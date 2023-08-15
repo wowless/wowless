@@ -33,9 +33,7 @@ lua_binary(
     name = "runtests",
     src = "tools/runtests.lua",
     interpreter = ":wowless",
-    deps = [
-        "@luassert",
-    ],
+    deps = ["@luassert"],
 )
 
 lua_binary(
