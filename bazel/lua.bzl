@@ -34,15 +34,49 @@ lua_library = rule(
     },
 )
 
+def _sopath(name):
+    return "build/luarocks/lib/lua/5.1/" + name.replace(".", "/") + ".so"
+
 def _path(name):
     return "build/luarocks/share/lua/5.1/" + name.replace(".", "/") + ".lua"
 
 def _lua_binary_impl(ctx):
+    cc_toolchain = find_cpp_toolchain(ctx)
+    feature_configuration = cc_common.configure_features(
+        ctx = ctx,
+        cc_toolchain = cc_toolchain,
+        requested_features = ctx.features,
+        unsupported_features = ctx.disabled_features,
+    )
     runfiles = [ctx.executable.interpreter, ctx.file.src]
     for k, v in _merge_deps_modules(ctx.attr.deps).items():
         if type(v) == type({}):
-            # TODO handle lua_cc_library
-            pass
+            name = ctx.label.name + "_" + k
+            srcs = v["srcs"]
+            _, compilation_outputs = cc_common.compile(
+                actions = ctx.actions,
+                feature_configuration = feature_configuration,
+                cc_toolchain = cc_toolchain,
+                name = name,
+                srcs = [s for s in srcs if s.extension != "h"],
+                private_hdrs = [s for s in srcs if s.extension == "h"],
+                compilation_contexts = [ctx.attr.interpreter[CcInfo].compilation_context],
+                local_defines = v["local_defines"],
+            )
+            linking_outputs = cc_common.link(
+                actions = ctx.actions,
+                feature_configuration = feature_configuration,
+                cc_toolchain = cc_toolchain,
+                name = name,
+                compilation_outputs = compilation_outputs,
+                output_type = "dynamic_library",
+            )
+            dst = ctx.actions.declare_file(_sopath(k))
+            ctx.actions.symlink(
+                output = dst,
+                target_file = linking_outputs.library_to_link.dynamic_library,
+            )
+            runfiles.append(dst)
         else:
             dst = ctx.actions.declare_file(_path(k))
             ctx.actions.symlink(output = dst, target_file = v)
@@ -60,8 +94,11 @@ lua_binary = rule(
         "deps": attr.label_list(providers = [LuaLibraryInfo]),
         "interpreter": attr.label(executable = True, cfg = "exec"),
         "src": attr.label(allow_single_file = [".lua"]),
+        "_cc_toolchain": attr.label(default = Label("@bazel_tools//tools/cpp:current_cc_toolchain")),
     },
     executable = True,
+    fragments = ["cpp"],
+    toolchains = use_cpp_toolchain(),
 )
 
 def _lua_cc_library_impl(ctx):
