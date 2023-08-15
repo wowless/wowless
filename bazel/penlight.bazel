@@ -10,4 +10,5 @@ lua_library(
         "lua/pl/path.lua": "pl.path",
         "lua/pl/utils.lua": "pl.utils",
     },
+    deps = ["@luafilesystem"],
 )

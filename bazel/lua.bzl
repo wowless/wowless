@@ -41,9 +41,13 @@ def _lua_binary_impl(ctx):
     runfiles = [ctx.executable.interpreter, ctx.file.src]
     for l in ctx.attr.deps:
         for k, v in l[LuaLibraryInfo].modules.items():
-            dst = ctx.actions.declare_file(_path(k))
-            ctx.actions.symlink(output = dst, target_file = v)
-            runfiles.append(dst)
+            if type(v) == type({}):
+                # TODO handle lua_cc_library
+                pass
+            else:
+                dst = ctx.actions.declare_file(_path(k))
+                ctx.actions.symlink(output = dst, target_file = v)
+                runfiles.append(dst)
     script = ctx.actions.declare_file(ctx.label.name)
     ctx.actions.write(script, "./" + ctx.executable.interpreter.short_path + " " + ctx.file.src.short_path, is_executable = True)
     return [DefaultInfo(
