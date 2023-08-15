@@ -6,7 +6,7 @@ LuaLibraryInfo = provider(
     },
 )
 
-def _merge_deps(deps):
+def _merge_deps_modules(deps):
     modules = {}
     for d in deps:
         for k, v in d[LuaLibraryInfo].modules.items():
@@ -16,7 +16,7 @@ def _merge_deps(deps):
     return modules
 
 def _lua_library_impl(ctx):
-    modules = _merge_deps(ctx.attr.deps)
+    modules = _merge_deps_modules(ctx.attr.deps)
     for k, v in ctx.attr.modules.items():
         if v in modules:
             fail("moo")
@@ -39,15 +39,14 @@ def _path(name):
 
 def _lua_binary_impl(ctx):
     runfiles = [ctx.executable.interpreter, ctx.file.src]
-    for l in ctx.attr.deps:
-        for k, v in l[LuaLibraryInfo].modules.items():
-            if type(v) == type({}):
-                # TODO handle lua_cc_library
-                pass
-            else:
-                dst = ctx.actions.declare_file(_path(k))
-                ctx.actions.symlink(output = dst, target_file = v)
-                runfiles.append(dst)
+    for k, v in _merge_deps_modules(ctx.attr.deps).items():
+        if type(v) == type({}):
+            # TODO handle lua_cc_library
+            pass
+        else:
+            dst = ctx.actions.declare_file(_path(k))
+            ctx.actions.symlink(output = dst, target_file = v)
+            runfiles.append(dst)
     script = ctx.actions.declare_file(ctx.label.name)
     ctx.actions.write(script, "./" + ctx.executable.interpreter.short_path + " " + ctx.file.src.short_path, is_executable = True)
     return [DefaultInfo(
@@ -95,7 +94,7 @@ def _lua_materialized_cc_library_impl(ctx):
         unsupported_features = ctx.disabled_features,
     )
     linking_contexts = []
-    for k, v in _merge_deps(ctx.attr.deps).items():
+    for k, v in _merge_deps_modules(ctx.attr.deps).items():
         name = ctx.label.name + "_" + k
         srcs = v["srcs"]
         _, compilation_outputs = cc_common.compile(
