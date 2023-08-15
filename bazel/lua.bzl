@@ -6,13 +6,17 @@ LuaLibraryInfo = provider(
     },
 )
 
-def _lua_library_impl(ctx):
+def _merge_deps(deps):
     modules = {}
-    for d in ctx.attr.deps:
+    for d in deps:
         for k, v in d[LuaLibraryInfo].modules.items():
             if k in modules:
                 fail("moo")
             modules[k] = v
+    return modules
+
+def _lua_library_impl(ctx):
+    modules = _merge_deps(ctx.attr.deps)
     for k, v in ctx.attr.modules.items():
         if v in modules:
             fail("moo")
@@ -60,8 +64,12 @@ lua_binary = rule(
 def _lua_cc_library_impl(ctx):
     return [
         cc_common.merge_cc_infos(cc_infos = [dep[CcInfo] for dep in ctx.attr.deps]),
-        DefaultInfo(files = depset(ctx.files.srcs)),
-        LuaLibraryInfo(modules = {}),
+        LuaLibraryInfo(modules = {
+            ctx.attr.module: {
+                "srcs": ctx.files.srcs,
+                "local_defines": ctx.attr.local_defines,
+            },
+        }),
     ]
 
 lua_cc_library = rule(
@@ -70,6 +78,7 @@ lua_cc_library = rule(
         "module": attr.string(mandatory = True),
         "srcs": attr.label_list(allow_files = [".c", ".h"]),
         "deps": attr.label_list(providers = [CcInfo]),
+        "local_defines": attr.string_list(),
     },
 )
 
@@ -81,26 +90,31 @@ def _lua_materialized_cc_library_impl(ctx):
         requested_features = ctx.features,
         unsupported_features = ctx.disabled_features,
     )
-    allsrcs = [f for d in ctx.attr.deps for f in d[DefaultInfo].files.to_list()]
-    _, compilation_outputs = cc_common.compile(
-        actions = ctx.actions,
-        feature_configuration = feature_configuration,
-        cc_toolchain = cc_toolchain,
-        name = ctx.label.name,
-        srcs = [s for s in allsrcs if s.extension != "h"],
-        private_hdrs = [s for s in allsrcs if s.extension == "h"],
-        compilation_contexts = [ctx.attr.lua[CcInfo].compilation_context],
-    )
-    linking_context, _ = cc_common.create_linking_context_from_compilation_outputs(
-        actions = ctx.actions,
-        feature_configuration = feature_configuration,
-        cc_toolchain = cc_toolchain,
-        name = ctx.label.name,
-        compilation_outputs = compilation_outputs,
-    )
-    ccinfo = CcInfo(linking_context = linking_context)
+    linking_contexts = []
+    for k, v in _merge_deps(ctx.attr.deps).items():
+        name = ctx.label.name + "_" + k
+        srcs = v["srcs"]
+        _, compilation_outputs = cc_common.compile(
+            actions = ctx.actions,
+            feature_configuration = feature_configuration,
+            cc_toolchain = cc_toolchain,
+            name = name,
+            srcs = [s for s in srcs if s.extension != "h"],
+            private_hdrs = [s for s in srcs if s.extension == "h"],
+            compilation_contexts = [ctx.attr.lua[CcInfo].compilation_context],
+            local_defines = v["local_defines"],
+        )
+        linking_context, _ = cc_common.create_linking_context_from_compilation_outputs(
+            actions = ctx.actions,
+            feature_configuration = feature_configuration,
+            cc_toolchain = cc_toolchain,
+            name = name,
+            compilation_outputs = compilation_outputs,
+        )
+        linking_contexts.append(linking_context)
+    ccinfos = [CcInfo(linking_context = l) for l in linking_contexts]
     depccinfos = [dep[CcInfo] for dep in ctx.attr.deps]
-    return [cc_common.merge_cc_infos(cc_infos = [ccinfo] + depccinfos)]
+    return [cc_common.merge_cc_infos(cc_infos = ccinfos + depccinfos)]
 
 lua_materialized_cc_library = rule(
     implementation = _lua_materialized_cc_library_impl,
