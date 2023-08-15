@@ -1,0 +1,13 @@
+load("@//:bazel/lua.bzl", "lua_library")
+
+lua_library(
+    name = "penlight",
+    visibility = ["//visibility:public"],
+    modules = {
+        "lua/pl/compat.lua": "pl.compat",
+        "lua/pl/dir.lua": "pl.dir",
+        "lua/pl/file.lua": "pl.file",
+        "lua/pl/path.lua": "pl.path",
+        "lua/pl/utils.lua": "pl.utils",
+    },
+)

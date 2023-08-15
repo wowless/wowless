@@ -65,6 +65,14 @@ http_archive(
 )
 
 http_archive(
+    name = "penlight",
+    url = "https://github.com/lunarmodules/penlight/archive/3bf03267b2571ba3cfa676a10528dd7b9a0db404.tar.gz",
+    sha256 = "e4e300221a37731336eedc812da359692896cace01720ff917be4491f1c728f9",
+    strip_prefix = "Penlight-3bf03267b2571ba3cfa676a10528dd7b9a0db404",
+    build_file = "@//:bazel/penlight.bazel",
+)
+
+http_archive(
     name = "puclua",
     url = "http://www.lua.org/ftp/lua-5.1.5.tar.gz",
     sha256 = "2640fc56a795f29d28ef15e13c34a47e223960b0240e8cb0a82d9b0738695333",
