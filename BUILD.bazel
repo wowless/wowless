@@ -1,24 +1,28 @@
-load("bazel/lua.bzl", "lua_binary")
+load("bazel/lua.bzl", "lua_binary", "lua_cc_library")
 
 cc_binary(
     name = "wowless",
-    srcs = ["main.c"],
-    deps = [
+    srcs = [
         ":ext",
-        "@elune",
         "@lsqlite3",
         "@luaexpat",
         "@luafilesystem",
+        "main.c",
+    ],
+    deps = [
+        "@elune",
+        "@lsqlite3",
+        "@luaexpat",
         "@lyaml",
         "@lzlib",
     ],
     features = ["fully_static_link"],
 )
 
-cc_library(
+lua_cc_library(
     name = "ext",
+    module = "wowless.ext",
     srcs = ["wowless/ext.c"],
-    deps = ["@elune"],
 )
 
 lua_binary(

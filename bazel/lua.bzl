@@ -15,7 +15,10 @@ def _lua_library_impl(ctx):
         if v in modules:
             fail("moo")
         modules[v] = k.files.to_list()[0]
-    return [LuaLibraryInfo(modules = modules)]
+    return [
+        cc_common.merge_cc_infos(cc_infos = [dep[CcInfo] for dep in ctx.attr.deps]),
+        LuaLibraryInfo(modules = modules),
+    ]
 
 lua_library = rule(
     implementation = _lua_library_impl,
@@ -50,4 +53,21 @@ lua_binary = rule(
         "src": attr.label(allow_single_file = [".lua"]),
     },
     executable = True,
+)
+
+def _lua_cc_library_impl(ctx):
+    modules = {}
+    return [
+        cc_common.merge_cc_infos(cc_infos = [dep[CcInfo] for dep in ctx.attr.deps]),
+        DefaultInfo(files = depset(ctx.files.srcs)),
+        LuaLibraryInfo(modules = modules),
+    ]
+
+lua_cc_library = rule(
+    implementation = _lua_cc_library_impl,
+    attrs = {
+        "module": attr.string(mandatory = True),
+        "srcs": attr.label_list(allow_files = [".c", ".h"]),
+        "deps": attr.label_list(providers = [CcInfo]),
+    },
 )

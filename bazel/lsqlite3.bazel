@@ -1,9 +1,9 @@
-cc_library(
+load("@//:bazel/lua.bzl", "lua_cc_library")
+
+lua_cc_library(
     name = "lsqlite3",
     visibility = ["//visibility:public"],
+    module = "lsqlite3",
     srcs = ["lsqlite3.c"],
-    deps = [
-        "@elune",
-        "@sqlite3",
-    ],
+    deps = ["@sqlite3"],
 )
