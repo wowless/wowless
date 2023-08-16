@@ -48,7 +48,7 @@ def _lua_binary_impl(ctx):
         requested_features = ctx.features,
         unsupported_features = ctx.disabled_features,
     )
-    runfiles = [ctx.executable.interpreter, ctx.file.src]
+    runfiles = [ctx.executable.interpreter, ctx.file.src] + ctx.files.data
     for k, v in _merge_deps_modules(ctx.attr.deps).items():
         if type(v) == type({}):
             name = ctx.label.name + "_" + k
@@ -91,6 +91,7 @@ def _lua_binary_impl(ctx):
 lua_binary = rule(
     implementation = _lua_binary_impl,
     attrs = {
+        "data": attr.label_list(allow_files = True),
         "deps": attr.label_list(providers = [LuaLibraryInfo]),
         "interpreter": attr.label(executable = True, cfg = "exec"),
         "src": attr.label(allow_single_file = [".lua"]),

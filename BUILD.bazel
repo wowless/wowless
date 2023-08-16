@@ -41,4 +41,8 @@ lua_binary(
     src = "tools/listfile.lua",
     interpreter = "@puclua",
     deps = ["@penlight"],
+    data = [
+        "tools/util.lua",
+        "vendor/listfile/community-listfile.csv",
+    ],
 )
