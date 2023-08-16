@@ -27,7 +27,7 @@ jobs:
           GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}
         imageName: ghcr.io/wowless/wowless-devcontainer
         refFilterForPush: refs/heads/main
-        runCmd: pre-commit run -a -v && ninja -v all
+        runCmd: bazel version && pre-commit run -a -v && ninja -v all
     - uses: actions/upload-artifact@v3
       if: success() || failure()
       with:
