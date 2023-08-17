@@ -3,7 +3,7 @@
     "context": "..",
     "dockerfile": "Dockerfile"
   },
-  "initializeCommand": "cp .env.dist .env",
+  "initializeCommand": "cp -n .env.dist .env",
   "customizations": {
     "vscode": {
       "extensions": [
