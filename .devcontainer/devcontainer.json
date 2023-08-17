@@ -17,5 +17,6 @@
   },
   "name": "wowless/wowless",
   "postCreateCommand": "pre-commit install --install-hooks",
-  "remoteUser": "vscode"
+  "remoteUser": "vscode",
+  "runArgs": ["--env-file", ".env"]
 }
