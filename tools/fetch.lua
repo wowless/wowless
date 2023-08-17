@@ -54,6 +54,7 @@ end
 local save = (function()
   local saved = {}
   return function(fn, content)
+    assert(content, 'writing to write nil content for ' .. fn)
     if not saved[fn:lower()] then
       log('writing', fn)
       path.mkdir(path.dirname(path.join(outdir, fn)))
