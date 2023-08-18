@@ -1,21 +1,21 @@
-cc_library(
-    name = "luafilesystem",
-    visibility = ["//visibility:public"],
-    srcs = [
-        "src/lfs.c",
-        "src/lfs.h",
-    ],
-    deps = ["@elune"],
-)
-
 filegroup(
-    name = "files",
+    name = "luafilesystem",
     visibility = ["//visibility:public"],
     srcs = [":lfs_so"],
 )
 
 cc_shared_library(
     name = "lfs_so",
-    deps = [":luafilesystem"],
+    deps = [":lib"],
     shared_lib_name = "lfs.so",
+)
+
+cc_library(
+    name = "lib",
+    visibility = ["//visibility:public"],
+    srcs = [
+        "src/lfs.c",
+        "src/lfs.h",
+    ],
+    deps = ["@elune"],
 )
