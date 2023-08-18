@@ -1,4 +1,4 @@
-load("@bazel_skylib//rules:run_binary.bzl", "run_binary")
+load("bazel/lua.bzl", "run_lua_script")
 
 cc_binary(
     name = "wowless",
@@ -21,44 +21,26 @@ cc_library(
     deps = ["@elune"],
 )
 
-run_binary(
+run_lua_script(
     name = "build_listfile",
-    tool = "@puclua",
-    args = [
-        "$(location tools/listfile.lua)",
-        "$(location build/listfile.lua)",
-    ],
-    srcs = [
+    script = "tools/listfile.lua",
+    output = "build/listfile.lua",
+    data = [
         "@luafilesystem",
         "@penlight",
-        "tools/listfile.lua",
         "tools/util.lua",
         "vendor/listfile/community-listfile.csv",
     ],
-    env = {
-        "LUA_CPATH": "$(location @luafilesystem)",
-        "LUA_PATH": "?.lua;external/penlight/?.lua",
-    },
-    outs = ["build/listfile.lua"],
 )
 
-run_binary(
+run_lua_script(
     name = "build_tactkeys",
-    tool = "@puclua",
-    args = [
-        "$(location tools/tactkeys.lua)",
-        "$(location build/tactkeys.lua)",
-    ],
-    srcs = [
+    script = "tools/tactkeys.lua",
+    output = "build/tactkeys.lua",
+    data = [
         "@luafilesystem",
         "@penlight",
-        "tools/tactkeys.lua",
         "tools/util.lua",
         "vendor/tactkeys/WoW.txt",
     ],
-    env = {
-        "LUA_CPATH": "$(location @luafilesystem)",
-        "LUA_PATH": "?.lua;external/penlight/?.lua",
-    },
-    outs = ["build/tactkeys.lua"],
 )
