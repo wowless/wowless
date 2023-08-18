@@ -1,11 +1,6 @@
-filegroup(
+cc_shared_library(
     name = "luafilesystem",
     visibility = ["//visibility:public"],
-    srcs = [":lfs_so"],
-)
-
-cc_shared_library(
-    name = "lfs_so",
     deps = [":lib"],
     shared_lib_name = "lfs.so",
 )
