@@ -21,14 +21,21 @@ cc_library(
     deps = ["@elune"],
 )
 
+filegroup(
+    name = "tools_util",
+    srcs = [
+        "@luafilesystem",
+        "@penlight",
+        "tools/util.lua",
+    ],
+)
+
 run_lua_script(
     name = "build_listfile",
     script = "tools/listfile.lua",
     output = "build/listfile.lua",
     data = [
-        "@luafilesystem",
-        "@penlight",
-        "tools/util.lua",
+        ":tools_util",
         "vendor/listfile/community-listfile.csv",
     ],
 )
@@ -38,9 +45,7 @@ run_lua_script(
     script = "tools/tactkeys.lua",
     output = "build/tactkeys.lua",
     data = [
-        "@luafilesystem",
-        "@penlight",
-        "tools/util.lua",
+        ":tools_util",
         "vendor/tactkeys/WoW.txt",
     ],
 )
