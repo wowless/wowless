@@ -41,3 +41,24 @@ run_binary(
     },
     outs = ["build/listfile.lua"],
 )
+
+run_binary(
+    name = "build_tactkeys",
+    tool = "@puclua",
+    args = [
+        "$(location tools/tactkeys.lua)",
+        "$(location build/tactkeys.lua)",
+    ],
+    srcs = [
+        "@luafilesystem//:files",
+        "@penlight//:files",
+        "tools/tactkeys.lua",
+        "tools/util.lua",
+        "vendor/tactkeys/WoW.txt",
+    ],
+    env = {
+        "LUA_CPATH": "$(location @luafilesystem//:files)",
+        "LUA_PATH": "?.lua;external/penlight/?.lua",
+    },
+    outs = ["build/tactkeys.lua"],
+)

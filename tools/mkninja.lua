@@ -111,7 +111,7 @@ local rules = {
     pool = 'console',
   },
   mktactkeys = {
-    command = 'lua tools/tactkeys.lua',
+    command = 'lua tools/tactkeys.lua $out',
   },
   mktestout = {
     command = 'bash -c "set -o pipefail && ' .. elune .. ' tools/runtests.lua $in 2>&1 | tee $out"',
@@ -280,7 +280,7 @@ local builds = {
       'tools/util.lua',
       'vendor/tactkeys/WoW.txt',
     },
-    outs_implicit = 'build/tactkeys.lua',
+    outs = 'build/tactkeys.lua',
     rule = 'mktactkeys',
   },
   {

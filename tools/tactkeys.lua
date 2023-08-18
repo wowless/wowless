@@ -5,4 +5,4 @@ for line in wowtxt:gmatch('[^\r\n]+') do
   t[k:lower()] = v:lower()
 end
 local u = require('tools.util')
-u.writeifchanged('build/tactkeys.lua', u.returntable(t))
+u.writeifchanged(arg[1], u.returntable(t))
