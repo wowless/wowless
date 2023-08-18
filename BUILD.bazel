@@ -24,7 +24,6 @@ cc_library(
 filegroup(
     name = "tools_util",
     srcs = [
-        "@luafilesystem",
         "@penlight",
         "tools/util.lua",
     ],

@@ -2,6 +2,7 @@ filegroup(
     name = "penlight",
     visibility = ["//visibility:public"],
     srcs = [
+        "@luafilesystem",
         "pl/compat.lua",
         "pl/dir.lua",
         "pl/file.lua",
