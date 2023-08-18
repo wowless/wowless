@@ -8,4 +8,4 @@ for line in listfile:gmatch('[^\r\n]+') do
 end
 
 local u = require('tools.util')
-u.writeifchanged('build/listfile.lua', u.returntable(t))
+u.writeifchanged(arg[1], u.returntable(t))

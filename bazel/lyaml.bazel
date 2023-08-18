@@ -1,9 +1,6 @@
-load("@//:bazel/lua.bzl", "lua_cc_library")
-
-lua_cc_library(
+cc_library(
     name = "lyaml",
     visibility = ["//visibility:public"],
-    module = "yaml",
     srcs = [
         "ext/yaml/emitter.c",
         "ext/yaml/lyaml.h",
@@ -11,6 +8,9 @@ lua_cc_library(
         "ext/yaml/scanner.c",
         "ext/yaml/yaml.c",
     ],
-    deps = ["@yaml"],
-    local_defines = ["VERSION=\"wowless\""],
+    deps = [
+        "@elune",
+        "@yaml",
+    ],
+    local_defines = ["VERSION=\\\"wowless\\\""],
 )

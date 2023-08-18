@@ -68,7 +68,7 @@ http_archive(
     name = "penlight",
     build_file = "@//:bazel/penlight.bazel",
     sha256 = "e4e300221a37731336eedc812da359692896cace01720ff917be4491f1c728f9",
-    strip_prefix = "Penlight-3bf03267b2571ba3cfa676a10528dd7b9a0db404",
+    strip_prefix = "Penlight-3bf03267b2571ba3cfa676a10528dd7b9a0db404/lua",
     url = "https://github.com/lunarmodules/penlight/archive/3bf03267b2571ba3cfa676a10528dd7b9a0db404.tar.gz",
 )
 

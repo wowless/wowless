@@ -1,9 +1,9 @@
-load("@//:bazel/lua.bzl", "lua_cc_library")
-
-lua_cc_library(
+cc_library(
     name = "lzlib",
     visibility = ["//visibility:public"],
-    module = "lzlib",
     srcs = ["lzlib.c"],
-    deps = ["@zlib"],
+    deps = [
+        "@elune",
+        "@zlib",
+    ],
 )

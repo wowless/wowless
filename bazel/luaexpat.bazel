@@ -1,12 +1,12 @@
-load("@//:bazel/lua.bzl", "lua_cc_library")
-
-lua_cc_library(
+cc_library(
     name = "luaexpat",
     visibility = ["//visibility:public"],
-    module = "lxplib",
     srcs = [
         "src/lxplib.c",
         "src/lxplib.h",
     ],
-    deps = ["@expat"],
+    deps = [
+        "@elune",
+        "@expat",
+    ],
 )

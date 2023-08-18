@@ -1,20 +1,12 @@
-load("bazel/lua.bzl", "lua_binary", "lua_cc_library", "lua_materialized_cc_library")
+load("@bazel_skylib//rules:run_binary.bzl", "run_binary")
 
 cc_binary(
     name = "wowless",
     srcs = ["main.c"],
     features = ["fully_static_link"],
     deps = [
-        ":lib",
-        "@elune",
-    ],
-)
-
-lua_materialized_cc_library(
-    name = "lib",
-    lua = "@elune",
-    deps = [
         ":ext",
+        "@elune",
         "@lsqlite3",
         "@luaexpat",
         "@luafilesystem",
@@ -23,26 +15,29 @@ lua_materialized_cc_library(
     ],
 )
 
-lua_cc_library(
+cc_library(
     name = "ext",
     srcs = ["wowless/ext.c"],
-    module = "wowless.ext",
+    deps = ["@elune"],
 )
 
-lua_binary(
-    name = "runtests",
-    src = "tools/runtests.lua",
-    interpreter = ":wowless",
-    deps = ["@luassert"],
-)
-
-lua_binary(
-    name = "listfile",
-    src = "tools/listfile.lua",
-    interpreter = "@puclua",
-    deps = ["@penlight"],
-    data = [
+run_binary(
+    name = "build_listfile",
+    tool = "@puclua",
+    args = [
+        "$(location tools/listfile.lua)",
+        "$(location build/listfile.lua)",
+    ],
+    srcs = [
+        "@luafilesystem//:files",
+        "@penlight//:files",
+        "tools/listfile.lua",
         "tools/util.lua",
         "vendor/listfile/community-listfile.csv",
     ],
+    env = {
+        "LUA_CPATH": "$(location @luafilesystem//:files)",
+        "LUA_PATH": "?.lua;external/penlight/?.lua",
+    },
+    outs = ["build/listfile.lua"],
 )

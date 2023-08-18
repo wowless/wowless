@@ -104,7 +104,7 @@ local rules = {
     pool = 'console',
   },
   mklistfile = {
-    command = 'lua tools/listfile.lua',
+    command = 'lua tools/listfile.lua $out',
   },
   mkninja = {
     command = 'lua tools/mkninja.lua',
@@ -268,7 +268,7 @@ local builds = {
       'tools/util.lua',
       'vendor/listfile/community-listfile.csv',
     },
-    outs_implicit = 'build/listfile.lua',
+    outs = 'build/listfile.lua',
     rule = 'mklistfile',
   },
   {
