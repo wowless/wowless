@@ -12,5 +12,11 @@ cc_library(
         "@elune",
         "@yaml",
     ],
+    data = [
+        "lib/lyaml/explicit.lua",
+        "lib/lyaml/functional.lua",
+        "lib/lyaml/implicit.lua",
+        "lib/lyaml/init.lua",
+    ],
     local_defines = ["VERSION=\\\"wowless\\\""],
 )

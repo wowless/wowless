@@ -21,6 +21,7 @@ cc_library(
         "@lzlib",
     ],
     data = [
+        "wowapi/yaml.lua",
         "wowless/hlist.lua",
     ],
 )
@@ -57,6 +58,7 @@ filegroup(
     name = "tests",
     srcs = [
         "spec/elune_spec.lua",
+        "spec/wowapi/yaml_spec.lua",
         "spec/wowless/hlist_spec.lua",
     ],
 )
@@ -74,6 +76,13 @@ cc_test(
         "$(locations :tests)",
     ],
     env = {
-        "LUA_PATH": "?.lua;external/luassert/?.lua;external/luassert/?/init.lua;external/say/?/init.lua",
+        "LUA_PATH": ";".join([
+            "?.lua",
+            "external/luassert/?.lua",
+            "external/luassert/?/init.lua",
+            "external/lyaml/lib/?.lua",
+            "external/lyaml/lib/?/init.lua",
+            "external/say/?/init.lua",
+        ]),
     },
 )
