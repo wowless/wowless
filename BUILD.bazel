@@ -48,3 +48,26 @@ run_lua_script(
         "vendor/tactkeys/WoW.txt",
     ],
 )
+
+genrule(
+    name = "whatever",
+    outs = ["whatever.sh"],
+    cmd = "echo \\\"\\$$@\\\" > $@",
+)
+
+sh_test(
+    name = "test",
+    srcs = [":whatever.sh"],
+    data = [
+        "@luassert",
+        ":wowless",
+        "tools/runtests.lua",
+    ],
+    args = [
+        "$(location :wowless)",
+        "$(location tools/runtests.lua)",
+    ],
+    env = {
+        "LUA_PATH": "?.lua;external/luassert/?.lua;external/luassert/?/init.lua;external/say/?/init.lua",
+    },
+)

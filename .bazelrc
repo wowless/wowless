@@ -1,2 +1,3 @@
 common --enable_bzlmod
 common --experimental_cc_shared_library
+test --test_output=all

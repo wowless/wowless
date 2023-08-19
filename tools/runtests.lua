@@ -1,3 +1,8 @@
+local rsuccess, assert = pcall(require, 'luassert')
+if not rsuccess then
+  io.stderr:write(assert)
+  os.exit(1)
+end
 local names = {}
 local depth = 0
 local errors = {}
@@ -10,7 +15,7 @@ local function doit(name, f)
   end
   depth = depth - 1
 end
-_G.assert = require('luassert')
+_G.assert = assert
 _G.describe = doit
 _G.it = doit
 for _, f in ipairs(arg) do

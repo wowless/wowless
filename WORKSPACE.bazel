@@ -42,9 +42,10 @@ http_archive(
 
 http_archive(
     name = "luassert",
+    add_prefix = "luassert",
     build_file = "@//:bazel/luassert.bazel",
     sha256 = "49e200b154d8347fac02a846359ad29b3b64a0510ed06287dc6954333f201e86",
-    strip_prefix = "luassert-8c9385b1a1944a5ce0ef9dbd721ad1987cf85e9d",
+    strip_prefix = "luassert-8c9385b1a1944a5ce0ef9dbd721ad1987cf85e9d/src",
     url = "https://github.com/lunarmodules/luassert/archive/8c9385b1a1944a5ce0ef9dbd721ad1987cf85e9d.tar.gz",
 )
 
@@ -84,7 +85,7 @@ http_archive(
     name = "say",
     build_file = "@//:bazel/say.bazel",
     sha256 = "ab1e2e662114358f758103785d0f56a1f8fb764564b0163290f2270cf976a094",
-    strip_prefix = "say-3e1f783d0aa496eb21d16e85b2235335cb9332df",
+    strip_prefix = "say-3e1f783d0aa496eb21d16e85b2235335cb9332df/src",
     url = "https://github.com/lunarmodules/say/archive/3e1f783d0aa496eb21d16e85b2235335cb9332df.tar.gz",
 )
 
