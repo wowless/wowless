@@ -2,10 +2,17 @@ load("bazel/lua.bzl", "run_lua_script")
 
 cc_binary(
     name = "wowless",
-    srcs = ["main.c"],
     features = ["fully_static_link"],
+    deps = [":lib"],
+)
+
+cc_library(
+    name = "lib",
+    srcs = [
+        "main.c",
+        "wowless/ext.c",
+    ],
     deps = [
-        ":ext",
         "@elune",
         "@lsqlite3",
         "@luaexpat",
@@ -13,12 +20,6 @@ cc_binary(
         "@lyaml",
         "@lzlib",
     ],
-)
-
-cc_library(
-    name = "ext",
-    srcs = ["wowless/ext.c"],
-    deps = ["@elune"],
 )
 
 filegroup(
@@ -49,22 +50,14 @@ run_lua_script(
     ],
 )
 
-genrule(
-    name = "whatever",
-    outs = ["whatever.sh"],
-    cmd = "echo \\\"\\$$@\\\" > $@",
-)
-
-sh_test(
+cc_test(
     name = "test",
-    srcs = [":whatever.sh"],
+    deps = [":lib"],
     data = [
         "@luassert",
-        ":wowless",
         "tools/runtests.lua",
     ],
     args = [
-        "$(location :wowless)",
         "$(location tools/runtests.lua)",
     ],
     env = {
