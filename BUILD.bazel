@@ -50,15 +50,32 @@ run_lua_script(
     ],
 )
 
+filegroup(
+    name = "wowless_lua",
+    srcs = [
+        "wowless/hlist.lua",
+    ],
+)
+
+filegroup(
+    name = "tests",
+    srcs = [
+        "spec/wowless/hlist_spec.lua",
+    ],
+)
+
 cc_test(
     name = "test",
     deps = [":lib"],
     data = [
         "@luassert",
+        ":tests",
+        ":wowless_lua",
         "tools/runtests.lua",
     ],
     args = [
         "$(location tools/runtests.lua)",
+        "$(locations :tests)",
     ],
     env = {
         "LUA_PATH": "?.lua;external/luassert/?.lua;external/luassert/?/init.lua;external/say/?/init.lua",
