@@ -20,6 +20,9 @@ cc_library(
         "@lyaml",
         "@lzlib",
     ],
+    data = [
+        "wowless/hlist.lua",
+    ],
 )
 
 filegroup(
@@ -51,13 +54,6 @@ run_lua_script(
 )
 
 filegroup(
-    name = "wowless_lua",
-    srcs = [
-        "wowless/hlist.lua",
-    ],
-)
-
-filegroup(
     name = "tests",
     srcs = [
         "spec/elune_spec.lua",
@@ -71,7 +67,6 @@ cc_test(
     data = [
         "@luassert",
         ":tests",
-        ":wowless_lua",
         "tools/runtests.lua",
     ],
     args = [
