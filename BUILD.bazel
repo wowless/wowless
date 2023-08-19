@@ -60,6 +60,7 @@ filegroup(
 filegroup(
     name = "tests",
     srcs = [
+        "spec/elune_spec.lua",
         "spec/wowless/hlist_spec.lua",
     ],
 )
