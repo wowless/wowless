@@ -21,8 +21,11 @@ cc_library(
         "@lzlib",
     ],
     data = [
+        "@luadate",
+        "@luapath",
         "wowapi/yaml.lua",
         "wowless/hlist.lua",
+        "wowless/util.lua",
     ],
 )
 
@@ -57,6 +60,7 @@ run_lua_script(
 filegroup(
     name = "tests",
     srcs = [
+        "spec/data/impl/C_DateAndTime.AdjustTimeByDays_spec.lua",
         "spec/elune_spec.lua",
         "spec/wowapi/yaml_spec.lua",
         "spec/wowless/hlist_spec.lua",
@@ -69,6 +73,7 @@ cc_test(
     data = [
         "@luassert",
         ":tests",
+        "data/impl/C_DateAndTime.AdjustTimeByDays.lua",
         "tools/runtests.lua",
     ],
     args = [
@@ -78,6 +83,8 @@ cc_test(
     env = {
         "LUA_PATH": ";".join([
             "?.lua",
+            "external/luadate/src/?.lua",
+            "external/luapath/lua/?.lua",
             "external/luassert/?.lua",
             "external/luassert/?/init.lua",
             "external/lyaml/lib/?.lua",

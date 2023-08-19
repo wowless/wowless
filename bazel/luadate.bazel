@@ -1,0 +1,5 @@
+filegroup(
+    name = "luadate",
+    visibility = ["//visibility:public"],
+    srcs = ["src/date.lua"],
+)

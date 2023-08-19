@@ -25,6 +25,14 @@ http_archive(
 )
 
 http_archive(
+    name = "luadate",
+    build_file = "@//:bazel/luadate.bazel",
+    sha256 = "5c8b732de68ea5afbec9589ec8a2fd8b39c205c037e2c2bcf58de1483d33bd92",
+    strip_prefix = "date-e309741edc15bde2c884b0db09d8560848773b50",
+    url = "https://github.com/tieske/date/archive/e309741edc15bde2c884b0db09d8560848773b50.tar.gz",
+)
+
+http_archive(
     name = "luaexpat",
     build_file = "@//:bazel/luaexpat.bazel",
     sha256 = "57135e369ff9cdd71604f108425f71f9c43f44656c328a1a687cedd7270f7c61",
@@ -38,6 +46,14 @@ http_archive(
     sha256 = "5bddb6971adbc0c48daf913b38ce40168c808c3c33b639ea9a9ddd30a60c85bd",
     strip_prefix = "luafilesystem-7c6e1b013caec0602ca4796df3b1d7253a2dd258",
     url = "https://github.com/lunarmodules/luafilesystem/archive/7c6e1b013caec0602ca4796df3b1d7253a2dd258.tar.gz",
+)
+
+http_archive(
+    name = "luapath",
+    build_file = "@//:bazel/luapath.bazel",
+    sha256 = "4966c1b5fb6f6a9aae4043f3e5aec349e562f8b1c8e576465f25659ad80ebda7",
+    strip_prefix = "lua-path-5a32c7052e84cdb9dcbcd45648aae3f6927376ac",
+    url = "https://github.com/moteus/lua-path/archive/5a32c7052e84cdb9dcbcd45648aae3f6927376ac.tar.gz",
 )
 
 http_archive(

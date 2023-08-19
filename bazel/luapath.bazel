@@ -1,0 +1,8 @@
+filegroup(
+    name = "luapath",
+    visibility = ["//visibility:public"],
+    srcs = [
+        "lua/path.lua",
+        "lua/path/module.lua",
+    ],
+)
