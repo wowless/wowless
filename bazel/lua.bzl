@@ -5,14 +5,19 @@ def _run_lua_script_impl(ctx):
     cpaths = {}
     for d in ctx.files.data:
         f = d.path
-        if "external/" not in f:
-            paths["?.lua"] = True
-        elif f.endswith(".lua"):
-            prefix = f.split("/", 3)[:2]
-            paths["/".join(prefix + ["?.lua"])] = True
-            paths["/".join(prefix + ["?/init.lua"])] = True
+        parts = f.split("/")
+        if parts[0] == "bazel-out":
+            prefix = parts[:5]
+        elif parts[0] == "external":
+            prefix = parts[:2]
         else:
-            cpaths["/".join(f.split("/", 6)[:5] + ["?.so"])] = True
+            prefix = []
+        if f.endswith("/init.lua"):
+            paths["/".join(prefix + ["?/init.lua"])] = True
+        elif f.endswith(".lua"):
+            paths["/".join(prefix + ["?.lua"])] = True
+        elif f.endswith(".so"):
+            cpaths["/".join(prefix + ["?.so"])] = True
     ctx.actions.run(
         executable = ctx.executable.interpreter,
         arguments = [ctx.file.script.path, ctx.outputs.output.path],
