@@ -6,6 +6,7 @@ source = {
 }
 build_dependencies = {
   'lsqlite3',
+  'lua-cjson',
   'luacheck',
   'luadbd',
   'luaexpat < 1.5.0',
