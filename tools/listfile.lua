@@ -1,9 +1,9 @@
 local t = {}
-local listfile = require('pl.file').read('vendor/listfile/community-listfile.csv')
-for line in listfile:gmatch('[^\r\n]+') do
-  local id, name = line:match('(%d+);dbfilesclient/([a-z0-9-_]+).db2')
+local listfile = require('pl.file').read('vendor/dbdefs/manifest.json')
+for _, e in ipairs(require('cjson').decode(listfile)) do
+  local id = e.db2FileDataID
   if id then
-    t[name] = tonumber(id)
+    t[e.tableName:lower()] = tonumber(id)
   end
 end
 

@@ -263,7 +263,7 @@ local builds = {
     ins_implicit = {
       'tools/listfile.lua',
       'tools/util.lua',
-      'vendor/listfile/community-listfile.csv',
+      'vendor/dbdefs/manifest.json',
     },
     outs_implicit = 'build/listfile.lua',
     rule = 'mklistfile',
