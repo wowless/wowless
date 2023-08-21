@@ -2,29 +2,27 @@ rockspec_format = '3.0'
 package = 'wowless'
 version = 'scm-0'
 source = {
-  url = 'git+https://github.com/ferronn-dev/wowless.git',
+  url = 'git+https://github.com/wowless/wowless.git',
 }
-dependencies = {
-  'lua = 5.1',
-  'argparse',
-  'busted',
-  'cluacov',
-  'date',
-  'http',
-  'libdeflate',
+build_dependencies = {
   'lsqlite3',
   'luacheck',
   'luadbd',
   'luaexpat < 1.5.0',
   'luamagick',
   'luasql-sqlite3',
+  'wowcig',
+}
+dependencies = {
+  'argparse',
+  'date',
+  'luassert',
   'lua-path',
   'lua-resty-tsort',
   'lyaml',
   'minheap',
   'penlight',
   'vstruct',
-  'wowcig',
 }
 build = {
   type = 'builtin',

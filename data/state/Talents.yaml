@@ -4,3 +4,11 @@ value:
   activeConfigID: 12345
   activeConfigID_comment: strictly speaking should be spec specific (nil if no spec
     selected)
+  pendingViewLoadoutLevel: null
+  pendingViewLoadoutLevel_comment: currently unused
+  pendingViewLoadoutSpecID: null
+  viewLoadoutDataImported: false
+  viewLoadoutDataImported_comment: true after ViewLoadout is called, reset on InitializeViewLoadout
+    currently used to generate warnings for bad usage. This deviates from how the
+    real client handles it!
+  viewLoadoutSpecID: null

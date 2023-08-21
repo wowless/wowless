@@ -16,4 +16,5 @@ RUN apt-get update \
         ruby \
         tar \
         unzip \
-        zip
+        zip \
+    && pip install pre-commit

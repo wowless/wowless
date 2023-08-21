@@ -1280,7 +1280,7 @@ Texture:
     alphamode:
       impl:
         method: SetBlendMode
-      type: string
+      type: BlendMode
     atlas:
       impl:
         method: SetAtlas
@@ -1299,7 +1299,7 @@ Texture:
       type: boolean
     nonblocking:
       impl:
-        method: SetBlockingLoadsRequested
+        method: SetNonBlocking
       type: boolean
     snaptopixelgrid:
       impl:

@@ -1,4 +1,46 @@
 ---
+addon:
+  capsule:
+    apinamespaces:
+      C_AuthChallenge: {}
+      C_StoreSecure: {}
+      C_WowTokenSecure: {}
+    enums:
+      BattlepayBannerType: {}
+      BattlepayDisplayFlag: {}
+      BattlepayGroupDisplayType: {}
+      BattlepayProductDecorator: {}
+      BattlepayProductGroupFlag: {}
+      PurchaseEligibility: {}
+      StoreError: {}
+      VasError: {}
+      VasServiceType: {}
+    globalapis:
+      CreateForbiddenFrame: {}
+  ignore_cvar_value:
+    graphicsEnvironmentDetail: {}
+    graphicsGroundClutter: {}
+    graphicsLiquidDetail: {}
+    graphicsParticleDensity: {}
+    graphicsQuality: {}
+    graphicsShadowQuality: {}
+    graphicsSpellDensity: {}
+    graphicsSSAO: {}
+    graphicsTextureResolution: {}
+    mouseSpeed: {}
+    raidGraphicsEnvironmentDetail: {}
+    raidGraphicsGroundClutter: {}
+    raidGraphicsLiquidDetail: {}
+    raidGraphicsParticleDensity: {}
+    RAIDgraphicsQuality: {}
+    raidGraphicsShadowQuality: {}
+    raidGraphicsSpellDensity: {}
+    raidGraphicsSSAO: {}
+    raidGraphicsTextureResolution: {}
+    RenderScale: {}
+  skipped_uiobjects:
+    Minimap: singleton
+    WorldFrame: singleton
 docs:
   apis:
     skip_namespaces:
@@ -10,3 +52,8 @@ docs:
       INVENTORY_SEARCH_UPDATE: {}
       PARTY_INVITE_CANCEL: {}
       SECURE_TRANSFER_CONFIRM_SEND_MAIL: {}
+runner:
+  skip_slashcmds:
+    CASTRANDOM: {}
+    LOOT_MASTER: {}
+    USERANDOM: {}

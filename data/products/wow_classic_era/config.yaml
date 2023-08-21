@@ -1,4 +1,32 @@
 ---
+addon:
+  globalenv_in_capsule:
+    CreateFromSecureMixins: {}
+    SecureMixin: {}
+  ignore_cvar_value:
+    graphicsEnvironmentDetail: {}
+    graphicsGroundClutter: {}
+    graphicsLiquidDetail: {}
+    graphicsParticleDensity: {}
+    graphicsQuality: {}
+    graphicsShadowQuality: {}
+    graphicsSpellDensity: {}
+    graphicsSSAO: {}
+    graphicsTextureResolution: {}
+    mouseSpeed: {}
+    raidGraphicsEnvironmentDetail: {}
+    raidGraphicsGroundClutter: {}
+    raidGraphicsLiquidDetail: {}
+    raidGraphicsParticleDensity: {}
+    RAIDgraphicsQuality: {}
+    raidGraphicsShadowQuality: {}
+    raidGraphicsSpellDensity: {}
+    raidGraphicsSSAO: {}
+    raidGraphicsTextureResolution: {}
+    RenderScale: {}
+  skipped_uiobjects:
+    Minimap: singleton
+    WorldFrame: singleton
 docs:
   apis:
     skip_namespaces:
@@ -7,3 +35,8 @@ docs:
     never_sent:
       PARTY_INVITE_CANCEL: {}
       SECURE_TRANSFER_CONFIRM_SEND_MAIL: {}
+runner:
+  skip_slashcmds:
+    CASTRANDOM: {}
+    LOOT_MASTER: {}
+    USERANDOM: {}

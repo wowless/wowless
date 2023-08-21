@@ -9,12 +9,26 @@ local function mapify(t)
 end
 
 local function perproduct(p, f)
-  return (require('wowapi.yaml').parseFile(('data/products/%s/%s.yaml'):format(p, f)))
+  return assert(require(('build.data.products.%s.%s'):format(p, f)))
+end
+
+local function tpath(t, ...)
+  for i = 1, select('#', ...) do
+    assert(type(t) == 'table')
+    t = t[(select(i, ...))]
+    if t == nil then
+      return nil
+    end
+  end
+  return t
 end
 
 local ptablemap = {
   build = function(p)
     return 'Build', perproduct(p, 'build')
+  end,
+  config = function(p)
+    return 'Config', perproduct(p, 'config').addon or {}
   end,
   cvars = function(p)
     return 'CVars', perproduct(p, 'cvars')
@@ -57,6 +71,7 @@ local ptablemap = {
     return 'Globals', perproduct(p, 'globals')
   end,
   namespaceapis = function(p)
+    local config = perproduct(p, 'config')
     local apiNamespaces = {}
     for k, api in pairs(perproduct(p, 'apis')) do
       local dot = k:find('%.')
@@ -72,6 +87,7 @@ local ptablemap = {
       for mk, mv in pairs(v.methods) do
         local tt = {
           alias = mv.alias,
+          overwritten = tpath(config, 'addon', 'overwritten_apis', k .. '.' .. mk) and true,
           stdlib = mv.stdlib,
         }
         mt[mk] = next(tt) and tt or true
@@ -81,6 +97,7 @@ local ptablemap = {
     return 'NamespaceApis', t
   end,
   uiobjectapis = function(p)
+    local config = perproduct(p, 'config')
     local uiobjects = perproduct(p, 'uiobjects')
     local inhrev = {}
     for k, cfg in pairs(uiobjects) do
@@ -115,22 +132,22 @@ local ptablemap = {
       end
     end
     addtype('Frame')
-    -- TODO figure out the right approach for these
-    uiobjects.Minimap = nil
-    uiobjects.WorldFrame = nil
     local t = {}
     for k, v in pairs(uiobjects) do
-      local mt = {}
-      for mk in pairs(v.methods) do
-        mt[mk] = true
+      if not tpath(config, 'addon', 'skipped_uiobjects', k) then
+        local mt = {}
+        for mk in pairs(v.methods) do
+          mt[mk] = true
+        end
+        t[k] = {
+          frametype = not not frametypes[k],
+          methods = mt,
+          objtype = objTypes[k],
+          virtual = v.virtual,
+          warner = v.warner,
+          zombie = v.zombie,
+        }
       end
-      t[k] = {
-        frametype = not not frametypes[k],
-        methods = mt,
-        objtype = objTypes[k],
-        virtual = v.virtual,
-        zombie = v.zombie,
-      }
     end
     return 'UIObjectApis', t
   end,

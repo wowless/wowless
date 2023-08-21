@@ -1,2 +1,2 @@
 local self = ...
-return self.luarep
+return self

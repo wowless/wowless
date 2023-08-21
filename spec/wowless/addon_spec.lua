@@ -1,4 +1,4 @@
-expose('addon', function()
+describe('addon', function()
   for _, product in ipairs(require('wowless.util').productList()) do
     describe(product, function()
       it('runs', function()

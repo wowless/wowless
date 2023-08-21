@@ -1,0 +1,4 @@
+---
+name: products
+type:
+  sequenceof: string

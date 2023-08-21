@@ -24,10 +24,10 @@ return (function(self, point, ...)
     if not frame then
       api.log(1, 'SetPoint to unknown frame %q', name)
     end
-    relativeTo = frame
+    relativeTo = frame and api.UserData(frame)
     idx = idx + 1
   elseif type(maybeRelativeTo) == 'table' then
-    relativeTo = maybeRelativeTo
+    relativeTo = api.UserData(maybeRelativeTo)
     idx = idx + 1
   elseif type(maybeRelativeTo) == 'nil' then
     idx = idx + 1
@@ -41,7 +41,7 @@ return (function(self, point, ...)
   if type(maybeX) == 'number' and type(maybeY) == 'number' then
     x, y = maybeX, maybeY
   end
-  if relativeTo ~= self.luarep then
+  if relativeTo ~= self then
     local newPoint = { point, relativeTo, relativePoint, x, y }
     for i, p in ipairs(self.points) do
       if p[1] == point then

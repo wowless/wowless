@@ -7,7 +7,9 @@ errors, those errors are almost certainly still in Wowless, not your addon. That
 said, Wowless is undergoing active development. If you're interested, join the
 Discord at <https://discord.gg/rTwWcfJXuz>.
 
-Development is currently only supported via VSCode and Docker.
+Development is currently only supported via Docker.
+
+Using VSCode:
 Use `Clone Repository in Container Volume...`, select this repository to clone,
 and then watch as VSCode builds a container and installs necessary dependencies.
 
@@ -24,6 +26,14 @@ ninja
 ```
 
 The above build remaining dependencies and runs unit tests.
+
+Using Docker Compose:
+
+```sh
+cp .env.dist .env
+docker-compose up -d
+docker-compose exec wowless bash
+```
 
 Running on WoW client Lua/XML code requires some additional steps.
 From inside the container:

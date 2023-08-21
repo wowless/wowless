@@ -8,8 +8,7 @@ local product = args.product
 
 local log = args.verbose and print or function() end
 
-local build = require('wowapi.yaml').parseFile('data/products/' .. product .. '/build.yaml')
-
+local build = require('build/data/products/' .. product .. '/build')
 local fdids = require('build.listfile')
 
 local path = require('path')
@@ -55,6 +54,7 @@ end
 local save = (function()
   local saved = {}
   return function(fn, content)
+    assert(content, 'attempting to write nil content for ' .. fn)
     if not saved[fn:lower()] then
       log('writing', fn)
       path.mkdir(path.dirname(path.join(outdir, fn)))
@@ -66,23 +66,28 @@ end)()
 
 local processFile = (function()
   local lxp = require('lxp')
-  local function doProcessFile(fn)
+  local function doProcessFile(fn, root)
     local content = handle:readFile(fn)
-    if content then
-      save(fn, content)
-      if fn:sub(-4) == '.xml' then
-        local parser = lxp.new({
-          StartElement = function(_, name, attrs)
-            local lname = string.lower(name)
-            if (lname == 'include' or lname == 'script') and attrs.file then
-              doProcessFile(joinRelative(fn, attrs.file))
-            end
-          end,
-        })
-        parser:parse(content)
-        parser:close()
-      end
+    if not content then
+      return false
     end
+    save(fn, content)
+    if fn:sub(-4) == '.xml' then
+      local parser = lxp.new({
+        StartElement = function(_, name, attrs)
+          local lname = string.lower(name)
+          if (lname == 'include' or lname == 'script') and attrs.file then
+            if doProcessFile(joinRelative(fn, attrs.file), root) then
+              return true
+            end
+            return root and doProcessFile(normalizePath(path.join(root, attrs.file)), root)
+          end
+        end,
+      })
+      parser:parse(content)
+      parser:close()
+    end
+    return true
   end
   return doProcessFile
 end)()
@@ -99,7 +104,7 @@ local function processTocDir(dir)
     save(tocName, tocContent)
     for line in tocContent:gmatch('[^\r\n]+') do
       if line:sub(1, 1) ~= '#' then
-        processFile(joinRelative(tocName, line:gsub('%s*$', '')))
+        processFile(joinRelative(tocName, line:gsub('%s*$', '')), dir)
       end
     end
   end
@@ -122,8 +127,10 @@ processTocDir('Interface/FrameXML')
 do
   -- Yes, ManifestInterfaceTOCData fdid and sig are hardcoded.
   local tocdata = handle:readFile(1267335)
-  for _, filepath in require('dbc').rows(tocdata, 's') do
+  for _, filepath in require('tools.dbc').rows(tocdata, 's') do
     processTocDir(normalizePath(filepath))
   end
   processTocDir('Interface/AddOns/Blizzard_APIDocumentationGenerated')
 end
+processFile('Interface/FrameXML/UI.xsd')
+processFile('Interface/FrameXML/UI_Shared.xsd')

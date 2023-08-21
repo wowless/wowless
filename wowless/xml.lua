@@ -133,6 +133,11 @@ local attributeTypes = {
     return result
   end,
 }
+for k, v in pairs(require('build.data.stringenums')) do
+  attributeTypes[k] = function(s)
+    return v[s] and s or nil
+  end
+end
 
 local function parseRoot(product, root, intrinsics, snapshot)
   local warnings = {}

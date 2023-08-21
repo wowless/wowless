@@ -1,38 +1,45 @@
--- TODO deduplicate with wowless.util
-local productList = {
-  'wow',
-  'wow_classic',
-  'wow_classic_era',
-  'wow_classic_era_ptr',
-  'wow_classic_ptr',
-  'wowt',
-}
+local parseYaml = require('wowapi.yaml').parseFile
+
+local productList = parseYaml('data/products.yaml')
 
 -- TODO get this from gentest.lua
 local perProductAddonGeneratedTypes = {
   build = function(p)
-    return { 'data/products/' .. p .. '/build.yaml' }
+    return { 'build/data/products/' .. p .. '/build.lua' }
+  end,
+  config = function(p)
+    return { 'build/data/products/' .. p .. '/config.lua' }
   end,
   cvars = function(p)
-    return { 'data/products/' .. p .. '/cvars.yaml' }
+    return { 'build/data/products/' .. p .. '/cvars.lua' }
   end,
-  events = function(p)
-    return { 'data/products/' .. p .. '/events.yaml' }
+  events = function()
+    local t = {}
+    for _, p in ipairs(productList) do
+      table.insert(t, 'build/data/products/' .. p .. '/events.lua')
+    end
+    return t
   end,
   globalapis = function(p)
-    return { 'data/products/' .. p .. '/apis.yaml' }
+    return { 'build/data/products/' .. p .. '/apis.lua' }
   end,
   globals = function(p)
-    return { 'data/products/' .. p .. '/globals.yaml' }
+    return { 'build/data/products/' .. p .. '/globals.lua' }
   end,
   namespaceapis = function(p)
-    return { 'data/products/' .. p .. '/apis.yaml' }
+    return {
+      'build/data/products/' .. p .. '/apis.lua',
+      'build/data/products/' .. p .. '/config.lua',
+    }
   end,
   product = function()
     return {}
   end,
   uiobjectapis = function(p)
-    return { 'data/products/' .. p .. '/uiobjects.yaml' }
+    return {
+      'build/data/products/' .. p .. '/config.lua',
+      'build/data/products/' .. p .. '/uiobjects.lua',
+    }
   end,
 }
 
@@ -51,7 +58,7 @@ for _, p in ipairs(productList) do
   perProductAddonGeneratedFiles[p] = pp
 end
 
-local elune = 'build/cmake/vendor/elune/lua/lua5.1'
+local elune = 'build/cmake/wowless'
 
 local pools = {
   fetch_pool = 1,
@@ -61,6 +68,9 @@ local pools = {
 local rules = {
   dbdata = {
     command = 'env/bin/lua tools/sqlite.lua -f $product',
+  },
+  dbdefs = {
+    command = 'env/bin/lua tools/dbdefs.lua $product',
     depfile = '$out.d',
     deps = 'gcc',
   },
@@ -71,8 +81,6 @@ local rules = {
   },
   dbschema = {
     command = 'env/bin/lua tools/sqlite.lua $product',
-    depfile = '$out.d',
-    deps = 'gcc',
   },
   downloadrelease = {
     command = 'sh bin/downloadaddon.sh $owner $repo $tag $out',
@@ -85,6 +93,9 @@ local rules = {
     command = elune .. ' wowless.lua -p $product --frame0 > /dev/null',
     pool = 'run_pool',
   },
+  luarocks = {
+    command = 'luarocks build --only-deps --tree build/luarocks && touch build/luarocks.stamp',
+  },
   mkaddon = {
     command = 'env/bin/lua tools/gentest.lua -f $type -p $product',
   },
@@ -93,12 +104,13 @@ local rules = {
   },
   mkninja = {
     command = 'env/bin/lua tools/mkninja.lua',
+    pool = 'console',
   },
   mktactkeys = {
     command = 'env/bin/lua tools/tactkeys.lua',
   },
   mktestout = {
-    command = 'bash -c "set -o pipefail && env/bin/busted 2>&1 | tee $out"',
+    command = 'bash -c "set -o pipefail && ' .. elune .. ' tools/runtests.lua $in 2>&1 | tee $out"',
   },
   prep = {
     command = 'env/bin/lua tools/prep.lua $product',
@@ -144,19 +156,25 @@ local builds = {
   {
     ins = {
       'CMakeLists.txt',
+      'data/products.yaml',
       'tools/addons.yaml',
       'tools/mkninja.lua',
-      'vendor/elune/CMakeLists.txt',
       'wowapi/yaml.lua',
     },
     outs = 'build.ninja',
     rule = 'mkninja',
   },
   {
+    ins_implicit = 'wowless-scm-0.rockspec',
+    outs_implicit = 'build/luarocks.stamp',
+    rule = 'luarocks',
+  },
+  {
     ins = {
-      elune,
-      'build/cmake/ext.so',
-      'build/flavors.lua',
+      'build/cmake/wowless',
+      'build/data/flavors.lua',
+      'build/data/stringenums.lua',
+      'build/luarocks.stamp',
       'build/wowless.stamp',
     },
     outs = 'build/runtime.stamp',
@@ -191,48 +209,22 @@ local builds = {
       'data/schemas/schema.yaml',
       'data/schemas/schematype.yaml',
       'data/schemas/state.yaml',
+      'data/schemas/stringenums.yaml',
       'data/schemas/structures.yaml',
       'data/schemas/type.yaml',
       'data/schemas/uiobjectimpl.yaml',
       'data/schemas/uiobjects.yaml',
       'data/schemas/xml.yaml',
-      'spec/addon/framework_spec.lua',
-      'spec/addon/util_spec.lua',
-      'spec/data/apis_spec.lua',
-      'spec/data/config_spec.lua',
-      'spec/data/impl_spec.lua',
-      'spec/data/impl/C_DateAndTime.AdjustTimeByDays_spec.lua',
-      'spec/data/impl/C_DateAndTime.AdjustTimeByMinutes_spec.lua',
-      'spec/data/impl/C_DateAndTime.CompareCalendarTime_spec.lua',
-      'spec/data/impl/EnumerateFrames_spec.lua',
-      'spec/data/impl/hooksecurefunc_spec.lua',
-      'spec/data/structures_spec.lua',
-      'spec/data/uiobjectimpl_spec.lua',
-      'spec/data/uiobjects_spec.lua',
-      'spec/data/yaml_spec.lua',
-      'spec/elune_spec.lua',
-      'spec/wowapi/schema_spec.lua',
-      'spec/wowapi/yaml_spec.lua',
-      'spec/wowless/addon_spec.lua',
-      'spec/wowless/blp_spec.lua',
-      'spec/wowless/frame_spec.lua',
-      'spec/wowless/green.png',
-      'spec/wowless/hlist_spec.lua',
-      'spec/wowless/png_spec.lua',
-      'spec/wowless/temp.blp',
-      'spec/wowless/temp.png',
-      'spec/wowless/util_spec.lua',
       'tools/addons.yaml',
       'tools/bump.lua',
       'tools/bumpaddons.lua',
+      'tools/dbdefs.lua',
       'tools/dblist.lua',
       'tools/docs.lua',
       'tools/errsv.lua',
       'tools/fetch.lua',
       'tools/gentest.lua',
       'tools/listfile.lua',
-      'tools/mkninja.lua',
-      'tools/precov.lua',
       'tools/prep.lua',
       'tools/proto.lua',
       'tools/render.lua',
@@ -256,8 +248,10 @@ local builds = {
       'wowless/png.lua',
       'wowless/render.lua',
       'wowless/runner.lua',
+      'wowless/typecheck.lua',
       'wowless/util.lua',
       'wowless/xml.lua',
+      'wowless.lua',
     },
     outs = 'build/wowless.stamp',
     rule = 'stamp',
@@ -285,11 +279,6 @@ local builds = {
     },
     outs_implicit = 'build/tactkeys.lua',
     rule = 'mktactkeys',
-  },
-  {
-    ins = 'data/flavors.yaml',
-    outs = 'build/flavors.lua',
-    rule = 'yaml2lua',
   },
 }
 
@@ -329,14 +318,29 @@ for _, p in ipairs(productList) do
     outs = dblist,
     rule = 'dblist',
   })
+  local dbdefs = 'build/products/' .. p .. '/dbdefs.lua'
+  table.insert(builds, {
+    args = {
+      product = p,
+      restat = 1,
+    },
+    ins_implicit = {
+      dblist,
+      'data/products/' .. p .. '/build.yaml',
+      'tools/dbdefs.lua',
+      'tools/util.lua',
+    },
+    outs = dbdefs,
+    rule = 'dbdefs',
+  })
   local fetchStamp = 'build/products/' .. p .. '/fetch.stamp'
   table.insert(builds, {
     args = { product = p },
     ins = {
       dblist,
+      'build/data/products/' .. p .. '/build.lua',
       'build/listfile.lua',
       'build/tactkeys.lua',
-      'data/products/' .. p .. '/build.yaml',
       'tools/fetch.lua',
     },
     outs = fetchStamp,
@@ -344,8 +348,8 @@ for _, p in ipairs(productList) do
   })
   local runout = 'out/' .. p .. '/log.txt'
   table.insert(runouts, runout)
-  local schemadb = 'build/products/' .. p .. '/schema.db'
-  local datadb = 'build/products/' .. p .. '/data.db'
+  local schemadb = 'build/products/' .. p .. '/schema.sqlite3'
+  local datadb = 'build/products/' .. p .. '/data.sqlite3'
   local datalua = 'build/products/' .. p .. '/data.lua'
   table.insert(runtimes, schemadb)
   local rundeps = {
@@ -384,8 +388,7 @@ for _, p in ipairs(productList) do
   table.insert(builds, {
     args = { product = p },
     ins_implicit = {
-      dblist,
-      'data/products/' .. p .. '/build.yaml',
+      dbdefs,
       'tools/sqlite.lua',
     },
     outs = schemadb,
@@ -394,9 +397,8 @@ for _, p in ipairs(productList) do
   table.insert(builds, {
     args = { product = p },
     ins_implicit = {
-      dblist,
+      dbdefs,
       fetchStamp,
-      'data/products/' .. p .. '/build.yaml',
       'tools/sqlite.lua',
     },
     outs = datadb,
@@ -421,8 +423,8 @@ for _, p in ipairs(productList) do
     outs = p,
     rule = 'phony',
   })
-  local b = require('wowapi.yaml').parseFile('data/products/' .. p .. '/build.yaml')
-  for k, v in pairs(require('wowapi.yaml').parseFile('tools/addons.yaml')) do
+  local b = parseYaml('data/products/' .. p .. '/build.yaml')
+  for k, v in pairs(parseYaml('tools/addons.yaml')) do
     local found = v.flavors == nil
     if not found then
       for _, f in ipairs(v.flavors) do
@@ -445,7 +447,7 @@ for _, p in ipairs(productList) do
   end
 end
 
-for k, v in pairs(require('wowapi.yaml').parseFile('tools/addons.yaml')) do
+for k, v in pairs(parseYaml('tools/addons.yaml')) do
   table.insert(builds, {
     args = {
       owner = v.owner,
@@ -461,12 +463,154 @@ for k, v in pairs(require('wowapi.yaml').parseFile('tools/addons.yaml')) do
   })
 end
 
+local yamls = {
+  'data/flavors.yaml',
+  'data/impl.yaml',
+  'data/products.yaml',
+  'data/stringenums.yaml',
+  'data/products/wow/apis.yaml',
+  'data/products/wow/build.yaml',
+  'data/products/wow/config.yaml',
+  'data/products/wow/cvars.yaml',
+  'data/products/wow/events.yaml',
+  'data/products/wow/globals.yaml',
+  'data/products/wow/structures.yaml',
+  'data/products/wow/uiobjects.yaml',
+  'data/products/wow/xml.yaml',
+  'data/products/wow_classic/apis.yaml',
+  'data/products/wow_classic/build.yaml',
+  'data/products/wow_classic/config.yaml',
+  'data/products/wow_classic/cvars.yaml',
+  'data/products/wow_classic/events.yaml',
+  'data/products/wow_classic/globals.yaml',
+  'data/products/wow_classic/structures.yaml',
+  'data/products/wow_classic/uiobjects.yaml',
+  'data/products/wow_classic/xml.yaml',
+  'data/products/wow_classic_era/apis.yaml',
+  'data/products/wow_classic_era/build.yaml',
+  'data/products/wow_classic_era/config.yaml',
+  'data/products/wow_classic_era/cvars.yaml',
+  'data/products/wow_classic_era/events.yaml',
+  'data/products/wow_classic_era/globals.yaml',
+  'data/products/wow_classic_era/structures.yaml',
+  'data/products/wow_classic_era/uiobjects.yaml',
+  'data/products/wow_classic_era/xml.yaml',
+  'data/products/wow_classic_era_ptr/apis.yaml',
+  'data/products/wow_classic_era_ptr/build.yaml',
+  'data/products/wow_classic_era_ptr/config.yaml',
+  'data/products/wow_classic_era_ptr/cvars.yaml',
+  'data/products/wow_classic_era_ptr/events.yaml',
+  'data/products/wow_classic_era_ptr/globals.yaml',
+  'data/products/wow_classic_era_ptr/structures.yaml',
+  'data/products/wow_classic_era_ptr/uiobjects.yaml',
+  'data/products/wow_classic_era_ptr/xml.yaml',
+  'data/products/wow_classic_ptr/apis.yaml',
+  'data/products/wow_classic_ptr/build.yaml',
+  'data/products/wow_classic_ptr/config.yaml',
+  'data/products/wow_classic_ptr/cvars.yaml',
+  'data/products/wow_classic_ptr/events.yaml',
+  'data/products/wow_classic_ptr/globals.yaml',
+  'data/products/wow_classic_ptr/structures.yaml',
+  'data/products/wow_classic_ptr/uiobjects.yaml',
+  'data/products/wow_classic_ptr/xml.yaml',
+  'data/products/wowt/apis.yaml',
+  'data/products/wowt/build.yaml',
+  'data/products/wowt/config.yaml',
+  'data/products/wowt/cvars.yaml',
+  'data/products/wowt/events.yaml',
+  'data/products/wowt/globals.yaml',
+  'data/products/wowt/structures.yaml',
+  'data/products/wowt/uiobjects.yaml',
+  'data/products/wowt/xml.yaml',
+  'data/products/wowxptr/apis.yaml',
+  'data/products/wowxptr/build.yaml',
+  'data/products/wowxptr/config.yaml',
+  'data/products/wowxptr/cvars.yaml',
+  'data/products/wowxptr/events.yaml',
+  'data/products/wowxptr/globals.yaml',
+  'data/products/wowxptr/structures.yaml',
+  'data/products/wowxptr/uiobjects.yaml',
+  'data/products/wowxptr/xml.yaml',
+  'data/schemas/addons.yaml',
+  'data/schemas/any.yaml',
+  'data/schemas/apis.yaml',
+  'data/schemas/build.yaml',
+  'data/schemas/config.yaml',
+  'data/schemas/cvars.yaml',
+  'data/schemas/docs.yaml',
+  'data/schemas/events.yaml',
+  'data/schemas/flavors.yaml',
+  'data/schemas/globals.yaml',
+  'data/schemas/impl.yaml',
+  'data/schemas/products.yaml',
+  'data/schemas/schema.yaml',
+  'data/schemas/schematype.yaml',
+  'data/schemas/state.yaml',
+  'data/schemas/stringenums.yaml',
+  'data/schemas/structures.yaml',
+  'data/schemas/type.yaml',
+  'data/schemas/uiobjectimpl.yaml',
+  'data/schemas/uiobjects.yaml',
+  'data/schemas/xml.yaml',
+  'data/state/Addons.yaml',
+  'data/state/Bindings.yaml',
+  'data/state/CVars.yaml',
+  'data/state/Calendar.yaml',
+  'data/state/ModifiedClicks.yaml',
+  'data/state/System.yaml',
+  'data/state/Talents.yaml',
+  'data/state/Time.yaml',
+  'data/state/Units.yaml',
+  'data/uiobjectimpl.yaml',
+}
+local yamlluas = {}
+for _, yaml in ipairs(yamls) do
+  local yamllua = 'build/' .. yaml:sub(1, -5) .. 'lua'
+  table.insert(yamlluas, yamllua)
+  table.insert(builds, {
+    ins = yaml,
+    outs = yamllua,
+    rule = 'yaml2lua',
+  })
+end
+
 table.insert(builds, {
   ins = {
-    '.busted',
+    'spec/addon/framework_spec.lua',
+    'spec/addon/util_spec.lua',
+    'spec/data/apis_spec.lua',
+    'spec/data/config_spec.lua',
+    'spec/data/globals_spec.lua',
+    'spec/data/impl_spec.lua',
+    'spec/data/impl/C_DateAndTime.AdjustTimeByDays_spec.lua',
+    'spec/data/impl/C_DateAndTime.AdjustTimeByMinutes_spec.lua',
+    'spec/data/impl/C_DateAndTime.CompareCalendarTime_spec.lua',
+    'spec/data/impl/EnumerateFrames_spec.lua',
+    'spec/data/impl/hooksecurefunc_spec.lua',
+    'spec/data/structures_spec.lua',
+    'spec/data/uiobjectimpl_spec.lua',
+    'spec/data/uiobjects_spec.lua',
+    'spec/data/yaml_spec.lua',
+    'spec/elune_spec.lua',
+    'spec/wowapi/schema_spec.lua',
+    'spec/wowapi/yaml_spec.lua',
+    'spec/wowless/addon_spec.lua',
+    'spec/wowless/blp_spec.lua',
+    'spec/wowless/frame_spec.lua',
+    'spec/wowless/hlist_spec.lua',
+    'spec/wowless/png_spec.lua',
+    'spec/wowless/typecheck_spec.lua',
+    'spec/wowless/util_spec.lua',
+  },
+  ins_implicit = {
     'build/runtime.stamp',
+    'spec/wowless/green.png',
+    'spec/wowless/temp.blp',
+    'spec/wowless/temp.png',
+    'tools/runtests.lua',
     addonGeneratedFiles,
     runtimes,
+    yamlluas,
   },
   outs = 'test.out',
   rule = 'mktestout',
@@ -553,5 +697,4 @@ os.execute([[
   -G Ninja \
   -DCMAKE_EXPORT_COMPILE_COMMANDS=1 \
   -DCMAKE_NINJA_OUTPUT_PATH_PREFIX=build/cmake/ \
-  > /dev/null \
 ]])

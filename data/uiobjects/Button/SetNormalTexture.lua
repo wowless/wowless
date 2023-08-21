@@ -1,7 +1,7 @@
 return (function(self, tex)
   local t = toTexture(self, tex, self.normalTexture)
   if t then
-    t:SetParent(self.luarep)
+    api.SetParent(t, self)
     if t:GetNumPoints() == 0 then
       t:SetAllPoints()
     end

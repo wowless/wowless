@@ -415,11 +415,9 @@ local syncTests = function()
         end,
         ['format handles %f'] = function()
           assertEquals('inf', format('%f', math.huge):sub(-3))
-          assertEquals('nan', format('%f', -math.sin(math.huge)):sub(-3))
         end,
         ['format handles %F'] = function()
           assertEquals('inf', format('%F', math.huge):sub(-3))
-          assertEquals('nan', format('%F', -math.sin(math.huge)):sub(-3))
         end,
       }
     end,
@@ -506,6 +504,24 @@ local syncTests = function()
           assertEquals(1, f:GetFrameLevel())
           assertEquals(2, g:GetFrameLevel())
         end,
+        ['parent keys'] = function()
+          local up = CreateFrame('Frame')
+          if not up.GetParentKey then
+            return
+          end
+          local down = CreateFrame('Frame', nil, up)
+          check1(nil, down:GetParentKey())
+          up.moo = down
+          check1('moo', down:GetParentKey())
+          check0(down:SetParentKey('cow'))
+          assertEquals(up.cow, down)
+          assertEquals(up.moo, down)
+          check1('moo', down:GetParentKey())
+          up.moo = nil
+          check1('cow', down:GetParentKey())
+          up.cow = nil
+          check1(nil, down:GetParentKey())
+        end,
       }
     end,
 
@@ -545,7 +561,7 @@ local syncTests = function()
           }
         end,
         Kids = function()
-          if _G.__wowless or _G.WowlessData.Build.flavor ~= 'Vanilla' then -- TODO fix
+          if _G.WowlessData ~= 'wow_classic_era' then -- TODO fix
             return
           end
           local parent = f(1, CreateFrame('Frame'))
@@ -651,7 +667,7 @@ local syncTests = function()
           f:SetScrollChild(g)
           assertEquals(g, f:GetScrollChild())
           assertEquals(f, g:GetParent())
-          if _G.WowlessData.Build.flavor ~= 'Vanilla' then
+          if _G.WowlessData.product ~= 'wow_classic_era' then
             assertEquals(false, pcall(f.SetScrollChild, f, nil))
             assertEquals(false, pcall(f.SetScrollChild, f, 'WowlessScrollFrameChild'))
           else

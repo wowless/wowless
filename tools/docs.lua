@@ -5,7 +5,7 @@ local args = (function()
 end)()
 
 local lfs = require('lfs')
-local writeFile = require('pl.file').write
+local writeifchanged = require('tools.util').writeifchanged
 local parseYaml = require('wowapi.yaml').parseFile
 local pprintYaml = require('wowapi.yaml').pprint
 local product = args.product
@@ -94,7 +94,6 @@ for _, t in pairs(docs) do
 end
 
 local types = {
-  AuraData = 'table',
   BigInteger = 'number',
   BigUInteger = 'number',
   bool = 'boolean',
@@ -103,33 +102,59 @@ local types = {
   ClubId = 'string',
   ClubInvitationId = 'string',
   ClubStreamId = 'string',
+  CScriptObject = 'table',
   cstring = 'string',
+  CurveType = 'string',
+  FileAsset = 'string',
   fileID = 'number',
-  FramePoint = 'string', -- hack, yes
+  FilterMode = 'string',
+  ['function'] = 'function',
   GarrisonFollower = 'string',
   HTMLTextType = 'string',
+  InsertMode = 'string',
   InventorySlots = 'number',
   ItemInfo = 'string',
   kstringClubMessage = 'string',
   kstringLfgListApplicant = 'string',
   kstringLfgListChat = 'string',
   kstringLfgListSearch = 'string',
+  LoopType = 'string',
+  luaFunction = 'function',
   luaIndex = 'number',
-  ModelSceneFrame = 'table',
-  ModelSceneFrameActor = 'table',
+  ModelAsset = 'string',
+  ModelSceneFrame = 'ModelScene',
+  ModelSceneFrameActor = 'Actor',
   NamePlateFrame = 'table',
+  normalizedValue = 'number',
   NotificationDbId = 'string',
   number = 'number',
   RecruitAcceptanceID = 'string',
   ScriptRegion = 'table',
-  SimpleTexture = 'table',
+  SimpleAnim = 'table',
+  SimpleAnimGroup = 'table',
+  SimpleButtonStateToken = 'string',
+  SimpleControlPoint = 'table',
+  SimpleFont = 'table',
+  SimpleFontString = 'table',
+  SimpleFrame = 'Frame',
+  SimpleLine = 'table',
+  SimpleMaskTexture = 'table',
+  SimplePathAnim = 'table',
+  SimpleTexture = 'Texture',
+  SingleColorValue = 'number',
+  size = 'number',
+  StatusBarFillStyle = 'string',
   string = 'string',
   table = 'table',
+  TBFFlags = 'string',
   TBFStyleFlags = 'string',
+  TextureAsset = 'string',
   textureAtlas = 'string',
   textureKit = 'string',
   time_t = 'number',
   TooltipComparisonItem = 'table',
+  uiAddon = 'uiAddon',
+  uiFontHeight = 'number',
   UiMapPoint = 'table',
   uiUnit = 'number',
   UnitToken = 'unit',
@@ -137,6 +162,10 @@ local types = {
   WOWGUID = 'string',
   WOWMONEY = 'number',
 }
+for k in pairs(parseYaml('data/stringenums.yaml')) do
+  assert(not types[k])
+  types[k] = k
+end
 local tys = {}
 for name, tab in pairs(tabs) do
   tys[name] = tab.Type
@@ -178,7 +207,7 @@ local function t2nty(field, ns)
     return { arrayof = t2nty({ Type = field.InnerType }, ns) }
   elseif t == 'table' and field.Mixin then
     local mst = assert(knownMixinStructs[field.Mixin], 'no struct for mixin ' .. field.Mixin)
-    return { mixin = field.Mixin, structure = mst }
+    return { structure = mst }
   elseif types[t] then
     return types[t]
   end
@@ -191,7 +220,8 @@ local function t2nty(field, ns)
   elseif ty == 'Enumeration' then
     return { enum = t }
   elseif ty == 'Structure' then
-    return { mixin = field.Mixin, structure = n }
+    -- TODO cross-check mixin
+    return { structure = n }
   elseif ty == 'CallbackType' then
     return 'function'
   else
@@ -261,8 +291,10 @@ local function rewriteApis()
     nss[split(name) or ''] = true
     if not skip(apis, name) then
       local ns = split(name)
+      local api = apis[name]
       apis[name] = {
-        inputs = { insig(fn, ns) },
+        inputs = insig(fn, ns),
+        mayreturnnothing = api and api.mayreturnnothing,
         outputs = outsig(fn, ns),
       }
     end
@@ -270,7 +302,7 @@ local function rewriteApis()
   for k in pairs(cfgskip) do
     assert(nss[k], k .. ' in skip_namespaces but not in docs')
   end
-  require('pl.file').write(f, y.pprint(apis))
+  writeifchanged(f, y.pprint(apis))
   return apis
 end
 
@@ -302,14 +334,11 @@ local function rewriteEvents()
   for k in pairs(neversent) do
     assert(seen[k], k .. ' is marked never_sent but not present in docs')
   end
-  writeFile(filename, pprintYaml(out))
+  writeifchanged(filename, pprintYaml(out))
   return out
 end
 
 local function rewriteStructures(outApis, outEvents)
-  local stubs = {
-    FramePoint = 'CENTER',
-  }
   local filename = ('data/products/%s/structures.yaml'):format(product)
   local structures = require('wowapi.yaml').parseFile(filename)
   for name, tab in pairs(tabs) do
@@ -321,11 +350,11 @@ local function rewriteStructures(outApis, outEvents)
           ret[f.Name] = {
             default = enum[f.Type] and enum[f.Type][f.Default] or f.Default,
             nilable = f.Nilable or nil,
-            stub = deref(structures, name, f.Name, 'stub') or stubs[f.Type],
+            stub = deref(structures, name, 'fields', f.Name, 'stub'),
             type = t2nty(f, ns),
           }
         end
-        return ret
+        return { fields = ret }
       end)()
     end
   end
@@ -334,7 +363,7 @@ local function rewriteStructures(outApis, outEvents)
   local function processType(ty)
     if ty.structure and not out[ty.structure] then
       out[ty.structure] = structures[ty.structure]
-      for _, v in pairs(structures[ty.structure]) do
+      for _, v in pairs(structures[ty.structure].fields) do
         processType(v.type)
       end
     elseif ty.arrayof then
@@ -347,15 +376,13 @@ local function rewriteStructures(outApis, outEvents)
     end
   end
   for _, api in pairs(outApis) do
-    for _, ilist in ipairs(api.inputs or {}) do
-      processList(ilist)
-    end
+    processList(api.inputs)
     processList(api.outputs)
   end
   for _, event in pairs(outEvents) do
     processList(event.payload)
   end
-  writeFile(filename, pprintYaml(out))
+  writeifchanged(filename, pprintYaml(out))
 end
 
 local outApis = rewriteApis()

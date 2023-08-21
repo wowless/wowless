@@ -1,9 +1,6 @@
 local function run(cfg)
   assert(cfg, 'missing configuration')
   assert(cfg.product, 'missing product')
-  _G.loadstring = debug.newcfunction(function(...)
-    return _G.loadstring_untainted(...) -- elune rewrite hack
-  end)
   local loglevel = cfg.loglevel or 0
   local time0 = os.clock()
   local function log(level, fmt, ...)
@@ -57,6 +54,9 @@ local function run(cfg)
     os.exit(0)
   end
 
+  local datalua = require('build.products.' .. cfg.product .. '.data')
+  local runnercfg = datalua.config.runner or {}
+
   local scripts = {
     bindings = function()
       local names = {}
@@ -67,12 +67,8 @@ local function run(cfg)
       for _, name in ipairs(names) do
         local fn = api.states.Bindings[name]
         api.log(2, 'firing binding ' .. name)
-        api.CallSafely(function()
-          fn('down')
-        end)
-        api.CallSafely(function()
-          fn('up')
-        end)
+        api.CallSafely(fn, 'down')
+        api.CallSafely(fn, 'up')
       end
     end,
     clicks = function()
@@ -113,8 +109,7 @@ local function run(cfg)
         VARIABLES_LOADED = true,
         VOICE_CHAT_VAD_SETTINGS_UPDATED = true, -- inconsistent with nilable C_VoiceChat outputs
       }
-      local datalua = require('build.products.' .. cfg.product .. '.data')
-      local skip = (datalua.config.runner or {}).skip_events or {}
+      local skip = runnercfg.skip_events or {}
       -- TODO unify with wowapi/loader
       local stubenv = setmetatable({}, {
         __index = function(_, k)
@@ -151,19 +146,19 @@ local function run(cfg)
       end
     end,
     slashcmds = function()
-      local cmdBlacklist = { -- TODO remove this; these require a better SecureCmdOptionParse
-        BENCHMARK = true,
-        CASTRANDOM = true,
-        EVENT = true, -- throws Lua errors if text isn't a valid event
-        LOOT_MASTER = true, -- broken
-        PTRFEEDBACK = true, -- this just seems broken with an empty string
-        USERANDOM = true,
-      }
       local cmds = {}
       for k, v in pairs(api.env) do
         local cmd = k:match('^SLASH_(.+)1$')
-        if cmd and not cmdBlacklist[cmd] then
+        if cmd then
           cmds[cmd] = v
+        end
+      end
+      if cfg.dir then
+        for k in pairs(runnercfg.skip_slashcmds or {}) do
+          api.CallSafely(function()
+            assert(cmds[k], 'missing skip_slashcmd ' .. k)
+          end)
+          cmds[k] = nil
         end
       end
       for k, v in require('pl.tablex').sort(cmds) do
@@ -197,7 +192,16 @@ local function run(cfg)
 
   api.SendEvent('PLAYER_LOGOUT')
   loader.saveAllVariables()
-  return api
+
+  -- Last ditch invariant check.
+  for _, obj in pairs(api.uiobjects) do
+    assert(api.UserData(obj.luarep) == obj)
+    for k, v in pairs(obj) do
+      assert(type(v) ~= 'table' or (k ~= 'luarep') == not api.UserData(v), k)
+    end
+  end
+
+  return api, loader
 end
 
 return {

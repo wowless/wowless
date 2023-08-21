@@ -360,6 +360,8 @@ EditBox:
   - HighlightColor
   - TextInsets
   extends: Frame
+FlipBook:
+  extends: Animation
 FogOfWarFrame:
   extends: Frame
 Font:
@@ -1280,7 +1282,7 @@ Texture:
     alphamode:
       impl:
         method: SetBlendMode
-      type: string
+      type: BlendMode
     atlas:
       impl:
         method: SetAtlas

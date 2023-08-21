@@ -1,8 +1,5 @@
 ---
-acos: {}
-asin: {}
-atan: {}
-atan2: {}
+_ReturnNothing: {}
 C_Calendar.GetMonthInfo:
   states:
   - Calendar
@@ -13,6 +10,17 @@ C_Calendar.SetMonth:
   states:
   - Calendar
 C_ClassTalents.GetActiveConfigID:
+  states:
+  - Talents
+C_ClassTalents.GetTraitTreeForSpec:
+  sqls:
+  - lookup: C_ClassTalents.GetTraitTreeForSpec
+C_ClassTalents.InitializeViewLoadout:
+  states:
+  - Talents
+C_ClassTalents.ViewLoadout:
+  sqls:
+  - lookup: GetSpecializationInfoByID
   states:
   - Talents
 C_Console.GetAllCommands:
@@ -56,6 +64,9 @@ C_CVar.SetCVar:
 C_DateAndTime.AdjustTimeByDays: {}
 C_DateAndTime.AdjustTimeByMinutes: {}
 C_DateAndTime.CompareCalendarTime: {}
+C_EventUtils.IsEventValid:
+  frameworks:
+  - datalua
 C_Item.DoesItemExistByID:
   sqls:
   - lookup: C_Item.DoesItemExistByID
@@ -120,7 +131,6 @@ C_UIColor.GetColors:
 C_XMLUtil.GetTemplateInfo:
   frameworks:
   - api
-cos: {}
 CreateFont:
   frameworks:
   - api
@@ -130,26 +140,28 @@ CreateForbiddenFrame:
 CreateFrame:
   frameworks:
   - api
-debugprofilestop: {}
-debugstack: {}
 EnumerateFrames:
   frameworks:
   - api
 FillLocalizedClassList:
   sqls:
   - cursor: FillLocalizedClassList
-GetAddOnEnableState:
-  states:
-  - Addons
-GetAddOnInfo:
-  states:
-  - Addons
-GetAddOnMetadata:
-  states:
-  - Addons
+forceinsecure: {}
+GetAddOnEnableState: {}
+GetAddOnInfo: {}
+GetAddOnMetadata: {}
 GetBuildInfo:
   frameworks:
   - datalua
+GetBuildInfo_10_1:
+  frameworks:
+  - datalua
+GetBuildInfo_3_4_2:
+  frameworks:
+  - datalua
+GetButtonMetatable:
+  frameworks:
+  - api
 GetChatWindowInfo: {}
 GetChatWindowMessages:
   frameworks:
@@ -159,10 +171,16 @@ GetClassInfo:
   - lookup: GetClassInfo
 GetClickFrame:
   frameworks:
-  - env
+  - api
 getfenv:
   frameworks:
   - env
+GetFontStringMetatable:
+  frameworks:
+  - api
+GetFrameMetatable:
+  frameworks:
+  - api
 GetInventorySlotInfo:
   sqls:
   - lookup: GetInventorySlotInfo
@@ -241,12 +259,8 @@ GetTime:
 hooksecurefunc:
   frameworks:
   - env
-IsAddOnLoaded:
-  states:
-  - Addons
-IsAddOnLoadOnDemand:
-  states:
-  - Addons
+IsAddOnLoaded: {}
+IsAddOnLoadOnDemand: {}
 IsLoggedIn:
   states:
   - System
@@ -276,8 +290,6 @@ SendSystemMessage:
   - Time
   - Units
 SetPortraitTexture: {}
-sin: {}
-tan: {}
 UnitClass:
   sqls:
   - lookup: UnitClass

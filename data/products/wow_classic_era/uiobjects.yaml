@@ -1,16 +1,13 @@
 ---
 Actor:
-  fields:
-    scale:
-      init: 1
-      type: number
+  fields: {}
   inherits:
     ParentedObjectBase: {}
+    RegionBase: {}
     ScriptObjectBase: {}
   methods:
     ClearModel: {}
     GetActiveBoundingBox: {}
-    GetAlpha: {}
     GetAnimation: {}
     GetAnimationBlendOperation: {}
     GetAnimationVariation: {}
@@ -23,18 +20,11 @@ Actor:
     GetPitch: {}
     GetPosition: {}
     GetRoll: {}
-    GetScale:
-      getter:
-      - name: scale
     GetSpellVisualKit: {}
     GetYaw: {}
-    Hide: {}
     IsLoaded: {}
-    IsShown: {}
     IsUsingCenterForOrigin: {}
-    IsVisible: {}
     PlayAnimationKit: {}
-    SetAlpha: {}
     SetAnimation: {}
     SetAnimationBlendOperation: {}
     SetDesaturation: {}
@@ -46,14 +36,9 @@ Actor:
     SetPitch: {}
     SetPosition: {}
     SetRoll: {}
-    SetScale:
-      setter:
-      - name: scale
-    SetShown: {}
     SetSpellVisualKit: {}
     SetUseCenterForOrigin: {}
     SetYaw: {}
-    Show: {}
     StopAnimationKit: {}
   objectType: ModelSceneActor
 Alpha:
@@ -67,11 +52,13 @@ Alpha:
 Animation:
   fields:
     endDelay:
+      init: 0
       type: number
     smoothing:
       init: OUT
-      type: string
+      type: SmoothingType
     startDelay:
+      init: 0
       type: number
   inherits:
     ParentedObject: {}
@@ -126,6 +113,20 @@ AnimationGroup:
   methods:
     CreateAnimation:
       impl: AnimationGroup/CreateAnimation
+      inputs:
+      - default: Animation
+        name: animationType
+        nilable: true
+        type: string
+      - name: name
+        nilable: true
+        type: string
+      - name: inheritsFrom
+        nilable: true
+        type: string
+      outputs:
+      - name: animation
+        type: Animation
     Finish: {}
     GetAnimations:
       impl: AnimationGroup/GetAnimations
@@ -175,22 +176,22 @@ Button:
       type: string
     disabledTexture:
       nilable: true
-      type: texture
+      type: Texture
     fontstring:
       nilable: true
-      type: table
+      type: FontString
     highlightTexture:
       nilable: true
-      type: texture
+      type: Texture
     motionScriptsWhileDisabled:
       init: false
       type: boolean
     normalFontObject:
       nilable: true
-      type: font
+      type: Font
     normalTexture:
       nilable: true
-      type: texture
+      type: Texture
     pushedTextOffsetX:
       init: 0
       type: number
@@ -198,7 +199,8 @@ Button:
       init: 0
       type: number
     pushedTexture:
-      type: texture
+      nilable: true
+      type: Texture
     registeredClicks:
       init:
         leftbuttonup: true
@@ -267,6 +269,10 @@ Button:
       impl: Button/SetEnabled
     SetFontString:
       impl: Button/SetFontString
+      inputs:
+      - name: fontString
+        type: FontString
+      outputs: {}
     SetFormattedText:
       impl: Button/SetFormattedText
     SetHighlightAtlas:
@@ -301,9 +307,11 @@ CheckButton:
       init: false
       type: boolean
     checkedTexture:
-      type: texture
+      nilable: true
+      type: Texture
     disabledCheckedTexture:
-      type: texture
+      nilable: true
+      type: Texture
   inherits:
     Button: {}
   methods:
@@ -358,13 +366,17 @@ CinematicModel:
 ColorSelect:
   fields:
     colorValueTexture:
-      type: texture
+      nilable: true
+      type: Texture
     colorValueThumbTexture:
-      type: texture
+      nilable: true
+      type: Texture
     colorWheelTexture:
-      type: texture
+      nilable: true
+      type: Texture
     colorWheelThumbTexture:
-      type: texture
+      nilable: true
+      type: Texture
   inherits:
     Frame: {}
   methods:
@@ -421,18 +433,30 @@ ControlPoint:
 Cooldown:
   fields:
     blingTexture:
-      type: texture
+      nilable: true
+      type: Texture
+    durationMillis:
+      init: 0
+      type: number
     edgeTexture:
-      type: texture
+      nilable: true
+      type: Texture
+    startTimeMillis:
+      init: 0
+      type: number
     swipeTexture:
-      type: texture
+      nilable: true
+      type: Texture
   inherits:
     Frame: {}
   methods:
     Clear: {}
     GetCooldownDisplayDuration: {}
     GetCooldownDuration: {}
-    GetCooldownTimes: {}
+    GetCooldownTimes:
+      getter:
+      - name: startTimeMillis
+      - name: durationMillis
     GetDrawBling: {}
     GetDrawEdge: {}
     GetDrawSwipe: {}
@@ -527,7 +551,10 @@ EditBox:
       getter:
       - name: historyLines
     GetInputLanguage:
-      impl: EditBox/GetInputLanguage
+      outputs:
+      - name: language
+        stub: ROMAN
+        type: string
     GetMaxBytes:
       getter:
       - name: maxBytes
@@ -625,9 +652,21 @@ FontInstance:
   inherits: {}
   methods:
     GetFont:
-      impl: FontInstance/GetFont
+      outputs:
+      - name: fontName
+        type: string
+      - name: fontHeight
+        stub: 12
+        type: number
+      - name: fontFlags
+        type: string
     GetFontObject:
       impl: FontInstance/GetFontObject
+      inputs: {}
+      outputs:
+      - name: font
+        nilable: true
+        type: FontInstance
     GetIndentedWordWrap: {}
     GetJustifyH: {}
     GetJustifyV: {}
@@ -719,6 +758,7 @@ FontString:
       setter:
       - name: textScale
     SetWordWrap: {}
+  warner: true
 ForbiddenMixin:
   fields:
     forbidden:
@@ -742,7 +782,7 @@ Frame:
       type: number
     frameStrata:
       init: MEDIUM
-      type: string
+      type: FrameStrata
     hasFixedFrameLevel:
       init: false
       type: boolean
@@ -762,12 +802,16 @@ Frame:
       init: false
       type: boolean
     maxResizeHeight:
+      init: 0
       type: number
     maxResizeWidth:
+      init: 0
       type: number
     minResizeHeight:
+      init: 0
       type: number
     minResizeWidth:
+      init: 0
       type: number
     movable:
       init: false
@@ -789,12 +833,62 @@ Frame:
     CanChangeAttribute: {}
     CreateFontString:
       impl: Frame/CreateFontString
+      inputs:
+      - name: name
+        nilable: true
+        type: string
+      - default: ARTWORK
+        name: drawLayer
+        nilable: true
+        type: DrawLayer
+      - name: templateName
+        nilable: true
+        type: string
+      outputs:
+      - name: fontString
+        type: FontString
     CreateLine:
       impl: Frame/CreateLine
+      inputs: {}
+      outputs:
+      - name: line
+        type: Line
     CreateMaskTexture:
       impl: Frame/CreateMaskTexture
+      inputs:
+      - name: name
+        nilable: true
+        type: string
+      - name: layer
+        nilable: true
+        type: DrawLayer
+      - name: inheritsFrom
+        nilable: true
+        type: string
+      - name: subLayer
+        nilable: true
+        type: number
+      outputs:
+      - name: mask
+        type: MaskTexture
     CreateTexture:
       impl: Frame/CreateTexture
+      inputs:
+      - name: name
+        nilable: true
+        type: string
+      - name: layer
+        nilable: true
+        type: DrawLayer
+      - name: inheritsFrom
+        nilable: true
+        type: string
+      - name: subLayer
+        nilable: true
+        type: number
+      outputs:
+      - name: texture
+        type: Texture
     DesaturateHierarchy: {}
     DisableDrawLayer: {}
     DoesClipChildren: {}
@@ -956,7 +1050,7 @@ GameTooltip:
       type: number
     tooltipOwner:
       nilable: true
-      type: table
+      type: Frame
   inherits:
     Frame: {}
   methods:
@@ -1017,6 +1111,13 @@ GameTooltip:
     SetMinimumWidth: {}
     SetOwner:
       impl: GameTooltip/SetOwner
+      inputs:
+      - name: owner
+        type: Frame
+      - name: anchorType
+        nilable: true
+        type: string
+      outputs: {}
     SetPadding: {}
     SetPetAction: {}
     SetPossession: {}
@@ -1046,7 +1147,7 @@ LayeredRegion:
   fields:
     layer:
       init: ARTWORK
-      type: string
+      type: DrawLayer
     sublevel:
       init: 0
       type: number
@@ -1095,6 +1196,7 @@ Line:
     SetThickness:
       setter:
       - name: thickness
+  warner: true
 LineScale:
   inherits:
     Scale: {}
@@ -1149,9 +1251,11 @@ Minimap:
     SetStaticPOIArrowTexture: {}
     SetZoom: {}
     UpdateBlips: {}
+  singleton: true
 Model:
   fields:
     modelScale:
+      init: 1
       type: number
   inherits:
     Frame: {}
@@ -1231,6 +1335,16 @@ ModelScene:
     ClearFog: {}
     CreateActor:
       impl: ModelScene/CreateActor
+      inputs:
+      - name: name
+        nilable: true
+        type: string
+      - name: template
+        nilable: true
+        type: string
+      outputs:
+      - name: actor
+        type: Actor
     GetActorAtIndex: {}
     GetCameraFarClip: {}
     GetCameraFieldOfView: {}
@@ -1345,6 +1459,11 @@ ParentedObject:
   methods:
     SetParent:
       impl: ParentedObject/SetParent
+      inputs:
+      - name: parent
+        nilable: true
+        type: UIObject
+      outputs: {}
   virtual: true
 ParentedObjectBase:
   fields:
@@ -1352,7 +1471,7 @@ ParentedObjectBase:
       type: hlist
     parent:
       nilable: true
-      type: table
+      type: UIObject
   inherits:
     ForbiddenMixin: {}
     UIObject: {}
@@ -1369,6 +1488,19 @@ Path:
   methods:
     CreateControlPoint:
       impl: Path/CreateControlPoint
+      inputs:
+      - name: name
+        nilable: true
+        type: string
+      - name: templateName
+        nilable: true
+        type: string
+      - name: order
+        nilable: true
+        type: number
+      outputs:
+      - name: point
+        type: ControlPoint
     GetControlPoints: {}
     GetCurve: {}
     GetMaxOrder: {}
@@ -1403,9 +1535,6 @@ PlayerModel:
     StopAnimKit: {}
 Region:
   fields:
-    alpha:
-      init: 1
-      type: number
     animationGroups:
       init: {}
       type: table
@@ -1430,17 +1559,12 @@ Region:
     points:
       init: {}
       type: table
-    scale:
-      init: 1
-      type: number
-    shown:
-      init: true
-      type: boolean
     width:
       init: 0
       type: number
   inherits:
     ParentedObject: {}
+    RegionBase: {}
   methods:
     AdjustPointsOffset: {}
     CanChangeProtectedState: {}
@@ -1450,9 +1574,16 @@ Region:
     ClearPointsOffset: {}
     CreateAnimationGroup:
       impl: Region/CreateAnimationGroup
-    GetAlpha:
-      getter:
-      - name: alpha
+      inputs:
+      - name: name
+        nilable: true
+        type: string
+      - name: templateName
+        nilable: true
+        type: string
+      outputs:
+      - name: animationGroup
+        type: AnimationGroup
     GetAnimationGroups:
       impl: Region/GetAnimationGroups
     GetBottom:
@@ -1472,6 +1603,24 @@ Region:
       impl: Region/GetNumPoints
     GetPoint:
       impl: Region/GetPoint
+      inputs:
+      - default: 1
+        name: anchorIndex
+        nilable: true
+        type: tonumber
+      mayreturnnothing: true
+      outputs:
+      - name: point
+        type: FramePoint
+      - name: relativeTo
+        nilable: true
+        type: UIObject
+      - name: relativePoint
+        type: FramePoint
+      - name: offsetX
+        type: number
+      - name: offsetY
+        type: number
     GetPointByName: {}
     GetRect:
       getter:
@@ -1481,9 +1630,6 @@ Region:
       - name: height
     GetRight:
       impl: Region/GetRight
-    GetScale:
-      getter:
-      - name: scale
     GetScaledRect:
       impl: Region/GetScaledRect
     GetSize:
@@ -1495,8 +1641,6 @@ Region:
     GetWidth:
       getter:
       - name: width
-    Hide:
-      impl: Region/Hide
     IsAnchoringRestricted: {}
     IsDragging: {}
     IsIgnoringParentAlpha:
@@ -1510,15 +1654,8 @@ Region:
     IsProtected:
       impl: Region/IsProtected
     IsRectValid: {}
-    IsShown:
-      getter:
-      - name: shown
-    IsVisible:
-      impl: Region/IsVisible
     SetAllPoints:
       impl: Region/SetAllPoints
-    SetAlpha:
-      impl: Region/SetAlpha
     SetHeight:
       setter:
       - name: height
@@ -1530,10 +1667,6 @@ Region:
       - name: isIgnoringParentScale
     SetPoint:
       impl: Region/SetPoint
-    SetScale:
-      impl: Region/SetScale
-    SetShown:
-      impl: Region/SetShown
     SetSize:
       setter:
       - name: width
@@ -1541,9 +1674,42 @@ Region:
     SetWidth:
       setter:
       - name: width
+    StopAnimating: {}
+  virtual: true
+RegionBase:
+  fields:
+    alpha:
+      init: 1
+      type: number
+    scale:
+      init: 1
+      type: number
+    shown:
+      init: true
+      type: boolean
+  inherits: {}
+  methods:
+    GetAlpha:
+      getter:
+      - name: alpha
+    GetScale:
+      getter:
+      - name: scale
+    Hide:
+      impl: Region/Hide
+    IsShown:
+      getter:
+      - name: shown
+    IsVisible:
+      impl: Region/IsVisible
+    SetAlpha:
+      impl: Region/SetAlpha
+    SetScale:
+      impl: Region/SetScale
+    SetShown:
+      impl: Region/SetShown
     Show:
       impl: Region/Show
-    StopAnimating: {}
   virtual: true
 Rotation:
   inherits:
@@ -1574,7 +1740,10 @@ ScriptObject:
     GetScript:
       impl: ScriptObject/GetScript
     HasScript:
-      impl: ScriptObject/HasScript
+      outputs:
+      - name: hasScript
+        stub: true
+        type: boolean
     HookScript:
       impl: ScriptObject/HookScript
     SetScript:
@@ -1595,7 +1764,7 @@ ScrollFrame:
   fields:
     scrollChild:
       nilable: true
-      type: frame
+      type: Frame
   inherits:
     Frame: {}
   methods:
@@ -1642,9 +1811,12 @@ Slider:
     min:
       init: 0
       type: number
+    orientation:
+      init: HORIZONTAL
+      type: Orientation
     thumbTexture:
       nilable: true
-      type: texture
+      type: Texture
     value:
       init: 0
       type: number
@@ -1660,7 +1832,9 @@ Slider:
       - name: min
       - name: max
     GetObeyStepOnDrag: {}
-    GetOrientation: {}
+    GetOrientation:
+      getter:
+      - name: orientation
     GetStepsPerPage: {}
     GetThumbTexture:
       getter:
@@ -1677,7 +1851,9 @@ Slider:
       - name: min
       - name: max
     SetObeyStepOnDrag: {}
-    SetOrientation: {}
+    SetOrientation:
+      setter:
+      - name: orientation
     SetStepsPerPage: {}
     SetThumbTexture:
       setter:
@@ -1695,7 +1871,8 @@ StatusBar:
       init: 0
       type: number
     statusBarTexture:
-      type: texture
+      nilable: true
+      type: Texture
     value:
       init: 0
       type: number
@@ -1757,11 +1934,12 @@ Texture:
     GetMaskTexture: {}
     GetNumMaskTextures: {}
     RemoveMaskTexture: {}
+  warner: true
 TextureBase:
   fields:
     blendMode:
       init: BLEND
-      type: string
+      type: BlendMode
     blx:
       init: 0
       type: number
@@ -1893,6 +2071,7 @@ Translation:
 UIObject:
   fields:
     name:
+      nilable: true
       type: string
   inherits: {}
   methods:
@@ -1926,3 +2105,4 @@ WorldFrame:
   inherits:
     Frame: {}
   methods: {}
+  singleton: true

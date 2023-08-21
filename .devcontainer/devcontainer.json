@@ -13,8 +13,7 @@
     }
   },
   "features": {
-    "ghcr.io/devcontainers/features/github-cli:1": {},
-    "ghcr.io/devcontainers-contrib/features/pre-commit:2": {}
+    "ghcr.io/devcontainers/features/github-cli:1": {}
   },
   "name": "wowless/wowless",
   "postCreateCommand": "pre-commit install --install-hooks",

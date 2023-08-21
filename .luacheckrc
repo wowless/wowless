@@ -1,7 +1,10 @@
 read_globals = {
+  'debug.getfunctionstats',
+  'debug.getglobalstats',
   'debug.gettime',
   'debug.newcfunction',
   'debug.setnewclosuretaint',
+  'debug.setprofilingenabled',
   'forceinsecure',
   'issecure',
   'issecurevariable',
@@ -38,9 +41,6 @@ files['addon/Wowless'] = {
 files['data/uiobjects'] = {
   read_globals = {
     'api',
-    'build',
     'toTexture',
-    'u',
-    'UpdateVisible',
   },
 }

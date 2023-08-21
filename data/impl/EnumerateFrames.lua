@@ -1,4 +1,3 @@
 local api, frame = ...
-local nextentry = api.frames:entries()
-local nextframe = nextentry(api.frames, frame and api.UserData(frame))
-return nextframe and nextframe.luarep
+local nextentry, arg = api.frames:entries()
+return nextentry(arg, frame)

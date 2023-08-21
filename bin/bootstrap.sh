@@ -6,5 +6,5 @@ python3 -m venv env
 . env/bin/activate
 python3 -m pip install -r requirements.txt
 hererocks -l 5.1.5 -r 3.8.0 env
-luarocks build --only-deps
+luarocks build
 lua tools/mkninja.lua

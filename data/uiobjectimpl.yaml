@@ -25,9 +25,7 @@ CheckButton/SetChecked: {}
 CheckButton/SetCheckedTexture: {}
 EditBox/Disable: {}
 EditBox/Enable: {}
-EditBox/GetInputLanguage: {}
 EditBox/Insert: {}
-FontInstance/GetFont: {}
 FontInstance/GetFontObject: {}
 FontString/SetText: {}
 ForbiddenMixin/SetForbidden: {}
@@ -48,6 +46,7 @@ Frame/RegisterUnitEvent: {}
 Frame/SetAttribute: {}
 Frame/SetAttributeNoHandler: {}
 Frame/SetFrameLevel: {}
+Frame/SetResizeBounds: {}
 Frame/UnregisterAllEvents: {}
 Frame/UnregisterEvent: {}
 GameTooltip/IsOwned: {}
@@ -60,6 +59,8 @@ MouseMixin/EnableMouse: {}
 MouseMixin/IsMouseEnabled: {}
 ParentedObject/GetDebugName: {}
 ParentedObject/SetParent: {}
+ParentedObjectBase/GetParentKey: {}
+ParentedObjectBase/SetParentKey: {}
 Path/CreateControlPoint: {}
 Region/ClearAllPoints: {}
 Region/CreateAnimationGroup: {}
@@ -81,7 +82,6 @@ Region/SetScale: {}
 Region/SetShown: {}
 Region/Show: {}
 ScriptObject/GetScript: {}
-ScriptObject/HasScript: {}
 ScriptObject/HookScript: {}
 ScriptObject/SetScript: {}
 ScrollFrame/SetScrollChild: {}
