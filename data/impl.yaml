@@ -150,9 +150,6 @@ forceinsecure: {}
 GetAddOnEnableState: {}
 GetAddOnInfo: {}
 GetAddOnMetadata: {}
-GetBuildInfo:
-  frameworks:
-  - datalua
 GetBuildInfo_10_1:
   frameworks:
   - datalua
@@ -241,11 +238,6 @@ GetTalentPrereqs_Vanilla:
 GetTalentPrereqs_Wrath:
   sqls:
   - cursor: GetTalentPrereqs
-  states:
-  - Units
-GetTalentTabInfo_Vanilla:
-  sqls:
-  - lookup: GetTalentTabInfo
   states:
   - Units
 GetTalentTabInfo_Wrath:

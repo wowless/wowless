@@ -1,8 +1,22 @@
 ---
 addon:
-  globalenv_in_capsule:
-    CreateFromSecureMixins: {}
-    SecureMixin: {}
+  capsule:
+    apinamespaces:
+      C_AuthChallenge: {}
+      C_StoreSecure: {}
+      C_WowTokenSecure: {}
+    enums:
+      BattlepayBannerType: {}
+      BattlepayDisplayFlag: {}
+      BattlepayGroupDisplayType: {}
+      BattlepayProductDecorator: {}
+      BattlepayProductGroupFlag: {}
+      PurchaseEligibility: {}
+      StoreError: {}
+      VasError: {}
+      VasServiceType: {}
+    globalapis:
+      CreateForbiddenFrame: {}
   ignore_cvar_value:
     graphicsEnvironmentDetail: {}
     graphicsGroundClutter: {}
@@ -31,12 +45,15 @@ docs:
   apis:
     skip_namespaces:
       C_ConfigurationWarnings: {}
+      C_EditMode: {}
   events:
     never_sent:
+      EDIT_MODE_LAYOUTS_UPDATED: {}
       PARTY_INVITE_CANCEL: {}
       SECURE_TRANSFER_CONFIRM_SEND_MAIL: {}
 runner:
   skip_slashcmds:
+    ACHIEVEMENTUI: {}
     CASTRANDOM: {}
     LOOT_MASTER: {}
     USERANDOM: {}

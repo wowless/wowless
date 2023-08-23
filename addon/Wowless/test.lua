@@ -667,17 +667,8 @@ local syncTests = function()
           f:SetScrollChild(g)
           assertEquals(g, f:GetScrollChild())
           assertEquals(f, g:GetParent())
-          if _G.WowlessData.product ~= 'wow_classic_era' then
-            assertEquals(false, pcall(f.SetScrollChild, f, nil))
-            assertEquals(false, pcall(f.SetScrollChild, f, 'WowlessScrollFrameChild'))
-          else
-            f:SetScrollChild(nil)
-            assertEquals(nil, f:GetScrollChild())
-            assertEquals(nil, g:GetParent())
-            f:SetScrollChild('WowlessScrollFrameChild')
-            assertEquals(g, f:GetScrollChild())
-            assertEquals(f, g:GetParent())
-          end
+          assertEquals(false, pcall(f.SetScrollChild, f, nil))
+          assertEquals(false, pcall(f.SetScrollChild, f, 'WowlessScrollFrameChild'))
           assertEquals(false, pcall(f.SetScrollChild, f))
         end,
       }
