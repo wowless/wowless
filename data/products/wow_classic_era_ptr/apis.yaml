@@ -8718,7 +8718,6 @@ ExpandTrainerSkillLine:
 FactionToggleAtWar: {}
 fastrandom:
   stdlib: fastrandom
-FauxScrollFrame_Update: {}
 FillLocalizedClassList:
   impl: FillLocalizedClassList
   inputs:
@@ -12977,7 +12976,6 @@ SetGuildRosterSelection: {}
 SetGuildRosterShowOffline: {}
 SetInventoryPortraitTexture: {}
 SetInWorldUIVisibility: {}
-SetItemRef: {}
 SetLegacyRaidDifficultyID: {}
 SetLootMethod: {}
 SetLootPortrait: {}
