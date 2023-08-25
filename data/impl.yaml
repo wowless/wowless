@@ -125,6 +125,12 @@ C_Traits.GetNodeInfo:
 C_Traits.GetTreeNodes:
   sqls:
   - cursor: C_Traits.GetTreeNodes
+C_UI.GetUIParent:
+  frameworks:
+  - env
+C_UI.GetWorldFrame:
+  frameworks:
+  - env
 C_UIColor.GetColors:
   sqls:
   - cursor: C_UIColor.GetColors

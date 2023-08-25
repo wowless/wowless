@@ -434,6 +434,13 @@ C_ActionBar.ToggleAutoCastPetAction:
   - name: slotID
     type: number
   outputs: {}
+C_AddOns.DoesAddOnExist:
+  inputs:
+  - name: name
+    type: uiAddon
+  outputs:
+  - name: exists
+    type: boolean
 C_AddOns.GetAddOnMetadata:
   impl: GetAddOnMetadata
   inputs:
@@ -6024,6 +6031,11 @@ C_Container.GetBackpackAutosortDisabled:
   outputs:
   - name: isDisabled
     type: boolean
+C_Container.GetBackpackSellJunkDisabled:
+  inputs: {}
+  outputs:
+  - name: isDisabled
+    type: boolean
 C_Container.GetBagName:
   inputs:
   - name: bagIndex
@@ -6258,6 +6270,11 @@ C_Container.PlayerHasHearthstone:
     nilable: true
     type: number
 C_Container.SetBackpackAutosortDisabled:
+  inputs:
+  - name: disable
+    type: boolean
+  outputs: {}
+C_Container.SetBackpackSellJunkDisabled:
   inputs:
   - name: disable
     type: boolean
@@ -11100,6 +11117,14 @@ C_MerchantFrame.IsMerchantItemRefundable:
   outputs:
   - name: refundable
     type: boolean
+C_MerchantFrame.IsSellAllJunkEnabled:
+  inputs: {}
+  outputs:
+  - name: enabled
+    type: boolean
+C_MerchantFrame.SellAllJunkItems:
+  inputs: {}
+  outputs: {}
 C_Minimap.CanTrackBattlePets:
   inputs: {}
   outputs:
@@ -12097,7 +12122,7 @@ C_PartyInfo.GetMinLevel:
   outputs:
   - name: minLevel
     type: number
-C_PartyInfo.GetRestrictRaidPings:
+C_PartyInfo.GetRestrictPings:
   inputs: {}
   outputs:
   - name: restrictToAssistants
@@ -12148,7 +12173,7 @@ C_PartyInfo.RequestInviteFromUnit:
     nilable: true
     type: boolean
   outputs: {}
-C_PartyInfo.SetRestrictRaidPings:
+C_PartyInfo.SetRestrictPings:
   inputs:
   - name: restrictToAssistants
     type: boolean
@@ -12759,37 +12784,64 @@ C_PetJournal.SummonRandomPet:
   - name: onlyFavorites
     type: boolean
   outputs: {}
-C_Ping.ClearPendingPingInfo:
+C_Ping.GetContextualPingTypeForUnit:
+  inputs:
+  - name: targetUnit
+    nilable: true
+    type: string
+  outputs:
+  - name: type
+    type:
+      enum: PingSubjectType
+C_Ping.SendMacroPing:
+  inputs:
+  - name: type
+    nilable: true
+    type:
+      enum: PingSubjectType
+  - name: targetToken
+    nilable: true
+    type: string
+  outputs: {}
+C_Ping.TogglePingListener:
+  inputs:
+  - name: down
+    type: boolean
+  outputs: {}
+C_PingSecure.ClearPendingPingInfo:
   inputs: {}
   outputs: {}
-C_Ping.CreateFrame:
+C_PingSecure.CreateFrame:
   inputs: {}
   outputs: {}
-C_Ping.GetCooldownInfo:
+C_PingSecure.DisplayError:
+  inputs:
+  - name: error
+    type: string
+  outputs: {}
+C_PingSecure.GetCooldownInfo:
   inputs: {}
   outputs:
   - name: cooldownInfo
     type:
       structure: PingCooldownInfo
-C_Ping.GetDefaultPingOptions:
+C_PingSecure.GetDefaultPingOptions:
   inputs: {}
   outputs:
   - name: pingTypes
     type:
       arrayof:
         structure: PingTypeInfo
-C_Ping.GetTargetPingReceiver:
-  impl: _ReturnNothing
+C_PingSecure.GetTargetPingReceiver:
   inputs:
   - name: mousePosX
     type: number
   - name: mousePosY
     type: number
-  mayreturnnothing: true
   outputs:
   - name: frame
     type: table
-C_Ping.GetTargetWorldPing:
+C_PingSecure.GetTargetWorldPing:
   inputs:
   - name: mousePosX
     type: number
@@ -12798,13 +12850,13 @@ C_Ping.GetTargetWorldPing:
   outputs:
   - name: foundTarget
     type: boolean
-C_Ping.GetTargetWorldPingAndSend:
+C_PingSecure.GetTargetWorldPingAndSend:
   inputs: {}
   outputs:
   - name: result
     type:
       structure: ContextualWorldPingResult
-C_Ping.GetTextureKitForType:
+C_PingSecure.GetTextureKitForType:
   inputs:
   - name: type
     type:
@@ -12812,7 +12864,7 @@ C_Ping.GetTextureKitForType:
   outputs:
   - name: uiTextureKitID
     type: string
-C_Ping.SendPing:
+C_PingSecure.SendPing:
   inputs:
   - name: type
     type:
@@ -12824,6 +12876,46 @@ C_Ping.SendPing:
   - name: result
     type:
       enum: PingResult
+C_PingSecure.SetPendingPingOffScreenCallback:
+  inputs:
+  - name: cb
+    type: function
+  outputs: {}
+C_PingSecure.SetPingCooldownStartedCallback:
+  inputs:
+  - name: cb
+    type: function
+  outputs: {}
+C_PingSecure.SetPingPinFrameAddedCallback:
+  inputs:
+  - name: cb
+    type: function
+  outputs: {}
+C_PingSecure.SetPingPinFrameRemovedCallback:
+  inputs:
+  - name: cb
+    type: function
+  outputs: {}
+C_PingSecure.SetPingPinFrameScreenClampStateUpdatedCallback:
+  inputs:
+  - name: cb
+    type: function
+  outputs: {}
+C_PingSecure.SetPingRadialWheelCreatedCallback:
+  inputs:
+  - name: cb
+    type: function
+  outputs: {}
+C_PingSecure.SetSendMacroPingCallback:
+  inputs:
+  - name: cb
+    type: function
+  outputs: {}
+C_PingSecure.SetTogglePingListenerCallback:
+  inputs:
+  - name: cb
+    type: function
+  outputs: {}
 C_PlayerChoice.GetCurrentPlayerChoiceInfo:
   inputs: {}
   outputs:
@@ -12952,6 +13044,13 @@ C_PlayerInfo.GetName:
   - name: name
     nilable: true
     type: string
+C_PlayerInfo.GetPetStableCreatureDisplayInfoID:
+  inputs:
+  - name: index
+    type: number
+  outputs:
+  - name: creatureDisplayInfoID
+    type: number
 C_PlayerInfo.GetPlayerCharacterData:
   inputs: {}
   outputs:
@@ -19502,6 +19601,18 @@ C_UI.GetTopRightNotchSafeRegion:
     type: number
   - name: bottom
     type: number
+C_UI.GetUIParent:
+  impl: C_UI.GetUIParent
+  inputs: {}
+  outputs:
+  - name: uiParent
+    type: Frame
+C_UI.GetWorldFrame:
+  impl: C_UI.GetWorldFrame
+  inputs: {}
+  outputs:
+  - name: worldFrame
+    type: Frame
 C_UI.Reload:
   inputs: {}
   outputs: {}
