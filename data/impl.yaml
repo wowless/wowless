@@ -1,5 +1,4 @@
 ---
-_ReturnNothing: {}
 C_Calendar.GetMonthInfo:
   states:
   - Calendar
