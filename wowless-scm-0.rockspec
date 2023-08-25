@@ -7,12 +7,13 @@ source = {
 build_dependencies = {
   'lsqlite3',
   'lua-cjson',
+  'luacasc >= 1.15',
   'luacheck',
+  'luadbc',
   'luadbd',
   'luaexpat < 1.5.0',
   'luamagick',
   'luasql-sqlite3',
-  'wowcig',
 }
 dependencies = {
   'argparse',
