@@ -5360,8 +5360,6 @@ PENDING_AZERITE_ESSENCE_CHANGED:
   - name: essenceID
     nilable: true
     type: number
-PENDING_PING_OFF_SCREEN:
-  payload: {}
 PERKS_ACTIVITIES_TRACKED_UPDATED:
   payload:
   - name: trackedPerksActivities
@@ -5635,30 +5633,10 @@ PETITION_CLOSED:
   payload: {}
 PETITION_SHOW:
   payload: {}
-PING_PIN_FRAME_ADDED:
+PING_SYSTEM_ERROR:
   payload:
-  - name: region
-    type: table
-  - name: uiTextureKit
+  - name: error
     type: string
-  - name: isWorldPoint
-    type: boolean
-PING_PIN_FRAME_REMOVED:
-  payload:
-  - name: region
-    type: table
-PING_PIN_FRAME_SCREEN_CLAMP_STATE_UPDATED:
-  payload:
-  - name: region
-    type: table
-  - name: state
-    type: boolean
-PING_RADIAL_WHEEL_FRAME_CREATED:
-  payload:
-  - name: region
-    type: table
-PING_RADIAL_WHEEL_FRAME_DESTROYED:
-  payload: {}
 PLAY_MOVIE:
   payload:
   - name: movieID
@@ -5909,6 +5887,8 @@ PVP_MATCH_COMPLETE:
   - name: duration
     type: number
 PVP_MATCH_INACTIVE:
+  payload: {}
+PVP_MATCH_STATE_CHANGED:
   payload: {}
 PVP_POWER_UPDATE:
   payload: {}
@@ -8038,6 +8018,17 @@ WARFRONT_COMPLETED:
     type: number
   - name: winner
     type: number
+WARGAME_INVITE_SENT:
+  payload: {}
+WARGAME_REQUEST_RESPONSE:
+  payload:
+  - name: responderGUID
+    type: string
+  - name: responderName
+    nilable: true
+    type: string
+  - name: accepted
+    type: boolean
 WARGAME_REQUESTED:
   payload:
   - name: opposingPartyMemberName

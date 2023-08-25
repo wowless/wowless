@@ -115,7 +115,7 @@ do
   for name, apicfg in pairs(cfg) do
     if not apicfg.debug then
       if apicfg.impl then
-        local ic = implcfg[apicfg.impl]
+        local ic = assert(implcfg[apicfg.impl], 'missing impl ' .. apicfg.impl)
         apicfg.frameworks = ic.frameworks
         apicfg.sqls = ic.sqls
         apicfg.states = ic.states
