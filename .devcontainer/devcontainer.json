@@ -3,7 +3,6 @@
     "context": "..",
     "dockerfile": "Dockerfile"
   },
-  "initializeCommand": "cp -n .env.dist .env",
   "customizations": {
     "vscode": {
       "extensions": [
@@ -17,6 +16,5 @@
     "ghcr.io/devcontainers/features/github-cli:1": {}
   },
   "name": "wowless/wowless",
-  "remoteUser": "vscode",
-  "runArgs": ["--env-file", ".env"]
+  "remoteUser": "vscode"
 }
