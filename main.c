@@ -31,15 +31,14 @@ int main(int argc, char **argv) {
   }
   luaL_openlibsx(L, LUALIB_ELUNE);
   luaL_openlibsx(L, LUALIB_STANDARD);
-  lua_getfield(L, LUA_REGISTRYINDEX, "_LOADED");
+  lua_getglobal(L, "package");
+  lua_getfield(L, -1, "preload");
   for (size_t i = 0; i < sizeof(modules) / sizeof(struct module); ++i) {
     const struct module *m = &modules[i];
     lua_pushcfunction(L, m->func);
-    lua_pushstring(L, m->name);
-    lua_call(L, 1, 1);
     lua_setfield(L, -2, m->name);
   }
-  lua_pop(L, 1);
+  lua_pop(L, 2);
   lua_newtable(L);
   for (int i = 1; i < argc; ++i) {
     lua_pushstring(L, argv[i]);
