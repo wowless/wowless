@@ -83,9 +83,19 @@ set_property(
   APPEND PROPERTY INCLUDE_DIRECTORIES ${zlib_SOURCE_DIR} ${zlib_BINARY_DIR}
 )
 
+add_custom_command(
+  OUTPUT rocks.c
+  COMMAND luarocks build --only-deps --tree luarocks ${CMAKE_CURRENT_SOURCE_DIR}/wowless-scm-0.rockspec
+  COMMAND bash -c \"lua ${CMAKE_CURRENT_SOURCE_DIR}/tools/lua2c.lua > rocks.c\"
+  DEPENDS
+    ${CMAKE_CURRENT_SOURCE_DIR}/tools/lua2c.lua
+    ${CMAKE_CURRENT_SOURCE_DIR}/wowless-scm-0.rockspec
+)
+
 add_executable(
   wowless
   main.c
+  rocks.c
   wowless/ext.c
   ${lsqlite3_SOURCE_DIR}/lsqlite3.c
   ${luaexpat_SOURCE_DIR}/src/lxplib.c

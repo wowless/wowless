@@ -10,6 +10,7 @@ extern int luaopen_lxp(lua_State *);
 extern int luaopen_wowless_ext(lua_State *);
 extern int luaopen_yaml(lua_State *);
 extern int luaopen_zlib(lua_State *);
+extern void preload_luarocks(lua_State *);
 
 struct module {
   const char *name;
@@ -24,12 +25,6 @@ static const struct module modules[] = {
     {"zlib",        luaopen_zlib       },
 };
 
-static const char luapath[] =
-    "\
-./?.lua;\
-build/luarocks/share/lua/5.1/?.lua;\
-build/luarocks/share/lua/5.1/?/init.lua";
-
 int main(int argc, char **argv) {
   lua_State *L = luaL_newstate();
   if (L == NULL) {
@@ -37,8 +32,9 @@ int main(int argc, char **argv) {
   }
   luaL_openlibsx(L, LUALIB_ELUNE);
   luaL_openlibsx(L, LUALIB_STANDARD);
+  preload_luarocks(L);
   lua_getglobal(L, "package");
-  lua_pushstring(L, luapath);
+  lua_pushstring(L, "./?.lua");
   lua_setfield(L, -2, "path");
   lua_getfield(L, -1, "loaders");
   lua_pushnil(L);

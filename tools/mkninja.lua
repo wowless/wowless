@@ -93,9 +93,6 @@ local rules = {
     command = elune .. ' wowless.lua -p $product --frame0 > /dev/null',
     pool = 'run_pool',
   },
-  luarocks = {
-    command = 'luarocks build --only-deps --tree build/luarocks && touch build/luarocks.stamp',
-  },
   mkaddon = {
     command = 'lua tools/gentest.lua -f $type -p $product',
   },
@@ -165,16 +162,10 @@ local builds = {
     rule = 'mkninja',
   },
   {
-    ins_implicit = 'wowless-scm-0.rockspec',
-    outs_implicit = 'build/luarocks.stamp',
-    rule = 'luarocks',
-  },
-  {
     ins = {
       'build/cmake/wowless',
       'build/data/flavors.lua',
       'build/data/stringenums.lua',
-      'build/luarocks.stamp',
       'build/wowless.stamp',
     },
     outs = 'build/runtime.stamp',
