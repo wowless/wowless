@@ -4,6 +4,7 @@ project(wowless)
 set(BUILD_SHARED_LIBS OFF)
 set(BUILD_SUMMARY ON)
 set(LUA_USE_READLINE OFF)
+set(LUA_DISABLE_LOADLIB ON)
 
 add_compile_options(-D_GNU_SOURCE -DNDEBUG -flto -O3)
 add_link_options(-ffast-math)
@@ -12,7 +13,7 @@ include(FetchContent)
 FetchContent_Declare(
   elune
   GIT_REPOSITORY https://github.com/meorawr/elune.git
-  GIT_TAG f051f75a3e963130c2d1ad98f56868bfc6b2798d
+  GIT_TAG 7fc7271922fbc0a371ef15d699ffa0b2be649a81
 )
 FetchContent_Declare(
   expat
