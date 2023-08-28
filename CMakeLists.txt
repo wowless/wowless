@@ -86,7 +86,7 @@ set_property(
 add_custom_command(
   OUTPUT rocks.c
   COMMAND luarocks build --only-deps --tree luarocks ${CMAKE_CURRENT_SOURCE_DIR}/wowless-scm-0.rockspec
-  COMMAND bash -c \"lua ${CMAKE_CURRENT_SOURCE_DIR}/tools/lua2c.lua > rocks.c\"
+  COMMAND /usr/local/bin/lua ${CMAKE_CURRENT_SOURCE_DIR}/tools/lua2c.lua -o rocks.c
   DEPENDS
     ${CMAKE_CURRENT_SOURCE_DIR}/tools/lua2c.lua
     ${CMAKE_CURRENT_SOURCE_DIR}/wowless-scm-0.rockspec
