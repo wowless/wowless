@@ -3,21 +3,7 @@
     "context": "..",
     "dockerfile": "Dockerfile"
   },
-  "initializeCommand": "cp -n .env.dist .env",
-  "customizations": {
-    "vscode": {
-      "extensions": [
-        "EditorConfig.EditorConfig",
-        "ms-vscode.cpptools",
-        "qwtel.sqlite-viewer"
-      ]
-    }
-  },
-  "features": {
-    "ghcr.io/devcontainers/features/github-cli:1": {}
-  },
   "name": "wowless/wowless",
   "postCreateCommand": "pre-commit install --install-hooks",
-  "remoteUser": "vscode",
-  "runArgs": ["--env-file", ".env"]
+  "remoteUser": "vscode"
 }
