@@ -36,6 +36,7 @@ FetchContent_Declare(
   luafilesystem
   GIT_REPOSITORY https://github.com/lunarmodules/luafilesystem.git
   GIT_TAG v1_8_0
+  SOURCE_SUBDIR disable_cmakelists_txt
 )
 FetchContent_Declare(
   lyaml
