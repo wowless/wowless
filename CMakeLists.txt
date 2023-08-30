@@ -18,7 +18,7 @@ FetchContent_Declare(
   expat
   GIT_REPOSITORY https://github.com/libexpat/libexpat.git
   GIT_TAG R_2_5_0
-  SOURCE_SUBDIR expat
+  SOURCE_SUBDIR disable_cmakelists_txt
 )
 FetchContent_Declare(
   lsqlite3
@@ -90,6 +90,20 @@ add_custom_command(
 )
 
 add_library(
+  expat OBJECT
+  ${expat_SOURCE_DIR}/expat/lib/xmlparse.c
+  ${expat_SOURCE_DIR}/expat/lib/xmlrole.c
+  ${expat_SOURCE_DIR}/expat/lib/xmltok.c
+)
+target_include_directories(expat PUBLIC ${expat_SOURCE_DIR}/expat/lib)
+
+add_library(
+  luaexpat OBJECT
+  ${luaexpat_SOURCE_DIR}/src/lxplib.c
+)
+target_link_libraries(luaexpat expat)
+
+add_library(
   yaml OBJECT
   ${yaml_SOURCE_DIR}/src/api.c
   ${yaml_SOURCE_DIR}/src/dumper.c
@@ -129,9 +143,8 @@ add_executable(
   rocks.c
   wowless/ext.c
   ${lsqlite3_SOURCE_DIR}/lsqlite3.c
-  ${luaexpat_SOURCE_DIR}/src/lxplib.c
   ${luafilesystem_SOURCE_DIR}/src/lfs.c
   ${lzlib_SOURCE_DIR}/lzlib.c
   ${sqlite3_SOURCE_DIR}/sqlite3.c
 )
-target_link_libraries(wowless expat liblua lyaml pthread yaml zlibstatic -static)
+target_link_libraries(wowless expat liblua luaexpat lyaml pthread yaml zlibstatic -static)
