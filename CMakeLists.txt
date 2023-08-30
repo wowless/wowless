@@ -130,4 +130,4 @@ add_executable(
   ${sqlite3_SOURCE_DIR}/sqlite3.c
   $<TARGET_OBJECTS:yaml>
 )
-target_link_libraries(wowless expat liblua pthread yaml zlibstatic -static)
+target_link_libraries(wowless expat liblua pthread zlibstatic -static)
