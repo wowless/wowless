@@ -105,12 +105,10 @@ function G.GeneratedTests()
     assert(b, 'no build')
     return {
       GetBuildInfo = function()
-        if b.tocversion == 30402 or b.tocversion == 11404 then
-          G.check7(b.version, b.build, b.date, b.tocversion, '', ' ', b.tocversion, GetBuildInfo())
-        elseif b.tocversion >= 100100 then
+        if b.tocversion >= 100100 then
           G.check6(b.version, b.build, b.date, b.tocversion, '', ' ', GetBuildInfo())
         else
-          G.check4(b.version, b.build, b.date, b.tocversion, GetBuildInfo())
+          G.check7(b.version, b.build, b.date, b.tocversion, '', ' ', b.tocversion, GetBuildInfo())
         end
       end,
       IsDebugBuild = function()
