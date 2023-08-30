@@ -76,10 +76,6 @@ FetchContent_MakeAvailable(
 )
 
 set_property(
-  SOURCE ${lyaml_SOURCE_DIR}/ext/yaml/yaml.c
-  APPEND PROPERTY COMPILE_DEFINITIONS VERSION="wowless"
-)
-set_property(
   SOURCE ${lzlib_SOURCE_DIR}/lzlib.c
   APPEND PROPERTY INCLUDE_DIRECTORIES ${zlib_SOURCE_DIR} ${zlib_BINARY_DIR}
 )
@@ -114,6 +110,19 @@ set_property(
 )
 target_include_directories(yaml PUBLIC ${yaml_SOURCE_DIR}/include)
 
+add_library(
+  lyaml OBJECT
+  ${lyaml_SOURCE_DIR}/ext/yaml/emitter.c
+  ${lyaml_SOURCE_DIR}/ext/yaml/parser.c
+  ${lyaml_SOURCE_DIR}/ext/yaml/scanner.c
+  ${lyaml_SOURCE_DIR}/ext/yaml/yaml.c
+)
+set_property(
+  SOURCE ${lyaml_SOURCE_DIR}/ext/yaml/yaml.c
+  APPEND PROPERTY COMPILE_DEFINITIONS VERSION="wowless"
+)
+target_link_libraries(lyaml yaml)
+
 add_executable(
   wowless
   main.c
@@ -122,12 +131,7 @@ add_executable(
   ${lsqlite3_SOURCE_DIR}/lsqlite3.c
   ${luaexpat_SOURCE_DIR}/src/lxplib.c
   ${luafilesystem_SOURCE_DIR}/src/lfs.c
-  ${lyaml_SOURCE_DIR}/ext/yaml/emitter.c
-  ${lyaml_SOURCE_DIR}/ext/yaml/parser.c
-  ${lyaml_SOURCE_DIR}/ext/yaml/scanner.c
-  ${lyaml_SOURCE_DIR}/ext/yaml/yaml.c
   ${lzlib_SOURCE_DIR}/lzlib.c
   ${sqlite3_SOURCE_DIR}/sqlite3.c
-  $<TARGET_OBJECTS:yaml>
 )
-target_link_libraries(wowless expat liblua pthread zlibstatic -static)
+target_link_libraries(wowless expat liblua lyaml pthread yaml zlibstatic -static)
