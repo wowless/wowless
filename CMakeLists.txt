@@ -24,11 +24,13 @@ FetchContent_Declare(
   lsqlite3
   URL http://lua.sqlite.org/index.cgi/zip/lsqlite3_fsl09y.zip
   URL_HASH MD5=1f937ed6bf9d5980239da516c424d7b6
+  SOURCE_SUBDIR disable_cmakelists_txt
 )
 FetchContent_Declare(
   luaexpat
   GIT_REPOSITORY https://github.com/lunarmodules/luaexpat.git
   GIT_TAG 1.4.1
+  SOURCE_SUBDIR disable_cmakelists_txt
 )
 FetchContent_Declare(
   luafilesystem
@@ -39,6 +41,7 @@ FetchContent_Declare(
   lyaml
   GIT_REPOSITORY https://github.com/gvvaughan/lyaml.git
   GIT_TAG v6.2.8
+  SOURCE_SUBDIR disable_cmakelists_txt
 )
 FetchContent_Declare(
   lzlib
@@ -50,6 +53,7 @@ FetchContent_Declare(
   sqlite3
   URL https://www.sqlite.org/2023/sqlite-amalgamation-3410200.zip
   URL_HASH SHA3_256=c51ca72411b8453c64e0980be23bc9b9530bdc3ec1513e06fbf022ed0fd02463
+  SOURCE_SUBDIR disable_cmakelists_txt
 )
 FetchContent_Declare(
   yaml
@@ -159,13 +163,36 @@ add_library(
 )
 target_link_libraries(lzlib zlib)
 
+add_library(
+  sqlite3 OBJECT
+  ${sqlite3_SOURCE_DIR}/sqlite3.c
+)
+target_include_directories(sqlite3 PUBLIC ${sqlite3_SOURCE_DIR})
+
+add_library(
+  lsqlite3 OBJECT
+  ${lsqlite3_SOURCE_DIR}/lsqlite3.c
+)
+target_link_libraries(lsqlite3 sqlite3)
+
 add_executable(
   wowless
   main.c
   rocks.c
   wowless/ext.c
-  ${lsqlite3_SOURCE_DIR}/lsqlite3.c
   ${luafilesystem_SOURCE_DIR}/src/lfs.c
-  ${sqlite3_SOURCE_DIR}/sqlite3.c
 )
-target_link_libraries(wowless expat liblua luaexpat lyaml lzlib pthread yaml zlib -static)
+target_link_libraries(
+  wowless
+  expat
+  liblua
+  lsqlite3
+  luaexpat
+  lyaml
+  lzlib
+  pthread
+  sqlite3
+  yaml
+  zlib
+  -static
+)
