@@ -175,13 +175,16 @@ add_library(
 )
 target_link_libraries(lsqlite3 sqlite3)
 
-add_executable(
-  wowless
+add_library(
+  wowlesslib OBJECT
   main.c
   rocks.c
   wowless/ext.c
   ${luafilesystem_SOURCE_DIR}/src/lfs.c
 )
+target_link_libraries(wowlesslib liblua)
+
+add_executable(wowless)
 target_link_libraries(
   wowless
   expat
@@ -192,6 +195,7 @@ target_link_libraries(
   lzlib
   pthread
   sqlite3
+  wowlesslib
   yaml
   zlib
   -static
