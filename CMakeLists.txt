@@ -44,7 +44,7 @@ FetchContent_Declare(
   lzlib
   GIT_REPOSITORY https://github.com/luadist/lzlib.git
   GIT_TAG 0.4.3
-  SOURCE_SUBDIR foo
+  SOURCE_SUBDIR disable_cmakelists_txt
 )
 FetchContent_Declare(
   sqlite3
@@ -61,6 +61,7 @@ FetchContent_Declare(
   zlib
   URL https://zlib.net/fossils/zlib-1.3.tar.gz
   URL_HASH SHA256=ff0ba4c292013dbc27530b3a81e1f9a813cd39de01ca5e0f8bf355702efa593e
+  SOURCE_SUBDIR disable_cmakelists_txt
 )
 FetchContent_MakeAvailable(
   elune
@@ -73,11 +74,6 @@ FetchContent_MakeAvailable(
   sqlite3
   yaml
   zlib
-)
-
-set_property(
-  SOURCE ${lzlib_SOURCE_DIR}/lzlib.c
-  APPEND PROPERTY INCLUDE_DIRECTORIES ${zlib_SOURCE_DIR} ${zlib_BINARY_DIR}
 )
 
 add_custom_command(
@@ -137,6 +133,32 @@ set_property(
 )
 target_link_libraries(lyaml yaml)
 
+add_library(
+  zlib OBJECT
+  ${zlib_SOURCE_DIR}/adler32.c
+  ${zlib_SOURCE_DIR}/crc32.c
+  ${zlib_SOURCE_DIR}/compress.c
+  ${zlib_SOURCE_DIR}/deflate.c
+  ${zlib_SOURCE_DIR}/gzclose.c
+  ${zlib_SOURCE_DIR}/gzlib.c
+  ${zlib_SOURCE_DIR}/gzread.c
+  ${zlib_SOURCE_DIR}/gzwrite.c
+  ${zlib_SOURCE_DIR}/inflate.c
+  ${zlib_SOURCE_DIR}/infback.c
+  ${zlib_SOURCE_DIR}/inftrees.c
+  ${zlib_SOURCE_DIR}/inffast.c
+  ${zlib_SOURCE_DIR}/trees.c
+  ${zlib_SOURCE_DIR}/uncompr.c
+  ${zlib_SOURCE_DIR}/zutil.c
+)
+target_include_directories(zlib PUBLIC ${zlib_SOURCE_DIR})
+
+add_library(
+  lzlib OBJECT
+  ${lzlib_SOURCE_DIR}/lzlib.c
+)
+target_link_libraries(lzlib zlib)
+
 add_executable(
   wowless
   main.c
@@ -144,7 +166,6 @@ add_executable(
   wowless/ext.c
   ${lsqlite3_SOURCE_DIR}/lsqlite3.c
   ${luafilesystem_SOURCE_DIR}/src/lfs.c
-  ${lzlib_SOURCE_DIR}/lzlib.c
   ${sqlite3_SOURCE_DIR}/sqlite3.c
 )
-target_link_libraries(wowless expat liblua luaexpat lyaml pthread yaml zlibstatic -static)
+target_link_libraries(wowless expat liblua luaexpat lyaml lzlib pthread yaml zlib -static)
