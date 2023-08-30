@@ -102,7 +102,7 @@ add_library(
   luaexpat OBJECT
   ${luaexpat_SOURCE_DIR}/src/lxplib.c
 )
-target_link_libraries(luaexpat expat)
+target_link_libraries(luaexpat expat liblua)
 
 add_library(
   yaml OBJECT
@@ -136,7 +136,7 @@ set_property(
   SOURCE ${lyaml_SOURCE_DIR}/ext/yaml/yaml.c
   APPEND PROPERTY COMPILE_DEFINITIONS VERSION="wowless"
 )
-target_link_libraries(lyaml yaml)
+target_link_libraries(lyaml liblua yaml)
 
 add_library(
   zlib OBJECT
@@ -162,7 +162,7 @@ add_library(
   lzlib OBJECT
   ${lzlib_SOURCE_DIR}/lzlib.c
 )
-target_link_libraries(lzlib zlib)
+target_link_libraries(lzlib liblua zlib)
 
 add_library(
   sqlite3 OBJECT
@@ -174,7 +174,7 @@ add_library(
   lsqlite3 OBJECT
   ${lsqlite3_SOURCE_DIR}/lsqlite3.c
 )
-target_link_libraries(lsqlite3 sqlite3)
+target_link_libraries(lsqlite3 liblua sqlite3)
 
 add_library(
   wowlesslib OBJECT
