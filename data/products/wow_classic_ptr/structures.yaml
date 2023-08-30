@@ -15,6 +15,10 @@ C_AreaPoiInfo.AreaPOIInfo:
     factionID:
       nilable: true
       type: number
+    highlightVignettesOnHover:
+      type: boolean
+    highlightWorldQuestsOnHover:
+      type: boolean
     isAlwaysOnFlightmap:
       type: boolean
     isPrimaryMapForPOI:
@@ -891,6 +895,8 @@ C_Container.ContainerItemInfo:
       type: boolean
     itemID:
       type: number
+    itemName:
+      type: string
     quality:
       nilable: true
       type:
@@ -1337,6 +1343,8 @@ C_GossipInfo.GossipQuestUIInfo:
       type: boolean
     isIgnored:
       type: boolean
+    isImportant:
+      type: boolean
     isLegendary:
       type: boolean
     isTrivial:
@@ -1447,6 +1455,9 @@ C_LFGList.LfgSearchResultData:
       type: string
 C_LossOfControl.LossOfControlData:
   fields:
+    auraInstanceID:
+      nilable: true
+      type: number
     displayText:
       type: string
     displayType:
@@ -1620,6 +1631,12 @@ C_ModelInfo.UIModelSceneCameraInfo:
         structure: vector3
     zoomedYawOffset:
       type: number
+C_MountJournal.MountCreatureDisplayInfo:
+  fields:
+    creatureDisplayID:
+      type: number
+    isVisible:
+      type: boolean
 C_PvP.BattlefieldCurrencyReward:
   fields:
     id:
@@ -2488,6 +2505,8 @@ CharCustomizationCategory:
       type: number
     name:
       type: string
+    needsNativeFormCategory:
+      type: boolean
     options:
       type:
         arrayof:
