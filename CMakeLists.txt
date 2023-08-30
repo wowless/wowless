@@ -55,6 +55,7 @@ FetchContent_Declare(
   yaml
   GIT_REPOSITORY https://github.com/yaml/libyaml.git
   GIT_TAG 0.2.5
+  SOURCE_SUBDIR disable_cmakelists_txt
 )
 FetchContent_Declare(
   zlib
@@ -92,6 +93,29 @@ add_custom_command(
     ${CMAKE_CURRENT_SOURCE_DIR}/wowless-scm-0.rockspec
 )
 
+add_library(
+  yaml OBJECT
+  ${yaml_SOURCE_DIR}/include/yaml.h
+  ${yaml_SOURCE_DIR}/src/api.c
+  ${yaml_SOURCE_DIR}/src/dumper.c
+  ${yaml_SOURCE_DIR}/src/emitter.c
+  ${yaml_SOURCE_DIR}/src/loader.c
+  ${yaml_SOURCE_DIR}/src/parser.c
+  ${yaml_SOURCE_DIR}/src/reader.c
+  ${yaml_SOURCE_DIR}/src/scanner.c
+  ${yaml_SOURCE_DIR}/src/writer.c
+  ${yaml_SOURCE_DIR}/src/yaml_private.h
+)
+set_property(
+  SOURCE ${yaml_SOURCE_DIR}/src/api.c
+  APPEND PROPERTY COMPILE_DEFINITIONS
+  YAML_VERSION_MAJOR=0
+  YAML_VERSION_MINOR=2
+  YAML_VERSION_PATCH=5
+  YAML_VERSION_STRING="0.2.5"
+)
+target_include_directories(yaml PUBLIC ${yaml_SOURCE_DIR}/include)
+
 add_executable(
   wowless
   main.c
@@ -106,5 +130,6 @@ add_executable(
   ${lyaml_SOURCE_DIR}/ext/yaml/yaml.c
   ${lzlib_SOURCE_DIR}/lzlib.c
   ${sqlite3_SOURCE_DIR}/sqlite3.c
+  $<TARGET_OBJECTS:yaml>
 )
 target_link_libraries(wowless expat liblua pthread yaml zlibstatic -static)
