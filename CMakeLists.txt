@@ -95,7 +95,6 @@ add_custom_command(
 
 add_library(
   yaml OBJECT
-  ${yaml_SOURCE_DIR}/include/yaml.h
   ${yaml_SOURCE_DIR}/src/api.c
   ${yaml_SOURCE_DIR}/src/dumper.c
   ${yaml_SOURCE_DIR}/src/emitter.c
@@ -104,7 +103,6 @@ add_library(
   ${yaml_SOURCE_DIR}/src/reader.c
   ${yaml_SOURCE_DIR}/src/scanner.c
   ${yaml_SOURCE_DIR}/src/writer.c
-  ${yaml_SOURCE_DIR}/src/yaml_private.h
 )
 set_property(
   SOURCE ${yaml_SOURCE_DIR}/src/api.c
