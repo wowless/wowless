@@ -96,7 +96,18 @@ add_library(
   ${expat_SOURCE_DIR}/expat/lib/xmlrole.c
   ${expat_SOURCE_DIR}/expat/lib/xmltok.c
 )
-target_include_directories(expat PUBLIC ${expat_SOURCE_DIR}/expat/lib)
+block()
+  set(XML_DEV_URANDOM ON)
+  configure_file(
+    ${expat_SOURCE_DIR}/expat/expat_config.h.cmake
+    ${expat_BINARY_DIR}/expat_config.h
+  )
+endblock()
+target_include_directories(
+  expat PUBLIC
+  ${expat_SOURCE_DIR}/expat/lib
+  ${expat_BINARY_DIR}
+)
 
 add_library(
   luaexpat OBJECT
