@@ -13,6 +13,7 @@ FetchContent_Declare(
   elune
   GIT_REPOSITORY https://github.com/meorawr/elune.git
   GIT_TAG f051f75a3e963130c2d1ad98f56868bfc6b2798d
+  SOURCE_SUBDIR disable_cmakelists_txt
 )
 FetchContent_Declare(
   expat
@@ -57,6 +58,12 @@ FetchContent_Declare(
   SOURCE_SUBDIR disable_cmakelists_txt
 )
 FetchContent_Declare(
+  utf8h
+  GIT_REPOSITORY https://github.com/sheredom/utf8.h.git
+  GIT_TAG ce48f0eda6cac8f365837edaf8298ad5c03f7f2e
+  SOURCE_SUBDIR disable_cmakelists_txt
+)
+FetchContent_Declare(
   yaml
   GIT_REPOSITORY https://github.com/yaml/libyaml.git
   GIT_TAG 0.2.5
@@ -77,6 +84,7 @@ FetchContent_MakeAvailable(
   lyaml
   lzlib
   sqlite3
+  utf8h
   yaml
   zlib
 )
@@ -88,6 +96,64 @@ add_custom_command(
   DEPENDS
     ${CMAKE_CURRENT_SOURCE_DIR}/tools/lua2c.lua
     ${CMAKE_CURRENT_SOURCE_DIR}/wowless-scm-0.rockspec
+)
+
+add_library(
+  elune OBJECT
+  ${elune_SOURCE_DIR}/liblua/lapi.c
+  ${elune_SOURCE_DIR}/liblua/lapi.c
+  ${elune_SOURCE_DIR}/liblua/lauxlib.c
+  ${elune_SOURCE_DIR}/liblua/lbaselib.c
+  ${elune_SOURCE_DIR}/liblua/lbitlib.c
+  ${elune_SOURCE_DIR}/liblua/lcode.c
+  ${elune_SOURCE_DIR}/liblua/lcompatlib.c
+  ${elune_SOURCE_DIR}/liblua/lcorolib.c
+  ${elune_SOURCE_DIR}/liblua/ldblib.c
+  ${elune_SOURCE_DIR}/liblua/ldebug.c
+  ${elune_SOURCE_DIR}/liblua/ldo.c
+  ${elune_SOURCE_DIR}/liblua/ldump.c
+  ${elune_SOURCE_DIR}/liblua/lfunc.c
+  ${elune_SOURCE_DIR}/liblua/lgc.c
+  ${elune_SOURCE_DIR}/liblua/linit.c
+  ${elune_SOURCE_DIR}/liblua/liolib.c
+  ${elune_SOURCE_DIR}/liblua/llex.c
+  ${elune_SOURCE_DIR}/liblua/lmanip.c
+  ${elune_SOURCE_DIR}/liblua/lmathlib.c
+  ${elune_SOURCE_DIR}/liblua/lmem.c
+  ${elune_SOURCE_DIR}/liblua/loadlib.c
+  ${elune_SOURCE_DIR}/liblua/lobject.c
+  ${elune_SOURCE_DIR}/liblua/lopcodes.c
+  ${elune_SOURCE_DIR}/liblua/loslib.c
+  ${elune_SOURCE_DIR}/liblua/lparser.c
+  ${elune_SOURCE_DIR}/liblua/lreadline.c
+  ${elune_SOURCE_DIR}/liblua/lsec.c
+  ${elune_SOURCE_DIR}/liblua/lseclib.c
+  ${elune_SOURCE_DIR}/liblua/lstate.c
+  ${elune_SOURCE_DIR}/liblua/lstatslib.c
+  ${elune_SOURCE_DIR}/liblua/lstring.c
+  ${elune_SOURCE_DIR}/liblua/lstrlib.c
+  ${elune_SOURCE_DIR}/liblua/ltable.c
+  ${elune_SOURCE_DIR}/liblua/ltablib.c
+  ${elune_SOURCE_DIR}/liblua/ltm.c
+  ${elune_SOURCE_DIR}/liblua/lundump.c
+  ${elune_SOURCE_DIR}/liblua/lvm.c
+  ${elune_SOURCE_DIR}/liblua/lzio.c
+)
+block()
+  set(LUA_CPATH_ESCAPED "")
+  set(LUA_DIRSEP_ESCAPED "/")
+  set(LUA_PATH_ESCAPED "")
+  set(LUAI_BITSINT 32)
+  configure_file(
+    ${elune_SOURCE_DIR}/liblua/include/luaconf.h.in
+    ${elune_BINARY_DIR}/luaconf.h
+  )
+endblock()
+target_include_directories(
+  elune PUBLIC
+  ${elune_SOURCE_DIR}/liblua/include
+  ${elune_BINARY_DIR}
+  ${utf8h_SOURCE_DIR}
 )
 
 add_library(
@@ -113,7 +179,7 @@ add_library(
   luaexpat OBJECT
   ${luaexpat_SOURCE_DIR}/src/lxplib.c
 )
-target_link_libraries(luaexpat expat liblua)
+target_link_libraries(luaexpat elune expat)
 
 add_library(
   yaml OBJECT
@@ -147,7 +213,7 @@ set_property(
   SOURCE ${lyaml_SOURCE_DIR}/ext/yaml/yaml.c
   APPEND PROPERTY COMPILE_DEFINITIONS VERSION="wowless"
 )
-target_link_libraries(lyaml liblua yaml)
+target_link_libraries(lyaml elune yaml)
 
 add_library(
   zlib OBJECT
@@ -173,7 +239,7 @@ add_library(
   lzlib OBJECT
   ${lzlib_SOURCE_DIR}/lzlib.c
 )
-target_link_libraries(lzlib liblua zlib)
+target_link_libraries(lzlib elune zlib)
 
 add_library(
   sqlite3 OBJECT
@@ -185,7 +251,7 @@ add_library(
   lsqlite3 OBJECT
   ${lsqlite3_SOURCE_DIR}/lsqlite3.c
 )
-target_link_libraries(lsqlite3 liblua sqlite3)
+target_link_libraries(lsqlite3 elune sqlite3)
 
 add_library(
   wowlesslib OBJECT
@@ -194,17 +260,19 @@ add_library(
   wowless/ext.c
   ${luafilesystem_SOURCE_DIR}/src/lfs.c
 )
-target_link_libraries(wowlesslib liblua)
+target_link_libraries(wowlesslib elune)
 
 add_executable(wowless)
 target_link_libraries(
   wowless
+  dl
+  elune
   expat
-  liblua
   lsqlite3
   luaexpat
   lyaml
   lzlib
+  m
   pthread
   sqlite3
   wowlesslib
