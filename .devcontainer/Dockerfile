@@ -23,3 +23,4 @@ RUN apt-get update \
 WORKDIR /wowless
 COPY wowless-scm-0.rockspec .
 RUN luarocks build
+RUN delgroup nvm
