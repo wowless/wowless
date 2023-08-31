@@ -1,10 +1,6 @@
 cmake_minimum_required(VERSION 3.24)
 project(wowless)
 
-set(BUILD_SHARED_LIBS OFF)
-set(BUILD_SUMMARY ON)
-set(LUA_USE_READLINE OFF)
-
 add_compile_options(-D_GNU_SOURCE -DNDEBUG -flto -O3)
 add_link_options(-ffast-math)
 
@@ -13,53 +9,67 @@ FetchContent_Declare(
   elune
   GIT_REPOSITORY https://github.com/meorawr/elune.git
   GIT_TAG f051f75a3e963130c2d1ad98f56868bfc6b2798d
+  SOURCE_SUBDIR disable_cmakelists_txt
 )
 FetchContent_Declare(
   expat
   GIT_REPOSITORY https://github.com/libexpat/libexpat.git
   GIT_TAG R_2_5_0
-  SOURCE_SUBDIR expat
+  SOURCE_SUBDIR disable_cmakelists_txt
 )
 FetchContent_Declare(
   lsqlite3
   URL http://lua.sqlite.org/index.cgi/zip/lsqlite3_fsl09y.zip
   URL_HASH MD5=1f937ed6bf9d5980239da516c424d7b6
+  SOURCE_SUBDIR disable_cmakelists_txt
 )
 FetchContent_Declare(
   luaexpat
   GIT_REPOSITORY https://github.com/lunarmodules/luaexpat.git
   GIT_TAG 1.4.1
+  SOURCE_SUBDIR disable_cmakelists_txt
 )
 FetchContent_Declare(
   luafilesystem
   GIT_REPOSITORY https://github.com/lunarmodules/luafilesystem.git
   GIT_TAG v1_8_0
+  SOURCE_SUBDIR disable_cmakelists_txt
 )
 FetchContent_Declare(
   lyaml
   GIT_REPOSITORY https://github.com/gvvaughan/lyaml.git
   GIT_TAG v6.2.8
+  SOURCE_SUBDIR disable_cmakelists_txt
 )
 FetchContent_Declare(
   lzlib
   GIT_REPOSITORY https://github.com/luadist/lzlib.git
   GIT_TAG 0.4.3
-  SOURCE_SUBDIR foo
+  SOURCE_SUBDIR disable_cmakelists_txt
 )
 FetchContent_Declare(
   sqlite3
   URL https://www.sqlite.org/2023/sqlite-amalgamation-3410200.zip
   URL_HASH SHA3_256=c51ca72411b8453c64e0980be23bc9b9530bdc3ec1513e06fbf022ed0fd02463
+  SOURCE_SUBDIR disable_cmakelists_txt
+)
+FetchContent_Declare(
+  utf8h
+  GIT_REPOSITORY https://github.com/sheredom/utf8.h.git
+  GIT_TAG ce48f0eda6cac8f365837edaf8298ad5c03f7f2e
+  SOURCE_SUBDIR disable_cmakelists_txt
 )
 FetchContent_Declare(
   yaml
   GIT_REPOSITORY https://github.com/yaml/libyaml.git
   GIT_TAG 0.2.5
+  SOURCE_SUBDIR disable_cmakelists_txt
 )
 FetchContent_Declare(
   zlib
   URL https://zlib.net/fossils/zlib-1.3.tar.gz
   URL_HASH SHA256=ff0ba4c292013dbc27530b3a81e1f9a813cd39de01ca5e0f8bf355702efa593e
+  SOURCE_SUBDIR disable_cmakelists_txt
 )
 FetchContent_MakeAvailable(
   elune
@@ -70,17 +80,9 @@ FetchContent_MakeAvailable(
   lyaml
   lzlib
   sqlite3
+  utf8h
   yaml
   zlib
-)
-
-set_property(
-  SOURCE ${lyaml_SOURCE_DIR}/ext/yaml/yaml.c
-  APPEND PROPERTY COMPILE_DEFINITIONS VERSION="wowless"
-)
-set_property(
-  SOURCE ${lzlib_SOURCE_DIR}/lzlib.c
-  APPEND PROPERTY INCLUDE_DIRECTORIES ${zlib_SOURCE_DIR} ${zlib_BINARY_DIR}
 )
 
 add_custom_command(
@@ -92,19 +94,185 @@ add_custom_command(
     ${CMAKE_CURRENT_SOURCE_DIR}/wowless-scm-0.rockspec
 )
 
-add_executable(
-  wowless
-  main.c
-  rocks.c
-  wowless/ext.c
-  ${lsqlite3_SOURCE_DIR}/lsqlite3.c
+add_library(
+  elune OBJECT
+  ${elune_SOURCE_DIR}/liblua/lapi.c
+  ${elune_SOURCE_DIR}/liblua/lapi.c
+  ${elune_SOURCE_DIR}/liblua/lauxlib.c
+  ${elune_SOURCE_DIR}/liblua/lbaselib.c
+  ${elune_SOURCE_DIR}/liblua/lbitlib.c
+  ${elune_SOURCE_DIR}/liblua/lcode.c
+  ${elune_SOURCE_DIR}/liblua/lcompatlib.c
+  ${elune_SOURCE_DIR}/liblua/lcorolib.c
+  ${elune_SOURCE_DIR}/liblua/ldblib.c
+  ${elune_SOURCE_DIR}/liblua/ldebug.c
+  ${elune_SOURCE_DIR}/liblua/ldo.c
+  ${elune_SOURCE_DIR}/liblua/ldump.c
+  ${elune_SOURCE_DIR}/liblua/lfunc.c
+  ${elune_SOURCE_DIR}/liblua/lgc.c
+  ${elune_SOURCE_DIR}/liblua/linit.c
+  ${elune_SOURCE_DIR}/liblua/liolib.c
+  ${elune_SOURCE_DIR}/liblua/llex.c
+  ${elune_SOURCE_DIR}/liblua/lmanip.c
+  ${elune_SOURCE_DIR}/liblua/lmathlib.c
+  ${elune_SOURCE_DIR}/liblua/lmem.c
+  ${elune_SOURCE_DIR}/liblua/loadlib.c
+  ${elune_SOURCE_DIR}/liblua/lobject.c
+  ${elune_SOURCE_DIR}/liblua/lopcodes.c
+  ${elune_SOURCE_DIR}/liblua/loslib.c
+  ${elune_SOURCE_DIR}/liblua/lparser.c
+  ${elune_SOURCE_DIR}/liblua/lreadline.c
+  ${elune_SOURCE_DIR}/liblua/lsec.c
+  ${elune_SOURCE_DIR}/liblua/lseclib.c
+  ${elune_SOURCE_DIR}/liblua/lstate.c
+  ${elune_SOURCE_DIR}/liblua/lstatslib.c
+  ${elune_SOURCE_DIR}/liblua/lstring.c
+  ${elune_SOURCE_DIR}/liblua/lstrlib.c
+  ${elune_SOURCE_DIR}/liblua/ltable.c
+  ${elune_SOURCE_DIR}/liblua/ltablib.c
+  ${elune_SOURCE_DIR}/liblua/ltm.c
+  ${elune_SOURCE_DIR}/liblua/lundump.c
+  ${elune_SOURCE_DIR}/liblua/lvm.c
+  ${elune_SOURCE_DIR}/liblua/lzio.c
+)
+block()
+  set(LUA_CPATH_ESCAPED "")
+  set(LUA_DIRSEP_ESCAPED "/")
+  set(LUA_PATH_ESCAPED "")
+  set(LUAI_BITSINT 32)
+  configure_file(
+    ${elune_SOURCE_DIR}/liblua/include/luaconf.h.in
+    ${elune_BINARY_DIR}/luaconf.h
+  )
+endblock()
+target_include_directories(
+  elune PUBLIC
+  ${elune_SOURCE_DIR}/liblua/include
+  ${elune_BINARY_DIR}
+  ${utf8h_SOURCE_DIR}
+)
+
+add_library(
+  expat OBJECT
+  ${expat_SOURCE_DIR}/expat/lib/xmlparse.c
+  ${expat_SOURCE_DIR}/expat/lib/xmlrole.c
+  ${expat_SOURCE_DIR}/expat/lib/xmltok.c
+)
+block()
+  set(XML_DEV_URANDOM ON)
+  configure_file(
+    ${expat_SOURCE_DIR}/expat/expat_config.h.cmake
+    ${expat_BINARY_DIR}/expat_config.h
+  )
+endblock()
+target_include_directories(
+  expat PUBLIC
+  ${expat_SOURCE_DIR}/expat/lib
+  ${expat_BINARY_DIR}
+)
+
+add_library(
+  luaexpat OBJECT
   ${luaexpat_SOURCE_DIR}/src/lxplib.c
-  ${luafilesystem_SOURCE_DIR}/src/lfs.c
+)
+target_link_libraries(luaexpat elune expat)
+
+add_library(
+  yaml OBJECT
+  ${yaml_SOURCE_DIR}/src/api.c
+  ${yaml_SOURCE_DIR}/src/dumper.c
+  ${yaml_SOURCE_DIR}/src/emitter.c
+  ${yaml_SOURCE_DIR}/src/loader.c
+  ${yaml_SOURCE_DIR}/src/parser.c
+  ${yaml_SOURCE_DIR}/src/reader.c
+  ${yaml_SOURCE_DIR}/src/scanner.c
+  ${yaml_SOURCE_DIR}/src/writer.c
+)
+set_property(
+  SOURCE ${yaml_SOURCE_DIR}/src/api.c
+  APPEND PROPERTY COMPILE_DEFINITIONS
+  YAML_VERSION_MAJOR=0
+  YAML_VERSION_MINOR=2
+  YAML_VERSION_PATCH=5
+  YAML_VERSION_STRING="0.2.5"
+)
+target_include_directories(yaml PUBLIC ${yaml_SOURCE_DIR}/include)
+
+add_library(
+  lyaml OBJECT
   ${lyaml_SOURCE_DIR}/ext/yaml/emitter.c
   ${lyaml_SOURCE_DIR}/ext/yaml/parser.c
   ${lyaml_SOURCE_DIR}/ext/yaml/scanner.c
   ${lyaml_SOURCE_DIR}/ext/yaml/yaml.c
+)
+set_property(
+  SOURCE ${lyaml_SOURCE_DIR}/ext/yaml/yaml.c
+  APPEND PROPERTY COMPILE_DEFINITIONS VERSION="wowless"
+)
+target_link_libraries(lyaml elune yaml)
+
+add_library(
+  zlib OBJECT
+  ${zlib_SOURCE_DIR}/adler32.c
+  ${zlib_SOURCE_DIR}/crc32.c
+  ${zlib_SOURCE_DIR}/compress.c
+  ${zlib_SOURCE_DIR}/deflate.c
+  ${zlib_SOURCE_DIR}/gzclose.c
+  ${zlib_SOURCE_DIR}/gzlib.c
+  ${zlib_SOURCE_DIR}/gzread.c
+  ${zlib_SOURCE_DIR}/gzwrite.c
+  ${zlib_SOURCE_DIR}/inflate.c
+  ${zlib_SOURCE_DIR}/infback.c
+  ${zlib_SOURCE_DIR}/inftrees.c
+  ${zlib_SOURCE_DIR}/inffast.c
+  ${zlib_SOURCE_DIR}/trees.c
+  ${zlib_SOURCE_DIR}/uncompr.c
+  ${zlib_SOURCE_DIR}/zutil.c
+)
+target_include_directories(zlib PUBLIC ${zlib_SOURCE_DIR})
+
+add_library(
+  lzlib OBJECT
   ${lzlib_SOURCE_DIR}/lzlib.c
+)
+target_link_libraries(lzlib elune zlib)
+
+add_library(
+  sqlite3 OBJECT
   ${sqlite3_SOURCE_DIR}/sqlite3.c
 )
-target_link_libraries(wowless expat liblua pthread yaml zlibstatic -static)
+target_include_directories(sqlite3 PUBLIC ${sqlite3_SOURCE_DIR})
+
+add_library(
+  lsqlite3 OBJECT
+  ${lsqlite3_SOURCE_DIR}/lsqlite3.c
+)
+target_link_libraries(lsqlite3 elune sqlite3)
+
+add_library(
+  wowlesslib OBJECT
+  main.c
+  rocks.c
+  wowless/ext.c
+  ${luafilesystem_SOURCE_DIR}/src/lfs.c
+)
+target_link_libraries(wowlesslib elune)
+
+add_executable(wowless)
+target_link_libraries(
+  wowless
+  dl
+  elune
+  expat
+  lsqlite3
+  luaexpat
+  lyaml
+  lzlib
+  m
+  pthread
+  sqlite3
+  wowlesslib
+  yaml
+  zlib
+  -static
+)
