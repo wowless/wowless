@@ -13,18 +13,20 @@ for _, rv in pairs(manifest.repository) do
     end
   end
 end
-print([[#include "lauxlib.h"
+io.output('rocks.c')
+io.write([[#include "lauxlib.h"
 #include "lualib.h"
 struct module {
   const char *name;
   const char *code;
 };
-static const struct module modules[] = {]])
+static const struct module modules[] = {
+]])
 for k, v in require('pl.tablex').sort(modules) do
   v = v:gsub('\\', '\\\\'):gsub('\n', '\\n\\\n'):gsub('"', '\\"')
-  print(('  {"%s", "%s"},'):format(k, v))
+  io.write(('  {"%s", "%s"},\n'):format(k, v))
 end
-print([[};
+io.write([[};
 void preload_luarocks(lua_State *L) {
   lua_getglobal(L, "package");
   lua_getfield(L, -1, "preload");
@@ -34,4 +36,5 @@ void preload_luarocks(lua_State *L) {
     lua_setfield(L, -2, m->name);
   }
   lua_pop(L, 2);
-}]])
+}
+]])
