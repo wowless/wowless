@@ -85,15 +85,6 @@ FetchContent_MakeAvailable(
   zlib
 )
 
-add_custom_command(
-  OUTPUT rocks.c
-  COMMAND luarocks build --only-deps --tree luarocks ${CMAKE_CURRENT_SOURCE_DIR}/wowless-scm-0.rockspec
-  COMMAND lua ${CMAKE_CURRENT_SOURCE_DIR}/tools/lua2c.lua
-  DEPENDS
-    ${CMAKE_CURRENT_SOURCE_DIR}/tools/lua2c.lua
-    ${CMAKE_CURRENT_SOURCE_DIR}/wowless-scm-0.rockspec
-)
-
 add_library(
   elune OBJECT
   ${elune_SOURCE_DIR}/liblua/lapi.c
@@ -151,6 +142,9 @@ target_include_directories(
   ${elune_BINARY_DIR}
   ${utf8h_SOURCE_DIR}
 )
+
+add_executable(bootstraplua ${elune_SOURCE_DIR}/lua/lua.c)
+target_link_libraries(bootstraplua elune m)
 
 add_library(
   expat OBJECT
@@ -248,6 +242,15 @@ add_library(
   ${lsqlite3_SOURCE_DIR}/lsqlite3.c
 )
 target_link_libraries(lsqlite3 elune sqlite3)
+
+add_custom_command(
+  OUTPUT rocks.c
+  COMMAND luarocks build --only-deps --tree luarocks ${CMAKE_CURRENT_SOURCE_DIR}/wowless-scm-0.rockspec
+  COMMAND bootstraplua ${CMAKE_CURRENT_SOURCE_DIR}/tools/lua2c.lua
+  DEPENDS
+    ${CMAKE_CURRENT_SOURCE_DIR}/tools/lua2c.lua
+    ${CMAKE_CURRENT_SOURCE_DIR}/wowless-scm-0.rockspec
+)
 
 add_library(
   wowlesslib OBJECT
