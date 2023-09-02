@@ -247,6 +247,14 @@ add_library(
 )
 target_link_libraries(luafilesystem elune)
 
+macro(rock2c module rockspec)
+  add_custom_command(
+    OUTPUT ${module}.c
+    COMMAND bootstraplua ${CMAKE_CURRENT_SOURCE_DIR}/tools/rock2c.lua ${rockspec}
+    DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/tools/rock2c.lua ${rockspec}
+  )
+endmacro()
+
 FetchContent_Declare(
   say
   GIT_REPOSITORY https://github.com/lunarmodules/say.git
@@ -254,15 +262,7 @@ FetchContent_Declare(
   SOURCE_SUBDIR disable_cmakelists_txt
 )
 FetchContent_MakeAvailable(say)
-add_custom_command(
-  OUTPUT say.c
-  COMMAND bootstraplua
-    ${CMAKE_CURRENT_SOURCE_DIR}/tools/rock2c.lua
-    ${say_SOURCE_DIR}/say-scm-1.rockspec
-  DEPENDS
-    ${CMAKE_CURRENT_SOURCE_DIR}/tools/rock2c.lua
-    ${say_SOURCE_DIR}/say-scm-1.rockspec
-)
+rock2c(say ${say_SOURCE_DIR}/say-scm-1.rockspec)
 add_library(say STATIC say.c)
 target_link_libraries(say elune)
 
@@ -273,15 +273,7 @@ FetchContent_Declare(
   SOURCE_SUBDIR disable_cmakelists_txt
 )
 FetchContent_MakeAvailable(luassert)
-add_custom_command(
-  OUTPUT luassert.c
-  COMMAND bootstraplua
-    ${CMAKE_CURRENT_SOURCE_DIR}/tools/rock2c.lua
-    ${luassert_SOURCE_DIR}/luassert-scm-1.rockspec
-  DEPENDS
-    ${CMAKE_CURRENT_SOURCE_DIR}/tools/rock2c.lua
-    ${luassert_SOURCE_DIR}/luassert-scm-1.rockspec
-)
+rock2c(luassert ${luassert_SOURCE_DIR}/luassert-scm-1.rockspec)
 add_library(luassert STATIC luassert.c)
 target_link_libraries(luassert elune say)
 
