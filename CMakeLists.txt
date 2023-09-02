@@ -2,86 +2,22 @@ cmake_minimum_required(VERSION 3.24)
 project(wowless)
 
 include(FetchContent)
-FetchContent_Declare(
-  elune
-  GIT_REPOSITORY https://github.com/meorawr/elune.git
-  GIT_TAG f051f75a3e963130c2d1ad98f56868bfc6b2798d
-  SOURCE_SUBDIR disable_cmakelists_txt
-)
-FetchContent_Declare(
-  expat
-  GIT_REPOSITORY https://github.com/libexpat/libexpat.git
-  GIT_TAG R_2_5_0
-  SOURCE_SUBDIR disable_cmakelists_txt
-)
-FetchContent_Declare(
-  lsqlite3
-  URL http://lua.sqlite.org/index.cgi/zip/lsqlite3_fsl09y.zip
-  URL_HASH MD5=1f937ed6bf9d5980239da516c424d7b6
-  SOURCE_SUBDIR disable_cmakelists_txt
-)
-FetchContent_Declare(
-  luaexpat
-  GIT_REPOSITORY https://github.com/lunarmodules/luaexpat.git
-  GIT_TAG 1.4.1
-  SOURCE_SUBDIR disable_cmakelists_txt
-)
-FetchContent_Declare(
-  luafilesystem
-  GIT_REPOSITORY https://github.com/lunarmodules/luafilesystem.git
-  GIT_TAG v1_8_0
-  SOURCE_SUBDIR disable_cmakelists_txt
-)
-FetchContent_Declare(
-  lyaml
-  GIT_REPOSITORY https://github.com/gvvaughan/lyaml.git
-  GIT_TAG v6.2.8
-  SOURCE_SUBDIR disable_cmakelists_txt
-)
-FetchContent_Declare(
-  lzlib
-  GIT_REPOSITORY https://github.com/luadist/lzlib.git
-  GIT_TAG 0.4.3
-  SOURCE_SUBDIR disable_cmakelists_txt
-)
-FetchContent_Declare(
-  sqlite3
-  URL https://www.sqlite.org/2023/sqlite-amalgamation-3410200.zip
-  URL_HASH SHA3_256=c51ca72411b8453c64e0980be23bc9b9530bdc3ec1513e06fbf022ed0fd02463
-  SOURCE_SUBDIR disable_cmakelists_txt
-)
+
 FetchContent_Declare(
   utf8h
   GIT_REPOSITORY https://github.com/sheredom/utf8.h.git
   GIT_TAG ce48f0eda6cac8f365837edaf8298ad5c03f7f2e
   SOURCE_SUBDIR disable_cmakelists_txt
 )
-FetchContent_Declare(
-  yaml
-  GIT_REPOSITORY https://github.com/yaml/libyaml.git
-  GIT_TAG 0.2.5
-  SOURCE_SUBDIR disable_cmakelists_txt
-)
-FetchContent_Declare(
-  zlib
-  URL https://zlib.net/fossils/zlib-1.3.tar.gz
-  URL_HASH SHA256=ff0ba4c292013dbc27530b3a81e1f9a813cd39de01ca5e0f8bf355702efa593e
-  SOURCE_SUBDIR disable_cmakelists_txt
-)
-FetchContent_MakeAvailable(
-  elune
-  expat
-  lsqlite3
-  luaexpat
-  luafilesystem
-  lyaml
-  lzlib
-  sqlite3
-  utf8h
-  yaml
-  zlib
-)
+FetchContent_MakeAvailable(utf8h)
 
+FetchContent_Declare(
+  elune
+  GIT_REPOSITORY https://github.com/meorawr/elune.git
+  GIT_TAG f051f75a3e963130c2d1ad98f56868bfc6b2798d
+  SOURCE_SUBDIR disable_cmakelists_txt
+)
+FetchContent_MakeAvailable(elune)
 add_library(
   elune OBJECT
   ${elune_SOURCE_DIR}/liblua/lapi.c
@@ -139,10 +75,16 @@ target_include_directories(
   ${elune_BINARY_DIR}
   ${utf8h_SOURCE_DIR}
 )
-
 add_executable(bootstraplua ${elune_SOURCE_DIR}/lua/lua.c)
 target_link_libraries(bootstraplua elune m)
 
+FetchContent_Declare(
+  expat
+  GIT_REPOSITORY https://github.com/libexpat/libexpat.git
+  GIT_TAG R_2_5_0
+  SOURCE_SUBDIR disable_cmakelists_txt
+)
+FetchContent_MakeAvailable(expat)
 add_library(
   expat OBJECT
   ${expat_SOURCE_DIR}/expat/lib/xmlparse.c
@@ -162,12 +104,26 @@ target_include_directories(
   ${expat_BINARY_DIR}
 )
 
+FetchContent_Declare(
+  luaexpat
+  GIT_REPOSITORY https://github.com/lunarmodules/luaexpat.git
+  GIT_TAG 1.4.1
+  SOURCE_SUBDIR disable_cmakelists_txt
+)
+FetchContent_MakeAvailable(luaexpat)
 add_library(
   luaexpat OBJECT
   ${luaexpat_SOURCE_DIR}/src/lxplib.c
 )
 target_link_libraries(luaexpat elune expat)
 
+FetchContent_Declare(
+  yaml
+  GIT_REPOSITORY https://github.com/yaml/libyaml.git
+  GIT_TAG 0.2.5
+  SOURCE_SUBDIR disable_cmakelists_txt
+)
+FetchContent_MakeAvailable(yaml)
 add_library(
   yaml OBJECT
   ${yaml_SOURCE_DIR}/src/api.c
@@ -189,6 +145,13 @@ set_property(
 )
 target_include_directories(yaml PUBLIC ${yaml_SOURCE_DIR}/include)
 
+FetchContent_Declare(
+  lyaml
+  GIT_REPOSITORY https://github.com/gvvaughan/lyaml.git
+  GIT_TAG v6.2.8
+  SOURCE_SUBDIR disable_cmakelists_txt
+)
+FetchContent_MakeAvailable(lyaml)
 add_library(
   lyaml OBJECT
   ${lyaml_SOURCE_DIR}/ext/yaml/emitter.c
@@ -202,6 +165,13 @@ set_property(
 )
 target_link_libraries(lyaml elune yaml)
 
+FetchContent_Declare(
+  zlib
+  URL https://zlib.net/fossils/zlib-1.3.tar.gz
+  URL_HASH SHA256=ff0ba4c292013dbc27530b3a81e1f9a813cd39de01ca5e0f8bf355702efa593e
+  SOURCE_SUBDIR disable_cmakelists_txt
+)
+FetchContent_MakeAvailable(zlib)
 add_library(
   zlib OBJECT
   ${zlib_SOURCE_DIR}/adler32.c
@@ -222,23 +192,57 @@ add_library(
 )
 target_include_directories(zlib PUBLIC ${zlib_SOURCE_DIR})
 
+FetchContent_Declare(
+  lzlib
+  GIT_REPOSITORY https://github.com/luadist/lzlib.git
+  GIT_TAG 0.4.3
+  SOURCE_SUBDIR disable_cmakelists_txt
+)
+FetchContent_MakeAvailable(lzlib)
 add_library(
   lzlib OBJECT
   ${lzlib_SOURCE_DIR}/lzlib.c
 )
 target_link_libraries(lzlib elune zlib)
 
+FetchContent_Declare(
+  sqlite3
+  URL https://www.sqlite.org/2023/sqlite-amalgamation-3410200.zip
+  URL_HASH SHA3_256=c51ca72411b8453c64e0980be23bc9b9530bdc3ec1513e06fbf022ed0fd02463
+  SOURCE_SUBDIR disable_cmakelists_txt
+)
+FetchContent_MakeAvailable(sqlite3)
 add_library(
   sqlite3 OBJECT
   ${sqlite3_SOURCE_DIR}/sqlite3.c
 )
 target_include_directories(sqlite3 PUBLIC ${sqlite3_SOURCE_DIR})
 
+FetchContent_Declare(
+  lsqlite3
+  URL http://lua.sqlite.org/index.cgi/zip/lsqlite3_fsl09y.zip
+  URL_HASH MD5=1f937ed6bf9d5980239da516c424d7b6
+  SOURCE_SUBDIR disable_cmakelists_txt
+)
+FetchContent_MakeAvailable(lsqlite3)
 add_library(
   lsqlite3 OBJECT
   ${lsqlite3_SOURCE_DIR}/lsqlite3.c
 )
 target_link_libraries(lsqlite3 elune sqlite3)
+
+FetchContent_Declare(
+  luafilesystem
+  GIT_REPOSITORY https://github.com/lunarmodules/luafilesystem.git
+  GIT_TAG v1_8_0
+  SOURCE_SUBDIR disable_cmakelists_txt
+)
+FetchContent_MakeAvailable(luafilesystem)
+add_library(
+  luafilesystem OBJECT
+  ${luafilesystem_SOURCE_DIR}/src/lfs.c
+)
+target_link_libraries(luafilesystem elune)
 
 add_custom_command(
   OUTPUT rocks.c
@@ -254,7 +258,6 @@ add_library(
   main.c
   rocks.c
   wowless/ext.c
-  ${luafilesystem_SOURCE_DIR}/src/lfs.c
 )
 target_link_libraries(wowlesslib elune)
 
@@ -266,6 +269,7 @@ target_link_libraries(
   expat
   lsqlite3
   luaexpat
+  luafilesystem
   lyaml
   lzlib
   m
