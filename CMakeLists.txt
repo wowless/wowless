@@ -278,6 +278,17 @@ add_library(luassert STATIC luassert.c)
 target_link_libraries(luassert elune say)
 
 FetchContent_Declare(
+  argparse
+  GIT_REPOSITORY https://github.com/luarocks/argparse
+  GIT_TAG 27967d7b52295ea7885671af734332038c132837
+  SOURCE_SUBDIR disable_cmakelists_txt
+)
+FetchContent_MakeAvailable(argparse)
+rock2c(argparse ${argparse_SOURCE_DIR}/argparse-scm-2.rockspec)
+add_library(argparse STATIC argparse.c)
+target_link_libraries(argparse elune)
+
+FetchContent_Declare(
   date
   GIT_REPOSITORY https://github.com/tieske/date.git
   GIT_TAG e309741edc15bde2c884b0db09d8560848773b50
@@ -307,6 +318,7 @@ target_link_libraries(wowlesslib elune)
 add_executable(wowless main.c)
 target_link_libraries(
   wowless
+  argparse
   date
   elune
   lsqlite3

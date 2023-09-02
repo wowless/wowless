@@ -16,7 +16,6 @@ build_dependencies = {
   'luasql-sqlite3',
 }
 dependencies = {
-  'argparse',
   'lua-path',
   'lua-resty-tsort',
   'lyaml',
