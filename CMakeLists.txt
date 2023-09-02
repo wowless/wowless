@@ -1,9 +1,6 @@
 cmake_minimum_required(VERSION 3.24)
 project(wowless)
 
-add_compile_options(-D_GNU_SOURCE -DNDEBUG -flto -O3)
-add_link_options(-ffast-math)
-
 include(FetchContent)
 FetchContent_Declare(
   elune
