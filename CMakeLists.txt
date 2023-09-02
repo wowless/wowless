@@ -277,6 +277,17 @@ rock2c(luassert ${luassert_SOURCE_DIR}/luassert-scm-1.rockspec)
 add_library(luassert STATIC luassert.c)
 target_link_libraries(luassert elune say)
 
+FetchContent_Declare(
+  date
+  GIT_REPOSITORY https://github.com/tieske/date.git
+  GIT_TAG e309741edc15bde2c884b0db09d8560848773b50
+  SOURCE_SUBDIR disable_cmakelists_txt
+)
+FetchContent_MakeAvailable(date)
+rock2c(date ${date_SOURCE_DIR}/date-2.2-2.rockspec)
+add_library(date STATIC date.c)
+target_link_libraries(date elune)
+
 add_custom_command(
   OUTPUT rocks.c
   COMMAND luarocks build --only-deps --tree luarocks ${CMAKE_CURRENT_SOURCE_DIR}/wowless-scm-0.rockspec
@@ -296,6 +307,7 @@ target_link_libraries(wowlesslib elune)
 add_executable(wowless main.c)
 target_link_libraries(
   wowless
+  date
   elune
   lsqlite3
   luaexpat

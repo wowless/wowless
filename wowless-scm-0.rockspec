@@ -17,7 +17,6 @@ build_dependencies = {
 }
 dependencies = {
   'argparse',
-  'date',
   'lua-path',
   'lua-resty-tsort',
   'lyaml',
