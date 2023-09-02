@@ -19,7 +19,7 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(elune)
 add_library(
-  elune OBJECT
+  elune STATIC
   ${elune_SOURCE_DIR}/liblua/lapi.c
   ${elune_SOURCE_DIR}/liblua/lapi.c
   ${elune_SOURCE_DIR}/liblua/lauxlib.c
@@ -75,8 +75,10 @@ target_include_directories(
   ${elune_BINARY_DIR}
   ${utf8h_SOURCE_DIR}
 )
+target_link_libraries(elune m)
+
 add_executable(bootstraplua ${elune_SOURCE_DIR}/lua/lua.c)
-target_link_libraries(bootstraplua elune m)
+target_link_libraries(bootstraplua elune)
 
 FetchContent_Declare(
   expat
@@ -86,7 +88,7 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(expat)
 add_library(
-  expat OBJECT
+  expat STATIC
   ${expat_SOURCE_DIR}/expat/lib/xmlparse.c
   ${expat_SOURCE_DIR}/expat/lib/xmlrole.c
   ${expat_SOURCE_DIR}/expat/lib/xmltok.c
@@ -112,7 +114,7 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(luaexpat)
 add_library(
-  luaexpat OBJECT
+  luaexpat STATIC
   ${luaexpat_SOURCE_DIR}/src/lxplib.c
 )
 target_link_libraries(luaexpat elune expat)
@@ -125,7 +127,7 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(yaml)
 add_library(
-  yaml OBJECT
+  yaml STATIC
   ${yaml_SOURCE_DIR}/src/api.c
   ${yaml_SOURCE_DIR}/src/dumper.c
   ${yaml_SOURCE_DIR}/src/emitter.c
@@ -153,7 +155,7 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(lyaml)
 add_library(
-  lyaml OBJECT
+  lyaml STATIC
   ${lyaml_SOURCE_DIR}/ext/yaml/emitter.c
   ${lyaml_SOURCE_DIR}/ext/yaml/parser.c
   ${lyaml_SOURCE_DIR}/ext/yaml/scanner.c
@@ -173,7 +175,7 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(zlib)
 add_library(
-  zlib OBJECT
+  zlib STATIC
   ${zlib_SOURCE_DIR}/adler32.c
   ${zlib_SOURCE_DIR}/crc32.c
   ${zlib_SOURCE_DIR}/compress.c
@@ -200,7 +202,7 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(lzlib)
 add_library(
-  lzlib OBJECT
+  lzlib STATIC
   ${lzlib_SOURCE_DIR}/lzlib.c
 )
 target_link_libraries(lzlib elune zlib)
@@ -213,10 +215,11 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(sqlite3)
 add_library(
-  sqlite3 OBJECT
+  sqlite3 STATIC
   ${sqlite3_SOURCE_DIR}/sqlite3.c
 )
 target_include_directories(sqlite3 PUBLIC ${sqlite3_SOURCE_DIR})
+target_link_libraries(sqlite3 dl pthread)
 
 FetchContent_Declare(
   lsqlite3
@@ -226,7 +229,7 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(lsqlite3)
 add_library(
-  lsqlite3 OBJECT
+  lsqlite3 STATIC
   ${lsqlite3_SOURCE_DIR}/lsqlite3.c
 )
 target_link_libraries(lsqlite3 elune sqlite3)
@@ -239,7 +242,7 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(luafilesystem)
 add_library(
-  luafilesystem OBJECT
+  luafilesystem STATIC
   ${luafilesystem_SOURCE_DIR}/src/lfs.c
 )
 target_link_libraries(luafilesystem elune)
@@ -254,29 +257,21 @@ add_custom_command(
 )
 
 add_library(
-  wowlesslib OBJECT
-  main.c
+  wowlesslib STATIC
   rocks.c
   wowless/ext.c
 )
 target_link_libraries(wowlesslib elune)
 
-add_executable(wowless)
+add_executable(wowless main.c)
 target_link_libraries(
   wowless
-  dl
   elune
-  expat
   lsqlite3
   luaexpat
   luafilesystem
   lyaml
   lzlib
-  m
-  pthread
-  sqlite3
   wowlesslib
-  yaml
-  zlib
   -static
 )
