@@ -1,5 +1,5 @@
 describe('uiobjects', function()
-  for _, p in ipairs(require('wowless.util').productList()) do
+  for _, p in ipairs(require('build.data.products')) do
     local api = require('wowless.api').new(function() end, 0, p)
     local typechecker = require('wowless.typecheck')(api)
     local function typecheck(spec, val)

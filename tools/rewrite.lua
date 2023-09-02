@@ -2,7 +2,7 @@ local writeFile = require('pl.file').write
 local yaml = require('wowapi.yaml')
 
 local function rewriteFile(ty, fn)
-  for _, p in ipairs(require('wowless.util').productList()) do
+  for _, p in ipairs(require('build.data.products')) do
     local filename = 'data/products/' .. p .. '/' .. ty .. '.yaml'
     local before = require('pl.file').read(filename)
     local data = yaml.parse(before)

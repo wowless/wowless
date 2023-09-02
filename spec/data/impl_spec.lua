@@ -16,7 +16,7 @@ describe('impl', function()
       expected[k] = true
     end
     local actual = {}
-    for _, p in ipairs(require('wowless.util').productList()) do
+    for _, p in ipairs(require('build.data.products')) do
       for _, v in pairs(require('build/data/products/' .. p .. '/apis')) do
         if v.impl then
           actual[v.impl] = true

@@ -1,5 +1,5 @@
 describe('structures', function()
-  for _, p in ipairs(require('wowless.util').productList()) do
+  for _, p in ipairs(require('build.data.products')) do
     describe(p, function()
       local refs = {}
       local function refty(ty)

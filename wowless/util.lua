@@ -100,15 +100,10 @@ local function dateToCalendarTime(d)
   }
 end
 
-local function productList()
-  return require('build.data.products')
-end
-
 return {
   calendarTimeToDate = calendarTimeToDate,
   dateToCalendarTime = dateToCalendarTime,
   mixin = mixin,
-  productList = productList,
   readfile = readfile,
   tget = tget,
   tset = tset,

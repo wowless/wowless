@@ -1,5 +1,5 @@
 describe('config', function()
-  for _, p in ipairs(require('wowless.util').productList()) do
+  for _, p in ipairs(require('build.data.products')) do
     describe(p, function()
       local config = require('build/data/products/' .. p .. '/config')
       local apis = require('build/data/products/' .. p .. '/apis')

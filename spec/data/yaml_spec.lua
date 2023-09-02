@@ -26,7 +26,7 @@ local productschemas = {
   xml = 'xml',
 }
 
-local products = require('wowless.util').productList()
+local products = require('build.data.products')
 
 describe('yaml', function()
   for dir, schemaname in pairs(dirschemas) do
