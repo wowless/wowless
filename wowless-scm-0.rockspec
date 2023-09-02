@@ -5,7 +5,6 @@ source = {
   url = 'git+https://github.com/wowless/wowless.git',
 }
 build_dependencies = {
-  'date',
   'lsqlite3',
   'lua-cjson',
   'luacasc >= 1.15',
