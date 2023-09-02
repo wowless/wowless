@@ -247,6 +247,44 @@ add_library(
 )
 target_link_libraries(luafilesystem elune)
 
+FetchContent_Declare(
+  say
+  GIT_REPOSITORY https://github.com/lunarmodules/say.git
+  GIT_TAG 3e1f783d0aa496eb21d16e85b2235335cb9332df
+  SOURCE_SUBDIR disable_cmakelists_txt
+)
+FetchContent_MakeAvailable(say)
+add_custom_command(
+  OUTPUT say.c
+  COMMAND bootstraplua
+    ${CMAKE_CURRENT_SOURCE_DIR}/tools/rock2c.lua
+    ${say_SOURCE_DIR}/say-scm-1.rockspec
+  DEPENDS
+    ${CMAKE_CURRENT_SOURCE_DIR}/tools/rock2c.lua
+    ${say_SOURCE_DIR}/say-scm-1.rockspec
+)
+add_library(say STATIC say.c)
+target_link_libraries(say elune)
+
+FetchContent_Declare(
+  luassert
+  GIT_REPOSITORY https://github.com/lunarmodules/luassert.git
+  GIT_TAG 8c9385b1a1944a5ce0ef9dbd721ad1987cf85e9d
+  SOURCE_SUBDIR disable_cmakelists_txt
+)
+FetchContent_MakeAvailable(luassert)
+add_custom_command(
+  OUTPUT luassert.c
+  COMMAND bootstraplua
+    ${CMAKE_CURRENT_SOURCE_DIR}/tools/rock2c.lua
+    ${luassert_SOURCE_DIR}/luassert-scm-1.rockspec
+  DEPENDS
+    ${CMAKE_CURRENT_SOURCE_DIR}/tools/rock2c.lua
+    ${luassert_SOURCE_DIR}/luassert-scm-1.rockspec
+)
+add_library(luassert STATIC luassert.c)
+target_link_libraries(luassert elune say)
+
 add_custom_command(
   OUTPUT rocks.c
   COMMAND luarocks build --only-deps --tree luarocks ${CMAKE_CURRENT_SOURCE_DIR}/wowless-scm-0.rockspec
@@ -270,6 +308,7 @@ target_link_libraries(
   lsqlite3
   luaexpat
   luafilesystem
+  luassert
   lyaml
   lzlib
   wowlesslib

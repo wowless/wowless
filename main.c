@@ -11,6 +11,8 @@ extern int luaopen_wowless_ext(lua_State *);
 extern int luaopen_yaml(lua_State *);
 extern int luaopen_zlib(lua_State *);
 extern void preload_luarocks(lua_State *);
+extern void preload_luassert(lua_State *);
+extern void preload_say(lua_State *);
 
 struct module {
   const char *name;
@@ -33,6 +35,8 @@ int main(int argc, char **argv) {
   luaL_openlibsx(L, LUALIB_ELUNE);
   luaL_openlibsx(L, LUALIB_STANDARD);
   preload_luarocks(L);
+  preload_luassert(L);
+  preload_say(L);
   lua_getglobal(L, "package");
   lua_pushstring(L, "./?.lua");
   lua_setfield(L, -2, "path");
