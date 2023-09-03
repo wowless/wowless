@@ -29,7 +29,8 @@ for mk, mv in pairs(rockspec.build.modules) do
     modules[mk] = readfile(dir .. mv)
   end
 end
-io.output(rockspec.package .. '.c')
+local package = rockspec.package:gsub('-', '')
+io.output(package .. '.c')
 io.write([[#include "lauxlib.h"
 #include "lualib.h"
 struct module {
@@ -43,7 +44,7 @@ for k, v in sorted(modules) do
   io.write(('  {"%s", "%s"},\n'):format(k, v))
 end
 io.write('};\n')
-io.write(('void preload_%s(lua_State *L) {'):format(rockspec.package))
+io.write(('void preload_%s(lua_State *L) {'):format(package))
 io.write([[
   lua_getglobal(L, "package");
   lua_getfield(L, -1, "preload");

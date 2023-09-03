@@ -12,6 +12,7 @@ extern int luaopen_yaml(lua_State *);
 extern int luaopen_zlib(lua_State *);
 extern void preload_argparse(lua_State *);
 extern void preload_date(lua_State *);
+extern void preload_luapath(lua_State *);
 extern void preload_luarocks(lua_State *);
 extern void preload_luassert(lua_State *);
 extern void preload_lyaml(lua_State *);
@@ -42,6 +43,7 @@ int main(int argc, char **argv) {
   luaL_openlibsx(L, LUALIB_STANDARD);
   preload_argparse(L);
   preload_date(L);
+  preload_luapath(L);
   preload_luarocks(L);
   preload_luassert(L);
   preload_lyaml(L);

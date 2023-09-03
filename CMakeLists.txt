@@ -348,6 +348,22 @@ add_library(minheap STATIC minheap.c)
 target_link_libraries(minheap elune)
 
 FetchContent_Declare(
+  luapath
+  GIT_REPOSITORY https://github.com/moteus/lua-path
+  GIT_TAG 5a32c7052e84cdb9dcbcd45648aae3f6927376ac
+  SOURCE_SUBDIR disable_cmakelists_txt
+)
+FetchContent_MakeAvailable(luapath)
+file(
+  COPY_FILE
+  ${luapath_SOURCE_DIR}/rockspecs/lua-path-scm-0.rockspec
+  ${luapath_SOURCE_DIR}/lua-path-scm-0.rockspec
+)
+rock2c(luapath ${luapath_SOURCE_DIR}/lua-path-scm-0.rockspec)
+add_library(luapath STATIC luapath.c)
+target_link_libraries(luapath elune)
+
+FetchContent_Declare(
   vstruct
   GIT_REPOSITORY https://github.com/toxicfrog/vstruct
   GIT_TAG b6889e3b275e9f9532b5dff4917e903b17e22730
@@ -383,6 +399,7 @@ target_link_libraries(
   lsqlite3
   luaexpat
   luafilesystem
+  luapath
   luassert
   lyaml
   lzlib
