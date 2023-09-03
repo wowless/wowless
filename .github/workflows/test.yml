@@ -35,3 +35,11 @@ jobs:
         path: |
           out/
           test.out
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        submodules: true
+    - run: cmake -B build
+    - run: cmake --build build
