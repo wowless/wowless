@@ -410,5 +410,4 @@ target_link_libraries(
   tsort
   vstruct
   wowlesslib
-  -static
 )
