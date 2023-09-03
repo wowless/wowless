@@ -19,7 +19,6 @@ build_dependencies = {
 }
 dependencies = {
   'lua-path',
-  'lua-resty-tsort',
   'penlight',
 }
 build = {

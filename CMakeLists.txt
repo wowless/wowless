@@ -313,6 +313,25 @@ add_library(date STATIC date.c)
 target_link_libraries(date elune)
 
 FetchContent_Declare(
+  tsort
+  GIT_REPOSITORY https://github.com/bungle/lua-resty-tsort
+  GIT_TAG 07754a8af7c51ca5fbcf05dc5f4b1b900f1bf530
+  SOURCE_SUBDIR disable_cmakelists_txt
+)
+FetchContent_MakeAvailable(tsort)
+file(WRITE ${tsort_SOURCE_DIR}/dummy.rockspec [=[
+package = 'tsort'
+build = {
+  modules = {
+    ['resty.tsort'] = 'lib/resty/tsort.lua',
+  },
+}
+]=])
+rock2c(tsort ${tsort_SOURCE_DIR}/dummy.rockspec)
+add_library(tsort STATIC tsort.c)
+target_link_libraries(tsort elune)
+
+FetchContent_Declare(
   minheap
   GIT_REPOSITORY https://github.com/mah0x211/lua-minheap
   GIT_TAG c5fe42b60cf5b3ee7ed6d33eb31be1119dfb1cd6
@@ -368,6 +387,7 @@ target_link_libraries(
   lyaml
   lzlib
   minheap
+  tsort
   vstruct
   wowlesslib
   -static
