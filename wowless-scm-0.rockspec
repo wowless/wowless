@@ -15,12 +15,12 @@ build_dependencies = {
   'luamagick',
   'luasql-sqlite3',
   'lyaml',
+  'vstruct',
 }
 dependencies = {
   'lua-path',
   'lua-resty-tsort',
   'penlight',
-  'vstruct',
 }
 build = {
   type = 'builtin',

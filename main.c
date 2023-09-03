@@ -17,6 +17,7 @@ extern void preload_luassert(lua_State *);
 extern void preload_lyaml(lua_State *);
 extern void preload_minheap(lua_State *);
 extern void preload_say(lua_State *);
+extern void preload_vstruct(lua_State *);
 
 struct module {
   const char *name;
@@ -45,6 +46,7 @@ int main(int argc, char **argv) {
   preload_lyaml(L);
   preload_minheap(L);
   preload_say(L);
+  preload_vstruct(L);
   lua_getglobal(L, "package");
   lua_pushstring(L, "./?.lua");
   lua_setfield(L, -2, "path");

@@ -328,6 +328,17 @@ rock2c(minheap ${minheap_SOURCE_DIR}/minheap-scm-1.rockspec)
 add_library(minheap STATIC minheap.c)
 target_link_libraries(minheap elune)
 
+FetchContent_Declare(
+  vstruct
+  GIT_REPOSITORY https://github.com/toxicfrog/vstruct
+  GIT_TAG b6889e3b275e9f9532b5dff4917e903b17e22730
+  SOURCE_SUBDIR disable_cmakelists_txt
+)
+FetchContent_MakeAvailable(vstruct)
+rock2c(vstruct ${vstruct_SOURCE_DIR}/vstruct-2.1.1-1.rockspec)
+add_library(vstruct STATIC vstruct.c)
+target_link_libraries(vstruct elune)
+
 add_custom_command(
   OUTPUT rocks.c
   COMMAND luarocks build --only-deps --tree luarocks ${CMAKE_CURRENT_SOURCE_DIR}/wowless-scm-0.rockspec
@@ -357,6 +368,7 @@ target_link_libraries(
   lyaml
   lzlib
   minheap
+  vstruct
   wowlesslib
   -static
 )
