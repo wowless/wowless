@@ -14,11 +14,11 @@ build_dependencies = {
   'luaexpat < 1.5.0',
   'luamagick',
   'luasql-sqlite3',
+  'lyaml',
 }
 dependencies = {
   'lua-path',
   'lua-resty-tsort',
-  'lyaml',
   'penlight',
   'vstruct',
 }

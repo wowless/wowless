@@ -147,6 +147,14 @@ set_property(
 )
 target_include_directories(yaml PUBLIC ${yaml_SOURCE_DIR}/include)
 
+macro(rock2c module rockspec)
+  add_custom_command(
+    OUTPUT ${module}.c
+    COMMAND bootstraplua ${CMAKE_CURRENT_SOURCE_DIR}/tools/rock2c.lua ${rockspec}
+    DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/tools/rock2c.lua ${rockspec}
+  )
+endmacro()
+
 FetchContent_Declare(
   lyaml
   GIT_REPOSITORY https://github.com/gvvaughan/lyaml.git
@@ -154,8 +162,21 @@ FetchContent_Declare(
   SOURCE_SUBDIR disable_cmakelists_txt
 )
 FetchContent_MakeAvailable(lyaml)
+file(WRITE ${lyaml_SOURCE_DIR}/dummy.rockspec [=[
+package = 'lyaml'
+build = {
+  modules = {
+    ['lyaml.explicit'] = 'lib/lyaml/explicit.lua',
+    ['lyaml.functional'] = 'lib/lyaml/functional.lua',
+    ['lyaml.implicit'] = 'lib/lyaml/implicit.lua',
+    ['lyaml.init'] = 'lib/lyaml/init.lua',
+  },
+}
+]=])
+rock2c(lyaml ${lyaml_SOURCE_DIR}/dummy.rockspec)
 add_library(
   lyaml STATIC
+  lyaml.c
   ${lyaml_SOURCE_DIR}/ext/yaml/emitter.c
   ${lyaml_SOURCE_DIR}/ext/yaml/parser.c
   ${lyaml_SOURCE_DIR}/ext/yaml/scanner.c
@@ -246,14 +267,6 @@ add_library(
   ${luafilesystem_SOURCE_DIR}/src/lfs.c
 )
 target_link_libraries(luafilesystem elune)
-
-macro(rock2c module rockspec)
-  add_custom_command(
-    OUTPUT ${module}.c
-    COMMAND bootstraplua ${CMAKE_CURRENT_SOURCE_DIR}/tools/rock2c.lua ${rockspec}
-    DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/tools/rock2c.lua ${rockspec}
-  )
-endmacro()
 
 FetchContent_Declare(
   say
