@@ -129,7 +129,6 @@ local types = {
   NotificationDbId = 'string',
   number = 'number',
   RecruitAcceptanceID = 'string',
-  RoleShortageReward = 'number',
   ScriptRegion = 'table',
   SimpleAnim = 'table',
   SimpleAnimGroup = 'table',

@@ -6578,7 +6578,8 @@ C_PvP.GetHolidayBGLossRewards:
         structure: C_PvP.BattlefieldCurrencyReward
   - name: roleShortageBonus
     nilable: true
-    type: number
+    type:
+      structure: C_PvP.RoleShortageReward
 C_PvP.GetHolidayBGRewards:
   inputs: {}
   outputs:
@@ -6598,7 +6599,8 @@ C_PvP.GetHolidayBGRewards:
         structure: C_PvP.BattlefieldCurrencyReward
   - name: roleShortageBonus
     nilable: true
-    type: number
+    type:
+      structure: C_PvP.RoleShortageReward
 C_PvP.GetRandomBGLossRewards:
   inputs: {}
   outputs:
@@ -6618,7 +6620,8 @@ C_PvP.GetRandomBGLossRewards:
         structure: C_PvP.BattlefieldCurrencyReward
   - name: roleShortageBonus
     nilable: true
-    type: number
+    type:
+      structure: C_PvP.RoleShortageReward
 C_PvP.GetRandomBGRewards:
   inputs: {}
   outputs:
@@ -6638,7 +6641,8 @@ C_PvP.GetRandomBGRewards:
         structure: C_PvP.BattlefieldCurrencyReward
   - name: roleShortageBonus
     nilable: true
-    type: number
+    type:
+      structure: C_PvP.RoleShortageReward
 C_PvP.IsInBrawl:
   inputs: {}
   outputs:

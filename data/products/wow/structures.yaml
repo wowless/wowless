@@ -4517,6 +4517,15 @@ C_PvP.RatedSoloShuffleSpecStats:
       type: number
     weeklyMostPlayedSpecRounds:
       type: number
+C_PvP.RoleShortageReward:
+  fields:
+    rewardItemID:
+      type: number
+    rewardSpellID:
+      type: number
+    validRoles:
+      type:
+        arrayof: string
 C_QuestInfoSystem.QuestRewardSpellInfo:
   fields:
     garrFollowerID:
