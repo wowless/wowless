@@ -16,11 +16,10 @@ build_dependencies = {
   'luamagick',
   'luasql-sqlite3',
   'lyaml',
+  'penlight',
   'vstruct',
 }
-dependencies = {
-  'penlight',
-}
+dependencies = {}
 build = {
   type = 'builtin',
   modules = {},

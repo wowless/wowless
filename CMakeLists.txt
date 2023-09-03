@@ -364,6 +364,17 @@ add_library(luapath STATIC luapath.c)
 target_link_libraries(luapath elune)
 
 FetchContent_Declare(
+  penlight
+  GIT_REPOSITORY https://github.com/lunarmodules/penlight
+  GIT_TAG 3bf03267b2571ba3cfa676a10528dd7b9a0db404
+  SOURCE_SUBDIR disable_cmakelists_txt
+)
+FetchContent_MakeAvailable(penlight)
+rock2c(penlight ${penlight_SOURCE_DIR}/penlight-dev-1.rockspec)
+add_library(penlight STATIC penlight.c)
+target_link_libraries(penlight elune)
+
+FetchContent_Declare(
   vstruct
   GIT_REPOSITORY https://github.com/toxicfrog/vstruct
   GIT_TAG b6889e3b275e9f9532b5dff4917e903b17e22730
@@ -374,18 +385,8 @@ rock2c(vstruct ${vstruct_SOURCE_DIR}/vstruct-2.1.1-1.rockspec)
 add_library(vstruct STATIC vstruct.c)
 target_link_libraries(vstruct elune)
 
-add_custom_command(
-  OUTPUT rocks.c
-  COMMAND luarocks build --only-deps --tree luarocks ${CMAKE_CURRENT_SOURCE_DIR}/wowless-scm-0.rockspec
-  COMMAND bootstraplua ${CMAKE_CURRENT_SOURCE_DIR}/tools/lua2c.lua
-  DEPENDS
-    ${CMAKE_CURRENT_SOURCE_DIR}/tools/lua2c.lua
-    ${CMAKE_CURRENT_SOURCE_DIR}/wowless-scm-0.rockspec
-)
-
 add_library(
   wowlesslib STATIC
-  rocks.c
   wowless/ext.c
 )
 target_link_libraries(wowlesslib elune)
@@ -404,6 +405,7 @@ target_link_libraries(
   lyaml
   lzlib
   minheap
+  penlight
   tsort
   vstruct
   wowlesslib
