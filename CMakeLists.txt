@@ -213,6 +213,7 @@ add_library(
   ${zlib_SOURCE_DIR}/uncompr.c
   ${zlib_SOURCE_DIR}/zutil.c
 )
+target_compile_definitions(zlib PRIVATE Z_HAVE_UNISTD_H)
 target_include_directories(zlib PUBLIC ${zlib_SOURCE_DIR})
 
 FetchContent_Declare(
