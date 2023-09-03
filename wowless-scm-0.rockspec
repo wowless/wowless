@@ -19,7 +19,6 @@ dependencies = {
   'lua-path',
   'lua-resty-tsort',
   'lyaml',
-  'minheap',
   'penlight',
   'vstruct',
 }

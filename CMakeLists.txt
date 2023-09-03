@@ -299,6 +299,22 @@ rock2c(date ${date_SOURCE_DIR}/date-2.2-2.rockspec)
 add_library(date STATIC date.c)
 target_link_libraries(date elune)
 
+FetchContent_Declare(
+  minheap
+  GIT_REPOSITORY https://github.com/mah0x211/lua-minheap
+  GIT_TAG c5fe42b60cf5b3ee7ed6d33eb31be1119dfb1cd6
+  SOURCE_SUBDIR disable_cmakelists_txt
+)
+FetchContent_MakeAvailable(minheap)
+file(
+  COPY_FILE
+  ${minheap_SOURCE_DIR}/rockspecs/minheap-scm-1.rockspec
+  ${minheap_SOURCE_DIR}/minheap-scm-1.rockspec
+)
+rock2c(minheap ${minheap_SOURCE_DIR}/minheap-scm-1.rockspec)
+add_library(minheap STATIC minheap.c)
+target_link_libraries(minheap elune)
+
 add_custom_command(
   OUTPUT rocks.c
   COMMAND luarocks build --only-deps --tree luarocks ${CMAKE_CURRENT_SOURCE_DIR}/wowless-scm-0.rockspec
@@ -327,6 +343,7 @@ target_link_libraries(
   luassert
   lyaml
   lzlib
+  minheap
   wowlesslib
   -static
 )

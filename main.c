@@ -14,6 +14,7 @@ extern void preload_argparse(lua_State *);
 extern void preload_date(lua_State *);
 extern void preload_luarocks(lua_State *);
 extern void preload_luassert(lua_State *);
+extern void preload_minheap(lua_State *);
 extern void preload_say(lua_State *);
 
 struct module {
@@ -40,6 +41,7 @@ int main(int argc, char **argv) {
   preload_date(L);
   preload_luarocks(L);
   preload_luassert(L);
+  preload_minheap(L);
   preload_say(L);
   lua_getglobal(L, "package");
   lua_pushstring(L, "./?.lua");
