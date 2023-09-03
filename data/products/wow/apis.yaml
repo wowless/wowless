@@ -13374,8 +13374,7 @@ C_PvP.GetArenaRewards:
         structure: C_PvP.BattlefieldCurrencyReward
   - name: roleShortageBonus
     nilable: true
-    type:
-      structure: C_PvP.RoleShortageReward
+    type: number
 C_PvP.GetArenaSkirmishRewards:
   inputs: {}
   outputs:
@@ -13395,8 +13394,7 @@ C_PvP.GetArenaSkirmishRewards:
         structure: C_PvP.BattlefieldCurrencyReward
   - name: roleShortageBonus
     nilable: true
-    type:
-      structure: C_PvP.RoleShortageReward
+    type: number
 C_PvP.GetAssignedSpecForBattlefieldQueue:
   inputs:
   - name: queueID
@@ -13468,8 +13466,7 @@ C_PvP.GetBrawlRewards:
         structure: C_PvP.BattlefieldCurrencyReward
   - name: roleShortageBonus
     nilable: true
-    type:
-      structure: C_PvP.RoleShortageReward
+    type: number
   - name: hasWon
     type: boolean
 C_PvP.GetCustomVictoryStatID:
@@ -13624,8 +13621,7 @@ C_PvP.GetRandomBGRewards:
         structure: C_PvP.BattlefieldCurrencyReward
   - name: roleShortageBonus
     nilable: true
-    type:
-      structure: C_PvP.RoleShortageReward
+    type: number
 C_PvP.GetRandomEpicBGInfo:
   inputs: {}
   outputs:
@@ -13651,8 +13647,7 @@ C_PvP.GetRandomEpicBGRewards:
         structure: C_PvP.BattlefieldCurrencyReward
   - name: roleShortageBonus
     nilable: true
-    type:
-      structure: C_PvP.RoleShortageReward
+    type: number
 C_PvP.GetRatedBGRewards:
   inputs: {}
   outputs:
@@ -13672,8 +13667,7 @@ C_PvP.GetRatedBGRewards:
         structure: C_PvP.BattlefieldCurrencyReward
   - name: roleShortageBonus
     nilable: true
-    type:
-      structure: C_PvP.RoleShortageReward
+    type: number
 C_PvP.GetRatedSoloShuffleMinItemLevel:
   inputs: {}
   outputs:
@@ -13698,8 +13692,7 @@ C_PvP.GetRatedSoloShuffleRewards:
         structure: C_PvP.BattlefieldCurrencyReward
   - name: roleShortageBonus
     nilable: true
-    type:
-      structure: C_PvP.RoleShortageReward
+    type: number
 C_PvP.GetRewardItemLevelsByTierEnum:
   inputs:
   - name: pvpTierEnum
