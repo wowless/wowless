@@ -492,7 +492,34 @@ lua2c(
 add_library(vstruct STATIC vstruct.c)
 target_link_libraries(vstruct elune)
 
-rock2c(wowless ${CMAKE_CURRENT_SOURCE_DIR}/wowless-scm-0.rockspec)
+lua2c(
+  wowless
+  build.data.flavors=${CMAKE_CURRENT_SOURCE_DIR}/build/data/flavors.lua
+  build.data.products=${CMAKE_CURRENT_SOURCE_DIR}/build/data/products.lua
+  build.data.stringenums=${CMAKE_CURRENT_SOURCE_DIR}/build/data/stringenums.lua
+  build.products.wow.data=${CMAKE_CURRENT_SOURCE_DIR}/build/products/wow/data.lua
+  build.products.wowt.data=${CMAKE_CURRENT_SOURCE_DIR}/build/products/wowt/data.lua
+  build.products.wowxptr.data=${CMAKE_CURRENT_SOURCE_DIR}/build/products/wowxptr/data.lua
+  build.products.wow_classic.data=${CMAKE_CURRENT_SOURCE_DIR}/build/products/wow_classic/data.lua
+  build.products.wow_classic_era.data=${CMAKE_CURRENT_SOURCE_DIR}/build/products/wow_classic_era/data.lua
+  build.products.wow_classic_era_ptr.data=${CMAKE_CURRENT_SOURCE_DIR}/build/products/wow_classic_era_ptr/data.lua
+  build.products.wow_classic_ptr.data=${CMAKE_CURRENT_SOURCE_DIR}/build/products/wow_classic_ptr/data.lua
+  wowapi.data=${CMAKE_CURRENT_SOURCE_DIR}/wowapi/data.lua
+  wowapi.loader=${CMAKE_CURRENT_SOURCE_DIR}/wowapi/loader.lua
+  wowapi.schema=${CMAKE_CURRENT_SOURCE_DIR}/wowapi/schema.lua
+  wowapi.uiobjects=${CMAKE_CURRENT_SOURCE_DIR}/wowapi/uiobjects.lua
+  wowapi.yaml=${CMAKE_CURRENT_SOURCE_DIR}/wowapi/yaml.lua
+  wowless.api=${CMAKE_CURRENT_SOURCE_DIR}/wowless/api.lua
+  wowless.blp=${CMAKE_CURRENT_SOURCE_DIR}/wowless/blp.lua
+  wowless.env=${CMAKE_CURRENT_SOURCE_DIR}/wowless/env.lua
+  wowless.hlist=${CMAKE_CURRENT_SOURCE_DIR}/wowless/hlist.lua
+  wowless.loader=${CMAKE_CURRENT_SOURCE_DIR}/wowless/loader.lua
+  wowless.png=${CMAKE_CURRENT_SOURCE_DIR}/wowless/png.lua
+  wowless.runner=${CMAKE_CURRENT_SOURCE_DIR}/wowless/runner.lua
+  wowless.typecheck=${CMAKE_CURRENT_SOURCE_DIR}/wowless/typecheck.lua
+  wowless.util=${CMAKE_CURRENT_SOURCE_DIR}/wowless/util.lua
+  wowless.xml=${CMAKE_CURRENT_SOURCE_DIR}/wowless/xml.lua
+)
 add_library(
   wowlesslib STATIC
   wowless.c
