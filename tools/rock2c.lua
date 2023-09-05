@@ -39,7 +39,6 @@ local package = rockspec.package:gsub('-', '')
 io.output(package .. '.c')
 io.write([[#include "lauxlib.h"
 #include "lualib.h"
-#include <string.h>
 struct module {
   const char *name;
   const char *code;
@@ -51,7 +50,7 @@ for k, v in sorted(modules) do
   io.write(('  {"%s", "%s", %d},\n'):format(k, v, v:len()))
 end
 io.write('};\n')
-io.write(('void preload_%s(lua_State *L) {\n'):format(package))
+io.write(('void preload_%s(lua_State *L) {'):format(package))
 io.write([[
   lua_getglobal(L, "package");
   lua_getfield(L, -1, "preload");
