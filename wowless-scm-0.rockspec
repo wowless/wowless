@@ -22,5 +22,15 @@ build_dependencies = {
 dependencies = {}
 build = {
   type = 'builtin',
-  modules = {},
+  modules = {
+    ['wowapi.data'] = 'wowapi/data.lua',
+    ['wowapi.schema'] = 'wowapi/schema.lua',
+    ['wowapi.yaml'] = 'wowapi/yaml.lua',
+    ['wowless.api'] = 'wowless/api.lua',
+    ['wowless.blp'] = 'wowless/blp.lua',
+    ['wowless.hlist'] = 'wowless/hlist.lua',
+    ['wowless.png'] = 'wowless/png.lua',
+    ['wowless.typecheck'] = 'wowless/typecheck.lua',
+    ['wowless.util'] = 'wowless/util.lua',
+  },
 }

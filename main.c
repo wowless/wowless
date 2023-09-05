@@ -20,6 +20,7 @@ extern void preload_penlight(lua_State *);
 extern void preload_say(lua_State *);
 extern void preload_tsort(lua_State *);
 extern void preload_vstruct(lua_State *);
+extern void preload_wowless(lua_State *);
 
 struct module {
   const char *name;
@@ -51,9 +52,10 @@ int main(int argc, char **argv) {
   preload_say(L);
   preload_tsort(L);
   preload_vstruct(L);
+  preload_wowless(L);
   lua_getglobal(L, "package");
   lua_getfield(L, -1, "loaders");
-  lua_createtable(L, 2, 0);
+  lua_createtable(L, 1, 0);
   lua_rawgeti(L, -2, 1);
   lua_rawseti(L, -2, -1);
   lua_setfield(L, -1, "loaders");

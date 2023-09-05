@@ -386,8 +386,10 @@ rock2c(vstruct ${vstruct_SOURCE_DIR}/vstruct-2.1.1-1.rockspec)
 add_library(vstruct STATIC vstruct.c)
 target_link_libraries(vstruct elune)
 
+rock2c(wowless ${CMAKE_CURRENT_SOURCE_DIR}/wowless-scm-0.rockspec)
 add_library(
   wowlesslib STATIC
+  wowless.c
   wowless/ext.c
 )
 target_link_libraries(wowlesslib elune)
