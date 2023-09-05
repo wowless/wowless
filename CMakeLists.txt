@@ -147,13 +147,15 @@ set_property(
 )
 target_include_directories(yaml PUBLIC ${yaml_SOURCE_DIR}/include)
 
-macro(rock2c module rockspec)
+function(lua2c name)
+  set(deps ${ARGN})
+  list(TRANSFORM deps REPLACE "^.*=" "")
   add_custom_command(
-    OUTPUT ${module}.c
-    COMMAND bootstraplua ${CMAKE_CURRENT_SOURCE_DIR}/tools/rock2c.lua ${rockspec}
-    DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/tools/rock2c.lua ${rockspec}
+    OUTPUT ${name}.c
+    COMMAND bootstraplua ${CMAKE_CURRENT_SOURCE_DIR}/tools/lua2c.lua ${name} ${ARGN}
+    DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/tools/lua2c.lua ${deps}
   )
-endmacro()
+endfunction()
 
 FetchContent_Declare(
   lyaml
@@ -162,18 +164,13 @@ FetchContent_Declare(
   SOURCE_SUBDIR disable_cmakelists_txt
 )
 FetchContent_MakeAvailable(lyaml)
-file(WRITE ${lyaml_SOURCE_DIR}/dummy.rockspec [=[
-package = 'lyaml'
-build = {
-  modules = {
-    ['lyaml.explicit'] = 'lib/lyaml/explicit.lua',
-    ['lyaml.functional'] = 'lib/lyaml/functional.lua',
-    ['lyaml.implicit'] = 'lib/lyaml/implicit.lua',
-    ['lyaml.init'] = 'lib/lyaml/init.lua',
-  },
-}
-]=])
-rock2c(lyaml ${lyaml_SOURCE_DIR}/dummy.rockspec)
+lua2c(
+  lyaml
+  lyaml=${lyaml_SOURCE_DIR}/lib/lyaml/init.lua
+  lyaml.explicit=${lyaml_SOURCE_DIR}/lib/lyaml/explicit.lua
+  lyaml.functional=${lyaml_SOURCE_DIR}/lib/lyaml/functional.lua
+  lyaml.implicit=${lyaml_SOURCE_DIR}/lib/lyaml/implicit.lua
+)
 add_library(
   lyaml STATIC
   lyaml.c
@@ -276,7 +273,7 @@ FetchContent_Declare(
   SOURCE_SUBDIR disable_cmakelists_txt
 )
 FetchContent_MakeAvailable(say)
-rock2c(say ${say_SOURCE_DIR}/say-scm-1.rockspec)
+lua2c(say say=${say_SOURCE_DIR}/src/say/init.lua)
 add_library(say STATIC say.c)
 target_link_libraries(say elune)
 
@@ -287,7 +284,38 @@ FetchContent_Declare(
   SOURCE_SUBDIR disable_cmakelists_txt
 )
 FetchContent_MakeAvailable(luassert)
-rock2c(luassert ${luassert_SOURCE_DIR}/luassert-scm-1.rockspec)
+lua2c(
+  luassert
+  luassert.compatibility=${luassert_SOURCE_DIR}/src/compatibility.lua
+  luassert.state=${luassert_SOURCE_DIR}/src/state.lua
+  luassert.util=${luassert_SOURCE_DIR}/src/util.lua
+  luassert.spy=${luassert_SOURCE_DIR}/src/spy.lua
+  luassert.stub=${luassert_SOURCE_DIR}/src/stub.lua
+  luassert.assert=${luassert_SOURCE_DIR}/src/assert.lua
+  luassert.modifiers=${luassert_SOURCE_DIR}/src/modifiers.lua
+  luassert.assertions=${luassert_SOURCE_DIR}/src/assertions.lua
+  luassert.array=${luassert_SOURCE_DIR}/src/array.lua
+  luassert.namespaces=${luassert_SOURCE_DIR}/src/namespaces.lua
+  luassert.match=${luassert_SOURCE_DIR}/src/match.lua
+  luassert.mock=${luassert_SOURCE_DIR}/src/mock.lua
+  luassert=${luassert_SOURCE_DIR}/src/init.lua
+  luassert.matchers=${luassert_SOURCE_DIR}/src/matchers/init.lua
+  luassert.matchers.core=${luassert_SOURCE_DIR}/src/matchers/core.lua
+  luassert.matchers.composite=${luassert_SOURCE_DIR}/src/matchers/composite.lua
+  luassert.formatters=${luassert_SOURCE_DIR}/src/formatters/init.lua
+  luassert.formatters.binarystring=${luassert_SOURCE_DIR}/src/formatters/binarystring.lua
+  luassert.languages.ar=${luassert_SOURCE_DIR}/src/languages/ar.lua
+  luassert.languages.de=${luassert_SOURCE_DIR}/src/languages/de.lua
+  luassert.languages.en=${luassert_SOURCE_DIR}/src/languages/en.lua
+  luassert.languages.fr=${luassert_SOURCE_DIR}/src/languages/fr.lua
+  luassert.languages.is=${luassert_SOURCE_DIR}/src/languages/is.lua
+  luassert.languages.ja=${luassert_SOURCE_DIR}/src/languages/ja.lua
+  luassert.languages.ko=${luassert_SOURCE_DIR}/src/languages/ko.lua
+  luassert.languages.nl=${luassert_SOURCE_DIR}/src/languages/nl.lua
+  luassert.languages.ru=${luassert_SOURCE_DIR}/src/languages/ru.lua
+  luassert.languages.ua=${luassert_SOURCE_DIR}/src/languages/ua.lua
+  luassert.languages.zh=${luassert_SOURCE_DIR}/src/languages/zh.lua
+)
 add_library(luassert STATIC luassert.c)
 target_link_libraries(luassert elune say)
 
@@ -298,7 +326,7 @@ FetchContent_Declare(
   SOURCE_SUBDIR disable_cmakelists_txt
 )
 FetchContent_MakeAvailable(argparse)
-rock2c(argparse ${argparse_SOURCE_DIR}/argparse-scm-2.rockspec)
+lua2c(argparse argparse=${argparse_SOURCE_DIR}/src/argparse.lua)
 add_library(argparse STATIC argparse.c)
 target_link_libraries(argparse elune)
 
@@ -309,7 +337,7 @@ FetchContent_Declare(
   SOURCE_SUBDIR disable_cmakelists_txt
 )
 FetchContent_MakeAvailable(date)
-rock2c(date ${date_SOURCE_DIR}/date-2.2-2.rockspec)
+lua2c(date date=${date_SOURCE_DIR}/src/date.lua)
 add_library(date STATIC date.c)
 target_link_libraries(date elune)
 
@@ -320,15 +348,7 @@ FetchContent_Declare(
   SOURCE_SUBDIR disable_cmakelists_txt
 )
 FetchContent_MakeAvailable(tsort)
-file(WRITE ${tsort_SOURCE_DIR}/dummy.rockspec [=[
-package = 'tsort'
-build = {
-  modules = {
-    ['resty.tsort'] = 'lib/resty/tsort.lua',
-  },
-}
-]=])
-rock2c(tsort ${tsort_SOURCE_DIR}/dummy.rockspec)
+lua2c(tsort resty.tsort=${tsort_SOURCE_DIR}/lib/resty/tsort.lua)
 add_library(tsort STATIC tsort.c)
 target_link_libraries(tsort elune)
 
@@ -339,12 +359,7 @@ FetchContent_Declare(
   SOURCE_SUBDIR disable_cmakelists_txt
 )
 FetchContent_MakeAvailable(minheap)
-file(
-  COPY_FILE
-  ${minheap_SOURCE_DIR}/rockspecs/minheap-scm-1.rockspec
-  ${minheap_SOURCE_DIR}/minheap-scm-1.rockspec
-)
-rock2c(minheap ${minheap_SOURCE_DIR}/minheap-scm-1.rockspec)
+lua2c(minheap minheap=${minheap_SOURCE_DIR}/minheap.lua)
 add_library(minheap STATIC minheap.c)
 target_link_libraries(minheap elune)
 
@@ -355,12 +370,25 @@ FetchContent_Declare(
   SOURCE_SUBDIR disable_cmakelists_txt
 )
 FetchContent_MakeAvailable(luapath)
-file(
-  COPY_FILE
-  ${luapath_SOURCE_DIR}/rockspecs/lua-path-scm-0.rockspec
-  ${luapath_SOURCE_DIR}/lua-path-scm-0.rockspec
+lua2c(
+  luapath
+  path=${luapath_SOURCE_DIR}/lua/path.lua
+  path.fs=${luapath_SOURCE_DIR}/lua/path/fs.lua
+  path.findfile=${luapath_SOURCE_DIR}/lua/path/findfile.lua
+  path.lfs.fs=${luapath_SOURCE_DIR}/lua/path/lfs/fs.lua
+  path.syscall.fs=${luapath_SOURCE_DIR}/lua/path/syscall/fs.lua
+  path.lfs.impl.fs=${luapath_SOURCE_DIR}/lua/path/lfs/impl/fs.lua
+  path.module=${luapath_SOURCE_DIR}/lua/path/module.lua
+  path.win32.alien.fs=${luapath_SOURCE_DIR}/lua/path/win32/alien/fs.lua
+  path.win32.alien.types=${luapath_SOURCE_DIR}/lua/path/win32/alien/types.lua
+  path.win32.alien.utils=${luapath_SOURCE_DIR}/lua/path/win32/alien/utils.lua
+  path.win32.alien.wcs=${luapath_SOURCE_DIR}/lua/path/win32/alien/wcs.lua
+  path.win32.ffi.fs=${luapath_SOURCE_DIR}/lua/path/win32/ffi/fs.lua
+  path.win32.ffi.types=${luapath_SOURCE_DIR}/lua/path/win32/ffi/types.lua
+  path.win32.ffi.wcs=${luapath_SOURCE_DIR}/lua/path/win32/ffi/wcs.lua
+  path.win32.fs=${luapath_SOURCE_DIR}/lua/path/win32/fs.lua
+  path.win32.wcs=${luapath_SOURCE_DIR}/lua/path/win32/wcs.lua
 )
-rock2c(luapath ${luapath_SOURCE_DIR}/lua-path-scm-0.rockspec)
 add_library(luapath STATIC luapath.c)
 target_link_libraries(luapath elune)
 
@@ -371,7 +399,48 @@ FetchContent_Declare(
   SOURCE_SUBDIR disable_cmakelists_txt
 )
 FetchContent_MakeAvailable(penlight)
-rock2c(penlight ${penlight_SOURCE_DIR}/penlight-dev-1.rockspec)
+lua2c(
+  penlight
+  pl=${penlight_SOURCE_DIR}/lua/pl/init.lua
+  pl.strict=${penlight_SOURCE_DIR}/lua/pl/strict.lua
+  pl.dir=${penlight_SOURCE_DIR}/lua/pl/dir.lua
+  pl.operator=${penlight_SOURCE_DIR}/lua/pl/operator.lua
+  pl.input=${penlight_SOURCE_DIR}/lua/pl/input.lua
+  pl.config=${penlight_SOURCE_DIR}/lua/pl/config.lua
+  pl.seq=${penlight_SOURCE_DIR}/lua/pl/seq.lua
+  pl.stringio=${penlight_SOURCE_DIR}/lua/pl/stringio.lua
+  pl.text=${penlight_SOURCE_DIR}/lua/pl/text.lua
+  pl.test=${penlight_SOURCE_DIR}/lua/pl/test.lua
+  pl.tablex=${penlight_SOURCE_DIR}/lua/pl/tablex.lua
+  pl.app=${penlight_SOURCE_DIR}/lua/pl/app.lua
+  pl.stringx=${penlight_SOURCE_DIR}/lua/pl/stringx.lua
+  pl.lexer=${penlight_SOURCE_DIR}/lua/pl/lexer.lua
+  pl.utils=${penlight_SOURCE_DIR}/lua/pl/utils.lua
+  pl.compat=${penlight_SOURCE_DIR}/lua/pl/compat.lua
+  pl.sip=${penlight_SOURCE_DIR}/lua/pl/sip.lua
+  pl.permute=${penlight_SOURCE_DIR}/lua/pl/permute.lua
+  pl.pretty=${penlight_SOURCE_DIR}/lua/pl/pretty.lua
+  pl.class=${penlight_SOURCE_DIR}/lua/pl/class.lua
+  pl.List=${penlight_SOURCE_DIR}/lua/pl/List.lua
+  pl.data=${penlight_SOURCE_DIR}/lua/pl/data.lua
+  pl.Date=${penlight_SOURCE_DIR}/lua/pl/Date.lua
+  pl.luabalanced=${penlight_SOURCE_DIR}/lua/pl/luabalanced.lua
+  pl.comprehension=${penlight_SOURCE_DIR}/lua/pl/comprehension.lua
+  pl.path=${penlight_SOURCE_DIR}/lua/pl/path.lua
+  pl.array2d=${penlight_SOURCE_DIR}/lua/pl/array2d.lua
+  pl.func=${penlight_SOURCE_DIR}/lua/pl/func.lua
+  pl.lapp=${penlight_SOURCE_DIR}/lua/pl/lapp.lua
+  pl.file=${penlight_SOURCE_DIR}/lua/pl/file.lua
+  pl.template=${penlight_SOURCE_DIR}/lua/pl/template.lua
+  pl.Map=${penlight_SOURCE_DIR}/lua/pl/Map.lua
+  pl.MultiMap=${penlight_SOURCE_DIR}/lua/pl/MultiMap.lua
+  pl.OrderedMap=${penlight_SOURCE_DIR}/lua/pl/OrderedMap.lua
+  pl.Set=${penlight_SOURCE_DIR}/lua/pl/Set.lua
+  pl.xml=${penlight_SOURCE_DIR}/lua/pl/xml.lua
+  pl.url=${penlight_SOURCE_DIR}/lua/pl/url.lua
+  pl.types=${penlight_SOURCE_DIR}/lua/pl/types.lua
+  pl.import_into=${penlight_SOURCE_DIR}/lua/pl/import_into.lua
+)
 add_library(penlight STATIC penlight.c)
 target_link_libraries(penlight elune)
 
@@ -382,7 +451,44 @@ FetchContent_Declare(
   SOURCE_SUBDIR disable_cmakelists_txt
 )
 FetchContent_MakeAvailable(vstruct)
-rock2c(vstruct ${vstruct_SOURCE_DIR}/vstruct-2.1.1-1.rockspec)
+lua2c(
+  vstruct
+  vstruct.api=${vstruct_SOURCE_DIR}/api.lua
+  vstruct.ast=${vstruct_SOURCE_DIR}/ast.lua
+  vstruct.ast.Bitpack=${vstruct_SOURCE_DIR}/ast/Bitpack.lua
+  vstruct.ast.IO=${vstruct_SOURCE_DIR}/ast/IO.lua
+  vstruct.ast.List=${vstruct_SOURCE_DIR}/ast/List.lua
+  vstruct.ast.Name=${vstruct_SOURCE_DIR}/ast/Name.lua
+  vstruct.ast.Node=${vstruct_SOURCE_DIR}/ast/Node.lua
+  vstruct.ast.Repeat=${vstruct_SOURCE_DIR}/ast/Repeat.lua
+  vstruct.ast.Root=${vstruct_SOURCE_DIR}/ast/Root.lua
+  vstruct.ast.Table=${vstruct_SOURCE_DIR}/ast/Table.lua
+  vstruct.compat1x=${vstruct_SOURCE_DIR}/compat1x.lua
+  vstruct.cursor=${vstruct_SOURCE_DIR}/cursor.lua
+  vstruct.frexp=${vstruct_SOURCE_DIR}/frexp.lua
+  vstruct=${vstruct_SOURCE_DIR}/init.lua
+  vstruct.io=${vstruct_SOURCE_DIR}/io.lua
+  vstruct.io.a=${vstruct_SOURCE_DIR}/io/a.lua
+  vstruct.io.b=${vstruct_SOURCE_DIR}/io/b.lua
+  vstruct.io.bigendian=${vstruct_SOURCE_DIR}/io/bigendian.lua
+  vstruct.io.c=${vstruct_SOURCE_DIR}/io/c.lua
+  vstruct.io.defaults=${vstruct_SOURCE_DIR}/io/defaults.lua
+  vstruct.io.endianness=${vstruct_SOURCE_DIR}/io/endianness.lua
+  vstruct.io.f=${vstruct_SOURCE_DIR}/io/f.lua
+  vstruct.io.hostendian=${vstruct_SOURCE_DIR}/io/hostendian.lua
+  vstruct.io.i=${vstruct_SOURCE_DIR}/io/i.lua
+  vstruct.io.littleendian=${vstruct_SOURCE_DIR}/io/littleendian.lua
+  vstruct.io.m=${vstruct_SOURCE_DIR}/io/m.lua
+  vstruct.io.p=${vstruct_SOURCE_DIR}/io/p.lua
+  vstruct.io.s=${vstruct_SOURCE_DIR}/io/s.lua
+  vstruct.io.seekb=${vstruct_SOURCE_DIR}/io/seekb.lua
+  vstruct.io.seekf=${vstruct_SOURCE_DIR}/io/seekf.lua
+  vstruct.io.seekto=${vstruct_SOURCE_DIR}/io/seekto.lua
+  vstruct.io.u=${vstruct_SOURCE_DIR}/io/u.lua
+  vstruct.io.x=${vstruct_SOURCE_DIR}/io/x.lua
+  vstruct.io.z=${vstruct_SOURCE_DIR}/io/z.lua
+  vstruct.lexer=${vstruct_SOURCE_DIR}/lexer.lua
+)
 add_library(vstruct STATIC vstruct.c)
 target_link_libraries(vstruct elune)
 

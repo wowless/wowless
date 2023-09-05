@@ -16,20 +16,15 @@ local function sorted(t)
     end
   end)
 end
-local rockspec = {}
-setfenv(loadfile(arg[1]), rockspec)()
-local dir = arg[1]:sub(1, arg[1]:len() - arg[1]:reverse():find('/') + 1)
+local package = arg[1]
 local modules = {}
-for mk, mv in pairs(rockspec.build.modules) do
-  if mv:sub(-4) == '.lua' then
-    if mk:sub(-5) == '.init' then
-      mk = mk:sub(1, -6)
-    end
-    assert(not modules[mk])
-    modules[mk] = readfile(dir .. mv)
-  end
+for i = 2, #arg do
+  local p = arg[i]:find('=')
+  local mk = arg[i]:sub(1, p - 1)
+  local mv = arg[i]:sub(p + 1)
+  assert(not modules[mk])
+  modules[mk] = readfile(mv)
 end
-local package = rockspec.package:gsub('-', '')
 io.output(package .. '.c')
 io.write([[#include "lauxlib.h"
 #include "lualib.h"
