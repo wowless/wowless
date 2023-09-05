@@ -56,3 +56,10 @@ io.write([[
   lua_pop(L, 2);
 }
 ]])
+io.output(package .. '.c.deps')
+io.write(package .. '.c: ' .. arg[1])
+for _, mv in pairs(rockspec.build.modules) do
+  if mv:sub(-4) == '.lua' then
+    io.write(' ' .. dir .. mv)
+  end
+end

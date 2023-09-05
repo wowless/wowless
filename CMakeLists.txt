@@ -152,6 +152,7 @@ macro(rock2c module rockspec)
     OUTPUT ${module}.c
     COMMAND bootstraplua ${CMAKE_CURRENT_SOURCE_DIR}/tools/rock2c.lua ${rockspec}
     DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/tools/rock2c.lua ${rockspec}
+    DEPFILE ${module}.c.deps
   )
 endmacro()
 
