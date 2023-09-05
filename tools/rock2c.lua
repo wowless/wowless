@@ -27,7 +27,7 @@ for mk, mv in pairs(rockspec.build.modules) do
     end
     assert(not modules[mk])
     local text = readfile(dir .. mv)
-    local code = string.dump(loadstring(text, mv))
+    local code = string.dump(loadstring(text, mk))
     local escaped = {}
     for i = 1, code:len() do
       table.insert(escaped, string.format('\\%03o', code:byte(i)))
