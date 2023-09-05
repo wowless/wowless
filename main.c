@@ -55,10 +55,12 @@ int main(int argc, char **argv) {
   lua_pushstring(L, "./?.lua");
   lua_setfield(L, -2, "path");
   lua_getfield(L, -1, "loaders");
-  lua_pushnil(L);
-  lua_rawseti(L, -2, 4);
-  lua_pushnil(L);
-  lua_rawseti(L, -2, 3);
+  lua_createtable(L, 2, 0);
+  lua_rawgeti(L, -2, 1);
+  lua_rawseti(L, -2, -1);
+  lua_rawgeti(L, -2, 2);
+  lua_rawseti(L, -2, -1);
+  lua_setfield(L, -1, "loaders");
   lua_pop(L, 1);
   lua_getfield(L, -1, "preload");
   for (size_t i = 0; i < sizeof(modules) / sizeof(struct module); ++i) {
