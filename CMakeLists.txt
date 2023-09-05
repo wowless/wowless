@@ -14,7 +14,7 @@ FetchContent_MakeAvailable(utf8h)
 FetchContent_Declare(
   elune
   GIT_REPOSITORY https://github.com/meorawr/elune.git
-  GIT_TAG f051f75a3e963130c2d1ad98f56868bfc6b2798d
+  GIT_TAG 0c68467e655007f78ed8cb66bba8ae4b4698ced6
   SOURCE_SUBDIR disable_cmakelists_txt
 )
 FetchContent_MakeAvailable(elune)

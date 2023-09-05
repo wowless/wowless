@@ -26,31 +26,38 @@ for mk, mv in pairs(rockspec.build.modules) do
       mk = mk:sub(1, -6)
     end
     assert(not modules[mk])
-    modules[mk] = readfile(dir .. mv)
+    local text = readfile(dir .. mv)
+    local code = string.dump(loadstring(text, mv))
+    local escaped = {}
+    for i = 1, code:len() do
+      table.insert(escaped, string.format('\\%03o', code:byte(i)))
+    end
+    modules[mk] = table.concat(escaped, '')
   end
 end
 local package = rockspec.package:gsub('-', '')
 io.output(package .. '.c')
 io.write([[#include "lauxlib.h"
 #include "lualib.h"
+#include <string.h>
 struct module {
   const char *name;
   const char *code;
+  size_t size;
 };
 static const struct module modules[] = {
 ]])
 for k, v in sorted(modules) do
-  v = v:gsub('\\', '\\\\'):gsub('\n', '\\n\\\n'):gsub('"', '\\"')
-  io.write(('  {"%s", "%s"},\n'):format(k, v))
+  io.write(('  {"%s", "%s", %d},\n'):format(k, v, v:len()))
 end
 io.write('};\n')
-io.write(('void preload_%s(lua_State *L) {'):format(package))
+io.write(('void preload_%s(lua_State *L) {\n'):format(package))
 io.write([[
   lua_getglobal(L, "package");
   lua_getfield(L, -1, "preload");
   for (size_t i = 0; i < sizeof(modules) / sizeof(struct module); ++i) {
     const struct module *m = &modules[i];
-    luaL_loadstring(L, m->code);
+    luaL_loadbufferx(L, m->code, m->size, m->name, "b");
     lua_setfield(L, -2, m->name);
   }
   lua_pop(L, 2);
