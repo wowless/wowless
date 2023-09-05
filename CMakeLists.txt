@@ -69,11 +69,11 @@ block()
     ${elune_BINARY_DIR}/luaconf.h
   )
 endblock()
+target_include_directories(elune PRIVATE ${utf8h_SOURCE_DIR})
 target_include_directories(
   elune PUBLIC
   ${elune_SOURCE_DIR}/liblua/include
   ${elune_BINARY_DIR}
-  ${utf8h_SOURCE_DIR}
 )
 target_link_libraries(elune m)
 
