@@ -25,7 +25,7 @@ for i = 2, #arg do
   local mv = arg[i]:sub(p + 1)
   assert(not modules[mk] and not cmodules[mk])
   if mv == 'c' then
-    cmodules[mk] = true
+    cmodules[mk] = mk:gsub('%.', '_')
   else
     modules[mk] = readfile(mv)
   end
@@ -49,12 +49,12 @@ struct cmodule {
   lua_CFunction func;
 };
 ]])
-for k in sorted(cmodules) do
-  io.write('extern int luaopen_' .. k .. '(lua_State *);\n')
+for _, v in sorted(cmodules) do
+  io.write('extern int luaopen_' .. v .. '(lua_State *);\n')
 end
 io.write('static const struct cmodule cmodules[] = {\n')
-for k in sorted(cmodules) do
-  io.write(('  {"%s", luaopen_%s},\n'):format(k, k))
+for k, v in sorted(cmodules) do
+  io.write(('  {"%s", luaopen_%s},\n'):format(k, v))
 end
 io.write([[};
 void preload_]] .. package .. [[(lua_State *L) {

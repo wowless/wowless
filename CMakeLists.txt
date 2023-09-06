@@ -502,8 +502,10 @@ lua2c(
 add_library(vstruct STATIC vstruct.c)
 target_link_libraries(vstruct elune)
 
+lua2c(wowless wowless.ext=c)
 add_library(
   wowlesslib STATIC
+  wowless.c
   wowless/ext.c
 )
 target_link_libraries(wowlesslib elune)
