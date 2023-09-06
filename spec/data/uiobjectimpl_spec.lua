@@ -1,7 +1,7 @@
 describe('uiobjectimpl', function()
   it('has the right files', function()
     local expected = {}
-    for k in pairs(require('build/data/uiobjectimpl')) do
+    for k in pairs(require('build.data.uiobjectimpl')) do
       expected['data/uiobjects/' .. k .. '.lua'] = true
     end
     local actual = {}
