@@ -130,7 +130,7 @@ local rules = {
     command = 'touch $out',
   },
   yaml2lua = {
-    command = 'lua tools/yaml2lua.lua $in > $out',
+    command = 'lua tools/yaml2lua.lua $in $out',
   },
 }
 

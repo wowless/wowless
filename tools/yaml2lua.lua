@@ -1,2 +1,4 @@
+local t = assert(require('wowapi.yaml').parseFile(arg[1]))
+io.output(arg[2])
 io.write('return ')
-require('pl.pretty').dump((assert(require('wowapi.yaml').parseFile(arg[1]))))
+io.write(require('pl.pretty').write(t))
