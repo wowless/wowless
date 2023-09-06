@@ -4,13 +4,12 @@
 #include "lauxlib.h"
 #include "lualib.h"
 
-extern int luaopen_lfs(lua_State *);
-extern int luaopen_lsqlite3(lua_State *);
 extern int luaopen_wowless_ext(lua_State *);
-extern int luaopen_zlib(lua_State *);
 extern void preload_argparse(lua_State *);
 extern void preload_date(lua_State *);
 extern void preload_expat(lua_State *);
+extern void preload_lsqlite3(lua_State *);
+extern void preload_luafilesystem(lua_State *);
 extern void preload_luapath(lua_State *);
 extern void preload_luassert(lua_State *);
 extern void preload_lyaml(lua_State *);
@@ -19,16 +18,14 @@ extern void preload_penlight(lua_State *);
 extern void preload_say(lua_State *);
 extern void preload_tsort(lua_State *);
 extern void preload_vstruct(lua_State *);
+extern void preload_zlib(lua_State *);
 
 struct module {
   const char *name;
   lua_CFunction func;
 };
 static const struct module modules[] = {
-    {"lfs",         luaopen_lfs        },
-    {"lsqlite3",    luaopen_lsqlite3   },
     {"wowless.ext", luaopen_wowless_ext},
-    {"zlib",        luaopen_zlib       },
 };
 
 int main(int argc, char **argv) {
@@ -41,6 +38,8 @@ int main(int argc, char **argv) {
   preload_argparse(L);
   preload_date(L);
   preload_expat(L);
+  preload_lsqlite3(L);
+  preload_luafilesystem(L);
   preload_luapath(L);
   preload_luassert(L);
   preload_lyaml(L);
@@ -49,6 +48,7 @@ int main(int argc, char **argv) {
   preload_say(L);
   preload_tsort(L);
   preload_vstruct(L);
+  preload_zlib(L);
   lua_getglobal(L, "package");
   lua_pushstring(L, "./?.lua");
   lua_setfield(L, -2, "path");

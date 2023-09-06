@@ -224,8 +224,10 @@ FetchContent_Declare(
   SOURCE_SUBDIR disable_cmakelists_txt
 )
 FetchContent_MakeAvailable(lzlib)
+lua2c(zlib zlib=c)
 add_library(
   lzlib STATIC
+  zlib.c
   ${lzlib_SOURCE_DIR}/lzlib.c
 )
 target_link_libraries(lzlib elune zlib)
@@ -251,8 +253,10 @@ FetchContent_Declare(
   SOURCE_SUBDIR disable_cmakelists_txt
 )
 FetchContent_MakeAvailable(lsqlite3)
+lua2c(lsqlite3 lsqlite3=c)
 add_library(
   lsqlite3 STATIC
+  lsqlite3.c
   ${lsqlite3_SOURCE_DIR}/lsqlite3.c
 )
 target_link_libraries(lsqlite3 elune sqlite3)
@@ -264,8 +268,10 @@ FetchContent_Declare(
   SOURCE_SUBDIR disable_cmakelists_txt
 )
 FetchContent_MakeAvailable(luafilesystem)
+lua2c(luafilesystem lfs=c)
 add_library(
   luafilesystem STATIC
+  luafilesystem.c
   ${luafilesystem_SOURCE_DIR}/src/lfs.c
 )
 target_link_libraries(luafilesystem elune)
