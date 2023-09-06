@@ -18,12 +18,17 @@ local function sorted(t)
 end
 local package = arg[1]
 local modules = {}
+local cmodules = {}
 for i = 2, #arg do
   local p = arg[i]:find('=')
   local mk = arg[i]:sub(1, p - 1)
   local mv = arg[i]:sub(p + 1)
-  assert(not modules[mk])
-  modules[mk] = readfile(mv)
+  assert(not modules[mk] and not cmodules[mk])
+  if mv == 'c' then
+    cmodules[mk] = true
+  else
+    modules[mk] = readfile(mv)
+  end
 end
 io.output(package .. '.c')
 io.write([[#include "lauxlib.h"
@@ -38,14 +43,31 @@ for k, v in sorted(modules) do
   v = v:gsub('\\', '\\\\'):gsub('\n', '\\n\\\n'):gsub('"', '\\"')
   io.write(('  {"%s", "%s"},\n'):format(k, v))
 end
-io.write('};\n')
-io.write(('void preload_%s(lua_State *L) {'):format(package))
-io.write([[
+io.write([[};
+struct cmodule {
+  const char *name;
+  lua_CFunction func;
+};
+]])
+for k in sorted(cmodules) do
+  io.write('extern int luaopen_' .. k .. '(lua_State *);\n')
+end
+io.write('static const struct cmodule cmodules[] = {\n')
+for k in sorted(cmodules) do
+  io.write(('  {"%s", luaopen_%s},\n'):format(k, k))
+end
+io.write([[};
+void preload_]] .. package .. [[(lua_State *L) {
   lua_getglobal(L, "package");
   lua_getfield(L, -1, "preload");
   for (size_t i = 0; i < sizeof(modules) / sizeof(struct module); ++i) {
     const struct module *m = &modules[i];
     luaL_loadstring(L, m->code);
+    lua_setfield(L, -2, m->name);
+  }
+  for (size_t i = 0; i < sizeof(cmodules) / sizeof(struct cmodule); ++i) {
+    const struct cmodule *m = &cmodules[i];
+    lua_pushcfunction(L, m->func);
     lua_setfield(L, -2, m->name);
   }
   lua_pop(L, 2);

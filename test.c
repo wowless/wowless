@@ -6,12 +6,12 @@
 
 extern int luaopen_lfs(lua_State *);
 extern int luaopen_lsqlite3(lua_State *);
-extern int luaopen_lxp(lua_State *);
 extern int luaopen_wowless_ext(lua_State *);
 extern int luaopen_yaml(lua_State *);
 extern int luaopen_zlib(lua_State *);
 extern void preload_argparse(lua_State *);
 extern void preload_date(lua_State *);
+extern void preload_expat(lua_State *);
 extern void preload_luapath(lua_State *);
 extern void preload_luassert(lua_State *);
 extern void preload_lyaml(lua_State *);
@@ -28,7 +28,6 @@ struct module {
 static const struct module modules[] = {
     {"lfs",         luaopen_lfs        },
     {"lsqlite3",    luaopen_lsqlite3   },
-    {"lxp",         luaopen_lxp        },
     {"wowless.ext", luaopen_wowless_ext},
     {"yaml",        luaopen_yaml       },
     {"zlib",        luaopen_zlib       },
@@ -43,6 +42,7 @@ int main(int argc, char **argv) {
   luaL_openlibsx(L, LUALIB_STANDARD);
   preload_argparse(L);
   preload_date(L);
+  preload_expat(L);
   preload_luapath(L);
   preload_luassert(L);
   preload_lyaml(L);

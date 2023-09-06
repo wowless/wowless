@@ -106,6 +106,17 @@ target_include_directories(
   ${expat_BINARY_DIR}
 )
 
+function(lua2c name)
+  set(deps ${ARGN})
+  list(TRANSFORM deps REPLACE "^.*=" "")
+  list(REMOVE_ITEM deps c)
+  add_custom_command(
+    OUTPUT ${name}.c
+    COMMAND bootstraplua ${CMAKE_CURRENT_SOURCE_DIR}/tools/lua2c.lua ${name} ${ARGN}
+    DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/tools/lua2c.lua ${deps}
+  )
+endfunction()
+
 FetchContent_Declare(
   luaexpat
   GIT_REPOSITORY https://github.com/lunarmodules/luaexpat.git
@@ -113,8 +124,10 @@ FetchContent_Declare(
   SOURCE_SUBDIR disable_cmakelists_txt
 )
 FetchContent_MakeAvailable(luaexpat)
+lua2c(expat lxp=c)
 add_library(
   luaexpat STATIC
+  expat.c
   ${luaexpat_SOURCE_DIR}/src/lxplib.c
 )
 target_link_libraries(luaexpat elune expat)
@@ -146,16 +159,6 @@ set_property(
   YAML_VERSION_STRING="0.2.5"
 )
 target_include_directories(yaml PUBLIC ${yaml_SOURCE_DIR}/include)
-
-function(lua2c name)
-  set(deps ${ARGN})
-  list(TRANSFORM deps REPLACE "^.*=" "")
-  add_custom_command(
-    OUTPUT ${name}.c
-    COMMAND bootstraplua ${CMAKE_CURRENT_SOURCE_DIR}/tools/lua2c.lua ${name} ${ARGN}
-    DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/tools/lua2c.lua ${deps}
-  )
-endfunction()
 
 FetchContent_Declare(
   lyaml
