@@ -543,7 +543,7 @@ function(add_lua_executable name main)
   add_custom_command(
     OUTPUT ${luamain}
     COMMAND bootstraplua ${CMAKE_CURRENT_SOURCE_DIR}/tools/luamain.lua ${luamain} ${main} ${ARGN}
-    DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/tools/luamain.lua
+    DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/tools/luamain.lua ${main}
   )
   add_executable(${name} ${luamain})
   target_link_libraries(${name} elune ${ARGN})
@@ -551,7 +551,7 @@ endfunction()
 
 add_lua_executable(
   wowless
-  wowless.lua
+  ${CMAKE_CURRENT_SOURCE_DIR}/wowless.lua
   argparse
   date
   lsqlite3
@@ -669,7 +669,7 @@ add_library(testonly STATIC testonly.c)
 
 add_lua_executable(
   test
-  tools/runtests.lua
+  ${CMAKE_CURRENT_SOURCE_DIR}/tools/runtests.lua
   argparse
   date
   lsqlite3
