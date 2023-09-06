@@ -124,10 +124,10 @@ FetchContent_Declare(
   SOURCE_SUBDIR disable_cmakelists_txt
 )
 FetchContent_MakeAvailable(luaexpat)
-lua2c(expat lxp=c)
+lua2c(luaexpat lxp=c)
 add_library(
   luaexpat STATIC
-  expat.c
+  luaexpat.c
   ${luaexpat_SOURCE_DIR}/src/lxplib.c
 )
 target_link_libraries(luaexpat elune expat)
@@ -224,10 +224,10 @@ FetchContent_Declare(
   SOURCE_SUBDIR disable_cmakelists_txt
 )
 FetchContent_MakeAvailable(lzlib)
-lua2c(zlib zlib=c)
+lua2c(lzlib zlib=c)
 add_library(
   lzlib STATIC
-  zlib.c
+  lzlib.c
   ${lzlib_SOURCE_DIR}/lzlib.c
 )
 target_link_libraries(lzlib elune zlib)
@@ -327,7 +327,7 @@ lua2c(
   luassert.languages.zh=${luassert_SOURCE_DIR}/src/languages/zh.lua
 )
 add_library(luassert STATIC luassert.c)
-target_link_libraries(luassert elune say)
+target_link_libraries(luassert elune)
 
 FetchContent_Declare(
   argparse
@@ -502,20 +502,30 @@ lua2c(
 add_library(vstruct STATIC vstruct.c)
 target_link_libraries(vstruct elune)
 
-lua2c(wowless wowless.ext=c)
+lua2c(wowlesslib wowless.ext=c)
 add_library(
   wowlesslib STATIC
-  wowless.c
+  wowlesslib.c
   wowless/ext.c
 )
 target_link_libraries(wowlesslib elune)
 
-add_executable(wowless main.c)
-target_link_libraries(
+function(add_lua_executable name main)
+  set(luamain ${name}luamain.c)
+  add_custom_command(
+    OUTPUT ${luamain}
+    COMMAND bootstraplua ${CMAKE_CURRENT_SOURCE_DIR}/tools/luamain.lua ${luamain} ${main} ${ARGN}
+    DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/tools/luamain.lua
+  )
+  add_executable(${name} ${luamain})
+  target_link_libraries(${name} elune ${ARGN})
+endfunction()
+
+add_lua_executable(
   wowless
+  wowless.lua
   argparse
   date
-  elune
   lsqlite3
   luaexpat
   luafilesystem
@@ -529,12 +539,11 @@ target_link_libraries(
   wowlesslib
 )
 
-add_executable(test test.c)
-target_link_libraries(
+add_lua_executable(
   test
+  tools/runtests.lua
   argparse
   date
-  elune
   lsqlite3
   luaexpat
   luafilesystem
@@ -544,6 +553,7 @@ target_link_libraries(
   lzlib
   minheap
   penlight
+  say
   tsort
   vstruct
   wowlesslib
