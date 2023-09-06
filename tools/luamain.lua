@@ -1,5 +1,12 @@
+local function readfile(filename)
+  local f = assert(io.open(filename, 'r'))
+  local content = assert(f:read('*a'))
+  f:close()
+  return content
+end
 local outfile = arg[1]
 local main = arg[2]
+local text = readfile(main):gsub('\\', '\\\\'):gsub('\n', '\\n\\\n'):gsub('"', '\\"')
 local preloads = {}
 for i = 3, #arg do
   table.insert(preloads, arg[i])
@@ -45,7 +52,7 @@ io.write([[
     lua_rawseti(L, -2, i);
   }
   lua_setglobal(L, "arg");
-  if (luaL_dofile(L, "]] .. main .. [[") != 0) {
+  if (luaL_dostring(L, "]] .. text .. [[") != 0) {
     puts(lua_tostring(L, -1));
   }
   lua_close(L);
