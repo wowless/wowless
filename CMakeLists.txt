@@ -528,7 +528,7 @@ add_lua_executable(
 
 function(yaml2lua basename)
   set(input ${CMAKE_CURRENT_SOURCE_DIR}/data/${basename}.yaml)
-  set(output yamlluas/${basename}.lua)
+  set(output ${CMAKE_CURRENT_BINARY_DIR}/yamlluas/${basename}.lua)
   add_custom_command(
     OUTPUT ${output}
     COMMAND yaml2lua ${input} ${output}
