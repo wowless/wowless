@@ -502,7 +502,25 @@ lua2c(
 add_library(vstruct STATIC vstruct.c)
 target_link_libraries(vstruct elune)
 
-lua2c(wowlesslib wowless.ext=c)
+lua2c(
+  wowlesslib
+  wowapi.data=${CMAKE_CURRENT_SOURCE_DIR}/wowapi/data.lua
+  wowapi.loader=${CMAKE_CURRENT_SOURCE_DIR}/wowapi/loader.lua
+  wowapi.schema=${CMAKE_CURRENT_SOURCE_DIR}/wowapi/schema.lua
+  wowapi.uiobjects=${CMAKE_CURRENT_SOURCE_DIR}/wowapi/uiobjects.lua
+  wowapi.yaml=${CMAKE_CURRENT_SOURCE_DIR}/wowapi/yaml.lua
+  wowless.api=${CMAKE_CURRENT_SOURCE_DIR}/wowless/api.lua
+  wowless.blp=${CMAKE_CURRENT_SOURCE_DIR}/wowless/blp.lua
+  wowless.env=${CMAKE_CURRENT_SOURCE_DIR}/wowless/env.lua
+  wowless.ext=c
+  wowless.hlist=${CMAKE_CURRENT_SOURCE_DIR}/wowless/hlist.lua
+  wowless.loader=${CMAKE_CURRENT_SOURCE_DIR}/wowless/loader.lua
+  wowless.png=${CMAKE_CURRENT_SOURCE_DIR}/wowless/png.lua
+  wowless.runner=${CMAKE_CURRENT_SOURCE_DIR}/wowless/runner.lua
+  wowless.typecheck=${CMAKE_CURRENT_SOURCE_DIR}/wowless/typecheck.lua
+  wowless.util=${CMAKE_CURRENT_SOURCE_DIR}/wowless/util.lua
+  wowless.xml=${CMAKE_CURRENT_SOURCE_DIR}/wowless/xml.lua
+)
 add_library(
   wowlesslib STATIC
   wowlesslib.c
