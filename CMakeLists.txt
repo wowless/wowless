@@ -508,6 +508,25 @@ target_link_libraries(
   luaexpat
   luafilesystem
   luapath
+  lyaml
+  lzlib
+  minheap
+  penlight
+  tsort
+  vstruct
+  wowlesslib
+)
+
+add_executable(test test.c)
+target_link_libraries(
+  test
+  argparse
+  date
+  elune
+  lsqlite3
+  luaexpat
+  luafilesystem
+  luapath
   luassert
   lyaml
   lzlib
