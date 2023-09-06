@@ -96,7 +96,6 @@ local function run(cfg)
     end,
     events = function()
       local eventBlacklist = {
-        BARBER_SHOP_OPEN = true, -- issue #111
         INSPECT_HONOR_UPDATE = true, -- INSPECTED_UNIT shenanigans
         INSTANCE_LOCK_START = true,
         INSTANCE_LOCK_WARNING = true,
@@ -107,7 +106,6 @@ local function run(cfg)
         STORE_GUILD_MASTER_INFO_RECEIVED = true, -- SelectedRealm shenanigans
         UPDATE_MASTER_LOOT_LIST = true,
         VARIABLES_LOADED = true,
-        VOICE_CHAT_VAD_SETTINGS_UPDATED = true, -- inconsistent with nilable C_VoiceChat outputs
       }
       local skip = runnercfg.skip_events or {}
       -- TODO unify with wowapi/loader
