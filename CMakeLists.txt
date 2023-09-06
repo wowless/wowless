@@ -106,6 +106,17 @@ target_include_directories(
   ${expat_BINARY_DIR}
 )
 
+function(lua2c name)
+  set(deps ${ARGN})
+  list(TRANSFORM deps REPLACE "^.*=" "")
+  list(REMOVE_ITEM deps c)
+  add_custom_command(
+    OUTPUT ${name}.c
+    COMMAND bootstraplua ${CMAKE_CURRENT_SOURCE_DIR}/tools/lua2c.lua ${name} ${ARGN}
+    DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/tools/lua2c.lua ${deps}
+  )
+endfunction()
+
 FetchContent_Declare(
   luaexpat
   GIT_REPOSITORY https://github.com/lunarmodules/luaexpat.git
@@ -113,8 +124,10 @@ FetchContent_Declare(
   SOURCE_SUBDIR disable_cmakelists_txt
 )
 FetchContent_MakeAvailable(luaexpat)
+lua2c(luaexpat lxp=c)
 add_library(
   luaexpat STATIC
+  luaexpat.c
   ${luaexpat_SOURCE_DIR}/src/lxplib.c
 )
 target_link_libraries(luaexpat elune expat)
@@ -147,16 +160,6 @@ set_property(
 )
 target_include_directories(yaml PUBLIC ${yaml_SOURCE_DIR}/include)
 
-function(lua2c name)
-  set(deps ${ARGN})
-  list(TRANSFORM deps REPLACE "^.*=" "")
-  add_custom_command(
-    OUTPUT ${name}.c
-    COMMAND bootstraplua ${CMAKE_CURRENT_SOURCE_DIR}/tools/lua2c.lua ${name} ${ARGN}
-    DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/tools/lua2c.lua ${deps}
-  )
-endfunction()
-
 FetchContent_Declare(
   lyaml
   GIT_REPOSITORY https://github.com/gvvaughan/lyaml.git
@@ -170,6 +173,7 @@ lua2c(
   lyaml.explicit=${lyaml_SOURCE_DIR}/lib/lyaml/explicit.lua
   lyaml.functional=${lyaml_SOURCE_DIR}/lib/lyaml/functional.lua
   lyaml.implicit=${lyaml_SOURCE_DIR}/lib/lyaml/implicit.lua
+  yaml=c
 )
 add_library(
   lyaml STATIC
@@ -220,8 +224,10 @@ FetchContent_Declare(
   SOURCE_SUBDIR disable_cmakelists_txt
 )
 FetchContent_MakeAvailable(lzlib)
+lua2c(lzlib zlib=c)
 add_library(
   lzlib STATIC
+  lzlib.c
   ${lzlib_SOURCE_DIR}/lzlib.c
 )
 target_link_libraries(lzlib elune zlib)
@@ -247,8 +253,10 @@ FetchContent_Declare(
   SOURCE_SUBDIR disable_cmakelists_txt
 )
 FetchContent_MakeAvailable(lsqlite3)
+lua2c(lsqlite3 lsqlite3=c)
 add_library(
   lsqlite3 STATIC
+  lsqlite3.c
   ${lsqlite3_SOURCE_DIR}/lsqlite3.c
 )
 target_link_libraries(lsqlite3 elune sqlite3)
@@ -260,8 +268,10 @@ FetchContent_Declare(
   SOURCE_SUBDIR disable_cmakelists_txt
 )
 FetchContent_MakeAvailable(luafilesystem)
+lua2c(luafilesystem lfs=c)
 add_library(
   luafilesystem STATIC
+  luafilesystem.c
   ${luafilesystem_SOURCE_DIR}/src/lfs.c
 )
 target_link_libraries(luafilesystem elune)
@@ -317,7 +327,7 @@ lua2c(
   luassert.languages.zh=${luassert_SOURCE_DIR}/src/languages/zh.lua
 )
 add_library(luassert STATIC luassert.c)
-target_link_libraries(luassert elune say)
+target_link_libraries(luassert elune)
 
 FetchContent_Declare(
   argparse
@@ -493,7 +503,7 @@ add_library(vstruct STATIC vstruct.c)
 target_link_libraries(vstruct elune)
 
 lua2c(
-  wowless
+  wowlesslib
   build.data.flavors=${CMAKE_CURRENT_SOURCE_DIR}/build/data/flavors.lua
   build.data.products=${CMAKE_CURRENT_SOURCE_DIR}/build/data/products.lua
   build.data.stringenums=${CMAKE_CURRENT_SOURCE_DIR}/build/data/stringenums.lua
@@ -512,6 +522,7 @@ lua2c(
   wowless.api=${CMAKE_CURRENT_SOURCE_DIR}/wowless/api.lua
   wowless.blp=${CMAKE_CURRENT_SOURCE_DIR}/wowless/blp.lua
   wowless.env=${CMAKE_CURRENT_SOURCE_DIR}/wowless/env.lua
+  wowless.ext=c
   wowless.hlist=${CMAKE_CURRENT_SOURCE_DIR}/wowless/hlist.lua
   wowless.loader=${CMAKE_CURRENT_SOURCE_DIR}/wowless/loader.lua
   wowless.png=${CMAKE_CURRENT_SOURCE_DIR}/wowless/png.lua
@@ -522,17 +533,45 @@ lua2c(
 )
 add_library(
   wowlesslib STATIC
-  wowless.c
+  wowlesslib.c
   wowless/ext.c
 )
 target_link_libraries(wowlesslib elune)
 
-add_executable(wowless main.c)
-target_link_libraries(
+function(add_lua_executable name main)
+  set(luamain ${name}luamain.c)
+  add_custom_command(
+    OUTPUT ${luamain}
+    COMMAND bootstraplua ${CMAKE_CURRENT_SOURCE_DIR}/tools/luamain.lua ${luamain} ${main} ${ARGN}
+    DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/tools/luamain.lua
+  )
+  add_executable(${name} ${luamain})
+  target_link_libraries(${name} elune ${ARGN})
+endfunction()
+
+add_lua_executable(
   wowless
+  wowless.lua
   argparse
   date
-  elune
+  lsqlite3
+  luaexpat
+  luafilesystem
+  luapath
+  lyaml
+  lzlib
+  minheap
+  penlight
+  tsort
+  vstruct
+  wowlesslib
+)
+
+add_lua_executable(
+  test
+  tools/runtests.lua
+  argparse
+  date
   lsqlite3
   luaexpat
   luafilesystem
@@ -542,6 +581,7 @@ target_link_libraries(
   lzlib
   minheap
   penlight
+  say
   tsort
   vstruct
   wowlesslib
