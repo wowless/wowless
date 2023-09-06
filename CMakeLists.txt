@@ -520,6 +520,7 @@ target_link_libraries(wowlessyaml elune)
 add_lua_executable(
   yaml2lua
   ${CMAKE_CURRENT_SOURCE_DIR}/tools/yaml2lua.lua
+  luafilesystem
   lyaml
   penlight
   wowlessyaml
@@ -531,7 +532,7 @@ function(yaml2lua basename)
   add_custom_command(
     OUTPUT ${output}
     COMMAND yaml2lua ${input} ${output}
-    DEPENDS ${input}
+    DEPENDS yaml2lua ${input}
   )
 endfunction()
 

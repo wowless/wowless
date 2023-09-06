@@ -1,4 +1,3 @@
 local t = assert(require('wowapi.yaml').parseFile(arg[1]))
-io.output(arg[2])
-io.write('return ')
-io.write(require('pl.pretty').write(t))
+local s = 'return ' .. require('pl.pretty').write(t)
+require('pl.file').write(arg[2], s)
