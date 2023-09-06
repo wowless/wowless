@@ -96,7 +96,6 @@ local function run(cfg)
     end,
     events = function()
       local eventBlacklist = {
-        BARBER_SHOP_OPEN = true, -- issue #111
         INSPECT_HONOR_UPDATE = true, -- INSPECTED_UNIT shenanigans
         INSTANCE_LOCK_START = true,
         INSTANCE_LOCK_WARNING = true,
