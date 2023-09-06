@@ -542,9 +542,9 @@ yaml2lua(stringenums)
 
 lua2c(
   wowlesslib
-  build.data.flavors=yamlluas/flavors.lua
-  build.data.products=yamlluas/products.lua
-  build.data.stringenums=yamlluas/stringenums.lua
+  build.data.flavors=${CMAKE_CURRENT_BINARY_DIR}/yamlluas/flavors.lua
+  build.data.products=${CMAKE_CURRENT_BINARY_DIR}/yamlluas/products.lua
+  build.data.stringenums=${CMAKE_CURRENT_BINARY_DIR}/yamlluas/stringenums.lua
   wowapi.data=${CMAKE_CURRENT_SOURCE_DIR}/wowapi/data.lua
   wowapi.loader=${CMAKE_CURRENT_SOURCE_DIR}/wowapi/loader.lua
   wowapi.schema=${CMAKE_CURRENT_SOURCE_DIR}/wowapi/schema.lua
