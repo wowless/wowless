@@ -7,7 +7,6 @@
 extern int luaopen_lfs(lua_State *);
 extern int luaopen_lsqlite3(lua_State *);
 extern int luaopen_wowless_ext(lua_State *);
-extern int luaopen_yaml(lua_State *);
 extern int luaopen_zlib(lua_State *);
 extern void preload_argparse(lua_State *);
 extern void preload_date(lua_State *);
@@ -29,7 +28,6 @@ static const struct module modules[] = {
     {"lfs",         luaopen_lfs        },
     {"lsqlite3",    luaopen_lsqlite3   },
     {"wowless.ext", luaopen_wowless_ext},
-    {"yaml",        luaopen_yaml       },
     {"zlib",        luaopen_zlib       },
 };
 

@@ -173,6 +173,7 @@ lua2c(
   lyaml.explicit=${lyaml_SOURCE_DIR}/lib/lyaml/explicit.lua
   lyaml.functional=${lyaml_SOURCE_DIR}/lib/lyaml/functional.lua
   lyaml.implicit=${lyaml_SOURCE_DIR}/lib/lyaml/implicit.lua
+  yaml=c
 )
 add_library(
   lyaml STATIC
