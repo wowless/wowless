@@ -2641,6 +2641,42 @@ CHAT_MSG_PET_INFO:
     type: boolean
   - name: supressRaidIcons
     type: boolean
+CHAT_MSG_PING:
+  payload:
+  - name: text
+    type: string
+  - name: playerName
+    type: string
+  - name: languageName
+    type: string
+  - name: channelName
+    type: string
+  - name: playerName2
+    type: string
+  - name: specialFlags
+    type: string
+  - name: zoneChannelID
+    type: number
+  - name: channelIndex
+    type: number
+  - name: channelBaseName
+    type: string
+  - name: languageID
+    type: number
+  - name: lineID
+    type: number
+  - name: guid
+    type: string
+  - name: bnSenderID
+    type: number
+  - name: isMobile
+    type: boolean
+  - name: isSubtitle
+    type: boolean
+  - name: hideSenderInLetterbox
+    type: boolean
+  - name: supressRaidIcons
+    type: boolean
 CHAT_MSG_RAID:
   payload:
   - name: text
@@ -5597,6 +5633,10 @@ PETITION_CLOSED:
   payload: {}
 PETITION_SHOW:
   payload: {}
+PING_SYSTEM_ERROR:
+  payload:
+  - name: error
+    type: string
 PLAY_MOVIE:
   payload:
   - name: movieID
@@ -5847,6 +5887,8 @@ PVP_MATCH_COMPLETE:
   - name: duration
     type: number
 PVP_MATCH_INACTIVE:
+  payload: {}
+PVP_MATCH_STATE_CHANGED:
   payload: {}
 PVP_POWER_UPDATE:
   payload: {}
@@ -7599,12 +7641,10 @@ UPDATE_STEALTH:
   payload: {}
 UPDATE_SUMMONPETS_ACTION:
   payload: {}
-UPDATE_TRADESKILL_CAST_COMPLETE:
+UPDATE_TRADESKILL_CAST_STOPPED:
   payload:
   - name: isScrapping
     type: boolean
-UPDATE_TRADESKILL_RECAST:
-  payload: {}
 UPDATE_UI_WIDGET:
   payload:
   - name: widgetInfo
@@ -7978,6 +8018,17 @@ WARFRONT_COMPLETED:
     type: number
   - name: winner
     type: number
+WARGAME_INVITE_SENT:
+  payload: {}
+WARGAME_REQUEST_RESPONSE:
+  payload:
+  - name: responderGUID
+    type: string
+  - name: responderName
+    nilable: true
+    type: string
+  - name: accepted
+    type: boolean
 WARGAME_REQUESTED:
   payload:
   - name: opposingPartyMemberName

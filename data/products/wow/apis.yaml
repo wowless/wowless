@@ -434,6 +434,13 @@ C_ActionBar.ToggleAutoCastPetAction:
   - name: slotID
     type: number
   outputs: {}
+C_AddOns.DoesAddOnExist:
+  inputs:
+  - name: name
+    type: uiAddon
+  outputs:
+  - name: exists
+    type: boolean
 C_AddOns.GetAddOnMetadata:
   impl: GetAddOnMetadata
   inputs:
@@ -3274,9 +3281,11 @@ C_ChallengeMode.StartChallengeMode:
   outputs:
   - name: success
     type: boolean
+C_CharacterServices.AssignNameChangeDistribution: {}
 C_CharacterServices.AssignPCTDistribution: {}
 C_CharacterServices.AssignRaceOrFactionChangeDistribution: {}
 C_CharacterServices.AssignUpgradeDistribution: {}
+C_CharacterServices.CapitalizeCharName: {}
 C_CharacterServices.GetActiveCharacterUpgradeBoostType: {}
 C_CharacterServices.GetActiveClassTrialBoostType: {}
 C_CharacterServices.GetAutomaticBoost: {}
@@ -4011,6 +4020,11 @@ C_Club.DestroyTicket:
   - name: ticketId
     type: string
   outputs: {}
+C_Club.DoesAnyCommunityHaveUnreadMessages:
+  inputs: {}
+  outputs:
+  - name: hasUnreadMessages
+    type: boolean
 C_Club.DoesCommunityHaveMembersOfTheOppositeFaction:
   inputs:
   - name: clubId
@@ -6020,6 +6034,11 @@ C_Container.GetBackpackAutosortDisabled:
   outputs:
   - name: isDisabled
     type: boolean
+C_Container.GetBackpackSellJunkDisabled:
+  inputs: {}
+  outputs:
+  - name: isDisabled
+    type: boolean
 C_Container.GetBagName:
   inputs:
   - name: bagIndex
@@ -6254,6 +6273,11 @@ C_Container.PlayerHasHearthstone:
     nilable: true
     type: number
 C_Container.SetBackpackAutosortDisabled:
+  inputs:
+  - name: disable
+    type: boolean
+  outputs: {}
+C_Container.SetBackpackSellJunkDisabled:
   inputs:
   - name: disable
     type: boolean
@@ -6537,6 +6561,9 @@ C_ContentTracking.StopTracking:
       enum: ContentTrackingType
   - name: id
     type: number
+  - name: stopType
+    type:
+      enum: ContentTrackingStopType
   outputs: {}
 C_ContentTracking.ToggleTracking:
   inputs:
@@ -6545,6 +6572,9 @@ C_ContentTracking.ToggleTracking:
       enum: ContentTrackingType
   - name: id
     type: number
+  - name: stopType
+    type:
+      enum: ContentTrackingStopType
   outputs:
   - name: error
     nilable: true
@@ -9148,6 +9178,12 @@ C_IncomingSummon.IncomingSummonStatus:
   - name: status
     type:
       enum: SummonStatus
+C_InterfaceFileManifest.GetInterfaceArtFiles:
+  inputs: {}
+  outputs:
+  - name: images
+    type:
+      arrayof: string
 C_InvasionInfo.AreInvasionsAvailable:
   inputs: {}
   outputs:
@@ -11084,6 +11120,14 @@ C_MerchantFrame.IsMerchantItemRefundable:
   outputs:
   - name: refundable
     type: boolean
+C_MerchantFrame.IsSellAllJunkEnabled:
+  inputs: {}
+  outputs:
+  - name: enabled
+    type: boolean
+C_MerchantFrame.SellAllJunkItems:
+  inputs: {}
+  outputs: {}
 C_Minimap.CanTrackBattlePets:
   inputs: {}
   outputs:
@@ -12081,6 +12125,11 @@ C_PartyInfo.GetMinLevel:
   outputs:
   - name: minLevel
     type: number
+C_PartyInfo.GetRestrictPings:
+  inputs: {}
+  outputs:
+  - name: restrictToAssistants
+    type: boolean
 C_PartyInfo.InviteUnit:
   inputs:
   - name: targetName
@@ -12125,6 +12174,11 @@ C_PartyInfo.RequestInviteFromUnit:
     type: boolean
   - name: dps
     nilable: true
+    type: boolean
+  outputs: {}
+C_PartyInfo.SetRestrictPings:
+  inputs:
+  - name: restrictToAssistants
     type: boolean
   outputs: {}
 C_PartyPose.ExtraAction:
@@ -12733,6 +12787,138 @@ C_PetJournal.SummonRandomPet:
   - name: onlyFavorites
     type: boolean
   outputs: {}
+C_Ping.GetContextualPingTypeForUnit:
+  inputs:
+  - name: targetUnit
+    nilable: true
+    type: string
+  outputs:
+  - name: type
+    type:
+      enum: PingSubjectType
+C_Ping.SendMacroPing:
+  inputs:
+  - name: type
+    nilable: true
+    type:
+      enum: PingSubjectType
+  - name: targetToken
+    nilable: true
+    type: string
+  outputs: {}
+C_Ping.TogglePingListener:
+  inputs:
+  - name: down
+    type: boolean
+  outputs: {}
+C_PingSecure.ClearPendingPingInfo:
+  inputs: {}
+  outputs: {}
+C_PingSecure.CreateFrame:
+  inputs: {}
+  outputs: {}
+C_PingSecure.DisplayError:
+  inputs:
+  - name: error
+    type: string
+  outputs: {}
+C_PingSecure.GetCooldownInfo:
+  inputs: {}
+  outputs:
+  - name: cooldownInfo
+    type:
+      structure: PingCooldownInfo
+C_PingSecure.GetDefaultPingOptions:
+  inputs: {}
+  outputs:
+  - name: pingTypes
+    type:
+      arrayof:
+        structure: PingTypeInfo
+C_PingSecure.GetTargetPingReceiver:
+  inputs:
+  - name: mousePosX
+    type: number
+  - name: mousePosY
+    type: number
+  outputs:
+  - name: frame
+    type: table
+C_PingSecure.GetTargetWorldPing:
+  inputs:
+  - name: mousePosX
+    type: number
+  - name: mousePosY
+    type: number
+  outputs:
+  - name: foundTarget
+    type: boolean
+C_PingSecure.GetTargetWorldPingAndSend:
+  inputs: {}
+  outputs:
+  - name: result
+    type:
+      structure: ContextualWorldPingResult
+C_PingSecure.GetTextureKitForType:
+  inputs:
+  - name: type
+    type:
+      enum: PingSubjectType
+  outputs:
+  - name: uiTextureKitID
+    type: string
+C_PingSecure.SendPing:
+  inputs:
+  - name: type
+    type:
+      enum: PingSubjectType
+  - name: target
+    nilable: true
+    type: string
+  outputs:
+  - name: result
+    type:
+      enum: PingResult
+C_PingSecure.SetPendingPingOffScreenCallback:
+  inputs:
+  - name: cb
+    type: function
+  outputs: {}
+C_PingSecure.SetPingCooldownStartedCallback:
+  inputs:
+  - name: cb
+    type: function
+  outputs: {}
+C_PingSecure.SetPingPinFrameAddedCallback:
+  inputs:
+  - name: cb
+    type: function
+  outputs: {}
+C_PingSecure.SetPingPinFrameRemovedCallback:
+  inputs:
+  - name: cb
+    type: function
+  outputs: {}
+C_PingSecure.SetPingPinFrameScreenClampStateUpdatedCallback:
+  inputs:
+  - name: cb
+    type: function
+  outputs: {}
+C_PingSecure.SetPingRadialWheelCreatedCallback:
+  inputs:
+  - name: cb
+    type: function
+  outputs: {}
+C_PingSecure.SetSendMacroPingCallback:
+  inputs:
+  - name: cb
+    type: function
+  outputs: {}
+C_PingSecure.SetTogglePingListenerCallback:
+  inputs:
+  - name: cb
+    type: function
+  outputs: {}
 C_PlayerChoice.GetCurrentPlayerChoiceInfo:
   inputs: {}
   outputs:
@@ -12861,6 +13047,13 @@ C_PlayerInfo.GetName:
   - name: name
     nilable: true
     type: string
+C_PlayerInfo.GetPetStableCreatureDisplayInfoID:
+  inputs:
+  - name: index
+    type: number
+  outputs:
+  - name: creatureDisplayInfoID
+    type: number
 C_PlayerInfo.GetPlayerCharacterData:
   inputs: {}
   outputs:
@@ -17112,6 +17305,13 @@ C_ToyBoxInfo.SetDefaultFilters:
 C_TradeSkillUI.AnyRecipeCategoriesFiltered: {}
 C_TradeSkillUI.AreAnyInventorySlotsFiltered: {}
 C_TradeSkillUI.CanObliterateCursorItem: {}
+C_TradeSkillUI.CanStoreEnchantInItem:
+  inputs:
+  - name: itemGUID
+    type: string
+  outputs:
+  - name: canStore
+    type: boolean
 C_TradeSkillUI.CanTradeSkillListLink: {}
 C_TradeSkillUI.ClearInventorySlotFilter: {}
 C_TradeSkillUI.ClearPendingObliterateItem: {}
@@ -17963,6 +18163,13 @@ C_Traits.ConfigHasStagedChanges:
   outputs:
   - name: hasChanges
     type: boolean
+C_Traits.GenerateImportString:
+  inputs:
+  - name: configID
+    type: number
+  outputs:
+  - name: importString
+    type: string
 C_Traits.GenerateInspectImportString:
   inputs:
   - name: target
@@ -18054,7 +18261,6 @@ C_Traits.GetNodeInfo:
     type: number
   - name: nodeID
     type: number
-  mayreturnnothing: true
   outputs:
   - name: nodeInfo
     type:
@@ -19398,6 +19604,18 @@ C_UI.GetTopRightNotchSafeRegion:
     type: number
   - name: bottom
     type: number
+C_UI.GetUIParent:
+  impl: C_UI.GetUIParent
+  inputs: {}
+  outputs:
+  - name: uiParent
+    type: Frame
+C_UI.GetWorldFrame:
+  impl: C_UI.GetWorldFrame
+  inputs: {}
+  outputs:
+  - name: worldFrame
+    type: Frame
 C_UI.Reload:
   inputs: {}
   outputs: {}
@@ -19668,6 +19886,15 @@ C_UIWidgetManager.GetTopCenterWidgetSetID:
   outputs:
   - name: setID
     type: number
+C_UIWidgetManager.GetTugOfWarWidgetVisualizationInfo:
+  inputs:
+  - name: widgetID
+    type: number
+  outputs:
+  - name: widgetInfo
+    nilable: true
+    type:
+      structure: C_UIWidgetManager.TugOfWarWidgetVisualizationInfo
 C_UIWidgetManager.GetUnitPowerBarWidgetVisualizationInfo:
   inputs:
   - name: widgetID
