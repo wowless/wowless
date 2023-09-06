@@ -3,7 +3,7 @@ describe('apis', function()
     local wapi = require('wowless.api').new(function() end, 0, p)
     local typechecker = require('wowless.typecheck')(wapi)
     describe(p, function()
-      for name, api in pairs(require('build/data/products/' .. p .. '/apis')) do
+      for name, api in pairs(require('build.data.products.' .. p .. '.apis')) do
         describe(name, function()
           it('is not stubbed if provided by elune', function()
             if _G[name] then

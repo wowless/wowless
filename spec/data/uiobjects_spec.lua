@@ -8,7 +8,7 @@ describe('uiobjects', function()
       assert.same(value, val)
     end
     describe(p, function()
-      local uiobjects = require('build/data/products/' .. p .. '/uiobjects')
+      local uiobjects = require('build.data.products.' .. p .. '.uiobjects')
       describe('hierarchy', function()
         local g = {}
         for k, v in pairs(uiobjects) do
