@@ -567,6 +567,106 @@ add_lua_executable(
   wowlesslib
 )
 
+lua2c(
+  testonly
+  build.data.impl=${CMAKE_CURRENT_SOURCE_DIR}/build/data/impl.lua
+  build.data.products.wow.apis=${CMAKE_CURRENT_SOURCE_DIR}/build/data/products/wow/apis.lua
+  build.data.products.wowt.apis=${CMAKE_CURRENT_SOURCE_DIR}/build/data/products/wowt/apis.lua
+  build.data.products.wowxptr.apis=${CMAKE_CURRENT_SOURCE_DIR}/build/data/products/wowxptr/apis.lua
+  build.data.products.wow_classic.apis=${CMAKE_CURRENT_SOURCE_DIR}/build/data/products/wow_classic/apis.lua
+  build.data.products.wow_classic_era.apis=${CMAKE_CURRENT_SOURCE_DIR}/build/data/products/wow_classic_era/apis.lua
+  build.data.products.wow_classic_era_ptr.apis=${CMAKE_CURRENT_SOURCE_DIR}/build/data/products/wow_classic_era_ptr/apis.lua
+  build.data.products.wow_classic_ptr.apis=${CMAKE_CURRENT_SOURCE_DIR}/build/data/products/wow_classic_ptr/apis.lua
+  build.data.products.wow.build=${CMAKE_CURRENT_SOURCE_DIR}/build/data/products/wow/build.lua
+  build.data.products.wowt.build=${CMAKE_CURRENT_SOURCE_DIR}/build/data/products/wowt/build.lua
+  build.data.products.wowxptr.build=${CMAKE_CURRENT_SOURCE_DIR}/build/data/products/wowxptr/build.lua
+  build.data.products.wow_classic.build=${CMAKE_CURRENT_SOURCE_DIR}/build/data/products/wow_classic/build.lua
+  build.data.products.wow_classic_era.build=${CMAKE_CURRENT_SOURCE_DIR}/build/data/products/wow_classic_era/build.lua
+  build.data.products.wow_classic_era_ptr.build=${CMAKE_CURRENT_SOURCE_DIR}/build/data/products/wow_classic_era_ptr/build.lua
+  build.data.products.wow_classic_ptr.build=${CMAKE_CURRENT_SOURCE_DIR}/build/data/products/wow_classic_ptr/build.lua
+  build.data.products.wow.config=${CMAKE_CURRENT_SOURCE_DIR}/build/data/products/wow/config.lua
+  build.data.products.wowt.config=${CMAKE_CURRENT_SOURCE_DIR}/build/data/products/wowt/config.lua
+  build.data.products.wowxptr.config=${CMAKE_CURRENT_SOURCE_DIR}/build/data/products/wowxptr/config.lua
+  build.data.products.wow_classic.config=${CMAKE_CURRENT_SOURCE_DIR}/build/data/products/wow_classic/config.lua
+  build.data.products.wow_classic_era.config=${CMAKE_CURRENT_SOURCE_DIR}/build/data/products/wow_classic_era/config.lua
+  build.data.products.wow_classic_era_ptr.config=${CMAKE_CURRENT_SOURCE_DIR}/build/data/products/wow_classic_era_ptr/config.lua
+  build.data.products.wow_classic_ptr.config=${CMAKE_CURRENT_SOURCE_DIR}/build/data/products/wow_classic_ptr/config.lua
+  build.data.products.wow.cvars=${CMAKE_CURRENT_SOURCE_DIR}/build/data/products/wow/cvars.lua
+  build.data.products.wowt.cvars=${CMAKE_CURRENT_SOURCE_DIR}/build/data/products/wowt/cvars.lua
+  build.data.products.wowxptr.cvars=${CMAKE_CURRENT_SOURCE_DIR}/build/data/products/wowxptr/cvars.lua
+  build.data.products.wow_classic.cvars=${CMAKE_CURRENT_SOURCE_DIR}/build/data/products/wow_classic/cvars.lua
+  build.data.products.wow_classic_era.cvars=${CMAKE_CURRENT_SOURCE_DIR}/build/data/products/wow_classic_era/cvars.lua
+  build.data.products.wow_classic_era_ptr.cvars=${CMAKE_CURRENT_SOURCE_DIR}/build/data/products/wow_classic_era_ptr/cvars.lua
+  build.data.products.wow_classic_ptr.cvars=${CMAKE_CURRENT_SOURCE_DIR}/build/data/products/wow_classic_ptr/cvars.lua
+  build.data.products.wow.events=${CMAKE_CURRENT_SOURCE_DIR}/build/data/products/wow/events.lua
+  build.data.products.wowt.events=${CMAKE_CURRENT_SOURCE_DIR}/build/data/products/wowt/events.lua
+  build.data.products.wowxptr.events=${CMAKE_CURRENT_SOURCE_DIR}/build/data/products/wowxptr/events.lua
+  build.data.products.wow_classic.events=${CMAKE_CURRENT_SOURCE_DIR}/build/data/products/wow_classic/events.lua
+  build.data.products.wow_classic_era.events=${CMAKE_CURRENT_SOURCE_DIR}/build/data/products/wow_classic_era/events.lua
+  build.data.products.wow_classic_era_ptr.events=${CMAKE_CURRENT_SOURCE_DIR}/build/data/products/wow_classic_era_ptr/events.lua
+  build.data.products.wow_classic_ptr.events=${CMAKE_CURRENT_SOURCE_DIR}/build/data/products/wow_classic_ptr/events.lua
+  build.data.products.wow.globals=${CMAKE_CURRENT_SOURCE_DIR}/build/data/products/wow/globals.lua
+  build.data.products.wowt.globals=${CMAKE_CURRENT_SOURCE_DIR}/build/data/products/wowt/globals.lua
+  build.data.products.wowxptr.globals=${CMAKE_CURRENT_SOURCE_DIR}/build/data/products/wowxptr/globals.lua
+  build.data.products.wow_classic.globals=${CMAKE_CURRENT_SOURCE_DIR}/build/data/products/wow_classic/globals.lua
+  build.data.products.wow_classic_era.globals=${CMAKE_CURRENT_SOURCE_DIR}/build/data/products/wow_classic_era/globals.lua
+  build.data.products.wow_classic_era_ptr.globals=${CMAKE_CURRENT_SOURCE_DIR}/build/data/products/wow_classic_era_ptr/globals.lua
+  build.data.products.wow_classic_ptr.globals=${CMAKE_CURRENT_SOURCE_DIR}/build/data/products/wow_classic_ptr/globals.lua
+  build.data.products.wow.structures=${CMAKE_CURRENT_SOURCE_DIR}/build/data/products/wow/structures.lua
+  build.data.products.wowt.structures=${CMAKE_CURRENT_SOURCE_DIR}/build/data/products/wowt/structures.lua
+  build.data.products.wowxptr.structures=${CMAKE_CURRENT_SOURCE_DIR}/build/data/products/wowxptr/structures.lua
+  build.data.products.wow_classic.structures=${CMAKE_CURRENT_SOURCE_DIR}/build/data/products/wow_classic/structures.lua
+  build.data.products.wow_classic_era.structures=${CMAKE_CURRENT_SOURCE_DIR}/build/data/products/wow_classic_era/structures.lua
+  build.data.products.wow_classic_era_ptr.structures=${CMAKE_CURRENT_SOURCE_DIR}/build/data/products/wow_classic_era_ptr/structures.lua
+  build.data.products.wow_classic_ptr.structures=${CMAKE_CURRENT_SOURCE_DIR}/build/data/products/wow_classic_ptr/structures.lua
+  build.data.products.wow.uiobjects=${CMAKE_CURRENT_SOURCE_DIR}/build/data/products/wow/uiobjects.lua
+  build.data.products.wowt.uiobjects=${CMAKE_CURRENT_SOURCE_DIR}/build/data/products/wowt/uiobjects.lua
+  build.data.products.wowxptr.uiobjects=${CMAKE_CURRENT_SOURCE_DIR}/build/data/products/wowxptr/uiobjects.lua
+  build.data.products.wow_classic.uiobjects=${CMAKE_CURRENT_SOURCE_DIR}/build/data/products/wow_classic/uiobjects.lua
+  build.data.products.wow_classic_era.uiobjects=${CMAKE_CURRENT_SOURCE_DIR}/build/data/products/wow_classic_era/uiobjects.lua
+  build.data.products.wow_classic_era_ptr.uiobjects=${CMAKE_CURRENT_SOURCE_DIR}/build/data/products/wow_classic_era_ptr/uiobjects.lua
+  build.data.products.wow_classic_ptr.uiobjects=${CMAKE_CURRENT_SOURCE_DIR}/build/data/products/wow_classic_ptr/uiobjects.lua
+  build.data.products.wow.xml=${CMAKE_CURRENT_SOURCE_DIR}/build/data/products/wow/xml.lua
+  build.data.products.wowt.xml=${CMAKE_CURRENT_SOURCE_DIR}/build/data/products/wowt/xml.lua
+  build.data.products.wowxptr.xml=${CMAKE_CURRENT_SOURCE_DIR}/build/data/products/wowxptr/xml.lua
+  build.data.products.wow_classic.xml=${CMAKE_CURRENT_SOURCE_DIR}/build/data/products/wow_classic/xml.lua
+  build.data.products.wow_classic_era.xml=${CMAKE_CURRENT_SOURCE_DIR}/build/data/products/wow_classic_era/xml.lua
+  build.data.products.wow_classic_era_ptr.xml=${CMAKE_CURRENT_SOURCE_DIR}/build/data/products/wow_classic_era_ptr/xml.lua
+  build.data.products.wow_classic_ptr.xml=${CMAKE_CURRENT_SOURCE_DIR}/build/data/products/wow_classic_ptr/xml.lua
+  build.data.schemas.addons=${CMAKE_CURRENT_SOURCE_DIR}/build/data/schemas/addons.lua
+  build.data.schemas.any=${CMAKE_CURRENT_SOURCE_DIR}/build/data/schemas/any.lua
+  build.data.schemas.apis=${CMAKE_CURRENT_SOURCE_DIR}/build/data/schemas/apis.lua
+  build.data.schemas.build=${CMAKE_CURRENT_SOURCE_DIR}/build/data/schemas/build.lua
+  build.data.schemas.config=${CMAKE_CURRENT_SOURCE_DIR}/build/data/schemas/config.lua
+  build.data.schemas.cvars=${CMAKE_CURRENT_SOURCE_DIR}/build/data/schemas/cvars.lua
+  build.data.schemas.docs=${CMAKE_CURRENT_SOURCE_DIR}/build/data/schemas/docs.lua
+  build.data.schemas.events=${CMAKE_CURRENT_SOURCE_DIR}/build/data/schemas/events.lua
+  build.data.schemas.flavors=${CMAKE_CURRENT_SOURCE_DIR}/build/data/schemas/flavors.lua
+  build.data.schemas.globals=${CMAKE_CURRENT_SOURCE_DIR}/build/data/schemas/globals.lua
+  build.data.schemas.impl=${CMAKE_CURRENT_SOURCE_DIR}/build/data/schemas/impl.lua
+  build.data.schemas.products=${CMAKE_CURRENT_SOURCE_DIR}/build/data/schemas/products.lua
+  build.data.schemas.schema=${CMAKE_CURRENT_SOURCE_DIR}/build/data/schemas/schema.lua
+  build.data.schemas.schematype=${CMAKE_CURRENT_SOURCE_DIR}/build/data/schemas/schematype.lua
+  build.data.schemas.state=${CMAKE_CURRENT_SOURCE_DIR}/build/data/schemas/state.lua
+  build.data.schemas.stringenums=${CMAKE_CURRENT_SOURCE_DIR}/build/data/schemas/stringenums.lua
+  build.data.schemas.structures=${CMAKE_CURRENT_SOURCE_DIR}/build/data/schemas/structures.lua
+  build.data.schemas.type=${CMAKE_CURRENT_SOURCE_DIR}/build/data/schemas/type.lua
+  build.data.schemas.uiobjectimpl=${CMAKE_CURRENT_SOURCE_DIR}/build/data/schemas/uiobjectimpl.lua
+  build.data.schemas.uiobjects=${CMAKE_CURRENT_SOURCE_DIR}/build/data/schemas/uiobjects.lua
+  build.data.schemas.xml=${CMAKE_CURRENT_SOURCE_DIR}/build/data/schemas/xml.lua
+  build.data.state.Addons=${CMAKE_CURRENT_SOURCE_DIR}/build/data/state/Addons.lua
+  build.data.state.Bindings=${CMAKE_CURRENT_SOURCE_DIR}/build/data/state/Bindings.lua
+  build.data.state.CVars=${CMAKE_CURRENT_SOURCE_DIR}/build/data/state/CVars.lua
+  build.data.state.Calendar=${CMAKE_CURRENT_SOURCE_DIR}/build/data/state/Calendar.lua
+  build.data.state.ModifiedClicks=${CMAKE_CURRENT_SOURCE_DIR}/build/data/state/ModifiedClicks.lua
+  build.data.state.System=${CMAKE_CURRENT_SOURCE_DIR}/build/data/state/System.lua
+  build.data.state.Talents=${CMAKE_CURRENT_SOURCE_DIR}/build/data/state/Talents.lua
+  build.data.state.Time=${CMAKE_CURRENT_SOURCE_DIR}/build/data/state/Time.lua
+  build.data.state.Units=${CMAKE_CURRENT_SOURCE_DIR}/build/data/state/Units.lua
+  build.data.uiobjectimpl=${CMAKE_CURRENT_SOURCE_DIR}/build/data/uiobjectimpl.lua
+)
+add_library(testonly STATIC testonly.c)
+
 add_lua_executable(
   test
   tools/runtests.lua
@@ -582,6 +682,7 @@ add_lua_executable(
   minheap
   penlight
   say
+  testonly
   tsort
   vstruct
   wowlesslib
