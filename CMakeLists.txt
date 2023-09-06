@@ -502,11 +502,47 @@ lua2c(
 add_library(vstruct STATIC vstruct.c)
 target_link_libraries(vstruct elune)
 
+function(add_lua_executable name main)
+  set(luamain ${name}luamain.c)
+  add_custom_command(
+    OUTPUT ${luamain}
+    COMMAND bootstraplua ${CMAKE_CURRENT_SOURCE_DIR}/tools/luamain.lua ${luamain} ${main} ${ARGN}
+    DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/tools/luamain.lua ${main}
+  )
+  add_executable(${name} ${luamain})
+  target_link_libraries(${name} elune ${ARGN})
+endfunction()
+
+lua2c(wowlessyaml wowapi.yaml=${CMAKE_CURRENT_SOURCE_DIR}/wowapi/yaml.lua)
+add_library(wowlessyaml wowlessyaml.c)
+
+add_lua_executable(
+  yaml2lua
+  ${CMAKE_CURRENT_SOURCE_DIR}/tools/yaml2lua.lua
+  lyaml
+  penlight
+  wowlessyaml
+)
+
+function(yaml2lua basename)
+  set(input ${CMAKE_CURRENT_SOURCE_DIR}/data/${basename}.yaml)
+  set(output yamlluas/${basename}.lua)
+  add_custom_command(
+    OUTPUT ${output}
+    COMMAND yaml2lua ${input} ${output}
+    DEPENDS ${input}
+  )
+endfunction()
+
+yaml2lua(flavors)
+yaml2lua(products)
+yaml2lua(stringenums)
+
 lua2c(
   wowlesslib
-  build.data.flavors=${CMAKE_CURRENT_SOURCE_DIR}/build/data/flavors.lua
-  build.data.products=${CMAKE_CURRENT_SOURCE_DIR}/build/data/products.lua
-  build.data.stringenums=${CMAKE_CURRENT_SOURCE_DIR}/build/data/stringenums.lua
+  build.data.flavors=yamlluas/flavors.lua
+  build.data.products=yamlluas/products.lua
+  build.data.stringenums=yamlluas/stringenums.lua
   build.products.wow.data=${CMAKE_CURRENT_SOURCE_DIR}/build/products/wow/data.lua
   build.products.wowt.data=${CMAKE_CURRENT_SOURCE_DIR}/build/products/wowt/data.lua
   build.products.wowxptr.data=${CMAKE_CURRENT_SOURCE_DIR}/build/products/wowxptr/data.lua
@@ -518,7 +554,6 @@ lua2c(
   wowapi.loader=${CMAKE_CURRENT_SOURCE_DIR}/wowapi/loader.lua
   wowapi.schema=${CMAKE_CURRENT_SOURCE_DIR}/wowapi/schema.lua
   wowapi.uiobjects=${CMAKE_CURRENT_SOURCE_DIR}/wowapi/uiobjects.lua
-  wowapi.yaml=${CMAKE_CURRENT_SOURCE_DIR}/wowapi/yaml.lua
   wowless.api=${CMAKE_CURRENT_SOURCE_DIR}/wowless/api.lua
   wowless.blp=${CMAKE_CURRENT_SOURCE_DIR}/wowless/blp.lua
   wowless.env=${CMAKE_CURRENT_SOURCE_DIR}/wowless/env.lua
@@ -538,17 +573,6 @@ add_library(
 )
 target_link_libraries(wowlesslib elune)
 
-function(add_lua_executable name main)
-  set(luamain ${name}luamain.c)
-  add_custom_command(
-    OUTPUT ${luamain}
-    COMMAND bootstraplua ${CMAKE_CURRENT_SOURCE_DIR}/tools/luamain.lua ${luamain} ${main} ${ARGN}
-    DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/tools/luamain.lua ${main}
-  )
-  add_executable(${name} ${luamain})
-  target_link_libraries(${name} elune ${ARGN})
-endfunction()
-
 add_lua_executable(
   wowless
   ${CMAKE_CURRENT_SOURCE_DIR}/wowless.lua
@@ -565,6 +589,7 @@ add_lua_executable(
   tsort
   vstruct
   wowlesslib
+  wowlessyaml
 )
 
 lua2c(
@@ -686,4 +711,5 @@ add_lua_executable(
   tsort
   vstruct
   wowlesslib
+  wowlessyaml
 )
