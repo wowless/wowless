@@ -572,6 +572,7 @@ add_library(
   ${cjson_SOURCE_DIR}/lua_cjson.c
   ${cjson_SOURCE_DIR}/strbuf.c
 )
+target_link_libraries(cjson elune)
 lua2c(luacjson cjson=c)
 add_library(luacjson luacjson.c)
 target_link_libraries(luacjson cjson elune)
