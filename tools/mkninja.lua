@@ -86,7 +86,7 @@ local rules = {
     command = 'sh bin/downloadaddon.sh $owner $repo $tag $out',
   },
   fetch = {
-    command = 'lua tools/fetch.lua $product && touch $out',
+    command = 'build/cmake/fetch $product && touch $out',
     pool = 'fetch_pool',
   },
   frame0 = {
@@ -328,10 +328,10 @@ for _, p in ipairs(productList) do
     args = { product = p },
     ins = {
       dblist,
+      'build/cmake/fetch',
       'build/data/products/' .. p .. '/build.lua',
       'build/listfile.lua',
       'build/tactkeys.lua',
-      'tools/fetch.lua',
     },
     outs = fetchStamp,
     rule = 'fetch',

@@ -701,6 +701,128 @@ add_strict_lua_executable(
   toolssqlite3ext
 )
 
+FetchContent_Declare(
+  luabitop
+  GIT_REPOSITORY https://github.com/luadist/luabitop
+  GIT_TAG 81bb23b0e737805442033535de8e6d204d0e5381
+  SOURCE_SUBDIR disable_cmakelists_txt
+)
+FetchContent_MakeAvailable(luabitop)
+lua2c(luabitop bit=c)
+add_library(luabitop STATIC luabitop.c ${luabitop_SOURCE_DIR}/bit.c)
+target_link_libraries(luabitop elune)
+
+FetchContent_Declare(
+  md5
+  GIT_REPOSITORY https://github.com/keplerproject/md5
+  GIT_TAG e6f25516910239111f06e2b838bf2f991161ba83
+  SOURCE_SUBDIR disable_cmakelists_txt
+)
+FetchContent_MakeAvailable(md5)
+lua2c(
+  md5
+  md5=${md5_SOURCE_DIR}/src/md5.lua
+  md5.core=c
+)
+add_library(
+  md5 STATIC
+  md5.c
+  ${md5_SOURCE_DIR}/src/md5.c
+  ${md5_SOURCE_DIR}/src/md5lib.c
+)
+target_link_libraries(md5 elune)
+
+FetchContent_Declare(
+  luasocket
+  GIT_REPOSITORY https://github.com/lunarmodules/luasocket
+  GIT_TAG 8c2ff7217e2a205eb107a6f48b04ff1b2b3090a1
+  SOURCE_SUBDIR disable_cmakelists_txt
+)
+FetchContent_MakeAvailable(luasocket)
+lua2c(
+  luasocket
+  ltn12=${luasocket_SOURCE_DIR}/src/ltn12.lua
+  mime=${luasocket_SOURCE_DIR}/src/mime.lua
+  mime.core=c
+  socket=${luasocket_SOURCE_DIR}/src/socket.lua
+  socket.core=c
+  socket.headers=${luasocket_SOURCE_DIR}/src/headers.lua
+  socket.http=${luasocket_SOURCE_DIR}/src/http.lua
+  socket.url=${luasocket_SOURCE_DIR}/src/url.lua
+)
+add_library(
+  luasocket STATIC
+  luasocket.c
+  ${luasocket_SOURCE_DIR}/src/auxiliar.c
+  ${luasocket_SOURCE_DIR}/src/buffer.c
+  ${luasocket_SOURCE_DIR}/src/compat.c
+  ${luasocket_SOURCE_DIR}/src/except.c
+  ${luasocket_SOURCE_DIR}/src/inet.c
+  ${luasocket_SOURCE_DIR}/src/io.c
+  ${luasocket_SOURCE_DIR}/src/luasocket.c
+  ${luasocket_SOURCE_DIR}/src/mime.c
+  ${luasocket_SOURCE_DIR}/src/options.c
+  ${luasocket_SOURCE_DIR}/src/timeout.c
+  ${luasocket_SOURCE_DIR}/src/select.c
+  ${luasocket_SOURCE_DIR}/src/tcp.c
+  ${luasocket_SOURCE_DIR}/src/udp.c
+  ${luasocket_SOURCE_DIR}/src/usocket.c
+)
+target_link_libraries(luasocket elune)
+
+FetchContent_Declare(
+  casc
+  URL https://luarocks.org/manifests/foxlit/luacasc-1.15-0.src.rock
+  URL_HASH SHA256=af37a4f6494f0fd707a66bed50a236622645b937c31fd4a2ef6a33b6c1a3e1b0
+  DOWNLOAD_NAME luacasc-1.15-0.src.rock.zip
+  SOURCE_SUBDIR disable_cmakelists_txt
+)
+FetchContent_MakeAvailable(casc)
+file(
+  ARCHIVE_EXTRACT
+  INPUT ${casc_SOURCE_DIR}/luacasc-1.15.zip
+  DESTINATION ${casc_SOURCE_DIR}
+)
+lua2c(
+  casc
+  casc=${casc_SOURCE_DIR}/luacasc/casc/init.lua
+  casc.bin=${casc_SOURCE_DIR}/luacasc/casc/bin.lua
+  casc.binc=c
+  casc.blte=${casc_SOURCE_DIR}/luacasc/casc/blte.lua
+  casc.bspatch=${casc_SOURCE_DIR}/luacasc/casc/bspatch.lua
+  casc.dbc=${casc_SOURCE_DIR}/luacasc/casc/dbc.lua
+  casc.encoding=${casc_SOURCE_DIR}/luacasc/casc/encoding.lua
+  casc.install=${casc_SOURCE_DIR}/luacasc/casc/install.lua
+  casc.jenkins96=${casc_SOURCE_DIR}/luacasc/casc/jenkins96.lua
+  casc.md5=${casc_SOURCE_DIR}/luacasc/casc/md5.lua
+  casc.platform=${casc_SOURCE_DIR}/luacasc/casc/platform.lua
+  casc.ribbit=${casc_SOURCE_DIR}/luacasc/casc/ribbit.lua
+  casc.root=${casc_SOURCE_DIR}/luacasc/casc/root.lua
+)
+add_library(
+  casc STATIC
+  casc.c
+  ${casc_SOURCE_DIR}/luacasc/casc/bin.c
+)
+target_link_libraries(casc elune)
+
+add_strict_lua_executable(
+  fetch
+  ${CMAKE_CURRENT_SOURCE_DIR}/tools/fetch.lua
+  argparse
+  casc
+  dbc
+  luabitop
+  luaexpat
+  luafilesystem
+  luasocket
+  luapath
+  lzlib
+  md5
+  penlight
+  toolsdbc
+)
+
 lua2c(
   wowlesslib
   build.data.flavors=yamlluas/flavors.lua
