@@ -14,7 +14,7 @@ FetchContent_MakeAvailable(utf8h)
 FetchContent_Declare(
   elune
   GIT_REPOSITORY https://github.com/meorawr/elune.git
-  GIT_TAG f051f75a3e963130c2d1ad98f56868bfc6b2798d
+  GIT_TAG 7fc7271922fbc0a371ef15d699ffa0b2be649a81
   SOURCE_SUBDIR disable_cmakelists_txt
 )
 FetchContent_MakeAvailable(elune)
@@ -62,7 +62,9 @@ add_library(
 block()
   set(LUA_CPATH_ESCAPED "")
   set(LUA_DIRSEP_ESCAPED "/")
+  set(LUA_DISABLE_LOADLIB true)
   set(LUA_PATH_ESCAPED "")
+  set(LUA_USE_POSIX true)
   set(LUAI_BITSINT 32)
   configure_file(
     ${elune_SOURCE_DIR}/liblua/include/luaconf.h.in
