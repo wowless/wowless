@@ -115,7 +115,7 @@ local rules = {
     deps = 'gcc',
   },
   render = {
-    command = 'lua tools/render.lua $in',
+    command = 'build/cmake/render $in',
     pool = 'fetch_pool',
   },
   run = {
@@ -366,9 +366,9 @@ for _, p in ipairs(productList) do
       args = { product = p },
       ins = { prefix .. '.yaml' },
       ins_implicit = {
+        'build/cmake/render',
         'build/tactkeys.lua',
         'data/products/' .. p .. '/build.yaml',
-        'tools/render.lua',
         'wowless/render.lua',
       },
       outs = { prefix .. '.png' },
