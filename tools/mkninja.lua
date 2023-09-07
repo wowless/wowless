@@ -110,7 +110,7 @@ local rules = {
     command = 'bash -c "set -o pipefail && build/cmake/test $in 2>&1 | tee $out"',
   },
   prep = {
-    command = 'lua tools/prep.lua $product',
+    command = 'build/cmake/prep $product',
     depfile = '$out.d',
     deps = 'gcc',
   },
@@ -401,10 +401,7 @@ for _, p in ipairs(productList) do
       product = p,
       restat = 1,
     },
-    ins_implicit = {
-      'tools/prep.lua',
-      'tools/util.lua',
-    },
+    ins_implicit = 'build/cmake/prep',
     outs = datalua,
     rule = 'prep',
   })

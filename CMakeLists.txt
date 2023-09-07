@@ -540,6 +540,22 @@ yaml2lua(flavors)
 yaml2lua(products)
 yaml2lua(stringenums)
 
+lua2c(wowlessutil wowless.util=${CMAKE_CURRENT_SOURCE_DIR}/wowless/util.lua)
+add_library(wowlessutil wowlessutil.c)
+target_link_libraries(wowlessutil elune)
+
+add_lua_executable(
+  prep
+  ${CMAKE_CURRENT_SOURCE_DIR}/tools/prep.lua
+  argparse
+  luafilesystem
+  luapath
+  lyaml
+  penlight
+  wowlessutil
+  wowlessyaml
+)
+
 lua2c(
   wowlesslib
   build.data.flavors=yamlluas/flavors.lua
@@ -558,7 +574,6 @@ lua2c(
   wowless.png=${CMAKE_CURRENT_SOURCE_DIR}/wowless/png.lua
   wowless.runner=${CMAKE_CURRENT_SOURCE_DIR}/wowless/runner.lua
   wowless.typecheck=${CMAKE_CURRENT_SOURCE_DIR}/wowless/typecheck.lua
-  wowless.util=${CMAKE_CURRENT_SOURCE_DIR}/wowless/util.lua
   wowless.xml=${CMAKE_CURRENT_SOURCE_DIR}/wowless/xml.lua
 )
 add_library(
@@ -584,6 +599,7 @@ add_lua_executable(
   tsort
   vstruct
   wowlesslib
+  wowlessutil
   wowlessyaml
 )
 
@@ -605,5 +621,6 @@ add_lua_executable(
   tsort
   vstruct
   wowlesslib
+  wowlessutil
   wowlessyaml
 )
