@@ -671,6 +671,7 @@ target_link_libraries(toolsdbc elune)
 FetchContent_Declare(
   dbc
   URL https://luarocks.org/manifests/foxlit/luadbc-1.12-1.src.rock
+  URL_HASH SHA256=70dcd264f6789d9a6f421652564ec0a3e46f16cfddf830d9b23a5cf0979f20f6
   DOWNLOAD_NAME luadbc-1.12-1.src.rock.zip
   SOURCE_SUBDIR disable_cmakelists_txt
 )
