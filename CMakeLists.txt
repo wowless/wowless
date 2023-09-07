@@ -559,6 +559,32 @@ lua2c(wowlessutil wowless.util=${CMAKE_CURRENT_SOURCE_DIR}/wowless/util.lua)
 add_library(wowlessutil wowlessutil.c)
 target_link_libraries(wowlessutil elune)
 
+FetchContent_Declare(
+  cjson
+  GIT_REPOSITORY https://github.com/openresty/lua-cjson
+  GIT_TAG 2bfad8f5eeb821357d2ada29506e864ff7ec947e
+  SOURCE_SUBDIR disable_cmakelists_txt
+)
+FetchContent_MakeAvailable(cjson)
+add_library(
+  cjson
+  ${cjson_SOURCE_DIR}/fpconv.c
+  ${cjson_SOURCE_DIR}/lua_cjson.c
+  ${cjson_SOURCE_DIR}/strbuf.c
+)
+lua2c(luacjson cjson=c)
+add_library(luacjson luacjson.c)
+target_link_libraries(luacjson cjson elune)
+
+add_strict_lua_executable(
+  listfile
+  ${CMAKE_CURRENT_SOURCE_DIR}/tools/listfile.lua
+  luacjson
+  luafilesystem
+  penlight
+  toolsutil
+)
+
 add_strict_lua_executable(
   prep
   ${CMAKE_CURRENT_SOURCE_DIR}/tools/prep.lua

@@ -97,7 +97,7 @@ local rules = {
     command = 'lua tools/gentest.lua -f $type -p $product',
   },
   mklistfile = {
-    command = 'lua tools/listfile.lua',
+    command = 'build/cmake/listfile',
   },
   mkninja = {
     command = 'lua tools/mkninja.lua',
@@ -252,8 +252,7 @@ local builds = {
       restat = 1,
     },
     ins_implicit = {
-      'tools/listfile.lua',
-      'tools/util.lua',
+      'build/cmake/listfile',
       'vendor/dbdefs/manifest.json',
     },
     outs_implicit = 'build/listfile.lua',

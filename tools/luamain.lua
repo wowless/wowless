@@ -67,6 +67,11 @@ io.write([[
   lua_setglobal(L, "arg");
   if (luaL_dostring(L, "]] .. text .. [[") != 0) {
     puts(lua_tostring(L, -1));
+]])
+io.write(strict and [[
+    return EXIT_FAILURE;
+]] or '')
+io.write([[
   }
   lua_close(L);
   return EXIT_SUCCESS;
