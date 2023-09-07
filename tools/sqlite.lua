@@ -1,14 +1,9 @@
 local lsqlite3 = require('lsqlite3')
 
-local quote = (function()
-  local moo = require('luasql.sqlite3').sqlite3():connect('')
-  return function(s)
-    return '\'' .. moo:escape(s) .. '\''
-  end
-end)()
+local sqlquote = require('tools.sqlite3ext').quote
 
 local function factory(theProduct)
-  local defs = require('build.products.' .. theProduct .. '.dbdefs')
+  local defs = dofile('build/products/' .. theProduct .. '/dbdefs.lua')
   for _, v in pairs(defs) do
     v.orderedfields = (function()
       local field2index = v.field2index
@@ -73,7 +68,7 @@ local function factory(theProduct)
             if ty == 'nil' then
               value = 'NULL'
             elseif ty == 'string' then
-              value = quote(value)
+              value = '\'' .. sqlquote(value) .. '\''
             elseif ty == 'number' then
               value = tostring(value)
             else

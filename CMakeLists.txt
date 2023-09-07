@@ -660,6 +660,46 @@ add_strict_lua_executable(
   wowlessyaml
 )
 
+lua2c(toolssqlite3ext tools.sqlite3ext=c)
+add_library(toolssqlite3ext STATIC tools/sqlite3ext.c toolssqlite3ext.c)
+target_link_libraries(toolssqlite3ext elune sqlite3)
+
+lua2c(toolsdbc tools.dbc=${CMAKE_CURRENT_SOURCE_DIR}/tools/dbc.lua)
+add_library(toolsdbc STATIC toolsdbc.c)
+target_link_libraries(toolsdbc elune)
+
+FetchContent_Declare(
+  dbc
+  URL https://luarocks.org/manifests/foxlit/luadbc-1.12-1.src.rock
+  DOWNLOAD_NAME luadbc-1.12-1.src.rock.zip
+  SOURCE_SUBDIR disable_cmakelists_txt
+)
+FetchContent_MakeAvailable(dbc)
+file(
+  ARCHIVE_EXTRACT
+  INPUT ${dbc_SOURCE_DIR}/luadbc-1.12.zip
+  DESTINATION ${dbc_SOURCE_DIR}
+)
+lua2c(
+  dbc
+  dbc=${dbc_SOURCE_DIR}/luadbc/dbc/init.lua
+  dbc.bin=${dbc_SOURCE_DIR}/luadbc/dbc/bin.lua
+)
+add_library(dbc STATIC dbc.c)
+target_link_libraries(dbc elune)
+
+add_strict_lua_executable(
+  sqlite
+  ${CMAKE_CURRENT_SOURCE_DIR}/tools/sqlite.lua
+  argparse
+  dbc
+  lsqlite3
+  luafilesystem
+  penlight
+  toolsdbc
+  toolssqlite3ext
+)
+
 lua2c(
   wowlesslib
   build.data.flavors=yamlluas/flavors.lua

@@ -67,7 +67,7 @@ local pools = {
 
 local rules = {
   dbdata = {
-    command = 'lua tools/sqlite.lua -f $product',
+    command = 'build/cmake/sqlite -f $product',
   },
   dbdefs = {
     command = 'build/cmake/dbdefs $product',
@@ -80,7 +80,7 @@ local rules = {
     deps = 'gcc',
   },
   dbschema = {
-    command = 'lua tools/sqlite.lua $product',
+    command = 'build/cmake/sqlite $product',
   },
   downloadrelease = {
     command = 'sh bin/downloadaddon.sh $owner $repo $tag $out',
@@ -379,7 +379,7 @@ for _, p in ipairs(productList) do
     args = { product = p },
     ins_implicit = {
       dbdefs,
-      'tools/sqlite.lua',
+      'build/cmake/sqlite',
     },
     outs = schemadb,
     rule = 'dbschema',
@@ -389,7 +389,7 @@ for _, p in ipairs(productList) do
     ins_implicit = {
       dbdefs,
       fetchStamp,
-      'tools/sqlite.lua',
+      'build/cmake/sqlite',
     },
     outs = datadb,
     rule = 'dbdata',
