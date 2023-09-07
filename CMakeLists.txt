@@ -1168,7 +1168,12 @@ lua2c(luamagick luamagick=c)
 add_library(luamagick STATIC luamagick.c ${luamagick_SOURCE_DIR}/luamagick.c)
 target_link_libraries(luamagick elune imagemagick)
 
-lua2c(wowlessrender wowless.render=${CMAKE_CURRENT_SOURCE_DIR}/wowless/render.lua)
+lua2c(
+  wowlessrender
+  wowless.blp=${CMAKE_CURRENT_SOURCE_DIR}/wowless/blp.lua
+  wowless.render=${CMAKE_CURRENT_SOURCE_DIR}/wowless/render.lua
+  wowless.png=${CMAKE_CURRENT_SOURCE_DIR}/wowless/png.lua
+)
 add_library(wowlessrender STATIC wowlessrender.c)
 target_link_libraries(wowlessrender elune)
 
@@ -1185,6 +1190,7 @@ add_strict_lua_executable(
   lzlib
   md5
   penlight
+  vstruct
   wowlessrender
   wowlessyaml
 )
@@ -1199,12 +1205,10 @@ lua2c(
   wowapi.schema=${CMAKE_CURRENT_SOURCE_DIR}/wowapi/schema.lua
   wowapi.uiobjects=${CMAKE_CURRENT_SOURCE_DIR}/wowapi/uiobjects.lua
   wowless.api=${CMAKE_CURRENT_SOURCE_DIR}/wowless/api.lua
-  wowless.blp=${CMAKE_CURRENT_SOURCE_DIR}/wowless/blp.lua
   wowless.env=${CMAKE_CURRENT_SOURCE_DIR}/wowless/env.lua
   wowless.ext=c
   wowless.hlist=${CMAKE_CURRENT_SOURCE_DIR}/wowless/hlist.lua
   wowless.loader=${CMAKE_CURRENT_SOURCE_DIR}/wowless/loader.lua
-  wowless.png=${CMAKE_CURRENT_SOURCE_DIR}/wowless/png.lua
   wowless.runner=${CMAKE_CURRENT_SOURCE_DIR}/wowless/runner.lua
   wowless.typecheck=${CMAKE_CURRENT_SOURCE_DIR}/wowless/typecheck.lua
   wowless.xml=${CMAKE_CURRENT_SOURCE_DIR}/wowless/xml.lua
@@ -1230,7 +1234,6 @@ add_lua_executable(
   minheap
   penlight
   tsort
-  vstruct
   wowlesslib
   wowlessutil
   wowlessyaml
@@ -1254,6 +1257,7 @@ add_lua_executable(
   tsort
   vstruct
   wowlesslib
+  wowlessrender
   wowlessutil
   wowlessyaml
 )
