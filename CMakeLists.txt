@@ -528,7 +528,7 @@ lua2c(wowlessyaml wowapi.yaml=${CMAKE_CURRENT_SOURCE_DIR}/wowapi/yaml.lua)
 add_library(wowlessyaml wowlessyaml.c)
 target_link_libraries(wowlessyaml elune)
 
-add_lua_executable(
+add_strict_lua_executable(
   yaml2lua
   ${CMAKE_CURRENT_SOURCE_DIR}/tools/yaml2lua.lua
   luafilesystem

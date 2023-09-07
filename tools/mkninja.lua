@@ -130,7 +130,7 @@ local rules = {
     command = 'touch $out',
   },
   yaml2lua = {
-    command = 'lua tools/yaml2lua.lua $in $out',
+    command = 'build/cmake/yaml2lua $in $out',
   },
 }
 
@@ -556,6 +556,7 @@ for _, yaml in ipairs(yamls) do
   table.insert(yamlluas, yamllua)
   table.insert(builds, {
     ins = yaml,
+    ins_implicit = 'build/cmake/yaml2lua',
     outs = yamllua,
     rule = 'yaml2lua',
   })
