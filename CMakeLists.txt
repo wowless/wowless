@@ -835,7 +835,13 @@ file(WRITE ${imagemagick_SOURCE_DIR}/magick/magick-baseconfig.h [=[
 #define MAGICKCORE_HAVE_STRING_H
 #define MAGICKCORE_HAVE_UNISTD_H
 #define MAGICKCORE_HDRI_ENABLE 0
+#define MAGICKCORE_CONFIGURE_RELATIVE_PATH "foo"
+#define MAGICKCORE_LIBRARY_PATH "foo"
+#define MAGICKCORE_LIBRARY_RELATIVE_PATH "foo"
+#define MAGICKCORE_POSIX_SUPPORT
 #define MAGICKCORE_QUANTUM_DEPTH 16
+#define MAGICKCORE_SHARE_RELATIVE_PATH "foo"
+#define MAGICKCORE_SHAREARCH_BASEDIRNAME "foo"
 #define MAGICKCORE_SIZEOF_VOID_P 8
 #define MAGICKCORE_STDC_HEADERS
 ]=])
@@ -880,11 +886,11 @@ add_library(
   ${imagemagick_SOURCE_DIR}/magick/compare.c
   ${imagemagick_SOURCE_DIR}/magick/composite.c
   ${imagemagick_SOURCE_DIR}/magick/compress.c
-#  ${imagemagick_SOURCE_DIR}/magick/configure.c
+  ${imagemagick_SOURCE_DIR}/magick/configure.c
   ${imagemagick_SOURCE_DIR}/magick/constitute.c
   ${imagemagick_SOURCE_DIR}/magick/decorate.c
   ${imagemagick_SOURCE_DIR}/magick/delegate.c
-#  ${imagemagick_SOURCE_DIR}/magick/deprecate.c
+  ${imagemagick_SOURCE_DIR}/magick/deprecate.c
   ${imagemagick_SOURCE_DIR}/magick/display.c
   ${imagemagick_SOURCE_DIR}/magick/distort.c
   ${imagemagick_SOURCE_DIR}/magick/distribute-cache.c
