@@ -75,7 +75,7 @@ local rules = {
     deps = 'gcc',
   },
   dblist = {
-    command = 'lua tools/dblist.lua $product',
+    command = 'build/cmake/dblist $product',
     depfile = '$out.d',
     deps = 'gcc',
   },
@@ -302,7 +302,7 @@ for _, p in ipairs(productList) do
       restat = 1,
     },
     ins_implicit = {
-      'tools/dblist.lua',
+      'build/cmake/dblist',
       'tools/util.lua',
     },
     outs = dblist,

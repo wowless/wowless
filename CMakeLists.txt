@@ -589,6 +589,18 @@ add_strict_lua_executable(
 )
 
 add_strict_lua_executable(
+  dblist
+  ${CMAKE_CURRENT_SOURCE_DIR}/tools/dblist.lua
+  argparse
+  lsqlite3
+  luafilesystem
+  lyaml
+  penlight
+  toolsutil
+  wowlessyaml
+)
+
+add_strict_lua_executable(
   prep
   ${CMAKE_CURRENT_SOURCE_DIR}/tools/prep.lua
   argparse
