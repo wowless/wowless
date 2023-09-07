@@ -70,7 +70,7 @@ local rules = {
     command = 'lua tools/sqlite.lua -f $product',
   },
   dbdefs = {
-    command = 'lua tools/dbdefs.lua $product',
+    command = 'build/cmake/dbdefs $product',
     depfile = '$out.d',
     deps = 'gcc',
   },
@@ -316,8 +316,8 @@ for _, p in ipairs(productList) do
     },
     ins_implicit = {
       dblist,
+      'build/cmake/dbdefs',
       'data/products/' .. p .. '/build.yaml',
-      'tools/dbdefs.lua',
       'tools/util.lua',
     },
     outs = dbdefs,
