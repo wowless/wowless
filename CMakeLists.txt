@@ -513,6 +513,17 @@ function(add_lua_executable name main)
   target_link_libraries(${name} elune ${ARGN})
 endfunction()
 
+function(add_strict_lua_executable name main)
+  set(luamain ${name}luamain.c)
+  add_custom_command(
+    OUTPUT ${luamain}
+    COMMAND bootstraplua ${CMAKE_CURRENT_SOURCE_DIR}/tools/luamain.lua ${luamain} ${main} -strict ${ARGN}
+    DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/tools/luamain.lua ${main}
+  )
+  add_executable(${name} ${luamain})
+  target_link_libraries(${name} elune ${ARGN})
+endfunction()
+
 lua2c(wowlessyaml wowapi.yaml=${CMAKE_CURRENT_SOURCE_DIR}/wowapi/yaml.lua)
 add_library(wowlessyaml wowlessyaml.c)
 target_link_libraries(wowlessyaml elune)
@@ -540,11 +551,15 @@ yaml2lua(flavors)
 yaml2lua(products)
 yaml2lua(stringenums)
 
+lua2c(toolsutil tools.util=${CMAKE_CURRENT_SOURCE_DIR}/tools/util.lua)
+add_library(toolsutil toolsutil.c)
+target_link_libraries(toolsutil elune)
+
 lua2c(wowlessutil wowless.util=${CMAKE_CURRENT_SOURCE_DIR}/wowless/util.lua)
 add_library(wowlessutil wowlessutil.c)
 target_link_libraries(wowlessutil elune)
 
-add_lua_executable(
+add_strict_lua_executable(
   prep
   ${CMAKE_CURRENT_SOURCE_DIR}/tools/prep.lua
   argparse
@@ -552,6 +567,7 @@ add_lua_executable(
   luapath
   lyaml
   penlight
+  toolsutil
   wowlessutil
   wowlessyaml
 )
