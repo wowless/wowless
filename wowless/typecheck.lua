@@ -191,6 +191,13 @@ return function(api)
           return nil, 'field ' .. fname .. ' ' .. err
         end
       end
+      if isout then
+        for k in pairs(value) do
+          if not st.fields[k] then
+            return nil, 'has extraneous field ' .. k
+          end
+        end
+      end
       -- TODO assert presence of mixin
       return value
     elseif spec.type.arrayof then
