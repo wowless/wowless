@@ -6,7 +6,8 @@ local function readfile(filename)
 end
 local outfile = arg[1]
 local main = arg[2]
-local text = readfile(main):gsub('\\', '\\\\'):gsub('\n', '\\n\\\n'):gsub('"', '\\"')
+local text = readfile(main)
+local etext = text:gsub('\\', '\\\\'):gsub('\n', '\\n\\\n'):gsub('"', '\\"')
 local preloads = {}
 local strict = arg[3] == '-strict'
 for i = strict and 4 or 3, #arg do
@@ -65,7 +66,10 @@ io.write([[
     lua_rawseti(L, -2, i);
   }
   lua_setglobal(L, "arg");
-  if (luaL_dostring(L, "]] .. text .. [[") != 0) {
+]])
+io.write(('  int ret = luaL_loadbuffer(L, "%s", %d, "@%s");\n'):format(etext, text:len(), main))
+io.write([[
+  if (ret || lua_pcall(L, 0, LUA_MULTRET, 0)) {
     puts(lua_tostring(L, -1));
 ]])
 io.write(strict and [[
