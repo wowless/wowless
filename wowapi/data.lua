@@ -1,7 +1,7 @@
 local extLoaders = {
   sql = require('pl.file').read,
   yaml = function(f)
-    return require('build/' .. f:sub(1, -6))
+    return require('build.' .. f:sub(1, -6):gsub('/', '.'))
   end,
 }
 

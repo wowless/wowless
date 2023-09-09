@@ -1,9 +1,9 @@
 describe('config', function()
   for _, p in ipairs(require('build.data.products')) do
     describe(p, function()
-      local config = require('build/data/products/' .. p .. '/config')
-      local apis = require('build/data/products/' .. p .. '/apis')
-      local globals = require('build/data/products/' .. p .. '/globals')
+      local config = require('build.data.products.' .. p .. '.config')
+      local apis = require('build.data.products.' .. p .. '.apis')
+      local globals = require('build.data.products.' .. p .. '.globals')
       local ns = {}
       for k in pairs(apis) do
         local dot = k:find('%.')

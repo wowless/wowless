@@ -67,26 +67,26 @@ local pools = {
 
 local rules = {
   dbdata = {
-    command = 'lua tools/sqlite.lua -f $product',
+    command = 'build/cmake/sqlite -f $product',
   },
   dbdefs = {
-    command = 'lua tools/dbdefs.lua $product',
+    command = 'build/cmake/dbdefs $product',
     depfile = '$out.d',
     deps = 'gcc',
   },
   dblist = {
-    command = 'lua tools/dblist.lua $product',
+    command = 'build/cmake/dblist $product',
     depfile = '$out.d',
     deps = 'gcc',
   },
   dbschema = {
-    command = 'lua tools/sqlite.lua $product',
+    command = 'build/cmake/sqlite $product',
   },
   downloadrelease = {
     command = 'sh bin/downloadaddon.sh $owner $repo $tag $out',
   },
   fetch = {
-    command = 'lua tools/fetch.lua $product && touch $out',
+    command = 'build/cmake/fetch $product && touch $out',
     pool = 'fetch_pool',
   },
   frame0 = {
@@ -97,7 +97,7 @@ local rules = {
     command = 'lua tools/gentest.lua -f $type -p $product',
   },
   mklistfile = {
-    command = 'lua tools/listfile.lua',
+    command = 'build/cmake/listfile',
   },
   mkninja = {
     command = 'lua tools/mkninja.lua',
@@ -110,12 +110,12 @@ local rules = {
     command = 'bash -c "set -o pipefail && build/cmake/test $in 2>&1 | tee $out"',
   },
   prep = {
-    command = 'lua tools/prep.lua $product',
+    command = 'build/cmake/prep $product',
     depfile = '$out.d',
     deps = 'gcc',
   },
   render = {
-    command = 'lua tools/render.lua $in',
+    command = 'build/cmake/render $in',
     pool = 'fetch_pool',
   },
   run = {
@@ -130,7 +130,7 @@ local rules = {
     command = 'touch $out',
   },
   yaml2lua = {
-    command = 'lua tools/yaml2lua.lua $in > $out',
+    command = 'build/cmake/yaml2lua $in $out',
   },
 }
 
@@ -252,8 +252,7 @@ local builds = {
       restat = 1,
     },
     ins_implicit = {
-      'tools/listfile.lua',
-      'tools/util.lua',
+      'build/cmake/listfile',
       'vendor/dbdefs/manifest.json',
     },
     outs_implicit = 'build/listfile.lua',
@@ -303,7 +302,7 @@ for _, p in ipairs(productList) do
       restat = 1,
     },
     ins_implicit = {
-      'tools/dblist.lua',
+      'build/cmake/dblist',
       'tools/util.lua',
     },
     outs = dblist,
@@ -317,8 +316,8 @@ for _, p in ipairs(productList) do
     },
     ins_implicit = {
       dblist,
+      'build/cmake/dbdefs',
       'data/products/' .. p .. '/build.yaml',
-      'tools/dbdefs.lua',
       'tools/util.lua',
     },
     outs = dbdefs,
@@ -329,10 +328,10 @@ for _, p in ipairs(productList) do
     args = { product = p },
     ins = {
       dblist,
+      'build/cmake/fetch',
       'build/data/products/' .. p .. '/build.lua',
       'build/listfile.lua',
       'build/tactkeys.lua',
-      'tools/fetch.lua',
     },
     outs = fetchStamp,
     rule = 'fetch',
@@ -367,9 +366,9 @@ for _, p in ipairs(productList) do
       args = { product = p },
       ins = { prefix .. '.yaml' },
       ins_implicit = {
+        'build/cmake/render',
         'build/tactkeys.lua',
         'data/products/' .. p .. '/build.yaml',
-        'tools/render.lua',
         'wowless/render.lua',
       },
       outs = { prefix .. '.png' },
@@ -380,7 +379,7 @@ for _, p in ipairs(productList) do
     args = { product = p },
     ins_implicit = {
       dbdefs,
-      'tools/sqlite.lua',
+      'build/cmake/sqlite',
     },
     outs = schemadb,
     rule = 'dbschema',
@@ -390,7 +389,7 @@ for _, p in ipairs(productList) do
     ins_implicit = {
       dbdefs,
       fetchStamp,
-      'tools/sqlite.lua',
+      'build/cmake/sqlite',
     },
     outs = datadb,
     rule = 'dbdata',
@@ -401,10 +400,7 @@ for _, p in ipairs(productList) do
       product = p,
       restat = 1,
     },
-    ins_implicit = {
-      'tools/prep.lua',
-      'tools/util.lua',
-    },
+    ins_implicit = 'build/cmake/prep',
     outs = datalua,
     rule = 'prep',
   })
@@ -560,6 +556,7 @@ for _, yaml in ipairs(yamls) do
   table.insert(yamlluas, yamllua)
   table.insert(builds, {
     ins = yaml,
+    ins_implicit = 'build/cmake/yaml2lua',
     outs = yamllua,
     rule = 'yaml2lua',
   })
@@ -689,5 +686,5 @@ os.execute([[
   -G Ninja \
   -DCMAKE_EXPORT_COMPILE_COMMANDS=1 \
   -DCMAKE_NINJA_OUTPUT_PATH_PREFIX=build/cmake/ \
-  -DCMAKE_C_FLAGS="-D_GNU_SOURCE -DNDEBUG -ffast-math -flto -O3" \
+  -DCMAKE_C_FLAGS="-D_GNU_SOURCE -DNDEBUG -ffast-math -O3" \
 ]])
