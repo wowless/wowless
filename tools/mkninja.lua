@@ -104,7 +104,7 @@ local rules = {
     pool = 'console',
   },
   mktactkeys = {
-    command = 'lua tools/tactkeys.lua',
+    command = 'build/cmake/tactkeys',
   },
   mktestout = {
     command = 'bash -c "set -o pipefail && build/cmake/test $in 2>&1 | tee $out"',
@@ -263,7 +263,7 @@ local builds = {
       restat = 1,
     },
     ins_implicit = {
-      'tools/tactkeys.lua',
+      'build/cmake/tactkeys',
       'tools/util.lua',
       'vendor/tactkeys/WoW.txt',
     },

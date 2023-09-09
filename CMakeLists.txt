@@ -660,6 +660,14 @@ add_strict_lua_executable(
   wowlessyaml
 )
 
+add_strict_lua_executable(
+  tactkeys
+  ${CMAKE_CURRENT_SOURCE_DIR}/tools/tactkeys.lua
+  luafilesystem
+  penlight
+  toolsutil
+)
+
 lua2c(toolssqlite3ext tools.sqlite3ext=c)
 add_library(toolssqlite3ext STATIC tools/sqlite3ext.c toolssqlite3ext.c)
 target_link_libraries(toolssqlite3ext elune sqlite3)
