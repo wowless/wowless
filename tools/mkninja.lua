@@ -94,7 +94,7 @@ local rules = {
     pool = 'run_pool',
   },
   mkaddon = {
-    command = 'lua tools/gentest.lua -f $type -p $product',
+    command = 'build/cmake/gentest -f $type -p $product',
   },
   mklistfile = {
     command = 'build/cmake/listfile',
@@ -276,14 +276,14 @@ for _, p in ipairs(productList) do
   local prefix = 'build/products/' .. p .. '/WowlessData/'
   table.insert(builds, {
     args = { product = p, ['type'] = 'toc' },
-    ins = 'tools/gentest.lua',
+    ins = 'build/cmake/gentest',
     outs_implicit = prefix .. 'WowlessData.toc',
     rule = 'mkaddon',
   })
   for k, v in pairs(perProductAddonGeneratedTypes) do
     table.insert(builds, {
       args = { product = p, ['type'] = k },
-      ins = { v(p), 'tools/gentest.lua' },
+      ins = { v(p), 'build/cmake/gentest' },
       outs_implicit = prefix .. k .. '.lua',
       rule = 'mkaddon',
     })

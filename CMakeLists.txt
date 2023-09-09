@@ -1195,6 +1195,14 @@ add_strict_lua_executable(
   wowlessyaml
 )
 
+add_strict_lua_executable(
+  gentest
+  ${CMAKE_CURRENT_SOURCE_DIR}/tools/gentest.lua
+  argparse
+  luafilesystem
+  penlight
+)
+
 lua2c(
   wowlesslib
   build.data.flavors=yamlluas/flavors.lua
