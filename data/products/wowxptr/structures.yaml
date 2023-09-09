@@ -92,6 +92,14 @@ BountyInfo:
     turninRequirementText:
       nilable: true
       type: string
+C_ActionBar.ActionUsableState:
+  fields:
+    noMana:
+      type: boolean
+    slot:
+      type: number
+    usable:
+      type: boolean
 C_AlliedRaces.AlliedRaceInfo:
   fields:
     achievementIds:
@@ -186,6 +194,10 @@ C_AreaPoiInfo.AreaPOIInfo:
     factionID:
       nilable: true
       type: number
+    highlightVignettesOnHover:
+      type: boolean
+    highlightWorldQuestsOnHover:
+      type: boolean
     isAlwaysOnFlightmap:
       type: boolean
     isPrimaryMapForPOI:
@@ -1514,22 +1526,6 @@ C_Commentator.NameOverrideEntry:
     originalName:
       type: string
     overrideName:
-      type: string
-C_Console.ConsoleCommandInfo:
-  fields:
-    category:
-      type:
-        enum: ConsoleCategory
-    command:
-      type: string
-    commandType:
-      type:
-        enum: ConsoleCommandType
-    help:
-      type: string
-    scriptContents:
-      type: string
-    scriptParameters:
       type: string
 C_ConsoleScriptCollection.ConsoleScriptCollectionData:
   fields:
@@ -3487,11 +3483,11 @@ C_MajorFactions.MajorFactionData:
       type: number
     textureKit:
       type: string
+    uiPriority:
+      type: number
     unlockDescription:
       nilable: true
       type: string
-    unlockOrder:
-      type: number
 C_MajorFactions.MajorFactionFeatureAbilityInfo:
   fields:
     featureAbilityType:
@@ -3874,6 +3870,12 @@ C_PerksActivities.PerksActivityInfo:
           structure: C_PerksActivities.PerksActivityCriteria
     description:
       type: string
+    eventEndTime:
+      nilable: true
+      type: number
+    eventStartTime:
+      nilable: true
+      type: number
     ID:
       type: number
     requirementsList:
@@ -4598,6 +4600,8 @@ C_QuestLog.QuestInfo:
       type: boolean
     isHidden:
       type: boolean
+    isInternalOnly:
+      type: boolean
     isLegendarySort:
       type: boolean
     isOnMap:
@@ -4940,6 +4944,8 @@ C_ScenarioInfo.ScenarioStepInfo:
           structure: C_ScenarioInfo.ScenarioStepSpellInfo
     stepFailed:
       type: boolean
+    stepID:
+      type: number
     title:
       type: string
     weightedProgress:
@@ -5382,8 +5388,15 @@ C_Texture.AtlasInfo:
       type: number
     leftTexCoord:
       type: number
+    rawSize:
+      type:
+        structure: vector2
     rightTexCoord:
       type: number
+    sliceData:
+      nilable: true
+      type:
+        structure: UITextureSliceData
     tilesHorizontally:
       type: boolean
     tilesVertically:
@@ -5569,6 +5582,9 @@ C_Traits.TraitNodeInfo:
           structure: C_Traits.TraitOutEdgeInfo
 C_Traits.TraitNodeInfoPartial:
   fields:
+    activeEntryID:
+      nilable: true
+      type: number
     activeRank:
       nilable: true
       type: number
@@ -5813,7 +5829,7 @@ C_UIWidgetManager.CaptureBarWidgetVisualizationInfo:
       type: string
     glowAnimType:
       type:
-        enum: CaptureBarWidgetGlowAnimType
+        enum: WidgetGlowAnimType
     hasTimer:
       type: boolean
     inAnimType:
@@ -6980,6 +6996,64 @@ C_UIWidgetManager.TextWithSubtextWidgetVisualizationInfo:
       type: string
     widgetWidth:
       type: number
+C_UIWidgetManager.TugOfWarWidgetVisualizationInfo:
+  fields:
+    currentValue:
+      type: number
+    frameTextureKit:
+      type: string
+    glowAnimType:
+      type:
+        enum: WidgetGlowAnimType
+    hasTimer:
+      type: boolean
+    inAnimType:
+      type:
+        enum: WidgetAnimationType
+    layoutDirection:
+      type:
+        enum: UIWidgetLayoutDirection
+    leftIconInfo:
+      type:
+        structure: C_UIWidgetManager.UIWidgetIconInfo
+    maxValue:
+      type: number
+    minValue:
+      type: number
+    modelSceneLayer:
+      type:
+        enum: UIWidgetModelSceneLayer
+    neutralZoneCenter:
+      type: number
+    neutralZoneSize:
+      type: number
+    orderIndex:
+      type: number
+    outAnimType:
+      type:
+        enum: WidgetAnimationType
+    rightIconInfo:
+      type:
+        structure: C_UIWidgetManager.UIWidgetIconInfo
+    scriptedAnimationEffectID:
+      type: number
+    shownState:
+      type:
+        enum: WidgetShownState
+    textureKit:
+      type: string
+    tooltip:
+      type: string
+    tooltipLoc:
+      type:
+        enum: UIWidgetTooltipLocation
+    widgetScale:
+      type:
+        enum: UIWidgetScale
+    widgetSizeSetting:
+      type: number
+    widgetTag:
+      type: string
 C_UIWidgetManager.UIWidgetCurrencyInfo:
   fields:
     iconFileID:
@@ -6992,6 +7066,21 @@ C_UIWidgetManager.UIWidgetCurrencyInfo:
       type: string
     tooltip:
       type: string
+C_UIWidgetManager.UIWidgetIconInfo:
+  fields:
+    sizeType:
+      type:
+        enum: WidgetIconSizeType
+    sourceID:
+      type: number
+    sourceType:
+      type:
+        enum: WidgetIconSourceType
+    tooltip:
+      type: string
+    tooltipLoc:
+      type:
+        enum: UIWidgetTooltipLocation
 C_UIWidgetManager.UIWidgetInfo:
   fields:
     unitToken:
@@ -7023,6 +7112,8 @@ C_UIWidgetManager.UIWidgetItemInfo:
     overrideTooltip:
       nilable: true
       type: string
+    showAsEarned:
+      type: boolean
     stackCount:
       nilable: true
       type: number
@@ -7584,6 +7675,22 @@ colorRGBA:
     r:
       type: number
   mixin: ColorMixin
+ConsoleCommandInfo:
+  fields:
+    category:
+      type:
+        enum: ConsoleCategory
+    command:
+      type: string
+    commandType:
+      type:
+        enum: ConsoleCommandType
+    help:
+      type: string
+    scriptContents:
+      type: string
+    scriptParameters:
+      type: string
 ContentTrackingMapInfo:
   fields:
     targetID:
@@ -7602,6 +7709,15 @@ ContentTrackingMapInfo:
       type: number
     y:
       type: number
+ContextualWorldPingResult:
+  fields:
+    contextualPingType:
+      nilable: true
+      type:
+        enum: PingSubjectType
+    result:
+      type:
+        enum: PingResult
 CorruptionEffectInfo:
   fields:
     description:
@@ -8154,6 +8270,28 @@ ExpansionDisplayInfoFeature:
       type: number
     text:
       type: string
+FontScriptInfo:
+  fields:
+    color:
+      type:
+        structure: colorRGBA
+    height:
+      type: number
+    outline:
+      type: string
+    shadow:
+      nilable: true
+      type:
+        structure: FontScriptShadowInfo
+FontScriptShadowInfo:
+  fields:
+    color:
+      type:
+        structure: colorRGBA
+    x:
+      type: number
+    y:
+      type: number
 GarrisonAbilityEffect:
   fields:
     description:
@@ -8343,6 +8481,12 @@ ItemLocation:
 ItemTransmogInfo:
   fields: {}
   mixin: ItemTransmogInfoMixin
+LocaleInfo:
+  fields:
+    localeId:
+      type: number
+    localeName:
+      type: string
 MythicPlusAffixScoreInfo:
   fields:
     durationSec:
@@ -8398,6 +8542,21 @@ NewCraftingOrderInfo:
       type: number
     tipAmount:
       type: number
+PingCooldownInfo:
+  fields:
+    endTimeMs:
+      type: number
+    startTimeMs:
+      type: number
+PingTypeInfo:
+  fields:
+    orderIndex:
+      type: number
+    type:
+      type:
+        enum: PingSubjectType
+    uiTextureKitID:
+      type: string
 PlayerInfoCharacterData:
   fields:
     alternateFormRaceData:
@@ -8763,6 +8922,19 @@ TransmogLocation:
 TransmogPendingInfo:
   fields: {}
   mixin: TransmogPendingInfoMixin
+UITextureSliceData:
+  fields:
+    marginBottom:
+      type: number
+    marginLeft:
+      type: number
+    marginRight:
+      type: number
+    marginTop:
+      type: number
+    sliceMode:
+      type:
+        enum: UITextureSliceMode
 UnitAuraUpdateInfo:
   fields:
     addedAuras:

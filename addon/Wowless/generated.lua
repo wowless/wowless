@@ -139,8 +139,9 @@ function G.GeneratedTests()
     local expectedCVars = lowify(_G.WowlessData.CVars)
     local actualCVars = lowify((function()
       -- Do this early to avoid issues with deferred cvar creation.
+      local getall = _G.C_Console and _G.C_Console.GetAllCommands or _G.ConsoleGetAllCommands
       local t = {}
-      for _, command in ipairs(_G.C_Console.GetAllCommands()) do
+      for _, command in ipairs(getall()) do
         local name = command.command
         if name:sub(1, 6) ~= 'CACHE-' then
           assertEquals(nil, t[name])
