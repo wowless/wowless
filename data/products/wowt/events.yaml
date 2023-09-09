@@ -4392,6 +4392,8 @@ GLUE_CONSOLE_LOG:
     type: string
 GLUE_SCREENSHOT_FAILED:
   payload: {}
+GLUE_SCREENSHOT_SUCCEEDED:
+  payload: {}
 GM_PLAYER_INFO:
   payload:
   - name: name
