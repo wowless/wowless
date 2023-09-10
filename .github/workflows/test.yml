@@ -52,5 +52,5 @@ jobs:
         submodules: true
     - uses: seanmiddleditch/gha-setup-ninja@v3
       if: matrix.generator == 'Ninja'
-    - run: cmake -B build -G ${{ matrix.generator }}
+    - run: cmake -B build -G "${{ matrix.generator }}"
     - run: cmake --build build
