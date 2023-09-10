@@ -582,11 +582,31 @@ target_link_libraries(luacjson cjson elune)
 add_strict_lua_executable(
   listfile
   ${CMAKE_CURRENT_SOURCE_DIR}/tools/listfile.lua
+  argparse
   luacjson
   luafilesystem
   penlight
   toolsutil
 )
+
+file(
+  MAKE_DIRECTORY
+  ${CMAKE_CURRENT_BINARY_DIR}/generated
+  ${CMAKE_CURRENT_BINARY_DIR}/runtime
+  ${CMAKE_CURRENT_BINARY_DIR}/stamp
+)
+
+add_custom_command(
+  OUTPUT stamp/listfile.txt
+  BYPRODUCTS runtime/listfile.lua
+  COMMAND listfile ${CMAKE_CURRENT_SOURCE_DIR}/vendor/dbdefs/manifest.json generated/listfile.lua
+  COMMAND ${CMAKE_COMMAND} -E copy_if_different generated/listfile.lua runtime/listfile.lua
+  COMMAND ${CMAKE_COMMAND} -E touch stamp/listfile.txt
+  DEPENDS listfile ${CMAKE_CURRENT_SOURCE_DIR}/vendor/dbdefs/manifest.json
+)
+lua2c(runtimelistfile runtime.listfile=runtime/listfile.lua)
+add_library(runtimelistfile STATIC runtimelistfile.c stamp/listfile.txt)
+target_link_libraries(runtimelistfile elune)
 
 add_strict_lua_executable(
   dblist
@@ -828,6 +848,7 @@ add_strict_lua_executable(
   lzlib
   md5
   penlight
+  runtimelistfile
   toolsdbc
 )
 

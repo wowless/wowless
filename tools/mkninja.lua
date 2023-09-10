@@ -96,9 +96,6 @@ local rules = {
   mkaddon = {
     command = 'build/cmake/gentest -f $type -p $product',
   },
-  mklistfile = {
-    command = 'build/cmake/listfile',
-  },
   mkninja = {
     command = 'lua tools/mkninja.lua',
     pool = 'console',
@@ -215,7 +212,6 @@ local builds = {
       'tools/errsv.lua',
       'tools/fetch.lua',
       'tools/gentest.lua',
-      'tools/listfile.lua',
       'tools/prep.lua',
       'tools/proto.lua',
       'tools/render.lua',
@@ -246,17 +242,6 @@ local builds = {
     },
     outs = 'build/wowless.stamp',
     rule = 'stamp',
-  },
-  {
-    args = {
-      restat = 1,
-    },
-    ins_implicit = {
-      'build/cmake/listfile',
-      'vendor/dbdefs/manifest.json',
-    },
-    outs_implicit = 'build/listfile.lua',
-    rule = 'mklistfile',
   },
   {
     args = {
@@ -330,7 +315,6 @@ for _, p in ipairs(productList) do
       dblist,
       'build/cmake/fetch',
       'build/data/products/' .. p .. '/build.lua',
-      'build/listfile.lua',
       'build/tactkeys.lua',
     },
     outs = fetchStamp,

@@ -14,7 +14,7 @@ end
 local log = args.verbose and print or function() end
 
 local build = dofile('build/data/products/' .. product .. '/build.lua')
-local fdids = dofile('build/listfile.lua')
+local fdids = require('runtime.listfile')
 
 local path = require('path')
 path.mkdir('cache')
