@@ -683,10 +683,23 @@ add_strict_lua_executable(
 add_strict_lua_executable(
   tactkeys
   ${CMAKE_CURRENT_SOURCE_DIR}/tools/tactkeys.lua
+  argparse
   luafilesystem
   penlight
   toolsutil
 )
+
+add_custom_command(
+  OUTPUT stamp/tactkeys.txt
+  BYPRODUCTS runtime/tactkeys.lua
+  COMMAND tactkeys ${CMAKE_CURRENT_SOURCE_DIR}/vendor/tactkeys/WoW.txt generated/tactkeys.lua
+  COMMAND ${CMAKE_COMMAND} -E copy_if_different generated/tactkeys.lua runtime/tactkeys.lua
+  COMMAND ${CMAKE_COMMAND} -E touch stamp/tactkeys.txt
+  DEPENDS tactkeys ${CMAKE_CURRENT_SOURCE_DIR}/vendor/dbdefs/manifest.json
+)
+lua2c(runtimetactkeys runtime.tactkeys=runtime/tactkeys.lua)
+add_library(runtimetactkeys STATIC runtimetactkeys.c stamp/tactkeys.txt)
+target_link_libraries(runtimetactkeys elune)
 
 lua2c(toolssqlite3ext tools.sqlite3ext=c)
 add_library(toolssqlite3ext STATIC tools/sqlite3ext.c toolssqlite3ext.c)
@@ -849,6 +862,7 @@ add_strict_lua_executable(
   md5
   penlight
   runtimelistfile
+  runtimetactkeys
   toolsdbc
 )
 
@@ -1219,6 +1233,7 @@ add_strict_lua_executable(
   lzlib
   md5
   penlight
+  runtimetactkeys
   vstruct
   wowlessrender
   wowlessyaml

@@ -100,9 +100,6 @@ local rules = {
     command = 'lua tools/mkninja.lua',
     pool = 'console',
   },
-  mktactkeys = {
-    command = 'build/cmake/tactkeys',
-  },
   mktestout = {
     command = 'bash -c "set -o pipefail && build/cmake/test $in 2>&1 | tee $out"',
   },
@@ -217,7 +214,6 @@ local builds = {
       'tools/render.lua',
       'tools/rewrite.lua',
       'tools/sqlite.lua',
-      'tools/tactkeys.lua',
       'tools/util.lua',
       'tools/yaml2lua.lua',
       'tools/yamlfmt.lua',
@@ -242,18 +238,6 @@ local builds = {
     },
     outs = 'build/wowless.stamp',
     rule = 'stamp',
-  },
-  {
-    args = {
-      restat = 1,
-    },
-    ins_implicit = {
-      'build/cmake/tactkeys',
-      'tools/util.lua',
-      'vendor/tactkeys/WoW.txt',
-    },
-    outs_implicit = 'build/tactkeys.lua',
-    rule = 'mktactkeys',
   },
 }
 
@@ -315,7 +299,6 @@ for _, p in ipairs(productList) do
       dblist,
       'build/cmake/fetch',
       'build/data/products/' .. p .. '/build.lua',
-      'build/tactkeys.lua',
     },
     outs = fetchStamp,
     rule = 'fetch',
@@ -351,7 +334,6 @@ for _, p in ipairs(productList) do
       ins = { prefix .. '.yaml' },
       ins_implicit = {
         'build/cmake/render',
-        'build/tactkeys.lua',
         'data/products/' .. p .. '/build.yaml',
         'wowless/render.lua',
       },
