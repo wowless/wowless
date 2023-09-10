@@ -541,7 +541,7 @@ add_strict_lua_executable(
 
 function(yaml2lua basename)
   set(input ${CMAKE_CURRENT_SOURCE_DIR}/data/${basename}.yaml)
-  set(output yamlluas/${basename}.lua)
+  set(output runtime/${basename}.lua)
   add_custom_command(
     OUTPUT ${output}
     COMMAND yaml2lua ${input} ${output}
@@ -1249,9 +1249,9 @@ add_strict_lua_executable(
 
 lua2c(
   wowlesslib
-  build.data.flavors=yamlluas/flavors.lua
-  build.data.products=yamlluas/products.lua
-  build.data.stringenums=yamlluas/stringenums.lua
+  runtime.flavors=runtime/flavors.lua
+  runtime.products=runtime/products.lua
+  runtime.stringenums=runtime/stringenums.lua
   wowapi.data=${CMAKE_CURRENT_SOURCE_DIR}/wowapi/data.lua
   wowapi.loader=${CMAKE_CURRENT_SOURCE_DIR}/wowapi/loader.lua
   wowapi.schema=${CMAKE_CURRENT_SOURCE_DIR}/wowapi/schema.lua

@@ -158,8 +158,6 @@ local builds = {
   {
     ins = {
       'build/cmake/wowless',
-      'build/data/flavors.lua',
-      'build/data/stringenums.lua',
       'build/wowless.stamp',
     },
     outs = 'build/runtime.stamp',
