@@ -909,7 +909,7 @@ FetchContent_Declare(
   SOURCE_SUBDIR disable_cmakelists_txt
 )
 FetchContent_MakeAvailable(imagemagick)
-file(WRITE ${imagemagick_SOURCE_DIR}/magick/magick-baseconfig.h [=[
+file(WRITE ${CMAKE_CURRENT_BINARY_DIR}/magick-baseconfig.h [=[
 #define MAGICKCORE_HAVE_STDINT_H
 #define MAGICKCORE_HAVE_STRING_H
 #define MAGICKCORE_HAVE_UNISTD_H
@@ -925,6 +925,12 @@ file(WRITE ${imagemagick_SOURCE_DIR}/magick/magick-baseconfig.h [=[
 #define MAGICKCORE_SIZEOF_VOID_P 8
 #define MAGICKCORE_STDC_HEADERS
 ]=])
+file(
+  COPY_FILE
+  ${CMAKE_CURRENT_BINARY_DIR}/magick-baseconfig.h
+  ${imagemagick_SOURCE_DIR}/magick/magick-baseconfig.h
+  ONLY_IF_DIFFERENT
+)
 block()
   set(DOCUMENTATION_PATH foo)
   set(PACKAGE_LIB_VERSION 0x69C)
