@@ -1350,7 +1350,9 @@ add_strict_lua_executable(
 
 lua2c(
   testonly
+  build.data.flavors=runtime/flavors.lua
   build.data.impl=${CMAKE_CURRENT_SOURCE_DIR}/build/data/impl.lua
+  build.data.products=runtime/products.lua
   build.data.products.wow.apis=${CMAKE_CURRENT_SOURCE_DIR}/build/data/products/wow/apis.lua
   build.data.products.wowt.apis=${CMAKE_CURRENT_SOURCE_DIR}/build/data/products/wowt/apis.lua
   build.data.products.wowxptr.apis=${CMAKE_CURRENT_SOURCE_DIR}/build/data/products/wowxptr/apis.lua
@@ -1444,11 +1446,12 @@ lua2c(
   build.data.state.Talents=${CMAKE_CURRENT_SOURCE_DIR}/build/data/state/Talents.lua
   build.data.state.Time=${CMAKE_CURRENT_SOURCE_DIR}/build/data/state/Time.lua
   build.data.state.Units=${CMAKE_CURRENT_SOURCE_DIR}/build/data/state/Units.lua
+  build.data.stringenums=runtime/stringenums.lua
   build.data.uiobjectimpl=${CMAKE_CURRENT_SOURCE_DIR}/build/data/uiobjectimpl.lua
 )
 add_library(testonly STATIC testonly.c)
 
-add_lua_executable(
+add_strict_lua_executable(
   test
   ${CMAKE_CURRENT_SOURCE_DIR}/tools/runtests.lua
   argparse
