@@ -140,11 +140,6 @@ local builds = {
     rule = 'phony',
   },
   {
-    ins = 'build/runtime.stamp',
-    outs = 'runtime',
-    rule = 'phony',
-  },
-  {
     ins = {
       'CMakeLists.txt',
       'data/products.yaml',
@@ -154,14 +149,6 @@ local builds = {
     },
     outs = 'build.ninja',
     rule = 'mkninja',
-  },
-  {
-    ins = {
-      'build/cmake/wowless',
-      'build/wowless.stamp',
-    },
-    outs = 'build/runtime.stamp',
-    rule = 'stamp',
   },
   {
     -- Someday this shouldn't need to be explicit.
@@ -257,7 +244,7 @@ for _, p in ipairs(productList) do
   end
 end
 
-local runtimes = {}
+local schemadbs = {}
 local runouts = {}
 local pngs = {}
 local addonouts = {}
@@ -305,12 +292,11 @@ for _, p in ipairs(productList) do
   table.insert(runouts, runout)
   local schemadb = 'build/products/' .. p .. '/schema.sqlite3'
   local datadb = 'build/products/' .. p .. '/data.sqlite3'
-  local datalua = 'build/products/' .. p .. '/data.lua'
-  table.insert(runtimes, schemadb)
+  table.insert(schemadbs, schemadb)
   local rundeps = {
-    'build/runtime.stamp',
+    'build/cmake/wowless',
+    'build/wowless.stamp',
     datadb,
-    datalua,
   }
   table.insert(builds, {
     args = { product = p },
@@ -358,19 +344,9 @@ for _, p in ipairs(productList) do
     outs = datadb,
     rule = 'dbdata',
   })
-  table.insert(runtimes, datalua)
-  table.insert(builds, {
-    args = {
-      product = p,
-      restat = 1,
-    },
-    ins_implicit = 'build/cmake/prep',
-    outs = datalua,
-    rule = 'prep',
-  })
   table.insert(builds, {
     args = { product = p },
-    ins = { datadb, datalua },
+    ins = { datadb },
     outs = p,
     rule = 'phony',
   })
@@ -556,13 +532,13 @@ table.insert(builds, {
   },
   ins_implicit = {
     'build/cmake/test',
-    'build/runtime.stamp',
+    'build/wowless.stamp',
     'spec/wowless/green.png',
     'spec/wowless/temp.blp',
     'spec/wowless/temp.png',
     'tools/runtests.lua',
     addonGeneratedFiles,
-    runtimes,
+    schemadbs,
     yamlluas,
   },
   outs = 'test.out',
