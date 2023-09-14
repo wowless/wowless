@@ -27,7 +27,13 @@ for i = 2, #arg do
   if mv == 'c' then
     cmodules[mk] = mk:gsub('%.', '_')
   else
-    modules[mk] = readfile(mv)
+    local text = readfile(mv)
+    local code = string.dump(loadstring(text, mk))
+    local escaped = {}
+    for j = 1, code:len() do
+      table.insert(escaped, string.format('\\%03o', code:byte(j)))
+    end
+    modules[mk] = table.concat(escaped, '')
   end
 end
 io.output(package .. '.c')
@@ -42,8 +48,7 @@ struct module {
 static const struct module modules[] = {
 ]])
 for k, v in sorted(modules) do
-  local e = v:gsub('\\', '\\\\'):gsub('\n', '\\n\\\n'):gsub('"', '\\"')
-  io.write(('  {"%s", "%s", %d, "@%s.lua"},\n'):format(k, e, v:len(), k:gsub('%.', '/')))
+  io.write(('  {"%s", "%s", %d, "@%s.lua"},\n'):format(k, v, v:len(), k:gsub('%.', '/')))
 end
 io.write([[};
 struct cmodule {
@@ -64,7 +69,7 @@ void preload_]] .. package .. [[(lua_State *L) {
   lua_getfield(L, -1, "preload");
   for (size_t i = 0; i < sizeof(modules) / sizeof(struct module); ++i) {
     const struct module *m = &modules[i];
-    luaL_loadbuffer(L, m->code, m->size, m->file);
+    luaL_loadbufferx(L, m->code, m->size, m->file, "b");
     lua_setfield(L, -2, m->name);
   }
   for (size_t i = 0; i < sizeof(cmodules) / sizeof(struct cmodule); ++i) {
