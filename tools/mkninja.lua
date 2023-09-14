@@ -103,11 +103,6 @@ local rules = {
   mktestout = {
     command = 'bash -c "set -o pipefail && build/cmake/test $in 2>&1 | tee $out"',
   },
-  prep = {
-    command = 'build/cmake/prep $product',
-    depfile = '$out.d',
-    deps = 'gcc',
-  },
   render = {
     command = 'build/cmake/render $in',
     pool = 'fetch_pool',
@@ -517,6 +512,15 @@ local function flatten(x)
   doit(x)
   table.sort(t)
   return table.concat(t, ' ')
+end
+
+local usedrules = {}
+for _, b in ipairs(builds) do
+  assert(b.rule == 'phony' or rules[b.rule], 'unknown rule ' .. b.rule)
+  usedrules[b.rule] = true
+end
+for k in pairs(rules) do
+  assert(usedrules[k], 'unused rule ' .. k)
 end
 
 local sorted = require('pl.tablex').sort
