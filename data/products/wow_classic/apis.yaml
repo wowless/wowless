@@ -5468,7 +5468,7 @@ C_Map.GetMapHighlightInfoAtPosition:
   - name: scrollChildY
     type: number
 C_Map.GetMapInfo:
-  impl: C_Map.GetMapInfo
+  impl: C_Map.GetMapInfo_Vanilla
   inputs:
   - name: uiMapID
     type: number

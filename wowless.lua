@@ -5,7 +5,7 @@ _G.require = function(k, ...)
   assert(k ~= 'wowapi.yaml' or args.frame0 or args.profile)
   return require(k, ...)
 end
-local products = require('build.data.products')
+local products = require('runtime.products')
 args = (function()
   local parser = require('argparse')()
   parser:option('-p --product', 'product tag'):count(1):choices(products)

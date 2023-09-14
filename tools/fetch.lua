@@ -6,10 +6,15 @@ local args = (function()
 end)()
 local product = args.product
 
+-- Don't let casc use any system backdoors.
+os.execute = function(...) -- luacheck: ignore
+  error('attempt to call execute(' .. table.concat({ ... }) .. ')')
+end
+
 local log = args.verbose and print or function() end
 
-local build = require('build.data.products.' .. product .. '.build')
-local fdids = require('build.listfile')
+local build = dofile('build/data/products/' .. product .. '/build.lua')
+local fdids = require('runtime.listfile')
 
 local path = require('path')
 path.mkdir('cache')
@@ -23,7 +28,7 @@ local handle = (function()
     cacheFiles = true,
     cdn = cdn,
     ckey = ckey,
-    keys = require('build.tactkeys'),
+    keys = require('runtime.tactkeys'),
     locale = casc.locale.US,
     log = log,
     zerofillEncryptedChunks = true,
@@ -119,7 +124,7 @@ local function processTocDir(dir)
   end
 end
 
-for _, db in ipairs(require('build.products.' .. product .. '.dblist')) do
+for _, db in ipairs(dofile('build/products/' .. product .. '/dblist.lua')) do
   save(path.join('db2', db .. '.db2'), handle:readFile(fdids[db:lower()]))
 end
 

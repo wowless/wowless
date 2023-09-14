@@ -209,7 +209,7 @@ do
         assert(v:match(': want "function", got "nil"$'))
         apis[k] = nil
       elseif type(v) == 'table' then
-        assert(next(v) == 'impltype', ('expected impltype, got %q'):format(next(v)))
+        assert(next(v) == 'impltype', ('%q: expected impltype, got %q'):format(k, next(v)))
         assert(next(v, 'impltype') == nil)
         if v.impltype:match(': bad argument #1 to \'create\' %(Lua function expected%): want true, got false$') then
           apis[k] = {}

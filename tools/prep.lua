@@ -1,6 +1,8 @@
 local args = (function()
   local parser = require('argparse')()
   parser:argument('product', 'product to fetch')
+  parser:option('-o --output', 'output file')
+  parser:option('-s --stamp', 'stamp file')
   return parser:parse()
 end)()
 
@@ -312,7 +314,7 @@ local data = {
   xml = parseYaml('data/products/' .. product .. '/xml.yaml'),
 }
 
-local outfn = 'build/products/' .. args.product .. '/data.lua'
+local outfn = args.output or ('build/products/' .. args.product .. '/data.lua')
 local tu = require('tools.util')
-tu.writedeps(outfn, deps)
+tu.writedeps(outfn, deps, args.stamp)
 tu.writeifchanged(outfn, tu.returntable(data))

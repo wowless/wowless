@@ -293,7 +293,6 @@ Button:
       - type: number
     IsEnabled:
       impl: Button/IsEnabled
-    LockHighlight: {}
     RegisterForClicks:
       impl: Button/RegisterForClicks
     RegisterForMouse: {}
@@ -317,7 +316,6 @@ Button:
     SetHighlightAtlas:
       impl: Button/SetHighlightAtlas
     SetHighlightFontObject: {}
-    SetHighlightLocked: {}
     SetHighlightTexture:
       impl: Button/SetHighlightTexture
     SetMotionScriptsWhileDisabled:
@@ -340,7 +338,6 @@ Button:
       impl: Button/SetPushedTexture
     SetText:
       impl: Button/SetText
-    UnlockHighlight: {}
 CheckButton:
   fields:
     checked:
@@ -630,6 +627,7 @@ EditBox:
     HighlightText: {}
     Insert:
       impl: EditBox/Insert
+    IsAlphabeticOnly: {}
     IsAutoFocus:
       getter:
       - name: isAutoFocus
@@ -644,10 +642,13 @@ EditBox:
       getter:
       - name: isMultiLine
     IsNumeric: {}
+    IsNumericFullRange: {}
     IsPassword: {}
     IsSecureText:
       getter:
       - name: isSecureText
+    ResetInputMode: {}
+    SetAlphabeticOnly: {}
     SetAltArrowKeyMode: {}
     SetAutoFocus:
       setter:
@@ -676,6 +677,7 @@ EditBox:
       - name: isMultiLine
     SetNumber: {}
     SetNumeric: {}
+    SetNumericFullRange: {}
     SetPassword: {}
     SetSecureText:
       setter:
@@ -1018,6 +1020,7 @@ Frame:
       - name: minResizeHeight
       - name: maxResizeWidth
       - name: maxResizeHeight
+    GetWindow: {}
     HasFixedFrameLevel:
       getter:
       - name: hasFixedFrameLevel
@@ -1045,6 +1048,7 @@ Frame:
     IsUserPlaced:
       getter:
       - name: isUserPlaced
+    LockHighlight: {}
     Lower: {}
     Raise: {}
     RegisterAllEvents:
@@ -1078,6 +1082,7 @@ Frame:
     SetFrameStrata:
       setter:
       - name: frameStrata
+    SetHighlightLocked: {}
     SetHitRectInsets: {}
     SetHyperlinksEnabled:
       setter:
@@ -1103,9 +1108,11 @@ Frame:
     SetUserPlaced:
       setter:
       - name: isUserPlaced
+    SetWindow: {}
     StartMoving: {}
     StartSizing: {}
     StopMovingOrSizing: {}
+    UnlockHighlight: {}
     UnregisterAllEvents:
       impl: Frame/UnregisterAllEvents
     UnregisterEvent:
@@ -1212,11 +1219,13 @@ Line:
     TextureBase: {}
   methods:
     GetEndPoint: {}
+    GetHitRectThickness: {}
     GetStartPoint: {}
     GetThickness:
       getter:
       - name: thickness
     SetEndPoint: {}
+    SetHitRectThickness: {}
     SetStartPoint: {}
     SetThickness:
       setter:
@@ -1753,6 +1762,7 @@ Region:
     SetPassThroughButtons: {}
     SetPoint:
       impl: Region/SetPoint
+    SetProtected: {}
     SetSize:
       setter:
       - name: width
@@ -2026,9 +2036,14 @@ Texture:
     TextureBase: {}
   methods:
     AddMaskTexture: {}
+    ClearTextureSlice: {}
     GetMaskTexture: {}
     GetNumMaskTextures: {}
+    GetTextureSliceMargins: {}
+    GetTextureSliceMode: {}
     RemoveMaskTexture: {}
+    SetTextureSliceMargins: {}
+    SetTextureSliceMode: {}
   warner: true
 TextureBase:
   fields:

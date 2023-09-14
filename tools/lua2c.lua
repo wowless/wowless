@@ -36,12 +36,14 @@ io.write([[#include "lauxlib.h"
 struct module {
   const char *name;
   const char *code;
+  int size;
+  const char *file;
 };
 static const struct module modules[] = {
 ]])
 for k, v in sorted(modules) do
-  v = v:gsub('\\', '\\\\'):gsub('\n', '\\n\\\n'):gsub('"', '\\"')
-  io.write(('  {"%s", "%s"},\n'):format(k, v))
+  local e = v:gsub('\\', '\\\\'):gsub('\n', '\\n\\\n'):gsub('"', '\\"')
+  io.write(('  {"%s", "%s", %d, "@%s.lua"},\n'):format(k, e, v:len(), k:gsub('%.', '/')))
 end
 io.write([[};
 struct cmodule {
@@ -62,7 +64,7 @@ void preload_]] .. package .. [[(lua_State *L) {
   lua_getfield(L, -1, "preload");
   for (size_t i = 0; i < sizeof(modules) / sizeof(struct module); ++i) {
     const struct module *m = &modules[i];
-    luaL_loadstring(L, m->code);
+    luaL_loadbuffer(L, m->code, m->size, m->file);
     lua_setfield(L, -2, m->name);
   }
   for (size_t i = 0; i < sizeof(cmodules) / sizeof(struct cmodule); ++i) {

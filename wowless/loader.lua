@@ -609,7 +609,7 @@ local function loader(api, cfg)
   end
 
   local build = datalua.build
-  local flavors = require('build.data.flavors')
+  local flavors = require('runtime.flavors')
 
   local function parseToc(tocFile, content)
     local attrs = {}

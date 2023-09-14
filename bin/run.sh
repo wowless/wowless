@@ -2,5 +2,5 @@
 set -e
 product="$1"
 shift
-ninja runtime "$product"
+ninja build/cmake/wowless "$product"
 build/cmake/wowless -p "$product" "$@"
