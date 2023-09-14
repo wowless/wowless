@@ -744,7 +744,7 @@ add_custom_command(
   COMMAND tactkeys ${CMAKE_CURRENT_SOURCE_DIR}/vendor/tactkeys/WoW.txt generated/tactkeys.lua
   COMMAND ${CMAKE_COMMAND} -E copy_if_different generated/tactkeys.lua runtime/tactkeys.lua
   COMMAND ${CMAKE_COMMAND} -E touch stamp/tactkeys.txt
-  DEPENDS tactkeys ${CMAKE_CURRENT_SOURCE_DIR}/vendor/dbdefs/manifest.json
+  DEPENDS tactkeys ${CMAKE_CURRENT_SOURCE_DIR}/vendor/tactkeys/WoW.txt
 )
 lua2c(runtimetactkeys runtime.tactkeys=runtime/tactkeys.lua)
 add_library(runtimetactkeys STATIC runtimetactkeys.c stamp/tactkeys.txt)
