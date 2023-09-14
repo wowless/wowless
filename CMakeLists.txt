@@ -1,6 +1,9 @@
 cmake_minimum_required(VERSION 3.24)
 project(wowless LANGUAGES C)
 
+# https://gitlab.kitware.com/cmake/cmake/-/issues/25245
+cmake_policy(SET CMP0116 OLD)
+
 include(FetchContent)
 
 FetchContent_Declare(
@@ -680,6 +683,52 @@ add_strict_lua_executable(
   wowlessyaml
 )
 
+function(doprep product)
+  add_custom_command(
+    OUTPUT stamp/${product}.txt
+    BYPRODUCTS runtime/${product}.lua
+    COMMAND prep ${product}
+      --output ${CMAKE_CURRENT_BINARY_DIR}/generated/${product}.lua
+      --stamp ${CMAKE_NINJA_OUTPUT_PATH_PREFIX}stamp/${product}.txt
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different
+      ${CMAKE_CURRENT_BINARY_DIR}/generated/${product}.lua
+      ${CMAKE_CURRENT_BINARY_DIR}/runtime/${product}.lua
+    COMMAND ${CMAKE_COMMAND} -E touch ${CMAKE_CURRENT_BINARY_DIR}/stamp/${product}.txt
+    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+    DEPFILE ${CMAKE_CURRENT_BINARY_DIR}/generated/${product}.lua.d
+    DEPENDS prep
+  )
+endfunction()
+
+# TODO derive this from data/products.yaml, or vice versa
+list(
+  APPEND products
+  wow
+  wowt
+  wowxptr
+  wow_classic
+  wow_classic_era
+  wow_classic_era_ptr
+  wow_classic_ptr
+)
+foreach(p ${products})
+  doprep(${p})
+endforeach()
+block()
+  foreach(p ${products})
+    list(APPEND specs build.products.${p}.data=runtime/${p}.lua)
+    list(APPEND stamps stamp/${p}.txt)
+  endforeach()
+  # TODO rationalize with lua2c
+  add_custom_command(
+    OUTPUT dataluas.c
+    COMMAND bootstraplua ${CMAKE_CURRENT_SOURCE_DIR}/tools/lua2c.lua dataluas ${specs}
+    DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/tools/lua2c.lua ${stamps}
+  )
+  add_library(dataluas STATIC dataluas.c)
+  target_link_libraries(dataluas elune)
+endblock()
+
 add_strict_lua_executable(
   tactkeys
   ${CMAKE_CURRENT_SOURCE_DIR}/tools/tactkeys.lua
@@ -1278,10 +1327,11 @@ add_library(
 )
 target_link_libraries(wowlesslib elune)
 
-add_lua_executable(
+add_strict_lua_executable(
   wowless
   ${CMAKE_CURRENT_SOURCE_DIR}/wowless.lua
   argparse
+  dataluas
   date
   lsqlite3
   luaexpat
@@ -1293,6 +1343,7 @@ add_lua_executable(
   penlight
   tsort
   wowlesslib
+  wowlessrender
   wowlessutil
   wowlessyaml
 )
@@ -1301,6 +1352,7 @@ add_lua_executable(
   test
   ${CMAKE_CURRENT_SOURCE_DIR}/tools/runtests.lua
   argparse
+  dataluas
   date
   lsqlite3
   luaexpat
