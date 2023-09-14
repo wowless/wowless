@@ -1343,6 +1343,7 @@ add_strict_lua_executable(
   penlight
   tsort
   wowlesslib
+  wowlessrender
   wowlessutil
   wowlessyaml
 )
