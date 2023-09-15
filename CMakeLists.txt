@@ -64,11 +64,30 @@ add_library(
 )
 block()
   set(LUA_CPATH_ESCAPED "")
-  set(LUA_DIRSEP_ESCAPED "/")
-  set(LUA_DISABLE_LOADLIB true)
+  set(LUA_DISABLE_LOADLIB ON)
   set(LUA_PATH_ESCAPED "")
-  set(LUA_USE_POSIX true)
   set(LUAI_BITSINT 32)
+  if(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
+    set(LUA_DIRSEP_ESCAPED "/")
+    set(LUA_USE_LINUX OFF)
+    set(LUA_USE_MACOS ON)
+    set(LUA_USE_POSIX ON)
+    set(LUA_USE_WINDOWS OFF)
+  elseif(CMAKE_SYSTEM_NAME STREQUAL "Linux")
+    set(LUA_DIRSEP_ESCAPED "/")
+    set(LUA_USE_LINUX ON)
+    set(LUA_USE_MACOS OFF)
+    set(LUA_USE_POSIX ON)
+    set(LUA_USE_WINDOWS OFF)
+  elseif(CMAKE_SYSTEM_NAME STREQUAL "Windows")
+    set(LUA_DIRSEP_ESCAPED "\\\\")
+    set(LUA_USE_LINUX OFF)
+    set(LUA_USE_MACOS OFF)
+    set(LUA_USE_POSIX OFF)
+    set(LUA_USE_WINDOWS ON)
+  else()
+    message(FATAL_ERROR "unsupported platform")
+  endif()
   configure_file(
     ${elune_SOURCE_DIR}/liblua/include/luaconf.h.in
     ${elune_BINARY_DIR}/luaconf.h
@@ -80,7 +99,12 @@ target_include_directories(
   ${elune_SOURCE_DIR}/liblua/include
   ${elune_BINARY_DIR}
 )
-target_link_libraries(elune m)
+target_link_libraries(
+  elune PRIVATE
+  $<$<PLATFORM_ID:Darwin,Linux>:m>
+  $<$<PLATFORM_ID:Windows>:bcrypt>
+)
+set_target_properties(elune PROPERTIES C_STANDARD 11)
 
 add_executable(bootstraplua ${elune_SOURCE_DIR}/lua/lua.c)
 target_link_libraries(bootstraplua elune)
