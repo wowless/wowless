@@ -35,6 +35,13 @@ io.write([[#include "lauxlib.h"
 #include "lualib.h"
 ]])
 if next(modules) then
+  for k, v in sorted(modules) do
+    io.write(('static const char %s[] = {\n'):format(k:gsub('%.', '_')))
+    for i = 1, v:len() do
+      io.write(('  0x%02x,\n'):format(v:byte(i)))
+    end
+    io.write('};\n')
+  end
   io.write([[
 struct module {
   const char *name;
@@ -45,8 +52,7 @@ struct module {
 static const struct module modules[] = {
 ]])
   for k, v in sorted(modules) do
-    local e = v:gsub('\\', '\\\\'):gsub('\n', '\\n\\\n'):gsub('"', '\\"')
-    io.write(('  {"%s", "%s", %d, "@%s.lua"},\n'):format(k, e, v:len(), k:gsub('%.', '/')))
+    io.write(('  {"%s", %s, %d, "@%s.lua"},\n'):format(k, k:gsub('%.', '_'), v:len(), k:gsub('%.', '/')))
   end
   io.write('};\n')
 end
