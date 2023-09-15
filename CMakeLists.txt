@@ -188,6 +188,7 @@ set_property(
   YAML_VERSION_STRING="0.2.5"
 )
 target_include_directories(yaml PUBLIC ${yaml_SOURCE_DIR}/include)
+target_compile_definitions(yaml PUBLIC YAML_DECLARE_STATIC)
 
 FetchContent_Declare(
   lyaml
@@ -243,7 +244,7 @@ add_library(
   ${zlib_SOURCE_DIR}/uncompr.c
   ${zlib_SOURCE_DIR}/zutil.c
 )
-target_compile_definitions(zlib PRIVATE Z_HAVE_UNISTD_H)
+target_compile_definitions(zlib PRIVATE $<$<PLATFORM_ID:Darwin,Linux>:Z_HAVE_UNISTD_H>)
 target_include_directories(zlib PUBLIC ${zlib_SOURCE_DIR})
 
 FetchContent_Declare(
