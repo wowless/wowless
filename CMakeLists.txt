@@ -708,7 +708,18 @@ add_strict_lua_executable(
   wowlessyaml
 )
 
-function(doprep product)
+# TODO derive this from data/products.yaml, or vice versa
+list(
+  APPEND products
+  wow
+  wowt
+  wowxptr
+  wow_classic
+  wow_classic_era
+  wow_classic_era_ptr
+  wow_classic_ptr
+)
+foreach(product ${products})
   add_custom_command(
     OUTPUT stamp/${product}.txt
     BYPRODUCTS runtime/${product}.lua
@@ -723,36 +734,19 @@ function(doprep product)
     DEPFILE ${CMAKE_CURRENT_BINARY_DIR}/generated/${product}.lua.d
     DEPENDS prep
   )
-endfunction()
-
-# TODO derive this from data/products.yaml, or vice versa
-list(
-  APPEND products
-  wow
-  wowt
-  wowxptr
-  wow_classic
-  wow_classic_era
-  wow_classic_era_ptr
-  wow_classic_ptr
-)
-foreach(p ${products})
-  doprep(${p})
-endforeach()
-block()
-  foreach(p ${products})
-    list(APPEND specs build.products.${p}.data=runtime/${p}.lua)
-    list(APPEND stamps stamp/${p}.txt)
-  endforeach()
   # TODO rationalize with lua2c
   add_custom_command(
-    OUTPUT dataluas.c
-    COMMAND bootstraplua ${CMAKE_CURRENT_SOURCE_DIR}/tools/lua2c.lua dataluas ${specs}
-    DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/tools/lua2c.lua ${stamps}
+    OUTPUT datalua_${product}.c
+    COMMAND bootstraplua
+      ${CMAKE_CURRENT_SOURCE_DIR}/tools/lua2c.lua
+      datalua_${product}
+      build.products.${product}.data=runtime/${product}.lua
+    DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/tools/lua2c.lua stamp/${product}.txt
   )
-  add_library(dataluas STATIC dataluas.c)
-  target_link_libraries(dataluas elune)
-endblock()
+  add_library(datalua_${product} STATIC datalua_${product}.c)
+  target_link_libraries(datalua_${product} elune)
+  list(APPEND dataluas datalua_${product})
+endforeach()
 
 add_strict_lua_executable(
   tactkeys
@@ -1356,7 +1350,7 @@ add_strict_lua_executable(
   wowless
   ${CMAKE_CURRENT_SOURCE_DIR}/wowless.lua
   argparse
-  dataluas
+  ${dataluas}
   date
   lsqlite3
   luaexpat
@@ -1377,7 +1371,7 @@ add_lua_executable(
   test
   ${CMAKE_CURRENT_SOURCE_DIR}/tools/runtests.lua
   argparse
-  dataluas
+  ${dataluas}
   date
   lsqlite3
   luaexpat
