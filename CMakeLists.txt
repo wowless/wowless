@@ -993,7 +993,6 @@ file(WRITE ${imagemagick_SOURCE_DIR}/magick/magick-baseconfig.h.in [=[
 #define MAGICKCORE_SIZEOF_VOID_P 8
 #define MAGICKCORE_STDC_HEADERS
 #cmakedefine MAGICKCORE_HAVE_UNISTD_H
-#cmakedefine MAGICKCORE_POSIX_SUPPORT
 #cmakedefine ssize_t @ssize_t@
 ]=])
 block()
@@ -1001,7 +1000,6 @@ block()
     set(ssize_t int)
   else()
     set(MAGICKCORE_HAVE_UNISTD_H ON)
-    set(MAGICKCORE_POSIX_SUPPORT ON)
   endif()
   configure_file(
     ${imagemagick_SOURCE_DIR}/magick/magick-baseconfig.h.in
