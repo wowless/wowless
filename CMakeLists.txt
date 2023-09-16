@@ -986,22 +986,23 @@ file(WRITE ${imagemagick_SOURCE_DIR}/magick/magick-baseconfig.h.in [=[
 #define MAGICKCORE_CONFIGURE_RELATIVE_PATH "foo"
 #define MAGICKCORE_LIBRARY_PATH "foo"
 #define MAGICKCORE_LIBRARY_RELATIVE_PATH "foo"
+#define MAGICKCORE_PACKAGE_NAME "ImageMagick"
 #define MAGICKCORE_PNG_DELEGATE
 #define MAGICKCORE_QUANTUM_DEPTH 16
 #define MAGICKCORE_SHARE_RELATIVE_PATH "foo"
 #define MAGICKCORE_SHAREARCH_BASEDIRNAME "foo"
 #define MAGICKCORE_SIZEOF_VOID_P 8
 #define MAGICKCORE_STDC_HEADERS
+#cmakedefine MAGICKCORE_HAVE__ALIGNED_MALLOC
 #cmakedefine MAGICKCORE_HAVE_UNISTD_H
-#cmakedefine MAGICKCORE_POSIX_SUPPORT
 #cmakedefine ssize_t @ssize_t@
 ]=])
 block()
   if(CMAKE_SYSTEM_NAME STREQUAL "Windows")
+    set(MAGICKCORE_HAVE__ALIGNED_MALLOC ON)
     set(ssize_t int)
   else()
     set(MAGICKCORE_HAVE_UNISTD_H ON)
-    set(MAGICKCORE_POSIX_SUPPORT ON)
   endif()
   configure_file(
     ${imagemagick_SOURCE_DIR}/magick/magick-baseconfig.h.in
@@ -1281,6 +1282,7 @@ add_library(
   ${imagemagick_SOURCE_DIR}/wand/wand.c
 )
 target_include_directories(imagemagick PUBLIC ${imagemagick_SOURCE_DIR})
+target_compile_definitions(imagemagick PRIVATE $<$<PLATFORM_ID:Windows>:_LIB>)
 target_link_libraries(imagemagick libpng)
 
 FetchContent_Declare(
