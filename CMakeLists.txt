@@ -134,6 +134,7 @@ target_include_directories(
   ${expat_SOURCE_DIR}/expat/lib
   ${expat_BINARY_DIR}
 )
+target_compile_definitions(expat PUBLIC XML_STATIC)
 
 function(lua2c name)
   set(deps ${ARGN})
