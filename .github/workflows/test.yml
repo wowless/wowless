@@ -39,18 +39,28 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        generator:
-        - Ninja
-        - Unix Makefiles
-        os:
-        - macos-latest
-        - ubuntu-latest
-    runs-on: ${{ matrix.os }}
+        config:
+        - name: Linux / Make
+          generator: Unix Makefiles
+          os: ubuntu-latest
+        - name: Linux / Ninja
+          generator: Ninja
+          os: ubuntu-latest
+        - name: MacOS / Make
+          generator: Unix Makefiles
+          os: macos-latest
+        - name: MacOS / Ninja
+          generator: Ninja
+          os: macos-latest
+        - name: Windows / Ninja
+          generator: Ninja
+          os: windows-latest
+    runs-on: ${{ matrix.config.os }}
     steps:
     - uses: actions/checkout@v3
       with:
         submodules: true
     - uses: seanmiddleditch/gha-setup-ninja@v3
-      if: matrix.generator == 'Ninja'
-    - run: cmake -B build -G "${{ matrix.generator }}"
+      if: matrix.config.generator == 'Ninja'
+    - run: cmake -B build -G "${{ matrix.config.generator }}"
     - run: cmake --build build
