@@ -876,9 +876,10 @@ add_library(
   ${luasocket_SOURCE_DIR}/src/select.c
   ${luasocket_SOURCE_DIR}/src/tcp.c
   ${luasocket_SOURCE_DIR}/src/udp.c
-  ${luasocket_SOURCE_DIR}/src/usocket.c
+  $<$<PLATFORM_ID:Darwin,Linux>:${luasocket_SOURCE_DIR}/src/usocket.c>
+  $<$<PLATFORM_ID:Windows>:${luasocket_SOURCE_DIR}/src/wsocket.c>
 )
-target_link_libraries(luasocket elune)
+target_link_libraries(luasocket elune $<$<PLATFORM_ID:Windows>:ws2_32>)
 
 FetchContent_Declare(
   casc
