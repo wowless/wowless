@@ -274,7 +274,7 @@ add_library(
   ${sqlite3_SOURCE_DIR}/sqlite3.c
 )
 target_include_directories(sqlite3 PUBLIC ${sqlite3_SOURCE_DIR})
-target_link_libraries(sqlite3 dl pthread)
+target_link_libraries(sqlite3 $<$<PLATFORM_ID:Darwin,Linux>:dl pthread>)
 
 FetchContent_Declare(
   lsqlite3
