@@ -1282,7 +1282,7 @@ add_library(
   ${imagemagick_SOURCE_DIR}/wand/wand.c
 )
 target_include_directories(imagemagick PUBLIC ${imagemagick_SOURCE_DIR})
-target_compile_definitions(imagemagick PRIVATE $<$<PLATFORM_ID:Windows>:_LIB>)
+target_compile_definitions(imagemagick PUBLIC $<$<PLATFORM_ID:Windows>:_LIB>)
 target_link_libraries(imagemagick libpng)
 
 FetchContent_Declare(
