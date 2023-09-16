@@ -979,28 +979,35 @@ FetchContent_Declare(
   SOURCE_SUBDIR disable_cmakelists_txt
 )
 FetchContent_MakeAvailable(imagemagick)
-file(WRITE ${CMAKE_CURRENT_BINARY_DIR}/magick-baseconfig.h [=[
+file(WRITE ${imagemagick_SOURCE_DIR}/magick/magick-baseconfig.h.in [=[
 #define MAGICKCORE_HAVE_STDINT_H
 #define MAGICKCORE_HAVE_STRING_H
-#define MAGICKCORE_HAVE_UNISTD_H
 #define MAGICKCORE_HDRI_ENABLE 0
 #define MAGICKCORE_CONFIGURE_RELATIVE_PATH "foo"
 #define MAGICKCORE_LIBRARY_PATH "foo"
 #define MAGICKCORE_LIBRARY_RELATIVE_PATH "foo"
 #define MAGICKCORE_PNG_DELEGATE
-#define MAGICKCORE_POSIX_SUPPORT
 #define MAGICKCORE_QUANTUM_DEPTH 16
 #define MAGICKCORE_SHARE_RELATIVE_PATH "foo"
 #define MAGICKCORE_SHAREARCH_BASEDIRNAME "foo"
 #define MAGICKCORE_SIZEOF_VOID_P 8
 #define MAGICKCORE_STDC_HEADERS
+#cmakedefine MAGICKCORE_HAVE_UNISTD_H
+#cmakedefine MAGICKCORE_POSIX_SUPPORT
+#cmakedefine ssize_t @ssize_t@
 ]=])
-file(
-  COPY_FILE
-  ${CMAKE_CURRENT_BINARY_DIR}/magick-baseconfig.h
-  ${imagemagick_SOURCE_DIR}/magick/magick-baseconfig.h
-  ONLY_IF_DIFFERENT
-)
+block()
+  if(CMAKE_SYSTEM_NAME STREQUAL "Windows")
+    set(ssize_t int)
+  else()
+    set(MAGICKCORE_HAVE_UNISTD_H ON)
+    set(MAGICKCORE_POSIX_SUPPORT ON)
+  endif()
+  configure_file(
+    ${imagemagick_SOURCE_DIR}/magick/magick-baseconfig.h.in
+    ${imagemagick_SOURCE_DIR}/magick/magick-baseconfig.h
+  )
+endblock()
 block()
   set(DOCUMENTATION_PATH foo)
   set(PACKAGE_LIB_VERSION 0x69C)
