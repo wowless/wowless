@@ -1283,7 +1283,7 @@ add_library(
 )
 target_include_directories(imagemagick PUBLIC ${imagemagick_SOURCE_DIR})
 target_compile_definitions(imagemagick PUBLIC $<$<PLATFORM_ID:Windows>:_LIB>)
-target_link_libraries(imagemagick libpng)
+target_link_libraries(imagemagick libpng $<$<PLATFORM_ID:Windows>:urlmon>)
 
 FetchContent_Declare(
   luamagick
