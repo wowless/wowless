@@ -3603,6 +3603,8 @@ GLUE_CONSOLE_LOG:
     type: string
 GLUE_SCREENSHOT_FAILED:
   payload: {}
+GLUE_SCREENSHOT_SUCCEEDED:
+  payload: {}
 GLYPH_ADDED:
   payload:
   - name: glyphSlot
@@ -3962,6 +3964,28 @@ LFG_LIST_ACTIVE_ENTRY_UPDATE:
   - name: created
     nilable: true
     type: boolean
+LFG_LIST_APPLICANT_LIST_UPDATED:
+  payload:
+  - name: newPendingEntry
+    nilable: true
+    type: boolean
+  - name: newPendingEntryWithData
+    nilable: true
+    type: boolean
+LFG_LIST_APPLICANT_UPDATED:
+  payload:
+  - name: applicantID
+    type: number
+LFG_LIST_APPLICATION_STATUS_UPDATED:
+  payload:
+  - name: searchResultID
+    type: number
+  - name: newStatus
+    type: string
+  - name: oldStatus
+    type: string
+  - name: groupName
+    type: string
 LFG_LIST_AVAILABILITY_UPDATE:
   payload: {}
 LFG_LIST_ENTRY_CREATION_FAILED:
@@ -3970,6 +3994,12 @@ LFG_LIST_ENTRY_EXPIRED_TIMEOUT:
   payload: {}
 LFG_LIST_ENTRY_EXPIRED_TOO_MANY_PLAYERS:
   payload: {}
+LFG_LIST_JOINED_GROUP:
+  payload:
+  - name: searchResultID
+    type: number
+  - name: groupName
+    type: string
 LFG_LIST_ROLE_UPDATE:
   payload: {}
 LFG_LIST_SEARCH_FAILED:
@@ -4706,6 +4736,10 @@ PLAYER_SOFT_INTERACT_CHANGED:
     type: string
 PLAYER_SOFT_TARGET_INTERACTION:
   payload: {}
+PLAYER_SPECIALIZATION_CHANGED:
+  payload:
+  - name: unitTarget
+    type: unit
 PLAYER_STARTED_LOOKING:
   payload: {}
 PLAYER_STARTED_MOVING:
@@ -4780,6 +4814,8 @@ PRODUCT_CHOICE_UPDATE:
   payload: {}
 PRODUCT_DISTRIBUTIONS_UPDATED:
   payload: {}
+PVP_BRAWL_INFO_UPDATED:
+  payload: {}
 PVP_RATED_STATS_UPDATE:
   payload: {}
 PVP_TIMER_UPDATE:
@@ -4829,7 +4865,21 @@ QUEST_GREETING:
   payload: {}
 QUEST_ITEM_UPDATE:
   payload: {}
+QUEST_LOG_CRITERIA_UPDATE:
+  payload:
+  - name: questID
+    type: number
+  - name: specificTreeID
+    type: number
+  - name: description
+    type: string
+  - name: numFulfilled
+    type: number
+  - name: numRequired
+    type: number
 QUEST_LOG_UPDATE:
+  payload: {}
+QUEST_POI_UPDATE:
   payload: {}
 QUEST_PROGRESS:
   payload: {}
@@ -6346,6 +6396,12 @@ VOID_TRANSFER_DONE:
   payload: {}
 VOID_TRANSFER_SUCCESS:
   payload: {}
+VOTE_KICK_REASON_NEEDED:
+  payload:
+  - name: name
+    type: string
+  - name: resultGUID
+    type: string
 WARFRONT_COMPLETED:
   payload:
   - name: mapID

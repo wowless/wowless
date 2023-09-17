@@ -1132,6 +1132,8 @@ GameTooltip:
     SetInventoryItem: {}
     SetInventoryItemByID: {}
     SetItemByID: {}
+    SetLFGDungeonReward: {}
+    SetLFGDungeonShortageReward: {}
     SetLootCurrency: {}
     SetLootItem: {}
     SetLootRollItem: {}
@@ -1574,6 +1576,32 @@ PlayerModel:
     SetUnit: {}
     StopAnimKit: {}
     ZeroCachedCenterXY: {}
+POIFrame:
+  inherits: {}
+  methods:
+    DrawAll: {}
+    DrawBlob: {}
+    DrawNone: {}
+    EnableMerging: {}
+    EnableSmoothing: {}
+    GetMapID: {}
+    SetBorderAlpha: {}
+    SetBorderScalar: {}
+    SetBorderTexture: {}
+    SetFillAlpha: {}
+    SetFillTexture: {}
+    SetMapID: {}
+    SetMergeThreshold: {}
+    SetNumSplinePoints: {}
+    UpdateMouseOverTooltip: {}
+  virtual: true
+QuestPOIFrame:
+  inherits:
+    Frame: {}
+    POIFrame: {}
+  methods:
+    GetNumTooltips: {}
+    GetTooltipIndex: {}
 Region:
   fields:
     animationGroups:
