@@ -52,6 +52,9 @@ jobs:
         - name: MacOS / Ninja
           generator: Ninja
           os: macos-latest
+        - name: Windows / MSBuild
+          generator: Visual Studio 17 2022
+          os: windows-latest
         - name: Windows / Ninja
           generator: Ninja
           os: windows-latest
