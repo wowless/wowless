@@ -633,8 +633,16 @@ add_custom_command(
   COMMAND ${CMAKE_COMMAND} -E touch stamp/listfile.txt
   DEPENDS listfile ${CMAKE_CURRENT_SOURCE_DIR}/vendor/dbdefs/manifest.json
 )
-lua2c(runtimelistfile runtime.listfile=runtime/listfile.lua)
-add_library(runtimelistfile STATIC runtimelistfile.c stamp/listfile.txt)
+# TODO rationalize with lua2c
+add_custom_command(
+  OUTPUT runtimelistfile.c
+  COMMAND bootstraplua
+    ${CMAKE_CURRENT_SOURCE_DIR}/tools/lua2c.lua
+    runtimelistfile
+    runtime.listfile=runtime/listfile.lua
+  DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/tools/lua2c.lua stamp/listfile.txt
+)
+add_library(runtimelistfile STATIC runtimelistfile.c)
 target_link_libraries(runtimelistfile elune)
 
 add_strict_lua_executable(
@@ -766,8 +774,16 @@ add_custom_command(
   COMMAND ${CMAKE_COMMAND} -E touch stamp/tactkeys.txt
   DEPENDS tactkeys ${CMAKE_CURRENT_SOURCE_DIR}/vendor/tactkeys/WoW.txt
 )
-lua2c(runtimetactkeys runtime.tactkeys=runtime/tactkeys.lua)
-add_library(runtimetactkeys STATIC runtimetactkeys.c stamp/tactkeys.txt)
+# TODO rationalize with lua2c
+add_custom_command(
+  OUTPUT runtimetactkeys.c
+  COMMAND bootstraplua
+    ${CMAKE_CURRENT_SOURCE_DIR}/tools/lua2c.lua
+    runtimetactkeys
+    runtime.tactkeys=runtime/tactkeys.lua
+  DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/tools/lua2c.lua stamp/tactkeys.txt
+)
+add_library(runtimetactkeys STATIC runtimetactkeys.c)
 target_link_libraries(runtimetactkeys elune)
 
 lua2c(toolssqlite3ext tools.sqlite3ext=c)
