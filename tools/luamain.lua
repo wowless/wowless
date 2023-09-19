@@ -25,6 +25,11 @@ for _, p in ipairs(preloads) do
   io.write('extern void preload_' .. p .. '(lua_State *);\n')
 end
 io.write([[
+static int errhandler(lua_State *L) {
+  const char *msg = lua_tostring(L, 1);
+  luaL_traceback(L, L, msg, 1);
+  return 1;
+}
 int main(int argc, char **argv) {
   lua_State *L = luaL_newstate();
   if (L == NULL) {
@@ -66,10 +71,11 @@ io.write([[
     lua_rawseti(L, -2, i);
   }
   lua_setglobal(L, "arg");
+  lua_pushcfunction(L, errhandler);
 ]])
 io.write(('  int ret = luaL_loadbuffer(L, "%s", %d, "@%s");\n'):format(etext, text:len(), main))
 io.write([[
-  if (ret || lua_pcall(L, 0, LUA_MULTRET, 0)) {
+  if (ret || lua_pcall(L, 0, LUA_MULTRET, -2)) {
     puts(lua_tostring(L, -1));
 ]])
 io.write(strict and [[
