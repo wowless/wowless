@@ -1,6 +1,6 @@
 local casc = require('casc')
 local yaml = require('wowapi.yaml')
-local allProducts = require('build.data.products')
+local allProducts = require('runtime.products')
 local args = (function()
   local parser = require('argparse')()
   parser:argument('products', 'product tags'):args('*'):choices(allProducts)

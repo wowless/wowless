@@ -1348,10 +1348,29 @@ add_strict_lua_executable(
   penlight
 )
 
+lua2c(runtimeproducts runtime.products=runtime/products.lua)
+add_library(runtimeproducts STATIC runtimeproducts.c)
+target_link_libraries(runtimeproducts elune)
+
+add_strict_lua_executable(
+  bump
+  ${CMAKE_CURRENT_SOURCE_DIR}/tools/bump.lua
+  argparse
+  casc
+  luabitop
+  luafilesystem
+  luasocket
+  lyaml
+  lzlib
+  md5
+  penlight
+  runtimeproducts
+  wowlessyaml
+)
+
 lua2c(
   wowlesslib
   runtime.flavors=runtime/flavors.lua
-  runtime.products=runtime/products.lua
   runtime.stringenums=runtime/stringenums.lua
   wowapi.data=${CMAKE_CURRENT_SOURCE_DIR}/wowapi/data.lua
   wowapi.loader=${CMAKE_CURRENT_SOURCE_DIR}/wowapi/loader.lua
@@ -1387,6 +1406,7 @@ add_strict_lua_executable(
   lzlib
   minheap
   penlight
+  runtimeproducts
   tsort
   wowlesslib
   wowlessrender
@@ -1409,6 +1429,7 @@ add_lua_executable(
   lzlib
   minheap
   penlight
+  runtimeproducts
   say
   tsort
   vstruct
