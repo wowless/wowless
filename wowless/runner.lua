@@ -109,19 +109,15 @@ local function run(cfg)
       }
       local skip = runnercfg.skip_events or {}
       -- TODO unify with wowapi/loader
-      local stubenv = setmetatable({}, {
-        __index = function(_, k)
-          return k == 'Mixin' and require('wowless.util').mixin or api.env[k]
-        end,
-        __metatable = 'stub metatable',
-        __newindex = function()
-          error('cannot modify _G from a stub')
-        end,
-      })
+      local mixin = require('wowless.util').mixin
+      local function stubMixin(t, name)
+        return mixin(t, api.env[name])
+      end
       for k, v in require('pl.tablex').sort(datalua.events) do
         if v.payload and not eventBlacklist[k] and not skip[k] then
           if v.payload == 'return ' or cfg.allevents then
-            api.SendEvent(k, setfenv(assert(loadstring(v.payload)), stubenv)())
+            local text = 'local Mixin = ...;' .. v.payload
+            api.SendEvent(k, assert(loadstring(text))(stubMixin))
           end
         end
       end
