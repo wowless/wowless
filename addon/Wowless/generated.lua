@@ -206,6 +206,8 @@ function G.GeneratedTests()
           else
             assertEquals(ty, type(func))
           end
+        elseif cfg.overwritten and not iswowlesslite then
+          return checkLuaFunc(func)
         elseif not capsuleapis[name] then
           return checkCFunc(func)
         end

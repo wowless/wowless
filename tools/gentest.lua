@@ -54,12 +54,14 @@ local ptablemap = {
     return 'Events', t
   end,
   globalapis = function(p)
+    local config = perproduct(p, 'config')
     local t = {}
     for name, api in pairs(perproduct(p, 'apis')) do
       if not name:find('%.') and not api.debug then
         local vv = {
           alias = api.alias,
           nowrap = api.nowrap,
+          overwritten = tpath(config, 'addon', 'overwritten_apis', name) and true,
           stdlib = api.stdlib,
         }
         t[name] = next(vv) and vv or true
