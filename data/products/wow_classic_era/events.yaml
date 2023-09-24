@@ -1,11 +1,5 @@
 ---
-ACHIEVEMENT_EARNED:
-  payload:
-  - name: achievementID
-    type: number
-  - name: alreadyEarned
-    nilable: true
-    type: boolean
+ACHIEVEMENT_EARNED: {}
 ACHIEVEMENT_PLAYER_NAME:
   payload:
   - name: achievementID
