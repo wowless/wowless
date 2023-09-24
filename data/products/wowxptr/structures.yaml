@@ -3086,7 +3086,11 @@ C_ItemUpgrade.ItemUpgradeLevelInfo:
       type: number
 C_ItemUpgrade.ItemUpgradeSeasonalCostType:
   fields:
+    currencyID:
+      nilable: true
+      type: number
     itemID:
+      nilable: true
       type: number
     orderIndex:
       type: number
@@ -3980,6 +3984,18 @@ C_PerksProgram.PerksVendorItemInfo:
     timeRemaining:
       type: number
     transmogSetID:
+      type: number
+    uiGroupInfo:
+      nilable: true
+      type:
+        structure: C_PerksProgram.PerksVendorItemUIGroupInfo
+C_PerksProgram.PerksVendorItemUIGroupInfo:
+  fields:
+    ID:
+      type: number
+    name:
+      type: string
+    priority:
       type: number
 C_PetInfo.PetTamerMapInfo:
   fields:
@@ -6615,11 +6631,20 @@ C_UIWidgetManager.StatusBarWidgetVisualizationInfo:
     colorTint:
       type:
         enum: StatusBarColorTintValue
+    fillMaxOpacity:
+      type:
+        enum: WidgetOpacityType
+    fillMinOpacity:
+      type:
+        enum: WidgetOpacityType
     fillMotionType:
       type:
         enum: UIWidgetMotionType
     frameTextureKit:
       type: string
+    glowAnimType:
+      type:
+        enum: WidgetGlowAnimType
     hasTimer:
       type: boolean
     inAnimType:
@@ -6646,6 +6671,9 @@ C_UIWidgetManager.StatusBarWidgetVisualizationInfo:
         arrayof: number
     scriptedAnimationEffectID:
       type: number
+    showGlowState:
+      type:
+        enum: WidgetShowGlowState
     shownState:
       type:
         enum: WidgetShownState
@@ -7492,6 +7520,8 @@ C_XMLUtil.XMLTemplateInfo:
       type:
         arrayof:
           structure: C_XMLUtil.XMLTemplateKeyValue
+    sourceLocation:
+      type: string
     type:
       type: string
     width:

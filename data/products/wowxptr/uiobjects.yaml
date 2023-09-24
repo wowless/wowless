@@ -2030,20 +2030,16 @@ TabardModel:
     GetUpperEmblemFile: {}
     GetUpperEmblemTexture: {}
     InitializeTabardColors: {}
+    IsGuildTabard: {}
     Save: {}
 Texture:
   inherits:
     TextureBase: {}
   methods:
     AddMaskTexture: {}
-    ClearTextureSlice: {}
     GetMaskTexture: {}
     GetNumMaskTextures: {}
-    GetTextureSliceMargins: {}
-    GetTextureSliceMode: {}
     RemoveMaskTexture: {}
-    SetTextureSliceMargins: {}
-    SetTextureSliceMode: {}
   warner: true
 TextureBase:
   fields:
@@ -2102,6 +2098,7 @@ TextureBase:
     LayeredRegion: {}
     ScriptObject: {}
   methods:
+    ClearTextureSlice: {}
     GetAtlas: {}
     GetBlendMode:
       getter:
@@ -2126,6 +2123,8 @@ TextureBase:
       impl: Texture/GetTexture
     GetTextureFileID: {}
     GetTextureFilePath: {}
+    GetTextureSliceMargins: {}
+    GetTextureSliceMode: {}
     GetVertexColor:
       getter:
       - name: vertexColorR
@@ -2163,6 +2162,8 @@ TextureBase:
     SetTexelSnappingBias: {}
     SetTexture:
       impl: Texture/SetTexture
+    SetTextureSliceMargins: {}
+    SetTextureSliceMode: {}
     SetVertexOffset: {}
     SetVertTile:
       setter:

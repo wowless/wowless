@@ -6464,6 +6464,13 @@ SHOW_SUBSCRIPTION_INTERSTITIAL:
   - name: type
     type:
       enum: SubscriptionInterstitialType
+SHOW_SUBTITLE:
+  payload:
+  - name: subtitle
+    type: string
+  - name: sender
+    nilable: true
+    type: string
 SIMPLE_BROWSER_WEB_ERROR:
   payload:
   - name: errorCode

@@ -55,6 +55,7 @@ addon:
     C_Traits.GetConditionInfo: {}
     C_Traits.GetEntryInfo: {}
     C_Traits.GetTreeInfo: {}
+    SetPortraitToTexture: {}
   skipped_uiobjects:
     Minimap: singleton
     WorldFrame: singleton

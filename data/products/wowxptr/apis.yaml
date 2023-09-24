@@ -8156,6 +8156,9 @@ C_FriendList.SendWho:
   inputs:
   - name: filter
     type: string
+  - name: origin
+    nilable: true
+    type: number
   outputs: {}
 C_FriendList.SetFriendNotes:
   inputs:
@@ -13200,6 +13203,11 @@ C_PlayerInfo.GetName:
   - name: name
     nilable: true
     type: string
+C_PlayerInfo.GetNativeDisplayID:
+  inputs: {}
+  outputs:
+  - name: nativeDisplayID
+    type: number
 C_PlayerInfo.GetPetStableCreatureDisplayInfoID:
   inputs:
   - name: index
@@ -13262,6 +13270,11 @@ C_PlayerInfo.IsConnected:
   outputs:
   - name: isConnected
     nilable: true
+    type: boolean
+C_PlayerInfo.IsDisplayRaceNative:
+  inputs: {}
+  outputs:
+  - name: isDisplayRaceNative
     type: boolean
 C_PlayerInfo.IsExpansionLandingPageUnlockedForPlayer:
   inputs:
