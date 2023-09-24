@@ -1368,6 +1368,18 @@ add_strict_lua_executable(
   wowlessyaml
 )
 
+add_lua_executable(
+  docs
+  ${CMAKE_CURRENT_SOURCE_DIR}/tools/docs.lua
+  argparse
+  luafilesystem
+  luapath
+  lyaml
+  penlight
+  toolsutil
+  wowlessyaml
+)
+
 lua2c(
   wowlesslib
   runtime.flavors=runtime/flavors.lua
