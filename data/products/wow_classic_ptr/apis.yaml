@@ -14316,7 +14316,6 @@ SetSendMailShowing:
   outputs: {}
 SetSpellbookPetAction: {}
 SetSuperTrackedQuestID: {}
-SetTalentGroupRole: {}
 SetTaxiBenchmarkMode:
   inputs:
   - name: value
