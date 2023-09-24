@@ -86,11 +86,11 @@ function G.GeneratedTests()
                 else
                   assertEquals(ty, type(func))
                 end
-              elseif not mcfg.overwritten then
+              elseif mcfg.overwritten and not iswowlesslite then
+                return checkLuaFunc(func)
+              else
                 return checkCFunc(func)
               end
-              -- Do nothing on overwritten APIs. They're Lua when processing
-              -- FrameXML, and C when running bare.
             end
           end
           return mkTests(ns, mtests)
