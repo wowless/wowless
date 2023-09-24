@@ -53,6 +53,8 @@ docs:
       PARTY_INVITE_CANCEL: {}
       SECURE_TRANSFER_CONFIRM_SEND_MAIL: {}
 runner:
+  skip_events:
+    CONFIRM_BINDER: StaticPopup buggy OnCancel without self
   skip_slashcmds:
     ACHIEVEMENTUI: {}
     CASTRANDOM: {}
