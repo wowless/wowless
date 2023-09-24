@@ -3536,11 +3536,7 @@ GENERIC_ERROR:
   payload:
   - name: errorMessage
     type: string
-GENERIC_WIDGET_DISPLAY_SHOW:
-  payload:
-  - name: info
-    type:
-      structure: C_GenericWidgetDisplay.GenericWidgetDisplayFrameInfo
+GENERIC_WIDGET_DISPLAY_SHOW: {}
 GET_ITEM_INFO_RECEIVED:
   payload:
   - name: itemID

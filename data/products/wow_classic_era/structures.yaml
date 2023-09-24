@@ -1244,27 +1244,6 @@ C_GamePad.GamePadStickConfig:
       type: number
     stick:
       type: string
-C_GenericWidgetDisplay.GenericWidgetDisplayFrameInfo:
-  fields:
-    closeButtonText:
-      nilable: true
-      type: string
-    extraButtonText:
-      nilable: true
-      type: string
-    frameHeight:
-      type: number
-    frameWidth:
-      type: number
-    title:
-      nilable: true
-      type: string
-    uiTextureKit:
-      nilable: true
-      type: string
-    uiWidgetSetID:
-      nilable: true
-      type: number
 C_GossipInfo.FriendshipReputationInfo:
   fields:
     friendshipFactionID:
