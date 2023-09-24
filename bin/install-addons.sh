@@ -14,6 +14,9 @@ function install() {
   if [ -d "$wowdir" ]
   then
     echo "installing in $wowproduct"
+    rm -rf "$wowdir/Wowless"
+    rm -rf "$wowdir/WowlessData"
+    rm -rf "$wowdir/WowlessTracker"
     ln -sf "$wowless/addon/Wowless" "$wowdir"
     ln -sf "$wowless/addon/WowlessTracker" "$wowdir"
     ln -sf "$wowless/build/products/$addonproduct/WowlessData" "$wowdir"
@@ -21,6 +24,7 @@ function install() {
 }
 install _retail_ wow
 install _ptr_ wowt
+install _xptr_ wowxptr
 install _classic_ wow_classic
 install _classic_era_ wow_classic_era
 install _classic_era_ptr_ wow_classic_era_ptr
