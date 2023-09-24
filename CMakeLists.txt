@@ -1304,7 +1304,7 @@ target_link_libraries(imagemagick libpng $<$<PLATFORM_ID:Windows>:urlmon>)
 FetchContent_Declare(
   luamagick
   GIT_REPOSITORY https://github.com/lua-wow-tools/luamagick
-  GIT_TAG 7f204a2a8ea32e3ff16e99a040469ce1e2b8b6b2
+  GIT_TAG 91ade4c984835fc57bdb3b399e2d7a5fa3b63546
   SOURCE_SUBDIR disable_cmakelists_txt
 )
 FetchContent_MakeAvailable(luamagick)
