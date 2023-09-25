@@ -1,14 +1,9 @@
 local lsqlite3 = require('lsqlite3')
 
-local quote = (function()
-  local moo = require('luasql.sqlite3').sqlite3():connect('')
-  return function(s)
-    return '\'' .. moo:escape(s) .. '\''
-  end
-end)()
+local sqlquote = require('tools.sqlite3ext').quote
 
 local function factory(theProduct)
-  local defs = require('build.products.' .. theProduct .. '.dbdefs')
+  local defs = dofile('build/products/' .. theProduct .. '/dbdefs.lua')
   for _, v in pairs(defs) do
     v.orderedfields = (function()
       local field2index = v.field2index
@@ -24,9 +19,27 @@ local function factory(theProduct)
   end
 
   local function create(filename)
+    local indexes = {
+      SpecSetMember = { 'SpecSetMember (SpecSet)' },
+      TraitCond = { 'TraitCond (ID)' },
+      TraitNode = { 'TraitNode (ID)' },
+      TraitNodeEntry = { 'TraitNodeEntry (ID)' },
+      TraitNodeGroup = { 'TraitNodeGroup (ID)' },
+      TraitNodeGroupXTraitCond = { 'TraitNodeGroupXTraitCond (TraitNodeGroupID)' },
+      TraitNodeGroupXTraitNode = { 'TraitNodeGroupXTraitNode (TraitNodeID)' },
+      TraitNodeXTraitCond = { 'TraitNodeXTraitCond (TraitNodeID)' },
+      TraitNodeXTraitNodeEntry = { 'TraitNodeXTraitNodeEntry (TraitNodeID)' },
+      UiTextureAtlas = { 'UiTextureAtlas (ID)' },
+      UiTextureAtlasMember = { 'UiTextureAtlasMember (CommittedName COLLATE NOCASE)' },
+    }
     local dbinit = { 'BEGIN' }
     for k, v in pairs(defs) do
       table.insert(dbinit, ('CREATE TABLE %s ("%s")'):format(k, table.concat(v.orderedfields, '","')))
+      if indexes[k] then
+        for i, index in ipairs(indexes[k]) do
+          table.insert(dbinit, ('CREATE INDEX %sIndex%d ON %s'):format(k, i, index))
+        end
+      end
     end
     table.insert(dbinit, 'COMMIT')
     table.insert(dbinit, '')
@@ -55,7 +68,7 @@ local function factory(theProduct)
             if ty == 'nil' then
               value = 'NULL'
             elseif ty == 'string' then
-              value = quote(value)
+              value = '\'' .. sqlquote(value) .. '\''
             elseif ty == 'number' then
               value = tostring(value)
             else
@@ -70,8 +83,6 @@ local function factory(theProduct)
         error('failed to populate ' .. k .. ': ' .. msg)
       end
     end
-    table.insert(dbinit, 'CREATE INDEX MooIndex ON UiTextureAtlasMember (CommittedName COLLATE NOCASE)')
-    table.insert(dbinit, 'CREATE INDEX CowIndex ON UiTextureAtlas (ID)')
     table.insert(dbinit, 'COMMIT')
     table.insert(dbinit, '')
     if db:exec(table.concat(dbinit, ';\n')) ~= lsqlite3.OK then

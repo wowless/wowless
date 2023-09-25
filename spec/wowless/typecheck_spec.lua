@@ -104,6 +104,12 @@ local tests = {
     spec = { type = { structure = 'structname' } },
     value = { 'moo' },
   },
+  ['structure type, table value, is out'] = {
+    isout = true,
+    out = { nil, 'has extraneous field 1' },
+    spec = { type = { structure = 'structname' } },
+    value = { 'moo' },
+  },
   ['unit type, string value, known unit'] = {
     out = { { name = 'Woof' } },
     spec = { type = 'unit' },
@@ -132,6 +138,7 @@ describe('typecheck', function()
           fields = {},
         },
       },
+      uiobjects = {},
     },
     states = {
       Addons = {},
@@ -149,7 +156,7 @@ describe('typecheck', function()
   })
   for name, test in pairs(tests) do
     it(name, function()
-      assert.same(test.out, { typecheck(test.spec, test.value) })
+      assert.same(test.out, { typecheck(test.spec, test.value, test.isout) })
     end)
   end
 end)

@@ -35,3 +35,9 @@ FrameStrata:
 Orientation:
   HORIZONTAL: {}
   VERTICAL: {}
+SmoothingType:
+  IN: {}
+  IN_OUT: {}
+  NONE: {}
+  OUT: {}
+  OUT_IN: {}

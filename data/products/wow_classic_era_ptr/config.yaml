@@ -4,11 +4,9 @@ addon:
     apinamespaces:
       C_AuthChallenge: {}
       C_StoreSecure: {}
-      C_UnitAurasPrivate: {}
       C_WowTokenSecure: {}
     enums:
       BattlepayBannerType: {}
-      BattlepayCardType: {}
       BattlepayDisplayFlag: {}
       BattlepayGroupDisplayType: {}
       BattlepayProductDecorator: {}
@@ -19,10 +17,30 @@ addon:
       VasServiceType: {}
     globalapis:
       CreateForbiddenFrame: {}
-  overwritten_apis:
-    C_Traits.GetConditionInfo: {}
-    C_Traits.GetEntryInfo: {}
-    C_Traits.GetTreeInfo: {}
+  hooked_globals:
+    FauxScrollFrame_Update: {}
+    SetItemRef: {}
+  ignore_cvar_value:
+    graphicsEnvironmentDetail: {}
+    graphicsGroundClutter: {}
+    graphicsLiquidDetail: {}
+    graphicsParticleDensity: {}
+    graphicsQuality: {}
+    graphicsShadowQuality: {}
+    graphicsSpellDensity: {}
+    graphicsSSAO: {}
+    graphicsTextureResolution: {}
+    mouseSpeed: {}
+    raidGraphicsEnvironmentDetail: {}
+    raidGraphicsGroundClutter: {}
+    raidGraphicsLiquidDetail: {}
+    raidGraphicsParticleDensity: {}
+    RAIDgraphicsQuality: {}
+    raidGraphicsShadowQuality: {}
+    raidGraphicsSpellDensity: {}
+    raidGraphicsSSAO: {}
+    raidGraphicsTextureResolution: {}
+    RenderScale: {}
   skipped_uiobjects:
     Minimap: singleton
     WorldFrame: singleton
@@ -30,16 +48,15 @@ docs:
   apis:
     skip_namespaces:
       C_ConfigurationWarnings: {}
+      C_EditMode: {}
   events:
     never_sent:
+      EDIT_MODE_LAYOUTS_UPDATED: {}
+      PARTY_INVITE_CANCEL: {}
       SECURE_TRANSFER_CONFIRM_SEND_MAIL: {}
 runner:
-  skip_events:
-    PERKS_PROGRAM_OPEN: needs C_ModelInfo.GetModelSceneInfoByID implemented
-    RAF_REWARD_CLAIM_FAILED: numAffordableRewards never set
   skip_slashcmds:
+    ACHIEVEMENTUI: {}
     CASTRANDOM: {}
-    EDITMODE: {}
-    EVENT: {}
-    PTRFEEDBACK: {}
+    LOOT_MASTER: {}
     USERANDOM: {}

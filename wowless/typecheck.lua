@@ -28,15 +28,23 @@ return function(api)
     return value, type(value) ~= basetype
   end
 
-  local function resolveobj(ty, value)
-    if type(value) == 'string' then
-      value = api.env[value]
+  local function resolveobj(ty, value, isout)
+    if isout then
+      if value and value.luarep then
+        return value.luarep, not value:IsObjectType(ty)
+      else
+        return nil, true
+      end
+    else
+      if type(value) == 'string' then
+        value = api.env[value]
+      end
+      if type(value) ~= 'table' then
+        return nil, true
+      end
+      local ud = api.UserData(value)
+      return ud, not ud or not ud:IsObjectType(ty)
     end
-    if type(value) ~= 'table' then
-      return nil, true
-    end
-    local ud = api.UserData(value)
-    return ud, not ud or not ud:IsObjectType(ty)
   end
 
   local plainscalartypechecks = {
@@ -46,29 +54,36 @@ return function(api)
     gender = function(value)
       return tonumber(value) or 0
     end,
-    font = function(value)
-      return resolveobj('fontinstance', value)
-    end,
-    frame = function(value)
-      return resolveobj('frame', value)
-    end,
     ['function'] = function(value)
       return luatypecheck('function', value)
     end,
-    number = function(value)
-      return luatypecheck('number', type(value) == 'string' and tonumber(value) or value)
+    number = function(value, isout)
+      if isout then
+        return luatypecheck('number', value)
+      else
+        return luatypecheck('number', type(value) == 'string' and tonumber(value) or value)
+      end
     end,
     oneornil = function(value)
       return value, value ~= 1
     end,
-    string = function(value)
-      return luatypecheck('string', type(value) == 'number' and tostring(value) or value)
+    string = function(value, isout)
+      if isout then
+        return luatypecheck('string', value)
+      else
+        return luatypecheck('string', type(value) == 'number' and tostring(value) or value)
+      end
     end,
     table = function(value)
       return luatypecheck('table', value)
     end,
-    texture = function(value)
-      return resolveobj('texture', value)
+    tonumber = function(value)
+      local v = type(value) == 'string' and tonumber(value) or value
+      return type(v) == 'number' and v or nil
+    end,
+    tostring = function(value)
+      local v = type(value) == 'number' and tostring(value) or value
+      return type(v) == 'string' and v or nil
     end,
     uiAddon = function(value)
       return api.states.Addons[tonumber(value) or tostring(value):lower()]
@@ -101,8 +116,8 @@ return function(api)
   local scalartypechecks = {}
   for checktype, checkfn in pairs(plainscalartypechecks) do
     assert(not scalartypechecks[checktype])
-    scalartypechecks[checktype] = function(value)
-      local v, err = checkfn(value)
+    scalartypechecks[checktype] = function(value, isout)
+      local v, err = checkfn(value, isout)
       if err then
         return plainmismatch(checktype, v)
       else
@@ -110,7 +125,7 @@ return function(api)
       end
     end
   end
-  for etype, evalues in pairs(require('build.data.stringenums')) do
+  for etype, evalues in pairs(require('runtime.stringenums')) do
     assert(not scalartypechecks[etype])
     scalartypechecks[etype] = function(value)
       if type(value) ~= 'string' then
@@ -123,6 +138,17 @@ return function(api)
       return value
     end
   end
+  for k in pairs(api.datalua.uiobjects) do
+    assert(not scalartypechecks[k])
+    scalartypechecks[k] = function(value, isout)
+      local v, err = resolveobj(k, value, isout)
+      if err then
+        return plainmismatch(k, v)
+      else
+        return v
+      end
+    end
+  end
 
   local nilables = {
     gender = true,
@@ -130,7 +156,7 @@ return function(api)
     oneornil = true,
   }
 
-  local function typecheck(spec, value)
+  local function typecheck(spec, value, isout)
     if value == nil then
       if not spec.nilable and spec.default == nil and not nilables[spec.type] then
         return nil, 'is not nilable, but nil was passed'
@@ -139,7 +165,7 @@ return function(api)
     end
     local scalartypecheck = scalartypechecks[spec.type]
     if scalartypecheck then
-      return scalartypecheck(value)
+      return scalartypecheck(value, isout)
     end
     if spec.type.enum then
       local v = type(value) == 'string' and tonumber(value) or value
@@ -163,6 +189,13 @@ return function(api)
         local _, err = typecheck(fspec, value[fname])
         if err then
           return nil, 'field ' .. fname .. ' ' .. err
+        end
+      end
+      if isout then
+        for k in pairs(value) do
+          if not st.fields[k] then
+            return nil, 'has extraneous field ' .. k
+          end
         end
       end
       -- TODO assert presence of mixin

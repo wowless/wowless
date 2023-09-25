@@ -25,9 +25,7 @@ CheckButton/SetChecked: {}
 CheckButton/SetCheckedTexture: {}
 EditBox/Disable: {}
 EditBox/Enable: {}
-EditBox/GetInputLanguage: {}
 EditBox/Insert: {}
-FontInstance/GetFont: {}
 FontInstance/GetFontObject: {}
 FontString/SetText: {}
 ForbiddenMixin/SetForbidden: {}
@@ -84,7 +82,6 @@ Region/SetScale: {}
 Region/SetShown: {}
 Region/Show: {}
 ScriptObject/GetScript: {}
-ScriptObject/HasScript: {}
 ScriptObject/HookScript: {}
 ScriptObject/SetScript: {}
 ScrollFrame/SetScrollChild: {}

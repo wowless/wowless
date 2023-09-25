@@ -418,7 +418,7 @@
     </Layers>
     <Scripts>
       <OnLoad>
-        assertEquals(_G.WowlessData.Build.flavor ~= 'Vanilla', not not self.tex.loaded)
+        assertEquals(true, self.tex.loaded)
       </OnLoad>
     </Scripts>
   </Frame>

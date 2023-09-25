@@ -60,6 +60,7 @@ type:
         type:
           oneof:
           - literal: api
+          - literal: cvar
           - literal: enum
           - literal: event
           - literal: flavor

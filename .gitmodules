@@ -2,10 +2,6 @@
 	path = vendor/dbdefs
 	shallow = true
 	url = https://github.com/wowdev/wowdbdefs
-[submodule "vendor/listfile"]
-	path = vendor/listfile
-	shallow = true
-	url = https://github.com/wowdev/wow-listfile
 [submodule "vendor/tactkeys"]
 	path = vendor/tactkeys
 	shallow = true

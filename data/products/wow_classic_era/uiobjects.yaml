@@ -52,11 +52,13 @@ Alpha:
 Animation:
   fields:
     endDelay:
+      init: 0
       type: number
     smoothing:
       init: OUT
-      type: string
+      type: SmoothingType
     startDelay:
+      init: 0
       type: number
   inherits:
     ParentedObject: {}
@@ -103,6 +105,8 @@ Animation:
       - name: startDelay
     SetTarget: {}
     SetTargetKey: {}
+    SetTargetName: {}
+    SetTargetParent: {}
     Stop: {}
 AnimationGroup:
   inherits:
@@ -111,10 +115,26 @@ AnimationGroup:
   methods:
     CreateAnimation:
       impl: AnimationGroup/CreateAnimation
+      inputs:
+      - default: Animation
+        name: animationType
+        nilable: true
+        type: string
+      - name: name
+        nilable: true
+        type: string
+      - name: inheritsFrom
+        nilable: true
+        type: string
+      outputs:
+      - name: animation
+        type: Animation
     Finish: {}
     GetAnimations:
       impl: AnimationGroup/GetAnimations
+    GetAnimationSpeedMultiplier: {}
     GetDuration: {}
+    GetElapsed: {}
     GetLooping: {}
     GetLoopState: {}
     GetProgress: {}
@@ -122,11 +142,13 @@ AnimationGroup:
     IsPaused: {}
     IsPendingFinish: {}
     IsPlaying: {}
+    IsReverse: {}
     IsSetToFinalAlpha: {}
     Pause: {}
     Play: {}
     RemoveAnimations: {}
     Restart: {}
+    SetAnimationSpeedMultiplier: {}
     SetLooping: {}
     SetPlaying: {}
     SetToFinalAlpha: {}
@@ -143,6 +165,7 @@ Browser:
     NavigateHome: {}
     NavigateReload: {}
     NavigateStop: {}
+    NavigateTo: {}
     OpenExternalLink: {}
     OpenTicket: {}
     SetFocus: {}
@@ -160,22 +183,22 @@ Button:
       type: string
     disabledTexture:
       nilable: true
-      type: texture
+      type: Texture
     fontstring:
       nilable: true
-      type: fontstring
+      type: FontString
     highlightTexture:
       nilable: true
-      type: texture
+      type: Texture
     motionScriptsWhileDisabled:
       init: false
       type: boolean
     normalFontObject:
       nilable: true
-      type: font
+      type: Font
     normalTexture:
       nilable: true
-      type: texture
+      type: Texture
     pushedTextOffsetX:
       init: 0
       type: number
@@ -183,7 +206,8 @@ Button:
       init: 0
       type: number
     pushedTexture:
-      type: texture
+      nilable: true
+      type: Texture
     registeredClicks:
       init:
         leftbuttonup: true
@@ -191,6 +215,10 @@ Button:
   inherits:
     Frame: {}
   methods:
+    ClearDisabledTexture: {}
+    ClearHighlightTexture: {}
+    ClearNormalTexture: {}
+    ClearPushedTexture: {}
     Click:
       impl: Button/Click
     Disable:
@@ -252,11 +280,16 @@ Button:
       impl: Button/SetEnabled
     SetFontString:
       impl: Button/SetFontString
+      inputs:
+      - name: fontString
+        type: FontString
+      outputs: {}
     SetFormattedText:
       impl: Button/SetFormattedText
     SetHighlightAtlas:
       impl: Button/SetHighlightAtlas
     SetHighlightFontObject: {}
+    SetHighlightLocked: {}
     SetHighlightTexture:
       impl: Button/SetHighlightTexture
     SetMotionScriptsWhileDisabled:
@@ -286,9 +319,11 @@ CheckButton:
       init: false
       type: boolean
     checkedTexture:
-      type: texture
+      nilable: true
+      type: Texture
     disabledCheckedTexture:
-      type: texture
+      nilable: true
+      type: Texture
   inherits:
     Button: {}
   methods:
@@ -343,16 +378,21 @@ CinematicModel:
 ColorSelect:
   fields:
     colorValueTexture:
-      type: texture
+      nilable: true
+      type: Texture
     colorValueThumbTexture:
-      type: texture
+      nilable: true
+      type: Texture
     colorWheelTexture:
-      type: texture
+      nilable: true
+      type: Texture
     colorWheelThumbTexture:
-      type: texture
+      nilable: true
+      type: Texture
   inherits:
     Frame: {}
   methods:
+    ClearColorWheelTexture: {}
     GetColorHSV:
       outputs:
       - name: h
@@ -406,17 +446,20 @@ ControlPoint:
 Cooldown:
   fields:
     blingTexture:
-      type: texture
+      nilable: true
+      type: Texture
     durationMillis:
       init: 0
       type: number
     edgeTexture:
-      type: texture
+      nilable: true
+      type: Texture
     startTimeMillis:
       init: 0
       type: number
     swipeTexture:
-      type: texture
+      nilable: true
+      type: Texture
   inherits:
     Frame: {}
   methods:
@@ -458,6 +501,7 @@ Cooldown:
     SetSwipeTexture:
       setter:
       - name: swipeTexture
+    SetTexCoordRange: {}
     SetUseCircularEdge: {}
 DressUpModel:
   inherits:
@@ -521,7 +565,10 @@ EditBox:
       getter:
       - name: historyLines
     GetInputLanguage:
-      impl: EditBox/GetInputLanguage
+      outputs:
+      - name: language
+        stub: ROMAN
+        type: string
     GetMaxBytes:
       getter:
       - name: maxBytes
@@ -539,6 +586,7 @@ EditBox:
     GetUTF8CursorPosition: {}
     GetVisibleTextByteLimit: {}
     HasFocus: {}
+    HasText: {}
     HighlightText: {}
     Insert:
       impl: EditBox/Insert
@@ -604,9 +652,18 @@ FogOfWarFrame:
   inherits:
     Frame: {}
   methods:
+    GetFogOfWarBackgroundAtlas: {}
+    GetFogOfWarBackgroundTexture: {}
+    GetFogOfWarMaskAtlas: {}
+    GetFogOfWarMaskTexture: {}
+    GetMaskScalar: {}
     GetUiMapID: {}
+    SetFogOfWarBackgroundAtlas: {}
+    SetFogOfWarBackgroundTexture: {}
+    SetFogOfWarMaskAtlas: {}
+    SetFogOfWarMaskTexture: {}
+    SetMaskScalar: {}
     SetUiMapID: {}
-  zombie: true
 Font:
   inherits:
     FontInstance: {}
@@ -619,9 +676,21 @@ FontInstance:
   inherits: {}
   methods:
     GetFont:
-      impl: FontInstance/GetFont
+      outputs:
+      - name: fontName
+        type: string
+      - name: fontHeight
+        stub: 12
+        type: number
+      - name: fontFlags
+        type: string
     GetFontObject:
       impl: FontInstance/GetFontObject
+      inputs: {}
+      outputs:
+      - name: font
+        nilable: true
+        type: FontInstance
     GetIndentedWordWrap: {}
     GetJustifyH: {}
     GetJustifyV: {}
@@ -665,6 +734,7 @@ FontString:
   inherits:
     FontInstance: {}
     LayeredRegion: {}
+    ScriptObject: {}
   methods:
     CalculateScreenAreaFromCharacterSpan: {}
     CanNonSpaceWrap: {}
@@ -680,6 +750,7 @@ FontString:
     GetNumLines:
       outputs:
       - type: number
+    GetRotation: {}
     GetStringHeight:
       outputs:
       - type: number
@@ -695,6 +766,7 @@ FontString:
     GetUnboundedStringWidth:
       outputs:
       - type: number
+    GetVertexColor: {}
     GetWrappedWidth:
       outputs:
       - type: number
@@ -706,6 +778,7 @@ FontString:
       setter:
       - name: maxLines
     SetNonSpaceWrap: {}
+    SetRotation: {}
     SetText:
       impl: FontString/SetText
     SetTextHeight: {}
@@ -713,6 +786,7 @@ FontString:
       setter:
       - name: textScale
     SetWordWrap: {}
+  warner: true
 ForbiddenMixin:
   fields:
     forbidden:
@@ -780,19 +854,69 @@ Frame:
       init: false
       type: boolean
   inherits:
-    MouseMixin: {}
     Region: {}
     ScriptObject: {}
   methods:
+    AbortDrag: {}
     CanChangeAttribute: {}
     CreateFontString:
       impl: Frame/CreateFontString
+      inputs:
+      - name: name
+        nilable: true
+        type: string
+      - default: ARTWORK
+        name: drawLayer
+        nilable: true
+        type: DrawLayer
+      - name: templateName
+        nilable: true
+        type: string
+      outputs:
+      - name: fontString
+        type: FontString
     CreateLine:
       impl: Frame/CreateLine
+      inputs: {}
+      outputs:
+      - name: line
+        type: Line
     CreateMaskTexture:
       impl: Frame/CreateMaskTexture
+      inputs:
+      - name: name
+        nilable: true
+        type: string
+      - name: layer
+        nilable: true
+        type: DrawLayer
+      - name: inheritsFrom
+        nilable: true
+        type: string
+      - name: subLayer
+        nilable: true
+        type: number
+      outputs:
+      - name: mask
+        type: MaskTexture
     CreateTexture:
       impl: Frame/CreateTexture
+      inputs:
+      - name: name
+        nilable: true
+        type: string
+      - name: layer
+        nilable: true
+        type: DrawLayer
+      - name: inheritsFrom
+        nilable: true
+        type: string
+      - name: subLayer
+        nilable: true
+        type: number
+      outputs:
+      - name: texture
+        type: Texture
     DesaturateHierarchy: {}
     DisableDrawLayer: {}
     DoesClipChildren: {}
@@ -807,11 +931,9 @@ Frame:
     GetChildren:
       impl: Frame/GetChildren
     GetClampRectInsets: {}
-    GetDepth: {}
     GetDontSavePosition: {}
     GetEffectiveAlpha:
       impl: Frame/GetEffectiveAlpha
-    GetEffectiveDepth: {}
     GetEffectivelyFlattensRenderLayers: {}
     GetFlattensRenderLayers: {}
     GetFrameLevel:
@@ -827,14 +949,6 @@ Frame:
     GetID:
       getter:
       - name: id
-    GetMaxResize:
-      getter:
-      - name: maxResizeWidth
-      - name: maxResizeHeight
-    GetMinResize:
-      getter:
-      - name: minResizeWidth
-      - name: minResizeHeight
     GetNumChildren:
       impl: Frame/GetNumChildren
     GetNumRegions:
@@ -844,13 +958,19 @@ Frame:
       - name: propagateKeyboardInput
     GetRegions:
       impl: Frame/GetRegions
+    GetResizeBounds:
+      getter:
+      - name: minResizeWidth
+      - name: minResizeHeight
+      - name: maxResizeWidth
+      - name: maxResizeHeight
     HasFixedFrameLevel:
       getter:
       - name: hasFixedFrameLevel
     HasFixedFrameStrata:
       getter:
       - name: hasFixedFrameStrata
-    IgnoreDepth: {}
+    InterceptStartDrag: {}
     IsClampedToScreen:
       getter:
       - name: isClampedToScreen
@@ -858,7 +978,6 @@ Frame:
       impl: Frame/IsEventRegistered
     IsGamePadButtonEnabled: {}
     IsGamePadStickEnabled: {}
-    IsIgnoringDepth: {}
     IsKeyboardEnabled: {}
     IsMovable:
       getter:
@@ -891,7 +1010,6 @@ Frame:
       - name: isClampedToScreen
     SetClampRectInsets: {}
     SetClipsChildren: {}
-    SetDepth: {}
     SetDontSavePosition: {}
     SetDrawLayerEnabled: {}
     SetFixedFrameLevel:
@@ -901,7 +1019,6 @@ Frame:
       setter:
       - name: hasFixedFrameStrata
     SetFlattensRenderLayers: {}
-    SetFrameBuffer: {}
     SetFrameLevel:
       impl: Frame/SetFrameLevel
     SetFrameStrata:
@@ -914,14 +1031,7 @@ Frame:
     SetID:
       setter:
       - name: id
-    SetMaxResize:
-      setter:
-      - name: maxResizeWidth
-      - name: maxResizeHeight
-    SetMinResize:
-      setter:
-      - name: minResizeWidth
-      - name: minResizeHeight
+    SetIsFrameBuffer: {}
     SetMovable:
       setter:
       - name: movable
@@ -931,6 +1041,8 @@ Frame:
     SetResizable:
       setter:
       - name: resizable
+    SetResizeBounds:
+      impl: Frame/SetResizeBounds
     SetToplevel:
       setter:
       - name: toplevel
@@ -954,7 +1066,7 @@ GameTooltip:
       type: number
     tooltipOwner:
       nilable: true
-      type: frame
+      type: Frame
   inherits:
     Frame: {}
   methods:
@@ -993,12 +1105,16 @@ GameTooltip:
     SetAnchorType: {}
     SetAuctionItem: {}
     SetAuctionSellItem: {}
+    SetBackpackToken: {}
     SetBagItem: {}
     SetBagItemChild: {}
     SetBuybackItem: {}
     SetCompareItem: {}
     SetCraftItem: {}
     SetCraftSpell: {}
+    SetCurrencyToken: {}
+    SetCurrencyTokenByID: {}
+    SetEquipmentSet: {}
     SetExistingSocketGem: {}
     SetFrameStack: {}
     SetGuildBankItem: {}
@@ -1008,6 +1124,7 @@ GameTooltip:
     SetInventoryItem: {}
     SetInventoryItemByID: {}
     SetItemByID: {}
+    SetLootCurrency: {}
     SetLootItem: {}
     SetLootRollItem: {}
     SetMerchantCostItem: {}
@@ -1015,13 +1132,21 @@ GameTooltip:
     SetMinimumWidth: {}
     SetOwner:
       impl: GameTooltip/SetOwner
+      inputs:
+      - name: owner
+        type: Frame
+      - name: anchorType
+        nilable: true
+        type: string
+      outputs: {}
     SetPadding: {}
     SetPetAction: {}
     SetPossession: {}
+    SetQuestCurrency: {}
     SetQuestItem: {}
+    SetQuestLogCurrency: {}
     SetQuestLogItem: {}
-    SetQuestLogRewardSpell: {}
-    SetQuestRewardSpell: {}
+    SetQuestLogSpecialItem: {}
     SetSendMailItem: {}
     SetShapeshift: {}
     SetSocketedItem: {}
@@ -1093,6 +1218,7 @@ Line:
     SetThickness:
       setter:
       - name: thickness
+  warner: true
 LineScale:
   inherits:
     Scale: {}
@@ -1151,6 +1277,7 @@ Minimap:
 Model:
   fields:
     modelScale:
+      init: 1
       type: number
   inherits:
     Frame: {}
@@ -1230,6 +1357,16 @@ ModelScene:
     ClearFog: {}
     CreateActor:
       impl: ModelScene/CreateActor
+      inputs:
+      - name: name
+        nilable: true
+        type: string
+      - name: template
+        nilable: true
+        type: string
+      outputs:
+      - name: actor
+        type: Actor
     GetActorAtIndex: {}
     GetCameraFarClip: {}
     GetCameraFieldOfView: {}
@@ -1271,6 +1408,7 @@ ModelScene:
     SetCameraOrientationByAxisVectors: {}
     SetCameraOrientationByYawPitchRoll: {}
     SetCameraPosition: {}
+    SetDesaturation: {}
     SetDrawLayer: {}
     SetFogColor: {}
     SetFogFar: {}
@@ -1281,6 +1419,7 @@ ModelScene:
     SetLightPosition: {}
     SetLightType: {}
     SetLightVisible: {}
+    SetPaused: {}
     SetViewInsets: {}
     SetViewTranslation: {}
     TakeActor: {}
@@ -1299,6 +1438,7 @@ MouseMixin:
   methods:
     EnableMouse:
       impl: MouseMixin/EnableMouse
+    EnableMouseMotion: {}
     EnableMouseWheel:
       setter:
       - name: mouseWheelEnabled
@@ -1310,6 +1450,7 @@ MouseMixin:
     IsMouseMotionEnabled:
       getter:
       - name: mouseMotionEnabled
+    IsMouseMotionFocus: {}
     IsMouseWheelEnabled:
       getter:
       - name: mouseWheelEnabled
@@ -1326,6 +1467,7 @@ MovieFrame:
   methods:
     EnableSubtitles: {}
     StartMovie: {}
+    StartMovieByName: {}
     StopMovie: {}
 OffScreenFrame:
   inherits:
@@ -1337,6 +1479,7 @@ OffScreenFrame:
     IsSnapshotValid: {}
     SetMaxSnapshots: {}
     TakeSnapshot: {}
+    TestPrintToFile: {}
     UsesNPOT: {}
 ParentedObject:
   inherits:
@@ -1344,6 +1487,11 @@ ParentedObject:
   methods:
     SetParent:
       impl: ParentedObject/SetParent
+      inputs:
+      - name: parent
+        nilable: true
+        type: UIObject
+      outputs: {}
   virtual: true
 ParentedObjectBase:
   fields:
@@ -1351,9 +1499,8 @@ ParentedObjectBase:
       type: hlist
     parent:
       nilable: true
-      type: uiobject
+      type: UIObject
   inherits:
-    ForbiddenMixin: {}
     UIObject: {}
   methods:
     GetDebugName:
@@ -1361,6 +1508,10 @@ ParentedObjectBase:
     GetParent:
       getter:
       - name: parent
+    GetParentKey:
+      impl: ParentedObjectBase/GetParentKey
+    SetParentKey:
+      impl: ParentedObjectBase/SetParentKey
   virtual: true
 Path:
   inherits:
@@ -1368,10 +1519,23 @@ Path:
   methods:
     CreateControlPoint:
       impl: Path/CreateControlPoint
+      inputs:
+      - name: name
+        nilable: true
+        type: string
+      - name: templateName
+        nilable: true
+        type: string
+      - name: order
+        nilable: true
+        type: number
+      outputs:
+      - name: point
+        type: ControlPoint
     GetControlPoints: {}
-    GetCurve: {}
-    GetMaxOrder: {}
-    SetCurve: {}
+    GetCurveType: {}
+    GetMaxControlPointOrder: {}
+    SetCurveType: {}
 PlayerModel:
   inherits:
     Model: {}
@@ -1390,7 +1554,6 @@ PlayerModel:
     SetBarberShopAlternateForm: {}
     SetCamDistanceScale: {}
     SetCreature: {}
-    SetCustomRace: {}
     SetDisplayInfo: {}
     SetDoBlend: {}
     SetItem: {}
@@ -1400,6 +1563,7 @@ PlayerModel:
     SetRotation: {}
     SetUnit: {}
     StopAnimKit: {}
+    ZeroCachedCenterXY: {}
 Region:
   fields:
     animationGroups:
@@ -1430,6 +1594,7 @@ Region:
       init: 0
       type: number
   inherits:
+    MouseMixin: {}
     ParentedObject: {}
     RegionBase: {}
   methods:
@@ -1437,10 +1602,20 @@ Region:
     CanChangeProtectedState: {}
     ClearAllPoints:
       impl: Region/ClearAllPoints
-    ClearPointByName: {}
+    ClearPoint: {}
     ClearPointsOffset: {}
     CreateAnimationGroup:
       impl: Region/CreateAnimationGroup
+      inputs:
+      - name: name
+        nilable: true
+        type: string
+      - name: templateName
+        nilable: true
+        type: string
+      outputs:
+      - name: animationGroup
+        type: AnimationGroup
     GetAnimationGroups:
       impl: Region/GetAnimationGroups
     GetBottom:
@@ -1460,6 +1635,24 @@ Region:
       impl: Region/GetNumPoints
     GetPoint:
       impl: Region/GetPoint
+      inputs:
+      - default: 1
+        name: anchorIndex
+        nilable: true
+        type: tonumber
+      mayreturnnothing: true
+      outputs:
+      - name: point
+        type: FramePoint
+      - name: relativeTo
+        nilable: true
+        type: UIObject
+      - name: relativePoint
+        type: FramePoint
+      - name: offsetX
+        type: number
+      - name: offsetY
+        type: number
     GetPointByName: {}
     GetRect:
       getter:
@@ -1475,6 +1668,7 @@ Region:
       getter:
       - name: width
       - name: height
+    GetSourceLocation: {}
     GetTop:
       impl: Region/GetTop
     GetWidth:
@@ -1504,6 +1698,7 @@ Region:
     SetIgnoreParentScale:
       setter:
       - name: isIgnoringParentScale
+    SetPassThroughButtons: {}
     SetPoint:
       impl: Region/SetPoint
     SetSize:
@@ -1564,14 +1759,14 @@ Scale:
   inherits:
     Animation: {}
   methods:
-    GetFromScale: {}
     GetOrigin: {}
     GetScale: {}
-    GetToScale: {}
-    SetFromScale: {}
+    GetScaleFrom: {}
+    GetScaleTo: {}
     SetOrigin: {}
     SetScale: {}
-    SetToScale: {}
+    SetScaleFrom: {}
+    SetScaleTo: {}
 ScriptObject:
   inherits:
     ScriptObjectBase: {}
@@ -1579,7 +1774,10 @@ ScriptObject:
     GetScript:
       impl: ScriptObject/GetScript
     HasScript:
-      impl: ScriptObject/HasScript
+      outputs:
+      - name: hasScript
+        stub: true
+        type: boolean
     HookScript:
       impl: ScriptObject/HookScript
     SetScript:
@@ -1600,7 +1798,7 @@ ScrollFrame:
   fields:
     scrollChild:
       nilable: true
-      type: frame
+      type: Frame
   inherits:
     Frame: {}
   methods:
@@ -1648,10 +1846,11 @@ Slider:
       init: 0
       type: number
     orientation:
+      init: HORIZONTAL
       type: Orientation
     thumbTexture:
       nilable: true
-      type: texture
+      type: Texture
     value:
       init: 0
       type: number
@@ -1706,7 +1905,8 @@ StatusBar:
       init: 0
       type: number
     statusBarTexture:
-      type: texture
+      nilable: true
+      type: Texture
     value:
       init: 0
       type: number
@@ -1721,15 +1921,17 @@ StatusBar:
     GetOrientation: {}
     GetReverseFill: {}
     GetRotatesTexture: {}
-    GetStatusBarAtlas: {}
     GetStatusBarColor:
       impl: StatusBar/GetStatusBarColor
+    GetStatusBarDesaturation: {}
     GetStatusBarTexture:
       getter:
       - name: statusBarTexture
     GetValue:
       getter:
       - name: value
+    IsStatusBarDesaturated: {}
+    SetColorFill: {}
     SetFillStyle: {}
     SetMinMaxValues:
       setter:
@@ -1738,9 +1940,10 @@ StatusBar:
     SetOrientation: {}
     SetReverseFill: {}
     SetRotatesTexture: {}
-    SetStatusBarAtlas: {}
     SetStatusBarColor:
       impl: StatusBar/SetStatusBarColor
+    SetStatusBarDesaturated: {}
+    SetStatusBarDesaturation: {}
     SetStatusBarTexture:
       impl: StatusBar/SetStatusBarTexture
     SetValue:
@@ -1768,6 +1971,7 @@ Texture:
     GetMaskTexture: {}
     GetNumMaskTextures: {}
     RemoveMaskTexture: {}
+  warner: true
 TextureBase:
   fields:
     blendMode:
@@ -1823,6 +2027,7 @@ TextureBase:
       type: boolean
   inherits:
     LayeredRegion: {}
+    ScriptObject: {}
   methods:
     GetAtlas: {}
     GetBlendMode:
@@ -1832,7 +2037,6 @@ TextureBase:
     GetHorizTile:
       getter:
       - name: horizTile
-    GetNonBlocking: {}
     GetRotation: {}
     GetTexCoord:
       getter:
@@ -1859,6 +2063,7 @@ TextureBase:
     GetVertTile:
       getter:
       - name: vertTile
+    IsBlockingLoadRequested: {}
     IsDesaturated: {}
     IsSnappingToPixelGrid: {}
     SetAtlas:
@@ -1866,19 +2071,18 @@ TextureBase:
     SetBlendMode:
       setter:
       - name: blendMode
+    SetBlockingLoadsRequested: {}
     SetColorTexture:
       impl: Texture/SetColorTexture
     SetDesaturated: {}
     SetDesaturation: {}
     SetGradient: {}
-    SetGradientAlpha: {}
     SetHorizTile:
       setter:
       - name: horizTile
     SetMask:
       setter:
       - name: maskName
-    SetNonBlocking: {}
     SetRotation: {}
     SetSnapToPixelGrid: {}
     SetTexCoord:
@@ -1904,8 +2108,10 @@ Translation:
 UIObject:
   fields:
     name:
+      nilable: true
       type: string
-  inherits: {}
+  inherits:
+    ForbiddenMixin: {}
   methods:
     GetName:
       getter:
@@ -1920,8 +2126,6 @@ UnitPositionFrame:
     Frame: {}
   methods:
     AddUnit: {}
-    AddUnitAtlas: {}
-    AddUnitFileID: {}
     ClearUnits: {}
     FinalizeUnits: {}
     GetMouseOverUnits: {}

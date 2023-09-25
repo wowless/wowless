@@ -9,7 +9,7 @@ local function mapify(t)
 end
 
 local function perproduct(p, f)
-  return assert(require(('build.data.products.%s.%s'):format(p, f)))
+  return assert(dofile(('build/data/products/%s/%s.lua'):format(p, f)))
 end
 
 local function tpath(t, ...)
@@ -41,7 +41,7 @@ local ptablemap = {
         registerable = true,
       }
     end
-    for _, product in ipairs(require('wowless.util').productList()) do
+    for _, product in ipairs(dofile('build/data/products.lua')) do
       for k in pairs(perproduct(product, 'events')) do
         if not t[k] then
           t[k] = {
@@ -54,12 +54,14 @@ local ptablemap = {
     return 'Events', t
   end,
   globalapis = function(p)
+    local config = perproduct(p, 'config')
     local t = {}
     for name, api in pairs(perproduct(p, 'apis')) do
       if not name:find('%.') and not api.debug then
         local vv = {
           alias = api.alias,
           nowrap = api.nowrap,
+          overwritten = tpath(config, 'addon', 'overwritten_apis', name) and true,
           stdlib = api.stdlib,
         }
         t[name] = next(vv) and vv or true
@@ -144,6 +146,7 @@ local ptablemap = {
           methods = mt,
           objtype = objTypes[k],
           virtual = v.virtual,
+          warner = v.warner,
           zombie = v.zombie,
         }
       end
@@ -178,13 +181,13 @@ local filemap = (function()
   end
   for k in pairs(files) do
     if ptablemap[k] then
-      for _, p in ipairs(next(args.product) and args.product or require('wowless.util').productList()) do
+      for _, p in ipairs(next(args.product) and args.product or dofile('build/data/products.lua')) do
         local nn, tt = ptablemap[k](p)
         local ss = '_G.WowlessData.' .. nn .. ' = ' .. require('pl.pretty').write(tt) .. '\n'
         t['build/products/' .. p .. '/WowlessData/' .. k .. '.lua'] = style(ss)
       end
     elseif k == 'product' then
-      for _, p in ipairs(next(args.product) and args.product or require('wowless.util').productList()) do
+      for _, p in ipairs(next(args.product) and args.product or dofile('build/data/products.lua')) do
         local ss = ('_G.WowlessData = { product = %q }'):format(p)
         t['build/products/' .. p .. '/WowlessData/' .. k .. '.lua'] = style(ss)
       end
@@ -197,7 +200,7 @@ local filemap = (function()
       table.insert(tt, 1, 'product.lua')
       table.insert(tt, '')
       local content = table.concat(tt, '\n')
-      for _, p in ipairs(next(args.product) and args.product or require('wowless.util').productList()) do
+      for _, p in ipairs(next(args.product) and args.product or dofile('build/data/products.lua')) do
         t['build/products/' .. p .. '/WowlessData/WowlessData.toc'] = content
       end
     else

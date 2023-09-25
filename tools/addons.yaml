@@ -1,4 +1,11 @@
 ---
+AdiBags:
+  flavors:
+  - Vanilla
+  - Wrath
+  owner: AdiAddons
+  repo: AdiBags
+  tag: v1.10.17
 Bartender4:
   owner: nevcairiel
   repo: bartender4

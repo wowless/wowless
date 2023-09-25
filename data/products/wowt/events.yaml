@@ -12,6 +12,14 @@ ACHIEVEMENT_PLAYER_NAME:
     type: number
 ACHIEVEMENT_SEARCH_UPDATED:
   payload: {}
+ACTION_RANGE_CHECK_UPDATE:
+  payload:
+  - name: slot
+    type: number
+  - name: isInRange
+    type: boolean
+  - name: checksRange
+    type: boolean
 ACTION_WILL_BIND_ITEM:
   payload: {}
 ACTIONBAR_HIDEGRID:
@@ -91,6 +99,8 @@ AJ_DUNGEON_ACTION:
   - name: lfgDungeonID
     type: number
 AJ_OPEN:
+  payload: {}
+AJ_OPEN_COLLECTIONS_ACTION:
   payload: {}
 AJ_PVE_LFG_ACTION:
   payload: {}
@@ -257,6 +267,12 @@ AUCTION_HOUSE_DISABLED:
   payload: {}
 AUCTION_HOUSE_FAVORITES_UPDATED:
   payload: {}
+AUCTION_HOUSE_ITEM_DELIVERY_DELAY_UPDATE:
+  payload:
+  - name: purchasedItemDeliveryDelay
+    type: number
+  - name: cancelledItemDeliveryDelay
+    type: number
 AUCTION_HOUSE_NEW_BID_RECEIVED:
   payload:
   - name: auctionID
@@ -274,10 +290,6 @@ AUCTION_HOUSE_POST_WARNING:
 AUCTION_HOUSE_PURCHASE_COMPLETED:
   payload:
   - name: auctionID
-    type: number
-AUCTION_HOUSE_PURCHASE_DELIVERY_DELAY_UPDATE:
-  payload:
-  - name: purchasedItemDeliveryDelay
     type: number
 AUCTION_HOUSE_SCRIPT_DEPRECATED:
   payload: {}
@@ -727,6 +739,8 @@ CAN_PLAYER_SPEAK_LANGUAGE_CHANGED:
     type: number
   - name: canSpeakLanguage
     type: boolean
+CANCEL_ALL_LOOT_ROLLS:
+  payload: {}
 CANCEL_GLYPH_CAST:
   payload: {}
 CANCEL_LOOT_ROLL:
@@ -2627,6 +2641,42 @@ CHAT_MSG_PET_INFO:
     type: boolean
   - name: supressRaidIcons
     type: boolean
+CHAT_MSG_PING:
+  payload:
+  - name: text
+    type: string
+  - name: playerName
+    type: string
+  - name: languageName
+    type: string
+  - name: channelName
+    type: string
+  - name: playerName2
+    type: string
+  - name: specialFlags
+    type: string
+  - name: zoneChannelID
+    type: number
+  - name: channelIndex
+    type: number
+  - name: channelBaseName
+    type: string
+  - name: languageID
+    type: number
+  - name: lineID
+    type: number
+  - name: guid
+    type: string
+  - name: bnSenderID
+    type: number
+  - name: isMobile
+    type: boolean
+  - name: isSubtitle
+    type: boolean
+  - name: hideSenderInLetterbox
+    type: boolean
+  - name: supressRaidIcons
+    type: boolean
 CHAT_MSG_RAID:
   payload:
   - name: text
@@ -3222,6 +3272,9 @@ CINEMATIC_START:
   payload:
   - name: canBeCancelled
     type: boolean
+  - name: forcedAspectRatio
+    type:
+      enum: CameraModeAspectRatio
 CINEMATIC_STOP:
   payload: {}
 CLASS_TRIAL_TIMER_START:
@@ -3604,6 +3657,21 @@ CONSOLE_MESSAGE:
     type: string
   - name: colorType
     type: number
+CONTENT_TRACKING_IS_ENABLED_UPDATE:
+  payload:
+  - name: isEnabled
+    type: boolean
+CONTENT_TRACKING_LIST_UPDATE:
+  payload: {}
+CONTENT_TRACKING_UPDATE:
+  payload:
+  - name: type
+    type:
+      enum: ContentTrackingType
+  - name: id
+    type: number
+  - name: isTracked
+    type: boolean
 CONTRIBUTION_CHANGED:
   payload:
   - name: state
@@ -3842,6 +3910,10 @@ DUEL_INBOUNDS:
 DUEL_OUTOFBOUNDS:
   payload: {}
 DUEL_REQUESTED:
+  payload:
+  - name: playerName
+    type: string
+DUEL_TO_THE_DEATH_REQUESTED:
   payload:
   - name: playerName
     type: string
@@ -4319,6 +4391,8 @@ GLUE_CONSOLE_LOG:
   - name: message
     type: string
 GLUE_SCREENSHOT_FAILED:
+  payload: {}
+GLUE_SCREENSHOT_SUCCEEDED:
   payload: {}
 GM_PLAYER_INFO:
   payload:
@@ -4967,6 +5041,8 @@ LORE_TEXT_UPDATED_CAMPAIGN:
         structure: C_LoreText.LoreTextEntry
 LOSS_OF_CONTROL_ADDED:
   payload:
+  - name: unitTarget
+    type: unit
   - name: effectIndex
     type: number
 LOSS_OF_CONTROL_COMMENTATOR_ADDED:
@@ -4980,7 +5056,9 @@ LOSS_OF_CONTROL_COMMENTATOR_UPDATE:
   - name: victim
     type: string
 LOSS_OF_CONTROL_UPDATE:
-  payload: {}
+  payload:
+  - name: unitTarget
+    type: unit
 LUA_WARNING:
   payload:
   - name: warnType
@@ -5023,6 +5101,14 @@ MAIL_SUCCESS:
     type: number
 MAIL_UNLOCK_SEND_ITEMS:
   payload: {}
+MAIN_SPEC_NEED_ROLL:
+  payload:
+  - name: rollID
+    type: number
+  - name: roll
+    type: number
+  - name: isWinning
+    type: boolean
 MAJOR_FACTION_INTERACTION_ENDED:
   payload: {}
 MAJOR_FACTION_INTERACTION_STARTED:
@@ -5290,6 +5376,10 @@ PERKS_ACTIVITY_COMPLETED:
   payload:
   - name: perksActivityID
     type: number
+PERKS_PROGRAM_ADD_PENDING_SHOP_ITEM:
+  payload:
+  - name: vendorItemID
+    type: number
 PERKS_PROGRAM_CLOSE:
   payload: {}
 PERKS_PROGRAM_CURRENCY_AWARDED:
@@ -5317,6 +5407,10 @@ PERKS_PROGRAM_PURCHASE_SUCCESS:
   - name: vendorItemID
     type: number
 PERKS_PROGRAM_REFUND_SUCCESS:
+  payload:
+  - name: vendorItemID
+    type: number
+PERKS_PROGRAM_REMOVE_PENDING_SHOP_ITEM:
   payload:
   - name: vendorItemID
     type: number
@@ -5541,6 +5635,10 @@ PETITION_CLOSED:
   payload: {}
 PETITION_SHOW:
   payload: {}
+PING_SYSTEM_ERROR:
+  payload:
+  - name: error
+    type: string
 PLAY_MOVIE:
   payload:
   - name: movieID
@@ -5791,6 +5889,8 @@ PVP_MATCH_COMPLETE:
   - name: duration
     type: number
 PVP_MATCH_INACTIVE:
+  payload: {}
+PVP_MATCH_STATE_CHANGED:
   payload: {}
 PVP_POWER_UPDATE:
   payload: {}
@@ -6126,8 +6226,6 @@ RESEARCH_ARTIFACT_COMPLETE:
   - name: name
     type: string
 RESEARCH_ARTIFACT_DIG_SITE_UPDATED:
-  payload: {}
-RESEARCH_ARTIFACT_HISTORY_READY:
   payload: {}
 RESEARCH_ARTIFACT_UPDATE:
   payload: {}
@@ -6770,6 +6868,13 @@ TOYS_UPDATED:
   - name: hasFanfare
     nilable: true
     type: boolean
+TRACKABLE_INFO_UPDATE:
+  payload:
+  - name: type
+    type:
+      enum: ContentTrackingType
+  - name: id
+    type: number
 TRACKED_ACHIEVEMENT_LIST_CHANGED:
   payload:
   - name: achievementID
@@ -6797,6 +6902,13 @@ TRACKED_RECIPE_UPDATE:
     type: number
   - name: tracked
     type: boolean
+TRACKING_TARGET_INFO_UPDATE:
+  payload:
+  - name: targetType
+    type:
+      enum: ContentTrackingTargetType
+  - name: targetID
+    type: number
 TRADE_ACCEPT_UPDATE:
   payload:
   - name: playerAccepted
@@ -7119,6 +7231,12 @@ UNIT_DISPLAYPOWER:
   payload:
   - name: unitTarget
     type: unit
+UNIT_DISTANCE_CHECK_UPDATE:
+  payload:
+  - name: unitTarget
+    type: unit
+  - name: isInDistance
+    type: boolean
 UNIT_ENTERED_VEHICLE:
   payload:
   - name: unitTarget
@@ -7183,6 +7301,12 @@ UNIT_HEALTH:
   payload:
   - name: unitTarget
     type: unit
+UNIT_IN_RANGE_UPDATE:
+  payload:
+  - name: unitTarget
+    type: unit
+  - name: isInRange
+    type: boolean
 UNIT_INVENTORY_CHANGED:
   payload:
   - name: unitTarget
@@ -7329,6 +7453,8 @@ UNIT_SPELLCAST_EMPOWER_STOP:
     type: string
   - name: spellID
     type: number
+  - name: complete
+    type: boolean
 UNIT_SPELLCAST_EMPOWER_UPDATE:
   payload:
   - name: unitTarget
@@ -7369,6 +7495,22 @@ UNIT_SPELLCAST_NOT_INTERRUPTIBLE:
   payload:
   - name: unitTarget
     type: unit
+UNIT_SPELLCAST_RETICLE_CLEAR:
+  payload:
+  - name: unitTarget
+    type: unit
+  - name: castGUID
+    type: string
+  - name: spellID
+    type: number
+UNIT_SPELLCAST_RETICLE_TARGET:
+  payload:
+  - name: unitTarget
+    type: unit
+  - name: castGUID
+    type: string
+  - name: spellID
+    type: number
 UNIT_SPELLCAST_SENT:
   payload:
   - name: unit
@@ -7501,12 +7643,10 @@ UPDATE_STEALTH:
   payload: {}
 UPDATE_SUMMONPETS_ACTION:
   payload: {}
-UPDATE_TRADESKILL_CAST_COMPLETE:
+UPDATE_TRADESKILL_CAST_STOPPED:
   payload:
   - name: isScrapping
     type: boolean
-UPDATE_TRADESKILL_RECAST:
-  payload: {}
 UPDATE_UI_WIDGET:
   payload:
   - name: widgetInfo
@@ -7880,6 +8020,17 @@ WARFRONT_COMPLETED:
     type: number
   - name: winner
     type: number
+WARGAME_INVITE_SENT:
+  payload: {}
+WARGAME_REQUEST_RESPONSE:
+  payload:
+  - name: responderGUID
+    type: string
+  - name: responderName
+    nilable: true
+    type: string
+  - name: accepted
+    type: boolean
 WARGAME_REQUESTED:
   payload:
   - name: opposingPartyMemberName

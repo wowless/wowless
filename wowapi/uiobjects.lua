@@ -34,6 +34,7 @@ local function mkBaseUIObjectTypes(api)
           isa = isa,
           metaindex = metaindex,
           name = ty.cfg.objectType or k,
+          warner = ty.cfg.warner,
           zombie = ty.cfg.zombie,
         }
       end
@@ -55,6 +56,7 @@ local function mkBaseUIObjectTypes(api)
         isa = v.isa,
         name = v.name,
         sandboxMT = { __index = sandboxIndex },
+        warner = v.warner,
         zombie = v.zombie,
       }
     end
@@ -68,9 +70,8 @@ local function mkBaseUIObjectTypes(api)
   local typechecker = require('wowless.typecheck')(api)
 
   local check = setmetatable({
-    texture = function(v, self)
-      local tex = toTexture(self, v)
-      return tex and api.UserData(tex)
+    Texture = function(v, self)
+      return toTexture(self, v)
     end,
   }, {
     __index = function(t, k)
@@ -95,13 +96,6 @@ local function mkBaseUIObjectTypes(api)
         return fn(self, ...)
       end
     end
-    local function wrapAll(map)
-      local mm = {}
-      for k, v in pairs(map) do
-        mm[k] = wrap(k, v)
-      end
-      return mm
-    end
     local constructor = wrapstrfn(cfg.constructor, name, 'hlist', hlist)
     if cfg.singleton then
       local orig = constructor
@@ -115,13 +109,68 @@ local function mkBaseUIObjectTypes(api)
     local mixin = {}
     for mname, method in pairs(cfg.methods) do
       local fname = name .. ':' .. mname
-      mixin[mname] = wrapstrfn(method, fname, 'api,toTexture,check', api, toTexture, check)
+      local function checkInputs(fn)
+        if not method.inputs then
+          return fn
+        end
+        local sig = method.inputs
+        local nsig = #method.inputs
+        return function(self, ...)
+          local args = {}
+          for i, param in ipairs(sig) do
+            local v, errmsg, iswarn = typechecker(param, (select(i, ...)))
+            if not errmsg then
+              args[i] = v
+            else
+              local msg = ('arg %d (%q) of %q %s'):format(i, tostring(param.name), fname, errmsg)
+              if iswarn then
+                api.log(1, 'warning: ' .. msg)
+              else
+                error(msg)
+              end
+            end
+          end
+          return fn(self, unpack(args, 1, nsig))
+        end
+      end
+      local function checkOutputs(fn)
+        if not method.outputs then
+          return fn
+        end
+        local outs = method.outputs
+        local nouts = #outs
+        local mayreturnnothing = method.mayreturnnothing
+        local function doCheckOutputs(...)
+          local n = select('#', ...)
+          if n == 0 and mayreturnnothing then
+            return
+          end
+          if #outs ~= n then
+            error(('wrong number of return values to %q: want %d, got %d'):format(fname, nouts, n))
+          end
+          local rets = {}
+          for i, out in ipairs(outs) do
+            local v, errmsg = typechecker(out, (select(i, ...)), true)
+            if errmsg then
+              error(('output %d (%q) of %q %s'):format(i, tostring(out.name), fname, errmsg))
+            end
+            rets[i] = v
+          end
+          return unpack(rets, 1, nouts)
+        end
+        return function(...)
+          return doCheckOutputs(fn(...))
+        end
+      end
+      local mtext = method.impl or method
+      local fn = wrap(mname, wrapstrfn(mtext, fname, 'api,toTexture,check', api, toTexture, check))
+      mixin[mname] = checkOutputs(checkInputs(fn))
     end
     uiobjects[name] = {
       cfg = cfg,
       constructor = constructor,
       inherits = cfg.inherits,
-      mixin = wrapAll(mixin),
+      mixin = mixin,
     }
   end
   return flatten(uiobjects)

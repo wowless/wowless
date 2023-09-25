@@ -1,7 +1,7 @@
 local extLoaders = {
   sql = require('pl.file').read,
   yaml = function(f)
-    return require('build/' .. f:sub(1, -6))
+    return require('build.' .. f:sub(1, -6):gsub('/', '.'))
   end,
 }
 
@@ -38,6 +38,7 @@ end
 
 local fns = {
   apis = perproduct('apis'),
+  cvars = perproduct('cvars'),
   enums = function()
     local t = {}
     for _, d in ipairs(require('pl.dir').getdirectories('data/products')) do
@@ -48,6 +49,7 @@ local fns = {
   events = perproduct('events'),
   flavors = global('flavors'),
   impl = global('impl'),
+  products = global('products'),
   schemas = loaddir('schemas', 'yaml'),
   sqlcursor = loaddir('sql/cursor', 'sql'),
   sqllookup = loaddir('sql/lookup', 'sql'),

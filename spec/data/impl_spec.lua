@@ -1,7 +1,7 @@
 describe('impl', function()
   it('references exactly the files in data/impl', function()
     local expected = {}
-    for k in pairs(require('build/data/impl')) do
+    for k in pairs(require('build.data.impl')) do
       expected['data/impl/' .. k .. '.lua'] = true
     end
     local actual = {}
@@ -12,12 +12,12 @@ describe('impl', function()
   end)
   it('references exactly the set of all implemented apis', function()
     local expected = {}
-    for k in pairs(require('build/data/impl')) do
+    for k in pairs(require('build.data.impl')) do
       expected[k] = true
     end
     local actual = {}
-    for _, p in ipairs(require('wowless.util').productList()) do
-      for _, v in pairs(require('build/data/products/' .. p .. '/apis')) do
+    for _, p in ipairs(require('build.data.products')) do
+      for _, v in pairs(require('build.data.products.' .. p .. '.apis')) do
         if v.impl then
           actual[v.impl] = true
         end

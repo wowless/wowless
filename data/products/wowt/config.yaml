@@ -3,6 +3,7 @@ addon:
   capsule:
     apinamespaces:
       C_AuthChallenge: {}
+      C_PingSecure: {}
       C_StoreSecure: {}
       C_UnitAurasPrivate: {}
       C_WowTokenSecure: {}
@@ -19,6 +20,37 @@ addon:
       VasServiceType: {}
     globalapis:
       CreateForbiddenFrame: {}
+  hooked_globals:
+    SetItemRef: {}
+  ignore_cvar_value:
+    graphicsComputeEffects: {}
+    graphicsDepthEffects: {}
+    graphicsEnvironmentDetail: {}
+    graphicsGroundClutter: {}
+    graphicsLiquidDetail: {}
+    graphicsOutlineMode: {}
+    graphicsParticleDensity: {}
+    graphicsQuality: {}
+    graphicsShadowQuality: {}
+    graphicsSpellDensity: {}
+    graphicsSSAO: {}
+    graphicsTextureResolution: {}
+    graphicsViewDistance: {}
+    mouseSpeed: {}
+    raidGraphicsComputeEffects: {}
+    raidGraphicsDepthEffects: {}
+    raidGraphicsEnvironmentDetail: {}
+    raidGraphicsGroundClutter: {}
+    raidGraphicsLiquidDetail: {}
+    raidGraphicsOutlineMode: {}
+    raidGraphicsParticleDensity: {}
+    RAIDgraphicsQuality: {}
+    raidGraphicsShadowQuality: {}
+    raidGraphicsSpellDensity: {}
+    raidGraphicsSSAO: {}
+    raidGraphicsTextureResolution: {}
+    raidGraphicsViewDistance: {}
+    RenderScale: {}
   overwritten_apis:
     C_Traits.GetConditionInfo: {}
     C_Traits.GetEntryInfo: {}

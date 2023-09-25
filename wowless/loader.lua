@@ -57,7 +57,8 @@ local function loader(api, cfg)
       local t = api.env
       for part in value:gmatch('[^.]+') do
         if type(t) ~= 'table' then
-          error(('cannot find %q in _G'):format(value))
+          api.log(1, 'warning: cannot find %q in _G', value)
+          return nil
         end
         t = t[part]
       end
@@ -337,7 +338,7 @@ local function loader(api, cfg)
     end,
   }
 
-  local function forAddon(addonName, addonEnv)
+  local function forAddon(addonName, addonEnv, addonRoot)
     local loadFile
 
     local xmlattrlang = {
@@ -388,7 +389,7 @@ local function loader(api, cfg)
         if attr.impl == 'internal' then
           xmlattrlang[attr.name](ctx, obj, v)
         elseif attr.impl == 'loadfile' then
-          loadFile(path.join(dir, v))
+          loadFile(path.join(dir, v), nil, path.join(addonRoot, v))
         elseif attr.impl.scope then
           return { [attr.impl.scope] = v }
         elseif attr.impl.method then
@@ -530,7 +531,7 @@ local function loader(api, cfg)
             local obj = loadElement(ctx, elt, parent)
             -- TODO find if this if needs to be broader to everything here including kids
             if parent:IsObjectType(impl.parenttype) then
-              parent[impl.parentmethod](parent, obj)
+              parent[impl.parentmethod](parent, obj.luarep)
             end
           elseif impl == 'transparent' or impl == 'loadstring' then
             local ctxmix = mixin({}, ctx)
@@ -579,7 +580,7 @@ local function loader(api, cfg)
       end)
     end
 
-    function loadFile(filename, closureTaint)
+    function loadFile(filename, closureTaint, secondaryFileName)
       filename = path.normalize(filename)
       api.CallSafely(function()
         api.log(2, 'loading file %s', filename)
@@ -592,6 +593,9 @@ local function loader(api, cfg)
           error('unknown file type ' .. filename)
         end
         local success, content = pcall(readFile, filename)
+        if not success and secondaryFileName then
+          success, content = pcall(readFile, secondaryFileName)
+        end
         if success then
           -- TODO only pass SecureCapsuleGet on signed addons
           loadFn(filename, content, nil, closureTaint, addonName, addonEnv, api.env.SecureCapsuleGet)
@@ -605,7 +609,7 @@ local function loader(api, cfg)
   end
 
   local build = datalua.build
-  local flavors = require('build.data.flavors')
+  local flavors = require('runtime.flavors')
 
   local function parseToc(tocFile, content)
     local attrs = {}
@@ -700,6 +704,7 @@ local function loader(api, cfg)
         if addon then
           addon.name = name
           addon.fdid = fdid
+          addon.dir = dir
           addonData[name:lower()] = addon
           table.insert(addonData, addon)
         end
@@ -751,7 +756,7 @@ local function loader(api, cfg)
         end
       end
       api.log(1, 'loading addon files for %s', addonName)
-      local loadFile = forAddon(addonName, {})
+      local loadFile = forAddon(addonName, {}, toc.dir)
       for _, file in ipairs(toc.files) do
         loadFile(file)
       end
@@ -772,18 +777,23 @@ local function loader(api, cfg)
     end
   end
 
+  local function isLoadable(toc)
+    return toc.attrs.OnlyBetaAndPTR ~= '1' or datalua.cvars.agentuid.value == 'wow_ptr'
+  end
+
   local function loadFrameXml()
-    local loadFile = forAddon()
+    local tocdir = path.join(rootDir, 'Interface', 'FrameXML')
+    local loadFile = forAddon(nil, nil, tocdir)
     for tag, text in sqlitedb:urows('SELECT BaseTag, TagText_lang FROM GlobalStrings') do
       api.env[tag] = text
     end
-    for _, file in ipairs(resolveTocDir(path.join(rootDir, 'Interface', 'FrameXML')).files) do
+    for _, file in ipairs(resolveTocDir(tocdir).files) do
       loadFile(file)
     end
     loadFile(path.join(rootDir, flavors[build.flavor].dir, 'FrameXML', 'Bindings.xml'))
     local blizzardAddons = {}
     for name, toc in pairs(addonData) do
-      if type(name) == 'string' and toc.fdid and toc.attrs.LoadOnDemand ~= '1' then
+      if type(name) == 'string' and toc.fdid and toc.attrs.LoadOnDemand ~= '1' and isLoadable(toc) then
         table.insert(blizzardAddons, name)
       end
     end

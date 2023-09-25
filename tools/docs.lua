@@ -5,7 +5,7 @@ local args = (function()
 end)()
 
 local lfs = require('lfs')
-local writeFile = require('pl.file').write
+local writeifchanged = require('tools.util').writeifchanged
 local parseYaml = require('wowapi.yaml').parseFile
 local pprintYaml = require('wowapi.yaml').pprint
 local product = args.product
@@ -125,8 +125,9 @@ local types = {
   luaFunction = 'function',
   luaIndex = 'number',
   ModelAsset = 'string',
-  ModelSceneFrame = 'table',
-  ModelSceneFrameActor = 'table',
+  ModelSceneFrame = 'ModelScene',
+  ModelSceneFrameActor = 'Actor',
+  mouseButton = 'string',
   NamePlateFrame = 'table',
   normalizedValue = 'number',
   NotificationDbId = 'string',
@@ -139,20 +140,22 @@ local types = {
   SimpleControlPoint = 'table',
   SimpleFont = 'table',
   SimpleFontString = 'table',
-  SimpleFrame = 'frame',
+  SimpleFrame = 'Frame',
   SimpleLine = 'table',
   SimpleMaskTexture = 'table',
   SimplePathAnim = 'table',
-  SimpleTexture = 'texture',
+  SimpleTexture = 'Texture',
+  SimpleWindow = 'table',
   SingleColorValue = 'number',
   size = 'number',
-  SmoothingType = 'string',
   StatusBarFillStyle = 'string',
   string = 'string',
+  stringView = 'string',
   table = 'table',
   TBFFlags = 'string',
   TBFStyleFlags = 'string',
   TextureAsset = 'string',
+  TextureAssetDisk = 'string',
   textureAtlas = 'string',
   textureKit = 'string',
   time_t = 'number',
@@ -227,7 +230,7 @@ local function t2nty(field, ns)
     -- TODO cross-check mixin
     return { structure = n }
   elseif ty == 'CallbackType' then
-    return 'function'
+    return field.Name == 'cbObject' and 'userdata' or 'function'
   else
     error(('%s has unexpected type %s'):format(n, ty))
   end
@@ -295,8 +298,10 @@ local function rewriteApis()
     nss[split(name) or ''] = true
     if not skip(apis, name) then
       local ns = split(name)
+      local api = apis[name]
       apis[name] = {
-        inputs = { insig(fn, ns) },
+        inputs = insig(fn, ns),
+        mayreturnnothing = api and api.mayreturnnothing,
         outputs = outsig(fn, ns),
       }
     end
@@ -304,7 +309,7 @@ local function rewriteApis()
   for k in pairs(cfgskip) do
     assert(nss[k], k .. ' in skip_namespaces but not in docs')
   end
-  require('pl.file').write(f, y.pprint(apis))
+  writeifchanged(f, y.pprint(apis))
   return apis
 end
 
@@ -336,7 +341,7 @@ local function rewriteEvents()
   for k in pairs(neversent) do
     assert(seen[k], k .. ' is marked never_sent but not present in docs')
   end
-  writeFile(filename, pprintYaml(out))
+  writeifchanged(filename, pprintYaml(out))
   return out
 end
 
@@ -378,15 +383,13 @@ local function rewriteStructures(outApis, outEvents)
     end
   end
   for _, api in pairs(outApis) do
-    for _, ilist in ipairs(api.inputs or {}) do
-      processList(ilist)
-    end
+    processList(api.inputs)
     processList(api.outputs)
   end
   for _, event in pairs(outEvents) do
     processList(event.payload)
   end
-  writeFile(filename, pprintYaml(out))
+  writeifchanged(filename, pprintYaml(out))
 end
 
 local moo = {}

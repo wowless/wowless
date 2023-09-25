@@ -1,5 +1,43 @@
 ---
 addon:
+  capsule:
+    apinamespaces:
+      C_AuthChallenge: {}
+      C_StoreSecure: {}
+      C_WowTokenSecure: {}
+    enums:
+      BattlepayBannerType: {}
+      BattlepayDisplayFlag: {}
+      BattlepayGroupDisplayType: {}
+      BattlepayProductDecorator: {}
+      BattlepayProductGroupFlag: {}
+      PurchaseEligibility: {}
+      StoreError: {}
+      VasError: {}
+      VasServiceType: {}
+    globalapis:
+      CreateForbiddenFrame: {}
+  ignore_cvar_value:
+    graphicsEnvironmentDetail: {}
+    graphicsGroundClutter: {}
+    graphicsLiquidDetail: {}
+    graphicsParticleDensity: {}
+    graphicsQuality: {}
+    graphicsShadowQuality: {}
+    graphicsSpellDensity: {}
+    graphicsSSAO: {}
+    graphicsTextureResolution: {}
+    mouseSpeed: {}
+    raidGraphicsEnvironmentDetail: {}
+    raidGraphicsGroundClutter: {}
+    raidGraphicsLiquidDetail: {}
+    raidGraphicsParticleDensity: {}
+    RAIDgraphicsQuality: {}
+    raidGraphicsShadowQuality: {}
+    raidGraphicsSpellDensity: {}
+    raidGraphicsSSAO: {}
+    raidGraphicsTextureResolution: {}
+    RenderScale: {}
   skipped_uiobjects:
     Minimap: singleton
     WorldFrame: singleton
@@ -7,12 +45,21 @@ docs:
   apis:
     skip_namespaces:
       C_ConfigurationWarnings: {}
+      C_EditMode: {}
   events:
     never_sent:
+      ACHIEVEMENT_EARNED: {}
+      EDIT_MODE_LAYOUTS_UPDATED: {}
+      GENERIC_WIDGET_DISPLAY_SHOW: {}
       PARTY_INVITE_CANCEL: {}
       SECURE_TRANSFER_CONFIRM_SEND_MAIL: {}
 runner:
+  skip_events:
+    CONFIRM_BINDER: StaticPopup buggy OnCancel without self
+    FORBIDDEN_NAME_PLATE_UNIT_ADDED: C_NamePlate.GetNamePlateForUnit unimplemented
+    FORBIDDEN_NAME_PLATE_UNIT_REMOVED: C_NamePlate.GetNamePlateForUnit unimplemented
   skip_slashcmds:
+    ACHIEVEMENTUI: {}
     CASTRANDOM: {}
     LOOT_MASTER: {}
     USERANDOM: {}
