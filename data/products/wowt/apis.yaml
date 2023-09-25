@@ -448,9 +448,9 @@ C_AddOns.GetAddOnMetadata:
     type: uiAddon
   - name: variable
     type: string
+  mayreturnnothing: true
   outputs:
   - name: value
-    nilable: true
     type: string
 C_AdventureJournal.ActivateEntry: {}
 C_AdventureJournal.CanBeShown: {}
@@ -7279,7 +7279,8 @@ C_Cursor.GetCursorItem:
 C_CVar.GetCVar:
   impl: C_CVar.GetCVar
   inputs:
-  - type: string
+  - name: name
+    type: string
   outputs:
   - name: value
     nilable: true
@@ -7297,7 +7298,8 @@ C_CVar.GetCVarBitfield:
 C_CVar.GetCVarBool:
   impl: C_CVar.GetCVarBool
   inputs:
-  - type: string
+  - name: name
+    type: string
   outputs:
   - name: value
     nilable: true
@@ -7308,14 +7310,16 @@ C_CVar.GetCVarDefault:
   - name: name
     type: string
   outputs:
-  - name: value
+  - name: defaultValue
     nilable: true
     type: string
 C_CVar.RegisterCVar:
   impl: C_CVar.RegisterCVar
   inputs:
-  - type: string
-  - nilable: true
+  - name: name
+    type: string
+  - name: value
+    nilable: true
     type: string
   outputs: {}
 C_CVar.ResetTestCVars:
@@ -7324,14 +7328,13 @@ C_CVar.ResetTestCVars:
 C_CVar.SetCVar:
   impl: C_CVar.SetCVar
   inputs:
-  - type: string
-  - nilable: true
+  - name: name
     type: string
-  - nilable: true
+  - name: value
+    nilable: true
     type: string
   outputs:
   - name: success
-    nilable: true
     type: boolean
 C_CVar.SetCVarBitfield:
   inputs:
@@ -10920,7 +10923,6 @@ C_Map.GetMapInfo:
     type: number
   outputs:
   - name: info
-    nilable: true
     type:
       structure: C_Map.UiMapDetails
 C_Map.GetMapInfoAtPosition:
@@ -16251,9 +16253,9 @@ C_Texture.GetAtlasInfo:
   inputs:
   - name: atlas
     type: string
+  mayreturnnothing: true
   outputs:
   - name: info
-    nilable: true
     type:
       structure: C_Texture.AtlasInfo
 C_Texture.GetCraftingReagentQualityChatIcon:
@@ -26536,7 +26538,10 @@ SetPortraitTexture:
   - name: textureObject
     type: Texture
   - name: unitToken
-    type: string
+    type: unit
+  - default: false
+    name: disableMasking
+    type: boolean
   outputs: {}
 SetPortraitTextureFromCreatureDisplayID:
   inputs:
