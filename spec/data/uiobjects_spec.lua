@@ -21,7 +21,7 @@ describe('uiobjects', function()
         local nr = {}
         for _, v in pairs(g) do
           for ik in pairs(v) do
-            nr[ik] = true
+            nr[ik] = (nr[ik] or 0) + 1
           end
         end
         local function process(t, root, k)
@@ -44,9 +44,12 @@ describe('uiobjects', function()
               it('is a uiobject', function()
                 assert.True(t.UIObject)
               end)
-            elseif not next(g[k]) then
-              it('is virtual', function()
-                assert.True(uiobjects[k].virtual)
+            else
+              it('is virtual or uiobject', function()
+                assert.True(uiobjects[k].virtual or t.UIObject)
+              end)
+              it('is used more than once if virtual', function()
+                assert.True(not uiobjects[k].virtual or nr[k] > 1)
               end)
             end
           end)

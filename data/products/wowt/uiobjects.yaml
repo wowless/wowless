@@ -846,19 +846,6 @@ FontString:
       - name: textScale
     SetWordWrap: {}
   warner: true
-ForbiddenMixin:
-  fields:
-    forbidden:
-      init: false
-      type: boolean
-  inherits: {}
-  methods:
-    IsForbidden:
-      getter:
-      - name: forbidden
-    SetForbidden:
-      impl: ForbiddenMixin/SetForbidden
-  virtual: true
 Frame:
   fields:
     attributes:
@@ -1454,44 +1441,6 @@ ModelScene:
     SetViewInsets: {}
     SetViewTranslation: {}
     TakeActor: {}
-MouseMixin:
-  fields:
-    mouseClickEnabled:
-      init: true
-      type: boolean
-    mouseMotionEnabled:
-      init: true
-      type: boolean
-    mouseWheelEnabled:
-      init: false
-      type: boolean
-  inherits: {}
-  methods:
-    EnableMouse:
-      impl: MouseMixin/EnableMouse
-    EnableMouseMotion: {}
-    EnableMouseWheel:
-      setter:
-      - name: mouseWheelEnabled
-    IsMouseClickEnabled:
-      getter:
-      - name: mouseClickEnabled
-    IsMouseEnabled:
-      impl: MouseMixin/IsMouseEnabled
-    IsMouseMotionEnabled:
-      getter:
-      - name: mouseMotionEnabled
-    IsMouseMotionFocus: {}
-    IsMouseWheelEnabled:
-      getter:
-      - name: mouseWheelEnabled
-    SetMouseClickEnabled:
-      setter:
-      - name: mouseClickEnabled
-    SetMouseMotionEnabled:
-      setter:
-      - name: mouseMotionEnabled
-  virtual: true
 MovieFrame:
   inherits:
     Frame: {}
@@ -1644,6 +1593,15 @@ Region:
     left:
       init: 0
       type: number
+    mouseClickEnabled:
+      init: true
+      type: boolean
+    mouseMotionEnabled:
+      init: true
+      type: boolean
+    mouseWheelEnabled:
+      init: false
+      type: boolean
     points:
       init: {}
       type: table
@@ -1651,7 +1609,6 @@ Region:
       init: 0
       type: number
   inherits:
-    MouseMixin: {}
     ParentedObject: {}
     RegionBase: {}
   methods:
@@ -1673,6 +1630,12 @@ Region:
       outputs:
       - name: animationGroup
         type: AnimationGroup
+    EnableMouse:
+      impl: MouseMixin/EnableMouse
+    EnableMouseMotion: {}
+    EnableMouseWheel:
+      setter:
+      - name: mouseWheelEnabled
     GetAnimationGroups:
       impl: Region/GetAnimationGroups
     GetBottom:
@@ -1739,7 +1702,19 @@ Region:
     IsIgnoringParentScale:
       getter:
       - name: isIgnoringParentScale
+    IsMouseClickEnabled:
+      getter:
+      - name: mouseClickEnabled
+    IsMouseEnabled:
+      impl: MouseMixin/IsMouseEnabled
+    IsMouseMotionEnabled:
+      getter:
+      - name: mouseMotionEnabled
+    IsMouseMotionFocus: {}
     IsMouseOver: {}
+    IsMouseWheelEnabled:
+      getter:
+      - name: mouseWheelEnabled
     IsObjectLoaded: {}
     IsProtected:
       impl: Region/IsProtected
@@ -1755,6 +1730,12 @@ Region:
     SetIgnoreParentScale:
       setter:
       - name: isIgnoringParentScale
+    SetMouseClickEnabled:
+      setter:
+      - name: mouseClickEnabled
+    SetMouseMotionEnabled:
+      setter:
+      - name: mouseMotionEnabled
     SetPassThroughButtons: {}
     SetPoint:
       impl: Region/SetPoint
@@ -2171,19 +2152,26 @@ Translation:
     SetOffset: {}
 UIObject:
   fields:
+    forbidden:
+      init: false
+      type: boolean
     name:
       nilable: true
       type: string
-  inherits:
-    ForbiddenMixin: {}
+  inherits: {}
   methods:
     GetName:
       getter:
       - name: name
     GetObjectType:
       impl: UIObject/GetObjectType
+    IsForbidden:
+      getter:
+      - name: forbidden
     IsObjectType:
       impl: UIObject/IsObjectType
+    SetForbidden:
+      impl: ForbiddenMixin/SetForbidden
   virtual: true
 UnitPositionFrame:
   inherits:
