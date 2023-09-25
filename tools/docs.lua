@@ -227,7 +227,7 @@ local function t2nty(field, ns)
     -- TODO cross-check mixin
     return { structure = n }
   elseif ty == 'CallbackType' then
-    return 'function'
+    return field.Name == 'cbObject' and 'userdata' or 'function'
   else
     error(('%s has unexpected type %s'):format(n, ty))
   end

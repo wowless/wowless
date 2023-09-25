@@ -6854,6 +6854,7 @@ C_Timer.After:
     type: function
   outputs: {}
 C_Timer.NewTicker:
+  impl: C_Timer.NewTicker
   inputs:
   - name: seconds
     type: number
@@ -6864,8 +6865,9 @@ C_Timer.NewTicker:
     type: number
   outputs:
   - name: cbObject
-    type: function
+    type: userdata
 C_Timer.NewTimer:
+  impl: C_Timer.NewTimer
   inputs:
   - name: seconds
     type: number
@@ -6873,7 +6875,7 @@ C_Timer.NewTimer:
     type: function
   outputs:
   - name: cbObject
-    type: function
+    type: userdata
 C_ToyBoxInfo.ClearFanfare:
   inputs:
   - name: itemID
