@@ -97,6 +97,7 @@ for _, t in pairs(docs) do
 end
 
 local types = {
+  AnimationDataEnum = 'number',
   BigInteger = 'number',
   BigUInteger = 'number',
   bool = 'boolean',
@@ -114,6 +115,7 @@ local types = {
   ['function'] = 'function',
   GarrisonFollower = 'string',
   HTMLTextType = 'string',
+  IDOrLink = 'string',
   InsertMode = 'string',
   InventorySlots = 'number',
   ItemInfo = 'string',
@@ -164,6 +166,7 @@ local types = {
   uiFontHeight = 'number',
   UiMapPoint = 'table',
   uiUnit = 'number',
+  uiRect = 'number', -- TODO this is actually expanded to four values (??!!!!)
   UnitToken = 'unit',
   WeeklyRewardItemDBID = 'string',
   WOWGUID = 'string',
@@ -426,7 +429,7 @@ for _, t in pairs(scrobjs) do
   moo[t.Name] = fns
 end
 
-require('pl.file').write('moo.yaml', require('wowapi.yaml').pprint(moo))
+require('pl.file').write('uiobjects.' .. args.product .. '.yaml', require('wowapi.yaml').pprint(moo))
 os.exit(0) -- DO NOT SUBMIT
 
 local outApis = rewriteApis()
