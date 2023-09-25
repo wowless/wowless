@@ -428,9 +428,83 @@ for _, t in pairs(scrobjs) do
   end
   moo[t.Name] = fns
 end
-
-require('pl.file').write('uiobjects.' .. args.product .. '.yaml', require('wowapi.yaml').pprint(moo))
-os.exit(0) -- DO NOT SUBMIT
+local moomap = {
+  FrameAPICharacterModelBase = 'PlayerModel',
+  FrameAPICinematicModel = 'CinematicModel',
+  FrameAPICooldown = 'Cooldown',
+  FrameAPIDressUpModel = 'DressUpModel',
+  FrameAPIFogOfWarFrame = 'FogOfWarFrame',
+  FrameAPIModelSceneFrame = 'ModelScene',
+  FrameAPIModelSceneFrameActor = 'Actor',
+  FrameAPIModelSceneFrameActorBase = 'Actor',
+  FrameAPISimpleCheckout = 'Checkout',
+  FrameAPITabardModel = 'TabardModel',
+  FrameAPITabardModelBase = 'TabardModel',
+  FrameAPIUnitPositionFrame = 'UnitPositionFrame',
+  MinimapFrameAPI = 'Minimap',
+  SimpleAnimAPI = 'Animation',
+  SimpleAnimAlphaAPI = 'Alpha',
+  SimpleAnimatableObjectAPI = 'Animation',
+  SimpleAnimFlipBookAPI = 'FlipBook',
+  SimpleAnimGroupAPI = 'AnimationGroup',
+  SimpleAnimPathAPI = 'Path',
+  SimpleAnimRotationAPI = 'Rotation',
+  SimpleAnimScaleAPI = 'Scale',
+  SimpleAnimScaleLineAPI = 'LineScale',
+  SimpleAnimTextureCoordTranslationAPI = 'TextureCoordTranslation',
+  SimpleAnimTranslationAPI = 'Translation',
+  SimpleAnimTranslationLineAPI = 'LineTranslation',
+  SimpleBrowserAPI = 'Browser',
+  SimpleButtonAPI = 'Button',
+  SimpleCheckboxAPI = 'CheckButton',
+  SimpleColorSelectAPI = 'ColorSelect',
+  SimpleControlPointAPI = 'ControlPoint',
+  SimpleEditBoxAPI = 'EditBox',
+  SimpleFontAPI = 'Font',
+  SimpleFontStringAPI = 'FontString',
+  SimpleFrameAPI = 'Frame',
+  SimpleFrameScriptObjectAPI = 'ScriptObject',
+  SimpleHTMLAPI = 'SimpleHTML',
+  SimpleLineAPI = 'Line',
+  SimpleMaskTextureAPI = 'MaskTexture',
+  SimpleMessageFrameAPI = 'MessageFrame',
+  SimpleModelAPI = 'Model',
+  SimpleModelFFXAPI = 'Model',
+  SimpleMovieAPI = 'MovieFrame',
+  SimpleObjectAPI = 'UIObject',
+  SimpleOffScreenFrameAPI = 'OffScreenFrame',
+  SimpleRegionAPI = 'Region',
+  SimpleScrollFrameAPI = 'ScrollFrame',
+  SimpleScriptRegionAPI = 'Region',
+  SimpleScriptRegionResizingAPI = 'Region',
+  SimpleSliderAPI = 'Slider',
+  SimpleStatusBarAPI = 'StatusBar',
+  SimpleTextureAPI = 'Texture',
+  SimpleTextureBaseAPI = 'TextureBase',
+}
+local moo2 = {}
+for k, v in pairs(moo) do
+  local mmk = assert(moomap[k], 'unknown doc type ' .. k)
+  local t = moo2[mmk] or {}
+  for mk, mv in pairs(v) do
+    assert(not t[mk], 'multiple specs for ' .. k .. '.' .. mk)
+    t[mk] = mv
+  end
+  moo2[mmk] = t
+end
+local filename = ('data/products/%s/uiobjects.yaml'):format(product)
+local uiobjects = require('wowapi.yaml').parseFile(filename)
+for k, v in pairs(moo2) do
+  if k ~= 'FlipBook' then -- TODO fix
+    local u = assert(uiobjects[k], 'unknown uiobject type ' .. k)
+    for mk in pairs(v) do
+      if not u.methods[mk] then
+        print('missing uiobject method ' .. k .. '.' .. mk)
+      end
+    end
+  end
+end
+os.exit(0)
 
 local outApis = rewriteApis()
 local outEvents = rewriteEvents()
