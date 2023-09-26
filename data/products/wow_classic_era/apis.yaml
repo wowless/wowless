@@ -10191,7 +10191,7 @@ GetLegacyRaidDifficultyID:
 GetLocale:
   inputs: {}
   outputs:
-  - name: locale
+  - name: localeName
     stub: enUS
     type: string
 GetLocalGameTime: {}
@@ -10783,10 +10783,10 @@ GetPetTrainingPoints:
 GetPhysicalScreenSize:
   inputs: {}
   outputs:
-  - name: physicalWidth
+  - name: sizeX
     stub: 1024
     type: number
-  - name: physicalHeight
+  - name: sizeY
     stub: 768
     type: number
 GetPlayerFacing: {}
@@ -12283,7 +12283,7 @@ IsPossessBarVisible: {}
 IsPublicBuild:
   inputs: {}
   outputs:
-  - name: value
+  - name: isPublicBuild
     stub: true
     type: boolean
 IsPVPTimerRunning: {}
@@ -13674,7 +13674,7 @@ UnitGroupRolesAssigned:
     nilable: true
     type: string
   outputs:
-  - name: role
+  - name: result
     stub: DAMAGER
     type: string
 UnitGUID:

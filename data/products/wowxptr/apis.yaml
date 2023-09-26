@@ -23494,7 +23494,7 @@ GetLifesteal:
 GetLocale:
   inputs: {}
   outputs:
-  - name: locale
+  - name: localeName
     stub: enUS
     type: string
 GetLocalGameTime:
@@ -24223,10 +24223,10 @@ GetPetTimeRemaining: {}
 GetPhysicalScreenSize:
   inputs: {}
   outputs:
-  - name: physicalWidth
+  - name: sizeX
     stub: 1024
     type: number
-  - name: physicalHeight
+  - name: sizeY
     stub: 768
     type: number
 GetPlayerFacing: {}
@@ -26079,7 +26079,7 @@ IsPressHoldReleaseSpell: {}
 IsPublicBuild:
   inputs: {}
   outputs:
-  - name: value
+  - name: isPublicBuild
     stub: true
     type: boolean
 IsPvpTalentSpell: {}
@@ -27652,7 +27652,7 @@ UnitGroupRolesAssigned:
     nilable: true
     type: string
   outputs:
-  - name: role
+  - name: result
     stub: DAMAGER
     type: string
 UnitGUID:
