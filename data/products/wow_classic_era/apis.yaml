@@ -699,9 +699,9 @@ C_AzeriteEssence.GetMilestones:
   inputs: {}
   outputs:
   - name: milestones
-    stub:
-    - slot: 1
-    type: table
+    type:
+      arrayof:
+        structure: C_AzeriteEssence.AzeriteMilestoneInfo
 C_AzeriteEssence.GetMilestoneSpell:
   inputs:
   - name: milestoneID
@@ -5392,18 +5392,13 @@ C_Map.GetMapArtID:
     type: number
 C_Map.GetMapArtLayers:
   inputs:
-  - type: number
+  - name: uiMapID
+    type: number
   outputs:
   - name: layerInfo
-    stub:
-    - additionalZoomSteps: 0
-      layerHeight: 1
-      layerWidth: 1
-      maxScale: 1
-      minScale: 1
-      tileHeight: 1
-      tileWidth: 1
-    type: table
+    type:
+      arrayof:
+        structure: C_Map.UiMapLayerInfo
 C_Map.GetMapArtLayerTextures:
   inputs:
   - name: uiMapID
