@@ -24822,7 +24822,8 @@ GetTalentInfoBySpecialization:
     type: boolean
   - name: spellID
     type: number
-  - nilable: true
+  - name: unknown
+    nilable: true
     type: unknown
   - name: row
     type: number

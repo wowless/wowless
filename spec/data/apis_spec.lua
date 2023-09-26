@@ -23,6 +23,13 @@ describe('apis', function()
                 end
               end)
             end
+            it('either all have names or none have names', function()
+              local named = 0
+              for _, input in ipairs(api.inputs or {}) do
+                named = named + (input.name and 1 or 0)
+              end
+              assert.True(named == 0 or named == #api.inputs)
+            end)
           end)
           describe('outputs', function()
             for k, output in ipairs(api.outputs or {}) do
@@ -54,6 +61,13 @@ describe('apis', function()
                 end
               end)
             end
+            it('either all have names or none have names', function()
+              local named = 0
+              for _, output in ipairs(api.outputs or {}) do
+                named = named + (output.name and 1 or 0)
+              end
+              assert.True(named == 0 or named == #api.outputs)
+            end)
           end)
         end)
       end
