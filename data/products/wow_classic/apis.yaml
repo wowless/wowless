@@ -5382,7 +5382,7 @@ C_Map.GetMapArtLayers:
   inputs:
   - type: number
   outputs:
-  - name: mapArtLayers
+  - name: layerInfo
     stub:
     - additionalZoomSteps: 0
       layerHeight: 1
