@@ -4,5 +4,5 @@ if not addon then
 else
   local name = addon.name
   local secure = addon.name:sub(1, 9) == 'Blizzard_' and 'SECURE' or 'INSECURE'
-  return name, addon.attrs.Title, addon.attrs.Notes or '', true, nil, secure, false
+  return name, addon.attrs.Title or '', addon.attrs.Notes or '', true, nil, secure, false
 end

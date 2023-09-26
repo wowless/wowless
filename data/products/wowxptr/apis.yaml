@@ -500,10 +500,8 @@ C_AddOns.GetAddOnInfo:
   - name: name
     type: string
   - name: title
-    nilable: true
     type: string
   - name: notes
-    nilable: true
     type: string
   - name: loadable
     type: boolean
@@ -521,9 +519,9 @@ C_AddOns.GetAddOnMetadata:
     type: uiAddon
   - name: variable
     type: string
+  mayreturnnothing: true
   outputs:
   - name: value
-    nilable: true
     type: string
 C_AddOns.GetAddOnOptionalDependencies:
   inputs:
@@ -7387,7 +7385,8 @@ C_Cursor.GetCursorItem:
 C_CVar.GetCVar:
   impl: C_CVar.GetCVar
   inputs:
-  - type: string
+  - name: name
+    type: string
   outputs:
   - name: value
     nilable: true
@@ -7405,7 +7404,8 @@ C_CVar.GetCVarBitfield:
 C_CVar.GetCVarBool:
   impl: C_CVar.GetCVarBool
   inputs:
-  - type: string
+  - name: name
+    type: string
   outputs:
   - name: value
     nilable: true
@@ -7416,7 +7416,7 @@ C_CVar.GetCVarDefault:
   - name: name
     type: string
   outputs:
-  - name: value
+  - name: defaultValue
     nilable: true
     type: string
 C_CVar.GetCVarInfo:
@@ -7441,8 +7441,10 @@ C_CVar.GetCVarInfo:
 C_CVar.RegisterCVar:
   impl: C_CVar.RegisterCVar
   inputs:
-  - type: string
-  - nilable: true
+  - name: name
+    type: string
+  - name: value
+    nilable: true
     type: string
   outputs: {}
 C_CVar.ResetTestCVars:
@@ -7451,14 +7453,13 @@ C_CVar.ResetTestCVars:
 C_CVar.SetCVar:
   impl: C_CVar.SetCVar
   inputs:
-  - type: string
-  - nilable: true
+  - name: name
     type: string
-  - nilable: true
+  - name: value
+    nilable: true
     type: string
   outputs:
   - name: success
-    nilable: true
     type: boolean
 C_CVar.SetCVarBitfield:
   inputs:
@@ -11071,7 +11072,6 @@ C_Map.GetMapInfo:
     type: number
   outputs:
   - name: info
-    nilable: true
     type:
       structure: C_Map.UiMapDetails
 C_Map.GetMapInfoAtPosition:
@@ -16431,9 +16431,9 @@ C_Texture.GetAtlasInfo:
   inputs:
   - name: atlas
     type: string
+  mayreturnnothing: true
   outputs:
   - name: info
-    nilable: true
     type:
       structure: C_Texture.AtlasInfo
 C_Texture.GetCraftingReagentQualityChatIcon:
@@ -22176,17 +22176,17 @@ GetBuildInfo:
   impl: GetBuildInfo_10_1
   inputs: {}
   outputs:
-  - name: version
+  - name: buildVersion
     type: string
-  - name: build
+  - name: buildNumber
     type: string
-  - name: date
+  - name: buildDate
     type: string
-  - name: tocversion
+  - name: interfaceVersion
     type: number
   - name: localizedVersion
     type: string
-  - name: buildType
+  - name: buildInfo
     type: string
 GetButtonMetatable:
   impl: GetButtonMetatable
@@ -24080,10 +24080,10 @@ GetNumSpecializations:
 GetNumSpecializationsForClassID:
   impl: GetNumSpecializationsForClassID
   inputs:
-  - name: classID
+  - name: specID
     type: number
   outputs:
-  - name: numSpecializations
+  - name: specCount
     type: number
 GetNumSpellTabs:
   outputs:
@@ -24717,12 +24717,14 @@ GetScreenHeight:
   impl: GetScreenHeight
   inputs: {}
   outputs:
-  - type: number
+  - name: height
+    type: number
 GetScreenWidth:
   impl: GetScreenWidth
   inputs: {}
   outputs:
-  - type: number
+  - name: width
+    type: number
 GetSecondsUntilParentalControlsKick:
   inputs: {}
   outputs:
@@ -24865,7 +24867,9 @@ GetSpecializationInfoForClassID:
   inputs:
   - name: classID
     type: number
-  - name: specIndex
+  - name: index
+    type: number
+  - name: gender
     nilable: true
     type: number
   mayreturnnothing: true
@@ -24876,15 +24880,19 @@ GetSpecializationInfoForClassID:
     type: string
   - name: description
     type: string
-  - name: texture
+  - name: icon
     type: number
   - name: role
     type: string
-  - name: isRecommended
+  - name: recommended
     type: boolean
-  - name: isAllowed
+  - name: allowedForBoost
     type: boolean
-  - name: mastery
+  - name: masterySpell1
+    nilable: true
+    type: number
+  - name: masterySpell2
+    nilable: true
     type: number
 GetSpecializationInfoForSpecID:
   impl: GetSpecializationInfoForSpecID
@@ -24901,15 +24909,19 @@ GetSpecializationInfoForSpecID:
     type: string
   - name: description
     type: string
-  - name: texture
+  - name: icon
     type: number
   - name: role
     type: string
-  - name: isRecommended
+  - name: recommended
     type: boolean
-  - name: isAllowed
+  - name: allowedForBoost
     type: boolean
-  - name: masterySpellID
+  - name: masterySpell1
+    nilable: true
+    type: number
+  - name: masterySpell2
+    nilable: true
     type: number
 GetSpecializationMasterySpells: {}
 GetSpecializationNameForSpecID:
@@ -25180,7 +25192,8 @@ GetTime:
   impl: GetTime
   inputs: {}
   outputs:
-  - type: number
+  - name: time
+    type: number
 GetTimePreciseSec:
   inputs: {}
   outputs:
@@ -26150,7 +26163,7 @@ IsTestBuild:
   impl: IsTestBuild
   inputs: {}
   outputs:
-  - name: value
+  - name: isTestBuild
     type: boolean
 IsThreatWarningEnabled: {}
 IsTitleKnown: {}
@@ -26923,7 +26936,10 @@ SetPortraitTexture:
   - name: textureObject
     type: Texture
   - name: unitToken
-    type: string
+    type: unit
+  - default: false
+    name: disableMasking
+    type: boolean
   outputs: {}
 SetPortraitTextureFromCreatureDisplayID:
   inputs:
@@ -27573,20 +27589,25 @@ UnitEffectiveLevel:
 UnitExists:
   impl: UnitExists
   inputs:
-  - nilable: true
+  - default: WOWGUID_NULL
+    name: unit
     type: unit
   outputs:
-  - type: boolean
+  - name: result
+    type: boolean
 UnitFactionGroup:
   impl: UnitFactionGroup
   inputs:
-  - name: unit
+  - name: unitName
     type: unit
+  - default: false
+    name: checkDisplayRace
+    type: boolean
   mayreturnnothing: true
   outputs:
-  - name: factionTag
+  - name: factionGroupTag
     type: string
-  - name: localizedFactionName
+  - name: localized
     type: string
 UnitFullName:
   inputs:
@@ -27936,10 +27957,15 @@ UnitIsOwnerOrControllerOfUnit:
 UnitIsPlayer:
   impl: UnitIsPlayer
   inputs:
-  - nilable: true
+  - default: WOWGUID_NULL
+    name: unit
     type: unit
+  - name: partyIndex
+    nilable: true
+    type: number
   outputs:
-  - type: boolean
+  - name: result
+    type: boolean
 UnitIsPossessed:
   inputs:
   - default: WOWGUID_NULL
@@ -27992,10 +28018,13 @@ UnitIsUnconscious: {}
 UnitIsUnit:
   impl: UnitIsUnit
   inputs:
-  - type: unit
-  - type: unit
+  - name: unitName1
+    type: unit
+  - name: unitName2
+    type: unit
   outputs:
-  - type: boolean
+  - name: result
+    type: boolean
 UnitIsVisible:
   inputs:
   - default: WOWGUID_NULL

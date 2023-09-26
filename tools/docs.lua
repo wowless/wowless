@@ -246,12 +246,23 @@ local function rewriteApis()
   local function insig(fn, ns)
     local t = {}
     for _, a in ipairs(fn.Arguments or {}) do
-      table.insert(t, {
-        default = a.Default,
-        name = a.Name,
-        nilable = a.Nilable or nil,
-        type = t2nty(a, ns),
-      })
+      -- Super duper hack, sorry world.
+      if (fn.Name == 'UnitFactionGroup' or fn.Name == 'UnitIsUnit') and a.Name:sub(1, 8) == 'unitName' then
+        assert(a.Type == 'cstring')
+        assert(not a.Default)
+        assert(not a.Nilable)
+        table.insert(t, {
+          name = a.Name,
+          type = 'unit',
+        })
+      else
+        table.insert(t, {
+          default = a.Default,
+          name = a.Name,
+          nilable = a.Nilable or nil,
+          type = t2nty(a, ns),
+        })
+      end
     end
     return t
   end
@@ -277,9 +288,6 @@ local function rewriteApis()
     if not api then
       return false
     end
-    if api.impl then
-      return true
-    end
     for _, out in ipairs(api.outputs or {}) do
       if out.stub then
         return true
@@ -297,6 +305,7 @@ local function rewriteApis()
       local ns = split(name)
       local api = apis[name]
       apis[name] = {
+        impl = api and api.impl,
         inputs = insig(fn, ns),
         mayreturnnothing = api and api.mayreturnnothing,
         outputs = outsig(fn, ns),
