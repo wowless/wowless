@@ -11523,7 +11523,8 @@ GetNumAddOns:
   impl: GetNumAddOns
   inputs: {}
   outputs:
-  - type: number
+  - name: numAddOns
+    type: number
 GetNumArenaOpponents:
   outputs:
   - type: number
@@ -11772,7 +11773,8 @@ GetNumTalentTabs:
     nilable: true
     type: boolean
   outputs:
-  - type: number
+  - name: numTalentTabs
+    type: number
 GetNumTitles:
   outputs:
   - type: number
@@ -12401,7 +12403,8 @@ GetScreenHeight:
   impl: GetScreenHeight
   inputs: {}
   outputs:
-  - type: number
+  - name: height
+    type: number
 GetScreenResolutions:
   comment: output is actually an unpacked string table
   inputs: {}
@@ -12412,7 +12415,8 @@ GetScreenWidth:
   impl: GetScreenWidth
   inputs: {}
   outputs:
-  - type: number
+  - name: width
+    type: number
 GetScriptCPUUsage: {}
 GetSecondsUntilParentalControlsKick: {}
 GetSelectedAuctionItem:
@@ -12770,7 +12774,8 @@ GetTime:
   impl: GetTime
   inputs: {}
   outputs:
-  - type: number
+  - name: time
+    type: number
 GetTimePreciseSec:
   inputs: {}
   outputs:
@@ -13251,15 +13256,18 @@ IsAddOnLoaded:
   - name: addon
     type: uiAddon
   outputs:
-  - type: boolean
-  - type: boolean
+  - name: loadedOrLoading
+    type: boolean
+  - name: loaded
+    type: boolean
 IsAddOnLoadOnDemand:
   impl: IsAddOnLoadOnDemand
   inputs:
   - name: addon
     type: uiAddon
   outputs:
-  - type: oneornil
+  - name: loadOnDemand
+    type: oneornil
 IsAddonVersionCheckEnabled:
   inputs: {}
   outputs:
@@ -14886,7 +14894,8 @@ UnitExists:
     nilable: true
     type: unit
   outputs:
-  - type: boolean
+  - name: result
+    type: boolean
 UnitFactionGroup:
   impl: UnitFactionGroup
   inputs:
@@ -15111,7 +15120,8 @@ UnitIsPlayer:
     nilable: true
     type: unit
   outputs:
-  - type: boolean
+  - name: result
+    type: boolean
 UnitIsPossessed:
   inputs:
   - nilable: true
@@ -15148,7 +15158,8 @@ UnitIsUnit:
   - name: unitName2
     type: unit
   outputs:
-  - type: boolean
+  - name: result
+    type: boolean
 UnitIsVisible:
   inputs:
   - nilable: true

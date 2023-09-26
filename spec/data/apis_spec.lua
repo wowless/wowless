@@ -25,8 +25,8 @@ describe('apis', function()
             end
           end)
           describe('outputs', function()
-            for _, output in ipairs(api.outputs or {}) do
-              describe(output.name, function()
+            for k, output in ipairs(api.outputs or {}) do
+              describe(k, function()
                 if output.default ~= nil then
                   it('default must typecheck', function()
                     local value, errmsg = typechecker(output, output.default)
@@ -42,6 +42,9 @@ describe('apis', function()
                   end)
                 end
                 if api.impl then
+                  it('has a name', function()
+                    assert.Not.Nil(output.name)
+                  end)
                   it('cannot specify return value', function()
                     assert.Nil(output.stub)
                   end)
