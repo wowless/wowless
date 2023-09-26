@@ -22315,7 +22315,8 @@ GetClassInfo:
 GetClickFrame:
   impl: GetClickFrame
   inputs:
-  - type: string
+  - name: name
+    type: string
   outputs:
   - name: frame
     nilable: true
@@ -23069,7 +23070,8 @@ GetInventoryItemTexture: {}
 GetInventorySlotInfo:
   impl: GetInventorySlotInfo
   inputs:
-  - type: string
+  - name: slotName
+    type: string
   outputs:
   - name: slotId
     type: number
@@ -23134,7 +23136,8 @@ GetItemLevelColor: {}
 GetItemQualityColor:
   impl: GetItemQualityColor
   inputs:
-  - type: number
+  - name: quality
+    type: number
   outputs:
   - name: r
     type: number
@@ -26776,7 +26779,8 @@ securecallfunction:
 SecureCmdOptionParse:
   impl: SecureCmdOptionParse
   inputs:
-  - type: string
+  - name: command
+    type: string
   outputs:
   - name: result
     nilable: true

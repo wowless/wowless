@@ -9282,7 +9282,8 @@ GetClassInfo:
 GetClickFrame:
   impl: GetClickFrame
   inputs:
-  - type: string
+  - name: name
+    type: string
   outputs:
   - name: frame
     nilable: true
@@ -10083,7 +10084,8 @@ GetInventoryItemTexture: {}
 GetInventorySlotInfo:
   impl: GetInventorySlotInfo
   inputs:
-  - type: string
+  - name: slotName
+    type: string
   outputs:
   - name: slotId
     type: number
@@ -10141,7 +10143,8 @@ GetItemInventorySlotInfo:
 GetItemQualityColor:
   impl: GetItemQualityColor
   inputs:
-  - type: number
+  - name: quality
+    type: number
   outputs:
   - name: r
     type: number
@@ -12861,7 +12864,8 @@ securecallfunction:
 SecureCmdOptionParse:
   impl: SecureCmdOptionParse
   inputs:
-  - type: string
+  - name: command
+    type: string
   outputs:
   - name: result
     nilable: true
@@ -13617,7 +13621,8 @@ UnitDistanceSquared: {}
 UnitExists:
   impl: UnitExists
   inputs:
-  - nilable: true
+  - name: unit
+    nilable: true
     type: unit
   outputs:
   - type: boolean
@@ -13825,7 +13830,8 @@ UnitIsOwnerOrControllerOfUnit:
 UnitIsPlayer:
   impl: UnitIsPlayer
   inputs:
-  - nilable: true
+  - name: unit
+    nilable: true
     type: unit
   outputs:
   - type: boolean
@@ -13860,8 +13866,10 @@ UnitIsUnconscious: {}
 UnitIsUnit:
   impl: UnitIsUnit
   inputs:
-  - type: unit
-  - type: unit
+  - name: unitName1
+    type: unit
+  - name: unitName2
+    type: unit
   outputs:
   - type: boolean
 UnitIsVisible:

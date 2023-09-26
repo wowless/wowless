@@ -10,17 +10,20 @@ describe('apis', function()
               assert.Truthy(api.impl or api.stdlib or api.alias)
             end
           end)
-          if api.impl then
-            describe('inputs', function()
-              for _, input in ipairs(api.inputs or {}) do
-                describe(input.name, function()
+          describe('inputs', function()
+            for k, input in ipairs(api.inputs or {}) do
+              describe(k, function()
+                if api.impl then
+                  it('has a name', function()
+                    assert.Not.Nil(input.name)
+                  end)
                   it('cannot be unknown type', function()
                     assert.Not.same('unknown', input.type)
                   end)
-                end)
-              end
-            end)
-          end
+                end
+              end)
+            end
+          end)
           describe('outputs', function()
             for _, output in ipairs(api.outputs or {}) do
               describe(output.name, function()
