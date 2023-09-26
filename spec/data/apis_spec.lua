@@ -57,10 +57,12 @@ describe('apis', function()
                     assert.same(value, output.stub)
                   end)
                 end
-                if api.impl then
+                if api.impl or output.stub then
                   it('has a name', function()
                     assert.Not.Nil(output.name)
                   end)
+                end
+                if api.impl then
                   it('cannot specify return value', function()
                     assert.Nil(output.stub)
                   end)

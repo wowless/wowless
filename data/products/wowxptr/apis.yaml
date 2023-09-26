@@ -2208,7 +2208,8 @@ C_AzeriteEssence.GetMilestoneInfo:
 C_AzeriteEssence.GetMilestones:
   inputs: {}
   outputs:
-  - stub:
+  - name: milestones
+    stub:
     - slot: 1
     type: table
 C_AzeriteEssence.GetMilestoneSpell:
@@ -10952,7 +10953,8 @@ C_Map.GetMapArtLayers:
   inputs:
   - type: number
   outputs:
-  - stub:
+  - name: mapArtLayers
+    stub:
     - additionalZoomSteps: 0
       layerHeight: 1
       layerWidth: 1
@@ -16096,7 +16098,8 @@ C_StoreSecure.GetBnetTransferInfo: {}
 C_StoreSecure.GetCharacterInfoByGUID: {}
 C_StoreSecure.GetCharactersForRealm:
   outputs:
-  - stub:
+  - name: characters
+    stub:
     - level: 42
     type: table
 C_StoreSecure.GetConfirmationInfo: {}
@@ -17682,7 +17685,8 @@ C_TradeSkillUI.GetFilterableInventorySlots: {}
 C_TradeSkillUI.GetFilteredRecipeIDs:
   inputs: {}
   outputs:
-  - stub: {}
+  - name: recipeIDs
+    stub: {}
     type:
       arrayof: number
 C_TradeSkillUI.GetGatheringOperationInfo:
@@ -20986,7 +20990,8 @@ C_Widget.IsFrameWidget:
   - name: frame
     type: unknown
   outputs:
-  - stub: true
+  - name: result
+    stub: true
     type: boolean
 C_Widget.IsRenderableWidget: {}
 C_Widget.IsWidget:
@@ -22360,7 +22365,8 @@ GetCombatRatingBonus:
 GetCombatRatingBonusForCombatRatingValue: {}
 GetComboPoints:
   outputs:
-  - stub: 0
+  - name: comboPoints
+    stub: 0
     type: number
 GetCompanionInfo: {}
 GetComparisonAchievementPoints: {}
@@ -22681,7 +22687,8 @@ GetGraphicsAPIs:
   comment: actually returns a string dotdotdot, not just a string
   inputs: {}
   outputs:
-  - stub: opengl
+  - name: graphicsAPIs
+    stub: opengl
     type: string
 GetGraphicsCVarValueForQualityLevel: {}
 GetGreetingText:
@@ -24426,7 +24433,8 @@ GetQuestLogRewardCurrencyInfo:
 GetQuestLogRewardFactionInfo: {}
 GetQuestLogRewardHonor:
   outputs:
-  - stub: 0
+  - name: value
+    stub: 0
     type: number
 GetQuestLogRewardInfo:
   inputs:
