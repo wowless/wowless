@@ -500,10 +500,8 @@ C_AddOns.GetAddOnInfo:
   - name: name
     type: string
   - name: title
-    nilable: true
     type: string
   - name: notes
-    nilable: true
     type: string
   - name: loadable
     type: boolean
@@ -521,9 +519,9 @@ C_AddOns.GetAddOnMetadata:
     type: uiAddon
   - name: variable
     type: string
+  mayreturnnothing: true
   outputs:
   - name: value
-    nilable: true
     type: string
 C_AddOns.GetAddOnOptionalDependencies:
   inputs:
@@ -2210,9 +2208,10 @@ C_AzeriteEssence.GetMilestoneInfo:
 C_AzeriteEssence.GetMilestones:
   inputs: {}
   outputs:
-  - stub:
-    - slot: 1
-    type: table
+  - name: milestones
+    type:
+      arrayof:
+        structure: C_AzeriteEssence.AzeriteMilestoneInfo
 C_AzeriteEssence.GetMilestoneSpell:
   inputs:
   - name: milestoneID
@@ -7387,7 +7386,8 @@ C_Cursor.GetCursorItem:
 C_CVar.GetCVar:
   impl: C_CVar.GetCVar
   inputs:
-  - type: string
+  - name: name
+    type: string
   outputs:
   - name: value
     nilable: true
@@ -7405,7 +7405,8 @@ C_CVar.GetCVarBitfield:
 C_CVar.GetCVarBool:
   impl: C_CVar.GetCVarBool
   inputs:
-  - type: string
+  - name: name
+    type: string
   outputs:
   - name: value
     nilable: true
@@ -7416,7 +7417,7 @@ C_CVar.GetCVarDefault:
   - name: name
     type: string
   outputs:
-  - name: value
+  - name: defaultValue
     nilable: true
     type: string
 C_CVar.GetCVarInfo:
@@ -7441,8 +7442,10 @@ C_CVar.GetCVarInfo:
 C_CVar.RegisterCVar:
   impl: C_CVar.RegisterCVar
   inputs:
-  - type: string
-  - nilable: true
+  - name: name
+    type: string
+  - name: value
+    nilable: true
     type: string
   outputs: {}
 C_CVar.ResetTestCVars:
@@ -7451,14 +7454,13 @@ C_CVar.ResetTestCVars:
 C_CVar.SetCVar:
   impl: C_CVar.SetCVar
   inputs:
-  - type: string
-  - nilable: true
+  - name: name
     type: string
-  - nilable: true
+  - name: value
+    nilable: true
     type: string
   outputs:
   - name: success
-    nilable: true
     type: boolean
 C_CVar.SetCVarBitfield:
   inputs:
@@ -9363,6 +9365,7 @@ C_IslandsQueue.GetIslandsWeeklyQuestID:
   inputs: {}
   outputs:
   - name: questID
+    nilable: true
     stub: 1
     type: number
 C_IslandsQueue.QueueForIsland:
@@ -10949,17 +10952,13 @@ C_Map.GetMapArtID:
     type: number
 C_Map.GetMapArtLayers:
   inputs:
-  - type: number
+  - name: uiMapID
+    type: number
   outputs:
-  - stub:
-    - additionalZoomSteps: 0
-      layerHeight: 1
-      layerWidth: 1
-      maxScale: 1
-      minScale: 1
-      tileHeight: 1
-      tileWidth: 1
-    type: table
+  - name: layerInfo
+    type:
+      arrayof:
+        structure: C_Map.UiMapLayerInfo
 C_Map.GetMapArtLayerTextures:
   inputs:
   - name: uiMapID
@@ -11071,7 +11070,6 @@ C_Map.GetMapInfo:
     type: number
   outputs:
   - name: info
-    nilable: true
     type:
       structure: C_Map.UiMapDetails
 C_Map.GetMapInfoAtPosition:
@@ -16096,7 +16094,8 @@ C_StoreSecure.GetBnetTransferInfo: {}
 C_StoreSecure.GetCharacterInfoByGUID: {}
 C_StoreSecure.GetCharactersForRealm:
   outputs:
-  - stub:
+  - name: characters
+    stub:
     - level: 42
     type: table
 C_StoreSecure.GetConfirmationInfo: {}
@@ -16431,9 +16430,9 @@ C_Texture.GetAtlasInfo:
   inputs:
   - name: atlas
     type: string
+  mayreturnnothing: true
   outputs:
   - name: info
-    nilable: true
     type:
       structure: C_Texture.AtlasInfo
 C_Texture.GetCraftingReagentQualityChatIcon:
@@ -17682,7 +17681,8 @@ C_TradeSkillUI.GetFilterableInventorySlots: {}
 C_TradeSkillUI.GetFilteredRecipeIDs:
   inputs: {}
   outputs:
-  - stub: {}
+  - name: recipeIDs
+    stub: {}
     type:
       arrayof: number
 C_TradeSkillUI.GetGatheringOperationInfo:
@@ -20986,7 +20986,8 @@ C_Widget.IsFrameWidget:
   - name: frame
     type: unknown
   outputs:
-  - stub: true
+  - name: result
+    stub: true
     type: boolean
 C_Widget.IsRenderableWidget: {}
 C_Widget.IsWidget:
@@ -22176,17 +22177,17 @@ GetBuildInfo:
   impl: GetBuildInfo_10_1
   inputs: {}
   outputs:
-  - name: version
+  - name: buildVersion
     type: string
-  - name: build
+  - name: buildNumber
     type: string
-  - name: date
+  - name: buildDate
     type: string
-  - name: tocversion
+  - name: interfaceVersion
     type: number
   - name: localizedVersion
     type: string
-  - name: buildType
+  - name: buildInfo
     type: string
 GetButtonMetatable:
   impl: GetButtonMetatable
@@ -22315,7 +22316,8 @@ GetClassInfo:
 GetClickFrame:
   impl: GetClickFrame
   inputs:
-  - type: string
+  - name: name
+    type: string
   outputs:
   - name: frame
     nilable: true
@@ -22359,7 +22361,8 @@ GetCombatRatingBonus:
 GetCombatRatingBonusForCombatRatingValue: {}
 GetComboPoints:
   outputs:
-  - stub: 0
+  - name: comboPoints
+    stub: 0
     type: number
 GetCompanionInfo: {}
 GetComparisonAchievementPoints: {}
@@ -22680,7 +22683,8 @@ GetGraphicsAPIs:
   comment: actually returns a string dotdotdot, not just a string
   inputs: {}
   outputs:
-  - stub: opengl
+  - name: graphicsAPIs
+    stub: opengl
     type: string
 GetGraphicsCVarValueForQualityLevel: {}
 GetGreetingText:
@@ -23069,7 +23073,8 @@ GetInventoryItemTexture: {}
 GetInventorySlotInfo:
   impl: GetInventorySlotInfo
   inputs:
-  - type: string
+  - name: slotName
+    type: string
   outputs:
   - name: slotId
     type: number
@@ -23134,7 +23139,8 @@ GetItemLevelColor: {}
 GetItemQualityColor:
   impl: GetItemQualityColor
   inputs:
-  - type: number
+  - name: quality
+    type: number
   outputs:
   - name: r
     type: number
@@ -23484,7 +23490,7 @@ GetLifesteal:
 GetLocale:
   inputs: {}
   outputs:
-  - name: locale
+  - name: localeName
     stub: enUS
     type: string
 GetLocalGameTime:
@@ -24080,10 +24086,10 @@ GetNumSpecializations:
 GetNumSpecializationsForClassID:
   impl: GetNumSpecializationsForClassID
   inputs:
-  - name: classID
+  - name: specID
     type: number
   outputs:
-  - name: numSpecializations
+  - name: specCount
     type: number
 GetNumSpellTabs:
   outputs:
@@ -24213,10 +24219,10 @@ GetPetTimeRemaining: {}
 GetPhysicalScreenSize:
   inputs: {}
   outputs:
-  - name: physicalWidth
+  - name: sizeX
     stub: 1024
     type: number
-  - name: physicalHeight
+  - name: sizeY
     stub: 768
     type: number
 GetPlayerFacing: {}
@@ -24423,7 +24429,8 @@ GetQuestLogRewardCurrencyInfo:
 GetQuestLogRewardFactionInfo: {}
 GetQuestLogRewardHonor:
   outputs:
-  - stub: 0
+  - name: value
+    stub: 0
     type: number
 GetQuestLogRewardInfo:
   inputs:
@@ -24717,12 +24724,14 @@ GetScreenHeight:
   impl: GetScreenHeight
   inputs: {}
   outputs:
-  - type: number
+  - name: height
+    type: number
 GetScreenWidth:
   impl: GetScreenWidth
   inputs: {}
   outputs:
-  - type: number
+  - name: width
+    type: number
 GetSecondsUntilParentalControlsKick:
   inputs: {}
   outputs:
@@ -24865,7 +24874,9 @@ GetSpecializationInfoForClassID:
   inputs:
   - name: classID
     type: number
-  - name: specIndex
+  - name: index
+    type: number
+  - name: gender
     nilable: true
     type: number
   mayreturnnothing: true
@@ -24876,15 +24887,19 @@ GetSpecializationInfoForClassID:
     type: string
   - name: description
     type: string
-  - name: texture
+  - name: icon
     type: number
   - name: role
     type: string
-  - name: isRecommended
+  - name: recommended
     type: boolean
-  - name: isAllowed
+  - name: allowedForBoost
     type: boolean
-  - name: mastery
+  - name: masterySpell1
+    nilable: true
+    type: number
+  - name: masterySpell2
+    nilable: true
     type: number
 GetSpecializationInfoForSpecID:
   impl: GetSpecializationInfoForSpecID
@@ -24901,15 +24916,19 @@ GetSpecializationInfoForSpecID:
     type: string
   - name: description
     type: string
-  - name: texture
+  - name: icon
     type: number
   - name: role
     type: string
-  - name: isRecommended
+  - name: recommended
     type: boolean
-  - name: isAllowed
+  - name: allowedForBoost
     type: boolean
-  - name: masterySpellID
+  - name: masterySpell1
+    nilable: true
+    type: number
+  - name: masterySpell2
+    nilable: true
     type: number
 GetSpecializationMasterySpells: {}
 GetSpecializationNameForSpecID:
@@ -25123,7 +25142,8 @@ GetTalentInfoBySpecialization:
     type: boolean
   - name: spellID
     type: number
-  - nilable: true
+  - name: unknown
+    nilable: true
     type: unknown
   - name: row
     type: number
@@ -25180,7 +25200,8 @@ GetTime:
   impl: GetTime
   inputs: {}
   outputs:
-  - type: number
+  - name: time
+    type: number
 GetTimePreciseSec:
   inputs: {}
   outputs:
@@ -26054,7 +26075,7 @@ IsPressHoldReleaseSpell: {}
 IsPublicBuild:
   inputs: {}
   outputs:
-  - name: value
+  - name: isPublicBuild
     stub: true
     type: boolean
 IsPvpTalentSpell: {}
@@ -26150,7 +26171,7 @@ IsTestBuild:
   impl: IsTestBuild
   inputs: {}
   outputs:
-  - name: value
+  - name: isTestBuild
     type: boolean
 IsThreatWarningEnabled: {}
 IsTitleKnown: {}
@@ -26763,7 +26784,8 @@ securecallfunction:
 SecureCmdOptionParse:
   impl: SecureCmdOptionParse
   inputs:
-  - type: string
+  - name: command
+    type: string
   outputs:
   - name: result
     nilable: true
@@ -26923,7 +26945,10 @@ SetPortraitTexture:
   - name: textureObject
     type: Texture
   - name: unitToken
-    type: string
+    type: unit
+  - default: false
+    name: disableMasking
+    type: boolean
   outputs: {}
 SetPortraitTextureFromCreatureDisplayID:
   inputs:
@@ -27573,20 +27598,25 @@ UnitEffectiveLevel:
 UnitExists:
   impl: UnitExists
   inputs:
-  - nilable: true
+  - default: WOWGUID_NULL
+    name: unit
     type: unit
   outputs:
-  - type: boolean
+  - name: result
+    type: boolean
 UnitFactionGroup:
   impl: UnitFactionGroup
   inputs:
-  - name: unit
+  - name: unitName
     type: unit
+  - default: false
+    name: checkDisplayRace
+    type: boolean
   mayreturnnothing: true
   outputs:
-  - name: factionTag
+  - name: factionGroupTag
     type: string
-  - name: localizedFactionName
+  - name: localized
     type: string
 UnitFullName:
   inputs:
@@ -27614,11 +27644,11 @@ UnitGetTotalHealAbsorbs:
   - type: number
 UnitGroupRolesAssigned:
   inputs:
-  - name: unit
-    nilable: true
-    type: string
+  - default: WOWGUID_NULL
+    name: unit
+    type: unit
   outputs:
-  - name: role
+  - name: result
     stub: DAMAGER
     type: string
 UnitGUID:
@@ -27936,10 +27966,15 @@ UnitIsOwnerOrControllerOfUnit:
 UnitIsPlayer:
   impl: UnitIsPlayer
   inputs:
-  - nilable: true
+  - default: WOWGUID_NULL
+    name: unit
     type: unit
+  - name: partyIndex
+    nilable: true
+    type: number
   outputs:
-  - type: boolean
+  - name: result
+    type: boolean
 UnitIsPossessed:
   inputs:
   - default: WOWGUID_NULL
@@ -27992,10 +28027,13 @@ UnitIsUnconscious: {}
 UnitIsUnit:
   impl: UnitIsUnit
   inputs:
-  - type: unit
-  - type: unit
+  - name: unitName1
+    type: unit
+  - name: unitName2
+    type: unit
   outputs:
-  - type: boolean
+  - name: result
+    type: boolean
 UnitIsVisible:
   inputs:
   - default: WOWGUID_NULL

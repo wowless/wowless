@@ -2075,9 +2075,10 @@ C_AzeriteEssence.GetMilestoneInfo:
 C_AzeriteEssence.GetMilestones:
   inputs: {}
   outputs:
-  - stub:
-    - slot: 1
-    type: table
+  - name: milestones
+    type:
+      arrayof:
+        structure: C_AzeriteEssence.AzeriteMilestoneInfo
 C_AzeriteEssence.GetMilestoneSpell:
   inputs:
   - name: milestoneID
@@ -9235,6 +9236,7 @@ C_IslandsQueue.GetIslandsWeeklyQuestID:
   inputs: {}
   outputs:
   - name: questID
+    nilable: true
     stub: 1
     type: number
 C_IslandsQueue.QueueForIsland:
@@ -10801,17 +10803,13 @@ C_Map.GetMapArtID:
     type: number
 C_Map.GetMapArtLayers:
   inputs:
-  - type: number
+  - name: uiMapID
+    type: number
   outputs:
-  - stub:
-    - additionalZoomSteps: 0
-      layerHeight: 1
-      layerWidth: 1
-      maxScale: 1
-      minScale: 1
-      tileHeight: 1
-      tileWidth: 1
-    type: table
+  - name: layerInfo
+    type:
+      arrayof:
+        structure: C_Map.UiMapLayerInfo
 C_Map.GetMapArtLayerTextures:
   inputs:
   - name: uiMapID
@@ -15932,7 +15930,8 @@ C_StoreSecure.GetBnetTransferInfo: {}
 C_StoreSecure.GetCharacterInfoByGUID: {}
 C_StoreSecure.GetCharactersForRealm:
   outputs:
-  - stub:
+  - name: characters
+    stub:
     - level: 42
     type: table
 C_StoreSecure.GetConfirmationInfo: {}
@@ -17504,7 +17503,8 @@ C_TradeSkillUI.GetFilterableInventorySlots: {}
 C_TradeSkillUI.GetFilteredRecipeIDs:
   inputs: {}
   outputs:
-  - stub: {}
+  - name: recipeIDs
+    stub: {}
     type:
       arrayof: number
 C_TradeSkillUI.GetGatheringOperationInfo:
@@ -20799,7 +20799,8 @@ C_Widget.IsFrameWidget:
   - name: frame
     type: unknown
   outputs:
-  - stub: true
+  - name: result
+    stub: true
     type: boolean
 C_Widget.IsRenderableWidget: {}
 C_Widget.IsWidget:
@@ -22081,7 +22082,8 @@ GetClassInfo:
 GetClickFrame:
   impl: GetClickFrame
   inputs:
-  - type: string
+  - name: name
+    type: string
   outputs:
   - name: frame
     nilable: true
@@ -22125,7 +22127,8 @@ GetCombatRatingBonus:
 GetCombatRatingBonusForCombatRatingValue: {}
 GetComboPoints:
   outputs:
-  - stub: 0
+  - name: comboPoints
+    stub: 0
     type: number
 GetCompanionInfo: {}
 GetComparisonAchievementPoints: {}
@@ -22424,7 +22427,8 @@ GetGraphicsAPIs:
   comment: actually returns a string dotdotdot, not just a string
   inputs: {}
   outputs:
-  - stub: opengl
+  - name: graphicsAPIs
+    stub: opengl
     type: string
 GetGraphicsCVarValueForQualityLevel: {}
 GetGreetingText:
@@ -22813,7 +22817,8 @@ GetInventoryItemTexture: {}
 GetInventorySlotInfo:
   impl: GetInventorySlotInfo
   inputs:
-  - type: string
+  - name: slotName
+    type: string
   outputs:
   - name: slotId
     type: number
@@ -22878,7 +22883,8 @@ GetItemLevelColor: {}
 GetItemQualityColor:
   impl: GetItemQualityColor
   inputs:
-  - type: number
+  - name: quality
+    type: number
   outputs:
   - name: r
     type: number
@@ -23228,7 +23234,7 @@ GetLifesteal:
 GetLocale:
   inputs: {}
   outputs:
-  - name: locale
+  - name: localeName
     stub: enUS
     type: string
 GetLocalGameTime: {}
@@ -23557,7 +23563,8 @@ GetNumAddOns:
   impl: GetNumAddOns
   inputs: {}
   outputs:
-  - type: number
+  - name: numAddOns
+    type: number
 GetNumArchaeologyRaces:
   outputs:
   - type: number
@@ -23923,10 +23930,10 @@ GetPetTimeRemaining: {}
 GetPhysicalScreenSize:
   inputs: {}
   outputs:
-  - name: physicalWidth
+  - name: sizeX
     stub: 1024
     type: number
-  - name: physicalHeight
+  - name: sizeY
     stub: 768
     type: number
 GetPlayerFacing: {}
@@ -24133,7 +24140,8 @@ GetQuestLogRewardCurrencyInfo:
 GetQuestLogRewardFactionInfo: {}
 GetQuestLogRewardHonor:
   outputs:
-  - stub: 0
+  - name: value
+    stub: 0
     type: number
 GetQuestLogRewardInfo:
   inputs:
@@ -24423,12 +24431,14 @@ GetScreenHeight:
   impl: GetScreenHeight
   inputs: {}
   outputs:
-  - type: number
+  - name: height
+    type: number
 GetScreenWidth:
   impl: GetScreenWidth
   inputs: {}
   outputs:
-  - type: number
+  - name: width
+    type: number
 GetSecondsUntilParentalControlsKick: {}
 GetSelectedArtifactInfo: {}
 GetSelectedDisplayChannel: {}
@@ -24816,7 +24826,8 @@ GetTalentInfoBySpecialization:
     type: boolean
   - name: spellID
     type: number
-  - nilable: true
+  - name: unknown
+    nilable: true
     type: unknown
   - name: row
     type: number
@@ -24873,7 +24884,8 @@ GetTime:
   impl: GetTime
   inputs: {}
   outputs:
-  - type: number
+  - name: time
+    type: number
 GetTimePreciseSec:
   inputs: {}
   outputs:
@@ -25420,15 +25432,18 @@ IsAddOnLoaded:
   - name: addon
     type: uiAddon
   outputs:
-  - type: boolean
-  - type: boolean
+  - name: loadedOrLoading
+    type: boolean
+  - name: loaded
+    type: boolean
 IsAddOnLoadOnDemand:
   impl: IsAddOnLoadOnDemand
   inputs:
   - name: addon
     type: uiAddon
   outputs:
-  - type: oneornil
+  - name: loadOnDemand
+    type: oneornil
 IsAddonVersionCheckEnabled:
   inputs: {}
   outputs:
@@ -25686,7 +25701,7 @@ IsPressHoldReleaseSpell: {}
 IsPublicBuild:
   inputs: {}
   outputs:
-  - name: value
+  - name: isPublicBuild
     stub: true
     type: boolean
 IsPvpTalentSpell: {}
@@ -26377,7 +26392,8 @@ securecallfunction:
 SecureCmdOptionParse:
   impl: SecureCmdOptionParse
   inputs:
-  - type: string
+  - name: command
+    type: string
   outputs:
   - name: result
     nilable: true
@@ -27143,10 +27159,12 @@ UnitEffectiveLevel:
 UnitExists:
   impl: UnitExists
   inputs:
-  - nilable: true
+  - name: unit
+    nilable: true
     type: unit
   outputs:
-  - type: boolean
+  - name: result
+    type: boolean
 UnitFactionGroup:
   impl: UnitFactionGroup
   inputs:
@@ -27188,7 +27206,7 @@ UnitGroupRolesAssigned:
     nilable: true
     type: string
   outputs:
-  - name: role
+  - name: result
     stub: DAMAGER
     type: string
 UnitGUID:
@@ -27412,10 +27430,12 @@ UnitIsOwnerOrControllerOfUnit:
 UnitIsPlayer:
   impl: UnitIsPlayer
   inputs:
-  - nilable: true
+  - name: unit
+    nilable: true
     type: unit
   outputs:
-  - type: boolean
+  - name: result
+    type: boolean
 UnitIsPossessed:
   inputs:
   - nilable: true
@@ -27448,10 +27468,13 @@ UnitIsUnconscious: {}
 UnitIsUnit:
   impl: UnitIsUnit
   inputs:
-  - type: unit
-  - type: unit
+  - name: unitName1
+    type: unit
+  - name: unitName2
+    type: unit
   outputs:
-  - type: boolean
+  - name: result
+    type: boolean
 UnitIsVisible:
   inputs:
   - nilable: true

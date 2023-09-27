@@ -3595,6 +3595,22 @@ C_Map.UiMapGroupMemberInfo:
       type: string
     relativeHeightIndex:
       type: number
+C_Map.UiMapLayerInfo:
+  fields:
+    additionalZoomSteps:
+      type: number
+    layerHeight:
+      type: number
+    layerWidth:
+      type: number
+    maxScale:
+      type: number
+    minScale:
+      type: number
+    tileHeight:
+      type: number
+    tileWidth:
+      type: number
 C_MapExplorationInfo.UiMapExplorationHitRect:
   fields:
     bottom:
