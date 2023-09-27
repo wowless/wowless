@@ -1525,8 +1525,9 @@ PlayerModel:
     SetUnit: {}
     StopAnimKit: {}
     ZeroCachedCenterXY: {}
-POIFrame:
-  inherits: {}
+QuestPOIFrame:
+  inherits:
+    Frame: {}
   methods:
     DrawAll: {}
     DrawBlob: {}
@@ -1534,6 +1535,8 @@ POIFrame:
     EnableMerging: {}
     EnableSmoothing: {}
     GetMapID: {}
+    GetNumTooltips: {}
+    GetTooltipIndex: {}
     SetBorderAlpha: {}
     SetBorderScalar: {}
     SetBorderTexture: {}
@@ -1543,14 +1546,6 @@ POIFrame:
     SetMergeThreshold: {}
     SetNumSplinePoints: {}
     UpdateMouseOverTooltip: {}
-  virtual: true
-QuestPOIFrame:
-  inherits:
-    Frame: {}
-    POIFrame: {}
-  methods:
-    GetNumTooltips: {}
-    GetTooltipIndex: {}
 Region:
   fields:
     animationGroups:
@@ -1787,12 +1782,6 @@ Scale:
     SetScale: {}
     SetScaleFrom: {}
     SetScaleTo: {}
-ScenarioPOIFrame:
-  inherits:
-    Frame: {}
-    POIFrame: {}
-  methods:
-    GetScenarioTooltipText: {}
 ScriptObject:
   inherits:
     ScriptObjectBase: {}
