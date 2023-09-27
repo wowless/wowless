@@ -2,6 +2,9 @@
 name: docs
 type:
   record:
+    Documentation:
+      type:
+        sequenceof: string
     Events:
       type:
         sequenceof:

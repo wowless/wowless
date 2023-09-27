@@ -17,6 +17,9 @@ addon:
       VasServiceType: {}
     globalapis:
       CreateForbiddenFrame: {}
+  hooked_globals:
+    FauxScrollFrame_Update: {}
+    SetItemRef: {}
   ignore_cvar_value:
     graphicsEnvironmentDetail: {}
     graphicsGroundClutter: {}

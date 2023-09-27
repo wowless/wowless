@@ -77,6 +77,10 @@ C_Map.GetMapInfo:
   sqls:
   - lookup: C_Map.GetMapInfo
     table: true
+C_Map.GetMapInfo_Vanilla:
+  sqls:
+  - lookup: C_Map.GetMapInfo_Vanilla
+    table: true
 C_ScriptedAnimations.GetAllScriptedAnimationEffects:
   sqls:
   - cursor: C_ScriptedAnimations.GetAllScriptedAnimationEffects
@@ -87,6 +91,9 @@ C_SpecializationInfo.GetSpecIDs:
 C_Texture.GetAtlasInfo:
   sqls:
   - lookup: C_Texture.GetAtlasInfo
+C_Texture.GetAtlasInfo_10_2:
+  sqls:
+  - lookup: C_Texture.GetAtlasInfo_10_2
 C_Timer.After:
   frameworks:
   - api
@@ -124,6 +131,12 @@ C_Traits.GetNodeInfo:
 C_Traits.GetTreeNodes:
   sqls:
   - cursor: C_Traits.GetTreeNodes
+C_UI.GetUIParent:
+  frameworks:
+  - env
+C_UI.GetWorldFrame:
+  frameworks:
+  - env
 C_UIColor.GetColors:
   sqls:
   - cursor: C_UIColor.GetColors
@@ -149,9 +162,6 @@ forceinsecure: {}
 GetAddOnEnableState: {}
 GetAddOnInfo: {}
 GetAddOnMetadata: {}
-GetBuildInfo:
-  frameworks:
-  - datalua
 GetBuildInfo_10_1:
   frameworks:
   - datalua
@@ -240,11 +250,6 @@ GetTalentPrereqs_Vanilla:
 GetTalentPrereqs_Wrath:
   sqls:
   - cursor: GetTalentPrereqs
-  states:
-  - Units
-GetTalentTabInfo_Vanilla:
-  sqls:
-  - lookup: GetTalentTabInfo
   states:
   - Units
 GetTalentTabInfo_Wrath:

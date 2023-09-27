@@ -1,6 +1,9 @@
 ---
 C_AreaPoiInfo.AreaPOIInfo:
   fields:
+    addPaddingAboveWidgets:
+      nilable: true
+      type: boolean
     areaPoiID:
       type: number
     atlasName:
@@ -9,6 +12,13 @@ C_AreaPoiInfo.AreaPOIInfo:
     description:
       nilable: true
       type: string
+    factionID:
+      nilable: true
+      type: number
+    isAlwaysOnFlightmap:
+      type: boolean
+    isPrimaryMapForPOI:
+      type: boolean
     name:
       type: string
     position:
@@ -85,6 +95,98 @@ C_AzeriteItem.UnlockedAzeriteEmpoweredItems:
     unlockedItem:
       type:
         structure: ItemLocation
+C_BattleNet.BNetAccountInfo:
+  fields:
+    accountName:
+      type: string
+    appearOffline:
+      type: boolean
+    battleTag:
+      type: string
+    bnetAccountID:
+      type: number
+    customMessage:
+      type: string
+    customMessageTime:
+      type: number
+    gameAccountInfo:
+      type:
+        structure: C_BattleNet.BNetGameAccountInfo
+    isAFK:
+      type: boolean
+    isBattleTagFriend:
+      type: boolean
+    isDND:
+      type: boolean
+    isFavorite:
+      type: boolean
+    isFriend:
+      type: boolean
+    lastOnlineTime:
+      type: number
+    note:
+      type: string
+    rafLinkType:
+      type:
+        enum: RafLinkType
+C_BattleNet.BNetGameAccountInfo:
+  fields:
+    areaName:
+      nilable: true
+      type: string
+    canSummon:
+      type: boolean
+    characterLevel:
+      nilable: true
+      type: number
+    characterName:
+      nilable: true
+      type: string
+    className:
+      nilable: true
+      type: string
+    clientProgram:
+      type: string
+    factionName:
+      nilable: true
+      type: string
+    gameAccountID:
+      type: number
+    hasFocus:
+      type: boolean
+    isGameAFK:
+      type: boolean
+    isGameBusy:
+      type: boolean
+    isInCurrentRegion:
+      type: boolean
+    isOnline:
+      type: boolean
+    isWowMobile:
+      type: boolean
+    playerGuid:
+      nilable: true
+      type: string
+    raceName:
+      nilable: true
+      type: string
+    realmDisplayName:
+      nilable: true
+      type: string
+    realmID:
+      nilable: true
+      type: number
+    realmName:
+      nilable: true
+      type: string
+    regionID:
+      type: number
+    richPresence:
+      nilable: true
+      type: string
+    wowProjectID:
+      nilable: true
+      type: number
 C_Calendar.CalendarDayEvent:
   fields:
     calendarType:
@@ -741,6 +843,101 @@ C_Console.ConsoleCommandInfo:
       type: string
     scriptParameters:
       type: string
+C_ConsoleScriptCollection.ConsoleScriptCollectionData:
+  fields:
+    ID:
+      type: number
+    name:
+      type: string
+C_ConsoleScriptCollection.ConsoleScriptCollectionElementData:
+  fields:
+    collectionID:
+      nilable: true
+      type: number
+    consoleScriptID:
+      nilable: true
+      type: number
+C_ConsoleScriptCollection.ConsoleScriptData:
+  fields:
+    help:
+      type: string
+    ID:
+      type: number
+    isLuaScript:
+      type: boolean
+    name:
+      type: string
+    params:
+      type: string
+    script:
+      type: string
+C_Container.ContainerItemInfo:
+  fields:
+    hasLoot:
+      type: boolean
+    hasNoValue:
+      type: boolean
+    hyperlink:
+      type: string
+    iconFileID:
+      type: number
+    isBound:
+      type: boolean
+    isFiltered:
+      type: boolean
+    isLocked:
+      type: boolean
+    isReadable:
+      type: boolean
+    itemID:
+      type: number
+    itemName:
+      type: string
+    quality:
+      nilable: true
+      type:
+        enum: ItemQuality
+    stackCount:
+      type: number
+C_Container.ItemPurchaseCurrency:
+  fields:
+    currencyCount:
+      type: number
+    iconFileID:
+      nilable: true
+      type: number
+    name:
+      type: string
+C_Container.ItemPurchaseInfo:
+  fields:
+    currencyCount:
+      type: number
+    hasEnchants:
+      type: boolean
+    itemCount:
+      type: number
+    money:
+      type: number
+    refundSeconds:
+      type: number
+C_Container.ItemPurchaseItem:
+  fields:
+    hyperlink:
+      type: string
+    iconFileID:
+      nilable: true
+      type: number
+    itemCount:
+      type: number
+C_Container.ItemQuestInfo:
+  fields:
+    isActive:
+      type: boolean
+    isQuestItem:
+      type: boolean
+    questID:
+      nilable: true
+      type: number
 C_CreatureInfo.ClassInfo:
   fields:
     classFile:
@@ -763,10 +960,26 @@ C_CreatureInfo.RaceInfo:
       type: number
     raceName:
       type: string
+C_CurrencyInfo.CurrencyDisplayInfo:
+  fields:
+    actualAmount:
+      type: number
+    description:
+      type: string
+    displayAmount:
+      type: number
+    icon:
+      type: number
+    name:
+      type: string
+    quality:
+      type: number
 C_CurrencyInfo.CurrencyInfo:
   fields:
     canEarnPerWeek:
       type: boolean
+    description:
+      type: string
     discovered:
       type: boolean
     iconFileID:
@@ -1031,6 +1244,58 @@ C_GamePad.GamePadStickConfig:
       type: number
     stick:
       type: string
+C_GossipInfo.FriendshipReputationInfo:
+  fields:
+    friendshipFactionID:
+      type: number
+    maxRep:
+      type: number
+    name:
+      nilable: true
+      type: string
+    nextThreshold:
+      nilable: true
+      type: number
+    reaction:
+      type: string
+    reactionThreshold:
+      type: number
+    standing:
+      type: number
+    text:
+      type: string
+    texture:
+      type: number
+C_GossipInfo.FriendshipReputationRankInfo:
+  fields:
+    currentLevel:
+      type: number
+    maxLevel:
+      type: number
+C_GossipInfo.GossipOptionUIInfo:
+  fields:
+    flags:
+      type: number
+    gossipOptionID:
+      nilable: true
+      type: number
+    icon:
+      type: number
+    name:
+      type: string
+    orderIndex:
+      type: number
+    overrideIconID:
+      nilable: true
+      type: number
+    selectOptionWhenOnlyOption:
+      type: boolean
+    spellID:
+      nilable: true
+      type: number
+    status:
+      type:
+        enum: GossipOptionStatus
 C_GossipInfo.GossipPoiInfo:
   fields:
     inBattleMap:
@@ -1042,14 +1307,66 @@ C_GossipInfo.GossipPoiInfo:
         structure: vector2
     textureIndex:
       type: number
-C_LFGInfo.LFGLockInfo:
+C_GossipInfo.GossipQuestUIInfo:
   fields:
-    hideEntry:
+    frequency:
+      nilable: true
+      type: number
+    isComplete:
+      nilable: true
       type: boolean
-    lfgID:
+    isIgnored:
+      type: boolean
+    isImportant:
+      type: boolean
+    isLegendary:
+      type: boolean
+    isTrivial:
+      type: boolean
+    questID:
       type: number
-    reason:
+    questLevel:
       type: number
+    repeatable:
+      nilable: true
+      type: boolean
+    title:
+      type: string
+C_LFGList.GroupFinderActivityInfo:
+  fields:
+    categoryID:
+      type: number
+    difficultyID:
+      type: number
+    displayType:
+      type:
+        enum: LFGListDisplayType
+    filters:
+      type: number
+    fullName:
+      type: string
+    groupFinderActivityGroupID:
+      type: number
+    iconFileDataID:
+      type: number
+    mapID:
+      type: number
+    maxLevel:
+      type: number
+    maxLevelSuggestion:
+      type: number
+    maxNumPlayers:
+      type: number
+    minLevel:
+      type: number
+    orderIndex:
+      type: number
+    redirectedDifficultyID:
+      type: number
+    shortName:
+      type: string
+    useDungeonRoleExpectations:
+      type: boolean
 C_LFGList.LfgEntryData:
   fields:
     activityIDs:
@@ -1059,6 +1376,16 @@ C_LFGList.LfgEntryData:
       type: string
     duration:
       type: number
+    newPlayerFriendly:
+      type: boolean
+C_LFGList.LFGRoles:
+  fields:
+    dps:
+      type: boolean
+    healer:
+      type: boolean
+    tank:
+      type: boolean
 C_LFGList.LfgSearchResultData:
   fields:
     activityIDs:
@@ -1070,6 +1397,8 @@ C_LFGList.LfgSearchResultData:
       type: boolean
     comment:
       type: string
+    hasSelf:
+      type: boolean
     isDelisted:
       type: boolean
     isWarMode:
@@ -1079,6 +1408,9 @@ C_LFGList.LfgSearchResultData:
       type: string
     name:
       type: string
+    newPlayerFriendly:
+      nilable: true
+      type: boolean
     numBNetFriends:
       type: number
     numCharFriends:
@@ -1097,6 +1429,9 @@ C_LFGList.LfgSearchResultData:
       type: string
 C_LossOfControl.LossOfControlData:
   fields:
+    auraInstanceID:
+      nilable: true
+      type: number
     displayText:
       type: string
     displayType:
@@ -1160,6 +1495,22 @@ C_Map.UiMapGroupMemberInfo:
       type: string
     relativeHeightIndex:
       type: number
+C_Map.UiMapLayerInfo:
+  fields:
+    additionalZoomSteps:
+      type: number
+    layerHeight:
+      type: number
+    layerWidth:
+      type: number
+    maxScale:
+      type: number
+    minScale:
+      type: number
+    tileHeight:
+      type: number
+    tileWidth:
+      type: number
 C_MapExplorationInfo.UiMapExplorationHitRect:
   fields:
     bottom:
@@ -1178,6 +1529,8 @@ C_MapExplorationInfo.UiMapExplorationInfo:
     hitRect:
       type:
         structure: C_MapExplorationInfo.UiMapExplorationHitRect
+    isDrawOnTopLayer:
+      type: boolean
     isShownByMouseOver:
       type: boolean
     offsetX:
@@ -1268,6 +1621,70 @@ C_ModelInfo.UIModelSceneCameraInfo:
         structure: vector3
     zoomedYawOffset:
       type: number
+C_PvP.BattlefieldCurrencyReward:
+  fields:
+    id:
+      type: number
+    quantity:
+      type: number
+C_PvP.BattlefieldItemReward:
+  fields:
+    id:
+      type: number
+    name:
+      type: string
+    quantity:
+      type: number
+    texture:
+      type: number
+C_PvP.BattlefieldVehicleInfo:
+  fields:
+    atlas:
+      type: string
+    facing:
+      type: number
+    isAlive:
+      type: boolean
+    isOccupied:
+      type: boolean
+    isPlayer:
+      type: boolean
+    name:
+      type: string
+    shouldDrawBelowPlayerBlips:
+      type: boolean
+    textureHeight:
+      type: number
+    textureWidth:
+      type: number
+    x:
+      type: number
+    y:
+      type: number
+C_PvP.RoleShortageReward:
+  fields: {}
+C_QuestInfoSystem.QuestRewardSpellInfo:
+  fields:
+    garrFollowerID:
+      nilable: true
+      type: number
+    genericUnlock:
+      type: boolean
+    hideSpellLearnText:
+      type: boolean
+    isBoostSpell:
+      type: boolean
+    isSpellLearned:
+      type: boolean
+    isTradeskill:
+      type: boolean
+    name:
+      type: string
+    texture:
+      type: number
+    type:
+      type:
+        enum: QuestCompleteSpellType
 C_QuestLog.QuestObjectiveInfo:
   fields:
     finished:
@@ -1438,6 +1855,237 @@ C_Texture.AtlasInfo:
       type: number
     width:
       type: number
+C_Traits.TraitCondInfo:
+  fields:
+    achievementID:
+      nilable: true
+      type: number
+    condID:
+      type: number
+    isAlwaysMet:
+      type: boolean
+    isGate:
+      type: boolean
+    isMet:
+      type: boolean
+    playerLevel:
+      nilable: true
+      type: number
+    questID:
+      nilable: true
+      type: number
+    ranksGranted:
+      nilable: true
+      type: number
+    specSetID:
+      nilable: true
+      type: number
+    spentAmountRequired:
+      nilable: true
+      type: number
+    tooltipFormat:
+      nilable: true
+      type: string
+    traitCurrencyID:
+      nilable: true
+      type: number
+C_Traits.TraitConfigInfo:
+  fields:
+    ID:
+      type: number
+    name:
+      type: string
+    treeIDs:
+      type:
+        arrayof: number
+    type:
+      type:
+        enum: TraitConfigType
+    usesSharedActionBars:
+      type: boolean
+C_Traits.TraitCurrencyCost:
+  fields:
+    amount:
+      type: number
+    ID:
+      type: number
+C_Traits.TraitDefinitionInfo:
+  fields:
+    overriddenSpellID:
+      nilable: true
+      type: number
+    overrideDescription:
+      nilable: true
+      type: string
+    overrideIcon:
+      nilable: true
+      type: number
+    overrideName:
+      nilable: true
+      type: string
+    overrideSubtext:
+      nilable: true
+      type: string
+    spellID:
+      nilable: true
+      type: number
+    subType:
+      nilable: true
+      type:
+        enum: TraitDefinitionSubType
+C_Traits.TraitEntryInfo:
+  fields:
+    conditionIDs:
+      type:
+        arrayof: number
+    definitionID:
+      type: number
+    isAvailable:
+      type: boolean
+    maxRanks:
+      type: number
+    type:
+      type:
+        enum: TraitNodeEntryType
+C_Traits.TraitEntryRankInfo:
+  fields:
+    entryID:
+      type: number
+    rank:
+      type: number
+C_Traits.TraitGateInfo:
+  fields:
+    conditionID:
+      type: number
+    topLeftNodeID:
+      type: number
+C_Traits.TraitNodeInfo:
+  fields:
+    activeEntry:
+      nilable: true
+      type:
+        structure: C_Traits.TraitEntryRankInfo
+    activeRank:
+      type: number
+    canPurchaseRank:
+      type: boolean
+    canRefundRank:
+      type: boolean
+    cascadeRepurchaseEntryID:
+      nilable: true
+      type: number
+    conditionIDs:
+      type:
+        arrayof: number
+    currentRank:
+      type: number
+    entryIDs:
+      type:
+        arrayof: number
+    entryIDsWithCommittedRanks:
+      type:
+        arrayof: number
+    flags:
+      type: number
+    groupIDs:
+      type:
+        arrayof: number
+    ID:
+      type: number
+    isAvailable:
+      type: boolean
+    isCascadeRepurchasable:
+      type: boolean
+    isVisible:
+      type: boolean
+    maxRanks:
+      type: number
+    meetsEdgeRequirements:
+      type: boolean
+    nextEntry:
+      nilable: true
+      type:
+        structure: C_Traits.TraitEntryRankInfo
+    posX:
+      type: number
+    posY:
+      type: number
+    ranksPurchased:
+      type: number
+    type:
+      type:
+        enum: TraitNodeType
+    visibleEdges:
+      type:
+        arrayof:
+          structure: C_Traits.TraitOutEdgeInfo
+C_Traits.TraitNodeInfoPartial:
+  fields:
+    activeRank:
+      nilable: true
+      type: number
+    canPurchaseRank:
+      nilable: true
+      type: boolean
+    canRefundRank:
+      nilable: true
+      type: boolean
+    currentRank:
+      nilable: true
+      type: number
+    isAvailable:
+      nilable: true
+      type: boolean
+    isCascadeRepurchasable:
+      nilable: true
+      type: boolean
+    isVisible:
+      nilable: true
+      type: boolean
+    meetsEdgeRequirements:
+      nilable: true
+      type: boolean
+    ranksPurchased:
+      nilable: true
+      type: number
+C_Traits.TraitOutEdgeInfo:
+  fields:
+    isActive:
+      type: boolean
+    targetNode:
+      type: number
+    type:
+      type: number
+    visualStyle:
+      type: number
+C_Traits.TraitTreeInfo:
+  fields:
+    gates:
+      type:
+        arrayof:
+          structure: C_Traits.TraitGateInfo
+    hideSingleRankNumbers:
+      type: boolean
+    ID:
+      type: number
+C_Traits.TreeCurrencyInfo:
+  fields:
+    maxQuantity:
+      nilable: true
+      type: number
+    quantity:
+      type: number
+    spent:
+      type: number
+    traitCurrencyID:
+      type: number
+C_UIColor.DBColorExport:
+  fields:
+    baseTag:
+      type: string
+    color:
+      type:
+        structure: colorRGBA
 C_UIWidgetManager.BulletTextListWidgetVisualizationInfo:
   fields:
     enabledState:
@@ -1769,8 +2417,41 @@ C_VoiceChat.VoiceTtsVoiceType:
       type: string
     voiceID:
       type: number
+C_XMLUtil.XMLTemplateInfo:
+  fields:
+    height:
+      type: number
+    inherits:
+      nilable: true
+      type: string
+    keyValues:
+      type:
+        arrayof:
+          structure: C_XMLUtil.XMLTemplateKeyValue
+    type:
+      type: string
+    width:
+      type: number
+C_XMLUtil.XMLTemplateKeyValue:
+  fields:
+    key:
+      type: string
+    keyType:
+      type: string
+    type:
+      type: string
+    value:
+      type: string
+C_XMLUtil.XMLTemplateListInfo:
+  fields:
+    name:
+      type: string
+    type:
+      type: string
 CalendarTime:
   fields:
+    day:
+      type: number
     hour:
       type: number
     minute:
@@ -1783,10 +2464,101 @@ CalendarTime:
       type: number
     year:
       type: number
+CharacterAlternateFormData:
+  fields:
+    createScreenIconAtlas:
+      type: string
+    fileName:
+      type: string
+    name:
+      type: string
+    raceID:
+      type: number
+CharCustomizationCategory:
+  fields:
+    cameraDistanceOffset:
+      type: number
+    cameraZoomLevel:
+      type: number
+    chrModelID:
+      nilable: true
+      type: number
+    hasNewChoices:
+      type: boolean
+    icon:
+      type: string
+    id:
+      type: number
+    name:
+      type: string
+    needsNativeFormCategory:
+      type: boolean
+    options:
+      type:
+        arrayof:
+          structure: CharCustomizationOption
+    orderIndex:
+      type: number
+    selectedIcon:
+      type: string
+    spellShapeshiftFormID:
+      nilable: true
+      type: number
+    undressModel:
+      type: boolean
+CharCustomizationChoice:
+  fields:
+    id:
+      type: number
+    ineligibleChoice:
+      type: boolean
+    isLocked:
+      type: boolean
+    isNew:
+      type: boolean
+    lockedText:
+      nilable: true
+      type: string
+    name:
+      type: string
+    soundKit:
+      nilable: true
+      type: number
+    swatchColor1:
+      nilable: true
+      type:
+        structure: colorRGB
+    swatchColor2:
+      nilable: true
+      type:
+        structure: colorRGB
+CharCustomizationOption:
+  fields:
+    choices:
+      type:
+        arrayof:
+          structure: CharCustomizationChoice
+    currentChoiceIndex:
+      nilable: true
+      type: number
+    hasNewChoices:
+      type: boolean
+    id:
+      type: number
+    isSound:
+      type: boolean
+    name:
+      type: string
+    optionType:
+      type:
+        enum: ChrCustomizationOptionType
+    orderIndex:
+      type: number
 ChatChannelInfo:
   fields:
     channelType:
-      type: number
+      type:
+        enum: PermanentChatChannelType
     instanceID:
       type: number
     localID:
@@ -1797,6 +2569,15 @@ ChatChannelInfo:
       type: string
     zoneChannelID:
       type: number
+colorRGB:
+  fields:
+    b:
+      type: number
+    g:
+      type: number
+    r:
+      type: number
+  mixin: ColorMixin
 colorRGBA:
   fields:
     a:
@@ -1828,13 +2609,13 @@ GuildTabardInfo:
   fields:
     backgroundColor:
       type:
-        structure: colorRGBA
+        structure: colorRGB
     borderColor:
       type:
-        structure: colorRGBA
+        structure: colorRGB
     emblemColor:
       type:
-        structure: colorRGBA
+        structure: colorRGB
     emblemFilename:
       type: string
     emblemStyle:
@@ -1851,6 +2632,21 @@ ItemLocation:
       nilable: true
       type: number
   mixin: ItemLocationMixin
+PlayerInfoCharacterData:
+  fields:
+    alternateFormRaceData:
+      nilable: true
+      type:
+        structure: CharacterAlternateFormData
+    createScreenIconAtlas:
+      type: string
+    fileName:
+      type: string
+    name:
+      type: string
+    sex:
+      type:
+        enum: UnitSex
 PlayerLocation:
   fields: {}
 QueueSpecificInfo:
@@ -1885,6 +2681,8 @@ QueueSpecificInfo:
     teamSize:
       nilable: true
       type: number
+ReportInfo:
+  fields: {}
 vector2:
   fields:
     x:

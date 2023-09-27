@@ -6,24 +6,17 @@ source = {
 }
 build_dependencies = {
   'lsqlite3',
+  'lua-path',
+  'luacasc >= 1.15',
   'luacheck',
-  'luadbd',
+  'luadbc',
   'luaexpat < 1.5.0',
   'luamagick',
-  'luasql-sqlite3',
-  'wowcig',
-}
-dependencies = {
-  'argparse',
-  'date',
-  'luassert',
-  'lua-path',
-  'lua-resty-tsort',
   'lyaml',
-  'minheap',
   'penlight',
   'vstruct',
 }
+dependencies = {}
 build = {
   type = 'builtin',
   modules = {},

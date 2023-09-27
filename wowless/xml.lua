@@ -133,7 +133,7 @@ local attributeTypes = {
     return result
   end,
 }
-for k, v in pairs(require('build.data.stringenums')) do
+for k, v in pairs(require('runtime.stringenums')) do
   attributeTypes[k] = function(s)
     return v[s] and s or nil
   end

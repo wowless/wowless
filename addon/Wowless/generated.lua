@@ -86,11 +86,11 @@ function G.GeneratedTests()
                 else
                   assertEquals(ty, type(func))
                 end
-              elseif not mcfg.overwritten then
+              elseif mcfg.overwritten and not iswowlesslite then
+                return checkLuaFunc(func)
+              else
                 return checkCFunc(func)
               end
-              -- Do nothing on overwritten APIs. They're Lua when processing
-              -- FrameXML, and C when running bare.
             end
           end
           return mkTests(ns, mtests)
@@ -105,12 +105,10 @@ function G.GeneratedTests()
     assert(b, 'no build')
     return {
       GetBuildInfo = function()
-        if b.tocversion == 30402 or b.tocversion == 11404 then
-          G.check7(b.version, b.build, b.date, b.tocversion, '', ' ', b.tocversion, GetBuildInfo())
-        elseif b.tocversion >= 100100 then
+        if b.tocversion >= 100100 then
           G.check6(b.version, b.build, b.date, b.tocversion, '', ' ', GetBuildInfo())
         else
-          G.check4(b.version, b.build, b.date, b.tocversion, GetBuildInfo())
+          G.check7(b.version, b.build, b.date, b.tocversion, '', ' ', b.tocversion, GetBuildInfo())
         end
       end,
       IsDebugBuild = function()
@@ -141,8 +139,9 @@ function G.GeneratedTests()
     local expectedCVars = lowify(_G.WowlessData.CVars)
     local actualCVars = lowify((function()
       -- Do this early to avoid issues with deferred cvar creation.
+      local getall = _G.C_Console and _G.C_Console.GetAllCommands or _G.ConsoleGetAllCommands
       local t = {}
-      for _, command in ipairs(_G.C_Console.GetAllCommands()) do
+      for _, command in ipairs(getall()) do
         local name = command.command
         if name:sub(1, 6) ~= 'CACHE-' then
           assertEquals(nil, t[name])
@@ -207,6 +206,8 @@ function G.GeneratedTests()
           else
             assertEquals(ty, type(func))
           end
+        elseif cfg.overwritten and not iswowlesslite then
+          return checkLuaFunc(func)
         elseif not capsuleapis[name] then
           return checkCFunc(func)
         end

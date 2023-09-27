@@ -218,9 +218,13 @@ BNSummonFriendByIndex: {}
 BNTokenFindName: {}
 BreakUpLargeNumbers:
   inputs:
-  - type: number
+  - name: largeNumber
+    type: number
+  - default: false
+    name: natural
+    type: boolean
   outputs:
-  - name: valueString
+  - name: result
     type: string
 BuybackItem: {}
 BuyGuildBankTab: {}
@@ -434,6 +438,80 @@ C_ActionBar.ToggleAutoCastPetAction:
   - name: slotID
     type: number
   outputs: {}
+C_AddOns.DisableAddOn:
+  inputs:
+  - name: name
+    type: uiAddon
+  - default: '0'
+    name: character
+    type: string
+  outputs: {}
+C_AddOns.DisableAllAddOns:
+  inputs:
+  - name: character
+    nilable: true
+    type: string
+  outputs: {}
+C_AddOns.DoesAddOnExist:
+  inputs:
+  - name: name
+    type: uiAddon
+  outputs:
+  - name: exists
+    type: boolean
+C_AddOns.EnableAddOn:
+  inputs:
+  - name: name
+    type: uiAddon
+  - default: '0'
+    name: character
+    type: string
+  outputs: {}
+C_AddOns.EnableAllAddOns:
+  inputs:
+  - name: character
+    nilable: true
+    type: string
+  outputs: {}
+C_AddOns.GetAddOnDependencies:
+  inputs:
+  - name: name
+    type: uiAddon
+  outputs:
+  - name: unpackedPrimitiveType
+    type: string
+C_AddOns.GetAddOnEnableState:
+  impl: GetAddOnEnableState
+  inputs:
+  - name: name
+    type: uiAddon
+  - default: '0'
+    name: character
+    type: string
+  outputs:
+  - name: state
+    type: number
+C_AddOns.GetAddOnInfo:
+  impl: GetAddOnInfo
+  inputs:
+  - name: name
+    type: uiAddon
+  outputs:
+  - name: name
+    type: string
+  - name: title
+    type: string
+  - name: notes
+    type: string
+  - name: loadable
+    type: boolean
+  - name: reason
+    nilable: true
+    type: string
+  - name: security
+    type: string
+  - name: updateAvailable
+    type: boolean
 C_AddOns.GetAddOnMetadata:
   impl: GetAddOnMetadata
   inputs:
@@ -441,10 +519,72 @@ C_AddOns.GetAddOnMetadata:
     type: uiAddon
   - name: variable
     type: string
+  mayreturnnothing: true
   outputs:
+  - name: value
+    type: string
+C_AddOns.GetAddOnOptionalDependencies:
+  inputs:
+  - name: name
+    type: uiAddon
+  outputs:
+  - name: unpackedPrimitiveType
+    type: string
+C_AddOns.GetNumAddOns:
+  impl: GetNumAddOns
+  inputs: {}
+  outputs:
+  - name: numAddOns
+    type: number
+C_AddOns.IsAddOnLoaded:
+  impl: IsAddOnLoaded
+  inputs:
+  - name: name
+    type: uiAddon
+  outputs:
+  - name: loadedOrLoading
+    type: boolean
+  - name: loaded
+    type: boolean
+C_AddOns.IsAddOnLoadOnDemand:
+  impl: IsAddOnLoadOnDemand
+  inputs:
+  - name: name
+    type: uiAddon
+  outputs:
+  - name: loadOnDemand
+    type: boolean
+C_AddOns.IsAddonVersionCheckEnabled:
+  inputs: {}
+  outputs:
+  - name: isEnabled
+    type: boolean
+C_AddOns.LoadAddOn:
+  impl: LoadAddOn
+  inputs:
+  - name: name
+    type: uiAddon
+  outputs:
+  - name: loaded
+    nilable: true
+    type: boolean
   - name: value
     nilable: true
     type: string
+C_AddOns.ResetAddOns:
+  inputs: {}
+  outputs: {}
+C_AddOns.ResetDisabledAddOns:
+  inputs: {}
+  outputs: {}
+C_AddOns.SaveAddOns:
+  inputs: {}
+  outputs: {}
+C_AddOns.SetAddonVersionCheck:
+  inputs:
+  - name: enabled
+    type: boolean
+  outputs: {}
 C_AdventureJournal.ActivateEntry: {}
 C_AdventureJournal.CanBeShown: {}
 C_AdventureJournal.GetNumAvailableSuggestions: {}
@@ -2068,9 +2208,10 @@ C_AzeriteEssence.GetMilestoneInfo:
 C_AzeriteEssence.GetMilestones:
   inputs: {}
   outputs:
-  - stub:
-    - slot: 1
-    type: table
+  - name: milestones
+    type:
+      arrayof:
+        structure: C_AzeriteEssence.AzeriteMilestoneInfo
 C_AzeriteEssence.GetMilestoneSpell:
   inputs:
   - name: milestoneID
@@ -3274,9 +3415,11 @@ C_ChallengeMode.StartChallengeMode:
   outputs:
   - name: success
     type: boolean
+C_CharacterServices.AssignNameChangeDistribution: {}
 C_CharacterServices.AssignPCTDistribution: {}
 C_CharacterServices.AssignRaceOrFactionChangeDistribution: {}
 C_CharacterServices.AssignUpgradeDistribution: {}
+C_CharacterServices.CapitalizeCharName: {}
 C_CharacterServices.GetActiveCharacterUpgradeBoostType: {}
 C_CharacterServices.GetActiveClassTrialBoostType: {}
 C_CharacterServices.GetAutomaticBoost: {}
@@ -3678,6 +3821,7 @@ C_ClassTalents.GetStarterBuildActive:
   - name: isActive
     type: boolean
 C_ClassTalents.GetTraitTreeForSpec:
+  impl: C_ClassTalents.GetTraitTreeForSpec
   inputs:
   - name: specID
     type: number
@@ -3710,6 +3854,7 @@ C_ClassTalents.ImportLoadout:
   - name: importError
     type: string
 C_ClassTalents.InitializeViewLoadout:
+  impl: C_ClassTalents.InitializeViewLoadout
   inputs:
   - name: specID
     type: number
@@ -3785,6 +3930,7 @@ C_ClassTalents.UpdateLastSelectedSavedConfigID:
     type: number
   outputs: {}
 C_ClassTalents.ViewLoadout:
+  impl: C_ClassTalents.ViewLoadout
   inputs:
   - name: entries
     type:
@@ -4008,6 +4154,11 @@ C_Club.DestroyTicket:
   - name: ticketId
     type: string
   outputs: {}
+C_Club.DoesAnyCommunityHaveUnreadMessages:
+  inputs: {}
+  outputs:
+  - name: hasUnreadMessages
+    type: boolean
 C_Club.DoesCommunityHaveMembersOfTheOppositeFaction:
   inputs:
   - name: clubId
@@ -5926,38 +6077,6 @@ C_Commentator.ZoomIn:
 C_Commentator.ZoomOut:
   inputs: {}
   outputs: {}
-C_Console.GetAllCommands:
-  impl: C_Console.GetAllCommands
-  inputs: {}
-  outputs:
-  - name: commands
-    type:
-      arrayof:
-        structure: C_Console.ConsoleCommandInfo
-C_Console.GetColorFromType:
-  inputs:
-  - name: colorType
-    type:
-      enum: ConsoleColorType
-  outputs:
-  - name: color
-    type:
-      structure: colorRGB
-C_Console.GetFontHeight:
-  inputs: {}
-  outputs:
-  - name: fontHeightInPixels
-    type: number
-C_Console.PrintAllMatchingCommands:
-  inputs:
-  - name: partialCommandText
-    type: string
-  outputs: {}
-C_Console.SetFontHeight:
-  inputs:
-  - name: fontHeightInPixels
-    type: number
-  outputs: {}
 C_ConsoleScriptCollection.GetCollectionDataByID:
   inputs:
   - name: collectionID
@@ -6013,6 +6132,11 @@ C_Container.ContainerRefundItemPurchase:
     type: boolean
   outputs: {}
 C_Container.GetBackpackAutosortDisabled:
+  inputs: {}
+  outputs:
+  - name: isDisabled
+    type: boolean
+C_Container.GetBackpackSellJunkDisabled:
   inputs: {}
   outputs:
   - name: isDisabled
@@ -6251,6 +6375,11 @@ C_Container.PlayerHasHearthstone:
     nilable: true
     type: number
 C_Container.SetBackpackAutosortDisabled:
+  inputs:
+  - name: disable
+    type: boolean
+  outputs: {}
+C_Container.SetBackpackSellJunkDisabled:
   inputs:
   - name: disable
     type: boolean
@@ -6534,6 +6663,9 @@ C_ContentTracking.StopTracking:
       enum: ContentTrackingType
   - name: id
     type: number
+  - name: stopType
+    type:
+      enum: ContentTrackingStopType
   outputs: {}
 C_ContentTracking.ToggleTracking:
   inputs:
@@ -6542,6 +6674,9 @@ C_ContentTracking.ToggleTracking:
       enum: ContentTrackingType
   - name: id
     type: number
+  - name: stopType
+    type:
+      enum: ContentTrackingStopType
   outputs:
   - name: error
     nilable: true
@@ -7196,6 +7331,11 @@ C_CurrencyInfo.GetCurrencyListSize:
   outputs:
   - name: currencyListSize
     type: number
+C_CurrencyInfo.GetDragonIslesSuppliesCurrencyID:
+  inputs: {}
+  outputs:
+  - name: dragonIslesSuppliesCurrencyID
+    type: number
 C_CurrencyInfo.GetFactionGrantedByCurrency:
   inputs:
   - name: currencyID
@@ -7246,7 +7386,8 @@ C_Cursor.GetCursorItem:
 C_CVar.GetCVar:
   impl: C_CVar.GetCVar
   inputs:
-  - type: string
+  - name: name
+    type: string
   outputs:
   - name: value
     nilable: true
@@ -7264,7 +7405,8 @@ C_CVar.GetCVarBitfield:
 C_CVar.GetCVarBool:
   impl: C_CVar.GetCVarBool
   inputs:
-  - type: string
+  - name: name
+    type: string
   outputs:
   - name: value
     nilable: true
@@ -7275,14 +7417,35 @@ C_CVar.GetCVarDefault:
   - name: name
     type: string
   outputs:
-  - name: value
+  - name: defaultValue
     nilable: true
     type: string
+C_CVar.GetCVarInfo:
+  inputs:
+  - name: name
+    type: string
+  outputs:
+  - name: value
+    type: string
+  - name: defaultValue
+    type: string
+  - name: isStoredServerAccount
+    type: boolean
+  - name: isStoredServerCharacter
+    type: boolean
+  - name: isLockedFromUser
+    type: boolean
+  - name: isSecure
+    type: boolean
+  - name: isReadOnly
+    type: boolean
 C_CVar.RegisterCVar:
   impl: C_CVar.RegisterCVar
   inputs:
-  - type: string
-  - nilable: true
+  - name: name
+    type: string
+  - name: value
+    nilable: true
     type: string
   outputs: {}
 C_CVar.ResetTestCVars:
@@ -7291,14 +7454,13 @@ C_CVar.ResetTestCVars:
 C_CVar.SetCVar:
   impl: C_CVar.SetCVar
   inputs:
-  - type: string
-  - nilable: true
+  - name: name
     type: string
-  - nilable: true
+  - name: value
+    nilable: true
     type: string
   outputs:
   - name: success
-    nilable: true
     type: boolean
 C_CVar.SetCVarBitfield:
   inputs:
@@ -7996,6 +8158,9 @@ C_FriendList.SendWho:
   inputs:
   - name: filter
     type: string
+  - name: origin
+    nilable: true
+    type: number
   outputs: {}
 C_FriendList.SetFriendNotes:
   inputs:
@@ -9027,6 +9192,7 @@ C_Heirloom.GetClassAndSpecFilters:
   - name: classFilter
     type: number
   - name: specFilter
+    stub: 0
     type: number
 C_Heirloom.GetCollectedHeirloomFilter: {}
 C_Heirloom.GetHeirloomInfo:
@@ -9145,6 +9311,12 @@ C_IncomingSummon.IncomingSummonStatus:
   - name: status
     type:
       enum: SummonStatus
+C_InterfaceFileManifest.GetInterfaceArtFiles:
+  inputs: {}
+  outputs:
+  - name: images
+    type:
+      arrayof: string
 C_InvasionInfo.AreInvasionsAvailable:
   inputs: {}
   outputs:
@@ -9193,6 +9365,7 @@ C_IslandsQueue.GetIslandsWeeklyQuestID:
   inputs: {}
   outputs:
   - name: questID
+    nilable: true
     stub: 1
     type: number
 C_IslandsQueue.QueueForIsland:
@@ -9351,6 +9524,13 @@ C_Item.GetItemIDByGUID:
   outputs:
   - name: itemID
     nilable: true
+    type: number
+C_Item.GetItemIDForItemInfo:
+  inputs:
+  - name: itemInfo
+    type: string
+  outputs:
+  - name: itemID
     type: number
 C_Item.GetItemInventoryType:
   inputs:
@@ -10113,6 +10293,26 @@ C_LFGInfo.HideNameFromUI:
   outputs:
   - name: shouldHide
     type: boolean
+C_LFGInfo.IsGroupFinderEnabled:
+  inputs: {}
+  outputs:
+  - name: enabled
+    type: boolean
+C_LFGInfo.IsLFDEnabled:
+  inputs: {}
+  outputs:
+  - name: enabled
+    type: boolean
+C_LFGInfo.IsLFREnabled:
+  inputs: {}
+  outputs:
+  - name: enabled
+    type: boolean
+C_LFGInfo.IsPremadeGroupEnabled:
+  inputs: {}
+  outputs:
+  - name: enabled
+    type: boolean
 C_LFGList.AcceptInvite: {}
 C_LFGList.ApplyToGroup: {}
 C_LFGList.CanActiveEntryUseAutoAccept:
@@ -10752,17 +10952,13 @@ C_Map.GetMapArtID:
     type: number
 C_Map.GetMapArtLayers:
   inputs:
-  - type: number
+  - name: uiMapID
+    type: number
   outputs:
-  - stub:
-    - additionalZoomSteps: 0
-      layerHeight: 1
-      layerWidth: 1
-      maxScale: 1
-      minScale: 1
-      tileHeight: 1
-      tileWidth: 1
-    type: table
+  - name: layerInfo
+    type:
+      arrayof:
+        structure: C_Map.UiMapLayerInfo
 C_Map.GetMapArtLayerTextures:
   inputs:
   - name: uiMapID
@@ -10874,7 +11070,6 @@ C_Map.GetMapInfo:
     type: number
   outputs:
   - name: info
-    nilable: true
     type:
       structure: C_Map.UiMapDetails
 C_Map.GetMapInfoAtPosition:
@@ -11073,6 +11268,11 @@ C_MerchantFrame.IsMerchantItemRefundable:
     type: number
   outputs:
   - name: refundable
+    type: boolean
+C_MerchantFrame.IsSellAllJunkEnabled:
+  inputs: {}
+  outputs:
+  - name: enabled
     type: boolean
 C_MerchantFrame.SellAllJunkItems:
   inputs: {}
@@ -12074,6 +12274,11 @@ C_PartyInfo.GetMinLevel:
   outputs:
   - name: minLevel
     type: number
+C_PartyInfo.GetRestrictPings:
+  inputs: {}
+  outputs:
+  - name: restrictToAssistants
+    type: boolean
 C_PartyInfo.InviteUnit:
   inputs:
   - name: targetName
@@ -12118,6 +12323,11 @@ C_PartyInfo.RequestInviteFromUnit:
     type: boolean
   - name: dps
     nilable: true
+    type: boolean
+  outputs: {}
+C_PartyInfo.SetRestrictPings:
+  inputs:
+  - name: restrictToAssistants
     type: boolean
   outputs: {}
 C_PartyPose.ExtraAction:
@@ -12190,6 +12400,11 @@ C_PerksActivities.GetPerksActivityInfo:
     nilable: true
     type:
       structure: C_PerksActivities.PerksActivityInfo
+C_PerksActivities.GetPerksUIThemePrefix:
+  inputs: {}
+  outputs:
+  - name: kitPrefix
+    type: string
 C_PerksActivities.GetTrackedPerksActivities:
   inputs: {}
   outputs:
@@ -12726,6 +12941,138 @@ C_PetJournal.SummonRandomPet:
   - name: onlyFavorites
     type: boolean
   outputs: {}
+C_Ping.GetContextualPingTypeForUnit:
+  inputs:
+  - name: targetUnit
+    nilable: true
+    type: string
+  outputs:
+  - name: type
+    type:
+      enum: PingSubjectType
+C_Ping.SendMacroPing:
+  inputs:
+  - name: type
+    nilable: true
+    type:
+      enum: PingSubjectType
+  - name: targetToken
+    nilable: true
+    type: string
+  outputs: {}
+C_Ping.TogglePingListener:
+  inputs:
+  - name: down
+    type: boolean
+  outputs: {}
+C_PingSecure.ClearPendingPingInfo:
+  inputs: {}
+  outputs: {}
+C_PingSecure.CreateFrame:
+  inputs: {}
+  outputs: {}
+C_PingSecure.DisplayError:
+  inputs:
+  - name: error
+    type: string
+  outputs: {}
+C_PingSecure.GetCooldownInfo:
+  inputs: {}
+  outputs:
+  - name: cooldownInfo
+    type:
+      structure: PingCooldownInfo
+C_PingSecure.GetDefaultPingOptions:
+  inputs: {}
+  outputs:
+  - name: pingTypes
+    type:
+      arrayof:
+        structure: PingTypeInfo
+C_PingSecure.GetTargetPingReceiver:
+  inputs:
+  - name: mousePosX
+    type: number
+  - name: mousePosY
+    type: number
+  outputs:
+  - name: frame
+    type: table
+C_PingSecure.GetTargetWorldPing:
+  inputs:
+  - name: mousePosX
+    type: number
+  - name: mousePosY
+    type: number
+  outputs:
+  - name: foundTarget
+    type: boolean
+C_PingSecure.GetTargetWorldPingAndSend:
+  inputs: {}
+  outputs:
+  - name: result
+    type:
+      structure: ContextualWorldPingResult
+C_PingSecure.GetTextureKitForType:
+  inputs:
+  - name: type
+    type:
+      enum: PingSubjectType
+  outputs:
+  - name: uiTextureKitID
+    type: string
+C_PingSecure.SendPing:
+  inputs:
+  - name: type
+    type:
+      enum: PingSubjectType
+  - name: target
+    nilable: true
+    type: string
+  outputs:
+  - name: result
+    type:
+      enum: PingResult
+C_PingSecure.SetPendingPingOffScreenCallback:
+  inputs:
+  - name: cb
+    type: function
+  outputs: {}
+C_PingSecure.SetPingCooldownStartedCallback:
+  inputs:
+  - name: cb
+    type: function
+  outputs: {}
+C_PingSecure.SetPingPinFrameAddedCallback:
+  inputs:
+  - name: cb
+    type: function
+  outputs: {}
+C_PingSecure.SetPingPinFrameRemovedCallback:
+  inputs:
+  - name: cb
+    type: function
+  outputs: {}
+C_PingSecure.SetPingPinFrameScreenClampStateUpdatedCallback:
+  inputs:
+  - name: cb
+    type: function
+  outputs: {}
+C_PingSecure.SetPingRadialWheelCreatedCallback:
+  inputs:
+  - name: cb
+    type: function
+  outputs: {}
+C_PingSecure.SetSendMacroPingCallback:
+  inputs:
+  - name: cb
+    type: function
+  outputs: {}
+C_PingSecure.SetTogglePingListenerCallback:
+  inputs:
+  - name: cb
+    type: function
+  outputs: {}
 C_PlayerChoice.GetCurrentPlayerChoiceInfo:
   inputs: {}
   outputs:
@@ -12854,6 +13201,18 @@ C_PlayerInfo.GetName:
   - name: name
     nilable: true
     type: string
+C_PlayerInfo.GetNativeDisplayID:
+  inputs: {}
+  outputs:
+  - name: nativeDisplayID
+    type: number
+C_PlayerInfo.GetPetStableCreatureDisplayInfoID:
+  inputs:
+  - name: index
+    type: number
+  outputs:
+  - name: creatureDisplayInfoID
+    type: number
 C_PlayerInfo.GetPlayerCharacterData:
   inputs: {}
   outputs:
@@ -12909,6 +13268,11 @@ C_PlayerInfo.IsConnected:
   outputs:
   - name: isConnected
     nilable: true
+    type: boolean
+C_PlayerInfo.IsDisplayRaceNative:
+  inputs: {}
+  outputs:
+  - name: isDisplayRaceNative
     type: boolean
 C_PlayerInfo.IsExpansionLandingPageUnlockedForPlayer:
   inputs:
@@ -15730,7 +16094,8 @@ C_StoreSecure.GetBnetTransferInfo: {}
 C_StoreSecure.GetCharacterInfoByGUID: {}
 C_StoreSecure.GetCharactersForRealm:
   outputs:
-  - stub:
+  - name: characters
+    stub:
     - level: 42
     type: table
 C_StoreSecure.GetConfirmationInfo: {}
@@ -16046,14 +16411,28 @@ C_Texture.ClearTitleIconTexture:
   - name: texture
     type: Texture
   outputs: {}
-C_Texture.GetAtlasInfo:
-  impl: C_Texture.GetAtlasInfo
+C_Texture.GetAtlasElementID:
   inputs:
   - name: atlas
     type: string
   outputs:
+  - name: elementID
+    type: number
+C_Texture.GetAtlasID:
+  inputs:
+  - name: atlas
+    type: string
+  outputs:
+  - name: atlasID
+    type: number
+C_Texture.GetAtlasInfo:
+  impl: C_Texture.GetAtlasInfo_10_2
+  inputs:
+  - name: atlas
+    type: string
+  mayreturnnothing: true
+  outputs:
   - name: info
-    nilable: true
     type:
       structure: C_Texture.AtlasInfo
 C_Texture.GetCraftingReagentQualityChatIcon:
@@ -17105,6 +17484,13 @@ C_ToyBoxInfo.SetDefaultFilters:
 C_TradeSkillUI.AnyRecipeCategoriesFiltered: {}
 C_TradeSkillUI.AreAnyInventorySlotsFiltered: {}
 C_TradeSkillUI.CanObliterateCursorItem: {}
+C_TradeSkillUI.CanStoreEnchantInItem:
+  inputs:
+  - name: itemGUID
+    type: string
+  outputs:
+  - name: canStore
+    type: boolean
 C_TradeSkillUI.CanTradeSkillListLink: {}
 C_TradeSkillUI.ClearInventorySlotFilter: {}
 C_TradeSkillUI.ClearPendingObliterateItem: {}
@@ -17295,7 +17681,8 @@ C_TradeSkillUI.GetFilterableInventorySlots: {}
 C_TradeSkillUI.GetFilteredRecipeIDs:
   inputs: {}
   outputs:
-  - stub: {}
+  - name: recipeIDs
+    stub: {}
     type:
       arrayof: number
 C_TradeSkillUI.GetGatheringOperationInfo:
@@ -17931,6 +18318,9 @@ C_Traits.CascadeRepurchaseRanks:
     type: number
   - name: nodeID
     type: number
+  - name: entryID
+    nilable: true
+    type: number
   outputs:
   - name: success
     type: boolean
@@ -17956,6 +18346,13 @@ C_Traits.ConfigHasStagedChanges:
   outputs:
   - name: hasChanges
     type: boolean
+C_Traits.GenerateImportString:
+  inputs:
+  - name: configID
+    type: number
+  outputs:
+  - name: importString
+    type: string
 C_Traits.GenerateInspectImportString:
   inputs:
   - name: target
@@ -18180,6 +18577,9 @@ C_Traits.RefundRank:
     type: number
   - name: nodeID
     type: number
+  - name: clearEdges
+    nilable: true
+    type: boolean
   outputs:
   - name: success
     type: boolean
@@ -18219,6 +18619,9 @@ C_Traits.SetSelection:
   - name: nodeEntryID
     nilable: true
     type: number
+  - name: clearEdges
+    nilable: true
+    type: boolean
   outputs:
   - name: success
     type: boolean
@@ -19390,6 +19793,18 @@ C_UI.GetTopRightNotchSafeRegion:
     type: number
   - name: bottom
     type: number
+C_UI.GetUIParent:
+  impl: C_UI.GetUIParent
+  inputs: {}
+  outputs:
+  - name: uiParent
+    type: Frame
+C_UI.GetWorldFrame:
+  impl: C_UI.GetWorldFrame
+  inputs: {}
+  outputs:
+  - name: worldFrame
+    type: Frame
 C_UI.Reload:
   inputs: {}
   outputs: {}
@@ -19660,6 +20075,15 @@ C_UIWidgetManager.GetTopCenterWidgetSetID:
   outputs:
   - name: setID
     type: number
+C_UIWidgetManager.GetTugOfWarWidgetVisualizationInfo:
+  inputs:
+  - name: widgetID
+    type: number
+  outputs:
+  - name: widgetInfo
+    nilable: true
+    type:
+      structure: C_UIWidgetManager.TugOfWarWidgetVisualizationInfo
 C_UIWidgetManager.GetUnitPowerBarWidgetVisualizationInfo:
   inputs:
   - name: widgetID
@@ -20562,7 +20986,8 @@ C_Widget.IsFrameWidget:
   - name: frame
     type: unknown
   outputs:
-  - stub: true
+  - name: result
+    stub: true
     type: boolean
 C_Widget.IsRenderableWidget: {}
 C_Widget.IsWidget:
@@ -20683,7 +21108,15 @@ C_ZoneAbility.GetActiveAbilities:
     type:
       arrayof:
         structure: C_ZoneAbility.ZoneAbilityInfo
-CalculateStringEditDistance: {}
+CalculateStringEditDistance:
+  inputs:
+  - name: firstString
+    type: string
+  - name: secondString
+    type: string
+  outputs:
+  - name: distance
+    type: number
 CallCompanion: {}
 CameraOrSelectOrMoveStart:
   inputs: {}
@@ -20726,7 +21159,11 @@ CancelLogout:
 CancelMasterLootRoll: {}
 CancelPendingEquip: {}
 CancelPetPossess: {}
-CancelPreloadingMovie: {}
+CancelPreloadingMovie:
+  inputs:
+  - name: movieId
+    type: number
+  outputs: {}
 CancelScene: {}
 CancelShapeshiftForm:
   inputs: {}
@@ -21000,13 +21437,68 @@ ConfirmNoRefundOnUse: {}
 ConfirmOnUse: {}
 ConfirmReadyCheck: {}
 ConfirmTalentWipe: {}
-ConsoleAddMessage: {}
+ConsoleAddMessage:
+  inputs:
+  - name: message
+    type: string
+  outputs: {}
 ConsoleExec:
   inputs:
   - name: command
     type: string
+  - default: false
+    name: addToHistory
+    type: boolean
+  outputs:
+  - name: result
+    type: boolean
+ConsoleGetAllCommands:
+  impl: C_Console.GetAllCommands
+  inputs: {}
+  outputs:
+  - name: commands
+    type:
+      arrayof:
+        structure: ConsoleCommandInfo
+ConsoleGetColorFromType:
+  inputs:
+  - name: colorType
+    type:
+      enum: ConsoleColorType
+  outputs:
+  - name: color
+    type:
+      structure: colorRGB
+ConsoleGetFontHeight:
+  inputs: {}
+  outputs:
+  - name: fontHeightInPixels
+    type: number
+ConsoleIsActive:
+  inputs: {}
+  outputs:
+  - name: consoleIsActive
+    type: boolean
+ConsolePrintAllMatchingCommands:
+  inputs:
+  - name: partialCommandText
+    type: string
   outputs: {}
-CopyToClipboard: {}
+ConsoleSetFontHeight:
+  inputs:
+  - name: fontHeightInPixels
+    type: number
+  outputs: {}
+CopyToClipboard:
+  inputs:
+  - name: text
+    type: string
+  - default: false
+    name: removeMarkup
+    type: boolean
+  outputs:
+  - name: length
+    type: number
 coroutine.create:
   stdlib: coroutine.create
 coroutine.resume:
@@ -21072,6 +21564,15 @@ CreateFrame:
     type: Frame
 CreateMacro: {}
 CreateNewRaidProfile: {}
+CreateWindow:
+  inputs:
+  - default: true
+    name: popupStyle
+    type: boolean
+  outputs:
+  - name: window
+    nilable: true
+    type: table
 CursorHasItem: {}
 CursorHasMacro: {}
 CursorHasMoney: {}
@@ -21094,7 +21595,18 @@ debugstack:
 DeclineChannelInvite: {}
 DeclineGroup: {}
 DeclineGuild: {}
-DeclineName: {}
+DeclineName:
+  inputs:
+  - name: name
+    type: string
+  - name: gender
+    nilable: true
+    type: number
+  - name: declensionSet
+    type: number
+  outputs:
+  - name: declinedNames
+    type: string
 DeclineQuest: {}
 DeclineResurrect: {}
 DeclineSpellConfirmationPrompt: {}
@@ -21116,15 +21628,6 @@ DestroyTotem: {}
 DetectWowMouse: {}
 difftime:
   stdlib: difftime
-DisableAddOn:
-  inputs:
-  - name: addon
-    type: uiAddon
-  - name: playerOrAll
-    nilable: true
-    type: unknown
-  outputs: {}
-DisableAllAddOns: {}
 DisableSpellAutocast: {}
 DismissCompanion: {}
 Dismount:
@@ -21209,15 +21712,6 @@ EJ_SetDifficulty: {}
 EJ_SetLootFilter: {}
 EJ_SetSearch: {}
 EjectPassengerFromSeat: {}
-EnableAddOn:
-  inputs:
-  - name: addon
-    type: uiAddon
-  - name: playerOrAll
-    nilable: true
-    type: unknown
-  outputs: {}
-EnableAllAddOns: {}
 EnableSpellAutocast: {}
 EndBoundTradeable: {}
 EndRefund: {}
@@ -21456,41 +21950,6 @@ GetActiveTitle:
   - name: title
     type: string
 GetAddOnCPUUsage: {}
-GetAddOnDependencies: {}
-GetAddOnEnableState:
-  impl: GetAddOnEnableState
-  inputs:
-  - name: character
-    nilable: true
-    type: string
-  - name: addon
-    type: uiAddon
-  outputs:
-  - name: enabledState
-    type: number
-GetAddOnInfo:
-  impl: GetAddOnInfo
-  inputs:
-  - name: addon
-    type: uiAddon
-  outputs:
-  - name: name
-    type: string
-  - name: title
-    nilable: true
-    type: string
-  - name: notes
-    nilable: true
-    type: string
-  - name: loadable
-    type: boolean
-  - name: reason
-    nilable: true
-    type: string
-  - name: security
-    type: string
-  - name: newVersion
-    type: boolean
 GetAddOnMemoryUsage:
   inputs:
   - name: addon
@@ -21498,7 +21957,6 @@ GetAddOnMemoryUsage:
   outputs:
   - name: memoryKb
     type: number
-GetAddOnOptionalDependencies: {}
 GetAllowLowLevelRaid: {}
 GetAlternativeDefaultLanguage: {}
 GetArchaeologyInfo: {}
@@ -21569,9 +22027,23 @@ GetAvailableBandwidth:
   - type: number
 GetAvailableLevel: {}
 GetAvailableLocaleInfo:
+  inputs:
+  - default: false
+    name: ignoreLocaleRestrictions
+    type: boolean
   outputs:
-  - type: table
-GetAvailableLocales: {}
+  - name: localeInfos
+    type:
+      arrayof:
+        structure: LocaleInfo
+GetAvailableLocales:
+  inputs:
+  - default: false
+    name: ignoreLocaleRestrictions
+    type: boolean
+  outputs:
+  - name: unpackedPrimitiveType
+    type: string
 GetAvailableQuestInfo:
   inputs:
   - name: index
@@ -21705,17 +22177,17 @@ GetBuildInfo:
   impl: GetBuildInfo_10_1
   inputs: {}
   outputs:
-  - name: version
+  - name: buildVersion
     type: string
-  - name: build
+  - name: buildNumber
     type: string
-  - name: date
+  - name: buildDate
     type: string
-  - name: tocversion
+  - name: interfaceVersion
     type: number
   - name: localizedVersion
     type: string
-  - name: buildType
+  - name: buildInfo
     type: string
 GetButtonMetatable:
   impl: GetButtonMetatable
@@ -21844,7 +22316,8 @@ GetClassInfo:
 GetClickFrame:
   impl: GetClickFrame
   inputs:
-  - type: string
+  - name: name
+    type: string
   outputs:
   - name: frame
     nilable: true
@@ -21888,7 +22361,8 @@ GetCombatRatingBonus:
 GetCombatRatingBonusForCombatRatingValue: {}
 GetComboPoints:
   outputs:
-  - stub: 0
+  - name: comboPoints
+    stub: 0
     type: number
 GetCompanionInfo: {}
 GetComparisonAchievementPoints: {}
@@ -21933,8 +22407,10 @@ GetCurrentGuildBankTab:
 GetCurrentKeyBoardFocus: {}
 GetCurrentLevelFeatures: {}
 GetCurrentRegion:
+  inputs: {}
   outputs:
-  - type: number
+  - name: region
+    type: number
 GetCurrentRegionName:
   inputs: {}
   outputs:
@@ -21950,7 +22426,13 @@ GetCurrentScaledResolution:
     stub: 768
     type: number
 GetCurrentTitle: {}
-GetCursorDelta: {}
+GetCursorDelta:
+  inputs: {}
+  outputs:
+  - name: deltaX
+    type: number
+  - name: deltaY
+    type: number
 GetCursorInfo: {}
 GetCursorMoney:
   outputs:
@@ -21958,11 +22440,10 @@ GetCursorMoney:
 GetCursorPosition:
   inputs: {}
   outputs:
-  - name: x
+  - name: posX
     type: number
-  - name: y
+  - name: posY
     type: number
-GetCVarInfo: {}
 GetDailyQuestsCompleted:
   outputs:
   - type: number
@@ -21977,8 +22458,10 @@ GetDefaultLanguage:
     stub: 7
     type: number
 GetDefaultScale:
+  inputs: {}
   outputs:
-  - type: number
+  - name: scale
+    type: number
 GetDemotionRank: {}
 GetDetailedItemLevelInfo: {}
 GetDifficultyInfo:
@@ -22159,8 +22642,21 @@ GetFlyoutInfo:
     type: boolean
 GetFlyoutSlotInfo: {}
 GetFollowerTypeIDFromSpell: {}
-GetFontInfo: {}
-GetFonts: {}
+GetFontInfo:
+  inputs:
+  - name: fontObject
+    type: table
+  outputs:
+  - name: info
+    nilable: true
+    type:
+      structure: FontScriptInfo
+GetFonts:
+  inputs: {}
+  outputs:
+  - name: fontNames
+    type:
+      arrayof: string
 GetFontStringMetatable:
   impl: GetFontStringMetatable
   inputs: {}
@@ -22187,7 +22683,8 @@ GetGraphicsAPIs:
   comment: actually returns a string dotdotdot, not just a string
   inputs: {}
   outputs:
-  - stub: opengl
+  - name: graphicsAPIs
+    stub: opengl
     type: string
 GetGraphicsCVarValueForQualityLevel: {}
 GetGreetingText:
@@ -22576,7 +23073,8 @@ GetInventoryItemTexture: {}
 GetInventorySlotInfo:
   impl: GetInventorySlotInfo
   inputs:
-  - type: string
+  - name: slotName
+    type: string
   outputs:
   - name: slotId
     type: number
@@ -22641,7 +23139,8 @@ GetItemLevelColor: {}
 GetItemQualityColor:
   impl: GetItemQualityColor
   inputs:
-  - type: number
+  - name: quality
+    type: number
   outputs:
   - name: r
     type: number
@@ -22991,10 +23490,16 @@ GetLifesteal:
 GetLocale:
   inputs: {}
   outputs:
-  - name: locale
+  - name: localeName
     stub: enUS
     type: string
-GetLocalGameTime: {}
+GetLocalGameTime:
+  inputs: {}
+  outputs:
+  - name: hour
+    type: number
+  - name: minute
+    type: number
 GetLooseMacroIcons:
   inputs:
   - name: iconTable
@@ -23257,10 +23762,30 @@ GetMoney:
 GetMonitorAspectRatio: {}
 GetMonitorCount: {}
 GetMonitorName: {}
-GetMouseButtonClicked: {}
-GetMouseButtonName: {}
+GetMouseButtonClicked:
+  inputs: {}
+  outputs:
+  - name: buttonName
+    type: string
+GetMouseButtonName:
+  inputs:
+  - name: button
+    type: string
+  outputs:
+  - name: buttonName
+    type: string
 GetMouseFocus: {}
-GetMovieDownloadProgress: {}
+GetMovieDownloadProgress:
+  inputs:
+  - name: movieId
+    type: number
+  outputs:
+  - name: inProgress
+    type: boolean
+  - name: downloaded
+    type: number
+  - name: total
+    type: number
 GetMultiCastBarIndex:
   outputs:
   - type: number
@@ -23316,11 +23841,6 @@ GetNumActiveQuests:
   outputs:
   - name: numActiveQuests
     type: number
-GetNumAddOns:
-  impl: GetNumAddOns
-  inputs: {}
-  outputs:
-  - type: number
 GetNumArchaeologyRaces:
   outputs:
   - type: number
@@ -23389,7 +23909,16 @@ GetNumCompletedAchievements:
     type: number
   - name: numCompleted
     type: number
-GetNumDeclensionSets: {}
+GetNumDeclensionSets:
+  inputs:
+  - name: name
+    type: string
+  - name: gender
+    nilable: true
+    type: number
+  outputs:
+  - name: numDeclensionSets
+    type: number
 GetNumDisplayChannels:
   inputs: {}
   outputs:
@@ -23557,10 +24086,10 @@ GetNumSpecializations:
 GetNumSpecializationsForClassID:
   impl: GetNumSpecializationsForClassID
   inputs:
-  - name: classID
+  - name: specID
     type: number
   outputs:
-  - name: numSpecializations
+  - name: specCount
     type: number
 GetNumSpellTabs:
   outputs:
@@ -23593,7 +24122,11 @@ GetNumWarGameTypes: {}
 GetNumWorldPVPAreas: {}
 GetObjectiveText: {}
 GetOptOutOfLoot: {}
-GetOSLocale: {}
+GetOSLocale:
+  inputs: {}
+  outputs:
+  - name: localeName
+    type: string
 GetOverrideAPBySpellPower: {}
 GetOverrideBarIndex:
   inputs: {}
@@ -23686,10 +24219,10 @@ GetPetTimeRemaining: {}
 GetPhysicalScreenSize:
   inputs: {}
   outputs:
-  - name: physicalWidth
+  - name: sizeX
     stub: 1024
     type: number
-  - name: physicalHeight
+  - name: sizeY
     stub: 768
     type: number
 GetPlayerFacing: {}
@@ -23896,7 +24429,8 @@ GetQuestLogRewardCurrencyInfo:
 GetQuestLogRewardFactionInfo: {}
 GetQuestLogRewardHonor:
   outputs:
-  - stub: 0
+  - name: value
+    stub: 0
     type: number
 GetQuestLogRewardInfo:
   inputs:
@@ -24181,18 +24715,29 @@ GetSchoolString:
   - type: number
   outputs:
   - type: string
-GetScreenDPIScale: {}
+GetScreenDPIScale:
+  inputs: {}
+  outputs:
+  - name: scale
+    type: number
 GetScreenHeight:
   impl: GetScreenHeight
   inputs: {}
   outputs:
-  - type: number
+  - name: height
+    type: number
 GetScreenWidth:
   impl: GetScreenWidth
   inputs: {}
   outputs:
-  - type: number
-GetSecondsUntilParentalControlsKick: {}
+  - name: width
+    type: number
+GetSecondsUntilParentalControlsKick:
+  inputs: {}
+  outputs:
+  - name: remaining
+    nilable: true
+    type: number
 GetSelectedArtifactInfo: {}
 GetSelectedDisplayChannel: {}
 GetSelectedFaction:
@@ -24216,9 +24761,13 @@ GetServerExpansionLevel:
 GetServerTime:
   inputs: {}
   outputs:
-  - name: timestamp
+  - name: time
     type: number
-GetSessionTime: {}
+GetSessionTime:
+  inputs: {}
+  outputs:
+  - name: time
+    type: number
 GetSetBonusesForSpecializationByItemID: {}
 GetShapeshiftForm:
   inputs:
@@ -24325,7 +24874,9 @@ GetSpecializationInfoForClassID:
   inputs:
   - name: classID
     type: number
-  - name: specIndex
+  - name: index
+    type: number
+  - name: gender
     nilable: true
     type: number
   mayreturnnothing: true
@@ -24336,15 +24887,19 @@ GetSpecializationInfoForClassID:
     type: string
   - name: description
     type: string
-  - name: texture
+  - name: icon
     type: number
   - name: role
     type: string
-  - name: isRecommended
+  - name: recommended
     type: boolean
-  - name: isAllowed
+  - name: allowedForBoost
     type: boolean
-  - name: mastery
+  - name: masterySpell1
+    nilable: true
+    type: number
+  - name: masterySpell2
+    nilable: true
     type: number
 GetSpecializationInfoForSpecID:
   impl: GetSpecializationInfoForSpecID
@@ -24361,23 +24916,31 @@ GetSpecializationInfoForSpecID:
     type: string
   - name: description
     type: string
-  - name: texture
+  - name: icon
     type: number
   - name: role
     type: string
-  - name: isRecommended
+  - name: recommended
     type: boolean
-  - name: isAllowed
+  - name: allowedForBoost
     type: boolean
-  - name: masterySpellID
+  - name: masterySpell1
+    nilable: true
+    type: number
+  - name: masterySpell2
+    nilable: true
     type: number
 GetSpecializationMasterySpells: {}
 GetSpecializationNameForSpecID:
   inputs:
   - name: specID
     type: number
+  - name: gender
+    nilable: true
+    type: number
   outputs:
-  - name: value
+  - name: name
+    nilable: true
     type: string
 GetSpecializationRole:
   inputs:
@@ -24579,7 +25142,8 @@ GetTalentInfoBySpecialization:
     type: boolean
   - name: spellID
     type: number
-  - nilable: true
+  - name: unknown
+    nilable: true
     type: unknown
   - name: row
     type: number
@@ -24630,17 +25194,18 @@ GetThreatStatusColor:
 GetTickTime:
   inputs: {}
   outputs:
-  - name: elapsed
+  - name: time
     type: number
 GetTime:
   impl: GetTime
   inputs: {}
   outputs:
-  - type: number
+  - name: time
+    type: number
 GetTimePreciseSec:
   inputs: {}
   outputs:
-  - name: seconds
+  - name: time
     type: number
 GetTimeToWellRested: {}
 GetTitleName: {}
@@ -25158,7 +25723,11 @@ InitiateTrade:
 InRepairMode: {}
 ipairs:
   stdlib: ipairs
-Is64BitClient: {}
+Is64BitClient:
+  inputs: {}
+  outputs:
+  - name: is64Bit
+    type: boolean
 IsAccountSecured: {}
 IsAchievementEligible: {}
 IsActionInRange: {}
@@ -25177,28 +25746,13 @@ IsActiveQuestTrivial:
   outputs:
   - name: isActiveQuestTrivial
     type: boolean
-IsAddOnLoaded:
-  impl: IsAddOnLoaded
-  inputs:
-  - name: addon
-    type: uiAddon
-  outputs:
-  - type: boolean
-  - type: boolean
-IsAddOnLoadOnDemand:
-  impl: IsAddOnLoadOnDemand
-  inputs:
-  - name: addon
-    type: uiAddon
-  outputs:
-  - type: oneornil
-IsAddonVersionCheckEnabled:
-  inputs: {}
-  outputs:
-  - type: boolean
 IsAdvancedFlyableArea: {}
 IsAllowedToUserTeleport: {}
-IsAltKeyDown: {}
+IsAltKeyDown:
+  inputs: {}
+  outputs:
+  - name: down
+    type: boolean
 IsArenaSkirmish: {}
 IsArenaTeamCaptain: {}
 IsArtifactCompletionHistoryAvailable: {}
@@ -25244,7 +25798,6 @@ IsCharacterNewlyBoosted: {}
 IsChatAFK: {}
 IsChatChannelRaid: {}
 IsChatDND: {}
-IsCompetitiveModeEnabled: {}
 IsConsumableAction: {}
 IsConsumableItem:
   inputs:
@@ -25262,7 +25815,11 @@ IsConsumableSpell:
   outputs:
   - name: value
     type: boolean
-IsControlKeyDown: {}
+IsControlKeyDown:
+  inputs: {}
+  outputs:
+  - name: down
+    type: boolean
 IsCorruptedItem:
   inputs:
   - name: itemLink
@@ -25291,7 +25848,11 @@ IsDebugBuild:
   outputs:
   - name: value
     type: boolean
-IsDemonHunterAvailable: {}
+IsDemonHunterAvailable:
+  inputs: {}
+  outputs:
+  - name: available
+    type: boolean
 IsDesaturateSupported: {}
 IsDisplayChannelModerator: {}
 IsDisplayChannelOwner: {}
@@ -25367,11 +25928,37 @@ IsInventoryItemProfessionBag: {}
 IsItemAction: {}
 IsItemInRange: {}
 IsJailersTowerLayerTimeLocked: {}
-IsKeyDown: {}
-IsLeftAltKeyDown: {}
-IsLeftControlKeyDown: {}
-IsLeftMetaKeyDown: {}
-IsLeftShiftKeyDown: {}
+IsKeyDown:
+  inputs:
+  - name: keyOrMouseName
+    type: string
+  - default: false
+    name: excludeBindingState
+    type: boolean
+  outputs:
+  - name: down
+    nilable: true
+    type: boolean
+IsLeftAltKeyDown:
+  inputs: {}
+  outputs:
+  - name: down
+    type: boolean
+IsLeftControlKeyDown:
+  inputs: {}
+  outputs:
+  - name: down
+    type: boolean
+IsLeftMetaKeyDown:
+  inputs: {}
+  outputs:
+  - name: down
+    type: boolean
+IsLeftShiftKeyDown:
+  inputs: {}
+  outputs:
+  - name: down
+    type: boolean
 IsLegacyDifficulty: {}
 IsLFGComplete: {}
 IsLFGDungeonJoinable:
@@ -25387,16 +25974,28 @@ IsLFGDungeonJoinable:
     type: boolean
   - name: totalGroupSizeRequired
     type: number
-IsLinuxClient: {}
+IsLinuxClient:
+  inputs: {}
+  outputs:
+  - name: isLinux
+    type: boolean
 IsLoggedIn:
   impl: IsLoggedIn
   inputs: {}
   outputs:
   - name: isLoggedIn
     type: boolean
-IsMacClient: {}
+IsMacClient:
+  inputs: {}
+  outputs:
+  - name: isMac
+    type: boolean
 IsMasterLooter: {}
-IsMetaKeyDown: {}
+IsMetaKeyDown:
+  inputs: {}
+  outputs:
+  - name: down
+    type: boolean
 IsModifiedClick:
   inputs:
   - name: action
@@ -25405,15 +26004,42 @@ IsModifiedClick:
   outputs:
   - name: value
     type: boolean
-IsModifierKeyDown: {}
+IsModifierKeyDown:
+  inputs: {}
+  outputs:
+  - name: down
+    type: boolean
 IsMounted:
   outputs:
   - type: boolean
-IsMouseButtonDown: {}
+IsMouseButtonDown:
+  inputs:
+  - name: button
+    nilable: true
+    type: string
+  outputs:
+  - name: down
+    type: boolean
 IsMouselooking: {}
-IsMovieLocal: {}
-IsMoviePlayable: {}
-IsOnGlueScreen: {}
+IsMovieLocal:
+  inputs:
+  - name: movieId
+    type: number
+  outputs:
+  - name: isLocal
+    type: boolean
+IsMoviePlayable:
+  inputs:
+  - name: movieId
+    type: number
+  outputs:
+  - name: isPlayable
+    type: boolean
+IsOnGlueScreen:
+  inputs: {}
+  outputs:
+  - name: isOnGlueScreen
+    type: boolean
 IsOnGroundFloorInJailersTower: {}
 IsOnTournamentRealm: {}
 IsOutdoors: {}
@@ -25449,7 +26075,7 @@ IsPressHoldReleaseSpell: {}
 IsPublicBuild:
   inputs: {}
   outputs:
-  - name: value
+  - name: isPublicBuild
     stub: true
     type: boolean
 IsPvpTalentSpell: {}
@@ -25481,17 +26107,37 @@ IsRecognizedName: {}
 IsRecruitAFriendLinked: {}
 IsResting: {}
 IsRestrictedAccount: {}
-IsRightAltKeyDown: {}
-IsRightControlKeyDown: {}
-IsRightMetaKeyDown: {}
-IsRightShiftKeyDown: {}
+IsRightAltKeyDown:
+  inputs: {}
+  outputs:
+  - name: down
+    type: boolean
+IsRightControlKeyDown:
+  inputs: {}
+  outputs:
+  - name: down
+    type: boolean
+IsRightMetaKeyDown:
+  inputs: {}
+  outputs:
+  - name: down
+    type: boolean
+IsRightShiftKeyDown:
+  inputs: {}
+  outputs:
+  - name: down
+    type: boolean
 issecure:
   stdlib: issecure
 issecurevariable:
   stdlib: issecurevariable
 IsSelectedSpellBookItem: {}
 IsServerControlledBackfill: {}
-IsShiftKeyDown: {}
+IsShiftKeyDown:
+  inputs: {}
+  outputs:
+  - name: down
+    type: boolean
 IsSpecializationActivateSpell: {}
 IsSpellClassOrSpec: {}
 IsSpellInRange: {}
@@ -25525,7 +26171,7 @@ IsTestBuild:
   impl: IsTestBuild
   inputs: {}
   outputs:
-  - name: value
+  - name: isTestBuild
     type: boolean
 IsThreatWarningEnabled: {}
 IsTitleKnown: {}
@@ -25550,9 +26196,21 @@ IsUnitModelReadyForUI:
 IsUsableAction: {}
 IsUsableItem: {}
 IsUsableSpell: {}
-IsUsingFixedTimeStep: {}
-IsUsingGamepad: {}
-IsUsingMouse: {}
+IsUsingFixedTimeStep:
+  inputs: {}
+  outputs:
+  - name: isUsingFixedTimeStep
+    type: boolean
+IsUsingGamepad:
+  inputs: {}
+  outputs:
+  - name: down
+    type: boolean
+IsUsingMouse:
+  inputs: {}
+  outputs:
+  - name: down
+    type: boolean
 IsUsingVehicleControls: {}
 IsVehicleAimAngleAdjustable: {}
 IsVehicleAimPowerAdjustable: {}
@@ -25567,7 +26225,11 @@ IsVoidStorageReady:
   - name: ready
     type: boolean
 IsWargame: {}
-IsWindowsClient: {}
+IsWindowsClient:
+  inputs: {}
+  outputs:
+  - name: isWindows
+    type: boolean
 IsWorldLootObject: {}
 IsXPUserDisabled: {}
 ItemAddedToArtifact: {}
@@ -25624,35 +26286,20 @@ JoinTemporaryChannel: {}
 JumpOrAscendStart:
   inputs: {}
   outputs: {}
-KBArticle_BeginLoading: {}
-KBArticle_GetData: {}
-KBArticle_IsLoaded: {}
-KBQuery_BeginLoading: {}
-KBQuery_GetArticleHeaderCount: {}
-KBQuery_GetArticleHeaderData: {}
-KBQuery_GetTotalArticleCount: {}
-KBQuery_IsLoaded: {}
-KBSetup_BeginLoading: {}
-KBSetup_GetArticleHeaderCount: {}
-KBSetup_GetArticleHeaderData: {}
-KBSetup_GetCategoryCount: {}
-KBSetup_GetCategoryData: {}
-KBSetup_GetLanguageCount: {}
-KBSetup_GetLanguageData: {}
-KBSetup_GetSubCategoryCount: {}
-KBSetup_GetSubCategoryData: {}
-KBSetup_GetTotalArticleCount: {}
-KBSetup_IsLoaded: {}
-KBSystem_GetMOTD: {}
-KBSystem_GetServerNotice: {}
-KBSystem_GetServerStatus: {}
 Kiosk.GetCharacterTemplateSetIndex: {}
+Kiosk.GetKioskLoginInfo: {}
+Kiosk.IsCompetitiveModeEnabled: {}
 Kiosk.IsEnabled:
   inputs: {}
   outputs:
   - type: boolean
 Kiosk.ShutdownSession: {}
 Kiosk.StartSession: {}
+LaunchURL:
+  inputs:
+  - name: url
+    type: string
+  outputs: {}
 ldexp:
   alias: math.ldexp
 LearnPvpTalent: {}
@@ -25667,23 +26314,19 @@ LeaveSingleLFG: {}
 LFGTeleport: {}
 ListChannelByName: {}
 ListChannels: {}
-LoadAddOn:
-  impl: LoadAddOn
-  inputs:
-  - name: addon
-    type: uiAddon
-  outputs:
-  - name: loaded
-    type: boolean
-  - name: reason
-    nilable: true
-    type: string
 LoadBindings: {}
 loadstring:
   stdlib: loadstring
 loadstring_untainted:
   stdlib: loadstring_untainted
-LoadURLIndex: {}
+LoadURLIndex:
+  inputs:
+  - name: index
+    type: number
+  - name: param
+    nilable: true
+    type: number
+  outputs: {}
 log:
   alias: math.log
 log10:
@@ -25931,7 +26574,11 @@ PlaySound: {}
 PlaySoundFile: {}
 PlayVocalErrorSoundID: {}
 PortGraveyard: {}
-PreloadMovie: {}
+PreloadMovie:
+  inputs:
+  - name: movieId
+    type: number
+  outputs: {}
 PrevView:
   inputs: {}
   outputs: {}
@@ -26050,14 +26697,10 @@ RequestTimePlayed:
   inputs: {}
   outputs: {}
 RequeueSkirmish: {}
-ResetAddOns:
-  inputs: {}
-  outputs: {}
 ResetChatColors: {}
 ResetChatWindows: {}
 ResetCPUUsage: {}
 ResetCursor: {}
-ResetDisabledAddOns: {}
 ResetInstances: {}
 ResetPerformanceValues:
   debug: true
@@ -26081,7 +26724,9 @@ RespondInstanceLock:
   outputs: {}
 RespondMailLockSendItem: {}
 RespondToInviteConfirmation: {}
-RestartGx: {}
+RestartGx:
+  inputs: {}
+  outputs: {}
 RestoreRaidProfileFromCopy: {}
 ResurrectGetOfferer: {}
 ResurrectHasSickness: {}
@@ -26104,7 +26749,6 @@ RunScript:
     nilable: true
     type: string
   outputs: {}
-SaveAddOns: {}
 SaveBindings:
   inputs:
   - type: number
@@ -26140,7 +26784,8 @@ securecallfunction:
 SecureCmdOptionParse:
   impl: SecureCmdOptionParse
   inputs:
-  - type: string
+  - name: command
+    type: string
   outputs:
   - name: result
     nilable: true
@@ -26187,7 +26832,6 @@ SetAchievementComparisonUnit: {}
 SetAchievementSearchString: {}
 SetActionBarToggles: {}
 SetActionUIButton: {}
-SetAddonVersionCheck: {}
 SetAllowDangerousScripts: {}
 SetAllowLowLevelRaid: {}
 SetAutoDeclineGuildInvites: {}
@@ -26301,7 +26945,10 @@ SetPortraitTexture:
   - name: textureObject
     type: Texture
   - name: unitToken
-    type: string
+    type: unit
+  - default: false
+    name: disableMasking
+    type: boolean
   outputs: {}
 SetPortraitTextureFromCreatureDisplayID:
   inputs:
@@ -26310,7 +26957,13 @@ SetPortraitTextureFromCreatureDisplayID:
   - name: creatureDisplayID
     type: number
   outputs: {}
-SetPortraitToTexture: {}
+SetPortraitToTexture:
+  inputs:
+  - name: texture
+    type: Texture
+  - name: asset
+    type: string
+  outputs: {}
 SetPVP: {}
 SetPVPRoles: {}
 SetRaidDifficultyID: {}
@@ -26577,7 +27230,11 @@ Stuck: {}
 SubmitRequiredGuildRename: {}
 SummonFriend: {}
 SummonRandomCritter: {}
-SupportsClipCursor: {}
+SupportsClipCursor:
+  inputs: {}
+  outputs:
+  - name: supportsClipCursor
+    type: boolean
 SurrenderArena: {}
 SwapRaidSubgroup: {}
 SwitchAchievementSearchTab: {}
@@ -26801,29 +27458,67 @@ UnitAttackSpeed:
 UnitAura: {}
 UnitAuraBySlot: {}
 UnitAuraSlots: {}
-UnitBattlePetLevel: {}
-UnitBattlePetSpeciesID: {}
-UnitBattlePetType: {}
+UnitBattlePetLevel:
+  inputs:
+  - name: unit
+    type: unit
+  outputs:
+  - name: result
+    nilable: true
+    type: number
+UnitBattlePetSpeciesID:
+  inputs:
+  - name: unit
+    type: unit
+  outputs:
+  - name: result
+    nilable: true
+    type: number
+UnitBattlePetType:
+  inputs:
+  - name: unit
+    type: unit
+  outputs:
+  - name: result
+    nilable: true
+    type: number
 UnitBuff: {}
 UnitCanAssist:
   inputs:
-  - type: string
-  - type: string
+  - name: unit
+    type: unit
+  - name: target
+    type: unit
   outputs:
-  - type: oneornil
+  - name: result
+    type: boolean
 UnitCanAttack:
   inputs:
-  - type: string
-  - type: string
+  - name: unit
+    type: unit
+  - name: target
+    type: unit
   outputs:
-  - type: oneornil
+  - name: result
+    type: boolean
 UnitCanCooperate:
   inputs:
-  - type: string
-  - type: string
+  - name: unit
+    type: unit
+  - name: target
+    type: unit
   outputs:
-  - type: oneornil
-UnitCanPetBattle: {}
+  - name: result
+    type: boolean
+UnitCanPetBattle:
+  inputs:
+  - name: unit
+    type: unit
+  - name: target
+    type: unit
+  outputs:
+  - name: result
+    type: boolean
 UnitCastingInfo:
   inputs:
   - type: string
@@ -26903,20 +27598,25 @@ UnitEffectiveLevel:
 UnitExists:
   impl: UnitExists
   inputs:
-  - nilable: true
+  - default: WOWGUID_NULL
+    name: unit
     type: unit
   outputs:
-  - type: boolean
+  - name: result
+    type: boolean
 UnitFactionGroup:
   impl: UnitFactionGroup
   inputs:
-  - name: unit
+  - name: unitName
     type: unit
+  - default: false
+    name: checkDisplayRace
+    type: boolean
   mayreturnnothing: true
   outputs:
-  - name: factionTag
+  - name: factionGroupTag
     type: string
-  - name: localizedFactionName
+  - name: localized
     type: string
 UnitFullName:
   inputs:
@@ -26944,11 +27644,11 @@ UnitGetTotalHealAbsorbs:
   - type: number
 UnitGroupRolesAssigned:
   inputs:
-  - name: unit
-    nilable: true
-    type: string
+  - default: WOWGUID_NULL
+    name: unit
+    type: unit
   outputs:
-  - name: role
+  - name: result
     stub: DAMAGER
     type: string
 UnitGUID:
@@ -27029,16 +27729,40 @@ UnitHPPerStamina:
   outputs:
   - name: value
     type: number
-UnitInAnyGroup: {}
-UnitInBattleground: {}
+UnitInAnyGroup:
+  inputs:
+  - default: WOWGUID_NULL
+    name: unit
+    type: unit
+  - name: partyIndex
+    nilable: true
+    type: number
+  outputs:
+  - name: result
+    type: boolean
+UnitInBattleground:
+  inputs:
+  - default: WOWGUID_NULL
+    name: unit
+    type: unit
+  - name: partyIndex
+    nilable: true
+    type: number
+  outputs:
+  - name: result
+    nilable: true
+    type: number
 UnitInOtherParty: {}
 UnitInParty:
   inputs:
-  - name: unit
-    nilable: true
+  - default: WOWGUID_NULL
+    name: unit
     type: unit
+  - name: partyIndex
+    nilable: true
+    type: number
   outputs:
-  - name: inParty
+  - name: result
     type: boolean
 UnitInPartyShard:
   inputs:
@@ -27049,10 +27773,16 @@ UnitInPartyShard:
     type: boolean
 UnitInRaid:
   inputs:
-  - nilable: true
-    type: string
+  - default: WOWGUID_NULL
+    name: unit
+    type: unit
+  - name: partyIndex
+    nilable: true
+    type: number
   outputs:
-  - type: boolean
+  - name: result
+    nilable: true
+    type: number
 UnitInRange:
   inputs:
   - name: unit
@@ -27064,7 +27794,17 @@ UnitInRange:
   - name: checkedRange
     stub: true
     type: boolean
-UnitInSubgroup: {}
+UnitInSubgroup:
+  inputs:
+  - default: WOWGUID_NULL
+    name: unit
+    type: unit
+  - name: partyIndex
+    nilable: true
+    type: number
+  outputs:
+  - name: result
+    type: boolean
 UnitInVehicle:
   inputs:
   - type: string
@@ -27074,19 +27814,34 @@ UnitInVehicleControlSeat: {}
 UnitInVehicleHidesPetFrame: {}
 UnitIsAFK:
   inputs:
-  - type: string
+  - name: unit
+    type: unit
   outputs:
-  - type: oneornil
-UnitIsBattlePet: {}
-UnitIsBattlePetCompanion: {}
+  - name: result
+    type: boolean
+UnitIsBattlePet:
+  inputs:
+  - name: unit
+    type: unit
+  outputs:
+  - name: result
+    nilable: true
+    type: boolean
+UnitIsBattlePetCompanion:
+  inputs:
+  - name: unit
+    type: unit
+  outputs:
+  - name: result
+    type: boolean
 UnitIsBossMob: {}
 UnitIsCharmed:
   inputs:
-  - name: unit
-    nilable: true
+  - default: WOWGUID_NULL
+    name: unit
     type: unit
   outputs:
-  - name: value
+  - name: result
     type: boolean
 UnitIsConnected:
   inputs:
@@ -27096,7 +27851,14 @@ UnitIsConnected:
   - name: isConnected
     type: boolean
 UnitIsControlling: {}
-UnitIsCorpse: {}
+UnitIsCorpse:
+  inputs:
+  - default: WOWGUID_NULL
+    name: unit
+    type: unit
+  outputs:
+  - name: result
+    type: boolean
 UnitIsDead:
   inputs:
   - type: string
@@ -27112,17 +27874,17 @@ UnitIsDND:
   - name: unit
     type: unit
   outputs:
-  - name: isDND
-    type: oneornil
+  - name: result
+    type: boolean
 UnitIsEnemy:
   inputs:
   - name: unit
     type: unit
-  - name: otherUnit
+  - name: target
     type: unit
   outputs:
-  - name: isEnemy
-    type: oneornil
+  - name: result
+    type: boolean
 UnitIsFeignDeath:
   inputs:
   - type: string
@@ -27130,11 +27892,21 @@ UnitIsFeignDeath:
   - type: oneornil
 UnitIsFriend:
   inputs:
-  - type: string
-  - type: string
+  - name: unit
+    type: unit
+  - name: target
+    type: unit
   outputs:
-  - type: oneornil
-UnitIsGameObject: {}
+  - name: result
+    type: boolean
+UnitIsGameObject:
+  inputs:
+  - default: WOWGUID_NULL
+    name: unit
+    type: unit
+  outputs:
+  - name: result
+    type: boolean
 UnitIsGhost:
   inputs:
   - type: string
@@ -27150,16 +27922,38 @@ UnitIsGroupLeader:
   - type: string
   outputs:
   - type: boolean
-UnitIsInMyGuild: {}
-UnitIsInteractable: {}
-UnitIsMercenary: {}
-UnitIsOtherPlayersBattlePet: {}
-UnitIsOtherPlayersPet:
+UnitIsInMyGuild:
   inputs:
-  - nilable: true
+  - name: unit
     type: string
   outputs:
-  - type: boolean
+  - name: result
+    type: boolean
+UnitIsInteractable:
+  inputs:
+  - default: WOWGUID_NULL
+    name: unit
+    type: unit
+  outputs:
+  - name: result
+    type: boolean
+UnitIsMercenary: {}
+UnitIsOtherPlayersBattlePet:
+  inputs:
+  - default: WOWGUID_NULL
+    name: unit
+    type: unit
+  outputs:
+  - name: result
+    type: boolean
+UnitIsOtherPlayersPet:
+  inputs:
+  - default: WOWGUID_NULL
+    name: unit
+    type: unit
+  outputs:
+  - name: result
+    type: boolean
 UnitIsOwnerOrControllerOfUnit:
   inputs:
   - name: controllingUnit
@@ -27172,29 +27966,54 @@ UnitIsOwnerOrControllerOfUnit:
 UnitIsPlayer:
   impl: UnitIsPlayer
   inputs:
-  - nilable: true
+  - default: WOWGUID_NULL
+    name: unit
     type: unit
+  - name: partyIndex
+    nilable: true
+    type: number
   outputs:
-  - type: boolean
+  - name: result
+    type: boolean
 UnitIsPossessed:
   inputs:
-  - nilable: true
-    type: string
+  - default: WOWGUID_NULL
+    name: unit
+    type: unit
   outputs:
-  - type: boolean
+  - name: result
+    type: boolean
 UnitIsPVP:
   inputs:
-  - type: unit
+  - name: unit
+    type: unit
   outputs:
-  - type: boolean
+  - name: result
+    type: boolean
 UnitIsPVPFreeForAll:
   inputs:
-  - type: unit
+  - name: unit
+    type: unit
   outputs:
-  - type: boolean
-UnitIsPVPSanctuary: {}
+  - name: result
+    type: boolean
+UnitIsPVPSanctuary:
+  inputs:
+  - default: WOWGUID_NULL
+    name: unit
+    type: unit
+  outputs:
+  - name: result
+    type: boolean
 UnitIsQuestBoss: {}
-UnitIsRaidOfficer: {}
+UnitIsRaidOfficer:
+  inputs:
+  - default: WOWGUID_NULL
+    name: unit
+    type: unit
+  outputs:
+  - name: result
+    type: boolean
 UnitIsSameServer: {}
 UnitIsTapDenied:
   inputs:
@@ -27208,17 +28027,28 @@ UnitIsUnconscious: {}
 UnitIsUnit:
   impl: UnitIsUnit
   inputs:
-  - type: unit
-  - type: unit
+  - name: unitName1
+    type: unit
+  - name: unitName2
+    type: unit
   outputs:
-  - type: boolean
+  - name: result
+    type: boolean
 UnitIsVisible:
   inputs:
-  - nilable: true
-    type: string
+  - default: WOWGUID_NULL
+    name: unit
+    type: unit
   outputs:
-  - type: boolean
-UnitIsWildBattlePet: {}
+  - name: result
+    type: boolean
+UnitIsWildBattlePet:
+  inputs:
+  - name: unit
+    type: unit
+  outputs:
+  - name: result
+    type: boolean
 UnitLeadsAnyGroup: {}
 UnitLevel:
   impl: UnitLevel
@@ -27291,25 +28121,33 @@ UnitPhaseReason:
       enum: PhaseReason
 UnitPlayerControlled:
   inputs:
-  - nilable: true
-    type: string
-  outputs:
-  - type: boolean
-UnitPlayerOrPetInParty:
-  inputs:
-  - name: unit
-    nilable: true
+  - default: WOWGUID_NULL
+    name: unit
     type: unit
   outputs:
-  - name: value
+  - name: result
+    type: boolean
+UnitPlayerOrPetInParty:
+  inputs:
+  - default: WOWGUID_NULL
+    name: unit
+    type: unit
+  - name: partyIndex
+    nilable: true
+    type: number
+  outputs:
+  - name: result
     type: boolean
 UnitPlayerOrPetInRaid:
   inputs:
-  - name: unit
-    nilable: true
+  - default: WOWGUID_NULL
+    name: unit
     type: unit
+  - name: partyIndex
+    nilable: true
+    type: number
   outputs:
-  - name: value
+  - name: result
     type: boolean
 UnitPosition: {}
 UnitPower:
@@ -27420,10 +28258,14 @@ UnitRangedAttackPower: {}
 UnitRangedDamage: {}
 UnitReaction:
   inputs:
-  - type: string
-  - type: string
+  - name: unit
+    type: unit
+  - name: target
+    type: unit
   outputs:
-  - type: number
+  - name: result
+    nilable: true
+    type: number
 UnitRealmRelationship:
   inputs:
   - type: string
@@ -27551,8 +28393,11 @@ UpdateAddOnMemoryUsage:
   inputs: {}
   outputs: {}
 UpdateInventoryAlertStatus: {}
+UpdateUIParentPosition: {}
 UpdateWarGamesList: {}
-UpdateWindow: {}
+UpdateWindow:
+  inputs: {}
+  outputs: {}
 UseAction:
   inputs:
   - type: number

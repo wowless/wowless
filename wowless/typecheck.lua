@@ -125,7 +125,7 @@ return function(api)
       end
     end
   end
-  for etype, evalues in pairs(require('build.data.stringenums')) do
+  for etype, evalues in pairs(require('runtime.stringenums')) do
     assert(not scalartypechecks[etype])
     scalartypechecks[etype] = function(value)
       if type(value) ~= 'string' then
@@ -189,6 +189,13 @@ return function(api)
         local _, err = typecheck(fspec, value[fname])
         if err then
           return nil, 'field ' .. fname .. ' ' .. err
+        end
+      end
+      if isout then
+        for k in pairs(value) do
+          if not st.fields[k] then
+            return nil, 'has extraneous field ' .. k
+          end
         end
       end
       -- TODO assert presence of mixin

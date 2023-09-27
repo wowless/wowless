@@ -105,6 +105,8 @@ Animation:
       - name: startDelay
     SetTarget: {}
     SetTargetKey: {}
+    SetTargetName: {}
+    SetTargetParent: {}
     Stop: {}
 AnimationGroup:
   inherits:
@@ -130,7 +132,9 @@ AnimationGroup:
     Finish: {}
     GetAnimations:
       impl: AnimationGroup/GetAnimations
+    GetAnimationSpeedMultiplier: {}
     GetDuration: {}
+    GetElapsed: {}
     GetLooping: {}
     GetLoopState: {}
     GetProgress: {}
@@ -138,11 +142,13 @@ AnimationGroup:
     IsPaused: {}
     IsPendingFinish: {}
     IsPlaying: {}
+    IsReverse: {}
     IsSetToFinalAlpha: {}
     Pause: {}
     Play: {}
     RemoveAnimations: {}
     Restart: {}
+    SetAnimationSpeedMultiplier: {}
     SetLooping: {}
     SetPlaying: {}
     SetToFinalAlpha: {}
@@ -159,6 +165,7 @@ Browser:
     NavigateHome: {}
     NavigateReload: {}
     NavigateStop: {}
+    NavigateTo: {}
     OpenExternalLink: {}
     OpenTicket: {}
     SetFocus: {}
@@ -208,6 +215,10 @@ Button:
   inherits:
     Frame: {}
   methods:
+    ClearDisabledTexture: {}
+    ClearHighlightTexture: {}
+    ClearNormalTexture: {}
+    ClearPushedTexture: {}
     Click:
       impl: Button/Click
     Disable:
@@ -278,6 +289,7 @@ Button:
     SetHighlightAtlas:
       impl: Button/SetHighlightAtlas
     SetHighlightFontObject: {}
+    SetHighlightLocked: {}
     SetHighlightTexture:
       impl: Button/SetHighlightTexture
     SetMotionScriptsWhileDisabled:
@@ -380,6 +392,7 @@ ColorSelect:
   inherits:
     Frame: {}
   methods:
+    ClearColorWheelTexture: {}
     GetColorHSV:
       outputs:
       - name: h
@@ -488,6 +501,7 @@ Cooldown:
     SetSwipeTexture:
       setter:
       - name: swipeTexture
+    SetTexCoordRange: {}
     SetUseCircularEdge: {}
 DressUpModel:
   inherits:
@@ -572,6 +586,7 @@ EditBox:
     GetUTF8CursorPosition: {}
     GetVisibleTextByteLimit: {}
     HasFocus: {}
+    HasText: {}
     HighlightText: {}
     Insert:
       impl: EditBox/Insert
@@ -637,9 +652,18 @@ FogOfWarFrame:
   inherits:
     Frame: {}
   methods:
+    GetFogOfWarBackgroundAtlas: {}
+    GetFogOfWarBackgroundTexture: {}
+    GetFogOfWarMaskAtlas: {}
+    GetFogOfWarMaskTexture: {}
+    GetMaskScalar: {}
     GetUiMapID: {}
+    SetFogOfWarBackgroundAtlas: {}
+    SetFogOfWarBackgroundTexture: {}
+    SetFogOfWarMaskAtlas: {}
+    SetFogOfWarMaskTexture: {}
+    SetMaskScalar: {}
     SetUiMapID: {}
-  zombie: true
 Font:
   inherits:
     FontInstance: {}
@@ -710,6 +734,7 @@ FontString:
   inherits:
     FontInstance: {}
     LayeredRegion: {}
+    ScriptObject: {}
   methods:
     CalculateScreenAreaFromCharacterSpan: {}
     CanNonSpaceWrap: {}
@@ -725,6 +750,7 @@ FontString:
     GetNumLines:
       outputs:
       - type: number
+    GetRotation: {}
     GetStringHeight:
       outputs:
       - type: number
@@ -740,6 +766,7 @@ FontString:
     GetUnboundedStringWidth:
       outputs:
       - type: number
+    GetVertexColor: {}
     GetWrappedWidth:
       outputs:
       - type: number
@@ -751,6 +778,7 @@ FontString:
       setter:
       - name: maxLines
     SetNonSpaceWrap: {}
+    SetRotation: {}
     SetText:
       impl: FontString/SetText
     SetTextHeight: {}
@@ -759,19 +787,6 @@ FontString:
       - name: textScale
     SetWordWrap: {}
   warner: true
-ForbiddenMixin:
-  fields:
-    forbidden:
-      init: false
-      type: boolean
-  inherits: {}
-  methods:
-    IsForbidden:
-      getter:
-      - name: forbidden
-    SetForbidden:
-      impl: ForbiddenMixin/SetForbidden
-  virtual: true
 Frame:
   fields:
     attributes:
@@ -826,10 +841,10 @@ Frame:
       init: false
       type: boolean
   inherits:
-    MouseMixin: {}
     Region: {}
     ScriptObject: {}
   methods:
+    AbortDrag: {}
     CanChangeAttribute: {}
     CreateFontString:
       impl: Frame/CreateFontString
@@ -903,11 +918,9 @@ Frame:
     GetChildren:
       impl: Frame/GetChildren
     GetClampRectInsets: {}
-    GetDepth: {}
     GetDontSavePosition: {}
     GetEffectiveAlpha:
       impl: Frame/GetEffectiveAlpha
-    GetEffectiveDepth: {}
     GetEffectivelyFlattensRenderLayers: {}
     GetFlattensRenderLayers: {}
     GetFrameLevel:
@@ -923,14 +936,6 @@ Frame:
     GetID:
       getter:
       - name: id
-    GetMaxResize:
-      getter:
-      - name: maxResizeWidth
-      - name: maxResizeHeight
-    GetMinResize:
-      getter:
-      - name: minResizeWidth
-      - name: minResizeHeight
     GetNumChildren:
       impl: Frame/GetNumChildren
     GetNumRegions:
@@ -940,13 +945,19 @@ Frame:
       - name: propagateKeyboardInput
     GetRegions:
       impl: Frame/GetRegions
+    GetResizeBounds:
+      getter:
+      - name: minResizeWidth
+      - name: minResizeHeight
+      - name: maxResizeWidth
+      - name: maxResizeHeight
     HasFixedFrameLevel:
       getter:
       - name: hasFixedFrameLevel
     HasFixedFrameStrata:
       getter:
       - name: hasFixedFrameStrata
-    IgnoreDepth: {}
+    InterceptStartDrag: {}
     IsClampedToScreen:
       getter:
       - name: isClampedToScreen
@@ -954,7 +965,6 @@ Frame:
       impl: Frame/IsEventRegistered
     IsGamePadButtonEnabled: {}
     IsGamePadStickEnabled: {}
-    IsIgnoringDepth: {}
     IsKeyboardEnabled: {}
     IsMovable:
       getter:
@@ -987,7 +997,6 @@ Frame:
       - name: isClampedToScreen
     SetClampRectInsets: {}
     SetClipsChildren: {}
-    SetDepth: {}
     SetDontSavePosition: {}
     SetDrawLayerEnabled: {}
     SetFixedFrameLevel:
@@ -997,7 +1006,6 @@ Frame:
       setter:
       - name: hasFixedFrameStrata
     SetFlattensRenderLayers: {}
-    SetFrameBuffer: {}
     SetFrameLevel:
       impl: Frame/SetFrameLevel
     SetFrameStrata:
@@ -1010,14 +1018,7 @@ Frame:
     SetID:
       setter:
       - name: id
-    SetMaxResize:
-      setter:
-      - name: maxResizeWidth
-      - name: maxResizeHeight
-    SetMinResize:
-      setter:
-      - name: minResizeWidth
-      - name: minResizeHeight
+    SetIsFrameBuffer: {}
     SetMovable:
       setter:
       - name: movable
@@ -1027,6 +1028,8 @@ Frame:
     SetResizable:
       setter:
       - name: resizable
+    SetResizeBounds:
+      impl: Frame/SetResizeBounds
     SetToplevel:
       setter:
       - name: toplevel
@@ -1089,12 +1092,16 @@ GameTooltip:
     SetAnchorType: {}
     SetAuctionItem: {}
     SetAuctionSellItem: {}
+    SetBackpackToken: {}
     SetBagItem: {}
     SetBagItemChild: {}
     SetBuybackItem: {}
     SetCompareItem: {}
     SetCraftItem: {}
     SetCraftSpell: {}
+    SetCurrencyToken: {}
+    SetCurrencyTokenByID: {}
+    SetEquipmentSet: {}
     SetExistingSocketGem: {}
     SetFrameStack: {}
     SetGuildBankItem: {}
@@ -1104,6 +1111,7 @@ GameTooltip:
     SetInventoryItem: {}
     SetInventoryItemByID: {}
     SetItemByID: {}
+    SetLootCurrency: {}
     SetLootItem: {}
     SetLootRollItem: {}
     SetMerchantCostItem: {}
@@ -1121,10 +1129,11 @@ GameTooltip:
     SetPadding: {}
     SetPetAction: {}
     SetPossession: {}
+    SetQuestCurrency: {}
     SetQuestItem: {}
+    SetQuestLogCurrency: {}
     SetQuestLogItem: {}
-    SetQuestLogRewardSpell: {}
-    SetQuestRewardSpell: {}
+    SetQuestLogSpecialItem: {}
     SetSendMailItem: {}
     SetShapeshift: {}
     SetSocketedItem: {}
@@ -1386,6 +1395,7 @@ ModelScene:
     SetCameraOrientationByAxisVectors: {}
     SetCameraOrientationByYawPitchRoll: {}
     SetCameraPosition: {}
+    SetDesaturation: {}
     SetDrawLayer: {}
     SetFogColor: {}
     SetFogFar: {}
@@ -1396,51 +1406,17 @@ ModelScene:
     SetLightPosition: {}
     SetLightType: {}
     SetLightVisible: {}
+    SetPaused: {}
     SetViewInsets: {}
     SetViewTranslation: {}
     TakeActor: {}
-MouseMixin:
-  fields:
-    mouseClickEnabled:
-      init: true
-      type: boolean
-    mouseMotionEnabled:
-      init: true
-      type: boolean
-    mouseWheelEnabled:
-      init: false
-      type: boolean
-  inherits: {}
-  methods:
-    EnableMouse:
-      impl: MouseMixin/EnableMouse
-    EnableMouseWheel:
-      setter:
-      - name: mouseWheelEnabled
-    IsMouseClickEnabled:
-      getter:
-      - name: mouseClickEnabled
-    IsMouseEnabled:
-      impl: MouseMixin/IsMouseEnabled
-    IsMouseMotionEnabled:
-      getter:
-      - name: mouseMotionEnabled
-    IsMouseWheelEnabled:
-      getter:
-      - name: mouseWheelEnabled
-    SetMouseClickEnabled:
-      setter:
-      - name: mouseClickEnabled
-    SetMouseMotionEnabled:
-      setter:
-      - name: mouseMotionEnabled
-  virtual: true
 MovieFrame:
   inherits:
     Frame: {}
   methods:
     EnableSubtitles: {}
     StartMovie: {}
+    StartMovieByName: {}
     StopMovie: {}
 OffScreenFrame:
   inherits:
@@ -1452,6 +1428,7 @@ OffScreenFrame:
     IsSnapshotValid: {}
     SetMaxSnapshots: {}
     TakeSnapshot: {}
+    TestPrintToFile: {}
     UsesNPOT: {}
 ParentedObject:
   inherits:
@@ -1473,7 +1450,6 @@ ParentedObjectBase:
       nilable: true
       type: UIObject
   inherits:
-    ForbiddenMixin: {}
     UIObject: {}
   methods:
     GetDebugName:
@@ -1481,6 +1457,10 @@ ParentedObjectBase:
     GetParent:
       getter:
       - name: parent
+    GetParentKey:
+      impl: ParentedObjectBase/GetParentKey
+    SetParentKey:
+      impl: ParentedObjectBase/SetParentKey
   virtual: true
 Path:
   inherits:
@@ -1502,9 +1482,9 @@ Path:
       - name: point
         type: ControlPoint
     GetControlPoints: {}
-    GetCurve: {}
-    GetMaxOrder: {}
-    SetCurve: {}
+    GetCurveType: {}
+    GetMaxControlPointOrder: {}
+    SetCurveType: {}
 PlayerModel:
   inherits:
     Model: {}
@@ -1523,7 +1503,6 @@ PlayerModel:
     SetBarberShopAlternateForm: {}
     SetCamDistanceScale: {}
     SetCreature: {}
-    SetCustomRace: {}
     SetDisplayInfo: {}
     SetDoBlend: {}
     SetItem: {}
@@ -1533,6 +1512,7 @@ PlayerModel:
     SetRotation: {}
     SetUnit: {}
     StopAnimKit: {}
+    ZeroCachedCenterXY: {}
 Region:
   fields:
     animationGroups:
@@ -1556,6 +1536,15 @@ Region:
     left:
       init: 0
       type: number
+    mouseClickEnabled:
+      init: true
+      type: boolean
+    mouseMotionEnabled:
+      init: true
+      type: boolean
+    mouseWheelEnabled:
+      init: false
+      type: boolean
     points:
       init: {}
       type: table
@@ -1570,7 +1559,7 @@ Region:
     CanChangeProtectedState: {}
     ClearAllPoints:
       impl: Region/ClearAllPoints
-    ClearPointByName: {}
+    ClearPoint: {}
     ClearPointsOffset: {}
     CreateAnimationGroup:
       impl: Region/CreateAnimationGroup
@@ -1584,6 +1573,12 @@ Region:
       outputs:
       - name: animationGroup
         type: AnimationGroup
+    EnableMouse:
+      impl: MouseMixin/EnableMouse
+    EnableMouseMotion: {}
+    EnableMouseWheel:
+      setter:
+      - name: mouseWheelEnabled
     GetAnimationGroups:
       impl: Region/GetAnimationGroups
     GetBottom:
@@ -1636,6 +1631,7 @@ Region:
       getter:
       - name: width
       - name: height
+    GetSourceLocation: {}
     GetTop:
       impl: Region/GetTop
     GetWidth:
@@ -1649,7 +1645,19 @@ Region:
     IsIgnoringParentScale:
       getter:
       - name: isIgnoringParentScale
+    IsMouseClickEnabled:
+      getter:
+      - name: mouseClickEnabled
+    IsMouseEnabled:
+      impl: MouseMixin/IsMouseEnabled
+    IsMouseMotionEnabled:
+      getter:
+      - name: mouseMotionEnabled
+    IsMouseMotionFocus: {}
     IsMouseOver: {}
+    IsMouseWheelEnabled:
+      getter:
+      - name: mouseWheelEnabled
     IsObjectLoaded: {}
     IsProtected:
       impl: Region/IsProtected
@@ -1665,6 +1673,13 @@ Region:
     SetIgnoreParentScale:
       setter:
       - name: isIgnoringParentScale
+    SetMouseClickEnabled:
+      setter:
+      - name: mouseClickEnabled
+    SetMouseMotionEnabled:
+      setter:
+      - name: mouseMotionEnabled
+    SetPassThroughButtons: {}
     SetPoint:
       impl: Region/SetPoint
     SetSize:
@@ -1725,14 +1740,14 @@ Scale:
   inherits:
     Animation: {}
   methods:
-    GetFromScale: {}
     GetOrigin: {}
     GetScale: {}
-    GetToScale: {}
-    SetFromScale: {}
+    GetScaleFrom: {}
+    GetScaleTo: {}
     SetOrigin: {}
     SetScale: {}
-    SetToScale: {}
+    SetScaleFrom: {}
+    SetScaleTo: {}
 ScriptObject:
   inherits:
     ScriptObjectBase: {}
@@ -1887,15 +1902,17 @@ StatusBar:
     GetOrientation: {}
     GetReverseFill: {}
     GetRotatesTexture: {}
-    GetStatusBarAtlas: {}
     GetStatusBarColor:
       impl: StatusBar/GetStatusBarColor
+    GetStatusBarDesaturation: {}
     GetStatusBarTexture:
       getter:
       - name: statusBarTexture
     GetValue:
       getter:
       - name: value
+    IsStatusBarDesaturated: {}
+    SetColorFill: {}
     SetFillStyle: {}
     SetMinMaxValues:
       setter:
@@ -1904,9 +1921,10 @@ StatusBar:
     SetOrientation: {}
     SetReverseFill: {}
     SetRotatesTexture: {}
-    SetStatusBarAtlas: {}
     SetStatusBarColor:
       impl: StatusBar/SetStatusBarColor
+    SetStatusBarDesaturated: {}
+    SetStatusBarDesaturation: {}
     SetStatusBarTexture:
       impl: StatusBar/SetStatusBarTexture
     SetValue:
@@ -1990,6 +2008,7 @@ TextureBase:
       type: boolean
   inherits:
     LayeredRegion: {}
+    ScriptObject: {}
   methods:
     GetAtlas: {}
     GetBlendMode:
@@ -1999,7 +2018,6 @@ TextureBase:
     GetHorizTile:
       getter:
       - name: horizTile
-    GetNonBlocking: {}
     GetRotation: {}
     GetTexCoord:
       getter:
@@ -2026,6 +2044,7 @@ TextureBase:
     GetVertTile:
       getter:
       - name: vertTile
+    IsBlockingLoadRequested: {}
     IsDesaturated: {}
     IsSnappingToPixelGrid: {}
     SetAtlas:
@@ -2033,19 +2052,18 @@ TextureBase:
     SetBlendMode:
       setter:
       - name: blendMode
+    SetBlockingLoadsRequested: {}
     SetColorTexture:
       impl: Texture/SetColorTexture
     SetDesaturated: {}
     SetDesaturation: {}
     SetGradient: {}
-    SetGradientAlpha: {}
     SetHorizTile:
       setter:
       - name: horizTile
     SetMask:
       setter:
       - name: maskName
-    SetNonBlocking: {}
     SetRotation: {}
     SetSnapToPixelGrid: {}
     SetTexCoord:
@@ -2070,6 +2088,9 @@ Translation:
     SetOffset: {}
 UIObject:
   fields:
+    forbidden:
+      init: false
+      type: boolean
     name:
       nilable: true
       type: string
@@ -2080,16 +2101,19 @@ UIObject:
       - name: name
     GetObjectType:
       impl: UIObject/GetObjectType
+    IsForbidden:
+      getter:
+      - name: forbidden
     IsObjectType:
       impl: UIObject/IsObjectType
+    SetForbidden:
+      impl: ForbiddenMixin/SetForbidden
   virtual: true
 UnitPositionFrame:
   inherits:
     Frame: {}
   methods:
     AddUnit: {}
-    AddUnitAtlas: {}
-    AddUnitFileID: {}
     ClearUnits: {}
     FinalizeUnits: {}
     GetMouseOverUnits: {}

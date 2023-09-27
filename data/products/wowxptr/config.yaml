@@ -3,6 +3,7 @@ addon:
   capsule:
     apinamespaces:
       C_AuthChallenge: {}
+      C_PingSecure: {}
       C_StoreSecure: {}
       C_UnitAurasPrivate: {}
       C_WowTokenSecure: {}
@@ -21,7 +22,6 @@ addon:
       CreateForbiddenFrame: {}
   hooked_globals:
     SetItemRef: {}
-    UpdateUIParentPosition: {}
   ignore_cvar_value:
     graphicsComputeEffects: {}
     graphicsDepthEffects: {}
@@ -55,6 +55,7 @@ addon:
     C_Traits.GetConditionInfo: {}
     C_Traits.GetEntryInfo: {}
     C_Traits.GetTreeInfo: {}
+    SetPortraitToTexture: {}
   skipped_uiobjects:
     Minimap: singleton
     WorldFrame: singleton

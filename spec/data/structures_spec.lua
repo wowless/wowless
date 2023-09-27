@@ -1,5 +1,5 @@
 describe('structures', function()
-  for _, p in ipairs(require('wowless.util').productList()) do
+  for _, p in ipairs(require('build.data.products')) do
     describe(p, function()
       local refs = {}
       local function refty(ty)
@@ -14,16 +14,16 @@ describe('structures', function()
           refty(x.type)
         end
       end
-      for _, api in pairs(require('build/data/products/' .. p .. '/apis')) do
+      for _, api in pairs(require('build.data.products.' .. p .. '.apis')) do
         reflist(api.inputs)
         reflist(api.outputs)
       end
-      for _, v in pairs(require('build/data/products/' .. p .. '/events')) do
+      for _, v in pairs(require('build.data.products.' .. p .. '.events')) do
         for _, pv in ipairs(v.payload or {}) do
           refty(pv.type)
         end
       end
-      local actual = require('build/data/products/' .. p .. '/structures')
+      local actual = require('build.data.products.' .. p .. '.structures')
       local expected = {}
       local function close(ty)
         if ty.arrayof then

@@ -1,5 +1,5 @@
 describe('uiobjects', function()
-  for _, p in ipairs(require('wowless.util').productList()) do
+  for _, p in ipairs(require('build.data.products')) do
     local api = require('wowless.api').new(function() end, 0, p)
     local typechecker = require('wowless.typecheck')(api)
     local function typecheck(spec, val)
@@ -8,7 +8,7 @@ describe('uiobjects', function()
       assert.same(value, val)
     end
     describe(p, function()
-      local uiobjects = require('build/data/products/' .. p .. '/uiobjects')
+      local uiobjects = require('build.data.products.' .. p .. '.uiobjects')
       describe('hierarchy', function()
         local g = {}
         for k, v in pairs(uiobjects) do
@@ -21,7 +21,7 @@ describe('uiobjects', function()
         local nr = {}
         for _, v in pairs(g) do
           for ik in pairs(v) do
-            nr[ik] = true
+            nr[ik] = (nr[ik] or 0) + 1
           end
         end
         local function process(t, root, k)
@@ -44,9 +44,12 @@ describe('uiobjects', function()
               it('is a uiobject', function()
                 assert.True(t.UIObject)
               end)
-            elseif not next(g[k]) then
-              it('is virtual', function()
-                assert.True(uiobjects[k].virtual)
+            else
+              it('is virtual or uiobject', function()
+                assert.True(uiobjects[k].virtual or t.UIObject)
+              end)
+              it('is used more than once if virtual', function()
+                assert.True(not uiobjects[k].virtual or nr[k] > 1)
               end)
             end
           end)

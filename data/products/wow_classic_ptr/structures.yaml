@@ -15,6 +15,10 @@ C_AreaPoiInfo.AreaPOIInfo:
     factionID:
       nilable: true
       type: number
+    highlightVignettesOnHover:
+      type: boolean
+    highlightWorldQuestsOnHover:
+      type: boolean
     isAlwaysOnFlightmap:
       type: boolean
     isPrimaryMapForPOI:
@@ -891,6 +895,8 @@ C_Container.ContainerItemInfo:
       type: boolean
     itemID:
       type: number
+    itemName:
+      type: string
     quality:
       nilable: true
       type:
@@ -1337,6 +1343,8 @@ C_GossipInfo.GossipQuestUIInfo:
       type: boolean
     isIgnored:
       type: boolean
+    isImportant:
+      type: boolean
     isLegendary:
       type: boolean
     isTrivial:
@@ -1350,8 +1358,28 @@ C_GossipInfo.GossipQuestUIInfo:
       type: boolean
     title:
       type: string
+C_LFGInfo.LFGLockInfo:
+  fields:
+    hideEntry:
+      type: boolean
+    lfgID:
+      type: number
+    reason:
+      type: number
+C_LFGList.BestDungeonScoreMapInfo:
+  fields:
+    bestRunLevel:
+      type: number
+    finishedSuccess:
+      type: boolean
+    mapName:
+      type: string
+    mapScore:
+      type: number
 C_LFGList.GroupFinderActivityInfo:
   fields:
+    allowCrossFaction:
+      type: boolean
     categoryID:
       type: number
     difficultyID:
@@ -1367,6 +1395,18 @@ C_LFGList.GroupFinderActivityInfo:
       type: number
     iconFileDataID:
       type: number
+    ilvlSuggestion:
+      type: number
+    isCurrentRaidActivity:
+      type: boolean
+    isMythicActivity:
+      type: boolean
+    isMythicPlusActivity:
+      type: boolean
+    isPvpActivity:
+      type: boolean
+    isRatedPvpActivity:
+      type: boolean
     mapID:
       type: number
     maxLevel:
@@ -1383,19 +1423,86 @@ C_LFGList.GroupFinderActivityInfo:
       type: number
     shortName:
       type: string
+    showQuickJoinToast:
+      type: boolean
     useDungeonRoleExpectations:
+      type: boolean
+    useHonorLevel:
+      type: boolean
+C_LFGList.LfgApplicantData:
+  fields:
+    applicantID:
+      type: number
+    applicationStatus:
+      type: string
+    comment:
+      type: string
+    displayOrderID:
+      type: number
+    isNew:
+      type: boolean
+    numMembers:
+      type: number
+    pendingApplicationStatus:
+      nilable: true
+      type: string
+C_LFGList.LfgCategoryData:
+  fields:
+    allowCrossFaction:
+      type: boolean
+    autoChooseActivity:
+      type: boolean
+    name:
+      type: string
+    preferCurrentArea:
+      type: boolean
+    searchPromptOverride:
+      nilable: true
+      type: string
+    separateRecommended:
+      type: boolean
+    showPlaystyleDropdown:
       type: boolean
 C_LFGList.LfgEntryData:
   fields:
+    activityID:
+      type: number
     activityIDs:
       type:
         arrayof: number
+    autoAccept:
+      type: boolean
     comment:
       type: string
     duration:
       type: number
+    isCrossFactionListing:
+      type: boolean
+    name:
+      type: string
     newPlayerFriendly:
       type: boolean
+    playstyle:
+      nilable: true
+      type:
+        enum: LFGEntryPlaystyle
+    privateGroup:
+      type: boolean
+    questID:
+      nilable: true
+      type: number
+    requiredDungeonScore:
+      nilable: true
+      type: number
+    requiredHonorLevel:
+      type: number
+    requiredItemLevel:
+      type: number
+    requiredPvpRating:
+      nilable: true
+      type: number
+    voiceChat:
+      type: string
 C_LFGList.LFGRoles:
   fields:
     dps:
@@ -1406,6 +1513,8 @@ C_LFGList.LFGRoles:
       type: boolean
 C_LFGList.LfgSearchResultData:
   fields:
+    activityID:
+      type: number
     activityIDs:
       type:
         arrayof: number
@@ -1421,9 +1530,22 @@ C_LFGList.LfgSearchResultData:
       type: boolean
     isWarMode:
       type: boolean
+    leaderDungeonScoreInfo:
+      nilable: true
+      type:
+        structure: C_LFGList.BestDungeonScoreMapInfo
+    leaderFactionGroup:
+      type: number
     leaderName:
       nilable: true
       type: string
+    leaderOverallDungeonScore:
+      nilable: true
+      type: number
+    leaderPvpRatingInfo:
+      nilable: true
+      type:
+        structure: C_LFGList.PvpRatingInfo
     name:
       type: string
     newPlayerFriendly:
@@ -1445,8 +1567,56 @@ C_LFGList.LfgSearchResultData:
       type: number
     voiceChat:
       type: string
+C_LFGList.PvpRatingInfo:
+  fields:
+    activityName:
+      type: string
+    bracket:
+      type: number
+    rating:
+      type: number
+    tier:
+      type: number
+C_LFGList.WowLocale:
+  fields:
+    deDE:
+      default: false
+      type: boolean
+    enUS:
+      default: false
+      type: boolean
+    esES:
+      default: false
+      type: boolean
+    esMX:
+      default: false
+      type: boolean
+    frFR:
+      default: false
+      type: boolean
+    itIT:
+      default: false
+      type: boolean
+    koKR:
+      default: false
+      type: boolean
+    ptBR:
+      default: false
+      type: boolean
+    ruRU:
+      default: false
+      type: boolean
+    zhCN:
+      default: false
+      type: boolean
+    zhTW:
+      default: false
+      type: boolean
 C_LossOfControl.LossOfControlData:
   fields:
+    auraInstanceID:
+      nilable: true
+      type: number
     displayText:
       type: string
     displayType:
@@ -1509,6 +1679,22 @@ C_Map.UiMapGroupMemberInfo:
     name:
       type: string
     relativeHeightIndex:
+      type: number
+C_Map.UiMapLayerInfo:
+  fields:
+    additionalZoomSteps:
+      type: number
+    layerHeight:
+      type: number
+    layerWidth:
+      type: number
+    maxScale:
+      type: number
+    minScale:
+      type: number
+    tileHeight:
+      type: number
+    tileWidth:
       type: number
 C_MapExplorationInfo.UiMapExplorationHitRect:
   fields:
@@ -1620,6 +1806,12 @@ C_ModelInfo.UIModelSceneCameraInfo:
         structure: vector3
     zoomedYawOffset:
       type: number
+C_MountJournal.MountCreatureDisplayInfo:
+  fields:
+    creatureDisplayID:
+      type: number
+    isVisible:
+      type: boolean
 C_PvP.BattlefieldCurrencyReward:
   fields:
     id:
@@ -1660,6 +1852,15 @@ C_PvP.BattlefieldVehicleInfo:
       type: number
     y:
       type: number
+C_PvP.RoleShortageReward:
+  fields:
+    rewardItemID:
+      type: number
+    rewardSpellID:
+      type: number
+    validRoles:
+      type:
+        arrayof: string
 C_QuestInfoSystem.QuestRewardSpellInfo:
   fields:
     garrFollowerID:
@@ -1694,6 +1895,14 @@ C_QuestLog.QuestObjectiveInfo:
       type: string
     type:
       type: string
+C_QuestLog.QuestOnMapInfo:
+  fields:
+    questID:
+      type: number
+    x:
+      type: number
+    y:
+      type: number
 C_QuestSession.QuestSessionPlayerDetails:
   fields:
     guid:
@@ -2488,6 +2697,8 @@ CharCustomizationCategory:
       type: number
     name:
       type: string
+    needsNativeFormCategory:
+      type: boolean
     options:
       type:
         arrayof:

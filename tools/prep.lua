@@ -1,6 +1,8 @@
 local args = (function()
   local parser = require('argparse')()
   parser:argument('product', 'product to fetch')
+  parser:option('-o --output', 'output file')
+  parser:option('-s --stamp', 'stamp file')
   return parser:parse()
 end)()
 
@@ -115,7 +117,7 @@ do
   for name, apicfg in pairs(cfg) do
     if not apicfg.debug then
       if apicfg.impl then
-        local ic = implcfg[apicfg.impl]
+        local ic = assert(implcfg[apicfg.impl], 'missing impl ' .. apicfg.impl)
         apicfg.frameworks = ic.frameworks
         apicfg.sqls = ic.sqls
         apicfg.states = ic.states
@@ -312,7 +314,7 @@ local data = {
   xml = parseYaml('data/products/' .. product .. '/xml.yaml'),
 }
 
-local outfn = 'build/products/' .. args.product .. '/data.lua'
+local outfn = args.output or ('build/products/' .. args.product .. '/data.lua')
 local tu = require('tools.util')
-tu.writedeps(outfn, deps)
+tu.writedeps(outfn, deps, args.stamp)
 tu.writeifchanged(outfn, tu.returntable(data))

@@ -1,5 +1,5 @@
 describe('addon', function()
-  for _, product in ipairs(require('wowless.util').productList()) do
+  for _, product in ipairs(require('build.data.products')) do
     describe(product, function()
       it('runs', function()
         local api = require('wowless.runner').run({

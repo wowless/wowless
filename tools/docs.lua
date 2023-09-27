@@ -5,7 +5,7 @@ local args = (function()
 end)()
 
 local lfs = require('lfs')
-local writeFile = require('pl.file').write
+local writeifchanged = require('tools.util').writeifchanged
 local parseYaml = require('wowapi.yaml').parseFile
 local pprintYaml = require('wowapi.yaml').pprint
 local product = args.product
@@ -124,6 +124,7 @@ local types = {
   ModelAsset = 'string',
   ModelSceneFrame = 'ModelScene',
   ModelSceneFrameActor = 'Actor',
+  mouseButton = 'string',
   NamePlateFrame = 'table',
   normalizedValue = 'number',
   NotificationDbId = 'string',
@@ -141,14 +142,17 @@ local types = {
   SimpleMaskTexture = 'table',
   SimplePathAnim = 'table',
   SimpleTexture = 'Texture',
+  SimpleWindow = 'table',
   SingleColorValue = 'number',
   size = 'number',
   StatusBarFillStyle = 'string',
   string = 'string',
+  stringView = 'string',
   table = 'table',
   TBFFlags = 'string',
   TBFStyleFlags = 'string',
   TextureAsset = 'string',
+  TextureAssetDisk = 'string',
   textureAtlas = 'string',
   textureKit = 'string',
   time_t = 'number',
@@ -223,7 +227,7 @@ local function t2nty(field, ns)
     -- TODO cross-check mixin
     return { structure = n }
   elseif ty == 'CallbackType' then
-    return 'function'
+    return field.Name == 'cbObject' and 'userdata' or 'function'
   else
     error(('%s has unexpected type %s'):format(n, ty))
   end
@@ -242,46 +246,58 @@ local function rewriteApis()
   local function insig(fn, ns)
     local t = {}
     for _, a in ipairs(fn.Arguments or {}) do
-      table.insert(t, {
-        default = a.Default,
-        name = a.Name,
-        nilable = a.Nilable or nil,
-        type = t2nty(a, ns),
-      })
+      -- Super duper hack, sorry world.
+      if (fn.Name == 'UnitFactionGroup' or fn.Name == 'UnitIsUnit') and a.Name:sub(1, 8) == 'unitName' then
+        assert(a.Type == 'cstring')
+        assert(not a.Default)
+        assert(not a.Nilable)
+        table.insert(t, {
+          name = a.Name,
+          type = 'unit',
+        })
+      else
+        table.insert(t, {
+          default = a.Default,
+          name = a.Name,
+          nilable = a.Nilable or nil,
+          type = t2nty(a, ns),
+        })
+      end
     end
     return t
   end
-  local function outsig(fn, ns)
+  local function outsig(fn, ns, api)
+    local stubs = {}
+    for _, output in ipairs(api and api.outputs or {}) do
+      if output.stub ~= nil then
+        stubs[output.name] = output.stub
+      end
+    end
     local outputs = {}
     for _, r in ipairs(fn.Returns or {}) do
       table.insert(outputs, {
         default = enum[r.Type] and enum[r.Type][r.Default] or r.Default,
         name = r.Name,
         nilable = r.Nilable or nil,
+        stub = stubs[r.Name],
         type = t2nty(r, ns),
       })
+      stubs[r.Name] = nil
+    end
+    if next(stubs) ~= nil then
+      error(table.concat({
+        'stub merge error on',
+        ns and (' ns = ' .. ns) or '',
+        '\n',
+        require('pl.pretty').write(fn),
+      }, ''))
     end
     return outputs
   end
   local cfgskip = deref(config, 'apis', 'skip_namespaces') or {}
-  local function skip(apis, name)
+  local function skip(name)
     local ns = split(name)
-    if ns and cfgskip[ns] then
-      return true
-    end
-    local api = apis[name]
-    if not api then
-      return false
-    end
-    if api.impl then
-      return true
-    end
-    for _, out in ipairs(api.outputs or {}) do
-      if out.stub then
-        return true
-      end
-    end
-    return false
+    return ns and cfgskip[ns]
   end
   local y = require('wowapi.yaml')
   local f = 'data/products/' .. product .. '/apis.yaml'
@@ -289,18 +305,21 @@ local function rewriteApis()
   local nss = {}
   for name, fn in pairs(funcs) do
     nss[split(name) or ''] = true
-    if not skip(apis, name) then
+    if not skip(name) then
       local ns = split(name)
+      local api = apis[name]
       apis[name] = {
+        impl = api and api.impl,
         inputs = insig(fn, ns),
-        outputs = outsig(fn, ns),
+        mayreturnnothing = api and api.mayreturnnothing,
+        outputs = outsig(fn, ns, api),
       }
     end
   end
   for k in pairs(cfgskip) do
     assert(nss[k], k .. ' in skip_namespaces but not in docs')
   end
-  require('pl.file').write(f, y.pprint(apis))
+  writeifchanged(f, y.pprint(apis))
   return apis
 end
 
@@ -332,7 +351,7 @@ local function rewriteEvents()
   for k in pairs(neversent) do
     assert(seen[k], k .. ' is marked never_sent but not present in docs')
   end
-  writeFile(filename, pprintYaml(out))
+  writeifchanged(filename, pprintYaml(out))
   return out
 end
 
@@ -380,7 +399,7 @@ local function rewriteStructures(outApis, outEvents)
   for _, event in pairs(outEvents) do
     processList(event.payload)
   end
-  writeFile(filename, pprintYaml(out))
+  writeifchanged(filename, pprintYaml(out))
 end
 
 local outApis = rewriteApis()

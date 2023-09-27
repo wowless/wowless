@@ -891,6 +891,15 @@ Enum:
     MaxValue: 6
     MinValue: 0
     NumValues: 7
+  CameraModeAspectRatio:
+    Cinemascope_2_Dot_4_X_1: 3
+    Default: 0
+    HighDefinition_16_X_9: 2
+    LegacyLetterbox: 1
+  CameraModeAspectRatioMeta:
+    MaxValue: 3
+    MinValue: 0
+    NumValues: 4
   CharacterServiceInfoFlag:
     RestrictToRecommendedSpecs: 1
   CharacterServiceInfoFlagMeta:
@@ -989,17 +998,6 @@ Enum:
     MaxValue: 2
     MinValue: 0
     NumValues: 3
-  CinematicAspectRatio:
-    Cinemascope2Dot4X_1: 5
-    Hd_16_X_9: 4
-    Legacy_16_X_9: 1
-    NoAspectRatioSpecified: 0
-    Sd_4_X_3: 3
-    Square_1_X_1: 2
-  CinematicAspectRatioMeta:
-    MaxValue: 5
-    MinValue: 0
-    NumValues: 6
   ClientPlatformType:
     Macintosh: 1
     Windows: 0
@@ -1553,11 +1551,12 @@ Enum:
     FlagPlayerItemAssignment: 2
     FlagSortLast: 1
     Hidden: 4
+    StartsCollapsed: 16
     Virtual: 8
   CurrencyTokenCategoryFlagsMeta:
-    MaxValue: 8
+    MaxValue: 16
     MinValue: 1
-    NumValues: 4
+    NumValues: 5
   Cursormode:
     AttackCursor: 4
     AttackErrorCursor: 39
@@ -1712,6 +1711,17 @@ Enum:
     MaxValue: 1
     MinValue: 0
     NumValues: 2
+  DisableAccountProfilesFlags:
+    Document: 1
+    ItemsCollections: 16
+    MountsCollections: 4
+    None: 0
+    PetsCollections: 8
+    SharedCollections: 2
+  DisableAccountProfilesFlagsMeta:
+    MaxValue: 16
+    MinValue: 0
+    NumValues: 6
   EnvironmentalDamageFlags:
     DmgIsPct: 2
     OneTime: 1
