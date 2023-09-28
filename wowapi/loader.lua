@@ -68,24 +68,54 @@ local function loadFunctions(api, loader)
   end
 
   local function mkfn(fname, apicfg)
-    local function base()
-      if apicfg.stub then
-        local text = ('local Mixin = ...; return function() %s end'):format(apicfg.stub)
-        return assert(loadstring(text))(stubMixin)
-      elseif apicfg.impl then
-        return impls[apicfg.impl]
-      else
-        error(('invalid function %q'):format(fname))
+    local basefn
+    if apicfg.stub then
+      local text = ('local Mixin = ...; return function() %s end'):format(apicfg.stub)
+      basefn = assert(loadstring(text))(stubMixin)
+    elseif apicfg.impl then
+      basefn = impls[apicfg.impl]
+    else
+      error(('invalid function %q'):format(fname))
+    end
+
+    local specials = {}
+    for _, fw in ipairs(apicfg.frameworks or {}) do
+      table.insert(specials, (assert(frameworks[fw], 'unknown framework ' .. fw)))
+    end
+    for _, st in ipairs(apicfg.states or {}) do
+      table.insert(specials, api.states[st])
+    end
+    for _, sql in ipairs(apicfg.sqls or {}) do
+      table.insert(specials, sql.lookup and sqls.lookups[sql.lookup] or sqls.cursors[sql.cursor])
+    end
+    local specialfn
+    if not next(specials) then
+      specialfn = basefn
+    else
+      local nspecials = #specials
+      specialfn = function(...)
+        local t = {}
+        for _, v in ipairs(specials) do
+          table.insert(t, v)
+        end
+        local n = select('#', ...)
+        for i = 1, n do
+          local v = select(i, ...)
+          if i then
+            t[nspecials + i] = v
+          end
+        end
+        return basefn(unpack(t, 1, nspecials + n))
       end
     end
 
-    local function checkInputs(fn)
-      if not apicfg.inputs then
-        return fn
-      end
+    local infn
+    if not apicfg.inputs then
+      infn = specialfn
+    else
       local sig = apicfg.inputs
       local nsig = #apicfg.inputs
-      return function(...)
+      infn = function(...)
         local args = {}
         for i, param in ipairs(sig) do
           local v, errmsg, iswarn = typechecker(param, (select(i, ...)))
@@ -100,44 +130,14 @@ local function loadFunctions(api, loader)
             end
           end
         end
-        return fn(unpack(args, 1, nsig))
+        return specialfn(unpack(args, 1, nsig))
       end
     end
 
-    local function addSpecialArgs(fn)
-      local args = {}
-      for _, fw in ipairs(apicfg.frameworks or {}) do
-        table.insert(args, (assert(frameworks[fw], 'unknown framework ' .. fw)))
-      end
-      for _, st in ipairs(apicfg.states or {}) do
-        table.insert(args, api.states[st])
-      end
-      for _, sql in ipairs(apicfg.sqls or {}) do
-        table.insert(args, sql.lookup and sqls.lookups[sql.lookup] or sqls.cursors[sql.cursor])
-      end
-      if not next(args) then
-        return fn
-      end
-      return function(...)
-        local t = {}
-        for _, v in ipairs(args) do
-          table.insert(t, v)
-        end
-        local n = select('#', ...)
-        for i = 1, n do
-          local v = select(i, ...)
-          if i then
-            t[#args + i] = v
-          end
-        end
-        return fn(unpack(t, 1, #args + n))
-      end
-    end
-
-    local function checkOutputs(fn)
-      if not apicfg.impl or not apicfg.outputs then
-        return fn
-      end
+    local outfn
+    if not apicfg.impl or not apicfg.outputs then
+      outfn = infn
+    else
       local nouts = #apicfg.outputs
       local function doCheckOutputs(...)
         local n = select('#', ...)
@@ -157,16 +157,11 @@ local function loadFunctions(api, loader)
         end
         return unpack(rets, 1, nouts)
       end
-      return function(...)
-        return doCheckOutputs(fn(...))
+      outfn = function(...)
+        return doCheckOutputs(infn(...))
       end
     end
-
-    local function maybeCWrap(fn)
-      return apicfg.nowrap and fn or debug.newcfunction(fn)
-    end
-
-    return maybeCWrap(checkOutputs(checkInputs(addSpecialArgs(base()))))
+    return apicfg.nowrap and outfn or debug.newcfunction(outfn)
   end
 
   local fns = {}
