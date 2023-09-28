@@ -109,6 +109,7 @@ local function loadFunctions(api, loader)
       end
     end
 
+    local edepth = 2
     local infn
     if not apicfg.inputs then
       infn = specialfn
@@ -130,6 +131,10 @@ local function loadFunctions(api, loader)
             end
           end
         end
+        if select('#', ...) > nsig then
+          local d = debug.getinfo(edepth)
+          api.log(1, 'warning: too many arguments passed to %s at %s:%d', fname, d.source:sub(2), d.currentline)
+        end
         return specialfn(unpack(args, 1, nsig))
       end
     end
@@ -138,6 +143,7 @@ local function loadFunctions(api, loader)
     if not apicfg.impl or not apicfg.outputs then
       outfn = infn
     else
+      edepth = edepth + 1
       local nouts = #apicfg.outputs
       local function doCheckOutputs(...)
         local n = select('#', ...)
@@ -161,7 +167,13 @@ local function loadFunctions(api, loader)
         return doCheckOutputs(infn(...))
       end
     end
-    return apicfg.nowrap and outfn or debug.newcfunction(outfn)
+
+    if apicfg.nowrap then
+      return outfn
+    else
+      edepth = edepth + 1
+      return debug.newcfunction(outfn)
+    end
   end
 
   local fns = {}
