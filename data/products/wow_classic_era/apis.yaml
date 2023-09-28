@@ -9551,6 +9551,7 @@ GetDownloadedPercentage:
   inputs: {}
   outputs:
   - type: number
+GetDuelerInfo: {}
 GetDungeonDifficultyID:
   inputs: {}
   outputs:
