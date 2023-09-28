@@ -490,7 +490,8 @@ C_AddOns.GetAddOnEnableState:
     type: string
   outputs:
   - name: state
-    type: number
+    type:
+      enum: AddOnEnableState
 C_AddOns.GetAddOnInfo:
   impl: GetAddOnInfo
   inputs:
@@ -506,7 +507,6 @@ C_AddOns.GetAddOnInfo:
   - name: loadable
     type: boolean
   - name: reason
-    nilable: true
     type: string
   - name: security
     type: string
@@ -536,6 +536,21 @@ C_AddOns.GetNumAddOns:
   outputs:
   - name: numAddOns
     type: number
+C_AddOns.IsAddOnLoadable:
+  inputs:
+  - name: name
+    type: uiAddon
+  - default: '0'
+    name: character
+    type: string
+  - default: false
+    name: demandLoaded
+    type: boolean
+  outputs:
+  - name: loadable
+    type: boolean
+  - name: reason
+    type: string
 C_AddOns.IsAddOnLoaded:
   impl: IsAddOnLoaded
   inputs:
@@ -14174,6 +14189,11 @@ C_PvP.IsBattlegroundEnlistmentBonusActive:
     type: boolean
   - name: brawlActive
     type: boolean
+C_PvP.IsBrawlSoloRBG:
+  inputs: {}
+  outputs:
+  - name: isBrawlSoloRBG
+    type: boolean
 C_PvP.IsBrawlSoloShuffle:
   inputs: {}
   outputs:
@@ -14233,6 +14253,11 @@ C_PvP.IsRatedSoloShuffle:
   inputs: {}
   outputs:
   - name: isRatedSoloShuffle
+    type: boolean
+C_PvP.IsSoloRBG:
+  inputs: {}
+  outputs:
+  - name: isSoloRBG
     type: boolean
 C_PvP.IsSoloShuffle:
   inputs: {}
@@ -20930,6 +20955,24 @@ C_WeeklyRewards.GetItemHyperlink:
   outputs:
   - name: hyperlink
     type: string
+C_WeeklyRewards.GetNextActivitiesIncrease:
+  inputs:
+  - name: activityTierID
+    type: number
+  - name: level
+    type: number
+  outputs:
+  - name: hasSeasonData
+    type: boolean
+  - name: nextActivityTierID
+    nilable: true
+    type: number
+  - name: nextLevel
+    nilable: true
+    type: number
+  - name: itemLevel
+    nilable: true
+    type: number
 C_WeeklyRewards.GetNextMythicPlusIncrease:
   inputs:
   - name: mythicPlusLevel

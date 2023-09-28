@@ -87,6 +87,9 @@ Constants:
     MainHandTransmogIsIndividualWeapon: -1
     MainHandTransmogIsPairedWeapon: 0
     NoTransmogID: 0
+  WeeklyRewardsConsts:
+    ABORT_ITEM_RETENTION_DAYS: 15
+    WEEKLY_REWARD_ITEM_RETENTION_DAYS: 15
 Enum:
   AccountData:
     Bindings: 2
@@ -172,10 +175,11 @@ Enum:
     SettingsLoaded: '0x0000000000001000'
     TrialBoostHistoryLoaded: '0x0000000000100000'
     VasTransactionsLoaded: '0x0000000000040000'
+    WoWTokenPurchaseLoaded: '0x0000001000000000'
   AccountStateFlagsMeta:
     MaxValue: -2147483648
     MinValue: 0
-    NumValues: 35
+    NumValues: 36
   ActionBarOrientation:
     Horizontal: 0
     Vertical: 1
@@ -192,6 +196,14 @@ Enum:
     MaxValue: 3
     MinValue: 0
     NumValues: 4
+  AddOnEnableState:
+    All: 2
+    None: 0
+    Some: 1
+  AddOnEnableStateMeta:
+    MaxValue: 2
+    MinValue: 0
+    NumValues: 3
   AddSoulbindConduitReason:
     Cheat: 1
     None: 0
@@ -1836,6 +1848,7 @@ Enum:
     CatalystBalancing: 57
     CatalystCraft: 58
     Cheat: 4
+    ConvertItemsToCurrencyAndReputation: 62
     ConvertItemsToCurrencyValue: 48
     ConvertOldItem: 0
     ConvertOldPvPCurrency: 1
@@ -1856,7 +1869,7 @@ Enum:
     GuildBankWithdrawal: 21
     ItemDeletion: 14
     ItemRefund: 2
-    Last: 62
+    Last: 63
     LFGReward: 11
     Loot: 9
     PhBuffer_53: 53
@@ -1889,9 +1902,9 @@ Enum:
     WorldQuestReward: 35
     WorldQuestRewardIgnoreCapsDeprecated: 36
   CurrencySourceMeta:
-    MaxValue: 62
+    MaxValue: 63
     MinValue: 0
-    NumValues: 63
+    NumValues: 64
   CurrencyTokenCategoryFlags:
     FlagPlayerItemAssignment: 2
     FlagSortLast: 1
@@ -3026,12 +3039,15 @@ Enum:
     CharacterBoost_3: 86
     CorpseRecovery: 80
     DungeonHeroic: 2
+    DungeonHeroicJackpot: 102
     DungeonLevelUp_1: 17
     DungeonLevelUp_2: 18
     DungeonLevelUp_3: 19
     DungeonLevelUp_4: 20
     DungeonMythic: 23
+    DungeonMythicJackpot: 103
     DungeonNormal: 1
+    DungeonNormalJackpot: 101
     ForceNone: 21
     LegendaryCrafting_1: 63
     LegendaryCrafting_2: 64
@@ -3117,9 +3133,9 @@ Enum:
     WorldQuest_9: 42
     WorldQuestJackpot: 74
   ItemCreationContextMeta:
-    MaxValue: 100
+    MaxValue: 103
     MinValue: 0
-    NumValues: 101
+    NumValues: 104
   ItemDisplayTextDisplayStyle:
     ItemNameAndInfoText: 1
     ItemNameOnlyCentered: 2
@@ -5659,6 +5675,7 @@ Enum:
     AlwaysAllowTaxiPathing: 131072
     AlwaysAllowUserWaypoints: 65536
     Deprecated: 512
+    DoNotShowOnNavbar: 524288
     FallbackToParentMap: 16
     FlightMapAutoZoom: 16384
     FlightMapShowZoomOut: 8192
@@ -5676,9 +5693,9 @@ Enum:
     ShowTaskObjectives: 64
     ShowTaxiNodes: 4
   UIMapFlagMeta:
-    MaxValue: 262144
+    MaxValue: 524288
     MinValue: 1
-    NumValues: 19
+    NumValues: 20
   UIMapSystem:
     Adventure: 2
     Minimap: 3
@@ -6084,10 +6101,30 @@ Enum:
     MaxValue: 13
     MinValue: 0
     NumValues: 14
+  WeeklyRewardChestActivityType:
+    LFGDungeons: 1
+    Scenario: 0
+  WeeklyRewardChestActivityTypeMeta:
+    MaxValue: 1
+    MinValue: 0
+    NumValues: 2
+  WeeklyRewardChestClaimRewardResult:
+    CountExceeded: 7
+    DbError: 5
+    InvalidSlot: 3
+    InvalidThreshold: 1
+    LockFailure: 6
+    PlayerNotFound: 2
+    Success: 0
+    TooManyItems: 4
+  WeeklyRewardChestClaimRewardResultMeta:
+    MaxValue: 7
+    MinValue: 0
+    NumValues: 8
   WeeklyRewardChestThresholdType:
+    Activities: 1
     AlsoReceive: 4
     Concession: 5
-    MythicPlus: 1
     None: 0
     Raid: 3
     RankedPvP: 2
@@ -6095,6 +6132,16 @@ Enum:
     MaxValue: 5
     MinValue: 0
     NumValues: 6
+  WeeklyRewardProgressResult:
+    DbError: 3
+    NoPlayer: 4
+    NoSeason: 1
+    Success: 0
+    TimedOut: 2
+  WeeklyRewardProgressResultMeta:
+    MaxValue: 4
+    MinValue: 0
+    NumValues: 5
   WidgetAnimationType:
     Fade: 1
     None: 0
