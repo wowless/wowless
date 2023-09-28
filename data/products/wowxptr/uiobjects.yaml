@@ -2152,7 +2152,7 @@ TextureBase:
   virtual: true
 TextureCoordTranslation:
   inherits:
-    Animation: {}
+    Translation: {}
   methods: {}
 Translation:
   inherits:

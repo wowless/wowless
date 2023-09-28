@@ -414,6 +414,13 @@ function G.GeneratedTests()
       Texture = function()
         return CreateFrame('Frame'):CreateTexture()
       end,
+      TextureCoordTranslation = (function()
+        local count = 0
+        return function()
+          count = count + 1
+          return _G.WowlessUIObjectTest.AnimationGroup['TextureCoordTranslation' .. count]
+        end
+      end)(),
       Translation = function()
         return CreateFrame('Frame'):CreateAnimationGroup():CreateAnimation('Translation')
       end,
@@ -453,7 +460,7 @@ function G.GeneratedTests()
               })
             end
           end
-          if not cfg.virtual and name ~= 'TextureCoordTranslation' then -- FIXME
+          if not cfg.virtual then
             local factory = factories[name]
               or cfg.frametype and function()
                 return assertCreateFrame(name)

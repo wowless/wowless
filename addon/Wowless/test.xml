@@ -598,4 +598,13 @@
       </Frame>
     </Frames>
   </Frame>
+
+  <Frame name='WowlessUIObjectTest'>
+    <Animations>
+      <AnimationGroup parentKey='AnimationGroup'>
+        <TextureCoordTranslation parentKey='TextureCoordTranslation1' />
+        <TextureCoordTranslation parentKey='TextureCoordTranslation2' />
+      </AnimationGroup>
+    </Animations>
+  </Frame>
 </Ui>
