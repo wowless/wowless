@@ -7490,6 +7490,8 @@ C_WeeklyRewards.WeeklyRewardActivityEncounterInfo:
       type: number
 C_WeeklyRewards.WeeklyRewardActivityInfo:
   fields:
+    activityTierID:
+      type: number
     claimID:
       nilable: true
       type: number
