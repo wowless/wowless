@@ -607,4 +607,16 @@
       </AnimationGroup>
     </Animations>
   </Frame>
+
+  <Script>
+    WowlessLog = {}
+  </Script>
+  <ScopedModifier>
+    <Script>
+      table.insert(WowlessLog, 'moo')
+    </Script>
+  </ScopedModifier>
+  <Script>
+    assertEquals('moo', table.concat(WowlessLog, ','))
+  </Script>
 </Ui>

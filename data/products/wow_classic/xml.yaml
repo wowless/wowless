@@ -1141,6 +1141,7 @@ ScopedModifier:
   contents:
     Actor: {}
     LayoutFrame: {}
+    Script: {}
   impl: transparent
 Script:
   attributes:
