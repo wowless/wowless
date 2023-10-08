@@ -144,7 +144,8 @@ local function loader(api, cfg)
     elseif script.text then
       local args = xmlimpls[string.lower(script.type)].tag.script.args or 'self, ...'
       local fnstr = 'return function(' .. args .. ') ' .. script.text .. ' end'
-      fn = setfenv(loadstr(fnstr, filename, script.line), env)()
+      local outfn = setfenv(loadstr(fnstr, filename, script.line), api.env)
+      fn = setfenv(outfn(), env)
       scriptCache[script] = fn
     end
     if obj.scripts then

@@ -619,4 +619,14 @@
   <Script>
     assertEquals('moo', table.concat(WowlessLog, ','))
   </Script>
+
+  <ScopedModifier scriptsUseGivenEnv='true'>
+    <Frame>
+      <Scripts>
+        <OnLoad>
+          assertEquals(addonEnv, globalEnv.getfenv(1))
+        </OnLoad>
+      </Scripts>
+    </Frame>
+  </ScopedModifier>
 </Ui>
