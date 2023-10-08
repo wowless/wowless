@@ -20939,6 +20939,13 @@ C_WeeklyRewards.GetConquestWeeklyProgress:
   - name: weeklyProgress
     type:
       structure: C_WeeklyRewards.ConquestWeeklyProgress
+C_WeeklyRewards.GetDifficultyIDForActivityTier:
+  inputs:
+  - name: activityTierID
+    type: number
+  outputs:
+  - name: difficultyID
+    type: number
 C_WeeklyRewards.GetExampleRewardItemHyperlinks:
   inputs:
   - name: id
@@ -20985,6 +20992,15 @@ C_WeeklyRewards.GetNextMythicPlusIncrease:
     type: number
   - name: itemLevel
     nilable: true
+    type: number
+C_WeeklyRewards.GetNumCompletedDungeonRuns:
+  inputs: {}
+  outputs:
+  - name: numHeroic
+    type: number
+  - name: numMythic
+    type: number
+  - name: numMythicPlus
     type: number
 C_WeeklyRewards.GetWeeklyRewardTextureKit:
   inputs: {}

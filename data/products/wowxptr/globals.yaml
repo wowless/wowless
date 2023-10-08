@@ -56,6 +56,7 @@ Constants:
   ITEM_WEAPON_SUBCLASSConstants:
     ITEM_WEAPON_SUBCLASS_NONE: -1
   ItemConsts:
+    MAX_LOOT_OBJECT_ITEMS: 31
     NUM_ITEM_ENCHANTMENT_SOCKETS: 3
   LevelConstsExposed:
     MIN_ACHIEVEMENT_LEVEL: 10
@@ -1869,11 +1870,13 @@ Enum:
     GuildBankWithdrawal: 21
     ItemDeletion: 14
     ItemRefund: 2
-    Last: 63
+    Last: 65
     LFGReward: 11
     Loot: 9
     PhBuffer_53: 53
     PhBuffer_54: 54
+    PhBuffer_63: 63
+    PhBuffer_64: 64
     PlayerTrait: 52
     PlayerTraitRefund: 60
     ProfessionInitialAward: 59
@@ -1902,9 +1905,9 @@ Enum:
     WorldQuestReward: 35
     WorldQuestRewardIgnoreCapsDeprecated: 36
   CurrencySourceMeta:
-    MaxValue: 63
+    MaxValue: 65
     MinValue: 0
-    NumValues: 64
+    NumValues: 66
   CurrencyTokenCategoryFlags:
     FlagPlayerItemAssignment: 2
     FlagSortLast: 1
