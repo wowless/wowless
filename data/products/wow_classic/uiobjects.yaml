@@ -2124,8 +2124,3 @@ UnitPositionFrame:
     SetUnitColor: {}
     StartPlayerPing: {}
     StopPlayerPing: {}
-WorldFrame:
-  inherits:
-    Frame: {}
-  methods: {}
-  singleton: true

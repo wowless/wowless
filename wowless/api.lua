@@ -262,7 +262,7 @@ local function new(log, maxErrors, product)
   local function CreateFrame(type, name, parent, templateNames, id)
     local ltype = string.lower(type)
     if not IsIntrinsicType(ltype) or not InheritsFrom(ltype, 'frame') then
-      if not uiobjectTypes[ltype] or uiobjectTypes[ltype].warner then
+      if ltype ~= 'worldframe' and (not uiobjectTypes[ltype] or uiobjectTypes[ltype].warner) then
         SendEvent('LUA_WARNING', 0, 'Unknown frame type: ' .. type)
       end
       error('CreateFrame: Unknown frame type \'' .. type .. '\'')

@@ -470,7 +470,7 @@ local function loader(api, cfg)
 
       function loadElement(ctx, e, parent)
         -- This assumes that uiobject types and xml types are the same "space" of strings.
-        if api.IsIntrinsicType(e.type) then
+        if api.IsIntrinsicType(e.type) or e.type == 'worldframe' then
           ctx = not e.attr.intrinsic and ctx or mixin({}, ctx, { intrinsic = true })
           local template = {
             inherits = e.attr.inherits,
@@ -516,7 +516,10 @@ local function loader(api, cfg)
               if virtual and ctx.ignoreVirtual then
                 api.log(1, 'ignoring virtual on ' .. tostring(name))
               end
-              return api.CreateUIObject(e.type, name, parent, ctx.useAddonEnv and addonEnv or nil, { template })
+              if e.type ~= 'worldframe' or not addonEnv then
+                local ety = e.type == 'worldframe' and 'frame' or e.type
+                return api.CreateUIObject(ety, name, parent, ctx.useAddonEnv and addonEnv or nil, { template })
+              end
             end
           end
         else

@@ -801,6 +801,18 @@ local syncTests = function()
       }, '\n')
       assertEquals(expected, table.concat(log, '\n'))
     end,
+    WorldFrame = function()
+      return {
+        ['is a normal frame'] = function()
+          if _G.WorldFrame then
+            assertEquals('Frame', _G.WorldFrame:GetObjectType())
+          end
+        end,
+        ['is not a frame type'] = function()
+          assertEquals(false, (pcall(CreateFrame, 'WorldFrame')))
+        end,
+      }
+    end,
   }
 end
 

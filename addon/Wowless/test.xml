@@ -661,4 +661,18 @@
       </Scripts>
     </Frame>
   </ScopedModifier>
+
+  <Script>
+    WowlessLog = {}
+  </Script>
+  <WorldFrame>
+    <Scripts>
+      <OnLoad>
+        table.insert(WowlessLog, 'moo')
+      </OnLoad>
+    </Scripts>
+  </WorldFrame>
+  <Script>
+    assertEquals(nil, (next(WowlessLog)))
+  </Script>
 </Ui>
