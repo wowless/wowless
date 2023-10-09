@@ -251,13 +251,9 @@ local function loader(api, cfg)
       if minColor and maxColor then
         local minR, minG, minB, minA = getColor(minColor)
         local maxR, maxG, maxB, maxA = getColor(maxColor)
-        if parent.SetGradientAlpha then
-          parent:SetGradientAlpha(e.attr.orientation, minR, minG, minB, minA, maxR, maxG, maxB, maxA)
-        else
-          local min = { r = minR, g = minG, b = minB, a = minA }
-          local max = { r = maxR, g = maxG, b = maxB, a = maxA }
-          parent:SetGradient(e.attr.orientation, min, max)
-        end
+        local min = { r = minR, g = minG, b = minB, a = minA }
+        local max = { r = maxR, g = maxG, b = maxB, a = maxA }
+        parent:SetGradient(e.attr.orientation, min, max)
       end
     end,
     highlightcolor = function(_, e, parent)
