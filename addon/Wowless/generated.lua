@@ -425,25 +425,9 @@ function G.GeneratedTests()
         return CreateFrame('Frame'):CreateAnimationGroup():CreateAnimation('Translation')
       end,
     }
-    local exceptions = { -- TODO remove need for this
-      Line = {
-        AdjustPointsOffset = true,
-        ClearPointByName = true,
-        ClearPointsOffset = true,
-        GetNumPoints = true,
-        GetPoint = true,
-        GetPointByName = true,
-        SetAllPoints = true,
-        SetHeight = true,
-        SetPoint = true,
-        SetSize = true,
-        SetWidth = true,
-      },
-    }
     local tests = {}
     for name, cfg in pairs(_G.WowlessData.UIObjectApis) do
       tests[name] = function()
-        local exc = exceptions[name]
         if cfg == false then
           assertCreateFrameFails(name)
           table.insert(G.ExpectedLuaWarnings, {
@@ -470,9 +454,7 @@ function G.GeneratedTests()
               local mtests = {}
               for mname in pairs(cfg.methods) do
                 mtests[mname] = function()
-                  if not exc or not exc[mname] then
-                    return checkCFunc(__index[mname])
-                  end
+                  return checkCFunc(__index[mname])
                 end
               end
               return mtests
