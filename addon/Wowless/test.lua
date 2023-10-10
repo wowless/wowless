@@ -810,6 +810,10 @@ local syncTests = function()
         end,
         ['is not a frame type'] = function()
           assertEquals(false, (pcall(CreateFrame, 'WorldFrame')))
+          table.insert(_G.Wowless.ExpectedLuaWarnings, {
+            warnText = 'Unknown frame type: WorldFrame',
+            warnType = 0,
+          })
         end,
       }
     end,
