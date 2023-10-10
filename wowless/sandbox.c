@@ -32,49 +32,58 @@ static int sandbox_gc(lua_State *L) {
 static int sandbox_dump(lua_State *L) {
   sandbox *S = sandbox_check(L, 1);
   lua_State *SL = S->L;
+  lua_pushvalue(SL, LUA_GLOBALSINDEX);
   lua_pushnil(SL);
-  while (lua_next(SL, LUA_GLOBALSINDEX) != 0) {
-    puts(lua_tostring(SL, -2));
+  while (lua_gettop(SL) > 0) {
+    if (lua_next(SL, -2) != 0) {
+      puts(lua_tostring(SL, -2));
+      if (lua_type(SL, -1) == LUA_TTABLE) {
+        lua_pushnil(SL);
+        continue;
+      }
+    }
     lua_pop(SL, 1);
   }
   return 0;
 }
 
-static void sandbox_import_recursive(lua_State *L, lua_State *SL) {
-  lua_pushnil(L);
-  while (lua_next(L, -2) != 0) {
-    if (!lua_type(L, -2) == LUA_TSTRING) {
-      lua_settop(SL, 0);
-      luaL_error(L, "invalid key");
-    }
-    lua_pushstring(SL, lua_tostring(L, -2));
-    switch (lua_type(L, -1)) {
-      case LUA_TNUMBER:
-        lua_pushnumber(SL, lua_tonumber(L, -1));
-        break;
-      case LUA_TSTRING:
-        lua_pushstring(SL, lua_tostring(L, -1));
-        break;
-      case LUA_TTABLE:
-        lua_newtable(SL);
-        sandbox_import_recursive(L, SL);
-        break;
-      default:
-        lua_settop(SL, 0);
-        luaL_error(L, "invald value");
-    }
-    lua_settable(SL, -3);
-    lua_pop(L, 1);
-  }
-}
-
 static int sandbox_import(lua_State *L) {
   sandbox *S = sandbox_check(L, 1);
+  lua_State *SL = S->L;
   luaL_checktype(L, 2, LUA_TTABLE);
   lua_settop(L, 2);
-  lua_pushvalue(S->L, LUA_GLOBALSINDEX);
-  sandbox_import_recursive(L, S->L);
-  lua_pop(S->L, 1);
+  lua_pushnil(L);
+  lua_pushvalue(SL, LUA_GLOBALSINDEX);
+  while (lua_gettop(L) > 1) {
+    if (lua_next(L, -2) == 0) {
+      if (lua_gettop(SL) > 1) {
+        lua_settable(SL, -3);
+      }
+    } else if (!lua_type(L, -2) == LUA_TSTRING) {
+      lua_settop(SL, 0);
+      luaL_error(L, "invalid key");
+    } else {
+      lua_pushstring(SL, lua_tostring(L, -2));
+      switch (lua_type(L, -1)) {
+        case LUA_TNUMBER:
+          lua_pushnumber(SL, lua_tonumber(L, -1));
+          break;
+        case LUA_TSTRING:
+          lua_pushstring(SL, lua_tostring(L, -1));
+          break;
+        case LUA_TTABLE:
+          lua_pushnil(L);
+          lua_newtable(SL);
+          continue;
+        default:
+          lua_settop(SL, 0);
+          luaL_error(L, "invald value");
+      }
+      lua_settable(SL, -3);
+    }
+    lua_pop(L, 1);
+  }
+  lua_pop(SL, 1);
   return 0;
 }
 
