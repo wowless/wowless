@@ -3514,6 +3514,8 @@ GLUE_CONSOLE_LOG:
     type: string
 GLUE_SCREENSHOT_FAILED:
   payload: {}
+GLUE_SCREENSHOT_SUCCEEDED:
+  payload: {}
 GLYPH_ADDED:
   payload:
   - name: glyphSlot
