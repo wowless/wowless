@@ -1403,6 +1403,7 @@ lua2c(
   wowless.loader=${CMAKE_CURRENT_SOURCE_DIR}/wowless/loader.lua
   wowless.profiler=${CMAKE_CURRENT_SOURCE_DIR}/wowless/profiler.lua
   wowless.runner=${CMAKE_CURRENT_SOURCE_DIR}/wowless/runner.lua
+  wowless.sandbox=c
   wowless.typecheck=${CMAKE_CURRENT_SOURCE_DIR}/wowless/typecheck.lua
   wowless.xml=${CMAKE_CURRENT_SOURCE_DIR}/wowless/xml.lua
 )
@@ -1410,6 +1411,7 @@ add_library(
   wowlesslib STATIC
   wowlesslib.c
   wowless/ext.c
+  wowless/sandbox.c
 )
 target_link_libraries(wowlesslib elune)
 
