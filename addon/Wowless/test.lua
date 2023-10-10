@@ -1,4 +1,4 @@
-local addonName, G = ...
+local addonName, G, extraArg = ...
 local assertEquals = _G.assertEquals
 
 local check0 = G.check0
@@ -615,6 +615,21 @@ local syncTests = function()
               }
             end,
           }
+        end,
+      }
+    end,
+
+    loading = function()
+      return {
+        addonName = function()
+          assertEquals('Wowless', addonName)
+        end,
+        addonTable = function()
+          assertEquals('table', type(G))
+          assertEquals(nil, getmetatable(G))
+        end,
+        extraArg = function()
+          assertEquals(nil, extraArg)
         end,
       }
     end,

@@ -335,7 +335,7 @@ local function loader(api, cfg)
     end,
   }
 
-  local function forAddon(addonName, addonEnv, addonRoot)
+  local function forAddon(addonName, addonEnv, addonRoot, isSecure)
     local loadFile
 
     local xmlattrlang = {
@@ -597,8 +597,15 @@ local function loader(api, cfg)
           success, content = pcall(readFile, secondaryFileName)
         end
         if success then
-          -- TODO only pass SecureCapsuleGet on signed addons
-          loadFn(filename, content, nil, closureTaint, addonName, addonEnv, api.env.SecureCapsuleGet)
+          loadFn(
+            filename,
+            content,
+            nil,
+            closureTaint,
+            addonName,
+            addonEnv,
+            isSecure and api.env.SecureCapsuleGet or nil
+          )
         else
           api.log(1, 'skipping missing file %s', filename)
         end
@@ -756,7 +763,7 @@ local function loader(api, cfg)
         end
       end
       api.log(1, 'loading addon files for %s', addonName)
-      local loadFile = forAddon(addonName, {}, toc.dir)
+      local loadFile = forAddon(addonName, {}, toc.dir, not not toc.fdid)
       for _, file in ipairs(toc.files) do
         loadFile(file)
       end
@@ -783,7 +790,7 @@ local function loader(api, cfg)
 
   local function loadFrameXml()
     local tocdir = path.join(rootDir, 'Interface', 'FrameXML')
-    local loadFile = forAddon(nil, nil, tocdir)
+    local loadFile = forAddon(nil, nil, tocdir, true)
     for tag, text in sqlitedb:urows('SELECT BaseTag, TagText_lang FROM GlobalStrings') do
       api.env[tag] = text
     end
