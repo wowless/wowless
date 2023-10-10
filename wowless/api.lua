@@ -3,7 +3,7 @@ local hlist = require('wowless.hlist')
 
 local function new(log, maxErrors, product)
   local allEventRegistrations = hlist()
-  local env = {}
+  local env = require('wowless.sandbox').create()
   local errors = 0
   local eventRegistrations = {}
   local frames = hlist()
