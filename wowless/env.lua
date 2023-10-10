@@ -16,10 +16,11 @@ local function dump(api)
 end
 
 local function init(api, loader, lite)
+  api.env:import(api.datalua.globals)
+  api.env:dump()
+  os.exit(0)
   api.impls = require('wowapi.loader').loadFunctions(api, loader)
-  api.env._G = api.env
   Mixin(api.env, deepcopy(api.impls))
-  Mixin(api.env, deepcopy(api.datalua.globals))
 
   local wowlessDebug = Mixin({}, debug)
   wowlessDebug.debug = function()
