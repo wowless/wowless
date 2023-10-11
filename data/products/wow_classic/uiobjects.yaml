@@ -590,6 +590,7 @@ EditBox:
     HighlightText: {}
     Insert:
       impl: EditBox/Insert
+    IsAlphabeticOnly: {}
     IsAutoFocus:
       getter:
       - name: isAutoFocus
@@ -604,10 +605,13 @@ EditBox:
       getter:
       - name: isMultiLine
     IsNumeric: {}
+    IsNumericFullRange: {}
     IsPassword: {}
     IsSecureText:
       getter:
       - name: isSecureText
+    ResetInputMode: {}
+    SetAlphabeticOnly: {}
     SetAltArrowKeyMode: {}
     SetAutoFocus:
       setter:
@@ -636,6 +640,7 @@ EditBox:
       - name: isMultiLine
     SetNumber: {}
     SetNumeric: {}
+    SetNumericFullRange: {}
     SetPassword: {}
     SetSecureText:
       setter:
@@ -844,6 +849,7 @@ Frame:
     Region: {}
     ScriptObject: {}
   methods:
+    AbortDrag: {}
     CanChangeAttribute: {}
     CreateFontString:
       impl: Frame/CreateFontString
@@ -956,6 +962,7 @@ Frame:
     HasFixedFrameStrata:
       getter:
       - name: hasFixedFrameStrata
+    InterceptStartDrag: {}
     IsClampedToScreen:
       getter:
       - name: isClampedToScreen
@@ -1094,6 +1101,7 @@ GameTooltip:
     SetBagItem: {}
     SetBagItemChild: {}
     SetBuybackItem: {}
+    SetCompanionPet: {}
     SetCompareItem: {}
     SetCraftItem: {}
     SetCraftSpell: {}
@@ -1104,18 +1112,22 @@ GameTooltip:
     SetFrameStack: {}
     SetGlyph: {}
     SetGuildBankItem: {}
+    SetHeirloomByItemID: {}
     SetHyperlink: {}
     SetInboxItem: {}
     SetInstanceLockEncountersComplete: {}
     SetInventoryItem: {}
     SetInventoryItemByID: {}
     SetItemByID: {}
+    SetLFGDungeonReward: {}
+    SetLFGDungeonShortageReward: {}
     SetLootCurrency: {}
     SetLootItem: {}
     SetLootRollItem: {}
     SetMerchantCostItem: {}
     SetMerchantItem: {}
     SetMinimumWidth: {}
+    SetMountBySpellID: {}
     SetOwner:
       impl: GameTooltip/SetOwner
       inputs:
@@ -1142,6 +1154,7 @@ GameTooltip:
     SetTalent: {}
     SetText: {}
     SetTotem: {}
+    SetToyByItemID: {}
     SetTrackingSpell: {}
     SetTradePlayerItem: {}
     SetTradeSkillItem: {}
@@ -1394,6 +1407,7 @@ ModelScene:
     SetCameraOrientationByAxisVectors: {}
     SetCameraOrientationByYawPitchRoll: {}
     SetCameraPosition: {}
+    SetDesaturation: {}
     SetDrawLayer: {}
     SetFogColor: {}
     SetFogFar: {}
@@ -1404,6 +1418,7 @@ ModelScene:
     SetLightPosition: {}
     SetLightType: {}
     SetLightVisible: {}
+    SetPaused: {}
     SetViewInsets: {}
     SetViewTranslation: {}
     TakeActor: {}
@@ -1500,7 +1515,6 @@ PlayerModel:
     SetBarberShopAlternateForm: {}
     SetCamDistanceScale: {}
     SetCreature: {}
-    SetCustomRace: {}
     SetDisplayInfo: {}
     SetDoBlend: {}
     SetItem: {}
@@ -1510,6 +1524,28 @@ PlayerModel:
     SetRotation: {}
     SetUnit: {}
     StopAnimKit: {}
+    ZeroCachedCenterXY: {}
+QuestPOIFrame:
+  inherits:
+    Frame: {}
+  methods:
+    DrawAll: {}
+    DrawBlob: {}
+    DrawNone: {}
+    EnableMerging: {}
+    EnableSmoothing: {}
+    GetMapID: {}
+    GetNumTooltips: {}
+    GetTooltipIndex: {}
+    SetBorderAlpha: {}
+    SetBorderScalar: {}
+    SetBorderTexture: {}
+    SetFillAlpha: {}
+    SetFillTexture: {}
+    SetMapID: {}
+    SetMergeThreshold: {}
+    SetNumSplinePoints: {}
+    UpdateMouseOverTooltip: {}
 Region:
   fields:
     animationGroups:
@@ -1679,6 +1715,7 @@ Region:
     SetPassThroughButtons: {}
     SetPoint:
       impl: Region/SetPoint
+    SetProtected: {}
     SetSize:
       setter:
       - name: width
@@ -2111,8 +2148,6 @@ UnitPositionFrame:
     Frame: {}
   methods:
     AddUnit: {}
-    AddUnitAtlas: {}
-    AddUnitFileID: {}
     ClearUnits: {}
     FinalizeUnits: {}
     GetMouseOverUnits: {}
