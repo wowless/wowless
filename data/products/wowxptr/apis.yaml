@@ -10782,6 +10782,12 @@ C_LossOfControl.GetActiveLossOfControlDataCountByUnit:
   outputs:
   - name: count
     type: number
+C_Macro.SetMacroExecuteLineCallback:
+  impl: C_Macro.SetMacroExecuteLineCallback
+  inputs:
+  - name: cb
+    type: function
+  outputs: {}
 C_Mail.CanCheckInbox:
   inputs: {}
   outputs:
@@ -26796,7 +26802,7 @@ RollOnLoot: {}
 RunBinding: {}
 RunMacro: {}
 RunMacroText:
-  impl: RunMacroText
+  impl: RunMacroText_Callback
   inputs:
   - name: macroText
     type: string

@@ -1143,11 +1143,12 @@ Enum:
     MinValue: 0
     NumValues: 4
   ChrCustomizationCategoryFlag:
+    Subcategory: 2
     UndressModel: 1
   ChrCustomizationCategoryFlagMeta:
-    MaxValue: 1
+    MaxValue: 2
     MinValue: 1
-    NumValues: 1
+    NumValues: 2
   ChrCustomizationOptionType:
     Checkbox: 1
     SelectionPopout: 0
@@ -2384,10 +2385,12 @@ Enum:
     NormalTitleAndSubTitle: 2
     Scenario: 6
     ScenarioClickExpand: 8
+    WeeklyRewardUnlock: 9
+    WeeklyRewardUpgrade: 10
   EventToastDisplayTypeMeta:
-    MaxValue: 8
+    MaxValue: 10
     MinValue: 0
-    NumValues: 9
+    NumValues: 11
   EventToastEventType:
     BattlePetLevelChanged: 8
     BattlePetLevelUpAbility: 9
@@ -2411,11 +2414,13 @@ Enum:
     SpellLearned: 21
     SpellScript: 18
     TreasureItem: 22
+    WeeklyRewardUnlock: 23
+    WeeklyRewardUpgrade: 24
     WorldStateChange: 13
   EventToastEventTypeMeta:
-    MaxValue: 22
+    MaxValue: 24
     MinValue: 0
-    NumValues: 23
+    NumValues: 25
   ExcludedCensorSources:
     All: 255
     Friends: 1

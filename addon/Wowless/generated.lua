@@ -93,6 +93,16 @@ function G.GeneratedTests()
               end
             end
           end
+          if name == 'C_Macro' then
+            mtests.SetMacroExecuteLineCallback = function()
+              local func = _G.C_Macro.SetMacroExecuteLineCallback
+              if iswowlesslite and ncfg.SetMacroExecuteLineCallback then
+                return checkCFunc(func)
+              else
+                assertEquals(nil, func)
+              end
+            end
+          end
           return mkTests(ns, mtests)
         end
       end

@@ -3975,6 +3975,8 @@ C_PerksProgram.PerksVendorItemInfo:
       type: string
     iconTexture:
       type: string
+    isPurchasePending:
+      type: boolean
     itemID:
       type: number
     itemModifiedAppearanceID:
@@ -3983,8 +3985,6 @@ C_PerksProgram.PerksVendorItemInfo:
       type: number
     name:
       type: string
-    pending:
-      type: boolean
     perksVendorCategoryID:
       type: number
     perksVendorItemID:
@@ -7627,6 +7627,8 @@ CharCustomizationCategory:
     spellShapeshiftFormID:
       nilable: true
       type: number
+    subcategory:
+      type: boolean
     undressModel:
       type: boolean
 CharCustomizationChoice:

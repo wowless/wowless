@@ -61,6 +61,7 @@ addon:
 docs:
   apis:
     skip_namespaces:
+      C_BarberShopInternal: {}
       C_ConfigurationWarnings: {}
   events:
     never_sent:
