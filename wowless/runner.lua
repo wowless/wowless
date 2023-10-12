@@ -160,7 +160,7 @@ local function run(cfg)
         if api.datalua.events.EXECUTE_CHAT_LINE then
           api.SendEvent('EXECUTE_CHAT_LINE', v)
         elseif api.macroExecuteLineCallback then
-          api.macroExecuteLineCallback(v)
+          api.CallSafely(api.macroExecuteLineCallback, v)
         end
       end
     end,
