@@ -14,12 +14,15 @@ local function skip(k, v)
   end
   return false
 end
+local sorted = require('pl.tablex').sort
 local p = arg[1]
+local t = {}
 print('#include <lauxlib.h>')
 print('#include <lualib.h>')
-for k, v in require('pl.tablex').sort((require('build.data.products.' .. p .. '.apis'))) do
+for k, v in sorted((require('build.data.products.' .. p .. '.apis'))) do
   if not skip(k, v) then
-    print(('static int wowless_%s_%s(lua_State *L) {'):format(p, k))
+    t[k] = ('wowless_%s_%s'):format(p, k)
+    print(('static int %s(lua_State *L) {'):format(t[k]))
     for i, input in ipairs(v.inputs or {}) do
       if input.type == 'number' then
         if input.nilable then
@@ -83,3 +86,19 @@ for k, v in require('pl.tablex').sort((require('build.data.products.' .. p .. '.
     print('}')
   end
 end
+print('static struct luaL_Reg regt[] = {')
+for k, v in sorted(t) do
+  print(('  { "%s", %s },'):format(k, v))
+end
+print('  { 0, 0 },')
+print('};')
+print('static int register_apis(lua_State *L) {')
+print('  luaL_argcheck(L, lua_istable(L, 1), 1, 0);')
+print('  lua_settop(L, 1);')
+print('  luaL_register(L, NULL, regt);')
+print('  return 0;')
+print('}')
+print(('int luaopen_runtime_%s_capi(lua_State *L) {'):format(p))
+print('  lua_pushcfunction(L, register_apis);')
+print('  return 1;')
+print('}')
