@@ -39,8 +39,16 @@ for k, v in require('pl.tablex').sort((require('build.data.products.' .. p .. '.
         assert(output.stub == nil)
         print('  lua_pushnil(L);')
       elseif output.type == 'table' then
-        assert(output.stub == nil, 'stub on ' .. k)
         print('  lua_newtable(L);')
+        for sk, sv in pairs(output.stub or {}) do
+          assert(type(sk) == 'string', 'weird table key ' .. k)
+          if type(sv) == 'number' then
+            print(('  lua_pushnumber(L, %d);'):format(sv))
+            print(('  lua_setfield(L, -2, "%s");'):format(sk))
+          else
+            error('weird table value ' .. k)
+          end
+        end
       else
         error('wat outputs ' .. k)
       end
