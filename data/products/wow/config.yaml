@@ -53,8 +53,6 @@ addon:
     C_Traits.GetConditionInfo: {}
     C_Traits.GetEntryInfo: {}
     C_Traits.GetTreeInfo: {}
-  skipped_uiobjects:
-    Minimap: singleton
 docs:
   apis:
     skip_namespaces:

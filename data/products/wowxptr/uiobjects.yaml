@@ -1280,7 +1280,6 @@ Minimap:
     SetQuestBlobInsideAlpha: {}
     SetQuestBlobInsideTexture: {}
     SetQuestBlobOutsideAlpha: {}
-    SetQuestBlobOutsideSelectedTexture: {}
     SetQuestBlobOutsideTexture: {}
     SetQuestBlobRingAlpha: {}
     SetQuestBlobRingScalar: {}
@@ -1289,7 +1288,6 @@ Minimap:
     SetTaskBlobInsideAlpha: {}
     SetTaskBlobInsideTexture: {}
     SetTaskBlobOutsideAlpha: {}
-    SetTaskBlobOutsideSelectedTexture: {}
     SetTaskBlobOutsideTexture: {}
     SetTaskBlobRingAlpha: {}
     SetTaskBlobRingScalar: {}

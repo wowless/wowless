@@ -41,8 +41,6 @@ addon:
     raidGraphicsSSAO: {}
     raidGraphicsTextureResolution: {}
     RenderScale: {}
-  skipped_uiobjects:
-    Minimap: singleton
 docs:
   apis:
     skip_namespaces:

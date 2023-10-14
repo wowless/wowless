@@ -328,15 +328,21 @@ function G.GeneratedTests()
     end
     local indexes = {}
     local function mkTests(objectTypeName, zombie, factory, tests)
-      local obj = assert(factory(), 'factory failed')
-      local obj2 = assert(factory(), 'factory failed')
-      if objectTypeName == 'EditBox' then
-        obj:Hide() -- captures input focus otherwise
-        obj2:Hide() -- captures input focus otherwise
+      local obj, mt
+      if objectTypeName == 'Minimap' then
+        obj = _G.Minimap or CreateFrame('Minimap')
+        mt = getmetatable(obj)
+      else
+        obj = assert(factory(), 'factory failed')
+        local obj2 = assert(factory(), 'factory failed')
+        if objectTypeName == 'EditBox' then
+          obj:Hide() -- captures input focus otherwise
+          obj2:Hide() -- captures input focus otherwise
+        end
+        assert(obj ~= obj2)
+        mt = getmetatable(obj)
+        assert(mt == getmetatable(obj2))
       end
-      assert(obj ~= obj2)
-      local mt = getmetatable(obj)
-      assert(mt == getmetatable(obj2))
       if zombie then
         assert(mt == nil)
         assertEquals(objectTypeName, CreateFrame('Frame').GetObjectType(obj))
@@ -357,7 +363,7 @@ function G.GeneratedTests()
             assertEquals(udk, 0)
             assertEquals('userdata', type(udv))
             assert(getmetatable(udv) == nil)
-            assert(next(obj, udk) == nil)
+            assert(next(obj, udk) == nil or objectTypeName == 'Minimap')
           end,
           methods = function()
             local t = tests(__index)

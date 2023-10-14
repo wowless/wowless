@@ -56,8 +56,6 @@ addon:
     C_Traits.GetEntryInfo: {}
     C_Traits.GetTreeInfo: {}
     SetPortraitToTexture: {}
-  skipped_uiobjects:
-    Minimap: singleton
 docs:
   apis:
     skip_namespaces:
