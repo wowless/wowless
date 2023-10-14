@@ -1,6 +1,22 @@
-local p = 'wow_classic_era'
+local function skip(k, v)
+  if v.impl or v.stdlib or v.alias or k:find('%.') then
+    return true
+  end
+  for _, input in ipairs(v.inputs or {}) do
+    if input.type == 'Texture' or input.type.enum then
+      return true
+    end
+  end
+  for _, output in ipairs(v.outputs or {}) do
+    if (output.type.arrayof or output.type.structure) and not output.nilable then
+      return true
+    end
+  end
+  return false
+end
+local p = arg[1]
 for k, v in require('pl.tablex').sort((require('build.data.products.' .. p .. '.apis'))) do
-  if not (v.impl or v.stdlib or v.alias or k:find('%.')) then
+  if not skip(k, v) then
     print(('static int wowless_%s_%s(lua_State *L) {'):format(p, k))
     for i, input in ipairs(v.inputs or {}) do
       if input.type == 'number' then
