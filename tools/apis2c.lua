@@ -15,16 +15,26 @@ local function skip(k, v)
   return false
 end
 local p = arg[1]
+print('#include <lauxlib.h>')
+print('#include <lualib.h>')
 for k, v in require('pl.tablex').sort((require('build.data.products.' .. p .. '.apis'))) do
   if not skip(k, v) then
     print(('static int wowless_%s_%s(lua_State *L) {'):format(p, k))
     for i, input in ipairs(v.inputs or {}) do
       if input.type == 'number' then
-        print(('  luaL_%snumber(L, %d);'):format(input.nilable and 'opt' or 'check', i))
+        if input.nilable then
+          print(('  luaL_optnumber(L, %d, 0);'):format(i))
+        else
+          print(('  luaL_checknumber(L, %d);'):format(i))
+        end
       elseif input.type == 'boolean' then
         print(('  luaL_argcheck(L, lua_isboolean(L, %d), %d, 0);'):format(i, i))
       elseif input.type == 'string' or input.type == 'unit' or input.type == 'uiAddon' then
-        print(('  luaL_%sstring(L, %d);'):format(input.nilable and 'opt' or 'check', i))
+        if input.nilable then
+          print(('  luaL_optstring(L, %d, 0);'):format(i))
+        else
+          print(('  luaL_checkstring(L, %d);'):format(i))
+        end
       elseif input.type == 'table' then
         if input.nilable then
           print(('  luaL_argcheck(L, lua_istable(L, %d) || lua_isnoneornil(L, %d), %d, 0);'):format(i, i, i))
