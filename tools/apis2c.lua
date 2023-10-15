@@ -19,7 +19,7 @@ local p = arg[1]
 local t = {}
 print('#include <lauxlib.h>')
 print('#include <lualib.h>')
-for k, v in sorted((require('build.data.products.' .. p .. '.apis'))) do
+for k, v in sorted((dofile('runtime/products/' .. p .. '/apis.lua'))) do
   if not skip(k, v) then
     t[k] = ('wowless_%s_%s'):format(p, k)
     print(('static int %s(lua_State *L) {'):format(t[k]))

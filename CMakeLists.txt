@@ -1388,27 +1388,24 @@ add_lua_executable(
   penlight
 )
 
-yaml2lua(products/wow/apis)
-lua2c(
-  apiscfglib
-  build.data.products.wow.apis=runtime/products/wow/apis.lua
-)
-add_library(apiscfglib STATIC apiscfglib.c)
-target_link_libraries(apiscfglib PRIVATE elune)
 add_strict_lua_executable(
   apis2c
   ${CMAKE_CURRENT_SOURCE_DIR}/tools/apis2c.lua
-  apiscfglib
   luafilesystem
   lyaml
   penlight
 )
-add_custom_command(
-  OUTPUT wowapis.c
-  COMMAND apis2c wow > ${CMAKE_CURRENT_BINARY_DIR}/wowapis.c
-  DEPENDS apis2c
-)
-add_library(wowapis STATIC wowapis.c)
+
+foreach(product ${products})
+  yaml2lua(products/${product}/apis)
+  add_custom_command(
+    OUTPUT ${product}_capis.c
+    COMMAND apis2c ${product} > ${CMAKE_CURRENT_BINARY_DIR}/${product}_capis.c
+    DEPENDS apis2c ${CMAKE_CURRENT_BINARY_DIR}/runtime/products/${product}/apis.lua
+  )
+  list(APPEND capi_sources ${product}_capis.c)
+endforeach()
+add_library(wowapis STATIC ${capi_sources})
 target_link_libraries(wowapis PRIVATE elune)
 add_custom_target(wat DEPENDS wowapis)
 
