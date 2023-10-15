@@ -177,14 +177,17 @@ local function loadFunctions(api, loader)
   end
 
   local fns = {}
+  require('runtime.' .. datalua.product .. '.capi')(fns)
   local aliases = {}
   for fn, apicfg in pairs(apis) do
-    if apicfg.alias then
-      aliases[fn] = apicfg.alias
-    elseif apicfg.stdlib then
-      util.tset(fns, fn, assert(util.tget(_G, apicfg.stdlib)))
-    else
-      util.tset(fns, fn, mkfn(fn, apicfg))
+    if fns[fn] == nil then
+      if apicfg.alias then
+        aliases[fn] = apicfg.alias
+      elseif apicfg.stdlib then
+        util.tset(fns, fn, assert(util.tget(_G, apicfg.stdlib)))
+      else
+        util.tset(fns, fn, mkfn(fn, apicfg))
+      end
     end
   end
   for k, v in pairs(aliases) do

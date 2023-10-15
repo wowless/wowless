@@ -1,5 +1,5 @@
 local function skip(k, v)
-  if v.impl or v.stdlib or v.alias or k:find('%.') then
+  if v.impl or v.stdlib or v.alias or v.debug or k:find('%.') then
     return true
   end
   for _, input in ipairs(v.inputs or {}) do
