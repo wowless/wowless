@@ -4,7 +4,6 @@ local function skip(v)
   end
   local inskips = {
     Actor = true,
-    ['function'] = true,
     ModelScene = true,
     Texture = true,
   }
@@ -59,6 +58,12 @@ for k, v in sorted((dofile('runtime/products/' .. p .. '/apis.lua'))) do
           print(('  luaL_argcheck(L, lua_istable(L, %d) || lua_isnoneornil(L, %d), %d, 0);'):format(i, i, i))
         else
           print(('  luaL_argcheck(L, lua_istable(L, %d), %d, 0);'):format(i, i))
+        end
+      elseif input.type == 'function' then
+        if input.nilable then
+          print(('  luaL_argcheck(L, lua_isfunction(L, %d) || lua_isnoneornil(L, %d), %d, 0);'):format(i, i, i))
+        else
+          print(('  luaL_argcheck(L, lua_isfunction(L, %d), %d, 0);'):format(i, i))
         end
       elseif input.type == 'unknown' then
         if not input.nilable then
