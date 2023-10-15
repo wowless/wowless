@@ -24,14 +24,20 @@ for k, v in sorted((dofile('runtime/products/' .. p .. '/apis.lua'))) do
     t[k] = ('wowless_%s_%s'):format(p, k)
     print(('static int %s(lua_State *L) {'):format(t[k]))
     for i, input in ipairs(v.inputs or {}) do
-      if input.type == 'number' then
+      if input.default ~= nil then -- luacheck: ignore
+        -- do nothing
+      elseif input.type == 'number' then
         if input.nilable then
           print(('  luaL_optnumber(L, %d, 0);'):format(i))
         else
           print(('  luaL_checknumber(L, %d);'):format(i))
         end
       elseif input.type == 'boolean' then
-        print(('  luaL_argcheck(L, lua_isboolean(L, %d), %d, 0);'):format(i, i))
+        if input.nilable then
+          print(('  luaL_argcheck(L, lua_isboolean(L, %d) || lua_isnoneornil(L, %d), %d, 0);'):format(i, i, i))
+        else
+          print(('  luaL_argcheck(L, lua_isboolean(L, %d), %d, 0);'):format(i, i))
+        end
       elseif input.type == 'string' or input.type == 'unit' or input.type == 'uiAddon' then
         if input.nilable then
           print(('  luaL_optstring(L, %d, 0);'):format(i))
