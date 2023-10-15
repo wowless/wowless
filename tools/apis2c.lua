@@ -1,14 +1,23 @@
-local function skip(k, v)
-  if v.impl or v.stdlib or v.alias or v.debug or k:find('%.') then
+local function skip(v)
+  if v.impl or v.stdlib or v.alias or v.debug then
     return true
   end
+  local inskips = {
+    Actor = true,
+    ['function'] = true,
+    ModelScene = true,
+    Texture = true,
+  }
   for _, input in ipairs(v.inputs or {}) do
-    if input.type == 'Texture' or input.type.enum then
+    if inskips[input.type] or type(input.type) == 'table' then
       return true
     end
   end
   for _, output in ipairs(v.outputs or {}) do
-    if (output.type.arrayof or output.type.structure) and not output.nilable then
+    if type(output.type) == 'table' and (not output.nilable or output.stub) then
+      return true
+    end
+    if output.type == 'table' and output.stub then
       return true
     end
   end
@@ -20,9 +29,10 @@ local t = {}
 print('#include <lauxlib.h>')
 print('#include <lualib.h>')
 for k, v in sorted((dofile('runtime/products/' .. p .. '/apis.lua'))) do
-  if not skip(k, v) then
-    t[k] = ('wowless_%s_%s'):format(p, k)
-    print(('static int %s(lua_State *L) {'):format(t[k]))
+  if not skip(v) then
+    local mn = ('wowless_%s_%s'):format(p, k:gsub('%.', '__'))
+    t[k] = mn
+    print(('static int %s(lua_State *L) {'):format(mn))
     for i, input in ipairs(v.inputs or {}) do
       if input.default ~= nil then -- luacheck: ignore
         -- do nothing
@@ -94,7 +104,10 @@ for k, v in sorted((dofile('runtime/products/' .. p .. '/apis.lua'))) do
 end
 print('static struct luaL_Reg regt[] = {')
 for k, v in sorted(t) do
-  print(('  { "%s", %s },'):format(k, v))
+  -- TODO remove this skip
+  if not k:find('%.') then
+    print(('  { "%s", %s },'):format(k, v))
+  end
 end
 print('  { 0, 0 },')
 print('};')

@@ -76,7 +76,7 @@ io.write([[
 io.write(('  int ret = luaL_loadbuffer(L, "%s", %d, "@%s");\n'):format(etext, text:len(), main))
 io.write([[
   if (ret || lua_pcall(L, 0, LUA_MULTRET, -2)) {
-    puts(lua_tostring(L, -1));
+    fprintf(stderr, "%s\n", lua_tostring(L, -1));
 ]])
 io.write(strict and [[
     return EXIT_FAILURE;
