@@ -1404,14 +1404,13 @@ foreach(product ${products})
     DEPENDS apis2c ${CMAKE_CURRENT_BINARY_DIR}/runtime/products/${product}/apis.lua
   )
   list(APPEND capi_sources ${product}_capis.c)
+  list(APPEND capi_luamodules runtime.${product}.capi=c)
 endforeach()
-add_library(wowapis STATIC ${capi_sources})
-target_link_libraries(wowapis PRIVATE elune)
-add_custom_target(wat DEPENDS wowapis)
 
 lua2c(
   wowlesslib
   runtime.flavors=runtime/flavors.lua
+  ${capi_luamodules}
   runtime.stringenums=runtime/stringenums.lua
   wowapi.data=${CMAKE_CURRENT_SOURCE_DIR}/wowapi/data.lua
   wowapi.loader=${CMAKE_CURRENT_SOURCE_DIR}/wowapi/loader.lua
@@ -1431,6 +1430,7 @@ add_library(
   wowlesslib STATIC
   wowlesslib.c
   wowless/ext.c
+  ${capi_sources}
 )
 target_link_libraries(wowlesslib elune)
 
