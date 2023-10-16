@@ -211,6 +211,15 @@ return function(api)
           return nil, 'element ' .. i .. ' ' .. err
         end
       end
+      if isout then
+        local n = 0
+        for _ in pairs(value) do
+          n = n + 1
+        end
+        if #value ~= n then
+          return nil, 'is not strictly an array'
+        end
+      end
       return value
     else
       return nil, 'invalid spec'
