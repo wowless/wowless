@@ -180,7 +180,7 @@ local function loadFunctions(api, loader)
   require('runtime.' .. datalua.product .. '.capi')(fns)
   local aliases = {}
   for fn, apicfg in pairs(apis) do
-    if fns[fn] == nil then
+    if util.tget(fns, fn) == nil then
       if apicfg.alias then
         aliases[fn] = apicfg.alias
       elseif apicfg.stdlib then
