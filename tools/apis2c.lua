@@ -80,22 +80,23 @@ for k, v in sorted((dofile('runtime/products/' .. p .. '/apis.lua'))) do
     end
     local outputs = v.outputs or {}
     for _, output in ipairs(outputs) do
-      if output.nilable and not output.stub then
+      local stub = output.stub or output.default
+      if output.nilable and not stub then
         print('  lua_pushnil(L);')
       elseif output.type == 'number' then
-        print(('  lua_pushnumber(L, %d);'):format(output.stub or 1))
+        print(('  lua_pushnumber(L, %d);'):format(stub or 1))
       elseif output.type == 'boolean' then
-        print(('  lua_pushboolean(L, %s);'):format(output.stub and 1 or 0))
+        print(('  lua_pushboolean(L, %s);'):format(stub and 1 or 0))
       elseif output.type == 'string' then
-        print(('  lua_pushstring(L, "%s");'):format(output.stub or ''))
+        print(('  lua_pushstring(L, "%s");'):format(stub or ''))
       elseif output.type == 'nil' then
         print('  lua_pushnil(L);')
       elseif output.type == 'oneornil' then
-        assert(output.stub == nil)
+        assert(stub == nil)
         print('  lua_pushnil(L);')
       elseif output.type == 'table' then
         print('  lua_newtable(L);')
-        for sk, sv in pairs(output.stub or {}) do
+        for sk, sv in pairs(stub or {}) do
           assert(type(sk) == 'string', 'weird table key ' .. k)
           if type(sv) == 'number' then
             print(('  lua_pushnumber(L, %d);'):format(sv))
@@ -111,7 +112,7 @@ for k, v in sorted((dofile('runtime/products/' .. p .. '/apis.lua'))) do
         for _, e in pairs(enums[output.type.enum]) do
           x = (not x or e < x) and e or x
         end
-        print(('  lua_pushnumber(L, %d);'):format(output.stub or x))
+        print(('  lua_pushnumber(L, %d);'):format(stub or x))
       else
         error('wat outputs ' .. k)
       end
