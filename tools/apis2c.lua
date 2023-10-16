@@ -38,40 +38,39 @@ for k, v in sorted((dofile('runtime/products/' .. p .. '/apis.lua'))) do
     t[ns][mn] = fn
     print(('static int %s(lua_State *L) {'):format(fn))
     for i, input in ipairs(v.inputs or {}) do
-      if input.default ~= nil then -- luacheck: ignore
-        -- do nothing
-      elseif input.type == 'number' then
-        if input.nilable then
+      local opt = input.nilable or input.default ~= nil
+      if input.type == 'number' then
+        if opt then
           print(('  luaL_optnumber(L, %d, 0);'):format(i))
         else
           print(('  luaL_checknumber(L, %d);'):format(i))
         end
       elseif input.type == 'boolean' then
-        if input.nilable then
+        if opt then
           print(('  luaL_argcheck(L, lua_isboolean(L, %d) || lua_isnoneornil(L, %d), %d, 0);'):format(i, i, i))
         else
           print(('  luaL_argcheck(L, lua_isboolean(L, %d), %d, 0);'):format(i, i))
         end
       elseif input.type == 'string' or input.type == 'unit' or input.type == 'uiAddon' then
-        if input.nilable then
+        if opt then
           print(('  luaL_optstring(L, %d, 0);'):format(i))
         else
           print(('  luaL_checkstring(L, %d);'):format(i))
         end
       elseif input.type == 'table' then
-        if input.nilable then
+        if opt then
           print(('  luaL_argcheck(L, lua_istable(L, %d) || lua_isnoneornil(L, %d), %d, 0);'):format(i, i, i))
         else
           print(('  luaL_argcheck(L, lua_istable(L, %d), %d, 0);'):format(i, i))
         end
       elseif input.type == 'function' then
-        if input.nilable then
+        if opt then
           print(('  luaL_argcheck(L, lua_isfunction(L, %d) || lua_isnoneornil(L, %d), %d, 0);'):format(i, i, i))
         else
           print(('  luaL_argcheck(L, lua_isfunction(L, %d), %d, 0);'):format(i, i))
         end
       elseif input.type == 'unknown' then
-        if not input.nilable then
+        if not opt then
           print(('  luaL_argcheck(L, !lua_isnoneornil(L, %d), %d, 0);'):format(i, i))
         end
       else
