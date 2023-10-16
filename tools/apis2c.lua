@@ -8,7 +8,7 @@ local function skip(v)
     Texture = true,
   }
   for _, input in ipairs(v.inputs or {}) do
-    if inskips[input.type] or type(input.type) == 'table' then
+    if inskips[input.type] or input.type.arrayof or input.type.structure then
       return true
     end
   end
@@ -58,6 +58,13 @@ for k, v in sorted((dofile('runtime/products/' .. p .. '/apis.lua'))) do
       elseif input.type == 'unknown' then
         if not opt then
           print(('  luaL_argcheck(L, !lua_isnoneornil(L, %d), %d, 0);'):format(i, i))
+        end
+      elseif input.type.enum then
+        -- TODO check actual values; for now, just check it's a number
+        if opt then
+          print(('  luaL_argcheck(L, lua_isnumber(L, %d) || lua_isnoneornil(L, %d), %d, 0);'):format(i, i, i))
+        else
+          print(('  luaL_argcheck(L, lua_isnumber(L, %d), %d, 0);'):format(i, i))
         end
       else
         error('wat inputs ' .. k)
