@@ -29,9 +29,13 @@ print('#include <lauxlib.h>')
 print('#include <lualib.h>')
 for k, v in sorted((dofile('runtime/products/' .. p .. '/apis.lua'))) do
   if not skip(v) then
-    local mn = ('wowless_%s_%s'):format(p, k:gsub('%.', '__'))
-    t[k] = mn
-    print(('static int %s(lua_State *L) {'):format(mn))
+    local dot = k:find('%.')
+    local ns = dot and k:sub(1, dot - 1) or ''
+    local mn = k:sub((dot or 0) + 1)
+    local fn = ('wowless_%s_%s'):format(p, k:gsub('%.', '__'))
+    t[ns] = t[ns] or {}
+    t[ns][mn] = fn
+    print(('static int %s(lua_State *L) {'):format(fn))
     for i, input in ipairs(v.inputs or {}) do
       if input.default ~= nil then -- luacheck: ignore
         -- do nothing
@@ -107,19 +111,18 @@ for k, v in sorted((dofile('runtime/products/' .. p .. '/apis.lua'))) do
     print('}')
   end
 end
-print('static struct luaL_Reg regt[] = {')
 for k, v in sorted(t) do
-  -- TODO remove this skip
-  if not k:find('%.') then
-    print(('  { "%s", %s },'):format(k, v))
+  print(('static struct luaL_Reg reg_%s[] = {'):format(k))
+  for vk, vv in sorted(v) do
+    print(('  { "%s", %s },'):format(vk, vv))
   end
+  print('  { 0, 0 },')
+  print('};')
 end
-print('  { 0, 0 },')
-print('};')
 print('static int register_apis(lua_State *L) {')
 print('  luaL_argcheck(L, lua_istable(L, 1), 1, 0);')
 print('  lua_settop(L, 1);')
-print('  luaL_register(L, NULL, regt);')
+print('  luaL_register(L, NULL, reg_);')
 print('  return 0;')
 print('}')
 print(('int luaopen_runtime_%s_capi(lua_State *L) {'):format(p))
