@@ -28,6 +28,15 @@ local t = {}
 print('#include <lauxlib.h>')
 print('#include <lualib.h>')
 local enums = dofile('runtime/products/' .. p .. '/globals.lua').Enum
+local scalars = {
+  boolean = 'boolean',
+  ['function'] = 'function',
+  number = 'number',
+  string = 'string',
+  table = 'table',
+  uiAddon = 'string',
+  unit = 'string',
+}
 for k, v in sorted((dofile('runtime/products/' .. p .. '/apis.lua'))) do
   if not skip(v) then
     local dot = k:find('%.')
@@ -39,35 +48,12 @@ for k, v in sorted((dofile('runtime/products/' .. p .. '/apis.lua'))) do
     print(('static int %s(lua_State *L) {'):format(fn))
     for i, input in ipairs(v.inputs or {}) do
       local opt = input.nilable or input.default ~= nil
-      if input.type == 'number' then
+      local scalar = scalars[input.type]
+      if scalar then
         if opt then
-          print(('  luaL_optnumber(L, %d, 0);'):format(i))
+          print(('  luaL_argcheck(L, lua_is%s(L, %d) || lua_isnoneornil(L, %d), %d, 0);'):format(scalar, i, i, i))
         else
-          print(('  luaL_checknumber(L, %d);'):format(i))
-        end
-      elseif input.type == 'boolean' then
-        if opt then
-          print(('  luaL_argcheck(L, lua_isboolean(L, %d) || lua_isnoneornil(L, %d), %d, 0);'):format(i, i, i))
-        else
-          print(('  luaL_argcheck(L, lua_isboolean(L, %d), %d, 0);'):format(i, i))
-        end
-      elseif input.type == 'string' or input.type == 'unit' or input.type == 'uiAddon' then
-        if opt then
-          print(('  luaL_optstring(L, %d, 0);'):format(i))
-        else
-          print(('  luaL_checkstring(L, %d);'):format(i))
-        end
-      elseif input.type == 'table' then
-        if opt then
-          print(('  luaL_argcheck(L, lua_istable(L, %d) || lua_isnoneornil(L, %d), %d, 0);'):format(i, i, i))
-        else
-          print(('  luaL_argcheck(L, lua_istable(L, %d), %d, 0);'):format(i, i))
-        end
-      elseif input.type == 'function' then
-        if opt then
-          print(('  luaL_argcheck(L, lua_isfunction(L, %d) || lua_isnoneornil(L, %d), %d, 0);'):format(i, i, i))
-        else
-          print(('  luaL_argcheck(L, lua_isfunction(L, %d), %d, 0);'):format(i, i))
+          print(('  luaL_argcheck(L, lua_is%s(L, %d), %d, 0);'):format(scalar, i, i))
         end
       elseif input.type == 'unknown' then
         if not opt then
