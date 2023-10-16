@@ -257,7 +257,7 @@ local function rewriteApis()
         })
       else
         table.insert(t, {
-          default = a.Default,
+          default = enum[a.Type] and enum[a.Type][a.Default] or a.Default,
           name = a.Name,
           nilable = a.Nilable or nil,
           type = t2nty(a, ns),

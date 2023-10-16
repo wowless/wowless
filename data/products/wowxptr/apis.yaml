@@ -28157,7 +28157,7 @@ UnitPartialPower:
   inputs:
   - name: unitToken
     type: unit
-  - default: NumPowerTypes
+  - default: 26
     name: powerType
     type:
       enum: PowerType
@@ -28219,7 +28219,7 @@ UnitPower:
   inputs:
   - name: unitToken
     type: unit
-  - default: NumPowerTypes
+  - default: 26
     name: powerType
     type:
       enum: PowerType
@@ -28249,7 +28249,7 @@ UnitPowerMax:
   inputs:
   - name: unitToken
     type: unit
-  - default: NumPowerTypes
+  - default: 26
     name: powerType
     type:
       enum: PowerType
