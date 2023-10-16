@@ -26,14 +26,12 @@ static void assertstringornil(lua_State *L, int index) {
 }
 
 static void asserttype(lua_State *L, int index, enum lua_Type type) {
-  if (lua_type(L, index) != type) {
-    luaL_typerror(L, index, lua_typename(L, type));
-  }
+  luaL_checktype(L, index, type);
 }
 
 static void asserttypeornil(lua_State *L, int index, enum lua_Type type) {
-  if (!lua_isnoneornil(L, index) && lua_type(L, index) != type) {
-    luaL_typerror(L, index, lua_typename(L, type));
+  if (!lua_isnoneornil(L, index)) {
+    luaL_checktype(L, index, type);
   }
 }
 
