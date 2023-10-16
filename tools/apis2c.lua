@@ -66,10 +66,9 @@ for k, v in sorted((dofile('runtime/products/' .. p .. '/apis.lua'))) do
         print(('  assertnumber%s(L, %d);'):format(opt and 'ornil' or '', i))
       elseif input.type.arrayof then
         -- FIXME a lot more to say here
-        assert(input.type.arrayof)
-        print(('  if (!lua_isnoneornil(L, %d)) {'):format(i))
-        print(('    asserttype(L, %d, LUA_TTABLE);'):format(i))
-        print('  }')
+        assert(not opt)
+        local ascalar = assert(input.type.arrayof)
+        print(('  assertarray(L, %d, LUA_T%s);'):format(i, ascalar:upper()))
       else
         error('wat inputs ' .. k)
       end

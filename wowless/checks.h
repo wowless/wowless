@@ -39,6 +39,23 @@ static void assertpresent(lua_State *L, int index) {
   luaL_argcheck(L, !lua_isnoneornil(L, index), index, "value expected");
 }
 
+static void assertarray(lua_State *L, int index, enum lua_Type type) {
+  asserttype(L, index, LUA_TTABLE);
+  luaL_checkstack(L, 1, "array check");
+  index = lua_absindex(L, index);
+  lua_pushnumber(L, 1);
+  lua_gettable(L, index);
+  for (int i = 2; !lua_isnil(L, -1); ++i) {
+    if (lua_type(L, -1) != type) {
+      luaL_error(L, "you are having a bad day");
+    }
+    lua_pop(L, 1);
+    lua_pushnumber(L, i);
+    lua_gettable(L, index);
+  }
+  lua_pop(L, 1);
+}
+
 struct nsreg {
   const char *name;
   luaL_Reg *reg;
