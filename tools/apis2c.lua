@@ -1,3 +1,12 @@
+local scalars = {
+  boolean = 'boolean',
+  ['function'] = 'function',
+  number = 'number',
+  string = 'string',
+  table = 'table',
+  uiAddon = 'string',
+  unit = 'string',
+}
 local function skip(v)
   if v.impl or v.stdlib or v.alias or v.debug then
     return true
@@ -8,7 +17,10 @@ local function skip(v)
     Texture = true,
   }
   for _, input in ipairs(v.inputs or {}) do
-    if inskips[input.type] or input.type.arrayof or input.type.structure then
+    if inskips[input.type] or input.type.structure then
+      return true
+    end
+    if input.type.arrayof and not scalars[input.type.arrayof] then
       return true
     end
   end
@@ -28,15 +40,6 @@ local t = {}
 print('#include <lauxlib.h>')
 print('#include <lualib.h>')
 local enums = dofile('runtime/products/' .. p .. '/globals.lua').Enum
-local scalars = {
-  boolean = 'boolean',
-  ['function'] = 'function',
-  number = 'number',
-  string = 'string',
-  table = 'table',
-  uiAddon = 'string',
-  unit = 'string',
-}
 for k, v in sorted((dofile('runtime/products/' .. p .. '/apis.lua'))) do
   if not skip(v) then
     local dot = k:find('%.')
@@ -66,6 +69,12 @@ for k, v in sorted((dofile('runtime/products/' .. p .. '/apis.lua'))) do
         else
           print(('  luaL_argcheck(L, lua_isnumber(L, %d), %d, 0);'):format(i, i))
         end
+      elseif input.type.arrayof then
+        -- FIXME a lot more to say here
+        assert(input.type.arrayof)
+        print(('  if (!lua_isnoneornil(L, %d)) {'):format(i))
+        print(('    luaL_argcheck(L, lua_istable(L, %d), %d, 0);'):format(i, i))
+        print('  }')
       else
         error('wat inputs ' .. k)
       end
