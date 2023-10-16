@@ -13,7 +13,7 @@ local function skip(v)
     end
   end
   for _, output in ipairs(v.outputs or {}) do
-    if type(output.type) == 'table' and (not output.nilable or output.stub) then
+    if (output.type.arrayof or output.type.structure) and (not output.nilable or output.stub) then
       return true
     end
     if output.type == 'table' and output.stub then
@@ -27,6 +27,7 @@ local p = arg[1]
 local t = {}
 print('#include <lauxlib.h>')
 print('#include <lualib.h>')
+local enums = dofile('runtime/products/' .. p .. '/globals.lua').Enum
 for k, v in sorted((dofile('runtime/products/' .. p .. '/apis.lua'))) do
   if not skip(v) then
     local dot = k:find('%.')
@@ -103,6 +104,14 @@ for k, v in sorted((dofile('runtime/products/' .. p .. '/apis.lua'))) do
             error('weird table value ' .. k)
           end
         end
+      elseif output.type.enum then
+        -- Unfortunately we cannot rely on the existence of a Meta enum,
+        -- so we go fishing for the minimum value manually.
+        local x
+        for _, e in pairs(enums[output.type.enum]) do
+          x = (not x or e < x) and e or x
+        end
+        print(('  lua_pushnumber(L, %d);'):format(output.stub or x))
       else
         error('wat outputs ' .. k)
       end

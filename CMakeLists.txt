@@ -1398,10 +1398,14 @@ add_strict_lua_executable(
 
 foreach(product ${products})
   yaml2lua(products/${product}/apis)
+  yaml2lua(products/${product}/globals)
   add_custom_command(
     OUTPUT ${product}_capis.c
     COMMAND apis2c ${product} > ${CMAKE_CURRENT_BINARY_DIR}/${product}_capis.c
-    DEPENDS apis2c ${CMAKE_CURRENT_BINARY_DIR}/runtime/products/${product}/apis.lua
+    DEPENDS
+      apis2c
+      ${CMAKE_CURRENT_BINARY_DIR}/runtime/products/${product}/apis.lua
+      ${CMAKE_CURRENT_BINARY_DIR}/runtime/products/${product}/globals.lua
   )
   list(APPEND capi_sources ${product}_capis.c)
   list(APPEND capi_luamodules runtime.${product}.capi=c)
