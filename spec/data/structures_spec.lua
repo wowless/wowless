@@ -1,5 +1,12 @@
 describe('structures', function()
   for _, p in ipairs(require('build.data.products')) do
+    local api = require('wowless.api').new(function() end, 0, p)
+    local typechecker = require('wowless.typecheck')(api)
+    local function typecheck(spec, val)
+      local value, errmsg = typechecker(spec, val, true)
+      assert.Nil(errmsg)
+      assert.same(value, val)
+    end
     describe(p, function()
       local refs = {}
       local function refty(ty)
@@ -14,9 +21,9 @@ describe('structures', function()
           refty(x.type)
         end
       end
-      for _, api in pairs(require('build.data.products.' .. p .. '.apis')) do
-        reflist(api.inputs)
-        reflist(api.outputs)
+      for _, v in pairs(require('build.data.products.' .. p .. '.apis')) do
+        reflist(v.inputs)
+        reflist(v.outputs)
       end
       for _, v in pairs(require('build.data.products.' .. p .. '.events')) do
         for _, pv in ipairs(v.payload or {}) do
@@ -56,6 +63,19 @@ describe('structures', function()
           end)
         end
       end)
+      for k, v in pairs(actual) do
+        describe(k, function()
+          for fk, fv in pairs(v.fields) do
+            describe(fk, function()
+              if fv.stub ~= nil then
+                it('has stub of the right type', function()
+                  typecheck(fv, fv.stub)
+                end)
+              end
+            end)
+          end
+        end)
+      end
     end)
   end
 end)
