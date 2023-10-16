@@ -3,7 +3,7 @@ describe('uiobjects', function()
     local api = require('wowless.api').new(function() end, 0, p)
     local typechecker = require('wowless.typecheck')(api)
     local function typecheck(spec, val)
-      local value, errmsg = typechecker(spec, val)
+      local value, errmsg = typechecker(spec, val, true)
       assert.Nil(errmsg)
       assert.same(value, val)
     end
@@ -114,7 +114,7 @@ describe('uiobjects', function()
                     describe(output.name or i, function()
                       if output.stub ~= nil then
                         it('has stub of the right type', function()
-                          typecheck(output, output.stub, true)
+                          typecheck(output, output.stub)
                         end)
                       end
                     end)
