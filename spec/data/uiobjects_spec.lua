@@ -114,7 +114,7 @@ describe('uiobjects', function()
                     describe(output.name or i, function()
                       if output.stub ~= nil then
                         it('has stub of the right type', function()
-                          typecheck(output, output.stub)
+                          typecheck(output, output.stub, true)
                         end)
                       end
                     end)
