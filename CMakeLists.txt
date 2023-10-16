@@ -1433,9 +1433,11 @@ lua2c(
 add_library(
   wowlesslib STATIC
   wowlesslib.c
+  wowless/checks.h
   wowless/ext.c
   ${capi_sources}
 )
+target_include_directories(wowlesslib PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 target_link_libraries(wowlesslib elune)
 
 add_strict_lua_executable(

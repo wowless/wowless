@@ -39,6 +39,7 @@ local p = arg[1]
 local t = {}
 print('#include <lauxlib.h>')
 print('#include <lualib.h>')
+print('#include "wowless/checks.h"')
 local enums = dofile('runtime/products/' .. p .. '/globals.lua').Enum
 for k, v in sorted((dofile('runtime/products/' .. p .. '/apis.lua'))) do
   if not skip(v) then
@@ -52,28 +53,22 @@ for k, v in sorted((dofile('runtime/products/' .. p .. '/apis.lua'))) do
     for i, input in ipairs(v.inputs or {}) do
       local opt = input.nilable or input.default ~= nil
       local scalar = scalars[input.type]
-      if scalar then
-        if opt then
-          print(('  luaL_argcheck(L, lua_is%s(L, %d) || lua_isnoneornil(L, %d), %d, 0);'):format(scalar, i, i, i))
-        else
-          print(('  luaL_argcheck(L, lua_is%s(L, %d), %d, 0);'):format(scalar, i, i))
-        end
+      if scalar == 'number' or scalar == 'string' then
+        print(('  assert%s%s(L, %d);'):format(scalar, opt and 'ornil' or '', i))
+      elseif scalar then
+        print(('  asserttype%s(L, %d, LUA_T%s);'):format(opt and 'ornil' or '', i, scalar:upper()))
       elseif input.type == 'unknown' then
         if not opt then
           print(('  luaL_argcheck(L, !lua_isnoneornil(L, %d), %d, 0);'):format(i, i))
         end
       elseif input.type.enum then
         -- TODO check actual values; for now, just check it's a number
-        if opt then
-          print(('  luaL_argcheck(L, lua_isnumber(L, %d) || lua_isnoneornil(L, %d), %d, 0);'):format(i, i, i))
-        else
-          print(('  luaL_argcheck(L, lua_isnumber(L, %d), %d, 0);'):format(i, i))
-        end
+        print(('  assertnumber%s(L, %d);'):format(opt and 'ornil' or '', i))
       elseif input.type.arrayof then
         -- FIXME a lot more to say here
         assert(input.type.arrayof)
         print(('  if (!lua_isnoneornil(L, %d)) {'):format(i))
-        print(('    luaL_argcheck(L, lua_istable(L, %d), %d, 0);'):format(i, i))
+        print(('    asserttype(L, %d, LUA_TTABLE);'):format(i))
         print('  }')
       else
         error('wat inputs ' .. k)
