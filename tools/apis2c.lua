@@ -122,7 +122,15 @@ end
 print('static int register_apis(lua_State *L) {')
 print('  luaL_argcheck(L, lua_istable(L, 1), 1, 0);')
 print('  lua_settop(L, 1);')
-print('  luaL_register(L, NULL, reg_);')
+for k in sorted(t) do
+  if k == '' then
+    print('  luaL_register(L, NULL, reg_);')
+  else
+    print('  lua_newtable(L);')
+    print(('  luaL_register(L, NULL, reg_%s);'):format(k))
+    print(('  lua_setfield(L, -2, "%s");'):format(k))
+  end
+end
 print('  return 0;')
 print('}')
 print(('int luaopen_runtime_%s_capi(lua_State *L) {'):format(p))
