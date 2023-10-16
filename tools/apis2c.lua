@@ -59,7 +59,7 @@ for k, v in sorted((dofile('runtime/products/' .. p .. '/apis.lua'))) do
         print(('  asserttype%s(L, %d, LUA_T%s);'):format(opt and 'ornil' or '', i, scalar:upper()))
       elseif input.type == 'unknown' then
         if not opt then
-          print(('  luaL_argcheck(L, !lua_isnoneornil(L, %d), %d, 0);'):format(i, i))
+          print(('  assertpresent(L, %d);'):format(i))
         end
       elseif input.type.enum then
         -- TODO check actual values; for now, just check it's a number

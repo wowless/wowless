@@ -36,3 +36,7 @@ static void asserttypeornil(lua_State *L, int index, enum lua_Type type) {
     luaL_typerror(L, index, lua_typename(L, type));
   }
 }
+
+static void assertpresent(lua_State *L, int index) {
+  luaL_argcheck(L, !lua_isnoneornil(L, index), index, "value expected");
+}
