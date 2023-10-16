@@ -67,6 +67,11 @@ describe('structures', function()
         describe(k, function()
           for fk, fv in pairs(v.fields) do
             describe(fk, function()
+              if fv.default ~= nil then
+                it('has default of the right type', function()
+                  typecheck(fv, fv.default)
+                end)
+              end
               if fv.stub ~= nil then
                 it('has stub of the right type', function()
                   typecheck(fv, fv.stub)
