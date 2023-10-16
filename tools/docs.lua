@@ -255,6 +255,12 @@ local function rewriteApis()
           name = a.Name,
           type = 'unit',
         })
+      elseif a.Type == 'UnitToken' and a.Default == 'WOWGUID_NULL' then
+        table.insert(t, {
+          name = a.Name,
+          nilable = true,
+          type = 'unit',
+        })
       else
         table.insert(t, {
           default = enum[a.Type] and enum[a.Type][a.Default] or a.Default,

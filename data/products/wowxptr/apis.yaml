@@ -27663,8 +27663,8 @@ UnitEffectiveLevel:
 UnitExists:
   impl: UnitExists
   inputs:
-  - default: WOWGUID_NULL
-    name: unit
+  - name: unit
+    nilable: true
     type: unit
   outputs:
   - name: result
@@ -27709,8 +27709,8 @@ UnitGetTotalHealAbsorbs:
   - type: number
 UnitGroupRolesAssigned:
   inputs:
-  - default: WOWGUID_NULL
-    name: unit
+  - name: unit
+    nilable: true
     type: unit
   outputs:
   - name: result
@@ -27796,8 +27796,8 @@ UnitHPPerStamina:
     type: number
 UnitInAnyGroup:
   inputs:
-  - default: WOWGUID_NULL
-    name: unit
+  - name: unit
+    nilable: true
     type: unit
   - name: partyIndex
     nilable: true
@@ -27807,8 +27807,8 @@ UnitInAnyGroup:
     type: boolean
 UnitInBattleground:
   inputs:
-  - default: WOWGUID_NULL
-    name: unit
+  - name: unit
+    nilable: true
     type: unit
   - name: partyIndex
     nilable: true
@@ -27820,8 +27820,8 @@ UnitInBattleground:
 UnitInOtherParty: {}
 UnitInParty:
   inputs:
-  - default: WOWGUID_NULL
-    name: unit
+  - name: unit
+    nilable: true
     type: unit
   - name: partyIndex
     nilable: true
@@ -27838,8 +27838,8 @@ UnitInPartyShard:
     type: boolean
 UnitInRaid:
   inputs:
-  - default: WOWGUID_NULL
-    name: unit
+  - name: unit
+    nilable: true
     type: unit
   - name: partyIndex
     nilable: true
@@ -27861,8 +27861,8 @@ UnitInRange:
     type: boolean
 UnitInSubgroup:
   inputs:
-  - default: WOWGUID_NULL
-    name: unit
+  - name: unit
+    nilable: true
     type: unit
   - name: partyIndex
     nilable: true
@@ -27902,8 +27902,8 @@ UnitIsBattlePetCompanion:
 UnitIsBossMob: {}
 UnitIsCharmed:
   inputs:
-  - default: WOWGUID_NULL
-    name: unit
+  - name: unit
+    nilable: true
     type: unit
   outputs:
   - name: result
@@ -27918,8 +27918,8 @@ UnitIsConnected:
 UnitIsControlling: {}
 UnitIsCorpse:
   inputs:
-  - default: WOWGUID_NULL
-    name: unit
+  - name: unit
+    nilable: true
     type: unit
   outputs:
   - name: result
@@ -27966,8 +27966,8 @@ UnitIsFriend:
     type: boolean
 UnitIsGameObject:
   inputs:
-  - default: WOWGUID_NULL
-    name: unit
+  - name: unit
+    nilable: true
     type: unit
   outputs:
   - name: result
@@ -27996,8 +27996,8 @@ UnitIsInMyGuild:
     type: boolean
 UnitIsInteractable:
   inputs:
-  - default: WOWGUID_NULL
-    name: unit
+  - name: unit
+    nilable: true
     type: unit
   outputs:
   - name: result
@@ -28005,16 +28005,16 @@ UnitIsInteractable:
 UnitIsMercenary: {}
 UnitIsOtherPlayersBattlePet:
   inputs:
-  - default: WOWGUID_NULL
-    name: unit
+  - name: unit
+    nilable: true
     type: unit
   outputs:
   - name: result
     type: boolean
 UnitIsOtherPlayersPet:
   inputs:
-  - default: WOWGUID_NULL
-    name: unit
+  - name: unit
+    nilable: true
     type: unit
   outputs:
   - name: result
@@ -28031,8 +28031,8 @@ UnitIsOwnerOrControllerOfUnit:
 UnitIsPlayer:
   impl: UnitIsPlayer
   inputs:
-  - default: WOWGUID_NULL
-    name: unit
+  - name: unit
+    nilable: true
     type: unit
   - name: partyIndex
     nilable: true
@@ -28042,8 +28042,8 @@ UnitIsPlayer:
     type: boolean
 UnitIsPossessed:
   inputs:
-  - default: WOWGUID_NULL
-    name: unit
+  - name: unit
+    nilable: true
     type: unit
   outputs:
   - name: result
@@ -28064,8 +28064,8 @@ UnitIsPVPFreeForAll:
     type: boolean
 UnitIsPVPSanctuary:
   inputs:
-  - default: WOWGUID_NULL
-    name: unit
+  - name: unit
+    nilable: true
     type: unit
   outputs:
   - name: result
@@ -28073,8 +28073,8 @@ UnitIsPVPSanctuary:
 UnitIsQuestBoss: {}
 UnitIsRaidOfficer:
   inputs:
-  - default: WOWGUID_NULL
-    name: unit
+  - name: unit
+    nilable: true
     type: unit
   outputs:
   - name: result
@@ -28101,8 +28101,8 @@ UnitIsUnit:
     type: boolean
 UnitIsVisible:
   inputs:
-  - default: WOWGUID_NULL
-    name: unit
+  - name: unit
+    nilable: true
     type: unit
   outputs:
   - name: result
@@ -28186,16 +28186,16 @@ UnitPhaseReason:
       enum: PhaseReason
 UnitPlayerControlled:
   inputs:
-  - default: WOWGUID_NULL
-    name: unit
+  - name: unit
+    nilable: true
     type: unit
   outputs:
   - name: result
     type: boolean
 UnitPlayerOrPetInParty:
   inputs:
-  - default: WOWGUID_NULL
-    name: unit
+  - name: unit
+    nilable: true
     type: unit
   - name: partyIndex
     nilable: true
@@ -28205,8 +28205,8 @@ UnitPlayerOrPetInParty:
     type: boolean
 UnitPlayerOrPetInRaid:
   inputs:
-  - default: WOWGUID_NULL
-    name: unit
+  - name: unit
+    nilable: true
     type: unit
   - name: partyIndex
     nilable: true

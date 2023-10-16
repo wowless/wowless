@@ -13,7 +13,7 @@ describe('apis', function()
           describe('inputs', function()
             for k, input in ipairs(api.inputs or {}) do
               describe(k, function()
-                if input.default ~= nil and input.default ~= 'WOWGUID_NULL' then -- FIXME
+                if input.default ~= nil then
                   it('default must typecheck', function()
                     local value, errmsg = typechecker(input, input.default)
                     assert.Nil(errmsg)
