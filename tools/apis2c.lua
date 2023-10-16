@@ -125,21 +125,14 @@ for k, v in sorted(t) do
   print('  { 0, 0 },')
   print('};')
 end
-print('static int register_apis(lua_State *L) {')
-print('  luaL_argcheck(L, lua_istable(L, 1), 1, 0);')
-print('  lua_settop(L, 1);')
+print('static struct nsreg nsregs[] = {')
 for k in sorted(t) do
-  if k == '' then
-    print('  luaL_register(L, NULL, reg_);')
-  else
-    print('  lua_newtable(L);')
-    print(('  luaL_register(L, NULL, reg_%s);'):format(k))
-    print(('  lua_setfield(L, -2, "%s");'):format(k))
+  if k ~= '' then
+    print(('  { "%s", reg_%s },'):format(k, k))
   end
 end
-print('  return 0;')
-print('}')
+print('  { 0, 0 },')
+print('};')
 print(('int luaopen_runtime_%s_capi(lua_State *L) {'):format(p))
-print('  lua_pushcfunction(L, register_apis);')
-print('  return 1;')
+print('  return setup_runtime(L, reg_, nsregs);')
 print('}')
