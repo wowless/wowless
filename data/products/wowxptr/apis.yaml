@@ -12287,6 +12287,16 @@ C_PartyInfo.GetInviteReferralInfo:
     type: boolean
   - name: outClubId
     type: string
+C_PartyInfo.GetMinItemLevel:
+  inputs:
+  - name: avgItemLevelCategory
+    type:
+      enum: AvgItemLevelCategories
+  outputs:
+  - name: minItemLevel
+    type: number
+  - name: playerNameWithLowestItemLevel
+    type: string
 C_PartyInfo.GetMinLevel:
   inputs:
   - name: category
@@ -13302,6 +13312,11 @@ C_PlayerInfo.IsExpansionLandingPageUnlockedForPlayer:
   outputs:
   - name: isUnlocked
     type: boolean
+C_PlayerInfo.IsMirrorImage:
+  inputs: {}
+  outputs:
+  - name: isMirrorImage
+    type: boolean
 C_PlayerInfo.IsPlayerEligibleForNPE:
   inputs: {}
   outputs:
@@ -14121,6 +14136,11 @@ C_PvP.GetSkirmishInfo:
   - name: battlemasterListInfo
     type:
       structure: C_PvP.BattlemasterListInfo
+C_PvP.GetSoloRBGMinItemLevel:
+  inputs: {}
+  outputs:
+  - name: minItemLevel
+    type: number
 C_PvP.GetSpecialEventBrawlInfo:
   inputs: {}
   outputs:

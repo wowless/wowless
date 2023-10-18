@@ -4339,6 +4339,9 @@ C_PvP.PvpBrawlInfo:
         arrayof: string
     maxLevel:
       type: number
+    minItemLevel:
+      default: 0
+      type: number
     minLevel:
       type: number
     name:
