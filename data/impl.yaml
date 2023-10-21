@@ -146,6 +146,9 @@ C_UIColor.GetColors:
 C_XMLUtil.GetTemplateInfo:
   frameworks:
   - api
+C_XMLUtil.GetTemplateInfo_10_2:
+  frameworks:
+  - api
 CreateFont:
   frameworks:
   - api

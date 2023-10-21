@@ -21170,7 +21170,7 @@ C_WowTokenUI.StartTokenSell:
     type: string
   outputs: {}
 C_XMLUtil.GetTemplateInfo:
-  impl: C_XMLUtil.GetTemplateInfo
+  impl: C_XMLUtil.GetTemplateInfo_10_2
   inputs:
   - name: name
     type: string

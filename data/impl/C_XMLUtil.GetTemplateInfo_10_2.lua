@@ -5,6 +5,7 @@ if t then
     height = 1,
     inherits = t.inherits and table.concat(t.inherits, ','),
     keyValues = {},
+    sourceLocation = 'source',
     type = t.type,
     width = 1,
   }
