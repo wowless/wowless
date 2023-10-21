@@ -512,7 +512,7 @@ local syncTests = function()
           check1('moo', down:GetParentKey())
           check0(down:SetParentKey('cow'))
           assertEquals(up.cow, down)
-          if _G.WowlessData.product == 'wowxptr' then
+          if up.ClearParentKey then
             assertEquals(nil, up.moo)
           else
             assertEquals(up.moo, down)
