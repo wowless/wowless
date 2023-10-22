@@ -46,7 +46,8 @@ repos:
     name: luacheck
     entry: luacheck
     language: system
-    types: [lua]
+    types: [file]
+    files: (\.lua|^.luacheckrc)$
   - id: addon-chmod
     name: addon execute bits
     entry: chmod 755
