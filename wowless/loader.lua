@@ -144,7 +144,8 @@ local function loader(api, cfg)
     elseif script.text then
       local args = xmlimpls[string.lower(script.type)].tag.script.args or 'self, ...'
       local fnstr = 'return function(' .. args .. ') ' .. script.text .. ' end'
-      fn = setfenv(loadstr(fnstr, filename, script.line), env)()
+      local outfn = setfenv(loadstr(fnstr, filename, script.line), api.env)
+      fn = setfenv(outfn(), env)
       scriptCache[script] = fn
     end
     if obj.scripts then
@@ -250,13 +251,9 @@ local function loader(api, cfg)
       if minColor and maxColor then
         local minR, minG, minB, minA = getColor(minColor)
         local maxR, maxG, maxB, maxA = getColor(maxColor)
-        if parent.SetGradientAlpha then
-          parent:SetGradientAlpha(e.attr.orientation, minR, minG, minB, minA, maxR, maxG, maxB, maxA)
-        else
-          local min = { r = minR, g = minG, b = minB, a = minA }
-          local max = { r = maxR, g = maxG, b = maxB, a = maxA }
-          parent:SetGradient(e.attr.orientation, min, max)
-        end
+        local min = { r = minR, g = minG, b = minB, a = minA }
+        local max = { r = maxR, g = maxG, b = maxB, a = maxA }
+        parent:SetGradient(e.attr.orientation, min, max)
       end
     end,
     highlightcolor = function(_, e, parent)
@@ -338,7 +335,7 @@ local function loader(api, cfg)
     end,
   }
 
-  local function forAddon(addonName, addonEnv, addonRoot)
+  local function forAddon(addonName, addonEnv, addonRoot, isSecure)
     local loadFile
 
     local xmlattrlang = {
@@ -469,7 +466,7 @@ local function loader(api, cfg)
 
       function loadElement(ctx, e, parent)
         -- This assumes that uiobject types and xml types are the same "space" of strings.
-        if api.IsIntrinsicType(e.type) then
+        if api.IsIntrinsicType(e.type) or e.type == 'worldframe' then
           ctx = not e.attr.intrinsic and ctx or mixin({}, ctx, { intrinsic = true })
           local template = {
             inherits = e.attr.inherits,
@@ -515,7 +512,10 @@ local function loader(api, cfg)
               if virtual and ctx.ignoreVirtual then
                 api.log(1, 'ignoring virtual on ' .. tostring(name))
               end
-              return api.CreateUIObject(e.type, name, parent, ctx.useAddonEnv and addonEnv or nil, { template })
+              if e.type ~= 'worldframe' or not addonEnv then
+                local ety = e.type == 'worldframe' and 'frame' or e.type
+                return api.CreateUIObject(ety, name, parent, ctx.useAddonEnv and addonEnv or nil, { template })
+              end
             end
           end
         else
@@ -597,8 +597,15 @@ local function loader(api, cfg)
           success, content = pcall(readFile, secondaryFileName)
         end
         if success then
-          -- TODO only pass SecureCapsuleGet on signed addons
-          loadFn(filename, content, nil, closureTaint, addonName, addonEnv, api.env.SecureCapsuleGet)
+          loadFn(
+            filename,
+            content,
+            nil,
+            closureTaint,
+            addonName,
+            addonEnv,
+            isSecure and api.env.SecureCapsuleGet or nil
+          )
         else
           api.log(1, 'skipping missing file %s', filename)
         end
@@ -756,7 +763,7 @@ local function loader(api, cfg)
         end
       end
       api.log(1, 'loading addon files for %s', addonName)
-      local loadFile = forAddon(addonName, {}, toc.dir)
+      local loadFile = forAddon(addonName, {}, toc.dir, not not toc.fdid)
       for _, file in ipairs(toc.files) do
         loadFile(file)
       end
@@ -783,7 +790,7 @@ local function loader(api, cfg)
 
   local function loadFrameXml()
     local tocdir = path.join(rootDir, 'Interface', 'FrameXML')
-    local loadFile = forAddon(nil, nil, tocdir)
+    local loadFile = forAddon(nil, nil, tocdir, true)
     for tag, text in sqlitedb:urows('SELECT BaseTag, TagText_lang FROM GlobalStrings') do
       api.env[tag] = text
     end

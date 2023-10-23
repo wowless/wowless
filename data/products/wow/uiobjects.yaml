@@ -1275,7 +1275,6 @@ Minimap:
     SetQuestBlobInsideAlpha: {}
     SetQuestBlobInsideTexture: {}
     SetQuestBlobOutsideAlpha: {}
-    SetQuestBlobOutsideSelectedTexture: {}
     SetQuestBlobOutsideTexture: {}
     SetQuestBlobRingAlpha: {}
     SetQuestBlobRingScalar: {}
@@ -1284,7 +1283,6 @@ Minimap:
     SetTaskBlobInsideAlpha: {}
     SetTaskBlobInsideTexture: {}
     SetTaskBlobOutsideAlpha: {}
-    SetTaskBlobOutsideSelectedTexture: {}
     SetTaskBlobOutsideTexture: {}
     SetTaskBlobRingAlpha: {}
     SetTaskBlobRingScalar: {}
@@ -2189,8 +2187,3 @@ UnitPositionFrame:
     SetUnitColor: {}
     StartPlayerPing: {}
     StopPlayerPing: {}
-WorldFrame:
-  inherits:
-    Frame: {}
-  methods: {}
-  singleton: true

@@ -59,6 +59,7 @@ MouseMixin/EnableMouse: {}
 MouseMixin/IsMouseEnabled: {}
 ParentedObject/GetDebugName: {}
 ParentedObject/SetParent: {}
+ParentedObjectBase/ClearParentKey: {}
 ParentedObjectBase/GetParentKey: {}
 ParentedObjectBase/SetParentKey: {}
 Path/CreateControlPoint: {}

@@ -157,7 +157,11 @@ local function run(cfg)
       end
       for k, v in require('pl.tablex').sort(cmds) do
         api.log(2, 'firing chat command ' .. k .. ' via ' .. v)
-        api.SendEvent('EXECUTE_CHAT_LINE', v)
+        if api.datalua.events.EXECUTE_CHAT_LINE then
+          api.SendEvent('EXECUTE_CHAT_LINE', v)
+        elseif api.macroExecuteLineCallback then
+          api.CallSafely(api.macroExecuteLineCallback, v)
+        end
       end
     end,
     update = function()

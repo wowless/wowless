@@ -49,8 +49,11 @@ type:
           type:
             oneof:
             - literal: text
-            - sequenceof:
-                ref: xml
+            - mapof:
+                key:
+                  ref: xml
+                value:
+                  record: {}
         extends:
           type:
             ref: xml

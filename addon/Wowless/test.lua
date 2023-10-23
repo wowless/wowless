@@ -1,4 +1,4 @@
-local addonName, G = ...
+local addonName, G, extraArg = ...
 local assertEquals = _G.assertEquals
 
 local check0 = G.check0
@@ -506,18 +506,19 @@ local syncTests = function()
         end,
         ['parent keys'] = function()
           local up = CreateFrame('Frame')
-          if not up.GetParentKey then
-            return
-          end
           local down = CreateFrame('Frame', nil, up)
           check1(nil, down:GetParentKey())
           up.moo = down
           check1('moo', down:GetParentKey())
           check0(down:SetParentKey('cow'))
           assertEquals(up.cow, down)
-          assertEquals(up.moo, down)
-          check1('moo', down:GetParentKey())
-          up.moo = nil
+          if up.ClearParentKey then
+            assertEquals(nil, up.moo)
+          else
+            assertEquals(up.moo, down)
+            check1('moo', down:GetParentKey())
+            up.moo = nil
+          end
           check1('cow', down:GetParentKey())
           up.cow = nil
           check1(nil, down:GetParentKey())
@@ -614,6 +615,21 @@ local syncTests = function()
               }
             end,
           }
+        end,
+      }
+    end,
+
+    loading = function()
+      return {
+        addonName = function()
+          assertEquals('Wowless', addonName)
+        end,
+        addonTable = function()
+          assertEquals('table', type(G))
+          assertEquals(nil, getmetatable(G))
+        end,
+        extraArg = function()
+          assertEquals(nil, extraArg)
         end,
       }
     end,
@@ -799,6 +815,22 @@ local syncTests = function()
         'parent' .. (',true'):rep(6),
       }, '\n')
       assertEquals(expected, table.concat(log, '\n'))
+    end,
+    WorldFrame = function()
+      return {
+        ['is a normal frame'] = function()
+          if _G.WorldFrame then
+            assertEquals('Frame', _G.WorldFrame:GetObjectType())
+          end
+        end,
+        ['is not a frame type'] = function()
+          assertEquals(false, (pcall(CreateFrame, 'WorldFrame')))
+          table.insert(_G.Wowless.ExpectedLuaWarnings, {
+            warnText = 'Unknown frame type: WorldFrame',
+            warnType = 0,
+          })
+        end,
+      }
     end,
   }
 end

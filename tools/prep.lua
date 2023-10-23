@@ -23,6 +23,7 @@ local Mixin = require('wowless.util').mixin
 
 local globals = parseYaml('data/products/' .. product .. '/globals.yaml')
 local structures = parseYaml('data/products/' .. product .. '/structures.yaml')
+local stringenums = parseYaml('data/stringenums.yaml')
 
 local function valstr(value)
   local ty = type(value)
@@ -40,7 +41,6 @@ end
 local specDefault = (function()
   local defaultOutputs = {
     boolean = 'false',
-    FramePoint = 'CENTER', -- TODO move this
     ['function'] = 'function() end',
     ['nil'] = 'nil',
     number = '1',
@@ -80,6 +80,13 @@ local specDefault = (function()
     local ty = assert(spec.type, 'spec missing a type')
     if defaultOutputs[ty] then
       return defaultOutputs[ty]
+    end
+    if stringenums[ty] then
+      local least
+      for k in pairs(stringenums[ty]) do
+        least = (least == nil or k < least) and k or least
+      end
+      return least
     end
     if ty.arrayof then
       return '{' .. specDefault({ type = ty.arrayof }) .. '}'
@@ -293,7 +300,6 @@ for k, v in pairs(uiobjectdata) do
     objectType = v.objectType,
     singleton = v.singleton,
     warner = v.warner,
-    zombie = v.zombie,
   }
 end
 

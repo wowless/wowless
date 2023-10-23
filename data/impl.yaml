@@ -73,6 +73,9 @@ C_ItemInteraction.GetItemInteractionInfo:
   sqls:
   - lookup: C_ItemInteraction.GetItemInteractionInfo
     table: true
+C_Macro.SetMacroExecuteLineCallback:
+  frameworks:
+  - api
 C_Map.GetMapInfo:
   sqls:
   - lookup: C_Map.GetMapInfo
@@ -141,6 +144,9 @@ C_UIColor.GetColors:
   sqls:
   - cursor: C_UIColor.GetColors
 C_XMLUtil.GetTemplateInfo:
+  frameworks:
+  - api
+C_XMLUtil.GetTemplateInfo_10_2:
   frameworks:
   - api
 CreateFont:
@@ -280,6 +286,9 @@ RequestTimePlayed:
   states:
   - Time
 RunMacroText:
+  frameworks:
+  - api
+RunMacroText_Callback:
   frameworks:
   - api
 RunScript: {}

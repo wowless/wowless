@@ -86,6 +86,7 @@ local function mixin(t, ...)
   return t
 end
 
+G.addonEnv = G
 G.assertEquals = assertEquals
 G.assertRecursivelyEqual = assertRecursivelyEqual
 G.check0 = check0
@@ -93,4 +94,5 @@ G.check1 = check1
 G.check4 = check4
 G.check6 = check6
 G.check7 = check7
+G.globalEnv = _G
 G.mixin = mixin

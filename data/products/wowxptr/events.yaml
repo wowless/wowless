@@ -4030,10 +4030,6 @@ EQUIPMENT_SWAP_FINISHED:
     type: number
 EQUIPMENT_SWAP_PENDING:
   payload: {}
-EXECUTE_CHAT_LINE:
-  payload:
-  - name: chatLine
-    type: string
 EXPAND_BAG_BAR_CHANGED:
   payload:
   - name: expandBagBar

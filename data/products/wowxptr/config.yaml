@@ -56,12 +56,10 @@ addon:
     C_Traits.GetEntryInfo: {}
     C_Traits.GetTreeInfo: {}
     SetPortraitToTexture: {}
-  skipped_uiobjects:
-    Minimap: singleton
-    WorldFrame: singleton
 docs:
   apis:
     skip_namespaces:
+      C_BarberShopInternal: {}
       C_ConfigurationWarnings: {}
   events:
     never_sent:

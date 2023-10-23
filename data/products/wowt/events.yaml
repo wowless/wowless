@@ -20,6 +20,12 @@ ACTION_RANGE_CHECK_UPDATE:
     type: boolean
   - name: checksRange
     type: boolean
+ACTION_USABLE_CHANGED:
+  payload:
+  - name: changes
+    type:
+      arrayof:
+        structure: C_ActionBar.ActionUsableState
 ACTION_WILL_BIND_ITEM:
   payload: {}
 ACTIONBAR_HIDEGRID:
@@ -4024,10 +4030,6 @@ EQUIPMENT_SWAP_FINISHED:
     type: number
 EQUIPMENT_SWAP_PENDING:
   payload: {}
-EXECUTE_CHAT_LINE:
-  payload:
-  - name: chatLine
-    type: string
 EXPAND_BAG_BAR_CHANGED:
   payload:
   - name: expandBagBar
@@ -4392,6 +4394,8 @@ GLUE_CONSOLE_LOG:
     type: string
 GLUE_SCREENSHOT_FAILED:
   payload: {}
+GLUE_SCREENSHOT_STARTED:
+  payload: {}
 GLUE_SCREENSHOT_SUCCEEDED:
   payload: {}
 GM_PLAYER_INFO:
@@ -4401,7 +4405,9 @@ GM_PLAYER_INFO:
   - name: info
     type: string
 GOSSIP_CLOSED:
-  payload: {}
+  payload:
+  - name: interactionIsContinuing
+    type: boolean
 GOSSIP_CONFIRM:
   payload:
   - name: gossipID
@@ -4778,22 +4784,6 @@ KIOSK_SESSION_EXPIRATION_WARNING:
   - name: seconds
     type: number
 KIOSK_SESSION_EXPIRED:
-  payload: {}
-KNOWLEDGE_BASE_ARTICLE_LOAD_FAILURE:
-  payload: {}
-KNOWLEDGE_BASE_ARTICLE_LOAD_SUCCESS:
-  payload: {}
-KNOWLEDGE_BASE_QUERY_LOAD_FAILURE:
-  payload: {}
-KNOWLEDGE_BASE_QUERY_LOAD_SUCCESS:
-  payload: {}
-KNOWLEDGE_BASE_SERVER_MESSAGE:
-  payload: {}
-KNOWLEDGE_BASE_SETUP_LOAD_FAILURE:
-  payload: {}
-KNOWLEDGE_BASE_SETUP_LOAD_SUCCESS:
-  payload: {}
-KNOWLEDGE_BASE_SYSTEM_MOTD_UPDATED:
   payload: {}
 KNOWN_TITLES_UPDATE:
   payload:
@@ -6470,6 +6460,13 @@ SHOW_SUBSCRIPTION_INTERSTITIAL:
   - name: type
     type:
       enum: SubscriptionInterstitialType
+SHOW_SUBTITLE:
+  payload:
+  - name: subtitle
+    type: string
+  - name: sender
+    nilable: true
+    type: string
 SIMPLE_BROWSER_WEB_ERROR:
   payload:
   - name: errorCode

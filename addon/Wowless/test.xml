@@ -607,4 +607,75 @@
       </AnimationGroup>
     </Animations>
   </Frame>
+
+  <Script>
+    WowlessLog = {}
+  </Script>
+  <ScopedModifier>
+    <Script>
+      table.insert(WowlessLog, 'moo')
+    </Script>
+  </ScopedModifier>
+  <Script>
+    assertEquals('moo', table.concat(WowlessLog, ','))
+  </Script>
+
+  <ScopedModifier scriptsUseGivenEnv='true'>
+    <Frame>
+      <Scripts>
+        <OnLoad>
+          assertEquals(addonEnv, globalEnv.getfenv(1))
+        </OnLoad>
+      </Scripts>
+    </Frame>
+  </ScopedModifier>
+
+  <!--
+    Mixin tests. Failure cases are not tested because the warning format
+    depends on line numbers and also tickles the old issue of extra file:line
+    entries on XML error strings.
+  -->
+  <Script>
+    WowlessGlobalMixin = { cow = 'moo' }
+  </Script>
+  <Frame mixin='WowlessGlobalMixin'>
+    <Scripts>
+      <OnLoad>
+        assertEquals('moo', self.cow)
+      </OnLoad>
+    </Scripts>
+  </Frame>
+  <ScopedModifier scriptsUseGivenEnv='true'>
+    <Frame>
+      <Scripts>
+        <OnLoad>
+          WowlessScopedMixin = { moo = 'cow' }
+        </OnLoad>
+      </Scripts>
+    </Frame>
+    <Frame mixin='WowlessScopedMixin'>
+      <Scripts>
+        <OnLoad>
+          assertEquals('cow', self.moo)
+        </OnLoad>
+      </Scripts>
+    </Frame>
+  </ScopedModifier>
+
+  <!-- TODO disabled until we support cranky XML errors -->
+  <!--
+  <Script>
+    WowlessLog = {}
+  </Script>
+  <WorldFrame>
+    <Scripts>
+      <OnLoad>
+        table.insert(WowlessLog, 'moo')
+      </OnLoad>
+    </Scripts>
+  </WorldFrame>
+  <Script>
+    assertEquals(nil, (next(WowlessLog)))
+  </Script>
+  -->
 </Ui>
