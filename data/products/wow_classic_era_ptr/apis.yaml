@@ -12477,9 +12477,9 @@ LoadAddOn:
     type: string
 LoadBindings: {}
 loadstring:
-  stdlib: loadstring
+  impl: loadstring
 loadstring_untainted:
-  stdlib: loadstring_untainted
+  impl: loadstring_untainted
 LoadURLIndex: {}
 log:
   alias: math.log

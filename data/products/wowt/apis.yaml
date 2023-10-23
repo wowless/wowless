@@ -26401,9 +26401,9 @@ ListChannelByName: {}
 ListChannels: {}
 LoadBindings: {}
 loadstring:
-  stdlib: loadstring
+  impl: loadstring
 loadstring_untainted:
-  stdlib: loadstring_untainted
+  impl: loadstring_untainted
 LoadURLIndex:
   inputs:
   - name: index

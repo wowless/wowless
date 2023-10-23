@@ -84,6 +84,15 @@ local function apiTests()
       local frame = CreateFrame('Frame', name)
       assertEquals(frame, _G.GetClickFrame(name))
     end,
+    loadstring = function()
+      return {
+        globalenv = function()
+          local _G = _G
+          setfenv(1, {})
+          _G.assertEquals(_G, _G.getfenv(_G.loadstring('')))
+        end,
+      }
+    end,
   }
 end
 G.ApiTests = apiTests
