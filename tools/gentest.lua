@@ -147,7 +147,6 @@ local ptablemap = {
           objtype = objTypes[k],
           virtual = v.virtual,
           warner = v.warner,
-          zombie = v.zombie,
         }
       end
     end

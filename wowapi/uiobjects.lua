@@ -35,7 +35,6 @@ local function mkBaseUIObjectTypes(api)
           metaindex = metaindex,
           name = ty.cfg.objectType or k,
           warner = ty.cfg.warner,
-          zombie = ty.cfg.zombie,
         }
       end
     end
@@ -57,7 +56,6 @@ local function mkBaseUIObjectTypes(api)
         name = v.name,
         sandboxMT = { __index = sandboxIndex },
         warner = v.warner,
-        zombie = v.zombie,
       }
     end
     return t

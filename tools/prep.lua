@@ -300,7 +300,6 @@ for k, v in pairs(uiobjectdata) do
     objectType = v.objectType,
     singleton = v.singleton,
     warner = v.warner,
-    zombie = v.zombie,
   }
 end
 

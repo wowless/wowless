@@ -223,9 +223,6 @@ local function new(log, maxErrors, product)
     if InheritsFrom(typename, 'region') and obj:IsVisible() then
       RunScript(ud, 'OnShow')
     end
-    if objtype.zombie then
-      setmetatable(obj, nil)
-    end
     return ud
   end
 

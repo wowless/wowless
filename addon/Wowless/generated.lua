@@ -327,7 +327,7 @@ function G.GeneratedTests()
       assertEquals(expectedErr, err:sub(err:len() - expectedErr:len() + 1))
     end
     local indexes = {}
-    local function mkTests(objectTypeName, zombie, factory, tests)
+    local function mkTests(objectTypeName, factory, tests)
       local obj, mt
       if objectTypeName == 'Minimap' then
         obj = _G.Minimap or CreateFrame('Minimap')
@@ -343,39 +343,34 @@ function G.GeneratedTests()
         mt = getmetatable(obj)
         assert(mt == getmetatable(obj2))
       end
-      if zombie then
-        assert(mt == nil)
-        assertEquals(objectTypeName, CreateFrame('Frame').GetObjectType(obj))
-      else
-        assert(mt ~= nil)
-        assertEquals(objectTypeName, obj:GetObjectType())
-        assert(getmetatable(mt) == nil)
-        local mtk, __index = next(mt)
-        assertEquals('__index', mtk)
-        assertEquals('table', type(__index))
-        assertEquals(nil, next(mt, mtk))
-        assertEquals(nil, getmetatable(__index))
-        assertEquals(nil, indexes[__index])
-        indexes[__index] = true
-        return {
-          contents = function()
-            local udk, udv = next(obj)
-            assertEquals(udk, 0)
-            assertEquals('userdata', type(udv))
-            assert(getmetatable(udv) == nil)
-            assert(next(obj, udk) == nil or objectTypeName == 'Minimap')
-          end,
-          methods = function()
-            local t = tests(__index)
-            for k in pairs(__index) do
-              t[k] = t[k] or function()
-                error('missing')
-              end
+      assert(mt ~= nil)
+      assertEquals(objectTypeName, obj:GetObjectType())
+      assert(getmetatable(mt) == nil)
+      local mtk, __index = next(mt)
+      assertEquals('__index', mtk)
+      assertEquals('table', type(__index))
+      assertEquals(nil, next(mt, mtk))
+      assertEquals(nil, getmetatable(__index))
+      assertEquals(nil, indexes[__index])
+      indexes[__index] = true
+      return {
+        contents = function()
+          local udk, udv = next(obj)
+          assertEquals(udk, 0)
+          assertEquals('userdata', type(udv))
+          assert(getmetatable(udv) == nil)
+          assert(next(obj, udk) == nil or objectTypeName == 'Minimap')
+        end,
+        methods = function()
+          local t = tests(__index)
+          for k in pairs(__index) do
+            t[k] = t[k] or function()
+              error('missing')
             end
-            return t
-          end,
-        }
-      end
+          end
+          return t
+        end,
+      }
     end
     local factories = {
       Actor = function()
@@ -466,7 +461,7 @@ function G.GeneratedTests()
                 return assertCreateFrame(name)
               end
             assert(factory, 'missing factory')
-            return mkTests(cfg.objtype, cfg.zombie, factory, function(__index)
+            return mkTests(cfg.objtype, factory, function(__index)
               local mtests = {}
               for mname in pairs(cfg.methods) do
                 mtests[mname] = function()

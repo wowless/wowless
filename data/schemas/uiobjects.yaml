@@ -104,5 +104,3 @@ type:
           type: boolean
         warner:
           type: boolean
-        zombie:
-          type: boolean
