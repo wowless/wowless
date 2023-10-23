@@ -36,11 +36,14 @@ io.write([[#include "lauxlib.h"
 ]])
 if next(modules) then
   for k, v in sorted(modules) do
-    io.write(('static const char %s[] = {\n'):format(k:gsub('%.', '_')))
+    io.write(('static const char %s[] = {'):format(k:gsub('%.', '_')))
     for i = 1, v:len() do
-      io.write(('  0x%02x,\n'):format(v:byte(i)))
+      if i % 12 == 1 then
+        io.write('\n ')
+      end
+      io.write((' 0x%02x,'):format(v:byte(i)))
     end
-    io.write('};\n')
+    io.write('\n};\n')
   end
   io.write([[
 struct module {
