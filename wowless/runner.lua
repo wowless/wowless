@@ -1,8 +1,6 @@
 local function run(cfg)
   local newglobal = { tostring = tostring }
   local oldglobal = require('wowless.ext').setglobaltable(newglobal)
-  print('newglobal = ' .. tostring(newglobal))
-  print('oldglobal = ' .. tostring(oldglobal))
   assert(cfg, 'missing configuration')
   assert(cfg.product, 'missing product')
   local loglevel = cfg.loglevel or 0
@@ -13,6 +11,7 @@ local function run(cfg)
     end
   end
   local api = require('wowless.api').new(log, cfg.maxErrors, cfg.product)
+  api.globalenv = newglobal
   local loader = require('wowless.loader').loader(api, {
     otherAddonDirs = cfg.otherAddonDirs,
     product = cfg.product,

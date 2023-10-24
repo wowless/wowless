@@ -1,7 +1,4 @@
-local env, arg = ...
+local api, arg = ...
 local narg = tonumber(arg)
 local fenv = getfenv(narg and narg + 3 or arg)
-print(_G)
-print(env)
-print(fenv)
-return fenv == _G and env or fenv
+return (fenv == _G or fenv == api.globalenv) and api.env or fenv

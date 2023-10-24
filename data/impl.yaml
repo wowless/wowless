@@ -189,7 +189,7 @@ GetClickFrame:
   - api
 getfenv:
   frameworks:
-  - env
+  - api
 GetFontStringMetatable:
   frameworks:
   - api
