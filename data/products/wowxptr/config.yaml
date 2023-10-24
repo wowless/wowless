@@ -20,6 +20,7 @@ addon:
       VasServiceType: {}
     globalapis:
       CreateForbiddenFrame: {}
+      loadstring_untainted: {}
   hooked_globals:
     SetItemRef: {}
   ignore_cvar_value:
