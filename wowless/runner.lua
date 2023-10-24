@@ -159,8 +159,12 @@ local function run(cfg)
         api.log(2, 'firing chat command ' .. k .. ' via ' .. v)
         if api.datalua.events.EXECUTE_CHAT_LINE then
           api.SendEvent('EXECUTE_CHAT_LINE', v)
-        elseif api.macroExecuteLineCallback then
-          api.CallSafely(api.macroExecuteLineCallback, v)
+        elseif api.datalua.apis['C_Macro.SetMacroExecuteLineCallback'] then
+          if api.macroExecuteLineCallback then
+            api.CallSafely(api.macroExecuteLineCallback, v)
+          end
+        else
+          error('unknown macro execution model')
         end
       end
     end,
