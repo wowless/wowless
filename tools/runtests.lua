@@ -14,6 +14,7 @@ _G.assert = require('luassert')
 _G.describe = doit
 _G.it = doit
 for _, f in ipairs(arg) do
+  require('wowless.ext').setglobaltable(_G)
   local success, msg = pcall(dofile, f)
   if not success then
     table.insert(errors, f .. '\n' .. msg)
