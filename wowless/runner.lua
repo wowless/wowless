@@ -1,6 +1,6 @@
 local function run(cfg)
   local newglobal = { tostring = tostring }
-  local oldglobal = require('wowless.ext').setglobaltable(newglobal)
+  require('wowless.ext').setglobaltable(newglobal)
   assert(cfg, 'missing configuration')
   assert(cfg.product, 'missing product')
   local loglevel = cfg.loglevel or 0
