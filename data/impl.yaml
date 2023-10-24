@@ -280,6 +280,12 @@ IsTestBuild:
 LoadAddOn:
   frameworks:
   - loader
+loadstring:
+  frameworks:
+  - env
+loadstring_untainted:
+  frameworks:
+  - env
 RequestTimePlayed:
   frameworks:
   - api
