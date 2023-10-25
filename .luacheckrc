@@ -3,6 +3,7 @@ read_globals = {
   'debug.getglobalstats',
   'debug.gettime',
   'debug.newcfunction',
+  'debug.newsecurefunction',
   'debug.setnewclosuretaint',
   'debug.setprofilingenabled',
   'forceinsecure',
