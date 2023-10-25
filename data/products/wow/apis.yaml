@@ -21531,7 +21531,7 @@ FocusUnit:
   outputs: {}
 FollowUnit: {}
 forceinsecure:
-  stdlib: forceinsecure
+  impl: forceinsecure
 ForceLogout: {}
 ForceQuit: {}
 ForfeitDuel: {}

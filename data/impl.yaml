@@ -164,6 +164,7 @@ EnumerateFrames:
 FillLocalizedClassList:
   sqls:
   - cursor: FillLocalizedClassList
+forceinsecure: {}
 GetAddOnEnableState: {}
 GetAddOnInfo: {}
 GetAddOnMetadata: {}
