@@ -64,7 +64,7 @@ local function mkBaseUIObjectTypes(api)
   local function wrapstrfn(s, fname, args, ...)
     local wrapstr = ('local %s=...;return %s'):format(args, s)
     local wrapfn = assert(loadstring(wrapstr, fname))
-    setfenv(wrapfn, getfenv(1))
+    setfenv(wrapfn, _G)
     return wrapfn(...)
   end
 
