@@ -26400,9 +26400,9 @@ ListChannelByName: {}
 ListChannels: {}
 LoadBindings: {}
 loadstring:
-  impl: loadstring
+  stdlib: loadstring
 loadstring_untainted:
-  impl: loadstring_untainted
+  stdlib: loadstring_untainted
 LoadURLIndex:
   inputs:
   - name: index
@@ -26862,7 +26862,7 @@ SearchLFGJoin: {}
 SearchLFGLeave: {}
 SearchLFGSort: {}
 securecall:
-  impl: securecall
+  stdlib: securecall
 securecallfunction:
   stdlib: securecallfunction
 SecureCmdOptionParse:
