@@ -233,6 +233,7 @@ local function run(cfg)
       assert(type(v) ~= 'table' or (k ~= 'luarep') == not api.UserData(v), k)
     end
   end
+  assert(issecure(), 'wowless bug: framework is tainted')
 
   return api, loader
 end
