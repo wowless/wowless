@@ -1,5 +1,15 @@
 local function run(cfg)
-  local newglobal = { tostring = tostring }
+  require('lfs')
+  require('lsqlite3')
+  local mt = {
+    __index = function(_, k)
+      error('invalid index ' .. tostring(k))
+    end,
+    __newindex = function(_, k)
+      error('invalid newindex ' .. tostring(k))
+    end,
+  }
+  local newglobal = setmetatable({ tostring = tostring }, mt)
   require('wowless.ext').setglobaltable(newglobal)
   assert(cfg, 'missing configuration')
   assert(cfg.product, 'missing product')
