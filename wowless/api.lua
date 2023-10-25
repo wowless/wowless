@@ -325,7 +325,6 @@ local function new(log, maxErrors, product)
   for k, v in pairs(datalua.states) do
     states[k] = require('pl.tablex').deepcopy(v)
   end
-  seterrorhandler(ErrorHandler)
 
   local api = {
     CallSafely = CallSafely,
@@ -333,7 +332,6 @@ local function new(log, maxErrors, product)
     CreateUIObject = CreateUIObject,
     datalua = datalua,
     env = env,
-    ErrorHandler = ErrorHandler,
     frames = frames,
     GetDebugName = GetDebugName,
     GetErrorCount = GetErrorCount,
