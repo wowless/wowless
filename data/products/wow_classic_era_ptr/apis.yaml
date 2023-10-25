@@ -12019,8 +12019,7 @@ HearthAndResurrectFromArea: {}
 HideRepairCursor: {}
 HonorSystemEnabled: {}
 hooksecurefunc:
-  impl: hooksecurefunc
-  outputs: {}
+  stdlib: hooksecurefunc
 InActiveBattlefield: {}
 InboxItemCanDelete:
   inputs:

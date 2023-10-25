@@ -25784,8 +25784,7 @@ HaveQuestRewardData:
 HearthAndResurrectFromArea: {}
 HideRepairCursor: {}
 hooksecurefunc:
-  impl: hooksecurefunc
-  outputs: {}
+  stdlib: hooksecurefunc
 InboxItemCanDelete:
   inputs:
   - name: index

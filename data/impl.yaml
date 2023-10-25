@@ -266,9 +266,6 @@ GetTalentTabInfo_Wrath:
 GetTime:
   states:
   - Time
-hooksecurefunc:
-  frameworks:
-  - env
 IsAddOnLoaded: {}
 IsAddOnLoadOnDemand: {}
 IsLoggedIn:

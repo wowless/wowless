@@ -452,7 +452,6 @@ table.insert(builds, {
     'spec/data/impl/C_DateAndTime.AdjustTimeByMinutes_spec.lua',
     'spec/data/impl/C_DateAndTime.CompareCalendarTime_spec.lua',
     'spec/data/impl/EnumerateFrames_spec.lua',
-    'spec/data/impl/hooksecurefunc_spec.lua',
     'spec/data/structures_spec.lua',
     'spec/data/uiobjectimpl_spec.lua',
     'spec/data/uiobjects_spec.lua',
