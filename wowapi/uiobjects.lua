@@ -62,7 +62,10 @@ local function mkBaseUIObjectTypes(api)
   end
 
   local function wrapstrfn(s, fname, args, ...)
-    return assert(loadstring(('local %s=...;return %s'):format(args, s), fname))(...)
+    local wrapstr = ('local %s=...;return %s'):format(args, s)
+    local wrapfn = assert(loadstring(wrapstr, fname))
+    setfenv(wrapfn, getfenv(1))
+    return wrapfn(...)
   end
 
   local typechecker = require('wowless.typecheck')(api)

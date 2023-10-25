@@ -9,6 +9,37 @@ local function run(cfg)
     end
   end
   local api = require('wowless.api').new(log, cfg.maxErrors, cfg.product)
+
+  -- begin WARNING WARNING WARNING
+  --[[
+  The following lines of code are very magical.
+
+  The third line sets the global table for this Lua state to the
+  sandbox env table. This is necessary for the correct behavior of
+  some elune functionality, like securecall, hooksecurefunc,
+  and loadstring.
+
+  This does not affect wowless framework code. Any globals it
+  references from Lua are done via the environment table, which
+  remains unchanged from when it was (pre)loaded.
+
+  Any later loadstring'd framework code must be setfenv'd to the
+  host environment _G, since loadstring'd code is born with an
+  environment pointing to the current global table. See the api and
+  uiobject loaders for where this happens.
+
+  The first and second lines eagerly load modules which write to
+  the global table.
+
+  The fourth line is required because print depends on tostring from
+  the global table. TODO remove this dependency
+  ]]
+  require('lfs')
+  require('lsqlite3')
+  require('wowless.ext').setglobaltable(api.env)
+  api.env.tostring = tostring
+  -- end WARNING WARNING WARNING
+
   local loader = require('wowless.loader').loader(api, {
     otherAddonDirs = cfg.otherAddonDirs,
     product = cfg.product,

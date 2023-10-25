@@ -12020,8 +12020,7 @@ HearthAndResurrectFromArea: {}
 HideRepairCursor: {}
 HonorSystemEnabled: {}
 hooksecurefunc:
-  impl: hooksecurefunc
-  outputs: {}
+  stdlib: hooksecurefunc
 InActiveBattlefield: {}
 InboxItemCanDelete:
   inputs:
@@ -12478,9 +12477,9 @@ LoadAddOn:
     type: string
 LoadBindings: {}
 loadstring:
-  impl: loadstring
+  stdlib: loadstring
 loadstring_untainted:
-  impl: loadstring_untainted
+  stdlib: loadstring_untainted
 LoadURLIndex: {}
 log:
   alias: math.log
@@ -12870,7 +12869,7 @@ ScriptsDisallowedForBeta:
 scrub:
   stdlib: scrub
 securecall:
-  impl: securecall
+  stdlib: securecall
 securecallfunction:
   stdlib: securecallfunction
 SecureCmdOptionParse:

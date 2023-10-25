@@ -266,9 +266,6 @@ GetTalentTabInfo_Wrath:
 GetTime:
   states:
   - Time
-hooksecurefunc:
-  frameworks:
-  - env
 IsAddOnLoaded: {}
 IsAddOnLoadOnDemand: {}
 IsLoggedIn:
@@ -280,12 +277,6 @@ IsTestBuild:
 LoadAddOn:
   frameworks:
   - loader
-loadstring:
-  frameworks:
-  - env
-loadstring_untainted:
-  frameworks:
-  - env
 RequestTimePlayed:
   frameworks:
   - api
@@ -298,9 +289,6 @@ RunMacroText_Callback:
   frameworks:
   - api
 RunScript: {}
-securecall:
-  frameworks:
-  - env
 SecureCmdOptionParse: {}
 SendSystemMessage:
   frameworks:
