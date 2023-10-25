@@ -106,7 +106,7 @@ local function loader(api, cfg)
 
   local function loadLuaString(filename, str, line, closureTaint, ...)
     local before = api.env.ScrollingMessageFrameMixin
-    local fn = setfenv(loadstr(str, filename, line), api.env)
+    local fn = loadstr(str, filename, line)
     api.CallSafely(function(...)
       debug.setnewclosuretaint(closureTaint)
       fn(...)
@@ -144,7 +144,7 @@ local function loader(api, cfg)
     elseif script.text then
       local args = xmlimpls[string.lower(script.type)].tag.script.args or 'self, ...'
       local fnstr = 'return function(' .. args .. ') ' .. script.text .. ' end'
-      local outfn = setfenv(loadstr(fnstr, filename, script.line), api.env)
+      local outfn = loadstr(fnstr, filename, script.line)
       fn = setfenv(outfn(), env)
       scriptCache[script] = fn
     end
@@ -549,7 +549,7 @@ local function loader(api, cfg)
             -- TODO interpret all binding attributes
             if not e.attr.debug then -- TODO support debug bindings
               local bfn = 'return function(keystate) ' .. e.text .. ' end'
-              api.states.Bindings[e.attr.name] = setfenv(loadstr(bfn, filename, e.line), api.env)()
+              api.states.Bindings[e.attr.name] = loadstr(bfn, filename, e.line)()
             end
           elseif e.type == 'fontfamily' then -- TODO do this another way
             local font = e.kids[1].kids[1]
