@@ -527,13 +527,7 @@ local syncTests = function()
     end,
 
     GameTooltip = function()
-      local f = function(n, ...)
-        local k = select('#', ...)
-        if n ~= k then
-          error(string.format('wrong number of return values: want %d, got %d', n, k), 2)
-        end
-        return ...
-      end
+      local f = G.retn
       return {
         init = function()
           local gt = f(1, CreateFrame('GameTooltip'))
@@ -650,25 +644,6 @@ local syncTests = function()
       }
     end,
 
-    secureexecuterange = function()
-      return {
-        empty = function()
-          check0(secureexecuterange({}, error))
-        end,
-        nonempty = function()
-          local log = {}
-          check0(secureexecuterange({ 'foo', 'bar' }, function(...)
-            table.insert(log, '[')
-            for i = 1, select('#', ...) do
-              table.insert(log, (select(i, ...)))
-            end
-            table.insert(log, ']')
-          end, 'baz', 'quux'))
-          assertEquals('[,1,foo,baz,quux,],[,2,bar,baz,quux,]', table.concat(log, ','))
-        end,
-      }
-    end,
-
     StatusBar = function()
       local sb = CreateFrame('StatusBar')
       local nilparent = CreateFrame('Frame')
@@ -729,16 +704,6 @@ local syncTests = function()
       return checkStateMachine(states, transitions, 'empty')
     end,
 
-    ['table'] = function()
-      return {
-        wipe = function()
-          local t = { 1, 2, 3 }
-          local w = table.wipe(t)
-          assertEquals(w, t)
-          assertEquals(nil, next(t))
-        end,
-      }
-    end,
     ['texture'] = function()
       local t = CreateFrame('Frame'):CreateTexture()
       assertEquals('BLEND', t:GetBlendMode())

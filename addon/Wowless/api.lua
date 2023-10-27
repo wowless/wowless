@@ -65,6 +65,17 @@ local function apiTests()
         end,
       }
     end),
+    C_Timer = function()
+      return {
+        NewTicker = function()
+          local t = G.retn(1, _G.C_Timer.NewTicker(0, function() end, 0))
+          assertEquals('userdata', type(t))
+          local mt = getmetatable(t)
+          assertEquals('boolean', type(mt))
+          assertEquals(false, mt)
+        end,
+      }
+    end,
     error = function()
       return {
         nullary = function()
@@ -90,6 +101,33 @@ local function apiTests()
           local _G = _G
           setfenv(1, {})
           _G.assertEquals(_G, _G.getfenv(_G.loadstring('')))
+        end,
+      }
+    end,
+    secureexecuterange = function()
+      return {
+        empty = function()
+          G.check0(secureexecuterange({}, error))
+        end,
+        nonempty = function()
+          local log = {}
+          G.check0(secureexecuterange({ 'foo', 'bar' }, function(...)
+            table.insert(log, '[')
+            for i = 1, select('#', ...) do
+              table.insert(log, (select(i, ...)))
+            end
+            table.insert(log, ']')
+          end, 'baz', 'quux'))
+          assertEquals('[,1,foo,baz,quux,],[,2,bar,baz,quux,]', table.concat(log, ','))
+        end,
+      }
+    end,
+    table = function()
+      return {
+        wipe = function()
+          local t = { 1, 2, 3 }
+          G.check1(t, table.wipe(t))
+          assertEquals(nil, next(t))
         end,
       }
     end,

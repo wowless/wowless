@@ -5674,6 +5674,11 @@ C_Macro.GetNumIcons:
   outputs:
   - name: numIcons
     type: number
+C_Macro.SetMacroExecuteLineCallback:
+  inputs:
+  - name: cb
+    type: function
+  outputs: {}
 C_Mail.HasInboxMoney:
   inputs:
   - name: inboxIndex
@@ -14077,7 +14082,7 @@ RollOnLoot: {}
 RunBinding: {}
 RunMacro: {}
 RunMacroText:
-  impl: RunMacroText
+  impl: RunMacroText_Callback
   inputs:
   - name: macroText
     type: string

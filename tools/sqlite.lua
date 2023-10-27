@@ -21,20 +21,18 @@ local function factory(theProduct)
   local function create(filename)
     local indexes = {
       SpecSetMember = { 'SpecSetMember (SpecSet)' },
-      TraitCond = { 'TraitCond (ID)' },
-      TraitNode = { 'TraitNode (ID)' },
-      TraitNodeEntry = { 'TraitNodeEntry (ID)' },
-      TraitNodeGroup = { 'TraitNodeGroup (ID)' },
       TraitNodeGroupXTraitCond = { 'TraitNodeGroupXTraitCond (TraitNodeGroupID)' },
       TraitNodeGroupXTraitNode = { 'TraitNodeGroupXTraitNode (TraitNodeID)' },
       TraitNodeXTraitCond = { 'TraitNodeXTraitCond (TraitNodeID)' },
       TraitNodeXTraitNodeEntry = { 'TraitNodeXTraitNodeEntry (TraitNodeID)' },
-      UiTextureAtlas = { 'UiTextureAtlas (ID)' },
       UiTextureAtlasMember = { 'UiTextureAtlasMember (CommittedName COLLATE NOCASE)' },
     }
     local dbinit = { 'BEGIN' }
     for k, v in pairs(defs) do
       table.insert(dbinit, ('CREATE TABLE %s ("%s")'):format(k, table.concat(v.orderedfields, '","')))
+      if v.field2index.ID then
+        table.insert(dbinit, ('CREATE INDEX %sIndexID ON %s (ID)'):format(k, k))
+      end
       if indexes[k] then
         for i, index in ipairs(indexes[k]) do
           table.insert(dbinit, ('CREATE INDEX %sIndex%d ON %s'):format(k, i, index))

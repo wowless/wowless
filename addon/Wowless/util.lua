@@ -77,6 +77,14 @@ local function check7(e1, e2, e3, e4, e5, e6, e7, ...)
   assertEquals(e7, a7)
 end
 
+local function retn(n, ...)
+  local k = select('#', ...)
+  if n ~= k then
+    error(string.format('wrong number of return values: want %d, got %d', n, k), 2)
+  end
+  return ...
+end
+
 local function mixin(t, ...)
   for i = 1, select('#', ...) do
     for k, v in pairs(select(i, ...)) do
@@ -96,3 +104,4 @@ G.check6 = check6
 G.check7 = check7
 G.globalEnv = _G
 G.mixin = mixin
+G.retn = retn
