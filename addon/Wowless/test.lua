@@ -527,13 +527,7 @@ local syncTests = function()
     end,
 
     GameTooltip = function()
-      local f = function(n, ...)
-        local k = select('#', ...)
-        if n ~= k then
-          error(string.format('wrong number of return values: want %d, got %d', n, k), 2)
-        end
-        return ...
-      end
+      local f = G.retn
       return {
         init = function()
           local gt = f(1, CreateFrame('GameTooltip'))

@@ -65,6 +65,17 @@ local function apiTests()
         end,
       }
     end),
+    C_Timer = function()
+      return {
+        NewTicker = function()
+          local t = G.retn(1, _G.C_Timer.NewTicker(0, function() end, 0))
+          assertEquals('userdata', type(t))
+          local mt = getmetatable(t)
+          assertEquals('boolean', type(mt))
+          assertEquals(false, mt)
+        end,
+      }
+    end,
     error = function()
       return {
         nullary = function()
