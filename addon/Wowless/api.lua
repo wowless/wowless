@@ -96,7 +96,28 @@ local function apiTests()
       assertEquals(frame, _G.GetClickFrame(name))
     end,
     issecurevariable = function()
-      G.check2(true, nil, issecurevariable('issecurevariable'))
+      return {
+        ['namespaced wow apis are secure'] = function()
+          G.check2(true, nil, issecurevariable(_G.C_Timer, 'NewTicker'))
+        end,
+        ['missing globals are secure'] = function()
+          local k = 'thisisdefinitelynotaglobal'
+          assertEquals(nil, _G[k])
+          G.check2(true, nil, issecurevariable(k))
+        end,
+        ['fails with nil table'] = function()
+          assertEquals(false, (pcall(issecurevariable, nil, 'moo')))
+        end,
+        ['fails with nil variable name'] = function()
+          assertEquals(false, (pcall(issecurevariable, nil)))
+        end,
+        ['global wow apis are secure'] = function()
+          G.check2(true, nil, issecurevariable('issecurevariable'))
+        end,
+        ['missing keys on insecure tables are secure'] = function()
+          G.check2(true, nil, issecurevariable({}, 'moo'))
+        end,
+      }
     end,
     loadstring = function()
       return {
