@@ -11,6 +11,7 @@ read_globals = {
   'loadstring_untainted',
   'scrub',
   'securecall',
+  'securecallfunction',
   'secureexecuterange',
   'seterrorhandler',
   'strcmputf8i',
