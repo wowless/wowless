@@ -167,7 +167,7 @@ function G.GeneratedTests()
         local actual = actualCVars[k]
         assert(actual, format('extra cvar', k))
         assertEquals(v.name, actual.name, 'cvar name mismatch')
-        if not toskipin[k] then
+        if not toskipin[actual.name] then
           assertEquals(v.value, actual.value, 'cvar value mismatch')
         end
       end
