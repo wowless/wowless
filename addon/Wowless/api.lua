@@ -104,6 +104,33 @@ local function apiTests()
         end,
       }
     end,
+    secureexecuterange = function()
+      return {
+        empty = function()
+          G.check0(secureexecuterange({}, error))
+        end,
+        nonempty = function()
+          local log = {}
+          G.check0(secureexecuterange({ 'foo', 'bar' }, function(...)
+            table.insert(log, '[')
+            for i = 1, select('#', ...) do
+              table.insert(log, (select(i, ...)))
+            end
+            table.insert(log, ']')
+          end, 'baz', 'quux'))
+          assertEquals('[,1,foo,baz,quux,],[,2,bar,baz,quux,]', table.concat(log, ','))
+        end,
+      }
+    end,
+    table = function()
+      return {
+        wipe = function()
+          local t = { 1, 2, 3 }
+          G.check1(t, table.wipe(t))
+          assertEquals(nil, next(t))
+        end,
+      }
+    end,
   }
 end
 G.ApiTests = apiTests
