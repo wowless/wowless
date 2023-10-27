@@ -1,4 +1,4 @@
-local _, G = ...
+local addonName, G = ...
 local assertEquals = _G.assertEquals
 local function mainline(x)
   return _G.WowlessData.Build.flavor == 'Mainline' and x or nil
@@ -95,6 +95,9 @@ local function apiTests()
       local frame = CreateFrame('Frame', name)
       assertEquals(frame, _G.GetClickFrame(name))
     end,
+    issecure = function()
+      G.check1(false, issecure())
+    end,
     issecurevariable = function()
       return {
         ['fails with nil table'] = function()
@@ -105,6 +108,9 @@ local function apiTests()
         end,
         ['global wow apis are secure'] = function()
           G.check2(true, nil, issecurevariable('issecurevariable'))
+        end,
+        ['local table values are insecure'] = function()
+          G.check2(false, addonName, issecurevariable({ foo = 42 }, 'foo'))
         end,
         ['missing globals are secure'] = function()
           local k = 'thisisdefinitelynotaglobal'
