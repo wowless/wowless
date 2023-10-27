@@ -83,12 +83,8 @@ local function new(log, maxErrors, product)
     end
   end
 
-  local function DoCallSafely(fun, ...)
-    return xpcall(fun, ErrorHandler, ...)
-  end
-
-  local function CallSafely(...)
-    return securecallfunction(DoCallSafely, ...)
+  local function CallSafely(fun, ...)
+    return securecallfunction(xpcall, fun, ErrorHandler, ...)
   end
 
   local function GetDebugName(frame)
