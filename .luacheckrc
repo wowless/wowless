@@ -1,4 +1,5 @@
 read_globals = {
+  'debug.cleartaint',
   'debug.getfunctionstats',
   'debug.getglobalstats',
   'debug.gettime',
@@ -6,6 +7,8 @@ read_globals = {
   'debug.newsecurefunction',
   'debug.setnewclosuretaint',
   'debug.setprofilingenabled',
+  'debug.setstacktaint',
+  'debug.settaintmode',
   'forceinsecure',
   'issecure',
   'issecurevariable',

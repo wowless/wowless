@@ -113,9 +113,11 @@ local function loader(api, cfg)
 
   local function loadLuaString(filename, str, line, closureTaint, ...)
     local before = api.env.ScrollingMessageFrameMixin
+    debug.settaintmode('disabled')
     local fn = loadstr(str, filename, line)
     api.CallSafely(function(...)
       debug.setnewclosuretaint(closureTaint)
+      debug.settaintmode('rw')
       fn(...)
     end, ...)
     debug.setnewclosuretaint(nil)
