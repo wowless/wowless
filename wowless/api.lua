@@ -84,6 +84,7 @@ local function new(log, maxErrors, product)
   end
 
   local function CallSafely(fun, ...)
+    assert(issecure(), 'wowless bug: must enter CallSafely securely')
     return securecallfunction(xpcall, fun, ErrorHandler, ...)
   end
 
