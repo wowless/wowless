@@ -97,14 +97,6 @@ local function apiTests()
     end,
     issecurevariable = function()
       return {
-        ['namespaced wow apis are secure'] = function()
-          G.check2(true, nil, issecurevariable(_G.C_Timer, 'NewTicker'))
-        end,
-        ['missing globals are secure'] = function()
-          local k = 'thisisdefinitelynotaglobal'
-          assertEquals(nil, _G[k])
-          G.check2(true, nil, issecurevariable(k))
-        end,
         ['fails with nil table'] = function()
           assertEquals(false, (pcall(issecurevariable, nil, 'moo')))
         end,
@@ -114,8 +106,16 @@ local function apiTests()
         ['global wow apis are secure'] = function()
           G.check2(true, nil, issecurevariable('issecurevariable'))
         end,
+        ['missing globals are secure'] = function()
+          local k = 'thisisdefinitelynotaglobal'
+          assertEquals(nil, _G[k])
+          G.check2(true, nil, issecurevariable(k))
+        end,
         ['missing keys on insecure tables are secure'] = function()
           G.check2(true, nil, issecurevariable({}, 'moo'))
+        end,
+        ['namespaced wow apis are secure'] = function()
+          G.check2(true, nil, issecurevariable(_G.C_Timer, 'NewTicker'))
         end,
       }
     end,
