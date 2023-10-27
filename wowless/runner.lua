@@ -39,6 +39,7 @@ local function run(cfg)
   require('wowless.ext').setglobaltable(api.env)
   api.env.tostring = tostring
   -- end WARNING WARNING WARNING
+  debug.settaintmode('rw')
 
   local loader = require('wowless.loader').loader(api, {
     otherAddonDirs = cfg.otherAddonDirs,

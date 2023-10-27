@@ -92,7 +92,14 @@ local function loader(api, cfg)
 
   local function loadstr(str, filename, line)
     local pre = line and string.rep('\n', line - 1) or ''
-    return assert(loadstring(pre .. str, '@' .. path.normalize(filename):gsub('/', '\\')))
+    if filename:find('Wowless') then
+      debug.setstacktaint('Wowless')
+      local fn = assert(loadstring(pre .. str, '@' .. path.normalize(filename):gsub('/', '\\')))
+      debug.cleartaint()
+      return fn
+    else
+      return assert(loadstring(pre .. str, '@' .. path.normalize(filename):gsub('/', '\\')))
+    end
   end
 
   local function getColor(e)
