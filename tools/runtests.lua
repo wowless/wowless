@@ -4,7 +4,7 @@ local errors = {}
 local function doit(name, f)
   depth = depth + 1
   names[depth] = name
-  local success, msg = pcall(f)
+  local success, msg = securecallfunction(pcall, f)
   if not success then
     table.insert(errors, table.concat(names, ' ', 1, depth) .. '\n' .. msg)
   end
