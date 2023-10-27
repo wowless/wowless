@@ -45,6 +45,13 @@ local function check1(e1, ...)
   assertEquals(e1, a1)
 end
 
+local function check2(e1, e2, ...)
+  assertEquals(2, select('#', ...))
+  local a1, a2 = ...
+  assertEquals(e1, a1)
+  assertEquals(e2, a2)
+end
+
 local function check4(e1, e2, e3, e4, ...)
   assertEquals(4, select('#', ...))
   local a1, a2, a3, a4 = ...
@@ -99,6 +106,7 @@ G.assertEquals = assertEquals
 G.assertRecursivelyEqual = assertRecursivelyEqual
 G.check0 = check0
 G.check1 = check1
+G.check2 = check2
 G.check4 = check4
 G.check6 = check6
 G.check7 = check7

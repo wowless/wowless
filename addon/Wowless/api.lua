@@ -95,6 +95,9 @@ local function apiTests()
       local frame = CreateFrame('Frame', name)
       assertEquals(frame, _G.GetClickFrame(name))
     end,
+    issecurevariable = function()
+      G.check2(true, nil, issecurevariable('issecurevariable'))
+    end,
     loadstring = function()
       return {
         globalenv = function()
