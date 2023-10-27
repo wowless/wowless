@@ -172,7 +172,7 @@ local function loadFunctions(api, loader)
       return outfn
     else
       edepth = edepth + 1
-      return debug.newcfunction(outfn)
+      return debug.newsecurefunction(outfn)
     end
   end
 

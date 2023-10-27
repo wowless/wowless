@@ -676,10 +676,10 @@ local function loader(api, cfg)
     local cancelled = setmetatable({}, { __mode = 'k' })
     local tickerMT = {
       __index = {
-        Cancel = debug.newcfunction(function(self)
+        Cancel = debug.newsecurefunction(function(self)
           cancelled[self] = true
         end),
-        IsCancelled = debug.newcfunction(function(self)
+        IsCancelled = debug.newsecurefunction(function(self)
           return cancelled[self]
         end),
       },
