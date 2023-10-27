@@ -8761,7 +8761,7 @@ FocusUnit:
   outputs: {}
 FollowUnit: {}
 forceinsecure:
-  impl: forceinsecure
+  stdlib: forceinsecure
 ForceLogout: {}
 ForceQuit: {}
 ForfeitDuel: {}

@@ -1,1 +1,0 @@
--- Do nothing; taint is not yet supported in wowless.
