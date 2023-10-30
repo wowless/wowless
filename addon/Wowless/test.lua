@@ -72,7 +72,7 @@ local function checkStateMachine(states, transitions, init)
   end
 end
 
-local syncTests = function()
+G.testsuite.sync = function()
   return {
     ['button states'] = function()
       local b = CreateFrame('Button')
@@ -914,11 +914,7 @@ _G.WowlessTestFailures = {}
 _G.WowlessTestsDone = false
 do
   local syncIter, syncState = G.tests(function()
-    return {
-      api = G.ApiTests,
-      generated = G.GeneratedTests,
-      sync = syncTests,
-    }
+    return G.testsuite
   end)
   local numSyncTests, asyncIndex, numAsyncTests, asyncPending = 0, 0, #asyncTests, false
   local totalTime, numFrames = 0, 0

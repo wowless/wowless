@@ -18,7 +18,7 @@ local function tget(t, s)
   end
 end
 
-function G.GeneratedTests()
+G.testsuite.generated = function()
   local cfuncs = {}
 
   local function checkFunc(func, isLua, env)

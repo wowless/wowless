@@ -11,7 +11,7 @@ local function numkeys(t)
   end
   return n
 end
-local function apiTests()
+G.testsuite.api = function()
   return {
     C_AreaPoiInfo = function()
       return {
@@ -157,4 +157,3 @@ local function apiTests()
     end,
   }
 end
-G.ApiTests = apiTests
