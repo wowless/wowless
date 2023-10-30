@@ -3,6 +3,8 @@ G.testsuite.uiobjects = function()
   local assertEquals = G.assertEquals
   local check0 = G.check0
   local check1 = G.check1
+  local check2 = G.check2
+  local check3 = G.check3
   local check4 = G.check4
   return {
     Frame = function()
@@ -23,19 +25,14 @@ G.testsuite.uiobjects = function()
               local g = CreateFrame('Frame', nil, f)
               local h = CreateFrame('Frame', nil, f)
               local i = CreateFrame('Frame', nil, f)
-              assert(f:GetNumChildren() == 3)
-              assert(select(1, f:GetChildren()) == g)
-              assert(select(2, f:GetChildren()) == h)
-              assert(select(3, f:GetChildren()) == i)
+              check1(3, f:GetNumChildren())
+              check3(g, h, i, f:GetChildren())
               h:SetParent(nil)
-              assert(f:GetNumChildren() == 2)
-              assert(select(1, f:GetChildren()) == g)
-              assert(select(2, f:GetChildren()) == i)
+              check1(2, f:GetNumChildren())
+              check2(g, i, f:GetChildren())
               h:SetParent(f)
-              assert(f:GetNumChildren() == 3)
-              assert(select(1, f:GetChildren()) == g)
-              assert(select(2, f:GetChildren()) == i)
-              assert(select(3, f:GetChildren()) == h)
+              check1(3, f:GetNumChildren())
+              check3(g, i, h, f:GetChildren())
             end,
             ['two'] = function()
               local f = CreateFrame('Frame')
@@ -43,12 +40,11 @@ G.testsuite.uiobjects = function()
               local h = CreateFrame('Frame')
               g:SetParent(f)
               h:SetParent(f)
-              assert(f:GetNumChildren() == 2)
-              assert(select(1, f:GetChildren()) == g)
-              assert(select(2, f:GetChildren()) == h)
+              check1(2, f:GetNumChildren())
+              check2(g, h, f:GetChildren())
               g:SetParent(f)
-              assert(select(1, f:GetChildren()) == g)
-              assert(select(2, f:GetChildren()) == h)
+              check1(2, f:GetNumChildren())
+              check2(g, h, f:GetChildren())
             end,
           }
         end,
