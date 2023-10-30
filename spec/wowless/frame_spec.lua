@@ -140,12 +140,6 @@ describe('frame', function()
     assert.equals(getmetatable(f), getmetatable(g))
   end)
 
-  it('gets a new method when hooked', function()
-    local f = api.impls.CreateFrame('frame')
-    api.impls.hooksecurefunc(f, 'Show', function() end)
-    assert.Not.same(f.Show, getmetatable(f).__index.Show)
-  end)
-
   it('gets a new script handler when hooked', function()
     local f = api.impls.CreateFrame('frame')
     f:SetScript('OnShow', function() end)

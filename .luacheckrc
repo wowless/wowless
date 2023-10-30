@@ -7,6 +7,7 @@ read_globals = {
   'debug.setnewclosuretaint',
   'debug.setprofilingenabled',
   'forceinsecure',
+  'hooksecurefunc',
   'issecure',
   'issecurevariable',
   'loadstring_untainted',
