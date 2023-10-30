@@ -154,6 +154,7 @@ local builds = {
       'addon/Wowless/init.lua',
       'addon/Wowless/test.lua',
       'addon/Wowless/test.xml',
+      'addon/Wowless/uiobjects.lua',
       'addon/Wowless/util.lua',
       'addon/Wowless/Wowless.toc',
       'addon/WowlessTracker/tracker.lua',
