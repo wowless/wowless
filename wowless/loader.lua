@@ -113,12 +113,9 @@ local function loader(api, cfg)
 
   local function loadLuaString(filename, str, line, closureTaint, ...)
     local before = api.env.ScrollingMessageFrameMixin
-    debug.settaintmode('disabled')
     local fn = loadstr(str, filename, line)
     debug.setnewclosuretaint(closureTaint)
-    debug.settaintmode('rw')
     api.CallSandbox(fn, ...)
-    debug.settaintmode('disabled')
     debug.setnewclosuretaint(nil)
     -- Super hacky hack to hook ScrollingMessageFrameMixin.AddMessage
     local after = api.env.ScrollingMessageFrameMixin

@@ -92,7 +92,9 @@ local function new(log, maxErrors, product)
   local function CallSandbox(fun, ...)
     assert(issecure(), 'wowless bug: must enter CallSandbox securely')
     assert(getfenv(fun) ~= _G, 'wowless bug: expected sandbox function')
-    return securecallfunction(xpcall, fun, ErrorHandler, ...)
+    debug.settaintmode('rw')
+    securecallfunction(xpcall, fun, ErrorHandler, ...)
+    debug.settaintmode('disabled')
   end
 
   local function GetDebugName(frame)
