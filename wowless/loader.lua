@@ -115,11 +115,10 @@ local function loader(api, cfg)
     local before = api.env.ScrollingMessageFrameMixin
     debug.settaintmode('disabled')
     local fn = loadstr(str, filename, line)
-    api.CallSafely(function(...)
-      debug.setnewclosuretaint(closureTaint)
-      debug.settaintmode('rw')
-      fn(...)
-    end, ...)
+    debug.setnewclosuretaint(closureTaint)
+    debug.settaintmode('rw')
+    api.CallSandbox(fn, ...)
+    debug.settaintmode('disabled')
     debug.setnewclosuretaint(nil)
     -- Super hacky hack to hook ScrollingMessageFrameMixin.AddMessage
     local after = api.env.ScrollingMessageFrameMixin
@@ -174,6 +173,7 @@ local function loader(api, cfg)
         else
           error('invalid inherit tag on script')
         end
+        setfenv(fn, env)
       end
       assert(not script.attr.intrinsicorder or intrinsic, 'intrinsicOrder on non-intrinsic')
       local bindingType = 1
@@ -688,6 +688,7 @@ local function loader(api, cfg)
       __metatable = false,
     }
     time.newTicker = function(seconds, callback, iterations)
+      assert(getfenv(callback) ~= _G, 'wowless bug: framework callback in newTicker')
       local p = newproxy(true)
       mixin(getmetatable(p), tickerMT)
       cancelled[p] = false

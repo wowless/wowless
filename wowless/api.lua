@@ -85,6 +85,13 @@ local function new(log, maxErrors, product)
 
   local function CallSafely(fun, ...)
     assert(issecure(), 'wowless bug: must enter CallSafely securely')
+    assert(getfenv(fun) == _G, 'wowless bug: expected framework function')
+    return securecallfunction(xpcall, fun, ErrorHandler, ...)
+  end
+
+  local function CallSandbox(fun, ...)
+    assert(issecure(), 'wowless bug: must enter CallSandbox securely')
+    assert(getfenv(fun) ~= _G, 'wowless bug: expected sandbox function')
     return securecallfunction(xpcall, fun, ErrorHandler, ...)
   end
 
@@ -124,7 +131,7 @@ local function new(log, maxErrors, product)
       for i = 0, 2 do
         local script = obj.scripts[i][string.lower(name)]
         if script then
-          CallSafely(script, obj.luarep, ...)
+          CallSandbox(script, obj.luarep, ...)
         end
       end
     end
@@ -228,6 +235,7 @@ local function new(log, maxErrors, product)
   end
 
   local function SetScript(obj, name, bindingType, script)
+    assert(script == nil or getfenv(script) ~= _G, 'wowless bug: scripts must run in the sandbox')
     obj.scripts[bindingType][string.lower(name)] = script
   end
 
@@ -280,6 +288,7 @@ local function new(log, maxErrors, product)
     while time.timers:peek().pri < time.stamp do
       local timer = time.timers:pop()
       log(2, 'running timer %.2f %s', timer.pri, tostring(timer.val))
+      assert(getfenv(timer.val) == _G, 'wowless bug: sandbox callback in NextFrame')
       CallSafely(timer.val)
     end
     for frame in frames:entries() do
@@ -329,6 +338,7 @@ local function new(log, maxErrors, product)
 
   local api = {
     CallSafely = CallSafely,
+    CallSandbox = CallSandbox,
     CreateFrame = CreateFrame,
     CreateUIObject = CreateUIObject,
     datalua = datalua,

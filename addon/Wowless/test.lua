@@ -72,7 +72,7 @@ local function checkStateMachine(states, transitions, init)
   end
 end
 
-local syncTests = function()
+G.testsuite.sync = function()
   return {
     ['button states'] = function()
       local b = CreateFrame('Button')
@@ -421,197 +421,6 @@ local syncTests = function()
         end,
       }
     end,
-    ['frame'] = function()
-      return {
-        ['creation with frame in name position'] = function()
-          local f = CreateFrame('Frame')
-          local g = CreateFrame('Frame', f)
-          assert(g:GetName() == nil)
-          assert(g:GetParent() == nil)
-        end,
-        ['creation with number name'] = function()
-          assertEquals('999', CreateFrame('Frame', 999):GetName())
-        end,
-        ['kid order'] = function()
-          return {
-            ['three'] = function()
-              local f = CreateFrame('Frame')
-              local g = CreateFrame('Frame', nil, f)
-              local h = CreateFrame('Frame', nil, f)
-              local i = CreateFrame('Frame', nil, f)
-              assert(f:GetNumChildren() == 3)
-              assert(select(1, f:GetChildren()) == g)
-              assert(select(2, f:GetChildren()) == h)
-              assert(select(3, f:GetChildren()) == i)
-              h:SetParent(nil)
-              assert(f:GetNumChildren() == 2)
-              assert(select(1, f:GetChildren()) == g)
-              assert(select(2, f:GetChildren()) == i)
-              h:SetParent(f)
-              assert(f:GetNumChildren() == 3)
-              assert(select(1, f:GetChildren()) == g)
-              assert(select(2, f:GetChildren()) == i)
-              assert(select(3, f:GetChildren()) == h)
-            end,
-            ['two'] = function()
-              local f = CreateFrame('Frame')
-              local g = CreateFrame('Frame')
-              local h = CreateFrame('Frame')
-              g:SetParent(f)
-              h:SetParent(f)
-              assert(f:GetNumChildren() == 2)
-              assert(select(1, f:GetChildren()) == g)
-              assert(select(2, f:GetChildren()) == h)
-              g:SetParent(f)
-              assert(select(1, f:GetChildren()) == g)
-              assert(select(2, f:GetChildren()) == h)
-            end,
-          }
-        end,
-        ['level'] = function()
-          local f = CreateFrame('Frame')
-          local g = CreateFrame('Frame')
-          local h = CreateFrame('Frame')
-          assertEquals(0, f:GetFrameLevel())
-          g:SetParent(f)
-          assertEquals(1, g:GetFrameLevel())
-          f:SetFrameLevel(5)
-          assertEquals(5, f:GetFrameLevel())
-          assertEquals(6, g:GetFrameLevel())
-          f:SetParent(h)
-          assertEquals(0, h:GetFrameLevel())
-          assertEquals(1, f:GetFrameLevel())
-          assertEquals(2, g:GetFrameLevel())
-          f:SetParent(nil)
-          f:SetFrameLevel(42)
-          assertEquals(false, f:HasFixedFrameLevel())
-          f:SetFixedFrameLevel(true)
-          assertEquals(true, f:HasFixedFrameLevel())
-          assertEquals(42, f:GetFrameLevel())
-          assertEquals(43, g:GetFrameLevel())
-          f:SetParent(h)
-          assertEquals(42, f:GetFrameLevel())
-          assertEquals(43, g:GetFrameLevel())
-          f:SetFixedFrameLevel(false)
-          assertEquals(false, f:HasFixedFrameLevel())
-          assertEquals(42, f:GetFrameLevel())
-          assertEquals(43, g:GetFrameLevel())
-          f:SetParent(h)
-          assertEquals(42, f:GetFrameLevel())
-          assertEquals(43, g:GetFrameLevel())
-          f:SetParent(nil)
-          f:SetParent(h)
-          assertEquals(1, f:GetFrameLevel())
-          assertEquals(2, g:GetFrameLevel())
-        end,
-        ['parent keys'] = function()
-          local up = CreateFrame('Frame')
-          local down = CreateFrame('Frame', nil, up)
-          check1(nil, down:GetParentKey())
-          up.moo = down
-          check1('moo', down:GetParentKey())
-          check0(down:SetParentKey('cow'))
-          assertEquals(up.cow, down)
-          if up.ClearParentKey then
-            assertEquals(nil, up.moo)
-          else
-            assertEquals(up.moo, down)
-            check1('moo', down:GetParentKey())
-            up.moo = nil
-          end
-          check1('cow', down:GetParentKey())
-          up.cow = nil
-          check1(nil, down:GetParentKey())
-        end,
-      }
-    end,
-
-    GameTooltip = function()
-      local f = G.retn
-      return {
-        init = function()
-          local gt = f(1, CreateFrame('GameTooltip'))
-          return {
-            GetAnchorType = function()
-              assertEquals('ANCHOR_', f(1, gt:GetAnchorType()):sub(1, 7))
-            end,
-            GetChildren = function()
-              f(0, gt:GetChildren())
-            end,
-            GetNumChildren = function()
-              assertEquals(0, f(1, gt:GetNumChildren()))
-            end,
-            GetNumRegions = function()
-              assertEquals(0, f(1, gt:GetNumRegions()))
-            end,
-            GetOwner = function()
-              assertEquals(nil, f(1, gt:GetOwner()))
-            end,
-            GetRegions = function()
-              f(0, gt:GetRegions())
-            end,
-            NumLines = function()
-              assertEquals(0, f(1, gt:NumLines()))
-            end,
-          }
-        end,
-        SetOwner = function()
-          return {
-            AnchorTypes = function()
-              local gt = f(1, CreateFrame('GameTooltip'))
-              local owner = f(1, CreateFrame('Frame'))
-              local anchorTypes = {
-                'ANCHOR_BOTTOM',
-                'ANCHOR_BOTTOMLEFT',
-                'ANCHOR_BOTTOMRIGHT',
-                'ANCHOR_CURSOR',
-                'ANCHOR_LEFT',
-                'ANCHOR_NONE',
-                'ANCHOR_PRESERVE',
-                'ANCHOR_RIGHT',
-                'ANCHOR_TOP',
-                'ANCHOR_TOPLEFT',
-                'ANCHOR_TOPRIGHT',
-              }
-              local tests = {}
-              for _, anchorType in ipairs(anchorTypes) do
-                tests[anchorType] = function()
-                  f(0, gt:SetOwner(owner, anchorType))
-                  assertEquals(anchorType, f(1, gt:GetAnchorType()))
-                end
-              end
-              return tests
-            end,
-            InvalidAnchorType = function()
-              local gt = f(1, CreateFrame('GameTooltip'))
-              local owner = f(1, CreateFrame('Frame'))
-              f(0, gt:SetOwner(owner, 'invalid'))
-              assertEquals('ANCHOR_LEFT', f(1, gt:GetAnchorType()))
-            end,
-            NoArgs = function()
-              local gt = f(1, CreateFrame('GameTooltip'))
-              assertEquals(false, pcall(gt.SetOwner, gt))
-            end,
-            OneArg = function()
-              local gt = f(1, CreateFrame('GameTooltip'))
-              local owner = f(1, CreateFrame('Frame'))
-              f(0, gt:SetOwner(owner))
-              return {
-                GetAnchorType = function()
-                  assertEquals('ANCHOR_LEFT', f(1, gt:GetAnchorType()))
-                end,
-                GetOwner = function()
-                  assertEquals(owner, f(1, gt:GetOwner()))
-                end,
-                IsOwned = function()
-                  assertEquals(true, f(1, gt:IsOwned(owner)))
-                end,
-              }
-            end,
-          }
-        end,
-      }
-    end,
 
     loading = function()
       return {
@@ -624,22 +433,6 @@ local syncTests = function()
         end,
         extraArg = function()
           assertEquals(nil, extraArg)
-        end,
-      }
-    end,
-
-    ScrollFrame = function()
-      return {
-        SetScrollChild = function()
-          local f = CreateFrame('ScrollFrame')
-          assertEquals(nil, f:GetScrollChild())
-          local g = CreateFrame('Frame', 'WowlessScrollFrameChild')
-          f:SetScrollChild(g)
-          assertEquals(g, f:GetScrollChild())
-          assertEquals(f, g:GetParent())
-          assertEquals(false, pcall(f.SetScrollChild, f, nil))
-          assertEquals(false, pcall(f.SetScrollChild, f, 'WowlessScrollFrameChild'))
-          assertEquals(false, pcall(f.SetScrollChild, f))
         end,
       }
     end,
@@ -704,17 +497,6 @@ local syncTests = function()
       return checkStateMachine(states, transitions, 'empty')
     end,
 
-    ['texture'] = function()
-      local t = CreateFrame('Frame'):CreateTexture()
-      assertEquals('BLEND', t:GetBlendMode())
-      t:SetColorTexture(0.8, 0.6, 0.4, 0.2)
-      assertEquals(IsTestBuild() and 'FileData ID 0' or nil, t:GetTexture())
-      check4(1, 1, 1, 1, t:GetVertexColor())
-      t:SetTexture(136235)
-      assertEquals(136235, t:GetTexture())
-      t:SetColorTexture(0.8, 0.6, 0.4, 0.2)
-      assertEquals(IsTestBuild() and 'FileData ID 0' or nil, t:GetTexture())
-    end,
     ['visible updated on kids before calling any OnShow'] = function()
       local p = CreateFrame('Frame')
       local k1 = CreateFrame('Frame', nil, p)
@@ -914,11 +696,7 @@ _G.WowlessTestFailures = {}
 _G.WowlessTestsDone = false
 do
   local syncIter, syncState = G.tests(function()
-    return {
-      api = G.ApiTests,
-      generated = G.GeneratedTests,
-      sync = syncTests,
-    }
+    return G.testsuite
   end)
   local numSyncTests, asyncIndex, numAsyncTests, asyncPending = 0, 0, #asyncTests, false
   local totalTime, numFrames = 0, 0

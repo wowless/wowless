@@ -99,8 +99,8 @@ local function run(cfg)
       for _, name in ipairs(names) do
         local fn = api.states.Bindings[name]
         api.log(2, 'firing binding ' .. name)
-        api.CallSafely(fn, 'down')
-        api.CallSafely(fn, 'up')
+        api.CallSandbox(fn, 'down')
+        api.CallSandbox(fn, 'up')
       end
     end,
     clicks = function()
@@ -193,7 +193,7 @@ local function run(cfg)
           api.SendEvent('EXECUTE_CHAT_LINE', v)
         elseif api.datalua.apis['C_Macro.SetMacroExecuteLineCallback'] then
           if api.macroExecuteLineCallback then
-            api.CallSafely(api.macroExecuteLineCallback, v)
+            api.CallSandbox(api.macroExecuteLineCallback, v)
           end
         else
           error('unknown macro execution model')

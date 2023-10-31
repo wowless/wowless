@@ -11,7 +11,7 @@ local function numkeys(t)
   end
   return n
 end
-local function apiTests()
+G.testsuite.api = function()
   return {
     C_AreaPoiInfo = function()
       return {
@@ -95,6 +95,40 @@ local function apiTests()
       local frame = CreateFrame('Frame', name)
       assertEquals(frame, _G.GetClickFrame(name))
     end,
+    hooksecurefunc = function()
+      return {
+        ['hooks members and returns original'] = function()
+          local log = {}
+          local func = function(a, b, c)
+            table.insert(log, string.format('func(%d,%d,%d)', a, b, c))
+            return a + 1, b + 1, c + 1
+          end
+          local hook = function(a, b, c)
+            table.insert(log, string.format('hook(%d,%d,%d)', a, b, c))
+            return a - 1, b - 1, c - 1
+          end
+          local t = { member = func }
+          G.check0(hooksecurefunc(t, 'member', hook))
+          assert(t.member ~= func)
+          assert(t.member ~= hook)
+          G.check3(13, 35, 57, t.member(12, 34, 56))
+          assertEquals('func(12,34,56);hook(12,34,56)', table.concat(log, ';'))
+        end,
+        ['unpacks nils'] = function()
+          local func = function()
+            return nil, 42, nil, nil
+          end
+          local hookWasCalled = false
+          local hook = function()
+            hookWasCalled = true
+          end
+          local env = { moocow = func }
+          hooksecurefunc(env, 'moocow', hook)
+          G.check4(nil, 42, nil, nil, env.moocow())
+          assert(hookWasCalled)
+        end,
+      }
+    end,
     issecure = function()
       G.check1(false, issecure())
     end,
@@ -163,4 +197,3 @@ local function apiTests()
     end,
   }
 end
-G.ApiTests = apiTests

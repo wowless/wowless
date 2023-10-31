@@ -16,3 +16,4 @@ frame:SetScript('OnEvent', function(_, _, warnType, warnText)
   })
 end)
 G.LuaWarningsFrame = frame
+G.testsuite = {}

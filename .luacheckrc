@@ -10,6 +10,7 @@ read_globals = {
   'debug.setstacktaint',
   'debug.settaintmode',
   'forceinsecure',
+  'hooksecurefunc',
   'issecure',
   'issecurevariable',
   'loadstring_untainted',

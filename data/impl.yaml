@@ -98,8 +98,6 @@ C_Texture.GetAtlasInfo_10_2:
   sqls:
   - lookup: C_Texture.GetAtlasInfo_10_2
 C_Timer.After:
-  frameworks:
-  - api
   states:
   - Time
 C_Timer.NewTicker:
