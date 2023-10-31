@@ -61,6 +61,7 @@ local function loadFunctions(api, loader)
     loader = loader,
   }
 
+  local bubblewrap = require('wowless.util').bubblewrap
   local typechecker = require('wowless.typecheck')(api)
 
   local function stubMixin(t, name)
@@ -172,7 +173,7 @@ local function loadFunctions(api, loader)
       return outfn
     else
       edepth = edepth + 1
-      return debug.newsecurefunction(outfn)
+      return debug.newsecurefunction(bubblewrap(outfn))
     end
   end
 
