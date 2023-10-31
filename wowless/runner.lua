@@ -79,7 +79,7 @@ local function run(cfg)
     end
     doit('frame0')
     if api.env.ToggleTalentFrame then
-      api.CallSafely(api.env.ToggleTalentFrame)
+      api.CallSandbox(api.env.ToggleTalentFrame)
       doit('frame1')
     end
     os.exit(0)
