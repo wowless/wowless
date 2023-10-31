@@ -228,6 +228,7 @@ local function new(log, maxErrors, product)
   end
 
   local function SetScript(obj, name, bindingType, script)
+    assert(script == nil or getfenv(script) ~= _G, 'wowless bug: scripts must run in the sandbox')
     obj.scripts[bindingType][string.lower(name)] = script
   end
 

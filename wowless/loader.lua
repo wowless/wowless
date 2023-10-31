@@ -165,6 +165,7 @@ local function loader(api, cfg)
         else
           error('invalid inherit tag on script')
         end
+        setfenv(fn, env)
       end
       assert(not script.attr.intrinsicorder or intrinsic, 'intrinsicOrder on non-intrinsic')
       local bindingType = 1
