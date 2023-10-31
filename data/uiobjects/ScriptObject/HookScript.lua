@@ -7,11 +7,12 @@ return (function(self, name, script, bindingType)
     api.log(1, 'cannot hook nonexistent intrinsic precall/postcall')
     return false
   end
-  scripts[lname] = function(...)
+  local function newfn(...)
     if old then
       old(...)
     end
     script(...)
   end
+  scripts[lname] = setfenv(newfn, api.env)
   return true
 end)(...)

@@ -85,6 +85,13 @@ local function new(log, maxErrors, product)
 
   local function CallSafely(fun, ...)
     assert(issecure(), 'wowless bug: must enter CallSafely securely')
+    assert(getfenv(fun) == _G, 'wowless bug: expected framework function')
+    return securecallfunction(xpcall, fun, ErrorHandler, ...)
+  end
+
+  local function CallSandbox(fun, ...)
+    assert(issecure(), 'wowless bug: must enter CallSandbox securely')
+    assert(getfenv(fun) ~= _G, 'wowless bug: expected sandbox function')
     return securecallfunction(xpcall, fun, ErrorHandler, ...)
   end
 
@@ -124,7 +131,7 @@ local function new(log, maxErrors, product)
       for i = 0, 2 do
         local script = obj.scripts[i][string.lower(name)]
         if script then
-          CallSafely(script, obj.luarep, ...)
+          CallSandbox(script, obj.luarep, ...)
         end
       end
     end
@@ -331,6 +338,7 @@ local function new(log, maxErrors, product)
 
   local api = {
     CallSafely = CallSafely,
+    CallSandbox = CallSandbox,
     CreateFrame = CreateFrame,
     CreateUIObject = CreateUIObject,
     datalua = datalua,
