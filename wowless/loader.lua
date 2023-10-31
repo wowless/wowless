@@ -680,6 +680,7 @@ local function loader(api, cfg)
       __metatable = false,
     }
     time.newTicker = function(seconds, callback, iterations)
+      assert(getfenv(callback) ~= _G, 'wowless bug: framework callback in newTicker')
       local p = newproxy(true)
       mixin(getmetatable(p), tickerMT)
       cancelled[p] = false
