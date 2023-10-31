@@ -93,10 +93,10 @@ local function loader(api, cfg)
   local function loadstr(str, filename, line)
     local pre = line and string.rep('\n', line - 1) or ''
     if filename:find('Wowless') then
-      debug.setstacktaint('Wowless')
-      local fn = assert(loadstring(pre .. str, '@' .. path.normalize(filename):gsub('/', '\\')))
-      debug.cleartaint()
-      return fn
+      debug.setnewclosuretaint('Wowless')
+      local fn = loadstring(pre .. str, '@' .. path.normalize(filename):gsub('/', '\\'))
+      debug.setnewclosuretaint(nil)
+      return assert(fn)
     else
       return assert(loadstring(pre .. str, '@' .. path.normalize(filename):gsub('/', '\\')))
     end
