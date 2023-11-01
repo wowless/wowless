@@ -10,10 +10,10 @@ repos:
   rev: '2.6.1'
   hooks:
   - id: editorconfig-checker
-#- repo: https://github.com/JohnnyMorganz/StyLua
-#  rev: v0.17.0
-#  hooks:
-#  - id: stylua-github
+- repo: https://github.com/JohnnyMorganz/StyLua
+  rev: 32c433a29b17466d18ec5cef2b1a59af1389d7e6
+  hooks:
+  - id: stylua-github
 - repo: https://github.com/Lucas-C/pre-commit-hooks
   rev: v1.1.13
   hooks:
