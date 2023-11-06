@@ -25406,7 +25406,11 @@ InitiateTrade:
 InRepairMode: {}
 ipairs:
   stdlib: ipairs
-Is64BitClient: {}
+Is64BitClient:
+  inputs: {}
+  outputs:
+  - name: is64Bit
+    type: boolean
 IsAccountSecured: {}
 IsAchievementEligible: {}
 IsActionInRange: {}
@@ -25583,7 +25587,11 @@ IsFlyableArea: {}
 IsFlying: {}
 IsGamePadCursorControlEnabled: {}
 IsGamePadFreelookEnabled: {}
-IsGMClient: {}
+IsGMClient:
+  inputs: {}
+  outputs:
+  - name: isGM
+    type: boolean
 IsGraphicsCVarValueSupported: {}
 IsGraphicsSettingValueSupported: {}
 IsGUIDInGroup: {}
@@ -25638,14 +25646,22 @@ IsLFGDungeonJoinable:
     type: boolean
   - name: totalGroupSizeRequired
     type: number
-IsLinuxClient: {}
+IsLinuxClient:
+  inputs: {}
+  outputs:
+  - name: isLinux
+    type: boolean
 IsLoggedIn:
   impl: IsLoggedIn
   inputs: {}
   outputs:
   - name: isLoggedIn
     type: boolean
-IsMacClient: {}
+IsMacClient:
+  inputs: {}
+  outputs:
+  - name: isMac
+    type: boolean
 IsMasterLooter: {}
 IsMetaKeyDown: {}
 IsModifiedClick:
@@ -25818,7 +25834,11 @@ IsVoidStorageReady:
   - name: ready
     type: boolean
 IsWargame: {}
-IsWindowsClient: {}
+IsWindowsClient:
+  inputs: {}
+  outputs:
+  - name: isWindows
+    type: boolean
 IsWorldLootObject: {}
 IsXPUserDisabled: {}
 ItemAddedToArtifact: {}

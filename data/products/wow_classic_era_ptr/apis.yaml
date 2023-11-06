@@ -12040,7 +12040,11 @@ InRepairMode: {}
 InviteUnit: {}
 ipairs:
   stdlib: ipairs
-Is64BitClient: {}
+Is64BitClient:
+  inputs: {}
+  outputs:
+  - name: is64Bit
+    type: boolean
 IsAccountSecured: {}
 IsAchievementEligible: {}
 IsActionInRange: {}
@@ -12189,7 +12193,11 @@ IsFlyableArea: {}
 IsFlying: {}
 IsGamePadCursorControlEnabled: {}
 IsGamePadFreelookEnabled: {}
-IsGMClient: {}
+IsGMClient:
+  inputs: {}
+  outputs:
+  - name: isGM
+    type: boolean
 IsGraphicsCVarValueSupported: {}
 IsGraphicsSettingValueSupported: {}
 IsGUIDInGroup: {}
@@ -12220,14 +12228,22 @@ IsLeftControlKeyDown: {}
 IsLeftMetaKeyDown: {}
 IsLeftShiftKeyDown: {}
 IsLegacyDifficulty: {}
-IsLinuxClient: {}
+IsLinuxClient:
+  inputs: {}
+  outputs:
+  - name: isLinux
+    type: boolean
 IsLoggedIn:
   impl: IsLoggedIn
   inputs: {}
   outputs:
   - name: isLoggedIn
     type: boolean
-IsMacClient: {}
+IsMacClient:
+  inputs: {}
+  outputs:
+  - name: isMac
+    type: boolean
 IsMasterLooter: {}
 IsMetaKeyDown: {}
 IsModifiedClick:
@@ -12372,7 +12388,11 @@ IsVeteranTrialAccount:
   - name: isVeteranTrialAccount
     type: boolean
 IsWargame: {}
-IsWindowsClient: {}
+IsWindowsClient:
+  inputs: {}
+  outputs:
+  - name: isWindows
+    type: boolean
 IsXPUserDisabled: {}
 ItemHasRange: {}
 ItemTextGetCreator:

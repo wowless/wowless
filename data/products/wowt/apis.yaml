@@ -25977,7 +25977,11 @@ IsFlyableArea: {}
 IsFlying: {}
 IsGamePadCursorControlEnabled: {}
 IsGamePadFreelookEnabled: {}
-IsGMClient: {}
+IsGMClient:
+  inputs: {}
+  outputs:
+  - name: isGM
+    type: boolean
 IsGraphicsCVarValueSupported: {}
 IsGraphicsSettingValueSupported: {}
 IsGUIDInGroup: {}

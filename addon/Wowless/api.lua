@@ -129,6 +129,21 @@ G.testsuite.api = function()
         end,
       }
     end,
+    Is64BitClient = function()
+      local v = G.retn(1, _G.Is64BitClient())
+      assert(v == true or v == false)
+    end,
+    IsGMClient = function()
+      G.check1(false, _G.IsGMClient())
+    end,
+    IsLinuxClient = function()
+      local v = G.retn(1, _G.IsLinuxClient())
+      assert(v == true or v == false)
+    end,
+    IsMacClient = function()
+      local v = G.retn(1, _G.IsMacClient())
+      assert(v == true or v == false)
+    end,
     issecurevariable = function()
       return {
         ['fails with nil table'] = function()
@@ -152,6 +167,10 @@ G.testsuite.api = function()
           G.check2(true, nil, issecurevariable(_G.C_Timer, 'NewTicker'))
         end,
       }
+    end,
+    IsWindowsClient = function()
+      local v = G.retn(1, _G.IsWindowsClient())
+      assert(v == true or v == false)
     end,
     loadstring = function()
       return {
