@@ -61,6 +61,12 @@ type:
                     required: true
                     type:
                       schema: type
+          platform:
+            type:
+              oneof:
+              - literal: linux
+              - literal: mac
+              - literal: windows
           protection:
             type:
               oneof:

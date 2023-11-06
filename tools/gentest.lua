@@ -62,6 +62,7 @@ local ptablemap = {
           alias = api.alias,
           nowrap = api.nowrap,
           overwritten = tpath(config, 'addon', 'overwritten_apis', name) and true,
+          platform = api.platform,
           stdlib = api.stdlib,
         }
         t[name] = next(vv) and vv or true

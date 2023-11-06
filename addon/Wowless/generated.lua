@@ -2,6 +2,12 @@ local _, G = ...
 local assertEquals = _G.assertEquals
 local iswowlesslite = _G.__wowless and _G.__wowless.lite
 
+local platforms = {
+  linux = _G.IsLinuxClient(),
+  mac = _G.IsMacClient(),
+  windows = _G.IsWindowsClient(),
+}
+
 local capsuleEnv = _G.SimpleCheckout and getfenv(_G.SimpleCheckout.OnLoad) or {}
 
 assert(_G.WowlessData, 'missing WowlessData')
@@ -218,7 +224,7 @@ G.testsuite.generated = function()
           end
         elseif cfg.overwritten and not iswowlesslite then
           return checkLuaFunc(func)
-        elseif not capsuleapis[name] then
+        elseif not capsuleapis[name] and (not cfg.platform or platforms[cfg.platform]) then
           return checkCFunc(func)
         end
       end

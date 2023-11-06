@@ -12527,17 +12527,28 @@ Logout:
 LootMoneyNotify: {}
 LootSlot: {}
 LootSlotHasItem: {}
-MacOptions_AreOSShortcutsDisabled: {}
-MacOptions_GetGameBundleName: {}
-MacOptions_HasNewStyleInputMonitoring: {}
-MacOptions_HasNewStyleUniversalAccess: {}
-MacOptions_IsInputMonitoringEnabled: {}
-MacOptions_IsMicrophoneEnabled: {}
-MacOptions_IsUniversalAccessEnabled: {}
-MacOptions_OpenInputMonitoring: {}
-MacOptions_OpenMicrophoneRequestDialogue: {}
-MacOptions_OpenUniversalAccess: {}
-MacOptions_SetOSShortcutsDisabled: {}
+MacOptions_AreOSShortcutsDisabled:
+  platform: mac
+MacOptions_GetGameBundleName:
+  platform: mac
+MacOptions_HasNewStyleInputMonitoring:
+  platform: mac
+MacOptions_HasNewStyleUniversalAccess:
+  platform: mac
+MacOptions_IsInputMonitoringEnabled:
+  platform: mac
+MacOptions_IsMicrophoneEnabled:
+  platform: mac
+MacOptions_IsUniversalAccessEnabled:
+  platform: mac
+MacOptions_OpenInputMonitoring:
+  platform: mac
+MacOptions_OpenMicrophoneRequestDialogue:
+  platform: mac
+MacOptions_OpenUniversalAccess:
+  platform: mac
+MacOptions_SetOSShortcutsDisabled:
+  platform: mac
 math.abs:
   stdlib: math.abs
 math.acos:
