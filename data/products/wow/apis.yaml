@@ -25647,6 +25647,7 @@ IsLFGDungeonJoinable:
   - name: totalGroupSizeRequired
     type: number
 IsLinuxClient:
+  impl: IsLinuxClient
   inputs: {}
   outputs:
   - name: isLinux
@@ -25658,6 +25659,7 @@ IsLoggedIn:
   - name: isLoggedIn
     type: boolean
 IsMacClient:
+  impl: IsMacClient
   inputs: {}
   outputs:
   - name: isMac
@@ -25835,6 +25837,7 @@ IsVoidStorageReady:
     type: boolean
 IsWargame: {}
 IsWindowsClient:
+  impl: IsWindowsClient
   inputs: {}
   outputs:
   - name: isWindows

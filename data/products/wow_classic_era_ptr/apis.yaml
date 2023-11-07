@@ -12229,6 +12229,7 @@ IsLeftMetaKeyDown: {}
 IsLeftShiftKeyDown: {}
 IsLegacyDifficulty: {}
 IsLinuxClient:
+  impl: IsLinuxClient
   inputs: {}
   outputs:
   - name: isLinux
@@ -12240,6 +12241,7 @@ IsLoggedIn:
   - name: isLoggedIn
     type: boolean
 IsMacClient:
+  impl: IsMacClient
   inputs: {}
   outputs:
   - name: isMac
@@ -12389,6 +12391,7 @@ IsVeteranTrialAccount:
     type: boolean
 IsWargame: {}
 IsWindowsClient:
+  impl: IsWindowsClient
   inputs: {}
   outputs:
   - name: isWindows

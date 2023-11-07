@@ -690,6 +690,23 @@ local asyncTests = {
       RequestTimePlayed()
     end,
   },
+  {
+    name = 'C_Timer.NewTimer',
+    fn = function(done)
+      local t
+      local function cb(...)
+        local args = { ... }
+        done(function()
+          assertEquals(1, #args)
+          assertEquals(t, args[1])
+          assert(tostring(t) ~= tostring(args[1]))
+          assertEquals('bar', args[1].foo)
+        end)
+      end
+      t = G.retn(1, _G.C_Timer.NewTimer(0, cb))
+      t.foo = 'bar'
+    end,
+  },
 }
 
 _G.WowlessTestFailures = {}

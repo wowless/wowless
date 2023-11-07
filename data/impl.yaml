@@ -265,12 +265,21 @@ GetTime:
   - Time
 IsAddOnLoaded: {}
 IsAddOnLoadOnDemand: {}
+IsLinuxClient:
+  frameworks:
+  - api
 IsLoggedIn:
   states:
   - System
+IsMacClient:
+  frameworks:
+  - api
 IsTestBuild:
   frameworks:
   - datalua
+IsWindowsClient:
+  frameworks:
+  - api
 LoadAddOn:
   frameworks:
   - loader
