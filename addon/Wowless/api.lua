@@ -173,11 +173,19 @@ G.testsuite.api = function()
     end,
     IsLinuxClient = function()
       local v = G.retn(1, _G.IsLinuxClient())
-      assert(v == true or v == false)
+      if _G.__wowless then
+        assertEquals(_G.__wowless.platform == 'linux', v)
+      else
+        assertEquals('boolean', type(v))
+      end
     end,
     IsMacClient = function()
       local v = G.retn(1, _G.IsMacClient())
-      assert(v == true or v == false)
+      if _G.__wowless then
+        assertEquals(_G.__wowless.platform == 'mac', v)
+      else
+        assertEquals('boolean', type(v))
+      end
     end,
     issecurevariable = function()
       return {
@@ -205,7 +213,11 @@ G.testsuite.api = function()
     end,
     IsWindowsClient = function()
       local v = G.retn(1, _G.IsWindowsClient())
-      assert(v == true or v == false)
+      if _G.__wowless then
+        assertEquals(_G.__wowless.platform == 'windows', v)
+      else
+        assertEquals('boolean', type(v))
+      end
     end,
     loadstring = function()
       return {

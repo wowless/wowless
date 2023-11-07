@@ -352,6 +352,7 @@ local function new(log, maxErrors, product)
     log = log,
     NextFrame = NextFrame,
     ParentSub = ParentSub,
+    platform = require('runtime.platform'),
     product = product,
     RegisterAllEvents = RegisterAllEvents,
     RegisterEvent = RegisterEvent,

@@ -1388,9 +1388,17 @@ add_lua_executable(
   penlight
 )
 
+file(GENERATE OUTPUT runtime/platform.lua CONTENT "\
+return '\
+$<$<PLATFORM_ID:Darwin>:mac>\
+$<$<PLATFORM_ID:Linux>:linux>\
+$<$<PLATFORM_ID:Windows>:windows>\
+'\n")
+
 lua2c(
   wowlesslib
   runtime.flavors=runtime/flavors.lua
+  runtime.platform=runtime/platform.lua
   runtime.stringenums=runtime/stringenums.lua
   wowapi.data=${CMAKE_CURRENT_SOURCE_DIR}/wowapi/data.lua
   wowapi.loader=${CMAKE_CURRENT_SOURCE_DIR}/wowapi/loader.lua
