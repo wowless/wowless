@@ -952,6 +952,26 @@ add_strict_lua_executable(
   toolsdbc
 )
 
+add_strict_lua_executable(
+  cascmap
+  ${CMAKE_CURRENT_SOURCE_DIR}/tools/cascmap.lua
+  argparse
+  casc
+  dbc
+  luabitop
+  luaexpat
+  luafilesystem
+  luapath
+  luasocket
+  lzlib
+  md5
+  penlight
+  runtimelistfile
+  runtimetactkeys
+  toolsdbc
+  toolsutil
+)
+
 FetchContent_Declare(
   libpng
   GIT_REPOSITORY https://github.com/glennrp/libpng
