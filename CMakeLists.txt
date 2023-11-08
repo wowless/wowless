@@ -1472,27 +1472,27 @@ add_custom_target(
   test
   runtests
   spec/addon/framework_spec.lua
-# spec/addon/util_spec.lua
+  spec/addon/util_spec.lua
 # spec/data/apis_spec.lua
 # spec/data/config_spec.lua
 # spec/data/globals_spec.lua
 # spec/data/impl_spec.lua
-# spec/data/impl/C_DateAndTime.AdjustTimeByDays_spec.lua
-# spec/data/impl/C_DateAndTime.AdjustTimeByMinutes_spec.lua
-# spec/data/impl/C_DateAndTime.CompareCalendarTime_spec.lua
+ spec/data/impl/C_DateAndTime.AdjustTimeByDays_spec.lua
+ spec/data/impl/C_DateAndTime.AdjustTimeByMinutes_spec.lua
+ spec/data/impl/C_DateAndTime.CompareCalendarTime_spec.lua
 # spec/data/impl/EnumerateFrames_spec.lua
 # spec/data/structures_spec.lua
 # spec/data/uiobjectimpl_spec.lua
 # spec/data/uiobjects_spec.lua
 # spec/data/yaml_spec.lua
-# spec/elune_spec.lua
+  spec/elune_spec.lua
 # spec/wowapi/schema_spec.lua
-# spec/wowapi/yaml_spec.lua
+  spec/wowapi/yaml_spec.lua
 # spec/wowless/addon_spec.lua
-# spec/wowless/blp_spec.lua
-# spec/wowless/hlist_spec.lua
-# spec/wowless/png_spec.lua
-# spec/wowless/typecheck_spec.lua
-# spec/wowless/util_spec.lua
+  spec/wowless/blp_spec.lua
+  spec/wowless/hlist_spec.lua
+  spec/wowless/png_spec.lua
+  spec/wowless/typecheck_spec.lua
+  spec/wowless/util_spec.lua
   WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
 )
