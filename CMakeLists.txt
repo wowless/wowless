@@ -1368,11 +1368,80 @@ add_strict_lua_executable(
   wowlessyaml
 )
 
-lua2c(wowapischema wowapi.schema=${CMAKE_CURRENT_SOURCE_DIR}/wowapi/schema.lua)
+yaml2lua(impl)
+yaml2lua(uiobjectimpl)
+
+foreach(product ${products})
+  foreach(yaml apis build config cvars events globals structures uiobjects xml)
+    yaml2lua(products/${product}/${yaml})
+    list(
+      APPEND yamlluas
+      build.data.products.${product}.${yaml}=runtime/products/${product}/${yaml}.lua
+    )
+  endforeach()
+endforeach()
+list(
+  APPEND
+  schemas
+  addons
+  any
+  apis
+  build
+  config
+  cvars
+  docs
+  events
+  flavors
+  globals
+  impl
+  products
+  schema
+  schematype
+  state
+  stringenums
+  structures
+  type
+  uiobjectimpl
+  uiobjects
+  xml
+)
+foreach(schema ${schemas})
+  yaml2lua(schemas/${schema})
+  list(APPEND yamlluas build.data.schemas.${schema}=runtime/schemas/${schema}.lua)
+endforeach()
+list(
+  APPEND
+  states
+  Addons
+  Bindings
+  CVars
+  Calendar
+  ModifiedClicks
+  System
+  Talents
+  Time
+  Units
+)
+foreach(state ${states})
+  yaml2lua(state/${state})
+  list(APPEND yamlluas build.data.state.${state}=runtime/state/${state}.lua)
+endforeach()
+
+lua2c(
+  wowapischema
+  build.data.flavors=runtime/flavors.lua
+  build.data.impl=runtime/impl.lua
+  build.data.products=runtime/products.lua
+  build.data.stringenums=runtime/stringenums.lua
+  build.data.uiobjectimpl=runtime/uiobjectimpl.lua
+  ${yamlluas}
+  wowapi.data=${CMAKE_CURRENT_SOURCE_DIR}/wowapi/data.lua
+  wowapi.schema=${CMAKE_CURRENT_SOURCE_DIR}/wowapi/schema.lua
+)
 add_library(wowapischema STATIC wowapischema.c)
 target_link_libraries(wowapischema PRIVATE elune)
 
-add_lua_executable(
+add_strict_lua_executable(
   docs
   ${CMAKE_CURRENT_SOURCE_DIR}/tools/docs.lua
   argparse
@@ -1381,6 +1450,7 @@ add_lua_executable(
   lyaml
   penlight
   toolsutil
+  wowapischema
   wowlessyaml
 )
 
@@ -1405,7 +1475,6 @@ lua2c(
   runtime.flavors=runtime/flavors.lua
   runtime.platform=runtime/platform.lua
   runtime.stringenums=runtime/stringenums.lua
-  wowapi.data=${CMAKE_CURRENT_SOURCE_DIR}/wowapi/data.lua
   wowapi.loader=${CMAKE_CURRENT_SOURCE_DIR}/wowapi/loader.lua
   wowapi.uiobjects=${CMAKE_CURRENT_SOURCE_DIR}/wowapi/uiobjects.lua
   wowless.api=${CMAKE_CURRENT_SOURCE_DIR}/wowless/api.lua
