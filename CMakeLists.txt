@@ -1443,7 +1443,7 @@ add_strict_lua_executable(
   wowlessyaml
 )
 
-add_lua_executable(
+add_strict_lua_executable(
   runtests
   ${CMAKE_CURRENT_SOURCE_DIR}/tools/runtests.lua
   argparse

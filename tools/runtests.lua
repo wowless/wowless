@@ -13,6 +13,19 @@ end
 _G.assert = require('luassert')
 _G.describe = doit
 _G.it = doit
+local require = require
+local bcache = {}
+_G.require = function(s)
+  if s:sub(1, 11) ~= 'build.data.' then
+    return require(s)
+  end
+  local t = bcache[s]
+  if t == nil then
+    t = assert(dofile(s:gsub('%.', '/') .. '.lua'))
+    bcache[s] = t
+  end
+  return t
+end
 for _, f in ipairs(arg) do
   require('wowless.ext').setglobaltable(_G)
   local success, msg = pcall(dofile, f)
