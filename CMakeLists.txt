@@ -1444,7 +1444,7 @@ add_strict_lua_executable(
 )
 
 add_lua_executable(
-  test
+  runtests
   ${CMAKE_CURRENT_SOURCE_DIR}/tools/runtests.lua
   argparse
   ${dataluas}
@@ -1466,4 +1466,32 @@ add_lua_executable(
   wowlessrender
   wowlessutil
   wowlessyaml
+)
+
+add_custom_target(
+  test
+  runtests
+  ${CMAKE_CURRENT_SOURCE_DIR}/spec/addon/framework_spec.lua
+#  ${CMAKE_CURRENT_SOURCE_DIR}/spec/addon/util_spec.lua
+#  ${CMAKE_CURRENT_SOURCE_DIR}/spec/data/apis_spec.lua
+#  ${CMAKE_CURRENT_SOURCE_DIR}/spec/data/config_spec.lua
+#  ${CMAKE_CURRENT_SOURCE_DIR}/spec/data/globals_spec.lua
+#  ${CMAKE_CURRENT_SOURCE_DIR}/spec/data/impl_spec.lua
+#  ${CMAKE_CURRENT_SOURCE_DIR}/spec/data/impl/C_DateAndTime.AdjustTimeByDays_spec.lua
+#  ${CMAKE_CURRENT_SOURCE_DIR}/spec/data/impl/C_DateAndTime.AdjustTimeByMinutes_spec.lua
+#  ${CMAKE_CURRENT_SOURCE_DIR}/spec/data/impl/C_DateAndTime.CompareCalendarTime_spec.lua
+#  ${CMAKE_CURRENT_SOURCE_DIR}/spec/data/impl/EnumerateFrames_spec.lua
+#  ${CMAKE_CURRENT_SOURCE_DIR}/spec/data/structures_spec.lua
+#  ${CMAKE_CURRENT_SOURCE_DIR}/spec/data/uiobjectimpl_spec.lua
+#  ${CMAKE_CURRENT_SOURCE_DIR}/spec/data/uiobjects_spec.lua
+#  ${CMAKE_CURRENT_SOURCE_DIR}/spec/data/yaml_spec.lua
+#  ${CMAKE_CURRENT_SOURCE_DIR}/spec/elune_spec.lua
+#  ${CMAKE_CURRENT_SOURCE_DIR}/spec/wowapi/schema_spec.lua
+#  ${CMAKE_CURRENT_SOURCE_DIR}/spec/wowapi/yaml_spec.lua
+#  ${CMAKE_CURRENT_SOURCE_DIR}/spec/wowless/addon_spec.lua
+#  ${CMAKE_CURRENT_SOURCE_DIR}/spec/wowless/blp_spec.lua
+#  ${CMAKE_CURRENT_SOURCE_DIR}/spec/wowless/hlist_spec.lua
+#  ${CMAKE_CURRENT_SOURCE_DIR}/spec/wowless/png_spec.lua
+#  ${CMAKE_CURRENT_SOURCE_DIR}/spec/wowless/typecheck_spec.lua
+#  ${CMAKE_CURRENT_SOURCE_DIR}/spec/wowless/util_spec.lua
 )

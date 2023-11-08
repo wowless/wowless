@@ -101,7 +101,7 @@ local rules = {
     pool = 'console',
   },
   mktestout = {
-    command = 'bash -c "set -o pipefail && build/cmake/test $in 2>&1 | tee $out"',
+    command = 'bash -c "set -o pipefail && build/cmake/runtests $in 2>&1 | tee $out"',
   },
   render = {
     command = 'build/cmake/render $in',
@@ -469,7 +469,7 @@ table.insert(builds, {
   },
   ins_implicit = {
     'build/addon.stamp',
-    'build/cmake/test',
+    'build/cmake/runtests',
     'spec/wowless/green.png',
     'spec/wowless/temp.blp',
     'spec/wowless/temp.png',
