@@ -1368,6 +1368,10 @@ add_strict_lua_executable(
   wowlessyaml
 )
 
+lua2c(wowapischema wowapi.schema=${CMAKE_CURRENT_SOURCE_DIR}/wowapi/schema.lua)
+add_library(wowapischema STATIC wowapischema.c)
+target_link_libraries(wowapischema PRIVATE elune)
+
 add_lua_executable(
   docs
   ${CMAKE_CURRENT_SOURCE_DIR}/tools/docs.lua
@@ -1403,7 +1407,6 @@ lua2c(
   runtime.stringenums=runtime/stringenums.lua
   wowapi.data=${CMAKE_CURRENT_SOURCE_DIR}/wowapi/data.lua
   wowapi.loader=${CMAKE_CURRENT_SOURCE_DIR}/wowapi/loader.lua
-  wowapi.schema=${CMAKE_CURRENT_SOURCE_DIR}/wowapi/schema.lua
   wowapi.uiobjects=${CMAKE_CURRENT_SOURCE_DIR}/wowapi/uiobjects.lua
   wowless.api=${CMAKE_CURRENT_SOURCE_DIR}/wowless/api.lua
   wowless.env=${CMAKE_CURRENT_SOURCE_DIR}/wowless/env.lua
@@ -1463,6 +1466,7 @@ add_strict_lua_executable(
   say
   tsort
   vstruct
+  wowapischema
   wowlesslib
   wowlessrender
   wowlessutil
