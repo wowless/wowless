@@ -544,22 +544,11 @@ function(add_lua_executable name main)
   target_link_libraries(${name} PRIVATE elune ${ARGN})
 endfunction()
 
-function(add_strict_lua_executable name main)
-  set(luamain ${name}luamain.c)
-  add_custom_command(
-    OUTPUT ${luamain}
-    COMMAND bootstraplua ${CMAKE_CURRENT_SOURCE_DIR}/tools/luamain.lua ${luamain} ${main} -strict ${ARGN}
-    DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/tools/luamain.lua ${main}
-  )
-  add_executable(${name} ${luamain})
-  target_link_libraries(${name} PRIVATE elune ${ARGN})
-endfunction()
-
 lua2c(wowlessyaml wowapi.yaml=${CMAKE_CURRENT_SOURCE_DIR}/wowapi/yaml.lua)
 add_library(wowlessyaml wowlessyaml.c)
 target_link_libraries(wowlessyaml PRIVATE elune)
 
-add_strict_lua_executable(
+add_lua_executable(
   yaml2lua
   ${CMAKE_CURRENT_SOURCE_DIR}/tools/yaml2lua.lua
   luafilesystem
@@ -608,7 +597,7 @@ lua2c(luacjson cjson=c)
 add_library(luacjson luacjson.c)
 target_link_libraries(luacjson PRIVATE cjson elune)
 
-add_strict_lua_executable(
+add_lua_executable(
   listfile
   ${CMAKE_CURRENT_SOURCE_DIR}/tools/listfile.lua
   argparse
@@ -645,7 +634,7 @@ add_custom_command(
 add_library(runtimelistfile STATIC runtimelistfile.c)
 target_link_libraries(runtimelistfile PRIVATE elune)
 
-add_strict_lua_executable(
+add_lua_executable(
   dblist
   ${CMAKE_CURRENT_SOURCE_DIR}/tools/dblist.lua
   argparse
@@ -691,7 +680,7 @@ lua2c(
 add_library(luadbd STATIC luadbd.c)
 target_link_libraries(luadbd PRIVATE elune)
 
-add_strict_lua_executable(
+add_lua_executable(
   dbdefs
   ${CMAKE_CURRENT_SOURCE_DIR}/tools/dbdefs.lua
   argparse
@@ -704,7 +693,7 @@ add_strict_lua_executable(
   wowlessyaml
 )
 
-add_strict_lua_executable(
+add_lua_executable(
   prep
   ${CMAKE_CURRENT_SOURCE_DIR}/tools/prep.lua
   argparse
@@ -757,7 +746,7 @@ foreach(product ${products})
   list(APPEND dataluas datalua_${product})
 endforeach()
 
-add_strict_lua_executable(
+add_lua_executable(
   tactkeys
   ${CMAKE_CURRENT_SOURCE_DIR}/tools/tactkeys.lua
   argparse
@@ -815,7 +804,7 @@ lua2c(
 add_library(dbc STATIC dbc.c)
 target_link_libraries(dbc PRIVATE elune)
 
-add_strict_lua_executable(
+add_lua_executable(
   sqlite
   ${CMAKE_CURRENT_SOURCE_DIR}/tools/sqlite.lua
   argparse
@@ -933,7 +922,7 @@ add_library(
 )
 target_link_libraries(casc PRIVATE elune)
 
-add_strict_lua_executable(
+add_lua_executable(
   fetch
   ${CMAKE_CURRENT_SOURCE_DIR}/tools/fetch.lua
   argparse
@@ -1321,7 +1310,7 @@ lua2c(
 add_library(wowlessrender STATIC wowlessrender.c)
 target_link_libraries(wowlessrender PRIVATE elune)
 
-add_strict_lua_executable(
+add_lua_executable(
   render
   ${CMAKE_CURRENT_SOURCE_DIR}/tools/render.lua
   argparse
@@ -1340,7 +1329,7 @@ add_strict_lua_executable(
   wowlessyaml
 )
 
-add_strict_lua_executable(
+add_lua_executable(
   gentest
   ${CMAKE_CURRENT_SOURCE_DIR}/tools/gentest.lua
   argparse
@@ -1352,7 +1341,7 @@ lua2c(runtimeproducts runtime.products=runtime/products.lua)
 add_library(runtimeproducts STATIC runtimeproducts.c)
 target_link_libraries(runtimeproducts PRIVATE elune)
 
-add_strict_lua_executable(
+add_lua_executable(
   bump
   ${CMAKE_CURRENT_SOURCE_DIR}/tools/bump.lua
   argparse
@@ -1441,7 +1430,7 @@ lua2c(
 add_library(wowapischema STATIC wowapischema.c)
 target_link_libraries(wowapischema PRIVATE elune)
 
-add_strict_lua_executable(
+add_lua_executable(
   docs
   ${CMAKE_CURRENT_SOURCE_DIR}/tools/docs.lua
   argparse
@@ -1454,7 +1443,7 @@ add_strict_lua_executable(
   wowlessyaml
 )
 
-add_strict_lua_executable(
+add_lua_executable(
   errsv
   ${CMAKE_CURRENT_SOURCE_DIR}/tools/errsv.lua
   luafilesystem
@@ -1494,7 +1483,7 @@ add_library(
 )
 target_link_libraries(wowlesslib PRIVATE elune)
 
-add_strict_lua_executable(
+add_lua_executable(
   wowless
   ${CMAKE_CURRENT_SOURCE_DIR}/wowless.lua
   argparse
@@ -1516,7 +1505,7 @@ add_strict_lua_executable(
   wowlessyaml
 )
 
-add_strict_lua_executable(
+add_lua_executable(
   runtests
   ${CMAKE_CURRENT_SOURCE_DIR}/tools/runtests.lua
   argparse
