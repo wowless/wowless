@@ -1380,12 +1380,13 @@ add_lua_executable(
   wowlessyaml
 )
 
-add_lua_executable(
+add_strict_lua_executable(
   errsv
   ${CMAKE_CURRENT_SOURCE_DIR}/tools/errsv.lua
   luafilesystem
   lyaml
   penlight
+  wowlessyaml
 )
 
 file(GENERATE OUTPUT runtime/platform.lua CONTENT "\
