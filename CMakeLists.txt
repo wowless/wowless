@@ -107,7 +107,7 @@ target_link_libraries(
 set_target_properties(elune PROPERTIES C_STANDARD 11)
 
 add_executable(bootstraplua ${elune_SOURCE_DIR}/lua/lua.c)
-target_link_libraries(bootstraplua elune)
+target_link_libraries(bootstraplua PRIVATE elune)
 
 FetchContent_Declare(
   expat
@@ -160,7 +160,7 @@ add_library(
   luaexpat.c
   ${luaexpat_SOURCE_DIR}/src/lxplib.c
 )
-target_link_libraries(luaexpat elune expat)
+target_link_libraries(luaexpat PRIVATE elune expat)
 
 FetchContent_Declare(
   yaml
@@ -218,7 +218,7 @@ set_property(
   SOURCE ${lyaml_SOURCE_DIR}/ext/yaml/yaml.c
   APPEND PROPERTY COMPILE_DEFINITIONS VERSION="wowless"
 )
-target_link_libraries(lyaml elune yaml)
+target_link_libraries(lyaml PRIVATE elune yaml)
 
 FetchContent_Declare(
   zlib
@@ -261,7 +261,7 @@ add_library(
   lzlib.c
   ${lzlib_SOURCE_DIR}/lzlib.c
 )
-target_link_libraries(lzlib elune zlib)
+target_link_libraries(lzlib PRIVATE elune zlib)
 
 FetchContent_Declare(
   sqlite3
@@ -275,7 +275,7 @@ add_library(
   ${sqlite3_SOURCE_DIR}/sqlite3.c
 )
 target_include_directories(sqlite3 PUBLIC ${sqlite3_SOURCE_DIR})
-target_link_libraries(sqlite3 $<$<PLATFORM_ID:Darwin,Linux>:dl pthread>)
+target_link_libraries(sqlite3 PRIVATE $<$<PLATFORM_ID:Darwin,Linux>:dl pthread>)
 
 FetchContent_Declare(
   lsqlite3
@@ -290,7 +290,7 @@ add_library(
   lsqlite3.c
   ${lsqlite3_SOURCE_DIR}/lsqlite3.c
 )
-target_link_libraries(lsqlite3 elune sqlite3)
+target_link_libraries(lsqlite3 PRIVATE elune sqlite3)
 
 FetchContent_Declare(
   luafilesystem
@@ -305,7 +305,7 @@ add_library(
   luafilesystem.c
   ${luafilesystem_SOURCE_DIR}/src/lfs.c
 )
-target_link_libraries(luafilesystem elune)
+target_link_libraries(luafilesystem PRIVATE elune)
 
 FetchContent_Declare(
   say
@@ -316,7 +316,7 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(say)
 lua2c(say say=${say_SOURCE_DIR}/src/say/init.lua)
 add_library(say STATIC say.c)
-target_link_libraries(say elune)
+target_link_libraries(say PRIVATE elune)
 
 FetchContent_Declare(
   luassert
@@ -358,7 +358,7 @@ lua2c(
   luassert.languages.zh=${luassert_SOURCE_DIR}/src/languages/zh.lua
 )
 add_library(luassert STATIC luassert.c)
-target_link_libraries(luassert elune)
+target_link_libraries(luassert PRIVATE elune)
 
 FetchContent_Declare(
   argparse
@@ -369,7 +369,7 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(argparse)
 lua2c(argparse argparse=${argparse_SOURCE_DIR}/src/argparse.lua)
 add_library(argparse STATIC argparse.c)
-target_link_libraries(argparse elune)
+target_link_libraries(argparse PRIVATE elune)
 
 FetchContent_Declare(
   date
@@ -380,7 +380,7 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(date)
 lua2c(date date=${date_SOURCE_DIR}/src/date.lua)
 add_library(date STATIC date.c)
-target_link_libraries(date elune)
+target_link_libraries(date PRIVATE elune)
 
 FetchContent_Declare(
   tsort
@@ -391,7 +391,7 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(tsort)
 lua2c(tsort resty.tsort=${tsort_SOURCE_DIR}/lib/resty/tsort.lua)
 add_library(tsort STATIC tsort.c)
-target_link_libraries(tsort elune)
+target_link_libraries(tsort PRIVATE elune)
 
 FetchContent_Declare(
   minheap
@@ -402,7 +402,7 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(minheap)
 lua2c(minheap minheap=${minheap_SOURCE_DIR}/minheap.lua)
 add_library(minheap STATIC minheap.c)
-target_link_libraries(minheap elune)
+target_link_libraries(minheap PRIVATE elune)
 
 FetchContent_Declare(
   luapath
@@ -431,7 +431,7 @@ lua2c(
   path.win32.wcs=${luapath_SOURCE_DIR}/lua/path/win32/wcs.lua
 )
 add_library(luapath STATIC luapath.c)
-target_link_libraries(luapath elune)
+target_link_libraries(luapath PRIVATE elune)
 
 FetchContent_Declare(
   penlight
@@ -483,7 +483,7 @@ lua2c(
   pl.import_into=${penlight_SOURCE_DIR}/lua/pl/import_into.lua
 )
 add_library(penlight STATIC penlight.c)
-target_link_libraries(penlight elune)
+target_link_libraries(penlight PRIVATE elune)
 
 FetchContent_Declare(
   vstruct
@@ -531,7 +531,7 @@ lua2c(
   vstruct.lexer=${vstruct_SOURCE_DIR}/lexer.lua
 )
 add_library(vstruct STATIC vstruct.c)
-target_link_libraries(vstruct elune)
+target_link_libraries(vstruct PRIVATE elune)
 
 function(add_lua_executable name main)
   set(luamain ${name}luamain.c)
@@ -541,7 +541,7 @@ function(add_lua_executable name main)
     DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/tools/luamain.lua ${main}
   )
   add_executable(${name} ${luamain})
-  target_link_libraries(${name} elune ${ARGN})
+  target_link_libraries(${name} PRIVATE elune ${ARGN})
 endfunction()
 
 function(add_strict_lua_executable name main)
@@ -552,12 +552,12 @@ function(add_strict_lua_executable name main)
     DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/tools/luamain.lua ${main}
   )
   add_executable(${name} ${luamain})
-  target_link_libraries(${name} elune ${ARGN})
+  target_link_libraries(${name} PRIVATE elune ${ARGN})
 endfunction()
 
 lua2c(wowlessyaml wowapi.yaml=${CMAKE_CURRENT_SOURCE_DIR}/wowapi/yaml.lua)
 add_library(wowlessyaml wowlessyaml.c)
-target_link_libraries(wowlessyaml elune)
+target_link_libraries(wowlessyaml PRIVATE elune)
 
 add_strict_lua_executable(
   yaml2lua
@@ -584,11 +584,11 @@ yaml2lua(stringenums)
 
 lua2c(toolsutil tools.util=${CMAKE_CURRENT_SOURCE_DIR}/tools/util.lua)
 add_library(toolsutil toolsutil.c)
-target_link_libraries(toolsutil elune)
+target_link_libraries(toolsutil PRIVATE elune)
 
 lua2c(wowlessutil wowless.util=${CMAKE_CURRENT_SOURCE_DIR}/wowless/util.lua)
 add_library(wowlessutil wowlessutil.c)
-target_link_libraries(wowlessutil elune)
+target_link_libraries(wowlessutil PRIVATE elune)
 
 FetchContent_Declare(
   cjson
@@ -603,10 +603,10 @@ add_library(
   ${cjson_SOURCE_DIR}/lua_cjson.c
   ${cjson_SOURCE_DIR}/strbuf.c
 )
-target_link_libraries(cjson elune)
+target_link_libraries(cjson PRIVATE elune)
 lua2c(luacjson cjson=c)
 add_library(luacjson luacjson.c)
-target_link_libraries(luacjson cjson elune)
+target_link_libraries(luacjson PRIVATE cjson elune)
 
 add_strict_lua_executable(
   listfile
@@ -643,7 +643,7 @@ add_custom_command(
   DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/tools/lua2c.lua stamp/listfile.txt
 )
 add_library(runtimelistfile STATIC runtimelistfile.c)
-target_link_libraries(runtimelistfile elune)
+target_link_libraries(runtimelistfile PRIVATE elune)
 
 add_strict_lua_executable(
   dblist
@@ -674,7 +674,7 @@ add_library(
   ${lpeg_SOURCE_DIR}/lptree.c
   ${lpeg_SOURCE_DIR}/lpvm.c
 )
-target_link_libraries(lpeg elune)
+target_link_libraries(lpeg PRIVATE elune)
 
 FetchContent_Declare(
   luadbd
@@ -689,7 +689,7 @@ lua2c(
   luadbd.sig=${luadbd_SOURCE_DIR}/luadbd/sig.lua
 )
 add_library(luadbd STATIC luadbd.c)
-target_link_libraries(luadbd elune)
+target_link_libraries(luadbd PRIVATE elune)
 
 add_strict_lua_executable(
   dbdefs
@@ -753,7 +753,7 @@ foreach(product ${products})
     DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/tools/lua2c.lua stamp/${product}.txt
   )
   add_library(datalua_${product} STATIC datalua_${product}.c)
-  target_link_libraries(datalua_${product} elune)
+  target_link_libraries(datalua_${product} PRIVATE elune)
   list(APPEND dataluas datalua_${product})
 endforeach()
 
@@ -784,15 +784,15 @@ add_custom_command(
   DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/tools/lua2c.lua stamp/tactkeys.txt
 )
 add_library(runtimetactkeys STATIC runtimetactkeys.c)
-target_link_libraries(runtimetactkeys elune)
+target_link_libraries(runtimetactkeys PRIVATE elune)
 
 lua2c(toolssqlite3ext tools.sqlite3ext=c)
 add_library(toolssqlite3ext STATIC tools/sqlite3ext.c toolssqlite3ext.c)
-target_link_libraries(toolssqlite3ext elune sqlite3)
+target_link_libraries(toolssqlite3ext PRIVATE elune sqlite3)
 
 lua2c(toolsdbc tools.dbc=${CMAKE_CURRENT_SOURCE_DIR}/tools/dbc.lua)
 add_library(toolsdbc STATIC toolsdbc.c)
-target_link_libraries(toolsdbc elune)
+target_link_libraries(toolsdbc PRIVATE elune)
 
 FetchContent_Declare(
   dbc
@@ -813,7 +813,7 @@ lua2c(
   dbc.bin=${dbc_SOURCE_DIR}/luadbc/dbc/bin.lua
 )
 add_library(dbc STATIC dbc.c)
-target_link_libraries(dbc elune)
+target_link_libraries(dbc PRIVATE elune)
 
 add_strict_lua_executable(
   sqlite
@@ -836,7 +836,7 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(luabitop)
 lua2c(luabitop bit=c)
 add_library(luabitop STATIC luabitop.c ${luabitop_SOURCE_DIR}/bit.c)
-target_link_libraries(luabitop elune)
+target_link_libraries(luabitop PRIVATE elune)
 
 FetchContent_Declare(
   md5
@@ -856,7 +856,7 @@ add_library(
   ${md5_SOURCE_DIR}/src/md5.c
   ${md5_SOURCE_DIR}/src/md5lib.c
 )
-target_link_libraries(md5 elune)
+target_link_libraries(md5 PRIVATE elune)
 
 FetchContent_Declare(
   luasocket
@@ -895,7 +895,7 @@ add_library(
   $<$<PLATFORM_ID:Darwin,Linux>:${luasocket_SOURCE_DIR}/src/usocket.c>
   $<$<PLATFORM_ID:Windows>:${luasocket_SOURCE_DIR}/src/wsocket.c>
 )
-target_link_libraries(luasocket elune $<$<PLATFORM_ID:Windows>:ws2_32>)
+target_link_libraries(luasocket PRIVATE elune $<$<PLATFORM_ID:Windows>:ws2_32>)
 
 FetchContent_Declare(
   casc
@@ -931,7 +931,7 @@ add_library(
   casc.c
   ${casc_SOURCE_DIR}/luacasc/casc/bin.c
 )
-target_link_libraries(casc elune)
+target_link_libraries(casc PRIVATE elune)
 
 add_strict_lua_executable(
   fetch
@@ -986,7 +986,7 @@ add_library(
   ${libpng_SOURCE_DIR}/pngwutil.c
 )
 target_include_directories(libpng PUBLIC ${libpng_SOURCE_DIR})
-target_link_libraries(libpng zlib)
+target_link_libraries(libpng PRIVATE zlib)
 
 FetchContent_Declare(
   imagemagick
@@ -1299,7 +1299,7 @@ add_library(
 )
 target_include_directories(imagemagick PUBLIC ${imagemagick_SOURCE_DIR})
 target_compile_definitions(imagemagick PUBLIC $<$<PLATFORM_ID:Windows>:_LIB>)
-target_link_libraries(imagemagick libpng $<$<PLATFORM_ID:Windows>:urlmon>)
+target_link_libraries(imagemagick PRIVATE libpng $<$<PLATFORM_ID:Windows>:urlmon>)
 
 FetchContent_Declare(
   luamagick
@@ -1310,7 +1310,7 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(luamagick)
 lua2c(luamagick luamagick=c)
 add_library(luamagick STATIC luamagick.c ${luamagick_SOURCE_DIR}/luamagick.c)
-target_link_libraries(luamagick elune imagemagick)
+target_link_libraries(luamagick PRIVATE elune imagemagick)
 
 lua2c(
   wowlessrender
@@ -1319,7 +1319,7 @@ lua2c(
   wowless.png=${CMAKE_CURRENT_SOURCE_DIR}/wowless/png.lua
 )
 add_library(wowlessrender STATIC wowlessrender.c)
-target_link_libraries(wowlessrender elune)
+target_link_libraries(wowlessrender PRIVATE elune)
 
 add_strict_lua_executable(
   render
@@ -1350,7 +1350,7 @@ add_strict_lua_executable(
 
 lua2c(runtimeproducts runtime.products=runtime/products.lua)
 add_library(runtimeproducts STATIC runtimeproducts.c)
-target_link_libraries(runtimeproducts elune)
+target_link_libraries(runtimeproducts PRIVATE elune)
 
 add_strict_lua_executable(
   bump
@@ -1419,7 +1419,7 @@ add_library(
   wowlesslib.c
   wowless/ext.c
 )
-target_link_libraries(wowlesslib elune)
+target_link_libraries(wowlesslib PRIVATE elune)
 
 add_strict_lua_executable(
   wowless
