@@ -1444,7 +1444,7 @@ add_strict_lua_executable(
 )
 
 add_lua_executable(
-  test
+  runtests
   ${CMAKE_CURRENT_SOURCE_DIR}/tools/runtests.lua
   argparse
   ${dataluas}
