@@ -167,12 +167,15 @@ G.testsuite.uiobjects = function()
           up.moo = down
           check1('moo', down:GetParentKey())
           check0(down:SetParentKey('cow'))
-          assertEquals(up.cow, down)
+          assertEquals(down, up.cow)
+          assertEquals(down, up.moo)
+          check1('moo', down:GetParentKey())
+          check0(down:SetParentKey('cow', true))
+          assertEquals(down, up.cow)
           if up.ClearParentKey then
             assertEquals(nil, up.moo)
           else
-            assertEquals(up.moo, down)
-            check1('moo', down:GetParentKey())
+            assertEquals(down, up.moo)
             up.moo = nil
           end
           check1('cow', down:GetParentKey())
