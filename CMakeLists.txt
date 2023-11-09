@@ -541,7 +541,7 @@ function(add_lua_executable name main)
     DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/tools/luamain.lua ${main}
   )
   add_executable(${name} ${luamain})
-  target_link_libraries(${name} PRIVATE ${ARGN} elune)
+  target_link_libraries(${name} PRIVATE elune ${ARGN})
 endfunction()
 
 lua2c(wowlessyaml wowapi.yaml=${CMAKE_CURRENT_SOURCE_DIR}/wowapi/yaml.lua)
