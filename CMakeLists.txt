@@ -541,7 +541,7 @@ function(add_lua_executable name main)
     DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/tools/luamain.lua ${main}
   )
   add_executable(${name} ${luamain})
-  target_link_libraries(${name} PRIVATE elune ${ARGN})
+  target_link_libraries(${name} PRIVATE ${ARGN} elune)
 endfunction()
 
 lua2c(wowlessyaml wowapi.yaml=${CMAKE_CURRENT_SOURCE_DIR}/wowapi/yaml.lua)
@@ -817,17 +817,6 @@ add_lua_executable(
 )
 
 FetchContent_Declare(
-  luabitop
-  GIT_REPOSITORY https://github.com/luadist/luabitop
-  GIT_TAG 81bb23b0e737805442033535de8e6d204d0e5381
-  SOURCE_SUBDIR disable_cmakelists_txt
-)
-FetchContent_MakeAvailable(luabitop)
-lua2c(luabitop bit=c)
-add_library(luabitop STATIC luabitop.c ${luabitop_SOURCE_DIR}/bit.c)
-target_link_libraries(luabitop PRIVATE elune)
-
-FetchContent_Declare(
   md5
   GIT_REPOSITORY https://github.com/keplerproject/md5
   GIT_TAG e6f25516910239111f06e2b838bf2f991161ba83
@@ -928,7 +917,6 @@ add_lua_executable(
   argparse
   casc
   dbc
-  luabitop
   luaexpat
   luafilesystem
   luapath
@@ -1315,7 +1303,6 @@ add_lua_executable(
   ${CMAKE_CURRENT_SOURCE_DIR}/tools/render.lua
   argparse
   casc
-  luabitop
   luafilesystem
   luamagick
   luasocket
@@ -1346,7 +1333,6 @@ add_lua_executable(
   ${CMAKE_CURRENT_SOURCE_DIR}/tools/bump.lua
   argparse
   casc
-  luabitop
   luafilesystem
   luasocket
   lyaml
