@@ -13944,7 +13944,7 @@ RollOnLoot: {}
 RunBinding: {}
 RunMacro: {}
 RunMacroText:
-  impl: RunMacroText
+  impl: RunMacroText_Callback
   inputs:
   - name: macroText
     type: string
