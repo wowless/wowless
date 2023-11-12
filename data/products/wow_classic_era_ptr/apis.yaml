@@ -11252,7 +11252,10 @@ GetLegacyRaidDifficultyID:
   - type: number
 GetLFDChoiceCollapseState: {}
 GetLFDChoiceEnabledState: {}
-GetLFDChoiceOrder: {}
+GetLFDChoiceOrder:
+  inputs: {}
+  outputs:
+  - type: table
 GetLFDLockInfo: {}
 GetLFDLockPlayerCount: {}
 GetLFDRoleLockInfo: {}
