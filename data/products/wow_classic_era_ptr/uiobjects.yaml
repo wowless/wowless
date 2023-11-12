@@ -1108,16 +1108,20 @@ GameTooltip:
     SetCraftSpell: {}
     SetCurrencyToken: {}
     SetCurrencyTokenByID: {}
+    SetEngravingRune: {}
     SetEquipmentSet: {}
     SetExistingSocketGem: {}
     SetFrameStack: {}
     SetGuildBankItem: {}
+    SetHeirloomByItemID: {}
     SetHyperlink: {}
     SetInboxItem: {}
     SetInstanceLockEncountersComplete: {}
     SetInventoryItem: {}
     SetInventoryItemByID: {}
     SetItemByID: {}
+    SetLFGDungeonReward: {}
+    SetLFGDungeonShortageReward: {}
     SetLootCurrency: {}
     SetLootItem: {}
     SetLootRollItem: {}
@@ -1150,6 +1154,7 @@ GameTooltip:
     SetTalent: {}
     SetText: {}
     SetTotem: {}
+    SetToyByItemID: {}
     SetTrackingSpell: {}
     SetTradePlayerItem: {}
     SetTradeSkillItem: {}
