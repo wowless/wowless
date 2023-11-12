@@ -7836,7 +7836,7 @@ C_Texture.GetAtlasID:
   - name: atlasID
     type: number
 C_Texture.GetAtlasInfo:
-  impl: C_Texture.GetAtlasInfo
+  impl: C_Texture.GetAtlasInfo_10_2
   inputs:
   - name: atlas
     type: string
