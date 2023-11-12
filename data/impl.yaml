@@ -168,6 +168,9 @@ GetAddOnMetadata: {}
 GetBuildInfo_10_1:
   frameworks:
   - datalua
+GetBuildInfo_1_15_0:
+  frameworks:
+  - datalua
 GetBuildInfo_3_4_2:
   frameworks:
   - datalua

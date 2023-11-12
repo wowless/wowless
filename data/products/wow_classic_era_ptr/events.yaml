@@ -20,6 +20,8 @@ ACTION_RANGE_CHECK_UPDATE:
     type: boolean
   - name: checksRange
     type: boolean
+ACTION_USABLE_CHANGED:
+  payload: {}
 ACTION_WILL_BIND_ITEM:
   payload: {}
 ACTIONBAR_HIDEGRID:
@@ -2429,6 +2431,8 @@ CHAT_MSG_PET_INFO:
     type: boolean
   - name: supressRaidIcons
     type: boolean
+CHAT_MSG_PING:
+  payload: {}
 CHAT_MSG_RAID:
   payload:
   - name: text
@@ -3493,10 +3497,6 @@ EQUIPMENT_SWAP_FINISHED:
     type: number
 EQUIPMENT_SWAP_PENDING:
   payload: {}
-EXECUTE_CHAT_LINE:
-  payload:
-  - name: chatLine
-    type: string
 EXPAND_BAG_BAR_CHANGED:
   payload:
   - name: expandBagBar
@@ -3566,6 +3566,10 @@ GLUE_CONSOLE_LOG:
   - name: message
     type: string
 GLUE_SCREENSHOT_FAILED:
+  payload: {}
+GLUE_SCREENSHOT_STARTED:
+  payload: {}
+GLUE_SCREENSHOT_SUCCEEDED:
   payload: {}
 GLYPH_ADDED:
   payload:
@@ -3876,22 +3880,6 @@ KIOSK_SESSION_EXPIRATION_WARNING:
     type: number
 KIOSK_SESSION_EXPIRED:
   payload: {}
-KNOWLEDGE_BASE_ARTICLE_LOAD_FAILURE:
-  payload: {}
-KNOWLEDGE_BASE_ARTICLE_LOAD_SUCCESS:
-  payload: {}
-KNOWLEDGE_BASE_QUERY_LOAD_FAILURE:
-  payload: {}
-KNOWLEDGE_BASE_QUERY_LOAD_SUCCESS:
-  payload: {}
-KNOWLEDGE_BASE_SERVER_MESSAGE:
-  payload: {}
-KNOWLEDGE_BASE_SETUP_LOAD_FAILURE:
-  payload: {}
-KNOWLEDGE_BASE_SETUP_LOAD_SUCCESS:
-  payload: {}
-KNOWLEDGE_BASE_SYSTEM_MOTD_UPDATED:
-  payload: {}
 LANGUAGE_LIST_CHANGED:
   payload: {}
 LEARNED_SPELL_IN_TAB:
@@ -3925,6 +3913,12 @@ LFG_LIST_ACTIVE_ENTRY_UPDATE:
   - name: created
     nilable: true
     type: boolean
+LFG_LIST_APPLICANT_LIST_UPDATED:
+  payload: {}
+LFG_LIST_APPLICANT_UPDATED:
+  payload: {}
+LFG_LIST_APPLICATION_STATUS_UPDATED:
+  payload: {}
 LFG_LIST_AVAILABILITY_UPDATE:
   payload: {}
 LFG_LIST_ENTRY_CREATION_FAILED:
@@ -3932,6 +3926,8 @@ LFG_LIST_ENTRY_CREATION_FAILED:
 LFG_LIST_ENTRY_EXPIRED_TIMEOUT:
   payload: {}
 LFG_LIST_ENTRY_EXPIRED_TOO_MANY_PLAYERS:
+  payload: {}
+LFG_LIST_JOINED_GROUP:
   payload: {}
 LFG_LIST_ROLE_UPDATE:
   payload: {}
@@ -4218,6 +4214,10 @@ MODIFIER_STATE_CHANGED:
     type: number
 MOUNT_CURSOR_CLEAR:
   payload: {}
+MOUNT_JOURNAL_SEARCH_UPDATED:
+  payload: {}
+MOUNT_JOURNAL_USABILITY_CHANGED:
+  payload: {}
 MUTELIST_UPDATE:
   payload: {}
 NAME_PLATE_CREATED:
@@ -4233,6 +4233,10 @@ NAME_PLATE_UNIT_REMOVED:
   - name: unitToken
     type: string
 NEW_AUCTION_UPDATE:
+  payload: {}
+NEW_MOUNT_ADDED:
+  payload: {}
+NEW_PET_ADDED:
   payload: {}
 NEW_RECIPE_LEARNED:
   payload:
@@ -4469,6 +4473,14 @@ PET_FORCE_NAME_DECLENSION:
   - name: declinedName5
     nilable: true
     type: string
+PET_JOURNAL_LIST_UPDATE:
+  payload: {}
+PET_JOURNAL_PET_DELETED:
+  payload: {}
+PET_JOURNAL_PET_RESTORED:
+  payload: {}
+PET_JOURNAL_PET_REVOKED:
+  payload: {}
 PET_SPELL_POWER_UPDATE:
   payload: {}
 PET_STABLE_CLOSED:
@@ -4643,6 +4655,8 @@ PLAYER_SOFT_INTERACT_CHANGED:
     type: string
 PLAYER_SOFT_TARGET_INTERACTION:
   payload: {}
+PLAYER_SPECIALIZATION_CHANGED:
+  payload: {}
 PLAYER_STARTED_LOOKING:
   payload: {}
 PLAYER_STARTED_MOVING:
@@ -4717,6 +4731,8 @@ PRODUCT_CHOICE_UPDATE:
   payload: {}
 PRODUCT_DISTRIBUTIONS_UPDATED:
   payload: {}
+PVP_BRAWL_INFO_UPDATED:
+  payload: {}
 PVP_RATED_STATS_UPDATE:
   payload: {}
 PVP_TIMER_UPDATE:
@@ -4766,7 +4782,11 @@ QUEST_GREETING:
   payload: {}
 QUEST_ITEM_UPDATE:
   payload: {}
+QUEST_LOG_CRITERIA_UPDATE:
+  payload: {}
 QUEST_LOG_UPDATE:
+  payload: {}
+QUEST_POI_UPDATE:
   payload: {}
 QUEST_PROGRESS:
   payload: {}
@@ -5053,6 +5073,8 @@ SHOW_RATED_PVP_REWARD_TOAST:
     type: boolean
   - name: lessAwesome
     type: boolean
+SHOW_SUBTITLE:
+  payload: {}
 SIMPLE_BROWSER_WEB_ERROR:
   payload:
   - name: errorCode
@@ -5139,6 +5161,8 @@ SPELL_DATA_LOAD_RESULT:
   - name: success
     type: boolean
 SPELL_POWER_CHANGED:
+  payload: {}
+SPELL_PUSHED_TO_ACTIONBAR:
   payload: {}
 SPELL_SCRIPT_ERROR:
   payload:
@@ -5933,6 +5957,8 @@ UPDATE_SHAPESHIFT_USABLE:
   payload: {}
 UPDATE_STEALTH:
   payload: {}
+UPDATE_SUMMONPETS_ACTION:
+  payload: {}
 UPDATE_TRADESKILL_RECAST:
   payload: {}
 UPDATE_UI_WIDGET:
@@ -6281,12 +6307,18 @@ VOID_TRANSFER_DONE:
   payload: {}
 VOID_TRANSFER_SUCCESS:
   payload: {}
+VOTE_KICK_REASON_NEEDED:
+  payload: {}
 WARFRONT_COMPLETED:
   payload:
   - name: mapID
     type: number
   - name: winner
     type: number
+WARGAME_INVITE_SENT:
+  payload: {}
+WARGAME_REQUEST_RESPONSE:
+  payload: {}
 WARGAME_REQUESTED:
   payload:
   - name: opposingPartyMemberName

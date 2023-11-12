@@ -17,6 +17,7 @@ AcceptBattlefieldPort:
 AcceptDuel: {}
 AcceptGroup: {}
 AcceptGuild: {}
+AcceptProposal: {}
 AcceptQuest: {}
 AcceptResurrect: {}
 AcceptSockets: {}
@@ -420,6 +421,14 @@ C_ActionBar.ToggleAutoCastPetAction:
   - name: slotID
     type: number
   outputs: {}
+C_AddOns.DisableAddOn: {}
+C_AddOns.DisableAllAddOns: {}
+C_AddOns.DoesAddOnExist: {}
+C_AddOns.EnableAddOn: {}
+C_AddOns.EnableAllAddOns: {}
+C_AddOns.GetAddOnDependencies: {}
+C_AddOns.GetAddOnEnableState: {}
+C_AddOns.GetAddOnInfo: {}
 C_AddOns.GetAddOnMetadata:
   impl: GetAddOnMetadata
   inputs:
@@ -430,6 +439,17 @@ C_AddOns.GetAddOnMetadata:
   outputs:
   - name: value
     type: string
+C_AddOns.GetAddOnOptionalDependencies: {}
+C_AddOns.GetNumAddOns: {}
+C_AddOns.IsAddOnLoadable: {}
+C_AddOns.IsAddOnLoaded: {}
+C_AddOns.IsAddOnLoadOnDemand: {}
+C_AddOns.IsAddonVersionCheckEnabled: {}
+C_AddOns.LoadAddOn: {}
+C_AddOns.ResetAddOns: {}
+C_AddOns.ResetDisabledAddOns: {}
+C_AddOns.SaveAddOns: {}
+C_AddOns.SetAddonVersionCheck: {}
 C_AreaPoiInfo.GetAreaPOIForMap:
   inputs:
   - name: uiMapID
@@ -1630,9 +1650,11 @@ C_CameraDefaults.GetCameraFOVDefaults:
     type: number
   - name: fieldOfViewDegreesPlayerMax
     type: number
+C_CharacterServices.AssignNameChangeDistribution: {}
 C_CharacterServices.AssignPCTDistribution: {}
 C_CharacterServices.AssignRaceOrFactionChangeDistribution: {}
 C_CharacterServices.AssignUpgradeDistribution: {}
+C_CharacterServices.CapitalizeCharName: {}
 C_CharacterServices.GetActiveCharacterUpgradeBoostType: {}
 C_CharacterServices.GetActiveClassTrialBoostType: {}
 C_CharacterServices.GetAutomaticBoost: {}
@@ -1968,6 +1990,7 @@ C_Club.DestroyTicket:
   - name: ticketId
     type: string
   outputs: {}
+C_Club.DoesAnyCommunityHaveUnreadMessages: {}
 C_Club.EditClub:
   inputs:
   - name: clubId
@@ -3432,38 +3455,6 @@ C_Commentator.ZoomIn:
 C_Commentator.ZoomOut:
   inputs: {}
   outputs: {}
-C_Console.GetAllCommands:
-  impl: C_Console.GetAllCommands
-  inputs: {}
-  outputs:
-  - name: commands
-    type:
-      arrayof:
-        structure: C_Console.ConsoleCommandInfo
-C_Console.GetColorFromType:
-  inputs:
-  - name: colorType
-    type:
-      enum: ConsoleColorType
-  outputs:
-  - name: color
-    type:
-      structure: colorRGB
-C_Console.GetFontHeight:
-  inputs: {}
-  outputs:
-  - name: fontHeightInPixels
-    type: number
-C_Console.PrintAllMatchingCommands:
-  inputs:
-  - name: partialCommandText
-    type: string
-  outputs: {}
-C_Console.SetFontHeight:
-  inputs:
-  - name: fontHeightInPixels
-    type: number
-  outputs: {}
 C_ConsoleScriptCollection.GetCollectionDataByID:
   inputs:
   - name: collectionID
@@ -3872,6 +3863,7 @@ C_CurrencyInfo.GetCurrencyListLink:
   outputs:
   - name: link
     type: string
+C_CurrencyInfo.IsCurrencyContainer: {}
 C_Cursor.GetCursorItem:
   inputs: {}
   outputs:
@@ -3915,6 +3907,7 @@ C_CVar.GetCVarDefault:
   - name: defaultValue
     nilable: true
     type: string
+C_CVar.GetCVarInfo: {}
 C_CVar.RegisterCVar:
   impl: C_CVar.RegisterCVar
   inputs:
@@ -5080,10 +5073,17 @@ C_KeyBindings.GetCustomBindingType:
     nilable: true
     type:
       enum: CustomBindingType
+C_LFGList.AcceptInvite: {}
+C_LFGList.ApplyToGroup: {}
+C_LFGList.CanActiveEntryUseAutoAccept: {}
+C_LFGList.CancelApplication: {}
+C_LFGList.CanCreateQuestGroup: {}
+C_LFGList.ClearApplicationTextFields: {}
 C_LFGList.ClearCreationTextFields:
   inputs: {}
   outputs: {}
 C_LFGList.ClearSearchResults: {}
+C_LFGList.ClearSearchTextFields: {}
 C_LFGList.CopyActiveEntryInfoToCreationFields:
   inputs: {}
   outputs: {}
@@ -5098,12 +5098,16 @@ C_LFGList.CreateListing:
   outputs:
   - name: success
     type: boolean
+C_LFGList.DeclineApplicant: {}
+C_LFGList.DeclineInvite: {}
+C_LFGList.DoesEntryTitleMatchPrebuiltTitle: {}
 C_LFGList.GetActiveEntryInfo:
   inputs: {}
   outputs:
   - name: entryData
     type:
       structure: C_LFGList.LfgEntryData
+C_LFGList.GetActivityFullName: {}
 C_LFGList.GetActivityGroupInfo:
   inputs:
   - name: groupID
@@ -5113,6 +5117,7 @@ C_LFGList.GetActivityGroupInfo:
     type: string
   - name: orderIndex
     type: number
+C_LFGList.GetActivityIDForQuestID: {}
 C_LFGList.GetActivityInfoExpensive: {}
 C_LFGList.GetActivityInfoTable:
   inputs:
@@ -5122,6 +5127,14 @@ C_LFGList.GetActivityInfoTable:
   - name: activityInfo
     type:
       structure: C_LFGList.GroupFinderActivityInfo
+C_LFGList.GetApplicantDungeonScoreForListing: {}
+C_LFGList.GetApplicantInfo: {}
+C_LFGList.GetApplicantMemberInfo: {}
+C_LFGList.GetApplicantMemberStats: {}
+C_LFGList.GetApplicantPvpRatingInfoForListing: {}
+C_LFGList.GetApplicants: {}
+C_LFGList.GetApplicationInfo: {}
+C_LFGList.GetApplications: {}
 C_LFGList.GetAvailableActivities:
   inputs:
   - name: categoryID
@@ -5140,7 +5153,9 @@ C_LFGList.GetAvailableActivityGroups: {}
 C_LFGList.GetAvailableCategories:
   outputs:
   - type: table
-C_LFGList.GetCategoryInfo: {}
+C_LFGList.GetAvailableLanguageSearchFilter: {}
+C_LFGList.GetAvailableRoles: {}
+C_LFGList.GetDefaultLanguageSearchFilter: {}
 C_LFGList.GetFilteredSearchResults:
   inputs: {}
   outputs:
@@ -5150,13 +5165,16 @@ C_LFGList.GetFilteredSearchResults:
   - name: filteredResults
     type:
       arrayof: number
-C_LFGList.GetRedirectedMapDifficultyID:
-  inputs:
-  - name: difficultyID
-    type: number
-  outputs:
-  - name: redirectedMapDifficultyID
-    type: number
+C_LFGList.GetKeystoneForActivity: {}
+C_LFGList.GetLanguageSearchFilter: {}
+C_LFGList.GetLfgCategoryInfo: {}
+C_LFGList.GetNumApplicants: {}
+C_LFGList.GetNumApplications: {}
+C_LFGList.GetNumInvitedApplicantMembers: {}
+C_LFGList.GetNumPendingApplicantMembers: {}
+C_LFGList.GetOwnedKeystoneActivityAndGroupAndLevel: {}
+C_LFGList.GetPlaystyleString: {}
+C_LFGList.GetRoleCheckInfo: {}
 C_LFGList.GetRoles:
   inputs: {}
   outputs:
@@ -5169,6 +5187,7 @@ C_LFGList.GetSavedRoles:
   - name: roles
     type:
       structure: C_LFGList.LFGRoles
+C_LFGList.GetSearchResultEncounterInfo: {}
 C_LFGList.GetSearchResultFriends: {}
 C_LFGList.GetSearchResultInfo:
   inputs:
@@ -5178,7 +5197,6 @@ C_LFGList.GetSearchResultInfo:
   - name: searchResultData
     type:
       structure: C_LFGList.LfgSearchResultData
-C_LFGList.GetSearchResultLeaderInfo: {}
 C_LFGList.GetSearchResultMemberCounts: {}
 C_LFGList.GetSearchResultMemberInfo: {}
 C_LFGList.GetSearchResults:
@@ -5206,11 +5224,8 @@ C_LFGList.HasSearchResultInfo:
   outputs:
   - name: hasSearchResultInfo
     type: boolean
-C_LFGList.IsLookingForGroupEnabled:
-  inputs: {}
-  outputs:
-  - name: isEnabled
-    type: boolean
+C_LFGList.InviteApplicant: {}
+C_LFGList.IsCurrentlyApplying: {}
 C_LFGList.IsPlayerAuthenticatedForLFG:
   inputs:
   - name: categoryID
@@ -5219,15 +5234,13 @@ C_LFGList.IsPlayerAuthenticatedForLFG:
   outputs:
   - name: isAuthenticated
     type: boolean
+C_LFGList.RefreshApplicants: {}
+C_LFGList.RemoveApplicant: {}
 C_LFGList.RemoveListing: {}
 C_LFGList.RequestAvailableActivities:
   inputs: {}
   outputs: {}
-C_LFGList.RequestInvite:
-  inputs:
-  - name: searchResultID
-    type: number
-  outputs: {}
+C_LFGList.SaveLanguageSearchFilter: {}
 C_LFGList.Search:
   inputs:
   - name: categoryID
@@ -5242,6 +5255,8 @@ C_LFGList.Search:
     name: preferredFilters
     type: number
   outputs: {}
+C_LFGList.SetApplicantMemberRole: {}
+C_LFGList.SetEntryTitle: {}
 C_LFGList.SetRoles:
   inputs:
   - name: roles
@@ -5250,6 +5265,8 @@ C_LFGList.SetRoles:
   outputs:
   - name: success
     type: boolean
+C_LFGList.SetSearchToActivity: {}
+C_LFGList.SetSearchToQuestID: {}
 C_LFGList.UpdateListing:
   inputs:
   - name: activityIDs
@@ -5261,6 +5278,8 @@ C_LFGList.UpdateListing:
   outputs:
   - name: success
     type: boolean
+C_LFGList.ValidateRequiredDungeonScore: {}
+C_LFGList.ValidateRequiredPvpRatingForActivity: {}
 C_Loot.IsLegacyLootModeEnabled:
   inputs: {}
   outputs:
@@ -5852,6 +5871,7 @@ C_PartyInfo.GetInviteConfirmationInvalidQueues:
     type:
       arrayof:
         structure: QueueSpecificInfo
+C_PartyInfo.IsCrossFactionParty: {}
 C_PartyInfo.IsPartyFull:
   inputs:
   - name: category
@@ -5903,6 +5923,8 @@ C_PlayerInfo.GetName:
   - name: name
     nilable: true
     type: string
+C_PlayerInfo.GetNativeDisplayID: {}
+C_PlayerInfo.GetPetStableCreatureDisplayInfoID: {}
 C_PlayerInfo.GetPlayerCharacterData:
   inputs: {}
   outputs:
@@ -5951,6 +5973,9 @@ C_PlayerInfo.IsConnected:
   - name: isConnected
     nilable: true
     type: boolean
+C_PlayerInfo.IsDisplayRaceNative: {}
+C_PlayerInfo.IsMirrorImage: {}
+C_PlayerInfo.IsPlayerNPERestricted: {}
 C_PlayerInfo.IsXPUserDisabled:
   inputs: {}
   outputs:
@@ -6205,6 +6230,7 @@ C_QuestInfoSystem.HasQuestRewardSpells:
   outputs:
   - name: hasRewardSpells
     type: boolean
+C_QuestLog.GetMapForQuestPOIs: {}
 C_QuestLog.GetMaxNumQuests:
   inputs: {}
   outputs:
@@ -6231,6 +6257,7 @@ C_QuestLog.GetQuestObjectives:
     type:
       arrayof:
         structure: C_QuestLog.QuestObjectiveInfo
+C_QuestLog.GetQuestsOnMap: {}
 C_QuestLog.IsOnQuest:
   inputs:
   - name: questID
@@ -6245,6 +6272,7 @@ C_QuestLog.IsQuestFlaggedCompleted:
   outputs:
   - name: isCompleted
     type: boolean
+C_QuestLog.SetMapForQuestPOIs: {}
 C_QuestLog.ShouldShowQuestRewards:
   inputs:
   - name: questID
@@ -6796,6 +6824,8 @@ C_Texture.ClearTitleIconTexture:
   - name: texture
     type: Texture
   outputs: {}
+C_Texture.GetAtlasElementID: {}
+C_Texture.GetAtlasID: {}
 C_Texture.GetAtlasInfo:
   impl: C_Texture.GetAtlasInfo
   inputs:
@@ -6937,6 +6967,7 @@ C_Traits.ConfigHasStagedChanges:
   outputs:
   - name: hasChanges
     type: boolean
+C_Traits.GenerateImportString: {}
 C_Traits.GenerateInspectImportString:
   inputs:
   - name: target
@@ -7916,6 +7947,7 @@ C_VoiceChat.IsSpeakForMeAllowed:
   outputs:
   - name: isAllowed
     type: boolean
+C_VoiceChat.IsTranscribing: {}
 C_VoiceChat.IsTranscriptionAllowed:
   inputs: {}
   outputs:
@@ -8315,6 +8347,7 @@ CannotBeResurrected:
   inputs: {}
   outputs:
   - type: boolean
+CanPartyLFGBackfill: {}
 CanReplaceGuildMaster: {}
 CanResetTutorials: {}
 CanSendAuctionQuery: {}
@@ -8352,6 +8385,7 @@ CastSpellByName:
   protection: secure
 ceil:
   alias: math.ceil
+CenterCamera: {}
 ChangeActionBarPage: {}
 ChangeChatColor: {}
 ChannelBan: {}
@@ -8371,6 +8405,7 @@ CheckInteractDistance: {}
 CheckTalentMasterDist: {}
 ClassicExpansionAtLeast: {}
 ClearAchievementComparisonUnit: {}
+ClearAllLFGDungeons: {}
 ClearBattlemaster:
   inputs: {}
   outputs: {}
@@ -8493,6 +8528,7 @@ CombatLogSetCurrentEntry: {}
 CombatLogSetRetentionTime: {}
 CombatTextSetActiveUnit: {}
 CompleteLFGReadyCheck: {}
+CompleteLFGRoleCheck: {}
 CompleteQuest: {}
 ConfirmAcceptQuest: {}
 ConfirmBarbersChoice: {}
@@ -8511,6 +8547,11 @@ ConsoleExec:
   - name: command
     type: string
   outputs: {}
+ConsoleGetAllCommands: {}
+ConsoleGetColorFromType: {}
+ConsoleGetFontHeight: {}
+ConsolePrintAllMatchingCommands: {}
+ConsoleSetFontHeight: {}
 ConvertToParty: {}
 ConvertToRaid: {}
 CopyToClipboard: {}
@@ -8584,6 +8625,7 @@ CreateFrame:
     type: Frame
 CreateMacro: {}
 CreateNewRaidProfile: {}
+CreateWindow: {}
 CursorCanGoInSlot:
   inputs:
   - name: slot
@@ -8671,6 +8713,7 @@ DoTradeSkill: {}
 DropCursorMoney: {}
 DropItemOnUnit: {}
 DumpMovementCapture: {}
+DungeonAppearsInRandomLFD: {}
 EditMacro: {}
 EjectPassengerFromSeat: {}
 EnableAddOn:
@@ -8854,17 +8897,6 @@ GetActiveTitle:
     type: string
 GetAddOnCPUUsage: {}
 GetAddOnDependencies: {}
-GetAddOnEnableState:
-  impl: GetAddOnEnableState
-  inputs:
-  - name: character
-    nilable: true
-    type: string
-  - name: addon
-    type: uiAddon
-  outputs:
-  - name: enabledState
-    type: number
 GetAddOnInfo:
   impl: GetAddOnInfo
   inputs:
@@ -9051,6 +9083,7 @@ GetAvailableTitle:
   outputs:
   - name: title
     type: string
+GetAverageItemLevel: {}
 GetBackgroundLoadingStatus: {}
 GetBackpackCurrencyInfo: {}
 GetBankSlotCost:
@@ -9125,6 +9158,8 @@ GetBattlegroundInfo:
   - name: longDescription
     type: string
 GetBattlegroundPoints: {}
+GetBestFlexRaidChoice: {}
+GetBestRFChoice: {}
 GetBidderAuctionItems: {}
 GetBillingTimeRested: {}
 GetBinding:
@@ -9150,7 +9185,7 @@ GetBlockChance: {}
 GetBonusBarIndex: {}
 GetBonusBarOffset: {}
 GetBuildInfo:
-  impl: GetBuildInfo_3_4_2
+  impl: GetBuildInfo_1_15_0
   inputs: {}
   outputs:
   - name: version
@@ -9510,7 +9545,6 @@ GetCursorPosition:
     type: number
   - name: y
     type: number
-GetCVarInfo: {}
 GetCVarSettingValidity: {}
 GetDailyQuestsCompleted:
   outputs:
@@ -9551,10 +9585,12 @@ GetDownloadedPercentage:
   inputs: {}
   outputs:
   - type: number
+GetDuelerInfo: {}
 GetDungeonDifficultyID:
   inputs: {}
   outputs:
   - type: number
+GetDungeonForRandomSlot: {}
 GetDungeonInfo: {}
 GetEditBoxMetatable: {}
 GetEquivalentDynamicDifficultyID: {}
@@ -9695,6 +9731,7 @@ GetFirstTradeSkill:
   inputs: {}
   outputs:
   - type: number
+GetFlexRaidDungeonInfo: {}
 GetFontInfo: {}
 GetFonts: {}
 GetFontStringMetatable:
@@ -10183,6 +10220,49 @@ GetLegacyRaidDifficultyID:
   inputs: {}
   outputs:
   - type: number
+GetLFDChoiceCollapseState: {}
+GetLFDChoiceEnabledState: {}
+GetLFDChoiceOrder: {}
+GetLFDLockInfo: {}
+GetLFDLockPlayerCount: {}
+GetLFDRoleLockInfo: {}
+GetLFDRoleRestrictions: {}
+GetLFGBootProposal: {}
+GetLFGCategoryForID: {}
+GetLFGCompletionReward: {}
+GetLFGCompletionRewardItem: {}
+GetLFGCompletionRewardItemLink: {}
+GetLFGDeserterExpiration: {}
+GetLFGDungeonEncounterInfo: {}
+GetLFGDungeonInfo: {}
+GetLFGDungeonNumEncounters: {}
+GetLFGDungeonRewardCapBarInfo: {}
+GetLFGDungeonRewardCapInfo: {}
+GetLFGDungeonRewardInfo: {}
+GetLFGDungeonRewardLink: {}
+GetLFGDungeonRewards: {}
+GetLFGDungeonShortageRewardInfo: {}
+GetLFGDungeonShortageRewardLink: {}
+GetLFGInfoServer: {}
+GetLFGInviteRoleAvailability: {}
+GetLFGInviteRoleRestrictions: {}
+GetLFGProposal: {}
+GetLFGProposalEncounter: {}
+GetLFGProposalMember: {}
+GetLFGQueuedList: {}
+GetLFGQueueStats: {}
+GetLFGRandomCooldownExpiration: {}
+GetLFGRandomDungeonInfo: {}
+GetLFGReadyCheckUpdate: {}
+GetLFGReadyCheckUpdateBattlegroundInfo: {}
+GetLFGRoles: {}
+GetLFGRoleShortageRewards: {}
+GetLFGRoleUpdate: {}
+GetLFGRoleUpdateBattlegroundInfo: {}
+GetLFGRoleUpdateMember: {}
+GetLFGRoleUpdateSlot: {}
+GetLFGSuspendedPlayers: {}
+GetLFRChoiceOrder: {}
 GetLocale:
   inputs: {}
   outputs:
@@ -10544,6 +10624,7 @@ GetNumDisplayChannels:
   inputs: {}
   outputs:
   - type: number
+GetNumDungeonForRandomSlot: {}
 GetNumExpansions:
   inputs: {}
   outputs:
@@ -10553,6 +10634,7 @@ GetNumFactions:
   outputs:
   - name: numFactions
     type: number
+GetNumFlexRaidDungeons: {}
 GetNumGroupChannels: {}
 GetNumGroupMembers:
   outputs:
@@ -10641,11 +10723,15 @@ GetNumQuestWatches:
   outputs:
   - type: number
 GetNumRaidProfiles: {}
+GetNumRandomDungeons: {}
+GetNumRandomScenarios: {}
 GetNumRewardCurrencies: {}
+GetNumRFDungeons: {}
 GetNumRoutes: {}
 GetNumSavedInstances:
   outputs:
   - type: number
+GetNumScenarios: {}
 GetNumShapeshiftForms:
   outputs:
   - type: number
@@ -10711,6 +10797,8 @@ GetOwnerAuctionItems: {}
 GetParryChance: {}
 GetParryChanceFromAttribute: {}
 GetPartyAssignment: {}
+GetPartyLFGBackfillInfo: {}
+GetPartyLFGID: {}
 GetPendingInviteConfirmations: {}
 GetPersonalRatedInfo: {}
 GetPetActionCooldown: {}
@@ -10844,6 +10932,7 @@ GetPVPRankProgress:
   outputs:
   - name: value
     type: number
+GetPVPRoles: {}
 GetPVPSessionStats: {}
 GetPVPThisWeekStats: {}
 GetPVPTimer: {}
@@ -11036,6 +11125,8 @@ GetQuestMoneyToGet:
   outputs:
   - name: money
     type: number
+GetQuestPOILeaderBoard: {}
+GetQuestPOIs: {}
 GetQuestPortraitGiver: {}
 GetQuestPortraitTurnIn:
   inputs: {}
@@ -11102,6 +11193,9 @@ GetRaidRosterInfo:
   - name: combatRole
     type: string
 GetRaidTargetIndex: {}
+GetRandomDungeonBestChoice: {}
+GetRandomScenarioBestChoice: {}
+GetRandomScenarioInfo: {}
 GetRangedCritChance:
   inputs: {}
   outputs:
@@ -11194,6 +11288,7 @@ GetRewardXP:
   outputs:
   - name: xp
     type: number
+GetRFDungeonInfo: {}
 GetRuneCooldown: {}
 GetRuneType: {}
 GetRunningMacro: {}
@@ -11220,6 +11315,7 @@ GetSavedInstanceInfo:
   - type: number
   - type: number
   - type: boolean
+GetScenariosChoiceOrder: {}
 GetSchoolString:
   inputs:
   - type: number
@@ -11978,6 +12074,7 @@ HasIgnoreDualWieldWeapon: {}
 HasInboxItem: {}
 HasInspectHonorData: {}
 HasKey: {}
+HasLFGRestrictions: {}
 HasLoadedCUFProfiles:
   inputs: {}
   outputs:
@@ -12078,6 +12175,7 @@ IsAddonVersionCheckEnabled:
   inputs: {}
   outputs:
   - type: boolean
+IsAllowedToUserTeleport: {}
 IsAltKeyDown: {}
 IsArenaSeasonActive: {}
 IsArenaSkirmish: {}
@@ -12217,7 +12315,9 @@ IsInGroup: {}
 IsInGuild: {}
 IsInGuildGroup: {}
 IsInInstance: {}
+IsInLFGDungeon: {}
 IsInRaid: {}
+IsInScenarioGroup: {}
 IsInventoryItemLocked: {}
 IsInventoryItemProfessionBag: {}
 IsItemAction: {}
@@ -12228,6 +12328,8 @@ IsLeftControlKeyDown: {}
 IsLeftMetaKeyDown: {}
 IsLeftShiftKeyDown: {}
 IsLegacyDifficulty: {}
+IsLFGComplete: {}
+IsLFGDungeonJoinable: {}
 IsLinuxClient:
   impl: IsLinuxClient
   inputs: {}
@@ -12269,6 +12371,7 @@ IsOnTournamentRealm: {}
 IsOutdoors: {}
 IsOutlineModeSupported: {}
 IsOutOfBounds: {}
+IsPartyLFG: {}
 IsPassiveSpell:
   outputs:
   - name: isPassive
@@ -12330,7 +12433,9 @@ issecure:
 issecurevariable:
   stdlib: issecurevariable
 IsSelectedSpellBookItem: {}
+IsServerControlledBackfill: {}
 IsShiftKeyDown: {}
+IsSpellHidden: {}
 IsSpellInRange: {}
 IsSpellKnown: {}
 IsSpellKnownOrOverridesKnown:
@@ -12439,35 +12544,15 @@ ItemTextPrevPage: {}
 JoinArena: {}
 JoinBattlefield: {}
 JoinChannelByName: {}
+JoinLFG: {}
 JoinPermanentChannel: {}
+JoinSingleLFG: {}
 JoinSkirmish: {}
 JoinTemporaryChannel: {}
 JoinWorldPVPQueue: {}
 JumpOrAscendStart:
   inputs: {}
   outputs: {}
-KBArticle_BeginLoading: {}
-KBArticle_GetData: {}
-KBArticle_IsLoaded: {}
-KBQuery_BeginLoading: {}
-KBQuery_GetArticleHeaderCount: {}
-KBQuery_GetArticleHeaderData: {}
-KBQuery_GetTotalArticleCount: {}
-KBQuery_IsLoaded: {}
-KBSetup_BeginLoading: {}
-KBSetup_GetArticleHeaderCount: {}
-KBSetup_GetArticleHeaderData: {}
-KBSetup_GetCategoryCount: {}
-KBSetup_GetCategoryData: {}
-KBSetup_GetLanguageCount: {}
-KBSetup_GetLanguageData: {}
-KBSetup_GetSubCategoryCount: {}
-KBSetup_GetSubCategoryData: {}
-KBSetup_GetTotalArticleCount: {}
-KBSetup_IsLoaded: {}
-KBSystem_GetMOTD: {}
-KBSystem_GetServerNotice: {}
-KBSystem_GetServerStatus: {}
 KeyRingButtonIDToInvSlotID: {}
 Kiosk.GetCharacterTemplateSetIndex: {}
 Kiosk.IsEnabled:
@@ -12483,7 +12568,10 @@ LearnTalent: {}
 LeaveBattlefield: {}
 LeaveChannelByLocalID: {}
 LeaveChannelByName: {}
+LeaveLFG: {}
 LeaveParty: {}
+LeaveSingleLFG: {}
+LFGTeleport: {}
 ListChannelByName: {}
 ListChannels: {}
 LoadAddOn:
@@ -12662,6 +12750,7 @@ PartialPlayTime:
   inputs: {}
   outputs:
   - type: boolean
+PartyLFGStartBackfill: {}
 pcall:
   stdlib: pcall
 pcallwithenv:
@@ -12723,6 +12812,7 @@ PlaceAction: {}
 PlaceAuctionBid: {}
 PlayerCanTeleport: {}
 PlayerEffectiveAttackPower: {}
+PlayerHasToy: {}
 PlayerIsPVPInactive:
   inputs:
   - type: unit
@@ -12737,6 +12827,7 @@ PreloadMovie: {}
 PrevView:
   inputs: {}
   outputs: {}
+ProcessExceptionClient: {}
 PromoteToAssistant: {}
 PromoteToLeader:
   inputs:
@@ -12763,6 +12854,11 @@ QuestChooseRewardError: {}
 QuestFlagsPVP: {}
 QuestIsDaily: {}
 QuestLogPushQuest: {}
+QuestMapUpdateAllQuests: {}
+QuestPOIGetIconInfo: {}
+QuestPOIGetQuestIDByIndex: {}
+QuestPOIGetQuestIDByVisibleIndex: {}
+QuestPOIUpdateIcons: {}
 Quit:
   inputs: {}
   outputs: {}
@@ -12788,7 +12884,9 @@ rawset:
 RedockChatWindows:
   inputs: {}
   outputs: {}
+RefreshLFGList: {}
 RegisterStaticConstants: {}
+RejectProposal: {}
 RemoveChatWindowChannel: {}
 RemoveChatWindowMessages: {}
 RemoveQuestWatch: {}
@@ -12808,6 +12906,8 @@ RequestBattlefieldScoreData: {}
 RequestBattlegroundInstanceInfo: {}
 RequestInspectHonorData: {}
 RequestInviteFromUnit: {}
+RequestLFDPartyLockInfo: {}
+RequestLFDPlayerLockInfo: {}
 RequestPVPRewards: {}
 RequestRaidInfo: {}
 RequestRatedInfo: {}
@@ -12890,6 +12990,14 @@ ScriptsDisallowedForBeta:
     type: boolean
 scrub:
   stdlib: scrub
+SearchLFGGetEncounterResults: {}
+SearchLFGGetJoinedID: {}
+SearchLFGGetNumResults: {}
+SearchLFGGetPartyResults: {}
+SearchLFGGetResults: {}
+SearchLFGJoin: {}
+SearchLFGLeave: {}
+SearchLFGSort: {}
 securecall:
   stdlib: securecall
 securecallfunction:
@@ -12962,6 +13070,7 @@ SetAuctionsTabShowing:
     type: boolean
   outputs: {}
 SetAutoDeclineGuildInvites: {}
+SetBarSlotFromIntro: {}
 SetBattlefieldScoreFaction: {}
 SetBinding: {}
 SetBindingClick: {}
@@ -13025,6 +13134,12 @@ SetGuildRosterShowOffline: {}
 SetInventoryPortraitTexture: {}
 SetInWorldUIVisibility: {}
 SetLegacyRaidDifficultyID: {}
+SetLFGBootVote: {}
+SetLFGComment: {}
+SetLFGDungeon: {}
+SetLFGDungeonEnabled: {}
+SetLFGHeaderCollapsed: {}
+SetLFGRoles: {}
 SetLootMethod: {}
 SetLootPortrait: {}
 SetLootThreshold: {}
@@ -13055,6 +13170,8 @@ SetPartyAssignment:
   outputs: {}
 SetPendingReportArenaTeamName: {}
 SetPetStablePaperdoll: {}
+SetPOIIconOverlapDistance: {}
+SetPOIIconOverlapPushDistance: {}
 SetPortraitTexture:
   impl: SetPortraitTexture
   inputs:
@@ -13075,6 +13192,7 @@ SetPortraitTextureFromCreatureDisplayID:
   outputs: {}
 SetPortraitToTexture: {}
 SetPVP: {}
+SetPVPRoles: {}
 SetRaidDifficultyID: {}
 SetRaidProfileOption: {}
 SetRaidProfileSavedPosition: {}
@@ -13101,7 +13219,6 @@ SetSendMailShowing:
   outputs: {}
 SetSpellbookPetAction: {}
 SetSuperTrackedQuestID: {}
-SetTalentGroupRole: {}
 SetTaxiBenchmarkMode:
   inputs:
   - name: value
@@ -13651,6 +13768,7 @@ UnitDebuff: {}
 UnitDefense: {}
 UnitDetailedThreatSituation: {}
 UnitDistanceSquared: {}
+UnitEffectiveLevel: {}
 UnitExists:
   impl: UnitExists
   inputs:
@@ -13710,6 +13828,8 @@ UnitHasIncomingResurrection:
   outputs:
   - name: isBeingResurrected
     type: boolean
+UnitHasLFGDeserter: {}
+UnitHasLFGRandomCooldown: {}
 UnitHasRelicSlot:
   inputs:
   - nilable: true
@@ -14158,6 +14278,8 @@ UseAction:
 UseInventoryItem: {}
 UseItemByName: {}
 UseQuestLogSpecialItem: {}
+UseToy: {}
+UseToyByName: {}
 VehicleAimDecrement: {}
 VehicleAimDownStart: {}
 VehicleAimDownStop: {}
@@ -14170,6 +14292,7 @@ VehicleAimUpStop: {}
 VehicleExit: {}
 VehicleNextSeat: {}
 VehiclePrevSeat: {}
+WantsAlteredForm: {}
 WarGameRespond: {}
 wipe:
   alias: table.wipe
