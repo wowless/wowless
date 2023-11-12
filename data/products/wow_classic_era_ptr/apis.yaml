@@ -5609,7 +5609,9 @@ C_LFGList.GetApplicantPvpRatingInfoForListing:
       structure: C_LFGList.PvpRatingInfo
 C_LFGList.GetApplicants: {}
 C_LFGList.GetApplicationInfo: {}
-C_LFGList.GetApplications: {}
+C_LFGList.GetApplications:
+  outputs:
+  - type: table
 C_LFGList.GetAvailableActivities:
   inputs:
   - name: categoryID
@@ -9238,7 +9240,7 @@ C_WowTokenSecure.RedeemTokenConfirm: {}
 C_WowTokenSecure.SetBalanceAmountString: {}
 C_WowTokenSecure.WillKickFromWorld: {}
 C_XMLUtil.GetTemplateInfo:
-  impl: C_XMLUtil.GetTemplateInfo
+  impl: C_XMLUtil.GetTemplateInfo_10_2
   inputs:
   - name: name
     type: string
