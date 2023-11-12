@@ -951,6 +951,7 @@ Frame:
       - name: minResizeHeight
       - name: maxResizeWidth
       - name: maxResizeHeight
+    GetWindow: {}
     HasFixedFrameLevel:
       getter:
       - name: hasFixedFrameLevel
@@ -978,6 +979,7 @@ Frame:
     IsUserPlaced:
       getter:
       - name: isUserPlaced
+    LockHighlight: {}
     Lower: {}
     Raise: {}
     RegisterAllEvents:
@@ -1011,6 +1013,7 @@ Frame:
     SetFrameStrata:
       setter:
       - name: frameStrata
+    SetHighlightLocked: {}
     SetHitRectInsets: {}
     SetHyperlinksEnabled:
       setter:
@@ -1036,9 +1039,11 @@ Frame:
     SetUserPlaced:
       setter:
       - name: isUserPlaced
+    SetWindow: {}
     StartMoving: {}
     StartSizing: {}
     StopMovingOrSizing: {}
+    UnlockHighlight: {}
     UnregisterAllEvents:
       impl: Frame/UnregisterAllEvents
     UnregisterEvent:
@@ -1452,6 +1457,8 @@ ParentedObjectBase:
   inherits:
     UIObject: {}
   methods:
+    ClearParentKey:
+      impl: ParentedObjectBase/ClearParentKey
     GetDebugName:
       impl: ParentedObject/GetDebugName
     GetParent:
@@ -1682,6 +1689,7 @@ Region:
     SetPassThroughButtons: {}
     SetPoint:
       impl: Region/SetPoint
+    SetProtected: {}
     SetSize:
       setter:
       - name: width
