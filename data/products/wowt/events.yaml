@@ -5891,6 +5891,7 @@ PVP_REWARDS_UPDATE:
 PVP_ROLE_POPUP_HIDE:
   payload:
   - name: readyCheckInfo
+    nilable: true
     type:
       structure: C_PvP.PvpReadyCheckInfo
 PVP_ROLE_POPUP_SHOW:

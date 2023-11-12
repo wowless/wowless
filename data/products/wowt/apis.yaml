@@ -12526,6 +12526,13 @@ C_PerksProgram.GetVendorItemInfoRefundTimeLeft:
   outputs:
   - name: refundTimeRemaining
     type: number
+C_PerksProgram.IsFrozenPerksVendorItem:
+  inputs:
+  - name: perksVendorItemID
+    type: number
+  outputs:
+  - name: isFrozen
+    type: boolean
 C_PerksProgram.ItemSelectedTelemetry:
   inputs:
   - name: perksVendorItemID
