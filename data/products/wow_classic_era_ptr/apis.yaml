@@ -475,6 +475,7 @@ C_AddOns.GetAddOnEnableState:
     type:
       enum: AddOnEnableState
 C_AddOns.GetAddOnInfo:
+  impl: GetAddOnInfo
   inputs:
   - name: name
     type: uiAddon
@@ -511,6 +512,7 @@ C_AddOns.GetAddOnOptionalDependencies:
   - name: unpackedPrimitiveType
     type: string
 C_AddOns.GetNumAddOns:
+  impl: GetNumAddOns
   inputs: {}
   outputs:
   - name: numAddOns
@@ -531,6 +533,7 @@ C_AddOns.IsAddOnLoadable:
   - name: reason
     type: string
 C_AddOns.IsAddOnLoaded:
+  impl: IsAddOnLoaded
   inputs:
   - name: name
     type: uiAddon
@@ -540,6 +543,7 @@ C_AddOns.IsAddOnLoaded:
   - name: loaded
     type: boolean
 C_AddOns.IsAddOnLoadOnDemand:
+  impl: IsAddOnLoadOnDemand
   inputs:
   - name: name
     type: uiAddon
@@ -552,6 +556,7 @@ C_AddOns.IsAddonVersionCheckEnabled:
   - name: isEnabled
     type: boolean
 C_AddOns.LoadAddOn:
+  impl: LoadAddOn
   inputs:
   - name: name
     type: uiAddon
@@ -9735,15 +9740,6 @@ DestroyTotem: {}
 DetectWowMouse: {}
 difftime:
   stdlib: difftime
-DisableAddOn:
-  inputs:
-  - name: addon
-    type: uiAddon
-  - name: playerOrAll
-    nilable: true
-    type: unknown
-  outputs: {}
-DisableAllAddOns: {}
 DisableSpellAutocast: {}
 DismissCompanion: {}
 Dismount:
@@ -9773,15 +9769,6 @@ DumpMovementCapture: {}
 DungeonAppearsInRandomLFD: {}
 EditMacro: {}
 EjectPassengerFromSeat: {}
-EnableAddOn:
-  inputs:
-  - name: addon
-    type: uiAddon
-  - name: playerOrAll
-    nilable: true
-    type: unknown
-  outputs: {}
-EnableAllAddOns: {}
 EnableSpellAutocast: {}
 EndBoundTradeable: {}
 EndRefund: {}
@@ -9953,30 +9940,6 @@ GetActiveTitle:
   - name: title
     type: string
 GetAddOnCPUUsage: {}
-GetAddOnDependencies: {}
-GetAddOnInfo:
-  impl: GetAddOnInfo
-  inputs:
-  - name: addon
-    type: uiAddon
-  outputs:
-  - name: name
-    type: string
-  - name: title
-    nilable: true
-    type: string
-  - name: notes
-    nilable: true
-    type: string
-  - name: loadable
-    type: boolean
-  - name: reason
-    nilable: true
-    type: string
-  - name: security
-    type: string
-  - name: newVersion
-    type: boolean
 GetAddOnMemoryUsage:
   inputs:
   - name: addon
@@ -9984,7 +9947,6 @@ GetAddOnMemoryUsage:
   outputs:
   - name: memoryKb
     type: number
-GetAddOnOptionalDependencies: {}
 GetAllowLowLevelRaid: {}
 GetAlternativeDefaultLanguage: {}
 GetAreaSpiritHealerTime:
@@ -11611,12 +11573,6 @@ GetNumActiveQuests:
   outputs:
   - name: numActiveQuests
     type: number
-GetNumAddOns:
-  impl: GetNumAddOns
-  inputs: {}
-  outputs:
-  - name: numAddOns
-    type: number
 GetNumArenaOpponents:
   outputs:
   - type: number
@@ -13210,28 +13166,6 @@ IsActiveQuestTrivial:
   outputs:
   - name: isActiveQuestTrivial
     type: boolean
-IsAddOnLoaded:
-  impl: IsAddOnLoaded
-  inputs:
-  - name: addon
-    type: uiAddon
-  outputs:
-  - name: loadedOrLoading
-    type: boolean
-  - name: loaded
-    type: boolean
-IsAddOnLoadOnDemand:
-  impl: IsAddOnLoadOnDemand
-  inputs:
-  - name: addon
-    type: uiAddon
-  outputs:
-  - name: loadOnDemand
-    type: oneornil
-IsAddonVersionCheckEnabled:
-  inputs: {}
-  outputs:
-  - type: boolean
 IsAllowedToUserTeleport: {}
 IsAltKeyDown: {}
 IsArenaSeasonActive: {}
@@ -13631,17 +13565,6 @@ LeaveSingleLFG: {}
 LFGTeleport: {}
 ListChannelByName: {}
 ListChannels: {}
-LoadAddOn:
-  impl: LoadAddOn
-  inputs:
-  - name: addon
-    type: uiAddon
-  outputs:
-  - name: loaded
-    type: boolean
-  - name: reason
-    nilable: true
-    type: string
 LoadBindings: {}
 loadstring:
   stdlib: loadstring
@@ -13973,14 +13896,10 @@ RequestTimePlayed:
   inputs: {}
   outputs: {}
 RequeueSkirmish: {}
-ResetAddOns:
-  inputs: {}
-  outputs: {}
 ResetChatColors: {}
 ResetChatWindows: {}
 ResetCPUUsage: {}
 ResetCursor: {}
-ResetDisabledAddOns: {}
 ResetGroupPreviewTalentPoints: {}
 ResetInstances: {}
 ResetPerformanceValues:
@@ -14026,7 +13945,6 @@ RunScript:
     nilable: true
     type: string
   outputs: {}
-SaveAddOns: {}
 SaveBindings:
   inputs:
   - type: number
@@ -14116,7 +14034,6 @@ SetAchievementComparisonUnit: {}
 SetActionBarToggles: {}
 SetActionUIButton: {}
 SetActiveTalentGroup: {}
-SetAddonVersionCheck: {}
 SetAllowDangerousScripts: {}
 SetAllowLowLevelRaid: {}
 SetArenaTeamRosterSelection: {}
