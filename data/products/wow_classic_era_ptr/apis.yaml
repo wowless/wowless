@@ -9576,6 +9576,7 @@ ConsoleExec:
     type: string
   outputs: {}
 ConsoleGetAllCommands:
+  impl: C_Console.GetAllCommands
   inputs: {}
   outputs:
   - name: commands
