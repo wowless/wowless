@@ -45,6 +45,7 @@ addon:
 docs:
   apis:
     skip_namespaces:
+      C_BarberShopInternal: {}
       C_ConfigurationWarnings: {}
       C_EditMode: {}
   events:

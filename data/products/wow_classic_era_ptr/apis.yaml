@@ -421,14 +421,78 @@ C_ActionBar.ToggleAutoCastPetAction:
   - name: slotID
     type: number
   outputs: {}
-C_AddOns.DisableAddOn: {}
-C_AddOns.DisableAllAddOns: {}
-C_AddOns.DoesAddOnExist: {}
-C_AddOns.EnableAddOn: {}
-C_AddOns.EnableAllAddOns: {}
-C_AddOns.GetAddOnDependencies: {}
-C_AddOns.GetAddOnEnableState: {}
-C_AddOns.GetAddOnInfo: {}
+C_AddOns.DisableAddOn:
+  inputs:
+  - name: name
+    type: uiAddon
+  - default: '0'
+    name: character
+    type: string
+  outputs: {}
+C_AddOns.DisableAllAddOns:
+  inputs:
+  - name: character
+    nilable: true
+    type: string
+  outputs: {}
+C_AddOns.DoesAddOnExist:
+  inputs:
+  - name: name
+    type: uiAddon
+  outputs:
+  - name: exists
+    type: boolean
+C_AddOns.EnableAddOn:
+  inputs:
+  - name: name
+    type: uiAddon
+  - default: '0'
+    name: character
+    type: string
+  outputs: {}
+C_AddOns.EnableAllAddOns:
+  inputs:
+  - name: character
+    nilable: true
+    type: string
+  outputs: {}
+C_AddOns.GetAddOnDependencies:
+  inputs:
+  - name: name
+    type: uiAddon
+  outputs:
+  - name: unpackedPrimitiveType
+    type: string
+C_AddOns.GetAddOnEnableState:
+  inputs:
+  - name: name
+    type: uiAddon
+  - default: '0'
+    name: character
+    type: string
+  outputs:
+  - name: state
+    type:
+      enum: AddOnEnableState
+C_AddOns.GetAddOnInfo:
+  inputs:
+  - name: name
+    type: uiAddon
+  outputs:
+  - name: name
+    type: string
+  - name: title
+    type: string
+  - name: notes
+    type: string
+  - name: loadable
+    type: boolean
+  - name: reason
+    type: string
+  - name: security
+    type: string
+  - name: updateAvailable
+    type: boolean
 C_AddOns.GetAddOnMetadata:
   impl: GetAddOnMetadata
   inputs:
@@ -439,17 +503,79 @@ C_AddOns.GetAddOnMetadata:
   outputs:
   - name: value
     type: string
-C_AddOns.GetAddOnOptionalDependencies: {}
-C_AddOns.GetNumAddOns: {}
-C_AddOns.IsAddOnLoadable: {}
-C_AddOns.IsAddOnLoaded: {}
-C_AddOns.IsAddOnLoadOnDemand: {}
-C_AddOns.IsAddonVersionCheckEnabled: {}
-C_AddOns.LoadAddOn: {}
-C_AddOns.ResetAddOns: {}
-C_AddOns.ResetDisabledAddOns: {}
-C_AddOns.SaveAddOns: {}
-C_AddOns.SetAddonVersionCheck: {}
+C_AddOns.GetAddOnOptionalDependencies:
+  inputs:
+  - name: name
+    type: uiAddon
+  outputs:
+  - name: unpackedPrimitiveType
+    type: string
+C_AddOns.GetNumAddOns:
+  inputs: {}
+  outputs:
+  - name: numAddOns
+    type: number
+C_AddOns.IsAddOnLoadable:
+  inputs:
+  - name: name
+    type: uiAddon
+  - default: '0'
+    name: character
+    type: string
+  - default: false
+    name: demandLoaded
+    type: boolean
+  outputs:
+  - name: loadable
+    type: boolean
+  - name: reason
+    type: string
+C_AddOns.IsAddOnLoaded:
+  inputs:
+  - name: name
+    type: uiAddon
+  outputs:
+  - name: loadedOrLoading
+    type: boolean
+  - name: loaded
+    type: boolean
+C_AddOns.IsAddOnLoadOnDemand:
+  inputs:
+  - name: name
+    type: uiAddon
+  outputs:
+  - name: loadOnDemand
+    type: boolean
+C_AddOns.IsAddonVersionCheckEnabled:
+  inputs: {}
+  outputs:
+  - name: isEnabled
+    type: boolean
+C_AddOns.LoadAddOn:
+  inputs:
+  - name: name
+    type: uiAddon
+  outputs:
+  - name: loaded
+    nilable: true
+    type: boolean
+  - name: value
+    nilable: true
+    type: string
+C_AddOns.ResetAddOns:
+  inputs: {}
+  outputs: {}
+C_AddOns.ResetDisabledAddOns:
+  inputs: {}
+  outputs: {}
+C_AddOns.SaveAddOns:
+  inputs: {}
+  outputs: {}
+C_AddOns.SetAddonVersionCheck:
+  inputs:
+  - name: enabled
+    type: boolean
+  outputs: {}
 C_AreaPoiInfo.GetAreaPOIForMap:
   inputs:
   - name: uiMapID
@@ -1990,7 +2116,11 @@ C_Club.DestroyTicket:
   - name: ticketId
     type: string
   outputs: {}
-C_Club.DoesAnyCommunityHaveUnreadMessages: {}
+C_Club.DoesAnyCommunityHaveUnreadMessages:
+  inputs: {}
+  outputs:
+  - name: hasUnreadMessages
+    type: boolean
 C_Club.EditClub:
   inputs:
   - name: clubId
@@ -3863,7 +3993,15 @@ C_CurrencyInfo.GetCurrencyListLink:
   outputs:
   - name: link
     type: string
-C_CurrencyInfo.IsCurrencyContainer: {}
+C_CurrencyInfo.IsCurrencyContainer:
+  inputs:
+  - name: currencyID
+    type: number
+  - name: quantity
+    type: number
+  outputs:
+  - name: isCurrencyContainer
+    type: boolean
 C_Cursor.GetCursorItem:
   inputs: {}
   outputs:
@@ -3907,7 +4045,25 @@ C_CVar.GetCVarDefault:
   - name: defaultValue
     nilable: true
     type: string
-C_CVar.GetCVarInfo: {}
+C_CVar.GetCVarInfo:
+  inputs:
+  - name: name
+    type: string
+  outputs:
+  - name: value
+    type: string
+  - name: defaultValue
+    type: string
+  - name: isStoredServerAccount
+    type: boolean
+  - name: isStoredServerCharacter
+    type: boolean
+  - name: isLockedFromUser
+    type: boolean
+  - name: isSecure
+    type: boolean
+  - name: isReadOnly
+    type: boolean
 C_CVar.RegisterCVar:
   impl: C_CVar.RegisterCVar
   inputs:
@@ -4054,6 +4210,175 @@ C_DeathInfo.UseSelfResurrectOption:
       enum: SelfResurrectOptionType
   - name: id
     type: number
+  outputs: {}
+C_Engraving.AddCategoryFilter:
+  inputs:
+  - name: category
+    type: number
+  outputs: {}
+C_Engraving.AddExclusiveCategoryFilter:
+  inputs:
+  - name: category
+    type: number
+  outputs: {}
+C_Engraving.CastRune:
+  inputs:
+  - name: skillLineAbilityID
+    type: number
+  outputs: {}
+C_Engraving.ClearAllCategoryFilters:
+  inputs: {}
+  outputs: {}
+C_Engraving.ClearCategoryFilter:
+  inputs:
+  - name: category
+    type: number
+  outputs: {}
+C_Engraving.ClearExclusiveCategoryFilter:
+  inputs: {}
+  outputs: {}
+C_Engraving.EnableEquippedFilter:
+  inputs:
+  - name: enabled
+    type: boolean
+  outputs: {}
+C_Engraving.GetCurrentRuneCast:
+  inputs: {}
+  outputs:
+  - name: engravingInfo
+    nilable: true
+    type:
+      structure: C_Engraving.EngravingData
+C_Engraving.GetEngravingModeEnabled:
+  inputs: {}
+  outputs:
+  - name: enabled
+    type: boolean
+C_Engraving.GetExclusiveCategoryFilter:
+  inputs: {}
+  outputs:
+  - name: category
+    nilable: true
+    type: number
+C_Engraving.GetNumRunesKnown:
+  inputs:
+  - name: equipmentSlot
+    nilable: true
+    type: number
+  outputs:
+  - name: known
+    type: number
+  - name: max
+    type: number
+C_Engraving.GetRuneCategories:
+  inputs:
+  - name: shouldFilter
+    type: boolean
+  - name: ownedOnly
+    type: boolean
+  outputs:
+  - name: categories
+    type:
+      arrayof: number
+C_Engraving.GetRuneForEquipmentSlot:
+  inputs:
+  - name: equipmentSlot
+    type: number
+  outputs:
+  - name: engravingInfo
+    nilable: true
+    type:
+      structure: C_Engraving.EngravingData
+C_Engraving.GetRuneForInventorySlot:
+  inputs:
+  - name: containerIndex
+    type: number
+  - name: slotIndex
+    type: number
+  outputs:
+  - name: engravingInfo
+    nilable: true
+    type:
+      structure: C_Engraving.EngravingData
+C_Engraving.GetRunesForCategory:
+  inputs:
+  - name: category
+    type: number
+  - name: ownedOnly
+    type: boolean
+  outputs:
+  - name: engravingInfo
+    type:
+      arrayof:
+        structure: C_Engraving.EngravingData
+C_Engraving.HasCategoryFilter:
+  inputs:
+  - name: category
+    type: number
+  outputs:
+  - name: result
+    type: boolean
+C_Engraving.IsEngravingEnabled:
+  inputs: {}
+  outputs:
+  - name: value
+    type: boolean
+C_Engraving.IsEquipmentSlotEngravable:
+  inputs:
+  - name: equipmentSlot
+    type: number
+  outputs:
+  - name: result
+    type: boolean
+C_Engraving.IsEquippedFilterEnabled:
+  inputs: {}
+  outputs:
+  - name: enabled
+    type: boolean
+C_Engraving.IsInventorySlotEngravable:
+  inputs:
+  - name: containerIndex
+    type: number
+  - name: slotIndex
+    type: number
+  outputs:
+  - name: result
+    type: boolean
+C_Engraving.IsInventorySlotEngravableByCurrentRuneCast:
+  inputs:
+  - name: containerIndex
+    type: number
+  - name: slotIndex
+    type: number
+  outputs:
+  - name: result
+    type: boolean
+C_Engraving.IsKnownRuneSpell:
+  inputs:
+  - name: spellID
+    type: number
+  outputs:
+  - name: result
+    type: boolean
+C_Engraving.IsRuneEquipped:
+  inputs:
+  - name: skillLineAbilityID
+    type: number
+  outputs:
+  - name: result
+    type: boolean
+C_Engraving.RefreshRunesList:
+  inputs: {}
+  outputs: {}
+C_Engraving.SetEngravingModeEnabled:
+  inputs:
+  - name: enabled
+    type: boolean
+  outputs: {}
+C_Engraving.SetSearchFilter:
+  inputs:
+  - name: filter
+    type: string
   outputs: {}
 C_EquipmentSet.AssignSpecToEquipmentSet:
   inputs:
@@ -4381,6 +4706,9 @@ C_FriendList.SendWho:
   inputs:
   - name: filter
     type: string
+  - name: origin
+    nilable: true
+    type: number
   outputs: {}
 C_FriendList.SetFriendNotes:
   inputs:
@@ -4830,6 +5158,12 @@ C_GuildInfo.SetNote:
   - name: isPublic
     type: boolean
   outputs: {}
+C_InterfaceFileManifest.GetInterfaceArtFiles:
+  inputs: {}
+  outputs:
+  - name: images
+    type:
+      arrayof: string
 C_Item.DoesItemExist:
   inputs:
   - name: emptiableItemLocation
@@ -5073,17 +5407,94 @@ C_KeyBindings.GetCustomBindingType:
     nilable: true
     type:
       enum: CustomBindingType
+C_LFGInfo.CanPlayerUseGroupFinder:
+  inputs: {}
+  outputs:
+  - name: canUse
+    type: boolean
+  - name: failureReason
+    type: string
+C_LFGInfo.CanPlayerUseLFD:
+  inputs: {}
+  outputs:
+  - name: canUse
+    type: boolean
+  - name: failureReason
+    type: string
+C_LFGInfo.CanPlayerUseLFR:
+  inputs: {}
+  outputs:
+  - name: canUse
+    type: boolean
+  - name: failureReason
+    type: string
+C_LFGInfo.CanPlayerUsePremadeGroup:
+  inputs: {}
+  outputs:
+  - name: canUse
+    type: boolean
+  - name: failureReason
+    type: string
+C_LFGInfo.GetLFDLockStates:
+  inputs: {}
+  outputs:
+  - name: lockInfo
+    type:
+      arrayof:
+        structure: C_LFGInfo.LFGLockInfo
+C_LFGInfo.GetRoleCheckDifficultyDetails:
+  inputs: {}
+  outputs:
+  - name: maxLevel
+    nilable: true
+    type: number
+  - name: isLevelReduced
+    type: boolean
+C_LFGInfo.IsGroupFinderEnabled:
+  inputs: {}
+  outputs:
+  - name: enabled
+    type: boolean
+C_LFGInfo.IsLFDEnabled:
+  inputs: {}
+  outputs:
+  - name: enabled
+    type: boolean
+C_LFGInfo.IsLFREnabled:
+  inputs: {}
+  outputs:
+  - name: enabled
+    type: boolean
+C_LFGInfo.IsPremadeGroupEnabled:
+  inputs: {}
+  outputs:
+  - name: enabled
+    type: boolean
 C_LFGList.AcceptInvite: {}
 C_LFGList.ApplyToGroup: {}
-C_LFGList.CanActiveEntryUseAutoAccept: {}
+C_LFGList.CanActiveEntryUseAutoAccept:
+  inputs: {}
+  outputs:
+  - name: canUseAutoAccept
+    type: boolean
 C_LFGList.CancelApplication: {}
-C_LFGList.CanCreateQuestGroup: {}
-C_LFGList.ClearApplicationTextFields: {}
+C_LFGList.CanCreateQuestGroup:
+  inputs:
+  - name: questID
+    type: number
+  outputs:
+  - name: canCreate
+    type: boolean
+C_LFGList.ClearApplicationTextFields:
+  inputs: {}
+  outputs: {}
 C_LFGList.ClearCreationTextFields:
   inputs: {}
   outputs: {}
 C_LFGList.ClearSearchResults: {}
-C_LFGList.ClearSearchTextFields: {}
+C_LFGList.ClearSearchTextFields:
+  inputs: {}
+  outputs: {}
 C_LFGList.CopyActiveEntryInfoToCreationFields:
   inputs: {}
   outputs: {}
@@ -5100,14 +5511,38 @@ C_LFGList.CreateListing:
     type: boolean
 C_LFGList.DeclineApplicant: {}
 C_LFGList.DeclineInvite: {}
-C_LFGList.DoesEntryTitleMatchPrebuiltTitle: {}
+C_LFGList.DoesEntryTitleMatchPrebuiltTitle:
+  inputs:
+  - name: activityID
+    type: number
+  - name: groupID
+    type: number
+  - name: playstyle
+    nilable: true
+    type:
+      enum: LFGEntryPlaystyle
+  outputs:
+  - name: matches
+    type: boolean
 C_LFGList.GetActiveEntryInfo:
   inputs: {}
   outputs:
   - name: entryData
     type:
       structure: C_LFGList.LfgEntryData
-C_LFGList.GetActivityFullName: {}
+C_LFGList.GetActivityFullName:
+  inputs:
+  - name: activityID
+    type: number
+  - name: questID
+    nilable: true
+    type: number
+  - name: showWarmode
+    nilable: true
+    type: boolean
+  outputs:
+  - name: fullName
+    type: string
 C_LFGList.GetActivityGroupInfo:
   inputs:
   - name: groupID
@@ -5123,15 +5558,50 @@ C_LFGList.GetActivityInfoTable:
   inputs:
   - name: activityID
     type: number
+  - name: questID
+    nilable: true
+    type: number
+  - name: showWarmode
+    nilable: true
+    type: boolean
   outputs:
   - name: activityInfo
     type:
       structure: C_LFGList.GroupFinderActivityInfo
-C_LFGList.GetApplicantDungeonScoreForListing: {}
-C_LFGList.GetApplicantInfo: {}
+C_LFGList.GetApplicantDungeonScoreForListing:
+  inputs:
+  - name: localID
+    type: number
+  - name: applicantIndex
+    type: number
+  - name: activityID
+    type: number
+  outputs:
+  - name: bestDungeonScoreForListing
+    type:
+      structure: C_LFGList.BestDungeonScoreMapInfo
+C_LFGList.GetApplicantInfo:
+  inputs:
+  - name: applicantID
+    type: number
+  outputs:
+  - name: applicantData
+    type:
+      structure: C_LFGList.LfgApplicantData
 C_LFGList.GetApplicantMemberInfo: {}
 C_LFGList.GetApplicantMemberStats: {}
-C_LFGList.GetApplicantPvpRatingInfoForListing: {}
+C_LFGList.GetApplicantPvpRatingInfoForListing:
+  inputs:
+  - name: localID
+    type: number
+  - name: applicantIndex
+    type: number
+  - name: activityID
+    type: number
+  outputs:
+  - name: pvpRatingInfo
+    type:
+      structure: C_LFGList.PvpRatingInfo
 C_LFGList.GetApplicants: {}
 C_LFGList.GetApplicationInfo: {}
 C_LFGList.GetApplications: {}
@@ -5165,15 +5635,49 @@ C_LFGList.GetFilteredSearchResults:
   - name: filteredResults
     type:
       arrayof: number
-C_LFGList.GetKeystoneForActivity: {}
+C_LFGList.GetKeystoneForActivity:
+  inputs:
+  - name: activityID
+    type: number
+  outputs:
+  - name: level
+    type: number
 C_LFGList.GetLanguageSearchFilter: {}
-C_LFGList.GetLfgCategoryInfo: {}
+C_LFGList.GetLfgCategoryInfo:
+  inputs:
+  - name: categoryID
+    type: number
+  outputs:
+  - name: categoryData
+    type:
+      structure: C_LFGList.LfgCategoryData
 C_LFGList.GetNumApplicants: {}
 C_LFGList.GetNumApplications: {}
 C_LFGList.GetNumInvitedApplicantMembers: {}
 C_LFGList.GetNumPendingApplicantMembers: {}
-C_LFGList.GetOwnedKeystoneActivityAndGroupAndLevel: {}
-C_LFGList.GetPlaystyleString: {}
+C_LFGList.GetOwnedKeystoneActivityAndGroupAndLevel:
+  inputs:
+  - default: false
+    name: getTimewalking
+    type: boolean
+  outputs:
+  - name: activityID
+    type: number
+  - name: groupID
+    type: number
+  - name: keystoneLevel
+    type: number
+C_LFGList.GetPlaystyleString:
+  inputs:
+  - name: playstyle
+    type:
+      enum: LFGEntryPlaystyle
+  - name: activityInfo
+    type:
+      structure: C_LFGList.GroupFinderActivityInfo
+  outputs:
+  - name: playstyleString
+    type: string
 C_LFGList.GetRoleCheckInfo: {}
 C_LFGList.GetRoles:
   inputs: {}
@@ -5228,7 +5732,7 @@ C_LFGList.InviteApplicant: {}
 C_LFGList.IsCurrentlyApplying: {}
 C_LFGList.IsPlayerAuthenticatedForLFG:
   inputs:
-  - name: categoryID
+  - name: activityID
     nilable: true
     type: number
   outputs:
@@ -5245,18 +5749,33 @@ C_LFGList.Search:
   inputs:
   - name: categoryID
     type: number
-  - name: activityIDs
-    type:
-      arrayof: number
   - default: 0
     name: filter
     type: number
   - default: 0
     name: preferredFilters
     type: number
+  - name: languageFilter
+    nilable: true
+    type:
+      structure: C_LFGList.WowLocale
+  - default: false
+    name: searchCrossFactionListings
+    nilable: true
+    type: boolean
   outputs: {}
 C_LFGList.SetApplicantMemberRole: {}
-C_LFGList.SetEntryTitle: {}
+C_LFGList.SetEntryTitle:
+  inputs:
+  - name: activityID
+    type: number
+  - name: groupID
+    type: number
+  - name: playstyle
+    nilable: true
+    type:
+      enum: LFGEntryPlaystyle
+  outputs: {}
 C_LFGList.SetRoles:
   inputs:
   - name: roles
@@ -5265,8 +5784,16 @@ C_LFGList.SetRoles:
   outputs:
   - name: success
     type: boolean
-C_LFGList.SetSearchToActivity: {}
-C_LFGList.SetSearchToQuestID: {}
+C_LFGList.SetSearchToActivity:
+  inputs:
+  - name: activityID
+    type: number
+  outputs: {}
+C_LFGList.SetSearchToQuestID:
+  inputs:
+  - name: questID
+    type: number
+  outputs: {}
 C_LFGList.UpdateListing:
   inputs:
   - name: activityIDs
@@ -5278,8 +5805,22 @@ C_LFGList.UpdateListing:
   outputs:
   - name: success
     type: boolean
-C_LFGList.ValidateRequiredDungeonScore: {}
-C_LFGList.ValidateRequiredPvpRatingForActivity: {}
+C_LFGList.ValidateRequiredDungeonScore:
+  inputs:
+  - name: dungeonScore
+    type: number
+  outputs:
+  - name: passes
+    type: boolean
+C_LFGList.ValidateRequiredPvpRatingForActivity:
+  inputs:
+  - name: activityID
+    type: number
+  - name: rating
+    type: number
+  outputs:
+  - name: passes
+    type: boolean
 C_Loot.IsLegacyLootModeEnabled:
   inputs: {}
   outputs:
@@ -5347,6 +5888,11 @@ C_Macro.GetNumIcons:
   outputs:
   - name: numIcons
     type: number
+C_Macro.SetMacroExecuteLineCallback:
+  inputs:
+  - name: cb
+    type: function
+  outputs: {}
 C_Mail.HasInboxMoney:
   inputs:
   - name: inboxIndex
@@ -5769,6 +6315,337 @@ C_ModelInfo.GetModelSceneInfoByID:
       arrayof: number
   - name: flags
     type: number
+C_MountJournal.ClearFanfare:
+  inputs:
+  - name: mountID
+    type: number
+  outputs: {}
+C_MountJournal.ClearRecentFanfares:
+  inputs: {}
+  outputs: {}
+C_MountJournal.Dismiss:
+  inputs: {}
+  outputs: {}
+C_MountJournal.GetAllCreatureDisplayIDsForMountID:
+  inputs:
+  - name: mountID
+    type: number
+  outputs:
+  - name: creatureDisplayIDs
+    type:
+      arrayof: number
+C_MountJournal.GetCollectedDragonridingMounts:
+  inputs: {}
+  outputs:
+  - name: mountIDs
+    type:
+      arrayof: number
+C_MountJournal.GetCollectedFilterSetting:
+  inputs:
+  - name: filterIndex
+    type: number
+  outputs:
+  - name: isChecked
+    type: boolean
+C_MountJournal.GetDisplayedMountAllCreatureDisplayInfo:
+  inputs:
+  - name: mountIndex
+    type: number
+  outputs:
+  - name: allDisplayInfo
+    type:
+      arrayof:
+        structure: C_MountJournal.MountCreatureDisplayInfo
+C_MountJournal.GetDisplayedMountID:
+  inputs:
+  - name: displayIndex
+    type: number
+  outputs:
+  - name: mountID
+    type: number
+C_MountJournal.GetDisplayedMountInfo:
+  inputs:
+  - name: displayIndex
+    type: number
+  outputs:
+  - name: name
+    type: string
+  - name: spellID
+    type: number
+  - name: icon
+    type: number
+  - name: isActive
+    type: boolean
+  - name: isUsable
+    type: boolean
+  - name: sourceType
+    type: number
+  - name: isFavorite
+    type: boolean
+  - name: isFactionSpecific
+    type: boolean
+  - name: faction
+    nilable: true
+    type: number
+  - name: shouldHideOnChar
+    type: boolean
+  - name: isCollected
+    type: boolean
+  - name: mountID
+    type: number
+  - name: isForDragonriding
+    type: boolean
+C_MountJournal.GetDisplayedMountInfoExtra:
+  inputs:
+  - name: mountIndex
+    type: number
+  outputs:
+  - name: creatureDisplayInfoID
+    nilable: true
+    type: number
+  - name: description
+    type: string
+  - name: source
+    type: string
+  - name: isSelfMount
+    type: boolean
+  - name: mountTypeID
+    type: number
+  - name: uiModelSceneID
+    type: number
+  - name: animID
+    type: number
+  - name: spellVisualKitID
+    type: number
+  - name: disablePlayerMountPreview
+    type: boolean
+C_MountJournal.GetIsFavorite:
+  inputs:
+  - name: mountIndex
+    type: number
+  outputs:
+  - name: isFavorite
+    type: boolean
+  - name: canSetFavorite
+    type: boolean
+C_MountJournal.GetMountAllCreatureDisplayInfoByID:
+  inputs:
+  - name: mountID
+    type: number
+  outputs:
+  - name: allDisplayInfo
+    type:
+      arrayof:
+        structure: C_MountJournal.MountCreatureDisplayInfo
+C_MountJournal.GetMountFromItem:
+  inputs:
+  - name: itemID
+    type: number
+  outputs:
+  - name: mountID
+    nilable: true
+    type: number
+C_MountJournal.GetMountFromSpell:
+  inputs:
+  - name: spellID
+    type: number
+  outputs:
+  - name: mountID
+    nilable: true
+    type: number
+C_MountJournal.GetMountIDs:
+  inputs: {}
+  outputs:
+  - name: mountIDs
+    type:
+      arrayof: number
+C_MountJournal.GetMountInfoByID:
+  inputs:
+  - name: mountID
+    type: number
+  outputs:
+  - name: name
+    type: string
+  - name: spellID
+    type: number
+  - name: icon
+    type: number
+  - name: isActive
+    type: boolean
+  - name: isUsable
+    type: boolean
+  - name: sourceType
+    type: number
+  - name: isFavorite
+    type: boolean
+  - name: isFactionSpecific
+    type: boolean
+  - name: faction
+    nilable: true
+    type: number
+  - name: shouldHideOnChar
+    type: boolean
+  - name: isCollected
+    type: boolean
+  - name: mountID
+    type: number
+  - name: isForDragonriding
+    type: boolean
+C_MountJournal.GetMountInfoExtraByID:
+  inputs:
+  - name: mountID
+    type: number
+  outputs:
+  - name: creatureDisplayInfoID
+    nilable: true
+    type: number
+  - name: description
+    type: string
+  - name: source
+    type: string
+  - name: isSelfMount
+    type: boolean
+  - name: mountTypeID
+    type: number
+  - name: uiModelSceneID
+    type: number
+  - name: animID
+    type: number
+  - name: spellVisualKitID
+    type: number
+  - name: disablePlayerMountPreview
+    type: boolean
+C_MountJournal.GetMountLink:
+  inputs:
+  - name: spellID
+    type: number
+  outputs:
+  - name: mountCreatureDisplayInfoLink
+    nilable: true
+    type: string
+C_MountJournal.GetMountUsabilityByID:
+  inputs:
+  - name: mountID
+    type: number
+  - name: checkIndoors
+    type: boolean
+  outputs:
+  - name: isUsable
+    type: boolean
+  - name: useError
+    nilable: true
+    type: string
+C_MountJournal.GetNumDisplayedMounts:
+  inputs: {}
+  outputs:
+  - name: numMounts
+    type: number
+C_MountJournal.GetNumMounts:
+  inputs: {}
+  outputs:
+  - name: numMounts
+    type: number
+C_MountJournal.GetNumMountsNeedingFanfare:
+  inputs: {}
+  outputs:
+  - name: numMountsNeedingFanfare
+    type: number
+C_MountJournal.IsSourceChecked:
+  inputs:
+  - name: filterIndex
+    type: number
+  outputs:
+  - name: isChecked
+    type: boolean
+C_MountJournal.IsTypeChecked:
+  inputs:
+  - name: filterIndex
+    type: number
+  outputs:
+  - name: isChecked
+    type: boolean
+C_MountJournal.IsUsingDefaultFilters:
+  inputs: {}
+  outputs:
+  - name: isUsingDefaultFilters
+    type: boolean
+C_MountJournal.IsValidSourceFilter:
+  inputs:
+  - name: filterIndex
+    type: number
+  outputs:
+  - name: isValid
+    type: boolean
+C_MountJournal.IsValidTypeFilter:
+  inputs:
+  - name: filterIndex
+    type: number
+  outputs:
+  - name: isValid
+    type: boolean
+C_MountJournal.NeedsFanfare:
+  inputs:
+  - name: mountID
+    type: number
+  outputs:
+  - name: needsFanfare
+    type: boolean
+C_MountJournal.Pickup:
+  inputs:
+  - name: displayIndex
+    type: number
+  outputs: {}
+C_MountJournal.SetAllSourceFilters:
+  inputs:
+  - name: isChecked
+    type: boolean
+  outputs: {}
+C_MountJournal.SetAllTypeFilters:
+  inputs:
+  - name: isChecked
+    type: boolean
+  outputs: {}
+C_MountJournal.SetCollectedFilterSetting:
+  inputs:
+  - name: filterIndex
+    type: number
+  - name: isChecked
+    type: boolean
+  outputs: {}
+C_MountJournal.SetDefaultFilters:
+  inputs: {}
+  outputs: {}
+C_MountJournal.SetIsFavorite:
+  inputs:
+  - name: mountIndex
+    type: number
+  - name: isFavorite
+    type: boolean
+  outputs: {}
+C_MountJournal.SetSearch:
+  inputs:
+  - name: searchValue
+    type: string
+  outputs: {}
+C_MountJournal.SetSourceFilter:
+  inputs:
+  - name: filterIndex
+    type: number
+  - name: isChecked
+    type: boolean
+  outputs: {}
+C_MountJournal.SetTypeFilter:
+  inputs:
+  - name: filterIndex
+    type: number
+  - name: isChecked
+    type: boolean
+  outputs: {}
+C_MountJournal.SummonByID:
+  inputs:
+  - name: mountID
+    type: number
+  outputs: {}
 C_NamePlate.GetNamePlateEnemyClickThrough: {}
 C_NamePlate.GetNamePlateEnemyPreferredClickInsets: {}
 C_NamePlate.GetNamePlateEnemySize: {}
@@ -5871,7 +6748,14 @@ C_PartyInfo.GetInviteConfirmationInvalidQueues:
     type:
       arrayof:
         structure: QueueSpecificInfo
-C_PartyInfo.IsCrossFactionParty: {}
+C_PartyInfo.IsCrossFactionParty:
+  inputs:
+  - name: category
+    nilable: true
+    type: number
+  outputs:
+  - name: isCrossFactionParty
+    type: boolean
 C_PartyInfo.IsPartyFull:
   inputs:
   - name: category
@@ -5880,6 +6764,76 @@ C_PartyInfo.IsPartyFull:
   outputs:
   - name: isFull
     type: boolean
+C_PetJournal.ClearFanfare: {}
+C_PetJournal.ClearRecentFanfares: {}
+C_PetJournal.ClearSearchFilter: {}
+C_PetJournal.DismissSummonedPet: {}
+C_PetJournal.FindPetIDByName: {}
+C_PetJournal.GetNumCollectedInfo: {}
+C_PetJournal.GetNumPets: {}
+C_PetJournal.GetNumPetsInJournal:
+  inputs:
+  - name: creatureID
+    type: number
+  outputs:
+  - name: maxAllowed
+    type: number
+  - name: numPets
+    type: number
+C_PetJournal.GetNumPetsNeedingFanfare: {}
+C_PetJournal.GetNumPetSources: {}
+C_PetJournal.GetNumPetTypes: {}
+C_PetJournal.GetOwnedBattlePetString: {}
+C_PetJournal.GetPetCooldownByGUID: {}
+C_PetJournal.GetPetInfoByIndex: {}
+C_PetJournal.GetPetInfoByPetID: {}
+C_PetJournal.GetPetInfoBySpeciesID: {}
+C_PetJournal.GetPetLoadOutInfo: {}
+C_PetJournal.GetPetModelSceneInfoBySpeciesID: {}
+C_PetJournal.GetPetSortParameter: {}
+C_PetJournal.GetPetSummonInfo:
+  inputs:
+  - name: battlePetGUID
+    type: string
+  outputs:
+  - name: isSummonable
+    type: boolean
+  - name: error
+    type:
+      enum: PetJournalError
+  - name: errorText
+    type: string
+C_PetJournal.GetSummonBattlePetCooldown: {}
+C_PetJournal.GetSummonedPetGUID: {}
+C_PetJournal.IsCurrentlySummoned: {}
+C_PetJournal.IsFilterChecked: {}
+C_PetJournal.IsJournalReadOnly: {}
+C_PetJournal.IsJournalUnlocked: {}
+C_PetJournal.IsPetSourceChecked: {}
+C_PetJournal.IsPetTypeChecked: {}
+C_PetJournal.PetIsFavorite: {}
+C_PetJournal.PetIsLockedForConvert: {}
+C_PetJournal.PetIsRevoked: {}
+C_PetJournal.PetIsSummonable:
+  inputs:
+  - name: battlePetGUID
+    type: string
+  outputs:
+  - name: isSummonable
+    type: boolean
+C_PetJournal.PetIsUsable: {}
+C_PetJournal.PetNeedsFanfare: {}
+C_PetJournal.PickupPet: {}
+C_PetJournal.SetAllPetSourcesChecked: {}
+C_PetJournal.SetAllPetTypesChecked: {}
+C_PetJournal.SetFavorite: {}
+C_PetJournal.SetFilterChecked: {}
+C_PetJournal.SetPetLoadOutInfo: {}
+C_PetJournal.SetPetSortParameter: {}
+C_PetJournal.SetPetSourceChecked: {}
+C_PetJournal.SetPetTypeFilter: {}
+C_PetJournal.SetSearchFilter: {}
+C_PetJournal.SummonPetByGUID: {}
 C_PlayerInfo.CanUseItem:
   inputs:
   - name: itemID
@@ -5923,8 +6877,18 @@ C_PlayerInfo.GetName:
   - name: name
     nilable: true
     type: string
-C_PlayerInfo.GetNativeDisplayID: {}
-C_PlayerInfo.GetPetStableCreatureDisplayInfoID: {}
+C_PlayerInfo.GetNativeDisplayID:
+  inputs: {}
+  outputs:
+  - name: nativeDisplayID
+    type: number
+C_PlayerInfo.GetPetStableCreatureDisplayInfoID:
+  inputs:
+  - name: index
+    type: number
+  outputs:
+  - name: creatureDisplayInfoID
+    type: number
 C_PlayerInfo.GetPlayerCharacterData:
   inputs: {}
   outputs:
@@ -5973,9 +6937,21 @@ C_PlayerInfo.IsConnected:
   - name: isConnected
     nilable: true
     type: boolean
-C_PlayerInfo.IsDisplayRaceNative: {}
-C_PlayerInfo.IsMirrorImage: {}
-C_PlayerInfo.IsPlayerNPERestricted: {}
+C_PlayerInfo.IsDisplayRaceNative:
+  inputs: {}
+  outputs:
+  - name: isDisplayRaceNative
+    type: boolean
+C_PlayerInfo.IsMirrorImage:
+  inputs: {}
+  outputs:
+  - name: isMirrorImage
+    type: boolean
+C_PlayerInfo.IsPlayerNPERestricted:
+  inputs: {}
+  outputs:
+  - name: isRestricted
+    type: boolean
 C_PlayerInfo.IsXPUserDisabled:
   inputs: {}
   outputs:
@@ -6230,7 +7206,11 @@ C_QuestInfoSystem.HasQuestRewardSpells:
   outputs:
   - name: hasRewardSpells
     type: boolean
-C_QuestLog.GetMapForQuestPOIs: {}
+C_QuestLog.GetMapForQuestPOIs:
+  inputs: {}
+  outputs:
+  - name: uiMapID
+    type: number
 C_QuestLog.GetMaxNumQuests:
   inputs: {}
   outputs:
@@ -6257,7 +7237,15 @@ C_QuestLog.GetQuestObjectives:
     type:
       arrayof:
         structure: C_QuestLog.QuestObjectiveInfo
-C_QuestLog.GetQuestsOnMap: {}
+C_QuestLog.GetQuestsOnMap:
+  inputs:
+  - name: uiMapID
+    type: number
+  outputs:
+  - name: quests
+    type:
+      arrayof:
+        structure: C_QuestLog.QuestOnMapInfo
 C_QuestLog.IsOnQuest:
   inputs:
   - name: questID
@@ -6272,7 +7260,11 @@ C_QuestLog.IsQuestFlaggedCompleted:
   outputs:
   - name: isCompleted
     type: boolean
-C_QuestLog.SetMapForQuestPOIs: {}
+C_QuestLog.SetMapForQuestPOIs:
+  inputs:
+  - name: uiMapID
+    type: number
+  outputs: {}
 C_QuestLog.ShouldShowQuestRewards:
   inputs:
   - name: questID
@@ -6824,8 +7816,20 @@ C_Texture.ClearTitleIconTexture:
   - name: texture
     type: Texture
   outputs: {}
-C_Texture.GetAtlasElementID: {}
-C_Texture.GetAtlasID: {}
+C_Texture.GetAtlasElementID:
+  inputs:
+  - name: atlas
+    type: string
+  outputs:
+  - name: elementID
+    type: number
+C_Texture.GetAtlasID:
+  inputs:
+  - name: atlas
+    type: string
+  outputs:
+  - name: atlasID
+    type: number
 C_Texture.GetAtlasInfo:
   impl: C_Texture.GetAtlasInfo
   inputs:
@@ -6942,6 +7946,9 @@ C_Traits.CascadeRepurchaseRanks:
     type: number
   - name: nodeID
     type: number
+  - name: entryID
+    nilable: true
+    type: number
   outputs:
   - name: success
     type: boolean
@@ -6967,7 +7974,13 @@ C_Traits.ConfigHasStagedChanges:
   outputs:
   - name: hasChanges
     type: boolean
-C_Traits.GenerateImportString: {}
+C_Traits.GenerateImportString:
+  inputs:
+  - name: configID
+    type: number
+  outputs:
+  - name: importString
+    type: string
 C_Traits.GenerateInspectImportString:
   inputs:
   - name: target
@@ -7188,6 +8201,9 @@ C_Traits.RefundRank:
     type: number
   - name: nodeID
     type: number
+  - name: clearEdges
+    nilable: true
+    type: boolean
   outputs:
   - name: success
     type: boolean
@@ -7227,6 +8243,9 @@ C_Traits.SetSelection:
   - name: nodeEntryID
     nilable: true
     type: number
+  - name: clearEdges
+    nilable: true
+    type: boolean
   outputs:
   - name: success
     type: boolean
@@ -7947,7 +8966,11 @@ C_VoiceChat.IsSpeakForMeAllowed:
   outputs:
   - name: isAllowed
     type: boolean
-C_VoiceChat.IsTranscribing: {}
+C_VoiceChat.IsTranscribing:
+  inputs: {}
+  outputs:
+  - name: isTranscribing
+    type: boolean
 C_VoiceChat.IsTranscriptionAllowed:
   inputs: {}
   outputs:
@@ -8547,11 +9570,37 @@ ConsoleExec:
   - name: command
     type: string
   outputs: {}
-ConsoleGetAllCommands: {}
-ConsoleGetColorFromType: {}
-ConsoleGetFontHeight: {}
-ConsolePrintAllMatchingCommands: {}
-ConsoleSetFontHeight: {}
+ConsoleGetAllCommands:
+  inputs: {}
+  outputs:
+  - name: commands
+    type:
+      arrayof:
+        structure: ConsoleCommandInfo
+ConsoleGetColorFromType:
+  inputs:
+  - name: colorType
+    type:
+      enum: ConsoleColorType
+  outputs:
+  - name: color
+    type:
+      structure: colorRGB
+ConsoleGetFontHeight:
+  inputs: {}
+  outputs:
+  - name: fontHeightInPixels
+    type: number
+ConsolePrintAllMatchingCommands:
+  inputs:
+  - name: partialCommandText
+    type: string
+  outputs: {}
+ConsoleSetFontHeight:
+  inputs:
+  - name: fontHeightInPixels
+    type: number
+  outputs: {}
 ConvertToParty: {}
 ConvertToRaid: {}
 CopyToClipboard: {}
@@ -8625,7 +9674,15 @@ CreateFrame:
     type: Frame
 CreateMacro: {}
 CreateNewRaidProfile: {}
-CreateWindow: {}
+CreateWindow:
+  inputs:
+  - default: true
+    name: popupStyle
+    type: boolean
+  outputs:
+  - name: window
+    nilable: true
+    type: table
 CursorCanGoInSlot:
   inputs:
   - name: slot
