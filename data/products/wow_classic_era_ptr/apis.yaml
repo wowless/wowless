@@ -5630,7 +5630,9 @@ C_LFGList.GetAvailableActivityGroups: {}
 C_LFGList.GetAvailableCategories:
   outputs:
   - type: table
-C_LFGList.GetAvailableLanguageSearchFilter: {}
+C_LFGList.GetAvailableLanguageSearchFilter:
+  outputs:
+  - type: table
 C_LFGList.GetAvailableRoles: {}
 C_LFGList.GetDefaultLanguageSearchFilter: {}
 C_LFGList.GetFilteredSearchResults:
@@ -5659,7 +5661,13 @@ C_LFGList.GetLfgCategoryInfo:
     type:
       structure: C_LFGList.LfgCategoryData
 C_LFGList.GetNumApplicants: {}
-C_LFGList.GetNumApplications: {}
+C_LFGList.GetNumApplications:
+  inputs: {}
+  outputs:
+  - name: numApplications
+    type: number
+  - name: numActiveApplications
+    type: number
 C_LFGList.GetNumInvitedApplicantMembers: {}
 C_LFGList.GetNumPendingApplicantMembers: {}
 C_LFGList.GetOwnedKeystoneActivityAndGroupAndLevel:
