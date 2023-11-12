@@ -166,7 +166,7 @@ Enum:
     VasTransactionsLoaded: '0x0000000000040000'
     WoWTokenPurchaseLoaded: '0x0000001000000000'
   AccountStateFlagsMeta:
-    MaxValue: 1073741824
+    MaxValue: -2147483648
     MinValue: 0
     NumValues: 36
   AddOnEnableState:
