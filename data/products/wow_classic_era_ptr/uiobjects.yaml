@@ -587,6 +587,7 @@ EditBox:
     HighlightText: {}
     Insert:
       impl: EditBox/Insert
+    IsAlphabeticOnly: {}
     IsAutoFocus:
       getter:
       - name: isAutoFocus
@@ -601,10 +602,13 @@ EditBox:
       getter:
       - name: isMultiLine
     IsNumeric: {}
+    IsNumericFullRange: {}
     IsPassword: {}
     IsSecureText:
       getter:
       - name: isSecureText
+    ResetInputMode: {}
+    SetAlphabeticOnly: {}
     SetAltArrowKeyMode: {}
     SetAutoFocus:
       setter:
@@ -633,6 +637,7 @@ EditBox:
       - name: isMultiLine
     SetNumber: {}
     SetNumeric: {}
+    SetNumericFullRange: {}
     SetPassword: {}
     SetSecureText:
       setter:
@@ -1948,6 +1953,7 @@ TabardModel:
     GetUpperEmblemFileName: {}
     GetUpperEmblemTexture: {}
     InitializeTabardColors: {}
+    IsGuildTabard: {}
     Save: {}
 Texture:
   inherits:
