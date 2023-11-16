@@ -291,9 +291,6 @@ RequestTimePlayed:
   - api
   states:
   - Time
-RunMacroText:
-  frameworks:
-  - api
 RunMacroText_Callback:
   frameworks:
   - api
