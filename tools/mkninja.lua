@@ -26,6 +26,13 @@ local perProductAddonGeneratedTypes = {
   globals = function(p)
     return { 'build/data/products/' .. p .. '/globals.lua' }
   end,
+  impltests = function()
+    return {
+      'data/test/GetBuildInfo_10_1.lua',
+      'data/test/GetBuildInfo_1_15_0.lua',
+      'data/test/GetBuildInfo_3_4_2.lua',
+    }
+  end,
   namespaceapis = function(p)
     return {
       'build/data/products/' .. p .. '/apis.lua',
@@ -454,6 +461,7 @@ table.insert(builds, {
     'spec/data/impl/C_DateAndTime.CompareCalendarTime_spec.lua',
     'spec/data/impl/EnumerateFrames_spec.lua',
     'spec/data/structures_spec.lua',
+    'spec/data/test_spec.lua',
     'spec/data/uiobjectimpl_spec.lua',
     'spec/data/uiobjects_spec.lua',
     'spec/data/yaml_spec.lua',

@@ -72,6 +72,16 @@ local ptablemap = {
   globals = function(p)
     return 'Globals', perproduct(p, 'globals')
   end,
+  impltests = function(p)
+    local r = require('pl.file').read
+    local t = {}
+    for _, api in pairs(perproduct(p, 'apis')) do
+      if api.impl and not t[api.impl] then
+        t[api.impl] = r('data/test/' .. api.impl .. '.lua')
+      end
+    end
+    return 'ImplTests', t
+  end,
   namespaceapis = function(p)
     local config = perproduct(p, 'config')
     local apiNamespaces = {}
