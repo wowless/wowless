@@ -14735,7 +14735,7 @@ UnitClassification:
     nilable: true
     type: unit
   outputs:
-  - name: classification
+  - name: result
     stub: normal
     type: string
 UnitControllingVehicle: {}
