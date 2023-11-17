@@ -26,8 +26,9 @@ local perProductAddonGeneratedTypes = {
   globals = function(p)
     return { 'build/data/products/' .. p .. '/globals.lua' }
   end,
-  impltests = function()
+  impltests = function(p)
     return {
+      'build/data/products/' .. p .. '/apis.lua',
       'data/test/GetBuildInfo_10_1.lua',
       'data/test/GetBuildInfo_1_15_0.lua',
       'data/test/GetBuildInfo_3_4_2.lua',
