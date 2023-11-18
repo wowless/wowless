@@ -1322,6 +1322,7 @@ add_lua_executable(
   argparse
   luafilesystem
   penlight
+  toolsutil
 )
 
 lua2c(runtimeproducts runtime.products=runtime/products.lua)
@@ -1344,6 +1345,7 @@ add_lua_executable(
 )
 
 yaml2lua(impl)
+yaml2lua(test)
 yaml2lua(uiobjectimpl)
 
 foreach(product ${products})
@@ -1375,6 +1377,7 @@ list(
   state
   stringenums
   structures
+  test
   type
   uiobjectimpl
   uiobjects
@@ -1408,6 +1411,7 @@ lua2c(
   build.data.impl=runtime/impl.lua
   build.data.products=runtime/products.lua
   build.data.stringenums=runtime/stringenums.lua
+  build.data.test=runtime/test.lua
   build.data.uiobjectimpl=runtime/uiobjectimpl.lua
   ${yamlluas}
   wowapi.data=${CMAKE_CURRENT_SOURCE_DIR}/wowapi/data.lua

@@ -26,6 +26,12 @@ local perProductAddonGeneratedTypes = {
   globals = function(p)
     return { 'build/data/products/' .. p .. '/globals.lua' }
   end,
+  impltests = function(p)
+    return {
+      'build/data/products/' .. p .. '/apis.lua',
+      'build/data/test.lua',
+    }
+  end,
   namespaceapis = function(p)
     return {
       'build/data/products/' .. p .. '/apis.lua',
@@ -95,6 +101,8 @@ local rules = {
   },
   mkaddon = {
     command = 'build/cmake/gentest -f $type -p $product',
+    depfile = '$out.d',
+    deps = 'gcc',
   },
   mkninja = {
     command = 'lua tools/mkninja.lua',
@@ -177,7 +185,7 @@ for _, p in ipairs(productList) do
     table.insert(builds, {
       args = { product = p, ['type'] = k },
       ins = { v(p), 'build/cmake/gentest' },
-      outs_implicit = prefix .. k .. '.lua',
+      outs = prefix .. k .. '.lua',
       rule = 'mkaddon',
     })
   end
@@ -414,6 +422,7 @@ local yamls = {
   'data/schemas/state.yaml',
   'data/schemas/stringenums.yaml',
   'data/schemas/structures.yaml',
+  'data/schemas/test.yaml',
   'data/schemas/type.yaml',
   'data/schemas/uiobjectimpl.yaml',
   'data/schemas/uiobjects.yaml',
@@ -427,6 +436,7 @@ local yamls = {
   'data/state/Talents.yaml',
   'data/state/Time.yaml',
   'data/state/Units.yaml',
+  'data/test.yaml',
   'data/uiobjectimpl.yaml',
 }
 local yamlluas = {}
@@ -454,6 +464,7 @@ table.insert(builds, {
     'spec/data/impl/C_DateAndTime.CompareCalendarTime_spec.lua',
     'spec/data/impl/EnumerateFrames_spec.lua',
     'spec/data/structures_spec.lua',
+    'spec/data/test_spec.lua',
     'spec/data/uiobjectimpl_spec.lua',
     'spec/data/uiobjects_spec.lua',
     'spec/data/yaml_spec.lua',

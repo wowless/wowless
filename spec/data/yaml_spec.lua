@@ -5,6 +5,7 @@ local globalschemas = {
   ['data/impl'] = 'impl',
   ['data/products'] = 'products',
   ['data/stringenums'] = 'stringenums',
+  ['data/test'] = 'test',
   ['data/uiobjectimpl'] = 'uiobjectimpl',
   ['tools/addons'] = 'addons',
 }
