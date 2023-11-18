@@ -73,5 +73,6 @@ runner:
     CASTRANDOM: {}
     EDITMODE: {}
     EVENT: {}
+    EVENTVERBOSE: {}
     PTRFEEDBACK: {}
     USERANDOM: {}
