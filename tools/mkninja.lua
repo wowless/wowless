@@ -27,7 +27,10 @@ local perProductAddonGeneratedTypes = {
     return { 'build/data/products/' .. p .. '/globals.lua' }
   end,
   impltests = function(p)
-    return { 'build/data/products/' .. p .. '/apis.lua' }
+    return {
+      'build/data/products/' .. p .. '/apis.lua',
+      'build/data/test.lua',
+    }
   end,
   namespaceapis = function(p)
     return {
@@ -419,6 +422,7 @@ local yamls = {
   'data/schemas/state.yaml',
   'data/schemas/stringenums.yaml',
   'data/schemas/structures.yaml',
+  'data/schemas/test.yaml',
   'data/schemas/type.yaml',
   'data/schemas/uiobjectimpl.yaml',
   'data/schemas/uiobjects.yaml',
@@ -432,6 +436,7 @@ local yamls = {
   'data/state/Talents.yaml',
   'data/state/Time.yaml',
   'data/state/Units.yaml',
+  'data/test.yaml',
   'data/uiobjectimpl.yaml',
 }
 local yamlluas = {}

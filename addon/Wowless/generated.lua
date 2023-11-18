@@ -306,12 +306,15 @@ G.testsuite.generated = function()
   local function impltests()
     local tests = {}
     local arg = {
+      assertEquals = G.assertEquals,
+      check2 = G.check2,
       check6 = G.check6,
       check7 = G.check7,
       data = {
         build = _G.WowlessData.Build,
       },
       env = _G,
+      retn = G.retn,
     }
     for k, v in pairs(_G.WowlessData.ImplTests) do
       tests[k] = function()
