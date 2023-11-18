@@ -22508,6 +22508,7 @@ GetCombatRating:
   outputs:
   - name: result
     nilable: true
+    stub: 0
     type: number
 GetCombatRatingBonus:
   inputs:
@@ -22516,6 +22517,7 @@ GetCombatRatingBonus:
   outputs:
   - name: result
     nilable: true
+    stub: 0
     type: number
 GetCombatRatingBonusForCombatRatingValue:
   inputs:
