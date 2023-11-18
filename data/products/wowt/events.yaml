@@ -3594,6 +3594,8 @@ COMMODITY_SEARCH_RESULTS_ADDED:
   payload:
   - name: itemID
     type: number
+COMMODITY_SEARCH_RESULTS_RECEIVED:
+  payload: {}
 COMMODITY_SEARCH_RESULTS_UPDATED:
   payload:
   - name: itemID
@@ -4807,6 +4809,8 @@ LFG_BOOT_PROPOSAL_UPDATE:
   payload: {}
 LFG_COMPLETION_REWARD:
   payload: {}
+LFG_ENABLED_STATE_CHANGED:
+  payload: {}
 LFG_GROUP_DELISTED_LEADERSHIP_CHANGE:
   payload:
   - name: listingName
@@ -4968,6 +4972,12 @@ LOOT_HISTORY_CLEAR_HISTORY:
 LOOT_HISTORY_GO_TO_ENCOUNTER:
   payload:
   - name: encounterID
+    type: number
+LOOT_HISTORY_ONE_HUNDRED_ROLL:
+  payload:
+  - name: encounterID
+    type: number
+  - name: lootListID
     type: number
 LOOT_HISTORY_UPDATE_DROP:
   payload:
@@ -5404,6 +5414,8 @@ PERKS_PROGRAM_REMOVE_PENDING_SHOP_ITEM:
   payload:
   - name: vendorItemID
     type: number
+PERKS_PROGRAM_RESULT_ERROR:
+  payload: {}
 PERKS_PROGRAM_SET_FROZEN_ITEM:
   payload:
   - name: vendorItemID
@@ -7051,6 +7063,12 @@ TRAIT_TREE_CURRENCY_INFO_UPDATED:
     type: number
 TRANSMOG_COLLECTION_CAMERA_UPDATE:
   payload: {}
+TRANSMOG_COLLECTION_ITEM_FAVORITE_UPDATE:
+  payload:
+  - name: itemAppearanceID
+    type: number
+  - name: isFavorite
+    type: boolean
 TRANSMOG_COLLECTION_ITEM_UPDATE:
   payload: {}
 TRANSMOG_COLLECTION_SOURCE_ADDED:
