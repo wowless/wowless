@@ -306,15 +306,16 @@ G.testsuite.uiobjects = function()
     end,
 
     Texture = function()
+      local colortex = _G.WowlessData.Build.test and 'FileData ID 0' or nil
       local t = CreateFrame('Frame'):CreateTexture()
       assertEquals('BLEND', t:GetBlendMode())
       t:SetColorTexture(0.8, 0.6, 0.4, 0.2)
-      assertEquals(IsTestBuild() and 'FileData ID 0' or nil, t:GetTexture())
+      assertEquals(colortex, t:GetTexture())
       check4(1, 1, 1, 1, t:GetVertexColor())
       t:SetTexture(136235)
       assertEquals(136235, t:GetTexture())
       t:SetColorTexture(0.8, 0.6, 0.4, 0.2)
-      assertEquals(IsTestBuild() and 'FileData ID 0' or nil, t:GetTexture())
+      assertEquals(colortex, t:GetTexture())
     end,
   }
 end
