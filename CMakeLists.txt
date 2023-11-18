@@ -1322,6 +1322,7 @@ add_lua_executable(
   argparse
   luafilesystem
   penlight
+  toolsutil
 )
 
 lua2c(runtimeproducts runtime.products=runtime/products.lua)

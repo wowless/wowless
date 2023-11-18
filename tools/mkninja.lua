@@ -27,12 +27,7 @@ local perProductAddonGeneratedTypes = {
     return { 'build/data/products/' .. p .. '/globals.lua' }
   end,
   impltests = function(p)
-    return {
-      'build/data/products/' .. p .. '/apis.lua',
-      'data/test/GetBuildInfo_10_1.lua',
-      'data/test/GetBuildInfo_1_15_0.lua',
-      'data/test/GetBuildInfo_3_4_2.lua',
-    }
+    return { 'build/data/products/' .. p .. '/apis.lua' }
   end,
   namespaceapis = function(p)
     return {
@@ -103,6 +98,8 @@ local rules = {
   },
   mkaddon = {
     command = 'build/cmake/gentest -f $type -p $product',
+    depfile = '$out.d',
+    deps = 'gcc',
   },
   mkninja = {
     command = 'lua tools/mkninja.lua',
@@ -185,7 +182,7 @@ for _, p in ipairs(productList) do
     table.insert(builds, {
       args = { product = p, ['type'] = k },
       ins = { v(p), 'build/cmake/gentest' },
-      outs_implicit = prefix .. k .. '.lua',
+      outs = prefix .. k .. '.lua',
       rule = 'mkaddon',
     })
   end
