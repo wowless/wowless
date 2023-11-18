@@ -1,4 +1,5 @@
 local addonName, G, extraArg = ...
+local numAddonArgs = select('#', ...)
 local assertEquals = _G.assertEquals
 
 local check0 = G.check0
@@ -433,6 +434,9 @@ G.testsuite.sync = function()
         end,
         extraArg = function()
           assertEquals(nil, extraArg)
+        end,
+        numAddonArgs = function()
+          assertEquals(3, numAddonArgs)
         end,
       }
     end,
