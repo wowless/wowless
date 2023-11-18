@@ -315,6 +315,7 @@ G.testsuite.generated = function()
       },
       env = _G,
       retn = G.retn,
+      wowless = _G.__wowless,
     }
     for k, v in pairs(_G.WowlessData.ImplTests) do
       tests[k] = function()
