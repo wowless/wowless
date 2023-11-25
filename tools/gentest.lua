@@ -72,6 +72,22 @@ local ptablemap = {
   globals = function(p)
     return 'Globals', perproduct(p, 'globals')
   end,
+  impltests = function(p)
+    local r = require('pl.file').read
+    local t = {}
+    local deps = {}
+    for _, api in pairs(perproduct(p, 'apis')) do
+      if api.impl and not t[api.impl] then
+        local f = 'data/test/' .. api.impl .. '.lua'
+        local content = r(f)
+        if content then
+          t[api.impl] = content
+          deps[f] = true
+        end
+      end
+    end
+    return 'ImplTests', t, deps
+  end,
   namespaceapis = function(p)
     local config = perproduct(p, 'config')
     local apiNamespaces = {}
@@ -161,8 +177,9 @@ local args = (function()
   parser:option('-p --product', 'products to generate, default all'):count('*')
   return parser:parse()
 end)()
-local filemap = (function()
+local filemap, alldeps = (function()
   local t = {}
+  local deps = {}
   local files = (function()
     if next(args.file) then
       return mapify(args.file)
@@ -181,9 +198,11 @@ local filemap = (function()
   for k in pairs(files) do
     if ptablemap[k] then
       for _, p in ipairs(next(args.product) and args.product or dofile('build/data/products.lua')) do
-        local nn, tt = ptablemap[k](p)
+        local nn, tt, dd = ptablemap[k](p)
         local ss = '_G.WowlessData.' .. nn .. ' = ' .. require('pl.pretty').write(tt) .. '\n'
-        t['build/products/' .. p .. '/WowlessData/' .. k .. '.lua'] = style(ss)
+        local ff = 'build/products/' .. p .. '/WowlessData/' .. k .. '.lua'
+        t[ff] = style(ss)
+        deps[ff] = dd
       end
     elseif k == 'product' then
       for _, p in ipairs(next(args.product) and args.product or dofile('build/data/products.lua')) do
@@ -206,7 +225,7 @@ local filemap = (function()
       error('invalid file type ' .. k)
     end
   end
-  return t
+  return t, deps
 end)()
 
 if not args.dryrun then
@@ -214,5 +233,8 @@ if not args.dryrun then
   for k, v in pairs(filemap) do
     w(k, v)
     os.execute('chmod a+x ' .. k)
+  end
+  for k, v in pairs(alldeps) do
+    require('tools.util').writedeps(k, v)
   end
 end

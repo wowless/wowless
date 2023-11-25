@@ -114,21 +114,11 @@ G.testsuite.generated = function()
     local b = _G.WowlessData.Build
     assert(b, 'no build')
     return {
-      GetBuildInfo = function()
-        if b.tocversion >= 100100 then
-          G.check6(b.version, b.build, b.date, b.tocversion, '', ' ', GetBuildInfo())
-        else
-          G.check7(b.version, b.build, b.date, b.tocversion, '', ' ', b.tocversion, GetBuildInfo())
-        end
-      end,
       IsDebugBuild = function()
         G.check1(false, _G.IsDebugBuild())
       end,
       IsPublicBuild = function()
         G.check1(true, _G.IsPublicBuild())
-      end,
-      IsTestBuild = function()
-        G.check1(b.test, IsTestBuild())
       end,
     }
   end
@@ -310,6 +300,29 @@ G.testsuite.generated = function()
     return tests
   end
 
+  local function impltests()
+    local tests = {}
+    local arg = {
+      assertEquals = G.assertEquals,
+      check2 = G.check2,
+      check6 = G.check6,
+      check7 = G.check7,
+      data = {
+        build = _G.WowlessData.Build,
+      },
+      env = _G,
+      retn = G.retn,
+      wowless = _G.__wowless,
+    }
+    for k, v in pairs(_G.WowlessData.ImplTests) do
+      tests[k] = function()
+        local vv = loadstring(v, '@data/test/' .. k .. '.lua')
+        return vv(arg)
+      end
+    end
+    return tests
+  end
+
   local function uiobjects()
     local function assertCreateFrame(ty)
       local function process(...)
@@ -484,6 +497,7 @@ G.testsuite.generated = function()
     events = events,
     globalApis = globalApis,
     globals = globals,
+    impltests = impltests,
     uiobjects = uiobjects,
   }
 end

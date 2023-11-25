@@ -1,5 +1,11 @@
 ---
-ACHIEVEMENT_EARNED: {}
+ACHIEVEMENT_EARNED:
+  payload:
+  - name: achievementID
+    type: number
+  - name: alreadyEarned
+    nilable: true
+    type: boolean
 ACHIEVEMENT_PLAYER_NAME:
   payload:
   - name: achievementID
@@ -14,6 +20,12 @@ ACTION_RANGE_CHECK_UPDATE:
     type: boolean
   - name: checksRange
     type: boolean
+ACTION_USABLE_CHANGED:
+  payload:
+  - name: changes
+    type:
+      arrayof:
+        structure: C_ActionBar.ActionUsableState
 ACTION_WILL_BIND_ITEM:
   payload: {}
 ACTIONBAR_HIDEGRID:
@@ -2423,6 +2435,42 @@ CHAT_MSG_PET_INFO:
     type: boolean
   - name: supressRaidIcons
     type: boolean
+CHAT_MSG_PING:
+  payload:
+  - name: text
+    type: string
+  - name: playerName
+    type: string
+  - name: languageName
+    type: string
+  - name: channelName
+    type: string
+  - name: playerName2
+    type: string
+  - name: specialFlags
+    type: string
+  - name: zoneChannelID
+    type: number
+  - name: channelIndex
+    type: number
+  - name: channelBaseName
+    type: string
+  - name: languageID
+    type: number
+  - name: lineID
+    type: number
+  - name: guid
+    type: string
+  - name: bnSenderID
+    type: number
+  - name: isMobile
+    type: boolean
+  - name: isSubtitle
+    type: boolean
+  - name: hideSenderInLetterbox
+    type: boolean
+  - name: supressRaidIcons
+    type: boolean
 CHAT_MSG_RAID:
   payload:
   - name: text
@@ -3448,6 +3496,14 @@ END_BOUND_TRADEABLE:
   payload:
   - name: reason
     type: string
+ENGRAVING_MODE_CHANGED:
+  payload:
+  - name: enabled
+    type: boolean
+ENGRAVING_TARGETING_MODE_CHANGED:
+  payload:
+  - name: enabled
+    type: boolean
 ENTERED_DIFFERENT_INSTANCE_FROM_PARTY:
   payload: {}
 ENTITLEMENT_DELIVERED:
@@ -3487,10 +3543,6 @@ EQUIPMENT_SWAP_FINISHED:
     type: number
 EQUIPMENT_SWAP_PENDING:
   payload: {}
-EXECUTE_CHAT_LINE:
-  payload:
-  - name: chatLine
-    type: string
 EXPAND_BAG_BAR_CHANGED:
   payload:
   - name: expandBagBar
@@ -3536,7 +3588,11 @@ GENERIC_ERROR:
   payload:
   - name: errorMessage
     type: string
-GENERIC_WIDGET_DISPLAY_SHOW: {}
+GENERIC_WIDGET_DISPLAY_SHOW:
+  payload:
+  - name: info
+    type:
+      structure: C_GenericWidgetDisplay.GenericWidgetDisplayFrameInfo
 GET_ITEM_INFO_RECEIVED:
   payload:
   - name: itemID
@@ -3556,6 +3612,8 @@ GLUE_CONSOLE_LOG:
   - name: message
     type: string
 GLUE_SCREENSHOT_FAILED:
+  payload: {}
+GLUE_SCREENSHOT_STARTED:
   payload: {}
 GLUE_SCREENSHOT_SUCCEEDED:
   payload: {}
@@ -3578,7 +3636,9 @@ GM_PLAYER_INFO:
   - name: info
     type: string
 GOSSIP_CLOSED:
-  payload: {}
+  payload:
+  - name: interactionIsContinuing
+    type: boolean
 GOSSIP_CONFIRM:
   payload:
   - name: gossipID
@@ -3868,22 +3928,6 @@ KIOSK_SESSION_EXPIRATION_WARNING:
     type: number
 KIOSK_SESSION_EXPIRED:
   payload: {}
-KNOWLEDGE_BASE_ARTICLE_LOAD_FAILURE:
-  payload: {}
-KNOWLEDGE_BASE_ARTICLE_LOAD_SUCCESS:
-  payload: {}
-KNOWLEDGE_BASE_QUERY_LOAD_FAILURE:
-  payload: {}
-KNOWLEDGE_BASE_QUERY_LOAD_SUCCESS:
-  payload: {}
-KNOWLEDGE_BASE_SERVER_MESSAGE:
-  payload: {}
-KNOWLEDGE_BASE_SETUP_LOAD_FAILURE:
-  payload: {}
-KNOWLEDGE_BASE_SETUP_LOAD_SUCCESS:
-  payload: {}
-KNOWLEDGE_BASE_SYSTEM_MOTD_UPDATED:
-  payload: {}
 LANGUAGE_LIST_CHANGED:
   payload: {}
 LEARNED_SPELL_IN_TAB:
@@ -3897,6 +3941,8 @@ LEARNED_SPELL_IN_TAB:
 LFG_BOOT_PROPOSAL_UPDATE:
   payload: {}
 LFG_COMPLETION_REWARD:
+  payload: {}
+LFG_ENABLED_STATE_CHANGED:
   payload: {}
 LFG_GROUP_DELISTED_LEADERSHIP_CHANGE:
   payload:
@@ -3917,6 +3963,28 @@ LFG_LIST_ACTIVE_ENTRY_UPDATE:
   - name: created
     nilable: true
     type: boolean
+LFG_LIST_APPLICANT_LIST_UPDATED:
+  payload:
+  - name: newPendingEntry
+    nilable: true
+    type: boolean
+  - name: newPendingEntryWithData
+    nilable: true
+    type: boolean
+LFG_LIST_APPLICANT_UPDATED:
+  payload:
+  - name: applicantID
+    type: number
+LFG_LIST_APPLICATION_STATUS_UPDATED:
+  payload:
+  - name: searchResultID
+    type: number
+  - name: newStatus
+    type: string
+  - name: oldStatus
+    type: string
+  - name: groupName
+    type: string
 LFG_LIST_AVAILABILITY_UPDATE:
   payload: {}
 LFG_LIST_ENTRY_CREATION_FAILED:
@@ -3925,6 +3993,12 @@ LFG_LIST_ENTRY_EXPIRED_TIMEOUT:
   payload: {}
 LFG_LIST_ENTRY_EXPIRED_TOO_MANY_PLAYERS:
   payload: {}
+LFG_LIST_JOINED_GROUP:
+  payload:
+  - name: searchResultID
+    type: number
+  - name: groupName
+    type: string
 LFG_LIST_ROLE_UPDATE:
   payload: {}
 LFG_LIST_SEARCH_FAILED:
@@ -4210,6 +4284,10 @@ MODIFIER_STATE_CHANGED:
     type: number
 MOUNT_CURSOR_CLEAR:
   payload: {}
+MOUNT_JOURNAL_SEARCH_UPDATED:
+  payload: {}
+MOUNT_JOURNAL_USABILITY_CHANGED:
+  payload: {}
 MUTELIST_UPDATE:
   payload: {}
 NAME_PLATE_CREATED:
@@ -4226,6 +4304,14 @@ NAME_PLATE_UNIT_REMOVED:
     type: string
 NEW_AUCTION_UPDATE:
   payload: {}
+NEW_MOUNT_ADDED:
+  payload:
+  - name: mountID
+    type: number
+NEW_PET_ADDED:
+  payload:
+  - name: battlePetGUID
+    type: string
 NEW_RECIPE_LEARNED:
   payload:
   - name: recipeID
@@ -4461,6 +4547,20 @@ PET_FORCE_NAME_DECLENSION:
   - name: declinedName5
     nilable: true
     type: string
+PET_JOURNAL_LIST_UPDATE:
+  payload: {}
+PET_JOURNAL_PET_DELETED:
+  payload:
+  - name: battlePetGUID
+    type: string
+PET_JOURNAL_PET_RESTORED:
+  payload:
+  - name: battlePetGUID
+    type: string
+PET_JOURNAL_PET_REVOKED:
+  payload:
+  - name: battlePetGUID
+    type: string
 PET_SPELL_POWER_UPDATE:
   payload: {}
 PET_STABLE_CLOSED:
@@ -4635,6 +4735,10 @@ PLAYER_SOFT_INTERACT_CHANGED:
     type: string
 PLAYER_SOFT_TARGET_INTERACTION:
   payload: {}
+PLAYER_SPECIALIZATION_CHANGED:
+  payload:
+  - name: unitTarget
+    type: unit
 PLAYER_STARTED_LOOKING:
   payload: {}
 PLAYER_STARTED_MOVING:
@@ -4709,6 +4813,8 @@ PRODUCT_CHOICE_UPDATE:
   payload: {}
 PRODUCT_DISTRIBUTIONS_UPDATED:
   payload: {}
+PVP_BRAWL_INFO_UPDATED:
+  payload: {}
 PVP_RATED_STATS_UPDATE:
   payload: {}
 PVP_TIMER_UPDATE:
@@ -4758,7 +4864,21 @@ QUEST_GREETING:
   payload: {}
 QUEST_ITEM_UPDATE:
   payload: {}
+QUEST_LOG_CRITERIA_UPDATE:
+  payload:
+  - name: questID
+    type: number
+  - name: specificTreeID
+    type: number
+  - name: description
+    type: string
+  - name: numFulfilled
+    type: number
+  - name: numRequired
+    type: number
 QUEST_LOG_UPDATE:
+  payload: {}
+QUEST_POI_UPDATE:
   payload: {}
 QUEST_PROGRESS:
   payload: {}
@@ -4950,6 +5070,12 @@ RUNE_TYPE_UPDATE:
   payload:
   - name: runeIndex
     type: number
+RUNE_UPDATED:
+  payload:
+  - name: rune
+    nilable: true
+    type:
+      structure: C_Engraving.EngravingData
 SAVED_VARIABLES_TOO_LARGE:
   payload:
   - name: addOnName
@@ -5045,6 +5171,13 @@ SHOW_RATED_PVP_REWARD_TOAST:
     type: boolean
   - name: lessAwesome
     type: boolean
+SHOW_SUBTITLE:
+  payload:
+  - name: subtitle
+    type: string
+  - name: sender
+    nilable: true
+    type: string
 SIMPLE_BROWSER_WEB_ERROR:
   payload:
   - name: errorCode
@@ -5132,6 +5265,14 @@ SPELL_DATA_LOAD_RESULT:
     type: boolean
 SPELL_POWER_CHANGED:
   payload: {}
+SPELL_PUSHED_TO_ACTIONBAR:
+  payload:
+  - name: spellID
+    type: number
+  - name: slot
+    type: number
+  - name: page
+    type: number
 SPELL_SCRIPT_ERROR:
   payload:
   - name: spellID
@@ -5925,6 +6066,8 @@ UPDATE_SHAPESHIFT_USABLE:
   payload: {}
 UPDATE_STEALTH:
   payload: {}
+UPDATE_SUMMONPETS_ACTION:
+  payload: {}
 UPDATE_TRADESKILL_RECAST:
   payload: {}
 UPDATE_UI_WIDGET:
@@ -6273,12 +6416,29 @@ VOID_TRANSFER_DONE:
   payload: {}
 VOID_TRANSFER_SUCCESS:
   payload: {}
+VOTE_KICK_REASON_NEEDED:
+  payload:
+  - name: name
+    type: string
+  - name: resultGUID
+    type: string
 WARFRONT_COMPLETED:
   payload:
   - name: mapID
     type: number
   - name: winner
     type: number
+WARGAME_INVITE_SENT:
+  payload: {}
+WARGAME_REQUEST_RESPONSE:
+  payload:
+  - name: responderGUID
+    type: string
+  - name: responderName
+    nilable: true
+    type: string
+  - name: accepted
+    type: boolean
 WARGAME_REQUESTED:
   payload:
   - name: opposingPartyMemberName

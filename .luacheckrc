@@ -31,14 +31,11 @@ read_globals = {
 files['addon/Wowless'] = {
   read_globals = {
     'abs',
-    'C_CovenantSanctumUI',
     'CreateFont',
     'CreateFrame',
     'debugprofilestop',
     'DevTools_Dump',
     'format',
-    'GetBuildInfo',
-    'IsTestBuild',
     'RequestTimePlayed',
     'SendSystemMessage',
   },

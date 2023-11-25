@@ -1,4 +1,5 @@
 local addonName, G, extraArg = ...
+local numAddonArgs = select('#', ...)
 local assertEquals = _G.assertEquals
 
 local check0 = G.check0
@@ -434,6 +435,9 @@ G.testsuite.sync = function()
         extraArg = function()
           assertEquals(nil, extraArg)
         end,
+        numAddonArgs = function()
+          assertEquals(3, numAddonArgs)
+        end,
       }
     end,
 
@@ -688,6 +692,23 @@ local asyncTests = {
         end)
       end)
       RequestTimePlayed()
+    end,
+  },
+  {
+    name = 'C_Timer.NewTimer',
+    fn = function(done)
+      local t
+      local function cb(...)
+        local args = { ... }
+        done(function()
+          assertEquals(1, #args)
+          assertEquals(t, args[1])
+          assert(tostring(t) ~= tostring(args[1]))
+          assertEquals('bar', args[1].foo)
+        end)
+      end
+      t = G.retn(1, _G.C_Timer.NewTimer(0, cb))
+      t.foo = 'bar'
     end,
   },
 }

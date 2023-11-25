@@ -25984,7 +25984,11 @@ IsFlyableArea: {}
 IsFlying: {}
 IsGamePadCursorControlEnabled: {}
 IsGamePadFreelookEnabled: {}
-IsGMClient: {}
+IsGMClient:
+  inputs: {}
+  outputs:
+  - name: isGM
+    type: boolean
 IsGraphicsCVarValueSupported: {}
 IsGraphicsSettingValueSupported: {}
 IsGUIDInGroup: {}
@@ -26066,6 +26070,7 @@ IsLFGDungeonJoinable:
   - name: totalGroupSizeRequired
     type: number
 IsLinuxClient:
+  impl: IsLinuxClient
   inputs: {}
   outputs:
   - name: isLinux
@@ -26077,6 +26082,7 @@ IsLoggedIn:
   - name: isLoggedIn
     type: boolean
 IsMacClient:
+  impl: IsMacClient
   inputs: {}
   outputs:
   - name: isMac
@@ -26317,6 +26323,7 @@ IsVoidStorageReady:
     type: boolean
 IsWargame: {}
 IsWindowsClient:
+  impl: IsWindowsClient
   inputs: {}
   outputs:
   - name: isWindows
@@ -27653,7 +27660,7 @@ UnitClassification:
     nilable: true
     type: unit
   outputs:
-  - name: classification
+  - name: result
     stub: normal
     type: string
 UnitControllingVehicle: {}

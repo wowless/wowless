@@ -1,8 +1,8 @@
 ---
-build: '51825'
-date: Oct 18 2023
+build: '52206'
+date: Nov 15 2023
 flavor: Mainline
-hash: be87e2a6cbafb917189870c5d477b8b1
-test: false
-tocversion: 100200
-version: 10.2.0
+hash: b4dab9f784445dab0d71cb5253f19d0a
+test: true
+tocversion: 100205
+version: 10.2.5

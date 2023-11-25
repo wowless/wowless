@@ -104,7 +104,9 @@ local function loader(api, cfg)
 
   local function getColor(e)
     local name = e.attr.name or e.attr.color
-    if name then
+    if name == 'GREEN_FONT_COLOR' and datalua.build.flavor == 'Vanilla' then -- issue #303
+      return e.attr.r or 0, e.attr.g or 0, e.attr.b or 0, e.attr.a or 1
+    elseif name then
       return assert(api.env[name], ('unknown color %q'):format(name)):GetRGBA()
     else
       return e.attr.r or 0, e.attr.g or 0, e.attr.b or 0, e.attr.a or 1
@@ -672,27 +674,50 @@ local function loader(api, cfg)
       error('fell off the end of time')
     end)
 
-    local cancelled = setmetatable({}, { __mode = 'k' })
-    local tickerMT = {
-      __index = {
-        Cancel = debug.newsecurefunction(function(self)
-          cancelled[self] = true
-        end),
-        IsCancelled = debug.newsecurefunction(function(self)
-          return cancelled[self]
-        end),
-      },
-      __metatable = false,
+    local state = setmetatable({}, { __mode = 'k' })
+    local index = {
+      Cancel = debug.newcfunction(function(self)
+        state[self].cancelled = true
+      end),
+      Invoke = debug.newcfunction(function(self, ...)
+        state[self].callback(...)
+      end),
+      IsCancelled = debug.newcfunction(function(self)
+        return state[self].cancelled
+      end),
     }
+    local tickerMT
+    tickerMT = {
+      __eq = function(u1, u2)
+        return state[u1].table == state[u2].table
+      end,
+      __index = function(u, k)
+        return index[k] or state[u].table[k]
+      end,
+      __metatable = false,
+      __newindex = function(u, k, v)
+        if index[k] or tickerMT[k] ~= nil then
+          error('Attempted to assign to read-only key ' .. k)
+        end
+        state[u].table[k] = v
+      end,
+    }
+    local mtproxy = newproxy(true)
+    mixin(getmetatable(mtproxy), tickerMT)
     time.newTicker = function(seconds, callback, iterations)
       assert(getfenv(callback) ~= _G, 'wowless bug: framework callback in newTicker')
-      local p = newproxy(true)
-      mixin(getmetatable(p), tickerMT)
-      cancelled[p] = false
+      local p = newproxy(mtproxy)
+      state[p] = {
+        callback = callback,
+        cancelled = false,
+        table = {},
+      }
       local count = 0
       local function cb()
-        if not cancelled[p] and count < iterations then
-          callback()
+        if not state[p].cancelled and count < iterations then
+          local np = newproxy(p)
+          state[np] = state[p]
+          callback(np)
           count = count + 1
           time.timers:push(time.stamp + seconds, cb)
         end
