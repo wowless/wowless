@@ -923,7 +923,7 @@ add_lua_executable(
   penlight
 )
 
-add_strict_lua_executable(
+add_lua_executable(
   cascmap
   ${CMAKE_CURRENT_SOURCE_DIR}/tools/cascmap.lua
   argparse
