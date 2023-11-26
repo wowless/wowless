@@ -265,7 +265,6 @@ Button:
       - type: number
     IsEnabled:
       impl: Button/IsEnabled
-    LockHighlight: {}
     RegisterForClicks:
       impl: Button/RegisterForClicks
     RegisterForMouse: {}
@@ -289,7 +288,6 @@ Button:
     SetHighlightAtlas:
       impl: Button/SetHighlightAtlas
     SetHighlightFontObject: {}
-    SetHighlightLocked: {}
     SetHighlightTexture:
       impl: Button/SetHighlightTexture
     SetMotionScriptsWhileDisabled:
@@ -312,7 +310,6 @@ Button:
       impl: Button/SetPushedTexture
     SetText:
       impl: Button/SetText
-    UnlockHighlight: {}
 CheckButton:
   fields:
     checked:
@@ -590,6 +587,7 @@ EditBox:
     HighlightText: {}
     Insert:
       impl: EditBox/Insert
+    IsAlphabeticOnly: {}
     IsAutoFocus:
       getter:
       - name: isAutoFocus
@@ -604,10 +602,13 @@ EditBox:
       getter:
       - name: isMultiLine
     IsNumeric: {}
+    IsNumericFullRange: {}
     IsPassword: {}
     IsSecureText:
       getter:
       - name: isSecureText
+    ResetInputMode: {}
+    SetAlphabeticOnly: {}
     SetAltArrowKeyMode: {}
     SetAutoFocus:
       setter:
@@ -636,6 +637,7 @@ EditBox:
       - name: isMultiLine
     SetNumber: {}
     SetNumeric: {}
+    SetNumericFullRange: {}
     SetPassword: {}
     SetSecureText:
       setter:
@@ -951,6 +953,7 @@ Frame:
       - name: minResizeHeight
       - name: maxResizeWidth
       - name: maxResizeHeight
+    GetWindow: {}
     HasFixedFrameLevel:
       getter:
       - name: hasFixedFrameLevel
@@ -978,6 +981,7 @@ Frame:
     IsUserPlaced:
       getter:
       - name: isUserPlaced
+    LockHighlight: {}
     Lower: {}
     Raise: {}
     RegisterAllEvents:
@@ -1011,6 +1015,7 @@ Frame:
     SetFrameStrata:
       setter:
       - name: frameStrata
+    SetHighlightLocked: {}
     SetHitRectInsets: {}
     SetHyperlinksEnabled:
       setter:
@@ -1036,9 +1041,11 @@ Frame:
     SetUserPlaced:
       setter:
       - name: isUserPlaced
+    SetWindow: {}
     StartMoving: {}
     StartSizing: {}
     StopMovingOrSizing: {}
+    UnlockHighlight: {}
     UnregisterAllEvents:
       impl: Frame/UnregisterAllEvents
     UnregisterEvent:
@@ -1101,16 +1108,20 @@ GameTooltip:
     SetCraftSpell: {}
     SetCurrencyToken: {}
     SetCurrencyTokenByID: {}
+    SetEngravingRune: {}
     SetEquipmentSet: {}
     SetExistingSocketGem: {}
     SetFrameStack: {}
     SetGuildBankItem: {}
+    SetHeirloomByItemID: {}
     SetHyperlink: {}
     SetInboxItem: {}
     SetInstanceLockEncountersComplete: {}
     SetInventoryItem: {}
     SetInventoryItemByID: {}
     SetItemByID: {}
+    SetLFGDungeonReward: {}
+    SetLFGDungeonShortageReward: {}
     SetLootCurrency: {}
     SetLootItem: {}
     SetLootRollItem: {}
@@ -1143,6 +1154,7 @@ GameTooltip:
     SetTalent: {}
     SetText: {}
     SetTotem: {}
+    SetToyByItemID: {}
     SetTrackingSpell: {}
     SetTradePlayerItem: {}
     SetTradeSkillItem: {}
@@ -1196,11 +1208,13 @@ Line:
     TextureBase: {}
   methods:
     GetEndPoint: {}
+    GetHitRectThickness: {}
     GetStartPoint: {}
     GetThickness:
       getter:
       - name: thickness
     SetEndPoint: {}
+    SetHitRectThickness: {}
     SetStartPoint: {}
     SetThickness:
       setter:
@@ -1452,6 +1466,8 @@ ParentedObjectBase:
   inherits:
     UIObject: {}
   methods:
+    ClearParentKey:
+      impl: ParentedObjectBase/ClearParentKey
     GetDebugName:
       impl: ParentedObject/GetDebugName
     GetParent:
@@ -1682,6 +1698,7 @@ Region:
     SetPassThroughButtons: {}
     SetPoint:
       impl: Region/SetPoint
+    SetProtected: {}
     SetSize:
       setter:
       - name: width
@@ -1943,6 +1960,7 @@ TabardModel:
     GetUpperEmblemFileName: {}
     GetUpperEmblemTexture: {}
     InitializeTabardColors: {}
+    IsGuildTabard: {}
     Save: {}
 Texture:
   inherits:
@@ -2010,6 +2028,7 @@ TextureBase:
     LayeredRegion: {}
     ScriptObject: {}
   methods:
+    ClearTextureSlice: {}
     GetAtlas: {}
     GetBlendMode:
       getter:
@@ -2034,6 +2053,8 @@ TextureBase:
       impl: Texture/GetTexture
     GetTextureFileID: {}
     GetTextureFilePath: {}
+    GetTextureSliceMargins: {}
+    GetTextureSliceMode: {}
     GetVertexColor:
       getter:
       - name: vertexColorR
@@ -2071,6 +2092,8 @@ TextureBase:
     SetTexelSnappingBias: {}
     SetTexture:
       impl: Texture/SetTexture
+    SetTextureSliceMargins: {}
+    SetTextureSliceMode: {}
     SetVertexOffset: {}
     SetVertTile:
       setter:

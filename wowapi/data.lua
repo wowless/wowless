@@ -56,6 +56,7 @@ local fns = {
   state = loaddir('state', 'yaml'),
   stringenums = global('stringenums'),
   structures = perproduct('structures'),
+  test = global('test'),
   uiobjectimpl = global('uiobjectimpl'),
   uiobjects = perproduct('uiobjects'),
   xml = perproduct('xml'),

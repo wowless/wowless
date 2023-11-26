@@ -1,0 +1,3 @@
+local t = ...
+local b = t.data.build
+t.check6(b.version, b.build, b.date, b.tocversion, '', ' ', t.env.GetBuildInfo())

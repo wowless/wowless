@@ -97,7 +97,9 @@ local function loader(api, cfg)
 
   local function getColor(e)
     local name = e.attr.name or e.attr.color
-    if name then
+    if name == 'GREEN_FONT_COLOR' and datalua.build.flavor == 'Vanilla' then -- issue #303
+      return e.attr.r or 0, e.attr.g or 0, e.attr.b or 0, e.attr.a or 1
+    elseif name then
       return assert(api.env[name], ('unknown color %q'):format(name)):GetRGBA()
     else
       return e.attr.r or 0, e.attr.g or 0, e.attr.b or 0, e.attr.a or 1

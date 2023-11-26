@@ -54,9 +54,11 @@ addon:
     C_Traits.GetConditionInfo: {}
     C_Traits.GetEntryInfo: {}
     C_Traits.GetTreeInfo: {}
+    SetPortraitToTexture: {}
 docs:
   apis:
     skip_namespaces:
+      C_BarberShopInternal: {}
       C_ConfigurationWarnings: {}
   events:
     never_sent:
