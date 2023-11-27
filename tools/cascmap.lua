@@ -144,3 +144,4 @@ processFile('Interface/FrameXML/UI_Shared.xsd')
 local outfile = 'build/products/' .. args.product .. '/cmap.lua'
 local outstr = require('tools.util').returntable(cmap)
 require('pl.file').write(outfile, outstr)
+log('wrote', outfile)
