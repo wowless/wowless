@@ -21,8 +21,9 @@ local fetch = (function()
   local http = require('socket.http').request
   local tsink = require('ltn12').sink.table
   local blte = require('casc.blte').readData
+  local md5 = require('md5').sumhexa
   local opts = { zerofillEncryptedChunks = true }
-  return function(v)
+  return function(k, v)
     local h = v.archive
     local suffix = ('%s/%s/%s'):format(h:sub(1, 2), h:sub(3, 4), h)
     local url = 'http://blzddist1-a.akamaihd.net/tpr/wow/data/' .. suffix
@@ -36,11 +37,14 @@ local fetch = (function()
     })
     assert(ok, url)
     assert(status == 206, status .. ' ' .. url)
-    return (blte(table.concat(sink), nil, opts))
+    local content, header, zerofill = blte(table.concat(sink), nil, opts)
+    assert(md5(header) == v.ekey, 'ekey mismatch on ' .. k)
+    assert(zerofill or md5(content) == v.ckey, 'ckey mismatch on ' .. k)
+    return content
   end
 end)()
 for k, v in require('pl.tablex').sort(cmap) do
   log('writing', k)
   path.mkdir(path.dirname(path.join(outdir, k)))
-  require('pl.file').write(path.join(outdir, k), fetch(v))
+  require('pl.file').write(path.join(outdir, k), fetch(k, v))
 end

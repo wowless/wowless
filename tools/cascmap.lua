@@ -64,6 +64,7 @@ local save = (function()
         archive = archive,
         ckey = hex(ckey),
         ekey = hex(ekey),
+        name = fn,
         rend = tonumber(rend),
         rstart = tonumber(rstart),
       }
@@ -141,7 +142,13 @@ end
 processFile('Interface/FrameXML/UI.xsd')
 processFile('Interface/FrameXML/UI_Shared.xsd')
 
+local nmap = {}
+for _, v in require('pl.tablex').sort(cmap) do
+  nmap[v.name] = v
+  v.name = nil
+end
+
 local outfile = 'build/products/' .. args.product .. '/cmap.lua'
-local outstr = require('tools.util').returntable(cmap)
+local outstr = require('tools.util').returntable(nmap)
 require('pl.file').write(outfile, outstr)
 log('wrote', outfile)

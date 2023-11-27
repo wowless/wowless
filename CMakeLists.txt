@@ -920,6 +920,7 @@ add_lua_executable(
   luapath
   luasocket
   lzlib
+  md5
   penlight
 )
 
