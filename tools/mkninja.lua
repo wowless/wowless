@@ -72,6 +72,10 @@ local pools = {
 }
 
 local rules = {
+  cascmap = {
+    command = 'build/cmake/cascmap $product',
+    pool = 'fetch_pool',
+  },
   dbdata = {
     command = 'build/cmake/sqlite -f $product',
   },
@@ -224,13 +228,23 @@ for _, p in ipairs(productList) do
     outs = dbdefs,
     rule = 'dbdefs',
   })
-  local fetchStamp = 'build/products/' .. p .. '/fetch.stamp'
+  local cmap = 'build/products/' .. p .. '/cmap.lua'
   table.insert(builds, {
     args = { product = p },
     ins = {
       dblist,
-      'build/cmake/fetch',
+      'build/cmake/cascmap',
       'build/data/products/' .. p .. '/build.lua',
+    },
+    outs = cmap,
+    rule = 'cascmap',
+  })
+  local fetchStamp = 'build/products/' .. p .. '/fetch.stamp'
+  table.insert(builds, {
+    args = { product = p },
+    ins = {
+      cmap,
+      'build/cmake/fetch',
     },
     outs = fetchStamp,
     rule = 'fetch',

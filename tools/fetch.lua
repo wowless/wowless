@@ -35,8 +35,7 @@ local fetch = (function()
       sink = tsink(sink),
       url = url,
     })
-    assert(ok, url)
-    assert(status == 206, status .. ' ' .. url)
+    assert(ok and status == 206, status .. ' ' .. k)
     local content, header, zerofill = blte(table.concat(sink), nil, opts)
     assert(md5(header) == v.ekey, 'ekey mismatch on ' .. k)
     assert(zerofill or md5(content) == v.ckey, 'ckey mismatch on ' .. k)
