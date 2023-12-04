@@ -6,3 +6,7 @@
 	path = vendor/tactkeys
 	shallow = true
 	url = https://github.com/wowdev/TACTKeys
+[submodule "vcpkg"]
+	path = vcpkg
+	shallow = true
+	url = https://github.com/microsoft/vcpkg
