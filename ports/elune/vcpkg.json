@@ -3,16 +3,9 @@
   "version": "0",
   "dependencies": [
     {
-      "name": "utf8h",
-      "host": true
-    },
-    {
       "name": "vcpkg-cmake",
       "host": true
     },
-    {
-      "name": "vcpkg-cmake-config",
-      "host": true
-    }
+    "utf8h"
   ]
 }

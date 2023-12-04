@@ -13,8 +13,8 @@ cmake_policy(SET CMP0116 OLD)
 
 include(FetchContent)
 
-find_package(elune REQUIRED)
-add_library(elune ALIAS elune::liblua)
+find_package(elune CONFIG REQUIRED)
+add_library(elune ALIAS liblua)
 add_executable(bootstraplua ALIAS elune::lua51)
 
 find_package(expat CONFIG REQUIRED)
