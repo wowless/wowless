@@ -10,6 +10,7 @@ vcpkg_cmake_configure(
   OPTIONS
     -DBUILD_TESTING=OFF
     -DCMAKE_C_FLAGS=-D_GNU_SOURCE
+    -DLUA_USE_READLINE=OFF
 )
 vcpkg_cmake_install()
 vcpkg_install_copyright(FILE_LIST "${SOURCE_PATH}/LICENSE")
