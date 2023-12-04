@@ -11,10 +11,6 @@ vcpkg_cmake_configure(
     -DCMAKE_C_FLAGS=-D_GNU_SOURCE
 )
 vcpkg_cmake_install()
+vcpkg_install_copyright(FILE_LIST "${SOURCE_PATH}/LICENSE")
 #vcpkg_cmake_config_fixup()
 file(REMOVE_RECURSE "${CURRENT_PACKAGES_DIR}/debug/include")
-file(
-  INSTALL "${SOURCE_PATH}/LICENSE"
-  DESTINATION "${CURRENT_PACKAGES_DIR}/share/${PORT}"
-  RENAME copyright
-)
