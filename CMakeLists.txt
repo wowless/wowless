@@ -116,32 +116,8 @@ set_target_properties(elune PROPERTIES C_STANDARD 11)
 add_executable(bootstraplua ${elune_SOURCE_DIR}/lua/lua.c)
 target_link_libraries(bootstraplua PRIVATE elune)
 
-FetchContent_Declare(
-  expat
-  GIT_REPOSITORY https://github.com/libexpat/libexpat.git
-  GIT_TAG R_2_5_0
-  SOURCE_SUBDIR disable_cmakelists_txt
-)
-FetchContent_MakeAvailable(expat)
-add_library(
-  expat STATIC
-  ${expat_SOURCE_DIR}/expat/lib/xmlparse.c
-  ${expat_SOURCE_DIR}/expat/lib/xmlrole.c
-  ${expat_SOURCE_DIR}/expat/lib/xmltok.c
-)
-block()
-  set(XML_DEV_URANDOM ON)
-  configure_file(
-    ${expat_SOURCE_DIR}/expat/expat_config.h.cmake
-    ${expat_BINARY_DIR}/expat_config.h
-  )
-endblock()
-target_include_directories(
-  expat PUBLIC
-  ${expat_SOURCE_DIR}/expat/lib
-  ${expat_BINARY_DIR}
-)
-target_compile_definitions(expat PUBLIC XML_STATIC)
+find_package(expat CONFIG REQUIRED)
+add_library(expat ALIAS expat::expat)
 
 function(lua2c name)
   set(deps ${ARGN})
