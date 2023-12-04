@@ -1,4 +1,11 @@
 cmake_minimum_required(VERSION 3.24)
+
+set(
+  CMAKE_TOOLCHAIN_FILE
+  ${CMAKE_CURRENT_SOURCE_DIR}/vcpkg/scripts/buildsystems/vcpkg.cmake
+  CACHE STRING "Vcpkg toolchain file"
+)
+
 project(wowless LANGUAGES C)
 
 # https://gitlab.kitware.com/cmake/cmake/-/issues/25245
@@ -220,33 +227,8 @@ set_property(
 )
 target_link_libraries(lyaml PRIVATE elune yaml)
 
-FetchContent_Declare(
-  zlib
-  URL https://zlib.net/fossils/zlib-1.3.tar.gz
-  URL_HASH SHA256=ff0ba4c292013dbc27530b3a81e1f9a813cd39de01ca5e0f8bf355702efa593e
-  SOURCE_SUBDIR disable_cmakelists_txt
-)
-FetchContent_MakeAvailable(zlib)
-add_library(
-  zlib STATIC
-  ${zlib_SOURCE_DIR}/adler32.c
-  ${zlib_SOURCE_DIR}/crc32.c
-  ${zlib_SOURCE_DIR}/compress.c
-  ${zlib_SOURCE_DIR}/deflate.c
-  ${zlib_SOURCE_DIR}/gzclose.c
-  ${zlib_SOURCE_DIR}/gzlib.c
-  ${zlib_SOURCE_DIR}/gzread.c
-  ${zlib_SOURCE_DIR}/gzwrite.c
-  ${zlib_SOURCE_DIR}/inflate.c
-  ${zlib_SOURCE_DIR}/infback.c
-  ${zlib_SOURCE_DIR}/inftrees.c
-  ${zlib_SOURCE_DIR}/inffast.c
-  ${zlib_SOURCE_DIR}/trees.c
-  ${zlib_SOURCE_DIR}/uncompr.c
-  ${zlib_SOURCE_DIR}/zutil.c
-)
-target_compile_definitions(zlib PRIVATE $<$<PLATFORM_ID:Darwin,Linux>:Z_HAVE_UNISTD_H>)
-target_include_directories(zlib PUBLIC ${zlib_SOURCE_DIR})
+find_package(ZLIB REQUIRED)
+add_library(zlib ALIAS ZLIB::ZLIB)
 
 FetchContent_Declare(
   lzlib
