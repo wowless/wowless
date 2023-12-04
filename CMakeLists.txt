@@ -756,44 +756,32 @@ add_library(
 )
 target_link_libraries(md5 PRIVATE elune)
 
+find_package(CURL REQUIRED)
+
 FetchContent_Declare(
-  luasocket
-  GIT_REPOSITORY https://github.com/lunarmodules/luasocket
-  GIT_TAG 8c2ff7217e2a205eb107a6f48b04ff1b2b3090a1
+  luacurl
+  GIT_REPOSITORY https://github.com/lua-curl/lua-curlv3
+  GIT_TAG 9f8b6dba8b5ef1b26309a571ae75cda4034279e5
   SOURCE_SUBDIR disable_cmakelists_txt
 )
-FetchContent_MakeAvailable(luasocket)
-lua2c(
-  luasocket
-  ltn12=${luasocket_SOURCE_DIR}/src/ltn12.lua
-  mime=${luasocket_SOURCE_DIR}/src/mime.lua
-  mime.core=c
-  socket=${luasocket_SOURCE_DIR}/src/socket.lua
-  socket.core=c
-  socket.headers=${luasocket_SOURCE_DIR}/src/headers.lua
-  socket.http=${luasocket_SOURCE_DIR}/src/http.lua
-  socket.url=${luasocket_SOURCE_DIR}/src/url.lua
-)
+FetchContent_MakeAvailable(luacurl)
+lua2c(luacurl lcurl=c)
 add_library(
-  luasocket STATIC
-  luasocket.c
-  ${luasocket_SOURCE_DIR}/src/auxiliar.c
-  ${luasocket_SOURCE_DIR}/src/buffer.c
-  ${luasocket_SOURCE_DIR}/src/compat.c
-  ${luasocket_SOURCE_DIR}/src/except.c
-  ${luasocket_SOURCE_DIR}/src/inet.c
-  ${luasocket_SOURCE_DIR}/src/io.c
-  ${luasocket_SOURCE_DIR}/src/luasocket.c
-  ${luasocket_SOURCE_DIR}/src/mime.c
-  ${luasocket_SOURCE_DIR}/src/options.c
-  ${luasocket_SOURCE_DIR}/src/timeout.c
-  ${luasocket_SOURCE_DIR}/src/select.c
-  ${luasocket_SOURCE_DIR}/src/tcp.c
-  ${luasocket_SOURCE_DIR}/src/udp.c
-  $<$<PLATFORM_ID:Darwin,Linux>:${luasocket_SOURCE_DIR}/src/usocket.c>
-  $<$<PLATFORM_ID:Windows>:${luasocket_SOURCE_DIR}/src/wsocket.c>
+  luacurl STATIC 
+  luacurl.c
+  ${luacurl_SOURCE_DIR}/src/lcurl.c
+  ${luacurl_SOURCE_DIR}/src/l52util.c
+  ${luacurl_SOURCE_DIR}/src/lceasy.c
+  ${luacurl_SOURCE_DIR}/src/lcerror.c
+  ${luacurl_SOURCE_DIR}/src/lchttppost.c
+  ${luacurl_SOURCE_DIR}/src/lcurl.c
+  ${luacurl_SOURCE_DIR}/src/lcutils.c
+  ${luacurl_SOURCE_DIR}/src/lcmulti.c
+  ${luacurl_SOURCE_DIR}/src/lcshare.c
+  ${luacurl_SOURCE_DIR}/src/lcmime.c
+  ${luacurl_SOURCE_DIR}/src/lcurlapi.c
 )
-target_link_libraries(luasocket PRIVATE elune $<$<PLATFORM_ID:Windows>:ws2_32>)
+target_link_libraries(luacurl PRIVATE CURL::libcurl)
 
 FetchContent_Declare(
   casc
@@ -837,10 +825,10 @@ add_lua_executable(
   argparse
   casc
   dbc
+  luacurl
   luaexpat
   luafilesystem
   luapath
-  luasocket
   lzlib
   md5
   penlight
@@ -1190,9 +1178,9 @@ add_lua_executable(
   ${CMAKE_CURRENT_SOURCE_DIR}/tools/render.lua
   argparse
   casc
+  luacurl
   luafilesystem
   luamagick
-  luasocket
   lyaml
   lzlib
   md5
@@ -1221,8 +1209,8 @@ add_lua_executable(
   ${CMAKE_CURRENT_SOURCE_DIR}/tools/bump.lua
   argparse
   casc
+  luacurl
   luafilesystem
-  luasocket
   lyaml
   lzlib
   md5

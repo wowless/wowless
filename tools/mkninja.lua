@@ -148,6 +148,7 @@ local builds = {
       'data/products.yaml',
       'tools/addons.yaml',
       'tools/mkninja.lua',
+      'vcpkg.json',
       'wowapi/yaml.lua',
     },
     outs = 'build.ninja',
