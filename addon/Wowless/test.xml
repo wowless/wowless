@@ -684,4 +684,18 @@
     assertEquals(nil, (next(WowlessLog)))
   </Script>
   -->
+
+  <Frame>
+    <Frames>
+      <Frame parentKey='foo' />
+      <Frame parentKey='foo' />
+    </Frames>
+    <Scripts>
+      <OnLoad>
+        assertEquals(2, self:GetNumChildren())
+        local _, f = self:GetChildren()
+        assertEquals(f, self.foo)
+      </OnLoad>
+    </Scripts>
+  </Frame>
 </Ui>

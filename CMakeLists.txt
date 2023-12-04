@@ -1,4 +1,11 @@
 cmake_minimum_required(VERSION 3.24)
+
+set(
+  CMAKE_TOOLCHAIN_FILE
+  ${CMAKE_CURRENT_SOURCE_DIR}/vcpkg/scripts/buildsystems/vcpkg.cmake
+  CACHE STRING "Vcpkg toolchain file"
+)
+
 project(wowless LANGUAGES C)
 
 # https://gitlab.kitware.com/cmake/cmake/-/issues/25245
@@ -109,32 +116,8 @@ set_target_properties(elune PROPERTIES C_STANDARD 11)
 add_executable(bootstraplua ${elune_SOURCE_DIR}/lua/lua.c)
 target_link_libraries(bootstraplua PRIVATE elune)
 
-FetchContent_Declare(
-  expat
-  GIT_REPOSITORY https://github.com/libexpat/libexpat.git
-  GIT_TAG R_2_5_0
-  SOURCE_SUBDIR disable_cmakelists_txt
-)
-FetchContent_MakeAvailable(expat)
-add_library(
-  expat STATIC
-  ${expat_SOURCE_DIR}/expat/lib/xmlparse.c
-  ${expat_SOURCE_DIR}/expat/lib/xmlrole.c
-  ${expat_SOURCE_DIR}/expat/lib/xmltok.c
-)
-block()
-  set(XML_DEV_URANDOM ON)
-  configure_file(
-    ${expat_SOURCE_DIR}/expat/expat_config.h.cmake
-    ${expat_BINARY_DIR}/expat_config.h
-  )
-endblock()
-target_include_directories(
-  expat PUBLIC
-  ${expat_SOURCE_DIR}/expat/lib
-  ${expat_BINARY_DIR}
-)
-target_compile_definitions(expat PUBLIC XML_STATIC)
+find_package(expat CONFIG REQUIRED)
+add_library(expat ALIAS expat::expat)
 
 function(lua2c name)
   set(deps ${ARGN})
@@ -162,34 +145,7 @@ add_library(
 )
 target_link_libraries(luaexpat PRIVATE elune expat)
 
-FetchContent_Declare(
-  yaml
-  GIT_REPOSITORY https://github.com/yaml/libyaml.git
-  GIT_TAG 0.2.5
-  SOURCE_SUBDIR disable_cmakelists_txt
-)
-FetchContent_MakeAvailable(yaml)
-add_library(
-  yaml STATIC
-  ${yaml_SOURCE_DIR}/src/api.c
-  ${yaml_SOURCE_DIR}/src/dumper.c
-  ${yaml_SOURCE_DIR}/src/emitter.c
-  ${yaml_SOURCE_DIR}/src/loader.c
-  ${yaml_SOURCE_DIR}/src/parser.c
-  ${yaml_SOURCE_DIR}/src/reader.c
-  ${yaml_SOURCE_DIR}/src/scanner.c
-  ${yaml_SOURCE_DIR}/src/writer.c
-)
-set_property(
-  SOURCE ${yaml_SOURCE_DIR}/src/api.c
-  APPEND PROPERTY COMPILE_DEFINITIONS
-  YAML_VERSION_MAJOR=0
-  YAML_VERSION_MINOR=2
-  YAML_VERSION_PATCH=5
-  YAML_VERSION_STRING="0.2.5"
-)
-target_include_directories(yaml PUBLIC ${yaml_SOURCE_DIR}/include)
-target_compile_definitions(yaml PUBLIC YAML_DECLARE_STATIC)
+find_package(yaml CONFIG REQUIRED)
 
 FetchContent_Declare(
   lyaml
@@ -220,33 +176,8 @@ set_property(
 )
 target_link_libraries(lyaml PRIVATE elune yaml)
 
-FetchContent_Declare(
-  zlib
-  URL https://zlib.net/fossils/zlib-1.3.tar.gz
-  URL_HASH SHA256=ff0ba4c292013dbc27530b3a81e1f9a813cd39de01ca5e0f8bf355702efa593e
-  SOURCE_SUBDIR disable_cmakelists_txt
-)
-FetchContent_MakeAvailable(zlib)
-add_library(
-  zlib STATIC
-  ${zlib_SOURCE_DIR}/adler32.c
-  ${zlib_SOURCE_DIR}/crc32.c
-  ${zlib_SOURCE_DIR}/compress.c
-  ${zlib_SOURCE_DIR}/deflate.c
-  ${zlib_SOURCE_DIR}/gzclose.c
-  ${zlib_SOURCE_DIR}/gzlib.c
-  ${zlib_SOURCE_DIR}/gzread.c
-  ${zlib_SOURCE_DIR}/gzwrite.c
-  ${zlib_SOURCE_DIR}/inflate.c
-  ${zlib_SOURCE_DIR}/infback.c
-  ${zlib_SOURCE_DIR}/inftrees.c
-  ${zlib_SOURCE_DIR}/inffast.c
-  ${zlib_SOURCE_DIR}/trees.c
-  ${zlib_SOURCE_DIR}/uncompr.c
-  ${zlib_SOURCE_DIR}/zutil.c
-)
-target_compile_definitions(zlib PRIVATE $<$<PLATFORM_ID:Darwin,Linux>:Z_HAVE_UNISTD_H>)
-target_include_directories(zlib PUBLIC ${zlib_SOURCE_DIR})
+find_package(ZLIB REQUIRED)
+add_library(zlib ALIAS ZLIB::ZLIB)
 
 FetchContent_Declare(
   lzlib
@@ -263,19 +194,8 @@ add_library(
 )
 target_link_libraries(lzlib PRIVATE elune zlib)
 
-FetchContent_Declare(
-  sqlite3
-  URL https://www.sqlite.org/2023/sqlite-amalgamation-3410200.zip
-  URL_HASH SHA3_256=c51ca72411b8453c64e0980be23bc9b9530bdc3ec1513e06fbf022ed0fd02463
-  SOURCE_SUBDIR disable_cmakelists_txt
-)
-FetchContent_MakeAvailable(sqlite3)
-add_library(
-  sqlite3 STATIC
-  ${sqlite3_SOURCE_DIR}/sqlite3.c
-)
-target_include_directories(sqlite3 PUBLIC ${sqlite3_SOURCE_DIR})
-target_link_libraries(sqlite3 PRIVATE $<$<PLATFORM_ID:Darwin,Linux>:dl pthread>)
+find_package(unofficial-sqlite3 CONFIG REQUIRED)
+add_library(sqlite3 ALIAS unofficial::sqlite3::sqlite3)
 
 FetchContent_Declare(
   lsqlite3
@@ -943,41 +863,8 @@ add_lua_executable(
   toolsutil
 )
 
-FetchContent_Declare(
-  libpng
-  GIT_REPOSITORY https://github.com/glennrp/libpng
-  GIT_TAG f8e5fa92b0e37ab597616f554bee254157998227
-  SOURCE_SUBDIR disable_cmakelists_txt
-)
-FetchContent_MakeAvailable(libpng)
-configure_file(
-  ${libpng_SOURCE_DIR}/scripts/pnglibconf.h.prebuilt
-  ${libpng_SOURCE_DIR}/pnglibconf.h
-)
-add_library(
-  libpng STATIC
-  ${libpng_SOURCE_DIR}/arm/arm_init.c
-  ${libpng_SOURCE_DIR}/arm/filter_neon.S
-  ${libpng_SOURCE_DIR}/arm/filter_neon_intrinsics.c
-  ${libpng_SOURCE_DIR}/arm/palette_neon_intrinsics.c
-  ${libpng_SOURCE_DIR}/png.c
-  ${libpng_SOURCE_DIR}/pngerror.c
-  ${libpng_SOURCE_DIR}/pngget.c
-  ${libpng_SOURCE_DIR}/pngmem.c
-  ${libpng_SOURCE_DIR}/pngpread.c
-  ${libpng_SOURCE_DIR}/pngread.c
-  ${libpng_SOURCE_DIR}/pngrio.c
-  ${libpng_SOURCE_DIR}/pngrtran.c
-  ${libpng_SOURCE_DIR}/pngrutil.c
-  ${libpng_SOURCE_DIR}/pngset.c
-  ${libpng_SOURCE_DIR}/pngtrans.c
-  ${libpng_SOURCE_DIR}/pngwio.c
-  ${libpng_SOURCE_DIR}/pngwrite.c
-  ${libpng_SOURCE_DIR}/pngwtran.c
-  ${libpng_SOURCE_DIR}/pngwutil.c
-)
-target_include_directories(libpng PUBLIC ${libpng_SOURCE_DIR})
-target_link_libraries(libpng PRIVATE zlib)
+find_package(PNG REQUIRED)
+add_library(libpng ALIAS PNG::PNG)
 
 FetchContent_Declare(
   imagemagick
