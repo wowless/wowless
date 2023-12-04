@@ -1,6 +1,7 @@
 {
   "dependencies": [
     "libpng",
+    "libyaml",
     "zlib"
   ]
 }

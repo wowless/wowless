@@ -169,34 +169,7 @@ add_library(
 )
 target_link_libraries(luaexpat PRIVATE elune expat)
 
-FetchContent_Declare(
-  yaml
-  GIT_REPOSITORY https://github.com/yaml/libyaml.git
-  GIT_TAG 0.2.5
-  SOURCE_SUBDIR disable_cmakelists_txt
-)
-FetchContent_MakeAvailable(yaml)
-add_library(
-  yaml STATIC
-  ${yaml_SOURCE_DIR}/src/api.c
-  ${yaml_SOURCE_DIR}/src/dumper.c
-  ${yaml_SOURCE_DIR}/src/emitter.c
-  ${yaml_SOURCE_DIR}/src/loader.c
-  ${yaml_SOURCE_DIR}/src/parser.c
-  ${yaml_SOURCE_DIR}/src/reader.c
-  ${yaml_SOURCE_DIR}/src/scanner.c
-  ${yaml_SOURCE_DIR}/src/writer.c
-)
-set_property(
-  SOURCE ${yaml_SOURCE_DIR}/src/api.c
-  APPEND PROPERTY COMPILE_DEFINITIONS
-  YAML_VERSION_MAJOR=0
-  YAML_VERSION_MINOR=2
-  YAML_VERSION_PATCH=5
-  YAML_VERSION_STRING="0.2.5"
-)
-target_include_directories(yaml PUBLIC ${yaml_SOURCE_DIR}/include)
-target_compile_definitions(yaml PUBLIC YAML_DECLARE_STATIC)
+find_package(yaml CONFIG REQUIRED)
 
 FetchContent_Declare(
   lyaml
