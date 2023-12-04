@@ -911,41 +911,8 @@ add_lua_executable(
   toolsdbc
 )
 
-FetchContent_Declare(
-  libpng
-  GIT_REPOSITORY https://github.com/glennrp/libpng
-  GIT_TAG f8e5fa92b0e37ab597616f554bee254157998227
-  SOURCE_SUBDIR disable_cmakelists_txt
-)
-FetchContent_MakeAvailable(libpng)
-configure_file(
-  ${libpng_SOURCE_DIR}/scripts/pnglibconf.h.prebuilt
-  ${libpng_SOURCE_DIR}/pnglibconf.h
-)
-add_library(
-  libpng STATIC
-  ${libpng_SOURCE_DIR}/arm/arm_init.c
-  ${libpng_SOURCE_DIR}/arm/filter_neon.S
-  ${libpng_SOURCE_DIR}/arm/filter_neon_intrinsics.c
-  ${libpng_SOURCE_DIR}/arm/palette_neon_intrinsics.c
-  ${libpng_SOURCE_DIR}/png.c
-  ${libpng_SOURCE_DIR}/pngerror.c
-  ${libpng_SOURCE_DIR}/pngget.c
-  ${libpng_SOURCE_DIR}/pngmem.c
-  ${libpng_SOURCE_DIR}/pngpread.c
-  ${libpng_SOURCE_DIR}/pngread.c
-  ${libpng_SOURCE_DIR}/pngrio.c
-  ${libpng_SOURCE_DIR}/pngrtran.c
-  ${libpng_SOURCE_DIR}/pngrutil.c
-  ${libpng_SOURCE_DIR}/pngset.c
-  ${libpng_SOURCE_DIR}/pngtrans.c
-  ${libpng_SOURCE_DIR}/pngwio.c
-  ${libpng_SOURCE_DIR}/pngwrite.c
-  ${libpng_SOURCE_DIR}/pngwtran.c
-  ${libpng_SOURCE_DIR}/pngwutil.c
-)
-target_include_directories(libpng PUBLIC ${libpng_SOURCE_DIR})
-target_link_libraries(libpng PRIVATE zlib)
+find_package(PNG REQUIRED)
+add_library(libpng ALIAS PNG::PNG)
 
 FetchContent_Declare(
   imagemagick
