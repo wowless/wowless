@@ -194,19 +194,8 @@ add_library(
 )
 target_link_libraries(lzlib PRIVATE elune zlib)
 
-FetchContent_Declare(
-  sqlite3
-  URL https://www.sqlite.org/2023/sqlite-amalgamation-3410200.zip
-  URL_HASH SHA3_256=c51ca72411b8453c64e0980be23bc9b9530bdc3ec1513e06fbf022ed0fd02463
-  SOURCE_SUBDIR disable_cmakelists_txt
-)
-FetchContent_MakeAvailable(sqlite3)
-add_library(
-  sqlite3 STATIC
-  ${sqlite3_SOURCE_DIR}/sqlite3.c
-)
-target_include_directories(sqlite3 PUBLIC ${sqlite3_SOURCE_DIR})
-target_link_libraries(sqlite3 PRIVATE $<$<PLATFORM_ID:Darwin,Linux>:dl pthread>)
+find_package(unofficial-sqlite3 CONFIG REQUIRED)
+add_library(sqlite3 ALIAS unofficial::sqlite3::sqlite3)
 
 FetchContent_Declare(
   lsqlite3
