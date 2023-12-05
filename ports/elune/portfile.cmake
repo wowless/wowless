@@ -8,6 +8,7 @@ vcpkg_from_github(
 vcpkg_cmake_configure(
   SOURCE_PATH "${SOURCE_PATH}"
   OPTIONS
+    -DBUILD_SHARED_LIBS=OFF
     -DBUILD_TESTING=OFF
     -DCMAKE_C_FLAGS=-D_GNU_SOURCE
     -DLUA_USE_READLINE=OFF
