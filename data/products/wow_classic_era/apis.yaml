@@ -5904,6 +5904,7 @@ C_Macro.GetNumIcons:
   - name: numIcons
     type: number
 C_Macro.SetMacroExecuteLineCallback:
+  impl: C_Macro.SetMacroExecuteLineCallback
   inputs:
   - name: cb
     type: function
