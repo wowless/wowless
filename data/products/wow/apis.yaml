@@ -21726,7 +21726,20 @@ Dismount:
   inputs: {}
   outputs: {}
 DisplayChannelOwner: {}
-DoEmote: {}
+DoEmote:
+  impl: DoEmote
+  inputs:
+  - name: token
+    type: string
+  - name: unit
+    nilable: true
+    type: unit
+  - name: hold
+    nilable: true
+    type: boolean
+  outputs:
+  - name: restricted
+    type: boolean
 DoesCurrentLocaleSellExpansionLevels:
   inputs: {}
   outputs:

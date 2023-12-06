@@ -156,6 +156,7 @@ CreateForbiddenFrame:
 CreateFrame:
   frameworks:
   - api
+DoEmote: {}
 EnumerateFrames:
   frameworks:
   - api
