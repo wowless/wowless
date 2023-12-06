@@ -188,14 +188,8 @@ local function run(cfg)
       end
       for k, v in require('pl.tablex').sort(cmds) do
         api.log(2, 'firing chat command ' .. k .. ' via ' .. v)
-        if api.datalua.events.EXECUTE_CHAT_LINE then
-          api.SendEvent('EXECUTE_CHAT_LINE', v)
-        elseif api.datalua.apis['C_Macro.SetMacroExecuteLineCallback'] then
-          if api.macroExecuteLineCallback then
-            api.CallSandbox(api.macroExecuteLineCallback, v)
-          end
-        else
-          error('unknown macro execution model')
+        if api.macroExecuteLineCallback then
+          api.CallSandbox(api.macroExecuteLineCallback, v)
         end
       end
     end,
