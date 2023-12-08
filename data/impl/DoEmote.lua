@@ -1,2 +1,3 @@
-print(...)
+local api, token, user, hold = ...
+api.log(1, 'DoEmote(%s, %s, %s) called', token, tostring(user), tostring(hold))
 return false
