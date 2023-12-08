@@ -116,6 +116,18 @@ local function run(cfg)
       api.NextFrame()
       api.SendEvent('PLAYER_REGEN_ENABLED')
     end,
+    emotes = function()
+      local cmds = {}
+      for k, v in pairs(api.env) do
+        cmds[v] = k:match('^EMOTE%d+_CMD%d+$') or nil
+      end
+      for cmd in require('pl.tablex').sort(cmds) do
+        api.log(2, 'firing emote chat command %s', cmd)
+        if api.macroExecuteLineCallback then
+          api.CallSandbox(api.macroExecuteLineCallback, cmd)
+        end
+      end
+    end,
     enterleave = function()
       for frame in api.frames:entries() do
         if frame:IsVisible() then
@@ -208,6 +220,7 @@ local function run(cfg)
     'macrotext',
     'bindings',
     'slashcmds',
+    'emotes',
     'events',
   }
   for _, script in ipairs(cfg.scripts and { strsplit(',', cfg.scripts) } or defaultScripts) do
