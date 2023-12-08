@@ -159,6 +159,8 @@ CreateFrame:
 DoEmote:
   frameworks:
   - api
+  sqls:
+  - lookup: DoEmote
 EnumerateFrames:
   frameworks:
   - api
