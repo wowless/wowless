@@ -5904,6 +5904,7 @@ C_Macro.GetNumIcons:
   - name: numIcons
     type: number
 C_Macro.SetMacroExecuteLineCallback:
+  impl: C_Macro.SetMacroExecuteLineCallback
   inputs:
   - name: cb
     type: function
@@ -9758,7 +9759,20 @@ Dismount:
   outputs: {}
 DisplayChannelOwner: {}
 DoCraft: {}
-DoEmote: {}
+DoEmote:
+  impl: DoEmote
+  inputs:
+  - name: token
+    type: string
+  - name: unit
+    nilable: true
+    type: unit
+  - name: hold
+    nilable: true
+    type: boolean
+  outputs:
+  - name: restricted
+    type: boolean
 DoesCurrentLocaleSellExpansionLevels:
   inputs: {}
   outputs:
