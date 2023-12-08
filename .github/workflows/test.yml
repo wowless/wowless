@@ -66,4 +66,4 @@ jobs:
     - uses: seanmiddleditch/gha-setup-ninja@v3
       if: matrix.config.generator == 'Ninja'
     - run: cmake -B build -G "${{ matrix.config.generator }}"
-    - run: cmake --build build
+    - run: cmake --build build --verbose
