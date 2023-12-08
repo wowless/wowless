@@ -3662,6 +3662,7 @@ C_ChatInfo.RegisterAddonMessagePrefix:
   - name: successfulRequest
     type: boolean
 C_ChatInfo.ReplaceIconAndGroupExpressions:
+  impl: C_ChatInfo.ReplaceIconAndGroupExpressions
   inputs:
   - name: input
     type: string

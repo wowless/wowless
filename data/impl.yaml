@@ -8,6 +8,7 @@ C_Calendar.SetAbsMonth:
 C_Calendar.SetMonth:
   states:
   - Calendar
+C_ChatInfo.ReplaceIconAndGroupExpressions: {}
 C_ClassTalents.GetActiveConfigID:
   states:
   - Talents
