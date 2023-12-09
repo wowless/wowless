@@ -144,7 +144,7 @@ local function spec2data(spec)
   write(header, {
     field_count = #spec.fields,
     field_storage_info_size = 24 * #spec.fields,
-    magic = 'WDC3',
+    magic = 'WDC4',
     pallet_data_size = pallet_size,
     record_size = record_size,
     section_count = #spec.sections,
@@ -231,7 +231,7 @@ describe('db2', function()
         assert.same(expected, collect(db2.rows, data, sig))
       end)
       it('works with luadbc', function()
-        assert.same(expected, collect(dbc.rows, data, sig))
+        assert.same(expected, collect(dbc.rows, 'WDC3' .. data:sub(5), sig))
       end)
     end)
   end

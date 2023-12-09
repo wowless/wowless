@@ -1,33 +1,33 @@
 ---
-wdc3, no sections, no fields:
+wdc4, no sections, no fields:
   fields: {}
   sections: {}
   sig: '{}'
-wdc3, no sections, two fields:
+wdc4, no sections, two fields:
   fields:
   - uncompressed
   - uncompressed
   sections: {}
   sig: '{uu}'
-wdc3, one empty section, no fields:
+wdc4, one empty section, no fields:
   fields: {}
   sections:
   - records: {}
   sig: '{}'
-wdc3, one empty section, one field:
+wdc4, one empty section, one field:
   fields:
   - uncompressed
   sections:
   - records: {}
   sig: '{u}'
-wdc3, one empty section, two fields:
+wdc4, one empty section, two fields:
   fields:
   - uncompressed
   - uncompressed
   sections:
   - records: {}
   sig: '{uu}'
-wdc3, one section, bitpacked_indexed field:
+wdc4, one section, bitpacked_indexed field:
   fields:
   - uncompressed
   - bitpacked_indexed
@@ -46,7 +46,7 @@ wdc3, one section, bitpacked_indexed field:
       - 31
       - 12
   sig: '{uu}'
-wdc3, one section, multiple bitpacked_indexed fields:
+wdc4, one section, multiple bitpacked_indexed fields:
   fields:
   - bitpacked_indexed
   - bitpacked_indexed
@@ -65,7 +65,7 @@ wdc3, one section, multiple bitpacked_indexed fields:
       - 31
       - 12
   sig: '{uu}'
-wdc3, one section, multiple bitpacked fields:
+wdc4, one section, multiple bitpacked fields:
   fields:
   - bitpacked
   - bitpacked
@@ -84,7 +84,7 @@ wdc3, one section, multiple bitpacked fields:
       - 31
       - 12
   sig: '{uu}'
-wdc3, one section, two integer fields:
+wdc4, one section, two integer fields:
   fields:
   - uncompressed
   - uncompressed
@@ -99,7 +99,7 @@ wdc3, one section, two integer fields:
       - 55
       - 66
   sig: '{uu}'
-wdc3, one section, two string fields:
+wdc4, one section, two string fields:
   fields:
   - uncompressed
   - uncompressed
