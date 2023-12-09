@@ -1336,6 +1336,22 @@ lua2c(
 add_library(wowlessdb2 STATIC wowlessdb2.c)
 target_link_libraries(wowlessdb2 PRIVATE elune)
 
+add_lua_executable(
+  db2compare
+  ${CMAKE_CURRENT_SOURCE_DIR}/tools/db2compare.lua
+  argparse
+  dbc
+  luafilesystem
+  penlight
+  vstruct
+  wowlessdb2
+)
+
+add_lua_executable(
+  db2dump
+  ${CMAKE_CURRENT_SOURCE_DIR}/tools/db2dump.lua
+)
+
 file(GENERATE OUTPUT runtime/platform.lua CONTENT "\
 return '\
 $<$<PLATFORM_ID:Darwin>:mac>\

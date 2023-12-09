@@ -13,7 +13,7 @@ local function collect(fn, data, sig)
 end
 
 local function compare(product)
-  local defs = require('build.products.' .. product .. '.dbdefs')
+  local defs = dofile('build/products/' .. product .. '/dbdefs.lua')
   for k, v in sorted(defs) do
     local data = readfile('extracts/' .. product .. '/db2/' .. k .. '.db2')
     local sig = '{' .. v.sig .. '}'
