@@ -1,3 +1,4 @@
-local env, name = ...
+local api, name = ...
 -- TODO a real implementation of GetClickFrame
-return env[name]
+local frame = api.env[name]
+return frame and api.UserData(frame)

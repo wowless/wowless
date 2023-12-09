@@ -1,6 +1,8 @@
 local args = (function()
   local parser = require('argparse')()
   parser:argument('product', 'product to fetch')
+  parser:option('-o --output', 'output file')
+  parser:option('-s --stamp', 'stamp file')
   return parser:parse()
 end)()
 
@@ -20,6 +22,8 @@ local plprettywrite = require('pl.pretty').write
 local Mixin = require('wowless.util').mixin
 
 local globals = parseYaml('data/products/' .. product .. '/globals.yaml')
+local structures = parseYaml('data/products/' .. product .. '/structures.yaml')
+local stringenums = parseYaml('data/stringenums.yaml')
 
 local function valstr(value)
   local ty = type(value)
@@ -47,22 +51,21 @@ local specDefault = (function()
     unknown = 'nil',
   }
   local structureDefaults = {}
-  local structures = parseYaml('data/products/' .. product .. '/structures.yaml')
   local specDefault
-  local function valstruct(name, mixin)
+  local function valstruct(name)
     if not structureDefaults[name] then
       local st = assert(structures[name], name)
       local t = {}
-      for fname, field in require('pl.tablex').sort(st) do
+      for fname, field in require('pl.tablex').sort(st.fields) do
         local v = specDefault(field)
         if v ~= 'nil' then
           table.insert(t, ('[%q]=%s'):format(fname, v))
         end
       end
-      structureDefaults[name] = '{' .. table.concat(t, ',') .. '}'
+      local str = '{' .. table.concat(t, ',') .. '}'
+      structureDefaults[name] = st.mixin and ('Mixin(%s,%q)'):format(str, st.mixin) or str
     end
-    local v = structureDefaults[name]
-    return mixin and ('Mixin(%s,%s)'):format(v, mixin) or v
+    return structureDefaults[name]
   end
   function specDefault(spec)
     if spec.stub ~= nil then
@@ -78,11 +81,18 @@ local specDefault = (function()
     if defaultOutputs[ty] then
       return defaultOutputs[ty]
     end
+    if stringenums[ty] then
+      local least
+      for k in pairs(stringenums[ty]) do
+        least = (least == nil or k < least) and k or least
+      end
+      return least
+    end
     if ty.arrayof then
       return '{' .. specDefault({ type = ty.arrayof }) .. '}'
     end
     if ty.structure then
-      return valstruct(ty.structure, ty.mixin)
+      return valstruct(ty.structure)
     end
     if ty.enum then
       local e = assert(globals.Enum[ty.enum], 'missing enum ' .. ty.enum)
@@ -114,7 +124,7 @@ do
   for name, apicfg in pairs(cfg) do
     if not apicfg.debug then
       if apicfg.impl then
-        local ic = implcfg[apicfg.impl]
+        local ic = assert(implcfg[apicfg.impl], 'missing impl ' .. apicfg.impl)
         apicfg.frameworks = ic.frameworks
         apicfg.sqls = ic.sqls
         apicfg.states = ic.states
@@ -195,42 +205,101 @@ local function mkuiobjectinit(k)
   end
   return init
 end
+-- Getters can manipulate inherited fields, so we need that info.
+local uiobjectfieldsets = {}
+local function mkuiobjectfieldset(k)
+  local set = uiobjectfieldsets[k]
+  if not set then
+    set = {}
+    local v = uiobjectdata[k]
+    for inh in pairs(v.inherits or {}) do
+      Mixin(set, mkuiobjectfieldset(inh))
+    end
+    for fk, fv in pairs(v.fields or {}) do
+      set[fk] = fv
+    end
+    uiobjectfieldsets[k] = set
+  end
+  return set
+end
 local uiobjects = {}
 for k, v in pairs(uiobjectdata) do
-  local constructor = { 'return {' }
+  local constructor = { 'function() return {' }
   for fk, fv in require('pl.tablex').sort(mkuiobjectinit(k)) do
     table.insert(constructor, ('  %s = %s,'):format(fk, fv))
   end
-  table.insert(constructor, '}')
+  table.insert(constructor, '} end')
+  local fieldset = mkuiobjectfieldset(k)
   local methods = {}
   for mk, mv in pairs(v.methods or {}) do
     if mv.impl then
       assert(uiobjectimpl[mv.impl])
-      methods[mk] = { impl = readFile('data/uiobjects/' .. mv.impl .. '.lua') }
+      methods[mk] = {
+        impl = 'function(...) ' .. readFile('data/uiobjects/' .. mv.impl .. '.lua') .. ' end',
+        inputs = mv.inputs,
+        mayreturnnothing = mv.mayreturnnothing,
+        outputs = mv.outputs,
+      }
     elseif mv.getter then
       local t = {}
       for _, f in ipairs(mv.getter) do
-        table.insert(t, 'x.' .. f.name)
+        if uiobjectdata[fieldset[f.name].type] then
+          table.insert(t, 'self.' .. f.name .. ' and self.' .. f.name .. '.luarep')
+        else
+          table.insert(t, 'self.' .. f.name)
+        end
       end
-      methods[mk] = { impl = 'local x = ...;return ' .. table.concat(t, ',') }
+      methods[mk] = 'function(self) return ' .. table.concat(t, ',') .. ' end'
     elseif mv.setter then
-      methods[mk] = { fields = mv.setter }
+      local t = { 'function(self' }
+      for _, f in ipairs(mv.setter) do
+        table.insert(t, ',')
+        table.insert(t, f.name)
+      end
+      table.insert(t, ') ')
+      for _, f in ipairs(mv.setter) do
+        local cf = fieldset[f.name]
+        table.insert(t, 'self.')
+        table.insert(t, f.name)
+        table.insert(t, '=')
+        if cf.type == 'boolean' then
+          table.insert(t, 'not not ')
+          table.insert(t, f.name)
+        else
+          local ct = { 'check.', cf.type, '(', f.name }
+          if cf.type == 'Texture' then
+            table.insert(ct, ',self')
+          end
+          table.insert(ct, ')')
+          local sct = table.concat(ct, '')
+          if f.nilable or cf.nilable then
+            table.insert(t, f.name)
+            table.insert(t, '~=nil and ')
+            table.insert(t, sct)
+            table.insert(t, ' or nil')
+          else
+            table.insert(t, sct)
+          end
+        end
+        table.insert(t, ';')
+      end
+      table.insert(t, ' end')
+      methods[mk] = table.concat(t, '')
     else
       local t = {}
       for _, output in ipairs(mv.outputs or {}) do
-        assert(output.type == 'number', 'unsupported type in ' .. k .. '.' .. mk)
-        table.insert(t, 1)
+        table.insert(t, specDefault(output))
       end
-      methods[mk] = { impl = 'return ' .. table.concat(t, ',') }
+      methods[mk] = 'function() return ' .. table.concat(t, ',') .. ' end'
     end
   end
   uiobjects[k] = {
     constructor = table.concat(constructor, '\n'),
-    fields = v.fields,
     inherits = v.inherits,
     methods = methods,
     objectType = v.objectType,
-    zombie = v.zombie,
+    singleton = v.singleton,
+    warner = v.warner,
   }
 end
 
@@ -242,14 +311,16 @@ local data = {
   events = events,
   globals = globals,
   impls = impls,
+  product = product,
   sqlcursors = sqlcursors,
   sqllookups = sqllookups,
   states = states,
+  structures = structures,
   uiobjects = uiobjects,
   xml = parseYaml('data/products/' .. product .. '/xml.yaml'),
 }
 
-local outfn = 'build/products/' .. args.product .. '/data.lua'
+local outfn = args.output or ('build/products/' .. args.product .. '/data.lua')
 local tu = require('tools.util')
-tu.writedeps(outfn, deps)
+tu.writedeps(outfn, deps, args.stamp)
 tu.writeifchanged(outfn, tu.returntable(data))

@@ -2,34 +2,14 @@ local util = require('wowless.util')
 local Mixin = util.mixin
 local hlist = require('wowless.hlist')
 
-local function toTexture(parent, tex, obj)
-  if type(tex) == 'string' or type(tex) == 'number' then
-    local t = obj or parent:CreateTexture()
-    t:SetTexture(tex)
-    return t
-  else
-    return tex
-  end
-end
-
 local function mkBaseUIObjectTypes(api)
-  local u = api.UserData
-
-  local function DoUpdateVisible(obj, script)
-    for kid in obj.children:entries() do
-      if kid.shown then
-        DoUpdateVisible(kid, script)
-      end
-    end
-    api.RunScript(obj, script)
-  end
-
-  local function UpdateVisible(obj, fn)
-    local wasVisible = obj:IsVisible()
-    fn()
-    local visibleNow = obj:IsVisible()
-    if wasVisible ~= visibleNow then
-      DoUpdateVisible(obj, visibleNow and 'OnShow' or 'OnHide')
+  local function toTexture(parent, tex, obj)
+    if type(tex) == 'string' or type(tex) == 'number' then
+      local t = obj or api.UserData(parent:CreateTexture())
+      t:SetTexture(tex)
+      return t
+    else
+      return tex and api.UserData(tex)
     end
   end
 
@@ -54,7 +34,7 @@ local function mkBaseUIObjectTypes(api)
           isa = isa,
           metaindex = metaindex,
           name = ty.cfg.objectType or k,
-          zombie = ty.cfg.zombie,
+          warner = ty.cfg.warner,
         }
       end
     end
@@ -66,7 +46,7 @@ local function mkBaseUIObjectTypes(api)
       local sandboxIndex = {}
       for n, f in pairs(v.metaindex) do
         sandboxIndex[n] = debug.newcfunction(function(obj, ...)
-          return f(u(obj), ...)
+          return f(api.UserData(obj), ...)
         end)
       end
       t[k] = {
@@ -75,26 +55,36 @@ local function mkBaseUIObjectTypes(api)
         isa = v.isa,
         name = v.name,
         sandboxMT = { __index = sandboxIndex },
-        zombie = v.zombie,
+        warner = v.warner,
       }
     end
     return t
   end
 
-  local env = {
-    api = api,
-    build = api.datalua.build,
-    toTexture = toTexture,
-    u = u,
-    UpdateVisible = UpdateVisible,
-  }
-  for k, v in pairs(_G) do
-    env[k] = v
+  local function wrapstrfn(s, fname, args, ...)
+    local wrapstr = ('local %s=...;return %s'):format(args, s)
+    local wrapfn = assert(loadstring(wrapstr, fname))
+    setfenv(wrapfn, _G)
+    return wrapfn(...)
   end
 
-  local constructorEnv = {
-    hlist = hlist,
-  }
+  local typechecker = require('wowless.typecheck')(api)
+
+  local check = setmetatable({
+    Texture = function(v, self)
+      return toTexture(self, v)
+    end,
+  }, {
+    __index = function(t, k)
+      local spec = { type = k }
+      local fn = function(v)
+        local vv, errmsg = typechecker(spec, v)
+        return errmsg and error(errmsg) or vv
+      end
+      t[k] = fn
+      return fn
+    end,
+  })
 
   local uiobjects = {}
   for name, cfg in pairs(api.datalua.uiobjects) do
@@ -107,66 +97,81 @@ local function mkBaseUIObjectTypes(api)
         return fn(self, ...)
       end
     end
-    local function wrapAll(map)
-      local mm = {}
-      for k, v in pairs(map) do
-        mm[k] = wrap(k, v)
+    local constructor = wrapstrfn(cfg.constructor, name, 'hlist', hlist)
+    if cfg.singleton then
+      local orig = constructor
+      local called = false
+      constructor = function()
+        assert(not called, name .. ' can only be created once')
+        called = true
+        return orig()
       end
-      return mm
     end
-    local constructor = setfenv(assert(loadstring(cfg.constructor)), constructorEnv)
     local mixin = {}
     for mname, method in pairs(cfg.methods) do
       local fname = name .. ':' .. mname
-      if method.impl then
-        local impl = assert(loadstring(method.impl, fname), 'function required on ' .. fname)
-        setfenv(impl, env)
-        mixin[mname] = impl
-      else
-        assert(method.fields, 'missing fields on ' .. fname)
-        mixin[mname] = function(self, ...)
-          for i, f in ipairs(method.fields) do
-            local v = select(i, ...)
-            local cf = cfg.fields[f.name]
-            local ty = cf.type
-            if ty == 'boolean' then
-              self[f.name] = not not v
-            elseif v == nil then
-              assert(f.nilable or cf.nilable, ('cannot set nil on %s.%s.%s'):format(name, mname, f.name))
-              self[f.name] = nil
-            elseif ty == 'texture' then
-              self[f.name] = toTexture(self, v)
-            elseif ty == 'number' then
-              self[f.name] = assert(tonumber(v), ('want number, got %s'):format(type(v)))
-            elseif ty == 'string' then
-              self[f.name] = tostring(v)
-            elseif ty == 'font' then
-              if type(v) == 'string' then
-                v = api.env[v]
-              end
-              assert(type(v) == 'table', 'expected font')
-              self[f.name] = v
-            elseif ty == 'frame' then
-              if type(v) == 'string' then
-                v = api.env[v]
-              end
-              assert(api.InheritsFrom(v:GetObjectType():lower(), 'frame'))
-              self[f.name] = v
-            elseif ty == 'table' then
-              assert(type(v) == 'table', 'expected table, got ' .. type(v))
-              self[f.name] = v
+      local function checkInputs(fn)
+        if not method.inputs then
+          return fn
+        end
+        local sig = method.inputs
+        local nsig = #method.inputs
+        return function(self, ...)
+          local args = {}
+          for i, param in ipairs(sig) do
+            local v, errmsg, iswarn = typechecker(param, (select(i, ...)))
+            if not errmsg then
+              args[i] = v
             else
-              error('unexpected type ' .. ty)
+              local msg = ('arg %d (%q) of %q %s'):format(i, tostring(param.name), fname, errmsg)
+              if iswarn then
+                api.log(1, 'warning: ' .. msg)
+              else
+                error(msg)
+              end
             end
           end
+          return fn(self, unpack(args, 1, nsig))
         end
       end
+      local function checkOutputs(fn)
+        if not method.outputs then
+          return fn
+        end
+        local outs = method.outputs
+        local nouts = #outs
+        local mayreturnnothing = method.mayreturnnothing
+        local function doCheckOutputs(...)
+          local n = select('#', ...)
+          if n == 0 and mayreturnnothing then
+            return
+          end
+          if #outs ~= n then
+            error(('wrong number of return values to %q: want %d, got %d'):format(fname, nouts, n))
+          end
+          local rets = {}
+          for i, out in ipairs(outs) do
+            local v, errmsg = typechecker(out, (select(i, ...)), true)
+            if errmsg then
+              error(('output %d (%q) of %q %s'):format(i, tostring(out.name), fname, errmsg))
+            end
+            rets[i] = v
+          end
+          return unpack(rets, 1, nouts)
+        end
+        return function(...)
+          return doCheckOutputs(fn(...))
+        end
+      end
+      local mtext = method.impl or method
+      local fn = wrap(mname, wrapstrfn(mtext, fname, 'api,toTexture,check', api, toTexture, check))
+      mixin[mname] = checkOutputs(checkInputs(fn))
     end
     uiobjects[name] = {
       cfg = cfg,
       constructor = constructor,
       inherits = cfg.inherits,
-      mixin = wrapAll(mixin),
+      mixin = mixin,
     }
   end
   return flatten(uiobjects)

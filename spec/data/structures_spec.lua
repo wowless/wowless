@@ -1,6 +1,12 @@
 describe('structures', function()
-  local parseYaml = require('wowapi.yaml').parseFile
-  for _, p in ipairs(require('wowless.util').productList()) do
+  for _, p in ipairs(require('build.data.products')) do
+    local api = require('wowless.api').new(function() end, 0, p)
+    local typechecker = require('wowless.typecheck')(api)
+    local function typecheck(spec, val)
+      local value, errmsg = typechecker(spec, val, true)
+      assert.Nil(errmsg)
+      assert.same(value, val)
+    end
     describe(p, function()
       local refs = {}
       local function refty(ty)
@@ -15,18 +21,16 @@ describe('structures', function()
           refty(x.type)
         end
       end
-      for _, api in pairs(parseYaml('data/products/' .. p .. '/apis.yaml')) do
-        for _, il in ipairs(api.inputs or {}) do
-          reflist(il)
-        end
-        reflist(api.outputs)
+      for _, v in pairs(require('build.data.products.' .. p .. '.apis')) do
+        reflist(v.inputs)
+        reflist(v.outputs)
       end
-      for _, v in pairs(parseYaml('data/products/' .. p .. '/events.yaml')) do
+      for _, v in pairs(require('build.data.products.' .. p .. '.events')) do
         for _, pv in ipairs(v.payload or {}) do
           refty(pv.type)
         end
       end
-      local actual = parseYaml('data/products/' .. p .. '/structures.yaml')
+      local actual = require('build.data.products.' .. p .. '.structures')
       local expected = {}
       local function close(ty)
         if ty.arrayof then
@@ -34,7 +38,7 @@ describe('structures', function()
         elseif ty.structure then
           if not expected[ty.structure] then
             expected[ty.structure] = true
-            for _, fv in pairs(actual[ty.structure] or {}) do
+            for _, fv in pairs((actual[ty.structure] or {}).fields) do
               close(fv.type)
             end
           end
@@ -59,6 +63,24 @@ describe('structures', function()
           end)
         end
       end)
+      for k, v in pairs(actual) do
+        describe(k, function()
+          for fk, fv in pairs(v.fields) do
+            describe(fk, function()
+              if fv.default ~= nil then
+                it('has default of the right type', function()
+                  typecheck(fv, fv.default)
+                end)
+              end
+              if fv.stub ~= nil then
+                it('has stub of the right type', function()
+                  typecheck(fv, fv.stub)
+                end)
+              end
+            end)
+          end
+        end)
+      end
     end)
   end
 end)

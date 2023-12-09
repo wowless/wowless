@@ -4,17 +4,19 @@ type:
   oneof:
   - literal: boolean
   - literal: function
+  - literal: gender
   - literal: nil
   - literal: number
   - literal: oneornil
   - literal: string
   - literal: table
+  - literal: tonumber
+  - literal: tostring
+  - literal: uiAddon
   - literal: unit
   - literal: unknown
   - literal: userdata
   - record:
-      mixin:
-        type: string
       structure:
         required: true
         type:
@@ -29,3 +31,5 @@ type:
         required: true
         type:
           ref: enum
+  - ref: stringenum
+  - ref: uiobject

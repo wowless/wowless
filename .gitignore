@@ -1,9 +1,11 @@
+/.env
+/.idea/
 /.ninja_deps
 /.ninja_log
+/.vs/
 /build/
 /build.ninja
 /cache
 /extracts
-/luacov.*
 /out/
 /test.out

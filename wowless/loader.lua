@@ -49,23 +49,27 @@ local function loader(api, cfg)
     return newtree
   end)()
 
-  local function parseTypedValue(type, value)
-    type = type and string.lower(type) or nil
-    if type == 'number' then
+  local function parseTypedValue(ty, value)
+    ty = ty and string.lower(ty) or nil
+    if ty == 'number' then
       return tonumber(value)
-    elseif type == 'global' then
+    elseif ty == 'global' then
       local t = api.env
       for part in value:gmatch('[^.]+') do
+        if type(t) ~= 'table' then
+          api.log(1, 'warning: cannot find %q in _G', value)
+          return nil
+        end
         t = t[part]
       end
       return t
-    elseif type == 'boolean' or type == 'bool' then
+    elseif ty == 'boolean' or ty == 'bool' then
       return (value == 'true')
-    elseif type == 'string' or type == nil then
+    elseif ty == 'string' or ty == nil then
       local n = tonumber(value)
       return n ~= nil and n or value
     else
-      error('invalid keyvalue/attribute type ' .. type)
+      error('invalid keyvalue/attribute type ' .. ty)
     end
   end
 
@@ -93,7 +97,9 @@ local function loader(api, cfg)
 
   local function getColor(e)
     local name = e.attr.name or e.attr.color
-    if name then
+    if name == 'GREEN_FONT_COLOR' and datalua.build.flavor == 'Vanilla' then -- issue #303
+      return e.attr.r or 0, e.attr.g or 0, e.attr.b or 0, e.attr.a or 1
+    elseif name then
       return assert(api.env[name], ('unknown color %q'):format(name)):GetRGBA()
     else
       return e.attr.r or 0, e.attr.g or 0, e.attr.b or 0, e.attr.a or 1
@@ -102,11 +108,9 @@ local function loader(api, cfg)
 
   local function loadLuaString(filename, str, line, closureTaint, ...)
     local before = api.env.ScrollingMessageFrameMixin
-    local fn = setfenv(loadstr(str, filename, line), api.env)
-    api.CallSafely(function(...)
-      debug.setnewclosuretaint(closureTaint)
-      fn(...)
-    end, ...)
+    local fn = loadstr(str, filename, line)
+    debug.setnewclosuretaint(closureTaint)
+    api.CallSandbox(fn, ...)
     debug.setnewclosuretaint(nil)
     -- Super hacky hack to hook ScrollingMessageFrameMixin.AddMessage
     local after = api.env.ScrollingMessageFrameMixin
@@ -131,7 +135,7 @@ local function loader(api, cfg)
       end
     elseif script.attr.method then
       local mattr = script.attr.method
-      fn = obj[mattr]
+      fn = obj.luarep[mattr]
       if not fn then
         api.log(2, 'unknown script method %q on %q', mattr, obj:GetDebugName())
       end
@@ -140,11 +144,12 @@ local function loader(api, cfg)
     elseif script.text then
       local args = xmlimpls[string.lower(script.type)].tag.script.args or 'self, ...'
       local fnstr = 'return function(' .. args .. ') ' .. script.text .. ' end'
-      fn = setfenv(loadstr(fnstr, filename, script.line), env)()
+      local outfn = loadstr(fnstr, filename, script.line)
+      fn = setfenv(outfn(), env)
       scriptCache[script] = fn
     end
-    if api.UserData(obj).scripts then
-      local old = api.UserData(obj).scripts[1][script.type:lower()]
+    if obj.scripts then
+      local old = obj.scripts[1][script.type:lower()]
       if old and fn and script.attr.inherit then
         local bfn = fn
         if script.attr.inherit == 'prepend' then
@@ -160,6 +165,7 @@ local function loader(api, cfg)
         else
           error('invalid inherit tag on script')
         end
+        setfenv(fn, env)
       end
       assert(not script.attr.intrinsicorder or intrinsic, 'intrinsicOrder on non-intrinsic')
       local bindingType = 1
@@ -196,11 +202,11 @@ local function loader(api, cfg)
       local point = anchor.attr.point
       local relativeTo
       if anchor.attr.relativeto then
-        relativeTo = api.ParentSub(anchor.attr.relativeto, parent:GetParent())
+        relativeTo = api.ParentSub(anchor.attr.relativeto, parent.parent)
       elseif anchor.attr.relativekey then
         relativeTo = navigate(parent, anchor.attr.relativekey)
       else
-        relativeTo = api.UserData(parent).parent
+        relativeTo = parent.parent and parent.parent.luarep
       end
       local relativePoint = anchor.attr.relativepoint or point
       local offsetX, offsetY = getXY(anchor.kids[#anchor.kids])
@@ -211,24 +217,23 @@ local function loader(api, cfg)
     attribute = function(_, e, parent)
       -- TODO share code with SetAttribute somehow
       local a = e.attr
-      api.UserData(parent).attributes[a.name] = parseTypedValue(a.type, a.value)
+      parent.attributes[a.name] = parseTypedValue(a.type, a.value)
     end,
     barcolor = function(_, e, parent)
       parent:SetStatusBarColor(getColor(e))
     end,
     color = function(ctx, e, parent)
       local r, g, b, a = getColor(e)
-      local p = api.UserData(parent)
-      if api.InheritsFrom(p.type, 'texturebase') then
+      if api.InheritsFrom(parent.type, 'texturebase') then
         parent:SetColorTexture(r, g, b, a)
-      elseif api.InheritsFrom(p.type, 'fontinstance') then
+      elseif api.InheritsFrom(parent.type, 'fontinstance') then
         if ctx.shadow then
           parent:SetShadowColor(r, g, b, a)
         else
           parent:SetTextColor(r, g, b, a)
         end
       else
-        error('cannot apply color to ' .. p.type)
+        error('cannot apply color to ' .. parent.type)
       end
     end,
     fontheight = function(_, e, parent)
@@ -247,13 +252,9 @@ local function loader(api, cfg)
       if minColor and maxColor then
         local minR, minG, minB, minA = getColor(minColor)
         local maxR, maxG, maxB, maxA = getColor(maxColor)
-        if parent.SetGradientAlpha then
-          parent:SetGradientAlpha(e.attr.orientation, minR, minG, minB, minA, maxR, maxG, maxB, maxA)
-        else
-          local min = { r = minR, g = minG, b = minB, a = minA }
-          local max = { r = maxR, g = maxG, b = maxB, a = maxA }
-          parent:SetGradient(e.attr.orientation, min, max)
-        end
+        local min = { r = minR, g = minG, b = minB, a = minA }
+        local max = { r = maxR, g = maxG, b = maxB, a = maxA }
+        parent:SetGradient(e.attr.orientation, min, max)
       end
     end,
     highlightcolor = function(_, e, parent)
@@ -264,10 +265,10 @@ local function loader(api, cfg)
     end,
     keyvalue = function(_, e, parent)
       local a = e.attr
-      parent[a.key] = parseTypedValue(a.type, a.value)
+      parent.luarep[a.key] = parseTypedValue(a.type, a.value)
     end,
     maskedtexture = function(_, e, parent)
-      local t = navigate(parent:GetParent(), e.attr.childkey)
+      local t = navigate(parent.parent and parent.parent.luarep, e.attr.childkey)
       if t then
         t:AddMaskTexture(parent)
       else
@@ -335,39 +336,41 @@ local function loader(api, cfg)
     end,
   }
 
-  local function forAddon(addonName, addonEnv)
+  local function forAddon(addonName, addonEnv, addonRoot, isSecure)
     local loadFile
 
     local xmlattrlang = {
       hidden = function(_, obj, value)
-        api.UserData(obj).shown = not value
+        obj.shown = not value
       end,
       mixin = function(ctx, obj, value)
         local env = ctx.useAddonEnv and addonEnv or api.env
         for _, m in ipairs(value) do
-          mixin(obj, env[m])
+          mixin(obj.luarep, env[m])
         end
       end,
       parent = function(_, obj, value)
-        api.SetParent(obj, api.env[value])
+        local parent = api.env[value]
+        api.SetParent(obj, parent and api.UserData(parent))
       end,
       parentarray = function(_, obj, value)
-        local p = api.UserData(obj).parent
+        local p = obj.parent
         if p then
+          p = p.luarep
           p[value] = p[value] or {}
-          table.insert(p[value], obj)
+          table.insert(p[value], obj.luarep)
         end
       end,
       parentkey = function(_, obj, value)
-        local p = api.UserData(obj).parent
+        local p = obj.parent
         if p then
-          p[value] = obj
+          p.luarep[value] = obj.luarep
         end
       end,
       securemixin = function(ctx, obj, value)
         local env = ctx.useAddonEnv and addonEnv or api.env
         for _, m in ipairs(value) do
-          mixin(obj, env[m])
+          mixin(obj.luarep, env[m])
         end
       end,
       setallpoints = function(_, obj, value)
@@ -384,30 +387,28 @@ local function loader(api, cfg)
         if attr.impl == 'internal' then
           xmlattrlang[attr.name](ctx, obj, v)
         elseif attr.impl == 'loadfile' then
-          loadFile(path.join(dir, v))
+          loadFile(path.join(dir, v), nil, path.join(addonRoot, v))
         elseif attr.impl.scope then
           return { [attr.impl.scope] = v }
         elseif attr.impl.method then
-          local ud = api.UserData(obj)
-          local fn = ud[attr.impl.method]
-          assert(fn, ('missing method %q on object type %q'):format(attr.impl.method, api.UserData(obj).type))
+          local fn = obj[attr.impl.method]
+          assert(fn, ('missing method %q on object type %q'):format(attr.impl.method, obj.type))
           if type(v) == 'table' then -- stringlist
-            fn(ud, unpack(v))
+            fn(obj, unpack(v))
           else
-            fn(ud, v)
+            fn(obj, v)
           end
         elseif attr.impl.field then
-          api.UserData(obj)[attr.impl.field] = v
+          obj[attr.impl.field] = v
         else
           error('invalid attribute impl for ' .. attr.name)
         end
       end
 
       local function processAttrs(ctx, e, obj, phase)
-        local objty = api.UserData(obj).type
+        local objty = obj.type
         local attrs = (xmlimpls[objty] or intrinsics[objty]).attrs
         for k, v in pairs(e.attr) do
-          -- This assumes that uiobject types and xml types are the same "space" of strings.
           local attr = attrs[k]
           if attr and phase == attr.phase then
             processAttr(ctx, attr, obj, v)
@@ -465,7 +466,8 @@ local function loader(api, cfg)
       end
 
       function loadElement(ctx, e, parent)
-        if api.IsIntrinsicType(e.type) then
+        -- This assumes that uiobject types and xml types are the same "space" of strings.
+        if api.IsIntrinsicType(e.type) or e.type == 'worldframe' then
           ctx = not e.attr.intrinsic and ctx or mixin({}, ctx, { intrinsic = true })
           local template = {
             inherits = e.attr.inherits,
@@ -511,13 +513,10 @@ local function loader(api, cfg)
               if virtual and ctx.ignoreVirtual then
                 api.log(1, 'ignoring virtual on ' .. tostring(name))
               end
-              return api.CreateUIObject(
-                e.type,
-                name,
-                parent and api.UserData(parent),
-                ctx.useAddonEnv and addonEnv or nil,
-                { template }
-              )
+              if e.type ~= 'worldframe' or not addonEnv then
+                local ety = e.type == 'worldframe' and 'frame' or e.type
+                return api.CreateUIObject(ety, name, parent, ctx.useAddonEnv and addonEnv or nil, { template })
+              end
             end
           end
         else
@@ -531,10 +530,9 @@ local function loader(api, cfg)
           elseif type(impl) == 'table' then
             local elt = impl.argument == 'lastkid' and e.kids[#e.kids] or mixin({}, e, { type = impl.argument })
             local obj = loadElement(ctx, elt, parent)
-            local up = api.UserData(parent)
             -- TODO find if this if needs to be broader to everything here including kids
-            if up:IsObjectType(impl.parenttype) then
-              up[impl.parentmethod](up, obj)
+            if parent:IsObjectType(impl.parenttype) then
+              parent[impl.parentmethod](parent, obj.luarep)
             end
           elseif impl == 'transparent' or impl == 'loadstring' then
             local ctxmix = mixin({}, ctx)
@@ -552,7 +550,7 @@ local function loader(api, cfg)
             -- TODO interpret all binding attributes
             if not e.attr.debug then -- TODO support debug bindings
               local bfn = 'return function(keystate) ' .. e.text .. ' end'
-              api.states.Bindings[e.attr.name] = setfenv(loadstr(bfn, filename, e.line), api.env)()
+              api.states.Bindings[e.attr.name] = loadstr(bfn, filename, e.line)()
             end
           elseif e.type == 'fontfamily' then -- TODO do this another way
             local font = e.kids[1].kids[1]
@@ -583,7 +581,7 @@ local function loader(api, cfg)
       end)
     end
 
-    function loadFile(filename, closureTaint)
+    function loadFile(filename, closureTaint, secondaryFileName)
       filename = path.normalize(filename)
       api.CallSafely(function()
         api.log(2, 'loading file %s', filename)
@@ -596,8 +594,19 @@ local function loader(api, cfg)
           error('unknown file type ' .. filename)
         end
         local success, content = pcall(readFile, filename)
+        if not success and secondaryFileName then
+          success, content = pcall(readFile, secondaryFileName)
+        end
         if success then
-          loadFn(filename, content, nil, closureTaint, addonName, addonEnv)
+          loadFn(
+            filename,
+            content,
+            nil,
+            closureTaint,
+            addonName,
+            addonEnv,
+            isSecure and api.env.SecureCapsuleGet or nil
+          )
         else
           api.log(1, 'skipping missing file %s', filename)
         end
@@ -608,7 +617,7 @@ local function loader(api, cfg)
   end
 
   local build = datalua.build
-  local flavors = require('build.flavors')
+  local flavors = require('runtime.flavors')
 
   local function parseToc(tocFile, content)
     local attrs = {}
@@ -658,26 +667,50 @@ local function loader(api, cfg)
       error('fell off the end of time')
     end)
 
-    local cancelled = setmetatable({}, { __mode = 'k' })
-    local tickerMT = {
-      __index = {
-        Cancel = debug.newcfunction(function(self)
-          cancelled[self] = true
-        end),
-        IsCancelled = debug.newcfunction(function(self)
-          return cancelled[self]
-        end),
-      },
-      __metatable = false,
+    local state = setmetatable({}, { __mode = 'k' })
+    local index = {
+      Cancel = debug.newcfunction(function(self)
+        state[self].cancelled = true
+      end),
+      Invoke = debug.newcfunction(function(self, ...)
+        state[self].callback(...)
+      end),
+      IsCancelled = debug.newcfunction(function(self)
+        return state[self].cancelled
+      end),
     }
+    local tickerMT
+    tickerMT = {
+      __eq = function(u1, u2)
+        return state[u1].table == state[u2].table
+      end,
+      __index = function(u, k)
+        return index[k] or state[u].table[k]
+      end,
+      __metatable = false,
+      __newindex = function(u, k, v)
+        if index[k] or tickerMT[k] ~= nil then
+          error('Attempted to assign to read-only key ' .. k)
+        end
+        state[u].table[k] = v
+      end,
+    }
+    local mtproxy = newproxy(true)
+    mixin(getmetatable(mtproxy), tickerMT)
     time.newTicker = function(seconds, callback, iterations)
-      local p = newproxy(true)
-      mixin(getmetatable(p), tickerMT)
-      cancelled[p] = false
+      assert(getfenv(callback) ~= _G, 'wowless bug: framework callback in newTicker')
+      local p = newproxy(mtproxy)
+      state[p] = {
+        callback = callback,
+        cancelled = false,
+        table = {},
+      }
       local count = 0
       local function cb()
-        if not cancelled[p] and count < iterations then
-          callback()
+        if not state[p].cancelled and count < iterations then
+          local np = newproxy(p)
+          state[np] = state[p]
+          callback(np)
           count = count + 1
           time.timers:push(time.stamp + seconds, cb)
         end
@@ -686,8 +719,6 @@ local function loader(api, cfg)
       return p
     end
   end
-
-  api.states.CVars.portal = build.ptr and 'test' or ''
 
   local sqlitedb = (function()
     local dbfile = ('build/products/%s/%s.sqlite3'):format(product, rootDir and 'data' or 'schema')
@@ -705,6 +736,7 @@ local function loader(api, cfg)
         if addon then
           addon.name = name
           addon.fdid = fdid
+          addon.dir = dir
           addonData[name:lower()] = addon
           table.insert(addonData, addon)
         end
@@ -756,7 +788,7 @@ local function loader(api, cfg)
         end
       end
       api.log(1, 'loading addon files for %s', addonName)
-      local loadFile = forAddon(addonName, {})
+      local loadFile = forAddon(addonName, {}, toc.dir, not not toc.fdid)
       for _, file in ipairs(toc.files) do
         loadFile(file)
       end
@@ -777,18 +809,23 @@ local function loader(api, cfg)
     end
   end
 
+  local function isLoadable(toc)
+    return toc.attrs.OnlyBetaAndPTR ~= '1' or datalua.cvars.agentuid.value == 'wow_ptr'
+  end
+
   local function loadFrameXml()
-    local loadFile = forAddon()
+    local tocdir = path.join(rootDir, 'Interface', 'FrameXML')
+    local loadFile = forAddon(nil, nil, tocdir, true)
     for tag, text in sqlitedb:urows('SELECT BaseTag, TagText_lang FROM GlobalStrings') do
       api.env[tag] = text
     end
-    for _, file in ipairs(resolveTocDir(path.join(rootDir, 'Interface', 'FrameXML')).files) do
+    for _, file in ipairs(resolveTocDir(tocdir).files) do
       loadFile(file)
     end
     loadFile(path.join(rootDir, flavors[build.flavor].dir, 'FrameXML', 'Bindings.xml'))
     local blizzardAddons = {}
     for name, toc in pairs(addonData) do
-      if type(name) == 'string' and toc.fdid and toc.attrs.LoadOnDemand ~= '1' then
+      if type(name) == 'string' and toc.fdid and toc.attrs.LoadOnDemand ~= '1' and isLoadable(toc) then
         table.insert(blizzardAddons, name)
       end
     end

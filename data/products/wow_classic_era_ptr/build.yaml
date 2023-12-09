@@ -1,9 +1,8 @@
 ---
-build: '48520'
-date: Mar 10 2023
-flavor: Mainline
-hash: 342cb61b327771f28b16bbae0862e26a
-ptr: true
+build: '52302'
+date: Nov 22 2023
+flavor: Vanilla
+hash: 809ea54b936aa786757a76a8372d0218
 test: false
-tocversion: 100007
-version: 10.0.7
+tocversion: 11500
+version: 1.15.0

@@ -1,9 +1,6 @@
 local function run(cfg)
   assert(cfg, 'missing configuration')
   assert(cfg.product, 'missing product')
-  _G.loadstring = debug.newcfunction(function(...)
-    return _G.loadstring_untainted(...) -- elune rewrite hack
-  end)
   local loglevel = cfg.loglevel or 0
   local time0 = os.clock()
   local function log(level, fmt, ...)
@@ -12,6 +9,37 @@ local function run(cfg)
     end
   end
   local api = require('wowless.api').new(log, cfg.maxErrors, cfg.product)
+
+  -- begin WARNING WARNING WARNING
+  --[[
+  The following lines of code are very magical.
+
+  The third line sets the global table for this Lua state to the
+  sandbox env table. This is necessary for the correct behavior of
+  some elune functionality, like securecall, hooksecurefunc,
+  and loadstring.
+
+  This does not affect wowless framework code. Any globals it
+  references from Lua are done via the environment table, which
+  remains unchanged from when it was (pre)loaded.
+
+  Any later loadstring'd framework code must be setfenv'd to the
+  host environment _G, since loadstring'd code is born with an
+  environment pointing to the current global table. See the api and
+  uiobject loaders for where this happens.
+
+  The first and second lines eagerly load modules which write to
+  the global table.
+
+  The fourth line is required because print depends on tostring from
+  the global table. TODO remove this dependency
+  ]]
+  require('lfs')
+  require('lsqlite3')
+  require('wowless.ext').setglobaltable(api.env)
+  api.env.tostring = tostring
+  -- end WARNING WARNING WARNING
+
   local loader = require('wowless.loader').loader(api, {
     otherAddonDirs = cfg.otherAddonDirs,
     product = cfg.product,
@@ -51,11 +79,14 @@ local function run(cfg)
     end
     doit('frame0')
     if api.env.ToggleTalentFrame then
-      api.CallSafely(api.env.ToggleTalentFrame)
+      api.CallSandbox(api.env.ToggleTalentFrame)
       doit('frame1')
     end
     os.exit(0)
   end
+
+  local datalua = require('build.products.' .. cfg.product .. '.data')
+  local runnercfg = datalua.config.runner or {}
 
   local scripts = {
     bindings = function()
@@ -67,12 +98,8 @@ local function run(cfg)
       for _, name in ipairs(names) do
         local fn = api.states.Bindings[name]
         api.log(2, 'firing binding ' .. name)
-        api.CallSafely(function()
-          fn('down')
-        end)
-        api.CallSafely(function()
-          fn('up')
-        end)
+        api.CallSandbox(fn, 'down')
+        api.CallSandbox(fn, 'up')
       end
     end,
     clicks = function()
@@ -89,6 +116,18 @@ local function run(cfg)
       api.NextFrame()
       api.SendEvent('PLAYER_REGEN_ENABLED')
     end,
+    emotes = function()
+      local cmds = {}
+      for k, v in pairs(api.env) do
+        cmds[v] = k:match('^EMOTE%d+_CMD%d+$') or nil
+      end
+      for cmd in require('pl.tablex').sort(cmds) do
+        api.log(2, 'firing emote chat command %s', cmd)
+        if api.macroExecuteLineCallback then
+          api.CallSandbox(api.macroExecuteLineCallback, cmd)
+        end
+      end
+    end,
     enterleave = function()
       for frame in api.frames:entries() do
         if frame:IsVisible() then
@@ -100,7 +139,6 @@ local function run(cfg)
     end,
     events = function()
       local eventBlacklist = {
-        BARBER_SHOP_OPEN = true, -- issue #111
         INSPECT_HONOR_UPDATE = true, -- INSPECTED_UNIT shenanigans
         INSTANCE_LOCK_START = true,
         INSTANCE_LOCK_WARNING = true,
@@ -111,24 +149,18 @@ local function run(cfg)
         STORE_GUILD_MASTER_INFO_RECEIVED = true, -- SelectedRealm shenanigans
         UPDATE_MASTER_LOOT_LIST = true,
         VARIABLES_LOADED = true,
-        VOICE_CHAT_VAD_SETTINGS_UPDATED = true, -- inconsistent with nilable C_VoiceChat outputs
       }
-      local datalua = require('build.products.' .. cfg.product .. '.data')
-      local skip = (datalua.config.runner or {}).skip_events or {}
+      local skip = runnercfg.skip_events or {}
       -- TODO unify with wowapi/loader
-      local stubenv = setmetatable({}, {
-        __index = function(_, k)
-          return k == 'Mixin' and require('wowless.util').mixin or api.env[k]
-        end,
-        __metatable = 'stub metatable',
-        __newindex = function()
-          error('cannot modify _G from a stub')
-        end,
-      })
+      local mixin = require('wowless.util').mixin
+      local function stubMixin(t, name)
+        return mixin(t, api.env[name])
+      end
       for k, v in require('pl.tablex').sort(datalua.events) do
         if v.payload and not eventBlacklist[k] and not skip[k] then
           if v.payload == 'return ' or cfg.allevents then
-            api.SendEvent(k, setfenv(assert(loadstring(v.payload)), stubenv)())
+            local text = 'local Mixin = ...;' .. v.payload
+            api.SendEvent(k, assert(loadstring(text))(stubMixin))
           end
         end
       end
@@ -151,24 +183,26 @@ local function run(cfg)
       end
     end,
     slashcmds = function()
-      local cmdBlacklist = { -- TODO remove this; these require a better SecureCmdOptionParse
-        BENCHMARK = true,
-        CASTRANDOM = true,
-        EVENT = true, -- throws Lua errors if text isn't a valid event
-        LOOT_MASTER = true, -- broken
-        PTRFEEDBACK = true, -- this just seems broken with an empty string
-        USERANDOM = true,
-      }
       local cmds = {}
       for k, v in pairs(api.env) do
         local cmd = k:match('^SLASH_(.+)1$')
-        if cmd and not cmdBlacklist[cmd] then
+        if cmd then
           cmds[cmd] = v
+        end
+      end
+      if cfg.dir then
+        for k in pairs(runnercfg.skip_slashcmds or {}) do
+          api.CallSafely(function()
+            assert(cmds[k], 'missing skip_slashcmd ' .. k)
+          end)
+          cmds[k] = nil
         end
       end
       for k, v in require('pl.tablex').sort(cmds) do
         api.log(2, 'firing chat command ' .. k .. ' via ' .. v)
-        api.SendEvent('EXECUTE_CHAT_LINE', v)
+        if api.macroExecuteLineCallback then
+          api.CallSandbox(api.macroExecuteLineCallback, v)
+        end
       end
     end,
     update = function()
@@ -186,6 +220,7 @@ local function run(cfg)
     'macrotext',
     'bindings',
     'slashcmds',
+    'emotes',
     'events',
   }
   for _, script in ipairs(cfg.scripts and { strsplit(',', cfg.scripts) } or defaultScripts) do
@@ -197,7 +232,17 @@ local function run(cfg)
 
   api.SendEvent('PLAYER_LOGOUT')
   loader.saveAllVariables()
-  return api
+
+  -- Last ditch invariant check.
+  for _, obj in pairs(api.uiobjects) do
+    assert(api.UserData(obj.luarep) == obj)
+    for k, v in pairs(obj) do
+      assert(type(v) ~= 'table' or (k ~= 'luarep') == not api.UserData(v), k)
+    end
+  end
+  assert(issecure(), 'wowless bug: framework is tainted')
+
+  return api, loader
 end
 
 return {

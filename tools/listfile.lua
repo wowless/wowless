@@ -1,11 +1,15 @@
+local args = (function()
+  local parser = require('argparse')()
+  parser:argument('manifest', 'manifest.json')
+  parser:argument('output', 'output.lua')
+  return parser:parse()
+end)()
 local t = {}
-local listfile = require('pl.file').read('vendor/listfile/community-listfile.csv')
-for line in listfile:gmatch('[^\r\n]+') do
-  local id, name = line:match('(%d+);dbfilesclient/([a-z0-9-_]+).db2')
+local listfile = require('pl.file').read(args.manifest)
+for _, e in ipairs(require('cjson').decode(listfile)) do
+  local id = e.db2FileDataID
   if id then
-    t[name] = tonumber(id)
+    t[e.tableName:lower()] = tonumber(id)
   end
 end
-
-local u = require('tools.util')
-u.writeifchanged('build/listfile.lua', u.returntable(t))
+require('pl.file').write(args.output, require('tools.util').returntable(t))

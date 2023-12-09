@@ -1,8 +1,4 @@
 ---
-acos: {}
-asin: {}
-atan: {}
-atan2: {}
 C_Calendar.GetMonthInfo:
   states:
   - Calendar
@@ -12,7 +8,19 @@ C_Calendar.SetAbsMonth:
 C_Calendar.SetMonth:
   states:
   - Calendar
+C_ChatInfo.ReplaceIconAndGroupExpressions: {}
 C_ClassTalents.GetActiveConfigID:
+  states:
+  - Talents
+C_ClassTalents.GetTraitTreeForSpec:
+  sqls:
+  - lookup: C_ClassTalents.GetTraitTreeForSpec
+C_ClassTalents.InitializeViewLoadout:
+  states:
+  - Talents
+C_ClassTalents.ViewLoadout:
+  sqls:
+  - lookup: GetSpecializationInfoByID
   states:
   - Talents
 C_Console.GetAllCommands:
@@ -56,6 +64,9 @@ C_CVar.SetCVar:
 C_DateAndTime.AdjustTimeByDays: {}
 C_DateAndTime.AdjustTimeByMinutes: {}
 C_DateAndTime.CompareCalendarTime: {}
+C_EventUtils.IsEventValid:
+  frameworks:
+  - datalua
 C_Item.DoesItemExistByID:
   sqls:
   - lookup: C_Item.DoesItemExistByID
@@ -63,9 +74,16 @@ C_ItemInteraction.GetItemInteractionInfo:
   sqls:
   - lookup: C_ItemInteraction.GetItemInteractionInfo
     table: true
+C_Macro.SetMacroExecuteLineCallback:
+  frameworks:
+  - api
 C_Map.GetMapInfo:
   sqls:
   - lookup: C_Map.GetMapInfo
+    table: true
+C_Map.GetMapInfo_Vanilla:
+  sqls:
+  - lookup: C_Map.GetMapInfo_Vanilla
     table: true
 C_ScriptedAnimations.GetAllScriptedAnimationEffects:
   sqls:
@@ -77,9 +95,10 @@ C_SpecializationInfo.GetSpecIDs:
 C_Texture.GetAtlasInfo:
   sqls:
   - lookup: C_Texture.GetAtlasInfo
+C_Texture.GetAtlasInfo_10_2:
+  sqls:
+  - lookup: C_Texture.GetAtlasInfo_10_2
 C_Timer.After:
-  frameworks:
-  - api
   states:
   - Time
 C_Timer.NewTicker:
@@ -114,13 +133,21 @@ C_Traits.GetNodeInfo:
 C_Traits.GetTreeNodes:
   sqls:
   - cursor: C_Traits.GetTreeNodes
+C_UI.GetUIParent:
+  frameworks:
+  - env
+C_UI.GetWorldFrame:
+  frameworks:
+  - env
 C_UIColor.GetColors:
   sqls:
   - cursor: C_UIColor.GetColors
 C_XMLUtil.GetTemplateInfo:
   frameworks:
   - api
-cos: {}
+C_XMLUtil.GetTemplateInfo_10_2:
+  frameworks:
+  - api
 CreateFont:
   frameworks:
   - api
@@ -130,26 +157,32 @@ CreateForbiddenFrame:
 CreateFrame:
   frameworks:
   - api
-debugprofilestop: {}
-debugstack: {}
+DoEmote:
+  frameworks:
+  - api
+  sqls:
+  - lookup: DoEmote
 EnumerateFrames:
   frameworks:
   - api
 FillLocalizedClassList:
   sqls:
   - cursor: FillLocalizedClassList
-GetAddOnEnableState:
-  states:
-  - Addons
-GetAddOnInfo:
-  states:
-  - Addons
-GetAddOnMetadata:
-  states:
-  - Addons
-GetBuildInfo:
+GetAddOnEnableState: {}
+GetAddOnInfo: {}
+GetAddOnMetadata: {}
+GetBuildInfo_10_1:
   frameworks:
   - datalua
+GetBuildInfo_1_15_0:
+  frameworks:
+  - datalua
+GetBuildInfo_3_4_2:
+  frameworks:
+  - datalua
+GetButtonMetatable:
+  frameworks:
+  - api
 GetChatWindowInfo: {}
 GetChatWindowMessages:
   frameworks:
@@ -159,10 +192,16 @@ GetClassInfo:
   - lookup: GetClassInfo
 GetClickFrame:
   frameworks:
-  - env
+  - api
 getfenv:
   frameworks:
   - env
+GetFontStringMetatable:
+  frameworks:
+  - api
+GetFrameMetatable:
+  frameworks:
+  - api
 GetInventorySlotInfo:
   sqls:
   - lookup: GetInventorySlotInfo
@@ -225,11 +264,6 @@ GetTalentPrereqs_Wrath:
   - cursor: GetTalentPrereqs
   states:
   - Units
-GetTalentTabInfo_Vanilla:
-  sqls:
-  - lookup: GetTalentTabInfo
-  states:
-  - Units
 GetTalentTabInfo_Wrath:
   sqls:
   - lookup: GetTalentTabInfo
@@ -238,21 +272,23 @@ GetTalentTabInfo_Wrath:
 GetTime:
   states:
   - Time
-hooksecurefunc:
+IsAddOnLoaded: {}
+IsAddOnLoadOnDemand: {}
+IsLinuxClient:
   frameworks:
-  - env
-IsAddOnLoaded:
-  states:
-  - Addons
-IsAddOnLoadOnDemand:
-  states:
-  - Addons
+  - api
 IsLoggedIn:
   states:
   - System
+IsMacClient:
+  frameworks:
+  - api
 IsTestBuild:
   frameworks:
   - datalua
+IsWindowsClient:
+  frameworks:
+  - api
 LoadAddOn:
   frameworks:
   - loader
@@ -261,13 +297,10 @@ RequestTimePlayed:
   - api
   states:
   - Time
-RunMacroText:
+RunMacroText_Callback:
   frameworks:
   - api
 RunScript: {}
-securecall:
-  frameworks:
-  - env
 SecureCmdOptionParse: {}
 SendSystemMessage:
   frameworks:
@@ -276,8 +309,6 @@ SendSystemMessage:
   - Time
   - Units
 SetPortraitTexture: {}
-sin: {}
-tan: {}
 UnitClass:
   sqls:
   - lookup: UnitClass
@@ -293,6 +324,9 @@ UnitIsPlayer: {}
 UnitIsUnit: {}
 UnitLevel: {}
 UnitName: {}
+UnitName_10_2_5:
+  states:
+  - Units
 UnitPowerType:
   sqls:
   - lookup: UnitPowerType

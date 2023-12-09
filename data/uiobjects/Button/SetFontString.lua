@@ -1,4 +1,4 @@
 return (function(self, value)
-  api.SetParent(value, self.luarep)
+  api.SetParent(value, self)
   self.fontstring = value
 end)(...)

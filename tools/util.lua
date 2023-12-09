@@ -9,11 +9,13 @@ local function writeifchanged(f, c)
   end
 end
 
-local function writedeps(f, deps)
-  local t = { f, ':' }
+local abs = require('pl.path').abspath
+
+local function writedeps(f, deps, stamp)
+  local t = { stamp or f, ':' }
   for dep in require('pl.tablex').sort(deps) do
     table.insert(t, ' \\\n ')
-    table.insert(t, dep)
+    table.insert(t, abs(dep))
   end
   table.insert(t, '\n\n')
   require('pl.file').write(f .. '.d', table.concat(t))

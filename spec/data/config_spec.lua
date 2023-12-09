@@ -1,9 +1,37 @@
 describe('config', function()
-  local parseYaml = require('wowapi.yaml').parseFile
-  for _, p in ipairs(require('wowless.util').productList()) do
+  for _, p in ipairs(require('build.data.products')) do
     describe(p, function()
-      local config = parseYaml('data/products/' .. p .. '/config.yaml')
-      local apis = parseYaml('data/products/' .. p .. '/apis.yaml')
+      local config = require('build.data.products.' .. p .. '.config')
+      local apis = require('build.data.products.' .. p .. '.apis')
+      local globals = require('build.data.products.' .. p .. '.globals')
+      local ns = {}
+      for k in pairs(apis) do
+        local dot = k:find('%.')
+        if dot then
+          ns[k:sub(1, dot - 1)] = true
+        end
+      end
+      describe('addon', function()
+        local addoncfg = config.addon or {}
+        describe('capsule', function()
+          local capsulecfg = addoncfg.capsule or {}
+          describe('apinamespaces', function()
+            for k in pairs(capsulecfg.apinamespaces or {}) do
+              it(k, function()
+                assert(ns[k])
+              end)
+            end
+          end)
+          describe('enums', function()
+            local enums = globals.Enum or {}
+            for k in pairs(capsulecfg.enums or {}) do
+              it(k, function()
+                assert(enums[k])
+              end)
+            end
+          end)
+        end)
+      end)
       describe('docs', function()
         local doccfg = config.docs or {}
         describe('apis', function()

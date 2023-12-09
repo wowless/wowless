@@ -30,7 +30,7 @@ Actor:
     virtual:
       type: boolean
   contents:
-  - Scripts
+    Scripts: {}
 Alpha:
   attributes:
     fromalpha:
@@ -57,10 +57,10 @@ Anchor:
     y:
       type: number
   contents:
-  - Offset
+    Offset: {}
 Anchors:
   contents:
-  - Anchor
+    Anchor: {}
   impl: transparent
 Animation:
   attributes:
@@ -94,8 +94,8 @@ Animation:
         method: SetTarget
       type: string
   contents:
-  - KeyValues
-  - Scripts
+    KeyValues: {}
+    Scripts: {}
 AnimationGroup:
   attributes:
     looping:
@@ -107,11 +107,11 @@ AnimationGroup:
         method: SetToFinalAlpha
       type: boolean
   contents:
-  - Animation
+    Animation: {}
   extends: LayoutFrame
 Animations:
   contents:
-  - AnimationGroup
+    AnimationGroup: {}
   impl: transparent
 Attribute:
   attributes:
@@ -123,7 +123,7 @@ Attribute:
       type: string
 Attributes:
   contents:
-  - Attribute
+    Attribute: {}
   impl: transparent
 BarColor:
   extends: Color
@@ -154,8 +154,8 @@ Binding:
   contents: text
 Bindings:
   contents:
-  - Binding
-  - ModifiedClick
+    Binding: {}
+    ModifiedClick: {}
   impl: transparent
 BlingTexture:
   extends: Texture
@@ -184,13 +184,13 @@ Button:
       phase: late
       type: string
   contents:
-  - ButtonFont
-  - ButtonText
-  - DisabledTexture
-  - HighlightTexture
-  - NormalTexture
-  - PushedTextOffset
-  - PushedTexture
+    ButtonFont: {}
+    ButtonText: {}
+    DisabledTexture: {}
+    HighlightTexture: {}
+    NormalTexture: {}
+    PushedTextOffset: {}
+    PushedTexture: {}
   extends: Frame
 ButtonFont:
   attributes:
@@ -212,8 +212,8 @@ CheckButton:
         method: SetChecked
       type: boolean
   contents:
-  - CheckedTexture
-  - DisabledCheckedTexture
+    CheckedTexture: {}
+    DisabledCheckedTexture: {}
   extends: Button
 CheckedTexture:
   extends: Texture
@@ -242,10 +242,10 @@ Color:
       type: number
 ColorSelect:
   contents:
-  - ColorValueTexture
-  - ColorValueThumbTexture
-  - ColorWheelTexture
-  - ColorWheelThumbTexture
+    ColorValueTexture: {}
+    ColorValueThumbTexture: {}
+    ColorWheelTexture: {}
+    ColorWheelThumbTexture: {}
   extends: Frame
 ColorValueTexture:
   extends: Texture
@@ -279,7 +279,7 @@ ControlPoint:
       type: number
 ControlPoints:
   contents:
-  - ControlPoint
+    ControlPoint: {}
   impl: transparent
 Cooldown:
   attributes:
@@ -296,13 +296,13 @@ Cooldown:
         method: SetReverse
       type: boolean
   contents:
-  - BlingTexture
-  - EdgeTexture
-  - SwipeTexture
+    BlingTexture: {}
+    EdgeTexture: {}
+    SwipeTexture: {}
   extends: Frame
 Dimension:
   contents:
-  - AbsDimension
+    AbsDimension: {}
   virtual: true
 DisabledCheckedTexture:
   extends: Texture
@@ -356,10 +356,12 @@ EditBox:
     visiblebytes:
       type: number
   contents:
-  - FontString
-  - HighlightColor
-  - TextInsets
+    FontString: {}
+    HighlightColor: {}
+    TextInsets: {}
   extends: Frame
+FlipBook:
+  extends: Animation
 FogOfWarFrame:
   extends: Frame
 Font:
@@ -389,8 +391,8 @@ Font:
     virtual:
       type: boolean
   contents:
-  - Color
-  - Shadow
+    Color: {}
+    Shadow: {}
 FontFamily:
   attributes:
     name:
@@ -399,7 +401,7 @@ FontFamily:
     virtual:
       type: boolean
   contents:
-  - Member
+    Member: {}
 FontHeight:
   extends: Value
 FontString:
@@ -421,8 +423,8 @@ FontString:
     wordwrap:
       type: boolean
   contents:
-  - FontHeight
-  - Shadow
+    FontHeight: {}
+    Shadow: {}
   extends: LayoutFrame
 FontStringHeader1:
   extends: FontString
@@ -508,16 +510,16 @@ Frame:
     useparentlevel:
       type: boolean
   contents:
-  - Animations
-  - Attributes
-  - Frames
-  - HitRectInsets
-  - Layers
-  - ResizeBounds
+    Animations: {}
+    Attributes: {}
+    Frames: {}
+    HitRectInsets: {}
+    Layers: {}
+    ResizeBounds: {}
   extends: LayoutFrame
 Frames:
   contents:
-  - Frame
+    Frame: {}
   impl: transparent
   phase: late
 GameTooltip:
@@ -527,8 +529,8 @@ Gradient:
     orientation:
       type: string
   contents:
-  - MaxColor
-  - MinColor
+    MaxColor: {}
+    MinColor: {}
 HighlightColor:
   extends: Color
 HighlightFont:
@@ -564,7 +566,7 @@ Insets:
     top:
       type: number
   contents:
-  - AbsInset
+    AbsInset: {}
   virtual: true
 KeyValue:
   attributes:
@@ -578,7 +580,7 @@ KeyValue:
       type: string
 KeyValues:
   contents:
-  - KeyValue
+    KeyValue: {}
   impl: transparent
 Layer:
   attributes:
@@ -590,13 +592,13 @@ Layer:
     texturesublevel:
       type: number
   contents:
-  - FontString
-  - Line
-  - Texture
+    FontString: {}
+    Line: {}
+    Texture: {}
   impl: transparent
 Layers:
   contents:
-  - Layer
+    Layer: {}
   impl: transparent
   phase: late
 LayoutFrame:
@@ -640,11 +642,11 @@ LayoutFrame:
     virtual:
       type: boolean
   contents:
-  - Anchors
-  - Color
-  - KeyValues
-  - Scripts
-  - Size
+    Anchors: {}
+    Color: {}
+    KeyValues: {}
+    Scripts: {}
+    Size: {}
   virtual: true
 Line:
   attributes:
@@ -666,7 +668,7 @@ LineScale:
     toscaley:
       type: number
   contents:
-  - Origin
+    Origin: {}
   extends: Animation
 MaskedTexture:
   attributes:
@@ -674,7 +676,7 @@ MaskedTexture:
       type: string
 MaskedTextures:
   contents:
-  - MaskedTexture
+    MaskedTexture: {}
   impl: transparent
 MaskTexture:
   attributes:
@@ -683,7 +685,7 @@ MaskTexture:
     vwrapmode:
       type: string
   contents:
-  - MaskedTextures
+    MaskedTextures: {}
   extends: Texture
 MaxColor:
   extends: Color
@@ -695,7 +697,7 @@ Member:
       required: true
       type: string
   contents:
-  - Font
+    Font: {}
 MessageFrame:
   attributes:
     displayduration:
@@ -707,7 +709,7 @@ MessageFrame:
     insertmode:
       type: string
   contents:
-  - FontString
+    FontString: {}
   extends: Frame
 MinColor:
   extends: Color
@@ -719,7 +721,7 @@ Model:
   extends: Frame
 ModelScene:
   contents:
-  - ViewInsets
+    ViewInsets: {}
   extends: Frame
 ModifiedClick:
   attributes:
@@ -750,7 +752,7 @@ Offset:
     y:
       type: number
   contents:
-  - AbsDimension
+    AbsDimension: {}
 OnAnimFinished:
   extends: ScriptType
   impl:
@@ -1046,13 +1048,13 @@ Origin:
     point:
       type: string
   contents:
-  - Offset
+    Offset: {}
 Path:
   attributes:
     curve:
       type: string
   contents:
-  - ControlPoints
+    ControlPoints: {}
   extends: Animation
 PlayerModel:
   extends: Frame
@@ -1101,8 +1103,8 @@ Rect:
       type: number
 ResizeBounds:
   contents:
-  - MaxResize
-  - MinResize
+    MaxResize: {}
+    MinResize: {}
   impl: transparent
 Rotation:
   attributes:
@@ -1124,7 +1126,7 @@ Scale:
     toscaley:
       type: number
   contents:
-  - Origin
+    Origin: {}
   extends: Animation
 ScenarioPOIFrame:
   extends: POIFrame
@@ -1139,8 +1141,9 @@ ScopedModifier:
         scope: useAddonEnv
       type: boolean
   contents:
-  - Actor
-  - LayoutFrame
+    Actor: {}
+    LayoutFrame: {}
+    Script: {}
   impl: transparent
 Script:
   attributes:
@@ -1151,7 +1154,7 @@ Script:
   impl: loadstring
 Scripts:
   contents:
-  - ScriptType
+    ScriptType: {}
   impl: transparent
 ScriptType:
   attributes:
@@ -1169,14 +1172,14 @@ ScriptType:
   virtual: true
 ScrollChild:
   contents:
-  - Frame
+    Frame: {}
   impl:
     argument: lastkid
     parentmethod: SetScrollChild
     parenttype: ScrollFrame
 ScrollFrame:
   contents:
-  - ScrollChild
+    ScrollChild: {}
   extends: Frame
 Shadow:
   attributes:
@@ -1185,16 +1188,16 @@ Shadow:
     y:
       type: number
   contents:
-  - Color
-  - Offset
+    Color: {}
+    Offset: {}
   impl:
     scope: shadow
 SimpleHTML:
   contents:
-  - FontString
-  - FontStringHeader1
-  - FontStringHeader2
-  - FontStringHeader3
+    FontString: {}
+    FontStringHeader1: {}
+    FontStringHeader2: {}
+    FontStringHeader3: {}
   extends: Frame
 Size:
   attributes:
@@ -1203,7 +1206,7 @@ Size:
     y:
       type: number
   contents:
-  - AbsDimension
+    AbsDimension: {}
 Slider:
   attributes:
     defaultvalue:
@@ -1231,7 +1234,7 @@ Slider:
         method: SetValueStep
       type: number
   contents:
-  - ThumbTexture
+    ThumbTexture: {}
   extends: Frame
 StatusBar:
   attributes:
@@ -1250,8 +1253,8 @@ StatusBar:
         method: SetReverseFill
       type: boolean
   contents:
-  - BarColor
-  - BarTexture
+    BarColor: {}
+    BarTexture: {}
   extends: Frame
 SwipeTexture:
   extends: Texture
@@ -1272,7 +1275,7 @@ TexCoords:
     top:
       type: number
   contents:
-  - Rect
+    Rect: {}
 TextInsets:
   extends: Insets
 Texture:
@@ -1280,7 +1283,7 @@ Texture:
     alphamode:
       impl:
         method: SetBlendMode
-      type: string
+      type: BlendMode
     atlas:
       impl:
         method: SetAtlas
@@ -1316,9 +1319,9 @@ Texture:
         method: SetVertTile
       type: boolean
   contents:
-  - Animations
-  - Gradient
-  - TexCoords
+    Animations: {}
+    Gradient: {}
+    TexCoords: {}
   extends: LayoutFrame
 TextureCoordTranslation:
   extends: Animation
@@ -1337,19 +1340,19 @@ Translation:
   extends: Animation
 Ui:
   contents:
-  - Actor
-  - Font
-  - FontFamily
-  - Include
-  - LayoutFrame
-  - ScopedModifier
-  - Script
+    Actor: {}
+    Font: {}
+    FontFamily: {}
+    Include: {}
+    LayoutFrame: {}
+    ScopedModifier: {}
+    Script: {}
   impl: transparent
 UnitPositionFrame:
   extends: Frame
 Value:
   contents:
-  - AbsValue
+    AbsValue: {}
 ViewInsets:
   attributes:
     bottom:

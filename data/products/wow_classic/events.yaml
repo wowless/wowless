@@ -12,6 +12,14 @@ ACHIEVEMENT_PLAYER_NAME:
     type: number
 ACHIEVEMENT_SEARCH_UPDATED:
   payload: {}
+ACTION_RANGE_CHECK_UPDATE:
+  payload:
+  - name: slot
+    type: number
+  - name: isInRange
+    type: boolean
+  - name: checksRange
+    type: boolean
 ACTION_WILL_BIND_ITEM:
   payload: {}
 ACTIONBAR_HIDEGRID:
@@ -62,6 +70,8 @@ ADDON_LOADED:
   payload:
   - name: addOnName
     type: string
+  - name: containsBindings
+    type: boolean
 ADDONS_UNLOADING:
   payload:
   - name: closingClient
@@ -85,6 +95,8 @@ AJ_DUNGEON_ACTION:
   - name: lfgDungeonID
     type: number
 AJ_OPEN:
+  payload: {}
+AJ_OPEN_COLLECTIONS_ACTION:
   payload: {}
 AJ_PVE_LFG_ACTION:
   payload: {}
@@ -127,11 +139,11 @@ AREA_SPIRIT_HEALER_OUT_OF_RANGE:
 ARENA_COOLDOWNS_UPDATE:
   payload:
   - name: unitTarget
-    type: string
+    type: unit
 ARENA_CROWD_CONTROL_SPELL_UPDATE:
   payload:
   - name: unitTarget
-    type: string
+    type: unit
   - name: spellID
     type: number
   - name: itemID
@@ -218,7 +230,6 @@ AZERITE_EMPOWERED_ITEM_SELECTION_UPDATED:
   payload:
   - name: azeriteEmpoweredItemLocation
     type:
-      mixin: ItemLocationMixin
       structure: ItemLocation
 AZERITE_ESSENCE_ACTIVATED:
   payload:
@@ -258,7 +269,6 @@ AZERITE_ITEM_EXPERIENCE_CHANGED:
   payload:
   - name: azeriteItemLocation
     type:
-      mixin: ItemLocationMixin
       structure: ItemLocation
   - name: oldExperienceAmount
     type: number
@@ -268,7 +278,6 @@ AZERITE_ITEM_POWER_LEVEL_CHANGED:
   payload:
   - name: azeriteItemLocation
     type:
-      mixin: ItemLocationMixin
       structure: ItemLocation
   - name: oldPowerLevel
     type: number
@@ -278,10 +287,13 @@ AZERITE_ITEM_POWER_LEVEL_CHANGED:
     type:
       arrayof:
         structure: C_AzeriteItem.UnlockedAzeriteEmpoweredItems
+  - name: azeriteItemID
+    type: number
 BAG_CLOSED:
   payload:
   - name: bagID
-    type: number
+    type:
+      enum: BagIndex
 BAG_CONTAINER_UPDATE:
   payload: {}
 BAG_NEW_ITEMS_UPDATED:
@@ -299,7 +311,8 @@ BAG_SLOT_FLAGS_UPDATED:
 BAG_UPDATE:
   payload:
   - name: bagID
-    type: number
+    type:
+      enum: BagIndex
 BAG_UPDATE_COOLDOWN:
   payload: {}
 BAG_UPDATE_DELAYED:
@@ -1732,6 +1745,42 @@ CHAT_MSG_GUILD_ACHIEVEMENT:
     type: boolean
   - name: supressRaidIcons
     type: boolean
+CHAT_MSG_GUILD_DEATHS:
+  payload:
+  - name: text
+    type: string
+  - name: playerName
+    type: string
+  - name: languageName
+    type: string
+  - name: channelName
+    type: string
+  - name: playerName2
+    type: string
+  - name: specialFlags
+    type: string
+  - name: zoneChannelID
+    type: number
+  - name: channelIndex
+    type: number
+  - name: channelBaseName
+    type: string
+  - name: languageID
+    type: number
+  - name: lineID
+    type: number
+  - name: guid
+    type: string
+  - name: bnSenderID
+    type: number
+  - name: isMobile
+    type: boolean
+  - name: isSubtitle
+    type: boolean
+  - name: hideSenderInLetterbox
+    type: boolean
+  - name: supressRaidIcons
+    type: boolean
 CHAT_MSG_GUILD_ITEM_LOOTED:
   payload:
   - name: text
@@ -2380,6 +2429,42 @@ CHAT_MSG_PET_INFO:
     type: boolean
   - name: supressRaidIcons
     type: boolean
+CHAT_MSG_PING:
+  payload:
+  - name: text
+    type: string
+  - name: playerName
+    type: string
+  - name: languageName
+    type: string
+  - name: channelName
+    type: string
+  - name: playerName2
+    type: string
+  - name: specialFlags
+    type: string
+  - name: zoneChannelID
+    type: number
+  - name: channelIndex
+    type: number
+  - name: channelBaseName
+    type: string
+  - name: languageID
+    type: number
+  - name: lineID
+    type: number
+  - name: guid
+    type: string
+  - name: bnSenderID
+    type: number
+  - name: isMobile
+    type: boolean
+  - name: isSubtitle
+    type: boolean
+  - name: hideSenderInLetterbox
+    type: boolean
+  - name: supressRaidIcons
+    type: boolean
 CHAT_MSG_RAID:
   payload:
   - name: text
@@ -2967,6 +3052,9 @@ CINEMATIC_START:
   payload:
   - name: canBeCancelled
     type: boolean
+  - name: forcedAspectRatio
+    type:
+      enum: CameraModeAspectRatio
 CINEMATIC_STOP:
   payload: {}
 CLASS_TRIAL_TIMER_START:
@@ -3361,6 +3449,10 @@ DUEL_REQUESTED:
   payload:
   - name: playerName
     type: string
+DUEL_TO_THE_DEATH_REQUESTED:
+  payload:
+  - name: playerName
+    type: string
 DYNAMIC_GOSSIP_POI_UPDATED:
   payload: {}
 EDIT_MODE_LAYOUTS_UPDATED: {}
@@ -3437,10 +3529,6 @@ EQUIPMENT_SWAP_FINISHED:
     type: number
 EQUIPMENT_SWAP_PENDING:
   payload: {}
-EXECUTE_CHAT_LINE:
-  payload:
-  - name: chatLine
-    type: string
 EXPAND_BAG_BAR_CHANGED:
   payload:
   - name: expandBagBar
@@ -3511,6 +3599,8 @@ GLUE_CONSOLE_LOG:
     type: string
 GLUE_SCREENSHOT_FAILED:
   payload: {}
+GLUE_SCREENSHOT_SUCCEEDED:
+  payload: {}
 GLYPH_ADDED:
   payload:
   - name: glyphSlot
@@ -3530,7 +3620,9 @@ GM_PLAYER_INFO:
   - name: info
     type: string
 GOSSIP_CLOSED:
-  payload: {}
+  payload:
+  - name: interactionIsContinuing
+    type: boolean
 GOSSIP_CONFIRM:
   payload:
   - name: gossipID
@@ -3619,6 +3711,10 @@ GUILD_INVITE_REQUEST:
   - name: emblemFilename
     nilable: true
     type: string
+GUILD_MEMBER_DIED:
+  payload:
+  - name: memberName
+    type: string
 GUILD_MOTD:
   payload:
   - name: motdText
@@ -3697,7 +3793,7 @@ IGR_BILLING_NAG_DIALOG:
 INCOMING_RESURRECT_CHANGED:
   payload:
   - name: unitTarget
-    type: string
+    type: unit
 INITIAL_CLUBS_LOADED:
   payload: {}
 INITIAL_HOTFIXES_APPLIED:
@@ -3762,14 +3858,16 @@ ITEM_DATA_LOAD_RESULT:
 ITEM_LOCK_CHANGED:
   payload:
   - name: bagOrSlotIndex
-    type: number
+    type:
+      enum: BagIndex
   - name: slotIndex
     nilable: true
     type: number
 ITEM_LOCKED:
   payload:
   - name: bagOrSlotIndex
-    type: number
+    type:
+      enum: BagIndex
   - name: slotIndex
     nilable: true
     type: number
@@ -3794,7 +3892,8 @@ ITEM_TEXT_TRANSLATION:
 ITEM_UNLOCKED:
   payload:
   - name: bagOrSlotIndex
-    type: number
+    type:
+      enum: BagIndex
   - name: slotIndex
     nilable: true
     type: number
@@ -3861,6 +3960,28 @@ LFG_LIST_ACTIVE_ENTRY_UPDATE:
   - name: created
     nilable: true
     type: boolean
+LFG_LIST_APPLICANT_LIST_UPDATED:
+  payload:
+  - name: newPendingEntry
+    nilable: true
+    type: boolean
+  - name: newPendingEntryWithData
+    nilable: true
+    type: boolean
+LFG_LIST_APPLICANT_UPDATED:
+  payload:
+  - name: applicantID
+    type: number
+LFG_LIST_APPLICATION_STATUS_UPDATED:
+  payload:
+  - name: searchResultID
+    type: number
+  - name: newStatus
+    type: string
+  - name: oldStatus
+    type: string
+  - name: groupName
+    type: string
 LFG_LIST_AVAILABILITY_UPDATE:
   payload: {}
 LFG_LIST_ENTRY_CREATION_FAILED:
@@ -3869,6 +3990,12 @@ LFG_LIST_ENTRY_EXPIRED_TIMEOUT:
   payload: {}
 LFG_LIST_ENTRY_EXPIRED_TOO_MANY_PLAYERS:
   payload: {}
+LFG_LIST_JOINED_GROUP:
+  payload:
+  - name: searchResultID
+    type: number
+  - name: groupName
+    type: string
 LFG_LIST_ROLE_UPDATE:
   payload: {}
 LFG_LIST_SEARCH_FAILED:
@@ -4026,6 +4153,8 @@ LOOT_SLOT_CLEARED:
     type: number
 LOSS_OF_CONTROL_ADDED:
   payload:
+  - name: unitTarget
+    type: unit
   - name: effectIndex
     type: number
 LOSS_OF_CONTROL_COMMENTATOR_ADDED:
@@ -4039,7 +4168,9 @@ LOSS_OF_CONTROL_COMMENTATOR_UPDATE:
   - name: victim
     type: string
 LOSS_OF_CONTROL_UPDATE:
-  payload: {}
+  payload:
+  - name: unitTarget
+    type: unit
 LUA_WARNING:
   payload:
   - name: warnType
@@ -4109,7 +4240,7 @@ MIN_EXPANSION_LEVEL_UPDATED:
 MINIMAP_PING:
   payload:
   - name: unitTarget
-    type: string
+    type: unit
   - name: y
     type: number
   - name: x
@@ -4150,6 +4281,10 @@ MODIFIER_STATE_CHANGED:
     type: number
 MOUNT_CURSOR_CLEAR:
   payload: {}
+MOUNT_JOURNAL_SEARCH_UPDATED:
+  payload: {}
+MOUNT_JOURNAL_USABILITY_CHANGED:
+  payload: {}
 MUTELIST_UPDATE:
   payload: {}
 NAME_PLATE_CREATED:
@@ -4166,6 +4301,14 @@ NAME_PLATE_UNIT_REMOVED:
     type: string
 NEW_AUCTION_UPDATE:
   payload: {}
+NEW_MOUNT_ADDED:
+  payload:
+  - name: mountID
+    type: number
+NEW_PET_ADDED:
+  payload:
+  - name: battlePetGUID
+    type: string
 NEW_RECIPE_LEARNED:
   payload:
   - name: recipeID
@@ -4232,11 +4375,11 @@ PARTY_LOOT_METHOD_CHANGED:
 PARTY_MEMBER_DISABLE:
   payload:
   - name: unitTarget
-    type: string
+    type: unit
 PARTY_MEMBER_ENABLE:
   payload:
   - name: unitTarget
-    type: string
+    type: unit
 PENDING_AZERITE_ESSENCE_CHANGED:
   payload:
   - name: essenceID
@@ -4401,6 +4544,20 @@ PET_FORCE_NAME_DECLENSION:
   - name: declinedName5
     nilable: true
     type: string
+PET_JOURNAL_LIST_UPDATE:
+  payload: {}
+PET_JOURNAL_PET_DELETED:
+  payload:
+  - name: battlePetGUID
+    type: string
+PET_JOURNAL_PET_RESTORED:
+  payload:
+  - name: battlePetGUID
+    type: string
+PET_JOURNAL_PET_REVOKED:
+  payload:
+  - name: battlePetGUID
+    type: string
 PET_SPELL_POWER_UPDATE:
   payload: {}
 PET_STABLE_CLOSED:
@@ -4431,6 +4588,10 @@ PLAYER_AVG_ITEM_LEVEL_UPDATE:
   payload: {}
 PLAYER_CAMPING:
   payload: {}
+PLAYER_CAN_GLIDE_CHANGED:
+  payload:
+  - name: canGlide
+    type: boolean
 PLAYER_CONTROL_GAINED:
   payload: {}
 PLAYER_CONTROL_LOST:
@@ -4438,7 +4599,7 @@ PLAYER_CONTROL_LOST:
 PLAYER_DAMAGE_DONE_MODS:
   payload:
   - name: unitTarget
-    type: string
+    type: unit
 PLAYER_DEAD:
   payload: {}
 PLAYER_DIFFICULTY_CHANGED:
@@ -4464,19 +4625,19 @@ PLAYER_FARSIGHT_FOCUS_CHANGED:
 PLAYER_FLAGS_CHANGED:
   payload:
   - name: unitTarget
-    type: string
+    type: unit
 PLAYER_FOCUS_CHANGED:
   payload: {}
 PLAYER_GAINS_VEHICLE_DATA:
   payload:
   - name: unitTarget
-    type: string
+    type: unit
   - name: vehicleUIIndicatorID
     type: number
 PLAYER_GUILD_UPDATE:
   payload:
   - name: unitTarget
-    type: string
+    type: unit
 PLAYER_INTERACTION_MANAGER_FRAME_HIDE:
   payload:
   - name: type
@@ -4526,11 +4687,11 @@ PLAYER_LOGOUT:
 PLAYER_LOSES_VEHICLE_DATA:
   payload:
   - name: unitTarget
-    type: string
+    type: unit
 PLAYER_MAX_LEVEL_UPDATE:
   payload:
   - name: unitTarget
-    type: string
+    type: unit
 PLAYER_MONEY:
   payload: {}
 PLAYER_MOUNT_DISPLAY_CHANGED:
@@ -4538,11 +4699,11 @@ PLAYER_MOUNT_DISPLAY_CHANGED:
 PLAYER_PVP_KILLS_CHANGED:
   payload:
   - name: unitTarget
-    type: string
+    type: unit
 PLAYER_PVP_RANK_CHANGED:
   payload:
   - name: unitTarget
-    type: string
+    type: unit
 PLAYER_QUITING:
   payload: {}
 PLAYER_REGEN_DISABLED:
@@ -4571,6 +4732,10 @@ PLAYER_SOFT_INTERACT_CHANGED:
     type: string
 PLAYER_SOFT_TARGET_INTERACTION:
   payload: {}
+PLAYER_SPECIALIZATION_CHANGED:
+  payload:
+  - name: unitTarget
+    type: unit
 PLAYER_STARTED_LOOKING:
   payload: {}
 PLAYER_STARTED_MOVING:
@@ -4590,7 +4755,7 @@ PLAYER_TARGET_CHANGED:
 PLAYER_TARGET_SET_ATTACKING:
   payload:
   - name: unitTarget
-    type: string
+    type: unit
 PLAYER_TOTEM_UPDATE:
   payload:
   - name: totemSlot
@@ -4600,7 +4765,7 @@ PLAYER_TRADE_MONEY:
 PLAYER_TRIAL_XP_UPDATE:
   payload:
   - name: unitTarget
-    type: string
+    type: unit
 PLAYER_UNGHOST:
   payload: {}
 PLAYER_UPDATE_RESTING:
@@ -4608,7 +4773,7 @@ PLAYER_UPDATE_RESTING:
 PLAYER_XP_UPDATE:
   payload:
   - name: unitTarget
-    type: string
+    type: unit
 PLAYERBANKBAGSLOTS_CHANGED:
   payload: {}
 PLAYERBANKSLOTS_CHANGED:
@@ -4645,12 +4810,14 @@ PRODUCT_CHOICE_UPDATE:
   payload: {}
 PRODUCT_DISTRIBUTIONS_UPDATED:
   payload: {}
+PVP_BRAWL_INFO_UPDATED:
+  payload: {}
 PVP_RATED_STATS_UPDATE:
   payload: {}
 PVP_TIMER_UPDATE:
   payload:
   - name: unitTarget
-    type: string
+    type: unit
 PVP_VEHICLE_INFO_UPDATED:
   payload: {}
 PVP_WORLDSTATE_UPDATE:
@@ -4694,7 +4861,21 @@ QUEST_GREETING:
   payload: {}
 QUEST_ITEM_UPDATE:
   payload: {}
+QUEST_LOG_CRITERIA_UPDATE:
+  payload:
+  - name: questID
+    type: number
+  - name: specificTreeID
+    type: number
+  - name: description
+    type: string
+  - name: numFulfilled
+    type: number
+  - name: numRequired
+    type: number
 QUEST_LOG_UPDATE:
+  payload: {}
+QUEST_POI_UPDATE:
   payload: {}
 QUEST_PROGRESS:
   payload: {}
@@ -4767,6 +4948,9 @@ RAF_ENTITLEMENT_DELIVERED:
     type: number
   - name: showFancyToast
     type: boolean
+  - name: rafVersion
+    type:
+      enum: RecruitAFriendRewardsVersion
 RAID_BOSS_EMOTE:
   payload:
   - name: text
@@ -4814,7 +4998,7 @@ READY_CHECK:
 READY_CHECK_CONFIRM:
   payload:
   - name: unitTarget
-    type: string
+    type: unit
   - name: isReady
     type: boolean
 READY_CHECK_FINISHED:
@@ -4940,6 +5124,12 @@ SHOW_LOOT_TOAST_UPGRADE:
     type: boolean
   - name: lessAwesome
     type: boolean
+SHOW_PARTY_POSE_UI:
+  payload:
+  - name: mapID
+    type: number
+  - name: won
+    type: boolean
 SHOW_PVP_FACTION_LOOT_TOAST:
   payload:
   - name: typeIdentifier
@@ -4981,8 +5171,6 @@ SIMPLE_BROWSER_WEB_PROXY_FAILED:
 SIMPLE_CHECKOUT_CLOSED:
   payload: {}
 SKILL_LINES_CHANGED:
-  payload: {}
-SOCIAL_ITEM_RECEIVED:
   payload: {}
 SOCKET_INFO_ACCEPT:
   payload: {}
@@ -5252,7 +5440,10 @@ TOKEN_SELL_RESULT:
 TOKEN_STATUS_CHANGED:
   payload: {}
 TOOLTIP_DATA_UPDATE:
-  payload: {}
+  payload:
+  - name: dataInstanceID
+    nilable: true
+    type: number
 TOYS_UPDATED:
   payload:
   - name: itemID
@@ -5413,26 +5604,6 @@ TUTORIAL_TRIGGER:
     type: number
   - name: forceShow
     type: boolean
-TWITTER_LINK_RESULT:
-  payload:
-  - name: isLinked
-    type: boolean
-  - name: screenName
-    type: string
-  - name: error
-    type: string
-TWITTER_POST_RESULT:
-  payload:
-  - name: result
-    type: number
-TWITTER_STATUS_UPDATE:
-  payload:
-  - name: isTwitterEnabled
-    type: boolean
-  - name: isLinked
-    type: boolean
-  - name: screenName
-    type: string
 UI_ERROR_MESSAGE:
   payload:
   - name: errorType
@@ -5452,29 +5623,29 @@ UI_SCALE_CHANGED:
 UNIT_ATTACK:
   payload:
   - name: unitTarget
-    type: string
+    type: unit
 UNIT_ATTACK_POWER:
   payload:
   - name: unitTarget
-    type: string
+    type: unit
 UNIT_ATTACK_SPEED:
   payload:
   - name: unitTarget
-    type: string
+    type: unit
 UNIT_AURA:
   payload:
   - name: unitTarget
-    type: string
+    type: unit
 UNIT_CHEAT_TOGGLE_EVENT:
   payload: {}
 UNIT_CLASSIFICATION_CHANGED:
   payload:
   - name: unitTarget
-    type: string
+    type: unit
 UNIT_COMBAT:
   payload:
   - name: unitTarget
-    type: string
+    type: unit
   - name: event
     type: string
   - name: flagText
@@ -5486,25 +5657,31 @@ UNIT_COMBAT:
 UNIT_CONNECTION:
   payload:
   - name: unitTarget
-    type: string
+    type: unit
   - name: isConnected
     type: boolean
 UNIT_DAMAGE:
   payload:
   - name: unitTarget
-    type: string
+    type: unit
 UNIT_DEFENSE:
   payload:
   - name: unitTarget
-    type: string
+    type: unit
 UNIT_DISPLAYPOWER:
   payload:
   - name: unitTarget
-    type: string
+    type: unit
+UNIT_DISTANCE_CHECK_UPDATE:
+  payload:
+  - name: unitTarget
+    type: unit
+  - name: isInDistance
+    type: boolean
 UNIT_ENTERED_VEHICLE:
   payload:
   - name: unitTarget
-    type: string
+    type: unit
   - name: showVehicleFrame
     type: boolean
   - name: isControlSeat
@@ -5520,7 +5697,7 @@ UNIT_ENTERED_VEHICLE:
 UNIT_ENTERING_VEHICLE:
   payload:
   - name: unitTarget
-    type: string
+    type: unit
   - name: showVehicleFrame
     type: boolean
   - name: isControlSeat
@@ -5536,141 +5713,147 @@ UNIT_ENTERING_VEHICLE:
 UNIT_EXITED_VEHICLE:
   payload:
   - name: unitTarget
-    type: string
+    type: unit
 UNIT_EXITING_VEHICLE:
   payload:
   - name: unitTarget
-    type: string
+    type: unit
 UNIT_FACTION:
   payload:
   - name: unitTarget
-    type: string
+    type: unit
 UNIT_FLAGS:
   payload:
   - name: unitTarget
-    type: string
+    type: unit
 UNIT_FORM_CHANGED:
   payload:
   - name: unitTarget
-    type: string
+    type: unit
 UNIT_HAPPINESS:
   payload:
   - name: unitTarget
-    type: string
+    type: unit
 UNIT_HEAL_PREDICTION:
   payload:
   - name: unitTarget
-    type: string
+    type: unit
 UNIT_HEALTH:
   payload:
   - name: unitTarget
-    type: string
+    type: unit
 UNIT_HEALTH_FREQUENT:
   payload:
   - name: unitTarget
-    type: string
+    type: unit
+UNIT_IN_RANGE_UPDATE:
+  payload:
+  - name: unitTarget
+    type: unit
+  - name: isInRange
+    type: boolean
 UNIT_INVENTORY_CHANGED:
   payload:
   - name: unitTarget
-    type: string
+    type: unit
 UNIT_LEVEL:
   payload:
   - name: unitTarget
-    type: string
+    type: unit
 UNIT_MANA:
   payload:
   - name: unitTarget
-    type: string
+    type: unit
 UNIT_MAXHEALTH:
   payload:
   - name: unitTarget
-    type: string
+    type: unit
 UNIT_MAXPOWER:
   payload:
   - name: unitTarget
-    type: string
+    type: unit
   - name: powerType
     type: string
 UNIT_MODEL_CHANGED:
   payload:
   - name: unitTarget
-    type: string
+    type: unit
 UNIT_NAME_UPDATE:
   payload:
   - name: unitTarget
-    type: string
+    type: unit
 UNIT_OTHER_PARTY_CHANGED:
   payload:
   - name: unitTarget
-    type: string
+    type: unit
 UNIT_PET:
   payload:
   - name: unitTarget
-    type: string
+    type: unit
 UNIT_PET_EXPERIENCE:
   payload:
   - name: unitTarget
-    type: string
+    type: unit
 UNIT_PET_TRAINING_POINTS:
   payload:
   - name: unitTarget
-    type: string
+    type: unit
 UNIT_PHASE:
   payload:
   - name: unitTarget
-    type: string
+    type: unit
 UNIT_PORTRAIT_UPDATE:
   payload:
   - name: unitTarget
-    type: string
+    type: unit
 UNIT_POWER_BAR_HIDE:
   payload:
   - name: unitTarget
-    type: string
+    type: unit
 UNIT_POWER_BAR_SHOW:
   payload:
   - name: unitTarget
-    type: string
+    type: unit
 UNIT_POWER_BAR_TIMER_UPDATE:
   payload:
   - name: unitTarget
-    type: string
+    type: unit
 UNIT_POWER_FREQUENT:
   payload:
   - name: unitTarget
-    type: string
+    type: unit
   - name: powerType
     type: string
 UNIT_POWER_UPDATE:
   payload:
   - name: unitTarget
-    type: string
+    type: unit
   - name: powerType
     type: string
 UNIT_QUEST_LOG_CHANGED:
   payload:
   - name: unitTarget
-    type: string
+    type: unit
 UNIT_RANGED_ATTACK_POWER:
   payload:
   - name: unitTarget
-    type: string
+    type: unit
 UNIT_RANGEDDAMAGE:
   payload:
   - name: unitTarget
-    type: string
+    type: unit
 UNIT_RESISTANCES:
   payload:
   - name: unitTarget
-    type: string
+    type: unit
 UNIT_SPELL_HASTE:
   payload:
   - name: unitTarget
-    type: string
+    type: unit
 UNIT_SPELLCAST_CHANNEL_START:
   payload:
   - name: unitTarget
-    type: string
+    type: unit
   - name: castGUID
     type: string
   - name: spellID
@@ -5678,7 +5861,7 @@ UNIT_SPELLCAST_CHANNEL_START:
 UNIT_SPELLCAST_CHANNEL_STOP:
   payload:
   - name: unitTarget
-    type: string
+    type: unit
   - name: castGUID
     type: string
   - name: spellID
@@ -5686,7 +5869,7 @@ UNIT_SPELLCAST_CHANNEL_STOP:
 UNIT_SPELLCAST_CHANNEL_UPDATE:
   payload:
   - name: unitTarget
-    type: string
+    type: unit
   - name: castGUID
     type: string
   - name: spellID
@@ -5694,7 +5877,7 @@ UNIT_SPELLCAST_CHANNEL_UPDATE:
 UNIT_SPELLCAST_DELAYED:
   payload:
   - name: unitTarget
-    type: string
+    type: unit
   - name: castGUID
     type: string
   - name: spellID
@@ -5702,7 +5885,7 @@ UNIT_SPELLCAST_DELAYED:
 UNIT_SPELLCAST_FAILED:
   payload:
   - name: unitTarget
-    type: string
+    type: unit
   - name: castGUID
     type: string
   - name: spellID
@@ -5710,7 +5893,7 @@ UNIT_SPELLCAST_FAILED:
 UNIT_SPELLCAST_FAILED_QUIET:
   payload:
   - name: unitTarget
-    type: string
+    type: unit
   - name: castGUID
     type: string
   - name: spellID
@@ -5718,11 +5901,19 @@ UNIT_SPELLCAST_FAILED_QUIET:
 UNIT_SPELLCAST_INTERRUPTED:
   payload:
   - name: unitTarget
-    type: string
+    type: unit
   - name: castGUID
     type: string
   - name: spellID
     type: number
+UNIT_SPELLCAST_INTERRUPTIBLE:
+  payload:
+  - name: unitTarget
+    type: unit
+UNIT_SPELLCAST_NOT_INTERRUPTIBLE:
+  payload:
+  - name: unitTarget
+    type: unit
 UNIT_SPELLCAST_SENT:
   payload:
   - name: unit
@@ -5736,7 +5927,7 @@ UNIT_SPELLCAST_SENT:
 UNIT_SPELLCAST_START:
   payload:
   - name: unitTarget
-    type: string
+    type: unit
   - name: castGUID
     type: string
   - name: spellID
@@ -5744,7 +5935,7 @@ UNIT_SPELLCAST_START:
 UNIT_SPELLCAST_STOP:
   payload:
   - name: unitTarget
-    type: string
+    type: unit
   - name: castGUID
     type: string
   - name: spellID
@@ -5752,7 +5943,7 @@ UNIT_SPELLCAST_STOP:
 UNIT_SPELLCAST_SUCCEEDED:
   payload:
   - name: unitTarget
-    type: string
+    type: unit
   - name: castGUID
     type: string
   - name: spellID
@@ -5760,23 +5951,23 @@ UNIT_SPELLCAST_SUCCEEDED:
 UNIT_STATS:
   payload:
   - name: unitTarget
-    type: string
+    type: unit
 UNIT_TARGET:
   payload:
   - name: unitTarget
-    type: string
+    type: unit
 UNIT_TARGETABLE_CHANGED:
   payload:
   - name: unitTarget
-    type: string
+    type: unit
 UNIT_THREAT_LIST_UPDATE:
   payload:
   - name: unitTarget
-    type: string
+    type: unit
 UNIT_THREAT_SITUATION_UPDATE:
   payload:
   - name: unitTarget
-    type: string
+    type: unit
 UPDATE_ACTIVE_BATTLEFIELD:
   payload: {}
 UPDATE_ALL_UI_WIDGETS:
@@ -5850,6 +6041,8 @@ UPDATE_SHAPESHIFT_FORMS:
 UPDATE_SHAPESHIFT_USABLE:
   payload: {}
 UPDATE_STEALTH:
+  payload: {}
+UPDATE_SUMMONPETS_ACTION:
   payload: {}
 UPDATE_TRADESKILL_RECAST:
   payload: {}
@@ -6199,12 +6392,29 @@ VOID_TRANSFER_DONE:
   payload: {}
 VOID_TRANSFER_SUCCESS:
   payload: {}
+VOTE_KICK_REASON_NEEDED:
+  payload:
+  - name: name
+    type: string
+  - name: resultGUID
+    type: string
 WARFRONT_COMPLETED:
   payload:
   - name: mapID
     type: number
   - name: winner
     type: number
+WARGAME_INVITE_SENT:
+  payload: {}
+WARGAME_REQUEST_RESPONSE:
+  payload:
+  - name: responderGUID
+    type: string
+  - name: responderName
+    nilable: true
+    type: string
+  - name: accepted
+    type: boolean
 WARGAME_REQUESTED:
   payload:
   - name: opposingPartyMemberName

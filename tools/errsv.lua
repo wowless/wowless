@@ -41,7 +41,7 @@ local getPatternValue = (function()
       value = tostring,
     },
     {
-      pattern = ': missing, has value (%d+)$',
+      pattern = ': missing, has value (-?%d+)$',
       value = mustnumber,
     },
     {
@@ -55,6 +55,10 @@ local getPatternValue = (function()
     {
       pattern = ': missing key ".+" with value (-?[0-9.]+)$',
       value = mustnumber,
+    },
+    {
+      pattern = ': missing key ".+" with value (0x000000[01248]+)$',
+      value = tostring,
     },
     {
       pattern = ': missing key ".+" with value table: [0-9a-fA-Fx]+$',
@@ -205,7 +209,7 @@ do
         assert(v:match(': want "function", got "nil"$'))
         apis[k] = nil
       elseif type(v) == 'table' then
-        assert(next(v) == 'impltype', ('expected impltype, got %q'):format(next(v)))
+        assert(next(v) == 'impltype', ('%q: expected impltype, got %q'):format(k, next(v)))
         assert(next(v, 'impltype') == nil)
         if v.impltype:match(': bad argument #1 to \'create\' %(Lua function expected%): want true, got false$') then
           apis[k] = {}

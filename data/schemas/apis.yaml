@@ -11,6 +11,8 @@ type:
             type:
               ref: api
       - record:
+          nowrap:
+            type: boolean
           stdlib:
             required: true
             type: string
@@ -25,19 +27,18 @@ type:
           inputs:
             type:
               sequenceof:
-                sequenceof:
-                  record:
-                    default:
-                      type:
-                        schema: any
-                    name:
-                      type: string
-                    nilable:
-                      type: boolean
+                record:
+                  default:
                     type:
-                      required: true
-                      type:
-                        schema: type
+                      schema: any
+                  name:
+                    type: string
+                  nilable:
+                    type: boolean
+                  type:
+                    required: true
+                    type:
+                      schema: type
           mayreturnnothing:
             type: boolean
           nowrap:

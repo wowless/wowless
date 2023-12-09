@@ -9,12 +9,26 @@ local function mapify(t)
 end
 
 local function perproduct(p, f)
-  return (require('wowapi.yaml').parseFile(('data/products/%s/%s.yaml'):format(p, f)))
+  return assert(dofile(('build/data/products/%s/%s.lua'):format(p, f)))
+end
+
+local function tpath(t, ...)
+  for i = 1, select('#', ...) do
+    assert(type(t) == 'table')
+    t = t[(select(i, ...))]
+    if t == nil then
+      return nil
+    end
+  end
+  return t
 end
 
 local ptablemap = {
   build = function(p)
     return 'Build', perproduct(p, 'build')
+  end,
+  config = function(p)
+    return 'Config', perproduct(p, 'config').addon or {}
   end,
   cvars = function(p)
     return 'CVars', perproduct(p, 'cvars')
@@ -27,7 +41,7 @@ local ptablemap = {
         registerable = true,
       }
     end
-    for _, product in ipairs(require('wowless.util').productList()) do
+    for _, product in ipairs(dofile('build/data/products.lua')) do
       for k in pairs(perproduct(product, 'events')) do
         if not t[k] then
           t[k] = {
@@ -40,12 +54,14 @@ local ptablemap = {
     return 'Events', t
   end,
   globalapis = function(p)
+    local config = perproduct(p, 'config')
     local t = {}
     for name, api in pairs(perproduct(p, 'apis')) do
       if not name:find('%.') and not api.debug then
         local vv = {
           alias = api.alias,
           nowrap = api.nowrap,
+          overwritten = tpath(config, 'addon', 'overwritten_apis', name) and true,
           stdlib = api.stdlib,
         }
         t[name] = next(vv) and vv or true
@@ -56,7 +72,24 @@ local ptablemap = {
   globals = function(p)
     return 'Globals', perproduct(p, 'globals')
   end,
+  impltests = function(p)
+    local r = require('pl.file').read
+    local t = {}
+    local deps = {}
+    for _, api in pairs(perproduct(p, 'apis')) do
+      if api.impl and not t[api.impl] then
+        local f = 'data/test/' .. api.impl .. '.lua'
+        local content = r(f)
+        if content then
+          t[api.impl] = content
+          deps[f] = true
+        end
+      end
+    end
+    return 'ImplTests', t, deps
+  end,
   namespaceapis = function(p)
+    local config = perproduct(p, 'config')
     local apiNamespaces = {}
     for k, api in pairs(perproduct(p, 'apis')) do
       local dot = k:find('%.')
@@ -72,6 +105,7 @@ local ptablemap = {
       for mk, mv in pairs(v.methods) do
         local tt = {
           alias = mv.alias,
+          overwritten = tpath(config, 'addon', 'overwritten_apis', k .. '.' .. mk) and true,
           stdlib = mv.stdlib,
         }
         mt[mk] = next(tt) and tt or true
@@ -81,6 +115,7 @@ local ptablemap = {
     return 'NamespaceApis', t
   end,
   uiobjectapis = function(p)
+    local config = perproduct(p, 'config')
     local uiobjects = perproduct(p, 'uiobjects')
     local inhrev = {}
     for k, cfg in pairs(uiobjects) do
@@ -115,22 +150,21 @@ local ptablemap = {
       end
     end
     addtype('Frame')
-    -- TODO figure out the right approach for these
-    uiobjects.Minimap = nil
-    uiobjects.WorldFrame = nil
     local t = {}
     for k, v in pairs(uiobjects) do
-      local mt = {}
-      for mk in pairs(v.methods) do
-        mt[mk] = true
+      if not tpath(config, 'addon', 'skipped_uiobjects', k) then
+        local mt = {}
+        for mk in pairs(v.methods) do
+          mt[mk] = true
+        end
+        t[k] = {
+          frametype = not not frametypes[k],
+          methods = mt,
+          objtype = objTypes[k],
+          virtual = v.virtual,
+          warner = v.warner,
+        }
       end
-      t[k] = {
-        frametype = not not frametypes[k],
-        methods = mt,
-        objtype = objTypes[k],
-        virtual = v.virtual,
-        zombie = v.zombie,
-      }
     end
     return 'UIObjectApis', t
   end,
@@ -143,8 +177,9 @@ local args = (function()
   parser:option('-p --product', 'products to generate, default all'):count('*')
   return parser:parse()
 end)()
-local filemap = (function()
+local filemap, alldeps = (function()
   local t = {}
+  local deps = {}
   local files = (function()
     if next(args.file) then
       return mapify(args.file)
@@ -162,13 +197,15 @@ local filemap = (function()
   end
   for k in pairs(files) do
     if ptablemap[k] then
-      for _, p in ipairs(next(args.product) and args.product or require('wowless.util').productList()) do
-        local nn, tt = ptablemap[k](p)
+      for _, p in ipairs(next(args.product) and args.product or dofile('build/data/products.lua')) do
+        local nn, tt, dd = ptablemap[k](p)
         local ss = '_G.WowlessData.' .. nn .. ' = ' .. require('pl.pretty').write(tt) .. '\n'
-        t['build/products/' .. p .. '/WowlessData/' .. k .. '.lua'] = style(ss)
+        local ff = 'build/products/' .. p .. '/WowlessData/' .. k .. '.lua'
+        t[ff] = style(ss)
+        deps[ff] = dd
       end
     elseif k == 'product' then
-      for _, p in ipairs(next(args.product) and args.product or require('wowless.util').productList()) do
+      for _, p in ipairs(next(args.product) and args.product or dofile('build/data/products.lua')) do
         local ss = ('_G.WowlessData = { product = %q }'):format(p)
         t['build/products/' .. p .. '/WowlessData/' .. k .. '.lua'] = style(ss)
       end
@@ -181,14 +218,14 @@ local filemap = (function()
       table.insert(tt, 1, 'product.lua')
       table.insert(tt, '')
       local content = table.concat(tt, '\n')
-      for _, p in ipairs(next(args.product) and args.product or require('wowless.util').productList()) do
+      for _, p in ipairs(next(args.product) and args.product or dofile('build/data/products.lua')) do
         t['build/products/' .. p .. '/WowlessData/WowlessData.toc'] = content
       end
     else
       error('invalid file type ' .. k)
     end
   end
-  return t
+  return t, deps
 end)()
 
 if not args.dryrun then
@@ -196,5 +233,8 @@ if not args.dryrun then
   for k, v in pairs(filemap) do
     w(k, v)
     os.execute('chmod a+x ' .. k)
+  end
+  for k, v in pairs(alldeps) do
+    require('tools.util').writedeps(k, v)
   end
 end

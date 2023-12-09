@@ -1,2 +1,2 @@
 local self = ...
-return api.GetDebugName(self.luarep)
+return api.GetDebugName(self)

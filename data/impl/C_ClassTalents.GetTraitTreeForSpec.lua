@@ -1,0 +1,3 @@
+local query, specID = ...
+
+return query(specID)
