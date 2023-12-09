@@ -1329,6 +1329,13 @@ add_lua_executable(
   wowlessyaml
 )
 
+lua2c(
+  wowlessdb2
+  wowless.db2=${CMAKE_CURRENT_SOURCE_DIR}/wowless/db2.lua
+)
+add_library(wowlessdb2 STATIC wowlessdb2.c)
+target_link_libraries(wowlessdb2 PRIVATE elune)
+
 file(GENERATE OUTPUT runtime/platform.lua CONTENT "\
 return '\
 $<$<PLATFORM_ID:Darwin>:mac>\
@@ -1388,6 +1395,7 @@ add_lua_executable(
   argparse
   ${dataluas}
   date
+  dbc
   lsqlite3
   luaexpat
   luafilesystem
@@ -1402,6 +1410,7 @@ add_lua_executable(
   tsort
   vstruct
   wowapischema
+  wowlessdb2
   wowlesslib
   wowlessrender
   wowlessutil

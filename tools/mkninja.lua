@@ -473,6 +473,7 @@ table.insert(builds, {
     'spec/wowapi/yaml_spec.lua',
     'spec/wowless/addon_spec.lua',
     'spec/wowless/blp_spec.lua',
+    'spec/wowless/db2_spec.lua',
     'spec/wowless/hlist_spec.lua',
     'spec/wowless/png_spec.lua',
     'spec/wowless/typecheck_spec.lua',
@@ -481,6 +482,7 @@ table.insert(builds, {
   ins_implicit = {
     'build/addon.stamp',
     'build/cmake/runtests',
+    'spec/wowless/db2tests.yaml',
     'spec/wowless/green.png',
     'spec/wowless/temp.blp',
     'spec/wowless/temp.png',
