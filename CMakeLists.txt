@@ -1350,6 +1350,12 @@ add_lua_executable(
 add_lua_executable(
   db2dump
   ${CMAKE_CURRENT_SOURCE_DIR}/tools/db2dump.lua
+  argparse
+  dbc
+  luafilesystem
+  penlight
+  vstruct
+  wowlessdb2
 )
 
 file(GENERATE OUTPUT runtime/platform.lua CONTENT "\
