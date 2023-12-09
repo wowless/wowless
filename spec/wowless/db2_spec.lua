@@ -1,5 +1,5 @@
 local db2 = require('wowless.db2')
-local dbc = require('dbc')
+local dbc = require('tools.dbc')
 local vstruct = require('vstruct')
 local sorted = require('pl.tablex').sort
 
@@ -231,7 +231,7 @@ describe('db2', function()
         assert.same(expected, collect(db2.rows, data, sig))
       end)
       it('works with luadbc', function()
-        assert.same(expected, collect(dbc.rows, 'WDC3' .. data:sub(5), sig))
+        assert.same(expected, collect(dbc.rows, data, sig))
       end)
     end)
   end

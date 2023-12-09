@@ -1,4 +1,4 @@
-local dbcrows = require('dbc').rows
+local dbcrows = require('tools.dbc').rows
 local db2rows = require('wowless.db2').rows
 local deepcompare = require('pl.tablex').deepcompare
 local readfile = require('pl.file').read

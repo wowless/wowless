@@ -1343,6 +1343,7 @@ add_lua_executable(
   dbc
   luafilesystem
   penlight
+  toolsdbc
   vstruct
   wowlessdb2
 )
@@ -1354,6 +1355,7 @@ add_lua_executable(
   dbc
   luafilesystem
   penlight
+  toolsdbc
   vstruct
   wowlessdb2
 )
@@ -1429,6 +1431,7 @@ add_lua_executable(
   penlight
   runtimeproducts
   say
+  toolsdbc
   tsort
   vstruct
   wowapischema
