@@ -49,6 +49,15 @@ local strbyte = string.byte
 local strfind = string.find
 local strsub = string.sub
 
+local function u1(content, offset)
+  return strbyte(content, offset + 1)
+end
+
+local function u2(content, offset)
+  local w, x = strbyte(content, offset + 1, offset + 2)
+  return w + x * 256
+end
+
 local function u4(content, offset)
   local w, x, y, z = strbyte(content, offset + 1, offset + 4)
   return w + (x or 0) * 256 + (y or 0) * 65536 + (z or 0) * 16777216
@@ -109,8 +118,8 @@ local function rows(content, sig)
     if fsi.storage_type == 0 then
       assert(fsi.additional_data_size == 0)
       assert(math.fmod(fsi.field_offset_bits, 8) == 0)
-      assert(fsi.field_size_bits > 0)
-      assert(math.fmod(fsi.field_size_bits, 8) == 0)
+      local sb = fsi.field_size_bits
+      assert(sb == 8 or sb == 16 or sb == 32)
       assert(fsi.cx1 == 0)
       assert(fsi.cx2 == 0)
       assert(fsi.cx3 == 0)
@@ -197,16 +206,18 @@ local function rows(content, sig)
         local t = {}
         for k = 1, h.total_field_count do
           local fsi = fsis[k]
-          if fsi.storage_type ~= 2 then
-            local foffset = math.floor(fsi.field_offset_bits / 8)
+          local foffset = math.floor(fsi.field_offset_bits / 8)
+          if fsi.storage_type == 0 then
+            -- TODO fix this for sections besides the first
+            local u = fsi.field_size_bits == 8 and u1 or fsi.field_size_bits == 16 and u2 or u4
+            local v = u(content, rpos + foffset)
+            t[k] = tsig[k] == 's' and z(content, rpos + foffset + v - roffset) or v
+          elseif fsi.storage_type ~= 2 then
             local boffset = fsi.field_offset_bits - foffset * 8
             local mask = 2 ^ (boffset + fsi.field_size_bits) - 2 ^ boffset
             local v = u4(content, rpos + foffset)
             local vv = i4tou4(bit.rshift(bit.band(v, mask), boffset))
-            if fsi.storage_type == 0 then
-              -- TODO fix this for sections besides the first
-              t[k] = tsig[k] == 's' and z(content, rpos + foffset + vv - roffset) or vv
-            elseif fsi.storage_type == 1 or fsi.storage_type == 5 then
+            if fsi.storage_type == 1 or fsi.storage_type == 5 then
               t[k] = vv
             elseif fsi.storage_type == 3 then
               t[k] = u4(content, palletpos + pallet_offsets[k] + vv * 4)
