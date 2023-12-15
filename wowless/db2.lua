@@ -108,14 +108,21 @@ local function rows(content, sig)
     assert(fsi.field_offset_bits + fsi.field_size_bits <= h.record_size * 8)
     if fsi.storage_type == 0 then
       assert(fsi.additional_data_size == 0)
+      assert(fsi.cx1 == 0)
+      assert(fsi.cx2 == 0)
+      assert(fsi.cx3 == 0)
     elseif fsi.storage_type == 2 then
       assert(fsi.field_size_bits == 0)
+      assert(fsi.cx2 == 0)
+      assert(fsi.cx3 == 0)
     elseif fsi.storage_type == 3 then
       assert(fsi.field_size_bits > 0)
       assert(fsi.additional_data_size > 0)
+      assert(fsi.cx3 == 0)
     elseif fsi.storage_type == 1 or fsi.storage_type == 5 then
       assert(fsi.field_size_bits > 0)
       assert(fsi.additional_data_size == 0)
+      assert(fsi.cx3 == 0)
     else
       error('unsupported storage type ' .. fsi.storage_type)
     end
