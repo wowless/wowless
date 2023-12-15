@@ -75,15 +75,16 @@ local function rows(content, sig)
   local cur = vstruct.cursor(content)
   local h = header:read(cur)
   assert(h.magic == 'WDC4')
-  assert(h.section_count <= 1) -- see string offset TODO below
+  assert(h.section_count >= 0)
   assert(h.total_field_count == #tsig)
   assert(h.total_field_count * 24 == h.field_storage_info_size)
   assert(h.flags.has_offset_map == false)
   local shs = {}
-  for _ = 1, h.section_count do
+  for i = 1, h.section_count do
     local sh = section_header:read(cur)
     assert(sh.id_list_size == 0 or sh.record_count * 4 == sh.id_list_size)
-    assert(sh.tact_key_hash == '\0\0\0\0\0\0\0\0')
+    -- Hack: first section must not be encrypted, all others must be.
+    assert(i ~= 1 or sh.tact_key_hash == '\0\0\0\0\0\0\0\0')
     table.insert(shs, sh)
   end
   cur:seek(nil, h.total_field_count * 4) -- ignore struct field_structure
@@ -149,8 +150,9 @@ local function rows(content, sig)
     table.insert(commons, common)
   end
   return coroutine.wrap(function()
-    for i = 1, h.section_count do
-      local sh = shs[i]
+    -- Only process the first section for now; the rest are encrypted.
+    if h.section_count > 0 then
+      local sh = shs[1]
       local rpos = sh.file_offset
       local ipos = rpos + sh.record_count * h.record_size + sh.string_table_size
       local cpos = ipos + sh.id_list_size
