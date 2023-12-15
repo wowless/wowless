@@ -118,6 +118,7 @@ local function rows(content, sig)
     if fsi.storage_type == 0 then
       assert(fsi.additional_data_size == 0)
       assert(math.fmod(fsi.field_offset_bits, 8) == 0)
+      assert(fsi.field_offset_bits < h.bitpacked_data_offset * 8)
       local sb = fsi.field_size_bits
       assert(sb == 8 or sb == 16 or sb == 32)
       assert(fsi.cx1 == 0)
@@ -130,11 +131,13 @@ local function rows(content, sig)
     elseif fsi.storage_type == 3 then
       assert(fsi.field_size_bits > 0)
       assert(fsi.field_size_bits <= 32)
+      assert(fsi.field_offset_bits >= h.bitpacked_data_offset * 8)
       assert(fsi.additional_data_size > 0)
       assert(fsi.cx3 == 0)
     elseif fsi.storage_type == 1 or fsi.storage_type == 5 then
       assert(fsi.field_size_bits > 0)
       assert(fsi.field_size_bits <= 32)
+      assert(fsi.field_offset_bits >= h.bitpacked_data_offset * 8)
       assert(fsi.additional_data_size == 0)
       assert(fsi.cx3 == 0)
     else

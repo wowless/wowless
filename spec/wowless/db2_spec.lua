@@ -17,7 +17,7 @@ local header = vstruct.compile([[<
   x2  -- flags: { [ 2 | x15 has_offset_map: b1 ] }
   x2  -- id_index: u2
   total_field_count: u4
-  x4  -- bitpacked_data_offset: u4
+  bitpacked_data_offset: u4
   x4  -- lookup_column_count: u4
   field_storage_info_size: u4
   x4  -- common_data_size: u4
@@ -141,7 +141,12 @@ local function spec2data(spec)
   local function write(fmt, t)
     table.insert(data, fmt:write(t))
   end
+  local n = 1
+  while n <= #spec.fields and spec.fields[n] == 'uncompressed' do
+    n = n + 1
+  end
   write(header, {
+    bitpacked_data_offset = (n - 1) * 4,
     field_count = #spec.fields,
     field_storage_info_size = 24 * #spec.fields,
     magic = 'WDC4',
