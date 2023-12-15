@@ -63,6 +63,8 @@ local function i4tou4(x)
   return x >= 0 and x or 2 ^ 32 + x
 end
 
+local zerohash = '\0\0\0\0\0\0\0\0'
+
 local function rows(content, sig)
   assert(sig:sub(1, 1) == '{')
   assert(sig:sub(-1) == '}')
@@ -84,7 +86,7 @@ local function rows(content, sig)
     local sh = section_header:read(cur)
     assert(sh.id_list_size == 0 or sh.record_count * 4 == sh.id_list_size)
     -- Hack: first section must not be encrypted, all others must be.
-    assert(i ~= 1 or sh.tact_key_hash == '\0\0\0\0\0\0\0\0')
+    assert(i ~= 1 or sh.tact_key_hash == zerohash)
     table.insert(shs, sh)
   end
   cur:seek(nil, h.total_field_count * 4) -- ignore struct field_structure
@@ -123,8 +125,15 @@ local function rows(content, sig)
   assert(common_offset == h.common_data_size)
   assert(pallet_offset == h.pallet_data_size)
   local palletpos = cur.pos
-  local commonpos = cur.pos + h.pallet_data_size
-  local pos = commonpos + h.common_data_size
+  local commonpos = palletpos + h.pallet_data_size
+  local encpos = commonpos + h.common_data_size
+  local pos = encpos
+  for _, sh in ipairs(shs) do
+    if sh.tact_key_hash ~= zerohash then
+      local count = u4(content, pos)
+      pos = pos + 4 + count * 4
+    end
+  end
   for _, sh in ipairs(shs) do
     assert(pos == sh.file_offset)
     pos = pos + sh.record_count * h.record_size
