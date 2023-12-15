@@ -129,10 +129,12 @@ local function rows(content, sig)
       assert(fsi.cx3 == 0)
     elseif fsi.storage_type == 3 then
       assert(fsi.field_size_bits > 0)
+      assert(fsi.field_size_bits <= 32)
       assert(fsi.additional_data_size > 0)
       assert(fsi.cx3 == 0)
     elseif fsi.storage_type == 1 or fsi.storage_type == 5 then
       assert(fsi.field_size_bits > 0)
+      assert(fsi.field_size_bits <= 32)
       assert(fsi.additional_data_size == 0)
       assert(fsi.cx3 == 0)
     else
