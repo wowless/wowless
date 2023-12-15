@@ -86,7 +86,7 @@ local function rows(content, sig)
     local sh = section_header:read(cur)
     assert(sh.id_list_size == 0 or sh.record_count * 4 == sh.id_list_size)
     -- Hack: first section must not be encrypted, all others must be.
-    assert(i ~= 1 or sh.tact_key_hash == zerohash)
+    assert((i == 1) == (sh.tact_key_hash == zerohash))
     table.insert(shs, sh)
   end
   cur:seek(nil, h.total_field_count * 4) -- ignore struct field_structure
