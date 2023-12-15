@@ -78,6 +78,7 @@ local goodsigs = {
   i = true,
   s = true,
   u = true,
+  ['.'] = true,
 }
 
 local function rows(content, sig)
@@ -112,9 +113,6 @@ local function rows(content, sig)
   local pallet_offset = 0
   for _ = 1, h.total_field_count do
     local fsi = field_storage_info:read(cur)
-    -- Hacky check to ensure field can be read by masking a u4.
-    assert(fsi.field_size_bits + math.fmod(fsi.field_offset_bits, 8) <= 32)
-    assert(fsi.field_offset_bits + fsi.field_size_bits <= h.record_size * 8)
     if fsi.storage_type == 0 then
       assert(fsi.additional_data_size == 0)
       assert(math.fmod(fsi.field_offset_bits, 8) == 0)
@@ -241,6 +239,11 @@ local function rows(content, sig)
           local fsi = fsis[k]
           if fsi.storage_type == 2 then
             t[k] = commons[k][t[0]] or fsi.cx1
+          end
+        end
+        for k = 1, h.total_field_count do
+          if tsig[k] == '.' then
+            table.remove(t, k)
           end
         end
         rpos = rpos + h.record_size
