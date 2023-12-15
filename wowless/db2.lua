@@ -58,10 +58,28 @@ local function u2(content, offset)
   return w + x * 256
 end
 
+local function u3(content, offset)
+  local w, x, y = strbyte(content, offset + 1, offset + 3)
+  return w + x * 256 + y * 65536
+end
+
 local function u4(content, offset)
   local w, x, y, z = strbyte(content, offset + 1, offset + 4)
-  return w + (x or 0) * 256 + (y or 0) * 65536 + (z or 0) * 16777216
+  return w + x * 256 + y * 65536 + z * 16777216
 end
+
+local function u5(content, offset)
+  local w, x, y, z, zz = strbyte(content, offset + 1, offset + 5)
+  return w + x * 256 + y * 65536 + z * 16777216 + zz * 4294967296
+end
+
+local un = {
+  [1] = u1,
+  [2] = u2,
+  [3] = u3,
+  [4] = u4,
+  [5] = u5,
+}
 
 local function z(content, offset)
   local e = assert(strfind(content, '\0', offset + 1, true))
@@ -117,8 +135,8 @@ local function rows(content, sig)
       assert(fsi.additional_data_size == 0)
       assert(math.fmod(fsi.field_offset_bits, 8) == 0)
       assert(fsi.field_offset_bits < h.bitpacked_data_offset * 8)
-      local sb = fsi.field_size_bits
-      assert(sb == 8 or sb == 16 or sb == 32)
+      assert(math.fmod(fsi.field_size_bits, 8) == 0)
+      assert(fsi.field_size_bits <= 32)
       assert(fsi.cx1 == 0)
       assert(fsi.cx2 == 0)
       assert(fsi.cx3 == 0)
@@ -212,8 +230,7 @@ local function rows(content, sig)
           local foffset = math.floor(fsi.field_offset_bits / 8)
           if fsi.storage_type == 0 then
             -- TODO fix this for sections besides the first
-            local u = fsi.field_size_bits == 8 and u1 or fsi.field_size_bits == 16 and u2 or u4
-            local v = u(content, rpos + foffset)
+            local v = un[fsi.field_size_bits / 8](content, rpos + foffset)
             t[k] = tsig[k] == 's' and z(content, rpos + foffset + v - roffset) or v
           elseif fsi.storage_type ~= 2 then
             local boffset = fsi.field_offset_bits - foffset * 8
