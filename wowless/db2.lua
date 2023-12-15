@@ -65,13 +65,19 @@ end
 
 local zerohash = '\0\0\0\0\0\0\0\0'
 
+local goodsigs = {
+  i = true,
+  s = true,
+  u = true,
+}
+
 local function rows(content, sig)
   assert(sig:sub(1, 1) == '{')
   assert(sig:sub(-1) == '}')
   local tsig = {}
   for i = 2, sig:len() - 1 do
     local c = sig:sub(i, i)
-    assert(c == 's' or c == 'u' or c == 'i')
+    assert(goodsigs[c], 'unexpected sig char ' .. c)
     table.insert(tsig, c)
   end
   local cur = vstruct.cursor(content)
