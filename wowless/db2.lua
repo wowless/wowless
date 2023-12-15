@@ -158,6 +158,10 @@ local function rows(content, sig)
     end
     table.insert(commons, common)
   end
+  local roffset = 0
+  for i = 2, #shs do
+    roffset = roffset + shs[i].record_count * h.record_size
+  end
   return coroutine.wrap(function()
     -- Only process the first section for now; the rest are encrypted.
     if h.section_count > 0 then
@@ -184,8 +188,8 @@ local function rows(content, sig)
             local v = u4(content, rpos + foffset)
             local vv = i4tou4(bit.rshift(bit.band(v, mask), boffset))
             if fsi.storage_type == 0 then
-              -- TODO strings are only correct in simple cases; see the WDC2 docs
-              t[k] = tsig[k] == 's' and z(content, rpos + foffset + vv) or vv
+              -- TODO fix this for sections besides the first
+              t[k] = tsig[k] == 's' and z(content, rpos + foffset + vv - roffset) or vv
             elseif fsi.storage_type == 1 or fsi.storage_type == 5 then
               t[k] = vv
             elseif fsi.storage_type == 3 then
