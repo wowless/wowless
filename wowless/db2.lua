@@ -68,17 +68,11 @@ local function u4(content, offset)
   return w + x * 256 + y * 65536 + z * 16777216
 end
 
-local function u5(content, offset)
-  local w, x, y, z, zz = strbyte(content, offset + 1, offset + 5)
-  return w + x * 256 + y * 65536 + z * 16777216 + zz * 4294967296
-end
-
 local un = {
   [1] = u1,
   [2] = u2,
   [3] = u3,
   [4] = u4,
-  [5] = u5,
 }
 
 local function z(content, offset)
