@@ -67,11 +67,17 @@ local function u4(content, offset)
   return w + x * 256 + y * 65536 + z * 16777216
 end
 
+local function u5(content, offset)
+  local w, x, y, z, zz = strbyte(content, offset + 1, offset + 5)
+  return w + x * 256 + y * 65536 + z * 16777216 + zz * 4294967296
+end
+
 local un = {
   [1] = u1,
   [2] = u2,
   [3] = u3,
   [4] = u4,
+  [5] = u5,
 }
 
 local function z(content, offset)
@@ -216,15 +222,18 @@ local function rows(content, sig)
         local t = {}
         for k = 1, h.total_field_count do
           local fsi = fsis[k]
+          local fob = fsi.field_offset_bits
+          local fsb = fsi.field_size_bits
           if fsi.storage_type == 0 then
             -- TODO fix this for sections besides the first
-            local foffset = fsi.field_offset_bits / 8
-            local v = un[fsi.field_size_bits / 8](content, rpos + foffset)
+            local foffset = fob / 8
+            local v = un[fsb / 8](content, rpos + foffset)
             t[k] = tsig[k] == 's' and z(content, rpos + foffset + v - roffset) or v
           elseif fsi.storage_type ~= 2 then
-            local fob = fsi.field_offset_bits
-            local v = u4(content, rpos + math.floor(fob / 8))
-            local vv = math.floor(v / (2 ^ (fob % 8))) % (2 ^ fsi.field_size_bits)
+            local loff = math.floor(fob / 8)
+            local hoff = math.floor((fob + fsb - 1) / 8)
+            local v = un[hoff - loff + 1](content, rpos + loff)
+            local vv = math.floor(v / (2 ^ (fob % 8))) % (2 ^ fsb)
             if fsi.storage_type == 1 or fsi.storage_type == 5 then
               t[k] = vv
             elseif fsi.storage_type == 3 then
