@@ -208,7 +208,8 @@ local function rows(content, sig)
     if h.section_count > 0 then
       local sh = shs[1]
       local rpos = sh.file_offset
-      local ipos = rpos + sh.record_count * h.record_size + sh.string_table_size
+      local spos = rpos + sh.record_count * h.record_size
+      local ipos = spos + sh.string_table_size
       local cpos = ipos + sh.id_list_size
       local copytable = {}
       for _ = 1, sh.copy_table_count do
@@ -228,7 +229,12 @@ local function rows(content, sig)
             -- TODO fix this for sections besides the first
             local foffset = fob / 8
             local v = un[fsb / 8](content, rpos + foffset)
-            t[k] = tsig[k] == 's' and z(content, rpos + foffset + v - roffset) or v
+            if tsig[k] == 's' then
+              local s = rpos + foffset + v - roffset
+              t[k] = s >= spos and s < ipos and z(content, s) or ''
+            else
+              t[k] = v
+            end
           elseif fsi.storage_type ~= 2 then
             local loff = math.floor(fob / 8)
             local hoff = math.floor((fob + fsb - 1) / 8)
