@@ -275,7 +275,6 @@ local function rows(content, sig)
               table.remove(t, k)
             end
           end
-          rpos = rpos + h.record_size
           local copies = {}
           for _, newid in ipairs(copytable[t[0]] or {}) do
             local tt = { [0] = newid }
@@ -289,6 +288,7 @@ local function rows(content, sig)
             coroutine.yield(copies[k])
           end
         end
+        rpos = rpos + h.record_size
       end
     end
   end)
