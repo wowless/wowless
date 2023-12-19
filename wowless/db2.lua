@@ -255,7 +255,7 @@ local function rows(content, sig)
             t[k] = commons[k][t[0]] or fsi.cx1
           end
         end
-        for k = 1, h.total_field_count do
+        for k = h.total_field_count, 1, -1 do
           if tsig[k] == '.' then
             table.remove(t, k)
           end
