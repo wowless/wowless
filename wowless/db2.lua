@@ -114,7 +114,6 @@ local function rows(content, sig)
   for i = 1, h.section_count do
     local sh = section_header:read(cur)
     assert(sh.id_list_size == 0 or sh.record_count * 4 == sh.id_list_size)
-    -- Hack: first section must not be encrypted, all others must be.
     assert((i == 1) == (sh.tact_key_hash == zerohash))
     table.insert(shs, sh)
   end
@@ -199,14 +198,20 @@ local function rows(content, sig)
     end
     table.insert(commons, common)
   end
-  local roffset = 0
-  for i = 2, #shs do
-    roffset = roffset + shs[i].record_count * h.record_size
+  do
+    local roffset = 0
+    for i = #shs, 1, -1 do
+      shs[i].xoffset = roffset
+      roffset = roffset + shs[i].record_count * h.record_size
+    end
+    local soffset = 0
+    for i = 1, #shs do
+      shs[i].xoffset = shs[i].xoffset + soffset
+      soffset = soffset + shs[i].string_table_size
+    end
   end
   return coroutine.wrap(function()
-    -- Only process the first section for now; the rest are encrypted.
-    if h.section_count > 0 then
-      local sh = shs[1]
+    for _, sh in ipairs(shs) do
       local rpos = sh.file_offset
       local spos = rpos + sh.record_count * h.record_size
       local ipos = spos + sh.string_table_size
@@ -226,11 +231,10 @@ local function rows(content, sig)
           local fob = fsi.field_offset_bits
           local fsb = fsi.field_size_bits
           if fsi.storage_type == 0 then
-            -- TODO fix this for sections besides the first
             local foffset = fob / 8
             local v = un[fsb / 8](content, rpos + foffset)
             if tsig[k] == 's' then
-              local s = rpos + foffset + v - roffset
+              local s = rpos + foffset + v - sh.xoffset
               t[k] = s >= spos and s < ipos and z(content, s) or ''
             else
               t[k] = v
@@ -259,29 +263,31 @@ local function rows(content, sig)
         elseif not h.flags.ignore_id_index then
           t[0] = t[h.id_index + 1]
         end
-        for k = 1, h.total_field_count do
-          local fsi = fsis[k]
-          if fsi.storage_type == 2 then
-            t[k] = commons[k][t[0]] or fsi.cx1
-          end
-        end
-        for k = h.total_field_count, 1, -1 do
-          if tsig[k] == '.' then
-            table.remove(t, k)
-          end
-        end
-        rpos = rpos + h.record_size
-        local copies = {}
-        for _, newid in ipairs(copytable[t[0]] or {}) do
-          local tt = { [0] = newid }
+        if t[0] ~= 0 then
           for k = 1, h.total_field_count do
-            tt[k] = t[k]
+            local fsi = fsis[k]
+            if fsi.storage_type == 2 then
+              t[k] = commons[k][t[0]] or fsi.cx1
+            end
           end
-          table.insert(copies, tt)
-        end
-        coroutine.yield(t)
-        for k = #copies, 1, -1 do
-          coroutine.yield(copies[k])
+          for k = h.total_field_count, 1, -1 do
+            if tsig[k] == '.' then
+              table.remove(t, k)
+            end
+          end
+          rpos = rpos + h.record_size
+          local copies = {}
+          for _, newid in ipairs(copytable[t[0]] or {}) do
+            local tt = { [0] = newid }
+            for k = 1, h.total_field_count do
+              tt[k] = t[k]
+            end
+            table.insert(copies, tt)
+          end
+          coroutine.yield(t)
+          for k = #copies, 1, -1 do
+            coroutine.yield(copies[k])
+          end
         end
       end
     end
