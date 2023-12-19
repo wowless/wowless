@@ -1,4 +1,3 @@
-local bit = require('bit')
 local vstruct = require('vstruct')
 
 local header = vstruct.compile([[<
@@ -80,10 +79,6 @@ local function z(content, offset)
   return strsub(content, offset + 1, e - 1)
 end
 
-local function i4tou4(x)
-  return x >= 0 and x or 2 ^ 32 + x
-end
-
 local zerohash = '\0\0\0\0\0\0\0\0'
 
 local goodsigs = {
@@ -127,9 +122,9 @@ local function rows(content, sig)
     local fsi = field_storage_info:read(cur)
     if fsi.storage_type == 0 then
       assert(fsi.additional_data_size == 0)
-      assert(math.fmod(fsi.field_offset_bits, 8) == 0)
+      assert(fsi.field_offset_bits % 8 == 0)
       assert(fsi.field_offset_bits < h.bitpacked_data_offset * 8)
-      assert(math.fmod(fsi.field_size_bits, 8) == 0)
+      assert(fsi.field_size_bits % 8 == 0)
       assert(fsi.field_size_bits <= 32)
       assert(fsi.cx1 == 0)
       assert(fsi.cx2 == 0)
@@ -227,11 +222,9 @@ local function rows(content, sig)
             local v = un[fsi.field_size_bits / 8](content, rpos + foffset)
             t[k] = tsig[k] == 's' and z(content, rpos + foffset + v - roffset) or v
           elseif fsi.storage_type ~= 2 then
-            local foffset = math.floor(fsi.field_offset_bits / 8)
-            local boffset = fsi.field_offset_bits - foffset * 8
-            local mask = 2 ^ (boffset + fsi.field_size_bits) - 2 ^ boffset
-            local v = u4(content, rpos + foffset)
-            local vv = i4tou4(bit.rshift(bit.band(v, mask), boffset))
+            local fob = fsi.field_offset_bits
+            local v = u4(content, rpos + math.floor(fob / 8))
+            local vv = math.floor(v / (2 ^ (fob % 8))) % (2 ^ fsi.field_size_bits)
             if fsi.storage_type == 1 or fsi.storage_type == 5 then
               t[k] = vv
             elseif fsi.storage_type == 3 then
