@@ -221,12 +221,13 @@ local function rows(content, sig)
         local t = {}
         for k = 1, h.total_field_count do
           local fsi = fsis[k]
-          local foffset = math.floor(fsi.field_offset_bits / 8)
           if fsi.storage_type == 0 then
             -- TODO fix this for sections besides the first
+            local foffset = fsi.field_offset_bits / 8
             local v = un[fsi.field_size_bits / 8](content, rpos + foffset)
             t[k] = tsig[k] == 's' and z(content, rpos + foffset + v - roffset) or v
           elseif fsi.storage_type ~= 2 then
+            local foffset = math.floor(fsi.field_offset_bits / 8)
             local boffset = fsi.field_offset_bits - foffset * 8
             local mask = 2 ^ (boffset + fsi.field_size_bits) - 2 ^ boffset
             local v = u4(content, rpos + foffset)
