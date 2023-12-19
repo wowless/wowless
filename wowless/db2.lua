@@ -237,7 +237,11 @@ local function rows(content, sig)
             if fsi.storage_type == 1 or fsi.storage_type == 5 then
               t[k] = vv
             elseif fsi.storage_type == 3 then
-              t[k] = u4(content, palletpos + pallet_offsets[k] + vv * 4)
+              local p = u4(content, palletpos + pallet_offsets[k] + vv * 4)
+              if tsig[k] == 'i' and p >= 2 ^ 31 then
+                p = p - 2 ^ 32
+              end
+              t[k] = p
             else
               error('internal error')
             end
