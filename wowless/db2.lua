@@ -11,7 +11,7 @@ local header = vstruct.compile([[<
   min_id: u4
   max_id: u4
   locale: u4
-  flags: { [ 2 | x13 ignore_id_index: b1 x1 has_offset_map: b1 ] }
+  flags: { [ 2 | x13 ignore_id_index: b1 collectable: b1 has_offset_map: b1 ] }
   id_index: u2
   total_field_count: u4
   bitpacked_data_offset: u4
@@ -103,6 +103,8 @@ local function rows(content, sig)
       table.insert(tsig, { field = i, signed = true })
     elseif c == 'u' then
       table.insert(tsig, { field = i })
+    elseif c == 'F' then
+      table.insert(tsig, { foreign = true })
     elseif c ~= '.' then
       error('unexpected sig char ' .. c)
     end
@@ -111,9 +113,12 @@ local function rows(content, sig)
   local h = header:read(cur)
   assert(h.magic == 'WDC4')
   assert(h.section_count >= 0)
-  assert(h.total_field_count >= #tsig)
   assert(h.total_field_count * 24 == h.field_storage_info_size)
+  assert(h.flags.collectable == false)
   assert(h.flags.has_offset_map == false)
+  for k, ts in ipairs(tsig) do
+    assert(ts.field == nil or ts.field <= h.total_field_count, k)
+  end
   local shs = {}
   for i = 1, h.section_count do
     local sh = section_header:read(cur)
@@ -220,6 +225,7 @@ local function rows(content, sig)
       local spos = rpos + sh.record_count * h.record_size
       local ipos = spos + sh.string_table_size
       local cpos = ipos + sh.id_list_size
+      local fpos = cpos + sh.copy_table_count * 8 + sh.offset_map_id_count * 6
       local copytable = {}
       for _ = 1, sh.copy_table_count do
         local newid = u4(content, cpos)
@@ -228,37 +234,53 @@ local function rows(content, sig)
         table.insert(copytable[copiedid], newid)
         cpos = cpos + 8
       end
-      for _ = 1, sh.record_count do
+      local relmap = {}
+      if sh.relationship_data_size > 0 then
+        local n = u4(content, fpos)
+        assert(n == 0 or n * 8 + 12 == sh.relationship_data_size)
+        for p = fpos + 12, fpos + sh.relationship_data_size - 1, 8 do
+          local foreign_key = u4(content, p)
+          local record_index = u4(content, p + 4)
+          relmap[record_index + 1] = foreign_key
+        end
+      end
+      for i = 1, sh.record_count do
         local t = {}
         for k, ts in ipairs(tsig) do
-          local fsi = fsis[ts.field]
-          local fob = fsi.field_offset_bits
-          local fsb = fsi.field_size_bits
-          if fsi.storage_type == 0 then
-            local foffset = fob / 8
-            local v = un[fsb / 8](content, rpos + foffset)
-            if ts.string then
-              local s = rpos + foffset + v - sh.xoffset
-              t[k] = s >= spos and s < ipos and z(content, s) or ''
-            else
-              t[k] = v
-            end
-          elseif fsi.storage_type ~= 2 then
-            local loff = div(fob, 8)
-            local hoff = div(fob + fsb - 1, 8)
-            local v = un[hoff - loff + 1](content, rpos + loff)
-            local vv = div(v, 2 ^ (fob % 8)) % (2 ^ fsb)
-            if fsi.storage_type == 1 or fsi.storage_type == 5 then
-              t[k] = vv
-            elseif fsi.storage_type == 3 then
-              local p = u4(content, palletpos + pallet_offsets[ts.field] + vv * 4)
-              if ts.signed and p >= 2 ^ 31 then
-                p = p - 2 ^ 32
+          if ts.field then
+            local fsi = fsis[ts.field]
+            local fob = fsi.field_offset_bits
+            local fsb = fsi.field_size_bits
+            if fsi.storage_type == 0 then
+              local foffset = fob / 8
+              local v = un[fsb / 8](content, rpos + foffset)
+              if ts.string then
+                local s = rpos + foffset + v - sh.xoffset
+                t[k] = s >= spos and s < ipos and z(content, s) or ''
+              else
+                t[k] = v
               end
-              t[k] = p
-            else
-              error('internal error')
+            elseif fsi.storage_type ~= 2 then
+              local loff = div(fob, 8)
+              local hoff = div(fob + fsb - 1, 8)
+              local v = un[hoff - loff + 1](content, rpos + loff)
+              local vv = div(v, 2 ^ (fob % 8)) % (2 ^ fsb)
+              if fsi.storage_type == 1 or fsi.storage_type == 5 then
+                t[k] = vv
+              elseif fsi.storage_type == 3 then
+                local p = u4(content, palletpos + pallet_offsets[ts.field] + vv * 4)
+                if ts.signed and p >= 2 ^ 31 then
+                  p = p - 2 ^ 32
+                end
+                t[k] = p
+              else
+                error('internal error')
+              end
             end
+          elseif ts.foreign then
+            t[k] = assert(relmap[i])
+          else
+            error('internal error')
           end
         end
         if sh.id_list_size > 0 then
@@ -270,7 +292,7 @@ local function rows(content, sig)
         if t[0] ~= 0 then
           for k, ts in ipairs(tsig) do
             local fsi = fsis[ts.field]
-            if fsi.storage_type == 2 then
+            if fsi and fsi.storage_type == 2 then
               t[k] = commons[ts.field][t[0]] or fsi.cx1
             end
           end
