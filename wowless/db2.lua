@@ -85,6 +85,10 @@ local function z(content, offset)
   return strsub(content, offset + 1, e - 1)
 end
 
+local function div(a, b)
+  return math.floor(a / b)
+end
+
 local zerohash = '\0\0\0\0\0\0\0\0'
 
 local goodsigs = {
@@ -240,10 +244,10 @@ local function rows(content, sig)
               t[k] = v
             end
           elseif fsi.storage_type ~= 2 then
-            local loff = math.floor(fob / 8)
-            local hoff = math.floor((fob + fsb - 1) / 8)
+            local loff = div(fob, 8)
+            local hoff = div(fob + fsb - 1, 8)
             local v = un[hoff - loff + 1](content, rpos + loff)
-            local vv = math.floor(v / (2 ^ (fob % 8))) % (2 ^ fsb)
+            local vv = div(v, 2 ^ (fob % 8)) % (2 ^ fsb)
             if fsi.storage_type == 1 or fsi.storage_type == 5 then
               t[k] = vv
             elseif fsi.storage_type == 3 then
