@@ -95,23 +95,24 @@ local goodsigs = {
   i = true,
   s = true,
   u = true,
-  ['.'] = true,
 }
 
 local function rows(content, sig)
   assert(sig:sub(1, 1) == '{')
   assert(sig:sub(-1) == '}')
   local tsig = {}
-  for i = 2, sig:len() - 1 do
-    local c = sig:sub(i, i)
-    assert(goodsigs[c], 'unexpected sig char ' .. c)
-    table.insert(tsig, c)
+  for i = 1, sig:len() - 2 do
+    local c = sig:sub(i + 1, i + 1)
+    if c ~= '.' then
+      assert(goodsigs[c], 'unexpected sig char ' .. c)
+      table.insert(tsig, { sig = c, field = i })
+    end
   end
   local cur = vstruct.cursor(content)
   local h = header:read(cur)
   assert(h.magic == 'WDC4')
   assert(h.section_count >= 0)
-  assert(h.total_field_count == #tsig)
+  assert(h.total_field_count >= #tsig)
   assert(h.total_field_count * 24 == h.field_storage_info_size)
   assert(h.flags.has_offset_map == false)
   local shs = {}
@@ -230,14 +231,14 @@ local function rows(content, sig)
       end
       for _ = 1, sh.record_count do
         local t = {}
-        for k = 1, h.total_field_count do
-          local fsi = fsis[k]
+        for k, ts in ipairs(tsig) do
+          local fsi = fsis[ts.field]
           local fob = fsi.field_offset_bits
           local fsb = fsi.field_size_bits
           if fsi.storage_type == 0 then
             local foffset = fob / 8
             local v = un[fsb / 8](content, rpos + foffset)
-            if tsig[k] == 's' then
+            if ts.sig == 's' then
               local s = rpos + foffset + v - sh.xoffset
               t[k] = s >= spos and s < ipos and z(content, s) or ''
             else
@@ -251,8 +252,8 @@ local function rows(content, sig)
             if fsi.storage_type == 1 or fsi.storage_type == 5 then
               t[k] = vv
             elseif fsi.storage_type == 3 then
-              local p = u4(content, palletpos + pallet_offsets[k] + vv * 4)
-              if tsig[k] == 'i' and p >= 2 ^ 31 then
+              local p = u4(content, palletpos + pallet_offsets[ts.field] + vv * 4)
+              if ts.sig == 'i' and p >= 2 ^ 31 then
                 p = p - 2 ^ 32
               end
               t[k] = p
@@ -268,21 +269,16 @@ local function rows(content, sig)
           t[0] = t[h.id_index + 1]
         end
         if t[0] ~= 0 then
-          for k = 1, h.total_field_count do
-            local fsi = fsis[k]
+          for k, ts in ipairs(tsig) do
+            local fsi = fsis[ts.field]
             if fsi.storage_type == 2 then
-              t[k] = commons[k][t[0]] or fsi.cx1
-            end
-          end
-          for k = h.total_field_count, 1, -1 do
-            if tsig[k] == '.' then
-              table.remove(t, k)
+              t[k] = commons[ts.field][t[0]] or fsi.cx1
             end
           end
           local copies = {}
           for _, newid in ipairs(copytable[t[0]] or {}) do
             local tt = { [0] = newid }
-            for k = 1, h.total_field_count do
+            for k = 1, #tsig do
               tt[k] = t[k]
             end
             table.insert(copies, tt)
