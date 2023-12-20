@@ -91,21 +91,20 @@ end
 
 local zerohash = '\0\0\0\0\0\0\0\0'
 
-local goodsigs = {
-  i = true,
-  s = true,
-  u = true,
-}
-
 local function rows(content, sig)
   assert(sig:sub(1, 1) == '{')
   assert(sig:sub(-1) == '}')
   local tsig = {}
   for i = 1, sig:len() - 2 do
     local c = sig:sub(i + 1, i + 1)
-    if c ~= '.' then
-      assert(goodsigs[c], 'unexpected sig char ' .. c)
-      table.insert(tsig, { sig = c, field = i })
+    if c == 's' then
+      table.insert(tsig, { field = i, string = true })
+    elseif c == 'i' then
+      table.insert(tsig, { field = i, signed = true })
+    elseif c == 'u' then
+      table.insert(tsig, { field = i })
+    elseif c ~= '.' then
+      error('unexpected sig char ' .. c)
     end
   end
   local cur = vstruct.cursor(content)
@@ -238,7 +237,7 @@ local function rows(content, sig)
           if fsi.storage_type == 0 then
             local foffset = fob / 8
             local v = un[fsb / 8](content, rpos + foffset)
-            if ts.sig == 's' then
+            if ts.string then
               local s = rpos + foffset + v - sh.xoffset
               t[k] = s >= spos and s < ipos and z(content, s) or ''
             else
@@ -253,7 +252,7 @@ local function rows(content, sig)
               t[k] = vv
             elseif fsi.storage_type == 3 then
               local p = u4(content, palletpos + pallet_offsets[ts.field] + vv * 4)
-              if ts.sig == 'i' and p >= 2 ^ 31 then
+              if ts.signed and p >= 2 ^ 31 then
                 p = p - 2 ^ 32
               end
               t[k] = p
