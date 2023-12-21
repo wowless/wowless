@@ -1,5 +1,13 @@
 <Ui>
   <Script>
+    WowlessXmlErrors = {}
+    WowlessOldErrorHandler = geterrorhandler()
+    seterrorhandler(function(e)
+      table.insert(WowlessXmlErrors, e)
+    end)
+  </Script>
+
+  <Script>
     _G.WowlessLog = {}
     local function log(fmt, ...)
       table.insert(_G.WowlessLog, string.format(fmt, ...))
@@ -698,4 +706,11 @@
       </OnLoad>
     </Scripts>
   </Frame>
+
+  <Script>
+    if WowlessOldErrorHandler then
+      seterrorhandler(WowlessOldErrorHandler)
+      WowlessOldErrorHandler = nil
+    end
+  </Script>
 </Ui>
