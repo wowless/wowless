@@ -1,8 +1,8 @@
 ---
-build: '52409'
-date: Dec  1 2023
+build: '52610'
+date: Dec 15 2023
 flavor: Vanilla
-hash: 20a02dcddc3b835481cbef7d47be0ca2
+hash: 3b40893c622218bf6610b3c36c796906
 test: false
 tocversion: 11500
 version: 1.15.0
