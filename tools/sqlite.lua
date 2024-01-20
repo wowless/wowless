@@ -59,10 +59,6 @@ local function factory(theProduct)
           for _, field in ipairs(v.orderedfields) do
             local value = row[v.field2index[field]]
             local ty = type(value)
-            if ty == 'table' then
-              value = value[1]
-              ty = type(value)
-            end
             if ty == 'nil' then
               value = 'NULL'
             elseif ty == 'string' then

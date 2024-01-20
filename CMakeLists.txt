@@ -595,7 +595,6 @@ FetchContent_MakeAvailable(luadbd)
 lua2c(
   luadbd
   luadbd.parser=${luadbd_SOURCE_DIR}/luadbd/parser.lua
-  luadbd.sig=${luadbd_SOURCE_DIR}/luadbd/sig.lua
 )
 add_library(luadbd STATIC luadbd.c)
 target_link_libraries(luadbd PRIVATE elune)
