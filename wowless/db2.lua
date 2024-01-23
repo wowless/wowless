@@ -111,6 +111,7 @@ local function rows(content, dbdef)
         idin = #fields
       end
     elseif f.relation then
+      assert(not relout)
       relout = i
     end
   end
