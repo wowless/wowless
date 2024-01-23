@@ -104,7 +104,7 @@ local function rows(content, dbdef)
     if not f.noninline then
       table.insert(fields, {
         index = i,
-        signed = not f.unsigned,
+        signed = not f.unsigned and f.type ~= 'float',
         string = f.type == 'string',
       })
       if f.id then
