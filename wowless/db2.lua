@@ -298,7 +298,7 @@ local function rows(content, dbdef)
           end
         end
         if relout then
-          t[relout] = assert(relmap[i])
+          t[relout] = relmap[i]
         end
         if idout and not idin then
           assert(sh.id_list_size > 0)
