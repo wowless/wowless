@@ -263,11 +263,14 @@ local function rows(content, dbdef)
           if fsi.storage_type == 0 then
             local foffset = fob / 8
             local v = un[fsb / 8](content, rpos + foffset)
-            if f.string then
-              local s = rpos + foffset + v - sh.xoffset
-              t[f.index] = s >= spos and s < ipos and z(content, s) or ''
-            else
+            if not f.string then
               t[f.index] = v
+            elseif v == 0 then
+              t[f.index] = ''
+            else
+              local s = rpos + foffset + v - sh.xoffset
+              assert(s >= spos and s < ipos)
+              t[f.index] = z(content, s)
             end
           elseif fsi.storage_type ~= 2 then
             local loff = div(fob, 8)
