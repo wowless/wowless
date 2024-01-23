@@ -91,22 +91,11 @@ end
 
 local zerohash = '\0\0\0\0\0\0\0\0'
 
-local function rows(content, sig)
-  assert(sig:sub(1, 1) == '{')
-  assert(sig:sub(-1) == '}')
-  local tsig = {}
-  for i = 1, sig:len() - 2 do
-    local c = sig:sub(i + 1, i + 1)
-    if c == 's' then
-      table.insert(tsig, { field = i, string = true })
-    elseif c == 'i' then
-      table.insert(tsig, { field = i, signed = true })
-    elseif c == 'u' then
-      table.insert(tsig, { field = i })
-    elseif c == 'F' then
-      table.insert(tsig, { foreign = true })
-    elseif c ~= '.' then
-      error('unexpected sig char ' .. c)
+local function rows(content, dbdef)
+  local numinline = 0
+  for _, f in ipairs(dbdef) do
+    if not f.noninline then
+      numinline = numinline + 1
     end
   end
   local cur = vstruct.cursor(content)
@@ -116,9 +105,8 @@ local function rows(content, sig)
   assert(h.total_field_count * 24 == h.field_storage_info_size)
   assert(h.flags.collectable == false)
   assert(h.flags.has_offset_map == false)
-  for k, ts in ipairs(tsig) do
-    assert(ts.field == nil or ts.field <= h.total_field_count, k)
-  end
+  assert(h.total_field_count == numinline)
+  local tsig = ''
   local shs = {}
   for i = 1, h.section_count do
     local sh = section_header:read(cur)

@@ -16,9 +16,8 @@ local function compare(product)
   local defs = dofile('build/products/' .. product .. '/dbdefs.lua')
   for k, v in sorted(defs) do
     local data = readfile('extracts/' .. product .. '/db2/' .. k .. '.db2')
-    local sig = '{' .. v.sig .. '}'
-    local sa, a = pcall(collect, dbcrows, data, sig)
-    local sb, b = pcall(collect, db2rows, data, sig)
+    local sa, a = pcall(collect, dbcrows, data, v)
+    local sb, b = pcall(collect, db2rows, data, v)
     if not sa or not sb then
       print(k .. ': error' .. (not sb and ': ' .. b or ''))
     elseif deepcompare(a, b) then
