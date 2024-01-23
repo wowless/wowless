@@ -1,56 +1,3 @@
-local function colsig(col, ty)
-  if ty == 'string' or ty == 'locstring' then
-    return 's'
-  elseif ty == 'float' then
-    return '.' -- luadbc is sometimes broken on floats :(
-  elseif ty == 'int' then
-    assert(col.size <= 32, 'wide ints not supported')
-    return col.unsigned and 'u' or 'i'
-  else
-    error('invalid column type ' .. ty)
-  end
-end
-
-local function mksig(dcols, bcols)
-  local types = {}
-  for _, dc in ipairs(dcols) do
-    types[dc.name] = dc.type
-  end
-  local sig = ''
-  local fields = {}
-  local idx = 1
-  for _, bc in ipairs(bcols) do
-    local isID = false
-    local isInline = true
-    local isRelation = false
-    if bc.annotations then
-      for _, a in ipairs(bc.annotations) do
-        isID = isID or a == 'id'
-        isInline = isInline and a ~= 'noninline'
-        isRelation = isRelation or a == 'relation'
-      end
-    end
-    if isInline then
-      local cs = colsig(bc, types[bc.name])
-      if bc.length then
-        cs = cs .. string.rep('.', bc.length - 1)
-      end
-      sig = sig .. cs
-      fields[bc.name] = idx
-      idx = idx + (bc.length or 1)
-    elseif isRelation then
-      sig = sig .. 'F'
-      fields[bc.name] = idx
-      idx = idx + 1
-    elseif isID then
-      fields[bc.name] = 0
-    else
-      error('invalid column')
-    end
-  end
-  return sig, fields
-end
-
 local function defs(product)
   local build = require('wowapi.yaml').parseFile('data/products/' .. product .. '/build.yaml')
   local bv = build.version .. '.' .. build.build
@@ -69,11 +16,29 @@ local function defs(product)
       end
       error('cannot find ' .. bv .. ' in dbd ' .. db)
     end)()
-    local sig, field2index = mksig(dbd.columns, v.columns)
-    t[db] = {
-      field2index = field2index,
-      sig = sig,
-    }
+    local types = {}
+    for _, dc in ipairs(dbd.columns) do
+      types[dc.name] = dc.type
+    end
+    local tt = {}
+    for _, vc in pairs(v.columns) do
+      local aa = {}
+      for _, a in ipairs(vc.annotations or {}) do
+        aa[a] = true
+      end
+      local ty = types[vc.name]
+      table.insert(tt, {
+        id = aa.id,
+        length = vc.length,
+        name = assert(vc.name),
+        noninline = aa.noninline,
+        relation = aa.relation,
+        size = vc.size,
+        type = ty == 'locstring' and 'string' or ty,
+        unsigned = vc.unsigned,
+      })
+    end
+    t[db] = tt
   end
   return t
 end
