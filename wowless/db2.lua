@@ -92,24 +92,29 @@ end
 local zerohash = '\0\0\0\0\0\0\0\0'
 
 local function rows(content, dbdef)
-  local idfield = nil
-  local inlines = {}
-  local noninlines = {}
+  local fields = {}
+  local idin = nil
+  local idout = nil
+  local relout = nil
   for i, f in ipairs(dbdef) do
     if f.id then
-      assert(idfield == nil)
-      idfield = i
+      assert(not idout)
+      idout = i
     end
-    if not f.id or not f.noninline then
-      table.insert(f.noninline and noninlines or inlines, {
-        foreign = f.foreign,
+    if not f.noninline then
+      table.insert(fields, {
         index = i,
         signed = not f.unsigned,
         string = f.type == 'string',
       })
+      if f.id then
+        idin = #fields
+      end
+    elseif f.relation then
+      relout = i
     end
   end
-  assert(idfield ~= nil)
+  assert(idout, 'no id field?')
   local cur = vstruct.cursor(content)
   local h = header:read(cur)
   assert(h.magic == 'WDC4')
@@ -117,8 +122,8 @@ local function rows(content, dbdef)
   assert(h.total_field_count * 24 == h.field_storage_info_size)
   assert(h.flags.collectable == false)
   assert(h.flags.has_offset_map == false)
-  assert(h.total_field_count == #inlines)
-  local tsig = ''
+  assert(h.total_field_count == #fields)
+  assert(h.flags.ignore_id_index or h.id_index == idin - 1)
   local shs = {}
   for i = 1, h.section_count do
     local sh = section_header:read(cur)
@@ -246,7 +251,7 @@ local function rows(content, dbdef)
       end
       for i = 1, sh.record_count do
         local t = {}
-        for k, f in ipairs(inlines) do
+        for k, f in ipairs(fields) do
           local fsi = fsis[k]
           local fob = fsi.field_offset_bits
           local fsb = fsi.field_size_bits
@@ -277,33 +282,28 @@ local function rows(content, dbdef)
             end
           end
         end
-        for _, f in ipairs(noninlines) do
-          if f.foreign then
-            t[f.index] = assert(relmap[i])
-          elseif f.id then
-            if sh.id_list_size > 0 then
-              t[f.index] = u4(content, ipos)
-              ipos = ipos + 4
-            elseif not h.flags.ignore_id_index then
-              t[f.index] = t[h.id_index + 1]
-            end
-          else
-            error('internal error')
-          end
+        if relout then
+          t[relout] = assert(relmap[i])
         end
-        if t[0] ~= 0 then
-          for k, ts in ipairs(tsig) do
-            local fsi = fsis[ts.field]
-            if fsi and fsi.storage_type == 2 then
-              t[k] = commons[ts.field][t[0]] or fsi.cx1
+        if idout and not idin then
+          assert(sh.id_list_size > 0)
+          t[idout] = u4(content, ipos)
+          ipos = ipos + 4
+        end
+        if t[idout] ~= 0 then
+          for k, f in ipairs(fields) do
+            local fsi = fsis[k]
+            if fsi.storage_type == 2 then
+              t[f.index] = commons[k][t[idout]] or fsi.cx1
             end
           end
           local copies = {}
-          for _, newid in ipairs(copytable[t[0]] or {}) do
-            local tt = { [0] = newid }
-            for k = 1, #tsig do
+          for _, newid in ipairs(copytable[t[idout]] or {}) do
+            local tt = {}
+            for k = 1, #dbdef do
               tt[k] = t[k]
             end
+            tt[idout] = newid
             table.insert(copies, tt)
           end
           coroutine.yield(t)
