@@ -92,12 +92,24 @@ end
 local zerohash = '\0\0\0\0\0\0\0\0'
 
 local function rows(content, dbdef)
-  local numinline = 0
-  for _, f in ipairs(dbdef) do
-    if not f.noninline then
-      numinline = numinline + 1
+  local idfield = nil
+  local inlines = {}
+  local noninlines = {}
+  for i, f in ipairs(dbdef) do
+    if f.id then
+      assert(idfield == nil)
+      idfield = i
+    end
+    if not f.id or not f.noninline then
+      table.insert(f.noninline and noninlines or inlines, {
+        foreign = f.foreign,
+        index = i,
+        signed = not f.unsigned,
+        string = f.type == 'string',
+      })
     end
   end
+  assert(idfield ~= nil)
   local cur = vstruct.cursor(content)
   local h = header:read(cur)
   assert(h.magic == 'WDC4')
@@ -105,7 +117,7 @@ local function rows(content, dbdef)
   assert(h.total_field_count * 24 == h.field_storage_info_size)
   assert(h.flags.collectable == false)
   assert(h.flags.has_offset_map == false)
-  assert(h.total_field_count == numinline)
+  assert(h.total_field_count == #inlines)
   local tsig = ''
   local shs = {}
   for i = 1, h.section_count do
@@ -234,48 +246,50 @@ local function rows(content, dbdef)
       end
       for i = 1, sh.record_count do
         local t = {}
-        for k, ts in ipairs(tsig) do
-          if ts.field then
-            local fsi = fsis[ts.field]
-            local fob = fsi.field_offset_bits
-            local fsb = fsi.field_size_bits
-            if fsi.storage_type == 0 then
-              local foffset = fob / 8
-              local v = un[fsb / 8](content, rpos + foffset)
-              if ts.string then
-                local s = rpos + foffset + v - sh.xoffset
-                t[k] = s >= spos and s < ipos and z(content, s) or ''
-              else
-                t[k] = v
-              end
-            elseif fsi.storage_type ~= 2 then
-              local loff = div(fob, 8)
-              local hoff = div(fob + fsb - 1, 8)
-              local v = un[hoff - loff + 1](content, rpos + loff)
-              local vv = div(v, 2 ^ (fob % 8)) % (2 ^ fsb)
-              if fsi.storage_type == 1 or fsi.storage_type == 5 then
-                t[k] = vv
-              elseif fsi.storage_type == 3 then
-                local p = u4(content, palletpos + pallet_offsets[ts.field] + vv * 4)
-                if ts.signed and p >= 2 ^ 31 then
-                  p = p - 2 ^ 32
-                end
-                t[k] = p
-              else
-                error('internal error')
-              end
+        for k, f in ipairs(inlines) do
+          local fsi = fsis[k]
+          local fob = fsi.field_offset_bits
+          local fsb = fsi.field_size_bits
+          if fsi.storage_type == 0 then
+            local foffset = fob / 8
+            local v = un[fsb / 8](content, rpos + foffset)
+            if f.string then
+              local s = rpos + foffset + v - sh.xoffset
+              t[f.index] = s >= spos and s < ipos and z(content, s) or ''
+            else
+              t[f.index] = v
             end
-          elseif ts.foreign then
-            t[k] = assert(relmap[i])
+          elseif fsi.storage_type ~= 2 then
+            local loff = div(fob, 8)
+            local hoff = div(fob + fsb - 1, 8)
+            local v = un[hoff - loff + 1](content, rpos + loff)
+            local vv = div(v, 2 ^ (fob % 8)) % (2 ^ fsb)
+            if fsi.storage_type == 1 or fsi.storage_type == 5 then
+              t[f.index] = vv
+            elseif fsi.storage_type == 3 then
+              local p = u4(content, palletpos + pallet_offsets[k] + vv * 4)
+              if f.signed and p >= 2 ^ 31 then
+                p = p - 2 ^ 32
+              end
+              t[f.index] = p
+            else
+              error('internal error')
+            end
+          end
+        end
+        for _, f in ipairs(noninlines) do
+          if f.foreign then
+            t[f.index] = assert(relmap[i])
+          elseif f.id then
+            if sh.id_list_size > 0 then
+              t[f.index] = u4(content, ipos)
+              ipos = ipos + 4
+            elseif not h.flags.ignore_id_index then
+              t[f.index] = t[h.id_index + 1]
+            end
           else
             error('internal error')
           end
-        end
-        if sh.id_list_size > 0 then
-          t[0] = u4(content, ipos)
-          ipos = ipos + 4
-        elseif not h.flags.ignore_id_index then
-          t[0] = t[h.id_index + 1]
         end
         if t[0] ~= 0 then
           for k, ts in ipairs(tsig) do
