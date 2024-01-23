@@ -5,7 +5,7 @@ local function colsig(f)
   if ty == 'string' then
     return 's'
   elseif ty == 'float' then
-    return '.' -- luadbc is sometimes broken on floats :(
+    return '?' -- luadbc is sometimes broken on floats :(
   elseif ty == 'int' then
     assert(f.size <= 32, 'wide ints not supported')
     return f.unsigned and 'u' or 'i'
@@ -25,15 +25,9 @@ local function rows(content, dbdef)
   for i = 1, n do
     local f = dbdef[i]
     if not f.noninline then
-      local cs = colsig(f)
-      sig = sig .. cs
-      if f.length then
-        sig = sig .. string.rep('.', f.length - 1)
-      end
-      if cs ~= '.' then
-        fieldindices[i] = idx
-        idx = idx + 1
-      end
+      sig = sig .. colsig(f) .. string.rep('.', (f.length or 1) - 1)
+      fieldindices[i] = idx
+      idx = idx + 1
     elseif f.relation then
       assert(f.type == 'int')
       sig = sig .. 'F'
