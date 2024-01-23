@@ -217,16 +217,17 @@ local function rows(content, dbdef)
     end
     table.insert(commons, common)
   end
+  local strings = {}
+  for _, sh in ipairs(shs) do
+    local off = sh.file_offset + sh.record_count * h.record_size
+    table.insert(strings, content:sub(off + 1, off + sh.string_table_size))
+  end
+  strings = table.concat(strings)
   do
     local roffset = 0
     for i = #shs, 1, -1 do
       shs[i].xoffset = roffset
       roffset = roffset + shs[i].record_count * h.record_size
-    end
-    local soffset = 0
-    for i = 1, #shs do
-      shs[i].xoffset = shs[i].xoffset + soffset
-      soffset = soffset + shs[i].string_table_size
     end
   end
   return coroutine.wrap(function()
@@ -268,9 +269,8 @@ local function rows(content, dbdef)
             elseif v == 0 then
               t[f.index] = ''
             else
-              local s = rpos + foffset + v - sh.xoffset
-              assert(s >= spos and s < ipos)
-              t[f.index] = z(content, s)
+              local s = rpos + foffset + v - sh.xoffset - spos
+              t[f.index] = z(strings, s)
             end
           elseif fsi.storage_type ~= 2 then
             local loff = div(fob, 8)
