@@ -104,6 +104,7 @@ local function rows(content, dbdef)
     if not f.noninline then
       table.insert(fields, {
         index = i,
+        length = f.length,
         signed = not f.unsigned and f.type ~= 'float',
         string = f.type == 'string',
       })
@@ -142,14 +143,20 @@ local function rows(content, dbdef)
   local common_offset = 0
   local pallet_offsets = {}
   local pallet_offset = 0
-  for _ = 1, h.total_field_count do
+  for i = 1, h.total_field_count do
     local fsi = field_storage_info:read(cur)
     if fsi.storage_type == 0 then
       assert(fsi.additional_data_size == 0)
       assert(fsi.field_offset_bits % 8 == 0)
       assert(fsi.field_offset_bits < h.bitpacked_data_offset * 8)
       assert(fsi.field_size_bits % 8 == 0)
-      assert(fsi.field_size_bits <= 32)
+      if fields[i].length then
+        assert(fsi.field_size_bits == fields[i].length * 32)
+        -- TODO support length > 1
+        fsi.field_size_bits = 32
+      else
+        assert(fsi.field_size_bits <= 32)
+      end
       assert(fsi.cx1 == 0)
       assert(fsi.cx2 == 0)
       assert(fsi.cx3 == 0)
