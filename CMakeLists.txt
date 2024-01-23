@@ -1338,18 +1338,6 @@ add_library(toolsdb2 STATIC toolsdb2.c)
 target_link_libraries(toolsdb2 PRIVATE elune)
 
 add_lua_executable(
-  db2compare
-  ${CMAKE_CURRENT_SOURCE_DIR}/tools/db2compare.lua
-  argparse
-  dbc
-  luafilesystem
-  penlight
-  toolsdb2
-  toolsdbc
-  vstruct
-)
-
-add_lua_executable(
   db2dump
   ${CMAKE_CURRENT_SOURCE_DIR}/tools/db2dump.lua
   argparse
