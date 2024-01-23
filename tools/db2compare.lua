@@ -1,5 +1,5 @@
 local dbcrows = require('tools.dbc').rows
-local db2rows = require('wowless.db2').rows
+local db2rows = require('tools.db2').rows
 local deepcompare = require('pl.tablex').deepcompare
 local readfile = require('pl.file').read
 local sorted = require('pl.tablex').sort

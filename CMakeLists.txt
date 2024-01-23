@@ -1329,11 +1329,11 @@ add_lua_executable(
 )
 
 lua2c(
-  wowlessdb2
-  wowless.db2=${CMAKE_CURRENT_SOURCE_DIR}/wowless/db2.lua
+  toolsdb2
+  tools.db2=${CMAKE_CURRENT_SOURCE_DIR}/tools/db2.lua
 )
-add_library(wowlessdb2 STATIC wowlessdb2.c)
-target_link_libraries(wowlessdb2 PRIVATE elune)
+add_library(toolsdb2 STATIC toolsdb2.c)
+target_link_libraries(toolsdb2 PRIVATE elune)
 
 add_lua_executable(
   db2compare
@@ -1342,9 +1342,9 @@ add_lua_executable(
   dbc
   luafilesystem
   penlight
+  toolsdb2
   toolsdbc
   vstruct
-  wowlessdb2
 )
 
 add_lua_executable(
@@ -1354,9 +1354,9 @@ add_lua_executable(
   dbc
   luafilesystem
   penlight
+  toolsdb2
   toolsdbc
   vstruct
-  wowlessdb2
 )
 
 file(GENERATE OUTPUT runtime/platform.lua CONTENT "\
@@ -1434,7 +1434,6 @@ add_lua_executable(
   tsort
   vstruct
   wowapischema
-  wowlessdb2
   wowlesslib
   wowlessrender
   wowlessutil
