@@ -698,36 +698,10 @@ lua2c(toolssqlite3ext tools.sqlite3ext=c)
 add_library(toolssqlite3ext STATIC tools/sqlite3ext.c toolssqlite3ext.c)
 target_link_libraries(toolssqlite3ext PRIVATE elune sqlite3)
 
-lua2c(toolsdbc tools.dbc=${CMAKE_CURRENT_SOURCE_DIR}/tools/dbc.lua)
-add_library(toolsdbc STATIC toolsdbc.c)
-target_link_libraries(toolsdbc PRIVATE elune)
-
-FetchContent_Declare(
-  dbc
-  URL https://luarocks.org/manifests/foxlit/luadbc-1.12-1.src.rock
-  URL_HASH SHA256=70dcd264f6789d9a6f421652564ec0a3e46f16cfddf830d9b23a5cf0979f20f6
-  DOWNLOAD_NAME luadbc-1.12-1.src.rock.zip
-  SOURCE_SUBDIR disable_cmakelists_txt
-)
-FetchContent_MakeAvailable(dbc)
-file(
-  ARCHIVE_EXTRACT
-  INPUT ${dbc_SOURCE_DIR}/luadbc-1.12.zip
-  DESTINATION ${dbc_SOURCE_DIR}
-)
-lua2c(
-  dbc
-  dbc=${dbc_SOURCE_DIR}/luadbc/dbc/init.lua
-  dbc.bin=${dbc_SOURCE_DIR}/luadbc/dbc/bin.lua
-)
-add_library(dbc STATIC dbc.c)
-target_link_libraries(dbc PRIVATE elune)
-
 add_lua_executable(
   sqlite
   ${CMAKE_CURRENT_SOURCE_DIR}/tools/sqlite.lua
   argparse
-  dbc
   lsqlite3
   luafilesystem
   penlight
@@ -836,7 +810,6 @@ add_lua_executable(
   ${CMAKE_CURRENT_SOURCE_DIR}/tools/fetch.lua
   argparse
   casc
-  dbc
   luaexpat
   luafilesystem
   luapath
@@ -1341,11 +1314,9 @@ add_lua_executable(
   db2dump
   ${CMAKE_CURRENT_SOURCE_DIR}/tools/db2dump.lua
   argparse
-  dbc
   luafilesystem
   penlight
   toolsdb2
-  toolsdbc
   vstruct
 )
 
@@ -1408,7 +1379,6 @@ add_lua_executable(
   argparse
   ${dataluas}
   date
-  dbc
   lsqlite3
   luaexpat
   luafilesystem
@@ -1420,7 +1390,6 @@ add_lua_executable(
   penlight
   runtimeproducts
   say
-  toolsdbc
   tsort
   vstruct
   wowapischema
