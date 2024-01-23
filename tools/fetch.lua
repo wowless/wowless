@@ -132,8 +132,8 @@ processTocDir('Interface/FrameXML')
 do
   -- Yes, ManifestInterfaceTOCData fdid and sig are hardcoded.
   local tocdata = handle:readFile(1267335)
-  for _, filepath in require('tools.dbc').rows(tocdata, 's') do
-    processTocDir(normalizePath(filepath))
+  for row in require('tools.dbc').rows(tocdata, { { type = 'string' } }) do
+    processTocDir(normalizePath(row[1]))
   end
   processTocDir('Interface/AddOns/Blizzard_APIDocumentationGenerated')
 end

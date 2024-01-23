@@ -18,10 +18,6 @@ local function rows(content, dbdef)
   if content:sub(1, 4) == 'WDC4' then
     content = 'WDC3' .. content:sub(5)
   end
-  -- TODO remove sig arg support
-  if type(dbdef) == 'string' then
-    return dbcrows(content, dbdef)
-  end
   local sig = ''
   local fieldindices = {}
   local idx = 1
