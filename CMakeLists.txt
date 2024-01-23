@@ -731,8 +731,9 @@ add_lua_executable(
   lsqlite3
   luafilesystem
   penlight
-  toolsdbc
+  toolsdb2
   toolssqlite3ext
+  vstruct
 )
 
 FetchContent_Declare(
@@ -845,7 +846,8 @@ add_lua_executable(
   penlight
   runtimelistfile
   runtimetactkeys
-  toolsdbc
+  toolsdb2
+  vstruct
 )
 
 find_package(PNG REQUIRED)
