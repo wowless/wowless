@@ -120,6 +120,10 @@ local function rows(content, dbdef)
   local h = header:read(cur)
   assert(h.magic == 'WDC4')
   assert(h.section_count >= 0)
+  if h.section_count == 0 then
+    -- Easier to bail than rewrite the invariants for this case.
+    return function() end
+  end
   assert(h.total_field_count * 24 == h.field_storage_info_size)
   assert(h.flags.collectable == false)
   assert(h.flags.has_offset_map == false)
