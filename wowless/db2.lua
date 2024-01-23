@@ -170,6 +170,12 @@ local function rows(content, dbdef)
       assert(fsi.field_offset_bits >= h.bitpacked_data_offset * 8)
       assert(fsi.additional_data_size > 0)
       assert(fsi.cx3 == 0)
+    elseif fsi.storage_type == 4 then
+      assert(fsi.field_size_bits > 0)
+      assert(fsi.field_size_bits <= 32)
+      assert(fsi.field_offset_bits >= h.bitpacked_data_offset * 8)
+      assert(fsi.additional_data_size > 0)
+      assert(fsi.cx3 > 0)
     elseif fsi.storage_type == 1 or fsi.storage_type == 5 then
       assert(fsi.field_size_bits > 0)
       assert(fsi.field_size_bits <= 32)
@@ -184,7 +190,7 @@ local function rows(content, dbdef)
     table.insert(pallet_offsets, pallet_offset)
     if fsi.storage_type == 2 then
       common_offset = common_offset + fsi.additional_data_size
-    elseif fsi.storage_type == 3 then
+    elseif fsi.storage_type == 3 or fsi.storage_type == 4 then
       pallet_offset = pallet_offset + fsi.additional_data_size
     end
   end
@@ -292,6 +298,9 @@ local function rows(content, dbdef)
                 p = p - 2 ^ 32
               end
               t[f.index] = p
+            elseif fsi.storage_type == 4 then
+              -- TODO support pallet arrays
+              t[f.index] = u4(content, palletpos + pallet_offsets[k] + vv * 4 * fsi.cx3)
             else
               error('internal error')
             end
