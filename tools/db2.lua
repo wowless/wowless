@@ -1,7 +1,6 @@
 local vstruct = require('vstruct')
 
 local header = vstruct.compile([[<
-  magic: s4
   record_count: u4
   field_count: u4
   record_size: u4
@@ -118,8 +117,15 @@ local function rows(content, dbdef)
   end
   assert(idout, 'no id field?')
   local cur = vstruct.cursor(content)
+  local magic = content:sub(1, 4)
+  if magic == 'WDC4' then
+    cur:seek(nil, 4)
+  elseif magic == 'WDC5' then
+    cur:seek(nil, 136)
+  else
+    error('unexpected magic ' .. magic)
+  end
   local h = header:read(cur)
-  assert(h.magic == 'WDC4')
   assert(h.section_count >= 0)
   if h.section_count == 0 then
     -- Easier to bail than rewrite the invariants for this case.
