@@ -2123,6 +2123,8 @@ C_EventToastManager.EventToastInfo:
     extraUiWidgetSetID:
       nilable: true
       type: number
+    flags:
+      type: number
     hideDefaultAtlas:
       nilable: true
       type: boolean
@@ -3872,6 +3874,14 @@ C_PerksActivities.PerksActivitiesTracked:
     trackedIDs:
       type:
         arrayof: number
+C_PerksActivities.PerksActivityCondition:
+  fields:
+    isMet:
+      type: boolean
+    text:
+      type: string
+    uiPriority:
+      type: number
 C_PerksActivities.PerksActivityCriteria:
   fields:
     criteriaID:
@@ -3882,8 +3892,14 @@ C_PerksActivities.PerksActivityInfo:
   fields:
     activityName:
       type: string
+    areAllConditionsMet:
+      type: boolean
     completed:
       type: boolean
+    conditions:
+      type:
+        arrayof:
+          structure: C_PerksActivities.PerksActivityCondition
     criteriaList:
       type:
         arrayof:
@@ -3893,11 +3909,16 @@ C_PerksActivities.PerksActivityInfo:
     eventEndTime:
       nilable: true
       type: number
+    eventName:
+      nilable: true
+      type: string
     eventStartTime:
       nilable: true
       type: number
     ID:
       type: number
+    inProgress:
+      type: boolean
     requirementsList:
       type:
         arrayof:
@@ -3940,6 +3961,12 @@ C_PerksActivities.PerksActivityThresholdInfo:
 C_PerksProgram.PerksProgramItemDisplayInfo:
   fields:
     creatureDisplayInfoID:
+      nilable: true
+      type: number
+    mainHandItemModifiedAppearanceID:
+      nilable: true
+      type: number
+    offHandItemModifiedAppearanceID:
       nilable: true
       type: number
     overrideModelSceneID:
@@ -3997,6 +4024,12 @@ C_PerksProgram.PerksVendorItemInfo:
       type: boolean
     speciesID:
       type: number
+    subItems:
+      type:
+        arrayof:
+          structure: C_PerksProgram.PerksVendorSubItemInfo
+    subItemsLoaded:
+      type: boolean
     timeRemaining:
       type: number
     transmogSetID:
@@ -4013,6 +4046,19 @@ C_PerksProgram.PerksVendorItemUIGroupInfo:
       type: string
     priority:
       type: number
+C_PerksProgram.PerksVendorSubItemInfo:
+  fields:
+    invType:
+      type: string
+    itemAppearanceID:
+      type: number
+    itemID:
+      type: number
+    name:
+      type: string
+    quality:
+      type:
+        enum: ItemQuality
 C_PetInfo.PetTamerMapInfo:
   fields:
     areaPoiID:
@@ -7063,6 +7109,9 @@ C_UIWidgetManager.TugOfWarWidgetVisualizationInfo:
     leftIconInfo:
       type:
         structure: C_UIWidgetManager.UIWidgetIconInfo
+    markerArrowShownState:
+      type:
+        enum: TugOfWarMarkerArrowShownState
     maxValue:
       type: number
     minValue:
@@ -7070,6 +7119,9 @@ C_UIWidgetManager.TugOfWarWidgetVisualizationInfo:
     modelSceneLayer:
       type:
         enum: UIWidgetModelSceneLayer
+    neutralFillStyle:
+      type:
+        enum: TugOfWarStyleValue
     neutralZoneCenter:
       type: number
     neutralZoneSize:
@@ -7151,8 +7203,20 @@ C_UIWidgetManager.UIWidgetItemInfo:
     infoTextEnabledState:
       type:
         enum: WidgetEnabledState
+    infoTextFontType:
+      type:
+        enum: UIWidgetFontType
+    infoTextSizeType:
+      type:
+        enum: UIWidgetTextSizeType
     itemID:
       type: number
+    itemNameTextFontType:
+      type:
+        enum: UIWidgetFontType
+    itemNameTextSizeType:
+      type:
+        enum: UIWidgetTextSizeType
     overrideItemName:
       nilable: true
       type: string

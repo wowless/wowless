@@ -121,6 +121,7 @@ local types = {
   LoopType = 'string',
   luaFunction = 'function',
   luaIndex = 'number',
+  LuaValueVariant = 'table',
   ModelAsset = 'string',
   ModelSceneFrame = 'ModelScene',
   ModelSceneFrameActor = 'Actor',
