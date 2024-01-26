@@ -285,7 +285,7 @@ local function rewriteApis()
       table.insert(outputs, {
         default = enum[r.Type] and enum[r.Type][r.Default] or r.Default,
         name = r.Name,
-        nilable = r.Nilable or nil,
+        nilable = r.Nilable or fn.Name == 'UnitName' or nil, -- horrible hack
         stub = stubs[r.Name],
         type = t2nty(r, ns),
       })
