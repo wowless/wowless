@@ -29302,7 +29302,7 @@ UnitRace:
   impl: UnitRace
   inputs:
   - name: name
-    type: string
+    type: unit
   outputs:
   - name: localizedRaceName
     type: string

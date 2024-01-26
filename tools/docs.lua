@@ -250,6 +250,7 @@ local unitHacks = {
   UnitFactionGroup = 'unitName',
   UnitName = 'unit',
   UnitIsUnit = 'unitName',
+  UnitRace = 'name',
 }
 
 local function rewriteApis()
