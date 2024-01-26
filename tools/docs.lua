@@ -48,7 +48,9 @@ do
             APIDocumentation = {
               AddDocumentationTable = function(_, t)
                 require('wowapi.schema').validate(product, schema, t)
-                docs[f] = t
+                if t.Name ~= 'DebugToggle' then -- TODO generalize
+                  docs[f] = t
+                end
               end,
             },
             Constants = setmetatable({}, nsmt),
