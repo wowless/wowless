@@ -245,12 +245,19 @@ local function split(name)
   end
 end
 
+-- Super duper hack, sorry world.
+local unitHacks = {
+  UnitFactionGroup = 'unitName',
+  UnitName = 'unit',
+  UnitIsUnit = 'unitName',
+}
+
 local function rewriteApis()
   local function insig(fn, ns)
+    local unitHack = unitHacks[fn.Name]
     local t = {}
     for _, a in ipairs(fn.Arguments or {}) do
-      -- Super duper hack, sorry world.
-      if (fn.Name == 'UnitFactionGroup' or fn.Name == 'UnitIsUnit') and a.Name:sub(1, 8) == 'unitName' then
+      if unitHack and a.Name:sub(1, unitHack:len()) == unitHack then
         assert(a.Type == 'cstring')
         assert(not a.Default)
         assert(not a.Nilable)

@@ -29071,10 +29071,10 @@ UnitLevel:
   - name: result
     type: number
 UnitName:
-  impl: UnitName_10_2_5
+  impl: UnitName
   inputs:
   - name: unit
-    type: string
+    type: unit
   outputs:
   - name: unitName
     nilable: true
