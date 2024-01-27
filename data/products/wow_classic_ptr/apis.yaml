@@ -15305,6 +15305,7 @@ UnitPowerType:
   inputs:
   - name: unit
     type: unit
+  mayreturnnothing: true
   outputs:
   - name: powerType
     type: number
