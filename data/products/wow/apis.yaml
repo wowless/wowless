@@ -29256,6 +29256,7 @@ UnitPowerType:
   - default: 0
     name: index
     type: number
+  mayreturnnothing: true
   outputs:
   - name: powerType
     type:
