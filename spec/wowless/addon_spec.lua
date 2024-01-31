@@ -4,7 +4,7 @@ describe('addon', function()
       it('runs', function()
         local api = require('wowless.runner').run({
           otherAddonDirs = {
-            'addon/Wowless',
+            'addon/Wowless/', -- trailing slash to validate fix for #235
             'build/products/' .. product .. '/WowlessData',
           },
           product = product,
