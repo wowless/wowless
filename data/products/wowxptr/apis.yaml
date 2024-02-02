@@ -25151,7 +25151,9 @@ GetSpellLevelLearned: {}
 GetSpellLink: {}
 GetSpellLossOfControlCooldown: {}
 GetSpellPenetration: {}
-GetSpellPowerCost: {}
+GetSpellPowerCost:
+  outputs:
+  - type: table
 GetSpellQueueWindow: {}
 GetSpellRank: {}
 GetSpellsForCharacterUpgradeTier: {}
