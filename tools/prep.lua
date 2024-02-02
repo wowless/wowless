@@ -131,6 +131,8 @@ do
         if not impls[apicfg.impl] then
           impls[apicfg.impl] = readFile('data/impl/' .. apicfg.impl .. '.lua')
         end
+      elseif apicfg.stubnothing then
+        apicfg.stub = ''
       else
         local rets = {}
         for _, out in ipairs(apicfg.outputs or {}) do
