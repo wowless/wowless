@@ -85,6 +85,8 @@ AuraData:
       type: number
     points:
       type: table
+    spellId:
+      type: number
 BountyInfo:
   fields:
     factionID:

@@ -20384,6 +20384,7 @@ C_UnitAuras.GetAuraDataBySlot:
       auraInstanceID: 1
       expirationTime: 0
       points: {}
+      spellId: 1
     type:
       structure: AuraData
 C_UnitAuras.GetAuraDataBySpellName:
