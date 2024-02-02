@@ -25305,7 +25305,9 @@ GetSpellPenetration:
   outputs:
   - name: result
     type: number
-GetSpellPowerCost: {}
+GetSpellPowerCost:
+  outputs:
+  - type: table
 GetSpellQueueWindow: {}
 GetSpellRank: {}
 GetSpellsForCharacterUpgradeTier: {}
