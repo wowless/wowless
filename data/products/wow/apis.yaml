@@ -20379,6 +20379,11 @@ C_UnitAuras.GetAuraDataBySlot:
   outputs:
   - name: aura
     nilable: true
+    stub:
+      applications: 1
+      auraInstanceID: 1
+      expirationTime: 0
+      points: {}
     type:
       structure: AuraData
 C_UnitAuras.GetAuraDataBySpellName:
