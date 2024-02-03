@@ -8699,6 +8699,7 @@ PlayerInfoCharacterData:
         enum: UnitSex
 PlayerLocation:
   fields: {}
+  mixin: PlayerLocationMixin
 PrivateAuraAnchor:
   fields:
     anchorID:
@@ -8806,6 +8807,7 @@ RegularReagentInfo:
       type: number
 ReportInfo:
   fields: {}
+  mixin: ReportInfoMixin
 RuneforgeItemPreviewInfo:
   fields:
     itemGUID:
@@ -9044,6 +9046,7 @@ TransmogLocation:
       type: number
     type:
       type: number
+  mixin: TransmogLocationMixin
 TransmogPendingInfo:
   fields: {}
   mixin: TransmogPendingInfoMixin

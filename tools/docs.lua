@@ -183,7 +183,8 @@ local tys = {}
 for name, tab in pairs(tabs) do
   tys[name] = tab.Type
 end
-for k in pairs(parseYaml('data/products/' .. product .. '/structures.yaml')) do
+local structs = parseYaml('data/products/' .. product .. '/structures.yaml')
+for k in pairs(structs) do
   if tys[k] and tys[k] ~= 'Structure' then
     error(('%s is a wowless structure but is a %s in docs'):format(k, tys[k]))
   else
@@ -197,17 +198,6 @@ for k in pairs(enum) do
     tys[k] = 'Enumeration'
   end
 end
-local knownMixinStructs = {
-  ColorMixin = 'colorRGBA',
-  ItemLocationMixin = 'ItemLocation',
-  ItemTransmogInfoMixin = 'ItemTransmogInfo',
-  PlayerLocationMixin = 'PlayerLocation',
-  ReportInfoMixin = 'ReportInfo',
-  TransmogLocationMixin = 'TransmogLocation',
-  TransmogPendingInfoMixin = 'TransmogPendingInfo',
-  Vector2DMixin = 'vector2',
-  Vector3DMixin = 'vector3',
-}
 local structRewrites = {
   AzeriteEmpoweredItemLocation = 'ItemLocation',
   AzeriteItemLocation = 'ItemLocation',
@@ -219,8 +209,7 @@ local function t2nty(field, ns)
     assert(t == 'table')
     return { arrayof = t2nty({ Type = field.InnerType }, ns) }
   elseif t == 'table' and field.Mixin then
-    local mst = assert(knownMixinStructs[field.Mixin], 'no struct for mixin ' .. field.Mixin)
-    return { structure = mst }
+    error('no struct for mixin ' .. field.Mixin)
   elseif types[t] then
     return types[t]
   end
@@ -233,7 +222,9 @@ local function t2nty(field, ns)
   elseif ty == 'Enumeration' then
     return { enum = t }
   elseif ty == 'Structure' then
-    -- TODO cross-check mixin
+    if field.Mixin and field.Mixin ~= structs[n].mixin then
+      error(('expected struct %s to have mixin %s'):format(n, field.Mixin))
+    end
     return { structure = n }
   elseif ty == 'CallbackType' then
     return field.Name == 'cbObject' and 'userdata' or 'function'
