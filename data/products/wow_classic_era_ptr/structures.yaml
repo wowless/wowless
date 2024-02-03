@@ -2920,6 +2920,7 @@ PlayerInfoCharacterData:
         enum: UnitSex
 PlayerLocation:
   fields: {}
+  mixin: PlayerLocationMixin
 PrivateAuraIconInfo:
   fields:
     iconAnchor:
@@ -2963,6 +2964,7 @@ QueueSpecificInfo:
       type: number
 ReportInfo:
   fields: {}
+  mixin: ReportInfoMixin
 UITextureSliceData:
   fields:
     marginBottom:

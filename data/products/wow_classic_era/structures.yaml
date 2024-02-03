@@ -2886,6 +2886,7 @@ PlayerInfoCharacterData:
         enum: UnitSex
 PlayerLocation:
   fields: {}
+  mixin: PlayerLocationMixin
 QueueSpecificInfo:
   fields:
     activityID:
@@ -2920,6 +2921,7 @@ QueueSpecificInfo:
       type: number
 ReportInfo:
   fields: {}
+  mixin: ReportInfoMixin
 UITextureSliceData:
   fields:
     marginBottom:

@@ -177,7 +177,8 @@ local tys = {}
 for name, tab in pairs(tabs) do
   tys[name] = tab.Type
 end
-for k in pairs(parseYaml('data/products/' .. product .. '/structures.yaml')) do
+local structs = parseYaml('data/products/' .. product .. '/structures.yaml')
+for k in pairs(structs) do
   if tys[k] and tys[k] ~= 'Structure' then
     error(('%s is a wowless structure but is a %s in docs'):format(k, tys[k]))
   else
@@ -215,7 +216,9 @@ local function t2nty(field, ns)
   elseif ty == 'Enumeration' then
     return { enum = t }
   elseif ty == 'Structure' then
-    -- TODO cross-check mixin
+    if field.Mixin and field.Mixin ~= structs[n].mixin then
+      error(('expected struct %s to have mixin %s'):format(n, field.Mixin))
+    end
     return { structure = n }
   elseif ty == 'CallbackType' then
     return field.Name == 'cbObject' and 'userdata' or 'function'
