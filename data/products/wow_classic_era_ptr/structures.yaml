@@ -1,4 +1,38 @@
 ---
+AddPrivateAuraAnchorArgs:
+  fields:
+    auraIndex:
+      type: number
+    durationAnchor:
+      nilable: true
+      type:
+        structure: AnchorBinding
+    iconInfo:
+      nilable: true
+      type:
+        structure: PrivateAuraIconInfo
+    parent:
+      type: Frame
+    showCountdownFrame:
+      type: boolean
+    showCountdownNumbers:
+      type: boolean
+    unitToken:
+      type: string
+AnchorBinding:
+  fields:
+    offsetX:
+      type: number
+    offsetY:
+      type: number
+    point:
+      type: FramePoint
+    relativePoint:
+      type: FramePoint
+    relativeTo:
+      type: table
+AuraData:
+  fields: {}
 C_ActionBar.ActionUsableState:
   fields:
     noMana:
@@ -2886,6 +2920,15 @@ PlayerInfoCharacterData:
         enum: UnitSex
 PlayerLocation:
   fields: {}
+PrivateAuraIconInfo:
+  fields:
+    iconAnchor:
+      type:
+        structure: AnchorBinding
+    iconHeight:
+      type: number
+    iconWidth:
+      type: number
 QueueSpecificInfo:
   fields:
     activityID:
@@ -2933,6 +2976,39 @@ UITextureSliceData:
     sliceMode:
       type:
         enum: UITextureSliceMode
+UnitAuraUpdateInfo:
+  fields:
+    addedAuras:
+      nilable: true
+      type:
+        arrayof:
+          structure: AuraData
+    isFullUpdate:
+      default: false
+      type: boolean
+    removedAuraInstanceIDs:
+      nilable: true
+      type:
+        arrayof: number
+    updatedAuraInstanceIDs:
+      nilable: true
+      type:
+        arrayof: number
+UnitPrivateAuraAppliedSoundInfo:
+  fields:
+    outputChannel:
+      nilable: true
+      type: string
+    soundFileID:
+      nilable: true
+      type: number
+    soundFileName:
+      nilable: true
+      type: string
+    spellID:
+      type: number
+    unitToken:
+      type: string
 vector2:
   fields:
     x:
