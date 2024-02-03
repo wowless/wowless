@@ -330,6 +330,7 @@ local function rewriteApis()
         inputs = insig(fn, ns),
         mayreturnnothing = api and api.mayreturnnothing,
         outputs = outsig(fn, ns, api),
+        stubnothing = api and api.stubnothing,
       }
     end
   end
