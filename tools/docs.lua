@@ -191,17 +191,6 @@ for k in pairs(enum) do
     tys[k] = 'Enumeration'
   end
 end
-local knownMixinStructs = {
-  ColorMixin = 'colorRGBA',
-  ItemLocationMixin = 'ItemLocation',
-  ItemTransmogInfoMixin = 'ItemTransmogInfo',
-  PlayerLocationMixin = 'PlayerLocation',
-  ReportInfoMixin = 'ReportInfo',
-  TransmogLocationMixin = 'TransmogLocation',
-  TransmogPendingInfoMixin = 'TransmogPendingInfo',
-  Vector2DMixin = 'vector2',
-  Vector3DMixin = 'vector3',
-}
 local structRewrites = {
   AzeriteEmpoweredItemLocation = 'ItemLocation',
   AzeriteItemLocation = 'ItemLocation',
@@ -213,8 +202,7 @@ local function t2nty(field, ns)
     assert(t == 'table')
     return { arrayof = t2nty({ Type = field.InnerType }, ns) }
   elseif t == 'table' and field.Mixin then
-    local mst = assert(knownMixinStructs[field.Mixin], 'no struct for mixin ' .. field.Mixin)
-    return { structure = mst }
+    error('no struct for mixin ' .. field.Mixin)
   elseif types[t] then
     return types[t]
   end
