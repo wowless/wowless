@@ -48,7 +48,9 @@ do
             APIDocumentation = {
               AddDocumentationTable = function(_, t)
                 require('wowapi.schema').validate(product, schema, t)
-                docs[f] = t
+                if t.Name ~= 'DebugToggle' then -- TODO generalize
+                  docs[f] = t
+                end
               end,
             },
             Constants = setmetatable({}, nsmt),
@@ -121,6 +123,7 @@ local types = {
   LoopType = 'string',
   luaFunction = 'function',
   luaIndex = 'number',
+  LuaValueVariant = 'table',
   ModelAsset = 'string',
   ModelSceneFrame = 'ModelScene',
   ModelSceneFrameActor = 'Actor',
@@ -242,12 +245,20 @@ local function split(name)
   end
 end
 
+-- Super duper hack, sorry world.
+local unitHacks = {
+  UnitFactionGroup = 'unitName',
+  UnitName = 'unit',
+  UnitIsUnit = 'unitName',
+  UnitRace = 'name',
+}
+
 local function rewriteApis()
   local function insig(fn, ns)
+    local unitHack = unitHacks[fn.Name]
     local t = {}
     for _, a in ipairs(fn.Arguments or {}) do
-      -- Super duper hack, sorry world.
-      if (fn.Name == 'UnitFactionGroup' or fn.Name == 'UnitIsUnit') and a.Name:sub(1, 8) == 'unitName' then
+      if unitHack and a.Name:sub(1, unitHack:len()) == unitHack then
         assert(a.Type == 'cstring')
         assert(not a.Default)
         assert(not a.Nilable)
@@ -284,7 +295,7 @@ local function rewriteApis()
       table.insert(outputs, {
         default = enum[r.Type] and enum[r.Type][r.Default] or r.Default,
         name = r.Name,
-        nilable = r.Nilable or nil,
+        nilable = r.Nilable or fn.Name == 'UnitName' or nil, -- horrible hack
         stub = stubs[r.Name],
         type = t2nty(r, ns),
       })

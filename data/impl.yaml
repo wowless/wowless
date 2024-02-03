@@ -324,9 +324,6 @@ UnitIsPlayer: {}
 UnitIsUnit: {}
 UnitLevel: {}
 UnitName: {}
-UnitName_10_2_5:
-  states:
-  - Units
 UnitPowerType:
   sqls:
   - lookup: UnitPowerType
