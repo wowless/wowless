@@ -468,6 +468,7 @@ local moomap = {
   FrameAPIModelSceneFrame = 'ModelScene',
   FrameAPIModelSceneFrameActor = 'Actor',
   FrameAPIModelSceneFrameActorBase = 'Actor',
+  FrameAPIQuestPOI = 'QuestPOIFrame',
   FrameAPISimpleCheckout = 'Checkout',
   FrameAPITabardModel = 'TabardModel',
   FrameAPITabardModelBase = 'TabardModel',
