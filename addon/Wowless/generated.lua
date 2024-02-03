@@ -67,8 +67,10 @@ G.testsuite.generated = function()
     local tests = {}
     local empty = {}
     for name, ncfg in pairs(_G.WowlessData.NamespaceApis) do
-      if not capsulens[name] then
-        tests[name] = function()
+      tests[name] = function()
+        if capsulens[name] then
+          assertEquals(not iswowlesslite, not (_G[name] or capsuleEnv[name]))
+        else
           local ns = _G[name] or capsuleEnv[name]
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
