@@ -35,7 +35,6 @@ local function mkBaseUIObjectTypes(api)
           metaindex = metaindex,
           name = ty.cfg.objectType or k,
           warner = ty.cfg.warner,
-          zombie = ty.cfg.zombie,
         }
       end
     end
@@ -57,14 +56,16 @@ local function mkBaseUIObjectTypes(api)
         name = v.name,
         sandboxMT = { __index = sandboxIndex },
         warner = v.warner,
-        zombie = v.zombie,
       }
     end
     return t
   end
 
   local function wrapstrfn(s, fname, args, ...)
-    return assert(loadstring(('local %s=...;return %s'):format(args, s), fname))(...)
+    local wrapstr = ('local %s=...;return %s'):format(args, s)
+    local wrapfn = assert(loadstring(wrapstr, fname))
+    setfenv(wrapfn, _G)
+    return wrapfn(...)
   end
 
   local typechecker = require('wowless.typecheck')(api)

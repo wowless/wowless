@@ -8,6 +8,7 @@ C_Calendar.SetAbsMonth:
 C_Calendar.SetMonth:
   states:
   - Calendar
+C_ChatInfo.ReplaceIconAndGroupExpressions: {}
 C_ClassTalents.GetActiveConfigID:
   states:
   - Talents
@@ -73,6 +74,9 @@ C_ItemInteraction.GetItemInteractionInfo:
   sqls:
   - lookup: C_ItemInteraction.GetItemInteractionInfo
     table: true
+C_Macro.SetMacroExecuteLineCallback:
+  frameworks:
+  - api
 C_Map.GetMapInfo:
   sqls:
   - lookup: C_Map.GetMapInfo
@@ -95,8 +99,6 @@ C_Texture.GetAtlasInfo_10_2:
   sqls:
   - lookup: C_Texture.GetAtlasInfo_10_2
 C_Timer.After:
-  frameworks:
-  - api
   states:
   - Time
 C_Timer.NewTicker:
@@ -143,6 +145,9 @@ C_UIColor.GetColors:
 C_XMLUtil.GetTemplateInfo:
   frameworks:
   - api
+C_XMLUtil.GetTemplateInfo_10_2:
+  frameworks:
+  - api
 CreateFont:
   frameworks:
   - api
@@ -152,17 +157,24 @@ CreateForbiddenFrame:
 CreateFrame:
   frameworks:
   - api
+DoEmote:
+  frameworks:
+  - api
+  sqls:
+  - lookup: DoEmote
 EnumerateFrames:
   frameworks:
   - api
 FillLocalizedClassList:
   sqls:
   - cursor: FillLocalizedClassList
-forceinsecure: {}
 GetAddOnEnableState: {}
 GetAddOnInfo: {}
 GetAddOnMetadata: {}
 GetBuildInfo_10_1:
+  frameworks:
+  - datalua
+GetBuildInfo_1_15_0:
   frameworks:
   - datalua
 GetBuildInfo_3_4_2:
@@ -260,17 +272,23 @@ GetTalentTabInfo_Wrath:
 GetTime:
   states:
   - Time
-hooksecurefunc:
-  frameworks:
-  - env
 IsAddOnLoaded: {}
 IsAddOnLoadOnDemand: {}
+IsLinuxClient:
+  frameworks:
+  - api
 IsLoggedIn:
   states:
   - System
+IsMacClient:
+  frameworks:
+  - api
 IsTestBuild:
   frameworks:
   - datalua
+IsWindowsClient:
+  frameworks:
+  - api
 LoadAddOn:
   frameworks:
   - loader
@@ -279,13 +297,10 @@ RequestTimePlayed:
   - api
   states:
   - Time
-RunMacroText:
+RunMacroText_Callback:
   frameworks:
   - api
 RunScript: {}
-securecall:
-  frameworks:
-  - env
 SecureCmdOptionParse: {}
 SendSystemMessage:
   frameworks:

@@ -5674,6 +5674,12 @@ C_Macro.GetNumIcons:
   outputs:
   - name: numIcons
     type: number
+C_Macro.SetMacroExecuteLineCallback:
+  impl: C_Macro.SetMacroExecuteLineCallback
+  inputs:
+  - name: cb
+    type: function
+  outputs: {}
 C_Mail.HasInboxMoney:
   inputs:
   - name: inboxIndex
@@ -9518,7 +9524,20 @@ Dismount:
   outputs: {}
 DisplayChannelOwner: {}
 DoCraft: {}
-DoEmote: {}
+DoEmote:
+  impl: DoEmote
+  inputs:
+  - name: token
+    type: string
+  - name: unit
+    nilable: true
+    type: unit
+  - name: hold
+    nilable: true
+    type: boolean
+  outputs:
+  - name: restricted
+    type: boolean
 DoesCurrentLocaleSellExpansionLevels:
   inputs: {}
   outputs:
@@ -9630,7 +9649,7 @@ FocusUnit:
   outputs: {}
 FollowUnit: {}
 forceinsecure:
-  impl: forceinsecure
+  stdlib: forceinsecure
 ForceLogout: {}
 ForceQuit: {}
 ForfeitDuel: {}
@@ -12626,7 +12645,9 @@ GetSpellInfo:
 GetSpellLink: {}
 GetSpellLossOfControlCooldown: {}
 GetSpellPenetration: {}
-GetSpellPowerCost: {}
+GetSpellPowerCost:
+  outputs:
+  - type: table
 GetSpellQueueWindow: {}
 GetSpellRank: {}
 GetSpellSubtext:
@@ -13219,8 +13240,7 @@ HearthAndResurrectFromArea: {}
 HideRepairCursor: {}
 HonorSystemEnabled: {}
 hooksecurefunc:
-  impl: hooksecurefunc
-  outputs: {}
+  stdlib: hooksecurefunc
 InActiveBattlefield: {}
 InboxItemCanDelete:
   inputs:
@@ -13241,7 +13261,11 @@ InRepairMode: {}
 InviteUnit: {}
 ipairs:
   stdlib: ipairs
-Is64BitClient: {}
+Is64BitClient:
+  inputs: {}
+  outputs:
+  - name: is64Bit
+    type: boolean
 IsAccountSecured: {}
 IsAchievementEligible: {}
 IsActionInRange: {}
@@ -13391,7 +13415,11 @@ IsFlyableArea: {}
 IsFlying: {}
 IsGamePadCursorControlEnabled: {}
 IsGamePadFreelookEnabled: {}
-IsGMClient: {}
+IsGMClient:
+  inputs: {}
+  outputs:
+  - name: isGM
+    type: boolean
 IsGraphicsCVarValueSupported: {}
 IsGraphicsSettingValueSupported: {}
 IsGUIDInGroup: {}
@@ -13431,14 +13459,24 @@ IsLeftShiftKeyDown: {}
 IsLegacyDifficulty: {}
 IsLFGComplete: {}
 IsLFGDungeonJoinable: {}
-IsLinuxClient: {}
+IsLinuxClient:
+  impl: IsLinuxClient
+  inputs: {}
+  outputs:
+  - name: isLinux
+    type: boolean
 IsLoggedIn:
   impl: IsLoggedIn
   inputs: {}
   outputs:
   - name: isLoggedIn
     type: boolean
-IsMacClient: {}
+IsMacClient:
+  impl: IsMacClient
+  inputs: {}
+  outputs:
+  - name: isMac
+    type: boolean
 IsMasterLooter: {}
 IsMetaKeyDown: {}
 IsModifiedClick:
@@ -13587,7 +13625,12 @@ IsVeteranTrialAccount:
   - name: isVeteranTrialAccount
     type: boolean
 IsWargame: {}
-IsWindowsClient: {}
+IsWindowsClient:
+  impl: IsWindowsClient
+  inputs: {}
+  outputs:
+  - name: isWindows
+    type: boolean
 IsXPUserDisabled: {}
 ItemHasRange: {}
 ItemTextGetCreator:
@@ -14078,7 +14121,7 @@ RollOnLoot: {}
 RunBinding: {}
 RunMacro: {}
 RunMacroText:
-  impl: RunMacroText
+  impl: RunMacroText_Callback
   inputs:
   - name: macroText
     type: string
@@ -14120,7 +14163,7 @@ SearchLFGJoin: {}
 SearchLFGLeave: {}
 SearchLFGSort: {}
 securecall:
-  impl: securecall
+  stdlib: securecall
 securecallfunction:
   stdlib: securecallfunction
 SecureCmdOptionParse:
@@ -14868,7 +14911,7 @@ UnitClassification:
     nilable: true
     type: unit
   outputs:
-  - name: classification
+  - name: result
     stub: normal
     type: string
 UnitControllingVehicle: {}
@@ -15227,7 +15270,7 @@ UnitPower:
   inputs:
   - name: unitToken
     type: unit
-  - default: NumPowerTypes
+  - default: 26
     name: powerType
     type:
       enum: PowerType
@@ -15249,7 +15292,7 @@ UnitPowerMax:
   inputs:
   - name: unitToken
     type: unit
-  - default: NumPowerTypes
+  - default: 26
     name: powerType
     type:
       enum: PowerType
@@ -15264,6 +15307,7 @@ UnitPowerType:
   inputs:
   - name: unit
     type: unit
+  mayreturnnothing: true
   outputs:
   - name: powerType
     type: number

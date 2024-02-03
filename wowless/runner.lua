@@ -9,8 +9,45 @@ local function run(cfg)
     end
   end
   local api = require('wowless.api').new(log, cfg.maxErrors, cfg.product)
+
+  -- begin WARNING WARNING WARNING
+  --[[
+  The following lines of code are very magical.
+
+  The third line sets the global table for this Lua state to the
+  sandbox env table. This is necessary for the correct behavior of
+  some elune functionality, like securecall, hooksecurefunc,
+  and loadstring.
+
+  This does not affect wowless framework code. Any globals it
+  references from Lua are done via the environment table, which
+  remains unchanged from when it was (pre)loaded.
+
+  Any later loadstring'd framework code must be setfenv'd to the
+  host environment _G, since loadstring'd code is born with an
+  environment pointing to the current global table. See the api and
+  uiobject loaders for where this happens.
+
+  The first and second lines eagerly load modules which write to
+  the global table.
+
+  The fourth line is required because print depends on tostring from
+  the global table. TODO remove this dependency
+  ]]
+  require('lfs')
+  require('lsqlite3')
+  require('wowless.ext').setglobaltable(api.env)
+  api.env.tostring = tostring
+  -- end WARNING WARNING WARNING
+
+  local path = require('path')
+  local otherAddonDirs = {}
+  for _, d in ipairs(cfg.otherAddonDirs or {}) do
+    local dd = path.basename(d) == '' and path.dirname(d) or d
+    table.insert(otherAddonDirs, dd)
+  end
   local loader = require('wowless.loader').loader(api, {
-    otherAddonDirs = cfg.otherAddonDirs,
+    otherAddonDirs = otherAddonDirs,
     product = cfg.product,
     rootDir = cfg.dir,
   })
@@ -19,8 +56,8 @@ local function run(cfg)
   if cfg.dir then
     loader.loadFrameXml()
   end
-  for _, d in ipairs(cfg.otherAddonDirs or {}) do
-    assert(loader.loadAddon(require('path').basename(d)))
+  for _, d in ipairs(otherAddonDirs) do
+    assert(loader.loadAddon(path.basename(d)))
   end
   api.states.System.isLoggedIn = true
   api.SendEvent('PLAYER_LOGIN')
@@ -48,7 +85,7 @@ local function run(cfg)
     end
     doit('frame0')
     if api.env.ToggleTalentFrame then
-      api.CallSafely(api.env.ToggleTalentFrame)
+      api.CallSandbox(api.env.ToggleTalentFrame)
       doit('frame1')
     end
     os.exit(0)
@@ -67,8 +104,8 @@ local function run(cfg)
       for _, name in ipairs(names) do
         local fn = api.states.Bindings[name]
         api.log(2, 'firing binding ' .. name)
-        api.CallSafely(fn, 'down')
-        api.CallSafely(fn, 'up')
+        api.CallSandbox(fn, 'down')
+        api.CallSandbox(fn, 'up')
       end
     end,
     clicks = function()
@@ -84,6 +121,18 @@ local function run(cfg)
       api.SendEvent('PLAYER_REGEN_DISABLED')
       api.NextFrame()
       api.SendEvent('PLAYER_REGEN_ENABLED')
+    end,
+    emotes = function()
+      local cmds = {}
+      for k, v in pairs(api.env) do
+        cmds[v] = k:match('^EMOTE%d+_CMD%d+$') or nil
+      end
+      for cmd in require('pl.tablex').sort(cmds) do
+        api.log(2, 'firing emote chat command %s', cmd)
+        if api.macroExecuteLineCallback then
+          api.CallSandbox(api.macroExecuteLineCallback, cmd)
+        end
+      end
     end,
     enterleave = function()
       for frame in api.frames:entries() do
@@ -157,7 +206,9 @@ local function run(cfg)
       end
       for k, v in require('pl.tablex').sort(cmds) do
         api.log(2, 'firing chat command ' .. k .. ' via ' .. v)
-        api.SendEvent('EXECUTE_CHAT_LINE', v)
+        if api.macroExecuteLineCallback then
+          api.CallSandbox(api.macroExecuteLineCallback, v)
+        end
       end
     end,
     update = function()
@@ -175,6 +226,7 @@ local function run(cfg)
     'macrotext',
     'bindings',
     'slashcmds',
+    'emotes',
     'events',
   }
   for _, script in ipairs(cfg.scripts and { strsplit(',', cfg.scripts) } or defaultScripts) do
@@ -194,6 +246,7 @@ local function run(cfg)
       assert(type(v) ~= 'table' or (k ~= 'luarep') == not api.UserData(v), k)
     end
   end
+  assert(issecure(), 'wowless bug: framework is tainted')
 
   return api, loader
 end

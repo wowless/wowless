@@ -51,7 +51,7 @@ local function loadFunctions(api, loader)
   local sqls = loadSqls(loader.sqlitedb, datalua.sqlcursors, datalua.sqllookups)
   local impls = {}
   for k, v in pairs(datalua.impls) do
-    impls[k] = loadstring(v, '@./data/impl/' .. k .. '.lua')
+    impls[k] = setfenv(loadstring(v, '@./data/impl/' .. k .. '.lua'), _G)
   end
 
   local frameworks = {
@@ -71,7 +71,7 @@ local function loadFunctions(api, loader)
     local basefn
     if apicfg.stub then
       local text = ('local Mixin = ...; return function() %s end'):format(apicfg.stub)
-      basefn = assert(loadstring(text))(stubMixin)
+      basefn = assert(setfenv(loadstring(text), _G))(stubMixin)
     elseif apicfg.impl then
       basefn = impls[apicfg.impl]
     else
@@ -172,7 +172,7 @@ local function loadFunctions(api, loader)
       return outfn
     else
       edepth = edepth + 1
-      return debug.newcfunction(outfn)
+      return debug.newsecurefunction(outfn)
     end
   end
 

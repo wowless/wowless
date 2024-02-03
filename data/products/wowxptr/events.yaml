@@ -4030,10 +4030,6 @@ EQUIPMENT_SWAP_FINISHED:
     type: number
 EQUIPMENT_SWAP_PENDING:
   payload: {}
-EXECUTE_CHAT_LINE:
-  payload:
-  - name: chatLine
-    type: string
 EXPAND_BAG_BAR_CHANGED:
   payload:
   - name: expandBagBar
@@ -5895,6 +5891,7 @@ PVP_REWARDS_UPDATE:
 PVP_ROLE_POPUP_HIDE:
   payload:
   - name: readyCheckInfo
+    nilable: true
     type:
       structure: C_PvP.PvpReadyCheckInfo
 PVP_ROLE_POPUP_SHOW:
@@ -6972,7 +6969,9 @@ TRADE_SKILL_DATA_SOURCE_CHANGING:
 TRADE_SKILL_DETAILS_UPDATE:
   payload: {}
 TRADE_SKILL_FAVORITES_CHANGED:
-  payload: {}
+  payload:
+  - name: isFavorite
+    type: boolean
 TRADE_SKILL_ITEM_CRAFTED_RESULT:
   payload:
   - name: data

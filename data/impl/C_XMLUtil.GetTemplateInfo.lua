@@ -5,7 +5,6 @@ if t then
     height = 1,
     inherits = t.inherits and table.concat(t.inherits, ','),
     keyValues = {},
-    sourceLocation = api.datalua.product == 'wowxptr' and 'source' or nil,
     type = t.type,
     width = 1,
   }

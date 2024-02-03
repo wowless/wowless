@@ -45,6 +45,21 @@ local function check1(e1, ...)
   assertEquals(e1, a1)
 end
 
+local function check2(e1, e2, ...)
+  assertEquals(2, select('#', ...))
+  local a1, a2 = ...
+  assertEquals(e1, a1)
+  assertEquals(e2, a2)
+end
+
+local function check3(e1, e2, e3, ...)
+  assertEquals(3, select('#', ...))
+  local a1, a2, a3 = ...
+  assertEquals(e1, a1)
+  assertEquals(e2, a2)
+  assertEquals(e3, a3)
+end
+
 local function check4(e1, e2, e3, e4, ...)
   assertEquals(4, select('#', ...))
   local a1, a2, a3, a4 = ...
@@ -77,6 +92,14 @@ local function check7(e1, e2, e3, e4, e5, e6, e7, ...)
   assertEquals(e7, a7)
 end
 
+local function retn(n, ...)
+  local k = select('#', ...)
+  if n ~= k then
+    error(string.format('wrong number of return values: want %d, got %d', n, k), 2)
+  end
+  return ...
+end
+
 local function mixin(t, ...)
   for i = 1, select('#', ...) do
     for k, v in pairs(select(i, ...)) do
@@ -86,11 +109,16 @@ local function mixin(t, ...)
   return t
 end
 
+G.addonEnv = G
 G.assertEquals = assertEquals
 G.assertRecursivelyEqual = assertRecursivelyEqual
 G.check0 = check0
 G.check1 = check1
+G.check2 = check2
+G.check3 = check3
 G.check4 = check4
 G.check6 = check6
 G.check7 = check7
+G.globalEnv = _G
 G.mixin = mixin
+G.retn = retn

@@ -3662,6 +3662,7 @@ C_ChatInfo.RegisterAddonMessagePrefix:
   - name: successfulRequest
     type: boolean
 C_ChatInfo.ReplaceIconAndGroupExpressions:
+  impl: C_ChatInfo.ReplaceIconAndGroupExpressions
   inputs:
   - name: input
     type: string
@@ -10782,6 +10783,12 @@ C_LossOfControl.GetActiveLossOfControlDataCountByUnit:
   outputs:
   - name: count
     type: number
+C_Macro.SetMacroExecuteLineCallback:
+  impl: C_Macro.SetMacroExecuteLineCallback
+  inputs:
+  - name: cb
+    type: function
+  outputs: {}
 C_Mail.CanCheckInbox:
   inputs: {}
   outputs:
@@ -12281,6 +12288,16 @@ C_PartyInfo.GetInviteReferralInfo:
     type: boolean
   - name: outClubId
     type: string
+C_PartyInfo.GetMinItemLevel:
+  inputs:
+  - name: avgItemLevelCategory
+    type:
+      enum: AvgItemLevelCategories
+  outputs:
+  - name: minItemLevel
+    type: number
+  - name: playerNameWithLowestItemLevel
+    type: string
 C_PartyInfo.GetMinLevel:
   inputs:
   - name: category
@@ -12510,6 +12527,13 @@ C_PerksProgram.GetVendorItemInfoRefundTimeLeft:
   outputs:
   - name: refundTimeRemaining
     type: number
+C_PerksProgram.IsFrozenPerksVendorItem:
+  inputs:
+  - name: perksVendorItemID
+    type: number
+  outputs:
+  - name: isFrozen
+    type: boolean
 C_PerksProgram.ItemSelectedTelemetry:
   inputs:
   - name: perksVendorItemID
@@ -13295,6 +13319,11 @@ C_PlayerInfo.IsExpansionLandingPageUnlockedForPlayer:
     type: number
   outputs:
   - name: isUnlocked
+    type: boolean
+C_PlayerInfo.IsMirrorImage:
+  inputs: {}
+  outputs:
+  - name: isMirrorImage
     type: boolean
 C_PlayerInfo.IsPlayerEligibleForNPE:
   inputs: {}
@@ -14115,6 +14144,11 @@ C_PvP.GetSkirmishInfo:
   - name: battlemasterListInfo
     type:
       structure: C_PvP.BattlemasterListInfo
+C_PvP.GetSoloRBGMinItemLevel:
+  inputs: {}
+  outputs:
+  - name: minItemLevel
+    type: number
 C_PvP.GetSpecialEventBrawlInfo:
   inputs: {}
   outputs:
@@ -20939,6 +20973,13 @@ C_WeeklyRewards.GetConquestWeeklyProgress:
   - name: weeklyProgress
     type:
       structure: C_WeeklyRewards.ConquestWeeklyProgress
+C_WeeklyRewards.GetDifficultyIDForActivityTier:
+  inputs:
+  - name: activityTierID
+    type: number
+  outputs:
+  - name: difficultyID
+    type: number
 C_WeeklyRewards.GetExampleRewardItemHyperlinks:
   inputs:
   - name: id
@@ -20985,6 +21026,15 @@ C_WeeklyRewards.GetNextMythicPlusIncrease:
     type: number
   - name: itemLevel
     nilable: true
+    type: number
+C_WeeklyRewards.GetNumCompletedDungeonRuns:
+  inputs: {}
+  outputs:
+  - name: numHeroic
+    type: number
+  - name: numMythic
+    type: number
+  - name: numMythicPlus
     type: number
 C_WeeklyRewards.GetWeeklyRewardTextureKit:
   inputs: {}
@@ -21128,7 +21178,7 @@ C_WowTokenUI.StartTokenSell:
     type: string
   outputs: {}
 C_XMLUtil.GetTemplateInfo:
-  impl: C_XMLUtil.GetTemplateInfo
+  impl: C_XMLUtil.GetTemplateInfo_10_2
   inputs:
   - name: name
     type: string
@@ -21677,7 +21727,20 @@ Dismount:
   inputs: {}
   outputs: {}
 DisplayChannelOwner: {}
-DoEmote: {}
+DoEmote:
+  impl: DoEmote
+  inputs:
+  - name: token
+    type: string
+  - name: unit
+    nilable: true
+    type: unit
+  - name: hold
+    nilable: true
+    type: boolean
+  outputs:
+  - name: restricted
+    type: boolean
 DoesCurrentLocaleSellExpansionLevels:
   inputs: {}
   outputs:
@@ -21830,7 +21893,7 @@ FocusUnit:
   outputs: {}
 FollowUnit: {}
 forceinsecure:
-  impl: forceinsecure
+  stdlib: forceinsecure
 ForceLogout: {}
 ForceQuit: {}
 ForfeitDuel: {}
@@ -25088,7 +25151,9 @@ GetSpellLevelLearned: {}
 GetSpellLink: {}
 GetSpellLossOfControlCooldown: {}
 GetSpellPenetration: {}
-GetSpellPowerCost: {}
+GetSpellPowerCost:
+  outputs:
+  - type: table
 GetSpellQueueWindow: {}
 GetSpellRank: {}
 GetSpellsForCharacterUpgradeTier: {}
@@ -25735,8 +25800,7 @@ HaveQuestRewardData:
 HearthAndResurrectFromArea: {}
 HideRepairCursor: {}
 hooksecurefunc:
-  impl: hooksecurefunc
-  outputs: {}
+  stdlib: hooksecurefunc
 InboxItemCanDelete:
   inputs:
   - name: index
@@ -25936,7 +26000,11 @@ IsFlyableArea: {}
 IsFlying: {}
 IsGamePadCursorControlEnabled: {}
 IsGamePadFreelookEnabled: {}
-IsGMClient: {}
+IsGMClient:
+  inputs: {}
+  outputs:
+  - name: isGM
+    type: boolean
 IsGraphicsCVarValueSupported: {}
 IsGraphicsSettingValueSupported: {}
 IsGUIDInGroup: {}
@@ -26018,6 +26086,7 @@ IsLFGDungeonJoinable:
   - name: totalGroupSizeRequired
     type: number
 IsLinuxClient:
+  impl: IsLinuxClient
   inputs: {}
   outputs:
   - name: isLinux
@@ -26029,6 +26098,7 @@ IsLoggedIn:
   - name: isLoggedIn
     type: boolean
 IsMacClient:
+  impl: IsMacClient
   inputs: {}
   outputs:
   - name: isMac
@@ -26269,6 +26339,7 @@ IsVoidStorageReady:
     type: boolean
 IsWargame: {}
 IsWindowsClient:
+  impl: IsWindowsClient
   inputs: {}
   outputs:
   - name: isWindows
@@ -26780,7 +26851,7 @@ RollOnLoot: {}
 RunBinding: {}
 RunMacro: {}
 RunMacroText:
-  impl: RunMacroText
+  impl: RunMacroText_Callback
   inputs:
   - name: macroText
     type: string
@@ -26821,7 +26892,7 @@ SearchLFGJoin: {}
 SearchLFGLeave: {}
 SearchLFGSort: {}
 securecall:
-  impl: securecall
+  stdlib: securecall
 securecallfunction:
   stdlib: securecallfunction
 SecureCmdOptionParse:
@@ -27605,7 +27676,7 @@ UnitClassification:
     nilable: true
     type: unit
   outputs:
-  - name: classification
+  - name: result
     stub: normal
     type: string
 UnitControllingVehicle: {}
@@ -27641,8 +27712,8 @@ UnitEffectiveLevel:
 UnitExists:
   impl: UnitExists
   inputs:
-  - default: WOWGUID_NULL
-    name: unit
+  - name: unit
+    nilable: true
     type: unit
   outputs:
   - name: result
@@ -27687,8 +27758,8 @@ UnitGetTotalHealAbsorbs:
   - type: number
 UnitGroupRolesAssigned:
   inputs:
-  - default: WOWGUID_NULL
-    name: unit
+  - name: unit
+    nilable: true
     type: unit
   outputs:
   - name: result
@@ -27774,8 +27845,8 @@ UnitHPPerStamina:
     type: number
 UnitInAnyGroup:
   inputs:
-  - default: WOWGUID_NULL
-    name: unit
+  - name: unit
+    nilable: true
     type: unit
   - name: partyIndex
     nilable: true
@@ -27785,8 +27856,8 @@ UnitInAnyGroup:
     type: boolean
 UnitInBattleground:
   inputs:
-  - default: WOWGUID_NULL
-    name: unit
+  - name: unit
+    nilable: true
     type: unit
   - name: partyIndex
     nilable: true
@@ -27798,8 +27869,8 @@ UnitInBattleground:
 UnitInOtherParty: {}
 UnitInParty:
   inputs:
-  - default: WOWGUID_NULL
-    name: unit
+  - name: unit
+    nilable: true
     type: unit
   - name: partyIndex
     nilable: true
@@ -27816,8 +27887,8 @@ UnitInPartyShard:
     type: boolean
 UnitInRaid:
   inputs:
-  - default: WOWGUID_NULL
-    name: unit
+  - name: unit
+    nilable: true
     type: unit
   - name: partyIndex
     nilable: true
@@ -27839,8 +27910,8 @@ UnitInRange:
     type: boolean
 UnitInSubgroup:
   inputs:
-  - default: WOWGUID_NULL
-    name: unit
+  - name: unit
+    nilable: true
     type: unit
   - name: partyIndex
     nilable: true
@@ -27880,8 +27951,8 @@ UnitIsBattlePetCompanion:
 UnitIsBossMob: {}
 UnitIsCharmed:
   inputs:
-  - default: WOWGUID_NULL
-    name: unit
+  - name: unit
+    nilable: true
     type: unit
   outputs:
   - name: result
@@ -27896,8 +27967,8 @@ UnitIsConnected:
 UnitIsControlling: {}
 UnitIsCorpse:
   inputs:
-  - default: WOWGUID_NULL
-    name: unit
+  - name: unit
+    nilable: true
     type: unit
   outputs:
   - name: result
@@ -27944,8 +28015,8 @@ UnitIsFriend:
     type: boolean
 UnitIsGameObject:
   inputs:
-  - default: WOWGUID_NULL
-    name: unit
+  - name: unit
+    nilable: true
     type: unit
   outputs:
   - name: result
@@ -27974,8 +28045,8 @@ UnitIsInMyGuild:
     type: boolean
 UnitIsInteractable:
   inputs:
-  - default: WOWGUID_NULL
-    name: unit
+  - name: unit
+    nilable: true
     type: unit
   outputs:
   - name: result
@@ -27983,16 +28054,16 @@ UnitIsInteractable:
 UnitIsMercenary: {}
 UnitIsOtherPlayersBattlePet:
   inputs:
-  - default: WOWGUID_NULL
-    name: unit
+  - name: unit
+    nilable: true
     type: unit
   outputs:
   - name: result
     type: boolean
 UnitIsOtherPlayersPet:
   inputs:
-  - default: WOWGUID_NULL
-    name: unit
+  - name: unit
+    nilable: true
     type: unit
   outputs:
   - name: result
@@ -28009,8 +28080,8 @@ UnitIsOwnerOrControllerOfUnit:
 UnitIsPlayer:
   impl: UnitIsPlayer
   inputs:
-  - default: WOWGUID_NULL
-    name: unit
+  - name: unit
+    nilable: true
     type: unit
   - name: partyIndex
     nilable: true
@@ -28020,8 +28091,8 @@ UnitIsPlayer:
     type: boolean
 UnitIsPossessed:
   inputs:
-  - default: WOWGUID_NULL
-    name: unit
+  - name: unit
+    nilable: true
     type: unit
   outputs:
   - name: result
@@ -28042,8 +28113,8 @@ UnitIsPVPFreeForAll:
     type: boolean
 UnitIsPVPSanctuary:
   inputs:
-  - default: WOWGUID_NULL
-    name: unit
+  - name: unit
+    nilable: true
     type: unit
   outputs:
   - name: result
@@ -28051,8 +28122,8 @@ UnitIsPVPSanctuary:
 UnitIsQuestBoss: {}
 UnitIsRaidOfficer:
   inputs:
-  - default: WOWGUID_NULL
-    name: unit
+  - name: unit
+    nilable: true
     type: unit
   outputs:
   - name: result
@@ -28079,8 +28150,8 @@ UnitIsUnit:
     type: boolean
 UnitIsVisible:
   inputs:
-  - default: WOWGUID_NULL
-    name: unit
+  - name: unit
+    nilable: true
     type: unit
   outputs:
   - name: result
@@ -28135,7 +28206,7 @@ UnitPartialPower:
   inputs:
   - name: unitToken
     type: unit
-  - default: NumPowerTypes
+  - default: 26
     name: powerType
     type:
       enum: PowerType
@@ -28164,16 +28235,16 @@ UnitPhaseReason:
       enum: PhaseReason
 UnitPlayerControlled:
   inputs:
-  - default: WOWGUID_NULL
-    name: unit
+  - name: unit
+    nilable: true
     type: unit
   outputs:
   - name: result
     type: boolean
 UnitPlayerOrPetInParty:
   inputs:
-  - default: WOWGUID_NULL
-    name: unit
+  - name: unit
+    nilable: true
     type: unit
   - name: partyIndex
     nilable: true
@@ -28183,8 +28254,8 @@ UnitPlayerOrPetInParty:
     type: boolean
 UnitPlayerOrPetInRaid:
   inputs:
-  - default: WOWGUID_NULL
-    name: unit
+  - name: unit
+    nilable: true
     type: unit
   - name: partyIndex
     nilable: true
@@ -28197,7 +28268,7 @@ UnitPower:
   inputs:
   - name: unitToken
     type: unit
-  - default: NumPowerTypes
+  - default: 26
     name: powerType
     type:
       enum: PowerType
@@ -28227,7 +28298,7 @@ UnitPowerMax:
   inputs:
   - name: unitToken
     type: unit
-  - default: NumPowerTypes
+  - default: 26
     name: powerType
     type:
       enum: PowerType
@@ -28242,6 +28313,7 @@ UnitPowerType:
   inputs:
   - name: unit
     type: unit
+  mayreturnnothing: true
   outputs:
   - name: powerType
     type: number

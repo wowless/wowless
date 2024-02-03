@@ -1,4 +1,46 @@
 ---
+AddPrivateAuraAnchorArgs:
+  fields:
+    auraIndex:
+      type: number
+    durationAnchor:
+      nilable: true
+      type:
+        structure: AnchorBinding
+    iconInfo:
+      nilable: true
+      type:
+        structure: PrivateAuraIconInfo
+    parent:
+      type: Frame
+    showCountdownFrame:
+      type: boolean
+    showCountdownNumbers:
+      type: boolean
+    unitToken:
+      type: string
+AnchorBinding:
+  fields:
+    offsetX:
+      type: number
+    offsetY:
+      type: number
+    point:
+      type: FramePoint
+    relativePoint:
+      type: FramePoint
+    relativeTo:
+      type: table
+AuraData:
+  fields: {}
+C_ActionBar.ActionUsableState:
+  fields:
+    noMana:
+      type: boolean
+    slot:
+      type: number
+    usable:
+      type: boolean
 C_AreaPoiInfo.AreaPOIInfo:
   fields:
     addPaddingAboveWidgets:
@@ -15,6 +57,10 @@ C_AreaPoiInfo.AreaPOIInfo:
     factionID:
       nilable: true
       type: number
+    highlightVignettesOnHover:
+      type: boolean
+    highlightWorldQuestsOnHover:
+      type: boolean
     isAlwaysOnFlightmap:
       type: boolean
     isPrimaryMapForPOI:
@@ -827,22 +873,6 @@ C_Commentator.NameOverrideEntry:
       type: string
     overrideName:
       type: string
-C_Console.ConsoleCommandInfo:
-  fields:
-    category:
-      type:
-        enum: ConsoleCategory
-    command:
-      type: string
-    commandType:
-      type:
-        enum: ConsoleCommandType
-    help:
-      type: string
-    scriptContents:
-      type: string
-    scriptParameters:
-      type: string
 C_ConsoleScriptCollection.ConsoleScriptCollectionData:
   fields:
     ID:
@@ -1042,6 +1072,23 @@ C_DeathInfo.SelfResurrectOption:
       type:
         enum: SelfResurrectOptionType
     priority:
+      type: number
+C_Engraving.EngravingData:
+  fields:
+    equipmentSlot:
+      type: number
+    iconTexture:
+      type: number
+    itemEnchantmentID:
+      type: number
+    learnedAbilitySpellIDs:
+      type:
+        arrayof: number
+    level:
+      type: number
+    name:
+      type: string
+    skillLineAbilityID:
       type: number
 C_FriendList.FriendInfo:
   fields:
@@ -1353,8 +1400,28 @@ C_GossipInfo.GossipQuestUIInfo:
       type: boolean
     title:
       type: string
+C_LFGInfo.LFGLockInfo:
+  fields:
+    hideEntry:
+      type: boolean
+    lfgID:
+      type: number
+    reason:
+      type: number
+C_LFGList.BestDungeonScoreMapInfo:
+  fields:
+    bestRunLevel:
+      type: number
+    finishedSuccess:
+      type: boolean
+    mapName:
+      type: string
+    mapScore:
+      type: number
 C_LFGList.GroupFinderActivityInfo:
   fields:
+    allowCrossFaction:
+      type: boolean
     categoryID:
       type: number
     difficultyID:
@@ -1370,6 +1437,18 @@ C_LFGList.GroupFinderActivityInfo:
       type: number
     iconFileDataID:
       type: number
+    ilvlSuggestion:
+      type: number
+    isCurrentRaidActivity:
+      type: boolean
+    isMythicActivity:
+      type: boolean
+    isMythicPlusActivity:
+      type: boolean
+    isPvpActivity:
+      type: boolean
+    isRatedPvpActivity:
+      type: boolean
     mapID:
       type: number
     maxLevel:
@@ -1386,19 +1465,86 @@ C_LFGList.GroupFinderActivityInfo:
       type: number
     shortName:
       type: string
+    showQuickJoinToast:
+      type: boolean
     useDungeonRoleExpectations:
+      type: boolean
+    useHonorLevel:
+      type: boolean
+C_LFGList.LfgApplicantData:
+  fields:
+    applicantID:
+      type: number
+    applicationStatus:
+      type: string
+    comment:
+      type: string
+    displayOrderID:
+      type: number
+    isNew:
+      type: boolean
+    numMembers:
+      type: number
+    pendingApplicationStatus:
+      nilable: true
+      type: string
+C_LFGList.LfgCategoryData:
+  fields:
+    allowCrossFaction:
+      type: boolean
+    autoChooseActivity:
+      type: boolean
+    name:
+      type: string
+    preferCurrentArea:
+      type: boolean
+    searchPromptOverride:
+      nilable: true
+      type: string
+    separateRecommended:
+      type: boolean
+    showPlaystyleDropdown:
       type: boolean
 C_LFGList.LfgEntryData:
   fields:
+    activityID:
+      type: number
     activityIDs:
       type:
         arrayof: number
+    autoAccept:
+      type: boolean
     comment:
       type: string
     duration:
       type: number
+    isCrossFactionListing:
+      type: boolean
+    name:
+      type: string
     newPlayerFriendly:
       type: boolean
+    playstyle:
+      nilable: true
+      type:
+        enum: LFGEntryPlaystyle
+    privateGroup:
+      type: boolean
+    questID:
+      nilable: true
+      type: number
+    requiredDungeonScore:
+      nilable: true
+      type: number
+    requiredHonorLevel:
+      type: number
+    requiredItemLevel:
+      type: number
+    requiredPvpRating:
+      nilable: true
+      type: number
+    voiceChat:
+      type: string
 C_LFGList.LFGRoles:
   fields:
     dps:
@@ -1409,6 +1555,8 @@ C_LFGList.LFGRoles:
       type: boolean
 C_LFGList.LfgSearchResultData:
   fields:
+    activityID:
+      type: number
     activityIDs:
       type:
         arrayof: number
@@ -1424,9 +1572,22 @@ C_LFGList.LfgSearchResultData:
       type: boolean
     isWarMode:
       type: boolean
+    leaderDungeonScoreInfo:
+      nilable: true
+      type:
+        structure: C_LFGList.BestDungeonScoreMapInfo
+    leaderFactionGroup:
+      type: number
     leaderName:
       nilable: true
       type: string
+    leaderOverallDungeonScore:
+      nilable: true
+      type: number
+    leaderPvpRatingInfo:
+      nilable: true
+      type:
+        structure: C_LFGList.PvpRatingInfo
     name:
       type: string
     newPlayerFriendly:
@@ -1448,6 +1609,51 @@ C_LFGList.LfgSearchResultData:
       type: number
     voiceChat:
       type: string
+C_LFGList.PvpRatingInfo:
+  fields:
+    activityName:
+      type: string
+    bracket:
+      type: number
+    rating:
+      type: number
+    tier:
+      type: number
+C_LFGList.WowLocale:
+  fields:
+    deDE:
+      default: false
+      type: boolean
+    enUS:
+      default: false
+      type: boolean
+    esES:
+      default: false
+      type: boolean
+    esMX:
+      default: false
+      type: boolean
+    frFR:
+      default: false
+      type: boolean
+    itIT:
+      default: false
+      type: boolean
+    koKR:
+      default: false
+      type: boolean
+    ptBR:
+      default: false
+      type: boolean
+    ruRU:
+      default: false
+      type: boolean
+    zhCN:
+      default: false
+      type: boolean
+    zhTW:
+      default: false
+      type: boolean
 C_LossOfControl.LossOfControlData:
   fields:
     auraInstanceID:
@@ -1642,6 +1848,12 @@ C_ModelInfo.UIModelSceneCameraInfo:
         structure: vector3
     zoomedYawOffset:
       type: number
+C_MountJournal.MountCreatureDisplayInfo:
+  fields:
+    creatureDisplayID:
+      type: number
+    isVisible:
+      type: boolean
 C_PvP.BattlefieldCurrencyReward:
   fields:
     id:
@@ -1718,6 +1930,14 @@ C_QuestLog.QuestObjectiveInfo:
       type: string
     type:
       type: string
+C_QuestLog.QuestOnMapInfo:
+  fields:
+    questID:
+      type: number
+    x:
+      type: number
+    y:
+      type: number
 C_QuestSession.QuestSessionPlayerDetails:
   fields:
     guid:
@@ -1866,8 +2086,15 @@ C_Texture.AtlasInfo:
       type: number
     leftTexCoord:
       type: number
+    rawSize:
+      type:
+        structure: vector2
     rightTexCoord:
       type: number
+    sliceData:
+      nilable: true
+      type:
+        structure: UITextureSliceData
     tilesHorizontally:
       type: boolean
     tilesVertically:
@@ -2042,6 +2269,9 @@ C_Traits.TraitNodeInfo:
           structure: C_Traits.TraitOutEdgeInfo
 C_Traits.TraitNodeInfoPartial:
   fields:
+    activeEntryID:
+      nilable: true
+      type: number
     activeRank:
       nilable: true
       type: number
@@ -2449,6 +2679,8 @@ C_XMLUtil.XMLTemplateInfo:
       type:
         arrayof:
           structure: C_XMLUtil.XMLTemplateKeyValue
+    sourceLocation:
+      type: string
     type:
       type: string
     width:
@@ -2525,6 +2757,8 @@ CharCustomizationCategory:
     spellShapeshiftFormID:
       nilable: true
       type: number
+    subcategory:
+      type: boolean
     undressModel:
       type: boolean
 CharCustomizationChoice:
@@ -2610,6 +2844,22 @@ colorRGBA:
     r:
       type: number
   mixin: ColorMixin
+ConsoleCommandInfo:
+  fields:
+    category:
+      type:
+        enum: ConsoleCategory
+    command:
+      type: string
+    commandType:
+      type:
+        enum: ConsoleCommandType
+    help:
+      type: string
+    scriptContents:
+      type: string
+    scriptParameters:
+      type: string
 ExpansionDisplayInfo:
   fields:
     banner:
@@ -2670,6 +2920,15 @@ PlayerInfoCharacterData:
         enum: UnitSex
 PlayerLocation:
   fields: {}
+PrivateAuraIconInfo:
+  fields:
+    iconAnchor:
+      type:
+        structure: AnchorBinding
+    iconHeight:
+      type: number
+    iconWidth:
+      type: number
 QueueSpecificInfo:
   fields:
     activityID:
@@ -2704,6 +2963,52 @@ QueueSpecificInfo:
       type: number
 ReportInfo:
   fields: {}
+UITextureSliceData:
+  fields:
+    marginBottom:
+      type: number
+    marginLeft:
+      type: number
+    marginRight:
+      type: number
+    marginTop:
+      type: number
+    sliceMode:
+      type:
+        enum: UITextureSliceMode
+UnitAuraUpdateInfo:
+  fields:
+    addedAuras:
+      nilable: true
+      type:
+        arrayof:
+          structure: AuraData
+    isFullUpdate:
+      default: false
+      type: boolean
+    removedAuraInstanceIDs:
+      nilable: true
+      type:
+        arrayof: number
+    updatedAuraInstanceIDs:
+      nilable: true
+      type:
+        arrayof: number
+UnitPrivateAuraAppliedSoundInfo:
+  fields:
+    outputChannel:
+      nilable: true
+      type: string
+    soundFileID:
+      nilable: true
+      type: number
+    soundFileName:
+      nilable: true
+      type: string
+    spellID:
+      type: number
+    unitToken:
+      type: string
 vector2:
   fields:
     x:

@@ -1,35 +1,35 @@
 repos:
 - repo: https://github.com/pre-commit/pre-commit-hooks
-  rev: v4.0.1
+  rev: v4.5.0
   hooks:
   - id: check-json
   - id: check-yaml
   - id: end-of-file-fixer
   - id: trailing-whitespace
 - repo: https://github.com/editorconfig-checker/editorconfig-checker.python
-  rev: '2.6.1'
+  rev: '2.7.3'
   hooks:
   - id: editorconfig-checker
 - repo: https://github.com/JohnnyMorganz/StyLua
-  rev: v0.17.0
+  rev: v0.18.2
   hooks:
   - id: stylua-github
 - repo: https://github.com/Lucas-C/pre-commit-hooks
-  rev: v1.1.13
+  rev: v1.5.4
   hooks:
   - id: remove-crlf
   - id: forbid-tabs
 - repo: https://github.com/markdownlint/markdownlint
-  rev: v0.11.0
+  rev: v0.12.0
   hooks:
   - id: markdownlint
 - repo: https://github.com/pre-commit/mirrors-clang-format
-  rev: v16.0.3
+  rev: v17.0.4
   hooks:
   - id: clang-format
     types: [c]
 - repo: https://github.com/shellcheck-py/shellcheck-py
-  rev: v0.8.0.1
+  rev: v0.9.0.6
   hooks:
   - id: shellcheck
     args:
@@ -46,7 +46,8 @@ repos:
     name: luacheck
     entry: luacheck
     language: system
-    types: [lua]
+    types: [file]
+    files: (\.lua|^.luacheckrc)$
   - id: addon-chmod
     name: addon execute bits
     entry: chmod 755

@@ -3975,6 +3975,8 @@ C_PerksProgram.PerksVendorItemInfo:
       type: string
     iconTexture:
       type: string
+    isPurchasePending:
+      type: boolean
     itemID:
       type: number
     itemModifiedAppearanceID:
@@ -3983,8 +3985,6 @@ C_PerksProgram.PerksVendorItemInfo:
       type: number
     name:
       type: string
-    pending:
-      type: boolean
     perksVendorCategoryID:
       type: number
     perksVendorItemID:
@@ -4338,6 +4338,9 @@ C_PvP.PvpBrawlInfo:
       type:
         arrayof: string
     maxLevel:
+      type: number
+    minItemLevel:
+      default: 0
       type: number
     minLevel:
       type: number
@@ -7627,6 +7630,8 @@ CharCustomizationCategory:
     spellShapeshiftFormID:
       nilable: true
       type: number
+    subcategory:
+      type: boolean
     undressModel:
       type: boolean
 CharCustomizationChoice:

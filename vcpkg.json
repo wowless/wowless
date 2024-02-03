@@ -1,0 +1,9 @@
+{
+  "dependencies": [
+    "expat",
+    "libpng",
+    "libyaml",
+    "sqlite3",
+    "zlib"
+  ]
+}

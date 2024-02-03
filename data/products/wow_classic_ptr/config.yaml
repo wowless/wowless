@@ -17,6 +17,7 @@ addon:
       VasServiceType: {}
     globalapis:
       CreateForbiddenFrame: {}
+      loadstring_untainted: {}
   hooked_globals:
     FauxScrollFrame_Update: {}
     SetItemRef: {}
@@ -41,9 +42,6 @@ addon:
     raidGraphicsSSAO: {}
     raidGraphicsTextureResolution: {}
     RenderScale: {}
-  skipped_uiobjects:
-    Minimap: singleton
-    WorldFrame: singleton
 docs:
   apis:
     skip_namespaces:

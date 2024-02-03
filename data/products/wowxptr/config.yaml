@@ -20,6 +20,7 @@ addon:
       VasServiceType: {}
     globalapis:
       CreateForbiddenFrame: {}
+      loadstring_untainted: {}
   hooked_globals:
     SetItemRef: {}
   ignore_cvar_value:
@@ -56,12 +57,10 @@ addon:
     C_Traits.GetEntryInfo: {}
     C_Traits.GetTreeInfo: {}
     SetPortraitToTexture: {}
-  skipped_uiobjects:
-    Minimap: singleton
-    WorldFrame: singleton
 docs:
   apis:
     skip_namespaces:
+      C_BarberShopInternal: {}
       C_ConfigurationWarnings: {}
   events:
     never_sent:

@@ -1,5 +1,13 @@
 <Ui>
   <Script>
+    WowlessXmlErrors = {}
+    WowlessOldErrorHandler = geterrorhandler()
+    seterrorhandler(function(e)
+      table.insert(WowlessXmlErrors, e)
+    end)
+  </Script>
+
+  <Script>
     _G.WowlessLog = {}
     local function log(fmt, ...)
       table.insert(_G.WowlessLog, string.format(fmt, ...))
@@ -124,26 +132,32 @@
     </Scripts>
   </Frame>
 
+  <Script>
+    WowlessLog = {}
+  </Script>
   <Frame name='WowlessTemplate1' frameStrata='LOW' virtual='true'>
     <Scripts>
-      <OnLoad>end, assertEquals('LOW', WowlessFrame:GetFrameStrata())--</OnLoad>
+      <OnLoad>end, table.insert(WowlessLog, WowlessFrame:GetFrameStrata())--</OnLoad>
     </Scripts>
   </Frame>
   <Frame name='WowlessTemplate2' frameStrata='MEDIUM' virtual='true'>
     <Scripts>
-      <OnLoad>end, assertEquals('MEDIUM', WowlessFrame:GetFrameStrata())--</OnLoad>
+      <OnLoad>end, table.insert(WowlessLog, WowlessFrame:GetFrameStrata())--</OnLoad>
     </Scripts>
   </Frame>
   <Frame name='WowlessTemplate3' frameStrata='HIGH' virtual='true' inherits='WowlessTemplate2'>
     <Scripts>
-      <OnLoad>end, assertEquals('HIGH', WowlessFrame:GetFrameStrata())--</OnLoad>
+      <OnLoad>end, table.insert(WowlessLog, WowlessFrame:GetFrameStrata())--</OnLoad>
     </Scripts>
   </Frame>
   <Frame name='WowlessFrame' frameStrata='DIALOG' inherits='WowlessTemplate1,WowlessTemplate3'>
     <Scripts>
-      <OnLoad>end, assertEquals('DIALOG', WowlessFrame:GetFrameStrata())--</OnLoad>
+      <OnLoad>end, table.insert(WowlessLog, WowlessFrame:GetFrameStrata())--</OnLoad>
     </Scripts>
   </Frame>
+  <Script>
+    assertEquals('LOW,MEDIUM,HIGH,DIALOG', table.concat(WowlessLog, ','))
+  </Script>
 
   <Button name='WowlessTemplate' registerForClicks='AnyUp,AnyDown' virtual='true'>
     <Scripts>
@@ -607,4 +621,136 @@
       </AnimationGroup>
     </Animations>
   </Frame>
+
+  <Script>
+    WowlessLog = {}
+  </Script>
+  <ScopedModifier>
+    <Script>
+      table.insert(WowlessLog, 'moo')
+    </Script>
+  </ScopedModifier>
+  <Script>
+    assertEquals('moo', table.concat(WowlessLog, ','))
+  </Script>
+
+  <ScopedModifier scriptsUseGivenEnv='true'>
+    <Frame>
+      <Scripts>
+        <OnLoad>
+          assertEquals(addonEnv, globalEnv.getfenv(1))
+        </OnLoad>
+      </Scripts>
+    </Frame>
+  </ScopedModifier>
+
+  <!--
+    Mixin tests. Failure cases are not tested because the warning format
+    depends on line numbers and also tickles the old issue of extra file:line
+    entries on XML error strings.
+  -->
+  <Script>
+    WowlessGlobalMixin = { cow = 'moo' }
+  </Script>
+  <Frame mixin='WowlessGlobalMixin'>
+    <Scripts>
+      <OnLoad>
+        assertEquals('moo', self.cow)
+      </OnLoad>
+    </Scripts>
+  </Frame>
+  <ScopedModifier scriptsUseGivenEnv='true'>
+    <Frame>
+      <Scripts>
+        <OnLoad>
+          WowlessScopedMixin = { moo = 'cow' }
+        </OnLoad>
+      </Scripts>
+    </Frame>
+    <Frame mixin='WowlessScopedMixin'>
+      <Scripts>
+        <OnLoad>
+          assertEquals('cow', self.moo)
+        </OnLoad>
+      </Scripts>
+    </Frame>
+  </ScopedModifier>
+
+  <!-- TODO disabled until we support cranky XML errors -->
+  <!--
+  <Script>
+    WowlessLog = {}
+  </Script>
+  <WorldFrame>
+    <Scripts>
+      <OnLoad>
+        table.insert(WowlessLog, 'moo')
+      </OnLoad>
+    </Scripts>
+  </WorldFrame>
+  <Script>
+    assertEquals(nil, (next(WowlessLog)))
+  </Script>
+  -->
+
+  <Frame>
+    <Frames>
+      <Frame parentKey='foo' />
+      <Frame parentKey='foo' />
+    </Frames>
+    <Scripts>
+      <OnLoad>
+        assertEquals(2, self:GetNumChildren())
+        local _, f = self:GetChildren()
+        assertEquals(f, self.foo)
+      </OnLoad>
+    </Scripts>
+  </Frame>
+
+  <!-- Empty script handlers clear the script. -->
+  <Script>
+    WowlessLog = {}
+  </Script>
+  <Frame name='WowlessScriptClearTemplate' virtual='true'>
+    <Scripts>
+      <OnLoad>table.insert(WowlessLog, tostring(self:GetScript('OnHide') ~= nil))</OnLoad>
+      <OnHide>return</OnHide>
+    </Scripts>
+  </Frame>
+  <Frame inherits='WowlessScriptClearTemplate' />
+  <Frame inherits='WowlessScriptClearTemplate'>
+    <Scripts>
+      <OnHide>return</OnHide>
+    </Scripts>
+  </Frame>
+  <Frame inherits='WowlessScriptClearTemplate'>
+    <Scripts>
+      <OnHide></OnHide>
+    </Scripts>
+  </Frame>
+  <Frame inherits='WowlessScriptClearTemplate'>
+    <Scripts>
+      <OnHide />
+    </Scripts>
+  </Frame>
+  <Frame inherits='WowlessScriptClearTemplate'>
+    <Scripts>
+      <OnHide inherit='prepend' />
+    </Scripts>
+  </Frame>
+  <Frame inherits='WowlessScriptClearTemplate'>
+    <Scripts>
+      <OnHide inherit='append' />
+    </Scripts>
+  </Frame>
+  <Script>
+    assertEquals('true,true,false,false,false,false', table.concat(WowlessLog, ','))
+  </Script>
+
+  <Script>
+    if WowlessOldErrorHandler then
+      seterrorhandler(WowlessOldErrorHandler)
+      WowlessOldErrorHandler = nil
+    end
+  </Script>
 </Ui>

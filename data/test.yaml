@@ -1,0 +1,12 @@
+---
+C_CovenantSanctumUI.GetRenownLevels: {}
+C_Timer.NewTimer: {}
+GetBuildInfo_10_1: {}
+GetBuildInfo_1_15_0: {}
+GetBuildInfo_3_4_2: {}
+GetClickFrame: {}
+IsLinuxClient: {}
+IsMacClient: {}
+IsTestBuild: {}
+IsWindowsClient: {}
+UnitName: {}

@@ -77,7 +77,15 @@ AppearanceSourceInfo:
       type: number
 AuraData:
   fields:
+    applications:
+      type: number
     auraInstanceID:
+      type: number
+    expirationTime:
+      type: number
+    points:
+      type: table
+    spellId:
       type: number
 BountyInfo:
   fields:
@@ -92,6 +100,14 @@ BountyInfo:
     turninRequirementText:
       nilable: true
       type: string
+C_ActionBar.ActionUsableState:
+  fields:
+    noMana:
+      type: boolean
+    slot:
+      type: number
+    usable:
+      type: boolean
 C_AlliedRaces.AlliedRaceInfo:
   fields:
     achievementIds:
@@ -1519,22 +1535,6 @@ C_Commentator.NameOverrideEntry:
       type: string
     overrideName:
       type: string
-C_Console.ConsoleCommandInfo:
-  fields:
-    category:
-      type:
-        enum: ConsoleCategory
-    command:
-      type: string
-    commandType:
-      type:
-        enum: ConsoleCommandType
-    help:
-      type: string
-    scriptContents:
-      type: string
-    scriptParameters:
-      type: string
 C_ConsoleScriptCollection.ConsoleScriptCollectionData:
   fields:
     ID:
@@ -2130,6 +2130,8 @@ C_EventToastManager.EventToastInfo:
         enum: EventToastEventType
     extraUiWidgetSetID:
       nilable: true
+      type: number
+    flags:
       type: number
     hideDefaultAtlas:
       nilable: true
@@ -3094,7 +3096,11 @@ C_ItemUpgrade.ItemUpgradeLevelInfo:
       type: number
 C_ItemUpgrade.ItemUpgradeSeasonalCostType:
   fields:
+    currencyID:
+      nilable: true
+      type: number
     itemID:
+      nilable: true
       type: number
     orderIndex:
       type: number
@@ -3876,6 +3882,14 @@ C_PerksActivities.PerksActivitiesTracked:
     trackedIDs:
       type:
         arrayof: number
+C_PerksActivities.PerksActivityCondition:
+  fields:
+    isMet:
+      type: boolean
+    text:
+      type: string
+    uiPriority:
+      type: number
 C_PerksActivities.PerksActivityCriteria:
   fields:
     criteriaID:
@@ -3886,8 +3900,14 @@ C_PerksActivities.PerksActivityInfo:
   fields:
     activityName:
       type: string
+    areAllConditionsMet:
+      type: boolean
     completed:
       type: boolean
+    conditions:
+      type:
+        arrayof:
+          structure: C_PerksActivities.PerksActivityCondition
     criteriaList:
       type:
         arrayof:
@@ -3897,11 +3917,16 @@ C_PerksActivities.PerksActivityInfo:
     eventEndTime:
       nilable: true
       type: number
+    eventName:
+      nilable: true
+      type: string
     eventStartTime:
       nilable: true
       type: number
     ID:
       type: number
+    inProgress:
+      type: boolean
     requirementsList:
       type:
         arrayof:
@@ -3946,6 +3971,12 @@ C_PerksProgram.PerksProgramItemDisplayInfo:
     creatureDisplayInfoID:
       nilable: true
       type: number
+    mainHandItemModifiedAppearanceID:
+      nilable: true
+      type: number
+    offHandItemModifiedAppearanceID:
+      nilable: true
+      type: number
     overrideModelSceneID:
       nilable: true
       type: number
@@ -3979,6 +4010,8 @@ C_PerksProgram.PerksVendorItemInfo:
       type: string
     iconTexture:
       type: string
+    isPurchasePending:
+      type: boolean
     itemID:
       type: number
     itemModifiedAppearanceID:
@@ -3987,8 +4020,6 @@ C_PerksProgram.PerksVendorItemInfo:
       type: number
     name:
       type: string
-    pending:
-      type: boolean
     perksVendorCategoryID:
       type: number
     perksVendorItemID:
@@ -4001,10 +4032,41 @@ C_PerksProgram.PerksVendorItemInfo:
       type: boolean
     speciesID:
       type: number
+    subItems:
+      type:
+        arrayof:
+          structure: C_PerksProgram.PerksVendorSubItemInfo
+    subItemsLoaded:
+      type: boolean
     timeRemaining:
       type: number
     transmogSetID:
       type: number
+    uiGroupInfo:
+      nilable: true
+      type:
+        structure: C_PerksProgram.PerksVendorItemUIGroupInfo
+C_PerksProgram.PerksVendorItemUIGroupInfo:
+  fields:
+    ID:
+      type: number
+    name:
+      type: string
+    priority:
+      type: number
+C_PerksProgram.PerksVendorSubItemInfo:
+  fields:
+    invType:
+      type: string
+    itemAppearanceID:
+      type: number
+    itemID:
+      type: number
+    name:
+      type: string
+    quality:
+      type:
+        enum: ItemQuality
 C_PetInfo.PetTamerMapInfo:
   fields:
     areaPoiID:
@@ -4331,6 +4393,9 @@ C_PvP.PvpBrawlInfo:
         arrayof: string
     maxLevel:
       type: number
+    minItemLevel:
+      default: 0
+      type: number
     minLevel:
       type: number
     name:
@@ -4623,6 +4688,8 @@ C_QuestLog.QuestInfo:
     isHeader:
       type: boolean
     isHidden:
+      type: boolean
+    isInternalOnly:
       type: boolean
     isLegendarySort:
       type: boolean
@@ -5410,8 +5477,15 @@ C_Texture.AtlasInfo:
       type: number
     leftTexCoord:
       type: number
+    rawSize:
+      type:
+        structure: vector2
     rightTexCoord:
       type: number
+    sliceData:
+      nilable: true
+      type:
+        structure: UITextureSliceData
     tilesHorizontally:
       type: boolean
     tilesVertically:
@@ -5597,6 +5671,9 @@ C_Traits.TraitNodeInfo:
           structure: C_Traits.TraitOutEdgeInfo
 C_Traits.TraitNodeInfoPartial:
   fields:
+    activeEntryID:
+      nilable: true
+      type: number
     activeRank:
       nilable: true
       type: number
@@ -6627,11 +6704,20 @@ C_UIWidgetManager.StatusBarWidgetVisualizationInfo:
     colorTint:
       type:
         enum: StatusBarColorTintValue
+    fillMaxOpacity:
+      type:
+        enum: WidgetOpacityType
+    fillMinOpacity:
+      type:
+        enum: WidgetOpacityType
     fillMotionType:
       type:
         enum: UIWidgetMotionType
     frameTextureKit:
       type: string
+    glowAnimType:
+      type:
+        enum: WidgetGlowAnimType
     hasTimer:
       type: boolean
     inAnimType:
@@ -6658,6 +6744,9 @@ C_UIWidgetManager.StatusBarWidgetVisualizationInfo:
         arrayof: number
     scriptedAnimationEffectID:
       type: number
+    showGlowState:
+      type:
+        enum: WidgetShowGlowState
     shownState:
       type:
         enum: WidgetShownState
@@ -7028,6 +7117,9 @@ C_UIWidgetManager.TugOfWarWidgetVisualizationInfo:
     leftIconInfo:
       type:
         structure: C_UIWidgetManager.UIWidgetIconInfo
+    markerArrowShownState:
+      type:
+        enum: TugOfWarMarkerArrowShownState
     maxValue:
       type: number
     minValue:
@@ -7035,6 +7127,9 @@ C_UIWidgetManager.TugOfWarWidgetVisualizationInfo:
     modelSceneLayer:
       type:
         enum: UIWidgetModelSceneLayer
+    neutralFillStyle:
+      type:
+        enum: TugOfWarStyleValue
     neutralZoneCenter:
       type: number
     neutralZoneSize:
@@ -7116,14 +7211,28 @@ C_UIWidgetManager.UIWidgetItemInfo:
     infoTextEnabledState:
       type:
         enum: WidgetEnabledState
+    infoTextFontType:
+      type:
+        enum: UIWidgetFontType
+    infoTextSizeType:
+      type:
+        enum: UIWidgetTextSizeType
     itemID:
       type: number
+    itemNameTextFontType:
+      type:
+        enum: UIWidgetFontType
+    itemNameTextSizeType:
+      type:
+        enum: UIWidgetTextSizeType
     overrideItemName:
       nilable: true
       type: string
     overrideTooltip:
       nilable: true
       type: string
+    showAsEarned:
+      type: boolean
     stackCount:
       nilable: true
       type: number
@@ -7456,6 +7565,8 @@ C_WeeklyRewards.WeeklyRewardActivityEncounterInfo:
       type: number
 C_WeeklyRewards.WeeklyRewardActivityInfo:
   fields:
+    activityTierID:
+      type: number
     claimID:
       nilable: true
       type: number
@@ -7502,6 +7613,8 @@ C_XMLUtil.XMLTemplateInfo:
       type:
         arrayof:
           structure: C_XMLUtil.XMLTemplateKeyValue
+    sourceLocation:
+      type: string
     type:
       type: string
     width:
@@ -7589,6 +7702,8 @@ CharCustomizationCategory:
     spellShapeshiftFormID:
       nilable: true
       type: number
+    subcategory:
+      type: boolean
     undressModel:
       type: boolean
 CharCustomizationChoice:
@@ -7685,6 +7800,22 @@ colorRGBA:
     r:
       type: number
   mixin: ColorMixin
+ConsoleCommandInfo:
+  fields:
+    category:
+      type:
+        enum: ConsoleCategory
+    command:
+      type: string
+    commandType:
+      type:
+        enum: ConsoleCommandType
+    help:
+      type: string
+    scriptContents:
+      type: string
+    scriptParameters:
+      type: string
 ContentTrackingMapInfo:
   fields:
     targetID:
@@ -8264,6 +8395,28 @@ ExpansionDisplayInfoFeature:
       type: number
     text:
       type: string
+FontScriptInfo:
+  fields:
+    color:
+      type:
+        structure: colorRGBA
+    height:
+      type: number
+    outline:
+      type: string
+    shadow:
+      nilable: true
+      type:
+        structure: FontScriptShadowInfo
+FontScriptShadowInfo:
+  fields:
+    color:
+      type:
+        structure: colorRGBA
+    x:
+      type: number
+    y:
+      type: number
 GarrisonAbilityEffect:
   fields:
     description:
@@ -8453,6 +8606,12 @@ ItemLocation:
 ItemTransmogInfo:
   fields: {}
   mixin: ItemTransmogInfoMixin
+LocaleInfo:
+  fields:
+    localeId:
+      type: number
+    localeName:
+      type: string
 MythicPlusAffixScoreInfo:
   fields:
     durationSec:
@@ -8888,6 +9047,19 @@ TransmogLocation:
 TransmogPendingInfo:
   fields: {}
   mixin: TransmogPendingInfoMixin
+UITextureSliceData:
+  fields:
+    marginBottom:
+      type: number
+    marginLeft:
+      type: number
+    marginRight:
+      type: number
+    marginTop:
+      type: number
+    sliceMode:
+      type:
+        enum: UITextureSliceMode
 UnitAuraUpdateInfo:
   fields:
     addedAuras:

@@ -18,7 +18,7 @@ local function tget(t, s)
   end
 end
 
-function G.GeneratedTests()
+G.testsuite.generated = function()
   local cfuncs = {}
 
   local function checkFunc(func, isLua, env)
@@ -93,6 +93,16 @@ function G.GeneratedTests()
               end
             end
           end
+          if name == 'C_Macro' then
+            mtests.SetMacroExecuteLineCallback = function()
+              local func = _G.C_Macro.SetMacroExecuteLineCallback
+              if iswowlesslite and ncfg.SetMacroExecuteLineCallback then
+                return checkCFunc(func)
+              else
+                assertEquals(nil, func)
+              end
+            end
+          end
           return mkTests(ns, mtests)
         end
       end
@@ -104,21 +114,11 @@ function G.GeneratedTests()
     local b = _G.WowlessData.Build
     assert(b, 'no build')
     return {
-      GetBuildInfo = function()
-        if b.tocversion >= 100100 then
-          G.check6(b.version, b.build, b.date, b.tocversion, '', ' ', GetBuildInfo())
-        else
-          G.check7(b.version, b.build, b.date, b.tocversion, '', ' ', b.tocversion, GetBuildInfo())
-        end
-      end,
       IsDebugBuild = function()
         G.check1(false, _G.IsDebugBuild())
       end,
       IsPublicBuild = function()
         G.check1(true, _G.IsPublicBuild())
-      end,
-      IsTestBuild = function()
-        G.check1(b.test, IsTestBuild())
       end,
     }
   end
@@ -157,7 +157,7 @@ function G.GeneratedTests()
         local actual = actualCVars[k]
         assert(actual, format('extra cvar', k))
         assertEquals(v.name, actual.name, 'cvar name mismatch')
-        if not toskipin[k] then
+        if not toskipin[actual.name] then
           assertEquals(v.value, actual.value, 'cvar value mismatch')
         end
       end
@@ -300,6 +300,29 @@ function G.GeneratedTests()
     return tests
   end
 
+  local function impltests()
+    local tests = {}
+    local arg = {
+      assertEquals = G.assertEquals,
+      check2 = G.check2,
+      check6 = G.check6,
+      check7 = G.check7,
+      data = {
+        build = _G.WowlessData.Build,
+      },
+      env = _G,
+      retn = G.retn,
+      wowless = _G.__wowless,
+    }
+    for k, v in pairs(_G.WowlessData.ImplTests) do
+      tests[k] = function()
+        local vv = loadstring(v, '@data/test/' .. k .. '.lua')
+        return vv(arg)
+      end
+    end
+    return tests
+  end
+
   local function uiobjects()
     local function assertCreateFrame(ty)
       local function process(...)
@@ -317,49 +340,50 @@ function G.GeneratedTests()
       assertEquals(expectedErr, err:sub(err:len() - expectedErr:len() + 1))
     end
     local indexes = {}
-    local function mkTests(objectTypeName, zombie, factory, tests)
-      local obj = assert(factory(), 'factory failed')
-      local obj2 = assert(factory(), 'factory failed')
-      if objectTypeName == 'EditBox' then
-        obj:Hide() -- captures input focus otherwise
-        obj2:Hide() -- captures input focus otherwise
-      end
-      assert(obj ~= obj2)
-      local mt = getmetatable(obj)
-      assert(mt == getmetatable(obj2))
-      if zombie then
-        assert(mt == nil)
-        assertEquals(objectTypeName, CreateFrame('Frame').GetObjectType(obj))
+    local function mkTests(objectTypeName, factory, tests)
+      local obj, mt
+      if objectTypeName == 'Minimap' then
+        obj = _G.Minimap or CreateFrame('Minimap')
+        mt = getmetatable(obj)
       else
-        assert(mt ~= nil)
-        assertEquals(objectTypeName, obj:GetObjectType())
-        assert(getmetatable(mt) == nil)
-        local mtk, __index = next(mt)
-        assertEquals('__index', mtk)
-        assertEquals('table', type(__index))
-        assertEquals(nil, next(mt, mtk))
-        assertEquals(nil, getmetatable(__index))
-        assertEquals(nil, indexes[__index])
-        indexes[__index] = true
-        return {
-          contents = function()
-            local udk, udv = next(obj)
-            assertEquals(udk, 0)
-            assertEquals('userdata', type(udv))
-            assert(getmetatable(udv) == nil)
-            assert(next(obj, udk) == nil)
-          end,
-          methods = function()
-            local t = tests(__index)
-            for k in pairs(__index) do
-              t[k] = t[k] or function()
-                error('missing')
-              end
-            end
-            return t
-          end,
-        }
+        obj = assert(factory(), 'factory failed')
+        local obj2 = assert(factory(), 'factory failed')
+        if objectTypeName == 'EditBox' then
+          obj:Hide() -- captures input focus otherwise
+          obj2:Hide() -- captures input focus otherwise
+        end
+        assert(obj ~= obj2)
+        mt = getmetatable(obj)
+        assert(mt == getmetatable(obj2))
       end
+      assert(mt ~= nil)
+      assertEquals(objectTypeName, obj:GetObjectType())
+      assert(getmetatable(mt) == nil)
+      local mtk, __index = next(mt)
+      assertEquals('__index', mtk)
+      assertEquals('table', type(__index))
+      assertEquals(nil, next(mt, mtk))
+      assertEquals(nil, getmetatable(__index))
+      assertEquals(nil, indexes[__index])
+      indexes[__index] = true
+      return {
+        contents = function()
+          local udk, udv = next(obj)
+          assertEquals(udk, 0)
+          assertEquals('userdata', type(udv))
+          assert(getmetatable(udv) == nil)
+          assert(next(obj, udk) == nil or objectTypeName == 'Minimap')
+        end,
+        methods = function()
+          local t = tests(__index)
+          for k in pairs(__index) do
+            t[k] = t[k] or function()
+              error('missing')
+            end
+          end
+          return t
+        end,
+      }
     end
     local factories = {
       Actor = function()
@@ -425,25 +449,9 @@ function G.GeneratedTests()
         return CreateFrame('Frame'):CreateAnimationGroup():CreateAnimation('Translation')
       end,
     }
-    local exceptions = { -- TODO remove need for this
-      Line = {
-        AdjustPointsOffset = true,
-        ClearPointByName = true,
-        ClearPointsOffset = true,
-        GetNumPoints = true,
-        GetPoint = true,
-        GetPointByName = true,
-        SetAllPoints = true,
-        SetHeight = true,
-        SetPoint = true,
-        SetSize = true,
-        SetWidth = true,
-      },
-    }
     local tests = {}
     for name, cfg in pairs(_G.WowlessData.UIObjectApis) do
       tests[name] = function()
-        local exc = exceptions[name]
         if cfg == false then
           assertCreateFrameFails(name)
           table.insert(G.ExpectedLuaWarnings, {
@@ -466,13 +474,11 @@ function G.GeneratedTests()
                 return assertCreateFrame(name)
               end
             assert(factory, 'missing factory')
-            return mkTests(cfg.objtype, cfg.zombie, factory, function(__index)
+            return mkTests(cfg.objtype, factory, function(__index)
               local mtests = {}
               for mname in pairs(cfg.methods) do
                 mtests[mname] = function()
-                  if not exc or not exc[mname] then
-                    return checkCFunc(__index[mname])
-                  end
+                  return checkCFunc(__index[mname])
                 end
               end
               return mtests
@@ -491,6 +497,7 @@ function G.GeneratedTests()
     events = events,
     globalApis = globalApis,
     globals = globals,
+    impltests = impltests,
     uiobjects = uiobjects,
   }
 end
