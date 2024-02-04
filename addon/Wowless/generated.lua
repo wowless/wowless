@@ -2,8 +2,6 @@ local _, G = ...
 local assertEquals = _G.assertEquals
 local iswowlesslite = _G.__wowless and _G.__wowless.lite
 
-local capsuleEnv = _G.SimpleCheckout and getfenv(_G.SimpleCheckout.OnLoad) or {}
-
 assert(_G.WowlessData, 'missing WowlessData')
 
 local capsuleconfig = _G.WowlessData.Config.capsule or {}
@@ -21,11 +19,11 @@ end
 G.testsuite.generated = function()
   local cfuncs = {}
 
-  local function checkFunc(func, isLua, env)
+  local function checkFunc(func, isLua)
     assertEquals('function', type(func))
     return {
       getfenv = function()
-        assertEquals(env or _G, getfenv(func))
+        assertEquals(_G, getfenv(func))
       end,
       impltype = function()
         assertEquals(isLua, (pcall(coroutine.create, func)))
@@ -37,17 +35,17 @@ G.testsuite.generated = function()
     }
   end
 
-  local function checkCFunc(func, env)
-    return checkFunc(func, false, env)
+  local function checkCFunc(func)
+    return checkFunc(func, false)
   end
 
-  local function checkLuaFunc(func, env)
-    return checkFunc(func, true, env)
+  local function checkLuaFunc(func)
+    return checkFunc(func, true)
   end
 
-  local function checkNotCFunc(func, env)
+  local function checkNotCFunc(func)
     if func ~= nil and not cfuncs[func] then
-      return checkLuaFunc(func, env)
+      return checkLuaFunc(func)
     end
   end
 
@@ -69,9 +67,9 @@ G.testsuite.generated = function()
     for name, ncfg in pairs(_G.WowlessData.NamespaceApis) do
       tests[name] = function()
         if capsulens[name] then
-          assertEquals(not iswowlesslite, not (_G[name] or capsuleEnv[name]))
+          assertEquals(not iswowlesslite, not _G[name])
         else
-          local ns = _G[name] or capsuleEnv[name]
+          local ns = _G[name]
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
           local mtests = {}
@@ -196,7 +194,7 @@ G.testsuite.generated = function()
     for name, cfg in pairs(_G.WowlessData.GlobalApis) do
       cfg = cfg == true and empty or cfg
       tests[name] = function()
-        local func = _G[name] or capsuleEnv[name]
+        local func = _G[name]
         if cfg.alias then
           assertEquals(func, assert(tget(_G, cfg.alias)))
         elseif cfg.nowrap then
@@ -225,34 +223,19 @@ G.testsuite.generated = function()
         end
       end
     end
-    for k in pairs(_G.WowlessData.Config.globalenv_in_capsule or {}) do
-      assert(not tests[k], k)
-      tests[k] = function()
-        local v = capsuleEnv[k]
-        if iswowlesslite then
-          assert(v == nil)
-        else
-          return checkLuaFunc(v, _G)
+    for k, v in pairs(_G) do
+      if type(v) == 'function' and not tests[k] and not tests['~' .. k] then
+        tests['~' .. k] = function()
+          return checkNotCFunc(v)
         end
       end
     end
-    local function checkEnv(env)
-      for k, v in pairs(env) do
-        if type(v) == 'function' and not tests[k] and not tests['~' .. k] then
-          tests['~' .. k] = function()
-            return checkNotCFunc(v, env)
-          end
-        end
-      end
-    end
-    checkEnv(_G)
-    checkEnv(capsuleEnv)
     return tests
   end
 
   local function globals()
     local data = _G.WowlessData.Globals
-    local actualEnum = G.mixin({}, _G.Enum, capsuleEnv.Enum or {})
+    local actualEnum = _G.Enum or {}
     local capsuleenums = capsuleconfig.enums or {}
     local expectedEnum = {}
     for k, v in pairs(data.Enum) do
