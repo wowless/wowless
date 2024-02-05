@@ -103,16 +103,6 @@ G.testsuite.generated = function()
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
           local mtests = mkftests(ncfg, name)
-          if name == 'C_Macro' then
-            mtests.SetMacroExecuteLineCallback = function()
-              local func = _G.C_Macro.SetMacroExecuteLineCallback
-              if iswowlesslite and ncfg.SetMacroExecuteLineCallback then
-                return checkCFunc(func)
-              else
-                assertEquals(nil, func)
-              end
-            end
-          end
           return mkTests(ns, mtests)
         end
       end
