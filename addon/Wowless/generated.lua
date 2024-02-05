@@ -5,6 +5,7 @@ local iswowlesslite = _G.__wowless and _G.__wowless.lite
 assert(_G.WowlessData, 'missing WowlessData')
 
 local capsuleconfig = _G.WowlessData.Config.capsule or {}
+local capsuleapis = capsuleconfig.globalapis or {}
 
 local function tget(t, s)
   local dot = s:find('%.')
@@ -49,6 +50,36 @@ G.testsuite.generated = function()
     end
   end
 
+  local function mkftests(cfgs, ename)
+    local ret = {}
+    local env = ename and _G[ename] or _G
+    for name, cfg in pairs(cfgs) do
+      cfg = cfg == true and {} or cfg
+      ret[name] = function()
+        local func = env[name]
+        if cfg.alias then
+          assertEquals(func, assert(tget(_G, cfg.alias)))
+        elseif cfg.nowrap then
+          return checkLuaFunc(func)
+        elseif cfg.stdlib then
+          local ty = type(tget(_G, cfg.stdlib))
+          if ty == 'function' then
+            return checkCFunc(func)
+          else
+            assertEquals(ty, type(func))
+          end
+        elseif cfg.overwritten then
+          return checkFunc(func, not iswowlesslite)
+        elseif capsuleapis[(ename and ename .. '.' or '') .. name] and not iswowlesslite then
+          assertEquals(nil, func)
+        else
+          return checkCFunc(func)
+        end
+      end
+    end
+    return ret
+  end
+
   local function apiNamespaces()
     local capsulens = capsuleconfig.apinamespaces or {}
     local function mkTests(ns, tests)
@@ -63,7 +94,6 @@ G.testsuite.generated = function()
       return tests
     end
     local tests = {}
-    local empty = {}
     for name, ncfg in pairs(_G.WowlessData.NamespaceApis) do
       tests[name] = function()
         if capsulens[name] then
@@ -72,27 +102,7 @@ G.testsuite.generated = function()
           local ns = _G[name]
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local mtests = {}
-          for mname, mcfg in pairs(ncfg) do
-            mcfg = mcfg == true and empty or mcfg
-            mtests[mname] = function()
-              local func = ns[mname]
-              if mcfg.alias then
-                assertEquals(func, assert(tget(_G, mcfg.alias)))
-              elseif mcfg.stdlib then
-                local ty = type(tget(_G, mcfg.stdlib))
-                if ty == 'function' then
-                  return checkCFunc(func)
-                else
-                  assertEquals(ty, type(func))
-                end
-              elseif mcfg.overwritten and not iswowlesslite then
-                return checkLuaFunc(func)
-              else
-                return checkCFunc(func)
-              end
-            end
-          end
+          local mtests = mkftests(ncfg, name)
           if name == 'C_Macro' then
             mtests.SetMacroExecuteLineCallback = function()
               local func = _G.C_Macro.SetMacroExecuteLineCallback
@@ -188,31 +198,7 @@ G.testsuite.generated = function()
   end
 
   local function globalApis()
-    local capsuleapis = capsuleconfig.globalapis or {}
-    local tests = {}
-    local empty = {}
-    for name, cfg in pairs(_G.WowlessData.GlobalApis) do
-      cfg = cfg == true and empty or cfg
-      tests[name] = function()
-        local func = _G[name]
-        if cfg.alias then
-          assertEquals(func, assert(tget(_G, cfg.alias)))
-        elseif cfg.nowrap then
-          return checkLuaFunc(func)
-        elseif cfg.stdlib then
-          local ty = type(tget(_G, cfg.stdlib))
-          if ty == 'function' then
-            return checkCFunc(func)
-          else
-            assertEquals(ty, type(func))
-          end
-        elseif cfg.overwritten and not iswowlesslite then
-          return checkLuaFunc(func)
-        elseif not capsuleapis[name] then
-          return checkCFunc(func)
-        end
-      end
-    end
+    local tests = mkftests(_G.WowlessData.GlobalApis)
     for k in pairs(_G.WowlessData.Config.hooked_globals or {}) do
       assert(not tests[k], k)
       tests[k] = function()
