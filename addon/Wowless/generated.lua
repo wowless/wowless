@@ -96,8 +96,8 @@ G.testsuite.generated = function()
     local tests = {}
     for name, ncfg in pairs(_G.WowlessData.NamespaceApis) do
       tests[name] = function()
-        if capsulens[name] then
-          assertEquals(not iswowlesslite, not _G[name])
+        if capsulens[name] and not iswowlesslite then
+          assertEquals(nil, _G[name])
         else
           local ns = _G[name]
           assertEquals('table', type(ns))
