@@ -1,36 +1,29 @@
 local lsqlite3 = require('lsqlite3')
-
 local sqlquote = require('tools.sqlite3ext').quote
+
+local indexes = {
+  SpecSetMember = { 'SpecSetMember (SpecSet)' },
+  TraitNodeGroupXTraitCond = { 'TraitNodeGroupXTraitCond (TraitNodeGroupID)' },
+  TraitNodeGroupXTraitNode = { 'TraitNodeGroupXTraitNode (TraitNodeID)' },
+  TraitNodeXTraitCond = { 'TraitNodeXTraitCond (TraitNodeID)' },
+  TraitNodeXTraitNodeEntry = { 'TraitNodeXTraitNodeEntry (TraitNodeID)' },
+  UiTextureAtlasMember = { 'UiTextureAtlasMember (CommittedName COLLATE NOCASE)' },
+}
 
 local function factory(theProduct)
   local defs = dofile('build/products/' .. theProduct .. '/dbdefs.lua')
-  for _, v in pairs(defs) do
-    v.orderedfields = (function()
-      local field2index = v.field2index
-      local list = {}
-      for k in pairs(field2index) do
-        table.insert(list, k)
-      end
-      table.sort(list, function(a, b)
-        return field2index[a] < field2index[b]
-      end)
-      return list
-    end)()
-  end
 
   local function create(filename)
-    local indexes = {
-      SpecSetMember = { 'SpecSetMember (SpecSet)' },
-      TraitNodeGroupXTraitCond = { 'TraitNodeGroupXTraitCond (TraitNodeGroupID)' },
-      TraitNodeGroupXTraitNode = { 'TraitNodeGroupXTraitNode (TraitNodeID)' },
-      TraitNodeXTraitCond = { 'TraitNodeXTraitCond (TraitNodeID)' },
-      TraitNodeXTraitNodeEntry = { 'TraitNodeXTraitNodeEntry (TraitNodeID)' },
-      UiTextureAtlasMember = { 'UiTextureAtlasMember (CommittedName COLLATE NOCASE)' },
-    }
     local dbinit = { 'BEGIN' }
     for k, v in pairs(defs) do
-      table.insert(dbinit, ('CREATE TABLE %s ("%s")'):format(k, table.concat(v.orderedfields, '","')))
-      if v.field2index.ID then
+      local fieldnames = {}
+      local hasid = false
+      for _, f in ipairs(v) do
+        table.insert(fieldnames, f.name)
+        hasid = hasid or f.id
+      end
+      table.insert(dbinit, ('CREATE TABLE %s ("%s")'):format(k, table.concat(fieldnames, '","')))
+      if hasid then
         table.insert(dbinit, ('CREATE INDEX %sIndexID ON %s (ID)'):format(k, k))
       end
       if indexes[k] then
@@ -54,15 +47,11 @@ local function factory(theProduct)
       local success, msg = pcall(function()
         local data = require('pl.file').read(('extracts/%s/db2/%s.db2'):format(theProduct, k))
         assert(data, 'missing db2 for ' .. k)
-        for row in require('tools.dbc').rows(data, '{' .. v.sig:gsub('%.', '%?') .. '}') do
+        for row in require('tools.db2').rows(data, v) do
           local values = {}
-          for _, field in ipairs(v.orderedfields) do
-            local value = row[v.field2index[field]]
+          for fk in ipairs(v) do
+            local value = row[fk]
             local ty = type(value)
-            if ty == 'table' then
-              value = value[1]
-              ty = type(value)
-            end
             if ty == 'nil' then
               value = 'NULL'
             elseif ty == 'string' then
@@ -70,7 +59,7 @@ local function factory(theProduct)
             elseif ty == 'number' then
               value = tostring(value)
             else
-              error('unexpected value of type ' .. ty .. ' on field ' .. field .. ' of table ' .. k)
+              error('unexpected value of type ' .. ty .. ' on field ' .. fk .. ' of table ' .. k)
             end
             table.insert(values, value)
           end

@@ -14,10 +14,14 @@ AcceptBattlefieldPort:
   protection: hardware
 AcceptDuel: {}
 AcceptGroup: {}
-AcceptGuild: {}
+AcceptGuild:
+  inputs: {}
+  outputs: {}
 AcceptProposal: {}
 AcceptQuest: {}
-AcceptResurrect: {}
+AcceptResurrect:
+  inputs: {}
+  outputs: {}
 AcceptSockets: {}
 AcceptSpellConfirmationPrompt: {}
 AcceptTrade: {}
@@ -77,9 +81,12 @@ assert:
   stdlib: assert
 AssistUnit:
   inputs:
-  - name: unit
-    nilable: true
-    type: unit
+  - default: ''
+    name: name
+    type: string
+  - default: false
+    name: exactMatch
+    type: boolean
   outputs: {}
 atan:
   nowrap: true
@@ -92,7 +99,9 @@ AttackTarget:
   inputs: {}
   outputs: {}
 AutoChooseCurrentGraphicsSetting: {}
-AutoEquipCursorItem: {}
+AutoEquipCursorItem:
+  inputs: {}
+  outputs: {}
 AutoLootMailItem: {}
 AutoStoreGuildBankItem: {}
 BankButtonIDToInvSlotID:
@@ -9646,6 +9655,22 @@ C_Item.GetItemQualityByID:
     nilable: true
     type:
       enum: ItemQuality
+C_Item.GetItemStatDelta:
+  inputs:
+  - name: itemLink1
+    type: string
+  - name: itemLink2
+    type: string
+  outputs:
+  - name: statTable
+    type: table
+C_Item.GetItemStats:
+  inputs:
+  - name: itemLink
+    type: string
+  outputs:
+  - name: statTable
+    type: table
 C_Item.GetItemUniquenessByID:
   inputs:
   - name: itemInfo
@@ -9677,6 +9702,16 @@ C_Item.GetLimitedCurrencyItemInfo:
     type: number
   - name: totalEarned
     type: number
+C_Item.GetSetBonusesForSpecializationByItemID:
+  inputs:
+  - name: specID
+    type: number
+  - name: itemID
+    type: number
+  outputs:
+  - name: itemSetSpellIDs
+    type:
+      arrayof: number
 C_Item.GetStackCount:
   inputs:
   - name: itemLocation
@@ -10795,6 +10830,53 @@ C_LossOfControl.GetActiveLossOfControlDataCountByUnit:
   outputs:
   - name: count
     type: number
+C_MacOptions.AreOSShortcutsDisabled:
+  inputs: {}
+  outputs:
+  - name: osShortcutsDisabledCVar
+    nilable: true
+    type: boolean
+  - name: osShortcutsDisabled
+    type: boolean
+C_MacOptions.GetGameBundleName:
+  inputs: {}
+  outputs:
+  - name: result
+    type: string
+C_MacOptions.HasNewStyleInputMonitoring:
+  inputs: {}
+  outputs:
+  - name: result
+    type: boolean
+C_MacOptions.IsInputMonitoringEnabled:
+  inputs: {}
+  outputs:
+  - name: result
+    type: boolean
+C_MacOptions.IsMicrophoneEnabled:
+  inputs: {}
+  outputs:
+  - name: result
+    type: boolean
+C_MacOptions.IsUniversalAccessEnabled:
+  inputs: {}
+  outputs:
+  - name: result
+    type: boolean
+C_MacOptions.OpenInputMonitoring:
+  inputs: {}
+  outputs: {}
+C_MacOptions.OpenMicrophoneRequestDialogue:
+  inputs: {}
+  outputs: {}
+C_MacOptions.OpenUniversalAccess:
+  inputs: {}
+  outputs: {}
+C_MacOptions.SetOSShortcutsDisabled:
+  inputs:
+  - name: disable
+    type: boolean
+  outputs: {}
 C_Macro.SetMacroExecuteLineCallback:
   impl: C_Macro.SetMacroExecuteLineCallback
   inputs:
@@ -20274,12 +20356,79 @@ C_UnitAuras.GetAuraDataByAuraInstanceID:
     nilable: true
     type:
       structure: AuraData
+C_UnitAuras.GetAuraDataByIndex:
+  inputs:
+  - name: unitToken
+    type: string
+  - name: index
+    type: number
+  - name: filter
+    nilable: true
+    type: string
+  outputs:
+  - name: aura
+    nilable: true
+    type:
+      structure: AuraData
 C_UnitAuras.GetAuraDataBySlot:
   inputs:
   - name: unitToken
     type: string
   - name: slot
     type: number
+  outputs:
+  - name: aura
+    nilable: true
+    stub:
+      applications: 1
+      auraInstanceID: 1
+      expirationTime: 0
+      points: {}
+      spellId: 1
+    type:
+      structure: AuraData
+C_UnitAuras.GetAuraDataBySpellName:
+  inputs:
+  - name: unitToken
+    type: string
+  - name: spellName
+    type: string
+  - name: filter
+    nilable: true
+    type: string
+  outputs:
+  - name: aura
+    nilable: true
+    type:
+      structure: AuraData
+C_UnitAuras.GetAuraSlots:
+  inputs:
+  - name: unitToken
+    type: unit
+  - name: filter
+    nilable: true
+    type: string
+  - name: maxSlots
+    nilable: true
+    type: number
+  - name: continuationToken
+    nilable: true
+    type: number
+  outputs:
+  - name: outContinuationToken
+    nilable: true
+    type: number
+  - name: slots
+    type: number
+C_UnitAuras.GetBuffDataByIndex:
+  inputs:
+  - name: unitToken
+    type: string
+  - name: index
+    type: number
+  - name: filter
+    nilable: true
+    type: string
   outputs:
   - name: aura
     nilable: true
@@ -20293,6 +20442,20 @@ C_UnitAuras.GetCooldownAuraBySpellID:
   - name: cooldownSpellID
     nilable: true
     type: number
+C_UnitAuras.GetDebuffDataByIndex:
+  inputs:
+  - name: unitToken
+    type: string
+  - name: index
+    type: number
+  - name: filter
+    nilable: true
+    type: string
+  outputs:
+  - name: aura
+    nilable: true
+    type:
+      structure: AuraData
 C_UnitAuras.GetPlayerAuraBySpellID:
   inputs:
   - name: spellID
@@ -21340,7 +21503,13 @@ CanEditMOTD:
   - name: canEdit
     type: boolean
 CanEditPublicNote: {}
-CanEjectPassengerFromSeat: {}
+CanEjectPassengerFromSeat:
+  inputs:
+  - name: virtualSeatIndex
+    type: number
+  outputs:
+  - name: result
+    type: boolean
 CanExitVehicle: {}
 CanGamePadControlCursor: {}
 CanGuildBankRepair:
@@ -21399,7 +21568,11 @@ CanSignPetition:
 CanSolveArtifact: {}
 CanSummonFriend: {}
 CanSurrenderArena: {}
-CanSwitchVehicleSeat: {}
+CanSwitchVehicleSeat:
+  inputs: {}
+  outputs:
+  - name: result
+    type: boolean
 CanSwitchVehicleSeats: {}
 CanUpgradeExpansion:
   inputs: {}
@@ -21417,7 +21590,13 @@ CanWithdrawGuildBankMoney:
   outputs:
   - name: value
     type: boolean
-CaseAccentInsensitiveParse: {}
+CaseAccentInsensitiveParse:
+  inputs:
+  - name: name
+    type: string
+  outputs:
+  - name: result
+    type: string
 CastPetAction: {}
 CastShapeshiftForm: {}
 CastSpell: {}
@@ -21476,7 +21655,8 @@ ClearSendMail: {}
 ClearTarget:
   inputs: {}
   outputs:
-  - type: boolean
+  - name: willMakeChange
+    type: boolean
 ClearTutorials: {}
 ClearVoidTransferDepositSlot: {}
 ClickSendMailItemButton: {}
@@ -21522,8 +21702,28 @@ CloseResearch:
 CloseSocketInfo:
   inputs: {}
   outputs: {}
-ClosestGameObjectPosition: {}
-ClosestUnitPosition: {}
+ClosestGameObjectPosition:
+  inputs:
+  - name: gameObjectID
+    type: number
+  outputs:
+  - name: xPos
+    type: number
+  - name: yPos
+    type: number
+  - name: distance
+    type: number
+ClosestUnitPosition:
+  inputs:
+  - name: creatureID
+    type: number
+  outputs:
+  - name: xPos
+    type: number
+  - name: yPos
+    type: number
+  - name: distance
+    type: number
 CloseTabardCreation:
   inputs: {}
   outputs: {}
@@ -21583,7 +21783,9 @@ ConfirmLootSlot: {}
 ConfirmNoRefundOnUse: {}
 ConfirmOnUse: {}
 ConfirmReadyCheck: {}
-ConfirmTalentWipe: {}
+ConfirmTalentWipe:
+  inputs: {}
+  outputs: {}
 ConsoleAddMessage:
   inputs:
   - name: message
@@ -21741,7 +21943,9 @@ debugstack:
   stdlib: debugstack
 DeclineChannelInvite: {}
 DeclineGroup: {}
-DeclineGuild: {}
+DeclineGuild:
+  inputs: {}
+  outputs: {}
 DeclineName:
   inputs:
   - name: name
@@ -21755,7 +21959,9 @@ DeclineName:
   - name: declinedNames
     type: string
 DeclineQuest: {}
-DeclineResurrect: {}
+DeclineResurrect:
+  inputs: {}
+  outputs: {}
 DeclineSpellConfirmationPrompt: {}
 deg:
   alias: math.deg
@@ -21871,7 +22077,11 @@ EJ_SelectTier:
 EJ_SetDifficulty: {}
 EJ_SetLootFilter: {}
 EJ_SetSearch: {}
-EjectPassengerFromSeat: {}
+EjectPassengerFromSeat:
+  inputs:
+  - name: virtualSeatIndex
+    type: number
+  outputs: {}
 EnableSpellAutocast: {}
 EndBoundTradeable: {}
 EndRefund: {}
@@ -21908,17 +22118,6 @@ ExpandWarGameHeader: {}
 FactionToggleAtWar: {}
 fastrandom:
   stdlib: fastrandom
-FillLocalizedClassList:
-  impl: FillLocalizedClassList
-  inputs:
-  - name: classTable
-    type: table
-  - name: isFemale
-    nilable: true
-    type: boolean
-  outputs:
-  - name: classTable
-    type: table
 FindBaseSpellByID: {}
 FindFlyoutSlotBySpellID: {}
 FindSpellBookSlotBySpellID:
@@ -21941,9 +22140,9 @@ floor:
 FlyoutHasSpell: {}
 FocusUnit:
   inputs:
-  - name: unit
-    nilable: true
-    type: unit
+  - default: ''
+    name: name
+    type: string
   outputs: {}
 FollowUnit: {}
 forceinsecure:
@@ -22117,7 +22316,11 @@ GetAddOnMemoryUsage:
   outputs:
   - name: memoryKb
     type: number
-GetAllowLowLevelRaid: {}
+GetAllowLowLevelRaid:
+  inputs: {}
+  outputs:
+  - name: result
+    type: boolean
 GetAlternativeDefaultLanguage: {}
 GetArchaeologyInfo: {}
 GetArchaeologyRaceInfo:
@@ -22181,7 +22384,7 @@ GetAutoCompleteResults: {}
 GetAutoDeclineGuildInvites:
   inputs: {}
   outputs:
-  - name: value
+  - name: result
     type: boolean
 GetAutoQuestPopUp: {}
 GetAvailableBandwidth:
@@ -22237,7 +22440,7 @@ GetAverageItemLevel:
 GetAvoidance:
   inputs: {}
   outputs:
-  - name: value
+  - name: result
     type: number
 GetBackgroundLoadingStatus: {}
 GetBankSlotCost:
@@ -22544,8 +22747,13 @@ GetCombatRatingBonusForCombatRatingValue:
     nilable: true
     type: number
 GetComboPoints:
+  inputs:
+  - name: unit
+    type: unit
+  - name: target
+    type: unit
   outputs:
-  - name: comboPoints
+  - name: result
     stub: 0
     type: number
 GetCompanionInfo: {}
@@ -22575,7 +22783,7 @@ GetCritChance:
 GetCritChanceProvidesParryEffect:
   inputs: {}
   outputs:
-  - name: value
+  - name: result
     type: boolean
 GetCriteriaSpell: {}
 GetCurrentArenaSeason:
@@ -22734,8 +22942,12 @@ GetExpansionTrialInfo:
 GetExpertise:
   inputs: {}
   outputs:
-  - type: number
-  - type: number
+  - name: mainhandExpertise
+    type: number
+  - name: offhandExpertise
+    type: number
+  - name: rangedExpertise
+    type: number
 GetExtraBarIndex:
   outputs:
   - type: number
@@ -23121,7 +23333,11 @@ GetHaste:
   outputs:
   - name: result
     type: number
-GetHitModifier: {}
+GetHitModifier:
+  inputs: {}
+  outputs:
+  - name: result
+    type: number
 GetHomePartyInfo: {}
 GetInboxHeaderInfo:
   inputs:
@@ -23352,8 +23568,6 @@ GetItemQualityColor:
 GetItemSetInfo: {}
 GetItemSpecInfo: {}
 GetItemSpell: {}
-GetItemStatDelta: {}
-GetItemStats: {}
 GetItemSubClassInfo:
   inputs:
   - name: classID
@@ -23367,7 +23581,11 @@ GetItemSubClassInfo:
   - name: isArmorType
     type: boolean
 GetItemUniqueness: {}
-GetJailersTowerLevel: {}
+GetJailersTowerLevel:
+  inputs: {}
+  outputs:
+  - name: result
+    type: number
 GetJournalInfoForSpellConfirmation: {}
 GetLanguageByIndex: {}
 GetLatestCompletedAchievements: {}
@@ -23684,7 +23902,7 @@ GetLFRChoiceOrder:
 GetLifesteal:
   inputs: {}
   outputs:
-  - name: value
+  - name: result
     type: number
 GetLocale:
   inputs: {}
@@ -23801,7 +24019,13 @@ GetMacroInfo:
 GetMacroItem: {}
 GetMacroItemIcons: {}
 GetMacroSpell: {}
-GetManaRegen: {}
+GetManaRegen:
+  inputs: {}
+  outputs:
+  - name: baseManaRegen
+    type: number
+  - name: castingManaRegen
+    type: number
 GetMasterLootCandidate:
   inputs:
   - name: slot
@@ -23811,11 +24035,15 @@ GetMasterLootCandidate:
   outputs:
   - name: candidate
     type: string
-GetMastery: {}
+GetMastery:
+  inputs: {}
+  outputs:
+  - name: result
+    type: number
 GetMasteryEffect:
   inputs: {}
   outputs:
-  - name: mastery
+  - name: masteryEffect
     type: number
   - name: bonusCoefficient
     type: number
@@ -23855,8 +24083,10 @@ GetMaxLevelForPlayerExpansion:
     type: number
 GetMaxNumCUFProfiles: {}
 GetMaxPlayerLevel:
+  inputs: {}
   outputs:
-  - type: number
+  - name: maxPlayerLevel
+    type: number
 GetMaxRenderScale:
   inputs: {}
   outputs:
@@ -23971,8 +24201,10 @@ GetModResilienceDamageReduction:
   - name: result
     type: number
 GetMoney:
+  inputs: {}
   outputs:
-  - type: number
+  - name: result
+    type: number
 GetMonitorAspectRatio: {}
 GetMonitorCount: {}
 GetMonitorName: {}
@@ -24048,7 +24280,7 @@ GetNextPendingInviteConfirmation:
 GetNormalizedRealmName:
   inputs: {}
   outputs:
-  - name: normalizedRealmName
+  - name: result
     type: string
 GetNumActiveQuests:
   inputs: {}
@@ -24459,25 +24691,52 @@ GetPhysicalScreenSize:
   - name: sizeY
     stub: 768
     type: number
-GetPlayerFacing: {}
+GetPlayerFacing:
+  inputs: {}
+  outputs:
+  - name: result
+    nilable: true
+    type: number
 GetPlayerInfoByGUID:
   inputs:
-  - type: string
+  - name: guid
+    type: string
   outputs:
-  - type: string
-  - type: string
-  - type: string
-  - type: string
-  - type: number
-  - type: string
-  - type: string
+  - name: localizedClass
+    type: string
+  - name: englishClass
+    type: string
+  - name: localizedRace
+    type: string
+  - name: englishRace
+    type: string
+  - name: sex
+    type: number
+  - name: name
+    type: string
+  - name: realmName
+    type: string
 GetPlayerTradeCurrency: {}
 GetPlayerTradeMoney:
   outputs:
   - type: number
 GetPossessInfo: {}
-GetPowerRegen: {}
-GetPowerRegenForPowerType: {}
+GetPowerRegen:
+  inputs: {}
+  outputs:
+  - name: basePowerRegen
+    type: number
+  - name: castingPowerRegen
+    type: number
+GetPowerRegenForPowerType:
+  inputs:
+  - name: powerType
+    type: number
+  outputs:
+  - name: basePowerRegen
+    type: number
+  - name: castingPowerRegen
+    type: number
 GetPrevCompleatedTutorial: {}
 GetPreviousAchievement: {}
 GetPreviousArenaSeason: {}
@@ -24507,16 +24766,22 @@ GetProgressText:
   - name: progressText
     type: string
 GetPromotionRank: {}
-GetPVPDesired: {}
-GetPVPGearStatRules: {}
+GetPVPDesired:
+  inputs: {}
+  outputs:
+  - name: result
+    type: boolean
+GetPVPGearStatRules:
+  inputs: {}
+  outputs:
+  - name: result
+    type: boolean
 GetPVPLifetimeStats:
   inputs: {}
   outputs:
-  - name: honorableKills
+  - name: lifetimeHonorableKills
     type: number
-  - name: dishonorableKills
-    type: number
-  - name: highestRank
+  - name: lifetimeMaxPVPRank
     type: number
 GetPvpPowerDamage:
   inputs: {}
@@ -24534,12 +24799,28 @@ GetPVPRoles:
   - type: boolean
   - type: boolean
   - type: boolean
-GetPVPSessionStats: {}
+GetPVPSessionStats:
+  inputs: {}
+  outputs:
+  - name: honorableKills
+    type: number
+  - name: dishonorableKills
+    type: number
 GetPvpTalentInfoByID: {}
 GetPvpTalentInfoBySpecialization: {}
 GetPvpTalentLink: {}
-GetPVPTimer: {}
-GetPVPYesterdayStats: {}
+GetPVPTimer:
+  inputs: {}
+  outputs:
+  - name: result
+    type: number
+GetPVPYesterdayStats:
+  inputs: {}
+  outputs:
+  - name: honorableKills
+    type: number
+  - name: dishonorableKills
+    type: number
 GetQuestBackgroundMaterial: {}
 GetQuestCurrencyID:
   inputs:
@@ -24832,8 +25113,9 @@ GetRepairAllCost:
 GetResSicknessDuration:
   inputs: {}
   outputs:
-  - name: value
-    type: number
+  - name: result
+    nilable: true
+    type: string
 GetRestrictedAccountData:
   inputs: {}
   outputs:
@@ -24846,11 +25128,11 @@ GetRestrictedAccountData:
 GetRestState:
   inputs: {}
   outputs:
-  - name: exhaustionStateID
+  - name: exhaustionID
     type: number
-  - name: exhaustionStateName
+  - name: name
     type: string
-  - name: exhaustionStateMultiplier
+  - name: factor
     type: number
 GetRewardArtifactXP:
   inputs: {}
@@ -24918,8 +25200,24 @@ GetRFDungeonInfo:
     type: number
   - name: maxLevel
     type: number
-GetRuneCooldown: {}
-GetRuneCount: {}
+GetRuneCooldown:
+  inputs:
+  - name: runeIndex
+    type: number
+  outputs:
+  - name: startTime
+    type: number
+  - name: duration
+    type: number
+  - name: isRuneReady
+    type: boolean
+GetRuneCount:
+  inputs:
+  - name: runeIndex
+    type: number
+  outputs:
+  - name: result
+    type: number
 GetRunningMacro: {}
 GetRunningMacroButton: {}
 GetSavedInstanceChatLink:
@@ -25014,7 +25312,6 @@ GetSessionTime:
   outputs:
   - name: time
     type: number
-GetSetBonusesForSpecializationByItemID: {}
 GetShapeshiftForm:
   inputs:
   - nilable: true
@@ -25028,7 +25325,12 @@ GetShapeshiftFormID:
   - name: index
     type: number
 GetShapeshiftFormInfo: {}
-GetSheathState: {}
+GetSheathState:
+  inputs: {}
+  outputs:
+  - name: result
+    nilable: true
+    type: number
 GetShieldBlock:
   inputs: {}
   outputs:
@@ -25208,7 +25510,7 @@ GetSpecsForSpell: {}
 GetSpeed:
   inputs: {}
   outputs:
-  - name: value
+  - name: result
     type: number
 GetSpellAutocast:
   inputs:
@@ -25280,7 +25582,11 @@ GetSpellDescription:
     type: number
   outputs:
   - type: string
-GetSpellHitModifier: {}
+GetSpellHitModifier:
+  inputs: {}
+  outputs:
+  - name: result
+    type: number
 GetSpellInfo:
   outputs:
   - name: name
@@ -25305,7 +25611,9 @@ GetSpellPenetration:
   outputs:
   - name: result
     type: number
-GetSpellPowerCost: {}
+GetSpellPowerCost:
+  outputs:
+  - type: table
 GetSpellQueueWindow: {}
 GetSpellRank: {}
 GetSpellsForCharacterUpgradeTier: {}
@@ -25362,7 +25670,11 @@ GetStablePetInfo:
     type: string
 GetStatistic: {}
 GetStatisticsCategoryList: {}
-GetSturdiness: {}
+GetSturdiness:
+  inputs: {}
+  outputs:
+  - name: result
+    type: number
 GetSubZoneText:
   inputs: {}
   outputs:
@@ -25424,7 +25736,11 @@ GetTargetTradeMoney:
 GetTaskInfo: {}
 GetTaskPOIs: {}
 GetTasksTable: {}
-GetTaxiBenchmarkMode: {}
+GetTaxiBenchmarkMode:
+  inputs: {}
+  outputs:
+  - name: result
+    type: boolean
 GetTaxiMapID: {}
 GetTempShapeshiftBarIndex: {}
 GetText:
@@ -25467,7 +25783,6 @@ GetTimePreciseSec:
   outputs:
   - name: time
     type: number
-GetTimeToWellRested: {}
 GetTitleName: {}
 GetTitleText:
   inputs: {}
@@ -25641,12 +25956,20 @@ GetUnitEmpowerStageDuration:
   outputs:
   - name: duration
     type: number
-GetUnitHealthModifier: {}
+GetUnitHealthModifier:
+  inputs:
+  - name: unit
+    type: unit
+  outputs:
+  - name: result
+    type: number
 GetUnitMaxHealthModifier:
   inputs:
-  - type: string
+  - name: unit
+    type: unit
   outputs:
-  - type: number
+  - name: result
+    type: number
 GetUnitPowerBarInfo:
   inputs:
   - name: unitToken
@@ -25728,7 +26051,13 @@ GetUnitPowerBarTextureInfoByID:
     type: number
   - name: colorA
     type: number
-GetUnitPowerModifier: {}
+GetUnitPowerModifier:
+  inputs:
+  - name: unit
+    type: unit
+  outputs:
+  - name: result
+    type: number
 GetUnitSpeed:
   inputs:
   - name: unit
@@ -25746,13 +26075,35 @@ GetVehicleBarIndex:
   inputs: {}
   outputs:
   - type: number
-GetVehicleUIIndicator: {}
-GetVehicleUIIndicatorSeat: {}
+GetVehicleUIIndicator:
+  inputs:
+  - name: vehicleIndicatorID
+    type: number
+  outputs:
+  - name: backgroundTextureID
+    type: number
+  - name: numSeatIndicators
+    type: number
+GetVehicleUIIndicatorSeat:
+  inputs:
+  - name: vehicleIndicatorID
+    type: number
+  - name: indicatorSeatIndex
+    type: number
+  outputs:
+  - name: virtualSeatIndex
+    type: number
+  - name: xPos
+    type: number
+  - name: yPos
+    type: number
 GetVersatilityBonus:
   inputs:
-  - type: number
+  - name: combatRating
+    type: number
   outputs:
-  - type: number
+  - name: result
+    type: number
 GetVideoCaps: {}
 GetVoidItemHyperlinkString: {}
 GetVoidItemInfo:
@@ -25825,7 +26176,12 @@ GetWorldElapsedTimers: {}
 GetWorldMapActionButtonSpellInfo: {}
 GetWorldPVPAreaInfo: {}
 GetWorldPVPQueueStatus: {}
-GetXPExhaustion: {}
+GetXPExhaustion:
+  inputs: {}
+  outputs:
+  - name: result
+    nilable: true
+    type: number
 GetZonePVPInfo: {}
 GetZoneText: {}
 GiveMasterLoot: {}
@@ -25888,7 +26244,11 @@ GuildSetMOTD: {}
 GuildUninvite: {}
 HandleAtlasMemberCommand: {}
 HasAction: {}
-HasAPEffectsSpellPower: {}
+HasAPEffectsSpellPower:
+  inputs: {}
+  outputs:
+  - name: result
+    type: boolean
 HasArtifactEquipped:
   inputs: {}
   outputs:
@@ -25910,7 +26270,11 @@ HasExtraActionBar:
   inputs: {}
   outputs:
   - type: oneornil
-HasFullControl: {}
+HasFullControl:
+  inputs: {}
+  outputs:
+  - name: result
+    type: boolean
 HasIgnoreDualWieldWeapon: {}
 HasInboxItem: {}
 HasLFGRestrictions: {}
@@ -25923,7 +26287,15 @@ HasNewMail:
   outputs:
   - name: value
     type: boolean
-HasNoReleaseAura: {}
+HasNoReleaseAura:
+  inputs: {}
+  outputs:
+  - name: hasCannotReleaseEffect
+    type: boolean
+  - name: longestDuration
+    type: number
+  - name: hasUntilCancelledDuration
+    type: boolean
 HasOverrideActionBar: {}
 HasPendingGlyphCast: {}
 HasPetSpells: {}
@@ -25935,7 +26307,11 @@ HasSendMailItem:
   outputs:
   - name: value
     type: boolean
-HasSPEffectsAttackPower: {}
+HasSPEffectsAttackPower:
+  inputs: {}
+  outputs:
+  - name: result
+    type: boolean
 HasTempShapeshiftActionBar: {}
 HasVehicleActionBar: {}
 HasWandEquipped: {}
@@ -25977,7 +26353,11 @@ InGuildParty:
     type: number
   - name: xpMultiplier
     type: number
-InitiateRolePoll: {}
+InitiateRolePoll:
+  inputs: {}
+  outputs:
+  - name: result
+    type: boolean
 InitiateTrade:
   inputs:
   - name: unit
@@ -25991,7 +26371,11 @@ Is64BitClient:
   outputs:
   - name: is64Bit
     type: boolean
-IsAccountSecured: {}
+IsAccountSecured:
+  inputs: {}
+  outputs:
+  - name: result
+    type: boolean
 IsAchievementEligible: {}
 IsActionInRange: {}
 IsActiveBattlefieldArena: {}
@@ -26112,7 +26496,7 @@ IsCurrentSpell:
 IsDebugBuild:
   inputs: {}
   outputs:
-  - name: value
+  - name: isDebugBuild
     type: boolean
 IsDemonHunterAvailable:
   inputs: {}
@@ -26408,7 +26792,11 @@ IsPublicBuild:
     stub: true
     type: boolean
 IsPvpTalentSpell: {}
-IsPVPTimerRunning: {}
+IsPVPTimerRunning:
+  inputs: {}
+  outputs:
+  - name: result
+    type: boolean
 IsQuestCompletable:
   inputs: {}
   outputs:
@@ -26517,7 +26905,11 @@ IsSwimming:
   - name: result
     type: boolean
 IsTalentSpell: {}
-IsTargetLoose: {}
+IsTargetLoose:
+  inputs: {}
+  outputs:
+  - name: isTargetLoose
+    type: boolean
 IsTestBuild:
   impl: IsTestBuild
   inputs: {}
@@ -26583,7 +26975,11 @@ IsWindowsClient:
   - name: isWindows
     type: boolean
 IsWorldLootObject: {}
-IsXPUserDisabled: {}
+IsXPUserDisabled:
+  inputs: {}
+  outputs:
+  - name: result
+    type: boolean
 ItemAddedToArtifact: {}
 ItemCanTargetGarrisonFollowerAbility: {}
 ItemHasRange: {}
@@ -26679,6 +27075,14 @@ LoadURLIndex:
     nilable: true
     type: number
   outputs: {}
+LocalizedClassList:
+  inputs:
+  - default: false
+    name: isFemale
+    type: boolean
+  outputs:
+  - name: result
+    type: table
 log:
   alias: math.log
 log10:
@@ -26705,16 +27109,6 @@ Logout:
 LootMoneyNotify: {}
 LootSlot: {}
 LootSlotHasItem: {}
-MacOptions_AreOSShortcutsDisabled: {}
-MacOptions_GetGameBundleName: {}
-MacOptions_HasNewStyleInputMonitoring: {}
-MacOptions_IsInputMonitoringEnabled: {}
-MacOptions_IsMicrophoneEnabled: {}
-MacOptions_IsUniversalAccessEnabled: {}
-MacOptions_OpenInputMonitoring: {}
-MacOptions_OpenMicrophoneRequestDialogue: {}
-MacOptions_OpenUniversalAccess: {}
-MacOptions_SetOSShortcutsDisabled: {}
 math.abs:
   stdlib: math.abs
 math.acos:
@@ -26825,7 +27219,9 @@ NextView:
 NoPlayTime:
   inputs: {}
   outputs:
-  - type: boolean
+  - name: result
+    nilable: true
+    type: boolean
 NotifyInspect: {}
 NotWhileDeadError: {}
 NumTaxiNodes: {}
@@ -26837,7 +27233,9 @@ pairs:
 PartialPlayTime:
   inputs: {}
   outputs:
-  - type: boolean
+  - name: result
+    nilable: true
+    type: boolean
 PartyLFGStartBackfill: {}
 pcall:
   stdlib: pcall
@@ -26907,7 +27305,15 @@ PlayerCanTeleport:
   outputs:
   - name: result
     type: boolean
-PlayerEffectiveAttackPower: {}
+PlayerEffectiveAttackPower:
+  inputs: {}
+  outputs:
+  - name: mainHandAttackPower
+    type: number
+  - name: offHandAttackPower
+    type: number
+  - name: rangedAttackPower
+    type: number
 PlayerHasToy:
   inputs:
   - name: itemID
@@ -26917,9 +27323,11 @@ PlayerHasToy:
     type: boolean
 PlayerIsPVPInactive:
   inputs:
-  - type: unit
+  - name: unit
+    type: unit
   outputs:
-  - type: boolean
+  - name: result
+    type: boolean
 PlayerVehicleHasComboPoints:
   inputs: {}
   outputs:
@@ -27027,7 +27435,11 @@ RepopMe:
   inputs: {}
   outputs: {}
 ReportBug: {}
-ReportPlayerIsPVPAFK: {}
+ReportPlayerIsPVPAFK:
+  inputs:
+  - name: unit
+    type: unit
+  outputs: {}
 ReportSuggestion: {}
 RequestBattlefieldScoreData: {}
 RequestBattlegroundInstanceInfo: {}
@@ -27071,11 +27483,18 @@ ResetView:
   - name: view
     type: number
   outputs: {}
-ResistancePercent: {}
+ResistancePercent:
+  inputs:
+  - name: resistance
+    type: number
+  - name: casterLevel
+    type: number
+  outputs:
+  - name: result
+    type: number
 RespondInstanceLock:
   inputs:
-  - name: response
-    nilable: true
+  - name: acceptLock
     type: boolean
   outputs: {}
 RespondMailLockSendItem: {}
@@ -27087,7 +27506,9 @@ RestoreRaidProfileFromCopy: {}
 ResurrectGetOfferer: {}
 ResurrectHasSickness: {}
 ResurrectHasTimer: {}
-RetrieveCorpse: {}
+RetrieveCorpse:
+  inputs: {}
+  outputs: {}
 ReturnInboxItem: {}
 RollOnLoot: {}
 RunBinding: {}
@@ -27155,7 +27576,11 @@ select:
   stdlib: select
 SelectActiveQuest: {}
 SelectAvailableQuest: {}
-SelectedRealmName: {}
+SelectedRealmName:
+  inputs: {}
+  outputs:
+  - name: selectedRealmName
+    type: string
 SelectTrainerService: {}
 SellCursorItem: {}
 SendChatMessage:
@@ -27189,8 +27614,18 @@ SetAchievementSearchString: {}
 SetActionBarToggles: {}
 SetActionUIButton: {}
 SetAllowDangerousScripts: {}
-SetAllowLowLevelRaid: {}
-SetAutoDeclineGuildInvites: {}
+SetAllowLowLevelRaid:
+  inputs:
+  - default: false
+    name: allow
+    type: boolean
+  outputs: {}
+SetAutoDeclineGuildInvites:
+  inputs:
+  - default: false
+    name: allow
+    type: boolean
+  outputs: {}
 SetBarSlotFromIntro: {}
 SetBattlefieldScoreFaction: {}
 SetBinding: {}
@@ -27349,8 +27784,8 @@ SetSpecialization: {}
 SetSpellbookPetAction: {}
 SetTaxiBenchmarkMode:
   inputs:
-  - name: value
-    nilable: true
+  - default: false
+    name: enable
     type: boolean
   outputs: {}
 SetTaxiMap: {}
@@ -27395,7 +27830,13 @@ SetWatchedFactionIndex: {}
 ShouldShowIslandsWeeklyPOI: {}
 ShouldShowSpecialSplashScreen: {}
 ShowAccountAchievements: {}
-ShowBossFrameWhenUninteractable: {}
+ShowBossFrameWhenUninteractable:
+  inputs:
+  - name: unit
+    type: unit
+  outputs:
+  - name: result
+    type: boolean
 ShowBuybackSellCursor: {}
 ShowQuestComplete: {}
 ShowQuestOffer: {}
@@ -27623,60 +28064,98 @@ TakeTaxiNode: {}
 tan:
   nowrap: true
   stdlib: tan
-TargetDirectionEnemy: {}
-TargetDirectionFinished: {}
-TargetDirectionFriend: {}
+TargetDirectionEnemy:
+  inputs:
+  - name: facing
+    type: number
+  - name: coneAngle
+    nilable: true
+    type: number
+  outputs: {}
+TargetDirectionFinished:
+  inputs: {}
+  outputs: {}
+TargetDirectionFriend:
+  inputs:
+  - name: facing
+    type: number
+  - name: coneAngle
+    nilable: true
+    type: number
+  outputs: {}
 TargetLastEnemy:
   inputs: {}
   outputs: {}
-TargetLastFriend: {}
+TargetLastFriend:
+  inputs: {}
+  outputs: {}
 TargetLastTarget:
   inputs: {}
   outputs: {}
-TargetNearest: {}
+TargetNearest:
+  inputs:
+  - default: false
+    name: reverse
+    type: boolean
+  outputs: {}
 TargetNearestEnemy:
   inputs:
-  - name: reverse
-    nilable: true
+  - default: false
+    name: reverse
     type: boolean
   outputs: {}
 TargetNearestEnemyPlayer:
   inputs:
-  - name: reverse
-    nilable: true
+  - default: false
+    name: reverse
     type: boolean
   outputs: {}
 TargetNearestFriend:
   inputs:
-  - name: reverse
-    nilable: true
+  - default: false
+    name: reverse
     type: boolean
   outputs: {}
 TargetNearestFriendPlayer:
   inputs:
-  - name: reverse
-    nilable: true
+  - default: false
+    name: reverse
     type: boolean
   outputs: {}
-TargetNearestPartyMember: {}
-TargetNearestRaidMember: {}
-TargetPriorityHighlightEnd:
+TargetNearestPartyMember:
   inputs:
-  - nilable: true
+  - default: false
+    name: reverse
     type: boolean
+  outputs: {}
+TargetNearestRaidMember:
+  inputs:
+  - default: false
+    name: reverse
+    type: boolean
+  outputs: {}
+TargetPriorityHighlightEnd:
+  inputs: {}
   outputs: {}
 TargetPriorityHighlightStart:
   inputs:
-  - nilable: true
+  - default: false
+    name: useStartDelay
     type: boolean
   outputs: {}
 TargetSpellReplacesBonusTree: {}
-TargetToggle: {}
+TargetToggle:
+  inputs: {}
+  outputs: {}
 TargetTotem: {}
 TargetUnit:
   inputs:
-  - nilable: true
-    type: unit
+  - default: ''
+    name: name
+    type: string
+  - default: false
+    name: exactMatch
+    type: boolean
   outputs: {}
 TaxiGetDestX: {}
 TaxiGetDestY: {}
@@ -27691,21 +28170,15 @@ TaxiNodePosition: {}
 TaxiRequestEarlyLanding: {}
 time:
   stdlib: time
-TimeoutResurrect: {}
+TimeoutResurrect:
+  inputs: {}
+  outputs: {}
 tinsert:
   alias: table.insert
 ToggleAnimKitDisplay:
   inputs: {}
   outputs: {}
 ToggleAutoRun:
-  inputs: {}
-  outputs: {}
-ToggleCollision:
-  debug: true
-  inputs: {}
-  outputs: {}
-ToggleCollisionDisplay:
-  debug: true
   inputs: {}
   outputs: {}
 ToggleDebugAIDisplay:
@@ -27721,14 +28194,6 @@ TogglePerformanceValues:
   - type: number
   outputs: {}
 TogglePetAutocast: {}
-TogglePlayerBounds:
-  debug: true
-  inputs: {}
-  outputs: {}
-TogglePortals:
-  debug: true
-  inputs: {}
-  outputs: {}
 TogglePVP:
   inputs: {}
   outputs: {}
@@ -27743,10 +28208,6 @@ ToggleSheath:
   inputs: {}
   outputs: {}
 ToggleSpellAutocast: {}
-ToggleTris:
-  debug: true
-  inputs: {}
-  outputs: {}
 ToggleWindowed:
   inputs: {}
   outputs: {}
@@ -27777,9 +28238,11 @@ type:
 UninviteUnit: {}
 UnitAffectingCombat:
   inputs:
-  - type: string
+  - name: unit
+    type: unit
   outputs:
-  - type: boolean
+  - name: result
+    type: boolean
 UnitAlliedRaceInfo:
   inputs:
   - name: unit
@@ -27791,29 +28254,38 @@ UnitAlliedRaceInfo:
     type: boolean
 UnitArmor:
   inputs:
-  - type: string
+  - name: unit
+    type: unit
   outputs:
-  - type: number
-  - type: number
-  - type: number
-  - type: number
-  - type: number
+  - name: base
+    type: number
+  - name: effective
+    type: number
+  - name: real
+    type: number
+  - name: bonus
+    type: number
 UnitAttackPower:
   inputs:
-  - type: string
+  - name: unit
+    type: unit
   outputs:
-  - type: number
-  - type: number
-  - type: number
+  - name: attackPower
+    type: number
+  - name: posBuff
+    type: number
+  - name: negBuff
+    type: number
 UnitAttackSpeed:
   inputs:
-  - type: string
+  - name: unit
+    type: unit
   outputs:
-  - type: number
-  - type: number
-UnitAura: {}
-UnitAuraBySlot: {}
-UnitAuraSlots: {}
+  - name: attackSpeed
+    type: number
+  - name: offhandAttackSpeed
+    nilable: true
+    type: number
 UnitBattlePetLevel:
   inputs:
   - name: unit
@@ -27838,7 +28310,6 @@ UnitBattlePetType:
   - name: result
     nilable: true
     type: number
-UnitBuff: {}
 UnitCanAssist:
   inputs:
   - name: unit
@@ -27877,10 +28348,52 @@ UnitCanPetBattle:
     type: boolean
 UnitCastingInfo:
   inputs:
-  - type: string
+  - name: unit
+    type: unit
+  outputs:
+  - name: name
+    type: string
+  - name: displayName
+    type: string
+  - name: textureID
+    type: number
+  - name: startTimeMs
+    type: number
+  - name: endTimeMs
+    type: number
+  - name: isTradeskill
+    type: boolean
+  - name: castID
+    type: string
+  - name: notInterruptible
+    type: boolean
+  - name: castingSpellID
+    type: number
 UnitChannelInfo:
   inputs:
-  - type: string
+  - name: unitToken
+    type: string
+  outputs:
+  - name: name
+    type: string
+  - name: displayName
+    type: string
+  - name: textureID
+    type: number
+  - name: startTimeMs
+    type: number
+  - name: endTimeMs
+    type: number
+  - name: isTradeskill
+    type: boolean
+  - name: notInterruptible
+    type: boolean
+  - name: spellID
+    type: number
+  - name: isEmpowered
+    type: boolean
+  - name: numEmpowerStages
+    type: number
 UnitChromieTimeID:
   inputs:
   - name: unit
@@ -27920,22 +28433,63 @@ UnitClassification:
   - name: result
     stub: normal
     type: string
-UnitControllingVehicle: {}
-UnitCreatureFamily: {}
-UnitCreatureType: {}
+UnitControllingVehicle:
+  inputs:
+  - name: unit
+    type: unit
+  outputs:
+  - name: result
+    type: boolean
+UnitCreatureFamily:
+  inputs:
+  - name: unit
+    type: unit
+  outputs:
+  - name: result
+    type: string
+UnitCreatureType:
+  inputs:
+  - name: unit
+    type: unit
+  outputs:
+  - name: result
+    type: string
 UnitDamage:
   inputs:
-  - type: string
+  - name: unit
+    type: unit
   outputs:
-  - type: number
-  - type: number
-  - type: number
-  - type: number
-  - type: number
-  - type: number
-  - type: number
-UnitDebuff: {}
-UnitDetailedThreatSituation: {}
+  - name: minDamage
+    type: number
+  - name: maxDamage
+    type: number
+  - name: offhandMinDamage
+    type: number
+  - name: offhandMaxDamage
+    type: number
+  - name: posBuff
+    type: number
+  - name: negBuff
+    type: number
+  - name: percent
+    type: number
+UnitDetailedThreatSituation:
+  inputs:
+  - name: unit
+    type: unit
+  - name: mobGUID
+    type: unit
+  outputs:
+  - name: isTanking
+    type: boolean
+  - name: status
+    type: number
+  - name: scaledPercentage
+    type: number
+  - name: rawPercentage
+    type: number
+  - name: rawThreat
+    type: number
 UnitDistanceSquared:
   inputs:
   - name: unit
@@ -27947,9 +28501,11 @@ UnitDistanceSquared:
     type: boolean
 UnitEffectiveLevel:
   inputs:
-  - type: string
+  - name: name
+    type: string
   outputs:
-  - type: number
+  - name: result
+    type: number
 UnitExists:
   impl: UnitExists
   inputs:
@@ -27985,21 +28541,29 @@ UnitFullName:
 UnitGetAvailableRoles: {}
 UnitGetIncomingHeals:
   inputs:
-  - type: string
-  - nilable: true
-    type: string
+  - name: unit
+    type: unit
+  - name: healerGUID
+    nilable: true
+    type: unit
   outputs:
-  - type: number
+  - name: result
+    nilable: true
+    type: number
 UnitGetTotalAbsorbs:
   inputs:
-  - type: string
+  - name: unit
+    type: unit
   outputs:
-  - type: number
+  - name: result
+    type: number
 UnitGetTotalHealAbsorbs:
   inputs:
-  - type: string
+  - name: unit
+    type: unit
   outputs:
-  - type: number
+  - name: result
+    type: number
 UnitGroupRolesAssigned:
   inputs:
   - name: unit
@@ -28047,22 +28611,27 @@ UnitHasLFGRandomCooldown:
     type: boolean
 UnitHasRelicSlot:
   inputs:
-  - nilable: true
-    type: string
+  - name: unit
+    type: unit
   outputs:
-  - type: boolean
+  - name: result
+    type: boolean
 UnitHasVehiclePlayerFrameUI:
   inputs:
-  - nilable: true
-    type: string
+  - name: unit
+    nilable: true
+    type: unit
   outputs:
-  - type: boolean
+  - name: result
+    type: boolean
 UnitHasVehicleUI:
   inputs:
-  - nilable: true
-    type: string
+  - name: unit
+    nilable: true
+    type: unit
   outputs:
-  - type: oneornil
+  - name: result
+    type: boolean
 UnitHealth:
   inputs:
   - name: unit
@@ -28106,7 +28675,7 @@ UnitHPPerStamina:
   - name: unit
     type: unit
   outputs:
-  - name: value
+  - name: result
     type: number
 UnitInAnyGroup:
   inputs:
@@ -28194,11 +28763,27 @@ UnitInSubgroup:
     type: boolean
 UnitInVehicle:
   inputs:
-  - type: string
+  - name: unit
+    type: unit
   outputs:
-  - type: boolean
-UnitInVehicleControlSeat: {}
-UnitInVehicleHidesPetFrame: {}
+  - name: result
+    type: boolean
+UnitInVehicleControlSeat:
+  inputs:
+  - name: unit
+    nilable: true
+    type: unit
+  outputs:
+  - name: result
+    type: boolean
+UnitInVehicleHidesPetFrame:
+  inputs:
+  - name: unit
+    nilable: true
+    type: unit
+  outputs:
+  - name: result
+    type: boolean
 UnitIsAFK:
   inputs:
   - name: unit
@@ -28243,7 +28828,13 @@ UnitIsConnected:
   outputs:
   - name: isConnected
     type: boolean
-UnitIsControlling: {}
+UnitIsControlling:
+  inputs:
+  - name: unit
+    type: unit
+  outputs:
+  - name: result
+    type: boolean
 UnitIsCorpse:
   inputs:
   - name: unit
@@ -28254,14 +28845,18 @@ UnitIsCorpse:
     type: boolean
 UnitIsDead:
   inputs:
-  - type: string
+  - name: unit
+    type: unit
   outputs:
-  - type: boolean
+  - name: result
+    type: boolean
 UnitIsDeadOrGhost:
   inputs:
-  - type: string
+  - name: unit
+    type: unit
   outputs:
-  - type: boolean
+  - name: result
+    type: boolean
 UnitIsDND:
   inputs:
   - name: unit
@@ -28280,9 +28875,11 @@ UnitIsEnemy:
     type: boolean
 UnitIsFeignDeath:
   inputs:
-  - type: string
+  - name: unit
+    type: unit
   outputs:
-  - type: oneornil
+  - name: result
+    type: boolean
 UnitIsFriend:
   inputs:
   - name: unit
@@ -28302,9 +28899,11 @@ UnitIsGameObject:
     type: boolean
 UnitIsGhost:
   inputs:
-  - type: string
+  - name: unit
+    type: unit
   outputs:
-  - type: boolean
+  - name: result
+    type: boolean
 UnitIsGroupAssistant:
   inputs:
   - type: string
@@ -28330,7 +28929,13 @@ UnitIsInteractable:
   outputs:
   - name: result
     type: boolean
-UnitIsMercenary: {}
+UnitIsMercenary:
+  inputs:
+  - name: name
+    type: string
+  outputs:
+  - name: result
+    type: boolean
 UnitIsOtherPlayersBattlePet:
   inputs:
   - name: unit
@@ -28413,16 +29018,34 @@ UnitIsRaidOfficer:
   outputs:
   - name: result
     type: boolean
-UnitIsSameServer: {}
+UnitIsSameServer:
+  inputs:
+  - name: unitName
+    type: string
+  outputs:
+  - name: result
+    type: boolean
 UnitIsTapDenied:
   inputs:
   - name: unit
     type: unit
   outputs:
-  - name: unitIsTapDenied
+  - name: result
     type: boolean
-UnitIsTrivial: {}
-UnitIsUnconscious: {}
+UnitIsTrivial:
+  inputs:
+  - name: unit
+    type: unit
+  outputs:
+  - name: result
+    type: boolean
+UnitIsUnconscious:
+  inputs:
+  - name: unit
+    type: unit
+  outputs:
+  - name: result
+    type: boolean
 UnitIsUnit:
   impl: UnitIsUnit
   inputs:
@@ -28452,20 +29075,22 @@ UnitLeadsAnyGroup: {}
 UnitLevel:
   impl: UnitLevel
   inputs:
+  - name: name
+    type: string
+  outputs:
+  - name: result
+    type: number
+UnitName:
+  impl: UnitName
+  inputs:
   - name: unit
     type: unit
   outputs:
-  - name: level
-    type: number
-UnitName:
-  impl: UnitName_10_2_5
-  inputs:
-  - name: unit
-    type: string
-  outputs:
   - name: unitName
+    nilable: true
     type: string
   - name: unitServer
+    nilable: true
     type: string
 UnitNameplateShowsWidgetsOnly:
   inputs:
@@ -28483,12 +29108,20 @@ UnitNameUnmodified:
     type: string
   - name: unitServer
     type: string
-UnitNumPowerBarTimers: {}
+UnitNumPowerBarTimers:
+  inputs:
+  - name: unit
+    type: unit
+  outputs:
+  - name: result
+    type: number
 UnitOnTaxi:
   inputs:
-  - type: string
+  - name: unit
+    type: unit
   outputs:
-  - type: oneornil
+  - name: result
+    type: boolean
 UnitPartialPower:
   inputs:
   - name: unitToken
@@ -28550,7 +29183,22 @@ UnitPlayerOrPetInRaid:
   outputs:
   - name: result
     type: boolean
-UnitPosition: {}
+UnitPosition:
+  inputs:
+  - name: unit
+    type: unit
+  outputs:
+  - name: x
+    nilable: true
+    type: number
+  - name: y
+    nilable: true
+    type: number
+  - name: z
+    nilable: true
+    type: number
+  - name: mapID
+    type: number
 UnitPower:
   inputs:
   - name: unitToken
@@ -28572,7 +29220,24 @@ UnitPowerBarID:
   outputs:
   - name: barID
     type: number
-UnitPowerBarTimerInfo: {}
+UnitPowerBarTimerInfo:
+  inputs:
+  - name: unit
+    type: unit
+  - default: 0
+    name: index
+    type: number
+  mayreturnnothing: true
+  outputs:
+  - name: duration
+    type: number
+  - name: expiration
+    type: number
+  - name: barID
+    type: number
+  - name: auraID
+    type: number
+  stubnothing: true
 UnitPowerDisplayMod:
   inputs:
   - name: powerType
@@ -28600,20 +29265,21 @@ UnitPowerType:
   inputs:
   - name: unit
     type: unit
+  - default: 0
+    name: index
+    type: number
+  mayreturnnothing: true
   outputs:
   - name: powerType
-    type: number
-  - name: powerToken
-    nilable: true
+    type:
+      enum: PowerType
+  - name: powerTypeToken
     type: string
-  - name: altR
-    nilable: true
+  - name: rgbX
     type: number
-  - name: altG
-    nilable: true
+  - name: rgbY
     type: number
-  - name: altB
-    nilable: true
+  - name: rgbZ
     type: number
 UnitPvpClassification:
   inputs:
@@ -28648,17 +29314,43 @@ UnitQuestTrivialLevelRangeScaling:
 UnitRace:
   impl: UnitRace
   inputs:
+  - name: name
+    type: unit
+  outputs:
+  - name: localizedRaceName
+    type: string
+  - name: englishRaceName
+    type: string
+  - name: raceID
+    type: number
+UnitRangedAttackPower:
+  inputs:
   - name: unit
     type: unit
   outputs:
-  - name: race
-    type: string
-  - name: fileName
-    type: string
-  - name: id
+  - name: attackPower
     type: number
-UnitRangedAttackPower: {}
-UnitRangedDamage: {}
+  - name: posBuff
+    type: number
+  - name: negBuff
+    type: number
+UnitRangedDamage:
+  inputs:
+  - name: unit
+    type: unit
+  outputs:
+  - name: speed
+    type: number
+  - name: minDamage
+    type: number
+  - name: maxDamage
+    type: number
+  - name: posBuff
+    type: number
+  - name: negBuff
+    type: number
+  - name: percent
+    type: number
 UnitReaction:
   inputs:
   - name: unit
@@ -28703,8 +29395,27 @@ UnitSelectionType:
   outputs:
   - name: result
     type: number
-UnitSetRole: {}
-UnitSetRoleEnum: {}
+UnitSetRole:
+  inputs:
+  - name: unit
+    type: unit
+  - name: roleStr
+    nilable: true
+    type: string
+  outputs:
+  - name: result
+    type: boolean
+UnitSetRoleEnum:
+  inputs:
+  - name: unit
+    type: unit
+  - name: role
+    nilable: true
+    type:
+      enum: LFGRole
+  outputs:
+  - name: result
+    type: boolean
 UnitSex:
   impl: UnitSex
   inputs:
@@ -28714,13 +29425,19 @@ UnitSex:
   - name: sex
     nilable: true
     type: number
-UnitShouldDisplayName: {}
+UnitShouldDisplayName:
+  inputs:
+  - name: unit
+    type: unit
+  outputs:
+  - name: result
+    type: boolean
 UnitSpellHaste:
   inputs:
   - name: unit
     type: unit
   outputs:
-  - name: spellHastePercent
+  - name: result
     stub: 100
     type: number
 UnitStagger:
@@ -28732,24 +29449,55 @@ UnitStagger:
     type: number
 UnitStat:
   inputs:
-  - type: string
-  - type: number
+  - name: unit
+    type: unit
+  - name: index
+    type: number
   outputs:
-  - type: number
-  - type: number
-  - type: number
-  - type: number
-UnitSwitchToVehicleSeat: {}
+  - name: currentStat
+    type: number
+  - name: effectiveStat
+    type: number
+  - name: statPositiveBuff
+    type: number
+  - name: statNegativeBuff
+    type: number
+UnitSwitchToVehicleSeat:
+  inputs:
+  - name: unit
+    type: unit
+  - name: virtualSeatIndex
+    type: number
+  outputs: {}
 UnitTargetsVehicleInRaidUI:
   inputs:
   - name: unit
     nilable: true
     type: unit
   outputs:
-  - name: value
+  - name: result
     type: boolean
-UnitThreatPercentageOfLead: {}
-UnitThreatSituation: {}
+UnitThreatPercentageOfLead:
+  inputs:
+  - name: unit
+    type: unit
+  - name: mobGUID
+    type: unit
+  outputs:
+  - name: result
+    nilable: true
+    type: number
+UnitThreatSituation:
+  inputs:
+  - name: unit
+    type: unit
+  - name: mobGUID
+    nilable: true
+    type: unit
+  outputs:
+  - name: result
+    nilable: true
+    type: number
 UnitTokenFromGUID:
   inputs:
   - name: unitGUID
@@ -28783,11 +29531,56 @@ UnitTrialXP:
   outputs:
   - name: result
     type: number
-UnitUsingVehicle: {}
-UnitVehicleSeatCount: {}
-UnitVehicleSeatInfo: {}
-UnitVehicleSkin: {}
-UnitWeaponAttackPower: {}
+UnitUsingVehicle:
+  inputs:
+  - name: unit
+    type: unit
+  outputs:
+  - name: result
+    type: boolean
+UnitVehicleSeatCount:
+  inputs:
+  - name: unit
+    type: unit
+  outputs:
+  - name: result
+    type: number
+UnitVehicleSeatInfo:
+  inputs:
+  - name: unit
+    type: unit
+  - name: virtualSeatIndex
+    type: number
+  outputs:
+  - name: controlType
+    type: string
+  - name: occupantName
+    type: string
+  - name: serverName
+    type: string
+  - name: ejectable
+    type: boolean
+  - name: canSwitchSeats
+    type: boolean
+UnitVehicleSkin:
+  inputs:
+  - name: unit
+    nilable: true
+    type: unit
+  outputs:
+  - name: result
+    type: number
+UnitWeaponAttackPower:
+  inputs:
+  - name: unit
+    type: unit
+  outputs:
+  - name: mainHandWeaponAttackPower
+    type: number
+  - name: offHandWeaponAttackPower
+    type: number
+  - name: rangedWeaponAttackPower
+    type: number
 UnitWidgetSet:
   inputs:
   - name: unit

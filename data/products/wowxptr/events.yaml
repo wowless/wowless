@@ -6969,7 +6969,9 @@ TRADE_SKILL_DATA_SOURCE_CHANGING:
 TRADE_SKILL_DETAILS_UPDATE:
   payload: {}
 TRADE_SKILL_FAVORITES_CHANGED:
-  payload: {}
+  payload:
+  - name: isFavorite
+    type: boolean
 TRADE_SKILL_ITEM_CRAFTED_RESULT:
   payload:
   - name: data

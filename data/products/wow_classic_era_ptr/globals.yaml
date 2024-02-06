@@ -53,6 +53,9 @@ Constants:
   LevelConstsExposed:
     MIN_ACHIEVEMENT_LEVEL: 10
     MIN_RES_SICKNESS_LEVEL: 10
+  LFG_ROLEConstants:
+    LFG_ROLE_ANY: 3
+    LFG_ROLE_NO_ROLE: -1
   LootConsts:
     MasterLootQualityThreshold: 5
   ProfessionConsts:
@@ -137,6 +140,7 @@ Enum:
     ArchivedPurchasesLoaded: '0x0000000000000800'
     AuctionableTokensLoaded: '0x0000000000008000'
     BattleNetAccountLoaded: '0x0000000000400000'
+    BitVectorsLoaded: '0x0000004000000000'
     BpayAddLicenseObjectsLoaded: '0x0000000000002000'
     BpayDistributionObjectsLoaded: '0x0000000000000400'
     BpayProductitemObjectsLoaded: '0x0000000000080000'
@@ -150,8 +154,11 @@ Enum:
     LoadFailed: '0x0000000000000020'
     MountsLoaded: '0x0000000000000004'
     None: '0x0000000000000000'
+    PerksHeldItemLoaded: '0x0000000400000000'
+    PerksPastRewardsLoaded: '0x0000000000020000'
     PerksPendingPurchaseLoaded: '0x0000000080000000'
-    PerkTablesLoaded: '0x0000000000020000'
+    PerksPendingRewardsLoaded: '0x0000000800000000'
+    PerksRefundsLoaded: '0x0000002000000000'
     PetjournalInitialized: '0x0000000000000008'
     PurchasesLoaded: '0x0000000000000200'
     QuestCriteriaLoaded: '0x0000000000200000'
@@ -168,7 +175,7 @@ Enum:
   AccountStateFlagsMeta:
     MaxValue: -2147483648
     MinValue: 0
-    NumValues: 36
+    NumValues: 40
   AddOnEnableState:
     All: 2
     None: 0
@@ -2880,6 +2887,14 @@ Enum:
     MaxValue: 8
     MinValue: 1
     NumValues: 4
+  LFGRole:
+    Damage: 2
+    Healer: 1
+    Tank: 0
+  LFGRoleMeta:
+    MaxValue: 2
+    MinValue: 0
+    NumValues: 3
   LinkedCurrencyFlags:
     AddIgnoresMax: 8
     IgnoreAdd: 1
@@ -2985,6 +3000,13 @@ Enum:
     MaxValue: 15
     MinValue: 0
     NumValues: 16
+  ModelSoundTagType:
+    Looping: 2
+    Oneshot: 1
+  ModelSoundTagTypeMeta:
+    MaxValue: 2
+    MinValue: 1
+    NumValues: 2
   MountType:
     Aquatic: 2
     Flying: 1
@@ -3811,6 +3833,7 @@ Enum:
     Hardcore: 3
     NoSeason: 0
     Placeholder: 2
+    SeasonOfDiscovery: 2
     SeasonOfMastery: 1
   SeasonIDMeta:
     MaxValue: 3
@@ -4330,8 +4353,8 @@ Enum:
   UIMapFlag:
     AlwaysAllowTaxiPathing: 131072
     AlwaysAllowUserWaypoints: 65536
-    Deprecated: 512
     DoNotShowOnNavbar: 524288
+    DoNotTranslateBranches: 512
     FallbackToParentMap: 16
     FlightMapAutoZoom: 16384
     FlightMapShowZoomOut: 8192
@@ -5400,7 +5423,9 @@ LE_GAME_ERR_MAIL_LIMITED_DURATION_ITEM: 791
 LE_GAME_ERR_MAIL_QUEST_ITEM: 429
 LE_GAME_ERR_MAIL_REACHED_CAP: 573
 LE_GAME_ERR_MAIL_RECEPIENT_CANT_RECEIVE_MAIL: 439
+LE_GAME_ERR_MAIL_RECEPIENT_IS_SELF_FOUND_CANNOT_RECEIVE_MAIL: 1075
 LE_GAME_ERR_MAIL_SENT: 440
+LE_GAME_ERR_MAIL_TARGET_CANNOT_RECEIVE_MAIL: 1078
 LE_GAME_ERR_MAIL_TARGET_NOT_FOUND: 434
 LE_GAME_ERR_MAIL_TO_SELF: 433
 LE_GAME_ERR_MAIL_TOO_MANY_ATTACHMENTS: 668
@@ -5630,6 +5655,9 @@ LE_GAME_ERR_PLAYER_DEAD: 158
 LE_GAME_ERR_PLAYER_DIED_S: 103
 LE_GAME_ERR_PLAYER_DIFFICULTY_CHANGED_S: 777
 LE_GAME_ERR_PLAYER_IS_NEUTRAL: 303
+LE_GAME_ERR_PLAYER_IS_SELF_FOUND_CANNOT_SEND_MAIL: 1076
+LE_GAME_ERR_PLAYER_IS_SELF_FOUND_CANNOT_TRADE: 1074
+LE_GAME_ERR_PLAYER_IS_SELF_FOUND_CANNOT_USE_AUCTION_HOUSE: 1077
 LE_GAME_ERR_PLAYER_SILENCED: 662
 LE_GAME_ERR_PLAYER_SILENCED_ECHO: 673
 LE_GAME_ERR_PLAYER_UNSILENCED: 663
@@ -5809,6 +5837,7 @@ LE_GAME_ERR_TALENT_FAILED_UNSPENT_TALENT_POINTS: 871
 LE_GAME_ERR_TALENT_GRANTED_BY_AURA: 1051
 LE_GAME_ERR_TALENT_WIPE_ERROR: 522
 LE_GAME_ERR_TAME_FAILED: 287
+LE_GAME_ERR_TARGET_IS_SELF_FOUND_CANNOT_TRADE: 1073
 LE_GAME_ERR_TARGET_LOGGING_OUT: 516
 LE_GAME_ERR_TARGET_NOT_IN_GROUP_S: 98
 LE_GAME_ERR_TARGET_NOT_IN_INSTANCE_S: 99

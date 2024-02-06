@@ -3594,6 +3594,8 @@ COMMODITY_SEARCH_RESULTS_ADDED:
   payload:
   - name: itemID
     type: number
+COMMODITY_SEARCH_RESULTS_RECEIVED:
+  payload: {}
 COMMODITY_SEARCH_RESULTS_UPDATED:
   payload:
   - name: itemID
@@ -4807,6 +4809,8 @@ LFG_BOOT_PROPOSAL_UPDATE:
   payload: {}
 LFG_COMPLETION_REWARD:
   payload: {}
+LFG_ENABLED_STATE_CHANGED:
+  payload: {}
 LFG_GROUP_DELISTED_LEADERSHIP_CHANGE:
   payload:
   - name: listingName
@@ -4968,6 +4972,12 @@ LOOT_HISTORY_CLEAR_HISTORY:
 LOOT_HISTORY_GO_TO_ENCOUNTER:
   payload:
   - name: encounterID
+    type: number
+LOOT_HISTORY_ONE_HUNDRED_ROLL:
+  payload:
+  - name: encounterID
+    type: number
+  - name: lootListID
     type: number
 LOOT_HISTORY_UPDATE_DROP:
   payload:
@@ -5353,15 +5363,9 @@ PENDING_AZERITE_ESSENCE_CHANGED:
     nilable: true
     type: number
 PERKS_ACTIVITIES_TRACKED_UPDATED:
-  payload:
-  - name: trackedPerksActivities
-    type:
-      structure: C_PerksActivities.PerksActivitiesTracked
+  payload: {}
 PERKS_ACTIVITIES_UPDATED:
-  payload:
-  - name: info
-    type:
-      structure: C_PerksActivities.PerksActivitiesInfo
+  payload: {}
 PERKS_ACTIVITY_COMPLETED:
   payload:
   - name: perksActivityID
@@ -5404,6 +5408,8 @@ PERKS_PROGRAM_REMOVE_PENDING_SHOP_ITEM:
   payload:
   - name: vendorItemID
     type: number
+PERKS_PROGRAM_RESULT_ERROR:
+  payload: {}
 PERKS_PROGRAM_SET_FROZEN_ITEM:
   payload:
   - name: vendorItemID
@@ -5693,6 +5699,8 @@ PLAYER_GUILD_UPDATE:
   payload:
   - name: unitTarget
     type: unit
+PLAYER_IMPULSE_APPLIED:
+  payload: {}
 PLAYER_INTERACTION_MANAGER_FRAME_HIDE:
   payload:
   - name: type
@@ -5703,6 +5711,10 @@ PLAYER_INTERACTION_MANAGER_FRAME_SHOW:
   - name: type
     type:
       enum: PlayerInteractionType
+PLAYER_IS_GLIDING_CHANGED:
+  payload:
+  - name: isGliding
+    type: boolean
 PLAYER_JOINED_PVP_MATCH:
   payload: {}
 PLAYER_LEARN_PVP_TALENT_FAILED:
@@ -6969,7 +6981,9 @@ TRADE_SKILL_DATA_SOURCE_CHANGING:
 TRADE_SKILL_DETAILS_UPDATE:
   payload: {}
 TRADE_SKILL_FAVORITES_CHANGED:
-  payload: {}
+  payload:
+  - name: isFavorite
+    type: boolean
 TRADE_SKILL_ITEM_CRAFTED_RESULT:
   payload:
   - name: data
@@ -7051,6 +7065,12 @@ TRAIT_TREE_CURRENCY_INFO_UPDATED:
     type: number
 TRANSMOG_COLLECTION_CAMERA_UPDATE:
   payload: {}
+TRANSMOG_COLLECTION_ITEM_FAVORITE_UPDATE:
+  payload:
+  - name: itemAppearanceID
+    type: number
+  - name: isFavorite
+    type: boolean
 TRANSMOG_COLLECTION_ITEM_UPDATE:
   payload: {}
 TRANSMOG_COLLECTION_SOURCE_ADDED:

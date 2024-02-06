@@ -40,8 +40,14 @@ local function run(cfg)
   api.env.tostring = tostring
   -- end WARNING WARNING WARNING
 
+  local path = require('path')
+  local otherAddonDirs = {}
+  for _, d in ipairs(cfg.otherAddonDirs or {}) do
+    local dd = path.basename(d) == '' and path.dirname(d) or d
+    table.insert(otherAddonDirs, dd)
+  end
   local loader = require('wowless.loader').loader(api, {
-    otherAddonDirs = cfg.otherAddonDirs,
+    otherAddonDirs = otherAddonDirs,
     product = cfg.product,
     rootDir = cfg.dir,
   })
@@ -50,8 +56,8 @@ local function run(cfg)
   if cfg.dir then
     loader.loadFrameXml()
   end
-  for _, d in ipairs(cfg.otherAddonDirs or {}) do
-    assert(loader.loadAddon(require('path').basename(d)))
+  for _, d in ipairs(otherAddonDirs) do
+    assert(loader.loadAddon(path.basename(d)))
   end
   api.states.System.isLoggedIn = true
   api.SendEvent('PLAYER_LOGIN')

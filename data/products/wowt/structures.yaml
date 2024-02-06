@@ -77,7 +77,15 @@ AppearanceSourceInfo:
       type: number
 AuraData:
   fields:
+    applications:
+      type: number
     auraInstanceID:
+      type: number
+    expirationTime:
+      type: number
+    points:
+      type: table
+    spellId:
       type: number
 BountyInfo:
   fields:
@@ -2123,6 +2131,8 @@ C_EventToastManager.EventToastInfo:
     extraUiWidgetSetID:
       nilable: true
       type: number
+    flags:
+      type: number
     hideDefaultAtlas:
       nilable: true
       type: boolean
@@ -4022,6 +4032,12 @@ C_PerksProgram.PerksVendorItemInfo:
       type: boolean
     speciesID:
       type: number
+    subItems:
+      type:
+        arrayof:
+          structure: C_PerksProgram.PerksVendorSubItemInfo
+    subItemsLoaded:
+      type: boolean
     timeRemaining:
       type: number
     transmogSetID:
@@ -4038,6 +4054,19 @@ C_PerksProgram.PerksVendorItemUIGroupInfo:
       type: string
     priority:
       type: number
+C_PerksProgram.PerksVendorSubItemInfo:
+  fields:
+    invType:
+      type: string
+    itemAppearanceID:
+      type: number
+    itemID:
+      type: number
+    name:
+      type: string
+    quality:
+      type:
+        enum: ItemQuality
 C_PetInfo.PetTamerMapInfo:
   fields:
     areaPoiID:
@@ -7088,6 +7117,9 @@ C_UIWidgetManager.TugOfWarWidgetVisualizationInfo:
     leftIconInfo:
       type:
         structure: C_UIWidgetManager.UIWidgetIconInfo
+    markerArrowShownState:
+      type:
+        enum: TugOfWarMarkerArrowShownState
     maxValue:
       type: number
     minValue:
@@ -7095,6 +7127,9 @@ C_UIWidgetManager.TugOfWarWidgetVisualizationInfo:
     modelSceneLayer:
       type:
         enum: UIWidgetModelSceneLayer
+    neutralFillStyle:
+      type:
+        enum: TugOfWarStyleValue
     neutralZoneCenter:
       type: number
     neutralZoneSize:
@@ -7176,8 +7211,20 @@ C_UIWidgetManager.UIWidgetItemInfo:
     infoTextEnabledState:
       type:
         enum: WidgetEnabledState
+    infoTextFontType:
+      type:
+        enum: UIWidgetFontType
+    infoTextSizeType:
+      type:
+        enum: UIWidgetTextSizeType
     itemID:
       type: number
+    itemNameTextFontType:
+      type:
+        enum: UIWidgetFontType
+    itemNameTextSizeType:
+      type:
+        enum: UIWidgetTextSizeType
     overrideItemName:
       nilable: true
       type: string
@@ -8652,6 +8699,7 @@ PlayerInfoCharacterData:
         enum: UnitSex
 PlayerLocation:
   fields: {}
+  mixin: PlayerLocationMixin
 PrivateAuraAnchor:
   fields:
     anchorID:
@@ -8759,6 +8807,7 @@ RegularReagentInfo:
       type: number
 ReportInfo:
   fields: {}
+  mixin: ReportInfoMixin
 RuneforgeItemPreviewInfo:
   fields:
     itemGUID:
@@ -8997,6 +9046,7 @@ TransmogLocation:
       type: number
     type:
       type: number
+  mixin: TransmogLocationMixin
 TransmogPendingInfo:
   fields: {}
   mixin: TransmogPendingInfoMixin

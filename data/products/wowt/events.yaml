@@ -5363,15 +5363,9 @@ PENDING_AZERITE_ESSENCE_CHANGED:
     nilable: true
     type: number
 PERKS_ACTIVITIES_TRACKED_UPDATED:
-  payload:
-  - name: trackedPerksActivities
-    type:
-      structure: C_PerksActivities.PerksActivitiesTracked
+  payload: {}
 PERKS_ACTIVITIES_UPDATED:
-  payload:
-  - name: info
-    type:
-      structure: C_PerksActivities.PerksActivitiesInfo
+  payload: {}
 PERKS_ACTIVITY_COMPLETED:
   payload:
   - name: perksActivityID
@@ -5705,6 +5699,8 @@ PLAYER_GUILD_UPDATE:
   payload:
   - name: unitTarget
     type: unit
+PLAYER_IMPULSE_APPLIED:
+  payload: {}
 PLAYER_INTERACTION_MANAGER_FRAME_HIDE:
   payload:
   - name: type
@@ -5715,6 +5711,10 @@ PLAYER_INTERACTION_MANAGER_FRAME_SHOW:
   - name: type
     type:
       enum: PlayerInteractionType
+PLAYER_IS_GLIDING_CHANGED:
+  payload:
+  - name: isGliding
+    type: boolean
 PLAYER_JOINED_PVP_MATCH:
   payload: {}
 PLAYER_LEARN_PVP_TALENT_FAILED:
@@ -6981,7 +6981,9 @@ TRADE_SKILL_DATA_SOURCE_CHANGING:
 TRADE_SKILL_DETAILS_UPDATE:
   payload: {}
 TRADE_SKILL_FAVORITES_CHANGED:
-  payload: {}
+  payload:
+  - name: isFavorite
+    type: boolean
 TRADE_SKILL_ITEM_CRAFTED_RESULT:
   payload:
   - name: data

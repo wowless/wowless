@@ -81,9 +81,12 @@ assert:
   stdlib: assert
 AssistUnit:
   inputs:
-  - name: unit
-    nilable: true
-    type: unit
+  - default: ''
+    name: name
+    type: string
+  - default: false
+    name: exactMatch
+    type: boolean
   outputs: {}
 atan:
   nowrap: true
@@ -4915,6 +4918,11 @@ C_GameRules.IsHardcoreActive:
   outputs:
   - name: active
     type: boolean
+C_GameRules.IsSelfFoundAllowed:
+  inputs: {}
+  outputs:
+  - name: active
+    type: boolean
 C_GenericWidgetDisplay.Acknowledge:
   inputs: {}
   outputs: {}
@@ -5460,10 +5468,22 @@ C_LFGInfo.IsGroupFinderEnabled:
   outputs:
   - name: enabled
     type: boolean
+C_LFGInfo.IsInLFGFollowerDungeon:
+  inputs: {}
+  outputs:
+  - name: result
+    type: boolean
 C_LFGInfo.IsLFDEnabled:
   inputs: {}
   outputs:
   - name: enabled
+    type: boolean
+C_LFGInfo.IsLFGFollowerDungeon:
+  inputs:
+  - name: dungeonID
+    type: number
+  outputs:
+  - name: result
     type: boolean
 C_LFGInfo.IsLFREnabled:
   inputs: {}
@@ -5898,6 +5918,53 @@ C_LossOfControl.GetActiveLossOfControlDataCountByUnit:
   outputs:
   - name: count
     type: number
+C_MacOptions.AreOSShortcutsDisabled:
+  inputs: {}
+  outputs:
+  - name: osShortcutsDisabledCVar
+    nilable: true
+    type: boolean
+  - name: osShortcutsDisabled
+    type: boolean
+C_MacOptions.GetGameBundleName:
+  inputs: {}
+  outputs:
+  - name: result
+    type: string
+C_MacOptions.HasNewStyleInputMonitoring:
+  inputs: {}
+  outputs:
+  - name: result
+    type: boolean
+C_MacOptions.IsInputMonitoringEnabled:
+  inputs: {}
+  outputs:
+  - name: result
+    type: boolean
+C_MacOptions.IsMicrophoneEnabled:
+  inputs: {}
+  outputs:
+  - name: result
+    type: boolean
+C_MacOptions.IsUniversalAccessEnabled:
+  inputs: {}
+  outputs:
+  - name: result
+    type: boolean
+C_MacOptions.OpenInputMonitoring:
+  inputs: {}
+  outputs: {}
+C_MacOptions.OpenMicrophoneRequestDialogue:
+  inputs: {}
+  outputs: {}
+C_MacOptions.OpenUniversalAccess:
+  inputs: {}
+  outputs: {}
+C_MacOptions.SetOSShortcutsDisabled:
+  inputs:
+  - name: disable
+    type: boolean
+  outputs: {}
 C_Macro.GetNumIcons:
   inputs: {}
   outputs:
@@ -8583,6 +8650,182 @@ C_UIWidgetManager.GetTopCenterWidgetSetID:
   outputs:
   - name: setID
     type: number
+C_UnitAuras.AddPrivateAuraAnchor:
+  inputs:
+  - name: args
+    type:
+      structure: AddPrivateAuraAnchorArgs
+  outputs:
+  - name: anchorID
+    nilable: true
+    type: number
+C_UnitAuras.AddPrivateAuraAppliedSound:
+  inputs:
+  - name: sound
+    type:
+      structure: UnitPrivateAuraAppliedSoundInfo
+  outputs:
+  - name: privateAuraSoundID
+    nilable: true
+    type: number
+C_UnitAuras.AuraIsPrivate:
+  inputs:
+  - name: spellID
+    type: number
+  outputs:
+  - name: isPrivate
+    type: boolean
+C_UnitAuras.GetAuraDataByAuraInstanceID:
+  inputs:
+  - name: unitToken
+    type: string
+  - name: auraInstanceID
+    type: number
+  outputs:
+  - name: aura
+    nilable: true
+    type:
+      structure: AuraData
+C_UnitAuras.GetAuraDataByIndex:
+  inputs:
+  - name: unitToken
+    type: string
+  - name: index
+    type: number
+  - name: filter
+    nilable: true
+    type: string
+  outputs:
+  - name: aura
+    nilable: true
+    type:
+      structure: AuraData
+C_UnitAuras.GetAuraDataBySlot:
+  inputs:
+  - name: unitToken
+    type: string
+  - name: slot
+    type: number
+  outputs:
+  - name: aura
+    nilable: true
+    type:
+      structure: AuraData
+C_UnitAuras.GetAuraDataBySpellName:
+  inputs:
+  - name: unitToken
+    type: string
+  - name: spellName
+    type: string
+  - name: filter
+    nilable: true
+    type: string
+  outputs:
+  - name: aura
+    nilable: true
+    type:
+      structure: AuraData
+C_UnitAuras.GetAuraSlots:
+  inputs:
+  - name: unitToken
+    type: unit
+  - name: filter
+    nilable: true
+    type: string
+  - name: maxSlots
+    nilable: true
+    type: number
+  - name: continuationToken
+    nilable: true
+    type: number
+  outputs:
+  - name: outContinuationToken
+    nilable: true
+    type: number
+  - name: slots
+    type: number
+C_UnitAuras.GetBuffDataByIndex:
+  inputs:
+  - name: unitToken
+    type: string
+  - name: index
+    type: number
+  - name: filter
+    nilable: true
+    type: string
+  outputs:
+  - name: aura
+    nilable: true
+    type:
+      structure: AuraData
+C_UnitAuras.GetCooldownAuraBySpellID:
+  inputs:
+  - name: spellID
+    type: number
+  outputs:
+  - name: cooldownSpellID
+    nilable: true
+    type: number
+C_UnitAuras.GetDebuffDataByIndex:
+  inputs:
+  - name: unitToken
+    type: string
+  - name: index
+    type: number
+  - name: filter
+    nilable: true
+    type: string
+  outputs:
+  - name: aura
+    nilable: true
+    type:
+      structure: AuraData
+C_UnitAuras.GetPlayerAuraBySpellID:
+  inputs:
+  - name: spellID
+    type: number
+  outputs:
+  - name: aura
+    nilable: true
+    type:
+      structure: AuraData
+C_UnitAuras.IsAuraFilteredOutByInstanceID:
+  inputs:
+  - name: unitToken
+    type: string
+  - name: auraInstanceID
+    type: number
+  - name: filterFlags
+    type: string
+  outputs:
+  - name: isFiltered
+    type: boolean
+C_UnitAuras.RemovePrivateAuraAnchor:
+  inputs:
+  - name: anchorID
+    type: number
+  outputs: {}
+C_UnitAuras.RemovePrivateAuraAppliedSound:
+  inputs:
+  - name: privateAuraSoundID
+    type: number
+  outputs: {}
+C_UnitAuras.SetPrivateWarningTextAnchor:
+  inputs:
+  - name: parent
+    type: Frame
+  - name: anchor
+    nilable: true
+    type:
+      structure: AnchorBinding
+  outputs: {}
+C_UnitAuras.WantsAlteredForm:
+  inputs:
+  - name: unitToken
+    type: string
+  outputs:
+  - name: wantsAlteredForm
+    type: boolean
 C_UserFeedback.SubmitBug:
   inputs:
   - name: bugInfo
@@ -9465,7 +9708,8 @@ ClearSendMail: {}
 ClearTarget:
   inputs: {}
   outputs:
-  - type: boolean
+  - name: willMakeChange
+    type: boolean
 ClearTutorials: {}
 ClickAuctionSellItemButton: {}
 ClickSendMailItemButton: {}
@@ -9867,9 +10111,9 @@ floor:
   alias: math.floor
 FocusUnit:
   inputs:
-  - name: unit
-    nilable: true
-    type: unit
+  - default: ''
+    name: name
+    type: string
   outputs: {}
 FollowUnit: {}
 forceinsecure:
@@ -12588,7 +12832,9 @@ GetSpellInfo:
 GetSpellLink: {}
 GetSpellLossOfControlCooldown: {}
 GetSpellPenetration: {}
-GetSpellPowerCost: {}
+GetSpellPowerCost:
+  outputs:
+  - type: table
 GetSpellQueueWindow: {}
 GetSpellRank: {}
 GetSpellSubtext:
@@ -13476,7 +13722,11 @@ IsStealthed:
 IsSubmerged: {}
 IsSubZonePVPPOI: {}
 IsSwimming: {}
-IsTargetLoose: {}
+IsTargetLoose:
+  inputs: {}
+  outputs:
+  - name: isTargetLoose
+    type: boolean
 IsTestBuild:
   impl: IsTestBuild
   inputs: {}
@@ -13625,17 +13875,6 @@ Logout:
 LootMoneyNotify: {}
 LootSlot: {}
 LootSlotHasItem: {}
-MacOptions_AreOSShortcutsDisabled: {}
-MacOptions_GetGameBundleName: {}
-MacOptions_HasNewStyleInputMonitoring: {}
-MacOptions_HasNewStyleUniversalAccess: {}
-MacOptions_IsInputMonitoringEnabled: {}
-MacOptions_IsMicrophoneEnabled: {}
-MacOptions_IsUniversalAccessEnabled: {}
-MacOptions_OpenInputMonitoring: {}
-MacOptions_OpenMicrophoneRequestDialogue: {}
-MacOptions_OpenUniversalAccess: {}
-MacOptions_SetOSShortcutsDisabled: {}
 math.abs:
   stdlib: math.abs
 math.acos:
@@ -14500,59 +14739,97 @@ TakeTaxiNode: {}
 tan:
   nowrap: true
   stdlib: tan
-TargetDirectionEnemy: {}
-TargetDirectionFinished: {}
-TargetDirectionFriend: {}
+TargetDirectionEnemy:
+  inputs:
+  - name: facing
+    type: number
+  - name: coneAngle
+    nilable: true
+    type: number
+  outputs: {}
+TargetDirectionFinished:
+  inputs: {}
+  outputs: {}
+TargetDirectionFriend:
+  inputs:
+  - name: facing
+    type: number
+  - name: coneAngle
+    nilable: true
+    type: number
+  outputs: {}
 TargetLastEnemy:
   inputs: {}
   outputs: {}
-TargetLastFriend: {}
+TargetLastFriend:
+  inputs: {}
+  outputs: {}
 TargetLastTarget:
   inputs: {}
   outputs: {}
-TargetNearest: {}
+TargetNearest:
+  inputs:
+  - default: false
+    name: reverse
+    type: boolean
+  outputs: {}
 TargetNearestEnemy:
   inputs:
-  - name: reverse
-    nilable: true
+  - default: false
+    name: reverse
     type: boolean
   outputs: {}
 TargetNearestEnemyPlayer:
   inputs:
-  - name: reverse
-    nilable: true
+  - default: false
+    name: reverse
     type: boolean
   outputs: {}
 TargetNearestFriend:
   inputs:
-  - name: reverse
-    nilable: true
+  - default: false
+    name: reverse
     type: boolean
   outputs: {}
 TargetNearestFriendPlayer:
   inputs:
-  - name: reverse
-    nilable: true
+  - default: false
+    name: reverse
     type: boolean
   outputs: {}
-TargetNearestPartyMember: {}
-TargetNearestRaidMember: {}
-TargetPriorityHighlightEnd:
+TargetNearestPartyMember:
   inputs:
-  - nilable: true
+  - default: false
+    name: reverse
     type: boolean
+  outputs: {}
+TargetNearestRaidMember:
+  inputs:
+  - default: false
+    name: reverse
+    type: boolean
+  outputs: {}
+TargetPriorityHighlightEnd:
+  inputs: {}
   outputs: {}
 TargetPriorityHighlightStart:
   inputs:
-  - nilable: true
+  - default: false
+    name: useStartDelay
     type: boolean
   outputs: {}
-TargetToggle: {}
+TargetToggle:
+  inputs: {}
+  outputs: {}
 TargetTotem: {}
 TargetUnit:
   inputs:
-  - nilable: true
-    type: unit
+  - default: ''
+    name: name
+    type: string
+  - default: false
+    name: exactMatch
+    type: boolean
   outputs: {}
 TaxiGetDestX: {}
 TaxiGetDestY: {}
@@ -14868,6 +15145,14 @@ UnitInParty:
   outputs:
   - name: inParty
     type: boolean
+UnitInPartyIsAI:
+  inputs:
+  - name: unit
+    nilable: true
+    type: unit
+  outputs:
+  - name: result
+    type: boolean
 UnitInPhase: {}
 UnitInRaid:
   inputs:
@@ -15131,6 +15416,7 @@ UnitPowerType:
   inputs:
   - name: unit
     type: unit
+  mayreturnnothing: true
   outputs:
   - name: powerType
     type: number

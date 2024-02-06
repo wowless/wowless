@@ -12645,7 +12645,9 @@ GetSpellInfo:
 GetSpellLink: {}
 GetSpellLossOfControlCooldown: {}
 GetSpellPenetration: {}
-GetSpellPowerCost: {}
+GetSpellPowerCost:
+  outputs:
+  - type: table
 GetSpellQueueWindow: {}
 GetSpellRank: {}
 GetSpellSubtext:
@@ -15305,6 +15307,7 @@ UnitPowerType:
   inputs:
   - name: unit
     type: unit
+  mayreturnnothing: true
   outputs:
   - name: powerType
     type: number
