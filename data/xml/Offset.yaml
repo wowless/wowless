@@ -1,9 +1,0 @@
----
-name: Offset
-attributes:
-  x:
-    type: number
-  y:
-    type: number
-contents:
-- AbsDimension

@@ -9,4 +9,5 @@ framework.lua
 test.xml
 generated.lua
 api.lua
+uiobjects.lua
 test.lua

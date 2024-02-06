@@ -1,7 +1,0 @@
----
-name: GetCritChance
-status: unimplemented
-inputs:
-- {}
-outputs:
-- type: number

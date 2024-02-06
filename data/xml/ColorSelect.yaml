@@ -1,8 +1,0 @@
----
-name: ColorSelect
-contents:
-- ColorValueTexture
-- ColorValueThumbTexture
-- ColorWheelTexture
-- ColorWheelThumbTexture
-extends: Frame

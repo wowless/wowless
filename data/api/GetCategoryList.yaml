@@ -1,5 +1,0 @@
----
-name: GetCategoryList
-status: unimplemented
-outputs:
-- type: table

@@ -1,7 +1,0 @@
----
-name: AntiAliasingSupported
-status: unimplemented
-inputs:
-- {}
-outputs:
-- type: boolean

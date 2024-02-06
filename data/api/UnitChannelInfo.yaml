@@ -1,5 +1,0 @@
----
-name: UnitChannelInfo
-status: unimplemented
-inputs:
-- - type: string

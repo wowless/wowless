@@ -1,8 +1,0 @@
----
-name: C_TradeSkillUI.GetFilteredRecipeIDs
-status: unimplemented
-inputs:
-- {}
-outputs:
-- innerType: number
-  type: table

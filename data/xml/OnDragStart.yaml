@@ -1,5 +1,0 @@
----
-name: OnDragStart
-extends: ScriptType
-impl:
-  script: {}

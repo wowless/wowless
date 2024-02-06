@@ -1,7 +1,0 @@
----
-name: GetTradeskillRepeatCount
-status: unimplemented
-inputs:
-- {}
-outputs:
-- type: number

@@ -1,9 +1,0 @@
----
-name: GetLootSlotType
-status: unimplemented
-inputs:
-- - name: slotIndex
-    type: number
-outputs:
-- name: slotType
-  type: number

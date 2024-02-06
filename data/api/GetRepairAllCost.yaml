@@ -1,5 +1,0 @@
----
-name: GetRepairAllCost
-status: unimplemented
-outputs:
-- type: number

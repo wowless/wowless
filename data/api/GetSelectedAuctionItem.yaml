@@ -1,9 +1,0 @@
----
-name: GetSelectedAuctionItem
-status: unimplemented
-inputs:
-- - name: type
-    type: string
-outputs:
-- name: index
-  type: number

@@ -1,8 +1,0 @@
----
-name: GetRangedCritChance
-status: unimplemented
-inputs:
-- {}
-outputs:
-- name: value
-  type: number

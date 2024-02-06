@@ -1,5 +1,0 @@
----
-name: GetRealmID
-status: unimplemented
-outputs:
-- type: number

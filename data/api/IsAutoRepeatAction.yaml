@@ -1,9 +1,0 @@
----
-name: IsAutoRepeatAction
-status: unimplemented
-inputs:
-- - name: action
-    type: number
-outputs:
-- name: value
-  type: boolean

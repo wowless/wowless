@@ -1,8 +1,0 @@
----
-name: GetQuestPOIs
-status: unimplemented
-inputs:
-- - name: poiTable
-    nilable: true
-    type: table
-outputs: {}

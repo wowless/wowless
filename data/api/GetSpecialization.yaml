@@ -1,5 +1,0 @@
----
-name: GetSpecialization
-status: unimplemented
-outputs:
-- type: number

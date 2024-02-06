@@ -1,7 +1,0 @@
----
-name: UnitIsAFK
-status: unimplemented
-inputs:
-- - type: string
-outputs:
-- type: oneornil

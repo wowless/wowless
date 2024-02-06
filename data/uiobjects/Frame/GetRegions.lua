@@ -1,8 +1,8 @@
 return (function(self)
   local ret = {}
-  for kid in kids(self) do
-    if api.InheritsFrom(u(kid).type, 'layeredregion') then
-      table.insert(ret, kid)
+  for kid in self.children:entries() do
+    if kid:IsObjectType('layeredregion') then
+      table.insert(ret, kid.luarep)
     end
   end
   return unpack(ret)

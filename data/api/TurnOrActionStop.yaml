@@ -1,6 +1,0 @@
----
-name: TurnOrActionStop
-status: unimplemented
-inputs:
-- {}
-outputs: {}

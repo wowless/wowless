@@ -1,8 +1,0 @@
----
-name: UnitCanAssist
-status: unimplemented
-inputs:
-- - type: string
-  - type: string
-outputs:
-- type: oneornil

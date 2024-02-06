@@ -1,7 +1,0 @@
----
-name: GetDownloadedPercentage
-status: unimplemented
-inputs:
-- {}
-outputs:
-- type: number

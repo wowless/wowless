@@ -83,10 +83,8 @@ local function tset(t, s, v)
   return t
 end
 
-local date = require('date')
-
 local function calendarTimeToDate(ct)
-  return date(ct.year, ct.month, ct.monthDay, ct.hour, ct.minute)
+  return require('date')(ct.year, ct.month, ct.monthDay, ct.hour, ct.minute)
 end
 
 local function dateToCalendarTime(d)
@@ -100,20 +98,10 @@ local function dateToCalendarTime(d)
   }
 end
 
-local function productList()
-  local t = {}
-  for _, k in ipairs(require('pl.dir').getdirectories('data/products')) do
-    table.insert(t, k:sub(15))
-  end
-  table.sort(t)
-  return t
-end
-
 return {
   calendarTimeToDate = calendarTimeToDate,
   dateToCalendarTime = dateToCalendarTime,
   mixin = mixin,
-  productList = productList,
   readfile = readfile,
   tget = tget,
   tset = tset,

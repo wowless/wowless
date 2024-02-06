@@ -1,8 +1,0 @@
----
-name: GetNumAvailableQuests
-status: unimplemented
-inputs:
-- {}
-outputs:
-- name: numAvailableQuests
-  type: number

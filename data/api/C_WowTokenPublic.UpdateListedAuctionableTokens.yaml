@@ -1,6 +1,0 @@
----
-name: C_WowTokenPublic.UpdateListedAuctionableTokens
-status: unimplemented
-inputs:
-- {}
-outputs: {}

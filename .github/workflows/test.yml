@@ -8,7 +8,9 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
+      with:
+        submodules: true
     - uses: docker/login-action@v1
       with:
         registry: ghcr.io
@@ -25,7 +27,7 @@ jobs:
           GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}
         imageName: ghcr.io/wowless/wowless-devcontainer
         refFilterForPush: refs/heads/main
-        runCmd: ninja -v all
+        runCmd: pre-commit run -a -v && ninja -v all
     - uses: actions/upload-artifact@v3
       if: success() || failure()
       with:
@@ -33,3 +35,35 @@ jobs:
         path: |
           out/
           test.out
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+        - name: Linux / Make
+          generator: Unix Makefiles
+          os: ubuntu-latest
+        - name: Linux / Ninja
+          generator: Ninja
+          os: ubuntu-latest
+        - name: MacOS / Make
+          generator: Unix Makefiles
+          os: macos-latest
+        - name: MacOS / Ninja
+          generator: Ninja
+          os: macos-latest
+        - name: Windows / MSBuild
+          generator: Visual Studio 17 2022
+          os: windows-latest
+        - name: Windows / Ninja
+          generator: Ninja
+          os: windows-latest
+    runs-on: ${{ matrix.config.os }}
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        submodules: true
+    - uses: seanmiddleditch/gha-setup-ninja@v3
+      if: matrix.config.generator == 'Ninja'
+    - run: cmake -B build -G "${{ matrix.config.generator }}"
+    - run: cmake --build build --verbose

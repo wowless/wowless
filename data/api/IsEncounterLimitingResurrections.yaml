@@ -1,7 +1,0 @@
----
-name: IsEncounterLimitingResurrections
-status: unimplemented
-inputs:
-- {}
-outputs:
-- type: boolean

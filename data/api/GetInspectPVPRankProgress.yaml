@@ -1,8 +1,0 @@
----
-name: GetInspectPVPRankProgress
-status: unimplemented
-inputs:
-- {}
-outputs:
-- name: value
-  type: number

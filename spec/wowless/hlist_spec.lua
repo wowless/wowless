@@ -1,0 +1,32 @@
+describe('hlist', function()
+  local hlist = require('wowless.hlist')
+  local function entries(h)
+    local t = {}
+    for k in h:entries() do
+      table.insert(t, k)
+    end
+    return t
+  end
+  it('works', function()
+    local h = hlist()
+    assert.False(h:has(42))
+    assert.False(h:has(99))
+    assert.same({}, entries(h))
+    h:insert(42)
+    assert.True(h:has(42))
+    assert.False(h:has(99))
+    assert.same({ 42 }, entries(h))
+    h:insert(99)
+    assert.True(h:has(42))
+    assert.True(h:has(99))
+    assert.same({ 42, 99 }, entries(h))
+    h:remove(42)
+    assert.False(h:has(42))
+    assert.True(h:has(99))
+    assert.same({ 99 }, entries(h))
+    h:insert(42)
+    assert.True(h:has(42))
+    assert.True(h:has(99))
+    assert.same({ 99, 42 }, entries(h))
+  end)
+end)

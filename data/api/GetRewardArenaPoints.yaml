@@ -1,8 +1,0 @@
----
-name: GetRewardArenaPoints
-status: unimplemented
-inputs:
-- {}
-outputs:
-- name: arenaPoints
-  type: number

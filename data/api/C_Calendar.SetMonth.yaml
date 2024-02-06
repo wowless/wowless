@@ -1,9 +1,0 @@
----
-name: C_Calendar.SetMonth
-status: implemented
-inputs:
-- - name: offsetMonths
-    type: number
-outputs: {}
-states:
-- Calendar

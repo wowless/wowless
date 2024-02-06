@@ -7,14 +7,25 @@ local edgesSqlCursor = args[6]
 local groupsSqlCursor = args[7]
 local conditionsSqlCursor = args[8]
 local configID, nodeID = args[9], args[10]
--- if not visible: return zeroed out fields; if invalid configID: empty return
+
 -- TODO mix in the state to determine the state dependent fields
-if configID ~= talentState.activeConfigID then
+
+local returnPlayerData = (configID == talentState.activeConfigID)
+local returnInspectData = (configID == datalua.globals.Constants.TraitConsts.VIEW_TRAIT_CONFIG_ID)
+
+-- if invalid configID: empty return
+if not returnPlayerData and not returnInspectData then
   return
 end
 
 local player = unitState.guids[unitState.aliases.player]
+local specID = (returnPlayerData and player.spec) or (returnInspectData and talentState.viewLoadoutSpecID)
 
+if returnInspectData and not talentState.viewLoadoutDataImported then
+  error('C_ClassTalents.ViewLoadout should be called before C_Traits.GetNodeInfo when using VIEW_TRAIT_CONFIG_ID')
+end
+
+-- if not visible: return zeroed out fields
 local zeroedNodeInfo = {
   meetsEdgeRequirements = false,
   entryIDs = {},
@@ -51,7 +62,7 @@ for conditionInfo in conditionsSqlCursor(nodeID) do
   local conditionType = conditionInfo.CondType
   local conditionSpec = conditionInfo.specID
   if
-    (conditionSpec == player.spec or 0 == conditionSpec)
+    (conditionSpec == specID or 0 == conditionSpec)
     and (
       conditionType == datalua.globals.Enum.TraitConditionType.Visible
       or conditionType == datalua.globals.Enum.TraitConditionType.Granted
@@ -60,7 +71,7 @@ for conditionInfo in conditionsSqlCursor(nodeID) do
     forceVisible = true
   end
   if
-    conditionSpec ~= player.spec
+    conditionSpec ~= specID
     and 0 ~= conditionSpec
     and conditionType == datalua.globals.Enum.TraitConditionType.Visible
   then

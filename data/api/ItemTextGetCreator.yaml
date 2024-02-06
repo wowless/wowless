@@ -1,8 +1,0 @@
----
-name: ItemTextGetCreator
-status: unimplemented
-inputs:
-- {}
-outputs:
-- name: creatorName
-  type: string

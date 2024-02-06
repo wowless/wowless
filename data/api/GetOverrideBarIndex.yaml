@@ -1,7 +1,0 @@
----
-name: GetOverrideBarIndex
-status: unimplemented
-inputs:
-- {}
-outputs:
-- type: number

@@ -1,0 +1,333 @@
+---
+C_Calendar.GetMonthInfo:
+  states:
+  - Calendar
+C_Calendar.SetAbsMonth:
+  states:
+  - Calendar
+C_Calendar.SetMonth:
+  states:
+  - Calendar
+C_ChatInfo.ReplaceIconAndGroupExpressions: {}
+C_ClassTalents.GetActiveConfigID:
+  states:
+  - Talents
+C_ClassTalents.GetTraitTreeForSpec:
+  sqls:
+  - lookup: C_ClassTalents.GetTraitTreeForSpec
+C_ClassTalents.InitializeViewLoadout:
+  states:
+  - Talents
+C_ClassTalents.ViewLoadout:
+  sqls:
+  - lookup: GetSpecializationInfoByID
+  states:
+  - Talents
+C_Console.GetAllCommands:
+  frameworks:
+  - datalua
+C_Covenants.GetCovenantData:
+  sqls:
+  - lookup: C_Covenants.GetCovenantData
+    table: true
+  - cursor: C_Covenants.GetCovenantData.soulbinds
+C_CovenantSanctumUI.GetRenownLevels:
+  sqls:
+  - cursor: C_CovenantSanctumUI.GetRenownLevels
+C_CovenantSanctumUI.GetRenownRewardsForLevel:
+  sqls:
+  - cursor: C_CovenantSanctumUI.GetRenownRewardsForLevel
+    table: true
+C_CreatureInfo.GetClassInfo:
+  sqls:
+  - lookup: C_CreatureInfo.GetClassInfo
+    table: true
+C_CVar.GetCVar:
+  frameworks:
+  - datalua
+  states:
+  - CVars
+C_CVar.GetCVarBool:
+  frameworks:
+  - datalua
+  states:
+  - CVars
+C_CVar.GetCVarDefault:
+  frameworks:
+  - datalua
+C_CVar.RegisterCVar:
+  states:
+  - CVars
+C_CVar.SetCVar:
+  states:
+  - CVars
+C_DateAndTime.AdjustTimeByDays: {}
+C_DateAndTime.AdjustTimeByMinutes: {}
+C_DateAndTime.CompareCalendarTime: {}
+C_EventUtils.IsEventValid:
+  frameworks:
+  - datalua
+C_Item.DoesItemExistByID:
+  sqls:
+  - lookup: C_Item.DoesItemExistByID
+C_ItemInteraction.GetItemInteractionInfo:
+  sqls:
+  - lookup: C_ItemInteraction.GetItemInteractionInfo
+    table: true
+C_Macro.SetMacroExecuteLineCallback:
+  frameworks:
+  - api
+C_Map.GetMapInfo:
+  sqls:
+  - lookup: C_Map.GetMapInfo
+    table: true
+C_Map.GetMapInfo_Vanilla:
+  sqls:
+  - lookup: C_Map.GetMapInfo_Vanilla
+    table: true
+C_ScriptedAnimations.GetAllScriptedAnimationEffects:
+  sqls:
+  - cursor: C_ScriptedAnimations.GetAllScriptedAnimationEffects
+    table: true
+C_SpecializationInfo.GetSpecIDs:
+  sqls:
+  - cursor: C_SpecializationInfo.GetSpecIDs
+C_Texture.GetAtlasInfo:
+  sqls:
+  - lookup: C_Texture.GetAtlasInfo
+C_Texture.GetAtlasInfo_10_2:
+  sqls:
+  - lookup: C_Texture.GetAtlasInfo_10_2
+C_Timer.After:
+  states:
+  - Time
+C_Timer.NewTicker:
+  states:
+  - Time
+C_Timer.NewTimer:
+  states:
+  - Time
+C_Traits.GetConfigInfo:
+  frameworks:
+  - datalua
+  sqls:
+  - lookup: C_Traits.GetConfigInfo
+  states:
+  - Units
+  - Talents
+C_Traits.GetNodeInfo:
+  frameworks:
+  - datalua
+  sqls:
+  - lookup: C_Traits.GetNodeInfo
+  - cursor: C_Traits.GetNodeInfo.entries
+    table: true
+  - cursor: C_Traits.GetNodeInfo.edges
+    table: true
+  - cursor: C_Traits.GetNodeInfo.groups
+  - cursor: C_Traits.GetNodeInfo.conditions
+    table: true
+  states:
+  - Units
+  - Talents
+C_Traits.GetTreeNodes:
+  sqls:
+  - cursor: C_Traits.GetTreeNodes
+C_UI.GetUIParent:
+  frameworks:
+  - env
+C_UI.GetWorldFrame:
+  frameworks:
+  - env
+C_UIColor.GetColors:
+  sqls:
+  - cursor: C_UIColor.GetColors
+C_XMLUtil.GetTemplateInfo:
+  frameworks:
+  - api
+C_XMLUtil.GetTemplateInfo_10_2:
+  frameworks:
+  - api
+CreateFont:
+  frameworks:
+  - api
+CreateForbiddenFrame:
+  frameworks:
+  - api
+CreateFrame:
+  frameworks:
+  - api
+DoEmote:
+  frameworks:
+  - api
+  sqls:
+  - lookup: DoEmote
+EnumerateFrames:
+  frameworks:
+  - api
+FillLocalizedClassList:
+  sqls:
+  - cursor: FillLocalizedClassList
+GetAddOnEnableState: {}
+GetAddOnInfo: {}
+GetAddOnMetadata: {}
+GetBuildInfo_10_1:
+  frameworks:
+  - datalua
+GetBuildInfo_1_15_0:
+  frameworks:
+  - datalua
+GetBuildInfo_3_4_2:
+  frameworks:
+  - datalua
+GetButtonMetatable:
+  frameworks:
+  - api
+GetChatWindowInfo: {}
+GetChatWindowMessages:
+  frameworks:
+  - env
+GetClassInfo:
+  sqls:
+  - lookup: GetClassInfo
+GetClickFrame:
+  frameworks:
+  - api
+getfenv:
+  frameworks:
+  - env
+GetFontStringMetatable:
+  frameworks:
+  - api
+GetFrameMetatable:
+  frameworks:
+  - api
+GetInventorySlotInfo:
+  sqls:
+  - lookup: GetInventorySlotInfo
+GetItemQualityColor: {}
+GetNumAddOns:
+  states:
+  - Addons
+GetNumClasses:
+  sqls:
+  - lookup: GetNumClasses
+GetNumSpecializationsForClassID:
+  sqls:
+  - lookup: GetNumSpecializationsForClassID
+GetNumTalents:
+  sqls:
+  - lookup: GetNumTalents
+  states:
+  - Units
+GetNumTalentTabs:
+  sqls:
+  - lookup: GetNumTalentTabs
+  states:
+  - Units
+GetScreenHeight:
+  states:
+  - System
+GetScreenWidth:
+  states:
+  - System
+GetSpecializationInfo:
+  sqls:
+  - lookup: GetSpecializationInfo
+  states:
+  - Units
+GetSpecializationInfoByID:
+  sqls:
+  - lookup: GetSpecializationInfoByID
+GetSpecializationInfoForClassID:
+  sqls:
+  - lookup: GetSpecializationInfoForClassID
+  states:
+  - Units
+GetSpecializationInfoForSpecID:
+  sqls:
+  - lookup: GetSpecializationInfoForSpecID
+  states:
+  - Units
+GetTalentInfo_Vanilla:
+  sqls:
+  - lookup: GetTalentInfo_Vanilla
+  states:
+  - Units
+GetTalentPrereqs_Vanilla:
+  sqls:
+  - cursor: GetTalentPrereqs
+  states:
+  - Units
+GetTalentPrereqs_Wrath:
+  sqls:
+  - cursor: GetTalentPrereqs
+  states:
+  - Units
+GetTalentTabInfo_Wrath:
+  sqls:
+  - lookup: GetTalentTabInfo
+  states:
+  - Units
+GetTime:
+  states:
+  - Time
+IsAddOnLoaded: {}
+IsAddOnLoadOnDemand: {}
+IsLinuxClient:
+  frameworks:
+  - api
+IsLoggedIn:
+  states:
+  - System
+IsMacClient:
+  frameworks:
+  - api
+IsTestBuild:
+  frameworks:
+  - datalua
+IsWindowsClient:
+  frameworks:
+  - api
+LoadAddOn:
+  frameworks:
+  - loader
+RequestTimePlayed:
+  frameworks:
+  - api
+  states:
+  - Time
+RunMacroText_Callback:
+  frameworks:
+  - api
+RunScript: {}
+SecureCmdOptionParse: {}
+SendSystemMessage:
+  frameworks:
+  - api
+  states:
+  - Time
+  - Units
+SetPortraitTexture: {}
+UnitClass:
+  sqls:
+  - lookup: UnitClass
+UnitClassBase:
+  sqls:
+  - lookup: UnitClassBase
+UnitExists: {}
+UnitFactionGroup:
+  sqls:
+  - lookup: UnitFactionGroup
+UnitGUID: {}
+UnitIsPlayer: {}
+UnitIsUnit: {}
+UnitLevel: {}
+UnitName: {}
+UnitPowerType:
+  sqls:
+  - lookup: UnitPowerType
+UnitRace:
+  sqls:
+  - lookup: UnitRace
+UnitSex: {}

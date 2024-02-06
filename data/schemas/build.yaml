@@ -10,13 +10,11 @@ type:
       type: string
     flavor:
       required: true
-      type: string
+      type:
+        ref: flavor
     hash:
       required: true
       type: string
-    ptr:
-      required: true
-      type: boolean
     test:
       required: true
       type: boolean

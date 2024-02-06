@@ -1,7 +1,0 @@
----
-name: TogglePlayerBounds
-status: unimplemented
-inputs:
-- {}
-outputs: {}
-debug: true

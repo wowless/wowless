@@ -1,9 +1,6 @@
 local function run(cfg)
   assert(cfg, 'missing configuration')
   assert(cfg.product, 'missing product')
-  _G.loadstring = debug.newcfunction(function(...)
-    return _G.loadstring_untainted(...) -- elune rewrite hack
-  end)
   local loglevel = cfg.loglevel or 0
   local time0 = os.clock()
   local function log(level, fmt, ...)
@@ -12,9 +9,45 @@ local function run(cfg)
     end
   end
   local api = require('wowless.api').new(log, cfg.maxErrors, cfg.product)
+
+  -- begin WARNING WARNING WARNING
+  --[[
+  The following lines of code are very magical.
+
+  The third line sets the global table for this Lua state to the
+  sandbox env table. This is necessary for the correct behavior of
+  some elune functionality, like securecall, hooksecurefunc,
+  and loadstring.
+
+  This does not affect wowless framework code. Any globals it
+  references from Lua are done via the environment table, which
+  remains unchanged from when it was (pre)loaded.
+
+  Any later loadstring'd framework code must be setfenv'd to the
+  host environment _G, since loadstring'd code is born with an
+  environment pointing to the current global table. See the api and
+  uiobject loaders for where this happens.
+
+  The first and second lines eagerly load modules which write to
+  the global table.
+
+  The fourth line is required because print depends on tostring from
+  the global table. TODO remove this dependency
+  ]]
+  require('lfs')
+  require('lsqlite3')
+  require('wowless.ext').setglobaltable(api.env)
+  api.env.tostring = tostring
+  -- end WARNING WARNING WARNING
+
+  local path = require('path')
+  local otherAddonDirs = {}
+  for _, d in ipairs(cfg.otherAddonDirs or {}) do
+    local dd = path.basename(d) == '' and path.dirname(d) or d
+    table.insert(otherAddonDirs, dd)
+  end
   local loader = require('wowless.loader').loader(api, {
-    cascproxy = cfg.cascproxy,
-    otherAddonDirs = cfg.otherAddonDirs,
+    otherAddonDirs = otherAddonDirs,
     product = cfg.product,
     rootDir = cfg.dir,
   })
@@ -23,8 +56,8 @@ local function run(cfg)
   if cfg.dir then
     loader.loadFrameXml()
   end
-  for _, d in ipairs(cfg.otherAddonDirs or {}) do
-    assert(loader.loadAddon(require('path').basename(d)))
+  for _, d in ipairs(otherAddonDirs) do
+    assert(loader.loadAddon(path.basename(d)))
   end
   api.states.System.isLoggedIn = true
   api.SendEvent('PLAYER_LOGIN')
@@ -52,11 +85,14 @@ local function run(cfg)
     end
     doit('frame0')
     if api.env.ToggleTalentFrame then
-      api.CallSafely(api.env.ToggleTalentFrame)
+      api.CallSandbox(api.env.ToggleTalentFrame)
       doit('frame1')
     end
     os.exit(0)
   end
+
+  local datalua = require('build.products.' .. cfg.product .. '.data')
+  local runnercfg = datalua.config.runner or {}
 
   local scripts = {
     bindings = function()
@@ -68,28 +104,15 @@ local function run(cfg)
       for _, name in ipairs(names) do
         local fn = api.states.Bindings[name]
         api.log(2, 'firing binding ' .. name)
-        api.CallSafely(function()
-          fn('down')
-        end)
-        api.CallSafely(function()
-          fn('up')
-        end)
+        api.CallSandbox(fn, 'down')
+        api.CallSandbox(fn, 'up')
       end
     end,
     clicks = function()
-      local clickBlacklist = {
-        PVPReadyDialogEnterBattleButton = true,
-      }
-      for _, frame in ipairs(api.frames) do
-        if
-          api.InheritsFrom(api.UserData(frame).type, 'button')
-          and frame:IsVisible()
-          and not clickBlacklist[frame:GetName() or '']
-        then
-          api.log(2, 'clicking %s', api.GetDebugName(frame))
-          api.CallSafely(function()
-            frame:Click()
-          end)
+      for frame in api.frames:entries() do
+        if frame:IsObjectType('button') and frame:IsVisible() then
+          api.log(2, 'clicking %s', frame:GetDebugName())
+          api.CallSafely(frame.Click, frame)
         end
       end
     end,
@@ -99,10 +122,22 @@ local function run(cfg)
       api.NextFrame()
       api.SendEvent('PLAYER_REGEN_ENABLED')
     end,
+    emotes = function()
+      local cmds = {}
+      for k, v in pairs(api.env) do
+        cmds[v] = k:match('^EMOTE%d+_CMD%d+$') or nil
+      end
+      for cmd in require('pl.tablex').sort(cmds) do
+        api.log(2, 'firing emote chat command %s', cmd)
+        if api.macroExecuteLineCallback then
+          api.CallSandbox(api.macroExecuteLineCallback, cmd)
+        end
+      end
+    end,
     enterleave = function()
-      for _, frame in ipairs(api.frames) do
-        if frame.IsVisible and frame:IsVisible() then
-          api.log(2, 'enter/leave %s', api.GetDebugName(frame))
+      for frame in api.frames:entries() do
+        if frame:IsVisible() then
+          api.log(2, 'enter/leave %s', frame:GetDebugName())
           api.RunScript(frame, 'OnEnter', true)
           api.RunScript(frame, 'OnLeave', true)
         end
@@ -110,7 +145,6 @@ local function run(cfg)
     end,
     events = function()
       local eventBlacklist = {
-        BARBER_SHOP_OPEN = true, -- issue #111
         INSPECT_HONOR_UPDATE = true, -- INSPECTED_UNIT shenanigans
         INSTANCE_LOCK_START = true,
         INSTANCE_LOCK_WARNING = true,
@@ -121,33 +155,20 @@ local function run(cfg)
         STORE_GUILD_MASTER_INFO_RECEIVED = true, -- SelectedRealm shenanigans
         UPDATE_MASTER_LOOT_LIST = true,
         VARIABLES_LOADED = true,
-        VOICE_CHAT_VAD_SETTINGS_UPDATED = true, -- inconsistent with nilable C_VoiceChat outputs
       }
-      local keys = {}
-      local payloads = {}
-      local typeToPayload = {
-        boolean = 'false',
-        number = '1',
-        string = '\'\'',
-        table = '{}',
-        unknown = 'nil',
-      }
-      for k, v in pairs(require('build.products.' .. cfg.product .. '.data').events) do
-        if not v.neverSent and not eventBlacklist[k] then
-          local payload = {}
-          for _, p in ipairs(v.payload or {}) do
-            local pv = typeToPayload[p.type] or 'nil'
-            table.insert(payload, pv)
-          end
-          if not next(payload) or cfg.allevents then
-            table.insert(keys, k)
-            payloads[k] = loadstring('return ' .. table.concat(payload, ','))
+      local skip = runnercfg.skip_events or {}
+      -- TODO unify with wowapi/loader
+      local mixin = require('wowless.util').mixin
+      local function stubMixin(t, name)
+        return mixin(t, api.env[name])
+      end
+      for k, v in require('pl.tablex').sort(datalua.events) do
+        if v.payload and not eventBlacklist[k] and not skip[k] then
+          if v.payload == 'return ' or cfg.allevents then
+            local text = 'local Mixin = ...;' .. v.payload
+            api.SendEvent(k, assert(loadstring(text))(stubMixin))
           end
         end
-      end
-      table.sort(keys)
-      for _, k in ipairs(keys) do
-        api.SendEvent(k, payloads[k]())
       end
     end,
     loot = function()
@@ -167,38 +188,27 @@ local function run(cfg)
         b:Click()
       end
     end,
-    misc = function()
-      api.SendEvent('CRAFT_SHOW')
-      api.SendEvent('CRAFT_UPDATE')
-      api.SendEvent('CRAFT_CLOSE')
-      api.SendEvent('TRADE_SKILL_SHOW')
-      api.SendEvent('TRADE_SKILL_UPDATE')
-      api.SendEvent('TRADE_SKILL_CLOSE')
-      api.SendEvent('GOSSIP_SHOW')
-      api.SendEvent('GOSSIP_CLOSE')
-      api.SendEvent('QUEST_GREETING')
-      api.SendEvent('QUEST_PROGRESS')
-      api.SendEvent('QUEST_FINISHED')
-    end,
     slashcmds = function()
-      local cmdBlacklist = { -- TODO remove this; these require a better SecureCmdOptionParse
-        BENCHMARK = true,
-        CASTRANDOM = true,
-        EVENT = true, -- throws Lua errors if text isn't a valid event
-        LOOT_MASTER = true, -- broken
-        PTRFEEDBACK = true, -- this just seems broken with an empty string
-        USERANDOM = true,
-      }
       local cmds = {}
       for k, v in pairs(api.env) do
         local cmd = k:match('^SLASH_(.+)1$')
-        if cmd and not cmdBlacklist[cmd] then
+        if cmd then
           cmds[cmd] = v
+        end
+      end
+      if cfg.dir then
+        for k in pairs(runnercfg.skip_slashcmds or {}) do
+          api.CallSafely(function()
+            assert(cmds[k], 'missing skip_slashcmd ' .. k)
+          end)
+          cmds[k] = nil
         end
       end
       for k, v in require('pl.tablex').sort(cmds) do
         api.log(2, 'firing chat command ' .. k .. ' via ' .. v)
-        api.SendEvent('EXECUTE_CHAT_LINE', v)
+        if api.macroExecuteLineCallback then
+          api.CallSandbox(api.macroExecuteLineCallback, v)
+        end
       end
     end,
     update = function()
@@ -214,9 +224,9 @@ local function run(cfg)
     'enterleave',
     'loot',
     'macrotext',
-    'misc',
     'bindings',
     'slashcmds',
+    'emotes',
     'events',
   }
   for _, script in ipairs(cfg.scripts and { strsplit(',', cfg.scripts) } or defaultScripts) do
@@ -228,7 +238,17 @@ local function run(cfg)
 
   api.SendEvent('PLAYER_LOGOUT')
   loader.saveAllVariables()
-  return api
+
+  -- Last ditch invariant check.
+  for _, obj in pairs(api.uiobjects) do
+    assert(api.UserData(obj.luarep) == obj)
+    for k, v in pairs(obj) do
+      assert(type(v) ~= 'table' or (k ~= 'luarep') == not api.UserData(v), k)
+    end
+  end
+  assert(issecure(), 'wowless bug: framework is tainted')
+
+  return api, loader
 end
 
 return {

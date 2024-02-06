@@ -1,7 +1,5 @@
-return (function(addons, addon, field)
-  if type(addon) == 'string' then
-    addon = addon:lower()
-  end
-  local toc = addons[addon]
-  return toc and toc.attrs[field] or nil
-end)(...)
+local addon, field = ...
+local v = addon and addon.attrs[field]
+if v then
+  return v
+end

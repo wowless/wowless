@@ -1,5 +1,0 @@
----
-name: C_LFGList.GetAvailableLanguageSearchFilter
-status: unimplemented
-outputs:
-- type: table

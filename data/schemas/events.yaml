@@ -5,16 +5,10 @@ type:
     key: string
     value:
       record:
-        docsarewrong:
-          type: boolean
         payload:
           type:
             sequenceof:
               record:
-                innerType:
-                  type: string
-                mixin:
-                  type: string
                 name:
                   required: true
                   type: string
@@ -23,10 +17,4 @@ type:
                 type:
                   required: true
                   type:
-                    oneof:
-                    - literal: boolean
-                    - literal: number
-                    - literal: string
-                    - literal: table
-                    - literal: unknown
-                    - ref: structure
+                    schema: type

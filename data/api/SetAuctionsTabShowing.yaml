@@ -1,7 +1,0 @@
----
-name: SetAuctionsTabShowing
-status: unimplemented
-inputs:
-- - name: value
-    type: boolean
-outputs: {}

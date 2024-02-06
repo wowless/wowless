@@ -1,5 +1,0 @@
----
-name: OnCharComposition
-extends: ScriptType
-impl:
-  script: {}

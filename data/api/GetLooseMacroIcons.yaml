@@ -1,8 +1,0 @@
----
-name: GetLooseMacroIcons
-status: unimplemented
-inputs:
-- - name: iconTable
-    nilable: true
-    type: table
-outputs: {}

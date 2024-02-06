@@ -1,0 +1,28 @@
+---
+name: structures
+type:
+  mapof:
+    key: string
+    value:
+      record:
+        fields:
+          required: true
+          type:
+            mapof:
+              key: string
+              value:
+                record:
+                  default:
+                    type:
+                      schema: any
+                  nilable:
+                    type: boolean
+                  stub:
+                    type:
+                      schema: any
+                  type:
+                    required: true
+                    type:
+                      schema: type
+        mixin:
+          type: string

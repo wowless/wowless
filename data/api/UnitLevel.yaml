@@ -1,9 +1,0 @@
----
-name: UnitLevel
-status: implemented
-inputs:
-- - name: unit
-    type: unit
-outputs:
-- name: level
-  type: number

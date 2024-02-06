@@ -1,12 +1,13 @@
 describe('schema', function()
   describe('validate', function()
     local accept, reject = (function()
-      local validate = require('wowapi.schema').validate
+      local base = require('wowapi.schema').validate
+      local function validate(schema, value)
+        return base('fake product', schema, value)
+      end
       return validate,
         function(schema, value)
-          local success, msg = pcall(function()
-            validate(schema, value)
-          end)
+          local success, msg = pcall(validate, schema, value)
           assert.False(success, msg)
         end
     end)()

@@ -1,8 +1,0 @@
----
-name: GetItemClassInfo
-status: unimplemented
-inputs:
-- - type: number
-outputs:
-- name: name
-  type: string

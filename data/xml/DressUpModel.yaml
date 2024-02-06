@@ -1,6 +1,0 @@
----
-name: DressUpModel
-attributes:
-  modelscale:
-    type: number
-extends: Frame

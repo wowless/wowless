@@ -1,9 +1,0 @@
----
-name: GetNumTalentTabs
-status: implemented
-outputs:
-- type: number
-sqls:
-- lookup: GetNumTalentTabs
-states:
-- Units

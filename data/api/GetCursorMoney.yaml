@@ -1,5 +1,0 @@
----
-name: GetCursorMoney
-status: unimplemented
-outputs:
-- type: number

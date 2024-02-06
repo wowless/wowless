@@ -1,9 +1,0 @@
----
-name: GetNumAddOns
-status: implemented
-inputs:
-- {}
-outputs:
-- type: number
-states:
-- Addons

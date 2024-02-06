@@ -1,5 +1,0 @@
----
-name: OnKeyUp
-extends: ScriptType
-impl:
-  script: {}

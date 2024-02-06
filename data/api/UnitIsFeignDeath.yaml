@@ -1,7 +1,0 @@
----
-name: UnitIsFeignDeath
-status: unimplemented
-inputs:
-- - type: string
-outputs:
-- type: oneornil

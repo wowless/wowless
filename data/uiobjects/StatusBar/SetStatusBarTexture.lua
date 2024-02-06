@@ -1,11 +1,10 @@
 return (function(self, tex)
-  local ud = u(self)
-  local t = toTexture(self, tex, ud.statusBarTexture)
+  local t = toTexture(self, tex, self.statusBarTexture)
   if t then
-    t:SetParent(self)
+    api.SetParent(t, self)
     t:ClearAllPoints()
     t:SetAllPoints()
     t:Show()
   end
-  ud.statusBarTexture = t
+  self.statusBarTexture = t
 end)(...)

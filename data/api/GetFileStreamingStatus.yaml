@@ -1,9 +1,0 @@
----
-name: GetFileStreamingStatus
-status: unimplemented
-inputs:
-- {}
-outputs:
-- name: status
-  stub: 0
-  type: number

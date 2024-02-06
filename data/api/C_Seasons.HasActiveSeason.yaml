@@ -1,7 +1,0 @@
----
-name: C_Seasons.HasActiveSeason
-status: unimplemented
-inputs:
-- {}
-outputs:
-- type: boolean

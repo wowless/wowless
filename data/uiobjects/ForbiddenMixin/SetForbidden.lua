@@ -1,3 +1,3 @@
 return (function(self)
-  u(self).forbidden = true
+  self.forbidden = true
 end)(...)

@@ -1,8 +1,0 @@
----
-name: GetNumVoidTransferDeposit
-status: unimplemented
-inputs:
-- {}
-outputs:
-- name: numDeposits
-  type: number

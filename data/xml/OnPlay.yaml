@@ -1,5 +1,0 @@
----
-name: OnPlay
-extends: ScriptType
-impl:
-  script: {}

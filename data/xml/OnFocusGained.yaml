@@ -1,5 +1,0 @@
----
-name: OnFocusGained
-extends: ScriptType
-impl:
-  script: {}

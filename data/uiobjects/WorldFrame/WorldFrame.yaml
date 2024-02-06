@@ -1,5 +1,0 @@
----
-name: WorldFrame
-inherits:
-  Frame: {}
-methods: {}

@@ -1,8 +1,0 @@
----
-name: SetTaxiBenchmarkMode
-status: unimplemented
-inputs:
-- - name: value
-    nilable: true
-    type: boolean
-outputs: {}

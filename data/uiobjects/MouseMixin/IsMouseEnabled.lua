@@ -1,4 +1,3 @@
 return (function(self)
-  local ud = u(self)
-  return ud.mouseClickEnabled and ud.mouseMotionEnabled
+  return self.mouseClickEnabled and self.mouseMotionEnabled
 end)(...)

@@ -1,3 +1,3 @@
 return (function(self)
-  m(self, 'SetShown', false)
+  self:SetShown(false)
 end)(...)

@@ -1,0 +1,106 @@
+---
+name: uiobjects
+type:
+  mapof:
+    key: string
+    value:
+      record:
+        fields:
+          type:
+            mapof:
+              key: string
+              value:
+                record:
+                  init:
+                    type:
+                      schema: any
+                  nilable:
+                    type: boolean
+                  type:
+                    required: true
+                    type:
+                      oneof:
+                      - literal: boolean
+                      - literal: hlist
+                      - literal: number
+                      - literal: string
+                      - literal: table
+                      - ref: stringenum
+                      - ref: uiobject
+        inherits:
+          type:
+            mapof:
+              key:
+                ref: uiobject
+              value:
+                record: null
+        methods:
+          type:
+            mapof:
+              key: string
+              value:
+                oneof:
+                - record:
+                    getter:
+                      required: true
+                      type:
+                        sequenceof:
+                          record:
+                            name:
+                              required: true
+                              type: string
+                - record:
+                    impl:
+                      type:
+                        ref: uiobjectimpl
+                    inputs:
+                      type:
+                        sequenceof:
+                          record:
+                            default:
+                              type:
+                                schema: any
+                            name:
+                              type: string
+                            nilable:
+                              type: boolean
+                            type:
+                              required: true
+                              type:
+                                schema: type
+                    mayreturnnothing:
+                      type: boolean
+                    outputs:
+                      type:
+                        sequenceof:
+                          record:
+                            name:
+                              type: string
+                            nilable:
+                              type: boolean
+                            stub:
+                              type:
+                                schema: any
+                            type:
+                              required: true
+                              type:
+                                schema: type
+                - record:
+                    setter:
+                      required: true
+                      type:
+                        sequenceof:
+                          record:
+                            name:
+                              required: true
+                              type: string
+                            nilable:
+                              type: boolean
+        objectType:
+          type: string
+        singleton:
+          type: boolean
+        virtual:
+          type: boolean
+        warner:
+          type: boolean

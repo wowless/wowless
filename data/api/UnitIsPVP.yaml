@@ -1,7 +1,0 @@
----
-name: UnitIsPVP
-status: unimplemented
-inputs:
-- - type: unit
-outputs:
-- type: boolean

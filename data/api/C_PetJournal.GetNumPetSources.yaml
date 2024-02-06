@@ -1,5 +1,0 @@
----
-name: C_PetJournal.GetNumPetSources
-status: unimplemented
-outputs:
-- type: number

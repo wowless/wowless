@@ -1,8 +1,0 @@
----
-name: GetMerchantFilter
-status: unimplemented
-inputs:
-- {}
-outputs:
-- name: currentFilter
-  type: number

@@ -1,7 +1,0 @@
----
-name: GetCraftSelectionIndex
-status: unimplemented
-inputs:
-- {}
-outputs:
-- type: number

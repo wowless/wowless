@@ -1,7 +1,8 @@
 local extLoaders = {
-  lua = loadfile,
   sql = require('pl.file').read,
-  yaml = require('wowapi.yaml').parseFile,
+  yaml = function(f)
+    return require('build.' .. f:sub(1, -6):gsub('/', '.'))
+  end,
 }
 
 local function loaddir(dir, ext)
@@ -19,17 +20,10 @@ local function loaddir(dir, ext)
   end
 end
 
-local function loadUIObjects()
-  local uiobjects = {}
-  for d in require('lfs').dir('data/uiobjects') do
-    if d ~= '.' and d ~= '..' then
-      uiobjects[d] = {
-        cfg = extLoaders.yaml(('data/uiobjects/%s/%s.yaml'):format(d, d)),
-        methods = loaddir('uiobjects/' .. d, 'lua')(),
-      }
-    end
+local function global(f)
+  return function()
+    return extLoaders.yaml('data/' .. f .. '.yaml')
   end
-  return uiobjects
 end
 
 local function perproduct(f)
@@ -43,16 +37,29 @@ local function perproduct(f)
 end
 
 local fns = {
-  apis = loaddir('api', 'yaml'),
+  apis = perproduct('apis'),
   cvars = perproduct('cvars'),
-  impl = loaddir('impl', 'lua'),
+  enums = function()
+    local t = {}
+    for _, d in ipairs(require('pl.dir').getdirectories('data/products')) do
+      t[require('path').basename(d)] = extLoaders.yaml(d .. '/globals.yaml').Enum
+    end
+    return t
+  end,
+  events = perproduct('events'),
+  flavors = global('flavors'),
+  impl = global('impl'),
+  products = global('products'),
   schemas = loaddir('schemas', 'yaml'),
   sqlcursor = loaddir('sql/cursor', 'sql'),
   sqllookup = loaddir('sql/lookup', 'sql'),
   state = loaddir('state', 'yaml'),
-  structures = loaddir('structures', 'yaml'),
-  uiobjects = loadUIObjects,
-  xml = loaddir('xml', 'yaml'),
+  stringenums = global('stringenums'),
+  structures = perproduct('structures'),
+  test = global('test'),
+  uiobjectimpl = global('uiobjectimpl'),
+  uiobjects = perproduct('uiobjects'),
+  xml = perproduct('xml'),
 }
 
 return setmetatable({}, {

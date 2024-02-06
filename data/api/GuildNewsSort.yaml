@@ -1,7 +1,0 @@
----
-name: GuildNewsSort
-status: unimplemented
-inputs:
-- - name: unknown
-    type: number
-outputs: {}

@@ -1,3 +1,2 @@
-return (function(api, ...)
-  return api.CreateFrame(...)
-end)(...)
+local api = ...
+return api.CreateFrame(select(2, ...))

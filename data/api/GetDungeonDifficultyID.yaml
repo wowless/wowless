@@ -1,7 +1,0 @@
----
-name: GetDungeonDifficultyID
-status: unimplemented
-inputs:
-- {}
-outputs:
-- type: number

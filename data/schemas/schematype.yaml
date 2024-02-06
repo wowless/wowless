@@ -60,12 +60,19 @@ type:
         type:
           oneof:
           - literal: api
+          - literal: cvar
+          - literal: enum
+          - literal: event
+          - literal: flavor
+          - literal: impl
           - literal: schema
           - literal: sqlcursor
           - literal: sqllookup
+          - literal: stringenum
           - literal: state
           - literal: structure
           - literal: uiobject
+          - literal: uiobjectimpl
           - literal: xml
   - record:
       schema:

@@ -1,7 +1,0 @@
----
-name: ButtonFont
-attributes:
-  style:
-    type: string
-extends: Font
-virtual: true

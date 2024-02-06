@@ -1,5 +1,0 @@
----
-name: IsMounted
-status: unimplemented
-outputs:
-- type: boolean

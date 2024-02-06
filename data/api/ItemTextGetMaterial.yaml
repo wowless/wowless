@@ -1,9 +1,0 @@
----
-name: ItemTextGetMaterial
-status: unimplemented
-inputs:
-- {}
-outputs:
-- name: materialName
-  nilable: true
-  type: string

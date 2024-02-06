@@ -1,27 +1,27 @@
 local traceback = require('wowless.ext').traceback
+local hlist = require('wowless.hlist')
 
 local function new(log, maxErrors, product)
-  local allEventRegistrations = {}
+  local allEventRegistrations = hlist()
   local env = {}
   local errors = 0
   local eventRegistrations = {}
-  local frames = {}
+  local frames = hlist()
   local states = {}
   local templates = {}
   local uiobjectTypes = {}
   local userdata = {}
 
-  local function u(obj)
+  local function UserData(obj)
     return userdata[obj[0]]
   end
 
   local function InheritsFrom(a, b)
-    assert(uiobjectTypes[a], 'unknown type ' .. a)
-    local result = a == b
-    for _, inh in ipairs(uiobjectTypes[a].inherits) do
-      result = result or InheritsFrom(inh, b)
+    local t = uiobjectTypes[a]
+    if not t then
+      error('unknown type ' .. a)
     end
-    return result
+    return t.isa[b]
   end
 
   local function IsIntrinsicType(t)
@@ -38,26 +38,25 @@ local function new(log, maxErrors, product)
     'statusBarTexture',
   }
 
-  local function SetParent(obj, parent)
-    if u(obj).parent == parent then
+  local function DoSetParent(obj, parent)
+    if obj.parent == parent then
       return
     end
-    if u(obj).parent then
-      local up = u(u(obj).parent)
-      up.childrenSet[obj] = nil
+    if obj.parent then
+      local up = obj.parent
+      up.children:remove(obj)
       for _, f in ipairs(parentFieldsToClear) do
         if up[f] == obj then
           up[f] = nil
         end
       end
     end
-    u(obj).parent = parent
+    obj.parent = parent
     if parent then
-      table.insert(u(parent).childrenList, obj)
-      u(parent).childrenSet[obj] = #u(parent).childrenList
+      parent.children:insert(obj)
     end
-    if parent and u(parent).frameLevel and u(obj).frameLevel and not u(obj).hasFixedFrameLevel then
-      obj:SetFrameLevel(u(parent).frameLevel + 1)
+    if parent and parent.frameLevel and obj.frameLevel and not obj.hasFixedFrameLevel then
+      obj:SetFrameLevel(parent.frameLevel + 1)
     end
   end
 
@@ -66,10 +65,10 @@ local function new(log, maxErrors, product)
   local function ParentSub(name, parent)
     if name and string.match(name, parentMatch) then
       local p = parent
-      while p ~= nil and not u(p).name do
-        p = u(p).parent
+      while p ~= nil and not p.name do
+        p = p.parent
       end
-      return string.gsub(name, parentMatch, p and u(p).name or 'Top')
+      return string.gsub(name, parentMatch, p and p.name or 'Top')
     else
       return name
     end
@@ -85,20 +84,25 @@ local function new(log, maxErrors, product)
   end
 
   local function CallSafely(fun, ...)
-    return xpcall(fun, ErrorHandler, ...)
+    assert(issecure(), 'wowless bug: must enter CallSafely securely')
+    assert(getfenv(fun) == _G, 'wowless bug: expected framework function')
+    return securecallfunction(xpcall, fun, ErrorHandler, ...)
+  end
+
+  local function CallSandbox(fun, ...)
+    assert(issecure(), 'wowless bug: must enter CallSandbox securely')
+    assert(getfenv(fun) ~= _G, 'wowless bug: expected sandbox function')
+    return securecallfunction(xpcall, fun, ErrorHandler, ...)
   end
 
   local function GetDebugName(frame)
-    local ud = u(frame)
-    local name = ud.name
+    local name = frame.name
     if name ~= nil then
       return name
     end
     name = ''
-    local parent = ud.parent
-    local pud
+    local parent = frame.parent
     while parent do
-      pud = u(parent)
       local found = false
       for k, v in pairs(parent) do
         if v == frame then
@@ -109,7 +113,7 @@ local function new(log, maxErrors, product)
       if not found then
         name = string.match(tostring(frame), '^table: 0x0*(.*)$'):lower() .. (name == '' and '' or ('.' .. name))
       end
-      local parentName = pud.name
+      local parentName = parent.name
       if parentName == 'UIParent' then
         break
       elseif parentName and parentName ~= '' then
@@ -117,51 +121,79 @@ local function new(log, maxErrors, product)
         break
       end
       frame = parent
-      parent = pud.parent
+      parent = parent.parent
     end
     return name
   end
 
   local function RunScript(obj, name, ...)
-    local ud = u(obj)
-    if ud.scripts then
+    if obj.scripts then
       for i = 0, 2 do
-        local script = ud.scripts[i][string.lower(name)]
+        local script = obj.scripts[i][string.lower(name)]
         if script then
-          log(4, 'begin %s[%d] for %s %s', name, i, ud.type, GetDebugName(obj))
-          CallSafely(function(...)
-            script(obj, ...)
-          end, ...)
-          log(4, 'end %s[%d] for %s %s', name, i, ud.type, GetDebugName(obj))
+          CallSandbox(script, obj.luarep, ...)
         end
       end
+    end
+  end
+
+  local function DoUpdateVisible(obj, script)
+    for kid in obj.children:entries() do
+      if kid.shown then
+        DoUpdateVisible(kid, script)
+      end
+    end
+    RunScript(obj, script)
+  end
+
+  local function UpdateVisible(obj, fn)
+    local wasVisible = obj:IsVisible()
+    fn()
+    local visibleNow = obj:IsVisible()
+    if wasVisible ~= visibleNow then
+      DoUpdateVisible(obj, visibleNow and 'OnShow' or 'OnHide')
+    end
+  end
+
+  local function SetParent(obj, parent)
+    if obj.IsVisible then
+      UpdateVisible(obj, function()
+        DoSetParent(obj, parent)
+      end)
+    else
+      DoSetParent(obj, parent)
     end
   end
 
   local datalua = require('build.products.' .. product .. '.data')
 
   local function CreateUIObject(typename, objnamearg, parent, addonEnv, tmplsarg, id)
-    local objname = ParentSub(objnamearg, parent)
-    assert(typename, 'must specify type for ' .. tostring(objname))
-    local type = uiobjectTypes[typename]
-    assert(type, 'unknown type ' .. typename .. ' for ' .. tostring(objname))
-    assert(IsIntrinsicType(typename), 'cannot create non-intrinsic type ' .. typename .. ' for ' .. tostring(objname))
-    log(3, 'creating %s%s', type.name, objname and (' named ' .. objname) or '')
-    local obj = setmetatable({}, type.metatable)
-    obj[0] = newproxy()
-    userdata[obj[0]] = {
-      name = objname,
-      type = typename,
-    }
-    type.constructor(obj)
-    SetParent(obj, parent)
+    local objname
+    if type(objnamearg) == 'string' then
+      objname = ParentSub(objnamearg, parent)
+    elseif type(objnamearg) == 'number' then
+      objname = tostring(objnamearg)
+    end
+    local objtype = uiobjectTypes[typename]
+    if not objtype then
+      error('unknown type ' .. tostring(typename) .. ' for ' .. tostring(objname))
+    end
+    log(3, 'creating %s%s', objtype.name, objname and (' named ' .. objname) or '')
+    local objp = newproxy()
+    local obj = setmetatable({ [0] = objp }, objtype.sandboxMT)
+    local ud = objtype.constructor()
+    ud.luarep = obj
+    ud.name = objname
+    ud.type = typename
+    userdata[objp] = ud
+    setmetatable(ud, objtype.hostMT)
+    DoSetParent(ud, parent)
     if InheritsFrom(typename, 'frame') then
-      table.insert(frames, obj)
-      u(obj).frameIndex = #frames
+      frames:insert(ud)
     end
     local tmpls = {}
-    if type.template then
-      table.insert(tmpls, type.template)
+    if objtype.template then
+      table.insert(tmpls, objtype.template)
     end
     if tmplsarg then
       for _, tmpl in ipairs(tmplsarg) do
@@ -169,12 +201,15 @@ local function new(log, maxErrors, product)
       end
     end
     for _, template in ipairs(tmpls) do
-      log(4, 'initializing early attributes for ' .. tostring(template.name))
-      template.initEarlyAttrs(obj)
+      template.initEarlyAttrs(ud)
     end
     if objname then
-      objname = ParentSub(objnamearg, u(obj).parent)
-      u(obj).name = objname
+      if type(objnamearg) == 'string' then
+        objname = ParentSub(objnamearg, ud.parent)
+      elseif type(objnamearg) == 'number' then
+        objname = tostring(objnamearg)
+      end
+      ud.name = objname
       if env[objname] then
         log(3, 'overwriting global ' .. objname)
       end
@@ -184,49 +219,45 @@ local function new(log, maxErrors, product)
       end
     end
     for _, template in ipairs(tmpls) do
-      log(4, 'initializing attributes for ' .. tostring(template.name))
-      template.initAttrs(obj)
+      template.initAttrs(ud)
     end
     for _, template in ipairs(tmpls) do
-      log(4, 'initializing children for ' .. tostring(template.name))
-      template.initKids(obj)
+      template.initKids(ud)
     end
     if id then
       obj:SetID(id)
     end
-    RunScript(obj, 'OnLoad')
+    RunScript(ud, 'OnLoad')
     if InheritsFrom(typename, 'region') and obj:IsVisible() then
-      RunScript(obj, 'OnShow')
+      RunScript(ud, 'OnShow')
     end
-    -- I have found a theory for this hack but this comment is too small to contain it.
-    if typename == 'fogofwarframe' and datalua.build.flavor ~= 'Mainline' then
-      setmetatable(obj, nil)
-    end
-    return obj
+    return ud
   end
 
   local function SetScript(obj, name, bindingType, script)
-    local ud = u(obj)
-    log(4, 'setting %s[%d] for %s %s', name, bindingType, ud.type, GetDebugName(obj))
-    ud.scripts[bindingType][string.lower(name)] = script
+    assert(script == nil or getfenv(script) ~= _G, 'wowless bug: scripts must run in the sandbox')
+    obj.scripts[bindingType][string.lower(name)] = script
+  end
+
+  for k in pairs(datalua.events) do
+    eventRegistrations[k] = hlist()
   end
 
   local function SendEvent(event, ...)
+    event = event:upper()
+    assert(eventRegistrations[event], 'internal error: cannot send ' .. event)
     local largs = {}
     for i = 1, select('#', ...) do
       local arg = select(i, ...)
       table.insert(largs, type(arg) == 'string' and ('%q'):format(arg) or tostring(arg))
     end
-    event = event:upper()
     log(1, 'sending event %s (%s)', event, table.concat(largs, ', '))
     -- Snapshot current registrations since handlers can mutate them.
     local regs = {}
-    for i, frame in ipairs(eventRegistrations[event] or {}) do
-      assert(u(frame).registeredEvents[event] == i, 'event registration invariant violated')
+    for frame in eventRegistrations[event]:entries() do
       table.insert(regs, frame)
     end
-    for i, frame in ipairs(allEventRegistrations) do
-      assert(u(frame).registeredAllEvents == i, 'event registration invariant violated')
+    for frame in allEventRegistrations:entries() do
       table.insert(regs, frame)
     end
     for _, reg in ipairs(regs) do
@@ -237,7 +268,7 @@ local function new(log, maxErrors, product)
   local function CreateFrame(type, name, parent, templateNames, id)
     local ltype = string.lower(type)
     if not IsIntrinsicType(ltype) or not InheritsFrom(ltype, 'frame') then
-      if not uiobjectTypes[ltype] or ltype == 'texture' or ltype == 'line' or ltype == 'fontstring' then
+      if not uiobjectTypes[ltype] or uiobjectTypes[ltype].warner then
         SendEvent('LUA_WARNING', 0, 'Unknown frame type: ' .. type)
       end
       error('CreateFrame: Unknown frame type \'' .. type .. '\'')
@@ -257,10 +288,11 @@ local function new(log, maxErrors, product)
     while time.timers:peek().pri < time.stamp do
       local timer = time.timers:pop()
       log(2, 'running timer %.2f %s', timer.pri, tostring(timer.val))
+      assert(getfenv(timer.val) == _G, 'wowless bug: sandbox callback in NextFrame')
       CallSafely(timer.val)
     end
-    for _, frame in ipairs(frames) do
-      if frame.IsVisible and frame:IsVisible() then
+    for frame in frames:entries() do
+      if frame:IsVisible() then
         RunScript(frame, 'OnUpdate', 1)
       end
     end
@@ -270,80 +302,47 @@ local function new(log, maxErrors, product)
     return errors
   end
 
-  local eventConfigs = datalua.events
-
   local function RegisterEvent(frame, event)
     event = event:upper()
-    assert(eventConfigs[event], 'cannot register ' .. event)
-    local ud = u(frame)
-    if not ud.registeredEvents[event] and not ud.registeredAllEvents then
-      local reg = eventRegistrations[event]
-      if not reg then
-        reg = {}
-        eventRegistrations[event] = reg
-      end
-      table.insert(reg, frame)
-      ud.registeredEvents[event] = #reg
+    assert(eventRegistrations[event], 'cannot register ' .. event)
+    if not allEventRegistrations:has(frame) then
+      eventRegistrations[event]:insert(frame)
     end
   end
 
   local function UnregisterEvent(frame, event)
     event = event:upper()
-    local ud = u(frame)
-    local idx = ud.registeredEvents[event]
-    if idx then
-      local reg = eventRegistrations[event]
-      assert(reg and reg[idx] == frame, 'event registration invariant violated')
-      if idx ~= #reg then
-        reg[idx] = reg[#reg]
-        u(reg[idx]).registeredEvents[event] = idx
-      end
-      reg[#reg] = nil
-      ud.registeredEvents[event] = nil
-    end
+    assert(eventRegistrations[event], 'cannot unregister ' .. event)
+    eventRegistrations[event]:remove(frame)
   end
 
   local function UnregisterAllEvents(frame)
-    local ud = u(frame)
-    for k in pairs(ud.registeredEvents) do
-      UnregisterEvent(frame, k)
+    for _, reg in pairs(eventRegistrations) do
+      reg:remove(frame)
     end
-    local idx = ud.registeredAllEvents
-    if idx then
-      assert(allEventRegistrations[idx] == frame, 'event registration invariant violated')
-      if idx ~= #allEventRegistrations then
-        allEventRegistrations[idx] = allEventRegistrations[#allEventRegistrations]
-        u(allEventRegistrations[idx]).registeredAllEvents = idx
-      end
-      allEventRegistrations[#allEventRegistrations] = nil
-      ud.registeredAllEvents = nil
-    end
+    allEventRegistrations:remove(frame)
   end
 
   local function RegisterAllEvents(frame)
     UnregisterAllEvents(frame)
-    table.insert(allEventRegistrations, frame)
-    u(frame).registeredAllEvents = #allEventRegistrations
+    allEventRegistrations:insert(frame)
   end
 
   local function IsEventRegistered(frame, event)
-    event = event:upper()
-    local ud = u(frame)
-    return ud.registeredAllEvents or ud.registeredEvents[event]
+    return allEventRegistrations:has(frame) or eventRegistrations[event:upper()]:has(frame)
   end
 
-  for k, v in pairs(datalua.state) do
+  for k, v in pairs(datalua.states) do
     states[k] = require('pl.tablex').deepcopy(v)
   end
-  seterrorhandler(ErrorHandler)
 
   local api = {
     CallSafely = CallSafely,
+    CallSandbox = CallSandbox,
     CreateFrame = CreateFrame,
     CreateUIObject = CreateUIObject,
     datalua = datalua,
     env = env,
-    ErrorHandler = ErrorHandler,
     frames = frames,
     GetDebugName = GetDebugName,
     GetErrorCount = GetErrorCount,
@@ -353,6 +352,7 @@ local function new(log, maxErrors, product)
     log = log,
     NextFrame = NextFrame,
     ParentSub = ParentSub,
+    platform = require('runtime.platform'),
     product = product,
     RegisterAllEvents = RegisterAllEvents,
     RegisterEvent = RegisterEvent,
@@ -362,10 +362,12 @@ local function new(log, maxErrors, product)
     SetScript = SetScript,
     states = states,
     templates = templates,
+    uiobjects = userdata,
     uiobjectTypes = uiobjectTypes,
     UnregisterAllEvents = UnregisterAllEvents,
     UnregisterEvent = UnregisterEvent,
-    UserData = u,
+    UpdateVisible = UpdateVisible,
+    UserData = UserData,
   }
   require('wowless.util').mixin(uiobjectTypes, require('wowapi.uiobjects')(api))
   return api

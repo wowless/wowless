@@ -1,8 +1,0 @@
----
-name: GetRewardTitle
-status: unimplemented
-inputs:
-- {}
-outputs:
-- name: playerTitle
-  type: string

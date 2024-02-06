@@ -1,5 +1,0 @@
----
-name: GetNumSpecializationsForClassID
-status: unimplemented
-outputs:
-- type: number

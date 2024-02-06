@@ -1,9 +1,0 @@
----
-name: GetTrainerServiceNumAbilityReq
-status: unimplemented
-inputs:
-- - name: skillIndex
-    type: number
-outputs:
-- name: numRequirements
-  type: number

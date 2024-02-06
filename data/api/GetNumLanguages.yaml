@@ -1,5 +1,0 @@
----
-name: GetNumLanguages
-status: unimplemented
-outputs:
-- type: number

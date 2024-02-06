@@ -1,47 +1,47 @@
-local lfs = require('lfs')
-local pf = require('pl.file')
+local writeFile = require('pl.file').write
 local yaml = require('wowapi.yaml')
 
-local function apiRewriter(fn)
-  for filename in lfs.dir('data/api') do
-    if filename:sub(-5) == '.yaml' then
-      local api = yaml.parseFile('data/api/' .. filename)
-      local newapi = fn(api)
-      if newapi then
-        pf.write('data/api/' .. filename, yaml.pprint(newapi))
-      end
+local function rewriteFile(ty, fn)
+  for _, p in ipairs(require('build.data.products')) do
+    local filename = 'data/products/' .. p .. '/' .. ty .. '.yaml'
+    local before = require('pl.file').read(filename)
+    local data = yaml.parse(before)
+    fn(p, data)
+    local after = yaml.pprint(data)
+    if after ~= before then
+      writeFile(filename, after)
     end
   end
 end
 
-local function uiobjectRewriter(fn)
-  for d in lfs.dir('data/uiobjects') do
-    if d ~= '.' and d ~= '..' then
-      local filename = ('data/uiobjects/%s/%s.yaml'):format(d, d)
-      local cfg = yaml.parseFile(filename)
-      local newcfg = fn(cfg)
-      if newcfg then
-        pf.write(filename, yaml.pprint(newcfg))
+local function rewriteSpecs(fn)
+  rewriteFile('apis', function(_, t)
+    for _, api in pairs(t) do
+      for _, i in ipairs(api.inputs or {}) do
+        fn(i)
+      end
+      for _, o in ipairs(api.outputs or {}) do
+        fn(o)
       end
     end
-  end
-end
-
-local function xmlRewriter(fn)
-  for filename in lfs.dir('data/xml') do
-    if filename:sub(-5) == '.yaml' then
-      local xml = yaml.parseFile('data/xml/' .. filename)
-      local newxml = fn(xml)
-      if newxml then
-        pf.delete('data/xml/' .. filename)
-        pf.write('data/xml/' .. newxml.name .. '.yaml', yaml.pprint(newxml))
+  end)
+  rewriteFile('events', function(_, t)
+    for _, ev in pairs(t) do
+      for _, f in ipairs(ev.payload or {}) do
+        fn(f)
       end
     end
-  end
+  end)
+  rewriteFile('structures', function(_, t)
+    for _, st in pairs(t) do
+      for _, f in pairs(st.fields) do
+        fn(f)
+      end
+    end
+  end)
 end
 
 return {
-  api = apiRewriter,
-  uiobject = uiobjectRewriter,
-  xml = xmlRewriter,
+  file = rewriteFile,
+  specs = rewriteSpecs,
 }

@@ -1,7 +1,0 @@
----
-name: EJ_SelectTier
-status: unimplemented
-inputs:
-- - name: tier
-    type: number
-outputs: {}

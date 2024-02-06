@@ -1,8 +1,0 @@
----
-name: PetAttack
-status: unimplemented
-inputs:
-- - name: unit
-    nilable: true
-    type: unit
-outputs: {}

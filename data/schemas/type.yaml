@@ -1,0 +1,35 @@
+---
+name: type
+type:
+  oneof:
+  - literal: boolean
+  - literal: function
+  - literal: gender
+  - literal: nil
+  - literal: number
+  - literal: oneornil
+  - literal: string
+  - literal: table
+  - literal: tonumber
+  - literal: tostring
+  - literal: uiAddon
+  - literal: unit
+  - literal: unknown
+  - literal: userdata
+  - record:
+      structure:
+        required: true
+        type:
+          ref: structure
+  - record:
+      arrayof:
+        required: true
+        type:
+          schema: type
+  - record:
+      enum:
+        required: true
+        type:
+          ref: enum
+  - ref: stringenum
+  - ref: uiobject

@@ -1,54 +1,36 @@
 local lsqlite3 = require('lsqlite3')
+local sqlquote = require('tools.sqlite3ext').quote
 
-local quote = (function()
-  local moo = require('luasql.sqlite3').sqlite3():connect('')
-  return function(s)
-    return '\'' .. moo:escape(s) .. '\''
-  end
-end)()
+local indexes = {
+  SpecSetMember = { 'SpecSetMember (SpecSet)' },
+  TraitNodeGroupXTraitCond = { 'TraitNodeGroupXTraitCond (TraitNodeGroupID)' },
+  TraitNodeGroupXTraitNode = { 'TraitNodeGroupXTraitNode (TraitNodeID)' },
+  TraitNodeXTraitCond = { 'TraitNodeXTraitCond (TraitNodeID)' },
+  TraitNodeXTraitNodeEntry = { 'TraitNodeXTraitNodeEntry (TraitNodeID)' },
+  UiTextureAtlasMember = { 'UiTextureAtlasMember (CommittedName COLLATE NOCASE)' },
+}
 
 local function factory(theProduct)
-  local defs = (function()
-    local build = require('wowapi.yaml').parseFile('data/products/' .. theProduct .. '/build.yaml')
-    local bv = build.version .. '.' .. build.build
-    local t = {}
-    for _, db in ipairs(require('build.products.' .. theProduct .. '.dblist')) do
-      local content = assert(require('pl.file').read('vendor/dbdefs/definitions/' .. db .. '.dbd'))
-      local dbd = assert(require('luadbd.parser').dbd(content))
-      local v = (function()
-        for _, version in ipairs(dbd.versions) do
-          for _, vb in ipairs(version.builds) do
-            -- Build ranges are not supported (yet).
-            if #vb == 1 and table.concat(vb[1], '.') == bv then
-              return version
-            end
-          end
-        end
-        error('cannot find ' .. bv .. ' in dbd ' .. db)
-      end)()
-      local sig, field2index = require('luadbd.sig')(dbd, v)
-      t[db] = {
-        field2index = field2index,
-        orderedfields = (function()
-          local list = {}
-          for k in pairs(field2index) do
-            table.insert(list, k)
-          end
-          table.sort(list, function(a, b)
-            return field2index[a] < field2index[b]
-          end)
-          return list
-        end)(),
-        sig = sig,
-      }
-    end
-    return t
-  end)()
+  local defs = dofile('build/products/' .. theProduct .. '/dbdefs.lua')
 
   local function create(filename)
     local dbinit = { 'BEGIN' }
     for k, v in pairs(defs) do
-      table.insert(dbinit, ('CREATE TABLE %s ("%s")'):format(k, table.concat(v.orderedfields, '","')))
+      local fieldnames = {}
+      local hasid = false
+      for _, f in ipairs(v) do
+        table.insert(fieldnames, f.name)
+        hasid = hasid or f.id
+      end
+      table.insert(dbinit, ('CREATE TABLE %s ("%s")'):format(k, table.concat(fieldnames, '","')))
+      if hasid then
+        table.insert(dbinit, ('CREATE INDEX %sIndexID ON %s (ID)'):format(k, k))
+      end
+      if indexes[k] then
+        for i, index in ipairs(indexes[k]) do
+          table.insert(dbinit, ('CREATE INDEX %sIndex%d ON %s'):format(k, i, index))
+        end
+      end
     end
     table.insert(dbinit, 'COMMIT')
     table.insert(dbinit, '')
@@ -65,23 +47,19 @@ local function factory(theProduct)
       local success, msg = pcall(function()
         local data = require('pl.file').read(('extracts/%s/db2/%s.db2'):format(theProduct, k))
         assert(data, 'missing db2 for ' .. k)
-        for row in require('dbc').rows(data, '{' .. v.sig:gsub('%.', '%?') .. '}') do
+        for row in require('tools.db2').rows(data, v) do
           local values = {}
-          for _, field in ipairs(v.orderedfields) do
-            local value = row[v.field2index[field]]
+          for fk in ipairs(v) do
+            local value = row[fk]
             local ty = type(value)
-            if ty == 'table' then
-              value = value[1]
-              ty = type(value)
-            end
             if ty == 'nil' then
               value = 'NULL'
             elseif ty == 'string' then
-              value = quote(value)
+              value = '\'' .. sqlquote(value) .. '\''
             elseif ty == 'number' then
               value = tostring(value)
             else
-              error('unexpected value of type ' .. ty .. ' on field ' .. field .. ' of table ' .. k)
+              error('unexpected value of type ' .. ty .. ' on field ' .. fk .. ' of table ' .. k)
             end
             table.insert(values, value)
           end
@@ -94,7 +72,9 @@ local function factory(theProduct)
     end
     table.insert(dbinit, 'COMMIT')
     table.insert(dbinit, '')
-    assert(db:exec(table.concat(dbinit, ';\n')) == lsqlite3.OK)
+    if db:exec(table.concat(dbinit, ';\n')) ~= lsqlite3.OK then
+      error('sqlite failure: ' .. db:errmsg())
+    end
   end
 
   return create, populate
@@ -106,8 +86,10 @@ local args = (function()
   parser:flag('-f --full', 'also include data')
   return parser:parse()
 end)()
+
 local filebase = args.full and 'data' or 'schema'
-local filename = ('build/products/%s/%s.db'):format(args.product, filebase)
+local filename = ('build/products/%s/%s.sqlite3'):format(args.product, filebase)
+
 require('pl.file').delete(filename)
 local create, populate = factory(args.product)
 local db = create(filename)

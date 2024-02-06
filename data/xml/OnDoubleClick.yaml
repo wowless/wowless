@@ -1,5 +1,0 @@
----
-name: OnDoubleClick
-extends: ScriptType
-impl:
-  script: {}

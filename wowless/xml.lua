@@ -10,7 +10,7 @@ local function preprocess(tree)
     local kids = {}
     local text = false
     if type(v.contents) == 'table' then
-      for _, kid in ipairs(v.contents or {}) do
+      for kid in pairs(v.contents) do
         local key = kid:lower()
         assert(not kids[key], kid .. ' is already a child of ' .. k)
         kids[key] = true
@@ -30,7 +30,7 @@ local function preprocess(tree)
         attrs[ak] = av.type
       end
       if type(t.contents) == 'table' then
-        for _, kid in ipairs(t.contents or {}) do
+        for kid in pairs(t.contents) do
           local key = kid:lower()
           assert(not kids[key], kid .. ' is already a child of ' .. k)
           kids[key] = true
@@ -52,7 +52,13 @@ local function preprocess(tree)
   return newtree
 end
 
-local lang = preprocess(require('build.xml'))
+local lang = setmetatable({}, {
+  __index = function(t, k)
+    local v = preprocess(require('build.products.' .. k .. '.data').xml)
+    t[k] = v
+    return v
+  end,
+})
 
 local attrBasedElementMT = {
   __index = (function()
@@ -73,31 +79,34 @@ local attrBasedElementMT = {
   end,
 }
 
-local attrMTs = (function()
-  local result = {}
-  for name, spec in pairs(lang) do
-    -- TODO be more defensive in loader.lua and remove these
-    local attrs = {
-      inherits = true,
-      intrinsic = true,
-      name = true,
-      virtual = true,
-    }
-    for attr in pairs(spec.attributes) do
-      attrs[attr] = true
+local attrMTs = setmetatable({}, {
+  __index = function(t, k)
+    local result = {}
+    for name, spec in pairs(lang[k]) do
+      -- TODO be more defensive in loader.lua and remove these
+      local attrs = {
+        inherits = true,
+        intrinsic = true,
+        name = true,
+        virtual = true,
+      }
+      for attr in pairs(spec.attributes) do
+        attrs[attr] = true
+      end
+      result[name] = {
+        __index = function(_, kk)
+          assert(attrs[kk], 'invalid table key ' .. kk)
+        end,
+        __metatable = 'attrMT:' .. name,
+        __newindex = function()
+          error('cannot add fields')
+        end,
+      }
     end
-    result[name] = {
-      __index = function(_, k)
-        assert(attrs[k], 'invalid table key ' .. k)
-      end,
-      __metatable = 'attrMT:' .. name,
-      __newindex = function()
-        error('cannot add fields')
-      end,
-    }
-  end
-  return result
-end)()
+    t[k] = result
+    return result
+  end,
+})
 
 local attributeTypes = {
   boolean = function(s)
@@ -124,13 +133,18 @@ local attributeTypes = {
     return result
   end,
 }
+for k, v in pairs(require('runtime.stringenums')) do
+  attributeTypes[k] = function(s)
+    return v[s] and s or nil
+  end
+end
 
-local function parseRoot(root, intrinsics, snapshot)
+local function parseRoot(product, root, intrinsics, snapshot)
   local warnings = {}
   local function run(e, tn, tk)
     assert(e._type == 'ELEMENT', 'invalid xml type ' .. e._type .. ' on child of ' .. tn)
     local tname = string.lower(e._name)
-    local ty = lang[tname] or snapshot[tname]
+    local ty = lang[product][tname] or snapshot[tname]
     if not ty then
       table.insert(warnings, 'unknown type ' .. tname)
       return nil
@@ -145,12 +159,13 @@ local function parseRoot(root, intrinsics, snapshot)
       return nil
     end
     local resultAttrs = {}
-    for k, v in pairs(e._attr or {}) do
+    for _, k in ipairs(e._attr) do
       local an = string.lower(k)
       local attr = ty.attributes[an]
       if not attr then
         table.insert(warnings, 'attribute ' .. k .. ' is not supported by ' .. tname)
       else
+        local v = e._attr[k]
         local vv = attributeTypes[attr](v)
         if vv == nil then
           table.insert(warnings, 'attribute ' .. k .. ' has invalid value ' .. v)
@@ -169,7 +184,7 @@ local function parseRoot(root, intrinsics, snapshot)
         line = line or kid._line
       end
       return setmetatable({
-        attr = setmetatable(resultAttrs, attrMTs[tname]),
+        attr = setmetatable(resultAttrs, attrMTs[product][tname]),
         kids = {},
         line = line,
         text = #texts > 0 and table.concat(texts, '\n') or nil,
@@ -196,7 +211,7 @@ local function parseRoot(root, intrinsics, snapshot)
         }
       end
       return setmetatable({
-        attr = setmetatable(resultAttrs, attrMTs[tname]),
+        attr = setmetatable(resultAttrs, attrMTs[product][tname]),
         kids = resultKids,
         type = tname,
       }, attrBasedElementMT)
@@ -240,14 +255,14 @@ local function xml2dom(xmlstr)
 end
 
 return {
-  newParser = function()
+  newParser = function(product)
     local intrinsics = {}
     return function(xmlstr)
       local snapshot = {}
       for k, v in pairs(intrinsics) do
         snapshot[k] = v
       end
-      return parseRoot(xml2dom(xmlstr), intrinsics, snapshot)
+      return parseRoot(product, xml2dom(xmlstr), intrinsics, snapshot)
     end
   end,
 }

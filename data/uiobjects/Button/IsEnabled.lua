@@ -1,3 +1,3 @@
 return (function(self)
-  return u(self).buttonState ~= 'DISABLED'
+  return self.buttonState ~= 'DISABLED'
 end)(...)

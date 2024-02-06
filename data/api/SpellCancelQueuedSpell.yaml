@@ -1,6 +1,0 @@
----
-name: SpellCancelQueuedSpell
-status: unimplemented
-inputs:
-- {}
-outputs: {}

@@ -1,5 +1,0 @@
----
-name: C_Garrison.GetInProgressMissions
-status: unimplemented
-outputs:
-- type: number

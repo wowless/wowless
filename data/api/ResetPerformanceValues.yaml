@@ -1,7 +1,0 @@
----
-name: ResetPerformanceValues
-status: unimplemented
-inputs:
-- {}
-outputs: {}
-debug: true

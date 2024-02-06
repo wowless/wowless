@@ -1,7 +1,0 @@
----
-name: GMSubmitBug
-status: unimplemented
-inputs:
-- - name: message
-    type: string
-outputs: {}

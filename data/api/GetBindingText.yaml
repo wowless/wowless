@@ -1,5 +1,0 @@
----
-name: GetBindingText
-status: unimplemented
-outputs:
-- type: string

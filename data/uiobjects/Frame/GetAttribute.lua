@@ -1,5 +1,5 @@
 return (function(self, arg1, arg2, arg3)
-  local attrs = u(self).attributes
+  local attrs = self.attributes
   if arg3 then
     local keys = {
       arg1 .. arg2 .. arg3,

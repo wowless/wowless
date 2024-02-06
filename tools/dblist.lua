@@ -4,27 +4,41 @@ local args = (function()
   return parser:parse()
 end)()
 
+local deps = {}
+
+local function parseYaml(f)
+  deps[f] = true
+  return (require('wowapi.yaml').parseFile(f))
+end
+
+local function readFile(f)
+  deps[f] = true
+  return (assert(require('pl.file').read(f)))
+end
+
 local function dblist(product)
   local dbset = {
     GlobalStrings = true,
     ManifestInterfaceTOCData = true,
   }
-  local productapis = require('wowapi.yaml').parseFile('data/products/' .. product .. '/apis.yaml')
-  local allapis = require('wowapi.data').apis
+  local impls = parseYaml('data/impl.yaml')
+  local productapis = parseYaml('data/products/' .. product .. '/apis.yaml')
   local sqls = {}
-  for _, apiname in pairs(productapis) do
-    local api = allapis[apiname]
-    for _, db in ipairs(api.dbs or {}) do
-      dbset[db.name] = true
-    end
-    for _, sql in ipairs(api.sqls or {}) do
-      local kk = sql.lookup and 'lookup' or 'cursor'
-      table.insert(sqls, kk .. '/' .. sql[kk])
+  for _, api in pairs(productapis) do
+    local impl = impls[api.impl]
+    if impl then
+      for _, db in ipairs(impl.dbs or {}) do
+        dbset[db.name] = true
+      end
+      for _, sql in ipairs(impl.sqls or {}) do
+        local kk = sql.lookup and 'lookup' or 'cursor'
+        table.insert(sqls, kk .. '/' .. sql[kk])
+      end
     end
   end
   for _, sql in ipairs(sqls) do
     -- We are fortunate that sqlite complains about missing tables first.
-    local sqltext = assert(require('pl.file').read('data/sql/' .. sql .. '.sql'))
+    local sqltext = readFile('data/sql/' .. sql .. '.sql')
     local db = require('lsqlite3').open_memory()
     while not db:prepare(sqltext) do
       local t = db:errmsg():match('^no such table: (%a+)$')
@@ -45,5 +59,7 @@ local function dblist(product)
 end
 
 local u = require('tools.util')
-local out = 'build/products/' .. args.product .. '/dblist.lua'
-u.writeifchanged(out, u.returntable(dblist(args.product)))
+local outfn = 'build/products/' .. args.product .. '/dblist.lua'
+local out = dblist(args.product)
+u.writedeps(outfn, deps)
+u.writeifchanged(outfn, u.returntable(out))

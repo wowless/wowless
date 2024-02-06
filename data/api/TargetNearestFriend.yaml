@@ -1,8 +1,0 @@
----
-name: TargetNearestFriend
-status: unimplemented
-inputs:
-- - name: reverse
-    nilable: true
-    type: boolean
-outputs: {}

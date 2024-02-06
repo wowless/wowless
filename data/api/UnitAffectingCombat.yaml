@@ -1,7 +1,0 @@
----
-name: UnitAffectingCombat
-status: unimplemented
-inputs:
-- - type: string
-outputs:
-- type: boolean

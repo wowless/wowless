@@ -1,0 +1,35 @@
+---
+name: impl
+type:
+  mapof:
+    key: string
+    value:
+      record:
+        frameworks:
+          type:
+            sequenceof:
+              oneof:
+              - literal: api
+              - literal: datalua
+              - literal: env
+              - literal: loader
+        sqls:
+          type:
+            sequenceof:
+              oneof:
+              - record:
+                  cursor:
+                    type:
+                      ref: sqlcursor
+                  table:
+                    type: boolean
+              - record:
+                  lookup:
+                    type:
+                      ref: sqllookup
+                  table:
+                    type: boolean
+        states:
+          type:
+            sequenceof:
+              ref: state

@@ -1,9 +1,0 @@
----
-name: C_AzeriteEssence.GetMilestones
-status: unimplemented
-inputs:
-- {}
-outputs:
-- stub:
-  - slot: 1
-  type: table

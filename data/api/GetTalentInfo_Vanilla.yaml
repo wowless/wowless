@@ -1,7 +1,0 @@
----
-name: GetTalentInfo_Vanilla
-status: implemented
-sqls:
-- lookup: GetTalentInfo_Vanilla
-states:
-- Units

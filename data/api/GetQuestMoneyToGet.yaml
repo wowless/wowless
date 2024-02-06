@@ -1,8 +1,0 @@
----
-name: GetQuestMoneyToGet
-status: unimplemented
-inputs:
-- {}
-outputs:
-- name: money
-  type: number

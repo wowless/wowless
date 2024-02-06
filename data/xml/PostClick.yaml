@@ -1,6 +1,0 @@
----
-name: PostClick
-extends: ScriptType
-impl:
-  script:
-    args: self, button, down

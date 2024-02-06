@@ -1,8 +1,0 @@
----
-name: UnitFullName
-status: unimplemented
-inputs:
-- - type: string
-outputs:
-- type: string
-- type: string

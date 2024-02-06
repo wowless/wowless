@@ -1,5 +1,0 @@
----
-name: OnMouseDown
-extends: ScriptType
-impl:
-  script: {}

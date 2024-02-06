@@ -1,7 +1,0 @@
----
-name: GetMinimapZoneText
-status: unimplemented
-inputs:
-- {}
-outputs:
-- type: string

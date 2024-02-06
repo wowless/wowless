@@ -1,8 +1,0 @@
----
-name: SetConsoleKey
-status: unimplemented
-inputs:
-- - name: key
-    nilable: true
-    type: string
-outputs: {}

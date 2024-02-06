@@ -1,5 +1,0 @@
----
-name: OnTextChanged
-extends: ScriptType
-impl:
-  script: {}

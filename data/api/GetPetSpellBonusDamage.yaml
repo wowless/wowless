@@ -1,8 +1,0 @@
----
-name: GetPetSpellBonusDamage
-status: unimplemented
-inputs:
-- {}
-outputs:
-- name: spellDamageBonus
-  type: number

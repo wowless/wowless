@@ -1,6 +1,9 @@
-local writeFile = require('pl.file').write
+local plfile = require('pl.file')
 local yaml = require('wowapi.yaml')
 for _, fn in ipairs(arg) do
-  local data = yaml.parseFile(fn)
-  writeFile(fn, yaml.pprint(data))
+  local orig = plfile.read(fn)
+  local formatted = yaml.pprint(yaml.parse(orig))
+  if formatted ~= orig then
+    plfile.write(fn, formatted)
+  end
 end

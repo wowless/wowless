@@ -1,8 +1,0 @@
----
-name: GetReleaseTimeRemaining
-status: unimplemented
-inputs:
-- {}
-outputs:
-- name: timeRemaining
-  type: number

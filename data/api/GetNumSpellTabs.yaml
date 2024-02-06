@@ -1,5 +1,0 @@
----
-name: GetNumSpellTabs
-status: unimplemented
-outputs:
-- type: number

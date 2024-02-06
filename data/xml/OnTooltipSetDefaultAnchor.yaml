@@ -1,5 +1,0 @@
----
-name: OnTooltipSetDefaultAnchor
-extends: ScriptType
-impl:
-  script: {}

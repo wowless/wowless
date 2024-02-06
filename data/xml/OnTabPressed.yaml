@@ -1,5 +1,0 @@
----
-name: OnTabPressed
-extends: ScriptType
-impl:
-  script: {}

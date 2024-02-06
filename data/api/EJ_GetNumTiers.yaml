@@ -1,8 +1,0 @@
----
-name: EJ_GetNumTiers
-status: unimplemented
-inputs:
-- {}
-outputs:
-- name: numTiers
-  type: number

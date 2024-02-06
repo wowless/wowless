@@ -1,7 +1,0 @@
----
-name: DeathRecap_HasEvents
-status: unimplemented
-inputs:
-- {}
-outputs:
-- type: boolean

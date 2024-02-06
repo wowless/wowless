@@ -1,5 +1,0 @@
----
-name: GetLFGDeserterExpiration
-status: unimplemented
-outputs:
-- type: number

@@ -1,3 +1,3 @@
 return (function(self)
-  return u(self).bottom + u(self).height
+  return self.bottom + self.height
 end)(...)

@@ -1,6 +1,0 @@
----
-name: RequestLFDPlayerLockInfo
-status: unimplemented
-inputs:
-- {}
-outputs: {}

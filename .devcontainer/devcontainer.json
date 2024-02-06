@@ -1,26 +1,23 @@
 {
-    "build": {
-        "context": "..",
-        "dockerfile": "Dockerfile"
-    },
-    "customizations": {
-      "codespaces": {
-        "repositories": {
-          "lua-wow-tools/*": {
-            "permissions": "write-all"
-          }
-        }
-      },
-      "vscode": {
-        "extensions": [
-          "EditorConfig.EditorConfig"
-        ]
-      }
-    },
-    "features": {
-        "github-cli": {}
-    },
-    "name": "lua-wow-tools/wowless",
-    "postCreateCommand": "git submodule update --init --recursive --depth 1 && pre-commit install && pre-commit run -a -v --show-diff-on-failure",
-    "remoteUser": "vscode"
+  "build": {
+    "context": "..",
+    "dockerfile": "Dockerfile"
+  },
+  "initializeCommand": "cp -n .env.dist .env",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "EditorConfig.EditorConfig",
+        "ms-vscode.cpptools",
+        "qwtel.sqlite-viewer"
+      ]
+    }
+  },
+  "features": {
+    "ghcr.io/devcontainers/features/github-cli:1": {}
+  },
+  "name": "wowless/wowless",
+  "postCreateCommand": "pre-commit install --install-hooks",
+  "remoteUser": "vscode",
+  "runArgs": ["--env-file", ".env"]
 }

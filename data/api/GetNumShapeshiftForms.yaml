@@ -1,5 +1,0 @@
----
-name: GetNumShapeshiftForms
-status: unimplemented
-outputs:
-- type: number

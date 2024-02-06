@@ -1,6 +1,0 @@
----
-name: GetStablePetFoodTypes
-status: unimplemented
-inputs:
-- - name: index
-    type: number

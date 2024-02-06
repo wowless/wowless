@@ -1,7 +1,0 @@
----
-name: GetCraftName
-status: unimplemented
-inputs:
-- {}
-outputs:
-- type: string

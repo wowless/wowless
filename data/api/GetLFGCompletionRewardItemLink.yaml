@@ -1,9 +1,0 @@
----
-name: GetLFGCompletionRewardItemLink
-status: unimplemented
-inputs:
-- - name: index
-    type: number
-outputs:
-- name: rewardItemLink
-  type: string

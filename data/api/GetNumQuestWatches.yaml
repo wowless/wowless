@@ -1,7 +1,0 @@
----
-name: GetNumQuestWatches
-status: unimplemented
-inputs:
-- {}
-outputs:
-- type: number

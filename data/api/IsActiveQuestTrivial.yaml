@@ -1,9 +1,0 @@
----
-name: IsActiveQuestTrivial
-status: unimplemented
-inputs:
-- - name: index
-    type: number
-outputs:
-- name: isActiveQuestTrivial
-  type: boolean

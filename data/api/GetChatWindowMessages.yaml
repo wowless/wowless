@@ -1,8 +1,0 @@
----
-name: GetChatWindowMessages
-status: implemented
-inputs:
-- - name: index
-    type: number
-frameworks:
-- env

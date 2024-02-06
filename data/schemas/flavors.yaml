@@ -1,0 +1,13 @@
+---
+name: flavors
+type:
+  mapof:
+    key: string
+    value:
+      record:
+        alternate:
+          required: true
+          type: string
+        dir:
+          required: true
+          type: string

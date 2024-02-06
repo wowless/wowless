@@ -1,0 +1,2157 @@
+---
+Actor:
+  fields: {}
+  inherits:
+    ParentedObjectBase: {}
+    RegionBase: {}
+    ScriptObjectBase: {}
+  methods:
+    ClearModel: {}
+    GetActiveBoundingBox: {}
+    GetAnimation: {}
+    GetAnimationBlendOperation: {}
+    GetAnimationVariation: {}
+    GetDesaturation: {}
+    GetMaxBoundingBox: {}
+    GetModelFileID: {}
+    GetModelPath: {}
+    GetModelUnitGUID: {}
+    GetParticleOverrideScale: {}
+    GetPitch: {}
+    GetPosition: {}
+    GetRoll: {}
+    GetSpellVisualKit: {}
+    GetYaw: {}
+    IsLoaded: {}
+    IsUsingCenterForOrigin: {}
+    PlayAnimationKit: {}
+    SetAnimation: {}
+    SetAnimationBlendOperation: {}
+    SetDesaturation: {}
+    SetModelByCreatureDisplayID: {}
+    SetModelByFileID: {}
+    SetModelByPath: {}
+    SetModelByUnit: {}
+    SetParticleOverrideScale: {}
+    SetPitch: {}
+    SetPosition: {}
+    SetRoll: {}
+    SetSpellVisualKit: {}
+    SetUseCenterForOrigin: {}
+    SetYaw: {}
+    StopAnimationKit: {}
+  objectType: ModelSceneActor
+Alpha:
+  inherits:
+    Animation: {}
+  methods:
+    GetFromAlpha: {}
+    GetToAlpha: {}
+    SetFromAlpha: {}
+    SetToAlpha: {}
+Animation:
+  fields:
+    endDelay:
+      init: 0
+      type: number
+    smoothing:
+      init: OUT
+      type: SmoothingType
+    startDelay:
+      init: 0
+      type: number
+  inherits:
+    ParentedObject: {}
+    ScriptObject: {}
+  methods:
+    GetDuration: {}
+    GetElapsed: {}
+    GetEndDelay:
+      getter:
+      - name: endDelay
+    GetOrder: {}
+    GetProgress: {}
+    GetRegionParent:
+      impl: Animation/GetRegionParent
+    GetSmoothing:
+      getter:
+      - name: smoothing
+    GetSmoothProgress: {}
+    GetStartDelay:
+      getter:
+      - name: startDelay
+    GetTarget: {}
+    IsDelaying: {}
+    IsDone: {}
+    IsPaused: {}
+    IsPlaying: {}
+    IsStopped: {}
+    Pause: {}
+    Play: {}
+    Restart: {}
+    SetChildKey: {}
+    SetDuration: {}
+    SetEndDelay:
+      setter:
+      - name: endDelay
+    SetOrder: {}
+    SetPlaying: {}
+    SetSmoothing:
+      setter:
+      - name: smoothing
+    SetSmoothProgress: {}
+    SetStartDelay:
+      setter:
+      - name: startDelay
+    SetTarget: {}
+    SetTargetKey: {}
+    SetTargetName: {}
+    SetTargetParent: {}
+    Stop: {}
+AnimationGroup:
+  inherits:
+    ParentedObjectBase: {}
+    ScriptObject: {}
+  methods:
+    CreateAnimation:
+      impl: AnimationGroup/CreateAnimation
+      inputs:
+      - default: Animation
+        name: animationType
+        nilable: true
+        type: string
+      - name: name
+        nilable: true
+        type: string
+      - name: inheritsFrom
+        nilable: true
+        type: string
+      outputs:
+      - name: animation
+        type: Animation
+    Finish: {}
+    GetAnimations:
+      impl: AnimationGroup/GetAnimations
+    GetAnimationSpeedMultiplier: {}
+    GetDuration: {}
+    GetElapsed: {}
+    GetLooping: {}
+    GetLoopState: {}
+    GetProgress: {}
+    IsDone: {}
+    IsPaused: {}
+    IsPendingFinish: {}
+    IsPlaying: {}
+    IsReverse: {}
+    IsSetToFinalAlpha: {}
+    Pause: {}
+    Play: {}
+    RemoveAnimations: {}
+    Restart: {}
+    SetAnimationSpeedMultiplier: {}
+    SetLooping: {}
+    SetPlaying: {}
+    SetToFinalAlpha: {}
+    Stop: {}
+Browser:
+  inherits:
+    Frame: {}
+  methods:
+    ClearFocus: {}
+    CopyExternalLink: {}
+    DeleteCookies: {}
+    NavigateBack: {}
+    NavigateForward: {}
+    NavigateHome: {}
+    NavigateReload: {}
+    NavigateStop: {}
+    NavigateTo: {}
+    OpenExternalLink: {}
+    OpenTicket: {}
+    SetFocus: {}
+    SetZoom: {}
+Button:
+  fields:
+    beingClicked:
+      init: false
+      type: boolean
+    buttonLocked:
+      init: false
+      type: boolean
+    buttonState:
+      init: NORMAL
+      type: string
+    disabledTexture:
+      nilable: true
+      type: Texture
+    fontstring:
+      nilable: true
+      type: FontString
+    highlightTexture:
+      nilable: true
+      type: Texture
+    motionScriptsWhileDisabled:
+      init: false
+      type: boolean
+    normalFontObject:
+      nilable: true
+      type: Font
+    normalTexture:
+      nilable: true
+      type: Texture
+    pushedTextOffsetX:
+      init: 0
+      type: number
+    pushedTextOffsetY:
+      init: 0
+      type: number
+    pushedTexture:
+      nilable: true
+      type: Texture
+    registeredClicks:
+      init:
+        leftbuttonup: true
+      type: table
+  inherits:
+    Frame: {}
+  methods:
+    ClearDisabledTexture: {}
+    ClearHighlightTexture: {}
+    ClearNormalTexture: {}
+    ClearPushedTexture: {}
+    Click:
+      impl: Button/Click
+    Disable:
+      impl: Button/Disable
+    Enable:
+      impl: Button/Enable
+    GetButtonState:
+      getter:
+      - name: buttonState
+    GetDisabledFontObject: {}
+    GetDisabledTexture:
+      getter:
+      - name: disabledTexture
+    GetFontString:
+      getter:
+      - name: fontstring
+    GetHighlightFontObject: {}
+    GetHighlightTexture:
+      getter:
+      - name: highlightTexture
+    GetMotionScriptsWhileDisabled:
+      getter:
+      - name: motionScriptsWhileDisabled
+    GetNormalFontObject:
+      getter:
+      - name: normalFontObject
+    GetNormalTexture:
+      getter:
+      - name: normalTexture
+    GetPushedTextOffset:
+      getter:
+      - name: pushedTextOffsetX
+      - name: pushedTextOffsetY
+    GetPushedTexture:
+      getter:
+      - name: pushedTexture
+    GetText:
+      impl: Button/GetText
+    GetTextHeight:
+      outputs:
+      - type: number
+    GetTextWidth:
+      outputs:
+      - type: number
+    IsEnabled:
+      impl: Button/IsEnabled
+    RegisterForClicks:
+      impl: Button/RegisterForClicks
+    RegisterForMouse: {}
+    SetButtonState:
+      impl: Button/SetButtonState
+    SetDisabledAtlas:
+      impl: Button/SetDisabledAtlas
+    SetDisabledFontObject: {}
+    SetDisabledTexture:
+      impl: Button/SetDisabledTexture
+    SetEnabled:
+      impl: Button/SetEnabled
+    SetFontString:
+      impl: Button/SetFontString
+      inputs:
+      - name: fontString
+        type: FontString
+      outputs: {}
+    SetFormattedText:
+      impl: Button/SetFormattedText
+    SetHighlightAtlas:
+      impl: Button/SetHighlightAtlas
+    SetHighlightFontObject: {}
+    SetHighlightTexture:
+      impl: Button/SetHighlightTexture
+    SetMotionScriptsWhileDisabled:
+      setter:
+      - name: motionScriptsWhileDisabled
+    SetNormalAtlas:
+      impl: Button/SetNormalAtlas
+    SetNormalFontObject:
+      setter:
+      - name: normalFontObject
+    SetNormalTexture:
+      impl: Button/SetNormalTexture
+    SetPushedAtlas:
+      impl: Button/SetPushedAtlas
+    SetPushedTextOffset:
+      setter:
+      - name: pushedTextOffsetX
+      - name: pushedTextOffsetY
+    SetPushedTexture:
+      impl: Button/SetPushedTexture
+    SetText:
+      impl: Button/SetText
+CheckButton:
+  fields:
+    checked:
+      init: false
+      type: boolean
+    checkedTexture:
+      nilable: true
+      type: Texture
+    disabledCheckedTexture:
+      nilable: true
+      type: Texture
+  inherits:
+    Button: {}
+  methods:
+    GetChecked:
+      getter:
+      - name: checked
+    GetCheckedTexture:
+      getter:
+      - name: checkedTexture
+    GetDisabledCheckedTexture:
+      getter:
+      - name: disabledCheckedTexture
+    SetChecked:
+      impl: CheckButton/SetChecked
+    SetCheckedTexture:
+      impl: CheckButton/SetCheckedTexture
+    SetDisabledCheckedTexture:
+      setter:
+      - name: disabledCheckedTexture
+Checkout:
+  inherits:
+    Frame: {}
+  methods:
+    CancelOpenCheckout: {}
+    ClearFocus: {}
+    CloseCheckout: {}
+    CopyExternalLink: {}
+    OpenCheckout: {}
+    OpenExternalLink: {}
+    SetFocus: {}
+    SetZoom: {}
+  objectType: BlizzardCheckout
+CinematicModel:
+  inherits:
+    PlayerModel: {}
+  methods:
+    EquipItem: {}
+    InitializeCamera: {}
+    InitializePanCamera: {}
+    SetAnimOffset: {}
+    SetCreatureData: {}
+    SetFacingLeft: {}
+    SetFadeTimes: {}
+    SetHeightFactor: {}
+    SetJumpInfo: {}
+    SetPanDistance: {}
+    SetSpellVisualKit: {}
+    SetTargetDistance: {}
+    StartPan: {}
+    StopPan: {}
+    UnequipItems: {}
+ColorSelect:
+  fields:
+    colorValueTexture:
+      nilable: true
+      type: Texture
+    colorValueThumbTexture:
+      nilable: true
+      type: Texture
+    colorWheelTexture:
+      nilable: true
+      type: Texture
+    colorWheelThumbTexture:
+      nilable: true
+      type: Texture
+  inherits:
+    Frame: {}
+  methods:
+    ClearColorWheelTexture: {}
+    GetColorAlpha: {}
+    GetColorAlphaTexture: {}
+    GetColorAlphaThumbTexture: {}
+    GetColorHSV:
+      outputs:
+      - name: h
+        type: number
+      - name: s
+        type: number
+      - name: v
+        type: number
+    GetColorRGB:
+      outputs:
+      - name: r
+        type: number
+      - name: g
+        type: number
+      - name: b
+        type: number
+    GetColorValueTexture:
+      getter:
+      - name: colorValueTexture
+    GetColorValueThumbTexture:
+      getter:
+      - name: colorValueThumbTexture
+    GetColorWheelTexture:
+      getter:
+      - name: colorWheelTexture
+    GetColorWheelThumbTexture:
+      getter:
+      - name: colorWheelThumbTexture
+    SetColorAlpha: {}
+    SetColorAlphaTexture: {}
+    SetColorAlphaThumbTexture: {}
+    SetColorHSV: {}
+    SetColorRGB: {}
+    SetColorValueTexture:
+      setter:
+      - name: colorValueTexture
+    SetColorValueThumbTexture:
+      setter:
+      - name: colorValueThumbTexture
+    SetColorWheelTexture:
+      setter:
+      - name: colorWheelTexture
+    SetColorWheelThumbTexture:
+      setter:
+      - name: colorWheelThumbTexture
+ControlPoint:
+  inherits:
+    ParentedObject: {}
+  methods:
+    GetOffset: {}
+    GetOrder: {}
+    SetOffset: {}
+    SetOrder: {}
+Cooldown:
+  fields:
+    blingTexture:
+      nilable: true
+      type: Texture
+    durationMillis:
+      init: 0
+      type: number
+    edgeTexture:
+      nilable: true
+      type: Texture
+    startTimeMillis:
+      init: 0
+      type: number
+    swipeTexture:
+      nilable: true
+      type: Texture
+  inherits:
+    Frame: {}
+  methods:
+    Clear: {}
+    GetCooldownDisplayDuration: {}
+    GetCooldownDuration: {}
+    GetCooldownTimes:
+      getter:
+      - name: startTimeMillis
+      - name: durationMillis
+    GetDrawBling: {}
+    GetDrawEdge: {}
+    GetDrawSwipe: {}
+    GetEdgeScale: {}
+    GetReverse: {}
+    GetRotation: {}
+    IsPaused: {}
+    Pause: {}
+    Resume: {}
+    SetBlingTexture:
+      setter:
+      - name: blingTexture
+    SetCooldown: {}
+    SetCooldownDuration: {}
+    SetCooldownUNIX: {}
+    SetCountdownAbbrevThreshold: {}
+    SetCountdownFont: {}
+    SetDrawBling: {}
+    SetDrawEdge: {}
+    SetDrawSwipe: {}
+    SetEdgeScale: {}
+    SetEdgeTexture:
+      setter:
+      - name: edgeTexture
+    SetHideCountdownNumbers: {}
+    SetReverse: {}
+    SetRotation: {}
+    SetSwipeColor: {}
+    SetSwipeTexture:
+      setter:
+      - name: swipeTexture
+    SetTexCoordRange: {}
+    SetUseCircularEdge: {}
+DressUpModel:
+  inherits:
+    PlayerModel: {}
+  methods:
+    Dress: {}
+    GetAutoDress: {}
+    GetSheathed: {}
+    SetAutoDress: {}
+    SetSheathed: {}
+    TryOn: {}
+    Undress: {}
+    UndressSlot: {}
+EditBox:
+  fields:
+    editboxText:
+      init: ''
+      type: string
+    enabled:
+      init: true
+      type: boolean
+    historyLines:
+      init: 10
+      type: number
+    isAutoFocus:
+      init: true
+      type: boolean
+    isCountInvisibleLetters:
+      init: false
+      type: boolean
+    isMultiLine:
+      init: false
+      type: boolean
+    isSecureText:
+      init: false
+      type: boolean
+    maxBytes:
+      init: 200
+      type: number
+    maxLetters:
+      init: 64
+      type: number
+  inherits:
+    FontInstance: {}
+    Frame: {}
+  methods:
+    AddHistoryLine: {}
+    ClearFocus: {}
+    ClearHighlightText: {}
+    ClearHistory: {}
+    Disable:
+      impl: EditBox/Disable
+    Enable:
+      impl: EditBox/Enable
+    GetAltArrowKeyMode: {}
+    GetBlinkSpeed: {}
+    GetCursorPosition: {}
+    GetDisplayText: {}
+    GetHighlightColor: {}
+    GetHistoryLines:
+      getter:
+      - name: historyLines
+    GetInputLanguage:
+      outputs:
+      - name: language
+        stub: ROMAN
+        type: string
+    GetMaxBytes:
+      getter:
+      - name: maxBytes
+    GetMaxLetters:
+      getter:
+      - name: maxLetters
+    GetNumber:
+      outputs:
+      - type: number
+    GetNumLetters: {}
+    GetText:
+      getter:
+      - name: editboxText
+    GetTextInsets: {}
+    GetUTF8CursorPosition: {}
+    GetVisibleTextByteLimit: {}
+    HasFocus: {}
+    HasText: {}
+    HighlightText: {}
+    Insert:
+      impl: EditBox/Insert
+    IsAlphabeticOnly: {}
+    IsAutoFocus:
+      getter:
+      - name: isAutoFocus
+    IsCountInvisibleLetters:
+      getter:
+      - name: isCountInvisibleLetters
+    IsEnabled:
+      getter:
+      - name: enabled
+    IsInIMECompositionMode: {}
+    IsMultiLine:
+      getter:
+      - name: isMultiLine
+    IsNumeric: {}
+    IsNumericFullRange: {}
+    IsPassword: {}
+    IsSecureText:
+      getter:
+      - name: isSecureText
+    ResetInputMode: {}
+    SetAlphabeticOnly: {}
+    SetAltArrowKeyMode: {}
+    SetAutoFocus:
+      setter:
+      - name: isAutoFocus
+    SetBlinkSpeed: {}
+    SetCountInvisibleLetters:
+      setter:
+      - name: isCountInvisibleLetters
+    SetCursorPosition: {}
+    SetEnabled:
+      setter:
+      - name: enabled
+    SetFocus: {}
+    SetHighlightColor: {}
+    SetHistoryLines:
+      setter:
+      - name: historyLines
+    SetMaxBytes:
+      setter:
+      - name: maxBytes
+    SetMaxLetters:
+      setter:
+      - name: maxLetters
+    SetMultiLine:
+      setter:
+      - name: isMultiLine
+    SetNumber: {}
+    SetNumeric: {}
+    SetNumericFullRange: {}
+    SetPassword: {}
+    SetSecureText:
+      setter:
+      - name: isSecureText
+    SetSecurityDisablePaste: {}
+    SetSecurityDisableSetText: {}
+    SetText:
+      setter:
+      - name: editboxText
+    SetTextInsets: {}
+    SetVisibleTextByteLimit: {}
+    ToggleInputLanguage: {}
+FogOfWarFrame:
+  inherits:
+    Frame: {}
+  methods:
+    GetFogOfWarBackgroundAtlas: {}
+    GetFogOfWarBackgroundTexture: {}
+    GetFogOfWarMaskAtlas: {}
+    GetFogOfWarMaskTexture: {}
+    GetMaskScalar: {}
+    GetUiMapID: {}
+    SetFogOfWarBackgroundAtlas: {}
+    SetFogOfWarBackgroundTexture: {}
+    SetFogOfWarMaskAtlas: {}
+    SetFogOfWarMaskTexture: {}
+    SetMaskScalar: {}
+    SetUiMapID: {}
+Font:
+  inherits:
+    FontInstance: {}
+    UIObject: {}
+  methods:
+    CopyFontObject: {}
+    GetAlpha: {}
+    SetAlpha: {}
+FontInstance:
+  inherits: {}
+  methods:
+    GetFont:
+      outputs:
+      - name: fontName
+        type: string
+      - name: fontHeight
+        stub: 12
+        type: number
+      - name: fontFlags
+        type: string
+    GetFontObject:
+      impl: FontInstance/GetFontObject
+      inputs: {}
+      outputs:
+      - name: font
+        nilable: true
+        type: FontInstance
+    GetIndentedWordWrap: {}
+    GetJustifyH: {}
+    GetJustifyV: {}
+    GetShadowColor:
+      outputs:
+      - type: number
+      - type: number
+      - type: number
+    GetShadowOffset:
+      outputs:
+      - type: number
+    GetSpacing:
+      outputs:
+      - type: number
+    GetTextColor:
+      outputs:
+      - type: number
+      - type: number
+      - type: number
+    SetFont: {}
+    SetFontObject: {}
+    SetIndentedWordWrap: {}
+    SetJustifyH: {}
+    SetJustifyV: {}
+    SetShadowColor: {}
+    SetShadowOffset: {}
+    SetSpacing: {}
+    SetTextColor: {}
+  virtual: true
+FontString:
+  fields:
+    maxLines:
+      init: 0
+      type: number
+    text:
+      nilable: true
+      type: string
+    textScale:
+      init: 1
+      type: number
+  inherits:
+    FontInstance: {}
+    LayeredRegion: {}
+    ScriptObject: {}
+  methods:
+    CalculateScreenAreaFromCharacterSpan: {}
+    CanNonSpaceWrap: {}
+    CanWordWrap: {}
+    FindCharacterIndexAtCoordinate: {}
+    GetFieldSize: {}
+    GetLineHeight:
+      outputs:
+      - type: number
+    GetMaxLines:
+      getter:
+      - name: maxLines
+    GetNumLines:
+      outputs:
+      - type: number
+    GetRotation: {}
+    GetStringHeight:
+      outputs:
+      - type: number
+    GetStringWidth:
+      outputs:
+      - type: number
+    GetText:
+      getter:
+      - name: text
+    GetTextScale:
+      getter:
+      - name: textScale
+    GetUnboundedStringWidth:
+      outputs:
+      - type: number
+    GetVertexColor: {}
+    GetWrappedWidth:
+      outputs:
+      - type: number
+    IsTruncated: {}
+    SetAlphaGradient: {}
+    SetFixedColor: {}
+    SetFormattedText: {}
+    SetMaxLines:
+      setter:
+      - name: maxLines
+    SetNonSpaceWrap: {}
+    SetRotation: {}
+    SetText:
+      impl: FontString/SetText
+    SetTextHeight: {}
+    SetTextScale:
+      setter:
+      - name: textScale
+    SetWordWrap: {}
+  warner: true
+Frame:
+  fields:
+    attributes:
+      init: {}
+      type: table
+    frameLevel:
+      init: 0
+      type: number
+    frameStrata:
+      init: MEDIUM
+      type: FrameStrata
+    hasFixedFrameLevel:
+      init: false
+      type: boolean
+    hasFixedFrameStrata:
+      init: false
+      type: boolean
+    hyperlinksEnabled:
+      init: false
+      type: boolean
+    id:
+      init: 0
+      type: number
+    isClampedToScreen:
+      init: false
+      type: boolean
+    isUserPlaced:
+      init: false
+      type: boolean
+    maxResizeHeight:
+      init: 0
+      type: number
+    maxResizeWidth:
+      init: 0
+      type: number
+    minResizeHeight:
+      init: 0
+      type: number
+    minResizeWidth:
+      init: 0
+      type: number
+    movable:
+      init: false
+      type: boolean
+    propagateKeyboardInput:
+      init: false
+      type: boolean
+    resizable:
+      init: false
+      type: boolean
+    toplevel:
+      init: false
+      type: boolean
+  inherits:
+    Region: {}
+    ScriptObject: {}
+  methods:
+    AbortDrag: {}
+    CanChangeAttribute: {}
+    CreateFontString:
+      impl: Frame/CreateFontString
+      inputs:
+      - name: name
+        nilable: true
+        type: string
+      - default: ARTWORK
+        name: drawLayer
+        nilable: true
+        type: DrawLayer
+      - name: templateName
+        nilable: true
+        type: string
+      outputs:
+      - name: fontString
+        type: FontString
+    CreateLine:
+      impl: Frame/CreateLine
+      inputs: {}
+      outputs:
+      - name: line
+        type: Line
+    CreateMaskTexture:
+      impl: Frame/CreateMaskTexture
+      inputs:
+      - name: name
+        nilable: true
+        type: string
+      - name: layer
+        nilable: true
+        type: DrawLayer
+      - name: inheritsFrom
+        nilable: true
+        type: string
+      - name: subLayer
+        nilable: true
+        type: number
+      outputs:
+      - name: mask
+        type: MaskTexture
+    CreateTexture:
+      impl: Frame/CreateTexture
+      inputs:
+      - name: name
+        nilable: true
+        type: string
+      - name: layer
+        nilable: true
+        type: DrawLayer
+      - name: inheritsFrom
+        nilable: true
+        type: string
+      - name: subLayer
+        nilable: true
+        type: number
+      outputs:
+      - name: texture
+        type: Texture
+    DesaturateHierarchy: {}
+    DisableDrawLayer: {}
+    DoesClipChildren: {}
+    EnableDrawLayer: {}
+    EnableGamePadButton: {}
+    EnableGamePadStick: {}
+    EnableKeyboard: {}
+    ExecuteAttribute: {}
+    GetAttribute:
+      impl: Frame/GetAttribute
+    GetBoundsRect: {}
+    GetChildren:
+      impl: Frame/GetChildren
+    GetClampRectInsets: {}
+    GetDontSavePosition: {}
+    GetEffectiveAlpha:
+      impl: Frame/GetEffectiveAlpha
+    GetEffectivelyFlattensRenderLayers: {}
+    GetFlattensRenderLayers: {}
+    GetFrameLevel:
+      getter:
+      - name: frameLevel
+    GetFrameStrata:
+      getter:
+      - name: frameStrata
+    GetHitRectInsets: {}
+    GetHyperlinksEnabled:
+      getter:
+      - name: hyperlinksEnabled
+    GetID:
+      getter:
+      - name: id
+    GetNumChildren:
+      impl: Frame/GetNumChildren
+    GetNumRegions:
+      impl: Frame/GetNumRegions
+    GetPropagateKeyboardInput:
+      getter:
+      - name: propagateKeyboardInput
+    GetRaisedFrameLevel: {}
+    GetRegions:
+      impl: Frame/GetRegions
+    GetResizeBounds:
+      getter:
+      - name: minResizeWidth
+      - name: minResizeHeight
+      - name: maxResizeWidth
+      - name: maxResizeHeight
+    GetWindow: {}
+    HasFixedFrameLevel:
+      getter:
+      - name: hasFixedFrameLevel
+    HasFixedFrameStrata:
+      getter:
+      - name: hasFixedFrameStrata
+    InterceptStartDrag: {}
+    IsClampedToScreen:
+      getter:
+      - name: isClampedToScreen
+    IsEventRegistered:
+      impl: Frame/IsEventRegistered
+    IsGamePadButtonEnabled: {}
+    IsGamePadStickEnabled: {}
+    IsKeyboardEnabled: {}
+    IsMovable:
+      getter:
+      - name: movable
+    IsResizable:
+      getter:
+      - name: resizable
+    IsToplevel:
+      getter:
+      - name: toplevel
+    IsUserPlaced:
+      getter:
+      - name: isUserPlaced
+    LockHighlight: {}
+    Lower: {}
+    Raise: {}
+    RegisterAllEvents:
+      impl: Frame/RegisterAllEvents
+    RegisterEvent:
+      impl: Frame/RegisterEvent
+    RegisterForDrag: {}
+    RegisterUnitEvent:
+      impl: Frame/RegisterUnitEvent
+    RotateTextures: {}
+    SetAttribute:
+      impl: Frame/SetAttribute
+    SetAttributeNoHandler:
+      impl: Frame/SetAttributeNoHandler
+    SetClampedToScreen:
+      setter:
+      - name: isClampedToScreen
+    SetClampRectInsets: {}
+    SetClipsChildren: {}
+    SetDontSavePosition: {}
+    SetDrawLayerEnabled: {}
+    SetFixedFrameLevel:
+      setter:
+      - name: hasFixedFrameLevel
+    SetFixedFrameStrata:
+      setter:
+      - name: hasFixedFrameStrata
+    SetFlattensRenderLayers: {}
+    SetFrameLevel:
+      impl: Frame/SetFrameLevel
+    SetFrameStrata:
+      setter:
+      - name: frameStrata
+    SetHighlightLocked: {}
+    SetHitRectInsets: {}
+    SetHyperlinksEnabled:
+      setter:
+      - name: hyperlinksEnabled
+    SetID:
+      setter:
+      - name: id
+    SetIsFrameBuffer: {}
+    SetMovable:
+      setter:
+      - name: movable
+    SetPropagateKeyboardInput:
+      setter:
+      - name: propagateKeyboardInput
+    SetResizable:
+      setter:
+      - name: resizable
+    SetResizeBounds:
+      impl: Frame/SetResizeBounds
+    SetToplevel:
+      setter:
+      - name: toplevel
+    SetUserPlaced:
+      setter:
+      - name: isUserPlaced
+    SetWindow: {}
+    StartMoving: {}
+    StartSizing: {}
+    StopMovingOrSizing: {}
+    UnlockHighlight: {}
+    UnregisterAllEvents:
+      impl: Frame/UnregisterAllEvents
+    UnregisterEvent:
+      impl: Frame/UnregisterEvent
+GameTooltip:
+  fields:
+    tooltipAnchorType:
+      init: ANCHOR_NONE
+      type: string
+    tooltipLines:
+      init: 0
+      type: number
+    tooltipOwner:
+      nilable: true
+      type: Frame
+  inherits:
+    Frame: {}
+  methods:
+    AddDoubleLine: {}
+    AddFontStrings: {}
+    AddLine: {}
+    AddSpellByID: {}
+    AddTexture: {}
+    AdvanceSecondaryCompareItem: {}
+    AppendText: {}
+    ClearLines: {}
+    CopyTooltip: {}
+    FadeOut: {}
+    GetAnchorType:
+      getter:
+      - name: tooltipAnchorType
+    GetItem: {}
+    GetMinimumWidth:
+      outputs:
+      - type: number
+    GetOwner:
+      getter:
+      - name: tooltipOwner
+    GetPadding: {}
+    GetSpell: {}
+    GetUnit: {}
+    IsEquippedItem: {}
+    IsOwned:
+      impl: GameTooltip/IsOwned
+    IsUnit: {}
+    NumLines:
+      getter:
+      - name: tooltipLines
+    ResetSecondaryCompareItem: {}
+    SetAction: {}
+    SetAnchorType: {}
+    SetAuctionItem: {}
+    SetAuctionSellItem: {}
+    SetBackpackToken: {}
+    SetBagItem: {}
+    SetBagItemChild: {}
+    SetBuybackItem: {}
+    SetCompareItem: {}
+    SetCraftItem: {}
+    SetCraftSpell: {}
+    SetCurrencyToken: {}
+    SetCurrencyTokenByID: {}
+    SetEngravingRune: {}
+    SetEquipmentSet: {}
+    SetExistingSocketGem: {}
+    SetFrameStack: {}
+    SetGuildBankItem: {}
+    SetHeirloomByItemID: {}
+    SetHyperlink: {}
+    SetInboxItem: {}
+    SetInstanceLockEncountersComplete: {}
+    SetInventoryItem: {}
+    SetInventoryItemByID: {}
+    SetItemByID: {}
+    SetLFGDungeonReward: {}
+    SetLFGDungeonShortageReward: {}
+    SetLootCurrency: {}
+    SetLootItem: {}
+    SetLootRollItem: {}
+    SetMerchantCostItem: {}
+    SetMerchantItem: {}
+    SetMinimumWidth: {}
+    SetOwner:
+      impl: GameTooltip/SetOwner
+      inputs:
+      - name: owner
+        type: Frame
+      - name: anchorType
+        nilable: true
+        type: string
+      outputs: {}
+    SetPadding: {}
+    SetPetAction: {}
+    SetPossession: {}
+    SetQuestCurrency: {}
+    SetQuestItem: {}
+    SetQuestLogCurrency: {}
+    SetQuestLogItem: {}
+    SetQuestLogSpecialItem: {}
+    SetSendMailItem: {}
+    SetShapeshift: {}
+    SetSocketedItem: {}
+    SetSocketGem: {}
+    SetSpellBookItem: {}
+    SetSpellByID: {}
+    SetTalent: {}
+    SetText: {}
+    SetTotem: {}
+    SetToyByItemID: {}
+    SetTrackingSpell: {}
+    SetTradePlayerItem: {}
+    SetTradeSkillItem: {}
+    SetTradeTargetItem: {}
+    SetTrainerService: {}
+    SetUnit: {}
+    SetUnitAura: {}
+    SetUnitBuff: {}
+    SetUnitDebuff: {}
+LayeredRegion:
+  fields:
+    layer:
+      init: ARTWORK
+      type: DrawLayer
+    sublevel:
+      init: 0
+      type: number
+    vertexColorA:
+      init: 1
+      type: number
+    vertexColorB:
+      init: 1
+      type: number
+    vertexColorG:
+      init: 1
+      type: number
+    vertexColorR:
+      init: 1
+      type: number
+  inherits:
+    Region: {}
+  methods:
+    GetDrawLayer:
+      getter:
+      - name: layer
+      - name: sublevel
+    SetDrawLayer:
+      setter:
+      - name: layer
+      - name: sublevel
+        nilable: true
+    SetVertexColor:
+      impl: LayeredRegion/SetVertexColor
+  virtual: true
+Line:
+  fields:
+    thickness:
+      init: 1
+      type: number
+  inherits:
+    TextureBase: {}
+  methods:
+    GetEndPoint: {}
+    GetHitRectThickness: {}
+    GetStartPoint: {}
+    GetThickness:
+      getter:
+      - name: thickness
+    SetEndPoint: {}
+    SetHitRectThickness: {}
+    SetStartPoint: {}
+    SetThickness:
+      setter:
+      - name: thickness
+  warner: true
+LineScale:
+  inherits:
+    Scale: {}
+  methods: {}
+LineTranslation:
+  inherits:
+    Translation: {}
+  methods: {}
+MaskTexture:
+  inherits:
+    TextureBase: {}
+  methods: {}
+MessageFrame:
+  inherits:
+    FontInstance: {}
+    Frame: {}
+  methods:
+    AddMessage:
+      impl: MessageFrame/AddMessage
+    Clear: {}
+    GetFadeDuration: {}
+    GetFadePower: {}
+    GetFading: {}
+    GetFontStringByID: {}
+    GetInsertMode: {}
+    GetTimeVisible: {}
+    HasMessageByID: {}
+    ResetMessageFadeByID: {}
+    SetFadeDuration: {}
+    SetFadePower: {}
+    SetFading: {}
+    SetInsertMode: {}
+    SetTimeVisible: {}
+Minimap:
+  inherits:
+    Frame: {}
+  methods:
+    GetPingPosition: {}
+    GetZoom:
+      outputs:
+      - type: number
+    GetZoomLevels:
+      outputs:
+      - type: number
+    PingLocation: {}
+    SetBlipTexture: {}
+    SetCorpsePOIArrowTexture: {}
+    SetIconTexture: {}
+    SetMaskTexture: {}
+    SetPlayerTexture: {}
+    SetPOIArrowTexture: {}
+    SetStaticPOIArrowTexture: {}
+    SetZoom: {}
+    UpdateBlips: {}
+  singleton: true
+Model:
+  fields:
+    modelScale:
+      init: 1
+      type: number
+  inherits:
+    Frame: {}
+  methods:
+    AdvanceTime: {}
+    ClearFog: {}
+    ClearModel: {}
+    ClearTransform: {}
+    GetCameraDistance: {}
+    GetCameraFacing: {}
+    GetCameraPosition: {}
+    GetCameraRoll: {}
+    GetCameraTarget: {}
+    GetDesaturation: {}
+    GetFacing: {}
+    GetFogColor: {}
+    GetFogFar: {}
+    GetFogNear: {}
+    GetLight: {}
+    GetModelAlpha: {}
+    GetModelDrawLayer: {}
+    GetModelFileID: {}
+    GetModelScale:
+      getter:
+      - name: modelScale
+    GetPaused: {}
+    GetPitch: {}
+    GetPosition: {}
+    GetRoll: {}
+    GetShadowEffect: {}
+    GetViewInsets: {}
+    GetViewTranslation: {}
+    GetWorldScale: {}
+    HasAttachmentPoints: {}
+    HasCustomCamera: {}
+    IsUsingModelCenterToTransform: {}
+    MakeCurrentCameraCustom: {}
+    ReplaceIconTexture: {}
+    SetCamera: {}
+    SetCameraDistance: {}
+    SetCameraFacing: {}
+    SetCameraPosition: {}
+    SetCameraRoll: {}
+    SetCameraTarget: {}
+    SetCustomCamera: {}
+    SetDesaturation: {}
+    SetFacing: {}
+    SetFogColor: {}
+    SetFogFar: {}
+    SetFogNear: {}
+    SetGlow: {}
+    SetLight: {}
+    SetModel: {}
+    SetModelAlpha: {}
+    SetModelDrawLayer: {}
+    SetModelScale:
+      setter:
+      - name: modelScale
+    SetParticlesEnabled: {}
+    SetPaused: {}
+    SetPitch: {}
+    SetPosition: {}
+    SetRoll: {}
+    SetSequence: {}
+    SetSequenceTime: {}
+    SetShadowEffect: {}
+    SetTransform: {}
+    SetViewInsets: {}
+    SetViewTranslation: {}
+    TransformCameraSpaceToModelSpace:
+      impl: Model/TransformCameraSpaceToModelSpace
+    UseModelCenterToTransform: {}
+ModelScene:
+  inherits:
+    Frame: {}
+  methods:
+    ClearFog: {}
+    CreateActor:
+      impl: ModelScene/CreateActor
+      inputs:
+      - name: name
+        nilable: true
+        type: string
+      - name: template
+        nilable: true
+        type: string
+      outputs:
+      - name: actor
+        type: Actor
+    GetActorAtIndex: {}
+    GetCameraFarClip: {}
+    GetCameraFieldOfView: {}
+    GetCameraForward: {}
+    GetCameraNearClip: {}
+    GetCameraPosition: {}
+    GetCameraRight: {}
+    GetCameraUp: {}
+    GetDrawLayer: {}
+    GetFogColor: {}
+    GetFogFar: {}
+    GetFogNear: {}
+    GetLightAmbientColor: {}
+    GetLightDiffuseColor: {}
+    GetLightDirection:
+      outputs:
+      - type: number
+      - type: number
+      - type: number
+    GetLightPosition:
+      outputs:
+      - type: number
+      - type: number
+      - type: number
+    GetLightType: {}
+    GetNumActors: {}
+    GetViewInsets:
+      outputs:
+      - type: number
+      - type: number
+      - type: number
+      - type: number
+    GetViewTranslation: {}
+    IsLightVisible: {}
+    Project3DPointTo2D: {}
+    SetCameraFarClip: {}
+    SetCameraFieldOfView: {}
+    SetCameraNearClip: {}
+    SetCameraOrientationByAxisVectors: {}
+    SetCameraOrientationByYawPitchRoll: {}
+    SetCameraPosition: {}
+    SetDesaturation: {}
+    SetDrawLayer: {}
+    SetFogColor: {}
+    SetFogFar: {}
+    SetFogNear: {}
+    SetLightAmbientColor: {}
+    SetLightDiffuseColor: {}
+    SetLightDirection: {}
+    SetLightPosition: {}
+    SetLightType: {}
+    SetLightVisible: {}
+    SetPaused: {}
+    SetViewInsets: {}
+    SetViewTranslation: {}
+    TakeActor: {}
+MovieFrame:
+  inherits:
+    Frame: {}
+  methods:
+    EnableSubtitles: {}
+    StartMovie: {}
+    StartMovieByName: {}
+    StopMovie: {}
+OffScreenFrame:
+  inherits:
+    Frame: {}
+  methods:
+    ApplySnapshot: {}
+    Flush: {}
+    GetMaxSnapshots: {}
+    IsSnapshotValid: {}
+    SetMaxSnapshots: {}
+    TakeSnapshot: {}
+    TestPrintToFile: {}
+    UsesNPOT: {}
+ParentedObject:
+  inherits:
+    ParentedObjectBase: {}
+  methods:
+    SetParent:
+      impl: ParentedObject/SetParent
+      inputs:
+      - name: parent
+        nilable: true
+        type: UIObject
+      outputs: {}
+  virtual: true
+ParentedObjectBase:
+  fields:
+    children:
+      type: hlist
+    parent:
+      nilable: true
+      type: UIObject
+  inherits:
+    UIObject: {}
+  methods:
+    ClearParentKey:
+      impl: ParentedObjectBase/ClearParentKey
+    GetDebugName:
+      impl: ParentedObject/GetDebugName
+    GetParent:
+      getter:
+      - name: parent
+    GetParentKey:
+      impl: ParentedObjectBase/GetParentKey
+    SetParentKey:
+      impl: ParentedObjectBase/SetParentKey
+  virtual: true
+Path:
+  inherits:
+    Animation: {}
+  methods:
+    CreateControlPoint:
+      impl: Path/CreateControlPoint
+      inputs:
+      - name: name
+        nilable: true
+        type: string
+      - name: templateName
+        nilable: true
+        type: string
+      - name: order
+        nilable: true
+        type: number
+      outputs:
+      - name: point
+        type: ControlPoint
+    GetControlPoints: {}
+    GetCurveType: {}
+    GetMaxControlPointOrder: {}
+    SetCurveType: {}
+PlayerModel:
+  inherits:
+    Model: {}
+  methods:
+    ApplySpellVisualKit: {}
+    CanSetUnit: {}
+    FreezeAnimation: {}
+    GetDisplayInfo: {}
+    GetDoBlend: {}
+    GetKeepModelOnHide: {}
+    HasAnimation: {}
+    PlayAnimKit: {}
+    RefreshCamera: {}
+    RefreshUnit: {}
+    SetAnimation: {}
+    SetBarberShopAlternateForm: {}
+    SetCamDistanceScale: {}
+    SetCreature: {}
+    SetDisplayInfo: {}
+    SetDoBlend: {}
+    SetItem: {}
+    SetItemAppearance: {}
+    SetKeepModelOnHide: {}
+    SetPortraitZoom: {}
+    SetRotation: {}
+    SetUnit: {}
+    StopAnimKit: {}
+    ZeroCachedCenterXY: {}
+Region:
+  fields:
+    animationGroups:
+      init: {}
+      type: table
+    bottom:
+      init: 0
+      type: number
+    explicitlyProtected:
+      init: false
+      type: boolean
+    height:
+      init: 0
+      type: number
+    isIgnoringParentAlpha:
+      init: false
+      type: boolean
+    isIgnoringParentScale:
+      init: false
+      type: boolean
+    left:
+      init: 0
+      type: number
+    mouseClickEnabled:
+      init: true
+      type: boolean
+    mouseMotionEnabled:
+      init: true
+      type: boolean
+    mouseWheelEnabled:
+      init: false
+      type: boolean
+    points:
+      init: {}
+      type: table
+    width:
+      init: 0
+      type: number
+  inherits:
+    ParentedObject: {}
+    RegionBase: {}
+  methods:
+    AdjustPointsOffset: {}
+    CanChangeProtectedState: {}
+    ClearAllPoints:
+      impl: Region/ClearAllPoints
+    ClearPoint: {}
+    ClearPointsOffset: {}
+    CreateAnimationGroup:
+      impl: Region/CreateAnimationGroup
+      inputs:
+      - name: name
+        nilable: true
+        type: string
+      - name: templateName
+        nilable: true
+        type: string
+      outputs:
+      - name: animationGroup
+        type: AnimationGroup
+    EnableMouse:
+      impl: MouseMixin/EnableMouse
+    EnableMouseMotion: {}
+    EnableMouseWheel:
+      setter:
+      - name: mouseWheelEnabled
+    GetAnimationGroups:
+      impl: Region/GetAnimationGroups
+    GetBottom:
+      getter:
+      - name: bottom
+    GetCenter:
+      impl: Region/GetCenter
+    GetEffectiveScale:
+      impl: Region/GetEffectiveScale
+    GetHeight:
+      getter:
+      - name: height
+    GetLeft:
+      getter:
+      - name: left
+    GetNumPoints:
+      impl: Region/GetNumPoints
+    GetPoint:
+      impl: Region/GetPoint
+      inputs:
+      - default: 1
+        name: anchorIndex
+        nilable: true
+        type: tonumber
+      mayreturnnothing: true
+      outputs:
+      - name: point
+        type: FramePoint
+      - name: relativeTo
+        nilable: true
+        type: UIObject
+      - name: relativePoint
+        type: FramePoint
+      - name: offsetX
+        type: number
+      - name: offsetY
+        type: number
+    GetPointByName: {}
+    GetRect:
+      getter:
+      - name: bottom
+      - name: left
+      - name: width
+      - name: height
+    GetRight:
+      impl: Region/GetRight
+    GetScaledRect:
+      impl: Region/GetScaledRect
+    GetSize:
+      getter:
+      - name: width
+      - name: height
+    GetSourceLocation: {}
+    GetTop:
+      impl: Region/GetTop
+    GetWidth:
+      getter:
+      - name: width
+    IsAnchoringRestricted: {}
+    IsDragging: {}
+    IsIgnoringParentAlpha:
+      getter:
+      - name: isIgnoringParentAlpha
+    IsIgnoringParentScale:
+      getter:
+      - name: isIgnoringParentScale
+    IsMouseClickEnabled:
+      getter:
+      - name: mouseClickEnabled
+    IsMouseEnabled:
+      impl: MouseMixin/IsMouseEnabled
+    IsMouseMotionEnabled:
+      getter:
+      - name: mouseMotionEnabled
+    IsMouseMotionFocus: {}
+    IsMouseOver: {}
+    IsMouseWheelEnabled:
+      getter:
+      - name: mouseWheelEnabled
+    IsObjectLoaded: {}
+    IsProtected:
+      impl: Region/IsProtected
+    IsRectValid: {}
+    SetAllPoints:
+      impl: Region/SetAllPoints
+    SetHeight:
+      setter:
+      - name: height
+    SetIgnoreParentAlpha:
+      setter:
+      - name: isIgnoringParentAlpha
+    SetIgnoreParentScale:
+      setter:
+      - name: isIgnoringParentScale
+    SetMouseClickEnabled:
+      setter:
+      - name: mouseClickEnabled
+    SetMouseMotionEnabled:
+      setter:
+      - name: mouseMotionEnabled
+    SetPassThroughButtons: {}
+    SetPoint:
+      impl: Region/SetPoint
+    SetProtected: {}
+    SetSize:
+      setter:
+      - name: width
+      - name: height
+    SetWidth:
+      setter:
+      - name: width
+    StopAnimating: {}
+  virtual: true
+RegionBase:
+  fields:
+    alpha:
+      init: 1
+      type: number
+    scale:
+      init: 1
+      type: number
+    shown:
+      init: true
+      type: boolean
+  inherits: {}
+  methods:
+    GetAlpha:
+      getter:
+      - name: alpha
+    GetScale:
+      getter:
+      - name: scale
+    Hide:
+      impl: Region/Hide
+    IsShown:
+      getter:
+      - name: shown
+    IsVisible:
+      impl: Region/IsVisible
+    SetAlpha:
+      impl: Region/SetAlpha
+    SetScale:
+      impl: Region/SetScale
+    SetShown:
+      impl: Region/SetShown
+    Show:
+      impl: Region/Show
+  virtual: true
+Rotation:
+  inherits:
+    Animation: {}
+  methods:
+    GetDegrees: {}
+    GetOrigin: {}
+    GetRadians: {}
+    SetDegrees: {}
+    SetOrigin: {}
+    SetRadians: {}
+Scale:
+  inherits:
+    Animation: {}
+  methods:
+    GetOrigin: {}
+    GetScale: {}
+    GetScaleFrom: {}
+    GetScaleTo: {}
+    SetOrigin: {}
+    SetScale: {}
+    SetScaleFrom: {}
+    SetScaleTo: {}
+ScriptObject:
+  inherits:
+    ScriptObjectBase: {}
+  methods:
+    GetScript:
+      impl: ScriptObject/GetScript
+    HasScript:
+      outputs:
+      - name: hasScript
+        stub: true
+        type: boolean
+    HookScript:
+      impl: ScriptObject/HookScript
+    SetScript:
+      impl: ScriptObject/SetScript
+  virtual: true
+ScriptObjectBase:
+  fields:
+    scripts:
+      init:
+        0: {}
+        1: {}
+        2: {}
+      type: table
+  inherits: {}
+  methods: {}
+  virtual: true
+ScrollFrame:
+  fields:
+    scrollChild:
+      nilable: true
+      type: Frame
+  inherits:
+    Frame: {}
+  methods:
+    GetHorizontalScroll:
+      outputs:
+      - type: number
+    GetHorizontalScrollRange:
+      outputs:
+      - type: number
+    GetScrollChild:
+      getter:
+      - name: scrollChild
+    GetVerticalScroll:
+      outputs:
+      - type: number
+    GetVerticalScrollRange:
+      outputs:
+      - type: number
+    SetHorizontalScroll: {}
+    SetScrollChild:
+      impl: ScrollFrame/SetScrollChild
+    SetVerticalScroll: {}
+    UpdateScrollChildRect: {}
+SimpleHTML:
+  inherits:
+    FontInstance: {}
+    Frame: {}
+  methods:
+    GetContentHeight:
+      outputs:
+      - type: number
+    GetHyperlinkFormat: {}
+    GetTextData: {}
+    SetHyperlinkFormat: {}
+    SetText: {}
+Slider:
+  fields:
+    enabled:
+      init: true
+      type: boolean
+    max:
+      init: 0
+      type: number
+    min:
+      init: 0
+      type: number
+    orientation:
+      init: HORIZONTAL
+      type: Orientation
+    thumbTexture:
+      nilable: true
+      type: Texture
+    value:
+      init: 0
+      type: number
+  inherits:
+    Frame: {}
+  methods:
+    Disable:
+      impl: Slider/Disable
+    Enable:
+      impl: Slider/Enable
+    GetMinMaxValues:
+      getter:
+      - name: min
+      - name: max
+    GetObeyStepOnDrag: {}
+    GetOrientation:
+      getter:
+      - name: orientation
+    GetStepsPerPage: {}
+    GetThumbTexture:
+      getter:
+      - name: thumbTexture
+    GetValue:
+      getter:
+      - name: value
+    GetValueStep: {}
+    IsDraggingThumb: {}
+    IsEnabled: {}
+    SetEnabled: {}
+    SetMinMaxValues:
+      setter:
+      - name: min
+      - name: max
+    SetObeyStepOnDrag: {}
+    SetOrientation:
+      setter:
+      - name: orientation
+    SetStepsPerPage: {}
+    SetThumbTexture:
+      setter:
+      - name: thumbTexture
+    SetValue:
+      setter:
+      - name: value
+    SetValueStep: {}
+StatusBar:
+  fields:
+    max:
+      init: 0
+      type: number
+    min:
+      init: 0
+      type: number
+    statusBarTexture:
+      nilable: true
+      type: Texture
+    value:
+      init: 0
+      type: number
+  inherits:
+    Frame: {}
+  methods:
+    GetFillStyle: {}
+    GetMinMaxValues:
+      getter:
+      - name: min
+      - name: max
+    GetOrientation: {}
+    GetReverseFill: {}
+    GetRotatesTexture: {}
+    GetStatusBarColor:
+      impl: StatusBar/GetStatusBarColor
+    GetStatusBarDesaturation: {}
+    GetStatusBarTexture:
+      getter:
+      - name: statusBarTexture
+    GetValue:
+      getter:
+      - name: value
+    IsStatusBarDesaturated: {}
+    SetColorFill: {}
+    SetFillStyle: {}
+    SetMinMaxValues:
+      setter:
+      - name: min
+      - name: max
+    SetOrientation: {}
+    SetReverseFill: {}
+    SetRotatesTexture: {}
+    SetStatusBarColor:
+      impl: StatusBar/SetStatusBarColor
+    SetStatusBarDesaturated: {}
+    SetStatusBarDesaturation: {}
+    SetStatusBarTexture:
+      impl: StatusBar/SetStatusBarTexture
+    SetValue:
+      setter:
+      - name: value
+TabardModel:
+  inherits:
+    PlayerModel: {}
+  methods:
+    CanSaveTabardNow: {}
+    CycleVariation: {}
+    GetLowerBackgroundFileName: {}
+    GetLowerEmblemFileName: {}
+    GetLowerEmblemTexture: {}
+    GetUpperBackgroundFileName: {}
+    GetUpperEmblemFileName: {}
+    GetUpperEmblemTexture: {}
+    InitializeTabardColors: {}
+    IsGuildTabard: {}
+    Save: {}
+Texture:
+  inherits:
+    TextureBase: {}
+  methods:
+    AddMaskTexture: {}
+    GetMaskTexture: {}
+    GetNumMaskTextures: {}
+    RemoveMaskTexture: {}
+  warner: true
+TextureBase:
+  fields:
+    blendMode:
+      init: BLEND
+      type: BlendMode
+    blx:
+      init: 0
+      type: number
+    bly:
+      init: 1
+      type: number
+    brx:
+      init: 1
+      type: number
+    bry:
+      init: 1
+      type: number
+    colorTextureA:
+      nilable: true
+      type: number
+    colorTextureB:
+      nilable: true
+      type: number
+    colorTextureG:
+      nilable: true
+      type: number
+    colorTextureR:
+      nilable: true
+      type: number
+    horizTile:
+      init: false
+      type: boolean
+    maskName:
+      nilable: true
+      type: string
+    texture:
+      nilable: true
+      type: string
+    tlx:
+      init: 0
+      type: number
+    tly:
+      init: 0
+      type: number
+    trx:
+      init: 1
+      type: number
+    try:
+      init: 0
+      type: number
+    vertTile:
+      init: false
+      type: boolean
+  inherits:
+    LayeredRegion: {}
+    ScriptObject: {}
+  methods:
+    ClearTextureSlice: {}
+    GetAtlas: {}
+    GetBlendMode:
+      getter:
+      - name: blendMode
+    GetDesaturation: {}
+    GetHorizTile:
+      getter:
+      - name: horizTile
+    GetRotation: {}
+    GetTexCoord:
+      getter:
+      - name: tlx
+      - name: tly
+      - name: blx
+      - name: bly
+      - name: trx
+      - name: try
+      - name: brx
+      - name: bry
+    GetTexelSnappingBias: {}
+    GetTexture:
+      impl: Texture/GetTexture
+    GetTextureFileID: {}
+    GetTextureFilePath: {}
+    GetTextureSliceMargins: {}
+    GetTextureSliceMode: {}
+    GetVertexColor:
+      getter:
+      - name: vertexColorR
+      - name: vertexColorG
+      - name: vertexColorB
+      - name: vertexColorA
+    GetVertexOffset: {}
+    GetVertTile:
+      getter:
+      - name: vertTile
+    IsBlockingLoadRequested: {}
+    IsDesaturated: {}
+    IsSnappingToPixelGrid: {}
+    SetAtlas:
+      impl: Texture/SetAtlas
+    SetBlendMode:
+      setter:
+      - name: blendMode
+    SetBlockingLoadsRequested: {}
+    SetColorTexture:
+      impl: Texture/SetColorTexture
+    SetDesaturated: {}
+    SetDesaturation: {}
+    SetGradient: {}
+    SetHorizTile:
+      setter:
+      - name: horizTile
+    SetMask:
+      setter:
+      - name: maskName
+    SetRotation: {}
+    SetSnapToPixelGrid: {}
+    SetTexCoord:
+      impl: Texture/SetTexCoord
+    SetTexelSnappingBias: {}
+    SetTexture:
+      impl: Texture/SetTexture
+    SetTextureSliceMargins: {}
+    SetTextureSliceMode: {}
+    SetVertexOffset: {}
+    SetVertTile:
+      setter:
+      - name: vertTile
+  virtual: true
+TextureCoordTranslation:
+  inherits:
+    Translation: {}
+  methods: {}
+Translation:
+  inherits:
+    Animation: {}
+  methods:
+    GetOffset: {}
+    SetOffset: {}
+UIObject:
+  fields:
+    forbidden:
+      init: false
+      type: boolean
+    name:
+      nilable: true
+      type: string
+  inherits: {}
+  methods:
+    GetName:
+      getter:
+      - name: name
+    GetObjectType:
+      impl: UIObject/GetObjectType
+    IsForbidden:
+      getter:
+      - name: forbidden
+    IsObjectType:
+      impl: UIObject/IsObjectType
+    SetForbidden:
+      impl: ForbiddenMixin/SetForbidden
+  virtual: true
+UnitPositionFrame:
+  inherits:
+    Frame: {}
+  methods:
+    AddUnit: {}
+    ClearUnits: {}
+    FinalizeUnits: {}
+    GetMouseOverUnits: {}
+    GetPlayerPingScale: {}
+    GetUiMapID: {}
+    SetPlayerPingScale: {}
+    SetPlayerPingTexture: {}
+    SetUiMapID: {}
+    SetUnitColor: {}
+    StartPlayerPing: {}
+    StopPlayerPing: {}

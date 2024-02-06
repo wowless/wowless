@@ -1,8 +1,0 @@
----
-name: GetShapeshiftForm
-status: unimplemented
-inputs:
-- - nilable: true
-    type: boolean
-outputs:
-- type: number

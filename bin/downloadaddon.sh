@@ -1,6 +1,6 @@
 set -e
 curl -sLo "$4" "$(gh api graphql \
-  -F owner="$1" -F name="$2" -F tag="$3" \
+  -f owner="$1" -f name="$2" -f tag="$3" \
   -f query="
 query(\$owner: String!, \$name: String!, \$tag: String!) {
   repository(owner: \$owner, name: \$name) {

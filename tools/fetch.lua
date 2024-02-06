@@ -6,24 +6,18 @@ local args = (function()
 end)()
 local product = args.product
 
+-- Don't let casc use any system backdoors.
+os.execute = function(...) -- luacheck: ignore
+  error('attempt to call execute(' .. table.concat({ ... }) .. ')')
+end
+
 local log = args.verbose and print or function() end
 
-local build = require('wowapi.yaml').parseFile('data/products/' .. product .. '/build.yaml')
-
-local fdids = require('build.listfile')
+local build = dofile('build/data/products/' .. product .. '/build.lua')
+local fdids = require('runtime.listfile')
 
 local path = require('path')
 path.mkdir('cache')
-
-local encryptionKeys = (function()
-  local wowtxt = require('pl.file').read('vendor/tactkeys/WoW.txt')
-  local ret = {}
-  for line in wowtxt:gmatch('[^\r\n]+') do
-    local k, v = line:match('^([0-9A-F]+) ([0-9A-F]+)')
-    ret[k:lower()] = v:lower()
-  end
-  return ret
-end)()
 
 local handle = (function()
   local casc = require('casc')
@@ -34,7 +28,7 @@ local handle = (function()
     cacheFiles = true,
     cdn = cdn,
     ckey = ckey,
-    keys = encryptionKeys,
+    keys = require('runtime.tactkeys'),
     locale = casc.locale.US,
     log = log,
     zerofillEncryptedChunks = true,
@@ -62,31 +56,43 @@ if path.isdir(outdir) then
   require('pl.dir').rmtree(outdir)
 end
 
-local function save(fn, content)
-  log('writing', fn)
-  path.mkdir(path.dirname(path.join(outdir, fn)))
-  require('pl.file').write(path.join(outdir, fn), content)
-end
+local save = (function()
+  local saved = {}
+  return function(fn, content)
+    assert(content, 'attempting to write nil content for ' .. fn)
+    if not saved[fn:lower()] then
+      log('writing', fn)
+      path.mkdir(path.dirname(path.join(outdir, fn)))
+      require('pl.file').write(path.join(outdir, fn), content)
+      saved[fn:lower()] = true
+    end
+  end
+end)()
 
 local processFile = (function()
   local lxp = require('lxp')
-  local function doProcessFile(fn)
+  local function doProcessFile(fn, root)
     local content = handle:readFile(fn)
-    if content then
-      save(fn, content)
-      if fn:sub(-4) == '.xml' then
-        local parser = lxp.new({
-          StartElement = function(_, name, attrs)
-            local lname = string.lower(name)
-            if (lname == 'include' or lname == 'script') and attrs.file then
-              doProcessFile(joinRelative(fn, attrs.file))
-            end
-          end,
-        })
-        parser:parse(content)
-        parser:close()
-      end
+    if not content then
+      return false
     end
+    save(fn, content)
+    if fn:sub(-4) == '.xml' then
+      local parser = lxp.new({
+        StartElement = function(_, name, attrs)
+          local lname = string.lower(name)
+          if (lname == 'include' or lname == 'script') and attrs.file then
+            if doProcessFile(joinRelative(fn, attrs.file), root) then
+              return true
+            end
+            return root and doProcessFile(normalizePath(path.join(root, attrs.file)), root)
+          end
+        end,
+      })
+      parser:parse(content)
+      parser:close()
+    end
+    return true
   end
   return doProcessFile
 end)()
@@ -103,7 +109,7 @@ local function processTocDir(dir)
     save(tocName, tocContent)
     for line in tocContent:gmatch('[^\r\n]+') do
       if line:sub(1, 1) ~= '#' then
-        processFile(joinRelative(tocName, line:gsub('%s*$', '')))
+        processFile(joinRelative(tocName, line:gsub('%s*$', '')), dir)
       end
     end
   end
@@ -118,7 +124,7 @@ local function processTocDir(dir)
   end
 end
 
-for _, db in ipairs(require('build.products.' .. product .. '.dblist')) do
+for _, db in ipairs(dofile('build/products/' .. product .. '/dblist.lua')) do
   save(path.join('db2', db .. '.db2'), handle:readFile(fdids[db:lower()]))
 end
 
@@ -126,8 +132,14 @@ processTocDir('Interface/FrameXML')
 do
   -- Yes, ManifestInterfaceTOCData fdid and sig are hardcoded.
   local tocdata = handle:readFile(1267335)
-  for _, filepath in require('dbc').rows(tocdata, 's') do
-    processTocDir(normalizePath(filepath))
+  local dbdef = {
+    { type = 'string' },
+    { id = true, noninline = true },
+  }
+  for row in require('tools.db2').rows(tocdata, dbdef) do
+    processTocDir(normalizePath(row[1]))
   end
   processTocDir('Interface/AddOns/Blizzard_APIDocumentationGenerated')
 end
+processFile('Interface/FrameXML/UI.xsd')
+processFile('Interface/FrameXML/UI_Shared.xsd')

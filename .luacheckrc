@@ -1,13 +1,19 @@
 read_globals = {
+  'debug.getfunctionstats',
+  'debug.getglobalstats',
   'debug.gettime',
   'debug.newcfunction',
+  'debug.newsecurefunction',
   'debug.setnewclosuretaint',
+  'debug.setprofilingenabled',
   'forceinsecure',
+  'hooksecurefunc',
   'issecure',
   'issecurevariable',
   'loadstring_untainted',
   'scrub',
   'securecall',
+  'securecallfunction',
   'secureexecuterange',
   'seterrorhandler',
   'strcmputf8i',
@@ -22,14 +28,11 @@ read_globals = {
 files['addon/Wowless'] = {
   read_globals = {
     'abs',
-    'C_CovenantSanctumUI',
     'CreateFont',
     'CreateFrame',
     'debugprofilestop',
     'DevTools_Dump',
     'format',
-    'GetBuildInfo',
-    'IsTestBuild',
     'RequestTimePlayed',
     'SendSystemMessage',
   },
@@ -38,12 +41,6 @@ files['addon/Wowless'] = {
 files['data/uiobjects'] = {
   read_globals = {
     'api',
-    'build',
-    'kids',
-    'm',
-    'runtimeProduct',
     'toTexture',
-    'u',
-    'UpdateVisible',
   },
 }

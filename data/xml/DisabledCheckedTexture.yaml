@@ -1,7 +1,0 @@
----
-name: DisabledCheckedTexture
-extends: Texture
-impl:
-  argument: self
-  parentmethod: SetDisabledCheckedTexture
-  parenttype: CheckButton

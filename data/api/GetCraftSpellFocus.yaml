@@ -1,6 +1,0 @@
----
-name: GetCraftSpellFocus
-status: unimplemented
-inputs:
-- - name: id
-    type: number

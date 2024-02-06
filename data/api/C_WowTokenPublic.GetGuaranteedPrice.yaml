@@ -1,8 +1,0 @@
----
-name: C_WowTokenPublic.GetGuaranteedPrice
-status: unimplemented
-inputs:
-- {}
-outputs:
-- name: price
-  type: number

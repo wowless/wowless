@@ -1,6 +1,0 @@
----
-name: GetComboPoints
-status: unimplemented
-outputs:
-- stub: 0
-  type: number

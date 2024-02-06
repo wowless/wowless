@@ -1,5 +1,0 @@
----
-name: GetSelectedSkill
-status: unimplemented
-outputs:
-- type: number

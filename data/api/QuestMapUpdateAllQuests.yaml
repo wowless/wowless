@@ -1,5 +1,0 @@
----
-name: QuestMapUpdateAllQuests
-status: unimplemented
-outputs:
-- type: number

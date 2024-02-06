@@ -1,9 +1,0 @@
----
-name: GetTrainerServiceStepIndex
-status: unimplemented
-inputs:
-- {}
-outputs:
-- name: value
-  nilable: true
-  type: number

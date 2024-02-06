@@ -1,9 +1,0 @@
----
-name: GetBattlefieldInstanceInfo
-status: unimplemented
-inputs:
-- - name: index
-    type: number
-outputs:
-- name: instanceID
-  type: number

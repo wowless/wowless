@@ -1,7 +1,0 @@
----
-name: CraftIsEnchanting
-status: unimplemented
-inputs:
-- {}
-outputs:
-- type: boolean
