@@ -92,6 +92,7 @@ block()
     ${elune_BINARY_DIR}/luaconf.h
   )
 endblock()
+find_path(UTF8H_INCLUDE_DIRS utf8h/utf8.h)
 target_include_directories(elune PRIVATE ${UTF8H_INCLUDE_DIRS}/utf8h)
 target_include_directories(
   elune PUBLIC
