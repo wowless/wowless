@@ -14,14 +14,6 @@ cmake_policy(SET CMP0116 OLD)
 include(FetchContent)
 
 FetchContent_Declare(
-  utf8h
-  GIT_REPOSITORY https://github.com/sheredom/utf8.h.git
-  GIT_TAG ce48f0eda6cac8f365837edaf8298ad5c03f7f2e
-  SOURCE_SUBDIR disable_cmakelists_txt
-)
-FetchContent_MakeAvailable(utf8h)
-
-FetchContent_Declare(
   elune
   GIT_REPOSITORY https://github.com/meorawr/elune.git
   GIT_TAG 7fc7271922fbc0a371ef15d699ffa0b2be649a81
@@ -100,7 +92,7 @@ block()
     ${elune_BINARY_DIR}/luaconf.h
   )
 endblock()
-target_include_directories(elune PRIVATE ${utf8h_SOURCE_DIR})
+target_include_directories(elune PRIVATE ${UTF8H_INCLUDE_DIRS}/utf8h)
 target_include_directories(
   elune PUBLIC
   ${elune_SOURCE_DIR}/liblua/include
