@@ -35,7 +35,7 @@ repos:
     args:
     - --shell=bash
 - repo: https://github.com/sqlfluff/sqlfluff
-  rev: 0.11.0
+  rev: 3.0.0a5
   hooks:
   - id: sqlfluff-fix
   - id: sqlfluff-lint
