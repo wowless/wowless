@@ -5,7 +5,6 @@
     "libpng",
     "libyaml",
     "sqlite3",
-    "utf8h",
     "zlib"
   ]
 }
