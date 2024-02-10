@@ -14,14 +14,6 @@ cmake_policy(SET CMP0116 OLD)
 include(FetchContent)
 
 FetchContent_Declare(
-  utf8h
-  GIT_REPOSITORY https://github.com/sheredom/utf8.h.git
-  GIT_TAG ce48f0eda6cac8f365837edaf8298ad5c03f7f2e
-  SOURCE_SUBDIR disable_cmakelists_txt
-)
-FetchContent_MakeAvailable(utf8h)
-
-FetchContent_Declare(
   elune
   GIT_REPOSITORY https://github.com/meorawr/elune.git
   GIT_TAG 7fc7271922fbc0a371ef15d699ffa0b2be649a81
@@ -100,7 +92,8 @@ block()
     ${elune_BINARY_DIR}/luaconf.h
   )
 endblock()
-target_include_directories(elune PRIVATE ${utf8h_SOURCE_DIR})
+find_path(UTF8H_INCLUDE_DIRS utf8h/utf8.h)
+target_include_directories(elune PRIVATE ${UTF8H_INCLUDE_DIRS}/utf8h)
 target_include_directories(
   elune PUBLIC
   ${elune_SOURCE_DIR}/liblua/include
@@ -595,7 +588,6 @@ FetchContent_MakeAvailable(luadbd)
 lua2c(
   luadbd
   luadbd.parser=${luadbd_SOURCE_DIR}/luadbd/parser.lua
-  luadbd.sig=${luadbd_SOURCE_DIR}/luadbd/sig.lua
 )
 add_library(luadbd STATIC luadbd.c)
 target_link_libraries(luadbd PRIVATE elune)
@@ -699,41 +691,16 @@ lua2c(toolssqlite3ext tools.sqlite3ext=c)
 add_library(toolssqlite3ext STATIC tools/sqlite3ext.c toolssqlite3ext.c)
 target_link_libraries(toolssqlite3ext PRIVATE elune sqlite3)
 
-lua2c(toolsdbc tools.dbc=${CMAKE_CURRENT_SOURCE_DIR}/tools/dbc.lua)
-add_library(toolsdbc STATIC toolsdbc.c)
-target_link_libraries(toolsdbc PRIVATE elune)
-
-FetchContent_Declare(
-  dbc
-  URL https://luarocks.org/manifests/foxlit/luadbc-1.12-1.src.rock
-  URL_HASH SHA256=70dcd264f6789d9a6f421652564ec0a3e46f16cfddf830d9b23a5cf0979f20f6
-  DOWNLOAD_NAME luadbc-1.12-1.src.rock.zip
-  SOURCE_SUBDIR disable_cmakelists_txt
-)
-FetchContent_MakeAvailable(dbc)
-file(
-  ARCHIVE_EXTRACT
-  INPUT ${dbc_SOURCE_DIR}/luadbc-1.12.zip
-  DESTINATION ${dbc_SOURCE_DIR}
-)
-lua2c(
-  dbc
-  dbc=${dbc_SOURCE_DIR}/luadbc/dbc/init.lua
-  dbc.bin=${dbc_SOURCE_DIR}/luadbc/dbc/bin.lua
-)
-add_library(dbc STATIC dbc.c)
-target_link_libraries(dbc PRIVATE elune)
-
 add_lua_executable(
   sqlite
   ${CMAKE_CURRENT_SOURCE_DIR}/tools/sqlite.lua
   argparse
-  dbc
   lsqlite3
   luafilesystem
   penlight
-  toolsdbc
+  toolsdb2
   toolssqlite3ext
+  vstruct
 )
 
 FetchContent_Declare(
@@ -849,7 +816,6 @@ add_lua_executable(
   ${CMAKE_CURRENT_SOURCE_DIR}/tools/cascmap.lua
   argparse
   casc
-  dbc
   luaexpat
   luafilesystem
   luapath
@@ -859,8 +825,9 @@ add_lua_executable(
   penlight
   runtimelistfile
   runtimetactkeys
-  toolsdbc
+  toolsdb2
   toolsutil
+  vstruct
 )
 
 find_package(PNG REQUIRED)
@@ -1341,6 +1308,23 @@ add_lua_executable(
   lyaml
   penlight
   wowlessyaml
+)
+
+lua2c(
+  toolsdb2
+  tools.db2=${CMAKE_CURRENT_SOURCE_DIR}/tools/db2.lua
+)
+add_library(toolsdb2 STATIC toolsdb2.c)
+target_link_libraries(toolsdb2 PRIVATE elune)
+
+add_lua_executable(
+  db2dump
+  ${CMAKE_CURRENT_SOURCE_DIR}/tools/db2dump.lua
+  argparse
+  luafilesystem
+  penlight
+  toolsdb2
+  vstruct
 )
 
 file(GENERATE OUTPUT runtime/platform.lua CONTENT "\
