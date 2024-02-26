@@ -152,7 +152,7 @@ Enum:
     ArchivedPurchasesLoaded: '0x0000000000000800'
     AuctionableTokensLoaded: '0x0000000000008000'
     BattleNetAccountLoaded: '0x0000000000400000'
-    BitVectorsLoaded: '0x0000000400000000'
+    BitVectorsLoaded: '0x0000004000000000'
     BpayAddLicenseObjectsLoaded: '0x0000000000002000'
     BpayDistributionObjectsLoaded: '0x0000000000000400'
     BpayProductitemObjectsLoaded: '0x0000000000080000'
@@ -166,8 +166,11 @@ Enum:
     LoadFailed: '0x0000000000000020'
     MountsLoaded: '0x0000000000000004'
     None: '0x0000000000000000'
+    PerksHeldItemLoaded: '0x0000000400000000'
+    PerksPastRewardsLoaded: '0x0000000000020000'
     PerksPendingPurchaseLoaded: '0x0000000080000000'
-    PerkTablesLoaded: '0x0000000000020000'
+    PerksPendingRewardsLoaded: '0x0000000800000000'
+    PerksRefundsLoaded: '0x0000002000000000'
     PetjournalInitialized: '0x0000000000000008'
     PurchasesLoaded: '0x0000000000000200'
     QuestCriteriaLoaded: '0x0000000000200000'
@@ -184,7 +187,7 @@ Enum:
   AccountStateFlagsMeta:
     MaxValue: -2147483648
     MinValue: 0
-    NumValues: 37
+    NumValues: 40
   ActionBarOrientation:
     Horizontal: 0
     Vertical: 1
@@ -2437,6 +2440,12 @@ Enum:
     MaxValue: 24
     MinValue: 0
     NumValues: 25
+  EventToastFlags:
+    DisableRightClickDismiss: 1
+  EventToastFlagsMeta:
+    MaxValue: 1
+    MinValue: 1
+    NumValues: 1
   ExcludedCensorSources:
     All: 255
     Friends: 1
@@ -5657,6 +5666,21 @@ Enum:
     MaxValue: 1
     MinValue: 0
     NumValues: 2
+  TugOfWarMarkerArrowShownState:
+    Always: 1
+    FlashOnMove: 2
+    Never: 0
+  TugOfWarMarkerArrowShownStateMeta:
+    MaxValue: 2
+    MinValue: 0
+    NumValues: 3
+  TugOfWarStyleValue:
+    ArchaeologyBrown: 1
+    DefaultYellow: 0
+  TugOfWarStyleValueMeta:
+    MaxValue: 1
+    MinValue: 0
+    NumValues: 2
   UICursorType:
     ActionBar: 6
     AmmoObsolete: 9
@@ -5713,8 +5737,8 @@ Enum:
   UIMapFlag:
     AlwaysAllowTaxiPathing: 131072
     AlwaysAllowUserWaypoints: 65536
-    Deprecated: 512
     DoNotShowOnNavbar: 524288
+    DoNotTranslateBranches: 512
     FallbackToParentMap: 16
     FlightMapAutoZoom: 16384
     FlightMapShowZoomOut: 8192

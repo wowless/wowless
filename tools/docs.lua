@@ -48,7 +48,9 @@ do
             APIDocumentation = {
               AddDocumentationTable = function(_, t)
                 require('wowapi.schema').validate(product, schema, t)
-                docs[f] = t
+                if t.Name ~= 'DebugToggle' then -- TODO generalize
+                  docs[f] = t
+                end
               end,
             },
             Constants = setmetatable({}, nsmt),
@@ -121,6 +123,7 @@ local types = {
   LoopType = 'string',
   luaFunction = 'function',
   luaIndex = 'number',
+  LuaValueVariant = 'table',
   ModelAsset = 'string',
   ModelSceneFrame = 'ModelScene',
   ModelSceneFrameActor = 'Actor',
@@ -174,7 +177,8 @@ local tys = {}
 for name, tab in pairs(tabs) do
   tys[name] = tab.Type
 end
-for k in pairs(parseYaml('data/products/' .. product .. '/structures.yaml')) do
+local structs = parseYaml('data/products/' .. product .. '/structures.yaml')
+for k in pairs(structs) do
   if tys[k] and tys[k] ~= 'Structure' then
     error(('%s is a wowless structure but is a %s in docs'):format(k, tys[k]))
   else
@@ -188,17 +192,6 @@ for k in pairs(enum) do
     tys[k] = 'Enumeration'
   end
 end
-local knownMixinStructs = {
-  ColorMixin = 'colorRGBA',
-  ItemLocationMixin = 'ItemLocation',
-  ItemTransmogInfoMixin = 'ItemTransmogInfo',
-  PlayerLocationMixin = 'PlayerLocation',
-  ReportInfoMixin = 'ReportInfo',
-  TransmogLocationMixin = 'TransmogLocation',
-  TransmogPendingInfoMixin = 'TransmogPendingInfo',
-  Vector2DMixin = 'vector2',
-  Vector3DMixin = 'vector3',
-}
 local structRewrites = {
   AzeriteEmpoweredItemLocation = 'ItemLocation',
   AzeriteItemLocation = 'ItemLocation',
@@ -210,8 +203,7 @@ local function t2nty(field, ns)
     assert(t == 'table')
     return { arrayof = t2nty({ Type = field.InnerType }, ns) }
   elseif t == 'table' and field.Mixin then
-    local mst = assert(knownMixinStructs[field.Mixin], 'no struct for mixin ' .. field.Mixin)
-    return { structure = mst }
+    error('no struct for mixin ' .. field.Mixin)
   elseif types[t] then
     return types[t]
   end
@@ -224,7 +216,9 @@ local function t2nty(field, ns)
   elseif ty == 'Enumeration' then
     return { enum = t }
   elseif ty == 'Structure' then
-    -- TODO cross-check mixin
+    if field.Mixin and field.Mixin ~= structs[n].mixin then
+      error(('expected struct %s to have mixin %s'):format(n, field.Mixin))
+    end
     return { structure = n }
   elseif ty == 'CallbackType' then
     return field.Name == 'cbObject' and 'userdata' or 'function'
@@ -242,12 +236,20 @@ local function split(name)
   end
 end
 
+-- Super duper hack, sorry world.
+local unitHacks = {
+  UnitFactionGroup = 'unitName',
+  UnitName = 'unit',
+  UnitIsUnit = 'unitName',
+  UnitRace = 'name',
+}
+
 local function rewriteApis()
   local function insig(fn, ns)
+    local unitHack = unitHacks[fn.Name]
     local t = {}
     for _, a in ipairs(fn.Arguments or {}) do
-      -- Super duper hack, sorry world.
-      if (fn.Name == 'UnitFactionGroup' or fn.Name == 'UnitIsUnit') and a.Name:sub(1, 8) == 'unitName' then
+      if unitHack and a.Name:sub(1, unitHack:len()) == unitHack then
         assert(a.Type == 'cstring')
         assert(not a.Default)
         assert(not a.Nilable)
@@ -284,7 +286,7 @@ local function rewriteApis()
       table.insert(outputs, {
         default = enum[r.Type] and enum[r.Type][r.Default] or r.Default,
         name = r.Name,
-        nilable = r.Nilable or nil,
+        nilable = r.Nilable or fn.Name == 'UnitName' or nil, -- horrible hack
         stub = stubs[r.Name],
         type = t2nty(r, ns),
       })
@@ -319,6 +321,7 @@ local function rewriteApis()
         inputs = insig(fn, ns),
         mayreturnnothing = api and api.mayreturnnothing,
         outputs = outsig(fn, ns, api),
+        stubnothing = api and api.stubnothing,
       }
     end
   end

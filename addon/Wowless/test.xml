@@ -1,5 +1,13 @@
 <Ui>
   <Script>
+    WowlessXmlErrors = {}
+    WowlessOldErrorHandler = geterrorhandler()
+    seterrorhandler(function(e)
+      table.insert(WowlessXmlErrors, e)
+    end)
+  </Script>
+
+  <Script>
     _G.WowlessLog = {}
     local function log(fmt, ...)
       table.insert(_G.WowlessLog, string.format(fmt, ...))
@@ -698,4 +706,51 @@
       </OnLoad>
     </Scripts>
   </Frame>
+
+  <!-- Empty script handlers clear the script. -->
+  <Script>
+    WowlessLog = {}
+  </Script>
+  <Frame name='WowlessScriptClearTemplate' virtual='true'>
+    <Scripts>
+      <OnLoad>table.insert(WowlessLog, tostring(self:GetScript('OnHide') ~= nil))</OnLoad>
+      <OnHide>return</OnHide>
+    </Scripts>
+  </Frame>
+  <Frame inherits='WowlessScriptClearTemplate' />
+  <Frame inherits='WowlessScriptClearTemplate'>
+    <Scripts>
+      <OnHide>return</OnHide>
+    </Scripts>
+  </Frame>
+  <Frame inherits='WowlessScriptClearTemplate'>
+    <Scripts>
+      <OnHide></OnHide>
+    </Scripts>
+  </Frame>
+  <Frame inherits='WowlessScriptClearTemplate'>
+    <Scripts>
+      <OnHide />
+    </Scripts>
+  </Frame>
+  <Frame inherits='WowlessScriptClearTemplate'>
+    <Scripts>
+      <OnHide inherit='prepend' />
+    </Scripts>
+  </Frame>
+  <Frame inherits='WowlessScriptClearTemplate'>
+    <Scripts>
+      <OnHide inherit='append' />
+    </Scripts>
+  </Frame>
+  <Script>
+    assertEquals('true,true,false,false,false,false', table.concat(WowlessLog, ','))
+  </Script>
+
+  <Script>
+    if WowlessOldErrorHandler then
+      seterrorhandler(WowlessOldErrorHandler)
+      WowlessOldErrorHandler = nil
+    end
+  </Script>
 </Ui>

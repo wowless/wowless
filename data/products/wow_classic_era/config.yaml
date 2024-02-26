@@ -16,6 +16,7 @@ addon:
       VasError: {}
       VasServiceType: {}
     globalapis:
+      C_Macro.SetMacroExecuteLineCallback: {}
       CreateForbiddenFrame: {}
       loadstring_untainted: {}
   ignore_cvar_value:

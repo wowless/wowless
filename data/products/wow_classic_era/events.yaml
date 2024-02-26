@@ -4641,6 +4641,8 @@ PLAYER_GUILD_UPDATE:
   payload:
   - name: unitTarget
     type: unit
+PLAYER_IMPULSE_APPLIED:
+  payload: {}
 PLAYER_INTERACTION_MANAGER_FRAME_HIDE:
   payload:
   - name: type
@@ -4651,6 +4653,10 @@ PLAYER_INTERACTION_MANAGER_FRAME_SHOW:
   - name: type
     type:
       enum: PlayerInteractionType
+PLAYER_IS_GLIDING_CHANGED:
+  payload:
+  - name: isGliding
+    type: boolean
 PLAYER_LEAVE_COMBAT:
   payload: {}
 PLAYER_LEAVING_WORLD:
@@ -5660,6 +5666,9 @@ UNIT_AURA:
   payload:
   - name: unitTarget
     type: unit
+  - name: updateInfo
+    type:
+      structure: UnitAuraUpdateInfo
 UNIT_CHEAT_TOGGLE_EVENT:
   payload: {}
 UNIT_CLASSIFICATION_CHANGED:

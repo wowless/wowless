@@ -27,12 +27,6 @@ type:
                         ref: api
                       value:
                         record: null
-          globalenv_in_capsule:
-            type:
-              mapof:
-                key: string
-                value:
-                  record: null
           hooked_globals:
             type:
               mapof:

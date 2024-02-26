@@ -586,6 +586,10 @@ G.testsuite.sync = function()
   }
 end
 
+G.testsuite.xml = function()
+  assertEquals('', table.concat(_G.WowlessXmlErrors, '\n'))
+end
+
 local asyncTests = {
   {
     name = 'event registration and dispatch order',

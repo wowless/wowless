@@ -8,6 +8,7 @@ C_Calendar.SetAbsMonth:
 C_Calendar.SetMonth:
   states:
   - Calendar
+C_ChatInfo.ReplaceIconAndGroupExpressions: {}
 C_ClassTalents.GetActiveConfigID:
   states:
   - Talents
@@ -156,6 +157,11 @@ CreateForbiddenFrame:
 CreateFrame:
   frameworks:
   - api
+DoEmote:
+  frameworks:
+  - api
+  sqls:
+  - lookup: DoEmote
 EnumerateFrames:
   frameworks:
   - api
@@ -318,9 +324,6 @@ UnitIsPlayer: {}
 UnitIsUnit: {}
 UnitLevel: {}
 UnitName: {}
-UnitName_10_2_5:
-  states:
-  - Units
 UnitPowerType:
   sqls:
   - lookup: UnitPowerType

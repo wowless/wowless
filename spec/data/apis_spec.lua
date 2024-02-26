@@ -96,6 +96,11 @@ describe('apis', function()
               end
             end)
           end)
+          describe('stubnothing', function()
+            it('is only true if mayreturnnothing', function()
+              assert(not api.stubnothing or api.mayreturnnothing)
+            end)
+          end)
         end)
       end
     end)

@@ -2855,6 +2855,7 @@ PlayerInfoCharacterData:
         enum: UnitSex
 PlayerLocation:
   fields: {}
+  mixin: PlayerLocationMixin
 QueueSpecificInfo:
   fields:
     activityID:
@@ -2889,6 +2890,7 @@ QueueSpecificInfo:
       type: number
 ReportInfo:
   fields: {}
+  mixin: ReportInfoMixin
 vector2:
   fields:
     x:
