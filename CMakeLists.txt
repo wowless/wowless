@@ -791,7 +791,6 @@ add_lua_executable(
   ${CMAKE_CURRENT_SOURCE_DIR}/tools/fetch.lua
   argparse
   casc
-  dbc
   luacurl
   luaexpat
   luafilesystem
