@@ -146,8 +146,12 @@ local builds = {
     ins = {
       'CMakeLists.txt',
       'data/products.yaml',
+      'ports/elune/portfile.cmake',
+      'ports/elune/vcpkg.json',
       'tools/addons.yaml',
       'tools/mkninja.lua',
+      'vcpkg.json',
+      'vcpkg-configuration.json',
       'wowapi/yaml.lua',
     },
     outs = 'build.ninja',
