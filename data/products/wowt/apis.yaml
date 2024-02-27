@@ -16282,6 +16282,7 @@ C_StoreSecure.GetCharactersForRealm:
     type: table
 C_StoreSecure.GetConfirmationInfo: {}
 C_StoreSecure.GetCurrencyID: {}
+C_StoreSecure.GetCurrencyInfo: {}
 C_StoreSecure.GetEligibleRacesForVASService: {}
 C_StoreSecure.GetEntryInfo: {}
 C_StoreSecure.GetFailureInfo: {}
