@@ -2155,3 +2155,11 @@ UnitPositionFrame:
     SetUnitColor: {}
     StartPlayerPing: {}
     StopPlayerPing: {}
+VertexColor:
+  inherits:
+    Animation: {}
+  methods:
+    GetEndColor: {}
+    GetStartColor: {}
+    SetEndColor: {}
+    SetStartColor: {}
