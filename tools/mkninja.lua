@@ -42,10 +42,7 @@ local perProductAddonGeneratedTypes = {
     return {}
   end,
   uiobjectapis = function(p)
-    return {
-      'build/data/products/' .. p .. '/config.lua',
-      'build/data/products/' .. p .. '/uiobjects.lua',
-    }
+    return { 'build/data/products/' .. p .. '/uiobjects.lua' }
   end,
 }
 
