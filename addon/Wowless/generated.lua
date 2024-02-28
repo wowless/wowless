@@ -409,6 +409,9 @@ G.testsuite.generated = function()
       Translation = function()
         return CreateFrame('Frame'):CreateAnimationGroup():CreateAnimation('Translation')
       end,
+      VertexColor = function()
+        return CreateFrame('Frame'):CreateAnimationGroup():CreateAnimation('VertexColor')
+      end,
     }
     local tests = {}
     for name, cfg in pairs(_G.WowlessData.UIObjectApis) do
