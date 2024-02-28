@@ -416,38 +416,30 @@ G.testsuite.generated = function()
     local tests = {}
     for name, cfg in pairs(_G.WowlessData.UIObjectApis) do
       tests[name] = function()
-        if cfg == false then
+        if not cfg.frametype then
           assertCreateFrameFails(name)
-          table.insert(G.ExpectedLuaWarnings, {
-            warnText = 'Unknown frame type: ' .. name,
-            warnType = 0,
-          })
-        else
-          if not cfg.frametype then
-            assertCreateFrameFails(name)
-            if cfg.warner then
-              table.insert(G.ExpectedLuaWarnings, {
-                warnText = 'Unknown frame type: ' .. name,
-                warnType = 0,
-              })
+          if cfg.warner then
+            table.insert(G.ExpectedLuaWarnings, {
+              warnText = 'Unknown frame type: ' .. name,
+              warnType = 0,
+            })
+          end
+        end
+        if not cfg.virtual then
+          local factory = factories[name]
+            or cfg.frametype and function()
+              return assertCreateFrame(name)
             end
-          end
-          if not cfg.virtual then
-            local factory = factories[name]
-              or cfg.frametype and function()
-                return assertCreateFrame(name)
+          assert(factory, 'missing factory')
+          return mkTests(cfg.objtype, factory, function(__index)
+            local mtests = {}
+            for mname in pairs(cfg.methods) do
+              mtests[mname] = function()
+                return checkCFunc(__index[mname])
               end
-            assert(factory, 'missing factory')
-            return mkTests(cfg.objtype, factory, function(__index)
-              local mtests = {}
-              for mname in pairs(cfg.methods) do
-                mtests[mname] = function()
-                  return checkCFunc(__index[mname])
-                end
-              end
-              return mtests
-            end)
-          end
+            end
+            return mtests
+          end)
         end
       end
     end
