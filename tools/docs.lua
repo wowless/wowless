@@ -477,6 +477,7 @@ local moomap = {
   SimpleAnimTextureCoordTranslationAPI = 'TextureCoordTranslation',
   SimpleAnimTranslationAPI = 'Translation',
   SimpleAnimTranslationLineAPI = 'LineTranslation',
+  SimpleAnimVertexColorAPI = 'VertexColor',
   SimpleBrowserAPI = 'Browser',
   SimpleButtonAPI = 'Button',
   SimpleCheckboxAPI = 'CheckButton',
