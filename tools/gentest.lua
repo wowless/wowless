@@ -115,7 +115,6 @@ local ptablemap = {
     return 'NamespaceApis', t
   end,
   uiobjectapis = function(p)
-    local config = perproduct(p, 'config')
     local uiobjects = perproduct(p, 'uiobjects')
     local inhrev = {}
     for k, cfg in pairs(uiobjects) do
@@ -152,19 +151,17 @@ local ptablemap = {
     addtype('Frame')
     local t = {}
     for k, v in pairs(uiobjects) do
-      if not tpath(config, 'addon', 'skipped_uiobjects', k) then
-        local mt = {}
-        for mk in pairs(v.methods) do
-          mt[mk] = true
-        end
-        t[k] = {
-          frametype = not not frametypes[k],
-          methods = mt,
-          objtype = objTypes[k],
-          virtual = v.virtual,
-          warner = v.warner,
-        }
+      local mt = {}
+      for mk in pairs(v.methods) do
+        mt[mk] = true
       end
+      t[k] = {
+        frametype = not not frametypes[k],
+        methods = mt,
+        objtype = objTypes[k],
+        virtual = v.virtual,
+        warner = v.warner,
+      }
     end
     return 'UIObjectApis', t
   end,
