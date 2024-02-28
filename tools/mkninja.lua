@@ -42,7 +42,11 @@ local perProductAddonGeneratedTypes = {
     return {}
   end,
   uiobjectapis = function(p)
-    return { 'build/data/products/' .. p .. '/uiobjects.lua' }
+    local t = {}
+    for _, p in ipairs(productList) do
+      table.insert(t, 'build/data/products/' .. p .. '/uiobjects.lua')
+    end
+    return t
   end,
 }
 
