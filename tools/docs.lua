@@ -508,13 +508,17 @@ local moomap = {
 }
 local moo2 = {}
 for k, v in pairs(moo) do
-  local mmk = assert(moomap[k], 'unknown doc type ' .. k)
-  local t = moo2[mmk] or {}
-  for mk, mv in pairs(v) do
-    assert(not t[mk], 'multiple specs for ' .. k .. '.' .. mk)
-    t[mk] = mv
+  local mmk = moomap[k]
+  if not mmk then
+    print('unknown doc type ' .. k)
+  else
+    local t = moo2[mmk] or {}
+    for mk, mv in pairs(v) do
+      assert(not t[mk], 'multiple specs for ' .. k .. '.' .. mk)
+      t[mk] = mv
+    end
+    moo2[mmk] = t
   end
-  moo2[mmk] = t
 end
 local filename = ('data/products/%s/uiobjects.yaml'):format(product)
 local uiobjects = require('wowapi.yaml').parseFile(filename)
