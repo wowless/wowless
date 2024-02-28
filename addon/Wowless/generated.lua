@@ -416,6 +416,25 @@ G.testsuite.generated = function()
     local tests = {}
     for name, cfg in pairs(_G.WowlessData.UIObjectApis) do
       tests[name] = function()
+        if cfg.unsupported then
+          return {
+            unsupported = function()
+              return {
+                createframe = function()
+                  table.insert(G.ExpectedLuaWarnings, {
+                    warnText = 'Unknown frame type: ' .. name,
+                    warnType = 0,
+                  })
+                  return assertCreateFrameFails(name)
+                end,
+                factory = function()
+                  local factory = factories[name]
+                  assert(not factory or not pcall(factory))
+                end,
+              }
+            end,
+          }
+        end
         if not cfg.frametype then
           assertCreateFrameFails(name)
           if cfg.warner then
