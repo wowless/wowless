@@ -2194,5 +2194,3 @@ VertexColor:
     GetStartColor: {}
     SetEndColor: {}
     SetStartColor: {}
-WorldFrame:
-  known_unknown: true

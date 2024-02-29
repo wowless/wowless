@@ -2234,5 +2234,3 @@ UnitPositionFrame:
     SetUnitColor: {}
     StartPlayerPing: {}
     StopPlayerPing: {}
-WorldFrame:
-  known_unknown: true

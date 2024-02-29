@@ -190,9 +190,9 @@ local uiobjectimpl = parseYaml('data/uiobjectimpl.yaml')
 local uiobjectinits = {}
 local function mkuiobjectinit(k)
   local init = uiobjectinits[k]
-  local v = uiobjectdata[k]
   if not init then
     init = {}
+    local v = uiobjectdata[k]
     for inh in pairs(v.inherits) do
       Mixin(init, mkuiobjectinit(inh))
     end
@@ -224,7 +224,8 @@ local function mkuiobjectfieldset(k)
   end
   return set
 end
-local function mkuiobject(k, v)
+local uiobjects = {}
+for k, v in pairs(uiobjectdata) do
   local constructor = { 'function() return {' }
   for fk, fv in require('pl.tablex').sort(mkuiobjectinit(k)) do
     table.insert(constructor, ('  %s = %s,'):format(fk, fv))
@@ -294,7 +295,7 @@ local function mkuiobject(k, v)
       methods[mk] = 'function() return ' .. table.concat(t, ',') .. ' end'
     end
   end
-  return {
+  uiobjects[k] = {
     constructor = table.concat(constructor, '\n'),
     inherits = v.inherits,
     methods = methods,
@@ -302,10 +303,6 @@ local function mkuiobject(k, v)
     singleton = v.singleton,
     warner = v.warner,
   }
-end
-local uiobjects = {}
-for k, v in pairs(uiobjectdata) do
-  uiobjects[k] = v.known_unknown and { known_unknown = true } or mkuiobject(k, v)
 end
 
 local data = {

@@ -116,12 +116,6 @@ local ptablemap = {
   end,
   uiobjectapis = function(p)
     local uiobjects = perproduct(p, 'uiobjects')
-    -- TODO remove this
-    for k, v in pairs(uiobjects) do
-      if v.known_unknown then
-        uiobjects[k] = nil
-      end
-    end
     local inhrev = {}
     for k, cfg in pairs(uiobjects) do
       for inh in pairs(cfg.inherits) do
