@@ -193,10 +193,10 @@ local function mkuiobjectinit(k)
   if not init then
     init = {}
     local v = uiobjectdata[k]
-    for inh in pairs(v.inherits or {}) do
+    for inh in pairs(v.inherits) do
       Mixin(init, mkuiobjectinit(inh))
     end
-    for fk, fv in pairs(v.fields or {}) do
+    for fk, fv in pairs(v.fields) do
       if fv.init ~= nil then
         init[fk] = valstr(fv.init)
       elseif fv.type == 'hlist' then
@@ -214,10 +214,10 @@ local function mkuiobjectfieldset(k)
   if not set then
     set = {}
     local v = uiobjectdata[k]
-    for inh in pairs(v.inherits or {}) do
+    for inh in pairs(v.inherits) do
       Mixin(set, mkuiobjectfieldset(inh))
     end
-    for fk, fv in pairs(v.fields or {}) do
+    for fk, fv in pairs(v.fields) do
       set[fk] = fv
     end
     uiobjectfieldsets[k] = set
@@ -233,7 +233,7 @@ for k, v in pairs(uiobjectdata) do
   table.insert(constructor, '} end')
   local fieldset = mkuiobjectfieldset(k)
   local methods = {}
-  for mk, mv in pairs(v.methods or {}) do
+  for mk, mv in pairs(v.methods) do
     if mv.impl then
       assert(uiobjectimpl[mv.impl])
       methods[mk] = {

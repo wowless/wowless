@@ -6,6 +6,7 @@ type:
     value:
       record:
         fields:
+          required: true
           type:
             mapof:
               key: string
@@ -28,6 +29,7 @@ type:
                       - ref: stringenum
                       - ref: uiobject
         inherits:
+          required: true
           type:
             mapof:
               key:
@@ -35,6 +37,7 @@ type:
               value:
                 record: null
         methods:
+          required: true
           type:
             mapof:
               key: string
