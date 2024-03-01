@@ -4,7 +4,7 @@ local iswowlesslite = _G.__wowless and _G.__wowless.lite
 
 assert(_G.WowlessData, 'missing WowlessData')
 
-local capsuleconfig = _G.WowlessData.Config.capsule or {}
+local capsuleconfig = _G.WowlessData.Config.addon.capsule or {}
 local capsuleapis = capsuleconfig.globalapis or {}
 
 local function tget(t, s)
@@ -150,7 +150,7 @@ G.testsuite.generated = function()
       end
       return t
     end)())
-    local toskipin = _G.WowlessData.Config.ignore_cvar_value or {}
+    local toskipin = _G.WowlessData.Config.addon.ignore_cvar_value or {}
     local tests = {}
     for k, v in pairs(expectedCVars) do
       tests[v.name] = function()
@@ -189,7 +189,7 @@ G.testsuite.generated = function()
 
   local function globalApis()
     local tests = mkftests(_G.WowlessData.GlobalApis)
-    for k in pairs(_G.WowlessData.Config.hooked_globals or {}) do
+    for k in pairs(_G.WowlessData.Config.addon.hooked_globals or {}) do
       assert(not tests[k], k)
       tests[k] = function()
         if iswowlesslite then
@@ -413,6 +413,7 @@ G.testsuite.generated = function()
         return CreateFrame('Frame'):CreateAnimationGroup():CreateAnimation('VertexColor')
       end,
     }
+    local warners = _G.WowlessData.Config.runtime.warners
     local tests = {}
     for name, cfg in pairs(_G.WowlessData.UIObjectApis) do
       tests[name] = function()
@@ -437,7 +438,7 @@ G.testsuite.generated = function()
         end
         if not cfg.frametype then
           assertCreateFrameFails(name)
-          if cfg.warner then
+          if warners[name:lower()] then
             table.insert(G.ExpectedLuaWarnings, {
               warnText = 'Unknown frame type: ' .. name,
               warnType = 0,

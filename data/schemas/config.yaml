@@ -84,3 +84,12 @@ type:
                 key: string
                 value:
                   record: null
+    runtime:
+      type:
+        record:
+          warners:
+            type:
+              mapof:
+                key: string
+                value:
+                  record: null

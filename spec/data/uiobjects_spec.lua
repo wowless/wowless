@@ -70,7 +70,7 @@ describe('uiobjects', function()
       for k, v in pairs(uiobjects) do
         describe(k, function()
           describe('fields', function()
-            for fk, fv in pairs(v.fields or {}) do
+            for fk, fv in pairs(v.fields) do
               describe(fk, function()
                 it('is not defined up inheritance tree', function()
                   for inh in pairs(v.inherits) do

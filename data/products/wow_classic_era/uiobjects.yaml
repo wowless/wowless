@@ -42,6 +42,7 @@ Actor:
     StopAnimationKit: {}
   objectType: ModelSceneActor
 Alpha:
+  fields: {}
   inherits:
     Animation: {}
   methods:
@@ -109,6 +110,7 @@ Animation:
     SetTargetParent: {}
     Stop: {}
 AnimationGroup:
+  fields: {}
   inherits:
     ParentedObjectBase: {}
     ScriptObject: {}
@@ -154,6 +156,7 @@ AnimationGroup:
     SetToFinalAlpha: {}
     Stop: {}
 Browser:
+  fields: {}
   inherits:
     Frame: {}
   methods:
@@ -341,6 +344,7 @@ CheckButton:
       setter:
       - name: disabledCheckedTexture
 Checkout:
+  fields: {}
   inherits:
     Frame: {}
   methods:
@@ -354,6 +358,7 @@ Checkout:
     SetZoom: {}
   objectType: BlizzardCheckout
 CinematicModel:
+  fields: {}
   inherits:
     PlayerModel: {}
   methods:
@@ -439,6 +444,7 @@ ColorSelect:
       setter:
       - name: colorWheelThumbTexture
 ControlPoint:
+  fields: {}
   inherits:
     ParentedObject: {}
   methods:
@@ -507,6 +513,7 @@ Cooldown:
     SetTexCoordRange: {}
     SetUseCircularEdge: {}
 DressUpModel:
+  fields: {}
   inherits:
     PlayerModel: {}
   methods:
@@ -671,6 +678,7 @@ FlipBook:
     SetFlipBookFrameWidth: {}
     SetFlipBookRows: {}
 FogOfWarFrame:
+  fields: {}
   inherits:
     Frame: {}
   methods:
@@ -687,6 +695,7 @@ FogOfWarFrame:
     SetMaskScalar: {}
     SetUiMapID: {}
 Font:
+  fields: {}
   inherits:
     FontInstance: {}
     UIObject: {}
@@ -695,6 +704,7 @@ Font:
     GetAlpha: {}
     SetAlpha: {}
 FontInstance:
+  fields: {}
   inherits: {}
   methods:
     GetFont:
@@ -808,7 +818,6 @@ FontString:
       setter:
       - name: textScale
     SetWordWrap: {}
-  warner: true
 Frame:
   fields:
     attributes:
@@ -1240,20 +1249,23 @@ Line:
     SetThickness:
       setter:
       - name: thickness
-  warner: true
 LineScale:
+  fields: {}
   inherits:
     Scale: {}
   methods: {}
 LineTranslation:
+  fields: {}
   inherits:
     Translation: {}
   methods: {}
 MaskTexture:
+  fields: {}
   inherits:
     TextureBase: {}
   methods: {}
 MessageFrame:
+  fields: {}
   inherits:
     FontInstance: {}
     Frame: {}
@@ -1275,6 +1287,7 @@ MessageFrame:
     SetInsertMode: {}
     SetTimeVisible: {}
 Minimap:
+  fields: {}
   inherits:
     Frame: {}
   methods:
@@ -1373,6 +1386,7 @@ Model:
       impl: Model/TransformCameraSpaceToModelSpace
     UseModelCenterToTransform: {}
 ModelScene:
+  fields: {}
   inherits:
     Frame: {}
   methods:
@@ -1446,6 +1460,7 @@ ModelScene:
     SetViewTranslation: {}
     TakeActor: {}
 MovieFrame:
+  fields: {}
   inherits:
     Frame: {}
   methods:
@@ -1454,6 +1469,7 @@ MovieFrame:
     StartMovieByName: {}
     StopMovie: {}
 OffScreenFrame:
+  fields: {}
   inherits:
     Frame: {}
   methods:
@@ -1466,6 +1482,7 @@ OffScreenFrame:
     TestPrintToFile: {}
     UsesNPOT: {}
 ParentedObject:
+  fields: {}
   inherits:
     ParentedObjectBase: {}
   methods:
@@ -1500,6 +1517,7 @@ ParentedObjectBase:
       impl: ParentedObjectBase/SetParentKey
   virtual: true
 Path:
+  fields: {}
   inherits:
     Animation: {}
   methods:
@@ -1523,6 +1541,7 @@ Path:
     GetMaxControlPointOrder: {}
     SetCurveType: {}
 PlayerModel:
+  fields: {}
   inherits:
     Model: {}
   methods:
@@ -1765,6 +1784,7 @@ RegionBase:
       impl: Region/Show
   virtual: true
 Rotation:
+  fields: {}
   inherits:
     Animation: {}
   methods:
@@ -1775,6 +1795,7 @@ Rotation:
     SetOrigin: {}
     SetRadians: {}
 Scale:
+  fields: {}
   inherits:
     Animation: {}
   methods:
@@ -1787,6 +1808,7 @@ Scale:
     SetScaleFrom: {}
     SetScaleTo: {}
 ScriptObject:
+  fields: {}
   inherits:
     ScriptObjectBase: {}
   methods:
@@ -1842,6 +1864,7 @@ ScrollFrame:
     SetVerticalScroll: {}
     UpdateScrollChildRect: {}
 SimpleHTML:
+  fields: {}
   inherits:
     FontInstance: {}
     Frame: {}
@@ -1969,6 +1992,7 @@ StatusBar:
       setter:
       - name: value
 TabardModel:
+  fields: {}
   inherits:
     PlayerModel: {}
   methods:
@@ -1984,6 +2008,7 @@ TabardModel:
     IsGuildTabard: {}
     Save: {}
 Texture:
+  fields: {}
   inherits:
     TextureBase: {}
   methods:
@@ -1991,7 +2016,6 @@ Texture:
     GetMaskTexture: {}
     GetNumMaskTextures: {}
     RemoveMaskTexture: {}
-  warner: true
 TextureBase:
   fields:
     blendMode:
@@ -2121,10 +2145,12 @@ TextureBase:
       - name: vertTile
   virtual: true
 TextureCoordTranslation:
+  fields: {}
   inherits:
     Translation: {}
   methods: {}
 Translation:
+  fields: {}
   inherits:
     Animation: {}
   methods:
@@ -2154,6 +2180,7 @@ UIObject:
       impl: ForbiddenMixin/SetForbidden
   virtual: true
 UnitPositionFrame:
+  fields: {}
   inherits:
     Frame: {}
   methods:
@@ -2170,6 +2197,7 @@ UnitPositionFrame:
     StartPlayerPing: {}
     StopPlayerPing: {}
 VertexColor:
+  fields: {}
   inherits:
     Animation: {}
   methods:
