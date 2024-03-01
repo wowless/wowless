@@ -523,7 +523,7 @@ end
 local filename = ('data/products/%s/uiobjects.yaml'):format(product)
 local uiobjects = require('wowapi.yaml').parseFile(filename)
 for k, v in pairs(moo2) do
-  if k ~= 'FlipBook' then -- TODO fix
+  if not deref(config, 'uiobjects', 'skip', k) then
     local u = assert(uiobjects[k], 'unknown uiobject type ' .. k)
     for mk in pairs(v) do
       if not u.methods[mk] then
