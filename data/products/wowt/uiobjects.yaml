@@ -1982,6 +1982,9 @@ Slider:
     SetValueStep: {}
 StatusBar:
   fields:
+    fillStyle:
+      init: STANDARD
+      type: StatusBarFillStyle
     max:
       init: 0
       type: number
@@ -1997,7 +2000,9 @@ StatusBar:
   inherits:
     Frame: {}
   methods:
-    GetFillStyle: {}
+    GetFillStyle:
+      getter:
+      - name: fillStyle
     GetMinMaxValues:
       getter:
       - name: min
@@ -2016,7 +2021,9 @@ StatusBar:
       - name: value
     IsStatusBarDesaturated: {}
     SetColorFill: {}
-    SetFillStyle: {}
+    SetFillStyle:
+      setter:
+      - name: fillStyle
     SetMinMaxValues:
       setter:
       - name: min

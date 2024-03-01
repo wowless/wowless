@@ -41,3 +41,8 @@ SmoothingType:
   NONE: {}
   OUT: {}
   OUT_IN: {}
+StatusBarFillStyle:
+  CENTER: {}
+  REVERSE: {}
+  STANDARD: {}
+  STANDARD_NO_RANGE_FILL: {}

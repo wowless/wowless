@@ -148,7 +148,6 @@ local types = {
   SimpleWindow = 'table',
   SingleColorValue = 'number',
   size = 'number',
-  StatusBarFillStyle = 'string',
   string = 'string',
   stringView = 'string',
   table = 'table',
