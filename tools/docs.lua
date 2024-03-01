@@ -106,7 +106,6 @@ local types = {
   ClubStreamId = 'string',
   CScriptObject = 'table',
   cstring = 'string',
-  CurveType = 'string',
   FileAsset = 'string',
   fileID = 'number',
   FilterMode = 'string',

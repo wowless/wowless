@@ -5,6 +5,9 @@ BlendMode:
   BLEND: {}
   DISABLE: {}
   MOD: {}
+CurveType:
+  NONE: {}
+  SMOOTH: {}
 DrawLayer:
   ARTWORK: {}
   BACKGROUND: {}

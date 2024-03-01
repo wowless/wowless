@@ -1531,7 +1531,10 @@ ParentedObjectBase:
       impl: ParentedObjectBase/SetParentKey
   virtual: true
 Path:
-  fields: {}
+  fields:
+    curveType:
+      init: NONE
+      type: CurveType
   inherits:
     Animation: {}
   methods:
@@ -1551,9 +1554,13 @@ Path:
       - name: point
         type: ControlPoint
     GetControlPoints: {}
-    GetCurveType: {}
+    GetCurveType:
+      getter:
+      - name: curveType
     GetMaxControlPointOrder: {}
-    SetCurveType: {}
+    SetCurveType:
+      setter:
+      - name: curveType
 PlayerModel:
   fields: {}
   inherits:
