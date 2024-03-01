@@ -76,3 +76,9 @@ runner:
     EVENT: {}
     PTRFEEDBACK: {}
     USERANDOM: {}
+runtime:
+  warners:
+    fontstring: {}
+    line: {}
+    texture: {}
+    worldframe: {}

@@ -301,7 +301,6 @@ for k, v in pairs(uiobjectdata) do
     methods = methods,
     objectType = v.objectType,
     singleton = v.singleton,
-    warner = v.warner,
   }
 end
 

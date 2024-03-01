@@ -73,3 +73,9 @@ runner:
     EDITMODE: {}
     EVENT: {}
     USERANDOM: {}
+runtime:
+  warners:
+    fontstring: {}
+    line: {}
+    texture: {}
+    worldframe: {}

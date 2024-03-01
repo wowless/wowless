@@ -28,7 +28,7 @@ local ptablemap = {
     return 'Build', perproduct(p, 'build')
   end,
   config = function(p)
-    return 'Config', perproduct(p, 'config').addon or {}
+    return 'Config', perproduct(p, 'config')
   end,
   cvars = function(p)
     return 'CVars', perproduct(p, 'cvars')
@@ -160,7 +160,6 @@ local ptablemap = {
         methods = mt,
         objtype = objTypes[k],
         virtual = v.virtual,
-        warner = v.warner,
       }
     end
     return 'UIObjectApis', t

@@ -268,8 +268,7 @@ local function new(log, maxErrors, product)
   local function CreateFrame(type, name, parent, templateNames, id)
     local ltype = string.lower(type)
     if not IsIntrinsicType(ltype) or not InheritsFrom(ltype, 'frame') then
-      -- TODO clean up worldframe here
-      if ltype == 'worldframe' or uiobjectTypes[ltype] and uiobjectTypes[ltype].warner then
+      if datalua.config.runtime.warners[ltype] then
         SendEvent('LUA_WARNING', 0, 'Unknown frame type: ' .. type)
       end
       error('CreateFrame: Unknown frame type \'' .. type .. '\'')

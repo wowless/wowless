@@ -34,7 +34,6 @@ local function mkBaseUIObjectTypes(api)
           isa = isa,
           metaindex = metaindex,
           name = ty.cfg.objectType or k,
-          warner = ty.cfg.warner,
         }
       end
     end
@@ -55,7 +54,6 @@ local function mkBaseUIObjectTypes(api)
         isa = v.isa,
         name = v.name,
         sandboxMT = { __index = sandboxIndex },
-        warner = v.warner,
       }
     end
     return t

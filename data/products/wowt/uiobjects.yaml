@@ -860,7 +860,6 @@ FontString:
       setter:
       - name: textScale
     SetWordWrap: {}
-  warner: true
 Frame:
   fields:
     attributes:
@@ -1236,7 +1235,6 @@ Line:
     SetThickness:
       setter:
       - name: thickness
-  warner: true
 LineScale:
   fields: {}
   inherits:
@@ -2060,7 +2058,6 @@ Texture:
     GetMaskTexture: {}
     GetNumMaskTextures: {}
     RemoveMaskTexture: {}
-  warner: true
 TextureBase:
   fields:
     blendMode:
