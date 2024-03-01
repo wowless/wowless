@@ -69,6 +69,15 @@ type:
                         ref: event
                       value:
                         record: null
+          uiobjects:
+            type:
+              record:
+                skip:
+                  type:
+                    mapof:
+                      key: string
+                      value:
+                        record: null
     runner:
       type:
         record:
