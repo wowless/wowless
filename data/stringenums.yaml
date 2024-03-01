@@ -32,6 +32,10 @@ FrameStrata:
   MEDIUM: {}
   PARENT: {}
   TOOLTIP: {}
+LoopType:
+  BOUNCE: {}
+  NONE: {}
+  REPEAT: {}
 Orientation:
   HORIZONTAL: {}
   VERTICAL: {}

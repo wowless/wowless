@@ -120,7 +120,6 @@ local types = {
   kstringLfgListApplicant = 'string',
   kstringLfgListChat = 'string',
   kstringLfgListSearch = 'string',
-  LoopType = 'string',
   luaFunction = 'function',
   luaIndex = 'number',
   LuaValueVariant = 'table',

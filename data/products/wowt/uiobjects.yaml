@@ -139,7 +139,10 @@ Animation:
     SetTargetParent: {}
     Stop: {}
 AnimationGroup:
-  fields: {}
+  fields:
+    looping:
+      init: NONE
+      type: LoopType
   inherits:
     ParentedObjectBase: {}
     ScriptObject: {}
@@ -166,7 +169,9 @@ AnimationGroup:
     GetAnimationSpeedMultiplier: {}
     GetDuration: {}
     GetElapsed: {}
-    GetLooping: {}
+    GetLooping:
+      getter:
+      - name: looping
     GetLoopState: {}
     GetProgress: {}
     IsDone: {}
@@ -180,7 +185,9 @@ AnimationGroup:
     RemoveAnimations: {}
     Restart: {}
     SetAnimationSpeedMultiplier: {}
-    SetLooping: {}
+    SetLooping:
+      setter:
+      - name: looping
     SetPlaying: {}
     SetToFinalAlpha: {}
     Stop: {}
