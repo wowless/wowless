@@ -162,6 +162,13 @@ local ptablemap = {
         virtual = v.virtual,
       }
     end
+    for _, product in ipairs(dofile('build/data/products.lua')) do
+      for k in pairs(perproduct(product, 'uiobjects')) do
+        if not t[k] then
+          t[k] = { unsupported = true }
+        end
+      end
+    end
     return 'UIObjectApis', t
   end,
 }

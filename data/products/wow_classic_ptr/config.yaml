@@ -67,5 +67,6 @@ runtime:
   warners:
     fontstring: {}
     line: {}
+    scenariopoiframe: {}
     texture: {}
     worldframe: {}

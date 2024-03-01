@@ -294,11 +294,18 @@ G.testsuite.generated = function()
       end
       return process(CreateFrame(ty))
     end
+    local warners = _G.WowlessData.Config.runtime.warners
     local function assertCreateFrameFails(ty)
       local success, err = pcall(CreateFrame, ty)
       assert(not success)
       local expectedErr = 'CreateFrame: Unknown frame type \'' .. ty .. '\''
       assertEquals(expectedErr, err:sub(err:len() - expectedErr:len() + 1))
+      if warners[ty:lower()] then
+        table.insert(G.ExpectedLuaWarnings, {
+          warnText = 'Unknown frame type: ' .. ty,
+          warnType = 0,
+        })
+      end
     end
     local indexes = {}
     local function mkTests(objectTypeName, factory, tests)
@@ -413,18 +420,29 @@ G.testsuite.generated = function()
         return CreateFrame('Frame'):CreateAnimationGroup():CreateAnimation('VertexColor')
       end,
     }
-    local warners = _G.WowlessData.Config.runtime.warners
     local tests = {}
     for name, cfg in pairs(_G.WowlessData.UIObjectApis) do
       tests[name] = function()
+        if cfg.unsupported then
+          return {
+            unsupported = function()
+              return {
+                createframe = function()
+                  assertCreateFrameFails(name)
+                end,
+                factory = function()
+                  local factory = factories[name]
+                  if factory then
+                    local success, obj = pcall(factory)
+                    assert(not success or obj:GetObjectType() ~= name)
+                  end
+                end,
+              }
+            end,
+          }
+        end
         if not cfg.frametype then
           assertCreateFrameFails(name)
-          if warners[name:lower()] then
-            table.insert(G.ExpectedLuaWarnings, {
-              warnText = 'Unknown frame type: ' .. name,
-              warnType = 0,
-            })
-          end
         end
         if not cfg.virtual then
           local factory = factories[name]
