@@ -62,3 +62,9 @@ runner:
     CASTRANDOM: {}
     LOOT_MASTER: {}
     USERANDOM: {}
+runtime:
+  warners:
+    fontstring: {}
+    line: {}
+    texture: {}
+    worldframe: {}
