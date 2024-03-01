@@ -265,6 +265,7 @@ G.testsuite.generated = function()
     local tests = {}
     local arg = {
       assertEquals = G.assertEquals,
+      assertRecursivelyEqual = G.assertRecursivelyEqual,
       check2 = G.check2,
       check6 = G.check6,
       check7 = G.check7,
@@ -272,6 +273,7 @@ G.testsuite.generated = function()
         build = _G.WowlessData.Build,
       },
       env = _G,
+      mixin = G.mixin,
       retn = G.retn,
       wowless = _G.__wowless,
     }

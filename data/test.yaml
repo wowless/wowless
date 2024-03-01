@@ -1,5 +1,8 @@
 ---
 C_CovenantSanctumUI.GetRenownLevels: {}
+C_DateAndTime.AdjustTimeByDays: {}
+C_DateAndTime.AdjustTimeByMinutes: {}
+C_DateAndTime.CompareCalendarTime: {}
 C_Timer.NewTimer: {}
 CreateFrame: {}
 GetBuildInfo_10_1: {}
