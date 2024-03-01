@@ -1,5 +1,5 @@
-local t = ...
-local day = t.data.build.flavor ~= 'Mainline' and 0 or nil
+local T = ...
+local day = T.data.build.flavor ~= 'Mainline' and 0 or nil
 local input = {
   day = day,
   hour = 13,
@@ -28,7 +28,7 @@ local tests = {
     weekday = 6,
     year = 2022,
   },
-  [0] = t.mixin({}, input),
+  [0] = T.mixin({}, input),
   [14] = {
     day = day,
     hour = 13,
@@ -48,12 +48,12 @@ local tests = {
     year = 2023,
   },
 }
-local tt = {}
+local t = {}
 for offset, expected in pairs(tests) do
-  tt[tostring(offset)] = function()
-    local actual = t.retn(1, t.env.C_DateAndTime.AdjustTimeByDays(input, offset))
+  t[tostring(offset)] = function()
+    local actual = T.retn(1, T.env.C_DateAndTime.AdjustTimeByDays(input, offset))
     assert(actual ~= input)
-    return t.assertRecursivelyEqual(expected, actual)
+    return T.assertRecursivelyEqual(expected, actual)
   end
 end
-return tt
+return t
