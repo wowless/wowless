@@ -50,15 +50,6 @@ type:
     docs:
       type:
         record:
-          apis:
-            type:
-              record:
-                skip_namespaces:
-                  type:
-                    mapof:
-                      key: string
-                      value:
-                        record: null
           events:
             type:
               record:
@@ -69,6 +60,12 @@ type:
                         ref: event
                       value:
                         record: null
+          skip_docfiles:
+            type:
+              mapof:
+                key: string
+                value:
+                  record: null
           uiobjects:
             type:
               record:

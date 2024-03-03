@@ -44,16 +44,14 @@ addon:
     raidGraphicsTextureResolution: {}
     RenderScale: {}
 docs:
-  apis:
-    skip_namespaces:
-      C_BarberShopInternal: {}
-      C_ConfigurationWarnings: {}
-      C_EditMode: {}
   events:
     never_sent:
-      EDIT_MODE_LAYOUTS_UPDATED: {}
       PARTY_INVITE_CANCEL: {}
       SECURE_TRANSFER_CONFIRM_SEND_MAIL: {}
+  skip_docfiles:
+    BarberShopInternalDocumentation: {}
+    ConfigurationWarningsDocumentation: {}
+    EditModeManagerDocumentation: {}
   uiobjects:
     skip:
       QuestPOIFrame: {}
