@@ -68,6 +68,7 @@ runner:
     USERANDOM: {}
 runtime:
   warners:
+    archaeologydigsiteframe: {}
     fontstring: {}
     line: {}
     questpoiframe: {}
