@@ -514,12 +514,10 @@ end
 local filename = ('data/products/%s/uiobjects.yaml'):format(product)
 local uiobjects = require('wowapi.yaml').parseFile(filename)
 for k, v in pairs(moo2) do
-  if not deref(config, 'uiobjects', 'skip', k) then
-    local u = assert(uiobjects[k], 'unknown uiobject type ' .. k)
-    for mk in pairs(v) do
-      if not u.methods[mk] then
-        print('missing uiobject method ' .. k .. '.' .. mk)
-      end
+  local u = assert(uiobjects[k], 'unknown uiobject type ' .. k)
+  for mk in pairs(v) do
+    if not u.methods[mk] then
+      print('missing uiobject method ' .. k .. '.' .. mk)
     end
   end
 end
