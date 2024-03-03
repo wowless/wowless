@@ -122,45 +122,43 @@ do
   local cfg = parseYaml('data/products/' .. product .. '/apis.yaml')
   local implcfg = parseYaml('data/impl.yaml')
   for name, apicfg in pairs(cfg) do
-    if not apicfg.debug then
-      if apicfg.impl then
-        local ic = assert(implcfg[apicfg.impl], 'missing impl ' .. apicfg.impl)
-        apicfg.frameworks = ic.frameworks
-        apicfg.sqls = ic.sqls
-        apicfg.states = ic.states
-        if not impls[apicfg.impl] then
-          impls[apicfg.impl] = readFile('data/impl/' .. apicfg.impl .. '.lua')
-        end
-      elseif apicfg.stubnothing then
-        apicfg.stub = ''
-      else
-        local rets = {}
-        for _, out in ipairs(apicfg.outputs or {}) do
-          table.insert(rets, specDefault(out))
-        end
-        apicfg.stub = 'return ' .. table.concat(rets, ',')
+    if apicfg.impl then
+      local ic = assert(implcfg[apicfg.impl], 'missing impl ' .. apicfg.impl)
+      apicfg.frameworks = ic.frameworks
+      apicfg.sqls = ic.sqls
+      apicfg.states = ic.states
+      if not impls[apicfg.impl] then
+        impls[apicfg.impl] = readFile('data/impl/' .. apicfg.impl .. '.lua')
       end
-      for _, sql in ipairs(apicfg.sqls or {}) do
-        if sql.cursor then
-          sqlcursors[sql.cursor] = {
-            sql = readFile('data/sql/cursor/' .. sql.cursor .. '.sql'),
-            table = sql.table,
-          }
-        elseif sql.lookup then
-          sqllookups[sql.lookup] = {
-            sql = readFile('data/sql/lookup/' .. sql.lookup .. '.sql'),
-            table = sql.table,
-          }
-        end
+    elseif apicfg.stubnothing then
+      apicfg.stub = ''
+    else
+      local rets = {}
+      for _, out in ipairs(apicfg.outputs or {}) do
+        table.insert(rets, specDefault(out))
       end
-      for _, state in ipairs(apicfg.states or {}) do
-        if not states[state] then
-          local statecfg = parseYaml('data/state/' .. state .. '.yaml')
-          states[state] = statecfg.value
-        end
-      end
-      apis[name] = apicfg
+      apicfg.stub = 'return ' .. table.concat(rets, ',')
     end
+    for _, sql in ipairs(apicfg.sqls or {}) do
+      if sql.cursor then
+        sqlcursors[sql.cursor] = {
+          sql = readFile('data/sql/cursor/' .. sql.cursor .. '.sql'),
+          table = sql.table,
+        }
+      elseif sql.lookup then
+        sqllookups[sql.lookup] = {
+          sql = readFile('data/sql/lookup/' .. sql.lookup .. '.sql'),
+          table = sql.table,
+        }
+      end
+    end
+    for _, state in ipairs(apicfg.states or {}) do
+      if not states[state] then
+        local statecfg = parseYaml('data/state/' .. state .. '.yaml')
+        states[state] = statecfg.value
+      end
+    end
+    apis[name] = apicfg
   end
 end
 

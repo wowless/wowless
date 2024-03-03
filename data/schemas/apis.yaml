@@ -19,8 +19,6 @@ type:
       - record:
           comment:
             type: string
-          debug:
-            type: boolean
           impl:
             type:
               ref: impl

@@ -26816,10 +26816,6 @@ ResetChatWindows: {}
 ResetCPUUsage: {}
 ResetCursor: {}
 ResetInstances: {}
-ResetPerformanceValues:
-  debug: true
-  inputs: {}
-  outputs: {}
 ResetSetMerchantFilter:
   inputs: {}
   outputs: {}
@@ -27458,35 +27454,10 @@ ToggleAnimKitDisplay:
 ToggleAutoRun:
   inputs: {}
   outputs: {}
-ToggleCollision:
-  debug: true
-  inputs: {}
-  outputs: {}
-ToggleCollisionDisplay:
-  debug: true
-  inputs: {}
-  outputs: {}
 ToggleDebugAIDisplay:
   inputs: {}
   outputs: {}
-TogglePerformancePause:
-  debug: true
-  inputs: {}
-  outputs: {}
-TogglePerformanceValues:
-  debug: true
-  inputs:
-  - type: number
-  outputs: {}
 TogglePetAutocast: {}
-TogglePlayerBounds:
-  debug: true
-  inputs: {}
-  outputs: {}
-TogglePortals:
-  debug: true
-  inputs: {}
-  outputs: {}
 TogglePVP:
   inputs: {}
   outputs: {}
@@ -27501,10 +27472,6 @@ ToggleSheath:
   inputs: {}
   outputs: {}
 ToggleSpellAutocast: {}
-ToggleTris:
-  debug: true
-  inputs: {}
-  outputs: {}
 ToggleWindowed:
   inputs: {}
   outputs: {}
