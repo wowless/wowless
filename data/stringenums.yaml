@@ -5,6 +5,9 @@ BlendMode:
   BLEND: {}
   DISABLE: {}
   MOD: {}
+CurveType:
+  NONE: {}
+  SMOOTH: {}
 DrawLayer:
   ARTWORK: {}
   BACKGROUND: {}
@@ -32,6 +35,10 @@ FrameStrata:
   MEDIUM: {}
   PARENT: {}
   TOOLTIP: {}
+LoopType:
+  BOUNCE: {}
+  NONE: {}
+  REPEAT: {}
 Orientation:
   HORIZONTAL: {}
   VERTICAL: {}
@@ -41,3 +48,8 @@ SmoothingType:
   NONE: {}
   OUT: {}
   OUT_IN: {}
+StatusBarFillStyle:
+  CENTER: {}
+  REVERSE: {}
+  STANDARD: {}
+  STANDARD_NO_RANGE_FILL: {}

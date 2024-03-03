@@ -110,7 +110,10 @@ Animation:
     SetTargetParent: {}
     Stop: {}
 AnimationGroup:
-  fields: {}
+  fields:
+    looping:
+      init: NONE
+      type: LoopType
   inherits:
     ParentedObjectBase: {}
     ScriptObject: {}
@@ -137,7 +140,9 @@ AnimationGroup:
     GetAnimationSpeedMultiplier: {}
     GetDuration: {}
     GetElapsed: {}
-    GetLooping: {}
+    GetLooping:
+      getter:
+      - name: looping
     GetLoopState: {}
     GetProgress: {}
     IsDone: {}
@@ -151,7 +156,9 @@ AnimationGroup:
     RemoveAnimations: {}
     Restart: {}
     SetAnimationSpeedMultiplier: {}
-    SetLooping: {}
+    SetLooping:
+      setter:
+      - name: looping
     SetPlaying: {}
     SetToFinalAlpha: {}
     Stop: {}
@@ -1518,7 +1525,10 @@ ParentedObjectBase:
       impl: ParentedObjectBase/SetParentKey
   virtual: true
 Path:
-  fields: {}
+  fields:
+    curveType:
+      init: NONE
+      type: CurveType
   inherits:
     Animation: {}
   methods:
@@ -1538,9 +1548,13 @@ Path:
       - name: point
         type: ControlPoint
     GetControlPoints: {}
-    GetCurveType: {}
+    GetCurveType:
+      getter:
+      - name: curveType
     GetMaxControlPointOrder: {}
-    SetCurveType: {}
+    SetCurveType:
+      setter:
+      - name: curveType
 PlayerModel:
   fields: {}
   inherits:
@@ -1941,6 +1955,9 @@ Slider:
     SetValueStep: {}
 StatusBar:
   fields:
+    fillStyle:
+      init: STANDARD
+      type: StatusBarFillStyle
     max:
       init: 0
       type: number
@@ -1956,7 +1973,9 @@ StatusBar:
   inherits:
     Frame: {}
   methods:
-    GetFillStyle: {}
+    GetFillStyle:
+      getter:
+      - name: fillStyle
     GetMinMaxValues:
       getter:
       - name: min
@@ -1975,7 +1994,9 @@ StatusBar:
       - name: value
     IsStatusBarDesaturated: {}
     SetColorFill: {}
-    SetFillStyle: {}
+    SetFillStyle:
+      setter:
+      - name: fillStyle
     SetMinMaxValues:
       setter:
       - name: min

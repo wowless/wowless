@@ -61,8 +61,12 @@ C_CVar.RegisterCVar:
 C_CVar.SetCVar:
   states:
   - CVars
-C_DateAndTime.AdjustTimeByDays: {}
-C_DateAndTime.AdjustTimeByMinutes: {}
+C_DateAndTime.AdjustTimeByDays:
+  frameworks:
+  - datalua
+C_DateAndTime.AdjustTimeByMinutes:
+  frameworks:
+  - datalua
 C_DateAndTime.CompareCalendarTime: {}
 C_EventUtils.IsEventValid:
   frameworks:

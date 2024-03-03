@@ -1,4 +1,4 @@
-local t = ...
+local T = ...
 return {
   failures = function()
     local types = {
@@ -6,12 +6,12 @@ return {
       'PingPin',
       'PingPinFrame',
     }
-    local tt = {}
+    local t = {}
     for _, v in ipairs(types) do
-      tt[v] = function()
-        assert(not pcall(t.env.CreateFrame, v))
+      t[v] = function()
+        assert(not pcall(T.env.CreateFrame, v))
       end
     end
-    return tt
+    return t
   end,
 }
