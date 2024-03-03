@@ -71,7 +71,7 @@ do
   processDocDir(prefix .. 'Blizzard_APIDocumentationGenerated')
 end
 
-local config = parseYaml('data/products/' .. product .. '/config.yaml').docs
+local config = parseYaml('data/products/' .. product .. '/docs.yaml')
 local enum = parseYaml('data/products/' .. product .. '/globals.yaml').Enum
 
 for k in pairs(deref(config, 'skip_docfiles') or {}) do

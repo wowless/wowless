@@ -20,6 +20,7 @@ local productschemas = {
   build = 'build',
   config = 'config',
   cvars = 'cvars',
+  docs = 'docs',
   events = 'events',
   globals = 'globals',
   structures = 'structures',

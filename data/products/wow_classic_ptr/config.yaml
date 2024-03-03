@@ -43,15 +43,6 @@ addon:
     raidGraphicsSSAO: {}
     raidGraphicsTextureResolution: {}
     RenderScale: {}
-docs:
-  events:
-    never_sent:
-      INVENTORY_SEARCH_UPDATE: {}
-      PARTY_INVITE_CANCEL: {}
-      SECURE_TRANSFER_CONFIRM_SEND_MAIL: {}
-  skip_docfiles:
-    ConfigurationWarningsDocumentation: {}
-    EditModeManagerDocumentation: {}
 runner:
   skip_events:
     AJ_PVP_RBG_ACTION: missing HonorFrame_SetType

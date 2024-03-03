@@ -1203,7 +1203,7 @@ yaml2lua(test)
 yaml2lua(uiobjectimpl)
 
 foreach(product ${products})
-  foreach(yaml apis build config cvars events globals structures uiobjects xml)
+  foreach(yaml apis build config cvars docs events globals structures uiobjects xml)
     yaml2lua(products/${product}/${yaml})
     list(
       APPEND yamlluas
@@ -1220,6 +1220,7 @@ list(
   build
   config
   cvars
+  docs
   doctable
   events
   flavors

@@ -1,0 +1,20 @@
+---
+name: docs
+type:
+  record:
+    events:
+      type:
+        record:
+          never_sent:
+            type:
+              mapof:
+                key:
+                  ref: event
+                value:
+                  record: null
+    skip_docfiles:
+      type:
+        mapof:
+          key: string
+          value:
+            record: null
