@@ -413,61 +413,64 @@ local function rewriteStructures(outApis, outEvents)
   writeifchanged(filename, pprintYaml(out))
 end
 
-local moo = {}
-
-for _, t in pairs(scrobjs) do
-  assert(not next(t.Events))
-  assert(not next(t.Tables))
-  local fns = {}
-  for _, fn in ipairs(t.Functions) do
-    assert(not fns[fn.Name])
-    local inputs = {}
-    for _, arg in ipairs(fn.Arguments or {}) do
-      table.insert(inputs, {
-        default = arg.Default,
-        name = arg.Name,
-        nilable = arg.Nilable or nil,
-        type = t2nty(arg),
-      })
+local function rewriteUIObjects()
+  local pscrobjs = {}
+  for _, t in pairs(scrobjs) do
+    assert(not next(t.Events))
+    assert(not next(t.Tables))
+    local fns = {}
+    for _, fn in ipairs(t.Functions) do
+      assert(not fns[fn.Name])
+      local inputs = {}
+      for _, arg in ipairs(fn.Arguments or {}) do
+        table.insert(inputs, {
+          default = arg.Default,
+          name = arg.Name,
+          nilable = arg.Nilable or nil,
+          type = t2nty(arg),
+        })
+      end
+      local outputs = {}
+      for _, ret in ipairs(fn.Returns or {}) do
+        table.insert(outputs, {
+          default = ret.Default,
+          name = ret.Name,
+          nilable = ret.Nilable or nil,
+          type = t2nty(ret),
+        })
+      end
+      fns[fn.Name] = {
+        inputs = inputs,
+        outputs = outputs,
+      }
     end
-    local outputs = {}
-    for _, ret in ipairs(fn.Returns or {}) do
-      table.insert(outputs, {
-        default = ret.Default,
-        name = ret.Name,
-        nilable = ret.Nilable or nil,
-        type = t2nty(ret),
-      })
+    pscrobjs[t.Name] = fns
+  end
+  local moo2 = {}
+  for k, v in pairs(pscrobjs) do
+    local mmk = assert(config.script_objects[k], 'unknown doc type ' .. k)
+    local t = moo2[mmk] or {}
+    for mk, mv in pairs(v) do
+      assert(not t[mk], 'multiple specs for ' .. k .. '.' .. mk)
+      t[mk] = mv
     end
-    fns[fn.Name] = {
-      inputs = inputs,
-      outputs = outputs,
-    }
+    moo2[mmk] = t
   end
-  moo[t.Name] = fns
-end
-local moo2 = {}
-for k, v in pairs(moo) do
-  local mmk = assert(config.script_objects[k], 'unknown doc type ' .. k)
-  local t = moo2[mmk] or {}
-  for mk, mv in pairs(v) do
-    assert(not t[mk], 'multiple specs for ' .. k .. '.' .. mk)
-    t[mk] = mv
-  end
-  moo2[mmk] = t
-end
-local filename = ('data/products/%s/uiobjects.yaml'):format(product)
-local uiobjects = require('wowapi.yaml').parseFile(filename)
-for k, v in pairs(moo2) do
-  local u = assert(uiobjects[k], 'unknown uiobject type ' .. k)
-  for mk in pairs(v) do
-    if not u.methods[mk] then
-      print('missing uiobject method ' .. k .. '.' .. mk)
+  local filename = ('data/products/%s/uiobjects.yaml'):format(product)
+  local uiobjects = require('wowapi.yaml').parseFile(filename)
+  for k, v in pairs(moo2) do
+    local u = assert(uiobjects[k], 'unknown uiobject type ' .. k)
+    for mk in pairs(v) do
+      if not u.methods[mk] then
+        print('missing uiobject method ' .. k .. '.' .. mk)
+      end
     end
   end
 end
-os.exit(0)
+rewriteUIObjects() -- TODO remove me
+os.exit(0) -- TODO remove me
 
 local outApis = rewriteApis()
 local outEvents = rewriteEvents()
 rewriteStructures(outApis, outEvents)
+rewriteUIObjects()
