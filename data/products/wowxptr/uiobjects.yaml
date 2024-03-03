@@ -191,6 +191,12 @@ AnimationGroup:
     SetPlaying: {}
     SetToFinalAlpha: {}
     Stop: {}
+ArchaeologyDigSiteFrame:
+  fields: {}
+  inherits:
+    Frame: {}
+    POIFrame: {}
+  methods: {}
 Browser:
   fields: {}
   inherits:
@@ -1601,7 +1607,6 @@ POIFrame:
     SetMapID: {}
     SetMergeThreshold: {}
     SetNumSplinePoints: {}
-    UpdateMouseOverTooltip: {}
   virtual: true
 QuestPOIFrame:
   fields: {}
@@ -1611,6 +1616,7 @@ QuestPOIFrame:
   methods:
     GetNumTooltips: {}
     GetTooltipIndex: {}
+    UpdateMouseOverTooltip: {}
 Region:
   fields:
     animationGroups:
@@ -1856,6 +1862,7 @@ ScenarioPOIFrame:
     POIFrame: {}
   methods:
     GetScenarioTooltipText: {}
+    UpdateMouseOverTooltip: {}
 ScriptObject:
   fields: {}
   inherits:
