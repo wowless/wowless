@@ -62,5 +62,6 @@ script_objects:
 skip_docfiles:
   BarberShopInternalDocumentation: {}
   ConfigurationWarningsDocumentation: {}
+  DebugToggleDocumentation: {}
   PingPinFrameAPIDocumentation: {}
   SimpleModelFFXAPIDocumentation: {}

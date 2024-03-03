@@ -27471,10 +27471,6 @@ ResetChatWindows: {}
 ResetCPUUsage: {}
 ResetCursor: {}
 ResetInstances: {}
-ResetPerformanceValues:
-  debug: true
-  inputs: {}
-  outputs: {}
 ResetSetMerchantFilter:
   inputs: {}
   outputs: {}
@@ -28184,15 +28180,6 @@ ToggleAutoRun:
   outputs: {}
 ToggleDebugAIDisplay:
   inputs: {}
-  outputs: {}
-TogglePerformancePause:
-  debug: true
-  inputs: {}
-  outputs: {}
-TogglePerformanceValues:
-  debug: true
-  inputs:
-  - type: number
   outputs: {}
 TogglePetAutocast: {}
 TogglePVP:

@@ -59,6 +59,7 @@ script_objects:
 skip_docfiles:
   BarberShopInternalDocumentation: {}
   ConfigurationWarningsDocumentation: {}
+  DebugToggleDocumentation: {}
   EditModeManagerDocumentation: {}
   FrameAPIBlobDocumentation: {}
   FrameAPIQuestPOIDocumentation: {}

@@ -57,7 +57,7 @@ local ptablemap = {
     local config = perproduct(p, 'config')
     local t = {}
     for name, api in pairs(perproduct(p, 'apis')) do
-      if not name:find('%.') and not api.debug then
+      if not name:find('%.') then
         local vv = {
           alias = api.alias,
           nowrap = api.nowrap,
@@ -93,7 +93,7 @@ local ptablemap = {
     local apiNamespaces = {}
     for k, api in pairs(perproduct(p, 'apis')) do
       local dot = k:find('%.')
-      if dot and not api.debug then
+      if dot then
         local name = k:sub(1, dot - 1)
         apiNamespaces[name] = apiNamespaces[name] or { methods = {} }
         apiNamespaces[name].methods[k:sub(dot + 1)] = api
