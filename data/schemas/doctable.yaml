@@ -1,5 +1,5 @@
 ---
-name: docs
+name: doctable
 type:
   record:
     Documentation:

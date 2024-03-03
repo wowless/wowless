@@ -1220,7 +1220,7 @@ list(
   build
   config
   cvars
-  docs
+  doctable
   events
   flavors
   globals

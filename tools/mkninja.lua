@@ -412,7 +412,7 @@ local yamls = {
   'data/schemas/build.yaml',
   'data/schemas/config.yaml',
   'data/schemas/cvars.yaml',
-  'data/schemas/docs.yaml',
+  'data/schemas/doctable.yaml',
   'data/schemas/events.yaml',
   'data/schemas/flavors.yaml',
   'data/schemas/globals.yaml',

@@ -39,7 +39,7 @@ do
       return setmetatable({}, nummt)
     end,
   }
-  local schema = require('wowapi.yaml').parseFile('data/schemas/docs.yaml').type
+  local schema = require('wowapi.yaml').parseFile('data/schemas/doctable.yaml').type
   local function processDocDir(docdir)
     if lfs.attributes(docdir) then
       for f in lfs.dir(docdir) do
