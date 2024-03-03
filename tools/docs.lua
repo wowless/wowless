@@ -80,7 +80,7 @@ for k in pairs(deref(config, 'skip_docfiles') or {}) do
   docs[f] = nil
 end
 
-local tabs, funcs, events = {}, {}, {}
+local tabs, funcs, events, scrobjs = {}, {}, {}, {}
 for _, t in pairs(docs) do
   if not t.Type or t.Type == 'System' then
     for _, tab in ipairs(t.Tables or {}) do
@@ -98,7 +98,15 @@ for _, t in pairs(docs) do
       assert(not events[name])
       events[name] = event
     end
+  elseif t.Type == 'ScriptObject' then
+    assert(config.script_objects[t.Name], 'missing script object mapping for ' .. t.Name)
+    assert(not scrobjs[t.Name])
+    scrobjs[t.Name] = t
   end
+end
+
+for k in pairs(config.script_objects) do
+  assert(scrobjs[k], 'redundant script object mapping ' .. k)
 end
 
 local types = {

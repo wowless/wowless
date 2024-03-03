@@ -12,6 +12,12 @@ type:
                   ref: event
                 value:
                   record: null
+    script_objects:
+      type:
+        mapof:
+          key: string
+          value:
+            ref: uiobject
     skip_docfiles:
       type:
         mapof:
