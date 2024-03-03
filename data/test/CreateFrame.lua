@@ -2,6 +2,7 @@ local T = ...
 return {
   failures = function()
     local types = {
+      'ModelFFX', -- glue only
       'NonsenseType',
       'PingPin',
       'PingPinFrame',

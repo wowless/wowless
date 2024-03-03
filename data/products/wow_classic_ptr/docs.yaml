@@ -47,7 +47,6 @@ script_objects:
   SimpleMaskTextureAPI: MaskTexture
   SimpleMessageFrameAPI: MessageFrame
   SimpleModelAPI: Model
-  SimpleModelFFXAPI: Model
   SimpleMovieAPI: MovieFrame
   SimpleObjectAPI: ParentedObjectBase
   SimpleOffScreenFrameAPI: OffScreenFrame
@@ -63,3 +62,4 @@ skip_docfiles:
   ConfigurationWarningsDocumentation: {}
   EditModeManagerDocumentation: {}
   PingPinFrameAPIDocumentation: {}
+  SimpleModelFFXAPIDocumentation: {}
