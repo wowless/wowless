@@ -74,6 +74,12 @@ end
 local config = parseYaml('data/products/' .. product .. '/config.yaml').docs
 local enum = parseYaml('data/products/' .. product .. '/globals.yaml').Enum
 
+for k in pairs(deref(config, 'skip_docfiles') or {}) do
+  local f = k .. '.lua'
+  assert(docs[f], 'missing skip_docfiles ' .. f)
+  docs[f] = nil
+end
+
 local tabs, funcs, events = {}, {}, {}
 for _, t in pairs(docs) do
   if not t.Type or t.Type == 'System' then
@@ -299,31 +305,19 @@ local function rewriteApis()
     end
     return outputs
   end
-  local cfgskip = deref(config, 'apis', 'skip_namespaces') or {}
-  local function skip(name)
-    local ns = split(name)
-    return ns and cfgskip[ns]
-  end
   local y = require('wowapi.yaml')
   local f = 'data/products/' .. product .. '/apis.yaml'
   local apis = y.parseFile(f)
-  local nss = {}
   for name, fn in pairs(funcs) do
-    nss[split(name) or ''] = true
-    if not skip(name) then
-      local ns = split(name)
-      local api = apis[name]
-      apis[name] = {
-        impl = api and api.impl,
-        inputs = insig(fn, ns),
-        mayreturnnothing = api and api.mayreturnnothing,
-        outputs = outsig(fn, ns, api),
-        stubnothing = api and api.stubnothing,
-      }
-    end
-  end
-  for k in pairs(cfgskip) do
-    assert(nss[k], k .. ' in skip_namespaces but not in docs')
+    local ns = split(name)
+    local api = apis[name]
+    apis[name] = {
+      impl = api and api.impl,
+      inputs = insig(fn, ns),
+      mayreturnnothing = api and api.mayreturnnothing,
+      outputs = outsig(fn, ns, api),
+      stubnothing = api and api.stubnothing,
+    }
   end
   writeifchanged(f, y.pprint(apis))
   return apis
