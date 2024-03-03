@@ -63,6 +63,7 @@ docs:
   skip_docfiles:
     BarberShopInternalDocumentation: {}
     ConfigurationWarningsDocumentation: {}
+    PingPinFrameAPIDocumentation: {}
 runner:
   skip_events:
     PERKS_PROGRAM_OPEN: needs C_ModelInfo.GetModelSceneInfoByID implemented
