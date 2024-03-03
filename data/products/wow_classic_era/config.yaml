@@ -49,7 +49,9 @@ docs:
     BarberShopInternalDocumentation: {}
     ConfigurationWarningsDocumentation: {}
     EditModeManagerDocumentation: {}
+    FrameAPIBlobDocumentation: {}
     FrameAPIQuestPOIDocumentation: {}
+    PingPinFrameAPIDocumentation: {}
 runner:
   skip_events:
     AJ_PVP_RBG_ACTION: missing HonorFrame_SetType

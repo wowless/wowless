@@ -52,6 +52,7 @@ docs:
   skip_docfiles:
     ConfigurationWarningsDocumentation: {}
     EditModeManagerDocumentation: {}
+    PingPinFrameAPIDocumentation: {}
 runner:
   skip_events:
     AJ_PVP_RBG_ACTION: missing HonorFrame_SetType
