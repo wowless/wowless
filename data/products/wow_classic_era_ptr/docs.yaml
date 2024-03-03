@@ -1,0 +1,12 @@
+---
+events:
+  never_sent:
+    PARTY_INVITE_CANCEL: {}
+    SECURE_TRANSFER_CONFIRM_SEND_MAIL: {}
+skip_docfiles:
+  BarberShopInternalDocumentation: {}
+  ConfigurationWarningsDocumentation: {}
+  EditModeManagerDocumentation: {}
+  FrameAPIBlobDocumentation: {}
+  FrameAPIQuestPOIDocumentation: {}
+  PingPinFrameAPIDocumentation: {}

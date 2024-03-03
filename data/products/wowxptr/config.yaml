@@ -58,14 +58,6 @@ addon:
     C_Traits.GetEntryInfo: {}
     C_Traits.GetTreeInfo: {}
     SetPortraitToTexture: {}
-docs:
-  events:
-    never_sent:
-      SECURE_TRANSFER_CONFIRM_SEND_MAIL: {}
-  skip_docfiles:
-    BarberShopInternalDocumentation: {}
-    ConfigurationWarningsDocumentation: {}
-    PingPinFrameAPIDocumentation: {}
 runner:
   skip_events:
     PERKS_PROGRAM_OPEN: needs C_ModelInfo.GetModelSceneInfoByID implemented

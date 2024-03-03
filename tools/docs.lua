@@ -39,7 +39,7 @@ do
       return setmetatable({}, nummt)
     end,
   }
-  local schema = require('wowapi.yaml').parseFile('data/schemas/docs.yaml').type
+  local schema = require('wowapi.yaml').parseFile('data/schemas/doctable.yaml').type
   local function processDocDir(docdir)
     if lfs.attributes(docdir) then
       for f in lfs.dir(docdir) do
@@ -71,7 +71,7 @@ do
   processDocDir(prefix .. 'Blizzard_APIDocumentationGenerated')
 end
 
-local config = parseYaml('data/products/' .. product .. '/config.yaml').docs
+local config = parseYaml('data/products/' .. product .. '/docs.yaml')
 local enum = parseYaml('data/products/' .. product .. '/globals.yaml').Enum
 
 for k in pairs(deref(config, 'skip_docfiles') or {}) do

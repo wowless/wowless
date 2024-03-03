@@ -1,0 +1,8 @@
+---
+events:
+  never_sent:
+    SECURE_TRANSFER_CONFIRM_SEND_MAIL: {}
+skip_docfiles:
+  BarberShopInternalDocumentation: {}
+  ConfigurationWarningsDocumentation: {}
+  PingPinFrameAPIDocumentation: {}
