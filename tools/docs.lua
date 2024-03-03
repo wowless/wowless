@@ -99,9 +99,14 @@ for _, t in pairs(docs) do
       events[name] = event
     end
   elseif t.Type == 'ScriptObject' then
+    assert(config.script_objects[t.Name], 'missing script object mapping for ' .. t.Name)
     assert(not scrobjs[t.Name])
     scrobjs[t.Name] = t
   end
+end
+
+for k in pairs(config.script_objects) do
+  assert(scrobjs[k], 'redundant script object mapping ' .. k)
 end
 
 local types = {
