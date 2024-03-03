@@ -441,68 +441,9 @@ for _, t in pairs(scrobjs) do
   end
   moo[t.Name] = fns
 end
-local moomap = {
-  FrameAPIArchaeologyDigSiteFrame = 'ArchaeologyDigSiteFrame',
-  FrameAPIBlob = 'QuestPOIFrame', -- TODO actually POIFrame
-  FrameAPICharacterModelBase = 'PlayerModel',
-  FrameAPICinematicModel = 'CinematicModel',
-  FrameAPICooldown = 'Cooldown',
-  FrameAPIDressUpModel = 'DressUpModel',
-  FrameAPIFogOfWarFrame = 'FogOfWarFrame',
-  FrameAPIModelSceneFrame = 'ModelScene',
-  FrameAPIModelSceneFrameActor = 'Actor',
-  FrameAPIModelSceneFrameActorBase = 'Actor',
-  FrameAPIQuestPOI = 'QuestPOIFrame',
-  FrameAPIScenarioPOI = 'ScenarioPOIFrame',
-  FrameAPISimpleCheckout = 'Checkout',
-  FrameAPITabardModel = 'TabardModel',
-  FrameAPITabardModelBase = 'TabardModel',
-  FrameAPIUnitPositionFrame = 'UnitPositionFrame',
-  MinimapFrameAPI = 'Minimap',
-  SimpleAnimAPI = 'Animation',
-  SimpleAnimAlphaAPI = 'Alpha',
-  SimpleAnimatableObjectAPI = 'Animation',
-  SimpleAnimFlipBookAPI = 'FlipBook',
-  SimpleAnimGroupAPI = 'AnimationGroup',
-  SimpleAnimPathAPI = 'Path',
-  SimpleAnimRotationAPI = 'Rotation',
-  SimpleAnimScaleAPI = 'Scale',
-  SimpleAnimScaleLineAPI = 'LineScale',
-  SimpleAnimTextureCoordTranslationAPI = 'TextureCoordTranslation',
-  SimpleAnimTranslationAPI = 'Translation',
-  SimpleAnimTranslationLineAPI = 'LineTranslation',
-  SimpleAnimVertexColorAPI = 'VertexColor',
-  SimpleBrowserAPI = 'Browser',
-  SimpleButtonAPI = 'Button',
-  SimpleCheckboxAPI = 'CheckButton',
-  SimpleColorSelectAPI = 'ColorSelect',
-  SimpleControlPointAPI = 'ControlPoint',
-  SimpleEditBoxAPI = 'EditBox',
-  SimpleFontAPI = 'Font',
-  SimpleFontStringAPI = 'FontString',
-  SimpleFrameAPI = 'Frame',
-  SimpleFrameScriptObjectAPI = 'UIObject',
-  SimpleHTMLAPI = 'SimpleHTML',
-  SimpleLineAPI = 'Line',
-  SimpleMaskTextureAPI = 'MaskTexture',
-  SimpleMessageFrameAPI = 'MessageFrame',
-  SimpleModelAPI = 'Model',
-  SimpleModelFFXAPI = 'Model',
-  SimpleMovieAPI = 'MovieFrame',
-  SimpleObjectAPI = 'ParentedObjectBase',
-  SimpleOffScreenFrameAPI = 'OffScreenFrame',
-  SimpleRegionAPI = 'Region',
-  SimpleScrollFrameAPI = 'ScrollFrame',
-  SimpleScriptRegionAPI = 'Region',
-  SimpleScriptRegionResizingAPI = 'Region',
-  SimpleSliderAPI = 'Slider',
-  SimpleStatusBarAPI = 'StatusBar',
-  SimpleTextureAPI = 'Texture',
-  SimpleTextureBaseAPI = 'TextureBase',
-}
 local moo2 = {}
 for k, v in pairs(moo) do
-  local mmk = assert(moomap[k], 'unknown doc type ' .. k)
+  local mmk = assert(config.script_objects[k], 'unknown doc type ' .. k)
   local t = moo2[mmk] or {}
   for mk, mv in pairs(v) do
     assert(not t[mk], 'multiple specs for ' .. k .. '.' .. mk)

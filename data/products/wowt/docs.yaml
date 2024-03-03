@@ -2,6 +2,64 @@
 events:
   never_sent:
     SECURE_TRANSFER_CONFIRM_SEND_MAIL: {}
+script_objects:
+  FrameAPIArchaeologyDigSiteFrame: ArchaeologyDigSiteFrame
+  FrameAPIBlob: POIFrame
+  FrameAPICharacterModelBase: PlayerModel
+  FrameAPICinematicModel: CinematicModel
+  FrameAPICooldown: Cooldown
+  FrameAPIDressUpModel: DressUpModel
+  FrameAPIFogOfWarFrame: FogOfWarFrame
+  FrameAPIModelSceneFrame: ModelScene
+  FrameAPIModelSceneFrameActor: Actor
+  FrameAPIModelSceneFrameActorBase: Actor
+  FrameAPIQuestPOI: QuestPOIFrame
+  FrameAPIScenarioPOI: ScenarioPOIFrame
+  FrameAPISimpleCheckout: Checkout
+  FrameAPITabardModel: TabardModel
+  FrameAPITabardModelBase: TabardModel
+  FrameAPIUnitPositionFrame: UnitPositionFrame
+  MinimapFrameAPI: Minimap
+  SimpleAnimAlphaAPI: Alpha
+  SimpleAnimAPI: Animation
+  SimpleAnimatableObjectAPI: Animation
+  SimpleAnimFlipBookAPI: FlipBook
+  SimpleAnimGroupAPI: AnimationGroup
+  SimpleAnimPathAPI: Path
+  SimpleAnimRotationAPI: Rotation
+  SimpleAnimScaleAPI: Scale
+  SimpleAnimScaleLineAPI: LineScale
+  SimpleAnimTextureCoordTranslationAPI: TextureCoordTranslation
+  SimpleAnimTranslationAPI: Translation
+  SimpleAnimTranslationLineAPI: LineTranslation
+  SimpleAnimVertexColorAPI: VertexColor
+  SimpleBrowserAPI: Browser
+  SimpleButtonAPI: Button
+  SimpleCheckboxAPI: CheckButton
+  SimpleColorSelectAPI: ColorSelect
+  SimpleControlPointAPI: ControlPoint
+  SimpleEditBoxAPI: EditBox
+  SimpleFontAPI: Font
+  SimpleFontStringAPI: FontString
+  SimpleFrameAPI: Frame
+  SimpleFrameScriptObjectAPI: UIObject
+  SimpleHTMLAPI: SimpleHTML
+  SimpleLineAPI: Line
+  SimpleMaskTextureAPI: MaskTexture
+  SimpleMessageFrameAPI: MessageFrame
+  SimpleModelAPI: Model
+  SimpleModelFFXAPI: Model
+  SimpleMovieAPI: MovieFrame
+  SimpleObjectAPI: ParentedObjectBase
+  SimpleOffScreenFrameAPI: OffScreenFrame
+  SimpleRegionAPI: Region
+  SimpleScriptRegionAPI: Region
+  SimpleScriptRegionResizingAPI: Region
+  SimpleScrollFrameAPI: ScrollFrame
+  SimpleSliderAPI: Slider
+  SimpleStatusBarAPI: StatusBar
+  SimpleTextureAPI: Texture
+  SimpleTextureBaseAPI: TextureBase
 skip_docfiles:
   BarberShopInternalDocumentation: {}
   ConfigurationWarningsDocumentation: {}
