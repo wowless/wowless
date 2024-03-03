@@ -48,7 +48,6 @@ script_objects:
   SimpleMaskTextureAPI: MaskTexture
   SimpleMessageFrameAPI: MessageFrame
   SimpleModelAPI: Model
-  SimpleModelFFXAPI: Model
   SimpleMovieAPI: MovieFrame
   SimpleObjectAPI: ParentedObjectBase
   SimpleOffScreenFrameAPI: OffScreenFrame
@@ -64,3 +63,4 @@ skip_docfiles:
   BarberShopInternalDocumentation: {}
   ConfigurationWarningsDocumentation: {}
   PingPinFrameAPIDocumentation: {}
+  SimpleModelFFXAPIDocumentation: {}
