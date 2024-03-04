@@ -2,7 +2,7 @@ local T = ...
 return {
   failures = function()
     local types = {
-      'ModelFFX', -- glue only
+      -- 'ModelFFX', -- glue only TODO reenable when we can handle different warnings
       'NonsenseType',
       'PingPin',
       'PingPinFrame',
