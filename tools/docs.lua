@@ -364,7 +364,7 @@ local function rewriteEvents()
   return out
 end
 
-local function rewriteStructures(outApis, outEvents)
+local function rewriteStructures(outApis, outEvents, outUIObjects)
   local filename = ('data/products/%s/structures.yaml'):format(product)
   local structures = require('wowapi.yaml').parseFile(filename)
   for name, tab in pairs(tabs) do
@@ -408,6 +408,15 @@ local function rewriteStructures(outApis, outEvents)
   for _, event in pairs(outEvents) do
     processList(event.payload)
   end
+  for _, uiobject in pairs(outUIObjects) do
+    for _, field in pairs(uiobject.fields) do
+      processType(field.type)
+    end
+    for _, method in pairs(uiobject.methods) do
+      processList(method.inputs)
+      processList(method.outputs)
+    end
+  end
   writeifchanged(filename, pprintYaml(out))
 end
 
@@ -444,31 +453,36 @@ local function rewriteUIObjects()
     end
     pscrobjs[t.Name] = fns
   end
-  local moo2 = {}
+  local mapped = {}
   for k, v in pairs(pscrobjs) do
     local mmk = assert(config.script_objects[k], 'unknown doc type ' .. k)
-    local t = moo2[mmk] or {}
+    local t = mapped[mmk] or {}
     for mk, mv in pairs(v) do
       assert(not t[mk], 'multiple specs for ' .. k .. '.' .. mk)
       t[mk] = mv
     end
-    moo2[mmk] = t
+    mapped[mmk] = t
   end
   local filename = ('data/products/%s/uiobjects.yaml'):format(product)
   local uiobjects = require('wowapi.yaml').parseFile(filename)
-  for k, v in pairs(moo2) do
+  for k, v in pairs(mapped) do
     local u = assert(uiobjects[k], 'unknown uiobject type ' .. k)
-    for mk in pairs(v) do
-      if not u.methods[mk] then
-        print('missing uiobject method ' .. k .. '.' .. mk)
+    for mk, mv in pairs(v) do
+      local mm = u.methods[mk]
+      -- TODO make this work with all methods
+      if mm and not mm then
+        u.methods[mk] = {
+          inputs = mv.inputs,
+          outputs = mv.outputs,
+        }
       end
     end
   end
+  writeifchanged(filename, pprintYaml(uiobjects))
+  return uiobjects
 end
-rewriteUIObjects() -- TODO remove me
-os.exit(0) -- TODO remove me
 
 local outApis = rewriteApis()
 local outEvents = rewriteEvents()
-rewriteStructures(outApis, outEvents)
-rewriteUIObjects()
+local outUIObjects = rewriteUIObjects()
+rewriteStructures(outApis, outEvents, outUIObjects)
