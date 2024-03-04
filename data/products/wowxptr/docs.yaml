@@ -63,3 +63,50 @@ skip_docfiles:
   ConfigurationWarningsDocumentation: {}
   PingPinFrameAPIDocumentation: {}
   SimpleModelFFXAPIDocumentation: {}
+typedefs:
+  BigInteger: number
+  BigUInteger: number
+  bool: boolean
+  CalendarEventID: string
+  ChatBubbleFrame: table
+  ClubId: string
+  ClubInvitationId: string
+  ClubStreamId: string
+  cstring: string
+  fileID: number
+  GarrisonFollower: string
+  HTMLTextType: string
+  InventorySlots: number
+  ItemInfo: string
+  kstringClubMessage: string
+  kstringLfgListApplicant: string
+  kstringLfgListChat: string
+  kstringLfgListSearch: string
+  luaIndex: number
+  ModelSceneFrame: ModelScene
+  ModelSceneFrameActor: Actor
+  mouseButton: string
+  NamePlateFrame: table
+  NotificationDbId: string
+  number: number
+  RecruitAcceptanceID: string
+  ScriptRegion: table
+  SimpleFont: table
+  SimpleFrame: Frame
+  SimpleTexture: Texture
+  SimpleWindow: table
+  string: string
+  stringView: string
+  TBFStyleFlags: string
+  TextureAssetDisk: string
+  textureAtlas: string
+  textureKit: string
+  time_t: number
+  TooltipComparisonItem: table
+  uiAddon: uiAddon
+  UiMapPoint: table
+  uiUnit: number
+  UnitToken: unit
+  WeeklyRewardItemDBID: string
+  WOWGUID: string
+  WOWMONEY: number

@@ -65,3 +65,40 @@ skip_docfiles:
   FrameAPIQuestPOIDocumentation: {}
   PingPinFrameAPIDocumentation: {}
   SimpleModelFFXAPIDocumentation: {}
+typedefs:
+  BigUInteger: number
+  bool: boolean
+  CalendarEventID: string
+  ChatBubbleFrame: table
+  ClubId: string
+  ClubInvitationId: string
+  ClubStreamId: string
+  cstring: string
+  fileID: number
+  HTMLTextType: string
+  ItemInfo: string
+  kstringClubMessage: string
+  kstringLfgListApplicant: string
+  kstringLfgListChat: string
+  kstringLfgListSearch: string
+  luaIndex: number
+  ModelSceneFrame: ModelScene
+  ModelSceneFrameActor: Actor
+  NamePlateFrame: table
+  NotificationDbId: string
+  number: number
+  ScriptRegion: table
+  SimpleFrame: Frame
+  SimpleTexture: Texture
+  SimpleWindow: table
+  string: string
+  TBFStyleFlags: string
+  textureAtlas: string
+  textureKit: string
+  time_t: number
+  TooltipComparisonItem: table
+  uiAddon: uiAddon
+  uiUnit: number
+  UnitToken: unit
+  WOWGUID: string
+  WOWMONEY: number

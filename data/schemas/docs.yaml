@@ -24,3 +24,9 @@ type:
           key: string
           value:
             record: null
+    typedefs:
+      type:
+        mapof:
+          key: string
+          value:
+            schema: type

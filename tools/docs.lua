@@ -107,81 +107,8 @@ for k in pairs(config.script_objects) do
   assert(scrobjs[k], 'redundant script object mapping ' .. k)
 end
 
-local types = {
-  BigInteger = 'number',
-  BigUInteger = 'number',
-  bool = 'boolean',
-  CalendarEventID = 'string',
-  ChatBubbleFrame = 'table',
-  ClubId = 'string',
-  ClubInvitationId = 'string',
-  ClubStreamId = 'string',
-  CScriptObject = 'table',
-  cstring = 'string',
-  FileAsset = 'string',
-  fileID = 'number',
-  FilterMode = 'string',
-  ['function'] = 'function',
-  GarrisonFollower = 'string',
-  HTMLTextType = 'string',
-  InsertMode = 'string',
-  InventorySlots = 'number',
-  ItemInfo = 'string',
-  kstringClubMessage = 'string',
-  kstringLfgListApplicant = 'string',
-  kstringLfgListChat = 'string',
-  kstringLfgListSearch = 'string',
-  luaFunction = 'function',
-  luaIndex = 'number',
-  LuaValueVariant = 'table',
-  ModelAsset = 'string',
-  ModelSceneFrame = 'ModelScene',
-  ModelSceneFrameActor = 'Actor',
-  mouseButton = 'string',
-  NamePlateFrame = 'table',
-  normalizedValue = 'number',
-  NotificationDbId = 'string',
-  number = 'number',
-  RecruitAcceptanceID = 'string',
-  ScriptRegion = 'table',
-  SimpleAnim = 'table',
-  SimpleAnimGroup = 'table',
-  SimpleButtonStateToken = 'string',
-  SimpleControlPoint = 'table',
-  SimpleFont = 'table',
-  SimpleFontString = 'table',
-  SimpleFrame = 'Frame',
-  SimpleLine = 'table',
-  SimpleMaskTexture = 'table',
-  SimplePathAnim = 'table',
-  SimpleTexture = 'Texture',
-  SimpleWindow = 'table',
-  SingleColorValue = 'number',
-  size = 'number',
-  string = 'string',
-  stringView = 'string',
-  table = 'table',
-  TBFFlags = 'string',
-  TBFStyleFlags = 'string',
-  TextureAsset = 'string',
-  TextureAssetDisk = 'string',
-  textureAtlas = 'string',
-  textureKit = 'string',
-  time_t = 'number',
-  TooltipComparisonItem = 'table',
-  uiAddon = 'uiAddon',
-  uiFontHeight = 'number',
-  UiMapPoint = 'table',
-  uiUnit = 'number',
-  UnitToken = 'unit',
-  WeeklyRewardItemDBID = 'string',
-  WOWGUID = 'string',
-  WOWMONEY = 'number',
-}
-for k in pairs(parseYaml('data/stringenums.yaml')) do
-  assert(not types[k])
-  types[k] = k
-end
+local typedefs = config.typedefs or {}
+local stringenums = parseYaml('data/stringenums.yaml')
 local tys = {}
 for name, tab in pairs(tabs) do
   tys[name] = tab.Type
@@ -206,6 +133,7 @@ local structRewrites = {
   AzeriteItemLocation = 'ItemLocation',
   EmptiableItemLocation = 'ItemLocation',
 }
+local used_typedefs = {}
 local function t2nty(field, ns)
   local t = field.Type
   if field.InnerType then
@@ -213,8 +141,11 @@ local function t2nty(field, ns)
     return { arrayof = t2nty({ Type = field.InnerType }, ns) }
   elseif t == 'table' and field.Mixin then
     error('no struct for mixin ' .. field.Mixin)
-  elseif types[t] then
-    return types[t]
+  elseif typedefs[t] then
+    used_typedefs[t] = true
+    return typedefs[t]
+  elseif stringenums[t] then
+    return t
   end
   local n = ns and tys[ns .. '.' .. t] and (ns .. '.' .. t) or t
   n = structRewrites[n] or n
@@ -411,3 +342,11 @@ end
 local outApis = rewriteApis()
 local outEvents = rewriteEvents()
 rewriteStructures(outApis, outEvents)
+
+local unused_typedefs = {}
+for k in pairs(typedefs) do
+  if not used_typedefs[k] then
+    unused_typedefs[k] = true
+  end
+end
+assert(not next(unused_typedefs), 'unused typedefs = ' .. require('pl.pretty').write(unused_typedefs))
