@@ -14,8 +14,13 @@ describe('apis', function()
             for k, input in ipairs(api.inputs or {}) do
               describe(k, function()
                 if input.type == 'nil' then
-                  it('is typed nil so it has no default', function()
-                    assert.Nil(input.default)
+                  describe('is typed nil so it', function()
+                    it('has no explicit default', function()
+                      assert.Nil(input.default)
+                    end)
+                    it('is not explicitly nilable', function()
+                      assert.Nil(input.nilable)
+                    end)
                   end)
                 end
                 if input.default ~= nil then
@@ -56,11 +61,16 @@ describe('apis', function()
             for k, output in ipairs(api.outputs or {}) do
               describe(k, function()
                 if output.type == 'nil' then
-                  it('is typed nil so it has no default', function()
-                    assert.Nil(output.default)
-                  end)
-                  it('is typed nil so it has no stub', function()
-                    assert.Nil(output.stub)
+                  describe('is typed nil so it', function()
+                    it('has no explicit default', function()
+                      assert.Nil(output.default)
+                    end)
+                    it('has no explicit stub', function()
+                      assert.Nil(output.stub)
+                    end)
+                    it('is not explicitly nilable', function()
+                      assert.Nil(output.nilable)
+                    end)
                   end)
                 end
                 if output.default ~= nil then

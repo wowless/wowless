@@ -21922,7 +21922,6 @@ CreateWindow:
     type: boolean
   outputs:
   - name: window
-    nilable: true
     type: nil
 CursorHasItem: {}
 CursorHasMacro: {}

@@ -223,12 +223,13 @@ local function rewriteApis()
     end
     local outputs = {}
     for _, r in ipairs(fn.Returns or {}) do
+      local ty = t2nty(r, ns)
       table.insert(outputs, {
         default = enum[r.Type] and enum[r.Type][r.Default] or r.Default,
         name = r.Name,
-        nilable = r.Nilable or fn.Name == 'UnitName' or nil, -- horrible hack
+        nilable = (r.Nilable or fn.Name == 'UnitName') and ty ~= 'nil' or nil, -- horrible hack
         stub = stubs[r.Name],
-        type = t2nty(r, ns),
+        type = ty,
       })
       stubs[r.Name] = nil
     end
