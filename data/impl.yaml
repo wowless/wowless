@@ -161,6 +161,7 @@ CreateForbiddenFrame:
 CreateFrame:
   frameworks:
   - api
+CreateWindow: {}
 DoEmote:
   frameworks:
   - api

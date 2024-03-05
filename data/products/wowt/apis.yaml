@@ -21915,6 +21915,7 @@ CreateFrame:
 CreateMacro: {}
 CreateNewRaidProfile: {}
 CreateWindow:
+  impl: CreateWindow
   inputs:
   - default: true
     name: popupStyle

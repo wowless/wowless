@@ -5,6 +5,7 @@ C_DateAndTime.AdjustTimeByMinutes: {}
 C_DateAndTime.CompareCalendarTime: {}
 C_Timer.NewTimer: {}
 CreateFrame: {}
+CreateWindow: {}
 EnumerateFrames: {}
 GetBuildInfo_10_1: {}
 GetBuildInfo_1_15_0: {}
