@@ -13,6 +13,11 @@ describe('apis', function()
           describe('inputs', function()
             for k, input in ipairs(api.inputs or {}) do
               describe(k, function()
+                if input.type == 'nil' then
+                  it('is typed nil so it has no default', function()
+                    assert.Nil(input.default)
+                  end)
+                end
                 if input.default ~= nil then
                   it('default must typecheck', function()
                     local value, errmsg = typechecker(input, input.default, true)
@@ -50,6 +55,14 @@ describe('apis', function()
           describe('outputs', function()
             for k, output in ipairs(api.outputs or {}) do
               describe(k, function()
+                if output.type == 'nil' then
+                  it('is typed nil so it has no default', function()
+                    assert.Nil(output.default)
+                  end)
+                  it('is typed nil so it has no stub', function()
+                    assert.Nil(output.stub)
+                  end)
+                end
                 if output.default ~= nil then
                   it('default must typecheck', function()
                     local value, errmsg = typechecker(output, output.default, true)
