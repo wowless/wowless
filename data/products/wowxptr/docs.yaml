@@ -94,7 +94,7 @@ typedefs:
   SimpleFont: table
   SimpleFrame: Frame
   SimpleTexture: Texture
-  SimpleWindow: table
+  SimpleWindow: nil
   string: string
   stringView: string
   TBFStyleFlags: string

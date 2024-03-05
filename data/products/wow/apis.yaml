@@ -21923,7 +21923,7 @@ CreateWindow:
   outputs:
   - name: window
     nilable: true
-    type: table
+    type: nil
 CursorHasItem: {}
 CursorHasMacro: {}
 CursorHasMoney: {}

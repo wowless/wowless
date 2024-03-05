@@ -90,7 +90,7 @@ typedefs:
   ScriptRegion: table
   SimpleFrame: Frame
   SimpleTexture: Texture
-  SimpleWindow: table
+  SimpleWindow: nil
   string: string
   TBFStyleFlags: string
   textureAtlas: string

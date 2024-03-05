@@ -9949,7 +9949,7 @@ CreateWindow:
   outputs:
   - name: window
     nilable: true
-    type: table
+    type: nil
 CursorCanGoInSlot:
   inputs:
   - name: slot
