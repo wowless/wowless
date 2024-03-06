@@ -1330,6 +1330,7 @@ lua2c(
   wowapi.uiobjects=${CMAKE_CURRENT_SOURCE_DIR}/wowapi/uiobjects.lua
   wowless.api=${CMAKE_CURRENT_SOURCE_DIR}/wowless/api.lua
   wowless.env=${CMAKE_CURRENT_SOURCE_DIR}/wowless/env.lua
+  wowless.events=${CMAKE_CURRENT_SOURCE_DIR}/wowless/events.lua
   wowless.ext=c
   wowless.hlist=${CMAKE_CURRENT_SOURCE_DIR}/wowless/hlist.lua
   wowless.loader=${CMAKE_CURRENT_SOURCE_DIR}/wowless/loader.lua
