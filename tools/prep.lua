@@ -74,7 +74,7 @@ local specDefault = (function()
     if spec.default ~= nil then
       return valstr(spec.default)
     end
-    if spec.nilable then
+    if spec.nilable and not spec.stubnotnil then
       return 'nil'
     end
     local ty = assert(spec.type, 'spec missing a type')

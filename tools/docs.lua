@@ -216,10 +216,10 @@ local function rewriteApis()
   end
   local function outsig(fn, ns, api)
     local stubs = {}
+    local stubnotnils = {}
     for _, output in ipairs(api and api.outputs or {}) do
-      if output.stub ~= nil then
-        stubs[output.name] = output.stub
-      end
+      stubs[output.name] = output.stub
+      stubnotnils[output.name] = output.stubnotnil
     end
     local outputs = {}
     for _, r in ipairs(fn.Returns or {}) do
@@ -229,6 +229,7 @@ local function rewriteApis()
         name = r.Name,
         nilable = (r.Nilable or fn.Name == 'UnitName') and ty ~= 'nil' or nil, -- horrible hack
         stub = stubs[r.Name],
+        stubnotnil = stubnotnils[r.Name],
         type = ty,
       })
       stubs[r.Name] = nil

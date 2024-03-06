@@ -7258,15 +7258,7 @@ C_QuestInfoSystem.GetQuestRewardSpellInfo:
   outputs:
   - name: info
     nilable: true
-    stub:
-      genericUnlock: false
-      hideSpellLearnText: false
-      isBoostSpell: false
-      isSpellLearned: false
-      isTradeskill: false
-      name: ''
-      texture: 1
-      type: 0
+    stubnotnil: true
     type:
       structure: C_QuestInfoSystem.QuestRewardSpellInfo
 C_QuestInfoSystem.GetQuestRewardSpells:
