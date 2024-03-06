@@ -2,13 +2,15 @@ local util = require('wowless.util')
 
 local function loadSqls(sqlitedb, cursorSqls, lookupSqls)
   local function lookup(stmt, isTable)
+    -- Manually pull out the first element of these iterators.
     if isTable then
-      for row in stmt:nrows() do -- luacheck: ignore 512
-        return row
-      end
+      local f, s = stmt:nrows()
+      return f(s)
     else
-      for row in stmt:rows() do -- luacheck: ignore 512
-        return unpack(row)
+      local f, s = stmt:rows()
+      local t = f(s)
+      if t then
+        return unpack(t)
       end
     end
   end
