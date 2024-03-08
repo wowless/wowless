@@ -318,7 +318,6 @@ local function new(log, maxErrors, product)
     CreateUIObject = CreateUIObject,
     datalua = datalua,
     env = env,
-    events = events,
     frames = frames,
     GetDebugName = GetDebugName,
     GetErrorCount = GetErrorCount,

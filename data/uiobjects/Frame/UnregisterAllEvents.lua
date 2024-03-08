@@ -1,3 +1,3 @@
 return (function(self)
-  return api.events.UnregisterAllEvents(self)
+  return api.modules.events.UnregisterAllEvents(self)
 end)(...)
