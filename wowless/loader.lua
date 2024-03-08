@@ -287,8 +287,8 @@ local function loader(api, cfg)
         parent:SetMinResize(getXY(e.kids[#e.kids]))
       end
     end,
-    modifiedclick = function(_, e)
-      api.states.ModifiedClicks[e.attr.action] = e.attr.default
+    modifiedclick = function()
+      -- TODO support modified clicks
     end,
     offset = function(ctx, e, parent)
       assert(ctx.shadow, 'this should only run on shadow for now')

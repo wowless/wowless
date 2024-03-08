@@ -1249,7 +1249,6 @@ list(
   Bindings
   CVars
   Calendar
-  ModifiedClicks
   System
   Talents
   Time

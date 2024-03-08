@@ -432,7 +432,6 @@ local yamls = {
   'data/state/Bindings.yaml',
   'data/state/CVars.yaml',
   'data/state/Calendar.yaml',
-  'data/state/ModifiedClicks.yaml',
   'data/state/System.yaml',
   'data/state/Talents.yaml',
   'data/state/Time.yaml',
