@@ -208,8 +208,8 @@ GetFrameMetatable:
   frameworks:
   - api
 GetFramesRegisteredForEvent:
-  frameworks:
-  - events
+  function: GetFramesRegisteredForEventUnpacked
+  module: events
 GetInventorySlotInfo:
   sqls:
   - lookup: GetInventorySlotInfo

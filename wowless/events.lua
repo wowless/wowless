@@ -55,8 +55,13 @@ return function(datalua)
     return ret
   end
 
+  local function GetFramesRegisteredForEventUnpacked(event)
+    return unpack(GetFramesRegisteredForEvent(event))
+  end
+
   return {
     GetFramesRegisteredForEvent = GetFramesRegisteredForEvent,
+    GetFramesRegisteredForEventUnpacked = GetFramesRegisteredForEventUnpacked,
     IsEventRegistered = IsEventRegistered,
     IsEventValid = IsEventValid,
     RegisterAllEvents = RegisterAllEvents,

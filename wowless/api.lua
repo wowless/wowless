@@ -293,6 +293,7 @@ local function new(log, maxErrors, product)
   end
 
   local modules = {
+    events = events,
     macrotext = (function()
       local callback
       return {
