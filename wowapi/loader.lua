@@ -60,6 +60,7 @@ local function loadFunctions(api, loader)
     api = api, -- TODO replace api framework with something finer grained
     datalua = api.datalua,
     env = api.env,
+    events = api.events,
     loader = loader,
   }
 

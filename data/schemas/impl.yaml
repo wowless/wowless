@@ -12,6 +12,7 @@ type:
               - literal: api
               - literal: datalua
               - literal: env
+              - literal: events
               - literal: loader
         sqls:
           type:
