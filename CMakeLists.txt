@@ -1247,7 +1247,6 @@ list(
   states
   Addons
   Bindings
-  ModifiedClicks
   System
   Talents
   Units
