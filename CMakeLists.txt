@@ -1247,7 +1247,6 @@ list(
   states
   Addons
   Bindings
-  CVars
   Calendar
   ModifiedClicks
   System
@@ -1332,6 +1331,7 @@ lua2c(
   wowless.ext=c
   wowless.hlist=${CMAKE_CURRENT_SOURCE_DIR}/wowless/hlist.lua
   wowless.loader=${CMAKE_CURRENT_SOURCE_DIR}/wowless/loader.lua
+  wowless.modules.cvars=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/cvars.lua
   wowless.modules.events=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/events.lua
   wowless.modules.macrotext=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/macrotext.lua
   wowless.modules.time=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/time.lua

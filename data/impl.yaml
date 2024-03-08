@@ -43,24 +43,15 @@ C_CreatureInfo.GetClassInfo:
   - lookup: C_CreatureInfo.GetClassInfo
     table: true
 C_CVar.GetCVar:
-  frameworks:
-  - datalua
-  states:
-  - CVars
+  module: cvars
 C_CVar.GetCVarBool:
-  frameworks:
-  - datalua
-  states:
-  - CVars
+  module: cvars
 C_CVar.GetCVarDefault:
-  frameworks:
-  - datalua
+  module: cvars
 C_CVar.RegisterCVar:
-  states:
-  - CVars
+  module: cvars
 C_CVar.SetCVar:
-  states:
-  - CVars
+  module: cvars
 C_DateAndTime.AdjustTimeByDays:
   frameworks:
   - datalua
