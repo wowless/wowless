@@ -305,7 +305,7 @@ RequestTimePlayed:
   - api
   states:
   - Time
-RunMacroText_Callback:
+RunMacroText:
   frameworks:
   - api
 RunScript: {}
