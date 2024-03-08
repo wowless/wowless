@@ -1,13 +1,10 @@
 ---
 C_Calendar.GetMonthInfo:
-  states:
-  - Calendar
+  module: calendar
 C_Calendar.SetAbsMonth:
-  states:
-  - Calendar
+  module: calendar
 C_Calendar.SetMonth:
-  states:
-  - Calendar
+  module: calendar
 C_ChatInfo.ReplaceIconAndGroupExpressions: {}
 C_ClassTalents.GetActiveConfigID:
   states:
