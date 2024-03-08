@@ -435,7 +435,6 @@ local yamls = {
   'data/state/ModifiedClicks.yaml',
   'data/state/System.yaml',
   'data/state/Talents.yaml',
-  'data/state/Time.yaml',
   'data/state/Units.yaml',
   'data/test.yaml',
   'data/uiobjectimpl.yaml',
