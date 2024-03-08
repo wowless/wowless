@@ -103,14 +103,11 @@ C_Texture.GetAtlasInfo_10_2:
   sqls:
   - lookup: C_Texture.GetAtlasInfo_10_2
 C_Timer.After:
-  states:
-  - Time
+  module: time
 C_Timer.NewTicker:
-  states:
-  - Time
+  module: time
 C_Timer.NewTimer:
-  states:
-  - Time
+  module: time
 C_Traits.GetConfigInfo:
   frameworks:
   - datalua
@@ -278,8 +275,7 @@ GetTalentTabInfo_Wrath:
   states:
   - Units
 GetTime:
-  states:
-  - Time
+  module: time
 IsAddOnLoaded: {}
 IsAddOnLoadOnDemand: {}
 IsLinuxClient:
@@ -303,8 +299,6 @@ LoadAddOn:
 RequestTimePlayed:
   frameworks:
   - api
-  states:
-  - Time
 RunMacroText:
   module: macrotext
 RunScript: {}
@@ -313,7 +307,6 @@ SendSystemMessage:
   frameworks:
   - api
   states:
-  - Time
   - Units
 SetPortraitTexture: {}
 UnitClass:
