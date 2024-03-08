@@ -11030,7 +11030,8 @@ GetFramerate:
   inputs: {}
   outputs:
   - type: number
-GetFramesRegisteredForEvent: {}
+GetFramesRegisteredForEvent:
+  impl: GetFramesRegisteredForEvent
 GetFunctionCPUUsage: {}
 GetGameMessageInfo: {}
 GetGameTime:

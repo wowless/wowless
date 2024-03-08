@@ -207,6 +207,9 @@ GetFontStringMetatable:
 GetFrameMetatable:
   frameworks:
   - api
+GetFramesRegisteredForEvent:
+  frameworks:
+  - api
 GetInventorySlotInfo:
   sqls:
   - lookup: GetInventorySlotInfo

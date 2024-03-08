@@ -621,6 +621,7 @@ local asyncTests = {
         end)
         return f
       end
+      local before = { _G.GetFramesRegisteredForEvent(event) }
       local t, a = {}, {}
       for i = 1, 32 do
         table.insert(a, mkframe('a' .. i))
@@ -645,6 +646,8 @@ local asyncTests = {
         a[i]:RegisterAllEvents()
       end
       assertEquals(0, #log)
+      local after = { _G.GetFramesRegisteredForEvent(event) }
+      assertEquals(#before + pending, #after)
       SendSystemMessage(msg)
     end,
   },

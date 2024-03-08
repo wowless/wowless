@@ -22774,7 +22774,8 @@ GetFramerate:
   inputs: {}
   outputs:
   - type: number
-GetFramesRegisteredForEvent: {}
+GetFramesRegisteredForEvent:
+  impl: GetFramesRegisteredForEvent
 GetGameMessageInfo: {}
 GetGameTime:
   inputs: {}
