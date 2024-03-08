@@ -129,9 +129,7 @@ local function run(cfg)
       end
       for cmd in require('pl.tablex').sort(cmds) do
         api.log(2, 'firing emote chat command %s', cmd)
-        if api.macroExecuteLineCallback then
-          api.CallSandbox(api.macroExecuteLineCallback, cmd)
-        end
+        api.modules.macrotext.RunMacroText(cmd)
       end
     end,
     enterleave = function()
@@ -206,9 +204,7 @@ local function run(cfg)
       end
       for k, v in require('pl.tablex').sort(cmds) do
         api.log(2, 'firing chat command ' .. k .. ' via ' .. v)
-        if api.macroExecuteLineCallback then
-          api.CallSandbox(api.macroExecuteLineCallback, v)
-        end
+        api.modules.macrotext.RunMacroText(v)
       end
     end,
     update = function()

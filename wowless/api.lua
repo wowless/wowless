@@ -292,6 +292,24 @@ local function new(log, maxErrors, product)
     states[k] = require('pl.tablex').deepcopy(v)
   end
 
+  local modules = {
+    macrotext = (function()
+      local callback
+      return {
+        RunMacroText = function(cmd)
+          if callback then
+            for _, line in ipairs({ strsplit('\n', cmd) }) do
+              CallSandbox(callback, line)
+            end
+          end
+        end,
+        SetCallback = function(cb)
+          callback = cb
+        end,
+      }
+    end)(),
+  }
+
   local api = {
     CallSafely = CallSafely,
     CallSandbox = CallSandbox,
@@ -306,6 +324,7 @@ local function new(log, maxErrors, product)
     InheritsFrom = InheritsFrom,
     IsIntrinsicType = IsIntrinsicType,
     log = log,
+    modules = modules,
     NextFrame = NextFrame,
     ParentSub = ParentSub,
     platform = require('runtime.platform'),

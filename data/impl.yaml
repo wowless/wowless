@@ -79,8 +79,8 @@ C_ItemInteraction.GetItemInteractionInfo:
   - lookup: C_ItemInteraction.GetItemInteractionInfo
     table: true
 C_Macro.SetMacroExecuteLineCallback:
-  frameworks:
-  - api
+  function: SetCallback
+  module: macrotext
 C_Map.GetMapInfo:
   sqls:
   - lookup: C_Map.GetMapInfo
@@ -306,8 +306,7 @@ RequestTimePlayed:
   states:
   - Time
 RunMacroText:
-  frameworks:
-  - api
+  module: macrotext
 RunScript: {}
 SecureCmdOptionParse: {}
 SendSystemMessage:
