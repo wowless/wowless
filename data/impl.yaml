@@ -200,8 +200,8 @@ GetInventorySlotInfo:
   - lookup: GetInventorySlotInfo
 GetItemQualityColor: {}
 GetNumAddOns:
-  states:
-  - Addons
+  frameworks:
+  - api
 GetNumClasses:
   sqls:
   - lookup: GetNumClasses

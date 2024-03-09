@@ -86,7 +86,7 @@ return function(api)
       return type(v) == 'string' and v or nil
     end,
     uiAddon = function(value)
-      return api.states.Addons[tonumber(value) or tostring(value):lower()]
+      return api.addons[tonumber(value) or tostring(value):lower()]
     end,
     unit = function(value)
       if type(value) ~= 'string' then

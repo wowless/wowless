@@ -666,7 +666,7 @@ local function loader(api, cfg)
     return require('lsqlite3').open(dbfile)
   end)()
 
-  local addonData = assert(api.states.Addons)
+  local addonData = assert(api.addons)
 
   local function initAddons()
     local lfs = require('lfs')
