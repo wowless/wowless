@@ -293,6 +293,7 @@ local function new(log, maxErrors, product)
   end
 
   local api = {
+    addons = {},
     CallSafely = CallSafely,
     CallSandbox = CallSandbox,
     CreateFrame = CreateFrame,

@@ -1245,7 +1245,6 @@ endforeach()
 list(
   APPEND
   states
-  Addons
   CVars
   Calendar
   System
