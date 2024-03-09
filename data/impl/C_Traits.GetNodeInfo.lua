@@ -1,24 +1,24 @@
 local args = { ... }
-local datalua = args[1]
-local unitState, talentState = args[2], args[3]
-local baseSql = args[4]
-local entriesSqlCursor = args[5]
-local edgesSqlCursor = args[6]
-local groupsSqlCursor = args[7]
-local conditionsSqlCursor = args[8]
-local configID, nodeID = args[9], args[10]
+local api = args[1]
+local talentState = args[2]
+local baseSql = args[3]
+local entriesSqlCursor = args[4]
+local edgesSqlCursor = args[5]
+local groupsSqlCursor = args[6]
+local conditionsSqlCursor = args[7]
+local configID, nodeID = args[8], args[9]
 
 -- TODO mix in the state to determine the state dependent fields
 
 local returnPlayerData = (configID == talentState.activeConfigID)
-local returnInspectData = (configID == datalua.globals.Constants.TraitConsts.VIEW_TRAIT_CONFIG_ID)
+local returnInspectData = (configID == api.datalua.globals.Constants.TraitConsts.VIEW_TRAIT_CONFIG_ID)
 
 -- if invalid configID: empty return
 if not returnPlayerData and not returnInspectData then
   return
 end
 
-local player = unitState.guids[unitState.aliases.player]
+local player = api.modules.units.player
 local specID = (returnPlayerData and player.spec) or (returnInspectData and talentState.viewLoadoutSpecID)
 
 if returnInspectData and not talentState.viewLoadoutDataImported then
@@ -64,8 +64,8 @@ for conditionInfo in conditionsSqlCursor(nodeID) do
   if
     (conditionSpec == specID or 0 == conditionSpec)
     and (
-      conditionType == datalua.globals.Enum.TraitConditionType.Visible
-      or conditionType == datalua.globals.Enum.TraitConditionType.Granted
+      conditionType == api.datalua.globals.Enum.TraitConditionType.Visible
+      or conditionType == api.datalua.globals.Enum.TraitConditionType.Granted
     )
   then
     forceVisible = true
@@ -73,7 +73,7 @@ for conditionInfo in conditionsSqlCursor(nodeID) do
   if
     conditionSpec ~= specID
     and 0 ~= conditionSpec
-    and conditionType == datalua.globals.Enum.TraitConditionType.Visible
+    and conditionType == api.datalua.globals.Enum.TraitConditionType.Visible
   then
     isVisible = false
   end

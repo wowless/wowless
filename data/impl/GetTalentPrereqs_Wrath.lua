@@ -1,7 +1,7 @@
-local units, sql, tabIndex, talentIndex = ...
+local api, sql, tabIndex, talentIndex = ...
 local num = 0
 local t = {}
-for tier, column in sql(units.guids[units.aliases.player].class, tabIndex, talentIndex) do
+for tier, column in sql(api.modules.units.player.class, tabIndex, talentIndex) do
   t[num + 1] = tier
   t[num + 2] = column
   num = num + 4

@@ -323,6 +323,7 @@ local function new(log, maxErrors, product)
     'macrotext',
     'system',
     'time',
+    'units',
   }
   local modules = {}
   for _, k in ipairs(modulenames) do

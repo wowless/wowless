@@ -92,10 +92,7 @@ return function(api)
       if type(value) ~= 'string' then
         return nil, true
       end
-      -- TODO complete unit resolution
-      local units = api.states.Units
-      local guid = units.aliases[value:lower()]
-      return guid and units.guids[guid] or nil
+      return api.modules.units.GetUnit(value)
     end,
     unknown = function(value)
       return value

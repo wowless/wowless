@@ -1246,7 +1246,6 @@ list(
   APPEND
   states
   Talents
-  Units
 )
 foreach(state ${states})
   yaml2lua(state/${state})
@@ -1332,6 +1331,7 @@ lua2c(
   wowless.modules.macrotext=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/macrotext.lua
   wowless.modules.system=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/system.lua
   wowless.modules.time=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/time.lua
+  wowless.modules.units=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/units.lua
   wowless.profiler=${CMAKE_CURRENT_SOURCE_DIR}/wowless/profiler.lua
   wowless.runner=${CMAKE_CURRENT_SOURCE_DIR}/wowless/runner.lua
   wowless.typecheck=${CMAKE_CURRENT_SOURCE_DIR}/wowless/typecheck.lua

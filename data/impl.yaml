@@ -98,15 +98,14 @@ C_Timer.NewTimer:
   module: time
 C_Traits.GetConfigInfo:
   frameworks:
-  - datalua
+  - api
   sqls:
   - lookup: C_Traits.GetConfigInfo
   states:
-  - Units
   - Talents
 C_Traits.GetNodeInfo:
   frameworks:
-  - datalua
+  - api
   sqls:
   - lookup: C_Traits.GetNodeInfo
   - cursor: C_Traits.GetNodeInfo.entries
@@ -117,7 +116,6 @@ C_Traits.GetNodeInfo:
   - cursor: C_Traits.GetNodeInfo.conditions
     table: true
   states:
-  - Units
   - Talents
 C_Traits.GetTreeNodes:
   sqls:
@@ -209,57 +207,57 @@ GetNumSpecializationsForClassID:
   sqls:
   - lookup: GetNumSpecializationsForClassID
 GetNumTalents:
+  frameworks:
+  - api
   sqls:
   - lookup: GetNumTalents
-  states:
-  - Units
 GetNumTalentTabs:
+  frameworks:
+  - api
   sqls:
   - lookup: GetNumTalentTabs
-  states:
-  - Units
 GetScreenHeight:
   module: system
 GetScreenWidth:
   module: system
 GetSpecializationInfo:
+  frameworks:
+  - api
   sqls:
   - lookup: GetSpecializationInfo
-  states:
-  - Units
 GetSpecializationInfoByID:
   sqls:
   - lookup: GetSpecializationInfoByID
 GetSpecializationInfoForClassID:
+  frameworks:
+  - api
   sqls:
   - lookup: GetSpecializationInfoForClassID
-  states:
-  - Units
 GetSpecializationInfoForSpecID:
+  frameworks:
+  - api
   sqls:
   - lookup: GetSpecializationInfoForSpecID
-  states:
-  - Units
 GetTalentInfo_Vanilla:
+  frameworks:
+  - api
   sqls:
   - lookup: GetTalentInfo_Vanilla
-  states:
-  - Units
 GetTalentPrereqs_Vanilla:
+  frameworks:
+  - api
   sqls:
   - cursor: GetTalentPrereqs
-  states:
-  - Units
 GetTalentPrereqs_Wrath:
+  frameworks:
+  - api
   sqls:
   - cursor: GetTalentPrereqs
-  states:
-  - Units
 GetTalentTabInfo_Wrath:
+  frameworks:
+  - api
   sqls:
   - lookup: GetTalentTabInfo
-  states:
-  - Units
 GetTime:
   module: time
 IsAddOnLoaded: {}
@@ -291,8 +289,6 @@ SecureCmdOptionParse: {}
 SendSystemMessage:
   frameworks:
   - api
-  states:
-  - Units
 SetPortraitTexture: {}
 UnitClass:
   sqls:

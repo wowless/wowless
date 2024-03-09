@@ -1,4 +1,4 @@
-local api, units, msg = ...
+local api, msg = ...
 api.modules.time.AddTimer(0, function()
-  api.SendEvent('CHAT_MSG_SYSTEM', msg, units.guids[units.aliases.player].name, nil, '')
+  api.SendEvent('CHAT_MSG_SYSTEM', msg, api.modules.units.player.name, nil, '')
 end)
