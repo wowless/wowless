@@ -3,6 +3,7 @@ local sqlquote = require('tools.sqlite3ext').quote
 
 local indexes = {
   SpecSetMember = { 'SpecSet' },
+  SpellMisc = { 'SpellID' },
   TraitNodeGroupXTraitCond = { 'TraitNodeGroupID' },
   TraitNodeGroupXTraitNode = { 'TraitNodeID' },
   TraitNodeXTraitCond = { 'TraitNodeID' },
