@@ -1,3 +1,4 @@
+local sorted = require('pl.tablex').sort
 local function run(cfg)
   assert(cfg, 'missing configuration')
   assert(cfg.product, 'missing product')
@@ -96,13 +97,7 @@ local function run(cfg)
 
   local scripts = {
     bindings = function()
-      local names = {}
-      for name in pairs(api.states.Bindings) do
-        table.insert(names, name)
-      end
-      table.sort(names)
-      for _, name in ipairs(names) do
-        local fn = api.states.Bindings[name]
+      for name, fn in sorted(api.states.Bindings) do
         api.log(2, 'firing binding ' .. name)
         api.CallSandbox(fn, 'down')
         api.CallSandbox(fn, 'up')
@@ -127,7 +122,7 @@ local function run(cfg)
       for k, v in pairs(api.env) do
         cmds[v] = k:match('^EMOTE%d+_CMD%d+$') or nil
       end
-      for cmd in require('pl.tablex').sort(cmds) do
+      for cmd in sorted(cmds) do
         api.log(2, 'firing emote chat command %s', cmd)
         if api.macroExecuteLineCallback then
           api.CallSandbox(api.macroExecuteLineCallback, cmd)
@@ -162,7 +157,7 @@ local function run(cfg)
       local function stubMixin(t, name)
         return mixin(t, api.env[name])
       end
-      for k, v in require('pl.tablex').sort(datalua.events) do
+      for k, v in sorted(datalua.events) do
         if v.payload and not eventBlacklist[k] and not skip[k] then
           if v.payload == 'return ' or cfg.allevents then
             local text = 'local Mixin = ...;' .. v.payload
@@ -204,7 +199,7 @@ local function run(cfg)
           cmds[k] = nil
         end
       end
-      for k, v in require('pl.tablex').sort(cmds) do
+      for k, v in sorted(cmds) do
         api.log(2, 'firing chat command ' .. k .. ' via ' .. v)
         if api.macroExecuteLineCallback then
           api.CallSandbox(api.macroExecuteLineCallback, v)
