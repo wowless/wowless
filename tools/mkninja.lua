@@ -432,7 +432,6 @@ local yamls = {
   'data/schemas/uiobjects.yaml',
   'data/schemas/xml.yaml',
   'data/state/Addons.yaml',
-  'data/state/Bindings.yaml',
   'data/state/Talents.yaml',
   'data/state/Units.yaml',
   'data/test.yaml',

@@ -1246,7 +1246,6 @@ list(
   APPEND
   states
   Addons
-  Bindings
   Talents
   Units
 )
