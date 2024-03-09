@@ -2,12 +2,12 @@ local lsqlite3 = require('lsqlite3')
 local sqlquote = require('tools.sqlite3ext').quote
 
 local indexes = {
-  SpecSetMember = { 'SpecSetMember (SpecSet)' },
-  TraitNodeGroupXTraitCond = { 'TraitNodeGroupXTraitCond (TraitNodeGroupID)' },
-  TraitNodeGroupXTraitNode = { 'TraitNodeGroupXTraitNode (TraitNodeID)' },
-  TraitNodeXTraitCond = { 'TraitNodeXTraitCond (TraitNodeID)' },
-  TraitNodeXTraitNodeEntry = { 'TraitNodeXTraitNodeEntry (TraitNodeID)' },
-  UiTextureAtlasMember = { 'UiTextureAtlasMember (CommittedName COLLATE NOCASE)' },
+  SpecSetMember = { 'SpecSet' },
+  TraitNodeGroupXTraitCond = { 'TraitNodeGroupID' },
+  TraitNodeGroupXTraitNode = { 'TraitNodeID' },
+  TraitNodeXTraitCond = { 'TraitNodeID' },
+  TraitNodeXTraitNodeEntry = { 'TraitNodeID' },
+  UiTextureAtlasMember = { 'CommittedName COLLATE NOCASE' },
 }
 
 local function factory(theProduct)
@@ -26,10 +26,8 @@ local function factory(theProduct)
       if hasid then
         table.insert(dbinit, ('CREATE INDEX %sIndexID ON %s (ID)'):format(k, k))
       end
-      if indexes[k] then
-        for i, index in ipairs(indexes[k]) do
-          table.insert(dbinit, ('CREATE INDEX %sIndex%d ON %s'):format(k, i, index))
-        end
+      for i, index in ipairs(indexes[k] or {}) do
+        table.insert(dbinit, ('CREATE INDEX %sIndex%d ON %s (%s)'):format(k, i, k, index))
       end
     end
     table.insert(dbinit, 'COMMIT')
