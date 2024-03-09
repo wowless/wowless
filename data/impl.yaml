@@ -1,13 +1,10 @@
 ---
 C_Calendar.GetMonthInfo:
-  states:
-  - Calendar
+  module: calendar
 C_Calendar.SetAbsMonth:
-  states:
-  - Calendar
+  module: calendar
 C_Calendar.SetMonth:
-  states:
-  - Calendar
+  module: calendar
 C_ChatInfo.ReplaceIconAndGroupExpressions: {}
 C_ClassTalents.GetActiveConfigID:
   states:
@@ -43,24 +40,15 @@ C_CreatureInfo.GetClassInfo:
   - lookup: C_CreatureInfo.GetClassInfo
     table: true
 C_CVar.GetCVar:
-  frameworks:
-  - datalua
-  states:
-  - CVars
+  module: cvars
 C_CVar.GetCVarBool:
-  frameworks:
-  - datalua
-  states:
-  - CVars
+  module: cvars
 C_CVar.GetCVarDefault:
-  frameworks:
-  - datalua
+  module: cvars
 C_CVar.RegisterCVar:
-  states:
-  - CVars
+  module: cvars
 C_CVar.SetCVar:
-  states:
-  - CVars
+  module: cvars
 C_DateAndTime.AdjustTimeByDays:
   frameworks:
   - datalua
@@ -79,8 +67,8 @@ C_ItemInteraction.GetItemInteractionInfo:
   - lookup: C_ItemInteraction.GetItemInteractionInfo
     table: true
 C_Macro.SetMacroExecuteLineCallback:
-  frameworks:
-  - api
+  function: SetCallback
+  module: macrotext
 C_Map.GetMapInfo:
   sqls:
   - lookup: C_Map.GetMapInfo
@@ -103,14 +91,11 @@ C_Texture.GetAtlasInfo_10_2:
   sqls:
   - lookup: C_Texture.GetAtlasInfo_10_2
 C_Timer.After:
-  states:
-  - Time
+  module: time
 C_Timer.NewTicker:
-  states:
-  - Time
+  module: time
 C_Timer.NewTimer:
-  states:
-  - Time
+  module: time
 C_Traits.GetConfigInfo:
   frameworks:
   - datalua
@@ -208,8 +193,8 @@ GetFrameMetatable:
   frameworks:
   - api
 GetFramesRegisteredForEvent:
-  frameworks:
-  - events
+  function: GetFramesRegisteredForEventUnpacked
+  module: events
 GetInventorySlotInfo:
   sqls:
   - lookup: GetInventorySlotInfo
@@ -234,11 +219,9 @@ GetNumTalentTabs:
   states:
   - Units
 GetScreenHeight:
-  states:
-  - System
+  module: system
 GetScreenWidth:
-  states:
-  - System
+  module: system
 GetSpecializationInfo:
   sqls:
   - lookup: GetSpecializationInfo
@@ -278,16 +261,14 @@ GetTalentTabInfo_Wrath:
   states:
   - Units
 GetTime:
-  states:
-  - Time
+  module: time
 IsAddOnLoaded: {}
 IsAddOnLoadOnDemand: {}
 IsLinuxClient:
   frameworks:
   - api
 IsLoggedIn:
-  states:
-  - System
+  module: system
 IsMacClient:
   frameworks:
   - api
@@ -303,18 +284,14 @@ LoadAddOn:
 RequestTimePlayed:
   frameworks:
   - api
-  states:
-  - Time
 RunMacroText:
-  frameworks:
-  - api
+  module: macrotext
 RunScript: {}
 SecureCmdOptionParse: {}
 SendSystemMessage:
   frameworks:
   - api
   states:
-  - Time
   - Units
 SetPortraitTexture: {}
 UnitClass:

@@ -11,7 +11,8 @@ local function new(log, maxErrors, product)
   local userdata = {}
 
   local datalua = require('build.products.' .. product .. '.data')
-  local events = require('wowless.events')(datalua)
+  local events -- module loaded later
+  local time -- module loaded later
 
   local function UserData(obj)
     return userdata[obj[0]]
@@ -269,14 +270,7 @@ local function new(log, maxErrors, product)
   end
 
   local function NextFrame(elapsed)
-    local time = states.Time
-    time.stamp = time.stamp + (elapsed or 1)
-    while time.timers:peek().pri < time.stamp do
-      local timer = time.timers:pop()
-      log(2, 'running timer %.2f %s', timer.pri, tostring(timer.val))
-      assert(getfenv(timer.val) == _G, 'wowless bug: sandbox callback in NextFrame')
-      CallSafely(timer.val)
-    end
+    time.Advance(elapsed)
     for frame in frames:entries() do
       if frame:IsVisible() then
         RunScript(frame, 'OnUpdate', 1)
@@ -300,7 +294,6 @@ local function new(log, maxErrors, product)
     CreateUIObject = CreateUIObject,
     datalua = datalua,
     env = env,
-    events = events,
     frames = frames,
     GetDebugName = GetDebugName,
     GetErrorCount = GetErrorCount,
@@ -322,6 +315,23 @@ local function new(log, maxErrors, product)
     UpdateVisible = UpdateVisible,
     UserData = UserData,
   }
+
+  local modulenames = {
+    'calendar',
+    'cvars',
+    'events',
+    'macrotext',
+    'system',
+    'time',
+  }
+  local modules = {}
+  for _, k in ipairs(modulenames) do
+    modules[k] = require('wowless.modules.' .. k)(api)
+  end
+  api.modules = modules
+  events = api.modules.events -- setting upvalue for SendEvent, TODO clean this up
+  time = api.modules.time -- setting upvalue for NextFrame, TODO clean this up
+
   require('wowless.util').mixin(uiobjectTypes, require('wowapi.uiobjects')(api))
   return api
 end

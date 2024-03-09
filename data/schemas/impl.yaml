@@ -14,6 +14,10 @@ type:
               - literal: env
               - literal: events
               - literal: loader
+        function:
+          type: string
+        module:
+          type: string
         sqls:
           type:
             sequenceof:

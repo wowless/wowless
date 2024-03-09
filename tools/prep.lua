@@ -120,11 +120,17 @@ do
   for name, apicfg in pairs(cfg) do
     if apicfg.impl then
       local ic = assert(implcfg[apicfg.impl], 'missing impl ' .. apicfg.impl)
-      apicfg.frameworks = ic.frameworks
+      apicfg.frameworks = ic.module and { 'api' } or ic.frameworks
       apicfg.sqls = ic.sqls
       apicfg.states = ic.states
       if not impls[apicfg.impl] then
-        impls[apicfg.impl] = readFile('data/impl/' .. apicfg.impl .. '.lua')
+        if ic.module then
+          -- TODO make this smarter so we don't piggy back on framework
+          local fmt = 'return (...).modules[%q][%q](select(2,...))'
+          impls[apicfg.impl] = fmt:format(ic.module, ic['function'] or apicfg.impl)
+        else
+          impls[apicfg.impl] = readFile('data/impl/' .. apicfg.impl .. '.lua')
+        end
       end
     elseif apicfg.stubnothing then
       apicfg.stub = ''

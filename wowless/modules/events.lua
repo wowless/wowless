@@ -1,8 +1,8 @@
 local hlist = require('wowless.hlist')
-return function(datalua)
+return function(api)
   local allregs = hlist()
   local regs = {}
-  for k in pairs(datalua.events) do
+  for k in pairs(api.datalua.events) do
     regs[k] = hlist()
   end
 
@@ -55,8 +55,13 @@ return function(datalua)
     return ret
   end
 
+  local function GetFramesRegisteredForEventUnpacked(event)
+    return unpack(GetFramesRegisteredForEvent(event))
+  end
+
   return {
     GetFramesRegisteredForEvent = GetFramesRegisteredForEvent,
+    GetFramesRegisteredForEventUnpacked = GetFramesRegisteredForEventUnpacked,
     IsEventRegistered = IsEventRegistered,
     IsEventValid = IsEventValid,
     RegisterAllEvents = RegisterAllEvents,

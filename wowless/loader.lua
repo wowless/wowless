@@ -661,66 +661,6 @@ local function loader(api, cfg)
     return nil
   end
 
-  do
-    local time = assert(api.states.Time)
-    time.timers = require('minheap'):new()
-    time.timers:push(math.huge, function()
-      error('fell off the end of time')
-    end)
-
-    local state = setmetatable({}, { __mode = 'k' })
-    local index = {
-      Cancel = debug.newcfunction(function(self)
-        state[self].cancelled = true
-      end),
-      Invoke = debug.newcfunction(function(self, ...)
-        state[self].callback(...)
-      end),
-      IsCancelled = debug.newcfunction(function(self)
-        return state[self].cancelled
-      end),
-    }
-    local tickerMT
-    tickerMT = {
-      __eq = function(u1, u2)
-        return state[u1].table == state[u2].table
-      end,
-      __index = function(u, k)
-        return index[k] or state[u].table[k]
-      end,
-      __metatable = false,
-      __newindex = function(u, k, v)
-        if index[k] or tickerMT[k] ~= nil then
-          error('Attempted to assign to read-only key ' .. k)
-        end
-        state[u].table[k] = v
-      end,
-    }
-    local mtproxy = newproxy(true)
-    mixin(getmetatable(mtproxy), tickerMT)
-    time.newTicker = function(seconds, callback, iterations)
-      assert(getfenv(callback) ~= _G, 'wowless bug: framework callback in newTicker')
-      local p = newproxy(mtproxy)
-      state[p] = {
-        callback = callback,
-        cancelled = false,
-        table = {},
-      }
-      local count = 0
-      local function cb()
-        if not state[p].cancelled and count < iterations then
-          local np = newproxy(p)
-          state[np] = state[p]
-          callback(np)
-          count = count + 1
-          time.timers:push(time.stamp + seconds, cb)
-        end
-      end
-      time.timers:push(time.stamp + seconds, cb)
-      return p
-    end
-  end
-
   local sqlitedb = (function()
     local dbfile = ('build/products/%s/%s.sqlite3'):format(product, rootDir and 'data' or 'schema')
     return require('lsqlite3').open(dbfile)
