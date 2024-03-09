@@ -320,6 +320,7 @@ local function new(log, maxErrors, product)
     'cvars',
     'events',
     'macrotext',
+    'system',
     'time',
   }
   local modules = {}

@@ -219,11 +219,9 @@ GetNumTalentTabs:
   states:
   - Units
 GetScreenHeight:
-  states:
-  - System
+  module: system
 GetScreenWidth:
-  states:
-  - System
+  module: system
 GetSpecializationInfo:
   sqls:
   - lookup: GetSpecializationInfo
@@ -270,8 +268,7 @@ IsLinuxClient:
   frameworks:
   - api
 IsLoggedIn:
-  states:
-  - System
+  module: system
 IsMacClient:
   frameworks:
   - api

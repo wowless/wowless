@@ -59,7 +59,8 @@ local function run(cfg)
   for _, d in ipairs(otherAddonDirs) do
     assert(loader.loadAddon(path.basename(d)))
   end
-  api.states.System.isLoggedIn = true
+  local system = api.modules.system
+  system.LogIn()
   api.SendEvent('PLAYER_LOGIN')
   api.SendEvent('UPDATE_CHAT_WINDOWS')
   api.SendEvent('VARIABLES_LOADED')
@@ -67,7 +68,7 @@ local function run(cfg)
   api.SendEvent('TRIAL_STATUS_UPDATE')
   api.SendEvent('DISPLAY_SIZE_CHANGED')
   if api.env.UIParent then -- Super duper hack to unblock 10.0 UIPanel code.
-    api.env.UIParent:SetSize(api.states.System.screenWidth, api.states.System.screenHeight)
+    api.env.UIParent:SetSize(system.GetScreenWidth(), system.GetScreenHeight())
   end
   api.SendEvent('SPELLS_CHANGED')
   if cfg.debug then
@@ -77,7 +78,7 @@ local function run(cfg)
   end
   if cfg.frame0 then
     local render = require('wowless.render')
-    local screenWidth, screenHeight = api.states.System.screenWidth, api.states.System.screenHeight
+    local screenWidth, screenHeight = system.GetScreenWidth(), system.GetScreenHeight()
     local function doit(name)
       local data = render.frames2rects(api, cfg.product, screenWidth, screenHeight)
       local fn = 'out/' .. cfg.product .. '/' .. name .. '.yaml'

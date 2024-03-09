@@ -433,7 +433,6 @@ local yamls = {
   'data/schemas/xml.yaml',
   'data/state/Addons.yaml',
   'data/state/Bindings.yaml',
-  'data/state/System.yaml',
   'data/state/Talents.yaml',
   'data/state/Units.yaml',
   'data/test.yaml',
