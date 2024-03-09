@@ -97,7 +97,7 @@ local function run(cfg)
 
   local scripts = {
     bindings = function()
-      for name, fn in sorted(api.states.Bindings) do
+      for name, fn in sorted(loader.bindings) do
         api.log(2, 'firing binding ' .. name)
         api.CallSandbox(fn, 'down')
         api.CallSandbox(fn, 'up')

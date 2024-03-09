@@ -113,10 +113,7 @@ local apis = {}
 local impls = {}
 local sqlcursors = {}
 local sqllookups = {}
-local states = {
-  -- These are unreferenced by any API, alas.
-  Bindings = parseYaml('data/state/Bindings.yaml').value,
-}
+local states = {}
 do
   local cfg = parseYaml('data/products/' .. product .. '/apis.yaml')
   local implcfg = parseYaml('data/impl.yaml')

@@ -11,6 +11,7 @@ local function loader(api, cfg)
   local mixin = util.mixin
   local intrinsics = {}
   local readFile = util.readfile
+  local bindings = {}
 
   local xmlimpls = (function()
     local tree = datalua.xml
@@ -550,7 +551,7 @@ local function loader(api, cfg)
             -- TODO interpret all binding attributes
             if not e.attr.debug then -- TODO support debug bindings
               local bfn = 'return function(keystate) ' .. e.text .. ' end'
-              api.states.Bindings[e.attr.name] = loadstr(bfn, filename, e.line)()
+              bindings[e.attr.name] = loadstr(bfn, filename, e.line)()
             end
           elseif e.type == 'fontfamily' then -- TODO do this another way
             local font = e.kids[1].kids[1]
@@ -863,6 +864,7 @@ local function loader(api, cfg)
   end
 
   return {
+    bindings = bindings,
     initAddons = initAddons,
     loadAddon = loadAddon,
     loadFrameXml = loadFrameXml,

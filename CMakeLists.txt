@@ -1246,7 +1246,6 @@ list(
   APPEND
   states
   Addons
-  Bindings
   CVars
   Calendar
   System
