@@ -1229,7 +1229,6 @@ list(
   products
   schema
   schematype
-  state
   stringenums
   structures
   test
@@ -1241,15 +1240,6 @@ list(
 foreach(schema ${schemas})
   yaml2lua(schemas/${schema})
   list(APPEND yamlluas build.data.schemas.${schema}=runtime/schemas/${schema}.lua)
-endforeach()
-list(
-  APPEND
-  states
-  tmp
-)
-foreach(state ${states})
-  yaml2lua(state/${state})
-  list(APPEND yamlluas build.data.state.${state}=runtime/state/${state}.lua)
 endforeach()
 
 lua2c(

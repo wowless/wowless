@@ -5,7 +5,6 @@ local domains = {
   schema = wdata.schemas,
   sqlcursor = wdata.sqlcursor,
   sqllookup = wdata.sqllookup,
-  state = wdata.state,
   stringenum = wdata.stringenums,
   uiobjectimpl = wdata.uiobjectimpl,
 }

@@ -423,7 +423,6 @@ local yamls = {
   'data/schemas/products.yaml',
   'data/schemas/schema.yaml',
   'data/schemas/schematype.yaml',
-  'data/schemas/state.yaml',
   'data/schemas/stringenums.yaml',
   'data/schemas/structures.yaml',
   'data/schemas/test.yaml',

@@ -5,7 +5,6 @@ local function new(log, maxErrors, product)
   local env = {}
   local errors = 0
   local frames = hlist()
-  local states = {}
   local templates = {}
   local uiobjectTypes = {}
   local userdata = {}
@@ -282,10 +281,6 @@ local function new(log, maxErrors, product)
     return errors
   end
 
-  for k, v in pairs(datalua.states) do
-    states[k] = require('pl.tablex').deepcopy(v)
-  end
-
   local api = {
     addons = {},
     CallSafely = CallSafely,
@@ -308,7 +303,6 @@ local function new(log, maxErrors, product)
     SendEvent = SendEvent,
     SetParent = SetParent,
     SetScript = SetScript,
-    states = states,
     templates = templates,
     uiobjects = userdata,
     uiobjectTypes = uiobjectTypes,

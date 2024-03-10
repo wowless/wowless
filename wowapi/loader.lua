@@ -85,9 +85,6 @@ local function loadFunctions(api, loader)
     for _, fw in ipairs(apicfg.frameworks or {}) do
       table.insert(specials, (assert(frameworks[fw], 'unknown framework ' .. fw)))
     end
-    for _, st in ipairs(apicfg.states or {}) do
-      table.insert(specials, api.states[st])
-    end
     for _, sql in ipairs(apicfg.sqls or {}) do
       table.insert(specials, sql.lookup and sqls.lookups[sql.lookup] or sqls.cursors[sql.cursor])
     end

@@ -12,7 +12,6 @@ local globalschemas = {
 
 local dirschemas = {
   schemas = 'schema',
-  state = 'state',
 }
 
 local productschemas = {

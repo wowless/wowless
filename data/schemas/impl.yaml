@@ -34,7 +34,3 @@ type:
                       ref: sqllookup
                   table:
                     type: boolean
-        states:
-          type:
-            sequenceof:
-              ref: state

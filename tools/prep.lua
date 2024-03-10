@@ -113,7 +113,6 @@ local apis = {}
 local impls = {}
 local sqlcursors = {}
 local sqllookups = {}
-local states = {}
 do
   local cfg = parseYaml('data/products/' .. product .. '/apis.yaml')
   local implcfg = parseYaml('data/impl.yaml')
@@ -122,7 +121,6 @@ do
       local ic = assert(implcfg[apicfg.impl], 'missing impl ' .. apicfg.impl)
       apicfg.frameworks = ic.module and { 'api' } or ic.frameworks
       apicfg.sqls = ic.sqls
-      apicfg.states = ic.states
       if not impls[apicfg.impl] then
         if ic.module then
           -- TODO make this smarter so we don't piggy back on framework
@@ -152,12 +150,6 @@ do
           sql = readFile('data/sql/lookup/' .. sql.lookup .. '.sql'),
           table = sql.table,
         }
-      end
-    end
-    for _, state in ipairs(apicfg.states or {}) do
-      if not states[state] then
-        local statecfg = parseYaml('data/state/' .. state .. '.yaml')
-        states[state] = statecfg.value
       end
     end
     apis[name] = apicfg
@@ -315,7 +307,6 @@ local data = {
   product = product,
   sqlcursors = sqlcursors,
   sqllookups = sqllookups,
-  states = states,
   structures = structures,
   uiobjects = uiobjects,
   xml = parseYaml('data/products/' .. product .. '/xml.yaml'),
