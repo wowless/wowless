@@ -1,5 +1,5 @@
-local api, talents, sql, configID = ...
-if configID ~= talents.activeConfigID then
+local api, sql, configID = ...
+if configID ~= api.modules.talents.activeConfigID then
   return
 end
 local player = api.modules.units.player

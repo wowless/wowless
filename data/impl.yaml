@@ -7,19 +7,19 @@ C_Calendar.SetMonth:
   module: calendar
 C_ChatInfo.ReplaceIconAndGroupExpressions: {}
 C_ClassTalents.GetActiveConfigID:
-  states:
-  - Talents
+  frameworks:
+  - api
 C_ClassTalents.GetTraitTreeForSpec:
   sqls:
   - lookup: C_ClassTalents.GetTraitTreeForSpec
 C_ClassTalents.InitializeViewLoadout:
-  states:
-  - Talents
+  frameworks:
+  - api
 C_ClassTalents.ViewLoadout:
+  frameworks:
+  - api
   sqls:
   - lookup: GetSpecializationInfoByID
-  states:
-  - Talents
 C_Console.GetAllCommands:
   frameworks:
   - datalua
@@ -101,8 +101,6 @@ C_Traits.GetConfigInfo:
   - api
   sqls:
   - lookup: C_Traits.GetConfigInfo
-  states:
-  - Talents
 C_Traits.GetNodeInfo:
   frameworks:
   - api
@@ -115,8 +113,6 @@ C_Traits.GetNodeInfo:
   - cursor: C_Traits.GetNodeInfo.groups
   - cursor: C_Traits.GetNodeInfo.conditions
     table: true
-  states:
-  - Talents
 C_Traits.GetTreeNodes:
   sqls:
   - cursor: C_Traits.GetTreeNodes

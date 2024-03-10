@@ -1,16 +1,15 @@
 local args = { ... }
 local api = args[1]
-local talentState = args[2]
-local baseSql = args[3]
-local entriesSqlCursor = args[4]
-local edgesSqlCursor = args[5]
-local groupsSqlCursor = args[6]
-local conditionsSqlCursor = args[7]
-local configID, nodeID = args[8], args[9]
+local baseSql = args[2]
+local entriesSqlCursor = args[3]
+local edgesSqlCursor = args[4]
+local groupsSqlCursor = args[5]
+local conditionsSqlCursor = args[6]
+local configID, nodeID = args[7], args[8]
 
 -- TODO mix in the state to determine the state dependent fields
 
-local returnPlayerData = (configID == talentState.activeConfigID)
+local returnPlayerData = (configID == api.modules.talents.activeConfigID)
 local returnInspectData = (configID == api.datalua.globals.Constants.TraitConsts.VIEW_TRAIT_CONFIG_ID)
 
 -- if invalid configID: empty return
@@ -19,9 +18,9 @@ if not returnPlayerData and not returnInspectData then
 end
 
 local player = api.modules.units.player
-local specID = (returnPlayerData and player.spec) or (returnInspectData and talentState.viewLoadoutSpecID)
+local specID = (returnPlayerData and player.spec) or (returnInspectData and api.modules.talents.viewLoadoutSpecID)
 
-if returnInspectData and not talentState.viewLoadoutDataImported then
+if returnInspectData and not api.modules.talents.viewLoadoutDataImported then
   error('C_ClassTalents.ViewLoadout should be called before C_Traits.GetNodeInfo when using VIEW_TRAIT_CONFIG_ID')
 end
 

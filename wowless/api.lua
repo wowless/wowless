@@ -322,6 +322,7 @@ local function new(log, maxErrors, product)
     'events',
     'macrotext',
     'system',
+    'talents',
     'time',
     'units',
   }
