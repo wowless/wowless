@@ -88,6 +88,7 @@ typedefs:
   NotificationDbId: string
   number: number
   ScriptRegion: table
+  SimpleFrame: Frame
   SimpleTexture: Texture
   string: string
   TBFStyleFlags: string
