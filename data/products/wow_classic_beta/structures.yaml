@@ -831,22 +831,6 @@ C_Commentator.NameOverrideEntry:
       type: string
     overrideName:
       type: string
-C_Console.ConsoleCommandInfo:
-  fields:
-    category:
-      type:
-        enum: ConsoleCategory
-    command:
-      type: string
-    commandType:
-      type:
-        enum: ConsoleCommandType
-    help:
-      type: string
-    scriptContents:
-      type: string
-    scriptParameters:
-      type: string
 C_ConsoleScriptCollection.ConsoleScriptCollectionData:
   fields:
     ID:
@@ -2795,6 +2779,22 @@ colorRGBA:
     r:
       type: number
   mixin: ColorMixin
+ConsoleCommandInfo:
+  fields:
+    category:
+      type:
+        enum: ConsoleCategory
+    command:
+      type: string
+    commandType:
+      type:
+        enum: ConsoleCommandType
+    help:
+      type: string
+    scriptContents:
+      type: string
+    scriptParameters:
+      type: string
 ExpansionDisplayInfo:
   fields:
     banner:
