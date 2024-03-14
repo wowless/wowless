@@ -61,7 +61,9 @@ script_objects:
   SimpleTextureAPI: Texture
   SimpleTextureBaseAPI: TextureBase
 skip_docfiles:
+  BarberShopInternalDocumentation: {}
   ConfigurationWarningsDocumentation: {}
+  DebugToggleDocumentation: {}
   EditModeManagerDocumentation: {}
   PingPinFrameAPIDocumentation: {}
   SimpleModelFFXAPIDocumentation: {}
@@ -73,6 +75,7 @@ typedefs:
   ClubId: string
   ClubInvitationId: string
   ClubStreamId: string
+  ConnectionIptype: string
   cstring: string
   fileID: number
   HTMLTextType: string
@@ -90,6 +93,7 @@ typedefs:
   ScriptRegion: table
   SimpleFrame: Frame
   SimpleTexture: Texture
+  SimpleWindow: nil
   string: string
   TBFStyleFlags: string
   textureAtlas: string

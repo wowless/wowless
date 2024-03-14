@@ -21,7 +21,11 @@ ACTION_RANGE_CHECK_UPDATE:
   - name: checksRange
     type: boolean
 ACTION_USABLE_CHANGED:
-  payload: {}
+  payload:
+  - name: changes
+    type:
+      arrayof:
+        structure: C_ActionBar.ActionUsableState
 ACTION_WILL_BIND_ITEM:
   payload: {}
 ACTIONBAR_HIDEGRID:
@@ -135,9 +139,23 @@ ALTERNATIVE_DEFAULT_LANGUAGE_CHANGED:
 ARCHAEOLOGY_CLOSED:
   payload: {}
 ARCHAEOLOGY_FIND_COMPLETE:
-  payload: {}
+  payload:
+  - name: numFindsCompleted
+    type: number
+  - name: totalFinds
+    type: number
+  - name: researchBranchID
+    type: number
 ARCHAEOLOGY_SURVEY_CAST:
-  payload: {}
+  payload:
+  - name: numFindsCompleted
+    type: number
+  - name: totalFinds
+    type: number
+  - name: researchBranchID
+    type: number
+  - name: successfulFind
+    type: number
 ARCHAEOLOGY_TOGGLE:
   payload: {}
 AREA_POIS_UPDATED:
@@ -186,7 +204,9 @@ ARENA_TEAM_ROSTER_UPDATE:
 ARENA_TEAM_UPDATE:
   payload: {}
 ARTIFACT_DIGSITE_COMPLETE:
-  payload: {}
+  payload:
+  - name: researchBranchID
+    type: number
 AUCTION_BIDDER_LIST_UPDATE:
   payload: {}
 AUCTION_HOUSE_CLOSED:
@@ -3431,6 +3451,10 @@ DUEL_TO_THE_DEATH_REQUESTED:
     type: string
 DYNAMIC_GOSSIP_POI_UPDATED:
   payload: {}
+ECLIPSE_DIRECTION_CHANGE:
+  payload:
+  - name: direction
+    type: string
 EDIT_MODE_LAYOUTS_UPDATED: {}
 ENABLE_DECLINE_GUILD_INVITE:
   payload: {}
@@ -3467,9 +3491,13 @@ END_BOUND_TRADEABLE:
   - name: reason
     type: string
 ENGRAVING_MODE_CHANGED:
-  payload: {}
+  payload:
+  - name: enabled
+    type: boolean
 ENGRAVING_TARGETING_MODE_CHANGED:
-  payload: {}
+  payload:
+  - name: enabled
+    type: boolean
 ENTERED_DIFFERENT_INSTANCE_FROM_PARTY:
   payload: {}
 ENTITLEMENT_DELIVERED:
@@ -3529,6 +3557,18 @@ FORBIDDEN_NAME_PLATE_UNIT_REMOVED:
   payload:
   - name: unitToken
     type: string
+FORGE_MASTER_CLOSED:
+  payload: {}
+FORGE_MASTER_ITEM_CHANGED:
+  payload:
+  - name: itemID
+    type: number
+FORGE_MASTER_OPENED:
+  payload: {}
+FORGE_MASTER_SET_ITEM:
+  payload:
+  - name: itemID
+    type: number
 FRAMESTACK_VISIBILITY_UPDATED:
   payload: {}
 FRIENDLIST_UPDATE:
@@ -3743,6 +3783,10 @@ GUILDTABARD_UPDATE:
   payload: {}
 GX_RESTARTED:
   payload: {}
+HARDCORE_DEATHS:
+  payload:
+  - name: memberName
+    type: string
 HEARTHSTONE_BOUND:
   payload: {}
 HEIRLOOM_UPGRADE_TARGETING_CHANGED:
@@ -3899,6 +3943,10 @@ LEARNED_SPELL_IN_TAB:
     type: number
   - name: isGuildPerkSpell
     type: boolean
+LEVEL_GRANT_PROPOSED:
+  payload:
+  - name: senderName
+    type: string
 LFG_BOOT_PROPOSAL_UPDATE:
   payload: {}
 LFG_COMPLETION_REWARD:
@@ -4344,6 +4392,10 @@ PARTY_MEMBER_ENABLE:
   payload:
   - name: unitTarget
     type: unit
+PARTY_REFER_A_FRIEND_UPDATED:
+  payload:
+  - name: unitTarget
+    type: unit
 PENDING_AZERITE_ESSENCE_CHANGED:
   payload:
   - name: essenceID
@@ -4615,7 +4667,9 @@ PLAYER_INTERACTION_MANAGER_FRAME_SHOW:
     type:
       enum: PlayerInteractionType
 PLAYER_IS_GLIDING_CHANGED:
-  payload: {}
+  payload:
+  - name: isGliding
+    type: boolean
 PLAYER_LEAVE_COMBAT:
   payload: {}
 PLAYER_LEAVING_WORLD:
@@ -4771,6 +4825,10 @@ PREVIEW_TALENT_POINTS_CHANGED:
   - name: groupIndex
     type: number
   - name: points
+    type: number
+PREVIEW_TALENT_PRIMARY_TREE_CHANGED:
+  payload:
+  - name: newTabID
     type: number
 PRODUCT_ASSIGN_TO_TARGET_FAILED:
   payload: {}
@@ -4979,6 +5037,20 @@ RECEIVED_ACHIEVEMENT_MEMBER_LIST:
   payload:
   - name: achievementID
     type: number
+RECRUIT_A_FRIEND_CAN_EMAIL:
+  payload:
+  - name: resultCode
+    type: number
+RECRUIT_A_FRIEND_INVITATION_FAILED:
+  payload:
+  - name: failureReason
+    type: string
+RECRUIT_A_FRIEND_INVITER_FRIEND_ADDED:
+  payload:
+  - name: name
+    type: string
+RECRUIT_A_FRIEND_SYSTEM_STATUS:
+  payload: {}
 REPLACE_ENCHANT:
   payload:
   - name: existingStr
@@ -5007,7 +5079,9 @@ REQUIRED_GUILD_RENAME_RESULT:
   - name: success
     type: boolean
 RESEARCH_ARTIFACT_COMPLETE:
-  payload: {}
+  payload:
+  - name: name
+    type: string
 RESEARCH_ARTIFACT_DIG_SITE_UPDATED:
   payload: {}
 RESEARCH_ARTIFACT_UPDATE:
@@ -5042,7 +5116,11 @@ RUNE_TYPE_UPDATE:
   - name: runeIndex
     type: number
 RUNE_UPDATED:
-  payload: {}
+  payload:
+  - name: rune
+    nilable: true
+    type:
+      structure: C_Engraving.EngravingData
 SAVED_VARIABLES_TOO_LARGE:
   payload:
   - name: addOnName
@@ -5139,7 +5217,12 @@ SHOW_RATED_PVP_REWARD_TOAST:
   - name: lessAwesome
     type: boolean
 SHOW_SUBTITLE:
-  payload: {}
+  payload:
+  - name: subtitle
+    type: string
+  - name: sender
+    nilable: true
+    type: string
 SIMPLE_BROWSER_WEB_ERROR:
   payload:
   - name: errorCode
@@ -5161,6 +5244,12 @@ SOCKET_INFO_REFUNDABLE_CONFIRM:
 SOCKET_INFO_SUCCESS:
   payload: {}
 SOCKET_INFO_UPDATE:
+  payload: {}
+SOR_BY_TEXT_UPDATED:
+  payload: {}
+SOR_COUNTS_UPDATED:
+  payload: {}
+SOR_START_EXPERIENCE_INCOMPLETE:
   payload: {}
 SOUND_DEVICE_UPDATE:
   payload: {}
@@ -5226,11 +5315,26 @@ SPELL_DATA_LOAD_RESULT:
   - name: success
     type: boolean
 SPELL_FLYOUT_UPDATE:
-  payload: {}
+  payload:
+  - name: flyoutID
+    nilable: true
+    type: number
+  - name: spellID
+    nilable: true
+    type: number
+  - name: isLearned
+    nilable: true
+    type: boolean
 SPELL_POWER_CHANGED:
   payload: {}
 SPELL_PUSHED_TO_ACTIONBAR:
-  payload: {}
+  payload:
+  - name: spellID
+    type: number
+  - name: slot
+    type: number
+  - name: page
+    type: number
 SPELL_SCRIPT_ERROR:
   payload:
   - name: spellID
@@ -5618,6 +5722,9 @@ UNIT_AURA:
   payload:
   - name: unitTarget
     type: unit
+  - name: updateInfo
+    type:
+      structure: UnitAuraUpdateInfo
 UNIT_CHEAT_TOGGLE_EVENT:
   payload: {}
 UNIT_CLASSIFICATION_CHANGED:
