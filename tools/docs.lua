@@ -218,8 +218,10 @@ local function rewriteApis()
     local stubs = {}
     local stubnotnils = {}
     for _, output in ipairs(api and api.outputs or {}) do
-      stubs[output.name] = output.stub
-      stubnotnils[output.name] = output.stubnotnil
+      if output.name then
+        stubs[output.name] = output.stub
+        stubnotnils[output.name] = output.stubnotnil
+      end
     end
     local outputs = {}
     for _, r in ipairs(fn.Returns or {}) do
