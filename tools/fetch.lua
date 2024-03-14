@@ -143,3 +143,4 @@ do
 end
 processFile('Interface/FrameXML/UI.xsd')
 processFile('Interface/FrameXML/UI_Shared.xsd')
+processFile('Interface/AddOns/Blizzard_SharedXML/UI.xsd')
