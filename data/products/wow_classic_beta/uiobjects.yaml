@@ -162,6 +162,12 @@ AnimationGroup:
     SetPlaying: {}
     SetToFinalAlpha: {}
     Stop: {}
+ArchaeologyDigSiteFrame:
+  fields: {}
+  inherits:
+    Frame: {}
+    POIFrame: {}
+  methods: {}
 Browser:
   fields: {}
   inherits:
@@ -1573,10 +1579,9 @@ PlayerModel:
     SetUnit: {}
     StopAnimKit: {}
     ZeroCachedCenterXY: {}
-QuestPOIFrame:
+POIFrame:
   fields: {}
-  inherits:
-    Frame: {}
+  inherits: {}
   methods:
     DrawAll: {}
     DrawBlob: {}
@@ -1584,8 +1589,6 @@ QuestPOIFrame:
     EnableMerging: {}
     EnableSmoothing: {}
     GetMapID: {}
-    GetNumTooltips: {}
-    GetTooltipIndex: {}
     SetBorderAlpha: {}
     SetBorderScalar: {}
     SetBorderTexture: {}
@@ -1594,6 +1597,15 @@ QuestPOIFrame:
     SetMapID: {}
     SetMergeThreshold: {}
     SetNumSplinePoints: {}
+  virtual: true
+QuestPOIFrame:
+  fields: {}
+  inherits:
+    Frame: {}
+    POIFrame: {}
+  methods:
+    GetNumTooltips: {}
+    GetTooltipIndex: {}
     UpdateMouseOverTooltip: {}
 Region:
   fields:
@@ -2223,3 +2235,12 @@ UnitPositionFrame:
     SetUnitColor: {}
     StartPlayerPing: {}
     StopPlayerPing: {}
+VertexColor:
+  fields: {}
+  inherits:
+    Animation: {}
+  methods:
+    GetEndColor: {}
+    GetStartColor: {}
+    SetEndColor: {}
+    SetStartColor: {}

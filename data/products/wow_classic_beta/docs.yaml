@@ -5,6 +5,7 @@ events:
     PARTY_INVITE_CANCEL: {}
     SECURE_TRANSFER_CONFIRM_SEND_MAIL: {}
 script_objects:
+  FrameAPIArchaeologyDigSiteFrame: ArchaeologyDigSiteFrame
   FrameAPIBlob: QuestPOIFrame
   FrameAPICharacterModelBase: PlayerModel
   FrameAPICinematicModel: CinematicModel
@@ -32,6 +33,7 @@ script_objects:
   SimpleAnimTextureCoordTranslationAPI: TextureCoordTranslation
   SimpleAnimTranslationAPI: Translation
   SimpleAnimTranslationLineAPI: LineTranslation
+  SimpleAnimVertexColorAPI: VertexColor
   SimpleBrowserAPI: Browser
   SimpleButtonAPI: Button
   SimpleCheckboxAPI: CheckButton
