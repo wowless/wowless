@@ -281,7 +281,6 @@ Button:
       - type: number
     IsEnabled:
       impl: Button/IsEnabled
-    LockHighlight: {}
     RegisterForClicks:
       impl: Button/RegisterForClicks
     RegisterForMouse: {}
@@ -305,7 +304,6 @@ Button:
     SetHighlightAtlas:
       impl: Button/SetHighlightAtlas
     SetHighlightFontObject: {}
-    SetHighlightLocked: {}
     SetHighlightTexture:
       impl: Button/SetHighlightTexture
     SetMotionScriptsWhileDisabled:
@@ -328,7 +326,6 @@ Button:
       impl: Button/SetPushedTexture
     SetText:
       impl: Button/SetText
-    UnlockHighlight: {}
 CheckButton:
   fields:
     checked:
@@ -411,6 +408,9 @@ ColorSelect:
     Frame: {}
   methods:
     ClearColorWheelTexture: {}
+    GetColorAlpha: {}
+    GetColorAlphaTexture: {}
+    GetColorAlphaThumbTexture: {}
     GetColorHSV:
       outputs:
       - name: h
@@ -439,6 +439,9 @@ ColorSelect:
     GetColorWheelThumbTexture:
       getter:
       - name: colorWheelThumbTexture
+    SetColorAlpha: {}
+    SetColorAlphaTexture: {}
+    SetColorAlphaThumbTexture: {}
     SetColorHSV: {}
     SetColorRGB: {}
     SetColorValueTexture:
@@ -985,6 +988,7 @@ Frame:
     GetPropagateKeyboardInput:
       getter:
       - name: propagateKeyboardInput
+    GetRaisedFrameLevel: {}
     GetRegions:
       impl: Frame/GetRegions
     GetResizeBounds:
@@ -993,6 +997,7 @@ Frame:
       - name: minResizeHeight
       - name: maxResizeWidth
       - name: maxResizeHeight
+    GetWindow: {}
     HasFixedFrameLevel:
       getter:
       - name: hasFixedFrameLevel
@@ -1020,6 +1025,7 @@ Frame:
     IsUserPlaced:
       getter:
       - name: isUserPlaced
+    LockHighlight: {}
     Lower: {}
     Raise: {}
     RegisterAllEvents:
@@ -1053,6 +1059,7 @@ Frame:
     SetFrameStrata:
       setter:
       - name: frameStrata
+    SetHighlightLocked: {}
     SetHitRectInsets: {}
     SetHyperlinksEnabled:
       setter:
@@ -1078,9 +1085,11 @@ Frame:
     SetUserPlaced:
       setter:
       - name: isUserPlaced
+    SetWindow: {}
     StartMoving: {}
     StartSizing: {}
     StopMovingOrSizing: {}
+    UnlockHighlight: {}
     UnregisterAllEvents:
       impl: Frame/UnregisterAllEvents
     UnregisterEvent:
@@ -1144,10 +1153,12 @@ GameTooltip:
     SetCraftSpell: {}
     SetCurrencyToken: {}
     SetCurrencyTokenByID: {}
+    SetEngravingRune: {}
     SetEquipmentSet: {}
     SetExistingSocketGem: {}
     SetFrameStack: {}
     SetGlyph: {}
+    SetGlyphByID: {}
     SetGuildBankItem: {}
     SetHeirloomByItemID: {}
     SetHyperlink: {}
@@ -1245,11 +1256,13 @@ Line:
     TextureBase: {}
   methods:
     GetEndPoint: {}
+    GetHitRectThickness: {}
     GetStartPoint: {}
     GetThickness:
       getter:
       - name: thickness
     SetEndPoint: {}
+    SetHitRectThickness: {}
     SetStartPoint: {}
     SetThickness:
       setter:
@@ -1509,6 +1522,8 @@ ParentedObjectBase:
   inherits:
     UIObject: {}
   methods:
+    ClearParentKey:
+      impl: ParentedObjectBase/ClearParentKey
     GetDebugName:
       impl: ParentedObject/GetDebugName
     GetParent:
@@ -2050,6 +2065,7 @@ TabardModel:
     GetUpperEmblemFileName: {}
     GetUpperEmblemTexture: {}
     InitializeTabardColors: {}
+    IsGuildTabard: {}
     Save: {}
 Texture:
   fields: {}
@@ -2117,6 +2133,7 @@ TextureBase:
     LayeredRegion: {}
     ScriptObject: {}
   methods:
+    ClearTextureSlice: {}
     GetAtlas: {}
     GetBlendMode:
       getter:
@@ -2141,6 +2158,8 @@ TextureBase:
       impl: Texture/GetTexture
     GetTextureFileID: {}
     GetTextureFilePath: {}
+    GetTextureSliceMargins: {}
+    GetTextureSliceMode: {}
     GetVertexColor:
       getter:
       - name: vertexColorR
@@ -2178,6 +2197,8 @@ TextureBase:
     SetTexelSnappingBias: {}
     SetTexture:
       impl: Texture/SetTexture
+    SetTextureSliceMargins: {}
+    SetTextureSliceMode: {}
     SetVertexOffset: {}
     SetVertTile:
       setter:
