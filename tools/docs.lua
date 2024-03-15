@@ -250,15 +250,17 @@ local function rewriteApis()
   local f = 'data/products/' .. product .. '/apis.yaml'
   local apis = y.parseFile(f)
   for name, fn in pairs(funcs) do
-    local ns = split(name)
-    local api = apis[name]
-    apis[name] = {
-      impl = api and api.impl,
-      inputs = insig(fn, ns),
-      mayreturnnothing = api and api.mayreturnnothing,
-      outputs = outsig(fn, ns, api),
-      stubnothing = api and api.stubnothing,
-    }
+    if not deref(config, 'skip_apis', name) then
+      local ns = split(name)
+      local api = apis[name]
+      apis[name] = {
+        impl = api and api.impl,
+        inputs = insig(fn, ns),
+        mayreturnnothing = api and api.mayreturnnothing,
+        outputs = outsig(fn, ns, api),
+        stubnothing = api and api.stubnothing,
+      }
+    end
   end
   writeifchanged(f, y.pprint(apis))
   return apis

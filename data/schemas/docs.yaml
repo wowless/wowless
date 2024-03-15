@@ -18,6 +18,12 @@ type:
           key: string
           value:
             ref: uiobject
+    skip_apis:
+      type:
+        mapof:
+          key:
+            ref: api
+          value: string
     skip_docfiles:
       type:
         mapof:
