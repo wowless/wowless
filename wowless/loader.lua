@@ -724,6 +724,10 @@ local function loader(api, cfg)
     'RequiredDeps',
     'Dependencies',
   }
+  local optionalDepAttrs = {
+    'OptionalDep',
+    'OptionalDeps',
+  }
 
   local function doLoadAddon(addonName)
     local toc = addonData[addonName:lower()]
@@ -736,6 +740,13 @@ local function loader(api, cfg)
       for _, attr in ipairs(depAttrs) do
         for dep in string.gmatch(toc.attrs[attr] or '', '[^, ]+') do
           doLoadAddon(dep)
+        end
+      end
+      for _, attr in ipairs(optionalDepAttrs) do
+        for dep in string.gmatch(toc.attrs[attr] or '', '[^, ]+') do
+          if addonData[dep:lower()] then
+            doLoadAddon(dep)
+          end
         end
       end
       api.log(1, 'loading addon files for %s', addonName)
