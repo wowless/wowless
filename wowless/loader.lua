@@ -761,15 +761,18 @@ local function loader(api, cfg)
   end
 
   local function loadFrameXml()
-    local tocdir = path.join(rootDir, 'Interface', 'FrameXML')
-    local loadFile = forAddon(nil, nil, tocdir, true)
     for tag, text in sqlitedb:urows('SELECT BaseTag, TagText_lang FROM GlobalStrings') do
       api.env[tag] = text
     end
-    for _, file in ipairs(resolveTocDir(tocdir).files) do
-      loadFile(file)
+    local fxtocdir = path.join(rootDir, 'Interface', 'FrameXML')
+    local fxtoc = resolveTocDir(fxtocdir)
+    if fxtoc then
+      local loadFile = forAddon(nil, nil, fxtocdir, true)
+      for _, file in ipairs(fxtoc.files) do
+        loadFile(file)
+      end
+      loadFile(path.join(rootDir, flavors[build.flavor].dir, 'FrameXML', 'Bindings.xml'))
     end
-    loadFile(path.join(rootDir, flavors[build.flavor].dir, 'FrameXML', 'Bindings.xml'))
     local blizzardAddons = {}
     for name, toc in pairs(addonData) do
       if type(name) == 'string' and toc.fdid and toc.attrs.LoadOnDemand ~= '1' and isLoadable(toc) then
@@ -779,6 +782,12 @@ local function loader(api, cfg)
     table.sort(blizzardAddons, function(a, b)
       return addonData[a].fdid < addonData[b].fdid
     end)
+    for _, name in ipairs(blizzardAddons) do
+      local toc = addonData[name]
+      if toc.attrs.LoadFirst == '1' or toc.attrs.GuardedAddOn == '1' then
+        loadAddon(name)
+      end
+    end
     for _, name in ipairs(blizzardAddons) do
       loadAddon(name)
     end
