@@ -746,7 +746,8 @@ local function loader(api, cfg)
       error('unknown addon ' .. addonName)
     end
     addonName = toc.name
-    if not toc.loaded and toc.attrs.AllowLoad ~= 'Glue' then
+    if not toc.loadattempted and toc.attrs.AllowLoad ~= 'Glue' then
+      toc.loadattempted = true
       api.log(1, 'loading addon dependencies for %s', addonName)
       for _, attr in ipairs(depAttrs) do
         for dep in string.gmatch(toc.attrs[attr] or '', '[^, ]+') do
