@@ -746,7 +746,8 @@ local function loader(api, cfg)
       error('unknown addon ' .. addonName)
     end
     addonName = toc.name
-    if not toc.loadattempted and toc.attrs.AllowLoad ~= 'Glue' then
+    local onlyGlue = toc.attrs.AllowLoad and toc.attrs.AllowLoad:lower() == 'glue'
+    if not toc.loadattempted and not onlyGlue then
       toc.loadattempted = true
       api.log(1, 'loading addon dependencies for %s', addonName)
       for _, attr in ipairs(depAttrs) do
