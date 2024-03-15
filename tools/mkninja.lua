@@ -451,6 +451,7 @@ table.insert(builds, {
     'spec/addon/util_spec.lua',
     'spec/data/apis_spec.lua',
     'spec/data/config_spec.lua',
+    'spec/data/flavors_spec.lua',
     'spec/data/globals_spec.lua',
     'spec/data/impl_spec.lua',
     'spec/data/structures_spec.lua',
