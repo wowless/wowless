@@ -688,6 +688,7 @@ local function loader(api, cfg)
           addon.name = name
           addon.fdid = fdid
           addon.dir = dir
+          addon.revwiths = {}
           addonData[name:lower()] = addon
           table.insert(addonData, addon)
         end
@@ -716,6 +717,16 @@ local function loader(api, cfg)
     for _, d in ipairs(otherAddonDirs) do
       local dir = path.dirname(d)
       maybeAddAll(dir == '' and '.' or dir)
+    end
+    for _, addon in ipairs(addonData) do
+      for name in string.gmatch(addon.attrs.LoadWith or '', '[^, ]+') do
+        local dep = addonData[name:lower()]
+        if not dep then
+          api.log(1, 'skipping unknown addon %q in LoadWith of %q', name, addon.name)
+        else
+          table.insert(dep.revwiths, addon.name)
+        end
+      end
     end
   end
 
@@ -759,6 +770,10 @@ local function loader(api, cfg)
       toc.loaded = true
       api.log(1, 'done loading %s', addonName)
       api.SendEvent('ADDON_LOADED', addonName)
+      for _, revwith in ipairs(toc.revwiths) do
+        api.log(1, 'processing LoadWith %q -> %q', addonName, revwith)
+        doLoadAddon(revwith)
+      end
     end
   end
 
