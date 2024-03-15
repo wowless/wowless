@@ -5,9 +5,10 @@ type:
     key: string
     value:
       record:
-        alternate:
+        alternates:
           required: true
-          type: string
+          type:
+            sequenceof: string
         dir:
           required: true
           type: string
