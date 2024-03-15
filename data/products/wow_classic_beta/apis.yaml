@@ -505,6 +505,7 @@ C_AddOns.GetAddOnDependencies:
   - name: unpackedPrimitiveType
     type: string
 C_AddOns.GetAddOnEnableState:
+  impl: GetAddOnEnableState
   inputs:
   - name: name
     type: uiAddon
@@ -516,6 +517,7 @@ C_AddOns.GetAddOnEnableState:
     type:
       enum: AddOnEnableState
 C_AddOns.GetAddOnInfo:
+  impl: GetAddOnInfo
   inputs:
   - name: name
     type: uiAddon
@@ -535,6 +537,7 @@ C_AddOns.GetAddOnInfo:
   - name: updateAvailable
     type: boolean
 C_AddOns.GetAddOnMetadata:
+  impl: GetAddOnMetadata
   inputs:
   - name: name
     type: uiAddon
@@ -551,6 +554,7 @@ C_AddOns.GetAddOnOptionalDependencies:
   - name: unpackedPrimitiveType
     type: string
 C_AddOns.GetNumAddOns:
+  impl: GetNumAddOns
   inputs: {}
   outputs:
   - name: numAddOns
@@ -576,6 +580,7 @@ C_AddOns.IsAddOnLoadable:
   - name: reason
     type: string
 C_AddOns.IsAddOnLoaded:
+  impl: IsAddOnLoaded
   inputs:
   - name: name
     type: uiAddon
@@ -585,6 +590,7 @@ C_AddOns.IsAddOnLoaded:
   - name: loaded
     type: boolean
 C_AddOns.IsAddOnLoadOnDemand:
+  impl: IsAddOnLoadOnDemand
   inputs:
   - name: name
     type: uiAddon
@@ -597,6 +603,7 @@ C_AddOns.IsAddonVersionCheckEnabled:
   - name: isEnabled
     type: boolean
 C_AddOns.LoadAddOn:
+  impl: LoadAddOn
   inputs:
   - name: name
     type: uiAddon
