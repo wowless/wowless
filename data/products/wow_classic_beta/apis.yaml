@@ -11113,7 +11113,21 @@ GetAllowLowLevelRaid:
     type: boolean
 GetAlternativeDefaultLanguage: {}
 GetArchaeologyInfo: {}
-GetArchaeologyRaceInfo: {}
+GetArchaeologyRaceInfo:
+  inputs:
+  - name: raceIndex
+    type: number
+  outputs:
+  - name: name
+    type: string
+  - name: texture
+    type: number
+  - name: itemID
+    type: number
+  - name: currencyAmount
+    type: number
+  - name: projectAmount
+    type: number
 GetArchaeologyRaceInfoByID: {}
 GetAreaSpiritHealerTime:
   inputs: {}
@@ -12890,12 +12904,16 @@ GetNumActiveQuests:
   outputs:
   - name: numActiveQuests
     type: number
-GetNumArchaeologyRaces: {}
+GetNumArchaeologyRaces:
+  outputs:
+  - type: number
 GetNumArenaOpponents:
   outputs:
   - type: number
 GetNumArenaTeamMembers: {}
-GetNumArtifactsByRace: {}
+GetNumArtifactsByRace:
+  outputs:
+  - type: number
 GetNumAuctionItems:
   inputs:
   - name: list
