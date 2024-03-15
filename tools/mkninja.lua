@@ -234,6 +234,7 @@ for _, p in ipairs(productList) do
     ins = {
       dblist,
       'build/cmake/fetch',
+      'build/data/flavors.lua',
       'build/data/products/' .. p .. '/build.lua',
     },
     outs = fetchStamp,
@@ -460,6 +461,7 @@ table.insert(builds, {
     'spec/addon/util_spec.lua',
     'spec/data/apis_spec.lua',
     'spec/data/config_spec.lua',
+    'spec/data/flavors_spec.lua',
     'spec/data/globals_spec.lua',
     'spec/data/impl_spec.lua',
     'spec/data/structures_spec.lua',

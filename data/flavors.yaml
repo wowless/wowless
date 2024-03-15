@@ -1,13 +1,12 @@
 ---
 Mainline:
-  alternate: Mainline
+  alternates: {}
   dir: Interface
-TBC:
-  alternate: BCC
-  dir: Interface_TBC
 Vanilla:
-  alternate: Classic
+  alternates:
+  - Classic
   dir: Interface_Vanilla
 Wrath:
-  alternate: WOTLKC
+  alternates:
+  - WOTLKC
   dir: Interface_Wrath

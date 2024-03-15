@@ -638,19 +638,25 @@ local function loader(api, cfg)
     return { attrs = attrs, files = files }
   end
 
+  local tocsuffixes = (function()
+    local flavor = build.flavor
+    local t = {
+      '_' .. flavor,
+      '-' .. flavor,
+    }
+    for _, alt in ipairs(flavors[flavor].alternates) do
+      table.insert(t, '_' .. alt)
+      table.insert(t, '-' .. alt)
+    end
+    table.insert(t, '')
+    return t
+  end)()
+
   local function resolveTocDir(tocDir)
     api.log(1, 'resolving %s', tocDir)
     local base = path.basename(tocDir)
-    local flavor = build.flavor
-    local toTry = {
-      '_' .. flavor,
-      '-' .. flavor,
-      '_' .. flavors[flavor].alternate,
-      '-' .. flavors[flavor].alternate,
-      '',
-    }
-    for _, try in ipairs(toTry) do
-      local tocFile = path.join(tocDir, base .. try .. '.toc')
+    for _, suffix in ipairs(tocsuffixes) do
+      local tocFile = path.join(tocDir, base .. suffix .. '.toc')
       local success, content = pcall(readFile, tocFile)
       if success then
         api.log(1, 'using toc %s', tocFile)
