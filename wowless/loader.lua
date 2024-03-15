@@ -739,7 +739,8 @@ local function loader(api, cfg)
         end
       end
       api.log(1, 'loading addon files for %s', addonName)
-      local loadFile = forAddon(addonName, {}, toc.dir, not not toc.fdid)
+      local addonEnv = toc.attrs.SuppressLocalTableRef ~= '1' and {} or nil
+      local loadFile = forAddon(addonName, addonEnv, toc.dir, not not toc.fdid)
       for _, file in ipairs(toc.files) do
         loadFile(file)
       end
