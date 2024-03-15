@@ -47,6 +47,8 @@ runner:
     LFG_PROPOSAL_SHOW: TODO figure out if there's an ordering issue here
   skip_slashcmds:
     CASTRANDOM: {}
+    GUILD_INVITE: {}
+    GUILD_UNINVITE: {}
     LOOT_MASTER: {}
     USERANDOM: {}
 runtime:
