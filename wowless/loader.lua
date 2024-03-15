@@ -783,6 +783,12 @@ local function loader(api, cfg)
       return addonData[a].fdid < addonData[b].fdid
     end)
     for _, name in ipairs(blizzardAddons) do
+      local toc = addonData[name]
+      if toc.attrs.LoadFirst == '1' or toc.attrs.GuardedAddOn == '1' then
+        loadAddon(name)
+      end
+    end
+    for _, name in ipairs(blizzardAddons) do
       loadAddon(name)
     end
   end
