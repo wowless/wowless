@@ -1,4 +1,8 @@
 ---
+Cata:
+  alternates:
+  - Classic
+  dir: Interface
 Mainline:
   alternates: {}
   dir: Interface
