@@ -182,6 +182,7 @@ for _, p in ipairs(productList) do
   table.insert(builds, {
     args = { product = p, ['type'] = 'toc' },
     ins = 'build/cmake/gentest',
+    ins_implicit = 'build/data/products.lua',
     outs_implicit = prefix .. 'WowlessData.toc',
     rule = 'mkaddon',
   })
@@ -189,6 +190,7 @@ for _, p in ipairs(productList) do
     table.insert(builds, {
       args = { product = p, ['type'] = k },
       ins = { v(p), 'build/cmake/gentest' },
+      ins_implicit = 'build/data/products.lua',
       outs = prefix .. k .. '.lua',
       rule = 'mkaddon',
     })

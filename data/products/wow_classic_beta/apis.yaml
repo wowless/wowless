@@ -10884,7 +10884,6 @@ ExpandTrainerSkillLine:
 FactionToggleAtWar: {}
 fastrandom:
   stdlib: fastrandom
-FauxScrollFrame_Update: {}
 FillLocalizedClassList:
   impl: FillLocalizedClassList
   inputs:
@@ -15858,7 +15857,6 @@ SetInWorldUIVisibility:
   - name: visible
     type: boolean
   outputs: {}
-SetItemRef: {}
 SetLegacyRaidDifficultyID:
   inputs:
   - name: difficultyID
