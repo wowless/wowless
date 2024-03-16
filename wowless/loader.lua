@@ -790,7 +790,8 @@ local function loader(api, cfg)
   end
 
   local function isLoadable(toc)
-    return toc.attrs.OnlyBetaAndPTR ~= '1' or datalua.cvars.agentuid.value == 'wow_ptr'
+    local a = datalua.cvars.agentuid.value
+    return toc.attrs.OnlyBetaAndPTR ~= '1' or a == 'wow_ptr' or a == 'wow_beta'
   end
 
   local function loadFrameXml()
