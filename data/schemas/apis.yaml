@@ -37,6 +37,8 @@ type:
                     required: true
                     type:
                       schema: type
+          instride:
+            type: number
           mayreturnnothing:
             type: boolean
           nowrap:
@@ -61,6 +63,8 @@ type:
                     required: true
                     type:
                       schema: type
+          outstride:
+            type: number
           protection:
             type:
               oneof:

@@ -176,6 +176,19 @@ local function split(name)
   end
 end
 
+local function stride(ts)
+  local n = 0
+  for _, t in ipairs(ts or {}) do
+    if t.StrideIndex then
+      n = n + 1
+      assert(n == t.StrideIndex)
+    else
+      assert(n == 0)
+    end
+  end
+  return n > 0 and n or nil
+end
+
 -- Super duper hack, sorry world.
 local unitHacks = {
   UnitFactionGroup = 'unitName',
@@ -256,8 +269,10 @@ local function rewriteApis()
       apis[name] = {
         impl = api and api.impl,
         inputs = insig(fn, ns),
+        instride = stride(fn.Arguments),
         mayreturnnothing = api and api.mayreturnnothing,
         outputs = outsig(fn, ns, api),
+        outstride = stride(fn.Returns),
         stubnothing = api and api.stubnothing,
       }
     end

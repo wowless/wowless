@@ -504,6 +504,7 @@ C_AddOns.GetAddOnDependencies:
   outputs:
   - name: unpackedPrimitiveType
     type: string
+  outstride: 1
 C_AddOns.GetAddOnEnableState:
   impl: GetAddOnEnableState
   inputs:
@@ -553,6 +554,7 @@ C_AddOns.GetAddOnOptionalDependencies:
   outputs:
   - name: unpackedPrimitiveType
     type: string
+  outstride: 1
 C_AddOns.GetNumAddOns:
   impl: GetNumAddOns
   inputs: {}
@@ -9443,6 +9445,7 @@ C_UnitAuras.GetAuraSlots:
     type: number
   - name: slots
     type: number
+  outstride: 1
 C_UnitAuras.GetBuffDataByIndex:
   inputs:
   - name: unitToken
@@ -10773,6 +10776,7 @@ DeclineName:
   outputs:
   - name: declinedNames
     type: string
+  outstride: 1
 DeclineQuest: {}
 DeclineResurrect:
   inputs: {}
@@ -11301,6 +11305,7 @@ GetAvailableLocales:
   outputs:
   - name: unpackedPrimitiveType
     type: string
+  outstride: 1
 GetAvailableTitle:
   inputs:
   - name: index
@@ -12861,6 +12866,7 @@ GetNetIpTypes:
   outputs:
   - name: ipTypes
     type: string
+  outstride: 1
 GetNetStats:
   inputs: {}
   outputs:
