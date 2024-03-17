@@ -68,6 +68,7 @@ skip_docfiles:
   PingPinFrameAPIDocumentation: {}
   SimpleModelFFXAPIDocumentation: {}
 typedefs:
+  AnimationDataEnum: number
   BigUInteger: number
   bool: boolean
   CalendarEventID: string
@@ -76,31 +77,55 @@ typedefs:
   ClubInvitationId: string
   ClubStreamId: string
   ConnectionIptype: string
+  CScriptObject: table
   cstring: string
+  FileAsset: string
   fileID: number
+  FilterMode: string
   HTMLTextType: string
+  IDOrLink: string
+  InsertMode: string
   ItemInfo: string
   kstringClubMessage: string
   kstringLfgListApplicant: string
   kstringLfgListChat: string
   kstringLfgListSearch: string
+  luaFunction: function
   luaIndex: number
+  ModelAsset: string
   ModelSceneFrame: ModelScene
   ModelSceneFrameActor: Actor
   NamePlateFrame: table
+  normalizedValue: number
   NotificationDbId: string
   number: number
   ScriptRegion: table
+  SimpleAnim: table
+  SimpleAnimGroup: table
+  SimpleButtonStateToken: string
+  SimpleControlPoint: table
+  SimpleFont: table
+  SimpleFontString: table
   SimpleFrame: Frame
+  SimpleLine: table
+  SimpleMaskTexture: table
+  SimplePathAnim: table
   SimpleTexture: Texture
   SimpleWindow: nil
+  SingleColorValue: number
+  size: number
   string: string
+  TBFFlags: string
   TBFStyleFlags: string
+  TextureAsset: string
+  TextureAssetDisk: string
   textureAtlas: string
   textureKit: string
   time_t: number
   TooltipComparisonItem: table
   uiAddon: uiAddon
+  uiFontHeight: number
+  uiRect: number
   uiUnit: number
   UnitToken: unit
   WOWGUID: string
