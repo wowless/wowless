@@ -273,6 +273,7 @@ local function rewriteApis()
         outputs = outsig(fn, ns, api),
         outstride = stride(fn.Returns),
         stubnothing = api and api.stubnothing,
+        stuboutstrides = api and api.stuboutstrides,
       }
     end
   end
