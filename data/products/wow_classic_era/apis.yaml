@@ -466,6 +466,7 @@ C_AddOns.GetAddOnDependencies:
   outputs:
   - name: unpackedPrimitiveType
     type: string
+  outstride: 1
 C_AddOns.GetAddOnEnableState:
   inputs:
   - name: name
@@ -514,6 +515,7 @@ C_AddOns.GetAddOnOptionalDependencies:
   outputs:
   - name: unpackedPrimitiveType
     type: string
+  outstride: 1
 C_AddOns.GetNumAddOns:
   impl: GetNumAddOns
   inputs: {}
@@ -8742,6 +8744,7 @@ C_UnitAuras.GetAuraSlots:
     type: number
   - name: slots
     type: number
+  outstride: 1
 C_UnitAuras.GetBuffDataByIndex:
   inputs:
   - name: unitToken

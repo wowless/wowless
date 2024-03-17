@@ -60,8 +60,6 @@ script_objects:
   SimpleStatusBarAPI: StatusBar
   SimpleTextureAPI: Texture
   SimpleTextureBaseAPI: TextureBase
-skip_apis:
-  GetNetStats: stub requires output stride
 skip_docfiles:
   BarberShopInternalDocumentation: {}
   ConfigurationWarningsDocumentation: {}
