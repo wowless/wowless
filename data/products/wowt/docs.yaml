@@ -66,6 +66,7 @@ skip_docfiles:
   PingPinFrameAPIDocumentation: {}
   SimpleModelFFXAPIDocumentation: {}
 typedefs:
+  AnimationDataEnum: number
   BigInteger: number
   BigUInteger: number
   bool: boolean
@@ -74,42 +75,67 @@ typedefs:
   ClubId: string
   ClubInvitationId: string
   ClubStreamId: string
+  CScriptObject: table
   cstring: string
+  FileAsset: string
   fileID: number
+  FilterMode: string
   GarrisonFollower: string
   HTMLTextType: string
+  IDOrLink: string
+  InsertMode: string
   InventorySlots: number
   ItemInfo: string
   kstringClubMessage: string
   kstringLfgListApplicant: string
   kstringLfgListChat: string
   kstringLfgListSearch: string
+  luaFunction: function
   luaIndex: number
   LuaValueVariant: table
+  ModelAsset: string
   ModelSceneFrame: ModelScene
   ModelSceneFrameActor: Actor
   mouseButton: string
   NamePlateFrame: table
+  normalizedValue: number
   NotificationDbId: string
   number: number
   RecruitAcceptanceID: string
   ScriptRegion: table
+  SimpleAnim: table
+  SimpleAnimGroup: table
+  SimpleButtonStateToken: string
+  SimpleControlPoint: table
   SimpleFont: table
+  SimpleFontString: table
   SimpleFrame: Frame
+  SimpleLine: table
+  SimpleMaskTexture: table
+  SimplePathAnim: table
   SimpleTexture: Texture
   SimpleWindow: nil
+  SingleColorValue: number
+  size: number
   string: string
   stringView: string
+  TBFFlags: string
   TBFStyleFlags: string
+  TextureAsset: string
   TextureAssetDisk: string
   textureAtlas: string
   textureKit: string
   time_t: number
   TooltipComparisonItem: table
   uiAddon: uiAddon
+  uiFontHeight: number
   UiMapPoint: table
+  uiRect: number
   uiUnit: number
   UnitToken: unit
   WeeklyRewardItemDBID: string
   WOWGUID: string
   WOWMONEY: number
+uiobject_methods:
+  Button:
+    SetButtonState: {}

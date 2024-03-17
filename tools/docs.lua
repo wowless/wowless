@@ -313,7 +313,7 @@ local function rewriteEvents()
   return out
 end
 
-local function rewriteStructures(outApis, outEvents)
+local function rewriteStructures(outApis, outEvents, outUIObjects)
   local filename = ('data/products/%s/structures.yaml'):format(product)
   local structures = require('wowapi.yaml').parseFile(filename)
   for name, tab in pairs(tabs) do
@@ -357,12 +357,84 @@ local function rewriteStructures(outApis, outEvents)
   for _, event in pairs(outEvents) do
     processList(event.payload)
   end
+  for _, uiobject in pairs(outUIObjects) do
+    for _, field in pairs(uiobject.fields) do
+      processType(field.type)
+    end
+    for _, method in pairs(uiobject.methods) do
+      processList(method.inputs)
+      processList(method.outputs)
+    end
+  end
   writeifchanged(filename, pprintYaml(out))
+end
+
+local function rewriteUIObjects()
+  local pscrobjs = {}
+  for _, t in pairs(scrobjs) do
+    assert(not next(t.Events))
+    assert(not next(t.Tables))
+    local fns = {}
+    for _, fn in ipairs(t.Functions) do
+      assert(not fns[fn.Name])
+      local inputs = {}
+      for _, arg in ipairs(fn.Arguments or {}) do
+        table.insert(inputs, {
+          default = arg.Default,
+          name = arg.Name,
+          nilable = arg.Nilable or nil,
+          type = t2nty(arg),
+        })
+      end
+      local outputs = {}
+      for _, ret in ipairs(fn.Returns or {}) do
+        table.insert(outputs, {
+          default = ret.Default,
+          name = ret.Name,
+          nilable = ret.Nilable or nil,
+          type = t2nty(ret),
+        })
+      end
+      fns[fn.Name] = {
+        inputs = inputs,
+        outputs = outputs,
+      }
+    end
+    pscrobjs[t.Name] = fns
+  end
+  local mapped = {}
+  for k, v in pairs(pscrobjs) do
+    local mmk = assert(config.script_objects[k], 'unknown doc type ' .. k)
+    local t = mapped[mmk] or {}
+    for mk, mv in pairs(v) do
+      assert(not t[mk], 'multiple specs for ' .. k .. '.' .. mk)
+      t[mk] = mv
+    end
+    mapped[mmk] = t
+  end
+  local filename = ('data/products/%s/uiobjects.yaml'):format(product)
+  local uiobjects = require('wowapi.yaml').parseFile(filename)
+  for k, v in pairs(mapped) do
+    local u = assert(uiobjects[k], 'unknown uiobject type ' .. k)
+    for mk, mv in pairs(v) do
+      local mm = u.methods[mk]
+      if deref(config, 'uiobject_methods', k, mk) then
+        u.methods[mk] = {
+          impl = mm and mm.impl,
+          inputs = mv.inputs,
+          outputs = mv.outputs,
+        }
+      end
+    end
+  end
+  writeifchanged(filename, pprintYaml(uiobjects))
+  return uiobjects
 end
 
 local outApis = rewriteApis()
 local outEvents = rewriteEvents()
-rewriteStructures(outApis, outEvents)
+local outUIObjects = rewriteUIObjects()
+rewriteStructures(outApis, outEvents, outUIObjects)
 
 local unused_typedefs = {}
 for k in pairs(typedefs) do
