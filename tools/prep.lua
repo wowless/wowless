@@ -133,9 +133,16 @@ do
     elseif apicfg.stubnothing then
       apicfg.stub = ''
     else
+      local outs = apicfg.outputs or {}
       local rets = {}
-      for _, out in ipairs(apicfg.outputs or {}) do
-        table.insert(rets, specDefault(out))
+      local nonstride = #outs - (apicfg.outstride or 0)
+      for i = 1, nonstride do
+        table.insert(rets, specDefault(outs[i]))
+      end
+      for _ = 1, apicfg.stuboutstrides or 1 do
+        for j = nonstride + 1, #outs do
+          table.insert(rets, specDefault(outs[j]))
+        end
       end
       apicfg.stub = 'return ' .. table.concat(rets, ',')
     end
