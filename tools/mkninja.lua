@@ -21,7 +21,10 @@ local perProductAddonGeneratedTypes = {
     return t
   end,
   globalapis = function(p)
-    return { 'build/data/products/' .. p .. '/apis.lua' }
+    return {
+      'build/data/products/' .. p .. '/apis.lua',
+      'build/data/products/' .. p .. '/config.lua',
+    }
   end,
   globals = function(p)
     return { 'build/data/products/' .. p .. '/globals.lua' }
@@ -179,6 +182,7 @@ for _, p in ipairs(productList) do
   table.insert(builds, {
     args = { product = p, ['type'] = 'toc' },
     ins = 'build/cmake/gentest',
+    ins_implicit = 'build/data/products.lua',
     outs_implicit = prefix .. 'WowlessData.toc',
     rule = 'mkaddon',
   })
@@ -186,6 +190,7 @@ for _, p in ipairs(productList) do
     table.insert(builds, {
       args = { product = p, ['type'] = k },
       ins = { v(p), 'build/cmake/gentest' },
+      ins_implicit = 'build/data/products.lua',
       outs = prefix .. k .. '.lua',
       rule = 'mkaddon',
     })
@@ -231,6 +236,7 @@ for _, p in ipairs(productList) do
     ins = {
       dblist,
       'build/cmake/fetch',
+      'build/data/flavors.lua',
       'build/data/products/' .. p .. '/build.lua',
     },
     outs = fetchStamp,
@@ -361,6 +367,15 @@ local yamls = {
   'data/products/wow_classic/structures.yaml',
   'data/products/wow_classic/uiobjects.yaml',
   'data/products/wow_classic/xml.yaml',
+  'data/products/wow_classic_beta/apis.yaml',
+  'data/products/wow_classic_beta/build.yaml',
+  'data/products/wow_classic_beta/config.yaml',
+  'data/products/wow_classic_beta/cvars.yaml',
+  'data/products/wow_classic_beta/events.yaml',
+  'data/products/wow_classic_beta/globals.yaml',
+  'data/products/wow_classic_beta/structures.yaml',
+  'data/products/wow_classic_beta/uiobjects.yaml',
+  'data/products/wow_classic_beta/xml.yaml',
   'data/products/wow_classic_era/apis.yaml',
   'data/products/wow_classic_era/build.yaml',
   'data/products/wow_classic_era/config.yaml',
@@ -420,7 +435,6 @@ local yamls = {
   'data/schemas/products.yaml',
   'data/schemas/schema.yaml',
   'data/schemas/schematype.yaml',
-  'data/schemas/state.yaml',
   'data/schemas/stringenums.yaml',
   'data/schemas/structures.yaml',
   'data/schemas/test.yaml',
@@ -428,15 +442,6 @@ local yamls = {
   'data/schemas/uiobjectimpl.yaml',
   'data/schemas/uiobjects.yaml',
   'data/schemas/xml.yaml',
-  'data/state/Addons.yaml',
-  'data/state/Bindings.yaml',
-  'data/state/CVars.yaml',
-  'data/state/Calendar.yaml',
-  'data/state/ModifiedClicks.yaml',
-  'data/state/System.yaml',
-  'data/state/Talents.yaml',
-  'data/state/Time.yaml',
-  'data/state/Units.yaml',
   'data/test.yaml',
   'data/uiobjectimpl.yaml',
 }
@@ -458,6 +463,7 @@ table.insert(builds, {
     'spec/addon/util_spec.lua',
     'spec/data/apis_spec.lua',
     'spec/data/config_spec.lua',
+    'spec/data/flavors_spec.lua',
     'spec/data/globals_spec.lua',
     'spec/data/impl_spec.lua',
     'spec/data/structures_spec.lua',

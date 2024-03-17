@@ -11,6 +11,7 @@ local function loader(api, cfg)
   local mixin = util.mixin
   local intrinsics = {}
   local readFile = util.readfile
+  local bindings = {}
 
   local xmlimpls = (function()
     local tree = datalua.xml
@@ -97,12 +98,16 @@ local function loader(api, cfg)
 
   local function getColor(e)
     local name = e.attr.name or e.attr.color
-    if name == 'GREEN_FONT_COLOR' and datalua.build.flavor == 'Vanilla' then -- issue #303
+    if not name then
       return e.attr.r or 0, e.attr.g or 0, e.attr.b or 0, e.attr.a or 1
-    elseif name then
-      return assert(api.env[name], ('unknown color %q'):format(name)):GetRGBA()
+    end
+    local color = api.env[name]
+    if color then
+      return color:GetRGBA()
+    elseif name == 'GREEN_FONT_COLOR' then -- issue #303
+      return 0, 0, 0, 1
     else
-      return e.attr.r or 0, e.attr.g or 0, e.attr.b or 0, e.attr.a or 1
+      error(('unknown color %q'):format(name))
     end
   end
 
@@ -287,8 +292,8 @@ local function loader(api, cfg)
         parent:SetMinResize(getXY(e.kids[#e.kids]))
       end
     end,
-    modifiedclick = function(_, e)
-      api.states.ModifiedClicks[e.attr.action] = e.attr.default
+    modifiedclick = function()
+      -- TODO support modified clicks
     end,
     offset = function(ctx, e, parent)
       assert(ctx.shadow, 'this should only run on shadow for now')
@@ -550,7 +555,7 @@ local function loader(api, cfg)
             -- TODO interpret all binding attributes
             if not e.attr.debug then -- TODO support debug bindings
               local bfn = 'return function(keystate) ' .. e.text .. ' end'
-              api.states.Bindings[e.attr.name] = loadstr(bfn, filename, e.line)()
+              bindings[e.attr.name] = loadstr(bfn, filename, e.line)()
             end
           elseif e.type == 'fontfamily' then -- TODO do this another way
             local font = e.kids[1].kids[1]
@@ -637,19 +642,25 @@ local function loader(api, cfg)
     return { attrs = attrs, files = files }
   end
 
+  local tocsuffixes = (function()
+    local flavor = build.flavor
+    local t = {
+      '_' .. flavor,
+      '-' .. flavor,
+    }
+    for _, alt in ipairs(flavors[flavor].alternates) do
+      table.insert(t, '_' .. alt)
+      table.insert(t, '-' .. alt)
+    end
+    table.insert(t, '')
+    return t
+  end)()
+
   local function resolveTocDir(tocDir)
     api.log(1, 'resolving %s', tocDir)
     local base = path.basename(tocDir)
-    local flavor = build.flavor
-    local toTry = {
-      '_' .. flavor,
-      '-' .. flavor,
-      '_' .. flavors[flavor].alternate,
-      '-' .. flavors[flavor].alternate,
-      '',
-    }
-    for _, try in ipairs(toTry) do
-      local tocFile = path.join(tocDir, base .. try .. '.toc')
+    for _, suffix in ipairs(tocsuffixes) do
+      local tocFile = path.join(tocDir, base .. suffix .. '.toc')
       local success, content = pcall(readFile, tocFile)
       if success then
         api.log(1, 'using toc %s', tocFile)
@@ -660,72 +671,12 @@ local function loader(api, cfg)
     return nil
   end
 
-  do
-    local time = assert(api.states.Time)
-    time.timers = require('minheap'):new()
-    time.timers:push(math.huge, function()
-      error('fell off the end of time')
-    end)
-
-    local state = setmetatable({}, { __mode = 'k' })
-    local index = {
-      Cancel = debug.newcfunction(function(self)
-        state[self].cancelled = true
-      end),
-      Invoke = debug.newcfunction(function(self, ...)
-        state[self].callback(...)
-      end),
-      IsCancelled = debug.newcfunction(function(self)
-        return state[self].cancelled
-      end),
-    }
-    local tickerMT
-    tickerMT = {
-      __eq = function(u1, u2)
-        return state[u1].table == state[u2].table
-      end,
-      __index = function(u, k)
-        return index[k] or state[u].table[k]
-      end,
-      __metatable = false,
-      __newindex = function(u, k, v)
-        if index[k] or tickerMT[k] ~= nil then
-          error('Attempted to assign to read-only key ' .. k)
-        end
-        state[u].table[k] = v
-      end,
-    }
-    local mtproxy = newproxy(true)
-    mixin(getmetatable(mtproxy), tickerMT)
-    time.newTicker = function(seconds, callback, iterations)
-      assert(getfenv(callback) ~= _G, 'wowless bug: framework callback in newTicker')
-      local p = newproxy(mtproxy)
-      state[p] = {
-        callback = callback,
-        cancelled = false,
-        table = {},
-      }
-      local count = 0
-      local function cb()
-        if not state[p].cancelled and count < iterations then
-          local np = newproxy(p)
-          state[np] = state[p]
-          callback(np)
-          count = count + 1
-          time.timers:push(time.stamp + seconds, cb)
-        end
-      end
-      time.timers:push(time.stamp + seconds, cb)
-      return p
-    end
-  end
-
   local sqlitedb = (function()
     local dbfile = ('build/products/%s/%s.sqlite3'):format(product, rootDir and 'data' or 'schema')
     return require('lsqlite3').open(dbfile)
   end)()
 
-  local addonData = assert(api.states.Addons)
+  local addonData = assert(api.addons)
 
   local function initAddons()
     local lfs = require('lfs')
@@ -737,6 +688,7 @@ local function loader(api, cfg)
           addon.name = name
           addon.fdid = fdid
           addon.dir = dir
+          addon.revwiths = {}
           addonData[name:lower()] = addon
           table.insert(addonData, addon)
         end
@@ -766,12 +718,26 @@ local function loader(api, cfg)
       local dir = path.dirname(d)
       maybeAddAll(dir == '' and '.' or dir)
     end
+    for _, addon in ipairs(addonData) do
+      for name in string.gmatch(addon.attrs.LoadWith or '', '[^, ]+') do
+        local dep = addonData[name:lower()]
+        if not dep then
+          api.log(1, 'skipping unknown addon %q in LoadWith of %q', name, addon.name)
+        else
+          table.insert(dep.revwiths, addon.name)
+        end
+      end
+    end
   end
 
   local depAttrs = {
     'RequiredDep',
     'RequiredDeps',
     'Dependencies',
+  }
+  local optionalDepAttrs = {
+    'OptionalDep',
+    'OptionalDeps',
   }
 
   local function doLoadAddon(addonName)
@@ -780,15 +746,25 @@ local function loader(api, cfg)
       error('unknown addon ' .. addonName)
     end
     addonName = toc.name
-    if not toc.loaded and toc.attrs.AllowLoad ~= 'Glue' then
+    local onlyGlue = toc.attrs.AllowLoad and toc.attrs.AllowLoad:lower() == 'glue'
+    if not toc.loadattempted and not onlyGlue then
+      toc.loadattempted = true
       api.log(1, 'loading addon dependencies for %s', addonName)
       for _, attr in ipairs(depAttrs) do
         for dep in string.gmatch(toc.attrs[attr] or '', '[^, ]+') do
           doLoadAddon(dep)
         end
       end
+      for _, attr in ipairs(optionalDepAttrs) do
+        for dep in string.gmatch(toc.attrs[attr] or '', '[^, ]+') do
+          if addonData[dep:lower()] then
+            doLoadAddon(dep)
+          end
+        end
+      end
       api.log(1, 'loading addon files for %s', addonName)
-      local loadFile = forAddon(addonName, {}, toc.dir, not not toc.fdid)
+      local addonEnv = toc.attrs.SuppressLocalTableRef ~= '1' and {} or nil
+      local loadFile = forAddon(addonName, addonEnv, toc.dir, not not toc.fdid)
       for _, file in ipairs(toc.files) do
         loadFile(file)
       end
@@ -796,6 +772,10 @@ local function loader(api, cfg)
       toc.loaded = true
       api.log(1, 'done loading %s', addonName)
       api.SendEvent('ADDON_LOADED', addonName)
+      for _, revwith in ipairs(toc.revwiths) do
+        api.log(1, 'processing LoadWith %q -> %q', addonName, revwith)
+        doLoadAddon(revwith)
+      end
     end
   end
 
@@ -810,19 +790,23 @@ local function loader(api, cfg)
   end
 
   local function isLoadable(toc)
-    return toc.attrs.OnlyBetaAndPTR ~= '1' or datalua.cvars.agentuid.value == 'wow_ptr'
+    local a = datalua.cvars.agentuid.value
+    return toc.attrs.OnlyBetaAndPTR ~= '1' or a == 'wow_ptr' or a == 'wow_beta'
   end
 
   local function loadFrameXml()
-    local tocdir = path.join(rootDir, 'Interface', 'FrameXML')
-    local loadFile = forAddon(nil, nil, tocdir, true)
     for tag, text in sqlitedb:urows('SELECT BaseTag, TagText_lang FROM GlobalStrings') do
       api.env[tag] = text
     end
-    for _, file in ipairs(resolveTocDir(tocdir).files) do
-      loadFile(file)
+    local fxtocdir = path.join(rootDir, 'Interface', 'FrameXML')
+    local fxtoc = resolveTocDir(fxtocdir)
+    if fxtoc then
+      local loadFile = forAddon(nil, nil, fxtocdir, true)
+      for _, file in ipairs(fxtoc.files) do
+        loadFile(file)
+      end
+      loadFile(path.join(rootDir, flavors[build.flavor].dir, 'FrameXML', 'Bindings.xml'))
     end
-    loadFile(path.join(rootDir, flavors[build.flavor].dir, 'FrameXML', 'Bindings.xml'))
     local blizzardAddons = {}
     for name, toc in pairs(addonData) do
       if type(name) == 'string' and toc.fdid and toc.attrs.LoadOnDemand ~= '1' and isLoadable(toc) then
@@ -832,6 +816,12 @@ local function loader(api, cfg)
     table.sort(blizzardAddons, function(a, b)
       return addonData[a].fdid < addonData[b].fdid
     end)
+    for _, name in ipairs(blizzardAddons) do
+      local toc = addonData[name]
+      if toc.attrs.LoadFirst == '1' or toc.attrs.GuardedAddOn == '1' then
+        loadAddon(name)
+      end
+    end
     for _, name in ipairs(blizzardAddons) do
       loadAddon(name)
     end
@@ -863,6 +853,7 @@ local function loader(api, cfg)
   end
 
   return {
+    bindings = bindings,
     initAddons = initAddons,
     loadAddon = loadAddon,
     loadFrameXml = loadFrameXml,

@@ -1,3 +1,5 @@
+local units = require('wowless.modules.units')()
+
 local tests = {
   ['array of numbers type, string value'] = {
     out = { nil, 'is of type "number array", but "string" was passed' },
@@ -111,7 +113,7 @@ local tests = {
     value = { 'moo' },
   },
   ['unit type, string value, known unit'] = {
-    out = { { name = 'Woof' } },
+    out = { units.player },
     spec = { type = 'unit' },
     value = 'player',
   },
@@ -140,18 +142,8 @@ describe('typecheck', function()
       },
       uiobjects = {},
     },
-    states = {
-      Addons = {},
-      Units = {
-        aliases = {
-          player = 'playerguid',
-        },
-        guids = {
-          playerguid = {
-            name = 'Woof',
-          },
-        },
-      },
+    modules = {
+      units = units,
     },
   })
   for name, test in pairs(tests) do

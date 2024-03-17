@@ -74,7 +74,7 @@ local specDefault = (function()
     if spec.default ~= nil then
       return valstr(spec.default)
     end
-    if spec.nilable then
+    if spec.nilable and not spec.stubnotnil then
       return 'nil'
     end
     local ty = assert(spec.type, 'spec missing a type')
@@ -113,29 +113,36 @@ local apis = {}
 local impls = {}
 local sqlcursors = {}
 local sqllookups = {}
-local states = {
-  -- These are unreferenced by any API, alas.
-  Bindings = parseYaml('data/state/Bindings.yaml').value,
-  ModifiedClicks = parseYaml('data/state/ModifiedClicks.yaml').value,
-}
 do
   local cfg = parseYaml('data/products/' .. product .. '/apis.yaml')
   local implcfg = parseYaml('data/impl.yaml')
   for name, apicfg in pairs(cfg) do
     if apicfg.impl then
       local ic = assert(implcfg[apicfg.impl], 'missing impl ' .. apicfg.impl)
-      apicfg.frameworks = ic.frameworks
+      apicfg.frameworks = ic.module and { 'api' } or ic.frameworks
       apicfg.sqls = ic.sqls
-      apicfg.states = ic.states
       if not impls[apicfg.impl] then
-        impls[apicfg.impl] = readFile('data/impl/' .. apicfg.impl .. '.lua')
+        if ic.module then
+          -- TODO make this smarter so we don't piggy back on framework
+          local fmt = 'return (...).modules[%q][%q](select(2,...))'
+          impls[apicfg.impl] = fmt:format(ic.module, ic['function'] or apicfg.impl)
+        else
+          impls[apicfg.impl] = readFile('data/impl/' .. apicfg.impl .. '.lua')
+        end
       end
     elseif apicfg.stubnothing then
       apicfg.stub = ''
     else
+      local outs = apicfg.outputs or {}
       local rets = {}
-      for _, out in ipairs(apicfg.outputs or {}) do
-        table.insert(rets, specDefault(out))
+      local nonstride = #outs - (apicfg.outstride or 0)
+      for i = 1, nonstride do
+        table.insert(rets, specDefault(outs[i]))
+      end
+      for _ = 1, apicfg.stuboutstrides or 1 do
+        for j = nonstride + 1, #outs do
+          table.insert(rets, specDefault(outs[j]))
+        end
       end
       apicfg.stub = 'return ' .. table.concat(rets, ',')
     end
@@ -150,12 +157,6 @@ do
           sql = readFile('data/sql/lookup/' .. sql.lookup .. '.sql'),
           table = sql.table,
         }
-      end
-    end
-    for _, state in ipairs(apicfg.states or {}) do
-      if not states[state] then
-        local statecfg = parseYaml('data/state/' .. state .. '.yaml')
-        states[state] = statecfg.value
       end
     end
     apis[name] = apicfg
@@ -313,7 +314,6 @@ local data = {
   product = product,
   sqlcursors = sqlcursors,
   sqllookups = sqllookups,
-  states = states,
   structures = structures,
   uiobjects = uiobjects,
   xml = parseYaml('data/products/' .. product .. '/xml.yaml'),

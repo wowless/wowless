@@ -489,6 +489,7 @@ C_AddOns.GetAddOnDependencies:
   outputs:
   - name: unpackedPrimitiveType
     type: string
+  outstride: 1
 C_AddOns.GetAddOnEnableState:
   impl: GetAddOnEnableState
   inputs:
@@ -539,6 +540,7 @@ C_AddOns.GetAddOnOptionalDependencies:
   outputs:
   - name: unpackedPrimitiveType
     type: string
+  outstride: 1
 C_AddOns.GetNumAddOns:
   impl: GetNumAddOns
   inputs: {}
@@ -1042,6 +1044,7 @@ C_ArtifactUI.GetMetaPowerInfo:
     type: number
   - name: currentRank
     type: number
+  outstride: 3
 C_ArtifactUI.GetNumAppearanceSets:
   inputs: {}
   outputs:
@@ -1101,6 +1104,7 @@ C_ArtifactUI.GetPowersAffectedByRelic:
   outputs:
   - name: powerIDs
     type: number
+  outstride: 1
 C_ArtifactUI.GetPowersAffectedByRelicItemLink:
   inputs:
   - name: relicItemInfo
@@ -1108,6 +1112,7 @@ C_ArtifactUI.GetPowersAffectedByRelicItemLink:
   outputs:
   - name: powerIDs
     type: number
+  outstride: 1
 C_ArtifactUI.GetPreviewAppearance:
   inputs: {}
   outputs:
@@ -6720,6 +6725,7 @@ C_ContributionCollector.GetActive:
   outputs:
   - name: contributionID
     type: number
+  outstride: 1
 C_ContributionCollector.GetAtlases:
   inputs:
   - name: contributionID
@@ -6735,6 +6741,7 @@ C_ContributionCollector.GetBuffs:
   outputs:
   - name: spellID
     type: number
+  outstride: 1
 C_ContributionCollector.GetContributionAppearance:
   inputs:
   - name: contributionID
@@ -6779,6 +6786,7 @@ C_ContributionCollector.GetManagedContributionsForCreatureID:
   outputs:
   - name: contributionID
     type: number
+  outstride: 1
 C_ContributionCollector.GetName:
   inputs:
   - name: contributionID
@@ -20380,12 +20388,7 @@ C_UnitAuras.GetAuraDataBySlot:
   outputs:
   - name: aura
     nilable: true
-    stub:
-      applications: 1
-      auraInstanceID: 1
-      expirationTime: 0
-      points: {}
-      spellId: 1
+    stubnotnil: true
     type:
       structure: AuraData
 C_UnitAuras.GetAuraDataBySpellName:
@@ -20421,6 +20424,7 @@ C_UnitAuras.GetAuraSlots:
     type: number
   - name: slots
     type: number
+  outstride: 1
 C_UnitAuras.GetBuffDataByIndex:
   inputs:
   - name: unitToken
@@ -21915,14 +21919,14 @@ CreateFrame:
 CreateMacro: {}
 CreateNewRaidProfile: {}
 CreateWindow:
+  impl: CreateWindow
   inputs:
   - default: true
     name: popupStyle
     type: boolean
   outputs:
   - name: window
-    nilable: true
-    type: table
+    type: nil
 CursorHasItem: {}
 CursorHasMacro: {}
 CursorHasMoney: {}
@@ -21959,6 +21963,7 @@ DeclineName:
   outputs:
   - name: declinedNames
     type: string
+  outstride: 1
 DeclineQuest: {}
 DeclineResurrect:
   inputs: {}
@@ -22411,6 +22416,7 @@ GetAvailableLocales:
   outputs:
   - name: unpackedPrimitiveType
     type: string
+  outstride: 1
 GetAvailableQuestInfo:
   inputs:
   - name: index
@@ -23080,7 +23086,8 @@ GetFramerate:
   inputs: {}
   outputs:
   - type: number
-GetFramesRegisteredForEvent: {}
+GetFramesRegisteredForEvent:
+  impl: GetFramesRegisteredForEvent
 GetGameMessageInfo: {}
 GetGameTime:
   inputs: {}
@@ -27511,7 +27518,7 @@ RollOnLoot: {}
 RunBinding: {}
 RunMacro: {}
 RunMacroText:
-  impl: RunMacroText_Callback
+  impl: RunMacroText
   inputs:
   - name: macroText
     type: string

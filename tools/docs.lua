@@ -107,84 +107,8 @@ for k in pairs(config.script_objects) do
   assert(scrobjs[k], 'redundant script object mapping ' .. k)
 end
 
-local types = {
-  AnimationDataEnum = 'number',
-  BigInteger = 'number',
-  BigUInteger = 'number',
-  bool = 'boolean',
-  CalendarEventID = 'string',
-  ChatBubbleFrame = 'table',
-  ClubId = 'string',
-  ClubInvitationId = 'string',
-  ClubStreamId = 'string',
-  CScriptObject = 'table',
-  cstring = 'string',
-  FileAsset = 'string',
-  fileID = 'number',
-  FilterMode = 'string',
-  ['function'] = 'function',
-  GarrisonFollower = 'string',
-  HTMLTextType = 'string',
-  IDOrLink = 'string',
-  InsertMode = 'string',
-  InventorySlots = 'number',
-  ItemInfo = 'string',
-  kstringClubMessage = 'string',
-  kstringLfgListApplicant = 'string',
-  kstringLfgListChat = 'string',
-  kstringLfgListSearch = 'string',
-  luaFunction = 'function',
-  luaIndex = 'number',
-  LuaValueVariant = 'table',
-  ModelAsset = 'string',
-  ModelSceneFrame = 'ModelScene',
-  ModelSceneFrameActor = 'Actor',
-  mouseButton = 'string',
-  NamePlateFrame = 'table',
-  normalizedValue = 'number',
-  NotificationDbId = 'string',
-  number = 'number',
-  RecruitAcceptanceID = 'string',
-  ScriptRegion = 'table',
-  SimpleAnim = 'table',
-  SimpleAnimGroup = 'table',
-  SimpleButtonStateToken = 'string',
-  SimpleControlPoint = 'table',
-  SimpleFont = 'table',
-  SimpleFontString = 'table',
-  SimpleFrame = 'Frame',
-  SimpleLine = 'table',
-  SimpleMaskTexture = 'table',
-  SimplePathAnim = 'table',
-  SimpleTexture = 'Texture',
-  SimpleWindow = 'table',
-  SingleColorValue = 'number',
-  size = 'number',
-  string = 'string',
-  stringView = 'string',
-  table = 'table',
-  TBFFlags = 'string',
-  TBFStyleFlags = 'string',
-  TextureAsset = 'string',
-  TextureAssetDisk = 'string',
-  textureAtlas = 'string',
-  textureKit = 'string',
-  time_t = 'number',
-  TooltipComparisonItem = 'table',
-  uiAddon = 'uiAddon',
-  uiFontHeight = 'number',
-  UiMapPoint = 'table',
-  uiUnit = 'number',
-  uiRect = 'number', -- TODO this is actually expanded to four values (wat)
-  UnitToken = 'unit',
-  WeeklyRewardItemDBID = 'string',
-  WOWGUID = 'string',
-  WOWMONEY = 'number',
-}
-for k in pairs(parseYaml('data/stringenums.yaml')) do
-  assert(not types[k])
-  types[k] = k
-end
+local typedefs = config.typedefs or {}
+local stringenums = parseYaml('data/stringenums.yaml')
 local tys = {}
 for name, tab in pairs(tabs) do
   tys[name] = tab.Type
@@ -209,6 +133,7 @@ local structRewrites = {
   AzeriteItemLocation = 'ItemLocation',
   EmptiableItemLocation = 'ItemLocation',
 }
+local used_typedefs = {}
 local function t2nty(field, ns)
   local t = field.Type
   if field.InnerType then
@@ -216,8 +141,11 @@ local function t2nty(field, ns)
     return { arrayof = t2nty({ Type = field.InnerType }, ns) }
   elseif t == 'table' and field.Mixin then
     error('no struct for mixin ' .. field.Mixin)
-  elseif types[t] then
-    return types[t]
+  elseif typedefs[t] then
+    used_typedefs[t] = true
+    return typedefs[t]
+  elseif stringenums[t] then
+    return t
   end
   local n = ns and tys[ns .. '.' .. t] and (ns .. '.' .. t) or t
   n = structRewrites[n] or n
@@ -246,6 +174,19 @@ local function split(name)
   else
     return name:sub(1, dotpos - 1), name:sub(dotpos + 1)
   end
+end
+
+local function stride(ts)
+  local n = 0
+  for _, t in ipairs(ts or {}) do
+    if t.StrideIndex then
+      n = n + 1
+      assert(n == t.StrideIndex)
+    else
+      assert(n == 0)
+    end
+  end
+  return n > 0 and n or nil
 end
 
 -- Super duper hack, sorry world.
@@ -288,19 +229,23 @@ local function rewriteApis()
   end
   local function outsig(fn, ns, api)
     local stubs = {}
+    local stubnotnils = {}
     for _, output in ipairs(api and api.outputs or {}) do
-      if output.stub ~= nil then
+      if output.name then
         stubs[output.name] = output.stub
+        stubnotnils[output.name] = output.stubnotnil
       end
     end
     local outputs = {}
     for _, r in ipairs(fn.Returns or {}) do
+      local ty = t2nty(r, ns)
       table.insert(outputs, {
         default = enum[r.Type] and enum[r.Type][r.Default] or r.Default,
         name = r.Name,
-        nilable = r.Nilable or fn.Name == 'UnitName' or nil, -- horrible hack
+        nilable = (r.Nilable or fn.Name == 'UnitName') and ty ~= 'nil' or nil, -- horrible hack
         stub = stubs[r.Name],
-        type = t2nty(r, ns),
+        stubnotnil = stubnotnils[r.Name],
+        type = ty,
       })
       stubs[r.Name] = nil
     end
@@ -318,15 +263,18 @@ local function rewriteApis()
   local f = 'data/products/' .. product .. '/apis.yaml'
   local apis = y.parseFile(f)
   for name, fn in pairs(funcs) do
-    local ns = split(name)
-    local api = apis[name]
-    apis[name] = {
-      impl = api and api.impl,
-      inputs = insig(fn, ns),
-      mayreturnnothing = api and api.mayreturnnothing,
-      outputs = outsig(fn, ns, api),
-      stubnothing = api and api.stubnothing,
-    }
+    if not deref(config, 'skip_apis', name) then
+      local ns = split(name)
+      local api = apis[name]
+      apis[name] = {
+        impl = api and api.impl,
+        inputs = insig(fn, ns),
+        mayreturnnothing = api and api.mayreturnnothing,
+        outputs = outsig(fn, ns, api),
+        outstride = stride(fn.Returns),
+        stubnothing = api and api.stubnothing,
+      }
+    end
   end
   writeifchanged(f, y.pprint(apis))
   return apis
@@ -486,3 +434,11 @@ local outApis = rewriteApis()
 local outEvents = rewriteEvents()
 local outUIObjects = rewriteUIObjects()
 rewriteStructures(outApis, outEvents, outUIObjects)
+
+local unused_typedefs = {}
+for k in pairs(typedefs) do
+  if not used_typedefs[k] then
+    unused_typedefs[k] = true
+  end
+end
+assert(not next(unused_typedefs), 'unused typedefs = ' .. require('pl.pretty').write(unused_typedefs))

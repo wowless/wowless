@@ -2,13 +2,15 @@ local util = require('wowless.util')
 
 local function loadSqls(sqlitedb, cursorSqls, lookupSqls)
   local function lookup(stmt, isTable)
+    -- Manually pull out the first element of these iterators.
     if isTable then
-      for row in stmt:nrows() do -- luacheck: ignore 512
-        return row
-      end
+      local f, s = stmt:nrows()
+      return f(s)
     else
-      for row in stmt:rows() do -- luacheck: ignore 512
-        return unpack(row)
+      local f, s = stmt:rows()
+      local t = f(s)
+      if t then
+        return unpack(t)
       end
     end
   end
@@ -58,6 +60,7 @@ local function loadFunctions(api, loader)
     api = api, -- TODO replace api framework with something finer grained
     datalua = api.datalua,
     env = api.env,
+    events = api.events,
     loader = loader,
   }
 
@@ -81,9 +84,6 @@ local function loadFunctions(api, loader)
     local specials = {}
     for _, fw in ipairs(apicfg.frameworks or {}) do
       table.insert(specials, (assert(frameworks[fw], 'unknown framework ' .. fw)))
-    end
-    for _, st in ipairs(apicfg.states or {}) do
-      table.insert(specials, api.states[st])
     end
     for _, sql in ipairs(apicfg.sqls or {}) do
       table.insert(specials, sql.lookup and sqls.lookups[sql.lookup] or sqls.cursors[sql.cursor])

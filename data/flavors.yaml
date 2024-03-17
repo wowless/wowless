@@ -1,13 +1,16 @@
 ---
-Mainline:
-  alternate: Mainline
+Cata:
+  alternates:
+  - Classic
   dir: Interface
-TBC:
-  alternate: BCC
-  dir: Interface_TBC
+Mainline:
+  alternates: {}
+  dir: Interface
 Vanilla:
-  alternate: Classic
+  alternates:
+  - Classic
   dir: Interface_Vanilla
 Wrath:
-  alternate: WOTLKC
+  alternates:
+  - WOTLKC
   dir: Interface_Wrath

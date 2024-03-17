@@ -55,10 +55,14 @@ type:
                   stub:
                     type:
                       schema: any
+                  stubnotnil:
+                    type: boolean
                   type:
                     required: true
                     type:
                       schema: type
+          outstride:
+            type: number
           protection:
             type:
               oneof:
@@ -66,3 +70,5 @@ type:
               - literal: secure
           stubnothing:
             type: boolean
+          stuboutstrides:
+            type: number

@@ -53,7 +53,6 @@ local fns = {
   schemas = loaddir('schemas', 'yaml'),
   sqlcursor = loaddir('sql/cursor', 'sql'),
   sqllookup = loaddir('sql/lookup', 'sql'),
-  state = loaddir('state', 'yaml'),
   stringenums = global('stringenums'),
   structures = perproduct('structures'),
   test = global('test'),

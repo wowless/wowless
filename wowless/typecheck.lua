@@ -86,16 +86,13 @@ return function(api)
       return type(v) == 'string' and v or nil
     end,
     uiAddon = function(value)
-      return api.states.Addons[tonumber(value) or tostring(value):lower()]
+      return api.addons[tonumber(value) or tostring(value):lower()]
     end,
     unit = function(value)
       if type(value) ~= 'string' then
         return nil, true
       end
-      -- TODO complete unit resolution
-      local units = api.states.Units
-      local guid = units.aliases[value:lower()]
-      return guid and units.guids[guid] or nil
+      return api.modules.units.GetUnit(value)
     end,
     unknown = function(value)
       return value

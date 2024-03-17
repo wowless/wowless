@@ -7388,6 +7388,7 @@ C_StoreSecure.GetCharactersForRealm:
     type: table
 C_StoreSecure.GetConfirmationInfo: {}
 C_StoreSecure.GetCurrencyID: {}
+C_StoreSecure.GetCurrencyInfo: {}
 C_StoreSecure.GetCurrentRealmCategory: {}
 C_StoreSecure.GetCurrentRealmContentSet: {}
 C_StoreSecure.GetEligibleRacesForVASService: {}
@@ -10701,7 +10702,8 @@ GetFramerate:
   inputs: {}
   outputs:
   - type: number
-GetFramesRegisteredForEvent: {}
+GetFramesRegisteredForEvent:
+  impl: GetFramesRegisteredForEvent
 GetFunctionCPUUsage: {}
 GetGameMessageInfo: {}
 GetGameTime:
@@ -14117,7 +14119,7 @@ RollOnLoot: {}
 RunBinding: {}
 RunMacro: {}
 RunMacroText:
-  impl: RunMacroText_Callback
+  impl: RunMacroText
   inputs:
   - name: macroText
     type: string

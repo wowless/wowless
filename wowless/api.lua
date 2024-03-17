@@ -2,15 +2,16 @@ local traceback = require('wowless.ext').traceback
 local hlist = require('wowless.hlist')
 
 local function new(log, maxErrors, product)
-  local allEventRegistrations = hlist()
   local env = {}
   local errors = 0
-  local eventRegistrations = {}
   local frames = hlist()
-  local states = {}
   local templates = {}
   local uiobjectTypes = {}
   local userdata = {}
+
+  local datalua = require('build.products.' .. product .. '.data')
+  local events -- module loaded later
+  local time -- module loaded later
 
   local function UserData(obj)
     return userdata[obj[0]]
@@ -165,8 +166,6 @@ local function new(log, maxErrors, product)
     end
   end
 
-  local datalua = require('build.products.' .. product .. '.data')
-
   local function CreateUIObject(typename, objnamearg, parent, addonEnv, tmplsarg, id)
     local objname
     if type(objnamearg) == 'string' then
@@ -239,28 +238,15 @@ local function new(log, maxErrors, product)
     obj.scripts[bindingType][string.lower(name)] = script
   end
 
-  for k in pairs(datalua.events) do
-    eventRegistrations[k] = hlist()
-  end
-
   local function SendEvent(event, ...)
-    event = event:upper()
-    assert(eventRegistrations[event], 'internal error: cannot send ' .. event)
+    assert(events.IsEventValid(event), 'internal error: cannot send ' .. event)
     local largs = {}
     for i = 1, select('#', ...) do
       local arg = select(i, ...)
       table.insert(largs, type(arg) == 'string' and ('%q'):format(arg) or tostring(arg))
     end
     log(1, 'sending event %s (%s)', event, table.concat(largs, ', '))
-    -- Snapshot current registrations since handlers can mutate them.
-    local regs = {}
-    for frame in eventRegistrations[event]:entries() do
-      table.insert(regs, frame)
-    end
-    for frame in allEventRegistrations:entries() do
-      table.insert(regs, frame)
-    end
-    for _, reg in ipairs(regs) do
+    for _, reg in ipairs(events.GetFramesRegisteredForEvent(event)) do
       RunScript(reg, 'OnEvent', event, ...)
     end
   end
@@ -283,14 +269,7 @@ local function new(log, maxErrors, product)
   end
 
   local function NextFrame(elapsed)
-    local time = states.Time
-    time.stamp = time.stamp + (elapsed or 1)
-    while time.timers:peek().pri < time.stamp do
-      local timer = time.timers:pop()
-      log(2, 'running timer %.2f %s', timer.pri, tostring(timer.val))
-      assert(getfenv(timer.val) == _G, 'wowless bug: sandbox callback in NextFrame')
-      CallSafely(timer.val)
-    end
+    time.Advance(elapsed)
     for frame in frames:entries() do
       if frame:IsVisible() then
         RunScript(frame, 'OnUpdate', 1)
@@ -302,41 +281,8 @@ local function new(log, maxErrors, product)
     return errors
   end
 
-  local function RegisterEvent(frame, event)
-    event = event:upper()
-    assert(eventRegistrations[event], 'cannot register ' .. event)
-    if not allEventRegistrations:has(frame) then
-      eventRegistrations[event]:insert(frame)
-    end
-  end
-
-  local function UnregisterEvent(frame, event)
-    event = event:upper()
-    assert(eventRegistrations[event], 'cannot unregister ' .. event)
-    eventRegistrations[event]:remove(frame)
-  end
-
-  local function UnregisterAllEvents(frame)
-    for _, reg in pairs(eventRegistrations) do
-      reg:remove(frame)
-    end
-    allEventRegistrations:remove(frame)
-  end
-
-  local function RegisterAllEvents(frame)
-    UnregisterAllEvents(frame)
-    allEventRegistrations:insert(frame)
-  end
-
-  local function IsEventRegistered(frame, event)
-    return allEventRegistrations:has(frame) or eventRegistrations[event:upper()]:has(frame)
-  end
-
-  for k, v in pairs(datalua.states) do
-    states[k] = require('pl.tablex').deepcopy(v)
-  end
-
   local api = {
+    addons = {},
     CallSafely = CallSafely,
     CallSandbox = CallSandbox,
     CreateFrame = CreateFrame,
@@ -347,28 +293,41 @@ local function new(log, maxErrors, product)
     GetDebugName = GetDebugName,
     GetErrorCount = GetErrorCount,
     InheritsFrom = InheritsFrom,
-    IsEventRegistered = IsEventRegistered,
     IsIntrinsicType = IsIntrinsicType,
     log = log,
     NextFrame = NextFrame,
     ParentSub = ParentSub,
     platform = require('runtime.platform'),
     product = product,
-    RegisterAllEvents = RegisterAllEvents,
-    RegisterEvent = RegisterEvent,
     RunScript = RunScript,
     SendEvent = SendEvent,
     SetParent = SetParent,
     SetScript = SetScript,
-    states = states,
     templates = templates,
     uiobjects = userdata,
     uiobjectTypes = uiobjectTypes,
-    UnregisterAllEvents = UnregisterAllEvents,
-    UnregisterEvent = UnregisterEvent,
     UpdateVisible = UpdateVisible,
     UserData = UserData,
   }
+
+  local modulenames = {
+    'calendar',
+    'cvars',
+    'events',
+    'macrotext',
+    'system',
+    'talents',
+    'time',
+    'units',
+  }
+  local modules = {}
+  for _, k in ipairs(modulenames) do
+    modules[k] = require('wowless.modules.' .. k)(api)
+  end
+  api.modules = modules
+  events = api.modules.events -- setting upvalue for SendEvent, TODO clean this up
+  time = api.modules.time -- setting upvalue for NextFrame, TODO clean this up
+
   require('wowless.util').mixin(uiobjectTypes, require('wowapi.uiobjects')(api))
   return api
 end

@@ -466,6 +466,7 @@ C_AddOns.GetAddOnDependencies:
   outputs:
   - name: unpackedPrimitiveType
     type: string
+  outstride: 1
 C_AddOns.GetAddOnEnableState:
   inputs:
   - name: name
@@ -514,6 +515,7 @@ C_AddOns.GetAddOnOptionalDependencies:
   outputs:
   - name: unpackedPrimitiveType
     type: string
+  outstride: 1
 C_AddOns.GetNumAddOns:
   impl: GetNumAddOns
   inputs: {}
@@ -7258,15 +7260,7 @@ C_QuestInfoSystem.GetQuestRewardSpellInfo:
   outputs:
   - name: info
     nilable: true
-    stub:
-      genericUnlock: false
-      hideSpellLearnText: false
-      isBoostSpell: false
-      isSpellLearned: false
-      isTradeskill: false
-      name: ''
-      texture: 1
-      type: 0
+    stubnotnil: true
     type:
       structure: C_QuestInfoSystem.QuestRewardSpellInfo
 C_QuestInfoSystem.GetQuestRewardSpells:
@@ -7704,6 +7698,7 @@ C_StoreSecure.GetCharactersForRealm:
     type: table
 C_StoreSecure.GetConfirmationInfo: {}
 C_StoreSecure.GetCurrencyID: {}
+C_StoreSecure.GetCurrencyInfo: {}
 C_StoreSecure.GetCurrentRealmCategory: {}
 C_StoreSecure.GetCurrentRealmContentSet: {}
 C_StoreSecure.GetEligibleRacesForVASService: {}
@@ -8749,6 +8744,7 @@ C_UnitAuras.GetAuraSlots:
     type: number
   - name: slots
     type: number
+  outstride: 1
 C_UnitAuras.GetBuffDataByIndex:
   inputs:
   - name: unitToken
@@ -9941,14 +9937,14 @@ CreateFrame:
 CreateMacro: {}
 CreateNewRaidProfile: {}
 CreateWindow:
+  impl: CreateWindow
   inputs:
   - default: true
     name: popupStyle
     type: boolean
   outputs:
   - name: window
-    nilable: true
-    type: table
+    type: nil
 CursorCanGoInSlot:
   inputs:
   - name: slot
@@ -11038,7 +11034,8 @@ GetFramerate:
   inputs: {}
   outputs:
   - type: number
-GetFramesRegisteredForEvent: {}
+GetFramesRegisteredForEvent:
+  impl: GetFramesRegisteredForEvent
 GetFunctionCPUUsage: {}
 GetGameMessageInfo: {}
 GetGameTime:
@@ -14201,7 +14198,7 @@ RollOnLoot: {}
 RunBinding: {}
 RunMacro: {}
 RunMacroText:
-  impl: RunMacroText_Callback
+  impl: RunMacroText
   inputs:
   - name: macroText
     type: string

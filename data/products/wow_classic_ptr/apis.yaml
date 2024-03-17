@@ -10701,7 +10701,8 @@ GetFramerate:
   inputs: {}
   outputs:
   - type: number
-GetFramesRegisteredForEvent: {}
+GetFramesRegisteredForEvent:
+  impl: GetFramesRegisteredForEvent
 GetFunctionCPUUsage: {}
 GetGameMessageInfo: {}
 GetGameTime:
@@ -14117,7 +14118,7 @@ RollOnLoot: {}
 RunBinding: {}
 RunMacro: {}
 RunMacroText:
-  impl: RunMacroText_Callback
+  impl: RunMacroText
   inputs:
   - name: macroText
     type: string
