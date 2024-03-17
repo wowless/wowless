@@ -315,6 +315,13 @@ Button:
     RegisterForMouse: {}
     SetButtonState:
       impl: Button/SetButtonState
+      inputs:
+      - name: buttonState
+        type: string
+      - default: false
+        name: lock
+        type: boolean
+      outputs: {}
     SetDisabledAtlas:
       impl: Button/SetDisabledAtlas
     SetDisabledFontObject: {}
