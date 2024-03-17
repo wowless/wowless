@@ -48,8 +48,8 @@ return function(api)
   end
 
   local plainscalartypechecks = {
-    boolean = function(value)
-      return luatypecheck('boolean', value)
+    boolean = function(value, isout)
+      return not not value, isout and type(value) ~= 'boolean'
     end,
     gender = function(value)
       return tonumber(value) or 0
