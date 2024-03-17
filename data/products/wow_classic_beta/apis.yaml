@@ -12874,10 +12874,9 @@ GetNetStats:
     type: number
   - name: out
     type: number
-  - name: latencyHome
+  - name: latencyList
     type: number
-  - name: latencyWorld
-    type: number
+  outstride: 1
 GetNewSocketInfo:
   inputs:
   - name: index
