@@ -37,8 +37,6 @@ type:
                     required: true
                     type:
                       schema: type
-          instride:
-            type: number
           mayreturnnothing:
             type: boolean
           nowrap:

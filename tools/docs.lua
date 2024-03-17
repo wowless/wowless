@@ -269,7 +269,6 @@ local function rewriteApis()
       apis[name] = {
         impl = api and api.impl,
         inputs = insig(fn, ns),
-        instride = stride(fn.Arguments),
         mayreturnnothing = api and api.mayreturnnothing,
         outputs = outsig(fn, ns, api),
         outstride = stride(fn.Returns),
