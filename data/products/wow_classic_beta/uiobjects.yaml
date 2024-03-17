@@ -196,7 +196,7 @@ Button:
       type: boolean
     buttonState:
       init: NORMAL
-      type: string
+      type: SimpleButtonStateToken
     disabledTexture:
       nilable: true
       type: Texture
@@ -288,7 +288,7 @@ Button:
       impl: Button/SetButtonState
       inputs:
       - name: buttonState
-        type: string
+        type: SimpleButtonStateToken
       - default: false
         name: lock
         type: boolean

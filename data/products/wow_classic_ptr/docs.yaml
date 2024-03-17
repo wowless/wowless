@@ -97,7 +97,6 @@ typedefs:
   ScriptRegion: table
   SimpleAnim: table
   SimpleAnimGroup: table
-  SimpleButtonStateToken: string
   SimpleControlPoint: table
   SimpleFont: table
   SimpleFontString: table

@@ -42,6 +42,10 @@ LoopType:
 Orientation:
   HORIZONTAL: {}
   VERTICAL: {}
+SimpleButtonStateToken:
+  DISABLED: {}
+  NORMAL: {}
+  PUSHED: {}
 SmoothingType:
   IN: {}
   IN_OUT: {}
