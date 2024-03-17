@@ -70,3 +70,5 @@ type:
               - literal: secure
           stubnothing:
             type: boolean
+          stuboutstrides:
+            type: number
