@@ -1,6 +1,6 @@
 {
-    "C_Cpp.autoAddFileAssociations": false,
-    "files.associations": {
-        ".luacheckrc": "lua"
-    }
+  "C_Cpp.autoAddFileAssociations": false,
+  "files.associations": {
+    ".luacheckrc": "lua"
+  }
 }
