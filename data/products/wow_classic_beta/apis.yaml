@@ -15,7 +15,6 @@ AcceptBattlefieldPort:
   - type: boolean
   outputs:
   - type: boolean
-  protection: hardware
 AcceptDuel: {}
 AcceptGroup: {}
 AcceptGuild:
@@ -10407,7 +10406,6 @@ CastSpellByName:
   - nilable: true
     type: string
   outputs: {}
-  protection: secure
 ceil:
   alias: math.ceil
 CenterCamera: {}
@@ -17098,7 +17096,6 @@ UseAction:
     type: unknown
   - type: string
   outputs: {}
-  protection: secure
 UseInventoryItem: {}
 UseQuestLogSpecialItem: {}
 UseToy: {}

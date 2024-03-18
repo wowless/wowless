@@ -63,11 +63,6 @@ type:
                       schema: type
           outstride:
             type: number
-          protection:
-            type:
-              oneof:
-              - literal: hardware
-              - literal: secure
           stubnothing:
             type: boolean
           stuboutstrides:
