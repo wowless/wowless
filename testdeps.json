@@ -1,0 +1,122 @@
+{
+    "spec/addon/framework_spec.lua": {
+        "files": [
+            "addon/Wowless/framework.lua"
+        ]
+    },
+    "spec/addon/util_spec.lua": {
+        "files": [
+            "addon/Wowless/util.lua"
+        ],
+        "packages": [
+            "pl.tablex"
+        ]
+    },
+    "spec/data/apis_spec.lua": {
+        "packages": [
+            "build.data.products.wow_classic_beta.apis",
+            "build.data.products.wow_classic_era_ptr.apis",
+            "build.data.products.wow_classic_era.apis",
+            "build.data.products.wow_classic_ptr.apis",
+            "build.data.products.wow_classic.apis",
+            "build.data.products.wow.apis",
+            "build.data.products.wowt.apis",
+            "build.data.products.wowxptr.apis",
+            "build.data.products",
+            "wowless.api",
+            "wowless.typecheck"
+        ]
+    },
+    "spec/data/config_spec.lua": {
+        "packages": [
+            "build.data.products.wow_classic_beta.apis",
+            "build.data.products.wow_classic_era_ptr.apis",
+            "build.data.products.wow_classic_era.apis",
+            "build.data.products.wow_classic_ptr.apis",
+            "build.data.products.wow_classic.apis",
+            "build.data.products.wow.apis",
+            "build.data.products.wowt.apis",
+            "build.data.products.wowxptr.apis",
+            "build.data.products.wow_classic_beta.config",
+            "build.data.products.wow_classic_era_ptr.config",
+            "build.data.products.wow_classic_era.config",
+            "build.data.products.wow_classic_ptr.config",
+            "build.data.products.wow_classic.config",
+            "build.data.products.wow.config",
+            "build.data.products.wowt.config",
+            "build.data.products.wowxptr.config",
+            "build.data.products.wow_classic_beta.globals",
+            "build.data.products.wow_classic_era_ptr.globals",
+            "build.data.products.wow_classic_era.globals",
+            "build.data.products.wow_classic_ptr.globals",
+            "build.data.products.wow_classic.globals",
+            "build.data.products.wow.globals",
+            "build.data.products.wowt.globals",
+            "build.data.products.wowxptr.globals",
+            "build.data.products"
+        ]
+    },
+    "spec/data/docs_spec.lua": {
+        "packages": [
+            "build.data.products.wow_classic_beta.docs",
+            "build.data.products.wow_classic_era_ptr.docs",
+            "build.data.products.wow_classic_era.docs",
+            "build.data.products.wow_classic_ptr.docs",
+            "build.data.products.wow_classic.docs",
+            "build.data.products.wow.docs",
+            "build.data.products.wowt.docs",
+            "build.data.products.wowxptr.docs",
+            "build.data.products.wow_classic_beta.uiobjects",
+            "build.data.products.wow_classic_era_ptr.uiobjects",
+            "build.data.products.wow_classic_era.uiobjects",
+            "build.data.products.wow_classic_ptr.uiobjects",
+            "build.data.products.wow_classic.uiobjects",
+            "build.data.products.wow.uiobjects",
+            "build.data.products.wowt.uiobjects",
+            "build.data.products.wowxptr.uiobjects",
+            "build.data.products"
+        ]
+    },
+    "spec/data/flavors_spec.lua": {
+        "packages": [
+            "build.data.products.wow_classic_beta.build",
+            "build.data.products.wow_classic_era_ptr.build",
+            "build.data.products.wow_classic_era.build",
+            "build.data.products.wow_classic_ptr.build",
+            "build.data.products.wow_classic.build",
+            "build.data.products.wow.build",
+            "build.data.products.wowt.build",
+            "build.data.products.wowxptr.build",
+            "build.data.flavors",
+            "build.data.products"
+        ]
+    },
+    "spec/data/globals_spec.lua": {
+        "packages": [
+            "build.data.products.wow_classic_beta.globals",
+            "build.data.products.wow_classic_era_ptr.globals",
+            "build.data.products.wow_classic_era.globals",
+            "build.data.products.wow_classic_ptr.globals",
+            "build.data.products.wow_classic.globals",
+            "build.data.products.wow.globals",
+            "build.data.products.wowt.globals",
+            "build.data.products.wowxptr.globals",
+            "build.data.products"
+        ]
+    },
+    "spec/data/impl_spec.lua": {},
+    "spec/data/structures_spec.lua": {},
+    "spec/data/test_spec.lua": {},
+    "spec/data/uiobjectimpl_spec.lua": {},
+    "spec/data/uiobjects_spec.lua": {},
+    "spec/data/yaml_spec.lua": {},
+    "spec/elune_spec.lua": {},
+    "spec/wowapi/schema_spec.lua": {},
+    "spec/wowapi/yaml_spec.lua": {},
+    "spec/wowless/addon_spec.lua": {},
+    "spec/wowless/blp_spec.lua": {},
+    "spec/wowless/hlist_spec.lua": {},
+    "spec/wowless/png_spec.lua": {},
+    "spec/wowless/typecheck_spec.lua": {},
+    "spec/wowless/util_spec.lua": {}
+}
