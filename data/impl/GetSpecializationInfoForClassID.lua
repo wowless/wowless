@@ -5,4 +5,4 @@ if id == nil then
   return
 end
 local recommended = true -- TODO implement
-return id, name, desc, icon, role, recommended, classID == player.class, mastery
+return id, name, desc, icon, role, recommended, classID == player.class, mastery, nil

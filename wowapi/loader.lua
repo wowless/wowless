@@ -150,8 +150,8 @@ local function loadFunctions(api, loader)
         if n == 0 and apicfg.mayreturnnothing then
           return
         end
-        if n > nouts then
-          error('returned too many values from ' .. fname)
+        if n ~= nouts then
+          error(('wrong number of return values to %q: want %d, got %d'):format(fname, nouts, n))
         end
         local rets = {}
         for i, out in ipairs(apicfg.outputs) do

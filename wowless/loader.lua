@@ -782,7 +782,7 @@ local function loader(api, cfg)
   local function loadAddon(addonName)
     local success, msg = pcall(doLoadAddon, addonName)
     if success then
-      return true
+      return true, nil
     else
       api.log(1, 'loading %s failed: %s', addonName, tostring(msg))
       return false, 'LOAD_FAILED'
