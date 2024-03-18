@@ -154,18 +154,17 @@ AnimationGroup:
     CreateAnimation:
       impl: AnimationGroup/CreateAnimation
       inputs:
-      - default: Animation
-        name: animationType
+      - name: animationType
         nilable: true
         type: string
       - name: name
         nilable: true
         type: string
-      - name: inheritsFrom
+      - name: templateName
         nilable: true
         type: string
       outputs:
-      - name: animation
+      - name: anim
         type: Animation
     Finish: {}
     GetAnimations:

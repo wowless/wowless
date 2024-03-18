@@ -103,7 +103,7 @@ typedefs:
   number: number
   RecruitAcceptanceID: string
   ScriptRegion: table
-  SimpleAnim: table
+  SimpleAnim: Animation
   SimpleAnimGroup: table
   SimpleControlPoint: table
   SimpleFont: table
@@ -138,6 +138,8 @@ typedefs:
 uiobject_methods:
   Animation:
     GetRegionParent: {}
+  AnimationGroup:
+    CreateAnimation: {}
   Button:
     SetButtonState: {}
     SetDisabledAtlas: {}
