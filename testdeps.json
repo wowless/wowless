@@ -173,8 +173,26 @@
       "build.data.test"
     ]
   },
-  "spec/data/uiobjectimpl_spec.lua": {},
-  "spec/data/uiobjects_spec.lua": {},
+  "spec/data/uiobjectimpl_spec.lua": {
+    "packages": [
+      "build.data.uiobjectimpl"
+    ]
+  },
+  "spec/data/uiobjects_spec.lua": {
+    "packages": [
+      "build.data.products.wow_classic_beta.uiobjects",
+      "build.data.products.wow_classic_era_ptr.uiobjects",
+      "build.data.products.wow_classic_era.uiobjects",
+      "build.data.products.wow_classic_ptr.uiobjects",
+      "build.data.products.wow_classic.uiobjects",
+      "build.data.products.wow.uiobjects",
+      "build.data.products.wowt.uiobjects",
+      "build.data.products.wowxptr.uiobjects",
+      "build.data.products",
+      "wowless.api",
+      "wowless.typecheck"
+    ]
+  },
   "spec/data/yaml_spec.lua": {},
   "spec/elune_spec.lua": {},
   "spec/wowapi/schema_spec.lua": {},
