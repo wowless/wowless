@@ -88,6 +88,8 @@ type:
                               required: true
                               type:
                                 schema: type
+                    outstride:
+                      type: number
                 - record:
                     setter:
                       required: true

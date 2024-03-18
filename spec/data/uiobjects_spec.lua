@@ -120,6 +120,11 @@ describe('uiobjects', function()
                     end)
                   end
                 end)
+                describe('outstride', function()
+                  it('is less than or equal to number of outputs', function()
+                    assert(not mv.outstride or mv.outstride <= #mv.outputs)
+                  end)
+                end)
               end)
             end
           end)

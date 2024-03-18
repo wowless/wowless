@@ -398,6 +398,7 @@ local function rewriteUIObjects()
       fns[fn.Name] = {
         inputs = inputs,
         outputs = outputs,
+        outstride = stride(fn.Returns),
       }
     end
     pscrobjs[t.Name] = fns
@@ -423,6 +424,7 @@ local function rewriteUIObjects()
           impl = mm and mm.impl,
           inputs = mv.inputs,
           outputs = mv.outputs,
+          outstride = mv.outstride,
         }
       end
     end
