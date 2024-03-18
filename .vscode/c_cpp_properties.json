@@ -1,12 +1,12 @@
 {
-    "configurations": [
-        {
-            "name": "default",
-            "includePath": [
-                "${workspaceFolder}/**"
-            ],
-            "compileCommands": "${workspaceFolder}/build/cmake/compile_commands.json"
-        }
-    ],
-    "version": 4
+  "configurations": [
+    {
+      "compileCommands": "${workspaceFolder}/build/cmake/compile_commands.json",
+      "includePath": [
+        "${workspaceFolder}/**"
+      ],
+      "name": "default"
+    }
+  ],
+  "version": 4
 }

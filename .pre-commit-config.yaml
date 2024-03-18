@@ -5,6 +5,8 @@ repos:
   - id: check-json
   - id: check-yaml
   - id: end-of-file-fixer
+  - id: pretty-format-json
+    args: [--autofix]
   - id: trailing-whitespace
 - repo: https://github.com/editorconfig-checker/editorconfig-checker.python
   rev: '2.7.3'
