@@ -1,6 +1,10 @@
 [*]
 insert_final_newline = true
 
+[*.json]
+indent_style = space
+indent_size = 2
+
 [*.lua]
 indent_style = space
 indent_size = 2
