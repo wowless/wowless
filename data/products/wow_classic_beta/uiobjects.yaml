@@ -295,6 +295,10 @@ Button:
       outputs: {}
     SetDisabledAtlas:
       impl: Button/SetDisabledAtlas
+      inputs:
+      - name: atlas
+        type: string
+      outputs: {}
     SetDisabledFontObject: {}
     SetDisabledTexture:
       impl: Button/SetDisabledTexture
@@ -318,6 +322,10 @@ Button:
       - name: motionScriptsWhileDisabled
     SetNormalAtlas:
       impl: Button/SetNormalAtlas
+      inputs:
+      - name: atlas
+        type: string
+      outputs: {}
     SetNormalFontObject:
       setter:
       - name: normalFontObject
@@ -325,6 +333,10 @@ Button:
       impl: Button/SetNormalTexture
     SetPushedAtlas:
       impl: Button/SetPushedAtlas
+      inputs:
+      - name: atlas
+        type: string
+      outputs: {}
     SetPushedTextOffset:
       setter:
       - name: pushedTextOffsetX

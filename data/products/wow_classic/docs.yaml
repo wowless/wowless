@@ -126,3 +126,6 @@ typedefs:
 uiobject_methods:
   Button:
     SetButtonState: {}
+    SetDisabledAtlas: {}
+    SetNormalAtlas: {}
+    SetPushedAtlas: {}
