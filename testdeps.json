@@ -104,9 +104,75 @@
       "build.data.products"
     ]
   },
-  "spec/data/impl_spec.lua": {},
-  "spec/data/structures_spec.lua": {},
-  "spec/data/test_spec.lua": {},
+  "spec/data/impl_spec.lua": {
+    "packages": [
+      "build.data.impl",
+      "build.data.products.wow_classic_beta.apis",
+      "build.data.products.wow_classic_era_ptr.apis",
+      "build.data.products.wow_classic_era.apis",
+      "build.data.products.wow_classic_ptr.apis",
+      "build.data.products.wow_classic.apis",
+      "build.data.products.wow.apis",
+      "build.data.products.wowt.apis",
+      "build.data.products.wowxptr.apis",
+      "build.data.products"
+    ]
+  },
+  "spec/data/structures_spec.lua": {
+    "packages": [
+      "build.data.products.wow_classic_beta.apis",
+      "build.data.products.wow_classic_era_ptr.apis",
+      "build.data.products.wow_classic_era.apis",
+      "build.data.products.wow_classic_ptr.apis",
+      "build.data.products.wow_classic.apis",
+      "build.data.products.wow.apis",
+      "build.data.products.wowt.apis",
+      "build.data.products.wowxptr.apis",
+      "build.data.products.wow_classic_beta.events",
+      "build.data.products.wow_classic_era_ptr.events",
+      "build.data.products.wow_classic_era.events",
+      "build.data.products.wow_classic_ptr.events",
+      "build.data.products.wow_classic.events",
+      "build.data.products.wow.events",
+      "build.data.products.wowt.events",
+      "build.data.products.wowxptr.events",
+      "build.data.products.wow_classic_beta.structures",
+      "build.data.products.wow_classic_era_ptr.structures",
+      "build.data.products.wow_classic_era.structures",
+      "build.data.products.wow_classic_ptr.structures",
+      "build.data.products.wow_classic.structures",
+      "build.data.products.wow.structures",
+      "build.data.products.wowt.structures",
+      "build.data.products.wowxptr.structures",
+      "build.data.products",
+      "wowless.api",
+      "wowless.typecheck"
+    ]
+  },
+  "spec/data/test_spec.lua": {
+    "files": [
+      "data/test/C_CovenantSanctumUI.GetRenownLevels.lua",
+      "data/test/C_DateAndTime.AdjustTimeByDays.lua",
+      "data/test/C_DateAndTime.AdjustTimeByMinutes.lua",
+      "data/test/C_DateAndTime.CompareCalendarTime.lua",
+      "data/test/C_Timer.NewTimer.lua",
+      "data/test/CreateFrame.lua",
+      "data/test/CreateWindow.lua",
+      "data/test/EnumerateFrames.lua",
+      "data/test/GetBuildInfo_10_1.lua",
+      "data/test/GetBuildInfo_1_15_0.lua",
+      "data/test/GetBuildInfo_3_4_2.lua",
+      "data/test/GetClickFrame.lua",
+      "data/test/IsLinuxClient.lua",
+      "data/test/IsMacClient.lua",
+      "data/test/IsTestBuild.lua",
+      "data/test/IsWindowsClient.lua",
+      "data/test/UnitName.lua"
+    ],
+    "packages": [
+      "build.data.test"
+    ]
+  },
   "spec/data/uiobjectimpl_spec.lua": {},
   "spec/data/uiobjects_spec.lua": {},
   "spec/data/yaml_spec.lua": {},
