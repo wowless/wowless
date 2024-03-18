@@ -103,6 +103,10 @@ Animation:
     GetProgress: {}
     GetRegionParent:
       impl: Animation/GetRegionParent
+      inputs: {}
+      outputs:
+      - name: region
+        type: UIObject
     GetSmoothing:
       getter:
       - name: smoothing

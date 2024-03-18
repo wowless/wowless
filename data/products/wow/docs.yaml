@@ -75,7 +75,7 @@ typedefs:
   ClubId: string
   ClubInvitationId: string
   ClubStreamId: string
-  CScriptObject: table
+  CScriptObject: UIObject
   cstring: string
   FileAsset: string
   fileID: number
@@ -136,6 +136,8 @@ typedefs:
   WOWGUID: string
   WOWMONEY: number
 uiobject_methods:
+  Animation:
+    GetRegionParent: {}
   Button:
     SetButtonState: {}
     SetDisabledAtlas: {}
