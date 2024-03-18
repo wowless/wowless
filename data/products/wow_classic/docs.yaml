@@ -59,6 +59,7 @@ script_objects:
   SimpleTextureAPI: Texture
   SimpleTextureBaseAPI: TextureBase
 skip_docfiles:
+  BaseDocumentation: {}
   ConfigurationWarningsDocumentation: {}
   EditModeManagerDocumentation: {}
   PingPinFrameAPIDocumentation: {}
@@ -94,6 +95,7 @@ typedefs:
   normalizedValue: number
   NotificationDbId: string
   number: number
+  ScriptObject: UIObject
   ScriptRegion: table
   SimpleAnim: Animation
   SimpleAnimGroup: table

@@ -60,6 +60,7 @@ script_objects:
   SimpleTextureBaseAPI: TextureBase
 skip_docfiles:
   BarberShopInternalDocumentation: {}
+  BaseDocumentation: {}
   ConfigurationWarningsDocumentation: {}
   PingPinFrameAPIDocumentation: {}
   SimpleModelFFXAPIDocumentation: {}
@@ -99,6 +100,7 @@ typedefs:
   NotificationDbId: string
   number: number
   RecruitAcceptanceID: string
+  ScriptObject: UIObject
   ScriptRegion: table
   SimpleAnim: Animation
   SimpleAnimGroup: table
