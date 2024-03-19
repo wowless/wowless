@@ -6096,6 +6096,79 @@ Enum:
     MaxValue: 4
     MinValue: 0
     NumValues: 5
+  Vocalerrorsounds:
+    Abilitycooling: 50
+    Alreadyingroup: 20
+    Alreadyinguild: 21
+    Ammoonlyinbag: 28
+    Bagfull: 29
+    BoundNodrop: 4
+    Cantaffordbankslot: 22
+    CantattackNotarget: 38
+    CantattackNotstandingObsolete: 37
+    Cantattackrongdirection: 36
+    CantcastOutofrange: 46
+    Cantcreate: 18
+    Cantdrinkmore: 6
+    Canteatmore: 7
+    CanteatMoving: 24
+    Cantequip2Hequipped: 42
+    Cantequip2HNoskill: 43
+    Cantequip2HSkill: 41
+    Cantflyhere: 60
+    Cantinvite: 8
+    CantlearnLevel: 13
+    Cantloot: 17
+    CantlootDidntkill: 31
+    CantlootLocked: 33
+    CantlootNotstandingObsolete: 34
+    CantlootToofar: 35
+    CantlootWrongfacing: 32
+    Cantputbag: 26
+    Cantswap: 58
+    CanttaxiNomoney: 54
+    CanttradeSoulbound: 59
+    Cantuseitem: 51
+    Cantuselocked: 55
+    Cantusetoofar: 57
+    Chestinuse: 52
+    Declinegroup: 19
+    ExhaustedObsolete: 67
+    FoodcoolingObsolete: 53
+    Genericnotarget: 45
+    Guildpermissions: 62
+    Invaliditemtarget: 66
+    Invalidtarget: 11
+    Inventoryfull: 0
+    Inviteebusy: 9
+    Itemcooling: 5
+    Itemlocked: 61
+    Itemmaxcount: 30
+    Locked: 14
+    Mustequippitem: 49
+    Noenergy: 64
+    NoequipEver: 3
+    NoequipLevel: 2
+    Noequipslotavailable: 56
+    Noessence: 65
+    Nomana: 15
+    Norage: 63
+    Notabag: 25
+    Notenoughgold: 39
+    Notenoughmoney: 40
+    Notequippable: 44
+    Notwhiledead: 16
+    Outofammo: 1
+    Potioncooling: 47
+    Proficiencyneeded: 48
+    Spellcooling: 12
+    Targettoofar: 10
+    Toomanybankslots: 23
+    Wrongslot: 27
+  VocalerrorsoundsMeta:
+    MaxValue: 67
+    MinValue: 0
+    NumValues: 68
   VoiceChannelErrorReason:
     IsBattleNetChannel: 1
     Unknown: 0

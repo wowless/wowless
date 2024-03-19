@@ -66,7 +66,7 @@ AreAccountAchievementsHidden:
 AreDangerousScriptsAllowed:
   inputs: {}
   outputs:
-  - name: value
+  - name: allowed
     stub: true
     type: boolean
 AreTalentsLocked: {}
@@ -23037,7 +23037,7 @@ GetFileIDFromPath: {}
 GetFileStreamingStatus:
   inputs: {}
   outputs:
-  - name: status
+  - name: result
     stub: 0
     type: number
 GetFilteredAchievementID: {}
@@ -24185,7 +24185,7 @@ GetMirrorTimerInfo:
   - name: index
     type: number
   outputs:
-  - name: timer
+  - name: name
     stub: UNKNOWN
     type: string
   - name: value
@@ -25105,7 +25105,7 @@ GetRealZoneText:
     nilable: true
     type: number
   outputs:
-  - name: zone
+  - name: text
     stub: RealZoneText
     type: string
 GetReleaseTimeRemaining:

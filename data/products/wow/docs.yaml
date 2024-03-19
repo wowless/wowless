@@ -76,6 +76,7 @@ typedefs:
   ClubId: string
   ClubInvitationId: string
   ClubStreamId: string
+  ConnectionIptype: string
   CScriptObject: UIObject
   cstring: string
   FileAsset: string
