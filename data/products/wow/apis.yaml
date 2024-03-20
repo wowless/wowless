@@ -24707,6 +24707,7 @@ GetLootSlotType:
     type: number
 GetLootSourceInfo: {}
 GetLootSpecialization:
+  impl: GetLootSpecialization
   inputs: {}
   outputs:
   - name: specializationID

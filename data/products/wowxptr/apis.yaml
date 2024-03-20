@@ -23686,7 +23686,8 @@ GetLootSlotType:
   - name: slotType
     type: number
 GetLootSourceInfo: {}
-GetLootSpecialization: {}
+GetLootSpecialization:
+  impl: GetLootSpecialization
 GetLootThreshold:
   outputs:
   - type: number

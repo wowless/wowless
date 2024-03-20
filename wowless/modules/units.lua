@@ -11,6 +11,9 @@ return function()
     spec = 71, -- Arms
   }
   return {
+    GetLootSpecialization = function()
+      return player.spec
+    end,
     GetUnit = function(unit)
       return unit:lower() == 'player' and player or nil
     end,
