@@ -193,6 +193,8 @@ GetInventorySlotInfo:
   sqls:
   - lookup: GetInventorySlotInfo
 GetItemQualityColor: {}
+GetLootSpecialization:
+  module: units
 GetNumAddOns:
   frameworks:
   - api
