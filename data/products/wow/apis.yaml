@@ -7658,6 +7658,7 @@ C_DeathInfo.UseSelfResurrectOption:
   - name: id
     type: number
   outputs: {}
+C_Debug.FrameXMLDebug: {}
 C_EditMode.ConvertLayoutInfoToString:
   inputs:
   - name: layoutInfo
@@ -22844,7 +22845,6 @@ ForceQuit:
 ForfeitDuel: {}
 format:
   alias: string.format
-FrameXML_Debug: {}
 frexp:
   alias: math.frexp
 GameMovieFinished:
