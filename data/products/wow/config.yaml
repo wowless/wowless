@@ -52,9 +52,11 @@ addon:
     raidGraphicsViewDistance: {}
     RenderScale: {}
   overwritten_apis:
+    C_AreaPoiInfo.GetAreaPOIInfo: {}
     C_Traits.GetConditionInfo: {}
     C_Traits.GetEntryInfo: {}
     C_Traits.GetTreeInfo: {}
+    C_VignetteInfo.GetVignetteInfo: {}
     SetPortraitToTexture: {}
 runner:
   skip_events:
