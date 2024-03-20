@@ -60,6 +60,7 @@ script_objects:
   SimpleTextureAPI: Texture
   SimpleTextureBaseAPI: TextureBase
 skip_docfiles:
+  ArenaTeamDocumentation: {}
   BarberShopInternalDocumentation: {}
   BaseDocumentation: {}
   ConfigurationWarningsDocumentation: {}
