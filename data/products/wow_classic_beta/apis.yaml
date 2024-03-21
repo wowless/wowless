@@ -15198,6 +15198,7 @@ JoinBattlefield: {}
 JoinChannelByName: {}
 JoinLFG: {}
 JoinPermanentChannel: {}
+JoinRatedBattlefield: {}
 JoinSingleLFG: {}
 JoinSkirmish: {}
 JoinTemporaryChannel: {}
