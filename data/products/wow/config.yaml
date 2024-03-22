@@ -66,6 +66,8 @@ runner:
     CASTRANDOM: {}
     EDITMODE: {}
     EVENT: {}
+    GUILD_INVITE: {}
+    GUILD_UNINVITE: {}
     USERANDOM: {}
 runtime:
   warners:
