@@ -1,5 +1,6 @@
 local util = require('wowless.util')
 local Mixin = util.mixin
+local bubblewrap = util.bubblewrap
 local hlist = require('wowless.hlist')
 
 local function mkBaseUIObjectTypes(api)
@@ -44,7 +45,7 @@ local function mkBaseUIObjectTypes(api)
     for k, v in pairs(result) do
       local sandboxIndex = {}
       for n, f in pairs(v.metaindex) do
-        sandboxIndex[n] = debug.newcfunction(function(obj, ...)
+        sandboxIndex[n] = debug.newsecurefunction(function(obj, ...)
           return f(api.UserData(obj), ...)
         end)
       end
@@ -163,7 +164,7 @@ local function mkBaseUIObjectTypes(api)
       end
       local mtext = method.impl or method
       local fn = wrap(mname, wrapstrfn(mtext, fname, 'api,toTexture,check', api, toTexture, check))
-      mixin[mname] = checkOutputs(checkInputs(fn))
+      mixin[mname] = bubblewrap(checkOutputs(checkInputs(fn)))
     end
     uiobjects[name] = {
       cfg = cfg,
