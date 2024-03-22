@@ -8277,6 +8277,9 @@ C_FriendList.SortWho:
     type: string
   outputs: {}
 C_FunctionContainers.CreateCallback: {}
+C_GameEnvironmentManager.GetCurrentEventRealmQueues: {}
+C_GameEnvironmentManager.GetCurrentGameEnvironment: {}
+C_GameEnvironmentManager.RequestGameEnvironment: {}
 C_GameModeManager.GetCurrentGameMode:
   inputs: {}
   outputs:
