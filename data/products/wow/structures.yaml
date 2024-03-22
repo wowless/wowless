@@ -188,7 +188,7 @@ C_ArdenwealdGardening.ArdenwealdGardenData:
       type: number
 C_AreaPoiInfo.AreaPOIInfo:
   fields:
-    addPaddingAboveWidgets:
+    addPaddingAboveTooltipWidgets:
       nilable: true
       type: boolean
     areaPoiID:
@@ -206,6 +206,9 @@ C_AreaPoiInfo.AreaPOIInfo:
       type: boolean
     highlightWorldQuestsOnHover:
       type: boolean
+    iconWidgetSet:
+      nilable: true
+      type: number
     isAlwaysOnFlightmap:
       type: boolean
     isPrimaryMapForPOI:
@@ -220,12 +223,12 @@ C_AreaPoiInfo.AreaPOIInfo:
     textureIndex:
       nilable: true
       type: number
+    tooltipWidgetSet:
+      nilable: true
+      type: number
     uiTextureKit:
       nilable: true
       type: string
-    widgetSetID:
-      nilable: true
-      type: number
 C_ArtifactUI.ArtifactArtInfo:
   fields:
     barConnectedColor:
@@ -2047,6 +2050,9 @@ C_EncounterJournal.EncounterJournalItemInfo:
     displayAsVeryRare:
       nilable: true
       type: boolean
+    displaySeasonID:
+      nilable: true
+      type: number
     encounterID:
       nilable: true
       type: number
@@ -3839,6 +3845,9 @@ C_PartyPose.PartyPoseInfo:
       type: number
     defeatSoundKitID:
       type: number
+    extraButtonText:
+      nilable: true
+      type: string
     mapID:
       type: number
     partyPoseID:
@@ -6295,6 +6304,9 @@ C_UIWidgetManager.HorizontalCurrenciesWidgetVisualizationInfo:
     tooltipLoc:
       type:
         enum: UIWidgetTooltipLocation
+    updateAnimType:
+      type:
+        enum: UIWidgetUpdateAnimType
     widgetScale:
       type:
         enum: UIWidgetScale
@@ -6468,6 +6480,43 @@ C_UIWidgetManager.ItemDisplayVisualizationInfo:
     tooltipLoc:
       type:
         enum: UIWidgetTooltipLocation
+    widgetScale:
+      type:
+        enum: UIWidgetScale
+    widgetSizeSetting:
+      type: number
+    widgetTag:
+      type: string
+C_UIWidgetManager.MapPinAnimationWidgetVisualizationInfo:
+  fields:
+    animType:
+      type:
+        enum: MapPinAnimationType
+    frameTextureKit:
+      type: string
+    hasTimer:
+      type: boolean
+    inAnimType:
+      type:
+        enum: WidgetAnimationType
+    layoutDirection:
+      type:
+        enum: UIWidgetLayoutDirection
+    modelSceneLayer:
+      type:
+        enum: UIWidgetModelSceneLayer
+    orderIndex:
+      type: number
+    outAnimType:
+      type:
+        enum: WidgetAnimationType
+    scriptedAnimationEffectID:
+      type: number
+    shownState:
+      type:
+        enum: WidgetShownState
+    textureKit:
+      type: string
     widgetScale:
       type:
         enum: UIWidgetScale
@@ -6918,6 +6967,9 @@ C_UIWidgetManager.TextureAndTextVisualizationInfo:
         enum: WidgetShownState
     text:
       type: string
+    textSizeType:
+      type:
+        enum: UIWidgetTextureAndTextSizeType
     textureKit:
       type: string
     tooltip:
@@ -7171,6 +7223,12 @@ C_UIWidgetManager.UIWidgetCurrencyInfo:
       type: string
     text:
       type: string
+    textFontType:
+      type:
+        enum: UIWidgetFontType
+    textSizeType:
+      type:
+        enum: UIWidgetTextSizeType
     tooltip:
       type: string
 C_UIWidgetManager.UIWidgetIconInfo:
@@ -7436,13 +7494,16 @@ C_VideoOptions.GxAdapterInfoDetails:
       type: string
 C_VignetteInfo.VignetteInfo:
   fields:
-    addPaddingAboveWidgets:
+    addPaddingAboveTooltipWidgets:
       nilable: true
       type: boolean
     atlasName:
       type: string
     hasTooltip:
       type: boolean
+    iconWidgetSet:
+      nilable: true
+      type: number
     inFogOfWar:
       type: boolean
     isDead:
@@ -7459,15 +7520,15 @@ C_VignetteInfo.VignetteInfo:
       type: boolean
     rewardQuestID:
       type: number
+    tooltipWidgetSet:
+      nilable: true
+      type: number
     type:
       type:
         enum: VignetteType
     vignetteGUID:
       type: string
     vignetteID:
-      type: number
-    widgetSetID:
-      nilable: true
       type: number
     zoneInfiniteAOI:
       type: boolean
