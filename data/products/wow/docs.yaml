@@ -60,6 +60,11 @@ script_objects:
   SimpleTextureAPI: Texture
   SimpleTextureBaseAPI: TextureBase
 skip_apis:
+  HasKey: PlayerScriptDocumentation has extra methods
+  ShowCloak: PlayerScriptDocumentation has extra methods
+  ShowHelm: PlayerScriptDocumentation has extra methods
+  ShowingCloak: PlayerScriptDocumentation has extra methods
+  ShowingHelm: PlayerScriptDocumentation has extra methods
   StartAttack: first argument should be nilable
 skip_docfiles:
   ArenaTeamDocumentation: {}

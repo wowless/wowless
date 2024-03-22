@@ -21,8 +21,7 @@ type:
     skip_apis:
       type:
         mapof:
-          key:
-            ref: api
+          key: string
           value: string
     skip_docfiles:
       type:
