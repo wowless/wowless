@@ -12,7 +12,7 @@ BtWLoadouts:
   - Mainline
   owner: breeni
   repo: btwloadouts
-  tag: v1.14.2
+  tag: v1.15.8
 Ferronnizer:
   flavors:
   - Vanilla
