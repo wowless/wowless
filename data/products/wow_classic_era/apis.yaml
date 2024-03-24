@@ -6136,6 +6136,7 @@ C_Map.GetMapInfo:
   inputs:
   - name: uiMapID
     type: number
+  mayreturnnothing: true
   outputs:
   - name: info
     type:
