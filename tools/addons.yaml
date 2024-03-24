@@ -18,7 +18,7 @@ Ferronnizer:
   - Vanilla
   owner: ferronn-dev
   repo: ferronnizer
-  tag: v453
+  tag: v469
 GSE:
   owner: timothyluke
   repo: gse-advanced-macro-compiler
