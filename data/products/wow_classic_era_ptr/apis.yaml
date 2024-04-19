@@ -61,7 +61,7 @@ AntiAliasingSupported:
 AreDangerousScriptsAllowed:
   inputs: {}
   outputs:
-  - name: value
+  - name: allowed
     stub: true
     type: boolean
 ArenaTeamDisband: {}
@@ -521,6 +521,7 @@ C_AddOns.GetNumAddOns:
   outputs:
   - name: numAddOns
     type: number
+C_AddOns.GetScriptsDisallowedForBeta: {}
 C_AddOns.IsAddOnLoadable:
   inputs:
   - name: name
@@ -1776,15 +1777,6 @@ C_Calendar.SetNextClubId:
 C_Calendar.UpdateEvent:
   inputs: {}
   outputs: {}
-C_CameraDefaults.GetCameraFOVDefaults:
-  inputs: {}
-  outputs:
-  - name: fieldOfViewDegreesDefault
-    type: number
-  - name: fieldOfViewDegreesPlayerMin
-    type: number
-  - name: fieldOfViewDegreesPlayerMax
-    type: number
 C_CharacterServices.AssignNameChangeDistribution: {}
 C_CharacterServices.AssignPCTDistribution: {}
 C_CharacterServices.AssignRaceOrFactionChangeDistribution: {}
@@ -3969,6 +3961,9 @@ C_CurrencyInfo.GetBasicCurrencyInfo:
   - name: info
     type:
       structure: C_CurrencyInfo.CurrencyDisplayInfo
+C_CurrencyInfo.GetCoinIcon: {}
+C_CurrencyInfo.GetCoinText: {}
+C_CurrencyInfo.GetCoinTextureString: {}
 C_CurrencyInfo.GetCurrencyContainerInfo:
   inputs:
   - name: currencyType
@@ -5068,6 +5063,8 @@ C_GuildInfo.CanViewOfficerNote:
   outputs:
   - name: canViewOfficerNote
     type: boolean
+C_GuildInfo.Demote: {}
+C_GuildInfo.Disband: {}
 C_GuildInfo.GetGuildRankOrder:
   inputs:
   - name: guid
@@ -5118,6 +5115,7 @@ C_GuildInfo.GuildControlGetRankFlags:
 C_GuildInfo.GuildRoster:
   inputs: {}
   outputs: {}
+C_GuildInfo.Invite: {}
 C_GuildInfo.IsGuildOfficer:
   inputs: {}
   outputs:
@@ -5132,6 +5130,7 @@ C_GuildInfo.IsGuildRankAssignmentAllowed:
   outputs:
   - name: isGuildRankAssignmentAllowed
     type: boolean
+C_GuildInfo.Leave: {}
 C_GuildInfo.MemberExistsByName:
   inputs:
   - name: name
@@ -5139,6 +5138,7 @@ C_GuildInfo.MemberExistsByName:
   outputs:
   - name: exists
     type: boolean
+C_GuildInfo.Promote: {}
 C_GuildInfo.QueryGuildMembersForRecipe:
   inputs:
   - name: skillLineID
@@ -5163,6 +5163,8 @@ C_GuildInfo.SetGuildRankOrder:
   - name: rankOrder
     type: number
   outputs: {}
+C_GuildInfo.SetLeader: {}
+C_GuildInfo.SetMOTD: {}
 C_GuildInfo.SetNote:
   inputs:
   - name: guid
@@ -5172,12 +5174,19 @@ C_GuildInfo.SetNote:
   - name: isPublic
     type: boolean
   outputs: {}
+C_GuildInfo.Uninvite: {}
 C_InterfaceFileManifest.GetInterfaceArtFiles:
   inputs: {}
   outputs:
   - name: images
     type:
       arrayof: string
+C_Item.ActionBindsItem: {}
+C_Item.BindEnchant: {}
+C_Item.ConfirmBindOnUse: {}
+C_Item.ConfirmNoRefundOnUse: {}
+C_Item.ConfirmOnUse: {}
+C_Item.DoesItemContainSpec: {}
 C_Item.DoesItemExist:
   inputs:
   - name: emptiableItemLocation
@@ -5194,6 +5203,10 @@ C_Item.DoesItemExistByID:
   outputs:
   - name: itemExists
     type: boolean
+C_Item.DropItemOnUnit: {}
+C_Item.EndBoundTradeable: {}
+C_Item.EndRefund: {}
+C_Item.EquipItemByName: {}
 C_Item.GetCurrentItemLevel:
   inputs:
   - name: itemLocation
@@ -5203,6 +5216,13 @@ C_Item.GetCurrentItemLevel:
   - name: currentItemLevel
     nilable: true
     type: number
+C_Item.GetDetailedItemLevelInfo: {}
+C_Item.GetItemChildInfo: {}
+C_Item.GetItemClassInfo: {}
+C_Item.GetItemCount: {}
+C_Item.GetItemCreationContext: {}
+C_Item.GetItemFamily: {}
+C_Item.GetItemGem: {}
 C_Item.GetItemGUID:
   inputs:
   - name: itemLocation
@@ -5243,6 +5263,9 @@ C_Item.GetItemIDForItemInfo:
   outputs:
   - name: itemID
     type: number
+C_Item.GetItemInfo: {}
+C_Item.GetItemInfoInstant: {}
+C_Item.GetItemInventorySlotInfo: {}
 C_Item.GetItemInventoryType:
   inputs:
   - name: itemLocation
@@ -5324,6 +5347,12 @@ C_Item.GetItemQualityByID:
     nilable: true
     type:
       enum: ItemQuality
+C_Item.GetItemQualityColor: {}
+C_Item.GetItemSetInfo: {}
+C_Item.GetItemSpecInfo: {}
+C_Item.GetItemSpell: {}
+C_Item.GetItemSubClassInfo: {}
+C_Item.GetItemUniqueness: {}
 C_Item.GetStackCount:
   inputs:
   - name: itemLocation
@@ -5332,6 +5361,7 @@ C_Item.GetStackCount:
   outputs:
   - name: stackCount
     type: number
+C_Item.IsArtifactPowerItem: {}
 C_Item.IsBound:
   inputs:
   - name: itemLocation
@@ -5340,6 +5370,14 @@ C_Item.IsBound:
   outputs:
   - name: isBound
     type: boolean
+C_Item.IsConsumableItem: {}
+C_Item.IsCurrentItem: {}
+C_Item.IsDressableItem: {}
+C_Item.IsEquippableItem: {}
+C_Item.IsEquippedItem: {}
+C_Item.IsEquippedItemType: {}
+C_Item.IsHarmfulItem: {}
+C_Item.IsHelpfulItem: {}
 C_Item.IsItemDataCached:
   inputs:
   - name: itemLocation
@@ -5355,6 +5393,7 @@ C_Item.IsItemDataCachedByID:
   outputs:
   - name: isCached
     type: boolean
+C_Item.IsItemInRange: {}
 C_Item.IsLocked:
   inputs:
   - name: itemLocation
@@ -5363,6 +5402,8 @@ C_Item.IsLocked:
   outputs:
   - name: isLocked
     type: boolean
+C_Item.IsUsableItem: {}
+C_Item.ItemHasRange: {}
 C_Item.LockItem:
   inputs:
   - name: itemLocation
@@ -5374,6 +5415,9 @@ C_Item.LockItemByGUID:
   - name: itemGUID
     type: string
   outputs: {}
+C_Item.PickupItem: {}
+C_Item.ReplaceEnchant: {}
+C_Item.ReplaceTradeEnchant: {}
 C_Item.RequestLoadItemData:
   inputs:
   - name: itemLocation
@@ -5396,6 +5440,7 @@ C_Item.UnlockItemByGUID:
   - name: itemGUID
     type: string
   outputs: {}
+C_Item.UseItemByName: {}
 C_ItemSocketInfo.CompleteSocketing:
   inputs: {}
   outputs: {}
@@ -5449,6 +5494,7 @@ C_LFGInfo.CanPlayerUsePremadeGroup:
     type: boolean
   - name: failureReason
     type: string
+C_LFGInfo.GetDungeonInfo: {}
 C_LFGInfo.GetLFDLockStates:
   inputs: {}
   outputs:
@@ -7230,6 +7276,7 @@ C_PvP.GetRandomBGRewards:
     nilable: true
     type:
       structure: C_PvP.RoleShortageReward
+C_PvP.GetZonePVPInfo: {}
 C_PvP.IsInBrawl:
   inputs: {}
   outputs:
@@ -7245,11 +7292,14 @@ C_PvP.IsRatedMap:
   outputs:
   - name: isRatedMap
     type: boolean
+C_PvP.IsSubZonePVPPOI: {}
 C_PvP.RequestCrowdControlSpell:
   inputs:
   - name: playerToken
     type: unit
   outputs: {}
+C_PvP.SetPVP: {}
+C_PvP.TogglePVP: {}
 C_QuestInfoSystem.GetQuestRewardSpellInfo:
   inputs:
   - name: questID
@@ -7625,6 +7675,7 @@ C_Sound.PlayItemSound:
     type:
       structure: ItemLocation
   outputs: {}
+C_Sound.PlayVocalErrorSound: {}
 C_Spell.DoesSpellExist:
   inputs:
   - name: spellID
@@ -7633,6 +7684,8 @@ C_Spell.DoesSpellExist:
   - name: spellExists
     stub: true
     type: boolean
+C_Spell.GetSchoolString: {}
+C_Spell.GetSpellQueueWindow: {}
 C_Spell.IsSpellDataCached:
   inputs:
   - name: spellID
@@ -7645,6 +7698,7 @@ C_Spell.RequestLoadSpellData:
   - name: spellID
     type: number
   outputs: {}
+C_Spell.TargetSpellReplacesBonusTree: {}
 C_SpellBook.GetSpellLinkFromSpellID:
   inputs:
   - name: spellID
@@ -7857,13 +7911,6 @@ C_TaskQuest.GetThreatQuests:
   - name: quests
     type:
       arrayof: number
-C_TaskQuest.GetUIWidgetSetIDFromQuestID:
-  inputs:
-  - name: questID
-    type: number
-  outputs:
-  - name: UiWidgetSetID
-    type: number
 C_TaskQuest.IsActive:
   inputs:
   - name: questID
@@ -12513,7 +12560,7 @@ GetRealZoneText:
     nilable: true
     type: number
   outputs:
-  - name: zone
+  - name: text
     stub: RealZoneText
     type: string
 GetReleaseTimeRemaining:

@@ -945,6 +945,10 @@ Enum:
     MaxValue: 3
     MinValue: 0
     NumValues: 4
+  Causeofdeath: {}
+  CauseofdeathFlags: {}
+  CauseofdeathFlagsMeta: {}
+  CauseofdeathMeta: {}
   CharacterServiceInfoFlag:
     RestrictToRecommendedSpecs: 1
   CharacterServiceInfoFlagMeta:
@@ -2932,6 +2936,8 @@ Enum:
     MaxValue: 4
     MinValue: 0
     NumValues: 5
+  MapIconUIWidgetSetType: {}
+  MapIconUIWidgetSetTypeMeta: {}
   MinimapTrackingFilter:
     Auctioneer: 1
     Banker: 2
@@ -3908,6 +3914,8 @@ Enum:
     MaxValue: 13
     MinValue: 0
     NumValues: 14
+  TimeEventFlag: {}
+  TimeEventFlagMeta: {}
   TitleIconVersion:
     Large: 2
     Medium: 1
@@ -4306,27 +4314,27 @@ Enum:
   UICursorType:
     ActionBar: 6
     Ammo: 8
-    BattlePet: 17
-    ConduitCollectionItem: 20
-    Currency: 14
+    BattlePet: 16
+    ConduitCollectionItem: 19
+    Currency: 13
     Default: 0
-    EquipmentSet: 13
-    Flyout: 15
-    GuildBank: 11
-    GuildBankMoney: 12
+    EquipmentSet: 12
+    Flyout: 14
+    GuildBank: 10
+    GuildBankMoney: 11
     Item: 1
     Macro: 7
     Merchant: 5
     Money: 2
-    Mount: 18
-    PerksProgramVendorItem: 21
-    Pet: 10
+    Mount: 17
+    PerksProgramVendorItem: 20
+    Pet: 9
     PetAction: 4
     Spell: 3
-    Toy: 19
-    VoidItem: 16
+    Toy: 18
+    VoidItem: 15
   UICursorTypeMeta:
-    MaxValue: 21
+    MaxValue: 20
     MinValue: 0
     NumValues: 21
   UIItemInteractionFlags:
@@ -4448,19 +4456,30 @@ Enum:
     Fifty: 5
     Ninty: 1
     OneHundred: 0
+    OneHundredEighty: 13
+    OneHundredFifty: 10
+    OneHundredForty: 9
+    OneHundredNinety: 14
+    OneHundredSeventy: 12
+    OneHundredSixty: 11
+    OneHundredTen: 6
+    OneHundredThirty: 8
+    OneHundredTwenty: 7
     Seventy: 3
     Sixty: 4
+    TwoHundred: 15
   UIWidgetScaleMeta:
-    MaxValue: 5
+    MaxValue: 15
     MinValue: 0
-    NumValues: 6
+    NumValues: 16
   UIWidgetSetLayoutDirection:
     Horizontal: 1
+    Overlap: 2
     Vertical: 0
   UIWidgetSetLayoutDirectionMeta:
-    MaxValue: 1
+    MaxValue: 2
     MinValue: 0
-    NumValues: 2
+    NumValues: 3
   UIWidgetVisualizationType:
     BulletTextList: 10
     CaptureBar: 1
@@ -4611,6 +4630,8 @@ Enum:
     MaxValue: 4
     MinValue: 0
     NumValues: 5
+  Vocalerrorsounds: {}
+  VocalerrorsoundsMeta: {}
   VoiceChatStatusCode:
     AlreadyInChannel: 10
     ChannelAlreadyExists: 9
