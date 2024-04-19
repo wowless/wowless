@@ -945,6 +945,30 @@ Enum:
     MaxValue: 3
     MinValue: 0
     NumValues: 4
+  Causeofdeath:
+    Creature: 3
+    Drowning: 5
+    Falling: 4
+    Fatigue: 6
+    Fire: 9
+    Lava: 8
+    None: 0
+    PlayerDuel: 2
+    PlayerPvP: 1
+    Slime: 7
+  CauseofdeathFlags:
+    CreatureNameNeeded: 2
+    NoneNeeded: 0
+    PlayerNameNeeded: 1
+    ZoneNameNeeded: 4
+  CauseofdeathFlagsMeta:
+    MaxValue: 4
+    MinValue: 0
+    NumValues: 4
+  CauseofdeathMeta:
+    MaxValue: 9
+    MinValue: 0
+    NumValues: 10
   CharacterServiceInfoFlag:
     RestrictToRecommendedSpecs: 1
   CharacterServiceInfoFlagMeta:
@@ -2932,6 +2956,13 @@ Enum:
     MaxValue: 4
     MinValue: 0
     NumValues: 5
+  MapIconUIWidgetSetType:
+    BehindIcon: 1
+    Tooltip: 0
+  MapIconUIWidgetSetTypeMeta:
+    MaxValue: 1
+    MinValue: 0
+    NumValues: 2
   MinimapTrackingFilter:
     Auctioneer: 1
     Banker: 2
@@ -3908,6 +3939,12 @@ Enum:
     MaxValue: 13
     MinValue: 0
     NumValues: 14
+  TimeEventFlag:
+    GlueScreenShortcut: 1
+  TimeEventFlagMeta:
+    MaxValue: 1
+    MinValue: 1
+    NumValues: 1
   TitleIconVersion:
     Large: 2
     Medium: 1
@@ -4306,27 +4343,27 @@ Enum:
   UICursorType:
     ActionBar: 6
     Ammo: 8
-    BattlePet: 17
-    ConduitCollectionItem: 20
-    Currency: 14
+    BattlePet: 16
+    ConduitCollectionItem: 19
+    Currency: 13
     Default: 0
-    EquipmentSet: 13
-    Flyout: 15
-    GuildBank: 11
-    GuildBankMoney: 12
+    EquipmentSet: 12
+    Flyout: 14
+    GuildBank: 10
+    GuildBankMoney: 11
     Item: 1
     Macro: 7
     Merchant: 5
     Money: 2
-    Mount: 18
-    PerksProgramVendorItem: 21
-    Pet: 10
+    Mount: 17
+    PerksProgramVendorItem: 20
+    Pet: 9
     PetAction: 4
     Spell: 3
-    Toy: 19
-    VoidItem: 16
+    Toy: 18
+    VoidItem: 15
   UICursorTypeMeta:
-    MaxValue: 21
+    MaxValue: 20
     MinValue: 0
     NumValues: 21
   UIItemInteractionFlags:
@@ -4448,19 +4485,30 @@ Enum:
     Fifty: 5
     Ninty: 1
     OneHundred: 0
+    OneHundredEighty: 13
+    OneHundredFifty: 10
+    OneHundredForty: 9
+    OneHundredNinety: 14
+    OneHundredSeventy: 12
+    OneHundredSixty: 11
+    OneHundredTen: 6
+    OneHundredThirty: 8
+    OneHundredTwenty: 7
     Seventy: 3
     Sixty: 4
+    TwoHundred: 15
   UIWidgetScaleMeta:
-    MaxValue: 5
+    MaxValue: 15
     MinValue: 0
-    NumValues: 6
+    NumValues: 16
   UIWidgetSetLayoutDirection:
     Horizontal: 1
+    Overlap: 2
     Vertical: 0
   UIWidgetSetLayoutDirectionMeta:
-    MaxValue: 1
+    MaxValue: 2
     MinValue: 0
-    NumValues: 2
+    NumValues: 3
   UIWidgetVisualizationType:
     BulletTextList: 10
     CaptureBar: 1
@@ -4611,6 +4659,79 @@ Enum:
     MaxValue: 4
     MinValue: 0
     NumValues: 5
+  Vocalerrorsounds:
+    Abilitycooling: 50
+    Alreadyingroup: 20
+    Alreadyinguild: 21
+    Ammoonlyinbag: 28
+    Bagfull: 29
+    BoundNodrop: 4
+    Cantaffordbankslot: 22
+    CantattackNotarget: 38
+    CantattackNotstandingObsolete: 37
+    Cantattackrongdirection: 36
+    CantcastOutofrange: 46
+    Cantcreate: 18
+    Cantdrinkmore: 6
+    Canteatmore: 7
+    CanteatMoving: 24
+    Cantequip2Hequipped: 42
+    Cantequip2HNoskill: 43
+    Cantequip2HSkill: 41
+    Cantflyhere: 60
+    Cantinvite: 8
+    CantlearnLevel: 13
+    Cantloot: 17
+    CantlootDidntkill: 31
+    CantlootLocked: 33
+    CantlootNotstandingObsolete: 34
+    CantlootToofar: 35
+    CantlootWrongfacing: 32
+    Cantputbag: 26
+    Cantswap: 58
+    CanttaxiNomoney: 54
+    CanttradeSoulbound: 59
+    Cantuseitem: 51
+    Cantuselocked: 55
+    Cantusetoofar: 57
+    Chestinuse: 52
+    Declinegroup: 19
+    ExhaustedObsolete: 67
+    FoodcoolingObsolete: 53
+    Genericnotarget: 45
+    Guildpermissions: 62
+    Invaliditemtarget: 66
+    Invalidtarget: 11
+    Inventoryfull: 0
+    Inviteebusy: 9
+    Itemcooling: 5
+    Itemlocked: 61
+    Itemmaxcount: 30
+    Locked: 14
+    Mustequippitem: 49
+    Noenergy: 64
+    NoequipEver: 3
+    NoequipLevel: 2
+    Noequipslotavailable: 56
+    Noessence: 65
+    Nomana: 15
+    Norage: 63
+    Notabag: 25
+    Notenoughgold: 39
+    Notenoughmoney: 40
+    Notequippable: 44
+    Notwhiledead: 16
+    Outofammo: 1
+    Potioncooling: 47
+    Proficiencyneeded: 48
+    Spellcooling: 12
+    Targettoofar: 10
+    Toomanybankslots: 23
+    Wrongslot: 27
+  VocalerrorsoundsMeta:
+    MaxValue: 67
+    MinValue: 0
+    NumValues: 68
   VoiceChatStatusCode:
     AlreadyInChannel: 10
     ChannelAlreadyExists: 9

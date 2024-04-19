@@ -1751,42 +1751,6 @@ CHAT_MSG_GUILD_ACHIEVEMENT:
     type: boolean
   - name: supressRaidIcons
     type: boolean
-CHAT_MSG_GUILD_DEATHS:
-  payload:
-  - name: text
-    type: string
-  - name: playerName
-    type: string
-  - name: languageName
-    type: string
-  - name: channelName
-    type: string
-  - name: playerName2
-    type: string
-  - name: specialFlags
-    type: string
-  - name: zoneChannelID
-    type: number
-  - name: channelIndex
-    type: number
-  - name: channelBaseName
-    type: string
-  - name: languageID
-    type: number
-  - name: lineID
-    type: number
-  - name: guid
-    type: string
-  - name: bnSenderID
-    type: number
-  - name: isMobile
-    type: boolean
-  - name: isSubtitle
-    type: boolean
-  - name: hideSenderInLetterbox
-    type: boolean
-  - name: supressRaidIcons
-    type: boolean
 CHAT_MSG_GUILD_ITEM_LOOTED:
   payload:
   - name: text
@@ -3727,10 +3691,6 @@ GUILD_INVITE_REQUEST:
   - name: emblemFilename
     nilable: true
     type: string
-GUILD_MEMBER_DIED:
-  payload:
-  - name: memberName
-    type: string
 GUILD_MOTD:
   payload:
   - name: motdText
@@ -3781,6 +3741,10 @@ GUILDTABARD_UPDATE:
   payload: {}
 GX_RESTARTED:
   payload: {}
+HARDCORE_DEATHS:
+  payload:
+  - name: memberName
+    type: string
 HEARTHSTONE_BOUND:
   payload: {}
 HEIRLOOM_UPGRADE_TARGETING_CHANGED:
@@ -3938,6 +3902,10 @@ LEARNED_SPELL_IN_TAB:
     type: number
   - name: isGuildPerkSpell
     type: boolean
+LEVEL_GRANT_PROPOSED:
+  payload:
+  - name: senderName
+    type: string
 LFG_BOOT_PROPOSAL_UPDATE:
   payload: {}
 LFG_COMPLETION_REWARD:
@@ -4380,6 +4348,10 @@ PARTY_MEMBER_DISABLE:
   - name: unitTarget
     type: unit
 PARTY_MEMBER_ENABLE:
+  payload:
+  - name: unitTarget
+    type: unit
+PARTY_REFER_A_FRIEND_UPDATED:
   payload:
   - name: unitTarget
     type: unit
@@ -5020,6 +4992,20 @@ RECEIVED_ACHIEVEMENT_MEMBER_LIST:
   payload:
   - name: achievementID
     type: number
+RECRUIT_A_FRIEND_CAN_EMAIL:
+  payload:
+  - name: resultCode
+    type: number
+RECRUIT_A_FRIEND_INVITATION_FAILED:
+  payload:
+  - name: failureReason
+    type: string
+RECRUIT_A_FRIEND_INVITER_FRIEND_ADDED:
+  payload:
+  - name: name
+    type: string
+RECRUIT_A_FRIEND_SYSTEM_STATUS:
+  payload: {}
 REPLACE_ENCHANT:
   payload:
   - name: existingStr
@@ -5205,6 +5191,12 @@ SOCKET_INFO_REFUNDABLE_CONFIRM:
 SOCKET_INFO_SUCCESS:
   payload: {}
 SOCKET_INFO_UPDATE:
+  payload: {}
+SOR_BY_TEXT_UPDATED:
+  payload: {}
+SOR_COUNTS_UPDATED:
+  payload: {}
+SOR_START_EXPERIENCE_INCOMPLETE:
   payload: {}
 SOUND_DEVICE_UPDATE:
   payload: {}
