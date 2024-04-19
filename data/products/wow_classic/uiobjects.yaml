@@ -731,7 +731,13 @@ Font:
     GetAlpha: {}
     SetAlpha: {}
 FontInstance:
-  fields: {}
+  fields:
+    justifyh:
+      init: LEFT
+      type: JustifyHorizontal
+    justifyv:
+      init: BOTTOM
+      type: JustifyVertical
   inherits: {}
   methods:
     GetFont:
@@ -751,8 +757,12 @@ FontInstance:
         nilable: true
         type: FontInstance
     GetIndentedWordWrap: {}
-    GetJustifyH: {}
-    GetJustifyV: {}
+    GetJustifyH:
+      getter:
+      - name: justifyh
+    GetJustifyV:
+      getter:
+      - name: justifyv
     GetShadowColor:
       outputs:
       - type: number
@@ -772,8 +782,12 @@ FontInstance:
     SetFont: {}
     SetFontObject: {}
     SetIndentedWordWrap: {}
-    SetJustifyH: {}
-    SetJustifyV: {}
+    SetJustifyH:
+      setter:
+      - name: justifyh
+    SetJustifyV:
+      setter:
+      - name: justifyv
     SetShadowColor: {}
     SetShadowOffset: {}
     SetSpacing: {}
