@@ -1972,50 +1972,9 @@ C_ChatInfo.IsValidChatLine:
   outputs:
   - name: isValid
     type: boolean
-C_ChatInfo.RegisterAddonMessagePrefix:
-  inputs:
-  - name: prefix
-    type: string
-  outputs:
-  - name: result
-    type:
-      enum: RegisterAddonMessagePrefixResult
 C_ChatInfo.ReportServerLag:
   inputs: {}
   outputs: {}
-C_ChatInfo.SendAddonMessage:
-  inputs:
-  - name: prefix
-    type: string
-  - name: message
-    type: string
-  - name: chatType
-    nilable: true
-    type: string
-  - name: target
-    nilable: true
-    type: string
-  outputs:
-  - name: result
-    type:
-      enum: SendAddonMessageResult
-C_ChatInfo.SendAddonMessageLogged:
-  inputs:
-  - name: prefix
-    type: string
-  - name: message
-    type: string
-  - name: chatType
-    nilable: true
-    type: string
-  - name: target
-    nilable: true
-    type: string
-  outputs:
-  - name: result
-    nilable: true
-    type:
-      enum: SendAddonMessageResult
 C_ChatInfo.SwapChatChannelsByChannelIndex:
   inputs:
   - name: firstChannelIndex
