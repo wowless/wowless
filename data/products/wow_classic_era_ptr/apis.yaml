@@ -5526,6 +5526,7 @@ C_Item.GetItemInventorySlotInfo:
       enum: InventoryType
   outputs:
   - name: result
+    stub: someNonEmptyString
     type: string
 C_Item.GetItemInventoryType:
   inputs:
@@ -5654,6 +5655,7 @@ C_Item.GetItemSubClassInfo:
     type: number
   outputs:
   - name: subClassName
+    stub: someNonEmptyString
     type: string
   - name: subClassUsesInvType
     type: boolean
