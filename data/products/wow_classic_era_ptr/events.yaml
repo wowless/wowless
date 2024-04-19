@@ -3742,7 +3742,9 @@ GUILDTABARD_UPDATE:
 GX_RESTARTED:
   payload: {}
 HARDCORE_DEATHS:
-  payload: {}
+  payload:
+  - name: memberName
+    type: string
 HEARTHSTONE_BOUND:
   payload: {}
 HEIRLOOM_UPGRADE_TARGETING_CHANGED:
@@ -3901,7 +3903,9 @@ LEARNED_SPELL_IN_TAB:
   - name: isGuildPerkSpell
     type: boolean
 LEVEL_GRANT_PROPOSED:
-  payload: {}
+  payload:
+  - name: senderName
+    type: string
 LFG_BOOT_PROPOSAL_UPDATE:
   payload: {}
 LFG_COMPLETION_REWARD:
@@ -4348,7 +4352,9 @@ PARTY_MEMBER_ENABLE:
   - name: unitTarget
     type: unit
 PARTY_REFER_A_FRIEND_UPDATED:
-  payload: {}
+  payload:
+  - name: unitTarget
+    type: unit
 PENDING_AZERITE_ESSENCE_CHANGED:
   payload:
   - name: essenceID
@@ -4987,11 +4993,17 @@ RECEIVED_ACHIEVEMENT_MEMBER_LIST:
   - name: achievementID
     type: number
 RECRUIT_A_FRIEND_CAN_EMAIL:
-  payload: {}
+  payload:
+  - name: resultCode
+    type: number
 RECRUIT_A_FRIEND_INVITATION_FAILED:
-  payload: {}
+  payload:
+  - name: failureReason
+    type: string
 RECRUIT_A_FRIEND_INVITER_FRIEND_ADDED:
-  payload: {}
+  payload:
+  - name: name
+    type: string
 RECRUIT_A_FRIEND_SYSTEM_STATUS:
   payload: {}
 REPLACE_ENCHANT:
