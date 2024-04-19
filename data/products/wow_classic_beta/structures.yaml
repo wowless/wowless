@@ -2942,6 +2942,9 @@ ItemLocation:
       nilable: true
       type: number
   mixin: ItemLocationMixin
+ItemTransmogInfo:
+  fields: {}
+  mixin: ItemTransmogInfoMixin
 LocaleInfo:
   fields:
     localeId:
@@ -3010,6 +3013,18 @@ QueueSpecificInfo:
 ReportInfo:
   fields: {}
   mixin: ReportInfoMixin
+TransmogLocation:
+  fields:
+    modification:
+      type: number
+    slotID:
+      type: number
+    type:
+      type: number
+  mixin: TransmogLocationMixin
+TransmogPendingInfo:
+  fields: {}
+  mixin: TransmogPendingInfoMixin
 UITextureSliceData:
   fields:
     marginBottom:
