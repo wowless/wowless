@@ -56,6 +56,8 @@ script_objects:
   SimpleStatusBarAPI: StatusBar
   SimpleTextureAPI: Texture
   SimpleTextureBaseAPI: TextureBase
+skip_apis:
+  StartAttack: first argument should be nilable
 skip_docfiles:
   BarberShopInternalDocumentation: {}
   BaseDocumentation: {}

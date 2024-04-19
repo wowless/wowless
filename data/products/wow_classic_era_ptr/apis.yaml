@@ -12534,6 +12534,7 @@ GetNetStats:
   - name: latencyList
     type: number
   outstride: 1
+  stuboutstrides: 2
 GetNewSocketInfo:
   inputs:
   - name: index
@@ -15575,6 +15576,7 @@ StablePet: {}
 StartAttack:
   inputs:
   - name: name
+    nilable: true
     type: string
   - default: false
     name: exactMatch
