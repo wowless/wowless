@@ -9980,6 +9980,7 @@ C_Item.GetItemQualityByID:
     type:
       enum: ItemQuality
 C_Item.GetItemQualityColor:
+  impl: GetItemQualityColor
   inputs:
   - name: quality
     type: number
