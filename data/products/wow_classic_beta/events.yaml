@@ -3092,69 +3092,33 @@ CLUB_ERROR:
     type:
       enum: ClubType
 CLUB_FINDER_APPLICANT_INVITE_RECIEVED:
-  payload:
-  - name: clubFinderGUIDs
-    type:
-      arrayof: string
+  payload: {}
 CLUB_FINDER_APPLICATIONS_UPDATED:
-  payload:
-  - name: type
-    type:
-      enum: ClubFinderRequestType
-  - name: clubFinderGUIDs
-    type:
-      arrayof: string
+  payload: {}
 CLUB_FINDER_CAN_WHISPER_APPLICANT:
-  payload:
-  - name: applicant
-    type: string
+  payload: {}
 CLUB_FINDER_CLUB_LIST_RETURNED:
-  payload:
-  - name: type
-    type:
-      enum: ClubFinderRequestType
+  payload: {}
 CLUB_FINDER_CLUB_REPORTED:
-  payload:
-  - name: type
-    type:
-      enum: ClubFinderRequestType
-  - name: clubFinderGUID
-    type: string
+  payload: {}
 CLUB_FINDER_COMMUNITY_OFFLINE_JOIN:
-  payload:
-  - name: clubId
-    type: string
+  payload: {}
 CLUB_FINDER_ENABLED_OR_DISABLED:
   payload: {}
 CLUB_FINDER_LINKED_CLUB_RETURNED:
-  payload:
-  - name: clubInfo
-    type:
-      structure: C_ClubFinder.RecruitingClubInfo
+  payload: {}
 CLUB_FINDER_MEMBERSHIP_LIST_CHANGED:
   payload: {}
 CLUB_FINDER_PLAYER_PENDING_LIST_RECIEVED:
-  payload:
-  - name: type
-    type:
-      enum: ClubFinderRequestType
+  payload: {}
 CLUB_FINDER_POST_UPDATED:
-  payload:
-  - name: clubFinderGUIDs
-    type:
-      arrayof: string
+  payload: {}
 CLUB_FINDER_RECRUIT_LIST_CHANGED:
   payload: {}
 CLUB_FINDER_RECRUITMENT_POST_RETURNED:
-  payload:
-  - name: type
-    type:
-      enum: ClubFinderRequestType
+  payload: {}
 CLUB_FINDER_RECRUITS_UPDATED:
-  payload:
-  - name: type
-    type:
-      enum: ClubFinderRequestType
+  payload: {}
 CLUB_INVITATION_ADDED_FOR_SELF:
   payload:
   - name: invitation
@@ -3518,14 +3482,9 @@ ECLIPSE_DIRECTION_CHANGE:
     type: string
 EDIT_MODE_LAYOUTS_UPDATED: {}
 EJ_DIFFICULTY_UPDATE:
-  payload:
-  - name: difficultyID
-    type: number
+  payload: {}
 EJ_LOOT_DATA_RECIEVED:
-  payload:
-  - name: itemID
-    nilable: true
-    type: number
+  payload: {}
 ENABLE_DECLINE_GUILD_INVITE:
   payload: {}
 ENABLE_LOW_LEVEL_RAID:
@@ -3762,15 +3721,7 @@ GROUP_LEFT:
 GROUP_ROSTER_UPDATE:
   payload: {}
 GUILD_CHALLENGE_COMPLETED:
-  payload:
-  - name: challengeType
-    type: number
-  - name: currentCount
-    type: number
-  - name: maxCount
-    type: number
-  - name: goldAwarded
-    type: number
+  payload: {}
 GUILD_CHALLENGE_UPDATED:
   payload: {}
 GUILD_EVENT_LOG_UPDATE:
@@ -4003,9 +3954,7 @@ KIOSK_SESSION_EXPIRATION_WARNING:
 KIOSK_SESSION_EXPIRED:
   payload: {}
 KNOWN_TITLES_UPDATE:
-  payload:
-  - name: unitTarget
-    type: unit
+  payload: {}
 LANGUAGE_LIST_CHANGED:
   payload: {}
 LEARNED_SPELL_IN_TAB:
@@ -4922,15 +4871,7 @@ PVP_TIMER_UPDATE:
   - name: unitTarget
     type: unit
 PVP_TYPES_ENABLED:
-  payload:
-  - name: wargameBattlegrounds
-    type: boolean
-  - name: ratedBattlegrounds
-    type: boolean
-  - name: ratedArenas
-    type: boolean
-  - name: ratedSoloShuffle
-    type: boolean
+  payload: {}
 PVP_VEHICLE_INFO_UPDATED:
   payload: {}
 PVP_WORLDSTATE_UPDATE:
@@ -5778,58 +5719,25 @@ TRAIT_TREE_CURRENCY_INFO_UPDATED:
 TRANSMOG_COLLECTION_CAMERA_UPDATE:
   payload: {}
 TRANSMOG_COLLECTION_ITEM_FAVORITE_UPDATE:
-  payload:
-  - name: itemAppearanceID
-    type: number
-  - name: isFavorite
-    type: boolean
+  payload: {}
 TRANSMOG_COLLECTION_ITEM_UPDATE:
   payload: {}
 TRANSMOG_COLLECTION_SOURCE_ADDED:
-  payload:
-  - name: itemModifiedAppearanceID
-    type: number
+  payload: {}
 TRANSMOG_COLLECTION_SOURCE_REMOVED:
-  payload:
-  - name: itemModifiedAppearanceID
-    type: number
+  payload: {}
 TRANSMOG_COLLECTION_UPDATED:
-  payload:
-  - name: collectionIndex
-    nilable: true
-    type: number
-  - name: modID
-    nilable: true
-    type: number
-  - name: itemAppearanceID
-    nilable: true
-    type: number
-  - name: reason
-    nilable: true
-    type: string
+  payload: {}
 TRANSMOG_COSMETIC_COLLECTION_SOURCE_ADDED:
-  payload:
-  - name: itemModifiedAppearanceID
-    type: number
+  payload: {}
 TRANSMOG_OUTFITS_CHANGED:
   payload: {}
 TRANSMOG_SEARCH_UPDATED:
-  payload:
-  - name: searchType
-    type:
-      enum: TransmogSearchType
-  - name: collectionType
-    nilable: true
-    type:
-      enum: TransmogCollectionType
+  payload: {}
 TRANSMOG_SETS_UPDATE_FAVORITE:
   payload: {}
 TRANSMOG_SOURCE_COLLECTABILITY_UPDATE:
-  payload:
-  - name: itemModifiedAppearanceID
-    type: number
-  - name: collectable
-    type: boolean
+  payload: {}
 TRANSMOGRIFY_CLOSE:
   payload: {}
 TRANSMOGRIFY_ITEM_UPDATE:
@@ -5837,19 +5745,9 @@ TRANSMOGRIFY_ITEM_UPDATE:
 TRANSMOGRIFY_OPEN:
   payload: {}
 TRANSMOGRIFY_SUCCESS:
-  payload:
-  - name: transmogLocation
-    type:
-      structure: TransmogLocation
+  payload: {}
 TRANSMOGRIFY_UPDATE:
-  payload:
-  - name: transmogLocation
-    nilable: true
-    type:
-      structure: TransmogLocation
-  - name: action
-    nilable: true
-    type: string
+  payload: {}
 TRIAL_CAP_REACHED_LEVEL:
   payload: {}
 TRIAL_CAP_REACHED_MONEY:
