@@ -1972,9 +1972,50 @@ C_ChatInfo.IsValidChatLine:
   outputs:
   - name: isValid
     type: boolean
+C_ChatInfo.RegisterAddonMessagePrefix:
+  inputs:
+  - name: prefix
+    type: string
+  outputs:
+  - name: result
+    type:
+      enum: RegisterAddonMessagePrefixResult
 C_ChatInfo.ReportServerLag:
   inputs: {}
   outputs: {}
+C_ChatInfo.SendAddonMessage:
+  inputs:
+  - name: prefix
+    type: string
+  - name: message
+    type: string
+  - name: chatType
+    nilable: true
+    type: string
+  - name: target
+    nilable: true
+    type: string
+  outputs:
+  - name: result
+    type:
+      enum: SendAddonMessageResult
+C_ChatInfo.SendAddonMessageLogged:
+  inputs:
+  - name: prefix
+    type: string
+  - name: message
+    type: string
+  - name: chatType
+    nilable: true
+    type: string
+  - name: target
+    nilable: true
+    type: string
+  outputs:
+  - name: result
+    nilable: true
+    type:
+      enum: SendAddonMessageResult
 C_ChatInfo.SwapChatChannelsByChannelIndex:
   inputs:
   - name: firstChannelIndex
@@ -2131,7 +2172,13 @@ C_Club.DoesAnyCommunityHaveUnreadMessages:
   outputs:
   - name: hasUnreadMessages
     type: boolean
-C_Club.DoesCommunityHaveMembersOfTheOppositeFaction: {}
+C_Club.DoesCommunityHaveMembersOfTheOppositeFaction:
+  inputs:
+  - name: clubId
+    type: string
+  outputs:
+  - name: hasMembersOfOppositeFaction
+    type: boolean
 C_Club.EditClub:
   inputs:
   - name: clubId
@@ -2219,7 +2266,11 @@ C_Club.GetAvatarIdList:
     nilable: true
     type:
       arrayof: number
-C_Club.GetClubCapacity: {}
+C_Club.GetClubCapacity:
+  inputs: {}
+  outputs:
+  - name: capacity
+    type: number
 C_Club.GetClubInfo:
   inputs:
   - name: clubId
@@ -2229,7 +2280,15 @@ C_Club.GetClubInfo:
     nilable: true
     type:
       structure: C_Club.ClubInfo
-C_Club.GetClubLimits: {}
+C_Club.GetClubLimits:
+  inputs:
+  - name: clubType
+    type:
+      enum: ClubType
+  outputs:
+  - name: clubLimits
+    type:
+      structure: C_Club.ClubLimits
 C_Club.GetClubMembers:
   inputs:
   - name: clubId
@@ -2267,7 +2326,12 @@ C_Club.GetCommunityNameResultText:
   - name: errorCode
     nilable: true
     type: string
-C_Club.GetGuildClubId: {}
+C_Club.GetGuildClubId:
+  inputs: {}
+  outputs:
+  - name: guildClubId
+    nilable: true
+    type: string
 C_Club.GetInfoFromLastCommunityChatLine:
   inputs: {}
   outputs:
@@ -2552,7 +2616,13 @@ C_Club.SendBattleTagFriendRequest:
   - name: memberId
     type: number
   outputs: {}
-C_Club.SendCharacterInvitation: {}
+C_Club.SendCharacterInvitation:
+  inputs:
+  - name: clubId
+    type: string
+  - name: character
+    type: string
+  outputs: {}
 C_Club.SendInvitation:
   inputs:
   - name: clubId
@@ -5608,7 +5678,14 @@ C_GuildInfo.Demote:
 C_GuildInfo.Disband:
   inputs: {}
   outputs: {}
-C_GuildInfo.GetGuildNewsInfo: {}
+C_GuildInfo.GetGuildNewsInfo:
+  inputs:
+  - name: index
+    type: number
+  outputs:
+  - name: newsInfo
+    type:
+      structure: C_GuildInfo.GuildNewsInfo
 C_GuildInfo.GetGuildRankOrder:
   inputs:
   - name: guid
@@ -5831,7 +5908,16 @@ C_Item.ActionBindsItem:
 C_Item.BindEnchant:
   inputs: {}
   outputs: {}
-C_Item.CanItemTransmogAppearance: {}
+C_Item.CanItemTransmogAppearance:
+  inputs:
+  - name: itemLoc
+    type:
+      structure: ItemLocation
+  outputs:
+  - name: canTransmog
+    type: boolean
+  - name: errorCode
+    type: number
 C_Item.ConfirmBindOnUse:
   inputs: {}
   outputs: {}
@@ -5892,8 +5978,26 @@ C_Item.EquipItemByName:
     nilable: true
     type: number
   outputs: {}
-C_Item.GetAppliedItemTransmogInfo: {}
-C_Item.GetBaseItemTransmogInfo: {}
+C_Item.GetAppliedItemTransmogInfo:
+  inputs:
+  - name: itemLoc
+    type:
+      structure: ItemLocation
+  outputs:
+  - name: info
+    nilable: true
+    type:
+      structure: ItemTransmogInfo
+C_Item.GetBaseItemTransmogInfo:
+  inputs:
+  - name: itemLoc
+    type:
+      structure: ItemLocation
+  outputs:
+  - name: info
+    nilable: true
+    type:
+      structure: ItemTransmogInfo
 C_Item.GetCurrentItemLevel:
   inputs:
   - name: itemLocation
@@ -5903,7 +6007,16 @@ C_Item.GetCurrentItemLevel:
   - name: currentItemLevel
     nilable: true
     type: number
-C_Item.GetCurrentItemTransmogInfo: {}
+C_Item.GetCurrentItemTransmogInfo:
+  inputs:
+  - name: itemLoc
+    type:
+      structure: ItemLocation
+  outputs:
+  - name: info
+    nilable: true
+    type:
+      structure: ItemTransmogInfo
 C_Item.GetDetailedItemLevelInfo:
   inputs:
   - name: itemInfo
@@ -7836,7 +7949,13 @@ C_PartyInfo.ConfirmLeaveParty:
     nilable: true
     type: number
   outputs: {}
-C_PartyInfo.DoCountdown: {}
+C_PartyInfo.DoCountdown:
+  inputs:
+  - name: seconds
+    type: number
+  outputs:
+  - name: success
+    type: boolean
 C_PartyInfo.GetActiveCategories:
   inputs: {}
   outputs:
@@ -8216,7 +8335,13 @@ C_PvP.GetHolidayBGRewards:
     nilable: true
     type:
       structure: C_PvP.RoleShortageReward
-C_PvP.GetOutdoorPvPWaitTime: {}
+C_PvP.GetOutdoorPvPWaitTime:
+  inputs:
+  - name: uiMapID
+    type: number
+  outputs:
+  - name: pvpWaitTime
+    type: number
 C_PvP.GetRandomBGLossRewards:
   inputs: {}
   outputs:
@@ -8832,7 +8957,11 @@ C_Spell.RequestLoadSpellData:
   - name: spellID
     type: number
   outputs: {}
-C_Spell.TargetSpellJumpsUpgradeTrack: {}
+C_Spell.TargetSpellJumpsUpgradeTrack:
+  inputs: {}
+  outputs:
+  - name: jumpsUpgradeTrack
+    type: boolean
 C_Spell.TargetSpellReplacesBonusTree:
   inputs: {}
   outputs:
@@ -11521,7 +11650,11 @@ CanShowResetInstances:
   outputs:
   - name: result
     type: boolean
-CanShowSetRoleButton: {}
+CanShowSetRoleButton:
+  inputs: {}
+  outputs:
+  - name: result
+    type: boolean
 CanSignPetition:
   inputs: {}
   outputs:
@@ -13133,7 +13266,13 @@ GetExpansionDisplayInfo:
     nilable: true
     type:
       structure: ExpansionDisplayInfo
-GetExpansionForLevel: {}
+GetExpansionForLevel:
+  inputs:
+  - name: playerLevel
+    type: number
+  outputs:
+  - name: expansionLevel
+    type: number
 GetExpansionLevel:
   inputs: {}
   outputs:
@@ -13914,7 +14053,11 @@ GetMasterLootCandidate:
   outputs:
   - name: candidate
     type: string
-GetMastery: {}
+GetMastery:
+  inputs: {}
+  outputs:
+  - name: result
+    type: number
 GetMaxBattlefieldID:
   outputs:
   - type: number
@@ -14421,7 +14564,11 @@ GetOverrideBarIndex:
   outputs:
   - type: number
 GetOverrideBarSkin: {}
-GetOverrideSpellPowerByAP: {}
+GetOverrideSpellPowerByAP:
+  inputs: {}
+  outputs:
+  - name: result
+    type: number
 GetOwnerAuctionItems: {}
 GetParryChance: {}
 GetParryChanceFromAttribute: {}
@@ -15750,12 +15897,87 @@ GetUnitMaxHealthModifier:
   - type: string
   outputs:
   - type: number
-GetUnitPowerBarInfo: {}
-GetUnitPowerBarInfoByID: {}
-GetUnitPowerBarStrings: {}
-GetUnitPowerBarStringsByID: {}
-GetUnitPowerBarTextureInfo: {}
-GetUnitPowerBarTextureInfoByID: {}
+GetUnitPowerBarInfo:
+  inputs:
+  - name: unitToken
+    type: unit
+  outputs:
+  - name: info
+    type:
+      structure: UnitPowerBarInfo
+GetUnitPowerBarInfoByID:
+  inputs:
+  - name: barID
+    type: number
+  outputs:
+  - name: info
+    type:
+      structure: UnitPowerBarInfo
+GetUnitPowerBarStrings:
+  inputs:
+  - name: unitToken
+    type: unit
+  outputs:
+  - name: name
+    nilable: true
+    type: string
+  - name: tooltip
+    nilable: true
+    type: string
+  - name: cost
+    nilable: true
+    type: string
+GetUnitPowerBarStringsByID:
+  inputs:
+  - name: barID
+    type: number
+  outputs:
+  - name: name
+    nilable: true
+    type: string
+  - name: tooltip
+    nilable: true
+    type: string
+  - name: cost
+    nilable: true
+    type: string
+GetUnitPowerBarTextureInfo:
+  inputs:
+  - name: unitToken
+    type: unit
+  - name: textureIndex
+    type: number
+  - name: timerIndex
+    nilable: true
+    type: number
+  outputs:
+  - name: texture
+    type: number
+  - name: colorR
+    type: number
+  - name: colorG
+    type: number
+  - name: colorB
+    type: number
+  - name: colorA
+    type: number
+GetUnitPowerBarTextureInfoByID:
+  inputs:
+  - name: barID
+    type: number
+  - name: textureIndex
+    type: number
+  outputs:
+  - name: texture
+    type: number
+  - name: colorR
+    type: number
+  - name: colorG
+    type: number
+  - name: colorB
+    type: number
+  - name: colorA
+    type: number
 GetUnitPowerModifier: {}
 GetUnitSpeed:
   inputs:
@@ -16357,7 +16579,13 @@ IsTrialAccount:
   - name: isTrialAccount
     type: boolean
 IsTutorialFlagged: {}
-IsUnitModelReadyForUI: {}
+IsUnitModelReadyForUI:
+  inputs:
+  - name: unitToken
+    type: unit
+  outputs:
+  - name: isReady
+    type: boolean
 IsUnitOnQuest: {}
 IsUnitOnQuestByQuestID: {}
 IsUsableAction: {}
@@ -16705,7 +16933,9 @@ PlayerIsPVPInactive:
 PlayMusic: {}
 PlaySound: {}
 PlaySoundFile: {}
-PortGraveyard: {}
+PortGraveyard:
+  inputs: {}
+  outputs: {}
 PostAuction: {}
 PreloadMovie: {}
 PrevView:
@@ -17840,7 +18070,14 @@ UnitGroupRolesAssigned:
   - name: result
     stub: DAMAGER
     type: string
-UnitGroupRolesAssignedEnum: {}
+UnitGroupRolesAssignedEnum:
+  inputs:
+  - name: unit
+    nilable: true
+    type: unit
+  outputs:
+  - name: result
+    type: number
 UnitGUID:
   impl: UnitGUID
   inputs:
@@ -18112,7 +18349,13 @@ UnitNameUnmodified:
   - type: string
   outputs:
   - type: string
-UnitNumPowerBarTimers: {}
+UnitNumPowerBarTimers:
+  inputs:
+  - name: unit
+    type: unit
+  outputs:
+  - name: result
+    type: number
 UnitOnTaxi:
   inputs:
   - type: string
@@ -18155,8 +18398,29 @@ UnitPower:
   outputs:
   - name: power
     type: number
-UnitPowerBarID: {}
-UnitPowerBarTimerInfo: {}
+UnitPowerBarID:
+  inputs:
+  - name: unitToken
+    type: unit
+  outputs:
+  - name: barID
+    type: number
+UnitPowerBarTimerInfo:
+  inputs:
+  - name: unit
+    type: unit
+  - default: 0
+    name: index
+    type: number
+  outputs:
+  - name: duration
+    type: number
+  - name: expiration
+    type: number
+  - name: barID
+    type: number
+  - name: auraID
+    type: number
 UnitPowerDisplayMod:
   inputs:
   - name: powerType
@@ -18273,7 +18537,17 @@ UnitSelectionColor:
   - name: alpha
     type: number
 UnitSetRole: {}
-UnitSetRoleEnum: {}
+UnitSetRoleEnum:
+  inputs:
+  - name: unit
+    type: unit
+  - name: role
+    nilable: true
+    type:
+      enum: LFGRole
+  outputs:
+  - name: result
+    type: boolean
 UnitSex:
   impl: UnitSex
   inputs:
@@ -18284,7 +18558,13 @@ UnitSex:
     nilable: true
     type: number
 UnitShouldDisplayName: {}
-UnitSpellHaste: {}
+UnitSpellHaste:
+  inputs:
+  - name: unit
+    type: unit
+  outputs:
+  - name: result
+    type: number
 UnitStat:
   inputs:
   - type: string
