@@ -70,6 +70,7 @@ skip_docfiles:
   SimpleModelFFXAPIDocumentation: {}
 typedefs:
   AnimationDataEnum: number
+  BigInteger: number
   BigUInteger: number
   bool: boolean
   CalendarEventID: string
@@ -117,7 +118,6 @@ typedefs:
   size: number
   string: string
   TBFFlags: string
-  TBFStyleFlags: string
   TextureAsset: string
   TextureAssetDisk: string
   textureAtlas: string
