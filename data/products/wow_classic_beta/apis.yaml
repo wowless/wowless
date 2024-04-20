@@ -18412,6 +18412,7 @@ UnitPowerBarTimerInfo:
   - default: 0
     name: index
     type: number
+  mayreturnnothing: true
   outputs:
   - name: duration
     type: number
@@ -18421,6 +18422,7 @@ UnitPowerBarTimerInfo:
     type: number
   - name: auraID
     type: number
+  stubnothing: true
 UnitPowerDisplayMod:
   inputs:
   - name: powerType
