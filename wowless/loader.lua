@@ -237,6 +237,8 @@ local function loader(api, cfg)
         else
           parent:SetTextColor(r, g, b, a)
         end
+      elseif api.InheritsFrom(parent.type, 'statusbar') then
+        parent:SetStatusBarColor(r, g, b, a)
       else
         error('cannot apply color to ' .. parent.type)
       end
