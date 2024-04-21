@@ -59,10 +59,18 @@ script_objects:
   SimpleStatusBarAPI: StatusBar
   SimpleTextureAPI: Texture
   SimpleTextureBaseAPI: TextureBase
+skip_apis:
+  HasKey: PlayerScriptDocumentation has extra methods
+  ShowCloak: PlayerScriptDocumentation has extra methods
+  ShowHelm: PlayerScriptDocumentation has extra methods
+  ShowingCloak: PlayerScriptDocumentation has extra methods
+  ShowingHelm: PlayerScriptDocumentation has extra methods
 skip_docfiles:
+  ArenaTeamDocumentation: {}
   BarberShopInternalDocumentation: {}
   BaseDocumentation: {}
   ConfigurationWarningsDocumentation: {}
+  DebugToggleDocumentation: {}
   PingPinFrameAPIDocumentation: {}
   SimpleModelFFXAPIDocumentation: {}
 typedefs:
