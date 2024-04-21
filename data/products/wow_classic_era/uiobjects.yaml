@@ -1939,7 +1939,7 @@ Slider:
       init: 0
       type: number
     orientation:
-      init: HORIZONTAL
+      init: VERTICAL
       type: Orientation
     thumbTexture:
       nilable: true
