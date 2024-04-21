@@ -32,6 +32,7 @@ script_objects:
   SimpleAnimTextureCoordTranslationAPI: TextureCoordTranslation
   SimpleAnimTranslationAPI: Translation
   SimpleAnimTranslationLineAPI: LineTranslation
+  SimpleAnimVertexColorAPI: VertexColor
   SimpleBrowserAPI: Browser
   SimpleButtonAPI: Button
   SimpleCheckboxAPI: CheckButton
@@ -74,6 +75,7 @@ typedefs:
   ClubId: string
   ClubInvitationId: string
   ClubStreamId: string
+  ConnectionIptype: string
   CScriptObject: UIObject
   cstring: string
   FileAsset: string
@@ -91,6 +93,7 @@ typedefs:
   kstringLfgListSearch: string
   luaFunction: function
   luaIndex: number
+  LuaValueVariant: table
   ModelAsset: string
   ModelSceneFrame: ModelScene
   ModelSceneFrameActor: Actor

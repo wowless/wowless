@@ -180,7 +180,7 @@ C_ArdenwealdGardening.ArdenwealdGardenData:
       type: number
 C_AreaPoiInfo.AreaPOIInfo:
   fields:
-    addPaddingAboveWidgets:
+    addPaddingAboveTooltipWidgets:
       nilable: true
       type: boolean
     areaPoiID:
@@ -198,6 +198,9 @@ C_AreaPoiInfo.AreaPOIInfo:
       type: boolean
     highlightWorldQuestsOnHover:
       type: boolean
+    iconWidgetSet:
+      nilable: true
+      type: number
     isAlwaysOnFlightmap:
       type: boolean
     isPrimaryMapForPOI:
@@ -212,12 +215,12 @@ C_AreaPoiInfo.AreaPOIInfo:
     textureIndex:
       nilable: true
       type: number
+    tooltipWidgetSet:
+      nilable: true
+      type: number
     uiTextureKit:
       nilable: true
       type: string
-    widgetSetID:
-      nilable: true
-      type: number
 C_ArtifactUI.ArtifactArtInfo:
   fields:
     barConnectedColor:
@@ -2039,6 +2042,9 @@ C_EncounterJournal.EncounterJournalItemInfo:
     displayAsVeryRare:
       nilable: true
       type: boolean
+    displaySeasonID:
+      nilable: true
+      type: number
     encounterID:
       nilable: true
       type: number
@@ -2122,6 +2128,8 @@ C_EventToastManager.EventToastInfo:
         enum: EventToastEventType
     extraUiWidgetSetID:
       nilable: true
+      type: number
+    flags:
       type: number
     hideDefaultAtlas:
       nilable: true
@@ -3829,6 +3837,9 @@ C_PartyPose.PartyPoseInfo:
       type: number
     defeatSoundKitID:
       type: number
+    extraButtonText:
+      nilable: true
+      type: string
     mapID:
       type: number
     partyPoseID:
@@ -3872,6 +3883,14 @@ C_PerksActivities.PerksActivitiesTracked:
     trackedIDs:
       type:
         arrayof: number
+C_PerksActivities.PerksActivityCondition:
+  fields:
+    isMet:
+      type: boolean
+    text:
+      type: string
+    uiPriority:
+      type: number
 C_PerksActivities.PerksActivityCriteria:
   fields:
     criteriaID:
@@ -3882,8 +3901,14 @@ C_PerksActivities.PerksActivityInfo:
   fields:
     activityName:
       type: string
+    areAllConditionsMet:
+      type: boolean
     completed:
       type: boolean
+    conditions:
+      type:
+        arrayof:
+          structure: C_PerksActivities.PerksActivityCondition
     criteriaList:
       type:
         arrayof:
@@ -3893,11 +3918,16 @@ C_PerksActivities.PerksActivityInfo:
     eventEndTime:
       nilable: true
       type: number
+    eventName:
+      nilable: true
+      type: string
     eventStartTime:
       nilable: true
       type: number
     ID:
       type: number
+    inProgress:
+      type: boolean
     requirementsList:
       type:
         arrayof:
@@ -3940,6 +3970,12 @@ C_PerksActivities.PerksActivityThresholdInfo:
 C_PerksProgram.PerksProgramItemDisplayInfo:
   fields:
     creatureDisplayInfoID:
+      nilable: true
+      type: number
+    mainHandItemModifiedAppearanceID:
+      nilable: true
+      type: number
+    offHandItemModifiedAppearanceID:
       nilable: true
       type: number
     overrideModelSceneID:
@@ -3997,6 +4033,12 @@ C_PerksProgram.PerksVendorItemInfo:
       type: boolean
     speciesID:
       type: number
+    subItems:
+      type:
+        arrayof:
+          structure: C_PerksProgram.PerksVendorSubItemInfo
+    subItemsLoaded:
+      type: boolean
     timeRemaining:
       type: number
     transmogSetID:
@@ -4013,6 +4055,19 @@ C_PerksProgram.PerksVendorItemUIGroupInfo:
       type: string
     priority:
       type: number
+C_PerksProgram.PerksVendorSubItemInfo:
+  fields:
+    invType:
+      type: string
+    itemAppearanceID:
+      type: number
+    itemID:
+      type: number
+    name:
+      type: string
+    quality:
+      type:
+        enum: ItemQuality
 C_PetInfo.PetTamerMapInfo:
   fields:
     areaPoiID:
@@ -6241,6 +6296,9 @@ C_UIWidgetManager.HorizontalCurrenciesWidgetVisualizationInfo:
     tooltipLoc:
       type:
         enum: UIWidgetTooltipLocation
+    updateAnimType:
+      type:
+        enum: UIWidgetUpdateAnimType
     widgetScale:
       type:
         enum: UIWidgetScale
@@ -6414,6 +6472,43 @@ C_UIWidgetManager.ItemDisplayVisualizationInfo:
     tooltipLoc:
       type:
         enum: UIWidgetTooltipLocation
+    widgetScale:
+      type:
+        enum: UIWidgetScale
+    widgetSizeSetting:
+      type: number
+    widgetTag:
+      type: string
+C_UIWidgetManager.MapPinAnimationWidgetVisualizationInfo:
+  fields:
+    animType:
+      type:
+        enum: MapPinAnimationType
+    frameTextureKit:
+      type: string
+    hasTimer:
+      type: boolean
+    inAnimType:
+      type:
+        enum: WidgetAnimationType
+    layoutDirection:
+      type:
+        enum: UIWidgetLayoutDirection
+    modelSceneLayer:
+      type:
+        enum: UIWidgetModelSceneLayer
+    orderIndex:
+      type: number
+    outAnimType:
+      type:
+        enum: WidgetAnimationType
+    scriptedAnimationEffectID:
+      type: number
+    shownState:
+      type:
+        enum: WidgetShownState
+    textureKit:
+      type: string
     widgetScale:
       type:
         enum: UIWidgetScale
@@ -6864,6 +6959,9 @@ C_UIWidgetManager.TextureAndTextVisualizationInfo:
         enum: WidgetShownState
     text:
       type: string
+    textSizeType:
+      type:
+        enum: UIWidgetTextureAndTextSizeType
     textureKit:
       type: string
     tooltip:
@@ -7063,6 +7161,9 @@ C_UIWidgetManager.TugOfWarWidgetVisualizationInfo:
     leftIconInfo:
       type:
         structure: C_UIWidgetManager.UIWidgetIconInfo
+    markerArrowShownState:
+      type:
+        enum: TugOfWarMarkerArrowShownState
     maxValue:
       type: number
     minValue:
@@ -7070,6 +7171,9 @@ C_UIWidgetManager.TugOfWarWidgetVisualizationInfo:
     modelSceneLayer:
       type:
         enum: UIWidgetModelSceneLayer
+    neutralFillStyle:
+      type:
+        enum: TugOfWarStyleValue
     neutralZoneCenter:
       type: number
     neutralZoneSize:
@@ -7111,6 +7215,12 @@ C_UIWidgetManager.UIWidgetCurrencyInfo:
       type: string
     text:
       type: string
+    textFontType:
+      type:
+        enum: UIWidgetFontType
+    textSizeType:
+      type:
+        enum: UIWidgetTextSizeType
     tooltip:
       type: string
 C_UIWidgetManager.UIWidgetIconInfo:
@@ -7151,8 +7261,20 @@ C_UIWidgetManager.UIWidgetItemInfo:
     infoTextEnabledState:
       type:
         enum: WidgetEnabledState
+    infoTextFontType:
+      type:
+        enum: UIWidgetFontType
+    infoTextSizeType:
+      type:
+        enum: UIWidgetTextSizeType
     itemID:
       type: number
+    itemNameTextFontType:
+      type:
+        enum: UIWidgetFontType
+    itemNameTextSizeType:
+      type:
+        enum: UIWidgetTextSizeType
     overrideItemName:
       nilable: true
       type: string
@@ -7364,13 +7486,16 @@ C_VideoOptions.GxAdapterInfoDetails:
       type: string
 C_VignetteInfo.VignetteInfo:
   fields:
-    addPaddingAboveWidgets:
+    addPaddingAboveTooltipWidgets:
       nilable: true
       type: boolean
     atlasName:
       type: string
     hasTooltip:
       type: boolean
+    iconWidgetSet:
+      nilable: true
+      type: number
     inFogOfWar:
       type: boolean
     isDead:
@@ -7387,15 +7512,15 @@ C_VignetteInfo.VignetteInfo:
       type: boolean
     rewardQuestID:
       type: number
+    tooltipWidgetSet:
+      nilable: true
+      type: number
     type:
       type:
         enum: VignetteType
     vignetteGUID:
       type: string
     vignetteID:
-      type: number
-    widgetSetID:
-      nilable: true
       type: number
     zoneInfiniteAOI:
       type: boolean
