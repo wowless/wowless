@@ -66,8 +66,9 @@ runner:
     RAF_REWARD_CLAIM_FAILED: numAffordableRewards never set
   skip_slashcmds:
     CASTRANDOM: {}
-    EDITMODE: {}
     EVENT: {}
+    GUILD_INVITE: {}
+    GUILD_UNINVITE: {}
     PTRFEEDBACK: {}
     USERANDOM: {}
 runtime:

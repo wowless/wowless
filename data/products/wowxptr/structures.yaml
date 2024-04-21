@@ -77,7 +77,15 @@ AppearanceSourceInfo:
       type: number
 AuraData:
   fields:
+    applications:
+      type: number
     auraInstanceID:
+      type: number
+    expirationTime:
+      type: number
+    points:
+      type: table
+    spellId:
       type: number
 BountyInfo:
   fields:

@@ -8277,6 +8277,9 @@ C_FriendList.SortWho:
     type: string
   outputs: {}
 C_FunctionContainers.CreateCallback: {}
+C_GameEnvironmentManager.GetCurrentEventRealmQueues: {}
+C_GameEnvironmentManager.GetCurrentGameEnvironment: {}
+C_GameEnvironmentManager.RequestGameEnvironment: {}
 C_GameModeManager.GetCurrentGameMode:
   inputs: {}
   outputs:
@@ -21000,6 +21003,7 @@ C_UnitAuras.GetAuraDataBySlot:
   outputs:
   - name: aura
     nilable: true
+    stubnotnil: true
     type:
       structure: AuraData
 C_UnitAuras.GetAuraDataBySpellName:
@@ -25002,6 +25006,7 @@ GetNetStats:
   - name: latencyList
     type: number
   outstride: 1
+  stuboutstrides: 2
 GetNewSocketInfo:
   inputs:
   - name: index
@@ -28832,6 +28837,7 @@ sqrt:
 StartAttack:
   inputs:
   - name: name
+    nilable: true
     type: string
   - default: false
     name: exactMatch
@@ -30153,6 +30159,7 @@ UnitPowerBarTimerInfo:
   - default: 0
     name: index
     type: number
+  mayreturnnothing: true
   outputs:
   - name: duration
     type: number
@@ -30162,6 +30169,7 @@ UnitPowerBarTimerInfo:
     type: number
   - name: auraID
     type: number
+  stubnothing: true
 UnitPowerDisplayMod:
   inputs:
   - name: powerType
