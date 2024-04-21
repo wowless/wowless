@@ -459,6 +459,9 @@ ColorSelect:
     Frame: {}
   methods:
     ClearColorWheelTexture: {}
+    GetColorAlpha: {}
+    GetColorAlphaTexture: {}
+    GetColorAlphaThumbTexture: {}
     GetColorHSV:
       outputs:
       - name: h
@@ -487,6 +490,9 @@ ColorSelect:
     GetColorWheelThumbTexture:
       getter:
       - name: colorWheelThumbTexture
+    SetColorAlpha: {}
+    SetColorAlphaTexture: {}
+    SetColorAlphaThumbTexture: {}
     SetColorHSV: {}
     SetColorRGB: {}
     SetColorValueTexture:
@@ -1059,6 +1065,7 @@ Frame:
     GetPropagateKeyboardInput:
       getter:
       - name: propagateKeyboardInput
+    GetRaisedFrameLevel: {}
     GetRegions:
       impl: Frame/GetRegions
     GetResizeBounds:
