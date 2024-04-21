@@ -61,10 +61,15 @@ Constants:
   LevelConstsExposed:
     MIN_ACHIEVEMENT_LEVEL: 10
     MIN_RES_SICKNESS_LEVEL: 10
-  LFG_ROLEConstants: {}
+  LFG_ROLEConstants:
+    LFG_ROLE_ANY: 3
+    LFG_ROLE_NO_ROLE: -1
   LootConsts:
     MasterLootQualityThreshold: 5
-  MajorFactionsConsts: {}
+  MajorFactionsConsts:
+    PLUNDERSTORM_MAJOR_FACTION_ID: 2593
+    WORLD_STATE_RAPID_RENOWN_CAP_10_0: 20851
+    WORLD_STATE_RENOWN_CAP_10_0: 19735
   ProfessionConsts:
     CLASSIC_PROFESSION_PARENT_TIER_INDEX: 4
     CRAFTING_ORDER_CLAIM_DURATION: 1800
@@ -2394,8 +2399,15 @@ Enum:
     MaxValue: 5
     MinValue: 0
     NumValues: 6
-  EventRealmQueues: {}
-  EventRealmQueuesMeta: {}
+  EventRealmQueues:
+    None: 0
+    PlunderstormDuo: 2
+    PlunderstormSolo: 1
+    PlunderstormTrio: 4
+  EventRealmQueuesMeta:
+    MaxValue: 4
+    MinValue: 0
+    NumValues: 4
   EventToastDisplayType:
     ChallengeMode: 7
     LargeTextWithIcon: 4
@@ -2442,8 +2454,12 @@ Enum:
     MaxValue: 24
     MinValue: 0
     NumValues: 25
-  EventToastFlags: {}
-  EventToastFlagsMeta: {}
+  EventToastFlags:
+    DisableRightClickDismiss: 1
+  EventToastFlagsMeta:
+    MaxValue: 1
+    MinValue: 1
+    NumValues: 1
   ExcludedCensorSources:
     All: 255
     Friends: 1
@@ -2502,12 +2518,86 @@ Enum:
     MaxValue: 14
     MinValue: 0
     NumValues: 15
-  GameEnvironment: {}
-  GameEnvironmentMeta: {}
-  GameMode: {}
-  GameModeFeatureSetting: {}
-  GameModeFeatureSettingMeta: {}
-  GameModeMeta: {}
+  GameEnvironment:
+    WoW: 0
+    WoWLabs: 1
+  GameEnvironmentMeta:
+    MaxValue: 1
+    MinValue: 0
+    NumValues: 2
+  GameMode:
+    Plunderstorm: 2
+    Standard: 1
+  GameModeFeatureSetting:
+    AchievementsPanel: 10
+    ActionBarIconIntro: 18
+    AllPlayersAreFastMovers: 42
+    AlwaysAllowAlliedRaces: 60
+    Bags: 23
+    CharacterCreateFullEnabled: 52
+    CharacterCreateUseFixedBackgroundModel: 53
+    CharacterPanel: 7
+    ChatLinkLevelToasts: 22
+    CollectionsPanel: 6
+    CommunitiesPanel: 11
+    CompactRaidFrameManager: 47
+    CustomActionBarOverlayHeightOffset: 5
+    DeleteItemConfirmation: 20
+    EditMode: 48
+    EncounterJournal: 12
+    FastAreaTriggerTick: 40
+    FinderPanel: 13
+    ForceAlteredFormsOn: 54
+    ForcedChatLanguage: 21
+    ForcedPartyFrameScale: 4
+    FrontEndChat: 44
+    Guilds: 16
+    HelpPanel: 15
+    IgnoreChrClassDisabledFlag: 41
+    InGameCalendar: 37
+    InGameFriendsList: 45
+    InGameMailNotification: 36
+    InGameTracking: 38
+    InGameWhoList: 39
+    InstanceDifficultyBanner: 49
+    LandingPageFactionID: 59
+    Macros: 46
+    MapPlunderstormCircle: 32
+    MaximizeWorldMap: 26
+    MaxNameplateDistance: 2
+    MaxUnitNameDistance: 1
+    MicroBarScale: 0
+    PerksProgramActivityTracking: 25
+    PetBattles: 24
+    PlayerNamePlateAlternateHealthColor: 56
+    PlayerNamePlateDifficultyIcon: 55
+    QuestLogMicroButton: 17
+    QuestLogPanel: 30
+    QuestSuperTracking: 31
+    RaceAlteredFormsEnabled: 43
+    ReleaseSpiritGhost: 19
+    ScaleNonPlayerNamePlates: 3
+    SpectatingUI: 33
+    SpellbookPanel: 8
+    Store: 14
+    TalentsPanel: 9
+    TargetFrameBuffs: 57
+    TutorialFrame: 34
+    UnitFramePvPContextual: 58
+    UniversalNameplateOcclusion: 35
+    UserAddOns: 50
+    UserScripts: 51
+    WorldMapHelpPlate: 29
+    WorldMapTrackingOptions: 27
+    WorldMapTrackingPin: 28
+  GameModeFeatureSettingMeta:
+    MaxValue: 60
+    MinValue: 0
+    NumValues: 61
+  GameModeMeta:
+    MaxValue: 2
+    MinValue: 1
+    NumValues: 2
   GamePadPowerLevel:
     Critical: 0
     High: 3
@@ -3661,8 +3751,14 @@ Enum:
     MaxValue: 8
     MinValue: 1
     NumValues: 4
-  LFGRole: {}
-  LFGRoleMeta: {}
+  LFGRole:
+    Damage: 2
+    Healer: 1
+    Tank: 0
+  LFGRoleMeta:
+    MaxValue: 2
+    MinValue: 0
+    NumValues: 3
   LinkedCurrencyFlags:
     AddIgnoresMax: 8
     IgnoreAdd: 1
@@ -3727,8 +3823,13 @@ Enum:
     MaxValue: 4
     MinValue: 0
     NumValues: 5
-  MapIconUIWidgetSetType: {}
-  MapIconUIWidgetSetTypeMeta: {}
+  MapIconUIWidgetSetType:
+    BehindIcon: 1
+    Tooltip: 0
+  MapIconUIWidgetSetTypeMeta:
+    MaxValue: 1
+    MinValue: 0
+    NumValues: 2
   MapOverlayDisplayLocation:
     BottomLeft: 1
     BottomRight: 3
@@ -3740,8 +3841,13 @@ Enum:
     MaxValue: 5
     MinValue: 0
     NumValues: 6
-  MapPinAnimationType: {}
-  MapPinAnimationTypeMeta: {}
+  MapPinAnimationType:
+    None: 0
+    Pulse: 1
+  MapPinAnimationTypeMeta:
+    MaxValue: 1
+    MinValue: 0
+    NumValues: 2
   MicroMenuOrder:
     Default: 0
     Reverse: 1
@@ -3828,8 +3934,13 @@ Enum:
     MaxValue: 19
     MinValue: 0
     NumValues: 20
-  ModelSoundTagType: {}
-  ModelSoundTagTypeMeta: {}
+  ModelSoundTagType:
+    Looping: 2
+    Oneshot: 1
+  ModelSoundTagTypeMeta:
+    MaxValue: 2
+    MinValue: 1
+    NumValues: 2
   MountType:
     Aquatic: 2
     Dragonriding: 3
@@ -5665,10 +5776,21 @@ Enum:
     MaxValue: 1
     MinValue: 0
     NumValues: 2
-  TugOfWarMarkerArrowShownState: {}
-  TugOfWarMarkerArrowShownStateMeta: {}
-  TugOfWarStyleValue: {}
-  TugOfWarStyleValueMeta: {}
+  TugOfWarMarkerArrowShownState:
+    Always: 1
+    FlashOnMove: 2
+    Never: 0
+  TugOfWarMarkerArrowShownStateMeta:
+    MaxValue: 2
+    MinValue: 0
+    NumValues: 3
+  TugOfWarStyleValue:
+    ArchaeologyBrown: 1
+    DefaultYellow: 0
+  TugOfWarStyleValueMeta:
+    MaxValue: 1
+    MinValue: 0
+    NumValues: 2
   UICursorType:
     ActionBar: 6
     AmmoObsolete: 8
@@ -5919,8 +6041,13 @@ Enum:
     MaxValue: 8
     MinValue: 0
     NumValues: 9
-  UIWidgetUpdateAnimType: {}
-  UIWidgetUpdateAnimTypeMeta: {}
+  UIWidgetUpdateAnimType:
+    Flash: 1
+    None: 0
+  UIWidgetUpdateAnimTypeMeta:
+    MaxValue: 1
+    MinValue: 0
+    NumValues: 2
   UIWidgetVisualizationType:
     BulletTextList: 10
     CaptureBar: 1
@@ -6098,8 +6225,79 @@ Enum:
     MaxValue: 4
     MinValue: 0
     NumValues: 5
-  Vocalerrorsounds: {}
-  VocalerrorsoundsMeta: {}
+  Vocalerrorsounds:
+    Abilitycooling: 50
+    Alreadyingroup: 20
+    Alreadyinguild: 21
+    Ammoonlyinbag: 28
+    Bagfull: 29
+    BoundNodrop: 4
+    Cantaffordbankslot: 22
+    CantattackNotarget: 38
+    CantattackNotstandingObsolete: 37
+    Cantattackrongdirection: 36
+    CantcastOutofrange: 46
+    Cantcreate: 18
+    Cantdrinkmore: 6
+    Canteatmore: 7
+    CanteatMoving: 24
+    Cantequip2Hequipped: 42
+    Cantequip2HNoskill: 43
+    Cantequip2HSkill: 41
+    Cantflyhere: 60
+    Cantinvite: 8
+    CantlearnLevel: 13
+    Cantloot: 17
+    CantlootDidntkill: 31
+    CantlootLocked: 33
+    CantlootNotstandingObsolete: 34
+    CantlootToofar: 35
+    CantlootWrongfacing: 32
+    Cantputbag: 26
+    Cantswap: 58
+    CanttaxiNomoney: 54
+    CanttradeSoulbound: 59
+    Cantuseitem: 51
+    Cantuselocked: 55
+    Cantusetoofar: 57
+    Chestinuse: 52
+    Declinegroup: 19
+    ExhaustedObsolete: 67
+    FoodcoolingObsolete: 53
+    Genericnotarget: 45
+    Guildpermissions: 62
+    Invaliditemtarget: 66
+    Invalidtarget: 11
+    Inventoryfull: 0
+    Inviteebusy: 9
+    Itemcooling: 5
+    Itemlocked: 61
+    Itemmaxcount: 30
+    Locked: 14
+    Mustequippitem: 49
+    Noenergy: 64
+    NoequipEver: 3
+    NoequipLevel: 2
+    Noequipslotavailable: 56
+    Noessence: 65
+    Nomana: 15
+    Norage: 63
+    Notabag: 25
+    Notenoughgold: 39
+    Notenoughmoney: 40
+    Notequippable: 44
+    Notwhiledead: 16
+    Outofammo: 1
+    Potioncooling: 47
+    Proficiencyneeded: 48
+    Spellcooling: 12
+    Targettoofar: 10
+    Toomanybankslots: 23
+    Wrongslot: 27
+  VocalerrorsoundsMeta:
+    MaxValue: 67
+    MinValue: 0
+    NumValues: 68
   VoiceChannelErrorReason:
     IsBattleNetChannel: 1
     Unknown: 0
