@@ -736,10 +736,10 @@ Font:
 FontInstance:
   fields:
     justifyh:
-      init: LEFT
+      init: CENTER
       type: JustifyHorizontal
     justifyv:
-      init: BOTTOM
+      init: MIDDLE
       type: JustifyVertical
   inherits: {}
   methods:
