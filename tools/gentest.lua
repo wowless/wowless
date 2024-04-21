@@ -168,6 +168,13 @@ local ptablemap = {
           table.insert(ft[gv.name].getters, { index = gk, method = mk })
         end
       end
+      -- TODO remove these super duper field hacks
+      ft.parent = nil
+      if k == 'EditBox' then
+        ft.shown.init = false
+      elseif k == 'Font' then
+        ft.name.init = 'WowlessFont1'
+      end
       t[k] = {
         fields = ft,
         frametype = not not frametypes[k],
