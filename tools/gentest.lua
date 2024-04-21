@@ -180,6 +180,8 @@ local ptablemap = {
         ft.shown.init = false
       elseif k == 'Font' then
         ft.name.init = 'WowlessFont1'
+      elseif k == 'Minimap' then
+        ft = {}
       end
       t[k] = {
         fields = ft,

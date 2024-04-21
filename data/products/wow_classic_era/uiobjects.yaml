@@ -563,7 +563,7 @@ EditBox:
       init: true
       type: boolean
     historyLines:
-      init: 10
+      init: 0
       type: number
     isAutoFocus:
       init: true
@@ -578,10 +578,10 @@ EditBox:
       init: false
       type: boolean
     maxBytes:
-      init: 200
+      init: 0
       type: number
     maxLetters:
-      init: 64
+      init: 0
       type: number
   inherits:
     FontInstance: {}
@@ -1276,7 +1276,7 @@ LayeredRegion:
 Line:
   fields:
     thickness:
-      init: 1
+      init: 4
       type: number
   inherits:
     TextureBase: {}
