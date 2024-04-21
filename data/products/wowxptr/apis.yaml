@@ -7658,6 +7658,14 @@ C_DeathInfo.UseSelfResurrectOption:
   - name: id
     type: number
   outputs: {}
+C_Debug.DashboardIsEnabled: {}
+C_Debug.FrameXMLDebug: {}
+C_Debug.GetAllPortLocsForMap: {}
+C_Debug.GetMapDebugObjects: {}
+C_Debug.PrintToDebugWindow: {}
+C_Debug.TeleportToMapDebugObject: {}
+C_Debug.TeleportToMapLocation: {}
+C_Debug.ViewInDebugWindow: {}
 C_EditMode.ConvertLayoutInfoToString:
   inputs:
   - name: layoutInfo
@@ -16878,6 +16886,7 @@ C_StoreSecure.GetCharactersForRealm:
     type: table
 C_StoreSecure.GetConfirmationInfo: {}
 C_StoreSecure.GetCurrencyID: {}
+C_StoreSecure.GetCurrencyInfo: {}
 C_StoreSecure.GetEligibleRacesForVASService: {}
 C_StoreSecure.GetEntryInfo: {}
 C_StoreSecure.GetFailureInfo: {}
@@ -22844,7 +22853,6 @@ ForceQuit:
 ForfeitDuel: {}
 format:
   alias: string.format
-FrameXML_Debug: {}
 frexp:
   alias: math.frexp
 GameMovieFinished:
