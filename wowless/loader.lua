@@ -104,7 +104,7 @@ local function loader(api, cfg)
     local color = api.env[name]
     if color then
       return color:GetRGBA()
-    elseif name == 'GREEN_FONT_COLOR' then -- issue #303
+    elseif name == 'GREEN_FONT_COLOR' or name == 'NORMAL_FONT_COLOR' then -- issue #303
       return 0, 0, 0, 1
     else
       error(('unknown color %q'):format(name))
