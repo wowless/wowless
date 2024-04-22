@@ -93,7 +93,7 @@ local rules = {
     command = 'build/cmake/sqlite $product',
   },
   downloadrelease = {
-    command = 'sh bin/downloadaddon.sh $owner $repo $tag $out',
+    command = 'sh bin/downloadaddon.sh $name $owner $repo $tag $out',
   },
   fetch = {
     command = 'build/cmake/fetch $product && touch $out',
@@ -124,7 +124,7 @@ local rules = {
     pool = 'run_pool',
   },
   runaddon = {
-    command = elune .. ' -p $product -e5 -a extracts/addons/$addon > $out',
+    command = elune .. ' -p $product -e5 -a extracts/addons/$addon/$addon > $out',
     pool = 'run_pool',
   },
   stamp = {
@@ -331,6 +331,7 @@ end
 for k, v in pairs(parseYaml('tools/addons.yaml')) do
   table.insert(builds, {
     args = {
+      name = k,
       owner = v.owner,
       repo = v.repo,
       tag = v.tag,

@@ -459,6 +459,9 @@ ColorSelect:
     Frame: {}
   methods:
     ClearColorWheelTexture: {}
+    GetColorAlpha: {}
+    GetColorAlphaTexture: {}
+    GetColorAlphaThumbTexture: {}
     GetColorHSV:
       outputs:
       - name: h
@@ -487,6 +490,9 @@ ColorSelect:
     GetColorWheelThumbTexture:
       getter:
       - name: colorWheelThumbTexture
+    SetColorAlpha: {}
+    SetColorAlphaTexture: {}
+    SetColorAlphaThumbTexture: {}
     SetColorHSV: {}
     SetColorRGB: {}
     SetColorValueTexture:
@@ -775,7 +781,13 @@ Font:
     GetAlpha: {}
     SetAlpha: {}
 FontInstance:
-  fields: {}
+  fields:
+    justifyh:
+      init: LEFT
+      type: JustifyHorizontal
+    justifyv:
+      init: BOTTOM
+      type: JustifyVertical
   inherits: {}
   methods:
     GetFont:
@@ -795,8 +807,12 @@ FontInstance:
         nilable: true
         type: FontInstance
     GetIndentedWordWrap: {}
-    GetJustifyH: {}
-    GetJustifyV: {}
+    GetJustifyH:
+      getter:
+      - name: justifyh
+    GetJustifyV:
+      getter:
+      - name: justifyv
     GetShadowColor:
       outputs:
       - type: number
@@ -816,8 +832,12 @@ FontInstance:
     SetFont: {}
     SetFontObject: {}
     SetIndentedWordWrap: {}
-    SetJustifyH: {}
-    SetJustifyV: {}
+    SetJustifyH:
+      setter:
+      - name: justifyh
+    SetJustifyV:
+      setter:
+      - name: justifyv
     SetShadowColor: {}
     SetShadowOffset: {}
     SetSpacing: {}
@@ -1045,6 +1065,7 @@ Frame:
     GetPropagateKeyboardInput:
       getter:
       - name: propagateKeyboardInput
+    GetRaisedFrameLevel: {}
     GetRegions:
       impl: Frame/GetRegions
     GetResizeBounds:
@@ -2281,3 +2302,12 @@ UnitPositionFrame:
     SetUnitColor: {}
     StartPlayerPing: {}
     StopPlayerPing: {}
+VertexColor:
+  fields: {}
+  inherits:
+    Animation: {}
+  methods:
+    GetEndColor: {}
+    GetStartColor: {}
+    SetEndColor: {}
+    SetStartColor: {}

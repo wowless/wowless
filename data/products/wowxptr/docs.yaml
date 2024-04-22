@@ -32,6 +32,7 @@ script_objects:
   SimpleAnimTextureCoordTranslationAPI: TextureCoordTranslation
   SimpleAnimTranslationAPI: Translation
   SimpleAnimTranslationLineAPI: LineTranslation
+  SimpleAnimVertexColorAPI: VertexColor
   SimpleBrowserAPI: Browser
   SimpleButtonAPI: Button
   SimpleCheckboxAPI: CheckButton
@@ -58,10 +59,19 @@ script_objects:
   SimpleStatusBarAPI: StatusBar
   SimpleTextureAPI: Texture
   SimpleTextureBaseAPI: TextureBase
+skip_apis:
+  HasKey: PlayerScriptDocumentation has extra methods
+  ShowCloak: PlayerScriptDocumentation has extra methods
+  ShowHelm: PlayerScriptDocumentation has extra methods
+  ShowingCloak: PlayerScriptDocumentation has extra methods
+  ShowingHelm: PlayerScriptDocumentation has extra methods
+  StartAttack: first argument should be nilable
 skip_docfiles:
+  ArenaTeamDocumentation: {}
   BarberShopInternalDocumentation: {}
   BaseDocumentation: {}
   ConfigurationWarningsDocumentation: {}
+  DebugToggleDocumentation: {}
   PingPinFrameAPIDocumentation: {}
   SimpleModelFFXAPIDocumentation: {}
 typedefs:
@@ -74,6 +84,7 @@ typedefs:
   ClubId: string
   ClubInvitationId: string
   ClubStreamId: string
+  ConnectionIptype: string
   CScriptObject: UIObject
   cstring: string
   FileAsset: string
@@ -91,6 +102,7 @@ typedefs:
   kstringLfgListSearch: string
   luaFunction: function
   luaIndex: number
+  LuaValueVariant: table
   ModelAsset: string
   ModelSceneFrame: ModelScene
   ModelSceneFrameActor: Actor

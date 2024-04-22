@@ -35,6 +35,15 @@ FrameStrata:
   MEDIUM: {}
   PARENT: {}
   TOOLTIP: {}
+JustifyHorizontal:
+  CENTER: {}
+  LEFT: {}
+  RIGHT: {}
+JustifyVertical:
+  BOTTOM: {}
+  CENTER: {}
+  MIDDLE: {}
+  TOP: {}
 LoopType:
   BOUNCE: {}
   NONE: {}

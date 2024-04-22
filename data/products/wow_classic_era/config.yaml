@@ -49,6 +49,8 @@ runner:
   skip_slashcmds:
     ACHIEVEMENTUI: {}
     CASTRANDOM: {}
+    GUILD_INVITE: {}
+    GUILD_UNINVITE: {}
     LOOT_MASTER: {}
     USERANDOM: {}
 runtime:

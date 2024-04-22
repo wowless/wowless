@@ -12,13 +12,13 @@ BtWLoadouts:
   - Mainline
   owner: breeni
   repo: btwloadouts
-  tag: v1.14.2
+  tag: v1.15.8
 Ferronnizer:
   flavors:
   - Vanilla
   owner: ferronn-dev
   repo: ferronnizer
-  tag: v453
+  tag: v469
 GSE:
   owner: timothyluke
   repo: gse-advanced-macro-compiler
@@ -36,7 +36,7 @@ Quartz:
 Questie:
   owner: questie
   repo: questie
-  tag: v8.2.1
+  tag: v9.4.11
 Talented:
   flavors:
   - Wrath

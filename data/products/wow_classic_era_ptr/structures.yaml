@@ -43,7 +43,7 @@ C_ActionBar.ActionUsableState:
       type: boolean
 C_AreaPoiInfo.AreaPOIInfo:
   fields:
-    addPaddingAboveWidgets:
+    addPaddingAboveTooltipWidgets:
       nilable: true
       type: boolean
     areaPoiID:
@@ -61,6 +61,9 @@ C_AreaPoiInfo.AreaPOIInfo:
       type: boolean
     highlightWorldQuestsOnHover:
       type: boolean
+    iconWidgetSet:
+      nilable: true
+      type: number
     isAlwaysOnFlightmap:
       type: boolean
     isPrimaryMapForPOI:
@@ -75,7 +78,7 @@ C_AreaPoiInfo.AreaPOIInfo:
     textureIndex:
       nilable: true
       type: number
-    widgetSetID:
+    tooltipWidgetSet:
       nilable: true
       type: number
 C_AzeriteEmpoweredItem.AzeriteEmpoweredItemPowerInfo:
@@ -1400,6 +1403,15 @@ C_GossipInfo.GossipQuestUIInfo:
       type: boolean
     title:
       type: string
+C_LFGInfo.LFGDungeonInfo:
+  fields:
+    iconID:
+      type: number
+    link:
+      nilable: true
+      type: string
+    name:
+      type: string
 C_LFGInfo.LFGLockInfo:
   fields:
     hideEntry:
@@ -1410,6 +1422,10 @@ C_LFGInfo.LFGLockInfo:
       type: number
 C_LFGList.BestDungeonScoreMapInfo:
   fields:
+    bestLevelIncrement:
+      type: number
+    bestRunDurationMs:
+      type: number
     bestRunLevel:
       type: number
     finishedSuccess:
@@ -1572,6 +1588,10 @@ C_LFGList.LfgSearchResultData:
       type: boolean
     isWarMode:
       type: boolean
+    leaderBestDungeonScoreInfo:
+      nilable: true
+      type:
+        structure: C_LFGList.BestDungeonScoreMapInfo
     leaderDungeonScoreInfo:
       nilable: true
       type:
@@ -2903,6 +2923,12 @@ ItemLocation:
       nilable: true
       type: number
   mixin: ItemLocationMixin
+LocaleInfo:
+  fields:
+    localeId:
+      type: number
+    localeName:
+      type: string
 PlayerInfoCharacterData:
   fields:
     alternateFormRaceData:

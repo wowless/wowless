@@ -554,9 +554,20 @@ DressUpModel:
   methods:
     Dress: {}
     GetAutoDress: {}
+    GetItemModifiedAppearanceID: {}
+    GetObeyHideInTransmogFlag: {}
     GetSheathed: {}
+    GetSpellItemEnchantmentID: {}
+    GetUseTransmogChoices: {}
+    GetUseTransmogSkin: {}
+    IsGeoReady: {}
+    IsSlotAllowed: {}
+    IsSlotVisible: {}
     SetAutoDress: {}
+    SetObeyHideInTransmogFlag: {}
     SetSheathed: {}
+    SetUseTransmogChoices: {}
+    SetUseTransmogSkin: {}
     TryOn: {}
     Undress: {}
     UndressSlot: {}
@@ -740,7 +751,13 @@ Font:
     GetAlpha: {}
     SetAlpha: {}
 FontInstance:
-  fields: {}
+  fields:
+    justifyh:
+      init: LEFT
+      type: JustifyHorizontal
+    justifyv:
+      init: BOTTOM
+      type: JustifyVertical
   inherits: {}
   methods:
     GetFont:
@@ -760,8 +777,12 @@ FontInstance:
         nilable: true
         type: FontInstance
     GetIndentedWordWrap: {}
-    GetJustifyH: {}
-    GetJustifyV: {}
+    GetJustifyH:
+      getter:
+      - name: justifyh
+    GetJustifyV:
+      getter:
+      - name: justifyv
     GetShadowColor:
       outputs:
       - type: number
@@ -781,8 +802,12 @@ FontInstance:
     SetFont: {}
     SetFontObject: {}
     SetIndentedWordWrap: {}
-    SetJustifyH: {}
-    SetJustifyV: {}
+    SetJustifyH:
+      setter:
+      - name: justifyh
+    SetJustifyV:
+      setter:
+      - name: justifyv
     SetShadowColor: {}
     SetShadowOffset: {}
     SetSpacing: {}
@@ -1215,6 +1240,7 @@ GameTooltip:
     SetQuestLogCurrency: {}
     SetQuestLogItem: {}
     SetQuestLogSpecialItem: {}
+    SetReforgeItem: {}
     SetSendMailItem: {}
     SetShapeshift: {}
     SetSocketedItem: {}
@@ -1230,6 +1256,7 @@ GameTooltip:
     SetTradeSkillItem: {}
     SetTradeTargetItem: {}
     SetTrainerService: {}
+    SetTransmogrifyItem: {}
     SetUnit: {}
     SetUnitAura: {}
     SetUnitBuff: {}

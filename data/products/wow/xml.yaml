@@ -377,9 +377,13 @@ Font:
     inherits:
       type: stringlist
     justifyh:
-      type: string
+      impl:
+        method: SetJustifyH
+      type: JustifyHorizontal
     justifyv:
-      type: string
+      impl:
+        method: SetJustifyV
+      type: JustifyVertical
     monochrome:
       type: boolean
     name:
@@ -409,9 +413,13 @@ FontString:
     font:
       type: string
     justifyh:
-      type: string
+      impl:
+        method: SetJustifyH
+      type: JustifyHorizontal
     justifyv:
-      type: string
+      impl:
+        method: SetJustifyV
+      type: JustifyVertical
     maxlines:
       type: number
     nonspacewrap:
