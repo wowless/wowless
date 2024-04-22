@@ -66,6 +66,7 @@ runner:
     EVENT: {}
     GUILD_INVITE: {}
     GUILD_UNINVITE: {}
+    PTRFEEDBACK: {}
     USERANDOM: {}
 runtime:
   warners:
