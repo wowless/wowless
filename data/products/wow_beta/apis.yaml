@@ -11715,13 +11715,6 @@ C_MajorFactions.GetCurrentRenownLevel:
   outputs:
   - name: level
     type: number
-C_MajorFactions.GetFeatureAbilities:
-  inputs: {}
-  outputs:
-  - name: featureAbilities
-    type:
-      arrayof:
-        structure: C_MajorFactions.MajorFactionFeatureAbilityInfo
 C_MajorFactions.GetMajorFactionData:
   inputs:
   - name: majorFactionID
@@ -11772,11 +11765,6 @@ C_MajorFactions.HasMaximumRenown:
   outputs:
   - name: hasMaxRenown
     type: boolean
-C_MajorFactions.IsPlayerInRenownCatchUpMode:
-  inputs: {}
-  outputs:
-  - name: isInCatchUpMode
-    type: boolean
 C_MajorFactions.IsWeeklyRenownCapped:
   inputs:
   - name: majorFactionID
@@ -11784,9 +11772,6 @@ C_MajorFactions.IsWeeklyRenownCapped:
   outputs:
   - name: isWeeklyCapped
     type: boolean
-C_MajorFactions.RequestCatchUpState:
-  inputs: {}
-  outputs: {}
 C_Map.CanSetUserWaypointOnMap:
   inputs:
   - name: uiMapID
@@ -16515,11 +16500,6 @@ C_Reputation.SetSelectedFaction:
   - name: factionSortIndex
     type: number
   outputs: {}
-C_Reputation.SetWatchedFaction:
-  inputs:
-  - name: factionID
-    type: number
-  outputs: {}
 C_Reputation.SetWatchedFactionByID:
   inputs:
   - name: factionID
@@ -17466,34 +17446,10 @@ C_SpellBook.GetCurrentLevelSpells:
   - name: spellIDs
     type:
       arrayof: number
-C_SpellBook.GetDeadlyDebuffInfo:
-  inputs:
-  - name: spellID
-    type: number
-  outputs:
-  - name: deadlyDebuffInfo
-    type:
-      structure: C_SpellBook.DeadlyDebuffInfo
 C_SpellBook.GetNumSpellBookSkillLines:
   inputs: {}
   outputs:
   - name: numSpellBookSkillLines
-    type: number
-C_SpellBook.GetOverrideSpell:
-  inputs:
-  - name: spellID
-    type: number
-  - default: 0
-    name: spec
-    type: number
-  - default: true
-    name: onlyKnown
-    type: boolean
-  - default: 0
-    name: ignoreOverrideSpellID
-    type: number
-  outputs:
-  - name: overrideSpellID
     type: number
 C_SpellBook.GetSkillLineIndexByID:
   inputs:
@@ -17628,24 +17584,6 @@ C_SpellBook.GetSpellBookSkillLineInfo:
   - name: skillLineInfo
     type:
       structure: C_SpellBook.SpellBookSkillLineInfo
-C_SpellBook.GetSpellInfo:
-  inputs:
-  - name: spellID
-    type: number
-  outputs:
-  - name: spellInfo
-    type:
-      structure: C_SpellBook.SpellInfo
-C_SpellBook.GetSpellLinkFromSpellID:
-  inputs:
-  - name: spellID
-    type: number
-  - name: glyphID
-    nilable: true
-    type: number
-  outputs:
-  - name: spellLink
-    type: string
 C_SpellBook.GetTrackedNameplateCooldownSpells:
   inputs: {}
   outputs:
@@ -17668,13 +17606,6 @@ C_SpellBook.IsSpellBookItemPassive:
       enum: SpellBookSpellBank
   outputs:
   - name: isPassive
-    type: boolean
-C_SpellBook.IsSpellDisabled:
-  inputs:
-  - name: spellID
-    type: number
-  outputs:
-  - name: disabled
     type: boolean
 C_SpellBook.PickupSpellBookItem:
   inputs:
@@ -20211,14 +20142,6 @@ C_Traits.GetStagedChangesCost:
     type:
       arrayof:
         structure: C_Traits.TraitCurrencyCost
-C_Traits.GetStagedPurchases:
-  inputs:
-  - name: configID
-    type: number
-  outputs:
-  - name: nodeIDsWithPurchases
-    type:
-      arrayof: number
 C_Traits.GetSubTreeInfo:
   inputs:
   - name: configID
@@ -21292,13 +21215,6 @@ C_TransmogSets.GetBaseSets:
     type:
       arrayof:
         structure: C_TransmogSets.TransmogSetInfo
-C_TransmogSets.GetBaseSetsCounts:
-  inputs: {}
-  outputs:
-  - name: numCollected
-    type: number
-  - name: numTotal
-    type: number
 C_TransmogSets.GetBaseSetsFilter:
   inputs:
   - name: index
@@ -23421,9 +23337,6 @@ ClickVoidStorageSlot: {}
 ClickVoidTransferDepositSlot: {}
 ClickVoidTransferWithdrawalSlot: {}
 ClickWorldMapActionButton: {}
-CloseBankFrame:
-  inputs: {}
-  outputs: {}
 CloseGuildBankFrame:
   inputs: {}
   outputs: {}
@@ -23442,9 +23355,6 @@ CloseMerchant:
   inputs: {}
   outputs: {}
 ClosePetition:
-  inputs: {}
-  outputs: {}
-ClosePetStables:
   inputs: {}
   outputs: {}
 CloseQuest:
@@ -23488,8 +23398,6 @@ CloseTrade:
 CloseTrainer:
   inputs: {}
   outputs: {}
-CollapseAllFactionHeaders: {}
-CollapseFactionHeader: {}
 CollapseGuildTradeSkillHeader: {}
 CollapseQuestHeader: {}
 CollapseWarGameHeader: {}
@@ -23758,7 +23666,6 @@ DestroyTotem:
 DetectWowMouse: {}
 difftime:
   stdlib: difftime
-DisableSpellAutocast: {}
 DismissCompanion: {}
 Dismount:
   inputs: {}
@@ -23783,12 +23690,6 @@ DoesCurrentLocaleSellExpansionLevels:
   outputs:
   - name: regionSellsExpansions
     type: boolean
-DoesSpellExist:
-  inputs:
-  - nilable: true
-    type: string
-  outputs:
-  - type: boolean
 DoesTemplateExist: {}
 DoMasterLootRoll: {}
 DoReadyCheck: {}
@@ -23856,7 +23757,6 @@ EjectPassengerFromSeat:
   - name: virtualSeatIndex
     type: number
   outputs: {}
-EnableSpellAutocast: {}
 EnumerateFrames:
   impl: EnumerateFrames
   inputs:
@@ -23884,12 +23784,9 @@ error:
 ExecuteVoidTransfer: {}
 exp:
   alias: math.exp
-ExpandAllFactionHeaders: {}
-ExpandFactionHeader: {}
 ExpandGuildTradeSkillHeader: {}
 ExpandQuestHeader: {}
 ExpandWarGameHeader: {}
-FactionToggleAtWar: {}
 fastrandom:
   stdlib: fastrandom
 FindBaseSpellByID: {}
@@ -24798,79 +24695,6 @@ GetExpertise:
 GetExtraBarIndex:
   outputs:
   - type: number
-GetFactionInfo:
-  inputs:
-  - name: factionIndex
-    type: number
-  outputs:
-  - name: name
-    type: string
-  - name: description
-    type: string
-  - name: standingID
-    type: number
-  - name: barMin
-    type: number
-  - name: barMax
-    type: number
-  - name: barValue
-    type: number
-  - name: atWarWith
-    type: boolean
-  - name: canToggleAtWar
-    type: boolean
-  - name: isHeader
-    type: boolean
-  - name: isCollapsed
-    type: boolean
-  - name: hasRep
-    type: boolean
-  - name: isWatched
-    type: boolean
-  - name: isChild
-    type: boolean
-  - name: factionID
-    type: number
-  - name: hasBonusRepGain
-    type: boolean
-  - name: canSetInteractive
-    type: boolean
-GetFactionInfoByID:
-  inputs:
-  - type: number
-  outputs:
-  - name: name
-    type: string
-  - name: description
-    type: string
-  - name: standingID
-    type: number
-  - name: barMin
-    type: number
-  - name: barMax
-    type: number
-  - name: barValue
-    type: number
-  - name: atWarWith
-    type: boolean
-  - name: canToggleAtWar
-    type: boolean
-  - name: isHeader
-    type: boolean
-  - name: isCollapsed
-    type: boolean
-  - name: hasRep
-    type: boolean
-  - name: isWatched
-    type: boolean
-  - name: isChild
-    type: boolean
-  - name: factionID
-    type: number
-  - name: hasBonusRepGain
-    type: boolean
-  - name: canSetInteractive
-    type: boolean
 GetFailedPVPTalentIDs: {}
 GetFailedTalentIDs: {}
 getfenv:
@@ -25097,23 +24921,7 @@ GetGuildEventInfo:
     type: number
   - name: hour
     type: number
-GetGuildExpirationTime: {}
 GetGuildFactionGroup: {}
-GetGuildFactionInfo:
-  inputs: {}
-  outputs:
-  - name: name
-    type: string
-  - name: description
-    type: string
-  - name: standingID
-    type: number
-  - name: barMin
-    type: number
-  - name: barMax
-    type: number
-  - name: barValue
-    type: number
 GetGuildInfo:
   inputs:
   - name: unit
@@ -26052,11 +25860,6 @@ GetMouseFoci:
   - name: region
     type:
       arrayof: table
-GetMouseFocus:
-  inputs: {}
-  outputs:
-  - name: region
-    type: table
 GetMovieDownloadProgress:
   inputs:
   - name: movieId
@@ -26216,10 +26019,6 @@ GetNumExpansions:
   outputs:
   - name: numExpansions
     type: number
-GetNumFactions:
-  outputs:
-  - name: numFactions
-    type: number
 GetNumFilteredAchievements: {}
 GetNumFlexRaidDungeons: {}
 GetNumFlyouts: {}
@@ -26378,9 +26177,6 @@ GetNumSpecializationsForClassID:
   outputs:
   - name: specCount
     type: number
-GetNumSpellTabs:
-  outputs:
-  - type: number
 GetNumSubgroupMembers:
   outputs:
   - type: number
@@ -26408,7 +26204,6 @@ GetNumVoidTransferWithdrawal:
   - name: numWithdrawals
     type: number
 GetNumWarGameTypes: {}
-GetNumWorldPVPAreas: {}
 GetObjectiveText: {}
 GetOptOutOfLoot: {}
 GetOSLocale:
@@ -27126,11 +26921,6 @@ GetSecondsUntilParentalControlsKick:
     type: number
 GetSelectedArtifactInfo: {}
 GetSelectedDisplayChannel: {}
-GetSelectedFaction:
-  inputs: {}
-  outputs:
-  - name: value
-    type: number
 GetSelectedWarGameType: {}
 GetSendMailCOD: {}
 GetSendMailItem: {}
@@ -27354,18 +27144,6 @@ GetSpeed:
   outputs:
   - name: result
     type: number
-GetSpellAutocast:
-  inputs:
-  - name: slot
-    type: number
-  - name: bookType
-    type: string
-  outputs:
-  - name: autoCastAllowed
-    type: boolean
-  - name: autoCastEnabled
-    type: boolean
-GetSpellAvailableLevel: {}
 GetSpellBaseCooldown: {}
 GetSpellBonusDamage:
   inputs:
@@ -27380,7 +27158,6 @@ GetSpellBonusHealing:
   outputs:
   - name: result
     type: number
-GetSpellBookItemInfo: {}
 GetSpellBookItemName:
   inputs:
   - name: slot
@@ -27394,24 +27171,10 @@ GetSpellBookItemName:
     type: string
   - name: spellID
     type: number
-GetSpellBookItemTexture:
-  outputs:
-  - name: fileID
-    type: number
 GetSpellCharges: {}
 GetSpellConfirmationPromptsInfo:
   outputs:
   - type: table
-GetSpellCooldown:
-  outputs:
-  - name: start
-    type: number
-  - name: duration
-    type: number
-  - name: enable
-    type: boolean
-  - name: modRate
-    type: number
 GetSpellCount: {}
 GetSpellCritChance:
   inputs: {}
@@ -27429,25 +27192,6 @@ GetSpellHitModifier:
   outputs:
   - name: result
     type: number
-GetSpellInfo:
-  outputs:
-  - name: name
-    type: string
-  - name: rank
-    type: nil
-  - name: icon
-    type: number
-  - name: castTime
-    type: number
-  - name: minRange
-    type: number
-  - name: maxRange
-    type: number
-  - name: spellID
-    type: number
-GetSpellLevelLearned: {}
-GetSpellLink: {}
-GetSpellLossOfControlCooldown: {}
 GetSpellPenetration:
   inputs: {}
   outputs:
@@ -27464,51 +27208,10 @@ GetSpellSubtext:
     type: number
   outputs:
   - type: nil
-GetSpellTabInfo:
-  inputs:
-  - name: tabIndex
-    type: number
-  outputs:
-  - name: name
-    type: string
-  - name: texture
-    type: number
-  - name: offset
-    type: number
-  - name: numSlots
-    type: number
-  - name: isGuild
-    type: boolean
-  - name: offSpecID
-    type: string
-  - name: shouldHide
-    type: boolean
-  - name: specID
-    type: number
 GetSpellTexture:
   outputs:
   - name: icon
     type: number
-GetSpellTradeSkillLink: {}
-GetStablePetFoodTypes:
-  inputs:
-  - name: index
-    type: number
-GetStablePetInfo:
-  inputs:
-  - name: index
-    type: number
-  outputs:
-  - name: petIcon
-    type: string
-  - name: petName
-    type: string
-  - name: petLevel
-    type: number
-  - name: petType
-    type: string
-  - name: petTalents
-    type: string
 GetStatistic: {}
 GetStatisticsCategoryList: {}
 GetSturdiness:
@@ -28055,21 +27758,11 @@ GetVoidUnlockCost:
     type: number
 GetWarGameQueueStatus: {}
 GetWarGameTypeInfo: {}
-GetWatchedFactionInfo:
-  inputs: {}
-  outputs:
-  - type: string
-  - type: number
-  - type: number
-  - type: number
-  - type: number
-  - type: number
 GetWeaponEnchantInfo: {}
 GetWebTicket: {}
 GetWorldElapsedTime: {}
 GetWorldElapsedTimers: {}
 GetWorldMapActionButtonSpellInfo: {}
-GetWorldPVPAreaInfo: {}
 GetWorldPVPQueueStatus: {}
 GetXPExhaustion:
   inputs: {}
@@ -28192,7 +27885,6 @@ HasNoReleaseAura:
     type: boolean
 HasOverrideActionBar: {}
 HasPendingGlyphCast: {}
-HasPetSpells: {}
 HasPetUI: {}
 HasSendMailItem:
   inputs:
@@ -28315,7 +28007,6 @@ IsArtifactRelicItem:
   outputs:
   - name: value
     type: boolean
-IsAtStableMaster: {}
 IsAttackAction:
   inputs:
   - name: action
@@ -28422,7 +28113,6 @@ IsExpansionTrial:
   outputs:
   - name: isExpansionTrialAccount
     type: boolean
-IsFactionInactive: {}
 IsFalling:
   inputs:
   - name: unit
@@ -28660,10 +28350,6 @@ IsOutOfBounds:
     type: boolean
 IsPartyLFG: {}
 IsPartyWorldPVP: {}
-IsPassiveSpell:
-  outputs:
-  - name: isPassive
-    type: boolean
 IsPendingGlyphRemoval: {}
 IsPetActive: {}
 IsPetAttackAction:
@@ -29170,7 +28856,6 @@ pcall:
   stdlib: pcall
 pcallwithenv:
   stdlib: pcallwithenv
-PetAbandon: {}
 PetAggressiveMode: {}
 PetAssistMode: {}
 PetAttack:
@@ -29181,7 +28866,6 @@ PetAttack:
   outputs: {}
 PetCanBeAbandoned: {}
 PetCanBeDismissed: {}
-PetCanBeRenamed: {}
 PetDefensiveAssistMode: {}
 PetDefensiveMode: {}
 PetDismiss: {}
@@ -29190,7 +28874,6 @@ PetHasActionBar: {}
 PetHasSpellbook: {}
 PetMoveTo: {}
 PetPassiveMode: {}
-PetRename: {}
 PetStopAttack: {}
 PetUsesPetFrame: {}
 PetWait: {}
@@ -29212,9 +28895,6 @@ PickupPlayerMoney:
     type: number
   outputs: {}
 PickupPvpTalent: {}
-PickupSpell: {}
-PickupSpellBookItem: {}
-PickupStablePet: {}
 PickupTalent: {}
 PickupTradeMoney: {}
 PitchDownStart:
@@ -29471,12 +29151,6 @@ ReturnInboxItem: {}
 RollOnLoot: {}
 RunBinding: {}
 RunMacro: {}
-RunMacroText:
-  impl: RunMacroText
-  inputs:
-  - name: macroText
-    type: string
-  outputs: {}
 RunScript:
   impl: RunScript
   inputs:
@@ -29657,8 +29331,6 @@ SetEuropeanNumbers:
     type: boolean
   outputs: {}
 SetEveryoneIsAssistant: {}
-SetFactionActive: {}
-SetFactionInactive: {}
 setfenv:
   stdlib: setfenv
 SetFocusedAchievement: {}
@@ -29729,8 +29401,6 @@ SetPartyAssignment:
   - name: unit
     type: unit
   outputs: {}
-SetPetSlot: {}
-SetPetStablePaperdoll: {}
 SetPOIIconOverlapDistance: {}
 SetPOIIconOverlapPushDistance: {}
 SetPortraitTexture:
@@ -29779,7 +29449,6 @@ SetRaidTargetProtected: {}
 SetSavedInstanceExtend: {}
 SetSelectedArtifact: {}
 SetSelectedDisplayChannel: {}
-SetSelectedFaction: {}
 SetSelectedScreenResolutionIndex: {}
 SetSelectedWarGameType: {}
 SetSendMailCOD: {}
@@ -29839,7 +29508,6 @@ SetView:
   - name: view
     type: number
   outputs: {}
-SetWatchedFactionIndex: {}
 ShouldShowIslandsWeeklyPOI:
   inputs: {}
   outputs:
@@ -30236,7 +29904,6 @@ ToggleSelfHighlight:
 ToggleSheath:
   inputs: {}
   outputs: {}
-ToggleSpellAutocast: {}
 ToggleWindowed:
   inputs: {}
   outputs: {}

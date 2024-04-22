@@ -3595,12 +3595,6 @@ C_MajorFactions.MajorFactionData:
     unlockDescription:
       nilable: true
       type: string
-C_MajorFactions.MajorFactionFeatureAbilityInfo:
-  fields:
-    featureAbilityType:
-      type: number
-    uiOrder:
-      type: number
 C_MajorFactions.MajorFactionRenownLevelInfo:
   fields:
     factionID:
@@ -5513,21 +5507,6 @@ C_Spell.SpellInfo:
       type: number
     spellID:
       type: number
-C_SpellBook.DeadlyDebuffInfo:
-  fields:
-    criticalStacks:
-      nilable: true
-      type: number
-    criticalTimeRemainingMs:
-      nilable: true
-      type: number
-    priority:
-      type: number
-    soundKitID:
-      nilable: true
-      type: number
-    warningText:
-      type: string
 C_SpellBook.SpellBookItemInfo:
   fields:
     actionID:
@@ -5565,20 +5544,6 @@ C_SpellBook.SpellBookSkillLineInfo:
       type: boolean
     specID:
       nilable: true
-      type: number
-C_SpellBook.SpellInfo:
-  fields:
-    castTime:
-      type: number
-    iconID:
-      type: number
-    maxRange:
-      type: number
-    minRange:
-      type: number
-    name:
-      type: string
-    spellID:
       type: number
 C_SplashScreen.SplashScreenInfo:
   fields:
