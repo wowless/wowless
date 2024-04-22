@@ -104,7 +104,7 @@ local function loader(api, cfg)
     local color = api.env[name]
     if color then
       return color:GetRGBA()
-    elseif name == 'GREEN_FONT_COLOR' then -- issue #303
+    elseif name == 'GREEN_FONT_COLOR' or name == 'NORMAL_FONT_COLOR' then -- issue #303
       return 0, 0, 0, 1
     else
       error(('unknown color %q'):format(name))
@@ -654,6 +654,8 @@ local function loader(api, cfg)
       table.insert(t, '_' .. alt)
       table.insert(t, '-' .. alt)
     end
+    table.insert(t, '_Standard')
+    table.insert(t, '-Standard')
     table.insert(t, '')
     return t
   end)()
@@ -793,7 +795,9 @@ local function loader(api, cfg)
 
   local function isLoadable(toc)
     local a = datalua.cvars.agentuid.value
-    return toc.attrs.OnlyBetaAndPTR ~= '1' or a == 'wow_ptr' or a == 'wow_beta'
+    local betaptr = toc.attrs.OnlyBetaAndPTR ~= '1' or a == 'wow_ptr' or a == 'wow_beta'
+    local gamemode = toc.attrs.AllowLoadGameType ~= 'wowlabs'
+    return betaptr and gamemode
   end
 
   local function loadFrameXml()
@@ -810,17 +814,18 @@ local function loader(api, cfg)
       loadFile(path.join(rootDir, flavors[build.flavor].dir, 'FrameXML', 'Bindings.xml'))
     end
     local blizzardAddons = {}
-    for name, toc in pairs(addonData) do
-      if type(name) == 'string' and toc.fdid and toc.attrs.LoadOnDemand ~= '1' and isLoadable(toc) then
-        table.insert(blizzardAddons, name)
+    for _, toc in ipairs(addonData) do
+      if toc.fdid and toc.attrs.LoadOnDemand ~= '1' and isLoadable(toc) then
+        table.insert(blizzardAddons, toc.name:lower())
       end
     end
-    table.sort(blizzardAddons, function(a, b)
-      return addonData[a].fdid < addonData[b].fdid
-    end)
     for _, name in ipairs(blizzardAddons) do
-      local toc = addonData[name]
-      if toc.attrs.LoadFirst == '1' or toc.attrs.GuardedAddOn == '1' then
+      if addonData[name].attrs.LoadFirst == '1' then
+        loadAddon(name)
+      end
+    end
+    for _, name in ipairs(blizzardAddons) do
+      if addonData[name].attrs.GuardedAddOn == '1' then
         loadAddon(name)
       end
     end
