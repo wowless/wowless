@@ -810,17 +810,18 @@ local function loader(api, cfg)
       loadFile(path.join(rootDir, flavors[build.flavor].dir, 'FrameXML', 'Bindings.xml'))
     end
     local blizzardAddons = {}
-    for name, toc in pairs(addonData) do
-      if type(name) == 'string' and toc.fdid and toc.attrs.LoadOnDemand ~= '1' and isLoadable(toc) then
-        table.insert(blizzardAddons, name)
+    for _, toc in ipairs(addonData) do
+      if toc.fdid and toc.attrs.LoadOnDemand ~= '1' and isLoadable(toc) then
+        table.insert(blizzardAddons, toc.name:lower())
       end
     end
-    table.sort(blizzardAddons, function(a, b)
-      return addonData[a].fdid < addonData[b].fdid
-    end)
     for _, name in ipairs(blizzardAddons) do
-      local toc = addonData[name]
-      if toc.attrs.LoadFirst == '1' or toc.attrs.GuardedAddOn == '1' then
+      if addonData[name].attrs.LoadFirst == '1' then
+        loadAddon(name)
+      end
+    end
+    for _, name in ipairs(blizzardAddons) do
+      if addonData[name].attrs.GuardedAddOn == '1' then
         loadAddon(name)
       end
     end
