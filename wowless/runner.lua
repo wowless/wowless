@@ -90,6 +90,7 @@ local function run(cfg)
       require('pl.file').write(fn, require('wowapi.yaml').pprint(data))
     end
     doit('frame0')
+    doit('frame1')
     if api.env.ToggleTalentFrame then
       api.CallSandbox(api.env.ToggleTalentFrame)
       doit('frame1')
