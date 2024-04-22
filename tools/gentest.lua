@@ -182,6 +182,8 @@ local ptablemap = {
       ft.height = nil
       ft.left = nil
       ft.parent = nil
+      ft.pushedTextOffsetX = nil
+      ft.pushedTextOffsetY = nil
       ft.top = nil
       ft.right = nil
       ft.width = nil
@@ -191,6 +193,9 @@ local ptablemap = {
         ft.name.init = 'WowlessFont1'
       elseif k == 'Minimap' then
         ft = {}
+      elseif k == 'SimpleHTML' then
+        ft.justifyh = nil
+        ft.justifyv = nil
       end
       t[k] = {
         fields = ft,

@@ -166,6 +166,11 @@ AnimationGroup:
     SetToFinalAlpha: {}
     Stop: {}
 Browser:
+  fieldinitoverrides:
+    mouseClickEnabled: true
+    mouseMotionEnabled: true
+    mouseWheelEnabled: true
+    resizable: true
   fields: {}
   inherits:
     Frame: {}
@@ -184,6 +189,9 @@ Browser:
     SetFocus: {}
     SetZoom: {}
 Button:
+  fieldinitoverrides:
+    mouseClickEnabled: true
+    mouseMotionEnabled: true
   fields:
     beingClicked:
       init: false
@@ -373,6 +381,11 @@ CheckButton:
       setter:
       - name: disabledCheckedTexture
 Checkout:
+  fieldinitoverrides:
+    mouseClickEnabled: true
+    mouseMotionEnabled: true
+    mouseWheelEnabled: true
+    resizable: true
   fields: {}
   inherits:
     Frame: {}
@@ -407,6 +420,9 @@ CinematicModel:
     StopPan: {}
     UnequipItems: {}
 ColorSelect:
+  fieldinitoverrides:
+    mouseClickEnabled: true
+    mouseMotionEnabled: true
   fields:
     colorValueTexture:
       nilable: true
@@ -557,6 +573,8 @@ DressUpModel:
 EditBox:
   fieldinitoverrides:
     justifyh: LEFT
+    mouseClickEnabled: true
+    mouseMotionEnabled: true
   fields:
     editboxText:
       init: ''
@@ -1646,10 +1664,10 @@ Region:
       init: 0
       type: number
     mouseClickEnabled:
-      init: true
+      init: false
       type: boolean
     mouseMotionEnabled:
-      init: true
+      init: false
       type: boolean
     mouseWheelEnabled:
       init: false
@@ -1917,6 +1935,8 @@ ScrollFrame:
     SetVerticalScroll: {}
     UpdateScrollChildRect: {}
 SimpleHTML:
+  fieldinitoverrides:
+    hyperlinksEnabled: true
   fields: {}
   inherits:
     FontInstance: {}
@@ -1930,6 +1950,9 @@ SimpleHTML:
     SetHyperlinkFormat: {}
     SetText: {}
 Slider:
+  fieldinitoverrides:
+    mouseClickEnabled: true
+    mouseMotionEnabled: true
   fields:
     enabled:
       init: true
