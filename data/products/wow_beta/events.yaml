@@ -1,4 +1,6 @@
 ---
+ACCOUNT_MONEY:
+  payload: {}
 ACHIEVEMENT_EARNED:
   payload:
   - name: achievementID
@@ -467,6 +469,16 @@ BANK_BAG_SLOT_FLAGS_UPDATED:
   payload:
   - name: slot
     type: number
+BANK_TAB_SETTINGS_UPDATED:
+  payload:
+  - name: bankType
+    type:
+      enum: BankType
+BANK_TABS_CHANGED:
+  payload:
+  - name: bankType
+    type:
+      enum: BankType
 BANKFRAME_CLOSED:
   payload: {}
 BANKFRAME_OPENED:
@@ -753,6 +765,10 @@ CANCEL_LOOT_ROLL:
   payload:
   - name: rollID
     type: number
+CANCEL_PLAYER_COUNTDOWN:
+  payload:
+  - name: initiatedBy
+    type: string
 CANCEL_SUMMON:
   payload: {}
 CAPTUREFRAMES_FAILED:
@@ -3706,6 +3722,8 @@ CONTRIBUTION_COLLECTOR_UPDATE_SINGLE:
   payload:
   - name: contributionID
     type: number
+CONVERT_TO_BIND_TO_ACCOUNT_CONFIRM:
+  payload: {}
 CONVERT_TO_RAID_CONFIRMATION:
   payload: {}
 CORPSE_IN_INSTANCE:
@@ -3929,6 +3947,10 @@ DYNAMIC_BUNDLE_PRICE_UPDATED:
   payload: {}
 DYNAMIC_GOSSIP_POI_UPDATED:
   payload: {}
+ECLIPSE_DIRECTION_CHANGE:
+  payload:
+  - name: direction
+    type: string
 EDIT_MODE_LAYOUTS_UPDATED:
   payload:
   - name: layoutInfo
@@ -4544,6 +4566,10 @@ GUILDTABARD_UPDATE:
   payload: {}
 GX_RESTARTED:
   payload: {}
+HARDCORE_DEATHS:
+  payload:
+  - name: memberName
+    type: string
 HEARTHSTONE_BOUND:
   payload: {}
 HEIRLOOM_UPGRADE_TARGETING_CHANGED:
@@ -4576,6 +4602,10 @@ HONOR_XP_UPDATE:
 IGNORELIST_UPDATE:
   payload: {}
 IGR_BILLING_NAG_DIALOG:
+  payload: {}
+IMMERSIVE_INTERACTION_BEGIN:
+  payload: {}
+IMMERSIVE_INTERACTION_END:
   payload: {}
 INCOMING_RESURRECT_CHANGED:
   payload:
@@ -4793,6 +4823,14 @@ KNOWN_TITLES_UPDATE:
     type: unit
 LANGUAGE_LIST_CHANGED:
   payload: {}
+LEARNED_SPELL_IN_SKILL_LINE:
+  payload:
+  - name: spellID
+    type: number
+  - name: skillLineIndex
+    type: number
+  - name: isGuildPerkSpell
+    type: boolean
 LEARNED_SPELL_IN_TAB:
   payload:
   - name: spellID
@@ -5362,6 +5400,12 @@ PENDING_AZERITE_ESSENCE_CHANGED:
   - name: essenceID
     nilable: true
     type: number
+PERKS_ACTIVITIES_TRACKED_LIST_CHANGED:
+  payload:
+  - name: perksActivityID
+    type: number
+  - name: added
+    type: boolean
 PERKS_ACTIVITIES_TRACKED_UPDATED:
   payload: {}
 PERKS_ACTIVITIES_UPDATED:
@@ -5566,6 +5610,9 @@ PET_FORCE_NAME_DECLENSION:
   payload:
   - name: name
     type: string
+  - name: petNumber
+    nilable: true
+    type: number
   - name: declinedName1
     nilable: true
     type: string
@@ -5581,6 +5628,8 @@ PET_FORCE_NAME_DECLENSION:
   - name: declinedName5
     nilable: true
     type: string
+PET_INFO_UPDATE:
+  payload: {}
 PET_JOURNAL_AUTO_SLOTTED_PET:
   payload:
   - name: slotIndex
@@ -5617,6 +5666,8 @@ PET_SPELL_POWER_UPDATE:
   payload: {}
 PET_STABLE_CLOSED:
   payload: {}
+PET_STABLE_FAVORITES_UPDATED:
+  payload: {}
 PET_STABLE_SHOW:
   payload: {}
 PET_STABLE_UPDATE:
@@ -5638,6 +5689,10 @@ PING_SYSTEM_ERROR:
 PLAY_MOVIE:
   payload:
   - name: movieID
+    type: number
+PLAYER_ACCOUNT_BANK_TAB_SLOTS_CHANGED:
+  payload:
+  - name: slot
     type: number
 PLAYER_ALIVE:
   payload: {}
@@ -6313,6 +6368,14 @@ SCENARIO_UPDATE:
   - name: newStep
     nilable: true
     type: boolean
+SCRAPPING_MACHINE_ITEM_ADDED:
+  payload:
+  - name: index
+    type: number
+SCRAPPING_MACHINE_ITEM_REMOVED:
+  payload:
+  - name: index
+    type: number
 SCRAPPING_MACHINE_ITEM_REMOVED_OR_CANCELLED:
   payload:
   - name: index
@@ -6703,6 +6766,14 @@ START_LOOT_ROLL:
   - name: lootHandle
     nilable: true
     type: number
+START_PLAYER_COUNTDOWN:
+  payload:
+  - name: initiatedBy
+    type: string
+  - name: timeRemaining
+    type: number
+  - name: totalTime
+    type: number
 START_TIMER:
   payload:
   - name: timerType
@@ -6796,6 +6867,8 @@ TALKINGHEAD_CLOSE:
 TALKINGHEAD_REQUESTED:
   payload: {}
 TASK_PROGRESS_UPDATE:
+  payload: {}
+TAXI_NODE_STATUS_CHANGED:
   payload: {}
 TAXIMAP_CLOSED:
   payload: {}
@@ -6984,6 +7057,8 @@ TRADE_SKILL_FAVORITES_CHANGED:
   payload:
   - name: isFavorite
     type: boolean
+  - name: recipeSpellID
+    type: number
 TRADE_SKILL_ITEM_CRAFTED_RESULT:
   payload:
   - name: data
@@ -7048,6 +7123,10 @@ TRAIT_NODE_CHANGED_PARTIAL:
 TRAIT_NODE_ENTRY_UPDATED:
   payload:
   - name: nodeEntryID
+    type: number
+TRAIT_SUB_TREE_CHANGED:
+  payload:
+  - name: subTreeID
     type: number
 TRAIT_SYSTEM_INTERACTION_STARTED:
   payload:

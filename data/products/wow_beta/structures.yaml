@@ -48,6 +48,8 @@ AppearanceSourceInfo:
     isHideVisual:
       nilable: true
       type: boolean
+    isValidSourceForPlayer:
+      type: boolean
     itemID:
       type: number
     itemModID:
@@ -58,6 +60,8 @@ AppearanceSourceInfo:
     name:
       nilable: true
       type: string
+    playerCanCollect:
+      type: boolean
     quality:
       nilable: true
       type: number
@@ -589,6 +593,20 @@ C_AzeriteItem.UnlockedAzeriteEmpoweredItems:
     unlockedItem:
       type:
         structure: ItemLocation
+C_Bank.BankTabData:
+  fields:
+    bankType:
+      type:
+        enum: BankType
+    depositFlags:
+      type:
+        enum: BagSlotFlags
+    icon:
+      type: number
+    ID:
+      type: number
+    name:
+      type: string
 C_BattleNet.BNetAccountInfo:
   fields:
     accountName:
@@ -678,6 +696,9 @@ C_BattleNet.BNetGameAccountInfo:
     richPresence:
       nilable: true
       type: string
+    timerunningSeasonID:
+      nilable: true
+      type: number
     wowProjectID:
       nilable: true
       type: number
@@ -1163,6 +1184,9 @@ C_Club.ClubMemberInfo:
       nilable: true
       type:
         enum: ClubRoleIdentifier
+    timerunningSeasonID:
+      nilable: true
+      type: number
     zone:
       nilable: true
       type: string
@@ -1898,6 +1922,8 @@ C_CurrencyInfo.CurrencyInfo:
   fields:
     canEarnPerWeek:
       type: boolean
+    currencyListDepth:
+      type: number
     description:
       type: string
     discovered:
@@ -2851,6 +2877,9 @@ C_GossipInfo.GossipOptionRewardInfo:
         enum: GossipOptionRewardType
 C_GossipInfo.GossipOptionUIInfo:
   fields:
+    failureDescription:
+      nilable: true
+      type: string
     flags:
       type: number
     gossipOptionID:
@@ -2877,6 +2906,12 @@ C_GossipInfo.GossipOptionUIInfo:
     status:
       type:
         enum: GossipOptionStatus
+C_GossipInfo.GossipOptionUIWidgetSetAndType:
+  fields:
+    uiWidgetSetID:
+      type: number
+    widgetType:
+      type: number
 C_GossipInfo.GossipPoiInfo:
   fields:
     inBattleMap:
@@ -2901,6 +2936,8 @@ C_GossipInfo.GossipQuestUIInfo:
     isImportant:
       type: boolean
     isLegendary:
+      type: boolean
+    isMeta:
       type: boolean
     isTrivial:
       type: boolean
@@ -3138,8 +3175,50 @@ C_LFGInfo.LFGLockInfo:
       type: number
     reason:
       type: number
+C_LFGList.AdvancedFilterOptions:
+  fields:
+    activities:
+      type:
+        arrayof: number
+    difficultyHeroic:
+      default: false
+      type: boolean
+    difficultyMythic:
+      default: false
+      type: boolean
+    difficultyMythicPlus:
+      default: false
+      type: boolean
+    difficultyNormal:
+      default: false
+      type: boolean
+    hasHealer:
+      default: false
+      type: boolean
+    hasTank:
+      default: false
+      type: boolean
+    minimumRating:
+      default: 0
+      type: number
+    needsDamage:
+      default: false
+      type: boolean
+    needsHealer:
+      default: false
+      type: boolean
+    needsMyClass:
+      default: false
+      type: boolean
+    needsTank:
+      default: false
+      type: boolean
 C_LFGList.BestDungeonScoreMapInfo:
   fields:
+    bestLevelIncrement:
+      type: number
+    bestRunDurationMs:
+      type: number
     bestRunLevel:
       type: number
     finishedSuccess:
@@ -3167,9 +3246,13 @@ C_LFGList.GroupFinderActivityInfo:
       type: number
     isCurrentRaidActivity:
       type: boolean
+    isHeroicActivity:
+      type: boolean
     isMythicActivity:
       type: boolean
     isMythicPlusActivity:
+      type: boolean
+    isNormalActivity:
       type: boolean
     isPvpActivity:
       type: boolean
@@ -3277,6 +3360,10 @@ C_LFGList.LfgSearchResultData:
       type: boolean
     isWarMode:
       type: boolean
+    leaderBestDungeonScoreInfo:
+      nilable: true
+      type:
+        structure: C_LFGList.BestDungeonScoreMapInfo
     leaderDungeonScoreInfo:
       nilable: true
       type:
@@ -3534,6 +3621,8 @@ C_MajorFactions.MajorFactionRenownRewardInfo:
     icon:
       nilable: true
       type: number
+    isAccountUnlock:
+      type: boolean
     itemID:
       nilable: true
       type: number
@@ -3848,6 +3937,9 @@ C_PartyPose.PartyPoseInfo:
     extraButtonText:
       nilable: true
       type: string
+    flags:
+      type:
+        enum: PartyPoseFlags
     mapID:
       type: number
     partyPoseID:
@@ -4017,6 +4109,8 @@ C_PerksProgram.PerksVendorItemInfo:
   fields:
     description:
       type: string
+    doesNotExpire:
+      type: boolean
     iconTexture:
       type: string
     isPurchasePending:
@@ -4027,6 +4121,8 @@ C_PerksProgram.PerksVendorItemInfo:
       type: number
     mountID:
       type: number
+    mountTypeName:
+      type: string
     name:
       type: string
     perksVendorCategoryID:
@@ -4653,6 +4749,8 @@ C_QuestLine.QuestLineInfo:
     floorLocation:
       type:
         enum: QuestLineFloorLocation
+    isAccountCompleted:
+      type: boolean
     isCampaign:
       type: boolean
     isDaily:
@@ -4687,6 +4785,8 @@ C_QuestLog.QuestInfo:
       type:
         enum: QuestFrequency
     hasLocalPOI:
+      type: boolean
+    isAbandonOnDisable:
       type: boolean
     isAutoComplete:
       type: boolean
@@ -4987,10 +5087,46 @@ C_RecruitAFriend.RafVersionInfo:
       type:
         arrayof:
           structure: C_RecruitAFriend.RafReward
+C_Reputation.FactionData:
+  fields:
+    atWarWith:
+      type: boolean
+    canSetInactive:
+      type: boolean
+    canToggleAtWar:
+      type: boolean
+    currentReactionThreshold:
+      type: number
+    currentStanding:
+      type: number
+    description:
+      type: string
+    factionID:
+      type: number
+    hasBonusRepGain:
+      type: boolean
+    isChild:
+      type: boolean
+    isCollapsed:
+      type: boolean
+    isHeader:
+      type: boolean
+    isHeaderWithRep:
+      type: boolean
+    isWatched:
+      type: boolean
+    name:
+      type: string
+    nextReactionThreshold:
+      type: number
+    reaction:
+      type: number
 C_ResearchInfo.DigSiteMapInfo:
   fields:
     name:
       type: string
+    poiBlobID:
+      type: number
     position:
       type:
         structure: vector2
@@ -5346,6 +5482,37 @@ C_SpecializationInfo.PvpTalentSlotInfo:
     selectedTalentID:
       nilable: true
       type: number
+C_Spell.DeadlyDebuffInfo:
+  fields:
+    criticalStacks:
+      nilable: true
+      type: number
+    criticalTimeRemainingMs:
+      nilable: true
+      type: number
+    priority:
+      type: number
+    soundKitID:
+      nilable: true
+      type: number
+    warningText:
+      type: string
+C_Spell.SpellInfo:
+  fields:
+    castTime:
+      type: number
+    iconID:
+      type: number
+    maxRange:
+      type: number
+    minRange:
+      type: number
+    name:
+      type: string
+    originalIconID:
+      type: number
+    spellID:
+      type: number
 C_SpellBook.DeadlyDebuffInfo:
   fields:
     criticalStacks:
@@ -5361,6 +5528,44 @@ C_SpellBook.DeadlyDebuffInfo:
       type: number
     warningText:
       type: string
+C_SpellBook.SpellBookItemInfo:
+  fields:
+    actionID:
+      type: number
+    iconID:
+      type: number
+    isPassive:
+      type: boolean
+    itemType:
+      type:
+        enum: SpellBookItemType
+    name:
+      type: string
+    spellID:
+      nilable: true
+      type: number
+    subName:
+      type: string
+C_SpellBook.SpellBookSkillLineInfo:
+  fields:
+    iconID:
+      type: number
+    isGuild:
+      type: boolean
+    itemIndexOffset:
+      type: number
+    name:
+      type: string
+    numSpellBookItems:
+      type: number
+    offSpecID:
+      nilable: true
+      type: number
+    shouldHide:
+      type: boolean
+    specID:
+      nilable: true
+      type: number
 C_SpellBook.SpellInfo:
   fields:
     castTime:
@@ -5384,6 +5589,8 @@ C_SplashScreen.SplashScreenInfo:
       type: string
     bottomLeftFeatureTitle:
       type: string
+    gameMenuRequest:
+      type: boolean
     header:
       type: string
     hordeQuestID:
@@ -5410,6 +5617,38 @@ C_SplashScreen.SplashScreenInfo:
       type: string
     topLeftFeatureTitle:
       type: string
+C_StableInfo.PetInfo:
+  fields:
+    abilities:
+      type:
+        arrayof: number
+    creatureID:
+      type: number
+    displayID:
+      type: number
+    familyName:
+      type: string
+    icon:
+      type: number
+    isExotic:
+      type: boolean
+    isFavorite:
+      type: boolean
+    level:
+      type: number
+    name:
+      type: string
+    petNumber:
+      type: number
+    slotID:
+      type: number
+    specialization:
+      type: string
+    type:
+      type: string
+    uiModelSceneID:
+      default: 718
+      type: number
 C_TaskQuest.TaskPOIData:
   fields:
     childDepth:
@@ -5420,6 +5659,8 @@ C_TaskQuest.TaskPOIData:
     isCombatAllyQuest:
       type: boolean
     isDaily:
+      type: boolean
+    isMeta:
       type: boolean
     isQuestStart:
       type: boolean
@@ -5440,6 +5681,8 @@ C_TaxiMap.MapTaxiNodeInfo:
     faction:
       type:
         enum: FlightPathFaction
+    isUndiscovered:
+      type: boolean
     name:
       type: string
     nodeID:
@@ -5598,10 +5841,14 @@ C_Traits.TraitEntryInfo:
       type:
         arrayof: number
     definitionID:
+      nilable: true
       type: number
     isAvailable:
       type: boolean
     maxRanks:
+      type: number
+    subTreeID:
+      nilable: true
       type: number
     type:
       type:
@@ -5671,6 +5918,12 @@ C_Traits.TraitNodeInfo:
       type: number
     ranksPurchased:
       type: number
+    subTreeActive:
+      nilable: true
+      type: boolean
+    subTreeID:
+      nilable: true
+      type: number
     type:
       type:
         enum: TraitNodeType
@@ -5710,6 +5963,9 @@ C_Traits.TraitNodeInfoPartial:
     ranksPurchased:
       nilable: true
       type: number
+    subTreeActive:
+      nilable: true
+      type: boolean
 C_Traits.TraitOutEdgeInfo:
   fields:
     isActive:
@@ -5719,6 +5975,31 @@ C_Traits.TraitOutEdgeInfo:
     type:
       type: number
     visualStyle:
+      type: number
+C_Traits.TraitSubTreeInfo:
+  fields:
+    description:
+      nilable: true
+      type: string
+    iconElementID:
+      nilable: true
+      type: string
+    ID:
+      type: number
+    isActive:
+      type: boolean
+    name:
+      nilable: true
+      type: string
+    posX:
+      type: number
+    posY:
+      type: number
+    subTreeSelectionNodeIDs:
+      type:
+        arrayof: number
+    traitCurrencyID:
+      nilable: true
       type: number
 C_Traits.TraitTreeInfo:
   fields:
@@ -5761,6 +6042,10 @@ C_TransmogCollection.TransmogAppearanceInfoBySourceData:
       type: boolean
     appearanceNumSources:
       type: number
+    canDisplayOnPlayer:
+      type: boolean
+    isAnySourceValidForPlayer:
+      type: boolean
     meetsTransmogPlayerCondition:
       type: boolean
     sourceIsCollected:
@@ -5789,6 +6074,8 @@ C_TransmogCollection.TransmogCategoryAppearanceInfo:
   fields:
     alwaysShowItem:
       nilable: true
+      type: boolean
+    canDisplayOnPlayer:
       type: boolean
     exclusions:
       type: number
@@ -5859,6 +6146,8 @@ C_TransmogSets.TransmogSetInfo:
       type: number
     uiOrder:
       type: number
+    validForCharacter:
+      type: boolean
 C_TransmogSets.TransmogSetPrimaryAppearanceInfo:
   fields:
     appearanceID:
@@ -7320,8 +7609,6 @@ C_UIWidgetManager.UIWidgetSpellInfo:
     iconSizeType:
       type:
         enum: WidgetIconSizeType
-    isLootObject:
-      type: boolean
     spellID:
       type: number
     stackDisplay:
@@ -7337,6 +7624,9 @@ C_UIWidgetManager.UIWidgetSpellInfo:
     textSizeType:
       type:
         enum: UIWidgetTextSizeType
+    tint:
+      type:
+        enum: SpellDisplayTint
     tooltip:
       type: string
 C_UIWidgetManager.UIWidgetStateIconInfo:
@@ -8943,6 +9233,16 @@ SpecPerkInfo:
     isMajorPerk:
       type: boolean
     perkID:
+      type: number
+SpellCooldownInfo:
+  fields:
+    duration:
+      type: number
+    isEnabled:
+      type: boolean
+    modRate:
+      type: number
+    startTime:
       type: number
 TooltipData:
   fields:

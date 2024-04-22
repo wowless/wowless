@@ -73,9 +73,11 @@ skip_docfiles:
   ConfigurationWarningsDocumentation: {}
   DebugToggleDocumentation: {}
   PingPinFrameAPIDocumentation: {}
+  SimpleMapSceneAPIDocumentation: {}
   SimpleModelFFXAPIDocumentation: {}
 typedefs:
   AnimationDataEnum: number
+  ArtifactTiers: number
   BigInteger: number
   BigUInteger: number
   bool: boolean
@@ -127,6 +129,7 @@ typedefs:
   SimpleWindow: nil
   SingleColorValue: number
   size: number
+  SpellIdentifier: string
   string: string
   stringView: string
   TBFFlags: string
