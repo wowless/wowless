@@ -21,7 +21,7 @@ local getPatternValue = (function()
   end
   local patterns = {
     {
-      pattern = ': want %d+, got (%d+)$',
+      pattern = ': want %-?%d+, got (-?%d+)$',
       value = mustnumber,
     },
     {

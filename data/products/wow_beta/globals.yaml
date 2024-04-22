@@ -566,7 +566,7 @@ Enum:
     Reagentbank: -3
   BagIndexMeta:
     MaxValue: 17
-    MinValue: -4
+    MinValue: -5
     NumValues: 23
   BagsDirection:
     Down: 1
@@ -4814,7 +4814,7 @@ Enum:
     SoulShards: 7
   PowerTypeMeta:
     MaxValue: 26
-    MinValue: -2
+    MinValue: 0
     NumValues: 27
   PowerTypeSign:
     Negative: 1
