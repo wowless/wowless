@@ -58,7 +58,11 @@ local function run(cfg)
     loader.loadFrameXml()
   end
   for _, d in ipairs(otherAddonDirs) do
-    assert(loader.loadAddon(path.basename(d)))
+    local addon = path.basename(d)
+    local success, reason = loader.loadAddon(addon)
+    if not success then
+      api.log(1, 'failed to load %s: %s', addon, reason)
+    end
   end
   local system = api.modules.system
   system.LogIn()
