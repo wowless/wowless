@@ -5,6 +5,12 @@ type:
     key: string
     value:
       record:
+        fieldinitoverrides:
+          type:
+            mapof:
+              key: string
+              value:
+                schema: any
         fields:
           required: true
           type:

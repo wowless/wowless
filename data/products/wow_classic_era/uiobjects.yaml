@@ -555,6 +555,8 @@ DressUpModel:
     Undress: {}
     UndressSlot: {}
 EditBox:
+  fieldinitoverrides:
+    justifyh: LEFT
   fields:
     editboxText:
       init: ''

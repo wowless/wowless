@@ -122,6 +122,7 @@ local ptablemap = {
         inhrev[inh] = inhrev[inh] or {}
         table.insert(inhrev[inh], k)
       end
+      cfg.fieldinitoverrides = cfg.fieldinitoverrides or {}
     end
     local objTypes = {}
     for k, cfg in pairs(uiobjects) do
@@ -131,6 +132,9 @@ local ptablemap = {
       for inhname in pairs(cfg.inherits) do
         local inh = uiobjects[inhname]
         fixup(inh)
+        for n, f in pairs(inh.fieldinitoverrides) do
+          cfg.fieldinitoverrides[n] = f
+        end
         for n, f in pairs(inh.fields) do
           cfg.fields[n] = f
         end
@@ -156,9 +160,14 @@ local ptablemap = {
     for k, v in pairs(uiobjects) do
       local ft = {}
       for fk, fv in pairs(v.fields) do
+        local init = fv.init
+        local override = v.fieldinitoverrides[fk]
+        if override ~= nil then
+          init = override
+        end
         ft[fk] = {
           getters = {},
-          init = fv.init,
+          init = init,
         }
       end
       local mt = {}
