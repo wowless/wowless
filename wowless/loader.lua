@@ -795,7 +795,9 @@ local function loader(api, cfg)
 
   local function isLoadable(toc)
     local a = datalua.cvars.agentuid.value
-    return toc.attrs.OnlyBetaAndPTR ~= '1' or a == 'wow_ptr' or a == 'wow_beta'
+    local betaptr = toc.attrs.OnlyBetaAndPTR ~= '1' or a == 'wow_ptr' or a == 'wow_beta'
+    local gamemode = toc.attrs.AllowLoadGameType ~= 'wowlabs'
+    return betaptr and gamemode
   end
 
   local function loadFrameXml()
