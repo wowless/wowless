@@ -76,7 +76,14 @@ Constants:
     PLUNDERSTORM_MAJOR_FACTION_ID: 2593
     WORLD_STATE_RAPID_RENOWN_CAP_10_0: 20851
     WORLD_STATE_RENOWN_CAP_10_0: 19735
-  PetConsts: {}
+  PetConsts:
+    EXTRA_PET_STABLE_SLOT: 5
+    MAX_STABLE_SLOTS: 200
+    MAX_SUMMONABLE_HUNTER_PETS: 5
+    MAX_SUMMONABLE_PETS: 25
+    NUM_PET_SLOTS: 205
+    NUM_PET_SLOTS_THAT_NEED_LEARNED_SPELL: 5
+    STABLED_PETS_FIRST_SLOT_INDEX: 6
   ProfessionConsts:
     CLASSIC_PROFESSION_PARENT_TIER_INDEX: 4
     CRAFTING_ORDER_CLAIM_DURATION: 1800
@@ -92,7 +99,9 @@ Constants:
     MAX_QUEST_WATCHES: 25
     MAX_WORLD_QUEST_WATCHES_AUTOMATIC: 1
     MAX_WORLD_QUEST_WATCHES_MANUAL: 5
-  TimerunningConsts: {}
+  TimerunningConsts:
+    TIMERUNNING_SEASON_NONE: 0
+    TIMERUNNING_SEASON_PANDARIA: 1
   TraitConsts:
     COMMIT_COMBAT_TRAIT_CONFIG_CHANGES_SPELL_ID: 384255
     INSPECT_TRAIT_CONFIG_ID: -1
@@ -202,8 +211,66 @@ Enum:
     MaxValue: -2147483648
     MinValue: 0
     NumValues: 44
-  AccountTransType: {}
-  AccountTransTypeMeta: {}
+  AccountTransType:
+    AccountCurrencies: 27
+    AccountNotifications: 39
+    Achievements: 4
+    AddLicense: 16
+    ArchivedPurchases: 9
+    AuctionableToken: 19
+    BankTab: 50
+    BattlenetAccount: 26
+    Battlepet: 3
+    BitVectors: 52
+    Characters: 7
+    CombinedQuestLog: 53
+    ConsumableToken: 20
+    CreateOrderInfo: 33
+    Criteria: 5
+    CriteriaNotif: 13
+    CurrencyCaps: 11
+    Distribution: 2
+    Distributions: 10
+    DynamicCriteria: 31
+    Factions: 51
+    FixedLicense: 15
+    GetOrderStatusByPurchaseID: 48
+    ItemCollections: 18
+    Items: 49
+    LoadAddLicenses: 17
+    LoadWowlabs: 46
+    Mounts: 6
+    OutstandingRpc: 45
+    PerkItemHold: 40
+    PerkPastRewards: 43
+    PerkPendingRewards: 41
+    PerkRecentPurchases: 42
+    PerkTransaction: 44
+    PlayerDataElements: 54
+    Productitem: 22
+    ProxyCreateAccountHonor: 35
+    ProxyForwarder: 0
+    ProxyGenerateBpayID: 38
+    ProxyGmSetHonor: 37
+    ProxyHonorInitialConversion: 34
+    ProxyValidateAccountHonor: 36
+    Purchase: 1
+    Purchases: 8
+    QuestCriteria: 25
+    QuestLog: 12
+    RafActivity: 32
+    RafFriendMonth: 29
+    RafRecruiterAcceptances: 28
+    RafReward: 30
+    Settings: 14
+    TrialBoostHistories: 24
+    TrialBoostHistory: 23
+    UpgradeAccount: 47
+    VasTransaction: 21
+  AccountTransTypeMeta:
+    MaxValue: 54
+    MinValue: 0
+    NumValues: 55
   ActionBarOrientation:
     Horizontal: 0
     Vertical: 1
@@ -439,8 +506,37 @@ Enum:
     MaxValue: 2
     MinValue: 0
     NumValues: 3
-  BagFlag: {}
-  BagFlagMeta: {}
+  BagFlag:
+    AllowBagsInNonBagSlots: 1024
+    AllowBuyback: 65536
+    AllowPartialStack: 16384
+    AlreadyBound: 4
+    AlreadyOwner: 2
+    AsymmetricSwap: 2097152
+    BagIsEmpty: 16
+    DontFindStack: 1
+    IgnoreBankcheck: 512
+    IgnoreBoundItemCheck: 64
+    IgnoreExisting: 8192
+    IgnorePetBankcheck: 131072
+    IgnoreReagentBags: 16777216
+    IgnoreSoulbound: 8388608
+    LookInAccountBankOnly: 33554432
+    LookInBankOnly: 32768
+    LookInInventory: 32
+    LookInReagentsBankOnly: 1048576
+    PreferNeutralPriorityBags: 524288
+    PreferPriorityBags: 262144
+    PreferQuivers: 2048
+    PreferReagentBags: 4194304
+    RecurseQuivers: 256
+    StackOnly: 128
+    Swap: 8
+    SwapBags: 4096
+  BagFlagMeta:
+    MaxValue: 33554432
+    MinValue: 1
+    NumValues: 26
   BagIndex:
     Accountbanktab: -5
     AccountBankTab_1: 13
@@ -500,10 +596,21 @@ Enum:
     MaxValue: 1
     MinValue: 0
     NumValues: 2
-  BalanceType: {}
-  BalanceTypeMeta: {}
-  BankType: {}
-  BankTypeMeta: {}
+  BalanceType:
+    Eclipse: 0
+    None: -1
+  BalanceTypeMeta:
+    MaxValue: 0
+    MinValue: -1
+    NumValues: 2
+  BankType:
+    Account: 2
+    Character: 0
+    Guild: 1
+  BankTypeMeta:
+    MaxValue: 2
+    MinValue: 0
+    NumValues: 3
   BattlepayBannerType:
     Discount: 1
     Featured: 2
@@ -854,8 +961,28 @@ Enum:
     MaxValue: 3
     MinValue: 0
     NumValues: 4
-  BnetAccountFlag: {}
-  BnetAccountFlagMeta: {}
+  BnetAccountFlag:
+    AccountQuestBitFixUp: 64
+    AchievementsToBi: 128
+    BattlePetTrainer: 1
+    CanBuyAhGameTimeTokens: 32768
+    DarkRealmLightCopy: 2048
+    Employee: 16
+    EmployeeFlagIsManual: 32
+    GdprErased: 1024
+    InvalidTransmogsFixUp: 256
+    InvalidTransmogsFixUp2: 512
+    LockedForExport: 16384
+    None: 0
+    QuestLogFlagsFixUp: 4096
+    RafVeteranNotified: 2
+    TwitterHasTempSecret: 8
+    TwitterLinked: 4
+    WasSecured: 8192
+  BnetAccountFlagMeta:
+    MaxValue: 32768
+    MinValue: 0
+    NumValues: 17
   BrawlType:
     Arena: 2
     Battleground: 1
@@ -1130,10 +1257,30 @@ Enum:
     MaxValue: 1
     MinValue: 0
     NumValues: 2
-  Causeofdeath: {}
-  CauseofdeathFlags: {}
-  CauseofdeathFlagsMeta: {}
-  CauseofdeathMeta: {}
+  Causeofdeath:
+    Creature: 3
+    Drowning: 5
+    Falling: 4
+    Fatigue: 6
+    Fire: 9
+    Lava: 8
+    None: 0
+    PlayerDuel: 2
+    PlayerPvP: 1
+    Slime: 7
+  CauseofdeathFlags:
+    CreatureNameNeeded: 2
+    NoneNeeded: 0
+    PlayerNameNeeded: 1
+    ZoneNameNeeded: 4
+  CauseofdeathFlagsMeta:
+    MaxValue: 4
+    MinValue: 0
+    NumValues: 4
+  CauseofdeathMeta:
+    MaxValue: 9
+    MinValue: 0
+    NumValues: 10
   CharacterServiceInfoFlag:
     RestrictToRecommendedSpecs: 1
   CharacterServiceInfoFlagMeta:
@@ -1506,10 +1653,26 @@ Enum:
     MaxValue: 3
     MinValue: 0
     NumValues: 4
-  CombinedQuestLogStatus: {}
-  CombinedQuestLogStatusMeta: {}
-  CombinedQuestStatus: {}
-  CombinedQuestStatusMeta: {}
+  CombinedQuestLogStatus:
+    Available: 0
+    Complete: 1
+    CompleteDaily: 2
+    CompleteGameReset: 6
+    CompleteMonthly: 4
+    CompleteWeekly: 3
+    CompleteYearly: 5
+  CombinedQuestLogStatusMeta:
+    MaxValue: 6
+    MinValue: 0
+    NumValues: 7
+  CombinedQuestStatus:
+    Completed: 1
+    Invalid: 0
+    NotCompleted: 2
+  CombinedQuestStatusMeta:
+    MaxValue: 2
+    MinValue: 0
+    NumValues: 3
   CommunicationMode:
     OpenMic: 1
     PushToTalk: 0
@@ -2966,8 +3129,13 @@ Enum:
     MaxValue: 3
     MinValue: 0
     NumValues: 4
-  GossipOptionUIWidgetSetTypes: {}
-  GossipOptionUIWidgetSetTypesMeta: {}
+  GossipOptionUIWidgetSetTypes:
+    Background: 1
+    Modifiers: 0
+  GossipOptionUIWidgetSetTypesMeta:
+    MaxValue: 1
+    MinValue: 0
+    NumValues: 2
   GraphicsValidationResult:
     AmdGpuUnsupported: 36
     AppleGpuUnsupported: 35
@@ -3990,8 +4158,14 @@ Enum:
     MaxValue: 19
     MinValue: 0
     NumValues: 20
-  ModelSoundOverrideType: {}
-  ModelSoundOverrideTypeMeta: {}
+  ModelSoundOverrideType:
+    Mute: 2
+    UseOverride: 1
+    UseParent: 0
+  ModelSoundOverrideTypeMeta:
+    MaxValue: 2
+    MinValue: 0
+    NumValues: 3
   ModelSoundTagType:
     Looping: 2
     Oneshot: 1
@@ -4055,8 +4229,12 @@ Enum:
     MaxValue: 24
     MinValue: 0
     NumValues: 25
-  PartyPoseFlags: {}
-  PartyPoseFlagsMeta: {}
+  PartyPoseFlags:
+    HideLeaveInstanceButton: 1
+  PartyPoseFlagsMeta:
+    MaxValue: 1
+    MinValue: 1
+    NumValues: 1
   PartyRequestJoinRelation:
     Club: 3
     Friend: 1
@@ -4635,10 +4813,29 @@ Enum:
     MaxValue: 26
     MinValue: -2
     NumValues: 27
-  PowerTypeSign: {}
-  PowerTypeSignMeta: {}
-  PowerTypeSlot: {}
-  PowerTypeSlotMeta: {}
+  PowerTypeSign:
+    Negative: 1
+    None: -1
+    Positive: 0
+  PowerTypeSignMeta:
+    MaxValue: 1
+    MinValue: -1
+    NumValues: 3
+  PowerTypeSlot:
+    Slot_0: 0
+    Slot_1: 1
+    Slot_2: 2
+    Slot_3: 3
+    Slot_4: 4
+    Slot_5: 5
+    Slot_6: 6
+    Slot_7: 7
+    Slot_8: 8
+    Slot_9: 9
+  PowerTypeSlotMeta:
+    MaxValue: 9
+    MinValue: 0
+    NumValues: 10
   Profession:
     Alchemy: 3
     Archaeology: 14
@@ -4823,8 +5020,14 @@ Enum:
     MaxValue: 2
     MinValue: 0
     NumValues: 3
-  QuestRewardContextFlags: {}
-  QuestRewardContextFlagsMeta: {}
+  QuestRewardContextFlags:
+    FirstCompletionBonus: 1
+    None: 0
+    RepeatCompletionBonus: 2
+  QuestRewardContextFlagsMeta:
+    MaxValue: 2
+    MinValue: 0
+    NumValues: 3
   QuestSessionCommand:
     None: 0
     SessionActiveNoCommand: 3
@@ -4912,8 +5115,14 @@ Enum:
     MaxValue: 16
     MinValue: 0
     NumValues: 17
-  QuestTreasurePickerType: {}
-  QuestTreasurePickerTypeMeta: {}
+  QuestTreasurePickerType:
+    Hidden: 1
+    Select: 2
+    Visible: 0
+  QuestTreasurePickerTypeMeta:
+    MaxValue: 2
+    MinValue: 0
+    NumValues: 3
   QuestWatchType:
     Automatic: 0
     Manual: 1
@@ -5065,8 +5274,14 @@ Enum:
     MaxValue: 16
     MinValue: 0
     NumValues: 17
-  ReputationSortType: {}
-  ReputationSortTypeMeta: {}
+  ReputationSortType:
+    Account: 1
+    Character: 2
+    None: 0
+  ReputationSortTypeMeta:
+    MaxValue: 2
+    MinValue: 0
+    NumValues: 3
   RuneforgePowerFilter:
     All: 0
     Available: 2
@@ -5135,8 +5350,29 @@ Enum:
     MaxValue: 1
     MinValue: 1
     NumValues: 1
-  Siflag: {}
-  SiflagMeta: {}
+  Siflag:
+    Affectedbyaltitude: 16
+    Affectedbysanity: 2048
+    AutocreatedByBroadcastText: 4
+    CasterOwnsTargetSound: 128
+    Disablepositionallpf: 1
+    Dontplayindoors: 256
+    Dontplayunderwater: 1024
+    Dontstopondeath: 4096
+    Ignoresuppressors: 64
+    Ignorevopriority: 16384
+    Looping: 512
+    Noduplicates: 32
+    None: 0
+    Onlyplayindoors: 32768
+    Onlyplayunderwater: 65536
+    Playonlyforowner: 8192
+    Playsequential: 8
+    UseModCastSpeed: 2
+  SiflagMeta:
+    MaxValue: 65536
+    MinValue: 0
+    NumValues: 18
   SkinningState:
     Looting: 3
     None: 0
@@ -5228,14 +5464,38 @@ Enum:
     MaxValue: 3
     MinValue: 0
     NumValues: 4
-  SoundBusFlag: {}
-  SoundBusFlagMeta: {}
-  SpellBookItemType: {}
-  SpellBookItemTypeMeta: {}
-  SpellBookSkillLineIndex: {}
-  SpellBookSkillLineIndexMeta: {}
-  SpellBookSpellBank: {}
-  SpellBookSpellBankMeta: {}
+  SoundBusFlag:
+    Disablepositionallpf: 1
+  SoundBusFlagMeta:
+    MaxValue: 1
+    MinValue: 1
+    NumValues: 1
+  SpellBookItemType:
+    Flyout: 4
+    FutureSpell: 2
+    None: 0
+    PetAction: 3
+    Spell: 1
+  SpellBookItemTypeMeta:
+    MaxValue: 4
+    MinValue: 0
+    NumValues: 5
+  SpellBookSkillLineIndex:
+    Class: 2
+    General: 1
+    MainSpec: 3
+    OffSpecStart: 4
+  SpellBookSkillLineIndexMeta:
+    MaxValue: 4
+    MinValue: 1
+    NumValues: 4
+  SpellBookSpellBank:
+    Pet: 1
+    Player: 0
+  SpellBookSpellBankMeta:
+    MaxValue: 1
+    MinValue: 0
+    NumValues: 2
   SpellDisplayBorderColor:
     Black: 1
     Blue: 8
@@ -5266,8 +5526,13 @@ Enum:
     MaxValue: 1
     MinValue: 0
     NumValues: 2
-  SpellDisplayTint: {}
-  SpellDisplayTintMeta: {}
+  SpellDisplayTint:
+    None: 0
+    Red: 1
+  SpellDisplayTintMeta:
+    MaxValue: 1
+    MinValue: 0
+    NumValues: 2
   SplashScreenType:
     SeasonRollOver: 1
     WhatsNew: 0
@@ -5329,8 +5594,48 @@ Enum:
     MaxValue: 13
     MinValue: 0
     NumValues: 14
-  SubcontainerType: {}
-  SubcontainerTypeMeta: {}
+  SubcontainerType:
+    AccountBankTabs: 36
+    Auction: 5
+    Bag: 0
+    Bankbag: 3
+    Bankgeneric: 2
+    BuybackSlots: 26
+    CachedReward: 27
+    Childequipmentstorage: 23
+    CraftingOrder: 34
+    CraftingOrderReagents: 35
+    CreatedImmediately: 25
+    CurrencytokenOboslete: 15
+    Equipablespells: 14
+    Equipped: 1
+    EquippedBags: 28
+    EquippedCooking: 31
+    EquippedFishing: 32
+    EquippedProfession1: 29
+    EquippedProfession2: 30
+    EquippedReagentbag: 33
+    GuildBank0: 7
+    GuildBank1: 8
+    GuildBank10: 20
+    GuildBank11: 21
+    GuildBank2: 9
+    GuildBank3: 10
+    GuildBank4: 11
+    GuildBank5: 12
+    GuildBank6: 16
+    GuildBank7: 17
+    GuildBank8: 18
+    GuildBank9: 19
+    GuildOverflow: 13
+    KeyringObsolete: 6
+    Mail: 4
+    Quarantine: 24
+    Reagentbank: 22
+  SubcontainerTypeMeta:
+    MaxValue: 36
+    MinValue: 0
+    NumValues: 37
   SubscriptionInterstitialResponseType:
     Clicked: 0
     Closed: 1
