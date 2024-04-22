@@ -654,6 +654,8 @@ local function loader(api, cfg)
       table.insert(t, '_' .. alt)
       table.insert(t, '-' .. alt)
     end
+    table.insert(t, '_Standard')
+    table.insert(t, '-Standard')
     table.insert(t, '')
     return t
   end)()
