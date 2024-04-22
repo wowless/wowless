@@ -17208,6 +17208,7 @@ C_SpecializationInfo.SetPvpTalentLocked:
   - name: locked
     type: boolean
   outputs: {}
+C_SpectatingUI.IsSpectating: {}
 C_Spell.DoesSpellExist:
   inputs:
   - name: spellIdentifier
@@ -23020,6 +23021,7 @@ C_ZoneAbility.GetActiveAbilities:
   inputs: {}
   outputs:
   - name: zoneAbilities
+    stub: {}
     type:
       arrayof:
         structure: C_ZoneAbility.ZoneAbilityInfo
