@@ -56,7 +56,7 @@ Animation:
       init: 0
       type: number
     smoothing:
-      init: OUT
+      init: NONE
       type: SmoothingType
     startDelay:
       init: 0
@@ -172,6 +172,11 @@ ArchaeologyDigSiteFrame:
     POIFrame: {}
   methods: {}
 Browser:
+  fieldinitoverrides:
+    mouseClickEnabled: true
+    mouseMotionEnabled: true
+    mouseWheelEnabled: true
+    resizable: true
   fields: {}
   inherits:
     Frame: {}
@@ -190,6 +195,9 @@ Browser:
     SetFocus: {}
     SetZoom: {}
 Button:
+  fieldinitoverrides:
+    mouseClickEnabled: true
+    mouseMotionEnabled: true
   fields:
     beingClicked:
       init: false
@@ -379,6 +387,11 @@ CheckButton:
       setter:
       - name: disabledCheckedTexture
 Checkout:
+  fieldinitoverrides:
+    mouseClickEnabled: true
+    mouseMotionEnabled: true
+    mouseWheelEnabled: true
+    resizable: true
   fields: {}
   inherits:
     Frame: {}
@@ -413,6 +426,9 @@ CinematicModel:
     StopPan: {}
     UnequipItems: {}
 ColorSelect:
+  fieldinitoverrides:
+    mouseClickEnabled: true
+    mouseMotionEnabled: true
   fields:
     colorValueTexture:
       nilable: true
@@ -572,6 +588,10 @@ DressUpModel:
     Undress: {}
     UndressSlot: {}
 EditBox:
+  fieldinitoverrides:
+    justifyh: LEFT
+    mouseClickEnabled: true
+    mouseMotionEnabled: true
   fields:
     editboxText:
       init: ''
@@ -580,7 +600,7 @@ EditBox:
       init: true
       type: boolean
     historyLines:
-      init: 10
+      init: 0
       type: number
     isAutoFocus:
       init: true
@@ -595,10 +615,10 @@ EditBox:
       init: false
       type: boolean
     maxBytes:
-      init: 200
+      init: 0
       type: number
     maxLetters:
-      init: 64
+      init: 0
       type: number
   inherits:
     FontInstance: {}
@@ -753,10 +773,10 @@ Font:
 FontInstance:
   fields:
     justifyh:
-      init: LEFT
+      init: CENTER
       type: JustifyHorizontal
     justifyv:
-      init: BOTTOM
+      init: MIDDLE
       type: JustifyVertical
   inherits: {}
   methods:
@@ -1299,7 +1319,7 @@ LayeredRegion:
 Line:
   fields:
     thickness:
-      init: 1
+      init: 4
       type: number
   inherits:
     TextureBase: {}
@@ -1695,10 +1715,10 @@ Region:
       init: 0
       type: number
     mouseClickEnabled:
-      init: true
+      init: false
       type: boolean
     mouseMotionEnabled:
-      init: true
+      init: false
       type: boolean
     mouseWheelEnabled:
       init: false
@@ -1966,6 +1986,8 @@ ScrollFrame:
     SetVerticalScroll: {}
     UpdateScrollChildRect: {}
 SimpleHTML:
+  fieldinitoverrides:
+    hyperlinksEnabled: true
   fields: {}
   inherits:
     FontInstance: {}
@@ -1979,6 +2001,9 @@ SimpleHTML:
     SetHyperlinkFormat: {}
     SetText: {}
 Slider:
+  fieldinitoverrides:
+    mouseClickEnabled: true
+    mouseMotionEnabled: true
   fields:
     enabled:
       init: true
@@ -1990,7 +2015,7 @@ Slider:
       init: 0
       type: number
     orientation:
-      init: HORIZONTAL
+      init: VERTICAL
       type: Orientation
     thumbTexture:
       nilable: true
