@@ -3494,6 +3494,12 @@ DISABLE_TAXI_BENCHMARK:
   payload: {}
 DISABLE_XP_GAIN:
   payload: {}
+DISPLAY_EVENT_TOAST_LINK:
+  payload:
+  - name: link
+    type: string
+DISPLAY_EVENT_TOASTS:
+  payload: {}
 DISPLAY_SIZE_CHANGED:
   payload: {}
 DUEL_FINISHED:
@@ -4916,6 +4922,8 @@ PVP_BRAWL_INFO_UPDATED:
 PVP_RATED_STATS_UPDATE:
   payload: {}
 PVP_REWARDS_UPDATE:
+  payload: {}
+PVP_ROLE_UPDATE:
   payload: {}
 PVP_TIMER_UPDATE:
   payload:

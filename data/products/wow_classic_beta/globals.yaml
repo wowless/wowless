@@ -1599,16 +1599,17 @@ Enum:
     Cheat: 0
     DroppedToCorpse: 8
     Garrison: 7
-    Last: 10
+    Last: 11
+    LegacyConversion: 10
     QuestTurnin: 3
     Spell: 1
     Trade: 5
     Vendor: 4
     VersionUpdate: 2
   CurrencyDestroyReasonMeta:
-    MaxValue: 10
+    MaxValue: 11
     MinValue: 0
-    NumValues: 11
+    NumValues: 12
   CurrencyFlags:
     Currency_100_Scaler: 8
     CurrencyAccountWide: 16777216
@@ -1920,6 +1921,58 @@ Enum:
     MaxValue: 4
     MinValue: 0
     NumValues: 4
+  EventToastDisplayType:
+    ChallengeMode: 7
+    LargeTextWithIcon: 4
+    NormalBlockText: 1
+    NormalSingleLine: 0
+    NormalTextWithIcon: 3
+    NormalTextWithIconAndRarity: 5
+    NormalTitleAndSubTitle: 2
+    Scenario: 6
+    ScenarioClickExpand: 8
+    WeeklyRewardUnlock: 9
+    WeeklyRewardUpgrade: 10
+  EventToastDisplayTypeMeta:
+    MaxValue: 10
+    MinValue: 0
+    NumValues: 11
+  EventToastEventType:
+    BattlePetLevelChanged: 8
+    BattlePetLevelUpAbility: 9
+    CriteriaUpdated: 19
+    LevelUp: 0
+    LevelUpDungeon: 2
+    LevelUpOther: 15
+    LevelUpPvP: 4
+    LevelUpRaid: 3
+    LevelUpSpell: 1
+    MythicPlusWeeklyRecord: 11
+    PetBattleCapture: 7
+    PetBattleFinalRound: 6
+    PetBattleNewAbility: 5
+    PlayerAuraAdded: 16
+    PlayerAuraRemoved: 17
+    PvPTierUpdate: 20
+    QuestBossEmote: 10
+    QuestTurnedIn: 12
+    Scenario: 14
+    SpellLearned: 21
+    SpellScript: 18
+    TreasureItem: 22
+    WeeklyRewardUnlock: 23
+    WeeklyRewardUpgrade: 24
+    WorldStateChange: 13
+  EventToastEventTypeMeta:
+    MaxValue: 24
+    MinValue: 0
+    NumValues: 25
+  EventToastFlags:
+    DisableRightClickDismiss: 1
+  EventToastFlagsMeta:
+    MaxValue: 1
+    MinValue: 1
+    NumValues: 1
   ExcludedCensorSources:
     All: 255
     Friends: 1
@@ -3995,8 +4048,8 @@ Enum:
     MinValue: 0
     NumValues: 6
   RegisterAddonMessagePrefixResult:
-    DuplicatePrefix: 2
-    InvalidPrefix: 1
+    DuplicatePrefix: 1
+    InvalidPrefix: 2
     MaxPrefixes: 3
     Success: 0
   RegisterAddonMessagePrefixResultMeta:
@@ -4071,6 +4124,15 @@ Enum:
     MaxValue: 16
     MinValue: 0
     NumValues: 17
+  ScalingArmorType:
+    Cloth: 0
+    Leather: 1
+    Mail: 2
+    Plate: 3
+  ScalingArmorTypeMeta:
+    MaxValue: 3
+    MinValue: 0
+    NumValues: 4
   ScriptedAnimationBehavior:
     None: 0
     SourceCollideWithTarget: 4
@@ -4587,14 +4649,15 @@ Enum:
     Legs: 9
     Mainhand: 11
     Offhand: 12
+    Ranged: 13
     Shoulder: 1
     Tabard: 5
     Waist: 8
     Wrist: 6
   TransmogSlotMeta:
-    MaxValue: 12
+    MaxValue: 13
     MinValue: 0
-    NumValues: 13
+    NumValues: 14
   TransmogSource:
     Achievement: 7
     CantCollect: 6

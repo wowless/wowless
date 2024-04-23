@@ -1361,6 +1361,75 @@ C_Engraving.EngravingData:
       type: string
     skillLineAbilityID:
       type: number
+C_EventToastManager.EventToastInfo:
+  fields:
+    colorTint:
+      nilable: true
+      type:
+        structure: colorRGB
+    displayType:
+      type:
+        enum: EventToastDisplayType
+    eventToastID:
+      type: number
+    eventType:
+      type:
+        enum: EventToastEventType
+    extraUiWidgetSetID:
+      nilable: true
+      type: number
+    flags:
+      type: number
+    hideDefaultAtlas:
+      nilable: true
+      type: boolean
+    hideSoundKitID:
+      nilable: true
+      type: number
+    iconFileID:
+      type: number
+    instructionText:
+      type: string
+    link:
+      type: string
+    quality:
+      nilable: true
+      type: number
+    qualityString:
+      nilable: true
+      type: string
+    showSoundKitID:
+      nilable: true
+      type: number
+    sortOrder:
+      type: number
+    subIcon:
+      nilable: true
+      type: string
+    subtitle:
+      type: string
+    subtitleTooltip:
+      nilable: true
+      type: string
+    subtitleTooltipUiWidgetSetID:
+      nilable: true
+      type: number
+    time:
+      nilable: true
+      type: number
+    title:
+      type: string
+    titleTooltip:
+      nilable: true
+      type: string
+    titleTooltipUiWidgetSetID:
+      nilable: true
+      type: number
+    uiTextureKit:
+      type: string
+    uiWidgetSetID:
+      nilable: true
+      type: number
 C_FriendList.FriendInfo:
   fields:
     afk:
