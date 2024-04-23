@@ -748,6 +748,25 @@
   </Script>
 
   <Script>
+    WowlessColorRed = { r = 1, g = 0, b = 0, a = 1 }
+    WowlessColorGreen = { r = 0, g = 1, b = 0, a = 1 }
+    WowlessColor = WowlessColorRed
+  </Script>
+  <Font name='WowlessColorTestFont1' virtual='true'>
+    <Color color='WowlessColor' />
+  </Font>
+  <Font name='WowlessColorTestFont2'>
+    <Color color='WowlessColor' />
+  </Font>
+  <Script>
+    WowlessColor = WowlessColorGreen
+    if not _G.__wowless then -- issue #303
+      assertEquals(0, (WowlessColorTestFont1:GetTextColor()))
+      assertEquals(0, (WowlessColorTestFont2:GetTextColor()))
+    end
+  </Script>
+
+  <Script>
     if WowlessOldErrorHandler then
       seterrorhandler(WowlessOldErrorHandler)
       WowlessOldErrorHandler = nil
