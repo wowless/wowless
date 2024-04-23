@@ -195,6 +195,9 @@ local function mkuiobjectinit(k)
     for inh in pairs(v.inherits) do
       Mixin(init, mkuiobjectinit(inh))
     end
+    for fk, fv in pairs(v.fieldinitoverrides or {}) do
+      init[fk] = valstr(fv)
+    end
     for fk, fv in pairs(v.fields) do
       if fv.init ~= nil then
         init[fk] = valstr(fv.init)

@@ -336,6 +336,7 @@ G.testsuite.generated = function()
       assertEquals(nil, getmetatable(__index))
       assertEquals(nil, indexes[__index])
       indexes[__index] = true
+      local ftests, mtests = tests(__index, obj)
       return {
         contents = function()
           local udk, udv = next(obj)
@@ -344,14 +345,16 @@ G.testsuite.generated = function()
           assert(getmetatable(udv) == nil)
           assert(next(obj, udk) == nil or objectTypeName == 'Minimap')
         end,
+        fields = function()
+          return ftests
+        end,
         methods = function()
-          local t = tests(__index)
           for k in pairs(__index) do
-            t[k] = t[k] or function()
+            mtests[k] = mtests[k] or function()
               error('missing')
             end
           end
-          return t
+          return mtests
         end,
       }
     end
@@ -452,14 +455,26 @@ G.testsuite.generated = function()
               return assertCreateFrame(name)
             end
           assert(factory, 'missing factory')
-          return mkTests(cfg.objtype, factory, function(__index)
+          return mkTests(cfg.objtype, factory, function(__index, obj)
+            local ftests = {}
+            for fk, fv in pairs(cfg.fields) do
+              ftests[fk] = function()
+                local t = {}
+                for _, g in ipairs(fv.getters) do
+                  t[g.method .. ':' .. g.index] = function()
+                    assertEquals(fv.init, (select(g.index, __index[g.method](obj))))
+                  end
+                end
+                return t
+              end
+            end
             local mtests = {}
             for mname in pairs(cfg.methods) do
               mtests[mname] = function()
                 return checkCFunc(__index[mname])
               end
             end
-            return mtests
+            return ftests, mtests
           end)
         end
       end

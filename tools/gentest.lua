@@ -122,6 +122,7 @@ local ptablemap = {
         inhrev[inh] = inhrev[inh] or {}
         table.insert(inhrev[inh], k)
       end
+      cfg.fieldinitoverrides = cfg.fieldinitoverrides or {}
     end
     local objTypes = {}
     for k, cfg in pairs(uiobjects) do
@@ -131,6 +132,12 @@ local ptablemap = {
       for inhname in pairs(cfg.inherits) do
         local inh = uiobjects[inhname]
         fixup(inh)
+        for n, f in pairs(inh.fieldinitoverrides) do
+          cfg.fieldinitoverrides[n] = f
+        end
+        for n, f in pairs(inh.fields) do
+          cfg.fields[n] = f
+        end
         for n, m in pairs(inh.methods) do
           cfg.methods[n] = m
         end
@@ -151,11 +158,47 @@ local ptablemap = {
     addtype('Frame')
     local t = {}
     for k, v in pairs(uiobjects) do
+      local ft = {}
+      for fk, fv in pairs(v.fields) do
+        local init = fv.init
+        local override = v.fieldinitoverrides[fk]
+        if override ~= nil then
+          init = override
+        end
+        ft[fk] = {
+          getters = {},
+          init = init,
+        }
+      end
       local mt = {}
-      for mk in pairs(v.methods) do
+      for mk, mv in pairs(v.methods) do
         mt[mk] = true
+        for gk, gv in ipairs(mv.getter or {}) do
+          table.insert(ft[gv.name].getters, { index = gk, method = mk })
+        end
+      end
+      -- TODO remove these super duper field hacks
+      ft.bottom = nil
+      ft.height = nil
+      ft.left = nil
+      ft.parent = nil
+      ft.pushedTextOffsetX = nil
+      ft.pushedTextOffsetY = nil
+      ft.top = nil
+      ft.right = nil
+      ft.width = nil
+      if k == 'EditBox' then
+        ft.shown.init = false
+      elseif k == 'Font' then
+        ft.name.init = 'WowlessFont1'
+      elseif k == 'Minimap' then
+        ft = {}
+      elseif k == 'SimpleHTML' then
+        ft.justifyh = nil
+        ft.justifyv = nil
       end
       t[k] = {
+        fields = ft,
         frametype = not not frametypes[k],
         methods = mt,
         objtype = objTypes[k],
