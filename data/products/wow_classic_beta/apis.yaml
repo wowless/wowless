@@ -1936,6 +1936,11 @@ C_ChatInfo.GetNumActiveChannels:
   outputs:
   - name: numChannels
     type: number
+C_ChatInfo.GetNumReservedChatWindows:
+  inputs: {}
+  outputs:
+  - name: numReserved
+    type: number
 C_ChatInfo.GetRegisteredAddonMessagePrefixes:
   inputs: {}
   outputs:
@@ -5145,6 +5150,24 @@ C_EquipmentSet.UseEquipmentSet:
   outputs:
   - name: setWasEquipped
     type: boolean
+C_EventToastManager.GetLevelUpDisplayToastsFromLevel:
+  inputs:
+  - name: level
+    type: number
+  outputs:
+  - name: toastInfo
+    type:
+      arrayof:
+        structure: C_EventToastManager.EventToastInfo
+C_EventToastManager.GetNextToastToDisplay:
+  inputs: {}
+  outputs:
+  - name: toastInfo
+    type:
+      structure: C_EventToastManager.EventToastInfo
+C_EventToastManager.RemoveCurrentToast:
+  inputs: {}
+  outputs: {}
 C_EventUtils.IsEventValid:
   impl: C_EventUtils.IsEventValid
   inputs:
@@ -5348,6 +5371,12 @@ C_FriendList.SortWho:
   - name: sorting
     type: string
   outputs: {}
+C_GameEnvironmentManager.GetCurrentEventRealmQueues:
+  inputs: {}
+  outputs:
+  - name: gameEnvironment
+    type:
+      enum: EventRealmQueues
 C_GameEnvironmentManager.GetCurrentGameEnvironment:
   inputs: {}
   outputs:
@@ -5360,6 +5389,28 @@ C_GameEnvironmentManager.RequestGameEnvironment:
     type:
       enum: GameEnvironment
   outputs: {}
+C_GameModeManager.GetCurrentGameMode:
+  inputs: {}
+  outputs:
+  - name: gameMode
+    type:
+      enum: GameMode
+C_GameModeManager.GetFeatureSetting:
+  inputs:
+  - name: feature
+    type:
+      enum: GameModeFeatureSetting
+  outputs:
+  - name: featureSetting
+    type: number
+C_GameModeManager.IsFeatureEnabled:
+  inputs:
+  - name: feature
+    type:
+      enum: GameModeFeatureSetting
+  outputs:
+  - name: isFeatureEnabled
+    type: boolean
 C_GamePad.AddSDLMapping:
   inputs:
   - name: platform
@@ -10084,6 +10135,9 @@ C_TransmogCollection.GetCategoryInfo:
   - default: false
     name: canOffHand
     type: boolean
+  - default: false
+    name: canRanged
+    type: boolean
 C_TransmogCollection.GetCategoryTotal:
   inputs:
   - name: category
@@ -11749,6 +11803,7 @@ ClearPartyAssignment:
   - name: unit
     type: unit
   outputs: {}
+ClearRaidMarker: {}
 ClearSendMail: {}
 ClearTarget:
   inputs: {}
@@ -13227,7 +13282,7 @@ GetDungeonDifficultyID:
 GetDungeonForRandomSlot: {}
 GetEclipseDirection: {}
 GetEditBoxMetatable: {}
-GetEquivalentDynamicDifficultyID: {}
+GetEquivalentDynamicDifficultyIDs: {}
 geterrorhandler:
   stdlib: geterrorhandler
 GetEventTime:
@@ -16501,6 +16556,7 @@ IsQuestItemHidden:
     type: number
 IsQuestLogSpecialItemInRange: {}
 IsQuestWatched: {}
+IsRaidMarkerActive: {}
 IsRangedWeapon: {}
 IsRatedBattleground: {}
 IsRecognizedName: {}
@@ -16922,6 +16978,7 @@ PitchUpStop:
 PlaceAction: {}
 PlaceAuctionBid: {}
 PlaceGlyphInSocket: {}
+PlaceRaidMarker: {}
 PlayerCanTeleport: {}
 PlayerEffectiveAttackPower: {}
 PlayerHasToy: {}

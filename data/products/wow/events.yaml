@@ -4071,6 +4071,8 @@ FRAMESTACK_VISIBILITY_UPDATED:
   payload: {}
 FRIENDLIST_UPDATE:
   payload: {}
+GAME_ENVIRONMENT_SWITCHED:
+  payload: {}
 GAME_PAD_ACTIVE_CHANGED:
   payload:
   - name: isActive
