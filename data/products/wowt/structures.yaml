@@ -188,7 +188,7 @@ C_ArdenwealdGardening.ArdenwealdGardenData:
       type: number
 C_AreaPoiInfo.AreaPOIInfo:
   fields:
-    addPaddingAboveWidgets:
+    addPaddingAboveTooltipWidgets:
       nilable: true
       type: boolean
     areaPoiID:
@@ -206,6 +206,9 @@ C_AreaPoiInfo.AreaPOIInfo:
       type: boolean
     highlightWorldQuestsOnHover:
       type: boolean
+    iconWidgetSet:
+      nilable: true
+      type: number
     isAlwaysOnFlightmap:
       type: boolean
     isPrimaryMapForPOI:
@@ -220,12 +223,12 @@ C_AreaPoiInfo.AreaPOIInfo:
     textureIndex:
       nilable: true
       type: number
+    tooltipWidgetSet:
+      nilable: true
+      type: number
     uiTextureKit:
       nilable: true
       type: string
-    widgetSetID:
-      nilable: true
-      type: number
 C_ArtifactUI.ArtifactArtInfo:
   fields:
     barConnectedColor:
@@ -675,6 +678,9 @@ C_BattleNet.BNetGameAccountInfo:
     richPresence:
       nilable: true
       type: string
+    timerunningSeasonID:
+      nilable: true
+      type: number
     wowProjectID:
       nilable: true
       type: number
@@ -1160,6 +1166,9 @@ C_Club.ClubMemberInfo:
       nilable: true
       type:
         enum: ClubRoleIdentifier
+    timerunningSeasonID:
+      nilable: true
+      type: number
     zone:
       nilable: true
       type: string
@@ -2047,6 +2056,9 @@ C_EncounterJournal.EncounterJournalItemInfo:
     displayAsVeryRare:
       nilable: true
       type: boolean
+    displaySeasonID:
+      nilable: true
+      type: number
     encounterID:
       nilable: true
       type: number
@@ -2240,6 +2252,9 @@ C_FriendList.WhoInfo:
       type: number
     raceStr:
       type: string
+    timerunningSeasonID:
+      nilable: true
+      type: number
 C_GamePad.GamePadAxisConfig:
   fields:
     axis:
@@ -3132,8 +3147,50 @@ C_LFGInfo.LFGLockInfo:
       type: number
     reason:
       type: number
+C_LFGList.AdvancedFilterOptions:
+  fields:
+    activities:
+      type:
+        arrayof: number
+    difficultyHeroic:
+      default: false
+      type: boolean
+    difficultyMythic:
+      default: false
+      type: boolean
+    difficultyMythicPlus:
+      default: false
+      type: boolean
+    difficultyNormal:
+      default: false
+      type: boolean
+    hasHealer:
+      default: false
+      type: boolean
+    hasTank:
+      default: false
+      type: boolean
+    minimumRating:
+      default: 0
+      type: number
+    needsDamage:
+      default: false
+      type: boolean
+    needsHealer:
+      default: false
+      type: boolean
+    needsMyClass:
+      default: false
+      type: boolean
+    needsTank:
+      default: false
+      type: boolean
 C_LFGList.BestDungeonScoreMapInfo:
   fields:
+    bestLevelIncrement:
+      type: number
+    bestRunDurationMs:
+      type: number
     bestRunLevel:
       type: number
     finishedSuccess:
@@ -3161,9 +3218,13 @@ C_LFGList.GroupFinderActivityInfo:
       type: number
     isCurrentRaidActivity:
       type: boolean
+    isHeroicActivity:
+      type: boolean
     isMythicActivity:
       type: boolean
     isMythicPlusActivity:
+      type: boolean
+    isNormalActivity:
       type: boolean
     isPvpActivity:
       type: boolean
@@ -3271,6 +3332,10 @@ C_LFGList.LfgSearchResultData:
       type: boolean
     isWarMode:
       type: boolean
+    leaderBestDungeonScoreInfo:
+      nilable: true
+      type:
+        structure: C_LFGList.BestDungeonScoreMapInfo
     leaderDungeonScoreInfo:
       nilable: true
       type:
@@ -3839,6 +3904,9 @@ C_PartyPose.PartyPoseInfo:
       type: number
     defeatSoundKitID:
       type: number
+    extraButtonText:
+      nilable: true
+      type: string
     mapID:
       type: number
     partyPoseID:
@@ -4008,6 +4076,8 @@ C_PerksProgram.PerksVendorItemInfo:
   fields:
     description:
       type: string
+    doesNotExpire:
+      type: boolean
     iconTexture:
       type: string
     isPurchasePending:
@@ -4018,6 +4088,8 @@ C_PerksProgram.PerksVendorItemInfo:
       type: number
     mountID:
       type: number
+    mountTypeName:
+      type: string
     name:
       type: string
     perksVendorCategoryID:
@@ -4679,6 +4751,8 @@ C_QuestLog.QuestInfo:
         enum: QuestFrequency
     hasLocalPOI:
       type: boolean
+    isAbandonOnDisable:
+      type: boolean
     isAutoComplete:
       type: boolean
     isBounty:
@@ -4982,6 +5056,8 @@ C_ResearchInfo.DigSiteMapInfo:
   fields:
     name:
       type: string
+    poiBlobID:
+      type: number
     position:
       type:
         structure: vector2
@@ -5401,6 +5477,38 @@ C_SplashScreen.SplashScreenInfo:
       type: string
     topLeftFeatureTitle:
       type: string
+C_StableInfo.PetInfo:
+  fields:
+    abilities:
+      type:
+        arrayof: number
+    creatureID:
+      type: number
+    displayID:
+      type: number
+    familyName:
+      type: string
+    icon:
+      type: number
+    isExotic:
+      type: boolean
+    isFavorite:
+      type: boolean
+    level:
+      type: number
+    name:
+      type: string
+    petNumber:
+      type: number
+    slotID:
+      type: number
+    specialization:
+      type: string
+    type:
+      type: string
+    uiModelSceneID:
+      default: 718
+      type: number
 C_TaskQuest.TaskPOIData:
   fields:
     childDepth:
@@ -5738,6 +5846,16 @@ C_Transmog.TransmogApplyWarningInfo:
       type: string
     text:
       type: string
+C_Transmog.TransmogSetItemInfo:
+  fields:
+    invSlot:
+      type: number
+    invType:
+      type: string
+    itemID:
+      type: number
+    itemModifiedAppearanceID:
+      type: number
 C_TransmogCollection.TransmogAppearanceInfoBySourceData:
   fields:
     appearanceHasAnyNonLevelRequirements:
@@ -6295,6 +6413,9 @@ C_UIWidgetManager.HorizontalCurrenciesWidgetVisualizationInfo:
     tooltipLoc:
       type:
         enum: UIWidgetTooltipLocation
+    updateAnimType:
+      type:
+        enum: UIWidgetUpdateAnimType
     widgetScale:
       type:
         enum: UIWidgetScale
@@ -6468,6 +6589,43 @@ C_UIWidgetManager.ItemDisplayVisualizationInfo:
     tooltipLoc:
       type:
         enum: UIWidgetTooltipLocation
+    widgetScale:
+      type:
+        enum: UIWidgetScale
+    widgetSizeSetting:
+      type: number
+    widgetTag:
+      type: string
+C_UIWidgetManager.MapPinAnimationWidgetVisualizationInfo:
+  fields:
+    animType:
+      type:
+        enum: MapPinAnimationType
+    frameTextureKit:
+      type: string
+    hasTimer:
+      type: boolean
+    inAnimType:
+      type:
+        enum: WidgetAnimationType
+    layoutDirection:
+      type:
+        enum: UIWidgetLayoutDirection
+    modelSceneLayer:
+      type:
+        enum: UIWidgetModelSceneLayer
+    orderIndex:
+      type: number
+    outAnimType:
+      type:
+        enum: WidgetAnimationType
+    scriptedAnimationEffectID:
+      type: number
+    shownState:
+      type:
+        enum: WidgetShownState
+    textureKit:
+      type: string
     widgetScale:
       type:
         enum: UIWidgetScale
@@ -6918,6 +7076,9 @@ C_UIWidgetManager.TextureAndTextVisualizationInfo:
         enum: WidgetShownState
     text:
       type: string
+    textSizeType:
+      type:
+        enum: UIWidgetTextureAndTextSizeType
     textureKit:
       type: string
     tooltip:
@@ -7171,6 +7332,12 @@ C_UIWidgetManager.UIWidgetCurrencyInfo:
       type: string
     text:
       type: string
+    textFontType:
+      type:
+        enum: UIWidgetFontType
+    textSizeType:
+      type:
+        enum: UIWidgetTextSizeType
     tooltip:
       type: string
 C_UIWidgetManager.UIWidgetIconInfo:
@@ -7436,13 +7603,16 @@ C_VideoOptions.GxAdapterInfoDetails:
       type: string
 C_VignetteInfo.VignetteInfo:
   fields:
-    addPaddingAboveWidgets:
+    addPaddingAboveTooltipWidgets:
       nilable: true
       type: boolean
     atlasName:
       type: string
     hasTooltip:
       type: boolean
+    iconWidgetSet:
+      nilable: true
+      type: number
     inFogOfWar:
       type: boolean
     isDead:
@@ -7459,15 +7629,15 @@ C_VignetteInfo.VignetteInfo:
       type: boolean
     rewardQuestID:
       type: number
+    tooltipWidgetSet:
+      nilable: true
+      type: number
     type:
       type:
         enum: VignetteType
     vignetteGUID:
       type: string
     vignetteID:
-      type: number
-    widgetSetID:
-      nilable: true
       type: number
     zoneInfiniteAOI:
       type: boolean
@@ -7602,6 +7772,15 @@ C_WeeklyRewards.WeeklyRewardActivityRewardInfo:
     type:
       type:
         enum: CachedRewardType
+C_WorldLootObject.WorldLootObjectInfo:
+  fields:
+    atMaxQuality:
+      type: boolean
+    inventoryType:
+      type:
+        enum: InventoryType
+    isUpgrade:
+      type: boolean
 C_XMLUtil.XMLTemplateInfo:
   fields:
     height:

@@ -753,6 +753,10 @@ CANCEL_LOOT_ROLL:
   payload:
   - name: rollID
     type: number
+CANCEL_PLAYER_COUNTDOWN:
+  payload:
+  - name: initiatedBy
+    type: string
 CANCEL_SUMMON:
   payload: {}
 CAPTUREFRAMES_FAILED:
@@ -3929,6 +3933,10 @@ DYNAMIC_BUNDLE_PRICE_UPDATED:
   payload: {}
 DYNAMIC_GOSSIP_POI_UPDATED:
   payload: {}
+ECLIPSE_DIRECTION_CHANGE:
+  payload:
+  - name: direction
+    type: string
 EDIT_MODE_LAYOUTS_UPDATED:
   payload:
   - name: layoutInfo
@@ -4071,6 +4079,11 @@ FRAMESTACK_VISIBILITY_UPDATED:
   payload: {}
 FRIENDLIST_UPDATE:
   payload: {}
+GAME_ENVIRONMENT_SWITCHED:
+  payload:
+  - name: gameEnvironment
+    type:
+      enum: GameEnvironment
 GAME_PAD_ACTIVE_CHANGED:
   payload:
   - name: isActive
@@ -4544,6 +4557,10 @@ GUILDTABARD_UPDATE:
   payload: {}
 GX_RESTARTED:
   payload: {}
+HARDCORE_DEATHS:
+  payload:
+  - name: memberName
+    type: string
 HEARTHSTONE_BOUND:
   payload: {}
 HEIRLOOM_UPGRADE_TARGETING_CHANGED:
@@ -5566,6 +5583,9 @@ PET_FORCE_NAME_DECLENSION:
   payload:
   - name: name
     type: string
+  - name: petNumber
+    nilable: true
+    type: number
   - name: declinedName1
     nilable: true
     type: string
@@ -5581,6 +5601,8 @@ PET_FORCE_NAME_DECLENSION:
   - name: declinedName5
     nilable: true
     type: string
+PET_INFO_UPDATE:
+  payload: {}
 PET_JOURNAL_AUTO_SLOTTED_PET:
   payload:
   - name: slotIndex
@@ -5617,11 +5639,11 @@ PET_SPELL_POWER_UPDATE:
   payload: {}
 PET_STABLE_CLOSED:
   payload: {}
+PET_STABLE_FAVORITES_UPDATED:
+  payload: {}
 PET_STABLE_SHOW:
   payload: {}
 PET_STABLE_UPDATE:
-  payload: {}
-PET_STABLE_UPDATE_PAPERDOLL:
   payload: {}
 PET_UI_CLOSE:
   payload: {}
@@ -6313,7 +6335,11 @@ SCENARIO_UPDATE:
   - name: newStep
     nilable: true
     type: boolean
-SCRAPPING_MACHINE_ITEM_REMOVED_OR_CANCELLED:
+SCRAPPING_MACHINE_ITEM_ADDED:
+  payload:
+  - name: index
+    type: number
+SCRAPPING_MACHINE_ITEM_REMOVED:
   payload:
   - name: index
     type: number
@@ -6703,6 +6729,14 @@ START_LOOT_ROLL:
   - name: lootHandle
     nilable: true
     type: number
+START_PLAYER_COUNTDOWN:
+  payload:
+  - name: initiatedBy
+    type: string
+  - name: timeRemaining
+    type: number
+  - name: totalTime
+    type: number
 START_TIMER:
   payload:
   - name: timerType
@@ -6984,6 +7018,8 @@ TRADE_SKILL_FAVORITES_CHANGED:
   payload:
   - name: isFavorite
     type: boolean
+  - name: recipeSpellID
+    type: number
 TRADE_SKILL_ITEM_CRAFTED_RESULT:
   payload:
   - name: data
@@ -8076,6 +8112,12 @@ WORLD_CURSOR_TOOLTIP_UPDATE:
   - name: anchorType
     type:
       enum: WorldCursorAnchorType
+WORLD_LOOT_OBJECT_INFO_UPDATED:
+  payload:
+  - name: guid
+    type: string
+WORLD_LOOT_OBJECT_SWAP_INVENTORY_TYPE_UPDATED:
+  payload: {}
 WORLD_MAP_OPEN:
   payload:
   - name: uiMapID
