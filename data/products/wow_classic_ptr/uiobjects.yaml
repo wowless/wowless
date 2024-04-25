@@ -165,6 +165,12 @@ AnimationGroup:
     SetPlaying: {}
     SetToFinalAlpha: {}
     Stop: {}
+ArchaeologyDigSiteFrame:
+  fields: {}
+  inherits:
+    Frame: {}
+    POIFrame: {}
+  methods: {}
 Browser:
   fieldinitoverrides:
     mouseClickEnabled: true
@@ -286,7 +292,6 @@ Button:
       - type: number
     IsEnabled:
       impl: Button/IsEnabled
-    LockHighlight: {}
     RegisterForClicks:
       impl: Button/RegisterForClicks
     RegisterForMouse: {}
@@ -321,7 +326,6 @@ Button:
     SetHighlightAtlas:
       impl: Button/SetHighlightAtlas
     SetHighlightFontObject: {}
-    SetHighlightLocked: {}
     SetHighlightTexture:
       impl: Button/SetHighlightTexture
     SetMotionScriptsWhileDisabled:
@@ -352,7 +356,6 @@ Button:
       impl: Button/SetPushedTexture
     SetText:
       impl: Button/SetText
-    UnlockHighlight: {}
 CheckButton:
   fields:
     checked:
@@ -443,6 +446,9 @@ ColorSelect:
     Frame: {}
   methods:
     ClearColorWheelTexture: {}
+    GetColorAlpha: {}
+    GetColorAlphaTexture: {}
+    GetColorAlphaThumbTexture: {}
     GetColorHSV:
       outputs:
       - name: h
@@ -471,6 +477,9 @@ ColorSelect:
     GetColorWheelThumbTexture:
       getter:
       - name: colorWheelThumbTexture
+    SetColorAlpha: {}
+    SetColorAlphaTexture: {}
+    SetColorAlphaThumbTexture: {}
     SetColorHSV: {}
     SetColorRGB: {}
     SetColorValueTexture:
@@ -561,9 +570,20 @@ DressUpModel:
   methods:
     Dress: {}
     GetAutoDress: {}
+    GetItemModifiedAppearanceID: {}
+    GetObeyHideInTransmogFlag: {}
     GetSheathed: {}
+    GetSpellItemEnchantmentID: {}
+    GetUseTransmogChoices: {}
+    GetUseTransmogSkin: {}
+    IsGeoReady: {}
+    IsSlotAllowed: {}
+    IsSlotVisible: {}
     SetAutoDress: {}
+    SetObeyHideInTransmogFlag: {}
     SetSheathed: {}
+    SetUseTransmogChoices: {}
+    SetUseTransmogSkin: {}
     TryOn: {}
     Undress: {}
     UndressSlot: {}
@@ -1035,6 +1055,7 @@ Frame:
     GetPropagateKeyboardInput:
       getter:
       - name: propagateKeyboardInput
+    GetRaisedFrameLevel: {}
     GetRegions:
       impl: Frame/GetRegions
     GetResizeBounds:
@@ -1043,6 +1064,7 @@ Frame:
       - name: minResizeHeight
       - name: maxResizeWidth
       - name: maxResizeHeight
+    GetWindow: {}
     HasFixedFrameLevel:
       getter:
       - name: hasFixedFrameLevel
@@ -1070,6 +1092,7 @@ Frame:
     IsUserPlaced:
       getter:
       - name: isUserPlaced
+    LockHighlight: {}
     Lower: {}
     Raise: {}
     RegisterAllEvents:
@@ -1103,6 +1126,7 @@ Frame:
     SetFrameStrata:
       setter:
       - name: frameStrata
+    SetHighlightLocked: {}
     SetHitRectInsets: {}
     SetHyperlinksEnabled:
       setter:
@@ -1128,9 +1152,11 @@ Frame:
     SetUserPlaced:
       setter:
       - name: isUserPlaced
+    SetWindow: {}
     StartMoving: {}
     StartSizing: {}
     StopMovingOrSizing: {}
+    UnlockHighlight: {}
     UnregisterAllEvents:
       impl: Frame/UnregisterAllEvents
     UnregisterEvent:
@@ -1194,10 +1220,12 @@ GameTooltip:
     SetCraftSpell: {}
     SetCurrencyToken: {}
     SetCurrencyTokenByID: {}
+    SetEngravingRune: {}
     SetEquipmentSet: {}
     SetExistingSocketGem: {}
     SetFrameStack: {}
     SetGlyph: {}
+    SetGlyphByID: {}
     SetGuildBankItem: {}
     SetHeirloomByItemID: {}
     SetHyperlink: {}
@@ -1232,6 +1260,7 @@ GameTooltip:
     SetQuestLogCurrency: {}
     SetQuestLogItem: {}
     SetQuestLogSpecialItem: {}
+    SetReforgeItem: {}
     SetSendMailItem: {}
     SetShapeshift: {}
     SetSocketedItem: {}
@@ -1247,6 +1276,7 @@ GameTooltip:
     SetTradeSkillItem: {}
     SetTradeTargetItem: {}
     SetTrainerService: {}
+    SetTransmogrifyItem: {}
     SetUnit: {}
     SetUnitAura: {}
     SetUnitBuff: {}
@@ -1295,11 +1325,13 @@ Line:
     TextureBase: {}
   methods:
     GetEndPoint: {}
+    GetHitRectThickness: {}
     GetStartPoint: {}
     GetThickness:
       getter:
       - name: thickness
     SetEndPoint: {}
+    SetHitRectThickness: {}
     SetStartPoint: {}
     SetThickness:
       setter:
@@ -1559,6 +1591,8 @@ ParentedObjectBase:
   inherits:
     UIObject: {}
   methods:
+    ClearParentKey:
+      impl: ParentedObjectBase/ClearParentKey
     GetDebugName:
       impl: ParentedObject/GetDebugName
     GetParent:
@@ -1629,10 +1663,9 @@ PlayerModel:
     SetUnit: {}
     StopAnimKit: {}
     ZeroCachedCenterXY: {}
-QuestPOIFrame:
+POIFrame:
   fields: {}
-  inherits:
-    Frame: {}
+  inherits: {}
   methods:
     DrawAll: {}
     DrawBlob: {}
@@ -1640,8 +1673,6 @@ QuestPOIFrame:
     EnableMerging: {}
     EnableSmoothing: {}
     GetMapID: {}
-    GetNumTooltips: {}
-    GetTooltipIndex: {}
     SetBorderAlpha: {}
     SetBorderScalar: {}
     SetBorderTexture: {}
@@ -1650,6 +1681,15 @@ QuestPOIFrame:
     SetMapID: {}
     SetMergeThreshold: {}
     SetNumSplinePoints: {}
+  virtual: true
+QuestPOIFrame:
+  fields: {}
+  inherits:
+    Frame: {}
+    POIFrame: {}
+  methods:
+    GetNumTooltips: {}
+    GetTooltipIndex: {}
     UpdateMouseOverTooltip: {}
 Region:
   fields:
@@ -2099,6 +2139,7 @@ TabardModel:
     GetUpperEmblemFileName: {}
     GetUpperEmblemTexture: {}
     InitializeTabardColors: {}
+    IsGuildTabard: {}
     Save: {}
 Texture:
   fields: {}
@@ -2166,6 +2207,7 @@ TextureBase:
     LayeredRegion: {}
     ScriptObject: {}
   methods:
+    ClearTextureSlice: {}
     GetAtlas: {}
     GetBlendMode:
       getter:
@@ -2190,6 +2232,8 @@ TextureBase:
       impl: Texture/GetTexture
     GetTextureFileID: {}
     GetTextureFilePath: {}
+    GetTextureSliceMargins: {}
+    GetTextureSliceMode: {}
     GetVertexColor:
       getter:
       - name: vertexColorR
@@ -2227,6 +2271,8 @@ TextureBase:
     SetTexelSnappingBias: {}
     SetTexture:
       impl: Texture/SetTexture
+    SetTextureSliceMargins: {}
+    SetTextureSliceMode: {}
     SetVertexOffset: {}
     SetVertTile:
       setter:
@@ -2284,3 +2330,12 @@ UnitPositionFrame:
     SetUnitColor: {}
     StartPlayerPing: {}
     StopPlayerPing: {}
+VertexColor:
+  fields: {}
+  inherits:
+    Animation: {}
+  methods:
+    GetEndColor: {}
+    GetStartColor: {}
+    SetEndColor: {}
+    SetStartColor: {}
