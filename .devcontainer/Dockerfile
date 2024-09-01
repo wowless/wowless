@@ -13,7 +13,7 @@ RUN apt-get update \
         libyaml-dev \
         libzip-dev \
         ninja-build \
-        ruby \
+        ruby-dev \
         tar \
         unzip \
         zip \
