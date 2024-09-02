@@ -1,8 +1,8 @@
 ---
-build: '54261'
-date: Apr 12 2024
-flavor: Wrath
-hash: c91609c69ed2ab39d44039390a1be969
+build: '56014'
+date: Aug  5 2024
+flavor: Cata
+hash: 0636a4b3aa0b9aa69dbb7db17a319395
 test: false
-tocversion: 30403
-version: 3.4.3
+tocversion: 40400
+version: 4.4.0

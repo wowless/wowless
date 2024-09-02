@@ -84,9 +84,6 @@ C_ScriptedAnimations.GetAllScriptedAnimationEffects:
 C_SpecializationInfo.GetSpecIDs:
   sqls:
   - cursor: C_SpecializationInfo.GetSpecIDs
-C_Texture.GetAtlasInfo:
-  sqls:
-  - lookup: C_Texture.GetAtlasInfo
 C_Texture.GetAtlasInfo_10_2:
   sqls:
   - lookup: C_Texture.GetAtlasInfo_10_2
@@ -125,9 +122,6 @@ C_UI.GetWorldFrame:
 C_UIColor.GetColors:
   sqls:
   - cursor: C_UIColor.GetColors
-C_XMLUtil.GetTemplateInfo:
-  frameworks:
-  - api
 C_XMLUtil.GetTemplateInfo_10_2:
   frameworks:
   - api
