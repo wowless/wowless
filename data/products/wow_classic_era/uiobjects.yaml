@@ -564,9 +564,20 @@ DressUpModel:
   methods:
     Dress: {}
     GetAutoDress: {}
+    GetItemModifiedAppearanceID: {}
+    GetObeyHideInTransmogFlag: {}
     GetSheathed: {}
+    GetSpellItemEnchantmentID: {}
+    GetUseTransmogChoices: {}
+    GetUseTransmogSkin: {}
+    IsGeoReady: {}
+    IsSlotAllowed: {}
+    IsSlotVisible: {}
     SetAutoDress: {}
+    SetObeyHideInTransmogFlag: {}
     SetSheathed: {}
+    SetUseTransmogChoices: {}
+    SetUseTransmogSkin: {}
     TryOn: {}
     Undress: {}
     UndressSlot: {}
@@ -1239,6 +1250,7 @@ GameTooltip:
     SetQuestLogCurrency: {}
     SetQuestLogItem: {}
     SetQuestLogSpecialItem: {}
+    SetReforgeItem: {}
     SetSendMailItem: {}
     SetShapeshift: {}
     SetSocketedItem: {}
@@ -1688,6 +1700,7 @@ Region:
       impl: Region/ClearAllPoints
     ClearPoint: {}
     ClearPointsOffset: {}
+    CollapsesLayout: {}
     CreateAnimationGroup:
       impl: Region/CreateAnimationGroup
       inputs:
@@ -1765,6 +1778,7 @@ Region:
       getter:
       - name: width
     IsAnchoringRestricted: {}
+    IsCollapsed: {}
     IsDragging: {}
     IsIgnoringParentAlpha:
       getter:
@@ -1791,6 +1805,7 @@ Region:
     IsRectValid: {}
     SetAllPoints:
       impl: Region/SetAllPoints
+    SetCollapsesLayout: {}
     SetHeight:
       setter:
       - name: height
@@ -1809,7 +1824,6 @@ Region:
     SetPassThroughButtons: {}
     SetPoint:
       impl: Region/SetPoint
-    SetProtected: {}
     SetSize:
       setter:
       - name: width

@@ -64,12 +64,14 @@ skip_docfiles:
   ConfigurationWarningsDocumentation: {}
   DebugToggleDocumentation: {}
   EditModeManagerDocumentation: {}
+  FrameAPIArchaeologyDigsiteDocumentation: {}
   FrameAPIBlobDocumentation: {}
   FrameAPIQuestPOIDocumentation: {}
   PingPinFrameAPIDocumentation: {}
   SimpleModelFFXAPIDocumentation: {}
 typedefs:
   AnimationDataEnum: number
+  BigInteger: number
   BigUInteger: number
   bool: boolean
   CalendarEventID: string
@@ -117,7 +119,6 @@ typedefs:
   size: number
   string: string
   TBFFlags: string
-  TBFStyleFlags: string
   TextureAsset: string
   TextureAssetDisk: string
   textureAtlas: string
