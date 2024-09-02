@@ -350,6 +350,13 @@ C_AchievementInfo.GetSupercedingAchievements:
   - name: supercedingAchievements
     type:
       arrayof: number
+C_AchievementInfo.IsGuildAchievement:
+  inputs:
+  - name: achievementId
+    type: number
+  outputs:
+  - name: isGuild
+    type: boolean
 C_AchievementInfo.IsValidAchievement:
   inputs:
   - name: achievementId
@@ -1086,6 +1093,11 @@ C_BarberShop.GetViewingChrModel:
   - name: chrModelID
     nilable: true
     type: number
+C_BarberShop.HasAlteredForm:
+  inputs: {}
+  outputs:
+  - name: hasAlteredForm
+    type: boolean
 C_BarberShop.HasAnyChanges:
   inputs: {}
   outputs:
@@ -1161,6 +1173,15 @@ C_BarberShop.SetModelDressState:
   inputs:
   - name: dressedState
     type: boolean
+  outputs: {}
+C_BarberShop.SetPortraitTexture:
+  inputs:
+  - name: texture
+    type: Texture
+  - name: raceID
+    type: number
+  - name: sex
+    type: number
   outputs: {}
 C_BarberShop.SetSelectedSex:
   inputs:
@@ -5821,6 +5842,13 @@ C_GuildInfo.Promote:
   - name: name
     type: string
   outputs: {}
+C_GuildInfo.QueryGuildMemberRecipes:
+  inputs:
+  - name: guildMemberGUID
+    type: string
+  - name: skillLineID
+    type: number
+  outputs: {}
 C_GuildInfo.QueryGuildMembersForRecipe:
   inputs:
   - name: skillLineID
@@ -8022,6 +8050,11 @@ C_PartyInfo.GetInviteConfirmationInvalidQueues:
     type:
       arrayof:
         structure: QueueSpecificInfo
+C_PartyInfo.InviteUnit:
+  inputs:
+  - name: targetName
+    type: string
+  outputs: {}
 C_PartyInfo.IsCrossFactionParty:
   inputs:
   - name: category
@@ -8325,6 +8358,29 @@ C_PvP.GetArenaCrowdControlInfo:
     type: number
   - name: duration
     type: number
+C_PvP.GetArenaRewards:
+  inputs:
+  - name: teamSize
+    type: number
+  outputs:
+  - name: honor
+    type: number
+  - name: experience
+    type: number
+  - name: itemRewards
+    nilable: true
+    type:
+      arrayof:
+        structure: C_PvP.BattlefieldItemReward
+  - name: currencyRewards
+    nilable: true
+    type:
+      arrayof:
+        structure: C_PvP.BattlefieldCurrencyReward
+  - name: roleShortageBonus
+    nilable: true
+    type:
+      structure: C_PvP.RoleShortageReward
 C_PvP.GetBattlefieldVehicleInfo:
   inputs:
   - name: vehicleIndex
@@ -8435,6 +8491,34 @@ C_PvP.GetRandomBGRewards:
     nilable: true
     type:
       structure: C_PvP.RoleShortageReward
+C_PvP.GetRatedBGRewards:
+  inputs: {}
+  outputs:
+  - name: honor
+    type: number
+  - name: experience
+    type: number
+  - name: itemRewards
+    nilable: true
+    type:
+      arrayof:
+        structure: C_PvP.BattlefieldItemReward
+  - name: currencyRewards
+    nilable: true
+    type:
+      arrayof:
+        structure: C_PvP.BattlefieldCurrencyReward
+  - name: roleShortageBonus
+    nilable: true
+    type:
+      structure: C_PvP.RoleShortageReward
+C_PvP.GetWorldPvPWaitTime:
+  inputs:
+  - name: index
+    type: number
+  outputs:
+  - name: pvpWaitTime
+    type: number
 C_PvP.GetZonePVPInfo:
   inputs: {}
   outputs:
@@ -9435,6 +9519,26 @@ C_ToyBoxInfo.NeedsFanfare:
     type: number
   outputs:
   - name: needsFanfare
+    type: boolean
+C_TradeSkillUI.GetTradeSkillDisplayName:
+  inputs:
+  - name: skillLineID
+    type: number
+  outputs:
+  - name: professionDisplayName
+    type: string
+C_TradeSkillUI.GetTradeSkillTexture:
+  inputs:
+  - name: tradeSkillID
+    type: number
+  outputs:
+  - name: tradeSkillTexture
+    nilable: true
+    type: number
+C_TradeSkillUI.IsGuildTradeSkillsEnabled:
+  inputs: {}
+  outputs:
+  - name: enabled
     type: boolean
 C_Traits.CanPurchaseRank:
   inputs:
@@ -12767,6 +12871,8 @@ GetBattlegroundInfo:
     type: string
   - name: longDescription
     type: string
+  - name: hasControllingHoliday
+    type: number
 GetBattlegroundPoints: {}
 GetBestFlexRaidChoice: {}
 GetBestRFChoice: {}
@@ -13282,7 +13388,6 @@ GetDungeonDifficultyID:
 GetDungeonForRandomSlot: {}
 GetEclipseDirection: {}
 GetEditBoxMetatable: {}
-GetEquivalentDynamicDifficultyIDs: {}
 geterrorhandler:
   stdlib: geterrorhandler
 GetEventTime:
@@ -16257,7 +16362,6 @@ InitiateTrade:
     type: unit
   outputs: {}
 InRepairMode: {}
-InviteUnit: {}
 ipairs:
   stdlib: ipairs
 Is64BitClient:
@@ -16433,6 +16537,7 @@ IsInventoryItemLocked: {}
 IsInventoryItemProfessionBag: {}
 IsItemAction: {}
 IsKeyDown: {}
+IsKeyRingEnabled: {}
 IsLeftAltKeyDown: {}
 IsLeftControlKeyDown: {}
 IsLeftMetaKeyDown: {}
@@ -16590,6 +16695,7 @@ IsSpellKnownOrOverridesKnown:
   outputs:
   - name: value
     type: boolean
+IsSpellOverlayed: {}
 IsStackableAction: {}
 IsStealthed:
   inputs: {}
@@ -16717,7 +16823,6 @@ JoinWorldPVPQueue: {}
 JumpOrAscendStart:
   inputs: {}
   outputs: {}
-KeyRingButtonIDToInvSlotID: {}
 Kiosk.GetCharacterTemplateSetIndex: {}
 Kiosk.IsEnabled:
   inputs: {}
@@ -17429,6 +17534,7 @@ SetPartyAssignment:
     type: unit
   outputs: {}
 SetPendingReportArenaTeamName: {}
+SetPetSlot: {}
 SetPetStablePaperdoll: {}
 SetPOIIconOverlapDistance: {}
 SetPOIIconOverlapPushDistance: {}
@@ -17638,7 +17744,8 @@ sqrt:
 StablePet: {}
 StartAttack:
   inputs:
-  - name: name
+  - default: '0'
+    name: name
     type: string
   - default: false
     name: exactMatch

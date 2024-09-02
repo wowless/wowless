@@ -14,6 +14,7 @@ Constants:
     ACCOUNT_WIDE_HONOR_LEVEL_CURRENCY_ID: 1586
     ARTIFACT_KNOWLEDGE_CURRENCY_ID: 1171
     CLASSIC_ARENA_POINTS_CURRENCY_ID: 1900
+    CLASSIC_CONQUEST_CURRENCY_ID: 390
     CLASSIC_HONOR_CURRENCY_ID: 1901
     CONQUEST_ARENA_AND_BG_META_CURRENCY_ID: 483
     CONQUEST_ARENA_META_CURRENCY_ID: 483
@@ -36,6 +37,10 @@ Constants:
     HONOR_PER_CURRENCY: 10
     MAX_CURRENCY_QUANTITY: 100000000
     PLAYER_CURRENCY_CLIENT_FLAGS: 12
+    PVP_CURRENCY_CONQUEST_ALLIANCE_INV_ICON: 463448
+    PVP_CURRENCY_CONQUEST_HORDE_INV_ICON: 463449
+    PVP_CURRENCY_HONOR_ALLIANCE_INV_ICON: 463450
+    PVP_CURRENCY_HONOR_HORDE_INV_ICON: 463451
     QUESTIONMARK_INV_ICON: 134400
     WAR_RESOURCES_CURRENCY_ID: 1560
   GroupFinderConstants:
@@ -1648,13 +1653,14 @@ Enum:
     CurrencyBDontDisplayIfZero: 32
     CurrencyBNoNotificationMailOnOfflineProgress: 4
     CurrencyBScaleMaxQuantityBySeasonWeeks: 64
+    CurrencyBScaleMaxQuantityByWeeksSinceStart: 128
     CurrencyBShowQuestXPGainInTooltip: 2
     CurrencyBUseTotalEarnedForEarned: 1
     FutureCurrencyFlag: 16
   CurrencyFlagsBMeta:
-    MaxValue: 64
+    MaxValue: 128
     MinValue: 1
-    NumValues: 7
+    NumValues: 8
   CurrencyFlagsMeta:
     MaxValue: -2147483648
     MinValue: 1
@@ -3060,15 +3066,16 @@ Enum:
     NumValues: 21
   JournalEncounterFlags:
     AllianceOnly: 4
+    DoNotDisplayEncounter: 64
     HordeOnly: 8
     InternalOnly: 32
     LimitDifficulties: 2
     NoMap: 16
     Obsolete: 1
   JournalEncounterFlagsMeta:
-    MaxValue: 32
+    MaxValue: 64
     MinValue: 1
-    NumValues: 6
+    NumValues: 7
   JournalEncounterIconFlags:
     Bleed: 8192
     Curse: 256
