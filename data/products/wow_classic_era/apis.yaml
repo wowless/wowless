@@ -33,6 +33,7 @@ acos:
   nowrap: true
   stdlib: acos
 ActionHasRange: {}
+AddAutoQuestPopUp: {}
 AddChatWindowChannel: {}
 AddChatWindowMessages:
   inputs:
@@ -330,6 +331,7 @@ C_AccountInfo.IsGUIDRelatedToLocalAccount:
   outputs:
   - name: isLocalUser
     type: boolean
+C_AchievementInfo.AreGuildAchievementsEnabled: {}
 C_AchievementInfo.GetRewardItemID:
   inputs:
   - name: achievementID
@@ -346,6 +348,7 @@ C_AchievementInfo.GetSupercedingAchievements:
   - name: supercedingAchievements
     type:
       arrayof: number
+C_AchievementInfo.IsGuildAchievement: {}
 C_AchievementInfo.IsValidAchievement:
   inputs:
   - name: achievementId
@@ -1081,6 +1084,7 @@ C_BarberShop.GetViewingChrModel:
   - name: chrModelID
     nilable: true
     type: number
+C_BarberShop.HasAlteredForm: {}
 C_BarberShop.HasAnyChanges:
   inputs: {}
   outputs:
@@ -1157,6 +1161,7 @@ C_BarberShop.SetModelDressState:
   - name: dressedState
     type: boolean
   outputs: {}
+C_BarberShop.SetPortraitTexture: {}
 C_BarberShop.SetSelectedSex:
   inputs:
   - name: sex
@@ -1931,6 +1936,7 @@ C_ChatInfo.GetNumActiveChannels:
   outputs:
   - name: numChannels
     type: number
+C_ChatInfo.GetNumReservedChatWindows: {}
 C_ChatInfo.GetRegisteredAddonMessagePrefixes:
   inputs: {}
   outputs:
@@ -1959,6 +1965,7 @@ C_ChatInfo.IsPartyChannelType:
   outputs:
   - name: isPartyChannelType
     type: boolean
+C_ChatInfo.IsTimerunningPlayer: {}
 C_ChatInfo.IsValidChatLine:
   inputs:
   - name: chatLine
@@ -1967,46 +1974,10 @@ C_ChatInfo.IsValidChatLine:
   outputs:
   - name: isValid
     type: boolean
-C_ChatInfo.RegisterAddonMessagePrefix:
-  inputs:
-  - name: prefix
-    type: string
-  outputs:
-  - name: successfulRequest
-    type: boolean
+C_ChatInfo.IsValidCombatFilterName: {}
 C_ChatInfo.ReportServerLag:
   inputs: {}
   outputs: {}
-C_ChatInfo.SendAddonMessage:
-  inputs:
-  - name: prefix
-    type: string
-  - name: message
-    type: string
-  - name: chatType
-    nilable: true
-    type: string
-  - name: target
-    nilable: true
-    type: string
-  outputs:
-  - name: success
-    type: boolean
-C_ChatInfo.SendAddonMessageLogged:
-  inputs:
-  - name: prefix
-    type: string
-  - name: message
-    type: string
-  - name: chatType
-    nilable: true
-    type: string
-  - name: target
-    nilable: true
-    type: string
-  outputs:
-  - name: success
-    type: boolean
 C_ChatInfo.SwapChatChannelsByChannelIndex:
   inputs:
   - name: firstChannelIndex
@@ -2160,6 +2131,7 @@ C_Club.DoesAnyCommunityHaveUnreadMessages:
   outputs:
   - name: hasUnreadMessages
     type: boolean
+C_Club.DoesCommunityHaveMembersOfTheOppositeFaction: {}
 C_Club.EditClub:
   inputs:
   - name: clubId
@@ -2247,6 +2219,7 @@ C_Club.GetAvatarIdList:
     nilable: true
     type:
       arrayof: number
+C_Club.GetClubCapacity: {}
 C_Club.GetClubInfo:
   inputs:
   - name: clubId
@@ -2256,6 +2229,7 @@ C_Club.GetClubInfo:
     nilable: true
     type:
       structure: C_Club.ClubInfo
+C_Club.GetClubLimits: {}
 C_Club.GetClubMembers:
   inputs:
   - name: clubId
@@ -2293,6 +2267,7 @@ C_Club.GetCommunityNameResultText:
   - name: errorCode
     nilable: true
     type: string
+C_Club.GetGuildClubId: {}
 C_Club.GetInfoFromLastCommunityChatLine:
   inputs: {}
   outputs:
@@ -2577,6 +2552,7 @@ C_Club.SendBattleTagFriendRequest:
   - name: memberId
     type: number
   outputs: {}
+C_Club.SendCharacterInvitation: {}
 C_Club.SendInvitation:
   inputs:
   - name: clubId
@@ -5110,6 +5086,7 @@ C_GossipInfo.SelectOptionByIndex:
     nilable: true
     type: boolean
   outputs: {}
+C_GuildInfo.AreGuildEventsEnabled: {}
 C_GuildInfo.CanEditOfficerNote:
   inputs: {}
   outputs:
@@ -5133,6 +5110,7 @@ C_GuildInfo.Demote:
 C_GuildInfo.Disband:
   inputs: {}
   outputs: {}
+C_GuildInfo.GetGuildNewsInfo: {}
 C_GuildInfo.GetGuildRankOrder:
   inputs:
   - name: guid
@@ -5188,6 +5166,7 @@ C_GuildInfo.Invite:
   - name: name
     type: string
   outputs: {}
+C_GuildInfo.IsEncounterGuildNewsEnabled: {}
 C_GuildInfo.IsGuildOfficer:
   inputs: {}
   outputs:
@@ -5202,6 +5181,7 @@ C_GuildInfo.IsGuildRankAssignmentAllowed:
   outputs:
   - name: isGuildRankAssignmentAllowed
     type: boolean
+C_GuildInfo.IsGuildReputationEnabled: {}
 C_GuildInfo.Leave:
   inputs: {}
   outputs: {}
@@ -5217,6 +5197,7 @@ C_GuildInfo.Promote:
   - name: name
     type: string
   outputs: {}
+C_GuildInfo.QueryGuildMemberRecipes: {}
 C_GuildInfo.QueryGuildMembersForRecipe:
   inputs:
   - name: skillLineID
@@ -5277,6 +5258,7 @@ C_Item.ActionBindsItem:
 C_Item.BindEnchant:
   inputs: {}
   outputs: {}
+C_Item.CanItemTransmogAppearance: {}
 C_Item.ConfirmBindOnUse:
   inputs: {}
   outputs: {}
@@ -5337,6 +5319,8 @@ C_Item.EquipItemByName:
     nilable: true
     type: number
   outputs: {}
+C_Item.GetAppliedItemTransmogInfo: {}
+C_Item.GetBaseItemTransmogInfo: {}
 C_Item.GetCurrentItemLevel:
   inputs:
   - name: itemLocation
@@ -5346,6 +5330,7 @@ C_Item.GetCurrentItemLevel:
   - name: currentItemLevel
     nilable: true
     type: number
+C_Item.GetCurrentItemTransmogInfo: {}
 C_Item.GetDetailedItemLevelInfo:
   inputs:
   - name: itemInfo
@@ -5419,6 +5404,7 @@ C_Item.GetItemGem:
     type: string
   - name: gemLink
     type: string
+C_Item.GetItemGemID: {}
 C_Item.GetItemGUID:
   inputs:
   - name: itemLocation
@@ -5528,6 +5514,7 @@ C_Item.GetItemInventorySlotInfo:
   - name: result
     stub: someNonEmptyString
     type: string
+C_Item.GetItemInventorySlotKey: {}
 C_Item.GetItemInventoryType:
   inputs:
   - name: itemLocation
@@ -5590,6 +5577,8 @@ C_Item.GetItemNameByID:
   - name: itemName
     nilable: true
     type: string
+C_Item.GetItemNumAddedSockets: {}
+C_Item.GetItemNumSockets: {}
 C_Item.GetItemQuality:
   inputs:
   - name: itemLocation
@@ -5901,6 +5890,7 @@ C_LFGInfo.CanPlayerUsePremadeGroup:
     type: boolean
   - name: failureReason
     type: string
+C_LFGInfo.CanPlayerUseScenarioFinder: {}
 C_LFGInfo.GetDungeonInfo:
   inputs:
   - name: lfgDungeonID
@@ -7278,6 +7268,7 @@ C_PartyInfo.ConfirmLeaveParty:
     nilable: true
     type: number
   outputs: {}
+C_PartyInfo.DoCountdown: {}
 C_PartyInfo.GetActiveCategories:
   inputs: {}
   outputs:
@@ -7293,6 +7284,7 @@ C_PartyInfo.GetInviteConfirmationInvalidQueues:
     type:
       arrayof:
         structure: QueueSpecificInfo
+C_PartyInfo.InviteUnit: {}
 C_PartyInfo.IsCrossFactionParty:
   inputs:
   - name: category
@@ -7587,6 +7579,7 @@ C_PvP.GetArenaCrowdControlInfo:
     type: number
   - name: duration
     type: number
+C_PvP.GetArenaRewards: {}
 C_PvP.GetBattlefieldVehicleInfo:
   inputs:
   - name: vehicleIndex
@@ -7648,6 +7641,7 @@ C_PvP.GetHolidayBGRewards:
     nilable: true
     type:
       structure: C_PvP.RoleShortageReward
+C_PvP.GetOutdoorPvPWaitTime: {}
 C_PvP.GetRandomBGLossRewards:
   inputs: {}
   outputs:
@@ -7690,6 +7684,8 @@ C_PvP.GetRandomBGRewards:
     nilable: true
     type:
       structure: C_PvP.RoleShortageReward
+C_PvP.GetRatedBGRewards: {}
+C_PvP.GetWorldPvPWaitTime: {}
 C_PvP.GetZonePVPInfo:
   inputs: {}
   outputs:
@@ -7826,6 +7822,7 @@ C_QuestLog.IsQuestFlaggedCompleted:
   outputs:
   - name: isCompleted
     type: boolean
+C_QuestLog.IsQuestFromContentPush: {}
 C_QuestLog.SetMapForQuestPOIs:
   inputs:
   - name: uiMapID
@@ -8182,6 +8179,7 @@ C_Spell.RequestLoadSpellData:
   - name: spellID
     type: number
   outputs: {}
+C_Spell.TargetSpellJumpsUpgradeTrack: {}
 C_Spell.TargetSpellReplacesBonusTree:
   inputs: {}
   outputs:
@@ -10205,6 +10203,7 @@ CanShowResetInstances:
   outputs:
   - name: result
     type: boolean
+CanShowSetRoleButton: {}
 CanSignPetition:
   inputs: {}
   outputs:
@@ -10216,6 +10215,7 @@ CanUpgradeExpansion:
   outputs:
   - name: canUpgradeExpansion
     type: boolean
+CanViewGuildRecipes: {}
 CanWithdrawGuildBankMoney:
   inputs: {}
   outputs:
@@ -10273,6 +10273,7 @@ ClassicExpansionAtLeast:
   - name: isAtLeast
     type: boolean
 ClearAchievementComparisonUnit: {}
+ClearAchievementSearchString: {}
 ClearAllLFGDungeons: {}
 ClearBattlemaster:
   inputs: {}
@@ -10292,6 +10293,7 @@ ClearPartyAssignment:
   - name: unit
     type: unit
   outputs: {}
+ClearRaidMarker: {}
 ClearSendMail: {}
 ClearTarget:
   inputs: {}
@@ -10362,10 +10364,12 @@ CloseTrainer:
 CollapseAllFactionHeaders: {}
 CollapseCraftSkillLine: {}
 CollapseFactionHeader: {}
+CollapseGuildTradeSkillHeader: {}
 CollapseQuestHeader: {}
 CollapseSkillHeader: {}
 CollapseTradeSkillSubClass: {}
 CollapseTrainerSkillLine: {}
+CollapseWarGameHeader: {}
 collectgarbage:
   stdlib: collectgarbage
 CombatLog_Object_IsA: {}
@@ -10669,6 +10673,41 @@ DropCursorMoney:
   outputs: {}
 DungeonAppearsInRandomLFD: {}
 EditMacro: {}
+EJ_ClearSearch: {}
+EJ_EndSearch: {}
+EJ_GetContentTuningID: {}
+EJ_GetCreatureInfo: {}
+EJ_GetCurrentTier: {}
+EJ_GetDifficulty: {}
+EJ_GetEncounterInfo: {}
+EJ_GetEncounterInfoByIndex: {}
+EJ_GetInstanceByIndex: {}
+EJ_GetInstanceForMap: {}
+EJ_GetInstanceInfo: {}
+EJ_GetInvTypeSortOrder: {}
+EJ_GetLootFilter: {}
+EJ_GetMapEncounter: {}
+EJ_GetNumEncountersForLootByIndex: {}
+EJ_GetNumLoot: {}
+EJ_GetNumSearchResults: {}
+EJ_GetNumTiers: {}
+EJ_GetSearchProgress: {}
+EJ_GetSearchResult: {}
+EJ_GetSearchSize: {}
+EJ_GetSectionPath: {}
+EJ_GetTierInfo: {}
+EJ_HandleLinkPath: {}
+EJ_InstanceIsRaid: {}
+EJ_IsLootListOutOfDate: {}
+EJ_IsSearchFinished: {}
+EJ_IsValidInstanceDifficulty: {}
+EJ_ResetLootFilter: {}
+EJ_SelectEncounter: {}
+EJ_SelectInstance: {}
+EJ_SelectTier: {}
+EJ_SetDifficulty: {}
+EJ_SetLootFilter: {}
+EJ_SetSearch: {}
 EjectPassengerFromSeat: {}
 EnableSpellAutocast: {}
 EnumerateFrames:
@@ -10701,6 +10740,7 @@ ExpandAllFactionHeaders: {}
 ExpandCraftSkillLine: {}
 ExpandCurrencyList: {}
 ExpandFactionHeader: {}
+ExpandGuildTradeSkillHeader: {}
 ExpandQuestHeader: {}
 ExpandSkillHeader: {}
 ExpandTradeSkillSubClass: {}
@@ -10709,6 +10749,7 @@ ExpandTrainerSkillLine:
   - name: index
     type: number
   outputs: {}
+ExpandWarGameHeader: {}
 FactionToggleAtWar: {}
 fastrandom:
   stdlib: fastrandom
@@ -10743,6 +10784,7 @@ FlipCameraYaw:
   outputs: {}
 floor:
   alias: math.floor
+FlyoutHasSpell: {}
 FocusUnit:
   inputs:
   - default: ''
@@ -10792,6 +10834,8 @@ GetAchievementLink: {}
 GetAchievementNumCriteria: {}
 GetAchievementNumRewards: {}
 GetAchievementReward: {}
+GetAchievementSearchProgress: {}
+GetAchievementSearchSize: {}
 GetActionAutocast: {}
 GetActionBarPage:
   inputs: {}
@@ -11017,6 +11061,7 @@ GetAutoDeclineGuildInvites:
   outputs:
   - name: result
     type: boolean
+GetAutoQuestPopUp: {}
 GetAvailableBandwidth:
   inputs: {}
   outputs:
@@ -11064,6 +11109,7 @@ GetBankSlotCost:
   outputs:
   - name: cost
     type: number
+GetBattlefieldArenaFaction: {}
 GetBattlefieldEstimatedWaitTime: {}
 GetBattlefieldFlagPosition: {}
 GetBattlefieldInstanceExpiration: {}
@@ -11488,6 +11534,8 @@ GetCurrentGuildBankTab:
   outputs:
   - type: number
 GetCurrentKeyBoardFocus: {}
+GetCurrentLevelFeatures: {}
+GetCurrentLevelSpells: {}
 GetCurrentRegion:
   inputs: {}
   outputs:
@@ -11602,8 +11650,9 @@ GetDungeonDifficultyID:
   - name: result
     type: number
 GetDungeonForRandomSlot: {}
+GetEclipseDirection: {}
 GetEditBoxMetatable: {}
-GetEquivalentDynamicDifficultyID: {}
+GetEquivalentDynamicDifficultyIDs: {}
 geterrorhandler:
   stdlib: geterrorhandler
 GetEventTime:
@@ -11642,6 +11691,7 @@ GetExpansionDisplayInfo:
     nilable: true
     type:
       structure: ExpansionDisplayInfo
+GetExpansionForLevel: {}
 GetExpansionLevel:
   inputs: {}
   outputs:
@@ -11753,12 +11803,16 @@ GetFileStreamingStatus:
   - name: result
     stub: 0
     type: number
+GetFilteredAchievementID: {}
 GetFirstBagBankSlotIndex: {}
 GetFirstTradeSkill:
   inputs: {}
   outputs:
   - type: number
 GetFlexRaidDungeonInfo: {}
+GetFlyoutID: {}
+GetFlyoutInfo: {}
+GetFlyoutSlotInfo: {}
 GetFontInfo: {}
 GetFonts: {}
 GetFontStringMetatable:
@@ -11916,9 +11970,12 @@ GetGuildBankWithdrawMoney:
   outputs:
   - name: value
     type: number
+GetGuildCategoryList: {}
+GetGuildChallengeInfo: {}
 GetGuildCharterCost: {}
 GetGuildEventInfo: {}
 GetGuildFactionGroup: {}
+GetGuildFactionInfo: {}
 GetGuildInfo:
   inputs:
   - name: unit
@@ -11936,7 +11993,15 @@ GetGuildInfoText:
   - name: text
     type: string
 GetGuildLogoInfo: {}
+GetGuildMemberRecipes: {}
+GetGuildNewsFilters: {}
+GetGuildNewsMemberName: {}
+GetGuildNewsSort: {}
+GetGuildPerkInfo: {}
+GetGuildRecipeInfoPostQuery: {}
+GetGuildRecipeMember: {}
 GetGuildRenameRequired: {}
+GetGuildRewardInfo: {}
 GetGuildRosterInfo:
   inputs:
   - name: guildIndex
@@ -11959,6 +12024,7 @@ GetGuildRosterInfo:
     type: boolean
   - name: isAway
     type: boolean
+GetGuildRosterLargestAchievementPoints: {}
 GetGuildRosterLastOnline: {}
 GetGuildRosterMOTD:
   outputs:
@@ -11974,6 +12040,7 @@ GetGuildRosterShowOffline:
   - name: value
     type: boolean
 GetGuildTabardFiles: {}
+GetGuildTradeSkillInfo: {}
 GetHaste:
   inputs: {}
   outputs:
@@ -12367,6 +12434,7 @@ GetMacroInfo:
 GetMacroItem: {}
 GetMacroItemIcons: {}
 GetMacroSpell: {}
+GetMajorTalentTreeBonuses: {}
 GetManaRegen: {}
 GetMasterLootCandidate:
   inputs:
@@ -12377,6 +12445,7 @@ GetMasterLootCandidate:
   outputs:
   - name: candidate
     type: string
+GetMastery: {}
 GetMaxBattlefieldID:
   outputs:
   - type: number
@@ -12465,6 +12534,7 @@ GetMinimumExpansionLevel:
   outputs:
   - name: expansionLevel
     type: number
+GetMinorTalentTreeBonuses: {}
 GetMinRenderScale:
   inputs: {}
   outputs:
@@ -12557,7 +12627,9 @@ GetNextPendingInviteConfirmation:
   - name: firstInvite
     nilable: true
     type: number
+GetNextPetTalentLevel: {}
 GetNextStableSlotCost: {}
+GetNextTalentLevel: {}
 GetNormalizedRealmName:
   inputs: {}
   outputs:
@@ -12581,6 +12653,7 @@ GetNumAuctionItems:
     type: number
   - name: count
     type: number
+GetNumAutoQuestPopUps: {}
 GetNumAvailableQuests:
   inputs: {}
   outputs:
@@ -12651,7 +12724,9 @@ GetNumFactions:
   outputs:
   - name: numFactions
     type: number
+GetNumFilteredAchievements: {}
 GetNumFlexRaidDungeons: {}
+GetNumFlyouts: {}
 GetNumGroupChannels: {}
 GetNumGroupMembers:
   outputs:
@@ -12665,6 +12740,7 @@ GetNumGuildBankTabs:
   outputs:
   - type: number
 GetNumGuildBankTransactions: {}
+GetNumGuildChallenges: {}
 GetNumGuildEvents: {}
 GetNumGuildMembers:
   inputs: {}
@@ -12675,6 +12751,10 @@ GetNumGuildMembers:
     type: number
   - name: onlineAndMobileMembers
     type: number
+GetNumGuildNews: {}
+GetNumGuildPerks: {}
+GetNumGuildRewards: {}
+GetNumGuildTradeSkill: {}
 GetNumLanguages:
   outputs:
   - type: number
@@ -12760,6 +12840,7 @@ GetNumSockets:
   outputs:
   - name: value
     type: number
+GetNumSpecializationsForClassID: {}
 GetNumSpellTabs:
   outputs:
   - type: number
@@ -12775,6 +12856,7 @@ GetNumTalentGroups:
     type: boolean
   outputs:
   - type: number
+GetNumTalentPoints: {}
 GetNumTalents:
   impl: GetNumTalents
   inputs:
@@ -12807,6 +12889,7 @@ GetNumTrainerServices:
   outputs:
   - name: numServices
     type: number
+GetNumWarGameTypes: {}
 GetObjectiveText: {}
 GetOptOutOfLoot: {}
 GetOSLocale:
@@ -12816,6 +12899,7 @@ GetOSLocale:
     type: string
 GetOverrideBarIndex: {}
 GetOverrideBarSkin: {}
+GetOverrideSpellPowerByAP: {}
 GetOwnerAuctionItems: {}
 GetParryChance: {}
 GetParryChanceFromAttribute: {}
@@ -12914,11 +12998,14 @@ GetPossessInfo: {}
 GetPowerRegen: {}
 GetPowerRegenForPowerType: {}
 GetPrevCompleatedTutorial: {}
+GetPreviewPrimaryTalentTree: {}
 GetPreviewTalentPointsSpent: {}
 GetPreviousAchievement: {}
 GetPreviousArenaSeason: {}
 GetPreviousArenaSeasonUsesTeams: {}
+GetPrimaryTalentTree: {}
 GetProfessionInfo: {}
+GetProfessions: {}
 GetProgressText:
   inputs: {}
   outputs:
@@ -13048,6 +13135,7 @@ GetQuestLogIndexByID:
   outputs:
   - name: questLogIndex
     type: number
+GetQuestLogIsAutoComplete: {}
 GetQuestLogItemDrop: {}
 GetQuestLogItemLink: {}
 GetQuestLogLeaderBoard:
@@ -13064,6 +13152,8 @@ GetQuestLogLeaderBoard:
     type: string
   - name: finished
     type: boolean
+GetQuestLogPortraitGiver: {}
+GetQuestLogPortraitTurnIn: {}
 GetQuestLogPushable: {}
 GetQuestLogQuestText: {}
 GetQuestLogQuestType: {}
@@ -13235,6 +13325,7 @@ GetRangedCritChance:
   - name: value
     type: number
 GetRangedHaste: {}
+GetRatedBattleGroundInfo: {}
 GetReadyCheckStatus:
   inputs:
   - name: unit
@@ -13394,6 +13485,7 @@ GetSelectedSkill:
   outputs:
   - type: number
 GetSelectedStablePet: {}
+GetSelectedWarGameType: {}
 GetSendMailCOD: {}
 GetSendMailItem: {}
 GetSendMailItemLink: {}
@@ -13491,6 +13583,8 @@ GetSocketTypes:
     stub: Blue
     type: string
 GetSoundEntryCount: {}
+GetSpecializationInfoForClassID: {}
+GetSpecializationInfoForSpecID: {}
 GetSpellAutocast:
   inputs:
   - name: slot
@@ -13502,6 +13596,7 @@ GetSpellAutocast:
     type: boolean
   - name: autoCastEnabled
     type: boolean
+GetSpellAvailableLevel: {}
 GetSpellBaseCooldown: {}
 GetSpellBonusDamage: {}
 GetSpellBonusHealing:
@@ -13685,6 +13780,9 @@ GetTalentTabInfo:
     type: string
   - name: previewPointsSpent
     type: number
+GetTalentTreeEarlySpells: {}
+GetTalentTreeMasterySpells: {}
+GetTalentTreeRoles: {}
 GetTargetTradeMoney:
   inputs: {}
   outputs:
@@ -14048,6 +14146,12 @@ GetUnitMaxHealthModifier:
   - type: string
   outputs:
   - type: number
+GetUnitPowerBarInfo: {}
+GetUnitPowerBarInfoByID: {}
+GetUnitPowerBarStrings: {}
+GetUnitPowerBarStringsByID: {}
+GetUnitPowerBarTextureInfo: {}
+GetUnitPowerBarTextureInfoByID: {}
 GetUnitPowerModifier: {}
 GetUnitSpeed:
   inputs:
@@ -14082,6 +14186,7 @@ GetVehicleUIIndicatorSeat: {}
 GetVideoCaps: {}
 GetVideoOptions: {}
 GetWarGameQueueStatus: {}
+GetWarGameTypeInfo: {}
 GetWatchedFactionInfo:
   inputs: {}
   outputs:
@@ -14139,7 +14244,6 @@ GuildControlGetAllowedShifts: {}
 GuildControlGetNumRanks:
   outputs:
   - type: number
-GuildControlGetRankFlags: {}
 GuildControlGetRankName:
   inputs:
   - name: rank
@@ -14154,6 +14258,8 @@ GuildControlShiftRankDown: {}
 GuildControlShiftRankUp: {}
 GuildInfo: {}
 GuildMasterAbsent: {}
+GuildNewsSetSticky: {}
+GuildNewsSort: {}
 GuildRosterSetOfficerNote: {}
 GuildRosterSetPublicNote: {}
 HandleAtlasMemberCommand: {}
@@ -14253,6 +14359,7 @@ InCombatLockdown:
   outputs:
   - name: inCombatLockdown
     type: boolean
+InGuildParty: {}
 InitiateRolePoll: {}
 InitiateTrade:
   inputs:
@@ -14260,7 +14367,6 @@ InitiateTrade:
     type: unit
   outputs: {}
 InRepairMode: {}
-InviteUnit: {}
 ipairs:
   stdlib: ipairs
 Is64BitClient:
@@ -14429,6 +14535,7 @@ IsInventoryItemLocked: {}
 IsInventoryItemProfessionBag: {}
 IsItemAction: {}
 IsKeyDown: {}
+IsKeyRingEnabled: {}
 IsLeftAltKeyDown: {}
 IsLeftControlKeyDown: {}
 IsLeftMetaKeyDown: {}
@@ -14548,7 +14655,9 @@ IsQuestItemHidden:
     type: number
 IsQuestLogSpecialItemInRange: {}
 IsQuestWatched: {}
+IsRaidMarkerActive: {}
 IsRangedWeapon: {}
+IsRatedBattleground: {}
 IsRecognizedName: {}
 IsResting: {}
 IsRestrictedAccount:
@@ -14562,6 +14671,7 @@ IsRightMetaKeyDown: {}
 IsRightShiftKeyDown: {}
 issecure:
   stdlib: issecure
+issecurevalue: {}
 issecurevariable:
   stdlib: issecurevariable
 IsSelectedSpellBookItem: {}
@@ -14580,6 +14690,7 @@ IsSpellKnownOrOverridesKnown:
   outputs:
   - name: value
     type: boolean
+IsSpellOverlayed: {}
 IsStackableAction: {}
 IsStealthed:
   inputs: {}
@@ -14625,6 +14736,7 @@ IsTrialAccount:
   - name: isTrialAccount
     type: boolean
 IsTutorialFlagged: {}
+IsUnitModelReadyForUI: {}
 IsUnitOnQuest: {}
 IsUnitOnQuestByQuestID: {}
 IsUsableAction: {}
@@ -14689,6 +14801,7 @@ JoinBattlefield: {}
 JoinChannelByName: {}
 JoinLFG: {}
 JoinPermanentChannel: {}
+JoinRatedBattlefield: {}
 JoinSingleLFG: {}
 JoinSkirmish: {}
 JoinTemporaryChannel: {}
@@ -14956,6 +15069,7 @@ PitchUpStop:
   outputs: {}
 PlaceAction: {}
 PlaceAuctionBid: {}
+PlaceRaidMarker: {}
 PlayerCanTeleport: {}
 PlayerEffectiveAttackPower: {}
 PlayerHasToy: {}
@@ -14967,6 +15081,7 @@ PlayerIsPVPInactive:
 PlayMusic: {}
 PlaySound: {}
 PlaySoundFile: {}
+PortGraveyard: {}
 PostAuction: {}
 PreloadMovie: {}
 PrevView:
@@ -14995,10 +15110,13 @@ QueryGuildBankText:
     type: number
   outputs: {}
 QueryGuildEventLog: {}
+QueryGuildNews: {}
+QueryGuildRecipes: {}
 QuestChooseRewardError: {}
 QuestFlagsPVP: {}
 QuestIsDaily: {}
 QuestLogPushQuest: {}
+QuestLogShouldShowPortrait: {}
 QuestMapUpdateAllQuests: {}
 QuestPOIGetIconInfo: {}
 QuestPOIGetQuestIDByIndex: {}
@@ -15032,6 +15150,7 @@ RedockChatWindows:
 RefreshLFGList: {}
 RegisterStaticConstants: {}
 RejectProposal: {}
+RemoveAutoQuestPopUp: {}
 RemoveChatWindowChannel: {}
 RemoveChatWindowMessages: {}
 RemoveQuestWatch: {}
@@ -15055,10 +15174,14 @@ ReportSuggestion:
   outputs: {}
 RequestBattlefieldScoreData: {}
 RequestBattlegroundInstanceInfo: {}
+RequestGuildChallengeInfo: {}
+RequestGuildPartyState: {}
+RequestGuildRewards: {}
 RequestInspectHonorData: {}
 RequestInviteFromUnit: {}
 RequestLFDPartyLockInfo: {}
 RequestLFDPlayerLockInfo: {}
+RequestPVPOptionsEnabled: {}
 RequestPVPRewards: {}
 RequestRaidInfo: {}
 RequestRatedInfo: {}
@@ -15216,6 +15339,7 @@ SendSystemMessage:
   outputs: {}
 SetAbandonQuest: {}
 SetAchievementComparisonUnit: {}
+SetAchievementSearchString: {}
 SetActionBarToggles: {}
 SetActionUIButton: {}
 SetActiveTalentGroup: {}
@@ -15325,8 +15449,11 @@ SetGuildBankText: {}
 SetGuildBankWithdrawGoldLimit: {}
 SetGuildInfoText: {}
 SetGuildMemberRank: {}
+SetGuildNewsFilter: {}
 SetGuildRosterSelection: {}
 SetGuildRosterShowOffline: {}
+SetGuildTradeSkillCategoryFilter: {}
+SetGuildTradeSkillItemNameFilter: {}
 SetInventoryPortraitTexture: {}
 SetInWorldUIVisibility:
   inputs:
@@ -15376,6 +15503,7 @@ SetPartyAssignment:
     type: unit
   outputs: {}
 SetPendingReportArenaTeamName: {}
+SetPetSlot: {}
 SetPetStablePaperdoll: {}
 SetPOIIconOverlapDistance: {}
 SetPOIIconOverlapPushDistance: {}
@@ -15398,6 +15526,8 @@ SetPortraitTextureFromCreatureDisplayID:
     type: number
   outputs: {}
 SetPortraitToTexture: {}
+SetPreviewPrimaryTalentTree: {}
+SetPrimaryTalentTree: {}
 SetPVPRoles: {}
 SetRaidDifficultyID:
   inputs:
@@ -15423,6 +15553,7 @@ SetSelectedDisplayChannel: {}
 SetSelectedFaction: {}
 SetSelectedScreenResolutionIndex: {}
 SetSelectedSkill: {}
+SetSelectedWarGameType: {}
 SetSendMailCOD: {}
 SetSendMailMoney: {}
 SetSendMailShowing:
@@ -15535,6 +15666,7 @@ SortAuctionItems: {}
 SortAuctionSetSort: {}
 SortBattlefieldScoreData: {}
 SortGuildRoster: {}
+SortGuildTradeSkill: {}
 SortQuests: {}
 SortQuestSortTypes: {}
 SortQuestWatches: {}
@@ -15574,7 +15706,6 @@ SpellTargetUnit: {}
 SplitGuildBankItem: {}
 sqrt:
   alias: math.sqrt
-StablePet: {}
 StartAttack:
   inputs:
   - name: name
@@ -15715,6 +15846,7 @@ Stuck:
 SubmitRequiredGuildRename: {}
 SupportsClipCursor: {}
 SwapRaidSubgroup: {}
+SwitchAchievementSearchTab: {}
 table.concat:
   stdlib: table.concat
 table.foreach:
@@ -16065,6 +16197,7 @@ UnitGroupRolesAssigned:
   - name: result
     stub: DAMAGER
     type: string
+UnitGroupRolesAssignedEnum: {}
 UnitGUID:
   impl: UnitGUID
   inputs:
@@ -16322,6 +16455,7 @@ UnitNameUnmodified:
   - type: string
   outputs:
   - type: string
+UnitNumPowerBarTimers: {}
 UnitOnTaxi:
   inputs:
   - type: string
@@ -16364,6 +16498,8 @@ UnitPower:
   outputs:
   - name: power
     type: number
+UnitPowerBarID: {}
+UnitPowerBarTimerInfo: {}
 UnitPowerDisplayMod:
   inputs:
   - name: powerType
@@ -16480,6 +16616,7 @@ UnitSelectionColor:
   - name: alpha
     type: number
 UnitSetRole: {}
+UnitSetRoleEnum: {}
 UnitSex:
   impl: UnitSex
   inputs:
@@ -16490,6 +16627,7 @@ UnitSex:
     nilable: true
     type: number
 UnitShouldDisplayName: {}
+UnitSpellHaste: {}
 UnitStat:
   inputs:
   - type: string
@@ -16523,7 +16661,6 @@ UnitXPMax:
 UnmuteSoundFile: {}
 unpack:
   stdlib: unpack
-UnstablePet: {}
 UpdateAddOnCPUUsage:
   inputs: {}
   outputs: {}
@@ -16531,6 +16668,7 @@ UpdateAddOnMemoryUsage:
   inputs: {}
   outputs: {}
 UpdateInventoryAlertStatus: {}
+UpdateWarGamesList: {}
 UpdateWindow:
   inputs: {}
   outputs: {}
@@ -16557,6 +16695,7 @@ VehicleAimUpStop: {}
 VehicleExit: {}
 VehicleNextSeat: {}
 VehiclePrevSeat: {}
+ViewGuildRecipes: {}
 WantsAlteredForm: {}
 WarGameRespond: {}
 wipe:
