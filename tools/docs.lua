@@ -44,19 +44,23 @@ do
     if lfs.attributes(docdir) then
       for f in lfs.dir(docdir) do
         if f:sub(-4) == '.lua' then
-          local success, err = pcall(setfenv(loadfile(docdir .. '/' .. f), {
-            APIDocumentation = {
-              AddDocumentationTable = function(_, t)
-                require('wowapi.schema').validate(product, schema, t)
-                docs[f] = t
+          local fn, success, err
+          fn, err = loadfile(docdir .. '/' .. f)
+          if fn then
+            success, err = pcall(setfenv(fn, {
+              APIDocumentation = {
+                AddDocumentationTable = function(_, t)
+                  require('wowapi.schema').validate(product, schema, t)
+                  docs[f] = t
+                end,
+              },
+              Constants = setmetatable({}, nsmt),
+              CreateFromMixins = function()
+                return setmetatable({}, mixmt)
               end,
-            },
-            Constants = setmetatable({}, nsmt),
-            CreateFromMixins = function()
-              return setmetatable({}, mixmt)
-            end,
-            Enum = setmetatable({}, nsmt),
-          }))
+              Enum = setmetatable({}, nsmt),
+            }))
+          end
           if not success then
             print(('error loading %s: %s'):format(f, err))
           end
