@@ -564,9 +564,20 @@ DressUpModel:
   methods:
     Dress: {}
     GetAutoDress: {}
+    GetItemModifiedAppearanceID: {}
+    GetObeyHideInTransmogFlag: {}
     GetSheathed: {}
+    GetSpellItemEnchantmentID: {}
+    GetUseTransmogChoices: {}
+    GetUseTransmogSkin: {}
+    IsGeoReady: {}
+    IsSlotAllowed: {}
+    IsSlotVisible: {}
     SetAutoDress: {}
+    SetObeyHideInTransmogFlag: {}
     SetSheathed: {}
+    SetUseTransmogChoices: {}
+    SetUseTransmogSkin: {}
     TryOn: {}
     Undress: {}
     UndressSlot: {}
