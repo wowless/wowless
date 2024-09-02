@@ -23,12 +23,6 @@ GSE:
   owner: timothyluke
   repo: gse-advanced-macro-compiler
   tag: 3.1.34
-LunaUnitFrames:
-  flavors:
-  - Wrath
-  owner: aviana
-  repo: lunaunitframes
-  tag: '4345'
 Quartz:
   owner: nevcairiel
   repo: quartz
@@ -37,12 +31,6 @@ Questie:
   owner: questie
   repo: questie
   tag: v9.4.11
-Talented:
-  flavors:
-  - Wrath
-  owner: lethay
-  repo: talentedclassic
-  tag: v230211-WotLK
 TalentTreeViewer:
   flavors:
   - Mainline

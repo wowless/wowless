@@ -10,7 +10,3 @@ Vanilla:
   alternates:
   - Classic
   dir: Interface_Vanilla
-Wrath:
-  alternates:
-  - WOTLKC
-  dir: Interface_Wrath
