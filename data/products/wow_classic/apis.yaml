@@ -13386,7 +13386,6 @@ GetDungeonDifficultyID:
 GetDungeonForRandomSlot: {}
 GetEclipseDirection: {}
 GetEditBoxMetatable: {}
-GetEquivalentDynamicDifficultyIDs: {}
 geterrorhandler:
   stdlib: geterrorhandler
 GetEventTime:
@@ -16361,7 +16360,6 @@ InitiateTrade:
     type: unit
   outputs: {}
 InRepairMode: {}
-InviteUnit: {}
 ipairs:
   stdlib: ipairs
 Is64BitClient:
@@ -16537,6 +16535,7 @@ IsInventoryItemLocked: {}
 IsInventoryItemProfessionBag: {}
 IsItemAction: {}
 IsKeyDown: {}
+IsKeyRingEnabled: {}
 IsLeftAltKeyDown: {}
 IsLeftControlKeyDown: {}
 IsLeftMetaKeyDown: {}
@@ -16694,6 +16693,7 @@ IsSpellKnownOrOverridesKnown:
   outputs:
   - name: value
     type: boolean
+IsSpellOverlayed: {}
 IsStackableAction: {}
 IsStealthed:
   inputs: {}
@@ -16821,7 +16821,6 @@ JoinWorldPVPQueue: {}
 JumpOrAscendStart:
   inputs: {}
   outputs: {}
-KeyRingButtonIDToInvSlotID: {}
 Kiosk.GetCharacterTemplateSetIndex: {}
 Kiosk.IsEnabled:
   inputs: {}
@@ -17533,6 +17532,7 @@ SetPartyAssignment:
     type: unit
   outputs: {}
 SetPendingReportArenaTeamName: {}
+SetPetSlot: {}
 SetPetStablePaperdoll: {}
 SetPOIIconOverlapDistance: {}
 SetPOIIconOverlapPushDistance: {}
