@@ -139,9 +139,23 @@ ALTERNATIVE_DEFAULT_LANGUAGE_CHANGED:
 ARCHAEOLOGY_CLOSED:
   payload: {}
 ARCHAEOLOGY_FIND_COMPLETE:
-  payload: {}
+  payload:
+  - name: numFindsCompleted
+    type: number
+  - name: totalFinds
+    type: number
+  - name: researchBranchID
+    type: number
 ARCHAEOLOGY_SURVEY_CAST:
-  payload: {}
+  payload:
+  - name: numFindsCompleted
+    type: number
+  - name: totalFinds
+    type: number
+  - name: researchBranchID
+    type: number
+  - name: successfulFind
+    type: number
 ARCHAEOLOGY_TOGGLE:
   payload: {}
 AREA_POIS_UPDATED:
@@ -190,7 +204,9 @@ ARENA_TEAM_ROSTER_UPDATE:
 ARENA_TEAM_UPDATE:
   payload: {}
 ARTIFACT_DIGSITE_COMPLETE:
-  payload: {}
+  payload:
+  - name: researchBranchID
+    type: number
 AUCTION_BIDDER_LIST_UPDATE:
   payload: {}
 AUCTION_HOUSE_CLOSED:
@@ -548,7 +564,14 @@ CANCEL_LOOT_ROLL:
   - name: rollID
     type: number
 CANCEL_PLAYER_COUNTDOWN:
-  payload: {}
+  payload:
+  - name: initiatedBy
+    type: string
+  - name: informChat
+    type: boolean
+  - name: initiatedByName
+    nilable: true
+    type: string
 CANCEL_SUMMON:
   payload: {}
 CAPTUREFRAMES_FAILED:
@@ -3074,33 +3097,69 @@ CLUB_ERROR:
     type:
       enum: ClubType
 CLUB_FINDER_APPLICANT_INVITE_RECIEVED:
-  payload: {}
+  payload:
+  - name: clubFinderGUIDs
+    type:
+      arrayof: string
 CLUB_FINDER_APPLICATIONS_UPDATED:
-  payload: {}
+  payload:
+  - name: type
+    type:
+      enum: ClubFinderRequestType
+  - name: clubFinderGUIDs
+    type:
+      arrayof: string
 CLUB_FINDER_CAN_WHISPER_APPLICANT:
-  payload: {}
+  payload:
+  - name: applicant
+    type: string
 CLUB_FINDER_CLUB_LIST_RETURNED:
-  payload: {}
+  payload:
+  - name: type
+    type:
+      enum: ClubFinderRequestType
 CLUB_FINDER_CLUB_REPORTED:
-  payload: {}
+  payload:
+  - name: type
+    type:
+      enum: ClubFinderRequestType
+  - name: clubFinderGUID
+    type: string
 CLUB_FINDER_COMMUNITY_OFFLINE_JOIN:
-  payload: {}
+  payload:
+  - name: clubId
+    type: string
 CLUB_FINDER_ENABLED_OR_DISABLED:
   payload: {}
 CLUB_FINDER_LINKED_CLUB_RETURNED:
-  payload: {}
+  payload:
+  - name: clubInfo
+    type:
+      structure: C_ClubFinder.RecruitingClubInfo
 CLUB_FINDER_MEMBERSHIP_LIST_CHANGED:
   payload: {}
 CLUB_FINDER_PLAYER_PENDING_LIST_RECIEVED:
-  payload: {}
+  payload:
+  - name: type
+    type:
+      enum: ClubFinderRequestType
 CLUB_FINDER_POST_UPDATED:
-  payload: {}
+  payload:
+  - name: clubFinderGUIDs
+    type:
+      arrayof: string
 CLUB_FINDER_RECRUIT_LIST_CHANGED:
   payload: {}
 CLUB_FINDER_RECRUITMENT_POST_RETURNED:
-  payload: {}
+  payload:
+  - name: type
+    type:
+      enum: ClubFinderRequestType
 CLUB_FINDER_RECRUITS_UPDATED:
-  payload: {}
+  payload:
+  - name: type
+    type:
+      enum: ClubFinderRequestType
 CLUB_INVITATION_ADDED_FOR_SELF:
   payload:
   - name: invitation
@@ -3239,15 +3298,8 @@ CLUB_TICKET_CREATED:
       structure: C_Club.ClubTicketInfo
 CLUB_TICKET_RECEIVED:
   payload:
-  - name: error
-    type:
-      enum: ClubErrorType
   - name: ticket
     type: string
-  - name: info
-    nilable: true
-    type:
-      structure: C_Club.ClubInfo
 CLUB_TICKETS_RECEIVED:
   payload:
   - name: clubId
@@ -3266,6 +3318,8 @@ COMBAT_TEXT_UPDATE:
   payload:
   - name: combatTextType
     type: string
+COMBO_TARGET_CHANGED:
+  payload: {}
 COMMENTATOR_ENTER_WORLD:
   payload: {}
 COMMENTATOR_HISTORY_FLUSHED:
@@ -3448,7 +3502,9 @@ DISABLE_TAXI_BENCHMARK:
 DISABLE_XP_GAIN:
   payload: {}
 DISPLAY_EVENT_TOAST_LINK:
-  payload: {}
+  payload:
+  - name: link
+    type: string
 DISPLAY_EVENT_TOASTS:
   payload: {}
 DISPLAY_SIZE_CHANGED:
@@ -3470,12 +3526,19 @@ DUEL_TO_THE_DEATH_REQUESTED:
 DYNAMIC_GOSSIP_POI_UPDATED:
   payload: {}
 ECLIPSE_DIRECTION_CHANGE:
-  payload: {}
+  payload:
+  - name: direction
+    type: string
 EDIT_MODE_LAYOUTS_UPDATED: {}
 EJ_DIFFICULTY_UPDATE:
-  payload: {}
+  payload:
+  - name: difficultyID
+    type: number
 EJ_LOOT_DATA_RECIEVED:
-  payload: {}
+  payload:
+  - name: itemID
+    nilable: true
+    type: number
 ENABLE_DECLINE_GUILD_INVITE:
   payload: {}
 ENABLE_LOW_LEVEL_RAID:
@@ -3580,17 +3643,24 @@ FORBIDDEN_NAME_PLATE_UNIT_REMOVED:
 FORGE_MASTER_CLOSED:
   payload: {}
 FORGE_MASTER_ITEM_CHANGED:
-  payload: {}
+  payload:
+  - name: itemID
+    type: number
 FORGE_MASTER_OPENED:
   payload: {}
 FORGE_MASTER_SET_ITEM:
-  payload: {}
+  payload:
+  - name: itemID
+    type: number
 FRAMESTACK_VISIBILITY_UPDATED:
   payload: {}
 FRIENDLIST_UPDATE:
   payload: {}
 GAME_ENVIRONMENT_SWITCHED:
-  payload: {}
+  payload:
+  - name: gameEnvironment
+    type:
+      enum: GameEnvironment
 GAME_PAD_ACTIVE_CHANGED:
   payload:
   - name: isActive
@@ -3705,7 +3775,15 @@ GROUP_LEFT:
 GROUP_ROSTER_UPDATE:
   payload: {}
 GUILD_CHALLENGE_COMPLETED:
-  payload: {}
+  payload:
+  - name: challengeType
+    type: number
+  - name: currentCount
+    type: number
+  - name: maxCount
+    type: number
+  - name: goldAwarded
+    type: number
 GUILD_CHALLENGE_UPDATED:
   payload: {}
 GUILD_EVENT_LOG_UPDATE:
@@ -3725,36 +3803,10 @@ GUILD_INVITE_REQUEST:
   - name: isNewGuild
     nilable: true
     type: boolean
-  - name: bkgColorR
+  - name: tabardInfo
     nilable: true
-    type: number
-  - name: bkgColorG
-    nilable: true
-    type: number
-  - name: bkgColorB
-    nilable: true
-    type: number
-  - name: borderColorR
-    nilable: true
-    type: number
-  - name: borderColorG
-    nilable: true
-    type: number
-  - name: borderColorB
-    nilable: true
-    type: number
-  - name: emblemColorR
-    nilable: true
-    type: number
-  - name: emblemColorG
-    nilable: true
-    type: number
-  - name: emblemColorB
-    nilable: true
-    type: number
-  - name: emblemFilename
-    nilable: true
-    type: string
+    type:
+      structure: GuildTabardInfo
 GUILD_MOTD:
   payload:
   - name: motdText
@@ -3965,7 +4017,9 @@ KIOSK_SESSION_EXPIRATION_WARNING:
 KIOSK_SESSION_EXPIRED:
   payload: {}
 KNOWN_TITLES_UPDATE:
-  payload: {}
+  payload:
+  - name: unitTarget
+    type: unit
 LANGUAGE_LIST_CHANGED:
   payload: {}
 LEARNED_SPELL_IN_TAB:
@@ -4580,6 +4634,9 @@ PET_FORCE_NAME_DECLENSION:
   payload:
   - name: name
     type: string
+  - name: petNumber
+    nilable: true
+    type: number
   - name: declinedName1
     nilable: true
     type: string
@@ -4862,7 +4919,9 @@ PREVIEW_TALENT_POINTS_CHANGED:
   - name: points
     type: number
 PREVIEW_TALENT_PRIMARY_TREE_CHANGED:
-  payload: {}
+  payload:
+  - name: newTabID
+    type: number
 PRODUCT_ASSIGN_TO_TARGET_FAILED:
   payload: {}
 PRODUCT_CHOICE_UPDATE:
@@ -4882,7 +4941,15 @@ PVP_TIMER_UPDATE:
   - name: unitTarget
     type: unit
 PVP_TYPES_ENABLED:
-  payload: {}
+  payload:
+  - name: wargameBattlegrounds
+    type: boolean
+  - name: ratedBattlegrounds
+    type: boolean
+  - name: ratedArenas
+    type: boolean
+  - name: ratedSoloShuffle
+    type: boolean
 PVP_VEHICLE_INFO_UPDATED:
   payload: {}
 PVP_WORLDSTATE_UPDATE:
@@ -5122,7 +5189,9 @@ REQUIRED_GUILD_RENAME_RESULT:
   - name: success
     type: boolean
 RESEARCH_ARTIFACT_COMPLETE:
-  payload: {}
+  payload:
+  - name: name
+    type: string
 RESEARCH_ARTIFACT_DIG_SITE_UPDATED:
   payload: {}
 RESEARCH_ARTIFACT_UPDATE:
@@ -5356,7 +5425,16 @@ SPELL_DATA_LOAD_RESULT:
   - name: success
     type: boolean
 SPELL_FLYOUT_UPDATE:
-  payload: {}
+  payload:
+  - name: flyoutID
+    nilable: true
+    type: number
+  - name: spellID
+    nilable: true
+    type: number
+  - name: isLearned
+    nilable: true
+    type: boolean
 SPELL_POWER_CHANGED:
   payload: {}
 SPELL_PUSHED_TO_ACTIONBAR:
@@ -5405,7 +5483,18 @@ START_LOOT_ROLL:
     nilable: true
     type: number
 START_PLAYER_COUNTDOWN:
-  payload: {}
+  payload:
+  - name: initiatedBy
+    type: string
+  - name: timeRemaining
+    type: number
+  - name: totalTime
+    type: number
+  - name: informChat
+    type: boolean
+  - name: initiatedByName
+    nilable: true
+    type: string
 START_TIMER:
   payload:
   - name: timerType
@@ -5713,25 +5802,58 @@ TRAIT_TREE_CURRENCY_INFO_UPDATED:
 TRANSMOG_COLLECTION_CAMERA_UPDATE:
   payload: {}
 TRANSMOG_COLLECTION_ITEM_FAVORITE_UPDATE:
-  payload: {}
+  payload:
+  - name: itemAppearanceID
+    type: number
+  - name: isFavorite
+    type: boolean
 TRANSMOG_COLLECTION_ITEM_UPDATE:
   payload: {}
 TRANSMOG_COLLECTION_SOURCE_ADDED:
-  payload: {}
+  payload:
+  - name: itemModifiedAppearanceID
+    type: number
 TRANSMOG_COLLECTION_SOURCE_REMOVED:
-  payload: {}
+  payload:
+  - name: itemModifiedAppearanceID
+    type: number
 TRANSMOG_COLLECTION_UPDATED:
-  payload: {}
+  payload:
+  - name: collectionIndex
+    nilable: true
+    type: number
+  - name: modID
+    nilable: true
+    type: number
+  - name: itemAppearanceID
+    nilable: true
+    type: number
+  - name: reason
+    nilable: true
+    type: string
 TRANSMOG_COSMETIC_COLLECTION_SOURCE_ADDED:
-  payload: {}
+  payload:
+  - name: itemModifiedAppearanceID
+    type: number
 TRANSMOG_OUTFITS_CHANGED:
   payload: {}
 TRANSMOG_SEARCH_UPDATED:
-  payload: {}
+  payload:
+  - name: searchType
+    type:
+      enum: TransmogSearchType
+  - name: collectionType
+    nilable: true
+    type:
+      enum: TransmogCollectionType
 TRANSMOG_SETS_UPDATE_FAVORITE:
   payload: {}
 TRANSMOG_SOURCE_COLLECTABILITY_UPDATE:
-  payload: {}
+  payload:
+  - name: itemModifiedAppearanceID
+    type: number
+  - name: collectable
+    type: boolean
 TRANSMOGRIFY_CLOSE:
   payload: {}
 TRANSMOGRIFY_ITEM_UPDATE:
@@ -5739,9 +5861,19 @@ TRANSMOGRIFY_ITEM_UPDATE:
 TRANSMOGRIFY_OPEN:
   payload: {}
 TRANSMOGRIFY_SUCCESS:
-  payload: {}
+  payload:
+  - name: transmogLocation
+    type:
+      structure: TransmogLocation
 TRANSMOGRIFY_UPDATE:
-  payload: {}
+  payload:
+  - name: transmogLocation
+    nilable: true
+    type:
+      structure: TransmogLocation
+  - name: action
+    nilable: true
+    type: string
 TRIAL_CAP_REACHED_LEVEL:
   payload: {}
 TRIAL_CAP_REACHED_MONEY:
