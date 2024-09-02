@@ -3313,6 +3313,8 @@ COMBAT_TEXT_UPDATE:
   payload:
   - name: combatTextType
     type: string
+COMBO_TARGET_CHANGED:
+  payload: {}
 COMMENTATOR_ENTER_WORLD:
   payload: {}
 COMMENTATOR_HISTORY_FLUSHED:
