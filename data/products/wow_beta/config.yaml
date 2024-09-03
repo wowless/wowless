@@ -69,6 +69,7 @@ runner:
     PTRFEEDBACK: {}
     USERANDOM: {}
 runtime:
+  capsulearg: true
   warners:
     fontstring: {}
     line: {}

@@ -69,6 +69,7 @@ runner:
     GUILD_UNINVITE: {}
     USERANDOM: {}
 runtime:
+  capsulearg: true
   warners:
     fontstring: {}
     line: {}

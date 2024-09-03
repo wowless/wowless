@@ -65,6 +65,9 @@ type:
     runtime:
       type:
         record:
+          capsulearg:
+            required: true
+            type: boolean
           warners:
             type:
               mapof:
