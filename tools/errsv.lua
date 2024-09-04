@@ -21,6 +21,10 @@ local getPatternValue = (function()
   end
   local patterns = {
     {
+      pattern = ': cvar name mismatch: want ',
+      value = constant(nil),
+    },
+    {
       pattern = ': want %-?%d+, got (-?%d+)$',
       value = mustnumber,
     },

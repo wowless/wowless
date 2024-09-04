@@ -4,6 +4,7 @@ local function loader(api, cfg)
   assert(product, 'loader requires a product')
   local otherAddonDirs = cfg and cfg.otherAddonDirs or {}
   local datalua = require('build.products.' .. product .. '.data')
+  local capsulearg = datalua.config.runtime.capsulearg
 
   local path = require('path')
   local parseXml = require('wowless.xml').newParser(product)
@@ -612,7 +613,13 @@ local function loader(api, cfg)
             closureTaint,
             addonName,
             addonEnv,
-            isSecure and api.env.SecureCapsuleGet or nil
+            (function()
+              if isSecure then
+                return api.env.SecureCapsuleGet
+              elseif capsulearg then
+                return nil
+              end
+            end)()
           )
         else
           api.log(1, 'skipping missing file %s', filename)

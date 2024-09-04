@@ -436,7 +436,7 @@ G.testsuite.sync = function()
           assertEquals(nil, extraArg)
         end,
         numAddonArgs = function()
-          assertEquals(3, numAddonArgs)
+          assertEquals(_G.WowlessData.Config.runtime.capsulearg and 3 or 2, numAddonArgs)
         end,
       }
     end,
