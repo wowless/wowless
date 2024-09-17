@@ -356,7 +356,7 @@ local function loader(api, cfg)
         obj.shown = not value
       end,
       mixin = function(ctx, obj, value)
-        local env = ctx.useAddonEnv and addonEnv or api.env
+        local env = ctx.useAddonEnv and addonEnv or ctx.useSecureEnv and api.secureenv or api.env
         for _, m in ipairs(value) do
           mixin(obj.luarep, env[m])
         end
@@ -380,7 +380,7 @@ local function loader(api, cfg)
         end
       end,
       securemixin = function(ctx, obj, value)
-        local env = ctx.useAddonEnv and addonEnv or api.env
+        local env = ctx.useAddonEnv and addonEnv or ctx.useSecureEnv and api.secureenv or api.env
         for _, m in ipairs(value) do
           mixin(obj.luarep, env[m])
         end
@@ -529,7 +529,8 @@ local function loader(api, cfg)
               end
               if e.type ~= 'worldframe' or not addonEnv then
                 local ety = e.type == 'worldframe' and 'frame' or e.type
-                return api.CreateUIObject(ety, name, parent, ctx.useAddonEnv and addonEnv or nil, { template })
+                local env = ctx.useAddonEnv and addonEnv or ctx.useSecureEnv and api.secureenv or api.env
+                return api.CreateUIObject(ety, name, parent, env, { template })
               end
             end
           end
