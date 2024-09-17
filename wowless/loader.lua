@@ -754,7 +754,7 @@ local function loader(api, cfg)
     'OptionalDeps',
   }
 
-  local function doLoadAddon(addonName)
+  local function doLoadAddon(addonName, forceSecure)
     local toc = addonData[addonName:lower()]
     if not toc then
       error('unknown addon ' .. addonName)
@@ -764,37 +764,53 @@ local function loader(api, cfg)
       api.log(1, 'skipping glue-only addon %s', addonName)
       return
     end
-    if toc.loaded then
-      api.log(1, 'addon %s is already loaded, skipping', addonName)
-      return
+    if forceSecure then
+      assert(toc.loaded, 'UseSecureEnvironment dep addons must previously be loaded insecurely')
+      if toc.secdeploaded then
+        api.log(1, 'UseSecureEnvironment dep addon %s is already loaded, skipping', addonName)
+      end
+      if toc.secdeploadattempted then
+        api.log(1, 'UseSecureEnvironment dep addon %s has a load pending already, skipping', addonName)
+      end
+      toc.secdeploadattempted = true
+    else
+      if toc.loaded then
+        api.log(1, 'addon %s is already loaded, skipping', addonName)
+        return
+      end
+      if toc.loadattempted then
+        api.log(1, 'addon %s has a load pending already, skipping', addonName)
+        return
+      end
+      toc.loadattempted = true
     end
-    if toc.loadattempted then
-      api.log(1, 'addon %s has a load pending already, skipping', addonName)
-      return
-    end
-    toc.loadattempted = true
+    local useSecureEnv = toc.attrs.UseSecureEnvironment == '1'
     api.log(1, 'loading addon dependencies for %s', addonName)
     for _, attr in ipairs(depAttrs) do
       for dep in string.gmatch(toc.attrs[attr] or '', '[^, ]+') do
-        doLoadAddon(dep)
+        doLoadAddon(dep, forceSecure or useSecureEnv)
       end
     end
     for _, attr in ipairs(optionalDepAttrs) do
       for dep in string.gmatch(toc.attrs[attr] or '', '[^, ]+') do
         if addonData[dep:lower()] then
-          doLoadAddon(dep)
+          doLoadAddon(dep, forceSecure or useSecureEnv)
         end
       end
     end
-    local useSecureEnv = toc.attrs.UseSecureEnvironment == '1'
-    api.log(1, 'loading addon files for %s%s', addonName, useSecureEnv and ' (securely)' or '')
+    local kindstr = forceSecure and ' (secure dependency)' or useSecureEnv and ' (secure)' or ''
+    api.log(1, 'loading addon files for %s%s', addonName, kindstr)
     local addonEnv = toc.attrs.SuppressLocalTableRef ~= '1' and {} or nil
-    local loadFile = forAddon(addonName, addonEnv, toc.dir, not not toc.fdid, useSecureEnv)
+    local loadFile = forAddon(addonName, addonEnv, toc.dir, not not toc.fdid, forceSecure or useSecureEnv) -- FIXME
     for _, file in ipairs(toc.files) do
       loadFile(file)
     end
     loadFile(('out/%s/SavedVariables/%s.lua'):format(product, addonName), toc.fdid and 'SavedVariables' or nil)
-    toc.loaded = true
+    if forceSecure then
+      toc.secdeploaded = true
+    else
+      toc.loaded = true
+    end
     api.log(1, 'done loading %s', addonName)
     api.SendEvent('ADDON_LOADED', addonName)
     for _, revwith in ipairs(toc.revwiths) do
