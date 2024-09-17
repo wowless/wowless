@@ -347,7 +347,7 @@ local function loader(api, cfg)
     end,
   }
 
-  local function forAddon(addonName, addonEnv, addonRoot, isSecure, useSecureEnv)
+  local function forAddon(addonName, addonEnv, addonRoot, isSecure, useSecureEnv, skipObjects)
     local loadFile
 
     local xmlattrlang = {
@@ -489,7 +489,9 @@ local function loader(api, cfg)
             type = e.type,
           }
           local virtual = e.attr.virtual
-          if e.attr.intrinsic then
+          if ctx.skipObjects then
+            return
+          elseif e.attr.intrinsic then
             assert(virtual ~= false, 'intrinsics cannot be explicitly non-virtual: ' .. e.type)
             assert(e.attr.name, 'cannot create anonymous intrinsic')
             local name = string.lower(e.attr.name)
@@ -586,6 +588,7 @@ local function loader(api, cfg)
         local ctx = {
           ignoreVirtual = false,
           intrinsic = false,
+          skipObjects = skipObjects,
           useAddonEnv = false,
           useSecureEnv = useSecureEnv,
         }
@@ -768,9 +771,11 @@ local function loader(api, cfg)
       assert(toc.loaded, 'UseSecureEnvironment dep addons must previously be loaded insecurely')
       if toc.secdeploaded then
         api.log(1, 'UseSecureEnvironment dep addon %s is already loaded, skipping', addonName)
+        return
       end
       if toc.secdeploadattempted then
         api.log(1, 'UseSecureEnvironment dep addon %s has a load pending already, skipping', addonName)
+        return
       end
       toc.secdeploadattempted = true
     else
@@ -801,7 +806,7 @@ local function loader(api, cfg)
     local kindstr = forceSecure and ' (secure dependency)' or useSecureEnv and ' (secure)' or ''
     api.log(1, 'loading addon files for %s%s', addonName, kindstr)
     local addonEnv = toc.attrs.SuppressLocalTableRef ~= '1' and {} or nil
-    local loadFile = forAddon(addonName, addonEnv, toc.dir, not not toc.fdid, forceSecure or useSecureEnv) -- FIXME
+    local loadFile = forAddon(addonName, addonEnv, toc.dir, not not toc.fdid, useSecureEnv, forceSecure)
     for _, file in ipairs(toc.files) do
       loadFile(file)
     end
@@ -843,7 +848,7 @@ local function loader(api, cfg)
     local fxtocdir = path.join(rootDir, 'Interface', 'FrameXML')
     local fxtoc = resolveTocDir(fxtocdir)
     if fxtoc then
-      local loadFile = forAddon(nil, nil, fxtocdir, true, false)
+      local loadFile = forAddon(nil, nil, fxtocdir, true, false, false)
       for _, file in ipairs(fxtoc.files) do
         loadFile(file)
       end
