@@ -770,7 +770,10 @@ local function loader(api, cfg)
       return
     end
     if forceSecure then
-      assert(toc.loaded, 'UseSecureEnvironment dep addons must previously be loaded insecurely')
+      if not toc.loaded then
+        api.log(1, 'UseSecureEnvironment dep addon %s not yet loaded insecurely, loading', addonName)
+        doLoadAddon(addonName, false)
+      end
       if toc.secdeploaded then
         api.log(1, 'UseSecureEnvironment dep addon %s is already loaded, skipping', addonName)
         return
