@@ -210,11 +210,16 @@ local function new(log, maxErrors, product)
         objname = tostring(objnamearg)
       end
       ud.name = objname
-      local genv = useSecureEnv and secureenv or env
-      if genv[objname] then
+      if env[objname] then
         log(3, 'overwriting global ' .. objname)
       end
-      genv[objname] = obj
+      env[objname] = obj
+      if useSecureEnv then
+        if secureenv[objname] then
+          log(3, 'overwriting secure global ' .. objname)
+        end
+        secureenv[objname] = obj
+      end
       if addonEnv then
         addonEnv[objname] = obj
       end

@@ -361,8 +361,9 @@ local function loader(api, cfg)
           mixin(obj.luarep, env[m])
         end
       end,
-      parent = function(_, obj, value)
-        local parent = api.env[value]
+      parent = function(ctx, obj, value)
+        local env = ctx.useAddonEnv and addonEnv or ctx.useSecureEnv and api.secureenv or api.env
+        local parent = env[value]
         api.SetParent(obj, parent and api.UserData(parent))
       end,
       parentarray = function(_, obj, value)
