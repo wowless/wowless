@@ -266,6 +266,7 @@ G.testsuite.generated = function()
     local arg = {
       assertEquals = G.assertEquals,
       assertRecursivelyEqual = G.assertRecursivelyEqual,
+      check1 = G.check1,
       check2 = G.check2,
       check3 = G.check3,
       check6 = G.check6,
