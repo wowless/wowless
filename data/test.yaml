@@ -10,6 +10,7 @@ EnumerateFrames: {}
 GetBuildInfo_10_1: {}
 GetBuildInfo_1_15_0: {}
 GetBuildInfo_3_4_2: {}
+GetClassInfo: {}
 GetClickFrame: {}
 IsLinuxClient: {}
 IsMacClient: {}

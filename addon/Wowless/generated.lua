@@ -267,6 +267,7 @@ G.testsuite.generated = function()
       assertEquals = G.assertEquals,
       assertRecursivelyEqual = G.assertRecursivelyEqual,
       check2 = G.check2,
+      check3 = G.check3,
       check6 = G.check6,
       check7 = G.check7,
       data = {
