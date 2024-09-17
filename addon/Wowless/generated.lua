@@ -330,6 +330,7 @@ G.testsuite.generated = function()
       end
       assert(mt ~= nil)
       assertEquals(objectTypeName, obj:GetObjectType())
+      assertEquals(objectTypeName ~= 'Font', obj:IsObjectType('Object'))
       assert(getmetatable(mt) == nil)
       local mtk, __index = next(mt)
       assertEquals('__index', mtk)

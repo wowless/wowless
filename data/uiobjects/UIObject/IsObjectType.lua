@@ -1,3 +1,8 @@
 return (function(self, ty)
-  return api.InheritsFrom(self.type, string.lower(ty))
+  ty = string.lower(ty)
+  if ty == 'object' then
+    return self.type ~= 'font'
+  else
+    return not not api.InheritsFrom(self.type, ty)
+  end
 end)(...)
