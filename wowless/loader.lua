@@ -555,7 +555,7 @@ local function loader(api, cfg)
             end
             loadElements(ctxmix, e.kids, parent)
             if impl == 'loadstring' and e.text then
-              loadLuaString(filename, e.text, e.line, useSecureEnv)
+              loadLuaString(filename, e.text, e.line, ctx.useSecureEnv)
             end
           elseif e.type == 'binding' then -- TODO do this another way
             -- TODO interpret all binding attributes
