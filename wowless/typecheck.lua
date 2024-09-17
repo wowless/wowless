@@ -36,7 +36,7 @@ return function(api)
         return nil, true
       end
     else
-      if type(value) == 'string' then
+      if ty == 'Font' and type(value) == 'string' then
         value = api.env[value]
       end
       if type(value) ~= 'table' then

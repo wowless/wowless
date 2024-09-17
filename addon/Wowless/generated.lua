@@ -266,6 +266,7 @@ G.testsuite.generated = function()
     local arg = {
       assertEquals = G.assertEquals,
       assertRecursivelyEqual = G.assertRecursivelyEqual,
+      check1 = G.check1,
       check2 = G.check2,
       check3 = G.check3,
       check6 = G.check6,
@@ -329,6 +330,7 @@ G.testsuite.generated = function()
       end
       assert(mt ~= nil)
       assertEquals(objectTypeName, obj:GetObjectType())
+      assertEquals(objectTypeName ~= 'Font', obj:IsObjectType('Object'))
       assert(getmetatable(mt) == nil)
       local mtk, __index = next(mt)
       assertEquals('__index', mtk)
