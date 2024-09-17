@@ -112,9 +112,12 @@ local function loader(api, cfg)
     end
   end
 
-  local function loadLuaString(filename, str, line, closureTaint, ...)
+  local function loadLuaString(filename, str, line, useSecureEnv, closureTaint, ...)
     local before = api.env.ScrollingMessageFrameMixin
     local fn = loadstr(str, filename, line)
+    if useSecureEnv then
+      setfenv(fn, api.secureenv)
+    end
     debug.setnewclosuretaint(closureTaint)
     api.CallSandbox(fn, ...)
     debug.setnewclosuretaint(nil)
@@ -344,7 +347,7 @@ local function loader(api, cfg)
     end,
   }
 
-  local function forAddon(addonName, addonEnv, addonRoot, isSecure)
+  local function forAddon(addonName, addonEnv, addonRoot, isSecure, useSecureEnv)
     local loadFile
 
     local xmlattrlang = {
@@ -552,7 +555,7 @@ local function loader(api, cfg)
             end
             loadElements(ctxmix, e.kids, parent)
             if impl == 'loadstring' and e.text then
-              loadLuaString(filename, e.text, e.line)
+              loadLuaString(filename, e.text, e.line, useSecureEnv)
             end
           elseif e.type == 'binding' then -- TODO do this another way
             -- TODO interpret all binding attributes
@@ -610,6 +613,7 @@ local function loader(api, cfg)
             filename,
             content,
             nil,
+            useSecureEnv,
             closureTaint,
             addonName,
             addonEnv,
@@ -771,9 +775,10 @@ local function loader(api, cfg)
           end
         end
       end
-      api.log(1, 'loading addon files for %s', addonName)
+      local useSecureEnv = toc.attrs.UseSecureEnvironment == '1'
+      api.log(1, 'loading addon files for %s%s', addonName, useSecureEnv and ' (securely)' or '')
       local addonEnv = toc.attrs.SuppressLocalTableRef ~= '1' and {} or nil
-      local loadFile = forAddon(addonName, addonEnv, toc.dir, not not toc.fdid)
+      local loadFile = forAddon(addonName, addonEnv, toc.dir, not not toc.fdid, useSecureEnv)
       for _, file in ipairs(toc.files) do
         loadFile(file)
       end
@@ -812,7 +817,7 @@ local function loader(api, cfg)
     local fxtocdir = path.join(rootDir, 'Interface', 'FrameXML')
     local fxtoc = resolveTocDir(fxtocdir)
     if fxtoc then
-      local loadFile = forAddon(nil, nil, fxtocdir, true)
+      local loadFile = forAddon(nil, nil, fxtocdir, true, false)
       for _, file in ipairs(fxtoc.files) do
         loadFile(file)
       end
