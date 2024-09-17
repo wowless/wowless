@@ -148,14 +148,15 @@ local function loader(api, cfg)
       if not fn then
         api.log(2, 'unknown script method %q on %q', mattr, obj:GetDebugName())
       end
-    elseif scriptCache[script] then
-      fn = scriptCache[script]
+    elseif scriptCache[env] and scriptCache[env][script] then
+      fn = scriptCache[env][script]
     elseif script.text then
       local args = xmlimpls[string.lower(script.type)].tag.script.args or 'self, ...'
       local fnstr = 'return function(' .. args .. ') ' .. script.text .. ' end'
       local outfn = loadstr(fnstr, filename, script.line)
       fn = setfenv(outfn(), env)
-      scriptCache[script] = fn
+      scriptCache[env] = scriptCache[env] or {}
+      scriptCache[env][script] = fn
     end
     if obj.scripts then
       local old = obj.scripts[1][script.type:lower()]
