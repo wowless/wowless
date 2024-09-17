@@ -14713,7 +14713,14 @@ GetNumSockets:
   outputs:
   - name: value
     type: number
-GetNumSpecializationsForClassID: {}
+GetNumSpecializationsForClassID:
+  impl: GetNumSpecializationsForClassID
+  inputs:
+  - name: specID
+    type: number
+  outputs:
+  - name: specCount
+    type: number
 GetNumSpellTabs:
   outputs:
   - type: number
