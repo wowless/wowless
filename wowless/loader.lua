@@ -614,10 +614,8 @@ local function loader(api, cfg)
             addonName,
             addonEnv,
             (function()
-              if isSecure then
-                return api.env.SecureCapsuleGet
-              elseif capsulearg then
-                return nil
+              if capsulearg then
+                return isSecure and api.env.SecureCapsuleGet or nil
               end
             end)()
           )
