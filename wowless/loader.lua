@@ -755,36 +755,45 @@ local function loader(api, cfg)
       error('unknown addon ' .. addonName)
     end
     addonName = toc.name
-    local onlyGlue = toc.attrs.AllowLoad and toc.attrs.AllowLoad:lower() == 'glue'
-    if not toc.loadattempted and not onlyGlue then
-      toc.loadattempted = true
-      api.log(1, 'loading addon dependencies for %s', addonName)
-      for _, attr in ipairs(depAttrs) do
-        for dep in string.gmatch(toc.attrs[attr] or '', '[^, ]+') do
+    if toc.attrs.AllowLoad and toc.attrs.AllowLoad:lower() == 'glue' then
+      api.log(1, 'skipping glue-only addon %s', addonName)
+      return
+    end
+    if toc.loaded then
+      api.log(1, 'addon %s is already loaded, skipping', addonName)
+      return
+    end
+    if toc.loadattempted then
+      api.log(1, 'addon %s has a load pending already, skipping', addonName)
+      return
+    end
+    toc.loadattempted = true
+    api.log(1, 'loading addon dependencies for %s', addonName)
+    for _, attr in ipairs(depAttrs) do
+      for dep in string.gmatch(toc.attrs[attr] or '', '[^, ]+') do
+        doLoadAddon(dep)
+      end
+    end
+    for _, attr in ipairs(optionalDepAttrs) do
+      for dep in string.gmatch(toc.attrs[attr] or '', '[^, ]+') do
+        if addonData[dep:lower()] then
           doLoadAddon(dep)
         end
       end
-      for _, attr in ipairs(optionalDepAttrs) do
-        for dep in string.gmatch(toc.attrs[attr] or '', '[^, ]+') do
-          if addonData[dep:lower()] then
-            doLoadAddon(dep)
-          end
-        end
-      end
-      api.log(1, 'loading addon files for %s', addonName)
-      local addonEnv = toc.attrs.SuppressLocalTableRef ~= '1' and {} or nil
-      local loadFile = forAddon(addonName, addonEnv, toc.dir, not not toc.fdid)
-      for _, file in ipairs(toc.files) do
-        loadFile(file)
-      end
-      loadFile(('out/%s/SavedVariables/%s.lua'):format(product, addonName), toc.fdid and 'SavedVariables' or nil)
-      toc.loaded = true
-      api.log(1, 'done loading %s', addonName)
-      api.SendEvent('ADDON_LOADED', addonName)
-      for _, revwith in ipairs(toc.revwiths) do
-        api.log(1, 'processing LoadWith %q -> %q', addonName, revwith)
-        doLoadAddon(revwith)
-      end
+    end
+    api.log(1, 'loading addon files for %s', addonName)
+    local addonEnv = toc.attrs.SuppressLocalTableRef ~= '1' and {} or nil
+    local loadFile = forAddon(addonName, addonEnv, toc.dir, not not toc.fdid)
+    for _, file in ipairs(toc.files) do
+      loadFile(file)
+    end
+    loadFile(('out/%s/SavedVariables/%s.lua'):format(product, addonName), toc.fdid and 'SavedVariables' or nil)
+    toc.loaded = true
+    api.log(1, 'done loading %s', addonName)
+    api.SendEvent('ADDON_LOADED', addonName)
+    for _, revwith in ipairs(toc.revwiths) do
+      api.log(1, 'processing LoadWith %q -> %q', addonName, revwith)
+      doLoadAddon(revwith)
     end
   end
 
