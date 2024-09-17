@@ -534,7 +534,7 @@ local function loader(api, cfg)
           local impl = xmlimpls[e.type] and xmlimpls[e.type].tag or nil
           local fn = xmllang[e.type]
           if type(impl) == 'table' and impl.script then
-            local env = ctx.useAddonEnv and addonEnv or api.env
+            local env = ctx.useAddonEnv and addonEnv or ctx.useSecureEnv and api.secureenv or api.env
             loadScript(e, parent, env, filename, ctx.intrinsic)
           elseif type(impl) == 'table' and impl.scope then
             loadElements(mixin({}, ctx, { [impl.scope] = true }), e.kids, parent)
@@ -587,6 +587,7 @@ local function loader(api, cfg)
           ignoreVirtual = false,
           intrinsic = false,
           useAddonEnv = false,
+          useSecureEnv = useSecureEnv,
         }
         loadElement(ctx, root)
       end)
