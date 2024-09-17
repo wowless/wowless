@@ -791,17 +791,17 @@ local function loader(api, cfg)
       end
       toc.loadattempted = true
     end
-    local useSecureEnv = toc.attrs.UseSecureEnvironment == '1'
+    local useSecureEnv = forceSecure or toc.attrs.UseSecureEnvironment == '1'
     api.log(1, 'loading addon dependencies for %s', addonName)
     for _, attr in ipairs(depAttrs) do
       for dep in string.gmatch(toc.attrs[attr] or '', '[^, ]+') do
-        doLoadAddon(dep, forceSecure or useSecureEnv)
+        doLoadAddon(dep, useSecureEnv)
       end
     end
     for _, attr in ipairs(optionalDepAttrs) do
       for dep in string.gmatch(toc.attrs[attr] or '', '[^, ]+') do
         if addonData[dep:lower()] then
-          doLoadAddon(dep, forceSecure or useSecureEnv)
+          doLoadAddon(dep, useSecureEnv)
         end
       end
     end
