@@ -167,7 +167,7 @@ local function new(log, maxErrors, product)
     end
   end
 
-  local function CreateUIObject(typename, objnamearg, parent, addonEnv, tmplsarg, id)
+  local function CreateUIObject(typename, objnamearg, parent, addonEnv, tmplsarg, id, useSecureEnv)
     local objname
     if type(objnamearg) == 'string' then
       objname = ParentSub(objnamearg, parent)
@@ -210,10 +210,11 @@ local function new(log, maxErrors, product)
         objname = tostring(objnamearg)
       end
       ud.name = objname
-      if env[objname] then
+      local genv = useSecureEnv and secureenv or env
+      if genv[objname] then
         log(3, 'overwriting global ' .. objname)
       end
-      env[objname] = obj
+      genv[objname] = obj
       if addonEnv then
         addonEnv[objname] = obj
       end

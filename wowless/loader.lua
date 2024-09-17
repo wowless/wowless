@@ -530,7 +530,7 @@ local function loader(api, cfg)
               if e.type ~= 'worldframe' or not addonEnv then
                 local ety = e.type == 'worldframe' and 'frame' or e.type
                 local env = ctx.useAddonEnv and addonEnv or ctx.useSecureEnv and api.secureenv or api.env
-                return api.CreateUIObject(ety, name, parent, env, { template })
+                return api.CreateUIObject(ety, name, parent, env, { template }, nil, ctx.useSecureEnv)
               end
             end
           end
