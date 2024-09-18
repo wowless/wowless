@@ -112,9 +112,12 @@ local function loader(api, cfg)
     end
   end
 
-  local function loadLuaString(filename, str, line, closureTaint, ...)
+  local function loadLuaString(filename, str, line, useSecureEnv, closureTaint, ...)
     local before = api.env.ScrollingMessageFrameMixin
     local fn = loadstr(str, filename, line)
+    if useSecureEnv then
+      setfenv(fn, api.secureenv)
+    end
     debug.setnewclosuretaint(closureTaint)
     api.CallSandbox(fn, ...)
     debug.setnewclosuretaint(nil)
@@ -145,14 +148,15 @@ local function loader(api, cfg)
       if not fn then
         api.log(2, 'unknown script method %q on %q', mattr, obj:GetDebugName())
       end
-    elseif scriptCache[script] then
-      fn = scriptCache[script]
+    elseif scriptCache[env] and scriptCache[env][script] then
+      fn = scriptCache[env][script]
     elseif script.text then
       local args = xmlimpls[string.lower(script.type)].tag.script.args or 'self, ...'
       local fnstr = 'return function(' .. args .. ') ' .. script.text .. ' end'
       local outfn = loadstr(fnstr, filename, script.line)
       fn = setfenv(outfn(), env)
-      scriptCache[script] = fn
+      scriptCache[env] = scriptCache[env] or {}
+      scriptCache[env][script] = fn
     end
     if obj.scripts then
       local old = obj.scripts[1][script.type:lower()]
@@ -344,7 +348,7 @@ local function loader(api, cfg)
     end,
   }
 
-  local function forAddon(addonName, addonEnv, addonRoot, isSecure)
+  local function forAddon(addonName, addonEnv, addonRoot, isSecure, useSecureEnv, skipObjects)
     local loadFile
 
     local xmlattrlang = {
@@ -352,13 +356,14 @@ local function loader(api, cfg)
         obj.shown = not value
       end,
       mixin = function(ctx, obj, value)
-        local env = ctx.useAddonEnv and addonEnv or api.env
+        local env = ctx.useAddonEnv and addonEnv or ctx.useSecureEnv and api.secureenv or api.env
         for _, m in ipairs(value) do
           mixin(obj.luarep, env[m])
         end
       end,
-      parent = function(_, obj, value)
-        local parent = api.env[value]
+      parent = function(ctx, obj, value)
+        local env = ctx.useAddonEnv and addonEnv or ctx.useSecureEnv and api.secureenv or api.env
+        local parent = env[value]
         api.SetParent(obj, parent and api.UserData(parent))
       end,
       parentarray = function(_, obj, value)
@@ -376,7 +381,7 @@ local function loader(api, cfg)
         end
       end,
       securemixin = function(ctx, obj, value)
-        local env = ctx.useAddonEnv and addonEnv or api.env
+        local env = ctx.useAddonEnv and addonEnv or ctx.useSecureEnv and api.secureenv or api.env
         for _, m in ipairs(value) do
           mixin(obj.luarep, env[m])
         end
@@ -486,7 +491,9 @@ local function loader(api, cfg)
             type = e.type,
           }
           local virtual = e.attr.virtual
-          if e.attr.intrinsic then
+          if ctx.skipObjects then
+            return
+          elseif e.attr.intrinsic then
             assert(virtual ~= false, 'intrinsics cannot be explicitly non-virtual: ' .. e.type)
             assert(e.attr.name, 'cannot create anonymous intrinsic')
             local name = string.lower(e.attr.name)
@@ -521,17 +528,16 @@ local function loader(api, cfg)
               if virtual and ctx.ignoreVirtual then
                 api.log(1, 'ignoring virtual on ' .. tostring(name))
               end
-              if e.type ~= 'worldframe' or not addonEnv then
-                local ety = e.type == 'worldframe' and 'frame' or e.type
-                return api.CreateUIObject(ety, name, parent, ctx.useAddonEnv and addonEnv or nil, { template })
-              end
+              local ety = e.type == 'worldframe' and 'frame' or e.type
+              local env = ctx.useAddonEnv and addonEnv or ctx.useSecureEnv and api.secureenv or api.env
+              return api.CreateUIObject(ety, name, parent, env, { template })
             end
           end
         else
           local impl = xmlimpls[e.type] and xmlimpls[e.type].tag or nil
           local fn = xmllang[e.type]
           if type(impl) == 'table' and impl.script then
-            local env = ctx.useAddonEnv and addonEnv or api.env
+            local env = ctx.useAddonEnv and addonEnv or ctx.useSecureEnv and api.secureenv or api.env
             loadScript(e, parent, env, filename, ctx.intrinsic)
           elseif type(impl) == 'table' and impl.scope then
             loadElements(mixin({}, ctx, { [impl.scope] = true }), e.kids, parent)
@@ -552,7 +558,7 @@ local function loader(api, cfg)
             end
             loadElements(ctxmix, e.kids, parent)
             if impl == 'loadstring' and e.text then
-              loadLuaString(filename, e.text, e.line)
+              loadLuaString(filename, e.text, e.line, ctx.useSecureEnv)
             end
           elseif e.type == 'binding' then -- TODO do this another way
             -- TODO interpret all binding attributes
@@ -583,7 +589,9 @@ local function loader(api, cfg)
         local ctx = {
           ignoreVirtual = false,
           intrinsic = false,
+          skipObjects = skipObjects,
           useAddonEnv = false,
+          useSecureEnv = useSecureEnv,
         }
         loadElement(ctx, root)
       end)
@@ -610,6 +618,7 @@ local function loader(api, cfg)
             filename,
             content,
             nil,
+            useSecureEnv,
             closureTaint,
             addonName,
             addonEnv,
@@ -749,7 +758,7 @@ local function loader(api, cfg)
     'OptionalDeps',
   }
 
-  local function doLoadAddon(addonName)
+  local function doLoadAddon(addonName, forceSecure)
     local toc = addonData[addonName:lower()]
     if not toc then
       error('unknown addon ' .. addonName)
@@ -759,36 +768,58 @@ local function loader(api, cfg)
       api.log(1, 'skipping glue-only addon %s', addonName)
       return
     end
-    if toc.loaded then
-      api.log(1, 'addon %s is already loaded, skipping', addonName)
-      return
+    if forceSecure then
+      if not toc.loaded then
+        api.log(1, 'UseSecureEnvironment dep addon %s not yet loaded insecurely, loading', addonName)
+        doLoadAddon(addonName, false)
+      end
+      if toc.secdeploaded then
+        api.log(1, 'UseSecureEnvironment dep addon %s is already loaded, skipping', addonName)
+        return
+      end
+      if toc.secdeploadattempted then
+        api.log(1, 'UseSecureEnvironment dep addon %s has a load pending already, skipping', addonName)
+        return
+      end
+      toc.secdeploadattempted = true
+    else
+      if toc.loaded then
+        api.log(1, 'addon %s is already loaded, skipping', addonName)
+        return
+      end
+      if toc.loadattempted then
+        api.log(1, 'addon %s has a load pending already, skipping', addonName)
+        return
+      end
+      toc.loadattempted = true
     end
-    if toc.loadattempted then
-      api.log(1, 'addon %s has a load pending already, skipping', addonName)
-      return
-    end
-    toc.loadattempted = true
+    local useSecureEnv = forceSecure or toc.attrs.UseSecureEnvironment == '1'
     api.log(1, 'loading addon dependencies for %s', addonName)
     for _, attr in ipairs(depAttrs) do
       for dep in string.gmatch(toc.attrs[attr] or '', '[^, ]+') do
-        doLoadAddon(dep)
+        doLoadAddon(dep, useSecureEnv)
       end
     end
     for _, attr in ipairs(optionalDepAttrs) do
       for dep in string.gmatch(toc.attrs[attr] or '', '[^, ]+') do
         if addonData[dep:lower()] then
-          doLoadAddon(dep)
+          doLoadAddon(dep, useSecureEnv)
         end
       end
     end
-    api.log(1, 'loading addon files for %s', addonName)
+    local kindstr = forceSecure and ' (secure dependency)' or useSecureEnv and ' (secure)' or ''
+    api.log(1, 'loading addon files for %s%s', addonName, kindstr)
     local addonEnv = toc.attrs.SuppressLocalTableRef ~= '1' and {} or nil
-    local loadFile = forAddon(addonName, addonEnv, toc.dir, not not toc.fdid)
+    local loadFile = forAddon(addonName, addonEnv, toc.dir, not not toc.fdid, useSecureEnv, forceSecure)
     for _, file in ipairs(toc.files) do
       loadFile(file)
     end
     loadFile(('out/%s/SavedVariables/%s.lua'):format(product, addonName), toc.fdid and 'SavedVariables' or nil)
-    toc.loaded = true
+    if forceSecure then
+      toc.secdeploaded = true
+    else
+      toc.loaded = true
+    end
     api.log(1, 'done loading %s', addonName)
     api.SendEvent('ADDON_LOADED', addonName)
     for _, revwith in ipairs(toc.revwiths) do
@@ -817,11 +848,12 @@ local function loader(api, cfg)
   local function loadFrameXml()
     for tag, text in sqlitedb:urows('SELECT BaseTag, TagText_lang FROM GlobalStrings') do
       api.env[tag] = text
+      api.secureenv[tag] = text
     end
     local fxtocdir = path.join(rootDir, 'Interface', 'FrameXML')
     local fxtoc = resolveTocDir(fxtocdir)
     if fxtoc then
-      local loadFile = forAddon(nil, nil, fxtocdir, true)
+      local loadFile = forAddon(nil, nil, fxtocdir, true, false, false)
       for _, file in ipairs(fxtoc.files) do
         loadFile(file)
       end

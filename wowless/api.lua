@@ -5,6 +5,7 @@ local function new(log, maxErrors, product)
   local env = {}
   local errors = 0
   local frames = hlist()
+  local secureenv = {}
   local templates = {}
   local uiobjectTypes = {}
   local userdata = {}
@@ -213,6 +214,7 @@ local function new(log, maxErrors, product)
         log(3, 'overwriting global ' .. objname)
       end
       env[objname] = obj
+      secureenv[objname] = obj
       if addonEnv then
         addonEnv[objname] = obj
       end
@@ -300,6 +302,7 @@ local function new(log, maxErrors, product)
     platform = require('runtime.platform'),
     product = product,
     RunScript = RunScript,
+    secureenv = secureenv,
     SendEvent = SendEvent,
     SetParent = SetParent,
     SetScript = SetScript,

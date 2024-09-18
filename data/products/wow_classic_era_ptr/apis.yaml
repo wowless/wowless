@@ -14613,8 +14613,16 @@ GetNumGuildBankTabs:
   outputs:
   - type: number
 GetNumGuildBankTransactions: {}
-GetNumGuildChallenges: {}
-GetNumGuildEvents: {}
+GetNumGuildChallenges:
+  inputs: {}
+  outputs:
+  - name: numChallenges
+    type: number
+GetNumGuildEvents:
+  inputs: {}
+  outputs:
+  - name: numEvents
+    type: number
 GetNumGuildMembers:
   inputs: {}
   outputs:
@@ -14624,9 +14632,17 @@ GetNumGuildMembers:
     type: number
   - name: onlineAndMobileMembers
     type: number
-GetNumGuildNews: {}
+GetNumGuildNews:
+  inputs: {}
+  outputs:
+  - name: numNews
+    type: number
 GetNumGuildPerks: {}
-GetNumGuildRewards: {}
+GetNumGuildRewards:
+  inputs: {}
+  outputs:
+  - name: numRewards
+    type: number
 GetNumGuildTradeSkill: {}
 GetNumLanguages:
   outputs:
