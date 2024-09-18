@@ -21148,9 +21148,11 @@ C_Traits.GetConfigIDByTreeID:
   inputs:
   - name: treeID
     type: number
+  mayreturnnothing: true
   outputs:
   - name: configID
     type: number
+  stubnothing: true
 C_Traits.GetConfigInfo:
   impl: C_Traits.GetConfigInfo
   inputs:
