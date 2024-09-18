@@ -52,12 +52,9 @@ addon:
     raidGraphicsViewDistance: {}
     RenderScale: {}
   overwritten_apis:
-    C_AreaPoiInfo.GetAreaPOIInfo: {}
     C_Traits.GetConditionInfo: {}
     C_Traits.GetEntryInfo: {}
     C_Traits.GetTreeInfo: {}
-    C_VignetteInfo.GetVignetteInfo: {}
-    SetPortraitToTexture: {}
 runner:
   skip_events:
     PERKS_PROGRAM_OPEN: needs C_ModelInfo.GetModelSceneInfoByID implemented
@@ -69,7 +66,7 @@ runner:
     GUILD_UNINVITE: {}
     USERANDOM: {}
 runtime:
-  capsulearg: true
+  capsulearg: false
   warners:
     fontstring: {}
     line: {}
