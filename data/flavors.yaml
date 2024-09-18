@@ -3,10 +3,21 @@ Cata:
   alternates:
   - Classic
   dir: Interface
+  gametypes:
+  - cata
+  - classic
+  - standard
 Mainline:
   alternates: {}
   dir: Interface
+  gametypes:
+  - mainline
+  - standard
 Vanilla:
   alternates:
   - Classic
   dir: Interface_Vanilla
+  gametypes:
+  - classic
+  - standard
+  - vanilla

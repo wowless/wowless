@@ -12,3 +12,7 @@ type:
         dir:
           required: true
           type: string
+        gametypes:
+          required: true
+          type:
+            sequenceof: string
