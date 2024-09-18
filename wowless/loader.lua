@@ -838,11 +838,25 @@ local function loader(api, cfg)
     end
   end
 
+  local gametypes = {}
+  for _, gt in ipairs(flavors[build.flavor].gametypes) do
+    gametypes[gt] = true
+  end
+
   local function isLoadable(toc)
     local a = datalua.cvars.agentuid.value
-    local betaptr = toc.attrs.OnlyBetaAndPTR ~= '1' or a == 'wow_ptr' or a == 'wow_beta'
-    local gamemode = toc.attrs.AllowLoadGameType ~= 'wowlabs'
-    return betaptr and gamemode
+    if toc.attrs.OnlyBetaAndPTR == '1' and a ~= 'wow_ptr' and a ~= 'wow_beta' then
+      return false
+    end
+    if not toc.attrs.AllowLoadGameType then
+      return true
+    end
+    for gt in string.gmatch(toc.attrs.AllowLoadGameType, '[^, ]+') do
+      if gametypes[gt] then
+        return true
+      end
+    end
+    return false
   end
 
   local function loadFrameXml()
