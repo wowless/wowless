@@ -1,4 +1,6 @@
 ---
+ACCOUNT_CHARACTER_CURRENCY_DATA_RECEIVED:
+  payload: {}
 ACHIEVEMENT_EARNED:
   payload:
   - name: achievementID
@@ -566,6 +568,11 @@ CANCEL_LOOT_ROLL:
 CANCEL_PLAYER_COUNTDOWN:
   payload:
   - name: initiatedBy
+    type: string
+  - name: informChat
+    type: boolean
+  - name: initiatedByName
+    nilable: true
     type: string
 CANCEL_SUMMON:
   payload: {}
@@ -3126,6 +3133,12 @@ CLUB_FINDER_COMMUNITY_OFFLINE_JOIN:
     type: string
 CLUB_FINDER_ENABLED_OR_DISABLED:
   payload: {}
+CLUB_FINDER_GUILD_REALM_NAME_UPDATED:
+  payload:
+  - name: clubFinderGUID
+    type: string
+  - name: realmName
+    type: string
 CLUB_FINDER_LINKED_CLUB_RETURNED:
   payload:
   - name: clubInfo
@@ -3451,7 +3464,7 @@ CURRENCY_DISPLAY_UPDATE:
   - name: quantityGainSource
     nilable: true
     type: number
-  - name: quantityLostSource
+  - name: destroyReason
     nilable: true
     type: number
 CURRENT_SPELL_CAST_CHANGED:
@@ -3476,6 +3489,12 @@ CVAR_UPDATE:
     type: string
   - name: value
     type: string
+DAILY_RESET_INSTANCE_WELCOME:
+  payload:
+  - name: mapname
+    type: string
+  - name: timeLeft
+    type: number
 DEBUG_MENU_TOGGLED:
   payload: {}
 DELETE_ITEM_CONFIRM:
@@ -3524,7 +3543,6 @@ ECLIPSE_DIRECTION_CHANGE:
   payload:
   - name: direction
     type: string
-EDIT_MODE_LAYOUTS_UPDATED: {}
 EJ_DIFFICULTY_UPDATE:
   payload:
   - name: difficultyID
@@ -3541,6 +3559,16 @@ ENABLE_LOW_LEVEL_RAID:
 ENABLE_TAXI_BENCHMARK:
   payload: {}
 ENABLE_XP_GAIN:
+  payload: {}
+ENCHANT_SPELL_COMPLETED:
+  payload:
+  - name: successful
+    type: boolean
+  - name: enchantedItem
+    nilable: true
+    type:
+      structure: ItemLocation
+ENCHANT_SPELL_SELECTED:
   payload: {}
 ENCOUNTER_END:
   payload:
@@ -3889,6 +3917,10 @@ IGNORELIST_UPDATE:
   payload: {}
 IGR_BILLING_NAG_DIALOG:
   payload: {}
+IMMERSIVE_INTERACTION_BEGIN:
+  payload: {}
+IMMERSIVE_INTERACTION_END:
+  payload: {}
 INCOMING_RESURRECT_CHANGED:
   payload:
   - name: unitTarget
@@ -3941,6 +3973,12 @@ INSTANCE_LOCK_STOP:
   payload: {}
 INSTANCE_LOCK_WARNING:
   payload: {}
+INSTANCE_RESET_WARNING:
+  payload:
+  - name: warningMessage
+    type: string
+  - name: timeLeft
+    type: number
 INVENTORY_SEARCH_UPDATE: {}
 ISLAND_COMPLETED:
   payload:
@@ -4628,6 +4666,9 @@ PET_FORCE_NAME_DECLENSION:
   payload:
   - name: name
     type: string
+  - name: petNumber
+    nilable: true
+    type: number
   - name: declinedName1
     nilable: true
     type: string
@@ -4940,6 +4981,8 @@ PVP_TYPES_ENABLED:
   - name: ratedArenas
     type: boolean
   - name: ratedSoloShuffle
+    type: boolean
+  - name: ratedBGBlitz
     type: boolean
 PVP_VEHICLE_INFO_UPDATED:
   payload: {}
@@ -5481,10 +5524,16 @@ START_PLAYER_COUNTDOWN:
     type: number
   - name: totalTime
     type: number
+  - name: informChat
+    type: boolean
+  - name: initiatedByName
+    nilable: true
+    type: string
 START_TIMER:
   payload:
   - name: timerType
-    type: number
+    type:
+      enum: StartTimerType
   - name: timeRemaining
     type: number
   - name: totalTime
@@ -5496,7 +5545,8 @@ STOP_MOVIE:
 STOP_TIMER_OF_TYPE:
   payload:
   - name: timerType
-    type: number
+    type:
+      enum: StartTimerType
 STORE_BOOST_AUTO_CONSUMED:
   payload: {}
 STORE_CHARACTER_LIST_RECEIVED:
@@ -5570,6 +5620,8 @@ TALENTS_INVOLUNTARILY_RESET:
   - name: isPetTalents
     type: boolean
 TASK_PROGRESS_UPDATE:
+  payload: {}
+TAXI_NODE_STATUS_CHANGED:
   payload: {}
 TAXIMAP_CLOSED:
   payload: {}
@@ -5770,6 +5822,10 @@ TRAIT_NODE_CHANGED_PARTIAL:
 TRAIT_NODE_ENTRY_UPDATED:
   payload:
   - name: nodeEntryID
+    type: number
+TRAIT_SUB_TREE_CHANGED:
+  payload:
+  - name: subTreeID
     type: number
 TRAIT_SYSTEM_INTERACTION_STARTED:
   payload:
@@ -6035,6 +6091,12 @@ UNIT_MANA:
   payload:
   - name: unitTarget
     type: unit
+UNIT_MAX_HEALTH_MODIFIERS_CHANGED:
+  payload:
+  - name: unitTarget
+    type: unit
+  - name: percentMaxHealthAdjusted
+    type: number
 UNIT_MAXHEALTH:
   payload:
   - name: unitTarget
@@ -6310,6 +6372,8 @@ UPDATE_SHAPESHIFT_FORM:
 UPDATE_SHAPESHIFT_FORMS:
   payload: {}
 UPDATE_SHAPESHIFT_USABLE:
+  payload: {}
+UPDATE_SPELL_TARGET_ITEM_CONTEXT:
   payload: {}
 UPDATE_STEALTH:
   payload: {}

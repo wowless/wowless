@@ -52,8 +52,8 @@ runner:
     AJ_PVP_RBG_ACTION: missing HonorFrame_SetType
     AJ_PVP_SKIRMISH_ACTION: missing HonorFrame_SetType
     ARENA_TEAM_UPDATE: missing PVPTeamDetails
+    CRAFT_SHOW: CraftFrame_SetupDropdown has an error (self)
     LFG_PROPOSAL_SHOW: TODO figure out if there's an ordering issue here
-    TRADE_SKILL_SHOW: no TradeSkillFrame.DetailsFrame
   skip_slashcmds:
     CASTRANDOM: {}
     GUILD_INVITE: {}
@@ -61,7 +61,7 @@ runner:
     LOOT_MASTER: {}
     USERANDOM: {}
 runtime:
-  capsulearg: true
+  capsulearg: false
   warners:
     archaeologydigsiteframe: {}
     fontstring: {}
