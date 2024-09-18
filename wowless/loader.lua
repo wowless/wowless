@@ -848,6 +848,7 @@ local function loader(api, cfg)
   local function loadFrameXml()
     for tag, text in sqlitedb:urows('SELECT BaseTag, TagText_lang FROM GlobalStrings') do
       api.env[tag] = text
+      api.secureenv[tag] = text
     end
     local fxtocdir = path.join(rootDir, 'Interface', 'FrameXML')
     local fxtoc = resolveTocDir(fxtocdir)
