@@ -17224,7 +17224,16 @@ C_ReturningPlayerUI.DeclinePrompt:
   outputs: {}
 C_Scenario.GetBonusStepRewardQuestID: {}
 C_Scenario.GetBonusSteps: {}
-C_Scenario.GetInfo: {}
+C_Scenario.GetInfo:
+  inputs: {}
+  outputs:
+  - name: scenarioName
+    type: string
+  - name: currentStage
+    type: number
+  - name: numStages
+    stub: 0
+    type: number
 C_Scenario.GetProvingGroundsInfo: {}
 C_Scenario.GetScenarioIconInfo: {}
 C_Scenario.GetStepInfo: {}
@@ -25243,7 +25252,16 @@ GetAutoDeclineGuildInvites:
   outputs:
   - name: result
     type: boolean
-GetAutoQuestPopUp: {}
+GetAutoQuestPopUp:
+  inputs:
+  - name: index
+    type: number
+  outputs:
+  - name: questID
+    type: number
+  - name: popupType
+    stub: COMPLETE
+    type: string
 GetAvailableBandwidth:
   inputs: {}
   outputs:
@@ -27120,7 +27138,10 @@ GetNumArenaOpponentSpecs:
 GetNumArtifactsByRace:
   outputs:
   - type: number
-GetNumAutoQuestPopUps: {}
+GetNumAutoQuestPopUps:
+  outputs:
+  - name: numAutoQuestPopUps
+    type: number
 GetNumAvailableQuests:
   inputs: {}
   outputs:
@@ -28377,7 +28398,10 @@ GetTargetTradeMoney:
     type: number
 GetTaskInfo: {}
 GetTaskPOIs: {}
-GetTasksTable: {}
+GetTasksTable:
+  inputs: {}
+  outputs:
+  - type: table
 GetTaxiBenchmarkMode:
   inputs: {}
   outputs:
