@@ -168,6 +168,9 @@ GetChatWindowMessages:
 GetClassInfo:
   sqls:
   - lookup: GetClassInfo
+GetClassInfo_Classic:
+  sqls:
+  - lookup: GetClassInfo_Classic
 GetClickFrame:
   frameworks:
   - api

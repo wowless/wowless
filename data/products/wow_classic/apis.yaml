@@ -13056,7 +13056,7 @@ GetClassicExpansionLevel:
   - name: expansionLevel
     type: number
 GetClassInfo:
-  impl: GetClassInfo
+  impl: GetClassInfo_Classic
   inputs:
   - name: classIndex
     type: number
