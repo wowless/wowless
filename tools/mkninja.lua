@@ -481,7 +481,18 @@ for k in pairs(rules) do
   assert(usedrules[k], 'unused rule ' .. k)
 end
 
-local sorted = require('pl.tablex').sort
+local function sorted(t)
+  local ks = {}
+  for k in pairs(t) do
+    table.insert(ks, k)
+  end
+  table.sort(ks)
+  return coroutine.wrap(function()
+    for _, k in ipairs(ks) do
+      coroutine.yield(k, t[k])
+    end
+  end)
+end
 
 local out = {}
 for p, n in pairs(pools) do
