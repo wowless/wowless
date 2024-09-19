@@ -1381,3 +1381,12 @@ add_lua_executable(
   wowlessutil
   wowlessyaml
 )
+
+add_lua_executable(
+  yamlfmt
+  ${CMAKE_CURRENT_SOURCE_DIR}/tools/yamlfmt.lua
+  luafilesystem
+  lyaml
+  penlight
+  wowlessyaml
+)
