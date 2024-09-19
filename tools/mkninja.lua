@@ -1,6 +1,12 @@
-local parseYaml = require('wowapi.yaml').parseFile
-
-local productList = parseYaml('data/products.yaml')
+local productList = {
+  'wow',
+  'wow_classic',
+  'wow_classic_era',
+  'wow_classic_era_ptr',
+  'wow_classic_ptr',
+  'wowt',
+  'wowxptr',
+}
 
 -- TODO get this from gentest.lua
 local perProductAddonGeneratedTypes = {
@@ -142,9 +148,7 @@ local builds = {
   {
     ins = {
       'CMakeLists.txt',
-      'data/products.yaml',
       'tools/mkninja.lua',
-      'wowapi/yaml.lua',
     },
     outs = 'build.ninja',
     rule = 'mkninja',
