@@ -7,7 +7,6 @@ local globalschemas = {
   ['data/stringenums'] = 'stringenums',
   ['data/test'] = 'test',
   ['data/uiobjectimpl'] = 'uiobjectimpl',
-  ['tools/addons'] = 'addons',
 }
 
 local dirschemas = {

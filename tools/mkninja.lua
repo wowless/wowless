@@ -92,9 +92,6 @@ local rules = {
   dbschema = {
     command = 'build/cmake/sqlite $product',
   },
-  downloadrelease = {
-    command = 'sh bin/downloadaddon.sh $name $owner $repo $tag $out',
-  },
   fetch = {
     command = 'build/cmake/fetch $product && touch $out',
     pool = 'fetch_pool',
@@ -123,10 +120,6 @@ local rules = {
     command = elune .. ' -p $product -e5 -a addon/Wowless -a build/products/$product/WowlessData > $out',
     pool = 'run_pool',
   },
-  runaddon = {
-    command = elune .. ' -p $product -e5 -a extracts/addons/$addon/$addon > $out',
-    pool = 'run_pool',
-  },
   stamp = {
     command = 'touch $out',
   },
@@ -150,7 +143,6 @@ local builds = {
     ins = {
       'CMakeLists.txt',
       'data/products.yaml',
-      'tools/addons.yaml',
       'tools/mkninja.lua',
       'wowapi/yaml.lua',
     },
@@ -304,45 +296,6 @@ for _, p in ipairs(productList) do
     outs = p,
     rule = 'phony',
   })
-  local b = parseYaml('data/products/' .. p .. '/build.yaml')
-  for k, v in pairs(parseYaml('tools/addons.yaml')) do
-    local found = v.flavors == nil
-    if not found then
-      for _, f in ipairs(v.flavors) do
-        found = found or f == b.flavor
-      end
-    end
-    if found then
-      local addonout = 'out/' .. p .. '/addons/' .. k .. '.txt'
-      table.insert(addonouts, addonout)
-      table.insert(builds, {
-        args = {
-          addon = k,
-          product = p,
-        },
-        ins = { rundeps, 'build/addonreleases/' .. k .. '.zip' },
-        outs = addonout,
-        rule = 'runaddon',
-      })
-    end
-  end
-end
-
-for k, v in pairs(parseYaml('tools/addons.yaml')) do
-  table.insert(builds, {
-    args = {
-      name = k,
-      owner = v.owner,
-      repo = v.repo,
-      tag = v.tag,
-    },
-    ins_implicit = {
-      'bin/downloadaddon.sh',
-      'tools/addons.yaml',
-    },
-    outs = 'build/addonreleases/' .. k .. '.zip',
-    rule = 'downloadrelease',
-  })
 end
 
 local yamls = {
@@ -413,7 +366,6 @@ local yamls = {
   'data/products/wowxptr/structures.yaml',
   'data/products/wowxptr/uiobjects.yaml',
   'data/products/wowxptr/xml.yaml',
-  'data/schemas/addons.yaml',
   'data/schemas/any.yaml',
   'data/schemas/apis.yaml',
   'data/schemas/build.yaml',

@@ -1214,7 +1214,6 @@ endforeach()
 list(
   APPEND
   schemas
-  addons
   any
   apis
   build
