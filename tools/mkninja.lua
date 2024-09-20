@@ -126,9 +126,19 @@ local rules = {
     command = elune .. ' -p $product -e5 -a addon/Wowless -a build/products/$product/WowlessData > $out',
     pool = 'run_pool',
   },
-  stamp = {
-    command = 'touch $out',
-  },
+}
+
+local addonFiles = {
+  'addon/Wowless/api.lua',
+  'addon/Wowless/evenmoreintrinsic.xml',
+  'addon/Wowless/framework.lua',
+  'addon/Wowless/generated.lua',
+  'addon/Wowless/init.lua',
+  'addon/Wowless/test.lua',
+  'addon/Wowless/test.xml',
+  'addon/Wowless/uiobjects.lua',
+  'addon/Wowless/util.lua',
+  'addon/Wowless/Wowless.toc',
 }
 
 local builds = {
@@ -149,24 +159,6 @@ local builds = {
     },
     outs = 'build.ninja',
     rule = 'mkninja',
-  },
-  {
-    ins = {
-      'addon/Wowless/api.lua',
-      'addon/Wowless/evenmoreintrinsic.xml',
-      'addon/Wowless/framework.lua',
-      'addon/Wowless/generated.lua',
-      'addon/Wowless/init.lua',
-      'addon/Wowless/test.lua',
-      'addon/Wowless/test.xml',
-      'addon/Wowless/uiobjects.lua',
-      'addon/Wowless/util.lua',
-      'addon/Wowless/Wowless.toc',
-      'addon/WowlessTracker/tracker.lua',
-      'addon/WowlessTracker/WowlessTracker.toc',
-    },
-    outs = 'build/addon.stamp',
-    rule = 'stamp',
   },
 }
 
@@ -241,8 +233,8 @@ for _, p in ipairs(productList) do
   local datadb = 'build/products/' .. p .. '/data.sqlite3'
   table.insert(schemadbs, schemadb)
   local rundeps = {
-    'build/addon.stamp',
     'build/cmake/wowless',
+    addonFiles,
     datadb,
   }
   table.insert(builds, {
@@ -325,12 +317,12 @@ table.insert(builds, {
     'spec/wowless/util_spec.lua',
   },
   ins_implicit = {
-    'build/addon.stamp',
     'build/cmake/runtests',
     'spec/wowless/green.png',
     'spec/wowless/temp.blp',
     'spec/wowless/temp.png',
     'tools/runtests.lua',
+    addonFiles,
     addonGeneratedFiles,
     schemadbs,
   },
