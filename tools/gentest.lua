@@ -9,7 +9,7 @@ local function mapify(t)
 end
 
 local function perproduct(p, f)
-  return assert(dofile(('build/data/products/%s/%s.lua'):format(p, f)))
+  return assert(dofile(('build/cmake/runtime/products/%s/%s.lua'):format(p, f)))
 end
 
 local function tpath(t, ...)
@@ -41,7 +41,7 @@ local ptablemap = {
         registerable = true,
       }
     end
-    for _, product in ipairs(dofile('build/data/products.lua')) do
+    for _, product in ipairs(dofile('build/cmake/runtime/products.lua')) do
       for k in pairs(perproduct(product, 'events')) do
         if not t[k] then
           t[k] = {
@@ -205,7 +205,7 @@ local ptablemap = {
         virtual = v.virtual,
       }
     end
-    for _, product in ipairs(dofile('build/data/products.lua')) do
+    for _, product in ipairs(dofile('build/cmake/runtime/products.lua')) do
       for k in pairs(perproduct(product, 'uiobjects')) do
         if not t[k] then
           t[k] = { unsupported = true }
@@ -243,7 +243,7 @@ local filemap, alldeps = (function()
   end
   for k in pairs(files) do
     if ptablemap[k] then
-      for _, p in ipairs(next(args.product) and args.product or dofile('build/data/products.lua')) do
+      for _, p in ipairs(next(args.product) and args.product or dofile('build/cmake/runtime/products.lua')) do
         local nn, tt, dd = ptablemap[k](p)
         local ss = '_G.WowlessData.' .. nn .. ' = ' .. require('pl.pretty').write(tt) .. '\n'
         local ff = 'build/products/' .. p .. '/WowlessData/' .. k .. '.lua'
@@ -251,7 +251,7 @@ local filemap, alldeps = (function()
         deps[ff] = dd
       end
     elseif k == 'product' then
-      for _, p in ipairs(next(args.product) and args.product or dofile('build/data/products.lua')) do
+      for _, p in ipairs(next(args.product) and args.product or dofile('build/cmake/runtime/products.lua')) do
         local ss = ('_G.WowlessData = { product = %q }'):format(p)
         t['build/products/' .. p .. '/WowlessData/' .. k .. '.lua'] = style(ss)
       end
@@ -264,7 +264,7 @@ local filemap, alldeps = (function()
       table.insert(tt, 1, 'product.lua')
       table.insert(tt, '')
       local content = table.concat(tt, '\n')
-      for _, p in ipairs(next(args.product) and args.product or dofile('build/data/products.lua')) do
+      for _, p in ipairs(next(args.product) and args.product or dofile('build/cmake/runtime/products.lua')) do
         t['build/products/' .. p .. '/WowlessData/WowlessData.toc'] = content
       end
     else

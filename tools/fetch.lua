@@ -13,8 +13,8 @@ end
 
 local log = args.verbose and print or function() end
 
-local build = dofile('build/data/products/' .. product .. '/build.lua')
-local flavor = dofile('build/data/flavors.lua')[build.flavor]
+local build = dofile('build/cmake/runtime/products/' .. product .. '/build.lua')
+local flavor = dofile('build/cmake/runtime/flavors.lua')[build.flavor]
 local fdids = require('runtime.listfile')
 
 local path = require('path')

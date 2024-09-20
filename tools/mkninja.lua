@@ -11,40 +11,40 @@ local productList = {
 -- TODO get this from gentest.lua
 local perProductAddonGeneratedTypes = {
   build = function(p)
-    return { 'build/data/products/' .. p .. '/build.lua' }
+    return { 'build/cmake/runtime/products/' .. p .. '/build.lua' }
   end,
   config = function(p)
-    return { 'build/data/products/' .. p .. '/config.lua' }
+    return { 'build/cmake/runtime/products/' .. p .. '/config.lua' }
   end,
   cvars = function(p)
-    return { 'build/data/products/' .. p .. '/cvars.lua' }
+    return { 'build/cmake/runtime/products/' .. p .. '/cvars.lua' }
   end,
   events = function()
     local t = {}
     for _, p in ipairs(productList) do
-      table.insert(t, 'build/data/products/' .. p .. '/events.lua')
+      table.insert(t, 'build/cmake/runtime/products/' .. p .. '/events.lua')
     end
     return t
   end,
   globalapis = function(p)
     return {
-      'build/data/products/' .. p .. '/apis.lua',
-      'build/data/products/' .. p .. '/config.lua',
+      'build/cmake/runtime/products/' .. p .. '/apis.lua',
+      'build/cmake/runtime/products/' .. p .. '/config.lua',
     }
   end,
   globals = function(p)
-    return { 'build/data/products/' .. p .. '/globals.lua' }
+    return { 'build/cmake/runtime/products/' .. p .. '/globals.lua' }
   end,
   impltests = function(p)
     return {
-      'build/data/products/' .. p .. '/apis.lua',
-      'build/data/test.lua',
+      'build/cmake/runtime/products/' .. p .. '/apis.lua',
+      'build/cmake/runtime/test.lua',
     }
   end,
   namespaceapis = function(p)
     return {
-      'build/data/products/' .. p .. '/apis.lua',
-      'build/data/products/' .. p .. '/config.lua',
+      'build/cmake/runtime/products/' .. p .. '/apis.lua',
+      'build/cmake/runtime/products/' .. p .. '/config.lua',
     }
   end,
   product = function()
@@ -53,7 +53,7 @@ local perProductAddonGeneratedTypes = {
   uiobjectapis = function()
     local t = {}
     for _, p in ipairs(productList) do
-      table.insert(t, 'build/data/products/' .. p .. '/uiobjects.lua')
+      table.insert(t, 'build/cmake/runtime/products/' .. p .. '/uiobjects.lua')
     end
     return t
   end,
@@ -167,7 +167,7 @@ for _, p in ipairs(productList) do
   table.insert(builds, {
     args = { product = p, ['type'] = 'toc' },
     ins = 'build/cmake/gentest',
-    ins_implicit = 'build/data/products.lua',
+    ins_implicit = 'build/cmake/runtime/products.lua',
     outs_implicit = prefix .. 'WowlessData.toc',
     rule = 'mkaddon',
   })
@@ -175,7 +175,7 @@ for _, p in ipairs(productList) do
     table.insert(builds, {
       args = { product = p, ['type'] = k },
       ins = { v(p), 'build/cmake/gentest' },
-      ins_implicit = 'build/data/products.lua',
+      ins_implicit = 'build/cmake/runtime/products.lua',
       outs = prefix .. k .. '.lua',
       rule = 'mkaddon',
     })
@@ -220,8 +220,8 @@ for _, p in ipairs(productList) do
     ins = {
       dblist,
       'build/cmake/fetch',
-      'build/data/flavors.lua',
-      'build/data/products/' .. p .. '/build.lua',
+      'build/cmake/runtime/flavors.lua',
+      'build/cmake/runtime/products/' .. p .. '/build.lua',
     },
     outs = fetchStamp,
     rule = 'fetch',
