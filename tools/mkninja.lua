@@ -143,7 +143,7 @@ local addonFiles = {
 
 local builds = {
   {
-    ins = { 'test.out', 'outs', 'pngs', 'addonouts' },
+    ins = { 'test.out', 'outs', 'pngs' },
     outs = 'all',
     rule = 'phony',
   },
@@ -185,7 +185,6 @@ end
 local schemadbs = {}
 local runouts = {}
 local pngs = {}
-local addonouts = {}
 for _, p in ipairs(productList) do
   local dblist = 'build/products/' .. p .. '/dblist.lua'
   table.insert(builds, {
@@ -337,11 +336,6 @@ table.insert(builds, {
 table.insert(builds, {
   ins = pngs,
   outs = 'pngs',
-  rule = 'phony',
-})
-table.insert(builds, {
-  ins = addonouts,
-  outs = 'addonouts',
   rule = 'phony',
 })
 
