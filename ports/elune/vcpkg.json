@@ -1,11 +1,11 @@
 {
-  "name": "elune",
-  "version": "0",
   "dependencies": [
     {
-      "name": "vcpkg-cmake",
-      "host": true
+      "host": true,
+      "name": "vcpkg-cmake"
     },
     "utf8h"
-  ]
+  ],
+  "name": "elune",
+  "version": "0"
 }
