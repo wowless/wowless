@@ -1,28 +1,25 @@
 ---
 C_Calendar.GetMonthInfo:
-  states:
-  - Calendar
+  module: calendar
 C_Calendar.SetAbsMonth:
-  states:
-  - Calendar
+  module: calendar
 C_Calendar.SetMonth:
-  states:
-  - Calendar
+  module: calendar
 C_ChatInfo.ReplaceIconAndGroupExpressions: {}
 C_ClassTalents.GetActiveConfigID:
-  states:
-  - Talents
+  frameworks:
+  - api
 C_ClassTalents.GetTraitTreeForSpec:
   sqls:
   - lookup: C_ClassTalents.GetTraitTreeForSpec
 C_ClassTalents.InitializeViewLoadout:
-  states:
-  - Talents
+  frameworks:
+  - api
 C_ClassTalents.ViewLoadout:
+  frameworks:
+  - api
   sqls:
   - lookup: GetSpecializationInfoByID
-  states:
-  - Talents
 C_Console.GetAllCommands:
   frameworks:
   - datalua
@@ -43,30 +40,25 @@ C_CreatureInfo.GetClassInfo:
   - lookup: C_CreatureInfo.GetClassInfo
     table: true
 C_CVar.GetCVar:
-  frameworks:
-  - datalua
-  states:
-  - CVars
+  module: cvars
 C_CVar.GetCVarBool:
-  frameworks:
-  - datalua
-  states:
-  - CVars
+  module: cvars
 C_CVar.GetCVarDefault:
+  module: cvars
+C_CVar.RegisterCVar:
+  module: cvars
+C_CVar.SetCVar:
+  module: cvars
+C_DateAndTime.AdjustTimeByDays:
   frameworks:
   - datalua
-C_CVar.RegisterCVar:
-  states:
-  - CVars
-C_CVar.SetCVar:
-  states:
-  - CVars
-C_DateAndTime.AdjustTimeByDays: {}
-C_DateAndTime.AdjustTimeByMinutes: {}
+C_DateAndTime.AdjustTimeByMinutes:
+  frameworks:
+  - datalua
 C_DateAndTime.CompareCalendarTime: {}
 C_EventUtils.IsEventValid:
-  frameworks:
-  - datalua
+  function: IsEventValid
+  module: events
 C_Item.DoesItemExistByID:
   sqls:
   - lookup: C_Item.DoesItemExistByID
@@ -75,8 +67,8 @@ C_ItemInteraction.GetItemInteractionInfo:
   - lookup: C_ItemInteraction.GetItemInteractionInfo
     table: true
 C_Macro.SetMacroExecuteLineCallback:
-  frameworks:
-  - api
+  function: SetCallback
+  module: macrotext
 C_Map.GetMapInfo:
   sqls:
   - lookup: C_Map.GetMapInfo
@@ -92,32 +84,23 @@ C_ScriptedAnimations.GetAllScriptedAnimationEffects:
 C_SpecializationInfo.GetSpecIDs:
   sqls:
   - cursor: C_SpecializationInfo.GetSpecIDs
-C_Texture.GetAtlasInfo:
-  sqls:
-  - lookup: C_Texture.GetAtlasInfo
 C_Texture.GetAtlasInfo_10_2:
   sqls:
   - lookup: C_Texture.GetAtlasInfo_10_2
 C_Timer.After:
-  states:
-  - Time
+  module: time
 C_Timer.NewTicker:
-  states:
-  - Time
+  module: time
 C_Timer.NewTimer:
-  states:
-  - Time
+  module: time
 C_Traits.GetConfigInfo:
   frameworks:
-  - datalua
+  - api
   sqls:
   - lookup: C_Traits.GetConfigInfo
-  states:
-  - Units
-  - Talents
 C_Traits.GetNodeInfo:
   frameworks:
-  - datalua
+  - api
   sqls:
   - lookup: C_Traits.GetNodeInfo
   - cursor: C_Traits.GetNodeInfo.entries
@@ -127,9 +110,6 @@ C_Traits.GetNodeInfo:
   - cursor: C_Traits.GetNodeInfo.groups
   - cursor: C_Traits.GetNodeInfo.conditions
     table: true
-  states:
-  - Units
-  - Talents
 C_Traits.GetTreeNodes:
   sqls:
   - cursor: C_Traits.GetTreeNodes
@@ -142,9 +122,6 @@ C_UI.GetWorldFrame:
 C_UIColor.GetColors:
   sqls:
   - cursor: C_UIColor.GetColors
-C_XMLUtil.GetTemplateInfo:
-  frameworks:
-  - api
 C_XMLUtil.GetTemplateInfo_10_2:
   frameworks:
   - api
@@ -157,6 +134,7 @@ CreateForbiddenFrame:
 CreateFrame:
   frameworks:
   - api
+CreateWindow: {}
 DoEmote:
   frameworks:
   - api
@@ -190,6 +168,9 @@ GetChatWindowMessages:
 GetClassInfo:
   sqls:
   - lookup: GetClassInfo
+GetClassInfo_Classic:
+  sqls:
+  - lookup: GetClassInfo_Classic
 GetClickFrame:
   frameworks:
   - api
@@ -202,13 +183,18 @@ GetFontStringMetatable:
 GetFrameMetatable:
   frameworks:
   - api
+GetFramesRegisteredForEvent:
+  function: GetFramesRegisteredForEventUnpacked
+  module: events
 GetInventorySlotInfo:
   sqls:
   - lookup: GetInventorySlotInfo
 GetItemQualityColor: {}
+GetLootSpecialization:
+  module: units
 GetNumAddOns:
-  states:
-  - Addons
+  frameworks:
+  - api
 GetNumClasses:
   sqls:
   - lookup: GetNumClasses
@@ -216,70 +202,66 @@ GetNumSpecializationsForClassID:
   sqls:
   - lookup: GetNumSpecializationsForClassID
 GetNumTalents:
+  frameworks:
+  - api
   sqls:
   - lookup: GetNumTalents
-  states:
-  - Units
 GetNumTalentTabs:
+  frameworks:
+  - api
   sqls:
   - lookup: GetNumTalentTabs
-  states:
-  - Units
 GetScreenHeight:
-  states:
-  - System
+  module: system
 GetScreenWidth:
-  states:
-  - System
+  module: system
 GetSpecializationInfo:
+  frameworks:
+  - api
   sqls:
   - lookup: GetSpecializationInfo
-  states:
-  - Units
 GetSpecializationInfoByID:
   sqls:
   - lookup: GetSpecializationInfoByID
 GetSpecializationInfoForClassID:
+  frameworks:
+  - api
   sqls:
   - lookup: GetSpecializationInfoForClassID
-  states:
-  - Units
 GetSpecializationInfoForSpecID:
+  frameworks:
+  - api
   sqls:
   - lookup: GetSpecializationInfoForSpecID
-  states:
-  - Units
 GetTalentInfo_Vanilla:
+  frameworks:
+  - api
   sqls:
   - lookup: GetTalentInfo_Vanilla
-  states:
-  - Units
 GetTalentPrereqs_Vanilla:
+  frameworks:
+  - api
   sqls:
   - cursor: GetTalentPrereqs
-  states:
-  - Units
 GetTalentPrereqs_Wrath:
+  frameworks:
+  - api
   sqls:
   - cursor: GetTalentPrereqs
-  states:
-  - Units
 GetTalentTabInfo_Wrath:
+  frameworks:
+  - api
   sqls:
   - lookup: GetTalentTabInfo
-  states:
-  - Units
 GetTime:
-  states:
-  - Time
+  module: time
 IsAddOnLoaded: {}
 IsAddOnLoadOnDemand: {}
 IsLinuxClient:
   frameworks:
   - api
 IsLoggedIn:
-  states:
-  - System
+  module: system
 IsMacClient:
   frameworks:
   - api
@@ -295,19 +277,13 @@ LoadAddOn:
 RequestTimePlayed:
   frameworks:
   - api
-  states:
-  - Time
-RunMacroText_Callback:
-  frameworks:
-  - api
+RunMacroText:
+  module: macrotext
 RunScript: {}
 SecureCmdOptionParse: {}
 SendSystemMessage:
   frameworks:
   - api
-  states:
-  - Time
-  - Units
 SetPortraitTexture: {}
 UnitClass:
   sqls:

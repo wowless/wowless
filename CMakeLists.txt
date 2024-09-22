@@ -101,7 +101,7 @@ add_library(sqlite3 ALIAS unofficial::sqlite3::sqlite3)
 FetchContent_Declare(
   lsqlite3
   URL http://lua.sqlite.org/index.cgi/zip/lsqlite3_fsl09y.zip
-  URL_HASH MD5=1f937ed6bf9d5980239da516c424d7b6
+  URL_HASH MD5=da1de94e833a3642317e23f2c78caa98
   SOURCE_SUBDIR disable_cmakelists_txt
 )
 FetchContent_MakeAvailable(lsqlite3)
@@ -1111,7 +1111,7 @@ yaml2lua(test)
 yaml2lua(uiobjectimpl)
 
 foreach(product ${products})
-  foreach(yaml apis build config cvars events globals structures uiobjects xml)
+  foreach(yaml apis build config cvars docs events globals structures uiobjects xml)
     yaml2lua(products/${product}/${yaml})
     list(
       APPEND yamlluas
@@ -1122,13 +1122,13 @@ endforeach()
 list(
   APPEND
   schemas
-  addons
   any
   apis
   build
   config
   cvars
   docs
+  doctable
   events
   flavors
   globals
@@ -1136,7 +1136,6 @@ list(
   products
   schema
   schematype
-  state
   stringenums
   structures
   test
@@ -1148,23 +1147,6 @@ list(
 foreach(schema ${schemas})
   yaml2lua(schemas/${schema})
   list(APPEND yamlluas build.data.schemas.${schema}=runtime/schemas/${schema}.lua)
-endforeach()
-list(
-  APPEND
-  states
-  Addons
-  Bindings
-  CVars
-  Calendar
-  ModifiedClicks
-  System
-  Talents
-  Time
-  Units
-)
-foreach(state ${states})
-  yaml2lua(state/${state})
-  list(APPEND yamlluas build.data.state.${state}=runtime/state/${state}.lua)
 endforeach()
 
 lua2c(
@@ -1240,6 +1222,14 @@ lua2c(
   wowless.ext=c
   wowless.hlist=${CMAKE_CURRENT_SOURCE_DIR}/wowless/hlist.lua
   wowless.loader=${CMAKE_CURRENT_SOURCE_DIR}/wowless/loader.lua
+  wowless.modules.calendar=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/calendar.lua
+  wowless.modules.cvars=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/cvars.lua
+  wowless.modules.events=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/events.lua
+  wowless.modules.macrotext=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/macrotext.lua
+  wowless.modules.system=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/system.lua
+  wowless.modules.talents=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/talents.lua
+  wowless.modules.time=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/time.lua
+  wowless.modules.units=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/units.lua
   wowless.profiler=${CMAKE_CURRENT_SOURCE_DIR}/wowless/profiler.lua
   wowless.runner=${CMAKE_CURRENT_SOURCE_DIR}/wowless/runner.lua
   wowless.typecheck=${CMAKE_CURRENT_SOURCE_DIR}/wowless/typecheck.lua
@@ -1297,5 +1287,14 @@ add_lua_executable(
   wowlesslib
   wowlessrender
   wowlessutil
+  wowlessyaml
+)
+
+add_lua_executable(
+  yamlfmt
+  ${CMAKE_CURRENT_SOURCE_DIR}/tools/yamlfmt.lua
+  luafilesystem
+  lyaml
+  penlight
   wowlessyaml
 )

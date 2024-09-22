@@ -13,7 +13,8 @@ end
 
 local log = args.verbose and print or function() end
 
-local build = dofile('build/data/products/' .. product .. '/build.lua')
+local build = dofile('build/cmake/runtime/products/' .. product .. '/build.lua')
+local flavor = dofile('build/cmake/runtime/flavors.lua')[build.flavor]
 local fdids = require('runtime.listfile')
 
 local path = require('path')
@@ -97,13 +98,31 @@ local processFile = (function()
   return doProcessFile
 end)()
 
+-- TODO unify this logic with the loader, issue #322
+local tocsuffixes = (function()
+  local t = {
+    '_' .. build.flavor,
+    '-' .. build.flavor,
+  }
+  for _, alt in ipairs(flavor.alternates) do
+    table.insert(t, '_' .. alt)
+    table.insert(t, '-' .. alt)
+  end
+  table.insert(t, '_Standard')
+  table.insert(t, '-Standard')
+  table.insert(t, '')
+  return t
+end)()
+
 local function processTocDir(dir)
   local addonName = path.basename(dir)
-  local tocName = path.join(dir, addonName .. '_' .. build.flavor .. '.toc')
-  local tocContent = handle:readFile(tocName)
-  if not tocContent then
-    tocName = path.join(dir, addonName .. '.toc')
+  local tocName, tocContent
+  for _, suffix in ipairs(tocsuffixes) do
+    tocName = path.join(dir, addonName .. suffix .. '.toc')
     tocContent = handle:readFile(tocName)
+    if tocContent then
+      break
+    end
   end
   if tocContent then
     save(tocName, tocContent)
@@ -143,3 +162,4 @@ do
 end
 processFile('Interface/FrameXML/UI.xsd')
 processFile('Interface/FrameXML/UI_Shared.xsd')
+processFile('Interface/AddOns/Blizzard_SharedXML/UI.xsd')

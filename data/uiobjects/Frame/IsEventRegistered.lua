@@ -1,3 +1,3 @@
 return (function(self, event)
-  return api.IsEventRegistered(self, event)
+  return api.modules.events.IsEventRegistered(self, event)
 end)(...)

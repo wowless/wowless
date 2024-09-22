@@ -7,12 +7,10 @@ local globalschemas = {
   ['data/stringenums'] = 'stringenums',
   ['data/test'] = 'test',
   ['data/uiobjectimpl'] = 'uiobjectimpl',
-  ['tools/addons'] = 'addons',
 }
 
 local dirschemas = {
   schemas = 'schema',
-  state = 'state',
 }
 
 local productschemas = {
@@ -20,6 +18,7 @@ local productschemas = {
   build = 'build',
   config = 'config',
   cvars = 'cvars',
+  docs = 'docs',
   events = 'events',
   globals = 'globals',
   structures = 'structures',

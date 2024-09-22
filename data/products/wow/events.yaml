@@ -1,4 +1,8 @@
 ---
+ACCOUNT_CHARACTER_CURRENCY_DATA_RECEIVED:
+  payload: {}
+ACCOUNT_MONEY:
+  payload: {}
 ACHIEVEMENT_EARNED:
   payload:
   - name: achievementID
@@ -54,6 +58,8 @@ ACTIVE_COMBAT_CONFIG_CHANGED:
   payload:
   - name: configID
     type: number
+ACTIVE_DELVE_DATA_UPDATE:
+  payload: {}
 ACTIVE_PLAYER_SPECIALIZATION_CHANGED:
   payload: {}
 ACTIVE_TALENT_GROUP_CHANGED:
@@ -467,6 +473,16 @@ BANK_BAG_SLOT_FLAGS_UPDATED:
   payload:
   - name: slot
     type: number
+BANK_TAB_SETTINGS_UPDATED:
+  payload:
+  - name: bankType
+    type:
+      enum: BankType
+BANK_TABS_CHANGED:
+  payload:
+  - name: bankType
+    type:
+      enum: BankType
 BANKFRAME_CLOSED:
   payload: {}
 BANKFRAME_OPENED:
@@ -753,6 +769,15 @@ CANCEL_LOOT_ROLL:
   payload:
   - name: rollID
     type: number
+CANCEL_PLAYER_COUNTDOWN:
+  payload:
+  - name: initiatedBy
+    type: string
+  - name: informChat
+    type: boolean
+  - name: initiatedByName
+    nilable: true
+    type: string
 CANCEL_SUMMON:
   payload: {}
 CAPTUREFRAMES_FAILED:
@@ -3356,6 +3381,12 @@ CLUB_FINDER_COMMUNITY_OFFLINE_JOIN:
     type: string
 CLUB_FINDER_ENABLED_OR_DISABLED:
   payload: {}
+CLUB_FINDER_GUILD_REALM_NAME_UPDATED:
+  payload:
+  - name: clubFinderGUID
+    type: string
+  - name: realmName
+    type: string
 CLUB_FINDER_LINKED_CLUB_RETURNED:
   payload:
   - name: clubInfo
@@ -3543,6 +3574,8 @@ COMBAT_TEXT_UPDATE:
   payload:
   - name: combatTextType
     type: string
+COMBO_TARGET_CHANGED:
+  payload: {}
 COMMENTATOR_ENTER_WORLD:
   payload: {}
 COMMENTATOR_HISTORY_FLUSHED:
@@ -3706,6 +3739,8 @@ CONTRIBUTION_COLLECTOR_UPDATE_SINGLE:
   payload:
   - name: contributionID
     type: number
+CONVERT_TO_BIND_TO_ACCOUNT_CONFIRM:
+  payload: {}
 CONVERT_TO_RAID_CONFIRMATION:
   payload: {}
 CORPSE_IN_INSTANCE:
@@ -3758,6 +3793,13 @@ CRAFTINGORDERS_CLAIMED_ORDER_REMOVED:
   payload: {}
 CRAFTINGORDERS_CLAIMED_ORDER_UPDATED:
   payload:
+  - name: orderID
+    type: number
+CRAFTINGORDERS_CRAFT_ORDER_RESPONSE:
+  payload:
+  - name: result
+    type:
+      enum: CraftingOrderResult
   - name: orderID
     type: number
 CRAFTINGORDERS_CUSTOMER_FAVORITES_CHANGED:
@@ -3832,6 +3874,14 @@ CRAFTINGORDERS_UPDATE_ORDER_COUNT:
     type: number
 CRAFTINGORDERS_UPDATE_PERSONAL_ORDER_COUNTS:
   payload: {}
+CRAFTINGORDERS_UPDATE_REWARDS:
+  payload:
+  - name: npcOrderRewards
+    type:
+      arrayof:
+        structure: CraftingOrderRewardInfo
+  - name: orderID
+    type: number
 CRITERIA_COMPLETE:
   payload:
   - name: criteriaID
@@ -3858,9 +3908,13 @@ CURRENCY_DISPLAY_UPDATE:
   - name: quantityGainSource
     nilable: true
     type: number
-  - name: quantityLostSource
+  - name: destroyReason
     nilable: true
     type: number
+CURRENCY_TRANSFER_FAILED:
+  payload: {}
+CURRENCY_TRANSFER_LOG_UPDATE:
+  payload: {}
 CURRENT_SPELL_CAST_CHANGED:
   payload:
   - name: cancelledCast
@@ -3883,6 +3937,12 @@ CVAR_UPDATE:
     type: string
   - name: value
     type: string
+DAILY_RESET_INSTANCE_WELCOME:
+  payload:
+  - name: mapname
+    type: string
+  - name: timeLeft
+    type: number
 DEBUG_MENU_TOGGLED:
   payload: {}
 DELETE_ITEM_CONFIRM:
@@ -3895,6 +3955,8 @@ DELETE_ITEM_CONFIRM:
     type: number
   - name: questWarn
     type: number
+DELVES_ACCOUNT_DATA_ELEMENT_CHANGED:
+  payload: {}
 DISABLE_DECLINE_GUILD_INVITE:
   payload: {}
 DISABLE_LOW_LEVEL_RAID:
@@ -3929,6 +3991,10 @@ DYNAMIC_BUNDLE_PRICE_UPDATED:
   payload: {}
 DYNAMIC_GOSSIP_POI_UPDATED:
   payload: {}
+ECLIPSE_DIRECTION_CHANGE:
+  payload:
+  - name: direction
+    type: string
 EDIT_MODE_LAYOUTS_UPDATED:
   payload:
   - name: layoutInfo
@@ -3952,6 +4018,16 @@ ENABLE_LOW_LEVEL_RAID:
 ENABLE_TAXI_BENCHMARK:
   payload: {}
 ENABLE_XP_GAIN:
+  payload: {}
+ENCHANT_SPELL_COMPLETED:
+  payload:
+  - name: successful
+    type: boolean
+  - name: enchantedItem
+    nilable: true
+    type:
+      structure: ItemLocation
+ENCHANT_SPELL_SELECTED:
   payload: {}
 ENCOUNTER_END:
   payload:
@@ -4013,14 +4089,23 @@ EQUIP_BIND_CONFIRM:
   payload:
   - name: slot
     type: number
+  - name: itemLocation
+    type:
+      structure: ItemLocation
 EQUIP_BIND_REFUNDABLE_CONFIRM:
   payload:
   - name: slot
     type: number
+  - name: itemLocation
+    type:
+      structure: ItemLocation
 EQUIP_BIND_TRADEABLE_CONFIRM:
   payload:
   - name: slot
     type: number
+  - name: itemLocation
+    type:
+      structure: ItemLocation
 EQUIPMENT_SETS_CHANGED:
   payload: {}
 EQUIPMENT_SWAP_FINISHED:
@@ -4071,6 +4156,11 @@ FRAMESTACK_VISIBILITY_UPDATED:
   payload: {}
 FRIENDLIST_UPDATE:
   payload: {}
+GAME_ENVIRONMENT_SWITCHED:
+  payload:
+  - name: gameEnvironment
+    type:
+      enum: GameEnvironment
 GAME_PAD_ACTIVE_CHANGED:
   payload:
   - name: isActive
@@ -4544,6 +4634,10 @@ GUILDTABARD_UPDATE:
   payload: {}
 GX_RESTARTED:
   payload: {}
+HARDCORE_DEATHS:
+  payload:
+  - name: memberName
+    type: string
 HEARTHSTONE_BOUND:
   payload: {}
 HEIRLOOM_UPGRADE_TARGETING_CHANGED:
@@ -4576,6 +4670,10 @@ HONOR_XP_UPDATE:
 IGNORELIST_UPDATE:
   payload: {}
 IGR_BILLING_NAG_DIALOG:
+  payload: {}
+IMMERSIVE_INTERACTION_BEGIN:
+  payload: {}
+IMMERSIVE_INTERACTION_END:
   payload: {}
 INCOMING_RESURRECT_CHANGED:
   payload:
@@ -4633,6 +4731,12 @@ INSTANCE_LOCK_STOP:
   payload: {}
 INSTANCE_LOCK_WARNING:
   payload: {}
+INSTANCE_RESET_WARNING:
+  payload:
+  - name: warningMessage
+    type: string
+  - name: timeLeft
+    type: number
 INVENTORY_SEARCH_UPDATE:
   payload: {}
 INVITE_TO_PARTY_CONFIRMATION:
@@ -4793,6 +4897,14 @@ KNOWN_TITLES_UPDATE:
     type: unit
 LANGUAGE_LIST_CHANGED:
   payload: {}
+LEARNED_SPELL_IN_SKILL_LINE:
+  payload:
+  - name: spellID
+    type: number
+  - name: skillLineIndex
+    type: number
+  - name: isGuildPerkSpell
+    type: boolean
 LEARNED_SPELL_IN_TAB:
   payload:
   - name: spellID
@@ -5113,8 +5225,6 @@ MAJOR_FACTION_INTERACTION_ENDED:
   payload: {}
 MAJOR_FACTION_INTERACTION_STARTED:
   payload: {}
-MAJOR_FACTION_RENOWN_CATCH_UP_STATE_UPDATE:
-  payload: {}
 MAJOR_FACTION_RENOWN_LEVEL_CHANGED:
   payload:
   - name: majorFactionID
@@ -5323,6 +5433,12 @@ OWNED_AUCTION_BIDDER_INFO_RECEIVED:
     type: string
 OWNED_AUCTIONS_UPDATED:
   payload: {}
+PARTY_ELIGIBILITY_FOR_DELVE_TIERS_CHANGED:
+  payload:
+  - name: playerName
+    type: string
+  - name: maxEligibleLevel
+    type: number
 PARTY_INVITE_CANCEL:
   payload: {}
 PARTY_INVITE_REQUEST:
@@ -5362,6 +5478,12 @@ PENDING_AZERITE_ESSENCE_CHANGED:
   - name: essenceID
     nilable: true
     type: number
+PERKS_ACTIVITIES_TRACKED_LIST_CHANGED:
+  payload:
+  - name: perksActivityID
+    type: number
+  - name: added
+    type: boolean
 PERKS_ACTIVITIES_TRACKED_UPDATED:
   payload: {}
 PERKS_ACTIVITIES_UPDATED:
@@ -5566,6 +5688,9 @@ PET_FORCE_NAME_DECLENSION:
   payload:
   - name: name
     type: string
+  - name: petNumber
+    nilable: true
+    type: number
   - name: declinedName1
     nilable: true
     type: string
@@ -5581,6 +5706,8 @@ PET_FORCE_NAME_DECLENSION:
   - name: declinedName5
     nilable: true
     type: string
+PET_INFO_UPDATE:
+  payload: {}
 PET_JOURNAL_AUTO_SLOTTED_PET:
   payload:
   - name: slotIndex
@@ -5617,11 +5744,11 @@ PET_SPELL_POWER_UPDATE:
   payload: {}
 PET_STABLE_CLOSED:
   payload: {}
+PET_STABLE_FAVORITES_UPDATED:
+  payload: {}
 PET_STABLE_SHOW:
   payload: {}
 PET_STABLE_UPDATE:
-  payload: {}
-PET_STABLE_UPDATE_PAPERDOLL:
   payload: {}
 PET_UI_CLOSE:
   payload: {}
@@ -5638,6 +5765,10 @@ PING_SYSTEM_ERROR:
 PLAY_MOVIE:
   payload:
   - name: movieID
+    type: number
+PLAYER_ACCOUNT_BANK_TAB_SLOTS_CHANGED:
+  payload:
+  - name: slot
     type: number
 PLAYER_ALIVE:
   payload: {}
@@ -5763,6 +5894,12 @@ PLAYER_LOSES_VEHICLE_DATA:
   payload:
   - name: unitTarget
     type: unit
+PLAYER_MAP_CHANGED:
+  payload:
+  - name: oldMapID
+    type: number
+  - name: newMapID
+    type: number
 PLAYER_MONEY:
   payload: {}
 PLAYER_MOUNT_DISPLAY_CHANGED:
@@ -5928,6 +6065,8 @@ PVP_TYPES_ENABLED:
   - name: ratedArenas
     type: boolean
   - name: ratedSoloShuffle
+    type: boolean
+  - name: ratedBGBlitz
     type: boolean
 PVP_VEHICLE_INFO_UPDATED:
   payload: {}
@@ -6178,6 +6317,8 @@ REJECTED_MATCHMAKING_PARTY_INVITE:
   payload:
   - name: name
     type: string
+REMIX_END_OF_EVENT:
+  payload: {}
 REPLACE_ENCHANT:
   payload:
   - name: existingStr
@@ -6237,8 +6378,6 @@ RESURRECT_REQUEST:
   - name: inviter
     type: string
 RETURNING_PLAYER_PROMPT:
-  payload: {}
-REVEAL_CAPTURE_TOGGLED:
   payload: {}
 ROLE_CHANGED_INFORM:
   payload:
@@ -6313,7 +6452,11 @@ SCENARIO_UPDATE:
   - name: newStep
     nilable: true
     type: boolean
-SCRAPPING_MACHINE_ITEM_REMOVED_OR_CANCELLED:
+SCRAPPING_MACHINE_ITEM_ADDED:
+  payload:
+  - name: index
+    type: number
+SCRAPPING_MACHINE_ITEM_REMOVED:
   payload:
   - name: index
     type: number
@@ -6380,6 +6523,10 @@ SHIPMENT_UPDATE:
   - name: hasAttachedFollower
     nilable: true
     type: boolean
+SHOW_DELVES_COMPANION_CONFIGURATION_UI:
+  payload: {}
+SHOW_DELVES_DISPLAY_UI:
+  payload: {}
 SHOW_FACTION_SELECT_UI:
   payload: {}
 SHOW_HYPERLINK_TOOLTIP:
@@ -6703,10 +6850,24 @@ START_LOOT_ROLL:
   - name: lootHandle
     nilable: true
     type: number
+START_PLAYER_COUNTDOWN:
+  payload:
+  - name: initiatedBy
+    type: string
+  - name: timeRemaining
+    type: number
+  - name: totalTime
+    type: number
+  - name: informChat
+    type: boolean
+  - name: initiatedByName
+    nilable: true
+    type: string
 START_TIMER:
   payload:
   - name: timerType
-    type: number
+    type:
+      enum: StartTimerType
   - name: timeRemaining
     type: number
   - name: totalTime
@@ -6720,7 +6881,8 @@ STOP_MOVIE:
 STOP_TIMER_OF_TYPE:
   payload:
   - name: timerType
-    type: number
+    type:
+      enum: StartTimerType
 STORE_BOOST_AUTO_CONSUMED:
   payload: {}
 STORE_CHARACTER_LIST_RECEIVED:
@@ -6796,6 +6958,8 @@ TALKINGHEAD_CLOSE:
 TALKINGHEAD_REQUESTED:
   payload: {}
 TASK_PROGRESS_UPDATE:
+  payload: {}
+TAXI_NODE_STATUS_CHANGED:
   payload: {}
 TAXIMAP_CLOSED:
   payload: {}
@@ -6984,6 +7148,8 @@ TRADE_SKILL_FAVORITES_CHANGED:
   payload:
   - name: isFavorite
     type: boolean
+  - name: recipeSpellID
+    type: number
 TRADE_SKILL_ITEM_CRAFTED_RESULT:
   payload:
   - name: data
@@ -7048,6 +7214,10 @@ TRAIT_NODE_CHANGED_PARTIAL:
 TRAIT_NODE_ENTRY_UPDATED:
   payload:
   - name: nodeEntryID
+    type: number
+TRAIT_SUB_TREE_CHANGED:
+  payload:
+  - name: subTreeID
     type: number
 TRAIT_SYSTEM_INTERACTION_STARTED:
   payload:
@@ -7337,6 +7507,12 @@ UNIT_MANA:
   payload:
   - name: unitTarget
     type: unit
+UNIT_MAX_HEALTH_MODIFIERS_CHANGED:
+  payload:
+  - name: unitTarget
+    type: unit
+  - name: percentMaxHealthAdjusted
+    type: number
 UNIT_MAXHEALTH:
   payload:
   - name: unitTarget
@@ -7656,6 +7832,8 @@ UPDATE_SHAPESHIFT_FORM:
 UPDATE_SHAPESHIFT_FORMS:
   payload: {}
 UPDATE_SHAPESHIFT_USABLE:
+  payload: {}
+UPDATE_SPELL_TARGET_ITEM_CONTEXT:
   payload: {}
 UPDATE_STEALTH:
   payload: {}
@@ -8028,6 +8206,8 @@ VOTE_KICK_REASON_NEEDED:
     type: string
   - name: resultGUID
     type: string
+WALK_IN_DATA_UPDATE:
+  payload: {}
 WAR_MODE_STATUS_UPDATE:
   payload:
   - name: warModeEnabled
@@ -8076,6 +8256,12 @@ WORLD_CURSOR_TOOLTIP_UPDATE:
   - name: anchorType
     type:
       enum: WorldCursorAnchorType
+WORLD_LOOT_OBJECT_INFO_UPDATED:
+  payload:
+  - name: guid
+    type: string
+WORLD_LOOT_OBJECT_SWAP_INVENTORY_TYPE_UPDATED:
+  payload: {}
 WORLD_MAP_OPEN:
   payload:
   - name: uiMapID

@@ -42,6 +42,7 @@ Actor:
     StopAnimationKit: {}
   objectType: ModelSceneActor
 Alpha:
+  fields: {}
   inherits:
     Animation: {}
   methods:
@@ -55,7 +56,7 @@ Animation:
       init: 0
       type: number
     smoothing:
-      init: OUT
+      init: NONE
       type: SmoothingType
     startDelay:
       init: 0
@@ -73,6 +74,10 @@ Animation:
     GetProgress: {}
     GetRegionParent:
       impl: Animation/GetRegionParent
+      inputs: {}
+      outputs:
+      - name: region
+        type: UIObject
     GetSmoothing:
       getter:
       - name: smoothing
@@ -109,6 +114,10 @@ Animation:
     SetTargetParent: {}
     Stop: {}
 AnimationGroup:
+  fields:
+    looping:
+      init: NONE
+      type: LoopType
   inherits:
     ParentedObjectBase: {}
     ScriptObject: {}
@@ -116,18 +125,17 @@ AnimationGroup:
     CreateAnimation:
       impl: AnimationGroup/CreateAnimation
       inputs:
-      - default: Animation
-        name: animationType
+      - name: animationType
         nilable: true
         type: string
       - name: name
         nilable: true
         type: string
-      - name: inheritsFrom
+      - name: templateName
         nilable: true
         type: string
       outputs:
-      - name: animation
+      - name: anim
         type: Animation
     Finish: {}
     GetAnimations:
@@ -135,7 +143,9 @@ AnimationGroup:
     GetAnimationSpeedMultiplier: {}
     GetDuration: {}
     GetElapsed: {}
-    GetLooping: {}
+    GetLooping:
+      getter:
+      - name: looping
     GetLoopState: {}
     GetProgress: {}
     IsDone: {}
@@ -149,11 +159,25 @@ AnimationGroup:
     RemoveAnimations: {}
     Restart: {}
     SetAnimationSpeedMultiplier: {}
-    SetLooping: {}
+    SetLooping:
+      setter:
+      - name: looping
     SetPlaying: {}
     SetToFinalAlpha: {}
     Stop: {}
+ArchaeologyDigSiteFrame:
+  fields: {}
+  inherits:
+    Frame: {}
+    POIFrame: {}
+  methods: {}
 Browser:
+  fieldinitoverrides:
+    mouseClickEnabled: true
+    mouseMotionEnabled: true
+    mouseWheelEnabled: true
+    resizable: true
+  fields: {}
   inherits:
     Frame: {}
   methods:
@@ -171,6 +195,9 @@ Browser:
     SetFocus: {}
     SetZoom: {}
 Button:
+  fieldinitoverrides:
+    mouseClickEnabled: true
+    mouseMotionEnabled: true
   fields:
     beingClicked:
       init: false
@@ -180,7 +207,7 @@ Button:
       type: boolean
     buttonState:
       init: NORMAL
-      type: string
+      type: SimpleButtonStateToken
     disabledTexture:
       nilable: true
       type: Texture
@@ -265,14 +292,24 @@ Button:
       - type: number
     IsEnabled:
       impl: Button/IsEnabled
-    LockHighlight: {}
     RegisterForClicks:
       impl: Button/RegisterForClicks
     RegisterForMouse: {}
     SetButtonState:
       impl: Button/SetButtonState
+      inputs:
+      - name: buttonState
+        type: SimpleButtonStateToken
+      - default: false
+        name: lock
+        type: boolean
+      outputs: {}
     SetDisabledAtlas:
       impl: Button/SetDisabledAtlas
+      inputs:
+      - name: atlas
+        type: string
+      outputs: {}
     SetDisabledFontObject: {}
     SetDisabledTexture:
       impl: Button/SetDisabledTexture
@@ -289,7 +326,6 @@ Button:
     SetHighlightAtlas:
       impl: Button/SetHighlightAtlas
     SetHighlightFontObject: {}
-    SetHighlightLocked: {}
     SetHighlightTexture:
       impl: Button/SetHighlightTexture
     SetMotionScriptsWhileDisabled:
@@ -297,6 +333,10 @@ Button:
       - name: motionScriptsWhileDisabled
     SetNormalAtlas:
       impl: Button/SetNormalAtlas
+      inputs:
+      - name: atlas
+        type: string
+      outputs: {}
     SetNormalFontObject:
       setter:
       - name: normalFontObject
@@ -304,6 +344,10 @@ Button:
       impl: Button/SetNormalTexture
     SetPushedAtlas:
       impl: Button/SetPushedAtlas
+      inputs:
+      - name: atlas
+        type: string
+      outputs: {}
     SetPushedTextOffset:
       setter:
       - name: pushedTextOffsetX
@@ -312,7 +356,6 @@ Button:
       impl: Button/SetPushedTexture
     SetText:
       impl: Button/SetText
-    UnlockHighlight: {}
 CheckButton:
   fields:
     checked:
@@ -344,6 +387,12 @@ CheckButton:
       setter:
       - name: disabledCheckedTexture
 Checkout:
+  fieldinitoverrides:
+    mouseClickEnabled: true
+    mouseMotionEnabled: true
+    mouseWheelEnabled: true
+    resizable: true
+  fields: {}
   inherits:
     Frame: {}
   methods:
@@ -357,6 +406,7 @@ Checkout:
     SetZoom: {}
   objectType: BlizzardCheckout
 CinematicModel:
+  fields: {}
   inherits:
     PlayerModel: {}
   methods:
@@ -376,6 +426,9 @@ CinematicModel:
     StopPan: {}
     UnequipItems: {}
 ColorSelect:
+  fieldinitoverrides:
+    mouseClickEnabled: true
+    mouseMotionEnabled: true
   fields:
     colorValueTexture:
       nilable: true
@@ -393,6 +446,9 @@ ColorSelect:
     Frame: {}
   methods:
     ClearColorWheelTexture: {}
+    GetColorAlpha: {}
+    GetColorAlphaTexture: {}
+    GetColorAlphaThumbTexture: {}
     GetColorHSV:
       outputs:
       - name: h
@@ -421,6 +477,9 @@ ColorSelect:
     GetColorWheelThumbTexture:
       getter:
       - name: colorWheelThumbTexture
+    SetColorAlpha: {}
+    SetColorAlphaTexture: {}
+    SetColorAlphaThumbTexture: {}
     SetColorHSV: {}
     SetColorRGB: {}
     SetColorValueTexture:
@@ -436,6 +495,7 @@ ColorSelect:
       setter:
       - name: colorWheelThumbTexture
 ControlPoint:
+  fields: {}
   inherits:
     ParentedObject: {}
   methods:
@@ -504,18 +564,36 @@ Cooldown:
     SetTexCoordRange: {}
     SetUseCircularEdge: {}
 DressUpModel:
+  fields: {}
   inherits:
     PlayerModel: {}
   methods:
     Dress: {}
     GetAutoDress: {}
+    GetItemModifiedAppearanceID: {}
+    GetItemTransmogInfo: {}
+    GetItemTransmogInfoList: {}
+    GetObeyHideInTransmogFlag: {}
     GetSheathed: {}
+    GetSpellItemEnchantmentID: {}
+    GetUseTransmogChoices: {}
+    GetUseTransmogSkin: {}
+    IsGeoReady: {}
+    IsSlotAllowed: {}
+    IsSlotVisible: {}
     SetAutoDress: {}
+    SetObeyHideInTransmogFlag: {}
     SetSheathed: {}
+    SetUseTransmogChoices: {}
+    SetUseTransmogSkin: {}
     TryOn: {}
     Undress: {}
     UndressSlot: {}
 EditBox:
+  fieldinitoverrides:
+    justifyh: LEFT
+    mouseClickEnabled: true
+    mouseMotionEnabled: true
   fields:
     editboxText:
       init: ''
@@ -524,7 +602,7 @@ EditBox:
       init: true
       type: boolean
     historyLines:
-      init: 10
+      init: 0
       type: number
     isAutoFocus:
       init: true
@@ -539,10 +617,10 @@ EditBox:
       init: false
       type: boolean
     maxBytes:
-      init: 200
+      init: 0
       type: number
     maxLetters:
-      init: 64
+      init: 0
       type: number
   inherits:
     FontInstance: {}
@@ -653,7 +731,23 @@ EditBox:
     SetTextInsets: {}
     SetVisibleTextByteLimit: {}
     ToggleInputLanguage: {}
+FlipBook:
+  fields: {}
+  inherits:
+    Animation: {}
+  methods:
+    GetFlipBookColumns: {}
+    GetFlipBookFrameHeight: {}
+    GetFlipBookFrames: {}
+    GetFlipBookFrameWidth: {}
+    GetFlipBookRows: {}
+    SetFlipBookColumns: {}
+    SetFlipBookFrameHeight: {}
+    SetFlipBookFrames: {}
+    SetFlipBookFrameWidth: {}
+    SetFlipBookRows: {}
 FogOfWarFrame:
+  fields: {}
   inherits:
     Frame: {}
   methods:
@@ -670,6 +764,7 @@ FogOfWarFrame:
     SetMaskScalar: {}
     SetUiMapID: {}
 Font:
+  fields: {}
   inherits:
     FontInstance: {}
     UIObject: {}
@@ -678,6 +773,13 @@ Font:
     GetAlpha: {}
     SetAlpha: {}
 FontInstance:
+  fields:
+    justifyh:
+      init: CENTER
+      type: JustifyHorizontal
+    justifyv:
+      init: MIDDLE
+      type: JustifyVertical
   inherits: {}
   methods:
     GetFont:
@@ -697,8 +799,12 @@ FontInstance:
         nilable: true
         type: FontInstance
     GetIndentedWordWrap: {}
-    GetJustifyH: {}
-    GetJustifyV: {}
+    GetJustifyH:
+      getter:
+      - name: justifyh
+    GetJustifyV:
+      getter:
+      - name: justifyv
     GetShadowColor:
       outputs:
       - type: number
@@ -718,8 +824,12 @@ FontInstance:
     SetFont: {}
     SetFontObject: {}
     SetIndentedWordWrap: {}
-    SetJustifyH: {}
-    SetJustifyV: {}
+    SetJustifyH:
+      setter:
+      - name: justifyh
+    SetJustifyV:
+      setter:
+      - name: justifyv
     SetShadowColor: {}
     SetShadowOffset: {}
     SetSpacing: {}
@@ -790,8 +900,8 @@ FontString:
     SetTextScale:
       setter:
       - name: textScale
+    SetTextToFit: {}
     SetWordWrap: {}
-  warner: true
 Frame:
   fields:
     attributes:
@@ -807,6 +917,9 @@ Frame:
       init: false
       type: boolean
     hasFixedFrameStrata:
+      init: false
+      type: boolean
+    hyperlinkPropagateToParent:
       init: false
       type: boolean
     hyperlinksEnabled:
@@ -843,6 +956,9 @@ Frame:
       init: false
       type: boolean
     toplevel:
+      init: false
+      type: boolean
+    usingParentLevel:
       init: false
       type: boolean
   inherits:
@@ -912,6 +1028,9 @@ Frame:
     DesaturateHierarchy: {}
     DisableDrawLayer: {}
     DoesClipChildren: {}
+    DoesHyperlinkPropagateToParent:
+      getter:
+      - name: hyperlinkPropagateToParent
     EnableDrawLayer: {}
     EnableGamePadButton: {}
     EnableGamePadStick: {}
@@ -948,6 +1067,7 @@ Frame:
     GetPropagateKeyboardInput:
       getter:
       - name: propagateKeyboardInput
+    GetRaisedFrameLevel: {}
     GetRegions:
       impl: Frame/GetRegions
     GetResizeBounds:
@@ -956,6 +1076,7 @@ Frame:
       - name: minResizeHeight
       - name: maxResizeWidth
       - name: maxResizeHeight
+    GetWindow: {}
     HasFixedFrameLevel:
       getter:
       - name: hasFixedFrameLevel
@@ -983,6 +1104,10 @@ Frame:
     IsUserPlaced:
       getter:
       - name: isUserPlaced
+    IsUsingParentLevel:
+      getter:
+      - name: usingParentLevel
+    LockHighlight: {}
     Lower: {}
     Raise: {}
     RegisterAllEvents:
@@ -1016,7 +1141,11 @@ Frame:
     SetFrameStrata:
       setter:
       - name: frameStrata
+    SetHighlightLocked: {}
     SetHitRectInsets: {}
+    SetHyperlinkPropagateToParent:
+      setter:
+      - name: hyperlinkPropagateToParent
     SetHyperlinksEnabled:
       setter:
       - name: hyperlinksEnabled
@@ -1041,9 +1170,14 @@ Frame:
     SetUserPlaced:
       setter:
       - name: isUserPlaced
+    SetUsingParentLevel:
+      setter:
+      - name: usingParentLevel
+    SetWindow: {}
     StartMoving: {}
     StartSizing: {}
     StopMovingOrSizing: {}
+    UnlockHighlight: {}
     UnregisterAllEvents:
       impl: Frame/UnregisterAllEvents
     UnregisterEvent:
@@ -1107,10 +1241,12 @@ GameTooltip:
     SetCraftSpell: {}
     SetCurrencyToken: {}
     SetCurrencyTokenByID: {}
+    SetEngravingRune: {}
     SetEquipmentSet: {}
     SetExistingSocketGem: {}
     SetFrameStack: {}
     SetGlyph: {}
+    SetGlyphByID: {}
     SetGuildBankItem: {}
     SetHeirloomByItemID: {}
     SetHyperlink: {}
@@ -1145,6 +1281,7 @@ GameTooltip:
     SetQuestLogCurrency: {}
     SetQuestLogItem: {}
     SetQuestLogSpecialItem: {}
+    SetReforgeItem: {}
     SetSendMailItem: {}
     SetShapeshift: {}
     SetSocketedItem: {}
@@ -1160,6 +1297,7 @@ GameTooltip:
     SetTradeSkillItem: {}
     SetTradeTargetItem: {}
     SetTrainerService: {}
+    SetTransmogrifyItem: {}
     SetUnit: {}
     SetUnitAura: {}
     SetUnitBuff: {}
@@ -1202,35 +1340,40 @@ LayeredRegion:
 Line:
   fields:
     thickness:
-      init: 1
+      init: 4
       type: number
   inherits:
     TextureBase: {}
   methods:
     GetEndPoint: {}
+    GetHitRectThickness: {}
     GetStartPoint: {}
     GetThickness:
       getter:
       - name: thickness
     SetEndPoint: {}
+    SetHitRectThickness: {}
     SetStartPoint: {}
     SetThickness:
       setter:
       - name: thickness
-  warner: true
 LineScale:
+  fields: {}
   inherits:
     Scale: {}
   methods: {}
 LineTranslation:
+  fields: {}
   inherits:
     Translation: {}
   methods: {}
 MaskTexture:
+  fields: {}
   inherits:
     TextureBase: {}
   methods: {}
 MessageFrame:
+  fields: {}
   inherits:
     FontInstance: {}
     Frame: {}
@@ -1252,6 +1395,7 @@ MessageFrame:
     SetInsertMode: {}
     SetTimeVisible: {}
 Minimap:
+  fields: {}
   inherits:
     Frame: {}
   methods:
@@ -1350,6 +1494,7 @@ Model:
       impl: Model/TransformCameraSpaceToModelSpace
     UseModelCenterToTransform: {}
 ModelScene:
+  fields: {}
   inherits:
     Frame: {}
   methods:
@@ -1423,6 +1568,7 @@ ModelScene:
     SetViewTranslation: {}
     TakeActor: {}
 MovieFrame:
+  fields: {}
   inherits:
     Frame: {}
   methods:
@@ -1431,6 +1577,7 @@ MovieFrame:
     StartMovieByName: {}
     StopMovie: {}
 OffScreenFrame:
+  fields: {}
   inherits:
     Frame: {}
   methods:
@@ -1443,6 +1590,7 @@ OffScreenFrame:
     TestPrintToFile: {}
     UsesNPOT: {}
 ParentedObject:
+  fields: {}
   inherits:
     ParentedObjectBase: {}
   methods:
@@ -1464,6 +1612,8 @@ ParentedObjectBase:
   inherits:
     UIObject: {}
   methods:
+    ClearParentKey:
+      impl: ParentedObjectBase/ClearParentKey
     GetDebugName:
       impl: ParentedObject/GetDebugName
     GetParent:
@@ -1475,6 +1625,10 @@ ParentedObjectBase:
       impl: ParentedObjectBase/SetParentKey
   virtual: true
 Path:
+  fields:
+    curveType:
+      init: NONE
+      type: CurveType
   inherits:
     Animation: {}
   methods:
@@ -1494,10 +1648,15 @@ Path:
       - name: point
         type: ControlPoint
     GetControlPoints: {}
-    GetCurveType: {}
+    GetCurveType:
+      getter:
+      - name: curveType
     GetMaxControlPointOrder: {}
-    SetCurveType: {}
+    SetCurveType:
+      setter:
+      - name: curveType
 PlayerModel:
+  fields: {}
   inherits:
     Model: {}
   methods:
@@ -1525,9 +1684,9 @@ PlayerModel:
     SetUnit: {}
     StopAnimKit: {}
     ZeroCachedCenterXY: {}
-QuestPOIFrame:
-  inherits:
-    Frame: {}
+POIFrame:
+  fields: {}
+  inherits: {}
   methods:
     DrawAll: {}
     DrawBlob: {}
@@ -1535,8 +1694,6 @@ QuestPOIFrame:
     EnableMerging: {}
     EnableSmoothing: {}
     GetMapID: {}
-    GetNumTooltips: {}
-    GetTooltipIndex: {}
     SetBorderAlpha: {}
     SetBorderScalar: {}
     SetBorderTexture: {}
@@ -1545,6 +1702,15 @@ QuestPOIFrame:
     SetMapID: {}
     SetMergeThreshold: {}
     SetNumSplinePoints: {}
+  virtual: true
+QuestPOIFrame:
+  fields: {}
+  inherits:
+    Frame: {}
+    POIFrame: {}
+  methods:
+    GetNumTooltips: {}
+    GetTooltipIndex: {}
     UpdateMouseOverTooltip: {}
 Region:
   fields:
@@ -1570,10 +1736,10 @@ Region:
       init: 0
       type: number
     mouseClickEnabled:
-      init: true
+      init: false
       type: boolean
     mouseMotionEnabled:
-      init: true
+      init: false
       type: boolean
     mouseWheelEnabled:
       init: false
@@ -1594,6 +1760,7 @@ Region:
       impl: Region/ClearAllPoints
     ClearPoint: {}
     ClearPointsOffset: {}
+    CollapsesLayout: {}
     CreateAnimationGroup:
       impl: Region/CreateAnimationGroup
       inputs:
@@ -1671,6 +1838,7 @@ Region:
       getter:
       - name: width
     IsAnchoringRestricted: {}
+    IsCollapsed: {}
     IsDragging: {}
     IsIgnoringParentAlpha:
       getter:
@@ -1697,6 +1865,7 @@ Region:
     IsRectValid: {}
     SetAllPoints:
       impl: Region/SetAllPoints
+    SetCollapsesLayout: {}
     SetHeight:
       setter:
       - name: height
@@ -1715,7 +1884,8 @@ Region:
     SetPassThroughButtons: {}
     SetPoint:
       impl: Region/SetPoint
-    SetProtected: {}
+    SetPropagateMouseClicks: {}
+    SetPropagateMouseMotion: {}
     SetSize:
       setter:
       - name: width
@@ -1761,6 +1931,7 @@ RegionBase:
       impl: Region/Show
   virtual: true
 Rotation:
+  fields: {}
   inherits:
     Animation: {}
   methods:
@@ -1771,6 +1942,7 @@ Rotation:
     SetOrigin: {}
     SetRadians: {}
 Scale:
+  fields: {}
   inherits:
     Animation: {}
   methods:
@@ -1783,6 +1955,7 @@ Scale:
     SetScaleFrom: {}
     SetScaleTo: {}
 ScriptObject:
+  fields: {}
   inherits:
     ScriptObjectBase: {}
   methods:
@@ -1838,6 +2011,9 @@ ScrollFrame:
     SetVerticalScroll: {}
     UpdateScrollChildRect: {}
 SimpleHTML:
+  fieldinitoverrides:
+    hyperlinksEnabled: true
+  fields: {}
   inherits:
     FontInstance: {}
     Frame: {}
@@ -1850,6 +2026,9 @@ SimpleHTML:
     SetHyperlinkFormat: {}
     SetText: {}
 Slider:
+  fieldinitoverrides:
+    mouseClickEnabled: true
+    mouseMotionEnabled: true
   fields:
     enabled:
       init: true
@@ -1861,7 +2040,7 @@ Slider:
       init: 0
       type: number
     orientation:
-      init: HORIZONTAL
+      init: VERTICAL
       type: Orientation
     thumbTexture:
       nilable: true
@@ -1913,6 +2092,9 @@ Slider:
     SetValueStep: {}
 StatusBar:
   fields:
+    fillStyle:
+      init: STANDARD
+      type: StatusBarFillStyle
     max:
       init: 0
       type: number
@@ -1928,7 +2110,9 @@ StatusBar:
   inherits:
     Frame: {}
   methods:
-    GetFillStyle: {}
+    GetFillStyle:
+      getter:
+      - name: fillStyle
     GetMinMaxValues:
       getter:
       - name: min
@@ -1947,7 +2131,9 @@ StatusBar:
       - name: value
     IsStatusBarDesaturated: {}
     SetColorFill: {}
-    SetFillStyle: {}
+    SetFillStyle:
+      setter:
+      - name: fillStyle
     SetMinMaxValues:
       setter:
       - name: min
@@ -1965,6 +2151,7 @@ StatusBar:
       setter:
       - name: value
 TabardModel:
+  fields: {}
   inherits:
     PlayerModel: {}
   methods:
@@ -1977,8 +2164,10 @@ TabardModel:
     GetUpperEmblemFileName: {}
     GetUpperEmblemTexture: {}
     InitializeTabardColors: {}
+    IsGuildTabard: {}
     Save: {}
 Texture:
+  fields: {}
   inherits:
     TextureBase: {}
   methods:
@@ -1986,7 +2175,6 @@ Texture:
     GetMaskTexture: {}
     GetNumMaskTextures: {}
     RemoveMaskTexture: {}
-  warner: true
 TextureBase:
   fields:
     blendMode:
@@ -2044,6 +2232,7 @@ TextureBase:
     LayeredRegion: {}
     ScriptObject: {}
   methods:
+    ClearTextureSlice: {}
     GetAtlas: {}
     GetBlendMode:
       getter:
@@ -2068,6 +2257,8 @@ TextureBase:
       impl: Texture/GetTexture
     GetTextureFileID: {}
     GetTextureFilePath: {}
+    GetTextureSliceMargins: {}
+    GetTextureSliceMode: {}
     GetVertexColor:
       getter:
       - name: vertexColorR
@@ -2105,16 +2296,20 @@ TextureBase:
     SetTexelSnappingBias: {}
     SetTexture:
       impl: Texture/SetTexture
+    SetTextureSliceMargins: {}
+    SetTextureSliceMode: {}
     SetVertexOffset: {}
     SetVertTile:
       setter:
       - name: vertTile
   virtual: true
 TextureCoordTranslation:
+  fields: {}
   inherits:
     Translation: {}
   methods: {}
 Translation:
+  fields: {}
   inherits:
     Animation: {}
   methods:
@@ -2144,6 +2339,7 @@ UIObject:
       impl: ForbiddenMixin/SetForbidden
   virtual: true
 UnitPositionFrame:
+  fields: {}
   inherits:
     Frame: {}
   methods:
@@ -2159,3 +2355,12 @@ UnitPositionFrame:
     SetUnitColor: {}
     StartPlayerPing: {}
     StopPlayerPing: {}
+VertexColor:
+  fields: {}
+  inherits:
+    Animation: {}
+  methods:
+    GetEndColor: {}
+    GetStartColor: {}
+    SetEndColor: {}
+    SetStartColor: {}

@@ -1,8 +1,8 @@
 describe('impl', function()
-  it('references exactly the files in data/impl', function()
+  it('references exactly the files in data/impl, except for modules', function()
     local expected = {}
-    for k in pairs(require('build.data.impl')) do
-      expected['data/impl/' .. k .. '.lua'] = true
+    for k, v in pairs(require('build.data.impl')) do
+      expected['data/impl/' .. k .. '.lua'] = not v.module or nil
     end
     local actual = {}
     for _, f in ipairs(require('pl.dir').getfiles('data/impl')) do

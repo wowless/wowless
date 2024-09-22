@@ -1,3 +1,3 @@
 return (function(self)
-  return api.RegisterAllEvents(self)
+  return api.modules.events.RegisterAllEvents(self)
 end)(...)

@@ -19,8 +19,6 @@ type:
       - record:
           comment:
             type: string
-          debug:
-            type: boolean
           impl:
             type:
               ref: impl
@@ -57,14 +55,15 @@ type:
                   stub:
                     type:
                       schema: any
+                  stubnotnil:
+                    type: boolean
                   type:
                     required: true
                     type:
                       schema: type
-          protection:
-            type:
-              oneof:
-              - literal: hardware
-              - literal: secure
+          outstride:
+            type: number
           stubnothing:
             type: boolean
+          stuboutstrides:
+            type: number

@@ -1,6 +1,0 @@
----
-name: System
-value:
-  isLoggedIn: false
-  screenHeight: 720
-  screenWidth: 1280

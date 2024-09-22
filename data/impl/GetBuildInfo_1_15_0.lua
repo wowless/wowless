@@ -1,3 +1,4 @@
 local datalua = ...
 local p = datalua.build
-return p.version, p.build, p.date, p.tocversion, '', 'Release ', p.tocversion
+local buildType = p.test and 'Test ' or 'Release '
+return p.version, p.build, p.date, p.tocversion, '', buildType, p.tocversion

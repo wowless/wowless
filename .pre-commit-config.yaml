@@ -1,13 +1,15 @@
 repos:
 - repo: https://github.com/pre-commit/pre-commit-hooks
-  rev: v4.5.0
+  rev: v4.6.0
   hooks:
   - id: check-json
   - id: check-yaml
   - id: end-of-file-fixer
+  - id: pretty-format-json
+    args: [--autofix]
   - id: trailing-whitespace
 - repo: https://github.com/editorconfig-checker/editorconfig-checker.python
-  rev: '2.7.3'
+  rev: '3.0.3'
   hooks:
   - id: editorconfig-checker
 - repo: https://github.com/JohnnyMorganz/StyLua
@@ -15,7 +17,7 @@ repos:
   hooks:
   - id: stylua-github
 - repo: https://github.com/Lucas-C/pre-commit-hooks
-  rev: v1.5.4
+  rev: v1.5.5
   hooks:
   - id: remove-crlf
   - id: forbid-tabs
@@ -24,24 +26,18 @@ repos:
   hooks:
   - id: markdownlint
 - repo: https://github.com/pre-commit/mirrors-clang-format
-  rev: v17.0.6
+  rev: v18.1.8
   hooks:
   - id: clang-format
     types: [c]
 - repo: https://github.com/shellcheck-py/shellcheck-py
-  rev: v0.9.0.6
+  rev: v0.10.0.1
   hooks:
   - id: shellcheck
     args:
     - --shell=bash
 - repo: local
   hooks:
-  - id: yamlfmt
-    name: wowless yamlfmt
-    entry: lua tools/yamlfmt.lua
-    language: system
-    types: [yaml]
-    files: ^data/
   - id: luacheck
     name: luacheck
     entry: luacheck
@@ -53,9 +49,20 @@ repos:
     entry: chmod 755
     language: system
     files: ^addon/
-  - id: local-test
+  - id: mkninja
+    name: create build system
+    entry: lua tools/mkninja.lua
+    language: system
+    pass_filenames: false
+  - id: yamlfmt
+    name: wowless yamlfmt
+    entry: sh -c 'ninja build/cmake/yamlfmt && build/cmake/yamlfmt "$@"' --
+    language: system
+    types: [yaml]
+    files: ^data/
+  - id: test
     name: build and test
-    entry: sh -c "lua tools/mkninja.lua && ninja -v"
+    entry: ninja -v
     language: system
     pass_filenames: false
 - repo: meta
