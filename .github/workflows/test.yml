@@ -65,5 +65,7 @@ jobs:
         submodules: true
     - uses: seanmiddleditch/gha-setup-ninja@v3
       if: matrix.config.generator == 'Ninja'
+    - uses: microsoft/setup-msbuild@v2
+      if: matrix.config.os == 'windows-latest'
     - run: cmake -B build -G "${{ matrix.config.generator }}"
     - run: cmake --build build --verbose

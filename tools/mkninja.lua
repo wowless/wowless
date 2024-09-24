@@ -155,7 +155,11 @@ local builds = {
   {
     ins = {
       'CMakeLists.txt',
+      'ports/elune/portfile.cmake',
+      'ports/elune/vcpkg.json',
       'tools/mkninja.lua',
+      'vcpkg.json',
+      'vcpkg-configuration.json',
     },
     outs = 'build.ninja',
     rule = 'mkninja',
