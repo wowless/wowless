@@ -58,7 +58,7 @@ runner:
     LOOT_MASTER: {}
     USERANDOM: {}
 runtime:
-  capsulearg: true
+  capsulearg: false
   warners:
     archaeologydigsiteframe: {}
     fontstring: {}

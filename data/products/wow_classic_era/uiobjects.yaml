@@ -892,6 +892,7 @@ FontString:
     SetTextScale:
       setter:
       - name: textScale
+    SetTextToFit: {}
     SetWordWrap: {}
 Frame:
   fields:
@@ -908,6 +909,9 @@ Frame:
       init: false
       type: boolean
     hasFixedFrameStrata:
+      init: false
+      type: boolean
+    hyperlinkPropagateToParent:
       init: false
       type: boolean
     hyperlinksEnabled:
@@ -944,6 +948,9 @@ Frame:
       init: false
       type: boolean
     toplevel:
+      init: false
+      type: boolean
+    usingParentLevel:
       init: false
       type: boolean
   inherits:
@@ -1013,6 +1020,9 @@ Frame:
     DesaturateHierarchy: {}
     DisableDrawLayer: {}
     DoesClipChildren: {}
+    DoesHyperlinkPropagateToParent:
+      getter:
+      - name: hyperlinkPropagateToParent
     EnableDrawLayer: {}
     EnableGamePadButton: {}
     EnableGamePadStick: {}
@@ -1086,6 +1096,9 @@ Frame:
     IsUserPlaced:
       getter:
       - name: isUserPlaced
+    IsUsingParentLevel:
+      getter:
+      - name: usingParentLevel
     LockHighlight: {}
     Lower: {}
     Raise: {}
@@ -1122,6 +1135,9 @@ Frame:
       - name: frameStrata
     SetHighlightLocked: {}
     SetHitRectInsets: {}
+    SetHyperlinkPropagateToParent:
+      setter:
+      - name: hyperlinkPropagateToParent
     SetHyperlinksEnabled:
       setter:
       - name: hyperlinksEnabled
@@ -1146,6 +1162,9 @@ Frame:
     SetUserPlaced:
       setter:
       - name: isUserPlaced
+    SetUsingParentLevel:
+      setter:
+      - name: usingParentLevel
     SetWindow: {}
     StartMoving: {}
     StartSizing: {}
@@ -1824,6 +1843,8 @@ Region:
     SetPassThroughButtons: {}
     SetPoint:
       impl: Region/SetPoint
+    SetPropagateMouseClicks: {}
+    SetPropagateMouseMotion: {}
     SetSize:
       setter:
       - name: width
