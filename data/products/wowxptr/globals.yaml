@@ -580,6 +580,7 @@ Enum:
     AllowBagsInNonBagSlots: 1024
     AllowBuyback: 65536
     AllowPartialStack: 16384
+    AllowSoulboundItemInAccountBank: 268435456
     AlreadyBound: 4
     AlreadyOwner: 2
     AsymmetricSwap: 2097152
@@ -606,9 +607,9 @@ Enum:
     Swap: 8
     SwapBags: 4096
   BagFlagMeta:
-    MaxValue: 134217728
+    MaxValue: 268435456
     MinValue: 1
-    NumValues: 28
+    NumValues: 29
   BagIndex:
     Accountbanktab: -5
     AccountBankTab_1: 13
@@ -6105,7 +6106,7 @@ Enum:
     GuildBank8: 18
     GuildBank9: 19
     GuildOverflow: 13
-    KeyringObsolete: 6
+    Keyring: 6
     Mail: 4
     Quarantine: 24
     Reagentbank: 22

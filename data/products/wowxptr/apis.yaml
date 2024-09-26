@@ -24552,6 +24552,13 @@ ClassicExpansionAtLeast:
   outputs:
   - name: isAtLeast
     type: boolean
+ClassicExpansionAtMost:
+  inputs:
+  - name: expansionLevel
+    type: number
+  outputs:
+  - name: isAtMost
+    type: boolean
 ClearAchievementComparisonUnit: {}
 ClearAchievementSearchString: {}
 ClearAllLFGDungeons: {}
