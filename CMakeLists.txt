@@ -16,7 +16,7 @@ include(FetchContent)
 FetchContent_Declare(
   elune
   GIT_REPOSITORY https://github.com/meorawr/elune.git
-  GIT_TAG 7fc7271922fbc0a371ef15d699ffa0b2be649a81
+  GIT_TAG bcdb36ddb6e6dd14ffca142dc6ec7ac7d1821766
   SOURCE_SUBDIR disable_cmakelists_txt
 )
 FetchContent_MakeAvailable(elune)
