@@ -74,8 +74,6 @@ for _, p in ipairs(productList) do
   perProductAddonGeneratedFiles[p] = pp
 end
 
-local elune = 'build/cmake/wowless'
-
 local pools = {
   fetch_pool = 1,
   run_pool = 2,
@@ -103,7 +101,7 @@ local rules = {
     pool = 'fetch_pool',
   },
   frame0 = {
-    command = elune .. ' -p $product --frame0 > /dev/null',
+    command = 'build/cmake/wowless run -p $product --frame0 > /dev/null',
     pool = 'run_pool',
   },
   mkaddon = {
@@ -123,7 +121,7 @@ local rules = {
     pool = 'fetch_pool',
   },
   run = {
-    command = elune .. ' -p $product -e5 -a addon/Wowless -a build/products/$product/WowlessData > $out',
+    command = 'build/cmake/wowless run -p $product -e5 -a addon/Wowless -a build/products/$product/WowlessData > $out',
     pool = 'run_pool',
   },
 }
