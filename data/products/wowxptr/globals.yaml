@@ -2231,6 +2231,14 @@ Enum:
     MaxValue: 14
     MinValue: 0
     NumValues: 15
+  CurrencyFilterType:
+    DiscoveredAndAllAccountTransferable: 2
+    DiscoveredOnly: 1
+    None: 0
+  CurrencyFilterTypeMeta:
+    MaxValue: 2
+    MinValue: 0
+    NumValues: 3
   CurrencyFlags:
     Currency_100_Scaler: 8
     CurrencyAccountWide: 16777216
@@ -3001,6 +3009,7 @@ Enum:
     CharNameReservationEnabled: 2
     CharReservationsPerRealmReopenThreshold: 8
     ChatLinkLevelToastsDisabled: 63
+    ClearMailOnRealmTransfer: 92
     CollectionsPanelDisabled: 36
     CommunitiesPanelDisabled: 41
     CompactRaidFrameManagerDisabled: 81
@@ -3088,9 +3097,9 @@ Enum:
     MinValue: 0
     NumValues: 2
   GameRuleMeta:
-    MaxValue: 91
+    MaxValue: 92
     MinValue: 0
-    NumValues: 92
+    NumValues: 93
   GarrAutoBoardIndex:
     AllyCenterFront: 3
     AllyLeftBack: 0

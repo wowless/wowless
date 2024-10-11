@@ -128,6 +128,8 @@ AJ_PVP_RBG_ACTION:
   payload: {}
 AJ_PVP_SKIRMISH_ACTION:
   payload: {}
+AJ_PVP_SPECIAL_BG_ACTION:
+  payload: {}
 AJ_QUEST_LOG_OPEN:
   payload:
   - name: questID

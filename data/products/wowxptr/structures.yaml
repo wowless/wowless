@@ -986,6 +986,45 @@ C_CampaignInfo.CampaignInfo:
       type: string
     usesNormalQuestIcons:
       type: boolean
+C_ChallengeMode.ChallengeCompletionInfo:
+  fields:
+    isAffixRecord:
+      default: false
+      type: boolean
+    isEligibleForScore:
+      default: false
+      type: boolean
+    isMapRecord:
+      default: false
+      type: boolean
+    keystoneUpgradeLevels:
+      default: 0
+      type: number
+    level:
+      default: 0
+      type: number
+    mapChallengeModeID:
+      default: 0
+      type: number
+    members:
+      type:
+        arrayof:
+          structure: C_ChallengeMode.ChallengeModeCompletionMemberInfo
+    newOverallDungeonScore:
+      nilable: true
+      type: number
+    oldOverallDungeonScore:
+      nilable: true
+      type: number
+    onTime:
+      default: false
+      type: boolean
+    practiceRun:
+      default: false
+      type: boolean
+    time:
+      default: 0
+      type: number
 C_ChallengeMode.ChallengeModeCompletionMemberInfo:
   fields:
     memberGUID:

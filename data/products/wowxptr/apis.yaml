@@ -2607,6 +2607,11 @@ C_BarberShop.GetViewingChrModel:
   - name: chrModelID
     nilable: true
     type: number
+C_BarberShop.HasAlteredForm:
+  inputs: {}
+  outputs:
+  - name: hasAlteredForm
+    type: boolean
 C_BarberShop.HasAnyChanges:
   inputs: {}
   outputs:
@@ -3471,39 +3476,12 @@ C_ChallengeMode.GetAffixInfo:
     type: string
   - name: filedataid
     type: number
-C_ChallengeMode.GetCompletionInfo:
+C_ChallengeMode.GetChallengeCompletionInfo:
   inputs: {}
   outputs:
-  - name: mapChallengeModeID
-    type: number
-  - name: level
-    type: number
-  - name: time
-    type: number
-  - name: onTime
-    type: boolean
-  - name: keystoneUpgradeLevels
-    type: number
-  - name: practiceRun
-    type: boolean
-  - name: oldOverallDungeonScore
-    nilable: true
-    type: number
-  - name: newOverallDungeonScore
-    nilable: true
-    type: number
-  - name: IsMapRecord
-    type: boolean
-  - name: IsAffixRecord
-    type: boolean
-  - name: PrimaryAffix
-    type: number
-  - name: isEligibleForScore
-    type: boolean
-  - name: members
+  - name: info
     type:
-      arrayof:
-        structure: C_ChallengeMode.ChallengeModeCompletionMemberInfo
+      structure: C_ChallengeMode.ChallengeCompletionInfo
 C_ChallengeMode.GetDeathCount:
   inputs: {}
   outputs:
@@ -7553,6 +7531,11 @@ C_CurrencyInfo.CanTransferCurrency:
     nilable: true
     type:
       enum: AccountCurrencyTransferResult
+C_CurrencyInfo.DoesCurrentFilterRequireAccountCurrencyData:
+  inputs: {}
+  outputs:
+  - name: doesCurrentFilterRequireAccountCurrencyData
+    type: boolean
 C_CurrencyInfo.DoesWarModeBonusApply:
   inputs:
   - name: currencyID
@@ -7665,6 +7648,12 @@ C_CurrencyInfo.GetCurrencyDescription:
   outputs:
   - name: description
     type: string
+C_CurrencyInfo.GetCurrencyFilter:
+  inputs: {}
+  outputs:
+  - name: filterType
+    type:
+      enum: CurrencyFilterType
 C_CurrencyInfo.GetCurrencyIDFromLink:
   inputs:
   - name: currencyLink
@@ -7823,6 +7812,12 @@ C_CurrencyInfo.SetCurrencyBackpackByID:
     type: number
   - name: backpack
     type: boolean
+  outputs: {}
+C_CurrencyInfo.SetCurrencyFilter:
+  inputs:
+  - name: filterType
+    type:
+      enum: CurrencyFilterType
   outputs: {}
 C_CurrencyInfo.SetCurrencyUnused:
   inputs:
@@ -13460,11 +13455,6 @@ C_MythicPlus.IsMythicPlusActive:
   inputs: {}
   outputs:
   - name: isMythicPlusActive
-    type: boolean
-C_MythicPlus.IsWeeklyRewardAvailable:
-  inputs: {}
-  outputs:
-  - name: weeklyRewardAvailable
     type: boolean
 C_MythicPlus.RequestCurrentAffixes:
   inputs: {}
