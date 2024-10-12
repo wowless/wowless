@@ -69,6 +69,7 @@ runner:
     USERANDOM: {}
 runtime:
   capsulearg: false
+  texturekitstatus: false
   warners:
     fontstring: {}
     line: {}

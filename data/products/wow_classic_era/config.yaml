@@ -59,6 +59,7 @@ runner:
     USERANDOM: {}
 runtime:
   capsulearg: false
+  texturekitstatus: false
   warners:
     archaeologydigsiteframe: {}
     fontstring: {}

@@ -68,6 +68,9 @@ type:
           capsulearg:
             required: true
             type: boolean
+          texturekitstatus:
+            required: true
+            type: boolean
           warners:
             type:
               mapof:
