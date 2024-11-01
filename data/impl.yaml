@@ -277,8 +277,6 @@ LoadAddOn:
 RequestTimePlayed:
   frameworks:
   - api
-RunMacroText:
-  module: macrotext
 RunScript: {}
 SecureCmdOptionParse: {}
 SendSystemMessage:

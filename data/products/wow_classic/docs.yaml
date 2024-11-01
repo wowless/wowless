@@ -116,6 +116,7 @@ typedefs:
   SimpleWindow: nil
   SingleColorValue: number
   size: number
+  SpellIdentifier: string
   string: string
   TBFFlags: string
   TextureAsset: string
