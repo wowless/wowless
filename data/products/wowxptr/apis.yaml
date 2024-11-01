@@ -12163,6 +12163,7 @@ C_Macro.GetSelectedMacroIcon:
   - name: textureNum
     type: number
 C_Macro.RunMacroText:
+  impl: RunMacroText
   inputs:
   - name: text
     type: string
