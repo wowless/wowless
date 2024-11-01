@@ -52,6 +52,8 @@ Constants:
     WAR_RESOURCES_CURRENCY_ID: 1560
   DelvesConsts:
     BRANN_COMPANION_INFO_ID: 1
+    BRANN_MAX_LEVEL: 60
+    BRANN_XP_FACTION_ID: 1203
     DELVES_COMPANION_TOOLTIP_WIDGET_SET_ID: 1331
     DELVES_COMPANION_TRAIT_SYSTEM_ID: 6
     DELVES_MIN_PLAYER_LEVEL_CONTENT_TUNING_ID: 2677
@@ -93,12 +95,14 @@ Constants:
   MountDynamicFlightConsts:
     TRAIT_SYSTEM_ID: 1
     TREE_ID: 672
+  PetConsts:
+    MAX_SUMMONABLE_PETS: 25
+    PETNUMBER_INVALIDSLOT: -1
   PetConsts_PostCata:
     EXTRA_PET_STABLE_SLOT: 5
     MAX_NUM_PET_SLOTS: 205
     MAX_STABLE_SLOTS: 200
     MAX_SUMMONABLE_HUNTER_PETS: 5
-    MAX_SUMMONABLE_PETS: 25
     NUM_PET_SLOTS_DEATHKNIGHT: 1
     NUM_PET_SLOTS_HUNTER: 205
     NUM_PET_SLOTS_MAGE: 1
@@ -110,7 +114,6 @@ Constants:
     MAX_NUM_PET_SLOTS: 25
     MAX_STABLE_SLOTS: 2
     MAX_SUMMONABLE_HUNTER_PETS: 5
-    MAX_SUMMONABLE_PETS: 25
     NUM_PET_SLOTS_DEATHKNIGHT: 0
     NUM_PET_SLOTS_HUNTER: 205
     NUM_PET_SLOTS_MAGE: 1
@@ -122,7 +125,6 @@ Constants:
     MAX_NUM_PET_SLOTS: 25
     MAX_STABLE_SLOTS: 4
     MAX_SUMMONABLE_HUNTER_PETS: 5
-    MAX_SUMMONABLE_PETS: 25
     NUM_PET_SLOTS_DEATHKNIGHT: 1
     NUM_PET_SLOTS_HUNTER: 205
     NUM_PET_SLOTS_MAGE: 1
@@ -174,10 +176,11 @@ Enum:
     NoValidSourceCharacter: 6
     ServerError: 7
     Success: 0
+    TransactionInProgress: 9
   AccountCurrencyTransferResultMeta:
-    MaxValue: 8
+    MaxValue: 9
     MinValue: 0
-    NumValues: 9
+    NumValues: 10
   AccountData:
     Bindings: 2
     Bindings2: 3
@@ -288,6 +291,7 @@ Enum:
     BattlenetAccount: 25
     Battlepet: 3
     BitVectors: 51
+    CharacterDataMerge: 54
     Characters: 7
     CombinedQuestLog: 52
     ConsumableToken: 19
@@ -333,9 +337,9 @@ Enum:
     UpgradeAccount: 46
     VasTransaction: 20
   AccountTransTypeMeta:
-    MaxValue: 53
+    MaxValue: 54
     MinValue: 0
-    NumValues: 54
+    NumValues: 55
   ActionBarOrientation:
     Horizontal: 0
     Vertical: 1
@@ -576,6 +580,7 @@ Enum:
     AllowBagsInNonBagSlots: 1024
     AllowBuyback: 65536
     AllowPartialStack: 16384
+    AllowSoulboundItemInAccountBank: 268435456
     AlreadyBound: 4
     AlreadyOwner: 2
     AsymmetricSwap: 2097152
@@ -602,9 +607,9 @@ Enum:
     Swap: 8
     SwapBags: 4096
   BagFlagMeta:
-    MaxValue: 134217728
+    MaxValue: 268435456
     MinValue: 1
-    NumValues: 28
+    NumValues: 29
   BagIndex:
     Accountbanktab: -5
     AccountBankTab_1: 13
@@ -716,9 +721,9 @@ Enum:
     UseHorizontalLayoutForFullCard: 16
     UseSquareIconBorder: 128
   BattlepayDisplayFlagMeta:
-    MaxValue: 1024
+    MaxValue: 2048
     MinValue: 1
-    NumValues: 11
+    NumValues: 12
   BattlepayGroupDisplayType:
     ActiveTimeOnly: 2
     Everyone: 0
@@ -2226,6 +2231,14 @@ Enum:
     MaxValue: 14
     MinValue: 0
     NumValues: 15
+  CurrencyFilterType:
+    DiscoveredAndAllAccountTransferable: 2
+    DiscoveredOnly: 1
+    None: 0
+  CurrencyFilterTypeMeta:
+    MaxValue: 2
+    MinValue: 0
+    NumValues: 3
   CurrencyFlags:
     Currency_100_Scaler: 8
     CurrencyAccountWide: 16777216
@@ -2258,7 +2271,7 @@ Enum:
     CurrencyTrackQuantity: 128
     CurrencyTradable: 1
     CurrencyUpdateVersionIgnoreMax: 512
-    DeprecatedCurrencyFlag: 2147483648
+    CurrencyUsesLedgerBalance: 2147483648
   CurrencyFlagsB:
     CurrencyBBattlenetVirtualCurrency: 8
     CurrencyBDontDisplayIfZero: 32
@@ -2996,6 +3009,7 @@ Enum:
     CharNameReservationEnabled: 2
     CharReservationsPerRealmReopenThreshold: 8
     ChatLinkLevelToastsDisabled: 63
+    ClearMailOnRealmTransfer: 92
     CollectionsPanelDisabled: 36
     CommunitiesPanelDisabled: 41
     CompactRaidFrameManagerDisabled: 81
@@ -3065,6 +3079,7 @@ Enum:
     UniversalNameplateOcclusion: 51
     UserAddonsDisabled: 29
     UserScriptsDisabled: 30
+    VanillaAccountMailInstant: 91
     VanillaNpcKnockback: 16
     VanillaRageGenerationModifier: 21
     WorldMapHelpPlateDisabled: 70
@@ -3082,9 +3097,9 @@ Enum:
     MinValue: 0
     NumValues: 2
   GameRuleMeta:
-    MaxValue: 90
+    MaxValue: 92
     MinValue: 0
-    NumValues: 91
+    NumValues: 93
   GarrAutoBoardIndex:
     AllyCenterFront: 3
     AllyLeftBack: 0
@@ -3468,6 +3483,13 @@ Enum:
     MaxValue: 64
     MinValue: 1
     NumValues: 7
+  IconAndTextShiftTextType:
+    None: 0
+    ShiftText: 1
+  IconAndTextShiftTextTypeMeta:
+    MaxValue: 1
+    MinValue: 0
+    NumValues: 2
   IconAndTextWidgetState:
     Hidden: 0
     Shown: 1
@@ -5140,31 +5162,34 @@ Enum:
     AlternateQuest: 23
     ArcaneCharges: 16
     Balance: 26
+    BurningEmbers: 14
     Chi: 12
     ComboPoints: 4
+    DemonicFury: 15
     Energy: 3
     Essence: 19
     Focus: 2
     Fury: 17
+    Happiness: 27
     HolyPower: 9
     Insanity: 13
     LunarPower: 8
     Maelstrom: 11
     Mana: 0
-    Obsolete: 14
-    Obsolete2: 15
     Pain: 18
     Rage: 1
     RuneBlood: 20
+    RuneChromatic: 29
     RuneFrost: 21
     Runes: 5
     RuneUnholy: 22
     RunicPower: 6
+    ShadowOrbs: 28
     SoulShards: 7
   PowerTypeMeta:
-    MaxValue: 26
+    MaxValue: 29
     MinValue: 0
-    NumValues: 27
+    NumValues: 30
   PowerTypeSign:
     Negative: 1
     None: -1
@@ -5708,6 +5733,23 @@ Enum:
     MaxValue: 2
     MinValue: 0
     NumValues: 3
+  ScreenLocationType:
+    Bottom: 4
+    Center: 0
+    Left: 1
+    LeftOutside: 7
+    LeftRight: 9
+    LeftRightOutside: 11
+    Right: 2
+    RightOutside: 8
+    Top: 3
+    TopBottom: 10
+    TopLeft: 5
+    TopRight: 6
+  ScreenLocationTypeMeta:
+    MaxValue: 11
+    MinValue: 0
+    NumValues: 12
   ScriptedAnimationBehavior:
     None: 0
     SourceCollideWithTarget: 4
@@ -6073,7 +6115,7 @@ Enum:
     GuildBank8: 18
     GuildBank9: 19
     GuildOverflow: 13
-    KeyringObsolete: 6
+    Keyring: 6
     Mail: 4
     Quarantine: 24
     Reagentbank: 22
@@ -6473,12 +6515,13 @@ Enum:
     MinValue: -1
     NumValues: 3
   TraitSystemFlag:
+    AllowEditInCombat: 4
     AllowMultipleLoadoutsPerTree: 1
     ShowSpendConfirmation: 2
   TraitSystemFlagMeta:
-    MaxValue: 2
+    MaxValue: 4
     MinValue: 1
-    NumValues: 2
+    NumValues: 3
   TraitTreeFlag:
     CannotRefund: 1
     HideSingleRankNumbers: 2
@@ -6529,10 +6572,10 @@ Enum:
     MaxValue: 29
     MinValue: 0
     NumValues: 30
-  TransmogIllisionFlags:
+  TransmogIllusionFlags:
     HideUntilCollected: 1
     PlayerConditionGrantsOnLogin: 2
-  TransmogIllisionFlagsMeta:
+  TransmogIllusionFlagsMeta:
     MaxValue: 2
     MinValue: 1
     NumValues: 2
@@ -7534,6 +7577,7 @@ LE_FRAME_TUTORIAL_ACCOUNT_EDIT_MODE_MANAGER: 4
 LE_FRAME_TUTORIAL_ACCOUNT_HEIRLOOM_JOURNAL_LEVEL: 8
 LE_FRAME_TUTORIAL_ACCOUNT_HUD_REVAMP_BAG_CHANGES: 2
 LE_FRAME_TUTORIAL_ACCOUNT_LFG_LIST: 7
+LE_FRAME_TUTORIAL_ACCOUNT_LOCAL_STORIES_FILTER_SEEN: 20
 LE_FRAME_TUTORIAL_ACCOUNT_MAP_LEGEND_OPENED: 16
 LE_FRAME_TUTORIAL_ACCOUNT_MOUNT_COLLECTION_DRAGONRIDING: 6
 LE_FRAME_TUTORIAL_ACCOUNT_NPC_CRAFTING_ORDER_CREATE_BUTTON: 18
@@ -7916,6 +7960,7 @@ LE_GAME_ERR_CURRENCY_TRANSFER_INVALID_CURRENCY: 1164
 LE_GAME_ERR_CURRENCY_TRANSFER_MAX_QUANTITY: 1166
 LE_GAME_ERR_CURRENCY_TRANSFER_NO_VALID_SOURCE: 1167
 LE_GAME_ERR_CURRENCY_TRANSFER_SERVER_ERROR: 1169
+LE_GAME_ERR_CURRENCY_TRANSFER_TRANSACTION_IN_PROGRESS: 1171
 LE_GAME_ERR_CURRENCY_TRANSFER_UNMET_REQUIREMENTS: 1170
 LE_GAME_ERR_DEATHBIND_SUCCESS_S: 394
 LE_GAME_ERR_DEATHBINDALREADYBOUND: 393
@@ -8984,7 +9029,7 @@ NUM_LE_CHARACTER_UNDELETE_RESULTS: 7
 NUM_LE_CHARACTER_UPGRADE_RESULTS: 13
 NUM_LE_CINEMATIC_PAN_TYPES: 6
 NUM_LE_EXPANSION_LEVELS: 10
-NUM_LE_FRAME_TUTORIAL_ACCCOUNTS: 19
+NUM_LE_FRAME_TUTORIAL_ACCCOUNTS: 20
 NUM_LE_FRAME_TUTORIALS: 157
 NUM_LE_GM_WEB_TICKET_STATUSS: 4
 NUM_LE_INVITE_REQUEST_TYPES: 3

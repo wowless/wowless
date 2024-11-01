@@ -679,8 +679,6 @@ C_BattleNet.BNetGameAccountInfo:
       type: boolean
     isOnline:
       type: boolean
-    isWowMobile:
-      type: boolean
     playerGuid:
       nilable: true
       type: string
@@ -988,6 +986,45 @@ C_CampaignInfo.CampaignInfo:
       type: string
     usesNormalQuestIcons:
       type: boolean
+C_ChallengeMode.ChallengeCompletionInfo:
+  fields:
+    isAffixRecord:
+      default: false
+      type: boolean
+    isEligibleForScore:
+      default: false
+      type: boolean
+    isMapRecord:
+      default: false
+      type: boolean
+    keystoneUpgradeLevels:
+      default: 0
+      type: number
+    level:
+      default: 0
+      type: number
+    mapChallengeModeID:
+      default: 0
+      type: number
+    members:
+      type:
+        arrayof:
+          structure: C_ChallengeMode.ChallengeModeCompletionMemberInfo
+    newOverallDungeonScore:
+      nilable: true
+      type: number
+    oldOverallDungeonScore:
+      nilable: true
+      type: number
+    onTime:
+      default: false
+      type: boolean
+    practiceRun:
+      default: false
+      type: boolean
+    time:
+      default: 0
+      type: number
 C_ChallengeMode.ChallengeModeCompletionMemberInfo:
   fields:
     memberGUID:
@@ -2306,8 +2343,6 @@ C_FriendList.FriendInfo:
       type: string
     level:
       type: number
-    mobile:
-      type: boolean
     name:
       type: string
     notes:
@@ -3819,6 +3854,40 @@ C_MapExplorationInfo.UiMapExplorationInfo:
       type: number
     textureWidth:
       type: number
+C_MerchantFrame.MerchantItemInfo:
+  fields:
+    currencyID:
+      nilable: true
+      type: number
+    hasExtendedCost:
+      default: false
+      type: boolean
+    isPurchasable:
+      default: false
+      type: boolean
+    isQuestStartItem:
+      default: false
+      type: boolean
+    isUsable:
+      default: false
+      type: boolean
+    name:
+      nilable: true
+      type: string
+    numAvailable:
+      default: 0
+      type: number
+    price:
+      default: 0
+      type: number
+    spellID:
+      nilable: true
+      type: number
+    stackCount:
+      default: 0
+      type: number
+    texture:
+      type: number
 C_Minimap.MinimapScriptTrackingFilter:
   fields:
     filterID:
@@ -4957,18 +5026,6 @@ C_QuestLog.QuestObjectiveInfo:
       type: string
     type:
       type: string
-C_QuestLog.QuestOnMapInfo:
-  fields:
-    isMapIndicatorQuest:
-      type: boolean
-    questID:
-      type: number
-    type:
-      type: number
-    x:
-      type: number
-    y:
-      type: number
 C_QuestLog.QuestTagInfo:
   fields:
     displayExpiration:
@@ -5795,31 +5852,6 @@ C_StableInfo.PetInfo:
       type: string
     uiModelSceneID:
       default: 718
-      type: number
-C_TaskQuest.TaskPOIData:
-  fields:
-    childDepth:
-      nilable: true
-      type: number
-    inProgress:
-      type: boolean
-    isCombatAllyQuest:
-      type: boolean
-    isDaily:
-      type: boolean
-    isMeta:
-      type: boolean
-    isQuestStart:
-      type: boolean
-    mapID:
-      type: number
-    numObjectives:
-      type: number
-    questId:
-      type: number
-    x:
-      type: number
-    y:
       type: number
 C_TaxiMap.MapTaxiNodeInfo:
   fields:
@@ -6792,6 +6824,9 @@ C_UIWidgetManager.IconAndTextWidgetVisualizationInfo:
         enum: WidgetAnimationType
     scriptedAnimationEffectID:
       type: number
+    shiftTextType:
+      type:
+        enum: IconAndTextShiftTextType
     state:
       type:
         enum: IconAndTextWidgetState
@@ -9416,6 +9451,37 @@ ProfTabInfo:
     rootIconID:
       type: number
     rootNodeID:
+      type: number
+QuestPOIMapInfo:
+  fields:
+    childDepth:
+      nilable: true
+      type: number
+    inProgress:
+      type: boolean
+    isCombatAllyQuest:
+      type: boolean
+    isDaily:
+      type: boolean
+    isMapIndicatorQuest:
+      type: boolean
+    isMeta:
+      type: boolean
+    isQuestStart:
+      type: boolean
+    mapID:
+      type: number
+    numObjectives:
+      type: number
+    questID:
+      type: number
+    questTagType:
+      nilable: true
+      type:
+        enum: QuestTagType
+    x:
+      type: number
+    y:
       type: number
 QuestRewardCurrencyInfo:
   fields:

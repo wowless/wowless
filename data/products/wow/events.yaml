@@ -1,6 +1,8 @@
 ---
 ACCOUNT_CHARACTER_CURRENCY_DATA_RECEIVED:
   payload: {}
+ACCOUNT_CVARS_LOADED:
+  payload: {}
 ACCOUNT_MONEY:
   payload: {}
 ACHIEVEMENT_EARNED:
@@ -125,6 +127,8 @@ AJ_PVP_LFG_ACTION:
 AJ_PVP_RBG_ACTION:
   payload: {}
 AJ_PVP_SKIRMISH_ACTION:
+  payload: {}
+AJ_PVP_SPECIAL_BG_ACTION:
   payload: {}
 AJ_QUEST_LOG_OPEN:
   payload:
@@ -899,6 +903,12 @@ CHAT_DISABLED_CHANGE_FAILED:
 CHAT_DISABLED_CHANGED:
   payload:
   - name: disabled
+    type: boolean
+CHAT_LOGGING_CHANGED:
+  payload:
+  - name: whichLog
+    type: number
+  - name: isEnabled
     type: boolean
 CHAT_MSG_ACHIEVEMENT:
   payload:
@@ -3912,7 +3922,10 @@ CURRENCY_DISPLAY_UPDATE:
     nilable: true
     type: number
 CURRENCY_TRANSFER_FAILED:
-  payload: {}
+  payload:
+  - name: failureReason
+    type:
+      enum: AccountCurrencyTransferResult
 CURRENCY_TRANSFER_LOG_UPDATE:
   payload: {}
 CURRENT_SPELL_CAST_CHANGED:
@@ -6754,8 +6767,9 @@ SPELL_ACTIVATION_OVERLAY_SHOW:
     type: number
   - name: overlayFileDataID
     type: number
-  - name: locationName
-    type: string
+  - name: locationType
+    type:
+      enum: ScreenLocationType
   - name: scale
     type: number
   - name: r
