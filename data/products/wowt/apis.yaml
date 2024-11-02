@@ -30791,7 +30791,6 @@ SetInWorldUIVisibility:
   - name: visible
     type: boolean
   outputs: {}
-SetItemRef: {}
 SetLegacyRaidDifficultyID:
   inputs:
   - name: difficultyID
