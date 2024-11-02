@@ -8215,6 +8215,7 @@ C_DelvesUI.GetDelvesMinRequiredLevel:
   outputs:
   - name: minRequiredLevel
     nilable: true
+    stubnotnil: true
     type: number
 C_DelvesUI.GetFactionForCompanion:
   inputs:
