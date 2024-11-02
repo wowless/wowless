@@ -22,6 +22,8 @@ addon:
       C_Macro.SetMacroExecuteLineCallback: {}
       CreateForbiddenFrame: {}
       loadstring_untainted: {}
+  hooked_globals:
+    SetItemRef: {}
   ignore_cvar_value:
     graphicsComputeEffects: {}
     graphicsDepthEffects: {}
@@ -66,10 +68,11 @@ runner:
     EVENT: {}
     GUILD_INVITE: {}
     GUILD_UNINVITE: {}
+    PTRFEEDBACK: {}
     USERANDOM: {}
 runtime:
   capsulearg: false
-  texturekitstatus: false
+  texturekitstatus: true
   warners:
     fontstring: {}
     line: {}

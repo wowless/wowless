@@ -1,8 +1,18 @@
 ---
 ACCOUNT_CHARACTER_CURRENCY_DATA_RECEIVED:
   payload: {}
+ACCOUNT_CVARS_LOADED:
+  payload: {}
 ACCOUNT_MONEY:
   payload: {}
+ACCOUNT_STORE_CURRENCY_AVAILABLE_UPDATED:
+  payload:
+  - name: currencyID
+    type: number
+ACCOUNT_STORE_ITEM_INFO_UPDATED:
+  payload:
+  - name: itemID
+    type: number
 ACHIEVEMENT_EARNED:
   payload:
   - name: achievementID
@@ -125,6 +135,8 @@ AJ_PVP_LFG_ACTION:
 AJ_PVP_RBG_ACTION:
   payload: {}
 AJ_PVP_SKIRMISH_ACTION:
+  payload: {}
+AJ_PVP_SPECIAL_BG_ACTION:
   payload: {}
 AJ_QUEST_LOG_OPEN:
   payload:
@@ -899,6 +911,12 @@ CHAT_DISABLED_CHANGE_FAILED:
 CHAT_DISABLED_CHANGED:
   payload:
   - name: disabled
+    type: boolean
+CHAT_LOGGING_CHANGED:
+  payload:
+  - name: whichLog
+    type: number
+  - name: isEnabled
     type: boolean
 CHAT_MSG_ACHIEVEMENT:
   payload:
@@ -3912,7 +3930,10 @@ CURRENCY_DISPLAY_UPDATE:
     nilable: true
     type: number
 CURRENCY_TRANSFER_FAILED:
-  payload: {}
+  payload:
+  - name: failureReason
+    type:
+      enum: AccountCurrencyTransferResult
 CURRENCY_TRANSFER_LOG_UPDATE:
   payload: {}
 CURRENT_SPELL_CAST_CHANGED:
@@ -4634,6 +4655,11 @@ GUILDTABARD_UPDATE:
   payload: {}
 GX_RESTARTED:
   payload: {}
+HANDLE_UI_ACTION:
+  payload:
+  - name: actionType
+    type:
+      enum: UIActionType
 HARDCORE_DEATHS:
   payload:
   - name: memberName
@@ -5341,6 +5367,10 @@ NAME_PLATE_UNIT_REMOVED:
   payload:
   - name: unitToken
     type: string
+NAVIGATION_DESTINATION_REACHED:
+  payload:
+  - name: isWaypoint
+    type: boolean
 NAVIGATION_FRAME_CREATED:
   payload:
   - name: region
@@ -6527,6 +6557,8 @@ SHOW_DELVES_COMPANION_CONFIGURATION_UI:
   payload: {}
 SHOW_DELVES_DISPLAY_UI:
   payload: {}
+SHOW_END_OF_MATCH_UI:
+  payload: {}
 SHOW_FACTION_SELECT_UI:
   payload: {}
 SHOW_HYPERLINK_TOOLTIP:
@@ -6754,8 +6786,9 @@ SPELL_ACTIVATION_OVERLAY_SHOW:
     type: number
   - name: overlayFileDataID
     type: number
-  - name: locationName
-    type: string
+  - name: locationType
+    type:
+      enum: ScreenLocationType
   - name: scale
     type: number
   - name: r
@@ -6812,6 +6845,14 @@ SPELL_PUSHED_TO_ACTIONBAR:
   - name: slot
     type: number
   - name: page
+    type: number
+SPELL_PUSHED_TO_FLYOUT_ON_ACTIONBAR:
+  payload:
+  - name: spellID
+    type: number
+  - name: flyoutSlot
+    type: number
+  - name: flyoutPage
     type: number
 SPELL_SCRIPT_ERROR:
   payload:
@@ -6932,6 +6973,8 @@ STURDINESS_UPDATE:
   payload: {}
 SUBSCRIPTION_CHANGED_KICK_IMMINENT: {}
 SUPER_TRACKING_CHANGED:
+  payload: {}
+SUPER_TRACKING_PATH_UPDATED:
   payload: {}
 SYSMSG:
   payload:
@@ -8260,8 +8303,6 @@ WORLD_LOOT_OBJECT_INFO_UPDATED:
   payload:
   - name: guid
     type: string
-WORLD_LOOT_OBJECT_SWAP_INVENTORY_TYPE_UPDATED:
-  payload: {}
 WORLD_MAP_OPEN:
   payload:
   - name: uiMapID
