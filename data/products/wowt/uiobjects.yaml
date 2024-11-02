@@ -948,6 +948,9 @@ Frame:
     hasFixedFrameStrata:
       init: false
       type: boolean
+    hyperlinkPropagateToParent:
+      init: false
+      type: boolean
     hyperlinksEnabled:
       init: false
       type: boolean
@@ -1051,6 +1054,9 @@ Frame:
     DesaturateHierarchy: {}
     DisableDrawLayer: {}
     DoesClipChildren: {}
+    DoesHyperlinkPropagateToParent:
+      getter:
+      - name: hyperlinkPropagateToParent
     EnableDrawLayer: {}
     EnableGamePadButton: {}
     EnableGamePadStick: {}
@@ -1161,6 +1167,9 @@ Frame:
       - name: frameStrata
     SetHighlightLocked: {}
     SetHitRectInsets: {}
+    SetHyperlinkPropagateToParent:
+      setter:
+      - name: hyperlinkPropagateToParent
     SetHyperlinksEnabled:
       setter:
       - name: hyperlinksEnabled
