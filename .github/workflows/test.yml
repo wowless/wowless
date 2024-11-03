@@ -21,7 +21,7 @@ jobs:
         path: cache
         key: cache-${{ github.run_id }}
         restore-keys: cache
-    - uses: devcontainers/ci@v0.2
+    - uses: devcontainers/ci@v0.3
       with:
         env: |
           GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}
