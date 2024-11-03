@@ -28,7 +28,7 @@ jobs:
         imageName: ghcr.io/wowless/wowless-devcontainer
         refFilterForPush: refs/heads/main
         runCmd: pre-commit run -a -v && ninja -v all
-    - uses: actions/upload-artifact@v3
+    - uses: actions/upload-artifact@v4
       if: success() || failure()
       with:
         name: test-results
