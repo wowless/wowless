@@ -13,13 +13,8 @@ cmake_policy(SET CMP0116 OLD)
 
 include(FetchContent)
 
-FetchContent_Declare(
-  elune
-  GIT_REPOSITORY https://github.com/meorawr/elune.git
-  GIT_TAG bcdb36ddb6e6dd14ffca142dc6ec7ac7d1821766
-  SOURCE_SUBDIR disable_cmakelists_txt
-)
-FetchContent_MakeAvailable(elune)
+set(elune_SOURCE_DIR vendor/elune)
+set(elune_BINARY_DIR ${CMAKE_BINARY_DIR}/_deps/elune-build)
 add_library(
   elune STATIC
   ${elune_SOURCE_DIR}/liblua/lapi.c
