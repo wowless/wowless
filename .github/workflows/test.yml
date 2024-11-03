@@ -16,7 +16,7 @@ jobs:
         registry: ghcr.io
         username: ${{ github.repository_owner }}
         password: ${{ secrets.GITHUB_TOKEN }}
-    - uses: actions/cache@v3
+    - uses: actions/cache@v4
       with:
         path: cache
         key: cache-${{ github.run_id }}
