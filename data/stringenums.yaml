@@ -41,7 +41,6 @@ JustifyHorizontal:
   RIGHT: {}
 JustifyVertical:
   BOTTOM: {}
-  CENTER: {}
   MIDDLE: {}
   TOP: {}
 LoopType:
