@@ -5,8 +5,9 @@ updates:
   schedule:
     interval: weekly
 - package-ecosystem: gitsubmodule
-  directories:
-  - /vcpkg
-  - /vendor/tactkeys
+  directory: /
+  allow:
+  - dependency-name: vcpkg
+  - dependency-name: vendor/tactkeys
   schedule:
     interval: monthly
