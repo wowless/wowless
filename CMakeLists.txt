@@ -641,6 +641,7 @@ foreach(product ${products})
     DEPFILE ${CMAKE_CURRENT_BINARY_DIR}/generated/${product}.lua.d
     DEPENDS prep
   )
+  add_custom_target(datalua_${product}_lua DEPENDS stamp/${product}.txt)
   # TODO rationalize with lua2c
   add_custom_command(
     OUTPUT datalua_${product}.c
@@ -648,9 +649,10 @@ foreach(product ${products})
       ${CMAKE_CURRENT_SOURCE_DIR}/tools/lua2c.lua
       datalua_${product}
       build.products.${product}.data=runtime/${product}.lua
-    DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/tools/lua2c.lua stamp/${product}.txt
+    DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/tools/lua2c.lua runtime/${product}.lua
   )
   add_library(datalua_${product} STATIC datalua_${product}.c)
+  add_dependencies(datalua_${product} datalua_${product}_lua)
   target_link_libraries(datalua_${product} PRIVATE elune)
   list(APPEND dataluas datalua_${product})
 endforeach()
