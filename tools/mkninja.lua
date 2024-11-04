@@ -192,7 +192,6 @@ for _, p in ipairs(productList) do
     },
     ins_implicit = {
       'build/cmake/dblist',
-      'tools/util.lua',
     },
     outs = dblist,
     rule = 'dblist',
@@ -207,7 +206,6 @@ for _, p in ipairs(productList) do
       dblist,
       'build/cmake/dbdefs',
       'data/products/' .. p .. '/build.yaml',
-      'tools/util.lua',
     },
     outs = dbdefs,
     rule = 'dbdefs',
@@ -255,7 +253,6 @@ for _, p in ipairs(productList) do
       ins_implicit = {
         'build/cmake/render',
         'data/products/' .. p .. '/build.yaml',
-        'wowless/render.lua',
       },
       outs = { prefix .. '.png' },
       rule = 'render',
@@ -318,7 +315,6 @@ table.insert(builds, {
     'spec/wowless/green.png',
     'spec/wowless/temp.blp',
     'spec/wowless/temp.png',
-    'tools/runtests.lua',
     addonFiles,
     addonGeneratedFiles,
     schemadbs,
