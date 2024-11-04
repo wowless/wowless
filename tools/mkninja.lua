@@ -207,7 +207,7 @@ for _, p in ipairs(productList) do
     ins_implicit = {
       dblist,
       'build/cmake/dbdefs',
-      'data/products/' .. p .. '/build.yaml',
+      'build/cmake/runtime/products/' .. p .. '/build.lua',
     },
     outs = dbdefs,
     rule = 'dbdefs',

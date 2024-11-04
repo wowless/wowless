@@ -1,5 +1,5 @@
 local function defs(product)
-  local build = require('wowapi.yaml').parseFile('data/products/' .. product .. '/build.yaml')
+  local build = dofile('build/cmake/runtime/products/' .. product .. '/build.lua')
   local bv = build.version .. '.' .. build.build
   local t = {}
   for _, db in ipairs(dofile('build/products/' .. product .. '/dblist.lua')) do

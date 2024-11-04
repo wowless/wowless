@@ -594,10 +594,8 @@ add_lua_executable(
   lpeg
   luadbd
   luafilesystem
-  lyaml
   penlight
   toolsutil
-  wowlessyaml
 )
 
 add_lua_executable(
