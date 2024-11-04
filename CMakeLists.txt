@@ -530,6 +530,7 @@ add_custom_command(
   COMMAND ${CMAKE_COMMAND} -E touch stamp/listfile.txt
   DEPENDS listfile ${CMAKE_CURRENT_SOURCE_DIR}/vendor/dbdefs/manifest.json
 )
+add_custom_target(listfilelua DEPENDS stamp/listfile.txt)
 # TODO rationalize with lua2c
 add_custom_command(
   OUTPUT runtimelistfile.c
@@ -537,9 +538,10 @@ add_custom_command(
     ${CMAKE_CURRENT_SOURCE_DIR}/tools/lua2c.lua
     runtimelistfile
     runtime.listfile=runtime/listfile.lua
-  DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/tools/lua2c.lua stamp/listfile.txt
+  DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/tools/lua2c.lua runtime/listfile.lua
 )
 add_library(runtimelistfile STATIC runtimelistfile.c)
+add_dependencies(runtimelistfile listfilelua)
 target_link_libraries(runtimelistfile PRIVATE elune)
 
 add_lua_executable(
