@@ -628,7 +628,7 @@ foreach(product ${products})
     BYPRODUCTS runtime/${product}.lua
     COMMAND prep ${product}
       --output ${CMAKE_CURRENT_BINARY_DIR}/generated/${product}.lua
-      --stamp ${CMAKE_NINJA_OUTPUT_PATH_PREFIX}stamp/${product}.txt
+      --stamp ${CMAKE_CURRENT_BINARY_DIR}/stamp/${product}.txt
     COMMAND ${CMAKE_COMMAND} -E copy_if_different
       ${CMAKE_CURRENT_BINARY_DIR}/generated/${product}.lua
       ${CMAKE_CURRENT_BINARY_DIR}/runtime/${product}.lua
