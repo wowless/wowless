@@ -604,11 +604,9 @@ add_lua_executable(
   argparse
   luafilesystem
   luapath
-  lyaml
   penlight
   toolsutil
   wowlessutil
-  wowlessyaml
 )
 
 # TODO derive this from data/products.yaml, or vice versa
@@ -636,6 +634,18 @@ foreach(product ${products})
     WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
     DEPFILE ${CMAKE_CURRENT_BINARY_DIR}/generated/${product}.lua.d
     DEPENDS prep
+      runtime/impl.lua
+      runtime/stringenums.lua
+      runtime/uiobjectimpl.lua
+      runtime/products/${product}/apis.lua
+      runtime/products/${product}/build.lua
+      runtime/products/${product}/config.lua
+      runtime/products/${product}/cvars.lua
+      runtime/products/${product}/events.lua
+      runtime/products/${product}/globals.lua
+      runtime/products/${product}/structures.lua
+      runtime/products/${product}/uiobjects.lua
+      runtime/products/${product}/xml.lua
   )
   add_custom_target(datalua_${product}_lua DEPENDS stamp/${product}.txt)
   # TODO rationalize with lua2c

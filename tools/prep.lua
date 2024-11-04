@@ -10,10 +10,6 @@ local product = args.product
 
 local deps = {} -- accumulated during runtime
 
-local function parseYaml(f)
-  deps[f] = true
-  return (assert(require('wowapi.yaml').parseFile(f)))
-end
 local function readFile(f)
   deps[f] = true
   return (assert(require('pl.file').read(f)))
@@ -21,9 +17,9 @@ end
 local plprettywrite = require('pl.pretty').write
 local Mixin = require('wowless.util').mixin
 
-local globals = parseYaml('data/products/' .. product .. '/globals.yaml')
-local structures = parseYaml('data/products/' .. product .. '/structures.yaml')
-local stringenums = parseYaml('data/stringenums.yaml')
+local globals = dofile('build/cmake/runtime/products/' .. product .. '/globals.lua')
+local structures = dofile('build/cmake/runtime/products/' .. product .. '/structures.lua')
+local stringenums = dofile('build/cmake/runtime/stringenums.lua')
 
 local function valstr(value)
   local ty = type(value)
@@ -114,8 +110,8 @@ local impls = {}
 local sqlcursors = {}
 local sqllookups = {}
 do
-  local cfg = parseYaml('data/products/' .. product .. '/apis.yaml')
-  local implcfg = parseYaml('data/impl.yaml')
+  local cfg = dofile('build/cmake/runtime/products/' .. product .. '/apis.lua')
+  local implcfg = dofile('build/cmake/runtime/impl.lua')
   for name, apicfg in pairs(cfg) do
     if apicfg.impl then
       local ic = assert(implcfg[apicfg.impl], 'missing impl ' .. apicfg.impl)
@@ -164,7 +160,7 @@ do
 end
 
 local cvars = {}
-for k, v in pairs(parseYaml('data/products/' .. product .. '/cvars.yaml')) do
+for k, v in pairs(dofile('build/cmake/runtime/products/' .. product .. '/cvars.lua')) do
   cvars[k:lower()] = {
     name = k,
     value = v,
@@ -172,7 +168,7 @@ for k, v in pairs(parseYaml('data/products/' .. product .. '/cvars.yaml')) do
 end
 
 local events = {}
-for k, v in pairs(parseYaml('data/products/' .. product .. '/events.yaml')) do
+for k, v in pairs(dofile('build/cmake/runtime/products/' .. product .. '/events.lua')) do
   events[k] = {
     payload = v.payload and (function()
       local t = {}
@@ -184,8 +180,8 @@ for k, v in pairs(parseYaml('data/products/' .. product .. '/events.yaml')) do
   }
 end
 
-local uiobjectdata = parseYaml('data/products/' .. product .. '/uiobjects.yaml')
-local uiobjectimpl = parseYaml('data/uiobjectimpl.yaml')
+local uiobjectdata = dofile('build/cmake/runtime/products/' .. product .. '/uiobjects.lua')
+local uiobjectimpl = dofile('build/cmake/runtime/uiobjectimpl.lua')
 local uiobjectinits = {}
 local function mkuiobjectinit(k)
   local init = uiobjectinits[k]
@@ -308,8 +304,8 @@ end
 
 local data = {
   apis = apis,
-  build = parseYaml('data/products/' .. product .. '/build.yaml'),
-  config = parseYaml('data/products/' .. product .. '/config.yaml'),
+  build = dofile('build/cmake/runtime/products/' .. product .. '/build.lua'),
+  config = dofile('build/cmake/runtime/products/' .. product .. '/config.lua'),
   cvars = cvars,
   events = events,
   globals = globals,
@@ -319,7 +315,7 @@ local data = {
   sqllookups = sqllookups,
   structures = structures,
   uiobjects = uiobjects,
-  xml = parseYaml('data/products/' .. product .. '/xml.yaml'),
+  xml = dofile('build/cmake/runtime/products/' .. product .. '/xml.lua'),
 }
 
 local outfn = args.output or ('build/products/' .. args.product .. '/data.lua')
