@@ -550,10 +550,8 @@ add_lua_executable(
   argparse
   lsqlite3
   luafilesystem
-  lyaml
   penlight
   toolsutil
-  wowlessyaml
 )
 
 FetchContent_Declare(
