@@ -670,6 +670,7 @@ add_custom_command(
   COMMAND ${CMAKE_COMMAND} -E touch stamp/tactkeys.txt
   DEPENDS tactkeys ${CMAKE_CURRENT_SOURCE_DIR}/vendor/tactkeys/WoW.txt
 )
+add_custom_target(tactkeyslua DEPENDS stamp/tactkeys.txt)
 # TODO rationalize with lua2c
 add_custom_command(
   OUTPUT runtimetactkeys.c
@@ -677,9 +678,10 @@ add_custom_command(
     ${CMAKE_CURRENT_SOURCE_DIR}/tools/lua2c.lua
     runtimetactkeys
     runtime.tactkeys=runtime/tactkeys.lua
-  DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/tools/lua2c.lua stamp/tactkeys.txt
+  DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/tools/lua2c.lua runtime/tactkeys.lua
 )
 add_library(runtimetactkeys STATIC runtimetactkeys.c)
+add_dependencies(runtimetactkeys tactkeyslua)
 target_link_libraries(runtimetactkeys PRIVATE elune)
 
 lua2c(toolssqlite3ext tools.sqlite3ext=c)
