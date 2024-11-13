@@ -2445,6 +2445,20 @@ C_Club.GetInvitationsForSelf:
     type:
       arrayof:
         structure: C_Club.ClubSelfInvitationInfo
+C_Club.GetLastTicketResponse:
+  inputs:
+  - name: ticket
+    type: string
+  outputs:
+  - name: error
+    type:
+      enum: ClubErrorType
+  - name: info
+    nilable: true
+    type:
+      structure: C_Club.ClubInfo
+  - name: showError
+    type: boolean
 C_Club.GetMemberInfo:
   inputs:
   - name: clubId
