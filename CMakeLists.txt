@@ -559,6 +559,7 @@ FetchContent_Declare(
   URL http://www.inf.puc-rio.br/~roberto/lpeg/lpeg-1.0.2.tar.gz
   URL_HASH MD5=d342571886f1abcb7afe6a83d024d583
   SOURCE_SUBDIR disable_cmakelists_txt
+  TLS_VERIFY OFF
 )
 FetchContent_MakeAvailable(lpeg)
 lua2c(lpeg lpeg=c)
