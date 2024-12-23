@@ -65,9 +65,6 @@ type:
     runtime:
       type:
         record:
-          capsulearg:
-            required: true
-            type: boolean
           texturekitstatus:
             required: true
             type: boolean

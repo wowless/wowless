@@ -71,7 +71,6 @@ runner:
     PTRFEEDBACK: {}
     USERANDOM: {}
 runtime:
-  capsulearg: false
   texturekitstatus: true
   warners:
     fontstring: {}
