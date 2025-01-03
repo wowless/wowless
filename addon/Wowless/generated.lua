@@ -82,12 +82,18 @@ G.testsuite.generated = function()
 
   local function apiNamespaces()
     local capsulens = capsuleconfig.apinamespaces or {}
-    local function mkTests(ns, tests)
+    local function mkTests(name, ns, tests)
       for k, v in pairs(ns) do
         -- Anything left over must be a FrameXML-defined function.
         if not tests[k] then
           tests['~' .. k] = function()
-            return checkNotCFunc(v)
+            local alias = _G.WowlessData.Config.addon.aliased_in_framexml[name .. '.' .. k]
+            if not alias then
+              return checkNotCFunc(v)
+            else
+              -- TODO make it possible to check non-unique C functions
+              assertEquals(iswowlesslite and 'nil' or 'function', type(v))
+            end
           end
         end
       end
@@ -103,7 +109,7 @@ G.testsuite.generated = function()
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
           local mtests = mkftests(ncfg, name)
-          return mkTests(ns, mtests)
+          return mkTests(name, ns, mtests)
         end
       end
     end

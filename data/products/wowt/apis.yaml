@@ -329,6 +329,14 @@ C_AccountStore.GetItemInfo:
     nilable: true
     type:
       structure: C_AccountStore.AccountStoreItemInfo
+C_AccountStore.GetStoreFrontState:
+  inputs:
+  - name: storeFrontID
+    type: number
+  outputs:
+  - name: state
+    type:
+      enum: AccountStoreState
 C_AccountStore.RefundItem:
   inputs:
   - name: itemID
@@ -8953,6 +8961,8 @@ C_GameModeManager.GetCurrentGameMode:
   - name: gameMode
     type:
       enum: GameMode
+C_GameModeManager.GetCurrentGameModeRecordID: {}
+C_GameModeManager.GetGameModeDisplayInfo: {}
 C_GamePad.AddSDLMapping:
   inputs:
   - name: platform
@@ -9120,6 +9130,15 @@ C_GameRules.GetGameRuleAsFloat:
   outputs:
   - name: value
     type: number
+C_GameRules.GetGameRuleAsFrameStrata:
+  inputs:
+  - name: gameRule
+    type:
+      enum: GameRule
+  outputs:
+  - name: frameStrata
+    stub: UNKNOWN
+    type: string
 C_GameRules.IsGameRuleActive:
   inputs:
   - name: gameRule
@@ -9610,6 +9629,13 @@ C_Garrison.IsFollowerOnCompletedMission:
   - name: followerOnCompletedMission
     type: boolean
 C_Garrison.IsInvasionAvailable: {}
+C_Garrison.IsLandingPageMinimapButtonVisible:
+  inputs:
+  - name: garrType
+    type: number
+  outputs:
+  - name: isLandingPageMinimapButtonVisible
+    type: boolean
 C_Garrison.IsMechanicFullyCountered: {}
 C_Garrison.IsOnGarrisonMap: {}
 C_Garrison.IsOnShipmentQuestForNPC: {}
@@ -12144,6 +12170,47 @@ C_LFGList.ValidateRequiredPvpRatingForActivity:
   outputs:
   - name: passes
     type: boolean
+C_LobbyMatchmakerInfo.AbandonQueue:
+  inputs: {}
+  outputs: {}
+C_LobbyMatchmakerInfo.EnterQueue:
+  inputs:
+  - name: playlistEntry
+    type:
+      enum: PartyPlaylistEntry
+  outputs: {}
+C_LobbyMatchmakerInfo.GetCurrQueuePlaylistEntry:
+  inputs: {}
+  outputs:
+  - name: playlistEntry
+    type:
+      enum: PartyPlaylistEntry
+C_LobbyMatchmakerInfo.GetCurrQueueState:
+  inputs: {}
+  outputs:
+  - name: queueState
+    type:
+      enum: PlunderstormQueueState
+C_LobbyMatchmakerInfo.GetQueueFromMainlineEnabled:
+  inputs: {}
+  outputs:
+  - name: queueFromMainlineEnabled
+    type: boolean
+C_LobbyMatchmakerInfo.GetQueueStartTime:
+  inputs: {}
+  outputs:
+  - name: queueStartTime
+    type: number
+C_LobbyMatchmakerInfo.IsInQueue:
+  inputs: {}
+  outputs:
+  - name: isInQueue
+    type: boolean
+C_LobbyMatchmakerInfo.RespondToQueuePop:
+  inputs:
+  - name: acceptQueue
+    type: boolean
+  outputs: {}
 C_Loot.GetLootRollDuration:
   inputs:
   - name: rollID
@@ -12953,6 +13020,13 @@ C_Minimap.IsFilteredOut:
       enum: MinimapTrackingFilter
   outputs:
   - name: isFiltered
+    type: boolean
+C_Minimap.IsInsideQuestBlob:
+  inputs:
+  - name: questID
+    type: number
+  outputs:
+  - name: isInside
     type: boolean
 C_Minimap.IsRotateMinimapIgnored:
   inputs: {}
@@ -16141,7 +16215,6 @@ C_QuestInfoSystem.GetQuestClassification:
     type: number
   outputs:
   - name: classification
-    nilable: true
     type:
       enum: QuestClassification
 C_QuestInfoSystem.GetQuestRewardCurrencies:
@@ -16693,13 +16766,6 @@ C_QuestLog.IsImportantQuest:
   outputs:
   - name: isImportant
     type: boolean
-C_QuestLog.IsLegendaryQuest:
-  inputs:
-  - name: questID
-    type: number
-  outputs:
-  - name: isLegendaryQuest
-    type: boolean
 C_QuestLog.IsMetaQuest:
   inputs:
   - name: questID
@@ -16787,13 +16853,6 @@ C_QuestLog.IsQuestInvasion:
     type: number
   outputs:
   - name: isInvasion
-    type: boolean
-C_QuestLog.IsQuestRepeatableType:
-  inputs:
-  - name: questID
-    type: number
-  outputs:
-  - name: isRepeatableType
     type: boolean
 C_QuestLog.IsQuestReplayable:
   inputs:
@@ -17061,6 +17120,15 @@ C_QuestSession.SetQuestIsSuperTracked:
   - name: superTrack
     type: boolean
   outputs: {}
+C_RaidLocks.GetRedirectedDifficultyID:
+  inputs:
+  - name: mapID
+    type: number
+  - name: difficultyID
+    type: number
+  outputs:
+  - name: redirectedDifficultyID
+    type: number
 C_RaidLocks.IsEncounterComplete:
   inputs:
   - name: mapID
@@ -23567,13 +23635,22 @@ C_VignetteInfo.FindBestUniqueVignette:
   - name: bestUniqueVignetteIndex
     nilable: true
     type: number
-C_VignetteInfo.GetVignetteHealthPct:
+C_VignetteInfo.GetHealthPercent:
   inputs:
   - name: vignetteGUID
     type: string
   outputs:
   - name: healthPct
     nilable: true
+    type: number
+C_VignetteInfo.GetRecommendedGroupSize:
+  inputs:
+  - name: vignetteGUID
+    type: string
+  outputs:
+  - name: minGroupSize
+    type: number
+  - name: maxGroupSize
     type: number
 C_VignetteInfo.GetVignetteInfo:
   inputs:
@@ -24324,6 +24401,13 @@ C_WorldLootObject.IsWorldLootObject:
   inputs:
   - name: unitToken
     type: unit
+  outputs:
+  - name: isWorldLootObject
+    type: boolean
+C_WorldLootObject.IsWorldLootObjectByGUID:
+  inputs:
+  - name: guid
+    type: string
   outputs:
   - name: isWorldLootObject
     type: boolean
@@ -29386,13 +29470,6 @@ IsAccountSecured:
 IsAchievementEligible: {}
 IsActionInRange: {}
 IsActiveBattlefieldArena: {}
-IsActiveQuestLegendary:
-  inputs:
-  - name: index
-    type: number
-  outputs:
-  - name: isActiveQuestLegendary
-    type: boolean
 IsActiveQuestTrivial:
   inputs:
   - name: index

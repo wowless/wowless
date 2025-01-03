@@ -3910,6 +3910,8 @@ CRITERIA_EARNED:
     type: number
   - name: description
     type: string
+  - name: achievementAlreadyEarnedOnAccount
+    type: boolean
 CRITERIA_UPDATE:
   payload: {}
 CURRENCY_DISPLAY_UPDATE:
@@ -5089,6 +5091,16 @@ LOADING_SCREEN_DISABLED:
   payload: {}
 LOADING_SCREEN_ENABLED:
   payload: {}
+LOBBY_MATCHMAKER_QUEUE_ABANDONED:
+  payload: {}
+LOBBY_MATCHMAKER_QUEUE_ERROR:
+  payload: {}
+LOBBY_MATCHMAKER_QUEUE_EXPIRED:
+  payload: {}
+LOBBY_MATCHMAKER_QUEUE_POPPED:
+  payload: {}
+LOBBY_MATCHMAKER_QUEUE_STATUS_UPDATE:
+  payload: {}
 LOC_RESULT:
   payload:
   - name: result
@@ -5862,6 +5874,12 @@ PLAYER_GUILD_UPDATE:
     type: unit
 PLAYER_IMPULSE_APPLIED:
   payload: {}
+PLAYER_INSIDE_QUEST_BLOB_STATE_CHANGED:
+  payload:
+  - name: questID
+    type: number
+  - name: isInside
+    type: boolean
 PLAYER_INTERACTION_MANAGER_FRAME_HIDE:
   payload:
   - name: type
@@ -6930,6 +6948,10 @@ STORE_CHARACTER_LIST_RECEIVED:
   payload: {}
 STORE_CONFIRM_PURCHASE:
   payload: {}
+STORE_FRONT_STATE_UPDATED:
+  payload:
+  - name: storeFrontID
+    type: number
 STORE_GUILD_FOLLOW_INFO_RECEIVED:
   payload:
   - name: characterGuid
@@ -7910,6 +7932,12 @@ UPDATE_WEB_TICKET:
     nilable: true
     type: number
   - name: waitMessage
+    nilable: true
+    type: string
+  - name: caseTitle
+    nilable: true
+    type: string
+  - name: caseDescription
     nilable: true
     type: string
 USE_BIND_CONFIRM:
