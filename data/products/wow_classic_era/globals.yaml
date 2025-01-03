@@ -1,5 +1,7 @@
 ---
 Constants:
+  AuctionConstants:
+    DEFAULT_AUCTION_PRICE_MULTIPLIER: 1.5
   CalendarGetEventTypeConstants:
     DEFAULT_CALENDAR_GET_EVENT_TYPE: 0
   CharCustomizationConstants:
@@ -43,8 +45,14 @@ Constants:
     PVP_CURRENCY_HONOR_HORDE_INV_ICON: 463451
     QUESTIONMARK_INV_ICON: 134400
     WAR_RESOURCES_CURRENCY_ID: 1560
-  GroupFinderConstants:
-    MAX_GROUP_FINDER_ACTIVITIES: 41
+  DelvesConsts:
+    BRANN_COMPANION_INFO_ID: 1
+    BRANN_MAX_LEVEL: 60
+    BRANN_XP_FACTION_ID: 1203
+    DELVES_COMPANION_TOOLTIP_WIDGET_SET_ID: 1331
+    DELVES_COMPANION_TRAIT_SYSTEM_ID: 6
+    DELVES_MIN_PLAYER_LEVEL_CONTENT_TUNING_ID: 2677
+    DELVES_NORMAL_KEY_CURRENCY_ID: 3028
   InventoryConstants:
     NumBagSlots: 4
     NumBankBagSlots: 6
@@ -65,6 +73,8 @@ Constants:
   LFG_ROLEConstants:
     LFG_ROLE_ANY: 3
     LFG_ROLE_NO_ROLE: -1
+  LFGConstsExposed:
+    GROUP_FINDER_MAX_ACTIVITY_CAPACITY: 16
   LootConsts:
     MasterLootQualityThreshold: 5
   MoneyFormattingConstants:
@@ -153,10 +163,11 @@ Enum:
     NoValidSourceCharacter: 6
     ServerError: 7
     Success: 0
+    TransactionInProgress: 9
   AccountCurrencyTransferResultMeta:
-    MaxValue: 8
+    MaxValue: 9
     MinValue: 0
-    NumValues: 9
+    NumValues: 10
   AccountData:
     Bindings: 2
     Bindings2: 3
@@ -471,6 +482,7 @@ Enum:
     AllowBagsInNonBagSlots: 1024
     AllowBuyback: 65536
     AllowPartialStack: 16384
+    AllowSoulboundItemInAccountBank: 268435456
     AlreadyBound: 4
     AlreadyOwner: 2
     AsymmetricSwap: 2097152
@@ -497,9 +509,9 @@ Enum:
     Swap: 8
     SwapBags: 4096
   BagFlagMeta:
-    MaxValue: 134217728
+    MaxValue: 268435456
     MinValue: 1
-    NumValues: 28
+    NumValues: 29
   BagIndex:
     Accountbanktab: -5
     AccountBankTab_1: 13
@@ -580,9 +592,9 @@ Enum:
     UseHorizontalLayoutForFullCard: 16
     UseSquareIconBorder: 128
   BattlepayDisplayFlagMeta:
-    MaxValue: 1024
+    MaxValue: 2048
     MinValue: 1
-    NumValues: 11
+    NumValues: 12
   BattlepayGroupDisplayType:
     ActiveTimeOnly: 2
     Everyone: 0
@@ -1688,6 +1700,14 @@ Enum:
     MaxValue: 1
     MinValue: 0
     NumValues: 2
+  CompanionConfigSlotTypes:
+    Combat: 2
+    Role: 0
+    Utility: 1
+  CompanionConfigSlotTypesMeta:
+    MaxValue: 2
+    MinValue: 0
+    NumValues: 3
   ConsoleCategory:
     Combat: 3
     Console: 2
@@ -1947,6 +1967,15 @@ Enum:
   CraftingReagentTypeMeta:
     MaxValue: 3
     MinValue: 0
+    NumValues: 4
+  CurioRarity:
+    Common: 1
+    Epic: 4
+    Rare: 3
+    Uncommon: 2
+  CurioRarityMeta:
+    MaxValue: 4
+    MinValue: 1
     NumValues: 4
   CurrencyDestroyReason:
     BonusRoll: 9
@@ -2433,18 +2462,20 @@ Enum:
     AllPlayersAreFastMovers: 53
     AlwaysAllowAlliedRaces: 59
     BagsUIDisabled: 64
-    CapHonorRankPerLevelBracket: 24
     CharacterCreateUseFixedBackgroundModel: 55
     CharacterlessLogin: 14
     CharacterPanelDisabled: 37
     CharNameReservationEnabled: 2
     CharReservationsPerRealmReopenThreshold: 8
     ChatLinkLevelToastsDisabled: 63
+    ClearMailOnRealmTransfer: 92
     CollectionsPanelDisabled: 36
     CommunitiesPanelDisabled: 41
     CompactRaidFrameManagerDisabled: 81
     CustomActionbarOverlayHeightOffset: 33
     DeleteItemConfirmationDisabled: 62
+    Deprecated1: 24
+    DeprecatedLFGUIEnabled: 6
     DisableHonorDecay: 23
     DisablePct: 9
     EditModeDisabled: 82
@@ -2458,6 +2489,10 @@ Enum:
     FrontEndChat: 50
     FullCharacterCreateDisabled: 84
     GameEnvironment: 13
+    GameLogo: 95
+    GameLogoHeight: 96
+    GameLogoVerticalOffset: 97
+    GroupFinderCapabilities: 98
     GuildsDisabled: 46
     HardcoreRuleset: 10
     HelpPanelDisabled: 45
@@ -2469,7 +2504,6 @@ Enum:
     IngameWhoListDisabled: 77
     InstanceDifficultyBannerDisabled: 83
     LandingPageFactionID: 35
-    LFGUIEnabled: 6
     MacrosDisabled: 80
     MapPlunderstormCircle: 48
     MaxAccountCharReservationsPerContentset: 4
@@ -2486,6 +2520,8 @@ Enum:
     PetBattlesDisabled: 65
     PlayerNameplateAlternateHealthColor: 58
     PlayerNameplateDifficultyIcon: 57
+    PlunderstormAreaSelection: 94
+    PremadeGroupFinderStyle: 93
     QuestLogMicrobuttonDisabled: 47
     QuestLogPanelDisabled: 71
     QuestLogSuperTrackingDisabled: 72
@@ -2522,14 +2558,23 @@ Enum:
   GameRuleFlags:
     AllowClient: 1
     None: 0
+    RequiresDefault: 2
   GameRuleFlagsMeta:
-    MaxValue: 1
+    MaxValue: 2
     MinValue: 0
-    NumValues: 2
+    NumValues: 3
   GameRuleMeta:
-    MaxValue: 91
+    MaxValue: 98
     MinValue: 0
-    NumValues: 92
+    NumValues: 99
+  GameRuleType:
+    Bool: 2
+    Float: 1
+    Int: 0
+  GameRuleTypeMeta:
+    MaxValue: 2
+    MinValue: 0
+    NumValues: 3
   GarrAutoBoardIndex:
     AllyCenterFront: 3
     AllyLeftBack: 0
@@ -2899,6 +2944,13 @@ Enum:
     MaxValue: 64
     MinValue: 1
     NumValues: 7
+  IconAndTextShiftTextType:
+    None: 0
+    ShiftText: 1
+  IconAndTextShiftTextTypeMeta:
+    MaxValue: 1
+    MinValue: 0
+    NumValues: 2
   IconAndTextWidgetState:
     Hidden: 0
     Shown: 1
@@ -3539,6 +3591,26 @@ Enum:
     MaxValue: 20
     MinValue: 0
     NumValues: 21
+  JailersTowerType:
+    AdamantVaults: 11
+    ArkobanHall: 7
+    BossRush: 14
+    Coldheart: 4
+    ForgottenCatacombs: 12
+    FractureChambers: 2
+    Mortregar: 5
+    Ossuary: 13
+    SkoldusHalls: 1
+    Soulforges: 3
+    TormentChamberAnduin: 10
+    TormentChamberJaina: 8
+    TormentChamberThrall: 9
+    TwistingCorridors: 0
+    UpperReaches: 6
+  JailersTowerTypeMeta:
+    MaxValue: 14
+    MinValue: 0
+    NumValues: 15
   JournalEncounterFlags:
     AllianceOnly: 4
     DoNotDisplayEncounter: 64
@@ -4150,6 +4222,17 @@ Enum:
     MaxValue: 5
     MinValue: 0
     NumValues: 6
+  PingSubjectType:
+    AlertNotThreat: 5
+    AlertThreat: 4
+    Assist: 2
+    Attack: 0
+    OnMyWay: 3
+    Warning: 1
+  PingSubjectTypeMeta:
+    MaxValue: 5
+    MinValue: 0
+    NumValues: 6
   PingTextureType:
     Center: 0
     Expand: 1
@@ -4158,6 +4241,12 @@ Enum:
     MaxValue: 2
     MinValue: 0
     NumValues: 3
+  PingTypeFlags:
+    DefaultPing: 1
+  PingTypeFlagsMeta:
+    MaxValue: 1
+    MinValue: 1
+    NumValues: 1
   PlayerClubRequestStatus:
     Approved: 4
     AutoApproved: 2
@@ -4336,6 +4425,14 @@ Enum:
     MaxValue: 9
     MinValue: 0
     NumValues: 10
+  PremadeGroupFinderStyle:
+    Disabled: 0
+    Mainline: 1
+    Vanilla: 2
+  PremadeGroupFinderStyleMeta:
+    MaxValue: 2
+    MinValue: 0
+    NumValues: 3
   Profession:
     Alchemy: 3
     Archaeology: 14
@@ -4611,6 +4708,35 @@ Enum:
     MaxValue: 3
     MinValue: 0
     NumValues: 4
+  RafRecruitActivityState:
+    Complete: 1
+    Incomplete: 0
+    RewardClaimed: 2
+  RafRecruitActivityStateMeta:
+    MaxValue: 2
+    MinValue: 0
+    NumValues: 3
+  RafRecruitSubStatus:
+    Active: 1
+    Inactive: 2
+    Trial: 0
+  RafRecruitSubStatusMeta:
+    MaxValue: 2
+    MinValue: 0
+    NumValues: 3
+  RafRewardType:
+    Appearance: 2
+    AppearanceSet: 5
+    GameTime: 4
+    Illusion: 6
+    Invalid: 7
+    Mount: 1
+    Pet: 0
+    Title: 3
+  RafRewardTypeMeta:
+    MaxValue: 7
+    MinValue: 0
+    NumValues: 8
   RcoCloseReason:
     RcoCloseCancel: 2
     RcoCloseCrafterFulfill: 5
@@ -4739,6 +4865,23 @@ Enum:
     MaxValue: 3
     MinValue: 0
     NumValues: 4
+  ScreenLocationType:
+    Bottom: 4
+    Center: 0
+    Left: 1
+    LeftOutside: 7
+    LeftRight: 9
+    LeftRightOutside: 11
+    Right: 2
+    RightOutside: 8
+    Top: 3
+    TopBottom: 10
+    TopLeft: 5
+    TopRight: 6
+  ScreenLocationTypeMeta:
+    MaxValue: 11
+    MinValue: 0
+    NumValues: 12
   ScriptedAnimationBehavior:
     None: 0
     SourceCollideWithTarget: 4
@@ -4778,15 +4921,17 @@ Enum:
     MinValue: 0
     NumValues: 4
   SeasonID:
+    Fresh: 11
+    FreshHardcore: 12
     Hardcore: 3
     NoSeason: 0
     Placeholder: 2
     SeasonOfDiscovery: 2
     SeasonOfMastery: 1
   SeasonIDMeta:
-    MaxValue: 3
+    MaxValue: 12
     MinValue: 0
-    NumValues: 4
+    NumValues: 6
   SelfResurrectOptionType:
     Item: 1
     Spell: 0
@@ -5266,12 +5411,13 @@ Enum:
     MinValue: -1
     NumValues: 3
   TraitSystemFlag:
+    AllowEditInCombat: 4
     AllowMultipleLoadoutsPerTree: 1
     ShowSpendConfirmation: 2
   TraitSystemFlagMeta:
-    MaxValue: 2
+    MaxValue: 4
     MinValue: 1
-    NumValues: 2
+    NumValues: 3
   TraitTreeFlag:
     CannotRefund: 1
     HideSingleRankNumbers: 2

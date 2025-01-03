@@ -4,6 +4,7 @@ local iswowlesslite = _G.__wowless and _G.__wowless.lite
 
 assert(_G.WowlessData, 'missing WowlessData')
 
+local aliased_in_framexml = _G.WowlessData.Config.addon.aliased_in_framexml or {}
 local capsuleconfig = _G.WowlessData.Config.addon.capsule or {}
 local capsuleapis = capsuleconfig.globalapis or {}
 
@@ -87,8 +88,7 @@ G.testsuite.generated = function()
         -- Anything left over must be a FrameXML-defined function.
         if not tests[k] then
           tests['~' .. k] = function()
-            local alias = _G.WowlessData.Config.addon.aliased_in_framexml[name .. '.' .. k]
-            if not alias then
+            if not aliased_in_framexml[name .. '.' .. k] then
               return checkNotCFunc(v)
             else
               -- TODO make it possible to check non-unique C functions
