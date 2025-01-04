@@ -1,5 +1,7 @@
 ---
 addon:
+  aliased_in_framexml:
+    C_LFGInfo.IsPremadeGroupEnabled: {}
   capsule:
     apinamespaces:
       C_AuthChallenge: {}
@@ -58,7 +60,7 @@ runner:
     LOOT_MASTER: {}
     USERANDOM: {}
 runtime:
-  texturekitstatus: false
+  texturekitstatus: true
   warners:
     archaeologydigsiteframe: {}
     fontstring: {}

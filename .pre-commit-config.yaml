@@ -54,9 +54,14 @@ repos:
     entry: lua tools/mkninja.lua
     language: system
     pass_filenames: false
+  - id: build-yamlfmt
+    name: build yamlfmt
+    entry: ninja build/cmake/yamlfmt
+    language: system
+    pass_filenames: false
   - id: yamlfmt
     name: wowless yamlfmt
-    entry: sh -c 'ninja build/cmake/yamlfmt && build/cmake/yamlfmt "$@"' --
+    entry: build/cmake/yamlfmt
     language: system
     types: [yaml]
     files: ^data/

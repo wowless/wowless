@@ -64,12 +64,18 @@ AntiAliasingSupported:
   inputs: {}
   outputs:
   - type: boolean
+AreClassRolesSoftSuggestions:
+  inputs: {}
+  outputs:
+  - name: result
+    type: boolean
 AreDangerousScriptsAllowed:
   inputs: {}
   outputs:
   - name: allowed
     stub: true
     type: boolean
+AreHighResTexturesAvailable: {}
 ArenaTeamDisband:
   inputs:
   - name: index
@@ -292,6 +298,7 @@ BNSetAFK: {}
 BNSetBlocked: {}
 BNSetCustomMessage: {}
 BNSetDND: {}
+BNSetFriendFavoriteFlag: {}
 BNSetFriendNote: {}
 BNSetSelectedBlock: {}
 BNSetSelectedFriend: {}
@@ -1285,9 +1292,6 @@ C_BattleNet.GetGameAccountInfoByID:
     nilable: true
     type:
       structure: C_BattleNet.BNetGameAccountInfo
-C_BattleNet.InstallHighResTextures:
-  inputs: {}
-  outputs: {}
 C_BehavioralMessaging.SendNotificationReceipt:
   inputs:
   - name: dbId
@@ -1992,6 +1996,18 @@ C_ChatInfo.IsChatLineCensored:
   outputs:
   - name: isCensored
     type: boolean
+C_ChatInfo.IsLoggingChat:
+  inputs: {}
+  outputs:
+  - name: enabled
+    type: boolean
+C_ChatInfo.IsLoggingCombat:
+  inputs: {}
+  outputs:
+  - name: enabled
+    type: boolean
+  - name: advanced
+    type: boolean
 C_ChatInfo.IsPartyChannelType:
   inputs:
   - name: channelType
@@ -2441,6 +2457,20 @@ C_Club.GetInvitationsForSelf:
     type:
       arrayof:
         structure: C_Club.ClubSelfInvitationInfo
+C_Club.GetLastTicketResponse:
+  inputs:
+  - name: ticket
+    type: string
+  outputs:
+  - name: error
+    type:
+      enum: ClubErrorType
+  - name: info
+    nilable: true
+    type:
+      structure: C_Club.ClubInfo
+  - name: showError
+    type: boolean
 C_Club.GetMemberInfo:
   inputs:
   - name: clubId
@@ -5459,6 +5489,8 @@ C_GameModeManager.GetCurrentGameMode:
   - name: gameMode
     type:
       enum: GameMode
+C_GameModeManager.GetCurrentGameModeRecordID: {}
+C_GameModeManager.GetGameModeDisplayInfo: {}
 C_GamePad.AddSDLMapping:
   inputs:
   - name: platform
@@ -5650,6 +5682,16 @@ C_GenericWidgetDisplay.Acknowledge:
 C_GenericWidgetDisplay.Close:
   inputs: {}
   outputs: {}
+C_Glue.IsFirstLoadThisSession:
+  inputs: {}
+  outputs:
+  - name: IsFirstLoadThisSession
+    type: boolean
+C_Glue.IsOnGlueScreen:
+  inputs: {}
+  outputs:
+  - name: isOnGlueScreen
+    type: boolean
 C_GossipInfo.CloseGossip:
   inputs: {}
   outputs: {}
@@ -6743,11 +6785,6 @@ C_LFGInfo.IsLFREnabled:
   outputs:
   - name: enabled
     type: boolean
-C_LFGInfo.IsPremadeGroupEnabled:
-  inputs: {}
-  outputs:
-  - name: enabled
-    type: boolean
 C_LFGList.AcceptInvite: {}
 C_LFGList.ApplyToGroup: {}
 C_LFGList.CanActiveEntryUseAutoAccept:
@@ -6778,12 +6815,9 @@ C_LFGList.CopyActiveEntryInfoToCreationFields:
   outputs: {}
 C_LFGList.CreateListing:
   inputs:
-  - name: activityIDs
+  - name: createData
     type:
-      arrayof: number
-  - name: newPlayerFriendly
-    nilable: true
-    type: boolean
+      structure: C_LFGList.LfgListingCreateData
   outputs:
   - name: success
     type: boolean
@@ -6966,19 +7000,13 @@ C_LFGList.GetPlaystyleString:
   outputs:
   - name: playstyleString
     type: string
+C_LFGList.GetPremadeGroupFinderStyle:
+  inputs: {}
+  outputs:
+  - name: style
+    type:
+      enum: PremadeGroupFinderStyle
 C_LFGList.GetRoleCheckInfo: {}
-C_LFGList.GetRoles:
-  inputs: {}
-  outputs:
-  - name: roles
-    type:
-      structure: C_LFGList.LFGRoles
-C_LFGList.GetSavedRoles:
-  inputs: {}
-  outputs:
-  - name: roles
-    type:
-      structure: C_LFGList.LFGRoles
 C_LFGList.GetSearchResultEncounterInfo: {}
 C_LFGList.GetSearchResultFriends: {}
 C_LFGList.GetSearchResultInfo:
@@ -6989,8 +7017,25 @@ C_LFGList.GetSearchResultInfo:
   - name: searchResultData
     type:
       structure: C_LFGList.LfgSearchResultData
+C_LFGList.GetSearchResultLeaderInfo:
+  inputs:
+  - name: searchResultID
+    type: number
+  outputs:
+  - name: leaderInfo
+    type:
+      structure: C_LFGList.LfgSearchResultPlayerInfo
 C_LFGList.GetSearchResultMemberCounts: {}
-C_LFGList.GetSearchResultMemberInfo: {}
+C_LFGList.GetSearchResultPlayerInfo:
+  inputs:
+  - name: searchResultID
+    type: number
+  - name: memberIndex
+    type: number
+  outputs:
+  - name: playerInfo
+    type:
+      structure: C_LFGList.LfgSearchResultPlayerInfo
 C_LFGList.GetSearchResults:
   inputs: {}
   outputs:
@@ -7020,11 +7065,16 @@ C_LFGList.InviteApplicant: {}
 C_LFGList.IsCurrentlyApplying: {}
 C_LFGList.IsPlayerAuthenticatedForLFG:
   inputs:
-  - name: activityID
+  - name: activityCategoryID
     nilable: true
     type: number
   outputs:
   - name: isAuthenticated
+    type: boolean
+C_LFGList.IsPremadeGroupFinderEnabled:
+  inputs: {}
+  outputs:
+  - name: enabled
     type: boolean
 C_LFGList.RefreshApplicants: {}
 C_LFGList.RemoveApplicant: {}
@@ -7055,6 +7105,10 @@ C_LFGList.Search:
     nilable: true
     type:
       structure: C_LFGList.AdvancedFilterOptions
+  - name: activityIDsFilter
+    nilable: true
+    type:
+      arrayof: number
   outputs: {}
 C_LFGList.SetApplicantMemberRole: {}
 C_LFGList.SetEntryTitle:
@@ -7068,14 +7122,6 @@ C_LFGList.SetEntryTitle:
     type:
       enum: LFGEntryPlaystyle
   outputs: {}
-C_LFGList.SetRoles:
-  inputs:
-  - name: roles
-    type:
-      structure: C_LFGList.LFGRoles
-  outputs:
-  - name: success
-    type: boolean
 C_LFGList.SetSearchToActivity:
   inputs:
   - name: activityID
@@ -7088,12 +7134,9 @@ C_LFGList.SetSearchToQuestID:
   outputs: {}
 C_LFGList.UpdateListing:
   inputs:
-  - name: activityIDs
+  - name: createData
     type:
-      arrayof: number
-  - name: newPlayerFriendly
-    nilable: true
-    type: boolean
+      structure: C_LFGList.LfgListingCreateData
   outputs:
   - name: success
     type: boolean
@@ -7112,6 +7155,29 @@ C_LFGList.ValidateRequiredPvpRatingForActivity:
     type: number
   outputs:
   - name: passes
+    type: boolean
+C_LFGListRoles.GetRoles:
+  inputs: {}
+  outputs:
+  - name: roles
+    type:
+      structure: LFGRoles
+C_LFGListRoles.GetSavedRoles:
+  inputs: {}
+  outputs:
+  - name: roles
+    type:
+      structure: LFGRoles
+C_LFGListRoles.SetRoles:
+  inputs:
+  - name: roles
+    type:
+      structure: LFGRoles
+  - default: false
+    name: limitToClassRoles
+    type: boolean
+  outputs:
+  - name: success
     type: boolean
 C_Loot.IsLegacyLootModeEnabled:
   inputs: {}
@@ -8717,7 +8783,7 @@ C_QuestLog.GetQuestsOnMap:
   - name: quests
     type:
       arrayof:
-        structure: C_QuestLog.QuestOnMapInfo
+        structure: QuestPOIMapInfo
 C_QuestLog.IsOnQuest:
   inputs:
   - name: questID
@@ -8824,6 +8890,15 @@ C_QuestSession.SetQuestIsSuperTracked:
   - name: superTrack
     type: boolean
   outputs: {}
+C_RaidLocks.GetRedirectedDifficultyID:
+  inputs:
+  - name: mapID
+    type: number
+  - name: difficultyID
+    type: number
+  outputs:
+  - name: redirectedDifficultyID
+    type: number
 C_RaidLocks.IsEncounterComplete:
   inputs:
   - name: mapID
@@ -8836,11 +8911,6 @@ C_RaidLocks.IsEncounterComplete:
   outputs:
   - name: encounterIsComplete
     type: boolean
-C_RecruitAFriend.CanGrantLevel:
-  inputs: {}
-  outputs:
-  - name: result
-    type: boolean
 C_RecruitAFriend.CanSummonFriend:
   inputs:
   - name: guid
@@ -8848,6 +8918,58 @@ C_RecruitAFriend.CanSummonFriend:
   outputs:
   - name: result
     type: boolean
+C_RecruitAFriend.ClaimActivityReward:
+  inputs:
+  - name: activityID
+    type: number
+  - name: acceptanceID
+    type: string
+  outputs:
+  - name: success
+    type: boolean
+C_RecruitAFriend.ClaimNextReward:
+  inputs:
+  - name: rafVersion
+    nilable: true
+    type:
+      enum: RecruitAFriendRewardsVersion
+  outputs:
+  - name: success
+    type: boolean
+C_RecruitAFriend.GenerateRecruitmentLink:
+  inputs: {}
+  outputs:
+  - name: success
+    type: boolean
+C_RecruitAFriend.GetRAFInfo:
+  inputs: {}
+  outputs:
+  - name: info
+    type:
+      structure: C_RecruitAFriend.RafInfo
+C_RecruitAFriend.GetRAFSystemInfo:
+  inputs: {}
+  outputs:
+  - name: systemInfo
+    type:
+      structure: C_RecruitAFriend.RafSystemInfo
+C_RecruitAFriend.GetRecruitActivityRequirementsText:
+  inputs:
+  - name: activityID
+    type: number
+  - name: acceptanceID
+    type: string
+  outputs:
+  - name: requirementsText
+    type:
+      arrayof: string
+C_RecruitAFriend.GetRecruitInfo:
+  inputs: {}
+  outputs:
+  - name: active
+    type: boolean
+  - name: faction
+    type: number
 C_RecruitAFriend.GetSummonFriendCooldown:
   inputs: {}
   outputs:
@@ -8857,12 +8979,34 @@ C_RecruitAFriend.GetSummonFriendCooldown:
     type: number
   - name: enableCooldownTimer
     type: boolean
-C_RecruitAFriend.IsReferAFriendLinked:
+C_RecruitAFriend.IsEnabled:
+  inputs: {}
+  outputs:
+  - name: enabled
+    type: boolean
+C_RecruitAFriend.IsRecruitAFriendLinked:
   inputs:
   - name: guid
-    type: unit
+    type: string
   outputs:
   - name: result
+    type: boolean
+C_RecruitAFriend.IsRecruitingEnabled:
+  inputs: {}
+  outputs:
+  - name: enabled
+    type: boolean
+C_RecruitAFriend.RemoveRAFRecruit:
+  inputs:
+  - name: wowAccountGUID
+    type: string
+  outputs:
+  - name: success
+    type: boolean
+C_RecruitAFriend.RequestUpdatedRecruitmentInfo:
+  inputs: {}
+  outputs:
+  - name: success
     type: boolean
 C_RecruitAFriend.SummonFriend:
   inputs:
@@ -9051,6 +9195,48 @@ C_ResearchInfo.GetDigSitesForMap:
     type:
       arrayof:
         structure: C_ResearchInfo.DigSiteMapInfo
+C_ScenarioInfo.GetCriteriaInfo:
+  inputs:
+  - name: criteriaIndex
+    type: number
+  outputs:
+  - name: scenarioCriteriaInfo
+    type:
+      structure: C_ScenarioInfo.ScenarioCriteriaInfo
+C_ScenarioInfo.GetCriteriaInfoByStep:
+  inputs:
+  - name: stepID
+    type: number
+  - name: criteriaIndex
+    type: number
+  outputs:
+  - name: scenarioCriteriaInfo
+    type:
+      structure: C_ScenarioInfo.ScenarioCriteriaInfo
+C_ScenarioInfo.GetJailersTowerTypeString:
+  inputs:
+  - name: runType
+    type:
+      enum: JailersTowerType
+  outputs:
+  - name: typeString
+    nilable: true
+    type: string
+C_ScenarioInfo.GetScenarioInfo:
+  inputs: {}
+  outputs:
+  - name: scenarioInfo
+    type:
+      structure: C_ScenarioInfo.ScenarioInformation
+C_ScenarioInfo.GetScenarioStepInfo:
+  inputs:
+  - name: scenarioStepID
+    nilable: true
+    type: number
+  outputs:
+  - name: scenarioStepInfo
+    type:
+      structure: C_ScenarioInfo.ScenarioStepInfo
 C_ScriptedAnimations.GetAllScriptedAnimationEffects:
   impl: C_ScriptedAnimations.GetAllScriptedAnimationEffects
   inputs: {}
@@ -9086,10 +9272,20 @@ C_SharedCharacterServices.SetPromotionalPopupSeen: {}
 C_SocialRestrictions.AcknowledgeRegionalChatDisabled:
   inputs: {}
   outputs: {}
+C_SocialRestrictions.CanReceiveChat:
+  inputs: {}
+  outputs:
+  - name: canReceiveChat
+    type: boolean
+C_SocialRestrictions.CanSendChat:
+  inputs: {}
+  outputs:
+  - name: canSendChat
+    type: boolean
 C_SocialRestrictions.IsChatDisabled:
   inputs: {}
   outputs:
-  - name: isDisabled
+  - name: disabled
     type: boolean
 C_SocialRestrictions.IsMuted:
   inputs: {}
@@ -9140,6 +9336,13 @@ C_Sound.PlayVocalErrorSound:
     type:
       enum: Vocalerrorsounds
   outputs: {}
+C_SpecializationInfo.GetNumSpecializationsForClassID:
+  inputs:
+  - name: specID
+    type: number
+  outputs:
+  - name: specCount
+    type: number
 C_Spell.DoesSpellExist:
   inputs:
   - name: spellIdentifier
@@ -9527,7 +9730,7 @@ C_TaskQuest.GetQuestProgressBarInfo:
   outputs:
   - name: progress
     type: number
-C_TaskQuest.GetQuestsForPlayerByMapID:
+C_TaskQuest.GetQuestsOnMap:
   inputs:
   - name: uiMapID
     type: number
@@ -9535,7 +9738,7 @@ C_TaskQuest.GetQuestsForPlayerByMapID:
   - name: taskPOIs
     type:
       arrayof:
-        structure: C_TaskQuest.TaskPOIData
+        structure: QuestPOIMapInfo
 C_TaskQuest.GetQuestTimeLeftMinutes:
   inputs:
   - name: questID
@@ -10279,6 +10482,11 @@ C_Transmog.IsSlotBeingCollapsed:
   outputs:
   - name: isBeingCollapsed
     type: boolean
+C_Transmog.LoadOutfit:
+  inputs:
+  - name: outfitID
+    type: number
+  outputs: {}
 C_Transmog.SetPending:
   inputs:
   - name: transmogLocation
@@ -10307,6 +10515,13 @@ C_TransmogCollection.AreAllSourceTypeFiltersChecked:
   outputs:
   - name: areAllSourceTypeFiltersChecked
     type: boolean
+C_TransmogCollection.CanAppearanceBeDisplayedOnPlayer:
+  inputs:
+  - name: itemAppearanceID
+    type: number
+  outputs:
+  - name: canAppearanceBeDisplayedOnPlayer
+    type: boolean
 C_TransmogCollection.ClearNewAppearance:
   inputs:
   - name: visualID
@@ -10320,6 +10535,11 @@ C_TransmogCollection.ClearSearch:
   outputs:
   - name: completed
     type: boolean
+C_TransmogCollection.DeleteOutfit:
+  inputs:
+  - name: outfitID
+    type: number
+  outputs: {}
 C_TransmogCollection.EndSearch:
   inputs: {}
   outputs: {}
@@ -10502,10 +10722,46 @@ C_TransmogCollection.GetLatestAppearance:
   - name: category
     type:
       enum: TransmogCollectionType
+C_TransmogCollection.GetNumMaxOutfits:
+  inputs: {}
+  outputs:
+  - name: maxOutfits
+    type: number
 C_TransmogCollection.GetNumTransmogSources:
   inputs: {}
   outputs:
   - name: count
+    type: number
+C_TransmogCollection.GetOutfitInfo:
+  inputs:
+  - name: outfitID
+    type: number
+  outputs:
+  - name: name
+    type: string
+  - name: icon
+    type: number
+C_TransmogCollection.GetOutfitItemTransmogInfoList:
+  inputs:
+  - name: outfitID
+    type: number
+  outputs:
+  - name: list
+    type:
+      arrayof:
+        structure: ItemTransmogInfo
+C_TransmogCollection.GetOutfits:
+  inputs: {}
+  outputs:
+  - name: outfitID
+    type:
+      arrayof: number
+C_TransmogCollection.GetPairedArtifactAppearance:
+  inputs:
+  - name: itemModifiedAppearanceID
+    type: number
+  outputs:
+  - name: pairedItemModifiedAppearanceID
     type: number
 C_TransmogCollection.GetSourceIcon:
   inputs:
@@ -10595,6 +10851,29 @@ C_TransmogCollection.IsUsingDefaultFilters:
   outputs:
   - name: isUsingDefaultFilters
     type: boolean
+C_TransmogCollection.ModifyOutfit:
+  inputs:
+  - name: outfitID
+    type: number
+  - name: itemTransmogInfoList
+    type:
+      arrayof:
+        structure: ItemTransmogInfo
+  outputs: {}
+C_TransmogCollection.NewOutfit:
+  inputs:
+  - name: name
+    type: string
+  - name: icon
+    type: number
+  - name: itemTransmogInfoList
+    type:
+      arrayof:
+        structure: ItemTransmogInfo
+  outputs:
+  - name: outfitID
+    nilable: true
+    type: number
 C_TransmogCollection.PlayerCanCollectSource:
   inputs:
   - name: sourceID
@@ -10628,6 +10907,13 @@ C_TransmogCollection.PlayerKnowsSource:
   outputs:
   - name: isKnown
     type: boolean
+C_TransmogCollection.RenameOutfit:
+  inputs:
+  - name: outfitID
+    type: number
+  - name: name
+    type: string
+  outputs: {}
 C_TransmogCollection.SearchProgress:
   inputs:
   - name: searchType
@@ -12129,6 +12415,13 @@ ClassicExpansionAtLeast:
   outputs:
   - name: isAtLeast
     type: boolean
+ClassicExpansionAtMost:
+  inputs:
+  - name: expansionLevel
+    type: number
+  outputs:
+  - name: isAtMost
+    type: boolean
 ClearAchievementComparisonUnit: {}
 ClearAchievementSearchString: {}
 ClearAllLFGDungeons: {}
@@ -12269,6 +12562,7 @@ ConfirmBarbersChoice:
 ConfirmBinder:
   inputs: {}
   outputs: {}
+ConfirmBNRequestInviteFriend: {}
 ConfirmLootRoll: {}
 ConfirmLootSlot: {}
 ConfirmPetUnlearn:
@@ -14718,6 +15012,7 @@ GetNumRoutes: {}
 GetNumSavedInstances:
   outputs:
   - type: number
+GetNumSavedWorldBosses: {}
 GetNumScenarios: {}
 GetNumShapeshiftForms:
   outputs:
@@ -14729,14 +15024,6 @@ GetNumSockets:
   inputs: {}
   outputs:
   - name: value
-    type: number
-GetNumSpecializationsForClassID:
-  impl: GetNumSpecializationsForClassID
-  inputs:
-  - name: specID
-    type: number
-  outputs:
-  - name: specCount
     type: number
 GetNumSpellTabs:
   outputs:
@@ -15342,6 +15629,7 @@ GetSavedInstanceInfo:
   - type: number
   - type: number
   - type: boolean
+GetSavedWorldBossInfo: {}
 GetScenariosChoiceOrder: {}
 GetScreenDPIScale: {}
 GetScreenHeight:
@@ -15484,8 +15772,11 @@ GetSocketTypes:
     stub: Blue
     type: string
 GetSoundEntryCount: {}
+GetSpecializationInfoByID: {}
 GetSpecializationInfoForClassID: {}
 GetSpecializationInfoForSpecID: {}
+GetSpecializationRoleByID: {}
+GetSpecializationRoleEnumByID: {}
 GetSpellAutocast:
   inputs:
   - name: slot
@@ -16337,7 +16628,11 @@ InCombatLockdown:
   - name: inCombatLockdown
     type: boolean
 InGuildParty: {}
-InitiateRolePoll: {}
+InitiateRolePoll:
+  inputs: {}
+  outputs:
+  - name: result
+    type: boolean
 InitiateTrade:
   inputs:
   - name: guid
@@ -16576,11 +16871,6 @@ IsMouseButtonDown: {}
 IsMouselooking: {}
 IsMovieLocal: {}
 IsMoviePlayable: {}
-IsOnGlueScreen:
-  inputs: {}
-  outputs:
-  - name: isOnGlueScreen
-    type: boolean
 IsOnTournamentRealm:
   inputs: {}
   outputs:
@@ -17548,6 +17838,7 @@ SetRaidTarget:
   - type: number
   outputs: {}
 SetRaidTargetProtected: {}
+SetSavedInstanceExtend: {}
 SetScreenResolution: {}
 SetSelectedAuctionItem: {}
 SetSelectedBattlefield: {}
@@ -18182,7 +18473,17 @@ UnitFullName:
   outputs:
   - type: string
   - type: string
-UnitGetAvailableRoles: {}
+UnitGetAvailableRoles:
+  inputs:
+  - name: unit
+    type: unit
+  outputs:
+  - name: tank
+    type: boolean
+  - name: healer
+    type: boolean
+  - name: dps
+    type: boolean
 UnitGetIncomingHeals:
   inputs:
   - type: string
@@ -18651,7 +18952,16 @@ UnitSelectionColor:
     type: number
   - name: alpha
     type: number
-UnitSetRole: {}
+UnitSetRole:
+  inputs:
+  - name: unit
+    type: unit
+  - name: roleStr
+    nilable: true
+    type: string
+  outputs:
+  - name: result
+    type: boolean
 UnitSetRoleEnum:
   inputs:
   - name: unit

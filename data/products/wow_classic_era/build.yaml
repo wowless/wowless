@@ -1,8 +1,8 @@
 ---
-build: '57134'
-date: Oct 17 2024
+build: '57979'
+date: Dec  5 2024
 flavor: Vanilla
-hash: 0fff60e4dc785f9150a2118099f01efd
+hash: 46febe610077a30555618a85064e1ede
 test: false
-tocversion: 11504
-version: 1.15.4
+tocversion: 11505
+version: 1.15.5

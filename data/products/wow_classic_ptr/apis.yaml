@@ -2445,6 +2445,20 @@ C_Club.GetInvitationsForSelf:
     type:
       arrayof:
         structure: C_Club.ClubSelfInvitationInfo
+C_Club.GetLastTicketResponse:
+  inputs:
+  - name: ticket
+    type: string
+  outputs:
+  - name: error
+    type:
+      enum: ClubErrorType
+  - name: info
+    nilable: true
+    type:
+      structure: C_Club.ClubInfo
+  - name: showError
+    type: boolean
 C_Club.GetMemberInfo:
   inputs:
   - name: clubId
@@ -9230,6 +9244,14 @@ C_Sound.PlayVocalErrorSound:
     type:
       enum: Vocalerrorsounds
   outputs: {}
+C_SpecializationInfo.GetNumSpecializationsForClassID:
+  impl: GetNumSpecializationsForClassID
+  inputs:
+  - name: specID
+    type: number
+  outputs:
+  - name: specCount
+    type: number
 C_Spell.DoesSpellExist:
   inputs:
   - name: spellIdentifier
@@ -12377,6 +12399,13 @@ ClassicExpansionAtLeast:
   outputs:
   - name: isAtLeast
     type: boolean
+ClassicExpansionAtMost:
+  inputs:
+  - name: expansionLevel
+    type: number
+  outputs:
+  - name: isAtMost
+    type: boolean
 ClearAchievementComparisonUnit: {}
 ClearAchievementSearchString: {}
 ClearAllLFGDungeons: {}
@@ -13397,7 +13426,7 @@ GetBlockChance: {}
 GetBonusBarIndex: {}
 GetBonusBarOffset: {}
 GetBuildInfo:
-  impl: GetBuildInfo_1_15_0
+  impl: GetBuildInfo_3_4_2
   inputs: {}
   outputs:
   - name: version
@@ -15153,14 +15182,6 @@ GetNumSockets:
   outputs:
   - name: value
     type: number
-GetNumSpecializationsForClassID:
-  impl: GetNumSpecializationsForClassID
-  inputs:
-  - name: specID
-    type: number
-  outputs:
-  - name: specCount
-    type: number
 GetNumSpellTabs:
   outputs:
   - type: number
@@ -15987,8 +16008,11 @@ GetSocketTypes:
     stub: Blue
     type: string
 GetSoundEntryCount: {}
+GetSpecializationInfoByID: {}
 GetSpecializationInfoForClassID: {}
 GetSpecializationInfoForSpecID: {}
+GetSpecializationRoleByID: {}
+GetSpecializationRoleEnumByID: {}
 GetSpellAutocast:
   inputs:
   - name: slot

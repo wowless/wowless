@@ -5,6 +5,12 @@ type:
     addon:
       type:
         record:
+          aliased_in_framexml:
+            type:
+              mapof:
+                key: string
+                value:
+                  record: null
           capsule:
             type:
               record:

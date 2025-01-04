@@ -104,6 +104,66 @@ BountyInfo:
     turninRequirementText:
       nilable: true
       type: string
+C_AccountStore.AccountStoreCategoryInfo:
+  fields:
+    icon:
+      type: number
+    id:
+      type: number
+    name:
+      type: string
+    type:
+      type:
+        enum: AccountStoreCategoryType
+C_AccountStore.AccountStoreCurrencyInfo:
+  fields:
+    amount:
+      type: number
+    icon:
+      type: number
+    id:
+      type: number
+    maxQuantity:
+      nilable: true
+      type: number
+    name:
+      type: string
+C_AccountStore.AccountStoreItemInfo:
+  fields:
+    creatureDisplayID:
+      nilable: true
+      type: number
+    currencyID:
+      type: number
+    customUIModelSceneID:
+      nilable: true
+      type: number
+    description:
+      nilable: true
+      type: string
+    displayIcon:
+      nilable: true
+      type: number
+    flags:
+      type:
+        enum: AccountStoreItemFlag
+    id:
+      type: number
+    name:
+      type: string
+    nonrefundable:
+      type: boolean
+    price:
+      type: number
+    refundSecondsRemaining:
+      nilable: true
+      type: number
+    status:
+      type:
+        enum: AccountStoreItemStatus
+    transmogSetID:
+      nilable: true
+      type: number
 C_ActionBar.ActionUsableState:
   fields:
     noMana:
@@ -2246,6 +2306,24 @@ C_EncounterJournal.EncounterJournalSectionInfo:
       type: string
     uiModelSceneID:
       type: number
+C_EndOfMatchUI.MatchDetail:
+  fields:
+    type:
+      type:
+        enum: MatchDetailType
+    value:
+      type: number
+C_EndOfMatchUI.MatchDetails:
+  fields:
+    detailsList:
+      type:
+        arrayof:
+          structure: C_EndOfMatchUI.MatchDetail
+    matchEnded:
+      type: boolean
+    matchType:
+      type:
+        enum: EndOfMatchType
 C_EventToastManager.EventToastInfo:
   fields:
     colorTint:
@@ -3337,6 +3415,8 @@ C_LFGList.GroupFinderActivityInfo:
       type: boolean
     categoryID:
       type: number
+    difficultyID:
+      type: number
     displayType:
       type:
         enum: LFGListDisplayType
@@ -3362,11 +3442,19 @@ C_LFGList.GroupFinderActivityInfo:
       type: boolean
     isRatedPvpActivity:
       type: boolean
+    mapID:
+      type: number
+    maxLevelSuggestion:
+      type: number
     maxNumPlayers:
       type: number
     minLevel:
       type: number
+    minLevelSuggestion:
+      type: number
     orderIndex:
+      type: number
+    redirectedDifficultyID:
       type: number
     shortName:
       type: string
@@ -3412,8 +3500,9 @@ C_LFGList.LfgCategoryData:
       type: boolean
 C_LFGList.LfgEntryData:
   fields:
-    activityID:
-      type: number
+    activityIDs:
+      type:
+        arrayof: number
     autoAccept:
       type: boolean
     comment:
@@ -3424,6 +3513,8 @@ C_LFGList.LfgEntryData:
       type: boolean
     name:
       type: string
+    newPlayerFriendly:
+      type: boolean
     playstyle:
       nilable: true
       type:
@@ -3445,10 +3536,44 @@ C_LFGList.LfgEntryData:
       type: number
     voiceChat:
       type: string
+C_LFGList.LfgListingCreateData:
+  fields:
+    activityIDs:
+      type:
+        arrayof: number
+    isAutoAccept:
+      default: false
+      type: boolean
+    isCrossFactionListing:
+      default: false
+      type: boolean
+    isPrivateGroup:
+      default: false
+      type: boolean
+    newPlayerFriendly:
+      default: false
+      type: boolean
+    playstyle:
+      default: 0
+      type:
+        enum: LFGEntryPlaystyle
+    questID:
+      nilable: true
+      type: number
+    requiredDungeonScore:
+      default: 0
+      type: number
+    requiredItemLevel:
+      default: 0
+      type: number
+    requiredPvpRating:
+      default: 0
+      type: number
 C_LFGList.LfgSearchResultData:
   fields:
-    activityID:
-      type: number
+    activityIDs:
+      type:
+        arrayof: number
     age:
       type: number
     autoAccept:
@@ -3469,9 +3594,9 @@ C_LFGList.LfgSearchResultData:
       type:
         structure: C_LFGList.BestDungeonScoreMapInfo
     leaderDungeonScoreInfo:
-      nilable: true
       type:
-        structure: C_LFGList.BestDungeonScoreMapInfo
+        arrayof:
+          structure: C_LFGList.BestDungeonScoreMapInfo
     leaderFactionGroup:
       type: number
     leaderName:
@@ -3481,11 +3606,14 @@ C_LFGList.LfgSearchResultData:
       nilable: true
       type: number
     leaderPvpRatingInfo:
-      nilable: true
       type:
-        structure: C_LFGList.PvpRatingInfo
+        arrayof:
+          structure: C_LFGList.PvpRatingInfo
     name:
       type: string
+    newPlayerFriendly:
+      nilable: true
+      type: boolean
     numBNetFriends:
       type: number
     numCharFriends:
@@ -3516,6 +3644,31 @@ C_LFGList.LfgSearchResultData:
     searchResultID:
       type: number
     voiceChat:
+      type: string
+C_LFGList.LfgSearchResultPlayerInfo:
+  fields:
+    areaName:
+      nilable: true
+      type: string
+    assignedRole:
+      type: string
+    classFilename:
+      type: string
+    className:
+      type: string
+    isLeader:
+      type: boolean
+    level:
+      nilable: true
+      type: number
+    lfgRoles:
+      type:
+        structure: LFGRoles
+    name:
+      nilable: true
+      type: string
+    specName:
+      nilable: true
       type: string
 C_LFGList.PvpRatingInfo:
   fields:
@@ -4282,6 +4435,9 @@ C_PerksProgram.PerksVendorItemInfo:
       type: string
     name:
       type: string
+    originalPrice:
+      nilable: true
+      type: number
     perksVendorCategoryID:
       type: number
     perksVendorItemID:
@@ -4291,6 +4447,8 @@ C_PerksProgram.PerksVendorItemInfo:
     purchased:
       type: boolean
     refundable:
+      type: boolean
+    showSaleBanner:
       type: boolean
     speciesID:
       type: number
@@ -4645,6 +4803,9 @@ C_PvP.PvpBrawlInfo:
         enum: BrawlType
     canQueue:
       type: boolean
+    crossFactionAllowed:
+      default: false
+      type: boolean
     groupsAllowed:
       type: boolean
     includesAllArenas:
@@ -4948,6 +5109,8 @@ C_QuestLine.QuestLineInfo:
       type: string
     questName:
       type: string
+    startMapID:
+      type: number
     x:
       type: number
     y:
@@ -8087,10 +8250,18 @@ C_VignetteInfo.VignetteInfo:
       type: boolean
     isUnique:
       type: boolean
+    mapPin:
+      nilable: true
+      type:
+        structure: UIMapPinInfo
     name:
       type: string
     objectGUID:
       type: string
+    objectiveType:
+      nilable: true
+      type:
+        enum: VignetteObjectiveType
     onMinimap:
       type: boolean
     onWorldMap:
@@ -9091,6 +9262,8 @@ FontScriptInfo:
     color:
       type:
         structure: colorRGBA
+    fontObject:
+      type: table
     height:
       type: number
     outline:
@@ -9297,6 +9470,14 @@ ItemLocation:
 ItemTransmogInfo:
   fields: {}
   mixin: ItemTransmogInfoMixin
+LFGRoles:
+  fields:
+    dps:
+      type: boolean
+    healer:
+      type: boolean
+    tank:
+      type: boolean
 LocaleInfo:
   fields:
     localeId:
@@ -9833,6 +10014,28 @@ TransmogLocation:
 TransmogPendingInfo:
   fields: {}
   mixin: TransmogPendingInfoMixin
+UIButtonInfo:
+  fields:
+    highlight:
+      type: string
+    icon:
+      type: string
+    normal:
+      type: string
+    pressed:
+      type: string
+    useNormalAsHiglight:
+      type: boolean
+UIMapPinInfo:
+  fields:
+    button:
+      type:
+        structure: UIButtonInfo
+    buttonSelected:
+      type:
+        structure: UIButtonInfo
+    underlay:
+      type: string
 UITextureSliceData:
   fields:
     marginBottom:

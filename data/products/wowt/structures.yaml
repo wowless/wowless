@@ -3415,6 +3415,8 @@ C_LFGList.GroupFinderActivityInfo:
       type: boolean
     categoryID:
       type: number
+    difficultyID:
+      type: number
     displayType:
       type:
         enum: LFGListDisplayType
@@ -3440,6 +3442,8 @@ C_LFGList.GroupFinderActivityInfo:
       type: boolean
     isRatedPvpActivity:
       type: boolean
+    mapID:
+      type: number
     maxLevelSuggestion:
       type: number
     maxNumPlayers:
@@ -3449,6 +3453,8 @@ C_LFGList.GroupFinderActivityInfo:
     minLevelSuggestion:
       type: number
     orderIndex:
+      type: number
+    redirectedDifficultyID:
       type: number
     shortName:
       type: string
@@ -8252,6 +8258,10 @@ C_VignetteInfo.VignetteInfo:
       type: string
     objectGUID:
       type: string
+    objectiveType:
+      nilable: true
+      type:
+        enum: VignetteObjectiveType
     onMinimap:
       type: boolean
     onWorldMap:

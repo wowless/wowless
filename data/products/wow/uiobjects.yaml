@@ -801,6 +801,7 @@ Font:
     CopyFontObject: {}
     GetAlpha: {}
     SetAlpha: {}
+    SetFontHeight: {}
 FontInstance:
   fields:
     justifyh:

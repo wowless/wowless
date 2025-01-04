@@ -565,6 +565,8 @@ DressUpModel:
     Dress: {}
     GetAutoDress: {}
     GetItemModifiedAppearanceID: {}
+    GetItemTransmogInfo: {}
+    GetItemTransmogInfoList: {}
     GetObeyHideInTransmogFlag: {}
     GetSheathed: {}
     GetSpellItemEnchantmentID: {}
@@ -764,6 +766,7 @@ Font:
     CopyFontObject: {}
     GetAlpha: {}
     SetAlpha: {}
+    SetFontHeight: {}
 FontInstance:
   fields:
     justifyh:
