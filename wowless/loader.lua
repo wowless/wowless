@@ -4,7 +4,6 @@ local function loader(api, cfg)
   assert(product, 'loader requires a product')
   local otherAddonDirs = cfg and cfg.otherAddonDirs or {}
   local datalua = require('build.products.' .. product .. '.data')
-  local capsulearg = datalua.config.runtime.capsulearg
 
   local path = require('path')
   local parseXml = require('wowless.xml').newParser(product)
@@ -348,7 +347,7 @@ local function loader(api, cfg)
     end,
   }
 
-  local function forAddon(addonName, addonEnv, addonRoot, isSecure, useSecureEnv, skipObjects)
+  local function forAddon(addonName, addonEnv, addonRoot, useSecureEnv, skipObjects)
     local loadFile
 
     local xmlattrlang = {
@@ -614,20 +613,7 @@ local function loader(api, cfg)
           success, content = pcall(readFile, secondaryFileName)
         end
         if success then
-          loadFn(
-            filename,
-            content,
-            nil,
-            useSecureEnv,
-            closureTaint,
-            addonName,
-            addonEnv,
-            (function()
-              if capsulearg then
-                return isSecure and api.env.SecureCapsuleGet or nil
-              end
-            end)()
-          )
+          loadFn(filename, content, nil, useSecureEnv, closureTaint, addonName, addonEnv)
         else
           api.log(1, 'skipping missing file %s', filename)
         end
@@ -810,7 +796,7 @@ local function loader(api, cfg)
     local kindstr = forceSecure and ' (secure dependency)' or useSecureEnv and ' (secure)' or ''
     api.log(1, 'loading addon files for %s%s', addonName, kindstr)
     local addonEnv = toc.attrs.SuppressLocalTableRef ~= '1' and {} or nil
-    local loadFile = forAddon(addonName, addonEnv, toc.dir, not not toc.fdid, useSecureEnv, forceSecure)
+    local loadFile = forAddon(addonName, addonEnv, toc.dir, useSecureEnv, forceSecure)
     for _, file in ipairs(toc.files) do
       loadFile(file)
     end
@@ -867,7 +853,7 @@ local function loader(api, cfg)
     local fxtocdir = path.join(rootDir, 'Interface', 'FrameXML')
     local fxtoc = resolveTocDir(fxtocdir)
     if fxtoc then
-      local loadFile = forAddon(nil, nil, fxtocdir, true, false, false)
+      local loadFile = forAddon(nil, nil, fxtocdir, false, false)
       for _, file in ipairs(fxtoc.files) do
         loadFile(file)
       end

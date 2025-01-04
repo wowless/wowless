@@ -70,7 +70,6 @@ runner:
     GUILD_UNINVITE: {}
     USERANDOM: {}
 runtime:
-  capsulearg: false
   texturekitstatus: true
   warners:
     fontstring: {}

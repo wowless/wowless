@@ -60,7 +60,6 @@ runner:
     LOOT_MASTER: {}
     USERANDOM: {}
 runtime:
-  capsulearg: false
   texturekitstatus: true
   warners:
     archaeologydigsiteframe: {}
