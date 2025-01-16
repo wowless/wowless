@@ -1,5 +1,7 @@
 #include "tactless.h"
 
+#include <stdlib.h>
+
 #include "lauxlib.h"
 #include "lualib.h"
 
@@ -15,7 +17,7 @@ static int tactopen(lua_State *L) {
   return 1;
 }
 
-static int tactfetch(lua_State *L) {
+static int tactcall(lua_State *L) {
   tactless **u = luaL_checkudata(L, 1, "tactless");
   lua_Number fdid = lua_tonumber(L, 2);
   unsigned char *s;
@@ -29,13 +31,22 @@ static int tactfetch(lua_State *L) {
     return 0;
   }
   lua_pushlstring(L, s, size);
+  free(s);
   return 1;
+}
+
+static int tactgc(lua_State *L) {
+  tactless **u = luaL_checkudata(L, 1, "tactless");
+  tactless_close(*u);
+  return 0;
 }
 
 int luaopen_tactless(lua_State *L) {
   if (luaL_newmetatable(L, "tactless")) {
-    lua_pushcfunction(L, tactfetch);
+    lua_pushcfunction(L, tactcall);
     lua_setfield(L, -2, "__call");
+    lua_pushcfunction(L, tactgc);
+    lua_setfield(L, -2, "__gc");
     lua_pushstring(L, "tactless");
     lua_setfield(L, -2, "__metatable");
   }
