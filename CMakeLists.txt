@@ -1165,15 +1165,13 @@ add_lua_executable(
   render
   ${CMAKE_CURRENT_SOURCE_DIR}/tools/render.lua
   argparse
-  casc
   luafilesystem
   luamagick
-  luasocket
   lyaml
   lzlib
-  md5
   penlight
   runtimetactkeys
+  toolstactless
   vstruct
   wowlessrender
   wowlessyaml
