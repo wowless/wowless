@@ -654,37 +654,6 @@ foreach(product ${products})
   list(APPEND dataluas datalua_${product})
 endforeach()
 
-add_lua_executable(
-  tactkeys
-  ${CMAKE_CURRENT_SOURCE_DIR}/tools/tactkeys.lua
-  argparse
-  luafilesystem
-  penlight
-  toolsutil
-)
-
-add_custom_command(
-  OUTPUT stamp/tactkeys.txt
-  BYPRODUCTS runtime/tactkeys.lua
-  COMMAND tactkeys ${CMAKE_CURRENT_SOURCE_DIR}/vendor/tactkeys/WoW.txt generated/tactkeys.lua
-  COMMAND ${CMAKE_COMMAND} -E copy_if_different generated/tactkeys.lua runtime/tactkeys.lua
-  COMMAND ${CMAKE_COMMAND} -E touch stamp/tactkeys.txt
-  DEPENDS tactkeys ${CMAKE_CURRENT_SOURCE_DIR}/vendor/tactkeys/WoW.txt
-)
-add_custom_target(tactkeyslua DEPENDS stamp/tactkeys.txt)
-# TODO rationalize with lua2c
-add_custom_command(
-  OUTPUT runtimetactkeys.c
-  COMMAND bootstraplua
-    ${CMAKE_CURRENT_SOURCE_DIR}/tools/lua2c.lua
-    runtimetactkeys
-    runtime.tactkeys=runtime/tactkeys.lua
-  DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/tools/lua2c.lua runtime/tactkeys.lua
-)
-add_library(runtimetactkeys STATIC runtimetactkeys.c)
-add_dependencies(runtimetactkeys tactkeyslua)
-target_link_libraries(runtimetactkeys PRIVATE elune)
-
 lua2c(toolssqlite3ext tools.sqlite3ext=c)
 add_library(toolssqlite3ext STATIC tools/sqlite3ext.c toolssqlite3ext.c)
 target_link_libraries(toolssqlite3ext PRIVATE elune sqlite3)
@@ -819,7 +788,6 @@ add_lua_executable(
   luapath
   penlight
   runtimelistfile
-  runtimetactkeys
   toolsdb2
   toolstactless
   vstruct
@@ -1170,7 +1138,6 @@ add_lua_executable(
   lyaml
   lzlib
   penlight
-  runtimetactkeys
   toolstactless
   vstruct
   wowlessrender
