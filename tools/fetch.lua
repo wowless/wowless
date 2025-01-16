@@ -7,8 +7,8 @@ end)()
 local product = args.product
 
 -- TODO this is just a playground
-local tactless = require('tactless')(args.product)
-print(tactless:fetch('interface/addons/blizzard_apidocumentation/blizzard_apidocumentation.toc'))
+local fetch = require('tactless')(args.product)
+print(fetch('interface/addons/blizzard_apidocumentation/blizzard_apidocumentation.toc'))
 os.exit(0)
 
 -- Don't let casc use any system backdoors.
