@@ -814,13 +814,9 @@ add_lua_executable(
   fetch
   ${CMAKE_CURRENT_SOURCE_DIR}/tools/fetch.lua
   argparse
-  casc
   luaexpat
   luafilesystem
   luapath
-  luasocket
-  lzlib
-  md5
   penlight
   runtimelistfile
   runtimetactkeys
