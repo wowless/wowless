@@ -2,6 +2,10 @@
 	path = vcpkg
 	shallow = true
 	url = https://github.com/microsoft/vcpkg
+[submodule "vendor/ctactless"]
+	path = vendor/ctactless
+	shallow = true
+	url = https://github.com/ferronn-dev/ctactless
 [submodule "vendor/dbdefs"]
 	path = vendor/dbdefs
 	shallow = true
