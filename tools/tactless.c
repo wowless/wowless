@@ -6,7 +6,7 @@
 #include "lualib.h"
 
 static int tactopen(lua_State *L) {
-  tactless *t = tactless_open(luaL_checkstring(L, 1));
+  tactless *t = tactless_open(luaL_checkstring(L, 1), luaL_optstring(L, 2, 0));
   if (!t) {
     return 0;
   }

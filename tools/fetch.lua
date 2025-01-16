@@ -16,7 +16,7 @@ local path = require('path')
 path.mkdir('cache')
 
 local fetch = (function()
-  local fetch = require('tactless')(args.product)
+  local fetch = require('tactless')(args.product, build.hash)
   if not fetch then
     print('unable to open ' .. build.hash)
     os.exit(1)
