@@ -796,6 +796,20 @@ add_library(
 )
 target_link_libraries(casc PRIVATE elune)
 
+find_package(CURL REQUIRED)
+add_library(libcurl ALIAS CURL::libcurl)
+
+find_package(OpenSSL REQUIRED)
+add_library(libcrypto ALIAS OpenSSL::Crypto)
+
+add_library(tactless STATIC vendor/ctactless/tactless.c vendor/ctactless/tactless.h)
+target_include_directories(tactless PUBLIC vendor/ctactless)
+target_link_libraries(tactless PRIVATE libcrypto libcurl zlib)
+
+lua2c(toolstactless tactless=c)
+add_library(toolstactless STATIC tools/tactless.c toolstactless.c)
+target_link_libraries(toolstactless PRIVATE elune tactless)
+
 add_lua_executable(
   fetch
   ${CMAKE_CURRENT_SOURCE_DIR}/tools/fetch.lua
@@ -811,6 +825,7 @@ add_lua_executable(
   runtimelistfile
   runtimetactkeys
   toolsdb2
+  toolstactless
   vstruct
 )
 
