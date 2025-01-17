@@ -60,6 +60,7 @@ script_objects:
   SimpleTextureAPI: Texture
   SimpleTextureBaseAPI: TextureBase
 skip_apis:
+  C_BattleNet.InstallHighResTextures: BattleNetDocumentation is incorrect
   HasKey: PlayerScriptDocumentation has extra methods
   ShowCloak: PlayerScriptDocumentation has extra methods
   ShowHelm: PlayerScriptDocumentation has extra methods
@@ -115,6 +116,7 @@ typedefs:
   normalizedValue: number
   NotificationDbId: string
   number: number
+  QuestObjectiveType: number
   RecruitAcceptanceID: string
   ScriptObject: UIObject
   ScriptRegion: table

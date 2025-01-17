@@ -5,6 +5,14 @@ ACCOUNT_CVARS_LOADED:
   payload: {}
 ACCOUNT_MONEY:
   payload: {}
+ACCOUNT_STORE_CURRENCY_AVAILABLE_UPDATED:
+  payload:
+  - name: currencyID
+    type: number
+ACCOUNT_STORE_ITEM_INFO_UPDATED:
+  payload:
+  - name: itemID
+    type: number
 ACHIEVEMENT_EARNED:
   payload:
   - name: achievementID
@@ -3902,6 +3910,8 @@ CRITERIA_EARNED:
     type: number
   - name: description
     type: string
+  - name: achievementAlreadyEarnedOnAccount
+    type: boolean
 CRITERIA_UPDATE:
   payload: {}
 CURRENCY_DISPLAY_UPDATE:
@@ -4129,6 +4139,8 @@ EQUIPMENT_SWAP_FINISHED:
     nilable: true
     type: number
 EQUIPMENT_SWAP_PENDING:
+  payload: {}
+EVENT_SCHEDULER_UPDATE:
   payload: {}
 EXPAND_BAG_BAR_CHANGED:
   payload:
@@ -4647,6 +4659,11 @@ GUILDTABARD_UPDATE:
   payload: {}
 GX_RESTARTED:
   payload: {}
+HANDLE_UI_ACTION:
+  payload:
+  - name: actionType
+    type:
+      enum: UIActionType
 HARDCORE_DEATHS:
   payload:
   - name: memberName
@@ -5076,6 +5093,16 @@ LOADING_SCREEN_DISABLED:
   payload: {}
 LOADING_SCREEN_ENABLED:
   payload: {}
+LOBBY_MATCHMAKER_QUEUE_ABANDONED:
+  payload: {}
+LOBBY_MATCHMAKER_QUEUE_ERROR:
+  payload: {}
+LOBBY_MATCHMAKER_QUEUE_EXPIRED:
+  payload: {}
+LOBBY_MATCHMAKER_QUEUE_POPPED:
+  payload: {}
+LOBBY_MATCHMAKER_QUEUE_STATUS_UPDATE:
+  payload: {}
 LOC_RESULT:
   payload:
   - name: result
@@ -5354,6 +5381,10 @@ NAME_PLATE_UNIT_REMOVED:
   payload:
   - name: unitToken
     type: string
+NAVIGATION_DESTINATION_REACHED:
+  payload:
+  - name: isWaypoint
+    type: boolean
 NAVIGATION_FRAME_CREATED:
   payload:
   - name: region
@@ -5391,6 +5422,10 @@ NEW_RUNEFORGE_POWER_ADDED:
 NEW_TOY_ADDED:
   payload:
   - name: itemID
+    type: number
+NEW_WARBAND_SCENE_ADDED:
+  payload:
+  - name: warbandScenID
     type: number
 NEW_WMO_CHUNK:
   payload: {}
@@ -5845,6 +5880,12 @@ PLAYER_GUILD_UPDATE:
     type: unit
 PLAYER_IMPULSE_APPLIED:
   payload: {}
+PLAYER_INSIDE_QUEST_BLOB_STATE_CHANGED:
+  payload:
+  - name: questID
+    type: number
+  - name: isInside
+    type: boolean
 PLAYER_INTERACTION_MANAGER_FRAME_HIDE:
   payload:
   - name: type
@@ -6026,6 +6067,10 @@ PROFESSION_EQUIPMENT_CHANGED:
     type: number
   - name: isTool
     type: boolean
+PROFESSION_RESPEC_CONFIRMATION:
+  payload:
+  - name: skillName
+    type: string
 PROVING_GROUNDS_SCORE_UPDATE:
   payload:
   - name: points
@@ -6540,6 +6585,8 @@ SHOW_DELVES_COMPANION_CONFIGURATION_UI:
   payload: {}
 SHOW_DELVES_DISPLAY_UI:
   payload: {}
+SHOW_END_OF_MATCH_UI:
+  payload: {}
 SHOW_FACTION_SELECT_UI:
   payload: {}
 SHOW_HYPERLINK_TOOLTIP:
@@ -6827,6 +6874,14 @@ SPELL_PUSHED_TO_ACTIONBAR:
     type: number
   - name: page
     type: number
+SPELL_PUSHED_TO_FLYOUT_ON_ACTIONBAR:
+  payload:
+  - name: spellID
+    type: number
+  - name: flyoutSlot
+    type: number
+  - name: flyoutPage
+    type: number
 SPELL_SCRIPT_ERROR:
   payload:
   - name: spellID
@@ -6903,6 +6958,10 @@ STORE_CHARACTER_LIST_RECEIVED:
   payload: {}
 STORE_CONFIRM_PURCHASE:
   payload: {}
+STORE_FRONT_STATE_UPDATED:
+  payload:
+  - name: storeFrontID
+    type: number
 STORE_GUILD_FOLLOW_INFO_RECEIVED:
   payload:
   - name: characterGuid
@@ -6946,6 +7005,8 @@ STURDINESS_UPDATE:
   payload: {}
 SUBSCRIPTION_CHANGED_KICK_IMMINENT: {}
 SUPER_TRACKING_CHANGED:
+  payload: {}
+SUPER_TRACKING_PATH_UPDATED:
   payload: {}
 SYSMSG:
   payload:
@@ -7883,6 +7944,12 @@ UPDATE_WEB_TICKET:
   - name: waitMessage
     nilable: true
     type: string
+  - name: caseTitle
+    nilable: true
+    type: string
+  - name: caseDescription
+    nilable: true
+    type: string
 USE_BIND_CONFIRM:
   payload: {}
 USE_COMBINED_BAGS_CHANGED:
@@ -8226,6 +8293,8 @@ WAR_MODE_STATUS_UPDATE:
   payload:
   - name: warModeEnabled
     type: boolean
+WARBAND_SCENE_FAVORITES_UPDATED:
+  payload: {}
 WARFRONT_COMPLETED:
   payload:
   - name: mapID
@@ -8274,8 +8343,6 @@ WORLD_LOOT_OBJECT_INFO_UPDATED:
   payload:
   - name: guid
     type: string
-WORLD_LOOT_OBJECT_SWAP_INVENTORY_TYPE_UPDATED:
-  payload: {}
 WORLD_MAP_OPEN:
   payload:
   - name: uiMapID

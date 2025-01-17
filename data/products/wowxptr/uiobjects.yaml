@@ -801,6 +801,7 @@ Font:
     CopyFontObject: {}
     GetAlpha: {}
     SetAlpha: {}
+    SetFontHeight: {}
 FontInstance:
   fields:
     justifyh:
@@ -1113,6 +1114,7 @@ Frame:
     IsClampedToScreen:
       getter:
       - name: isClampedToScreen
+    IsDrawLayerEnabled: {}
     IsEventRegistered:
       impl: Frame/IsEventRegistered
     IsGamePadButtonEnabled: {}
@@ -1818,6 +1820,7 @@ Region:
     GetWidth:
       getter:
       - name: width
+    Intersects: {}
     IsAnchoringRestricted: {}
     IsCollapsed: {}
     IsDragging: {}

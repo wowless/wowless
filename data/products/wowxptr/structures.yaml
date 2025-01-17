@@ -33,6 +33,8 @@ AnchorBinding:
       type: table
 AppearanceSourceInfo:
   fields:
+    canDisplayOnPlayer:
+      type: boolean
     categoryID:
       default: 0
       type:
@@ -104,6 +106,66 @@ BountyInfo:
     turninRequirementText:
       nilable: true
       type: string
+C_AccountStore.AccountStoreCategoryInfo:
+  fields:
+    icon:
+      type: number
+    id:
+      type: number
+    name:
+      type: string
+    type:
+      type:
+        enum: AccountStoreCategoryType
+C_AccountStore.AccountStoreCurrencyInfo:
+  fields:
+    amount:
+      type: number
+    icon:
+      type: number
+    id:
+      type: number
+    maxQuantity:
+      nilable: true
+      type: number
+    name:
+      type: string
+C_AccountStore.AccountStoreItemInfo:
+  fields:
+    creatureDisplayID:
+      nilable: true
+      type: number
+    currencyID:
+      type: number
+    customUIModelSceneID:
+      nilable: true
+      type: number
+    description:
+      nilable: true
+      type: string
+    displayIcon:
+      nilable: true
+      type: number
+    flags:
+      type:
+        enum: AccountStoreItemFlag
+    id:
+      type: number
+    name:
+      type: string
+    nonrefundable:
+      type: boolean
+    price:
+      type: number
+    refundSecondsRemaining:
+      nilable: true
+      type: number
+    status:
+      type:
+        enum: AccountStoreItemStatus
+    transmogSetID:
+      nilable: true
+      type: number
 C_ActionBar.ActionUsableState:
   fields:
     noMana:
@@ -112,6 +174,27 @@ C_ActionBar.ActionUsableState:
       type: number
     usable:
       type: boolean
+C_AddOnProfiler.AddOnPerformanceMessage:
+  fields:
+    addOnName:
+      nilable: true
+      type: string
+    metric:
+      type:
+        enum: AddOnProfilerMetric
+    metricValue:
+      type: number
+    thresholdValue:
+      type: number
+    type:
+      type:
+        enum: AddOnPerformanceMessageType
+C_AddOnProfiler.AddOnProfilerResult:
+  fields:
+    addOnName:
+      type: string
+    metricValue:
+      type: number
 C_AlliedRaces.AlliedRaceInfo:
   fields:
     achievementIds:
@@ -1808,6 +1891,8 @@ C_Covenants.CovenantData:
       type: number
     celebrationSoundKit:
       type: number
+    factionID:
+      type: number
     ID:
       type: number
     name:
@@ -2245,6 +2330,49 @@ C_EncounterJournal.EncounterJournalSectionInfo:
     title:
       type: string
     uiModelSceneID:
+      type: number
+C_EndOfMatchUI.MatchDetail:
+  fields:
+    type:
+      type:
+        enum: MatchDetailType
+    value:
+      type: number
+C_EndOfMatchUI.MatchDetails:
+  fields:
+    detailsList:
+      type:
+        arrayof:
+          structure: C_EndOfMatchUI.MatchDetail
+    matchEnded:
+      type: boolean
+    matchType:
+      type:
+        enum: EndOfMatchType
+C_EventScheduler.OngoingEventInfo:
+  fields:
+    areaPoiID:
+      type: number
+    rewardsClaimed:
+      default: false
+      type: boolean
+C_EventScheduler.ScheduledEventInfo:
+  fields:
+    areaPoiID:
+      type: number
+    duration:
+      type: number
+    endTime:
+      type: number
+    eventKey:
+      type: string
+    hasReminder:
+      default: false
+      type: boolean
+    rewardsClaimed:
+      default: false
+      type: boolean
+    startTime:
       type: number
 C_EventToastManager.EventToastInfo:
   fields:
@@ -3337,6 +3465,8 @@ C_LFGList.GroupFinderActivityInfo:
       type: boolean
     categoryID:
       type: number
+    difficultyID:
+      type: number
     displayType:
       type:
         enum: LFGListDisplayType
@@ -3362,11 +3492,19 @@ C_LFGList.GroupFinderActivityInfo:
       type: boolean
     isRatedPvpActivity:
       type: boolean
+    mapID:
+      type: number
+    maxLevelSuggestion:
+      type: number
     maxNumPlayers:
       type: number
     minLevel:
       type: number
+    minLevelSuggestion:
+      type: number
     orderIndex:
+      type: number
+    redirectedDifficultyID:
       type: number
     shortName:
       type: string
@@ -3412,8 +3550,9 @@ C_LFGList.LfgCategoryData:
       type: boolean
 C_LFGList.LfgEntryData:
   fields:
-    activityID:
-      type: number
+    activityIDs:
+      type:
+        arrayof: number
     autoAccept:
       type: boolean
     comment:
@@ -3424,6 +3563,8 @@ C_LFGList.LfgEntryData:
       type: boolean
     name:
       type: string
+    newPlayerFriendly:
+      type: boolean
     playstyle:
       nilable: true
       type:
@@ -3445,10 +3586,44 @@ C_LFGList.LfgEntryData:
       type: number
     voiceChat:
       type: string
+C_LFGList.LfgListingCreateData:
+  fields:
+    activityIDs:
+      type:
+        arrayof: number
+    isAutoAccept:
+      default: false
+      type: boolean
+    isCrossFactionListing:
+      default: false
+      type: boolean
+    isPrivateGroup:
+      default: false
+      type: boolean
+    newPlayerFriendly:
+      default: false
+      type: boolean
+    playstyle:
+      default: 0
+      type:
+        enum: LFGEntryPlaystyle
+    questID:
+      nilable: true
+      type: number
+    requiredDungeonScore:
+      default: 0
+      type: number
+    requiredItemLevel:
+      default: 0
+      type: number
+    requiredPvpRating:
+      default: 0
+      type: number
 C_LFGList.LfgSearchResultData:
   fields:
-    activityID:
-      type: number
+    activityIDs:
+      type:
+        arrayof: number
     age:
       type: number
     autoAccept:
@@ -3469,9 +3644,9 @@ C_LFGList.LfgSearchResultData:
       type:
         structure: C_LFGList.BestDungeonScoreMapInfo
     leaderDungeonScoreInfo:
-      nilable: true
       type:
-        structure: C_LFGList.BestDungeonScoreMapInfo
+        arrayof:
+          structure: C_LFGList.BestDungeonScoreMapInfo
     leaderFactionGroup:
       type: number
     leaderName:
@@ -3481,11 +3656,14 @@ C_LFGList.LfgSearchResultData:
       nilable: true
       type: number
     leaderPvpRatingInfo:
-      nilable: true
       type:
-        structure: C_LFGList.PvpRatingInfo
+        arrayof:
+          structure: C_LFGList.PvpRatingInfo
     name:
       type: string
+    newPlayerFriendly:
+      nilable: true
+      type: boolean
     numBNetFriends:
       type: number
     numCharFriends:
@@ -3516,6 +3694,31 @@ C_LFGList.LfgSearchResultData:
     searchResultID:
       type: number
     voiceChat:
+      type: string
+C_LFGList.LfgSearchResultPlayerInfo:
+  fields:
+    areaName:
+      nilable: true
+      type: string
+    assignedRole:
+      type: string
+    classFilename:
+      type: string
+    className:
+      type: string
+    isLeader:
+      type: boolean
+    level:
+      nilable: true
+      type: number
+    lfgRoles:
+      type:
+        structure: LFGRoles
+    name:
+      nilable: true
+      type: string
+    specName:
+      nilable: true
       type: string
 C_LFGList.PvpRatingInfo:
   fields:
@@ -3680,6 +3883,10 @@ C_MajorFactions.MajorFactionData:
       type: number
     expansionID:
       type: number
+    factionFontColor:
+      nilable: true
+      type:
+        structure: DBColorExport
     factionID:
       type: number
     isUnlocked:
@@ -3693,6 +3900,9 @@ C_MajorFactions.MajorFactionData:
     renownLevelThreshold:
       type: number
     renownReputationEarned:
+      type: number
+    renownTrackLevelEffectID:
+      nilable: true
       type: number
     textureKit:
       type: string
@@ -4282,6 +4492,9 @@ C_PerksProgram.PerksVendorItemInfo:
       type: string
     name:
       type: string
+    originalPrice:
+      nilable: true
+      type: number
     perksVendorCategoryID:
       type: number
     perksVendorItemID:
@@ -4291,6 +4504,8 @@ C_PerksProgram.PerksVendorItemInfo:
     purchased:
       type: boolean
     refundable:
+      type: boolean
+    showSaleBanner:
       type: boolean
     speciesID:
       type: number
@@ -4411,6 +4626,8 @@ C_PlayerChoice.PlayerChoiceInfo:
       type: string
     questionText:
       type: string
+    showChoicesAsList:
+      type: boolean
     soundKitID:
       nilable: true
       type: number
@@ -4423,11 +4640,18 @@ C_PlayerChoice.PlayerChoiceOptionButtonInfo:
       type: string
     disabled:
       type: boolean
+    hideButtonShowText:
+      type: boolean
     id:
       type: number
+    listText:
+      nilable: true
+      type: string
     rewardQuestID:
       nilable: true
       type: number
+    showCheckmark:
+      type: boolean
     soundKitID:
       nilable: true
       type: number
@@ -4644,6 +4868,9 @@ C_PvP.PvpBrawlInfo:
       type:
         enum: BrawlType
     canQueue:
+      type: boolean
+    crossFactionAllowed:
+      default: false
       type: boolean
     groupsAllowed:
       type: boolean
@@ -4948,6 +5175,8 @@ C_QuestLine.QuestLineInfo:
       type: string
     questName:
       type: string
+    startMapID:
+      type: number
     x:
       type: number
     y:
@@ -5021,6 +5250,9 @@ C_QuestLog.QuestObjectiveInfo:
     numFulfilled:
       type: number
     numRequired:
+      type: number
+    objectiveType:
+      nilable: true
       type: number
     text:
       type: string
@@ -5823,9 +6055,6 @@ C_SplashScreen.SplashScreenInfo:
       type: string
 C_StableInfo.PetInfo:
   fields:
-    abilities:
-      type:
-        arrayof: number
     creatureID:
       type: number
     displayID:
@@ -5842,16 +6071,32 @@ C_StableInfo.PetInfo:
       type: number
     name:
       type: string
+    petAbilities:
+      type:
+        arrayof: number
     petNumber:
       type: number
     slotID:
       type: number
+    specAbilities:
+      type:
+        arrayof: number
     specialization:
       type: string
+    specID:
+      type: number
     type:
       type: string
     uiModelSceneID:
       default: 718
+      type: number
+C_StableInfo.PetSpecInfo:
+  fields:
+    specializationName:
+      type: string
+    specID:
+      type: number
+    specIndex:
       type: number
 C_TaxiMap.MapTaxiNodeInfo:
   fields:
@@ -7890,6 +8135,8 @@ C_UIWidgetManager.UIWidgetSpellInfo:
     iconSizeType:
       type:
         enum: WidgetIconSizeType
+    showAsEarned:
+      type: boolean
     showGlowState:
       type:
         enum: WidgetShowGlowState
@@ -8087,10 +8334,18 @@ C_VignetteInfo.VignetteInfo:
       type: boolean
     isUnique:
       type: boolean
+    mapPin:
+      nilable: true
+      type:
+        structure: UIMapPinInfo
     name:
       type: string
     objectGUID:
       type: string
+    objectiveType:
+      nilable: true
+      type:
+        enum: VignetteObjectiveType
     onMinimap:
       type: boolean
     onWorldMap:
@@ -8176,6 +8431,41 @@ C_VoiceChat.VoiceTtsVoiceType:
       type: string
     voiceID:
       type: number
+C_WarbandScene.WarbandSceneEntry:
+  fields:
+    description:
+      type: string
+    hasFanfare:
+      default: false
+      type: boolean
+    isFavorite:
+      default: false
+      type: boolean
+    name:
+      type: string
+    quality:
+      type: number
+    qualityColor:
+      type:
+        structure: colorRGB
+    source:
+      type: string
+    sourceType:
+      default: 0
+      type: number
+    textureKit:
+      type: string
+    warbandSceneID:
+      default: 0
+      type: number
+C_WarbandScene.WarbandSceneSearchInfo:
+  fields:
+    favoritesOnly:
+      default: false
+      type: boolean
+    ownedOnly:
+      default: false
+      type: boolean
 C_WeeklyRewards.ConquestWeeklyProgress:
   fields:
     displayType:
@@ -9042,6 +9332,13 @@ CurrencyCost:
       type: number
     currencyID:
       type: number
+DBColorExport:
+  fields:
+    baseTag:
+      type: string
+    color:
+      type:
+        structure: colorRGBA
 EncounterTrackingInfo:
   fields:
     difficultyID:
@@ -9091,6 +9388,8 @@ FontScriptInfo:
     color:
       type:
         structure: colorRGBA
+    fontObject:
+      type: table
     height:
       type: number
     outline:
@@ -9297,6 +9596,14 @@ ItemLocation:
 ItemTransmogInfo:
   fields: {}
   mixin: ItemTransmogInfoMixin
+LFGRoles:
+  fields:
+    dps:
+      type: boolean
+    healer:
+      type: boolean
+    tank:
+      type: boolean
 LocaleInfo:
   fields:
     localeId:
@@ -9833,6 +10140,28 @@ TransmogLocation:
 TransmogPendingInfo:
   fields: {}
   mixin: TransmogPendingInfoMixin
+UIButtonInfo:
+  fields:
+    highlight:
+      type: string
+    icon:
+      type: string
+    normal:
+      type: string
+    pressed:
+      type: string
+    useNormalAsHiglight:
+      type: boolean
+UIMapPinInfo:
+  fields:
+    button:
+      type:
+        structure: UIButtonInfo
+    buttonSelected:
+      type:
+        structure: UIButtonInfo
+    underlay:
+      type: string
 UITextureSliceData:
   fields:
     marginBottom:
@@ -9869,6 +10198,8 @@ UnitPowerBarInfo:
     anchorTop:
       type: boolean
     animateNumbers:
+      type: boolean
+    attachTooltipToBar:
       type: boolean
     barType:
       type: number

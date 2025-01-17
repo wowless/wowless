@@ -1,5 +1,7 @@
 ---
 addon:
+  aliased_in_framexml:
+    C_LFGInfo.IsPremadeGroupEnabled: {}
   capsule:
     apinamespaces:
       C_AuthChallenge: {}
@@ -10,10 +12,10 @@ addon:
     enums:
       BattlepayBannerType: {}
       BattlepayCardType: {}
-      BattlepayDisplayFlag: {}
+      BattlepayDisplayFlags: {}
       BattlepayGroupDisplayType: {}
       BattlepayProductDecorator: {}
-      BattlepayProductGroupFlag: {}
+      BattlepayProductGroupFlags: {}
       PurchaseEligibility: {}
       StoreError: {}
       VasError: {}

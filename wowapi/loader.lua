@@ -182,7 +182,11 @@ local function loadFunctions(api, loader)
     if apicfg.alias then
       aliases[fn] = apicfg.alias
     elseif apicfg.stdlib then
-      util.tset(fns, fn, assert(util.tget(_G, apicfg.stdlib)))
+      local v = assert(util.tget(_G, apicfg.stdlib))
+      if apicfg.nowrap == false then
+        v = debug.newsecurefunction(v)
+      end
+      util.tset(fns, fn, v)
     else
       util.tset(fns, fn, mkfn(fn, apicfg))
     end
