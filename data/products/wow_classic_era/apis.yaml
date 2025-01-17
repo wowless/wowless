@@ -14758,6 +14758,11 @@ GetMultiCastBarIndex:
 GetMultiCastTotemSpells: {}
 getn:
   alias: table.getn
+GetNativeRealmID:
+  inputs: {}
+  outputs:
+  - name: nativeRealmID
+    type: number
 GetNetIpTypes:
   inputs: {}
   outputs:
