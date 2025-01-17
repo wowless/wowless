@@ -6,7 +6,7 @@
 #include "lualib.h"
 
 static int tactopen(lua_State *L) {
-  tactless *t = tactless_open(luaL_checkstring(L, 1), luaL_optstring(L, 2, 0));
+  tactless *t = tactless_open(luaL_checkstring(L, 2), luaL_optstring(L, 3, 0));
   if (!t) {
     return 0;
   }
@@ -35,6 +35,15 @@ static int tactcall(lua_State *L) {
   return 1;
 }
 
+static int tactbuild(lua_State *L) {
+  char hash[33];
+  if (!tactless_current_build(luaL_checkstring(L, 1), hash)) {
+    return 0;
+  }
+  lua_pushlstring(L, hash, 32);
+  return 1;
+}
+
 static int tactgc(lua_State *L) {
   tactless **u = luaL_checkudata(L, 1, "tactless");
   tactless_close(*u);
@@ -50,6 +59,17 @@ int luaopen_tactless(lua_State *L) {
     lua_pushstring(L, "tactless");
     lua_setfield(L, -2, "__metatable");
   }
-  lua_pushcfunction(L, tactopen);
+  lua_newtable(L);
+  if (luaL_newmetatable(L, "tactlesslib")) {
+    lua_pushcfunction(L, tactopen);
+    lua_setfield(L, -2, "__call");
+    lua_newtable(L);
+    lua_pushcfunction(L, tactbuild);
+    lua_setfield(L, -2, "build");
+    lua_setfield(L, -2, "__index");
+    lua_pushstring(L, "tactlesslib");
+    lua_setfield(L, -2, "__metatable");
+  }
+  lua_setmetatable(L, -2);
   return 1;
 }
