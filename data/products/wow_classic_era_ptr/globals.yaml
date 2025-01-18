@@ -5437,6 +5437,7 @@ Enum:
     CraftingOrderReagents: 35
     CreatedImmediately: 25
     CurrencytokenOboslete: 15
+    CurrencyTransfer: 37
     Equipablespells: 14
     Equipped: 1
     EquippedBags: 28
@@ -5463,9 +5464,9 @@ Enum:
     Quarantine: 24
     ReagentbankObsolete: 22
   SubcontainerTypeMeta:
-    MaxValue: 36
+    MaxValue: 37
     MinValue: 0
-    NumValues: 37
+    NumValues: 38
   TimeEventFlag:
     GlueScreenShortcut: 1
   TimeEventFlagMeta:
