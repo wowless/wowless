@@ -14,7 +14,3 @@
 	path = vendor/elune
 	shallow = true
 	url = https://github.com/meorawr/elune
-[submodule "vendor/tactkeys"]
-	path = vendor/tactkeys
-	shallow = true
-	url = https://github.com/wowdev/TACTKeys
