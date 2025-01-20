@@ -65,6 +65,7 @@ local function loadFunctions(api, loader)
   }
 
   local typechecker = require('wowless.typecheck')(api)
+  local funchecker = require('wowless.funcheck')(typechecker)
 
   local function stubMixin(t, name)
     return util.mixin(t, api.env[name])
@@ -144,25 +145,7 @@ local function loadFunctions(api, loader)
       outfn = infn
     else
       edepth = edepth + 1
-      local nouts = #apicfg.outputs
-      local function doCheckOutputs(...)
-        local n = select('#', ...)
-        if n == 0 and apicfg.mayreturnnothing then
-          return
-        end
-        if n ~= nouts then
-          error(('wrong number of return values to %q: want %d, got %d'):format(fname, nouts, n))
-        end
-        local rets = {}
-        for i, out in ipairs(apicfg.outputs) do
-          local v, errmsg = typechecker(out, (select(i, ...)), true)
-          if errmsg then
-            error(('output %d (%q) of %q %s'):format(i, tostring(out.name), fname, errmsg))
-          end
-          rets[i] = v
-        end
-        return unpack(rets, 1, nouts)
-      end
+      local doCheckOutputs = funchecker.makeCheckOutputs(fname, apicfg)
       outfn = function(...)
         return doCheckOutputs(infn(...))
       end
