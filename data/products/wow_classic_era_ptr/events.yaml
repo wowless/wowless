@@ -3678,7 +3678,10 @@ EQUIPMENT_SWAP_FINISHED:
 EQUIPMENT_SWAP_PENDING:
   payload: {}
 EVENT_REALM_QUEUES_UPDATED:
-  payload: {}
+  payload:
+  - name: gameEnvironment
+    type:
+      enum: EventRealmQueues
 EXPAND_BAG_BAR_CHANGED:
   payload:
   - name: expandBagBar
