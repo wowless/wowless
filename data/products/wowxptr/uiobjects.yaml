@@ -678,8 +678,12 @@ EditBox:
     ClearHistory: {}
     Disable:
       impl: EditBox/Disable
+      inputs: {}
+      outputs: {}
     Enable:
       impl: EditBox/Enable
+      inputs: {}
+      outputs: {}
     GetAltArrowKeyMode: {}
     GetBlinkSpeed: {}
     GetCursorPosition: {}

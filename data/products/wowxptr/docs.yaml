@@ -166,3 +166,6 @@ uiobject_methods:
     SetDisabledAtlas: {}
     SetNormalAtlas: {}
     SetPushedAtlas: {}
+  EditBox:
+    Disable: {}
+    Enable: {}
