@@ -41,7 +41,14 @@ local function rewriteSpecs(fn)
   end)
 end
 
-return {
+local args = (function()
+  local parser = require('argparse')()
+  parser:argument('program', 'program.lua')
+  return parser:parse()
+end)()
+
+local fn = assert(loadfile(args.program))
+fn({
   file = rewriteFile,
   specs = rewriteSpecs,
-}
+})

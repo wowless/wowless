@@ -1172,6 +1172,16 @@ add_lua_executable(
   vstruct
 )
 
+add_lua_executable(
+  rewrite
+  ${CMAKE_CURRENT_SOURCE_DIR}/tools/rewrite.lua
+  argparse
+  luafilesystem
+  lyaml
+  penlight
+  wowlessyaml
+)
+
 file(GENERATE OUTPUT runtime/platform.lua CONTENT "\
 return '\
 $<$<PLATFORM_ID:Darwin>:mac>\
