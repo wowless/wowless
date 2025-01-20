@@ -253,10 +253,22 @@ Button:
     ClearPushedTexture: {}
     Click:
       impl: Button/Click
+      inputs:
+      - default: LeftButton
+        name: button
+        type: string
+      - default: false
+        name: isDown
+        type: boolean
+      outputs: {}
     Disable:
       impl: Button/Disable
+      inputs: {}
+      outputs: {}
     Enable:
       impl: Button/Enable
+      inputs: {}
+      outputs: {}
     GetButtonState:
       getter:
       - name: buttonState

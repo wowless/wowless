@@ -159,6 +159,9 @@ uiobject_methods:
     CreateAnimation: {}
     GetAnimations: {}
   Button:
+    Click: {}
+    Disable: {}
+    Enable: {}
     SetButtonState: {}
     SetDisabledAtlas: {}
     SetNormalAtlas: {}
