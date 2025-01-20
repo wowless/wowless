@@ -140,6 +140,11 @@ AnimationGroup:
     Finish: {}
     GetAnimations:
       impl: AnimationGroup/GetAnimations
+      inputs: {}
+      outputs:
+      - name: scriptObject
+        type: UIObject
+      outstride: 1
     GetAnimationSpeedMultiplier: {}
     GetDuration: {}
     GetElapsed: {}

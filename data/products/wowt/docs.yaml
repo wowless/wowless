@@ -156,6 +156,7 @@ uiobject_methods:
     GetRegionParent: {}
   AnimationGroup:
     CreateAnimation: {}
+    GetAnimations: {}
   Button:
     SetButtonState: {}
     SetDisabledAtlas: {}

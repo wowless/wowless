@@ -243,6 +243,7 @@ for k, v in pairs(uiobjectdata) do
         inputs = mv.inputs,
         mayreturnnothing = mv.mayreturnnothing,
         outputs = mv.outputs,
+        outstride = mv.outstride,
       }
     elseif mv.getter then
       local t = {}
