@@ -4690,8 +4690,12 @@ Slider:
   methods:
     Disable:
       impl: Slider/Disable
+      inputs: {}
+      outputs: {}
     Enable:
       impl: Slider/Enable
+      inputs: {}
+      outputs: {}
     GetMinMaxValues:
       getter:
       - name: min

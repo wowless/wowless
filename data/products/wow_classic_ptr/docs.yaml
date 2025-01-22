@@ -150,4 +150,5 @@ uiobject_methods:
     Disable: {}
     Enable: {}
 uiobjects:
+  Slider: {}
   UIObject: {}
