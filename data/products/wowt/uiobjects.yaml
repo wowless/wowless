@@ -1517,18 +1517,72 @@ FogOfWarFrame:
   inherits:
     Frame: {}
   methods:
-    GetFogOfWarBackgroundAtlas: {}
-    GetFogOfWarBackgroundTexture: {}
-    GetFogOfWarMaskAtlas: {}
-    GetFogOfWarMaskTexture: {}
-    GetMaskScalar: {}
-    GetUiMapID: {}
-    SetFogOfWarBackgroundAtlas: {}
-    SetFogOfWarBackgroundTexture: {}
-    SetFogOfWarMaskAtlas: {}
-    SetFogOfWarMaskTexture: {}
-    SetMaskScalar: {}
-    SetUiMapID: {}
+    GetFogOfWarBackgroundAtlas:
+      inputs: {}
+      outputs:
+      - name: atlas
+        type: string
+    GetFogOfWarBackgroundTexture:
+      inputs: {}
+      outputs:
+      - name: asset
+        nilable: true
+        type: string
+    GetFogOfWarMaskAtlas:
+      inputs: {}
+      outputs:
+      - name: atlas
+        type: string
+    GetFogOfWarMaskTexture:
+      inputs: {}
+      outputs:
+      - name: asset
+        nilable: true
+        type: string
+    GetMaskScalar:
+      inputs: {}
+      outputs:
+      - name: scalar
+        type: number
+    GetUiMapID:
+      inputs: {}
+      outputs:
+      - name: uiMapID
+        type: number
+    SetFogOfWarBackgroundAtlas:
+      inputs:
+      - name: atlas
+        type: string
+      outputs: {}
+    SetFogOfWarBackgroundTexture:
+      inputs:
+      - name: asset
+        type: string
+      - name: horizontalTile
+        type: boolean
+      - name: verticalTile
+        type: boolean
+      outputs: {}
+    SetFogOfWarMaskAtlas:
+      inputs:
+      - name: atlas
+        type: string
+      outputs: {}
+    SetFogOfWarMaskTexture:
+      inputs:
+      - name: asset
+        type: string
+      outputs: {}
+    SetMaskScalar:
+      inputs:
+      - name: scalar
+        type: number
+      outputs: {}
+    SetUiMapID:
+      inputs:
+      - name: uiMapID
+        type: number
+      outputs: {}
 Font:
   fields: {}
   inherits:
