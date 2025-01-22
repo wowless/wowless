@@ -4049,6 +4049,28 @@ LocaleInfo:
       type: number
     localeName:
       type: string
+ModelLight:
+  fields:
+    ambientColor:
+      nilable: true
+      type:
+        structure: colorRGB
+    ambientIntensity:
+      default: 0
+      type: number
+    diffuseColor:
+      nilable: true
+      type:
+        structure: colorRGB
+    diffuseIntensity:
+      default: 0
+      type: number
+    omnidirectional:
+      default: false
+      type: boolean
+    point:
+      type:
+        structure: vector3
 PlayerInfoCharacterData:
   fields:
     alternateFormRaceData:
@@ -4177,6 +4199,16 @@ TransmogLocation:
 TransmogPendingInfo:
   fields: {}
   mixin: TransmogPendingInfoMixin
+uiBoundsRect:
+  fields:
+    bottom:
+      type: number
+    height:
+      type: number
+    left:
+      type: number
+    width:
+      type: number
 UITextureSliceData:
   fields:
     marginBottom:
