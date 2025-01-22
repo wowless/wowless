@@ -1462,16 +1462,56 @@ FlipBook:
   inherits:
     Animation: {}
   methods:
-    GetFlipBookColumns: {}
-    GetFlipBookFrameHeight: {}
-    GetFlipBookFrames: {}
-    GetFlipBookFrameWidth: {}
-    GetFlipBookRows: {}
-    SetFlipBookColumns: {}
-    SetFlipBookFrameHeight: {}
-    SetFlipBookFrames: {}
-    SetFlipBookFrameWidth: {}
-    SetFlipBookRows: {}
+    GetFlipBookColumns:
+      inputs: {}
+      outputs:
+      - name: columns
+        type: number
+    GetFlipBookFrameHeight:
+      inputs: {}
+      outputs:
+      - name: height
+        type: number
+    GetFlipBookFrames:
+      inputs: {}
+      outputs:
+      - name: frames
+        type: number
+    GetFlipBookFrameWidth:
+      inputs: {}
+      outputs:
+      - name: width
+        type: number
+    GetFlipBookRows:
+      inputs: {}
+      outputs:
+      - name: rows
+        type: number
+    SetFlipBookColumns:
+      inputs:
+      - name: columns
+        type: number
+      outputs: {}
+    SetFlipBookFrameHeight:
+      inputs:
+      - name: height
+        type: number
+      outputs: {}
+    SetFlipBookFrames:
+      inputs:
+      - name: frames
+        type: number
+      outputs: {}
+    SetFlipBookFrameWidth:
+      inputs:
+      - name: width
+        type: number
+      outputs: {}
+    SetFlipBookRows:
+      inputs:
+      - name: rows
+        type: number
+      outputs: {}
 FogOfWarFrame:
   fields: {}
   inherits:
