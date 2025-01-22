@@ -201,68 +201,70 @@ local unitHacks = {
   UnitRace = 'name',
 }
 
-local function rewriteApis()
-  local function insig(fn, ns)
-    local unitHack = unitHacks[fn.Name]
-    local t = {}
-    for _, a in ipairs(fn.Arguments or {}) do
-      if unitHack and a.Name:sub(1, unitHack:len()) == unitHack then
-        assert(a.Type == 'cstring')
-        assert(not a.Default)
-        assert(not a.Nilable)
-        table.insert(t, {
-          name = a.Name,
-          type = 'unit',
-        })
-      elseif a.Type == 'UnitToken' and a.Default == 'WOWGUID_NULL' then
-        table.insert(t, {
-          name = a.Name,
-          nilable = true,
-          type = 'unit',
-        })
-      else
-        table.insert(t, {
-          default = enum[a.Type] and enum[a.Type][a.Default] or a.Default,
-          name = a.Name,
-          nilable = a.Nilable or nil,
-          type = t2nty(a, ns),
-        })
-      end
-    end
-    return t
-  end
-  local function outsig(fn, ns, api)
-    local stubs = {}
-    local stubnotnils = {}
-    for _, output in ipairs(api and api.outputs or {}) do
-      if output.name then
-        stubs[output.name] = output.stub
-        stubnotnils[output.name] = output.stubnotnil
-      end
-    end
-    local outputs = {}
-    for _, r in ipairs(fn.Returns or {}) do
-      local ty = t2nty(r, ns)
-      table.insert(outputs, {
-        default = enum[r.Type] and enum[r.Type][r.Default] or r.Default,
-        name = r.Name,
-        nilable = (r.Nilable or fn.Name == 'UnitName') and ty ~= 'nil' or nil, -- horrible hack
-        stub = stubs[r.Name],
-        stubnotnil = stubnotnils[r.Name],
-        type = ty,
+local function insig(fn, ns)
+  local unitHack = unitHacks[fn.Name]
+  local t = {}
+  for _, a in ipairs(fn.Arguments or {}) do
+    if unitHack and a.Name:sub(1, unitHack:len()) == unitHack then
+      assert(a.Type == 'cstring')
+      assert(not a.Default)
+      assert(not a.Nilable)
+      table.insert(t, {
+        name = a.Name,
+        type = 'unit',
       })
-      stubs[r.Name] = nil
+    elseif a.Type == 'UnitToken' and a.Default == 'WOWGUID_NULL' then
+      table.insert(t, {
+        name = a.Name,
+        nilable = true,
+        type = 'unit',
+      })
+    else
+      table.insert(t, {
+        default = enum[a.Type] and enum[a.Type][a.Default] or a.Default,
+        name = a.Name,
+        nilable = a.Nilable or nil,
+        type = t2nty(a, ns),
+      })
     end
-    if next(stubs) ~= nil then
-      error(table.concat({
-        'stub merge error on',
-        ns and (' ns = ' .. ns) or '',
-        '\n',
-        require('pl.pretty').write(fn),
-      }, ''))
-    end
-    return outputs
   end
+  return t
+end
+
+local function outsig(fn, ns, api)
+  local stubs = {}
+  local stubnotnils = {}
+  for _, output in ipairs(api and api.outputs or {}) do
+    if output.name then
+      stubs[output.name] = output.stub
+      stubnotnils[output.name] = output.stubnotnil
+    end
+  end
+  local outputs = {}
+  for _, r in ipairs(fn.Returns or {}) do
+    local ty = t2nty(r, ns)
+    table.insert(outputs, {
+      default = enum[r.Type] and enum[r.Type][r.Default] or r.Default,
+      name = r.Name,
+      nilable = (r.Nilable or fn.Name == 'UnitName') and ty ~= 'nil' or nil, -- horrible hack
+      stub = stubs[r.Name],
+      stubnotnil = stubnotnils[r.Name],
+      type = ty,
+    })
+    stubs[r.Name] = nil
+  end
+  if next(stubs) ~= nil then
+    error(table.concat({
+      'stub merge error on',
+      ns and (' ns = ' .. ns) or '',
+      '\n',
+      require('pl.pretty').write(fn),
+    }, ''))
+  end
+  return outputs
+end
+
+local function rewriteApis()
   local y = require('wowapi.yaml')
   local f = 'data/products/' .. product .. '/apis.yaml'
   local apis = y.parseFile(f)
@@ -381,29 +383,7 @@ local function rewriteUIObjects()
     local fns = {}
     for _, fn in ipairs(t.Functions) do
       assert(not fns[fn.Name])
-      local inputs = {}
-      for _, arg in ipairs(fn.Arguments or {}) do
-        table.insert(inputs, {
-          default = arg.Default,
-          name = arg.Name,
-          nilable = arg.Nilable or nil,
-          type = t2nty(arg),
-        })
-      end
-      local outputs = {}
-      for _, ret in ipairs(fn.Returns or {}) do
-        table.insert(outputs, {
-          default = ret.Default,
-          name = ret.Name,
-          nilable = ret.Nilable or nil,
-          type = t2nty(ret),
-        })
-      end
-      fns[fn.Name] = {
-        inputs = inputs,
-        outputs = outputs,
-        outstride = stride(fn.Returns),
-      }
+      fns[fn.Name] = fn
     end
     pscrobjs[t.Name] = fns
   end
@@ -424,9 +404,6 @@ local function rewriteUIObjects()
     UIObject = true,
   }
   local denylist = {
-    EditBox = {
-      GetNumber = true, -- stubnotnil
-    },
     ModelScene = {
       GetViewInsets = true, -- uiRect
     },
@@ -435,17 +412,19 @@ local function rewriteUIObjects()
     local u = assert(uiobjects[k], 'unknown uiobject type ' .. k)
     for mk, mv in pairs(v) do
       local mm = u.methods[mk]
+      local inputs = insig(mv)
+      local outputs = outsig(mv, nil, mm)
       local clean = mm and not (mm.impl or mm.getter or mm.setter)
-      for _, out in ipairs(mv.outputs) do
+      for _, out in ipairs(outputs or {}) do
         clean = clean and not unstubbable[out.type]
       end
       clean = clean and not (denylist[k] and denylist[k][mk])
       if mm and (clean or deref(config, 'uiobjects', k) or deref(config, 'uiobject_methods', k, mk)) then
         u.methods[mk] = {
           impl = mm.impl,
-          inputs = mv.inputs,
-          outputs = mv.outputs,
-          outstride = mv.outstride,
+          inputs = inputs,
+          outputs = outputs,
+          outstride = stride(mv.Returns),
         }
       end
     end

@@ -1570,8 +1570,12 @@ EditBox:
       getter:
       - name: maxLetters
     GetNumber:
+      inputs: {}
       outputs:
-      - type: number
+      - name: number
+        nilable: true
+        stubnotnil: true
+        type: number
     GetNumLetters:
       inputs: {}
       outputs:

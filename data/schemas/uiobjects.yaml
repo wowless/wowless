@@ -90,6 +90,8 @@ type:
                             stub:
                               type:
                                 schema: any
+                            stubnotnil:
+                              type: boolean
                             type:
                               required: true
                               type:
