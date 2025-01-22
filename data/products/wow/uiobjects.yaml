@@ -1589,10 +1589,26 @@ Font:
     FontInstance: {}
     UIObject: {}
   methods:
-    CopyFontObject: {}
-    GetAlpha: {}
-    SetAlpha: {}
-    SetFontHeight: {}
+    CopyFontObject:
+      inputs:
+      - name: sourceFont
+        type: table
+      outputs: {}
+    GetAlpha:
+      inputs: {}
+      outputs:
+      - name: alpha
+        type: number
+    SetAlpha:
+      inputs:
+      - name: alpha
+        type: number
+      outputs: {}
+    SetFontHeight:
+      inputs:
+      - name: height
+        type: number
+      outputs: {}
 FontInstance:
   fields:
     justifyh:
