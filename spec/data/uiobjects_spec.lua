@@ -124,6 +124,20 @@ describe('uiobjects', function()
                           typecheck(output, output.stub)
                         end)
                       end
+                      it('cannot be both stubnotnil and have a stub', function()
+                        assert.True(not output.stubnotnil or output.stub == nil)
+                      end)
+                      it('must be nilable if stubnotnil', function()
+                        assert.True(not output.stubnotnil or output.nilable)
+                      end)
+                      if mv.impl then
+                        it('cannot specify return value', function()
+                          assert.Nil(output.stub)
+                        end)
+                        it('cannot be unknown type', function()
+                          assert.Not.same('unknown', output.type)
+                        end)
+                      end
                     end)
                   end
                   it('either all have names or none have names', function()
