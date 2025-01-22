@@ -966,6 +966,10 @@ Button:
       - name: pushedTexture
     GetText:
       impl: Button/GetText
+      inputs: {}
+      outputs:
+      - name: text
+        type: string
     GetTextHeight:
       inputs: {}
       outputs:
@@ -978,8 +982,16 @@ Button:
         type: number
     IsEnabled:
       impl: Button/IsEnabled
+      inputs: {}
+      outputs:
+      - name: isEnabled
+        type: boolean
     RegisterForClicks:
       impl: Button/RegisterForClicks
+      inputs:
+      - name: unpackedPrimitiveType
+        type: number
+      outputs: {}
     RegisterForMouse:
       inputs:
       - name: unpackedPrimitiveType
@@ -1007,18 +1019,38 @@ Button:
       outputs: {}
     SetDisabledTexture:
       impl: Button/SetDisabledTexture
+      inputs:
+      - name: asset
+        type: string
+      outputs: {}
     SetEnabled:
       impl: Button/SetEnabled
+      inputs:
+      - default: false
+        name: enabled
+        type: boolean
+      outputs: {}
     SetFontString:
       impl: Button/SetFontString
       inputs:
       - name: fontString
-        type: FontString
+        type: table
       outputs: {}
     SetFormattedText:
       impl: Button/SetFormattedText
+      inputs:
+      - name: text
+        type: string
+      outputs: {}
     SetHighlightAtlas:
       impl: Button/SetHighlightAtlas
+      inputs:
+      - name: atlas
+        type: string
+      - name: blendMode
+        nilable: true
+        type: BlendMode
+      outputs: {}
     SetHighlightFontObject:
       inputs:
       - name: font
@@ -1026,6 +1058,13 @@ Button:
       outputs: {}
     SetHighlightTexture:
       impl: Button/SetHighlightTexture
+      inputs:
+      - name: asset
+        type: string
+      - name: blendMode
+        nilable: true
+        type: BlendMode
+      outputs: {}
     SetMotionScriptsWhileDisabled:
       setter:
       - name: motionScriptsWhileDisabled
@@ -1040,6 +1079,10 @@ Button:
       - name: normalFontObject
     SetNormalTexture:
       impl: Button/SetNormalTexture
+      inputs:
+      - name: asset
+        type: string
+      outputs: {}
     SetPushedAtlas:
       impl: Button/SetPushedAtlas
       inputs:
@@ -1052,8 +1095,17 @@ Button:
       - name: pushedTextOffsetY
     SetPushedTexture:
       impl: Button/SetPushedTexture
+      inputs:
+      - name: asset
+        type: string
+      outputs: {}
     SetText:
       impl: Button/SetText
+      inputs:
+      - default: ''
+        name: text
+        type: string
+      outputs: {}
 CheckButton:
   fields:
     checked:
@@ -1079,8 +1131,17 @@ CheckButton:
       - name: disabledCheckedTexture
     SetChecked:
       impl: CheckButton/SetChecked
+      inputs:
+      - default: false
+        name: checked
+        type: boolean
+      outputs: {}
     SetCheckedTexture:
       impl: CheckButton/SetCheckedTexture
+      inputs:
+      - name: asset
+        type: string
+      outputs: {}
     SetDisabledCheckedTexture:
       setter:
       - name: disabledCheckedTexture
@@ -1847,6 +1908,10 @@ EditBox:
       outputs: {}
     Insert:
       impl: EditBox/Insert
+      inputs:
+      - name: text
+        type: string
+      outputs: {}
     IsAlphabeticOnly:
       inputs: {}
       outputs:
@@ -2355,6 +2420,11 @@ FontString:
       outputs: {}
     SetText:
       impl: FontString/SetText
+      inputs:
+      - default: ''
+        name: text
+        type: string
+      outputs: {}
     SetTextHeight:
       inputs:
       - name: height
@@ -2448,40 +2518,51 @@ Frame:
       - name: name
         nilable: true
         type: string
-      - default: ARTWORK
-        name: drawLayer
+      - name: drawLayer
         nilable: true
         type: DrawLayer
       - name: templateName
         nilable: true
         type: string
       outputs:
-      - name: fontString
-        type: FontString
+      - name: line
+        type: table
     CreateLine:
       impl: Frame/CreateLine
-      inputs: {}
+      inputs:
+      - name: name
+        nilable: true
+        type: string
+      - name: drawLayer
+        nilable: true
+        type: DrawLayer
+      - name: templateName
+        nilable: true
+        type: string
+      - name: subLevel
+        nilable: true
+        type: number
       outputs:
       - name: line
-        type: Line
+        type: table
     CreateMaskTexture:
       impl: Frame/CreateMaskTexture
       inputs:
       - name: name
         nilable: true
         type: string
-      - name: layer
+      - name: drawLayer
         nilable: true
         type: DrawLayer
-      - name: inheritsFrom
+      - name: templateName
         nilable: true
         type: string
-      - name: subLayer
+      - name: subLevel
         nilable: true
         type: number
       outputs:
-      - name: mask
-        type: MaskTexture
+      - name: maskTexture
+        type: table
     CreateTexture:
       impl: Frame/CreateTexture
       inputs:
@@ -2558,6 +2639,12 @@ Frame:
       outstride: 1
     GetAttribute:
       impl: Frame/GetAttribute
+      inputs:
+      - name: attributeName
+        type: string
+      outputs:
+      - name: value
+        type: string
     GetBoundsRect:
       inputs: {}
       outputs:
@@ -2589,6 +2676,10 @@ Frame:
         type: boolean
     GetEffectiveAlpha:
       impl: Frame/GetEffectiveAlpha
+      inputs: {}
+      outputs:
+      - name: effectiveAlpha
+        type: number
     GetEffectivelyFlattensRenderLayers:
       inputs: {}
       outputs:
@@ -2624,8 +2715,16 @@ Frame:
       - name: id
     GetNumChildren:
       impl: Frame/GetNumChildren
+      inputs: {}
+      outputs:
+      - name: numChildren
+        type: number
     GetNumRegions:
       impl: Frame/GetNumRegions
+      inputs: {}
+      outputs:
+      - name: numRegions
+        type: number
     GetPropagateKeyboardInput:
       getter:
       - name: propagateKeyboardInput
@@ -2665,6 +2764,16 @@ Frame:
       - name: isClampedToScreen
     IsEventRegistered:
       impl: Frame/IsEventRegistered
+      inputs:
+      - name: eventName
+        type: string
+      outputs:
+      - name: isRegistered
+        type: boolean
+      - name: units
+        nilable: true
+        type: string
+      outstride: 1
     IsGamePadButtonEnabled:
       inputs: {}
       outputs:
@@ -2708,8 +2817,16 @@ Frame:
       outputs: {}
     RegisterAllEvents:
       impl: Frame/RegisterAllEvents
+      inputs: {}
+      outputs: {}
     RegisterEvent:
       impl: Frame/RegisterEvent
+      inputs:
+      - name: eventName
+        type: string
+      outputs:
+      - name: registered
+        type: boolean
     RegisterForDrag:
       inputs:
       - name: unpackedPrimitiveType
@@ -2717,6 +2834,14 @@ Frame:
       outputs: {}
     RegisterUnitEvent:
       impl: Frame/RegisterUnitEvent
+      inputs:
+      - name: eventName
+        type: string
+      - name: units
+        type: string
+      outputs:
+      - name: registered
+        type: boolean
     RotateTextures:
       inputs:
       - name: radians
@@ -2730,8 +2855,20 @@ Frame:
       outputs: {}
     SetAttribute:
       impl: Frame/SetAttribute
+      inputs:
+      - name: attributeName
+        type: string
+      - name: value
+        type: string
+      outputs: {}
     SetAttributeNoHandler:
       impl: Frame/SetAttributeNoHandler
+      inputs:
+      - name: attributeName
+        type: string
+      - name: value
+        type: string
+      outputs: {}
     SetClampedToScreen:
       setter:
       - name: isClampedToScreen
@@ -2777,6 +2914,10 @@ Frame:
       outputs: {}
     SetFrameLevel:
       impl: Frame/SetFrameLevel
+      inputs:
+      - name: frameLevel
+        type: number
+      outputs: {}
     SetFrameStrata:
       setter:
       - name: frameStrata
@@ -2821,6 +2962,18 @@ Frame:
       - name: resizable
     SetResizeBounds:
       impl: Frame/SetResizeBounds
+      inputs:
+      - name: minWidth
+        type: number
+      - name: minHeight
+        type: number
+      - name: maxWidth
+        nilable: true
+        type: number
+      - name: maxHeight
+        nilable: true
+        type: number
+      outputs: {}
     SetToplevel:
       setter:
       - name: toplevel
@@ -2861,8 +3014,16 @@ Frame:
       outputs: {}
     UnregisterAllEvents:
       impl: Frame/UnregisterAllEvents
+      inputs: {}
+      outputs: {}
     UnregisterEvent:
       impl: Frame/UnregisterEvent
+      inputs:
+      - name: eventName
+        type: string
+      outputs:
+      - name: registered
+        type: boolean
 GameTooltip:
   fields:
     tooltipAnchorType:
@@ -3051,6 +3212,22 @@ MessageFrame:
   methods:
     AddMessage:
       impl: MessageFrame/AddMessage
+      inputs:
+      - name: text
+        type: string
+      - name: colorR
+        type: number
+      - name: colorG
+        type: number
+      - name: colorB
+        type: number
+      - name: a
+        nilable: true
+        type: number
+      - name: messageID
+        nilable: true
+        type: number
+      outputs: {}
     Clear:
       inputs: {}
       outputs: {}
@@ -3677,6 +3854,14 @@ Model:
       outputs: {}
     TransformCameraSpaceToModelSpace:
       impl: Model/TransformCameraSpaceToModelSpace
+      inputs:
+      - name: cameraPosition
+        type:
+          structure: vector3
+      outputs:
+      - name: modelPosition
+        type:
+          structure: vector3
     UseModelCenterToTransform:
       inputs:
       - name: useCenter
@@ -3694,14 +3879,10 @@ ModelScene:
       impl: ModelScene/CreateActor
       inputs:
       - name: name
-        nilable: true
         type: string
       - name: template
-        nilable: true
         type: string
-      outputs:
-      - name: actor
-        type: Actor
+      outputs: {}
     GetActorAtIndex:
       inputs:
       - name: index
@@ -4139,15 +4320,35 @@ ParentedObjectBase:
   methods:
     ClearParentKey:
       impl: ParentedObjectBase/ClearParentKey
+      inputs: {}
+      outputs: {}
     GetDebugName:
       impl: ParentedObject/GetDebugName
+      inputs:
+      - default: false
+        name: preferParentKey
+        type: boolean
+      outputs:
+      - name: debugName
+        type: string
     GetParent:
       getter:
       - name: parent
     GetParentKey:
       impl: ParentedObjectBase/GetParentKey
+      inputs: {}
+      outputs:
+      - name: parentKey
+        type: string
     SetParentKey:
       impl: ParentedObjectBase/SetParentKey
+      inputs:
+      - name: parentKey
+        type: string
+      - default: false
+        name: clearOtherKeys
+        type: boolean
+      outputs: {}
   virtual: true
 Path:
   fields:
@@ -4171,7 +4372,7 @@ Path:
         type: number
       outputs:
       - name: point
-        type: ControlPoint
+        type: table
     GetControlPoints: {}
     GetCurveType:
       getter:
@@ -4508,6 +4709,8 @@ Region:
         type: boolean
     ClearAllPoints:
       impl: Region/ClearAllPoints
+      inputs: {}
+      outputs: {}
     ClearPoint:
       inputs:
       - name: point
@@ -4535,6 +4738,11 @@ Region:
         type: AnimationGroup
     EnableMouse:
       impl: MouseMixin/EnableMouse
+      inputs:
+      - default: false
+        name: enable
+        type: boolean
+      outputs: {}
     EnableMouseMotion:
       inputs:
       - default: false
@@ -4551,8 +4759,18 @@ Region:
       - name: bottom
     GetCenter:
       impl: Region/GetCenter
+      inputs: {}
+      outputs:
+      - name: x
+        type: number
+      - name: y
+        type: number
     GetEffectiveScale:
       impl: Region/GetEffectiveScale
+      inputs: {}
+      outputs:
+      - name: effectiveScale
+        type: number
     GetHeight:
       getter:
       - name: height
@@ -4561,20 +4779,24 @@ Region:
       - name: left
     GetNumPoints:
       impl: Region/GetNumPoints
+      inputs: {}
+      outputs:
+      - name: numPoints
+        type: number
     GetPoint:
       impl: Region/GetPoint
       inputs:
-      - default: 1
+      - default: 0
         name: anchorIndex
-        nilable: true
-        type: tonumber
-      mayreturnnothing: true
+        type: number
+      - default: false
+        name: resolveCollapsed
+        type: boolean
       outputs:
       - name: point
         type: FramePoint
       - name: relativeTo
-        nilable: true
-        type: UIObject
+        type: table
       - name: relativePoint
         type: FramePoint
       - name: offsetX
@@ -4607,8 +4829,22 @@ Region:
       - name: height
     GetRight:
       impl: Region/GetRight
+      inputs: {}
+      outputs:
+      - name: right
+        type: number
     GetScaledRect:
       impl: Region/GetScaledRect
+      inputs: {}
+      outputs:
+      - name: left
+        type: number
+      - name: bottom
+        type: number
+      - name: width
+        type: number
+      - name: height
+        type: number
     GetSize:
       getter:
       - name: width
@@ -4620,6 +4856,10 @@ Region:
         type: string
     GetTop:
       impl: Region/GetTop
+      inputs: {}
+      outputs:
+      - name: top
+        type: number
     GetWidth:
       getter:
       - name: width
@@ -4649,6 +4889,10 @@ Region:
       - name: mouseClickEnabled
     IsMouseEnabled:
       impl: MouseMixin/IsMouseEnabled
+      inputs: {}
+      outputs:
+      - name: enabled
+        type: boolean
     IsMouseMotionEnabled:
       getter:
       - name: mouseMotionEnabled
@@ -4684,6 +4928,12 @@ Region:
         type: boolean
     IsProtected:
       impl: Region/IsProtected
+      inputs: {}
+      outputs:
+      - name: isProtected
+        type: boolean
+      - name: isProtectedExplicitly
+        type: boolean
     IsRectValid:
       inputs: {}
       outputs:
@@ -4691,6 +4941,13 @@ Region:
         type: boolean
     SetAllPoints:
       impl: Region/SetAllPoints
+      inputs:
+      - name: relativeTo
+        type: table
+      - default: true
+        name: doResize
+        type: boolean
+      outputs: {}
     SetCollapsesLayout:
       inputs:
       - name: collapsesLayout
@@ -4718,6 +4975,18 @@ Region:
       outputs: {}
     SetPoint:
       impl: Region/SetPoint
+      inputs:
+      - name: point
+        type: FramePoint
+      - name: relativeTo
+        type: table
+      - name: relativePoint
+        type: FramePoint
+      - name: offsetX
+        type: number
+      - name: offsetY
+        type: number
+      outputs: {}
     SetPropagateMouseClicks:
       inputs:
       - name: propagate
@@ -4967,6 +5236,10 @@ ScrollFrame:
       outputs: {}
     SetScrollChild:
       impl: ScrollFrame/SetScrollChild
+      inputs:
+      - name: scrollChild
+        type: Frame
+      outputs: {}
     SetVerticalScroll:
       inputs:
       - name: offset
@@ -5041,8 +5314,12 @@ Slider:
   methods:
     Disable:
       impl: Slider/Disable
+      inputs: {}
+      outputs: {}
     Enable:
       impl: Slider/Enable
+      inputs: {}
+      outputs: {}
     GetMinMaxValues:
       getter:
       - name: min
@@ -5158,6 +5435,16 @@ StatusBar:
         type: boolean
     GetStatusBarColor:
       impl: StatusBar/GetStatusBarColor
+      inputs: {}
+      outputs:
+      - name: colorR
+        type: number
+      - name: colorG
+        type: number
+      - name: colorB
+        type: number
+      - name: colorA
+        type: number
     GetStatusBarDesaturation:
       inputs: {}
       outputs:
@@ -5210,6 +5497,17 @@ StatusBar:
       outputs: {}
     SetStatusBarColor:
       impl: StatusBar/SetStatusBarColor
+      inputs:
+      - name: colorR
+        type: number
+      - name: colorG
+        type: number
+      - name: colorB
+        type: number
+      - name: a
+        nilable: true
+        type: number
+      outputs: {}
     SetStatusBarDesaturated:
       inputs:
       - default: false
@@ -5223,6 +5521,12 @@ StatusBar:
       outputs: {}
     SetStatusBarTexture:
       impl: StatusBar/SetStatusBarTexture
+      inputs:
+      - name: asset
+        type: string
+      outputs:
+      - name: success
+        type: boolean
     SetValue:
       setter:
       - name: value
@@ -5412,6 +5716,11 @@ TextureBase:
         type: number
     GetTexture:
       impl: Texture/GetTexture
+      inputs: {}
+      outputs:
+      - name: textureFile
+        nilable: true
+        type: string
     GetTextureFileID:
       inputs: {}
       outputs:
@@ -5475,6 +5784,19 @@ TextureBase:
         type: boolean
     SetAtlas:
       impl: Texture/SetAtlas
+      inputs:
+      - name: atlas
+        type: string
+      - default: false
+        name: useAtlasSize
+        type: boolean
+      - name: filterMode
+        nilable: true
+        type: string
+      - name: resetTexCoords
+        nilable: true
+        type: boolean
+      outputs: {}
     SetBlendMode:
       setter:
       - name: blendMode
@@ -5486,6 +5808,17 @@ TextureBase:
       outputs: {}
     SetColorTexture:
       impl: Texture/SetColorTexture
+      inputs:
+      - name: colorR
+        type: number
+      - name: colorG
+        type: number
+      - name: colorB
+        type: number
+      - name: a
+        nilable: true
+        type: number
+      outputs: {}
     SetDesaturated:
       inputs:
       - default: false
@@ -5531,6 +5864,16 @@ TextureBase:
       outputs: {}
     SetTexCoord:
       impl: Texture/SetTexCoord
+      inputs:
+      - name: left
+        type: number
+      - name: right
+        type: number
+      - name: bottom
+        type: number
+      - name: top
+        type: number
+      outputs: {}
     SetTexelSnappingBias:
       inputs:
       - name: bias
@@ -5538,6 +5881,22 @@ TextureBase:
       outputs: {}
     SetTexture:
       impl: Texture/SetTexture
+      inputs:
+      - name: textureAsset
+        nilable: true
+        type: string
+      - name: wrapModeHorizontal
+        nilable: true
+        type: string
+      - name: wrapModeVertical
+        nilable: true
+        type: string
+      - name: filterMode
+        nilable: true
+        type: string
+      outputs:
+      - name: success
+        type: boolean
     SetTextureSliceMargins:
       inputs:
       - name: left
@@ -5607,13 +5966,25 @@ UIObject:
       - name: name
     GetObjectType:
       impl: UIObject/GetObjectType
+      inputs: {}
+      outputs:
+      - name: objectType
+        type: string
     IsForbidden:
       getter:
       - name: forbidden
     IsObjectType:
       impl: UIObject/IsObjectType
+      inputs:
+      - name: objectType
+        type: string
+      outputs:
+      - name: isType
+        type: boolean
     SetForbidden:
       impl: ForbiddenMixin/SetForbidden
+      inputs: {}
+      outputs: {}
   virtual: true
 UnitPositionFrame:
   fields: {}

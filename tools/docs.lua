@@ -414,7 +414,7 @@ local function rewriteUIObjects()
       local mm = u.methods[mk]
       local inputs = insig(mv)
       local outputs = outsig(mv, nil, mm)
-      local clean = mm and not (mm.impl or mm.getter or mm.setter)
+      local clean = mm and not (mm.getter or mm.setter)
       for _, out in ipairs(outputs or {}) do
         clean = clean and not unstubbable[out.type]
       end
