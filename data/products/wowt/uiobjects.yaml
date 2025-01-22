@@ -1178,26 +1178,139 @@ DressUpModel:
   inherits:
     PlayerModel: {}
   methods:
-    Dress: {}
-    GetAutoDress: {}
-    GetItemTransmogInfo: {}
-    GetItemTransmogInfoList: {}
-    GetObeyHideInTransmogFlag: {}
-    GetSheathed: {}
-    GetUseTransmogChoices: {}
-    GetUseTransmogSkin: {}
-    IsGeoReady: {}
-    IsSlotAllowed: {}
-    IsSlotVisible: {}
-    SetAutoDress: {}
-    SetItemTransmogInfo: {}
-    SetObeyHideInTransmogFlag: {}
-    SetSheathed: {}
-    SetUseTransmogChoices: {}
-    SetUseTransmogSkin: {}
-    TryOn: {}
-    Undress: {}
-    UndressSlot: {}
+    Dress:
+      inputs: {}
+      outputs: {}
+    GetAutoDress:
+      inputs: {}
+      outputs:
+      - name: enabled
+        type: boolean
+    GetItemTransmogInfo:
+      inputs:
+      - name: inventorySlot
+        type: number
+      outputs:
+      - name: itemTransmogInfo
+        type:
+          structure: ItemTransmogInfo
+    GetItemTransmogInfoList:
+      inputs: {}
+      outputs:
+      - name: infoList
+        type:
+          arrayof:
+            structure: ItemTransmogInfo
+    GetObeyHideInTransmogFlag:
+      inputs: {}
+      outputs:
+      - name: enabled
+        type: boolean
+    GetSheathed:
+      inputs: {}
+      outputs:
+      - name: sheathed
+        type: boolean
+    GetUseTransmogChoices:
+      inputs: {}
+      outputs:
+      - name: enabled
+        type: boolean
+    GetUseTransmogSkin:
+      inputs: {}
+      outputs:
+      - name: enabled
+        type: boolean
+    IsGeoReady:
+      inputs: {}
+      outputs:
+      - name: ready
+        type: boolean
+    IsSlotAllowed:
+      inputs:
+      - name: slot
+        type: number
+      outputs:
+      - name: allowed
+        type: boolean
+    IsSlotVisible:
+      inputs:
+      - name: slot
+        type: number
+      outputs:
+      - name: visible
+        type: boolean
+    SetAutoDress:
+      inputs:
+      - default: false
+        name: enabled
+        type: boolean
+      outputs: {}
+    SetItemTransmogInfo:
+      inputs:
+      - name: itemTransmogInfo
+        type:
+          structure: ItemTransmogInfo
+      - name: inventorySlot
+        nilable: true
+        type: number
+      - default: false
+        name: ignoreChildItems
+        type: boolean
+      outputs:
+      - name: result
+        type:
+          enum: ItemTryOnReason
+    SetObeyHideInTransmogFlag:
+      inputs:
+      - default: false
+        name: enabled
+        type: boolean
+      outputs: {}
+    SetSheathed:
+      inputs:
+      - default: false
+        name: sheathed
+        type: boolean
+      - default: false
+        name: hideWeapons
+        type: boolean
+      outputs: {}
+    SetUseTransmogChoices:
+      inputs:
+      - default: false
+        name: enabled
+        type: boolean
+      outputs: {}
+    SetUseTransmogSkin:
+      inputs:
+      - default: false
+        name: enabled
+        type: boolean
+      outputs: {}
+    TryOn:
+      inputs:
+      - name: linkOrItemModifiedAppearanceID
+        type: string
+      - name: handSlotName
+        nilable: true
+        type: string
+      - name: spellEnchantID
+        nilable: true
+        type: number
+      outputs:
+      - name: result
+        nilable: true
+        type:
+          enum: ItemTryOnReason
+    Undress:
+      inputs: {}
+      outputs: {}
+    UndressSlot:
+      inputs:
+      - name: inventorySlot
+        type: number
+      outputs: {}
 EditBox:
   fieldinitoverrides:
     justifyh: LEFT
