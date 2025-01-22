@@ -4616,6 +4616,10 @@ ScrollFrame:
       outputs: {}
     SetScrollChild:
       impl: ScrollFrame/SetScrollChild
+      inputs:
+      - name: scrollChild
+        type: Frame
+      outputs: {}
     SetVerticalScroll:
       inputs:
       - name: offset

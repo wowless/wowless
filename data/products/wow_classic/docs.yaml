@@ -150,5 +150,6 @@ uiobject_methods:
     Disable: {}
     Enable: {}
 uiobjects:
+  ScrollFrame: {}
   Slider: {}
   UIObject: {}
