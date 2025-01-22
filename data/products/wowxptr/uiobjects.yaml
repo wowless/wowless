@@ -923,21 +923,98 @@ CinematicModel:
   inherits:
     PlayerModel: {}
   methods:
-    EquipItem: {}
-    InitializeCamera: {}
-    InitializePanCamera: {}
-    SetAnimOffset: {}
-    SetCreatureData: {}
-    SetFacingLeft: {}
-    SetFadeTimes: {}
-    SetHeightFactor: {}
-    SetJumpInfo: {}
-    SetPanDistance: {}
-    SetSpellVisualKit: {}
-    SetTargetDistance: {}
-    StartPan: {}
-    StopPan: {}
-    UnequipItems: {}
+    EquipItem:
+      inputs:
+      - name: itemID
+        type: number
+      outputs: {}
+    InitializeCamera:
+      inputs:
+      - default: 0
+        name: scaleFactor
+        type: number
+      outputs: {}
+    InitializePanCamera:
+      inputs:
+      - default: 0
+        name: scaleFactor
+        type: number
+      outputs: {}
+    SetAnimOffset:
+      inputs:
+      - name: offset
+        type: number
+      outputs: {}
+    SetCreatureData:
+      inputs:
+      - name: creatureID
+        type: number
+      outputs: {}
+    SetFacingLeft:
+      inputs:
+      - default: false
+        name: isFacingLeft
+        type: boolean
+      outputs: {}
+    SetFadeTimes:
+      inputs:
+      - name: fadeInSeconds
+        type: number
+      - name: fadeOutSeconds
+        type: number
+      outputs: {}
+    SetHeightFactor:
+      inputs:
+      - name: factor
+        type: number
+      outputs: {}
+    SetJumpInfo:
+      inputs:
+      - name: jumpLength
+        type: number
+      - name: jumpHeight
+        type: number
+      outputs: {}
+    SetPanDistance:
+      inputs:
+      - name: scale
+        type: number
+      outputs: {}
+    SetSpellVisualKit:
+      inputs:
+      - name: visualKitID
+        type: number
+      outputs: {}
+    SetTargetDistance:
+      inputs:
+      - name: scale
+        type: number
+      outputs: {}
+    StartPan:
+      inputs:
+      - name: panType
+        type: number
+      - name: durationSeconds
+        type: number
+      - default: false
+        name: doFade
+        type: boolean
+      - default: 0
+        name: visKitID
+        type: number
+      - default: 0
+        name: startPositionScale
+        type: number
+      - default: 1
+        name: speedMultiplier
+        type: number
+      outputs: {}
+    StopPan:
+      inputs: {}
+      outputs: {}
+    UnequipItems:
+      inputs: {}
+      outputs: {}
 ColorSelect:
   fieldinitoverrides:
     mouseClickEnabled: true
