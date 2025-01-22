@@ -3563,11 +3563,16 @@ ModelScene:
       - name: numActors
         type: number
     GetViewInsets:
+      inputs: {}
       outputs:
-      - type: number
-      - type: number
-      - type: number
-      - type: number
+      - name: insetsLeft
+        type: number
+      - name: insetsRight
+        type: number
+      - name: insetsTop
+        type: number
+      - name: insetsBottom
+        type: number
     GetViewTranslation:
       inputs: {}
       outputs:
@@ -3736,7 +3741,13 @@ ModelScene:
       outputs: {}
     SetViewInsets:
       inputs:
-      - name: insets
+      - name: insetsLeft
+        type: number
+      - name: insetsRight
+        type: number
+      - name: insetsTop
+        type: number
+      - name: insetsBottom
         type: number
       outputs: {}
     SetViewTranslation:

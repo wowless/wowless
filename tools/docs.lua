@@ -226,6 +226,16 @@ local function insig(fn, ns)
         nilable = true,
         type = 'unit',
       })
+    elseif a.Type == 'uiRect' then
+      assert(a.Default == nil)
+      assert(not a.Nilable)
+      assert(not a.StrideIndex)
+      for _, p in ipairs({ 'Left', 'Right', 'Top', 'Bottom' }) do
+        table.insert(t, {
+          name = a.Name .. p,
+          type = 'number',
+        })
+      end
     else
       table.insert(t, {
         default = default(a),
@@ -249,16 +259,28 @@ local function outsig(fn, ns, api)
   end
   local outputs = {}
   for _, r in ipairs(fn.Returns or {}) do
-    local ty = t2nty(r, ns)
-    table.insert(outputs, {
-      default = default(r),
-      name = r.Name,
-      nilable = (r.Nilable or fn.Name == 'UnitName') and ty ~= 'nil' or nil, -- horrible hack
-      stub = stubs[r.Name],
-      stubnotnil = stubnotnils[r.Name],
-      type = ty,
-    })
-    stubs[r.Name] = nil
+    if r.Type == 'uiRect' then
+      assert(r.Default == nil)
+      assert(not r.Nilable)
+      assert(not r.StrideIndex)
+      for _, p in ipairs({ 'Left', 'Right', 'Top', 'Bottom' }) do
+        table.insert(outputs, {
+          name = r.Name .. p,
+          type = 'number',
+        })
+      end
+    else
+      local ty = t2nty(r, ns)
+      table.insert(outputs, {
+        default = default(r),
+        name = r.Name,
+        nilable = (r.Nilable or fn.Name == 'UnitName') and ty ~= 'nil' or nil, -- horrible hack
+        stub = stubs[r.Name],
+        stubnotnil = stubnotnils[r.Name],
+        type = ty,
+      })
+      stubs[r.Name] = nil
+    end
   end
   if next(stubs) ~= nil then
     error(table.concat({
@@ -410,11 +432,6 @@ local function rewriteUIObjects()
     Texture = true,
     UIObject = true,
   }
-  local denylist = {
-    ModelScene = {
-      GetViewInsets = true, -- uiRect
-    },
-  }
   for k, v in pairs(mapped) do
     local u = assert(uiobjects[k], 'unknown uiobject type ' .. k)
     for mk, mv in pairs(v) do
@@ -435,9 +452,6 @@ local function rewriteUIObjects()
               return
             end
           end
-        end
-        if denylist[k] and denylist[k][mk] then
-          return
         end
         local cu = deref(config, 'uiobjects', k)
         local cm = deref(config, 'uiobject_methods', k, mk)

@@ -145,7 +145,6 @@ typedefs:
   uiAddon: uiAddon
   uiFontHeight: number
   UiMapPoint: table
-  uiRect: number
   uiUnit: number
   UnitToken: unit
   WeeklyRewardItemDBID: string

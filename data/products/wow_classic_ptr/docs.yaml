@@ -127,7 +127,6 @@ typedefs:
   TooltipComparisonItem: table
   uiAddon: uiAddon
   uiFontHeight: number
-  uiRect: number
   uiUnit: number
   UnitToken: unit
   WOWGUID: string
