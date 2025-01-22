@@ -194,6 +194,9 @@ local function stride(ts)
 end
 
 local function default(x)
+  if x.Type == 'luaIndex' and x.Default then
+    return x.Default + 1
+  end
   return enum[x.Type] and enum[x.Type][x.Default] or x.Default
 end
 

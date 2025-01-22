@@ -41,7 +41,7 @@ AppearanceSourceInfo:
       nilable: true
       type: number
     invType:
-      default: 0
+      default: 1
       type: number
     isCollected:
       type: boolean

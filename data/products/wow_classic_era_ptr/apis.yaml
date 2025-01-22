@@ -18959,7 +18959,7 @@ UnitPowerBarTimerInfo:
   inputs:
   - name: unit
     type: unit
-  - default: 0
+  - default: 1
     name: index
     type: number
   outputs:
