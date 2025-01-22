@@ -151,3 +151,4 @@ uiobject_methods:
     Enable: {}
 uiobjects:
   Actor: {}
+  Alpha: {}

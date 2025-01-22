@@ -470,10 +470,26 @@ Alpha:
   inherits:
     Animation: {}
   methods:
-    GetFromAlpha: {}
-    GetToAlpha: {}
-    SetFromAlpha: {}
-    SetToAlpha: {}
+    GetFromAlpha:
+      inputs: {}
+      outputs:
+      - name: normalizedAlpha
+        type: number
+    GetToAlpha:
+      inputs: {}
+      outputs:
+      - name: normalizedAlpha
+        type: number
+    SetFromAlpha:
+      inputs:
+      - name: normalizedAlpha
+        type: number
+      outputs: {}
+    SetToAlpha:
+      inputs:
+      - name: normalizedAlpha
+        type: number
+      outputs: {}
 Animation:
   fields:
     endDelay:
