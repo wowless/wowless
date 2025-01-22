@@ -5195,13 +5195,25 @@ UIObject:
       - name: name
     GetObjectType:
       impl: UIObject/GetObjectType
+      inputs: {}
+      outputs:
+      - name: objectType
+        type: string
     IsForbidden:
       getter:
       - name: forbidden
     IsObjectType:
       impl: UIObject/IsObjectType
+      inputs:
+      - name: objectType
+        type: string
+      outputs:
+      - name: isType
+        type: boolean
     SetForbidden:
       impl: ForbiddenMixin/SetForbidden
+      inputs: {}
+      outputs: {}
   virtual: true
 UnitPositionFrame:
   fields: {}

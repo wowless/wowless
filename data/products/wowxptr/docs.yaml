@@ -169,3 +169,5 @@ uiobject_methods:
   EditBox:
     Disable: {}
     Enable: {}
+uiobjects:
+  UIObject: {}
