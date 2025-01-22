@@ -421,9 +421,13 @@ local function rewriteUIObjects()
   local uiobjects = require('wowapi.yaml').parseFile(filename)
   for k, v in pairs(mapped) do
     local u = assert(uiobjects[k], 'unknown uiobject type ' .. k)
+    local clean = true
+    for _, mm in pairs(u.methods) do
+      clean = clean and not (mm.impl or mm.getter or mm.setter)
+    end
     for mk, mv in pairs(v) do
       local mm = u.methods[mk]
-      if mm and (deref(config, 'uiobjects', k) or deref(config, 'uiobject_methods', k, mk)) then
+      if mm and (clean or deref(config, 'uiobjects', k) or deref(config, 'uiobject_methods', k, mk)) then
         u.methods[mk] = {
           impl = mm.impl,
           inputs = mv.inputs,

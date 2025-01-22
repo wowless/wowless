@@ -2010,23 +2010,73 @@ Minimap:
   inherits:
     Frame: {}
   methods:
-    GetPingPosition: {}
+    GetPingPosition:
+      inputs: {}
+      outputs:
+      - name: positionX
+        type: number
+      - name: positionY
+        type: number
     GetZoom:
+      inputs: {}
       outputs:
-      - type: number
+      - name: zoomFactor
+        type: number
     GetZoomLevels:
+      inputs: {}
       outputs:
-      - type: number
-    PingLocation: {}
-    SetBlipTexture: {}
-    SetCorpsePOIArrowTexture: {}
-    SetIconTexture: {}
-    SetMaskTexture: {}
-    SetPlayerTexture: {}
-    SetPOIArrowTexture: {}
-    SetStaticPOIArrowTexture: {}
-    SetZoom: {}
-    UpdateBlips: {}
+      - name: zoomLevels
+        type: number
+    PingLocation:
+      inputs:
+      - name: locationX
+        type: number
+      - name: locationY
+        type: number
+      outputs: {}
+    SetBlipTexture:
+      inputs:
+      - name: asset
+        type: string
+      outputs: {}
+    SetCorpsePOIArrowTexture:
+      inputs:
+      - name: asset
+        type: string
+      outputs: {}
+    SetIconTexture:
+      inputs:
+      - name: asset
+        type: string
+      outputs: {}
+    SetMaskTexture:
+      inputs:
+      - name: asset
+        type: string
+      outputs: {}
+    SetPlayerTexture:
+      inputs:
+      - name: asset
+        type: string
+      outputs: {}
+    SetPOIArrowTexture:
+      inputs:
+      - name: asset
+        type: string
+      outputs: {}
+    SetStaticPOIArrowTexture:
+      inputs:
+      - name: asset
+        type: string
+      outputs: {}
+    SetZoom:
+      inputs:
+      - name: zoomFactor
+        type: number
+      outputs: {}
+    UpdateBlips:
+      inputs: {}
+      outputs: {}
   singleton: true
 Model:
   fields:
@@ -2183,23 +2233,96 @@ MovieFrame:
   inherits:
     Frame: {}
   methods:
-    EnableSubtitles: {}
-    StartMovie: {}
-    StartMovieByName: {}
-    StopMovie: {}
+    EnableSubtitles:
+      inputs:
+      - name: enable
+        type: boolean
+      outputs: {}
+    StartMovie:
+      inputs:
+      - name: movieID
+        type: number
+      - default: false
+        name: looping
+        type: boolean
+      outputs:
+      - name: success
+        type: boolean
+      - name: returnCode
+        type: number
+    StartMovieByName:
+      inputs:
+      - name: movieName
+        type: string
+      - default: false
+        name: looping
+        type: boolean
+      - default: 0
+        name: resolution
+        type: number
+      outputs:
+      - name: success
+        type: boolean
+      - name: returnCode
+        type: number
+    StopMovie:
+      inputs: {}
+      outputs: {}
 OffScreenFrame:
   fields: {}
   inherits:
     Frame: {}
   methods:
-    ApplySnapshot: {}
-    Flush: {}
-    GetMaxSnapshots: {}
-    IsSnapshotValid: {}
-    SetMaxSnapshots: {}
-    TakeSnapshot: {}
-    TestPrintToFile: {}
-    UsesNPOT: {}
+    ApplySnapshot:
+      inputs:
+      - name: texture
+        type: Texture
+      - name: snapshotID
+        type: number
+      outputs:
+      - name: success
+        type: boolean
+    Flush:
+      inputs: {}
+      outputs: {}
+    GetMaxSnapshots:
+      inputs: {}
+      outputs:
+      - name: maxSnapshots
+        type: number
+    IsSnapshotValid:
+      inputs:
+      - name: snapshotID
+        type: number
+      outputs:
+      - name: isValid
+        type: boolean
+    SetMaxSnapshots:
+      inputs:
+      - name: maxSnapshots
+        type: number
+      outputs: {}
+    TakeSnapshot:
+      inputs: {}
+      outputs:
+      - name: snapshotID
+        nilable: true
+        type: number
+    TestPrintToFile:
+      inputs:
+      - name: snapshotID
+        type: number
+      - name: filename
+        type: string
+      outputs:
+      - name: success
+        type: boolean
+    UsesNPOT:
+      inputs: {}
+      outputs:
+      - name: usesNPOT
+        nilable: true
+        type: boolean
 ParentedObject:
   fields: {}
   inherits:
@@ -2271,30 +2394,159 @@ PlayerModel:
   inherits:
     Model: {}
   methods:
-    ApplySpellVisualKit: {}
-    CanSetUnit: {}
-    FreezeAnimation: {}
-    GetDisplayInfo: {}
-    GetDoBlend: {}
-    GetKeepModelOnHide: {}
-    HasAnimation: {}
-    PlayAnimKit: {}
-    RefreshCamera: {}
-    RefreshUnit: {}
-    SetAnimation: {}
-    SetBarberShopAlternateForm: {}
-    SetCamDistanceScale: {}
-    SetCreature: {}
-    SetDisplayInfo: {}
-    SetDoBlend: {}
-    SetItem: {}
-    SetItemAppearance: {}
-    SetKeepModelOnHide: {}
-    SetPortraitZoom: {}
-    SetRotation: {}
-    SetUnit: {}
-    StopAnimKit: {}
-    ZeroCachedCenterXY: {}
+    ApplySpellVisualKit:
+      inputs:
+      - name: spellVisualKitID
+        type: number
+      - default: false
+        name: oneShot
+        type: boolean
+      outputs: {}
+    CanSetUnit:
+      inputs:
+      - name: unit
+        type: unit
+      outputs: {}
+    FreezeAnimation:
+      inputs:
+      - name: anim
+        type: number
+      - name: variation
+        type: number
+      - name: frame
+        type: number
+      outputs: {}
+    GetDisplayInfo:
+      inputs: {}
+      outputs:
+      - name: displayID
+        type: number
+    GetDoBlend:
+      inputs: {}
+      outputs:
+      - name: doBlend
+        type: boolean
+    GetKeepModelOnHide:
+      inputs: {}
+      outputs:
+      - name: keepModelOnHide
+        type: boolean
+    HasAnimation:
+      inputs:
+      - name: anim
+        type: number
+      outputs:
+      - name: hasAnimation
+        type: boolean
+    PlayAnimKit:
+      inputs:
+      - name: animKit
+        type: number
+      - default: false
+        name: loop
+        type: boolean
+      outputs: {}
+    RefreshCamera:
+      inputs: {}
+      outputs: {}
+    RefreshUnit:
+      inputs: {}
+      outputs: {}
+    SetAnimation:
+      inputs:
+      - name: anim
+        type: number
+      - name: variation
+        nilable: true
+        type: number
+      outputs: {}
+    SetBarberShopAlternateForm:
+      inputs: {}
+      outputs: {}
+    SetCamDistanceScale:
+      inputs:
+      - name: scale
+        type: number
+      outputs: {}
+    SetCreature:
+      inputs:
+      - name: creatureID
+        type: number
+      - default: 0
+        name: displayID
+        type: number
+      outputs: {}
+    SetDisplayInfo:
+      inputs:
+      - name: displayID
+        type: number
+      - name: mountDisplayID
+        nilable: true
+        type: number
+      outputs: {}
+    SetDoBlend:
+      inputs:
+      - default: false
+        name: doBlend
+        type: boolean
+      outputs: {}
+    SetItem:
+      inputs:
+      - name: itemID
+        type: number
+      - name: appearanceModID
+        nilable: true
+        type: number
+      - name: itemVisualID
+        nilable: true
+        type: number
+      outputs: {}
+    SetItemAppearance:
+      inputs:
+      - name: itemAppearanceID
+        type: number
+      - name: itemVisualID
+        nilable: true
+        type: number
+      - name: itemSubclass
+        nilable: true
+        type:
+          enum: ItemWeaponSubclass
+      outputs: {}
+    SetKeepModelOnHide:
+      inputs:
+      - name: keepModelOnHide
+        type: boolean
+      outputs: {}
+    SetPortraitZoom:
+      inputs:
+      - name: zoom
+        type: number
+      outputs: {}
+    SetRotation:
+      inputs:
+      - name: radians
+        type: number
+      - default: true
+        name: animate
+        type: boolean
+      outputs: {}
+    SetUnit:
+      inputs:
+      - name: unit
+        type: unit
+      - default: true
+        name: blend
+        type: boolean
+      outputs:
+      - name: success
+        type: boolean
+    StopAnimKit:
+      inputs: {}
+      outputs: {}
+    ZeroCachedCenterXY:
+      inputs: {}
+      outputs: {}
 POIFrame:
   fields: {}
   inherits: {}
@@ -2320,9 +2572,31 @@ QuestPOIFrame:
     Frame: {}
     POIFrame: {}
   methods:
-    GetNumTooltips: {}
-    GetTooltipIndex: {}
-    UpdateMouseOverTooltip: {}
+    GetNumTooltips:
+      inputs: {}
+      outputs:
+      - name: numObjectives
+        type: number
+    GetTooltipIndex:
+      inputs:
+      - name: index
+        type: number
+      outputs:
+      - name: objectiveIndex
+        type: number
+    UpdateMouseOverTooltip:
+      inputs:
+      - name: x
+        type: number
+      - name: y
+        type: number
+      outputs:
+      - name: questID
+        nilable: true
+        type: number
+      - name: numObjectives
+        nilable: true
+        type: number
 Region:
   fields:
     animationGroups:
@@ -2546,25 +2820,109 @@ Rotation:
   inherits:
     Animation: {}
   methods:
-    GetDegrees: {}
-    GetOrigin: {}
-    GetRadians: {}
-    SetDegrees: {}
-    SetOrigin: {}
-    SetRadians: {}
+    GetDegrees:
+      inputs: {}
+      outputs:
+      - name: angle
+        type: number
+    GetOrigin:
+      inputs: {}
+      outputs:
+      - name: point
+        type: FramePoint
+      - name: originX
+        type: number
+      - name: originY
+        type: number
+    GetRadians:
+      inputs: {}
+      outputs:
+      - name: angle
+        type: number
+    SetDegrees:
+      inputs:
+      - name: angle
+        type: number
+      outputs: {}
+    SetOrigin:
+      inputs:
+      - name: point
+        type: FramePoint
+      - name: originX
+        type: number
+      - name: originY
+        type: number
+      outputs: {}
+    SetRadians:
+      inputs:
+      - name: angle
+        type: number
+      outputs: {}
 Scale:
   fields: {}
   inherits:
     Animation: {}
   methods:
-    GetOrigin: {}
-    GetScale: {}
-    GetScaleFrom: {}
-    GetScaleTo: {}
-    SetOrigin: {}
-    SetScale: {}
-    SetScaleFrom: {}
-    SetScaleTo: {}
+    GetOrigin:
+      inputs: {}
+      outputs:
+      - name: point
+        type: FramePoint
+      - name: originX
+        type: number
+      - name: originY
+        type: number
+    GetScale:
+      inputs: {}
+      outputs:
+      - name: scaleX
+        type: number
+      - name: scaleY
+        type: number
+    GetScaleFrom:
+      inputs: {}
+      outputs:
+      - name: scaleX
+        type: number
+      - name: scaleY
+        type: number
+    GetScaleTo:
+      inputs: {}
+      outputs:
+      - name: scaleX
+        type: number
+      - name: scaleY
+        type: number
+    SetOrigin:
+      inputs:
+      - name: point
+        type: FramePoint
+      - name: originX
+        type: number
+      - name: originY
+        type: number
+      outputs: {}
+    SetScale:
+      inputs:
+      - name: scaleX
+        type: number
+      - name: scaleY
+        type: number
+      outputs: {}
+    SetScaleFrom:
+      inputs:
+      - name: scaleX
+        type: number
+      - name: scaleY
+        type: number
+      outputs: {}
+    SetScaleTo:
+      inputs:
+      - name: scaleX
+        type: number
+      - name: scaleY
+        type: number
+      outputs: {}
 ScriptObject:
   fields: {}
   inherits:
@@ -2630,12 +2988,35 @@ SimpleHTML:
     Frame: {}
   methods:
     GetContentHeight:
+      inputs: {}
       outputs:
-      - type: number
-    GetHyperlinkFormat: {}
-    GetTextData: {}
-    SetHyperlinkFormat: {}
-    SetText: {}
+      - name: height
+        type: number
+    GetHyperlinkFormat:
+      inputs: {}
+      outputs:
+      - name: format
+        type: string
+    GetTextData:
+      inputs: {}
+      outputs:
+      - name: content
+        type:
+          arrayof:
+            structure: HTMLContentNode
+    SetHyperlinkFormat:
+      inputs:
+      - name: format
+        type: string
+      outputs: {}
+    SetText:
+      inputs:
+      - name: text
+        type: string
+      - default: false
+        name: ignoreMarkup
+        type: boolean
+      outputs: {}
 Slider:
   fieldinitoverrides:
     mouseClickEnabled: true
@@ -2766,26 +3147,86 @@ TabardModel:
   inherits:
     PlayerModel: {}
   methods:
-    CanSaveTabardNow: {}
-    CycleVariation: {}
-    GetLowerBackgroundFileName: {}
-    GetLowerEmblemFileName: {}
-    GetLowerEmblemTexture: {}
-    GetUpperBackgroundFileName: {}
-    GetUpperEmblemFileName: {}
-    GetUpperEmblemTexture: {}
-    InitializeTabardColors: {}
-    IsGuildTabard: {}
-    Save: {}
+    CanSaveTabardNow:
+      inputs: {}
+      outputs:
+      - name: canSave
+        type: boolean
+    CycleVariation:
+      inputs:
+      - name: variationIndex
+        type: number
+      - name: delta
+        type: number
+      outputs: {}
+    GetLowerBackgroundFileName:
+      inputs: {}
+      outputs:
+      - name: path
+        type: string
+    GetLowerEmblemFileName:
+      inputs: {}
+      outputs:
+      - name: path
+        type: string
+    GetLowerEmblemTexture:
+      inputs:
+      - name: texture
+        type: Texture
+      outputs: {}
+    GetUpperBackgroundFileName:
+      inputs: {}
+      outputs:
+      - name: path
+        type: string
+    GetUpperEmblemFileName:
+      inputs: {}
+      outputs:
+      - name: path
+        type: string
+    GetUpperEmblemTexture:
+      inputs:
+      - name: texture
+        type: Texture
+      outputs: {}
+    InitializeTabardColors:
+      inputs: {}
+      outputs: {}
+    IsGuildTabard:
+      inputs: {}
+      outputs:
+      - name: isGuildTabard
+        type: boolean
+    Save:
+      inputs: {}
+      outputs: {}
 Texture:
   fields: {}
   inherits:
     TextureBase: {}
   methods:
-    AddMaskTexture: {}
-    GetMaskTexture: {}
-    GetNumMaskTextures: {}
-    RemoveMaskTexture: {}
+    AddMaskTexture:
+      inputs:
+      - name: mask
+        type: table
+      outputs: {}
+    GetMaskTexture:
+      inputs:
+      - name: index
+        type: number
+      outputs:
+      - name: mask
+        type: table
+    GetNumMaskTextures:
+      inputs: {}
+      outputs:
+      - name: count
+        type: number
+    RemoveMaskTexture:
+      inputs:
+      - name: mask
+        type: table
+      outputs: {}
 TextureBase:
   fields:
     blendMode:
@@ -2924,8 +3365,20 @@ Translation:
   inherits:
     Animation: {}
   methods:
-    GetOffset: {}
-    SetOffset: {}
+    GetOffset:
+      inputs: {}
+      outputs:
+      - name: offsetX
+        type: number
+      - name: offsetY
+        type: number
+    SetOffset:
+      inputs:
+      - name: offsetX
+        type: number
+      - name: offsetY
+        type: number
+      outputs: {}
 UIObject:
   fields:
     forbidden:
@@ -2954,24 +3407,134 @@ UnitPositionFrame:
   inherits:
     Frame: {}
   methods:
-    AddUnit: {}
-    ClearUnits: {}
-    FinalizeUnits: {}
-    GetMouseOverUnits: {}
-    GetPlayerPingScale: {}
-    GetUiMapID: {}
-    SetPlayerPingScale: {}
-    SetPlayerPingTexture: {}
-    SetUiMapID: {}
-    SetUnitColor: {}
-    StartPlayerPing: {}
-    StopPlayerPing: {}
+    AddUnit:
+      inputs:
+      - name: unitTokenString
+        type: string
+      - name: asset
+        type: string
+      - name: width
+        nilable: true
+        type: number
+      - name: height
+        nilable: true
+        type: number
+      - name: r
+        nilable: true
+        type: number
+      - name: g
+        nilable: true
+        type: number
+      - name: b
+        nilable: true
+        type: number
+      - name: a
+        nilable: true
+        type: number
+      - name: sublayer
+        nilable: true
+        type: number
+      - name: showFacing
+        nilable: true
+        type: boolean
+      outputs: {}
+    ClearUnits:
+      inputs: {}
+      outputs: {}
+    FinalizeUnits:
+      inputs: {}
+      outputs: {}
+    GetMouseOverUnits:
+      inputs: {}
+      outputs:
+      - name: units
+        type: string
+      outstride: 1
+    GetPlayerPingScale:
+      inputs: {}
+      outputs:
+      - name: scale
+        type: number
+    GetUiMapID:
+      inputs: {}
+      outputs:
+      - name: mapID
+        type: number
+    SetPlayerPingScale:
+      inputs:
+      - name: scale
+        type: number
+      outputs: {}
+    SetPlayerPingTexture:
+      inputs:
+      - name: textureType
+        type:
+          enum: PingTextureType
+      - name: asset
+        type: string
+      - default: 0
+        name: width
+        type: number
+      - default: 0
+        name: height
+        type: number
+      outputs: {}
+    SetUiMapID:
+      inputs:
+      - name: mapID
+        type: number
+      outputs: {}
+    SetUnitColor:
+      inputs:
+      - name: unit
+        type: string
+      - name: colorR
+        type: number
+      - name: colorG
+        type: number
+      - name: colorB
+        type: number
+      - name: colorA
+        type: number
+      outputs: {}
+    StartPlayerPing:
+      inputs:
+      - default: 0
+        name: duration
+        type: number
+      - default: 0
+        name: fadeDuration
+        type: number
+      outputs: {}
+    StopPlayerPing:
+      inputs: {}
+      outputs: {}
 VertexColor:
   fields: {}
   inherits:
     Animation: {}
   methods:
-    GetEndColor: {}
-    GetStartColor: {}
-    SetEndColor: {}
-    SetStartColor: {}
+    GetEndColor:
+      inputs: {}
+      outputs:
+      - name: color
+        type:
+          structure: colorRGBA
+    GetStartColor:
+      inputs: {}
+      outputs:
+      - name: color
+        type:
+          structure: colorRGBA
+    SetEndColor:
+      inputs:
+      - name: color
+        type:
+          structure: colorRGBA
+      outputs: {}
+    SetStartColor:
+      inputs:
+      - name: color
+        type:
+          structure: colorRGBA
+      outputs: {}

@@ -168,14 +168,3 @@ uiobject_methods:
   EditBox:
     Disable: {}
     Enable: {}
-uiobjects:
-  Actor: {}
-  Alpha: {}
-  Browser: {}
-  Checkout: {}
-  CinematicModel: {}
-  ControlPoint: {}
-  DressUpModel: {}
-  FlipBook: {}
-  FogOfWarFrame: {}
-  Font: {}

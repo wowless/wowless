@@ -30,6 +30,12 @@ describe('structures', function()
           refty(pv.type)
         end
       end
+      for _, v in pairs(require('build.data.products.' .. p .. '.uiobjects')) do
+        for _, m in pairs(v.methods) do
+          reflist(m.inputs)
+          reflist(m.outputs)
+        end
+      end
       local actual = require('build.data.products.' .. p .. '.structures')
       local expected = {}
       local function close(ty)

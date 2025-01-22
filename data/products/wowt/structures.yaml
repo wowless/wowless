@@ -9455,6 +9455,14 @@ GuildTabardInfo:
       type: number
     emblemStyle:
       type: number
+HTMLContentNode:
+  fields:
+    align:
+      type: JustifyHorizontal
+    text:
+      type: string
+    type:
+      type: string
 ItemLocation:
   fields:
     bagID:
