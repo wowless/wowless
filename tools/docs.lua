@@ -419,20 +419,30 @@ local function rewriteUIObjects()
     local u = assert(uiobjects[k], 'unknown uiobject type ' .. k)
     for mk, mv in pairs(v) do
       local mm = u.methods[mk]
-      local inputs = insig(mv)
-      local outputs = outsig(mv, nil, mm)
-      local clean = mm and not (mm.impl or mm.getter or mm.setter)
-      for _, out in ipairs(outputs or {}) do
-        clean = clean and not unstubbable[out.type]
-      end
-      clean = clean and not (denylist[k] and denylist[k][mk])
-      if mm and (clean or deref(config, 'uiobjects', k) or deref(config, 'uiobject_methods', k, mk)) then
-        u.methods[mk] = {
-          impl = mm.impl,
-          inputs = inputs,
-          outputs = outputs,
-          outstride = stride(mv.Returns),
-        }
+      local mmv = {
+        impl = mm and mm.impl,
+        inputs = insig(mv),
+        outputs = outsig(mv, nil, mm),
+        outstride = stride(mv.Returns),
+      }
+      local okay = (function()
+        if not mm or mm.getter or mm.setter then
+          return
+        end
+        for _, out in ipairs(mmv.outputs) do
+          if unstubbable[out.type] then
+            return
+          end
+        end
+        if denylist[k] and denylist[k][mk] then
+          return
+        end
+        local cu = deref(config, 'uiobjects', k)
+        local cm = deref(config, 'uiobject_methods', k, mk)
+        return not mm.impl or cu or cm
+      end)()
+      if okay then
+        u.methods[mk] = mmv
       end
     end
   end
