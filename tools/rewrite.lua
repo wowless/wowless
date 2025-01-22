@@ -14,6 +14,25 @@ local function rewriteFile(ty, fn)
   end
 end
 
+local function rewriteTable(x, y)
+  for xk, xv in pairs(x) do
+    if type(xv) ~= 'table' then
+      y[xk] = xv
+    else
+      y[xk] = y[xk] or {}
+      rewriteTable(xv, y[xk])
+    end
+  end
+end
+
+local function rewriteFiles(z)
+  for zk, zv in pairs(z) do
+    rewriteFile(zk, function(_, t)
+      rewriteTable(zv, t)
+    end)
+  end
+end
+
 local function rewriteSpecs(fn)
   rewriteFile('apis', function(_, t)
     for _, api in pairs(t) do
@@ -50,5 +69,6 @@ end)()
 local fn = assert(loadfile(args.program))
 fn({
   file = rewriteFile,
+  files = rewriteFiles,
   specs = rewriteSpecs,
 })
