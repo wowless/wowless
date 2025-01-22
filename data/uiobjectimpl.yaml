@@ -63,6 +63,7 @@ ParentedObjectBase/ClearParentKey: {}
 ParentedObjectBase/GetParentKey: {}
 ParentedObjectBase/SetParentKey: {}
 Path/CreateControlPoint: {}
+Path/GetControlPoints: {}
 Region/ClearAllPoints: {}
 Region/CreateAnimationGroup: {}
 Region/GetAnimationGroups: {}

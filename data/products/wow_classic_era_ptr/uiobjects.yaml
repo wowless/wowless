@@ -3896,7 +3896,13 @@ Path:
       outputs:
       - name: point
         type: ControlPoint
-    GetControlPoints: {}
+    GetControlPoints:
+      impl: Path/GetControlPoints
+      inputs: {}
+      outputs:
+      - name: scriptObject
+        type: UIObject
+      outstride: 1
     GetCurveType:
       getter:
       - name: curveType
