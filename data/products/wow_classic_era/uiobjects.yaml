@@ -668,14 +668,36 @@ Checkout:
   inherits:
     Frame: {}
   methods:
-    CancelOpenCheckout: {}
-    ClearFocus: {}
-    CloseCheckout: {}
-    CopyExternalLink: {}
-    OpenCheckout: {}
-    OpenExternalLink: {}
-    SetFocus: {}
-    SetZoom: {}
+    CancelOpenCheckout:
+      inputs: {}
+      outputs: {}
+    ClearFocus:
+      inputs: {}
+      outputs: {}
+    CloseCheckout:
+      inputs: {}
+      outputs: {}
+    CopyExternalLink:
+      inputs: {}
+      outputs: {}
+    OpenCheckout:
+      inputs:
+      - name: checkoutID
+        type: number
+      outputs:
+      - name: wasOpened
+        type: boolean
+    OpenExternalLink:
+      inputs: {}
+      outputs: {}
+    SetFocus:
+      inputs: {}
+      outputs: {}
+    SetZoom:
+      inputs:
+      - name: zoomLevel
+        type: number
+      outputs: {}
   objectType: BlizzardCheckout
 CinematicModel:
   fields: {}
