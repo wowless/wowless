@@ -108,6 +108,22 @@ describe('uiobjects', function()
                       end
                     end)
                   end
+                  it('either all have names or none have names', function()
+                    local named = 0
+                    for _, input in ipairs(mv.inputs or {}) do
+                      named = named + (input.name and 1 or 0)
+                    end
+                    assert.True(named == 0 or named == #mv.inputs)
+                  end)
+                  it('are uniquely named', function()
+                    local names = {}
+                    for _, input in ipairs(mv.inputs or {}) do
+                      if input.name then
+                        assert.Nil(names[input.name])
+                        names[input.name] = true
+                      end
+                    end
+                  end)
                 end)
                 describe('outputs', function()
                   for i, output in ipairs(mv.outputs or {}) do
@@ -119,6 +135,22 @@ describe('uiobjects', function()
                       end
                     end)
                   end
+                  it('either all have names or none have names', function()
+                    local named = 0
+                    for _, output in ipairs(mv.outputs or {}) do
+                      named = named + (output.name and 1 or 0)
+                    end
+                    assert.True(named == 0 or named == #mv.outputs)
+                  end)
+                  it('are uniquely named', function()
+                    local names = {}
+                    for _, output in ipairs(mv.outputs or {}) do
+                      if output.name then
+                        assert.Nil(names[output.name])
+                        names[output.name] = true
+                      end
+                    end
+                  end)
                 end)
                 describe('outstride', function()
                   it('is less than or equal to number of outputs', function()
