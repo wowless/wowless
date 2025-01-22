@@ -99,8 +99,8 @@ describe('uiobjects', function()
                   end
                 end)
                 describe('inputs', function()
-                  for i, input in ipairs(mv.inputs or {}) do
-                    describe(input.name or i, function()
+                  for _, input in ipairs(mv.inputs or {}) do
+                    describe(input.name, function()
                       if input.default ~= nil then
                         it('has default of the right type', function()
                           typecheck(input, input.default)
@@ -108,20 +108,11 @@ describe('uiobjects', function()
                       end
                     end)
                   end
-                  it('either all have names or none have names', function()
-                    local named = 0
-                    for _, input in ipairs(mv.inputs or {}) do
-                      named = named + (input.name and 1 or 0)
-                    end
-                    assert.True(named == 0 or named == #mv.inputs)
-                  end)
                   it('are uniquely named', function()
                     local names = {}
                     for _, input in ipairs(mv.inputs or {}) do
-                      if input.name then
-                        assert.Nil(names[input.name])
-                        names[input.name] = true
-                      end
+                      assert.Nil(names[input.name])
+                      names[input.name] = true
                     end
                   end)
                 end)

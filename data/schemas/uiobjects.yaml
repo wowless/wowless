@@ -70,6 +70,7 @@ type:
                               type:
                                 schema: any
                             name:
+                              required: true
                               type: string
                             nilable:
                               type: boolean
