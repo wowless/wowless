@@ -171,3 +171,4 @@ uiobject_methods:
 uiobjects:
   Actor: {}
   Alpha: {}
+  Browser: {}

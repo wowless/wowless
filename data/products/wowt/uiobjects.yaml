@@ -626,19 +626,53 @@ Browser:
   inherits:
     Frame: {}
   methods:
-    ClearFocus: {}
-    CopyExternalLink: {}
-    DeleteCookies: {}
-    NavigateBack: {}
-    NavigateForward: {}
-    NavigateHome: {}
-    NavigateReload: {}
-    NavigateStop: {}
-    NavigateTo: {}
-    OpenExternalLink: {}
-    OpenTicket: {}
-    SetFocus: {}
-    SetZoom: {}
+    ClearFocus:
+      inputs: {}
+      outputs: {}
+    CopyExternalLink:
+      inputs: {}
+      outputs: {}
+    DeleteCookies:
+      inputs: {}
+      outputs: {}
+    NavigateBack:
+      inputs: {}
+      outputs: {}
+    NavigateForward:
+      inputs: {}
+      outputs: {}
+    NavigateHome:
+      inputs:
+      - name: urlType
+        type: string
+      outputs: {}
+    NavigateReload:
+      inputs: {}
+      outputs: {}
+    NavigateStop:
+      inputs: {}
+      outputs: {}
+    NavigateTo:
+      inputs:
+      - name: url
+        type: string
+      outputs: {}
+    OpenExternalLink:
+      inputs: {}
+      outputs: {}
+    OpenTicket:
+      inputs:
+      - name: index
+        type: number
+      outputs: {}
+    SetFocus:
+      inputs: {}
+      outputs: {}
+    SetZoom:
+      inputs:
+      - name: zoom
+        type: number
+      outputs: {}
 Button:
   fieldinitoverrides:
     mouseClickEnabled: true
