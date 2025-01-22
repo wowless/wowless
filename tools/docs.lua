@@ -423,9 +423,9 @@ local function rewriteUIObjects()
     local u = assert(uiobjects[k], 'unknown uiobject type ' .. k)
     for mk, mv in pairs(v) do
       local mm = u.methods[mk]
-      if deref(config, 'uiobject_methods', k, mk) then
+      if mm and (deref(config, 'uiobjects', k) or deref(config, 'uiobject_methods', k, mk)) then
         u.methods[mk] = {
-          impl = mm and mm.impl,
+          impl = mm.impl,
           inputs = mv.inputs,
           outputs = mv.outputs,
           outstride = mv.outstride,

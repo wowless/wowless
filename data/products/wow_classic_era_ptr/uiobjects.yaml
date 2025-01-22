@@ -6,40 +6,251 @@ Actor:
     RegionBase: {}
     ScriptObjectBase: {}
   methods:
-    ClearModel: {}
-    GetActiveBoundingBox: {}
-    GetAnimation: {}
-    GetAnimationBlendOperation: {}
-    GetAnimationVariation: {}
-    GetDesaturation: {}
-    GetMaxBoundingBox: {}
-    GetModelFileID: {}
-    GetModelPath: {}
-    GetModelUnitGUID: {}
-    GetParticleOverrideScale: {}
-    GetPitch: {}
-    GetPosition: {}
-    GetRoll: {}
-    GetSpellVisualKit: {}
-    GetYaw: {}
-    IsLoaded: {}
-    IsUsingCenterForOrigin: {}
-    PlayAnimationKit: {}
-    SetAnimation: {}
-    SetAnimationBlendOperation: {}
-    SetDesaturation: {}
-    SetModelByCreatureDisplayID: {}
-    SetModelByFileID: {}
-    SetModelByPath: {}
-    SetModelByUnit: {}
-    SetParticleOverrideScale: {}
-    SetPitch: {}
-    SetPosition: {}
-    SetRoll: {}
-    SetSpellVisualKit: {}
-    SetUseCenterForOrigin: {}
-    SetYaw: {}
-    StopAnimationKit: {}
+    ClearModel:
+      inputs: {}
+      outputs: {}
+    GetActiveBoundingBox:
+      inputs: {}
+      outputs:
+      - name: boxBottom
+        type:
+          structure: vector3
+      - name: boxTop
+        type:
+          structure: vector3
+    GetAnimation:
+      inputs: {}
+      outputs:
+      - name: animation
+        type: number
+    GetAnimationBlendOperation:
+      inputs: {}
+      outputs:
+      - name: blendOp
+        type:
+          enum: ModelBlendOperation
+    GetAnimationVariation:
+      inputs: {}
+      outputs:
+      - name: variation
+        type: number
+    GetDesaturation:
+      inputs: {}
+      outputs:
+      - name: strength
+        type: number
+    GetMaxBoundingBox:
+      inputs: {}
+      outputs:
+      - name: boxBottom
+        type:
+          structure: vector3
+      - name: boxTop
+        type:
+          structure: vector3
+    GetModelFileID:
+      inputs: {}
+      outputs:
+      - name: file
+        type: number
+    GetModelPath:
+      inputs: {}
+      outputs:
+      - name: path
+        type: string
+    GetModelUnitGUID:
+      inputs: {}
+      outputs:
+      - name: guid
+        type: string
+    GetParticleOverrideScale:
+      inputs: {}
+      outputs:
+      - name: scale
+        nilable: true
+        type: number
+    GetPitch:
+      inputs: {}
+      outputs:
+      - name: pitch
+        type: number
+    GetPosition:
+      inputs: {}
+      outputs:
+      - name: positionX
+        type: number
+      - name: positionY
+        type: number
+      - name: positionZ
+        type: number
+    GetRoll:
+      inputs: {}
+      outputs:
+      - name: roll
+        type: number
+    GetSpellVisualKit:
+      inputs: {}
+      outputs:
+      - name: spellVisualKitID
+        type: number
+    GetYaw:
+      inputs: {}
+      outputs:
+      - name: yaw
+        type: number
+    IsLoaded:
+      inputs: {}
+      outputs:
+      - name: isLoaded
+        type: boolean
+    IsUsingCenterForOrigin:
+      inputs: {}
+      outputs:
+      - name: x
+        type: boolean
+      - name: y
+        type: boolean
+      - name: z
+        type: boolean
+    PlayAnimationKit:
+      inputs:
+      - name: animationKit
+        type: number
+      - default: false
+        name: isLooping
+        type: boolean
+      outputs: {}
+    SetAnimation:
+      inputs:
+      - name: animation
+        type: number
+      - name: variation
+        nilable: true
+        type: number
+      - default: 1
+        name: animSpeed
+        type: number
+      - default: 0
+        name: animOffsetSeconds
+        type: number
+      outputs: {}
+    SetAnimationBlendOperation:
+      inputs:
+      - name: blendOp
+        type:
+          enum: ModelBlendOperation
+      outputs: {}
+    SetDesaturation:
+      inputs:
+      - name: strength
+        type: number
+      outputs: {}
+    SetModelByCreatureDisplayID:
+      inputs:
+      - name: creatureDisplayID
+        type: number
+      - default: false
+        name: useActivePlayerCustomizations
+        type: boolean
+      outputs:
+      - name: success
+        type: boolean
+    SetModelByFileID:
+      inputs:
+      - name: asset
+        type: string
+      - default: false
+        name: useMips
+        type: boolean
+      outputs:
+      - name: success
+        type: boolean
+    SetModelByPath:
+      inputs:
+      - name: asset
+        type: string
+      - default: false
+        name: useMips
+        type: boolean
+      outputs:
+      - name: success
+        type: boolean
+    SetModelByUnit:
+      inputs:
+      - name: unit
+        type: unit
+      - default: false
+        name: sheatheWeapons
+        type: boolean
+      - default: true
+        name: autoDress
+        type: boolean
+      - default: false
+        name: hideWeapons
+        type: boolean
+      - default: true
+        name: usePlayerNativeForm
+        type: boolean
+      - default: false
+        name: holdBowString
+        type: boolean
+      outputs:
+      - name: success
+        type: boolean
+    SetParticleOverrideScale:
+      inputs:
+      - name: scale
+        nilable: true
+        type: number
+      outputs: {}
+    SetPitch:
+      inputs:
+      - name: pitch
+        type: number
+      outputs: {}
+    SetPosition:
+      inputs:
+      - name: positionX
+        type: number
+      - name: positionY
+        type: number
+      - name: positionZ
+        type: number
+      outputs: {}
+    SetRoll:
+      inputs:
+      - name: roll
+        type: number
+      outputs: {}
+    SetSpellVisualKit:
+      inputs:
+      - default: 0
+        name: spellVisualKitID
+        type: number
+      - default: false
+        name: oneShot
+        type: boolean
+      outputs: {}
+    SetUseCenterForOrigin:
+      inputs:
+      - default: false
+        name: x
+        type: boolean
+      - default: false
+        name: y
+        type: boolean
+      - default: false
+        name: z
+        type: boolean
+      outputs: {}
+    SetYaw:
+      inputs:
+      - name: yaw
+        type: number
+      outputs: {}
+    StopAnimationKit:
+      inputs: {}
+      outputs: {}
   objectType: ModelSceneActor
 Alpha:
   fields: {}

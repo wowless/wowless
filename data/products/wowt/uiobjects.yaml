@@ -6,70 +6,464 @@ Actor:
     RegionBase: {}
     ScriptObjectBase: {}
   methods:
-    AttachToMount: {}
-    CalculateMountScale: {}
-    ClearModel: {}
-    Dress: {}
-    DressPlayerSlot: {}
-    GetActiveBoundingBox: {}
-    GetAnimation: {}
-    GetAnimationBlendOperation: {}
-    GetAnimationVariation: {}
-    GetAutoDress: {}
-    GetDesaturation: {}
-    GetItemTransmogInfo: {}
-    GetItemTransmogInfoList: {}
-    GetMaxBoundingBox: {}
-    GetModelFileID: {}
-    GetModelPath: {}
-    GetModelUnitGUID: {}
-    GetObeyHideInTransmogFlag: {}
-    GetParticleOverrideScale: {}
-    GetPaused: {}
-    GetPitch: {}
-    GetPosition: {}
-    GetRoll: {}
-    GetSheathed: {}
-    GetSpellVisualKit: {}
-    GetUseTransmogChoices: {}
-    GetUseTransmogSkin: {}
-    GetYaw: {}
-    IsGeoReady: {}
-    IsLoaded: {}
-    IsSlotAllowed: {}
-    IsSlotVisible: {}
-    IsUsingCenterForOrigin: {}
-    PlayAnimationKit: {}
-    ReleaseFrontEndCharacterDisplays: {}
-    ResetNextHandSlot: {}
-    SetAnimation: {}
-    SetAnimationBlendOperation: {}
-    SetAutoDress: {}
-    SetDesaturation: {}
-    SetFrontEndLobbyModelFromDefaultCharacterDisplay: {}
-    SetItemTransmogInfo: {}
-    SetModelByCreatureDisplayID: {}
-    SetModelByFileID: {}
-    SetModelByHyperlink: {}
-    SetModelByPath: {}
-    SetModelByUnit: {}
-    SetObeyHideInTransmogFlag: {}
-    SetParticleOverrideScale: {}
-    SetPaused: {}
-    SetPitch: {}
-    SetPlayerModelFromGlues: {}
-    SetPosition: {}
-    SetRoll: {}
-    SetSheathed: {}
-    SetSpellVisualKit: {}
-    SetUseCenterForOrigin: {}
-    SetUseTransmogChoices: {}
-    SetUseTransmogSkin: {}
-    SetYaw: {}
-    StopAnimationKit: {}
-    TryOn: {}
-    Undress: {}
-    UndressSlot: {}
+    AttachToMount:
+      inputs:
+      - name: rider
+        type: Actor
+      - name: animation
+        type: number
+      - name: spellKitVisualID
+        nilable: true
+        type: number
+      outputs:
+      - name: success
+        type: boolean
+    CalculateMountScale:
+      inputs:
+      - name: rider
+        type: Actor
+      outputs:
+      - name: scale
+        type: number
+    ClearModel:
+      inputs: {}
+      outputs: {}
+    Dress:
+      inputs: {}
+      outputs: {}
+    DressPlayerSlot:
+      inputs:
+      - name: invSlot
+        type: number
+      outputs: {}
+    GetActiveBoundingBox:
+      inputs: {}
+      outputs:
+      - name: boxBottom
+        type:
+          structure: vector3
+      - name: boxTop
+        type:
+          structure: vector3
+    GetAnimation:
+      inputs: {}
+      outputs:
+      - name: animation
+        type: number
+    GetAnimationBlendOperation:
+      inputs: {}
+      outputs:
+      - name: blendOp
+        type:
+          enum: ModelBlendOperation
+    GetAnimationVariation:
+      inputs: {}
+      outputs:
+      - name: variation
+        type: number
+    GetAutoDress:
+      inputs: {}
+      outputs:
+      - name: autoDress
+        type: boolean
+    GetDesaturation:
+      inputs: {}
+      outputs:
+      - name: strength
+        type: number
+    GetItemTransmogInfo:
+      inputs:
+      - name: inventorySlots
+        type: number
+      outputs:
+      - name: itemTransmogInfo
+        nilable: true
+        type:
+          structure: ItemTransmogInfo
+    GetItemTransmogInfoList:
+      inputs: {}
+      outputs:
+      - name: infoList
+        type:
+          arrayof:
+            structure: ItemTransmogInfo
+    GetMaxBoundingBox:
+      inputs: {}
+      outputs:
+      - name: boxBottom
+        type:
+          structure: vector3
+      - name: boxTop
+        type:
+          structure: vector3
+    GetModelFileID:
+      inputs: {}
+      outputs:
+      - name: file
+        type: number
+    GetModelPath:
+      inputs: {}
+      outputs:
+      - name: path
+        type: string
+    GetModelUnitGUID:
+      inputs: {}
+      outputs:
+      - name: guid
+        type: string
+    GetObeyHideInTransmogFlag:
+      inputs: {}
+      outputs:
+      - name: obey
+        type: boolean
+    GetParticleOverrideScale:
+      inputs: {}
+      outputs:
+      - name: scale
+        nilable: true
+        type: number
+    GetPaused:
+      inputs: {}
+      outputs:
+      - name: paused
+        type: boolean
+      - name: globalPaused
+        type: boolean
+    GetPitch:
+      inputs: {}
+      outputs:
+      - name: pitch
+        type: number
+    GetPosition:
+      inputs: {}
+      outputs:
+      - name: positionX
+        type: number
+      - name: positionY
+        type: number
+      - name: positionZ
+        type: number
+    GetRoll:
+      inputs: {}
+      outputs:
+      - name: roll
+        type: number
+    GetSheathed:
+      inputs: {}
+      outputs:
+      - name: sheathed
+        type: boolean
+    GetSpellVisualKit:
+      inputs: {}
+      outputs:
+      - name: spellVisualKitID
+        type: number
+    GetUseTransmogChoices:
+      inputs: {}
+      outputs:
+      - name: use
+        type: boolean
+    GetUseTransmogSkin:
+      inputs: {}
+      outputs:
+      - name: use
+        type: boolean
+    GetYaw:
+      inputs: {}
+      outputs:
+      - name: yaw
+        type: number
+    IsGeoReady:
+      inputs: {}
+      outputs:
+      - name: isReady
+        type: boolean
+    IsLoaded:
+      inputs: {}
+      outputs:
+      - name: isLoaded
+        type: boolean
+    IsSlotAllowed:
+      inputs:
+      - name: inventorySlots
+        type: number
+      outputs:
+      - name: allowed
+        type: boolean
+    IsSlotVisible:
+      inputs:
+      - name: inventorySlots
+        type: number
+      outputs:
+      - name: visible
+        type: boolean
+    IsUsingCenterForOrigin:
+      inputs: {}
+      outputs:
+      - name: x
+        type: boolean
+      - name: y
+        type: boolean
+      - name: z
+        type: boolean
+    PlayAnimationKit:
+      inputs:
+      - name: animationKit
+        type: number
+      - default: false
+        name: isLooping
+        type: boolean
+      outputs: {}
+    ReleaseFrontEndCharacterDisplays:
+      inputs: {}
+      outputs:
+      - name: success
+        type: boolean
+    ResetNextHandSlot:
+      inputs: {}
+      outputs: {}
+    SetAnimation:
+      inputs:
+      - name: animation
+        type: number
+      - name: variation
+        nilable: true
+        type: number
+      - default: 1
+        name: animSpeed
+        type: number
+      - default: 0
+        name: animOffsetSeconds
+        type: number
+      outputs: {}
+    SetAnimationBlendOperation:
+      inputs:
+      - name: blendOp
+        type:
+          enum: ModelBlendOperation
+      outputs: {}
+    SetAutoDress:
+      inputs:
+      - name: autoDress
+        type: boolean
+      outputs: {}
+    SetDesaturation:
+      inputs:
+      - name: strength
+        type: number
+      outputs: {}
+    SetFrontEndLobbyModelFromDefaultCharacterDisplay:
+      inputs:
+      - name: characterIndex
+        type: number
+      outputs:
+      - name: success
+        type: boolean
+    SetItemTransmogInfo:
+      inputs:
+      - name: transmogInfo
+        type:
+          structure: ItemTransmogInfo
+      - name: inventorySlots
+        nilable: true
+        type: number
+      - default: false
+        name: ignoreChildItems
+        type: boolean
+      outputs:
+      - name: result
+        type:
+          enum: ItemTryOnReason
+    SetModelByCreatureDisplayID:
+      inputs:
+      - name: creatureDisplayID
+        type: number
+      - default: false
+        name: useActivePlayerCustomizations
+        type: boolean
+      outputs:
+      - name: success
+        type: boolean
+    SetModelByFileID:
+      inputs:
+      - name: asset
+        type: string
+      - default: false
+        name: useMips
+        type: boolean
+      outputs:
+      - name: success
+        type: boolean
+    SetModelByHyperlink:
+      inputs:
+      - name: link
+        type: string
+      outputs:
+      - name: success
+        type: boolean
+    SetModelByPath:
+      inputs:
+      - name: asset
+        type: string
+      - default: false
+        name: useMips
+        type: boolean
+      outputs:
+      - name: success
+        type: boolean
+    SetModelByUnit:
+      inputs:
+      - name: unit
+        type: unit
+      - default: false
+        name: sheatheWeapons
+        type: boolean
+      - default: true
+        name: autoDress
+        type: boolean
+      - default: false
+        name: hideWeapons
+        type: boolean
+      - default: true
+        name: usePlayerNativeForm
+        type: boolean
+      - default: false
+        name: holdBowString
+        type: boolean
+      outputs:
+      - name: success
+        type: boolean
+    SetObeyHideInTransmogFlag:
+      inputs:
+      - name: obey
+        type: boolean
+      outputs: {}
+    SetParticleOverrideScale:
+      inputs:
+      - name: scale
+        nilable: true
+        type: number
+      outputs: {}
+    SetPaused:
+      inputs:
+      - name: paused
+        type: boolean
+      - default: true
+        name: affectsGlobalPause
+        type: boolean
+      outputs: {}
+    SetPitch:
+      inputs:
+      - name: pitch
+        type: number
+      outputs: {}
+    SetPlayerModelFromGlues:
+      inputs:
+      - name: characterIndex
+        nilable: true
+        type: number
+      - default: false
+        name: sheatheWeapons
+        type: boolean
+      - default: true
+        name: autoDress
+        type: boolean
+      - default: false
+        name: hideWeapons
+        type: boolean
+      - default: true
+        name: usePlayerNativeForm
+        type: boolean
+      outputs:
+      - name: success
+        type: boolean
+    SetPosition:
+      inputs:
+      - name: positionX
+        type: number
+      - name: positionY
+        type: number
+      - name: positionZ
+        type: number
+      outputs: {}
+    SetRoll:
+      inputs:
+      - name: roll
+        type: number
+      outputs: {}
+    SetSheathed:
+      inputs:
+      - name: sheathed
+        type: boolean
+      - default: false
+        name: hidden
+        type: boolean
+      outputs: {}
+    SetSpellVisualKit:
+      inputs:
+      - default: 0
+        name: spellVisualKitID
+        type: number
+      - default: false
+        name: oneShot
+        type: boolean
+      outputs: {}
+    SetUseCenterForOrigin:
+      inputs:
+      - default: false
+        name: x
+        type: boolean
+      - default: false
+        name: y
+        type: boolean
+      - default: false
+        name: z
+        type: boolean
+      outputs: {}
+    SetUseTransmogChoices:
+      inputs:
+      - name: use
+        type: boolean
+      outputs: {}
+    SetUseTransmogSkin:
+      inputs:
+      - name: use
+        type: boolean
+      outputs: {}
+    SetYaw:
+      inputs:
+      - name: yaw
+        type: number
+      outputs: {}
+    StopAnimationKit:
+      inputs: {}
+      outputs: {}
+    TryOn:
+      inputs:
+      - name: itemLinkOrItemModifiedAppearanceID
+        type: string
+      - name: handSlotName
+        nilable: true
+        type: string
+      - default: 0
+        name: spellEnchantmentID
+        type: number
+      outputs:
+      - name: reason
+        nilable: true
+        type:
+          enum: ItemTryOnReason
+    Undress:
+      inputs:
+      - default: true
+        name: includeWeapons
+        type: boolean
+      outputs: {}
+    UndressSlot:
+      inputs:
+      - name: inventorySlots
+        type: number
+      outputs: {}
   objectType: ModelSceneActor
 Alpha:
   fields: {}
