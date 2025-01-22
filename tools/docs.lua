@@ -429,9 +429,11 @@ local function rewriteUIObjects()
         if not mm or mm.getter or mm.setter then
           return
         end
-        for _, out in ipairs(mmv.outputs) do
-          if unstubbable[out.type] then
-            return
+        if not mm.impl then
+          for _, out in ipairs(mmv.outputs) do
+            if unstubbable[out.type] then
+              return
+            end
           end
         end
         if denylist[k] and denylist[k][mk] then
