@@ -193,6 +193,10 @@ local function stride(ts)
   return n > 0 and n or nil
 end
 
+local function default(x)
+  return enum[x.Type] and enum[x.Type][x.Default] or x.Default
+end
+
 -- Super duper hack, sorry world.
 local unitHacks = {
   UnitFactionGroup = 'unitName',
@@ -221,7 +225,7 @@ local function insig(fn, ns)
       })
     else
       table.insert(t, {
-        default = enum[a.Type] and enum[a.Type][a.Default] or a.Default,
+        default = default(a),
         name = a.Name,
         nilable = a.Nilable or nil,
         type = t2nty(a, ns),
@@ -244,7 +248,7 @@ local function outsig(fn, ns, api)
   for _, r in ipairs(fn.Returns or {}) do
     local ty = t2nty(r, ns)
     table.insert(outputs, {
-      default = enum[r.Type] and enum[r.Type][r.Default] or r.Default,
+      default = default(r),
       name = r.Name,
       nilable = (r.Nilable or fn.Name == 'UnitName') and ty ~= 'nil' or nil, -- horrible hack
       stub = stubs[r.Name],
@@ -329,7 +333,7 @@ local function rewriteStructures(outApis, outEvents, outUIObjects)
         local ret = {}
         for _, f in ipairs(tab.Fields) do
           ret[f.Name] = {
-            default = enum[f.Type] and enum[f.Type][f.Default] or f.Default,
+            default = default(f),
             nilable = f.Nilable or nil,
             stub = deref(structures, name, 'fields', f.Name, 'stub'),
             type = t2nty(f, ns),
