@@ -105,7 +105,7 @@ typedefs:
   ScriptRegion: table
   SimpleAnim: Animation
   SimpleAnimGroup: table
-  SimpleControlPoint: table
+  SimpleControlPoint: ControlPoint
   SimpleFont: table
   SimpleFontString: table
   SimpleFrame: Frame
@@ -150,6 +150,7 @@ uiobject_methods:
     Disable: {}
     Enable: {}
 uiobjects:
+  Path: {}
   ScrollFrame: {}
   Slider: {}
   UIObject: {}
