@@ -155,3 +155,4 @@ uiobjects:
   Browser: {}
   Checkout: {}
   CinematicModel: {}
+  ControlPoint: {}

@@ -876,10 +876,30 @@ ControlPoint:
   inherits:
     ParentedObject: {}
   methods:
-    GetOffset: {}
-    GetOrder: {}
-    SetOffset: {}
-    SetOrder: {}
+    GetOffset:
+      inputs: {}
+      outputs:
+      - name: offsetX
+        type: number
+      - name: offsetY
+        type: number
+    GetOrder:
+      inputs: {}
+      outputs:
+      - name: order
+        type: number
+    SetOffset:
+      inputs:
+      - name: offsetX
+        type: number
+      - name: offsetY
+        type: number
+      outputs: {}
+    SetOrder:
+      inputs:
+      - name: order
+        type: number
+      outputs: {}
 Cooldown:
   fields:
     blingTexture:
