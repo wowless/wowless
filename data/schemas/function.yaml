@@ -1,0 +1,54 @@
+---
+name: function
+type:
+  record:
+    comment:
+      type: string
+    impl:
+      type:
+        ref: impl
+    inputs:
+      type:
+        sequenceof:
+          record:
+            default:
+              type:
+                schema: any
+            name:
+              type: string
+            nilable:
+              type: boolean
+            type:
+              required: true
+              type:
+                schema: type
+    mayreturnnothing:
+      type: boolean
+    nowrap:
+      type: boolean
+    outputs:
+      type:
+        sequenceof:
+          record:
+            default:
+              type:
+                schema: any
+            name:
+              type: string
+            nilable:
+              type: boolean
+            stub:
+              type:
+                schema: any
+            stubnotnil:
+              type: boolean
+            type:
+              required: true
+              type:
+                schema: type
+    outstride:
+      type: number
+    stubnothing:
+      type: boolean
+    stuboutstrides:
+      type: number

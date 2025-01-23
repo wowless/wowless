@@ -8,6 +8,7 @@ local lfs = require('lfs')
 local writeifchanged = require('tools.util').writeifchanged
 local parseYaml = require('wowapi.yaml').parseFile
 local pprintYaml = require('wowapi.yaml').pprint
+local tableeq = require('pl.tablex').deepcompare
 local product = args.product
 
 local function deref(t, ...)
@@ -274,7 +275,7 @@ local function outsig(fn, ns, api)
       table.insert(outputs, {
         default = default(r),
         name = r.Name,
-        nilable = (r.Nilable or fn.Name == 'UnitName') and ty ~= 'nil' or nil, -- horrible hack
+        nilable = r.Nilable and ty ~= 'nil' or nil, -- horrible hack
         stub = stubs[r.Name],
         stubnotnil = stubnotnils[r.Name],
         type = ty,
@@ -301,7 +302,7 @@ local function rewriteApis()
     if not deref(config, 'skip_apis', name) then
       local ns = split(name)
       local api = apis[name]
-      apis[name] = {
+      local newapi = {
         impl = api and api.impl,
         inputs = insig(fn, ns),
         mayreturnnothing = api and api.mayreturnnothing,
@@ -310,6 +311,12 @@ local function rewriteApis()
         stubnothing = api and api.stubnothing,
         stuboutstrides = api and api.stuboutstrides,
       }
+      local lie = deref(config, 'lies', 'apis', name)
+      if lie then
+        assert(tableeq(lie, newapi), 'lie mismatch on ' .. name)
+      else
+        apis[name] = newapi
+      end
     end
   end
   writeifchanged(f, y.pprint(apis))

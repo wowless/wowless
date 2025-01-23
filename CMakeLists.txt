@@ -1100,6 +1100,7 @@ list(
   doctable
   events
   flavors
+  function
   globals
   impl
   products

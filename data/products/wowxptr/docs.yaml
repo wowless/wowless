@@ -2,6 +2,18 @@
 events:
   never_sent:
     SECURE_TRANSFER_CONFIRM_SEND_MAIL: {}
+lies:
+  apis:
+    UnitName:
+      impl: UnitName
+      inputs:
+      - name: unit
+        type: unit
+      outputs:
+      - name: unitName
+        type: string
+      - name: unitServer
+        type: string
 script_objects:
   FrameAPIArchaeologyDigSiteFrame: ArchaeologyDigSiteFrame
   FrameAPIBlob: POIFrame

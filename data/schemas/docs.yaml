@@ -12,6 +12,15 @@ type:
                   ref: event
                 value:
                   record: null
+    lies:
+      type:
+        record:
+          apis:
+            type:
+              mapof:
+                key: string
+                value:
+                  schema: function
     script_objects:
       type:
         mapof:
