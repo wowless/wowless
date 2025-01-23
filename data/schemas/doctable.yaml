@@ -85,6 +85,8 @@ type:
             Documentation:
               type:
                 sequenceof: string
+            MayReturnNothing:
+              type: boolean
             Name:
               required: true
               type: string

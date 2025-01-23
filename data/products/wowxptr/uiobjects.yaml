@@ -2155,6 +2155,13 @@ Font:
       outputs:
       - name: alpha
         type: number
+    GetFontObjectForAlphabet:
+      inputs:
+      - name: alphabet
+        type: string
+      outputs:
+      - name: font
+        type: table
     SetAlpha:
       inputs:
       - name: alpha

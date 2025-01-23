@@ -2232,11 +2232,10 @@ Enum:
     HasSomeReagents: 4
     IsFulfillable: 16
     IsRecraft: 1
-    None: 0
   CraftingOrderFlagsMeta:
     MaxValue: 16
-    MinValue: 0
-    NumValues: 6
+    MinValue: 1
+    NumValues: 5
   CraftingOrderItemType:
     CraftedResult: 2
     NpcProvided: 4

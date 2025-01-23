@@ -9326,6 +9326,16 @@ CraftingTargetItem:
       type: number
     quantity:
       type: number
+CreateFontFamilyMemberInfo:
+  fields:
+    alphabet:
+      type: string
+    file:
+      type: string
+    flags:
+      type: string
+    height:
+      type: number
 CurrencyCost:
   fields:
     amount:

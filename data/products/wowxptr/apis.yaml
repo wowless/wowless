@@ -25300,6 +25300,17 @@ CreateFont:
   outputs:
   - name: font
     type: Font
+CreateFontFamily:
+  inputs:
+  - name: name
+    type: string
+  - name: members
+    type:
+      arrayof:
+        structure: CreateFontFamilyMemberInfo
+  outputs:
+  - name: fontFamily
+    type: table
 CreateForbiddenFrame:
   impl: CreateForbiddenFrame
   inputs:

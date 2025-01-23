@@ -90,6 +90,7 @@ skip_docfiles:
   PingPinFrameAPIDocumentation: {}
   SimpleMapSceneAPIDocumentation: {}
   SimpleModelFFXAPIDocumentation: {}
+  WorldSafeLocsUIInternalDocumentation: {}
 typedefs:
   AnimationDataEnum: number
   ArtifactTiers: number
@@ -107,6 +108,7 @@ typedefs:
   FileAsset: string
   fileID: number
   FilterMode: string
+  FontAlphabet: string
   GarrisonFollower: string
   HTMLTextType: string
   IDOrLink: string
