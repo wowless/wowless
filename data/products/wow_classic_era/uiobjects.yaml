@@ -1013,6 +1013,12 @@ ColorSelect:
     mouseClickEnabled: true
     mouseMotionEnabled: true
   fields:
+    colorAlphaTexture:
+      nilable: true
+      type: Texture
+    colorAlphaThumbTexture:
+      nilable: true
+      type: Texture
     colorValueTexture:
       nilable: true
       type: Texture
@@ -1036,8 +1042,12 @@ ColorSelect:
       outputs:
       - name: alpha
         type: number
-    GetColorAlphaTexture: {}
-    GetColorAlphaThumbTexture: {}
+    GetColorAlphaTexture:
+      getter:
+      - name: colorAlphaTexture
+    GetColorAlphaThumbTexture:
+      getter:
+      - name: colorAlphaThumbTexture
     GetColorHSV:
       inputs: {}
       outputs:
@@ -1074,15 +1084,11 @@ ColorSelect:
         type: number
       outputs: {}
     SetColorAlphaTexture:
-      inputs:
-      - name: texture
-        type: Texture
-      outputs: {}
+      setter:
+      - name: colorAlphaTexture
     SetColorAlphaThumbTexture:
-      inputs:
-      - name: texture
-        type: string
-      outputs: {}
+      setter:
+      - name: colorAlphaThumbTexture
     SetColorHSV:
       inputs:
       - name: hsvX

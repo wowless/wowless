@@ -428,9 +428,6 @@ local function rewriteUIObjects()
   end
   local filename = ('data/products/%s/uiobjects.yaml'):format(product)
   local uiobjects = require('wowapi.yaml').parseFile(filename)
-  local unstubbable = {
-    Texture = true,
-  }
   for k, v in pairs(mapped) do
     local u = assert(uiobjects[k], 'unknown uiobject type ' .. k)
     for mk, mv in pairs(v) do
@@ -444,13 +441,6 @@ local function rewriteUIObjects()
       local okay = (function()
         if not mm or mm.getter or mm.setter then
           return
-        end
-        if not mm.impl then
-          for _, out in ipairs(mmv.outputs) do
-            if unstubbable[out.type] then
-              return
-            end
-          end
         end
         local cu = deref(config, 'uiobjects', k)
         local cm = deref(config, 'uiobject_methods', k, mk)
