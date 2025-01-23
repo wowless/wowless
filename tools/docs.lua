@@ -275,7 +275,7 @@ local function outsig(fn, ns, api)
       table.insert(outputs, {
         default = default(r),
         name = r.Name,
-        nilable = r.Nilable and ty ~= 'nil' or nil, -- horrible hack
+        nilable = r.Nilable and ty ~= 'nil' or nil,
         stub = stubs[r.Name],
         stubnotnil = stubnotnils[r.Name],
         type = ty,
