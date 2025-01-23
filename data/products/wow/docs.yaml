@@ -120,14 +120,14 @@ typedefs:
   ScriptObject: UIObject
   ScriptRegion: table
   SimpleAnim: Animation
-  SimpleAnimGroup: table
+  SimpleAnimGroup: AnimationGroup
   SimpleControlPoint: ControlPoint
   SimpleFont: table
   SimpleFontString: table
   SimpleFrame: Frame
-  SimpleLine: table
+  SimpleLine: Line
   SimpleMaskTexture: table
-  SimplePathAnim: table
+  SimplePathAnim: Path
   SimpleTexture: Texture
   SimpleWindow: nil
   SingleColorValue: number
