@@ -169,6 +169,7 @@ uiobject_methods:
     Disable: {}
     Enable: {}
 uiobjects:
+  Animation: {}
   Path: {}
   ScrollFrame: {}
   Slider: {}

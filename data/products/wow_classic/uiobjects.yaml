@@ -332,7 +332,12 @@ Animation:
     GetStartDelay:
       getter:
       - name: startDelay
-    GetTarget: {}
+    GetTarget:
+      impl: Animation/GetTarget
+      inputs: {}
+      outputs:
+      - name: target
+        type: UIObject
     IsDelaying:
       inputs: {}
       outputs:

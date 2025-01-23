@@ -430,7 +430,6 @@ local function rewriteUIObjects()
   local uiobjects = require('wowapi.yaml').parseFile(filename)
   local unstubbable = {
     Texture = true,
-    UIObject = true,
   }
   for k, v in pairs(mapped) do
     local u = assert(uiobjects[k], 'unknown uiobject type ' .. k)

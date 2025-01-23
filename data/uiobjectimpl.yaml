@@ -1,5 +1,6 @@
 ---
 Animation/GetRegionParent: {}
+Animation/GetTarget: {}
 AnimationGroup/CreateAnimation: {}
 AnimationGroup/GetAnimations: {}
 Button/Click: {}
