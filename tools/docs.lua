@@ -313,6 +313,7 @@ local function rewriteApis()
   local y = require('wowapi.yaml')
   local f = 'data/products/' .. product .. '/apis.yaml'
   local apis = y.parseFile(f)
+  local lies = deref(config, 'lies', 'apis') or {}
   for name, fn in pairs(funcs) do
     local ns = split(name)
     local api = apis[name]
@@ -325,12 +326,15 @@ local function rewriteApis()
       stubnothing = api and api.stubnothing,
       stuboutstrides = api and api.stuboutstrides,
     }
-    local lie = deref(config, 'lies', 'apis', name)
-    if lie then
-      assert(tableeq(lie, newapi), 'lie mismatch on ' .. name)
+    if lies[name] then
+      assert(tableeq(lies[name], newapi), 'lie mismatch on ' .. name)
+      lies[name] = nil
     else
       apis[name] = newapi
     end
+  end
+  if next(lies) then
+    error('not all lies were consumed: ' .. require('pl.pretty').write(lies))
   end
   writeifchanged(f, y.pprint(apis))
   return apis

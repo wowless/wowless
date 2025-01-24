@@ -5,17 +5,7 @@ events:
     PARTY_INVITE_CANCEL: {}
     SECURE_TRANSFER_CONFIRM_SEND_MAIL: {}
 lies:
-  apis:
-    UnitName:
-      impl: UnitName
-      inputs:
-      - name: unit
-        type: unit
-      outputs:
-      - name: unitName
-        type: string
-      - name: unitServer
-        type: string
+  apis: {}
 script_objects:
   FrameAPIArchaeologyDigSiteFrame: ArchaeologyDigSiteFrame
   FrameAPIBlob: QuestPOIFrame
