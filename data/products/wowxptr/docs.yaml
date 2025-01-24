@@ -14,6 +14,7 @@ lies:
         type: string
       - name: unitServer
         type: string
+mayreturnnothing: true
 script_objects:
   FrameAPIArchaeologyDigSiteFrame: ArchaeologyDigSiteFrame
   FrameAPIBlob: POIFrame

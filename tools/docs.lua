@@ -294,6 +294,21 @@ local function outsig(fn, ns, api)
   return outputs
 end
 
+local sawmayreturnnothing = false
+
+local function mayreturnnothing(fn, api)
+  sawmayreturnnothing = sawmayreturnnothing or fn.MayReturnNothing
+  local v = api and api.mayreturnnothing
+  if not config.mayreturnnothing then
+    return v
+  elseif fn.MayReturnNothing then
+    return true
+  elseif v then
+    print('mayreturnnothing problem on ' .. fn.Name)
+    return true
+  end
+end
+
 local function rewriteApis()
   local y = require('wowapi.yaml')
   local f = 'data/products/' .. product .. '/apis.yaml'
@@ -305,7 +320,7 @@ local function rewriteApis()
       local newapi = {
         impl = api and api.impl,
         inputs = insig(fn, ns),
-        mayreturnnothing = api and api.mayreturnnothing,
+        mayreturnnothing = mayreturnnothing(fn, api),
         outputs = outsig(fn, ns, api),
         outstride = stride(fn.Returns),
         stubnothing = api and api.stubnothing,
@@ -474,3 +489,7 @@ for k in pairs(typedefs) do
   end
 end
 assert(not next(unused_typedefs), 'unused typedefs = ' .. require('pl.pretty').write(unused_typedefs))
+
+if sawmayreturnnothing and not config.mayreturnnothing then
+  print('warning: saw MayReturnNothing but mayreturnnothing: false in config')
+end

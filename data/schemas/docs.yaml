@@ -21,6 +21,8 @@ type:
                 key: string
                 value:
                   schema: function
+    mayreturnnothing:
+      type: boolean
     script_objects:
       type:
         mapof:
