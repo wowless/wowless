@@ -75,6 +75,7 @@ Actor:
       inputs:
       - name: inventorySlots
         type: number
+      mayreturnnothing: true
       outputs:
       - name: itemTransmogInfo
         nilable: true
@@ -1576,6 +1577,7 @@ DressUpModel:
       inputs:
       - name: inventorySlot
         type: number
+      mayreturnnothing: true
       outputs:
       - name: itemTransmogInfo
         type:
@@ -1773,6 +1775,7 @@ EditBox:
         type: number
     GetDisplayText:
       inputs: {}
+      mayreturnnothing: true
       outputs:
       - name: displayText
         type: string
@@ -1810,6 +1813,7 @@ EditBox:
         type: number
     GetNumLetters:
       inputs: {}
+      mayreturnnothing: true
       outputs:
       - name: numLetters
         type: number
@@ -2279,6 +2283,7 @@ FontString:
         type: number
       - name: y
         type: number
+      mayreturnnothing: true
       outputs:
       - name: characterIndex
         type: number
@@ -3888,6 +3893,7 @@ ModelScene:
         type: number
       - name: pointZ
         type: number
+      mayreturnnothing: true
       outputs:
       - name: point2DX
         type: number
@@ -4630,6 +4636,7 @@ Region:
       - default: false
         name: resolveCollapsed
         type: boolean
+      mayreturnnothing: true
       outputs:
       - name: point
         type: FramePoint
@@ -5482,6 +5489,7 @@ TextureBase:
         type: string
     GetTextureSliceMargins:
       inputs: {}
+      mayreturnnothing: true
       outputs:
       - name: left
         type: number
@@ -5493,6 +5501,7 @@ TextureBase:
         type: number
     GetTextureSliceMode:
       inputs: {}
+      mayreturnnothing: true
       outputs:
       - name: sliceMode
         type:

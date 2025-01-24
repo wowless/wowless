@@ -457,6 +457,7 @@ local function rewriteUIObjects()
       local mmv = {
         impl = mm and mm.impl,
         inputs = insig(mv),
+        mayreturnnothing = mayreturnnothing(mv, mm),
         outputs = outsig(mv, nil, mm),
         outstride = stride(mv.Returns),
       }
