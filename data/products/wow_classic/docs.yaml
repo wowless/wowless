@@ -64,7 +64,6 @@ script_objects:
   SimpleTextureBaseAPI: TextureBase
 skip_docfiles:
   BarberShopInternalDocumentation: {}
-  BaseDocumentation: {}
   ConfigurationWarningsDocumentation: {}
   DebugToggleDocumentation: {}
   EditModeManagerDocumentation: {}

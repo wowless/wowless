@@ -97,7 +97,6 @@ script_objects:
 skip_docfiles:
   ArenaTeamDocumentation: {}
   BarberShopInternalDocumentation: {}
-  BaseDocumentation: {}
   CinematicListDocumentation: {}
   ConfigurationWarningsDocumentation: {}
   DebugToggleDocumentation: {}
