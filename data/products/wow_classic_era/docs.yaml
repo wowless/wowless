@@ -70,7 +70,6 @@ script_objects:
   SimpleTextureBaseAPI: TextureBase
 skip_apis:
   C_BattleNet.InstallHighResTextures: BattleNetDocumentation is incorrect
-  StartAttack: first argument should be nilable
 skip_docfiles:
   BarberShopInternalDocumentation: {}
   BaseDocumentation: {}

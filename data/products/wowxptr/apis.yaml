@@ -31849,8 +31849,8 @@ sqrt:
   alias: math.sqrt
 StartAttack:
   inputs:
-  - name: name
-    nilable: true
+  - default: '0'
+    name: name
     type: string
   - default: false
     name: exactMatch
