@@ -30094,7 +30094,11 @@ HasIgnoreDualWieldWeapon:
   - name: result
     type: boolean
 HasInboxItem: {}
-HasKey: {}
+HasKey:
+  inputs: {}
+  outputs:
+  - name: hasKey
+    type: boolean
 HasLFGRestrictions: {}
 HasLoadedCUFProfiles:
   inputs: {}

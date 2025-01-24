@@ -4,6 +4,29 @@ events:
     SECURE_TRANSFER_CONFIRM_SEND_MAIL: {}
 lies:
   apis:
+    C_BattleNet.InstallHighResTextures:
+      inputs: {}
+      outputs: {}
+    ShowCloak:
+      inputs:
+      - name: show
+        type: boolean
+      outputs: {}
+    ShowHelm:
+      inputs:
+      - name: show
+        type: boolean
+      outputs: {}
+    ShowingCloak:
+      inputs: {}
+      outputs:
+      - name: result
+        type: boolean
+    ShowingHelm:
+      inputs: {}
+      outputs:
+      - name: result
+        type: boolean
     UnitName:
       impl: UnitName
       inputs:
@@ -72,13 +95,6 @@ script_objects:
   SimpleStatusBarAPI: StatusBar
   SimpleTextureAPI: Texture
   SimpleTextureBaseAPI: TextureBase
-skip_apis:
-  C_BattleNet.InstallHighResTextures: BattleNetDocumentation is incorrect
-  HasKey: PlayerScriptDocumentation has extra methods
-  ShowCloak: PlayerScriptDocumentation has extra methods
-  ShowHelm: PlayerScriptDocumentation has extra methods
-  ShowingCloak: PlayerScriptDocumentation has extra methods
-  ShowingHelm: PlayerScriptDocumentation has extra methods
 skip_docfiles:
   ArenaTeamDocumentation: {}
   BarberShopInternalDocumentation: {}

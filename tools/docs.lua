@@ -314,24 +314,22 @@ local function rewriteApis()
   local f = 'data/products/' .. product .. '/apis.yaml'
   local apis = y.parseFile(f)
   for name, fn in pairs(funcs) do
-    if not deref(config, 'skip_apis', name) then
-      local ns = split(name)
-      local api = apis[name]
-      local newapi = {
-        impl = api and api.impl,
-        inputs = insig(fn, ns),
-        mayreturnnothing = mayreturnnothing(fn, api),
-        outputs = outsig(fn, ns, api),
-        outstride = stride(fn.Returns),
-        stubnothing = api and api.stubnothing,
-        stuboutstrides = api and api.stuboutstrides,
-      }
-      local lie = deref(config, 'lies', 'apis', name)
-      if lie then
-        assert(tableeq(lie, newapi), 'lie mismatch on ' .. name)
-      else
-        apis[name] = newapi
-      end
+    local ns = split(name)
+    local api = apis[name]
+    local newapi = {
+      impl = api and api.impl,
+      inputs = insig(fn, ns),
+      mayreturnnothing = mayreturnnothing(fn, api),
+      outputs = outsig(fn, ns, api),
+      outstride = stride(fn.Returns),
+      stubnothing = api and api.stubnothing,
+      stuboutstrides = api and api.stuboutstrides,
+    }
+    local lie = deref(config, 'lies', 'apis', name)
+    if lie then
+      assert(tableeq(lie, newapi), 'lie mismatch on ' .. name)
+    else
+      apis[name] = newapi
     end
   end
   writeifchanged(f, y.pprint(apis))

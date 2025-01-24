@@ -29,11 +29,6 @@ type:
           key: string
           value:
             ref: uiobject
-    skip_apis:
-      type:
-        mapof:
-          key: string
-          value: string
     skip_docfiles:
       type:
         mapof:
