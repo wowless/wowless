@@ -5,7 +5,17 @@ events:
     PARTY_INVITE_CANCEL: {}
     SECURE_TRANSFER_CONFIRM_SEND_MAIL: {}
 lies:
-  apis: {}
+  apis:
+    C_AddOns.GetAddOnMetadata:
+      impl: GetAddOnMetadata
+      inputs:
+      - name: name
+        type: uiAddon
+      - name: variable
+        type: string
+      outputs:
+      - name: value
+        type: string
 script_objects:
   FrameAPIArchaeologyDigSiteFrame: ArchaeologyDigSiteFrame
   FrameAPIBlob: QuestPOIFrame

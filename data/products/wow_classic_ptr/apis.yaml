@@ -557,6 +557,7 @@ C_AddOns.GetAddOnMetadata:
     type: string
   outputs:
   - name: value
+    nilable: true
     type: string
 C_AddOns.GetAddOnOptionalDependencies:
   inputs:

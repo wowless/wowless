@@ -4,6 +4,16 @@ events:
     SECURE_TRANSFER_CONFIRM_SEND_MAIL: {}
 lies:
   apis:
+    C_AddOns.GetAddOnMetadata:
+      impl: GetAddOnMetadata
+      inputs:
+      - name: name
+        type: uiAddon
+      - name: variable
+        type: string
+      outputs:
+      - name: value
+        type: string
     C_BattleNet.InstallHighResTextures:
       inputs: {}
       outputs: {}
