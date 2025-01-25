@@ -320,6 +320,7 @@ local function rewriteApis()
     local newapi = {
       impl = api and api.impl,
       inputs = insig(fn, ns),
+      mayreturnnils = api and api.mayreturnnils,
       mayreturnnothing = mayreturnnothing(fn, api),
       outputs = outsig(fn, ns, api),
       outstride = stride(fn.Returns),

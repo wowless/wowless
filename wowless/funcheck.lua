@@ -1,6 +1,7 @@
 return function(typechecker)
   local function makeCheckOutputs(fname, apicfg)
     local mayreturnnothing = apicfg.mayreturnnothing
+    local mayreturnnils = apicfg.mayreturnnils
     local outs = apicfg.outputs
     local nouts = #outs
     local outstride = apicfg.outstride
@@ -20,6 +21,15 @@ return function(typechecker)
         end
       elseif n ~= nouts then
         error(('wrong number of return values to %q: want %d, got %d'):format(fname, nouts, n))
+      end
+      if mayreturnnils and n == nfixed then
+        local allnil = true
+        for i = 1, nfixed do
+          allnil = allnil and select(i, ...) == nil
+        end
+        if allnil then
+          return ...
+        end
       end
       local rets = {}
       for i = 1, nfixed do
