@@ -18,4 +18,5 @@ IsLinuxClient: {}
 IsMacClient: {}
 IsTestBuild: {}
 IsWindowsClient: {}
+UnitFactionGroup: {}
 UnitName: {}

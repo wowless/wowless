@@ -32475,11 +32475,12 @@ UnitFactionGroup:
   - default: false
     name: checkDisplayRace
     type: boolean
-  mayreturnnothing: true
   outputs:
   - name: factionGroupTag
+    nilable: true
     type: string
   - name: localized
+    nilable: true
     type: string
 UnitFullName:
   inputs:

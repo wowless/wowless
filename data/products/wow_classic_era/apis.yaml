@@ -18467,11 +18467,12 @@ UnitFactionGroup:
   inputs:
   - name: unit
     type: unit
-  mayreturnnothing: true
   outputs:
   - name: factionTag
+    nilable: true
     type: string
   - name: localizedFactionName
+    nilable: true
     type: string
 UnitFullName:
   inputs:
