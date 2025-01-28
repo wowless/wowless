@@ -37,11 +37,17 @@ static int tactcall(lua_State *L) {
 
 static int tactbuild(lua_State *L) {
   char hash[33];
-  if (!tactless_current_build(luaL_checkstring(L, 1), hash)) {
+  int major, minor, patch, build;
+  if (!tactless_current_build(luaL_checkstring(L, 1), hash, &major, &minor,
+                              &patch, &build)) {
     return 0;
   }
   lua_pushlstring(L, hash, 32);
-  return 1;
+  lua_pushnumber(L, major);
+  lua_pushnumber(L, minor);
+  lua_pushnumber(L, patch);
+  lua_pushnumber(L, build);
+  return 5;
 }
 
 static int tactgc(lua_State *L) {
