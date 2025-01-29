@@ -97,9 +97,22 @@ find_package(expat CONFIG REQUIRED)
 add_library(expat ALIAS expat::expat)
 
 function(lua2c name)
-  set(deps ${ARGN})
-  list(TRANSFORM deps REPLACE "^.*=" "")
-  list(REMOVE_ITEM deps c)
+  foreach(arg ${ARGN})
+    string(FIND ${arg} "=" eqpos)
+    math(EXPR eqposy "${eqpos} + 1")
+    string(SUBSTRING ${arg} 0 ${eqpos} package)
+    string(SUBSTRING ${arg} ${eqposy} -1 file)
+    if(NOT (${file} STREQUAL "c"))
+      string(REPLACE "." "_" pkg ${package})
+      set(output lua2c/${pkg}.c)
+      set(cmd ${CMAKE_CURRENT_SOURCE_DIR}/tools/file2c.lua)
+      add_custom_command(
+        OUTPUT ${output}
+        COMMAND bootstraplua ${cmd} ${package} ${file} ${output}
+        DEPENDS ${cmd} ${file})
+      list(APPEND deps ${output})
+    endif()
+  endforeach()
   add_custom_command(
     OUTPUT ${name}.c
     COMMAND bootstraplua ${CMAKE_CURRENT_SOURCE_DIR}/tools/lua2c.lua ${name}
