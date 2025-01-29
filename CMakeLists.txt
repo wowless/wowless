@@ -442,15 +442,8 @@ add_custom_command(
   COMMAND ${CMAKE_COMMAND} -E touch stamp/listfile.txt
   DEPENDS listfile ${CMAKE_CURRENT_SOURCE_DIR}/vendor/dbdefs/manifest.json)
 add_custom_target(listfilelua DEPENDS stamp/listfile.txt)
-# TODO rationalize with lua2c
-add_custom_command(
-  OUTPUT runtimelistfile.c
-  COMMAND bootstraplua ${CMAKE_CURRENT_SOURCE_DIR}/tools/lua2c.lua
-          runtimelistfile runtime.listfile=runtime/listfile.lua
-  DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/tools/lua2c.lua runtime/listfile.lua)
-add_library(runtimelistfile STATIC runtimelistfile.c)
+lua2c(runtimelistfile runtime.listfile=runtime/listfile.lua)
 add_dependencies(runtimelistfile listfilelua)
-target_link_libraries(runtimelistfile PRIVATE elune)
 
 add_lua_executable(
   dblist
@@ -534,16 +527,9 @@ foreach(product ${products})
     DEPFILE ${CMAKE_CURRENT_BINARY_DIR}/generated/${product}.lua.d
     DEPENDS prep)
   add_custom_target(datalua_${product}_lua DEPENDS stamp/${product}.txt)
-  # TODO rationalize with lua2c
-  add_custom_command(
-    OUTPUT datalua_${product}.c
-    COMMAND
-      bootstraplua ${CMAKE_CURRENT_SOURCE_DIR}/tools/lua2c.lua
-      datalua_${product} build.products.${product}.data=runtime/${product}.lua
-    DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/tools/lua2c.lua runtime/${product}.lua)
-  add_library(datalua_${product} STATIC datalua_${product}.c)
+  lua2c(datalua_${product}
+        build.products.${product}.data=runtime/${product}.lua)
   add_dependencies(datalua_${product} datalua_${product}_lua)
-  target_link_libraries(datalua_${product} PRIVATE elune)
   list(APPEND dataluas datalua_${product})
 endforeach()
 
