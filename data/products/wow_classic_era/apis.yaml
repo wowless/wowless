@@ -14150,12 +14150,12 @@ GetGameTime:
 GetGMStatus: {}
 GetGMTicket: {}
 GetGraphicsAPIs:
-  comment: actually returns a string dotdotdot, not just a string
   inputs: {}
   outputs:
   - name: graphicsAPIs
     stub: opengl
     type: string
+  outstride: 1
 GetGraphicsCVarOffsetForCVar: {}
 GetGraphicsCVarOffsetForUI:
   inputs:
