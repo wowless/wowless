@@ -443,7 +443,8 @@ add_lua_executable(
   toolsutil)
 
 file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/generated
-     ${CMAKE_CURRENT_BINARY_DIR}/runtime ${CMAKE_CURRENT_BINARY_DIR}/stamp)
+     ${CMAKE_CURRENT_BINARY_DIR}/lua2c ${CMAKE_CURRENT_BINARY_DIR}/runtime
+     ${CMAKE_CURRENT_BINARY_DIR}/stamp)
 
 add_custom_command(
   OUTPUT stamp/listfile.txt
