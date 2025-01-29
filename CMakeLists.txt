@@ -118,7 +118,7 @@ function(lua2c name)
     COMMAND bootstraplua ${CMAKE_CURRENT_SOURCE_DIR}/tools/lua2c.lua ${name}
             ${ARGN}
     DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/tools/lua2c.lua ${deps})
-  add_library(${name} STATIC ${name}.c)
+  add_library(${name} STATIC ${name}.c ${deps})
   target_link_libraries(${name} PRIVATE elune)
 endfunction()
 
