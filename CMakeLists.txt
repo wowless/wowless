@@ -105,6 +105,8 @@ function(lua2c name)
     COMMAND bootstraplua ${CMAKE_CURRENT_SOURCE_DIR}/tools/lua2c.lua ${name}
             ${ARGN}
     DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/tools/lua2c.lua ${deps})
+  add_library(${name} STATIC ${name}.c)
+  target_link_libraries(${name} PRIVATE elune)
 endfunction()
 
 FetchContent_Declare(
@@ -114,8 +116,8 @@ FetchContent_Declare(
   SOURCE_SUBDIR disable_cmakelists_txt)
 FetchContent_MakeAvailable(luaexpat)
 lua2c(luaexpat lxp=c)
-add_library(luaexpat STATIC luaexpat.c ${luaexpat_SOURCE_DIR}/src/lxplib.c)
-target_link_libraries(luaexpat PRIVATE elune expat)
+target_sources(luaexpat PRIVATE ${luaexpat_SOURCE_DIR}/src/lxplib.c)
+target_link_libraries(luaexpat PRIVATE expat)
 
 find_package(yaml CONFIG REQUIRED)
 
@@ -132,16 +134,17 @@ lua2c(
   lyaml.functional=${lyaml_SOURCE_DIR}/lib/lyaml/functional.lua
   lyaml.implicit=${lyaml_SOURCE_DIR}/lib/lyaml/implicit.lua
   yaml=c)
-add_library(
-  lyaml STATIC
-  lyaml.c ${lyaml_SOURCE_DIR}/ext/yaml/emitter.c
-  ${lyaml_SOURCE_DIR}/ext/yaml/parser.c ${lyaml_SOURCE_DIR}/ext/yaml/scanner.c
-  ${lyaml_SOURCE_DIR}/ext/yaml/yaml.c)
+target_sources(
+  lyaml
+  PRIVATE ${lyaml_SOURCE_DIR}/ext/yaml/emitter.c
+          ${lyaml_SOURCE_DIR}/ext/yaml/parser.c
+          ${lyaml_SOURCE_DIR}/ext/yaml/scanner.c
+          ${lyaml_SOURCE_DIR}/ext/yaml/yaml.c)
 set_property(
   SOURCE ${lyaml_SOURCE_DIR}/ext/yaml/yaml.c
   APPEND
   PROPERTY COMPILE_DEFINITIONS VERSION="wowless")
-target_link_libraries(lyaml PRIVATE elune yaml)
+target_link_libraries(lyaml PRIVATE yaml)
 
 find_package(ZLIB REQUIRED)
 add_library(zlib ALIAS ZLIB::ZLIB)
@@ -153,8 +156,8 @@ FetchContent_Declare(
   SOURCE_SUBDIR disable_cmakelists_txt)
 FetchContent_MakeAvailable(lzlib)
 lua2c(lzlib zlib=c)
-add_library(lzlib STATIC lzlib.c ${lzlib_SOURCE_DIR}/lzlib.c)
-target_link_libraries(lzlib PRIVATE elune zlib)
+target_sources(lzlib PRIVATE ${lzlib_SOURCE_DIR}/lzlib.c)
+target_link_libraries(lzlib PRIVATE zlib)
 
 find_package(unofficial-sqlite3 CONFIG REQUIRED)
 add_library(sqlite3 ALIAS unofficial::sqlite3::sqlite3)
@@ -166,8 +169,8 @@ FetchContent_Declare(
   SOURCE_SUBDIR disable_cmakelists_txt)
 FetchContent_MakeAvailable(lsqlite3)
 lua2c(lsqlite3 lsqlite3=c)
-add_library(lsqlite3 STATIC lsqlite3.c ${lsqlite3_SOURCE_DIR}/lsqlite3.c)
-target_link_libraries(lsqlite3 PRIVATE elune sqlite3)
+target_sources(lsqlite3 PRIVATE ${lsqlite3_SOURCE_DIR}/lsqlite3.c)
+target_link_libraries(lsqlite3 PRIVATE sqlite3)
 
 FetchContent_Declare(
   luafilesystem
@@ -176,9 +179,7 @@ FetchContent_Declare(
   SOURCE_SUBDIR disable_cmakelists_txt)
 FetchContent_MakeAvailable(luafilesystem)
 lua2c(luafilesystem lfs=c)
-add_library(luafilesystem STATIC luafilesystem.c
-                                 ${luafilesystem_SOURCE_DIR}/src/lfs.c)
-target_link_libraries(luafilesystem PRIVATE elune)
+target_sources(luafilesystem PRIVATE ${luafilesystem_SOURCE_DIR}/src/lfs.c)
 
 FetchContent_Declare(
   say
@@ -187,8 +188,6 @@ FetchContent_Declare(
   SOURCE_SUBDIR disable_cmakelists_txt)
 FetchContent_MakeAvailable(say)
 lua2c(say say=${say_SOURCE_DIR}/src/say/init.lua)
-add_library(say STATIC say.c)
-target_link_libraries(say PRIVATE elune)
 
 FetchContent_Declare(
   luassert
@@ -227,8 +226,6 @@ lua2c(
   luassert.languages.ru=${luassert_SOURCE_DIR}/src/languages/ru.lua
   luassert.languages.ua=${luassert_SOURCE_DIR}/src/languages/ua.lua
   luassert.languages.zh=${luassert_SOURCE_DIR}/src/languages/zh.lua)
-add_library(luassert STATIC luassert.c)
-target_link_libraries(luassert PRIVATE elune)
 
 FetchContent_Declare(
   argparse
@@ -237,8 +234,6 @@ FetchContent_Declare(
   SOURCE_SUBDIR disable_cmakelists_txt)
 FetchContent_MakeAvailable(argparse)
 lua2c(argparse argparse=${argparse_SOURCE_DIR}/src/argparse.lua)
-add_library(argparse STATIC argparse.c)
-target_link_libraries(argparse PRIVATE elune)
 
 FetchContent_Declare(
   date
@@ -247,8 +242,6 @@ FetchContent_Declare(
   SOURCE_SUBDIR disable_cmakelists_txt)
 FetchContent_MakeAvailable(date)
 lua2c(date date=${date_SOURCE_DIR}/src/date.lua)
-add_library(date STATIC date.c)
-target_link_libraries(date PRIVATE elune)
 
 FetchContent_Declare(
   tsort
@@ -257,8 +250,6 @@ FetchContent_Declare(
   SOURCE_SUBDIR disable_cmakelists_txt)
 FetchContent_MakeAvailable(tsort)
 lua2c(tsort resty.tsort=${tsort_SOURCE_DIR}/lib/resty/tsort.lua)
-add_library(tsort STATIC tsort.c)
-target_link_libraries(tsort PRIVATE elune)
 
 FetchContent_Declare(
   minheap
@@ -267,8 +258,6 @@ FetchContent_Declare(
   SOURCE_SUBDIR disable_cmakelists_txt)
 FetchContent_MakeAvailable(minheap)
 lua2c(minheap minheap=${minheap_SOURCE_DIR}/minheap.lua)
-add_library(minheap STATIC minheap.c)
-target_link_libraries(minheap PRIVATE elune)
 
 FetchContent_Declare(
   luapath
@@ -294,8 +283,6 @@ lua2c(
   path.win32.ffi.wcs=${luapath_SOURCE_DIR}/lua/path/win32/ffi/wcs.lua
   path.win32.fs=${luapath_SOURCE_DIR}/lua/path/win32/fs.lua
   path.win32.wcs=${luapath_SOURCE_DIR}/lua/path/win32/wcs.lua)
-add_library(luapath STATIC luapath.c)
-target_link_libraries(luapath PRIVATE elune)
 
 FetchContent_Declare(
   penlight
@@ -344,8 +331,6 @@ lua2c(
   pl.url=${penlight_SOURCE_DIR}/lua/pl/url.lua
   pl.types=${penlight_SOURCE_DIR}/lua/pl/types.lua
   pl.import_into=${penlight_SOURCE_DIR}/lua/pl/import_into.lua)
-add_library(penlight STATIC penlight.c)
-target_link_libraries(penlight PRIVATE elune)
 
 FetchContent_Declare(
   vstruct
@@ -390,8 +375,6 @@ lua2c(
   vstruct.io.x=${vstruct_SOURCE_DIR}/io/x.lua
   vstruct.io.z=${vstruct_SOURCE_DIR}/io/z.lua
   vstruct.lexer=${vstruct_SOURCE_DIR}/lexer.lua)
-add_library(vstruct STATIC vstruct.c)
-target_link_libraries(vstruct PRIVATE elune)
 
 function(add_lua_executable name main)
   set(luamain ${name}luamain.c)
@@ -405,8 +388,6 @@ function(add_lua_executable name main)
 endfunction()
 
 lua2c(wowlessyaml wowapi.yaml=${CMAKE_CURRENT_SOURCE_DIR}/wowapi/yaml.lua)
-add_library(wowlessyaml wowlessyaml.c)
-target_link_libraries(wowlessyaml PRIVATE elune)
 
 add_lua_executable(yaml2lua ${CMAKE_CURRENT_SOURCE_DIR}/tools/yaml2lua.lua
                    luafilesystem lyaml penlight wowlessyaml)
@@ -425,12 +406,8 @@ yaml2lua(products)
 yaml2lua(stringenums)
 
 lua2c(toolsutil tools.util=${CMAKE_CURRENT_SOURCE_DIR}/tools/util.lua)
-add_library(toolsutil toolsutil.c)
-target_link_libraries(toolsutil PRIVATE elune)
 
 lua2c(wowlessutil wowless.util=${CMAKE_CURRENT_SOURCE_DIR}/wowless/util.lua)
-add_library(wowlessutil wowlessutil.c)
-target_link_libraries(wowlessutil PRIVATE elune)
 
 FetchContent_Declare(
   cjson
@@ -438,12 +415,10 @@ FetchContent_Declare(
   GIT_TAG 2bfad8f5eeb821357d2ada29506e864ff7ec947e
   SOURCE_SUBDIR disable_cmakelists_txt)
 FetchContent_MakeAvailable(cjson)
-add_library(cjson ${cjson_SOURCE_DIR}/fpconv.c ${cjson_SOURCE_DIR}/lua_cjson.c
-                  ${cjson_SOURCE_DIR}/strbuf.c)
-target_link_libraries(cjson PRIVATE elune)
 lua2c(luacjson cjson=c)
-add_library(luacjson luacjson.c)
-target_link_libraries(luacjson PRIVATE cjson elune)
+target_sources(
+  luacjson PRIVATE ${cjson_SOURCE_DIR}/fpconv.c ${cjson_SOURCE_DIR}/lua_cjson.c
+                   ${cjson_SOURCE_DIR}/strbuf.c)
 
 add_lua_executable(
   listfile
@@ -494,12 +469,11 @@ FetchContent_Declare(
   TLS_VERIFY OFF)
 FetchContent_MakeAvailable(lpeg)
 lua2c(lpeg lpeg=c)
-add_library(
-  lpeg STATIC
-  lpeg.c ${lpeg_SOURCE_DIR}/lpcap.c ${lpeg_SOURCE_DIR}/lpcode.c
-  ${lpeg_SOURCE_DIR}/lpprint.c ${lpeg_SOURCE_DIR}/lptree.c
-  ${lpeg_SOURCE_DIR}/lpvm.c)
-target_link_libraries(lpeg PRIVATE elune)
+target_sources(
+  lpeg
+  PRIVATE ${lpeg_SOURCE_DIR}/lpcap.c ${lpeg_SOURCE_DIR}/lpcode.c
+          ${lpeg_SOURCE_DIR}/lpprint.c ${lpeg_SOURCE_DIR}/lptree.c
+          ${lpeg_SOURCE_DIR}/lpvm.c)
 
 FetchContent_Declare(
   luadbd
@@ -508,8 +482,6 @@ FetchContent_Declare(
   SOURCE_SUBDIR disable_cmakelists_txt)
 FetchContent_MakeAvailable(luadbd)
 lua2c(luadbd luadbd.parser=${luadbd_SOURCE_DIR}/luadbd/parser.lua)
-add_library(luadbd STATIC luadbd.c)
-target_link_libraries(luadbd PRIVATE elune)
 
 add_lua_executable(
   dbdefs
@@ -576,8 +548,8 @@ foreach(product ${products})
 endforeach()
 
 lua2c(toolssqlite3ext tools.sqlite3ext=c)
-add_library(toolssqlite3ext STATIC tools/sqlite3ext.c toolssqlite3ext.c)
-target_link_libraries(toolssqlite3ext PRIVATE elune sqlite3)
+target_sources(toolssqlite3ext PRIVATE tools/sqlite3ext.c)
+target_link_libraries(toolssqlite3ext PRIVATE sqlite3)
 
 add_lua_executable(
   sqlite
@@ -602,8 +574,8 @@ target_include_directories(tactless PUBLIC vendor/ctactless)
 target_link_libraries(tactless PRIVATE libcrypto libcurl zlib)
 
 lua2c(toolstactless tactless=c)
-add_library(toolstactless STATIC tools/tactless.c toolstactless.c)
-target_link_libraries(toolstactless PRIVATE elune tactless)
+target_sources(toolstactless PRIVATE tools/tactless.c)
+target_link_libraries(toolstactless PRIVATE tactless)
 
 add_lua_executable(
   fetch
@@ -938,14 +910,12 @@ FetchContent_Declare(
   SOURCE_SUBDIR disable_cmakelists_txt)
 FetchContent_MakeAvailable(luamagick)
 lua2c(luamagick luamagick=c)
-add_library(luamagick STATIC luamagick.c ${luamagick_SOURCE_DIR}/luamagick.c)
-target_link_libraries(luamagick PRIVATE elune imagemagick)
+target_sources(luamagick PRIVATE ${luamagick_SOURCE_DIR}/luamagick.c)
+target_link_libraries(luamagick PRIVATE imagemagick)
 
 lua2c(wowlessrender wowless.blp=${CMAKE_CURRENT_SOURCE_DIR}/wowless/blp.lua
       wowless.render=${CMAKE_CURRENT_SOURCE_DIR}/wowless/render.lua
       wowless.png=${CMAKE_CURRENT_SOURCE_DIR}/wowless/png.lua)
-add_library(wowlessrender STATIC wowlessrender.c)
-target_link_libraries(wowlessrender PRIVATE elune)
 
 add_lua_executable(
   render
@@ -965,8 +935,6 @@ add_lua_executable(gentest ${CMAKE_CURRENT_SOURCE_DIR}/tools/gentest.lua
                    argparse luafilesystem penlight toolsutil)
 
 lua2c(runtimeproducts runtime.products=runtime/products.lua)
-add_library(runtimeproducts STATIC runtimeproducts.c)
-target_link_libraries(runtimeproducts PRIVATE elune)
 
 add_lua_executable(
   bump
@@ -1047,8 +1015,6 @@ lua2c(
   ${yamlluas}
   wowapi.data=${CMAKE_CURRENT_SOURCE_DIR}/wowapi/data.lua
   wowapi.schema=${CMAKE_CURRENT_SOURCE_DIR}/wowapi/schema.lua)
-add_library(wowapischema STATIC wowapischema.c)
-target_link_libraries(wowapischema PRIVATE elune)
 
 add_lua_executable(
   docs
@@ -1066,8 +1032,6 @@ add_lua_executable(errsv ${CMAKE_CURRENT_SOURCE_DIR}/tools/errsv.lua
                    luafilesystem lyaml penlight wowlessyaml)
 
 lua2c(toolsdb2 tools.db2=${CMAKE_CURRENT_SOURCE_DIR}/tools/db2.lua)
-add_library(toolsdb2 STATIC toolsdb2.c)
-target_link_libraries(toolsdb2 PRIVATE elune)
 
 add_lua_executable(
   db2dump
@@ -1123,8 +1087,7 @@ lua2c(
   wowless.runner=${CMAKE_CURRENT_SOURCE_DIR}/wowless/runner.lua
   wowless.typecheck=${CMAKE_CURRENT_SOURCE_DIR}/wowless/typecheck.lua
   wowless.xml=${CMAKE_CURRENT_SOURCE_DIR}/wowless/xml.lua)
-add_library(wowlesslib STATIC wowlesslib.c wowless/ext.c)
-target_link_libraries(wowlesslib PRIVATE elune)
+target_sources(wowlesslib PRIVATE wowless/ext.c)
 
 add_lua_executable(
   wowless
