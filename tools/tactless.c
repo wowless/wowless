@@ -6,12 +6,11 @@
 #include "lualib.h"
 
 static int tactopen(lua_State *L) {
-  tactless *t = tactless_open(luaL_checkstring(L, 2), luaL_optstring(L, 3, 0));
-  if (!t) {
+  tactless **u = lua_newuserdata(L, sizeof(tactless *));
+  *u = tactless_open(luaL_checkstring(L, 2), luaL_optstring(L, 3, 0));
+  if (!*u) {
     return 0;
   }
-  tactless **u = lua_newuserdata(L, sizeof(t));
-  *u = t;
   luaL_getmetatable(L, "tactless");
   lua_setmetatable(L, -2);
   return 1;
