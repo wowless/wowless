@@ -3,6 +3,14 @@ ACCOUNT_CHARACTER_CURRENCY_DATA_RECEIVED:
   payload: {}
 ACCOUNT_CVARS_LOADED:
   payload: {}
+ACCOUNT_STORE_CURRENCY_AVAILABLE_UPDATED:
+  payload:
+  - name: currencyID
+    type: number
+ACCOUNT_STORE_ITEM_INFO_UPDATED:
+  payload:
+  - name: itemID
+    type: number
 ACHIEVEMENT_EARNED:
   payload:
   - name: achievementID
@@ -3669,6 +3677,11 @@ EQUIPMENT_SWAP_FINISHED:
     type: number
 EQUIPMENT_SWAP_PENDING:
   payload: {}
+EVENT_REALM_QUEUES_UPDATED:
+  payload:
+  - name: gameEnvironment
+    type:
+      enum: EventRealmQueues
 EXPAND_BAG_BAR_CHANGED:
   payload:
   - name: expandBagBar
@@ -3914,6 +3927,11 @@ GUILDTABARD_UPDATE:
   payload: {}
 GX_RESTARTED:
   payload: {}
+HANDLE_UI_ACTION:
+  payload:
+  - name: actionType
+    type:
+      enum: UIActionType
 HARDCORE_DEATHS:
   payload:
   - name: memberName
@@ -4241,6 +4259,16 @@ LFG_UPDATE_RANDOM_INFO:
 LOADING_SCREEN_DISABLED:
   payload: {}
 LOADING_SCREEN_ENABLED:
+  payload: {}
+LOBBY_MATCHMAKER_QUEUE_ABANDONED:
+  payload: {}
+LOBBY_MATCHMAKER_QUEUE_ERROR:
+  payload: {}
+LOBBY_MATCHMAKER_QUEUE_EXPIRED:
+  payload: {}
+LOBBY_MATCHMAKER_QUEUE_POPPED:
+  payload: {}
+LOBBY_MATCHMAKER_QUEUE_STATUS_UPDATE:
   payload: {}
 LOC_RESULT:
   payload:
@@ -4808,6 +4836,12 @@ PLAYER_GUILD_UPDATE:
     type: unit
 PLAYER_IMPULSE_APPLIED:
   payload: {}
+PLAYER_INSIDE_QUEST_BLOB_STATE_CHANGED:
+  payload:
+  - name: questID
+    type: number
+  - name: isInside
+    type: boolean
 PLAYER_INTERACTION_MANAGER_FRAME_HIDE:
   payload:
   - name: type
@@ -5368,6 +5402,8 @@ SET_DEBUG_TOOL_VISIBLE:
   payload: {}
 SETTINGS_LOADED:
   payload: {}
+SHOW_END_OF_MATCH_UI:
+  payload: {}
 SHOW_HYPERLINK_TOOLTIP:
   payload:
   - name: hyperlink
@@ -5555,6 +5591,14 @@ SPELL_PUSHED_TO_ACTIONBAR:
     type: number
   - name: page
     type: number
+SPELL_PUSHED_TO_FLYOUT_ON_ACTIONBAR:
+  payload:
+  - name: spellID
+    type: number
+  - name: flyoutSlot
+    type: number
+  - name: flyoutPage
+    type: number
 SPELL_SCRIPT_ERROR:
   payload:
   - name: spellID
@@ -5631,6 +5675,10 @@ STORE_CONFIRM_PURCHASE:
   payload: {}
 STORE_ENTITLEMENT_NOTIFICATION:
   payload: {}
+STORE_FRONT_STATE_UPDATED:
+  payload:
+  - name: storeFrontID
+    type: number
 STORE_OPEN_SIMPLE_CHECKOUT:
   payload: {}
 STORE_ORDER_INITIATION_FAILED:

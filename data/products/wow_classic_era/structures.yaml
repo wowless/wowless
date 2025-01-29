@@ -81,6 +81,66 @@ AppearanceSourceInfo:
       type: number
 AuraData:
   fields: {}
+C_AccountStore.AccountStoreCategoryInfo:
+  fields:
+    icon:
+      type: number
+    id:
+      type: number
+    name:
+      type: string
+    type:
+      type:
+        enum: AccountStoreCategoryType
+C_AccountStore.AccountStoreCurrencyInfo:
+  fields:
+    amount:
+      type: number
+    icon:
+      type: number
+    id:
+      type: number
+    maxQuantity:
+      nilable: true
+      type: number
+    name:
+      type: string
+C_AccountStore.AccountStoreItemInfo:
+  fields:
+    creatureDisplayID:
+      nilable: true
+      type: number
+    currencyID:
+      type: number
+    customUIModelSceneID:
+      nilable: true
+      type: number
+    description:
+      nilable: true
+      type: string
+    displayIcon:
+      nilable: true
+      type: number
+    flags:
+      type:
+        enum: AccountStoreItemFlag
+    id:
+      type: number
+    name:
+      type: string
+    nonrefundable:
+      type: boolean
+    price:
+      type: number
+    refundSecondsRemaining:
+      nilable: true
+      type: number
+    status:
+      type:
+        enum: AccountStoreItemStatus
+    transmogSetID:
+      nilable: true
+      type: number
 C_ActionBar.ActionUsableState:
   fields:
     noMana:
@@ -1375,6 +1435,24 @@ C_EncounterJournal.EncounterJournalSectionInfo:
       type: string
     uiModelSceneID:
       type: number
+C_EndOfMatchUI.MatchDetail:
+  fields:
+    type:
+      type:
+        enum: MatchDetailType
+    value:
+      type: number
+C_EndOfMatchUI.MatchDetails:
+  fields:
+    detailsList:
+      type:
+        arrayof:
+          structure: C_EndOfMatchUI.MatchDetail
+    matchEnded:
+      type: boolean
+    matchType:
+      type:
+        enum: EndOfMatchType
 C_Engraving.EngravingData:
   fields:
     equipmentSlot:

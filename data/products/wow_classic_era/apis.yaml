@@ -338,6 +338,89 @@ C_AccountInfo.IsGUIDRelatedToLocalAccount:
   outputs:
   - name: isLocalUser
     type: boolean
+C_AccountStore.BeginPurchase:
+  inputs:
+  - name: itemID
+    type: number
+  outputs:
+  - name: purchaseStarted
+    type: boolean
+C_AccountStore.GetCategories:
+  inputs:
+  - name: storeFrontID
+    type: number
+  outputs:
+  - name: categories
+    type:
+      arrayof: number
+C_AccountStore.GetCategoryInfo:
+  inputs:
+  - name: categoryID
+    type: number
+  outputs:
+  - name: info
+    type:
+      structure: C_AccountStore.AccountStoreCategoryInfo
+C_AccountStore.GetCategoryItems:
+  inputs:
+  - name: categoryID
+    type: number
+  outputs:
+  - name: itemIDs
+    type:
+      arrayof: number
+C_AccountStore.GetCurrencyAvailable:
+  inputs:
+  - name: currencyID
+    type: number
+  outputs:
+  - name: amount
+    type: number
+C_AccountStore.GetCurrencyIDForStore:
+  inputs:
+  - name: storeFrontID
+    type: number
+  outputs:
+  - name: currencyID
+    nilable: true
+    type: number
+C_AccountStore.GetCurrencyInfo:
+  inputs:
+  - name: currencyID
+    type: number
+  outputs:
+  - name: info
+    type:
+      structure: C_AccountStore.AccountStoreCurrencyInfo
+C_AccountStore.GetItemInfo:
+  inputs:
+  - name: itemID
+    type: number
+  outputs:
+  - name: info
+    nilable: true
+    type:
+      structure: C_AccountStore.AccountStoreItemInfo
+C_AccountStore.GetStoreFrontState:
+  inputs:
+  - name: storeFrontID
+    type: number
+  outputs:
+  - name: state
+    type:
+      enum: AccountStoreState
+C_AccountStore.RefundItem:
+  inputs:
+  - name: itemID
+    type: number
+  outputs:
+  - name: refundStarted
+    type: boolean
+C_AccountStore.RequestStoreFrontInfoUpdate:
+  inputs:
+  - name: storeFrontID
+    type: number
+  outputs: {}
 C_AchievementInfo.AreGuildAchievementsEnabled:
   inputs: {}
   outputs:
@@ -477,6 +560,29 @@ C_ActionBar.ToggleAutoCastPetAction:
   - name: slotID
     type: number
   outputs: {}
+C_AddOnProfiler.GetAddOnMetric:
+  inputs:
+  - name: name
+    type: string
+  - name: metric
+    type:
+      enum: AddOnProfilerMetric
+  outputs:
+  - name: result
+    type: number
+C_AddOnProfiler.GetOverallMetric:
+  inputs:
+  - name: metric
+    type:
+      enum: AddOnProfilerMetric
+  outputs:
+  - name: result
+    type: number
+C_AddOnProfiler.IsEnabled:
+  inputs: {}
+  outputs:
+  - name: enabled
+    type: boolean
 C_AddOns.DisableAddOn:
   inputs:
   - name: name
@@ -4902,6 +5008,13 @@ C_EncounterJournal.SetTab:
   - name: tabIdx
     type: number
   outputs: {}
+C_EndOfMatchUI.GetEndOfMatchDetails:
+  inputs: {}
+  outputs:
+  - name: matchDetails
+    nilable: true
+    type:
+      structure: C_EndOfMatchUI.MatchDetails
 C_Engraving.AddCategoryFilter:
   inputs:
   - name: category
@@ -5659,6 +5772,14 @@ C_GameRules.GetGameRuleAsFloat:
   outputs:
   - name: value
     type: number
+C_GameRules.GetGameRuleAsFrameStrata:
+  inputs:
+  - name: gameRule
+    type:
+      enum: GameRule
+  outputs:
+  - name: frameStrata
+    type: string
 C_GameRules.IsGameRuleActive:
   inputs:
   - name: gameRule
@@ -16707,6 +16828,8 @@ IsCemeterySelectionAvailable:
   outputs:
   - name: result
     type: boolean
+IsChannelModerator: {}
+IsChannelOwner: {}
 IsCharacterNewlyBoosted:
   inputs: {}
   outputs:
@@ -16726,6 +16849,12 @@ IsConsumableSpell:
   - name: value
     type: boolean
 IsControlKeyDown: {}
+IsCpuBound:
+  inputs: {}
+  outputs:
+  - name: isCpuBound
+    nilable: true
+    type: boolean
 IsCurrentAction:
   inputs:
   - name: action
