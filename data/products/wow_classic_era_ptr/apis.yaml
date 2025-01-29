@@ -15768,12 +15768,12 @@ GetScreenHeight:
   - name: height
     type: number
 GetScreenResolutions:
-  comment: output is actually an unpacked string table
   inputs: {}
   outputs:
   - name: resolutions
     stub: 1024x768
     type: string
+  outstride: 1
 GetScreenWidth:
   impl: GetScreenWidth
   inputs: {}
