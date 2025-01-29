@@ -6267,12 +6267,13 @@ Enum:
     InvalidMessage: 2
     InvalidPrefix: 1
     NotInGroup: 5
+    NotInGuild: 10
     Success: 0
     TargetRequired: 6
   SendAddonMessageResultMeta:
-    MaxValue: 9
+    MaxValue: 10
     MinValue: 0
-    NumValues: 10
+    NumValues: 11
   SharedStringFlag:
     InternalOnly: 1
   SharedStringFlagMeta:

@@ -635,6 +635,13 @@ C_AddOns.DoesAddOnExist:
   outputs:
   - name: exists
     type: boolean
+C_AddOns.DoesAddOnHaveLoadError:
+  inputs:
+  - name: name
+    type: uiAddon
+  outputs:
+  - name: hadError
+    type: boolean
 C_AddOns.EnableAddOn:
   inputs:
   - name: name
