@@ -2581,6 +2581,13 @@ Frame:
       outstride: 1
     GetAttribute:
       impl: Frame/GetAttribute
+      inputs:
+      - name: attributeName
+        type: string
+      outputs:
+      - name: value
+        nilable: true
+        type: any
     GetBoundsRect:
       inputs: {}
       outputs:

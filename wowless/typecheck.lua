@@ -48,6 +48,9 @@ return function(api)
   end
 
   local plainscalartypechecks = {
+    any = function(value)
+      return value
+    end,
     boolean = function(value, isout)
       return not not value, isout and type(value) ~= 'boolean'
     end,
