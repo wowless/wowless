@@ -78,6 +78,8 @@ type:
                               required: true
                               type:
                                 schema: type
+                    mayreturnnils:
+                      type: boolean
                     mayreturnnothing:
                       type: boolean
                     outputs:

@@ -241,6 +241,7 @@ for k, v in pairs(uiobjectdata) do
       methods[mk] = {
         impl = 'function(...) ' .. readFile('data/uiobjects/' .. mv.impl .. '.lua') .. ' end',
         inputs = mv.inputs,
+        mayreturnnils = mv.mayreturnnils,
         mayreturnnothing = mv.mayreturnnothing,
         outputs = mv.outputs,
         outstride = mv.outstride,
