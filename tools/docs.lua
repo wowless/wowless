@@ -318,7 +318,6 @@ local function rewriteApis()
     local ns = split(name)
     local api = apis[name]
     local newapi = {
-      impl = api and api.impl,
       inputs = insig(fn, ns),
       mayreturnnils = api and api.mayreturnnils,
       mayreturnnothing = mayreturnnothing(fn, api),
@@ -331,6 +330,7 @@ local function rewriteApis()
       assert(tableeq(lies[name], newapi), 'lie mismatch on ' .. name)
       lies[name] = nil
     else
+      newapi.impl = api and api.impl
       apis[name] = newapi
     end
   end

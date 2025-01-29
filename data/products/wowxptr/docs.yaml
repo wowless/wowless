@@ -28,7 +28,6 @@ lies:
       - name: result
         type: boolean
     UnitName:
-      impl: UnitName
       inputs:
       - name: unit
         type: unit
