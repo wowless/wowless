@@ -25775,7 +25775,6 @@ GetBillingTimeRested:
   - name: billingTimeRested
     type: number
 GetBinding:
-  comment: trailing string... with keybinding values
   inputs:
   - name: index
     type: number
@@ -25786,6 +25785,9 @@ GetBinding:
   - name: category
     stub: BINDING_HEADER_MOVEMENT
     type: string
+  - name: key
+    type: string
+  outstride: 1
 GetBindingAction: {}
 GetBindingByKey: {}
 GetBindingKey: {}
