@@ -81,6 +81,66 @@ AppearanceSourceInfo:
       type: number
 AuraData:
   fields: {}
+C_AccountStore.AccountStoreCategoryInfo:
+  fields:
+    icon:
+      type: number
+    id:
+      type: number
+    name:
+      type: string
+    type:
+      type:
+        enum: AccountStoreCategoryType
+C_AccountStore.AccountStoreCurrencyInfo:
+  fields:
+    amount:
+      type: number
+    icon:
+      type: number
+    id:
+      type: number
+    maxQuantity:
+      nilable: true
+      type: number
+    name:
+      type: string
+C_AccountStore.AccountStoreItemInfo:
+  fields:
+    creatureDisplayID:
+      nilable: true
+      type: number
+    currencyID:
+      type: number
+    customUIModelSceneID:
+      nilable: true
+      type: number
+    description:
+      nilable: true
+      type: string
+    displayIcon:
+      nilable: true
+      type: number
+    flags:
+      type:
+        enum: AccountStoreItemFlag
+    id:
+      type: number
+    name:
+      type: string
+    nonrefundable:
+      type: boolean
+    price:
+      type: number
+    refundSecondsRemaining:
+      nilable: true
+      type: number
+    status:
+      type:
+        enum: AccountStoreItemStatus
+    transmogSetID:
+      nilable: true
+      type: number
 C_ActionBar.ActionUsableState:
   fields:
     noMana:
@@ -263,8 +323,6 @@ C_BattleNet.BNetGameAccountInfo:
     isInCurrentRegion:
       type: boolean
     isOnline:
-      type: boolean
-    isWowMobile:
       type: boolean
     playerGuid:
       nilable: true
@@ -1377,6 +1435,24 @@ C_EncounterJournal.EncounterJournalSectionInfo:
       type: string
     uiModelSceneID:
       type: number
+C_EndOfMatchUI.MatchDetail:
+  fields:
+    type:
+      type:
+        enum: MatchDetailType
+    value:
+      type: number
+C_EndOfMatchUI.MatchDetails:
+  fields:
+    detailsList:
+      type:
+        arrayof:
+          structure: C_EndOfMatchUI.MatchDetail
+    matchEnded:
+      type: boolean
+    matchType:
+      type:
+        enum: EndOfMatchType
 C_Engraving.EngravingData:
   fields:
     equipmentSlot:
@@ -1487,6 +1563,9 @@ C_FriendList.FriendInfo:
     notes:
       nilable: true
       type: string
+    rafLinkType:
+      type:
+        enum: RafLinkType
 C_FriendList.WhoInfo:
   fields:
     area:
@@ -1898,8 +1977,6 @@ C_LFGList.GroupFinderActivityInfo:
       type: string
     groupFinderActivityGroupID:
       type: number
-    iconFileDataID:
-      type: number
     ilvlSuggestion:
       type: number
     isCurrentRaidActivity:
@@ -1918,13 +1995,13 @@ C_LFGList.GroupFinderActivityInfo:
       type: boolean
     mapID:
       type: number
-    maxLevel:
-      type: number
     maxLevelSuggestion:
       type: number
     maxNumPlayers:
       type: number
     minLevel:
+      type: number
+    minLevelSuggestion:
       type: number
     orderIndex:
       type: number
@@ -1974,8 +2051,6 @@ C_LFGList.LfgCategoryData:
       type: boolean
 C_LFGList.LfgEntryData:
   fields:
-    activityID:
-      type: number
     activityIDs:
       type:
         arrayof: number
@@ -2012,6 +2087,39 @@ C_LFGList.LfgEntryData:
       type: number
     voiceChat:
       type: string
+C_LFGList.LfgListingCreateData:
+  fields:
+    activityIDs:
+      type:
+        arrayof: number
+    isAutoAccept:
+      default: false
+      type: boolean
+    isCrossFactionListing:
+      default: false
+      type: boolean
+    isPrivateGroup:
+      default: false
+      type: boolean
+    newPlayerFriendly:
+      default: false
+      type: boolean
+    playstyle:
+      default: 0
+      type:
+        enum: LFGEntryPlaystyle
+    questID:
+      nilable: true
+      type: number
+    requiredDungeonScore:
+      default: 0
+      type: number
+    requiredItemLevel:
+      default: 0
+      type: number
+    requiredPvpRating:
+      default: 0
+      type: number
 C_LFGList.LFGRoles:
   fields:
     dps:
@@ -2022,8 +2130,6 @@ C_LFGList.LFGRoles:
       type: boolean
 C_LFGList.LfgSearchResultData:
   fields:
-    activityID:
-      type: number
     activityIDs:
       type:
         arrayof: number
@@ -2033,6 +2139,9 @@ C_LFGList.LfgSearchResultData:
       type: boolean
     comment:
       type: string
+    crossFactionListing:
+      nilable: true
+      type: boolean
     hasSelf:
       type: boolean
     isDelisted:
@@ -2044,9 +2153,9 @@ C_LFGList.LfgSearchResultData:
       type:
         structure: C_LFGList.BestDungeonScoreMapInfo
     leaderDungeonScoreInfo:
-      nilable: true
       type:
-        structure: C_LFGList.BestDungeonScoreMapInfo
+        arrayof:
+          structure: C_LFGList.BestDungeonScoreMapInfo
     leaderFactionGroup:
       type: number
     leaderName:
@@ -2056,9 +2165,9 @@ C_LFGList.LfgSearchResultData:
       nilable: true
       type: number
     leaderPvpRatingInfo:
-      nilable: true
       type:
-        structure: C_LFGList.PvpRatingInfo
+        arrayof:
+          structure: C_LFGList.PvpRatingInfo
     name:
       type: string
     newPlayerFriendly:
@@ -2074,13 +2183,51 @@ C_LFGList.LfgSearchResultData:
       type: number
     partyGUID:
       type: string
+    playstyle:
+      nilable: true
+      type:
+        enum: LFGEntryPlaystyle
+    questID:
+      nilable: true
+      type: number
+    requiredDungeonScore:
+      nilable: true
+      type: number
     requiredHonorLevel:
       type: number
     requiredItemLevel:
       type: number
+    requiredPvpRating:
+      nilable: true
+      type: number
     searchResultID:
       type: number
     voiceChat:
+      type: string
+C_LFGList.LfgSearchResultPlayerInfo:
+  fields:
+    areaName:
+      nilable: true
+      type: string
+    assignedRole:
+      type: string
+    classFilename:
+      type: string
+    className:
+      type: string
+    isLeader:
+      type: boolean
+    level:
+      nilable: true
+      type: number
+    lfgRoles:
+      type:
+        structure: C_LFGList.LFGRoles
+    name:
+      nilable: true
+      type: string
+    specName:
+      nilable: true
       type: string
 C_LFGList.PvpRatingInfo:
   fields:
@@ -2425,20 +2572,208 @@ C_QuestLog.QuestObjectiveInfo:
       type: string
     type:
       type: string
-C_QuestLog.QuestOnMapInfo:
-  fields:
-    questID:
-      type: number
-    x:
-      type: number
-    y:
-      type: number
 C_QuestSession.QuestSessionPlayerDetails:
   fields:
     guid:
       type: string
     name:
       type: string
+C_RecruitAFriend.RafAppearanceInfo:
+  fields:
+    appearanceID:
+      type: number
+C_RecruitAFriend.RafAppearanceSetInfo:
+  fields:
+    appearanceIDs:
+      type:
+        arrayof: number
+    setID:
+      type: number
+    setName:
+      type: string
+C_RecruitAFriend.RafIllusionInfo:
+  fields:
+    spellItemEnchantmentID:
+      type: number
+C_RecruitAFriend.RafInfo:
+  fields:
+    claimInProgress:
+      type: boolean
+    recruitmentInfo:
+      nilable: true
+      type:
+        structure: C_RecruitAFriend.RafRecruitmentinfo
+    recruits:
+      type:
+        arrayof:
+          structure: C_RecruitAFriend.RafRecruit
+    versions:
+      type:
+        arrayof:
+          structure: C_RecruitAFriend.RafVersionInfo
+C_RecruitAFriend.RafMonthCount:
+  fields:
+    availableMonths:
+      type: number
+    lifetimeMonths:
+      type: number
+    spentMonths:
+      type: number
+C_RecruitAFriend.RafMountInfo:
+  fields:
+    mountID:
+      type: number
+    spellID:
+      type: number
+C_RecruitAFriend.RafPetInfo:
+  fields:
+    creatureID:
+      type: number
+    description:
+      type: string
+    displayID:
+      type: number
+    speciesID:
+      type: number
+    speciesName:
+      type: string
+C_RecruitAFriend.RafRecruit:
+  fields:
+    acceptanceID:
+      type: string
+    activities:
+      type:
+        arrayof:
+          structure: C_RecruitAFriend.RafRecruitActivity
+    battleTag:
+      type: string
+    bnetAccountID:
+      type: number
+    monthsRemaining:
+      type: number
+    subStatus:
+      type:
+        enum: RafRecruitSubStatus
+    versionRecruited:
+      type:
+        enum: RecruitAFriendRewardsVersion
+    wowAccountGUID:
+      type: string
+C_RecruitAFriend.RafRecruitActivity:
+  fields:
+    activityID:
+      type: number
+    rewardQuestID:
+      type: number
+    state:
+      type:
+        enum: RafRecruitActivityState
+C_RecruitAFriend.RafRecruitmentinfo:
+  fields:
+    expireTime:
+      type: number
+    recruitmentCode:
+      type: string
+    recruitmentURL:
+      type: string
+    remainingTimeSeconds:
+      type: number
+    remainingUses:
+      type: number
+    sourceFaction:
+      type: string
+    sourceRealm:
+      type: string
+    totalUses:
+      type: number
+C_RecruitAFriend.RafReward:
+  fields:
+    appearanceInfo:
+      nilable: true
+      type:
+        structure: C_RecruitAFriend.RafAppearanceInfo
+    appearanceSetInfo:
+      nilable: true
+      type:
+        structure: C_RecruitAFriend.RafAppearanceSetInfo
+    availableInMonths:
+      type: number
+    canAfford:
+      type: boolean
+    canClaim:
+      type: boolean
+    claimed:
+      type: boolean
+    iconID:
+      type: number
+    illusionInfo:
+      nilable: true
+      type:
+        structure: C_RecruitAFriend.RafIllusionInfo
+    itemID:
+      type: number
+    monthCost:
+      type: number
+    monthsRequired:
+      type: number
+    mountInfo:
+      nilable: true
+      type:
+        structure: C_RecruitAFriend.RafMountInfo
+    petInfo:
+      nilable: true
+      type:
+        structure: C_RecruitAFriend.RafPetInfo
+    rafVersion:
+      type:
+        enum: RecruitAFriendRewardsVersion
+    repeatable:
+      type: boolean
+    repeatableClaimCount:
+      type: number
+    rewardID:
+      type: number
+    rewardType:
+      type:
+        enum: RafRewardType
+    titleInfo:
+      nilable: true
+      type:
+        structure: C_RecruitAFriend.RafTitleInfo
+C_RecruitAFriend.RafSystemInfo:
+  fields:
+    daysInCycle:
+      type: number
+    maxRecruitmentUses:
+      type: number
+    maxRecruitMonths:
+      type: number
+    maxRecruits:
+      type: number
+C_RecruitAFriend.RafTitleInfo:
+  fields:
+    titleMaskID:
+      type: number
+C_RecruitAFriend.RafVersionInfo:
+  fields:
+    monthCount:
+      type:
+        structure: C_RecruitAFriend.RafMonthCount
+    nextReward:
+      nilable: true
+      type:
+        structure: C_RecruitAFriend.RafReward
+    numAffordableRewards:
+      type: number
+    numRecruits:
+      type: number
+    rafVersion:
+      type:
+        enum: RecruitAFriendRewardsVersion
+    rewards:
+      type:
+        arrayof:
+          structure: C_RecruitAFriend.RafReward
 C_Reforge.dstReforgeStats:
   fields:
     name:
@@ -2513,6 +2848,109 @@ C_ResearchInfo.DigSiteMapInfo:
     researchSiteID:
       type: number
     textureIndex:
+      type: number
+C_ScenarioInfo.ScenarioCriteriaInfo:
+  fields:
+    assetID:
+      default: 0
+      type: number
+    completed:
+      default: false
+      type: boolean
+    criteriaID:
+      type: number
+    criteriaType:
+      default: 0
+      type: number
+    description:
+      type: string
+    duration:
+      default: 0
+      type: number
+    elapsed:
+      default: 0
+      type: number
+    failed:
+      default: false
+      type: boolean
+    flags:
+      default: 0
+      type: number
+    isFormatted:
+      default: false
+      type: boolean
+    isWeightedProgress:
+      default: false
+      type: boolean
+    quantity:
+      default: 0
+      type: number
+    quantityString:
+      type: string
+    totalQuantity:
+      default: 0
+      type: number
+C_ScenarioInfo.ScenarioInformation:
+  fields:
+    area:
+      type: string
+    currentStage:
+      type: number
+    flags:
+      type: number
+    isComplete:
+      type: boolean
+    money:
+      type: number
+    name:
+      type: string
+    numStages:
+      type: number
+    scenarioID:
+      type: number
+    type:
+      type: number
+    uiTextureKit:
+      type: string
+    xp:
+      type: number
+C_ScenarioInfo.ScenarioStepInfo:
+  fields:
+    description:
+      type: string
+    isBonusStep:
+      type: boolean
+    isForCurrentStepOnly:
+      type: boolean
+    numCriteria:
+      type: number
+    rewardQuestID:
+      type: number
+    shouldShowBonusObjective:
+      type: boolean
+    spells:
+      type:
+        arrayof:
+          structure: C_ScenarioInfo.ScenarioStepSpellInfo
+    stepFailed:
+      type: boolean
+    stepID:
+      type: number
+    title:
+      type: string
+    weightedProgress:
+      nilable: true
+      type: number
+    widgetSetID:
+      nilable: true
+      type: number
+C_ScenarioInfo.ScenarioStepSpellInfo:
+  fields:
+    icon:
+      type: number
+    name:
+      type: string
+    spellID:
       type: number
 C_ScriptedAnimations.ScriptedAnimationEffect:
   fields:
@@ -2600,31 +3038,6 @@ C_Spell.SpellInfo:
     originalIconID:
       type: number
     spellID:
-      type: number
-C_TaskQuest.TaskPOIData:
-  fields:
-    childDepth:
-      nilable: true
-      type: number
-    inProgress:
-      type: boolean
-    isCombatAllyQuest:
-      type: boolean
-    isDaily:
-      type: boolean
-    isMeta:
-      type: boolean
-    isQuestStart:
-      type: boolean
-    mapID:
-      type: number
-    numObjectives:
-      type: number
-    questId:
-      type: number
-    x:
-      type: number
-    y:
       type: number
 C_TaxiMap.MapTaxiNodeInfo:
   fields:
@@ -3630,6 +4043,14 @@ ItemLocation:
 ItemTransmogInfo:
   fields: {}
   mixin: ItemTransmogInfoMixin
+LFGRoles:
+  fields:
+    dps:
+      type: boolean
+    healer:
+      type: boolean
+    tank:
+      type: boolean
 LocaleInfo:
   fields:
     localeId:
@@ -3684,6 +4105,35 @@ PrivateAuraIconInfo:
     iconHeight:
       type: number
     iconWidth:
+      type: number
+QuestPOIMapInfo:
+  fields:
+    childDepth:
+      nilable: true
+      type: number
+    inProgress:
+      type: boolean
+    isCombatAllyQuest:
+      type: boolean
+    isDaily:
+      type: boolean
+    isMeta:
+      type: boolean
+    isQuestStart:
+      type: boolean
+    mapID:
+      type: number
+    numObjectives:
+      type: number
+    questID:
+      type: number
+    questTagType:
+      nilable: true
+      type:
+        enum: QuestTagType
+    x:
+      type: number
+    y:
       type: number
 QueueSpecificInfo:
   fields:

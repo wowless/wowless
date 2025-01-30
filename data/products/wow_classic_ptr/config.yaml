@@ -1,5 +1,7 @@
 ---
 addon:
+  aliased_in_framexml:
+    C_LFGInfo.IsPremadeGroupEnabled: {}
   capsule:
     apinamespaces:
       C_AuthChallenge: {}
@@ -47,6 +49,9 @@ addon:
     C_ChatInfo.RegisterAddonMessagePrefix: {}
     C_ChatInfo.SendAddonMessage: {}
     C_ChatInfo.SendAddonMessageLogged: {}
+    C_Traits.GetConditionInfo: {}
+    C_Traits.GetEntryInfo: {}
+    C_Traits.GetTreeInfo: {}
 runner:
   skip_events:
     AJ_PVP_RBG_ACTION: missing HonorFrame_SetType
@@ -61,7 +66,7 @@ runner:
     LOOT_MASTER: {}
     USERANDOM: {}
 runtime:
-  texturekitstatus: false
+  texturekitstatus: true
   warners:
     archaeologydigsiteframe: {}
     fontstring: {}
