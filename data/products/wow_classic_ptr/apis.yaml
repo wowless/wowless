@@ -14293,6 +14293,11 @@ GetExpertisePercent:
   outputs:
   - type: number
   - type: number
+GetExtraBarIndex:
+  inputs: {}
+  outputs:
+  - name: value
+    type: number
 GetFactionInfo:
   inputs:
   - name: factionIndex
@@ -17147,6 +17152,11 @@ HasBoundGemProposed:
     type: boolean
 HasCompletedAnyAchievement: {}
 HasDualWieldPenalty: {}
+HasExtraActionBar:
+  inputs: {}
+  outputs:
+  - name: value
+    type: boolean
 HasFilledPetition:
   inputs: {}
   outputs:

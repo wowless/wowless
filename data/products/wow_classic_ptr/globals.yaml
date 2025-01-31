@@ -2702,7 +2702,9 @@ Enum:
     IngameWhoListDisabled: 77
     InstanceDifficultyBannerDisabled: 83
     LandingPageFactionID: 35
+    LgPlaceholder1Acarpentieri: 103
     MacrosDisabled: 80
+    MainlinePlaceholder1: 102
     MapPlunderstormCircle: 48
     MaxAccountCharReservationsPerContentset: 4
     MaxCharReservationsPerRealm: 3
@@ -2765,9 +2767,9 @@ Enum:
     MinValue: 0
     NumValues: 3
   GameRuleMeta:
-    MaxValue: 101
+    MaxValue: 103
     MinValue: 0
-    NumValues: 102
+    NumValues: 104
   GameRuleType:
     Bool: 2
     Float: 1
