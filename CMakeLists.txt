@@ -568,9 +568,9 @@ add_library(libcurl ALIAS CURL::libcurl)
 find_package(OpenSSL REQUIRED)
 add_library(libcrypto ALIAS OpenSSL::Crypto)
 
-add_library(tactless STATIC vendor/ctactless/tactless.c
-                            vendor/ctactless/tactless.h)
-target_include_directories(tactless PUBLIC vendor/ctactless)
+add_library(tactless STATIC vendor/tactless/tactless.c
+                            vendor/tactless/tactless.h)
+target_include_directories(tactless PUBLIC vendor/tactless)
 target_link_libraries(tactless PRIVATE libcrypto libcurl zlib)
 
 lua2c(toolstactless tactless=c)
