@@ -1817,6 +1817,11 @@ EditBox:
       outputs:
       - name: numLetters
         type: number
+    GetNumLines:
+      inputs: {}
+      outputs:
+      - name: lines
+        type: number
     GetText:
       getter:
       - name: editboxText

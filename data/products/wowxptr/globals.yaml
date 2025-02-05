@@ -535,6 +535,18 @@ Enum:
     MaxValue: 4
     MinValue: 0
     NumValues: 5
+  AssertDomain:
+    Art: 1
+    Design: 2
+    Engineering: 4
+    LiveOperations: 64
+    Performance: 32
+    Sound: 8
+    Tools: 16
+  AssertDomainMeta:
+    MaxValue: 64
+    MinValue: 1
+    NumValues: 7
   AuctionHouseCommoditySortOrder:
     Quantity: 1
     UnitPrice: 0
@@ -3277,7 +3289,9 @@ Enum:
     IngameWhoListDisabled: 77
     InstanceDifficultyBannerDisabled: 83
     LandingPageFactionID: 35
+    LgPlaceholder1Acarpentieri: 103
     MacrosDisabled: 80
+    MainlinePlaceholder1: 102
     MapPlunderstormCircle: 48
     MaxAccountCharReservationsPerContentset: 4
     MaxCharReservationsPerRealm: 3
@@ -3340,9 +3354,9 @@ Enum:
     MinValue: 0
     NumValues: 3
   GameRuleMeta:
-    MaxValue: 101
+    MaxValue: 103
     MinValue: 0
-    NumValues: 102
+    NumValues: 104
   GameRuleType:
     Bool: 2
     Float: 1
@@ -4661,6 +4675,17 @@ Enum:
     MaxValue: 3
     MinValue: 0
     NumValues: 4
+  LogPriority:
+    Debug: 30
+    Error: 2
+    Fatal: 1
+    Normal: 10
+    Spam: 40
+    Warning: 3
+  LogPriorityMeta:
+    MaxValue: 40
+    MinValue: 1
+    NumValues: 6
   LootSlotType:
     Currency: 3
     Item: 1

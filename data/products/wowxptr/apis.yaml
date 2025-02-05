@@ -2243,6 +2243,11 @@ C_AuctionHouse.SetFavoriteItem:
   - name: setFavorite
     type: boolean
   outputs: {}
+C_AuctionHouse.ShouldAutoPopulatePrice:
+  inputs: {}
+  outputs:
+  - name: shouldAutoPopulatePrice
+    type: boolean
 C_AuctionHouse.StartCommoditiesPurchase:
   inputs:
   - name: itemID
@@ -2250,6 +2255,11 @@ C_AuctionHouse.StartCommoditiesPurchase:
   - name: quantity
     type: number
   outputs: {}
+C_AuctionHouse.SupportsCopperValues:
+  inputs: {}
+  outputs:
+  - name: supportsCopperValues
+    type: boolean
 C_AuthChallenge.Cancel: {}
 C_AuthChallenge.DidChallengeSucceed: {}
 C_AuthChallenge.OnTabPressed: {}
@@ -25696,11 +25706,19 @@ ConfirmReadyCheck: {}
 ConfirmTalentWipe:
   inputs: {}
   outputs: {}
-ConsoleAddMessage:
+ConsoleEcho:
   inputs:
-  - name: message
+  - name: command
     type: string
-  outputs: {}
+  - default: false
+    name: addToHistory
+    type: boolean
+  - name: prefix
+    nilable: true
+    type: string
+  outputs:
+  - name: result
+    type: boolean
 ConsoleExec:
   inputs:
   - name: command

@@ -4510,10 +4510,6 @@ GLOBAL_MOUSE_UP:
   payload:
   - name: button
     type: string
-GLUE_CONSOLE_LOG:
-  payload:
-  - name: message
-    type: string
 GLUE_SCREENSHOT_FAILED:
   payload: {}
 GLUE_SCREENSHOT_STARTED:
@@ -4629,6 +4625,8 @@ GUILD_RENAME_REQUIRED:
   - name: flagSet
     type: boolean
 GUILD_REWARDS_LIST:
+  payload: {}
+GUILD_REWARDS_LIST_UPDATE:
   payload: {}
 GUILD_ROSTER_UPDATE:
   payload:
