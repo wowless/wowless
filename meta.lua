@@ -8,6 +8,10 @@ function debug.getfunctionstats(f) end
 ---@return function
 function debug.newcfunction(f) end
 
+---@param f function
+---@return function
+function debug.newsecurefunction(f) end
+
 ---@param taint string?
 function debug.setnewclosuretaint(taint) end
 
