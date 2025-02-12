@@ -294,6 +294,7 @@ table.insert(builds, {
     'spec/data/apis_spec.lua',
     'spec/data/config_spec.lua',
     'spec/data/docs_spec.lua',
+    'spec/data/events_spec.lua',
     'spec/data/flavors_spec.lua',
     'spec/data/globals_spec.lua',
     'spec/data/impl_spec.lua',
