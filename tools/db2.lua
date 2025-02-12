@@ -236,12 +236,12 @@ local function rows(content, dbdef)
     end
     table.insert(commons, common)
   end
-  local strings = {}
+  local stringstab = {}
   for _, sh in ipairs(shs) do
     local off = sh.file_offset + sh.record_count * h.record_size
-    table.insert(strings, content:sub(off + 1, off + sh.string_table_size))
+    table.insert(stringstab, content:sub(off + 1, off + sh.string_table_size))
   end
-  strings = table.concat(strings)
+  local strings = table.concat(stringstab)
   do
     local roffset = 0
     for i = #shs, 1, -1 do
