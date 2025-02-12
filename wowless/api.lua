@@ -179,7 +179,7 @@ local function new(log, maxErrors, product)
       error('unknown type ' .. tostring(typename) .. ' for ' .. tostring(objname))
     end
     log(3, 'creating %s%s', objtype.name, objname and (' named ' .. objname) or '')
-    local objp = newproxy()
+    local objp = newproxy(false)
     local obj = setmetatable({ [0] = objp }, objtype.sandboxMT)
     local ud = objtype.constructor()
     ud.luarep = obj

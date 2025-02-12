@@ -45,3 +45,6 @@ files['data/uiobjects'] = {
     'toTexture',
   },
 }
+exclude_files = {
+  'meta.lua',
+}
