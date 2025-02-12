@@ -2,7 +2,6 @@
   "runtime.version": "Lua 5.1",
   "workspace.ignoreDir": [
     "/addon/",
-    "/data/impl/",
     "/data/uiobjects/",
     "/spec/"
   ]
