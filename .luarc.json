@@ -3,7 +3,6 @@
   "workspace.ignoreDir": [
     "/addon/",
     "/data/",
-    "/luals/",
     "/spec/"
   ]
 }
