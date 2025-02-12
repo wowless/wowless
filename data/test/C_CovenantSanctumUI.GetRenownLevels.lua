@@ -7,7 +7,7 @@ local function numkeys(t)
   end
   return n
 end
-local islite = _G.__wowless and _G.__wowless.lite
+local islite = T.wowless and T.wowless.lite
 local function check(...)
   assertEquals(1, select('#', ...))
   local t = ...

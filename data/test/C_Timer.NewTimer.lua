@@ -25,7 +25,7 @@ for k, v in pairs(readonly) do
     t[k] = nil
   end)
   assertEquals(false, success, k)
-  assertEquals('Attempted to assign to read-only key ' .. k, msg:sub(-37 - k:len()))
+  assertEquals('Attempted to assign to read-only key ' .. k, assert(msg):sub(-37 - k:len()))
 end
 assertEquals(nil, t.WowlessStuff)
 t.WowlessStuff = 'wowless'
