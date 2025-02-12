@@ -1,12 +1,5 @@
-local args
-local require = require
-_G.require = function(k, ...)
-  assert(k:sub(1, 6) ~= 'tools.')
-  assert(k ~= 'wowapi.yaml' or args.frame0 or args.profile)
-  return require(k, ...)
-end
 local products = require('runtime.products')
-args = (function()
+local args = (function()
   local parser = require('argparse')()
   local run = parser:command('run'):summary('run wowless')
   run:option('-p --product', 'product tag'):count(1):choices(products)
