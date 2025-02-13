@@ -1944,6 +1944,11 @@ EditBox:
     SetFocus:
       inputs: {}
       outputs: {}
+    SetFontStringIgnoreParentAlpha:
+      inputs:
+      - name: ignoreParentAlpha
+        type: boolean
+      outputs: {}
     SetHighlightColor:
       inputs:
       - name: colorR

@@ -8940,6 +8940,11 @@ C_EventScheduler.GetScheduledEvents:
     type:
       arrayof:
         structure: C_EventScheduler.ScheduledEventInfo
+C_EventScheduler.HasData:
+  inputs: {}
+  outputs:
+  - name: hasData
+    type: boolean
 C_EventScheduler.HasSavedReminders:
   inputs: {}
   outputs:
