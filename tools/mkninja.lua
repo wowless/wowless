@@ -411,7 +411,7 @@ end
 table.insert(out, 'default test.out')
 table.insert(out, 'subninja build/cmake/build.ninja')
 
-local f = io.open('build.ninja', 'w')
+local f = assert(io.open('build.ninja', 'w'))
 f:write(table.concat(out, '\n'))
 f:write('\n')
 f:close()
