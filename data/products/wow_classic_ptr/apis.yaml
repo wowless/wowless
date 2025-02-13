@@ -13756,7 +13756,7 @@ GetBlockChance: {}
 GetBonusBarIndex: {}
 GetBonusBarOffset: {}
 GetBuildInfo:
-  impl: GetBuildInfo_1_15_0
+  impl: GetBuildInfo_3_4_2
   inputs: {}
   outputs:
   - name: version

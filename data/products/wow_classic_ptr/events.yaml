@@ -223,21 +223,57 @@ ARTIFACT_DIGSITE_COMPLETE:
     type: number
 AUCTION_BIDDER_LIST_UPDATE:
   payload: {}
+AUCTION_CANCELED:
+  payload: {}
+AUCTION_HOUSE_AUCTION_CREATED:
+  payload: {}
+AUCTION_HOUSE_AUCTIONS_EXPIRED:
+  payload: {}
+AUCTION_HOUSE_BROWSE_FAILURE:
+  payload: {}
+AUCTION_HOUSE_BROWSE_RESULTS_ADDED:
+  payload: {}
+AUCTION_HOUSE_BROWSE_RESULTS_UPDATED:
+  payload: {}
 AUCTION_HOUSE_CLOSED:
   payload: {}
 AUCTION_HOUSE_DISABLED:
+  payload: {}
+AUCTION_HOUSE_FAVORITES_UPDATED:
+  payload: {}
+AUCTION_HOUSE_ITEM_DELIVERY_DELAY_UPDATE:
+  payload: {}
+AUCTION_HOUSE_NEW_BID_RECEIVED:
+  payload: {}
+AUCTION_HOUSE_NEW_RESULTS_RECEIVED:
   payload: {}
 AUCTION_HOUSE_POST_ERROR:
   payload: {}
 AUCTION_HOUSE_POST_WARNING:
   payload: {}
+AUCTION_HOUSE_PURCHASE_COMPLETED:
+  payload: {}
 AUCTION_HOUSE_SCRIPT_DEPRECATED:
   payload: {}
 AUCTION_HOUSE_SHOW:
   payload: {}
+AUCTION_HOUSE_SHOW_COMMODITY_WON_NOTIFICATION:
+  payload: {}
+AUCTION_HOUSE_SHOW_ERROR:
+  payload: {}
 AUCTION_HOUSE_SHOW_FORMATTED_NOTIFICATION:
   payload: {}
 AUCTION_HOUSE_SHOW_NOTIFICATION:
+  payload: {}
+AUCTION_HOUSE_THROTTLED_MESSAGE_DROPPED:
+  payload: {}
+AUCTION_HOUSE_THROTTLED_MESSAGE_QUEUED:
+  payload: {}
+AUCTION_HOUSE_THROTTLED_MESSAGE_RESPONSE_RECEIVED:
+  payload: {}
+AUCTION_HOUSE_THROTTLED_MESSAGE_SENT:
+  payload: {}
+AUCTION_HOUSE_THROTTLED_SYSTEM_READY:
   payload: {}
 AUCTION_ITEM_LIST_UPDATE:
   payload: {}
@@ -423,6 +459,10 @@ BEHAVIORAL_NOTIFICATION:
     type: string
   - name: dbId
     type: string
+BID_ADDED:
+  payload: {}
+BIDS_UPDATED:
+  payload: {}
 BILLING_NAG_DIALOG:
   payload: {}
 BIND_ENCHANT:
@@ -3395,6 +3435,22 @@ COMMENTATOR_TEAMS_SWAPPED:
   payload:
   - name: swapped
     type: boolean
+COMMODITY_PRICE_UNAVAILABLE:
+  payload: {}
+COMMODITY_PRICE_UPDATED:
+  payload: {}
+COMMODITY_PURCHASE_FAILED:
+  payload: {}
+COMMODITY_PURCHASE_SUCCEEDED:
+  payload: {}
+COMMODITY_PURCHASED:
+  payload: {}
+COMMODITY_SEARCH_RESULTS_ADDED:
+  payload: {}
+COMMODITY_SEARCH_RESULTS_RECEIVED:
+  payload: {}
+COMMODITY_SEARCH_RESULTS_UPDATED:
+  payload: {}
 COMPACT_UNIT_FRAME_PROFILES_LOADED:
   payload: {}
 COMPANION_LEARNED:
@@ -3691,6 +3747,8 @@ EXPAND_BAG_BAR_CHANGED:
   - name: expandBagBar
     type: boolean
 EXPERIMENTAL_CVAR_CONFIRMATION_NEEDED:
+  payload: {}
+EXTRA_BROWSE_INFO_RECEIVED:
   payload: {}
 FIRST_FRAME_RENDERED:
   payload: {}
@@ -4040,6 +4098,8 @@ ITEM_DATA_LOAD_RESULT:
     type: number
   - name: success
     type: boolean
+ITEM_KEY_ITEM_INFO_RECEIVED:
+  payload: {}
 ITEM_LOCK_CHANGED:
   payload:
   - name: bagOrSlotIndex
@@ -4056,6 +4116,8 @@ ITEM_LOCKED:
   - name: slotIndex
     nilable: true
     type: number
+ITEM_PURCHASED:
+  payload: {}
 ITEM_PUSH:
   payload:
   - name: bagSlot
@@ -4063,6 +4125,10 @@ ITEM_PUSH:
   - name: iconFileID
     type: number
 ITEM_RESTORATION_BUTTON_STATUS:
+  payload: {}
+ITEM_SEARCH_RESULTS_ADDED:
+  payload: {}
+ITEM_SEARCH_RESULTS_UPDATED:
   payload: {}
 ITEM_TEXT_BEGIN:
   payload: {}
@@ -4546,6 +4612,8 @@ OBLITERUM_FORGE_PENDING_ITEM_CHANGED:
 OPEN_MASTER_LOOT_LIST:
   payload: {}
 OPEN_TABARD_FRAME:
+  payload: {}
+OWNED_AUCTION_BIDDER_INFO_RECEIVED:
   payload: {}
 OWNED_AUCTIONS_UPDATED:
   payload: {}
@@ -5284,6 +5352,8 @@ REPLACE_TRADESKILL_ENCHANT:
     type: string
   - name: replacement
     type: string
+REPLICATE_ITEM_LIST_UPDATE:
+  payload: {}
 REPORT_PLAYER_RESULT:
   payload:
   - name: success

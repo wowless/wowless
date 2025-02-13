@@ -527,6 +527,14 @@ Enum:
     UncommonQuality: 8
     UpgradesOnly: 4
     UsableOnly: 2
+  AuctionHouseFilterCategory:
+    Equipment: 1
+    Rarity: 2
+    Uncategorized: 0
+  AuctionHouseFilterCategoryMeta:
+    MaxValue: 2
+    MinValue: 0
+    NumValues: 3
   AuctionHouseFilterMeta:
     MaxValue: 13
     MinValue: 0
@@ -834,7 +842,6 @@ Enum:
     Ability0Selection: 16
     Ability1Selection: 32
     Ability2Selection: 64
-    AccountStore: 2048
     AcquiredViaLicense: 512
     Converted: 2
     DisplayOverridden: 256
@@ -846,9 +853,9 @@ Enum:
     Revoked: 4
     TradingPost: 1024
   BattlepetDbFlagsMeta:
-    MaxValue: 2048
+    MaxValue: 1024
     MinValue: 0
-    NumValues: 14
+    NumValues: 13
   BattlepetDeletedReason:
     AccountStore: 7
     CageError: 4
@@ -2216,6 +2223,7 @@ Enum:
   CurrencyFlagsB:
     CurrencyBBattlenetVirtualCurrency: 8
     CurrencyBDontDisplayIfZero: 32
+    CurrencyBForceMaxQuantityOnConversion: 256
     CurrencyBNoNotificationMailOnOfflineProgress: 4
     CurrencyBScaleMaxQuantityBySeasonWeeks: 64
     CurrencyBScaleMaxQuantityByWeeksSinceStart: 128
@@ -2223,9 +2231,9 @@ Enum:
     CurrencyBUseTotalEarnedForEarned: 1
     FutureCurrencyFlag: 16
   CurrencyFlagsBMeta:
-    MaxValue: 128
+    MaxValue: 256
     MinValue: 1
-    NumValues: 8
+    NumValues: 9
   CurrencyFlagsMeta:
     MaxValue: -2147483648
     MinValue: 1
@@ -3306,6 +3314,14 @@ Enum:
     MaxValue: 7
     MinValue: 0
     NumValues: 9
+  ItemCommodityStatus:
+    Commodity: 2
+    Item: 1
+    Unknown: 0
+  ItemCommodityStatusMeta:
+    MaxValue: 2
+    MinValue: 0
+    NumValues: 3
   ItemConsumableSubclass:
     Bandage: 7
     CombatCurio: 11

@@ -2725,6 +2725,7 @@ GameTooltip:
     SetInventoryItem: {}
     SetInventoryItemByID: {}
     SetItemByID: {}
+    SetItemKey: {}
     SetLFGDungeonReward: {}
     SetLFGDungeonShortageReward: {}
     SetLootCurrency: {}
