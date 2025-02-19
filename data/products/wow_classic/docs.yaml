@@ -63,6 +63,7 @@ script_objects:
   SimpleTextureAPI: Texture
   SimpleTextureBaseAPI: TextureBase
 skip_docfiles:
+  AuctionHouseDocumentation: {}
   BarberShopInternalDocumentation: {}
   ConfigurationWarningsDocumentation: {}
   DebugToggleDocumentation: {}
@@ -102,6 +103,7 @@ typedefs:
   normalizedValue: number
   NotificationDbId: string
   number: number
+  RecruitAcceptanceID: string
   ScriptObject: UIObject
   ScriptRegion: table
   SimpleAnim: Animation
