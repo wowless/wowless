@@ -1,4 +1,4 @@
 -- TODO support remaining arguments
-local units, sql, specIndex = ...
-local player = units.guids[units.aliases.player]
+local api, sql, specIndex = ...
+local player = api.modules.units.player
 return sql(player.class, player.sex, specIndex)

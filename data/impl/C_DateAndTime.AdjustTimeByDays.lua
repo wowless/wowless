@@ -1,5 +1,5 @@
-local calendarTime, days = ...
+local datalua, calendarTime, days = ...
 local util = require('wowless.util')
 local date = util.calendarTimeToDate(calendarTime)
 assert(date:adddays(days))
-return util.dateToCalendarTime(date)
+return util.dateToCalendarTime(datalua, date)

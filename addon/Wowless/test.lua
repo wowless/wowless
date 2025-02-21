@@ -436,7 +436,7 @@ G.testsuite.sync = function()
           assertEquals(nil, extraArg)
         end,
         numAddonArgs = function()
-          assertEquals(3, numAddonArgs)
+          assertEquals(2, numAddonArgs)
         end,
       }
     end,
@@ -444,6 +444,13 @@ G.testsuite.sync = function()
     StatusBar = function()
       local sb = CreateFrame('StatusBar')
       local nilparent = CreateFrame('Frame')
+      local function checkSetStatusBarTexture()
+        if _G.WowlessData.Config.runtime.texturekitstatus then
+          check1(true, sb:SetStatusBarTexture('interface/icons/temp'))
+        else
+          check0(sb:SetStatusBarTexture('interface/icons/temp'))
+        end
+      end
       local states = {
         colorTexture = function()
           local t = assert(sb:GetStatusBarTexture())
@@ -464,7 +471,7 @@ G.testsuite.sync = function()
         Hack = { -- TODO remove when we can walk from init
           to = 'colorTexture',
           func = function()
-            check0(sb:SetStatusBarTexture('interface/icons/temp'))
+            checkSetStatusBarTexture()
             check0(sb:SetStatusBarColor(0.8, 0.6, 0.4, 0.2))
           end,
         },
@@ -485,7 +492,7 @@ G.testsuite.sync = function()
             resetTexture = 'resetTexture',
           },
           func = function()
-            check0(sb:SetStatusBarTexture('interface/icons/temp'))
+            checkSetStatusBarTexture()
           end,
         },
         SetStatusBarTextureNil = {
@@ -586,6 +593,10 @@ G.testsuite.sync = function()
   }
 end
 
+G.testsuite.xml = function()
+  assertEquals('', table.concat(_G.WowlessXmlErrors, '\n'))
+end
+
 local asyncTests = {
   {
     name = 'event registration and dispatch order',
@@ -617,6 +628,7 @@ local asyncTests = {
         end)
         return f
       end
+      local before = { _G.GetFramesRegisteredForEvent(event) }
       local t, a = {}, {}
       for i = 1, 32 do
         table.insert(a, mkframe('a' .. i))
@@ -641,6 +653,8 @@ local asyncTests = {
         a[i]:RegisterAllEvents()
       end
       assertEquals(0, #log)
+      local after = { _G.GetFramesRegisteredForEvent(event) }
+      assertEquals(#before + pending, #after)
       SendSystemMessage(msg)
     end,
   },

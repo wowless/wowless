@@ -6,11 +6,6 @@ end)()
 
 local deps = {}
 
-local function parseYaml(f)
-  deps[f] = true
-  return (require('wowapi.yaml').parseFile(f))
-end
-
 local function readFile(f)
   deps[f] = true
   return (assert(require('pl.file').read(f)))
@@ -21,8 +16,8 @@ local function dblist(product)
     GlobalStrings = true,
     ManifestInterfaceTOCData = true,
   }
-  local impls = parseYaml('data/impl.yaml')
-  local productapis = parseYaml('data/products/' .. product .. '/apis.yaml')
+  local impls = dofile('build/cmake/runtime/impl.lua')
+  local productapis = dofile('build/cmake/runtime/products/' .. product .. '/apis.lua')
   local sqls = {}
   for _, api in pairs(productapis) do
     local impl = impls[api.impl]

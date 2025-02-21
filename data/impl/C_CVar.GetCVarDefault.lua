@@ -1,3 +1,0 @@
-local datalua, k = ...
-local t = datalua.cvars[k:lower()]
-return t and t.value

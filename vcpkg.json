@@ -1,0 +1,12 @@
+{
+  "dependencies": [
+    "curl",
+    "expat",
+    "libpng",
+    "libyaml",
+    "openssl",
+    "sqlite3",
+    "utf8h",
+    "zlib"
+  ]
+}

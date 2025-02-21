@@ -5,6 +5,12 @@ type:
     addon:
       type:
         record:
+          aliased_in_framexml:
+            type:
+              mapof:
+                key: string
+                value:
+                  record: null
           capsule:
             type:
               record:
@@ -27,12 +33,6 @@ type:
                         ref: api
                       value:
                         record: null
-          globalenv_in_capsule:
-            type:
-              mapof:
-                key: string
-                value:
-                  record: null
           hooked_globals:
             type:
               mapof:
@@ -53,34 +53,6 @@ type:
                   ref: api
                 value:
                   record: null
-          skipped_uiobjects:
-            type:
-              mapof:
-                key:
-                  ref: uiobject
-                value: string
-    docs:
-      type:
-        record:
-          apis:
-            type:
-              record:
-                skip_namespaces:
-                  type:
-                    mapof:
-                      key: string
-                      value:
-                        record: null
-          events:
-            type:
-              record:
-                never_sent:
-                  type:
-                    mapof:
-                      key:
-                        ref: event
-                      value:
-                        record: null
     runner:
       type:
         record:
@@ -91,6 +63,18 @@ type:
                   ref: event
                 value: string
           skip_slashcmds:
+            type:
+              mapof:
+                key: string
+                value:
+                  record: null
+    runtime:
+      type:
+        record:
+          texturekitstatus:
+            required: true
+            type: boolean
+          warners:
             type:
               mapof:
                 key: string

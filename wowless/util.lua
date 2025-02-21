@@ -87,8 +87,9 @@ local function calendarTimeToDate(ct)
   return require('date')(ct.year, ct.month, ct.monthDay, ct.hour, ct.minute)
 end
 
-local function dateToCalendarTime(d)
+local function dateToCalendarTime(datalua, d)
   return {
+    day = datalua.build.flavor ~= 'Mainline' and 0 or nil,
     hour = d:gethours(),
     minute = d:getminutes(),
     month = d:getmonth(),

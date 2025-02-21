@@ -1,2 +1,2 @@
-local units, sql, tabIndex = ... -- TODO honor isInspect
-return sql(units.guids[units.aliases.player].class, tabIndex)
+local api, sql, tabIndex = ... -- TODO honor isInspect
+return sql(api.modules.units.player.class, tabIndex)

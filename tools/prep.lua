@@ -74,7 +74,7 @@ local specDefault = (function()
     if spec.default ~= nil then
       return valstr(spec.default)
     end
-    if spec.nilable then
+    if spec.nilable and not spec.stubnotnil then
       return 'nil'
     end
     local ty = assert(spec.type, 'spec missing a type')
@@ -113,52 +113,53 @@ local apis = {}
 local impls = {}
 local sqlcursors = {}
 local sqllookups = {}
-local states = {
-  -- These are unreferenced by any API, alas.
-  Bindings = parseYaml('data/state/Bindings.yaml').value,
-  ModifiedClicks = parseYaml('data/state/ModifiedClicks.yaml').value,
-}
 do
   local cfg = parseYaml('data/products/' .. product .. '/apis.yaml')
   local implcfg = parseYaml('data/impl.yaml')
   for name, apicfg in pairs(cfg) do
-    if not apicfg.debug then
-      if apicfg.impl then
-        local ic = assert(implcfg[apicfg.impl], 'missing impl ' .. apicfg.impl)
-        apicfg.frameworks = ic.frameworks
-        apicfg.sqls = ic.sqls
-        apicfg.states = ic.states
-        if not impls[apicfg.impl] then
+    if apicfg.impl then
+      local ic = assert(implcfg[apicfg.impl], 'missing impl ' .. apicfg.impl)
+      apicfg.frameworks = ic.module and { 'api' } or ic.frameworks
+      apicfg.sqls = ic.sqls
+      if not impls[apicfg.impl] then
+        if ic.module then
+          -- TODO make this smarter so we don't piggy back on framework
+          local fmt = 'return (...).modules[%q][%q](select(2,...))'
+          impls[apicfg.impl] = fmt:format(ic.module, ic['function'] or apicfg.impl)
+        else
           impls[apicfg.impl] = readFile('data/impl/' .. apicfg.impl .. '.lua')
         end
-      else
-        local rets = {}
-        for _, out in ipairs(apicfg.outputs or {}) do
-          table.insert(rets, specDefault(out))
-        end
-        apicfg.stub = 'return ' .. table.concat(rets, ',')
       end
-      for _, sql in ipairs(apicfg.sqls or {}) do
-        if sql.cursor then
-          sqlcursors[sql.cursor] = {
-            sql = readFile('data/sql/cursor/' .. sql.cursor .. '.sql'),
-            table = sql.table,
-          }
-        elseif sql.lookup then
-          sqllookups[sql.lookup] = {
-            sql = readFile('data/sql/lookup/' .. sql.lookup .. '.sql'),
-            table = sql.table,
-          }
+    elseif apicfg.stubnothing then
+      apicfg.stub = ''
+    else
+      local outs = apicfg.outputs or {}
+      local rets = {}
+      local nonstride = #outs - (apicfg.outstride or 0)
+      for i = 1, nonstride do
+        table.insert(rets, specDefault(outs[i]))
+      end
+      for _ = 1, apicfg.stuboutstrides or 1 do
+        for j = nonstride + 1, #outs do
+          table.insert(rets, specDefault(outs[j]))
         end
       end
-      for _, state in ipairs(apicfg.states or {}) do
-        if not states[state] then
-          local statecfg = parseYaml('data/state/' .. state .. '.yaml')
-          states[state] = statecfg.value
-        end
-      end
-      apis[name] = apicfg
+      apicfg.stub = 'return ' .. table.concat(rets, ',')
     end
+    for _, sql in ipairs(apicfg.sqls or {}) do
+      if sql.cursor then
+        sqlcursors[sql.cursor] = {
+          sql = readFile('data/sql/cursor/' .. sql.cursor .. '.sql'),
+          table = sql.table,
+        }
+      elseif sql.lookup then
+        sqllookups[sql.lookup] = {
+          sql = readFile('data/sql/lookup/' .. sql.lookup .. '.sql'),
+          table = sql.table,
+        }
+      end
+    end
+    apis[name] = apicfg
   end
 end
 
@@ -191,10 +192,13 @@ local function mkuiobjectinit(k)
   if not init then
     init = {}
     local v = uiobjectdata[k]
-    for inh in pairs(v.inherits or {}) do
+    for inh in pairs(v.inherits) do
       Mixin(init, mkuiobjectinit(inh))
     end
-    for fk, fv in pairs(v.fields or {}) do
+    for fk, fv in pairs(v.fieldinitoverrides or {}) do
+      init[fk] = valstr(fv)
+    end
+    for fk, fv in pairs(v.fields) do
       if fv.init ~= nil then
         init[fk] = valstr(fv.init)
       elseif fv.type == 'hlist' then
@@ -212,10 +216,10 @@ local function mkuiobjectfieldset(k)
   if not set then
     set = {}
     local v = uiobjectdata[k]
-    for inh in pairs(v.inherits or {}) do
+    for inh in pairs(v.inherits) do
       Mixin(set, mkuiobjectfieldset(inh))
     end
-    for fk, fv in pairs(v.fields or {}) do
+    for fk, fv in pairs(v.fields) do
       set[fk] = fv
     end
     uiobjectfieldsets[k] = set
@@ -231,14 +235,16 @@ for k, v in pairs(uiobjectdata) do
   table.insert(constructor, '} end')
   local fieldset = mkuiobjectfieldset(k)
   local methods = {}
-  for mk, mv in pairs(v.methods or {}) do
+  for mk, mv in pairs(v.methods) do
     if mv.impl then
       assert(uiobjectimpl[mv.impl])
       methods[mk] = {
         impl = 'function(...) ' .. readFile('data/uiobjects/' .. mv.impl .. '.lua') .. ' end',
         inputs = mv.inputs,
+        mayreturnnils = mv.mayreturnnils,
         mayreturnnothing = mv.mayreturnnothing,
         outputs = mv.outputs,
+        outstride = mv.outstride,
       }
     elseif mv.getter then
       local t = {}
@@ -299,7 +305,6 @@ for k, v in pairs(uiobjectdata) do
     methods = methods,
     objectType = v.objectType,
     singleton = v.singleton,
-    warner = v.warner,
   }
 end
 
@@ -314,7 +319,6 @@ local data = {
   product = product,
   sqlcursors = sqlcursors,
   sqllookups = sqllookups,
-  states = states,
   structures = structures,
   uiobjects = uiobjects,
   xml = parseYaml('data/products/' .. product .. '/xml.yaml'),
