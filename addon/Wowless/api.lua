@@ -1,4 +1,4 @@
-local _, G = ...
+local addonName, G = ...
 local assertEquals = _G.assertEquals
 G.testsuite.api = function()
   return {
@@ -65,6 +65,9 @@ G.testsuite.api = function()
     IsGMClient = function()
       G.check1(false, _G.IsGMClient())
     end,
+    issecure = function()
+      G.check1(false, issecure())
+    end,
     issecurevariable = function()
       return {
         ['fails with nil table'] = function()
@@ -75,6 +78,9 @@ G.testsuite.api = function()
         end,
         ['global wow apis are secure'] = function()
           G.check2(true, nil, issecurevariable('issecurevariable'))
+        end,
+        ['local table values are insecure'] = function()
+          G.check2(false, addonName, issecurevariable({ foo = 42 }, 'foo'))
         end,
         ['missing globals are secure'] = function()
           local k = 'thisisdefinitelynotaglobal'
