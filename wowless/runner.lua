@@ -229,6 +229,7 @@ local function run(cfg)
   for _, script in ipairs(cfg.scripts and { strsplit(',', cfg.scripts) } or defaultScripts) do
     local fn = scripts[script]
     if fn then
+      api.log(1, 'running script %s', script)
       fn()
     end
   end
