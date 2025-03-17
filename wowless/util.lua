@@ -99,7 +99,24 @@ local function dateToCalendarTime(datalua, d)
   }
 end
 
+local function bubblewrapup(success, ...)
+  debug.settaintmode('rw')
+  if success then
+    return ...
+  else
+    error(...)
+  end
+end
+
+local function bubblewrap(fn)
+  return function(...)
+    debug.settaintmode('disabled')
+    return bubblewrapup(pcall(fn, ...))
+  end
+end
+
 return {
+  bubblewrap = bubblewrap,
   calendarTimeToDate = calendarTimeToDate,
   dateToCalendarTime = dateToCalendarTime,
   mixin = mixin,
