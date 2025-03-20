@@ -7,6 +7,11 @@ errors, those errors are almost certainly still in Wowless, not your addon. That
 said, Wowless is undergoing active development. If you're interested, join the
 Discord at <https://discord.gg/rTwWcfJXuz>.
 
+IMPORTANT NOTE: Wowless currently points at product builds that are no longer
+available on the Blizzard CDN. The binary and develop environment are still
+functional. Maintainers are aware and are digging out of this hole. Visit the
+Discord for updates.
+
 Development is currently only supported via Docker.
 
 Using VSCode:
