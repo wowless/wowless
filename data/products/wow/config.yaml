@@ -12,10 +12,10 @@ addon:
     enums:
       BattlepayBannerType: {}
       BattlepayCardType: {}
-      BattlepayDisplayFlag: {}
+      BattlepayDisplayFlags: {}
       BattlepayGroupDisplayType: {}
       BattlepayProductDecorator: {}
-      BattlepayProductGroupFlag: {}
+      BattlepayProductGroupFlags: {}
       PurchaseEligibility: {}
       StoreError: {}
       VasError: {}

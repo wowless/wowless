@@ -4145,6 +4145,8 @@ EVENT_REALM_QUEUES_UPDATED:
   - name: gameEnvironment
     type:
       enum: EventRealmQueues
+EVENT_SCHEDULER_UPDATE:
+  payload: {}
 EXPAND_BAG_BAR_CHANGED:
   payload:
   - name: expandBagBar
@@ -4508,10 +4510,6 @@ GLOBAL_MOUSE_UP:
   payload:
   - name: button
     type: string
-GLUE_CONSOLE_LOG:
-  payload:
-  - name: message
-    type: string
 GLUE_SCREENSHOT_FAILED:
   payload: {}
 GLUE_SCREENSHOT_STARTED:
@@ -4627,6 +4625,8 @@ GUILD_RENAME_REQUIRED:
   - name: flagSet
     type: boolean
 GUILD_REWARDS_LIST:
+  payload: {}
+GUILD_REWARDS_LIST_UPDATE:
   payload: {}
 GUILD_ROSTER_UPDATE:
   payload:
@@ -5426,6 +5426,10 @@ NEW_TOY_ADDED:
   payload:
   - name: itemID
     type: number
+NEW_WARBAND_SCENE_ADDED:
+  payload:
+  - name: warbandScenID
+    type: number
 NEW_WMO_CHUNK:
   payload: {}
 NEWCOMER_GRADUATION:
@@ -6066,6 +6070,10 @@ PROFESSION_EQUIPMENT_CHANGED:
     type: number
   - name: isTool
     type: boolean
+PROFESSION_RESPEC_CONFIRMATION:
+  payload:
+  - name: skillName
+    type: string
 PROVING_GROUNDS_SCORE_UPDATE:
   payload:
   - name: points
@@ -8288,6 +8296,8 @@ WAR_MODE_STATUS_UPDATE:
   payload:
   - name: warModeEnabled
     type: boolean
+WARBAND_SCENE_FAVORITES_UPDATED:
+  payload: {}
 WARFRONT_COMPLETED:
   payload:
   - name: mapID

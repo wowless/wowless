@@ -36,6 +36,7 @@ lies:
         type: string
       - name: unitServer
         type: string
+mayreturnnothing: true
 script_objects:
   FrameAPIArchaeologyDigSiteFrame: ArchaeologyDigSiteFrame
   FrameAPIBlob: POIFrame
@@ -103,6 +104,7 @@ skip_docfiles:
   PingPinFrameAPIDocumentation: {}
   SimpleMapSceneAPIDocumentation: {}
   SimpleModelFFXAPIDocumentation: {}
+  WorldSafeLocsUIInternalDocumentation: {}
 typedefs:
   AnimationDataEnum: number
   ArtifactTiers: number
@@ -120,6 +122,7 @@ typedefs:
   FileAsset: string
   fileID: number
   FilterMode: string
+  FontAlphabet: string
   GarrisonFollower: string
   HTMLTextType: string
   IDOrLink: string
@@ -141,6 +144,7 @@ typedefs:
   normalizedValue: number
   NotificationDbId: string
   number: number
+  QuestObjectiveType: number
   RecruitAcceptanceID: string
   ScriptObject: UIObject
   ScriptRegion: table
