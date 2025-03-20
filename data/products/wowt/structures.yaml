@@ -33,6 +33,8 @@ AnchorBinding:
       type: table
 AppearanceSourceInfo:
   fields:
+    canDisplayOnPlayer:
+      type: boolean
     categoryID:
       default: 0
       type:
@@ -172,6 +174,27 @@ C_ActionBar.ActionUsableState:
       type: number
     usable:
       type: boolean
+C_AddOnProfiler.AddOnPerformanceMessage:
+  fields:
+    addOnName:
+      nilable: true
+      type: string
+    metric:
+      type:
+        enum: AddOnProfilerMetric
+    metricValue:
+      type: number
+    thresholdValue:
+      type: number
+    type:
+      type:
+        enum: AddOnPerformanceMessageType
+C_AddOnProfiler.AddOnProfilerResult:
+  fields:
+    addOnName:
+      type: string
+    metricValue:
+      type: number
 C_AlliedRaces.AlliedRaceInfo:
   fields:
     achievementIds:
@@ -1583,6 +1606,16 @@ C_ClubFinder.RecruitingClubInfo:
       nilable: true
       type:
         structure: GuildTabardInfo
+C_ColorOverrides.ColorOverrideInfo:
+  fields:
+    overrideColor:
+      type:
+        structure: colorRGB
+    overrideColorString:
+      type: string
+    overrideType:
+      type:
+        enum: ColorOverride
 C_Commentator.CommentatorHistory:
   fields:
     overrideNameDirectory:
@@ -1796,6 +1829,25 @@ C_ContributionCollector.ContributionMapInfo:
     position:
       type:
         structure: vector2
+C_CooldownViewer.CooldownViewerCooldown:
+  fields:
+    charges:
+      type: boolean
+    flags:
+      type:
+        enum: CooldownSetSpellFlags
+    hasAura:
+      type: boolean
+    linkedSpellIDs:
+      type:
+        arrayof: number
+    overrideSpellID:
+      nilable: true
+      type: number
+    selfAura:
+      type: boolean
+    spellID:
+      type: number
 C_CovenantPreview.CovenantAbilityInfo:
   fields:
     spellID:
@@ -1867,6 +1919,8 @@ C_Covenants.CovenantData:
     beginResearchSoundKitID:
       type: number
     celebrationSoundKit:
+      type: number
+    factionID:
       type: number
     ID:
       type: number
@@ -1988,6 +2042,21 @@ C_CreatureInfo.ClassInfo:
     classID:
       type: number
     className:
+      type: string
+C_CreatureInfo.CreatureFamilyInfo:
+  fields:
+    iconFile:
+      nilable: true
+      type: number
+    id:
+      type: number
+    name:
+      type: string
+C_CreatureInfo.CreatureTypeInfo:
+  fields:
+    id:
+      type: number
+    name:
       type: string
 C_CreatureInfo.FactionInfo:
   fields:
@@ -2207,6 +2276,16 @@ C_EditMode.EditModeSystemInfo:
     systemIndex:
       nilable: true
       type: number
+C_EncodingUtil.CBORSerializationOptions:
+  fields:
+    ignoreSerializationErrors:
+      default: false
+      type: boolean
+C_EncodingUtil.JSONSerializationOptions:
+  fields:
+    ignoreSerializationErrors:
+      default: false
+      type: boolean
 C_EncounterJournal.DungeonEntranceMapInfo:
   fields:
     areaPoiID:
@@ -2324,6 +2403,31 @@ C_EndOfMatchUI.MatchDetails:
     matchType:
       type:
         enum: EndOfMatchType
+C_EventScheduler.OngoingEventInfo:
+  fields:
+    areaPoiID:
+      type: number
+    rewardsClaimed:
+      default: false
+      type: boolean
+C_EventScheduler.ScheduledEventInfo:
+  fields:
+    areaPoiID:
+      type: number
+    duration:
+      type: number
+    endTime:
+      type: number
+    eventKey:
+      type: string
+    hasReminder:
+      default: false
+      type: boolean
+    rewardsClaimed:
+      default: false
+      type: boolean
+    startTime:
+      type: number
 C_EventToastManager.EventToastInfo:
   fields:
     colorTint:
@@ -2610,6 +2714,22 @@ C_GamePad.GamePadStickConfig:
       type: number
     stick:
       type: string
+C_GameRules.GameModeDisplayInfo:
+  fields:
+    characterCreateExtraHeight:
+      type: number
+    characterCreateOuterBorder:
+      type: number
+    logo:
+      type: number
+    logoHeight:
+      type: number
+    logoShrunkenHeight:
+      type: number
+    logoUsesDarkBackdrop:
+      type: boolean
+    logoVerticalOffset:
+      type: number
 C_Garrison.AutoCombatDamageClassString:
   fields:
     damageClassValue:
@@ -3161,6 +3281,27 @@ C_GuildInfo.GuildNewsInfo:
       type: string
     year:
       type: number
+C_GuildInfo.GuildRenameStatus:
+  fields:
+    currentGuildMoney:
+      type: number
+    isNameChangeEnabled:
+      type: boolean
+    isPlayerGuildMaster:
+      type: boolean
+    nextRenameTime:
+      type: number
+    oldGuildName:
+      type: string
+    refundAmount:
+      type: number
+    refundEligibleEndTime:
+      type: number
+    renamePrice:
+      type: number
+    result:
+      type:
+        enum: GuildErrorType
 C_InvasionInfo.InvasionMapInfo:
   fields:
     atlasName:
@@ -3180,6 +3321,20 @@ C_IslandsQueue.IslandsQueueDifficultyInfo:
     difficultyId:
       type: number
     previewRewardQuestId:
+      type: number
+C_Item.ItemUpgradeInfo:
+  fields:
+    currentLevel:
+      type: number
+    maxItemLevel:
+      type: number
+    maxLevel:
+      type: number
+    trackString:
+      nilable: true
+      type: string
+    trackStringID:
+      nilable: true
       type: number
 C_ItemInteraction.ConversionCurrencyCost:
   fields:
@@ -3833,6 +3988,10 @@ C_MajorFactions.MajorFactionData:
       type: number
     expansionID:
       type: number
+    factionFontColor:
+      nilable: true
+      type:
+        structure: DBColorExport
     factionID:
       type: number
     isUnlocked:
@@ -3846,6 +4005,9 @@ C_MajorFactions.MajorFactionData:
     renownLevelThreshold:
       type: number
     renownReputationEarned:
+      type: number
+    renownTrackLevelEffectID:
+      nilable: true
       type: number
     textureKit:
       type: string
@@ -4423,6 +4585,8 @@ C_PerksProgram.PerksVendorItemInfo:
       type: boolean
     iconTexture:
       type: string
+    invType:
+      type: string
     isPurchasePending:
       type: boolean
     itemID:
@@ -4446,6 +4610,9 @@ C_PerksProgram.PerksVendorItemInfo:
       type: number
     purchased:
       type: boolean
+    quality:
+      type:
+        enum: ItemQuality
     refundable:
       type: boolean
     showSaleBanner:
@@ -4478,9 +4645,9 @@ C_PerksProgram.PerksVendorSubItemInfo:
   fields:
     invType:
       type: string
-    itemAppearanceID:
-      type: number
     itemID:
+      type: number
+    itemModifiedAppearanceID:
       type: number
     name:
       type: string
@@ -4569,6 +4736,8 @@ C_PlayerChoice.PlayerChoiceInfo:
       type: string
     questionText:
       type: string
+    showChoicesAsList:
+      type: boolean
     soundKitID:
       nilable: true
       type: number
@@ -4581,11 +4750,18 @@ C_PlayerChoice.PlayerChoiceOptionButtonInfo:
       type: string
     disabled:
       type: boolean
+    hideButtonShowText:
+      type: boolean
     id:
       type: number
+    listText:
+      nilable: true
+      type: string
     rewardQuestID:
       nilable: true
       type: number
+    showCheckmark:
+      type: boolean
     soundKitID:
       nilable: true
       type: number
@@ -5184,6 +5360,9 @@ C_QuestLog.QuestObjectiveInfo:
     numFulfilled:
       type: number
     numRequired:
+      type: number
+    objectiveType:
+      nilable: true
       type: number
     text:
       type: string
@@ -5986,9 +6165,6 @@ C_SplashScreen.SplashScreenInfo:
       type: string
 C_StableInfo.PetInfo:
   fields:
-    abilities:
-      type:
-        arrayof: number
     creatureID:
       type: number
     displayID:
@@ -6005,16 +6181,32 @@ C_StableInfo.PetInfo:
       type: number
     name:
       type: string
+    petAbilities:
+      type:
+        arrayof: number
     petNumber:
       type: number
     slotID:
       type: number
+    specAbilities:
+      type:
+        arrayof: number
     specialization:
       type: string
+    specID:
+      type: number
     type:
       type: string
     uiModelSceneID:
       default: 718
+      type: number
+C_StableInfo.PetSpecInfo:
+  fields:
+    specializationName:
+      type: string
+    specID:
+      type: number
+    specIndex:
       type: number
 C_TaxiMap.MapTaxiNodeInfo:
   fields:
@@ -6061,6 +6253,8 @@ C_Texture.AtlasInfo:
   fields:
     bottomTexCoord:
       type: number
+    elementName:
+      type: string
     file:
       nilable: true
       type: number
@@ -7673,6 +7867,9 @@ C_UIWidgetManager.TextureAndTextVisualizationInfo:
         enum: WidgetShownState
     text:
       type: string
+    textFormatType:
+      type:
+        enum: UIWidgetTextFormatType
     textSizeType:
       type:
         enum: UIWidgetTextureAndTextSizeType
@@ -7683,6 +7880,9 @@ C_UIWidgetManager.TextureAndTextVisualizationInfo:
     tooltipLoc:
       type:
         enum: UIWidgetTooltipLocation
+    updateAnimType:
+      type:
+        enum: UIWidgetUpdateAnimType
     widgetScale:
       type:
         enum: UIWidgetScale
@@ -8053,6 +8253,8 @@ C_UIWidgetManager.UIWidgetSpellInfo:
     iconSizeType:
       type:
         enum: WidgetIconSizeType
+    showAsEarned:
+      type: boolean
     showGlowState:
       type:
         enum: WidgetShowGlowState
@@ -8347,6 +8549,38 @@ C_VoiceChat.VoiceTtsVoiceType:
       type: string
     voiceID:
       type: number
+C_WarbandScene.WarbandSceneEntry:
+  fields:
+    description:
+      type: string
+    hasFanfare:
+      default: false
+      type: boolean
+    isFavorite:
+      default: false
+      type: boolean
+    name:
+      type: string
+    quality:
+      type: number
+    source:
+      type: string
+    sourceType:
+      default: 0
+      type: number
+    textureKit:
+      type: string
+    warbandSceneID:
+      default: 0
+      type: number
+C_WarbandScene.WarbandSceneSearchInfo:
+  fields:
+    favoritesOnly:
+      default: false
+      type: boolean
+    ownedOnly:
+      default: false
+      type: boolean
 C_WeeklyRewards.ConquestWeeklyProgress:
   fields:
     displayType:
@@ -9207,12 +9441,29 @@ CraftingTargetItem:
       type: number
     quantity:
       type: number
+CreateFontFamilyMemberInfo:
+  fields:
+    alphabet:
+      type: string
+    file:
+      type: string
+    flags:
+      type: string
+    height:
+      type: number
 CurrencyCost:
   fields:
     amount:
       type: number
     currencyID:
       type: number
+DBColorExport:
+  fields:
+    baseTag:
+      type: string
+    color:
+      type:
+        structure: colorRGBA
 EncounterTrackingInfo:
   fields:
     difficultyID:
@@ -9850,6 +10101,9 @@ SpellChargeInfo:
       type: number
 SpellCooldownInfo:
   fields:
+    activeCategory:
+      nilable: true
+      type: number
     duration:
       type: number
     isEnabled:
@@ -10112,6 +10366,8 @@ UnitPowerBarInfo:
     anchorTop:
       type: boolean
     animateNumbers:
+      type: boolean
+    attachTooltipToBar:
       type: boolean
     barType:
       type: number
