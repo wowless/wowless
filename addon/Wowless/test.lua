@@ -765,7 +765,7 @@ do
     if not asyncPending then
       if asyncIndex == numAsyncTests then
         frame:SetScript('OnUpdate', nil)
-        if _G.WowlessData.Build.flavor ~= 'Mainline' then -- TODO reenable for mainline
+        if _G.WowlessData.Config.addon.lua_warning_check then
           _G.WowlessTestFailures.LUA_WARNING = (function()
             local function check()
               assertEquals(#G.ExpectedLuaWarnings, #G.ActualLuaWarnings)
