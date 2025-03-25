@@ -1085,6 +1085,7 @@ lua2c(
   wowless.modules.units=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/units.lua
   wowless.profiler=${CMAKE_CURRENT_SOURCE_DIR}/wowless/profiler.lua
   wowless.runner=${CMAKE_CURRENT_SOURCE_DIR}/wowless/runner.lua
+  wowless.toc=${CMAKE_CURRENT_SOURCE_DIR}/wowless/toc.lua
   wowless.typecheck=${CMAKE_CURRENT_SOURCE_DIR}/wowless/typecheck.lua
   wowless.xml=${CMAKE_CURRENT_SOURCE_DIR}/wowless/xml.lua)
 target_sources(wowlesslib PRIVATE wowless/ext.c)
