@@ -7,7 +7,5 @@ return (function(self, tex)
     t:Show()
   end
   self.statusBarTexture = t
-  if api.datalua.config.runtime.texturekitstatus then
-    return true
-  end
+  return true
 end)(...)

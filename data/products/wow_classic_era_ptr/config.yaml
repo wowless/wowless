@@ -68,7 +68,6 @@ runner:
     RAIDFINDER: {}
     USERANDOM: {}
 runtime:
-  texturekitstatus: true
   warners:
     archaeologydigsiteframe: {}
     fontstring: {}

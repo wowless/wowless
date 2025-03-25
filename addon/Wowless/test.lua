@@ -445,11 +445,7 @@ G.testsuite.sync = function()
       local sb = CreateFrame('StatusBar')
       local nilparent = CreateFrame('Frame')
       local function checkSetStatusBarTexture()
-        if _G.WowlessData.Config.runtime.texturekitstatus then
-          check1(true, sb:SetStatusBarTexture('interface/icons/temp'))
-        else
-          check0(sb:SetStatusBarTexture('interface/icons/temp'))
-        end
+        check1(true, sb:SetStatusBarTexture('interface/icons/temp'))
       end
       local states = {
         colorTexture = function()

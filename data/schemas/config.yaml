@@ -71,9 +71,6 @@ type:
     runtime:
       type:
         record:
-          texturekitstatus:
-            required: true
-            type: boolean
           warners:
             type:
               mapof:
