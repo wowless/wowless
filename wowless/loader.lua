@@ -647,10 +647,14 @@ local function loader(api, cfg)
 
   local function resolveTocDir(tocDir)
     api.log(1, 'resolving %s', tocDir)
-    local file, content = tocutil.resolve(tocDir)
-    if file then
-      api.log(1, 'using toc %s', file)
-      return parseToc(file, content)
+    local base = path.basename(tocDir)
+    for _, suffix in ipairs(tocutil.suffixes) do
+      local tocFile = path.join(tocDir, base .. suffix .. '.toc')
+      local success, content = pcall(readFile, tocFile)
+      if success then
+        api.log(1, 'using toc %s', tocFile)
+        return parseToc(tocFile, content)
+      end
     end
     api.log(1, 'no valid toc for %s', tocDir)
     return nil
