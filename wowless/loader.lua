@@ -625,6 +625,7 @@ local function loader(api, cfg)
 
   local build = datalua.build
   local flavors = require('runtime.flavors')
+  local tocutil = require('wowless.toc')(build.flavor)
 
   local function parseToc(tocFile, content)
     local attrs = {}
@@ -644,26 +645,10 @@ local function loader(api, cfg)
     return { attrs = attrs, files = files }
   end
 
-  local tocsuffixes = (function()
-    local flavor = build.flavor
-    local t = {
-      '_' .. flavor,
-      '-' .. flavor,
-    }
-    for _, alt in ipairs(flavors[flavor].alternates) do
-      table.insert(t, '_' .. alt)
-      table.insert(t, '-' .. alt)
-    end
-    table.insert(t, '_Standard')
-    table.insert(t, '-Standard')
-    table.insert(t, '')
-    return t
-  end)()
-
   local function resolveTocDir(tocDir)
     api.log(1, 'resolving %s', tocDir)
     local base = path.basename(tocDir)
-    for _, suffix in ipairs(tocsuffixes) do
+    for _, suffix in ipairs(tocutil.suffixes) do
       local tocFile = path.join(tocDir, base .. suffix .. '.toc')
       local success, content = pcall(readFile, tocFile)
       if success then

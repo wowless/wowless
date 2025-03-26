@@ -9,7 +9,6 @@ local product = args.product
 local log = args.verbose and print or function() end
 
 local build = dofile('build/cmake/runtime/products/' .. product .. '/build.lua')
-local flavor = dofile('build/cmake/runtime/flavors.lua')[build.flavor]
 local fdids = require('runtime.listfile')
 
 local path = require('path')
@@ -81,21 +80,7 @@ local processFile = (function()
   return doProcessFile
 end)()
 
--- TODO unify this logic with the loader, issue #322
-local tocsuffixes = (function()
-  local t = {
-    '_' .. build.flavor,
-    '-' .. build.flavor,
-  }
-  for _, alt in ipairs(flavor.alternates) do
-    table.insert(t, '_' .. alt)
-    table.insert(t, '-' .. alt)
-  end
-  table.insert(t, '_Standard')
-  table.insert(t, '-Standard')
-  table.insert(t, '')
-  return t
-end)()
+local tocsuffixes = require('wowless.toc')(build.flavor).suffixes
 
 local function processTocDir(dir)
   local addonName = path.basename(dir)

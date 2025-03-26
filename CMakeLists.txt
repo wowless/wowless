@@ -577,6 +577,8 @@ lua2c(toolstactless tactless=c)
 target_sources(toolstactless PRIVATE tools/tactless.c)
 target_link_libraries(toolstactless PRIVATE tactless)
 
+lua2c(wowlesstoc wowless.toc=${CMAKE_CURRENT_SOURCE_DIR}/wowless/toc.lua)
+
 add_lua_executable(
   fetch
   ${CMAKE_CURRENT_SOURCE_DIR}/tools/fetch.lua
@@ -585,10 +587,12 @@ add_lua_executable(
   luafilesystem
   luapath
   penlight
+  runtimeflavors
   runtimelistfile
   toolsdb2
   toolstactless
-  vstruct)
+  vstruct
+  wowlesstoc)
 
 find_package(PNG REQUIRED)
 add_library(libpng ALIAS PNG::PNG)
@@ -934,6 +938,7 @@ add_lua_executable(
 add_lua_executable(gentest ${CMAKE_CURRENT_SOURCE_DIR}/tools/gentest.lua
                    argparse luafilesystem penlight toolsutil)
 
+lua2c(runtimeflavors runtime.flavors=runtime/flavors.lua)
 lua2c(runtimeproducts runtime.products=runtime/products.lua)
 
 add_lua_executable(
@@ -1064,7 +1069,6 @@ $<$<PLATFORM_ID:Windows>:windows>\
 
 lua2c(
   wowlesslib
-  runtime.flavors=runtime/flavors.lua
   runtime.platform=runtime/platform.lua
   runtime.stringenums=runtime/stringenums.lua
   wowapi.loader=${CMAKE_CURRENT_SOURCE_DIR}/wowapi/loader.lua
@@ -1103,10 +1107,12 @@ add_lua_executable(
   lzlib
   minheap
   penlight
+  runtimeflavors
   runtimeproducts
   tsort
   wowlesslib
   wowlessrender
+  wowlesstoc
   wowlessutil
   wowlessyaml)
 
@@ -1125,6 +1131,7 @@ add_lua_executable(
   lzlib
   minheap
   penlight
+  runtimeflavors
   runtimeproducts
   say
   tsort
@@ -1132,6 +1139,7 @@ add_lua_executable(
   wowapischema
   wowlesslib
   wowlessrender
+  wowlesstoc
   wowlessutil
   wowlessyaml)
 
