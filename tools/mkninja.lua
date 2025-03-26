@@ -218,7 +218,6 @@ for _, p in ipairs(productList) do
     ins = {
       dblist,
       'build/cmake/fetch',
-      'build/cmake/runtime/flavors.lua',
       'build/cmake/runtime/products/' .. p .. '/build.lua',
     },
     outs = fetchStamp,
