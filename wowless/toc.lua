@@ -16,8 +16,6 @@ for k, v in pairs(flavors) do
   suffixes[k] = t
 end
 
-return function(flavor)
-  return {
-    suffixes = suffixes[flavor],
-  }
-end
+return {
+  suffixes = suffixes,
+}

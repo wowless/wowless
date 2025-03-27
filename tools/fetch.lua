@@ -80,7 +80,7 @@ local processFile = (function()
   return doProcessFile
 end)()
 
-local tocsuffixes = require('wowless.toc')(build.flavor).suffixes
+local tocsuffixes = require('wowless.toc').suffixes[build.flavor]
 
 local function processTocDir(dir)
   local addonName = path.basename(dir)
