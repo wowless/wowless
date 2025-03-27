@@ -30,7 +30,7 @@ local function parse(content)
       table.insert(files, line)
     end
   end
-  return { attrs = attrs, files = files }
+  return attrs, files
 end
 
 return {
