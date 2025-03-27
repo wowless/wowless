@@ -1,10 +1,16 @@
 describe('wowless.toc', function()
   local wowlesstoc = require('wowless.toc')
-  for flavor in pairs(require('runtime.flavors')) do
-    describe(flavor, function()
-      local tocutil = wowlesstoc(flavor)
-      describe('suffixes', function()
-        local suffixes = tocutil.suffixes
+  local flavors = require('runtime.flavors')
+  describe('suffixes', function()
+    local allsuffixes = wowlesstoc.suffixes
+    it('are keyed by flavor', function()
+      for k in pairs(allsuffixes) do
+        assert.Not.Nil(flavors[k])
+      end
+    end)
+    for flavor in pairs(flavors) do
+      describe(flavor, function()
+        local suffixes = allsuffixes[flavor]
         it('are unique', function()
           local t = {}
           for _, v in ipairs(suffixes) do
@@ -16,6 +22,6 @@ describe('wowless.toc', function()
           assert.same('', suffixes[#suffixes])
         end)
       end)
-    end)
-  end
+    end
+  end)
 end)
