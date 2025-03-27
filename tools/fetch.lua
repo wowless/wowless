@@ -80,7 +80,8 @@ local processFile = (function()
   return doProcessFile
 end)()
 
-local tocsuffixes = require('wowless.toc').suffixes[build.flavor]
+local tocutil = require('wowless.toc')
+local tocsuffixes = tocutil.suffixes[build.flavor]
 
 local function processTocDir(dir)
   local addonName = path.basename(dir)
@@ -94,10 +95,9 @@ local function processTocDir(dir)
   end
   if tocContent then
     save(tocName, tocContent)
-    for line in tocContent:gmatch('[^\r\n]+') do
-      if line:sub(1, 1) ~= '#' then
-        processFile(joinRelative(tocName, line:gsub('%s*$', '')), dir)
-      end
+    local _, files = tocutil.parse(tocContent)
+    for _, file in ipairs(files) do
+      processFile(joinRelative(tocName, file), dir)
     end
   end
   local bindingsName = path.join(dir, 'Bindings.xml')
