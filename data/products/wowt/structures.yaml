@@ -3299,6 +3299,10 @@ C_GuildInfo.GuildRenameStatus:
       type: number
     renamePrice:
       type: number
+    reservedName:
+      type: string
+    reservedNameExpirationTime:
+      type: number
     result:
       type:
         enum: GuildErrorType
@@ -4801,10 +4805,6 @@ C_PlayerChoice.PlayerChoiceOptionInfo:
       nilable: true
       type:
         enum: PlayerChoiceRarity
-    rarityColor:
-      nilable: true
-      type:
-        structure: colorRGBA
     rewardInfo:
       type:
         structure: C_PlayerChoice.PlayerChoiceOptionRewardInfo

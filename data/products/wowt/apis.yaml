@@ -9586,6 +9586,18 @@ C_GamePad.StickIndexToConfigName:
 C_GamePad.StopVibration:
   inputs: {}
   outputs: {}
+C_GameRules.AutoConnectToGameModeRealm:
+  inputs:
+  - name: gameModeRecordID
+    type: number
+  outputs: {}
+C_GameRules.DoesGameModeHavePromo:
+  inputs:
+  - name: gameModeRecordID
+    type: number
+  outputs:
+  - name: hasPromo
+    type: boolean
 C_GameRules.GetActiveGameMode:
   inputs: {}
   outputs:
@@ -9598,13 +9610,46 @@ C_GameRules.GetCurrentEventRealmQueues:
   - name: eventRealmQueues
     type:
       enum: EventRealmQueues
-C_GameRules.GetGameModeDisplayInfo:
+C_GameRules.GetCurrentGameModeDisplayInfo:
   inputs: {}
   outputs:
   - name: info
     nilable: true
     type:
       structure: C_GameRules.GameModeDisplayInfo
+C_GameRules.GetCurrentGameModeRecordID:
+  inputs: {}
+  outputs:
+  - name: gameModeRecordID
+    type: number
+C_GameRules.GetDisplayedGameModeRecordIDAtIndex:
+  inputs:
+  - name: displayIndex
+    type: number
+  outputs:
+  - name: gameModeRecordID
+    type: number
+C_GameRules.GetGameModeDisplayInfoByRecordID:
+  inputs:
+  - name: gameModeRecordID
+    type: number
+  outputs:
+  - name: info
+    nilable: true
+    type:
+      structure: C_GameRules.GameModeDisplayInfo
+C_GameRules.GetGameModeGlueScreenName:
+  inputs: {}
+  outputs:
+  - name: screenName
+    type: string
+C_GameRules.GetGameModePromoGlobalString:
+  inputs:
+  - name: gameModeRecordID
+    type: number
+  outputs:
+  - name: promoGlobalString
+    type: string
 C_GameRules.GetGameRuleAsFloat:
   inputs:
   - name: gameRule
@@ -9625,6 +9670,16 @@ C_GameRules.GetGameRuleAsFrameStrata:
   - name: frameStrata
     stub: UNKNOWN
     type: string
+C_GameRules.GetNumDisplayedGameModes:
+  inputs: {}
+  outputs:
+  - name: numDisplayedGameModes
+    type: number
+C_GameRules.IsCharacterlessLoginActive:
+  inputs: {}
+  outputs:
+  - name: active
+    type: boolean
 C_GameRules.IsGameRuleActive:
   inputs:
   - name: gameRule
@@ -10543,7 +10598,9 @@ C_GuildInfo.RequestRenameNameCheck:
   outputs: {}
 C_GuildInfo.RequestRenameStatus:
   inputs: {}
-  outputs: {}
+  outputs:
+  - name: ableToRequest
+    type: boolean
 C_GuildInfo.SetGuildRankOrder:
   inputs:
   - name: guid
@@ -12493,7 +12550,17 @@ C_LFGList.GetAvailableActivities:
   outputs:
   - name: activities
     type: table
-C_LFGList.GetAvailableActivityGroups: {}
+C_LFGList.GetAvailableActivityGroups:
+  inputs:
+  - name: categoryID
+    type: number
+  - default: 0
+    name: filter
+    type: number
+  outputs:
+  - name: activityIDs
+    type:
+      arrayof: number
 C_LFGList.GetAvailableCategories:
   outputs:
   - type: table

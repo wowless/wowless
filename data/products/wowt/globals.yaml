@@ -57,13 +57,8 @@ Constants:
     QUESTIONMARK_INV_ICON: 134400
     WAR_RESOURCES_CURRENCY_ID: 1560
   DelvesConsts:
-    BRANN_MAX_LEVEL: 60
-    BRANN_XP_FACTION_ID: 1203
-    COMPANION_SEASONAL_LEVEL_START: 10
     DELVES_COMPANION_INFO_SELECTION_CHARACTER_DATA_ELEMENT_ID: 13
-    DELVES_COMPANION_TOOLTIP_WIDGET_SET_ID: 1331
     DELVES_MIN_PLAYER_LEVEL_CONTENT_TUNING_ID: 2677
-    DELVES_NORMAL_KEY_CURRENCY_ID: 3028
   EditModeConsts:
     EditModeDefaultGridSpacing: 100
     EditModeMaxGridSpacing: 300
@@ -3018,11 +3013,12 @@ Enum:
     Opacity: 5
     Orientation: 0
     ShowTimer: 9
+    ShowTooltips: 10
     VisibleSetting: 6
   EditModeCooldownViewerSettingMeta:
-    MaxValue: 9
+    MaxValue: 10
     MinValue: 0
-    NumValues: 10
+    NumValues: 11
   EditModeCooldownViewerSystemIndices:
     BuffBar: 4
     BuffIcon: 3
@@ -3384,12 +3380,6 @@ Enum:
     CompactRaidFrameManagerDisabled: 81
     CustomActionbarOverlayHeightOffset: 33
     DeleteItemConfirmationDisabled: 62
-    Deprecated1: 24
-    Deprecated2: 95
-    Deprecated3: 96
-    Deprecated4: 97
-    DeprecatedLFGUIEnabled: 6
-    DeprecatedSummoningStones: 0
     DisableHonorDecay: 23
     DisablePct: 9
     EditModeDisabled: 82
@@ -3415,9 +3405,7 @@ Enum:
     IngameWhoListDisabled: 77
     InstanceDifficultyBannerDisabled: 83
     LandingPageFactionID: 35
-    LgPlaceholder1Acarpentieri: 103
     MacrosDisabled: 80
-    MainlinePlaceholder1: 102
     MapPlunderstormCircle: 48
     MaxAccountCharReservationsPerContentset: 4
     MaxCharReservationsPerRealm: 3
@@ -3432,101 +3420,6 @@ Enum:
     NonPlayerNameplateScale: 31
     PerksProgramActivityTrackingDisabled: 66
     PetBattlesDisabled: 65
-    Placeholder1: 104
-    Placeholder109: 109
-    Placeholder110: 110
-    Placeholder111: 111
-    Placeholder112: 112
-    Placeholder113: 113
-    Placeholder114: 114
-    Placeholder115: 115
-    Placeholder116: 116
-    Placeholder117: 117
-    Placeholder118: 118
-    Placeholder119: 119
-    Placeholder120: 120
-    Placeholder121: 121
-    Placeholder122: 122
-    Placeholder123: 123
-    Placeholder124: 124
-    Placeholder125: 125
-    Placeholder126: 126
-    Placeholder127: 127
-    Placeholder128: 128
-    Placeholder129: 129
-    Placeholder130: 130
-    Placeholder131: 131
-    Placeholder132: 132
-    Placeholder133: 133
-    Placeholder134: 134
-    Placeholder135: 135
-    Placeholder136: 136
-    Placeholder137: 137
-    Placeholder138: 138
-    Placeholder139: 139
-    Placeholder140: 140
-    Placeholder141: 141
-    Placeholder142: 142
-    Placeholder143: 143
-    Placeholder144: 144
-    Placeholder145: 145
-    Placeholder146: 146
-    Placeholder147: 147
-    Placeholder148: 148
-    Placeholder149: 149
-    Placeholder150: 150
-    Placeholder151: 151
-    Placeholder152: 152
-    Placeholder153: 153
-    Placeholder154: 154
-    Placeholder155: 155
-    Placeholder156: 156
-    Placeholder157: 157
-    Placeholder158: 158
-    Placeholder159: 159
-    Placeholder160: 160
-    Placeholder161: 161
-    Placeholder162: 162
-    Placeholder163: 163
-    Placeholder164: 164
-    Placeholder165: 165
-    Placeholder166: 166
-    Placeholder167: 167
-    Placeholder168: 168
-    Placeholder169: 169
-    Placeholder170: 170
-    Placeholder171: 171
-    Placeholder172: 172
-    Placeholder173: 173
-    Placeholder174: 174
-    Placeholder175: 175
-    Placeholder176: 176
-    Placeholder177: 177
-    Placeholder178: 178
-    Placeholder179: 179
-    Placeholder180: 180
-    Placeholder181: 181
-    Placeholder182: 182
-    Placeholder183: 183
-    Placeholder184: 184
-    Placeholder185: 185
-    Placeholder186: 186
-    Placeholder187: 187
-    Placeholder188: 188
-    Placeholder189: 189
-    Placeholder190: 190
-    Placeholder191: 191
-    Placeholder192: 192
-    Placeholder193: 193
-    Placeholder194: 194
-    Placeholder195: 195
-    Placeholder196: 196
-    Placeholder197: 197
-    Placeholder198: 198
-    Placeholder199: 199
-    Placeholder2: 105
-    Placeholder3: 106
-    Placeholder4: 107
     PlayerNameplateAlternateHealthColor: 58
     PlayerNameplateDifficultyIcon: 57
     PlunderstormAreaSelection: 94
@@ -3562,10 +3455,6 @@ Enum:
     WorldMapLegendDisabled: 99
     WorldMapTrackingOptionsDisabled: 68
     WorldMapTrackingPinDisabled: 69
-    WoWLabsPlaceholder1: 87
-    WoWLabsPlaceholder2: 88
-    WoWLabsPlaceholder3: 89
-    WoWLabsPlaceholder4: 90
   GameRuleFlags:
     AllowClient: 1
     None: 0
@@ -3575,9 +3464,9 @@ Enum:
     MinValue: 0
     NumValues: 3
   GameRuleMeta:
-    MaxValue: 199
-    MinValue: 0
-    NumValues: 200
+    MaxValue: 108
+    MinValue: 1
+    NumValues: 93
   GameRuleType:
     Bool: 2
     Float: 1
@@ -3833,6 +3722,7 @@ Enum:
     GuildRename: 62
     GuildTabardVendor: 8
     IslandsMissionNpc: 36
+    ItemUpgrade: 64
     LFGDungeon: 20
     Mailbox: 18
     MajorFactionRenown: 53
@@ -3845,6 +3735,7 @@ Enum:
     Placeholder_1: 59
     Placeholder_2: 60
     Placeholder_3: 61
+    Placeholder_4: 63
     ProfessionRespec: 58
     ProfessionsCraftingOrder: 48
     ProfessionsCustomerOrder: 50
@@ -3874,9 +3765,9 @@ Enum:
     MinValue: 1
     NumValues: 1
   GossipNpcOptionMeta:
-    MaxValue: 62
+    MaxValue: 64
     MinValue: 0
-    NumValues: 63
+    NumValues: 65
   GossipOptionRecFlags:
     HideOptionIDFromClient: 2
     PlayMovieLabelPrepend: 4
@@ -4422,6 +4313,7 @@ Enum:
     Fire: 4096
     Fragrance: 67108864
     Frost: 2048
+    FutureUse: 1073741824
     Holy: 65536
     Hydraulic: 16
     Iron: 64
@@ -4441,9 +4333,9 @@ Enum:
     Wind: 32768
     Yellow: 4
   ItemGemColorMeta:
-    MaxValue: 536870912
+    MaxValue: 1073741824
     MinValue: 1
-    NumValues: 30
+    NumValues: 31
   ItemGemSubclass:
     Agility: 1
     Artifactrelic: 11
@@ -4665,6 +4557,7 @@ Enum:
     Fire: 14
     Fragrance: 26
     Frost: 13
+    FutureUse: 30
     Holy: 18
     Hydraulic: 5
     Iron: 8
@@ -4686,9 +4579,9 @@ Enum:
     Wind: 17
     Yellow: 3
   ItemSocketTypeMeta:
-    MaxValue: 29
+    MaxValue: 30
     MinValue: 0
-    NumValues: 30
+    NumValues: 31
   ItemSoundType:
     Close: 3
     Drop: 1
@@ -4906,6 +4799,31 @@ Enum:
     MaxValue: 2
     MinValue: 0
     NumValues: 3
+  LFGSlotInvalidReason:
+    AreaNotExplored: 9
+    CannotRunAnyChildDungeon: 14
+    ChromieTime: 16
+    EngagedInPvP: 12
+    ExpansionTooLow: 1
+    GearTooHigh: 5
+    GearTooLow: 4
+    LevelTargetTooHigh: 8
+    LevelTargetTooLow: 7
+    LevelTooHigh: 3
+    LevelTooLow: 2
+    None: 0
+    NoSpec: 13
+    NoValidRoles: 11
+    Npe: 17
+    PlayerConditionFailed: 19
+    RaidLocked: 6
+    Restricted: 15
+    Timerunning: 18
+    WrongFaction: 10
+  LFGSlotInvalidReasonMeta:
+    MaxValue: 19
+    MinValue: 0
+    NumValues: 20
   LgVendorPurchaseSettlementState:
     NotSettled: 1
     Settled: 0
@@ -5761,6 +5679,7 @@ Enum:
     PlaceholderType74: 73
     PlaceholderType75: 74
     PlaceholderType76: 75
+    PlaceholderType77: 77
     PlayerChoice: 37
     ProfessionRespec: 69
     Professions: 59
@@ -5787,9 +5706,9 @@ Enum:
     WeeklyRewards: 49
     WorldMap: 29
   PlayerInteractionTypeMeta:
-    MaxValue: 76
+    MaxValue: 77
     MinValue: 0
-    NumValues: 77
+    NumValues: 78
   PlayerMentorshipApplicationResult:
     AlreadyMentor: 1
     Ineligible: 2
