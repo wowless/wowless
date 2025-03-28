@@ -16,7 +16,9 @@ for k, v in pairs(flavors) do
   suffixes[k] = t
 end
 
-local function parse(content)
+local function parse(flavor, content)
+  assert(flavors[flavor])
+  content = content:gsub('%[Family%]', flavor)
   local attrs = {}
   local files = {}
   for line in content:gmatch('[^\r\n]+') do

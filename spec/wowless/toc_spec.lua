@@ -3,24 +3,39 @@ describe('wowless.toc', function()
   local flavors = require('runtime.flavors')
   describe('parse', function()
     local parse = wowlesstoc.parse
-    it('handles empty content', function()
-      local attrs, files = parse('')
-      assert.same({}, attrs)
-      assert.same({}, files)
-    end)
-    it('does basic parsing', function()
-      local lines = {
-        '# This is a comment',
-        '## Key: Value',
-        '',
-        'aaa ',
-        ' bbb ',
-        'ccc',
-      }
-      local attrs, files = parse(table.concat(lines, '\n'))
-      assert.same({ Key = 'Value' }, attrs)
-      assert.same({ 'aaa', 'bbb', 'ccc' }, files)
-    end)
+    for flavor in pairs(flavors) do
+      describe(flavor, function()
+        it('handles empty content', function()
+          local attrs, files = parse(flavor, '')
+          assert.same({}, attrs)
+          assert.same({}, files)
+        end)
+        it('does basic parsing', function()
+          local lines = {
+            '# This is a comment',
+            '## Key: Value',
+            '',
+            'aaa ',
+            ' bbb ',
+            'ccc',
+          }
+          local attrs, files = parse(flavor, table.concat(lines, '\n'))
+          assert.same({ Key = 'Value' }, attrs)
+          assert.same({ 'aaa', 'bbb', 'ccc' }, files)
+        end)
+        it('does flavor substitution', function()
+          local lines = {
+            '# [Family] comment blah blah',
+            '## A[Family]Key: B[Family]Value[Family]',
+            '',
+            'a[Family]b',
+          }
+          local attrs, files = parse(flavor, table.concat(lines, '\n'))
+          assert.same({ ['A' .. flavor .. 'Key'] = 'B' .. flavor .. 'Value' .. flavor }, attrs)
+          assert.same({ 'a' .. flavor .. 'b' }, files)
+        end)
+      end)
+    end
   end)
   describe('suffixes', function()
     local allsuffixes = wowlesstoc.suffixes

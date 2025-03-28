@@ -95,7 +95,7 @@ local function processTocDir(dir)
   end
   if tocContent then
     save(tocName, tocContent)
-    local _, files = tocutil.parse(tocContent)
+    local _, files = tocutil.parse(build.flavor, tocContent)
     for _, file in ipairs(files) do
       processFile(joinRelative(tocName, file), dir)
     end

@@ -630,7 +630,7 @@ local function loader(api, cfg)
 
   local function parseToc(tocFile, content)
     local dir = path.dirname(tocFile)
-    local attrs, files = tocutil.parse(content)
+    local attrs, files = tocutil.parse(build.flavor, content)
     for i, f in ipairs(files) do
       files[i] = path.join(dir, f)
     end
