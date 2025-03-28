@@ -2725,6 +2725,9 @@ Enum:
     AfterDeathSpectatingUI: 49
     AllPlayersAreFastMovers: 53
     AlwaysAllowAlliedRaces: 59
+    AvailablePlaceholder1: 88
+    AvailablePlaceholder2: 89
+    AvailablePlaceholder3: 90
     BagsUIDisabled: 64
     CharacterCreateUseFixedBackgroundModel: 55
     CharacterlessLogin: 14
@@ -2787,97 +2790,6 @@ Enum:
     PerksProgramActivityTrackingDisabled: 66
     PetBattlesDisabled: 65
     Placeholder1: 104
-    Placeholder109: 109
-    Placeholder110: 110
-    Placeholder111: 111
-    Placeholder112: 112
-    Placeholder113: 113
-    Placeholder114: 114
-    Placeholder115: 115
-    Placeholder116: 116
-    Placeholder117: 117
-    Placeholder118: 118
-    Placeholder119: 119
-    Placeholder120: 120
-    Placeholder121: 121
-    Placeholder122: 122
-    Placeholder123: 123
-    Placeholder124: 124
-    Placeholder125: 125
-    Placeholder126: 126
-    Placeholder127: 127
-    Placeholder128: 128
-    Placeholder129: 129
-    Placeholder130: 130
-    Placeholder131: 131
-    Placeholder132: 132
-    Placeholder133: 133
-    Placeholder134: 134
-    Placeholder135: 135
-    Placeholder136: 136
-    Placeholder137: 137
-    Placeholder138: 138
-    Placeholder139: 139
-    Placeholder140: 140
-    Placeholder141: 141
-    Placeholder142: 142
-    Placeholder143: 143
-    Placeholder144: 144
-    Placeholder145: 145
-    Placeholder146: 146
-    Placeholder147: 147
-    Placeholder148: 148
-    Placeholder149: 149
-    Placeholder150: 150
-    Placeholder151: 151
-    Placeholder152: 152
-    Placeholder153: 153
-    Placeholder154: 154
-    Placeholder155: 155
-    Placeholder156: 156
-    Placeholder157: 157
-    Placeholder158: 158
-    Placeholder159: 159
-    Placeholder160: 160
-    Placeholder161: 161
-    Placeholder162: 162
-    Placeholder163: 163
-    Placeholder164: 164
-    Placeholder165: 165
-    Placeholder166: 166
-    Placeholder167: 167
-    Placeholder168: 168
-    Placeholder169: 169
-    Placeholder170: 170
-    Placeholder171: 171
-    Placeholder172: 172
-    Placeholder173: 173
-    Placeholder174: 174
-    Placeholder175: 175
-    Placeholder176: 176
-    Placeholder177: 177
-    Placeholder178: 178
-    Placeholder179: 179
-    Placeholder180: 180
-    Placeholder181: 181
-    Placeholder182: 182
-    Placeholder183: 183
-    Placeholder184: 184
-    Placeholder185: 185
-    Placeholder186: 186
-    Placeholder187: 187
-    Placeholder188: 188
-    Placeholder189: 189
-    Placeholder190: 190
-    Placeholder191: 191
-    Placeholder192: 192
-    Placeholder193: 193
-    Placeholder194: 194
-    Placeholder195: 195
-    Placeholder196: 196
-    Placeholder197: 197
-    Placeholder198: 198
-    Placeholder199: 199
     Placeholder2: 105
     Placeholder3: 106
     Placeholder4: 107
@@ -2917,9 +2829,6 @@ Enum:
     WorldMapTrackingOptionsDisabled: 68
     WorldMapTrackingPinDisabled: 69
     WoWLabsPlaceholder1: 87
-    WoWLabsPlaceholder2: 88
-    WoWLabsPlaceholder3: 89
-    WoWLabsPlaceholder4: 90
   GameRuleFlags:
     AllowClient: 1
     None: 0
@@ -2929,9 +2838,9 @@ Enum:
     MinValue: 0
     NumValues: 3
   GameRuleMeta:
-    MaxValue: 199
+    MaxValue: 108
     MinValue: 0
-    NumValues: 200
+    NumValues: 109
   GameRuleType:
     Bool: 2
     Float: 1

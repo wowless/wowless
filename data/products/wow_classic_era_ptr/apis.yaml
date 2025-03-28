@@ -5936,9 +5936,7 @@ C_GameRules.GetGameModeDisplayInfoByRecordID:
     type:
       structure: C_GameRules.GameModeDisplayInfo
 C_GameRules.GetGameModeGlueScreenName:
-  inputs:
-  - name: gameModeRecordID
-    type: number
+  inputs: {}
   outputs:
   - name: screenName
     type: string
