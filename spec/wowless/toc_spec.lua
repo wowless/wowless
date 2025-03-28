@@ -34,6 +34,28 @@ describe('wowless.toc', function()
           assert.same({ ['A' .. flavor .. 'Key'] = 'B' .. flavor .. 'Value' .. flavor }, attrs)
           assert.same({ 'a' .. flavor .. 'b' }, files)
         end)
+        it('does AllowLoad filtering', function()
+          local lines = {
+            'algame [AllowLoad Game]',
+            'alglue [AllowLoad Glue]',
+          }
+          local _, files = parse(flavor, table.concat(lines, '\n'))
+          assert.same({ 'algame' }, files)
+        end)
+        it('does AllowLoadGameType filtering', function()
+          local lines = {
+            'aaa [AllowLoadGameType mainline]',
+            'bbb [AllowLoadGameType vanilla, cata]',
+            'ccc [AllowLoadGameType classic]',
+          }
+          local _, files = parse(flavor, table.concat(lines, '\n'))
+          local expected = {
+            Cata = { 'bbb', 'ccc' },
+            Mainline = { 'aaa' },
+            Vanilla = { 'bbb', 'ccc' },
+          }
+          assert.same(assert(expected[flavor]), files)
+        end)
       end)
     end
   end)

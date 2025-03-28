@@ -1,5 +1,14 @@
 local flavors = require('runtime.flavors')
 
+local gametypes = {}
+for k, v in pairs(flavors) do
+  local t = {}
+  for _, gt in ipairs(v.gametypes) do
+    t[gt] = true
+  end
+  gametypes[k] = t
+end
+
 local suffixes = {}
 for k, v in pairs(flavors) do
   local t = {
@@ -17,7 +26,7 @@ for k, v in pairs(flavors) do
 end
 
 local function parse(flavor, content)
-  assert(flavors[flavor])
+  local gts = assert(gametypes[flavor])
   content = content:gsub('%[Family%]', flavor)
   local attrs = {}
   local files = {}
@@ -29,7 +38,23 @@ local function parse(flavor, content)
         attrs[key] = value
       end
     elseif line ~= '' and line:sub(1, 1) ~= '#' then
-      table.insert(files, line)
+      local file, filter, fdata = line:match('^(.-)%s*%[(.-)%s+(.-)%]$')
+      file = file or line
+      local function allow()
+        if not filter or filter == 'AllowLoad' and fdata == 'Game' then
+          return true
+        end
+        if filter == 'AllowLoadGameType' then
+          for gametype in fdata:gmatch('[^, ]+') do
+            if gts[gametype] then
+              return true
+            end
+          end
+        end
+      end
+      if allow() then
+        table.insert(files, file)
+      end
     end
   end
   return attrs, files
