@@ -84,9 +84,9 @@ C_ScriptedAnimations.GetAllScriptedAnimationEffects:
 C_SpecializationInfo.GetSpecIDs:
   sqls:
   - cursor: C_SpecializationInfo.GetSpecIDs
-C_Texture.GetAtlasInfo_10_2:
+C_Texture.GetAtlasInfo:
   sqls:
-  - lookup: C_Texture.GetAtlasInfo_10_2
+  - lookup: C_Texture.GetAtlasInfo
 C_Timer.After:
   module: time
 C_Timer.NewTicker:
