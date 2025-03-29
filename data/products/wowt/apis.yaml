@@ -27169,7 +27169,8 @@ GetCurrentBindingSet:
   outputs:
   - type: number
 GetCurrentCombatTextEventInfo: {}
-GetCurrentEnvironment: {}
+GetCurrentEnvironment:
+  impl: GetCurrentEnvironment
 GetCurrentEventID:
   inputs: {}
   outputs:

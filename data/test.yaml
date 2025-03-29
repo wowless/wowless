@@ -14,6 +14,7 @@ GetBuildInfo_3_4_2: {}
 GetClassInfo: {}
 GetClassInfo_Classic: {}
 GetClickFrame: {}
+GetCurrentEnvironment: {}
 IsLinuxClient: {}
 IsMacClient: {}
 IsTestBuild: {}
