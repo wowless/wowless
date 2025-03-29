@@ -12,5 +12,6 @@ SELECT
 FROM
   UiTextureAtlasMember m
   JOIN UiTextureAtlas a ON a.ID = m.UiTextureAtlasID
+  JOIN UiTextureAtlasElement e ON e.ID = m.UiTextureAtlasElementID
 WHERE
-  m.CommittedName = ?1 COLLATE NOCASE;
+  e.Name = ?1 COLLATE NOCASE;
