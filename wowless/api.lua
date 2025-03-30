@@ -317,6 +317,7 @@ local function new(log, maxErrors, product)
     'calendar',
     'cvars',
     'events',
+    'env',
     'macrotext',
     'system',
     'talents',

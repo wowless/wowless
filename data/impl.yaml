@@ -177,7 +177,8 @@ GetClassInfo_Classic:
 GetClickFrame:
   frameworks:
   - api
-GetCurrentEnvironment: {}
+GetCurrentEnvironment:
+  module: env
 getfenv:
   frameworks:
   - env
