@@ -87,6 +87,9 @@ C_SpecializationInfo.GetSpecIDs:
 C_Texture.GetAtlasInfo:
   sqls:
   - lookup: C_Texture.GetAtlasInfo
+C_Texture.GetAtlasInfo_11_1_5:
+  sqls:
+  - lookup: C_Texture.GetAtlasInfo_11_1_5
 C_Timer.After:
   module: time
 C_Timer.NewTicker:
