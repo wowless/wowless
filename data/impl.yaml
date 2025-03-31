@@ -191,6 +191,8 @@ GetFrameMetatable:
 GetFramesRegisteredForEvent:
   function: GetFramesRegisteredForEventUnpacked
   module: events
+GetGlobalEnvironment:
+  module: env
 GetInventorySlotInfo:
   sqls:
   - lookup: GetInventorySlotInfo
@@ -262,6 +264,8 @@ GetTime:
   module: time
 IsAddOnLoaded: {}
 IsAddOnLoadOnDemand: {}
+IsInGlobalEnvironment:
+  module: env
 IsLinuxClient:
   frameworks:
   - api

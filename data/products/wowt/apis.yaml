@@ -27473,7 +27473,8 @@ GetGameTime:
     type: number
   - name: minute
     type: number
-GetGlobalEnvironment: {}
+GetGlobalEnvironment:
+  impl: GetGlobalEnvironment
 GetGMStatus: {}
 GetGMTicket: {}
 GetGraphicsAPIs:
@@ -30813,7 +30814,8 @@ IsIndoors:
   outputs:
   - name: result
     type: boolean
-IsInGlobalEnvironment: {}
+IsInGlobalEnvironment:
+  impl: IsInGlobalEnvironment
 IsInGroup: {}
 IsInGuild:
   inputs: {}
