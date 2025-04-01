@@ -21,4 +21,5 @@ IsLinuxClient: {}
 IsMacClient: {}
 IsTestBuild: {}
 IsWindowsClient: {}
+SwapToGlobalEnvironment: {}
 UnitName: {}

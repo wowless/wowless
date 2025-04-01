@@ -294,6 +294,8 @@ SendSystemMessage:
   frameworks:
   - api
 SetPortraitTexture: {}
+SwapToGlobalEnvironment:
+  module: env
 UnitClass:
   sqls:
   - lookup: UnitClass

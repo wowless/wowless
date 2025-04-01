@@ -32422,7 +32422,8 @@ SupportsClipCursor:
     type: boolean
 SurrenderArena: {}
 SwapRaidSubgroup: {}
-SwapToGlobalEnvironment: {}
+SwapToGlobalEnvironment:
+  impl: SwapToGlobalEnvironment
 SwitchAchievementSearchTab: {}
 table.concat:
   stdlib: table.concat
