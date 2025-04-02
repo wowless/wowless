@@ -24,11 +24,9 @@ struct module {
   const char *file;
 };
 ]])
-io.write(
-  ('const struct module lua2c_%s = { "%s", code, %d, "@%s" };\n'):format(
-    package:gsub('%.', '_'),
-    package,
-    input:len(),
-    file
-  )
-)
+io.write(('const struct module lua2c_%s = {\n'):format(package:gsub('%.', '_')))
+io.write(('  .name = "%s",\n'):format(package))
+io.write('  .code = code,\n')
+io.write(('  .size = %d,\n'):format(input:len()))
+io.write(('  .file = "@%s",\n'):format(file))
+io.write('};\n')
