@@ -33,16 +33,9 @@ end
 io.output(package .. '.c')
 io.write([[#include "lauxlib.h"
 #include "lualib.h"
+#include "tools/file2c.h"
 ]])
 if next(modules) then
-  io.write([[
-struct module {
-  const char *name;
-  const char *code;
-  int size;
-  const char *file;
-};
-]])
   for k in sorted(modules) do
     io.write(('extern const struct module lua2c_%s;\n'):format(k:gsub('%.', '_')))
   end
