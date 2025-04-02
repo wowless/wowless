@@ -1,8 +1,8 @@
 ---
-build: '60000'
+build: '60013'
 date: Mar 27 2025
 flavor: Vanilla
-hash: 26b444d6514c63d45327421cd482bd77
+hash: 0665c253dbda07c1332ebacb946ead5f
 test: false
 tocversion: 11507
 version: 1.15.7
