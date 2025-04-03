@@ -16,6 +16,13 @@ local function sorted(t)
     end
   end)
 end
+local function numentries(t)
+  local n = 0
+  for _ in pairs(t) do
+    n = n + 1
+  end
+  return n
+end
 local package = arg[1]
 local modules = {}
 local cmodules = {}
@@ -31,58 +38,27 @@ for i = 2, #arg do
   end
 end
 io.output(package .. '.c')
-io.write([[#include "lauxlib.h"
-#include "lualib.h"
-#include "tools/file2c.h"
-]])
-if next(modules) then
-  for k in sorted(modules) do
-    io.write(('extern const struct module lua2c_%s;\n'):format(k:gsub('%.', '_')))
-  end
-  io.write([[
-static const struct module *modules[] = {
-]])
-  for k in sorted(modules) do
-    io.write(('  &lua2c_%s,\n'):format(k:gsub('%.', '_')))
-  end
-  io.write('};\n')
+io.write('#include "lualib.h"\n')
+io.write('#include "tools/lua2c.h"\n')
+for k in sorted(modules) do
+  io.write(('extern const struct module lua2c_%s;\n'):format(k:gsub('%.', '_')))
 end
-if next(cmodules) then
-  io.write([[
-struct cmodule {
-  const char *name;
-  lua_CFunction func;
-};
-]])
-  for _, v in sorted(cmodules) do
-    io.write('extern int luaopen_' .. v .. '(lua_State *);\n')
-  end
-  io.write('static const struct cmodule cmodules[] = {\n')
-  for k, v in sorted(cmodules) do
-    io.write(('  {"%s", luaopen_%s},\n'):format(k, v))
-  end
-  io.write('};\n')
+io.write('static const struct module *modules[] = {\n')
+for k in sorted(modules) do
+  io.write(('  &lua2c_%s,\n'):format(k:gsub('%.', '_')))
 end
-io.write([[
-void preload_]] .. package .. [[(lua_State *L) {
-  lua_getglobal(L, "package");
-  lua_getfield(L, -1, "preload");
-]])
-io.write(not next(modules) and '' or [[
-  for (size_t i = 0; i < sizeof(modules) / sizeof(*modules); ++i) {
-    const struct module *m = modules[i];
-    luaL_loadbuffer(L, m->code, m->size, m->file);
-    lua_setfield(L, -2, m->name);
-  }
-]])
-io.write(not next(cmodules) and '' or [[
-  for (size_t i = 0; i < sizeof(cmodules) / sizeof(struct cmodule); ++i) {
-    const struct cmodule *m = &cmodules[i];
-    lua_pushcfunction(L, m->func);
-    lua_setfield(L, -2, m->name);
-  }
-]])
-io.write([[
-  lua_pop(L, 2);
-}
-]])
+io.write('};\n')
+for _, v in sorted(cmodules) do
+  io.write('extern int luaopen_' .. v .. '(lua_State *);\n')
+end
+io.write('static const struct cmodule cmodules[] = {\n')
+for k, v in sorted(cmodules) do
+  io.write(('  {"%s", luaopen_%s},\n'):format(k, v))
+end
+io.write('};\n')
+io.write(('const struct preload preload_%s = {\n'):format(package))
+io.write('  .modules = modules,\n')
+io.write(('  .nmodules = %d,\n'):format(numentries(modules)))
+io.write('  .cmodules = cmodules,\n')
+io.write(('  .ncmodules = %d,\n'):format(numentries(cmodules)))
+io.write('};\n')

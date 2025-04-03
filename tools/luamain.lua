@@ -19,9 +19,10 @@ io.write([[
 #include <stdlib.h>
 #include "lauxlib.h"
 #include "lualib.h"
+#include "tools/lua2c.h"
 ]])
 for _, p in ipairs(preloads) do
-  io.write('extern void preload_' .. p .. '(lua_State *);\n')
+  io.write('extern const struct preload preload_' .. p .. ';\n')
 end
 io.write([[
 static int errhandler(lua_State *L) {
@@ -38,7 +39,7 @@ int main(int argc, char **argv) {
   luaL_openlibsx(L, LUALIB_STANDARD);
 ]])
 for _, p in ipairs(preloads) do
-  io.write('  preload_' .. p .. '(L);\n')
+  io.write('  preload(L, &preload_' .. p .. ');\n')
 end
 io.write([[
   lua_getglobal(L, "package");

@@ -390,6 +390,10 @@ lua2c(
   vstruct.io.z=${vstruct_SOURCE_DIR}/io/z.lua
   vstruct.lexer=${vstruct_SOURCE_DIR}/lexer.lua)
 
+add_library(lua2c STATIC tools/lua2c.c tools/lua2c.h tools/file2c.h)
+target_include_directories(lua2c PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+target_link_libraries(lua2c PRIVATE elune)
+
 function(add_lua_executable name main)
   set(luamain ${name}luamain.c)
   add_custom_command(
@@ -398,7 +402,8 @@ function(add_lua_executable name main)
             ${luamain} ${main} ${ARGN}
     DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/tools/luamain.lua ${main})
   add_executable(${name} ${luamain})
-  target_link_libraries(${name} PRIVATE ${ARGN} elune)
+  target_include_directories(${name} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
+  target_link_libraries(${name} PRIVATE ${ARGN} lua2c elune)
 endfunction()
 
 lua2c(wowlessyaml wowapi.yaml=${CMAKE_CURRENT_SOURCE_DIR}/wowapi/yaml.lua)
