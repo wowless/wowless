@@ -40,25 +40,29 @@ end
 io.output(package .. '.c')
 io.write('#include "lualib.h"\n')
 io.write('#include "tools/lua2c.h"\n')
-for k in sorted(modules) do
-  io.write(('extern const struct module lua2c_%s;\n'):format(k:gsub('%.', '_')))
+if next(modules) then
+  for k in sorted(modules) do
+    io.write(('extern const struct module lua2c_%s;\n'):format(k:gsub('%.', '_')))
+  end
+  io.write('static const struct module *modules[] = {\n')
+  for k in sorted(modules) do
+    io.write(('  &lua2c_%s,\n'):format(k:gsub('%.', '_')))
+  end
+  io.write('};\n')
 end
-io.write('static const struct module *modules[] = {\n')
-for k in sorted(modules) do
-  io.write(('  &lua2c_%s,\n'):format(k:gsub('%.', '_')))
+if next(cmodules) then
+  for _, v in sorted(cmodules) do
+    io.write('extern int luaopen_' .. v .. '(lua_State *);\n')
+  end
+  io.write('static const struct cmodule cmodules[] = {\n')
+  for k, v in sorted(cmodules) do
+    io.write(('  {"%s", luaopen_%s},\n'):format(k, v))
+  end
+  io.write('};\n')
 end
-io.write('};\n')
-for _, v in sorted(cmodules) do
-  io.write('extern int luaopen_' .. v .. '(lua_State *);\n')
-end
-io.write('static const struct cmodule cmodules[] = {\n')
-for k, v in sorted(cmodules) do
-  io.write(('  {"%s", luaopen_%s},\n'):format(k, v))
-end
-io.write('};\n')
 io.write(('const struct preload preload_%s = {\n'):format(package))
-io.write('  .modules = modules,\n')
+io.write(('  .modules = %s,\n'):format(next(modules) and 'modules' or 0))
 io.write(('  .nmodules = %d,\n'):format(numentries(modules)))
-io.write('  .cmodules = cmodules,\n')
+io.write(('  .cmodules = %s,\n'):format(next(cmodules) and 'cmodules' or 0))
 io.write(('  .ncmodules = %d,\n'):format(numentries(cmodules)))
 io.write('};\n')
