@@ -394,16 +394,25 @@ add_library(lua2c STATIC tools/lua2c.c tools/lua2c.h tools/file2c.h)
 target_include_directories(lua2c PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 target_link_libraries(lua2c PRIVATE elune)
 
+add_library(luamain STATIC tools/luamain.c tools/luamain.h)
+target_include_directories(luamain PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
+target_link_libraries(luamain PUBLIC lua2c elune)
+
 function(add_lua_executable name main)
+  add_custom_command(
+    OUTPUT ${name}luafile.c
+    COMMAND bootstraplua ${CMAKE_CURRENT_SOURCE_DIR}/tools/file2c.lua main
+            ${main} ${name}luafile.c
+    DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/tools/file2c.lua ${main})
   set(luamain ${name}luamain.c)
   add_custom_command(
     OUTPUT ${luamain}
     COMMAND bootstraplua ${CMAKE_CURRENT_SOURCE_DIR}/tools/luamain.lua
-            ${luamain} ${main} ${ARGN}
+            ${luamain} ${ARGN}
     DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/tools/luamain.lua ${main})
-  add_executable(${name} ${luamain})
+  add_executable(${name} ${luamain} ${name}luafile.c)
   target_include_directories(${name} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
-  target_link_libraries(${name} PRIVATE ${ARGN} lua2c elune)
+  target_link_libraries(${name} PRIVATE ${ARGN} luamain)
 endfunction()
 
 lua2c(wowlessyaml wowapi.yaml=${CMAKE_CURRENT_SOURCE_DIR}/wowapi/yaml.lua)
