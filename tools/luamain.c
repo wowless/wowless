@@ -19,9 +19,22 @@ int main(int argc, char **argv) {
   }
   luaL_openlibsx(L, LUALIB_ELUNE);
   luaL_openlibsx(L, LUALIB_STANDARD);
+  lua_getglobal(L, "package");
+  lua_getfield(L, -1, "preload");
   for (size_t i = 0; i < luamain.npreloads; ++i) {
-    preload(L, luamain.preloads[i]);
+    const struct preload *preload = luamain.preloads[i];
+    for (size_t j = 0; j < preload->nmodules; ++j) {
+      const struct module *m = preload->modules[j];
+      luaL_loadbuffer(L, m->code, m->size, m->file);
+      lua_setfield(L, -2, m->name);
+    }
+    for (size_t j = 0; j < preload->ncmodules; ++j) {
+      const struct cmodule *m = &preload->cmodules[j];
+      lua_pushcfunction(L, m->func);
+      lua_setfield(L, -2, m->name);
+    }
   }
+  lua_pop(L, 2);
   lua_getglobal(L, "package");
   lua_getfield(L, -1, "loaders");
   lua_createtable(L, 1, 0);

@@ -118,7 +118,7 @@ function(lua2c name)
     COMMAND bootstraplua ${CMAKE_CURRENT_SOURCE_DIR}/tools/lua2c.lua ${name}
             ${ARGN}
     DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/tools/lua2c.lua ${deps})
-  add_library(${name} STATIC ${name}.c tools/file2c.h ${deps})
+  add_library(${name} STATIC ${name}.c tools/file2c.h tools/lua2c.h ${deps})
   target_include_directories(${name} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
   target_link_libraries(${name} PRIVATE elune)
 endfunction()
@@ -390,13 +390,10 @@ lua2c(
   vstruct.io.z=${vstruct_SOURCE_DIR}/io/z.lua
   vstruct.lexer=${vstruct_SOURCE_DIR}/lexer.lua)
 
-add_library(lua2c STATIC tools/lua2c.c tools/lua2c.h tools/file2c.h)
-target_include_directories(lua2c PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
-target_link_libraries(lua2c PRIVATE elune)
-
-add_library(luamain STATIC tools/luamain.c tools/luamain.h)
+add_library(luamain STATIC tools/luamain.c tools/luamain.h tools/lua2c.h
+                           tools/file2c.h)
 target_include_directories(luamain PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
-target_link_libraries(luamain PUBLIC lua2c elune)
+target_link_libraries(luamain PUBLIC elune)
 
 function(add_lua_executable name main)
   add_custom_command(

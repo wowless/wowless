@@ -16,6 +16,4 @@ struct preload {
   int ncmodules;
 };
 
-void preload(lua_State *L, const struct preload *preload);
-
 #endif
