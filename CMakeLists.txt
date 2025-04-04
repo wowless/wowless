@@ -178,8 +178,8 @@ add_library(sqlite3 ALIAS unofficial::sqlite3::sqlite3)
 
 FetchContent_Declare(
   lsqlite3
-  URL http://lua.sqlite.org/index.cgi/zip/lsqlite3_fsl09y.zip
-  URL_HASH MD5=da1de94e833a3642317e23f2c78caa98
+  URL http://lua.sqlite.org/home/zip/lsqlite3_v096.zip
+  URL_HASH MD5=70e87bc7efa1ec4a7d69ccebdcd91e09
   SOURCE_SUBDIR disable_cmakelists_txt)
 FetchContent_MakeAvailable(lsqlite3)
 lua2c(lsqlite3 lsqlite3=c)
