@@ -7,4 +7,5 @@ return (function(self, tex)
     t:Show()
   end
   self.statusBarTexture = t
+  return true
 end)(...)

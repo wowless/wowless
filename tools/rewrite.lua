@@ -2,7 +2,7 @@ local writeFile = require('pl.file').write
 local yaml = require('wowapi.yaml')
 
 local function rewriteFile(ty, fn)
-  for _, p in ipairs(require('build.data.products')) do
+  for _, p in ipairs(dofile('build/cmake/runtime/products.lua')) do
     local filename = 'data/products/' .. p .. '/' .. ty .. '.yaml'
     local before = require('pl.file').read(filename)
     local data = yaml.parse(before)
@@ -11,6 +11,25 @@ local function rewriteFile(ty, fn)
     if after ~= before then
       writeFile(filename, after)
     end
+  end
+end
+
+local function rewriteTable(x, y)
+  for xk, xv in pairs(x) do
+    if type(xv) ~= 'table' then
+      y[xk] = xv
+    else
+      y[xk] = y[xk] or {}
+      rewriteTable(xv, y[xk])
+    end
+  end
+end
+
+local function rewriteFiles(z)
+  for zk, zv in pairs(z) do
+    rewriteFile(zk, function(_, t)
+      rewriteTable(zv, t)
+    end)
   end
 end
 
@@ -41,7 +60,15 @@ local function rewriteSpecs(fn)
   end)
 end
 
-return {
+local args = (function()
+  local parser = require('argparse')()
+  parser:argument('program', 'program.lua')
+  return parser:parse()
+end)()
+
+local fn = assert(loadfile(args.program))
+fn({
   file = rewriteFile,
+  files = rewriteFiles,
   specs = rewriteSpecs,
-}
+})

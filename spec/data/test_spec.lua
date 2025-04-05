@@ -16,6 +16,10 @@ describe('test', function()
   end)
   for filename, content in pairs(luas) do
     describe(filename, function()
+      it('has the right preamble', function()
+        local preamble = 'local T = ...\n'
+        assert.same(preamble, content:sub(1, preamble:len()))
+      end)
       it('loads', function()
         assert(loadstring(content, '@' .. filename))
       end)

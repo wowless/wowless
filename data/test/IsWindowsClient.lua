@@ -1,7 +1,7 @@
-local t = ...
-local v = t.retn(1, t.env.IsWindowsClient())
-if t.wowless then
-  t.assertEquals(t.wowless.platform == 'windows', v)
+local T = ...
+local v = T.retn(1, T.env.IsWindowsClient())
+if T.wowless then
+  T.assertEquals(T.wowless.platform == 'windows', v)
 else
-  t.assertEquals('boolean', type(v))
+  T.assertEquals('boolean', type(v))
 end

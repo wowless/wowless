@@ -1,3 +1,3 @@
 local s = ...
 local sx = require('pl.stringx')
-return sx.strip(sx.split(s, ';')[1] or '')
+return sx.strip(sx.split(s, ';')[1] or ''), nil

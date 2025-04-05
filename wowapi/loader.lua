@@ -2,13 +2,15 @@ local util = require('wowless.util')
 
 local function loadSqls(sqlitedb, cursorSqls, lookupSqls)
   local function lookup(stmt, isTable)
+    -- Manually pull out the first element of these iterators.
     if isTable then
-      for row in stmt:nrows() do -- luacheck: ignore 512
-        return row
-      end
+      local f, s = stmt:nrows()
+      return f(s)
     else
-      for row in stmt:rows() do -- luacheck: ignore 512
-        return unpack(row)
+      local f, s = stmt:rows()
+      local t = f(s)
+      if t then
+        return unpack(t)
       end
     end
   end
@@ -58,10 +60,12 @@ local function loadFunctions(api, loader)
     api = api, -- TODO replace api framework with something finer grained
     datalua = api.datalua,
     env = api.env,
+    events = api.events,
     loader = loader,
   }
 
   local typechecker = require('wowless.typecheck')(api)
+  local funchecker = require('wowless.funcheck')(typechecker)
 
   local function stubMixin(t, name)
     return util.mixin(t, api.env[name])
@@ -81,9 +85,6 @@ local function loadFunctions(api, loader)
     local specials = {}
     for _, fw in ipairs(apicfg.frameworks or {}) do
       table.insert(specials, (assert(frameworks[fw], 'unknown framework ' .. fw)))
-    end
-    for _, st in ipairs(apicfg.states or {}) do
-      table.insert(specials, api.states[st])
     end
     for _, sql in ipairs(apicfg.sqls or {}) do
       table.insert(specials, sql.lookup and sqls.lookups[sql.lookup] or sqls.cursors[sql.cursor])
@@ -144,25 +145,7 @@ local function loadFunctions(api, loader)
       outfn = infn
     else
       edepth = edepth + 1
-      local nouts = #apicfg.outputs
-      local function doCheckOutputs(...)
-        local n = select('#', ...)
-        if n == 0 and apicfg.mayreturnnothing then
-          return
-        end
-        if n > nouts then
-          error('returned too many values from ' .. fname)
-        end
-        local rets = {}
-        for i, out in ipairs(apicfg.outputs) do
-          local v, errmsg = typechecker(out, (select(i, ...)), true)
-          if errmsg then
-            error(('output %d (%q) of %q %s'):format(i, tostring(out.name), fname, errmsg))
-          end
-          rets[i] = v
-        end
-        return unpack(rets, 1, nouts)
-      end
+      local doCheckOutputs = funchecker.makeCheckOutputs(fname, apicfg)
       outfn = function(...)
         return doCheckOutputs(infn(...))
       end
@@ -182,7 +165,11 @@ local function loadFunctions(api, loader)
     if apicfg.alias then
       aliases[fn] = apicfg.alias
     elseif apicfg.stdlib then
-      util.tset(fns, fn, assert(util.tget(_G, apicfg.stdlib)))
+      local v = assert(util.tget(_G, apicfg.stdlib))
+      if apicfg.nowrap == false then
+        v = debug.newsecurefunction(v)
+      end
+      util.tset(fns, fn, v)
     else
       util.tset(fns, fn, mkfn(fn, apicfg))
     end

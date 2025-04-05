@@ -10,6 +10,7 @@ if atlasHeight then
     file = fileDataID,
     height = overrideHeight ~= 0 and overrideHeight or committedBottom - committedTop,
     leftTexCoord = committedLeft / atlasWidth,
+    rawSize = { x = 0, y = 0 }, -- TODO implement
     rightTexCoord = committedRight / atlasWidth,
     tilesHorizontally = band(committedFlags, 0x4) ~= 0,
     tilesVertically = band(committedFlags, 0x2) ~= 0,

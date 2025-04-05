@@ -1,10 +1,8 @@
 cmake_minimum_required(VERSION 3.24)
 
-set(
-  CMAKE_TOOLCHAIN_FILE
-  ${CMAKE_CURRENT_SOURCE_DIR}/vcpkg/scripts/buildsystems/vcpkg.cmake
-  CACHE STRING "Vcpkg toolchain file"
-)
+set(CMAKE_TOOLCHAIN_FILE
+    ${CMAKE_CURRENT_SOURCE_DIR}/vcpkg/scripts/buildsystems/vcpkg.cmake
+    CACHE STRING "Vcpkg toolchain file")
 
 project(wowless LANGUAGES C)
 
@@ -13,21 +11,8 @@ cmake_policy(SET CMP0116 OLD)
 
 include(FetchContent)
 
-FetchContent_Declare(
-  utf8h
-  GIT_REPOSITORY https://github.com/sheredom/utf8.h.git
-  GIT_TAG ce48f0eda6cac8f365837edaf8298ad5c03f7f2e
-  SOURCE_SUBDIR disable_cmakelists_txt
-)
-FetchContent_MakeAvailable(utf8h)
-
-FetchContent_Declare(
-  elune
-  GIT_REPOSITORY https://github.com/meorawr/elune.git
-  GIT_TAG 7fc7271922fbc0a371ef15d699ffa0b2be649a81
-  SOURCE_SUBDIR disable_cmakelists_txt
-)
-FetchContent_MakeAvailable(elune)
+set(elune_SOURCE_DIR vendor/elune)
+set(elune_BINARY_DIR ${CMAKE_BINARY_DIR}/_deps/elune-build)
 add_library(
   elune STATIC
   ${elune_SOURCE_DIR}/liblua/lapi.c
@@ -67,50 +52,42 @@ add_library(
   ${elune_SOURCE_DIR}/liblua/ltm.c
   ${elune_SOURCE_DIR}/liblua/lundump.c
   ${elune_SOURCE_DIR}/liblua/lvm.c
-  ${elune_SOURCE_DIR}/liblua/lzio.c
-)
+  ${elune_SOURCE_DIR}/liblua/lzio.c)
 block()
-  set(LUA_CPATH_ESCAPED "")
-  set(LUA_DISABLE_LOADLIB ON)
-  set(LUA_PATH_ESCAPED "")
-  set(LUAI_BITSINT 32)
-  if(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
-    set(LUA_DIRSEP_ESCAPED "/")
-    set(LUA_USE_LINUX OFF)
-    set(LUA_USE_MACOS ON)
-    set(LUA_USE_POSIX ON)
-    set(LUA_USE_WINDOWS OFF)
-  elseif(CMAKE_SYSTEM_NAME STREQUAL "Linux")
-    set(LUA_DIRSEP_ESCAPED "/")
-    set(LUA_USE_LINUX ON)
-    set(LUA_USE_MACOS OFF)
-    set(LUA_USE_POSIX ON)
-    set(LUA_USE_WINDOWS OFF)
-  elseif(CMAKE_SYSTEM_NAME STREQUAL "Windows")
-    set(LUA_DIRSEP_ESCAPED "\\\\")
-    set(LUA_USE_LINUX OFF)
-    set(LUA_USE_MACOS OFF)
-    set(LUA_USE_POSIX OFF)
-    set(LUA_USE_WINDOWS ON)
-  else()
-    message(FATAL_ERROR "unsupported platform")
-  endif()
-  configure_file(
-    ${elune_SOURCE_DIR}/liblua/include/luaconf.h.in
-    ${elune_BINARY_DIR}/luaconf.h
-  )
+set(LUA_CPATH_ESCAPED "")
+set(LUA_DISABLE_LOADLIB ON)
+set(LUA_PATH_ESCAPED "")
+set(LUAI_BITSINT 32)
+if(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
+  set(LUA_DIRSEP_ESCAPED "/")
+  set(LUA_USE_LINUX OFF)
+  set(LUA_USE_MACOS ON)
+  set(LUA_USE_POSIX ON)
+  set(LUA_USE_WINDOWS OFF)
+elseif(CMAKE_SYSTEM_NAME STREQUAL "Linux")
+  set(LUA_DIRSEP_ESCAPED "/")
+  set(LUA_USE_LINUX ON)
+  set(LUA_USE_MACOS OFF)
+  set(LUA_USE_POSIX ON)
+  set(LUA_USE_WINDOWS OFF)
+elseif(CMAKE_SYSTEM_NAME STREQUAL "Windows")
+  set(LUA_DIRSEP_ESCAPED "\\\\")
+  set(LUA_USE_LINUX OFF)
+  set(LUA_USE_MACOS OFF)
+  set(LUA_USE_POSIX OFF)
+  set(LUA_USE_WINDOWS ON)
+else()
+  message(FATAL_ERROR "unsupported platform")
+endif()
+configure_file(${elune_SOURCE_DIR}/liblua/include/luaconf.h.in
+               ${elune_BINARY_DIR}/luaconf.h)
 endblock()
-target_include_directories(elune PRIVATE ${utf8h_SOURCE_DIR})
-target_include_directories(
-  elune PUBLIC
-  ${elune_SOURCE_DIR}/liblua/include
-  ${elune_BINARY_DIR}
-)
-target_link_libraries(
-  elune PRIVATE
-  $<$<PLATFORM_ID:Darwin,Linux>:m>
-  $<$<PLATFORM_ID:Windows>:bcrypt>
-)
+find_path(UTF8H_INCLUDE_DIRS utf8h/utf8.h)
+target_include_directories(elune PRIVATE ${UTF8H_INCLUDE_DIRS}/utf8h)
+target_include_directories(elune PUBLIC ${elune_SOURCE_DIR}/liblua/include
+                                        ${elune_BINARY_DIR})
+target_link_libraries(elune PRIVATE $<$<PLATFORM_ID:Darwin,Linux>:m>
+                                    $<$<PLATFORM_ID:Windows>:bcrypt>)
 set_target_properties(elune PROPERTIES C_STANDARD 11)
 
 add_executable(bootstraplua ${elune_SOURCE_DIR}/lua/lua.c)
@@ -120,30 +97,41 @@ find_package(expat CONFIG REQUIRED)
 add_library(expat ALIAS expat::expat)
 
 function(lua2c name)
-  set(deps ${ARGN})
-  list(TRANSFORM deps REPLACE "^.*=" "")
-  list(REMOVE_ITEM deps c)
+  foreach(arg ${ARGN})
+    string(FIND ${arg} "=" eqpos)
+    math(EXPR eqposy "${eqpos} + 1")
+    string(SUBSTRING ${arg} 0 ${eqpos} package)
+    string(SUBSTRING ${arg} ${eqposy} -1 file)
+    if(NOT (${file} STREQUAL "c"))
+      string(REPLACE "." "_" pkg ${package})
+      set(output lua2c/${pkg}.c)
+      set(cmd ${CMAKE_CURRENT_SOURCE_DIR}/tools/file2c.lua)
+      add_custom_command(
+        OUTPUT ${output}
+        COMMAND bootstraplua ${cmd} ${package} ${file} ${output}
+        DEPENDS ${cmd} ${file})
+      list(APPEND deps ${output})
+    endif()
+  endforeach()
   add_custom_command(
     OUTPUT ${name}.c
-    COMMAND bootstraplua ${CMAKE_CURRENT_SOURCE_DIR}/tools/lua2c.lua ${name} ${ARGN}
-    DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/tools/lua2c.lua ${deps}
-  )
+    COMMAND bootstraplua ${CMAKE_CURRENT_SOURCE_DIR}/tools/lua2c.lua ${name}
+            ${ARGN}
+    DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/tools/lua2c.lua ${deps})
+  add_library(${name} STATIC ${name}.c tools/file2c.h tools/lua2c.h ${deps})
+  target_include_directories(${name} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
+  target_link_libraries(${name} PRIVATE elune)
 endfunction()
 
 FetchContent_Declare(
   luaexpat
   GIT_REPOSITORY https://github.com/lunarmodules/luaexpat.git
   GIT_TAG 1.4.1
-  SOURCE_SUBDIR disable_cmakelists_txt
-)
+  SOURCE_SUBDIR disable_cmakelists_txt)
 FetchContent_MakeAvailable(luaexpat)
 lua2c(luaexpat lxp=c)
-add_library(
-  luaexpat STATIC
-  luaexpat.c
-  ${luaexpat_SOURCE_DIR}/src/lxplib.c
-)
-target_link_libraries(luaexpat PRIVATE elune expat)
+target_sources(luaexpat PRIVATE ${luaexpat_SOURCE_DIR}/src/lxplib.c)
+target_link_libraries(luaexpat PRIVATE expat)
 
 find_package(yaml CONFIG REQUIRED)
 
@@ -151,8 +139,7 @@ FetchContent_Declare(
   lyaml
   GIT_REPOSITORY https://github.com/gvvaughan/lyaml.git
   GIT_TAG v6.2.8
-  SOURCE_SUBDIR disable_cmakelists_txt
-)
+  SOURCE_SUBDIR disable_cmakelists_txt)
 FetchContent_MakeAvailable(lyaml)
 lua2c(
   lyaml
@@ -160,21 +147,18 @@ lua2c(
   lyaml.explicit=${lyaml_SOURCE_DIR}/lib/lyaml/explicit.lua
   lyaml.functional=${lyaml_SOURCE_DIR}/lib/lyaml/functional.lua
   lyaml.implicit=${lyaml_SOURCE_DIR}/lib/lyaml/implicit.lua
-  yaml=c
-)
-add_library(
-  lyaml STATIC
-  lyaml.c
-  ${lyaml_SOURCE_DIR}/ext/yaml/emitter.c
-  ${lyaml_SOURCE_DIR}/ext/yaml/parser.c
-  ${lyaml_SOURCE_DIR}/ext/yaml/scanner.c
-  ${lyaml_SOURCE_DIR}/ext/yaml/yaml.c
-)
+  yaml=c)
+target_sources(
+  lyaml
+  PRIVATE ${lyaml_SOURCE_DIR}/ext/yaml/emitter.c
+          ${lyaml_SOURCE_DIR}/ext/yaml/parser.c
+          ${lyaml_SOURCE_DIR}/ext/yaml/scanner.c
+          ${lyaml_SOURCE_DIR}/ext/yaml/yaml.c)
 set_property(
   SOURCE ${lyaml_SOURCE_DIR}/ext/yaml/yaml.c
-  APPEND PROPERTY COMPILE_DEFINITIONS VERSION="wowless"
-)
-target_link_libraries(lyaml PRIVATE elune yaml)
+  APPEND
+  PROPERTY COMPILE_DEFINITIONS VERSION="wowless")
+target_link_libraries(lyaml PRIVATE yaml)
 
 find_package(ZLIB REQUIRED)
 add_library(zlib ALIAS ZLIB::ZLIB)
@@ -183,67 +167,47 @@ FetchContent_Declare(
   lzlib
   GIT_REPOSITORY https://github.com/luadist/lzlib.git
   GIT_TAG 0.4.3
-  SOURCE_SUBDIR disable_cmakelists_txt
-)
+  SOURCE_SUBDIR disable_cmakelists_txt)
 FetchContent_MakeAvailable(lzlib)
 lua2c(lzlib zlib=c)
-add_library(
-  lzlib STATIC
-  lzlib.c
-  ${lzlib_SOURCE_DIR}/lzlib.c
-)
-target_link_libraries(lzlib PRIVATE elune zlib)
+target_sources(lzlib PRIVATE ${lzlib_SOURCE_DIR}/lzlib.c)
+target_link_libraries(lzlib PRIVATE zlib)
 
 find_package(unofficial-sqlite3 CONFIG REQUIRED)
 add_library(sqlite3 ALIAS unofficial::sqlite3::sqlite3)
 
 FetchContent_Declare(
   lsqlite3
-  URL http://lua.sqlite.org/index.cgi/zip/lsqlite3_fsl09y.zip
-  URL_HASH MD5=1f937ed6bf9d5980239da516c424d7b6
-  SOURCE_SUBDIR disable_cmakelists_txt
-)
+  URL http://lua.sqlite.org/home/zip/lsqlite3_v096.zip
+  URL_HASH MD5=70e87bc7efa1ec4a7d69ccebdcd91e09
+  SOURCE_SUBDIR disable_cmakelists_txt)
 FetchContent_MakeAvailable(lsqlite3)
 lua2c(lsqlite3 lsqlite3=c)
-add_library(
-  lsqlite3 STATIC
-  lsqlite3.c
-  ${lsqlite3_SOURCE_DIR}/lsqlite3.c
-)
-target_link_libraries(lsqlite3 PRIVATE elune sqlite3)
+target_sources(lsqlite3 PRIVATE ${lsqlite3_SOURCE_DIR}/lsqlite3.c)
+target_link_libraries(lsqlite3 PRIVATE sqlite3)
 
 FetchContent_Declare(
   luafilesystem
   GIT_REPOSITORY https://github.com/lunarmodules/luafilesystem.git
   GIT_TAG v1_8_0
-  SOURCE_SUBDIR disable_cmakelists_txt
-)
+  SOURCE_SUBDIR disable_cmakelists_txt)
 FetchContent_MakeAvailable(luafilesystem)
 lua2c(luafilesystem lfs=c)
-add_library(
-  luafilesystem STATIC
-  luafilesystem.c
-  ${luafilesystem_SOURCE_DIR}/src/lfs.c
-)
-target_link_libraries(luafilesystem PRIVATE elune)
+target_sources(luafilesystem PRIVATE ${luafilesystem_SOURCE_DIR}/src/lfs.c)
 
 FetchContent_Declare(
   say
   GIT_REPOSITORY https://github.com/lunarmodules/say.git
   GIT_TAG 3e1f783d0aa496eb21d16e85b2235335cb9332df
-  SOURCE_SUBDIR disable_cmakelists_txt
-)
+  SOURCE_SUBDIR disable_cmakelists_txt)
 FetchContent_MakeAvailable(say)
 lua2c(say say=${say_SOURCE_DIR}/src/say/init.lua)
-add_library(say STATIC say.c)
-target_link_libraries(say PRIVATE elune)
 
 FetchContent_Declare(
   luassert
   GIT_REPOSITORY https://github.com/lunarmodules/luassert.git
   GIT_TAG 8c9385b1a1944a5ce0ef9dbd721ad1987cf85e9d
-  SOURCE_SUBDIR disable_cmakelists_txt
-)
+  SOURCE_SUBDIR disable_cmakelists_txt)
 FetchContent_MakeAvailable(luassert)
 lua2c(
   luassert
@@ -275,61 +239,45 @@ lua2c(
   luassert.languages.nl=${luassert_SOURCE_DIR}/src/languages/nl.lua
   luassert.languages.ru=${luassert_SOURCE_DIR}/src/languages/ru.lua
   luassert.languages.ua=${luassert_SOURCE_DIR}/src/languages/ua.lua
-  luassert.languages.zh=${luassert_SOURCE_DIR}/src/languages/zh.lua
-)
-add_library(luassert STATIC luassert.c)
-target_link_libraries(luassert PRIVATE elune)
+  luassert.languages.zh=${luassert_SOURCE_DIR}/src/languages/zh.lua)
 
 FetchContent_Declare(
   argparse
   GIT_REPOSITORY https://github.com/luarocks/argparse
   GIT_TAG 27967d7b52295ea7885671af734332038c132837
-  SOURCE_SUBDIR disable_cmakelists_txt
-)
+  SOURCE_SUBDIR disable_cmakelists_txt)
 FetchContent_MakeAvailable(argparse)
 lua2c(argparse argparse=${argparse_SOURCE_DIR}/src/argparse.lua)
-add_library(argparse STATIC argparse.c)
-target_link_libraries(argparse PRIVATE elune)
 
 FetchContent_Declare(
   date
   GIT_REPOSITORY https://github.com/tieske/date.git
   GIT_TAG e309741edc15bde2c884b0db09d8560848773b50
-  SOURCE_SUBDIR disable_cmakelists_txt
-)
+  SOURCE_SUBDIR disable_cmakelists_txt)
 FetchContent_MakeAvailable(date)
 lua2c(date date=${date_SOURCE_DIR}/src/date.lua)
-add_library(date STATIC date.c)
-target_link_libraries(date PRIVATE elune)
 
 FetchContent_Declare(
   tsort
   GIT_REPOSITORY https://github.com/bungle/lua-resty-tsort
   GIT_TAG 07754a8af7c51ca5fbcf05dc5f4b1b900f1bf530
-  SOURCE_SUBDIR disable_cmakelists_txt
-)
+  SOURCE_SUBDIR disable_cmakelists_txt)
 FetchContent_MakeAvailable(tsort)
 lua2c(tsort resty.tsort=${tsort_SOURCE_DIR}/lib/resty/tsort.lua)
-add_library(tsort STATIC tsort.c)
-target_link_libraries(tsort PRIVATE elune)
 
 FetchContent_Declare(
   minheap
   GIT_REPOSITORY https://github.com/mah0x211/lua-minheap
   GIT_TAG c5fe42b60cf5b3ee7ed6d33eb31be1119dfb1cd6
-  SOURCE_SUBDIR disable_cmakelists_txt
-)
+  SOURCE_SUBDIR disable_cmakelists_txt)
 FetchContent_MakeAvailable(minheap)
 lua2c(minheap minheap=${minheap_SOURCE_DIR}/minheap.lua)
-add_library(minheap STATIC minheap.c)
-target_link_libraries(minheap PRIVATE elune)
 
 FetchContent_Declare(
   luapath
   GIT_REPOSITORY https://github.com/moteus/lua-path
   GIT_TAG 5a32c7052e84cdb9dcbcd45648aae3f6927376ac
-  SOURCE_SUBDIR disable_cmakelists_txt
-)
+  SOURCE_SUBDIR disable_cmakelists_txt)
 FetchContent_MakeAvailable(luapath)
 lua2c(
   luapath
@@ -348,17 +296,13 @@ lua2c(
   path.win32.ffi.types=${luapath_SOURCE_DIR}/lua/path/win32/ffi/types.lua
   path.win32.ffi.wcs=${luapath_SOURCE_DIR}/lua/path/win32/ffi/wcs.lua
   path.win32.fs=${luapath_SOURCE_DIR}/lua/path/win32/fs.lua
-  path.win32.wcs=${luapath_SOURCE_DIR}/lua/path/win32/wcs.lua
-)
-add_library(luapath STATIC luapath.c)
-target_link_libraries(luapath PRIVATE elune)
+  path.win32.wcs=${luapath_SOURCE_DIR}/lua/path/win32/wcs.lua)
 
 FetchContent_Declare(
   penlight
   GIT_REPOSITORY https://github.com/lunarmodules/penlight
   GIT_TAG 3bf03267b2571ba3cfa676a10528dd7b9a0db404
-  SOURCE_SUBDIR disable_cmakelists_txt
-)
+  SOURCE_SUBDIR disable_cmakelists_txt)
 FetchContent_MakeAvailable(penlight)
 lua2c(
   penlight
@@ -400,17 +344,13 @@ lua2c(
   pl.xml=${penlight_SOURCE_DIR}/lua/pl/xml.lua
   pl.url=${penlight_SOURCE_DIR}/lua/pl/url.lua
   pl.types=${penlight_SOURCE_DIR}/lua/pl/types.lua
-  pl.import_into=${penlight_SOURCE_DIR}/lua/pl/import_into.lua
-)
-add_library(penlight STATIC penlight.c)
-target_link_libraries(penlight PRIVATE elune)
+  pl.import_into=${penlight_SOURCE_DIR}/lua/pl/import_into.lua)
 
 FetchContent_Declare(
   vstruct
   GIT_REPOSITORY https://github.com/toxicfrog/vstruct
   GIT_TAG b6889e3b275e9f9532b5dff4917e903b17e22730
-  SOURCE_SUBDIR disable_cmakelists_txt
-)
+  SOURCE_SUBDIR disable_cmakelists_txt)
 FetchContent_MakeAvailable(vstruct)
 lua2c(
   vstruct
@@ -448,34 +388,34 @@ lua2c(
   vstruct.io.u=${vstruct_SOURCE_DIR}/io/u.lua
   vstruct.io.x=${vstruct_SOURCE_DIR}/io/x.lua
   vstruct.io.z=${vstruct_SOURCE_DIR}/io/z.lua
-  vstruct.lexer=${vstruct_SOURCE_DIR}/lexer.lua
-)
-add_library(vstruct STATIC vstruct.c)
-target_link_libraries(vstruct PRIVATE elune)
+  vstruct.lexer=${vstruct_SOURCE_DIR}/lexer.lua)
+
+add_library(luamain STATIC tools/luamain.c tools/luamain.h tools/lua2c.h
+                           tools/file2c.h)
+target_include_directories(luamain PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
+target_link_libraries(luamain PUBLIC elune)
 
 function(add_lua_executable name main)
+  add_custom_command(
+    OUTPUT ${name}luafile.c
+    COMMAND bootstraplua ${CMAKE_CURRENT_SOURCE_DIR}/tools/file2c.lua main
+            ${main} ${name}luafile.c
+    DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/tools/file2c.lua ${main})
   set(luamain ${name}luamain.c)
   add_custom_command(
     OUTPUT ${luamain}
-    COMMAND bootstraplua ${CMAKE_CURRENT_SOURCE_DIR}/tools/luamain.lua ${luamain} ${main} ${ARGN}
-    DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/tools/luamain.lua ${main}
-  )
-  add_executable(${name} ${luamain})
-  target_link_libraries(${name} PRIVATE ${ARGN} elune)
+    COMMAND bootstraplua ${CMAKE_CURRENT_SOURCE_DIR}/tools/luamain.lua
+            ${luamain} ${ARGN}
+    DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/tools/luamain.lua ${main})
+  add_executable(${name} ${luamain} ${name}luafile.c)
+  target_include_directories(${name} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
+  target_link_libraries(${name} PRIVATE ${ARGN} luamain)
 endfunction()
 
 lua2c(wowlessyaml wowapi.yaml=${CMAKE_CURRENT_SOURCE_DIR}/wowapi/yaml.lua)
-add_library(wowlessyaml wowlessyaml.c)
-target_link_libraries(wowlessyaml PRIVATE elune)
 
-add_lua_executable(
-  yaml2lua
-  ${CMAKE_CURRENT_SOURCE_DIR}/tools/yaml2lua.lua
-  luafilesystem
-  lyaml
-  penlight
-  wowlessyaml
-)
+add_lua_executable(yaml2lua ${CMAKE_CURRENT_SOURCE_DIR}/tools/yaml2lua.lua
+                   luafilesystem lyaml penlight wowlessyaml)
 
 function(yaml2lua basename)
   set(input ${CMAKE_CURRENT_SOURCE_DIR}/data/${basename}.yaml)
@@ -483,8 +423,7 @@ function(yaml2lua basename)
   add_custom_command(
     OUTPUT ${output}
     COMMAND yaml2lua ${input} ${output}
-    DEPENDS yaml2lua ${input}
-  )
+    DEPENDS yaml2lua ${input})
 endfunction()
 
 yaml2lua(flavors)
@@ -492,30 +431,19 @@ yaml2lua(products)
 yaml2lua(stringenums)
 
 lua2c(toolsutil tools.util=${CMAKE_CURRENT_SOURCE_DIR}/tools/util.lua)
-add_library(toolsutil toolsutil.c)
-target_link_libraries(toolsutil PRIVATE elune)
 
 lua2c(wowlessutil wowless.util=${CMAKE_CURRENT_SOURCE_DIR}/wowless/util.lua)
-add_library(wowlessutil wowlessutil.c)
-target_link_libraries(wowlessutil PRIVATE elune)
 
 FetchContent_Declare(
   cjson
   GIT_REPOSITORY https://github.com/openresty/lua-cjson
   GIT_TAG 2bfad8f5eeb821357d2ada29506e864ff7ec947e
-  SOURCE_SUBDIR disable_cmakelists_txt
-)
+  SOURCE_SUBDIR disable_cmakelists_txt)
 FetchContent_MakeAvailable(cjson)
-add_library(
-  cjson
-  ${cjson_SOURCE_DIR}/fpconv.c
-  ${cjson_SOURCE_DIR}/lua_cjson.c
-  ${cjson_SOURCE_DIR}/strbuf.c
-)
-target_link_libraries(cjson PRIVATE elune)
 lua2c(luacjson cjson=c)
-add_library(luacjson luacjson.c)
-target_link_libraries(luacjson PRIVATE cjson elune)
+target_sources(
+  luacjson PRIVATE ${cjson_SOURCE_DIR}/fpconv.c ${cjson_SOURCE_DIR}/lua_cjson.c
+                   ${cjson_SOURCE_DIR}/strbuf.c)
 
 add_lua_executable(
   listfile
@@ -524,35 +452,24 @@ add_lua_executable(
   luacjson
   luafilesystem
   penlight
-  toolsutil
-)
+  toolsutil)
 
-file(
-  MAKE_DIRECTORY
-  ${CMAKE_CURRENT_BINARY_DIR}/generated
-  ${CMAKE_CURRENT_BINARY_DIR}/runtime
-  ${CMAKE_CURRENT_BINARY_DIR}/stamp
-)
+file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/generated
+     ${CMAKE_CURRENT_BINARY_DIR}/lua2c ${CMAKE_CURRENT_BINARY_DIR}/runtime
+     ${CMAKE_CURRENT_BINARY_DIR}/stamp)
 
 add_custom_command(
   OUTPUT stamp/listfile.txt
   BYPRODUCTS runtime/listfile.lua
-  COMMAND listfile ${CMAKE_CURRENT_SOURCE_DIR}/vendor/dbdefs/manifest.json generated/listfile.lua
-  COMMAND ${CMAKE_COMMAND} -E copy_if_different generated/listfile.lua runtime/listfile.lua
+  COMMAND listfile ${CMAKE_CURRENT_SOURCE_DIR}/vendor/dbdefs/manifest.json
+          generated/listfile.lua
+  COMMAND ${CMAKE_COMMAND} -E copy_if_different generated/listfile.lua
+          runtime/listfile.lua
   COMMAND ${CMAKE_COMMAND} -E touch stamp/listfile.txt
-  DEPENDS listfile ${CMAKE_CURRENT_SOURCE_DIR}/vendor/dbdefs/manifest.json
-)
-# TODO rationalize with lua2c
-add_custom_command(
-  OUTPUT runtimelistfile.c
-  COMMAND bootstraplua
-    ${CMAKE_CURRENT_SOURCE_DIR}/tools/lua2c.lua
-    runtimelistfile
-    runtime.listfile=runtime/listfile.lua
-  DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/tools/lua2c.lua stamp/listfile.txt
-)
-add_library(runtimelistfile STATIC runtimelistfile.c)
-target_link_libraries(runtimelistfile PRIVATE elune)
+  DEPENDS listfile ${CMAKE_CURRENT_SOURCE_DIR}/vendor/dbdefs/manifest.json)
+add_custom_target(listfilelua DEPENDS stamp/listfile.txt)
+lua2c(runtimelistfile runtime.listfile=runtime/listfile.lua)
+add_dependencies(runtimelistfile listfilelua)
 
 add_lua_executable(
   dblist
@@ -560,44 +477,30 @@ add_lua_executable(
   argparse
   lsqlite3
   luafilesystem
-  lyaml
   penlight
-  toolsutil
-  wowlessyaml
-)
+  toolsutil)
 
 FetchContent_Declare(
   lpeg
   URL http://www.inf.puc-rio.br/~roberto/lpeg/lpeg-1.0.2.tar.gz
   URL_HASH MD5=d342571886f1abcb7afe6a83d024d583
   SOURCE_SUBDIR disable_cmakelists_txt
-)
+  TLS_VERIFY OFF)
 FetchContent_MakeAvailable(lpeg)
 lua2c(lpeg lpeg=c)
-add_library(
-  lpeg STATIC
-  lpeg.c
-  ${lpeg_SOURCE_DIR}/lpcap.c
-  ${lpeg_SOURCE_DIR}/lpcode.c
-  ${lpeg_SOURCE_DIR}/lpprint.c
-  ${lpeg_SOURCE_DIR}/lptree.c
-  ${lpeg_SOURCE_DIR}/lpvm.c
-)
-target_link_libraries(lpeg PRIVATE elune)
+target_sources(
+  lpeg
+  PRIVATE ${lpeg_SOURCE_DIR}/lpcap.c ${lpeg_SOURCE_DIR}/lpcode.c
+          ${lpeg_SOURCE_DIR}/lpprint.c ${lpeg_SOURCE_DIR}/lptree.c
+          ${lpeg_SOURCE_DIR}/lpvm.c)
 
 FetchContent_Declare(
   luadbd
   GIT_REPOSITORY https://github.com/lua-wow-tools/luadbd
   GIT_TAG 600ca1dcc83f9dee7ca165b27d17f7d0355db6e2
-  SOURCE_SUBDIR disable_cmakelists_txt
-)
+  SOURCE_SUBDIR disable_cmakelists_txt)
 FetchContent_MakeAvailable(luadbd)
-lua2c(
-  luadbd
-  luadbd.parser=${luadbd_SOURCE_DIR}/luadbd/parser.lua
-)
-add_library(luadbd STATIC luadbd.c)
-target_link_libraries(luadbd PRIVATE elune)
+lua2c(luadbd luadbd.parser=${luadbd_SOURCE_DIR}/luadbd/parser.lua)
 
 add_lua_executable(
   dbdefs
@@ -606,11 +509,8 @@ add_lua_executable(
   lpeg
   luadbd
   luafilesystem
-  lyaml
   penlight
-  toolsutil
-  wowlessyaml
-)
+  toolsutil)
 
 add_lua_executable(
   prep
@@ -622,81 +522,46 @@ add_lua_executable(
   penlight
   toolsutil
   wowlessutil
-  wowlessyaml
-)
+  wowlessyaml)
 
 # TODO derive this from data/products.yaml, or vice versa
 list(
-  APPEND products
+  APPEND
+  products
   wow
   wowt
   wowxptr
   wow_classic
   wow_classic_era
   wow_classic_era_ptr
-  wow_classic_ptr
-)
+  wow_classic_ptr)
 foreach(product ${products})
   add_custom_command(
     OUTPUT stamp/${product}.txt
     BYPRODUCTS runtime/${product}.lua
-    COMMAND prep ${product}
-      --output ${CMAKE_CURRENT_BINARY_DIR}/generated/${product}.lua
-      --stamp ${CMAKE_NINJA_OUTPUT_PATH_PREFIX}stamp/${product}.txt
-    COMMAND ${CMAKE_COMMAND} -E copy_if_different
+    COMMAND
+      prep ${product} --output
+      ${CMAKE_CURRENT_BINARY_DIR}/generated/${product}.lua --stamp
+      ${CMAKE_CURRENT_BINARY_DIR}/stamp/${product}.txt
+    COMMAND
+      ${CMAKE_COMMAND} -E copy_if_different
       ${CMAKE_CURRENT_BINARY_DIR}/generated/${product}.lua
       ${CMAKE_CURRENT_BINARY_DIR}/runtime/${product}.lua
-    COMMAND ${CMAKE_COMMAND} -E touch ${CMAKE_CURRENT_BINARY_DIR}/stamp/${product}.txt
+    COMMAND ${CMAKE_COMMAND} -E touch
+            ${CMAKE_CURRENT_BINARY_DIR}/stamp/${product}.txt
     WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
     DEPFILE ${CMAKE_CURRENT_BINARY_DIR}/generated/${product}.lua.d
-    DEPENDS prep
-  )
-  # TODO rationalize with lua2c
-  add_custom_command(
-    OUTPUT datalua_${product}.c
-    COMMAND bootstraplua
-      ${CMAKE_CURRENT_SOURCE_DIR}/tools/lua2c.lua
-      datalua_${product}
-      build.products.${product}.data=runtime/${product}.lua
-    DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/tools/lua2c.lua stamp/${product}.txt
-  )
-  add_library(datalua_${product} STATIC datalua_${product}.c)
-  target_link_libraries(datalua_${product} PRIVATE elune)
+    DEPENDS prep)
+  add_custom_target(datalua_${product}_lua DEPENDS stamp/${product}.txt)
+  lua2c(datalua_${product}
+        build.products.${product}.data=runtime/${product}.lua)
+  add_dependencies(datalua_${product} datalua_${product}_lua)
   list(APPEND dataluas datalua_${product})
 endforeach()
 
-add_lua_executable(
-  tactkeys
-  ${CMAKE_CURRENT_SOURCE_DIR}/tools/tactkeys.lua
-  argparse
-  luafilesystem
-  penlight
-  toolsutil
-)
-
-add_custom_command(
-  OUTPUT stamp/tactkeys.txt
-  BYPRODUCTS runtime/tactkeys.lua
-  COMMAND tactkeys ${CMAKE_CURRENT_SOURCE_DIR}/vendor/tactkeys/WoW.txt generated/tactkeys.lua
-  COMMAND ${CMAKE_COMMAND} -E copy_if_different generated/tactkeys.lua runtime/tactkeys.lua
-  COMMAND ${CMAKE_COMMAND} -E touch stamp/tactkeys.txt
-  DEPENDS tactkeys ${CMAKE_CURRENT_SOURCE_DIR}/vendor/tactkeys/WoW.txt
-)
-# TODO rationalize with lua2c
-add_custom_command(
-  OUTPUT runtimetactkeys.c
-  COMMAND bootstraplua
-    ${CMAKE_CURRENT_SOURCE_DIR}/tools/lua2c.lua
-    runtimetactkeys
-    runtime.tactkeys=runtime/tactkeys.lua
-  DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/tools/lua2c.lua stamp/tactkeys.txt
-)
-add_library(runtimetactkeys STATIC runtimetactkeys.c)
-target_link_libraries(runtimetactkeys PRIVATE elune)
-
 lua2c(toolssqlite3ext tools.sqlite3ext=c)
-add_library(toolssqlite3ext STATIC tools/sqlite3ext.c toolssqlite3ext.c)
-target_link_libraries(toolssqlite3ext PRIVATE elune sqlite3)
+target_sources(toolssqlite3ext PRIVATE tools/sqlite3ext.c)
+target_link_libraries(toolssqlite3ext PRIVATE sqlite3)
 
 add_lua_executable(
   sqlite
@@ -707,121 +572,39 @@ add_lua_executable(
   penlight
   toolsdb2
   toolssqlite3ext
-  vstruct
-)
+  vstruct)
 
-FetchContent_Declare(
-  md5
-  GIT_REPOSITORY https://github.com/keplerproject/md5
-  GIT_TAG e6f25516910239111f06e2b838bf2f991161ba83
-  SOURCE_SUBDIR disable_cmakelists_txt
-)
-FetchContent_MakeAvailable(md5)
-lua2c(
-  md5
-  md5=${md5_SOURCE_DIR}/src/md5.lua
-  md5.core=c
-)
-add_library(
-  md5 STATIC
-  md5.c
-  ${md5_SOURCE_DIR}/src/md5.c
-  ${md5_SOURCE_DIR}/src/md5lib.c
-)
-target_link_libraries(md5 PRIVATE elune)
+find_package(CURL REQUIRED)
+add_library(libcurl ALIAS CURL::libcurl)
 
-FetchContent_Declare(
-  luasocket
-  GIT_REPOSITORY https://github.com/lunarmodules/luasocket
-  GIT_TAG 8c2ff7217e2a205eb107a6f48b04ff1b2b3090a1
-  SOURCE_SUBDIR disable_cmakelists_txt
-)
-FetchContent_MakeAvailable(luasocket)
-lua2c(
-  luasocket
-  ltn12=${luasocket_SOURCE_DIR}/src/ltn12.lua
-  mime=${luasocket_SOURCE_DIR}/src/mime.lua
-  mime.core=c
-  socket=${luasocket_SOURCE_DIR}/src/socket.lua
-  socket.core=c
-  socket.headers=${luasocket_SOURCE_DIR}/src/headers.lua
-  socket.http=${luasocket_SOURCE_DIR}/src/http.lua
-  socket.url=${luasocket_SOURCE_DIR}/src/url.lua
-)
-add_library(
-  luasocket STATIC
-  luasocket.c
-  ${luasocket_SOURCE_DIR}/src/auxiliar.c
-  ${luasocket_SOURCE_DIR}/src/buffer.c
-  ${luasocket_SOURCE_DIR}/src/compat.c
-  ${luasocket_SOURCE_DIR}/src/except.c
-  ${luasocket_SOURCE_DIR}/src/inet.c
-  ${luasocket_SOURCE_DIR}/src/io.c
-  ${luasocket_SOURCE_DIR}/src/luasocket.c
-  ${luasocket_SOURCE_DIR}/src/mime.c
-  ${luasocket_SOURCE_DIR}/src/options.c
-  ${luasocket_SOURCE_DIR}/src/timeout.c
-  ${luasocket_SOURCE_DIR}/src/select.c
-  ${luasocket_SOURCE_DIR}/src/tcp.c
-  ${luasocket_SOURCE_DIR}/src/udp.c
-  $<$<PLATFORM_ID:Darwin,Linux>:${luasocket_SOURCE_DIR}/src/usocket.c>
-  $<$<PLATFORM_ID:Windows>:${luasocket_SOURCE_DIR}/src/wsocket.c>
-)
-target_link_libraries(luasocket PRIVATE elune $<$<PLATFORM_ID:Windows>:ws2_32>)
+find_package(OpenSSL REQUIRED)
+add_library(libcrypto ALIAS OpenSSL::Crypto)
 
-FetchContent_Declare(
-  casc
-  URL https://luarocks.org/manifests/foxlit/luacasc-1.15-0.src.rock
-  URL_HASH SHA256=af37a4f6494f0fd707a66bed50a236622645b937c31fd4a2ef6a33b6c1a3e1b0
-  DOWNLOAD_NAME luacasc-1.15-0.src.rock.zip
-  SOURCE_SUBDIR disable_cmakelists_txt
-)
-FetchContent_MakeAvailable(casc)
-file(
-  ARCHIVE_EXTRACT
-  INPUT ${casc_SOURCE_DIR}/luacasc-1.15.zip
-  DESTINATION ${casc_SOURCE_DIR}
-)
-lua2c(
-  casc
-  casc=${casc_SOURCE_DIR}/luacasc/casc/init.lua
-  casc.bin=${casc_SOURCE_DIR}/luacasc/casc/bin.lua
-  casc.binc=c
-  casc.blte=${casc_SOURCE_DIR}/luacasc/casc/blte.lua
-  casc.bspatch=${casc_SOURCE_DIR}/luacasc/casc/bspatch.lua
-  casc.dbc=${casc_SOURCE_DIR}/luacasc/casc/dbc.lua
-  casc.encoding=${casc_SOURCE_DIR}/luacasc/casc/encoding.lua
-  casc.install=${casc_SOURCE_DIR}/luacasc/casc/install.lua
-  casc.jenkins96=${casc_SOURCE_DIR}/luacasc/casc/jenkins96.lua
-  casc.md5=${casc_SOURCE_DIR}/luacasc/casc/md5.lua
-  casc.platform=${casc_SOURCE_DIR}/luacasc/casc/platform.lua
-  casc.ribbit=${casc_SOURCE_DIR}/luacasc/casc/ribbit.lua
-  casc.root=${casc_SOURCE_DIR}/luacasc/casc/root.lua
-)
-add_library(
-  casc STATIC
-  casc.c
-  ${casc_SOURCE_DIR}/luacasc/casc/bin.c
-)
-target_link_libraries(casc PRIVATE elune)
+add_library(tactless STATIC vendor/tactless/tactless.c
+                            vendor/tactless/tactless.h)
+target_include_directories(tactless PUBLIC vendor/tactless)
+target_link_libraries(tactless PRIVATE libcrypto libcurl zlib)
+
+lua2c(toolstactless tactless=c)
+target_sources(toolstactless PRIVATE tools/tactless.c)
+target_link_libraries(toolstactless PRIVATE tactless)
+
+lua2c(wowlesstoc wowless.toc=${CMAKE_CURRENT_SOURCE_DIR}/wowless/toc.lua)
 
 add_lua_executable(
   fetch
   ${CMAKE_CURRENT_SOURCE_DIR}/tools/fetch.lua
   argparse
-  casc
   luaexpat
   luafilesystem
   luapath
-  luasocket
-  lzlib
-  md5
   penlight
+  runtimeflavors
   runtimelistfile
-  runtimetactkeys
   toolsdb2
+  toolstactless
   vstruct
-)
+  wowlesstoc)
 
 find_package(PNG REQUIRED)
 add_library(libpng ALIAS PNG::PNG)
@@ -830,10 +613,11 @@ FetchContent_Declare(
   imagemagick
   GIT_REPOSITORY https://github.com/ImageMagick/ImageMagick6
   GIT_TAG 41e02a5b17b3f64565839134197fe169a838dd12
-  SOURCE_SUBDIR disable_cmakelists_txt
-)
+  SOURCE_SUBDIR disable_cmakelists_txt)
 FetchContent_MakeAvailable(imagemagick)
-file(WRITE ${imagemagick_SOURCE_DIR}/magick/magick-baseconfig.h.in [=[
+file(
+  WRITE ${imagemagick_SOURCE_DIR}/magick/magick-baseconfig.h.in
+  [=[
 #define MAGICKCORE_HAVE_STDINT_H
 #define MAGICKCORE_HAVE_STRING_H
 #define MAGICKCORE_HDRI_ENABLE 0
@@ -852,37 +636,33 @@ file(WRITE ${imagemagick_SOURCE_DIR}/magick/magick-baseconfig.h.in [=[
 #cmakedefine ssize_t @ssize_t@
 ]=])
 block()
-  if(CMAKE_SYSTEM_NAME STREQUAL "Windows")
-    set(MAGICKCORE_HAVE__ALIGNED_MALLOC ON)
-    set(ssize_t int)
-  else()
-    set(MAGICKCORE_HAVE_UNISTD_H ON)
-  endif()
-  configure_file(
-    ${imagemagick_SOURCE_DIR}/magick/magick-baseconfig.h.in
-    ${imagemagick_SOURCE_DIR}/magick/magick-baseconfig.h
-  )
+if(CMAKE_SYSTEM_NAME STREQUAL "Windows")
+  set(MAGICKCORE_HAVE__ALIGNED_MALLOC ON)
+  set(ssize_t int)
+else()
+  set(MAGICKCORE_HAVE_UNISTD_H ON)
+endif()
+configure_file(${imagemagick_SOURCE_DIR}/magick/magick-baseconfig.h.in
+               ${imagemagick_SOURCE_DIR}/magick/magick-baseconfig.h)
 endblock()
 block()
-  set(DOCUMENTATION_PATH foo)
-  set(PACKAGE_LIB_VERSION 0x69C)
-  set(PACKAGE_NAME ImageMagick)
-  set(PACKAGE_RELEASE_DATE 2023-09-04)
-  set(PACKAGE_VERSION_ADDENDUM -94)
-  set(MAGICK_GIT_REVISION 41e02a5b17b3f64565839134197fe169a838dd12)
-  set(MAGICK_LIB_VERSION_NUMBER 6,0,0)
-  set(MAGICK_LIB_VERSION_TEXT 6.9.12)
-  set(MAGICK_LIBRARY_CURRENT 6)
-  set(MAGICK_LIBRARY_CURRENT_MIN 6)
-  set(MAGICK_TARGET_CPU x86_64)
-  set(MAGICKPP_LIB_VERSION_TEXT 6.9.12)
-  set(MAGICKPP_LIBRARY_CURRENT 8)
-  set(MAGICKPP_LIBRARY_CURRENT_MIN 8)
-  set(MAGICKPP_LIBRARY_VERSION_INFO 8:0:0)
-  configure_file(
-    ${imagemagick_SOURCE_DIR}/magick/version.h.in
-    ${imagemagick_SOURCE_DIR}/magick/version.h
-  )
+set(DOCUMENTATION_PATH foo)
+set(PACKAGE_LIB_VERSION 0x69C)
+set(PACKAGE_NAME ImageMagick)
+set(PACKAGE_RELEASE_DATE 2023-09-04)
+set(PACKAGE_VERSION_ADDENDUM -94)
+set(MAGICK_GIT_REVISION 41e02a5b17b3f64565839134197fe169a838dd12)
+set(MAGICK_LIB_VERSION_NUMBER 6,0,0)
+set(MAGICK_LIB_VERSION_TEXT 6.9.12)
+set(MAGICK_LIBRARY_CURRENT 6)
+set(MAGICK_LIBRARY_CURRENT_MIN 6)
+set(MAGICK_TARGET_CPU x86_64)
+set(MAGICKPP_LIB_VERSION_TEXT 6.9.12)
+set(MAGICKPP_LIBRARY_CURRENT 8)
+set(MAGICKPP_LIBRARY_CURRENT_MIN 8)
+set(MAGICKPP_LIBRARY_VERSION_INFO 8:0:0)
+configure_file(${imagemagick_SOURCE_DIR}/magick/version.h.in
+               ${imagemagick_SOURCE_DIR}/magick/version.h)
 endblock()
 add_library(
   imagemagick STATIC
@@ -1133,87 +913,79 @@ add_library(
   ${imagemagick_SOURCE_DIR}/wand/pixel-wand.c
   ${imagemagick_SOURCE_DIR}/wand/stream.c
   ${imagemagick_SOURCE_DIR}/wand/wand-view.c
-  ${imagemagick_SOURCE_DIR}/wand/wand.c
-)
+  ${imagemagick_SOURCE_DIR}/wand/wand.c)
 target_include_directories(imagemagick PUBLIC ${imagemagick_SOURCE_DIR})
 target_compile_definitions(imagemagick PUBLIC $<$<PLATFORM_ID:Windows>:_LIB>)
-target_link_libraries(imagemagick PRIVATE libpng zlib $<$<PLATFORM_ID:Windows>:urlmon>)
+target_link_libraries(
+  imagemagick PRIVATE libpng zlib $<$<PLATFORM_ID:Windows>:urlmon ws2_32>)
 
 FetchContent_Declare(
   luamagick
   GIT_REPOSITORY https://github.com/lua-wow-tools/luamagick
   GIT_TAG 91ade4c984835fc57bdb3b399e2d7a5fa3b63546
-  SOURCE_SUBDIR disable_cmakelists_txt
-)
+  SOURCE_SUBDIR disable_cmakelists_txt)
 FetchContent_MakeAvailable(luamagick)
 lua2c(luamagick luamagick=c)
-add_library(luamagick STATIC luamagick.c ${luamagick_SOURCE_DIR}/luamagick.c)
-target_link_libraries(luamagick PRIVATE elune imagemagick)
+target_sources(luamagick PRIVATE ${luamagick_SOURCE_DIR}/luamagick.c)
+target_link_libraries(luamagick PRIVATE imagemagick)
 
-lua2c(
-  wowlessrender
-  wowless.blp=${CMAKE_CURRENT_SOURCE_DIR}/wowless/blp.lua
-  wowless.render=${CMAKE_CURRENT_SOURCE_DIR}/wowless/render.lua
-  wowless.png=${CMAKE_CURRENT_SOURCE_DIR}/wowless/png.lua
-)
-add_library(wowlessrender STATIC wowlessrender.c)
-target_link_libraries(wowlessrender PRIVATE elune)
+lua2c(wowlessrender wowless.blp=${CMAKE_CURRENT_SOURCE_DIR}/wowless/blp.lua
+      wowless.render=${CMAKE_CURRENT_SOURCE_DIR}/wowless/render.lua
+      wowless.png=${CMAKE_CURRENT_SOURCE_DIR}/wowless/png.lua)
 
 add_lua_executable(
   render
   ${CMAKE_CURRENT_SOURCE_DIR}/tools/render.lua
   argparse
-  casc
   luafilesystem
   luamagick
-  luasocket
   lyaml
   lzlib
-  md5
   penlight
-  runtimetactkeys
+  toolstactless
   vstruct
   wowlessrender
-  wowlessyaml
-)
+  wowlessyaml)
 
-add_lua_executable(
-  gentest
-  ${CMAKE_CURRENT_SOURCE_DIR}/tools/gentest.lua
-  argparse
-  luafilesystem
-  penlight
-  toolsutil
-)
+add_lua_executable(gentest ${CMAKE_CURRENT_SOURCE_DIR}/tools/gentest.lua
+                   argparse luafilesystem penlight toolsutil)
 
+lua2c(runtimeflavors runtime.flavors=runtime/flavors.lua)
 lua2c(runtimeproducts runtime.products=runtime/products.lua)
-add_library(runtimeproducts STATIC runtimeproducts.c)
-target_link_libraries(runtimeproducts PRIVATE elune)
 
 add_lua_executable(
   bump
   ${CMAKE_CURRENT_SOURCE_DIR}/tools/bump.lua
   argparse
-  casc
   luafilesystem
-  luasocket
   lyaml
   lzlib
-  md5
   penlight
   runtimeproducts
-  wowlessyaml
-)
+  toolstactless
+  wowlessyaml)
 
 yaml2lua(impl)
 yaml2lua(test)
 yaml2lua(uiobjectimpl)
 
 foreach(product ${products})
-  foreach(yaml apis build config cvars events globals structures uiobjects xml)
+  foreach(
+    yaml
+    apis
+    build
+    config
+    cvars
+    docs
+    events
+    globals
+    structures
+    uiobjects
+    xml)
     yaml2lua(products/${product}/${yaml})
     list(
-      APPEND yamlluas
+      APPEND
+      yamlluas
       build.data.products.${product}.${yaml}=runtime/products/${product}/${yaml}.lua
     )
   endforeach()
@@ -1221,49 +993,32 @@ endforeach()
 list(
   APPEND
   schemas
-  addons
   any
   apis
   build
   config
   cvars
   docs
+  doctable
   events
   flavors
+  function
   globals
   impl
   products
   schema
   schematype
-  state
   stringenums
   structures
   test
   type
   uiobjectimpl
   uiobjects
-  xml
-)
+  xml)
 foreach(schema ${schemas})
   yaml2lua(schemas/${schema})
-  list(APPEND yamlluas build.data.schemas.${schema}=runtime/schemas/${schema}.lua)
-endforeach()
-list(
-  APPEND
-  states
-  Addons
-  Bindings
-  CVars
-  Calendar
-  ModifiedClicks
-  System
-  Talents
-  Time
-  Units
-)
-foreach(state ${states})
-  yaml2lua(state/${state})
-  list(APPEND yamlluas build.data.state.${state}=runtime/state/${state}.lua)
+  list(APPEND yamlluas
+       build.data.schemas.${schema}=runtime/schemas/${schema}.lua)
 endforeach()
 
 lua2c(
@@ -1276,10 +1031,7 @@ lua2c(
   build.data.uiobjectimpl=runtime/uiobjectimpl.lua
   ${yamlluas}
   wowapi.data=${CMAKE_CURRENT_SOURCE_DIR}/wowapi/data.lua
-  wowapi.schema=${CMAKE_CURRENT_SOURCE_DIR}/wowapi/schema.lua
-)
-add_library(wowapischema STATIC wowapischema.c)
-target_link_libraries(wowapischema PRIVATE elune)
+  wowapi.schema=${CMAKE_CURRENT_SOURCE_DIR}/wowapi/schema.lua)
 
 add_lua_executable(
   docs
@@ -1291,24 +1043,12 @@ add_lua_executable(
   penlight
   toolsutil
   wowapischema
-  wowlessyaml
-)
+  wowlessyaml)
 
-add_lua_executable(
-  errsv
-  ${CMAKE_CURRENT_SOURCE_DIR}/tools/errsv.lua
-  luafilesystem
-  lyaml
-  penlight
-  wowlessyaml
-)
+add_lua_executable(errsv ${CMAKE_CURRENT_SOURCE_DIR}/tools/errsv.lua
+                   luafilesystem lyaml penlight wowlessyaml)
 
-lua2c(
-  toolsdb2
-  tools.db2=${CMAKE_CURRENT_SOURCE_DIR}/tools/db2.lua
-)
-add_library(toolsdb2 STATIC toolsdb2.c)
-target_link_libraries(toolsdb2 PRIVATE elune)
+lua2c(toolsdb2 tools.db2=${CMAKE_CURRENT_SOURCE_DIR}/tools/db2.lua)
 
 add_lua_executable(
   db2dump
@@ -1317,10 +1057,22 @@ add_lua_executable(
   luafilesystem
   penlight
   toolsdb2
-  vstruct
-)
+  vstruct)
 
-file(GENERATE OUTPUT runtime/platform.lua CONTENT "\
+add_lua_executable(
+  rewrite
+  ${CMAKE_CURRENT_SOURCE_DIR}/tools/rewrite.lua
+  argparse
+  luafilesystem
+  lyaml
+  penlight
+  wowlessyaml)
+
+file(
+  GENERATE
+  OUTPUT runtime/platform.lua
+  CONTENT
+    "\
 return '\
 $<$<PLATFORM_ID:Darwin>:mac>\
 $<$<PLATFORM_ID:Linux>:linux>\
@@ -1329,7 +1081,6 @@ $<$<PLATFORM_ID:Windows>:windows>\
 
 lua2c(
   wowlesslib
-  runtime.flavors=runtime/flavors.lua
   runtime.platform=runtime/platform.lua
   runtime.stringenums=runtime/stringenums.lua
   wowapi.loader=${CMAKE_CURRENT_SOURCE_DIR}/wowapi/loader.lua
@@ -1337,19 +1088,23 @@ lua2c(
   wowless.api=${CMAKE_CURRENT_SOURCE_DIR}/wowless/api.lua
   wowless.env=${CMAKE_CURRENT_SOURCE_DIR}/wowless/env.lua
   wowless.ext=c
+  wowless.funcheck=${CMAKE_CURRENT_SOURCE_DIR}/wowless/funcheck.lua
   wowless.hlist=${CMAKE_CURRENT_SOURCE_DIR}/wowless/hlist.lua
   wowless.loader=${CMAKE_CURRENT_SOURCE_DIR}/wowless/loader.lua
+  wowless.modules.calendar=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/calendar.lua
+  wowless.modules.cvars=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/cvars.lua
+  wowless.modules.env=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/env.lua
+  wowless.modules.events=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/events.lua
+  wowless.modules.macrotext=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/macrotext.lua
+  wowless.modules.system=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/system.lua
+  wowless.modules.talents=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/talents.lua
+  wowless.modules.time=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/time.lua
+  wowless.modules.units=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/units.lua
   wowless.profiler=${CMAKE_CURRENT_SOURCE_DIR}/wowless/profiler.lua
   wowless.runner=${CMAKE_CURRENT_SOURCE_DIR}/wowless/runner.lua
   wowless.typecheck=${CMAKE_CURRENT_SOURCE_DIR}/wowless/typecheck.lua
-  wowless.xml=${CMAKE_CURRENT_SOURCE_DIR}/wowless/xml.lua
-)
-add_library(
-  wowlesslib STATIC
-  wowlesslib.c
-  wowless/ext.c
-)
-target_link_libraries(wowlesslib PRIVATE elune)
+  wowless.xml=${CMAKE_CURRENT_SOURCE_DIR}/wowless/xml.lua)
+target_sources(wowlesslib PRIVATE wowless/ext.c)
 
 add_lua_executable(
   wowless
@@ -1365,13 +1120,14 @@ add_lua_executable(
   lzlib
   minheap
   penlight
+  runtimeflavors
   runtimeproducts
   tsort
   wowlesslib
   wowlessrender
+  wowlesstoc
   wowlessutil
-  wowlessyaml
-)
+  wowlessyaml)
 
 add_lua_executable(
   runtests
@@ -1388,6 +1144,7 @@ add_lua_executable(
   lzlib
   minheap
   penlight
+  runtimeflavors
   runtimeproducts
   say
   tsort
@@ -1395,6 +1152,9 @@ add_lua_executable(
   wowapischema
   wowlesslib
   wowlessrender
+  wowlesstoc
   wowlessutil
-  wowlessyaml
-)
+  wowlessyaml)
+
+add_lua_executable(yamlfmt ${CMAKE_CURRENT_SOURCE_DIR}/tools/yamlfmt.lua
+                   luafilesystem lyaml penlight wowlessyaml)

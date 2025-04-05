@@ -1,11 +1,11 @@
-local talentState, specLookupSql, importData = ...
+local api, specLookupSql, importData = ...
 
-talentState.viewLoadoutDataImported = false
+api.modules.talents.viewLoadoutDataImported = false
 
-local pendingSpecID = talentState.pendingViewLoadoutSpecID
+local pendingSpecID = api.modules.talents.pendingViewLoadoutSpecID
 if specLookupSql(pendingSpecID, 1) ~= nil then
-  talentState.viewLoadoutSpecID = pendingSpecID
-  talentState.viewLoadoutDataImported = true
+  api.modules.talents.viewLoadoutSpecID = pendingSpecID
+  api.modules.talents.viewLoadoutDataImported = true
 end
 
-return talentState.viewLoadoutSpecID ~= nil and type(importData) == 'table'
+return api.modules.talents.viewLoadoutSpecID ~= nil and type(importData) == 'table'

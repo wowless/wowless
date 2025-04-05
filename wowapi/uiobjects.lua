@@ -34,7 +34,6 @@ local function mkBaseUIObjectTypes(api)
           isa = isa,
           metaindex = metaindex,
           name = ty.cfg.objectType or k,
-          warner = ty.cfg.warner,
         }
       end
     end
@@ -55,7 +54,6 @@ local function mkBaseUIObjectTypes(api)
         isa = v.isa,
         name = v.name,
         sandboxMT = { __index = sandboxIndex },
-        warner = v.warner,
       }
     end
     return t
@@ -69,6 +67,7 @@ local function mkBaseUIObjectTypes(api)
   end
 
   local typechecker = require('wowless.typecheck')(api)
+  local funchecker = require('wowless.funcheck')(typechecker)
 
   local check = setmetatable({
     Texture = function(v, self)
@@ -138,27 +137,7 @@ local function mkBaseUIObjectTypes(api)
         if not method.outputs then
           return fn
         end
-        local outs = method.outputs
-        local nouts = #outs
-        local mayreturnnothing = method.mayreturnnothing
-        local function doCheckOutputs(...)
-          local n = select('#', ...)
-          if n == 0 and mayreturnnothing then
-            return
-          end
-          if #outs ~= n then
-            error(('wrong number of return values to %q: want %d, got %d'):format(fname, nouts, n))
-          end
-          local rets = {}
-          for i, out in ipairs(outs) do
-            local v, errmsg = typechecker(out, (select(i, ...)), true)
-            if errmsg then
-              error(('output %d (%q) of %q %s'):format(i, tostring(out.name), fname, errmsg))
-            end
-            rets[i] = v
-          end
-          return unpack(rets, 1, nouts)
-        end
+        local doCheckOutputs = funchecker.makeCheckOutputs(fname, method)
         return function(...)
           return doCheckOutputs(fn(...))
         end

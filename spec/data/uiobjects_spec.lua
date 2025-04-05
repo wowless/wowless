@@ -70,7 +70,7 @@ describe('uiobjects', function()
       for k, v in pairs(uiobjects) do
         describe(k, function()
           describe('fields', function()
-            for fk, fv in pairs(v.fields or {}) do
+            for fk, fv in pairs(v.fields) do
               describe(fk, function()
                 it('is not defined up inheritance tree', function()
                   for inh in pairs(v.inherits) do
@@ -99,8 +99,8 @@ describe('uiobjects', function()
                   end
                 end)
                 describe('inputs', function()
-                  for i, input in ipairs(mv.inputs or {}) do
-                    describe(input.name or i, function()
+                  for _, input in ipairs(mv.inputs or {}) do
+                    describe(input.name, function()
                       if input.default ~= nil then
                         it('has default of the right type', function()
                           typecheck(input, input.default)
@@ -108,6 +108,13 @@ describe('uiobjects', function()
                       end
                     end)
                   end
+                  it('are uniquely named', function()
+                    local names = {}
+                    for _, input in ipairs(mv.inputs or {}) do
+                      assert.Nil(names[input.name])
+                      names[input.name] = true
+                    end
+                  end)
                 end)
                 describe('outputs', function()
                   for i, output in ipairs(mv.outputs or {}) do
@@ -117,8 +124,43 @@ describe('uiobjects', function()
                           typecheck(output, output.stub)
                         end)
                       end
+                      it('cannot be both stubnotnil and have a stub', function()
+                        assert.True(not output.stubnotnil or output.stub == nil)
+                      end)
+                      it('must be nilable if stubnotnil', function()
+                        assert.True(not output.stubnotnil or output.nilable)
+                      end)
+                      if mv.impl then
+                        it('cannot specify return value', function()
+                          assert.Nil(output.stub)
+                        end)
+                        it('cannot be unknown type', function()
+                          assert.Not.same('unknown', output.type)
+                        end)
+                      end
                     end)
                   end
+                  it('either all have names or none have names', function()
+                    local named = 0
+                    for _, output in ipairs(mv.outputs or {}) do
+                      named = named + (output.name and 1 or 0)
+                    end
+                    assert.True(named == 0 or named == #mv.outputs)
+                  end)
+                  it('are uniquely named', function()
+                    local names = {}
+                    for _, output in ipairs(mv.outputs or {}) do
+                      if output.name then
+                        assert.Nil(names[output.name])
+                        names[output.name] = true
+                      end
+                    end
+                  end)
+                end)
+                describe('outstride', function()
+                  it('is less than or equal to number of outputs', function()
+                    assert(not mv.outstride or mv.outstride <= #mv.outputs)
+                  end)
                 end)
               end)
             end

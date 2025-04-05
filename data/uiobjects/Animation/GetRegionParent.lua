@@ -1,2 +1,2 @@
 local self = ...
-return self:GetParent():GetParent()
+return self.parent.parent

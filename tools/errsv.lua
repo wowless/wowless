@@ -21,7 +21,11 @@ local getPatternValue = (function()
   end
   local patterns = {
     {
-      pattern = ': want %d+, got (%d+)$',
+      pattern = ': cvar name mismatch: want ',
+      value = constant(nil),
+    },
+    {
+      pattern = ': want %-?%d+, got (-?%d+)$',
       value = mustnumber,
     },
     {
@@ -57,7 +61,7 @@ local getPatternValue = (function()
       value = mustnumber,
     },
     {
-      pattern = ': missing key ".+" with value (0x000000[01248]+)$',
+      pattern = ': missing key ".+" with value (0x0000[01248]+)$',
       value = tostring,
     },
     {

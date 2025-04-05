@@ -182,7 +182,7 @@ local layers = {
   HIGHLIGHT = 5,
 }
 
-local function rects2png(data, casc, outfile)
+local function rects2png(data, fetch, outfile)
   local magick = require('luamagick')
   local function color(c)
     local pwand = magick.new_pixel_wand()
@@ -210,7 +210,7 @@ local function rects2png(data, casc, outfile)
     if prev then
       return prev.width, prev.height, prev.png
     end
-    local content = casc:readFile(fpath)
+    local content = fetch(fpath)
     local success, width, height, png = pcall(function()
       local width, height, rgba = require('wowless.blp').read(content)
       return width, height, require('wowless.png').write(width, height, rgba)
