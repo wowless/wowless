@@ -10,7 +10,7 @@ local function preprocess(tree)
     local kids = {}
     local text = false
     if type(v.contents) == 'table' then
-      for _, kid in ipairs(v.contents or {}) do
+      for kid in pairs(v.contents) do
         local key = kid:lower()
         assert(not kids[key], kid .. ' is already a child of ' .. k)
         kids[key] = true
@@ -30,7 +30,7 @@ local function preprocess(tree)
         attrs[ak] = av.type
       end
       if type(t.contents) == 'table' then
-        for _, kid in ipairs(t.contents or {}) do
+        for kid in pairs(t.contents) do
           local key = kid:lower()
           assert(not kids[key], kid .. ' is already a child of ' .. k)
           kids[key] = true

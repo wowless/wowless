@@ -8,6 +8,7 @@ local lfs = require('lfs')
 local writeifchanged = require('tools.util').writeifchanged
 local parseYaml = require('wowapi.yaml').parseFile
 local pprintYaml = require('wowapi.yaml').pprint
+local tableeq = require('pl.tablex').deepcompare
 local product = args.product
 
 local function deref(t, ...)
@@ -39,24 +40,28 @@ do
       return setmetatable({}, nummt)
     end,
   }
-  local schema = require('wowapi.yaml').parseFile('data/schemas/docs.yaml').type
+  local schema = require('wowapi.yaml').parseFile('data/schemas/doctable.yaml').type
   local function processDocDir(docdir)
     if lfs.attributes(docdir) then
       for f in lfs.dir(docdir) do
         if f:sub(-4) == '.lua' then
-          local success, err = pcall(setfenv(loadfile(docdir .. '/' .. f), {
-            APIDocumentation = {
-              AddDocumentationTable = function(_, t)
-                require('wowapi.schema').validate(product, schema, t)
-                docs[f] = t
+          local fn, success, err
+          fn, err = loadfile(docdir .. '/' .. f)
+          if fn then
+            success, err = pcall(setfenv(fn, {
+              APIDocumentation = {
+                AddDocumentationTable = function(_, t)
+                  require('wowapi.schema').validate(product, schema, t)
+                  docs[f] = t
+                end,
+              },
+              Constants = setmetatable({}, nsmt),
+              CreateFromMixins = function()
+                return setmetatable({}, mixmt)
               end,
-            },
-            Constants = setmetatable({}, nsmt),
-            CreateFromMixins = function()
-              return setmetatable({}, mixmt)
-            end,
-            Enum = setmetatable({}, nsmt),
-          }))
+              Enum = setmetatable({}, nsmt),
+            }))
+          end
           if not success then
             print(('error loading %s: %s'):format(f, err))
           end
@@ -69,10 +74,16 @@ do
   processDocDir(prefix .. 'Blizzard_APIDocumentationGenerated')
 end
 
-local config = parseYaml('data/products/' .. product .. '/config.yaml').docs
+local config = parseYaml('data/products/' .. product .. '/docs.yaml')
 local enum = parseYaml('data/products/' .. product .. '/globals.yaml').Enum
 
-local tabs, funcs, events = {}, {}, {}
+for k in pairs(deref(config, 'skip_docfiles') or {}) do
+  local f = k .. '.lua'
+  assert(docs[f], 'missing skip_docfiles ' .. f)
+  docs[f] = nil
+end
+
+local tabs, funcs, events, scrobjs = {}, {}, {}, {}
 for _, t in pairs(docs) do
   if not t.Type or t.Type == 'System' then
     for _, tab in ipairs(t.Tables or {}) do
@@ -90,91 +101,25 @@ for _, t in pairs(docs) do
       assert(not events[name])
       events[name] = event
     end
+  elseif t.Type == 'ScriptObject' then
+    assert(config.script_objects[t.Name], 'missing script object mapping for ' .. t.Name)
+    assert(not scrobjs[t.Name])
+    scrobjs[t.Name] = t
   end
 end
 
-local types = {
-  BigInteger = 'number',
-  BigUInteger = 'number',
-  bool = 'boolean',
-  CalendarEventID = 'string',
-  ChatBubbleFrame = 'table',
-  ClubId = 'string',
-  ClubInvitationId = 'string',
-  ClubStreamId = 'string',
-  CScriptObject = 'table',
-  cstring = 'string',
-  CurveType = 'string',
-  FileAsset = 'string',
-  fileID = 'number',
-  FilterMode = 'string',
-  ['function'] = 'function',
-  GarrisonFollower = 'string',
-  HTMLTextType = 'string',
-  InsertMode = 'string',
-  InventorySlots = 'number',
-  ItemInfo = 'string',
-  kstringClubMessage = 'string',
-  kstringLfgListApplicant = 'string',
-  kstringLfgListChat = 'string',
-  kstringLfgListSearch = 'string',
-  LoopType = 'string',
-  luaFunction = 'function',
-  luaIndex = 'number',
-  ModelAsset = 'string',
-  ModelSceneFrame = 'ModelScene',
-  ModelSceneFrameActor = 'Actor',
-  mouseButton = 'string',
-  NamePlateFrame = 'table',
-  normalizedValue = 'number',
-  NotificationDbId = 'string',
-  number = 'number',
-  RecruitAcceptanceID = 'string',
-  ScriptRegion = 'table',
-  SimpleAnim = 'table',
-  SimpleAnimGroup = 'table',
-  SimpleButtonStateToken = 'string',
-  SimpleControlPoint = 'table',
-  SimpleFont = 'table',
-  SimpleFontString = 'table',
-  SimpleFrame = 'Frame',
-  SimpleLine = 'table',
-  SimpleMaskTexture = 'table',
-  SimplePathAnim = 'table',
-  SimpleTexture = 'Texture',
-  SimpleWindow = 'table',
-  SingleColorValue = 'number',
-  size = 'number',
-  StatusBarFillStyle = 'string',
-  string = 'string',
-  stringView = 'string',
-  table = 'table',
-  TBFFlags = 'string',
-  TBFStyleFlags = 'string',
-  TextureAsset = 'string',
-  TextureAssetDisk = 'string',
-  textureAtlas = 'string',
-  textureKit = 'string',
-  time_t = 'number',
-  TooltipComparisonItem = 'table',
-  uiAddon = 'uiAddon',
-  uiFontHeight = 'number',
-  UiMapPoint = 'table',
-  uiUnit = 'number',
-  UnitToken = 'unit',
-  WeeklyRewardItemDBID = 'string',
-  WOWGUID = 'string',
-  WOWMONEY = 'number',
-}
-for k in pairs(parseYaml('data/stringenums.yaml')) do
-  assert(not types[k])
-  types[k] = k
+for k in pairs(config.script_objects) do
+  assert(scrobjs[k], 'redundant script object mapping ' .. k)
 end
+
+local typedefs = config.typedefs or {}
+local stringenums = parseYaml('data/stringenums.yaml')
 local tys = {}
 for name, tab in pairs(tabs) do
   tys[name] = tab.Type
 end
-for k in pairs(parseYaml('data/products/' .. product .. '/structures.yaml')) do
+local structs = parseYaml('data/products/' .. product .. '/structures.yaml')
+for k in pairs(structs) do
   if tys[k] and tys[k] ~= 'Structure' then
     error(('%s is a wowless structure but is a %s in docs'):format(k, tys[k]))
   else
@@ -188,32 +133,24 @@ for k in pairs(enum) do
     tys[k] = 'Enumeration'
   end
 end
-local knownMixinStructs = {
-  ColorMixin = 'colorRGBA',
-  ItemLocationMixin = 'ItemLocation',
-  ItemTransmogInfoMixin = 'ItemTransmogInfo',
-  PlayerLocationMixin = 'PlayerLocation',
-  ReportInfoMixin = 'ReportInfo',
-  TransmogLocationMixin = 'TransmogLocation',
-  TransmogPendingInfoMixin = 'TransmogPendingInfo',
-  Vector2DMixin = 'vector2',
-  Vector3DMixin = 'vector3',
-}
 local structRewrites = {
   AzeriteEmpoweredItemLocation = 'ItemLocation',
   AzeriteItemLocation = 'ItemLocation',
   EmptiableItemLocation = 'ItemLocation',
 }
+local used_typedefs = {}
 local function t2nty(field, ns)
   local t = field.Type
   if field.InnerType then
     assert(t == 'table')
     return { arrayof = t2nty({ Type = field.InnerType }, ns) }
   elseif t == 'table' and field.Mixin then
-    local mst = assert(knownMixinStructs[field.Mixin], 'no struct for mixin ' .. field.Mixin)
-    return { structure = mst }
-  elseif types[t] then
-    return types[t]
+    error('no struct for mixin ' .. field.Mixin)
+  elseif typedefs[t] then
+    used_typedefs[t] = true
+    return typedefs[t]
+  elseif stringenums[t] then
+    return t
   end
   local n = ns and tys[ns .. '.' .. t] and (ns .. '.' .. t) or t
   n = structRewrites[n] or n
@@ -224,7 +161,9 @@ local function t2nty(field, ns)
   elseif ty == 'Enumeration' then
     return { enum = t }
   elseif ty == 'Structure' then
-    -- TODO cross-check mixin
+    if field.Mixin and field.Mixin ~= structs[n].mixin then
+      error(('expected struct %s to have mixin %s'):format(n, field.Mixin))
+    end
     return { structure = n }
   elseif ty == 'CallbackType' then
     return field.Name == 'cbObject' and 'userdata' or 'function'
@@ -242,82 +181,161 @@ local function split(name)
   end
 end
 
-local function rewriteApis()
-  local function insig(fn, ns)
-    local t = {}
-    for _, a in ipairs(fn.Arguments or {}) do
-      -- Super duper hack, sorry world.
-      if (fn.Name == 'UnitFactionGroup' or fn.Name == 'UnitIsUnit') and a.Name:sub(1, 8) == 'unitName' then
-        assert(a.Type == 'cstring')
-        assert(not a.Default)
-        assert(not a.Nilable)
-        table.insert(t, {
-          name = a.Name,
-          type = 'unit',
-        })
-      else
-        table.insert(t, {
-          default = a.Default,
-          name = a.Name,
-          nilable = a.Nilable or nil,
-          type = t2nty(a, ns),
-        })
-      end
+local function stride(ts)
+  local n = 0
+  for _, t in ipairs(ts or {}) do
+    if t.StrideIndex then
+      n = n + 1
+      assert(n == t.StrideIndex)
+    else
+      assert(n == 0)
     end
-    return t
   end
-  local function outsig(fn, ns, api)
-    local stubs = {}
-    for _, output in ipairs(api and api.outputs or {}) do
-      if output.stub ~= nil then
-        stubs[output.name] = output.stub
+  return n > 0 and n or nil
+end
+
+local function default(x)
+  if x.Type == 'luaIndex' and x.Default then
+    return x.Default + 1
+  end
+  return enum[x.Type] and enum[x.Type][x.Default] or x.Default
+end
+
+-- Super duper hack, sorry world.
+local unitHacks = {
+  UnitFactionGroup = 'unitName',
+  UnitName = 'unit',
+  UnitIsUnit = 'unitName',
+  UnitRace = 'name',
+}
+
+local function insig(fn, ns)
+  local unitHack = unitHacks[fn.Name]
+  local t = {}
+  for _, a in ipairs(fn.Arguments or {}) do
+    if unitHack and a.Name:sub(1, unitHack:len()) == unitHack then
+      assert(a.Type == 'cstring')
+      assert(not a.Default)
+      assert(not a.Nilable)
+      table.insert(t, {
+        name = a.Name,
+        type = 'unit',
+      })
+    elseif a.Type == 'UnitToken' and a.Default == 'WOWGUID_NULL' then
+      table.insert(t, {
+        name = a.Name,
+        nilable = true,
+        type = 'unit',
+      })
+    elseif a.Type == 'uiRect' then
+      assert(a.Default == nil)
+      assert(not a.Nilable)
+      assert(not a.StrideIndex)
+      for _, p in ipairs({ 'Left', 'Right', 'Top', 'Bottom' }) do
+        table.insert(t, {
+          name = a.Name .. p,
+          type = 'number',
+        })
       end
+    else
+      table.insert(t, {
+        default = default(a),
+        name = a.Name,
+        nilable = a.Nilable or nil,
+        type = t2nty(a, ns),
+      })
     end
-    local outputs = {}
-    for _, r in ipairs(fn.Returns or {}) do
+  end
+  return t
+end
+
+local function outsig(fn, ns, api)
+  local stubs = {}
+  local stubnotnils = {}
+  for _, output in ipairs(api and api.outputs or {}) do
+    if output.name then
+      stubs[output.name] = output.stub
+      stubnotnils[output.name] = output.stubnotnil
+    end
+  end
+  local outputs = {}
+  for _, r in ipairs(fn.Returns or {}) do
+    if r.Type == 'uiRect' then
+      assert(r.Default == nil)
+      assert(not r.Nilable)
+      assert(not r.StrideIndex)
+      for _, p in ipairs({ 'Left', 'Right', 'Top', 'Bottom' }) do
+        table.insert(outputs, {
+          name = r.Name .. p,
+          type = 'number',
+        })
+      end
+    else
+      local ty = t2nty(r, ns)
       table.insert(outputs, {
-        default = enum[r.Type] and enum[r.Type][r.Default] or r.Default,
+        default = default(r),
         name = r.Name,
-        nilable = r.Nilable or nil,
+        nilable = r.Nilable and ty ~= 'nil' or nil,
         stub = stubs[r.Name],
-        type = t2nty(r, ns),
+        stubnotnil = stubnotnils[r.Name],
+        type = ty,
       })
       stubs[r.Name] = nil
     end
-    if next(stubs) ~= nil then
-      error(table.concat({
-        'stub merge error on',
-        ns and (' ns = ' .. ns) or '',
-        '\n',
-        require('pl.pretty').write(fn),
-      }, ''))
-    end
-    return outputs
   end
-  local cfgskip = deref(config, 'apis', 'skip_namespaces') or {}
-  local function skip(name)
-    local ns = split(name)
-    return ns and cfgskip[ns]
+  if next(stubs) ~= nil then
+    error(table.concat({
+      'stub merge error on',
+      ns and (' ns = ' .. ns) or '',
+      '\n',
+      require('pl.pretty').write(fn),
+    }, ''))
   end
+  return outputs
+end
+
+local sawmayreturnnothing = false
+
+local function mayreturnnothing(fn, api)
+  sawmayreturnnothing = sawmayreturnnothing or fn.MayReturnNothing
+  local v = api and api.mayreturnnothing
+  if not config.mayreturnnothing then
+    return v
+  elseif fn.MayReturnNothing then
+    return true
+  elseif v then
+    print('mayreturnnothing problem on ' .. fn.Name)
+    return true
+  end
+end
+
+local function rewriteApis()
   local y = require('wowapi.yaml')
   local f = 'data/products/' .. product .. '/apis.yaml'
   local apis = y.parseFile(f)
-  local nss = {}
+  local lies = deref(config, 'lies', 'apis') or {}
   for name, fn in pairs(funcs) do
-    nss[split(name) or ''] = true
-    if not skip(name) then
-      local ns = split(name)
-      local api = apis[name]
-      apis[name] = {
-        impl = api and api.impl,
-        inputs = insig(fn, ns),
-        mayreturnnothing = api and api.mayreturnnothing,
-        outputs = outsig(fn, ns, api),
-      }
+    local ns = split(name)
+    local api = apis[name]
+    local newapi = {
+      inputs = insig(fn, ns),
+      mayreturnnils = api and api.mayreturnnils,
+      mayreturnnothing = mayreturnnothing(fn, api),
+      outputs = outsig(fn, ns, api),
+      outstride = stride(fn.Returns),
+      stubnothing = api and api.stubnothing,
+      stuboutstrides = api and api.stuboutstrides,
+    }
+    if lies[name] then
+      assert(tableeq(lies[name], newapi), 'lie mismatch on ' .. name)
+      lies[name] = nil
+    else
+      newapi.impl = api and api.impl
+      apis[name] = newapi
     end
   end
-  for k in pairs(cfgskip) do
-    assert(nss[k], k .. ' in skip_namespaces but not in docs')
+  if next(lies) then
+    error('not all lies were consumed: ' .. require('pl.pretty').write(lies))
   end
   writeifchanged(f, y.pprint(apis))
   return apis
@@ -355,7 +373,7 @@ local function rewriteEvents()
   return out
 end
 
-local function rewriteStructures(outApis, outEvents)
+local function rewriteStructures(outApis, outEvents, outUIObjects)
   local filename = ('data/products/%s/structures.yaml'):format(product)
   local structures = require('wowapi.yaml').parseFile(filename)
   for name, tab in pairs(tabs) do
@@ -365,7 +383,7 @@ local function rewriteStructures(outApis, outEvents)
         local ret = {}
         for _, f in ipairs(tab.Fields) do
           ret[f.Name] = {
-            default = enum[f.Type] and enum[f.Type][f.Default] or f.Default,
+            default = default(f),
             nilable = f.Nilable or nil,
             stub = deref(structures, name, 'fields', f.Name, 'stub'),
             type = t2nty(f, ns),
@@ -399,9 +417,83 @@ local function rewriteStructures(outApis, outEvents)
   for _, event in pairs(outEvents) do
     processList(event.payload)
   end
+  for _, uiobject in pairs(outUIObjects) do
+    for _, field in pairs(uiobject.fields) do
+      processType(field.type)
+    end
+    for _, method in pairs(uiobject.methods) do
+      processList(method.inputs)
+      processList(method.outputs)
+    end
+  end
   writeifchanged(filename, pprintYaml(out))
+end
+
+local function rewriteUIObjects()
+  local pscrobjs = {}
+  for _, t in pairs(scrobjs) do
+    assert(not next(t.Events))
+    assert(not next(t.Tables))
+    local fns = {}
+    for _, fn in ipairs(t.Functions) do
+      assert(not fns[fn.Name])
+      fns[fn.Name] = fn
+    end
+    pscrobjs[t.Name] = fns
+  end
+  local mapped = {}
+  for k, v in pairs(pscrobjs) do
+    local mmk = assert(config.script_objects[k], 'unknown doc type ' .. k)
+    local t = mapped[mmk] or {}
+    for mk, mv in pairs(v) do
+      assert(not t[mk], 'multiple specs for ' .. k .. '.' .. mk)
+      t[mk] = mv
+    end
+    mapped[mmk] = t
+  end
+  local filename = ('data/products/%s/uiobjects.yaml'):format(product)
+  local uiobjects = require('wowapi.yaml').parseFile(filename)
+  for k, v in pairs(mapped) do
+    local u = assert(uiobjects[k], 'unknown uiobject type ' .. k)
+    for mk, mv in pairs(v) do
+      local mm = u.methods[mk]
+      local mmv = {
+        impl = mm and mm.impl,
+        inputs = insig(mv),
+        mayreturnnothing = mayreturnnothing(mv, mm),
+        outputs = outsig(mv, nil, mm),
+        outstride = stride(mv.Returns),
+      }
+      local okay = (function()
+        if not mm or mm.getter or mm.setter then
+          return
+        end
+        local cu = deref(config, 'uiobjects', k)
+        local cm = deref(config, 'uiobject_methods', k, mk)
+        return not mm.impl or cu or cm
+      end)()
+      if okay then
+        u.methods[mk] = mmv
+      end
+    end
+  end
+  writeifchanged(filename, pprintYaml(uiobjects))
+  return uiobjects
 end
 
 local outApis = rewriteApis()
 local outEvents = rewriteEvents()
-rewriteStructures(outApis, outEvents)
+local outUIObjects = rewriteUIObjects()
+rewriteStructures(outApis, outEvents, outUIObjects)
+
+local unused_typedefs = {}
+for k in pairs(typedefs) do
+  if not used_typedefs[k] then
+    unused_typedefs[k] = true
+  end
+end
+assert(not next(unused_typedefs), 'unused typedefs = ' .. require('pl.pretty').write(unused_typedefs))
+
+if sawmayreturnnothing and not config.mayreturnnothing then
+  print('warning: saw MayReturnNothing but mayreturnnothing: false in config')
+end

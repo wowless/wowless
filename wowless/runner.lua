@@ -1,3 +1,4 @@
+local sorted = require('pl.tablex').sort
 local function run(cfg)
   assert(cfg, 'missing configuration')
   assert(cfg.product, 'missing product')
@@ -9,8 +10,45 @@ local function run(cfg)
     end
   end
   local api = require('wowless.api').new(log, cfg.maxErrors, cfg.product)
+
+  -- begin WARNING WARNING WARNING
+  --[[
+  The following lines of code are very magical.
+
+  The third line sets the global table for this Lua state to the
+  sandbox env table. This is necessary for the correct behavior of
+  some elune functionality, like securecall, hooksecurefunc,
+  and loadstring.
+
+  This does not affect wowless framework code. Any globals it
+  references from Lua are done via the environment table, which
+  remains unchanged from when it was (pre)loaded.
+
+  Any later loadstring'd framework code must be setfenv'd to the
+  host environment _G, since loadstring'd code is born with an
+  environment pointing to the current global table. See the api and
+  uiobject loaders for where this happens.
+
+  The first and second lines eagerly load modules which write to
+  the global table.
+
+  The fourth line is required because print depends on tostring from
+  the global table. TODO remove this dependency
+  ]]
+  require('lfs')
+  require('lsqlite3')
+  require('wowless.ext').setglobaltable(api.env)
+  api.env.tostring = tostring
+  -- end WARNING WARNING WARNING
+
+  local path = require('path')
+  local otherAddonDirs = {}
+  for _, d in ipairs(cfg.otherAddonDirs or {}) do
+    local dd = path.basename(d) == '' and path.dirname(d) or d
+    table.insert(otherAddonDirs, dd)
+  end
   local loader = require('wowless.loader').loader(api, {
-    otherAddonDirs = cfg.otherAddonDirs,
+    otherAddonDirs = otherAddonDirs,
     product = cfg.product,
     rootDir = cfg.dir,
   })
@@ -19,10 +57,15 @@ local function run(cfg)
   if cfg.dir then
     loader.loadFrameXml()
   end
-  for _, d in ipairs(cfg.otherAddonDirs or {}) do
-    assert(loader.loadAddon(require('path').basename(d)))
+  for _, d in ipairs(otherAddonDirs) do
+    local addon = path.basename(d)
+    local success, reason = loader.loadAddon(addon)
+    if not success then
+      api.log(1, 'failed to load %s: %s', addon, reason)
+    end
   end
-  api.states.System.isLoggedIn = true
+  local system = api.modules.system
+  system.LogIn()
   api.SendEvent('PLAYER_LOGIN')
   api.SendEvent('UPDATE_CHAT_WINDOWS')
   api.SendEvent('VARIABLES_LOADED')
@@ -30,7 +73,7 @@ local function run(cfg)
   api.SendEvent('TRIAL_STATUS_UPDATE')
   api.SendEvent('DISPLAY_SIZE_CHANGED')
   if api.env.UIParent then -- Super duper hack to unblock 10.0 UIPanel code.
-    api.env.UIParent:SetSize(api.states.System.screenWidth, api.states.System.screenHeight)
+    api.env.UIParent:SetSize(system.GetScreenWidth(), system.GetScreenHeight())
   end
   api.SendEvent('SPELLS_CHANGED')
   if cfg.debug then
@@ -40,15 +83,16 @@ local function run(cfg)
   end
   if cfg.frame0 then
     local render = require('wowless.render')
-    local screenWidth, screenHeight = api.states.System.screenWidth, api.states.System.screenHeight
+    local screenWidth, screenHeight = system.GetScreenWidth(), system.GetScreenHeight()
     local function doit(name)
       local data = render.frames2rects(api, cfg.product, screenWidth, screenHeight)
       local fn = 'out/' .. cfg.product .. '/' .. name .. '.yaml'
       require('pl.file').write(fn, require('wowapi.yaml').pprint(data))
     end
     doit('frame0')
+    doit('frame1')
     if api.env.ToggleTalentFrame then
-      api.CallSafely(api.env.ToggleTalentFrame)
+      api.CallSandbox(api.env.ToggleTalentFrame)
       doit('frame1')
     end
     os.exit(0)
@@ -59,16 +103,10 @@ local function run(cfg)
 
   local scripts = {
     bindings = function()
-      local names = {}
-      for name in pairs(api.states.Bindings) do
-        table.insert(names, name)
-      end
-      table.sort(names)
-      for _, name in ipairs(names) do
-        local fn = api.states.Bindings[name]
+      for name, fn in sorted(loader.bindings) do
         api.log(2, 'firing binding ' .. name)
-        api.CallSafely(fn, 'down')
-        api.CallSafely(fn, 'up')
+        api.CallSandbox(fn, 'down')
+        api.CallSandbox(fn, 'up')
       end
     end,
     clicks = function()
@@ -84,6 +122,16 @@ local function run(cfg)
       api.SendEvent('PLAYER_REGEN_DISABLED')
       api.NextFrame()
       api.SendEvent('PLAYER_REGEN_ENABLED')
+    end,
+    emotes = function()
+      local cmds = {}
+      for k, v in pairs(api.env) do
+        cmds[v] = k:match('^EMOTE%d+_CMD%d+$') or nil
+      end
+      for cmd in sorted(cmds) do
+        api.log(2, 'firing emote chat command %s', cmd)
+        api.modules.macrotext.RunMacroText(cmd)
+      end
     end,
     enterleave = function()
       for frame in api.frames:entries() do
@@ -113,7 +161,7 @@ local function run(cfg)
       local function stubMixin(t, name)
         return mixin(t, api.env[name])
       end
-      for k, v in require('pl.tablex').sort(datalua.events) do
+      for k, v in sorted(datalua.events) do
         if v.payload and not eventBlacklist[k] and not skip[k] then
           if v.payload == 'return ' or cfg.allevents then
             local text = 'local Mixin = ...;' .. v.payload
@@ -155,9 +203,9 @@ local function run(cfg)
           cmds[k] = nil
         end
       end
-      for k, v in require('pl.tablex').sort(cmds) do
+      for k, v in sorted(cmds) do
         api.log(2, 'firing chat command ' .. k .. ' via ' .. v)
-        api.SendEvent('EXECUTE_CHAT_LINE', v)
+        api.modules.macrotext.RunMacroText(v)
       end
     end,
     update = function()
@@ -175,11 +223,13 @@ local function run(cfg)
     'macrotext',
     'bindings',
     'slashcmds',
+    'emotes',
     'events',
   }
   for _, script in ipairs(cfg.scripts and { strsplit(',', cfg.scripts) } or defaultScripts) do
     local fn = scripts[script]
     if fn then
+      api.log(1, 'running script %s', script)
       fn()
     end
   end
@@ -194,6 +244,7 @@ local function run(cfg)
       assert(type(v) ~= 'table' or (k ~= 'luarep') == not api.UserData(v), k)
     end
   end
+  assert(issecure(), 'wowless bug: framework is tainted')
 
   return api, loader
 end

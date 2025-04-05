@@ -1,0 +1,204 @@
+---
+events:
+  never_sent:
+    SECURE_TRANSFER_CONFIRM_SEND_MAIL: {}
+lies:
+  apis:
+    C_BattleNet.InstallHighResTextures:
+      inputs: {}
+      outputs: {}
+    ShowCloak:
+      inputs:
+      - name: show
+        type: boolean
+      outputs: {}
+    ShowHelm:
+      inputs:
+      - name: show
+        type: boolean
+      outputs: {}
+    ShowingCloak:
+      inputs: {}
+      outputs:
+      - name: result
+        type: boolean
+    ShowingHelm:
+      inputs: {}
+      outputs:
+      - name: result
+        type: boolean
+    UnitName:
+      inputs:
+      - name: unit
+        type: unit
+      outputs:
+      - name: unitName
+        type: string
+      - name: unitServer
+        type: string
+mayreturnnothing: true
+script_objects:
+  FrameAPIArchaeologyDigSiteFrame: ArchaeologyDigSiteFrame
+  FrameAPIBlob: POIFrame
+  FrameAPICharacterModelBase: PlayerModel
+  FrameAPICinematicModel: CinematicModel
+  FrameAPICooldown: Cooldown
+  FrameAPIDressUpModel: DressUpModel
+  FrameAPIFogOfWarFrame: FogOfWarFrame
+  FrameAPIModelSceneFrame: ModelScene
+  FrameAPIModelSceneFrameActor: Actor
+  FrameAPIModelSceneFrameActorBase: Actor
+  FrameAPIQuestPOI: QuestPOIFrame
+  FrameAPIScenarioPOI: ScenarioPOIFrame
+  FrameAPISimpleCheckout: Checkout
+  FrameAPITabardModel: TabardModel
+  FrameAPITabardModelBase: TabardModel
+  FrameAPIUnitPositionFrame: UnitPositionFrame
+  MinimapFrameAPI: Minimap
+  SimpleAnimAlphaAPI: Alpha
+  SimpleAnimAPI: Animation
+  SimpleAnimatableObjectAPI: Animation
+  SimpleAnimFlipBookAPI: FlipBook
+  SimpleAnimGroupAPI: AnimationGroup
+  SimpleAnimPathAPI: Path
+  SimpleAnimRotationAPI: Rotation
+  SimpleAnimScaleAPI: Scale
+  SimpleAnimScaleLineAPI: LineScale
+  SimpleAnimTextureCoordTranslationAPI: TextureCoordTranslation
+  SimpleAnimTranslationAPI: Translation
+  SimpleAnimTranslationLineAPI: LineTranslation
+  SimpleAnimVertexColorAPI: VertexColor
+  SimpleBrowserAPI: Browser
+  SimpleButtonAPI: Button
+  SimpleCheckboxAPI: CheckButton
+  SimpleColorSelectAPI: ColorSelect
+  SimpleControlPointAPI: ControlPoint
+  SimpleEditBoxAPI: EditBox
+  SimpleFontAPI: Font
+  SimpleFontStringAPI: FontString
+  SimpleFrameAPI: Frame
+  SimpleFrameScriptObjectAPI: UIObject
+  SimpleHTMLAPI: SimpleHTML
+  SimpleLineAPI: Line
+  SimpleMaskTextureAPI: MaskTexture
+  SimpleMessageFrameAPI: MessageFrame
+  SimpleModelAPI: Model
+  SimpleMovieAPI: MovieFrame
+  SimpleObjectAPI: ParentedObjectBase
+  SimpleOffScreenFrameAPI: OffScreenFrame
+  SimpleRegionAPI: Region
+  SimpleScriptRegionAPI: Region
+  SimpleScriptRegionResizingAPI: Region
+  SimpleScrollFrameAPI: ScrollFrame
+  SimpleSliderAPI: Slider
+  SimpleStatusBarAPI: StatusBar
+  SimpleTextureAPI: Texture
+  SimpleTextureBaseAPI: TextureBase
+skip_docfiles:
+  ArenaTeamDocumentation: {}
+  BarberShopInternalDocumentation: {}
+  CinematicListDocumentation: {}
+  ConfigurationWarningsDocumentation: {}
+  DebugToggleDocumentation: {}
+  LiveEventDocumentation: {}
+  PingPinFrameAPIDocumentation: {}
+  SimpleMapSceneAPIDocumentation: {}
+  SimpleModelFFXAPIDocumentation: {}
+  WorldSafeLocsUIInternalDocumentation: {}
+typedefs:
+  AnimationDataEnum: number
+  ArtifactTiers: number
+  BigInteger: number
+  BigUInteger: number
+  bool: boolean
+  CalendarEventID: string
+  ChatBubbleFrame: table
+  ClubId: string
+  ClubInvitationId: string
+  ClubStreamId: string
+  ConnectionIptype: string
+  CScriptObject: UIObject
+  cstring: string
+  FileAsset: string
+  fileID: number
+  FilterMode: string
+  FontAlphabet: string
+  GarrisonFollower: string
+  HTMLTextType: string
+  IDOrLink: string
+  InsertMode: string
+  InventorySlots: number
+  ItemInfo: string
+  kstringClubMessage: string
+  kstringLfgListApplicant: string
+  kstringLfgListChat: string
+  kstringLfgListSearch: string
+  luaFunction: function
+  luaIndex: number
+  LuaValueVariant: table
+  ModelAsset: string
+  ModelSceneFrame: ModelScene
+  ModelSceneFrameActor: Actor
+  mouseButton: string
+  NamePlateFrame: table
+  normalizedValue: number
+  NotificationDbId: string
+  number: number
+  QuestObjectiveType: number
+  RecruitAcceptanceID: string
+  ScriptObject: UIObject
+  ScriptRegion: table
+  SimpleAnim: Animation
+  SimpleAnimGroup: AnimationGroup
+  SimpleControlPoint: ControlPoint
+  SimpleFont: table
+  SimpleFontString: table
+  SimpleFrame: Frame
+  SimpleLine: Line
+  SimpleMaskTexture: table
+  SimplePathAnim: Path
+  SimpleTexture: Texture
+  SimpleWindow: nil
+  SingleColorValue: number
+  size: number
+  SpellIdentifier: string
+  string: string
+  stringView: string
+  TBFFlags: string
+  TextureAsset: string
+  TextureAssetDisk: string
+  textureAtlas: string
+  textureKit: string
+  time_t: number
+  TooltipComparisonItem: table
+  uiAddon: uiAddon
+  uiFontHeight: number
+  UiMapPoint: table
+  uiUnit: number
+  UnitToken: unit
+  WeeklyRewardItemDBID: string
+  WOWGUID: string
+  WOWMONEY: number
+uiobject_methods:
+  Animation:
+    GetRegionParent: {}
+  AnimationGroup:
+    CreateAnimation: {}
+    GetAnimations: {}
+  Button:
+    Click: {}
+    Disable: {}
+    Enable: {}
+    SetButtonState: {}
+    SetDisabledAtlas: {}
+    SetNormalAtlas: {}
+    SetPushedAtlas: {}
+  EditBox:
+    Disable: {}
+    Enable: {}
+uiobjects:
+  Animation: {}
+  Path: {}
+  ScrollFrame: {}
+  Slider: {}
+  UIObject: {}

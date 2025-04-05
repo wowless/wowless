@@ -6,38 +6,21 @@ local args = (function()
 end)()
 local product = args.product
 
--- Don't let casc use any system backdoors.
-os.execute = function(...) -- luacheck: ignore
-  error('attempt to call execute(' .. table.concat({ ... }) .. ')')
-end
-
 local log = args.verbose and print or function() end
 
-local build = dofile('build/data/products/' .. product .. '/build.lua')
+local build = dofile('build/cmake/runtime/products/' .. product .. '/build.lua')
 local fdids = require('runtime.listfile')
 
 local path = require('path')
 path.mkdir('cache')
 
-local handle = (function()
-  local casc = require('casc')
-  local _, cdn, ckey = casc.cdnbuild('http://us.patch.battle.net:1119/' .. product, 'us')
-  local handle, err = casc.open({
-    bkey = build.hash,
-    cache = 'cache',
-    cacheFiles = true,
-    cdn = cdn,
-    ckey = ckey,
-    keys = require('runtime.tactkeys'),
-    locale = casc.locale.US,
-    log = log,
-    zerofillEncryptedChunks = true,
-  })
-  if not handle then
-    print('unable to open ' .. build.hash .. ': ' .. err)
+local fetch = (function()
+  local fetch = require('tactless')(args.product, build.hash)
+  if not fetch then
+    print('unable to open ' .. build.hash)
     os.exit(1)
   end
-  return handle
+  return fetch
 end)()
 
 local function normalizePath(p)
@@ -72,7 +55,7 @@ end)()
 local processFile = (function()
   local lxp = require('lxp')
   local function doProcessFile(fn, root)
-    local content = handle:readFile(fn)
+    local content = fetch(fn)
     if not content then
       return false
     end
@@ -97,27 +80,31 @@ local processFile = (function()
   return doProcessFile
 end)()
 
+local tocutil = require('wowless.toc')
+local tocsuffixes = tocutil.suffixes[build.flavor]
+
 local function processTocDir(dir)
   local addonName = path.basename(dir)
-  local tocName = path.join(dir, addonName .. '_' .. build.flavor .. '.toc')
-  local tocContent = handle:readFile(tocName)
-  if not tocContent then
-    tocName = path.join(dir, addonName .. '.toc')
-    tocContent = handle:readFile(tocName)
+  local tocName, tocContent
+  for _, suffix in ipairs(tocsuffixes) do
+    tocName = path.join(dir, addonName .. suffix .. '.toc')
+    tocContent = fetch(tocName)
+    if tocContent then
+      break
+    end
   end
   if tocContent then
     save(tocName, tocContent)
-    for line in tocContent:gmatch('[^\r\n]+') do
-      if line:sub(1, 1) ~= '#' then
-        processFile(joinRelative(tocName, line:gsub('%s*$', '')), dir)
-      end
+    local _, files = tocutil.parse(build.flavor, tocContent)
+    for _, file in ipairs(files) do
+      processFile(joinRelative(tocName, file), dir)
     end
   end
   local bindingsName = path.join(dir, 'Bindings.xml')
-  local bindingsContent = handle:readFile(bindingsName)
+  local bindingsContent = fetch(bindingsName)
   if not bindingsContent then
     bindingsName = bindingsName:gsub('^Interface/', 'Interface_' .. build.flavor .. '/')
-    bindingsContent = handle:readFile(bindingsName)
+    bindingsContent = fetch(bindingsName)
   end
   if bindingsContent then
     save(bindingsName, bindingsContent)
@@ -125,17 +112,22 @@ local function processTocDir(dir)
 end
 
 for _, db in ipairs(dofile('build/products/' .. product .. '/dblist.lua')) do
-  save(path.join('db2', db .. '.db2'), handle:readFile(fdids[db:lower()]))
+  save(path.join('db2', db .. '.db2'), fetch(fdids[db:lower()]))
 end
 
 processTocDir('Interface/FrameXML')
 do
   -- Yes, ManifestInterfaceTOCData fdid and sig are hardcoded.
-  local tocdata = handle:readFile(1267335)
-  for _, filepath in require('tools.dbc').rows(tocdata, 's') do
-    processTocDir(normalizePath(filepath))
+  local tocdata = fetch(1267335)
+  local dbdef = {
+    { type = 'string' },
+    { id = true, noninline = true },
+  }
+  for row in require('tools.db2').rows(tocdata, dbdef) do
+    processTocDir(normalizePath(row[1]))
   end
   processTocDir('Interface/AddOns/Blizzard_APIDocumentationGenerated')
 end
 processFile('Interface/FrameXML/UI.xsd')
 processFile('Interface/FrameXML/UI_Shared.xsd')
+processFile('Interface/AddOns/Blizzard_SharedXML/UI.xsd')

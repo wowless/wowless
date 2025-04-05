@@ -4,7 +4,7 @@ local errors = {}
 local function doit(name, f)
   depth = depth + 1
   names[depth] = name
-  local success, msg = pcall(f)
+  local success, msg = securecallfunction(pcall, f)
   if not success then
     table.insert(errors, table.concat(names, ' ', 1, depth) .. '\n' .. msg)
   end
@@ -14,6 +14,7 @@ _G.assert = require('luassert')
 _G.describe = doit
 _G.it = doit
 for _, f in ipairs(arg) do
+  require('wowless.ext').setglobaltable(_G)
   local success, msg = pcall(dofile, f)
   if not success then
     table.insert(errors, f .. '\n' .. msg)

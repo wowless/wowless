@@ -2,11 +2,11 @@ local _, G = ...
 local assertEquals = _G.assertEquals
 local iswowlesslite = _G.__wowless and _G.__wowless.lite
 
-local capsuleEnv = _G.SimpleCheckout and getfenv(_G.SimpleCheckout.OnLoad) or {}
-
 assert(_G.WowlessData, 'missing WowlessData')
 
-local capsuleconfig = _G.WowlessData.Config.capsule or {}
+local aliased_in_framexml = _G.WowlessData.Config.addon.aliased_in_framexml or {}
+local capsuleconfig = _G.WowlessData.Config.addon.capsule or {}
+local capsuleapis = capsuleconfig.globalapis or {}
 
 local function tget(t, s)
   local dot = s:find('%.')
@@ -18,14 +18,14 @@ local function tget(t, s)
   end
 end
 
-function G.GeneratedTests()
+G.testsuite.generated = function()
   local cfuncs = {}
 
-  local function checkFunc(func, isLua, env)
+  local function checkFunc(func, isLua)
     assertEquals('function', type(func))
     return {
       getfenv = function()
-        assertEquals(env or _G, getfenv(func))
+        assertEquals(_G, getfenv(func))
       end,
       impltype = function()
         assertEquals(isLua, (pcall(coroutine.create, func)))
@@ -37,63 +37,79 @@ function G.GeneratedTests()
     }
   end
 
-  local function checkCFunc(func, env)
-    return checkFunc(func, false, env)
+  local function checkCFunc(func)
+    return checkFunc(func, false)
   end
 
-  local function checkLuaFunc(func, env)
-    return checkFunc(func, true, env)
+  local function checkLuaFunc(func)
+    return checkFunc(func, true)
   end
 
-  local function checkNotCFunc(func, env)
+  local function checkNotCFunc(func)
     if func ~= nil and not cfuncs[func] then
-      return checkLuaFunc(func, env)
+      return checkLuaFunc(func)
     end
+  end
+
+  local function mkftests(cfgs, ename)
+    local ret = {}
+    local env = ename and _G[ename] or _G
+    for name, cfg in pairs(cfgs) do
+      cfg = cfg == true and {} or cfg
+      ret[name] = function()
+        local func = env[name]
+        if cfg.alias then
+          assertEquals(func, assert(tget(_G, cfg.alias)))
+        elseif cfg.nowrap then
+          return checkLuaFunc(func)
+        elseif cfg.stdlib then
+          local ty = type(tget(_G, cfg.stdlib))
+          if ty == 'function' then
+            return checkCFunc(func)
+          else
+            assertEquals(ty, type(func))
+          end
+        elseif cfg.overwritten then
+          return checkFunc(func, not iswowlesslite)
+        elseif capsuleapis[(ename and ename .. '.' or '') .. name] and not iswowlesslite then
+          assertEquals(nil, func)
+        else
+          return checkCFunc(func)
+        end
+      end
+    end
+    return ret
   end
 
   local function apiNamespaces()
     local capsulens = capsuleconfig.apinamespaces or {}
-    local function mkTests(ns, tests)
+    local function mkTests(name, ns, tests)
       for k, v in pairs(ns) do
         -- Anything left over must be a FrameXML-defined function.
         if not tests[k] then
           tests['~' .. k] = function()
-            return checkNotCFunc(v)
+            if not aliased_in_framexml[name .. '.' .. k] then
+              return checkNotCFunc(v)
+            else
+              -- TODO make it possible to check non-unique C functions
+              assertEquals(iswowlesslite and 'nil' or 'function', type(v))
+            end
           end
         end
       end
       return tests
     end
     local tests = {}
-    local empty = {}
     for name, ncfg in pairs(_G.WowlessData.NamespaceApis) do
-      if not capsulens[name] then
-        tests[name] = function()
-          local ns = _G[name] or capsuleEnv[name]
+      tests[name] = function()
+        if capsulens[name] and not iswowlesslite then
+          assertEquals(nil, _G[name])
+        else
+          local ns = _G[name]
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local mtests = {}
-          for mname, mcfg in pairs(ncfg) do
-            mcfg = mcfg == true and empty or mcfg
-            mtests[mname] = function()
-              local func = ns[mname]
-              if mcfg.alias then
-                assertEquals(func, assert(tget(_G, mcfg.alias)))
-              elseif mcfg.stdlib then
-                local ty = type(tget(_G, mcfg.stdlib))
-                if ty == 'function' then
-                  return checkCFunc(func)
-                else
-                  assertEquals(ty, type(func))
-                end
-              elseif mcfg.overwritten and not iswowlesslite then
-                return checkLuaFunc(func)
-              else
-                return checkCFunc(func)
-              end
-            end
-          end
-          return mkTests(ns, mtests)
+          local mtests = mkftests(ncfg, name)
+          return mkTests(name, ns, mtests)
         end
       end
     end
@@ -104,21 +120,11 @@ function G.GeneratedTests()
     local b = _G.WowlessData.Build
     assert(b, 'no build')
     return {
-      GetBuildInfo = function()
-        if b.tocversion >= 100100 then
-          G.check6(b.version, b.build, b.date, b.tocversion, '', ' ', GetBuildInfo())
-        else
-          G.check7(b.version, b.build, b.date, b.tocversion, '', ' ', b.tocversion, GetBuildInfo())
-        end
-      end,
       IsDebugBuild = function()
         G.check1(false, _G.IsDebugBuild())
       end,
       IsPublicBuild = function()
         G.check1(true, _G.IsPublicBuild())
-      end,
-      IsTestBuild = function()
-        G.check1(b.test, IsTestBuild())
       end,
     }
   end
@@ -150,14 +156,14 @@ function G.GeneratedTests()
       end
       return t
     end)())
-    local toskipin = _G.WowlessData.Config.ignore_cvar_value or {}
+    local toskipin = _G.WowlessData.Config.addon.ignore_cvar_value or {}
     local tests = {}
     for k, v in pairs(expectedCVars) do
       tests[v.name] = function()
         local actual = actualCVars[k]
         assert(actual, format('extra cvar', k))
         assertEquals(v.name, actual.name, 'cvar name mismatch')
-        if not toskipin[k] then
+        if not toskipin[actual.name] then
           assertEquals(v.value, actual.value, 'cvar value mismatch')
         end
       end
@@ -188,32 +194,8 @@ function G.GeneratedTests()
   end
 
   local function globalApis()
-    local capsuleapis = capsuleconfig.globalapis or {}
-    local tests = {}
-    local empty = {}
-    for name, cfg in pairs(_G.WowlessData.GlobalApis) do
-      cfg = cfg == true and empty or cfg
-      tests[name] = function()
-        local func = _G[name] or capsuleEnv[name]
-        if cfg.alias then
-          assertEquals(func, assert(tget(_G, cfg.alias)))
-        elseif cfg.nowrap then
-          return checkLuaFunc(func)
-        elseif cfg.stdlib then
-          local ty = type(tget(_G, cfg.stdlib))
-          if ty == 'function' then
-            return checkCFunc(func)
-          else
-            assertEquals(ty, type(func))
-          end
-        elseif cfg.overwritten and not iswowlesslite then
-          return checkLuaFunc(func)
-        elseif not capsuleapis[name] then
-          return checkCFunc(func)
-        end
-      end
-    end
-    for k in pairs(_G.WowlessData.Config.hooked_globals or {}) do
+    local tests = mkftests(_G.WowlessData.GlobalApis)
+    for k in pairs(_G.WowlessData.Config.addon.hooked_globals or {}) do
       assert(not tests[k], k)
       tests[k] = function()
         if iswowlesslite then
@@ -223,34 +205,19 @@ function G.GeneratedTests()
         end
       end
     end
-    for k in pairs(_G.WowlessData.Config.globalenv_in_capsule or {}) do
-      assert(not tests[k], k)
-      tests[k] = function()
-        local v = capsuleEnv[k]
-        if iswowlesslite then
-          assert(v == nil)
-        else
-          return checkLuaFunc(v, _G)
+    for k, v in pairs(_G) do
+      if type(v) == 'function' and not tests[k] and not tests['~' .. k] then
+        tests['~' .. k] = function()
+          return checkNotCFunc(v)
         end
       end
     end
-    local function checkEnv(env)
-      for k, v in pairs(env) do
-        if type(v) == 'function' and not tests[k] and not tests['~' .. k] then
-          tests['~' .. k] = function()
-            return checkNotCFunc(v, env)
-          end
-        end
-      end
-    end
-    checkEnv(_G)
-    checkEnv(capsuleEnv)
     return tests
   end
 
   local function globals()
     local data = _G.WowlessData.Globals
-    local actualEnum = G.mixin({}, _G.Enum, capsuleEnv.Enum or {})
+    local actualEnum = _G.Enum or {}
     local capsuleenums = capsuleconfig.enums or {}
     local expectedEnum = {}
     for k, v in pairs(data.Enum) do
@@ -300,6 +267,33 @@ function G.GeneratedTests()
     return tests
   end
 
+  local function impltests()
+    local tests = {}
+    local arg = {
+      assertEquals = G.assertEquals,
+      assertRecursivelyEqual = G.assertRecursivelyEqual,
+      check1 = G.check1,
+      check2 = G.check2,
+      check3 = G.check3,
+      check6 = G.check6,
+      check7 = G.check7,
+      data = {
+        build = _G.WowlessData.Build,
+      },
+      env = _G,
+      mixin = G.mixin,
+      retn = G.retn,
+      wowless = _G.__wowless,
+    }
+    for k, v in pairs(_G.WowlessData.ImplTests) do
+      tests[k] = function()
+        local vv = loadstring(v, '@data/test/' .. k .. '.lua')
+        return vv(arg)
+      end
+    end
+    return tests
+  end
+
   local function uiobjects()
     local function assertCreateFrame(ty)
       local function process(...)
@@ -310,56 +304,68 @@ function G.GeneratedTests()
       end
       return process(CreateFrame(ty))
     end
+    local warners = _G.WowlessData.Config.runtime.warners
     local function assertCreateFrameFails(ty)
       local success, err = pcall(CreateFrame, ty)
       assert(not success)
       local expectedErr = 'CreateFrame: Unknown frame type \'' .. ty .. '\''
       assertEquals(expectedErr, err:sub(err:len() - expectedErr:len() + 1))
+      if warners[ty:lower()] then
+        table.insert(G.ExpectedLuaWarnings, {
+          warnText = 'Unknown frame type: ' .. ty,
+          warnType = 0,
+        })
+      end
     end
     local indexes = {}
-    local function mkTests(objectTypeName, zombie, factory, tests)
-      local obj = assert(factory(), 'factory failed')
-      local obj2 = assert(factory(), 'factory failed')
-      if objectTypeName == 'EditBox' then
-        obj:Hide() -- captures input focus otherwise
-        obj2:Hide() -- captures input focus otherwise
-      end
-      assert(obj ~= obj2)
-      local mt = getmetatable(obj)
-      assert(mt == getmetatable(obj2))
-      if zombie then
-        assert(mt == nil)
-        assertEquals(objectTypeName, CreateFrame('Frame').GetObjectType(obj))
+    local function mkTests(objectTypeName, factory, tests)
+      local obj, mt
+      if objectTypeName == 'Minimap' then
+        obj = _G.Minimap or CreateFrame('Minimap')
+        mt = getmetatable(obj)
       else
-        assert(mt ~= nil)
-        assertEquals(objectTypeName, obj:GetObjectType())
-        assert(getmetatable(mt) == nil)
-        local mtk, __index = next(mt)
-        assertEquals('__index', mtk)
-        assertEquals('table', type(__index))
-        assertEquals(nil, next(mt, mtk))
-        assertEquals(nil, getmetatable(__index))
-        assertEquals(nil, indexes[__index])
-        indexes[__index] = true
-        return {
-          contents = function()
-            local udk, udv = next(obj)
-            assertEquals(udk, 0)
-            assertEquals('userdata', type(udv))
-            assert(getmetatable(udv) == nil)
-            assert(next(obj, udk) == nil)
-          end,
-          methods = function()
-            local t = tests(__index)
-            for k in pairs(__index) do
-              t[k] = t[k] or function()
-                error('missing')
-              end
-            end
-            return t
-          end,
-        }
+        obj = assert(factory(), 'factory failed')
+        local obj2 = assert(factory(), 'factory failed')
+        if objectTypeName == 'EditBox' then
+          obj:Hide() -- captures input focus otherwise
+          obj2:Hide() -- captures input focus otherwise
+        end
+        assert(obj ~= obj2)
+        mt = getmetatable(obj)
+        assert(mt == getmetatable(obj2))
       end
+      assert(mt ~= nil)
+      assertEquals(objectTypeName, obj:GetObjectType())
+      assertEquals(objectTypeName ~= 'Font', obj:IsObjectType('Object'))
+      assert(getmetatable(mt) == nil)
+      local mtk, __index = next(mt)
+      assertEquals('__index', mtk)
+      assertEquals('table', type(__index))
+      assertEquals(nil, next(mt, mtk))
+      assertEquals(nil, getmetatable(__index))
+      assertEquals(nil, indexes[__index])
+      indexes[__index] = true
+      local ftests, mtests = tests(__index, obj)
+      return {
+        contents = function()
+          local udk, udv = next(obj)
+          assertEquals(udk, 0)
+          assertEquals('userdata', type(udv))
+          assert(getmetatable(udv) == nil)
+          assert(next(obj, udk) == nil or objectTypeName == 'Minimap')
+        end,
+        fields = function()
+          return ftests
+        end,
+        methods = function()
+          for k in pairs(__index) do
+            mtests[k] = mtests[k] or function()
+              error('missing')
+            end
+          end
+          return mtests
+        end,
+      }
     end
     local factories = {
       Actor = function()
@@ -414,63 +420,71 @@ function G.GeneratedTests()
       Texture = function()
         return CreateFrame('Frame'):CreateTexture()
       end,
+      TextureCoordTranslation = (function()
+        local count = 0
+        return function()
+          count = count + 1
+          return _G.WowlessUIObjectTest.AnimationGroup['TextureCoordTranslation' .. count]
+        end
+      end)(),
       Translation = function()
         return CreateFrame('Frame'):CreateAnimationGroup():CreateAnimation('Translation')
       end,
-    }
-    local exceptions = { -- TODO remove need for this
-      Line = {
-        AdjustPointsOffset = true,
-        ClearPointByName = true,
-        ClearPointsOffset = true,
-        GetNumPoints = true,
-        GetPoint = true,
-        GetPointByName = true,
-        SetAllPoints = true,
-        SetHeight = true,
-        SetPoint = true,
-        SetSize = true,
-        SetWidth = true,
-      },
+      VertexColor = function()
+        return CreateFrame('Frame'):CreateAnimationGroup():CreateAnimation('VertexColor')
+      end,
     }
     local tests = {}
     for name, cfg in pairs(_G.WowlessData.UIObjectApis) do
       tests[name] = function()
-        local exc = exceptions[name]
-        if cfg == false then
+        if cfg.unsupported then
+          return {
+            unsupported = function()
+              return {
+                createframe = function()
+                  assertCreateFrameFails(name)
+                end,
+                factory = function()
+                  local factory = factories[name]
+                  if factory then
+                    local success, obj = pcall(factory)
+                    assert(not success or obj:GetObjectType() ~= name)
+                  end
+                end,
+              }
+            end,
+          }
+        end
+        if not cfg.frametype then
           assertCreateFrameFails(name)
-          table.insert(G.ExpectedLuaWarnings, {
-            warnText = 'Unknown frame type: ' .. name,
-            warnType = 0,
-          })
-        else
-          if not cfg.frametype then
-            assertCreateFrameFails(name)
-            if cfg.warner then
-              table.insert(G.ExpectedLuaWarnings, {
-                warnText = 'Unknown frame type: ' .. name,
-                warnType = 0,
-              })
+        end
+        if not cfg.virtual then
+          local factory = factories[name]
+            or cfg.frametype and function()
+              return assertCreateFrame(name)
             end
-          end
-          if not cfg.virtual and name ~= 'TextureCoordTranslation' then -- FIXME
-            local factory = factories[name]
-              or cfg.frametype and function()
-                return assertCreateFrame(name)
-              end
-            assert(factory, 'missing factory')
-            return mkTests(cfg.objtype, cfg.zombie, factory, function(__index)
-              local mtests = {}
-              for mname in pairs(cfg.methods) do
-                mtests[mname] = function()
-                  if not exc or not exc[mname] then
-                    return checkCFunc(__index[mname])
+          assert(factory, 'missing factory')
+          return mkTests(cfg.objtype, factory, function(__index, obj)
+            local ftests = {}
+            for fk, fv in pairs(cfg.fields) do
+              ftests[fk] = function()
+                local t = {}
+                for _, g in ipairs(fv.getters) do
+                  t[g.method .. ':' .. g.index] = function()
+                    assertEquals(fv.init, (select(g.index, __index[g.method](obj))))
                   end
                 end
+                return t
               end
-              return mtests
-            end)
-          end
+            end
+            local mtests = {}
+            for mname in pairs(cfg.methods) do
+              mtests[mname] = function()
+                return checkCFunc(__index[mname])
+              end
+            end
+            return ftests, mtests
+          end)
         end
       end
     end
@@ -484,6 +498,7 @@ function G.GeneratedTests()
     events = events,
     globalApis = globalApis,
     globals = globals,
+    impltests = impltests,
     uiobjects = uiobjects,
   }
 end

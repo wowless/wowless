@@ -3,10 +3,12 @@
 ## Interface-Classic: 11401
 ## Interface-BCC: 20503
 ## SavedVariables: WowlessLastTestFailures
+## Notes: WoW client unit tests
 util.lua
 init.lua
 framework.lua
 test.xml
 generated.lua
 api.lua
+uiobjects.lua
 test.lua

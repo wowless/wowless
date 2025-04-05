@@ -2,6 +2,7 @@
 /.idea/
 /.ninja_deps
 /.ninja_log
+/.vs/
 /build/
 /build.ninja
 /cache

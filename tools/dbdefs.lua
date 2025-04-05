@@ -1,5 +1,5 @@
 local function defs(product)
-  local build = require('wowapi.yaml').parseFile('data/products/' .. product .. '/build.yaml')
+  local build = dofile('build/cmake/runtime/products/' .. product .. '/build.lua')
   local bv = build.version .. '.' .. build.build
   local t = {}
   for _, db in ipairs(dofile('build/products/' .. product .. '/dblist.lua')) do
@@ -16,11 +16,29 @@ local function defs(product)
       end
       error('cannot find ' .. bv .. ' in dbd ' .. db)
     end)()
-    local sig, field2index = require('luadbd.sig')(dbd, v)
-    t[db] = {
-      field2index = field2index,
-      sig = sig,
-    }
+    local types = {}
+    for _, dc in ipairs(dbd.columns) do
+      types[dc.name] = dc.type
+    end
+    local tt = {}
+    for _, vc in pairs(v.columns) do
+      local aa = {}
+      for _, a in ipairs(vc.annotations or {}) do
+        aa[a] = true
+      end
+      local ty = types[vc.name]
+      table.insert(tt, {
+        id = aa.id,
+        length = vc.length,
+        name = assert(vc.name),
+        noninline = aa.noninline,
+        relation = aa.relation,
+        size = vc.size,
+        type = ty == 'locstring' and 'string' or ty,
+        unsigned = vc.unsigned,
+      })
+    end
+    t[db] = tt
   end
   return t
 end

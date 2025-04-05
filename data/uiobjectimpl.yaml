@@ -1,5 +1,6 @@
 ---
 Animation/GetRegionParent: {}
+Animation/GetTarget: {}
 AnimationGroup/CreateAnimation: {}
 AnimationGroup/GetAnimations: {}
 Button/Click: {}
@@ -59,9 +60,11 @@ MouseMixin/EnableMouse: {}
 MouseMixin/IsMouseEnabled: {}
 ParentedObject/GetDebugName: {}
 ParentedObject/SetParent: {}
+ParentedObjectBase/ClearParentKey: {}
 ParentedObjectBase/GetParentKey: {}
 ParentedObjectBase/SetParentKey: {}
 Path/CreateControlPoint: {}
+Path/GetControlPoints: {}
 Region/ClearAllPoints: {}
 Region/CreateAnimationGroup: {}
 Region/GetAnimationGroups: {}

@@ -1,27 +1,26 @@
 local args = { ... }
-local datalua = args[1]
-local unitState, talentState = args[2], args[3]
-local baseSql = args[4]
-local entriesSqlCursor = args[5]
-local edgesSqlCursor = args[6]
-local groupsSqlCursor = args[7]
-local conditionsSqlCursor = args[8]
-local configID, nodeID = args[9], args[10]
+local api = args[1]
+local baseSql = args[2]
+local entriesSqlCursor = args[3]
+local edgesSqlCursor = args[4]
+local groupsSqlCursor = args[5]
+local conditionsSqlCursor = args[6]
+local configID, nodeID = args[7], args[8]
 
 -- TODO mix in the state to determine the state dependent fields
 
-local returnPlayerData = (configID == talentState.activeConfigID)
-local returnInspectData = (configID == datalua.globals.Constants.TraitConsts.VIEW_TRAIT_CONFIG_ID)
+local returnPlayerData = (configID == api.modules.talents.activeConfigID)
+local returnInspectData = (configID == api.datalua.globals.Constants.TraitConsts.VIEW_TRAIT_CONFIG_ID)
 
 -- if invalid configID: empty return
 if not returnPlayerData and not returnInspectData then
   return
 end
 
-local player = unitState.guids[unitState.aliases.player]
-local specID = (returnPlayerData and player.spec) or (returnInspectData and talentState.viewLoadoutSpecID)
+local player = api.modules.units.player
+local specID = (returnPlayerData and player.spec) or (returnInspectData and api.modules.talents.viewLoadoutSpecID)
 
-if returnInspectData and not talentState.viewLoadoutDataImported then
+if returnInspectData and not api.modules.talents.viewLoadoutDataImported then
   error('C_ClassTalents.ViewLoadout should be called before C_Traits.GetNodeInfo when using VIEW_TRAIT_CONFIG_ID')
 end
 
@@ -64,8 +63,8 @@ for conditionInfo in conditionsSqlCursor(nodeID) do
   if
     (conditionSpec == specID or 0 == conditionSpec)
     and (
-      conditionType == datalua.globals.Enum.TraitConditionType.Visible
-      or conditionType == datalua.globals.Enum.TraitConditionType.Granted
+      conditionType == api.datalua.globals.Enum.TraitConditionType.Visible
+      or conditionType == api.datalua.globals.Enum.TraitConditionType.Granted
     )
   then
     forceVisible = true
@@ -73,7 +72,7 @@ for conditionInfo in conditionsSqlCursor(nodeID) do
   if
     conditionSpec ~= specID
     and 0 ~= conditionSpec
-    and conditionType == datalua.globals.Enum.TraitConditionType.Visible
+    and conditionType == api.datalua.globals.Enum.TraitConditionType.Visible
   then
     isVisible = false
   end

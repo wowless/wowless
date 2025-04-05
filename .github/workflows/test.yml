@@ -4,31 +4,38 @@ on:
   push:
     branches:
     - main
+env:
+  VCPKG_BINARY_SOURCES: "clear;x-gha,readwrite"
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/github-script@v7
+      with:
+        script: |
+          core.exportVariable('ACTIONS_CACHE_URL', process.env.ACTIONS_CACHE_URL || '');
+          core.exportVariable('ACTIONS_RUNTIME_TOKEN', process.env.ACTIONS_RUNTIME_TOKEN || '');
+    - uses: actions/checkout@v4
       with:
         submodules: true
-    - uses: docker/login-action@v1
+    - uses: docker/login-action@v3
       with:
         registry: ghcr.io
         username: ${{ github.repository_owner }}
         password: ${{ secrets.GITHUB_TOKEN }}
-    - uses: actions/cache@v3
+    - uses: actions/cache@v4
       with:
         path: cache
         key: cache-${{ github.run_id }}
         restore-keys: cache
-    - uses: devcontainers/ci@v0.2
+    - uses: devcontainers/ci@v0.3
       with:
         env: |
           GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}
         imageName: ghcr.io/wowless/wowless-devcontainer
         refFilterForPush: refs/heads/main
         runCmd: pre-commit run -a -v && ninja -v all
-    - uses: actions/upload-artifact@v3
+    - uses: actions/upload-artifact@v4
       if: success() || failure()
       with:
         name: test-results
@@ -60,10 +67,14 @@ jobs:
           os: windows-latest
     runs-on: ${{ matrix.config.os }}
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/github-script@v7
+      with:
+        script: |
+          core.exportVariable('ACTIONS_CACHE_URL', process.env.ACTIONS_CACHE_URL || '');
+          core.exportVariable('ACTIONS_RUNTIME_TOKEN', process.env.ACTIONS_RUNTIME_TOKEN || '');
+    - uses: actions/checkout@v4
       with:
         submodules: true
-    - uses: seanmiddleditch/gha-setup-ninja@v3
-      if: matrix.config.generator == 'Ninja'
+    - uses: lukka/get-cmake@v3.31.5
     - run: cmake -B build -G "${{ matrix.config.generator }}"
-    - run: cmake --build build
+    - run: cmake --build build --verbose

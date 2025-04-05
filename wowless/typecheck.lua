@@ -36,7 +36,7 @@ return function(api)
         return nil, true
       end
     else
-      if type(value) == 'string' then
+      if ty == 'Font' and type(value) == 'string' then
         value = api.env[value]
       end
       if type(value) ~= 'table' then
@@ -48,8 +48,8 @@ return function(api)
   end
 
   local plainscalartypechecks = {
-    boolean = function(value)
-      return luatypecheck('boolean', value)
+    boolean = function(value, isout)
+      return not not value, isout and type(value) ~= 'boolean'
     end,
     gender = function(value)
       return tonumber(value) or 0
@@ -86,16 +86,13 @@ return function(api)
       return type(v) == 'string' and v or nil
     end,
     uiAddon = function(value)
-      return api.states.Addons[tonumber(value) or tostring(value):lower()]
+      return api.addons[tonumber(value) or tostring(value):lower()]
     end,
     unit = function(value)
       if type(value) ~= 'string' then
         return nil, true
       end
-      -- TODO complete unit resolution
-      local units = api.states.Units
-      local guid = units.aliases[value:lower()]
-      return guid and units.guids[guid] or nil
+      return api.modules.units.GetUnit(value)
     end,
     unknown = function(value)
       return value
@@ -209,6 +206,15 @@ return function(api)
         local _, err = typecheck(espec, v)
         if err then
           return nil, 'element ' .. i .. ' ' .. err
+        end
+      end
+      if isout then
+        local n = 0
+        for _ in pairs(value) do
+          n = n + 1
+        end
+        if #value ~= n then
+          return nil, 'is not strictly an array'
         end
       end
       return value
