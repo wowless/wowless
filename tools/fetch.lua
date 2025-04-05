@@ -9,7 +9,6 @@ local product = args.product
 local log = args.verbose and print or function() end
 
 local build = dofile('build/cmake/runtime/products/' .. product .. '/build.lua')
-local flavor = dofile('build/cmake/runtime/flavors.lua')[build.flavor]
 local fdids = require('runtime.listfile')
 
 local path = require('path')
@@ -81,21 +80,8 @@ local processFile = (function()
   return doProcessFile
 end)()
 
--- TODO unify this logic with the loader, issue #322
-local tocsuffixes = (function()
-  local t = {
-    '_' .. build.flavor,
-    '-' .. build.flavor,
-  }
-  for _, alt in ipairs(flavor.alternates) do
-    table.insert(t, '_' .. alt)
-    table.insert(t, '-' .. alt)
-  end
-  table.insert(t, '_Standard')
-  table.insert(t, '-Standard')
-  table.insert(t, '')
-  return t
-end)()
+local tocutil = require('wowless.toc')
+local tocsuffixes = tocutil.suffixes[build.flavor]
 
 local function processTocDir(dir)
   local addonName = path.basename(dir)
@@ -109,10 +95,9 @@ local function processTocDir(dir)
   end
   if tocContent then
     save(tocName, tocContent)
-    for line in tocContent:gmatch('[^\r\n]+') do
-      if line:sub(1, 1) ~= '#' then
-        processFile(joinRelative(tocName, line:gsub('%s*$', '')), dir)
-      end
+    local _, files = tocutil.parse(build.flavor, tocContent)
+    for _, file in ipairs(files) do
+      processFile(joinRelative(tocName, file), dir)
     end
   end
   local bindingsName = path.join(dir, 'Bindings.xml')

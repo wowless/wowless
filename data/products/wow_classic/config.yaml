@@ -63,7 +63,6 @@ runner:
     LOOT_MASTER: {}
     USERANDOM: {}
 runtime:
-  texturekitstatus: true
   warners:
     archaeologydigsiteframe: {}
     fontstring: {}

@@ -12,10 +12,10 @@ addon:
     enums:
       BattlepayBannerType: {}
       BattlepayCardType: {}
-      BattlepayDisplayFlag: {}
+      BattlepayDisplayFlags: {}
       BattlepayGroupDisplayType: {}
       BattlepayProductDecorator: {}
-      BattlepayProductGroupFlag: {}
+      BattlepayProductGroupFlags: {}
       PurchaseEligibility: {}
       StoreError: {}
       VasError: {}
@@ -70,7 +70,6 @@ runner:
     GUILD_UNINVITE: {}
     USERANDOM: {}
 runtime:
-  texturekitstatus: true
   warners:
     fontstring: {}
     line: {}

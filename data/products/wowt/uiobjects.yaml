@@ -75,6 +75,7 @@ Actor:
       inputs:
       - name: inventorySlots
         type: number
+      mayreturnnothing: true
       outputs:
       - name: itemTransmogInfo
         nilable: true
@@ -1424,6 +1425,11 @@ Cooldown:
       outputs:
       - name: edgeScale
         type: number
+    GetHideCountdownNumbers:
+      inputs: {}
+      outputs:
+      - name: hideNumbers
+        type: boolean
     GetReverse:
       inputs: {}
       outputs:
@@ -1434,6 +1440,11 @@ Cooldown:
       outputs:
       - name: rotationRadians
         type: number
+    GetUseAuraDisplayTime:
+      inputs: {}
+      outputs:
+      - name: useAuraDisplayTime
+        type: boolean
     IsPaused:
       inputs: {}
       outputs:
@@ -1553,6 +1564,12 @@ Cooldown:
         type:
           structure: vector2
       outputs: {}
+    SetUseAuraDisplayTime:
+      inputs:
+      - default: false
+        name: useAuraDisplayTime
+        type: boolean
+      outputs: {}
     SetUseCircularEdge:
       inputs:
       - default: false
@@ -1576,6 +1593,7 @@ DressUpModel:
       inputs:
       - name: inventorySlot
         type: number
+      mayreturnnothing: true
       outputs:
       - name: itemTransmogInfo
         type:
@@ -1773,6 +1791,7 @@ EditBox:
         type: number
     GetDisplayText:
       inputs: {}
+      mayreturnnothing: true
       outputs:
       - name: displayText
         type: string
@@ -1810,8 +1829,14 @@ EditBox:
         type: number
     GetNumLetters:
       inputs: {}
+      mayreturnnothing: true
       outputs:
       - name: numLetters
+        type: number
+    GetNumLines:
+      inputs: {}
+      outputs:
+      - name: lines
         type: number
     GetText:
       getter:
@@ -2155,6 +2180,13 @@ Font:
       outputs:
       - name: alpha
         type: number
+    GetFontObjectForAlphabet:
+      inputs:
+      - name: alphabet
+        type: string
+      outputs:
+      - name: font
+        type: table
     SetAlpha:
       inputs:
       - name: alpha
@@ -2272,6 +2304,7 @@ FontString:
         type: number
       - name: y
         type: number
+      mayreturnnothing: true
       outputs:
       - name: characterIndex
         type: number
@@ -2332,6 +2365,9 @@ FontString:
       outputs:
       - name: isTruncated
         type: boolean
+    OnColorsUpdated:
+      inputs: {}
+      outputs: {}
     SetAlphaGradient:
       inputs:
       - name: start
@@ -2453,6 +2489,9 @@ Frame:
       outputs:
       - name: canChangeAttributes
         type: boolean
+    ClearAlphaGradient:
+      inputs: {}
+      outputs: {}
     CreateFontString:
       impl: Frame/CreateFontString
       inputs:
@@ -2674,6 +2713,13 @@ Frame:
     IsClampedToScreen:
       getter:
       - name: isClampedToScreen
+    IsDrawLayerEnabled:
+      inputs:
+      - name: layer
+        type: DrawLayer
+      outputs:
+      - name: isEnabled
+        type: boolean
     IsEventRegistered:
       impl: Frame/IsEventRegistered
     IsGamePadButtonEnabled:
@@ -2738,6 +2784,14 @@ Frame:
       - default: 0.5
         name: y
         type: number
+      outputs: {}
+    SetAlphaGradient:
+      inputs:
+      - name: index
+        type: number
+      - name: gradient
+        type:
+          structure: vector2
       outputs: {}
     SetAttribute:
       impl: Frame/SetAttribute
@@ -3874,6 +3928,7 @@ ModelScene:
         type: number
       - name: pointZ
         type: number
+      mayreturnnothing: true
       outputs:
       - name: point2DX
         type: number
@@ -4616,6 +4671,7 @@ Region:
       - default: false
         name: resolveCollapsed
         type: boolean
+      mayreturnnothing: true
       outputs:
       - name: point
         type: FramePoint
@@ -4651,6 +4707,13 @@ Region:
     GetWidth:
       getter:
       - name: width
+    Intersects:
+      inputs:
+      - name: region
+        type: table
+      outputs:
+      - name: intersects
+        type: boolean
     IsAnchoringRestricted:
       inputs: {}
       outputs:
@@ -5284,6 +5347,11 @@ TabardModel:
       outputs:
       - name: file
         type: number
+    GetLowerBorderFile:
+      inputs: {}
+      outputs:
+      - name: file
+        type: number
     GetLowerEmblemFile:
       inputs: {}
       outputs:
@@ -5295,6 +5363,11 @@ TabardModel:
         type: Texture
       outputs: {}
     GetUpperBackgroundFileName:
+      inputs: {}
+      outputs:
+      - name: file
+        type: number
+    GetUpperBorderFile:
       inputs: {}
       outputs:
       - name: file
@@ -5349,6 +5422,9 @@ Texture:
       outputs: {}
 TextureBase:
   fields:
+    atlas:
+      nilable: true
+      type: string
     blendMode:
       init: BLEND
       type: BlendMode
@@ -5408,10 +5484,8 @@ TextureBase:
       inputs: {}
       outputs: {}
     GetAtlas:
-      inputs: {}
-      outputs:
+      getter:
       - name: atlas
-        type: string
     GetBlendMode:
       getter:
       - name: blendMode
@@ -5461,6 +5535,7 @@ TextureBase:
         type: string
     GetTextureSliceMargins:
       inputs: {}
+      mayreturnnothing: true
       outputs:
       - name: left
         type: number
@@ -5472,6 +5547,7 @@ TextureBase:
         type: number
     GetTextureSliceMode:
       inputs: {}
+      mayreturnnothing: true
       outputs:
       - name: sliceMode
         type:

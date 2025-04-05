@@ -75,7 +75,6 @@ jobs:
     - uses: actions/checkout@v4
       with:
         submodules: true
-    - uses: seanmiddleditch/gha-setup-ninja@v6
-      if: matrix.config.generator == 'Ninja'
+    - uses: lukka/get-cmake@v3.31.5
     - run: cmake -B build -G "${{ matrix.config.generator }}"
     - run: cmake --build build --verbose

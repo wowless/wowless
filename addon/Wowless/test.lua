@@ -445,11 +445,7 @@ G.testsuite.sync = function()
       local sb = CreateFrame('StatusBar')
       local nilparent = CreateFrame('Frame')
       local function checkSetStatusBarTexture()
-        if _G.WowlessData.Config.runtime.texturekitstatus then
-          check1(true, sb:SetStatusBarTexture('interface/icons/temp'))
-        else
-          check0(sb:SetStatusBarTexture('interface/icons/temp'))
-        end
+        check1(true, sb:SetStatusBarTexture('interface/icons/temp'))
       end
       local states = {
         colorTexture = function()
@@ -769,7 +765,7 @@ do
     if not asyncPending then
       if asyncIndex == numAsyncTests then
         frame:SetScript('OnUpdate', nil)
-        if _G.WowlessData.Build.flavor ~= 'Mainline' then -- TODO reenable for mainline
+        if _G.WowlessData.Config.addon.lua_warning_check then
           _G.WowlessTestFailures.LUA_WARNING = (function()
             local function check()
               assertEquals(#G.ExpectedLuaWarnings, #G.ActualLuaWarnings)

@@ -73,7 +73,6 @@ runner:
     PTRFEEDBACK: {}
     USERANDOM: {}
 runtime:
-  texturekitstatus: true
   warners:
     fontstring: {}
     line: {}

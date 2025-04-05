@@ -62,6 +62,11 @@ ACTIVATE_GLYPH:
   payload:
   - name: spellID
     type: number
+ACTIVE_GAME_MODE_UPDATED:
+  payload:
+  - name: gameMode
+    type:
+      enum: GameMode
 ACTIVE_PLAYER_SPECIALIZATION_CHANGED:
   payload: {}
 ACTIVE_TALENT_GROUP_CHANGED:
@@ -235,6 +240,21 @@ AUCTION_HOUSE_SCRIPT_DEPRECATED:
   payload: {}
 AUCTION_HOUSE_SHOW:
   payload: {}
+AUCTION_HOUSE_SHOW_FORMATTED_NOTIFICATION:
+  payload:
+  - name: notification
+    type:
+      enum: AuctionHouseNotification
+  - name: text
+    type: string
+  - name: auctionID
+    nilable: true
+    type: number
+AUCTION_HOUSE_SHOW_NOTIFICATION:
+  payload:
+  - name: notification
+    type:
+      enum: AuctionHouseNotification
 AUCTION_ITEM_LIST_UPDATE:
   payload: {}
 AUCTION_MULTISELL_FAILURE:
@@ -3679,9 +3699,11 @@ EQUIPMENT_SWAP_PENDING:
   payload: {}
 EVENT_REALM_QUEUES_UPDATED:
   payload:
-  - name: gameEnvironment
+  - name: eventRealmQueues
     type:
       enum: EventRealmQueues
+EVENT_SCHEDULER_UPDATE:
+  payload: {}
 EXPAND_BAG_BAR_CHANGED:
   payload:
   - name: expandBagBar
@@ -3718,11 +3740,8 @@ FRAMESTACK_VISIBILITY_UPDATED:
   payload: {}
 FRIENDLIST_UPDATE:
   payload: {}
-GAME_ENVIRONMENT_SWITCHED:
-  payload:
-  - name: gameEnvironment
-    type:
-      enum: GameEnvironment
+GAME_MODE_DISPLAY_INFO_UPDATED:
+  payload: {}
 GAME_PAD_ACTIVE_CHANGED:
   payload:
   - name: isActive
@@ -3762,10 +3781,6 @@ GLOBAL_MOUSE_DOWN:
 GLOBAL_MOUSE_UP:
   payload:
   - name: button
-    type: string
-GLUE_CONSOLE_LOG:
-  payload:
-  - name: message
     type: string
 GLUE_SCREENSHOT_FAILED:
   payload: {}
@@ -3892,6 +3907,8 @@ GUILD_RENAME_REQUIRED:
   - name: flagSet
     type: boolean
 GUILD_REWARDS_LIST:
+  payload: {}
+GUILD_REWARDS_LIST_UPDATE:
   payload: {}
 GUILD_ROSTER_UPDATE:
   payload:
@@ -4543,6 +4560,8 @@ OBLITERUM_FORGE_PENDING_ITEM_CHANGED:
 OPEN_MASTER_LOOT_LIST:
   payload: {}
 OPEN_TABARD_FRAME:
+  payload: {}
+OWNED_AUCTIONS_UPDATED:
   payload: {}
 PARTY_INVITE_CANCEL: {}
 PARTY_INVITE_REQUEST:
@@ -5804,6 +5823,8 @@ TOKEN_REDEEM_RESULT:
     type: number
 TOKEN_SELL_CONFIRM_REQUIRED:
   payload: {}
+TOKEN_SELL_CONFIRMED:
+  payload: {}
 TOKEN_SELL_RESULT:
   payload:
   - name: result
@@ -6460,6 +6481,8 @@ UPDATE_CHAT_WINDOWS:
 UPDATE_EXHAUSTION:
   payload: {}
 UPDATE_EXPANSION_LEVEL:
+  payload: {}
+UPDATE_EXTRA_ACTIONBAR:
   payload: {}
 UPDATE_FACTION:
   payload: {}

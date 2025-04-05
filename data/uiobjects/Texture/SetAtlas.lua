@@ -12,4 +12,5 @@ return (function(self, name)
   self:SetHorizTile(t.tilesHorizontally)
   self:SetVertTile(t.tilesVertically)
   self:SetTexCoord(t.leftTexCoord, t.rightTexCoord, t.topTexCoord, t.bottomTexCoord)
+  self.atlas = t.elementName or name
 end)(...)

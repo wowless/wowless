@@ -8,7 +8,8 @@ local indexes = {
   TraitNodeGroupXTraitNode = { 'TraitNodeID' },
   TraitNodeXTraitCond = { 'TraitNodeID' },
   TraitNodeXTraitNodeEntry = { 'TraitNodeID' },
-  UiTextureAtlasMember = { 'CommittedName COLLATE NOCASE' },
+  UiTextureAtlasElement = { 'Name COLLATE NOCASE' },
+  UiTextureAtlasMember = { 'UiTextureAtlasElementID' },
 }
 
 local function factory(theProduct)

@@ -118,7 +118,8 @@ function(lua2c name)
     COMMAND bootstraplua ${CMAKE_CURRENT_SOURCE_DIR}/tools/lua2c.lua ${name}
             ${ARGN}
     DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/tools/lua2c.lua ${deps})
-  add_library(${name} STATIC ${name}.c ${deps})
+  add_library(${name} STATIC ${name}.c tools/file2c.h tools/lua2c.h ${deps})
+  target_include_directories(${name} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
   target_link_libraries(${name} PRIVATE elune)
 endfunction()
 
@@ -177,8 +178,8 @@ add_library(sqlite3 ALIAS unofficial::sqlite3::sqlite3)
 
 FetchContent_Declare(
   lsqlite3
-  URL http://lua.sqlite.org/index.cgi/zip/lsqlite3_fsl09y.zip
-  URL_HASH MD5=da1de94e833a3642317e23f2c78caa98
+  URL http://lua.sqlite.org/home/zip/lsqlite3_v096.zip
+  URL_HASH MD5=70e87bc7efa1ec4a7d69ccebdcd91e09
   SOURCE_SUBDIR disable_cmakelists_txt)
 FetchContent_MakeAvailable(lsqlite3)
 lua2c(lsqlite3 lsqlite3=c)
@@ -389,15 +390,26 @@ lua2c(
   vstruct.io.z=${vstruct_SOURCE_DIR}/io/z.lua
   vstruct.lexer=${vstruct_SOURCE_DIR}/lexer.lua)
 
+add_library(luamain STATIC tools/luamain.c tools/luamain.h tools/lua2c.h
+                           tools/file2c.h)
+target_include_directories(luamain PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
+target_link_libraries(luamain PUBLIC elune)
+
 function(add_lua_executable name main)
+  add_custom_command(
+    OUTPUT ${name}luafile.c
+    COMMAND bootstraplua ${CMAKE_CURRENT_SOURCE_DIR}/tools/file2c.lua main
+            ${main} ${name}luafile.c
+    DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/tools/file2c.lua ${main})
   set(luamain ${name}luamain.c)
   add_custom_command(
     OUTPUT ${luamain}
     COMMAND bootstraplua ${CMAKE_CURRENT_SOURCE_DIR}/tools/luamain.lua
-            ${luamain} ${main} ${ARGN}
+            ${luamain} ${ARGN}
     DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/tools/luamain.lua ${main})
-  add_executable(${name} ${luamain})
-  target_link_libraries(${name} PRIVATE ${ARGN} elune)
+  add_executable(${name} ${luamain} ${name}luafile.c)
+  target_include_directories(${name} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
+  target_link_libraries(${name} PRIVATE ${ARGN} luamain)
 endfunction()
 
 lua2c(wowlessyaml wowapi.yaml=${CMAKE_CURRENT_SOURCE_DIR}/wowapi/yaml.lua)
@@ -577,6 +589,8 @@ lua2c(toolstactless tactless=c)
 target_sources(toolstactless PRIVATE tools/tactless.c)
 target_link_libraries(toolstactless PRIVATE tactless)
 
+lua2c(wowlesstoc wowless.toc=${CMAKE_CURRENT_SOURCE_DIR}/wowless/toc.lua)
+
 add_lua_executable(
   fetch
   ${CMAKE_CURRENT_SOURCE_DIR}/tools/fetch.lua
@@ -585,10 +599,12 @@ add_lua_executable(
   luafilesystem
   luapath
   penlight
+  runtimeflavors
   runtimelistfile
   toolsdb2
   toolstactless
-  vstruct)
+  vstruct
+  wowlesstoc)
 
 find_package(PNG REQUIRED)
 add_library(libpng ALIAS PNG::PNG)
@@ -934,6 +950,7 @@ add_lua_executable(
 add_lua_executable(gentest ${CMAKE_CURRENT_SOURCE_DIR}/tools/gentest.lua
                    argparse luafilesystem penlight toolsutil)
 
+lua2c(runtimeflavors runtime.flavors=runtime/flavors.lua)
 lua2c(runtimeproducts runtime.products=runtime/products.lua)
 
 add_lua_executable(
@@ -1064,7 +1081,6 @@ $<$<PLATFORM_ID:Windows>:windows>\
 
 lua2c(
   wowlesslib
-  runtime.flavors=runtime/flavors.lua
   runtime.platform=runtime/platform.lua
   runtime.stringenums=runtime/stringenums.lua
   wowapi.loader=${CMAKE_CURRENT_SOURCE_DIR}/wowapi/loader.lua
@@ -1077,6 +1093,7 @@ lua2c(
   wowless.loader=${CMAKE_CURRENT_SOURCE_DIR}/wowless/loader.lua
   wowless.modules.calendar=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/calendar.lua
   wowless.modules.cvars=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/cvars.lua
+  wowless.modules.env=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/env.lua
   wowless.modules.events=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/events.lua
   wowless.modules.macrotext=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/macrotext.lua
   wowless.modules.system=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/system.lua
@@ -1103,10 +1120,12 @@ add_lua_executable(
   lzlib
   minheap
   penlight
+  runtimeflavors
   runtimeproducts
   tsort
   wowlesslib
   wowlessrender
+  wowlesstoc
   wowlessutil
   wowlessyaml)
 
@@ -1125,6 +1144,7 @@ add_lua_executable(
   lzlib
   minheap
   penlight
+  runtimeflavors
   runtimeproducts
   say
   tsort
@@ -1132,6 +1152,7 @@ add_lua_executable(
   wowapischema
   wowlesslib
   wowlessrender
+  wowlesstoc
   wowlessutil
   wowlessyaml)
 

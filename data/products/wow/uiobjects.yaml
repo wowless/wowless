@@ -75,6 +75,7 @@ Actor:
       inputs:
       - name: inventorySlots
         type: number
+      mayreturnnothing: true
       outputs:
       - name: itemTransmogInfo
         nilable: true
@@ -1576,6 +1577,7 @@ DressUpModel:
       inputs:
       - name: inventorySlot
         type: number
+      mayreturnnothing: true
       outputs:
       - name: itemTransmogInfo
         type:
@@ -1773,6 +1775,7 @@ EditBox:
         type: number
     GetDisplayText:
       inputs: {}
+      mayreturnnothing: true
       outputs:
       - name: displayText
         type: string
@@ -1810,8 +1813,14 @@ EditBox:
         type: number
     GetNumLetters:
       inputs: {}
+      mayreturnnothing: true
       outputs:
       - name: numLetters
+        type: number
+    GetNumLines:
+      inputs: {}
+      outputs:
+      - name: lines
         type: number
     GetText:
       getter:
@@ -1934,6 +1943,11 @@ EditBox:
       - name: enabled
     SetFocus:
       inputs: {}
+      outputs: {}
+    SetFontStringIgnoreParentAlpha:
+      inputs:
+      - name: ignoreParentAlpha
+        type: boolean
       outputs: {}
     SetHighlightColor:
       inputs:
@@ -2155,6 +2169,13 @@ Font:
       outputs:
       - name: alpha
         type: number
+    GetFontObjectForAlphabet:
+      inputs:
+      - name: alphabet
+        type: string
+      outputs:
+      - name: font
+        type: table
     SetAlpha:
       inputs:
       - name: alpha
@@ -2272,6 +2293,7 @@ FontString:
         type: number
       - name: y
         type: number
+      mayreturnnothing: true
       outputs:
       - name: characterIndex
         type: number
@@ -2674,6 +2696,13 @@ Frame:
     IsClampedToScreen:
       getter:
       - name: isClampedToScreen
+    IsDrawLayerEnabled:
+      inputs:
+      - name: layer
+        type: DrawLayer
+      outputs:
+      - name: isEnabled
+        type: boolean
     IsEventRegistered:
       impl: Frame/IsEventRegistered
     IsGamePadButtonEnabled:
@@ -3874,6 +3903,7 @@ ModelScene:
         type: number
       - name: pointZ
         type: number
+      mayreturnnothing: true
       outputs:
       - name: point2DX
         type: number
@@ -4616,6 +4646,7 @@ Region:
       - default: false
         name: resolveCollapsed
         type: boolean
+      mayreturnnothing: true
       outputs:
       - name: point
         type: FramePoint
@@ -4651,6 +4682,13 @@ Region:
     GetWidth:
       getter:
       - name: width
+    Intersects:
+      inputs:
+      - name: region
+        type: table
+      outputs:
+      - name: intersects
+        type: boolean
     IsAnchoringRestricted:
       inputs: {}
       outputs:
@@ -5349,6 +5387,9 @@ Texture:
       outputs: {}
 TextureBase:
   fields:
+    atlas:
+      nilable: true
+      type: string
     blendMode:
       init: BLEND
       type: BlendMode
@@ -5408,10 +5449,8 @@ TextureBase:
       inputs: {}
       outputs: {}
     GetAtlas:
-      inputs: {}
-      outputs:
+      getter:
       - name: atlas
-        type: string
     GetBlendMode:
       getter:
       - name: blendMode
@@ -5461,6 +5500,7 @@ TextureBase:
         type: string
     GetTextureSliceMargins:
       inputs: {}
+      mayreturnnothing: true
       outputs:
       - name: left
         type: number
@@ -5472,6 +5512,7 @@ TextureBase:
         type: number
     GetTextureSliceMode:
       inputs: {}
+      mayreturnnothing: true
       outputs:
       - name: sliceMode
         type:

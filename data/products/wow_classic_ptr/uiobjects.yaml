@@ -5004,6 +5004,9 @@ Texture:
       outputs: {}
 TextureBase:
   fields:
+    atlas:
+      nilable: true
+      type: string
     blendMode:
       init: BLEND
       type: BlendMode
@@ -5063,10 +5066,8 @@ TextureBase:
       inputs: {}
       outputs: {}
     GetAtlas:
-      inputs: {}
-      outputs:
+      getter:
       - name: atlas
-        type: string
     GetBlendMode:
       getter:
       - name: blendMode
