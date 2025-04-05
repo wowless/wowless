@@ -1082,12 +1082,10 @@ $<$<PLATFORM_ID:Windows>:windows>\
 FetchContent_Declare(
   lualua
   GIT_REPOSITORY https://github.com/lua-wow-tools/lualua.git
-  GIT_TAG 92285f62cba1b177d2aea5abb28eec983b4aafe5
-)
+  GIT_TAG 92285f62cba1b177d2aea5abb28eec983b4aafe5)
 FetchContent_MakeAvailable(lualua)
 lua2c(lualua lualua=c)
-add_library(lualua STATIC lualua.c ${lualua_SOURCE_DIR}/lualua.c)
-target_link_libraries(lualua elune lualua)
+target_sources(lualua PRIVATE ${lualua_SOURCE_DIR}/lualua.c)
 
 lua2c(
   wowlesslib
@@ -1125,7 +1123,6 @@ add_lua_executable(
   lsqlite3
   luaexpat
   luafilesystem
-  lualua
   luapath
   lyaml
   lzlib
@@ -1169,3 +1166,6 @@ add_lua_executable(
 
 add_lua_executable(yamlfmt ${CMAKE_CURRENT_SOURCE_DIR}/tools/yamlfmt.lua
                    luafilesystem lyaml penlight wowlessyaml)
+
+add_lua_executable(sandbox ${CMAKE_CURRENT_SOURCE_DIR}/sandbox.lua ${dataluas}
+                   lsqlite3 lualua)

@@ -144,9 +144,11 @@ s:loadstring([[
   assert(f ~= g)
   assert(f:GetParent() == nil)
   assert(g:GetParent() == f)
-  print(GetFactionInfo(1))
+  print((C_CreatureInfo.GetFactionInfo or GetFactionInfo)(1))
   print(C_ArtifactUI.GetAppearanceInfo(1, 1))
   Vector3DMixin = { rofl = 'copter' }
-  require('pl.pretty').dump(C_Commentator.GetStartLocation(1))
+  for k, v in pairs(C_Commentator.GetStartLocation(1)) do
+    print(k, v)
+  end
 ]])
 s:call(0, 0)
