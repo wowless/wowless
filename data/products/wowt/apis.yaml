@@ -19798,6 +19798,12 @@ C_SplashScreen.RequestLatestSplashScreen:
   - name: fromGameMenu
     type: boolean
   outputs: {}
+C_SplashScreen.SendSplashScreenActionLaunchedTelem:
+  inputs: {}
+  outputs: {}
+C_SplashScreen.SendSplashScreenCloseTelem:
+  inputs: {}
+  outputs: {}
 C_StableInfo.ClosePetStables:
   inputs: {}
   outputs: {}
