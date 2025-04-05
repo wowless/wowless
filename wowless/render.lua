@@ -206,6 +206,7 @@ local function rects2png(data, fetch, outfile)
         fpath = fpath .. '.blp'
       end
     end
+    assert(fpath)
     local prev = blobs[fpath]
     if prev then
       return prev.width, prev.height, prev.png
