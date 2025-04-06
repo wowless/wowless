@@ -15,6 +15,7 @@ GetClassInfo: {}
 GetClassInfo_Classic: {}
 GetClickFrame: {}
 GetCurrentEnvironment: {}
+getfenv: {}
 GetGlobalEnvironment: {}
 IsInGlobalEnvironment: {}
 IsLinuxClient: {}
