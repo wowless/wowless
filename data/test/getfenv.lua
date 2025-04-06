@@ -6,7 +6,7 @@ return {
         local function f() end
         local t = {}
         T.check1(f, T.env.setfenv(f, t))
-        T.check1(T.wowless and T.env or t, T.env.getfenv(f)) -- TODO fix
+        T.check1(t, T.env.getfenv(f))
       end,
       unset = function()
         local function f() end
