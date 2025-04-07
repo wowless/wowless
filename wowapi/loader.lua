@@ -152,7 +152,7 @@ local function loadFunctions(api, loader)
       return outfn
     else
       edepth = edepth + 1
-      return debug.newsecurefunction(outfn)
+      return debug.newcfunction(outfn)
     end
   end
 
@@ -164,7 +164,7 @@ local function loadFunctions(api, loader)
     elseif apicfg.stdlib then
       local v = assert(util.tget(_G, apicfg.stdlib))
       if apicfg.nowrap == false then
-        v = debug.newsecurefunction(v)
+        v = debug.newcfunction(v)
       end
       util.tset(fns, fn, v)
     else
