@@ -101,10 +101,7 @@ local function loadFunctions(api, loader)
         end
         local n = select('#', ...)
         for i = 1, n do
-          local v = select(i, ...)
-          if i then
-            t[nspecials + i] = v
-          end
+          t[nspecials + i] = select(i, ...)
         end
         return basefn(unpack(t, 1, nspecials + n))
       end
