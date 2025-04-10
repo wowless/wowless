@@ -4,6 +4,7 @@ local assertEquals = _G.assertEquals
 
 local check0 = G.check0
 local check1 = G.check1
+local check2 = G.check2
 local check4 = G.check4
 
 local function checkStateMachine(states, transitions, init)
@@ -607,8 +608,24 @@ G.testsuite.sync = function()
                   assertEquals(nil, m.wowless)
                   m.wowless = 'moo'
                   assertEquals('moo', m.wowless)
+                  check2('wowless', 'moo', next(m))
+                  assertEquals(nil, CreateFrame('ScrollingMessageFrame').wowless)
                   m.wowless = nil
                   assertEquals(nil, m.wowless)
+                  check1(nil, next(m))
+                end,
+                overwrite = function()
+                  local called
+                  local function cb()
+                    called = true
+                  end
+                  m.SetOnTextCopiedCallback = cb
+                  assertEquals(cb, m.SetOnTextCopiedCallback)
+                  check2('SetOnTextCopiedCallback', cb, next(m))
+                  CreateFrame('ScrollingMessageFrame'):SetOnTextCopiedCallback(function() end)
+                  assertEquals(nil, called)
+                  m.SetOnTextCopiedCallback = nil
+                  check1(nil, next(m))
                 end,
                 type = function()
                   assertEquals('number', type(getmetatable(m)))
