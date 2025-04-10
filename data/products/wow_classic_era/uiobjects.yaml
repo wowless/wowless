@@ -208,6 +208,26 @@ Actor:
       - name: pitch
         type: number
       outputs: {}
+    SetPlayerModelFromGlues:
+      inputs:
+      - name: characterIndex
+        nilable: true
+        type: number
+      - default: false
+        name: sheatheWeapons
+        type: boolean
+      - default: true
+        name: autoDress
+        type: boolean
+      - default: false
+        name: hideWeapons
+        type: boolean
+      - default: true
+        name: usePlayerNativeForm
+        type: boolean
+      outputs:
+      - name: success
+        type: boolean
     SetPosition:
       inputs:
       - name: positionX
@@ -251,6 +271,21 @@ Actor:
     StopAnimationKit:
       inputs: {}
       outputs: {}
+    TryOn:
+      inputs:
+      - name: itemLinkOrItemModifiedAppearanceID
+        type: string
+      - name: handSlotName
+        nilable: true
+        type: string
+      - default: 0
+        name: spellEnchantmentID
+        type: number
+      outputs:
+      - name: reason
+        nilable: true
+        type:
+          enum: ItemTryOnReason
   objectType: ModelSceneActor
 Alpha:
   fields: {}
@@ -1364,6 +1399,7 @@ DressUpModel:
       inputs:
       - name: inventorySlot
         type: number
+      mayreturnnothing: true
       outputs:
       - name: itemTransmogInfo
         type:
@@ -1546,6 +1582,7 @@ EditBox:
         type: number
     GetDisplayText:
       inputs: {}
+      mayreturnnothing: true
       outputs:
       - name: displayText
         type: string
@@ -1583,8 +1620,14 @@ EditBox:
         type: number
     GetNumLetters:
       inputs: {}
+      mayreturnnothing: true
       outputs:
       - name: numLetters
+        type: number
+    GetNumLines:
+      inputs: {}
+      outputs:
+      - name: lines
         type: number
     GetText:
       getter:
@@ -1707,6 +1750,11 @@ EditBox:
       - name: enabled
     SetFocus:
       inputs: {}
+      outputs: {}
+    SetFontStringIgnoreParentAlpha:
+      inputs:
+      - name: ignoreParentAlpha
+        type: boolean
       outputs: {}
     SetHighlightColor:
       inputs:
@@ -1928,6 +1976,13 @@ Font:
       outputs:
       - name: alpha
         type: number
+    GetFontObjectForAlphabet:
+      inputs:
+      - name: alphabet
+        type: string
+      outputs:
+      - name: font
+        type: table
     SetAlpha:
       inputs:
       - name: alpha
@@ -2045,6 +2100,7 @@ FontString:
         type: number
       - name: y
         type: number
+      mayreturnnothing: true
       outputs:
       - name: characterIndex
         type: number
@@ -2450,6 +2506,13 @@ Frame:
     IsClampedToScreen:
       getter:
       - name: isClampedToScreen
+    IsDrawLayerEnabled:
+      inputs:
+      - name: layer
+        type: DrawLayer
+      outputs:
+      - name: isEnabled
+        type: boolean
     IsEventRegistered:
       impl: Frame/IsEventRegistered
     IsGamePadButtonEnabled:
@@ -2716,6 +2779,7 @@ GameTooltip:
     SetInventoryItem: {}
     SetInventoryItemByID: {}
     SetItemByID: {}
+    SetItemKey: {}
     SetLFGDungeonReward: {}
     SetLFGDungeonShortageReward: {}
     SetLootCurrency: {}
@@ -3598,6 +3662,7 @@ ModelScene:
         type: number
       - name: pointZ
         type: number
+      mayreturnnothing: true
       outputs:
       - name: point2DX
         type: number
@@ -4230,6 +4295,7 @@ Region:
       - default: false
         name: resolveCollapsed
         type: boolean
+      mayreturnnothing: true
       outputs:
       - name: point
         type: FramePoint
@@ -4265,6 +4331,13 @@ Region:
     GetWidth:
       getter:
       - name: width
+    Intersects:
+      inputs:
+      - name: region
+        type: table
+      outputs:
+      - name: intersects
+        type: boolean
     IsAnchoringRestricted:
       inputs: {}
       outputs:
@@ -5055,6 +5128,7 @@ TextureBase:
         type: string
     GetTextureSliceMargins:
       inputs: {}
+      mayreturnnothing: true
       outputs:
       - name: left
         type: number
@@ -5066,6 +5140,7 @@ TextureBase:
         type: number
     GetTextureSliceMode:
       inputs: {}
+      mayreturnnothing: true
       outputs:
       - name: sliceMode
         type:
