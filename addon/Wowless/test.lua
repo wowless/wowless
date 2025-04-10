@@ -599,7 +599,21 @@ G.testsuite.sync = function()
               }
             end,
             metatable = function()
-              assertEquals('number', type(getmetatable(m)))
+              return {
+                call = function()
+                  assertEquals(false, (pcall(m)))
+                end,
+                index = function()
+                  assertEquals(nil, m.wowless)
+                  m.wowless = 'moo'
+                  assertEquals('moo', m.wowless)
+                  m.wowless = nil
+                  assertEquals(nil, m.wowless)
+                end,
+                type = function()
+                  assertEquals('number', type(getmetatable(m)))
+                end,
+              }
             end,
             type = function()
               assertEquals('table', type(m))
