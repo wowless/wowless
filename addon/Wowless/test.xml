@@ -676,6 +676,22 @@
     </Frame>
   </ScopedModifier>
 
+  <!-- Insecure securemixins are just mixins. -->
+  <Script>
+    WowlessSecureMixin = {
+      cow = 'moo',
+      fn = function() end,
+    }
+  </Script>
+  <Frame securemixin='WowlessSecureMixin'>
+    <Scripts>
+      <OnLoad>
+        assertEquals('moo', self.cow)
+        assertEquals(WowlessSecureMixin.fn, self.fn)
+      </OnLoad>
+    </Scripts>
+  </Frame>
+
   <!-- TODO disabled until we support cranky XML errors -->
   <!--
   <Script>
