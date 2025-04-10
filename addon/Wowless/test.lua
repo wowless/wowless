@@ -581,7 +581,7 @@ G.testsuite.sync = function()
           local m = _G.ScrollingMessageFrameMixin
           return {
             empty = function()
-              assertEquals(nil, next(m))
+              check1(nil, next(m))
             end,
             fn = function()
               -- The function is uninteresting when invoked this way.
