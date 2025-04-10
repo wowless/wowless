@@ -623,7 +623,6 @@ G.testsuite.sync = function()
               local cb = f.onTextCopiedCallback
               assertEquals('function', type(cb))
               return {
-                func = function() end,
                 notluafunc = function()
                   assertEquals(false, (pcall(coroutine.create, cb)))
                 end,
