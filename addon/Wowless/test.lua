@@ -570,6 +570,81 @@ G.testsuite.sync = function()
       }, '\n')
       assertEquals(expected, table.concat(log, '\n'))
     end,
+
+    ScrollingMessageFrame = function()
+      if _G.__wowless then -- TODO limit to lite, issue #402
+        return
+      end
+      return {
+        mixin = function()
+          local m = _G.ScrollingMessageFrameMixin
+          return {
+            empty = function()
+              assertEquals(nil, next(m))
+            end,
+            fn = function()
+              -- The function is uninteresting when invoked this way.
+              local fn = m.SetOnTextCopiedCallback
+              assertEquals('function', type(fn))
+              return {
+                isluafunc = function()
+                  assertEquals(true, (pcall(coroutine.create, fn)))
+                end,
+                nowrapping = function()
+                  local f = CreateFrame('ScrollingMessageFrame')
+                  local arg = function() end
+                  fn(f, arg)
+                  assertEquals(arg, f.onTextCopiedCallback)
+                end,
+              }
+            end,
+            metatable = function()
+              assertEquals('number', type(getmetatable(m)))
+            end,
+            type = function()
+              assertEquals('table', type(m))
+            end,
+          }
+        end,
+        fn = function()
+          local f = CreateFrame('ScrollingMessageFrame')
+          local fn = f.SetOnTextCopiedCallback
+          assertEquals('function', type(fn))
+          return {
+            notluafunc = function()
+              assertEquals(false, (pcall(coroutine.create, fn)))
+            end,
+            wrapsarg = function()
+              local called
+              local arg = function()
+                called = true
+              end
+              fn(f, arg)
+              local cb = f.onTextCopiedCallback
+              assertEquals('function', type(cb))
+              return {
+                func = function() end,
+                notluafunc = function()
+                  assertEquals(false, (pcall(coroutine.create, cb)))
+                end,
+                notsame = function()
+                  assertEquals(false, cb == arg)
+                end,
+                set = function()
+                  assertEquals(false, cb == nil)
+                end,
+                wrapped = function()
+                  called = false
+                  cb()
+                  assertEquals(true, called)
+                end,
+              }
+            end,
+          }
+        end,
+      }
+    end,
+
     WorldFrame = function()
       return {
         ['is a normal frame'] = function()
