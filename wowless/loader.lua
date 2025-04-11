@@ -12,6 +12,7 @@ local function loader(api, cfg)
   local intrinsics = {}
   local readFile = util.readfile
   local bindings = {}
+  local securemixins = {}
 
   local xmlimpls = (function()
     local tree = datalua.xml
@@ -389,7 +390,25 @@ local function loader(api, cfg)
       securemixin = function(ctx, obj, value)
         local env = ctx.useAddonEnv and addonEnv or ctx.useSecureEnv and api.secureenv or api.env
         for _, m in ipairs(value) do
-          mixin(obj.luarep, env[m])
+          local mv = env[m]
+          local sm = securemixins[mv]
+          if not sm then
+            local vv = {}
+            for k, v in pairs(mv) do
+              vv[k] = v
+              mv[k] = nil
+            end
+            setmetatable(mv, {
+              __index = vv,
+              __metatable = 0,
+            })
+            sm = {}
+            for k, v in pairs(vv) do
+              sm[k] = type(v) == 'function' and debug.newsecurefunction(v) or v
+            end
+            securemixins[mv] = sm
+          end
+          mixin(obj.luarep, sm)
         end
       end,
       setallpoints = function(_, obj, value)

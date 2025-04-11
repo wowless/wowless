@@ -4,6 +4,7 @@ local assertEquals = _G.assertEquals
 
 local check0 = G.check0
 local check1 = G.check1
+local check2 = G.check2
 local check4 = G.check4
 
 local function checkStateMachine(states, transitions, init)
@@ -570,6 +571,110 @@ G.testsuite.sync = function()
       }, '\n')
       assertEquals(expected, table.concat(log, '\n'))
     end,
+
+    ScrollingMessageFrame = function()
+      if _G.__wowless and _G.__wowless.lite then
+        return
+      end
+      return {
+        mixin = function()
+          local m = _G.ScrollingMessageFrameMixin
+          return {
+            empty = function()
+              check1(nil, next(m))
+            end,
+            fn = function()
+              -- The function is uninteresting when invoked this way.
+              local fn = m.SetOnTextCopiedCallback
+              assertEquals('function', type(fn))
+              return {
+                isluafunc = function()
+                  assertEquals(true, (pcall(coroutine.create, fn)))
+                end,
+                nowrapping = function()
+                  local f = CreateFrame('ScrollingMessageFrame')
+                  local arg = function() end
+                  fn(f, arg)
+                  assertEquals(arg, f.onTextCopiedCallback)
+                end,
+              }
+            end,
+            metatable = function()
+              return {
+                call = function()
+                  assertEquals(false, (pcall(m)))
+                end,
+                index = function()
+                  assertEquals(nil, m.wowless)
+                  m.wowless = 'moo'
+                  assertEquals('moo', m.wowless)
+                  check2('wowless', 'moo', next(m))
+                  assertEquals(nil, CreateFrame('ScrollingMessageFrame').wowless)
+                  m.wowless = nil
+                  assertEquals(nil, m.wowless)
+                  check1(nil, next(m))
+                end,
+                overwrite = function()
+                  local called
+                  local function cb()
+                    called = true
+                  end
+                  m.SetOnTextCopiedCallback = cb
+                  assertEquals(cb, m.SetOnTextCopiedCallback)
+                  check2('SetOnTextCopiedCallback', cb, next(m))
+                  CreateFrame('ScrollingMessageFrame'):SetOnTextCopiedCallback(function() end)
+                  assertEquals(nil, called)
+                  m.SetOnTextCopiedCallback = nil
+                  check1(nil, next(m))
+                end,
+                type = function()
+                  assertEquals('number', type(getmetatable(m)))
+                end,
+              }
+            end,
+            type = function()
+              assertEquals('table', type(m))
+            end,
+          }
+        end,
+        fn = function()
+          local f = CreateFrame('ScrollingMessageFrame')
+          local fn = f.SetOnTextCopiedCallback
+          assertEquals('function', type(fn))
+          return {
+            notluafunc = function()
+              assertEquals(false, (pcall(coroutine.create, fn)))
+            end,
+            wrapsarg = function()
+              local called
+              local arg = function()
+                called = true
+              end
+              fn(f, arg)
+              local cb = f.onTextCopiedCallback
+              assertEquals('function', type(cb))
+              return {
+                notluafunc = function()
+                  assertEquals(false, (pcall(coroutine.create, cb)))
+                end,
+                notsame = function()
+                  assertEquals(false, cb == arg)
+                end,
+                set = function()
+                  assertEquals(false, cb == nil)
+                end,
+                wrapped = function()
+                  called = false
+                  cb()
+                  assertEquals(true, called)
+                end,
+              }
+            end,
+          }
+        end,
+      }
+    end,
+
     WorldFrame = function()
       return {
         ['is a normal frame'] = function()

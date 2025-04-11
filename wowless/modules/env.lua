@@ -1,6 +1,11 @@
 return function(api)
   local env = api.env
   return {
+    getfenv = function(arg)
+      local narg = tonumber(arg)
+      local fenv = getfenv(narg and narg + 4 or arg)
+      return fenv == _G and env or fenv
+    end,
     GetCurrentEnvironment = function()
       -- getfenv(2) but accounting for the api loading stack
       return getfenv(6)

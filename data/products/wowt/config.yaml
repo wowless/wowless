@@ -71,6 +71,7 @@ runner:
     GUILD_INVITE: {}
     GUILD_UNINVITE: {}
     PTRFEEDBACK: {}
+    TABLEINSPECT: {}
     USERANDOM: {}
 runtime:
   warners:

@@ -180,8 +180,7 @@ GetClickFrame:
 GetCurrentEnvironment:
   module: env
 getfenv:
-  frameworks:
-  - env
+  module: env
 GetFontStringMetatable:
   frameworks:
   - api

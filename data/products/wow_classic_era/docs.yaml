@@ -8,6 +8,7 @@ lies:
     C_BattleNet.InstallHighResTextures:
       inputs: {}
       outputs: {}
+mayreturnnothing: true
 script_objects:
   FrameAPICharacterModelBase: PlayerModel
   FrameAPICinematicModel: CinematicModel
@@ -62,6 +63,7 @@ script_objects:
   SimpleTextureAPI: Texture
   SimpleTextureBaseAPI: TextureBase
 skip_docfiles:
+  AuctionHouseDocumentation: {}
   BarberShopInternalDocumentation: {}
   ConfigurationWarningsDocumentation: {}
   DebugToggleDocumentation: {}
@@ -87,6 +89,7 @@ typedefs:
   FileAsset: string
   fileID: number
   FilterMode: string
+  FontAlphabet: string
   HTMLTextType: string
   IDOrLink: string
   InsertMode: string
@@ -104,6 +107,7 @@ typedefs:
   normalizedValue: number
   NotificationDbId: string
   number: number
+  QuestObjectiveType: number
   RecruitAcceptanceID: string
   ScriptObject: UIObject
   ScriptRegion: table

@@ -68,6 +68,7 @@ runner:
     EVENT: {}
     GUILD_INVITE: {}
     GUILD_UNINVITE: {}
+    TABLEINSPECT: {}
     USERANDOM: {}
 runtime:
   warners:

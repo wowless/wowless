@@ -102,10 +102,7 @@ local function loadFunctions(api, loader)
         end
         local n = select('#', ...)
         for i = 1, n do
-          local v = select(i, ...)
-          if i then
-            t[nspecials + i] = v
-          end
+          t[nspecials + i] = select(i, ...)
         end
         return basefn(unpack(t, 1, nspecials + n))
       end
@@ -156,7 +153,7 @@ local function loadFunctions(api, loader)
       return outfn
     else
       edepth = edepth + 1
-      return debug.newsecurefunction(bubblewrap(outfn))
+      return debug.newcfunction(bubblewrap(outfn))
     end
   end
 
@@ -168,7 +165,7 @@ local function loadFunctions(api, loader)
     elseif apicfg.stdlib then
       local v = assert(util.tget(_G, apicfg.stdlib))
       if apicfg.nowrap == false then
-        v = debug.newsecurefunction(v)
+        v = debug.newcfunction(v)
       end
       util.tset(fns, fn, v)
     else
