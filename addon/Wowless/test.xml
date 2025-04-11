@@ -687,7 +687,7 @@
     <Scripts>
       <OnLoad>
         assertEquals('moo', self.cow)
-        assertEquals(WowlessSecureMixin.fn, self.fn)
+        assertEquals(not _G.__wowless, WowlessSecureMixin.fn == self.fn) -- issue #403
       </OnLoad>
     </Scripts>
   </Frame>

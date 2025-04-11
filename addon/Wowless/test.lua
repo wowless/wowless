@@ -573,7 +573,7 @@ G.testsuite.sync = function()
     end,
 
     ScrollingMessageFrame = function()
-      if _G.__wowless then -- TODO limit to lite, issue #402
+      if _G.__wowless and _G.__wowless.lite then
         return
       end
       return {
