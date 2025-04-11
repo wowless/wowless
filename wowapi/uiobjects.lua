@@ -45,7 +45,7 @@ local function mkBaseUIObjectTypes(api)
     for k, v in pairs(result) do
       local sandboxIndex = {}
       for n, f in pairs(v.metaindex) do
-        sandboxIndex[n] = debug.newsecurefunction(function(obj, ...)
+        sandboxIndex[n] = debug.newcfunction(function(obj, ...)
           return f(api.UserData(obj), ...)
         end)
       end
