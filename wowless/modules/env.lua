@@ -3,7 +3,7 @@ return function(api)
   return {
     getfenv = function(arg)
       local narg = tonumber(arg)
-      local fenv = getfenv(narg and narg + 4 or arg)
+      local fenv = getfenv(narg and narg + 5 or arg)
       return fenv == _G and env or fenv
     end,
     GetCurrentEnvironment = function()
