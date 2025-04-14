@@ -675,6 +675,34 @@ G.testsuite.sync = function()
       }
     end,
 
+    SimpleCheckout = function()
+      if _G.__wowless then -- scope to lite, issue #405
+        return
+      end
+      local forbidden = _G.SimpleCheckout
+      assertEquals(true, forbidden:IsForbidden())
+      local normal = CreateFrame('Checkout')
+      return {
+        metatable = function()
+          assertEquals('Forbidden', getmetatable(forbidden))
+        end,
+        methods = function()
+          local t = {}
+          for k, v in pairs(getmetatable(normal).__index) do
+            t[k] = function()
+              assertEquals(false, forbidden[k] == nil)
+              assertEquals(false, forbidden[k] == v)
+            end
+          end
+          return t
+        end,
+        userdata = function()
+          assertEquals('userdata', type(forbidden[0]))
+          assertEquals(false, forbidden[0] == normal[0])
+        end,
+      }
+    end,
+
     WorldFrame = function()
       return {
         ['is a normal frame'] = function()
