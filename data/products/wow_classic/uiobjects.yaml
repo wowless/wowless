@@ -2434,6 +2434,11 @@ Frame:
         type: number
     GetRegions:
       impl: Frame/GetRegions
+      inputs: {}
+      outputs:
+      - name: scriptObject
+        type: UIObject
+      outstride: 1
     GetResizeBounds:
       getter:
       - name: minResizeWidth
