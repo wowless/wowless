@@ -4639,6 +4639,11 @@ Region:
       - name: mouseWheelEnabled
     GetAnimationGroups:
       impl: Region/GetAnimationGroups
+      inputs: {}
+      outputs:
+      - name: scriptObject
+        type: UIObject
+      outstride: 1
     GetBottom:
       getter:
       - name: bottom
