@@ -2364,6 +2364,11 @@ Frame:
         type: number
     GetChildren:
       impl: Frame/GetChildren
+      inputs: {}
+      outputs:
+      - name: scriptObject
+        type: UIObject
+      outstride: 1
     GetClampRectInsets:
       inputs: {}
       outputs:
