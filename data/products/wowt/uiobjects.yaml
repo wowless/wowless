@@ -2974,6 +2974,12 @@ GameTooltip:
     GetPadding: {}
     IsOwned:
       impl: GameTooltip/IsOwned
+      inputs:
+      - name: frame
+        type: Frame
+      outputs:
+      - name: isOwned
+        type: boolean
     NumLines:
       getter:
       - name: tooltipLines

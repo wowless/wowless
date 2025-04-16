@@ -2702,6 +2702,12 @@ GameTooltip:
     IsEquippedItem: {}
     IsOwned:
       impl: GameTooltip/IsOwned
+      inputs:
+      - name: frame
+        type: Frame
+      outputs:
+      - name: isOwned
+        type: boolean
     IsUnit: {}
     NumLines:
       getter:
