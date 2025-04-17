@@ -12,17 +12,32 @@ static int sandbox_create(lua_State *L) {
 }
 
 static int sandbox_dostring(lua_State *L) {
-  lua_settop(L, 2);
   lua_State *S = *(lua_State **)luaL_checkudata(L, 1, UD);
   const char *str = luaL_checkstring(L, 2);
+  lua_settop(L, 0);
   if (luaL_dostring(S, str) == 0) {
+    int top = lua_gettop(S);
+    for (int i = 1; i <= top; ++i) {
+      switch (lua_type(S, i)) {
+        case LUA_TNUMBER:
+          lua_pushnumber(L, lua_tonumber(S, i));
+          break;
+        case LUA_TSTRING:
+          lua_pushstring(L, lua_tostring(S, i));
+          break;
+        default:
+          lua_pushnil(L);
+          break;
+      }
+    }
     lua_settop(S, 0);
+    return top;
   } else {
     lua_pushstring(L, lua_tostring(S, 1));
     lua_settop(S, 0);
     lua_error(L);
+    return 0;
   }
-  return 0;
 }
 
 int luaopen_wowless_sandbox(lua_State *L) {
