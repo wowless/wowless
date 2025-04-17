@@ -195,7 +195,8 @@ local function loader(api, cfg)
   local function navigate(obj, key)
     for _, p in ipairs({ strsplit('.', key) }) do
       if p == '$parent' or p == '$parentKey' then
-        obj = obj:GetParent()
+        local ud = api.UserData(obj)
+        obj = ud.parent and ud.parent.luarep
       else
         if not obj[p] then
           api.log(1, 'invalid relativeKey %q', key)
@@ -214,7 +215,7 @@ local function loader(api, cfg)
       if anchor.attr.relativeto then
         relativeTo = api.ParentSub(anchor.attr.relativeto, parent.parent)
       elseif anchor.attr.relativekey then
-        relativeTo = navigate(parent, anchor.attr.relativekey)
+        relativeTo = navigate(parent and parent.luarep, anchor.attr.relativekey)
       else
         relativeTo = parent.parent and parent.parent.luarep
       end
