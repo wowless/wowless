@@ -195,7 +195,8 @@ local function loader(api, cfg)
   local function navigate(obj, key)
     for _, p in ipairs({ strsplit('.', key) }) do
       if p == '$parent' or p == '$parentKey' then
-        obj = obj:GetParent()
+        local ud = api.UserData(obj)
+        obj = ud.parent and ud.parent.luarep
       else
         if not obj[p] then
           api.log(1, 'invalid relativeKey %q', key)
@@ -214,7 +215,7 @@ local function loader(api, cfg)
       if anchor.attr.relativeto then
         relativeTo = api.ParentSub(anchor.attr.relativeto, parent.parent)
       elseif anchor.attr.relativekey then
-        relativeTo = navigate(parent, anchor.attr.relativekey)
+        relativeTo = navigate(parent and parent.luarep, anchor.attr.relativekey)
       else
         relativeTo = parent.parent and parent.parent.luarep
       end
@@ -282,7 +283,7 @@ local function loader(api, cfg)
     maskedtexture = function(_, e, parent)
       local t = navigate(parent.parent and parent.parent.luarep, e.attr.childkey)
       if t then
-        t:AddMaskTexture(parent)
+        api.UserData(t):AddMaskTexture(parent)
       else
         api.log(1, 'cannot find maskedtexture childkey ' .. e.attr.childkey)
       end
