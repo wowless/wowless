@@ -1086,6 +1086,7 @@ lua2c(
   wowapi.loader=${CMAKE_CURRENT_SOURCE_DIR}/wowapi/loader.lua
   wowapi.uiobjects=${CMAKE_CURRENT_SOURCE_DIR}/wowapi/uiobjects.lua
   wowless.api=${CMAKE_CURRENT_SOURCE_DIR}/wowless/api.lua
+  wowless.bubblewrap=${CMAKE_CURRENT_SOURCE_DIR}/wowless/bubblewrap.lua
   wowless.env=${CMAKE_CURRENT_SOURCE_DIR}/wowless/env.lua
   wowless.ext=c
   wowless.funcheck=${CMAKE_CURRENT_SOURCE_DIR}/wowless/funcheck.lua

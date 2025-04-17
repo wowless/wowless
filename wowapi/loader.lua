@@ -64,7 +64,7 @@ local function loadFunctions(api, loader)
     loader = loader,
   }
 
-  local bubblewrap = require('wowless.util').bubblewrap
+  local bubblewrap = require('wowless.bubblewrap')
   local typechecker = require('wowless.typecheck')(api)
   local funchecker = require('wowless.funcheck')(typechecker)
 
