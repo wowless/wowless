@@ -309,6 +309,7 @@ table.insert(builds, {
     'spec/wowless/blp_spec.lua',
     'spec/wowless/hlist_spec.lua',
     'spec/wowless/png_spec.lua',
+    'spec/wowless/sandbox_spec.lua',
     'spec/wowless/toc_spec.lua',
     'spec/wowless/typecheck_spec.lua',
     'spec/wowless/util_spec.lua',
