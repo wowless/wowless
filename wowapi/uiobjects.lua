@@ -143,7 +143,8 @@ local function mkBaseUIObjectTypes(api)
         end
       end
       local mtext = method.impl or method
-      local fn = wrap(mname, wrapstrfn(mtext, fname, 'api,toTexture,check', api, toTexture, check))
+      local src = method.src and ('@' .. method.src) or fname
+      local fn = wrap(mname, wrapstrfn(mtext, src, 'api,toTexture,check', api, toTexture, check))
       mixin[mname] = checkOutputs(checkInputs(fn))
     end
     uiobjects[name] = {
