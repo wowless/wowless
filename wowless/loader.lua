@@ -283,7 +283,7 @@ local function loader(api, cfg)
     maskedtexture = function(_, e, parent)
       local t = navigate(parent.parent and parent.parent.luarep, e.attr.childkey)
       if t then
-        t:AddMaskTexture(parent)
+        api.UserData(t):AddMaskTexture(parent)
       else
         api.log(1, 'cannot find maskedtexture childkey ' .. e.attr.childkey)
       end
