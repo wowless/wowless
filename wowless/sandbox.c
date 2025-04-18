@@ -1,11 +1,13 @@
 #include <lauxlib.h>
 #include <lua.h>
+#include <lualib.h>
 
 static const char UD[] = "wowless-sandbox";
 
 static int sandbox_create(lua_State *L) {
   lua_State **S = (lua_State **)lua_newuserdata(L, sizeof(lua_State *));
   *S = luaL_newstate();
+  luaL_openlibsx(*S, LUALIB_ELUNE);
   luaL_getmetatable(L, UD);
   lua_setmetatable(L, -2);
   return 1;
@@ -29,6 +31,9 @@ static int sandbox_dostring(lua_State *L) {
     int top = lua_gettop(S);
     for (int i = 1; i <= top; ++i) {
       switch (lua_type(S, i)) {
+        case LUA_TBOOLEAN:
+          lua_pushboolean(L, lua_toboolean(S, i));
+          break;
         case LUA_TNUMBER:
           lua_pushnumber(L, lua_tonumber(S, i));
           break;
