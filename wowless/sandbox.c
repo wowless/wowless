@@ -11,8 +11,18 @@ static int sandbox_create(lua_State *L) {
   return 1;
 }
 
+static lua_State *sandbox_check(lua_State *L, int idx) {
+  return *(lua_State **)luaL_checkudata(L, idx, UD);
+}
+
+static int sandbox_destroy(lua_State *L) {
+  lua_State *S = sandbox_check(L, 1);
+  lua_close(S);
+  return 0;
+}
+
 static int sandbox_dostring(lua_State *L) {
-  lua_State *S = *(lua_State **)luaL_checkudata(L, 1, UD);
+  lua_State *S = sandbox_check(L, 1);
   const char *str = luaL_checkstring(L, 2);
   lua_settop(L, 0);
   if (luaL_dostring(S, str) == 0) {
@@ -46,6 +56,8 @@ int luaopen_wowless_sandbox(lua_State *L) {
     lua_pushcfunction(L, sandbox_dostring);
     lua_setfield(L, -2, "dostring");
     lua_setfield(L, -2, "__index");
+    lua_pushcfunction(L, sandbox_destroy);
+    lua_setfield(L, -2, "__gc");
     lua_pushstring(L, UD);
     lua_setfield(L, -2, "__metatable");
     lua_pop(L, 1);
