@@ -1,8 +1,8 @@
 ---
-build: '60142'
-date: Apr  3 2025
+build: '60192'
+date: Apr  7 2025
 flavor: Cata
-hash: c5cda7a89e23b18b805ec3f559d39993
+hash: fba9ec18b5ed14f979a3f29ba49d1442
 test: false
 tocversion: 40402
 version: 4.4.2

@@ -229,7 +229,7 @@ local function new(log, maxErrors, product)
       obj:SetID(id)
     end
     RunScript(ud, 'OnLoad')
-    if InheritsFrom(typename, 'region') and obj:IsVisible() then
+    if InheritsFrom(typename, 'region') and ud:IsVisible() then
       RunScript(ud, 'OnShow')
     end
     return ud
@@ -316,6 +316,7 @@ local function new(log, maxErrors, product)
   local modulenames = {
     'calendar',
     'cvars',
+    'datetime',
     'events',
     'env',
     'macrotext',
