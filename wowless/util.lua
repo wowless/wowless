@@ -83,7 +83,24 @@ local function tset(t, s, v)
   return t
 end
 
+local function bubblewrapup(success, ...)
+  debug.settaintmode('rw')
+  if success then
+    return ...
+  else
+    error(...)
+  end
+end
+
+local function bubblewrap(fn)
+  return function(...)
+    debug.settaintmode('disabled')
+    return bubblewrapup(pcall(fn, ...))
+  end
+end
+
 return {
+  bubblewrap = bubblewrap,
   mixin = mixin,
   readfile = readfile,
   tget = tget,

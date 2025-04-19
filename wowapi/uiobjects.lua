@@ -1,5 +1,6 @@
 local util = require('wowless.util')
 local Mixin = util.mixin
+local bubblewrap = util.bubblewrap
 local hlist = require('wowless.hlist')
 
 local function mkBaseUIObjectTypes(api)
@@ -145,7 +146,7 @@ local function mkBaseUIObjectTypes(api)
       local mtext = method.impl or method
       local src = method.src and ('@' .. method.src) or fname
       local fn = wrap(mname, wrapstrfn(mtext, src, 'api,toTexture,check', api, toTexture, check))
-      mixin[mname] = checkOutputs(checkInputs(fn))
+      mixin[mname] = bubblewrap(checkOutputs(checkInputs(fn)))
     end
     uiobjects[name] = {
       cfg = cfg,
