@@ -316,6 +316,7 @@ local function new(log, maxErrors, product)
   local modulenames = {
     'calendar',
     'cvars',
+    'datetime',
     'events',
     'env',
     'macrotext',

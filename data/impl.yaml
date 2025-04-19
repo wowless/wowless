@@ -50,12 +50,11 @@ C_CVar.RegisterCVar:
 C_CVar.SetCVar:
   module: cvars
 C_DateAndTime.AdjustTimeByDays:
-  frameworks:
-  - datalua
+  module: datetime
 C_DateAndTime.AdjustTimeByMinutes:
-  frameworks:
-  - datalua
-C_DateAndTime.CompareCalendarTime: {}
+  module: datetime
+C_DateAndTime.CompareCalendarTime:
+  module: datetime
 C_EventUtils.IsEventValid:
   function: IsEventValid
   module: events
