@@ -64,7 +64,6 @@ runner:
     GUILD_INVITE: {}
     GUILD_UNINVITE: {}
     LOOT_MASTER: {}
-    TABLEINSPECT: {}
     USERANDOM: {}
 runtime:
   warners:
