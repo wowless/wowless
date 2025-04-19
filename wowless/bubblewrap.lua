@@ -1,6 +1,6 @@
-local function bubblewrapup(stacktaint, success, ...)
+local function bubblewrapup(taintmode, stacktaint, success, ...)
   debug.setstacktaint(stacktaint)
-  debug.settaintmode('rw')
+  debug.settaintmode(taintmode)
   if success then
     return ...
   else
@@ -10,10 +10,11 @@ end
 
 local function bubblewrap(fn)
   return function(...)
+    local taintmode = debug.gettaintmode()
     debug.settaintmode('disabled')
     local stacktaint = debug.getstacktaint()
     debug.setstacktaint(nil)
-    return bubblewrapup(stacktaint, pcall(fn, ...))
+    return bubblewrapup(taintmode, stacktaint, pcall(fn, ...))
   end
 end
 
