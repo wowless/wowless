@@ -2621,6 +2621,11 @@ Frame:
         type: number
     GetChildren:
       impl: Frame/GetChildren
+      inputs: {}
+      outputs:
+      - name: scriptObject
+        type: UIObject
+      outstride: 1
     GetClampRectInsets:
       inputs: {}
       outputs:
@@ -2686,6 +2691,11 @@ Frame:
         type: number
     GetRegions:
       impl: Frame/GetRegions
+      inputs: {}
+      outputs:
+      - name: scriptObject
+        type: UIObject
+      outstride: 1
     GetResizeBounds:
       getter:
       - name: minResizeWidth
@@ -2964,6 +2974,12 @@ GameTooltip:
     GetPadding: {}
     IsOwned:
       impl: GameTooltip/IsOwned
+      inputs:
+      - name: frame
+        type: Frame
+      outputs:
+      - name: isOwned
+        type: boolean
     NumLines:
       getter:
       - name: tooltipLines
@@ -4629,6 +4645,11 @@ Region:
       - name: mouseWheelEnabled
     GetAnimationGroups:
       impl: Region/GetAnimationGroups
+      inputs: {}
+      outputs:
+      - name: scriptObject
+        type: UIObject
+      outstride: 1
     GetBottom:
       getter:
       - name: bottom

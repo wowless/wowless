@@ -83,22 +83,6 @@ local function tset(t, s, v)
   return t
 end
 
-local function calendarTimeToDate(ct)
-  return require('date')(ct.year, ct.month, ct.monthDay, ct.hour, ct.minute)
-end
-
-local function dateToCalendarTime(datalua, d)
-  return {
-    day = datalua.build.flavor ~= 'Mainline' and 0 or nil,
-    hour = d:gethours(),
-    minute = d:getminutes(),
-    month = d:getmonth(),
-    monthDay = d:getday(),
-    weekday = d:getweekday(),
-    year = d:getyear(),
-  }
-end
-
 local function bubblewrapup(success, ...)
   debug.settaintmode('rw')
   if success then
@@ -117,8 +101,6 @@ end
 
 return {
   bubblewrap = bubblewrap,
-  calendarTimeToDate = calendarTimeToDate,
-  dateToCalendarTime = dateToCalendarTime,
   mixin = mixin,
   readfile = readfile,
   tget = tget,
