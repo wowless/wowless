@@ -85,17 +85,29 @@ local function new(log, maxErrors, product)
     end
   end
 
+  local function assertHostMode()
+    local tm = debug.gettaintmode()
+    if tm ~= 'disabled' then
+      error(('wowless bug: host taint mode %q'):format(tm))
+    end
+    local st = debug.getstacktaint()
+    if st ~= nil then
+      error(('wowless bug: host stack taint %q'):format(st))
+    end
+  end
+
   local function CallSafely(fun, ...)
-    assert(issecure(), 'wowless bug: must enter CallSafely securely')
+    assertHostMode()
     assert(getfenv(fun) == _G, 'wowless bug: expected framework function')
     xpcall(fun, ErrorHandler, ...)
-    assert(issecure(), 'wowless bug: must leave CallSafely securely')
+    assertHostMode()
   end
 
   local function CallSandbox(fun, ...)
-    assert(issecure(), 'wowless bug: must enter CallSandbox securely')
+    assertHostMode()
     assert(getfenv(fun) ~= _G, 'wowless bug: expected sandbox function')
     securecallfunction(xpcall, fun, ErrorHandler, ...)
+    assertHostMode()
   end
 
   local function GetDebugName(frame)

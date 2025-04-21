@@ -1,6 +1,8 @@
 read_globals = {
   'debug.getfunctionstats',
   'debug.getglobalstats',
+  'debug.getstacktaint',
+  'debug.gettaintmode',
   'debug.gettime',
   'debug.newcfunction',
   'debug.newsecurefunction',
