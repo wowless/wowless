@@ -600,7 +600,7 @@ local function loader(api, cfg)
         end
       end
 
-      return api.CallSafely(function()
+      api.CallSafely(function()
         local root, warnings = parseXml(xmlstr)
         for _, warning in ipairs(warnings) do
           api.log(3, filename .. ': ' .. warning)
