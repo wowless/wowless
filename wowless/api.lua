@@ -96,6 +96,13 @@ local function new(log, maxErrors, product)
     end
   end
 
+  local function assertSandboxMode()
+    local tm = debug.gettaintmode()
+    if tm ~= 'rw' then
+      error(('wowless bug: sandbox taint mode %q'):format(tm))
+    end
+  end
+
   local function CallSafely(fun, ...)
     assertHostMode()
     assert(getfenv(fun) == _G, 'wowless bug: expected framework function')
@@ -106,7 +113,11 @@ local function new(log, maxErrors, product)
   local function CallSandbox(fun, ...)
     assertHostMode()
     assert(getfenv(fun) ~= _G, 'wowless bug: expected sandbox function')
-    securecallfunction(xpcall, fun, ErrorHandler, ...)
+    debug.settaintmode('rw')
+    xpcall(fun, ErrorHandler, ...)
+    assertSandboxMode()
+    debug.settaintmode('disabled')
+    debug.setstacktaint(nil)
     assertHostMode()
   end
 
