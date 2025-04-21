@@ -1,5 +1,5 @@
-return function(api)
-  local defaults = api.datalua.cvars
+return function(datalua)
+  local defaults = datalua.cvars
   local overrides = {}
   local function getEntry(name)
     name = name:lower()
