@@ -88,13 +88,14 @@ local function new(log, maxErrors, product)
   local function CallSafely(fun, ...)
     assert(issecure(), 'wowless bug: must enter CallSafely securely')
     assert(getfenv(fun) == _G, 'wowless bug: expected framework function')
-    return securecallfunction(xpcall, fun, ErrorHandler, ...)
+    xpcall(fun, ErrorHandler, ...)
+    assert(issecure(), 'wowless bug: must leave CallSafely securely')
   end
 
   local function CallSandbox(fun, ...)
     assert(issecure(), 'wowless bug: must enter CallSandbox securely')
     assert(getfenv(fun) ~= _G, 'wowless bug: expected sandbox function')
-    return securecallfunction(xpcall, fun, ErrorHandler, ...)
+    securecallfunction(xpcall, fun, ErrorHandler, ...)
   end
 
   local function GetDebugName(frame)
