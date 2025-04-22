@@ -73,7 +73,7 @@ local function run(cfg)
   api.SendEvent('TRIAL_STATUS_UPDATE')
   api.SendEvent('DISPLAY_SIZE_CHANGED')
   if api.env.UIParent then -- Super duper hack to unblock 10.0 UIPanel code.
-    api.env.UIParent:SetSize(system.GetScreenWidth(), system.GetScreenHeight())
+    api.UserData(api.env.UIParent):SetSize(system.GetScreenWidth(), system.GetScreenHeight())
   end
   api.SendEvent('SPELLS_CHANGED')
   if cfg.debug then
