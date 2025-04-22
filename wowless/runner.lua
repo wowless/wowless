@@ -178,6 +178,7 @@ local function run(cfg)
     macrotext = function()
       local b = api.env.ActionButton1
       if b then
+        b = api.UserData(b)
         b:SetAttribute('type', 'macro')
         b:SetAttribute('macrotext', '/startattack')
         b:Click()
