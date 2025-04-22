@@ -250,7 +250,7 @@ local function new(log, maxErrors, product)
       template.initKids(ud)
     end
     if id then
-      obj:SetID(id)
+      ud:SetID(id)
     end
     RunScript(ud, 'OnLoad')
     if InheritsFrom(typename, 'region') and ud:IsVisible() then
