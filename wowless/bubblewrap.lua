@@ -1,5 +1,3 @@
-local traceback = require('wowless.ext').traceback
-
 -- TODO align with api implementations
 local function assertHostMode()
   local tm = debug.gettaintmode()
@@ -36,7 +34,7 @@ local function bubblewrap(fn)
     debug.settaintmode('disabled')
     local stacktaint = debug.getstacktaint()
     debug.setstacktaint(nil)
-    return bubblewrapup(stacktaint, xpcall(fn, traceback, ...))
+    return bubblewrapup(stacktaint, pcall(fn, ...))
   end
 end
 
