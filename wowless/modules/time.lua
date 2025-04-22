@@ -56,7 +56,7 @@ return function(api)
       if not state[p].cancelled and count < iterations then
         local np = newproxy(p)
         state[np] = state[p]
-        callback(np)
+        api.CallSandbox(callback, np)
         count = count + 1
         addTimer(seconds, cb)
       end
