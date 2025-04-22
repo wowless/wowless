@@ -4,5 +4,5 @@ return (function(self, atlas)
     t = self:CreateTexture()
     self:SetDisabledTexture(t)
   end
-  t:SetAtlas(atlas)
+  api.UserData(t):SetAtlas(atlas)
 end)(...)
