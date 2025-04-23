@@ -64,6 +64,7 @@ local function loadFunctions(api, loader)
     loader = loader,
   }
 
+  local bubblewrap = require('wowless.bubblewrap')
   local typechecker = require('wowless.typecheck')(api)
   local funchecker = require('wowless.funcheck')(typechecker)
 
@@ -71,7 +72,7 @@ local function loadFunctions(api, loader)
     return util.mixin(t, api.env[name])
   end
 
-  local function mkfn(fname, apicfg)
+  local function mkfn(fname, apicfg, nowrap)
     local basefn
     if apicfg.stub then
       local text = ('local Mixin = ...; return function() %s end'):format(apicfg.stub)
@@ -148,14 +149,15 @@ local function loadFunctions(api, loader)
       end
     end
 
-    if apicfg.nowrap then
+    if nowrap or apicfg.nowrap then
       return outfn
     else
-      edepth = edepth + 1
-      return debug.newcfunction(outfn)
+      edepth = edepth + 2
+      return debug.newcfunction(bubblewrap(outfn))
     end
   end
 
+  local rawfns = {}
   local fns = {}
   local aliases = {}
   for fn, apicfg in pairs(apis) do
@@ -163,19 +165,19 @@ local function loadFunctions(api, loader)
       aliases[fn] = apicfg.alias
     elseif apicfg.stdlib then
       local v = assert(util.tget(_G, apicfg.stdlib))
-      if apicfg.nowrap == false then
-        v = debug.newcfunction(v)
-      end
-      util.tset(fns, fn, v)
+      util.tset(fns, fn, apicfg.nowrap == false and debug.newcfunction(v) or v)
+      util.tset(rawfns, fn, v)
     else
       util.tset(fns, fn, mkfn(fn, apicfg))
+      util.tset(rawfns, fn, mkfn(fn, apicfg, true))
     end
   end
   for k, v in pairs(aliases) do
     util.tset(fns, k, util.tget(fns, v))
+    util.tset(rawfns, k, util.tget(rawfns, v))
   end
   api.log(1, 'functions loaded')
-  return fns
+  return fns, rawfns
 end
 
 return {

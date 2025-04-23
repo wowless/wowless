@@ -1,4 +1,5 @@
 local util = require('wowless.util')
+local bubblewrap = require('wowless.bubblewrap')
 local Mixin = util.mixin
 local hlist = require('wowless.hlist')
 
@@ -44,9 +45,9 @@ local function mkBaseUIObjectTypes(api)
     for k, v in pairs(result) do
       local sandboxIndex = {}
       for n, f in pairs(v.metaindex) do
-        sandboxIndex[n] = debug.newcfunction(function(obj, ...)
+        sandboxIndex[n] = debug.newcfunction(bubblewrap(function(obj, ...)
           return f(api.UserData(obj), ...)
-        end)
+        end))
       end
       t[k] = {
         constructor = v.constructor,

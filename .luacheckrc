@@ -8,6 +8,8 @@ read_globals = {
   'debug.newsecurefunction',
   'debug.setnewclosuretaint',
   'debug.setprofilingenabled',
+  'debug.setstacktaint',
+  'debug.settaintmode',
   'forceinsecure',
   'hooksecurefunc',
   'issecure',
