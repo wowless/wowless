@@ -166,14 +166,7 @@ local function loader(api, cfg)
       local args = xmlimpls[string.lower(script.type)].tag.script.args or 'self, ...'
       local fnstr = 'return function(' .. args .. ') ' .. script.text .. ' end'
       local outfn = loadstr(fnstr, filename, script.line)
-      -- TODO do this properly
-      assert(debug.gettaintmode() == 'disabled')
-      assert(debug.getstacktaint() == nil)
-      debug.settaintmode('rw')
-      local success, ret = pcall(outfn)
-      assert(debug.gettaintmode() == 'rw')
-      debug.settaintmode('disabled')
-      debug.setstacktaint(nil)
+      local success, ret = api.CallSandbox(outfn)
       assert(success)
       fn = setfenv(ret, env)
       scriptCache[env] = scriptCache[env] or {}

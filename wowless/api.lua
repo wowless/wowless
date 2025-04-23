@@ -110,15 +110,19 @@ local function new(log, maxErrors, product)
     assertHostMode()
   end
 
-  local function CallSandbox(fun, ...)
-    assertHostMode()
-    assert(getfenv(fun) ~= _G, 'wowless bug: expected sandbox function')
-    debug.settaintmode('rw')
-    xpcall(fun, ErrorHandler, ...)
+  local function postSandbox(...)
     assertSandboxMode()
     debug.settaintmode('disabled')
     debug.setstacktaint(nil)
     assertHostMode()
+    return ...
+  end
+
+  local function CallSandbox(fun, ...)
+    assertHostMode()
+    assert(getfenv(fun) ~= _G, 'wowless bug: expected sandbox function')
+    debug.settaintmode('rw')
+    return postSandbox(xpcall(fun, ErrorHandler, ...))
   end
 
   local function GetDebugName(frame)
