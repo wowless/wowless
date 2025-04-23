@@ -103,11 +103,15 @@ local function new(log, maxErrors, product)
     assertHostMode()
   end
 
+  local function postSandbox(...)
+    assertHostMode()
+    return ...
+  end
+
   local function CallSandbox(fun, ...)
     assertHostMode()
     assert(getfenv(fun) ~= _G, 'wowless bug: expected sandbox function')
-    securecallfunction(xpcall, fun, ErrorHandler, ...)
-    assertHostMode()
+    return postSandbox(securecallfunction(xpcall, fun, ErrorHandler, ...))
   end
 
   local function GetDebugName(frame)

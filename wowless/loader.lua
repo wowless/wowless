@@ -154,7 +154,9 @@ local function loader(api, cfg)
       local args = xmlimpls[string.lower(script.type)].tag.script.args or 'self, ...'
       local fnstr = 'return function(' .. args .. ') ' .. script.text .. ' end'
       local outfn = loadstr(fnstr, filename, script.line)
-      fn = setfenv(outfn(), env)
+      local success, ret = api.CallSandbox(outfn)
+      assert(success)
+      fn = setfenv(ret, env)
       scriptCache[env] = scriptCache[env] or {}
       scriptCache[env][script] = fn
     end
