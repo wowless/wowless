@@ -93,8 +93,20 @@ local function loader(api, cfg)
   end
 
   local function loadstr(str, filename, line)
-    local pre = line and string.rep('\n', line - 1) or ''
-    return assert(loadstring(pre .. str, '@' .. path.normalize(filename):gsub('/', '\\')))
+    local function doload()
+      local pre = line and string.rep('\n', line - 1) or ''
+      return loadstring(pre .. str, '@' .. path.normalize(filename):gsub('/', '\\'))
+    end
+    if filename:find('Wowless') then
+      debug.setstacktaint('Wowless')
+      debug.settaintmode('rw')
+      local fn = doload()
+      debug.settaintmode('disabled')
+      debug.setstacktaint(nil)
+      return assert(fn)
+    else
+      return assert(doload())
+    end
   end
 
   local function getColor(e)
