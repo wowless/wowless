@@ -801,6 +801,16 @@ CAPTUREFRAMES_FAILED:
   payload: {}
 CAPTUREFRAMES_SUCCEEDED:
   payload: {}
+CAUTIONARY_CHANNEL_MESSAGE:
+  payload:
+  - name: confirmNumber
+    type: number
+CAUTIONARY_CHAT_MESSAGE:
+  payload:
+  - name: chatLineID
+    type: number
+  - name: confirmNumber
+    type: number
 CEMETERY_PREFERENCE_UPDATED:
   payload: {}
 CHALLENGE_MODE_COMPLETED:

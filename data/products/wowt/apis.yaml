@@ -3911,6 +3911,11 @@ C_ChatInfo.CanPlayerSpeakLanguage:
   outputs:
   - name: canSpeakLanguage
     type: boolean
+C_ChatInfo.DropCautionaryChatMessage:
+  inputs:
+  - name: confirmNumber
+    type: number
+  outputs: {}
 C_ChatInfo.GetChannelInfoFromIdentifier:
   inputs:
   - name: channelIdentifier
@@ -4183,6 +4188,11 @@ C_ChatInfo.SendAddonMessageLogged:
     nilable: true
     type:
       enum: SendAddonMessageResult
+C_ChatInfo.SendCautionaryChatMessage:
+  inputs:
+  - name: confirmNumber
+    type: number
+  outputs: {}
 C_ChatInfo.SwapChatChannelsByChannelIndex:
   inputs:
   - name: firstChannelIndex

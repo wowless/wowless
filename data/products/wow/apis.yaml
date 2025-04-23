@@ -696,6 +696,13 @@ C_AddOns.GetAddOnInfo:
     type: string
   - name: updateAvailable
     type: boolean
+C_AddOns.GetAddOnInterfaceVersion:
+  inputs:
+  - name: name
+    type: uiAddon
+  outputs:
+  - name: interfaceVersion
+    type: number
 C_AddOns.GetAddOnMetadata:
   impl: GetAddOnMetadata
   inputs:
@@ -3904,6 +3911,11 @@ C_ChatInfo.CanPlayerSpeakLanguage:
   outputs:
   - name: canSpeakLanguage
     type: boolean
+C_ChatInfo.DropCautionaryChatMessage:
+  inputs:
+  - name: confirmNumber
+    type: number
+  outputs: {}
 C_ChatInfo.GetChannelInfoFromIdentifier:
   inputs:
   - name: channelIdentifier
@@ -4176,6 +4188,11 @@ C_ChatInfo.SendAddonMessageLogged:
     nilable: true
     type:
       enum: SendAddonMessageResult
+C_ChatInfo.SendCautionaryChatMessage:
+  inputs:
+  - name: confirmNumber
+    type: number
+  outputs: {}
 C_ChatInfo.SwapChatChannelsByChannelIndex:
   inputs:
   - name: firstChannelIndex
@@ -5632,6 +5649,52 @@ C_ClubFinder.ShouldShowClubFinder:
   outputs:
   - name: shouldShow
     type: boolean
+C_ColorOverrides.ClearColorOverrides:
+  inputs: {}
+  outputs: {}
+C_ColorOverrides.GetColorForQuality:
+  inputs:
+  - name: quality
+    type:
+      enum: ItemQuality
+  outputs:
+  - name: color
+    type:
+      structure: colorRGBA
+C_ColorOverrides.GetColorOverrideInfo:
+  inputs:
+  - name: overrideType
+    type:
+      enum: ColorOverride
+  outputs:
+  - name: overrideInfo
+    nilable: true
+    type:
+      structure: C_ColorOverrides.ColorOverrideInfo
+C_ColorOverrides.GetDefaultColorForQuality:
+  inputs:
+  - name: quality
+    type:
+      enum: ItemQuality
+  outputs:
+  - name: color
+    type:
+      structure: colorRGBA
+C_ColorOverrides.RemoveColorOverride:
+  inputs:
+  - name: overrideType
+    type:
+      enum: ColorOverride
+  outputs: {}
+C_ColorOverrides.SetColorOverride:
+  inputs:
+  - name: overrideType
+    type:
+      enum: ColorOverride
+  - name: color
+    type:
+      structure: colorRGBA
+  outputs: {}
 C_Commentator.AddPlayerOverrideName:
   inputs:
   - name: playerName
@@ -7427,6 +7490,29 @@ C_ContributionCollector.IsAwaitingRewardQuestData:
   outputs:
   - name: awaitingData
     type: boolean
+C_CooldownViewer.GetCooldownViewerCategorySet:
+  inputs:
+  - name: category
+    type:
+      enum: CooldownViewerCategory
+  outputs:
+  - name: cooldownIDs
+    type:
+      arrayof: number
+C_CooldownViewer.GetCooldownViewerCooldownInfo:
+  inputs:
+  - name: cooldownID
+    type: number
+  mayreturnnothing: true
+  outputs:
+  - name: cooldownInfo
+    type:
+      structure: C_CooldownViewer.CooldownViewerCooldown
+C_CooldownViewer.IsCooldownViewerAvailable:
+  inputs: {}
+  outputs:
+  - name: available
+    type: boolean
 C_CovenantCallings.AreCallingsUnlocked:
   inputs: {}
   outputs:
@@ -7801,6 +7887,36 @@ C_CreatureInfo.GetClassInfo:
     nilable: true
     type:
       structure: C_CreatureInfo.ClassInfo
+C_CreatureInfo.GetCreatureFamilyIDs:
+  inputs: {}
+  outputs:
+  - name: creatureFamilyIDs
+    type:
+      arrayof: number
+C_CreatureInfo.GetCreatureFamilyInfo:
+  inputs:
+  - name: creatureFamilyID
+    type: number
+  outputs:
+  - name: creatureFamilyInfo
+    nilable: true
+    type:
+      structure: C_CreatureInfo.CreatureFamilyInfo
+C_CreatureInfo.GetCreatureTypeIDs:
+  inputs: {}
+  outputs:
+  - name: creatureTypeIDs
+    type:
+      arrayof: number
+C_CreatureInfo.GetCreatureTypeInfo:
+  inputs:
+  - name: creatureTypeID
+    type: number
+  outputs:
+  - name: creatureTypeInfo
+    nilable: true
+    type:
+      structure: C_CreatureInfo.CreatureTypeInfo
 C_CreatureInfo.GetFactionInfo:
   inputs:
   - name: raceID
@@ -8585,6 +8701,114 @@ C_EditMode.SetActiveLayout:
   - name: activeLayout
     type: number
   outputs: {}
+C_EncodingUtil.CompressString:
+  inputs:
+  - name: source
+    type: string
+  - default: 0
+    name: method
+    type:
+      enum: CompressionMethod
+  - default: 0
+    name: level
+    type:
+      enum: CompressionLevel
+  mayreturnnothing: true
+  outputs:
+  - name: output
+    type: string
+C_EncodingUtil.DecodeBase64:
+  inputs:
+  - name: source
+    type: string
+  - default: 0
+    name: variant
+    type:
+      enum: Base64Variant
+  mayreturnnothing: true
+  outputs:
+  - name: output
+    type: string
+C_EncodingUtil.DecodeHex:
+  inputs:
+  - name: source
+    type: string
+  mayreturnnothing: true
+  outputs:
+  - name: output
+    type: string
+C_EncodingUtil.DecompressString:
+  inputs:
+  - name: source
+    type: string
+  - default: 0
+    name: method
+    type:
+      enum: CompressionMethod
+  mayreturnnothing: true
+  outputs:
+  - name: output
+    type: string
+C_EncodingUtil.DeserializeCBOR:
+  inputs:
+  - name: source
+    type: string
+  outputs:
+  - name: value
+    nilable: true
+    type: table
+C_EncodingUtil.DeserializeJSON:
+  inputs:
+  - name: source
+    type: string
+  outputs:
+  - name: value
+    nilable: true
+    type: table
+C_EncodingUtil.EncodeBase64:
+  inputs:
+  - name: source
+    type: string
+  - default: 0
+    name: variant
+    type:
+      enum: Base64Variant
+  mayreturnnothing: true
+  outputs:
+  - name: output
+    type: string
+C_EncodingUtil.EncodeHex:
+  inputs:
+  - name: source
+    type: string
+  mayreturnnothing: true
+  outputs:
+  - name: output
+    type: string
+C_EncodingUtil.SerializeCBOR:
+  inputs:
+  - name: value
+    nilable: true
+    type: table
+  - name: options
+    nilable: true
+    type:
+      structure: C_EncodingUtil.CBORSerializationOptions
+  outputs:
+  - name: output
+    type: string
+C_EncodingUtil.SerializeJSON:
+  inputs:
+  - name: value
+    nilable: true
+    type: table
+  - name: options
+    nilable: true
+    type:
+      structure: C_EncodingUtil.JSONSerializationOptions
+  outputs:
+  - name: output
+    type: string
 C_EncounterJournal.GetDungeonEntrancesForMap:
   inputs:
   - name: uiMapID
@@ -9216,32 +9440,6 @@ C_FriendList.SortWho:
     type: string
   outputs: {}
 C_FunctionContainers.CreateCallback: {}
-C_GameEnvironmentManager.GetCurrentEventRealmQueues:
-  inputs: {}
-  outputs:
-  - name: gameEnvironment
-    type:
-      enum: EventRealmQueues
-C_GameEnvironmentManager.GetCurrentGameEnvironment:
-  inputs: {}
-  outputs:
-  - name: gameEnvironment
-    type:
-      enum: GameEnvironment
-C_GameEnvironmentManager.RequestGameEnvironment:
-  inputs:
-  - name: gameEnvironment
-    type:
-      enum: GameEnvironment
-  outputs: {}
-C_GameModeManager.GetCurrentGameMode:
-  inputs: {}
-  outputs:
-  - name: gameMode
-    type:
-      enum: GameMode
-C_GameModeManager.GetCurrentGameModeRecordID: {}
-C_GameModeManager.GetGameModeDisplayInfo: {}
 C_GamePad.AddSDLMapping:
   inputs:
   - name: platform
@@ -9398,6 +9596,70 @@ C_GamePad.StickIndexToConfigName:
 C_GamePad.StopVibration:
   inputs: {}
   outputs: {}
+C_GameRules.AutoConnectToGameModeRealm:
+  inputs:
+  - name: gameModeRecordID
+    type: number
+  outputs: {}
+C_GameRules.DoesGameModeHavePromo:
+  inputs:
+  - name: gameModeRecordID
+    type: number
+  outputs:
+  - name: hasPromo
+    type: boolean
+C_GameRules.GetActiveGameMode:
+  inputs: {}
+  outputs:
+  - name: gameMode
+    type:
+      enum: GameMode
+C_GameRules.GetCurrentEventRealmQueues:
+  inputs: {}
+  outputs:
+  - name: eventRealmQueues
+    type:
+      enum: EventRealmQueues
+C_GameRules.GetCurrentGameModeDisplayInfo:
+  inputs: {}
+  outputs:
+  - name: info
+    nilable: true
+    type:
+      structure: C_GameRules.GameModeDisplayInfo
+C_GameRules.GetCurrentGameModeRecordID:
+  inputs: {}
+  outputs:
+  - name: gameModeRecordID
+    type: number
+C_GameRules.GetDisplayedGameModeRecordIDAtIndex:
+  inputs:
+  - name: displayIndex
+    type: number
+  outputs:
+  - name: gameModeRecordID
+    type: number
+C_GameRules.GetGameModeDisplayInfoByRecordID:
+  inputs:
+  - name: gameModeRecordID
+    type: number
+  outputs:
+  - name: info
+    nilable: true
+    type:
+      structure: C_GameRules.GameModeDisplayInfo
+C_GameRules.GetGameModeGlueScreenName:
+  inputs: {}
+  outputs:
+  - name: screenName
+    type: string
+C_GameRules.GetGameModePromoGlobalString:
+  inputs:
+  - name: gameModeRecordID
+    type: number
+  outputs:
+  - name: promoGlobalString
+    type: string
 C_GameRules.GetGameRuleAsFloat:
   inputs:
   - name: gameRule
@@ -9418,6 +9680,16 @@ C_GameRules.GetGameRuleAsFrameStrata:
   - name: frameStrata
     stub: UNKNOWN
     type: string
+C_GameRules.GetNumDisplayedGameModes:
+  inputs: {}
+  outputs:
+  - name: numDisplayedGameModes
+    type: number
+C_GameRules.IsCharacterlessLoginActive:
+  inputs: {}
+  outputs:
+  - name: active
+    type: boolean
 C_GameRules.IsGameRuleActive:
   inputs:
   - name: gameRule
@@ -10321,6 +10593,24 @@ C_GuildInfo.RemoveFromGuild:
   - name: guid
     type: string
   outputs: {}
+C_GuildInfo.RequestGuildRename:
+  inputs:
+  - name: desiredName
+    type: string
+  outputs: {}
+C_GuildInfo.RequestGuildRenameRefund:
+  inputs: {}
+  outputs: {}
+C_GuildInfo.RequestRenameNameCheck:
+  inputs:
+  - name: desiredName
+    type: string
+  outputs: {}
+C_GuildInfo.RequestRenameStatus:
+  inputs: {}
+  outputs:
+  - name: ableToRequest
+    type: boolean
 C_GuildInfo.SetGuildRankOrder:
   inputs:
   - name: guid
@@ -11107,7 +11397,8 @@ C_Item.GetItemQualityColor:
   impl: GetItemQualityColor
   inputs:
   - name: quality
-    type: number
+    type:
+      enum: ItemQuality
   outputs:
   - name: colorRGBR
     type: number
@@ -11201,6 +11492,15 @@ C_Item.GetItemUniquenessByID:
   - name: limitCategoryID
     nilable: true
     type: number
+C_Item.GetItemUpgradeInfo:
+  inputs:
+  - name: itemInfo
+    type: string
+  outputs:
+  - name: itemUpgradeInfo
+    nilable: true
+    type:
+      structure: C_Item.ItemUpgradeInfo
 C_Item.GetLimitedCurrencyItemInfo:
   inputs:
   - name: itemInfo
@@ -12260,7 +12560,17 @@ C_LFGList.GetAvailableActivities:
   outputs:
   - name: activities
     type: table
-C_LFGList.GetAvailableActivityGroups: {}
+C_LFGList.GetAvailableActivityGroups:
+  inputs:
+  - name: categoryID
+    type: number
+  - default: 0
+    name: filter
+    type: number
+  outputs:
+  - name: activityIDs
+    type:
+      arrayof: number
 C_LFGList.GetAvailableCategories:
   outputs:
   - type: table
@@ -12544,6 +12854,29 @@ C_LobbyMatchmakerInfo.RespondToQueuePop:
   inputs:
   - name: acceptQueue
     type: boolean
+  outputs: {}
+C_Log.LogErrorMessage:
+  inputs:
+  - name: message
+    type: string
+  outputs: {}
+C_Log.LogMessage:
+  inputs:
+  - name: message
+    type: string
+  outputs: {}
+C_Log.LogMessageWithPriority:
+  inputs:
+  - name: priority
+    type:
+      enum: LogPriority
+  - name: message
+    type: string
+  outputs: {}
+C_Log.LogWarningMessage:
+  inputs:
+  - name: message
+    type: string
   outputs: {}
 C_Loot.GetLootRollDuration:
   inputs:
@@ -13218,6 +13551,12 @@ C_Map.MapHasArt:
   outputs:
   - name: hasArt
     type: boolean
+C_Map.OpenWorldMap:
+  inputs:
+  - name: uiMapID
+    nilable: true
+    type: number
+  outputs: {}
 C_Map.RequestPreloadMap:
   inputs:
   - name: uiMapID
@@ -14651,6 +14990,12 @@ C_PerksProgram.PickupPerksVendorItem:
   - name: perksVendorItemID
     type: number
   outputs: {}
+C_PerksProgram.RequestCartCheckout:
+  inputs:
+  - name: perksVendorItemIDs
+    type:
+      arrayof: number
+  outputs: {}
 C_PerksProgram.RequestPendingChestRewards:
   inputs: {}
   outputs: {}
@@ -14900,7 +15245,9 @@ C_PetJournal.ClearHoveredBattlePet:
 C_PetJournal.ClearRecentFanfares:
   inputs: {}
   outputs: {}
-C_PetJournal.ClearSearchFilter: {}
+C_PetJournal.ClearSearchFilter:
+  inputs: {}
+  outputs: {}
 C_PetJournal.FindPetIDByName: {}
 C_PetJournal.GetBattlePetLink: {}
 C_PetJournal.GetDisplayIDByIndex:
@@ -14956,6 +15303,12 @@ C_PetJournal.GetNumPetSources:
   - type: number
 C_PetJournal.GetNumPetTypes: {}
 C_PetJournal.GetOwnedBattlePetString: {}
+C_PetJournal.GetOwnedPetIDs:
+  inputs: {}
+  outputs:
+  - name: ownedPetIDs
+    type:
+      arrayof: string
 C_PetJournal.GetPetAbilityInfo:
   inputs:
   - name: abilityID
@@ -15041,6 +15394,11 @@ C_PetJournal.GetPetSummonInfo:
   - name: errorText
     type: string
 C_PetJournal.GetPetTeamAverageLevel: {}
+C_PetJournal.GetSearchFilter:
+  inputs: {}
+  outputs:
+  - name: filterText
+    type: string
 C_PetJournal.GetSummonBattlePetCooldown:
   inputs: {}
   outputs:
@@ -15118,7 +15476,11 @@ C_PetJournal.SetPetLoadOutInfo: {}
 C_PetJournal.SetPetSortParameter: {}
 C_PetJournal.SetPetSourceChecked: {}
 C_PetJournal.SetPetTypeFilter: {}
-C_PetJournal.SetSearchFilter: {}
+C_PetJournal.SetSearchFilter:
+  inputs:
+  - name: filterText
+    type: string
+  outputs: {}
 C_PetJournal.SpellTargetBattlePet:
   inputs:
   - name: battlePetGUID
@@ -18682,6 +19044,13 @@ C_Spell.DoesSpellExist:
   - name: spellExists
     stub: true
     type: boolean
+C_Spell.EnableSpellRangeCheck:
+  inputs:
+  - name: spellIdentifier
+    type: string
+  - name: enable
+    type: boolean
+  outputs: {}
 C_Spell.GetDeadlyDebuffInfo:
   inputs:
   - name: spellIdentifier
@@ -19276,12 +19645,6 @@ C_SpellBook.GetSpellBookSkillLineInfo:
   - name: skillLineInfo
     type:
       structure: C_SpellBook.SpellBookSkillLineInfo
-C_SpellBook.GetTrackedNameplateCooldownSpells:
-  inputs: {}
-  outputs:
-  - name: spellIDs
-    type:
-      arrayof: number
 C_SpellBook.HasPetSpells:
   inputs: {}
   mayreturnnothing: true
@@ -19445,6 +19808,12 @@ C_SplashScreen.RequestLatestSplashScreen:
   - name: fromGameMenu
     type: boolean
   outputs: {}
+C_SplashScreen.SendSplashScreenActionLaunchedTelem:
+  inputs: {}
+  outputs: {}
+C_SplashScreen.SendSplashScreenCloseTelem:
+  inputs: {}
+  outputs: {}
 C_StableInfo.ClosePetStables:
   inputs: {}
   outputs: {}
@@ -19534,6 +19903,14 @@ C_StorePublic.DoesGroupHavePurchaseableProducts:
   outputs:
   - name: hasPurchaseableProducts
     type: boolean
+C_StorePublic.EventStoreUISetShown:
+  inputs:
+  - name: newShown
+    type: boolean
+  - name: contextKey
+    nilable: true
+    type: string
+  outputs: {}
 C_StorePublic.IsDisabledByParentalControls:
   inputs: {}
   outputs:
@@ -19951,6 +20328,12 @@ C_Texture.GetAtlasElementID:
   outputs:
   - name: elementID
     type: number
+C_Texture.GetAtlasElements:
+  inputs: {}
+  outputs:
+  - name: atlases
+    type:
+      arrayof: string
 C_Texture.GetAtlasID:
   inputs:
   - name: atlas
@@ -19959,7 +20342,7 @@ C_Texture.GetAtlasID:
   - name: atlasID
     type: number
 C_Texture.GetAtlasInfo:
-  impl: C_Texture.GetAtlasInfo
+  impl: C_Texture.GetAtlasInfo_11_1_5
   inputs:
   - name: atlas
     type: string
@@ -26090,7 +26473,10 @@ FindSpellBookSlotBySpellID:
 FindSpellOverrideByID: {}
 FlagTutorial: {}
 FlashClientIcon:
-  inputs: {}
+  inputs:
+  - default: false
+    name: briefly
+    type: boolean
   outputs: {}
 FlipCameraYaw:
   inputs:
@@ -26799,6 +27185,8 @@ GetCurrentBindingSet:
   outputs:
   - type: number
 GetCurrentCombatTextEventInfo: {}
+GetCurrentEnvironment:
+  impl: GetCurrentEnvironment
 GetCurrentEventID:
   inputs: {}
   outputs:
@@ -27101,6 +27489,8 @@ GetGameTime:
     type: number
   - name: minute
     type: number
+GetGlobalEnvironment:
+  impl: GetGlobalEnvironment
 GetGMStatus: {}
 GetGMTicket: {}
 GetGraphicsAPIs:
@@ -29271,6 +29661,12 @@ GetSocketTypes:
     stub: Blue
     type: string
 GetSoundEntryCount: {}
+GetSourceLocation:
+  inputs: {}
+  mayreturnnothing: true
+  outputs:
+  - name: location
+    type: string
 GetSpecChangeCost: {}
 GetSpecialization:
   outputs:
@@ -29611,6 +30007,8 @@ GetTotemInfo:
   - name: icon
     type: number
   - name: modRate
+    type: number
+  - name: spellID
     type: number
 GetTotemTimeLeft:
   inputs:
@@ -30432,6 +30830,8 @@ IsIndoors:
   outputs:
   - name: result
     type: boolean
+IsInGlobalEnvironment:
+  impl: IsInGlobalEnvironment
 IsInGroup: {}
 IsInGuild:
   inputs: {}
@@ -30658,6 +31058,11 @@ IsPublicBuild:
   outputs:
   - name: isPublicBuild
     stub: true
+    type: boolean
+IsPublicTestClient:
+  inputs: {}
+  outputs:
+  - name: isPublicTestClient
     type: boolean
 IsPVPTimerRunning:
   inputs: {}
@@ -31739,6 +32144,7 @@ SetRaidTarget:
   outputs: {}
 SetRaidTargetProtected: {}
 SetSavedInstanceExtend: {}
+setsecurehookforbidden: {}
 SetSelectedArtifact: {}
 SetSelectedDisplayChannel: {}
 SetSelectedScreenResolutionIndex: {}
@@ -32032,6 +32438,8 @@ SupportsClipCursor:
     type: boolean
 SurrenderArena: {}
 SwapRaidSubgroup: {}
+SwapToGlobalEnvironment:
+  impl: SwapToGlobalEnvironment
 SwitchAchievementSearchTab: {}
 table.concat:
   stdlib: table.concat
@@ -32428,15 +32836,19 @@ UnitCreatureFamily:
   - name: unit
     type: unit
   outputs:
-  - name: result
+  - name: name
     type: string
+  - name: id
+    type: number
 UnitCreatureType:
   inputs:
   - name: unit
     type: unit
   outputs:
-  - name: result
+  - name: name
     type: string
+  - name: id
+    type: number
 UnitDamage:
   inputs:
   - name: unit
@@ -32695,7 +33107,13 @@ UnitInBattleground:
   - name: result
     nilable: true
     type: number
-UnitInOtherParty: {}
+UnitInOtherParty:
+  inputs:
+  - name: unit
+    type: unit
+  outputs:
+  - name: inOtherParty
+    type: boolean
 UnitInParty:
   inputs:
   - name: unit
@@ -32901,14 +33319,21 @@ UnitIsGhost:
     type: boolean
 UnitIsGroupAssistant:
   inputs:
-  - type: string
+  - name: unit
+    type: unit
   outputs:
-  - type: boolean
+  - name: isAssistant
+    type: boolean
 UnitIsGroupLeader:
   inputs:
-  - type: string
+  - name: unit
+    type: unit
+  - name: partyCategory
+    nilable: true
+    type: number
   outputs:
-  - type: boolean
+  - name: isLeader
+    type: boolean
 UnitIsInMyGuild:
   inputs:
   - name: unit
@@ -33066,7 +33491,13 @@ UnitIsWildBattlePet:
   outputs:
   - name: result
     type: boolean
-UnitLeadsAnyGroup: {}
+UnitLeadsAnyGroup:
+  inputs:
+  - name: unit
+    type: unit
+  outputs:
+  - name: isLeader
+    type: boolean
 UnitLevel:
   impl: UnitLevel
   inputs:
@@ -33117,6 +33548,13 @@ UnitOnTaxi:
   outputs:
   - name: result
     type: boolean
+UnitOwnerGUID:
+  inputs:
+  - name: unit
+    type: unit
+  outputs:
+  - name: ownerGUID
+    type: string
 UnitPartialPower:
   inputs:
   - name: unitToken

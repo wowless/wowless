@@ -193,12 +193,25 @@ uiobject_methods:
     SetDisabledAtlas: {}
     SetNormalAtlas: {}
     SetPushedAtlas: {}
+  Cooldown:
+    GetHideCountdownNumbers: {}
+    GetUseAuraDisplayTime: {}
+    SetUseAuraDisplayTime: {}
   EditBox:
     Disable: {}
     Enable: {}
+  FontString:
+    OnColorsUpdated: {}
+  Frame:
+    ClearAlphaGradient: {}
+    SetAlphaGradient: {}
+  Region:
+    CanPropagateMouseClicks: {}
+    CanPropagateMouseMotion: {}
 uiobjects:
   Animation: {}
   Path: {}
   ScrollFrame: {}
   Slider: {}
+  TabardModel: {}
   UIObject: {}
