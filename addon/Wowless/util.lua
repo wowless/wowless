@@ -4,13 +4,13 @@ local function quote(v)
   return type(v) == 'string' and string.format('%q', v) or tostring(v)
 end
 
-local function assertEquals(expected, actual, msg)
+local function assertEquals(expected, actual, msg, depth)
   local check = expected == actual
   if type(expected) == 'number' and type(actual) == 'number' then
     check = abs(expected - actual) < 0.0001
   end
   if not check then
-    error(string.format('%swant %s, got %s', msg and msg .. ': ' or '', quote(expected), quote(actual)), 2)
+    error(string.format('%swant %s, got %s', msg and msg .. ': ' or '', quote(expected), quote(actual)), depth or 2)
   end
 end
 
@@ -33,6 +33,24 @@ local function assertRecursivelyEqual(expected, actual)
   elseif ty == 'string' or ty == 'number' or ty == 'boolean' then
     assertEquals(expected, actual)
   end
+end
+
+local function match(k, ...)
+  local n = select('#', ...)
+  assert(n >= k, 'match usage error: insufficient args')
+  local t = {}
+  for i = 1, k do
+    local expected = select(i, ...)
+    local actual = select(k + i, ...)
+    t[tostring(i)] = function()
+      assert(n >= k + i, 'missing value')
+      assertEquals(expected, actual, nil, 3)
+    end
+  end
+  t.extra = function()
+    assert(n <= 2 * k, 'too many return values')
+  end
+  return t
 end
 
 local function check0(...)
@@ -120,5 +138,6 @@ G.check4 = check4
 G.check6 = check6
 G.check7 = check7
 G.globalEnv = _G
+G.match = match
 G.mixin = mixin
 G.retn = retn

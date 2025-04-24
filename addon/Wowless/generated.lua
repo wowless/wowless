@@ -281,6 +281,7 @@ G.testsuite.generated = function()
         build = _G.WowlessData.Build,
       },
       env = _G,
+      match = G.match,
       mixin = G.mixin,
       retn = G.retn,
       wowless = _G.__wowless,
