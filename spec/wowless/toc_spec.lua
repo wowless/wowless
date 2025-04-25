@@ -52,6 +52,7 @@ describe('wowless.toc', function()
           local expected = {
             Cata = { 'bbb', 'ccc' },
             Mainline = { 'aaa' },
+            Mists = { 'ccc' },
             Vanilla = { 'bbb', 'ccc' },
           }
           assert.same(assert(expected[flavor]), files)

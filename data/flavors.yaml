@@ -13,6 +13,14 @@ Mainline:
   gametypes:
   - mainline
   - standard
+Mists:
+  alternates:
+  - Classic
+  dir: Interface
+  gametypes:
+  - mists
+  - classic
+  - standard
 Vanilla:
   alternates:
   - Classic

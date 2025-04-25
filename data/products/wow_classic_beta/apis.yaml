@@ -15149,7 +15149,8 @@ GetCurrentBindingSet:
   outputs:
   - type: number
 GetCurrentCombatTextEventInfo: {}
-GetCurrentEnvironment: {}
+GetCurrentEnvironment:
+  impl: GetCurrentEnvironment
 GetCurrentEventID:
   inputs: {}
   outputs:
@@ -15503,7 +15504,8 @@ GetGameTime:
     type: number
   - name: minute
     type: number
-GetGlobalEnvironment: {}
+GetGlobalEnvironment:
+  impl: GetGlobalEnvironment
 GetGlyphClearInfo: {}
 GetGlyphInfo: {}
 GetGlyphLink: {}
@@ -18323,7 +18325,8 @@ IsInArenaTeam: {}
 IsInAuthenticatedRank: {}
 IsInCinematicScene: {}
 IsIndoors: {}
-IsInGlobalEnvironment: {}
+IsInGlobalEnvironment:
+  impl: IsInGlobalEnvironment
 IsInGroup: {}
 IsInGuild: {}
 IsInGuildGroup: {}
@@ -19703,7 +19706,8 @@ Stuck:
 SubmitRequiredGuildRename: {}
 SupportsClipCursor: {}
 SwapRaidSubgroup: {}
-SwapToGlobalEnvironment: {}
+SwapToGlobalEnvironment:
+  impl: SwapToGlobalEnvironment
 SwitchAchievementSearchTab: {}
 table.concat:
   stdlib: table.concat
