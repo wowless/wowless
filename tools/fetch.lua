@@ -100,11 +100,13 @@ local function processTocDir(dir)
       processFile(joinRelative(tocName, file), dir)
     end
   end
-  local bindingsName = path.join(dir, 'Bindings.xml')
-  local bindingsContent = fetch(bindingsName)
-  if not bindingsContent then
-    bindingsName = bindingsName:gsub('^Interface/', 'Interface_' .. build.flavor .. '/')
+  local bindingsName, bindingsContent
+  for _, suffix in ipairs(tocsuffixes) do
+    bindingsName = path.join(dir, 'Bindings' .. suffix .. '.xml')
     bindingsContent = fetch(bindingsName)
+    if bindingsContent then
+      break
+    end
   end
   if bindingsContent then
     save(bindingsName, bindingsContent)
@@ -115,7 +117,6 @@ for _, db in ipairs(dofile('build/products/' .. product .. '/dblist.lua')) do
   save(path.join('db2', db .. '.db2'), fetch(fdids[db:lower()]))
 end
 
-processTocDir('Interface/FrameXML')
 do
   -- Yes, ManifestInterfaceTOCData fdid and sig are hardcoded.
   local tocdata = fetch(1267335)
@@ -128,6 +129,4 @@ do
   end
   processTocDir('Interface/AddOns/Blizzard_APIDocumentationGenerated')
 end
-processFile('Interface/FrameXML/UI.xsd')
-processFile('Interface/FrameXML/UI_Shared.xsd')
 processFile('Interface/AddOns/Blizzard_SharedXML/UI.xsd')
