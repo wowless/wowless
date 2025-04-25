@@ -15715,7 +15715,11 @@ GetNumGuildNews:
   outputs:
   - name: numNews
     type: number
-GetNumGuildPerks: {}
+GetNumGuildPerks:
+  inputs: {}
+  outputs:
+  - name: numGuildPerks
+    type: number
 GetNumGuildRewards:
   inputs: {}
   outputs:
