@@ -10,6 +10,8 @@ lies:
       outputs: {}
 mayreturnnothing: true
 script_objects:
+  FrameAPIArchaeologyDigSiteFrame: ArchaeologyDigSiteFrame
+  FrameAPIBlob: POIFrame
   FrameAPICharacterModelBase: PlayerModel
   FrameAPICinematicModel: CinematicModel
   FrameAPICooldown: Cooldown
@@ -18,6 +20,7 @@ script_objects:
   FrameAPIModelSceneFrame: ModelScene
   FrameAPIModelSceneFrameActor: Actor
   FrameAPIModelSceneFrameActorBase: Actor
+  FrameAPIQuestPOI: QuestPOIFrame
   FrameAPISimpleCheckout: Checkout
   FrameAPITabardModel: TabardModel
   FrameAPITabardModelBase: TabardModel
@@ -68,9 +71,6 @@ skip_docfiles:
   ConfigurationWarningsDocumentation: {}
   DebugToggleDocumentation: {}
   EditModeManagerDocumentation: {}
-  FrameAPIArchaeologyDigsiteDocumentation: {}
-  FrameAPIBlobDocumentation: {}
-  FrameAPIQuestPOIDocumentation: {}
   PingPinFrameAPIDocumentation: {}
   SimpleModelFFXAPIDocumentation: {}
 typedefs:

@@ -612,6 +612,12 @@ AnimationGroup:
     Stop:
       inputs: {}
       outputs: {}
+ArchaeologyDigSiteFrame:
+  fields: {}
+  inherits:
+    Frame: {}
+    POIFrame: {}
+  methods: {}
 Browser:
   fieldinitoverrides:
     mouseClickEnabled: true
@@ -2803,6 +2809,7 @@ GameTooltip:
       getter:
       - name: tooltipLines
     ResetSecondaryCompareItem: {}
+    SetAchievementByID: {}
     SetAction: {}
     SetAnchorType: {}
     SetAuctionItem: {}
@@ -2811,15 +2818,19 @@ GameTooltip:
     SetBagItem: {}
     SetBagItemChild: {}
     SetBuybackItem: {}
+    SetCompanionPet: {}
     SetCompareItem: {}
     SetCraftItem: {}
     SetCraftSpell: {}
+    SetCurrencyByID: {}
     SetCurrencyToken: {}
     SetCurrencyTokenByID: {}
     SetEngravingRune: {}
     SetEquipmentSet: {}
     SetExistingSocketGem: {}
     SetFrameStack: {}
+    SetGlyph: {}
+    SetGlyphByID: {}
     SetGuildBankItem: {}
     SetHeirloomByItemID: {}
     SetHyperlink: {}
@@ -2837,6 +2848,7 @@ GameTooltip:
     SetMerchantCostItem: {}
     SetMerchantItem: {}
     SetMinimumWidth: {}
+    SetMountBySpellID: {}
     SetOwner:
       impl: GameTooltip/SetOwner
       inputs:
@@ -2870,6 +2882,7 @@ GameTooltip:
     SetTradeSkillItem: {}
     SetTradeTargetItem: {}
     SetTrainerService: {}
+    SetTransmogrifyItem: {}
     SetUnit: {}
     SetUnitAura: {}
     SetUnitBuff: {}
@@ -4208,6 +4221,113 @@ PlayerModel:
     ZeroCachedCenterXY:
       inputs: {}
       outputs: {}
+POIFrame:
+  fields: {}
+  inherits: {}
+  methods:
+    DrawAll:
+      inputs: {}
+      outputs: {}
+    DrawBlob:
+      inputs:
+      - name: questID
+        type: number
+      - default: false
+        name: draw
+        type: boolean
+      outputs: {}
+    DrawNone:
+      inputs: {}
+      outputs: {}
+    EnableMerging:
+      inputs:
+      - default: false
+        name: enable
+        type: boolean
+      outputs: {}
+    EnableSmoothing:
+      inputs:
+      - default: false
+        name: enable
+        type: boolean
+      outputs: {}
+    GetMapID:
+      inputs: {}
+      outputs:
+      - name: uiMapID
+        type: number
+    SetBorderAlpha:
+      inputs:
+      - name: alpha
+        type: number
+      outputs: {}
+    SetBorderScalar:
+      inputs:
+      - name: scalar
+        type: number
+      outputs: {}
+    SetBorderTexture:
+      inputs:
+      - name: asset
+        type: string
+      outputs: {}
+    SetFillAlpha:
+      inputs:
+      - name: alpha
+        type: number
+      outputs: {}
+    SetFillTexture:
+      inputs:
+      - name: asset
+        type: string
+      outputs: {}
+    SetMapID:
+      inputs:
+      - name: uiMapID
+        type: number
+      outputs: {}
+    SetMergeThreshold:
+      inputs:
+      - name: threshold
+        type: number
+      outputs: {}
+    SetNumSplinePoints:
+      inputs:
+      - name: numSplinePoints
+        type: number
+      outputs: {}
+  virtual: true
+QuestPOIFrame:
+  fields: {}
+  inherits:
+    Frame: {}
+    POIFrame: {}
+  methods:
+    GetNumTooltips:
+      inputs: {}
+      outputs:
+      - name: numObjectives
+        type: number
+    GetTooltipIndex:
+      inputs:
+      - name: index
+        type: number
+      outputs:
+      - name: objectiveIndex
+        type: number
+    UpdateMouseOverTooltip:
+      inputs:
+      - name: x
+        type: number
+      - name: y
+        type: number
+      outputs:
+      - name: questID
+        nilable: true
+        type: number
+      - name: numObjectives
+        nilable: true
+        type: number
 Region:
   fields:
     animationGroups:
