@@ -329,6 +329,8 @@ local function rewriteApis()
     if lies[name] then
       assert(tableeq(lies[name], newapi), 'lie mismatch on ' .. name)
       lies[name] = nil
+    elseif api.stdlib then
+      print('ignoring api docs on stdlib ' .. name)
     else
       newapi.impl = api and api.impl
       apis[name] = newapi
