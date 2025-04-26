@@ -15858,7 +15858,11 @@ GetNumTalentGroups:
     type: boolean
   outputs:
   - type: number
-GetNumTalentPoints: {}
+GetNumTalentPoints:
+  inputs: {}
+  outputs:
+  - name: numTalentPoints
+    type: number
 GetNumTalents:
   impl: GetNumTalents
   inputs:
