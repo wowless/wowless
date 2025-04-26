@@ -81,7 +81,7 @@ local processFile = (function()
 end)()
 
 local tocutil = require('wowless.toc')
-local tocsuffixes = tocutil.suffixes[build.flavor]
+local tocsuffixes = tocutil.suffixes[build.gametype]
 
 local function processTocDir(dir)
   local addonName = path.basename(dir)
@@ -95,7 +95,7 @@ local function processTocDir(dir)
   end
   if tocContent then
     save(tocName, tocContent)
-    local _, files = tocutil.parse(build.flavor, tocContent)
+    local _, files = tocutil.parse(build.gametype, tocContent)
     for _, file in ipairs(files) do
       processFile(joinRelative(tocName, file), dir)
     end

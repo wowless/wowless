@@ -1,0 +1,7 @@
+---
+name: gametypes
+type:
+  mapof:
+    key: string
+    value:
+      ref: family

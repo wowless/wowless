@@ -63,7 +63,8 @@ type:
           - literal: cvar
           - literal: enum
           - literal: event
-          - literal: flavor
+          - literal: family
+          - literal: gametype
           - literal: impl
           - literal: schema
           - literal: sqlcursor

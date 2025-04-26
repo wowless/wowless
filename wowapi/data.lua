@@ -47,7 +47,8 @@ local fns = {
     return t
   end,
   events = perproduct('events'),
-  flavors = global('flavors'),
+  families = global('families'),
+  gametypes = global('gametypes'),
   impl = global('impl'),
   products = global('products'),
   schemas = loaddir('schemas', 'yaml'),
