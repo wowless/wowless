@@ -11185,6 +11185,7 @@ C_TransmogCollection.GetLatestAppearance:
   - name: visualID
     type: number
   - name: category
+    stub: 1
     type:
       enum: TransmogCollectionType
 C_TransmogCollection.GetNumMaxOutfits:
