@@ -26420,10 +26420,14 @@ GetAvailableTitle:
   - name: title
     type: string
 GetAverageItemLevel:
+  inputs: {}
   outputs:
-  - type: number
-  - type: number
-  - type: number
+  - name: avgItemLevel
+    type: number
+  - name: avgItemLevelEquipped
+    type: number
+  - name: avgItemLevelPvp
+    type: number
 GetAvoidance:
   inputs: {}
   outputs:

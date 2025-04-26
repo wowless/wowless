@@ -14012,7 +14012,15 @@ GetAvailableTitle:
   outputs:
   - name: title
     type: string
-GetAverageItemLevel: {}
+GetAverageItemLevel:
+  inputs: {}
+  outputs:
+  - name: avgItemLevel
+    type: number
+  - name: avgItemLevelEquipped
+    type: number
+  - name: avgItemLevelPvp
+    type: number
 GetBackgroundLoadingStatus:
   inputs: {}
   outputs:
