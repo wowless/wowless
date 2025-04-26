@@ -295,7 +295,6 @@ table.insert(builds, {
     'spec/data/docs_spec.lua',
     'spec/data/events_spec.lua',
     'spec/data/families_spec.lua',
-    'spec/data/flavors_spec.lua',
     'spec/data/gametypes_spec.lua',
     'spec/data/globals_spec.lua',
     'spec/data/impl_spec.lua',
