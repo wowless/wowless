@@ -658,13 +658,14 @@ local function loader(api, cfg)
   end
 
   local build = datalua.build
-  local flavors = require('runtime.flavors')
+  local gametype = build.gametype
+  local family = require('runtime.gametypes')[gametype]
   local tocutil = require('wowless.toc')
-  local tocsuffixes = tocutil.suffixes[build.flavor]
+  local tocsuffixes = tocutil.suffixes[gametype]
 
   local function parseToc(tocFile, content)
     local dir = path.dirname(tocFile)
-    local attrs, files = tocutil.parse(build.flavor, content)
+    local attrs, files = tocutil.parse(gametype, content)
     for i, f in ipairs(files) do
       files[i] = path.join(dir, f)
     end
@@ -835,10 +836,10 @@ local function loader(api, cfg)
     end
   end
 
-  local gametypes = {}
-  for _, gt in ipairs(flavors[build.flavor].gametypes) do
-    gametypes[gt] = true
-  end
+  local gttokens = {
+    [family:lower()] = true,
+    [gametype:lower()] = true,
+  }
 
   local function isLoadable(toc)
     local a = datalua.cvars.agentuid.value
@@ -849,7 +850,7 @@ local function loader(api, cfg)
       return true
     end
     for gt in string.gmatch(toc.attrs.AllowLoadGameType, '[^, ]+') do
-      if gametypes[gt] then
+      if gttokens[gt] then
         return true
       end
     end

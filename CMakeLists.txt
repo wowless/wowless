@@ -602,6 +602,7 @@ add_lua_executable(
   luapath
   penlight
   runtimeflavors
+  runtimegametypes
   runtimelistfile
   toolsdb2
   toolstactless
@@ -953,6 +954,7 @@ add_lua_executable(gentest ${CMAKE_CURRENT_SOURCE_DIR}/tools/gentest.lua
                    argparse luafilesystem penlight toolsutil)
 
 lua2c(runtimeflavors runtime.flavors=runtime/flavors.lua)
+lua2c(runtimegametypes runtime.gametypes=runtime/gametypes.lua)
 lua2c(runtimeproducts runtime.products=runtime/products.lua)
 
 add_lua_executable(
@@ -1129,6 +1131,7 @@ add_lua_executable(
   minheap
   penlight
   runtimeflavors
+  runtimegametypes
   runtimeproducts
   tsort
   wowlesslib
@@ -1153,6 +1156,7 @@ add_lua_executable(
   minheap
   penlight
   runtimeflavors
+  runtimegametypes
   runtimeproducts
   say
   tsort
