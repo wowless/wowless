@@ -465,6 +465,7 @@ local function rewriteUIObjects()
         mayreturnnothing = mayreturnnothing(mv, mm),
         outputs = outsig(mv, nil, mm),
         outstride = stride(mv.Returns),
+        stuboutstrides = mm and mm.stuboutstrides,
       }
       local okay = (function()
         if not mm or mm.getter or mm.setter then
