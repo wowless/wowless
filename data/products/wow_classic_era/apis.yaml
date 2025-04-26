@@ -16741,25 +16741,45 @@ GetTalentPrereqs:
   - name: talentIndex
     type: number
 GetTalentTabInfo:
-  impl: GetTalentTabInfo_Wrath
+  impl: GetTalentTabInfo
   inputs:
   - name: index
     type: number
   - name: isInspect
     nilable: true
     type: boolean
-  outputs:
-  - name: name
-    type: string
-  - name: texture
-    type: nil
-  - name: pointsSpent
+  - name: isPet
+    nilable: true
+    type: boolean
+  - default: 1
+    name: talentGroup
+    nilable: true
     type: number
-  - name: fileName
+  outputs:
+  - name: id
+    nilable: true
+    type: number
+  - name: name
     nilable: true
     type: string
-  - name: previewPointsSpent
+  - name: description
+    nilable: true
+    type: string
+  - name: icon
+    nilable: true
     type: number
+  - default: 0
+    name: pointsSpent
+    type: number
+  - name: background
+    nilable: true
+    type: string
+  - default: 0
+    name: previewPointsSpent
+    type: number
+  - default: false
+    name: isUnlocked
+    type: boolean
 GetTalentTreeEarlySpells: {}
 GetTalentTreeMasterySpells: {}
 GetTalentTreeRoles: {}
