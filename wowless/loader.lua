@@ -861,15 +861,6 @@ local function loader(api, cfg)
       api.env[tag] = text
       api.secureenv[tag] = text
     end
-    local fxtocdir = path.join(rootDir, 'Interface', 'FrameXML')
-    local fxtoc = resolveTocDir(fxtocdir)
-    if fxtoc then
-      local loadFile = forAddon(nil, nil, fxtocdir, false, false)
-      for _, file in ipairs(fxtoc.files) do
-        loadFile(file)
-      end
-      loadFile(path.join(rootDir, flavors[build.flavor].dir, 'FrameXML', 'Bindings.xml'))
-    end
     local blizzardAddons = {}
     for _, toc in ipairs(addonData) do
       if toc.fdid and toc.attrs.LoadOnDemand ~= '1' and isLoadable(toc) then
