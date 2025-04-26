@@ -1,6 +1,6 @@
 local mkdate = require('date')
 return function(api)
-  local day = api.datalua.build.flavor ~= 'Mainline' and 0 or nil
+  local day = api.datalua.build.gametype ~= 'Standard' and 0 or nil
   local function calendarTimeToDate(ct)
     return mkdate(ct.year, ct.month, ct.monthDay, ct.hour, ct.minute)
   end
