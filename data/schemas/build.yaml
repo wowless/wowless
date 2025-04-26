@@ -8,10 +8,6 @@ type:
     date:
       required: true
       type: string
-    flavor:
-      required: true
-      type:
-        ref: flavor
     gametype:
       required: true
       type:

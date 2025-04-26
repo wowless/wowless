@@ -48,7 +48,6 @@ local fns = {
   end,
   events = perproduct('events'),
   families = global('families'),
-  flavors = global('flavors'),
   gametypes = global('gametypes'),
   impl = global('impl'),
   products = global('products'),

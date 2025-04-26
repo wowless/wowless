@@ -427,7 +427,6 @@ function(yaml2lua basename)
 endfunction()
 
 yaml2lua(families)
-yaml2lua(flavors)
 yaml2lua(gametypes)
 yaml2lua(products)
 yaml2lua(stringenums)
@@ -601,7 +600,6 @@ add_lua_executable(
   luafilesystem
   luapath
   penlight
-  runtimeflavors
   runtimegametypes
   runtimelistfile
   toolsdb2
@@ -953,7 +951,6 @@ add_lua_executable(
 add_lua_executable(gentest ${CMAKE_CURRENT_SOURCE_DIR}/tools/gentest.lua
                    argparse luafilesystem penlight toolsutil)
 
-lua2c(runtimeflavors runtime.flavors=runtime/flavors.lua)
 lua2c(runtimegametypes runtime.gametypes=runtime/gametypes.lua)
 lua2c(runtimeproducts runtime.products=runtime/products.lua)
 
@@ -1006,7 +1003,6 @@ list(
   doctable
   events
   families
-  flavors
   function
   gametypes
   globals
@@ -1030,7 +1026,6 @@ endforeach()
 lua2c(
   wowapischema
   build.data.families=runtime/families.lua
-  build.data.flavors=runtime/flavors.lua
   build.data.gametypes=runtime/gametypes.lua
   build.data.impl=runtime/impl.lua
   build.data.products=runtime/products.lua
@@ -1130,7 +1125,6 @@ add_lua_executable(
   lzlib
   minheap
   penlight
-  runtimeflavors
   runtimegametypes
   runtimeproducts
   tsort
@@ -1155,7 +1149,6 @@ add_lua_executable(
   lzlib
   minheap
   penlight
-  runtimeflavors
   runtimegametypes
   runtimeproducts
   say
