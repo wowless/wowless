@@ -13760,7 +13760,11 @@ GetBindLocation:
   outputs:
   - name: result
     type: string
-GetBlockChance: {}
+GetBlockChance:
+  inputs: {}
+  outputs:
+  - name: result
+    type: number
 GetBonusBarIndex: {}
 GetBonusBarOffset: {}
 GetBuildInfo:
@@ -14211,7 +14215,11 @@ GetDifficultyInfo:
   - name: maxPlayers
     nilable: true
     type: number
-GetDodgeChance: {}
+GetDodgeChance:
+  inputs: {}
+  outputs:
+  - name: result
+    type: number
 GetDodgeChanceFromAttribute: {}
 GetDownloadedPercentage:
   inputs: {}
@@ -14664,7 +14672,11 @@ GetHaste:
   outputs:
   - name: value
     type: number
-GetHitModifier: {}
+GetHitModifier:
+  inputs: {}
+  outputs:
+  - name: result
+    type: number
 GetHomePartyInfo: {}
 GetInboxHeaderInfo:
   inputs:
@@ -15053,7 +15065,13 @@ GetMacroItem: {}
 GetMacroItemIcons: {}
 GetMacroSpell: {}
 GetMajorTalentTreeBonuses: {}
-GetManaRegen: {}
+GetManaRegen:
+  inputs: {}
+  outputs:
+  - name: baseManaRegen
+    type: number
+  - name: castingManaRegen
+    type: number
 GetMasterLootCandidate:
   inputs:
   - name: slot
@@ -15101,7 +15119,11 @@ GetMaxRewardCurrencies:
   outputs:
   - name: maxRewardCurrencies
     type: number
-GetMeleeHaste: {}
+GetMeleeHaste:
+  inputs: {}
+  outputs:
+  - name: result
+    type: number
 GetMerchantItemCostInfo: {}
 GetMerchantItemCostItem: {}
 GetMerchantItemID:
@@ -15606,7 +15628,11 @@ GetOverrideSpellPowerByAP:
   - name: result
     type: number
 GetOwnerAuctionItems: {}
-GetParryChance: {}
+GetParryChance:
+  inputs: {}
+  outputs:
+  - name: result
+    type: number
 GetParryChanceFromAttribute: {}
 GetPartyAssignment: {}
 GetPartyLFGBackfillInfo: {}
@@ -16100,7 +16126,11 @@ GetRangedCritChance:
   outputs:
   - name: value
     type: number
-GetRangedHaste: {}
+GetRangedHaste:
+  inputs: {}
+  outputs:
+  - name: result
+    type: number
 GetRatedBattleGroundInfo: {}
 GetReadyCheckStatus:
   inputs:
@@ -16400,7 +16430,15 @@ GetSpellAutocast:
     type: boolean
 GetSpellAvailableLevel: {}
 GetSpellBaseCooldown: {}
-GetSpellBonusDamage: {}
+GetSpellBonusDamage:
+  inputs:
+  - name: school
+    type: number
+  outputs:
+  - name: result
+    nilable: true
+    stubnotnil: true
+    type: number
 GetSpellBonusHealing:
   inputs: {}
   outputs:
@@ -16458,7 +16496,11 @@ GetSpellDescription:
     type: number
   outputs:
   - type: string
-GetSpellHitModifier: {}
+GetSpellHitModifier:
+  inputs: {}
+  outputs:
+  - name: result
+    type: number
 GetSpellInfo:
   outputs:
   - name: name
@@ -18185,7 +18227,15 @@ ResetView:
   - name: view
     type: number
   outputs: {}
-ResistancePercent: {}
+ResistancePercent:
+  inputs:
+  - name: resistance
+    type: number
+  - name: casterLevel
+    type: number
+  outputs:
+  - name: result
+    type: number
 RespondInstanceLock:
   inputs:
   - name: response
@@ -19616,7 +19666,17 @@ UnitRangedAttack:
   outputs:
   - type: number
   - type: number
-UnitRangedAttackPower: {}
+UnitRangedAttackPower:
+  inputs:
+  - name: unit
+    type: unit
+  outputs:
+  - name: attackPower
+    type: number
+  - name: posBuff
+    type: number
+  - name: negBuff
+    type: number
 UnitRangedDamage: {}
 UnitReaction:
   inputs:
