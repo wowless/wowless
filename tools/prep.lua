@@ -294,11 +294,18 @@ for k, v in pairs(uiobjectdata) do
       table.insert(t, ' end')
       methods[mk] = table.concat(t, '')
     else
-      local t = {}
-      for _, output in ipairs(mv.outputs or {}) do
-        table.insert(t, specDefault(output))
+      local outs = mv.outputs or {}
+      local rets = {}
+      local nonstride = #outs - (mv.outstride or 0)
+      for i = 1, nonstride do
+        table.insert(rets, specDefault(outs[i]))
       end
-      methods[mk] = 'function() return ' .. table.concat(t, ',') .. ' end'
+      for _ = 1, mv.stuboutstrides or 1 do
+        for j = nonstride + 1, #outs do
+          table.insert(rets, specDefault(outs[j]))
+        end
+      end
+      methods[mk] = 'function() return ' .. table.concat(rets, ',') .. ' end'
     end
   end
   uiobjects[k] = {

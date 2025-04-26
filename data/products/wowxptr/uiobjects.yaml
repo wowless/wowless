@@ -5773,6 +5773,7 @@ UnitPositionFrame:
       - name: units
         type: string
       outstride: 1
+      stuboutstrides: 0
     GetPlayerPingScale:
       inputs: {}
       outputs:
