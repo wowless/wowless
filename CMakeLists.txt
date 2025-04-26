@@ -426,7 +426,9 @@ function(yaml2lua basename)
     DEPENDS yaml2lua ${input})
 endfunction()
 
+yaml2lua(families)
 yaml2lua(flavors)
+yaml2lua(gametypes)
 yaml2lua(products)
 yaml2lua(stringenums)
 
@@ -1001,8 +1003,10 @@ list(
   docs
   doctable
   events
+  families
   flavors
   function
+  gametypes
   globals
   impl
   products
@@ -1023,7 +1027,9 @@ endforeach()
 
 lua2c(
   wowapischema
+  build.data.families=runtime/families.lua
   build.data.flavors=runtime/flavors.lua
+  build.data.gametypes=runtime/gametypes.lua
   build.data.impl=runtime/impl.lua
   build.data.products=runtime/products.lua
   build.data.stringenums=runtime/stringenums.lua
