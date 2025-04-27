@@ -14669,7 +14669,11 @@ GetExpertisePercent:
   outputs:
   - type: number
   - type: number
-GetExtraBarIndex: {}
+GetExtraBarIndex:
+  inputs: {}
+  outputs:
+  - name: value
+    type: number
 GetFactionInfo:
   inputs:
   - name: factionIndex
