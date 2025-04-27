@@ -27030,8 +27030,10 @@ GetExpertise:
   - name: rangedExpertise
     type: number
 GetExtraBarIndex:
+  inputs: {}
   outputs:
-  - type: number
+  - name: value
+    type: number
 GetFailedPVPTalentIDs: {}
 GetFailedTalentIDs: {}
 getfenv:
