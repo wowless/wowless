@@ -14461,7 +14461,26 @@ GetGameTime:
   - name: minute
     type: number
 GetGlyphClearInfo: {}
-GetGlyphInfo: {}
+GetGlyphInfo:
+  inputs:
+  - name: index
+    type: number
+  outputs:
+  - name: name
+    type: string
+  - name: glyphType
+    type: number
+  - name: isKnown
+    type: boolean
+  - name: icon
+    nilable: true
+    type: number
+  - name: glyphID
+    nilable: true
+    type: number
+  - name: glyphLink
+    nilable: true
+    type: string
 GetGlyphLink: {}
 GetGlyphSocketInfo: {}
 GetGMStatus: {}
@@ -15410,7 +15429,11 @@ GetNumFactions:
 GetNumFilteredAchievements: {}
 GetNumFlexRaidDungeons: {}
 GetNumFlyouts: {}
-GetNumGlyphs: {}
+GetNumGlyphs:
+  inputs: {}
+  outputs:
+  - name: numGlyphs
+    type: number
 GetNumGlyphSockets:
   inputs: {}
   outputs:
