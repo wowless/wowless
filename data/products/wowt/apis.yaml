@@ -22120,7 +22120,14 @@ C_TradeSkillUI.GetTradeSkillDisplayName:
     type: string
 C_TradeSkillUI.GetTradeSkillLineForRecipe: {}
 C_TradeSkillUI.GetTradeSkillListLink: {}
-C_TradeSkillUI.GetTradeSkillTexture: {}
+C_TradeSkillUI.GetTradeSkillTexture:
+  inputs:
+  - name: tradeSkillID
+    type: number
+  outputs:
+  - name: tradeSkillTexture
+    nilable: true
+    type: number
 C_TradeSkillUI.HasFavoriteOrderRecipes:
   inputs: {}
   outputs:

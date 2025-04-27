@@ -12260,7 +12260,17 @@ C_LFGList.GetAvailableActivities:
   outputs:
   - name: activities
     type: table
-C_LFGList.GetAvailableActivityGroups: {}
+C_LFGList.GetAvailableActivityGroups:
+  inputs:
+  - name: categoryID
+    type: number
+  - default: 0
+    name: filter
+    type: number
+  outputs:
+  - name: activityIDs
+    type:
+      arrayof: number
 C_LFGList.GetAvailableCategories:
   outputs:
   - type: table
@@ -14900,7 +14910,9 @@ C_PetJournal.ClearHoveredBattlePet:
 C_PetJournal.ClearRecentFanfares:
   inputs: {}
   outputs: {}
-C_PetJournal.ClearSearchFilter: {}
+C_PetJournal.ClearSearchFilter:
+  inputs: {}
+  outputs: {}
 C_PetJournal.FindPetIDByName: {}
 C_PetJournal.GetBattlePetLink: {}
 C_PetJournal.GetDisplayIDByIndex:
@@ -15118,7 +15130,11 @@ C_PetJournal.SetPetLoadOutInfo: {}
 C_PetJournal.SetPetSortParameter: {}
 C_PetJournal.SetPetSourceChecked: {}
 C_PetJournal.SetPetTypeFilter: {}
-C_PetJournal.SetSearchFilter: {}
+C_PetJournal.SetSearchFilter:
+  inputs:
+  - name: filterText
+    type: string
+  outputs: {}
 C_PetJournal.SpellTargetBattlePet:
   inputs:
   - name: battlePetGUID
@@ -21737,7 +21753,14 @@ C_TradeSkillUI.GetTradeSkillDisplayName:
     type: string
 C_TradeSkillUI.GetTradeSkillLineForRecipe: {}
 C_TradeSkillUI.GetTradeSkillListLink: {}
-C_TradeSkillUI.GetTradeSkillTexture: {}
+C_TradeSkillUI.GetTradeSkillTexture:
+  inputs:
+  - name: tradeSkillID
+    type: number
+  outputs:
+  - name: tradeSkillTexture
+    nilable: true
+    type: number
 C_TradeSkillUI.HasFavoriteOrderRecipes:
   inputs: {}
   outputs:
@@ -32699,7 +32722,13 @@ UnitInBattleground:
   - name: result
     nilable: true
     type: number
-UnitInOtherParty: {}
+UnitInOtherParty:
+  inputs:
+  - name: unit
+    type: unit
+  outputs:
+  - name: inOtherParty
+    type: boolean
 UnitInParty:
   inputs:
   - name: unit
@@ -33070,7 +33099,13 @@ UnitIsWildBattlePet:
   outputs:
   - name: result
     type: boolean
-UnitLeadsAnyGroup: {}
+UnitLeadsAnyGroup:
+  inputs:
+  - name: unit
+    type: unit
+  outputs:
+  - name: isLeader
+    type: boolean
 UnitLevel:
   impl: UnitLevel
   inputs:
