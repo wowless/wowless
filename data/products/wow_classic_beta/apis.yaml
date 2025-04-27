@@ -10273,6 +10273,25 @@ C_ResearchInfo.GetDigSitesForMap:
     type:
       arrayof:
         structure: C_ResearchInfo.DigSiteMapInfo
+C_Scenario.GetBonusStepRewardQuestID: {}
+C_Scenario.GetBonusSteps: {}
+C_Scenario.GetInfo:
+  inputs: {}
+  outputs:
+  - name: scenarioName
+    type: string
+  - name: currentStage
+    type: number
+  - name: numStages
+    stub: 0
+    type: number
+C_Scenario.GetProvingGroundsInfo: {}
+C_Scenario.GetScenarioIconInfo: {}
+C_Scenario.GetStepInfo: {}
+C_Scenario.GetSupersededObjectives: {}
+C_Scenario.IsInScenario: {}
+C_Scenario.ShouldShowCriteria: {}
+C_Scenario.TreatScenarioAsDungeon: {}
 C_ScenarioInfo.GetCriteriaInfo:
   inputs:
   - name: criteriaIndex
