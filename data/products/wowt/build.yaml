@@ -1,7 +1,7 @@
 ---
 build: '60428'
 date: Apr 21 2025
-flavor: Mainline
+gametype: Standard
 hash: dee6e2e79a148880cff61a13ca7b4fc8
 test: false
 tocversion: 110105

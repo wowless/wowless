@@ -101,6 +101,8 @@ type:
                                 schema: type
                     outstride:
                       type: number
+                    stuboutstrides:
+                      type: number
                 - record:
                     setter:
                       required: true

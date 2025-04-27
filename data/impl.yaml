@@ -253,7 +253,7 @@ GetTalentPrereqs_Wrath:
   - api
   sqls:
   - cursor: GetTalentPrereqs
-GetTalentTabInfo_Wrath:
+GetTalentTabInfo:
   frameworks:
   - api
   sqls:

@@ -658,13 +658,14 @@ local function loader(api, cfg)
   end
 
   local build = datalua.build
-  local flavors = require('runtime.flavors')
+  local gametype = build.gametype
+  local family = require('runtime.gametypes')[gametype]
   local tocutil = require('wowless.toc')
-  local tocsuffixes = tocutil.suffixes[build.flavor]
+  local tocsuffixes = tocutil.suffixes[gametype]
 
   local function parseToc(tocFile, content)
     local dir = path.dirname(tocFile)
-    local attrs, files = tocutil.parse(build.flavor, content)
+    local attrs, files = tocutil.parse(gametype, content)
     for i, f in ipairs(files) do
       files[i] = path.join(dir, f)
     end
@@ -686,6 +687,20 @@ local function loader(api, cfg)
     return nil
   end
 
+  local function resolveBindingsXml(tocDir)
+    api.log(1, 'resolving bindings for %s', tocDir)
+    for _, suffix in ipairs(tocsuffixes) do
+      local bindingsFile = path.join(tocDir, 'Bindings' .. suffix .. '.xml')
+      local success, content = pcall(readFile, bindingsFile)
+      if success then
+        api.log(1, 'using bindings %s', bindingsFile)
+        return bindingsFile, content
+      end
+    end
+    api.log(1, 'no valid bindings for %s', tocDir)
+    return nil
+  end
+
   local sqlitedb = (function()
     local dbfile = ('build/products/%s/%s.sqlite3'):format(product, rootDir and 'data' or 'schema')
     return require('lsqlite3').open(dbfile)
@@ -704,6 +719,7 @@ local function loader(api, cfg)
           addon.fdid = fdid
           addon.dir = dir
           addon.revwiths = {}
+          addon.bindings = resolveBindingsXml(dir)
           addonData[name:lower()] = addon
           table.insert(addonData, addon)
         end
@@ -811,6 +827,9 @@ local function loader(api, cfg)
     for _, file in ipairs(toc.files) do
       loadFile(file)
     end
+    if toc.bindings then
+      loadFile(toc.bindings)
+    end
     loadFile(('out/%s/SavedVariables/%s.lua'):format(product, addonName), toc.fdid and 'SavedVariables' or nil)
     if forceSecure then
       toc.secdeploaded = true
@@ -835,10 +854,10 @@ local function loader(api, cfg)
     end
   end
 
-  local gametypes = {}
-  for _, gt in ipairs(flavors[build.flavor].gametypes) do
-    gametypes[gt] = true
-  end
+  local gttokens = {
+    [family:lower()] = true,
+    [gametype:lower()] = true,
+  }
 
   local function isLoadable(toc)
     local a = datalua.cvars.agentuid.value
@@ -849,7 +868,7 @@ local function loader(api, cfg)
       return true
     end
     for gt in string.gmatch(toc.attrs.AllowLoadGameType, '[^, ]+') do
-      if gametypes[gt] then
+      if gttokens[gt] then
         return true
       end
     end
@@ -860,15 +879,6 @@ local function loader(api, cfg)
     for tag, text in sqlitedb:urows('SELECT BaseTag, TagText_lang FROM GlobalStrings') do
       api.env[tag] = text
       api.secureenv[tag] = text
-    end
-    local fxtocdir = path.join(rootDir, 'Interface', 'FrameXML')
-    local fxtoc = resolveTocDir(fxtocdir)
-    if fxtoc then
-      local loadFile = forAddon(nil, nil, fxtocdir, false, false)
-      for _, file in ipairs(fxtoc.files) do
-        loadFile(file)
-      end
-      loadFile(path.join(rootDir, flavors[build.flavor].dir, 'FrameXML', 'Bindings.xml'))
     end
     local blizzardAddons = {}
     for _, toc in ipairs(addonData) do

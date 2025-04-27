@@ -11,7 +11,7 @@ local validPoints = {
 }
 return (function(self, point, ...)
   -- TODO handle resetting points
-  point = point or 'CENTER'
+  point = point and point:upper() or 'CENTER'
   assert(validPoints[point])
   local relativeTo = self.parent
   local relativePoint = point

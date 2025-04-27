@@ -1,33 +1,28 @@
-local flavors = require('runtime.flavors')
+local gametypes = require('runtime.gametypes')
 
-local gametypes = {}
-for k, v in pairs(flavors) do
-  local t = {}
-  for _, gt in ipairs(v.gametypes) do
-    t[gt] = true
-  end
-  gametypes[k] = t
+local gttokens = {}
+for k, v in pairs(gametypes) do
+  gttokens[k] = {
+    [k:lower()] = true,
+    [v:lower()] = true,
+  }
 end
 
 local suffixes = {}
-for k, v in pairs(flavors) do
-  local t = {
+for k, v in pairs(gametypes) do
+  suffixes[k] = {
     '_' .. k,
     '-' .. k,
+    '_' .. v,
+    '-' .. v,
+    '',
   }
-  for _, alt in ipairs(v.alternates) do
-    table.insert(t, '_' .. alt)
-    table.insert(t, '-' .. alt)
-  end
-  table.insert(t, '_Standard')
-  table.insert(t, '-Standard')
-  table.insert(t, '')
-  suffixes[k] = t
 end
 
-local function parse(flavor, content)
-  local gts = assert(gametypes[flavor])
-  content = content:gsub('%[Family%]', flavor)
+local function parse(gametype, content)
+  local gts = assert(gttokens[gametype])
+  content = content:gsub('%[Game%]', gametype)
+  content = content:gsub('%[Family%]', gametypes[gametype])
   local attrs = {}
   local files = {}
   for line in content:gmatch('[^\r\n]+') do
@@ -45,8 +40,8 @@ local function parse(flavor, content)
           return true
         end
         if filter == 'AllowLoadGameType' then
-          for gametype in fdata:gmatch('[^, ]+') do
-            if gts[gametype] then
+          for gt in fdata:gmatch('[^, ]+') do
+            if gts[gt] then
               return true
             end
           end

@@ -1,7 +1,8 @@
 local validate = require('wowapi.schema').validate
 
 local globalschemas = {
-  ['data/flavors'] = 'flavors',
+  ['data/families'] = 'families',
+  ['data/gametypes'] = 'gametypes',
   ['data/impl'] = 'impl',
   ['data/products'] = 'products',
   ['data/stringenums'] = 'stringenums',

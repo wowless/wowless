@@ -11019,6 +11019,7 @@ C_TransmogCollection.GetLatestAppearance:
   - name: visualID
     type: number
   - name: category
+    stub: 1
     type:
       enum: TransmogCollectionType
 C_TransmogCollection.GetNumMaxOutfits:
@@ -13637,7 +13638,15 @@ GetAvailableTitle:
   outputs:
   - name: title
     type: string
-GetAverageItemLevel: {}
+GetAverageItemLevel:
+  inputs: {}
+  outputs:
+  - name: avgItemLevel
+    type: number
+  - name: avgItemLevelEquipped
+    type: number
+  - name: avgItemLevelPvp
+    type: number
 GetBackgroundLoadingStatus:
   inputs: {}
   outputs:
@@ -13752,7 +13761,11 @@ GetBindLocation:
   outputs:
   - name: result
     type: string
-GetBlockChance: {}
+GetBlockChance:
+  inputs: {}
+  outputs:
+  - name: result
+    type: number
 GetBonusBarIndex: {}
 GetBonusBarOffset: {}
 GetBuildInfo:
@@ -14203,7 +14216,11 @@ GetDifficultyInfo:
   - name: maxPlayers
     nilable: true
     type: number
-GetDodgeChance: {}
+GetDodgeChance:
+  inputs: {}
+  outputs:
+  - name: result
+    type: number
 GetDodgeChanceFromAttribute: {}
 GetDownloadedPercentage:
   inputs: {}
@@ -14444,7 +14461,26 @@ GetGameTime:
   - name: minute
     type: number
 GetGlyphClearInfo: {}
-GetGlyphInfo: {}
+GetGlyphInfo:
+  inputs:
+  - name: index
+    type: number
+  outputs:
+  - name: name
+    type: string
+  - name: glyphType
+    type: number
+  - name: isKnown
+    type: boolean
+  - name: icon
+    nilable: true
+    type: number
+  - name: glyphID
+    nilable: true
+    type: number
+  - name: glyphLink
+    nilable: true
+    type: string
 GetGlyphLink: {}
 GetGlyphSocketInfo: {}
 GetGMStatus: {}
@@ -14656,7 +14692,11 @@ GetHaste:
   outputs:
   - name: value
     type: number
-GetHitModifier: {}
+GetHitModifier:
+  inputs: {}
+  outputs:
+  - name: result
+    type: number
 GetHomePartyInfo: {}
 GetInboxHeaderInfo:
   inputs:
@@ -15045,7 +15085,13 @@ GetMacroItem: {}
 GetMacroItemIcons: {}
 GetMacroSpell: {}
 GetMajorTalentTreeBonuses: {}
-GetManaRegen: {}
+GetManaRegen:
+  inputs: {}
+  outputs:
+  - name: baseManaRegen
+    type: number
+  - name: castingManaRegen
+    type: number
 GetMasterLootCandidate:
   inputs:
   - name: slot
@@ -15093,7 +15139,11 @@ GetMaxRewardCurrencies:
   outputs:
   - name: maxRewardCurrencies
     type: number
-GetMeleeHaste: {}
+GetMeleeHaste:
+  inputs: {}
+  outputs:
+  - name: result
+    type: number
 GetMerchantItemCostInfo: {}
 GetMerchantItemCostItem: {}
 GetMerchantItemID:
@@ -15379,7 +15429,11 @@ GetNumFactions:
 GetNumFilteredAchievements: {}
 GetNumFlexRaidDungeons: {}
 GetNumFlyouts: {}
-GetNumGlyphs: {}
+GetNumGlyphs:
+  inputs: {}
+  outputs:
+  - name: numGlyphs
+    type: number
 GetNumGlyphSockets:
   inputs: {}
   outputs:
@@ -15422,7 +15476,11 @@ GetNumGuildNews:
   outputs:
   - name: numNews
     type: number
-GetNumGuildPerks: {}
+GetNumGuildPerks:
+  inputs: {}
+  outputs:
+  - name: numGuildPerks
+    type: number
 GetNumGuildRewards:
   inputs: {}
   outputs:
@@ -15542,7 +15600,11 @@ GetNumTalentGroups:
     type: boolean
   outputs:
   - type: number
-GetNumTalentPoints: {}
+GetNumTalentPoints:
+  inputs: {}
+  outputs:
+  - name: numTalentPoints
+    type: number
 GetNumTalents:
   impl: GetNumTalents
   inputs:
@@ -15594,7 +15656,11 @@ GetOverrideSpellPowerByAP:
   - name: result
     type: number
 GetOwnerAuctionItems: {}
-GetParryChance: {}
+GetParryChance:
+  inputs: {}
+  outputs:
+  - name: result
+    type: number
 GetParryChanceFromAttribute: {}
 GetPartyAssignment: {}
 GetPartyLFGBackfillInfo: {}
@@ -16088,7 +16154,11 @@ GetRangedCritChance:
   outputs:
   - name: value
     type: number
-GetRangedHaste: {}
+GetRangedHaste:
+  inputs: {}
+  outputs:
+  - name: result
+    type: number
 GetRatedBattleGroundInfo: {}
 GetReadyCheckStatus:
   inputs:
@@ -16388,7 +16458,15 @@ GetSpellAutocast:
     type: boolean
 GetSpellAvailableLevel: {}
 GetSpellBaseCooldown: {}
-GetSpellBonusDamage: {}
+GetSpellBonusDamage:
+  inputs:
+  - name: school
+    type: number
+  outputs:
+  - name: result
+    nilable: true
+    stubnotnil: true
+    type: number
 GetSpellBonusHealing:
   inputs: {}
   outputs:
@@ -16446,7 +16524,11 @@ GetSpellDescription:
     type: number
   outputs:
   - type: string
-GetSpellHitModifier: {}
+GetSpellHitModifier:
+  inputs: {}
+  outputs:
+  - name: result
+    type: number
 GetSpellInfo:
   outputs:
   - name: name
@@ -16551,26 +16633,45 @@ GetTalentPrereqs:
   - name: talentIndex
     type: number
 GetTalentTabInfo:
-  impl: GetTalentTabInfo_Wrath
+  impl: GetTalentTabInfo
   inputs:
   - name: index
     type: number
   - name: isInspect
     nilable: true
     type: boolean
+  - name: isPet
+    nilable: true
+    type: boolean
+  - default: 1
+    name: talentGroup
+    nilable: true
+    type: number
   outputs:
+  - name: id
+    nilable: true
+    type: number
   - name: name
     nilable: true
     type: string
-  - name: texture
-    type: nil
-  - name: pointsSpent
-    type: number
-  - name: fileName
+  - name: description
     nilable: true
     type: string
-  - name: previewPointsSpent
+  - name: icon
+    nilable: true
     type: number
+  - default: 0
+    name: pointsSpent
+    type: number
+  - name: background
+    nilable: true
+    type: string
+  - default: 0
+    name: previewPointsSpent
+    type: number
+  - default: false
+    name: isUnlocked
+    type: boolean
 GetTalentTreeEarlySpells: {}
 GetTalentTreeMasterySpells: {}
 GetTalentTreeRoles: {}
@@ -18154,7 +18255,15 @@ ResetView:
   - name: view
     type: number
   outputs: {}
-ResistancePercent: {}
+ResistancePercent:
+  inputs:
+  - name: resistance
+    type: number
+  - name: casterLevel
+    type: number
+  outputs:
+  - name: result
+    type: number
 RespondInstanceLock:
   inputs:
   - name: response
@@ -19585,7 +19694,17 @@ UnitRangedAttack:
   outputs:
   - type: number
   - type: number
-UnitRangedAttackPower: {}
+UnitRangedAttackPower:
+  inputs:
+  - name: unit
+    type: unit
+  outputs:
+  - name: attackPower
+    type: number
+  - name: posBuff
+    type: number
+  - name: negBuff
+    type: number
 UnitRangedDamage: {}
 UnitReaction:
   inputs:
