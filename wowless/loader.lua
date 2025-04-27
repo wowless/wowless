@@ -687,6 +687,20 @@ local function loader(api, cfg)
     return nil
   end
 
+  local function resolveBindingsXml(tocDir)
+    api.log(1, 'resolving bindings for %s', tocDir)
+    for _, suffix in ipairs(tocsuffixes) do
+      local bindingsFile = path.join(tocDir, 'Bindings' .. suffix .. '.xml')
+      local success, content = pcall(readFile, bindingsFile)
+      if success then
+        api.log(1, 'using bindings %s', bindingsFile)
+        return bindingsFile, content
+      end
+    end
+    api.log(1, 'no valid bindings for %s', tocDir)
+    return nil
+  end
+
   local sqlitedb = (function()
     local dbfile = ('build/products/%s/%s.sqlite3'):format(product, rootDir and 'data' or 'schema')
     return require('lsqlite3').open(dbfile)
@@ -705,6 +719,7 @@ local function loader(api, cfg)
           addon.fdid = fdid
           addon.dir = dir
           addon.revwiths = {}
+          addon.bindings = resolveBindingsXml(dir)
           addonData[name:lower()] = addon
           table.insert(addonData, addon)
         end
@@ -811,6 +826,9 @@ local function loader(api, cfg)
     local loadFile = forAddon(addonName, addonEnv, toc.dir, useSecureEnv, forceSecure)
     for _, file in ipairs(toc.files) do
       loadFile(file)
+    end
+    if toc.bindings then
+      loadFile(toc.bindings)
     end
     loadFile(('out/%s/SavedVariables/%s.lua'):format(product, addonName), toc.fdid and 'SavedVariables' or nil)
     if forceSecure then
