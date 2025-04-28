@@ -26527,6 +26527,8 @@ GetBattlegroundInfo:
     type: string
   - name: longDescription
     type: string
+  - name: hasControllingHoliday
+    type: number
 GetBattlegroundPoints: {}
 GetBestFlexRaidChoice: {}
 GetBestRFChoice:
