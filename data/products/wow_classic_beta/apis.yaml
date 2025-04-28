@@ -18408,7 +18408,15 @@ GetSpellAutocast:
     type: boolean
 GetSpellAvailableLevel: {}
 GetSpellBaseCooldown: {}
-GetSpellBonusDamage: {}
+GetSpellBonusDamage:
+  inputs:
+  - name: school
+    type: number
+  outputs:
+  - name: result
+    nilable: true
+    stubnotnil: true
+    type: number
 GetSpellBonusHealing:
   inputs: {}
   outputs:
