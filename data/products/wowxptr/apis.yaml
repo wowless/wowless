@@ -30143,7 +30143,8 @@ HasDualWieldPenalty:
 HasExtraActionBar:
   inputs: {}
   outputs:
-  - type: oneornil
+  - name: value
+    type: boolean
 HasFullControl:
   inputs: {}
   outputs:
