@@ -17522,6 +17522,7 @@ GetSpellBonusDamage:
   outputs:
   - name: result
     nilable: true
+    stubnotnil: true
     type: number
 GetSpellBonusHealing:
   inputs: {}
