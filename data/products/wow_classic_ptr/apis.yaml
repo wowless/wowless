@@ -16636,8 +16636,8 @@ GetQuestLogTitle:
     type: string
   - name: level
     type: number
-  - name: questTag
-    type: string
+  - name: suggestedGroup
+    type: number
   - name: isHeader
     type: boolean
   - name: isCollapsed
@@ -16645,11 +16645,11 @@ GetQuestLogTitle:
   - name: isComplete
     type: boolean
   - name: frequency
-    type: string
+    type: number
   - name: questID
     type: number
   - name: startEvent
-    type: string
+    type: boolean
   - name: displayQuestID
     type: number
   - name: isOnMap
