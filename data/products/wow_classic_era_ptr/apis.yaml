@@ -8649,7 +8649,10 @@ C_PetJournal.GetNumPetsInJournal:
     type: number
   - name: numPets
     type: number
-C_PetJournal.GetNumPetsNeedingFanfare: {}
+C_PetJournal.GetNumPetsNeedingFanfare:
+  inputs: {}
+  outputs:
+  - type: number
 C_PetJournal.GetNumPetSources:
   outputs:
   - type: number

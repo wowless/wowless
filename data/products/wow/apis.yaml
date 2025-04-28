@@ -15296,6 +15296,7 @@ C_PetJournal.GetNumPetsInJournal:
   - name: numPets
     type: number
 C_PetJournal.GetNumPetsNeedingFanfare:
+  inputs: {}
   outputs:
   - type: number
 C_PetJournal.GetNumPetSources:
