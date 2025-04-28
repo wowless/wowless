@@ -21119,6 +21119,7 @@ UnitPowerBarTimerInfo:
     type: number
   - name: auraID
     type: number
+  stubnothing: true
 UnitPowerDisplayMod:
   inputs:
   - name: powerType
