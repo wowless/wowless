@@ -15856,7 +15856,6 @@ GetNumAuctionItems:
 GetNumAutoQuestPopUps:
   outputs:
   - name: numAutoQuestPopUps
-    stub: 0
     type: number
 GetNumAvailableQuests:
   inputs: {}

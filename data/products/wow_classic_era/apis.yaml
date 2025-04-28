@@ -16265,7 +16265,10 @@ GetNumAuctionItems:
     type: number
   - name: count
     type: number
-GetNumAutoQuestPopUps: {}
+GetNumAutoQuestPopUps:
+  outputs:
+  - name: numAutoQuestPopUps
+    type: number
 GetNumAvailableQuests:
   inputs: {}
   outputs:
