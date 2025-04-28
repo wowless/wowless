@@ -11162,6 +11162,72 @@ C_Timer.NewTimer:
   outputs:
   - name: cbObject
     type: userdata
+C_ToyBox.ForceToyRefilter:
+  inputs: {}
+  outputs: {}
+C_ToyBox.GetCollectedShown: {}
+C_ToyBox.GetIsFavorite:
+  inputs:
+  - name: itemID
+    type: number
+  outputs:
+  - name: isFavorite
+    type: boolean
+C_ToyBox.GetNumFilteredToys:
+  outputs:
+  - type: number
+C_ToyBox.GetNumLearnedDisplayedToys:
+  outputs:
+  - type: number
+C_ToyBox.GetNumTotalDisplayedToys:
+  outputs:
+  - type: number
+C_ToyBox.GetNumToys: {}
+C_ToyBox.GetToyFromIndex:
+  inputs:
+  - name: itemIndex
+    type: number
+  outputs:
+  - name: itemID
+    type: number
+C_ToyBox.GetToyInfo:
+  inputs:
+  - name: itemID
+    type: number
+  outputs:
+  - name: itemID
+    type: number
+  - name: toyName
+    type: string
+  - name: icon
+    type: number
+  - name: isFavorite
+    type: boolean
+  - name: hasFanfare
+    type: boolean
+  - name: itemQuality
+    type: number
+C_ToyBox.GetToyLink: {}
+C_ToyBox.GetUncollectedShown: {}
+C_ToyBox.GetUnusableShown: {}
+C_ToyBox.HasFavorites:
+  inputs: {}
+  outputs:
+  - name: value
+    type: boolean
+C_ToyBox.IsExpansionTypeFilterChecked: {}
+C_ToyBox.IsSourceTypeFilterChecked: {}
+C_ToyBox.IsToyUsable: {}
+C_ToyBox.PickupToyBoxItem: {}
+C_ToyBox.SetAllExpansionTypeFilters: {}
+C_ToyBox.SetAllSourceTypeFilters: {}
+C_ToyBox.SetCollectedShown: {}
+C_ToyBox.SetExpansionTypeFilter: {}
+C_ToyBox.SetFilterString: {}
+C_ToyBox.SetIsFavorite: {}
+C_ToyBox.SetSourceTypeFilter: {}
+C_ToyBox.SetUncollectedShown: {}
+C_ToyBox.SetUnusableShown: {}
 C_ToyBoxInfo.ClearFanfare:
   inputs:
   - name: itemID
