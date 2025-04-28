@@ -6562,6 +6562,84 @@ C_GuildInfo.Uninvite:
   - name: name
     type: string
   outputs: {}
+C_Heirloom.CanHeirloomUpgradeFromPending: {}
+C_Heirloom.CreateHeirloom: {}
+C_Heirloom.GetClassAndSpecFilters:
+  inputs: {}
+  outputs:
+  - name: classFilter
+    type: number
+  - name: specFilter
+    stub: 0
+    type: number
+C_Heirloom.GetCollectedHeirloomFilter: {}
+C_Heirloom.GetHeirloomInfo:
+  inputs:
+  - name: itemID
+    type: number
+  outputs:
+  - name: name
+    type: string
+  - name: itemEquipLoc
+    type: number
+  - name: isPvP
+    type: boolean
+  - name: itemTexture
+    type: number
+  - name: upgradeLevel
+    type: number
+  - name: source
+    type: string
+  - name: searchFiltered
+    type: boolean
+  - name: effectiveLevel
+    type: number
+  - name: minLevel
+    type: number
+  - name: maxLevel
+    type: number
+C_Heirloom.GetHeirloomItemIDFromDisplayedIndex:
+  inputs:
+  - name: index
+    type: number
+  outputs:
+  - name: itemID
+    type: number
+C_Heirloom.GetHeirloomItemIDs: {}
+C_Heirloom.GetHeirloomLink: {}
+C_Heirloom.GetHeirloomMaxUpgradeLevel:
+  inputs:
+  - name: itemID
+    type: number
+  outputs:
+  - name: upgradeLevel
+    type: number
+C_Heirloom.GetHeirloomSourceFilter: {}
+C_Heirloom.GetNumDisplayedHeirlooms:
+  inputs: {}
+  outputs:
+  - name: value
+    type: number
+C_Heirloom.GetNumHeirlooms: {}
+C_Heirloom.GetNumKnownHeirlooms: {}
+C_Heirloom.GetUncollectedHeirloomFilter: {}
+C_Heirloom.IsHeirloomSourceValid: {}
+C_Heirloom.IsItemHeirloom: {}
+C_Heirloom.IsPendingHeirloomUpgrade: {}
+C_Heirloom.PlayerHasHeirloom: {}
+C_Heirloom.SetClassAndSpecFilters:
+  inputs:
+  - name: classID
+    type: number
+  - name: specID
+    type: number
+  outputs: {}
+C_Heirloom.SetCollectedHeirloomFilter: {}
+C_Heirloom.SetHeirloomSourceFilter: {}
+C_Heirloom.SetSearch: {}
+C_Heirloom.SetUncollectedHeirloomFilter: {}
+C_Heirloom.ShouldShowHeirloomHelp: {}
+C_Heirloom.UpgradeHeirloom: {}
 C_ImmersiveInteraction.HasImmersiveInteraction:
   inputs: {}
   outputs:
