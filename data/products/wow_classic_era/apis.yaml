@@ -18353,7 +18353,11 @@ HasDualWieldPenalty:
   outputs:
   - name: result
     type: boolean
-HasExtraActionBar: {}
+HasExtraActionBar:
+  inputs: {}
+  outputs:
+  - name: value
+    type: boolean
 HasFilledPetition:
   inputs: {}
   outputs:
