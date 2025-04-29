@@ -17589,7 +17589,11 @@ GetNumTrainerServices:
   outputs:
   - name: numServices
     type: number
-GetNumUnspentTalents: {}
+GetNumUnspentTalents:
+  inputs: {}
+  outputs:
+  - name: numUnspentTalents
+    type: number
 GetNumWarGameTypes: {}
 GetObjectiveText: {}
 GetOptOutOfLoot: {}
