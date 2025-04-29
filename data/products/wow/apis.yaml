@@ -28884,7 +28884,11 @@ GetNumTrainerServices:
     type: number
 GetNumTreasurePickerItems: {}
 GetNumUnspentPvpTalents: {}
-GetNumUnspentTalents: {}
+GetNumUnspentTalents:
+  inputs: {}
+  outputs:
+  - name: numUnspentTalents
+    type: number
 GetNumVoidTransferDeposit:
   inputs: {}
   outputs:
