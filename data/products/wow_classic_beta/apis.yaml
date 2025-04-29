@@ -18363,7 +18363,14 @@ GetSavedWorldBossInfo:
     type: number
   - name: reset
     type: number
-GetScenariosChoiceOrder: {}
+GetScenariosChoiceOrder:
+  inputs:
+  - name: allScenarios
+    nilable: true
+    type: table
+  outputs:
+  - name: allScenarios
+    type: table
 GetScreenDPIScale:
   inputs: {}
   outputs:
