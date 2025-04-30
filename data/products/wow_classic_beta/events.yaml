@@ -4183,8 +4183,7 @@ INSTANCE_RESET_WARNING:
     type: string
   - name: timeLeft
     type: number
-INVENTORY_SEARCH_UPDATE:
-  payload: {}
+INVENTORY_SEARCH_UPDATE: {}
 ISLAND_COMPLETED:
   payload:
   - name: mapID
