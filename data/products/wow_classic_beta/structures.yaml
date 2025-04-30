@@ -4471,7 +4471,13 @@ SpellPowerCostInfo:
       type:
         enum: PowerType
 TransmogLocation:
-  fields: {}
+  fields:
+    modification:
+      type: number
+    slotID:
+      type: number
+    type:
+      type: number
   mixin: TransmogLocationMixin
 TransmogPendingInfo:
   fields: {}
