@@ -204,7 +204,11 @@ uiobject_methods:
     OnColorsUpdated: {}
   Frame:
     ClearAlphaGradient: {}
+    GetHighestFrameLevel: {}
     SetAlphaGradient: {}
+  Region:
+    CanPropagateMouseClicks: {}
+    CanPropagateMouseMotion: {}
 uiobjects:
   Animation: {}
   Path: {}

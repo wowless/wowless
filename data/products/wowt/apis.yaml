@@ -404,6 +404,13 @@ C_ActionBar.EnableActionRangeCheck:
   - name: enable
     type: boolean
   outputs: {}
+C_ActionBar.FindAssistedCombatActionButtons:
+  inputs: {}
+  mayreturnnothing: true
+  outputs:
+  - name: slots
+    type:
+      arrayof: number
 C_ActionBar.FindFlyoutActionButtons:
   inputs:
   - name: flyoutID
@@ -431,6 +438,11 @@ C_ActionBar.FindSpellActionButtons:
   - name: slots
     type:
       arrayof: number
+C_ActionBar.ForceUpdateAction:
+  inputs:
+  - name: slotID
+    type: number
+  outputs: {}
 C_ActionBar.GetBonusBarIndexForSlot:
   inputs:
   - name: slotID
@@ -471,6 +483,11 @@ C_ActionBar.GetSpell:
   outputs:
   - name: spellID
     type: number
+C_ActionBar.HasAssistedCombatActionButtons:
+  inputs: {}
+  outputs:
+  - name: hasButtons
+    type: boolean
 C_ActionBar.HasFlyoutActionButtons:
   inputs:
   - name: flyoutID
@@ -498,6 +515,13 @@ C_ActionBar.HasSpellActionButtons:
     type: number
   outputs:
   - name: hasSpellActionButtons
+    type: boolean
+C_ActionBar.IsAssistedCombatAction:
+  inputs:
+  - name: slotID
+    type: number
+  outputs:
+  - name: isAssistedCombatAction
     type: boolean
 C_ActionBar.IsAutoCastPetAction:
   inputs:
@@ -558,6 +582,11 @@ C_ActionBar.ToggleAutoCastPetAction:
   - name: slotID
     type: number
   outputs: {}
+C_AddOnProfiler.AddMeasuredCallEvent:
+  inputs:
+  - name: name
+    type: string
+  outputs: {}
 C_AddOnProfiler.AddPerformanceMessageShown:
   inputs:
   - name: msg
@@ -597,6 +626,11 @@ C_AddOnProfiler.GetOverallMetric:
   outputs:
   - name: result
     type: number
+C_AddOnProfiler.GetTicksPerSecond:
+  inputs: {}
+  outputs:
+  - name: frequency
+    type: number
 C_AddOnProfiler.GetTopKAddOnsForMetric:
   inputs:
   - name: metric
@@ -614,6 +648,19 @@ C_AddOnProfiler.IsEnabled:
   outputs:
   - name: enabled
     type: boolean
+C_AddOnProfiler.MeasureCall:
+  inputs:
+  - name: func
+    type: table
+  - name: unpackedPrimitiveType
+    type: number
+  outputs:
+  - name: results
+    type:
+      structure: C_AddOnProfiler.AddOnProfilerCallResults
+  - name: unpackedPrimitiveType
+    type: number
+  outstride: 1
 C_AddOns.DisableAddOn:
   inputs:
   - name: name
@@ -703,6 +750,13 @@ C_AddOns.GetAddOnInterfaceVersion:
   outputs:
   - name: interfaceVersion
     type: number
+C_AddOns.GetAddOnLocalTable:
+  inputs:
+  - name: name
+    type: uiAddon
+  outputs:
+  - name: table
+    type: table
 C_AddOns.GetAddOnMetadata:
   impl: GetAddOnMetadata
   inputs:
@@ -1548,6 +1602,34 @@ C_ArtifactUI.ShouldSuppressForgeRotation:
   outputs:
   - name: shouldSuppressForgeRotation
     type: boolean
+C_AssistedCombat.GetActionSpell:
+  inputs: {}
+  outputs:
+  - name: spellID
+    nilable: true
+    type: number
+C_AssistedCombat.GetNextCastSpell:
+  inputs:
+  - default: false
+    name: checkForVisibleButton
+    type: boolean
+  outputs:
+  - name: spellID
+    nilable: true
+    type: number
+C_AssistedCombat.GetRotationSpells:
+  inputs: {}
+  outputs:
+  - name: spellIDs
+    type:
+      arrayof: number
+C_AssistedCombat.IsAssistedCombatHighlightAvailable:
+  inputs: {}
+  outputs:
+  - name: isAvailable
+    type: boolean
+  - name: failureReason
+    type: string
 C_AuctionHouse.CalculateCommodityDeposit:
   inputs:
   - name: itemID
@@ -7511,8 +7593,10 @@ C_CooldownViewer.GetCooldownViewerCooldownInfo:
 C_CooldownViewer.IsCooldownViewerAvailable:
   inputs: {}
   outputs:
-  - name: available
+  - name: isAvailable
     type: boolean
+  - name: failureReason
+    type: string
 C_CovenantCallings.AreCallingsUnlocked:
   inputs: {}
   outputs:
@@ -8185,6 +8269,11 @@ C_CurrencyInfo.IsCurrencyContainer:
   outputs:
   - name: isCurrencyContainer
     type: boolean
+C_CurrencyInfo.IsCurrencyTransferInProgress:
+  inputs: {}
+  outputs:
+  - name: currencyTransferInProgress
+    type: boolean
 C_CurrencyInfo.IsCurrencyTransferTransactionDataReady:
   inputs: {}
   outputs:
@@ -8473,12 +8562,10 @@ C_Debug.DashboardIsEnabled: {}
 C_Debug.FrameXMLDebug: {}
 C_Debug.GetAllPortLocsForMap: {}
 C_Debug.GetMapDebugObjects: {}
-C_Debug.PrintToDebugWindow: {}
 C_Debug.TeleportToMapDebugObject: {}
 C_Debug.TeleportToMapLocation: {}
 C_Debug.ToggleDebugCharInfo: {}
 C_Debug.ToggleWindDebugMenu: {}
-C_Debug.ViewInDebugWindow: {}
 C_DelvesUI.GetCompanionInfoForActivePlayer:
   inputs: {}
   outputs:
@@ -19052,6 +19139,16 @@ C_Spell.EnableSpellRangeCheck:
   - name: enable
     type: boolean
   outputs: {}
+C_Spell.GetBaseSpell:
+  inputs:
+  - name: spellIdentifier
+    type: string
+  - default: 0
+    name: spec
+    type: number
+  outputs:
+  - name: baseSpellID
+    type: number
 C_Spell.GetDeadlyDebuffInfo:
   inputs:
   - name: spellIdentifier
@@ -24107,6 +24204,15 @@ C_UIWidgetManager.GetBulletTextListWidgetVisualizationInfo:
     nilable: true
     type:
       structure: C_UIWidgetManager.BulletTextListWidgetVisualizationInfo
+C_UIWidgetManager.GetButtonHeaderWidgetVisualizationInfo:
+  inputs:
+  - name: widgetID
+    type: number
+  outputs:
+  - name: widgetInfo
+    nilable: true
+    type:
+      structure: C_UIWidgetManager.ButtonHeaderWidgetVisualizationInfo
 C_UIWidgetManager.GetCaptureBarWidgetVisualizationInfo:
   inputs:
   - name: widgetID
@@ -32472,6 +32578,16 @@ SwapToGlobalEnvironment:
 SwitchAchievementSearchTab: {}
 table.concat:
   stdlib: table.concat
+table.create:
+  inputs:
+  - name: arraySizeHint
+    type: number
+  - name: nodeSizeHint
+    nilable: true
+    type: number
+  outputs:
+  - name: table
+    type: table
 table.foreach:
   stdlib: table.foreach
 table.foreachi:

@@ -2660,6 +2660,14 @@ Frame:
     GetFrameStrata:
       getter:
       - name: frameStrata
+    GetHighestFrameLevel:
+      inputs:
+      - default: false
+        name: iterateAllChildren
+        type: boolean
+      outputs:
+      - name: frameLevel
+        type: number
     GetHitRectInsets:
       inputs: {}
       outputs:
@@ -4604,6 +4612,16 @@ Region:
       inputs: {}
       outputs:
       - name: canChange
+        type: boolean
+    CanPropagateMouseClicks:
+      inputs: {}
+      outputs:
+      - name: canPropagate
+        type: boolean
+    CanPropagateMouseMotion:
+      inputs: {}
+      outputs:
+      - name: canPropagate
         type: boolean
     ClearAllPoints:
       impl: Region/ClearAllPoints
