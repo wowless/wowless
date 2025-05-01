@@ -34076,7 +34076,6 @@ UpdateAddOnMemoryUsage:
   inputs: {}
   outputs: {}
 UpdateInventoryAlertStatus: {}
-UpdateUIParentPosition: {}
 UpdateWarGamesList: {}
 UpdateWindow:
   inputs: {}
