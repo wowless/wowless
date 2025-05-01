@@ -4,33 +4,38 @@ type:
   mapof:
     key: string
     value:
-      record:
-        frameworks:
-          type:
-            sequenceof:
-              oneof:
-              - literal: api
-              - literal: datalua
-              - literal: env
-              - literal: events
-              - literal: loader
-        function:
-          type: string
-        module:
-          type: string
-        sqls:
-          type:
-            sequenceof:
-              oneof:
-              - record:
-                  cursor:
-                    type:
-                      ref: sqlcursor
-                  table:
-                    type: boolean
-              - record:
-                  lookup:
-                    type:
-                      ref: sqllookup
-                  table:
-                    type: boolean
+      oneof:
+      - record:
+          frameworks:
+            type:
+              sequenceof:
+                oneof:
+                - literal: api
+                - literal: datalua
+                - literal: env
+                - literal: events
+                - literal: loader
+          function:
+            type: string
+          sqls:
+            type:
+              sequenceof:
+                oneof:
+                - record:
+                    cursor:
+                      type:
+                        ref: sqlcursor
+                    table:
+                      type: boolean
+                - record:
+                    lookup:
+                      type:
+                        ref: sqllookup
+                    table:
+                      type: boolean
+      - record:
+          function:
+            type: string
+          module:
+            required: true
+            type: string
