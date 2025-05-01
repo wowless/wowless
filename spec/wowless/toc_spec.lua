@@ -51,6 +51,7 @@ describe('wowless.toc', function()
           local _, files = parse(gametype, table.concat(lines, '\n'))
           local expected = {
             Cata = { 'bbb', 'ccc' },
+            Mists = { 'ccc' },
             Standard = { 'aaa' },
             Vanilla = { 'bbb', 'ccc' },
           }
