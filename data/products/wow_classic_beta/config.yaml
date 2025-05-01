@@ -21,6 +21,9 @@ addon:
       C_Macro.SetMacroExecuteLineCallback: {}
       CreateForbiddenFrame: {}
       loadstring_untainted: {}
+  hooked_globals:
+    FauxScrollFrame_Update: {}
+    SetItemRef: {}
   ignore_cvar_value:
     graphicsEnvironmentDetail: {}
     graphicsGroundClutter: {}
