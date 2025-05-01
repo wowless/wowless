@@ -4382,6 +4382,16 @@ Region:
       outputs:
       - name: canChange
         type: boolean
+    CanPropagateMouseClicks:
+      inputs: {}
+      outputs:
+      - name: canPropagate
+        type: boolean
+    CanPropagateMouseMotion:
+      inputs: {}
+      outputs:
+      - name: canPropagate
+        type: boolean
     ClearAllPoints:
       impl: Region/ClearAllPoints
     ClearPoint:
@@ -4570,11 +4580,6 @@ Region:
       inputs: {}
       outputs:
       - name: isLoaded
-        type: boolean
-    IsPropagateMouseBlocked:
-      inputs: {}
-      outputs:
-      - name: blocked
         type: boolean
     IsProtected:
       impl: Region/IsProtected

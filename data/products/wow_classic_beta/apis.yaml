@@ -4786,8 +4786,10 @@ C_CooldownViewer.GetCooldownViewerCooldownInfo:
 C_CooldownViewer.IsCooldownViewerAvailable:
   inputs: {}
   outputs:
-  - name: available
+  - name: isAvailable
     type: boolean
+  - name: failureReason
+    type: string
 C_CreatureInfo.GetClassInfo:
   impl: C_CreatureInfo.GetClassInfo
   inputs:
