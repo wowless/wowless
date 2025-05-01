@@ -8922,6 +8922,7 @@ C_PaperDollInfo.IsRangedSlotShown:
   inputs: {}
   outputs:
   - name: isShown
+    stub: true
     type: boolean
 C_PaperDollInfo.OffhandHasShield:
   inputs: {}
