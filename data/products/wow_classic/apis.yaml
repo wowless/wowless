@@ -30,7 +30,6 @@ AcceptSpellConfirmationPrompt: {}
 AcceptTrade: {}
 AcknowledgeSurvey: {}
 acos:
-  nowrap: true
   stdlib: acos
 ActionHasRange: {}
 AddAutoQuestPopUp: {}
@@ -115,7 +114,6 @@ AscendStop:
   inputs: {}
   outputs: {}
 asin:
-  nowrap: true
   stdlib: asin
 assert:
   stdlib: assert
@@ -129,10 +127,8 @@ AssistUnit:
     type: boolean
   outputs: {}
 atan:
-  nowrap: true
   stdlib: atan
 atan2:
-  nowrap: true
   stdlib: atan2
 AttackTarget:
   inputs: {}
@@ -13065,7 +13061,6 @@ coroutine.wrap:
 coroutine.yield:
   stdlib: coroutine.yield
 cos:
-  nowrap: true
   stdlib: cos
 CraftIsEnchanting:
   inputs: {}
@@ -19654,7 +19649,6 @@ ShowQuestOffer: {}
 ShowRepairCursor: {}
 SignPetition: {}
 sin:
-  nowrap: true
   stdlib: sin
 SitStandOrDescendStart:
   inputs: {}
@@ -19884,7 +19878,6 @@ TakeInboxMoney: {}
 TakeInboxTextItem: {}
 TakeTaxiNode: {}
 tan:
-  nowrap: true
   stdlib: tan
 TargetDirectionEnemy:
   inputs:

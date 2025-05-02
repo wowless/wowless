@@ -60,12 +60,10 @@ G.testsuite.generated = function()
         local func = env[name]
         if cfg.alias then
           assertEquals(func, assert(tget(_G, cfg.alias)))
-        elseif cfg.nowrap then
-          return checkLuaFunc(func)
         elseif cfg.stdlib then
           local ty = type(tget(_G, cfg.stdlib))
           if ty == 'function' then
-            return checkCFunc(func)
+            return checkFunc(func, cfg.islua or false)
           else
             assertEquals(ty, type(func))
           end

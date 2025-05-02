@@ -54,13 +54,20 @@ local ptablemap = {
     return 'Events', t
   end,
   globalapis = function(p)
+    local function islua(api)
+      if not api.stdlib then
+        return false
+      end
+      local g = assert(tpath(_G, strsplit('.', api.stdlib)))
+      return type(g) == 'function' and pcall(coroutine.create, g)
+    end
     local config = perproduct(p, 'config')
     local t = {}
     for name, api in pairs(perproduct(p, 'apis')) do
       if not name:find('%.') then
         local vv = {
           alias = api.alias,
-          nowrap = api.nowrap,
+          islua = islua(api) or nil,
           overwritten = tpath(config, 'addon', 'overwritten_apis', name) and true,
           stdlib = api.stdlib,
         }

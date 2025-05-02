@@ -149,7 +149,7 @@ local function loadFunctions(api, loader)
       end
     end
 
-    if nowrap or apicfg.nowrap then
+    if nowrap then
       return outfn
     else
       edepth = edepth + 2
