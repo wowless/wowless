@@ -159,7 +159,7 @@ G.testsuite.generated = function()
     for k, v in pairs(expectedCVars) do
       tests[v.name] = function()
         local actual = actualCVars[k]
-        assert(actual, format('extra cvar', k))
+        assert(actual, ('extra cvar %q'):format(k))
         assertEquals(v.name, actual.name, 'cvar name mismatch')
         if not toskipin[actual.name] then
           assertEquals(v.value, actual.value, 'cvar value mismatch')
@@ -173,7 +173,7 @@ G.testsuite.generated = function()
     for k, v in pairs(actualCVars) do
       if not tests[v.name] and not toskipout[k] then
         tests[v.name] = function()
-          error(format('missing cvar with default %q', v.value))
+          error(('missing cvar with default %q'):format(v.value))
         end
       end
     end

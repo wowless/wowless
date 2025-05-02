@@ -7,7 +7,7 @@ end
 local function assertEquals(expected, actual, msg, depth)
   local check = expected == actual
   if type(expected) == 'number' and type(actual) == 'number' then
-    check = abs(expected - actual) < 0.0001
+    check = math.abs(expected - actual) < 0.0001
   end
   if not check then
     error(string.format('%swant %s, got %s', msg and msg .. ': ' or '', quote(expected), quote(actual)), depth or 2)

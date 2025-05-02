@@ -108,9 +108,9 @@
   <Frame>
     <Scripts>
       <OnLoad>
-        tinsert(WowlessLog, 'during')
+        table.insert(WowlessLog, 'during')
         end, (function()
-          tinsert(WowlessLog, 'before')
+          table.insert(WowlessLog, 'before')
         end)()
       --</OnLoad>
     </Scripts>

@@ -1,7 +1,5 @@
 ---
 AbandonSkill: {}
-abs:
-  alias: math.abs
 AcceptAreaSpiritHeal:
   inputs: {}
   outputs: {}
@@ -26,8 +24,6 @@ AcceptSpellConfirmationPrompt: {}
 AcceptTrade: {}
 AcknowledgeAutoAcceptQuest: {}
 AcknowledgeSurvey: {}
-acos:
-  stdlib: acos
 ActionHasRange: {}
 AddAutoQuestPopUp: {}
 AddChatWindowChannel: {}
@@ -71,8 +67,6 @@ AreTalentsLocked: {}
 AscendStop:
   inputs: {}
   outputs: {}
-asin:
-  stdlib: asin
 assert:
   stdlib: assert
 AssistUnit:
@@ -84,10 +78,6 @@ AssistUnit:
     name: exactMatch
     type: boolean
   outputs: {}
-atan:
-  stdlib: atan
-atan2:
-  stdlib: atan2
 AttachGlyphToSpell: {}
 AttackTarget:
   inputs: {}
@@ -25871,8 +25861,6 @@ CastSpellByName:
   - nilable: true
     type: string
   outputs: {}
-ceil:
-  alias: math.ceil
 CenterCamera:
   inputs: {}
   outputs: {}
@@ -26183,8 +26171,6 @@ coroutine.wrap:
   stdlib: coroutine.wrap
 coroutine.yield:
   stdlib: coroutine.yield
-cos:
-  stdlib: cos
 CreateFont:
   impl: CreateFont
   inputs:
@@ -26317,8 +26303,6 @@ DeclineResurrect:
   inputs: {}
   outputs: {}
 DeclineSpellConfirmationPrompt: {}
-deg:
-  alias: math.deg
 DeleteCursorItem:
   inputs: {}
   outputs: {}
@@ -26457,8 +26441,6 @@ EquipPendingItem:
 error:
   stdlib: error
 ExecuteVoidTransfer: {}
-exp:
-  alias: math.exp
 ExpandGuildTradeSkillHeader: {}
 ExpandQuestHeader: {}
 ExpandWarGameHeader: {}
@@ -26486,8 +26468,6 @@ FlipCameraYaw:
   - name: angle
     type: number
   outputs: {}
-floor:
-  alias: math.floor
 FlyoutHasSpell: {}
 FocusUnit:
   inputs:
@@ -26513,10 +26493,6 @@ ForceQuit:
   inputs: {}
   outputs: {}
 ForfeitDuel: {}
-format:
-  alias: string.format
-frexp:
-  alias: math.frexp
 gcinfo:
   stdlib: gcinfo
 GetAccountExpansionLevel:
@@ -28563,8 +28539,6 @@ GetMultiCastBarIndex:
   outputs:
   - type: number
 GetMultiCastTotemSpells: {}
-getn:
-  alias: table.getn
 GetNativeRealmID:
   inputs: {}
   outputs:
@@ -30458,8 +30432,6 @@ GetZoneText:
   - name: text
     type: string
 GiveMasterLoot: {}
-gmatch:
-  alias: string.gmatch
 GMEuropaBugsEnabled: {}
 GMEuropaComplaintsEnabled: {}
 GMEuropaSuggestionsEnabled: {}
@@ -30477,8 +30449,6 @@ GMSurveyNumAnswers: {}
 GMSurveyQuestion: {}
 GMSurveySubmit: {}
 GroupHasOfflineMember: {}
-gsub:
-  alias: string.gsub
 GuildControlAddRank: {}
 GuildControlDelRank: {}
 GuildControlGetAllowedShifts: {}
@@ -31350,8 +31320,6 @@ LaunchURL:
   - name: url
     type: string
   outputs: {}
-ldexp:
-  alias: math.ldexp
 LearnPvpTalent: {}
 LearnPvpTalents: {}
 LearnTalent: {}
@@ -31385,10 +31353,6 @@ LocalizedClassList:
   outputs:
   - name: result
     type: table
-log:
-  alias: math.log
-log10:
-  alias: math.log10
 LoggingChat:
   inputs:
   - name: value
@@ -31469,12 +31433,6 @@ math.tan:
   stdlib: math.tan
 math.tanh:
   stdlib: math.tanh
-max:
-  alias: math.max
-min:
-  alias: math.min
-mod:
-  alias: math.fmod
 MouselookStart: {}
 MouselookStop: {}
 MouseOverrideCinematicDisable:
@@ -31577,8 +31535,6 @@ PetPassiveMode: {}
 PetStopAttack: {}
 PetUsesPetFrame: {}
 PetWait: {}
-PI:
-  stdlib: math.pi
 PickupAction: {}
 PickupBagFromSlot: {}
 PickupCompanion: {}
@@ -31714,12 +31670,8 @@ QuestPOIUpdateIcons: {}
 Quit:
   inputs: {}
   outputs: {}
-rad:
-  alias: math.rad
 RaidProfileExists: {}
 RaidProfileHasUnsavedChanges: {}
-random:
-  alias: math.random
 RandomRoll:
   inputs:
   - name: min
@@ -32251,16 +32203,12 @@ ShowQuestComplete: {}
 ShowQuestOffer: {}
 ShowRepairCursor: {}
 SignPetition: {}
-sin:
-  stdlib: sin
 SitStandOrDescendStart:
   inputs: {}
   outputs: {}
 SocketInventoryItem: {}
 SocketItemToArtifact: {}
 SolveArtifact: {}
-sort:
-  alias: table.sort
 SortBattlefieldScoreData: {}
 SortBGList: {}
 SortGuildRoster: {}
@@ -32310,8 +32258,6 @@ SplashFrameCanBeShown:
   - name: result
     type: boolean
 SplitGuildBankItem: {}
-sqrt:
-  alias: math.sqrt
 StartAttack:
   inputs:
   - default: '0'
@@ -32363,14 +32309,10 @@ StrafeRightStart:
   inputs: {}
   outputs: {}
 StrafeRightStop: {}
-strbyte:
-  alias: string.byte
 strcmputf8i:
   stdlib: strcmputf8i
 strconcat:
   stdlib: strconcat
-strfind:
-  alias: string.find
 string.byte:
   stdlib: string.byte
 string.char:
@@ -32426,26 +32368,14 @@ StripHyperlinks:
     type: string
 strjoin:
   stdlib: strjoin
-strlen:
-  alias: string.len
 strlenutf8:
   stdlib: strlenutf8
-strlower:
-  alias: string.lower
-strmatch:
-  alias: string.match
-strrep:
-  alias: string.rep
 strsplit:
   stdlib: strsplit
 strsplittable:
   stdlib: strsplittable
-strsub:
-  alias: string.sub
 strtrim:
   stdlib: strtrim
-strupper:
-  alias: string.upper
 Stuck:
   inputs: {}
   outputs: {}
@@ -32487,8 +32417,6 @@ TakeInboxItem: {}
 TakeInboxMoney: {}
 TakeInboxTextItem: {}
 TakeTaxiNode: {}
-tan:
-  stdlib: tan
 TargetDirectionEnemy:
   inputs:
   - name: facing
@@ -32601,8 +32529,6 @@ time:
 TimeoutResurrect:
   inputs: {}
   outputs: {}
-tinsert:
-  alias: table.insert
 ToggleAutoRun:
   inputs: {}
   outputs: {}
@@ -32625,8 +32551,6 @@ tonumber:
   stdlib: tonumber
 tostring:
   stdlib: tostring
-tremove:
-  alias: table.remove
 TriggerTutorial: {}
 TurnInGuildCharter: {}
 TurnLeftStart:
@@ -34120,8 +34044,6 @@ VehiclePrevSeat:
   outputs: {}
 ViewGuildRecipes: {}
 WarGameRespond: {}
-wipe:
-  alias: table.wipe
 WithdrawGuildBankMoney: {}
 WorldLootObjectExists:
   inputs:

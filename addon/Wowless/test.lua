@@ -388,7 +388,8 @@ G.testsuite.sync = function()
       assertEquals('dead', coroutine.status(co))
       assertEquals('a,b,c,d,e,f', table.concat(log, ','))
     end,
-    ['format'] = function()
+    ['string.format'] = function()
+      local format = string.format
       return {
         ['format missing numbers'] = function()
           assertEquals('0', format('%d'))
