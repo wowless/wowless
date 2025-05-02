@@ -31996,8 +31996,7 @@ string.gmatch:
 string.gsub:
   stdlib: string.gsub
 string.join:
-  nowrap: false
-  stdlib: string.join
+  stdlib: strjoin
 string.len:
   stdlib: string.len
 string.lower:
@@ -32009,13 +32008,11 @@ string.rep:
 string.reverse:
   stdlib: string.reverse
 string.split:
-  nowrap: false
-  stdlib: string.split
+  stdlib: strsplit
 string.sub:
   stdlib: string.sub
 string.trim:
-  nowrap: false
-  stdlib: string.trim
+  stdlib: strtrim
 string.upper:
   stdlib: string.upper
 StripHyperlinks:

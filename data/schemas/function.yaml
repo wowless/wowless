@@ -24,8 +24,6 @@ type:
       type: boolean
     mayreturnnothing:
       type: boolean
-    nowrap:
-      type: boolean
     outputs:
       type:
         sequenceof:

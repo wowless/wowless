@@ -21217,7 +21217,6 @@ string.gmatch:
 string.gsub:
   stdlib: string.gsub
 string.join:
-  nowrap: false
   stdlib: strjoin
 string.len:
   stdlib: string.len
@@ -21230,12 +21229,10 @@ string.rep:
 string.reverse:
   stdlib: string.reverse
 string.split:
-  nowrap: false
   stdlib: strsplit
 string.sub:
   stdlib: string.sub
 string.trim:
-  nowrap: false
   stdlib: strtrim
 string.upper:
   stdlib: string.upper
