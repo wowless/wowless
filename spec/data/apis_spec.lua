@@ -3,7 +3,8 @@ describe('apis', function()
     local wapi = require('wowless.api').new(function() end, 0, p)
     local typechecker = require('wowless.typecheck')(wapi)
     describe(p, function()
-      for name, api in pairs(require('build.data.products.' .. p .. '.apis')) do
+      local apis = require('build.data.products.' .. p .. '.apis')
+      for name, api in pairs(apis) do
         describe(name, function()
           it('is not stubbed if provided by elune', function()
             if _G[name] then
@@ -149,6 +150,18 @@ describe('apis', function()
           end)
         end)
       end
+      it('has no duplicate stdlibs', function()
+        local s = {}
+        for k, v in pairs(apis) do
+          local z = v.stdlib
+          if z then
+            if s[z] then
+              error(('stdlib %q duplicated across %q and %q'):format(z, k, s[z]))
+            end
+            s[z] = k
+          end
+        end
+      end)
     end)
   end
 end)

@@ -292,6 +292,9 @@ SendSystemMessage:
   frameworks:
   - api
 SetPortraitTexture: {}
+string.join: {}
+string.split: {}
+string.trim: {}
 SwapToGlobalEnvironment:
   module: env
 UnitClass:

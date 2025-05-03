@@ -18957,7 +18957,7 @@ PetStopAttack: {}
 PetUsesPetFrame: {}
 PetWait: {}
 PI:
-  stdlib: math.pi
+  alias: math.pi
 PickupAction: {}
 PickupBagFromSlot: {}
 PickupCompanion: {}
@@ -19780,7 +19780,7 @@ string.gmatch:
 string.gsub:
   stdlib: string.gsub
 string.join:
-  stdlib: strjoin
+  alias: strjoin
 string.len:
   stdlib: string.len
 string.lower:
@@ -19792,11 +19792,11 @@ string.rep:
 string.reverse:
   stdlib: string.reverse
 string.split:
-  stdlib: strsplit
+  alias: strsplit
 string.sub:
   stdlib: string.sub
 string.trim:
-  stdlib: strtrim
+  alias: strtrim
 string.upper:
   stdlib: string.upper
 StripHyperlinks:
@@ -19819,7 +19819,7 @@ StripHyperlinks:
   - name: stripped
     type: string
 strjoin:
-  alias: string.join
+  stdlib: strjoin
 strlen:
   alias: string.len
 strlenutf8:
@@ -19831,13 +19831,13 @@ strmatch:
 strrep:
   alias: string.rep
 strsplit:
-  alias: string.split
+  stdlib: strsplit
 strsplittable:
   stdlib: strsplittable
 strsub:
   alias: string.sub
 strtrim:
-  alias: string.trim
+  stdlib: strtrim
 strupper:
   alias: string.upper
 Stuck:

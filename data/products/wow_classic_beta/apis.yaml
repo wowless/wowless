@@ -21159,7 +21159,7 @@ string.gmatch:
 string.gsub:
   stdlib: string.gsub
 string.join:
-  stdlib: strjoin
+  impl: string.join
 string.len:
   stdlib: string.len
 string.lower:
@@ -21171,11 +21171,11 @@ string.rep:
 string.reverse:
   stdlib: string.reverse
 string.split:
-  stdlib: strsplit
+  impl: string.split
 string.sub:
   stdlib: string.sub
 string.trim:
-  stdlib: strtrim
+  impl: string.trim
 string.upper:
   stdlib: string.upper
 StripHyperlinks:

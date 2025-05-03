@@ -160,27 +160,16 @@ local function loadFunctions(api, loader)
   local rawfns = {}
   local fns = {}
   local aliases = {}
-  local stdlibs = {}
   for fn, apicfg in pairs(apis) do
     if apicfg.alias then
       aliases[fn] = apicfg.alias
     elseif apicfg.stdlib then
-      stdlibs[apicfg.stdlib] = stdlibs[apicfg.stdlib] or {}
-      table.insert(stdlibs[apicfg.stdlib], fn)
+      local v = assert(util.tget(_G, fn))
+      util.tset(fns, fn, v)
+      util.tset(rawfns, fn, v)
     else
       util.tset(fns, fn, mkfn(fn, apicfg))
       util.tset(rawfns, fn, mkfn(fn, apicfg, true))
-    end
-  end
-  -- TODO just enforce stdlib uniqueness and hack luamain as needed
-  for k, fs in pairs(stdlibs) do
-    local v = assert(util.tget(_G, k))
-    util.tset(fns, fs[1], v)
-    util.tset(rawfns, fs[1], v)
-    local iscfunc = type(v) == 'function' and not pcall(coroutine.create, v)
-    for i = 2, #fs do
-      util.tset(fns, fs[i], iscfunc and debug.newcfunction(v) or v)
-      util.tset(rawfns, fs[i], v)
     end
   end
   for k, v in pairs(aliases) do
