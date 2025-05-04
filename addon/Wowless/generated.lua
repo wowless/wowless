@@ -1,4 +1,4 @@
-local _, G = ...
+local addonName, G = ...
 local assertEquals = _G.assertEquals
 local iswowlesslite = _G.__wowless and _G.__wowless.lite
 
@@ -268,6 +268,7 @@ G.testsuite.generated = function()
   local function impltests()
     local tests = {}
     local arg = {
+      addonName = addonName,
       assertEquals = G.assertEquals,
       assertRecursivelyEqual = G.assertRecursivelyEqual,
       check1 = G.check1,

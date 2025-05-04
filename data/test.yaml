@@ -21,6 +21,7 @@ IsInGlobalEnvironment: {}
 IsLinuxClient: {}
 IsMacClient: {}
 issecure: {}
+issecurevariable: {}
 IsTestBuild: {}
 IsWindowsClient: {}
 SwapToGlobalEnvironment: {}
