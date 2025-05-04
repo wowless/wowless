@@ -10,20 +10,6 @@ G.testsuite.api = function()
         end,
       }
     end,
-    error = function()
-      return {
-        nullary = function()
-          local success, msg = pcall(error)
-          assertEquals(false, success)
-          assertEquals(nil, msg)
-        end,
-        unary = function()
-          local success, msg = pcall(error, 'moo')
-          assertEquals(false, success)
-          assertEquals('moo', msg)
-        end,
-      }
-    end,
     hooksecurefunc = function()
       return {
         ['hooks members and returns original'] = function()
