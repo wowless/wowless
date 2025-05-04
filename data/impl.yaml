@@ -1,4 +1,30 @@
 ---
+acos:
+  stdlib: acos
+asin:
+  stdlib: asin
+assert:
+  stdlib: assert
+atan:
+  stdlib: atan
+atan2:
+  stdlib: atan2
+bit.arshift:
+  stdlib: bit.arshift
+bit.band:
+  stdlib: bit.band
+bit.bnot:
+  stdlib: bit.bnot
+bit.bor:
+  stdlib: bit.bor
+bit.bxor:
+  stdlib: bit.bxor
+bit.lshift:
+  stdlib: bit.lshift
+bit.mod:
+  stdlib: bit.mod
+bit.rshift:
+  stdlib: bit.rshift
 C_Calendar.GetMonthInfo:
   module: calendar
 C_Calendar.SetAbsMonth:
@@ -127,6 +153,22 @@ C_UIColor.GetColors:
 C_XMLUtil.GetTemplateInfo_10_2:
   frameworks:
   - api
+collectgarbage:
+  stdlib: collectgarbage
+coroutine.create:
+  stdlib: coroutine.create
+coroutine.resume:
+  stdlib: coroutine.resume
+coroutine.running:
+  stdlib: coroutine.running
+coroutine.status:
+  stdlib: coroutine.status
+coroutine.wrap:
+  stdlib: coroutine.wrap
+coroutine.yield:
+  stdlib: coroutine.yield
+cos:
+  stdlib: cos
 CreateFont:
   frameworks:
   - api
@@ -137,6 +179,18 @@ CreateFrame:
   frameworks:
   - api
 CreateWindow: {}
+date:
+  stdlib: date
+debuglocals:
+  stdlib: debuglocals
+debugprofilestart:
+  stdlib: debugprofilestart
+debugprofilestop:
+  stdlib: debugprofilestop
+debugstack:
+  stdlib: debugstack
+difftime:
+  stdlib: difftime
 DoEmote:
   frameworks:
   - api
@@ -145,9 +199,17 @@ DoEmote:
 EnumerateFrames:
   frameworks:
   - api
+error:
+  stdlib: error
+fastrandom:
+  stdlib: fastrandom
 FillLocalizedClassList:
   sqls:
   - cursor: FillLocalizedClassList
+forceinsecure:
+  stdlib: forceinsecure
+gcinfo:
+  stdlib: gcinfo
 GetAddOnEnableState: {}
 GetAddOnInfo: {}
 GetAddOnMetadata: {}
@@ -178,6 +240,8 @@ GetClickFrame:
   - api
 GetCurrentEnvironment:
   module: env
+geterrorhandler:
+  stdlib: geterrorhandler
 getfenv:
   module: env
 GetFontStringMetatable:
@@ -197,6 +261,8 @@ GetInventorySlotInfo:
 GetItemQualityColor: {}
 GetLootSpecialization:
   module: units
+getmetatable:
+  stdlib: getmetatable
 GetNumAddOns:
   frameworks:
   - api
@@ -260,6 +326,10 @@ GetTalentTabInfo:
   - lookup: GetTalentTabInfo
 GetTime:
   module: time
+hooksecurefunc:
+  stdlib: hooksecurefunc
+ipairs:
+  stdlib: ipairs
 IsAddOnLoaded: {}
 IsAddOnLoadOnDemand: {}
 IsInGlobalEnvironment:
@@ -272,6 +342,10 @@ IsLoggedIn:
 IsMacClient:
   frameworks:
   - api
+issecure:
+  stdlib: issecure
+issecurevariable:
+  stdlib: issecurevariable
 IsTestBuild:
   frameworks:
   - datalua
@@ -281,22 +355,192 @@ IsWindowsClient:
 LoadAddOn:
   frameworks:
   - loader
+loadstring:
+  stdlib: loadstring
+loadstring_untainted:
+  stdlib: loadstring_untainted
+math.abs:
+  stdlib: math.abs
+math.acos:
+  stdlib: math.acos
+math.asin:
+  stdlib: math.asin
+math.atan:
+  stdlib: math.atan
+math.atan2:
+  stdlib: math.atan2
+math.ceil:
+  stdlib: math.ceil
+math.cos:
+  stdlib: math.cos
+math.cosh:
+  stdlib: math.cosh
+math.deg:
+  stdlib: math.deg
+math.exp:
+  stdlib: math.exp
+math.floor:
+  stdlib: math.floor
+math.fmod:
+  stdlib: math.fmod
+math.frexp:
+  stdlib: math.frexp
+math.huge:
+  stdlib: math.huge
+math.ldexp:
+  stdlib: math.ldexp
+math.log:
+  stdlib: math.log
+math.log10:
+  stdlib: math.log10
+math.max:
+  stdlib: math.max
+math.min:
+  stdlib: math.min
+math.modf:
+  stdlib: math.modf
+math.pi:
+  stdlib: math.pi
+math.pow:
+  stdlib: math.pow
+math.rad:
+  stdlib: math.rad
+math.random:
+  stdlib: math.random
+math.sin:
+  stdlib: math.sin
+math.sinh:
+  stdlib: math.sinh
+math.sqrt:
+  stdlib: math.sqrt
+math.tan:
+  stdlib: math.tan
+math.tanh:
+  stdlib: math.tanh
+newproxy:
+  stdlib: newproxy
+next:
+  stdlib: next
+pairs:
+  stdlib: pairs
+pcall:
+  stdlib: pcall
+pcallwithenv:
+  stdlib: pcallwithenv
+rawequal:
+  stdlib: rawequal
+rawget:
+  stdlib: rawget
+rawset:
+  stdlib: rawset
 RequestTimePlayed:
   frameworks:
   - api
 RunMacroText:
   module: macrotext
 RunScript: {}
+scrub:
+  stdlib: scrub
+securecall:
+  stdlib: securecall
+securecallfunction:
+  stdlib: securecallfunction
 SecureCmdOptionParse: {}
+secureexecuterange:
+  stdlib: secureexecuterange
+select:
+  stdlib: select
 SendSystemMessage:
   frameworks:
   - api
+seterrorhandler:
+  stdlib: seterrorhandler
+setfenv:
+  stdlib: setfenv
+setmetatable:
+  stdlib: setmetatable
 SetPortraitTexture: {}
+sin:
+  stdlib: sin
+strcmputf8i:
+  stdlib: strcmputf8i
+strconcat:
+  stdlib: strconcat
+string.byte:
+  stdlib: string.byte
+string.char:
+  stdlib: string.char
+string.find:
+  stdlib: string.find
+string.format:
+  stdlib: string.format
+string.gfind:
+  stdlib: string.gfind
+string.gmatch:
+  stdlib: string.gmatch
+string.gsub:
+  stdlib: string.gsub
 string.join: {}
+string.len:
+  stdlib: string.len
+string.lower:
+  stdlib: string.lower
+string.match:
+  stdlib: string.match
+string.rep:
+  stdlib: string.rep
+string.reverse:
+  stdlib: string.reverse
 string.split: {}
+string.sub:
+  stdlib: string.sub
 string.trim: {}
+string.upper:
+  stdlib: string.upper
+strjoin:
+  stdlib: strjoin
+strlenutf8:
+  stdlib: strlenutf8
+strsplit:
+  stdlib: strsplit
+strsplittable:
+  stdlib: strsplittable
+strtrim:
+  stdlib: strtrim
 SwapToGlobalEnvironment:
   module: env
+table.concat:
+  stdlib: table.concat
+table.foreach:
+  stdlib: table.foreach
+table.foreachi:
+  stdlib: table.foreachi
+table.getn:
+  stdlib: table.getn
+table.insert:
+  stdlib: table.insert
+table.maxn:
+  stdlib: table.maxn
+table.remove:
+  stdlib: table.remove
+table.removemulti:
+  stdlib: table.removemulti
+table.setn:
+  stdlib: table.setn
+table.sort:
+  stdlib: table.sort
+table.wipe:
+  stdlib: table.wipe
+tan:
+  stdlib: tan
+time:
+  stdlib: time
+tonumber:
+  stdlib: tonumber
+tostring:
+  stdlib: tostring
+type:
+  stdlib: type
 UnitClass:
   sqls:
   - lookup: UnitClass
@@ -319,3 +563,7 @@ UnitRace:
   sqls:
   - lookup: UnitRace
 UnitSex: {}
+unpack:
+  stdlib: unpack
+xpcall:
+  stdlib: xpcall

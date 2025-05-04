@@ -39,3 +39,7 @@ type:
           module:
             required: true
             type: string
+      - record:
+          stdlib:
+            required: true
+            type: string

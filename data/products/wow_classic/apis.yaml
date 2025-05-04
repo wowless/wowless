@@ -30,7 +30,7 @@ AcceptSpellConfirmationPrompt: {}
 AcceptTrade: {}
 AcknowledgeSurvey: {}
 acos:
-  stdlib: acos
+  impl: acos
 ActionHasRange: {}
 AddAutoQuestPopUp: {}
 AddChatWindowChannel: {}
@@ -114,9 +114,9 @@ AscendStop:
   inputs: {}
   outputs: {}
 asin:
-  stdlib: asin
+  impl: asin
 assert:
-  stdlib: assert
+  impl: assert
 AssistUnit:
   inputs:
   - default: ''
@@ -127,9 +127,9 @@ AssistUnit:
     type: boolean
   outputs: {}
 atan:
-  stdlib: atan
+  impl: atan
 atan2:
-  stdlib: atan2
+  impl: atan2
 AttackTarget:
   inputs: {}
   outputs: {}
@@ -150,21 +150,21 @@ BeginTrade:
   inputs: {}
   outputs: {}
 bit.arshift:
-  stdlib: bit.arshift
+  impl: bit.arshift
 bit.band:
-  stdlib: bit.band
+  impl: bit.band
 bit.bnot:
-  stdlib: bit.bnot
+  impl: bit.bnot
 bit.bor:
-  stdlib: bit.bor
+  impl: bit.bor
 bit.bxor:
-  stdlib: bit.bxor
+  impl: bit.bxor
 bit.lshift:
-  stdlib: bit.lshift
+  impl: bit.lshift
 bit.mod:
-  stdlib: bit.mod
+  impl: bit.mod
 bit.rshift:
-  stdlib: bit.rshift
+  impl: bit.rshift
 BNAcceptFriendInvite: {}
 BNCheckBattleTagInviteToGuildMember: {}
 BNCheckBattleTagInviteToUnit: {}
@@ -12947,7 +12947,7 @@ CollapseTradeSkillSubClass: {}
 CollapseTrainerSkillLine: {}
 CollapseWarGameHeader: {}
 collectgarbage:
-  stdlib: collectgarbage
+  impl: collectgarbage
 CombatLog_Object_IsA: {}
 CombatLogAddFilter: {}
 CombatLogAdvanceEntry: {}
@@ -13049,19 +13049,19 @@ CopyToClipboard:
   - name: length
     type: number
 coroutine.create:
-  stdlib: coroutine.create
+  impl: coroutine.create
 coroutine.resume:
-  stdlib: coroutine.resume
+  impl: coroutine.resume
 coroutine.running:
-  stdlib: coroutine.running
+  impl: coroutine.running
 coroutine.status:
-  stdlib: coroutine.status
+  impl: coroutine.status
 coroutine.wrap:
-  stdlib: coroutine.wrap
+  impl: coroutine.wrap
 coroutine.yield:
-  stdlib: coroutine.yield
+  impl: coroutine.yield
 cos:
-  stdlib: cos
+  impl: cos
 CraftIsEnchanting:
   inputs: {}
   outputs:
@@ -13154,20 +13154,20 @@ CursorHasSpell:
   - name: result
     type: boolean
 date:
-  stdlib: date
+  impl: date
 DeathRecap_GetEvents: {}
 DeathRecap_HasEvents:
   inputs: {}
   outputs:
   - type: boolean
 debuglocals:
-  stdlib: debuglocals
+  impl: debuglocals
 debugprofilestart:
-  stdlib: debugprofilestart
+  impl: debugprofilestart
 debugprofilestop:
-  stdlib: debugprofilestop
+  impl: debugprofilestop
 debugstack:
-  stdlib: debugstack
+  impl: debugstack
 DeclineArenaTeam:
   inputs: {}
   outputs: {}
@@ -13216,7 +13216,7 @@ DestroyTotem:
   outputs: {}
 DetectWowMouse: {}
 difftime:
-  stdlib: difftime
+  impl: difftime
 DisableSpellAutocast: {}
 DismissCompanion: {}
 Dismount:
@@ -13340,7 +13340,7 @@ EquipPendingItem:
     type: number
   outputs: {}
 error:
-  stdlib: error
+  impl: error
 exp:
   alias: math.exp
 ExpandAllFactionHeaders: {}
@@ -13359,7 +13359,7 @@ ExpandTrainerSkillLine:
 ExpandWarGameHeader: {}
 FactionToggleAtWar: {}
 fastrandom:
-  stdlib: fastrandom
+  impl: fastrandom
 FillLocalizedClassList:
   impl: FillLocalizedClassList
   inputs:
@@ -13408,7 +13408,7 @@ FollowUnit:
     type: boolean
   outputs: {}
 forceinsecure:
-  stdlib: forceinsecure
+  impl: forceinsecure
 ForceLogout:
   inputs: {}
   outputs: {}
@@ -13421,7 +13421,7 @@ format:
 frexp:
   alias: math.frexp
 gcinfo:
-  stdlib: gcinfo
+  impl: gcinfo
 GetAbandonQuestItems: {}
 GetAbandonQuestName: {}
 GetAccountExpansionLevel:
@@ -14407,7 +14407,7 @@ GetErrorCallstackHeight:
     nilable: true
     type: number
 geterrorhandler:
-  stdlib: geterrorhandler
+  impl: geterrorhandler
 GetEventTime:
   inputs:
   - name: eventProfileIndex
@@ -15686,7 +15686,7 @@ GetMerchantNumItems:
   - name: numMerchantItems
     type: number
 getmetatable:
-  stdlib: getmetatable
+  impl: getmetatable
 GetMinimapZoneText:
   inputs: {}
   outputs:
@@ -18035,7 +18035,7 @@ HearthAndResurrectFromArea: {}
 HideRepairCursor: {}
 HonorSystemEnabled: {}
 hooksecurefunc:
-  stdlib: hooksecurefunc
+  impl: hooksecurefunc
 InActiveBattlefield: {}
 InboxItemCanDelete:
   inputs:
@@ -18077,7 +18077,7 @@ InitiateTrade:
   outputs: {}
 InRepairMode: {}
 ipairs:
-  stdlib: ipairs
+  impl: ipairs
 Is64BitClient:
   inputs: {}
   outputs:
@@ -18538,10 +18538,10 @@ IsRightShiftKeyDown:
   - name: down
     type: boolean
 issecure:
-  stdlib: issecure
+  impl: issecure
 issecurevalue: {}
 issecurevariable:
-  stdlib: issecurevariable
+  impl: issecurevariable
 IsSelectedSpellBookItem: {}
 IsServerControlledBackfill: {}
 IsShiftKeyDown:
@@ -18753,9 +18753,9 @@ ListChannelByName: {}
 ListChannels: {}
 LoadBindings: {}
 loadstring:
-  stdlib: loadstring
+  impl: loadstring
 loadstring_untainted:
-  stdlib: loadstring_untainted
+  impl: loadstring_untainted
 LoadURLIndex:
   inputs:
   - name: index
@@ -18791,63 +18791,63 @@ LootMoneyNotify: {}
 LootSlot: {}
 LootSlotHasItem: {}
 math.abs:
-  stdlib: math.abs
+  impl: math.abs
 math.acos:
-  stdlib: math.acos
+  impl: math.acos
 math.asin:
-  stdlib: math.asin
+  impl: math.asin
 math.atan:
-  stdlib: math.atan
+  impl: math.atan
 math.atan2:
-  stdlib: math.atan2
+  impl: math.atan2
 math.ceil:
-  stdlib: math.ceil
+  impl: math.ceil
 math.cos:
-  stdlib: math.cos
+  impl: math.cos
 math.cosh:
-  stdlib: math.cosh
+  impl: math.cosh
 math.deg:
-  stdlib: math.deg
+  impl: math.deg
 math.exp:
-  stdlib: math.exp
+  impl: math.exp
 math.floor:
-  stdlib: math.floor
+  impl: math.floor
 math.fmod:
-  stdlib: math.fmod
+  impl: math.fmod
 math.frexp:
-  stdlib: math.frexp
+  impl: math.frexp
 math.huge:
-  stdlib: math.huge
+  impl: math.huge
 math.ldexp:
-  stdlib: math.ldexp
+  impl: math.ldexp
 math.log:
-  stdlib: math.log
+  impl: math.log
 math.log10:
-  stdlib: math.log10
+  impl: math.log10
 math.max:
-  stdlib: math.max
+  impl: math.max
 math.min:
-  stdlib: math.min
+  impl: math.min
 math.modf:
-  stdlib: math.modf
+  impl: math.modf
 math.pi:
-  stdlib: math.pi
+  impl: math.pi
 math.pow:
-  stdlib: math.pow
+  impl: math.pow
 math.rad:
-  stdlib: math.rad
+  impl: math.rad
 math.random:
-  stdlib: math.random
+  impl: math.random
 math.sin:
-  stdlib: math.sin
+  impl: math.sin
 math.sinh:
-  stdlib: math.sinh
+  impl: math.sinh
 math.sqrt:
-  stdlib: math.sqrt
+  impl: math.sqrt
 math.tan:
-  stdlib: math.tan
+  impl: math.tan
 math.tanh:
-  stdlib: math.tanh
+  impl: math.tanh
 max:
   alias: math.max
 min:
@@ -18895,9 +18895,9 @@ MoveViewUpStop: {}
 MultiSampleAntiAliasingSupported: {}
 MuteSoundFile: {}
 newproxy:
-  stdlib: newproxy
+  impl: newproxy
 next:
-  stdlib: next
+  impl: next
 NextView:
   inputs: {}
   outputs: {}
@@ -18922,7 +18922,7 @@ OpeningCinematic:
   outputs: {}
 OpenTrainer: {}
 pairs:
-  stdlib: pairs
+  impl: pairs
 PartialPlayTime:
   inputs: {}
   outputs:
@@ -18931,9 +18931,9 @@ PartialPlayTime:
     type: boolean
 PartyLFGStartBackfill: {}
 pcall:
-  stdlib: pcall
+  impl: pcall
 pcallwithenv:
-  stdlib: pcallwithenv
+  impl: pcallwithenv
 PetAbandon: {}
 PetAggressiveMode: {}
 PetAttack:
@@ -19102,11 +19102,11 @@ RandomRoll:
     type: number
   outputs: {}
 rawequal:
-  stdlib: rawequal
+  impl: rawequal
 rawget:
-  stdlib: rawget
+  impl: rawget
 rawset:
-  stdlib: rawset
+  impl: rawset
 RedockChatWindows:
   inputs: {}
   outputs: {}
@@ -19247,7 +19247,7 @@ Screenshot:
   inputs: {}
   outputs: {}
 scrub:
-  stdlib: scrub
+  impl: scrub
 SearchLFGGetEncounterResults: {}
 SearchLFGGetJoinedID: {}
 SearchLFGGetNumResults: {}
@@ -19257,9 +19257,9 @@ SearchLFGJoin: {}
 SearchLFGLeave: {}
 SearchLFGSort: {}
 securecall:
-  stdlib: securecall
+  impl: securecall
 securecallfunction:
-  stdlib: securecallfunction
+  impl: securecallfunction
 SecureCmdOptionParse:
   impl: SecureCmdOptionParse
   inputs:
@@ -19273,9 +19273,9 @@ SecureCmdOptionParse:
     nilable: true
     type: string
 secureexecuterange:
-  stdlib: secureexecuterange
+  impl: secureexecuterange
 select:
-  stdlib: select
+  impl: select
 SelectActiveQuest: {}
 SelectAvailableQuest: {}
 SelectCraft:
@@ -19416,7 +19416,7 @@ SetErrorCallstackHeight:
     type: number
   outputs: {}
 seterrorhandler:
-  stdlib: seterrorhandler
+  impl: seterrorhandler
 SetEuropeanNumbers:
   inputs:
   - name: enabled
@@ -19426,7 +19426,7 @@ SetEveryoneIsAssistant: {}
 SetFactionActive: {}
 SetFactionInactive: {}
 setfenv:
-  stdlib: setfenv
+  impl: setfenv
 SetFocusedAchievement: {}
 SetGamePadCursorControl: {}
 SetGamePadFreeLook: {}
@@ -19470,7 +19470,7 @@ SetLootThreshold: {}
 SetMacroItem: {}
 SetMacroSpell: {}
 setmetatable:
-  stdlib: setmetatable
+  impl: setmetatable
 SetModifiedClick:
   inputs:
   - type: string
@@ -19649,7 +19649,7 @@ ShowQuestOffer: {}
 ShowRepairCursor: {}
 SignPetition: {}
 sin:
-  stdlib: sin
+  impl: sin
 SitStandOrDescendStart:
   inputs: {}
   outputs: {}
@@ -19760,45 +19760,45 @@ StrafeRightStop: {}
 strbyte:
   alias: string.byte
 strcmputf8i:
-  stdlib: strcmputf8i
+  impl: strcmputf8i
 strconcat:
-  stdlib: strconcat
+  impl: strconcat
 strfind:
   alias: string.find
 string.byte:
-  stdlib: string.byte
+  impl: string.byte
 string.char:
-  stdlib: string.char
+  impl: string.char
 string.find:
-  stdlib: string.find
+  impl: string.find
 string.format:
-  stdlib: string.format
+  impl: string.format
 string.gfind:
-  stdlib: string.gfind
+  impl: string.gfind
 string.gmatch:
-  stdlib: string.gmatch
+  impl: string.gmatch
 string.gsub:
-  stdlib: string.gsub
+  impl: string.gsub
 string.join:
   alias: strjoin
 string.len:
-  stdlib: string.len
+  impl: string.len
 string.lower:
-  stdlib: string.lower
+  impl: string.lower
 string.match:
-  stdlib: string.match
+  impl: string.match
 string.rep:
-  stdlib: string.rep
+  impl: string.rep
 string.reverse:
-  stdlib: string.reverse
+  impl: string.reverse
 string.split:
   alias: strsplit
 string.sub:
-  stdlib: string.sub
+  impl: string.sub
 string.trim:
   alias: strtrim
 string.upper:
-  stdlib: string.upper
+  impl: string.upper
 StripHyperlinks:
   inputs:
   - name: text
@@ -19819,11 +19819,11 @@ StripHyperlinks:
   - name: stripped
     type: string
 strjoin:
-  stdlib: strjoin
+  impl: strjoin
 strlen:
   alias: string.len
 strlenutf8:
-  stdlib: strlenutf8
+  impl: strlenutf8
 strlower:
   alias: string.lower
 strmatch:
@@ -19831,13 +19831,13 @@ strmatch:
 strrep:
   alias: string.rep
 strsplit:
-  stdlib: strsplit
+  impl: strsplit
 strsplittable:
-  stdlib: strsplittable
+  impl: strsplittable
 strsub:
   alias: string.sub
 strtrim:
-  stdlib: strtrim
+  impl: strtrim
 strupper:
   alias: string.upper
 Stuck:
@@ -19852,33 +19852,33 @@ SupportsClipCursor:
 SwapRaidSubgroup: {}
 SwitchAchievementSearchTab: {}
 table.concat:
-  stdlib: table.concat
+  impl: table.concat
 table.foreach:
-  stdlib: table.foreach
+  impl: table.foreach
 table.foreachi:
-  stdlib: table.foreachi
+  impl: table.foreachi
 table.getn:
-  stdlib: table.getn
+  impl: table.getn
 table.insert:
-  stdlib: table.insert
+  impl: table.insert
 table.maxn:
-  stdlib: table.maxn
+  impl: table.maxn
 table.remove:
-  stdlib: table.remove
+  impl: table.remove
 table.removemulti:
-  stdlib: table.removemulti
+  impl: table.removemulti
 table.setn:
-  stdlib: table.setn
+  impl: table.setn
 table.sort:
-  stdlib: table.sort
+  impl: table.sort
 table.wipe:
-  stdlib: table.wipe
+  impl: table.wipe
 TakeInboxItem: {}
 TakeInboxMoney: {}
 TakeInboxTextItem: {}
 TakeTaxiNode: {}
 tan:
-  stdlib: tan
+  impl: tan
 TargetDirectionEnemy:
   inputs:
   - name: facing
@@ -19987,7 +19987,7 @@ TaxiNodeName: {}
 TaxiNodePosition: {}
 TaxiRequestEarlyLanding: {}
 time:
-  stdlib: time
+  impl: time
 TimeoutResurrect:
   inputs: {}
   outputs: {}
@@ -20014,9 +20014,9 @@ ToggleWindowed:
   inputs: {}
   outputs: {}
 tonumber:
-  stdlib: tonumber
+  impl: tonumber
 tostring:
-  stdlib: tostring
+  impl: tostring
 TradeSkillOnlyShowMakeable: {}
 tremove:
   alias: table.remove
@@ -20038,7 +20038,7 @@ TurnRightStart:
   outputs: {}
 TurnRightStop: {}
 type:
-  stdlib: type
+  impl: type
 UninviteUnit: {}
 UnitAffectingCombat:
   inputs:
@@ -21046,7 +21046,7 @@ UnitXPMax:
   - type: number
 UnmuteSoundFile: {}
 unpack:
-  stdlib: unpack
+  impl: unpack
 UpdateAddOnCPUUsage:
   inputs: {}
   outputs: {}
@@ -21114,4 +21114,4 @@ wipe:
   alias: table.wipe
 WithdrawGuildBankMoney: {}
 xpcall:
-  stdlib: xpcall
+  impl: xpcall

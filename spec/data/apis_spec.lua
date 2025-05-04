@@ -8,7 +8,7 @@ describe('apis', function()
         describe(name, function()
           it('is not stubbed if provided by elune', function()
             if _G[name] then
-              assert.Truthy(api.impl or api.stdlib or api.alias)
+              assert.Truthy(api.impl or api.alias)
             end
           end)
           describe('inputs', function()
@@ -151,9 +151,10 @@ describe('apis', function()
         end)
       end
       it('has no duplicate stdlibs', function()
+        local impls = require('build.data.impl')
         local s = {}
         for k, v in pairs(apis) do
-          local z = v.stdlib
+          local z = impls[v.impl] and impls[v.impl].stdlib
           if z then
             if s[z] then
               error(('stdlib %q duplicated across %q and %q'):format(z, k, s[z]))

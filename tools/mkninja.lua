@@ -31,6 +31,7 @@ local perProductAddonGeneratedTypes = {
     return {
       'build/cmake/runtime/products/' .. p .. '/apis.lua',
       'build/cmake/runtime/products/' .. p .. '/config.lua',
+      'build/cmake/runtime/impl.lua',
     }
   end,
   globals = function(p)
@@ -46,6 +47,7 @@ local perProductAddonGeneratedTypes = {
     return {
       'build/cmake/runtime/products/' .. p .. '/apis.lua',
       'build/cmake/runtime/products/' .. p .. '/config.lua',
+      'build/cmake/runtime/impl.lua',
     }
   end,
   product = function()

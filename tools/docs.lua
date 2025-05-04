@@ -313,6 +313,7 @@ local function rewriteApis()
   local y = require('wowapi.yaml')
   local f = 'data/products/' .. product .. '/apis.yaml'
   local apis = y.parseFile(f)
+  local impls = y.parseFile('data/impl.yaml')
   local lies = deref(config, 'lies', 'apis') or {}
   for name, fn in pairs(funcs) do
     local ns = split(name)
@@ -329,7 +330,7 @@ local function rewriteApis()
     if lies[name] then
       assert(tableeq(lies[name], newapi), 'lie mismatch on ' .. name)
       lies[name] = nil
-    elseif api and api.stdlib then
+    elseif api and impls[api.impl] and impls[api.impl].stdlib then
       print('ignoring api docs on stdlib ' .. name)
     else
       newapi.impl = api and api.impl
