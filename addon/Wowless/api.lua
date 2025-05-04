@@ -78,14 +78,5 @@ G.testsuite.api = function()
         end,
       }
     end,
-    table = function()
-      return {
-        wipe = function()
-          local t = { 1, 2, 3 }
-          G.check1(t, table.wipe(t))
-          assertEquals(nil, next(t))
-        end,
-      }
-    end,
   }
 end

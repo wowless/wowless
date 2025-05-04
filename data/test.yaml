@@ -26,4 +26,5 @@ issecurevariable: {}
 IsTestBuild: {}
 IsWindowsClient: {}
 SwapToGlobalEnvironment: {}
+table.wipe: {}
 UnitName: {}
