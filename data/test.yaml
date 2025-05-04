@@ -20,6 +20,7 @@ GetGlobalEnvironment: {}
 IsInGlobalEnvironment: {}
 IsLinuxClient: {}
 IsMacClient: {}
+issecure: {}
 IsTestBuild: {}
 IsWindowsClient: {}
 SwapToGlobalEnvironment: {}

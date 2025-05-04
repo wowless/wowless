@@ -65,9 +65,6 @@ G.testsuite.api = function()
     IsGMClient = function()
       G.check1(false, _G.IsGMClient())
     end,
-    issecure = function()
-      G.check1(false, issecure())
-    end,
     issecurevariable = function()
       return {
         ['fails with nil table'] = function()
