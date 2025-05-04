@@ -3,7 +3,7 @@ local product, filename = unpack(arg)
 local data
 do
   local env = {}
-  setfenv(loadfile(filename), env)()
+  setfenv(assert(loadfile(filename)), env)()
   data = env.WowlessLastTestFailures
 end
 
