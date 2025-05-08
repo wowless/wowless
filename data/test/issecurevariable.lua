@@ -10,7 +10,11 @@ return {
     return T.match(2, true, nil, T.env.issecurevariable('issecurevariable'))
   end,
   ['local table values are insecure'] = function()
-    return T.match(2, false, T.addonName, T.env.issecurevariable({ foo = 42 }, 'foo'))
+    return T.match(2, false, T.addonName, T.env.issecurevariable(T, 'match'))
+  end,
+  ['local table values from loadstring are insecure'] = function()
+    local taint = T.wowless and T.addonName or '*** ForceTaint_Strong ***' -- issue #411
+    return T.match(2, false, taint, T.env.issecurevariable({ foo = 42 }, 'foo'))
   end,
   ['missing globals are secure'] = function()
     local k = 'thisisdefinitelynotaglobal'
