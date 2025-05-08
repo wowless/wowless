@@ -1651,11 +1651,12 @@ Enum:
     MinValue: 0
     NumValues: 5
   CharacterServiceInfoFlag:
+    AllowMaxLevelBoost: 2
     RestrictToRecommendedSpecs: 1
   CharacterServiceInfoFlagMeta:
-    MaxValue: 1
+    MaxValue: 2
     MinValue: 1
-    NumValues: 1
+    NumValues: 2
   CharCustomizationType:
     CustomOptionFacewear: 7
     CustomOptionHorn: 6
@@ -3409,6 +3410,7 @@ Enum:
     InstanceDifficultyBannerDisabled: 83
     LandingPageFactionID: 35
     MacrosDisabled: 80
+    MailGameRule: 132
     MapPlunderstormCircle: 48
     MaxAccountCharReservationsPerContentset: 4
     MaxCharReservationsPerRealm: 3
@@ -3467,9 +3469,9 @@ Enum:
     MinValue: 0
     NumValues: 3
   GameRuleMeta:
-    MaxValue: 108
+    MaxValue: 132
     MinValue: 1
-    NumValues: 94
+    NumValues: 95
   GameRuleType:
     Bool: 2
     Float: 1
@@ -4893,23 +4895,6 @@ Enum:
     MaxValue: 3
     MinValue: 0
     NumValues: 4
-  LuaOpcodeArgumentMode:
-    RegisterOrConstant: 3
-    RegisterOrJumpOffset: 2
-    Unused: 0
-    Used: 1
-  LuaOpcodeArgumentModeMeta:
-    MaxValue: 3
-    MinValue: 0
-    NumValues: 4
-  LuaOpcodeMode:
-    Abc: 0
-    ABx: 1
-    AsBx: 2
-  LuaOpcodeModeMeta:
-    MaxValue: 2
-    MinValue: 0
-    NumValues: 3
   MajorFactionFeatureAbility:
     Fishing: 1
     Generic: 0
@@ -8410,6 +8395,7 @@ LE_FRAME_TUTORIAL_ARTIFACT_APPEARANCE_TAB: 30
 LE_FRAME_TUTORIAL_ARTIFACT_KNOWLEDGE: 41
 LE_FRAME_TUTORIAL_ARTIFACT_KNOWLEDGE_LEVEL_LIMIT: 27
 LE_FRAME_TUTORIAL_ARTIFACT_RELIC_MATCH: 31
+LE_FRAME_TUTORIAL_ASSISTED_HIGHLIGHT_ENABLED_POPUP: 161
 LE_FRAME_TUTORIAL_AZERITE_FIRST_POWER_LOCKED_IN: 64
 LE_FRAME_TUTORIAL_AZERITE_ITEM_IN_BAG: 62
 LE_FRAME_TUTORIAL_AZERITE_ITEM_IN_SLOT: 63
@@ -9830,6 +9816,7 @@ LE_TOKEN_RESULT_ERROR_DISABLED: 2
 LE_TOKEN_RESULT_ERROR_NONE_FOR_SALE: 4
 LE_TOKEN_RESULT_ERROR_NOT_ENOUGH_PURCHASED_GAME_TIME: 11
 LE_TOKEN_RESULT_ERROR_OTHER: 3
+LE_TOKEN_RESULT_ERROR_THROTTLE_TOKENS: 12
 LE_TOKEN_RESULT_ERROR_TOO_MANY_TOKENS: 5
 LE_TOKEN_RESULT_ERROR_TRANSACTION_IN_PROGRESS: 7
 LE_TOKEN_RESULT_ERROR_TRIAL_RESTRICTED: 9
@@ -9869,7 +9856,7 @@ NUM_LE_CHARACTER_UPGRADE_RESULTS: 13
 NUM_LE_CINEMATIC_PAN_TYPES: 6
 NUM_LE_EXPANSION_LEVELS: 10
 NUM_LE_FRAME_TUTORIAL_ACCCOUNTS: 23
-NUM_LE_FRAME_TUTORIALS: 160
+NUM_LE_FRAME_TUTORIALS: 161
 NUM_LE_GM_WEB_TICKET_STATUSS: 4
 NUM_LE_INVITE_REQUEST_TYPES: 3
 NUM_LE_LFG_CATEGORYS: 7
@@ -9886,7 +9873,7 @@ NUM_LE_SPELL_CONFIRMATION_PROMPT_TYPES: 5
 NUM_LE_SUMMON_REASONS: 2
 NUM_LE_TOKEN_CHOICES: 2
 NUM_LE_TOKEN_REDEEM_TYPES: 2
-NUM_LE_TOKEN_RESULTS: 11
+NUM_LE_TOKEN_RESULTS: 12
 NUM_LE_TRACKER_SORTINGS: 4
 NUM_LE_TRANSMOG_SET_FILTERS: 4
 NUM_LE_UNIT_STATS: 4
