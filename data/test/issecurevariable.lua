@@ -1,10 +1,11 @@
 local T = ...
+local usage = 'Usage: issecurevariable([table,] "variable")'
 return {
   ['fails with nil table'] = function()
-    T.assertEquals(false, (pcall(T.env.issecurevariable, nil, 'moo')))
+    return T.match(2, false, usage, pcall(T.env.issecurevariable, nil, 'moo'))
   end,
   ['fails with nil variable name'] = function()
-    T.assertEquals(false, (pcall(T.env.issecurevariable, nil)))
+    return T.match(2, false, usage, pcall(T.env.issecurevariable, nil))
   end,
   ['global wow apis are secure'] = function()
     return T.match(2, true, nil, T.env.issecurevariable('issecurevariable'))
