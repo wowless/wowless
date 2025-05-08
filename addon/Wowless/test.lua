@@ -388,42 +388,6 @@ G.testsuite.sync = function()
       assertEquals('dead', coroutine.status(co))
       assertEquals('a,b,c,d,e,f', table.concat(log, ','))
     end,
-    ['string.format'] = function()
-      local format = string.format
-      return {
-        ['format missing numbers'] = function()
-          assertEquals('0', format('%d'))
-        end,
-        ['format nil numbers'] = function()
-          assertEquals('0', format('%d', nil))
-        end,
-        ['does not format missing strings'] = function()
-          assert(not pcall(format, '%s'))
-        end,
-        ['does not format nil strings'] = function()
-          assert(not pcall(format, '%s', nil))
-        end,
-        ['format handles indexed substitution'] = function()
-          assertEquals(' 7   moo', format('%2$2d %1$5s', 'moo', 7))
-        end,
-        ['format handles up to index 99 substitution'] = function()
-          local t = {}
-          for i = 1, 100 do
-            t[i] = i
-          end
-          for i = 1, 99 do
-            assertEquals(tostring(i), format('%' .. i .. '$d', unpack(t)))
-          end
-          assert(not pcall(format, '%100$d', unpack(t)))
-        end,
-        ['format handles %f'] = function()
-          assertEquals('inf', format('%f', math.huge):sub(-3))
-        end,
-        ['format handles %F'] = function()
-          assertEquals('inf', format('%F', math.huge):sub(-3))
-        end,
-      }
-    end,
 
     loading = function()
       return {
