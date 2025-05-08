@@ -8,10 +8,10 @@ return {
     return T.match(1, '0', format('%d', nil))
   end,
   ['does not format missing strings'] = function()
-    assert(not pcall(format, '%s'))
+    return T.match(2, false, 'bad argument #2 to \'?\' (string expected, got no value)', pcall(format, '%s'))
   end,
   ['does not format nil strings'] = function()
-    assert(not pcall(format, '%s', nil))
+    return T.match(2, false, 'bad argument #2 to \'?\' (string expected, got nil)', pcall(format, '%s', nil))
   end,
   ['format handles indexed substitution'] = function()
     return T.match(1, ' 7   moo', format('%2$2d %1$5s', 'moo', 7))
@@ -29,7 +29,7 @@ return {
       end
     end
     t['100'] = function()
-      assert(not pcall(format, '%100$d', unpack(arr)))
+      return T.match(2, false, 'invalid format (width or precision too long)', pcall(format, '%100$d', unpack(arr)))
     end
     return t
   end,
