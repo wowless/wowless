@@ -19,6 +19,7 @@ GetCurrentEnvironment: {}
 getfenv: {}
 GetGlobalEnvironment: {}
 hooksecurefunc: {}
+IsDebugBuild: {}
 IsGMClient: {}
 IsInGlobalEnvironment: {}
 IsLinuxClient: {}

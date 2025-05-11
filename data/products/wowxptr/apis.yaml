@@ -30343,6 +30343,7 @@ IsCurrentAction:
     type: boolean
 IsCurrentQuestFailed: {}
 IsDebugBuild:
+  impl: IsDebugBuild
   inputs: {}
   outputs:
   - name: isDebugBuild

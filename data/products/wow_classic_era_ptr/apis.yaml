@@ -18562,6 +18562,7 @@ IsCurrentSpell:
   - name: value
     type: boolean
 IsDebugBuild:
+  impl: IsDebugBuild
   inputs: {}
   outputs:
   - name: isDebugBuild

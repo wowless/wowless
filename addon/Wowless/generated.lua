@@ -114,16 +114,6 @@ G.testsuite.generated = function()
     return tests
   end
 
-  local function build()
-    local b = _G.WowlessData.Build
-    assert(b, 'no build')
-    return {
-      IsDebugBuild = function()
-        G.check1(false, _G.IsDebugBuild())
-      end,
-    }
-  end
-
   local function cvars()
     local function lowify(t)
       local tt = {}
@@ -493,7 +483,6 @@ G.testsuite.generated = function()
 
   return {
     apiNamespaces = apiNamespaces,
-    build = build,
     cvars = cvars,
     events = events,
     globalApis = globalApis,

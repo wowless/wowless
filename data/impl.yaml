@@ -332,6 +332,7 @@ ipairs:
   stdlib: ipairs
 IsAddOnLoaded: {}
 IsAddOnLoadOnDemand: {}
+IsDebugBuild: {}
 IsGMClient: {}
 IsInGlobalEnvironment:
   module: env
