@@ -13,8 +13,5 @@ G.testsuite.api = function()
       local v = G.retn(1, _G.Is64BitClient())
       assert(v == true or v == false)
     end,
-    IsGMClient = function()
-      G.check1(false, _G.IsGMClient())
-    end,
   }
 end

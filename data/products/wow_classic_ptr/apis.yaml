@@ -18248,6 +18248,7 @@ IsGamePadCursorControlEnabled: {}
 IsGamePadFreelookEnabled: {}
 IsGlyphFlagSet: {}
 IsGMClient:
+  impl: IsGMClient
   inputs: {}
   outputs:
   - name: isGM

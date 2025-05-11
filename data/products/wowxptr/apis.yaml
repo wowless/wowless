@@ -30415,6 +30415,7 @@ IsFlying:
 IsGamePadCursorControlEnabled: {}
 IsGamePadFreelookEnabled: {}
 IsGMClient:
+  impl: IsGMClient
   inputs: {}
   outputs:
   - name: isGM
