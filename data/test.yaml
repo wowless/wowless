@@ -26,6 +26,7 @@ issecure: {}
 issecurevariable: {}
 IsTestBuild: {}
 IsWindowsClient: {}
+loadstring: {}
 secureexecuterange: {}
 string.format: {}
 SwapToGlobalEnvironment: {}

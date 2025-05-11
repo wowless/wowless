@@ -16,14 +16,5 @@ G.testsuite.api = function()
     IsGMClient = function()
       G.check1(false, _G.IsGMClient())
     end,
-    loadstring = function()
-      return {
-        globalenv = function()
-          local _G = _G
-          setfenv(1, {})
-          _G.assertEquals(_G, _G.getfenv(_G.loadstring('')))
-        end,
-      }
-    end,
   }
 end
