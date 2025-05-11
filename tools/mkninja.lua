@@ -130,7 +130,6 @@ local rules = {
 }
 
 local addonFiles = {
-  'addon/Wowless/api.lua',
   'addon/Wowless/evenmoreintrinsic.xml',
   'addon/Wowless/framework.lua',
   'addon/Wowless/generated.lua',
