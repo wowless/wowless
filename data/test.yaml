@@ -23,6 +23,7 @@ IsGMClient: {}
 IsInGlobalEnvironment: {}
 IsLinuxClient: {}
 IsMacClient: {}
+IsPublicBuild: {}
 issecure: {}
 issecurevariable: {}
 IsTestBuild: {}

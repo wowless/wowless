@@ -18473,10 +18473,10 @@ IsPlayerMoving:
 IsPlayerSpell: {}
 IsPossessBarVisible: {}
 IsPublicBuild:
+  impl: IsPublicBuild
   inputs: {}
   outputs:
   - name: isPublicBuild
-    stub: true
     type: boolean
 IsPVPTimerRunning:
   inputs: {}

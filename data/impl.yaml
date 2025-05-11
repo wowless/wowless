@@ -343,6 +343,7 @@ IsLoggedIn:
 IsMacClient:
   frameworks:
   - api
+IsPublicBuild: {}
 issecure:
   stdlib: issecure
 issecurevariable:

@@ -121,9 +121,6 @@ G.testsuite.generated = function()
       IsDebugBuild = function()
         G.check1(false, _G.IsDebugBuild())
       end,
-      IsPublicBuild = function()
-        G.check1(true, _G.IsPublicBuild())
-      end,
     }
   end
 
