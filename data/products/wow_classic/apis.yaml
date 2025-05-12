@@ -13006,7 +13006,7 @@ ConsoleExec:
     type: string
   outputs: {}
 ConsoleGetAllCommands:
-  impl: C_Console.GetAllCommands
+  impl: ConsoleGetAllCommands
   inputs: {}
   outputs:
   - name: commands

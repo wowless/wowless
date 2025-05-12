@@ -25744,7 +25744,7 @@ ConsoleExec:
   - name: result
     type: boolean
 ConsoleGetAllCommands:
-  impl: C_Console.GetAllCommands
+  impl: ConsoleGetAllCommands
   inputs: {}
   outputs:
   - name: commands

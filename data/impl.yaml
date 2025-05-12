@@ -46,9 +46,6 @@ C_ClassTalents.ViewLoadout:
   - api
   sqls:
   - lookup: GetSpecializationInfoByID
-C_Console.GetAllCommands:
-  frameworks:
-  - datalua
 C_Covenants.GetCovenantData:
   sqls:
   - lookup: C_Covenants.GetCovenantData
@@ -158,6 +155,9 @@ ClassicExpansionAtLeast:
   - datalua
 collectgarbage:
   stdlib: collectgarbage
+ConsoleGetAllCommands:
+  frameworks:
+  - datalua
 coroutine.create:
   stdlib: coroutine.create
 coroutine.resume:
