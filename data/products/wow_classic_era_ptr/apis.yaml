@@ -13234,6 +13234,7 @@ CinematicStarted:
     type: boolean
   outputs: {}
 ClassicExpansionAtLeast:
+  impl: ClassicExpansionAtLeast
   inputs:
   - name: expansionLevel
     type: number

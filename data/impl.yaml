@@ -153,6 +153,9 @@ C_UIColor.GetColors:
 C_XMLUtil.GetTemplateInfo_10_2:
   frameworks:
   - api
+ClassicExpansionAtLeast:
+  frameworks:
+  - datalua
 collectgarbage:
   stdlib: collectgarbage
 coroutine.create:
