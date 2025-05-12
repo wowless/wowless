@@ -4,7 +4,7 @@ local gttokens = {}
 for k, v in pairs(gametypes) do
   gttokens[k] = {
     [k:lower()] = true,
-    [v:lower()] = true,
+    [v.family:lower()] = true,
   }
 end
 
@@ -13,8 +13,8 @@ for k, v in pairs(gametypes) do
   suffixes[k] = {
     '_' .. k,
     '-' .. k,
-    '_' .. v,
-    '-' .. v,
+    '_' .. v.family,
+    '-' .. v.family,
     '',
   }
 end
@@ -22,7 +22,7 @@ end
 local function parse(gametype, content)
   local gts = assert(gttokens[gametype])
   content = content:gsub('%[Game%]', gametype)
-  content = content:gsub('%[Family%]', gametypes[gametype])
+  content = content:gsub('%[Family%]', gametypes[gametype].family)
   local attrs = {}
   local files = {}
   for line in content:gmatch('[^\r\n]+') do

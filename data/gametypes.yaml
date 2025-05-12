@@ -1,5 +1,9 @@
 ---
-Cata: Classic
-Mists: Classic
-Standard: Mainline
-Vanilla: Classic
+Cata:
+  family: Classic
+Mists:
+  family: Classic
+Standard:
+  family: Mainline
+Vanilla:
+  family: Classic

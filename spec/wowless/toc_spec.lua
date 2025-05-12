@@ -3,7 +3,8 @@ describe('wowless.toc', function()
   local gametypes = require('runtime.gametypes')
   describe('parse', function()
     local parse = wowlesstoc.parse
-    for gametype, family in pairs(gametypes) do
+    for gametype, gt in pairs(gametypes) do
+      local family = gt.family
       describe(gametype, function()
         it('handles empty content', function()
           local attrs, files = parse(gametype, '')

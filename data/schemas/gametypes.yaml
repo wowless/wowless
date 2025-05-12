@@ -4,4 +4,8 @@ type:
   mapof:
     key: string
     value:
-      ref: family
+      record:
+        family:
+          required: true
+          type:
+            ref: family

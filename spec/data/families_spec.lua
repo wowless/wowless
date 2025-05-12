@@ -6,7 +6,7 @@ describe('families', function()
     end
     local actual = {}
     for _, v in pairs(require('build.data.gametypes')) do
-      actual[v] = true
+      actual[v.family] = true
     end
     assert.same(expected, actual)
   end)

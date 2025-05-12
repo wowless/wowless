@@ -659,7 +659,7 @@ local function loader(api, cfg)
 
   local build = datalua.build
   local gametype = build.gametype
-  local family = require('runtime.gametypes')[gametype]
+  local family = require('runtime.gametypes')[gametype].family
   local tocutil = require('wowless.toc')
   local tocsuffixes = tocutil.suffixes[gametype]
 
