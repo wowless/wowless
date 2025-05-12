@@ -5734,6 +5734,8 @@ SOCIAL_QUEUE_UPDATE:
     type: number
 SOCKET_INFO_ACCEPT:
   payload: {}
+SOCKET_INFO_BIND_CONFIRM:
+  payload: {}
 SOCKET_INFO_CLOSE:
   payload: {}
 SOCKET_INFO_FAILURE:

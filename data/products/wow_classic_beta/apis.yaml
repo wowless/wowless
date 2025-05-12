@@ -8883,6 +8883,11 @@ C_NewItems.RemoveNewItem:
   - name: slotIndex
     type: number
   outputs: {}
+C_PaperDollInfo.CanAutoEquipCursorItem:
+  inputs: {}
+  outputs:
+  - name: canAutoEquip
+    type: boolean
 C_PaperDollInfo.GetArmorEffectiveness:
   inputs:
   - name: armor
@@ -8906,6 +8911,13 @@ C_PaperDollInfo.GetMinItemLevel:
   - name: minItemLevel
     nilable: true
     type: number
+C_PaperDollInfo.IsInventorySlotEnabled:
+  inputs:
+  - name: slotName
+    type: string
+  outputs:
+  - name: isEnabled
+    type: boolean
 C_PaperDollInfo.IsRangedSlotShown:
   inputs: {}
   outputs:
@@ -10617,6 +10629,16 @@ C_SpecializationInfo.GetSpecializationMasterySpells:
   - name: spellIDs
     type:
       arrayof: number
+C_SpecializationInfo.GetTalentInfo:
+  inputs:
+  - name: query
+    type:
+      structure: C_SpecializationInfo.TalentInfoQuery
+  outputs:
+  - name: result
+    nilable: true
+    type:
+      structure: C_SpecializationInfo.TalentInfoResult
 C_SpecializationInfo.IsInitialized:
   inputs: {}
   outputs:
@@ -15847,13 +15869,21 @@ GetExpansionTrialInfo:
 GetExpertise:
   inputs: {}
   outputs:
-  - type: number
-  - type: number
+  - name: mainhandExpertise
+    type: number
+  - name: offhandExpertise
+    type: number
+  - name: rangedExpertise
+    type: number
 GetExpertisePercent:
   inputs: {}
   outputs:
-  - type: number
-  - type: number
+  - name: mainhandExpertisePercent
+    type: number
+  - name: offhandExpertisePercent
+    type: number
+  - name: rangedExpertisePercent
+    type: number
 GetExtraBarIndex:
   inputs: {}
   outputs:
@@ -16983,6 +17013,13 @@ GetMastery:
   outputs:
   - name: result
     type: number
+GetMasteryEffect:
+  inputs: {}
+  outputs:
+  - name: masteryEffect
+    type: number
+  - name: bonusCoefficient
+    type: number
 GetMaxBattlefieldID:
   outputs:
   - type: number
@@ -17123,6 +17160,11 @@ GetMirrorTimerProgress:
     type: number
 GetModifiedClick: {}
 GetModifiedClickAction: {}
+GetModResilienceDamageReduction:
+  inputs: {}
+  outputs:
+  - name: result
+    type: number
 GetMoney:
   outputs:
   - type: number
@@ -17574,6 +17616,11 @@ GetOSLocale:
   outputs:
   - name: localeName
     type: string
+GetOverrideAPBySpellPower:
+  inputs: {}
+  outputs:
+  - name: result
+    type: number
 GetOverrideBarIndex:
   inputs: {}
   outputs:
@@ -17789,6 +17836,16 @@ GetPVPLifetimeStats:
   - name: dishonorableKills
     type: number
   - name: highestRank
+    type: number
+GetPvpPowerDamage:
+  inputs: {}
+  outputs:
+  - name: result
+    type: number
+GetPvpPowerHealing:
+  inputs: {}
+  outputs:
+  - name: result
     type: number
 GetPVPRankInfo:
   inputs:
@@ -18704,13 +18761,6 @@ GetTabardCreationCost:
 GetTabardInfo: {}
 GetTalentClearInfo: {}
 GetTalentGroupRole: {}
-GetTalentInfo:
-  impl: GetTalentInfo_Vanilla
-  inputs:
-  - name: tabIndex
-    type: number
-  - name: talentIndex
-    type: number
 GetTalentInfoByID: {}
 GetTalentLink: {}
 GetTalentPrereqs:

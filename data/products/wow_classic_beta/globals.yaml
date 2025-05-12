@@ -1533,11 +1533,12 @@ Enum:
     MinValue: 0
     NumValues: 5
   CharacterServiceInfoFlag:
+    AllowMaxLevelBoost: 2
     RestrictToRecommendedSpecs: 1
   CharacterServiceInfoFlagMeta:
-    MaxValue: 1
+    MaxValue: 2
     MinValue: 1
-    NumValues: 1
+    NumValues: 2
   CharCustomizationType:
     CustomOptionFacewear: 7
     CustomOptionHorn: 6
@@ -2843,6 +2844,7 @@ Enum:
     InstanceDifficultyBannerDisabled: 83
     LandingPageFactionID: 35
     MacrosDisabled: 80
+    MailGameRule: 132
     MapPlunderstormCircle: 48
     MaxAccountCharReservationsPerContentset: 4
     MaxCharReservationsPerRealm: 3
@@ -2902,9 +2904,9 @@ Enum:
     MinValue: 0
     NumValues: 3
   GameRuleMeta:
-    MaxValue: 109
+    MaxValue: 132
     MinValue: 1
-    NumValues: 95
+    NumValues: 96
   GameRuleType:
     Bool: 2
     Float: 1
@@ -4256,23 +4258,6 @@ Enum:
     MaxValue: 3
     MinValue: 0
     NumValues: 4
-  LuaOpcodeArgumentMode:
-    RegisterOrConstant: 3
-    RegisterOrJumpOffset: 2
-    Unused: 0
-    Used: 1
-  LuaOpcodeArgumentModeMeta:
-    MaxValue: 3
-    MinValue: 0
-    NumValues: 4
-  LuaOpcodeMode:
-    Abc: 0
-    ABx: 1
-    AsBx: 2
-  LuaOpcodeModeMeta:
-    MaxValue: 2
-    MinValue: 0
-    NumValues: 3
   ManipulatorEventType:
     Complete: 2
     Delete: 3

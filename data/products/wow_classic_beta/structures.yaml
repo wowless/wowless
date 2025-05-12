@@ -3198,6 +3198,81 @@ C_ScriptedAnimations.ScriptedAnimationEffect:
       type: number
     yawRadians:
       type: number
+C_SpecializationInfo.TalentInfoQuery:
+  fields:
+    column:
+      nilable: true
+      type: number
+    groupIndex:
+      nilable: true
+      type: number
+    isInspect:
+      default: false
+      type: boolean
+    isPet:
+      default: false
+      type: boolean
+    specializationIndex:
+      nilable: true
+      type: number
+    talentIndex:
+      nilable: true
+      type: number
+    target:
+      nilable: true
+      type: unit
+    tier:
+      nilable: true
+      type: number
+C_SpecializationInfo.TalentInfoResult:
+  fields:
+    available:
+      default: false
+      type: boolean
+    column:
+      type: number
+    grantedByAura:
+      default: false
+      type: boolean
+    hasGoldBorder:
+      default: false
+      type: boolean
+    icon:
+      type: number
+    isExceptional:
+      default: false
+      type: boolean
+    isPVPTalentUnlocked:
+      default: false
+      type: boolean
+    known:
+      default: false
+      type: boolean
+    maxRank:
+      type: number
+    meetsPrereq:
+      default: false
+      type: boolean
+    meetsPreviewPrereq:
+      default: false
+      type: boolean
+    name:
+      type: string
+    previewRank:
+      type: number
+    rank:
+      type: number
+    selected:
+      default: false
+      type: boolean
+    spellID:
+      default: 0
+      type: number
+    talentID:
+      default: 0
+      type: number
+    tier:
+      type: number
 C_Spell.SpellInfo:
   fields:
     castTime:
