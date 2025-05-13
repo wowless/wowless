@@ -3136,7 +3136,7 @@ MessageFrame:
       inputs: {}
       outputs:
       - name: mode
-        type: string
+        type: InsertMode
     GetTimeVisible:
       inputs: {}
       outputs:
@@ -3172,7 +3172,7 @@ MessageFrame:
     SetInsertMode:
       inputs:
       - name: mode
-        type: string
+        type: InsertMode
       outputs: {}
     SetTimeVisible:
       inputs:

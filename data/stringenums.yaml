@@ -35,6 +35,9 @@ FrameStrata:
   MEDIUM: {}
   PARENT: {}
   TOOLTIP: {}
+InsertMode:
+  BOTTOM: {}
+  TOP: {}
 JustifyHorizontal:
   CENTER: {}
   LEFT: {}

@@ -126,7 +126,7 @@ typedefs:
   GarrisonFollower: string
   HTMLTextType: string
   IDOrLink: string
-  InsertMode: string
+  InsertMode: InsertMode
   InventorySlots: number
   ItemInfo: string
   kstringClubMessage: string
