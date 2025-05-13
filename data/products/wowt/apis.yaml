@@ -14534,7 +14534,7 @@ C_Navigation.GetFrame:
   outputs:
   - name: frame
     nilable: true
-    type: table
+    type: Region
 C_Navigation.GetNearestPartyMemberToken:
   inputs: {}
   outputs:
@@ -15643,7 +15643,7 @@ C_PingSecure.GetTargetPingReceiver:
     type: number
   outputs:
   - name: frame
-    type: table
+    type: Region
 C_PingSecure.GetTargetWorldPing:
   inputs:
   - name: mousePosX
@@ -20225,7 +20225,7 @@ C_System.GetFrameStack:
   outputs:
   - name: objects
     type:
-      arrayof: table
+      arrayof: Region
 C_SystemVisibilityManager.IsSystemVisible:
   inputs:
   - name: system
@@ -28630,7 +28630,7 @@ GetMouseFoci:
   outputs:
   - name: region
     type:
-      arrayof: table
+      arrayof: Region
 GetMovieDownloadProgress:
   inputs:
   - name: movieId

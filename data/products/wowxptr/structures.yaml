@@ -30,7 +30,7 @@ AnchorBinding:
     relativePoint:
       type: FramePoint
     relativeTo:
-      type: table
+      type: Region
 AppearanceSourceInfo:
   fields:
     canDisplayOnPlayer:

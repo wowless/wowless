@@ -2838,7 +2838,7 @@ Line:
       - name: relativePoint
         type: FramePoint
       - name: relativeTo
-        type: table
+        type: Region
       - name: offsetX
         type: number
       - name: offsetY
@@ -2854,7 +2854,7 @@ Line:
       - name: relativePoint
         type: FramePoint
       - name: relativeTo
-        type: table
+        type: Region
       - name: offsetX
         type: number
       - name: offsetY
@@ -2867,7 +2867,7 @@ Line:
       - name: relativePoint
         type: FramePoint
       - name: relativeTo
-        type: table
+        type: Region
       - default: 0
         name: offsetX
         type: number
@@ -2885,7 +2885,7 @@ Line:
       - name: relativePoint
         type: FramePoint
       - name: relativeTo
-        type: table
+        type: Region
       - default: 0
         name: offsetX
         type: number
@@ -4317,7 +4317,7 @@ Region:
       - name: point
         type: FramePoint
       - name: relativeTo
-        type: table
+        type: Region
       - name: relativePoint
         type: FramePoint
       - name: offsetX

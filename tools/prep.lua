@@ -45,6 +45,7 @@ local specDefault = (function()
     ['nil'] = 'nil',
     number = '1',
     oneornil = 'nil',
+    Region = 'nil',
     string = '\'\'',
     table = '{}',
     unit = '\'player\'',

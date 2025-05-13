@@ -10163,7 +10163,7 @@ C_System.GetFrameStack:
   outputs:
   - name: objects
     type:
-      arrayof: table
+      arrayof: Region
 C_SystemVisibilityManager.IsSystemVisible:
   inputs:
   - name: system
@@ -16156,7 +16156,7 @@ GetMouseFoci:
   outputs:
   - name: region
     type:
-      arrayof: table
+      arrayof: Region
 GetMovieDownloadProgress:
   inputs:
   - name: movieId

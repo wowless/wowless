@@ -5391,7 +5391,7 @@ NAVIGATION_DESTINATION_REACHED:
 NAVIGATION_FRAME_CREATED:
   payload:
   - name: region
-    type: table
+    type: Region
 NAVIGATION_FRAME_DESTROYED:
   payload: {}
 NEUTRAL_FACTION_SELECT_RESULT:

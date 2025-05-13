@@ -112,7 +112,7 @@ typedefs:
   QuestObjectiveType: number
   RecruitAcceptanceID: string
   ScriptObject: UIObject
-  ScriptRegion: table
+  ScriptRegion: Region
   SimpleAnim: Animation
   SimpleAnimGroup: AnimationGroup
   SimpleControlPoint: ControlPoint
