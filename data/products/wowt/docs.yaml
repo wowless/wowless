@@ -180,8 +180,6 @@ typedefs:
   WOWGUID: string
   WOWMONEY: number
 uiobject_methods:
-  Animation:
-    GetRegionParent: {}
   AnimationGroup:
     CreateAnimation: {}
     GetAnimations: {}

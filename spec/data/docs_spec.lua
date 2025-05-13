@@ -17,6 +17,9 @@ describe('docs', function()
       describe('uiobject_methods', function()
         for k, v in pairs(docs.uiobject_methods or {}) do
           describe(k, function()
+            it('is not also in docs uiobjects', function()
+              assert.Nil(docs.uiobjects and docs.uiobjects[k])
+            end)
             local um = assert(uiobjects[k]).methods or {}
             for mk in pairs(v) do
               describe(mk, function()
