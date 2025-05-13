@@ -140,9 +140,6 @@ typedefs:
   WOWGUID: string
   WOWMONEY: number
 uiobject_methods:
-  AnimationGroup:
-    CreateAnimation: {}
-    GetAnimations: {}
   Button:
     Click: {}
     Disable: {}
@@ -156,6 +153,7 @@ uiobject_methods:
     Enable: {}
 uiobjects:
   Animation: {}
+  AnimationGroup: {}
   Path: {}
   ScrollFrame: {}
   Slider: {}
