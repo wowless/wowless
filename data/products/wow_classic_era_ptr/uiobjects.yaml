@@ -4471,7 +4471,9 @@ Region:
     SetWidth:
       setter:
       - name: width
-    StopAnimating: {}
+    StopAnimating:
+      inputs: {}
+      outputs: {}
   virtual: true
 RegionBase:
   fields:

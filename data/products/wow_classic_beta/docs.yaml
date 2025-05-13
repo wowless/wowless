@@ -29,7 +29,7 @@ script_objects:
   MinimapFrameAPI: Minimap
   SimpleAnimAlphaAPI: Alpha
   SimpleAnimAPI: Animation
-  SimpleAnimatableObjectAPI: Animation
+  SimpleAnimatableObjectAPI: Region
   SimpleAnimFlipBookAPI: FlipBook
   SimpleAnimGroupAPI: AnimationGroup
   SimpleAnimPathAPI: Path
