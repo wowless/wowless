@@ -26382,8 +26382,14 @@ debuglocals:
   impl: debuglocals
 debugprofilestart:
   impl: debugprofilestart
+  inputs: {}
+  outputs: {}
 debugprofilestop:
   impl: debugprofilestop
+  inputs: {}
+  outputs:
+  - name: elapsedMilliseconds
+    type: number
 debugstack:
   impl: debugstack
 DeclineChannelInvite: {}
