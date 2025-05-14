@@ -13,7 +13,7 @@ return {
     return success(true, 0)
   end,
   ['4294967295'] = function()
-    return success(false, 4294967295)
+    return success(T.data.build.gametype == 'Standard', 4294967295)
   end,
   ['4294967296'] = function()
     return failure(4294967296)
