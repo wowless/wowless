@@ -151,9 +151,6 @@ uiobject_methods:
     SetDisabledAtlas: {}
     SetNormalAtlas: {}
     SetPushedAtlas: {}
-  EditBox:
-    Disable: {}
-    Enable: {}
   FontString:
     OnColorsUpdated: {}
   Frame:
@@ -167,6 +164,7 @@ uiobjects:
   Animation: {}
   AnimationGroup: {}
   Cooldown: {}
+  EditBox: {}
   Path: {}
   ScrollFrame: {}
   Slider: {}

@@ -1696,6 +1696,10 @@ EditBox:
       outputs: {}
     Insert:
       impl: EditBox/Insert
+      inputs:
+      - name: text
+        type: string
+      outputs: {}
     IsAlphabeticOnly:
       inputs: {}
       outputs:

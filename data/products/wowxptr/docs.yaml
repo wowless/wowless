@@ -188,13 +188,11 @@ uiobject_methods:
     SetDisabledAtlas: {}
     SetNormalAtlas: {}
     SetPushedAtlas: {}
-  EditBox:
-    Disable: {}
-    Enable: {}
 uiobjects:
   Animation: {}
   AnimationGroup: {}
   Cooldown: {}
+  EditBox: {}
   Path: {}
   ScrollFrame: {}
   Slider: {}
