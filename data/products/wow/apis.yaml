@@ -35,7 +35,6 @@ AddChatWindowMessages:
     type: string
   outputs: {}
 addframetext: {}
-AddTradeMoney: {}
 Ambiguate:
   inputs:
   - name: fullName
@@ -21479,6 +21478,14 @@ C_ToyBoxInfo.NeedsFanfare:
 C_ToyBoxInfo.SetDefaultFilters:
   inputs: {}
   outputs: {}
+C_TradeInfo.AddTradeMoney:
+  inputs: {}
+  outputs: {}
+C_TradeInfo.SetTradeMoney:
+  inputs:
+  - name: amount
+    type: number
+  outputs: {}
 C_TradeSkillUI.AnyRecipeCategoriesFiltered: {}
 C_TradeSkillUI.AreAnyInventorySlotsFiltered: {}
 C_TradeSkillUI.CancelProfessionRespec:
@@ -32144,11 +32151,6 @@ SetTaxiBenchmarkMode:
   outputs: {}
 SetTaxiMap: {}
 SetTradeCurrency: {}
-SetTradeMoney:
-  inputs:
-  - name: money
-    type: number
-  outputs: {}
 SetTrainerServiceTypeFilter:
   inputs:
   - name: type
