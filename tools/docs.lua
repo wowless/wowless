@@ -453,6 +453,27 @@ local function rewriteUIObjects()
   end
   local filename = ('data/products/%s/uiobjects.yaml'):format(product)
   local uiobjects = require('wowapi.yaml').parseFile(filename)
+  local inhm = {}
+  local function inhprocess(k)
+    if inhm[k] then
+      return
+    end
+    local t = {}
+    local v = assert(uiobjects[k])
+    for vk in pairs(v.inherits) do
+      inhprocess(vk)
+      for tk in pairs(inhm[vk]) do
+        t[tk] = true
+      end
+      for mk in pairs(uiobjects[vk].methods) do
+        t[mk] = true
+      end
+    end
+    inhm[k] = t
+  end
+  for k in pairs(uiobjects) do
+    inhprocess(k)
+  end
   for k, v in pairs(mapped) do
     local u = assert(uiobjects[k], 'unknown uiobject type ' .. k)
     for mk, mv in pairs(v) do
@@ -466,12 +487,12 @@ local function rewriteUIObjects()
         stuboutstrides = mm and mm.stuboutstrides,
       }
       local okay = (function()
-        if not mm or mm.getter or mm.setter then
-          return
-        end
         local cu = deref(config, 'uiobjects', k)
         local cm = deref(config, 'uiobject_methods', k, mk)
-        return not mm.impl or cu or cm
+        local gs = mm and (mm.getter or mm.setter)
+        local im = mm and mm.impl
+        local ih = inhm[k][mk]
+        return (cu or mm and (cm or not im)) and not gs and not ih
       end)()
       if okay then
         u.methods[mk] = mmv
