@@ -154,6 +154,7 @@ uiobject_methods:
 uiobjects:
   Animation: {}
   AnimationGroup: {}
+  Cooldown: {}
   Path: {}
   ScrollFrame: {}
   Slider: {}

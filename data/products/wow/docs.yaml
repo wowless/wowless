@@ -188,10 +188,6 @@ uiobject_methods:
     SetDisabledAtlas: {}
     SetNormalAtlas: {}
     SetPushedAtlas: {}
-  Cooldown:
-    GetHideCountdownNumbers: {}
-    GetUseAuraDisplayTime: {}
-    SetUseAuraDisplayTime: {}
   EditBox:
     Disable: {}
     Enable: {}
@@ -206,6 +202,7 @@ uiobject_methods:
 uiobjects:
   Animation: {}
   AnimationGroup: {}
+  Cooldown: {}
   Path: {}
   ScrollFrame: {}
   Slider: {}
