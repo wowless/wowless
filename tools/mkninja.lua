@@ -300,6 +300,7 @@ table.insert(builds, {
     'spec/data/gametypes_spec.lua',
     'spec/data/globals_spec.lua',
     'spec/data/impl_spec.lua',
+    'spec/data/sql_spec.lua',
     'spec/data/structures_spec.lua',
     'spec/data/test_spec.lua',
     'spec/data/uiobjectimpl_spec.lua',

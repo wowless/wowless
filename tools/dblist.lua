@@ -22,16 +22,12 @@ local function dblist(product)
   for _, api in pairs(productapis) do
     local impl = impls[api.impl]
     if impl then
-      for _, db in ipairs(impl.dbs or {}) do
-        dbset[db.name] = true
-      end
       for _, sql in ipairs(impl.sqls or {}) do
-        local kk = sql.lookup and 'lookup' or 'cursor'
-        table.insert(sqls, kk .. '/' .. sql[kk])
+        sqls[sql] = true
       end
     end
   end
-  for _, sql in ipairs(sqls) do
+  for sql in pairs(sqls) do
     -- We are fortunate that sqlite complains about missing tables first.
     local sqltext = readFile('data/sql/' .. sql .. '.sql')
     local db = require('lsqlite3').open_memory()

@@ -1,0 +1,15 @@
+---
+name: sql
+type:
+  mapof:
+    key: string
+    value:
+      record:
+        table:
+          type: boolean
+        type:
+          required: true
+          type:
+            oneof:
+            - literal: cursor
+            - literal: lookup

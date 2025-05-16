@@ -117,6 +117,7 @@ local sqllookups = {}
 do
   local cfg = parseYaml('data/products/' .. product .. '/apis.yaml')
   local implcfg = parseYaml('data/impl.yaml')
+  local sqlcfg = parseYaml('data/sql.yaml')
   for name, apicfg in pairs(cfg) do
     if apicfg.impl then
       local ic = assert(implcfg[apicfg.impl], 'missing impl ' .. apicfg.impl)
@@ -125,7 +126,16 @@ do
         apicfg.stdlib = ic.stdlib
       end
       apicfg.frameworks = ic.module and { 'api' } or ic.frameworks
-      apicfg.sqls = ic.sqls
+      if ic.sqls then
+        apicfg.sqls = {}
+        for _, v in ipairs(ic.sqls) do
+          local sql = sqlcfg[v]
+          table.insert(apicfg.sqls, {
+            [sql.type] = v,
+            table = sql.table,
+          })
+        end
+      end
       if not impls[apicfg.impl] then
         if ic.module then
           -- TODO make this smarter so we don't piggy back on framework
@@ -154,12 +164,12 @@ do
     for _, sql in ipairs(apicfg.sqls or {}) do
       if sql.cursor then
         sqlcursors[sql.cursor] = {
-          sql = readFile('data/sql/cursor/' .. sql.cursor .. '.sql'),
+          sql = readFile('data/sql/' .. sql.cursor .. '.sql'),
           table = sql.table,
         }
       elseif sql.lookup then
         sqllookups[sql.lookup] = {
-          sql = readFile('data/sql/lookup/' .. sql.lookup .. '.sql'),
+          sql = readFile('data/sql/' .. sql.lookup .. '.sql'),
           table = sql.table,
         }
       end

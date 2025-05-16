@@ -67,8 +67,7 @@ type:
           - literal: gametype
           - literal: impl
           - literal: schema
-          - literal: sqlcursor
-          - literal: sqllookup
+          - literal: sql
           - literal: stringenum
           - literal: structure
           - literal: uiobject

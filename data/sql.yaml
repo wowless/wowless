@@ -1,0 +1,97 @@
+---
+C_ClassTalents.GetTraitTreeForSpec:
+  type: lookup
+C_Covenants.GetCovenantData:
+  table: true
+  type: lookup
+C_Covenants.GetCovenantData.soulbinds:
+  type: cursor
+C_CovenantSanctumUI.GetRenownLevels:
+  type: cursor
+C_CovenantSanctumUI.GetRenownRewardsForLevel:
+  table: true
+  type: cursor
+C_CreatureInfo.GetClassInfo:
+  table: true
+  type: lookup
+C_Item.DoesItemExistByID:
+  type: lookup
+C_ItemInteraction.GetItemInteractionInfo:
+  table: true
+  type: lookup
+C_Map.GetMapInfo:
+  table: true
+  type: lookup
+C_Map.GetMapInfo_Vanilla:
+  table: true
+  type: lookup
+C_ScriptedAnimations.GetAllScriptedAnimationEffects:
+  table: true
+  type: cursor
+C_SpecializationInfo.GetSpecIDs:
+  type: cursor
+C_Texture.GetAtlasInfo:
+  type: lookup
+C_Texture.GetAtlasInfo_11_1_5:
+  type: lookup
+C_Traits.GetConfigInfo:
+  type: lookup
+C_Traits.GetNodeInfo:
+  type: lookup
+C_Traits.GetNodeInfo.conditions:
+  table: true
+  type: cursor
+C_Traits.GetNodeInfo.edges:
+  table: true
+  type: cursor
+C_Traits.GetNodeInfo.entries:
+  table: true
+  type: cursor
+C_Traits.GetNodeInfo.groups:
+  type: cursor
+C_Traits.GetTreeNodes:
+  type: cursor
+C_UIColor.GetColors:
+  type: cursor
+DoEmote:
+  type: lookup
+FillLocalizedClassList:
+  type: cursor
+GetClassInfo:
+  type: lookup
+GetClassInfo_Classic:
+  type: lookup
+GetInventorySlotInfo:
+  type: lookup
+GetNumClasses:
+  type: lookup
+GetNumSpecializationsForClassID:
+  type: lookup
+GetNumTalents:
+  type: lookup
+GetNumTalentTabs:
+  type: lookup
+GetSpecializationInfo:
+  type: lookup
+GetSpecializationInfoByID:
+  type: lookup
+GetSpecializationInfoForClassID:
+  type: lookup
+GetSpecializationInfoForSpecID:
+  type: lookup
+GetTalentInfo_Vanilla:
+  type: lookup
+GetTalentPrereqs:
+  type: cursor
+GetTalentTabInfo:
+  type: lookup
+UnitClass:
+  type: lookup
+UnitClassBase:
+  type: lookup
+UnitFactionGroup:
+  type: lookup
+UnitPowerType:
+  type: lookup
+UnitRace:
+  type: lookup

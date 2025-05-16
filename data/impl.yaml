@@ -37,7 +37,7 @@ C_ClassTalents.GetActiveConfigID:
   - api
 C_ClassTalents.GetTraitTreeForSpec:
   sqls:
-  - lookup: C_ClassTalents.GetTraitTreeForSpec
+  - C_ClassTalents.GetTraitTreeForSpec
 C_ClassTalents.InitializeViewLoadout:
   frameworks:
   - api
@@ -45,23 +45,20 @@ C_ClassTalents.ViewLoadout:
   frameworks:
   - api
   sqls:
-  - lookup: GetSpecializationInfoByID
+  - GetSpecializationInfoByID
 C_Covenants.GetCovenantData:
   sqls:
-  - lookup: C_Covenants.GetCovenantData
-    table: true
-  - cursor: C_Covenants.GetCovenantData.soulbinds
+  - C_Covenants.GetCovenantData
+  - C_Covenants.GetCovenantData.soulbinds
 C_CovenantSanctumUI.GetRenownLevels:
   sqls:
-  - cursor: C_CovenantSanctumUI.GetRenownLevels
+  - C_CovenantSanctumUI.GetRenownLevels
 C_CovenantSanctumUI.GetRenownRewardsForLevel:
   sqls:
-  - cursor: C_CovenantSanctumUI.GetRenownRewardsForLevel
-    table: true
+  - C_CovenantSanctumUI.GetRenownRewardsForLevel
 C_CreatureInfo.GetClassInfo:
   sqls:
-  - lookup: C_CreatureInfo.GetClassInfo
-    table: true
+  - C_CreatureInfo.GetClassInfo
 C_CVar.GetCVar:
   module: cvars
 C_CVar.GetCVarBool:
@@ -83,35 +80,31 @@ C_EventUtils.IsEventValid:
   module: events
 C_Item.DoesItemExistByID:
   sqls:
-  - lookup: C_Item.DoesItemExistByID
+  - C_Item.DoesItemExistByID
 C_ItemInteraction.GetItemInteractionInfo:
   sqls:
-  - lookup: C_ItemInteraction.GetItemInteractionInfo
-    table: true
+  - C_ItemInteraction.GetItemInteractionInfo
 C_Macro.SetMacroExecuteLineCallback:
   function: SetCallback
   module: macrotext
 C_Map.GetMapInfo:
   sqls:
-  - lookup: C_Map.GetMapInfo
-    table: true
+  - C_Map.GetMapInfo
 C_Map.GetMapInfo_Vanilla:
   sqls:
-  - lookup: C_Map.GetMapInfo_Vanilla
-    table: true
+  - C_Map.GetMapInfo_Vanilla
 C_ScriptedAnimations.GetAllScriptedAnimationEffects:
   sqls:
-  - cursor: C_ScriptedAnimations.GetAllScriptedAnimationEffects
-    table: true
+  - C_ScriptedAnimations.GetAllScriptedAnimationEffects
 C_SpecializationInfo.GetSpecIDs:
   sqls:
-  - cursor: C_SpecializationInfo.GetSpecIDs
+  - C_SpecializationInfo.GetSpecIDs
 C_Texture.GetAtlasInfo:
   sqls:
-  - lookup: C_Texture.GetAtlasInfo
+  - C_Texture.GetAtlasInfo
 C_Texture.GetAtlasInfo_11_1_5:
   sqls:
-  - lookup: C_Texture.GetAtlasInfo_11_1_5
+  - C_Texture.GetAtlasInfo_11_1_5
 C_Timer.After:
   module: time
 C_Timer.NewTicker:
@@ -122,22 +115,19 @@ C_Traits.GetConfigInfo:
   frameworks:
   - api
   sqls:
-  - lookup: C_Traits.GetConfigInfo
+  - C_Traits.GetConfigInfo
 C_Traits.GetNodeInfo:
   frameworks:
   - api
   sqls:
-  - lookup: C_Traits.GetNodeInfo
-  - cursor: C_Traits.GetNodeInfo.entries
-    table: true
-  - cursor: C_Traits.GetNodeInfo.edges
-    table: true
-  - cursor: C_Traits.GetNodeInfo.groups
-  - cursor: C_Traits.GetNodeInfo.conditions
-    table: true
+  - C_Traits.GetNodeInfo
+  - C_Traits.GetNodeInfo.entries
+  - C_Traits.GetNodeInfo.edges
+  - C_Traits.GetNodeInfo.groups
+  - C_Traits.GetNodeInfo.conditions
 C_Traits.GetTreeNodes:
   sqls:
-  - cursor: C_Traits.GetTreeNodes
+  - C_Traits.GetTreeNodes
 C_UI.GetUIParent:
   frameworks:
   - env
@@ -146,7 +136,7 @@ C_UI.GetWorldFrame:
   - env
 C_UIColor.GetColors:
   sqls:
-  - cursor: C_UIColor.GetColors
+  - C_UIColor.GetColors
 C_XMLUtil.GetTemplateInfo_10_2:
   frameworks:
   - api
@@ -198,7 +188,7 @@ DoEmote:
   frameworks:
   - api
   sqls:
-  - lookup: DoEmote
+  - DoEmote
 EnumerateFrames:
   frameworks:
   - api
@@ -208,7 +198,7 @@ fastrandom:
   stdlib: fastrandom
 FillLocalizedClassList:
   sqls:
-  - cursor: FillLocalizedClassList
+  - FillLocalizedClassList
 forceinsecure:
   stdlib: forceinsecure
 gcinfo:
@@ -234,10 +224,10 @@ GetChatWindowMessages:
   - env
 GetClassInfo:
   sqls:
-  - lookup: GetClassInfo
+  - GetClassInfo
 GetClassInfo_Classic:
   sqls:
-  - lookup: GetClassInfo_Classic
+  - GetClassInfo_Classic
 GetClickFrame:
   frameworks:
   - api
@@ -260,7 +250,7 @@ GetGlobalEnvironment:
   module: env
 GetInventorySlotInfo:
   sqls:
-  - lookup: GetInventorySlotInfo
+  - GetInventorySlotInfo
 GetItemQualityColor: {}
 GetLootSpecialization:
   module: units
@@ -271,20 +261,20 @@ GetNumAddOns:
   - api
 GetNumClasses:
   sqls:
-  - lookup: GetNumClasses
+  - GetNumClasses
 GetNumSpecializationsForClassID:
   sqls:
-  - lookup: GetNumSpecializationsForClassID
+  - GetNumSpecializationsForClassID
 GetNumTalents:
   frameworks:
   - api
   sqls:
-  - lookup: GetNumTalents
+  - GetNumTalents
 GetNumTalentTabs:
   frameworks:
   - api
   sqls:
-  - lookup: GetNumTalentTabs
+  - GetNumTalentTabs
 GetScreenHeight:
   module: system
 GetScreenWidth:
@@ -293,40 +283,40 @@ GetSpecializationInfo:
   frameworks:
   - api
   sqls:
-  - lookup: GetSpecializationInfo
+  - GetSpecializationInfo
 GetSpecializationInfoByID:
   sqls:
-  - lookup: GetSpecializationInfoByID
+  - GetSpecializationInfoByID
 GetSpecializationInfoForClassID:
   frameworks:
   - api
   sqls:
-  - lookup: GetSpecializationInfoForClassID
+  - GetSpecializationInfoForClassID
 GetSpecializationInfoForSpecID:
   frameworks:
   - api
   sqls:
-  - lookup: GetSpecializationInfoForSpecID
+  - GetSpecializationInfoForSpecID
 GetTalentInfo_Vanilla:
   frameworks:
   - api
   sqls:
-  - lookup: GetTalentInfo_Vanilla
+  - GetTalentInfo_Vanilla
 GetTalentPrereqs_Vanilla:
   frameworks:
   - api
   sqls:
-  - cursor: GetTalentPrereqs
+  - GetTalentPrereqs
 GetTalentPrereqs_Wrath:
   frameworks:
   - api
   sqls:
-  - cursor: GetTalentPrereqs
+  - GetTalentPrereqs
 GetTalentTabInfo:
   frameworks:
   - api
   sqls:
-  - lookup: GetTalentTabInfo
+  - GetTalentTabInfo
 GetTime:
   module: time
 hooksecurefunc:
@@ -549,14 +539,14 @@ type:
   stdlib: type
 UnitClass:
   sqls:
-  - lookup: UnitClass
+  - UnitClass
 UnitClassBase:
   sqls:
-  - lookup: UnitClassBase
+  - UnitClassBase
 UnitExists: {}
 UnitFactionGroup:
   sqls:
-  - lookup: UnitFactionGroup
+  - UnitFactionGroup
 UnitGUID: {}
 UnitIsPlayer: {}
 UnitIsUnit: {}
@@ -564,10 +554,10 @@ UnitLevel: {}
 UnitName: {}
 UnitPowerType:
   sqls:
-  - lookup: UnitPowerType
+  - UnitPowerType
 UnitRace:
   sqls:
-  - lookup: UnitRace
+  - UnitRace
 UnitSex: {}
 unpack:
   stdlib: unpack
