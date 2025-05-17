@@ -29,25 +29,42 @@ C_ScriptedAnimations.GetAllScriptedAnimationEffects:
   table: true
   type: cursor
 C_SpecializationInfo.GetSpecIDs:
+  indexes:
+    SpecSetMember: SpecSet
   type: cursor
 C_Texture.GetAtlasInfo:
+  indexes:
+    UiTextureAtlasElement: Name COLLATE NOCASE
+    UiTextureAtlasMember: UiTextureAtlasElementID
   type: lookup
 C_Texture.GetAtlasInfo_11_1_5:
+  indexes:
+    UiTextureAtlasElement: Name COLLATE NOCASE
+    UiTextureAtlasMember: UiTextureAtlasElementID
   type: lookup
 C_Traits.GetConfigInfo:
   type: lookup
 C_Traits.GetNodeInfo:
   type: lookup
 C_Traits.GetNodeInfo.conditions:
+  indexes:
+    SpecSetMember: SpecSet
+    TraitNodeGroupXTraitCond: TraitNodeGroupID
+    TraitNodeGroupXTraitNode: TraitNodeID
+    TraitNodeXTraitCond: TraitNodeID
   table: true
   type: cursor
 C_Traits.GetNodeInfo.edges:
   table: true
   type: cursor
 C_Traits.GetNodeInfo.entries:
+  indexes:
+    TraitNodeXTraitNodeEntry: TraitNodeID
   table: true
   type: cursor
 C_Traits.GetNodeInfo.groups:
+  indexes:
+    TraitNodeGroupXTraitNode: TraitNodeID
   type: cursor
 C_Traits.GetTreeNodes:
   type: cursor
@@ -80,6 +97,8 @@ GetSpecializationInfoForClassID:
 GetSpecializationInfoForSpecID:
   type: lookup
 GetTalentInfo_Vanilla:
+  indexes:
+    SpellMisc: SpellID
   type: lookup
 GetTalentPrereqs:
   type: cursor

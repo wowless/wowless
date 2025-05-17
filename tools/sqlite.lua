@@ -1,19 +1,9 @@
 local lsqlite3 = require('lsqlite3')
 local sqlquote = require('tools.sqlite3ext').quote
 
-local indexes = {
-  SpecSetMember = { 'SpecSet' },
-  SpellMisc = { 'SpellID' },
-  TraitNodeGroupXTraitCond = { 'TraitNodeGroupID' },
-  TraitNodeGroupXTraitNode = { 'TraitNodeID' },
-  TraitNodeXTraitCond = { 'TraitNodeID' },
-  TraitNodeXTraitNodeEntry = { 'TraitNodeID' },
-  UiTextureAtlasElement = { 'Name COLLATE NOCASE' },
-  UiTextureAtlasMember = { 'UiTextureAtlasElementID' },
-}
-
 local function factory(theProduct)
   local defs = dofile('build/products/' .. theProduct .. '/dbdefs.lua')
+  local dblist = dofile('build/products/' .. theProduct .. '/dblist.lua')
 
   local function create(filename)
     local dbinit = { 'BEGIN' }
@@ -28,7 +18,7 @@ local function factory(theProduct)
       if hasid then
         table.insert(dbinit, ('CREATE INDEX %sIndexID ON %s (ID)'):format(k, k))
       end
-      for i, index in ipairs(indexes[k] or {}) do
+      for i, index in ipairs(dblist[k]) do
         table.insert(dbinit, ('CREATE INDEX %sIndex%d ON %s (%s)'):format(k, i, k, index))
       end
     end

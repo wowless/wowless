@@ -5,6 +5,11 @@ type:
     key: string
     value:
       record:
+        indexes:
+          type:
+            mapof:
+              key: string
+              value: string
         table:
           type: boolean
         type:

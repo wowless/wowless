@@ -195,6 +195,7 @@ for _, p in ipairs(productList) do
     ins_implicit = {
       'build/cmake/dblist',
       'build/cmake/runtime/impl.lua',
+      'build/cmake/runtime/sql.lua',
       'build/cmake/runtime/products/' .. p .. '/apis.lua',
     },
     outs = dblist,
@@ -265,6 +266,7 @@ for _, p in ipairs(productList) do
     args = { product = p },
     ins_implicit = {
       dbdefs,
+      dblist,
       'build/cmake/sqlite',
     },
     outs = schemadb,
@@ -274,6 +276,7 @@ for _, p in ipairs(productList) do
     args = { product = p },
     ins_implicit = {
       dbdefs,
+      dblist,
       fetchStamp,
       'build/cmake/sqlite',
     },

@@ -2,7 +2,7 @@ local function defs(product)
   local build = dofile('build/cmake/runtime/products/' .. product .. '/build.lua')
   local bv = build.version .. '.' .. build.build
   local t = {}
-  for _, db in ipairs(dofile('build/products/' .. product .. '/dblist.lua')) do
+  for db in pairs(dofile('build/products/' .. product .. '/dblist.lua')) do
     local content = assert(require('pl.file').read('vendor/dbdefs/definitions/' .. db .. '.dbd'))
     local dbd = assert(require('luadbd.parser').dbd(content))
     local v = (function()
