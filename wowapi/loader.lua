@@ -1,56 +1,51 @@
 local util = require('wowless.util')
 
-local function loadSqls(sqlitedb, cursorSqls, lookupSqls)
-  local function lookup(stmt, isTable)
-    -- Manually pull out the first element of these iterators.
-    if isTable then
-      local f, s = stmt:nrows()
-      return f(s)
-    else
-      local f, s = stmt:rows()
-      local t = f(s)
-      if t then
-        return unpack(t)
-      end
-    end
-  end
-  local function cursor(stmt, isTable)
-    if isTable then
-      return stmt:nrows()
-    else
-      return stmt:urows()
-    end
-  end
-  local function prep(fn, sql, f)
-    local stmt = sqlitedb:prepare(sql.sql)
+local function loadSqls(sqlitedb, sqls)
+  local types = {
+    cursor = {
+      [false] = function(stmt)
+        return stmt:urows()
+      end,
+      [true] = function(stmt)
+        return stmt:nrows()
+      end,
+    },
+    lookup = {
+      -- Manually pull out the first element of these iterators.
+      [false] = function(stmt)
+        local f, s = stmt:rows()
+        local t = f(s)
+        if t then
+          return unpack(t)
+        end
+      end,
+      [true] = function(stmt)
+        local f, s = stmt:nrows()
+        return f(s)
+      end,
+    },
+  }
+  local ret = {}
+  for k, v in pairs(sqls) do
+    local stmt = sqlitedb:prepare(v.sql)
     if not stmt then
-      error('could not prepare ' .. fn .. ': ' .. sqlitedb:errmsg())
+      error('could not prepare ' .. k .. ': ' .. sqlitedb:errmsg())
     end
-    return function(...)
+    local f = types[v.type][not not v.table]
+    ret[k] = function(...)
       stmt:reset()
       stmt:bind_values(...)
-      return f(stmt, sql.table)
+      return f(stmt)
     end
   end
-  local lookups = {}
-  for k, v in pairs(lookupSqls) do
-    lookups[k] = prep(k, v, lookup)
-  end
-  local cursors = {}
-  for k, v in pairs(cursorSqls) do
-    cursors[k] = prep(k, v, cursor)
-  end
-  return {
-    cursors = cursors,
-    lookups = lookups,
-  }
+  return ret
 end
 
 local function loadFunctions(api, loader)
   api.log(1, 'loading functions')
   local datalua = api.datalua
   local apis = datalua.apis
-  local sqls = loadSqls(loader.sqlitedb, datalua.sqlcursors, datalua.sqllookups)
+  local sqls = loadSqls(loader.sqlitedb, datalua.sqls)
   local impls = {}
   for k, v in pairs(datalua.impls) do
     impls[k] = setfenv(loadstring(v, '@./data/impl/' .. k .. '.lua'), _G)
@@ -88,7 +83,7 @@ local function loadFunctions(api, loader)
       table.insert(specials, (assert(frameworks[fw], 'unknown framework ' .. fw)))
     end
     for _, sql in ipairs(apicfg.sqls or {}) do
-      table.insert(specials, sql.lookup and sqls.lookups[sql.lookup] or sqls.cursors[sql.cursor])
+      table.insert(specials, sqls[sql])
     end
     local specialfn
     if not next(specials) then

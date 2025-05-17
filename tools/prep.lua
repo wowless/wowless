@@ -112,8 +112,7 @@ end)()
 
 local apis = {}
 local impls = {}
-local sqlcursors = {}
-local sqllookups = {}
+local sqls = {}
 do
   local cfg = parseYaml('data/products/' .. product .. '/apis.yaml')
   local implcfg = parseYaml('data/impl.yaml')
@@ -126,14 +125,15 @@ do
         apicfg.stdlib = ic.stdlib
       end
       apicfg.frameworks = ic.module and { 'api' } or ic.frameworks
-      if ic.sqls then
-        apicfg.sqls = {}
-        for _, v in ipairs(ic.sqls) do
+      apicfg.sqls = ic.sqls
+      for _, v in ipairs(ic.sqls or {}) do
+        if not sqls[v] then
           local sql = sqlcfg[v]
-          table.insert(apicfg.sqls, {
-            [sql.type] = v,
+          sqls[v] = {
+            sql = readFile('data/sql/' .. v .. '.sql'),
             table = sql.table,
-          })
+            type = sql.type,
+          }
         end
       end
       if not impls[apicfg.impl] then
@@ -160,19 +160,6 @@ do
         end
       end
       apicfg.stub = 'return ' .. table.concat(rets, ',')
-    end
-    for _, sql in ipairs(apicfg.sqls or {}) do
-      if sql.cursor then
-        sqlcursors[sql.cursor] = {
-          sql = readFile('data/sql/' .. sql.cursor .. '.sql'),
-          table = sql.table,
-        }
-      elseif sql.lookup then
-        sqllookups[sql.lookup] = {
-          sql = readFile('data/sql/' .. sql.lookup .. '.sql'),
-          table = sql.table,
-        }
-      end
     end
     apis[name] = apicfg
   end
@@ -341,8 +328,7 @@ local data = {
   globals = globals,
   impls = impls,
   product = product,
-  sqlcursors = sqlcursors,
-  sqllookups = sqllookups,
+  sqls = sqls,
   structures = structures,
   uiobjects = uiobjects,
   xml = parseYaml('data/products/' .. product .. '/xml.yaml'),
