@@ -25909,8 +25909,12 @@ debuglocals:
   impl: debuglocals
 debugprofilestart:
   impl: debugprofilestart
+  inputs: {}
+  outputs: {}
 debugprofilestop:
   impl: debugprofilestop
+  inputs: {}
+  outputs: {}
 debugstack:
   impl: debugstack
 DeclineChannelInvite: {}
