@@ -15,8 +15,6 @@ type:
                 - literal: env
                 - literal: events
                 - literal: loader
-          function:
-            type: string
           sqls:
             type:
               sequenceof:
