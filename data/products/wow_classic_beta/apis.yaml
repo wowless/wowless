@@ -644,6 +644,7 @@ C_AddOnProfiler.MeasureCall:
     type: table
   - name: unpackedPrimitiveType
     type: number
+  instride: 1
   outputs:
   - name: results
     type:

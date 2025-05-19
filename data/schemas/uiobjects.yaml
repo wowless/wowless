@@ -78,6 +78,8 @@ type:
                               required: true
                               type:
                                 schema: type
+                    instride:
+                      type: number
                     mayreturnnils:
                       type: boolean
                     mayreturnnothing:

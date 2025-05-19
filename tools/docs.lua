@@ -319,6 +319,7 @@ local function rewriteApis()
     local api = apis[name]
     local newapi = {
       inputs = insig(fn, ns),
+      instride = stride(fn.Arguments),
       mayreturnnils = api and api.mayreturnnils,
       mayreturnnothing = mayreturnnothing(fn, api),
       outputs = outsig(fn, ns, api),
@@ -481,6 +482,7 @@ local function rewriteUIObjects()
       local mmv = {
         impl = mm and mm.impl,
         inputs = insig(mv),
+        instride = stride(mv.Arguments),
         mayreturnnothing = mayreturnnothing(mv, mm),
         outputs = outsig(mv, nil, mm),
         outstride = stride(mv.Returns),

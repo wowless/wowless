@@ -990,6 +990,7 @@ Button:
       inputs:
       - name: unpackedPrimitiveType
         type: number
+      instride: 1
       outputs: {}
     SetButtonState:
       impl: Button/SetButtonState
@@ -2604,6 +2605,7 @@ Frame:
         type: string
       - name: unpackedPrimitiveType
         type: string
+      instride: 1
       outputs:
       - name: success
         type: boolean
@@ -2793,6 +2795,7 @@ Frame:
       inputs:
       - name: unpackedPrimitiveType
         type: number
+      instride: 1
       outputs: {}
     RegisterUnitEvent:
       impl: Frame/RegisterUnitEvent
@@ -4849,6 +4852,7 @@ Region:
       inputs:
       - name: unpackedPrimitiveType
         type: number
+      instride: 1
       outputs: {}
     SetPoint:
       impl: Region/SetPoint
