@@ -49,9 +49,9 @@ local function write(width, height, rgba)
     table.insert(lines, '\0')
     table.insert(lines, rgba:sub((i - 1) * width * 4 + 1, i * width * 4))
   end
-  table.insert(t, toChunk('IDAT', { zlib.compress(table.concat(lines, '')) }))
+  table.insert(t, toChunk('IDAT', { zlib.compress(table.concat(lines)) }))
   table.insert(t, toChunk('IEND', {}))
-  return table.concat(t, '')
+  return table.concat(t)
 end
 
 return {

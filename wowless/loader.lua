@@ -920,7 +920,7 @@ local function loader(api, cfg)
         if next(t) then
           local fn = ('out/%s/SavedVariables/%s.lua'):format(product, v.name)
           assert(require('pl.dir').makepath(path.dirname(fn)))
-          assert(require('pl.file').write(fn, table.concat(t, '')))
+          assert(require('pl.file').write(fn, table.concat(t)))
         end
       end
     end

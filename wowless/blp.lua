@@ -114,10 +114,10 @@ local function rundxt(header, fn)
       end
     end
     for _, line in ipairs(lines) do
-      table.insert(rgbalines, table.concat(line, ''))
+      table.insert(rgbalines, table.concat(line))
     end
   end
-  return table.concat(rgbalines, '')
+  return table.concat(rgbalines)
 end
 
 local pixelFormats = {

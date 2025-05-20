@@ -158,7 +158,7 @@ G.testsuite.uiobjects = function()
           check1(true, f:IsVisible())
           check0(f:Hide())
           check1(false, f:IsVisible())
-          check1(('cDAb'):rep(6), table.concat(log, ''))
+          check1(('cDAb'):rep(6), table.concat(log))
         end,
         ['parent keys'] = function()
           local up = CreateFrame('Frame')

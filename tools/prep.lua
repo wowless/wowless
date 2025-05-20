@@ -281,7 +281,7 @@ for k, v in pairs(uiobjectdata) do
             table.insert(ct, ',self')
           end
           table.insert(ct, ')')
-          local sct = table.concat(ct, '')
+          local sct = table.concat(ct)
           if f.nilable or cf.nilable then
             table.insert(t, f.name)
             table.insert(t, '~=nil and ')
@@ -294,7 +294,7 @@ for k, v in pairs(uiobjectdata) do
         table.insert(t, ';')
       end
       table.insert(t, ' end')
-      methods[mk] = table.concat(t, '')
+      methods[mk] = table.concat(t)
     else
       local outs = mv.outputs or {}
       local rets = {}

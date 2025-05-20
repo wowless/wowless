@@ -289,7 +289,7 @@ local function outsig(fn, ns, api)
       ns and (' ns = ' .. ns) or '',
       '\n',
       require('pl.pretty').write(fn),
-    }, ''))
+    }))
   end
   return outputs
 end
