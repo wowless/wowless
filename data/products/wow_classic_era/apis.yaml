@@ -45,7 +45,6 @@ AddQuestWatch:
     type: number
   outputs: {}
 AddTrackedAchievement: {}
-AddTradeMoney: {}
 Ambiguate:
   inputs:
   - name: fullName
@@ -10395,6 +10394,14 @@ C_ToyBoxInfo.NeedsFanfare:
   outputs:
   - name: needsFanfare
     type: boolean
+C_TradeInfo.AddTradeMoney:
+  inputs: {}
+  outputs: {}
+C_TradeInfo.SetTradeMoney:
+  inputs:
+  - name: amount
+    type: number
+  outputs: {}
 C_TradeSkillUI.GetTradeSkillDisplayName:
   inputs:
   - name: skillLineID
@@ -19916,11 +19923,6 @@ SetTaxiBenchmarkMode:
     type: boolean
   outputs: {}
 SetTaxiMap: {}
-SetTradeMoney:
-  inputs:
-  - name: money
-    type: number
-  outputs: {}
 SetTradeSkillInvSlotFilter: {}
 SetTradeSkillItemLevelFilter: {}
 SetTradeSkillItemNameFilter: {}
