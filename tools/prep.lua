@@ -230,7 +230,7 @@ local function mkuiobjectfieldset(k)
 end
 local uiobjects = {}
 for k, v in pairs(uiobjectdata) do
-  local constructor = { 'function() return {' }
+  local constructor = { 'return function() return {' }
   for fk, fv in require('pl.tablex').sort(mkuiobjectinit(k)) do
     table.insert(constructor, ('  %s = %s,'):format(fk, fv))
   end
@@ -242,7 +242,7 @@ for k, v in pairs(uiobjectdata) do
       assert(uiobjectimpl[mv.impl])
       local src = 'data/uiobjects/' .. mv.impl .. '.lua'
       methods[mk] = {
-        impl = 'function(...) ' .. readFile(src) .. ' end',
+        impl = 'return function(...) ' .. readFile(src) .. ' end',
         inputs = mv.inputs,
         mayreturnnils = mv.mayreturnnils,
         mayreturnnothing = mv.mayreturnnothing,
@@ -259,9 +259,9 @@ for k, v in pairs(uiobjectdata) do
           table.insert(t, 'self.' .. f.name)
         end
       end
-      methods[mk] = 'function(self) return ' .. table.concat(t, ',') .. ' end'
+      methods[mk] = 'return function(self) return ' .. table.concat(t, ',') .. ' end'
     elseif mv.setter then
-      local t = { 'function(self' }
+      local t = { 'return function(self' }
       for _, f in ipairs(mv.setter) do
         table.insert(t, ',')
         table.insert(t, f.name)
@@ -307,7 +307,7 @@ for k, v in pairs(uiobjectdata) do
           table.insert(rets, specDefault(outs[j]))
         end
       end
-      methods[mk] = 'function() return ' .. table.concat(rets, ',') .. ' end'
+      methods[mk] = 'return function() return ' .. table.concat(rets, ',') .. ' end'
     end
   end
   uiobjects[k] = {
