@@ -70,21 +70,10 @@ local function mkBaseUIObjectTypes(api)
   local typechecker = require('wowless.typecheck')(api)
   local funchecker = require('wowless.funcheck')(typechecker)
 
-  local check = setmetatable({
-    Texture = function(v, self)
-      return toTexture(self, v)
-    end,
-  }, {
-    __index = function(t, k)
-      local spec = { type = k }
-      local fn = function(v)
-        local vv, errmsg = typechecker(spec, v)
-        return errmsg and error(errmsg) or vv
-      end
-      t[k] = fn
-      return fn
-    end,
-  })
+  local function check(spec, v)
+    local vv, errmsg = typechecker(spec, v)
+    return errmsg and error(errmsg) or vv
+  end
 
   local uiobjects = {}
   for name, cfg in pairs(api.datalua.uiobjects) do

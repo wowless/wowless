@@ -261,39 +261,41 @@ for k, v in pairs(uiobjectdata) do
       end
       methods[mk] = 'return function(self) return ' .. table.concat(t, ',') .. ' end'
     elseif mv.setter then
-      local t = { 'return function(self' }
+      local t = {}
+      for i, f in ipairs(mv.setter) do
+        local cf = fieldset[f.name]
+        if cf.type ~= 'Texture' then
+          table.insert(t, 'local spec')
+          table.insert(t, tostring(i))
+          table.insert(t, '={')
+          if cf.type == 'boolean' or cf.nilable or f.nilable then
+            table.insert(t, 'nilable=true,')
+          end
+          table.insert(t, 'type="' .. cf.type .. '"};')
+        end
+      end
+      table.insert(t, 'return function(self')
       for _, f in ipairs(mv.setter) do
         table.insert(t, ',')
         table.insert(t, f.name)
       end
-      table.insert(t, ') ')
-      for _, f in ipairs(mv.setter) do
+      table.insert(t, ')')
+      for i, f in ipairs(mv.setter) do
         local cf = fieldset[f.name]
         table.insert(t, 'self.')
         table.insert(t, f.name)
         table.insert(t, '=')
-        if cf.type == 'boolean' then
-          table.insert(t, 'not not ')
-          table.insert(t, f.name)
+        if cf.type == 'Texture' then
+          table.insert(t, 'toTexture(self,')
         else
-          local ct = { 'check.', cf.type, '(', f.name }
-          if cf.type == 'Texture' then
-            table.insert(ct, ',self')
-          end
-          table.insert(ct, ')')
-          local sct = table.concat(ct)
-          if f.nilable or cf.nilable then
-            table.insert(t, f.name)
-            table.insert(t, '~=nil and ')
-            table.insert(t, sct)
-            table.insert(t, ' or nil')
-          else
-            table.insert(t, sct)
-          end
+          table.insert(t, 'check(spec')
+          table.insert(t, tostring(i))
+          table.insert(t, ',')
         end
-        table.insert(t, ';')
+        table.insert(t, f.name)
+        table.insert(t, ');')
       end
-      table.insert(t, ' end')
+      table.insert(t, 'end')
       methods[mk] = table.concat(t)
     else
       local outs = mv.outputs or {}
