@@ -186,6 +186,26 @@ for k, v in pairs(parseYaml('data/products/' .. product .. '/events.yaml')) do
   }
 end
 
+local skipchecks = { -- issue #413
+  Animation = {
+    SetTarget = true,
+  },
+  Button = {
+    RegisterForMouse = true,
+  },
+  FontString = {
+    SetFormattedText = true,
+  },
+  Frame = {
+    RegisterForDrag = true,
+  },
+  Region = {
+    SetPassThroughButtons = true,
+  },
+  Scale = {
+    SetOrigin = true,
+  },
+}
 local uiobjectdata = parseYaml('data/products/' .. product .. '/uiobjects.yaml')
 local uiobjectimpl = parseYaml('data/uiobjectimpl.yaml')
 local uiobjectinits = {}
@@ -298,6 +318,22 @@ for k, v in pairs(uiobjectdata) do
       table.insert(t, 'end')
       methods[mk] = table.concat(t)
     else
+      local t = {}
+      local nin = mv.inputs and #mv.inputs or 0
+      for i = 1, nin do
+        table.insert(t, 'local spec' .. i .. '=' .. plprettywrite(mv.inputs[i], '') .. ';')
+      end
+      table.insert(t, 'return function(_')
+      for i = 1, nin do
+        table.insert(t, ',arg' .. i)
+      end
+      table.insert(t, ')')
+      for i = 1, nin do
+        if not skipchecks[k] or not skipchecks[k][mk] then
+          table.insert(t, 'check(spec' .. i .. ',arg' .. i .. ');')
+        end
+      end
+      table.insert(t, 'return ')
       local outs = mv.outputs or {}
       local rets = {}
       local nonstride = #outs - (mv.outstride or 0)
@@ -309,7 +345,9 @@ for k, v in pairs(uiobjectdata) do
           table.insert(rets, specDefault(outs[j]))
         end
       end
-      methods[mk] = 'return function() return ' .. table.concat(rets, ',') .. ' end'
+      table.insert(t, table.concat(rets, ','))
+      table.insert(t, ' end')
+      methods[mk] = table.concat(t)
     end
   end
   uiobjects[k] = {
