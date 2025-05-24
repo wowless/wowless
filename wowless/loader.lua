@@ -829,6 +829,7 @@ local function loader(api, cfg)
     end
     if toc.bindings then
       loadFile(toc.bindings)
+      api.SendEvent('UPDATE_BINDINGS')
     end
     loadFile(('out/%s/SavedVariables/%s.lua'):format(product, addonName), toc.fdid and 'SavedVariables' or nil)
     if forceSecure then
