@@ -56,6 +56,7 @@ runner:
     ARENA_TEAM_UPDATE: missing PVPTeamDetails
     CRAFT_SHOW: CraftFrame_SetupDropdown has an error (self)
     LFG_PROPOSAL_SHOW: TODO figure out if there's an ordering issue here
+    SHOW_LFG_EXPAND_SEARCH_PROMPT: missing text
   skip_slashcmds:
     CASTRANDOM: {}
     GUILD_INVITE: {}

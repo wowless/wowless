@@ -193,9 +193,6 @@ local skipchecks = { -- issue #413
   Button = {
     RegisterForMouse = true,
   },
-  FontString = {
-    SetFormattedText = true,
-  },
   Frame = {
     RegisterForDrag = true,
   },
