@@ -54,8 +54,9 @@ local function loader(api, cfg)
   local function parseTypedValue(ty, value)
     ty = ty and string.lower(ty) or nil
     if ty == 'number' then
-      return tonumber(value)
-    elseif ty == 'global' then
+      return tonumber(value) or 0
+    end
+    if ty == 'global' then
       local t = api.env
       for part in value:gmatch('[^.]+') do
         if type(t) ~= 'table' then
@@ -65,14 +66,18 @@ local function loader(api, cfg)
         t = t[part]
       end
       return t
-    elseif ty == 'boolean' or ty == 'bool' then
-      return (value == 'true')
-    elseif ty == 'string' or ty == nil then
-      local n = tonumber(value)
-      return n ~= nil and n or value
-    else
-      error('invalid keyvalue/attribute type ' .. ty)
     end
+    if ty == 'boolean' then
+      if value == 'true' then
+        return true
+      end
+      local n = tonumber(value)
+      return n ~= nil and n ~= 0
+    end
+    if ty and ty ~= 'string' then
+      api.log(1, 'warning: bogus keyvalue/attribute type %q', ty)
+    end
+    return value
   end
 
   local function getXY(e)
