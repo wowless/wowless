@@ -187,9 +187,6 @@ for k, v in pairs(parseYaml('data/products/' .. product .. '/events.yaml')) do
 end
 
 local skipchecks = { -- issue #413
-  Animation = {
-    SetTarget = true,
-  },
   Button = {
     RegisterForMouse = true,
   },

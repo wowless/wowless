@@ -91,7 +91,7 @@ Animation:
       type: number
     target:
       impl:
-        method: SetTarget
+        method: SetTargetName
       type: string
   contents:
     KeyValues: {}

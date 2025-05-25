@@ -9,6 +9,18 @@ G.testsuite.uiobjects = function()
   local check6 = G.check6
   local retn = G.retn
   return {
+    Animation = function()
+      return {
+        target = function()
+          local f = CreateFrame('Frame')
+          local a = f:CreateAnimationGroup():CreateAnimation()
+          check1(f, a:GetTarget())
+          assertEquals(false, pcall(a.SetTarget, a))
+          assertEquals(false, pcall(a.SetTarget, a, nil))
+        end,
+      }
+    end,
+
     Frame = function()
       return {
         ['creation with frame in name position'] = function()
