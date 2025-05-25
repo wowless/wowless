@@ -327,7 +327,9 @@ local function loader(api, cfg)
       parent:SetShadowOffset(getXY(e))
     end,
     origin = function(_, e, parent)
-      parent:SetOrigin(e.attr.point, 0, 0)
+      if e.attr.point then
+        parent:SetOrigin(e.attr.point, 0, 0)
+      end
     end,
     pushedtextoffset = function(_, e, parent)
       parent:SetPushedTextOffset(getXY(e))

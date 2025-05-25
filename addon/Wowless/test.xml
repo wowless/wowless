@@ -823,6 +823,74 @@
     </Scripts>
   </Frame>
 
+  <Frame>
+    <Animations>
+      <AnimationGroup>
+        <Scale>
+          <Scripts>
+            <OnLoad>Wowless.check3('CENTER', 0, 0, self:GetOrigin())</OnLoad>
+          </Scripts>
+        </Scale>
+        <Scale>
+          <Origin />
+          <Scripts>
+            <OnLoad>Wowless.check3('CENTER', 0, 0, self:GetOrigin())</OnLoad>
+          </Scripts>
+        </Scale>
+        <Scale>
+          <Origin point='LEFT' />
+          <Scripts>
+            <OnLoad>Wowless.check3('LEFT', 0, 0, self:GetOrigin())</OnLoad>
+          </Scripts>
+        </Scale>
+        <Scale>
+          <Origin x='42' />
+          <Scripts>
+            <OnLoad>Wowless.check3('CENTER', 0, 0, self:GetOrigin())</OnLoad>
+          </Scripts>
+        </Scale>
+        <Scale>
+          <Origin y='42' />
+          <Scripts>
+            <OnLoad>Wowless.check3('CENTER', 0, 0, self:GetOrigin())</OnLoad>
+          </Scripts>
+        </Scale>
+        <Scale>
+          <Origin>
+            <Offset />
+          </Origin>
+          <Scripts>
+            <OnLoad>Wowless.check3('CENTER', 0, 0, self:GetOrigin())</OnLoad>
+          </Scripts>
+        </Scale>
+        <Scale>
+          <Origin>
+            <Offset x='42' />
+          </Origin>
+          <Scripts>
+            <OnLoad>Wowless.check3('CENTER', 0, 0, self:GetOrigin())</OnLoad>
+          </Scripts>
+        </Scale>
+        <Scale>
+          <Origin>
+            <Offset x='42' y='99' />
+          </Origin>
+          <Scripts>
+            <OnLoad>Wowless.check3('CENTER', 0, 0, self:GetOrigin())</OnLoad>
+          </Scripts>
+        </Scale>
+        <Scale>
+          <Origin point='LEFT'>
+            <Offset x='42' y='99' />
+          </Origin>
+          <Scripts>
+            <OnLoad>Wowless.check3('LEFT', 0, 0, self:GetOrigin())</OnLoad>
+          </Scripts>
+        </Scale>
+      </AnimationGroup>
+    </Animations>
+  </Frame>
+
   <Script>
     if WowlessOldErrorHandler then
       seterrorhandler(WowlessOldErrorHandler)
