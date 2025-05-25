@@ -291,13 +291,15 @@ G.testsuite.uiobjects = function()
 
     Scale = function()
       return {
-        SetOrigin = function()
+        origin = function()
           local s = CreateFrame('Frame'):CreateAnimationGroup():CreateAnimation('Scale')
+          check3('CENTER', 0, 0, s:GetOrigin())
           assertEquals(false, pcall(s.SetOrigin))
           assertEquals(false, pcall(s.SetOrigin, 'garbage', 20, 30))
           assertEquals(false, pcall(s.SetOrigin, 'LEFT'))
           assertEquals(false, pcall(s.SetOrigin, 'LEFT', 20))
           check0(s:SetOrigin('LEFT', 20, 30))
+          check3('LEFT', 20, 30, s:GetOrigin())
         end,
       }
     end,

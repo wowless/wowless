@@ -4562,19 +4562,24 @@ Rotation:
         type: number
       outputs: {}
 Scale:
-  fields: {}
+  fields:
+    originPoint:
+      init: CENTER
+      type: FramePoint
+    originX:
+      init: 0
+      type: number
+    originY:
+      init: 0
+      type: number
   inherits:
     Animation: {}
   methods:
     GetOrigin:
-      inputs: {}
-      outputs:
-      - name: point
-        type: FramePoint
+      getter:
+      - name: originPoint
       - name: originX
-        type: number
       - name: originY
-        type: number
     GetScale:
       inputs: {}
       outputs:
@@ -4597,14 +4602,10 @@ Scale:
       - name: scaleY
         type: number
     SetOrigin:
-      inputs:
-      - name: point
-        type: FramePoint
+      setter:
+      - name: originPoint
       - name: originX
-        type: number
       - name: originY
-        type: number
-      outputs: {}
     SetScale:
       inputs:
       - name: scaleX
