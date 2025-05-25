@@ -646,6 +646,103 @@ C_Calendar.CalendarRaidInfo:
     time:
       type:
         structure: CalendarTime
+C_ChallengeMode.ChallengeCompletionInfo:
+  fields:
+    isAffixRecord:
+      default: false
+      type: boolean
+    isEligibleForScore:
+      default: false
+      type: boolean
+    isMapRecord:
+      default: false
+      type: boolean
+    keystoneUpgradeLevels:
+      default: 0
+      type: number
+    level:
+      default: 0
+      type: number
+    mapChallengeModeID:
+      default: 0
+      type: number
+    members:
+      type:
+        arrayof:
+          structure: C_ChallengeMode.ChallengeModeCompletionMemberInfo
+    newOverallDungeonScore:
+      nilable: true
+      type: number
+    oldOverallDungeonScore:
+      nilable: true
+      type: number
+    onTime:
+      default: false
+      type: boolean
+    practiceRun:
+      default: false
+      type: boolean
+    time:
+      default: 0
+      type: number
+C_ChallengeMode.ChallengeModeBestTime:
+  fields:
+    durationMs:
+      type: number
+    mapChallengeModeID:
+      type: number
+    members:
+      type:
+        arrayof:
+          structure: C_ChallengeMode.ChallengeModeBestTimeMember
+C_ChallengeMode.ChallengeModeBestTimeMember:
+  fields:
+    classFileName:
+      type: string
+    className:
+      type: string
+    name:
+      type: string
+    specializationID:
+      type: number
+C_ChallengeMode.ChallengeModeCompletionMemberInfo:
+  fields:
+    memberGUID:
+      type: string
+    name:
+      type: string
+C_ChallengeMode.ChallengeModeGuildAttemptMember:
+  fields:
+    classFileName:
+      type: string
+    name:
+      type: string
+C_ChallengeMode.ChallengeModeGuildTopAttempt:
+  fields:
+    classFileName:
+      type: string
+    isYou:
+      type: boolean
+    keystoneLevel:
+      type: number
+    mapChallengeModeID:
+      type: number
+    members:
+      type:
+        arrayof:
+          structure: C_ChallengeMode.ChallengeModeGuildAttemptMember
+    name:
+      type: string
+C_ChallengeMode.ChallengeModeReward:
+  fields:
+    displayInfoID:
+      type: number
+    isCurrency:
+      type: boolean
+    quantity:
+      type: number
+    rewardID:
+      type: number
 C_Club.ClubInfo:
   fields:
     avatarId:
@@ -2024,6 +2121,111 @@ C_GuildInfo.GuildRenameStatus:
     result:
       type:
         enum: GuildErrorType
+C_ItemUpgrade.ItemUpgradeCostDiscountInfo:
+  fields:
+    discountHighWatermark:
+      type: number
+    doesCurrentCharacterMeetHighWatermark:
+      type: boolean
+    isAccountWideDiscount:
+      type: boolean
+    isDiscounted:
+      type: boolean
+    isPartialTwoHandDiscount:
+      type: boolean
+C_ItemUpgrade.ItemUpgradeCurrencyCost:
+  fields:
+    cost:
+      type: number
+    currencyID:
+      type: number
+    discountInfo:
+      type:
+        structure: C_ItemUpgrade.ItemUpgradeCostDiscountInfo
+C_ItemUpgrade.ItemUpgradeItemCost:
+  fields:
+    cost:
+      type: number
+    discountInfo:
+      type:
+        structure: C_ItemUpgrade.ItemUpgradeCostDiscountInfo
+    itemID:
+      type: number
+C_ItemUpgrade.ItemUpgradeItemInfo:
+  fields:
+    currUpgrade:
+      type: number
+    customUpgradeString:
+      nilable: true
+      type: string
+    displayQuality:
+      type: number
+    highWatermarkSlot:
+      type: number
+    iconID:
+      type: number
+    itemUpgradeable:
+      type: boolean
+    maxItemLevel:
+      type: number
+    maxUpgrade:
+      type: number
+    minItemLevel:
+      type: number
+    name:
+      type: string
+    upgradeCostTypesForSeason:
+      type:
+        arrayof:
+          structure: C_ItemUpgrade.ItemUpgradeSeasonalCostType
+    upgradeLevelInfos:
+      type:
+        arrayof:
+          structure: C_ItemUpgrade.ItemUpgradeLevelInfo
+C_ItemUpgrade.ItemUpgradeLevelInfo:
+  fields:
+    currencyCostsToUpgrade:
+      type:
+        arrayof:
+          structure: C_ItemUpgrade.ItemUpgradeCurrencyCost
+    displayQuality:
+      type: number
+    failureMessage:
+      nilable: true
+      type: string
+    itemCostsToUpgrade:
+      type:
+        arrayof:
+          structure: C_ItemUpgrade.ItemUpgradeItemCost
+    itemLevelIncrement:
+      type: number
+    levelStats:
+      type:
+        arrayof:
+          structure: C_ItemUpgrade.ItemUpgradeStat
+    upgradeLevel:
+      type: number
+C_ItemUpgrade.ItemUpgradeSeasonalCostType:
+  fields:
+    currencyID:
+      nilable: true
+      type: number
+    itemID:
+      nilable: true
+      type: number
+    orderIndex:
+      type: number
+    sourceString:
+      nilable: true
+      type: string
+C_ItemUpgrade.ItemUpgradeStat:
+  fields:
+    active:
+      type: boolean
+    displayString:
+      type: string
+    statValue:
+      type: number
 C_LFGInfo.LFGDungeonInfo:
   fields:
     iconID:
@@ -2622,6 +2824,71 @@ C_MountJournal.MountCreatureDisplayInfo:
       type: number
     isVisible:
       type: boolean
+C_MythicPlus.MapSeasonBestInfo:
+  fields:
+    affixIDs:
+      type:
+        arrayof: number
+    completionDate:
+      type:
+        structure: C_MythicPlus.MythicPlusDate
+    dungeonScore:
+      type: number
+    durationSec:
+      type: number
+    level:
+      type: number
+    members:
+      type:
+        arrayof:
+          structure: C_MythicPlus.MythicPlusMember
+C_MythicPlus.MythicPlusDate:
+  fields:
+    day:
+      type: number
+    hour:
+      type: number
+    minute:
+      type: number
+    month:
+      type: number
+    year:
+      type: number
+C_MythicPlus.MythicPlusKeystoneAffix:
+  fields:
+    id:
+      type: number
+    seasonID:
+      type: number
+C_MythicPlus.MythicPlusMember:
+  fields:
+    classID:
+      type: number
+    name:
+      nilable: true
+      type: string
+    specID:
+      type: number
+C_MythicPlus.MythicPlusRunInfo:
+  fields:
+    completed:
+      type: boolean
+    level:
+      type: number
+    mapChallengeModeID:
+      type: number
+    runScore:
+      type: number
+    thisWeek:
+      type: boolean
+C_MythicPlus.SeasonTimeInfo:
+  fields:
+    bestTime:
+      type: number
+    lastTime:
+      type: number
+    medal:
+      type: number
 C_PetJournal.PetAbilityLevelInfo:
   fields:
     abilityID:
@@ -2708,8 +2975,42 @@ C_PvP.BattlefieldVehicleInfo:
       type: number
     y:
       type: number
+C_PvP.RandomBGInfo:
+  fields:
+    bgID:
+      type: number
+    bgIndex:
+      type: number
+    canQueue:
+      type: boolean
+    hasRandomWinToday:
+      type: boolean
+    maxLevel:
+      type: number
+    minLevel:
+      type: number
+    name:
+      type: string
 C_PvP.RoleShortageReward:
   fields: {}
+C_PvP.WorldPVPBattlegroundInfo:
+  fields:
+    bgID:
+      type: number
+    canEnter:
+      type: boolean
+    canQueue:
+      type: boolean
+    isActive:
+      type: boolean
+    maxLevel:
+      type: number
+    minLevel:
+      type: number
+    name:
+      type: string
+    startTime:
+      type: number
 C_QuestInfoSystem.QuestRewardSpellInfo:
   fields:
     garrFollowerID:
@@ -4410,6 +4711,30 @@ ModelLight:
     point:
       type:
         structure: vector3
+MythicPlusAffixScoreInfo:
+  fields:
+    durationSec:
+      type: number
+    level:
+      type: number
+    name:
+      type: string
+    overTime:
+      type: boolean
+    score:
+      type: number
+MythicPlusRatingLinkInfo:
+  fields:
+    completedInTime:
+      type: number
+    dungeonScore:
+      type: number
+    level:
+      type: number
+    mapChallengeModeID:
+      type: number
+    name:
+      type: string
 PlayerInfoCharacterData:
   fields:
     alternateFormRaceData:

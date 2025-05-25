@@ -45,7 +45,6 @@ AddQuestWatch:
     type: number
   outputs: {}
 AddTrackedAchievement: {}
-AddTradeMoney: {}
 Ambiguate:
   inputs:
   - name: fullName
@@ -2088,6 +2087,149 @@ C_Calendar.SetNextClubId:
     type: string
   outputs: {}
 C_Calendar.UpdateEvent:
+  inputs: {}
+  outputs: {}
+C_ChallengeMode.GetActiveChallengeMapID:
+  inputs: {}
+  outputs:
+  - name: mapChallengeModeID
+    nilable: true
+    type: number
+C_ChallengeMode.GetChallengeBestTime:
+  inputs:
+  - name: mapID
+    type: number
+  mayreturnnothing: true
+  outputs:
+  - name: guildBestTime
+    nilable: true
+    type: number
+  - name: realmBestTime
+    nilable: true
+    type: number
+C_ChallengeMode.GetChallengeCompletionInfo:
+  inputs: {}
+  outputs:
+  - name: info
+    type:
+      structure: C_ChallengeMode.ChallengeCompletionInfo
+C_ChallengeMode.GetChallengeGuildBestTimeInfo:
+  inputs:
+  - name: mapID
+    type: number
+  mayreturnnothing: true
+  outputs:
+  - name: guildBestTime
+    type:
+      structure: C_ChallengeMode.ChallengeModeBestTime
+C_ChallengeMode.GetChallengeMapRewardInfo:
+  inputs:
+  - name: mapID
+    type: number
+  - name: medal
+    type: number
+  - name: index
+    type: number
+  outputs:
+  - name: itemID
+    nilable: true
+    type: number
+  - name: name
+    type: string
+  - name: iconID
+    type: number
+  - name: quantity
+    type: number
+  - name: isCurrency
+    type: boolean
+C_ChallengeMode.GetChallengeModeMapTimes:
+  inputs:
+  - name: mapID
+    type: number
+  outputs:
+  - name: mapTimes
+    type:
+      arrayof: number
+C_ChallengeMode.GetChallengeRealmBestTimeInfo:
+  inputs:
+  - name: mapID
+    type: number
+  mayreturnnothing: true
+  outputs:
+  - name: guildBestTime
+    type:
+      structure: C_ChallengeMode.ChallengeModeBestTime
+C_ChallengeMode.GetGuildLeaders:
+  inputs: {}
+  mayreturnnothing: true
+  outputs:
+  - name: topAttempt
+    type:
+      arrayof:
+        structure: C_ChallengeMode.ChallengeModeGuildTopAttempt
+C_ChallengeMode.GetMapScoreInfo:
+  inputs: {}
+  mayreturnnothing: true
+  outputs:
+  - name: displayScores
+    type:
+      arrayof:
+        structure: MythicPlusRatingLinkInfo
+C_ChallengeMode.GetMapTable:
+  inputs: {}
+  outputs:
+  - name: mapChallengeModeIDs
+    type:
+      arrayof: number
+C_ChallengeMode.GetMapUIInfo:
+  inputs:
+  - name: mapChallengeModeID
+    type: number
+  mayreturnnothing: true
+  outputs:
+  - name: name
+    type: string
+  - name: id
+    type: number
+  - name: timeLimit
+    type: number
+  - name: texture
+    nilable: true
+    type: number
+  - name: backgroundTexture
+    type: number
+  - name: mapID
+    type: number
+C_ChallengeMode.GetNumChallengeMapRewards:
+  inputs:
+  - name: mapID
+    type: number
+  - name: medal
+    type: number
+  outputs:
+  - name: numRewards
+    type: number
+C_ChallengeMode.IsChallengeModeActive:
+  inputs: {}
+  outputs:
+  - name: challengeModeActive
+    type: boolean
+C_ChallengeMode.IsChallengeModeEnabled:
+  inputs: {}
+  outputs:
+  - name: isEnabled
+    type: boolean
+C_ChallengeMode.IsChallengeModeResettable:
+  inputs: {}
+  outputs:
+  - name: canReset
+    type: boolean
+C_ChallengeMode.RequestLeaders:
+  inputs:
+  - name: mapChallengeModeID
+    type: number
+  outputs: {}
+C_ChallengeMode.Reset:
   inputs: {}
   outputs: {}
 C_CharacterServices.ArePaidCharacterTransfersBetweenBnetAccountsEnabled: {}
@@ -7330,12 +7472,60 @@ C_Item.UseItemByName:
 C_ItemSocketInfo.CompleteSocketing:
   inputs: {}
   outputs: {}
+C_ItemUpgrade.CanUpgradeItem:
+  inputs:
+  - name: baseItem
+    type:
+      structure: ItemLocation
+  outputs:
+  - name: isValid
+    type: boolean
+C_ItemUpgrade.ClearItemUpgrade:
+  inputs: {}
+  outputs: {}
+C_ItemUpgrade.CloseItemUpgrade:
+  inputs: {}
+  outputs: {}
 C_ItemUpgrade.GetItemHyperlink:
   inputs: {}
   mayreturnnothing: true
   outputs:
   - name: link
     type: string
+C_ItemUpgrade.GetItemUpgradeEffect:
+  inputs:
+  - name: effectIndex
+    type: number
+  - name: numUpgradeLevels
+    nilable: true
+    type: number
+  mayreturnnothing: true
+  outputs:
+  - name: outBaseEffect
+    type: string
+  - name: outUpgradedEffect
+    type: string
+C_ItemUpgrade.GetItemUpgradeItemInfo:
+  inputs: {}
+  mayreturnnothing: true
+  outputs:
+  - name: itemInfo
+    type:
+      structure: C_ItemUpgrade.ItemUpgradeItemInfo
+C_ItemUpgrade.GetNumItemUpgradeEffects:
+  inputs: {}
+  outputs:
+  - name: numItemUpgradeEffects
+    type: number
+C_ItemUpgrade.SetItemUpgradeFromCursorItem:
+  inputs: {}
+  outputs: {}
+C_ItemUpgrade.UpgradeItem:
+  inputs:
+  - default: 1
+    name: numUpgrades
+    type: number
+  outputs: {}
 C_KeyBindings.GetBindingIndex:
   inputs:
   - name: action
@@ -8836,6 +9026,187 @@ C_MountJournal.SummonByID:
 C_MountJournal.SwapDynamicFlightMode:
   inputs: {}
   outputs: {}
+C_MythicPlus.GetCurrentAffixes:
+  inputs: {}
+  mayreturnnothing: true
+  outputs:
+  - name: affixIDs
+    type:
+      arrayof:
+        structure: C_MythicPlus.MythicPlusKeystoneAffix
+C_MythicPlus.GetCurrentSeason:
+  inputs: {}
+  outputs:
+  - name: seasonID
+    type: number
+C_MythicPlus.GetCurrentSeasonValues:
+  inputs: {}
+  outputs:
+  - name: displaySeasonID
+    type: number
+  - name: milestoneSeasonID
+    type: number
+  - name: rewardSeasonID
+    type: number
+C_MythicPlus.GetCurrentUIDisplaySeason:
+  inputs: {}
+  outputs:
+  - name: seasonID
+    nilable: true
+    type: number
+C_MythicPlus.GetEndOfRunGearSequenceLevel:
+  inputs:
+  - name: keystoneLevel
+    type: number
+  outputs:
+  - name: sequenceLevel
+    nilable: true
+    type: number
+C_MythicPlus.GetLastWeeklyBestInformation:
+  inputs: {}
+  mayreturnnothing: true
+  outputs:
+  - name: challengeMapId
+    type: number
+  - name: level
+    type: number
+C_MythicPlus.GetOwnedKeystoneChallengeMapID:
+  inputs: {}
+  mayreturnnothing: true
+  outputs:
+  - name: challengeMapID
+    type: number
+C_MythicPlus.GetOwnedKeystoneLevel:
+  inputs: {}
+  mayreturnnothing: true
+  outputs:
+  - name: keyStoneLevel
+    type: number
+C_MythicPlus.GetOwnedKeystoneMapID:
+  inputs: {}
+  mayreturnnothing: true
+  outputs:
+  - name: mapID
+    type: number
+C_MythicPlus.GetRewardLevelForDifficultyLevel:
+  inputs:
+  - name: difficultyLevel
+    type: number
+  outputs:
+  - name: weeklyRewardLevel
+    type: number
+  - name: endOfRunRewardLevel
+    type: number
+C_MythicPlus.GetRewardLevelFromKeystoneLevel:
+  inputs:
+  - name: keystoneLevel
+    type: number
+  outputs:
+  - name: rewardLevel
+    nilable: true
+    type: number
+C_MythicPlus.GetRunHistory:
+  inputs:
+  - default: false
+    name: includePreviousWeeks
+    type: boolean
+  - default: false
+    name: includeIncompleteRuns
+    type: boolean
+  outputs:
+  - name: runs
+    type:
+      arrayof:
+        structure: C_MythicPlus.MythicPlusRunInfo
+C_MythicPlus.GetSeasonBestAffixScoreInfoForMap:
+  inputs:
+  - name: mapChallengeModeID
+    type: number
+  mayreturnnothing: true
+  outputs:
+  - name: affixScores
+    type:
+      arrayof:
+        structure: MythicPlusAffixScoreInfo
+  - name: bestOverAllScore
+    type: number
+C_MythicPlus.GetSeasonBestForMap:
+  inputs:
+  - name: mapChallengeModeID
+    type: number
+  outputs:
+  - name: intimeInfo
+    nilable: true
+    type:
+      structure: C_MythicPlus.MapSeasonBestInfo
+  - name: overtimeInfo
+    nilable: true
+    type:
+      structure: C_MythicPlus.MapSeasonBestInfo
+C_MythicPlus.GetSeasonBestMythicRatingFromThisExpansion:
+  inputs: {}
+  mayreturnnothing: true
+  outputs:
+  - name: bestSeasonScore
+    type: number
+  - name: bestSeason
+    type: number
+C_MythicPlus.GetSeasonTimesForMap:
+  inputs:
+  - name: mapChallengeModeID
+    type: number
+  mayreturnnothing: true
+  outputs:
+  - name: timeInfo
+    type:
+      structure: C_MythicPlus.SeasonTimeInfo
+C_MythicPlus.GetWeeklyBestForMap:
+  inputs:
+  - name: mapChallengeModeID
+    type: number
+  mayreturnnothing: true
+  outputs:
+  - name: durationSec
+    type: number
+  - name: level
+    type: number
+  - name: completionDate
+    type:
+      structure: C_MythicPlus.MythicPlusDate
+  - name: affixIDs
+    type:
+      arrayof: number
+  - name: members
+    type:
+      arrayof:
+        structure: C_MythicPlus.MythicPlusMember
+  - name: dungeonScore
+    type: number
+C_MythicPlus.GetWeeklyChestRewardLevel:
+  inputs: {}
+  outputs:
+  - name: currentWeekBestLevel
+    type: number
+  - name: weeklyRewardLevel
+    type: number
+  - name: nextDifficultyWeeklyRewardLevel
+    type: number
+  - name: nextBestLevel
+    type: number
+C_MythicPlus.IsMythicPlusActive:
+  inputs: {}
+  outputs:
+  - name: isMythicPlusActive
+    type: boolean
+C_MythicPlus.RequestCurrentAffixes:
+  inputs: {}
+  outputs: {}
+C_MythicPlus.RequestMapInfo:
+  inputs: {}
+  outputs: {}
+C_MythicPlus.RequestRewards:
+  inputs: {}
+  outputs: {}
 C_NamePlate.GetNamePlateEnemyClickThrough: {}
 C_NamePlate.GetNamePlateEnemyPreferredClickInsets: {}
 C_NamePlate.GetNamePlateEnemySize: {}
@@ -9627,6 +9998,11 @@ C_ProductChoice.GetNumSuppressed:
   - type: number
 C_ProductChoice.GetProducts: {}
 C_ProductChoice.MakeSelection: {}
+C_PvP.ClearLocklistMap:
+  inputs:
+  - name: mapID
+    type: number
+  outputs: {}
 C_PvP.GetArenaCrowdControlInfo:
   inputs:
   - name: playerToken
@@ -9686,6 +10062,12 @@ C_PvP.GetBattlefieldVehicles:
     type:
       arrayof:
         structure: C_PvP.BattlefieldVehicleInfo
+C_PvP.GetHolidayBGInfo:
+  inputs: {}
+  outputs:
+  - name: info
+    type:
+      structure: C_PvP.RandomBGInfo
 C_PvP.GetHolidayBGLossRewards:
   inputs: {}
   outputs:
@@ -9728,6 +10110,20 @@ C_PvP.GetHolidayBGRewards:
     nilable: true
     type:
       structure: C_PvP.RoleShortageReward
+C_PvP.GetLocklistMap:
+  inputs:
+  - name: index
+    type: number
+  outputs:
+  - name: mapID
+    type: number
+C_PvP.GetLocklistMapName:
+  inputs:
+  - name: index
+    type: number
+  outputs:
+  - name: mapName
+    type: string
 C_PvP.GetOutdoorPvPWaitTime:
   inputs:
   - name: uiMapID
@@ -9735,6 +10131,12 @@ C_PvP.GetOutdoorPvPWaitTime:
   outputs:
   - name: pvpWaitTime
     type: number
+C_PvP.GetRandomBGInfo:
+  inputs: {}
+  outputs:
+  - name: info
+    type:
+      structure: C_PvP.RandomBGInfo
 C_PvP.GetRandomBGLossRewards:
   inputs: {}
   outputs:
@@ -9798,6 +10200,14 @@ C_PvP.GetRatedBGRewards:
     nilable: true
     type:
       structure: C_PvP.RoleShortageReward
+C_PvP.GetWorldPVPAreaInfo:
+  inputs:
+  - name: index
+    type: number
+  outputs:
+  - name: info
+    type:
+      structure: C_PvP.WorldPVPBattlegroundInfo
 C_PvP.GetWorldPvPWaitTime:
   inputs:
   - name: index
@@ -9841,6 +10251,11 @@ C_PvP.RequestCrowdControlSpell:
   - name: playerToken
     type: unit
   outputs: {}
+C_PvP.SetLocklistMap:
+  inputs:
+  - name: mapID
+    type: number
+  outputs: {}
 C_PvP.SetPVP:
   inputs:
   - default: false
@@ -9849,6 +10264,104 @@ C_PvP.SetPVP:
   outputs: {}
 C_PvP.TogglePVP:
   inputs: {}
+  outputs: {}
+C_QuestChoice.CloseQuestChoice:
+  inputs: {}
+  outputs: {}
+C_QuestChoice.GetQuestChoiceInfo:
+  inputs: {}
+  outputs:
+  - name: choiceID
+    type: number
+  - name: questionText
+    type: string
+  - name: numOptions
+    type: number
+C_QuestChoice.GetQuestChoiceOptionInfo:
+  inputs:
+  - name: index
+    type: number
+  mayreturnnothing: true
+  outputs:
+  - name: responseID
+    type: number
+  - name: answer
+    type: string
+  - name: description
+    type: string
+  - name: iconID
+    type: number
+C_QuestChoice.GetQuestChoiceRewardCurrency:
+  inputs:
+  - name: optionIndex
+    type: number
+  - name: currencyIndex
+    type: number
+  mayreturnnothing: true
+  outputs:
+  - name: currencyID
+    type: number
+  - name: iconID
+    type: number
+  - name: quantity
+    type: number
+C_QuestChoice.GetQuestChoiceRewardFaction:
+  inputs:
+  - name: optionIndex
+    type: number
+  - name: currencyIndex
+    type: number
+  mayreturnnothing: true
+  outputs:
+  - name: factionID
+    type: number
+  - name: quantity
+    type: number
+C_QuestChoice.GetQuestChoiceRewardInfo:
+  inputs:
+  - name: index
+    type: number
+  mayreturnnothing: true
+  outputs:
+  - name: title
+    nilable: true
+    type: string
+  - name: skillLineID
+    type: number
+  - name: skillPointCount
+    type: number
+  - name: money
+    type: number
+  - name: xp
+    type: number
+  - name: numItems
+    type: number
+  - name: numCurrencies
+    type: number
+  - name: numItemChoices
+    type: number
+  - name: numFactions
+    type: number
+C_QuestChoice.GetQuestChoiceRewardItem:
+  inputs:
+  - name: optionIndex
+    type: number
+  - name: itemIndex
+    type: number
+  mayreturnnothing: true
+  outputs:
+  - name: itemID
+    type: number
+  - name: name
+    type: string
+  - name: iconID
+    type: number
+  - name: quantity
+    type: number
+C_QuestChoice.SendQuestChoiceResponse:
+  inputs:
+  - name: responseID
+    type: number
   outputs: {}
 C_QuestInfoSystem.GetQuestRewardSpellInfo:
   inputs:
@@ -11333,6 +11846,14 @@ C_ToyBoxInfo.NeedsFanfare:
   outputs:
   - name: needsFanfare
     type: boolean
+C_TradeInfo.AddTradeMoney:
+  inputs: {}
+  outputs: {}
+C_TradeInfo.SetTradeMoney:
+  inputs:
+  - name: amount
+    type: number
+  outputs: {}
 C_TradeSkillUI.GetTradeSkillDisplayName:
   inputs:
   - name: skillLineID
@@ -15189,6 +15710,7 @@ GetAvailableLocales:
   - name: unpackedPrimitiveType
     type: string
   outstride: 1
+GetAvailableQuestInfo: {}
 GetAvailableTitle:
   inputs:
   - name: index
@@ -17617,6 +18139,8 @@ GetNumUnspentTalents:
     type: number
 GetNumWarGameTypes: {}
 GetObjectiveText: {}
+GetOnlyShowMakeable: {}
+GetOnlyShowSkillUps: {}
 GetOptOutOfLoot: {}
 GetOSLocale:
   inputs: {}
@@ -18577,6 +19101,18 @@ GetSpecChangeCost: {}
 GetSpecializationInfoByID: {}
 GetSpecializationInfoForClassID: {}
 GetSpecializationInfoForSpecID: {}
+GetSpecializationNameForSpecID:
+  inputs:
+  - name: specID
+    type: number
+  - name: gender
+    nilable: true
+    type:
+      enum: UnitSex
+  outputs:
+  - name: name
+    nilable: true
+    type: string
 GetSpecializationRole:
   inputs:
   - name: spec
@@ -18946,6 +19482,20 @@ GetTradeSkillInfo:
     type: number
   - name: isExpanded
     type: boolean
+  - name: altVerb
+    type: string
+  - name: numSkillUps
+    type: number
+  - name: indentLevel
+    type: number
+  - name: showProgressBar
+    type: boolean
+  - name: currentRank
+    type: number
+  - name: maxRank
+    type: number
+  - name: startingRank
+    type: number
 GetTradeSkillInvSlotFilter: {}
 GetTradeSkillInvSlots: {}
 GetTradeSkillItemLevelFilter: {}
@@ -19318,6 +19868,8 @@ GetWatchedFactionInfo:
   - type: number
 GetWeaponEnchantInfo: {}
 GetWebTicket: {}
+GetWorldElapsedTime: {}
+GetWorldElapsedTimers: {}
 GetWorldPVPQueueMapName:
   inputs:
   - type: boolean
@@ -19536,6 +20088,7 @@ IsAccountSecured:
 IsAchievementEligible: {}
 IsActionInRange: {}
 IsActiveBattlefieldArena: {}
+IsActiveQuestLegendary: {}
 IsActiveQuestTrivial:
   inputs:
   - name: index
@@ -20511,6 +21064,7 @@ QueryGuildBankText:
 QueryGuildEventLog: {}
 QueryGuildNews: {}
 QueryGuildRecipes: {}
+QueryWorldCountdownTimer: {}
 QuestChooseRewardError: {}
 QuestFlagsPVP: {}
 QuestIsDaily: {}
@@ -20602,6 +21156,7 @@ RequestLFDPlayerLockInfo:
 RequestPVPOptionsEnabled: {}
 RequestPVPRewards: {}
 RequestRaidInfo: {}
+RequestRandomBattlegroundInstanceInfo: {}
 RequestRatedInfo: {}
 RequestTimePlayed:
   impl: RequestTimePlayed
@@ -21011,11 +21566,6 @@ SetTaxiBenchmarkMode:
     type: boolean
   outputs: {}
 SetTaxiMap: {}
-SetTradeMoney:
-  inputs:
-  - name: money
-    type: number
-  outputs: {}
 SetTradeSkillInvSlotFilter: {}
 SetTradeSkillItemLevelFilter: {}
 SetTradeSkillItemNameFilter: {}
@@ -21453,6 +22003,7 @@ tonumber:
 tostring:
   impl: tostring
 TradeSkillOnlyShowMakeable: {}
+TradeSkillOnlyShowSkillUps: {}
 TriggerTutorial: {}
 TurnInArenaPetition: {}
 TurnInGuildCharter: {}

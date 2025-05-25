@@ -717,6 +717,52 @@ CAUTIONARY_CHAT_MESSAGE:
     type: number
 CEMETERY_PREFERENCE_UPDATED:
   payload: {}
+CHALLENGE_MODE_COMPLETED:
+  payload: {}
+CHALLENGE_MODE_COMPLETED_REWARDS:
+  payload:
+  - name: mapID
+    type: number
+  - name: medal
+    type: number
+  - name: timeMS
+    type: number
+  - name: money
+    type: number
+  - name: rewards
+    type:
+      arrayof:
+        structure: C_ChallengeMode.ChallengeModeReward
+CHALLENGE_MODE_DEATH_COUNT_UPDATED:
+  payload: {}
+CHALLENGE_MODE_KEYSTONE_RECEPTABLE_OPEN:
+  payload: {}
+CHALLENGE_MODE_KEYSTONE_SLOTTED:
+  payload:
+  - name: keystoneID
+    type: number
+CHALLENGE_MODE_LEADERS_UPDATE:
+  payload: {}
+CHALLENGE_MODE_MAPS_UPDATE:
+  payload: {}
+CHALLENGE_MODE_MEMBER_INFO_UPDATED:
+  payload: {}
+CHALLENGE_MODE_NEW_RECORD:
+  payload:
+  - name: mapID
+    type: number
+  - name: timeMS
+    type: number
+  - name: medal
+    type: number
+CHALLENGE_MODE_RESET:
+  payload:
+  - name: mapID
+    type: number
+CHALLENGE_MODE_START:
+  payload:
+  - name: mapID
+    type: number
 CHANNEL_COUNT_UPDATE:
   payload:
   - name: displayIndex
@@ -4250,6 +4296,8 @@ ITEM_UPGRADE_FAILED:
   payload: {}
 ITEM_UPGRADE_MASTER_SET_ITEM:
   payload: {}
+ITEM_UPGRADE_MASTER_UPDATE:
+  payload: {}
 JAILERS_TOWER_LEVEL_UPDATE:
   payload:
   - name: level
@@ -4643,6 +4691,16 @@ MOUNT_JOURNAL_USABILITY_CHANGED:
   payload: {}
 MUTELIST_UPDATE:
   payload: {}
+MYTHIC_PLUS_CURRENT_AFFIX_UPDATE:
+  payload: {}
+MYTHIC_PLUS_NEW_WEEKLY_RECORD:
+  payload:
+  - name: mapChallengeModeID
+    type: number
+  - name: completionMilliseconds
+    type: number
+  - name: level
+    type: number
 NAME_PLATE_CREATED:
   payload:
   - name: namePlateFrame
@@ -5285,6 +5343,10 @@ QUEST_BOSS_EMOTE:
     type: number
   - name: enableBossEmoteWarningSound
     type: boolean
+QUEST_CHOICE_CLOSE:
+  payload: {}
+QUEST_CHOICE_UPDATE:
+  payload: {}
 QUEST_COMPLETE:
   payload: {}
 QUEST_DETAIL:
@@ -6343,6 +6405,8 @@ UI_INFO_MESSAGE:
 UI_MODEL_SCENE_INFO_UPDATED:
   payload: {}
 UI_SCALE_CHANGED:
+  payload: {}
+UNIQUE_QUEST_CHOICE_UPDATE:
   payload: {}
 UNIT_ATTACK:
   payload:

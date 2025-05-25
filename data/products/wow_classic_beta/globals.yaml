@@ -53,6 +53,7 @@ Constants:
     WAR_RESOURCES_CURRENCY_ID: 1560
   DelvesConsts:
     DELVES_COMPANION_INFO_SELECTION_CHARACTER_DATA_ELEMENT_ID: 13
+    DELVES_COMPANION_TOOLTIP_WIDGET_SET_ID: 1331
     DELVES_MIN_PLAYER_LEVEL_CONTENT_TUNING_ID: 2677
     DELVES_NORMAL_KEY_CURRENCY_ID: 3028
   EncodingLimits:
@@ -144,6 +145,7 @@ Constants:
     RUNEFORGING_ROOT_CATEGORY_ID: 210
     RUNEFORGING_SKILL_LINE_ID: 960
   PvpInfoConsts:
+    MAX_PVP_LOCK_LIST_MAP: 2
     MaxPlayersPerInstance: 80
   QuestWatchConsts_Classic:
     MAX_QUEST_WATCHES: 25
@@ -2398,6 +2400,7 @@ Enum:
     AzeriteRespec: 34
     Barbershop: 42
     BonusRoll: 33
+    ChallengeModeDungeon: 44
     Cheat: 4
     ConvertOldItem: 0
     ConvertOldPvPCurrency: 1
@@ -2436,9 +2439,9 @@ Enum:
     WorldQuestReward: 35
     WorldQuestRewardIgnoreCaps: 36
   CurrencySourceMeta:
-    MaxValue: 43
+    MaxValue: 44
     MinValue: 0
-    NumValues: 44
+    NumValues: 45
   CurrencyTokenCategoryFlags:
     FlagPlayerItemAssignment: 2
     FlagSortLast: 1
