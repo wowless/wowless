@@ -289,6 +289,19 @@ G.testsuite.uiobjects = function()
       }
     end,
 
+    Scale = function()
+      return {
+        SetOrigin = function()
+          local s = CreateFrame('Frame'):CreateAnimationGroup():CreateAnimation('Scale')
+          assertEquals(false, pcall(s.SetOrigin))
+          assertEquals(false, pcall(s.SetOrigin, 'garbage', 20, 30))
+          assertEquals(false, pcall(s.SetOrigin, 'LEFT'))
+          assertEquals(false, pcall(s.SetOrigin, 'LEFT', 20))
+          check0(s:SetOrigin('LEFT', 20, 30))
+        end,
+      }
+    end,
+
     ScrollFrame = function()
       return {
         SetScrollChild = function()

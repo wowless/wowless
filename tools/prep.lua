@@ -199,9 +199,6 @@ local skipchecks = { -- issue #413
   Region = {
     SetPassThroughButtons = true,
   },
-  Scale = {
-    SetOrigin = true,
-  },
 }
 local uiobjectdata = parseYaml('data/products/' .. product .. '/uiobjects.yaml')
 local uiobjectimpl = parseYaml('data/uiobjectimpl.yaml')
