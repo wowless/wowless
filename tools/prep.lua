@@ -186,17 +186,6 @@ for k, v in pairs(parseYaml('data/products/' .. product .. '/events.yaml')) do
   }
 end
 
-local skipchecks = { -- issue #413
-  Button = {
-    RegisterForMouse = true,
-  },
-  Frame = {
-    RegisterForDrag = true,
-  },
-  Region = {
-    SetPassThroughButtons = true,
-  },
-}
 local uiobjectdata = parseYaml('data/products/' .. product .. '/uiobjects.yaml')
 local uiobjectimpl = parseYaml('data/uiobjectimpl.yaml')
 local uiobjectinits = {}
@@ -319,8 +308,8 @@ for k, v in pairs(uiobjectdata) do
         table.insert(t, ',arg' .. i)
       end
       table.insert(t, ')')
-      for i = 1, nin do
-        if not skipchecks[k] or not skipchecks[k][mk] then
+      if not mv or not mv.instride then -- issue #414
+        for i = 1, nin do
           table.insert(t, 'check(spec' .. i .. ',arg' .. i .. ');')
         end
       end
