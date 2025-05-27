@@ -299,19 +299,33 @@ for k, v in pairs(uiobjectdata) do
       methods[mk] = table.concat(t)
     else
       local t = {}
-      local nin = mv.inputs and #mv.inputs or 0
-      for i = 1, nin do
+      local ins = mv.inputs or {}
+      local nsins = #ins - (mv.instride or 0)
+      for i = 1, #ins do
         table.insert(t, 'local spec' .. i .. '=' .. plprettywrite(mv.inputs[i], '') .. ';')
       end
       table.insert(t, 'return function(_')
-      for i = 1, nin do
+      for i = 1, nsins do
         table.insert(t, ',arg' .. i)
       end
+      if mv.instride then
+        table.insert(t, ',...')
+      end
       table.insert(t, ')')
-      if not mv.instride then -- issue #414
-        for i = 1, nin do
+      for i = 1, nsins do
+        table.insert(t, 'check(spec' .. i .. ',arg' .. i .. ');')
+      end
+      if mv.instride then
+        table.insert(t, 'for i=1,select("#",...),' .. mv.instride .. ' do ')
+        table.insert(t, 'local arg' .. nsins + 1)
+        for i = nsins + 2, #ins do
+          table.insert(t, ',arg' .. i)
+        end
+        table.insert(t, '=select(i,...);')
+        for i = nsins + 1, #ins do
           table.insert(t, 'check(spec' .. i .. ',arg' .. i .. ');')
         end
+        table.insert(t, 'end ')
       end
       table.insert(t, 'return ')
       local outs = mv.outputs or {}
