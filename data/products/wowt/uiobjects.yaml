@@ -988,8 +988,8 @@ Button:
       impl: Button/RegisterForClicks
     RegisterForMouse:
       inputs:
-      - name: unpackedPrimitiveType
-        type: number
+      - name: button
+        type: string
       instride: 1
       outputs: {}
     SetButtonState:
@@ -2793,8 +2793,8 @@ Frame:
       impl: Frame/RegisterEvent
     RegisterForDrag:
       inputs:
-      - name: unpackedPrimitiveType
-        type: number
+      - name: button
+        type: string
       instride: 1
       outputs: {}
     RegisterUnitEvent:
@@ -4850,8 +4850,8 @@ Region:
       - name: mouseMotionEnabled
     SetPassThroughButtons:
       inputs:
-      - name: unpackedPrimitiveType
-        type: number
+      - name: button
+        type: string
       instride: 1
       outputs: {}
     SetPoint:

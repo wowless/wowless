@@ -36,6 +36,28 @@ lies:
         type: string
       - name: unitServer
         type: string
+  uiobjects:
+    Button:
+      RegisterForMouse:
+        inputs:
+        - name: unpackedPrimitiveType
+          type: number
+        instride: 1
+        outputs: {}
+    Frame:
+      RegisterForDrag:
+        inputs:
+        - name: unpackedPrimitiveType
+          type: number
+        instride: 1
+        outputs: {}
+    Region:
+      SetPassThroughButtons:
+        inputs:
+        - name: unpackedPrimitiveType
+          type: number
+        instride: 1
+        outputs: {}
 mayreturnnothing: true
 script_objects:
   FrameAPIArchaeologyDigSiteFrame: ArchaeologyDigSiteFrame

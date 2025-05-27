@@ -21,6 +21,16 @@ type:
                 key: string
                 value:
                   schema: function
+          uiobjects:
+            type:
+              mapof:
+                key:
+                  ref: uiobject
+                value:
+                  mapof:
+                    key: string
+                    value:
+                      schema: function
     mayreturnnothing:
       type: boolean
     script_objects:

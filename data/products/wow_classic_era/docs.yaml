@@ -8,6 +8,28 @@ lies:
     C_BattleNet.InstallHighResTextures:
       inputs: {}
       outputs: {}
+  uiobjects:
+    Button:
+      RegisterForMouse:
+        inputs:
+        - name: unpackedPrimitiveType
+          type: number
+        instride: 1
+        outputs: {}
+    Frame:
+      RegisterForDrag:
+        inputs:
+        - name: unpackedPrimitiveType
+          type: number
+        instride: 1
+        outputs: {}
+    Region:
+      SetPassThroughButtons:
+        inputs:
+        - name: unpackedPrimitiveType
+          type: number
+        instride: 1
+        outputs: {}
 mayreturnnothing: true
 script_objects:
   FrameAPICharacterModelBase: PlayerModel

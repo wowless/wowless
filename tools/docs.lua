@@ -454,6 +454,7 @@ local function rewriteUIObjects()
   end
   local filename = ('data/products/%s/uiobjects.yaml'):format(product)
   local uiobjects = require('wowapi.yaml').parseFile(filename)
+  local lies = deref(config, 'lies', 'uiobjects') or {}
   local inhm = {}
   local function inhprocess(k)
     if inhm[k] then
@@ -497,9 +498,21 @@ local function rewriteUIObjects()
         return (cu or mm and (cm or not im)) and not gs and not ih
       end)()
       if okay then
-        u.methods[mk] = mmv
+        local lie = deref(lies, k, mk)
+        if lie then
+          assert(tableeq(lie, mmv), 'lie mismatch on ' .. k .. '.' .. mk)
+          lies[k][mk] = nil
+        else
+          u.methods[mk] = mmv
+        end
       end
     end
+    if lies[k] and not next(lies[k]) then
+      lies[k] = nil
+    end
+  end
+  if next(lies) then
+    error('not all lies were consumed: ' .. require('pl.pretty').write(lies))
   end
   writeifchanged(filename, pprintYaml(uiobjects))
   return uiobjects
