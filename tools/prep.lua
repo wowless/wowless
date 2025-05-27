@@ -308,7 +308,7 @@ for k, v in pairs(uiobjectdata) do
         table.insert(t, ',arg' .. i)
       end
       table.insert(t, ')')
-      if not mv or not mv.instride then -- issue #414
+      if not mv.instride then -- issue #414
         for i = 1, nin do
           table.insert(t, 'check(spec' .. i .. ',arg' .. i .. ');')
         end
