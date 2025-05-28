@@ -490,12 +490,19 @@ local function rewriteUIObjects()
         stuboutstrides = mm and mm.stuboutstrides,
       }
       local okay = (function()
-        local cu = deref(config, 'uiobjects', k)
-        local cm = deref(config, 'uiobject_methods', k, mk)
-        local gs = mm and (mm.getter or mm.setter)
-        local im = mm and mm.impl
-        local ih = inhm[k][mk]
-        return (cu or mm and (cm or not im)) and not gs and not ih
+        if inhm[k][mk] then
+          return false
+        end
+        if mm and (mm.getter or mm.setter) then
+          return false
+        end
+        if deref(config, 'uiobjects', k) then
+          return true
+        end
+        if deref(config, 'uiobject_methods', k, mk) then
+          return true
+        end
+        return mm and not mm.impl
       end)()
       if okay then
         local lie = deref(lies, k, mk)
