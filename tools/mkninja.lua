@@ -314,6 +314,7 @@ table.insert(builds, {
     'spec/wowapi/yaml_spec.lua',
     'spec/wowless/addon_spec.lua',
     'spec/wowless/blp_spec.lua',
+    'spec/wowless/bubblewrap_spec.lua',
     'spec/wowless/hlist_spec.lua',
     'spec/wowless/png_spec.lua',
     'spec/wowless/toc_spec.lua',
