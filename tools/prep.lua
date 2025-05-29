@@ -238,7 +238,7 @@ for k, v in pairs(uiobjectdata) do
   local fieldset = mkuiobjectfieldset(k)
   local methods = {}
   for mk, mv in pairs(v.methods) do
-    if mv.impl then
+    if type(mv.impl) == 'string' then
       assert(uiobjectimpl[mv.impl])
       local src = 'data/uiobjects/' .. mv.impl .. '.lua'
       methods[mk] = {
@@ -250,9 +250,9 @@ for k, v in pairs(uiobjectdata) do
         outstride = mv.outstride,
         src = src,
       }
-    elseif mv.getter then
+    elseif mv.impl and mv.impl.getter then
       local t = {}
-      for _, f in ipairs(mv.getter) do
+      for _, f in ipairs(mv.impl.getter) do
         if uiobjectdata[fieldset[f.name].type] then
           table.insert(t, 'self.' .. f.name .. ' and self.' .. f.name .. '.luarep')
         else
@@ -260,9 +260,9 @@ for k, v in pairs(uiobjectdata) do
         end
       end
       methods[mk] = 'return function(self) return ' .. table.concat(t, ',') .. ' end'
-    elseif mv.setter then
+    elseif mv.impl and mv.impl.setter then
       local t = {}
-      for i, f in ipairs(mv.setter) do
+      for i, f in ipairs(mv.impl.setter) do
         local cf = fieldset[f.name]
         if cf.type ~= 'Texture' then
           table.insert(t, 'local spec')
@@ -275,12 +275,12 @@ for k, v in pairs(uiobjectdata) do
         end
       end
       table.insert(t, 'return function(self')
-      for _, f in ipairs(mv.setter) do
+      for _, f in ipairs(mv.impl.setter) do
         table.insert(t, ',')
         table.insert(t, f.name)
       end
       table.insert(t, ')')
-      for i, f in ipairs(mv.setter) do
+      for i, f in ipairs(mv.impl.setter) do
         local cf = fieldset[f.name]
         table.insert(t, 'self.')
         table.insert(t, f.name)

@@ -183,7 +183,7 @@ local ptablemap = {
       local mt = {}
       for mk, mv in pairs(v.methods) do
         mt[mk] = true
-        for gk, gv in ipairs(mv.getter or {}) do
+        for gk, gv in ipairs(mv.impl and mv.impl.getter or {}) do
           table.insert(ft[gv.name].getters, { index = gk, method = mk })
         end
       end

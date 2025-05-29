@@ -94,7 +94,7 @@ describe('uiobjects', function()
                   end
                 end)
                 it('manipulates only declared fields', function()
-                  for _, field in ipairs(mv.getter or mv.setter or {}) do
+                  for _, field in ipairs(mv.impl and (mv.impl.getter or mv.impl.setter) or {}) do
                     assert.True(hasMember(k, 'fields', field.name))
                   end
                 end)
