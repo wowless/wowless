@@ -149,7 +149,7 @@ typedefs:
   SpellIdentifier: string
   string: string
   TBFFlags: string
-  TextureAsset: string
+  TextureAsset: Texture
   TextureAssetDisk: string
   textureAtlas: string
   textureKit: string

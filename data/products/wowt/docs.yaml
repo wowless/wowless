@@ -187,7 +187,7 @@ typedefs:
   string: string
   stringView: string
   TBFFlags: string
-  TextureAsset: string
+  TextureAsset: Texture
   TextureAssetDisk: string
   textureAtlas: string
   textureKit: string

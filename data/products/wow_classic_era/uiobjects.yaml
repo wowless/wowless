@@ -3242,37 +3242,37 @@ Minimap:
     SetBlipTexture:
       inputs:
       - name: asset
-        type: string
+        type: Texture
       outputs: {}
     SetCorpsePOIArrowTexture:
       inputs:
       - name: asset
-        type: string
+        type: Texture
       outputs: {}
     SetIconTexture:
       inputs:
       - name: asset
-        type: string
+        type: Texture
       outputs: {}
     SetMaskTexture:
       inputs:
       - name: asset
-        type: string
+        type: Texture
       outputs: {}
     SetPlayerTexture:
       inputs:
       - name: asset
-        type: string
+        type: Texture
       outputs: {}
     SetPOIArrowTexture:
       inputs:
       - name: asset
-        type: string
+        type: Texture
       outputs: {}
     SetStaticPOIArrowTexture:
       inputs:
       - name: asset
-        type: string
+        type: Texture
       outputs: {}
     SetZoom:
       inputs:

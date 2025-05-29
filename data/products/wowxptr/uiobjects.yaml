@@ -3381,7 +3381,7 @@ Minimap:
     SetArchBlobInsideTexture:
       inputs:
       - name: asset
-        type: string
+        type: Texture
       outputs: {}
     SetArchBlobOutsideAlpha:
       inputs:
@@ -3391,7 +3391,7 @@ Minimap:
     SetArchBlobOutsideTexture:
       inputs:
       - name: asset
-        type: string
+        type: Texture
       outputs: {}
     SetArchBlobRingAlpha:
       inputs:
@@ -3406,37 +3406,37 @@ Minimap:
     SetArchBlobRingTexture:
       inputs:
       - name: asset
-        type: string
+        type: Texture
       outputs: {}
     SetBlipTexture:
       inputs:
       - name: asset
-        type: string
+        type: Texture
       outputs: {}
     SetCorpsePOIArrowTexture:
       inputs:
       - name: asset
-        type: string
+        type: Texture
       outputs: {}
     SetIconTexture:
       inputs:
       - name: asset
-        type: string
+        type: Texture
       outputs: {}
     SetMaskTexture:
       inputs:
       - name: asset
-        type: string
+        type: Texture
       outputs: {}
     SetPlayerTexture:
       inputs:
       - name: asset
-        type: string
+        type: Texture
       outputs: {}
     SetPOIArrowTexture:
       inputs:
       - name: asset
-        type: string
+        type: Texture
       outputs: {}
     SetQuestBlobInsideAlpha:
       inputs:
@@ -3446,7 +3446,7 @@ Minimap:
     SetQuestBlobInsideTexture:
       inputs:
       - name: asset
-        type: string
+        type: Texture
       outputs: {}
     SetQuestBlobOutsideAlpha:
       inputs:
@@ -3456,7 +3456,7 @@ Minimap:
     SetQuestBlobOutsideTexture:
       inputs:
       - name: asset
-        type: string
+        type: Texture
       outputs: {}
     SetQuestBlobRingAlpha:
       inputs:
@@ -3471,12 +3471,12 @@ Minimap:
     SetQuestBlobRingTexture:
       inputs:
       - name: asset
-        type: string
+        type: Texture
       outputs: {}
     SetStaticPOIArrowTexture:
       inputs:
       - name: asset
-        type: string
+        type: Texture
       outputs: {}
     SetTaskBlobInsideAlpha:
       inputs:
@@ -3486,7 +3486,7 @@ Minimap:
     SetTaskBlobInsideTexture:
       inputs:
       - name: asset
-        type: string
+        type: Texture
       outputs: {}
     SetTaskBlobOutsideAlpha:
       inputs:
@@ -3496,7 +3496,7 @@ Minimap:
     SetTaskBlobOutsideTexture:
       inputs:
       - name: asset
-        type: string
+        type: Texture
       outputs: {}
     SetTaskBlobRingAlpha:
       inputs:
@@ -3511,7 +3511,7 @@ Minimap:
     SetTaskBlobRingTexture:
       inputs:
       - name: asset
-        type: string
+        type: Texture
       outputs: {}
     SetZoom:
       inputs:
