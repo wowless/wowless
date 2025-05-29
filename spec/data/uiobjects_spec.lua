@@ -116,6 +116,11 @@ describe('uiobjects', function()
                     end
                   end)
                 end)
+                describe('instride', function()
+                  it('is less than or equal to number of inputs', function()
+                    assert(not mv.instride or mv.instride <= #mv.inputs)
+                  end)
+                end)
                 describe('outputs', function()
                   for i, output in ipairs(mv.outputs or {}) do
                     describe(output.name or i, function()

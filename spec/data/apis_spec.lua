@@ -58,6 +58,11 @@ describe('apis', function()
               end
             end)
           end)
+          describe('instride', function()
+            it('is less than or equal to number of inputs', function()
+              assert(not api.instride or api.instride <= #api.inputs)
+            end)
+          end)
           describe('outputs', function()
             for k, output in ipairs(api.outputs or {}) do
               describe(k, function()
