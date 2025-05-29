@@ -341,6 +341,10 @@ Animation:
       impl:
         getter:
         - name: endDelay
+      inputs: {}
+      outputs:
+      - name: delaySec
+        type: number
     GetOrder:
       inputs: {}
       outputs:
@@ -361,6 +365,10 @@ Animation:
       impl:
         getter:
         - name: smoothing
+      inputs: {}
+      outputs:
+      - name: weights
+        type: SmoothingType
     GetSmoothProgress:
       inputs: {}
       outputs:
@@ -370,6 +378,10 @@ Animation:
       impl:
         getter:
         - name: startDelay
+      inputs: {}
+      outputs:
+      - name: delaySec
+        type: number
     GetTarget:
       impl: Animation/GetTarget
       inputs: {}
@@ -534,6 +546,10 @@ AnimationGroup:
       impl:
         getter:
         - name: looping
+      inputs: {}
+      outputs:
+      - name: loopType
+        type: LoopType
     GetLoopState:
       inputs: {}
       outputs:
@@ -1258,6 +1274,12 @@ Cooldown:
         getter:
         - name: startTimeMillis
         - name: durationMillis
+      inputs: {}
+      outputs:
+      - name: start
+        type: number
+      - name: duration
+        type: number
     GetDrawBling:
       inputs: {}
       outputs:
@@ -1642,6 +1664,10 @@ EditBox:
       impl:
         getter:
         - name: historyLines
+      inputs: {}
+      outputs:
+      - name: numHistoryLines
+        type: number
     GetInputLanguage:
       inputs: {}
       outputs:
@@ -1651,10 +1677,18 @@ EditBox:
       impl:
         getter:
         - name: maxBytes
+      inputs: {}
+      outputs:
+      - name: maxBytes
+        type: number
     GetMaxLetters:
       impl:
         getter:
         - name: maxLetters
+      inputs: {}
+      outputs:
+      - name: maxLetters
+        type: number
     GetNumber:
       inputs: {}
       outputs:
@@ -1677,6 +1711,10 @@ EditBox:
       impl:
         getter:
         - name: editboxText
+      inputs: {}
+      outputs:
+      - name: text
+        type: string
     GetTextInsets:
       inputs: {}
       outputs:
@@ -1732,14 +1770,26 @@ EditBox:
       impl:
         getter:
         - name: isAutoFocus
+      inputs: {}
+      outputs:
+      - name: autoFocus
+        type: boolean
     IsCountInvisibleLetters:
       impl:
         getter:
         - name: isCountInvisibleLetters
+      inputs: {}
+      outputs:
+      - name: countInvisibleLetters
+        type: boolean
     IsEnabled:
       impl:
         getter:
         - name: enabled
+      inputs: {}
+      outputs:
+      - name: isEnabled
+        type: boolean
     IsInIMECompositionMode:
       inputs: {}
       outputs:
@@ -1749,6 +1799,10 @@ EditBox:
       impl:
         getter:
         - name: isMultiLine
+      inputs: {}
+      outputs:
+      - name: multiline
+        type: boolean
     IsNumeric:
       inputs: {}
       outputs:
@@ -1768,6 +1822,10 @@ EditBox:
       impl:
         getter:
         - name: isSecureText
+      inputs: {}
+      outputs:
+      - name: isSecure
+        type: boolean
     ResetInputMode:
       inputs: {}
       outputs: {}
@@ -4122,6 +4180,10 @@ Path:
       impl:
         getter:
         - name: curveType
+      inputs: {}
+      outputs:
+      - name: curveType
+        type: CurveType
     GetMaxControlPointOrder:
       inputs: {}
       outputs:
@@ -4808,6 +4870,10 @@ ScrollFrame:
       impl:
         getter:
         - name: scrollChild
+      inputs: {}
+      outputs:
+      - name: scrollChild
+        type: Frame
     GetVerticalScroll:
       inputs: {}
       outputs:
@@ -4914,6 +4980,12 @@ Slider:
         getter:
         - name: min
         - name: max
+      inputs: {}
+      outputs:
+      - name: minValue
+        type: number
+      - name: maxValue
+        type: number
     GetObeyStepOnDrag:
       inputs: {}
       outputs:
@@ -4923,6 +4995,10 @@ Slider:
       impl:
         getter:
         - name: orientation
+      inputs: {}
+      outputs:
+      - name: orientation
+        type: Orientation
     GetStepsPerPage:
       inputs: {}
       outputs:
@@ -4932,10 +5008,18 @@ Slider:
       impl:
         getter:
         - name: thumbTexture
+      inputs: {}
+      outputs:
+      - name: texture
+        type: Texture
     GetValue:
       impl:
         getter:
         - name: value
+      inputs: {}
+      outputs:
+      - name: value
+        type: number
     GetValueStep:
       inputs: {}
       outputs:
@@ -5500,6 +5584,10 @@ UIObject:
       impl:
         getter:
         - name: name
+      inputs: {}
+      outputs:
+      - name: name
+        type: string
     GetObjectType:
       impl: UIObject/GetObjectType
       inputs: {}
@@ -5510,6 +5598,10 @@ UIObject:
       impl:
         getter:
         - name: forbidden
+      inputs: {}
+      outputs:
+      - name: isForbidden
+        type: boolean
     IsObjectType:
       impl: UIObject/IsObjectType
       inputs:
