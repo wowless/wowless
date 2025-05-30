@@ -131,6 +131,17 @@ describe('uiobjects', function()
                           outputs = outputs,
                         })
                       end)
+                    elseif mv.impl.setter then
+                      it('has the right prototype', function()
+                        local inputs = {}
+                        for i, f in ipairs(mv.impl.setter) do
+                          inputs[i] = getMember(k, 'fields', f.name)
+                        end
+                        protocheck(mv, {
+                          inputs = inputs,
+                          outputs = {},
+                        })
+                      end)
                     end
                   end)
                 end
