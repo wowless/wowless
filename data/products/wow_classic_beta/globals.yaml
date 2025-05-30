@@ -5162,6 +5162,13 @@ Enum:
     MaxValue: 1
     MinValue: 0
     NumValues: 2
+  PvPMatchmakingType:
+    Arena: 1
+    Battleground: 0
+  PvPMatchmakingTypeMeta:
+    MaxValue: 1
+    MinValue: 0
+    NumValues: 2
   PvPRanks:
     Rank_1: 5
     Rank_10: 14
@@ -5612,6 +5619,16 @@ Enum:
     MaxValue: 10
     MinValue: 0
     NumValues: 11
+  SendReportResult:
+    GeneralError: 1
+    RequiresChatLine: 3
+    RequiresChatLineOrVoice: 4
+    Success: 0
+    TooManyReports: 2
+  SendReportResultMeta:
+    MaxValue: 4
+    MinValue: 0
+    NumValues: 5
   SharedStringFlag:
     InternalOnly: 1
   SharedStringFlagMeta:

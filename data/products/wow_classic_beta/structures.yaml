@@ -2889,6 +2889,14 @@ C_MythicPlus.SeasonTimeInfo:
       type: number
     medal:
       type: number
+C_PaperDollInfo.InspectRatedBGData:
+  fields:
+    played:
+      type: number
+    rating:
+      type: number
+    won:
+      type: number
 C_PetJournal.PetAbilityLevelInfo:
   fields:
     abilityID:

@@ -882,6 +882,34 @@ C_AreaPoiInfo.IsAreaPOITimed:
   outputs:
   - name: isTimed
     type: boolean
+C_AssistedCombat.GetActionSpell:
+  inputs: {}
+  outputs:
+  - name: spellID
+    nilable: true
+    type: number
+C_AssistedCombat.GetNextCastSpell:
+  inputs:
+  - default: false
+    name: checkForVisibleButton
+    type: boolean
+  outputs:
+  - name: spellID
+    nilable: true
+    type: number
+C_AssistedCombat.GetRotationSpells:
+  inputs: {}
+  outputs:
+  - name: spellIDs
+    type:
+      arrayof: number
+C_AssistedCombat.IsAvailable:
+  inputs: {}
+  outputs:
+  - name: isAvailable
+    type: boolean
+  - name: failureReason
+    type: string
 C_AuthChallenge.Cancel: {}
 C_AuthChallenge.DidChallengeSucceed: {}
 C_AuthChallenge.OnTabPressed: {}
@@ -9277,6 +9305,32 @@ C_PaperDollInfo.GetArmorEffectivenessAgainstTarget:
   - name: effectiveness
     nilable: true
     type: number
+C_PaperDollInfo.GetGlyphLinkByID:
+  inputs:
+  - name: glyphID
+    type: number
+  outputs:
+  - name: link
+    type: string
+C_PaperDollInfo.GetInspectGuildInfo:
+  inputs:
+  - name: unitString
+    type: string
+  outputs:
+  - name: achievementPoints
+    type: number
+  - name: numMembers
+    type: number
+  - name: guildName
+    type: string
+  - name: realmName
+    type: string
+C_PaperDollInfo.GetInspectRatedBGData:
+  inputs: {}
+  outputs:
+  - name: ratedBGData
+    type:
+      structure: C_PaperDollInfo.InspectRatedBGData
 C_PaperDollInfo.GetMinItemLevel:
   inputs: {}
   outputs:
@@ -16992,6 +17046,7 @@ GetInspectPVPRankProgress:
   - name: value
     type: number
 GetInspectSpecialization: {}
+GetInspectTalent: {}
 GetInstanceBootTimeRemaining:
   inputs: {}
   outputs:
@@ -20447,6 +20502,7 @@ IsPassiveSpell:
   - name: isPassive
     type: boolean
 IsPetActive: {}
+IsPetAssistAvailable: {}
 IsPetAttackAction:
   inputs:
   - type: number
@@ -20936,6 +20992,7 @@ pcallwithenv:
   impl: pcallwithenv
 PetAbandon: {}
 PetAggressiveMode: {}
+PetAssistMode: {}
 PetAttack:
   inputs:
   - name: unit
