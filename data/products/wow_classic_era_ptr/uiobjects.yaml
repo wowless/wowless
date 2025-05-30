@@ -438,9 +438,13 @@ Animation:
         type: boolean
       outputs: {}
     SetEndDelay:
-      impl:
-        setter:
-        - name: endDelay
+      inputs:
+      - name: delaySec
+        type: number
+      - default: true
+        name: recomputeGroupDuration
+        type: boolean
+      outputs: {}
     SetOrder:
       inputs:
       - name: newOrder
@@ -455,15 +459,23 @@ Animation:
       impl:
         setter:
         - name: smoothing
+      inputs:
+      - name: weights
+        type: SmoothingType
+      outputs: {}
     SetSmoothProgress:
       inputs:
       - name: durationSec
         type: number
       outputs: {}
     SetStartDelay:
-      impl:
-        setter:
-        - name: startDelay
+      inputs:
+      - name: delaySec
+        type: number
+      - default: true
+        name: recomputeGroupDuration
+        type: boolean
+      outputs: {}
     SetTarget:
       inputs:
       - name: target
@@ -623,6 +635,10 @@ AnimationGroup:
       impl:
         setter:
         - name: looping
+      inputs:
+      - name: loopType
+        type: LoopType
+      outputs: {}
     SetPlaying:
       inputs:
       - name: play
@@ -1845,6 +1861,11 @@ EditBox:
       impl:
         setter:
         - name: isAutoFocus
+      inputs:
+      - default: false
+        name: autoFocus
+        type: boolean
+      outputs: {}
     SetBlinkSpeed:
       inputs:
       - name: cursorBlinkSpeedSec
@@ -1854,6 +1875,11 @@ EditBox:
       impl:
         setter:
         - name: isCountInvisibleLetters
+      inputs:
+      - default: false
+        name: countInvisibleLetters
+        type: boolean
+      outputs: {}
     SetCursorPosition:
       inputs:
       - name: cursorPosition
@@ -1863,6 +1889,11 @@ EditBox:
       impl:
         setter:
         - name: enabled
+      inputs:
+      - default: false
+        name: enabled
+        type: boolean
+      outputs: {}
     SetFocus:
       inputs: {}
       outputs: {}
@@ -1887,18 +1918,35 @@ EditBox:
       impl:
         setter:
         - name: historyLines
+      inputs:
+      - name: numHistoryLines
+        type: number
+      outputs: {}
     SetMaxBytes:
       impl:
         setter:
         - name: maxBytes
+      inputs:
+      - name: maxBytes
+        type: number
+      outputs: {}
     SetMaxLetters:
       impl:
         setter:
         - name: maxLetters
+      inputs:
+      - name: maxLetters
+        type: number
+      outputs: {}
     SetMultiLine:
       impl:
         setter:
         - name: isMultiLine
+      inputs:
+      - default: false
+        name: multiline
+        type: boolean
+      outputs: {}
     SetNumber:
       inputs:
       - name: number
@@ -1926,6 +1974,11 @@ EditBox:
       impl:
         setter:
         - name: isSecureText
+      inputs:
+      - default: false
+        name: isSecure
+        type: boolean
+      outputs: {}
     SetSecurityDisablePaste:
       inputs: {}
       outputs: {}
@@ -1936,6 +1989,10 @@ EditBox:
       impl:
         setter:
         - name: editboxText
+      inputs:
+      - name: text
+        type: string
+      outputs: {}
     SetTextInsets:
       inputs:
       - name: left
@@ -4193,6 +4250,10 @@ Path:
       impl:
         setter:
         - name: curveType
+      inputs:
+      - name: curveType
+        type: CurveType
+      outputs: {}
 PlayerModel:
   fields: {}
   inherits:
@@ -5045,6 +5106,12 @@ Slider:
         setter:
         - name: min
         - name: max
+      inputs:
+      - name: minValue
+        type: number
+      - name: maxValue
+        type: number
+      outputs: {}
     SetObeyStepOnDrag:
       inputs:
       - name: obeyStepOnDrag
@@ -5054,6 +5121,10 @@ Slider:
       impl:
         setter:
         - name: orientation
+      inputs:
+      - name: orientation
+        type: Orientation
+      outputs: {}
     SetStepsPerPage:
       inputs:
       - name: stepsPerPage
@@ -5063,10 +5134,18 @@ Slider:
       impl:
         setter:
         - name: thumbTexture
+      inputs:
+      - name: asset
+        type: Texture
+      outputs: {}
     SetValue:
-      impl:
-        setter:
-        - name: value
+      inputs:
+      - name: value
+        type: number
+      - default: false
+        name: treatAsMouseEvent
+        type: boolean
+      outputs: {}
     SetValueStep:
       inputs:
       - name: valueStep

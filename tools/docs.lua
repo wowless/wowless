@@ -493,9 +493,6 @@ local function rewriteUIObjects()
         if inhm[k][mk] then
           return false
         end
-        if mm and mm.impl and mm.impl.setter then
-          return false
-        end
         if deref(config, 'uiobjects', k) then
           return true
         end

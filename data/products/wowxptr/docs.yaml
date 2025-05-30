@@ -213,7 +213,6 @@ uiobject_methods:
 uiobjects:
   Animation: {}
   AnimationGroup: {}
-  Cooldown: {}
   EditBox: {}
   Path: {}
   ScrollFrame: {}
