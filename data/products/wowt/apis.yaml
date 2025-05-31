@@ -1609,7 +1609,7 @@ C_AssistedCombat.GetRotationSpells:
   - name: spellIDs
     type:
       arrayof: number
-C_AssistedCombat.IsAssistedCombatHighlightAvailable:
+C_AssistedCombat.IsAvailable:
   inputs: {}
   outputs:
   - name: isAvailable

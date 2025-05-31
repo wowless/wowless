@@ -4954,10 +4954,11 @@ C_PvP.BattlemasterListInfo:
   fields:
     icon:
       type: number
-    instanceType:
-      type: number
     longDescription:
       type: string
+    matchmakingType:
+      type:
+        enum: PvPMatchmakingType
     maxPlayers:
       type: number
     minPlayers:
@@ -8308,6 +8309,12 @@ C_UIWidgetManager.UIWidgetSetInfo:
       type: number
 C_UIWidgetManager.UIWidgetSpellButtonInfo:
   fields:
+    cooldownType:
+      type:
+        enum: UIWidgetSpellButtonCooldownType
+    enabledState:
+      type:
+        enum: UIWidgetButtonEnabledState
     icon:
       type:
         enum: UIWidgetButtonIconType

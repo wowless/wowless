@@ -6013,6 +6013,13 @@ Enum:
     MaxValue: 1
     MinValue: 0
     NumValues: 2
+  PvPMatchmakingType:
+    Arena: 1
+    Battleground: 0
+  PvPMatchmakingTypeMeta:
+    MaxValue: 1
+    MinValue: 0
+    NumValues: 2
   PvPMatchState:
     Complete: 5
     Engaged: 3
@@ -6516,6 +6523,16 @@ Enum:
     MaxValue: 10
     MinValue: 0
     NumValues: 11
+  SendReportResult:
+    GeneralError: 1
+    RequiresChatLine: 3
+    RequiresChatLineOrVoice: 4
+    Success: 0
+    TooManyReports: 2
+  SendReportResultMeta:
+    MaxValue: 4
+    MinValue: 0
+    NumValues: 5
   SharedStringFlag:
     InternalOnly: 1
   SharedStringFlagMeta:
@@ -7582,6 +7599,13 @@ Enum:
     MaxValue: 1
     MinValue: 0
     NumValues: 2
+  UIWidgetButtonEnabledState:
+    Disabled: 0
+    Enabled: 1
+  UIWidgetButtonEnabledStateMeta:
+    MaxValue: 1
+    MinValue: 0
+    NumValues: 2
   UIWidgetButtonIconType:
     Checkmark: 3
     Exit: 0
@@ -7679,6 +7703,14 @@ Enum:
     Overlap: 2
     Vertical: 0
   UIWidgetSetLayoutDirectionMeta:
+    MaxValue: 2
+    MinValue: 0
+    NumValues: 3
+  UIWidgetSpellButtonCooldownType:
+    HideCooldown: 0
+    ShowCooldown: 1
+    ShowCooldownAndDisableOnCooldown: 2
+  UIWidgetSpellButtonCooldownTypeMeta:
     MaxValue: 2
     MinValue: 0
     NumValues: 3

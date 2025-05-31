@@ -6457,8 +6457,9 @@ REPLICATE_ITEM_LIST_UPDATE:
   payload: {}
 REPORT_PLAYER_RESULT:
   payload:
-  - name: success
-    type: boolean
+  - name: result
+    type:
+      enum: SendReportResult
   - name: reportType
     type:
       enum: ReportType
