@@ -577,15 +577,12 @@ add_lua_executable(
   vstruct)
 
 find_package(CURL REQUIRED)
-add_library(libcurl ALIAS CURL::libcurl)
-
 find_package(OpenSSL REQUIRED)
-add_library(libcrypto ALIAS OpenSSL::Crypto)
 
 add_library(tactless STATIC vendor/tactless/tactless.c
                             vendor/tactless/tactless.h)
 target_include_directories(tactless PUBLIC vendor/tactless)
-target_link_libraries(tactless PRIVATE libcrypto libcurl zlib)
+target_link_libraries(tactless PRIVATE OpenSSL::Crypto CURL::libcurl zlib)
 
 lua2c(toolstactless tactless=c)
 target_sources(toolstactless PRIVATE tools/tactless.c)
