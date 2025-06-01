@@ -1,3 +1,3 @@
 local script = ...
-pcall(loadstring(script))
+pcall(assert(loadstring(script)))
 -- TODO fire UI_ERROR_MESSAGE on failure

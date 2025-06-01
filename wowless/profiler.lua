@@ -40,7 +40,7 @@ local function capture(x)
 end
 
 local function write(tt)
-  local f = io.open('profile.' .. tt.product .. '.txt', 'w')
+  local f = assert(io.open('profile.' .. tt.product .. '.txt', 'w'))
   for k, v in pairs(flatten(capture(tt))) do
     f:write(('%s\t%d\t%d\t%d\n'):format(k, v.calls, v.ownticks, v.subticks))
   end
