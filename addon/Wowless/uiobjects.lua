@@ -332,6 +332,17 @@ G.testsuite.uiobjects = function()
       }
     end,
 
+    Slider = function()
+      local s = CreateFrame('Slider')
+      assertEquals(nil, s:GetThumbTexture())
+      local t = s:CreateTexture()
+      s:SetThumbTexture(t)
+      assertEquals(t, s:GetThumbTexture())
+      s:SetThumbTexture(12345)
+      assertEquals(t, s:GetThumbTexture())
+      assertEquals(12345, t:GetTexture())
+    end,
+
     Texture = function()
       local colortex = _G.WowlessData.Build.test and 'FileData ID 0' or nil
       local t = CreateFrame('Frame'):CreateTexture()

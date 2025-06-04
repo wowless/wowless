@@ -286,7 +286,7 @@ for k, v in pairs(uiobjectdata) do
         table.insert(t, f.name)
         table.insert(t, '=')
         if cf.type == 'Texture' then
-          table.insert(t, 'toTexture(self,')
+          table.insert(t, 'toTexture(self,' .. f.name .. ',self.')
         else
           table.insert(t, 'check(spec')
           table.insert(t, tostring(i))
