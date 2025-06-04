@@ -265,13 +265,13 @@ for k, v in pairs(uiobjectdata) do
       for i, f in ipairs(mv.impl.setter) do
         local cf = fieldset[f.name]
         if cf.type ~= 'Texture' then
-          table.insert(t, 'local spec')
-          table.insert(t, tostring(i))
-          table.insert(t, '={')
-          if cf.type == 'boolean' or cf.nilable or f.nilable then
-            table.insert(t, 'nilable=true,')
-          end
-          table.insert(t, 'type="' .. cf.type .. '"};')
+          table.insert(t, 'local spec' .. i .. '=')
+          local input = mv.inputs and mv.inputs[i]
+            or { -- issue #416
+              nilable = cf.type == 'boolean' or cf.nilable or f.nilable or nil,
+              type = cf.type,
+            }
+          table.insert(t, plprettywrite(input, '') .. ';')
         end
       end
       table.insert(t, 'return function(self')
