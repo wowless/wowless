@@ -219,8 +219,15 @@ uiobject_methods:
     CanPropagateMouseClicks: {}
     CanPropagateMouseMotion: {}
 uiobjects:
+  Actor: {}
+  Alpha: {}
   Animation: {}
   AnimationGroup: {}
+  Browser: {}
+  Checkout: {}
+  CinematicModel: {}
+  ColorSelect: {}
+  ControlPoint: {}
   EditBox: {}
   Path: {}
   ScrollFrame: {}

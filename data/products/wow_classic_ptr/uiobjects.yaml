@@ -1109,10 +1109,18 @@ ColorSelect:
       impl:
         getter:
         - name: colorAlphaTexture
+      inputs: {}
+      outputs:
+      - name: texture
+        type: Texture
     GetColorAlphaThumbTexture:
       impl:
         getter:
         - name: colorAlphaThumbTexture
+      inputs: {}
+      outputs:
+      - name: texture
+        type: Texture
     GetColorHSV:
       inputs: {}
       outputs:
@@ -1135,18 +1143,34 @@ ColorSelect:
       impl:
         getter:
         - name: colorValueTexture
+      inputs: {}
+      outputs:
+      - name: texture
+        type: Texture
     GetColorValueThumbTexture:
       impl:
         getter:
         - name: colorValueThumbTexture
+      inputs: {}
+      outputs:
+      - name: texture
+        type: Texture
     GetColorWheelTexture:
       impl:
         getter:
         - name: colorWheelTexture
+      inputs: {}
+      outputs:
+      - name: texture
+        type: Texture
     GetColorWheelThumbTexture:
       impl:
         getter:
         - name: colorWheelThumbTexture
+      inputs: {}
+      outputs:
+      - name: texture
+        type: Texture
     SetColorAlpha:
       inputs:
       - name: alpha
@@ -1156,10 +1180,18 @@ ColorSelect:
       impl:
         setter:
         - name: colorAlphaTexture
+      inputs:
+      - name: texture
+        type: Texture
+      outputs: {}
     SetColorAlphaThumbTexture:
       impl:
         setter:
         - name: colorAlphaThumbTexture
+      inputs:
+      - name: texture
+        type: Texture
+      outputs: {}
     SetColorHSV:
       inputs:
       - name: hsvX
@@ -1182,18 +1214,34 @@ ColorSelect:
       impl:
         setter:
         - name: colorValueTexture
+      inputs:
+      - name: texture
+        type: Texture
+      outputs: {}
     SetColorValueThumbTexture:
       impl:
         setter:
         - name: colorValueThumbTexture
+      inputs:
+      - name: texture
+        type: Texture
+      outputs: {}
     SetColorWheelTexture:
       impl:
         setter:
         - name: colorWheelTexture
+      inputs:
+      - name: texture
+        type: Texture
+      outputs: {}
     SetColorWheelThumbTexture:
       impl:
         setter:
         - name: colorWheelThumbTexture
+      inputs:
+      - name: texture
+        type: Texture
+      outputs: {}
 ControlPoint:
   fields: {}
   inherits:
