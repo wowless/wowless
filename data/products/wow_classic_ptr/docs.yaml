@@ -189,7 +189,12 @@ uiobjects:
   LineTranslation: {}
   MaskTexture: {}
   MessageFrame: {}
+  Minimap: {}
+  MovieFrame: {}
+  OffScreenFrame: {}
+  ParentedObject: {}
   Path: {}
+  PlayerModel: {}
   ScrollFrame: {}
   Slider: {}
   UIObject: {}
