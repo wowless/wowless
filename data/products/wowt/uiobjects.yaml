@@ -5338,6 +5338,14 @@ Scale:
         - name: originPoint
         - name: originX
         - name: originY
+      inputs: {}
+      outputs:
+      - name: point
+        type: FramePoint
+      - name: originX
+        type: number
+      - name: originY
+        type: number
     GetScale:
       inputs: {}
       outputs:
@@ -5365,6 +5373,14 @@ Scale:
         - name: originPoint
         - name: originX
         - name: originY
+      inputs:
+      - name: point
+        type: FramePoint
+      - name: originX
+        type: number
+      - name: originY
+        type: number
+      outputs: {}
     SetScale:
       inputs:
       - name: scaleX

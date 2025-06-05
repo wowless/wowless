@@ -241,6 +241,12 @@ uiobjects:
   ParentedObject: {}
   Path: {}
   PlayerModel: {}
+  RegionBase: {}
+  Rotation: {}
+  Scale: {}
+  ScriptObjectBase: {}
   ScrollFrame: {}
+  SimpleHTML: {}
   Slider: {}
+  TabardModel: {}
   UIObject: {}
