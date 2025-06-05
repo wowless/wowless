@@ -229,7 +229,10 @@ uiobjects:
   CinematicModel: {}
   ColorSelect: {}
   ControlPoint: {}
+  DressUpModel: {}
   EditBox: {}
+  FlipBook: {}
+  FogOfWarFrame: {}
   Path: {}
   ScrollFrame: {}
   Slider: {}
