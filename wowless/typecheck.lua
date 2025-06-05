@@ -189,13 +189,18 @@ return function(api)
         end
       end
       if isout then
+        local m = st.mixin and api.env[st.mixin] or {}
+        for k, v in pairs(m) do
+          if value[k] ~= v then
+            return nil, 'has incorrect mixin value ' .. k
+          end
+        end
         for k in pairs(value) do
-          if not st.fields[k] then
+          if not st.fields[k] and not m[k] then
             return nil, 'has extraneous field ' .. k
           end
         end
       end
-      -- TODO assert presence of mixin
       return value
     elseif spec.type.arrayof then
       if type(value) ~= 'table' then
