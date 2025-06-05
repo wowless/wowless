@@ -197,6 +197,13 @@ uiobjects:
   Font: {}
   FontInstance: {}
   FontString: {}
+  GameTooltip: {}
+  LayeredRegion: {}
+  Line: {}
+  LineScale: {}
+  LineTranslation: {}
+  MaskTexture: {}
+  MessageFrame: {}
   Path: {}
   ScrollFrame: {}
   Slider: {}

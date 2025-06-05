@@ -3369,6 +3369,10 @@ Line:
       impl:
         getter:
         - name: thickness
+      inputs: {}
+      outputs:
+      - name: thickness
+        type: number
     SetEndPoint:
       inputs:
       - name: relativePoint
@@ -3404,6 +3408,10 @@ Line:
       impl:
         setter:
         - name: thickness
+      inputs:
+      - name: thickness
+        type: number
+      outputs: {}
 LineScale:
   fields: {}
   inherits:
@@ -3427,6 +3435,22 @@ MessageFrame:
   methods:
     AddMessage:
       impl: MessageFrame/AddMessage
+      inputs:
+      - name: text
+        type: string
+      - name: colorR
+        type: number
+      - name: colorG
+        type: number
+      - name: colorB
+        type: number
+      - name: a
+        nilable: true
+        type: number
+      - name: messageID
+        nilable: true
+        type: number
+      outputs: {}
     Clear:
       inputs: {}
       outputs: {}
