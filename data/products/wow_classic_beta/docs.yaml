@@ -173,8 +173,6 @@ uiobject_methods:
     SetDisabledAtlas: {}
     SetNormalAtlas: {}
     SetPushedAtlas: {}
-  FontString:
-    OnColorsUpdated: {}
   Frame:
     ClearAlphaGradient: {}
     GetHighestFrameLevel: {}
@@ -196,6 +194,9 @@ uiobjects:
   EditBox: {}
   FlipBook: {}
   FogOfWarFrame: {}
+  Font: {}
+  FontInstance: {}
+  FontString: {}
   Path: {}
   ScrollFrame: {}
   Slider: {}

@@ -2367,6 +2367,10 @@ FontString:
       impl:
         getter:
         - name: maxLines
+      inputs: {}
+      outputs:
+      - name: maxLines
+        type: number
     GetNumLines:
       inputs: {}
       outputs:
@@ -2391,10 +2395,18 @@ FontString:
       impl:
         getter:
         - name: text
+      inputs: {}
+      outputs:
+      - name: text
+        type: string
     GetTextScale:
       impl:
         getter:
         - name: textScale
+      inputs: {}
+      outputs:
+      - name: textScale
+        type: number
     GetUnboundedStringWidth:
       inputs: {}
       outputs:
@@ -2437,6 +2449,10 @@ FontString:
       impl:
         setter:
         - name: maxLines
+      inputs:
+      - name: maxLines
+        type: number
+      outputs: {}
     SetNonSpaceWrap:
       inputs:
       - name: wrap
@@ -2449,6 +2465,11 @@ FontString:
       outputs: {}
     SetText:
       impl: FontString/SetText
+      inputs:
+      - default: ''
+        name: text
+        type: string
+      outputs: {}
     SetTextHeight:
       inputs:
       - name: height
@@ -2458,6 +2479,10 @@ FontString:
       impl:
         setter:
         - name: textScale
+      inputs:
+      - name: textScale
+        type: number
+      outputs: {}
     SetTextToFit:
       inputs:
       - default: ''

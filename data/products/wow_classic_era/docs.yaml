@@ -184,6 +184,9 @@ uiobjects:
   EditBox: {}
   FlipBook: {}
   FogOfWarFrame: {}
+  Font: {}
+  FontInstance: {}
+  FontString: {}
   Path: {}
   ScrollFrame: {}
   Slider: {}
