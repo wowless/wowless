@@ -235,6 +235,7 @@ uiobjects:
   MaskTexture: {}
   MessageFrame: {}
   Minimap: {}
+  Model: {}
   MovieFrame: {}
   OffScreenFrame: {}
   ParentedObject: {}

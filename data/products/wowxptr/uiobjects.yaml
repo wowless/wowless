@@ -3789,6 +3789,10 @@ Model:
       impl:
         getter:
         - name: modelScale
+      inputs: {}
+      outputs:
+      - name: scale
+        type: number
     GetPaused:
       inputs: {}
       outputs:
@@ -3974,6 +3978,10 @@ Model:
       impl:
         setter:
         - name: modelScale
+      inputs:
+      - name: scale
+        type: number
+      outputs: {}
     SetParticlesEnabled:
       inputs:
       - name: enabled
@@ -4054,6 +4062,14 @@ Model:
       outputs: {}
     TransformCameraSpaceToModelSpace:
       impl: Model/TransformCameraSpaceToModelSpace
+      inputs:
+      - name: cameraPosition
+        type:
+          structure: vector3
+      outputs:
+      - name: modelPosition
+        type:
+          structure: vector3
     UseModelCenterToTransform:
       inputs:
       - name: useCenter
