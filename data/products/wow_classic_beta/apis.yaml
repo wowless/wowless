@@ -9610,6 +9610,11 @@ C_PetJournal.ClearRecentFanfares:
 C_PetJournal.ClearSearchFilter:
   inputs: {}
   outputs: {}
+C_PetJournal.DismissSummonedPet:
+  inputs:
+  - name: petID
+    type: string
+  outputs: {}
 C_PetJournal.FindPetIDByName: {}
 C_PetJournal.GetBattlePetLink: {}
 C_PetJournal.GetDisplayIDByIndex:
@@ -9777,6 +9782,13 @@ C_PetJournal.HasFavoritePets:
   inputs: {}
   outputs:
   - name: hasFavorites
+    type: boolean
+C_PetJournal.IsCurrentlySummoned:
+  inputs:
+  - name: petID
+    type: string
+  outputs:
+  - name: isSummoned
     type: boolean
 C_PetJournal.IsFilterChecked: {}
 C_PetJournal.IsFindBattleEnabled:
@@ -22117,6 +22129,9 @@ UnitAttackSpeed:
   - type: number
   - type: number
 UnitAura: {}
+UnitBattlePetLevel: {}
+UnitBattlePetSpeciesID: {}
+UnitBattlePetType: {}
 UnitBuff: {}
 UnitCanAssist:
   inputs:
@@ -22465,6 +22480,8 @@ UnitIsAFK:
   - type: string
   outputs:
   - type: oneornil
+UnitIsBattlePet: {}
+UnitIsBattlePetCompanion: {}
 UnitIsCharmed:
   inputs:
   - name: unit
@@ -22578,6 +22595,7 @@ UnitIsInteractable:
   outputs:
   - name: result
     type: boolean
+UnitIsOtherPlayersBattlePet: {}
 UnitIsOtherPlayersPet:
   inputs:
   - nilable: true
@@ -22678,6 +22696,7 @@ UnitIsVisible:
     type: string
   outputs:
   - type: boolean
+UnitIsWildBattlePet: {}
 UnitLeadsAnyGroup:
   inputs:
   - name: unit
