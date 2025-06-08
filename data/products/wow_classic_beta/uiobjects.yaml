@@ -5467,11 +5467,21 @@ StatusBar:
       impl:
         getter:
         - name: fillStyle
+      inputs: {}
+      outputs:
+      - name: fillStyle
+        type: StatusBarFillStyle
     GetMinMaxValues:
       impl:
         getter:
         - name: min
         - name: max
+      inputs: {}
+      outputs:
+      - name: minValue
+        type: number
+      - name: maxValue
+        type: number
     GetOrientation:
       inputs: {}
       outputs:
@@ -5489,6 +5499,16 @@ StatusBar:
         type: boolean
     GetStatusBarColor:
       impl: StatusBar/GetStatusBarColor
+      inputs: {}
+      outputs:
+      - name: colorR
+        type: number
+      - name: colorG
+        type: number
+      - name: colorB
+        type: number
+      - name: colorA
+        type: number
     GetStatusBarDesaturation:
       inputs: {}
       outputs:
@@ -5498,10 +5518,18 @@ StatusBar:
       impl:
         getter:
         - name: statusBarTexture
+      inputs: {}
+      outputs:
+      - name: texture
+        type: Texture
     GetValue:
       impl:
         getter:
         - name: value
+      inputs: {}
+      outputs:
+      - name: value
+        type: number
     IsStatusBarDesaturated:
       inputs: {}
       outputs:
@@ -5523,11 +5551,21 @@ StatusBar:
       impl:
         setter:
         - name: fillStyle
+      inputs:
+      - name: fillStyle
+        type: StatusBarFillStyle
+      outputs: {}
     SetMinMaxValues:
       impl:
         setter:
         - name: min
         - name: max
+      inputs:
+      - name: minValue
+        type: number
+      - name: maxValue
+        type: number
+      outputs: {}
     SetOrientation:
       inputs:
       - name: orientation
@@ -5545,6 +5583,17 @@ StatusBar:
       outputs: {}
     SetStatusBarColor:
       impl: StatusBar/SetStatusBarColor
+      inputs:
+      - name: colorR
+        type: number
+      - name: colorG
+        type: number
+      - name: colorB
+        type: number
+      - name: a
+        nilable: true
+        type: number
+      outputs: {}
     SetStatusBarDesaturated:
       inputs:
       - default: false
@@ -5562,6 +5611,10 @@ StatusBar:
       impl:
         setter:
         - name: value
+      inputs:
+      - name: value
+        type: number
+      outputs: {}
 TabardModel:
   fields: {}
   inherits:

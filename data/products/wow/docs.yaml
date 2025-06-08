@@ -127,6 +127,9 @@ skip_docfiles:
   SimpleMapSceneAPIDocumentation: {}
   SimpleModelFFXAPIDocumentation: {}
   WorldSafeLocsUIInternalDocumentation: {}
+skip_uiobject_methods:
+  StatusBar:
+    SetStatusBarTexture: {}
 typedefs:
   AnimationDataEnum: number
   ArtifactTiers: number
@@ -254,5 +257,6 @@ uiobjects:
   ScrollFrame: {}
   SimpleHTML: {}
   Slider: {}
+  StatusBar: {}
   TabardModel: {}
   UIObject: {}

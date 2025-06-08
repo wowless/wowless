@@ -95,6 +95,9 @@ skip_docfiles:
   FrameAPIQuestPOIDocumentation: {}
   PingPinFrameAPIDocumentation: {}
   SimpleModelFFXAPIDocumentation: {}
+skip_uiobject_methods:
+  StatusBar:
+    SetStatusBarTexture: {}
 typedefs:
   AnimationDataEnum: number
   BigInteger: number
@@ -208,5 +211,6 @@ uiobjects:
   ScrollFrame: {}
   SimpleHTML: {}
   Slider: {}
+  StatusBar: {}
   TabardModel: {}
   UIObject: {}

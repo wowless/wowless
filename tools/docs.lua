@@ -490,7 +490,7 @@ local function rewriteUIObjects()
         stuboutstrides = mm and mm.stuboutstrides,
       }
       local okay = (function()
-        if inhm[k][mk] then
+        if inhm[k][mk] or deref(config, 'skip_uiobject_methods', k, mk) then
           return false
         end
         if deref(config, 'uiobjects', k) then
