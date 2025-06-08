@@ -1131,22 +1131,43 @@ CheckButton:
       impl:
         getter:
         - name: checked
+      inputs: {}
+      outputs:
+      - name: checked
+        type: boolean
     GetCheckedTexture:
       impl:
         getter:
         - name: checkedTexture
+      inputs: {}
+      outputs:
+      - name: texture
+        type: Texture
     GetDisabledCheckedTexture:
       impl:
         getter:
         - name: disabledCheckedTexture
+      inputs: {}
+      outputs:
+      - name: texture
+        type: Texture
     SetChecked:
       impl: CheckButton/SetChecked
+      inputs:
+      - default: false
+        name: checked
+        type: boolean
+      outputs: {}
     SetCheckedTexture:
       impl: CheckButton/SetCheckedTexture
     SetDisabledCheckedTexture:
       impl:
         setter:
         - name: disabledCheckedTexture
+      inputs:
+      - name: asset
+        type: Texture
+      outputs: {}
 Checkout:
   fieldinitoverrides:
     mouseClickEnabled: true
@@ -4576,16 +4597,36 @@ ParentedObjectBase:
   methods:
     ClearParentKey:
       impl: ParentedObjectBase/ClearParentKey
+      inputs: {}
+      outputs: {}
     GetDebugName:
       impl: ParentedObject/GetDebugName
+      inputs:
+      - default: false
+        name: preferParentKey
+        type: boolean
+      outputs:
+      - name: debugName
+        type: string
     GetParent:
       impl:
         getter:
         - name: parent
+      inputs: {}
+      outputs:
+      - name: parent
+        type: UIObject
     GetParentKey:
       impl: ParentedObjectBase/GetParentKey
     SetParentKey:
       impl: ParentedObjectBase/SetParentKey
+      inputs:
+      - name: parentKey
+        type: string
+      - default: false
+        name: clearOtherKeys
+        type: boolean
+      outputs: {}
   virtual: true
 Path:
   fields:
@@ -6026,10 +6067,18 @@ TextureBase:
       impl:
         getter:
         - name: atlas
+      inputs: {}
+      outputs:
+      - name: atlas
+        type: string
     GetBlendMode:
       impl:
         getter:
         - name: blendMode
+      inputs: {}
+      outputs:
+      - name: blendMode
+        type: BlendMode
     GetDesaturation:
       inputs: {}
       outputs:
@@ -6039,6 +6088,10 @@ TextureBase:
       impl:
         getter:
         - name: horizTile
+      inputs: {}
+      outputs:
+      - name: tiling
+        type: boolean
     GetRotation:
       inputs: {}
       outputs:
@@ -6115,6 +6168,10 @@ TextureBase:
       impl:
         getter:
         - name: vertTile
+      inputs: {}
+      outputs:
+      - name: tiling
+        type: boolean
     IsBlockingLoadRequested:
       inputs: {}
       outputs:
@@ -6136,6 +6193,10 @@ TextureBase:
       impl:
         setter:
         - name: blendMode
+      inputs:
+      - name: blendMode
+        type: BlendMode
+      outputs: {}
     SetBlockingLoadsRequested:
       inputs:
       - default: false
@@ -6144,6 +6205,17 @@ TextureBase:
       outputs: {}
     SetColorTexture:
       impl: Texture/SetColorTexture
+      inputs:
+      - name: colorR
+        type: number
+      - name: colorG
+        type: number
+      - name: colorB
+        type: number
+      - name: a
+        nilable: true
+        type: number
+      outputs: {}
     SetDesaturated:
       inputs:
       - default: false
@@ -6170,10 +6242,19 @@ TextureBase:
       impl:
         setter:
         - name: horizTile
+      inputs:
+      - default: false
+        name: tiling
+        type: boolean
+      outputs: {}
     SetMask:
       impl:
         setter:
         - name: maskName
+      inputs:
+      - name: file
+        type: string
+      outputs: {}
     SetRotation:
       inputs:
       - name: radians
@@ -6191,6 +6272,16 @@ TextureBase:
       outputs: {}
     SetTexCoord:
       impl: Texture/SetTexCoord
+      inputs:
+      - name: left
+        type: number
+      - name: right
+        type: number
+      - name: bottom
+        type: number
+      - name: top
+        type: number
+      outputs: {}
     SetTexelSnappingBias:
       inputs:
       - name: bias
@@ -6228,6 +6319,11 @@ TextureBase:
       impl:
         setter:
         - name: vertTile
+      inputs:
+      - default: false
+        name: tiling
+        type: boolean
+      outputs: {}
   virtual: true
 TextureCoordTranslation:
   fields: {}

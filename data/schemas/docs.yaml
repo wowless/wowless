@@ -71,10 +71,3 @@ type:
               key: string
               value:
                 record: null
-    uiobjects:
-      type:
-        mapof:
-          key:
-            ref: uiobject
-          value:
-            record: null

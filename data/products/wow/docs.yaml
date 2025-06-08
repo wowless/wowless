@@ -128,8 +128,23 @@ skip_docfiles:
   SimpleModelFFXAPIDocumentation: {}
   WorldSafeLocsUIInternalDocumentation: {}
 skip_uiobject_methods:
+  CheckButton:
+    SetCheckedTexture: {}
+  Cooldown:
+    SetBlingTexture: {}
+    SetEdgeTexture: {}
+    SetSwipeTexture: {}
+  ModelScene:
+    CreateActor: {}
+  ParentedObjectBase:
+    GetParentKey: {}
   StatusBar:
     SetStatusBarTexture: {}
+  TextureBase:
+    GetTexCoord: {}
+    GetTexture: {}
+    SetAtlas: {}
+    SetTexture: {}
 typedefs:
   AnimationDataEnum: number
   ArtifactTiers: number
@@ -209,54 +224,16 @@ uiobject_methods:
     Click: {}
     Disable: {}
     Enable: {}
+    RegisterForMouse: {}
     SetButtonState: {}
     SetDisabledAtlas: {}
     SetNormalAtlas: {}
     SetPushedAtlas: {}
   Frame:
     ClearAlphaGradient: {}
+    RegisterForDrag: {}
     SetAlphaGradient: {}
   Region:
     CanPropagateMouseClicks: {}
     CanPropagateMouseMotion: {}
-uiobjects:
-  Actor: {}
-  Alpha: {}
-  Animation: {}
-  AnimationGroup: {}
-  Browser: {}
-  Checkout: {}
-  CinematicModel: {}
-  ColorSelect: {}
-  ControlPoint: {}
-  DressUpModel: {}
-  EditBox: {}
-  FlipBook: {}
-  FogOfWarFrame: {}
-  Font: {}
-  FontInstance: {}
-  FontString: {}
-  GameTooltip: {}
-  LayeredRegion: {}
-  Line: {}
-  LineScale: {}
-  LineTranslation: {}
-  MaskTexture: {}
-  MessageFrame: {}
-  Minimap: {}
-  Model: {}
-  MovieFrame: {}
-  OffScreenFrame: {}
-  ParentedObject: {}
-  Path: {}
-  PlayerModel: {}
-  RegionBase: {}
-  Rotation: {}
-  Scale: {}
-  ScriptObjectBase: {}
-  ScrollFrame: {}
-  SimpleHTML: {}
-  Slider: {}
-  StatusBar: {}
-  TabardModel: {}
-  UIObject: {}
+    SetPassThroughButtons: {}
