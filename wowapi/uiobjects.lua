@@ -75,6 +75,10 @@ local function mkBaseUIObjectTypes(api)
     return errmsg and error(errmsg) or vv
   end
 
+  local function stubMixin(t, name)
+    return Mixin(t, api.env[name])
+  end
+
   local uiobjects = {}
   for name, cfg in pairs(api.datalua.uiobjects) do
     local lname = name:lower()
@@ -134,7 +138,7 @@ local function mkBaseUIObjectTypes(api)
       end
       local mtext = method.impl or method
       local src = method.src and ('@' .. method.src) or fname
-      local fn = wrap(mname, wrapstrfn(mtext, src, 'api,toTexture,check', api, toTexture, check))
+      local fn = wrap(mname, wrapstrfn(mtext, src, 'api,toTexture,check,Mixin', api, toTexture, check, stubMixin))
       mixin[mname] = checkOutputs(checkInputs(fn))
     end
     uiobjects[name] = {

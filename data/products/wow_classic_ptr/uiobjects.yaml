@@ -3770,7 +3770,6 @@ Model:
         type: number
       outputs: {}
     TransformCameraSpaceToModelSpace:
-      impl: Model/TransformCameraSpaceToModelSpace
       inputs:
       - name: cameraPosition
         type:
