@@ -127,6 +127,24 @@ skip_uiobject_methods:
     CreateActor: {}
   ParentedObjectBase:
     GetParentKey: {}
+  Region:
+    GetBottom: {}
+    GetDrawLayer: {}
+    GetHeight: {}
+    GetLeft: {}
+    GetPoint: {}
+    GetRect: {}
+    GetScript: {}
+    GetSize: {}
+    GetVertexColor: {}
+    GetWidth: {}
+    HasScript: {}
+    HookScript: {}
+    SetAllPoints: {}
+    SetDrawLayer: {}
+    SetPoint: {}
+    SetScript: {}
+    SetVertexColor: {}
   StatusBar:
     SetStatusBarTexture: {}
   TextureBase:
@@ -200,6 +218,4 @@ typedefs:
   UnitToken: unit
   WOWGUID: string
   WOWMONEY: number
-uiobject_methods:
-  Region:
-    SetPassThroughButtons: {}
+uiobject_methods: {}

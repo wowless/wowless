@@ -5196,6 +5196,8 @@ Region:
         type: boolean
     ClearAllPoints:
       impl: Region/ClearAllPoints
+      inputs: {}
+      outputs: {}
     ClearPoint:
       inputs:
       - name: point
@@ -5219,10 +5221,15 @@ Region:
         nilable: true
         type: string
       outputs:
-      - name: animationGroup
+      - name: group
         type: AnimationGroup
     EnableMouse:
       impl: MouseMixin/EnableMouse
+      inputs:
+      - default: false
+        name: enable
+        type: boolean
+      outputs: {}
     EnableMouseMotion:
       inputs:
       - default: false
@@ -5233,6 +5240,11 @@ Region:
       impl:
         setter:
         - name: mouseWheelEnabled
+      inputs:
+      - default: false
+        name: enable
+        type: boolean
+      outputs: {}
     GetAnimationGroups:
       impl: Region/GetAnimationGroups
       inputs: {}
@@ -5246,8 +5258,19 @@ Region:
         - name: bottom
     GetCenter:
       impl: Region/GetCenter
+      inputs: {}
+      mayreturnnothing: true
+      outputs:
+      - name: x
+        type: number
+      - name: y
+        type: number
     GetEffectiveScale:
       impl: Region/GetEffectiveScale
+      inputs: {}
+      outputs:
+      - name: effectiveScale
+        type: number
     GetHeight:
       impl:
         getter:
@@ -5258,6 +5281,10 @@ Region:
         - name: left
     GetNumPoints:
       impl: Region/GetNumPoints
+      inputs: {}
+      outputs:
+      - name: numPoints
+        type: number
     GetPoint:
       impl: Region/GetPoint
       inputs:
@@ -5306,8 +5333,24 @@ Region:
         - name: height
     GetRight:
       impl: Region/GetRight
+      inputs: {}
+      mayreturnnothing: true
+      outputs:
+      - name: right
+        type: number
     GetScaledRect:
       impl: Region/GetScaledRect
+      inputs: {}
+      mayreturnnothing: true
+      outputs:
+      - name: left
+        type: number
+      - name: bottom
+        type: number
+      - name: width
+        type: number
+      - name: height
+        type: number
     GetSize:
       impl:
         getter:
@@ -5320,6 +5363,11 @@ Region:
         type: string
     GetTop:
       impl: Region/GetTop
+      inputs: {}
+      mayreturnnothing: true
+      outputs:
+      - name: top
+        type: number
     GetWidth:
       impl:
         getter:
@@ -5350,20 +5398,40 @@ Region:
       impl:
         getter:
         - name: isIgnoringParentAlpha
+      inputs: {}
+      outputs:
+      - name: isIgnoring
+        type: boolean
     IsIgnoringParentScale:
       impl:
         getter:
         - name: isIgnoringParentScale
+      inputs: {}
+      outputs:
+      - name: isIgnoring
+        type: boolean
     IsMouseClickEnabled:
       impl:
         getter:
         - name: mouseClickEnabled
+      inputs: {}
+      outputs:
+      - name: enabled
+        type: boolean
     IsMouseEnabled:
       impl: MouseMixin/IsMouseEnabled
+      inputs: {}
+      outputs:
+      - name: enabled
+        type: boolean
     IsMouseMotionEnabled:
       impl:
         getter:
         - name: mouseMotionEnabled
+      inputs: {}
+      outputs:
+      - name: enabled
+        type: boolean
     IsMouseMotionFocus:
       inputs: {}
       outputs:
@@ -5390,6 +5458,10 @@ Region:
       impl:
         getter:
         - name: mouseWheelEnabled
+      inputs: {}
+      outputs:
+      - name: enabled
+        type: boolean
     IsObjectLoaded:
       inputs: {}
       outputs:
@@ -5397,6 +5469,12 @@ Region:
         type: boolean
     IsProtected:
       impl: Region/IsProtected
+      inputs: {}
+      outputs:
+      - name: isProtected
+        type: boolean
+      - name: isProtectedExplicitly
+        type: boolean
     IsRectValid:
       inputs: {}
       outputs:
@@ -5413,22 +5491,44 @@ Region:
       impl:
         setter:
         - name: height
+      inputs:
+      - name: height
+        type: number
+      outputs: {}
     SetIgnoreParentAlpha:
       impl:
         setter:
         - name: isIgnoringParentAlpha
+      inputs:
+      - name: ignore
+        type: boolean
+      outputs: {}
     SetIgnoreParentScale:
       impl:
         setter:
         - name: isIgnoringParentScale
+      inputs:
+      - name: ignore
+        type: boolean
+      outputs: {}
     SetMouseClickEnabled:
       impl:
         setter:
         - name: mouseClickEnabled
+      inputs:
+      - default: false
+        name: enabled
+        type: boolean
+      outputs: {}
     SetMouseMotionEnabled:
       impl:
         setter:
         - name: mouseMotionEnabled
+      inputs:
+      - default: false
+        name: enabled
+        type: boolean
+      outputs: {}
     SetPassThroughButtons:
       inputs:
       - name: button
@@ -5452,10 +5552,20 @@ Region:
         setter:
         - name: width
         - name: height
+      inputs:
+      - name: x
+        type: number
+      - name: y
+        type: number
+      outputs: {}
     SetWidth:
       impl:
         setter:
         - name: width
+      inputs:
+      - name: width
+        type: number
+      outputs: {}
     StopAnimating:
       inputs: {}
       outputs: {}
