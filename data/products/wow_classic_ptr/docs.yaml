@@ -100,11 +100,9 @@ skip_docfiles:
   SimpleModelFFXAPIDocumentation: {}
 skip_uiobject_methods:
   Button:
-    GetFontString: {}
     GetNormalFontObject: {}
     GetText: {}
     SetDisabledTexture: {}
-    SetFontString: {}
     SetFormattedText: {}
     SetHighlightTexture: {}
     SetNormalFontObject: {}

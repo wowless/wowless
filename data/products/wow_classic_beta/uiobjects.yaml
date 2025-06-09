@@ -818,6 +818,10 @@ Button:
       impl:
         getter:
         - name: fontstring
+      inputs: {}
+      outputs:
+      - name: fontString
+        type: FontString
     GetHighlightFontObject:
       inputs: {}
       outputs:
