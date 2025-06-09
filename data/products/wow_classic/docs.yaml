@@ -194,7 +194,7 @@ typedefs:
   SimpleAnimGroup: AnimationGroup
   SimpleControlPoint: ControlPoint
   SimpleFont: table
-  SimpleFontString: table
+  SimpleFontString: FontString
   SimpleFrame: Frame
   SimpleLine: Line
   SimpleMaskTexture: table

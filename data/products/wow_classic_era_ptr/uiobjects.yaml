@@ -3571,12 +3571,13 @@ MessageFrame:
       - name: isFading
         type: boolean
     GetFontStringByID:
+      impl: MessageFrame/GetFontStringByID
       inputs:
       - name: messageID
         type: number
       outputs:
       - name: fontString
-        type: table
+        type: FontString
     GetInsertMode:
       inputs: {}
       outputs:
