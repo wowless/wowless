@@ -218,4 +218,3 @@ typedefs:
   UnitToken: unit
   WOWGUID: string
   WOWMONEY: number
-uiobject_methods: {}

@@ -258,4 +258,3 @@ typedefs:
   WeeklyRewardItemDBID: string
   WOWGUID: string
   WOWMONEY: number
-uiobject_methods: {}

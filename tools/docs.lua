@@ -496,9 +496,6 @@ local function rewriteUIObjects()
         if deref(config, 'skip_uiobject_methods', k, mk) then
           return false
         end
-        if deref(config, 'uiobject_methods', k) then
-          return deref(config, 'uiobject_methods', k, mk)
-        end
         return true
       end)()
       if okay then
