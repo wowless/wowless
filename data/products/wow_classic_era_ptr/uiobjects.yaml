@@ -791,6 +791,10 @@ Button:
       impl:
         getter:
         - name: buttonState
+      inputs: {}
+      outputs:
+      - name: buttonState
+        type: SimpleButtonStateToken
     GetDisabledFontObject:
       inputs: {}
       outputs:
@@ -800,6 +804,10 @@ Button:
       impl:
         getter:
         - name: disabledTexture
+      inputs: {}
+      outputs:
+      - name: texture
+        type: Texture
     GetFontString:
       impl:
         getter:
@@ -813,10 +821,18 @@ Button:
       impl:
         getter:
         - name: highlightTexture
+      inputs: {}
+      outputs:
+      - name: texture
+        type: Texture
     GetMotionScriptsWhileDisabled:
       impl:
         getter:
         - name: motionScriptsWhileDisabled
+      inputs: {}
+      outputs:
+      - name: motionScriptsWhileDisabled
+        type: boolean
     GetNormalFontObject:
       impl:
         getter:
@@ -825,15 +841,29 @@ Button:
       impl:
         getter:
         - name: normalTexture
+      inputs: {}
+      outputs:
+      - name: texture
+        type: Texture
     GetPushedTextOffset:
       impl:
         getter:
         - name: pushedTextOffsetX
         - name: pushedTextOffsetY
+      inputs: {}
+      outputs:
+      - name: offsetX
+        type: number
+      - name: offsetY
+        type: number
     GetPushedTexture:
       impl:
         getter:
         - name: pushedTexture
+      inputs: {}
+      outputs:
+      - name: texture
+        type: Texture
     GetText:
       impl: Button/GetText
     GetTextHeight:
@@ -848,6 +878,10 @@ Button:
         type: number
     IsEnabled:
       impl: Button/IsEnabled
+      inputs: {}
+      outputs:
+      - name: isEnabled
+        type: boolean
     RegisterForClicks:
       impl: Button/RegisterForClicks
     RegisterForMouse:
@@ -880,6 +914,11 @@ Button:
       impl: Button/SetDisabledTexture
     SetEnabled:
       impl: Button/SetEnabled
+      inputs:
+      - default: false
+        name: enabled
+        type: boolean
+      outputs: {}
     SetFontString:
       impl: Button/SetFontString
       inputs:
@@ -890,6 +929,13 @@ Button:
       impl: Button/SetFormattedText
     SetHighlightAtlas:
       impl: Button/SetHighlightAtlas
+      inputs:
+      - name: atlas
+        type: string
+      - name: blendMode
+        nilable: true
+        type: BlendMode
+      outputs: {}
     SetHighlightFontObject:
       inputs:
       - name: font
@@ -901,6 +947,10 @@ Button:
       impl:
         setter:
         - name: motionScriptsWhileDisabled
+      inputs:
+      - name: motionScriptsWhileDisabled
+        type: boolean
+      outputs: {}
     SetNormalAtlas:
       impl: Button/SetNormalAtlas
       inputs:
@@ -924,10 +974,21 @@ Button:
         setter:
         - name: pushedTextOffsetX
         - name: pushedTextOffsetY
+      inputs:
+      - name: offsetX
+        type: number
+      - name: offsetY
+        type: number
+      outputs: {}
     SetPushedTexture:
       impl: Button/SetPushedTexture
     SetText:
       impl: Button/SetText
+      inputs:
+      - default: ''
+        name: text
+        type: string
+      outputs: {}
 CheckButton:
   fields:
     checked:

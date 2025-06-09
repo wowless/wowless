@@ -128,6 +128,18 @@ skip_docfiles:
   SimpleModelFFXAPIDocumentation: {}
   WorldSafeLocsUIInternalDocumentation: {}
 skip_uiobject_methods:
+  Button:
+    GetFontString: {}
+    GetNormalFontObject: {}
+    GetText: {}
+    RegisterForClicks: {}
+    SetDisabledTexture: {}
+    SetFontString: {}
+    SetFormattedText: {}
+    SetHighlightTexture: {}
+    SetNormalFontObject: {}
+    SetNormalTexture: {}
+    SetPushedTexture: {}
   CheckButton:
     SetCheckedTexture: {}
   Cooldown:
@@ -220,15 +232,6 @@ typedefs:
   WOWGUID: string
   WOWMONEY: number
 uiobject_methods:
-  Button:
-    Click: {}
-    Disable: {}
-    Enable: {}
-    RegisterForMouse: {}
-    SetButtonState: {}
-    SetDisabledAtlas: {}
-    SetNormalAtlas: {}
-    SetPushedAtlas: {}
   Frame:
     RegisterForDrag: {}
   Region:
