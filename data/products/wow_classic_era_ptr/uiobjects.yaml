@@ -2645,7 +2645,19 @@ Frame:
         type: FontString
     CreateLine:
       impl: Frame/CreateLine
-      inputs: {}
+      inputs:
+      - name: name
+        nilable: true
+        type: string
+      - name: drawLayer
+        nilable: true
+        type: DrawLayer
+      - name: templateName
+        nilable: true
+        type: string
+      - name: subLevel
+        nilable: true
+        type: number
       outputs:
       - name: line
         type: Line
@@ -2673,13 +2685,13 @@ Frame:
       - name: name
         nilable: true
         type: string
-      - name: layer
+      - name: drawLayer
         nilable: true
         type: DrawLayer
-      - name: inheritsFrom
+      - name: templateName
         nilable: true
         type: string
-      - name: subLayer
+      - name: subLevel
         nilable: true
         type: number
       outputs:
@@ -2707,6 +2719,10 @@ Frame:
       impl:
         getter:
         - name: hyperlinkPropagateToParent
+      inputs: {}
+      outputs:
+      - name: canPropagate
+        type: boolean
     EnableDrawLayer:
       inputs:
       - name: layer
@@ -2781,6 +2797,10 @@ Frame:
         type: boolean
     GetEffectiveAlpha:
       impl: Frame/GetEffectiveAlpha
+      inputs: {}
+      outputs:
+      - name: effectiveAlpha
+        type: number
     GetEffectivelyFlattensRenderLayers:
       inputs: {}
       outputs:
@@ -2795,10 +2815,18 @@ Frame:
       impl:
         getter:
         - name: frameLevel
+      inputs: {}
+      outputs:
+      - name: frameLevel
+        type: number
     GetFrameStrata:
       impl:
         getter:
         - name: frameStrata
+      inputs: {}
+      outputs:
+      - name: strata
+        type: FrameStrata
     GetHitRectInsets:
       inputs: {}
       outputs:
@@ -2814,18 +2842,38 @@ Frame:
       impl:
         getter:
         - name: hyperlinksEnabled
+      inputs: {}
+      outputs:
+      - name: enabled
+        type: boolean
     GetID:
       impl:
         getter:
         - name: id
+      inputs: {}
+      outputs:
+      - name: id
+        type: number
     GetNumChildren:
       impl: Frame/GetNumChildren
+      inputs: {}
+      outputs:
+      - name: numChildren
+        type: number
     GetNumRegions:
       impl: Frame/GetNumRegions
+      inputs: {}
+      outputs:
+      - name: numRegions
+        type: number
     GetPropagateKeyboardInput:
       impl:
         getter:
         - name: propagateKeyboardInput
+      inputs: {}
+      outputs:
+      - name: propagate
+        type: boolean
     GetRaisedFrameLevel:
       inputs: {}
       outputs:
@@ -2845,6 +2893,16 @@ Frame:
         - name: minResizeHeight
         - name: maxResizeWidth
         - name: maxResizeHeight
+      inputs: {}
+      outputs:
+      - name: minWidth
+        type: number
+      - name: minHeight
+        type: number
+      - name: maxWidth
+        type: number
+      - name: maxHeight
+        type: number
     GetWindow:
       inputs: {}
       outputs:
@@ -2854,10 +2912,18 @@ Frame:
       impl:
         getter:
         - name: hasFixedFrameLevel
+      inputs: {}
+      outputs:
+      - name: isFixed
+        type: boolean
     HasFixedFrameStrata:
       impl:
         getter:
         - name: hasFixedFrameStrata
+      inputs: {}
+      outputs:
+      - name: isFixed
+        type: boolean
     InterceptStartDrag:
       inputs:
       - name: delegate
@@ -2869,6 +2935,10 @@ Frame:
       impl:
         getter:
         - name: isClampedToScreen
+      inputs: {}
+      outputs:
+      - name: clampedToScreen
+        type: boolean
     IsDrawLayerEnabled:
       inputs:
       - name: layer
@@ -2878,6 +2948,16 @@ Frame:
         type: boolean
     IsEventRegistered:
       impl: Frame/IsEventRegistered
+      inputs:
+      - name: eventName
+        type: string
+      outputs:
+      - name: isRegistered
+        type: boolean
+      - name: units
+        nilable: true
+        type: string
+      outstride: 1
     IsGamePadButtonEnabled:
       inputs: {}
       outputs:
@@ -2897,22 +2977,42 @@ Frame:
       impl:
         getter:
         - name: movable
+      inputs: {}
+      outputs:
+      - name: isMovable
+        type: boolean
     IsResizable:
       impl:
         getter:
         - name: resizable
+      inputs: {}
+      outputs:
+      - name: resizable
+        type: boolean
     IsToplevel:
       impl:
         getter:
         - name: toplevel
+      inputs: {}
+      outputs:
+      - name: isTopLevel
+        type: boolean
     IsUserPlaced:
       impl:
         getter:
         - name: isUserPlaced
+      inputs: {}
+      outputs:
+      - name: isUserPlaced
+        type: boolean
     IsUsingParentLevel:
       impl:
         getter:
         - name: usingParentLevel
+      inputs: {}
+      outputs:
+      - name: usingParentLevel
+        type: boolean
     LockHighlight:
       inputs: {}
       outputs: {}
@@ -2924,6 +3024,8 @@ Frame:
       outputs: {}
     RegisterAllEvents:
       impl: Frame/RegisterAllEvents
+      inputs: {}
+      outputs: {}
     RegisterEvent:
       impl: Frame/RegisterEvent
     RegisterForDrag:
@@ -2953,6 +3055,10 @@ Frame:
       impl:
         setter:
         - name: isClampedToScreen
+      inputs:
+      - name: clampedToScreen
+        type: boolean
+      outputs: {}
     SetClampRectInsets:
       inputs:
       - name: left
@@ -2986,10 +3092,18 @@ Frame:
       impl:
         setter:
         - name: hasFixedFrameLevel
+      inputs:
+      - name: isFixed
+        type: boolean
+      outputs: {}
     SetFixedFrameStrata:
       impl:
         setter:
         - name: hasFixedFrameStrata
+      inputs:
+      - name: isFixed
+        type: boolean
+      outputs: {}
     SetFlattensRenderLayers:
       inputs:
       - name: flatten
@@ -2997,10 +3111,18 @@ Frame:
       outputs: {}
     SetFrameLevel:
       impl: Frame/SetFrameLevel
+      inputs:
+      - name: frameLevel
+        type: number
+      outputs: {}
     SetFrameStrata:
       impl:
         setter:
         - name: frameStrata
+      inputs:
+      - name: strata
+        type: FrameStrata
+      outputs: {}
     SetHighlightLocked:
       inputs:
       - name: locked
@@ -3021,14 +3143,27 @@ Frame:
       impl:
         setter:
         - name: hyperlinkPropagateToParent
+      inputs:
+      - name: canPropagate
+        type: boolean
+      outputs: {}
     SetHyperlinksEnabled:
       impl:
         setter:
         - name: hyperlinksEnabled
+      inputs:
+      - default: false
+        name: enabled
+        type: boolean
+      outputs: {}
     SetID:
       impl:
         setter:
         - name: id
+      inputs:
+      - name: id
+        type: number
+      outputs: {}
     SetIsFrameBuffer:
       inputs:
       - name: isFrameBuffer
@@ -3038,28 +3173,64 @@ Frame:
       impl:
         setter:
         - name: movable
+      inputs:
+      - name: movable
+        type: boolean
+      outputs: {}
     SetPropagateKeyboardInput:
       impl:
         setter:
         - name: propagateKeyboardInput
+      inputs:
+      - name: propagate
+        type: boolean
+      outputs: {}
     SetResizable:
       impl:
         setter:
         - name: resizable
+      inputs:
+      - name: resizable
+        type: boolean
+      outputs: {}
     SetResizeBounds:
       impl: Frame/SetResizeBounds
+      inputs:
+      - name: minWidth
+        type: number
+      - name: minHeight
+        type: number
+      - name: maxWidth
+        nilable: true
+        type: number
+      - name: maxHeight
+        nilable: true
+        type: number
+      outputs: {}
     SetToplevel:
       impl:
         setter:
         - name: toplevel
+      inputs:
+      - name: topLevel
+        type: boolean
+      outputs: {}
     SetUserPlaced:
       impl:
         setter:
         - name: isUserPlaced
+      inputs:
+      - name: userPlaced
+        type: boolean
+      outputs: {}
     SetUsingParentLevel:
       impl:
         setter:
         - name: usingParentLevel
+      inputs:
+      - name: usingParentLevel
+        type: boolean
+      outputs: {}
     SetWindow:
       inputs:
       - name: window
@@ -3089,6 +3260,8 @@ Frame:
       outputs: {}
     UnregisterAllEvents:
       impl: Frame/UnregisterAllEvents
+      inputs: {}
+      outputs: {}
     UnregisterEvent:
       impl: Frame/UnregisterEvent
 GameTooltip:

@@ -146,6 +146,15 @@ skip_uiobject_methods:
     SetBlingTexture: {}
     SetEdgeTexture: {}
     SetSwipeTexture: {}
+  Frame:
+    CreateFontString: {}
+    CreateMaskTexture: {}
+    GetAttribute: {}
+    RegisterEvent: {}
+    RegisterUnitEvent: {}
+    SetAttribute: {}
+    SetAttributeNoHandler: {}
+    UnregisterEvent: {}
   ModelScene:
     CreateActor: {}
   ParentedObjectBase:
@@ -232,7 +241,5 @@ typedefs:
   WOWGUID: string
   WOWMONEY: number
 uiobject_methods:
-  Frame:
-    RegisterForDrag: {}
   Region:
     SetPassThroughButtons: {}
