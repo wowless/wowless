@@ -481,7 +481,6 @@ local function rewriteUIObjects()
     for mk, mv in pairs(v) do
       local mm = u.methods[mk]
       local mmv = {
-        impl = mm and mm.impl,
         inputs = insig(mv),
         instride = stride(mv.Arguments),
         mayreturnnothing = mayreturnnothing(mv, mm),
@@ -504,6 +503,7 @@ local function rewriteUIObjects()
           assert(tableeq(lie, mmv), 'lie mismatch on ' .. k .. '.' .. mk)
           lies[k][mk] = nil
         else
+          mmv.impl = mm and mm.impl
           u.methods[mk] = mmv
         end
       end

@@ -890,6 +890,11 @@ Button:
         type: boolean
     RegisterForClicks:
       impl: Button/RegisterForClicks
+      inputs:
+      - name: button
+        type: string
+      instride: 1
+      outputs: {}
     RegisterForMouse:
       inputs:
       - name: button

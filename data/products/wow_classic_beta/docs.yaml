@@ -11,6 +11,12 @@ lies:
       outputs: {}
   uiobjects:
     Button:
+      RegisterForClicks:
+        inputs:
+        - name: unpackedPrimitiveType
+          type: number
+        instride: 1
+        outputs: {}
       RegisterForMouse:
         inputs:
         - name: unpackedPrimitiveType
@@ -101,7 +107,6 @@ skip_uiobject_methods:
     GetFontString: {}
     GetNormalFontObject: {}
     GetText: {}
-    RegisterForClicks: {}
     SetDisabledTexture: {}
     SetFontString: {}
     SetFormattedText: {}
