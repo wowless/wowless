@@ -847,6 +847,10 @@ Button:
       impl:
         getter:
         - name: normalFontObject
+      inputs: {}
+      outputs:
+      - name: font
+        type: Font
     GetNormalTexture:
       impl:
         getter:
@@ -976,6 +980,10 @@ Button:
       impl:
         setter:
         - name: normalFontObject
+      inputs:
+      - name: font
+        type: Font
+      outputs: {}
     SetNormalTexture:
       impl: Button/SetNormalTexture
     SetPushedAtlas:

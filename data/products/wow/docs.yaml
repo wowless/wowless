@@ -135,12 +135,10 @@ skip_docfiles:
   WorldSafeLocsUIInternalDocumentation: {}
 skip_uiobject_methods:
   Button:
-    GetNormalFontObject: {}
     GetText: {}
     SetDisabledTexture: {}
     SetFormattedText: {}
     SetHighlightTexture: {}
-    SetNormalFontObject: {}
     SetNormalTexture: {}
     SetPushedTexture: {}
   CheckButton:
