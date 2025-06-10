@@ -117,7 +117,6 @@ skip_uiobject_methods:
     SetEdgeTexture: {}
     SetSwipeTexture: {}
   Frame:
-    CreateFontString: {}
     CreateMaskTexture: {}
     GetAttribute: {}
     RegisterEvent: {}

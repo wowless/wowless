@@ -2600,15 +2600,14 @@ Frame:
       - name: name
         nilable: true
         type: string
-      - default: ARTWORK
-        name: drawLayer
+      - name: drawLayer
         nilable: true
         type: DrawLayer
       - name: templateName
         nilable: true
         type: string
       outputs:
-      - name: fontString
+      - name: line
         type: FontString
     CreateLine:
       impl: Frame/CreateLine
