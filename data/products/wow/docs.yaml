@@ -233,7 +233,7 @@ typedefs:
   SimpleAnim: Animation
   SimpleAnimGroup: AnimationGroup
   SimpleControlPoint: ControlPoint
-  SimpleFont: table
+  SimpleFont: Font
   SimpleFontString: FontString
   SimpleFrame: Frame
   SimpleLine: Line

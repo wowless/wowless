@@ -984,7 +984,7 @@ Button:
       inputs: {}
       outputs:
       - name: font
-        type: table
+        type: Font
     GetDisabledTexture:
       impl:
         getter:
@@ -1005,7 +1005,7 @@ Button:
       inputs: {}
       outputs:
       - name: font
-        type: table
+        type: Font
     GetHighlightTexture:
       impl:
         getter:
@@ -1102,7 +1102,7 @@ Button:
     SetDisabledFontObject:
       inputs:
       - name: font
-        type: table
+        type: Font
       outputs: {}
     SetDisabledTexture:
       impl: Button/SetDisabledTexture
@@ -1133,7 +1133,7 @@ Button:
     SetHighlightFontObject:
       inputs:
       - name: font
-        type: table
+        type: Font
       outputs: {}
     SetHighlightTexture:
       impl: Button/SetHighlightTexture
@@ -2490,7 +2490,7 @@ Font:
     CopyFontObject:
       inputs:
       - name: sourceFont
-        type: table
+        type: Font
       outputs: {}
     GetAlpha:
       inputs: {}
@@ -2503,7 +2503,7 @@ Font:
         type: string
       outputs:
       - name: font
-        type: table
+        type: Font
     SetAlpha:
       inputs:
       - name: alpha

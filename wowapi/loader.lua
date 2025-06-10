@@ -70,8 +70,8 @@ local function loadFunctions(api, loader)
   local function mkfn(fname, apicfg, nowrap)
     local basefn
     if apicfg.stub then
-      local text = ('local Mixin = ...; return function() %s end'):format(apicfg.stub)
-      basefn = assert(setfenv(loadstring(text), _G))(stubMixin)
+      local text = ('local api, Mixin = ...; return function() %s end'):format(apicfg.stub)
+      basefn = assert(setfenv(loadstring(text), _G))(api, stubMixin)
     elseif apicfg.impl then
       basefn = impls[apicfg.impl]
     else

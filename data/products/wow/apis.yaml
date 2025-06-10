@@ -26197,7 +26197,7 @@ CreateFontFamily:
         structure: CreateFontFamilyMemberInfo
   outputs:
   - name: fontFamily
-    type: table
+    type: Font
 CreateForbiddenFrame:
   impl: CreateForbiddenFrame
   inputs:
@@ -27430,7 +27430,7 @@ GetFollowerTypeIDFromSpell: {}
 GetFontInfo:
   inputs:
   - name: fontObject
-    type: table
+    type: Font
   outputs:
   - name: info
     nilable: true

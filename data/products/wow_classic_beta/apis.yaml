@@ -15059,7 +15059,7 @@ CreateFontFamily:
         structure: CreateFontFamilyMemberInfo
   outputs:
   - name: fontFamily
-    type: table
+    type: Font
 CreateForbiddenFrame:
   impl: CreateForbiddenFrame
   inputs:

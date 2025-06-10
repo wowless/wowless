@@ -9514,7 +9514,7 @@ FontScriptInfo:
       type:
         structure: colorRGBA
     fontObject:
-      type: table
+      type: Font
     height:
       type: number
     outline:
