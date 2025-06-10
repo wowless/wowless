@@ -3701,7 +3701,6 @@ MessageFrame:
       - name: isFading
         type: boolean
     GetFontStringByID:
-      impl: MessageFrame/GetFontStringByID
       inputs:
       - name: messageID
         type: number

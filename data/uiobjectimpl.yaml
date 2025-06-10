@@ -54,7 +54,6 @@ GameTooltip/IsOwned: {}
 GameTooltip/SetOwner: {}
 LayeredRegion/SetVertexColor: {}
 MessageFrame/AddMessage: {}
-MessageFrame/GetFontStringByID: {}
 ModelScene/CreateActor: {}
 MouseMixin/EnableMouse: {}
 MouseMixin/IsMouseEnabled: {}

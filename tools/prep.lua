@@ -42,6 +42,7 @@ local specDefault = (function()
   local defaultOutputs = {
     boolean = 'false',
     Font = 'api.CreateUIObject("font").luarep',
+    FontString = 'api.CreateUIObject("fontstring").luarep',
     ['function'] = 'function() end',
     ['nil'] = 'nil',
     number = '1',
