@@ -44,6 +44,7 @@ local specDefault = (function()
     Font = 'api.CreateUIObject("font").luarep',
     FontString = 'api.CreateUIObject("fontstring").luarep',
     ['function'] = 'function() end',
+    MaskTexture = 'api.CreateUIObject("masktexture").luarep',
     ['nil'] = 'nil',
     number = '1',
     oneornil = 'nil',

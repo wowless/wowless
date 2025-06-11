@@ -2706,17 +2706,17 @@ Frame:
       - name: name
         nilable: true
         type: string
-      - name: layer
+      - name: drawLayer
         nilable: true
         type: DrawLayer
-      - name: inheritsFrom
+      - name: templateName
         nilable: true
         type: string
-      - name: subLayer
+      - name: subLevel
         nilable: true
         type: number
       outputs:
-      - name: mask
+      - name: maskTexture
         type: MaskTexture
     CreateTexture:
       impl: Frame/CreateTexture
@@ -6092,7 +6092,7 @@ Texture:
     AddMaskTexture:
       inputs:
       - name: mask
-        type: table
+        type: MaskTexture
       outputs: {}
     GetMaskTexture:
       inputs:
@@ -6100,7 +6100,7 @@ Texture:
         type: number
       outputs:
       - name: mask
-        type: table
+        type: MaskTexture
     GetNumMaskTextures:
       inputs: {}
       outputs:
@@ -6109,7 +6109,7 @@ Texture:
     RemoveMaskTexture:
       inputs:
       - name: mask
-        type: table
+        type: MaskTexture
       outputs: {}
 TextureBase:
   fields:

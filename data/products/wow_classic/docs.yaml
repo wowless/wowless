@@ -113,7 +113,6 @@ skip_uiobject_methods:
     SetEdgeTexture: {}
     SetSwipeTexture: {}
   Frame:
-    CreateMaskTexture: {}
     GetAttribute: {}
     RegisterEvent: {}
     RegisterUnitEvent: {}
@@ -192,7 +191,7 @@ typedefs:
   SimpleFontString: FontString
   SimpleFrame: Frame
   SimpleLine: Line
-  SimpleMaskTexture: table
+  SimpleMaskTexture: MaskTexture
   SimplePathAnim: Path
   SimpleTexture: Texture
   SimpleWindow: nil
