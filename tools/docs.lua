@@ -146,11 +146,11 @@ local function t2nty(field, ns)
     return { arrayof = t2nty({ Type = field.InnerType }, ns) }
   elseif t == 'table' and field.Mixin then
     error('no struct for mixin ' .. field.Mixin)
+  elseif stringenums[t] then
+    return t
   elseif typedefs[t] then
     used_typedefs[t] = true
     return typedefs[t]
-  elseif stringenums[t] then
-    return t
   end
   local n = ns and tys[ns .. '.' .. t] and (ns .. '.' .. t) or t
   n = structRewrites[n] or n

@@ -166,7 +166,6 @@ typedefs:
   FilterMode: string
   HTMLTextType: string
   IDOrLink: string
-  InsertMode: InsertMode
   ItemInfo: string
   kstringClubMessage: string
   kstringLfgListApplicant: string
