@@ -64,6 +64,21 @@ lies:
           type: number
         instride: 1
         outputs: {}
+    TextureBase:
+      SetAtlas:
+        inputs:
+        - name: atlas
+          type: string
+        - default: false
+          name: useAtlasSize
+          type: boolean
+        - name: filterMode
+          nilable: true
+          type: FilterMode
+        - name: resetTexCoords
+          nilable: true
+          type: boolean
+        outputs: {}
 mayreturnnothing: true
 script_objects:
   FrameAPIArchaeologyDigSiteFrame: ArchaeologyDigSiteFrame
@@ -181,7 +196,6 @@ skip_uiobject_methods:
   TextureBase:
     GetTexCoord: {}
     GetTexture: {}
-    SetAtlas: {}
     SetTexture: {}
 typedefs:
   AnimationDataEnum: number
@@ -199,7 +213,6 @@ typedefs:
   cstring: string
   FileAsset: string
   fileID: number
-  FilterMode: string
   FontAlphabet: string
   GarrisonFollower: string
   HTMLTextType: string
