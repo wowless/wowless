@@ -125,6 +125,15 @@ local function new(log, maxErrors, product)
     return postSandbox(xpcall(fun, ErrorHandler, ...))
   end
 
+  local function GetParentKey(ud)
+    for k, v in pairs(ud.parent.luarep) do
+      if ud.luarep == v then
+        return k
+      end
+    end
+    return nil
+  end
+
   local function GetDebugName(frame)
     local name = frame.name
     if name ~= nil then
@@ -133,16 +142,8 @@ local function new(log, maxErrors, product)
     name = ''
     local parent = frame.parent
     while parent do
-      local found = false
-      for k, v in pairs(parent) do
-        if v == frame then
-          name = k .. (name == '' and '' or ('.' .. name))
-          found = true
-        end
-      end
-      if not found then
-        name = string.match(tostring(frame), '^table: 0x0*(.*)$'):lower() .. (name == '' and '' or ('.' .. name))
-      end
+      local key = GetParentKey(frame) or string.match(tostring(frame), '^table: 0x0*(.*)$'):lower()
+      name = key .. (name == '' and '' or ('.' .. name))
       local parentName = parent.name
       if parentName == 'UIParent' then
         break
@@ -256,6 +257,7 @@ local function new(log, maxErrors, product)
     if id then
       ud:SetID(id)
     end
+    log(3, 'running load scripts on %s named %s', objtype.name, GetDebugName(ud))
     RunScript(ud, 'OnLoad')
     if InheritsFrom(typename, 'region') and ud:IsVisible() then
       RunScript(ud, 'OnShow')
@@ -322,6 +324,7 @@ local function new(log, maxErrors, product)
     frames = frames,
     GetDebugName = GetDebugName,
     GetErrorCount = GetErrorCount,
+    GetParentKey = GetParentKey,
     InheritsFrom = InheritsFrom,
     IsIntrinsicType = IsIntrinsicType,
     log = log,
