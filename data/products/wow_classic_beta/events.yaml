@@ -6411,6 +6411,10 @@ UI_SCALE_CHANGED:
   payload: {}
 UNIQUE_QUEST_CHOICE_UPDATE:
   payload: {}
+UNIT_ABSORB_AMOUNT_CHANGED:
+  payload:
+  - name: unitTarget
+    type: unit
 UNIT_ATTACK:
   payload:
   - name: unitTarget
@@ -6525,6 +6529,10 @@ UNIT_FORM_CHANGED:
   - name: unitTarget
     type: unit
 UNIT_HAPPINESS:
+  payload:
+  - name: unitTarget
+    type: unit
+UNIT_HEAL_ABSORB_AMOUNT_CHANGED:
   payload:
   - name: unitTarget
     type: unit

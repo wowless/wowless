@@ -5989,6 +5989,15 @@ Enum:
     MaxValue: 4
     MinValue: 0
     NumValues: 5
+  TradeskillRelativeDifficulty:
+    Easy: 2
+    Medium: 1
+    Optimal: 0
+    Trivial: 3
+  TradeskillRelativeDifficultyMeta:
+    MaxValue: 3
+    MinValue: 0
+    NumValues: 4
   TraitCombatConfigFlags:
     ActiveForSpec: 1
     SharedActionBars: 4

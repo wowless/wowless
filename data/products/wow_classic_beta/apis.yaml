@@ -6387,6 +6387,24 @@ C_Glue.IsOnGlueScreen:
   outputs:
   - name: isOnGlueScreen
     type: boolean
+C_GlyphInfo.GetGlyphInfoByID:
+  inputs:
+  - name: glyphID
+    type: number
+  mayreturnnothing: true
+  outputs:
+  - name: name
+    type: string
+  - name: glyphType
+    type: number
+  - name: isKnown
+    type: boolean
+  - name: icon
+    type: number
+  - name: spellID
+    type: number
+  - name: link
+    type: string
 C_GossipInfo.CloseGossip:
   inputs: {}
   outputs: {}
@@ -9305,13 +9323,6 @@ C_PaperDollInfo.GetArmorEffectivenessAgainstTarget:
   - name: effectiveness
     nilable: true
     type: number
-C_PaperDollInfo.GetGlyphLinkByID:
-  inputs:
-  - name: glyphID
-    type: number
-  outputs:
-  - name: link
-    type: string
 C_PaperDollInfo.GetInspectGuildInfo:
   inputs:
   - name: unitString
@@ -22312,6 +22323,20 @@ UnitGetIncomingHeals:
     type: string
   outputs:
   - type: number
+UnitGetTotalAbsorbs:
+  inputs:
+  - name: unit
+    type: unit
+  outputs:
+  - name: result
+    type: number
+UnitGetTotalHealAbsorbs:
+  inputs:
+  - name: unit
+    type: unit
+  outputs:
+  - name: result
+    type: number
 UnitGroupRolesAssigned:
   inputs:
   - name: unit
