@@ -134,6 +134,7 @@ local addonFiles = {
   'addon/Wowless/framework.lua',
   'addon/Wowless/generated.lua',
   'addon/Wowless/init.lua',
+  'addon/Wowless/statemachine.lua',
   'addon/Wowless/test.lua',
   'addon/Wowless/test.xml',
   'addon/Wowless/uiobjects.lua',
