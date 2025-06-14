@@ -64,6 +64,41 @@ describe('statemachine', function()
         },
       },
     },
+    transitivity = {
+      init = '0',
+      success = false, -- issue #417
+      state = {
+        value = 0,
+      },
+      states = {
+        ['0'] = function(s)
+          assert.same(0, s.value)
+        end,
+        ['1'] = function(s)
+          assert.same(1, s.value)
+        end,
+        ['2'] = function(s)
+          assert.same(2, s.value)
+        end,
+      },
+      transitions = {
+        increment = {
+          edges = {
+            ['0'] = '1',
+            ['1'] = '2',
+          },
+          func = function(s)
+            s.value = s.value + 1
+          end,
+        },
+        reset = {
+          to = '0',
+          func = function(s)
+            s.value = 0
+          end,
+        },
+      },
+    },
   }
   local checkStateMachine
   do
