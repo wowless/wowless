@@ -1,6 +1,6 @@
 local _, G = ...
 
-local function checkStateMachine(states, transitions, init)
+local function checkStateMachine(states, transitions, init, arg)
   local edges = {}
   for s in pairs(states) do
     edges[s] = {}
@@ -36,13 +36,13 @@ local function checkStateMachine(states, transitions, init)
     return n and s:sub(n + 1) or s
   end
   local function checkState(s, n)
-    local success, msg = pcall(states[s])
+    local success, msg = pcall(states[s], arg)
     if not success then
       error(('%s state: %s'):format(n, trimerr(msg)))
     end
   end
   local function checkTransition(t, n)
-    local success, msg = pcall(transitions[t].func)
+    local success, msg = pcall(transitions[t].func, arg)
     if not success then
       error(('%s transition: %s'):format(n, trimerr(msg)))
     end

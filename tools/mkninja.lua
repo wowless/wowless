@@ -295,6 +295,7 @@ end
 table.insert(builds, {
   ins = {
     'spec/addon/framework_spec.lua',
+    'spec/addon/statemachine_spec.lua',
     'spec/addon/util_spec.lua',
     'spec/data/apis_spec.lua',
     'spec/data/config_spec.lua',
