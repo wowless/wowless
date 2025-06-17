@@ -2095,10 +2095,11 @@ Enum:
     NumValues: 5
   CooldownSetSpellFlags:
     HideAura: 1
+    PlaceHolder1: 2
   CooldownSetSpellFlagsMeta:
-    MaxValue: 1
+    MaxValue: 2
     MinValue: 1
-    NumValues: 1
+    NumValues: 2
   CooldownViewerCategory:
     Essential: 0
     TrackedBar: 3
