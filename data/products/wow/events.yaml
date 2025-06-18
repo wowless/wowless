@@ -268,6 +268,8 @@ ARTIFACT_UPDATE:
     type: boolean
 ARTIFACT_XP_UPDATE:
   payload: {}
+ASSISTED_COMBAT_ACTION_SPELL_CAST:
+  payload: {}
 AUCTION_CANCELED:
   payload:
   - name: auctionID
@@ -3971,6 +3973,8 @@ CURRENCY_TRANSFER_FAILED:
   - name: failureReason
     type:
       enum: AccountCurrencyTransferResult
+CURRENCY_TRANSFER_INITIATED:
+  payload: {}
 CURRENCY_TRANSFER_LOG_UPDATE:
   payload: {}
 CURRENT_SPELL_CAST_CHANGED:
@@ -6453,8 +6457,9 @@ REPLICATE_ITEM_LIST_UPDATE:
   payload: {}
 REPORT_PLAYER_RESULT:
   payload:
-  - name: success
-    type: boolean
+  - name: result
+    type:
+      enum: SendReportResult
   - name: reportType
     type:
       enum: ReportType

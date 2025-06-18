@@ -3050,6 +3050,14 @@ Frame:
       outputs:
       - name: strata
         type: FrameStrata
+    GetHighestFrameLevel:
+      inputs:
+      - default: false
+        name: iterateAllChildren
+        type: boolean
+      outputs:
+      - name: frameLevel
+        type: number
     GetHitRectInsets:
       inputs: {}
       outputs:

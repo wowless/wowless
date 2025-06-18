@@ -58,6 +58,7 @@ Constants:
     WAR_RESOURCES_CURRENCY_ID: 1560
   DelvesConsts:
     DELVES_COMPANION_INFO_SELECTION_CHARACTER_DATA_ELEMENT_ID: 13
+    DELVES_COMPANION_TOOLTIP_WIDGET_SET_ID: 1331
     DELVES_MIN_PLAYER_LEVEL_CONTENT_TUNING_ID: 2677
     DELVES_NORMAL_KEY_CURRENCY_ID: 3028
   EditModeConsts:
@@ -187,6 +188,7 @@ Enum:
   AccountCurrencyTransferResult:
     CannotUseCurrency: 8
     CharacterLoggedIn: 2
+    CurrencyTransferDisabled: 10
     InsufficientCurrency: 3
     InvalidCharacter: 1
     InvalidCurrency: 5
@@ -196,9 +198,9 @@ Enum:
     Success: 0
     TransactionInProgress: 9
   AccountCurrencyTransferResultMeta:
-    MaxValue: 9
+    MaxValue: 10
     MinValue: 0
-    NumValues: 10
+    NumValues: 11
   AccountData:
     Bindings: 2
     Bindings2: 3
@@ -1650,11 +1652,12 @@ Enum:
     MinValue: 0
     NumValues: 5
   CharacterServiceInfoFlag:
+    AllowMaxLevelBoost: 2
     RestrictToRecommendedSpecs: 1
   CharacterServiceInfoFlagMeta:
-    MaxValue: 1
+    MaxValue: 2
     MinValue: 1
-    NumValues: 1
+    NumValues: 2
   CharCustomizationType:
     CustomOptionFacewear: 7
     CustomOptionHorn: 6
@@ -3369,6 +3372,7 @@ Enum:
     AllPlayersAreFastMovers: 53
     AlwaysAllowAlliedRaces: 59
     BagsUIDisabled: 64
+    BlockWhileSheathedAllowed: 88
     CharacterCreateUseFixedBackgroundModel: 55
     CharacterlessLogin: 14
     CharacterPanelDisabled: 37
@@ -3407,6 +3411,7 @@ Enum:
     InstanceDifficultyBannerDisabled: 83
     LandingPageFactionID: 35
     MacrosDisabled: 80
+    MailGameRule: 132
     MapPlunderstormCircle: 48
     MaxAccountCharReservationsPerContentset: 4
     MaxCharReservationsPerRealm: 3
@@ -3465,9 +3470,9 @@ Enum:
     MinValue: 0
     NumValues: 3
   GameRuleMeta:
-    MaxValue: 108
+    MaxValue: 132
     MinValue: 1
-    NumValues: 93
+    NumValues: 95
   GameRuleType:
     Bool: 2
     Float: 1
@@ -6008,6 +6013,13 @@ Enum:
     MaxValue: 1
     MinValue: 0
     NumValues: 2
+  PvPMatchmakingType:
+    Arena: 1
+    Battleground: 0
+  PvPMatchmakingTypeMeta:
+    MaxValue: 1
+    MinValue: 0
+    NumValues: 2
   PvPMatchState:
     Complete: 5
     Engaged: 3
@@ -6343,6 +6355,7 @@ Enum:
     Botting: 128
     BTag: 512
     CharacterName: 2048
+    ChildSexualExploitationAndAbuse: 262144
     Description: 8192
     Disruption: 65536
     GroupName: 1024
@@ -6352,11 +6365,12 @@ Enum:
     IntentionallyFeeding: 16
     Name: 16384
     Spam: 4
+    TerroristAndViolentExtremistContent: 131072
     TextChat: 1
   ReportMinorCategoryMeta:
-    MaxValue: 65536
+    MaxValue: 262144
     MinValue: 1
-    NumValues: 17
+    NumValues: 19
   ReportSubComplaintTypes:
     Advertising: 1
     Inappropriate: 0
@@ -6509,6 +6523,16 @@ Enum:
     MaxValue: 10
     MinValue: 0
     NumValues: 11
+  SendReportResult:
+    GeneralError: 1
+    RequiresChatLine: 3
+    RequiresChatLineOrVoice: 4
+    Success: 0
+    TooManyReports: 2
+  SendReportResultMeta:
+    MaxValue: 4
+    MinValue: 0
+    NumValues: 5
   SharedStringFlag:
     InternalOnly: 1
   SharedStringFlagMeta:
@@ -7575,6 +7599,23 @@ Enum:
     MaxValue: 1
     MinValue: 0
     NumValues: 2
+  UIWidgetButtonEnabledState:
+    Disabled: 0
+    Enabled: 1
+  UIWidgetButtonEnabledStateMeta:
+    MaxValue: 1
+    MinValue: 0
+    NumValues: 2
+  UIWidgetButtonIconType:
+    Checkmark: 3
+    Exit: 0
+    RedX: 4
+    Speak: 1
+    Undo: 2
+  UIWidgetButtonIconTypeMeta:
+    MaxValue: 4
+    MinValue: 0
+    NumValues: 5
   UIWidgetFlag:
     UniversalWidget: 1
   UIWidgetFlagMeta:
@@ -7665,6 +7706,14 @@ Enum:
     MaxValue: 2
     MinValue: 0
     NumValues: 3
+  UIWidgetSpellButtonCooldownType:
+    HideCooldown: 0
+    ShowCooldown: 1
+    ShowCooldownAndDisableOnCooldown: 2
+  UIWidgetSpellButtonCooldownTypeMeta:
+    MaxValue: 2
+    MinValue: 0
+    NumValues: 3
   UIWidgetTextFormatType:
     LeadingZeroesWithSixDigits: 3
     None: 0
@@ -7723,6 +7772,7 @@ Enum:
     NumValues: 3
   UIWidgetVisualizationType:
     BulletTextList: 10
+    ButtonHeader: 30
     CaptureBar: 1
     CaptureZone: 17
     DiscreteProgressSteps: 19
@@ -7753,9 +7803,9 @@ Enum:
     UnitPowerBar: 23
     ZoneControl: 16
   UIWidgetVisualizationTypeMeta:
-    MaxValue: 29
+    MaxValue: 30
     MinValue: 0
-    NumValues: 30
+    NumValues: 31
   UnitMirrorPetFlags:
     Dismissable: 2
     ExtraPet: 16
@@ -8348,6 +8398,8 @@ LE_EXPANSION_WRATH_OF_THE_LICH_KING: 2
 LE_FRAME_TUTORIAL_9_0_GRRISON_LANDING_PAGE_BUTTON_CALLINGS: 88
 LE_FRAME_TUTORIAL_9_0_GRRISON_LANDING_PAGE_CALLINGS: 89
 LE_FRAME_TUTORIAL_9_0_JAILERS_TOWER_BUFFS: 90
+LE_FRAME_TUTORIAL_ACCOUNT_ASSISTED_COMBAT_ROTATION_ACTION_BUTTON: 23
+LE_FRAME_TUTORIAL_ACCOUNT_ASSISTED_COMBAT_ROTATION_DRAG_SPELL: 22
 LE_FRAME_TUTORIAL_ACCOUNT_COMPLETED_QUESTS_FILTER: 13
 LE_FRAME_TUTORIAL_ACCOUNT_COMPLETED_QUESTS_FILTER_SEEN: 14
 LE_FRAME_TUTORIAL_ACCOUNT_CONCENTRATION_CURRENCY: 15
@@ -8376,6 +8428,7 @@ LE_FRAME_TUTORIAL_ARTIFACT_APPEARANCE_TAB: 30
 LE_FRAME_TUTORIAL_ARTIFACT_KNOWLEDGE: 41
 LE_FRAME_TUTORIAL_ARTIFACT_KNOWLEDGE_LEVEL_LIMIT: 27
 LE_FRAME_TUTORIAL_ARTIFACT_RELIC_MATCH: 31
+LE_FRAME_TUTORIAL_ASSISTED_HIGHLIGHT_ENABLED_POPUP: 161
 LE_FRAME_TUTORIAL_AZERITE_FIRST_POWER_LOCKED_IN: 64
 LE_FRAME_TUTORIAL_AZERITE_ITEM_IN_BAG: 62
 LE_FRAME_TUTORIAL_AZERITE_ITEM_IN_SLOT: 63
@@ -8737,6 +8790,7 @@ LE_GAME_ERR_CROSS_REALM_RAID_INVITE: 92
 LE_GAME_ERR_CURRENCY_NOT_TRADABLE: 880
 LE_GAME_ERR_CURRENCY_SPELL_SLOT_MISMATCH: 879
 LE_GAME_ERR_CURRENCY_TRANSFER_CHARACTER_LOGGED_IN: 1190
+LE_GAME_ERR_CURRENCY_TRANSFER_DISABLED: 1194
 LE_GAME_ERR_CURRENCY_TRANSFER_INSUFFICIENT_CURRENCY: 1187
 LE_GAME_ERR_CURRENCY_TRANSFER_INVALID_CHARACTER: 1185
 LE_GAME_ERR_CURRENCY_TRANSFER_INVALID_CURRENCY: 1186
@@ -9795,6 +9849,7 @@ LE_TOKEN_RESULT_ERROR_DISABLED: 2
 LE_TOKEN_RESULT_ERROR_NONE_FOR_SALE: 4
 LE_TOKEN_RESULT_ERROR_NOT_ENOUGH_PURCHASED_GAME_TIME: 11
 LE_TOKEN_RESULT_ERROR_OTHER: 3
+LE_TOKEN_RESULT_ERROR_THROTTLE_TOKENS: 12
 LE_TOKEN_RESULT_ERROR_TOO_MANY_TOKENS: 5
 LE_TOKEN_RESULT_ERROR_TRANSACTION_IN_PROGRESS: 7
 LE_TOKEN_RESULT_ERROR_TRIAL_RESTRICTED: 9
@@ -9833,8 +9888,8 @@ NUM_LE_CHARACTER_UNDELETE_RESULTS: 7
 NUM_LE_CHARACTER_UPGRADE_RESULTS: 13
 NUM_LE_CINEMATIC_PAN_TYPES: 6
 NUM_LE_EXPANSION_LEVELS: 10
-NUM_LE_FRAME_TUTORIAL_ACCCOUNTS: 21
-NUM_LE_FRAME_TUTORIALS: 160
+NUM_LE_FRAME_TUTORIAL_ACCCOUNTS: 23
+NUM_LE_FRAME_TUTORIALS: 161
 NUM_LE_GM_WEB_TICKET_STATUSS: 4
 NUM_LE_INVITE_REQUEST_TYPES: 3
 NUM_LE_LFG_CATEGORYS: 7
@@ -9851,7 +9906,7 @@ NUM_LE_SPELL_CONFIRMATION_PROMPT_TYPES: 5
 NUM_LE_SUMMON_REASONS: 2
 NUM_LE_TOKEN_CHOICES: 2
 NUM_LE_TOKEN_REDEEM_TYPES: 2
-NUM_LE_TOKEN_RESULTS: 11
+NUM_LE_TOKEN_RESULTS: 12
 NUM_LE_TRACKER_SORTINGS: 4
 NUM_LE_TRANSMOG_SET_FILTERS: 4
 NUM_LE_UNIT_STATS: 4
