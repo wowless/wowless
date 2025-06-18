@@ -2,7 +2,7 @@ describe('statemachine', function()
   local tests = {
     empty = {
       init = '',
-      success = true,
+      success = false,
       states = {},
       transitions = {},
     },

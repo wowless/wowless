@@ -47,6 +47,7 @@ G.testsuite.sync = function()
           func = function()
             assertEquals(false, pcall(b.SetButtonState, b, 'bad'))
           end,
+          loop = true,
         },
         setEnabledFalse = {
           to = 'disabled',

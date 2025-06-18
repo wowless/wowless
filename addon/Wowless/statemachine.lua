@@ -1,6 +1,40 @@
 local _, G = ...
 
+local tkeys = {
+  edges = 'table',
+  func = 'function',
+  loop = 'boolean',
+  to = 'string',
+}
+
 local function checkStateMachine(states, transitions, init, arg)
+  assert(type(states) == 'table', 'states must be a table')
+  for k, v in pairs(states) do
+    assert(type(k) == 'string', 'invalid key in states')
+    assert(type(v) == 'function', 'invalid value in states')
+  end
+  assert(states[init], 'init must name a state')
+  for k, v in pairs(transitions) do
+    assert(type(k) == 'string', 'invalid key in transitions')
+    assert(type(v) == 'table', 'invalid value in transitions')
+    local nk = 0
+    for vk, vv in pairs(v) do
+      assert(type(vv) == tkeys[vk], ('transition %q has invalid key %q'):format(k, vk))
+      nk = nk + 1
+    end
+    assert(v.func, ('transition %q missing func'):format(k))
+    assert(nk == 2, ('transition %q has too many keys'):format(k))
+    if v.edges then
+      for ek, ev in pairs(v.edges) do
+        assert(states[ek], ('transition %q edge from %q is not a state'):format(k, ek))
+        assert(states[ev], ('transition %q edge to %q is not a state'):format(k, ev))
+      end
+    elseif v.loop ~= nil then
+      assert(v.loop == true, ('transition %q has a weird loop spec'):format(k))
+    elseif v.to then
+      assert(states[v.to], ('transition %q to is not a state'):format(k))
+    end
+  end
   local edges = {}
   for s in pairs(states) do
     edges[s] = {}
@@ -13,9 +47,13 @@ local function checkStateMachine(states, transitions, init, arg)
       for from, to in pairs(v.edges) do
         edges[from][to][k] = true
       end
-    else
+    elseif v.loop then
       for s in pairs(states) do
-        edges[s][v.to or s][k] = true
+        edges[s][s][k] = true
+      end
+    elseif v.to then
+      for s in pairs(states) do
+        edges[s][v.to][k] = true
       end
     end
   end
