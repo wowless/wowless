@@ -8,6 +8,13 @@ lies:
     C_BattleNet.InstallHighResTextures:
       inputs: {}
       outputs: {}
+    C_Item.GetItemClassInfo:
+      inputs:
+      - name: itemClassID
+        type: number
+      outputs:
+      - name: result
+        type: string
   uiobjects:
     Button:
       RegisterForClicks:

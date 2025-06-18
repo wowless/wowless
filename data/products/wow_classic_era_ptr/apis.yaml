@@ -6471,11 +6471,13 @@ C_Item.GetItemChildInfo:
     type:
       arrayof: number
 C_Item.GetItemClassInfo:
+  impl: C_Item.GetItemClassInfo
   inputs:
   - name: itemClassID
     type: number
   outputs:
   - name: result
+    nilable: true
     type: string
 C_Item.GetItemCount:
   inputs:
@@ -6790,6 +6792,7 @@ C_Item.GetItemSpell:
   - name: spellID
     type: number
 C_Item.GetItemSubClassInfo:
+  impl: C_Item.GetItemSubClassInfo
   inputs:
   - name: itemClassID
     type: number
@@ -6798,7 +6801,6 @@ C_Item.GetItemSubClassInfo:
   mayreturnnothing: true
   outputs:
   - name: subClassName
-    stub: someNonEmptyString
     type: string
   - name: subClassUsesInvType
     type: boolean
@@ -14118,7 +14120,15 @@ GetAuctionItemLink:
   - name: itemLink
     stub: '|cffffffff|Hitem:2592:::::::::::::::::|h[Wool Cloth]|h|r'
     type: string
-GetAuctionItemSubClasses: {}
+GetAuctionItemSubClasses:
+  impl: GetAuctionItemSubClasses
+  inputs:
+  - name: classID
+    type: number
+  outputs:
+  - name: subClasses
+    type: number
+  outstride: 1
 GetAuctionItemTimeLeft:
   inputs:
   - name: type

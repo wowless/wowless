@@ -25,6 +25,9 @@ bit.mod:
   stdlib: bit.mod
 bit.rshift:
   stdlib: bit.rshift
+C_AuctionHouse.GetAuctionItemSubClasses:
+  sqls:
+  - C_AuctionHouse.GetAuctionItemSubClasses
 C_Calendar.GetMonthInfo:
   module: calendar
 C_Calendar.SetAbsMonth:
@@ -81,6 +84,12 @@ C_EventUtils.IsEventValid:
 C_Item.DoesItemExistByID:
   sqls:
   - C_Item.DoesItemExistByID
+C_Item.GetItemClassInfo:
+  sqls:
+  - C_Item.GetItemClassInfo
+C_Item.GetItemSubClassInfo:
+  sqls:
+  - C_Item.GetItemSubClassInfo
 C_ItemInteraction.GetItemInteractionInfo:
   sqls:
   - C_ItemInteraction.GetItemInteractionInfo
@@ -206,6 +215,9 @@ gcinfo:
 GetAddOnEnableState: {}
 GetAddOnInfo: {}
 GetAddOnMetadata: {}
+GetAuctionItemSubClasses:
+  sqls:
+  - C_AuctionHouse.GetAuctionItemSubClasses
 GetBuildInfo_10_1:
   frameworks:
   - datalua

@@ -1629,6 +1629,7 @@ C_AuctionHouse.GetAuctionInfoByID:
     type:
       structure: C_AuctionHouse.AuctionInfo
 C_AuctionHouse.GetAuctionItemSubClasses:
+  impl: C_AuctionHouse.GetAuctionItemSubClasses
   inputs:
   - name: classID
     type: number
@@ -11047,11 +11048,13 @@ C_Item.GetItemChildInfo:
     type:
       arrayof: number
 C_Item.GetItemClassInfo:
+  impl: C_Item.GetItemClassInfo
   inputs:
   - name: itemClassID
     type: number
   outputs:
   - name: result
+    nilable: true
     type: string
 C_Item.GetItemConversionOutputIcon:
   inputs:
@@ -11438,6 +11441,7 @@ C_Item.GetItemStats:
   - name: statTable
     type: table
 C_Item.GetItemSubClassInfo:
+  impl: C_Item.GetItemSubClassInfo
   inputs:
   - name: itemClassID
     type: number
@@ -11446,7 +11450,6 @@ C_Item.GetItemSubClassInfo:
   mayreturnnothing: true
   outputs:
   - name: subClassName
-    stub: someNonEmptyString
     type: string
   - name: subClassUsesInvType
     type: boolean

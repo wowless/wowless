@@ -1,4 +1,8 @@
 ---
+C_AuctionHouse.GetAuctionItemSubClasses:
+  indexes:
+    ItemSubClass: ClassID
+  type: cursor
 C_ClassTalents.GetTraitTreeForSpec:
   type: lookup
 C_Covenants.GetCovenantData:
@@ -15,6 +19,14 @@ C_CreatureInfo.GetClassInfo:
   table: true
   type: lookup
 C_Item.DoesItemExistByID:
+  type: lookup
+C_Item.GetItemClassInfo:
+  indexes:
+    ItemClass: ClassID
+  type: lookup
+C_Item.GetItemSubClassInfo:
+  indexes:
+    ItemSubClass: ClassID, SubClassID
   type: lookup
 C_ItemInteraction.GetItemInteractionInfo:
   table: true
