@@ -101,39 +101,72 @@ Frame/UnregisterAllEvents:
   closure: true
 Frame/UnregisterEvent:
   closure: true
-GameTooltip/IsOwned: {}
-GameTooltip/SetOwner: {}
-LayeredRegion/SetVertexColor: {}
-MessageFrame/AddMessage: {}
-ModelScene/CreateActor: {}
-MouseMixin/EnableMouse: {}
-MouseMixin/IsMouseEnabled: {}
-ParentedObject/GetDebugName: {}
-ParentedObject/SetParent: {}
-ParentedObjectBase/ClearParentKey: {}
-ParentedObjectBase/GetParentKey: {}
-ParentedObjectBase/SetParentKey: {}
-Path/CreateControlPoint: {}
-Path/GetControlPoints: {}
-Region/ClearAllPoints: {}
-Region/CreateAnimationGroup: {}
-Region/GetAnimationGroups: {}
-Region/GetCenter: {}
-Region/GetEffectiveScale: {}
-Region/GetNumPoints: {}
-Region/GetPoint: {}
-Region/GetRight: {}
-Region/GetScaledRect: {}
-Region/GetTop: {}
-Region/Hide: {}
-Region/IsProtected: {}
-Region/IsVisible: {}
-Region/SetAllPoints: {}
-Region/SetAlpha: {}
-Region/SetPoint: {}
-Region/SetScale: {}
-Region/SetShown: {}
-Region/Show: {}
+GameTooltip/IsOwned:
+  closure: true
+GameTooltip/SetOwner:
+  closure: true
+LayeredRegion/SetVertexColor:
+  closure: true
+MessageFrame/AddMessage:
+  closure: true
+ModelScene/CreateActor:
+  closure: true
+MouseMixin/EnableMouse:
+  closure: true
+MouseMixin/IsMouseEnabled:
+  closure: true
+ParentedObject/GetDebugName:
+  closure: true
+ParentedObject/SetParent:
+  closure: true
+ParentedObjectBase/ClearParentKey:
+  closure: true
+ParentedObjectBase/GetParentKey:
+  closure: true
+ParentedObjectBase/SetParentKey:
+  closure: true
+Path/CreateControlPoint:
+  closure: true
+Path/GetControlPoints:
+  closure: true
+Region/ClearAllPoints:
+  closure: true
+Region/CreateAnimationGroup:
+  closure: true
+Region/GetAnimationGroups:
+  closure: true
+Region/GetCenter:
+  closure: true
+Region/GetEffectiveScale:
+  closure: true
+Region/GetNumPoints:
+  closure: true
+Region/GetPoint:
+  closure: true
+Region/GetRight:
+  closure: true
+Region/GetScaledRect:
+  closure: true
+Region/GetTop:
+  closure: true
+Region/Hide:
+  closure: true
+Region/IsProtected:
+  closure: true
+Region/IsVisible:
+  closure: true
+Region/SetAllPoints:
+  closure: true
+Region/SetAlpha:
+  closure: true
+Region/SetPoint:
+  closure: true
+Region/SetScale:
+  closure: true
+Region/SetShown:
+  closure: true
+Region/Show:
+  closure: true
 ScriptObject/GetScript: {}
 ScriptObject/HookScript: {}
 ScriptObject/SetScript: {}

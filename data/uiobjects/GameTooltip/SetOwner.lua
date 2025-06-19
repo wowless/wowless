@@ -11,7 +11,7 @@ local anchorTypes = {
   ANCHOR_TOPLEFT = true,
   ANCHOR_TOPRIGHT = true,
 }
-return (function(self, owner, anchorType)
+return function(self, owner, anchorType)
   self.tooltipOwner = owner
   self.tooltipAnchorType = anchorTypes[anchorType] and anchorType or 'ANCHOR_LEFT'
-end)(...)
+end

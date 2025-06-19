@@ -1,3 +1,4 @@
+local api = ...
 local validPoints = {
   BOTTOM = true,
   BOTTOMLEFT = true,
@@ -9,7 +10,7 @@ local validPoints = {
   TOPLEFT = true,
   TOPRIGHT = true,
 }
-return (function(self, point, ...)
+return function(self, point, ...)
   -- TODO handle resetting points
   point = point and point:upper() or 'CENTER'
   assert(validPoints[point])
@@ -51,4 +52,4 @@ return (function(self, point, ...)
     end
     table.insert(self.points, newPoint)
   end
-end)(...)
+end

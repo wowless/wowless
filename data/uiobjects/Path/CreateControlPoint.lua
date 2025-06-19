@@ -1,2 +1,4 @@
-local self, name = ...
-return api.CreateUIObject('controlpoint', name, self)
+local api = ...
+return function(self, name)
+  return api.CreateUIObject('controlpoint', name, self)
+end

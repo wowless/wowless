@@ -1,2 +1,4 @@
-local self = ...
-return api.GetParentKey(self)
+local api = ...
+return function(self)
+  return api.GetParentKey(self)
+end
