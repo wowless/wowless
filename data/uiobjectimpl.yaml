@@ -167,19 +167,35 @@ Region/SetShown:
   closure: true
 Region/Show:
   closure: true
-ScriptObject/GetScript: {}
-ScriptObject/HookScript: {}
-ScriptObject/SetScript: {}
-ScrollFrame/SetScrollChild: {}
-Slider/Disable: {}
-Slider/Enable: {}
-StatusBar/GetStatusBarColor: {}
-StatusBar/SetStatusBarColor: {}
-StatusBar/SetStatusBarTexture: {}
-Texture/GetTexture: {}
-Texture/SetAtlas: {}
-Texture/SetColorTexture: {}
-Texture/SetTexCoord: {}
-Texture/SetTexture: {}
-UIObject/GetObjectType: {}
-UIObject/IsObjectType: {}
+ScriptObject/GetScript:
+  closure: true
+ScriptObject/HookScript:
+  closure: true
+ScriptObject/SetScript:
+  closure: true
+ScrollFrame/SetScrollChild:
+  closure: true
+Slider/Disable:
+  closure: true
+Slider/Enable:
+  closure: true
+StatusBar/GetStatusBarColor:
+  closure: true
+StatusBar/SetStatusBarColor:
+  closure: true
+StatusBar/SetStatusBarTexture:
+  closure: true
+Texture/GetTexture:
+  closure: true
+Texture/SetAtlas:
+  closure: true
+Texture/SetColorTexture:
+  closure: true
+Texture/SetTexCoord:
+  closure: true
+Texture/SetTexture:
+  closure: true
+UIObject/GetObjectType:
+  closure: true
+UIObject/IsObjectType:
+  closure: true
