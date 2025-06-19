@@ -4,4 +4,6 @@ type:
   mapof:
     key: string
     value:
-      record: null
+      record:
+        closure:
+          type: boolean

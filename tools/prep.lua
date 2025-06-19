@@ -242,10 +242,12 @@ for k, v in pairs(uiobjectdata) do
   local methods = {}
   for mk, mv in pairs(v.methods) do
     if type(mv.impl) == 'string' then
-      assert(uiobjectimpl[mv.impl])
+      local implspec = assert(uiobjectimpl[mv.impl])
       local src = 'data/uiobjects/' .. mv.impl .. '.lua'
+      local text = readFile(src)
       methods[mk] = {
-        impl = 'return function(...) ' .. readFile(src) .. ' end',
+        closure = implspec.closure,
+        impl = implspec.closure and text or 'return function(...) ' .. text .. ' end',
         inputs = mv.inputs,
         mayreturnnils = mv.mayreturnnils,
         mayreturnnothing = mv.mayreturnnothing,

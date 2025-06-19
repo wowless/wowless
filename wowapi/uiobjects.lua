@@ -138,8 +138,13 @@ local function mkBaseUIObjectTypes(api)
       end
       local mtext = method.impl or method
       local src = method.src and ('@' .. method.src) or fname
-      local fn = wrap(mname, wrapstrfn(mtext, src, 'api,toTexture,check,Mixin', api, toTexture, check, stubMixin))
-      mixin[mname] = checkOutputs(checkInputs(fn))
+      local fn
+      if method.closure then
+        fn = assert(loadstring(mtext, src))(api)
+      else
+        fn = wrapstrfn(mtext, src, 'api,toTexture,check,Mixin', api, toTexture, check, stubMixin)
+      end
+      mixin[mname] = checkOutputs(checkInputs(wrap(mname, fn)))
     end
     uiobjects[name] = {
       cfg = cfg,

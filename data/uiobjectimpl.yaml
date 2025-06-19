@@ -3,7 +3,8 @@ Animation/GetRegionParent: {}
 Animation/GetTarget: {}
 AnimationGroup/CreateAnimation: {}
 AnimationGroup/GetAnimations: {}
-Button/Click: {}
+Button/Click:
+  closure: true
 Button/Disable: {}
 Button/Enable: {}
 Button/GetText: {}
