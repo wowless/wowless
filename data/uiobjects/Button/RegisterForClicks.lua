@@ -16,7 +16,7 @@ local validValues = (function()
   end
   return v
 end)()
-return (function(self, ...)
+return function(self, ...)
   table.wipe(self.registeredClicks)
   for i = 1, select('#', ...) do
     local clickType = select(i, ...)
@@ -25,4 +25,4 @@ return (function(self, ...)
     assert(validValues[ltype], 'invalid click registration type ' .. clickType)
     self.registeredClicks[ltype] = true
   end
-end)(...)
+end

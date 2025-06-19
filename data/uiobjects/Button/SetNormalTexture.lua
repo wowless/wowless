@@ -1,4 +1,5 @@
-return (function(self, tex)
+local api, toTexture = ...
+return function(self, tex)
   local t = toTexture(self, tex, self.normalTexture)
   if t then
     api.SetParent(t, self)
@@ -8,4 +9,4 @@ return (function(self, tex)
     t:SetShown(self.buttonState == 'NORMAL')
   end
   self.normalTexture = t
-end)(...)
+end

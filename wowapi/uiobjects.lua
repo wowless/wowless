@@ -140,7 +140,7 @@ local function mkBaseUIObjectTypes(api)
       local src = method.src and ('@' .. method.src) or fname
       local fn
       if method.closure then
-        fn = assert(loadstring(mtext, src))(api)
+        fn = assert(loadstring(mtext, src))(api, toTexture)
       else
         fn = wrapstrfn(mtext, src, 'api,toTexture,check,Mixin', api, toTexture, check, stubMixin)
       end

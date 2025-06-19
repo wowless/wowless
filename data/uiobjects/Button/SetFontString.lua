@@ -1,4 +1,5 @@
-return (function(self, value)
+local api = ...
+return function(self, value)
   api.SetParent(value, self)
   self.fontstring = value
-end)(...)
+end

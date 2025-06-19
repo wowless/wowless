@@ -1,28 +1,50 @@
 ---
-Animation/GetRegionParent: {}
-Animation/GetTarget: {}
-AnimationGroup/CreateAnimation: {}
-AnimationGroup/GetAnimations: {}
+Animation/GetRegionParent:
+  closure: true
+Animation/GetTarget:
+  closure: true
+AnimationGroup/CreateAnimation:
+  closure: true
+AnimationGroup/GetAnimations:
+  closure: true
 Button/Click:
   closure: true
-Button/Disable: {}
-Button/Enable: {}
-Button/GetText: {}
-Button/IsEnabled: {}
-Button/RegisterForClicks: {}
-Button/SetButtonState: {}
-Button/SetDisabledAtlas: {}
-Button/SetDisabledTexture: {}
-Button/SetEnabled: {}
-Button/SetFontString: {}
-Button/SetFormattedText: {}
-Button/SetHighlightAtlas: {}
-Button/SetHighlightTexture: {}
-Button/SetNormalAtlas: {}
-Button/SetNormalTexture: {}
-Button/SetPushedAtlas: {}
-Button/SetPushedTexture: {}
-Button/SetText: {}
+Button/Disable:
+  closure: true
+Button/Enable:
+  closure: true
+Button/GetText:
+  closure: true
+Button/IsEnabled:
+  closure: true
+Button/RegisterForClicks:
+  closure: true
+Button/SetButtonState:
+  closure: true
+Button/SetDisabledAtlas:
+  closure: true
+Button/SetDisabledTexture:
+  closure: true
+Button/SetEnabled:
+  closure: true
+Button/SetFontString:
+  closure: true
+Button/SetFormattedText:
+  closure: true
+Button/SetHighlightAtlas:
+  closure: true
+Button/SetHighlightTexture:
+  closure: true
+Button/SetNormalAtlas:
+  closure: true
+Button/SetNormalTexture:
+  closure: true
+Button/SetPushedAtlas:
+  closure: true
+Button/SetPushedTexture:
+  closure: true
+Button/SetText:
+  closure: true
 CheckButton/SetChecked: {}
 CheckButton/SetCheckedTexture: {}
 EditBox/Disable: {}
