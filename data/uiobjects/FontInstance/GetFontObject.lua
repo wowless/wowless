@@ -1,2 +1,3 @@
-local self = ...
-return self
+return function(self)
+  return self
+end

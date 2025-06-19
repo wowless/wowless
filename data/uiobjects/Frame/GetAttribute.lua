@@ -1,4 +1,4 @@
-return (function(self, arg1, arg2, arg3)
+return function(self, arg1, arg2, arg3)
   local attrs = self.attributes
   if arg3 then
     local keys = {
@@ -17,4 +17,4 @@ return (function(self, arg1, arg2, arg3)
   else
     return attrs[arg1]
   end
-end)(...)
+end

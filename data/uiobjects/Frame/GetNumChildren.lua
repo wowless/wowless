@@ -1,4 +1,4 @@
-return (function(self)
+return function(self)
   local n = 0
   for kid in self.children:entries() do
     if kid:IsObjectType('frame') then
@@ -6,4 +6,4 @@ return (function(self)
     end
   end
   return n
-end)(...)
+end

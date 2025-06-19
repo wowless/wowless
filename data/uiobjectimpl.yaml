@@ -45,34 +45,62 @@ Button/SetPushedTexture:
   closure: true
 Button/SetText:
   closure: true
-CheckButton/SetChecked: {}
-CheckButton/SetCheckedTexture: {}
-EditBox/Disable: {}
-EditBox/Enable: {}
-EditBox/Insert: {}
-FontInstance/GetFontObject: {}
-FontString/SetText: {}
-ForbiddenMixin/SetForbidden: {}
-Frame/CreateFontString: {}
-Frame/CreateLine: {}
-Frame/CreateMaskTexture: {}
-Frame/CreateTexture: {}
-Frame/GetAttribute: {}
-Frame/GetChildren: {}
-Frame/GetEffectiveAlpha: {}
-Frame/GetNumChildren: {}
-Frame/GetNumRegions: {}
-Frame/GetRegions: {}
-Frame/IsEventRegistered: {}
-Frame/RegisterAllEvents: {}
-Frame/RegisterEvent: {}
-Frame/RegisterUnitEvent: {}
-Frame/SetAttribute: {}
-Frame/SetAttributeNoHandler: {}
-Frame/SetFrameLevel: {}
-Frame/SetResizeBounds: {}
-Frame/UnregisterAllEvents: {}
-Frame/UnregisterEvent: {}
+CheckButton/SetChecked:
+  closure: true
+CheckButton/SetCheckedTexture:
+  closure: true
+EditBox/Disable:
+  closure: true
+EditBox/Enable:
+  closure: true
+EditBox/Insert:
+  closure: true
+FontInstance/GetFontObject:
+  closure: true
+FontString/SetText:
+  closure: true
+ForbiddenMixin/SetForbidden:
+  closure: true
+Frame/CreateFontString:
+  closure: true
+Frame/CreateLine:
+  closure: true
+Frame/CreateMaskTexture:
+  closure: true
+Frame/CreateTexture:
+  closure: true
+Frame/GetAttribute:
+  closure: true
+Frame/GetChildren:
+  closure: true
+Frame/GetEffectiveAlpha:
+  closure: true
+Frame/GetNumChildren:
+  closure: true
+Frame/GetNumRegions:
+  closure: true
+Frame/GetRegions:
+  closure: true
+Frame/IsEventRegistered:
+  closure: true
+Frame/RegisterAllEvents:
+  closure: true
+Frame/RegisterEvent:
+  closure: true
+Frame/RegisterUnitEvent:
+  closure: true
+Frame/SetAttribute:
+  closure: true
+Frame/SetAttributeNoHandler:
+  closure: true
+Frame/SetFrameLevel:
+  closure: true
+Frame/SetResizeBounds:
+  closure: true
+Frame/UnregisterAllEvents:
+  closure: true
+Frame/UnregisterEvent:
+  closure: true
 GameTooltip/IsOwned: {}
 GameTooltip/SetOwner: {}
 LayeredRegion/SetVertexColor: {}

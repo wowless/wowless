@@ -1,4 +1,4 @@
-return (function(self)
+return function(self)
   local ret = {}
   for kid in self.children:entries() do
     if kid:IsObjectType('layeredregion') then
@@ -6,4 +6,4 @@ return (function(self)
     end
   end
   return unpack(ret)
-end)(...)
+end
