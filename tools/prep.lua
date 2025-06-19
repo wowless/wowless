@@ -242,12 +242,10 @@ for k, v in pairs(uiobjectdata) do
   local methods = {}
   for mk, mv in pairs(v.methods) do
     if type(mv.impl) == 'string' then
-      local implspec = assert(uiobjectimpl[mv.impl])
+      assert(uiobjectimpl[mv.impl])
       local src = 'data/uiobjects/' .. mv.impl .. '.lua'
-      local text = readFile(src)
       methods[mk] = {
-        closure = implspec.closure,
-        impl = implspec.closure and text or 'return function(...) ' .. text .. ' end',
+        impl = readFile(src),
         inputs = mv.inputs,
         mayreturnnils = mv.mayreturnnils,
         mayreturnnothing = mv.mayreturnnothing,
@@ -266,7 +264,7 @@ for k, v in pairs(uiobjectdata) do
       end
       methods[mk] = 'return function(self) return ' .. table.concat(t, ',') .. ' end'
     elseif mv.impl and mv.impl.setter then
-      local t = {}
+      local t = { 'local api,toTexture,check,Mixin=...;' }
       for i, f in ipairs(mv.impl.setter) do
         local cf = fieldset[f.name]
         if cf.type ~= 'Texture' then
@@ -303,7 +301,7 @@ for k, v in pairs(uiobjectdata) do
       table.insert(t, 'end')
       methods[mk] = table.concat(t)
     else
-      local t = {}
+      local t = { 'local api,toTexture,check,Mixin=...;' }
       local ins = mv.inputs or {}
       local nsins = #ins - (mv.instride or 0)
       for i = 1, #ins do
