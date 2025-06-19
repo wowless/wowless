@@ -60,13 +60,6 @@ local function mkBaseUIObjectTypes(api)
     return t
   end
 
-  local function wrapstrfn(s, fname, args, ...)
-    local wrapstr = ('local %s=...;%s'):format(args, s)
-    local wrapfn = assert(loadstring(wrapstr, fname))
-    setfenv(wrapfn, _G)
-    return wrapfn(...)
-  end
-
   local typechecker = require('wowless.typecheck')(api)
   local funchecker = require('wowless.funcheck')(typechecker)
 
@@ -90,7 +83,7 @@ local function mkBaseUIObjectTypes(api)
         return fn(self, ...)
       end
     end
-    local constructor = wrapstrfn(cfg.constructor, name, 'hlist', hlist)
+    local constructor = assert(loadstring(cfg.constructor, name))(hlist)
     if cfg.singleton then
       local orig = constructor
       local called = false

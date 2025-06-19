@@ -32,7 +32,7 @@ local function valstr(value)
   elseif ty == 'string' then
     return string.format('%q', value)
   elseif ty == 'table' then
-    return plprettywrite(value)
+    return plprettywrite(value, '')
   else
     error('unsupported stub value type ' .. ty)
   end
@@ -233,11 +233,11 @@ local function mkuiobjectfieldset(k)
 end
 local uiobjects = {}
 for k, v in pairs(uiobjectdata) do
-  local constructor = { 'return function() return {' }
+  local constructor = { 'local hlist=...;return function()return{' }
   for fk, fv in require('pl.tablex').sort(mkuiobjectinit(k)) do
-    table.insert(constructor, ('  %s = %s,'):format(fk, fv))
+    table.insert(constructor, ('%s=%s,'):format(fk, fv))
   end
-  table.insert(constructor, '} end')
+  table.insert(constructor, '}end')
   local fieldset = mkuiobjectfieldset(k)
   local methods = {}
   for mk, mv in pairs(v.methods) do
@@ -348,7 +348,7 @@ for k, v in pairs(uiobjectdata) do
     end
   end
   uiobjects[k] = {
-    constructor = table.concat(constructor, '\n'),
+    constructor = table.concat(constructor),
     inherits = v.inherits,
     methods = methods,
     objectType = v.objectType,
