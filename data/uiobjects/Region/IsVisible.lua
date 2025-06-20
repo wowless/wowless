@@ -1,4 +1,9 @@
 return function(self)
-  local p = self.parent
-  return self.shown and (not p or p:IsVisible())
+  repeat
+    if not self.shown then
+      return false
+    end
+    self = self.parent
+  until not self
+  return true
 end
