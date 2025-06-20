@@ -127,8 +127,6 @@ do
         apicfg.impl = nil
         apicfg.stdlib = ic.stdlib
       end
-      apicfg.frameworks = ic.module and { 'api' } or ic.frameworks
-      apicfg.sqls = ic.sqls
       for _, v in ipairs(ic.sqls or {}) do
         if not sqls[v] then
           local sql = sqlcfg[v]
@@ -142,9 +140,16 @@ do
       if not impls[apicfg.impl] then
         if ic.module then
           local fmt = 'return (...).modules[%q][%q]'
-          impls[apicfg.impl] = fmt:format(ic.module, ic['function'] or apicfg.impl)
+          impls[apicfg.impl] = {
+            frameworks = { 'api' },
+            src = fmt:format(ic.module, ic['function'] or apicfg.impl),
+          }
         elseif not ic.stdlib then
-          impls[apicfg.impl] = readFile('data/impl/' .. apicfg.impl .. '.lua')
+          impls[apicfg.impl] = {
+            frameworks = ic.frameworks,
+            sqls = ic.sqls,
+            src = readFile('data/impl/' .. apicfg.impl .. '.lua'),
+          }
         end
       end
     elseif apicfg.stubnothing then

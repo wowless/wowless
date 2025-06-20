@@ -46,10 +46,6 @@ local function loadFunctions(api, loader)
   local datalua = api.datalua
   local apis = datalua.apis
   local sqls = loadSqls(loader.sqlitedb, datalua.sqls)
-  local impls = {}
-  for k, v in pairs(datalua.impls) do
-    impls[k] = setfenv(assert(loadstring(v, '@./data/impl/' .. k .. '.lua'), k), _G)
-  end
 
   local frameworks = {
     api = api, -- TODO replace api framework with something finer grained
@@ -58,6 +54,18 @@ local function loadFunctions(api, loader)
     events = api.events,
     loader = loader,
   }
+
+  local impls = {}
+  for k, v in pairs(datalua.impls) do
+    local specials = {}
+    for _, fw in ipairs(v.frameworks or {}) do
+      table.insert(specials, (assert(frameworks[fw], 'unknown framework ' .. fw)))
+    end
+    for _, sql in ipairs(v.sqls or {}) do
+      table.insert(specials, sqls[sql])
+    end
+    impls[k] = setfenv(assert(loadstring(v.src, '@./data/impl/' .. k .. '.lua'), k), _G)(unpack(specials))
+  end
 
   local bubblewrap = require('wowless.bubblewrap')
   local typechecker = require('wowless.typecheck')(api)
@@ -78,19 +86,10 @@ local function loadFunctions(api, loader)
       error(('invalid function %q'):format(fname))
     end
 
-    local specials = {}
-    for _, fw in ipairs(apicfg.frameworks or {}) do
-      table.insert(specials, (assert(frameworks[fw], 'unknown framework ' .. fw)))
-    end
-    for _, sql in ipairs(apicfg.sqls or {}) do
-      table.insert(specials, sqls[sql])
-    end
-    local specialfn = apicfg.stub and basefn or basefn(unpack(specials))
-
     local edepth = 2
     local infn
     if not apicfg.inputs then
-      infn = specialfn
+      infn = basefn
     else
       local sig = apicfg.inputs
       local nsig = #apicfg.inputs
@@ -113,7 +112,7 @@ local function loadFunctions(api, loader)
           local d = debug.getinfo(edepth)
           api.log(1, 'warning: too many arguments passed to %s at %s:%d', fname, d.source:sub(2), d.currentline)
         end
-        return specialfn(unpack(args, 1, nsig))
+        return basefn(unpack(args, 1, nsig))
       end
     end
 
