@@ -1,3 +1,1 @@
-return function(...)
-  return strtrim(...)
-end
+return strtrim

@@ -1,3 +1,1 @@
-return function(...)
-  return strsplit(...)
-end
+return strsplit
