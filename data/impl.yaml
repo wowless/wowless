@@ -177,11 +177,13 @@ C_XMLUtil.GetTemplateInfo_10_2:
   frameworks:
   - api
 ClassicExpansionAtLeast:
+  closure: true
   frameworks:
   - datalua
 collectgarbage:
   stdlib: collectgarbage
 ConsoleGetAllCommands:
+  closure: true
   frameworks:
   - datalua
 coroutine.create:
@@ -199,15 +201,19 @@ coroutine.yield:
 cos:
   stdlib: cos
 CreateFont:
+  closure: true
   frameworks:
   - api
 CreateForbiddenFrame:
+  closure: true
   frameworks:
   - api
 CreateFrame:
+  closure: true
   frameworks:
   - api
-CreateWindow: {}
+CreateWindow:
+  closure: true
 date:
   stdlib: date
 debuglocals:
@@ -227,6 +233,7 @@ DoEmote:
   sqls:
   - DoEmote
 EnumerateFrames:
+  closure: true
   frameworks:
   - api
 error:
@@ -234,41 +241,55 @@ error:
 fastrandom:
   stdlib: fastrandom
 FillLocalizedClassList:
+  closure: true
   sqls:
   - FillLocalizedClassList
 forceinsecure:
   stdlib: forceinsecure
 gcinfo:
   stdlib: gcinfo
-GetAddOnEnableState: {}
-GetAddOnInfo: {}
-GetAddOnMetadata: {}
+GetAddOnEnableState:
+  closure: true
+GetAddOnInfo:
+  closure: true
+GetAddOnMetadata:
+  closure: true
 GetAuctionItemSubClasses:
+  closure: true
   sqls:
   - C_AuctionHouse.GetAuctionItemSubClasses
 GetBuildInfo_10_1:
+  closure: true
   frameworks:
   - datalua
 GetBuildInfo_1_15_0:
+  closure: true
   frameworks:
   - datalua
 GetBuildInfo_3_4_2:
+  closure: true
   frameworks:
   - datalua
 GetButtonMetatable:
+  closure: true
   frameworks:
   - api
-GetChatWindowInfo: {}
+GetChatWindowInfo:
+  closure: true
 GetChatWindowMessages:
+  closure: true
   frameworks:
   - env
 GetClassInfo:
+  closure: true
   sqls:
   - GetClassInfo
 GetClassInfo_Classic:
+  closure: true
   sqls:
   - GetClassInfo_Classic
 GetClickFrame:
+  closure: true
   frameworks:
   - api
 GetCurrentEnvironment:
@@ -278,9 +299,11 @@ geterrorhandler:
 getfenv:
   module: env
 GetFontStringMetatable:
+  closure: true
   frameworks:
   - api
 GetFrameMetatable:
+  closure: true
   frameworks:
   - api
 GetFramesRegisteredForEvent:
@@ -289,28 +312,35 @@ GetFramesRegisteredForEvent:
 GetGlobalEnvironment:
   module: env
 GetInventorySlotInfo:
+  closure: true
   sqls:
   - GetInventorySlotInfo
-GetItemQualityColor: {}
+GetItemQualityColor:
+  closure: true
 GetLootSpecialization:
   module: units
 getmetatable:
   stdlib: getmetatable
 GetNumAddOns:
+  closure: true
   frameworks:
   - api
 GetNumClasses:
+  closure: true
   sqls:
   - GetNumClasses
 GetNumSpecializationsForClassID:
+  closure: true
   sqls:
   - GetNumSpecializationsForClassID
 GetNumTalents:
+  closure: true
   frameworks:
   - api
   sqls:
   - GetNumTalents
 GetNumTalentTabs:
+  closure: true
   frameworks:
   - api
   sqls:
@@ -320,39 +350,47 @@ GetScreenHeight:
 GetScreenWidth:
   module: system
 GetSpecializationInfo:
+  closure: true
   frameworks:
   - api
   sqls:
   - GetSpecializationInfo
 GetSpecializationInfoByID:
+  closure: true
   sqls:
   - GetSpecializationInfoByID
 GetSpecializationInfoForClassID:
+  closure: true
   frameworks:
   - api
   sqls:
   - GetSpecializationInfoForClassID
 GetSpecializationInfoForSpecID:
+  closure: true
   frameworks:
   - api
   sqls:
   - GetSpecializationInfoForSpecID
 GetTalentInfo_Vanilla:
+  closure: true
   frameworks:
   - api
   sqls:
   - GetTalentInfo_Vanilla
 GetTalentPrereqs_Vanilla:
+  closure: true
   frameworks:
   - api
   sqls:
   - GetTalentPrereqs
 GetTalentPrereqs_Wrath:
+  closure: true
   frameworks:
   - api
   sqls:
   - GetTalentPrereqs
 GetTalentTabInfo:
+  closure: true
   frameworks:
   - api
   sqls:

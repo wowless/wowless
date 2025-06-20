@@ -1,2 +1,4 @@
 local sql = ...
-return sql()
+return function()
+  return sql()
+end

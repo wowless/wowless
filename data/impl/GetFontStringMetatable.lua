@@ -1,2 +1,4 @@
 local api = ...
-return api.uiobjectTypes.fontstring.sandboxMT
+return function()
+  return api.uiobjectTypes.fontstring.sandboxMT
+end

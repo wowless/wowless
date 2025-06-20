@@ -48,7 +48,7 @@ local function loadFunctions(api, loader)
   local sqls = loadSqls(loader.sqlitedb, datalua.sqls)
   local impls = {}
   for k, v in pairs(datalua.impls) do
-    impls[k] = setfenv(loadstring(v, '@./data/impl/' .. k .. '.lua'), _G)
+    impls[k] = setfenv(assert(loadstring(v, '@./data/impl/' .. k .. '.lua'), k), _G)
   end
 
   local frameworks = {

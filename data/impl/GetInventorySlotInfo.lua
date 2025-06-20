@@ -1,2 +1,4 @@
-local sql, slotName = ...
-return sql(slotName)
+local sql = ...
+return function(slotName)
+  return sql(slotName)
+end
