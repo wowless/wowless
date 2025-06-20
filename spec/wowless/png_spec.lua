@@ -8,7 +8,7 @@ describe('png', function()
     end
     assert.same(
       require('pl.file').read('spec/wowless/green.png'),
-      require('wowless.png').write(256, 256, table.concat(t, ''))
+      require('wowless.png').write(256, 256, table.concat(t))
     )
   end)
 end)

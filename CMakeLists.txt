@@ -426,7 +426,8 @@ function(yaml2lua basename)
     DEPENDS yaml2lua ${input})
 endfunction()
 
-yaml2lua(flavors)
+yaml2lua(families)
+yaml2lua(gametypes)
 yaml2lua(products)
 yaml2lua(stringenums)
 
@@ -532,6 +533,7 @@ list(
   wowt
   wowxptr
   wow_classic
+  wow_classic_beta
   wow_classic_era
   wow_classic_era_ptr
   wow_classic_ptr)
@@ -575,15 +577,12 @@ add_lua_executable(
   vstruct)
 
 find_package(CURL REQUIRED)
-add_library(libcurl ALIAS CURL::libcurl)
-
 find_package(OpenSSL REQUIRED)
-add_library(libcrypto ALIAS OpenSSL::Crypto)
 
 add_library(tactless STATIC vendor/tactless/tactless.c
                             vendor/tactless/tactless.h)
 target_include_directories(tactless PUBLIC vendor/tactless)
-target_link_libraries(tactless PRIVATE libcrypto libcurl zlib)
+target_link_libraries(tactless PRIVATE OpenSSL::Crypto CURL::libcurl zlib)
 
 lua2c(toolstactless tactless=c)
 target_sources(toolstactless PRIVATE tools/tactless.c)
@@ -599,7 +598,7 @@ add_lua_executable(
   luafilesystem
   luapath
   penlight
-  runtimeflavors
+  runtimegametypes
   runtimelistfile
   toolsdb2
   toolstactless
@@ -950,7 +949,7 @@ add_lua_executable(
 add_lua_executable(gentest ${CMAKE_CURRENT_SOURCE_DIR}/tools/gentest.lua
                    argparse luafilesystem penlight toolsutil)
 
-lua2c(runtimeflavors runtime.flavors=runtime/flavors.lua)
+lua2c(runtimegametypes runtime.gametypes=runtime/gametypes.lua)
 lua2c(runtimeproducts runtime.products=runtime/products.lua)
 
 add_lua_executable(
@@ -966,6 +965,7 @@ add_lua_executable(
   wowlessyaml)
 
 yaml2lua(impl)
+yaml2lua(sql)
 yaml2lua(test)
 yaml2lua(uiobjectimpl)
 
@@ -1001,13 +1001,15 @@ list(
   docs
   doctable
   events
-  flavors
+  families
   function
+  gametypes
   globals
   impl
   products
   schema
   schematype
+  sql
   stringenums
   structures
   test
@@ -1023,9 +1025,11 @@ endforeach()
 
 lua2c(
   wowapischema
-  build.data.flavors=runtime/flavors.lua
+  build.data.families=runtime/families.lua
+  build.data.gametypes=runtime/gametypes.lua
   build.data.impl=runtime/impl.lua
   build.data.products=runtime/products.lua
+  build.data.sql=runtime/sql.lua
   build.data.stringenums=runtime/stringenums.lua
   build.data.test=runtime/test.lua
   build.data.uiobjectimpl=runtime/uiobjectimpl.lua
@@ -1086,6 +1090,7 @@ lua2c(
   wowapi.loader=${CMAKE_CURRENT_SOURCE_DIR}/wowapi/loader.lua
   wowapi.uiobjects=${CMAKE_CURRENT_SOURCE_DIR}/wowapi/uiobjects.lua
   wowless.api=${CMAKE_CURRENT_SOURCE_DIR}/wowless/api.lua
+  wowless.bubblewrap=c
   wowless.env=${CMAKE_CURRENT_SOURCE_DIR}/wowless/env.lua
   wowless.ext=c
   wowless.funcheck=${CMAKE_CURRENT_SOURCE_DIR}/wowless/funcheck.lua
@@ -1105,7 +1110,7 @@ lua2c(
   wowless.runner=${CMAKE_CURRENT_SOURCE_DIR}/wowless/runner.lua
   wowless.typecheck=${CMAKE_CURRENT_SOURCE_DIR}/wowless/typecheck.lua
   wowless.xml=${CMAKE_CURRENT_SOURCE_DIR}/wowless/xml.lua)
-target_sources(wowlesslib PRIVATE wowless/ext.c)
+target_sources(wowlesslib PRIVATE wowless/bubblewrap.c wowless/ext.c)
 
 add_lua_executable(
   wowless
@@ -1121,7 +1126,7 @@ add_lua_executable(
   lzlib
   minheap
   penlight
-  runtimeflavors
+  runtimegametypes
   runtimeproducts
   tsort
   wowlesslib
@@ -1145,7 +1150,7 @@ add_lua_executable(
   lzlib
   minheap
   penlight
-  runtimeflavors
+  runtimegametypes
   runtimeproducts
   say
   tsort

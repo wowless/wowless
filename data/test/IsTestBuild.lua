@@ -1,2 +1,2 @@
 local T = ...
-T.assertEquals(T.data.build.test, T.env.IsTestBuild())
+return T.match(1, T.data.build.test, T.env.IsTestBuild())

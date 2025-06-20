@@ -7,8 +7,8 @@
 util.lua
 init.lua
 framework.lua
+statemachine.lua
 test.xml
 generated.lua
-api.lua
 uiobjects.lua
 test.lua

@@ -1,2 +1,2 @@
 local T = ...
-T.assertEquals(nil, T.retn(1, T.env.CreateWindow()))
+return T.match(1, nil, T.env.CreateWindow())

@@ -7,6 +7,13 @@ lies:
     C_BattleNet.InstallHighResTextures:
       inputs: {}
       outputs: {}
+    C_Item.GetItemClassInfo:
+      inputs:
+      - name: itemClassID
+        type: number
+      outputs:
+      - name: result
+        type: string
     ShowCloak:
       inputs:
       - name: show
@@ -36,6 +43,49 @@ lies:
         type: string
       - name: unitServer
         type: string
+  uiobjects:
+    Button:
+      RegisterForClicks:
+        inputs:
+        - name: unpackedPrimitiveType
+          type: number
+        instride: 1
+        outputs: {}
+      RegisterForMouse:
+        inputs:
+        - name: unpackedPrimitiveType
+          type: number
+        instride: 1
+        outputs: {}
+    Frame:
+      RegisterForDrag:
+        inputs:
+        - name: unpackedPrimitiveType
+          type: number
+        instride: 1
+        outputs: {}
+    Region:
+      SetPassThroughButtons:
+        inputs:
+        - name: unpackedPrimitiveType
+          type: number
+        instride: 1
+        outputs: {}
+    TextureBase:
+      SetAtlas:
+        inputs:
+        - name: atlas
+          type: string
+        - default: false
+          name: useAtlasSize
+          type: boolean
+        - name: filterMode
+          nilable: true
+          type: FilterMode
+        - name: resetTexCoords
+          nilable: true
+          type: boolean
+        outputs: {}
 mayreturnnothing: true
 script_objects:
   FrameAPIArchaeologyDigSiteFrame: ArchaeologyDigSiteFrame
@@ -57,7 +107,7 @@ script_objects:
   MinimapFrameAPI: Minimap
   SimpleAnimAlphaAPI: Alpha
   SimpleAnimAPI: Animation
-  SimpleAnimatableObjectAPI: Animation
+  SimpleAnimatableObjectAPI: Region
   SimpleAnimFlipBookAPI: FlipBook
   SimpleAnimGroupAPI: AnimationGroup
   SimpleAnimPathAPI: Path
@@ -105,6 +155,55 @@ skip_docfiles:
   SimpleMapSceneAPIDocumentation: {}
   SimpleModelFFXAPIDocumentation: {}
   WorldSafeLocsUIInternalDocumentation: {}
+skip_uiobject_methods:
+  Button:
+    GetText: {}
+    SetDisabledTexture: {}
+    SetFormattedText: {}
+    SetHighlightTexture: {}
+    SetNormalTexture: {}
+    SetPushedTexture: {}
+  CheckButton:
+    SetCheckedTexture: {}
+  Cooldown:
+    SetBlingTexture: {}
+    SetEdgeTexture: {}
+    SetSwipeTexture: {}
+  Frame:
+    GetAttribute: {}
+    RegisterEvent: {}
+    RegisterUnitEvent: {}
+    SetAttribute: {}
+    SetAttributeNoHandler: {}
+    UnregisterEvent: {}
+  ModelScene:
+    CreateActor: {}
+  ParentedObjectBase:
+    GetParentKey: {}
+  Region:
+    GetBottom: {}
+    GetDrawLayer: {}
+    GetHeight: {}
+    GetLeft: {}
+    GetPoint: {}
+    GetRect: {}
+    GetScript: {}
+    GetSize: {}
+    GetVertexColor: {}
+    GetWidth: {}
+    HasScript: {}
+    HookScript: {}
+    SetAllPoints: {}
+    SetDrawLayer: {}
+    SetPoint: {}
+    SetScript: {}
+    SetVertexColor: {}
+  StatusBar:
+    SetStatusBarTexture: {}
+  TextureBase:
+    GetTexCoord: {}
+    GetTexture: {}
+    SetTexture: {}
 typedefs:
   AnimationDataEnum: number
   ArtifactTiers: number
@@ -121,12 +220,10 @@ typedefs:
   cstring: string
   FileAsset: string
   fileID: number
-  FilterMode: string
   FontAlphabet: string
   GarrisonFollower: string
   HTMLTextType: string
   IDOrLink: string
-  InsertMode: string
   InventorySlots: number
   ItemInfo: string
   kstringClubMessage: string
@@ -147,15 +244,15 @@ typedefs:
   QuestObjectiveType: number
   RecruitAcceptanceID: string
   ScriptObject: UIObject
-  ScriptRegion: table
+  ScriptRegion: Region
   SimpleAnim: Animation
   SimpleAnimGroup: AnimationGroup
   SimpleControlPoint: ControlPoint
-  SimpleFont: table
-  SimpleFontString: table
+  SimpleFont: Font
+  SimpleFontString: FontString
   SimpleFrame: Frame
   SimpleLine: Line
-  SimpleMaskTexture: table
+  SimpleMaskTexture: MaskTexture
   SimplePathAnim: Path
   SimpleTexture: Texture
   SimpleWindow: nil
@@ -165,7 +262,7 @@ typedefs:
   string: string
   stringView: string
   TBFFlags: string
-  TextureAsset: string
+  TextureAsset: Texture
   TextureAssetDisk: string
   textureAtlas: string
   textureKit: string
@@ -179,26 +276,3 @@ typedefs:
   WeeklyRewardItemDBID: string
   WOWGUID: string
   WOWMONEY: number
-uiobject_methods:
-  Animation:
-    GetRegionParent: {}
-  AnimationGroup:
-    CreateAnimation: {}
-    GetAnimations: {}
-  Button:
-    Click: {}
-    Disable: {}
-    Enable: {}
-    SetButtonState: {}
-    SetDisabledAtlas: {}
-    SetNormalAtlas: {}
-    SetPushedAtlas: {}
-  EditBox:
-    Disable: {}
-    Enable: {}
-uiobjects:
-  Animation: {}
-  Path: {}
-  ScrollFrame: {}
-  Slider: {}
-  UIObject: {}

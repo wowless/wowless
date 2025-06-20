@@ -54,8 +54,9 @@ local function loader(api, cfg)
   local function parseTypedValue(ty, value)
     ty = ty and string.lower(ty) or nil
     if ty == 'number' then
-      return tonumber(value)
-    elseif ty == 'global' then
+      return tonumber(value) or 0
+    end
+    if ty == 'global' then
       local t = api.env
       for part in value:gmatch('[^.]+') do
         if type(t) ~= 'table' then
@@ -65,14 +66,18 @@ local function loader(api, cfg)
         t = t[part]
       end
       return t
-    elseif ty == 'boolean' or ty == 'bool' then
-      return (value == 'true')
-    elseif ty == 'string' or ty == nil then
-      local n = tonumber(value)
-      return n ~= nil and n or value
-    else
-      error('invalid keyvalue/attribute type ' .. ty)
     end
+    if ty == 'boolean' then
+      if value == 'true' then
+        return true
+      end
+      local n = tonumber(value)
+      return n ~= nil and n ~= 0
+    end
+    if ty and ty ~= 'string' then
+      api.log(1, 'warning: bogus keyvalue/attribute type %q', ty)
+    end
+    return value
   end
 
   local function getXY(e)
@@ -93,8 +98,20 @@ local function loader(api, cfg)
   end
 
   local function loadstr(str, filename, line)
-    local pre = line and string.rep('\n', line - 1) or ''
-    return assert(loadstring(pre .. str, '@' .. path.normalize(filename):gsub('/', '\\')))
+    local function doload()
+      local pre = line and string.rep('\n', line - 1) or ''
+      return loadstring_untainted(pre .. str, '@' .. path.normalize(filename):gsub('/', '\\'))
+    end
+    if filename:find('Wowless') then
+      debug.setstacktaint('Wowless')
+      debug.settaintmode('rw')
+      local fn = doload()
+      debug.settaintmode('disabled')
+      debug.setstacktaint(nil)
+      return assert(fn)
+    else
+      return assert(doload())
+    end
   end
 
   local function getColor(e)
@@ -154,7 +171,9 @@ local function loader(api, cfg)
       local args = xmlimpls[string.lower(script.type)].tag.script.args or 'self, ...'
       local fnstr = 'return function(' .. args .. ') ' .. script.text .. ' end'
       local outfn = loadstr(fnstr, filename, script.line)
-      fn = setfenv(outfn(), env)
+      local success, ret = api.CallSandbox(outfn)
+      assert(success)
+      fn = setfenv(ret, env)
       scriptCache[env] = scriptCache[env] or {}
       scriptCache[env][script] = fn
     end
@@ -283,7 +302,7 @@ local function loader(api, cfg)
     maskedtexture = function(_, e, parent)
       local t = navigate(parent.parent and parent.parent.luarep, e.attr.childkey)
       if t then
-        api.UserData(t):AddMaskTexture(parent)
+        api.UserData(t):AddMaskTexture(parent.luarep)
       else
         api.log(1, 'cannot find maskedtexture childkey ' .. e.attr.childkey)
       end
@@ -308,7 +327,9 @@ local function loader(api, cfg)
       parent:SetShadowOffset(getXY(e))
     end,
     origin = function(_, e, parent)
-      parent:SetOrigin(e.attr.point, getXY(e.kids[#e.kids]))
+      if e.attr.point then
+        parent:SetOrigin(e.attr.point, 0, 0)
+      end
     end,
     pushedtextoffset = function(_, e, parent)
       parent:SetPushedTextOffset(getXY(e))
@@ -600,7 +621,7 @@ local function loader(api, cfg)
         end
       end
 
-      return api.CallSafely(function()
+      api.CallSafely(function()
         local root, warnings = parseXml(xmlstr)
         for _, warning in ipairs(warnings) do
           api.log(3, filename .. ': ' .. warning)
@@ -644,13 +665,14 @@ local function loader(api, cfg)
   end
 
   local build = datalua.build
-  local flavors = require('runtime.flavors')
+  local gametype = build.gametype
+  local family = require('runtime.gametypes')[gametype].family
   local tocutil = require('wowless.toc')
-  local tocsuffixes = tocutil.suffixes[build.flavor]
+  local tocsuffixes = tocutil.suffixes[gametype]
 
   local function parseToc(tocFile, content)
     local dir = path.dirname(tocFile)
-    local attrs, files = tocutil.parse(build.flavor, content)
+    local attrs, files = tocutil.parse(gametype, content)
     for i, f in ipairs(files) do
       files[i] = path.join(dir, f)
     end
@@ -672,6 +694,20 @@ local function loader(api, cfg)
     return nil
   end
 
+  local function resolveBindingsXml(tocDir)
+    api.log(1, 'resolving bindings for %s', tocDir)
+    for _, suffix in ipairs(tocsuffixes) do
+      local bindingsFile = path.join(tocDir, 'Bindings' .. suffix .. '.xml')
+      local success, content = pcall(readFile, bindingsFile)
+      if success then
+        api.log(1, 'using bindings %s', bindingsFile)
+        return bindingsFile, content
+      end
+    end
+    api.log(1, 'no valid bindings for %s', tocDir)
+    return nil
+  end
+
   local sqlitedb = (function()
     local dbfile = ('build/products/%s/%s.sqlite3'):format(product, rootDir and 'data' or 'schema')
     return require('lsqlite3').open(dbfile)
@@ -690,6 +726,7 @@ local function loader(api, cfg)
           addon.fdid = fdid
           addon.dir = dir
           addon.revwiths = {}
+          addon.bindings = resolveBindingsXml(dir)
           addonData[name:lower()] = addon
           table.insert(addonData, addon)
         end
@@ -797,6 +834,10 @@ local function loader(api, cfg)
     for _, file in ipairs(toc.files) do
       loadFile(file)
     end
+    if toc.bindings then
+      loadFile(toc.bindings)
+      api.SendEvent('UPDATE_BINDINGS')
+    end
     loadFile(('out/%s/SavedVariables/%s.lua'):format(product, addonName), toc.fdid and 'SavedVariables' or nil)
     if forceSecure then
       toc.secdeploaded = true
@@ -821,10 +862,10 @@ local function loader(api, cfg)
     end
   end
 
-  local gametypes = {}
-  for _, gt in ipairs(flavors[build.flavor].gametypes) do
-    gametypes[gt] = true
-  end
+  local gttokens = {
+    [family:lower()] = true,
+    [gametype:lower()] = true,
+  }
 
   local function isLoadable(toc)
     local a = datalua.cvars.agentuid.value
@@ -835,7 +876,7 @@ local function loader(api, cfg)
       return true
     end
     for gt in string.gmatch(toc.attrs.AllowLoadGameType, '[^, ]+') do
-      if gametypes[gt] then
+      if gttokens[gt] then
         return true
       end
     end
@@ -846,15 +887,6 @@ local function loader(api, cfg)
     for tag, text in sqlitedb:urows('SELECT BaseTag, TagText_lang FROM GlobalStrings') do
       api.env[tag] = text
       api.secureenv[tag] = text
-    end
-    local fxtocdir = path.join(rootDir, 'Interface', 'FrameXML')
-    local fxtoc = resolveTocDir(fxtocdir)
-    if fxtoc then
-      local loadFile = forAddon(nil, nil, fxtocdir, false, false)
-      for _, file in ipairs(fxtoc.files) do
-        loadFile(file)
-      end
-      loadFile(path.join(rootDir, flavors[build.flavor].dir, 'FrameXML', 'Bindings.xml'))
     end
     local blizzardAddons = {}
     for _, toc in ipairs(addonData) do
@@ -896,7 +928,7 @@ local function loader(api, cfg)
         if next(t) then
           local fn = ('out/%s/SavedVariables/%s.lua'):format(product, v.name)
           assert(require('pl.dir').makepath(path.dirname(fn)))
-          assert(require('pl.file').write(fn, table.concat(t, '')))
+          assert(require('pl.file').write(fn, table.concat(t)))
         end
       end
     end

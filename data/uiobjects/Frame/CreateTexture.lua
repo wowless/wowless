@@ -1,4 +1,5 @@
-return (function(self, name, layer, inherits, sublayer)
+local api = ...
+return function(self, name, layer, inherits, sublayer)
   -- TODO unify with api
   local tmpls = {}
   for templateName in string.gmatch(inherits or '', '[^, ]+') do
@@ -11,4 +12,4 @@ return (function(self, name, layer, inherits, sublayer)
     tex:SetDrawLayer(layer, sublayer)
   end
   return tex
-end)(...)
+end

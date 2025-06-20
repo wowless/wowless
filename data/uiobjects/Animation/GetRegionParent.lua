@@ -1,2 +1,3 @@
-local self = ...
-return self.parent.parent
+return function(self)
+  return self.parent.parent
+end

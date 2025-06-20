@@ -85,16 +85,53 @@ local function new(log, maxErrors, product)
     end
   end
 
+  local function assertHostMode()
+    local tm = debug.gettaintmode()
+    if tm ~= 'disabled' then
+      error(('wowless bug: host taint mode %q'):format(tm))
+    end
+    local st = debug.getstacktaint()
+    if st ~= nil then
+      error(('wowless bug: host stack taint %q'):format(st))
+    end
+  end
+
+  local function assertSandboxMode()
+    local tm = debug.gettaintmode()
+    if tm ~= 'rw' then
+      error(('wowless bug: sandbox taint mode %q'):format(tm))
+    end
+  end
+
   local function CallSafely(fun, ...)
-    assert(issecure(), 'wowless bug: must enter CallSafely securely')
+    assertHostMode()
     assert(getfenv(fun) == _G, 'wowless bug: expected framework function')
-    return securecallfunction(xpcall, fun, ErrorHandler, ...)
+    xpcall(fun, ErrorHandler, ...)
+    assertHostMode()
+  end
+
+  local function postSandbox(...)
+    assertSandboxMode()
+    debug.settaintmode('disabled')
+    debug.setstacktaint(nil)
+    assertHostMode()
+    return ...
   end
 
   local function CallSandbox(fun, ...)
-    assert(issecure(), 'wowless bug: must enter CallSandbox securely')
+    assertHostMode()
     assert(getfenv(fun) ~= _G, 'wowless bug: expected sandbox function')
-    return securecallfunction(xpcall, fun, ErrorHandler, ...)
+    debug.settaintmode('rw')
+    return postSandbox(xpcall(fun, ErrorHandler, ...))
+  end
+
+  local function GetParentKey(ud)
+    for k, v in pairs(ud.parent.luarep) do
+      if ud.luarep == v then
+        return k
+      end
+    end
+    return nil
   end
 
   local function GetDebugName(frame)
@@ -105,16 +142,8 @@ local function new(log, maxErrors, product)
     name = ''
     local parent = frame.parent
     while parent do
-      local found = false
-      for k, v in pairs(parent) do
-        if v == frame then
-          name = k .. (name == '' and '' or ('.' .. name))
-          found = true
-        end
-      end
-      if not found then
-        name = string.match(tostring(frame), '^table: 0x0*(.*)$'):lower() .. (name == '' and '' or ('.' .. name))
-      end
+      local key = GetParentKey(frame) or string.match(tostring(frame), '^table: 0x0*(.*)$'):lower()
+      name = key .. (name == '' and '' or ('.' .. name))
       local parentName = parent.name
       if parentName == 'UIParent' then
         break
@@ -226,8 +255,9 @@ local function new(log, maxErrors, product)
       template.initKids(ud)
     end
     if id then
-      obj:SetID(id)
+      ud:SetID(id)
     end
+    log(3, 'running load scripts on %s named %s', objtype.name, GetDebugName(ud))
     RunScript(ud, 'OnLoad')
     if InheritsFrom(typename, 'region') and ud:IsVisible() then
       RunScript(ud, 'OnShow')
@@ -294,6 +324,7 @@ local function new(log, maxErrors, product)
     frames = frames,
     GetDebugName = GetDebugName,
     GetErrorCount = GetErrorCount,
+    GetParentKey = GetParentKey,
     InheritsFrom = InheritsFrom,
     IsIntrinsicType = IsIntrinsicType,
     log = log,

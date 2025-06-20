@@ -1,3 +1,3 @@
-return (function(self)
+return function(self)
   return self.bottom + self.height
-end)(...)
+end

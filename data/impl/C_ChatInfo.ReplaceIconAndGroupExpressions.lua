@@ -1,2 +1,3 @@
-local s = ...
-return s
+return function(s)
+  return s
+end

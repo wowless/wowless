@@ -112,6 +112,18 @@ local tests = {
     spec = { type = { structure = 'structname' } },
     value = { 'moo' },
   },
+  ['structure type, table value, is out, has mixin'] = {
+    isout = true,
+    out = { { a = 42, b = issecure } },
+    spec = { type = { structure = 'structwithmixinname' } },
+    value = { a = 42, b = issecure },
+  },
+  ['structure type, table value, is out, has mixin, wrong field'] = {
+    isout = true,
+    out = { nil, 'has incorrect mixin value b' },
+    spec = { type = { structure = 'structwithmixinname' } },
+    value = { a = 42, b = 'moo' },
+  },
   ['unit type, string value, known unit'] = {
     out = { units.player },
     spec = { type = 'unit' },
@@ -139,8 +151,21 @@ describe('typecheck', function()
         structname = {
           fields = {},
         },
+        structwithmixinname = {
+          fields = {
+            a = {
+              type = 'number',
+            },
+          },
+          mixin = 'roflmixin',
+        },
       },
       uiobjects = {},
+    },
+    env = {
+      roflmixin = {
+        b = issecure,
+      },
     },
     modules = {
       units = units,

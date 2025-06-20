@@ -1,7 +1,4 @@
-local self = ...
-for k, v in pairs(self.parent.luarep) do
-  if self.luarep == v then
-    return k
-  end
+local api = ...
+return function(self)
+  return api.GetParentKey(self)
 end
-return nil

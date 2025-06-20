@@ -5,7 +5,57 @@ events:
     PARTY_INVITE_CANCEL: {}
     SECURE_TRANSFER_CONFIRM_SEND_MAIL: {}
 lies:
-  apis: {}
+  apis:
+    C_Item.GetItemClassInfo:
+      inputs:
+      - name: itemClassID
+        type: number
+      outputs:
+      - name: result
+        type: string
+  uiobjects:
+    Button:
+      RegisterForClicks:
+        inputs:
+        - name: unpackedPrimitiveType
+          type: number
+        instride: 1
+        outputs: {}
+      RegisterForMouse:
+        inputs:
+        - name: unpackedPrimitiveType
+          type: number
+        instride: 1
+        outputs: {}
+    Frame:
+      RegisterForDrag:
+        inputs:
+        - name: unpackedPrimitiveType
+          type: number
+        instride: 1
+        outputs: {}
+    Region:
+      SetPassThroughButtons:
+        inputs:
+        - name: unpackedPrimitiveType
+          type: number
+        instride: 1
+        outputs: {}
+    TextureBase:
+      SetAtlas:
+        inputs:
+        - name: atlas
+          type: string
+        - default: false
+          name: useAtlasSize
+          type: boolean
+        - name: filterMode
+          nilable: true
+          type: FilterMode
+        - name: resetTexCoords
+          nilable: true
+          type: boolean
+        outputs: {}
 script_objects:
   FrameAPIArchaeologyDigSiteFrame: ArchaeologyDigSiteFrame
   FrameAPIBlob: QuestPOIFrame
@@ -25,7 +75,7 @@ script_objects:
   MinimapFrameAPI: Minimap
   SimpleAnimAlphaAPI: Alpha
   SimpleAnimAPI: Animation
-  SimpleAnimatableObjectAPI: Animation
+  SimpleAnimatableObjectAPI: Region
   SimpleAnimFlipBookAPI: FlipBook
   SimpleAnimGroupAPI: AnimationGroup
   SimpleAnimPathAPI: Path
@@ -70,6 +120,55 @@ skip_docfiles:
   EditModeManagerDocumentation: {}
   PingPinFrameAPIDocumentation: {}
   SimpleModelFFXAPIDocumentation: {}
+skip_uiobject_methods:
+  Button:
+    GetText: {}
+    SetDisabledTexture: {}
+    SetFormattedText: {}
+    SetHighlightTexture: {}
+    SetNormalTexture: {}
+    SetPushedTexture: {}
+  CheckButton:
+    SetCheckedTexture: {}
+  Cooldown:
+    SetBlingTexture: {}
+    SetEdgeTexture: {}
+    SetSwipeTexture: {}
+  Frame:
+    GetAttribute: {}
+    RegisterEvent: {}
+    RegisterUnitEvent: {}
+    SetAttribute: {}
+    SetAttributeNoHandler: {}
+    UnregisterEvent: {}
+  ModelScene:
+    CreateActor: {}
+  ParentedObjectBase:
+    GetParentKey: {}
+  Region:
+    GetBottom: {}
+    GetDrawLayer: {}
+    GetHeight: {}
+    GetLeft: {}
+    GetPoint: {}
+    GetRect: {}
+    GetScript: {}
+    GetSize: {}
+    GetVertexColor: {}
+    GetWidth: {}
+    HasScript: {}
+    HookScript: {}
+    SetAllPoints: {}
+    SetDrawLayer: {}
+    SetPoint: {}
+    SetScript: {}
+    SetVertexColor: {}
+  StatusBar:
+    SetStatusBarTexture: {}
+  TextureBase:
+    GetTexCoord: {}
+    GetTexture: {}
+    SetTexture: {}
 typedefs:
   AnimationDataEnum: number
   BigInteger: number
@@ -85,10 +184,8 @@ typedefs:
   cstring: string
   FileAsset: string
   fileID: number
-  FilterMode: string
   HTMLTextType: string
   IDOrLink: string
-  InsertMode: string
   ItemInfo: string
   kstringClubMessage: string
   kstringLfgListApplicant: string
@@ -105,15 +202,15 @@ typedefs:
   number: number
   RecruitAcceptanceID: string
   ScriptObject: UIObject
-  ScriptRegion: table
+  ScriptRegion: Region
   SimpleAnim: Animation
   SimpleAnimGroup: AnimationGroup
   SimpleControlPoint: ControlPoint
-  SimpleFont: table
-  SimpleFontString: table
+  SimpleFont: Font
+  SimpleFontString: FontString
   SimpleFrame: Frame
   SimpleLine: Line
-  SimpleMaskTexture: table
+  SimpleMaskTexture: MaskTexture
   SimplePathAnim: Path
   SimpleTexture: Texture
   SimpleWindow: nil
@@ -122,7 +219,7 @@ typedefs:
   SpellIdentifier: string
   string: string
   TBFFlags: string
-  TextureAsset: string
+  TextureAsset: Texture
   TextureAssetDisk: string
   textureAtlas: string
   textureKit: string
@@ -134,26 +231,3 @@ typedefs:
   UnitToken: unit
   WOWGUID: string
   WOWMONEY: number
-uiobject_methods:
-  Animation:
-    GetRegionParent: {}
-  AnimationGroup:
-    CreateAnimation: {}
-    GetAnimations: {}
-  Button:
-    Click: {}
-    Disable: {}
-    Enable: {}
-    SetButtonState: {}
-    SetDisabledAtlas: {}
-    SetNormalAtlas: {}
-    SetPushedAtlas: {}
-  EditBox:
-    Disable: {}
-    Enable: {}
-uiobjects:
-  Animation: {}
-  Path: {}
-  ScrollFrame: {}
-  Slider: {}
-  UIObject: {}

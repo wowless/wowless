@@ -8,10 +8,10 @@ type:
     date:
       required: true
       type: string
-    flavor:
+    gametype:
       required: true
       type:
-        ref: flavor
+        ref: gametype
     hash:
       required: true
       type: string

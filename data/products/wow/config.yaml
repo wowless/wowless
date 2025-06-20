@@ -24,6 +24,8 @@ addon:
       C_Macro.SetMacroExecuteLineCallback: {}
       CreateForbiddenFrame: {}
       loadstring_untainted: {}
+  hooked_globals:
+    UpdateUIParentPosition: {}
   ignore_cvar_value:
     graphicsComputeEffects: {}
     graphicsDepthEffects: {}
@@ -68,7 +70,6 @@ runner:
     EVENT: {}
     GUILD_INVITE: {}
     GUILD_UNINVITE: {}
-    TABLEINSPECT: {}
     USERANDOM: {}
 runtime:
   warners:

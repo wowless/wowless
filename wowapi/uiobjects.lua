@@ -1,4 +1,5 @@
 local util = require('wowless.util')
+local bubblewrap = require('wowless.bubblewrap')
 local Mixin = util.mixin
 local hlist = require('wowless.hlist')
 
@@ -44,7 +45,7 @@ local function mkBaseUIObjectTypes(api)
     for k, v in pairs(result) do
       local sandboxIndex = {}
       for n, f in pairs(v.metaindex) do
-        sandboxIndex[n] = debug.newcfunction(function(obj, ...)
+        sandboxIndex[n] = bubblewrap(function(obj, ...)
           return f(api.UserData(obj), ...)
         end)
       end
@@ -59,31 +60,17 @@ local function mkBaseUIObjectTypes(api)
     return t
   end
 
-  local function wrapstrfn(s, fname, args, ...)
-    local wrapstr = ('local %s=...;return %s'):format(args, s)
-    local wrapfn = assert(loadstring(wrapstr, fname))
-    setfenv(wrapfn, _G)
-    return wrapfn(...)
-  end
-
   local typechecker = require('wowless.typecheck')(api)
   local funchecker = require('wowless.funcheck')(typechecker)
 
-  local check = setmetatable({
-    Texture = function(v, self)
-      return toTexture(self, v)
-    end,
-  }, {
-    __index = function(t, k)
-      local spec = { type = k }
-      local fn = function(v)
-        local vv, errmsg = typechecker(spec, v)
-        return errmsg and error(errmsg) or vv
-      end
-      t[k] = fn
-      return fn
-    end,
-  })
+  local function check(spec, v)
+    local vv, errmsg = typechecker(spec, v)
+    return errmsg and error(errmsg) or vv
+  end
+
+  local function stubMixin(t, name)
+    return Mixin(t, api.env[name])
+  end
 
   local uiobjects = {}
   for name, cfg in pairs(api.datalua.uiobjects) do
@@ -96,7 +83,7 @@ local function mkBaseUIObjectTypes(api)
         return fn(self, ...)
       end
     end
-    local constructor = wrapstrfn(cfg.constructor, name, 'hlist', hlist)
+    local constructor = assert(loadstring_untainted(cfg.constructor, name))(hlist)
     if cfg.singleton then
       local orig = constructor
       local called = false
@@ -144,8 +131,8 @@ local function mkBaseUIObjectTypes(api)
       end
       local mtext = method.impl or method
       local src = method.src and ('@' .. method.src) or fname
-      local fn = wrap(mname, wrapstrfn(mtext, src, 'api,toTexture,check', api, toTexture, check))
-      mixin[mname] = checkOutputs(checkInputs(fn))
+      local fn = assert(loadstring_untainted(mtext, src))(api, toTexture, check, stubMixin)
+      mixin[mname] = checkOutputs(checkInputs(wrap(mname, fn)))
     end
     uiobjects[name] = {
       cfg = cfg,

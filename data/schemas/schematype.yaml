@@ -63,11 +63,11 @@ type:
           - literal: cvar
           - literal: enum
           - literal: event
-          - literal: flavor
+          - literal: family
+          - literal: gametype
           - literal: impl
           - literal: schema
-          - literal: sqlcursor
-          - literal: sqllookup
+          - literal: sql
           - literal: stringenum
           - literal: structure
           - literal: uiobject

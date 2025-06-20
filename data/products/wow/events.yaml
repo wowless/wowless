@@ -70,6 +70,11 @@ ACTIVE_COMBAT_CONFIG_CHANGED:
     type: number
 ACTIVE_DELVE_DATA_UPDATE:
   payload: {}
+ACTIVE_GAME_MODE_UPDATED:
+  payload:
+  - name: gameMode
+    type:
+      enum: GameMode
 ACTIVE_PLAYER_SPECIALIZATION_CHANGED:
   payload: {}
 ACTIVE_TALENT_GROUP_CHANGED:
@@ -262,6 +267,8 @@ ARTIFACT_UPDATE:
   - name: newItem
     type: boolean
 ARTIFACT_XP_UPDATE:
+  payload: {}
+ASSISTED_COMBAT_ACTION_SPELL_CAST:
   payload: {}
 AUCTION_CANCELED:
   payload:
@@ -796,6 +803,16 @@ CAPTUREFRAMES_FAILED:
   payload: {}
 CAPTUREFRAMES_SUCCEEDED:
   payload: {}
+CAUTIONARY_CHANNEL_MESSAGE:
+  payload:
+  - name: confirmNumber
+    type: number
+CAUTIONARY_CHAT_MESSAGE:
+  payload:
+  - name: chatLineID
+    type: number
+  - name: confirmNumber
+    type: number
 CEMETERY_PREFERENCE_UPDATED:
   payload: {}
 CHALLENGE_MODE_COMPLETED:
@@ -3582,6 +3599,13 @@ CLUB_UPDATED:
   payload:
   - name: clubId
     type: string
+COLOR_OVERRIDE_UPDATED:
+  payload:
+  - name: overrideType
+    type:
+      enum: ColorOverride
+COLOR_OVERRIDES_RESET:
+  payload: {}
 COMBAT_LOG_EVENT:
   payload: {}
 COMBAT_LOG_EVENT_UNFILTERED:
@@ -3686,6 +3710,10 @@ CONFIRM_LOOT_ROLL:
     type: number
   - name: confirmReason
     type: string
+CONFIRM_PET_UNLEARN:
+  payload:
+  - name: cost
+    type: number
 CONFIRM_SUMMON:
   payload:
   - name: summonReason
@@ -3760,6 +3788,15 @@ CONTRIBUTION_COLLECTOR_UPDATE_SINGLE:
 CONVERT_TO_BIND_TO_ACCOUNT_CONFIRM:
   payload: {}
 CONVERT_TO_RAID_CONFIRMATION:
+  payload: {}
+COOLDOWN_VIEWER_SPELL_OVERRIDE_UPDATED:
+  payload:
+  - name: baseSpellID
+    type: number
+  - name: overrideSpellID
+    nilable: true
+    type: number
+COOLDOWN_VIEWER_TABLE_HOTFIXED:
   payload: {}
 CORPSE_IN_INSTANCE:
   payload: {}
@@ -3936,6 +3973,8 @@ CURRENCY_TRANSFER_FAILED:
   - name: failureReason
     type:
       enum: AccountCurrencyTransferResult
+CURRENCY_TRANSFER_INITIATED:
+  payload: {}
 CURRENCY_TRANSFER_LOG_UPDATE:
   payload: {}
 CURRENT_SPELL_CAST_CHANGED:
@@ -4142,7 +4181,7 @@ EQUIPMENT_SWAP_PENDING:
   payload: {}
 EVENT_REALM_QUEUES_UPDATED:
   payload:
-  - name: gameEnvironment
+  - name: eventRealmQueues
     type:
       enum: EventRealmQueues
 EVENT_SCHEDULER_UPDATE:
@@ -4186,11 +4225,8 @@ FRAMESTACK_VISIBILITY_UPDATED:
   payload: {}
 FRIENDLIST_UPDATE:
   payload: {}
-GAME_ENVIRONMENT_SWITCHED:
-  payload:
-  - name: gameEnvironment
-    type:
-      enum: GameEnvironment
+GAME_MODE_DISPLAY_INFO_UPDATED:
+  payload: {}
 GAME_PAD_ACTIVE_CHANGED:
   payload:
   - name: isActive
@@ -4620,10 +4656,32 @@ GUILD_REGISTRAR_CLOSED:
   payload: {}
 GUILD_REGISTRAR_SHOW:
   payload: {}
+GUILD_RENAME_NAME_CHECK:
+  payload:
+  - name: desiredName
+    type: string
+  - name: status
+    type:
+      enum: GuildErrorType
+  - name: nameErrorToken
+    nilable: true
+    type: string
+GUILD_RENAME_REFUND_RESULT:
+  payload:
+  - name: guildName
+    type: string
+  - name: status
+    type:
+      enum: GuildErrorType
 GUILD_RENAME_REQUIRED:
   payload:
   - name: flagSet
     type: boolean
+GUILD_RENAME_STATUS_UPDATE:
+  payload:
+  - name: status
+    type:
+      structure: C_GuildInfo.GuildRenameStatus
 GUILD_REWARDS_LIST:
   payload: {}
 GUILD_REWARDS_LIST_UPDATE:
@@ -5216,8 +5274,6 @@ LOSS_OF_CONTROL_UPDATE:
     type: unit
 LUA_WARNING:
   payload:
-  - name: warnType
-    type: number
   - name: warningText
     type: string
 MACRO_ACTION_BLOCKED:
@@ -5391,7 +5447,7 @@ NAVIGATION_DESTINATION_REACHED:
 NAVIGATION_FRAME_CREATED:
   payload:
   - name: region
-    type: table
+    type: Region
 NAVIGATION_FRAME_DESTROYED:
   payload: {}
 NEUTRAL_FACTION_SELECT_RESULT:
@@ -5569,6 +5625,11 @@ PERKS_PROGRAM_DISABLED:
   payload: {}
 PERKS_PROGRAM_OPEN:
   payload: {}
+PERKS_PROGRAM_PURCHASE_CART_SUCCESS:
+  payload:
+  - name: vendorItemIDs
+    type:
+      arrayof: number
 PERKS_PROGRAM_PURCHASE_SUCCESS:
   payload:
   - name: vendorItemID
@@ -6396,8 +6457,9 @@ REPLICATE_ITEM_LIST_UPDATE:
   payload: {}
 REPORT_PLAYER_RESULT:
   payload:
-  - name: success
-    type: boolean
+  - name: result
+    type:
+      enum: SendReportResult
   - name: reportType
     type:
       enum: ReportType
@@ -6422,6 +6484,13 @@ REQUEST_INVITE_CONFIRMATION:
   - name: dps
     nilable: true
     type: boolean
+REQUESTED_GUILD_RENAME_RESULT:
+  payload:
+  - name: newName
+    type: string
+  - name: status
+    type:
+      enum: GuildErrorType
 REQUIRED_GUILD_RENAME_RESULT:
   payload:
   - name: success
@@ -6885,6 +6954,14 @@ SPELL_PUSHED_TO_FLYOUT_ON_ACTIONBAR:
     type: number
   - name: flyoutPage
     type: number
+SPELL_RANGE_CHECK_UPDATE:
+  payload:
+  - name: spellIdentifier
+    type: string
+  - name: isInRange
+    type: boolean
+  - name: checksRange
+    type: boolean
 SPELL_SCRIPT_ERROR:
   payload:
   - name: spellID
@@ -6904,11 +6981,33 @@ SPELL_TEXT_UPDATE:
 SPELL_UPDATE_CHARGES:
   payload: {}
 SPELL_UPDATE_COOLDOWN:
-  payload: {}
+  payload:
+  - name: spellID
+    nilable: true
+    type: number
+  - name: baseSpellID
+    nilable: true
+    type: number
+  - name: category
+    nilable: true
+    type: number
+  - name: startRecoveryCategory
+    nilable: true
+    type: number
 SPELL_UPDATE_ICON:
-  payload: {}
+  payload:
+  - name: spellID
+    nilable: true
+    type: number
 SPELL_UPDATE_USABLE:
   payload: {}
+SPELL_UPDATE_USES:
+  payload:
+  - name: spellID
+    type: number
+  - name: baseSpellID
+    nilable: true
+    type: number
 SPELLS_CHANGED:
   payload: {}
 START_AUTOREPEAT_SPELL:
@@ -8349,6 +8448,7 @@ WORLD_LOOT_OBJECT_INFO_UPDATED:
 WORLD_MAP_OPEN:
   payload:
   - name: uiMapID
+    nilable: true
     type: number
 WORLD_PVP_QUEUE:
   payload: {}

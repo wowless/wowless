@@ -17,8 +17,8 @@ int main(int argc, char **argv) {
   if (L == NULL) {
     return EXIT_FAILURE;
   }
-  luaL_openlibsx(L, LUALIB_ELUNE);
   luaL_openlibsx(L, LUALIB_STANDARD);
+  luaL_openlibsx(L, LUALIB_ELUNE);
   lua_getglobal(L, "package");
   lua_getfield(L, -1, "preload");
   for (size_t i = 0; i < luamain.npreloads; ++i) {

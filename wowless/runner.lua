@@ -73,7 +73,7 @@ local function run(cfg)
   api.SendEvent('TRIAL_STATUS_UPDATE')
   api.SendEvent('DISPLAY_SIZE_CHANGED')
   if api.env.UIParent then -- Super duper hack to unblock 10.0 UIPanel code.
-    api.env.UIParent:SetSize(system.GetScreenWidth(), system.GetScreenHeight())
+    api.UserData(api.env.UIParent):SetSize(system.GetScreenWidth(), system.GetScreenHeight())
   end
   api.SendEvent('SPELLS_CHANGED')
   if cfg.debug then
@@ -165,7 +165,7 @@ local function run(cfg)
         if v.payload and not eventBlacklist[k] and not skip[k] then
           if v.payload == 'return ' or cfg.allevents then
             local text = 'local Mixin = ...;' .. v.payload
-            api.SendEvent(k, assert(loadstring(text))(stubMixin))
+            api.SendEvent(k, assert(loadstring_untainted(text))(stubMixin))
           end
         end
       end
@@ -178,6 +178,7 @@ local function run(cfg)
     macrotext = function()
       local b = api.env.ActionButton1
       if b then
+        b = api.UserData(b)
         b:SetAttribute('type', 'macro')
         b:SetAttribute('macrotext', '/startattack')
         b:Click()

@@ -1,0 +1,128 @@
+---
+C_AuctionHouse.GetAuctionItemSubClasses:
+  indexes:
+    ItemSubClass: ClassID
+  type: cursor
+C_ClassTalents.GetTraitTreeForSpec:
+  type: lookup
+C_Covenants.GetCovenantData:
+  table: true
+  type: lookup
+C_Covenants.GetCovenantData.soulbinds:
+  type: cursor
+C_CovenantSanctumUI.GetRenownLevels:
+  type: cursor
+C_CovenantSanctumUI.GetRenownRewardsForLevel:
+  table: true
+  type: cursor
+C_CreatureInfo.GetClassInfo:
+  table: true
+  type: lookup
+C_Item.DoesItemExistByID:
+  type: lookup
+C_Item.GetItemClassInfo:
+  indexes:
+    ItemClass: ClassID
+  type: lookup
+C_Item.GetItemSubClassInfo:
+  indexes:
+    ItemSubClass: ClassID, SubClassID
+  type: lookup
+C_ItemInteraction.GetItemInteractionInfo:
+  table: true
+  type: lookup
+C_Map.GetMapInfo:
+  table: true
+  type: lookup
+C_Map.GetMapInfo_Vanilla:
+  table: true
+  type: lookup
+C_ScriptedAnimations.GetAllScriptedAnimationEffects:
+  table: true
+  type: cursor
+C_SpecializationInfo.GetSpecIDs:
+  indexes:
+    SpecSetMember: SpecSet
+  type: cursor
+C_Texture.GetAtlasInfo:
+  indexes:
+    UiTextureAtlasElement: Name COLLATE NOCASE
+    UiTextureAtlasMember: UiTextureAtlasElementID
+  type: lookup
+C_Texture.GetAtlasInfo_11_1_5:
+  indexes:
+    UiTextureAtlasElement: Name COLLATE NOCASE
+    UiTextureAtlasMember: UiTextureAtlasElementID
+  type: lookup
+C_Traits.GetConfigInfo:
+  type: lookup
+C_Traits.GetNodeInfo:
+  type: lookup
+C_Traits.GetNodeInfo.conditions:
+  indexes:
+    SpecSetMember: SpecSet
+    TraitNodeGroupXTraitCond: TraitNodeGroupID
+    TraitNodeGroupXTraitNode: TraitNodeID
+    TraitNodeXTraitCond: TraitNodeID
+  table: true
+  type: cursor
+C_Traits.GetNodeInfo.edges:
+  table: true
+  type: cursor
+C_Traits.GetNodeInfo.entries:
+  indexes:
+    TraitNodeXTraitNodeEntry: TraitNodeID
+  table: true
+  type: cursor
+C_Traits.GetNodeInfo.groups:
+  indexes:
+    TraitNodeGroupXTraitNode: TraitNodeID
+  type: cursor
+C_Traits.GetTreeNodes:
+  type: cursor
+C_UIColor.GetColors:
+  type: cursor
+DoEmote:
+  type: lookup
+FillLocalizedClassList:
+  type: cursor
+GetClassInfo:
+  type: lookup
+GetClassInfo_Classic:
+  type: lookup
+GetInventorySlotInfo:
+  type: lookup
+GetNumClasses:
+  type: lookup
+GetNumSpecializationsForClassID:
+  type: lookup
+GetNumTalents:
+  type: lookup
+GetNumTalentTabs:
+  type: lookup
+GetSpecializationInfo:
+  type: lookup
+GetSpecializationInfoByID:
+  type: lookup
+GetSpecializationInfoForClassID:
+  type: lookup
+GetSpecializationInfoForSpecID:
+  type: lookup
+GetTalentInfo_Vanilla:
+  indexes:
+    SpellMisc: SpellID
+  type: lookup
+GetTalentPrereqs:
+  type: cursor
+GetTalentTabInfo:
+  type: lookup
+UnitClass:
+  type: lookup
+UnitClassBase:
+  type: lookup
+UnitFactionGroup:
+  type: lookup
+UnitPowerType:
+  type: lookup
+UnitRace:
+  type: lookup

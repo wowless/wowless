@@ -54,15 +54,24 @@ local ptablemap = {
     return 'Events', t
   end,
   globalapis = function(p)
+    local impls = dofile('build/cmake/runtime/impl.lua')
+    local function islua(api)
+      local impl = impls[api.impl]
+      if not impl or not impl.stdlib then
+        return false
+      end
+      local g = assert(tpath(_G, strsplit('.', impl.stdlib)))
+      return type(g) == 'function' and pcall(coroutine.create, g)
+    end
     local config = perproduct(p, 'config')
     local t = {}
     for name, api in pairs(perproduct(p, 'apis')) do
       if not name:find('%.') then
         local vv = {
           alias = api.alias,
-          nowrap = api.nowrap,
+          islua = islua(api) or nil,
           overwritten = tpath(config, 'addon', 'overwritten_apis', name) and true,
-          stdlib = api.stdlib,
+          stdlib = api.impl and tpath(impls, api.impl, 'stdlib'),
         }
         t[name] = next(vv) and vv or true
       end
@@ -89,6 +98,7 @@ local ptablemap = {
     return 'ImplTests', t, deps
   end,
   namespaceapis = function(p)
+    local impls = dofile('build/cmake/runtime/impl.lua')
     local config = perproduct(p, 'config')
     local apiNamespaces = {}
     for k, api in pairs(perproduct(p, 'apis')) do
@@ -106,7 +116,7 @@ local ptablemap = {
         local tt = {
           alias = mv.alias,
           overwritten = tpath(config, 'addon', 'overwritten_apis', k .. '.' .. mk) and true,
-          stdlib = mv.stdlib,
+          stdlib = mv.impl and tpath(impls, mv.impl, 'stdlib'),
         }
         mt[mk] = next(tt) and tt or true
       end
@@ -173,7 +183,7 @@ local ptablemap = {
       local mt = {}
       for mk, mv in pairs(v.methods) do
         mt[mk] = true
-        for gk, gv in ipairs(mv.getter or {}) do
+        for gk, gv in ipairs(mv.impl and mv.impl.getter or {}) do
           table.insert(ft[gv.name].getters, { index = gk, method = mk })
         end
       end

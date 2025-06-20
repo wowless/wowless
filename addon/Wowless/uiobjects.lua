@@ -9,6 +9,18 @@ G.testsuite.uiobjects = function()
   local check6 = G.check6
   local retn = G.retn
   return {
+    Animation = function()
+      return {
+        target = function()
+          local f = CreateFrame('Frame')
+          local a = f:CreateAnimationGroup():CreateAnimation()
+          check1(f, a:GetTarget())
+          assertEquals(false, pcall(a.SetTarget, a))
+          assertEquals(false, pcall(a.SetTarget, a, nil))
+        end,
+      }
+    end,
+
     Frame = function()
       return {
         ['creation with frame in name position'] = function()
@@ -158,7 +170,7 @@ G.testsuite.uiobjects = function()
           check1(true, f:IsVisible())
           check0(f:Hide())
           check1(false, f:IsVisible())
-          check1(('cDAb'):rep(6), table.concat(log, ''))
+          check1(('cDAb'):rep(6), table.concat(log))
         end,
         ['parent keys'] = function()
           local up = CreateFrame('Frame')
@@ -289,6 +301,21 @@ G.testsuite.uiobjects = function()
       }
     end,
 
+    Scale = function()
+      return {
+        origin = function()
+          local s = CreateFrame('Frame'):CreateAnimationGroup():CreateAnimation('Scale')
+          check3('CENTER', 0, 0, s:GetOrigin())
+          assertEquals(false, pcall(s.SetOrigin))
+          assertEquals(false, pcall(s.SetOrigin, 'garbage', 20, 30))
+          assertEquals(false, pcall(s.SetOrigin, 'LEFT'))
+          assertEquals(false, pcall(s.SetOrigin, 'LEFT', 20))
+          check0(s:SetOrigin('LEFT', 20, 30))
+          check3('LEFT', 20, 30, s:GetOrigin())
+        end,
+      }
+    end,
+
     ScrollFrame = function()
       return {
         SetScrollChild = function()
@@ -303,6 +330,17 @@ G.testsuite.uiobjects = function()
           assertEquals(false, pcall(f.SetScrollChild, f))
         end,
       }
+    end,
+
+    Slider = function()
+      local s = CreateFrame('Slider')
+      assertEquals(nil, s:GetThumbTexture())
+      local t = s:CreateTexture()
+      s:SetThumbTexture(t)
+      assertEquals(t, s:GetThumbTexture())
+      s:SetThumbTexture(12345)
+      assertEquals(t, s:GetThumbTexture())
+      assertEquals(12345, t:GetTexture())
     end,
 
     Texture = function()

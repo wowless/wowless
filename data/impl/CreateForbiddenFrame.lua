@@ -1,2 +1,2 @@
 local api = ...
-return api.CreateFrame(select(2, ...))
+return api.CreateFrame

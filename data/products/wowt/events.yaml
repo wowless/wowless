@@ -268,6 +268,8 @@ ARTIFACT_UPDATE:
     type: boolean
 ARTIFACT_XP_UPDATE:
   payload: {}
+ASSISTED_COMBAT_ACTION_SPELL_CAST:
+  payload: {}
 AUCTION_CANCELED:
   payload:
   - name: auctionID
@@ -801,6 +803,16 @@ CAPTUREFRAMES_FAILED:
   payload: {}
 CAPTUREFRAMES_SUCCEEDED:
   payload: {}
+CAUTIONARY_CHANNEL_MESSAGE:
+  payload:
+  - name: confirmNumber
+    type: number
+CAUTIONARY_CHAT_MESSAGE:
+  payload:
+  - name: chatLineID
+    type: number
+  - name: confirmNumber
+    type: number
 CEMETERY_PREFERENCE_UPDATED:
   payload: {}
 CHALLENGE_MODE_COMPLETED:
@@ -3320,8 +3332,6 @@ CHAT_SERVER_DISCONNECTED:
     type: boolean
 CHAT_SERVER_RECONNECTED:
   payload: {}
-CHAT_TOXICITY:
-  payload: {}
 CHEST_REWARDS_UPDATED_FROM_SERVER:
   payload: {}
 CINEMATIC_START:
@@ -3963,6 +3973,8 @@ CURRENCY_TRANSFER_FAILED:
   - name: failureReason
     type:
       enum: AccountCurrencyTransferResult
+CURRENCY_TRANSFER_INITIATED:
+  payload: {}
 CURRENCY_TRANSFER_LOG_UPDATE:
   payload: {}
 CURRENT_SPELL_CAST_CHANGED:
@@ -5435,7 +5447,7 @@ NAVIGATION_DESTINATION_REACHED:
 NAVIGATION_FRAME_CREATED:
   payload:
   - name: region
-    type: table
+    type: Region
 NAVIGATION_FRAME_DESTROYED:
   payload: {}
 NEUTRAL_FACTION_SELECT_RESULT:
@@ -6445,8 +6457,9 @@ REPLICATE_ITEM_LIST_UPDATE:
   payload: {}
 REPORT_PLAYER_RESULT:
   payload:
-  - name: success
-    type: boolean
+  - name: result
+    type:
+      enum: SendReportResult
   - name: reportType
     type:
       enum: ReportType

@@ -1,2 +1,4 @@
 local api = ...
-return api.uiobjectTypes.button.sandboxMT
+return function()
+  return api.uiobjectTypes.button.sandboxMT
+end

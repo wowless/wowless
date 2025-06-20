@@ -1,0 +1,13 @@
+---
+Cata:
+  expansion_level: 3
+  family: Classic
+Mists:
+  expansion_level: 4
+  family: Classic
+Standard:
+  expansion_level: 10
+  family: Mainline
+Vanilla:
+  expansion_level: 0
+  family: Classic

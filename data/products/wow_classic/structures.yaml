@@ -30,7 +30,7 @@ AnchorBinding:
     relativePoint:
       type: FramePoint
     relativeTo:
-      type: table
+      type: Region
 AppearanceSourceInfo:
   fields:
     categoryID:
@@ -4003,6 +4003,30 @@ ExpansionDisplayInfoFeature:
       type: number
     text:
       type: string
+FontScriptInfo:
+  fields:
+    color:
+      type:
+        structure: colorRGBA
+    fontObject:
+      type: Font
+    height:
+      type: number
+    outline:
+      type: string
+    shadow:
+      nilable: true
+      type:
+        structure: FontScriptShadowInfo
+FontScriptShadowInfo:
+  fields:
+    color:
+      type:
+        structure: colorRGBA
+    x:
+      type: number
+    y:
+      type: number
 GuildTabardInfo:
   fields:
     backgroundColor:

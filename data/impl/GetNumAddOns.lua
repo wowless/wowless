@@ -1,2 +1,4 @@
 local api = ...
-return #api.addons
+return function()
+  return #api.addons
+end

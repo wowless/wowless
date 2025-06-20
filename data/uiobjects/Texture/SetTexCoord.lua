@@ -1,4 +1,4 @@
-return (function(self, a1, a2, a3, a4, a5, a6, a7, a8)
+return function(self, a1, a2, a3, a4, a5, a6, a7, a8)
   a1 = assert(tonumber(a1))
   a2 = assert(tonumber(a2))
   a3 = assert(tonumber(a3))
@@ -26,4 +26,4 @@ return (function(self, a1, a2, a3, a4, a5, a6, a7, a8)
     self.brx = a2
     self.bry = a4
   end
-end)(...)
+end

@@ -1,10 +1,10 @@
 local wdata = require('wowapi.data')
 local domains = {
-  flavor = wdata.flavors,
+  family = wdata.families,
+  gametype = wdata.gametypes,
   impl = wdata.impl,
   schema = wdata.schemas,
-  sqlcursor = wdata.sqlcursor,
-  sqllookup = wdata.sqllookup,
+  sql = wdata.sql,
   stringenum = wdata.stringenums,
   uiobjectimpl = wdata.uiobjectimpl,
 }

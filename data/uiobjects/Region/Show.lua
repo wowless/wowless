@@ -1,3 +1,3 @@
-return (function(self)
+return function(self)
   self:SetShown(true)
-end)(...)
+end

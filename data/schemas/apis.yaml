@@ -10,10 +10,4 @@ type:
             required: true
             type:
               ref: api
-      - record:
-          nowrap:
-            type: boolean
-          stdlib:
-            required: true
-            type: string
       - schema: function

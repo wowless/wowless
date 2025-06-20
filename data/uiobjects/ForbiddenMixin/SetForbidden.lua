@@ -1,3 +1,3 @@
-return (function(self)
+return function(self)
   self.forbidden = true
-end)(...)
+end

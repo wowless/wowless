@@ -14,6 +14,10 @@ DrawLayer:
   BORDER: {}
   HIGHLIGHT: {}
   OVERLAY: {}
+FilterMode:
+  LINEAR: {}
+  NEAREST: {}
+  TRILINEAR: {}
 FramePoint:
   BOTTOM: {}
   BOTTOMLEFT: {}
@@ -35,6 +39,9 @@ FrameStrata:
   MEDIUM: {}
   PARENT: {}
   TOOLTIP: {}
+InsertMode:
+  BOTTOM: {}
+  TOP: {}
 JustifyHorizontal:
   CENTER: {}
   LEFT: {}
