@@ -1,2 +1,4 @@
-local sql, uimapid = ...
-return sql(uimapid)
+local sql = ...
+return function(uimapid)
+  return sql(uimapid)
+end

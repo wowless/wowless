@@ -26,6 +26,7 @@ bit.mod:
 bit.rshift:
   stdlib: bit.rshift
 C_AuctionHouse.GetAuctionItemSubClasses:
+  closure: true
   sqls:
   - C_AuctionHouse.GetAuctionItemSubClasses
 C_Calendar.GetMonthInfo:
@@ -34,32 +35,41 @@ C_Calendar.SetAbsMonth:
   module: calendar
 C_Calendar.SetMonth:
   module: calendar
-C_ChatInfo.ReplaceIconAndGroupExpressions: {}
+C_ChatInfo.ReplaceIconAndGroupExpressions:
+  closure: true
 C_ClassTalents.GetActiveConfigID:
+  closure: true
   frameworks:
   - api
 C_ClassTalents.GetTraitTreeForSpec:
+  closure: true
   sqls:
   - C_ClassTalents.GetTraitTreeForSpec
 C_ClassTalents.InitializeViewLoadout:
+  closure: true
   frameworks:
   - api
 C_ClassTalents.ViewLoadout:
+  closure: true
   frameworks:
   - api
   sqls:
   - GetSpecializationInfoByID
 C_Covenants.GetCovenantData:
+  closure: true
   sqls:
   - C_Covenants.GetCovenantData
   - C_Covenants.GetCovenantData.soulbinds
 C_CovenantSanctumUI.GetRenownLevels:
+  closure: true
   sqls:
   - C_CovenantSanctumUI.GetRenownLevels
 C_CovenantSanctumUI.GetRenownRewardsForLevel:
+  closure: true
   sqls:
   - C_CovenantSanctumUI.GetRenownRewardsForLevel
 C_CreatureInfo.GetClassInfo:
+  closure: true
   sqls:
   - C_CreatureInfo.GetClassInfo
 C_CVar.GetCVar:
@@ -82,36 +92,46 @@ C_EventUtils.IsEventValid:
   function: IsEventValid
   module: events
 C_Item.DoesItemExistByID:
+  closure: true
   sqls:
   - C_Item.DoesItemExistByID
 C_Item.GetItemClassInfo:
+  closure: true
   sqls:
   - C_Item.GetItemClassInfo
 C_Item.GetItemSubClassInfo:
+  closure: true
   sqls:
   - C_Item.GetItemSubClassInfo
 C_ItemInteraction.GetItemInteractionInfo:
+  closure: true
   sqls:
   - C_ItemInteraction.GetItemInteractionInfo
 C_Macro.SetMacroExecuteLineCallback:
   function: SetCallback
   module: macrotext
 C_Map.GetMapInfo:
+  closure: true
   sqls:
   - C_Map.GetMapInfo
 C_Map.GetMapInfo_Vanilla:
+  closure: true
   sqls:
   - C_Map.GetMapInfo_Vanilla
 C_ScriptedAnimations.GetAllScriptedAnimationEffects:
+  closure: true
   sqls:
   - C_ScriptedAnimations.GetAllScriptedAnimationEffects
 C_SpecializationInfo.GetSpecIDs:
+  closure: true
   sqls:
   - C_SpecializationInfo.GetSpecIDs
 C_Texture.GetAtlasInfo:
+  closure: true
   sqls:
   - C_Texture.GetAtlasInfo
 C_Texture.GetAtlasInfo_11_1_5:
+  closure: true
   sqls:
   - C_Texture.GetAtlasInfo_11_1_5
 C_Timer.After:
@@ -121,11 +141,13 @@ C_Timer.NewTicker:
 C_Timer.NewTimer:
   module: time
 C_Traits.GetConfigInfo:
+  closure: true
   frameworks:
   - api
   sqls:
   - C_Traits.GetConfigInfo
 C_Traits.GetNodeInfo:
+  closure: true
   frameworks:
   - api
   sqls:
@@ -135,18 +157,23 @@ C_Traits.GetNodeInfo:
   - C_Traits.GetNodeInfo.groups
   - C_Traits.GetNodeInfo.conditions
 C_Traits.GetTreeNodes:
+  closure: true
   sqls:
   - C_Traits.GetTreeNodes
 C_UI.GetUIParent:
+  closure: true
   frameworks:
   - env
 C_UI.GetWorldFrame:
+  closure: true
   frameworks:
   - env
 C_UIColor.GetColors:
+  closure: true
   sqls:
   - C_UIColor.GetColors
 C_XMLUtil.GetTemplateInfo_10_2:
+  closure: true
   frameworks:
   - api
 ClassicExpansionAtLeast:

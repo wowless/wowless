@@ -1,3 +1,4 @@
-local query, specID = ...
-
-return query(specID)
+local query = ...
+return function(specID)
+  return query(specID)
+end

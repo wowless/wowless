@@ -1,2 +1,4 @@
-local sql, itemClassID = ...
-return (sql(itemClassID))
+local sql = ...
+return function(itemClassID)
+  return (sql(itemClassID))
+end

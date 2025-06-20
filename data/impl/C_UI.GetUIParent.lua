@@ -1,2 +1,4 @@
 local env = ...
-return env.UIParent
+return function()
+  return env.UIParent
+end
