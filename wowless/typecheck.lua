@@ -49,7 +49,11 @@ return function(api)
 
   local plainscalartypechecks = {
     boolean = function(value, isout)
-      return not not value, isout and type(value) ~= 'boolean'
+      if isout then
+        return value, type(value) ~= 'boolean'
+      else
+        return not not value
+      end
     end,
     gender = function(value)
       return tonumber(value) or 0
