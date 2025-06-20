@@ -11,6 +11,11 @@ type:
             type:
               ref: impl
       - record:
+          directsql:
+            required: true
+            type:
+              ref: sql
+      - record:
           frameworks:
             type:
               sequenceof:

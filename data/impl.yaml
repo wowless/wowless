@@ -60,8 +60,7 @@ C_CovenantSanctumUI.GetRenownRewardsForLevel:
   sqls:
   - C_CovenantSanctumUI.GetRenownRewardsForLevel
 C_CreatureInfo.GetClassInfo:
-  sqls:
-  - C_CreatureInfo.GetClassInfo
+  directsql: C_CreatureInfo.GetClassInfo
 C_CVar.GetCVar:
   module: cvars
 C_CVar.GetCVarBool:
@@ -97,11 +96,9 @@ C_Macro.SetMacroExecuteLineCallback:
   function: SetCallback
   module: macrotext
 C_Map.GetMapInfo:
-  sqls:
-  - C_Map.GetMapInfo
+  directsql: C_Map.GetMapInfo
 C_Map.GetMapInfo_Vanilla:
-  sqls:
-  - C_Map.GetMapInfo_Vanilla
+  directsql: C_Map.GetMapInfo_Vanilla
 C_ScriptedAnimations.GetAllScriptedAnimationEffects:
   sqls:
   - C_ScriptedAnimations.GetAllScriptedAnimationEffects
@@ -235,11 +232,9 @@ GetChatWindowMessages:
   frameworks:
   - env
 GetClassInfo:
-  sqls:
-  - GetClassInfo
+  directsql: GetClassInfo
 GetClassInfo_Classic:
-  sqls:
-  - GetClassInfo_Classic
+  directsql: GetClassInfo_Classic
 GetClickFrame:
   frameworks:
   - api
@@ -261,8 +256,7 @@ GetFramesRegisteredForEvent:
 GetGlobalEnvironment:
   module: env
 GetInventorySlotInfo:
-  sqls:
-  - GetInventorySlotInfo
+  directsql: GetInventorySlotInfo
 GetItemQualityColor: {}
 GetLootSpecialization:
   module: units
@@ -272,11 +266,9 @@ GetNumAddOns:
   frameworks:
   - api
 GetNumClasses:
-  sqls:
-  - GetNumClasses
+  directsql: GetNumClasses
 GetNumSpecializationsForClassID:
-  sqls:
-  - GetNumSpecializationsForClassID
+  directsql: GetNumSpecializationsForClassID
 GetNumTalents:
   frameworks:
   - api
@@ -297,8 +289,7 @@ GetSpecializationInfo:
   sqls:
   - GetSpecializationInfo
 GetSpecializationInfoByID:
-  sqls:
-  - GetSpecializationInfoByID
+  directsql: GetSpecializationInfoByID
 GetSpecializationInfoForClassID:
   frameworks:
   - api

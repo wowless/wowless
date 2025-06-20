@@ -23,7 +23,7 @@ local function dblist(product)
   for _, api in pairs(productapis) do
     local impl = impls[api.impl]
     if impl then
-      for _, sql in ipairs(impl.sqls or {}) do
+      for _, sql in ipairs(impl.sqls or { impl.directsql }) do
         sqls[sql] = true
       end
     end

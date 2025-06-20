@@ -17,7 +17,7 @@ describe('sql', function()
     end
     local actual = {}
     for _, v in pairs(require('build.data.impl')) do
-      for _, sql in ipairs(v.sqls or {}) do
+      for _, sql in ipairs(v.sqls or { v.directsql }) do
         actual[sql] = true
       end
     end

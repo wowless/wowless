@@ -127,7 +127,7 @@ do
         apicfg.impl = nil
         apicfg.stdlib = ic.stdlib
       end
-      for _, v in ipairs(ic.sqls or {}) do
+      for _, v in ipairs(ic.sqls or { ic.directsql }) do
         if not sqls[v] then
           local sql = sqlcfg[v]
           sqls[v] = {
@@ -147,6 +147,11 @@ do
         elseif ic.delegate then
           impls[apicfg.impl] = {
             src = 'return ' .. ic.delegate,
+          }
+        elseif ic.directsql then
+          impls[apicfg.impl] = {
+            sqls = { ic.directsql },
+            src = 'return (...)',
           }
         elseif not ic.stdlib then
           impls[apicfg.impl] = {
