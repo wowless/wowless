@@ -344,22 +344,59 @@ local function new(log, maxErrors, product)
     UserData = UserData,
   }
 
-  local modulenames = {
-    'calendar',
-    'cvars',
-    'datetime',
-    'events',
-    'env',
-    'macrotext',
-    'system',
-    'talents',
-    'time',
-    'units',
+  local modulespecs = {
+    api = {
+      value = api,
+    },
+    calendar = {},
+    cvars = {
+      deps = { 'datalua' },
+    },
+    datalua = {
+      value = datalua,
+    },
+    datetime = {
+      deps = { 'datalua' },
+    },
+    env = {
+      deps = { 'api' },
+    },
+    events = {
+      deps = { 'datalua' },
+    },
+    macrotext = {
+      deps = { 'api' },
+    },
+    system = {},
+    talents = {},
+    time = {
+      deps = { 'api' },
+    },
+    units = {},
   }
-  local modules = {}
-  for _, k in ipairs(modulenames) do
-    modules[k] = require('wowless.modules.' .. k)(api)
+
+  local tt = require('resty.tsort').new()
+  for k, v in pairs(modulespecs) do
+    assert(not v.value or not v.deps)
+    tt:add(k)
+    for _, vv in ipairs(v.deps or {}) do
+      assert(modulespecs[vv])
+      tt:add(vv, k)
+    end
   end
+  local modules = {}
+  for _, m in ipairs(assert(tt:sort())) do
+    local spec = modulespecs[m]
+    modules[m] = spec.value
+      or (function()
+        local deps = {}
+        for _, d in ipairs(spec.deps or {}) do
+          table.insert(deps, (assert(modules[d])))
+        end
+        return require('wowless.modules.' .. m)(unpack(deps))
+      end)()
+  end
+
   api.modules = modules
   events = api.modules.events -- setting upvalue for SendEvent, TODO clean this up
   time = api.modules.time -- setting upvalue for NextFrame, TODO clean this up
