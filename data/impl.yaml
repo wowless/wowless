@@ -194,6 +194,7 @@ debugstack:
 difftime:
   stdlib: difftime
 DoEmote:
+  closure: true
   frameworks:
   - api
   sqls:

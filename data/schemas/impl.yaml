@@ -6,6 +6,8 @@ type:
     value:
       oneof:
       - record:
+          closure:
+            type: boolean
           frameworks:
             type:
               sequenceof:

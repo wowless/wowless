@@ -86,7 +86,9 @@ local function loadFunctions(api, loader)
       table.insert(specials, sqls[sql])
     end
     local specialfn
-    if not next(specials) then
+    if apicfg.closure then
+      specialfn = basefn(unpack(specials))
+    elseif not next(specials) then
       specialfn = basefn
     else
       local nspecials = #specials
