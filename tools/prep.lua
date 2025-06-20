@@ -127,7 +127,7 @@ do
         apicfg.impl = nil
         apicfg.stdlib = ic.stdlib
       end
-      apicfg.closure = ic.closure
+      apicfg.closure = ic.closure or ic.module
       apicfg.frameworks = ic.module and { 'api' } or ic.frameworks
       apicfg.sqls = ic.sqls
       for _, v in ipairs(ic.sqls or {}) do
@@ -142,8 +142,7 @@ do
       end
       if not impls[apicfg.impl] then
         if ic.module then
-          -- TODO make this smarter so we don't piggy back on framework
-          local fmt = 'return (...).modules[%q][%q](select(2,...))'
+          local fmt = 'return (...).modules[%q][%q]'
           impls[apicfg.impl] = fmt:format(ic.module, ic['function'] or apicfg.impl)
         elseif not ic.stdlib then
           impls[apicfg.impl] = readFile('data/impl/' .. apicfg.impl .. '.lua')
