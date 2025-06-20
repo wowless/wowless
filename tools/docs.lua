@@ -146,11 +146,11 @@ local function t2nty(field, ns)
     return { arrayof = t2nty({ Type = field.InnerType }, ns) }
   elseif t == 'table' and field.Mixin then
     error('no struct for mixin ' .. field.Mixin)
+  elseif stringenums[t] then
+    return t
   elseif typedefs[t] then
     used_typedefs[t] = true
     return typedefs[t]
-  elseif stringenums[t] then
-    return t
   end
   local n = ns and tys[ns .. '.' .. t] and (ns .. '.' .. t) or t
   n = structRewrites[n] or n
@@ -289,7 +289,7 @@ local function outsig(fn, ns, api)
       ns and (' ns = ' .. ns) or '',
       '\n',
       require('pl.pretty').write(fn),
-    }, ''))
+    }))
   end
   return outputs
 end
@@ -319,6 +319,7 @@ local function rewriteApis()
     local api = apis[name]
     local newapi = {
       inputs = insig(fn, ns),
+      instride = stride(fn.Arguments),
       mayreturnnils = api and api.mayreturnnils,
       mayreturnnothing = mayreturnnothing(fn, api),
       outputs = outsig(fn, ns, api),
@@ -453,29 +454,66 @@ local function rewriteUIObjects()
   end
   local filename = ('data/products/%s/uiobjects.yaml'):format(product)
   local uiobjects = require('wowapi.yaml').parseFile(filename)
+  local lies = deref(config, 'lies', 'uiobjects') or {}
+  local inhm = {}
+  local function inhprocess(k)
+    if inhm[k] then
+      return
+    end
+    local t = {}
+    local v = assert(uiobjects[k])
+    for vk in pairs(v.inherits) do
+      inhprocess(vk)
+      for tk in pairs(inhm[vk]) do
+        t[tk] = true
+      end
+      for mk in pairs(uiobjects[vk].methods) do
+        t[mk] = true
+      end
+    end
+    inhm[k] = t
+  end
+  for k in pairs(uiobjects) do
+    inhprocess(k)
+  end
   for k, v in pairs(mapped) do
     local u = assert(uiobjects[k], 'unknown uiobject type ' .. k)
     for mk, mv in pairs(v) do
       local mm = u.methods[mk]
       local mmv = {
-        impl = mm and mm.impl,
         inputs = insig(mv),
+        instride = stride(mv.Arguments),
         mayreturnnothing = mayreturnnothing(mv, mm),
         outputs = outsig(mv, nil, mm),
         outstride = stride(mv.Returns),
+        stuboutstrides = mm and mm.stuboutstrides,
       }
       local okay = (function()
-        if not mm or mm.getter or mm.setter then
-          return
+        if inhm[k][mk] then
+          return false
         end
-        local cu = deref(config, 'uiobjects', k)
-        local cm = deref(config, 'uiobject_methods', k, mk)
-        return not mm.impl or cu or cm
+        if deref(config, 'skip_uiobject_methods', k, mk) then
+          return false
+        end
+        return true
       end)()
       if okay then
-        u.methods[mk] = mmv
+        local lie = deref(lies, k, mk)
+        if lie then
+          assert(tableeq(lie, mmv), 'lie mismatch on ' .. k .. '.' .. mk)
+          lies[k][mk] = nil
+        else
+          mmv.impl = mm and mm.impl
+          u.methods[mk] = mmv
+        end
       end
     end
+    if lies[k] and not next(lies[k]) then
+      lies[k] = nil
+    end
+  end
+  if next(lies) then
+    error('not all lies were consumed: ' .. require('pl.pretty').write(lies))
   end
   writeifchanged(filename, pprintYaml(uiobjects))
   return uiobjects

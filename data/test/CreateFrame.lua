@@ -20,11 +20,11 @@ return {
       frame = function()
         local parent = T.env.CreateFrame('Frame')
         local frame = T.env.CreateFrame('Frame', nil, parent)
-        T.check1(parent, frame:GetParent())
+        return T.match(1, parent, frame:GetParent())
       end,
       ['nil'] = function()
         local frame = T.env.CreateFrame('Frame', nil, nil)
-        T.check1(nil, frame:GetParent())
+        return T.match(1, nil, frame:GetParent())
       end,
       string = function()
         local pname = 'WowlessFrameParentTest'
@@ -33,7 +33,7 @@ return {
       end,
       unset = function()
         local frame = T.env.CreateFrame('Frame', nil)
-        T.check1(nil, frame:GetParent())
+        return T.match(1, nil, frame:GetParent())
       end,
     }
   end,

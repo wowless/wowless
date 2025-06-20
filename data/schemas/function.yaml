@@ -20,11 +20,11 @@ type:
               required: true
               type:
                 schema: type
+    instride:
+      type: number
     mayreturnnils:
       type: boolean
     mayreturnnothing:
-      type: boolean
-    nowrap:
       type: boolean
     outputs:
       type:

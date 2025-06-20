@@ -1,8 +1,8 @@
 ---
-build: '60142'
-date: Apr  3 2025
-flavor: Cata
-hash: c5cda7a89e23b18b805ec3f559d39993
+build: '60895'
+date: May 15 2025
+gametype: Cata
+hash: dae7ca8bbea21a2730c9d103a4ae9897
 test: false
 tocversion: 40402
 version: 4.4.2

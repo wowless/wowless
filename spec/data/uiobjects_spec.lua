@@ -7,6 +7,23 @@ describe('uiobjects', function()
       assert.Nil(errmsg)
       assert.same(value, val)
     end
+    local function protocheck(expected, actual)
+      if expected.inputs then
+        assert.same(#expected.inputs, #actual.inputs)
+        for i, x in ipairs(expected.inputs) do
+          assert.same(x.type, actual.inputs[i].type)
+        end
+      end
+      if expected.outputs then
+        assert.same(#expected.outputs, #actual.outputs)
+        for i, x in ipairs(expected.outputs) do
+          assert.same(x.type, actual.outputs[i].type)
+        end
+      end
+      assert.same(expected.instride, actual.instride)
+      assert.same(expected.mayreturnnothing, actual.mayreturnnothing)
+      assert.same(expected.outstride, actual.outstride)
+    end
     describe(p, function()
       local uiobjects = require('build.data.products.' .. p .. '.uiobjects')
       describe('hierarchy', function()
@@ -55,17 +72,20 @@ describe('uiobjects', function()
           end)
         end
       end)
-      local function hasMember(k, m, f)
+      local function getMember(k, m, f)
         local v = uiobjects[k]
-        if (v[m] or {})[f] then
-          return true
+        if v[m] and v[m][f] then
+          return v[m][f]
         end
         for inh in pairs(v.inherits) do
-          if hasMember(inh, m, f) then
-            return true
+          local x = getMember(inh, m, f)
+          if x then
+            return x
           end
         end
-        return false
+      end
+      local function hasMember(k, m, f)
+        return getMember(k, m, f) ~= nil
       end
       for k, v in pairs(uiobjects) do
         describe(k, function()
@@ -93,11 +113,38 @@ describe('uiobjects', function()
                     assert.False(hasMember(inh, 'methods', mk))
                   end
                 end)
-                it('manipulates only declared fields', function()
-                  for _, field in ipairs(mv.getter or mv.setter or {}) do
-                    assert.True(hasMember(k, 'fields', field.name))
-                  end
-                end)
+                if mv.impl then
+                  describe('impl', function()
+                    it('manipulates only declared fields', function()
+                      for _, field in ipairs(mv.impl.getter or mv.impl.setter or {}) do
+                        assert.True(hasMember(k, 'fields', field.name))
+                      end
+                    end)
+                    if mv.impl.getter then
+                      it('has the right prototype', function()
+                        local outputs = {}
+                        for i, f in ipairs(mv.impl.getter) do
+                          outputs[i] = getMember(k, 'fields', f.name)
+                        end
+                        protocheck(mv, {
+                          inputs = {},
+                          outputs = outputs,
+                        })
+                      end)
+                    elseif mv.impl.setter then
+                      it('has the right prototype', function()
+                        local inputs = {}
+                        for i, f in ipairs(mv.impl.setter) do
+                          inputs[i] = getMember(k, 'fields', f.name)
+                        end
+                        protocheck(mv, {
+                          inputs = inputs,
+                          outputs = {},
+                        })
+                      end)
+                    end
+                  end)
+                end
                 describe('inputs', function()
                   for _, input in ipairs(mv.inputs or {}) do
                     describe(input.name, function()
@@ -114,6 +161,11 @@ describe('uiobjects', function()
                       assert.Nil(names[input.name])
                       names[input.name] = true
                     end
+                  end)
+                end)
+                describe('instride', function()
+                  it('is less than or equal to number of inputs', function()
+                    assert(not mv.instride or mv.instride <= #mv.inputs)
                   end)
                 end)
                 describe('outputs', function()
@@ -160,6 +212,15 @@ describe('uiobjects', function()
                 describe('outstride', function()
                   it('is less than or equal to number of outputs', function()
                     assert(not mv.outstride or mv.outstride <= #mv.outputs)
+                  end)
+                end)
+                describe('stuboutstrides', function()
+                  it('is only set it outstride is set', function()
+                    assert(not mv.stuboutstrides or mv.outstride)
+                  end)
+                  it('is either zero or greater than 1 if set', function()
+                    local s = mv.stuboutstrides
+                    assert(not s or s == 0 or s > 1)
                   end)
                 end)
               end)

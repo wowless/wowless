@@ -1,2 +1,4 @@
 local env = ...
-return env.WorldFrame
+return function()
+  return env.WorldFrame
+end

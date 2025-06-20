@@ -1,8 +1,8 @@
 local hlist = require('wowless.hlist')
-return function(api)
+return function(datalua)
   local allregs = hlist()
   local regs = {}
-  for k in pairs(api.datalua.events) do
+  for k in pairs(datalua.events) do
     regs[k] = hlist()
   end
 

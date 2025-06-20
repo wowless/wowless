@@ -1,4 +1,5 @@
-return (function(self, tex)
+local api, toTexture = ...
+return function(self, tex)
   local t = toTexture(self, tex, self.highlightTexture)
   if t then
     api.SetParent(t, self)
@@ -9,4 +10,4 @@ return (function(self, tex)
     t:Show()
   end
   self.highlightTexture = t
-end)(...)
+end

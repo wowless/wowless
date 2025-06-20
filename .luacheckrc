@@ -1,11 +1,15 @@
 read_globals = {
   'debug.getfunctionstats',
   'debug.getglobalstats',
+  'debug.getstacktaint',
+  'debug.gettaintmode',
   'debug.gettime',
   'debug.newcfunction',
   'debug.newsecurefunction',
   'debug.setnewclosuretaint',
   'debug.setprofilingenabled',
+  'debug.setstacktaint',
+  'debug.settaintmode',
   'forceinsecure',
   'hooksecurefunc',
   'issecure',
@@ -36,12 +40,5 @@ files['addon/Wowless'] = {
     'format',
     'RequestTimePlayed',
     'SendSystemMessage',
-  },
-}
--- TODO remove this when it is no longer necessary
-files['data/uiobjects'] = {
-  read_globals = {
-    'api',
-    'toTexture',
   },
 }

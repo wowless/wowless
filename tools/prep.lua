@@ -32,7 +32,7 @@ local function valstr(value)
   elseif ty == 'string' then
     return string.format('%q', value)
   elseif ty == 'table' then
-    return plprettywrite(value)
+    return plprettywrite(value, '')
   else
     error('unsupported stub value type ' .. ty)
   end
@@ -41,10 +41,14 @@ end
 local specDefault = (function()
   local defaultOutputs = {
     boolean = 'false',
+    Font = 'api.CreateUIObject("font").luarep',
+    FontString = 'api.CreateUIObject("fontstring").luarep',
     ['function'] = 'function() end',
+    MaskTexture = 'api.CreateUIObject("masktexture").luarep',
     ['nil'] = 'nil',
     number = '1',
     oneornil = 'nil',
+    Region = 'nil',
     string = '\'\'',
     table = '{}',
     unit = '\'player\'',
@@ -111,23 +115,50 @@ end)()
 
 local apis = {}
 local impls = {}
-local sqlcursors = {}
-local sqllookups = {}
+local sqls = {}
 do
   local cfg = parseYaml('data/products/' .. product .. '/apis.yaml')
   local implcfg = parseYaml('data/impl.yaml')
+  local sqlcfg = parseYaml('data/sql.yaml')
   for name, apicfg in pairs(cfg) do
     if apicfg.impl then
       local ic = assert(implcfg[apicfg.impl], 'missing impl ' .. apicfg.impl)
-      apicfg.frameworks = ic.module and { 'api' } or ic.frameworks
-      apicfg.sqls = ic.sqls
+      if ic.stdlib then
+        apicfg.impl = nil
+        apicfg.stdlib = ic.stdlib
+      end
+      for _, v in ipairs(ic.sqls or { ic.directsql }) do
+        if not sqls[v] then
+          local sql = sqlcfg[v]
+          sqls[v] = {
+            sql = readFile('data/sql/' .. v .. '.sql'),
+            table = sql.table,
+            type = sql.type,
+          }
+        end
+      end
       if not impls[apicfg.impl] then
         if ic.module then
-          -- TODO make this smarter so we don't piggy back on framework
-          local fmt = 'return (...).modules[%q][%q](select(2,...))'
-          impls[apicfg.impl] = fmt:format(ic.module, ic['function'] or apicfg.impl)
-        else
-          impls[apicfg.impl] = readFile('data/impl/' .. apicfg.impl .. '.lua')
+          local fmt = 'return (...).modules[%q][%q]'
+          impls[apicfg.impl] = {
+            frameworks = { 'api' },
+            src = fmt:format(ic.module, ic['function'] or apicfg.impl),
+          }
+        elseif ic.delegate then
+          impls[apicfg.impl] = {
+            src = 'return ' .. ic.delegate,
+          }
+        elseif ic.directsql then
+          impls[apicfg.impl] = {
+            sqls = { ic.directsql },
+            src = 'return (...)',
+          }
+        elseif not ic.stdlib then
+          impls[apicfg.impl] = {
+            frameworks = ic.frameworks,
+            sqls = ic.sqls,
+            src = readFile('data/impl/' .. apicfg.impl .. '.lua'),
+          }
         end
       end
     elseif apicfg.stubnothing then
@@ -145,19 +176,6 @@ do
         end
       end
       apicfg.stub = 'return ' .. table.concat(rets, ',')
-    end
-    for _, sql in ipairs(apicfg.sqls or {}) do
-      if sql.cursor then
-        sqlcursors[sql.cursor] = {
-          sql = readFile('data/sql/cursor/' .. sql.cursor .. '.sql'),
-          table = sql.table,
-        }
-      elseif sql.lookup then
-        sqllookups[sql.lookup] = {
-          sql = readFile('data/sql/lookup/' .. sql.lookup .. '.sql'),
-          table = sql.table,
-        }
-      end
     end
     apis[name] = apicfg
   end
@@ -228,79 +246,122 @@ local function mkuiobjectfieldset(k)
 end
 local uiobjects = {}
 for k, v in pairs(uiobjectdata) do
-  local constructor = { 'function() return {' }
+  local constructor = { 'local hlist=...;return function()return{' }
   for fk, fv in require('pl.tablex').sort(mkuiobjectinit(k)) do
-    table.insert(constructor, ('  %s = %s,'):format(fk, fv))
+    table.insert(constructor, ('%s=%s,'):format(fk, fv))
   end
-  table.insert(constructor, '} end')
+  table.insert(constructor, '}end')
   local fieldset = mkuiobjectfieldset(k)
   local methods = {}
   for mk, mv in pairs(v.methods) do
-    if mv.impl then
+    if type(mv.impl) == 'string' then
       assert(uiobjectimpl[mv.impl])
+      local src = 'data/uiobjects/' .. mv.impl .. '.lua'
       methods[mk] = {
-        impl = 'function(...) ' .. readFile('data/uiobjects/' .. mv.impl .. '.lua') .. ' end',
+        impl = readFile(src),
         inputs = mv.inputs,
         mayreturnnils = mv.mayreturnnils,
         mayreturnnothing = mv.mayreturnnothing,
         outputs = mv.outputs,
         outstride = mv.outstride,
+        src = src,
       }
-    elseif mv.getter then
+    elseif mv.impl and mv.impl.getter then
       local t = {}
-      for _, f in ipairs(mv.getter) do
+      for _, f in ipairs(mv.impl.getter) do
         if uiobjectdata[fieldset[f.name].type] then
           table.insert(t, 'self.' .. f.name .. ' and self.' .. f.name .. '.luarep')
         else
           table.insert(t, 'self.' .. f.name)
         end
       end
-      methods[mk] = 'function(self) return ' .. table.concat(t, ',') .. ' end'
-    elseif mv.setter then
-      local t = { 'function(self' }
-      for _, f in ipairs(mv.setter) do
+      methods[mk] = 'return function(self) return ' .. table.concat(t, ',') .. ' end'
+    elseif mv.impl and mv.impl.setter then
+      local t = { 'local api,toTexture,check,Mixin=...;' }
+      for i, f in ipairs(mv.impl.setter) do
+        local cf = fieldset[f.name]
+        if cf.type ~= 'Texture' then
+          table.insert(t, 'local spec' .. i .. '=')
+          local input = mv.inputs and mv.inputs[i]
+            or { -- issue #416
+              nilable = cf.type == 'boolean' or cf.nilable or f.nilable or nil,
+              type = cf.type,
+            }
+          table.insert(t, plprettywrite(input, '') .. ';')
+        end
+      end
+      table.insert(t, 'return function(self')
+      for _, f in ipairs(mv.impl.setter) do
         table.insert(t, ',')
         table.insert(t, f.name)
       end
-      table.insert(t, ') ')
-      for _, f in ipairs(mv.setter) do
+      table.insert(t, ')')
+      for i, f in ipairs(mv.impl.setter) do
         local cf = fieldset[f.name]
         table.insert(t, 'self.')
         table.insert(t, f.name)
         table.insert(t, '=')
-        if cf.type == 'boolean' then
-          table.insert(t, 'not not ')
-          table.insert(t, f.name)
+        if cf.type == 'Texture' then
+          table.insert(t, 'toTexture(self,' .. f.name .. ',self.')
         else
-          local ct = { 'check.', cf.type, '(', f.name }
-          if cf.type == 'Texture' then
-            table.insert(ct, ',self')
-          end
-          table.insert(ct, ')')
-          local sct = table.concat(ct, '')
-          if f.nilable or cf.nilable then
-            table.insert(t, f.name)
-            table.insert(t, '~=nil and ')
-            table.insert(t, sct)
-            table.insert(t, ' or nil')
-          else
-            table.insert(t, sct)
-          end
+          table.insert(t, 'check(spec')
+          table.insert(t, tostring(i))
+          table.insert(t, ',')
         end
-        table.insert(t, ';')
+        table.insert(t, f.name)
+        table.insert(t, ');')
       end
-      table.insert(t, ' end')
-      methods[mk] = table.concat(t, '')
+      table.insert(t, 'end')
+      methods[mk] = table.concat(t)
     else
-      local t = {}
-      for _, output in ipairs(mv.outputs or {}) do
-        table.insert(t, specDefault(output))
+      local t = { 'local api,toTexture,check,Mixin=...;' }
+      local ins = mv.inputs or {}
+      local nsins = #ins - (mv.instride or 0)
+      for i = 1, #ins do
+        table.insert(t, 'local spec' .. i .. '=' .. plprettywrite(mv.inputs[i], '') .. ';')
       end
-      methods[mk] = 'function() return ' .. table.concat(t, ',') .. ' end'
+      table.insert(t, 'return function(_')
+      for i = 1, nsins do
+        table.insert(t, ',arg' .. i)
+      end
+      if mv.instride then
+        table.insert(t, ',...')
+      end
+      table.insert(t, ')')
+      for i = 1, nsins do
+        table.insert(t, 'check(spec' .. i .. ',arg' .. i .. ');')
+      end
+      if mv.instride then
+        table.insert(t, 'for i=1,select("#",...),' .. mv.instride .. ' do ')
+        table.insert(t, 'local arg' .. nsins + 1)
+        for i = nsins + 2, #ins do
+          table.insert(t, ',arg' .. i)
+        end
+        table.insert(t, '=select(i,...);')
+        for i = nsins + 1, #ins do
+          table.insert(t, 'check(spec' .. i .. ',arg' .. i .. ');')
+        end
+        table.insert(t, 'end ')
+      end
+      table.insert(t, 'return ')
+      local outs = mv.outputs or {}
+      local rets = {}
+      local nonstride = #outs - (mv.outstride or 0)
+      for i = 1, nonstride do
+        table.insert(rets, specDefault(outs[i]))
+      end
+      for _ = 1, mv.stuboutstrides or 1 do
+        for j = nonstride + 1, #outs do
+          table.insert(rets, specDefault(outs[j]))
+        end
+      end
+      table.insert(t, table.concat(rets, ','))
+      table.insert(t, ' end')
+      methods[mk] = table.concat(t)
     end
   end
   uiobjects[k] = {
-    constructor = table.concat(constructor, '\n'),
+    constructor = table.concat(constructor),
     inherits = v.inherits,
     methods = methods,
     objectType = v.objectType,
@@ -317,8 +378,7 @@ local data = {
   globals = globals,
   impls = impls,
   product = product,
-  sqlcursors = sqlcursors,
-  sqllookups = sqllookups,
+  sqls = sqls,
   structures = structures,
   uiobjects = uiobjects,
   xml = parseYaml('data/products/' .. product .. '/xml.yaml'),

@@ -53,6 +53,7 @@ runner:
   skip_events:
     AJ_PVP_RBG_ACTION: missing HonorFrame_SetType
     AJ_PVP_SKIRMISH_ACTION: missing HonorFrame_SetType
+    AUCTION_HOUSE_SHOW: no C_AuctionHouse
     DUEL_OUTOFBOUNDS: error in StaticPopup infrastructure
     LFG_PROPOSAL_SHOW: TODO figure out if there's an ordering issue here
   skip_slashcmds:
@@ -61,6 +62,7 @@ runner:
     GUILD_INVITE: {}
     GUILD_UNINVITE: {}
     LOOT_MASTER: {}
+    RAIDFINDER: {}
     USERANDOM: {}
 runtime:
   warners:

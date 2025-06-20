@@ -4,13 +4,13 @@ local function quote(v)
   return type(v) == 'string' and string.format('%q', v) or tostring(v)
 end
 
-local function assertEquals(expected, actual, msg)
+local function assertEquals(expected, actual, msg, depth)
   local check = expected == actual
   if type(expected) == 'number' and type(actual) == 'number' then
-    check = abs(expected - actual) < 0.0001
+    check = math.abs(expected - actual) < 0.0001
   end
   if not check then
-    error(string.format('%swant %s, got %s', msg and msg .. ': ' or '', quote(expected), quote(actual)), 2)
+    error(string.format('%swant %s, got %s', msg and msg .. ': ' or '', quote(expected), quote(actual)), depth or 2)
   end
 end
 
@@ -35,61 +35,83 @@ local function assertRecursivelyEqual(expected, actual)
   end
 end
 
+local function match(k, ...)
+  local n = select('#', ...)
+  assert(n >= k, 'match usage error: insufficient args')
+  local t = {}
+  for i = 1, k do
+    local expected = select(i, ...)
+    local actual = select(k + i, ...)
+    t[tostring(i)] = function()
+      assert(n >= k + i, 'missing value')
+      assertEquals(expected, actual, nil, 3)
+    end
+  end
+  t.extra = function()
+    assert(n <= 2 * k, 'too many return values')
+  end
+  return t
+end
+
+local function checkEquals(expected, actual)
+  assertEquals(expected, actual, nil, 4)
+end
+
 local function check0(...)
-  assertEquals(0, select('#', ...))
+  checkEquals(0, select('#', ...))
 end
 
 local function check1(e1, ...)
-  assertEquals(1, select('#', ...))
+  checkEquals(1, select('#', ...))
   local a1 = ...
-  assertEquals(e1, a1)
+  checkEquals(e1, a1)
 end
 
 local function check2(e1, e2, ...)
-  assertEquals(2, select('#', ...))
+  checkEquals(2, select('#', ...))
   local a1, a2 = ...
-  assertEquals(e1, a1)
-  assertEquals(e2, a2)
+  checkEquals(e1, a1)
+  checkEquals(e2, a2)
 end
 
 local function check3(e1, e2, e3, ...)
-  assertEquals(3, select('#', ...))
+  checkEquals(3, select('#', ...))
   local a1, a2, a3 = ...
-  assertEquals(e1, a1)
-  assertEquals(e2, a2)
-  assertEquals(e3, a3)
+  checkEquals(e1, a1)
+  checkEquals(e2, a2)
+  checkEquals(e3, a3)
 end
 
 local function check4(e1, e2, e3, e4, ...)
-  assertEquals(4, select('#', ...))
+  checkEquals(4, select('#', ...))
   local a1, a2, a3, a4 = ...
-  assertEquals(e1, a1)
-  assertEquals(e2, a2)
-  assertEquals(e3, a3)
-  assertEquals(e4, a4)
+  checkEquals(e1, a1)
+  checkEquals(e2, a2)
+  checkEquals(e3, a3)
+  checkEquals(e4, a4)
 end
 
 local function check6(e1, e2, e3, e4, e5, e6, ...)
-  assertEquals(6, select('#', ...))
+  checkEquals(6, select('#', ...))
   local a1, a2, a3, a4, a5, a6 = ...
-  assertEquals(e1, a1)
-  assertEquals(e2, a2)
-  assertEquals(e3, a3)
-  assertEquals(e4, a4)
-  assertEquals(e5, a5)
-  assertEquals(e6, a6)
+  checkEquals(e1, a1)
+  checkEquals(e2, a2)
+  checkEquals(e3, a3)
+  checkEquals(e4, a4)
+  checkEquals(e5, a5)
+  checkEquals(e6, a6)
 end
 
 local function check7(e1, e2, e3, e4, e5, e6, e7, ...)
-  assertEquals(7, select('#', ...))
+  checkEquals(7, select('#', ...))
   local a1, a2, a3, a4, a5, a6, a7 = ...
-  assertEquals(e1, a1)
-  assertEquals(e2, a2)
-  assertEquals(e3, a3)
-  assertEquals(e4, a4)
-  assertEquals(e5, a5)
-  assertEquals(e6, a6)
-  assertEquals(e7, a7)
+  checkEquals(e1, a1)
+  checkEquals(e2, a2)
+  checkEquals(e3, a3)
+  checkEquals(e4, a4)
+  checkEquals(e5, a5)
+  checkEquals(e6, a6)
+  checkEquals(e7, a7)
 end
 
 local function retn(n, ...)
@@ -120,5 +142,6 @@ G.check4 = check4
 G.check6 = check6
 G.check7 = check7
 G.globalEnv = _G
+G.match = match
 G.mixin = mixin
 G.retn = retn

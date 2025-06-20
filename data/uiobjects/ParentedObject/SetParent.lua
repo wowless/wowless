@@ -1,3 +1,4 @@
-return (function(self, parent)
+local api = ...
+return function(self, parent)
   api.SetParent(self, parent)
-end)(...)
+end

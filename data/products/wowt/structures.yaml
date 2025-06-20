@@ -30,7 +30,7 @@ AnchorBinding:
     relativePoint:
       type: FramePoint
     relativeTo:
-      type: table
+      type: Region
 AppearanceSourceInfo:
   fields:
     canDisplayOnPlayer:
@@ -189,6 +189,32 @@ C_AddOnProfiler.AddOnPerformanceMessage:
     type:
       type:
         enum: AddOnPerformanceMessageType
+C_AddOnProfiler.AddOnProfilerCallEvent:
+  fields:
+    allocatedBytes:
+      type: number
+    deallocatedBytes:
+      type: number
+    elapsedMilliseconds:
+      type: number
+    elapsedTicks:
+      type: number
+    name:
+      type: string
+C_AddOnProfiler.AddOnProfilerCallResults:
+  fields:
+    allocatedBytes:
+      type: number
+    deallocatedBytes:
+      type: number
+    elapsedMilliseconds:
+      type: number
+    elapsedTicks:
+      type: number
+    events:
+      type:
+        arrayof:
+          structure: C_AddOnProfiler.AddOnProfilerCallEvent
 C_AddOnProfiler.AddOnProfilerResult:
   fields:
     addOnName:
@@ -4764,6 +4790,8 @@ C_PlayerChoice.PlayerChoiceOptionButtonInfo:
     rewardQuestID:
       nilable: true
       type: number
+    selected:
+      type: boolean
     showCheckmark:
       type: boolean
     soundKitID:
@@ -4926,10 +4954,11 @@ C_PvP.BattlemasterListInfo:
   fields:
     icon:
       type: number
-    instanceType:
-      type: number
     longDescription:
       type: string
+    matchmakingType:
+      type:
+        enum: PvPMatchmakingType
     maxPlayers:
       type: number
     minPlayers:
@@ -6648,9 +6677,6 @@ C_TransmogCollection.TransmogCategoryAppearanceInfo:
       type: boolean
     isUsable:
       type: boolean
-    restrictedSlotID:
-      nilable: true
-      type: number
     uiOrder:
       type: number
     visualID:
@@ -6751,6 +6777,51 @@ C_UIWidgetManager.BulletTextListWidgetVisualizationInfo:
         enum: WidgetShownState
     textureKit:
       type: string
+    widgetScale:
+      type:
+        enum: UIWidgetScale
+    widgetSizeSetting:
+      type: number
+    widgetTag:
+      type: string
+C_UIWidgetManager.ButtonHeaderWidgetVisualizationInfo:
+  fields:
+    buttons:
+      type:
+        arrayof:
+          structure: C_UIWidgetManager.UIWidgetSpellButtonInfo
+    frameTextureKit:
+      type: string
+    hasTimer:
+      type: boolean
+    headerText:
+      type: string
+    inAnimType:
+      type:
+        enum: WidgetAnimationType
+    layoutDirection:
+      type:
+        enum: UIWidgetLayoutDirection
+    modelSceneLayer:
+      type:
+        enum: UIWidgetModelSceneLayer
+    orderIndex:
+      type: number
+    outAnimType:
+      type:
+        enum: WidgetAnimationType
+    scriptedAnimationEffectID:
+      type: number
+    shownState:
+      type:
+        enum: WidgetShownState
+    textureKit:
+      type: string
+    tooltip:
+      type: string
+    tooltipLoc:
+      type:
+        enum: UIWidgetTooltipLocation
     widgetScale:
       type:
         enum: UIWidgetScale
@@ -8236,6 +8307,21 @@ C_UIWidgetManager.UIWidgetSetInfo:
         enum: UIWidgetSetLayoutDirection
     verticalPadding:
       type: number
+C_UIWidgetManager.UIWidgetSpellButtonInfo:
+  fields:
+    cooldownType:
+      type:
+        enum: UIWidgetSpellButtonCooldownType
+    enabledState:
+      type:
+        enum: UIWidgetButtonEnabledState
+    icon:
+      type:
+        enum: UIWidgetButtonIconType
+    spellID:
+      type: number
+    tooltip:
+      type: string
 C_UIWidgetManager.UIWidgetSpellInfo:
   fields:
     borderColor:
@@ -9514,7 +9600,7 @@ FontScriptInfo:
       type:
         structure: colorRGBA
     fontObject:
-      type: table
+      type: Font
     height:
       type: number
     outline:

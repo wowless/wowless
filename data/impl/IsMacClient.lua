@@ -1,2 +1,4 @@
 local api = ...
-return api.platform == 'mac'
+return function()
+  return api.platform == 'mac'
+end

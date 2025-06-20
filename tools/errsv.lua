@@ -49,7 +49,7 @@ local getPatternValue = (function()
       value = mustnumber,
     },
     {
-      pattern = ': extra cvar$',
+      pattern = ': extra cvar "[^"]*"$',
       value = constant(nil),
     },
     {

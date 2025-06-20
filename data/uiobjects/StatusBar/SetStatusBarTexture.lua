@@ -1,4 +1,5 @@
-return (function(self, tex)
+local api, toTexture = ...
+return function(self, tex)
   local t = toTexture(self, tex, self.statusBarTexture)
   if t then
     api.SetParent(t, self)
@@ -8,4 +9,4 @@ return (function(self, tex)
   end
   self.statusBarTexture = t
   return true
-end)(...)
+end

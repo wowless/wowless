@@ -1,3 +1,3 @@
-return (function(self, name, value)
+return function(self, name, value)
   self.attributes[name] = value
-end)(...)
+end

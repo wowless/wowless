@@ -1,4 +1,5 @@
-return (function(self, name)
+local api = ...
+return function(self, name)
   if name == nil then
     -- TODO error here instead of silently ignoring
     return
@@ -13,4 +14,4 @@ return (function(self, name)
   self:SetVertTile(t.tilesVertically)
   self:SetTexCoord(t.leftTexCoord, t.rightTexCoord, t.topTexCoord, t.bottomTexCoord)
   self.atlas = t.elementName or name
-end)(...)
+end

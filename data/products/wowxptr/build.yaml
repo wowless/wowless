@@ -1,7 +1,7 @@
 ---
 build: '59347'
 date: Feb 18 2025
-flavor: Mainline
+gametype: Standard
 hash: 6952f4bbf97e28f9bc573dc5436525ea
 test: false
 tocversion: 110100

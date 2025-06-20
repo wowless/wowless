@@ -4,74 +4,9 @@ local assertEquals = _G.assertEquals
 
 local check0 = G.check0
 local check1 = G.check1
+local check2 = G.check2
 local check4 = G.check4
-
-local function checkStateMachine(states, transitions, init)
-  local edges = {}
-  for s in pairs(states) do
-    edges[s] = {}
-    for ss in pairs(states) do
-      edges[s][ss] = {}
-    end
-  end
-  for k, v in pairs(transitions) do
-    if v.edges then
-      for from, to in pairs(v.edges) do
-        edges[from][to][k] = true
-      end
-    else
-      for s in pairs(states) do
-        edges[s][v.to or s][k] = true
-      end
-    end
-  end
-  local frominit = {}
-  for k in pairs(edges) do
-    local t = next(edges[init][k])
-    assert(t, 'no way to ' .. k .. ' from ' .. init) -- TODO generalize
-    frominit[k] = t
-  end
-  local toinit = {}
-  for k, v in pairs(edges) do
-    local t = next(v[init])
-    assert(t, 'no way back to ' .. init .. ' from ' .. k) -- TODO generalize
-    toinit[k] = t
-  end
-  local function trimerr(s)
-    local _, n = s:find(':%d+: ')
-    return n and s:sub(n + 1) or s
-  end
-  local function checkState(s, n)
-    local success, msg = pcall(states[s])
-    if not success then
-      error(('%s state: %s'):format(n, trimerr(msg)))
-    end
-  end
-  local function checkTransition(t, n)
-    local success, msg = pcall(transitions[t].func)
-    if not success then
-      error(('%s transition: %s'):format(n, trimerr(msg)))
-    end
-  end
-  for from, tos in pairs(edges) do
-    for to, ts in pairs(tos) do
-      for t in pairs(ts) do
-        local success, msg = pcall(function()
-          checkState(init, 'init')
-          checkTransition(frominit[from], 'init -> from')
-          checkState(from, 'from')
-          checkTransition(t, 'from -> to')
-          checkState(to, 'to')
-          checkTransition(toinit[to], 'to -> init')
-          checkState(init, 'postinit(' .. toinit[to] .. ')')
-        end)
-        if not success then
-          error(('failure on %s -> %s transition %s: %s'):format(from, to, t, trimerr(msg)))
-        end
-      end
-    end
-  end
-end
+local checkStateMachine = G.checkStateMachine
 
 G.testsuite.sync = function()
   return {
@@ -112,6 +47,7 @@ G.testsuite.sync = function()
           func = function()
             assertEquals(false, pcall(b.SetButtonState, b, 'bad'))
           end,
+          loop = true,
         },
         setEnabledFalse = {
           to = 'disabled',
@@ -387,41 +323,6 @@ G.testsuite.sync = function()
       assertEquals('dead', coroutine.status(co))
       assertEquals('a,b,c,d,e,f', table.concat(log, ','))
     end,
-    ['format'] = function()
-      return {
-        ['format missing numbers'] = function()
-          assertEquals('0', format('%d'))
-        end,
-        ['format nil numbers'] = function()
-          assertEquals('0', format('%d', nil))
-        end,
-        ['does not format missing strings'] = function()
-          assert(not pcall(format, '%s'))
-        end,
-        ['does not format nil strings'] = function()
-          assert(not pcall(format, '%s', nil))
-        end,
-        ['format handles indexed substitution'] = function()
-          assertEquals(' 7   moo', format('%2$2d %1$5s', 'moo', 7))
-        end,
-        ['format handles up to index 99 substitution'] = function()
-          local t = {}
-          for i = 1, 100 do
-            t[i] = i
-          end
-          for i = 1, 99 do
-            assertEquals(tostring(i), format('%' .. i .. '$d', unpack(t)))
-          end
-          assert(not pcall(format, '%100$d', unpack(t)))
-        end,
-        ['format handles %f'] = function()
-          assertEquals('inf', format('%f', math.huge):sub(-3))
-        end,
-        ['format handles %F'] = function()
-          assertEquals('inf', format('%F', math.huge):sub(-3))
-        end,
-      }
-    end,
 
     loading = function()
       return {
@@ -570,6 +471,138 @@ G.testsuite.sync = function()
       }, '\n')
       assertEquals(expected, table.concat(log, '\n'))
     end,
+
+    ScrollingMessageFrame = function()
+      if _G.__wowless and _G.__wowless.lite then
+        return
+      end
+      return {
+        mixin = function()
+          local m = _G.ScrollingMessageFrameMixin
+          return {
+            empty = function()
+              check1(nil, next(m))
+            end,
+            fn = function()
+              -- The function is uninteresting when invoked this way.
+              local fn = m.SetOnTextCopiedCallback
+              assertEquals('function', type(fn))
+              return {
+                isluafunc = function()
+                  assertEquals(true, (pcall(coroutine.create, fn)))
+                end,
+                nowrapping = function()
+                  local f = CreateFrame('ScrollingMessageFrame')
+                  local arg = function() end
+                  fn(f, arg)
+                  assertEquals(arg, f.onTextCopiedCallback)
+                end,
+              }
+            end,
+            metatable = function()
+              return {
+                call = function()
+                  assertEquals(false, (pcall(m)))
+                end,
+                index = function()
+                  assertEquals(nil, m.wowless)
+                  m.wowless = 'moo'
+                  assertEquals('moo', m.wowless)
+                  check2('wowless', 'moo', next(m))
+                  assertEquals(nil, CreateFrame('ScrollingMessageFrame').wowless)
+                  m.wowless = nil
+                  assertEquals(nil, m.wowless)
+                  check1(nil, next(m))
+                end,
+                overwrite = function()
+                  local called
+                  local function cb()
+                    called = true
+                  end
+                  m.SetOnTextCopiedCallback = cb
+                  assertEquals(cb, m.SetOnTextCopiedCallback)
+                  check2('SetOnTextCopiedCallback', cb, next(m))
+                  CreateFrame('ScrollingMessageFrame'):SetOnTextCopiedCallback(function() end)
+                  assertEquals(nil, called)
+                  m.SetOnTextCopiedCallback = nil
+                  check1(nil, next(m))
+                end,
+                type = function()
+                  assertEquals('number', type(getmetatable(m)))
+                end,
+              }
+            end,
+            type = function()
+              assertEquals('table', type(m))
+            end,
+          }
+        end,
+        fn = function()
+          local f = CreateFrame('ScrollingMessageFrame')
+          local fn = f.SetOnTextCopiedCallback
+          assertEquals('function', type(fn))
+          return {
+            notluafunc = function()
+              assertEquals(false, (pcall(coroutine.create, fn)))
+            end,
+            wrapsarg = function()
+              local called
+              local arg = function()
+                called = true
+              end
+              fn(f, arg)
+              local cb = f.onTextCopiedCallback
+              assertEquals('function', type(cb))
+              return {
+                notluafunc = function()
+                  assertEquals(false, (pcall(coroutine.create, cb)))
+                end,
+                notsame = function()
+                  assertEquals(false, cb == arg)
+                end,
+                set = function()
+                  assertEquals(false, cb == nil)
+                end,
+                wrapped = function()
+                  called = false
+                  cb()
+                  assertEquals(true, called)
+                end,
+              }
+            end,
+          }
+        end,
+      }
+    end,
+
+    SimpleCheckout = function()
+      if _G.__wowless then -- scope to lite, issue #405
+        return
+      end
+      local forbidden = _G.SimpleCheckout
+      assertEquals(true, forbidden:IsForbidden())
+      local normal = CreateFrame('Checkout')
+      return {
+        metatable = function()
+          assertEquals('Forbidden', getmetatable(forbidden))
+        end,
+        methods = function()
+          local t = {}
+          for k, v in pairs(getmetatable(normal).__index) do
+            t[k] = function()
+              assertEquals(false, forbidden[k] == nil)
+              assertEquals(false, forbidden[k] == v)
+            end
+          end
+          return t
+        end,
+        userdata = function()
+          assertEquals('userdata', type(forbidden[0]))
+          assertEquals(false, forbidden[0] == normal[0])
+        end,
+      }
+    end,
+
     WorldFrame = function()
       return {
         ['is a normal frame'] = function()

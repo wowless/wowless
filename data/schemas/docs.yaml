@@ -21,6 +21,16 @@ type:
                 key: string
                 value:
                   schema: function
+          uiobjects:
+            type:
+              mapof:
+                key:
+                  ref: uiobject
+                value:
+                  mapof:
+                    key: string
+                    value:
+                      schema: function
     mayreturnnothing:
       type: boolean
     script_objects:
@@ -35,13 +45,7 @@ type:
           key: string
           value:
             record: null
-    typedefs:
-      type:
-        mapof:
-          key: string
-          value:
-            schema: type
-    uiobject_methods:
+    skip_uiobject_methods:
       type:
         mapof:
           key:
@@ -51,10 +55,9 @@ type:
               key: string
               value:
                 record: null
-    uiobjects:
+    typedefs:
       type:
         mapof:
-          key:
-            ref: uiobject
+          key: string
           value:
-            record: null
+            schema: type

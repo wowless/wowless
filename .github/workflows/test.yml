@@ -34,7 +34,7 @@ jobs:
           GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}
         imageName: ghcr.io/wowless/wowless-devcontainer
         refFilterForPush: refs/heads/main
-        runCmd: pre-commit run -a -v && ninja -v all
+        runCmd: pre-commit run -a -v
     - uses: actions/upload-artifact@v4
       if: success() || failure()
       with:
@@ -75,6 +75,6 @@ jobs:
     - uses: actions/checkout@v4
       with:
         submodules: true
-    - uses: lukka/get-cmake@v3.31.5
+    - uses: lukka/get-cmake@v4.0.3
     - run: cmake -B build -G "${{ matrix.config.generator }}"
     - run: cmake --build build --verbose

@@ -517,8 +517,13 @@ Animation:
       - name: elapsedSec
         type: number
     GetEndDelay:
-      getter:
-      - name: endDelay
+      impl:
+        getter:
+        - name: endDelay
+      inputs: {}
+      outputs:
+      - name: delaySec
+        type: number
     GetOrder:
       inputs: {}
       outputs:
@@ -536,16 +541,26 @@ Animation:
       - name: region
         type: UIObject
     GetSmoothing:
-      getter:
-      - name: smoothing
+      impl:
+        getter:
+        - name: smoothing
+      inputs: {}
+      outputs:
+      - name: weights
+        type: SmoothingType
     GetSmoothProgress:
       inputs: {}
       outputs:
       - name: progress
         type: number
     GetStartDelay:
-      getter:
-      - name: startDelay
+      impl:
+        getter:
+        - name: startDelay
+      inputs: {}
+      outputs:
+      - name: delaySec
+        type: number
     GetTarget:
       impl: Animation/GetTarget
       inputs: {}
@@ -602,8 +617,13 @@ Animation:
         type: boolean
       outputs: {}
     SetEndDelay:
-      setter:
-      - name: endDelay
+      inputs:
+      - name: delaySec
+        type: number
+      - default: true
+        name: recomputeGroupDuration
+        type: boolean
+      outputs: {}
     SetOrder:
       inputs:
       - name: newOrder
@@ -615,16 +635,26 @@ Animation:
         type: boolean
       outputs: {}
     SetSmoothing:
-      setter:
-      - name: smoothing
+      impl:
+        setter:
+        - name: smoothing
+      inputs:
+      - name: weights
+        type: SmoothingType
+      outputs: {}
     SetSmoothProgress:
       inputs:
       - name: durationSec
         type: number
       outputs: {}
     SetStartDelay:
-      setter:
-      - name: startDelay
+      inputs:
+      - name: delaySec
+        type: number
+      - default: true
+        name: recomputeGroupDuration
+        type: boolean
+      outputs: {}
     SetTarget:
       inputs:
       - name: target
@@ -704,8 +734,13 @@ AnimationGroup:
       - name: elapsedSec
         type: number
     GetLooping:
-      getter:
-      - name: looping
+      impl:
+        getter:
+        - name: looping
+      inputs: {}
+      outputs:
+      - name: loopType
+        type: LoopType
     GetLoopState:
       inputs: {}
       outputs:
@@ -776,8 +811,13 @@ AnimationGroup:
         type: number
       outputs: {}
     SetLooping:
-      setter:
-      - name: looping
+      impl:
+        setter:
+        - name: looping
+      inputs:
+      - name: loopType
+        type: LoopType
+      outputs: {}
     SetPlaying:
       inputs:
       - name: play
@@ -933,43 +973,90 @@ Button:
       inputs: {}
       outputs: {}
     GetButtonState:
-      getter:
+      impl:
+        getter:
+        - name: buttonState
+      inputs: {}
+      outputs:
       - name: buttonState
+        type: SimpleButtonStateToken
     GetDisabledFontObject:
       inputs: {}
       outputs:
       - name: font
-        type: table
+        type: Font
     GetDisabledTexture:
-      getter:
-      - name: disabledTexture
+      impl:
+        getter:
+        - name: disabledTexture
+      inputs: {}
+      outputs:
+      - name: texture
+        type: Texture
     GetFontString:
-      getter:
-      - name: fontstring
+      impl:
+        getter:
+        - name: fontstring
+      inputs: {}
+      outputs:
+      - name: fontString
+        type: FontString
     GetHighlightFontObject:
       inputs: {}
       outputs:
       - name: font
-        type: table
+        type: Font
     GetHighlightTexture:
-      getter:
-      - name: highlightTexture
+      impl:
+        getter:
+        - name: highlightTexture
+      inputs: {}
+      outputs:
+      - name: texture
+        type: Texture
     GetMotionScriptsWhileDisabled:
-      getter:
+      impl:
+        getter:
+        - name: motionScriptsWhileDisabled
+      inputs: {}
+      outputs:
       - name: motionScriptsWhileDisabled
+        type: boolean
     GetNormalFontObject:
-      getter:
-      - name: normalFontObject
+      impl:
+        getter:
+        - name: normalFontObject
+      inputs: {}
+      outputs:
+      - name: font
+        type: Font
     GetNormalTexture:
-      getter:
-      - name: normalTexture
+      impl:
+        getter:
+        - name: normalTexture
+      inputs: {}
+      outputs:
+      - name: texture
+        type: Texture
     GetPushedTextOffset:
-      getter:
-      - name: pushedTextOffsetX
-      - name: pushedTextOffsetY
+      impl:
+        getter:
+        - name: pushedTextOffsetX
+        - name: pushedTextOffsetY
+      inputs: {}
+      outputs:
+      - name: offsetX
+        type: number
+      - name: offsetY
+        type: number
     GetPushedTexture:
-      getter:
-      - name: pushedTexture
+      impl:
+        getter:
+        - name: pushedTexture
+      inputs: {}
+      outputs:
+      - name: texture
+        type: Texture
     GetText:
       impl: Button/GetText
     GetTextHeight:
@@ -984,12 +1071,22 @@ Button:
         type: number
     IsEnabled:
       impl: Button/IsEnabled
+      inputs: {}
+      outputs:
+      - name: isEnabled
+        type: boolean
     RegisterForClicks:
       impl: Button/RegisterForClicks
+      inputs:
+      - name: button
+        type: string
+      instride: 1
+      outputs: {}
     RegisterForMouse:
       inputs:
-      - name: unpackedPrimitiveType
-        type: number
+      - name: button
+        type: string
+      instride: 1
       outputs: {}
     SetButtonState:
       impl: Button/SetButtonState
@@ -1009,12 +1106,17 @@ Button:
     SetDisabledFontObject:
       inputs:
       - name: font
-        type: table
+        type: Font
       outputs: {}
     SetDisabledTexture:
       impl: Button/SetDisabledTexture
     SetEnabled:
       impl: Button/SetEnabled
+      inputs:
+      - default: false
+        name: enabled
+        type: boolean
+      outputs: {}
     SetFontString:
       impl: Button/SetFontString
       inputs:
@@ -1025,16 +1127,28 @@ Button:
       impl: Button/SetFormattedText
     SetHighlightAtlas:
       impl: Button/SetHighlightAtlas
+      inputs:
+      - name: atlas
+        type: string
+      - name: blendMode
+        nilable: true
+        type: BlendMode
+      outputs: {}
     SetHighlightFontObject:
       inputs:
       - name: font
-        type: table
+        type: Font
       outputs: {}
     SetHighlightTexture:
       impl: Button/SetHighlightTexture
     SetMotionScriptsWhileDisabled:
-      setter:
+      impl:
+        setter:
+        - name: motionScriptsWhileDisabled
+      inputs:
       - name: motionScriptsWhileDisabled
+        type: boolean
+      outputs: {}
     SetNormalAtlas:
       impl: Button/SetNormalAtlas
       inputs:
@@ -1042,8 +1156,13 @@ Button:
         type: string
       outputs: {}
     SetNormalFontObject:
-      setter:
-      - name: normalFontObject
+      impl:
+        setter:
+        - name: normalFontObject
+      inputs:
+      - name: font
+        type: Font
+      outputs: {}
     SetNormalTexture:
       impl: Button/SetNormalTexture
     SetPushedAtlas:
@@ -1053,13 +1172,25 @@ Button:
         type: string
       outputs: {}
     SetPushedTextOffset:
-      setter:
-      - name: pushedTextOffsetX
-      - name: pushedTextOffsetY
+      impl:
+        setter:
+        - name: pushedTextOffsetX
+        - name: pushedTextOffsetY
+      inputs:
+      - name: offsetX
+        type: number
+      - name: offsetY
+        type: number
+      outputs: {}
     SetPushedTexture:
       impl: Button/SetPushedTexture
     SetText:
       impl: Button/SetText
+      inputs:
+      - default: ''
+        name: text
+        type: string
+      outputs: {}
 CheckButton:
   fields:
     checked:
@@ -1075,21 +1206,46 @@ CheckButton:
     Button: {}
   methods:
     GetChecked:
-      getter:
+      impl:
+        getter:
+        - name: checked
+      inputs: {}
+      outputs:
       - name: checked
+        type: boolean
     GetCheckedTexture:
-      getter:
-      - name: checkedTexture
+      impl:
+        getter:
+        - name: checkedTexture
+      inputs: {}
+      outputs:
+      - name: texture
+        type: Texture
     GetDisabledCheckedTexture:
-      getter:
-      - name: disabledCheckedTexture
+      impl:
+        getter:
+        - name: disabledCheckedTexture
+      inputs: {}
+      outputs:
+      - name: texture
+        type: Texture
     SetChecked:
       impl: CheckButton/SetChecked
+      inputs:
+      - default: false
+        name: checked
+        type: boolean
+      outputs: {}
     SetCheckedTexture:
       impl: CheckButton/SetCheckedTexture
     SetDisabledCheckedTexture:
-      setter:
-      - name: disabledCheckedTexture
+      impl:
+        setter:
+        - name: disabledCheckedTexture
+      inputs:
+      - name: asset
+        type: Texture
+      outputs: {}
 Checkout:
   fieldinitoverrides:
     mouseClickEnabled: true
@@ -1263,11 +1419,21 @@ ColorSelect:
       - name: alpha
         type: number
     GetColorAlphaTexture:
-      getter:
-      - name: colorAlphaTexture
+      impl:
+        getter:
+        - name: colorAlphaTexture
+      inputs: {}
+      outputs:
+      - name: texture
+        type: Texture
     GetColorAlphaThumbTexture:
-      getter:
-      - name: colorAlphaThumbTexture
+      impl:
+        getter:
+        - name: colorAlphaThumbTexture
+      inputs: {}
+      outputs:
+      - name: texture
+        type: Texture
     GetColorHSV:
       inputs: {}
       outputs:
@@ -1287,28 +1453,58 @@ ColorSelect:
       - name: rgbB
         type: number
     GetColorValueTexture:
-      getter:
-      - name: colorValueTexture
+      impl:
+        getter:
+        - name: colorValueTexture
+      inputs: {}
+      outputs:
+      - name: texture
+        type: Texture
     GetColorValueThumbTexture:
-      getter:
-      - name: colorValueThumbTexture
+      impl:
+        getter:
+        - name: colorValueThumbTexture
+      inputs: {}
+      outputs:
+      - name: texture
+        type: Texture
     GetColorWheelTexture:
-      getter:
-      - name: colorWheelTexture
+      impl:
+        getter:
+        - name: colorWheelTexture
+      inputs: {}
+      outputs:
+      - name: texture
+        type: Texture
     GetColorWheelThumbTexture:
-      getter:
-      - name: colorWheelThumbTexture
+      impl:
+        getter:
+        - name: colorWheelThumbTexture
+      inputs: {}
+      outputs:
+      - name: texture
+        type: Texture
     SetColorAlpha:
       inputs:
       - name: alpha
         type: number
       outputs: {}
     SetColorAlphaTexture:
-      setter:
-      - name: colorAlphaTexture
+      impl:
+        setter:
+        - name: colorAlphaTexture
+      inputs:
+      - name: texture
+        type: Texture
+      outputs: {}
     SetColorAlphaThumbTexture:
-      setter:
-      - name: colorAlphaThumbTexture
+      impl:
+        setter:
+        - name: colorAlphaThumbTexture
+      inputs:
+      - name: texture
+        type: Texture
+      outputs: {}
     SetColorHSV:
       inputs:
       - name: hsvX
@@ -1328,17 +1524,37 @@ ColorSelect:
         type: number
       outputs: {}
     SetColorValueTexture:
-      setter:
-      - name: colorValueTexture
+      impl:
+        setter:
+        - name: colorValueTexture
+      inputs:
+      - name: texture
+        type: Texture
+      outputs: {}
     SetColorValueThumbTexture:
-      setter:
-      - name: colorValueThumbTexture
+      impl:
+        setter:
+        - name: colorValueThumbTexture
+      inputs:
+      - name: texture
+        type: Texture
+      outputs: {}
     SetColorWheelTexture:
-      setter:
-      - name: colorWheelTexture
+      impl:
+        setter:
+        - name: colorWheelTexture
+      inputs:
+      - name: texture
+        type: Texture
+      outputs: {}
     SetColorWheelThumbTexture:
-      setter:
-      - name: colorWheelThumbTexture
+      impl:
+        setter:
+        - name: colorWheelThumbTexture
+      inputs:
+      - name: texture
+        type: Texture
+      outputs: {}
 ControlPoint:
   fields: {}
   inherits:
@@ -1402,9 +1618,16 @@ Cooldown:
       - name: duration
         type: number
     GetCooldownTimes:
-      getter:
-      - name: startTimeMillis
-      - name: durationMillis
+      impl:
+        getter:
+        - name: startTimeMillis
+        - name: durationMillis
+      inputs: {}
+      outputs:
+      - name: start
+        type: number
+      - name: duration
+        type: number
     GetDrawBling:
       inputs: {}
       outputs:
@@ -1457,8 +1680,9 @@ Cooldown:
       inputs: {}
       outputs: {}
     SetBlingTexture:
-      setter:
-      - name: blingTexture
+      impl:
+        setter:
+        - name: blingTexture
     SetCooldown:
       inputs:
       - name: start
@@ -1521,8 +1745,9 @@ Cooldown:
         type: number
       outputs: {}
     SetEdgeTexture:
-      setter:
-      - name: edgeTexture
+      impl:
+        setter:
+        - name: edgeTexture
     SetHideCountdownNumbers:
       inputs:
       - default: false
@@ -1553,8 +1778,9 @@ Cooldown:
         type: number
       outputs: {}
     SetSwipeTexture:
-      setter:
-      - name: swipeTexture
+      impl:
+        setter:
+        - name: swipeTexture
     SetTexCoordRange:
       inputs:
       - name: low
@@ -1807,19 +2033,34 @@ EditBox:
       - name: colorA
         type: number
     GetHistoryLines:
-      getter:
-      - name: historyLines
+      impl:
+        getter:
+        - name: historyLines
+      inputs: {}
+      outputs:
+      - name: numHistoryLines
+        type: number
     GetInputLanguage:
       inputs: {}
       outputs:
       - name: language
         type: string
     GetMaxBytes:
-      getter:
+      impl:
+        getter:
+        - name: maxBytes
+      inputs: {}
+      outputs:
       - name: maxBytes
+        type: number
     GetMaxLetters:
-      getter:
+      impl:
+        getter:
+        - name: maxLetters
+      inputs: {}
+      outputs:
       - name: maxLetters
+        type: number
     GetNumber:
       inputs: {}
       outputs:
@@ -1839,8 +2080,13 @@ EditBox:
       - name: lines
         type: number
     GetText:
-      getter:
-      - name: editboxText
+      impl:
+        getter:
+        - name: editboxText
+      inputs: {}
+      outputs:
+      - name: text
+        type: string
     GetTextInsets:
       inputs: {}
       outputs:
@@ -1883,28 +2129,52 @@ EditBox:
       outputs: {}
     Insert:
       impl: EditBox/Insert
+      inputs:
+      - name: text
+        type: string
+      outputs: {}
     IsAlphabeticOnly:
       inputs: {}
       outputs:
       - name: enabled
         type: boolean
     IsAutoFocus:
-      getter:
-      - name: isAutoFocus
+      impl:
+        getter:
+        - name: isAutoFocus
+      inputs: {}
+      outputs:
+      - name: autoFocus
+        type: boolean
     IsCountInvisibleLetters:
-      getter:
-      - name: isCountInvisibleLetters
+      impl:
+        getter:
+        - name: isCountInvisibleLetters
+      inputs: {}
+      outputs:
+      - name: countInvisibleLetters
+        type: boolean
     IsEnabled:
-      getter:
-      - name: enabled
+      impl:
+        getter:
+        - name: enabled
+      inputs: {}
+      outputs:
+      - name: isEnabled
+        type: boolean
     IsInIMECompositionMode:
       inputs: {}
       outputs:
       - name: isInIMECompositionMode
         type: boolean
     IsMultiLine:
-      getter:
-      - name: isMultiLine
+      impl:
+        getter:
+        - name: isMultiLine
+      inputs: {}
+      outputs:
+      - name: multiline
+        type: boolean
     IsNumeric:
       inputs: {}
       outputs:
@@ -1921,8 +2191,13 @@ EditBox:
       - name: isPassword
         type: boolean
     IsSecureText:
-      getter:
-      - name: isSecureText
+      impl:
+        getter:
+        - name: isSecureText
+      inputs: {}
+      outputs:
+      - name: isSecure
+        type: boolean
     ResetInputMode:
       inputs: {}
       outputs: {}
@@ -1939,24 +2214,42 @@ EditBox:
         type: boolean
       outputs: {}
     SetAutoFocus:
-      setter:
-      - name: isAutoFocus
+      impl:
+        setter:
+        - name: isAutoFocus
+      inputs:
+      - default: false
+        name: autoFocus
+        type: boolean
+      outputs: {}
     SetBlinkSpeed:
       inputs:
       - name: cursorBlinkSpeedSec
         type: number
       outputs: {}
     SetCountInvisibleLetters:
-      setter:
-      - name: isCountInvisibleLetters
+      impl:
+        setter:
+        - name: isCountInvisibleLetters
+      inputs:
+      - default: false
+        name: countInvisibleLetters
+        type: boolean
+      outputs: {}
     SetCursorPosition:
       inputs:
       - name: cursorPosition
         type: number
       outputs: {}
     SetEnabled:
-      setter:
-      - name: enabled
+      impl:
+        setter:
+        - name: enabled
+      inputs:
+      - default: false
+        name: enabled
+        type: boolean
+      outputs: {}
     SetFocus:
       inputs: {}
       outputs: {}
@@ -1973,17 +2266,38 @@ EditBox:
         type: number
       outputs: {}
     SetHistoryLines:
-      setter:
-      - name: historyLines
+      impl:
+        setter:
+        - name: historyLines
+      inputs:
+      - name: numHistoryLines
+        type: number
+      outputs: {}
     SetMaxBytes:
-      setter:
+      impl:
+        setter:
+        - name: maxBytes
+      inputs:
       - name: maxBytes
+        type: number
+      outputs: {}
     SetMaxLetters:
-      setter:
+      impl:
+        setter:
+        - name: maxLetters
+      inputs:
       - name: maxLetters
+        type: number
+      outputs: {}
     SetMultiLine:
-      setter:
-      - name: isMultiLine
+      impl:
+        setter:
+        - name: isMultiLine
+      inputs:
+      - default: false
+        name: multiline
+        type: boolean
+      outputs: {}
     SetNumber:
       inputs:
       - name: number
@@ -2008,8 +2322,14 @@ EditBox:
         type: boolean
       outputs: {}
     SetSecureText:
-      setter:
-      - name: isSecureText
+      impl:
+        setter:
+        - name: isSecureText
+      inputs:
+      - default: false
+        name: isSecure
+        type: boolean
+      outputs: {}
     SetSecurityDisablePaste:
       inputs: {}
       outputs: {}
@@ -2017,8 +2337,13 @@ EditBox:
       inputs: {}
       outputs: {}
     SetText:
-      setter:
-      - name: editboxText
+      impl:
+        setter:
+        - name: editboxText
+      inputs:
+      - name: text
+        type: string
+      outputs: {}
     SetTextInsets:
       inputs:
       - name: left
@@ -2173,7 +2498,7 @@ Font:
     CopyFontObject:
       inputs:
       - name: sourceFont
-        type: table
+        type: Font
       outputs: {}
     GetAlpha:
       inputs: {}
@@ -2186,7 +2511,7 @@ Font:
         type: string
       outputs:
       - name: font
-        type: table
+        type: Font
     SetAlpha:
       inputs:
       - name: alpha
@@ -2225,11 +2550,13 @@ FontInstance:
         type: FontInstance
     GetIndentedWordWrap: {}
     GetJustifyH:
-      getter:
-      - name: justifyh
+      impl:
+        getter:
+        - name: justifyh
     GetJustifyV:
-      getter:
-      - name: justifyv
+      impl:
+        getter:
+        - name: justifyv
     GetShadowColor:
       outputs:
       - type: number
@@ -2250,11 +2577,13 @@ FontInstance:
     SetFontObject: {}
     SetIndentedWordWrap: {}
     SetJustifyH:
-      setter:
-      - name: justifyh
+      impl:
+        setter:
+        - name: justifyh
     SetJustifyV:
-      setter:
-      - name: justifyv
+      impl:
+        setter:
+        - name: justifyv
     SetShadowColor: {}
     SetShadowOffset: {}
     SetSpacing: {}
@@ -2321,8 +2650,13 @@ FontString:
       - name: lineHeight
         type: number
     GetMaxLines:
-      getter:
+      impl:
+        getter:
+        - name: maxLines
+      inputs: {}
+      outputs:
       - name: maxLines
+        type: number
     GetNumLines:
       inputs: {}
       outputs:
@@ -2344,11 +2678,21 @@ FontString:
       - name: width
         type: number
     GetText:
-      getter:
+      impl:
+        getter:
+        - name: text
+      inputs: {}
+      outputs:
       - name: text
+        type: string
     GetTextScale:
-      getter:
+      impl:
+        getter:
+        - name: textScale
+      inputs: {}
+      outputs:
       - name: textScale
+        type: number
     GetUnboundedStringWidth:
       inputs: {}
       outputs:
@@ -2388,8 +2732,13 @@ FontString:
         type: string
       outputs: {}
     SetMaxLines:
-      setter:
+      impl:
+        setter:
+        - name: maxLines
+      inputs:
       - name: maxLines
+        type: number
+      outputs: {}
     SetNonSpaceWrap:
       inputs:
       - name: wrap
@@ -2402,14 +2751,24 @@ FontString:
       outputs: {}
     SetText:
       impl: FontString/SetText
+      inputs:
+      - default: ''
+        name: text
+        type: string
+      outputs: {}
     SetTextHeight:
       inputs:
       - name: height
         type: number
       outputs: {}
     SetTextScale:
-      setter:
+      impl:
+        setter:
+        - name: textScale
+      inputs:
       - name: textScale
+        type: number
+      outputs: {}
     SetTextToFit:
       inputs:
       - default: ''
@@ -2498,19 +2857,30 @@ Frame:
       - name: name
         nilable: true
         type: string
-      - default: ARTWORK
-        name: drawLayer
+      - name: drawLayer
         nilable: true
         type: DrawLayer
       - name: templateName
         nilable: true
         type: string
       outputs:
-      - name: fontString
+      - name: line
         type: FontString
     CreateLine:
       impl: Frame/CreateLine
-      inputs: {}
+      inputs:
+      - name: name
+        nilable: true
+        type: string
+      - name: drawLayer
+        nilable: true
+        type: DrawLayer
+      - name: templateName
+        nilable: true
+        type: string
+      - name: subLevel
+        nilable: true
+        type: number
       outputs:
       - name: line
         type: Line
@@ -2520,17 +2890,17 @@ Frame:
       - name: name
         nilable: true
         type: string
-      - name: layer
+      - name: drawLayer
         nilable: true
         type: DrawLayer
-      - name: inheritsFrom
+      - name: templateName
         nilable: true
         type: string
-      - name: subLayer
+      - name: subLevel
         nilable: true
         type: number
       outputs:
-      - name: mask
+      - name: maskTexture
         type: MaskTexture
     CreateTexture:
       impl: Frame/CreateTexture
@@ -2538,13 +2908,13 @@ Frame:
       - name: name
         nilable: true
         type: string
-      - name: layer
+      - name: drawLayer
         nilable: true
         type: DrawLayer
-      - name: inheritsFrom
+      - name: templateName
         nilable: true
         type: string
-      - name: subLayer
+      - name: subLevel
         nilable: true
         type: number
       outputs:
@@ -2569,8 +2939,13 @@ Frame:
       - name: clipsChildren
         type: boolean
     DoesHyperlinkPropagateToParent:
-      getter:
-      - name: hyperlinkPropagateToParent
+      impl:
+        getter:
+        - name: hyperlinkPropagateToParent
+      inputs: {}
+      outputs:
+      - name: canPropagate
+        type: boolean
     EnableDrawLayer:
       inputs:
       - name: layer
@@ -2600,6 +2975,7 @@ Frame:
         type: string
       - name: unpackedPrimitiveType
         type: string
+      instride: 1
       outputs:
       - name: success
         type: boolean
@@ -2621,6 +2997,11 @@ Frame:
         type: number
     GetChildren:
       impl: Frame/GetChildren
+      inputs: {}
+      outputs:
+      - name: scriptObject
+        type: UIObject
+      outstride: 1
     GetClampRectInsets:
       inputs: {}
       outputs:
@@ -2639,6 +3020,10 @@ Frame:
         type: boolean
     GetEffectiveAlpha:
       impl: Frame/GetEffectiveAlpha
+      inputs: {}
+      outputs:
+      - name: effectiveAlpha
+        type: number
     GetEffectivelyFlattensRenderLayers:
       inputs: {}
       outputs:
@@ -2650,11 +3035,29 @@ Frame:
       - name: flatten
         type: boolean
     GetFrameLevel:
-      getter:
+      impl:
+        getter:
+        - name: frameLevel
+      inputs: {}
+      outputs:
       - name: frameLevel
+        type: number
     GetFrameStrata:
-      getter:
-      - name: frameStrata
+      impl:
+        getter:
+        - name: frameStrata
+      inputs: {}
+      outputs:
+      - name: strata
+        type: FrameStrata
+    GetHighestFrameLevel:
+      inputs:
+      - default: false
+        name: iterateAllChildren
+        type: boolean
+      outputs:
+      - name: frameLevel
+        type: number
     GetHitRectInsets:
       inputs: {}
       outputs:
@@ -2667,18 +3070,41 @@ Frame:
       - name: bottom
         type: number
     GetHyperlinksEnabled:
-      getter:
-      - name: hyperlinksEnabled
+      impl:
+        getter:
+        - name: hyperlinksEnabled
+      inputs: {}
+      outputs:
+      - name: enabled
+        type: boolean
     GetID:
-      getter:
+      impl:
+        getter:
+        - name: id
+      inputs: {}
+      outputs:
       - name: id
+        type: number
     GetNumChildren:
       impl: Frame/GetNumChildren
+      inputs: {}
+      outputs:
+      - name: numChildren
+        type: number
     GetNumRegions:
       impl: Frame/GetNumRegions
+      inputs: {}
+      outputs:
+      - name: numRegions
+        type: number
     GetPropagateKeyboardInput:
-      getter:
-      - name: propagateKeyboardInput
+      impl:
+        getter:
+        - name: propagateKeyboardInput
+      inputs: {}
+      outputs:
+      - name: propagate
+        type: boolean
     GetRaisedFrameLevel:
       inputs: {}
       outputs:
@@ -2686,23 +3112,49 @@ Frame:
         type: number
     GetRegions:
       impl: Frame/GetRegions
+      inputs: {}
+      outputs:
+      - name: scriptObject
+        type: UIObject
+      outstride: 1
     GetResizeBounds:
-      getter:
-      - name: minResizeWidth
-      - name: minResizeHeight
-      - name: maxResizeWidth
-      - name: maxResizeHeight
+      impl:
+        getter:
+        - name: minResizeWidth
+        - name: minResizeHeight
+        - name: maxResizeWidth
+        - name: maxResizeHeight
+      inputs: {}
+      outputs:
+      - name: minWidth
+        type: number
+      - name: minHeight
+        type: number
+      - name: maxWidth
+        type: number
+      - name: maxHeight
+        type: number
     GetWindow:
       inputs: {}
       outputs:
       - name: window
         type: nil
     HasFixedFrameLevel:
-      getter:
-      - name: hasFixedFrameLevel
+      impl:
+        getter:
+        - name: hasFixedFrameLevel
+      inputs: {}
+      outputs:
+      - name: isFixed
+        type: boolean
     HasFixedFrameStrata:
-      getter:
-      - name: hasFixedFrameStrata
+      impl:
+        getter:
+        - name: hasFixedFrameStrata
+      inputs: {}
+      outputs:
+      - name: isFixed
+        type: boolean
     InterceptStartDrag:
       inputs:
       - name: delegate
@@ -2711,8 +3163,13 @@ Frame:
       - name: success
         type: boolean
     IsClampedToScreen:
-      getter:
-      - name: isClampedToScreen
+      impl:
+        getter:
+        - name: isClampedToScreen
+      inputs: {}
+      outputs:
+      - name: clampedToScreen
+        type: boolean
     IsDrawLayerEnabled:
       inputs:
       - name: layer
@@ -2722,6 +3179,16 @@ Frame:
         type: boolean
     IsEventRegistered:
       impl: Frame/IsEventRegistered
+      inputs:
+      - name: eventName
+        type: string
+      outputs:
+      - name: isRegistered
+        type: boolean
+      - name: units
+        nilable: true
+        type: string
+      outstride: 1
     IsGamePadButtonEnabled:
       inputs: {}
       outputs:
@@ -2738,17 +3205,37 @@ Frame:
       - name: enabled
         type: boolean
     IsMovable:
-      getter:
-      - name: movable
+      impl:
+        getter:
+        - name: movable
+      inputs: {}
+      outputs:
+      - name: isMovable
+        type: boolean
     IsResizable:
-      getter:
+      impl:
+        getter:
+        - name: resizable
+      inputs: {}
+      outputs:
       - name: resizable
+        type: boolean
     IsToplevel:
-      getter:
-      - name: toplevel
+      impl:
+        getter:
+        - name: toplevel
+      inputs: {}
+      outputs:
+      - name: isTopLevel
+        type: boolean
     IsUserPlaced:
-      getter:
+      impl:
+        getter:
+        - name: isUserPlaced
+      inputs: {}
+      outputs:
       - name: isUserPlaced
+        type: boolean
     IsUsingParentLevel:
       inputs: {}
       outputs:
@@ -2765,12 +3252,15 @@ Frame:
       outputs: {}
     RegisterAllEvents:
       impl: Frame/RegisterAllEvents
+      inputs: {}
+      outputs: {}
     RegisterEvent:
       impl: Frame/RegisterEvent
     RegisterForDrag:
       inputs:
-      - name: unpackedPrimitiveType
-        type: number
+      - name: button
+        type: string
+      instride: 1
       outputs: {}
     RegisterUnitEvent:
       impl: Frame/RegisterUnitEvent
@@ -2798,8 +3288,13 @@ Frame:
     SetAttributeNoHandler:
       impl: Frame/SetAttributeNoHandler
     SetClampedToScreen:
-      setter:
-      - name: isClampedToScreen
+      impl:
+        setter:
+        - name: isClampedToScreen
+      inputs:
+      - name: clampedToScreen
+        type: boolean
+      outputs: {}
     SetClampRectInsets:
       inputs:
       - name: left
@@ -2830,11 +3325,21 @@ Frame:
         type: boolean
       outputs: {}
     SetFixedFrameLevel:
-      setter:
-      - name: hasFixedFrameLevel
+      impl:
+        setter:
+        - name: hasFixedFrameLevel
+      inputs:
+      - name: isFixed
+        type: boolean
+      outputs: {}
     SetFixedFrameStrata:
-      setter:
-      - name: hasFixedFrameStrata
+      impl:
+        setter:
+        - name: hasFixedFrameStrata
+      inputs:
+      - name: isFixed
+        type: boolean
+      outputs: {}
     SetFlattensRenderLayers:
       inputs:
       - name: flatten
@@ -2842,9 +3347,18 @@ Frame:
       outputs: {}
     SetFrameLevel:
       impl: Frame/SetFrameLevel
+      inputs:
+      - name: frameLevel
+        type: number
+      outputs: {}
     SetFrameStrata:
-      setter:
-      - name: frameStrata
+      impl:
+        setter:
+        - name: frameStrata
+      inputs:
+      - name: strata
+        type: FrameStrata
+      outputs: {}
     SetHighlightLocked:
       inputs:
       - name: locked
@@ -2862,36 +3376,89 @@ Frame:
         type: number
       outputs: {}
     SetHyperlinkPropagateToParent:
-      setter:
-      - name: hyperlinkPropagateToParent
+      impl:
+        setter:
+        - name: hyperlinkPropagateToParent
+      inputs:
+      - name: canPropagate
+        type: boolean
+      outputs: {}
     SetHyperlinksEnabled:
-      setter:
-      - name: hyperlinksEnabled
+      impl:
+        setter:
+        - name: hyperlinksEnabled
+      inputs:
+      - default: false
+        name: enabled
+        type: boolean
+      outputs: {}
     SetID:
-      setter:
+      impl:
+        setter:
+        - name: id
+      inputs:
       - name: id
+        type: number
+      outputs: {}
     SetIsFrameBuffer:
       inputs:
       - name: isFrameBuffer
         type: boolean
       outputs: {}
     SetMovable:
-      setter:
+      impl:
+        setter:
+        - name: movable
+      inputs:
       - name: movable
+        type: boolean
+      outputs: {}
     SetPropagateKeyboardInput:
-      setter:
-      - name: propagateKeyboardInput
+      impl:
+        setter:
+        - name: propagateKeyboardInput
+      inputs:
+      - name: propagate
+        type: boolean
+      outputs: {}
     SetResizable:
-      setter:
+      impl:
+        setter:
+        - name: resizable
+      inputs:
       - name: resizable
+        type: boolean
+      outputs: {}
     SetResizeBounds:
       impl: Frame/SetResizeBounds
+      inputs:
+      - name: minWidth
+        type: number
+      - name: minHeight
+        type: number
+      - name: maxWidth
+        nilable: true
+        type: number
+      - name: maxHeight
+        nilable: true
+        type: number
+      outputs: {}
     SetToplevel:
-      setter:
-      - name: toplevel
+      impl:
+        setter:
+        - name: toplevel
+      inputs:
+      - name: topLevel
+        type: boolean
+      outputs: {}
     SetUserPlaced:
-      setter:
-      - name: isUserPlaced
+      impl:
+        setter:
+        - name: isUserPlaced
+      inputs:
+      - name: userPlaced
+        type: boolean
+      outputs: {}
     SetUsingParentLevel:
       inputs:
       - name: usingParentLevel
@@ -2926,6 +3493,8 @@ Frame:
       outputs: {}
     UnregisterAllEvents:
       impl: Frame/UnregisterAllEvents
+      inputs: {}
+      outputs: {}
     UnregisterEvent:
       impl: Frame/UnregisterEvent
 GameTooltip:
@@ -2952,21 +3521,30 @@ GameTooltip:
     CopyTooltip: {}
     FadeOut: {}
     GetAnchorType:
-      getter:
-      - name: tooltipAnchorType
+      impl:
+        getter:
+        - name: tooltipAnchorType
     GetCustomLineSpacing: {}
     GetMinimumWidth:
       outputs:
       - type: number
     GetOwner:
-      getter:
-      - name: tooltipOwner
+      impl:
+        getter:
+        - name: tooltipOwner
     GetPadding: {}
     IsOwned:
       impl: GameTooltip/IsOwned
+      inputs:
+      - name: frame
+        type: Frame
+      outputs:
+      - name: isOwned
+        type: boolean
     NumLines:
-      getter:
-      - name: tooltipLines
+      impl:
+        getter:
+        - name: tooltipLines
     SetAllowShowWithNoLines: {}
     SetAnchorType: {}
     SetCustomLineSpacing: {}
@@ -3010,14 +3588,16 @@ LayeredRegion:
     Region: {}
   methods:
     GetDrawLayer:
-      getter:
-      - name: layer
-      - name: sublevel
+      impl:
+        getter:
+        - name: layer
+        - name: sublevel
     SetDrawLayer:
-      setter:
-      - name: layer
-      - name: sublevel
-        nilable: true
+      impl:
+        setter:
+        - name: layer
+        - name: sublevel
+          nilable: true
     SetVertexColor:
       impl: LayeredRegion/SetVertexColor
   virtual: true
@@ -3035,7 +3615,7 @@ Line:
       - name: relativePoint
         type: FramePoint
       - name: relativeTo
-        type: table
+        type: Region
       - name: offsetX
         type: number
       - name: offsetY
@@ -3051,20 +3631,25 @@ Line:
       - name: relativePoint
         type: FramePoint
       - name: relativeTo
-        type: table
+        type: Region
       - name: offsetX
         type: number
       - name: offsetY
         type: number
     GetThickness:
-      getter:
+      impl:
+        getter:
+        - name: thickness
+      inputs: {}
+      outputs:
       - name: thickness
+        type: number
     SetEndPoint:
       inputs:
       - name: relativePoint
         type: FramePoint
       - name: relativeTo
-        type: table
+        type: Region
       - default: 0
         name: offsetX
         type: number
@@ -3082,7 +3667,7 @@ Line:
       - name: relativePoint
         type: FramePoint
       - name: relativeTo
-        type: table
+        type: Region
       - default: 0
         name: offsetX
         type: number
@@ -3091,8 +3676,13 @@ Line:
         type: number
       outputs: {}
     SetThickness:
-      setter:
+      impl:
+        setter:
+        - name: thickness
+      inputs:
       - name: thickness
+        type: number
+      outputs: {}
 LineScale:
   fields: {}
   inherits:
@@ -3116,6 +3706,22 @@ MessageFrame:
   methods:
     AddMessage:
       impl: MessageFrame/AddMessage
+      inputs:
+      - name: text
+        type: string
+      - name: colorR
+        type: number
+      - name: colorG
+        type: number
+      - name: colorB
+        type: number
+      - name: a
+        nilable: true
+        type: number
+      - name: messageID
+        nilable: true
+        type: number
+      outputs: {}
     Clear:
       inputs: {}
       outputs: {}
@@ -3140,12 +3746,12 @@ MessageFrame:
         type: number
       outputs:
       - name: fontString
-        type: table
+        type: FontString
     GetInsertMode:
       inputs: {}
       outputs:
       - name: mode
-        type: string
+        type: InsertMode
     GetTimeVisible:
       inputs: {}
       outputs:
@@ -3181,7 +3787,7 @@ MessageFrame:
     SetInsertMode:
       inputs:
       - name: mode
-        type: string
+        type: InsertMode
       outputs: {}
     SetTimeVisible:
       inputs:
@@ -3225,7 +3831,7 @@ Minimap:
     SetArchBlobInsideTexture:
       inputs:
       - name: asset
-        type: string
+        type: Texture
       outputs: {}
     SetArchBlobOutsideAlpha:
       inputs:
@@ -3235,7 +3841,7 @@ Minimap:
     SetArchBlobOutsideTexture:
       inputs:
       - name: asset
-        type: string
+        type: Texture
       outputs: {}
     SetArchBlobRingAlpha:
       inputs:
@@ -3250,37 +3856,37 @@ Minimap:
     SetArchBlobRingTexture:
       inputs:
       - name: asset
-        type: string
+        type: Texture
       outputs: {}
     SetBlipTexture:
       inputs:
       - name: asset
-        type: string
+        type: Texture
       outputs: {}
     SetCorpsePOIArrowTexture:
       inputs:
       - name: asset
-        type: string
+        type: Texture
       outputs: {}
     SetIconTexture:
       inputs:
       - name: asset
-        type: string
+        type: Texture
       outputs: {}
     SetMaskTexture:
       inputs:
       - name: asset
-        type: string
+        type: Texture
       outputs: {}
     SetPlayerTexture:
       inputs:
       - name: asset
-        type: string
+        type: Texture
       outputs: {}
     SetPOIArrowTexture:
       inputs:
       - name: asset
-        type: string
+        type: Texture
       outputs: {}
     SetQuestBlobInsideAlpha:
       inputs:
@@ -3290,7 +3896,7 @@ Minimap:
     SetQuestBlobInsideTexture:
       inputs:
       - name: asset
-        type: string
+        type: Texture
       outputs: {}
     SetQuestBlobOutsideAlpha:
       inputs:
@@ -3300,7 +3906,7 @@ Minimap:
     SetQuestBlobOutsideTexture:
       inputs:
       - name: asset
-        type: string
+        type: Texture
       outputs: {}
     SetQuestBlobRingAlpha:
       inputs:
@@ -3315,12 +3921,12 @@ Minimap:
     SetQuestBlobRingTexture:
       inputs:
       - name: asset
-        type: string
+        type: Texture
       outputs: {}
     SetStaticPOIArrowTexture:
       inputs:
       - name: asset
-        type: string
+        type: Texture
       outputs: {}
     SetTaskBlobInsideAlpha:
       inputs:
@@ -3330,7 +3936,7 @@ Minimap:
     SetTaskBlobInsideTexture:
       inputs:
       - name: asset
-        type: string
+        type: Texture
       outputs: {}
     SetTaskBlobOutsideAlpha:
       inputs:
@@ -3340,7 +3946,7 @@ Minimap:
     SetTaskBlobOutsideTexture:
       inputs:
       - name: asset
-        type: string
+        type: Texture
       outputs: {}
     SetTaskBlobRingAlpha:
       inputs:
@@ -3355,7 +3961,7 @@ Minimap:
     SetTaskBlobRingTexture:
       inputs:
       - name: asset
-        type: string
+        type: Texture
       outputs: {}
     SetZoom:
       inputs:
@@ -3476,8 +4082,13 @@ Model:
       - name: modelFileID
         type: number
     GetModelScale:
-      getter:
-      - name: modelScale
+      impl:
+        getter:
+        - name: modelScale
+      inputs: {}
+      outputs:
+      - name: scale
+        type: number
     GetPaused:
       inputs: {}
       outputs:
@@ -3660,8 +4271,13 @@ Model:
         type: DrawLayer
       outputs: {}
     SetModelScale:
-      setter:
-      - name: modelScale
+      impl:
+        setter:
+        - name: modelScale
+      inputs:
+      - name: scale
+        type: number
+      outputs: {}
     SetParticlesEnabled:
       inputs:
       - name: enabled
@@ -3741,7 +4357,14 @@ Model:
         type: number
       outputs: {}
     TransformCameraSpaceToModelSpace:
-      impl: Model/TransformCameraSpaceToModelSpace
+      inputs:
+      - name: cameraPosition
+        type:
+          structure: vector3
+      outputs:
+      - name: modelPosition
+        type:
+          structure: vector3
     UseModelCenterToTransform:
       inputs:
       - name: useCenter
@@ -4216,15 +4839,36 @@ ParentedObjectBase:
   methods:
     ClearParentKey:
       impl: ParentedObjectBase/ClearParentKey
+      inputs: {}
+      outputs: {}
     GetDebugName:
       impl: ParentedObject/GetDebugName
+      inputs:
+      - default: false
+        name: preferParentKey
+        type: boolean
+      outputs:
+      - name: debugName
+        type: string
     GetParent:
-      getter:
+      impl:
+        getter:
+        - name: parent
+      inputs: {}
+      outputs:
       - name: parent
+        type: UIObject
     GetParentKey:
       impl: ParentedObjectBase/GetParentKey
     SetParentKey:
       impl: ParentedObjectBase/SetParentKey
+      inputs:
+      - name: parentKey
+        type: string
+      - default: false
+        name: clearOtherKeys
+        type: boolean
+      outputs: {}
   virtual: true
 Path:
   fields:
@@ -4257,16 +4901,26 @@ Path:
         type: UIObject
       outstride: 1
     GetCurveType:
-      getter:
+      impl:
+        getter:
+        - name: curveType
+      inputs: {}
+      outputs:
       - name: curveType
+        type: CurveType
     GetMaxControlPointOrder:
       inputs: {}
       outputs:
       - name: maxOrder
         type: number
     SetCurveType:
-      setter:
+      impl:
+        setter:
+        - name: curveType
+      inputs:
       - name: curveType
+        type: CurveType
+      outputs: {}
 PlayerModel:
   fields: {}
   inherits:
@@ -4589,8 +5243,20 @@ Region:
       outputs:
       - name: canChange
         type: boolean
+    CanPropagateMouseClicks:
+      inputs: {}
+      outputs:
+      - name: canPropagate
+        type: boolean
+    CanPropagateMouseMotion:
+      inputs: {}
+      outputs:
+      - name: canPropagate
+        type: boolean
     ClearAllPoints:
       impl: Region/ClearAllPoints
+      inputs: {}
+      outputs: {}
     ClearPoint:
       inputs:
       - name: point
@@ -4614,10 +5280,15 @@ Region:
         nilable: true
         type: string
       outputs:
-      - name: animationGroup
+      - name: group
         type: AnimationGroup
     EnableMouse:
       impl: MouseMixin/EnableMouse
+      inputs:
+      - default: false
+        name: enable
+        type: boolean
+      outputs: {}
     EnableMouseMotion:
       inputs:
       - default: false
@@ -4625,25 +5296,54 @@ Region:
         type: boolean
       outputs: {}
     EnableMouseWheel:
-      setter:
-      - name: mouseWheelEnabled
+      impl:
+        setter:
+        - name: mouseWheelEnabled
+      inputs:
+      - default: false
+        name: enable
+        type: boolean
+      outputs: {}
     GetAnimationGroups:
       impl: Region/GetAnimationGroups
+      inputs: {}
+      outputs:
+      - name: scriptObject
+        type: UIObject
+      outstride: 1
     GetBottom:
-      getter:
-      - name: bottom
+      impl:
+        getter:
+        - name: bottom
     GetCenter:
       impl: Region/GetCenter
+      inputs: {}
+      mayreturnnothing: true
+      outputs:
+      - name: x
+        type: number
+      - name: y
+        type: number
     GetEffectiveScale:
       impl: Region/GetEffectiveScale
+      inputs: {}
+      outputs:
+      - name: effectiveScale
+        type: number
     GetHeight:
-      getter:
-      - name: height
+      impl:
+        getter:
+        - name: height
     GetLeft:
-      getter:
-      - name: left
+      impl:
+        getter:
+        - name: left
     GetNumPoints:
       impl: Region/GetNumPoints
+      inputs: {}
+      outputs:
+      - name: numPoints
+        type: number
     GetPoint:
       impl: Region/GetPoint
       inputs:
@@ -4676,7 +5376,7 @@ Region:
       - name: point
         type: FramePoint
       - name: relativeTo
-        type: table
+        type: Region
       - name: relativePoint
         type: FramePoint
       - name: offsetX
@@ -4684,19 +5384,37 @@ Region:
       - name: offsetY
         type: number
     GetRect:
-      getter:
-      - name: bottom
-      - name: left
-      - name: width
-      - name: height
+      impl:
+        getter:
+        - name: bottom
+        - name: left
+        - name: width
+        - name: height
     GetRight:
       impl: Region/GetRight
+      inputs: {}
+      mayreturnnothing: true
+      outputs:
+      - name: right
+        type: number
     GetScaledRect:
       impl: Region/GetScaledRect
-    GetSize:
-      getter:
+      inputs: {}
+      mayreturnnothing: true
+      outputs:
+      - name: left
+        type: number
+      - name: bottom
+        type: number
       - name: width
+        type: number
       - name: height
+        type: number
+    GetSize:
+      impl:
+        getter:
+        - name: width
+        - name: height
     GetSourceLocation:
       inputs: {}
       outputs:
@@ -4704,13 +5422,19 @@ Region:
         type: string
     GetTop:
       impl: Region/GetTop
+      inputs: {}
+      mayreturnnothing: true
+      outputs:
+      - name: top
+        type: number
     GetWidth:
-      getter:
-      - name: width
+      impl:
+        getter:
+        - name: width
     Intersects:
       inputs:
       - name: region
-        type: table
+        type: Region
       outputs:
       - name: intersects
         type: boolean
@@ -4730,19 +5454,43 @@ Region:
       - name: isDragging
         type: boolean
     IsIgnoringParentAlpha:
-      getter:
-      - name: isIgnoringParentAlpha
+      impl:
+        getter:
+        - name: isIgnoringParentAlpha
+      inputs: {}
+      outputs:
+      - name: isIgnoring
+        type: boolean
     IsIgnoringParentScale:
-      getter:
-      - name: isIgnoringParentScale
+      impl:
+        getter:
+        - name: isIgnoringParentScale
+      inputs: {}
+      outputs:
+      - name: isIgnoring
+        type: boolean
     IsMouseClickEnabled:
-      getter:
-      - name: mouseClickEnabled
+      impl:
+        getter:
+        - name: mouseClickEnabled
+      inputs: {}
+      outputs:
+      - name: enabled
+        type: boolean
     IsMouseEnabled:
       impl: MouseMixin/IsMouseEnabled
+      inputs: {}
+      outputs:
+      - name: enabled
+        type: boolean
     IsMouseMotionEnabled:
-      getter:
-      - name: mouseMotionEnabled
+      impl:
+        getter:
+        - name: mouseMotionEnabled
+      inputs: {}
+      outputs:
+      - name: enabled
+        type: boolean
     IsMouseMotionFocus:
       inputs: {}
       outputs:
@@ -4766,8 +5514,13 @@ Region:
       - name: isMouseOver
         type: boolean
     IsMouseWheelEnabled:
-      getter:
-      - name: mouseWheelEnabled
+      impl:
+        getter:
+        - name: mouseWheelEnabled
+      inputs: {}
+      outputs:
+      - name: enabled
+        type: boolean
     IsObjectLoaded:
       inputs: {}
       outputs:
@@ -4775,6 +5528,12 @@ Region:
         type: boolean
     IsProtected:
       impl: Region/IsProtected
+      inputs: {}
+      outputs:
+      - name: isProtected
+        type: boolean
+      - name: isProtectedExplicitly
+        type: boolean
     IsRectValid:
       inputs: {}
       outputs:
@@ -4788,24 +5547,52 @@ Region:
         type: boolean
       outputs: {}
     SetHeight:
-      setter:
+      impl:
+        setter:
+        - name: height
+      inputs:
       - name: height
+        type: number
+      outputs: {}
     SetIgnoreParentAlpha:
-      setter:
-      - name: isIgnoringParentAlpha
+      impl:
+        setter:
+        - name: isIgnoringParentAlpha
+      inputs:
+      - name: ignore
+        type: boolean
+      outputs: {}
     SetIgnoreParentScale:
-      setter:
-      - name: isIgnoringParentScale
+      impl:
+        setter:
+        - name: isIgnoringParentScale
+      inputs:
+      - name: ignore
+        type: boolean
+      outputs: {}
     SetMouseClickEnabled:
-      setter:
-      - name: mouseClickEnabled
+      impl:
+        setter:
+        - name: mouseClickEnabled
+      inputs:
+      - default: false
+        name: enabled
+        type: boolean
+      outputs: {}
     SetMouseMotionEnabled:
-      setter:
-      - name: mouseMotionEnabled
+      impl:
+        setter:
+        - name: mouseMotionEnabled
+      inputs:
+      - default: false
+        name: enabled
+        type: boolean
+      outputs: {}
     SetPassThroughButtons:
       inputs:
-      - name: unpackedPrimitiveType
-        type: number
+      - name: button
+        type: string
+      instride: 1
       outputs: {}
     SetPoint:
       impl: Region/SetPoint
@@ -4820,13 +5607,27 @@ Region:
         type: boolean
       outputs: {}
     SetSize:
-      setter:
-      - name: width
-      - name: height
+      impl:
+        setter:
+        - name: width
+        - name: height
+      inputs:
+      - name: x
+        type: number
+      - name: y
+        type: number
+      outputs: {}
     SetWidth:
-      setter:
+      impl:
+        setter:
+        - name: width
+      inputs:
       - name: width
-    StopAnimating: {}
+        type: number
+      outputs: {}
+    StopAnimating:
+      inputs: {}
+      outputs: {}
   virtual: true
 RegionBase:
   fields:
@@ -4842,16 +5643,19 @@ RegionBase:
   inherits: {}
   methods:
     GetAlpha:
-      getter:
-      - name: alpha
+      impl:
+        getter:
+        - name: alpha
     GetScale:
-      getter:
-      - name: scale
+      impl:
+        getter:
+        - name: scale
     Hide:
       impl: Region/Hide
     IsShown:
-      getter:
-      - name: shown
+      impl:
+        getter:
+        - name: shown
     IsVisible:
       impl: Region/IsVisible
     SetAlpha:
@@ -4907,11 +5711,25 @@ Rotation:
         type: number
       outputs: {}
 Scale:
-  fields: {}
+  fields:
+    originPoint:
+      init: CENTER
+      type: FramePoint
+    originX:
+      init: 0
+      type: number
+    originY:
+      init: 0
+      type: number
   inherits:
     Animation: {}
   methods:
     GetOrigin:
+      impl:
+        getter:
+        - name: originPoint
+        - name: originX
+        - name: originY
       inputs: {}
       outputs:
       - name: point
@@ -4942,6 +5760,11 @@ Scale:
       - name: scaleY
         type: number
     SetOrigin:
+      impl:
+        setter:
+        - name: originPoint
+        - name: originX
+        - name: originY
       inputs:
       - name: point
         type: FramePoint
@@ -5039,8 +5862,13 @@ ScrollFrame:
       - name: range
         type: number
     GetScrollChild:
-      getter:
+      impl:
+        getter:
+        - name: scrollChild
+      inputs: {}
+      outputs:
       - name: scrollChild
+        type: Frame
     GetVerticalScroll:
       inputs: {}
       outputs:
@@ -5143,28 +5971,50 @@ Slider:
       inputs: {}
       outputs: {}
     GetMinMaxValues:
-      getter:
-      - name: min
-      - name: max
+      impl:
+        getter:
+        - name: min
+        - name: max
+      inputs: {}
+      outputs:
+      - name: minValue
+        type: number
+      - name: maxValue
+        type: number
     GetObeyStepOnDrag:
       inputs: {}
       outputs:
       - name: isObeyStepOnDrag
         type: boolean
     GetOrientation:
-      getter:
+      impl:
+        getter:
+        - name: orientation
+      inputs: {}
+      outputs:
       - name: orientation
+        type: Orientation
     GetStepsPerPage:
       inputs: {}
       outputs:
       - name: stepsPerPage
         type: number
     GetThumbTexture:
-      getter:
-      - name: thumbTexture
+      impl:
+        getter:
+        - name: thumbTexture
+      inputs: {}
+      outputs:
+      - name: texture
+        type: Texture
     GetValue:
-      getter:
+      impl:
+        getter:
+        - name: value
+      inputs: {}
+      outputs:
       - name: value
+        type: number
     GetValueStep:
       inputs: {}
       outputs:
@@ -5186,28 +6036,50 @@ Slider:
         type: boolean
       outputs: {}
     SetMinMaxValues:
-      setter:
-      - name: min
-      - name: max
+      impl:
+        setter:
+        - name: min
+        - name: max
+      inputs:
+      - name: minValue
+        type: number
+      - name: maxValue
+        type: number
+      outputs: {}
     SetObeyStepOnDrag:
       inputs:
       - name: obeyStepOnDrag
         type: boolean
       outputs: {}
     SetOrientation:
-      setter:
+      impl:
+        setter:
+        - name: orientation
+      inputs:
       - name: orientation
+        type: Orientation
+      outputs: {}
     SetStepsPerPage:
       inputs:
       - name: stepsPerPage
         type: number
       outputs: {}
     SetThumbTexture:
-      setter:
-      - name: thumbTexture
+      impl:
+        setter:
+        - name: thumbTexture
+      inputs:
+      - name: asset
+        type: Texture
+      outputs: {}
     SetValue:
-      setter:
+      inputs:
       - name: value
+        type: number
+      - default: false
+        name: treatAsMouseEvent
+        type: boolean
+      outputs: {}
     SetValueStep:
       inputs:
       - name: valueStep
@@ -5234,12 +6106,24 @@ StatusBar:
     Frame: {}
   methods:
     GetFillStyle:
-      getter:
+      impl:
+        getter:
+        - name: fillStyle
+      inputs: {}
+      outputs:
       - name: fillStyle
+        type: StatusBarFillStyle
     GetMinMaxValues:
-      getter:
-      - name: min
-      - name: max
+      impl:
+        getter:
+        - name: min
+        - name: max
+      inputs: {}
+      outputs:
+      - name: minValue
+        type: number
+      - name: maxValue
+        type: number
     GetOrientation:
       inputs: {}
       outputs:
@@ -5257,17 +6141,37 @@ StatusBar:
         type: boolean
     GetStatusBarColor:
       impl: StatusBar/GetStatusBarColor
+      inputs: {}
+      outputs:
+      - name: colorR
+        type: number
+      - name: colorG
+        type: number
+      - name: colorB
+        type: number
+      - name: colorA
+        type: number
     GetStatusBarDesaturation:
       inputs: {}
       outputs:
       - name: desaturation
         type: number
     GetStatusBarTexture:
-      getter:
-      - name: statusBarTexture
+      impl:
+        getter:
+        - name: statusBarTexture
+      inputs: {}
+      outputs:
+      - name: texture
+        type: Texture
     GetValue:
-      getter:
+      impl:
+        getter:
+        - name: value
+      inputs: {}
+      outputs:
       - name: value
+        type: number
     IsStatusBarDesaturated:
       inputs: {}
       outputs:
@@ -5286,12 +6190,24 @@ StatusBar:
         type: number
       outputs: {}
     SetFillStyle:
-      setter:
+      impl:
+        setter:
+        - name: fillStyle
+      inputs:
       - name: fillStyle
+        type: StatusBarFillStyle
+      outputs: {}
     SetMinMaxValues:
-      setter:
-      - name: min
-      - name: max
+      impl:
+        setter:
+        - name: min
+        - name: max
+      inputs:
+      - name: minValue
+        type: number
+      - name: maxValue
+        type: number
+      outputs: {}
     SetOrientation:
       inputs:
       - name: orientation
@@ -5309,6 +6225,17 @@ StatusBar:
       outputs: {}
     SetStatusBarColor:
       impl: StatusBar/SetStatusBarColor
+      inputs:
+      - name: colorR
+        type: number
+      - name: colorG
+        type: number
+      - name: colorB
+        type: number
+      - name: a
+        nilable: true
+        type: number
+      outputs: {}
     SetStatusBarDesaturated:
       inputs:
       - default: false
@@ -5323,8 +6250,13 @@ StatusBar:
     SetStatusBarTexture:
       impl: StatusBar/SetStatusBarTexture
     SetValue:
-      setter:
+      impl:
+        setter:
+        - name: value
+      inputs:
       - name: value
+        type: number
+      outputs: {}
 TabardModel:
   fields: {}
   inherits:
@@ -5401,7 +6333,7 @@ Texture:
     AddMaskTexture:
       inputs:
       - name: mask
-        type: table
+        type: MaskTexture
       outputs: {}
     GetMaskTexture:
       inputs:
@@ -5409,7 +6341,7 @@ Texture:
         type: number
       outputs:
       - name: mask
-        type: table
+        type: MaskTexture
     GetNumMaskTextures:
       inputs: {}
       outputs:
@@ -5418,7 +6350,7 @@ Texture:
     RemoveMaskTexture:
       inputs:
       - name: mask
-        type: table
+        type: MaskTexture
       outputs: {}
 TextureBase:
   fields:
@@ -5484,19 +6416,34 @@ TextureBase:
       inputs: {}
       outputs: {}
     GetAtlas:
-      getter:
+      impl:
+        getter:
+        - name: atlas
+      inputs: {}
+      outputs:
       - name: atlas
+        type: string
     GetBlendMode:
-      getter:
+      impl:
+        getter:
+        - name: blendMode
+      inputs: {}
+      outputs:
       - name: blendMode
+        type: BlendMode
     GetDesaturation:
       inputs: {}
       outputs:
       - name: desaturation
         type: number
     GetHorizTile:
-      getter:
-      - name: horizTile
+      impl:
+        getter:
+        - name: horizTile
+      inputs: {}
+      outputs:
+      - name: tiling
+        type: boolean
     GetRotation:
       inputs: {}
       outputs:
@@ -5506,15 +6453,16 @@ TextureBase:
         type:
           structure: vector2
     GetTexCoord:
-      getter:
-      - name: tlx
-      - name: tly
-      - name: blx
-      - name: bly
-      - name: trx
-      - name: try
-      - name: brx
-      - name: bry
+      impl:
+        getter:
+        - name: tlx
+        - name: tly
+        - name: blx
+        - name: bly
+        - name: trx
+        - name: try
+        - name: brx
+        - name: bry
     GetTexelSnappingBias:
       inputs: {}
       outputs:
@@ -5553,11 +6501,12 @@ TextureBase:
         type:
           enum: UITextureSliceMode
     GetVertexColor:
-      getter:
-      - name: vertexColorR
-      - name: vertexColorG
-      - name: vertexColorB
-      - name: vertexColorA
+      impl:
+        getter:
+        - name: vertexColorR
+        - name: vertexColorG
+        - name: vertexColorB
+        - name: vertexColorA
     GetVertexOffset:
       inputs:
       - name: vertexIndex
@@ -5568,8 +6517,13 @@ TextureBase:
       - name: offsetY
         type: number
     GetVertTile:
-      getter:
-      - name: vertTile
+      impl:
+        getter:
+        - name: vertTile
+      inputs: {}
+      outputs:
+      - name: tiling
+        type: boolean
     IsBlockingLoadRequested:
       inputs: {}
       outputs:
@@ -5588,8 +6542,13 @@ TextureBase:
     SetAtlas:
       impl: Texture/SetAtlas
     SetBlendMode:
-      setter:
+      impl:
+        setter:
+        - name: blendMode
+      inputs:
       - name: blendMode
+        type: BlendMode
+      outputs: {}
     SetBlockingLoadsRequested:
       inputs:
       - default: false
@@ -5598,6 +6557,17 @@ TextureBase:
       outputs: {}
     SetColorTexture:
       impl: Texture/SetColorTexture
+      inputs:
+      - name: colorR
+        type: number
+      - name: colorG
+        type: number
+      - name: colorB
+        type: number
+      - name: a
+        nilable: true
+        type: number
+      outputs: {}
     SetDesaturated:
       inputs:
       - default: false
@@ -5621,11 +6591,22 @@ TextureBase:
           structure: colorRGBA
       outputs: {}
     SetHorizTile:
-      setter:
-      - name: horizTile
+      impl:
+        setter:
+        - name: horizTile
+      inputs:
+      - default: false
+        name: tiling
+        type: boolean
+      outputs: {}
     SetMask:
-      setter:
-      - name: maskName
+      impl:
+        setter:
+        - name: maskName
+      inputs:
+      - name: file
+        type: string
+      outputs: {}
     SetRotation:
       inputs:
       - name: radians
@@ -5643,6 +6624,16 @@ TextureBase:
       outputs: {}
     SetTexCoord:
       impl: Texture/SetTexCoord
+      inputs:
+      - name: left
+        type: number
+      - name: right
+        type: number
+      - name: bottom
+        type: number
+      - name: top
+        type: number
+      outputs: {}
     SetTexelSnappingBias:
       inputs:
       - name: bias
@@ -5677,8 +6668,14 @@ TextureBase:
         type: number
       outputs: {}
     SetVertTile:
-      setter:
-      - name: vertTile
+      impl:
+        setter:
+        - name: vertTile
+      inputs:
+      - default: false
+        name: tiling
+        type: boolean
+      outputs: {}
   virtual: true
 TextureCoordTranslation:
   fields: {}
@@ -5715,8 +6712,13 @@ UIObject:
   inherits: {}
   methods:
     GetName:
-      getter:
+      impl:
+        getter:
+        - name: name
+      inputs: {}
+      outputs:
       - name: name
+        type: string
     GetObjectType:
       impl: UIObject/GetObjectType
       inputs: {}
@@ -5724,8 +6726,13 @@ UIObject:
       - name: objectType
         type: string
     IsForbidden:
-      getter:
-      - name: forbidden
+      impl:
+        getter:
+        - name: forbidden
+      inputs: {}
+      outputs:
+      - name: isForbidden
+        type: boolean
     IsObjectType:
       impl: UIObject/IsObjectType
       inputs:
@@ -5787,6 +6794,7 @@ UnitPositionFrame:
       - name: units
         type: string
       outstride: 1
+      stuboutstrides: 0
     GetPlayerPingScale:
       inputs: {}
       outputs:

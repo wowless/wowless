@@ -1,8 +1,8 @@
 ---
-build: '60067'
-date: Apr  1 2025
-flavor: Mainline
-hash: a32293156eaef3555632435a700d0b82
+build: '61491'
+date: Jun 13 2025
+gametype: Standard
+hash: af1bad64c0bbfe1d9f73170395197cf2
 test: false
-tocversion: 110105
-version: 11.1.5
+tocversion: 110107
+version: 11.1.7

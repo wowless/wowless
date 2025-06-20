@@ -60,6 +60,38 @@ local function rewriteSpecs(fn)
   end)
 end
 
+local function align(ty, fn)
+  local t = {}
+  for _, p in ipairs(dofile('build/cmake/runtime/products.lua')) do
+    local filename = 'data/products/' .. p .. '/' .. ty .. '.yaml'
+    t[p] = {
+      before = require('pl.file').read(filename),
+      filename = filename,
+    }
+  end
+  local r = {}
+  for p, z in pairs(t) do
+    for k, v in pairs(yaml.parse(z.before)) do
+      r[k] = r[k] or {}
+      r[k][p] = v
+    end
+  end
+  fn(r)
+  local s = {}
+  for k, z in pairs(r) do
+    for p, v in pairs(z) do
+      s[p] = s[p] or {}
+      s[p][k] = v
+    end
+  end
+  for p, z in pairs(t) do
+    local after = yaml.pprint(s[p])
+    if after ~= z.before then
+      writeFile(z.filename, after)
+    end
+  end
+end
+
 local args = (function()
   local parser = require('argparse')()
   parser:argument('program', 'program.lua')
@@ -68,6 +100,7 @@ end)()
 
 local fn = assert(loadfile(args.program))
 fn({
+  align = align,
   file = rewriteFile,
   files = rewriteFiles,
   specs = rewriteSpecs,

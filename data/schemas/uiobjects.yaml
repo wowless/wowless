@@ -48,70 +48,74 @@ type:
             mapof:
               key: string
               value:
-                oneof:
-                - record:
-                    getter:
-                      required: true
-                      type:
-                        sequenceof:
-                          record:
-                            name:
-                              required: true
-                              type: string
-                - record:
-                    impl:
-                      type:
-                        ref: uiobjectimpl
-                    inputs:
-                      type:
-                        sequenceof:
-                          record:
-                            default:
-                              type:
-                                schema: any
-                            name:
-                              required: true
-                              type: string
-                            nilable:
-                              type: boolean
+                record:
+                  impl:
+                    type:
+                      oneof:
+                      - record:
+                          getter:
+                            required: true
                             type:
-                              required: true
-                              type:
-                                schema: type
-                    mayreturnnils:
-                      type: boolean
-                    mayreturnnothing:
-                      type: boolean
-                    outputs:
-                      type:
-                        sequenceof:
-                          record:
-                            name:
-                              type: string
-                            nilable:
-                              type: boolean
-                            stub:
-                              type:
-                                schema: any
-                            stubnotnil:
-                              type: boolean
+                              sequenceof:
+                                record:
+                                  name:
+                                    required: true
+                                    type: string
+                      - record:
+                          setter:
+                            required: true
                             type:
-                              required: true
-                              type:
-                                schema: type
-                    outstride:
-                      type: number
-                - record:
-                    setter:
-                      required: true
-                      type:
-                        sequenceof:
-                          record:
-                            name:
-                              required: true
-                              type: string
-                            nilable:
-                              type: boolean
+                              sequenceof:
+                                record:
+                                  name:
+                                    required: true
+                                    type: string
+                                  nilable:
+                                    type: boolean
+                      - ref: uiobjectimpl
+                  inputs:
+                    type:
+                      sequenceof:
+                        record:
+                          default:
+                            type:
+                              schema: any
+                          name:
+                            required: true
+                            type: string
+                          nilable:
+                            type: boolean
+                          type:
+                            required: true
+                            type:
+                              schema: type
+                  instride:
+                    type: number
+                  mayreturnnils:
+                    type: boolean
+                  mayreturnnothing:
+                    type: boolean
+                  outputs:
+                    type:
+                      sequenceof:
+                        record:
+                          name:
+                            type: string
+                          nilable:
+                            type: boolean
+                          stub:
+                            type:
+                              schema: any
+                          stubnotnil:
+                            type: boolean
+                          type:
+                            required: true
+                            type:
+                              schema: type
+                  outstride:
+                    type: number
+                  stuboutstrides:
+                    type: number
         objectType:
           type: string
         singleton:

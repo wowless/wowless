@@ -1,0 +1,241 @@
+---
+events:
+  never_sent:
+    INVENTORY_SEARCH_UPDATE: {}
+    PARTY_INVITE_CANCEL: {}
+    SECURE_TRANSFER_CONFIRM_SEND_MAIL: {}
+lies:
+  apis:
+    C_BattleNet.InstallHighResTextures:
+      inputs: {}
+      outputs: {}
+    C_Item.GetItemClassInfo:
+      inputs:
+      - name: itemClassID
+        type: number
+      outputs:
+      - name: result
+        type: string
+  uiobjects:
+    Button:
+      RegisterForClicks:
+        inputs:
+        - name: unpackedPrimitiveType
+          type: number
+        instride: 1
+        outputs: {}
+      RegisterForMouse:
+        inputs:
+        - name: unpackedPrimitiveType
+          type: number
+        instride: 1
+        outputs: {}
+    Frame:
+      RegisterForDrag:
+        inputs:
+        - name: unpackedPrimitiveType
+          type: number
+        instride: 1
+        outputs: {}
+    Region:
+      SetPassThroughButtons:
+        inputs:
+        - name: unpackedPrimitiveType
+          type: number
+        instride: 1
+        outputs: {}
+    TextureBase:
+      SetAtlas:
+        inputs:
+        - name: atlas
+          type: string
+        - default: false
+          name: useAtlasSize
+          type: boolean
+        - name: filterMode
+          nilable: true
+          type: FilterMode
+        - name: resetTexCoords
+          nilable: true
+          type: boolean
+        outputs: {}
+mayreturnnothing: true
+script_objects:
+  FrameAPIArchaeologyDigSiteFrame: ArchaeologyDigSiteFrame
+  FrameAPIBlob: POIFrame
+  FrameAPICharacterModelBase: PlayerModel
+  FrameAPICinematicModel: CinematicModel
+  FrameAPICooldown: Cooldown
+  FrameAPIDressUpModel: DressUpModel
+  FrameAPIFogOfWarFrame: FogOfWarFrame
+  FrameAPIModelSceneFrame: ModelScene
+  FrameAPIModelSceneFrameActor: Actor
+  FrameAPIModelSceneFrameActorBase: Actor
+  FrameAPIQuestPOI: QuestPOIFrame
+  FrameAPISimpleCheckout: Checkout
+  FrameAPITabardModel: TabardModel
+  FrameAPITabardModelBase: TabardModel
+  FrameAPIUnitPositionFrame: UnitPositionFrame
+  MinimapFrameAPI: Minimap
+  SimpleAnimAlphaAPI: Alpha
+  SimpleAnimAPI: Animation
+  SimpleAnimatableObjectAPI: Region
+  SimpleAnimFlipBookAPI: FlipBook
+  SimpleAnimGroupAPI: AnimationGroup
+  SimpleAnimPathAPI: Path
+  SimpleAnimRotationAPI: Rotation
+  SimpleAnimScaleAPI: Scale
+  SimpleAnimScaleLineAPI: LineScale
+  SimpleAnimTextureCoordTranslationAPI: TextureCoordTranslation
+  SimpleAnimTranslationAPI: Translation
+  SimpleAnimTranslationLineAPI: LineTranslation
+  SimpleAnimVertexColorAPI: VertexColor
+  SimpleBrowserAPI: Browser
+  SimpleButtonAPI: Button
+  SimpleCheckboxAPI: CheckButton
+  SimpleColorSelectAPI: ColorSelect
+  SimpleControlPointAPI: ControlPoint
+  SimpleEditBoxAPI: EditBox
+  SimpleFontAPI: Font
+  SimpleFontStringAPI: FontString
+  SimpleFrameAPI: Frame
+  SimpleFrameScriptObjectAPI: UIObject
+  SimpleHTMLAPI: SimpleHTML
+  SimpleLineAPI: Line
+  SimpleMaskTextureAPI: MaskTexture
+  SimpleMessageFrameAPI: MessageFrame
+  SimpleModelAPI: Model
+  SimpleMovieAPI: MovieFrame
+  SimpleObjectAPI: ParentedObjectBase
+  SimpleOffScreenFrameAPI: OffScreenFrame
+  SimpleRegionAPI: Region
+  SimpleScriptRegionAPI: Region
+  SimpleScriptRegionResizingAPI: Region
+  SimpleScrollFrameAPI: ScrollFrame
+  SimpleSliderAPI: Slider
+  SimpleStatusBarAPI: StatusBar
+  SimpleTextureAPI: Texture
+  SimpleTextureBaseAPI: TextureBase
+skip_docfiles:
+  AuctionHouseDocumentation: {}
+  BarberShopInternalDocumentation: {}
+  ConfigurationWarningsDocumentation: {}
+  DebugToggleDocumentation: {}
+  EditModeManagerDocumentation: {}
+  PingPinFrameAPIDocumentation: {}
+  SimpleModelFFXAPIDocumentation: {}
+skip_uiobject_methods:
+  Button:
+    GetText: {}
+    SetDisabledTexture: {}
+    SetFormattedText: {}
+    SetHighlightTexture: {}
+    SetNormalTexture: {}
+    SetPushedTexture: {}
+  CheckButton:
+    SetCheckedTexture: {}
+  Cooldown:
+    SetBlingTexture: {}
+    SetEdgeTexture: {}
+    SetSwipeTexture: {}
+  Frame:
+    GetAttribute: {}
+    RegisterEvent: {}
+    RegisterUnitEvent: {}
+    SetAttribute: {}
+    SetAttributeNoHandler: {}
+    UnregisterEvent: {}
+  ModelScene:
+    CreateActor: {}
+  ParentedObjectBase:
+    GetParentKey: {}
+  Region:
+    GetBottom: {}
+    GetDrawLayer: {}
+    GetHeight: {}
+    GetLeft: {}
+    GetPoint: {}
+    GetRect: {}
+    GetScript: {}
+    GetSize: {}
+    GetVertexColor: {}
+    GetWidth: {}
+    HasScript: {}
+    HookScript: {}
+    SetAllPoints: {}
+    SetDrawLayer: {}
+    SetPoint: {}
+    SetScript: {}
+    SetVertexColor: {}
+  StatusBar:
+    SetStatusBarTexture: {}
+  TextureBase:
+    GetTexCoord: {}
+    GetTexture: {}
+    SetTexture: {}
+typedefs:
+  AnimationDataEnum: number
+  BigInteger: number
+  BigUInteger: number
+  bool: boolean
+  CalendarEventID: string
+  ChatBubbleFrame: table
+  ClubId: string
+  ClubInvitationId: string
+  ClubStreamId: string
+  ConnectionIptype: string
+  CScriptObject: UIObject
+  cstring: string
+  FileAsset: string
+  fileID: number
+  FontAlphabet: string
+  HTMLTextType: string
+  IDOrLink: string
+  ItemInfo: string
+  kstringClubMessage: string
+  kstringLfgListApplicant: string
+  kstringLfgListChat: string
+  kstringLfgListSearch: string
+  luaFunction: function
+  luaIndex: number
+  LuaValueVariant: table
+  ModelAsset: string
+  ModelSceneFrame: ModelScene
+  ModelSceneFrameActor: Actor
+  NamePlateFrame: table
+  normalizedValue: number
+  NotificationDbId: string
+  number: number
+  QuestObjectiveType: number
+  RecruitAcceptanceID: string
+  ScriptObject: UIObject
+  ScriptRegion: Region
+  SimpleAnim: Animation
+  SimpleAnimGroup: AnimationGroup
+  SimpleControlPoint: ControlPoint
+  SimpleFont: Font
+  SimpleFontString: FontString
+  SimpleFrame: Frame
+  SimpleLine: Line
+  SimpleMaskTexture: MaskTexture
+  SimplePathAnim: Path
+  SimpleTexture: Texture
+  SimpleWindow: nil
+  SingleColorValue: number
+  size: number
+  SpellIdentifier: string
+  string: string
+  stringView: string
+  TBFFlags: string
+  TextureAsset: Texture
+  TextureAssetDisk: string
+  textureAtlas: string
+  textureKit: string
+  time_t: number
+  TooltipComparisonItem: table
+  uiAddon: uiAddon
+  uiFontHeight: number
+  uiUnit: number
+  UnitToken: unit
+  WOWGUID: string
+  WOWMONEY: number

@@ -1,0 +1,27 @@
+{
+  "tasks": [
+    {
+      "command": "pre-commit",
+      "label": "precommit",
+      "problemMatcher": [],
+      "type": "shell"
+    },
+    {
+      "command": "ninja out/*/log.txt | cat - && ls -l out/*/log.txt",
+      "label": "runall",
+      "problemMatcher": [],
+      "type": "shell"
+    },
+    {
+      "command": "ninja | cat -",
+      "group": {
+        "isDefault": true,
+        "kind": "test"
+      },
+      "label": "test",
+      "problemMatcher": [],
+      "type": "shell"
+    }
+  ],
+  "version": "2.0.0"
+}

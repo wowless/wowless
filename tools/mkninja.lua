@@ -1,6 +1,7 @@
 local productList = {
   'wow',
   'wow_classic',
+  'wow_classic_beta',
   'wow_classic_era',
   'wow_classic_era_ptr',
   'wow_classic_ptr',
@@ -30,6 +31,7 @@ local perProductAddonGeneratedTypes = {
     return {
       'build/cmake/runtime/products/' .. p .. '/apis.lua',
       'build/cmake/runtime/products/' .. p .. '/config.lua',
+      'build/cmake/runtime/impl.lua',
     }
   end,
   globals = function(p)
@@ -45,6 +47,7 @@ local perProductAddonGeneratedTypes = {
     return {
       'build/cmake/runtime/products/' .. p .. '/apis.lua',
       'build/cmake/runtime/products/' .. p .. '/config.lua',
+      'build/cmake/runtime/impl.lua',
     }
   end,
   product = function()
@@ -127,11 +130,11 @@ local rules = {
 }
 
 local addonFiles = {
-  'addon/Wowless/api.lua',
   'addon/Wowless/evenmoreintrinsic.xml',
   'addon/Wowless/framework.lua',
   'addon/Wowless/generated.lua',
   'addon/Wowless/init.lua',
+  'addon/Wowless/statemachine.lua',
   'addon/Wowless/test.lua',
   'addon/Wowless/test.xml',
   'addon/Wowless/uiobjects.lua',
@@ -193,6 +196,7 @@ for _, p in ipairs(productList) do
     ins_implicit = {
       'build/cmake/dblist',
       'build/cmake/runtime/impl.lua',
+      'build/cmake/runtime/sql.lua',
       'build/cmake/runtime/products/' .. p .. '/apis.lua',
     },
     outs = dblist,
@@ -263,6 +267,7 @@ for _, p in ipairs(productList) do
     args = { product = p },
     ins_implicit = {
       dbdefs,
+      dblist,
       'build/cmake/sqlite',
     },
     outs = schemadb,
@@ -272,6 +277,7 @@ for _, p in ipairs(productList) do
     args = { product = p },
     ins_implicit = {
       dbdefs,
+      dblist,
       fetchStamp,
       'build/cmake/sqlite',
     },
@@ -289,14 +295,17 @@ end
 table.insert(builds, {
   ins = {
     'spec/addon/framework_spec.lua',
+    'spec/addon/statemachine_spec.lua',
     'spec/addon/util_spec.lua',
     'spec/data/apis_spec.lua',
     'spec/data/config_spec.lua',
     'spec/data/docs_spec.lua',
     'spec/data/events_spec.lua',
-    'spec/data/flavors_spec.lua',
+    'spec/data/families_spec.lua',
+    'spec/data/gametypes_spec.lua',
     'spec/data/globals_spec.lua',
     'spec/data/impl_spec.lua',
+    'spec/data/sql_spec.lua',
     'spec/data/structures_spec.lua',
     'spec/data/test_spec.lua',
     'spec/data/uiobjectimpl_spec.lua',
@@ -307,6 +316,7 @@ table.insert(builds, {
     'spec/wowapi/yaml_spec.lua',
     'spec/wowless/addon_spec.lua',
     'spec/wowless/blp_spec.lua',
+    'spec/wowless/bubblewrap_spec.lua',
     'spec/wowless/hlist_spec.lua',
     'spec/wowless/png_spec.lua',
     'spec/wowless/toc_spec.lua',

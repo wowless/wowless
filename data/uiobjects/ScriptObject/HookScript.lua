@@ -1,4 +1,5 @@
-return (function(self, name, script, bindingType)
+local api = ...
+return function(self, name, script, bindingType)
   local btype = bindingType or 1
   local lname = string.lower(name)
   local scripts = self.scripts[btype]
@@ -15,4 +16,4 @@ return (function(self, name, script, bindingType)
   end
   scripts[lname] = setfenv(newfn, api.env)
   return true
-end)(...)
+end

@@ -24,6 +24,8 @@ addon:
       C_Macro.SetMacroExecuteLineCallback: {}
       CreateForbiddenFrame: {}
       loadstring_untainted: {}
+  hooked_globals:
+    UpdateUIParentPosition: {}
   ignore_cvar_value:
     graphicsComputeEffects: {}
     graphicsDepthEffects: {}

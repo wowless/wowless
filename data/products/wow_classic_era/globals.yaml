@@ -49,13 +49,18 @@ Constants:
     QUESTIONMARK_INV_ICON: 134400
     WAR_RESOURCES_CURRENCY_ID: 1560
   DelvesConsts:
-    BRANN_COMPANION_INFO_ID: 1
     BRANN_MAX_LEVEL: 60
     BRANN_XP_FACTION_ID: 1203
+    COMPANION_SEASONAL_LEVEL_START: 10
+    DELVES_COMPANION_INFO_SELECTION_CHARACTER_DATA_ELEMENT_ID: 13
     DELVES_COMPANION_TOOLTIP_WIDGET_SET_ID: 1331
-    DELVES_COMPANION_TRAIT_SYSTEM_ID: 6
     DELVES_MIN_PLAYER_LEVEL_CONTENT_TUNING_ID: 2677
     DELVES_NORMAL_KEY_CURRENCY_ID: 3028
+  EventScheduler:
+    SCHEDULED_EVENT_FUTURE_LIMIT: 12
+    SCHEDULED_EVENT_PAST_LIMIT_SECONDS: 3600
+    SCHEDULED_EVENT_REMINDER_DEAD_SECONDS: 10
+    SCHEDULED_EVENT_REMINDER_WARNING_SECONDS: 300
   InventoryConstants:
     NumBagSlots: 4
     NumBankBagSlots: 6
@@ -309,10 +314,11 @@ Enum:
     Toy: 5
     Transmog: 1
     TransmogSet: 8
+    WarbandScene: 11
   AccountStoreItemRewardTypeMeta:
-    MaxValue: 10
+    MaxValue: 11
     MinValue: 1
-    NumValues: 8
+    NumValues: 9
   AccountStoreItemStatus:
     Owned: 3
     Refundable: 2
@@ -419,6 +425,7 @@ Enum:
     RafFriendMonth: 28
     RafRecruiterAcceptances: 27
     RafReward: 29
+    SaveWarbandGroups: 60
     Settings: 14
     TrialBoostHistories: 23
     TrialBoostHistory: 22
@@ -426,14 +433,22 @@ Enum:
     VasTransaction: 20
     WarbandGroups: 55
   AccountTransTypeMeta:
-    MaxValue: 59
+    MaxValue: 60
     MinValue: 0
-    NumValues: 60
+    NumValues: 61
   AddOnEnableState:
     All: 2
     None: 0
     Some: 1
   AddOnEnableStateMeta:
+    MaxValue: 2
+    MinValue: 0
+    NumValues: 3
+  AddOnPerformanceMessageType:
+    OverallAddOnErrorDialog: 2
+    SpecificAddOnChatWarning: 0
+    SpecificAddOnErrorDialog: 1
+  AddOnPerformanceMessageTypeMeta:
     MaxValue: 2
     MinValue: 0
     NumValues: 3
@@ -473,6 +488,18 @@ Enum:
     MaxValue: 4
     MinValue: 0
     NumValues: 5
+  AssertDomain:
+    Art: 1
+    Design: 2
+    Engineering: 4
+    LiveOperations: 64
+    Performance: 32
+    Sound: 8
+    Tools: 16
+  AssertDomainMeta:
+    MaxValue: 64
+    MinValue: 1
+    NumValues: 7
   AuctionHouseCommoditySortOrder:
     Quantity: 1
     UnitPrice: 0
@@ -569,6 +596,13 @@ Enum:
     MaxValue: 3
     MinValue: 0
     NumValues: 4
+  AuctionStatus:
+    Active: 0
+    Sold: 1
+  AuctionStatusMeta:
+    MaxValue: 1
+    MinValue: 0
+    NumValues: 2
   AvgItemLevelCategories:
     Base: 0
     EquippedBase: 1
@@ -710,7 +744,20 @@ Enum:
     ShowFancyToast: 1024
     UseHorizontalLayoutForFullCard: 16
     UseSquareIconBorder: 128
-  BattlepayDisplayFlagMeta:
+  BattlepayDisplayFlags:
+    CardAlwaysShowsTexture: 4
+    CardDoesNotShowModel: 2
+    Deprecated1: 32
+    Deprecated2: 64
+    Expansion: 1
+    HiddenPrice: 8
+    HideWhenOwned: 256
+    RafReward: 512
+    ShowFancyToast: 1024
+    UseHorizontalLayoutForFullCard: 16
+    UseIconBorderWithOverrideTexture: 2048
+    UseSquareIconBorder: 128
+  BattlepayDisplayFlagsMeta:
     MaxValue: 2048
     MinValue: 1
     NumValues: 12
@@ -722,6 +769,22 @@ Enum:
     MaxValue: 2
     MinValue: 0
     NumValues: 3
+  BattlepayLicenseSynthesisFlags:
+    ForceToGameAccount: 1
+  BattlepayLicenseSynthesisFlagsMeta:
+    MaxValue: 1
+    MinValue: 1
+    NumValues: 1
+  BattlepayProductChoiceType:
+    ChoiceNone: 0
+    ChoiceOne: 1
+    SpecAndFaction: 2
+    VasCharacter: 3
+    VasCharacterAndName: 4
+  BattlepayProductChoiceTypeMeta:
+    MaxValue: 4
+    MinValue: 0
+    NumValues: 5
   BattlepayProductDecorator:
     Boost: 0
     Expansion: 1
@@ -737,10 +800,31 @@ Enum:
     EnabledForTrial: 2
     EnabledForVeteran: 8
     HideOwnedProducts: 1
-  BattlepayProductGroupFlagMeta:
-    MaxValue: 8
-    MinValue: 1
-    NumValues: 4
+  BattlepayProductGroupFlags:
+    DisableOwnedProducts: 4
+    EnabledForTrial: 2
+    EnabledForVeteran: 8
+    HideOwnedProducts: 1
+    None: 0
+    TrialAndVeteranOnly: 16
+  BattlepayProductGroupFlagsMeta:
+    MaxValue: 16
+    MinValue: 0
+    NumValues: 6
+  BattlepayShopEntryBannerType:
+    Discount: 1
+    Featured: 0
+    New: 2
+  BattlepayShopEntryBannerTypeMeta:
+    MaxValue: 2
+    MinValue: 0
+    NumValues: 3
+  BattlepayShopEntryFlags:
+    None: 0
+  BattlepayShopEntryFlagsMeta:
+    MaxValue: 0
+    MinValue: 0
+    NumValues: 1
   BattlePetAbilityFlag:
     DisplayAsHostileDebuff: 1
     HideStrongWeakHints: 2
@@ -828,7 +912,6 @@ Enum:
     Ability0Selection: 16
     Ability1Selection: 32
     Ability2Selection: 64
-    AccountStore: 2048
     AcquiredViaLicense: 512
     Converted: 2
     DisplayOverridden: 256
@@ -840,9 +923,9 @@ Enum:
     Revoked: 4
     TradingPost: 1024
   BattlepetDbFlagsMeta:
-    MaxValue: 2048
+    MaxValue: 1024
     MinValue: 0
-    NumValues: 14
+    NumValues: 13
   BattlepetDeletedReason:
     AccountStore: 7
     CageError: 4
@@ -1506,16 +1589,18 @@ Enum:
     MinValue: 0
     NumValues: 3
   ChrModelFeatureFlags:
-    DragonCompanions: 8
+    Deprecated0: 8
     Forms: 2
     HunterPets: 32
     Identity: 4
     Mounts: 16
+    None: 0
+    Players: 64
     Summons: 1
   ChrModelFeatureFlagsMeta:
-    MaxValue: 32
-    MinValue: 1
-    NumValues: 6
+    MaxValue: 64
+    MinValue: 0
+    NumValues: 8
   ChrRacesAllianceType:
     Alliance: 0
     Horde: 1
@@ -2210,6 +2295,7 @@ Enum:
   CurrencyFlagsB:
     CurrencyBBattlenetVirtualCurrency: 8
     CurrencyBDontDisplayIfZero: 32
+    CurrencyBForceMaxQuantityOnConversion: 256
     CurrencyBNoNotificationMailOnOfflineProgress: 4
     CurrencyBScaleMaxQuantityBySeasonWeeks: 64
     CurrencyBScaleMaxQuantityByWeeksSinceStart: 128
@@ -2217,9 +2303,9 @@ Enum:
     CurrencyBUseTotalEarnedForEarned: 1
     FutureCurrencyFlag: 16
   CurrencyFlagsBMeta:
-    MaxValue: 128
+    MaxValue: 256
     MinValue: 1
-    NumValues: 8
+    NumValues: 9
   CurrencyFlagsMeta:
     MaxValue: -2147483648
     MinValue: 1
@@ -2395,13 +2481,6 @@ Enum:
     MaxValue: 0
     MinValue: 0
     NumValues: 1
-  CustomizationScope:
-    DragonCompanion: 1
-    Player: 0
-  CustomizationScopeMeta:
-    MaxValue: 1
-    MinValue: 0
-    NumValues: 2
   Damageclass:
     All: 127
     AllMagical: 126
@@ -2621,13 +2700,6 @@ Enum:
     MaxValue: 14
     MinValue: 0
     NumValues: 15
-  GameEnvironment:
-    WoW: 0
-    WoWLabs: 1
-  GameEnvironmentMeta:
-    MaxValue: 1
-    MinValue: 0
-    NumValues: 2
   GameMode:
     Length: 3
     Plunderstorm: 2
@@ -2653,6 +2725,9 @@ Enum:
     AfterDeathSpectatingUI: 49
     AllPlayersAreFastMovers: 53
     AlwaysAllowAlliedRaces: 59
+    AvailablePlaceholder1: 88
+    AvailablePlaceholder2: 89
+    AvailablePlaceholder3: 90
     BagsUIDisabled: 64
     CharacterCreateUseFixedBackgroundModel: 55
     CharacterlessLogin: 14
@@ -2671,6 +2746,7 @@ Enum:
     Deprecated3: 96
     Deprecated4: 97
     DeprecatedLFGUIEnabled: 6
+    DeprecatedSummoningStones: 0
     DisableHonorDecay: 23
     DisablePct: 9
     EditModeDisabled: 82
@@ -2683,7 +2759,7 @@ Enum:
     ForcedPartyFrameScale: 32
     FrontEndChat: 50
     FullCharacterCreateDisabled: 84
-    GameEnvironment: 13
+    GameMode: 13
     GroupFinderCapabilities: 98
     GuildsDisabled: 46
     HardcoreRuleset: 10
@@ -2696,7 +2772,9 @@ Enum:
     IngameWhoListDisabled: 77
     InstanceDifficultyBannerDisabled: 83
     LandingPageFactionID: 35
+    LgPlaceholder1Acarpentieri: 103
     MacrosDisabled: 80
+    MainlinePlaceholder1: 102
     MapPlunderstormCircle: 48
     MaxAccountCharReservationsPerContentset: 4
     MaxCharReservationsPerRealm: 3
@@ -2711,6 +2789,10 @@ Enum:
     NonPlayerNameplateScale: 31
     PerksProgramActivityTrackingDisabled: 66
     PetBattlesDisabled: 65
+    Placeholder1: 104
+    Placeholder2: 105
+    Placeholder3: 106
+    Placeholder4: 107
     PlayerNameplateAlternateHealthColor: 58
     PlayerNameplateDifficultyIcon: 57
     PlunderstormAreaSelection: 94
@@ -2726,7 +2808,7 @@ Enum:
     SelfFoundAllowed: 22
     SpellbookPanelDisabled: 38
     StoreDisabled: 44
-    SummoningStones: 0
+    SummoningStones: 108
     TalentRespecCostMax: 19
     TalentRespecCostMin: 18
     TalentRespecCostStep: 20
@@ -2747,9 +2829,6 @@ Enum:
     WorldMapTrackingOptionsDisabled: 68
     WorldMapTrackingPinDisabled: 69
     WoWLabsPlaceholder1: 87
-    WoWLabsPlaceholder2: 88
-    WoWLabsPlaceholder3: 89
-    WoWLabsPlaceholder4: 90
   GameRuleFlags:
     AllowClient: 1
     None: 0
@@ -2759,9 +2838,9 @@ Enum:
     MinValue: 0
     NumValues: 3
   GameRuleMeta:
-    MaxValue: 101
+    MaxValue: 108
     MinValue: 0
-    NumValues: 102
+    NumValues: 109
   GameRuleType:
     Bool: 2
     Float: 1
@@ -3025,6 +3104,11 @@ Enum:
     PersonalTabardVendor: 54
     PetitionVendor: 7
     PetUntrainer: 13
+    Placeholder_1: 59
+    Placeholder_2: 60
+    Placeholder_3: 61
+    Placeholder_4: 62
+    ProfessionRespec: 58
     ProfessionsCraftingOrder: 48
     ProfessionsCustomerOrder: 50
     ProfessionsOpen: 49
@@ -3053,16 +3137,17 @@ Enum:
     MinValue: 1
     NumValues: 1
   GossipNpcOptionMeta:
-    MaxValue: 57
+    MaxValue: 62
     MinValue: 0
-    NumValues: 58
+    NumValues: 63
   GossipOptionRecFlags:
     HideOptionIDFromClient: 2
+    PlayMovieLabelPrepend: 4
     QuestLabelPrepend: 1
   GossipOptionRecFlagsMeta:
-    MaxValue: 2
+    MaxValue: 4
     MinValue: 1
-    NumValues: 2
+    NumValues: 3
   GossipOptionStatus:
     AlreadyComplete: 3
     Available: 0
@@ -3576,6 +3661,8 @@ Enum:
     CraftingSkillLineAbilityID: 39
     CraftingSkillReagents: 41
     CraftingSkillWatermark: 42
+    DbidHigh: 59
+    DbidLow: 60
     IncrementLevel: 2
     KeystoneAffix0: 19
     KeystoneAffix01: 20
@@ -3607,9 +3694,9 @@ Enum:
     TransmogrifySecondaryItemModifiedAppearanceIDSpec_4: 36
     TransmogrifySecondaryItemModifiedAppearanceIDSpecAll: 31
   ItemModificationMeta:
-    MaxValue: 58
+    MaxValue: 60
     MinValue: 0
-    NumValues: 59
+    NumValues: 61
   ItemProfessionSubclass:
     Alchemy: 2
     Archaeology: 13
@@ -3992,6 +4079,17 @@ Enum:
     MaxValue: 8
     MinValue: 1
     NumValues: 4
+  LogPriority:
+    Debug: 30
+    Error: 2
+    Fatal: 1
+    Normal: 10
+    Spam: 40
+    Warning: 3
+  LogPriorityMeta:
+    MaxValue: 40
+    MinValue: 1
+    NumValues: 6
   LootSlotType:
     Currency: 3
     Item: 1
@@ -4193,16 +4291,22 @@ Enum:
     MinValue: 1
     NumValues: 1
   PerksVendorCategoryType:
+    Achievement: 23
+    Activity: 21
+    GmAdjustment: 22
     Illusion: 7
     Mount: 2
     Pet: 3
+    Refund: 24
+    Stipend: 20
     Toy: 5
     Transmog: 1
     Transmogset: 8
+    WarbandScene: 9
   PerksVendorCategoryTypeMeta:
-    MaxValue: 8
+    MaxValue: 24
     MinValue: 1
-    NumValues: 6
+    NumValues: 12
   PermanentChatChannelType:
     Communities: 2
     Custom: 3
@@ -4659,7 +4763,15 @@ Enum:
     PerksProgramVendor: 57
     PersonalTabardVendor: 65
     PetitionVendor: 13
+    PlaceholderType71: 70
+    PlaceholderType72: 71
+    PlaceholderType73: 72
+    PlaceholderType74: 73
+    PlaceholderType75: 74
+    PlaceholderType76: 75
+    PlaceholderType77: 76
     PlayerChoice: 37
+    ProfessionRespec: 69
     Professions: 59
     ProfessionsCraftingOrder: 58
     ProfessionsCustomerOrder: 60
@@ -4684,9 +4796,9 @@ Enum:
     WeeklyRewards: 49
     WorldMap: 29
   PlayerInteractionTypeMeta:
-    MaxValue: 68
+    MaxValue: 76
     MinValue: 0
-    NumValues: 69
+    NumValues: 77
   PlayerMentorshipApplicationResult:
     AlreadyMentor: 1
     Ineligible: 2
@@ -4880,6 +4992,30 @@ Enum:
     MaxValue: 1
     MinValue: 0
     NumValues: 2
+  PvPRanks:
+    Rank_1: 5
+    Rank_10: 14
+    Rank_11: 15
+    Rank_12: 16
+    Rank_13: 17
+    Rank_14: 18
+    Rank_2: 6
+    Rank_3: 7
+    Rank_4: 8
+    Rank_5: 9
+    Rank_6: 10
+    Rank_7: 11
+    Rank_8: 12
+    Rank_9: 13
+    RankDishonored: 4
+    RankExiled: 3
+    RankNone: 0
+    RankOutlaw: 2
+    RankPariah: 1
+  PvPRanksMeta:
+    MaxValue: 18
+    MinValue: 0
+    NumValues: 19
   QuestClassification:
     BonusObjective: 8
     Calling: 3
@@ -5294,12 +5430,13 @@ Enum:
     InvalidMessage: 2
     InvalidPrefix: 1
     NotInGroup: 5
+    NotInGuild: 10
     Success: 0
     TargetRequired: 6
   SendAddonMessageResultMeta:
-    MaxValue: 9
+    MaxValue: 10
     MinValue: 0
-    NumValues: 10
+    NumValues: 11
   SharedStringFlag:
     InternalOnly: 1
   SharedStringFlagMeta:
@@ -5387,6 +5524,28 @@ Enum:
     MaxValue: 4
     MinValue: 0
     NumValues: 5
+  StableResult:
+    AlreadyStabled: 5
+    AlreadySummoned: 6
+    BuySlotSuccess: 14
+    CantControlExotic: 11
+    CheckForLuaHack: 13
+    FavoriteToggle: 15
+    InsufficientFunds: 1
+    InternalError: 12
+    InvalidSlot: 3
+    MaxSlots: 0
+    NoPet: 4
+    NotFound: 7
+    NotStableMaster: 2
+    PetRenamed: 16
+    ReviveSuccess: 10
+    StableSuccess: 8
+    UnstableSuccess: 9
+  StableResultMeta:
+    MaxValue: 16
+    MinValue: 0
+    NumValues: 17
   StartTimerType:
     ChallengeModeCountdown: 1
     PlayerCountdown: 2
@@ -5816,10 +5975,10 @@ Enum:
     MaxValue: 29
     MinValue: 0
     NumValues: 30
-  TransmogIllisionFlags:
+  TransmogIllusionFlags:
     HideUntilCollected: 1
     PlayerConditionGrantsOnLogin: 2
-  TransmogIllisionFlagsMeta:
+  TransmogIllusionFlagsMeta:
     MaxValue: 2
     MinValue: 1
     NumValues: 2
@@ -6415,6 +6574,16 @@ Enum:
     MaxValue: 13
     MinValue: 0
     NumValues: 14
+  WarbandSceneFlags:
+    AwardedAutomatically: 8
+    CannotBeSaved: 4
+    DoNotInclude: 1
+    HiddenUntilCollected: 2
+    IsDefault: 16
+  WarbandSceneFlagsMeta:
+    MaxValue: 16
+    MinValue: 1
+    NumValues: 5
   WeeklyRewardChestActivityType:
     LFGDungeons: 1
     Scenario: 0

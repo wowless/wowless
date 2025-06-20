@@ -30,9 +30,11 @@ AnchorBinding:
     relativePoint:
       type: FramePoint
     relativeTo:
-      type: table
+      type: Region
 AppearanceSourceInfo:
   fields:
+    canDisplayOnPlayer:
+      type: boolean
     categoryID:
       default: 0
       type:
@@ -149,6 +151,27 @@ C_ActionBar.ActionUsableState:
       type: number
     usable:
       type: boolean
+C_AddOnProfiler.AddOnPerformanceMessage:
+  fields:
+    addOnName:
+      nilable: true
+      type: string
+    metric:
+      type:
+        enum: AddOnProfilerMetric
+    metricValue:
+      type: number
+    thresholdValue:
+      type: number
+    type:
+      type:
+        enum: AddOnPerformanceMessageType
+C_AddOnProfiler.AddOnProfilerResult:
+  fields:
+    addOnName:
+      type: string
+    metricValue:
+      type: number
 C_AreaPoiInfo.AreaPOIInfo:
   fields:
     addPaddingAboveTooltipWidgets:
@@ -1747,6 +1770,22 @@ C_GamePad.GamePadStickConfig:
       type: number
     stick:
       type: string
+C_GameRules.GameModeDisplayInfo:
+  fields:
+    characterCreateExtraHeight:
+      type: number
+    characterCreateOuterBorder:
+      type: number
+    logo:
+      type: number
+    logoHeight:
+      type: number
+    logoShrunkenHeight:
+      type: number
+    logoUsesDarkBackdrop:
+      type: boolean
+    logoVerticalOffset:
+      type: number
 C_GenericWidgetDisplay.GenericWidgetDisplayFrameInfo:
   fields:
     closeButtonText:
@@ -2559,6 +2598,9 @@ C_QuestLog.QuestObjectiveInfo:
     numFulfilled:
       type: number
     numRequired:
+      type: number
+    objectiveType:
+      nilable: true
       type: number
     text:
       type: string
@@ -3394,6 +3436,10 @@ C_TransmogCollection.TransmogAppearanceInfoBySourceData:
       type: boolean
     appearanceNumSources:
       type: number
+    canDisplayOnPlayer:
+      type: boolean
+    isAnySourceValidForPlayer:
+      type: boolean
     meetsTransmogPlayerCondition:
       type: boolean
     sourceIsCollected:
@@ -3423,6 +3469,8 @@ C_TransmogCollection.TransmogCategoryAppearanceInfo:
     alwaysShowItem:
       nilable: true
       type: boolean
+    canDisplayOnPlayer:
+      type: boolean
     exclusions:
       type: number
     hasActiveRequiredHoliday:
@@ -3444,6 +3492,48 @@ C_TransmogCollection.TransmogCategoryAppearanceInfo:
       type: number
     visualID:
       type: number
+C_TransmogSets.TransmogSetInfo:
+  fields:
+    baseSetID:
+      nilable: true
+      type: number
+    classMask:
+      type: number
+    collected:
+      type: boolean
+    description:
+      nilable: true
+      type: string
+    expansionID:
+      type: number
+    favorite:
+      type: boolean
+    hiddenUntilCollected:
+      type: boolean
+    label:
+      nilable: true
+      type: string
+    limitedTimeSet:
+      type: boolean
+    name:
+      type: string
+    patchID:
+      type: number
+    requiredFaction:
+      nilable: true
+      type: string
+    setID:
+      type: number
+    uiOrder:
+      type: number
+    validForCharacter:
+      type: boolean
+C_TransmogSets.TransmogSetPrimaryAppearanceInfo:
+  fields:
+    appearanceID:
+      type: number
+    collected:
+      type: boolean
 C_UIColor.DBColorExport:
   fields:
     baseTag:
@@ -3979,6 +4069,16 @@ ConsoleCommandInfo:
       type: string
     scriptParameters:
       type: string
+CreateFontFamilyMemberInfo:
+  fields:
+    alphabet:
+      type: string
+    file:
+      type: string
+    flags:
+      type: string
+    height:
+      type: number
 ExpansionDisplayInfo:
   fields:
     banner:
@@ -3995,6 +4095,30 @@ ExpansionDisplayInfoFeature:
       type: number
     text:
       type: string
+FontScriptInfo:
+  fields:
+    color:
+      type:
+        structure: colorRGBA
+    fontObject:
+      type: Font
+    height:
+      type: number
+    outline:
+      type: string
+    shadow:
+      nilable: true
+      type:
+        structure: FontScriptShadowInfo
+FontScriptShadowInfo:
+  fields:
+    color:
+      type:
+        structure: colorRGBA
+    x:
+      type: number
+    y:
+      type: number
 GuildTabardInfo:
   fields:
     backgroundColor:
@@ -4245,6 +4369,8 @@ UnitPowerBarInfo:
     anchorTop:
       type: boolean
     animateNumbers:
+      type: boolean
+    attachTooltipToBar:
       type: boolean
     barType:
       type: number

@@ -1,4 +1,4 @@
-local _, G = ...
+local addonName, G = ...
 local assertEquals = _G.assertEquals
 local iswowlesslite = _G.__wowless and _G.__wowless.lite
 
@@ -60,12 +60,10 @@ G.testsuite.generated = function()
         local func = env[name]
         if cfg.alias then
           assertEquals(func, assert(tget(_G, cfg.alias)))
-        elseif cfg.nowrap then
-          return checkLuaFunc(func)
         elseif cfg.stdlib then
           local ty = type(tget(_G, cfg.stdlib))
           if ty == 'function' then
-            return checkCFunc(func)
+            return checkFunc(func, cfg.islua or false)
           else
             assertEquals(ty, type(func))
           end
@@ -116,19 +114,6 @@ G.testsuite.generated = function()
     return tests
   end
 
-  local function build()
-    local b = _G.WowlessData.Build
-    assert(b, 'no build')
-    return {
-      IsDebugBuild = function()
-        G.check1(false, _G.IsDebugBuild())
-      end,
-      IsPublicBuild = function()
-        G.check1(true, _G.IsPublicBuild())
-      end,
-    }
-  end
-
   local function cvars()
     local function lowify(t)
       local tt = {}
@@ -145,9 +130,8 @@ G.testsuite.generated = function()
     local expectedCVars = lowify(_G.WowlessData.CVars)
     local actualCVars = lowify((function()
       -- Do this early to avoid issues with deferred cvar creation.
-      local getall = _G.C_Console and _G.C_Console.GetAllCommands or _G.ConsoleGetAllCommands
       local t = {}
-      for _, command in ipairs(getall()) do
+      for _, command in ipairs(_G.ConsoleGetAllCommands()) do
         local name = command.command
         if name:sub(1, 6) ~= 'CACHE-' then
           assertEquals(nil, t[name])
@@ -161,7 +145,7 @@ G.testsuite.generated = function()
     for k, v in pairs(expectedCVars) do
       tests[v.name] = function()
         local actual = actualCVars[k]
-        assert(actual, format('extra cvar', k))
+        assert(actual, ('extra cvar %q'):format(k))
         assertEquals(v.name, actual.name, 'cvar name mismatch')
         if not toskipin[actual.name] then
           assertEquals(v.value, actual.value, 'cvar value mismatch')
@@ -175,7 +159,7 @@ G.testsuite.generated = function()
     for k, v in pairs(actualCVars) do
       if not tests[v.name] and not toskipout[k] then
         tests[v.name] = function()
-          error(format('missing cvar with default %q', v.value))
+          error(('missing cvar with default %q'):format(v.value))
         end
       end
     end
@@ -270,17 +254,22 @@ G.testsuite.generated = function()
   local function impltests()
     local tests = {}
     local arg = {
+      addonName = addonName,
       assertEquals = G.assertEquals,
       assertRecursivelyEqual = G.assertRecursivelyEqual,
+      check0 = G.check0,
       check1 = G.check1,
       check2 = G.check2,
       check3 = G.check3,
+      check4 = G.check4,
+      check5 = G.check5,
       check6 = G.check6,
       check7 = G.check7,
       data = {
         build = _G.WowlessData.Build,
       },
       env = _G,
+      match = G.match,
       mixin = G.mixin,
       retn = G.retn,
       wowless = _G.__wowless,
@@ -493,7 +482,6 @@ G.testsuite.generated = function()
 
   return {
     apiNamespaces = apiNamespaces,
-    build = build,
     cvars = cvars,
     events = events,
     globalApis = globalApis,

@@ -1,8 +1,8 @@
 ---
-build: '59415'
-date: Feb 26 2025
-flavor: Vanilla
-hash: a5d0bd2075f11c1c174dc119f3532d61
+build: '61257'
+date: Jun  3 2025
+gametype: Vanilla
+hash: d762957a75867e5ebe68b7b9ecbb9ff7
 test: false
-tocversion: 11506
-version: 1.15.6
+tocversion: 11507
+version: 1.15.7

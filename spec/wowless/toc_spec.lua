@@ -1,12 +1,13 @@
 describe('wowless.toc', function()
   local wowlesstoc = require('wowless.toc')
-  local flavors = require('runtime.flavors')
+  local gametypes = require('runtime.gametypes')
   describe('parse', function()
     local parse = wowlesstoc.parse
-    for flavor in pairs(flavors) do
-      describe(flavor, function()
+    for gametype, gt in pairs(gametypes) do
+      local family = gt.family
+      describe(gametype, function()
         it('handles empty content', function()
-          local attrs, files = parse(flavor, '')
+          local attrs, files = parse(gametype, '')
           assert.same({}, attrs)
           assert.same({}, files)
         end)
@@ -19,27 +20,27 @@ describe('wowless.toc', function()
             ' bbb ',
             'ccc',
           }
-          local attrs, files = parse(flavor, table.concat(lines, '\n'))
+          local attrs, files = parse(gametype, table.concat(lines, '\n'))
           assert.same({ Key = 'Value' }, attrs)
           assert.same({ 'aaa', 'bbb', 'ccc' }, files)
         end)
-        it('does flavor substitution', function()
+        it('does family substitution', function()
           local lines = {
             '# [Family] comment blah blah',
             '## A[Family]Key: B[Family]Value[Family]',
             '',
             'a[Family]b',
           }
-          local attrs, files = parse(flavor, table.concat(lines, '\n'))
-          assert.same({ ['A' .. flavor .. 'Key'] = 'B' .. flavor .. 'Value' .. flavor }, attrs)
-          assert.same({ 'a' .. flavor .. 'b' }, files)
+          local attrs, files = parse(gametype, table.concat(lines, '\n'))
+          assert.same({ ['A' .. family .. 'Key'] = 'B' .. family .. 'Value' .. family }, attrs)
+          assert.same({ 'a' .. family .. 'b' }, files)
         end)
         it('does AllowLoad filtering', function()
           local lines = {
             'algame [AllowLoad Game]',
             'alglue [AllowLoad Glue]',
           }
-          local _, files = parse(flavor, table.concat(lines, '\n'))
+          local _, files = parse(gametype, table.concat(lines, '\n'))
           assert.same({ 'algame' }, files)
         end)
         it('does AllowLoadGameType filtering', function()
@@ -48,27 +49,28 @@ describe('wowless.toc', function()
             'bbb [AllowLoadGameType vanilla, cata]',
             'ccc [AllowLoadGameType classic]',
           }
-          local _, files = parse(flavor, table.concat(lines, '\n'))
+          local _, files = parse(gametype, table.concat(lines, '\n'))
           local expected = {
             Cata = { 'bbb', 'ccc' },
-            Mainline = { 'aaa' },
+            Mists = { 'ccc' },
+            Standard = { 'aaa' },
             Vanilla = { 'bbb', 'ccc' },
           }
-          assert.same(assert(expected[flavor]), files)
+          assert.same(assert(expected[gametype]), files)
         end)
       end)
     end
   end)
   describe('suffixes', function()
     local allsuffixes = wowlesstoc.suffixes
-    it('are keyed by flavor', function()
+    it('are keyed by gametype', function()
       for k in pairs(allsuffixes) do
-        assert.Not.Nil(flavors[k])
+        assert.Not.Nil(gametypes[k])
       end
     end)
-    for flavor in pairs(flavors) do
-      describe(flavor, function()
-        local suffixes = allsuffixes[flavor]
+    for gametype in pairs(gametypes) do
+      describe(gametype, function()
+        local suffixes = allsuffixes[gametype]
         it('are unique', function()
           local t = {}
           for _, v in ipairs(suffixes) do

@@ -15,6 +15,6 @@ return {
     }
   end,
   unknown = function()
-    return T.check2(nil, nil, T.env.UnitName('completeandutternonsense'))
+    return T.match(2, nil, nil, T.env.UnitName('completeandutternonsense'))
   end,
 }

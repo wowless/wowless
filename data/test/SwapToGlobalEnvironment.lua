@@ -7,5 +7,5 @@ if T.wowless then
   T.env.SwapToGlobalEnvironment()
 else
   local msg = 'cannot modify function environment from a tainted context'
-  T.check2(false, msg, pcall(T.env.SwapToGlobalEnvironment))
+  return T.match(2, false, msg, pcall(T.env.SwapToGlobalEnvironment))
 end

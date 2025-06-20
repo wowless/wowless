@@ -1,2 +1,3 @@
-local unit = ...
-return unit and unit.isplayer or false
+return function(unit)
+  return unit and unit.isplayer or false
+end

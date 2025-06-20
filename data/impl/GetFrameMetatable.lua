@@ -1,2 +1,4 @@
 local api = ...
-return api.uiobjectTypes.frame.sandboxMT
+return function()
+  return api.uiobjectTypes.frame.sandboxMT
+end

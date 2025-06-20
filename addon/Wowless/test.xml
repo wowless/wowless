@@ -108,9 +108,9 @@
   <Frame>
     <Scripts>
       <OnLoad>
-        tinsert(WowlessLog, 'during')
+        table.insert(WowlessLog, 'during')
         end, (function()
-          tinsert(WowlessLog, 'before')
+          table.insert(WowlessLog, 'before')
         end)()
       --</OnLoad>
     </Scripts>
@@ -676,6 +676,22 @@
     </Frame>
   </ScopedModifier>
 
+  <!-- Insecure securemixins are just mixins. -->
+  <Script>
+    WowlessSecureMixin = {
+      cow = 'moo',
+      fn = function() end,
+    }
+  </Script>
+  <Frame securemixin='WowlessSecureMixin'>
+    <Scripts>
+      <OnLoad>
+        assertEquals('moo', self.cow)
+        assertEquals(not _G.__wowless, WowlessSecureMixin.fn == self.fn) -- issue #403
+      </OnLoad>
+    </Scripts>
+  </Frame>
+
   <!-- TODO disabled until we support cranky XML errors -->
   <!--
   <Script>
@@ -765,6 +781,115 @@
       assertEquals(0, (WowlessColorTestFont2:GetTextColor()))
     end
   </Script>
+
+  <Frame>
+    <KeyValues>
+      <KeyValue key='knilstr' value='str' />
+      <KeyValue key='knilnum' value='42' />
+      <KeyValue key='knilbool' value='true' />
+      <KeyValue key='kstrstr' value='str' type='string' />
+      <KeyValue key='kstrnum' value='42' type='string' />
+      <KeyValue key='kstrbool' value='true' type='string' />
+      <KeyValue key='knumstr' value='str' type='number' />
+      <KeyValue key='knumnum' value='42' type='number' />
+      <KeyValue key='knumbool' value='true' type='number' />
+      <KeyValue key='kjunkstr' value='str' type='wat' />
+      <KeyValue key='kjunknum' value='42' type='wat' />
+      <KeyValue key='kjunkbool' value='true' type='wat' />
+      <KeyValue key='kboolstr' value='str' type='boolean' />
+      <KeyValue key='kboolnum' value='42' type='boolean' />
+      <KeyValue key='kboolbool' value='true' type='boolean' />
+      <KeyValue key='kboolzero' value='0' type='boolean' />
+    </KeyValues>
+    <Scripts>
+      <OnLoad>
+        assertEquals('str', self.knilstr)
+        assertEquals('42', self.knilnum)
+        assertEquals('true', self.knilbool)
+        assertEquals('str', self.kstrstr)
+        assertEquals('42', self.kstrnum)
+        assertEquals('true', self.kstrbool)
+        assertEquals(0, self.knumstr)
+        assertEquals(42, self.knumnum)
+        assertEquals(0, self.knumbool)
+        assertEquals('str', self.kjunkstr)
+        assertEquals('42', self.kjunknum)
+        assertEquals('true', self.kjunkbool)
+        assertEquals(false, self.kboolstr)
+        assertEquals(true, self.kboolnum)
+        assertEquals(true, self.kboolbool)
+        assertEquals(false, self.kboolzero)
+      </OnLoad>
+    </Scripts>
+  </Frame>
+
+  <Frame>
+    <Animations>
+      <AnimationGroup>
+        <Scale>
+          <Scripts>
+            <OnLoad>Wowless.check3('CENTER', 0, 0, self:GetOrigin())</OnLoad>
+          </Scripts>
+        </Scale>
+        <Scale>
+          <Origin />
+          <Scripts>
+            <OnLoad>Wowless.check3('CENTER', 0, 0, self:GetOrigin())</OnLoad>
+          </Scripts>
+        </Scale>
+        <Scale>
+          <Origin point='LEFT' />
+          <Scripts>
+            <OnLoad>Wowless.check3('LEFT', 0, 0, self:GetOrigin())</OnLoad>
+          </Scripts>
+        </Scale>
+        <Scale>
+          <Origin x='42' />
+          <Scripts>
+            <OnLoad>Wowless.check3('CENTER', 0, 0, self:GetOrigin())</OnLoad>
+          </Scripts>
+        </Scale>
+        <Scale>
+          <Origin y='42' />
+          <Scripts>
+            <OnLoad>Wowless.check3('CENTER', 0, 0, self:GetOrigin())</OnLoad>
+          </Scripts>
+        </Scale>
+        <Scale>
+          <Origin>
+            <Offset />
+          </Origin>
+          <Scripts>
+            <OnLoad>Wowless.check3('CENTER', 0, 0, self:GetOrigin())</OnLoad>
+          </Scripts>
+        </Scale>
+        <Scale>
+          <Origin>
+            <Offset x='42' />
+          </Origin>
+          <Scripts>
+            <OnLoad>Wowless.check3('CENTER', 0, 0, self:GetOrigin())</OnLoad>
+          </Scripts>
+        </Scale>
+        <Scale>
+          <Origin>
+            <Offset x='42' y='99' />
+          </Origin>
+          <Scripts>
+            <OnLoad>Wowless.check3('CENTER', 0, 0, self:GetOrigin())</OnLoad>
+          </Scripts>
+        </Scale>
+        <Scale>
+          <Origin point='LEFT'>
+            <Offset x='42' y='99' />
+          </Origin>
+          <Scripts>
+            <OnLoad>Wowless.check3('LEFT', 0, 0, self:GetOrigin())</OnLoad>
+          </Scripts>
+        </Scale>
+      </AnimationGroup>
+    </Animations>
+  </Frame>
 
   <Script>
     if WowlessOldErrorHandler then

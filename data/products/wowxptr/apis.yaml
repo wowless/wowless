@@ -1,7 +1,5 @@
 ---
 AbandonSkill: {}
-abs:
-  alias: math.abs
 AcceptAreaSpiritHeal:
   inputs: {}
   outputs: {}
@@ -26,9 +24,6 @@ AcceptSpellConfirmationPrompt: {}
 AcceptTrade: {}
 AcknowledgeAutoAcceptQuest: {}
 AcknowledgeSurvey: {}
-acos:
-  nowrap: true
-  stdlib: acos
 ActionHasRange: {}
 AddAutoQuestPopUp: {}
 AddChatWindowChannel: {}
@@ -72,11 +67,8 @@ AreTalentsLocked: {}
 AscendStop:
   inputs: {}
   outputs: {}
-asin:
-  nowrap: true
-  stdlib: asin
 assert:
-  stdlib: assert
+  impl: assert
 AssistUnit:
   inputs:
   - default: ''
@@ -86,12 +78,6 @@ AssistUnit:
     name: exactMatch
     type: boolean
   outputs: {}
-atan:
-  nowrap: true
-  stdlib: atan
-atan2:
-  nowrap: true
-  stdlib: atan2
 AttachGlyphToSpell: {}
 AttackTarget:
   inputs: {}
@@ -117,21 +103,21 @@ BeginTrade:
   inputs: {}
   outputs: {}
 bit.arshift:
-  stdlib: bit.arshift
+  impl: bit.arshift
 bit.band:
-  stdlib: bit.band
+  impl: bit.band
 bit.bnot:
-  stdlib: bit.bnot
+  impl: bit.bnot
 bit.bor:
-  stdlib: bit.bor
+  impl: bit.bor
 bit.bxor:
-  stdlib: bit.bxor
+  impl: bit.bxor
 bit.lshift:
-  stdlib: bit.lshift
+  impl: bit.lshift
 bit.mod:
-  stdlib: bit.mod
+  impl: bit.mod
 bit.rshift:
-  stdlib: bit.rshift
+  impl: bit.rshift
 BNAcceptFriendInvite: {}
 BNCheckBattleTagInviteToGuildMember: {}
 BNCheckBattleTagInviteToUnit: {}
@@ -1637,6 +1623,7 @@ C_AuctionHouse.GetAuctionInfoByID:
     type:
       structure: C_AuctionHouse.AuctionInfo
 C_AuctionHouse.GetAuctionItemSubClasses:
+  impl: C_AuctionHouse.GetAuctionItemSubClasses
   inputs:
   - name: classID
     type: number
@@ -10772,11 +10759,13 @@ C_Item.GetItemChildInfo:
     type:
       arrayof: number
 C_Item.GetItemClassInfo:
+  impl: C_Item.GetItemClassInfo
   inputs:
   - name: itemClassID
     type: number
   outputs:
   - name: result
+    nilable: true
     type: string
 C_Item.GetItemConversionOutputIcon:
   inputs:
@@ -11162,6 +11151,7 @@ C_Item.GetItemStats:
   - name: statTable
     type: table
 C_Item.GetItemSubClassInfo:
+  impl: C_Item.GetItemSubClassInfo
   inputs:
   - name: itemClassID
     type: number
@@ -11170,7 +11160,6 @@ C_Item.GetItemSubClassInfo:
   mayreturnnothing: true
   outputs:
   - name: subClassName
-    stub: someNonEmptyString
     type: string
   - name: subClassUsesInvType
     type: boolean
@@ -12260,7 +12249,17 @@ C_LFGList.GetAvailableActivities:
   outputs:
   - name: activities
     type: table
-C_LFGList.GetAvailableActivityGroups: {}
+C_LFGList.GetAvailableActivityGroups:
+  inputs:
+  - name: categoryID
+    type: number
+  - default: 0
+    name: filter
+    type: number
+  outputs:
+  - name: activityIDs
+    type:
+      arrayof: number
 C_LFGList.GetAvailableCategories:
   outputs:
   - type: table
@@ -14122,7 +14121,7 @@ C_Navigation.GetFrame:
   outputs:
   - name: frame
     nilable: true
-    type: table
+    type: Region
 C_Navigation.GetNearestPartyMemberToken:
   inputs: {}
   outputs:
@@ -14900,7 +14899,9 @@ C_PetJournal.ClearHoveredBattlePet:
 C_PetJournal.ClearRecentFanfares:
   inputs: {}
   outputs: {}
-C_PetJournal.ClearSearchFilter: {}
+C_PetJournal.ClearSearchFilter:
+  inputs: {}
+  outputs: {}
 C_PetJournal.FindPetIDByName: {}
 C_PetJournal.GetBattlePetLink: {}
 C_PetJournal.GetDisplayIDByIndex:
@@ -14949,6 +14950,7 @@ C_PetJournal.GetNumPetsInJournal:
   - name: numPets
     type: number
 C_PetJournal.GetNumPetsNeedingFanfare:
+  inputs: {}
   outputs:
   - type: number
 C_PetJournal.GetNumPetSources:
@@ -15118,7 +15120,11 @@ C_PetJournal.SetPetLoadOutInfo: {}
 C_PetJournal.SetPetSortParameter: {}
 C_PetJournal.SetPetSourceChecked: {}
 C_PetJournal.SetPetTypeFilter: {}
-C_PetJournal.SetSearchFilter: {}
+C_PetJournal.SetSearchFilter:
+  inputs:
+  - name: filterText
+    type: string
+  outputs: {}
 C_PetJournal.SpellTargetBattlePet:
   inputs:
   - name: battlePetGUID
@@ -15207,7 +15213,7 @@ C_PingSecure.GetTargetPingReceiver:
     type: number
   outputs:
   - name: frame
-    type: table
+    type: Region
 C_PingSecure.GetTargetWorldPing:
   inputs:
   - name: mousePosX
@@ -19764,7 +19770,7 @@ C_System.GetFrameStack:
   outputs:
   - name: objects
     type:
-      arrayof: table
+      arrayof: Region
 C_SystemVisibilityManager.IsSystemVisible:
   inputs:
   - name: system
@@ -21737,7 +21743,14 @@ C_TradeSkillUI.GetTradeSkillDisplayName:
     type: string
 C_TradeSkillUI.GetTradeSkillLineForRecipe: {}
 C_TradeSkillUI.GetTradeSkillListLink: {}
-C_TradeSkillUI.GetTradeSkillTexture: {}
+C_TradeSkillUI.GetTradeSkillTexture:
+  inputs:
+  - name: tradeSkillID
+    type: number
+  outputs:
+  - name: tradeSkillTexture
+    nilable: true
+    type: number
 C_TradeSkillUI.HasFavoriteOrderRecipes:
   inputs: {}
   outputs:
@@ -25484,8 +25497,6 @@ CastSpellByName:
   - nilable: true
     type: string
   outputs: {}
-ceil:
-  alias: math.ceil
 CenterCamera:
   inputs: {}
   outputs: {}
@@ -25541,6 +25552,7 @@ CinematicStarted:
     type: boolean
   outputs: {}
 ClassicExpansionAtLeast:
+  impl: ClassicExpansionAtLeast
   inputs:
   - name: expansionLevel
     type: number
@@ -25668,7 +25680,7 @@ CollapseGuildTradeSkillHeader: {}
 CollapseQuestHeader: {}
 CollapseWarGameHeader: {}
 collectgarbage:
-  stdlib: collectgarbage
+  impl: collectgarbage
 CombatLog_Object_IsA: {}
 CombatLogAddFilter: {}
 CombatLogAdvanceEntry: {}
@@ -25735,7 +25747,7 @@ ConsoleExec:
   - name: result
     type: boolean
 ConsoleGetAllCommands:
-  impl: C_Console.GetAllCommands
+  impl: ConsoleGetAllCommands
   inputs: {}
   outputs:
   - name: commands
@@ -25785,20 +25797,17 @@ CopyToClipboard:
   - name: length
     type: number
 coroutine.create:
-  stdlib: coroutine.create
+  impl: coroutine.create
 coroutine.resume:
-  stdlib: coroutine.resume
+  impl: coroutine.resume
 coroutine.running:
-  stdlib: coroutine.running
+  impl: coroutine.running
 coroutine.status:
-  stdlib: coroutine.status
+  impl: coroutine.status
 coroutine.wrap:
-  stdlib: coroutine.wrap
+  impl: coroutine.wrap
 coroutine.yield:
-  stdlib: coroutine.yield
-cos:
-  nowrap: true
-  stdlib: cos
+  impl: coroutine.yield
 CreateFont:
   impl: CreateFont
   inputs:
@@ -25817,7 +25826,7 @@ CreateFontFamily:
         structure: CreateFontFamilyMemberInfo
   outputs:
   - name: fontFamily
-    type: table
+    type: Font
 CreateForbiddenFrame:
   impl: CreateForbiddenFrame
   inputs:
@@ -25893,20 +25902,24 @@ CursorHasSpell:
   - name: result
     type: boolean
 date:
-  stdlib: date
+  impl: date
 DeathRecap_GetEvents: {}
 DeathRecap_HasEvents:
   inputs: {}
   outputs:
   - type: boolean
 debuglocals:
-  stdlib: debuglocals
+  impl: debuglocals
 debugprofilestart:
-  stdlib: debugprofilestart
+  impl: debugprofilestart
+  inputs: {}
+  outputs: {}
 debugprofilestop:
-  stdlib: debugprofilestop
+  impl: debugprofilestop
+  inputs: {}
+  outputs: {}
 debugstack:
-  stdlib: debugstack
+  impl: debugstack
 DeclineChannelInvite: {}
 DeclineGroup: {}
 DeclineGuild:
@@ -25931,8 +25944,6 @@ DeclineResurrect:
   inputs: {}
   outputs: {}
 DeclineSpellConfirmationPrompt: {}
-deg:
-  alias: math.deg
 DeleteCursorItem:
   inputs: {}
   outputs: {}
@@ -25954,7 +25965,7 @@ DestroyTotem:
   outputs: {}
 DetectWowMouse: {}
 difftime:
-  stdlib: difftime
+  impl: difftime
 DismissCompanion: {}
 Dismount:
   inputs: {}
@@ -26069,15 +26080,13 @@ EquipPendingItem:
     type: number
   outputs: {}
 error:
-  stdlib: error
+  impl: error
 ExecuteVoidTransfer: {}
-exp:
-  alias: math.exp
 ExpandGuildTradeSkillHeader: {}
 ExpandQuestHeader: {}
 ExpandWarGameHeader: {}
 fastrandom:
-  stdlib: fastrandom
+  impl: fastrandom
 FindBaseSpellByID: {}
 FindFlyoutSlotBySpellID: {}
 FindSpellBookSlotBySpellID:
@@ -26097,8 +26106,6 @@ FlipCameraYaw:
   - name: angle
     type: number
   outputs: {}
-floor:
-  alias: math.floor
 FlyoutHasSpell: {}
 FocusUnit:
   inputs:
@@ -26116,7 +26123,7 @@ FollowUnit:
     type: boolean
   outputs: {}
 forceinsecure:
-  stdlib: forceinsecure
+  impl: forceinsecure
 ForceLogout:
   inputs: {}
   outputs: {}
@@ -26124,12 +26131,8 @@ ForceQuit:
   inputs: {}
   outputs: {}
 ForfeitDuel: {}
-format:
-  alias: string.format
-frexp:
-  alias: math.frexp
 gcinfo:
-  stdlib: gcinfo
+  impl: gcinfo
 GetAccountExpansionLevel:
   inputs: {}
   outputs:
@@ -26420,10 +26423,14 @@ GetAvailableTitle:
   - name: title
     type: string
 GetAverageItemLevel:
+  inputs: {}
   outputs:
-  - type: number
-  - type: number
-  - type: number
+  - name: avgItemLevel
+    type: number
+  - name: avgItemLevelEquipped
+    type: number
+  - name: avgItemLevelPvp
+    type: number
 GetAvoidance:
   inputs: {}
   outputs:
@@ -26500,6 +26507,8 @@ GetBattlegroundInfo:
     type: string
   - name: longDescription
     type: string
+  - name: hasControllingHoliday
+    type: number
 GetBattlegroundPoints: {}
 GetBestFlexRaidChoice: {}
 GetBestRFChoice:
@@ -26936,7 +26945,7 @@ GetErrorCallstackHeight:
     nilable: true
     type: number
 geterrorhandler:
-  stdlib: geterrorhandler
+  impl: geterrorhandler
 GetEventTime:
   inputs:
   - name: eventProfileIndex
@@ -27003,8 +27012,10 @@ GetExpertise:
   - name: rangedExpertise
     type: number
 GetExtraBarIndex:
+  inputs: {}
   outputs:
-  - type: number
+  - name: value
+    type: number
 GetFailedPVPTalentIDs: {}
 GetFailedTalentIDs: {}
 getfenv:
@@ -27043,7 +27054,7 @@ GetFollowerTypeIDFromSpell: {}
 GetFontInfo:
   inputs:
   - name: fontObject
-    type: table
+    type: Font
   outputs:
   - name: info
     nilable: true
@@ -28069,7 +28080,7 @@ GetMerchantNumItems:
   - name: numMerchantItems
     type: number
 getmetatable:
-  stdlib: getmetatable
+  impl: getmetatable
 GetMinimapZoneText:
   inputs: {}
   outputs:
@@ -28146,7 +28157,7 @@ GetMouseFoci:
   outputs:
   - name: region
     type:
-      arrayof: table
+      arrayof: Region
 GetMovieDownloadProgress:
   inputs:
   - name: movieId
@@ -28162,8 +28173,6 @@ GetMultiCastBarIndex:
   outputs:
   - type: number
 GetMultiCastTotemSpells: {}
-getn:
-  alias: table.getn
 GetNativeRealmID:
   inputs: {}
   outputs:
@@ -28478,7 +28487,11 @@ GetNumTrainerServices:
     type: number
 GetNumTreasurePickerItems: {}
 GetNumUnspentPvpTalents: {}
-GetNumUnspentTalents: {}
+GetNumUnspentTalents:
+  inputs: {}
+  outputs:
+  - name: numUnspentTalents
+    type: number
 GetNumVoidTransferDeposit:
   inputs: {}
   outputs:
@@ -29170,7 +29183,14 @@ GetSavedWorldBossInfo:
     type: number
   - name: reset
     type: number
-GetScenariosChoiceOrder: {}
+GetScenariosChoiceOrder:
+  inputs:
+  - name: allScenarios
+    nilable: true
+    type: table
+  outputs:
+  - name: allScenarios
+    type: table
 GetScreenDPIScale:
   inputs: {}
   outputs:
@@ -29430,6 +29450,7 @@ GetSpellBonusDamage:
   outputs:
   - name: result
     nilable: true
+    stubnotnil: true
     type: number
 GetSpellBonusHealing:
   inputs: {}
@@ -30037,8 +30058,6 @@ GetZoneText:
   - name: text
     type: string
 GiveMasterLoot: {}
-gmatch:
-  alias: string.gmatch
 GMEuropaBugsEnabled: {}
 GMEuropaComplaintsEnabled: {}
 GMEuropaSuggestionsEnabled: {}
@@ -30056,8 +30075,6 @@ GMSurveyNumAnswers: {}
 GMSurveyQuestion: {}
 GMSurveySubmit: {}
 GroupHasOfflineMember: {}
-gsub:
-  alias: string.gsub
 GuildControlAddRank: {}
 GuildControlDelRank: {}
 GuildControlGetAllowedShifts: {}
@@ -30114,7 +30131,8 @@ HasDualWieldPenalty:
 HasExtraActionBar:
   inputs: {}
   outputs:
-  - type: oneornil
+  - name: value
+    type: boolean
 HasFullControl:
   inputs: {}
   outputs:
@@ -30185,7 +30203,7 @@ HaveQuestRewardData:
 HearthAndResurrectFromArea: {}
 HideRepairCursor: {}
 hooksecurefunc:
-  stdlib: hooksecurefunc
+  impl: hooksecurefunc
 InboxItemCanDelete:
   inputs:
   - name: index
@@ -30226,7 +30244,7 @@ InitiateTrade:
   outputs: {}
 InRepairMode: {}
 ipairs:
-  stdlib: ipairs
+  impl: ipairs
 Is64BitClient:
   inputs: {}
   outputs:
@@ -30333,6 +30351,7 @@ IsCurrentAction:
     type: boolean
 IsCurrentQuestFailed: {}
 IsDebugBuild:
+  impl: IsDebugBuild
   inputs: {}
   outputs:
   - name: isDebugBuild
@@ -30405,6 +30424,7 @@ IsFlying:
 IsGamePadCursorControlEnabled: {}
 IsGamePadFreelookEnabled: {}
 IsGMClient:
+  impl: IsGMClient
   inputs: {}
   outputs:
   - name: isGM
@@ -30654,10 +30674,10 @@ IsPlayerNeutral: {}
 IsPlayerSpell: {}
 IsPossessBarVisible: {}
 IsPublicBuild:
+  impl: IsPublicBuild
   inputs: {}
   outputs:
   - name: isPublicBuild
-    stub: true
     type: boolean
 IsPVPTimerRunning:
   inputs: {}
@@ -30723,10 +30743,10 @@ IsRightShiftKeyDown:
   - name: down
     type: boolean
 issecure:
-  stdlib: issecure
+  impl: issecure
 issecurevalue: {}
 issecurevariable:
-  stdlib: issecurevariable
+  impl: issecurevariable
 IsSelectedSpellBookItem: {}
 IsServerControlledBackfill: {}
 IsShiftKeyDown:
@@ -30921,8 +30941,6 @@ LaunchURL:
   - name: url
     type: string
   outputs: {}
-ldexp:
-  alias: math.ldexp
 LearnPvpTalent: {}
 LearnPvpTalents: {}
 LearnTalent: {}
@@ -30937,9 +30955,9 @@ ListChannelByName: {}
 ListChannels: {}
 LoadBindings: {}
 loadstring:
-  stdlib: loadstring
+  impl: loadstring
 loadstring_untainted:
-  stdlib: loadstring_untainted
+  impl: loadstring_untainted
 LoadURLIndex:
   inputs:
   - name: index
@@ -30956,10 +30974,6 @@ LocalizedClassList:
   outputs:
   - name: result
     type: table
-log:
-  alias: math.log
-log10:
-  alias: math.log10
 LoggingChat:
   inputs:
   - name: value
@@ -30983,69 +30997,63 @@ LootMoneyNotify: {}
 LootSlot: {}
 LootSlotHasItem: {}
 math.abs:
-  stdlib: math.abs
+  impl: math.abs
 math.acos:
-  stdlib: math.acos
+  impl: math.acos
 math.asin:
-  stdlib: math.asin
+  impl: math.asin
 math.atan:
-  stdlib: math.atan
+  impl: math.atan
 math.atan2:
-  stdlib: math.atan2
+  impl: math.atan2
 math.ceil:
-  stdlib: math.ceil
+  impl: math.ceil
 math.cos:
-  stdlib: math.cos
+  impl: math.cos
 math.cosh:
-  stdlib: math.cosh
+  impl: math.cosh
 math.deg:
-  stdlib: math.deg
+  impl: math.deg
 math.exp:
-  stdlib: math.exp
+  impl: math.exp
 math.floor:
-  stdlib: math.floor
+  impl: math.floor
 math.fmod:
-  stdlib: math.fmod
+  impl: math.fmod
 math.frexp:
-  stdlib: math.frexp
+  impl: math.frexp
 math.huge:
-  stdlib: math.huge
+  impl: math.huge
 math.ldexp:
-  stdlib: math.ldexp
+  impl: math.ldexp
 math.log:
-  stdlib: math.log
+  impl: math.log
 math.log10:
-  stdlib: math.log10
+  impl: math.log10
 math.max:
-  stdlib: math.max
+  impl: math.max
 math.min:
-  stdlib: math.min
+  impl: math.min
 math.modf:
-  stdlib: math.modf
+  impl: math.modf
 math.pi:
-  stdlib: math.pi
+  impl: math.pi
 math.pow:
-  stdlib: math.pow
+  impl: math.pow
 math.rad:
-  stdlib: math.rad
+  impl: math.rad
 math.random:
-  stdlib: math.random
+  impl: math.random
 math.sin:
-  stdlib: math.sin
+  impl: math.sin
 math.sinh:
-  stdlib: math.sinh
+  impl: math.sinh
 math.sqrt:
-  stdlib: math.sqrt
+  impl: math.sqrt
 math.tan:
-  stdlib: math.tan
+  impl: math.tan
 math.tanh:
-  stdlib: math.tanh
-max:
-  alias: math.max
-min:
-  alias: math.min
-mod:
-  alias: math.fmod
+  impl: math.tanh
 MouselookStart: {}
 MouselookStop: {}
 MouseOverrideCinematicDisable:
@@ -31088,9 +31096,9 @@ MultiSampleAntiAliasingSupported: {}
 MuteSoundFile: {}
 NeutralPlayerSelectFaction: {}
 newproxy:
-  stdlib: newproxy
+  impl: newproxy
 next:
-  stdlib: next
+  impl: next
 NextView:
   inputs: {}
   outputs: {}
@@ -31115,7 +31123,7 @@ OpeningCinematic:
   outputs: {}
 OpenTrainer: {}
 pairs:
-  stdlib: pairs
+  impl: pairs
 PartialPlayTime:
   inputs: {}
   outputs:
@@ -31124,9 +31132,9 @@ PartialPlayTime:
     type: boolean
 PartyLFGStartBackfill: {}
 pcall:
-  stdlib: pcall
+  impl: pcall
 pcallwithenv:
-  stdlib: pcallwithenv
+  impl: pcallwithenv
 PetAggressiveMode: {}
 PetAssistMode: {}
 PetAttack:
@@ -31148,8 +31156,6 @@ PetPassiveMode: {}
 PetStopAttack: {}
 PetUsesPetFrame: {}
 PetWait: {}
-PI:
-  stdlib: math.pi
 PickupAction: {}
 PickupBagFromSlot: {}
 PickupCompanion: {}
@@ -31285,12 +31291,8 @@ QuestPOIUpdateIcons: {}
 Quit:
   inputs: {}
   outputs: {}
-rad:
-  alias: math.rad
 RaidProfileExists: {}
 RaidProfileHasUnsavedChanges: {}
-random:
-  alias: math.random
 RandomRoll:
   inputs:
   - name: min
@@ -31299,11 +31301,11 @@ RandomRoll:
     type: number
   outputs: {}
 rawequal:
-  stdlib: rawequal
+  impl: rawequal
 rawget:
-  stdlib: rawget
+  impl: rawget
 rawset:
-  stdlib: rawset
+  impl: rawset
 ReagentBankButtonIDToInvSlotID: {}
 RedockChatWindows:
   inputs: {}
@@ -31446,7 +31448,7 @@ Screenshot:
   inputs: {}
   outputs: {}
 scrub:
-  stdlib: scrub
+  impl: scrub
 SearchLFGGetEncounterResults: {}
 SearchLFGGetJoinedID: {}
 SearchLFGGetNumResults: {}
@@ -31456,9 +31458,9 @@ SearchLFGJoin: {}
 SearchLFGLeave: {}
 SearchLFGSort: {}
 securecall:
-  stdlib: securecall
+  impl: securecall
 securecallfunction:
-  stdlib: securecallfunction
+  impl: securecallfunction
 SecureCmdOptionParse:
   impl: SecureCmdOptionParse
   inputs:
@@ -31472,9 +31474,9 @@ SecureCmdOptionParse:
     nilable: true
     type: string
 secureexecuterange:
-  stdlib: secureexecuterange
+  impl: secureexecuterange
 select:
-  stdlib: select
+  impl: select
 SelectActiveQuest: {}
 SelectAvailableQuest: {}
 SelectedRealmName:
@@ -31616,7 +31618,7 @@ SetErrorCallstackHeight:
     type: number
   outputs: {}
 seterrorhandler:
-  stdlib: seterrorhandler
+  impl: seterrorhandler
 SetEuropeanNumbers:
   inputs:
   - name: enabled
@@ -31624,7 +31626,7 @@ SetEuropeanNumbers:
   outputs: {}
 SetEveryoneIsAssistant: {}
 setfenv:
-  stdlib: setfenv
+  impl: setfenv
 SetFocusedAchievement: {}
 SetGamePadCursorControl: {}
 SetGamePadFreeLook: {}
@@ -31671,7 +31673,7 @@ SetMacroItem: {}
 SetMacroSpell: {}
 SetMerchantFilter: {}
 setmetatable:
-  stdlib: setmetatable
+  impl: setmetatable
 SetModifiedClick:
   inputs:
   - type: string
@@ -31821,17 +31823,12 @@ ShowQuestComplete: {}
 ShowQuestOffer: {}
 ShowRepairCursor: {}
 SignPetition: {}
-sin:
-  nowrap: true
-  stdlib: sin
 SitStandOrDescendStart:
   inputs: {}
   outputs: {}
 SocketInventoryItem: {}
 SocketItemToArtifact: {}
 SolveArtifact: {}
-sort:
-  alias: table.sort
 SortBattlefieldScoreData: {}
 SortBGList: {}
 SortGuildRoster: {}
@@ -31881,8 +31878,6 @@ SplashFrameCanBeShown:
   - name: result
     type: boolean
 SplitGuildBankItem: {}
-sqrt:
-  alias: math.sqrt
 StartAttack:
   inputs:
   - default: '0'
@@ -31934,51 +31929,44 @@ StrafeRightStart:
   inputs: {}
   outputs: {}
 StrafeRightStop: {}
-strbyte:
-  alias: string.byte
 strcmputf8i:
-  stdlib: strcmputf8i
+  impl: strcmputf8i
 strconcat:
-  stdlib: strconcat
-strfind:
-  alias: string.find
+  impl: strconcat
 string.byte:
-  stdlib: string.byte
+  impl: string.byte
 string.char:
-  stdlib: string.char
+  impl: string.char
 string.find:
-  stdlib: string.find
+  impl: string.find
 string.format:
-  stdlib: string.format
+  impl: string.format
 string.gfind:
-  stdlib: string.gfind
+  impl: string.gfind
 string.gmatch:
-  stdlib: string.gmatch
+  impl: string.gmatch
 string.gsub:
-  stdlib: string.gsub
+  impl: string.gsub
 string.join:
-  nowrap: false
-  stdlib: string.join
+  impl: string.join
 string.len:
-  stdlib: string.len
+  impl: string.len
 string.lower:
-  stdlib: string.lower
+  impl: string.lower
 string.match:
-  stdlib: string.match
+  impl: string.match
 string.rep:
-  stdlib: string.rep
+  impl: string.rep
 string.reverse:
-  stdlib: string.reverse
+  impl: string.reverse
 string.split:
-  nowrap: false
-  stdlib: string.split
+  impl: string.split
 string.sub:
-  stdlib: string.sub
+  impl: string.sub
 string.trim:
-  nowrap: false
-  stdlib: string.trim
+  impl: string.trim
 string.upper:
-  stdlib: string.upper
+  impl: string.upper
 StripHyperlinks:
   inputs:
   - name: text
@@ -31999,27 +31987,15 @@ StripHyperlinks:
   - name: stripped
     type: string
 strjoin:
-  stdlib: strjoin
-strlen:
-  alias: string.len
+  impl: strjoin
 strlenutf8:
-  stdlib: strlenutf8
-strlower:
-  alias: string.lower
-strmatch:
-  alias: string.match
-strrep:
-  alias: string.rep
+  impl: strlenutf8
 strsplit:
-  stdlib: strsplit
+  impl: strsplit
 strsplittable:
-  stdlib: strsplittable
-strsub:
-  alias: string.sub
+  impl: strsplittable
 strtrim:
-  stdlib: strtrim
-strupper:
-  alias: string.upper
+  impl: strtrim
 Stuck:
   inputs: {}
   outputs: {}
@@ -32034,34 +32010,31 @@ SurrenderArena: {}
 SwapRaidSubgroup: {}
 SwitchAchievementSearchTab: {}
 table.concat:
-  stdlib: table.concat
+  impl: table.concat
 table.foreach:
-  stdlib: table.foreach
+  impl: table.foreach
 table.foreachi:
-  stdlib: table.foreachi
+  impl: table.foreachi
 table.getn:
-  stdlib: table.getn
+  impl: table.getn
 table.insert:
-  stdlib: table.insert
+  impl: table.insert
 table.maxn:
-  stdlib: table.maxn
+  impl: table.maxn
 table.remove:
-  stdlib: table.remove
+  impl: table.remove
 table.removemulti:
-  stdlib: table.removemulti
+  impl: table.removemulti
 table.setn:
-  stdlib: table.setn
+  impl: table.setn
 table.sort:
-  stdlib: table.sort
+  impl: table.sort
 table.wipe:
-  stdlib: table.wipe
+  impl: table.wipe
 TakeInboxItem: {}
 TakeInboxMoney: {}
 TakeInboxTextItem: {}
 TakeTaxiNode: {}
-tan:
-  nowrap: true
-  stdlib: tan
 TargetDirectionEnemy:
   inputs:
   - name: facing
@@ -32170,12 +32143,10 @@ TaxiNodeName: {}
 TaxiNodePosition: {}
 TaxiRequestEarlyLanding: {}
 time:
-  stdlib: time
+  impl: time
 TimeoutResurrect:
   inputs: {}
   outputs: {}
-tinsert:
-  alias: table.insert
 ToggleAutoRun:
   inputs: {}
   outputs: {}
@@ -32195,11 +32166,9 @@ ToggleWindowed:
   inputs: {}
   outputs: {}
 tonumber:
-  stdlib: tonumber
+  impl: tonumber
 tostring:
-  stdlib: tostring
-tremove:
-  alias: table.remove
+  impl: tostring
 TriggerTutorial: {}
 TurnInGuildCharter: {}
 TurnLeftStart:
@@ -32217,7 +32186,7 @@ TurnRightStart:
   outputs: {}
 TurnRightStop: {}
 type:
-  stdlib: type
+  impl: type
 UninviteUnit: {}
 UnitAffectingCombat:
   inputs:
@@ -32695,7 +32664,13 @@ UnitInBattleground:
   - name: result
     nilable: true
     type: number
-UnitInOtherParty: {}
+UnitInOtherParty:
+  inputs:
+  - name: unit
+    type: unit
+  outputs:
+  - name: inOtherParty
+    type: boolean
 UnitInParty:
   inputs:
   - name: unit
@@ -33066,7 +33041,13 @@ UnitIsWildBattlePet:
   outputs:
   - name: result
     type: boolean
-UnitLeadsAnyGroup: {}
+UnitLeadsAnyGroup:
+  inputs:
+  - name: unit
+    type: unit
+  outputs:
+  - name: isLeader
+    type: boolean
 UnitLevel:
   impl: UnitLevel
   inputs:
@@ -33601,7 +33582,7 @@ UnlearnSpecialization: {}
 UnlockVoidStorage: {}
 UnmuteSoundFile: {}
 unpack:
-  stdlib: unpack
+  impl: unpack
 UpdateAddOnCPUUsage:
   inputs: {}
   outputs: {}
@@ -33609,7 +33590,6 @@ UpdateAddOnMemoryUsage:
   inputs: {}
   outputs: {}
 UpdateInventoryAlertStatus: {}
-UpdateUIParentPosition: {}
 UpdateWarGamesList: {}
 UpdateWindow:
   inputs: {}
@@ -33664,8 +33644,6 @@ VehiclePrevSeat:
   outputs: {}
 ViewGuildRecipes: {}
 WarGameRespond: {}
-wipe:
-  alias: table.wipe
 WithdrawGuildBankMoney: {}
 WorldLootObjectExists:
   inputs:
@@ -33676,4 +33654,4 @@ WorldLootObjectExists:
   - name: result
     type: boolean
 xpcall:
-  stdlib: xpcall
+  impl: xpcall

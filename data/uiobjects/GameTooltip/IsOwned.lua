@@ -1,4 +1,3 @@
-return (function(self, owner)
-  assert(owner)
-  return self.tooltipOwner and self.tooltipOwner.luarep == owner
-end)(...)
+return function(self, owner)
+  return self.tooltipOwner == owner
+end

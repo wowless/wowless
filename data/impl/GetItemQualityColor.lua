@@ -1,4 +1,3 @@
-local quality = ...
 local data = {
   [0] = { 0x9d, 0x9d, 0x9d }, -- Poor
   [1] = { 0xff, 0xff, 0xff }, -- Common
@@ -10,5 +9,7 @@ local data = {
   [7] = { 0x00, 0xcc, 0xff }, -- Heirloom
   [8] = { 0x00, 0xcc, 0xff }, -- WoW Token
 }
-local r, g, b = unpack(assert(data[quality]))
-return r / 255, g / 255, b / 255, string.format('%2x%2x%2x', r, g, b)
+return function(quality)
+  local r, g, b = unpack(assert(data[quality]))
+  return r / 255, g / 255, b / 255, string.format('%2x%2x%2x', r, g, b)
+end
