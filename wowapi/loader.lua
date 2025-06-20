@@ -131,8 +131,8 @@ local function loadFunctions(api, loader)
     if nowrap then
       return outfn
     else
-      edepth = edepth + 2
-      return debug.newcfunction(bubblewrap(outfn))
+      edepth = edepth + 1
+      return bubblewrap(outfn)
     end
   end
 
