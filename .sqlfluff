@@ -1,6 +1,10 @@
 [sqlfluff]
 dialect = sqlite
-exclude_rules = L014, L034, L036
+exclude_rules = CP02
+templater = placeholder
 
 [sqlfluff:indentation]
 tab_space_size = 2
+
+[sqlfluff:templater:placeholder]
+param_regex = \?\d+
