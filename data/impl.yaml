@@ -488,7 +488,8 @@ string.gmatch:
   stdlib: string.gmatch
 string.gsub:
   stdlib: string.gsub
-string.join: {}
+string.join:
+  delegate: strjoin
 string.len:
   stdlib: string.len
 string.lower:
@@ -499,10 +500,12 @@ string.rep:
   stdlib: string.rep
 string.reverse:
   stdlib: string.reverse
-string.split: {}
+string.split:
+  delegate: strsplit
 string.sub:
   stdlib: string.sub
-string.trim: {}
+string.trim:
+  delegate: strtrim
 string.upper:
   stdlib: string.upper
 strjoin:

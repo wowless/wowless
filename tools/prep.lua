@@ -144,6 +144,10 @@ do
             frameworks = { 'api' },
             src = fmt:format(ic.module, ic['function'] or apicfg.impl),
           }
+        elseif ic.delegate then
+          impls[apicfg.impl] = {
+            src = 'return ' .. ic.delegate,
+          }
         elseif not ic.stdlib then
           impls[apicfg.impl] = {
             frameworks = ic.frameworks,

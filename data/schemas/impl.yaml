@@ -6,6 +6,11 @@ type:
     value:
       oneof:
       - record:
+          delegate:
+            required: true
+            type:
+              ref: impl
+      - record:
           frameworks:
             type:
               sequenceof:
