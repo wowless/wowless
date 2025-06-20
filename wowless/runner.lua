@@ -31,14 +31,10 @@ local function run(cfg)
 
   The first and second lines eagerly load modules which write to
   the global table.
-
-  The fourth line is required because print depends on tostring from
-  the global table. TODO remove this dependency
   ]]
   require('lfs')
   require('lsqlite3')
   require('wowless.ext').setglobaltable(api.env)
-  api.env.tostring = tostring
   -- end WARNING WARNING WARNING
 
   local path = require('path')
