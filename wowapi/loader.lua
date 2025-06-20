@@ -64,7 +64,7 @@ local function loadFunctions(api, loader)
     for _, sql in ipairs(v.sqls or {}) do
       table.insert(specials, sqls[sql])
     end
-    impls[k] = setfenv(assert(loadstring(v.src, '@./data/impl/' .. k .. '.lua'), k), _G)(unpack(specials))
+    impls[k] = setfenv(assert(loadstring_untainted(v.src, '@./data/impl/' .. k .. '.lua'), k), _G)(unpack(specials))
   end
 
   local bubblewrap = require('wowless.bubblewrap')
@@ -79,7 +79,7 @@ local function loadFunctions(api, loader)
     local basefn
     if apicfg.stub then
       local text = ('local api, Mixin = ...; return function() %s end'):format(apicfg.stub)
-      basefn = assert(setfenv(loadstring(text), _G))(api, stubMixin)
+      basefn = assert(setfenv(loadstring_untainted(text), _G))(api, stubMixin)
     elseif apicfg.impl then
       basefn = impls[apicfg.impl]
     else

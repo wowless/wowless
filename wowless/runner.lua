@@ -165,7 +165,7 @@ local function run(cfg)
         if v.payload and not eventBlacklist[k] and not skip[k] then
           if v.payload == 'return ' or cfg.allevents then
             local text = 'local Mixin = ...;' .. v.payload
-            api.SendEvent(k, assert(loadstring(text))(stubMixin))
+            api.SendEvent(k, assert(loadstring_untainted(text))(stubMixin))
           end
         end
       end

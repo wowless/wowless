@@ -83,7 +83,7 @@ local function mkBaseUIObjectTypes(api)
         return fn(self, ...)
       end
     end
-    local constructor = assert(loadstring(cfg.constructor, name))(hlist)
+    local constructor = assert(loadstring_untainted(cfg.constructor, name))(hlist)
     if cfg.singleton then
       local orig = constructor
       local called = false
@@ -131,7 +131,7 @@ local function mkBaseUIObjectTypes(api)
       end
       local mtext = method.impl or method
       local src = method.src and ('@' .. method.src) or fname
-      local fn = assert(loadstring(mtext, src))(api, toTexture, check, stubMixin)
+      local fn = assert(loadstring_untainted(mtext, src))(api, toTexture, check, stubMixin)
       mixin[mname] = checkOutputs(checkInputs(wrap(mname, fn)))
     end
     uiobjects[name] = {

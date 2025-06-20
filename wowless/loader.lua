@@ -100,7 +100,7 @@ local function loader(api, cfg)
   local function loadstr(str, filename, line)
     local function doload()
       local pre = line and string.rep('\n', line - 1) or ''
-      return loadstring(pre .. str, '@' .. path.normalize(filename):gsub('/', '\\'))
+      return loadstring_untainted(pre .. str, '@' .. path.normalize(filename):gsub('/', '\\'))
     end
     if filename:find('Wowless') then
       debug.setstacktaint('Wowless')
