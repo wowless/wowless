@@ -1,1 +1,3 @@
-return true
+return function()
+  return true
+end

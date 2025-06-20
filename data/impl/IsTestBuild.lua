@@ -1,2 +1,4 @@
 local datalua = ...
-return datalua.build.test
+return function()
+  return datalua.build.test
+end

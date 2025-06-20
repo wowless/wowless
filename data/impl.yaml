@@ -401,32 +401,42 @@ hooksecurefunc:
   stdlib: hooksecurefunc
 ipairs:
   stdlib: ipairs
-IsAddOnLoaded: {}
-IsAddOnLoadOnDemand: {}
-IsDebugBuild: {}
-IsGMClient: {}
+IsAddOnLoaded:
+  closure: true
+IsAddOnLoadOnDemand:
+  closure: true
+IsDebugBuild:
+  closure: true
+IsGMClient:
+  closure: true
 IsInGlobalEnvironment:
   module: env
 IsLinuxClient:
+  closure: true
   frameworks:
   - api
 IsLoggedIn:
   module: system
 IsMacClient:
+  closure: true
   frameworks:
   - api
-IsPublicBuild: {}
+IsPublicBuild:
+  closure: true
 issecure:
   stdlib: issecure
 issecurevariable:
   stdlib: issecurevariable
 IsTestBuild:
+  closure: true
   frameworks:
   - datalua
 IsWindowsClient:
+  closure: true
   frameworks:
   - api
 LoadAddOn:
+  closure: true
   frameworks:
   - loader
 loadstring:
@@ -508,23 +518,27 @@ rawget:
 rawset:
   stdlib: rawset
 RequestTimePlayed:
+  closure: true
   frameworks:
   - api
 RunMacroText:
   module: macrotext
-RunScript: {}
+RunScript:
+  closure: true
 scrub:
   stdlib: scrub
 securecall:
   stdlib: securecall
 securecallfunction:
   stdlib: securecallfunction
-SecureCmdOptionParse: {}
+SecureCmdOptionParse:
+  closure: true
 secureexecuterange:
   stdlib: secureexecuterange
 select:
   stdlib: select
 SendSystemMessage:
+  closure: true
   frameworks:
   - api
 seterrorhandler:
@@ -533,7 +547,8 @@ setfenv:
   stdlib: setfenv
 setmetatable:
   stdlib: setmetatable
-SetPortraitTexture: {}
+SetPortraitTexture:
+  closure: true
 sin:
   stdlib: sin
 strcmputf8i:
@@ -554,7 +569,8 @@ string.gmatch:
   stdlib: string.gmatch
 string.gsub:
   stdlib: string.gsub
-string.join: {}
+string.join:
+  closure: true
 string.len:
   stdlib: string.len
 string.lower:
@@ -565,10 +581,12 @@ string.rep:
   stdlib: string.rep
 string.reverse:
   stdlib: string.reverse
-string.split: {}
+string.split:
+  closure: true
 string.sub:
   stdlib: string.sub
-string.trim: {}
+string.trim:
+  closure: true
 string.upper:
   stdlib: string.upper
 strjoin:
@@ -616,27 +634,39 @@ tostring:
 type:
   stdlib: type
 UnitClass:
+  closure: true
   sqls:
   - UnitClass
 UnitClassBase:
+  closure: true
   sqls:
   - UnitClassBase
-UnitExists: {}
+UnitExists:
+  closure: true
 UnitFactionGroup:
+  closure: true
   sqls:
   - UnitFactionGroup
-UnitGUID: {}
-UnitIsPlayer: {}
-UnitIsUnit: {}
-UnitLevel: {}
-UnitName: {}
+UnitGUID:
+  closure: true
+UnitIsPlayer:
+  closure: true
+UnitIsUnit:
+  closure: true
+UnitLevel:
+  closure: true
+UnitName:
+  closure: true
 UnitPowerType:
+  closure: true
   sqls:
   - UnitPowerType
 UnitRace:
+  closure: true
   sqls:
   - UnitRace
-UnitSex: {}
+UnitSex:
+  closure: true
 unpack:
   stdlib: unpack
 xpcall:

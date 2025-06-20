@@ -1,1 +1,3 @@
-return strjoin(...)
+return function(...)
+  return strjoin(...)
+end

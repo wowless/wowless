@@ -1,2 +1,3 @@
-local unit = ...
-return unit and unit.sex or nil
+return function(unit)
+  return unit and unit.sex or nil
+end

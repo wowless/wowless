@@ -1,2 +1,3 @@
-local unit = ...
-return unit ~= nil
+return function(unit)
+  return unit ~= nil
+end
