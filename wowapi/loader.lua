@@ -85,25 +85,7 @@ local function loadFunctions(api, loader)
     for _, sql in ipairs(apicfg.sqls or {}) do
       table.insert(specials, sqls[sql])
     end
-    local specialfn
-    if apicfg.closure then
-      specialfn = basefn(unpack(specials))
-    elseif not next(specials) then
-      specialfn = basefn
-    else
-      local nspecials = #specials
-      specialfn = function(...)
-        local t = {}
-        for _, v in ipairs(specials) do
-          table.insert(t, v)
-        end
-        local n = select('#', ...)
-        for i = 1, n do
-          t[nspecials + i] = select(i, ...)
-        end
-        return basefn(unpack(t, 1, nspecials + n))
-      end
-    end
+    local specialfn = apicfg.stub and basefn or basefn(unpack(specials))
 
     local edepth = 2
     local infn

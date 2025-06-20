@@ -127,7 +127,6 @@ do
         apicfg.impl = nil
         apicfg.stdlib = ic.stdlib
       end
-      apicfg.closure = ic.closure or ic.module
       apicfg.frameworks = ic.module and { 'api' } or ic.frameworks
       apicfg.sqls = ic.sqls
       for _, v in ipairs(ic.sqls or {}) do

@@ -26,7 +26,6 @@ bit.mod:
 bit.rshift:
   stdlib: bit.rshift
 C_AuctionHouse.GetAuctionItemSubClasses:
-  closure: true
   sqls:
   - C_AuctionHouse.GetAuctionItemSubClasses
 C_Calendar.GetMonthInfo:
@@ -35,41 +34,32 @@ C_Calendar.SetAbsMonth:
   module: calendar
 C_Calendar.SetMonth:
   module: calendar
-C_ChatInfo.ReplaceIconAndGroupExpressions:
-  closure: true
+C_ChatInfo.ReplaceIconAndGroupExpressions: {}
 C_ClassTalents.GetActiveConfigID:
-  closure: true
   frameworks:
   - api
 C_ClassTalents.GetTraitTreeForSpec:
-  closure: true
   sqls:
   - C_ClassTalents.GetTraitTreeForSpec
 C_ClassTalents.InitializeViewLoadout:
-  closure: true
   frameworks:
   - api
 C_ClassTalents.ViewLoadout:
-  closure: true
   frameworks:
   - api
   sqls:
   - GetSpecializationInfoByID
 C_Covenants.GetCovenantData:
-  closure: true
   sqls:
   - C_Covenants.GetCovenantData
   - C_Covenants.GetCovenantData.soulbinds
 C_CovenantSanctumUI.GetRenownLevels:
-  closure: true
   sqls:
   - C_CovenantSanctumUI.GetRenownLevels
 C_CovenantSanctumUI.GetRenownRewardsForLevel:
-  closure: true
   sqls:
   - C_CovenantSanctumUI.GetRenownRewardsForLevel
 C_CreatureInfo.GetClassInfo:
-  closure: true
   sqls:
   - C_CreatureInfo.GetClassInfo
 C_CVar.GetCVar:
@@ -92,46 +82,36 @@ C_EventUtils.IsEventValid:
   function: IsEventValid
   module: events
 C_Item.DoesItemExistByID:
-  closure: true
   sqls:
   - C_Item.DoesItemExistByID
 C_Item.GetItemClassInfo:
-  closure: true
   sqls:
   - C_Item.GetItemClassInfo
 C_Item.GetItemSubClassInfo:
-  closure: true
   sqls:
   - C_Item.GetItemSubClassInfo
 C_ItemInteraction.GetItemInteractionInfo:
-  closure: true
   sqls:
   - C_ItemInteraction.GetItemInteractionInfo
 C_Macro.SetMacroExecuteLineCallback:
   function: SetCallback
   module: macrotext
 C_Map.GetMapInfo:
-  closure: true
   sqls:
   - C_Map.GetMapInfo
 C_Map.GetMapInfo_Vanilla:
-  closure: true
   sqls:
   - C_Map.GetMapInfo_Vanilla
 C_ScriptedAnimations.GetAllScriptedAnimationEffects:
-  closure: true
   sqls:
   - C_ScriptedAnimations.GetAllScriptedAnimationEffects
 C_SpecializationInfo.GetSpecIDs:
-  closure: true
   sqls:
   - C_SpecializationInfo.GetSpecIDs
 C_Texture.GetAtlasInfo:
-  closure: true
   sqls:
   - C_Texture.GetAtlasInfo
 C_Texture.GetAtlasInfo_11_1_5:
-  closure: true
   sqls:
   - C_Texture.GetAtlasInfo_11_1_5
 C_Timer.After:
@@ -141,13 +121,11 @@ C_Timer.NewTicker:
 C_Timer.NewTimer:
   module: time
 C_Traits.GetConfigInfo:
-  closure: true
   frameworks:
   - api
   sqls:
   - C_Traits.GetConfigInfo
 C_Traits.GetNodeInfo:
-  closure: true
   frameworks:
   - api
   sqls:
@@ -157,33 +135,26 @@ C_Traits.GetNodeInfo:
   - C_Traits.GetNodeInfo.groups
   - C_Traits.GetNodeInfo.conditions
 C_Traits.GetTreeNodes:
-  closure: true
   sqls:
   - C_Traits.GetTreeNodes
 C_UI.GetUIParent:
-  closure: true
   frameworks:
   - env
 C_UI.GetWorldFrame:
-  closure: true
   frameworks:
   - env
 C_UIColor.GetColors:
-  closure: true
   sqls:
   - C_UIColor.GetColors
 C_XMLUtil.GetTemplateInfo_10_2:
-  closure: true
   frameworks:
   - api
 ClassicExpansionAtLeast:
-  closure: true
   frameworks:
   - datalua
 collectgarbage:
   stdlib: collectgarbage
 ConsoleGetAllCommands:
-  closure: true
   frameworks:
   - datalua
 coroutine.create:
@@ -201,19 +172,15 @@ coroutine.yield:
 cos:
   stdlib: cos
 CreateFont:
-  closure: true
   frameworks:
   - api
 CreateForbiddenFrame:
-  closure: true
   frameworks:
   - api
 CreateFrame:
-  closure: true
   frameworks:
   - api
-CreateWindow:
-  closure: true
+CreateWindow: {}
 date:
   stdlib: date
 debuglocals:
@@ -227,13 +194,11 @@ debugstack:
 difftime:
   stdlib: difftime
 DoEmote:
-  closure: true
   frameworks:
   - api
   sqls:
   - DoEmote
 EnumerateFrames:
-  closure: true
   frameworks:
   - api
 error:
@@ -241,55 +206,41 @@ error:
 fastrandom:
   stdlib: fastrandom
 FillLocalizedClassList:
-  closure: true
   sqls:
   - FillLocalizedClassList
 forceinsecure:
   stdlib: forceinsecure
 gcinfo:
   stdlib: gcinfo
-GetAddOnEnableState:
-  closure: true
-GetAddOnInfo:
-  closure: true
-GetAddOnMetadata:
-  closure: true
+GetAddOnEnableState: {}
+GetAddOnInfo: {}
+GetAddOnMetadata: {}
 GetAuctionItemSubClasses:
-  closure: true
   sqls:
   - C_AuctionHouse.GetAuctionItemSubClasses
 GetBuildInfo_10_1:
-  closure: true
   frameworks:
   - datalua
 GetBuildInfo_1_15_0:
-  closure: true
   frameworks:
   - datalua
 GetBuildInfo_3_4_2:
-  closure: true
   frameworks:
   - datalua
 GetButtonMetatable:
-  closure: true
   frameworks:
   - api
-GetChatWindowInfo:
-  closure: true
+GetChatWindowInfo: {}
 GetChatWindowMessages:
-  closure: true
   frameworks:
   - env
 GetClassInfo:
-  closure: true
   sqls:
   - GetClassInfo
 GetClassInfo_Classic:
-  closure: true
   sqls:
   - GetClassInfo_Classic
 GetClickFrame:
-  closure: true
   frameworks:
   - api
 GetCurrentEnvironment:
@@ -299,11 +250,9 @@ geterrorhandler:
 getfenv:
   module: env
 GetFontStringMetatable:
-  closure: true
   frameworks:
   - api
 GetFrameMetatable:
-  closure: true
   frameworks:
   - api
 GetFramesRegisteredForEvent:
@@ -312,35 +261,28 @@ GetFramesRegisteredForEvent:
 GetGlobalEnvironment:
   module: env
 GetInventorySlotInfo:
-  closure: true
   sqls:
   - GetInventorySlotInfo
-GetItemQualityColor:
-  closure: true
+GetItemQualityColor: {}
 GetLootSpecialization:
   module: units
 getmetatable:
   stdlib: getmetatable
 GetNumAddOns:
-  closure: true
   frameworks:
   - api
 GetNumClasses:
-  closure: true
   sqls:
   - GetNumClasses
 GetNumSpecializationsForClassID:
-  closure: true
   sqls:
   - GetNumSpecializationsForClassID
 GetNumTalents:
-  closure: true
   frameworks:
   - api
   sqls:
   - GetNumTalents
 GetNumTalentTabs:
-  closure: true
   frameworks:
   - api
   sqls:
@@ -350,47 +292,39 @@ GetScreenHeight:
 GetScreenWidth:
   module: system
 GetSpecializationInfo:
-  closure: true
   frameworks:
   - api
   sqls:
   - GetSpecializationInfo
 GetSpecializationInfoByID:
-  closure: true
   sqls:
   - GetSpecializationInfoByID
 GetSpecializationInfoForClassID:
-  closure: true
   frameworks:
   - api
   sqls:
   - GetSpecializationInfoForClassID
 GetSpecializationInfoForSpecID:
-  closure: true
   frameworks:
   - api
   sqls:
   - GetSpecializationInfoForSpecID
 GetTalentInfo_Vanilla:
-  closure: true
   frameworks:
   - api
   sqls:
   - GetTalentInfo_Vanilla
 GetTalentPrereqs_Vanilla:
-  closure: true
   frameworks:
   - api
   sqls:
   - GetTalentPrereqs
 GetTalentPrereqs_Wrath:
-  closure: true
   frameworks:
   - api
   sqls:
   - GetTalentPrereqs
 GetTalentTabInfo:
-  closure: true
   frameworks:
   - api
   sqls:
@@ -401,42 +335,32 @@ hooksecurefunc:
   stdlib: hooksecurefunc
 ipairs:
   stdlib: ipairs
-IsAddOnLoaded:
-  closure: true
-IsAddOnLoadOnDemand:
-  closure: true
-IsDebugBuild:
-  closure: true
-IsGMClient:
-  closure: true
+IsAddOnLoaded: {}
+IsAddOnLoadOnDemand: {}
+IsDebugBuild: {}
+IsGMClient: {}
 IsInGlobalEnvironment:
   module: env
 IsLinuxClient:
-  closure: true
   frameworks:
   - api
 IsLoggedIn:
   module: system
 IsMacClient:
-  closure: true
   frameworks:
   - api
-IsPublicBuild:
-  closure: true
+IsPublicBuild: {}
 issecure:
   stdlib: issecure
 issecurevariable:
   stdlib: issecurevariable
 IsTestBuild:
-  closure: true
   frameworks:
   - datalua
 IsWindowsClient:
-  closure: true
   frameworks:
   - api
 LoadAddOn:
-  closure: true
   frameworks:
   - loader
 loadstring:
@@ -518,27 +442,23 @@ rawget:
 rawset:
   stdlib: rawset
 RequestTimePlayed:
-  closure: true
   frameworks:
   - api
 RunMacroText:
   module: macrotext
-RunScript:
-  closure: true
+RunScript: {}
 scrub:
   stdlib: scrub
 securecall:
   stdlib: securecall
 securecallfunction:
   stdlib: securecallfunction
-SecureCmdOptionParse:
-  closure: true
+SecureCmdOptionParse: {}
 secureexecuterange:
   stdlib: secureexecuterange
 select:
   stdlib: select
 SendSystemMessage:
-  closure: true
   frameworks:
   - api
 seterrorhandler:
@@ -547,8 +467,7 @@ setfenv:
   stdlib: setfenv
 setmetatable:
   stdlib: setmetatable
-SetPortraitTexture:
-  closure: true
+SetPortraitTexture: {}
 sin:
   stdlib: sin
 strcmputf8i:
@@ -569,8 +488,7 @@ string.gmatch:
   stdlib: string.gmatch
 string.gsub:
   stdlib: string.gsub
-string.join:
-  closure: true
+string.join: {}
 string.len:
   stdlib: string.len
 string.lower:
@@ -581,12 +499,10 @@ string.rep:
   stdlib: string.rep
 string.reverse:
   stdlib: string.reverse
-string.split:
-  closure: true
+string.split: {}
 string.sub:
   stdlib: string.sub
-string.trim:
-  closure: true
+string.trim: {}
 string.upper:
   stdlib: string.upper
 strjoin:
@@ -634,39 +550,27 @@ tostring:
 type:
   stdlib: type
 UnitClass:
-  closure: true
   sqls:
   - UnitClass
 UnitClassBase:
-  closure: true
   sqls:
   - UnitClassBase
-UnitExists:
-  closure: true
+UnitExists: {}
 UnitFactionGroup:
-  closure: true
   sqls:
   - UnitFactionGroup
-UnitGUID:
-  closure: true
-UnitIsPlayer:
-  closure: true
-UnitIsUnit:
-  closure: true
-UnitLevel:
-  closure: true
-UnitName:
-  closure: true
+UnitGUID: {}
+UnitIsPlayer: {}
+UnitIsUnit: {}
+UnitLevel: {}
+UnitName: {}
 UnitPowerType:
-  closure: true
   sqls:
   - UnitPowerType
 UnitRace:
-  closure: true
   sqls:
   - UnitRace
-UnitSex:
-  closure: true
+UnitSex: {}
 unpack:
   stdlib: unpack
 xpcall:
