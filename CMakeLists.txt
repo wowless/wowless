@@ -102,7 +102,9 @@ function(lua2c name)
     math(EXPR eqposy "${eqpos} + 1")
     string(SUBSTRING ${arg} 0 ${eqpos} package)
     string(SUBSTRING ${arg} ${eqposy} -1 file)
-    if(NOT (${file} STREQUAL "c"))
+    if(${file} STREQUAL "p")
+      list(APPEND preloads ${package})
+    elseif(NOT (${file} STREQUAL "c"))
       string(REPLACE "." "_" pkg ${package})
       set(output lua2c/${pkg}.c)
       set(cmd ${CMAKE_CURRENT_SOURCE_DIR}/tools/file2c.lua)
@@ -120,7 +122,7 @@ function(lua2c name)
     DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/tools/lua2c.lua ${deps})
   add_library(${name} STATIC ${name}.c tools/file2c.h tools/lua2c.h ${deps})
   target_include_directories(${name} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
-  target_link_libraries(${name} PRIVATE elune)
+  target_link_libraries(${name} PRIVATE elune ${preloads})
 endfunction()
 
 FetchContent_Declare(
@@ -239,7 +241,8 @@ lua2c(
   luassert.languages.nl=${luassert_SOURCE_DIR}/src/languages/nl.lua
   luassert.languages.ru=${luassert_SOURCE_DIR}/src/languages/ru.lua
   luassert.languages.ua=${luassert_SOURCE_DIR}/src/languages/ua.lua
-  luassert.languages.zh=${luassert_SOURCE_DIR}/src/languages/zh.lua)
+  luassert.languages.zh=${luassert_SOURCE_DIR}/src/languages/zh.lua
+  say=p)
 
 FetchContent_Declare(
   argparse
@@ -306,6 +309,7 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(penlight)
 lua2c(
   penlight
+  luafilesystem=p
   pl=${penlight_SOURCE_DIR}/lua/pl/init.lua
   pl.strict=${penlight_SOURCE_DIR}/lua/pl/strict.lua
   pl.dir=${penlight_SOURCE_DIR}/lua/pl/dir.lua
@@ -412,10 +416,11 @@ function(add_lua_executable name main)
   target_link_libraries(${name} PRIVATE ${ARGN} luamain)
 endfunction()
 
-lua2c(wowlessyaml wowapi.yaml=${CMAKE_CURRENT_SOURCE_DIR}/wowapi/yaml.lua)
+lua2c(wowlessyaml lyaml=p
+      wowapi.yaml=${CMAKE_CURRENT_SOURCE_DIR}/wowapi/yaml.lua)
 
 add_lua_executable(yaml2lua ${CMAKE_CURRENT_SOURCE_DIR}/tools/yaml2lua.lua
-                   luafilesystem lyaml penlight wowlessyaml)
+                   penlight wowlessyaml)
 
 function(yaml2lua basename)
   set(input ${CMAKE_CURRENT_SOURCE_DIR}/data/${basename}.yaml)
@@ -446,14 +451,8 @@ target_sources(
   luacjson PRIVATE ${cjson_SOURCE_DIR}/fpconv.c ${cjson_SOURCE_DIR}/lua_cjson.c
                    ${cjson_SOURCE_DIR}/strbuf.c)
 
-add_lua_executable(
-  listfile
-  ${CMAKE_CURRENT_SOURCE_DIR}/tools/listfile.lua
-  argparse
-  luacjson
-  luafilesystem
-  penlight
-  toolsutil)
+add_lua_executable(listfile ${CMAKE_CURRENT_SOURCE_DIR}/tools/listfile.lua
+                   argparse luacjson penlight toolsutil)
 
 file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/generated
      ${CMAKE_CURRENT_BINARY_DIR}/lua2c ${CMAKE_CURRENT_BINARY_DIR}/runtime
@@ -472,14 +471,8 @@ add_custom_target(listfilelua DEPENDS stamp/listfile.txt)
 lua2c(runtimelistfile runtime.listfile=runtime/listfile.lua)
 add_dependencies(runtimelistfile listfilelua)
 
-add_lua_executable(
-  dblist
-  ${CMAKE_CURRENT_SOURCE_DIR}/tools/dblist.lua
-  argparse
-  lsqlite3
-  luafilesystem
-  penlight
-  toolsutil)
+add_lua_executable(dblist ${CMAKE_CURRENT_SOURCE_DIR}/tools/dblist.lua argparse
+                   lsqlite3 penlight toolsutil)
 
 FetchContent_Declare(
   lpeg
@@ -509,7 +502,6 @@ add_lua_executable(
   argparse
   lpeg
   luadbd
-  luafilesystem
   penlight
   toolsutil)
 
@@ -517,9 +509,7 @@ add_lua_executable(
   prep
   ${CMAKE_CURRENT_SOURCE_DIR}/tools/prep.lua
   argparse
-  luafilesystem
   luapath
-  lyaml
   penlight
   toolsutil
   wowlessutil
@@ -570,11 +560,9 @@ add_lua_executable(
   ${CMAKE_CURRENT_SOURCE_DIR}/tools/sqlite.lua
   argparse
   lsqlite3
-  luafilesystem
   penlight
   toolsdb2
-  toolssqlite3ext
-  vstruct)
+  toolssqlite3ext)
 
 find_package(CURL REQUIRED)
 find_package(OpenSSL REQUIRED)
@@ -595,14 +583,12 @@ add_lua_executable(
   ${CMAKE_CURRENT_SOURCE_DIR}/tools/fetch.lua
   argparse
   luaexpat
-  luafilesystem
   luapath
   penlight
   runtimegametypes
   runtimelistfile
   toolsdb2
   toolstactless
-  vstruct
   wowlesstoc)
 
 find_package(PNG REQUIRED)
@@ -928,26 +914,26 @@ lua2c(luamagick luamagick=c)
 target_sources(luamagick PRIVATE ${luamagick_SOURCE_DIR}/luamagick.c)
 target_link_libraries(luamagick PRIVATE imagemagick)
 
-lua2c(wowlessrender wowless.blp=${CMAKE_CURRENT_SOURCE_DIR}/wowless/blp.lua
-      wowless.render=${CMAKE_CURRENT_SOURCE_DIR}/wowless/render.lua
-      wowless.png=${CMAKE_CURRENT_SOURCE_DIR}/wowless/png.lua)
+lua2c(
+  wowlessrender
+  vstruct=p
+  wowless.blp=${CMAKE_CURRENT_SOURCE_DIR}/wowless/blp.lua
+  wowless.render=${CMAKE_CURRENT_SOURCE_DIR}/wowless/render.lua
+  wowless.png=${CMAKE_CURRENT_SOURCE_DIR}/wowless/png.lua)
 
 add_lua_executable(
   render
   ${CMAKE_CURRENT_SOURCE_DIR}/tools/render.lua
   argparse
-  luafilesystem
   luamagick
-  lyaml
   lzlib
   penlight
   toolstactless
-  vstruct
   wowlessrender
   wowlessyaml)
 
 add_lua_executable(gentest ${CMAKE_CURRENT_SOURCE_DIR}/tools/gentest.lua
-                   argparse luafilesystem penlight toolsutil)
+                   argparse penlight toolsutil)
 
 lua2c(runtimegametypes runtime.gametypes=runtime/gametypes.lua)
 lua2c(runtimeproducts runtime.products=runtime/products.lua)
@@ -956,8 +942,6 @@ add_lua_executable(
   bump
   ${CMAKE_CURRENT_SOURCE_DIR}/tools/bump.lua
   argparse
-  luafilesystem
-  lyaml
   lzlib
   penlight
   runtimeproducts
@@ -1041,36 +1025,22 @@ add_lua_executable(
   docs
   ${CMAKE_CURRENT_SOURCE_DIR}/tools/docs.lua
   argparse
-  luafilesystem
   luapath
-  lyaml
   penlight
   toolsutil
   wowapischema
   wowlessyaml)
 
-add_lua_executable(errsv ${CMAKE_CURRENT_SOURCE_DIR}/tools/errsv.lua
-                   luafilesystem lyaml penlight wowlessyaml)
+add_lua_executable(errsv ${CMAKE_CURRENT_SOURCE_DIR}/tools/errsv.lua penlight
+                   wowlessyaml)
 
-lua2c(toolsdb2 tools.db2=${CMAKE_CURRENT_SOURCE_DIR}/tools/db2.lua)
+lua2c(toolsdb2 tools.db2=${CMAKE_CURRENT_SOURCE_DIR}/tools/db2.lua vstruct=p)
 
-add_lua_executable(
-  db2dump
-  ${CMAKE_CURRENT_SOURCE_DIR}/tools/db2dump.lua
-  argparse
-  luafilesystem
-  penlight
-  toolsdb2
-  vstruct)
+add_lua_executable(db2dump ${CMAKE_CURRENT_SOURCE_DIR}/tools/db2dump.lua
+                   argparse penlight toolsdb2)
 
-add_lua_executable(
-  rewrite
-  ${CMAKE_CURRENT_SOURCE_DIR}/tools/rewrite.lua
-  argparse
-  luafilesystem
-  lyaml
-  penlight
-  wowlessyaml)
+add_lua_executable(rewrite ${CMAKE_CURRENT_SOURCE_DIR}/tools/rewrite.lua
+                   argparse penlight wowlessyaml)
 
 file(
   GENERATE
@@ -1120,9 +1090,7 @@ add_lua_executable(
   date
   lsqlite3
   luaexpat
-  luafilesystem
   luapath
-  lyaml
   lzlib
   minheap
   penlight
@@ -1143,18 +1111,14 @@ add_lua_executable(
   date
   lsqlite3
   luaexpat
-  luafilesystem
   luapath
   luassert
-  lyaml
   lzlib
   minheap
   penlight
   runtimegametypes
   runtimeproducts
-  say
   tsort
-  vstruct
   wowapischema
   wowlesslib
   wowlessrender
@@ -1163,4 +1127,4 @@ add_lua_executable(
   wowlessyaml)
 
 add_lua_executable(yamlfmt ${CMAKE_CURRENT_SOURCE_DIR}/tools/yamlfmt.lua
-                   luafilesystem lyaml penlight wowlessyaml)
+                   penlight wowlessyaml)

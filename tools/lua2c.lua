@@ -26,12 +26,15 @@ end
 local package = arg[1]
 local modules = {}
 local cmodules = {}
+local preloads = {}
 for i = 2, #arg do
   local p = arg[i]:find('=')
   local mk = arg[i]:sub(1, p - 1)
   local mv = arg[i]:sub(p + 1)
   assert(not modules[mk] and not cmodules[mk])
-  if mv == 'c' then
+  if mv == 'p' then
+    preloads[mk] = mk
+  elseif mv == 'c' then
     cmodules[mk] = mk:gsub('%.', '_')
   else
     modules[mk] = readfile(mv)
@@ -40,6 +43,16 @@ end
 io.output(package .. '.c')
 io.write('#include "lualib.h"\n')
 io.write('#include "tools/lua2c.h"\n')
+if next(preloads) then
+  for k in sorted(preloads) do
+    io.write(('extern const struct preload preload_%s;\n'):format(k))
+  end
+  io.write('static const struct preload *preloads[] = {\n')
+  for k in sorted(preloads) do
+    io.write(('  &preload_%s,\n'):format(k))
+  end
+  io.write('};\n')
+end
 if next(modules) then
   for k in sorted(modules) do
     io.write(('extern const struct module lua2c_%s;\n'):format(k:gsub('%.', '_')))
@@ -61,6 +74,8 @@ if next(cmodules) then
   io.write('};\n')
 end
 io.write(('const struct preload preload_%s = {\n'):format(package))
+io.write(('  .preloads = %s,\n'):format(next(preloads) and 'preloads' or 0))
+io.write(('  .npreloads = %d,\n'):format(numentries(preloads)))
 io.write(('  .modules = %s,\n'):format(next(modules) and 'modules' or 0))
 io.write(('  .nmodules = %d,\n'):format(numentries(modules)))
 io.write(('  .cmodules = %s,\n'):format(next(cmodules) and 'cmodules' or 0))
