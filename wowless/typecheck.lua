@@ -1,3 +1,4 @@
+local stringenums = ...
 return function(api)
   local enumrev = {}
   for k, v in pairs(api.datalua.globals.Enum) do
@@ -126,7 +127,7 @@ return function(api)
       end
     end
   end
-  for etype, evalues in pairs(require('runtime.stringenums')) do
+  for etype, evalues in pairs(stringenums) do
     assert(not scalartypechecks[etype])
     scalartypechecks[etype] = function(value)
       if type(value) ~= 'string' then

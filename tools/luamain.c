@@ -2,9 +2,20 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <memory.h>
 
 #include "lauxlib.h"
 #include "lualib.h"
+
+static int depload(lua_State *L) {
+  lua_settop(L, 0);
+  lua_pushvalue(L, lua_upvalueindex(1));
+  lua_pushvalue(L, lua_upvalueindex(2));
+  lua_pushvalue(L, lua_upvalueindex(3));
+  lua_call(L, 1, 1);
+  lua_call(L, 1, LUA_MULTRET);
+  return lua_gettop(L);
+}
 
 static int errhandler(lua_State *L) {
   const char *msg = lua_tostring(L, 1);
@@ -43,6 +54,15 @@ int main(int argc, char **argv) {
       for (size_t j = 0; j < preload->nmodules; ++j) {
         const struct module *m = preload->modules[j];
         luaL_loadbuffer(L, m->code, m->size, m->file);
+        if (!strcmp(m->name, "wowless.toc")) {
+          lua_getglobal(L, "require");
+          lua_pushstring(L, "runtime.gametypes");
+          lua_pushcclosure(L, depload, 3);
+        } else if (!strcmp(m->name, "wowless.typecheck")) {
+          lua_getglobal(L, "require");
+          lua_pushstring(L, "runtime.stringenums");
+          lua_pushcclosure(L, depload, 3);
+        }
         lua_setfield(L, 4, m->name);
       }
       for (size_t j = 0; j < preload->ncmodules; ++j) {

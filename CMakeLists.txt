@@ -576,7 +576,7 @@ lua2c(toolstactless tactless=c)
 target_sources(toolstactless PRIVATE tools/tactless.c)
 target_link_libraries(toolstactless PRIVATE tactless)
 
-lua2c(wowlesstoc wowless.toc=${CMAKE_CURRENT_SOURCE_DIR}/wowless/toc.lua)
+lua2c(wowlesstoc runtimegametypes=p wowless.toc=${CMAKE_CURRENT_SOURCE_DIR}/wowless/toc.lua)
 
 add_lua_executable(
   fetch
@@ -585,7 +585,6 @@ add_lua_executable(
   luaexpat
   luapath
   penlight
-  runtimegametypes
   runtimelistfile
   toolsdb2
   toolstactless
@@ -1094,7 +1093,6 @@ add_lua_executable(
   lzlib
   minheap
   penlight
-  runtimegametypes
   runtimeproducts
   tsort
   wowlesslib
@@ -1116,7 +1114,6 @@ add_lua_executable(
   lzlib
   minheap
   penlight
-  runtimegametypes
   runtimeproducts
   tsort
   wowapischema

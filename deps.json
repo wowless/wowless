@@ -1,0 +1,14 @@
+{
+  "wowless.toc": {
+    "deps": [
+      "runtime.gametypes"
+    ],
+    "src": "wowless/toc.lua"
+  },
+  "wowless.typecheck": {
+    "deps": [
+      "runtime.stringenums"
+    ],
+    "src": "wowless/typecheck.lua"
+  }
+}

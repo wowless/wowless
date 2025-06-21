@@ -1,4 +1,4 @@
-local gametypes = require('runtime.gametypes')
+local gametypes = ...
 
 local gttokens = {}
 for k, v in pairs(gametypes) do
