@@ -1,8 +1,8 @@
 ---
-build: '59185'
-date: Feb 13 2025
-gametype: Cata
-hash: e57122e05dbd09d449af344397753fc5
+build: '61496'
+date: Jun 13 2025
+gametype: Mists
+hash: 4ba7c9504e71fc9ab845075f639474be
 test: false
-tocversion: 40402
-version: 4.4.2
+tocversion: 50500
+version: 5.5.0

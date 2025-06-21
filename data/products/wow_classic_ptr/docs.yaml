@@ -6,6 +6,9 @@ events:
     SECURE_TRANSFER_CONFIRM_SEND_MAIL: {}
 lies:
   apis:
+    C_BattleNet.InstallHighResTextures:
+      inputs: {}
+      outputs: {}
     C_Item.GetItemClassInfo:
       inputs:
       - name: itemClassID
@@ -56,9 +59,10 @@ lies:
           nilable: true
           type: boolean
         outputs: {}
+mayreturnnothing: true
 script_objects:
   FrameAPIArchaeologyDigSiteFrame: ArchaeologyDigSiteFrame
-  FrameAPIBlob: QuestPOIFrame
+  FrameAPIBlob: POIFrame
   FrameAPICharacterModelBase: PlayerModel
   FrameAPICinematicModel: CinematicModel
   FrameAPICooldown: Cooldown
@@ -184,6 +188,7 @@ typedefs:
   cstring: string
   FileAsset: string
   fileID: number
+  FontAlphabet: string
   HTMLTextType: string
   IDOrLink: string
   ItemInfo: string
@@ -193,6 +198,7 @@ typedefs:
   kstringLfgListSearch: string
   luaFunction: function
   luaIndex: number
+  LuaValueVariant: table
   ModelAsset: string
   ModelSceneFrame: ModelScene
   ModelSceneFrameActor: Actor
@@ -200,6 +206,7 @@ typedefs:
   normalizedValue: number
   NotificationDbId: string
   number: number
+  QuestObjectiveType: number
   RecruitAcceptanceID: string
   ScriptObject: UIObject
   ScriptRegion: Region
@@ -218,6 +225,7 @@ typedefs:
   size: number
   SpellIdentifier: string
   string: string
+  stringView: string
   TBFFlags: string
   TextureAsset: Texture
   TextureAssetDisk: string

@@ -1308,7 +1308,7 @@ Texture:
       type: boolean
     nonblocking:
       impl:
-        method: SetBlockingLoadsRequested
+        method: SetNonBlocking
       type: boolean
     snaptopixelgrid:
       impl:
