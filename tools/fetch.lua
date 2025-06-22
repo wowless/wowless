@@ -57,7 +57,7 @@ local processFile = (function()
   local function doProcessFile(fn, root)
     local content = fetch(fn)
     if not content then
-      return false
+      return
     end
     save(fn, content)
     if fn:sub(-4) == '.xml' then
@@ -75,7 +75,7 @@ local processFile = (function()
       parser:parse(content)
       parser:close()
     end
-    return true
+    return content
   end
   return doProcessFile
 end)()
@@ -117,16 +117,12 @@ for db in pairs(dofile('build/products/' .. product .. '/dblist.lua')) do
   save(path.join('db2', db .. '.db2'), fetch(fdids[db:lower()]))
 end
 
-do
-  -- Yes, ManifestInterfaceTOCData fdid and sig are hardcoded.
-  local tocdata = fetch(1267335)
-  local dbdef = {
-    { type = 'string' },
-    { id = true, noninline = true },
-  }
-  for row in require('tools.db2').rows(tocdata, dbdef) do
-    processTocDir(normalizePath(row[1]))
+for line in processFile('Interface/ui-toc-list.txt'):gmatch('[^\r\n]+') do
+  processTocDir(normalizePath(path.dirname(line)))
+end
+for line in processFile('Interface/ui-gen-addon-list.txt'):gmatch('[^\r\n]+') do
+  if line:sub(-4) == '.toc' then
+    processTocDir(normalizePath(path.dirname(line)))
   end
-  processTocDir('Interface/AddOns/Blizzard_APIDocumentationGenerated')
 end
 processFile('Interface/AddOns/Blizzard_SharedXML/UI.xsd')

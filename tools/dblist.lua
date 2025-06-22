@@ -14,7 +14,6 @@ end
 local function dblist(product)
   local dbset = {
     GlobalStrings = {},
-    ManifestInterfaceTOCData = {},
   }
   local impls = dofile('build/cmake/runtime/impl.lua')
   local sqlcfgs = dofile('build/cmake/runtime/sql.lua')

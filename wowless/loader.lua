@@ -749,8 +749,15 @@ local function loader(api, cfg)
       end
     end
     if rootDir then
-      for filepath in sqlitedb:urows('SELECT FilePath FROM ManifestInterfaceTOCData') do
+      local toclist = readFile(path.join(rootDir, 'Interface', 'ui-toc-list.txt'))
+      for filepath in toclist:gmatch('[^\r\n]+') do
         maybeAdd(path.join(rootDir, path.dirname(filepath)), true)
+      end
+      local genaddonlist = readFile(path.join(rootDir, 'Interface', 'ui-gen-addon-list.txt'))
+      for filepath in genaddonlist:gmatch('[^\r\n]+') do
+        if filepath:sub(-4) == '.toc' then
+          maybeAdd(path.join(rootDir, path.dirname(filepath)), true)
+        end
       end
     end
     for _, d in ipairs(otherAddonDirs) do
