@@ -719,7 +719,8 @@ local function loader(api, cfg)
     local lfs = require('lfs')
     local function maybeAdd(dir, signed)
       local name = path.basename(dir)
-      if not addonData[name] then
+      local key = name:lower()
+      if not addonData[key] then
         local addon = resolveTocDir(dir)
         if addon then
           addon.name = name
@@ -727,7 +728,7 @@ local function loader(api, cfg)
           addon.dir = dir
           addon.revwiths = {}
           addon.bindings = resolveBindingsXml(dir)
-          addonData[name:lower()] = addon
+          addonData[key] = addon
           table.insert(addonData, addon)
         end
       end
