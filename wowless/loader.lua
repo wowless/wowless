@@ -122,11 +122,9 @@ local function loader(api, cfg)
     local color = api.env[name]
     if color then
       return color.r, color.g, color.b, color.a
-    elseif name == 'GREEN_FONT_COLOR' or name == 'NORMAL_FONT_COLOR' then -- issue #303
-      return 0, 0, 0, 1
-    else
-      error(('unknown color %q'):format(name))
     end
+    api.log(1, 'unknown color %q', name) -- issue #303 for why we warn instead of error
+    return 0, 0, 0, 1
   end
 
   local function loadLuaString(filename, str, line, useSecureEnv, closureTaint, ...)
