@@ -717,13 +717,13 @@ local function loader(api, cfg)
 
   local function initAddons()
     local lfs = require('lfs')
-    local function maybeAdd(dir, fdid)
+    local function maybeAdd(dir, signed)
       local name = path.basename(dir)
       if not addonData[name] then
         local addon = resolveTocDir(dir)
         if addon then
           addon.name = name
-          addon.fdid = fdid
+          addon.signed = signed
           addon.dir = dir
           addon.revwiths = {}
           addon.bindings = resolveBindingsXml(dir)
@@ -748,8 +748,8 @@ local function loader(api, cfg)
       end
     end
     if rootDir then
-      for filepath, fdid in sqlitedb:urows('SELECT FilePath, ID FROM ManifestInterfaceTOCData') do
-        maybeAdd(path.join(rootDir, path.dirname(filepath)), fdid)
+      for filepath in sqlitedb:urows('SELECT FilePath FROM ManifestInterfaceTOCData') do
+        maybeAdd(path.join(rootDir, path.dirname(filepath)), true)
       end
     end
     for _, d in ipairs(otherAddonDirs) do
@@ -838,7 +838,7 @@ local function loader(api, cfg)
       loadFile(toc.bindings)
       api.SendEvent('UPDATE_BINDINGS')
     end
-    loadFile(('out/%s/SavedVariables/%s.lua'):format(product, addonName), toc.fdid and 'SavedVariables' or nil)
+    loadFile(('out/%s/SavedVariables/%s.lua'):format(product, addonName), toc.signed and 'SavedVariables' or nil)
     if forceSecure then
       toc.secdeploaded = true
     else
@@ -890,7 +890,7 @@ local function loader(api, cfg)
     end
     local blizzardAddons = {}
     for _, toc in ipairs(addonData) do
-      if toc.fdid and toc.attrs.LoadOnDemand ~= '1' and isLoadable(toc) then
+      if toc.signed and toc.attrs.LoadOnDemand ~= '1' and isLoadable(toc) then
         table.insert(blizzardAddons, toc.name:lower())
       end
     end
