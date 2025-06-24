@@ -102,6 +102,11 @@ C_Map.GetMapInfo_Vanilla:
 C_ScriptedAnimations.GetAllScriptedAnimationEffects:
   sqls:
   - C_ScriptedAnimations.GetAllScriptedAnimationEffects
+C_SpecializationInfo.GetSpecializationInfo:
+  frameworks:
+  - api
+  sqls:
+  - GetSpecializationInfo
 C_SpecializationInfo.GetSpecIDs:
   sqls:
   - C_SpecializationInfo.GetSpecIDs

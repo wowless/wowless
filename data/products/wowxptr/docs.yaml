@@ -245,6 +245,7 @@ typedefs:
   RecruitAcceptanceID: string
   ScriptObject: UIObject
   ScriptRegion: Region
+  SendChatMessageType: string
   SimpleAnim: Animation
   SimpleAnimGroup: AnimationGroup
   SimpleControlPoint: ControlPoint

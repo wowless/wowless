@@ -1648,6 +1648,11 @@ Cooldown:
       outputs:
       - name: edgeScale
         type: number
+    GetHideCountdownNumbers:
+      inputs: {}
+      outputs:
+      - name: hideNumbers
+        type: boolean
     GetReverse:
       inputs: {}
       outputs:
@@ -1658,6 +1663,11 @@ Cooldown:
       outputs:
       - name: rotationRadians
         type: number
+    GetUseAuraDisplayTime:
+      inputs: {}
+      outputs:
+      - name: useAuraDisplayTime
+        type: boolean
     IsPaused:
       inputs: {}
       outputs:
@@ -1779,6 +1789,12 @@ Cooldown:
       - name: high
         type:
           structure: vector2
+      outputs: {}
+    SetUseAuraDisplayTime:
+      inputs:
+      - default: false
+        name: useAuraDisplayTime
+        type: boolean
       outputs: {}
     SetUseCircularEdge:
       inputs:
@@ -2237,11 +2253,6 @@ EditBox:
     SetFocus:
       inputs: {}
       outputs: {}
-    SetFontStringIgnoreParentAlpha:
-      inputs:
-      - name: ignoreParentAlpha
-        type: boolean
-      outputs: {}
     SetHighlightColor:
       inputs:
       - name: colorR
@@ -2698,6 +2709,9 @@ FontString:
       outputs:
       - name: isTruncated
         type: boolean
+    OnColorsUpdated:
+      inputs: {}
+      outputs: {}
     SetAlphaGradient:
       inputs:
       - name: start
@@ -2711,6 +2725,11 @@ FontString:
       inputs:
       - name: fixedColor
         type: boolean
+      outputs: {}
+    SetFontHeight:
+      inputs:
+      - name: height
+        type: number
       outputs: {}
     SetFormattedText:
       inputs:
@@ -2834,6 +2853,9 @@ Frame:
       outputs:
       - name: canChangeAttributes
         type: boolean
+    ClearAlphaGradient:
+      inputs: {}
+      outputs: {}
     CreateFontString:
       impl: Frame/CreateFontString
       inputs:
@@ -3033,6 +3055,14 @@ Frame:
       outputs:
       - name: strata
         type: FrameStrata
+    GetHighestFrameLevel:
+      inputs:
+      - default: false
+        name: iterateAllChildren
+        type: boolean
+      outputs:
+      - name: frameLevel
+        type: number
     GetHitRectInsets:
       inputs: {}
       outputs:
@@ -3249,6 +3279,14 @@ Frame:
       - default: 0.5
         name: y
         type: number
+      outputs: {}
+    SetAlphaGradient:
+      inputs:
+      - name: index
+        type: number
+      - name: gradient
+        type:
+          structure: vector2
       outputs: {}
     SetAttribute:
       impl: Frame/SetAttribute
@@ -5210,6 +5248,16 @@ Region:
       outputs:
       - name: canChange
         type: boolean
+    CanPropagateMouseClicks:
+      inputs: {}
+      outputs:
+      - name: canPropagate
+        type: boolean
+    CanPropagateMouseMotion:
+      inputs: {}
+      outputs:
+      - name: canPropagate
+        type: boolean
     ClearAllPoints:
       impl: Region/ClearAllPoints
       inputs: {}
@@ -6236,6 +6284,11 @@ TabardModel:
       outputs:
       - name: file
         type: number
+    GetLowerBorderFile:
+      inputs: {}
+      outputs:
+      - name: file
+        type: number
     GetLowerEmblemFile:
       inputs: {}
       outputs:
@@ -6247,6 +6300,11 @@ TabardModel:
         type: Texture
       outputs: {}
     GetUpperBackgroundFileName:
+      inputs: {}
+      outputs:
+      - name: file
+        type: number
+    GetUpperBorderFile:
       inputs: {}
       outputs:
       - name: file
