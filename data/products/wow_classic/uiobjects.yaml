@@ -2987,6 +2987,12 @@ Frame:
       outputs: {}
     RegisterEvent:
       impl: Frame/RegisterEvent
+      inputs:
+      - name: eventName
+        type: string
+      outputs:
+      - name: registered
+        type: boolean
     RegisterForDrag:
       inputs:
       - name: button

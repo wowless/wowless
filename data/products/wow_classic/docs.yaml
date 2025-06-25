@@ -136,7 +136,6 @@ skip_uiobject_methods:
     SetSwipeTexture: {}
   Frame:
     GetAttribute: {}
-    RegisterEvent: {}
     RegisterUnitEvent: {}
     SetAttribute: {}
     SetAttributeNoHandler: {}
