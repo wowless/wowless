@@ -12,6 +12,7 @@ Constants:
   CharCustomizationConstants:
     CHAR_CUSTOMIZE_CUSTOM_DISPLAY_OPTION_FIRST: 5
     CHAR_CUSTOMIZE_CUSTOM_DISPLAY_OPTION_LAST: 8
+    NAME_RESERVATION_DAYS: 30
     NUM_CUSTOM_DISPLAY: 4
   ContentTrackingConsts:
     MaxTrackedAchievements: 10
@@ -1654,6 +1655,13 @@ Enum:
     MaxValue: 9
     MinValue: 0
     NumValues: 10
+  ChallengeModeHistoryFlags:
+    ConfirmedLeaver: 1
+    None: 0
+  ChallengeModeHistoryFlagsMeta:
+    MaxValue: 1
+    MinValue: 0
+    NumValues: 2
   ChallengeModeHistoryResult:
     Leaver: 1
     Successful: 0
@@ -2265,10 +2273,11 @@ Enum:
     NumValues: 5
   CooldownSetSpellFlags:
     HideAura: 1
+    PlaceHolder1: 2
   CooldownSetSpellFlagsMeta:
-    MaxValue: 1
+    MaxValue: 2
     MinValue: 1
-    NumValues: 1
+    NumValues: 2
   CooldownViewerBarContent:
     IconAndName: 0
     IconOnly: 1
