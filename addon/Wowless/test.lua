@@ -130,19 +130,6 @@ G.testsuite.sync = function()
         end,
       }
       local transitions = {
-        Hack = { -- TODO remove when we can walk from init
-          edges = { reset = 'both' },
-          func = function()
-            check0(f:SetText('Moo'))
-            check0(g:SetText('Moo'))
-          end,
-        },
-        Hack2 = {
-          edges = { reset = 'fstr' },
-          func = function()
-            f:CreateFontString()
-          end,
-        },
         Reset = {
           to = 'reset',
           func = function()
@@ -494,13 +481,6 @@ G.testsuite.sync = function()
         end,
       }
       local transitions = {
-        Hack = { -- TODO remove when we can walk from init
-          to = 'colorTexture',
-          func = function()
-            checkSetStatusBarTexture()
-            check0(sb:SetStatusBarColor(0.8, 0.6, 0.4, 0.2))
-          end,
-        },
         SetStatusBarColor = {
           edges = {
             colorTexture = 'colorTexture',
