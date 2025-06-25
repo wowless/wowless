@@ -405,6 +405,50 @@ G.testsuite.sync = function()
           end,
           to = 'none',
         },
+        unregistergarbage = {
+          func = function()
+            assert(not pcall(function()
+              f:UnregisterEvent('WOWLESS_NOPE')
+            end))
+          end,
+          loop = true,
+        },
+        unregisterloginfailure = {
+          edges = {
+            justpew = 'justpew',
+            none = 'none',
+          },
+          func = function()
+            check1(false, f:UnregisterEvent('PLAYER_LOGIN'))
+          end,
+        },
+        unregisterloginsuccess = {
+          edges = {
+            both = 'justpew',
+            justlogin = 'none',
+          },
+          func = function()
+            check1(true, f:UnregisterEvent('PLAYER_LOGIN'))
+          end,
+        },
+        unregisterpewfailure = {
+          edges = {
+            justlogin = 'justlogin',
+            none = 'none',
+          },
+          func = function()
+            check1(false, f:UnregisterEvent('PLAYER_ENTERING_WORLD'))
+          end,
+        },
+        unregisterpewsuccess = {
+          edges = {
+            both = 'justlogin',
+            justpew = 'none',
+          },
+          func = function()
+            check1(true, f:UnregisterEvent('PLAYER_ENTERING_WORLD'))
+          end,
+        },
       }
       return checkStateMachine(states, transitions, 'none')
     end,

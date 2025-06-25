@@ -19,7 +19,11 @@ return function(datalua)
   local function UnregisterEvent(frame, event)
     event = event:upper()
     local reg = assert(regs[event], 'cannot unregister ' .. event)
-    reg:remove(frame)
+    if reg:has(frame) then
+      reg:remove(frame)
+      return true
+    end
+    return false
   end
 
   local function UnregisterAllEvents(frame)
