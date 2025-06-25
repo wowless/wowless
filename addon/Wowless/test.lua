@@ -330,21 +330,39 @@ G.testsuite.sync = function()
         both = function()
           check2(true, nil, f:IsEventRegistered('PLAYER_LOGIN'))
           check2(true, nil, f:IsEventRegistered('PLAYER_ENTERING_WORLD'))
+          check2(false, nil, f:IsEventRegistered('PLAYER_LOGOUT'))
         end,
         justlogin = function()
           check2(true, nil, f:IsEventRegistered('PLAYER_LOGIN'))
           check2(false, nil, f:IsEventRegistered('PLAYER_ENTERING_WORLD'))
+          check2(false, nil, f:IsEventRegistered('PLAYER_LOGOUT'))
         end,
         justpew = function()
           check2(false, nil, f:IsEventRegistered('PLAYER_LOGIN'))
           check2(true, nil, f:IsEventRegistered('PLAYER_ENTERING_WORLD'))
+          check2(false, nil, f:IsEventRegistered('PLAYER_LOGOUT'))
         end,
         none = function()
           check2(false, nil, f:IsEventRegistered('PLAYER_LOGIN'))
           check2(false, nil, f:IsEventRegistered('PLAYER_ENTERING_WORLD'))
+          check2(false, nil, f:IsEventRegistered('PLAYER_LOGOUT'))
         end,
       }
       local transitions = {
+        registerall = {
+          func = function()
+            check0(f:RegisterAllEvents())
+          end,
+          loop = true,
+        },
+        registergarbage = {
+          func = function()
+            assert(not pcall(function()
+              f:RegisterEvent('WOWLESS_NOPE')
+            end))
+          end,
+          loop = true,
+        },
         registerloginfailure = {
           edges = {
             both = 'both',
