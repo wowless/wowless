@@ -41,7 +41,7 @@ return function(typechecker)
         rets[i] = v
       end
       for i = nfixed + 1, n do
-        local out = outs[mod(i - 1, outstride) + 1]
+        local out = outs[mod(i - nfixed - 1, outstride) + nfixed + 1]
         local v, errmsg = typechecker(out, (select(i, ...)), true)
         if errmsg then
           error(('output %d (%q) of %q %s'):format(i, tostring(out.name), fname, errmsg))
