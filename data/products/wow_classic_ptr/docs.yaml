@@ -143,7 +143,6 @@ skip_uiobject_methods:
     RegisterUnitEvent: {}
     SetAttribute: {}
     SetAttributeNoHandler: {}
-    UnregisterEvent: {}
   ModelScene:
     CreateActor: {}
   ParentedObjectBase:

@@ -3325,6 +3325,12 @@ Frame:
       outputs: {}
     UnregisterEvent:
       impl: Frame/UnregisterEvent
+      inputs:
+      - name: eventName
+        type: string
+      outputs:
+      - name: registered
+        type: boolean
 GameTooltip:
   fields:
     tooltipAnchorType:
