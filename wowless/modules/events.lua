@@ -9,9 +9,11 @@ return function(datalua)
   local function RegisterEvent(frame, event)
     event = event:upper()
     local reg = assert(regs[event], 'cannot register ' .. event)
-    if not allregs:has(frame) then
-      reg:insert(frame)
+    if allregs:has(frame) or reg:has(frame) then
+      return false
     end
+    reg:insert(frame)
+    return true
   end
 
   local function UnregisterEvent(frame, event)
@@ -33,7 +35,7 @@ return function(datalua)
   end
 
   local function IsEventRegistered(frame, event)
-    return allregs:has(frame) or regs[event:upper()]:has(frame)
+    return allregs:has(frame) or regs[event:upper()]:has(frame), nil
   end
 
   local function IsEventValid(event)

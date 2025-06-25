@@ -324,6 +324,73 @@ G.testsuite.sync = function()
       assertEquals('a,b,c,d,e,f', table.concat(log, ','))
     end,
 
+    ['event registration'] = function()
+      local f = CreateFrame('Frame')
+      local states = {
+        both = function()
+          check2(true, nil, f:IsEventRegistered('PLAYER_LOGIN'))
+          check2(true, nil, f:IsEventRegistered('PLAYER_ENTERING_WORLD'))
+        end,
+        justlogin = function()
+          check2(true, nil, f:IsEventRegistered('PLAYER_LOGIN'))
+          check2(false, nil, f:IsEventRegistered('PLAYER_ENTERING_WORLD'))
+        end,
+        justpew = function()
+          check2(false, nil, f:IsEventRegistered('PLAYER_LOGIN'))
+          check2(true, nil, f:IsEventRegistered('PLAYER_ENTERING_WORLD'))
+        end,
+        none = function()
+          check2(false, nil, f:IsEventRegistered('PLAYER_LOGIN'))
+          check2(false, nil, f:IsEventRegistered('PLAYER_ENTERING_WORLD'))
+        end,
+      }
+      local transitions = {
+        registerloginfailure = {
+          edges = {
+            both = 'both',
+            justlogin = 'justlogin',
+          },
+          func = function()
+            check1(false, f:RegisterEvent('PLAYER_LOGIN'))
+          end,
+        },
+        registerloginsuccess = {
+          edges = {
+            justpew = 'both',
+            none = 'justlogin',
+          },
+          func = function()
+            check1(true, f:RegisterEvent('PLAYER_LOGIN'))
+          end,
+        },
+        registerpewfailure = {
+          edges = {
+            both = 'both',
+            justpew = 'justpew',
+          },
+          func = function()
+            check1(false, f:RegisterEvent('PLAYER_ENTERING_WORLD'))
+          end,
+        },
+        registerpewsuccess = {
+          edges = {
+            justlogin = 'both',
+            none = 'justpew',
+          },
+          func = function()
+            check1(true, f:RegisterEvent('PLAYER_ENTERING_WORLD'))
+          end,
+        },
+        unregisterall = {
+          func = function()
+            check0(f:UnregisterAllEvents())
+          end,
+          to = 'none',
+        },
+      }
+      return checkStateMachine(states, transitions, 'none')
+    end,
+
     loading = function()
       return {
         addonName = function()
