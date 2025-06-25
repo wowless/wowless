@@ -3001,6 +3001,15 @@ Frame:
       outputs: {}
     RegisterUnitEvent:
       impl: Frame/RegisterUnitEvent
+      inputs:
+      - name: eventName
+        type: string
+      - name: units
+        type: string
+      instride: 1
+      outputs:
+      - name: registered
+        type: boolean
     RotateTextures:
       inputs:
       - name: radians
