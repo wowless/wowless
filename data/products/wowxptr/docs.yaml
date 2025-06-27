@@ -4,9 +4,6 @@ events:
     SECURE_TRANSFER_CONFIRM_SEND_MAIL: {}
 lies:
   apis:
-    C_BattleNet.InstallHighResTextures:
-      inputs: {}
-      outputs: {}
     C_Item.GetItemClassInfo:
       inputs:
       - name: itemClassID
@@ -14,26 +11,6 @@ lies:
       outputs:
       - name: result
         type: string
-    ShowCloak:
-      inputs:
-      - name: show
-        type: boolean
-      outputs: {}
-    ShowHelm:
-      inputs:
-      - name: show
-        type: boolean
-      outputs: {}
-    ShowingCloak:
-      inputs: {}
-      outputs:
-      - name: result
-        type: boolean
-    ShowingHelm:
-      inputs: {}
-      outputs:
-      - name: result
-        type: boolean
     UnitName:
       inputs:
       - name: unit
@@ -43,6 +20,12 @@ lies:
         type: string
       - name: unitServer
         type: string
+  extra_apis:
+    C_BattleNet.InstallHighResTextures: {}
+    ShowCloak: {}
+    ShowHelm: {}
+    ShowingCloak: {}
+    ShowingHelm: {}
   uiobjects:
     Button:
       RegisterForClicks:

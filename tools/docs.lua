@@ -315,6 +315,7 @@ local function rewriteApis()
   local f = 'data/products/' .. product .. '/apis.yaml'
   local apis = y.parseFile(f)
   local lies = deref(config, 'lies', 'apis') or {}
+  local extras = deref(config, 'lies', 'extra_apis') or {}
   for name, fn in pairs(funcs) do
     local ns = split(name)
     local api = apis[name]
@@ -331,6 +332,8 @@ local function rewriteApis()
     if lies[name] then
       assert(tableeq(lies[name], newapi), 'lie mismatch on ' .. name)
       lies[name] = nil
+    elseif extras[name] then
+      extras[name] = nil
     else
       newapi.impl = api and api.impl
       apis[name] = newapi
@@ -338,6 +341,9 @@ local function rewriteApis()
   end
   if next(lies) then
     error('not all lies were consumed: ' .. require('pl.pretty').write(lies))
+  end
+  if next(extras) then
+    error('not all extras were consumed: ' .. require('pl.pretty').write(extras))
   end
   writeifchanged(f, y.pprint(apis))
   return apis

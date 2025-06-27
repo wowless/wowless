@@ -18,9 +18,16 @@ type:
           apis:
             type:
               mapof:
-                key: string
+                key:
+                  ref: api
                 value:
                   schema: function
+          extra_apis:
+            type:
+              mapof:
+                key: string
+                value:
+                  record: null
           uiobjects:
             type:
               mapof:

@@ -5,9 +5,6 @@ events:
     SECURE_TRANSFER_CONFIRM_SEND_MAIL: {}
 lies:
   apis:
-    C_BattleNet.InstallHighResTextures:
-      inputs: {}
-      outputs: {}
     C_Item.GetItemClassInfo:
       inputs:
       - name: itemClassID
@@ -15,6 +12,8 @@ lies:
       outputs:
       - name: result
         type: string
+  extra_apis:
+    C_BattleNet.InstallHighResTextures: {}
   uiobjects:
     Button:
       RegisterForClicks:
