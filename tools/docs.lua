@@ -299,14 +299,10 @@ local sawmayreturnnothing = false
 
 local function mayreturnnothing(fn, api)
   sawmayreturnnothing = sawmayreturnnothing or fn.MayReturnNothing
-  local v = api and api.mayreturnnothing
-  if not config.mayreturnnothing then
-    return v
-  elseif fn.MayReturnNothing then
-    return true
-  elseif v then
-    print('mayreturnnothing problem on ' .. fn.Name)
-    return true
+  if config.mayreturnnothing then
+    return fn.MayReturnNothing
+  else
+    return api and api.mayreturnnothing
   end
 end
 
