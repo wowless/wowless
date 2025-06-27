@@ -2,12 +2,14 @@ describe('docs', function()
   for _, p in ipairs(require('build.data.products')) do
     describe(p, function()
       local docs = require('build.data.products.' .. p .. '.docs')
+      local apis = require('build.data.products.' .. p .. '.apis')
       describe('lies', function()
-        describe('apis', function()
-          for k, v in pairs(docs.lies and docs.lies.apis or {}) do
+        local lies = docs.lies or {}
+        describe('extra_apis', function()
+          for k in pairs(lies.extra_apis or {}) do
             describe(k, function()
-              it('has no impl', function()
-                assert.Nil(v.impl)
+              it('must not be a global api', function()
+                assert.Nil(apis[k])
               end)
             end)
           end
