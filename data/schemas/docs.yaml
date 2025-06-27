@@ -30,7 +30,7 @@ type:
                   mapof:
                     key: string
                     value:
-                      schema: function
+                      schema: any
     mayreturnnothing:
       type: boolean
     script_objects:

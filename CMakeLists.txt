@@ -1021,12 +1021,15 @@ lua2c(
   wowapi.data=${CMAKE_CURRENT_SOURCE_DIR}/wowapi/data.lua
   wowapi.schema=${CMAKE_CURRENT_SOURCE_DIR}/wowapi/schema.lua)
 
+lua2c(toolstedit tools.tedit=${CMAKE_CURRENT_SOURCE_DIR}/tools/tedit.lua)
+
 add_lua_executable(
   docs
   ${CMAKE_CURRENT_SOURCE_DIR}/tools/docs.lua
   argparse
   luapath
   penlight
+  toolstedit
   toolsutil
   wowapischema
   wowlessyaml)
@@ -1102,8 +1105,6 @@ add_lua_executable(
   wowlesstoc
   wowlessutil
   wowlessyaml)
-
-lua2c(toolstedit tools.tedit=${CMAKE_CURRENT_SOURCE_DIR}/tools/tedit.lua)
 
 add_lua_executable(
   runtests

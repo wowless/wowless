@@ -19,45 +19,47 @@ lies:
     Button:
       RegisterForClicks:
         inputs:
-        - name: unpackedPrimitiveType
-          type: number
-        instride: 1
-        outputs: {}
+        - _change:
+            from:
+              name: unpackedPrimitiveType
+              type: number
+            to:
+              name: button
+              type: string
       RegisterForMouse:
         inputs:
-        - name: unpackedPrimitiveType
-          type: number
-        instride: 1
-        outputs: {}
+        - _change:
+            from:
+              name: unpackedPrimitiveType
+              type: number
+            to:
+              name: button
+              type: string
     Frame:
       RegisterForDrag:
         inputs:
-        - name: unpackedPrimitiveType
-          type: number
-        instride: 1
-        outputs: {}
+        - _change:
+            from:
+              name: unpackedPrimitiveType
+              type: number
+            to:
+              name: button
+              type: string
     Region:
       SetPassThroughButtons:
         inputs:
-        - name: unpackedPrimitiveType
-          type: number
-        instride: 1
-        outputs: {}
+        - _change:
+            from:
+              name: unpackedPrimitiveType
+              type: number
+            to:
+              name: button
+              type: string
     TextureBase:
       SetAtlas:
         inputs:
-        - name: atlas
-          type: string
-        - default: false
-          name: useAtlasSize
-          type: boolean
-        - name: filterMode
-          nilable: true
-          type: FilterMode
-        - name: resetTexCoords
-          nilable: true
-          type: boolean
-        outputs: {}
+        - _add:
+            nilable: true
 mayreturnnothing: true
 script_objects:
   FrameAPICharacterModelBase: PlayerModel

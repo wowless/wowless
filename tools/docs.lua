@@ -6,6 +6,7 @@ end)()
 
 local lfs = require('lfs')
 local writeifchanged = require('tools.util').writeifchanged
+local tedit = require('tools.tedit')
 local parseYaml = require('wowapi.yaml').parseFile
 local pprintYaml = require('wowapi.yaml').pprint
 local tableeq = require('pl.tablex').deepcompare
@@ -481,6 +482,7 @@ local function rewriteUIObjects()
     for mk, mv in pairs(v) do
       local mm = u.methods[mk]
       local mmv = {
+        impl = mm and mm.impl,
         inputs = insig(mv),
         instride = stride(mv.Arguments),
         mayreturnnothing = mayreturnnothing(mv, mm),
@@ -500,10 +502,9 @@ local function rewriteUIObjects()
       if okay then
         local lie = deref(lies, k, mk)
         if lie then
-          assert(tableeq(lie, mmv), 'lie mismatch on ' .. k .. '.' .. mk)
+          assert(tableeq(mm, tedit(mmv, lie)), 'lie mismatch on ' .. k .. '.' .. mk)
           lies[k][mk] = nil
         else
-          mmv.impl = mm and mm.impl
           u.methods[mk] = mmv
         end
       end
