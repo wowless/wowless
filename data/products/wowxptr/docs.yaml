@@ -5,21 +5,15 @@ events:
 lies:
   apis:
     C_Item.GetItemClassInfo:
-      inputs:
-      - name: itemClassID
-        type: number
       outputs:
-      - name: result
-        type: string
+      - _add:
+          nilable: true
     UnitName:
-      inputs:
-      - name: unit
-        type: unit
       outputs:
-      - name: unitName
-        type: string
-      - name: unitServer
-        type: string
+      - _add:
+          nilable: true
+      - _add:
+          nilable: true
   extra_apis:
     C_BattleNet.InstallHighResTextures: {}
     ShowCloak: {}

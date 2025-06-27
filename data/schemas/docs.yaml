@@ -21,7 +21,7 @@ type:
                 key:
                   ref: api
                 value:
-                  schema: function
+                  schema: any
           extra_apis:
             type:
               mapof:

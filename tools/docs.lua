@@ -320,6 +320,7 @@ local function rewriteApis()
     local ns = split(name)
     local api = apis[name]
     local newapi = {
+      impl = api and api.impl,
       inputs = insig(fn, ns),
       instride = stride(fn.Arguments),
       mayreturnnils = api and api.mayreturnnils,
@@ -329,13 +330,13 @@ local function rewriteApis()
       stubnothing = api and api.stubnothing,
       stuboutstrides = api and api.stuboutstrides,
     }
-    if lies[name] then
-      assert(tableeq(lies[name], newapi), 'lie mismatch on ' .. name)
+    local lie = lies[name]
+    if lie then
+      assert(tableeq(api, tedit(newapi, lie)), 'lie mismatch on ' .. name)
       lies[name] = nil
     elseif extras[name] then
       extras[name] = nil
     else
-      newapi.impl = api and api.impl
       apis[name] = newapi
     end
   end

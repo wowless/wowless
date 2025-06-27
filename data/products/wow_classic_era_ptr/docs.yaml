@@ -6,12 +6,9 @@ events:
 lies:
   apis:
     C_Item.GetItemClassInfo:
-      inputs:
-      - name: itemClassID
-        type: number
       outputs:
-      - name: result
-        type: string
+      - _add:
+          nilable: true
   extra_apis:
     C_BattleNet.InstallHighResTextures: {}
   uiobjects:
