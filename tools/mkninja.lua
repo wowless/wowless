@@ -312,6 +312,7 @@ table.insert(builds, {
     'spec/data/uiobjects_spec.lua',
     'spec/data/yaml_spec.lua',
     'spec/elune_spec.lua',
+    'spec/tools/tedit_spec.lua',
     'spec/wowapi/schema_spec.lua',
     'spec/wowapi/yaml_spec.lua',
     'spec/wowless/addon_spec.lua',

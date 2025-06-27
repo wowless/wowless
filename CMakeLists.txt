@@ -1103,6 +1103,8 @@ add_lua_executable(
   wowlessutil
   wowlessyaml)
 
+lua2c(toolstedit tools.tedit=${CMAKE_CURRENT_SOURCE_DIR}/tools/tedit.lua)
+
 add_lua_executable(
   runtests
   ${CMAKE_CURRENT_SOURCE_DIR}/tools/runtests.lua
@@ -1118,6 +1120,7 @@ add_lua_executable(
   penlight
   runtimegametypes
   runtimeproducts
+  toolstedit
   tsort
   wowapischema
   wowlesslib
