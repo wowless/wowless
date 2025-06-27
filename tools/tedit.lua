@@ -22,6 +22,14 @@ local function applyat(t, k, e)
     assert(next(e, '_change') == nil)
     assert(deepeq(tt, e._change.from))
     t[k] = e._change.to
+  elseif e._remove then
+    assert(next(e) == '_remove')
+    assert(next(e, '_remove') == nil)
+    assert(type(tt) == 'table')
+    for ek, ev in pairs(e._remove) do
+      assert(deepeq(tt[ek], ev))
+      tt[ek] = nil
+    end
   else
     for ek, ev in pairs(e) do
       applyat(tt, ek, ev)

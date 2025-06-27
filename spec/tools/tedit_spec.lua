@@ -88,6 +88,20 @@ describe('tedit', function()
         },
       },
     },
+    ['simple remove'] = {
+      edit = {
+        _remove = {
+          foo = 42,
+        },
+      },
+      input = {
+        foo = 42,
+        bar = 'baz',
+      },
+      output = {
+        bar = 'baz',
+      },
+    },
   }
   for k, v in pairs(tests) do
     it(k, function()
