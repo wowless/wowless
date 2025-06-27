@@ -1,5 +1,6 @@
 describe('tedit', function()
   local tedit = require('tools.tedit')
+  local tcopy = require('pl.tablex').deepcopy
   local tests = {
     ['empty'] = {
       edit = {},
@@ -57,6 +58,16 @@ describe('tedit', function()
         },
       },
     },
+    ['root change'] = {
+      edit = {
+        _change = {
+          from = 42,
+          to = 'foo',
+        },
+      },
+      input = 42,
+      output = 'foo',
+    },
     ['simple change'] = {
       edit = {
         foo = {
@@ -80,7 +91,12 @@ describe('tedit', function()
   }
   for k, v in pairs(tests) do
     it(k, function()
-      assert.same(v.output, tedit(v.input, v.edit) or v.input)
+      local input = tcopy(v.input)
+      local edit = tcopy(v.edit)
+      local output = tedit(input, edit)
+      assert.same(v.output, output)
+      assert.same(v.input, input)
+      assert.same(v.edit, edit)
     end)
   end
 end)

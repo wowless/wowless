@@ -1,4 +1,6 @@
-local deepeq = require('pl.tablex').deepcompare
+local tablex = require('pl.tablex')
+local deepeq = tablex.deepcompare
+local deepcopy = tablex.deepcopy
 
 local function applyat(t, k, e)
   local tt = t[k]
@@ -28,5 +30,7 @@ local function applyat(t, k, e)
 end
 
 return function(v, e)
-  applyat({ v }, 1, e)
+  local t = { deepcopy(v) }
+  applyat(t, 1, deepcopy(e))
+  return t[1]
 end
