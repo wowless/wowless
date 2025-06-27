@@ -55,24 +55,9 @@ lies:
               type: string
     TextureBase:
       SetAtlas:
-        _change:
-          from:
-            impl: Texture/SetAtlas
-            inputs:
-            - name: atlas
-              type: string
-            - default: false
-              name: useAtlasSize
-              type: boolean
-            - name: filterMode
-              nilable: true
-              type: FilterMode
-            - name: resetTexCoords
-              nilable: true
-              type: boolean
-            outputs: {}
-          to:
-            impl: Texture/SetAtlas
+        inputs:
+        - _add:
+            nilable: true
 script_objects:
   FrameAPIArchaeologyDigSiteFrame: ArchaeologyDigSiteFrame
   FrameAPIBlob: QuestPOIFrame
