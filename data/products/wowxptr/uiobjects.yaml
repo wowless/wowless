@@ -2989,6 +2989,13 @@ Frame:
       outstride: 1
     GetAttribute:
       impl: Frame/GetAttribute
+      inputs:
+      - name: attributeName
+        type: string
+      outputs:
+      - name: value
+        nilable: true
+        type: unknown
     GetBoundsRect:
       inputs: {}
       outputs:
@@ -3305,8 +3312,22 @@ Frame:
       outputs: {}
     SetAttribute:
       impl: Frame/SetAttribute
+      inputs:
+      - name: attributeName
+        type: string
+      - name: value
+        nilable: true
+        type: unknown
+      outputs: {}
     SetAttributeNoHandler:
       impl: Frame/SetAttributeNoHandler
+      inputs:
+      - name: attributeName
+        type: string
+      - name: value
+        nilable: true
+        type: unknown
+      outputs: {}
     SetClampedToScreen:
       impl:
         setter:

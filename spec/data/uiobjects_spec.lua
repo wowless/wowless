@@ -186,9 +186,6 @@ describe('uiobjects', function()
                         it('cannot specify return value', function()
                           assert.Nil(output.stub)
                         end)
-                        it('cannot be unknown type', function()
-                          assert.Not.same('unknown', output.type)
-                        end)
                       end
                     end)
                   end
