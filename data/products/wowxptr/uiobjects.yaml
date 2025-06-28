@@ -1059,6 +1059,11 @@ Button:
         type: Texture
     GetText:
       impl: Button/GetText
+      inputs: {}
+      outputs:
+      - name: text
+        nilable: true
+        type: string
     GetTextHeight:
       inputs: {}
       outputs:

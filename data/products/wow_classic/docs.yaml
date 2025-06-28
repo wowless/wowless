@@ -12,6 +12,10 @@ lies:
           nilable: true
   uiobjects:
     Button:
+      GetText:
+        outputs:
+        - _add:
+            nilable: true
       RegisterForClicks:
         inputs:
         - _change:
@@ -147,7 +151,6 @@ skip_docfiles:
   SimpleModelFFXAPIDocumentation: {}
 skip_uiobject_methods:
   Button:
-    GetText: {}
     SetDisabledTexture: {}
     SetFormattedText: {}
     SetHighlightTexture: {}

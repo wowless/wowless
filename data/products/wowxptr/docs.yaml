@@ -28,6 +28,10 @@ lies:
     ShowingHelm: {}
   uiobjects:
     Button:
+      GetText:
+        outputs:
+        - _add:
+            nilable: true
       RegisterForClicks:
         inputs:
         - _change:
@@ -174,7 +178,6 @@ skip_docfiles:
   WorldSafeLocsUIInternalDocumentation: {}
 skip_uiobject_methods:
   Button:
-    GetText: {}
     SetDisabledTexture: {}
     SetFormattedText: {}
     SetHighlightTexture: {}
