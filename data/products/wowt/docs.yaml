@@ -86,6 +86,17 @@ lies:
               _change:
                 from: string
                 to: unknown
+    ModelScene:
+      CreateActor:
+        inputs:
+        - _add:
+            nilable: true
+        - _add:
+            nilable: true
+        outputs:
+          _add:
+          - name: actor
+            type: Actor
     Region:
       SetPassThroughButtons:
         inputs:
@@ -189,8 +200,6 @@ skip_uiobject_methods:
     SetBlingTexture: {}
     SetEdgeTexture: {}
     SetSwipeTexture: {}
-  ModelScene:
-    CreateActor: {}
   ParentedObjectBase:
     GetParentKey: {}
   Region:
