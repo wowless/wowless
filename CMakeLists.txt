@@ -1045,6 +1045,9 @@ add_lua_executable(db2dump ${CMAKE_CURRENT_SOURCE_DIR}/tools/db2dump.lua
 add_lua_executable(rewrite ${CMAKE_CURRENT_SOURCE_DIR}/tools/rewrite.lua
                    argparse penlight wowlessyaml)
 
+add_lua_executable(yedit ${CMAKE_CURRENT_SOURCE_DIR}/tools/yedit.lua argparse
+                   penlight toolstedit wowlessyaml)
+
 file(
   GENERATE
   OUTPUT runtime/platform.lua
