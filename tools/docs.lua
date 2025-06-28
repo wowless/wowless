@@ -9,7 +9,6 @@ local writeifchanged = require('tools.util').writeifchanged
 local tedit = require('tools.tedit')
 local parseYaml = require('wowapi.yaml').parseFile
 local pprintYaml = require('wowapi.yaml').pprint
-local tableeq = require('pl.tablex').deepcompare
 local product = args.product
 
 local function deref(t, ...)
@@ -328,7 +327,7 @@ local function rewriteApis()
     }
     local lie = lies[name]
     if lie then
-      assert(tableeq(api, tedit(newapi, lie)), 'lie mismatch on ' .. name)
+      apis[name] = tedit(newapi, lie)
       lies[name] = nil
     elseif extras[name] then
       extras[name] = nil
@@ -505,7 +504,7 @@ local function rewriteUIObjects()
       if okay then
         local lie = deref(lies, k, mk)
         if lie then
-          assert(tableeq(mm, tedit(mmv, lie)), 'lie mismatch on ' .. k .. '.' .. mk)
+          u.methods[mk] = tedit(mmv, lie)
           lies[k][mk] = nil
         else
           u.methods[mk] = mmv
