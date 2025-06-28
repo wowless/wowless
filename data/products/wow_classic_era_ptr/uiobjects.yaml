@@ -945,6 +945,14 @@ Button:
       outputs: {}
     SetFormattedText:
       impl: Button/SetFormattedText
+      inputs:
+      - name: text
+        type: string
+      - name: arg
+        nilable: true
+        type: unknown
+      instride: 1
+      outputs: {}
     SetHighlightAtlas:
       impl: Button/SetHighlightAtlas
       inputs:

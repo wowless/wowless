@@ -50,6 +50,15 @@ lies:
             to:
               name: button
               type: string
+      SetFormattedText:
+        _add:
+          instride: 1
+        inputs:
+          _add:
+            2:
+              name: arg
+              nilable: true
+              type: unknown
     Frame:
       GetAttribute:
         outputs:
@@ -190,7 +199,6 @@ skip_docfiles:
 skip_uiobject_methods:
   Button:
     SetDisabledTexture: {}
-    SetFormattedText: {}
     SetHighlightTexture: {}
     SetNormalTexture: {}
     SetPushedTexture: {}
