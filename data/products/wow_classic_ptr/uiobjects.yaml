@@ -1573,6 +1573,18 @@ Cooldown:
         name: drawSwipe
         type: boolean
       outputs: {}
+    SetEdgeColor:
+      inputs:
+      - name: colorR
+        type: number
+      - name: colorG
+        type: number
+      - name: colorB
+        type: number
+      - name: a
+        nilable: true
+        type: number
+      outputs: {}
     SetEdgeScale:
       inputs:
       - name: scale

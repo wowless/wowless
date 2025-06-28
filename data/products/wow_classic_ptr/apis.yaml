@@ -11139,7 +11139,7 @@ C_SpecializationInfo.GetActiveSpecGroup:
     type: number
 C_SpecializationInfo.GetNumSpecializationsForClassID:
   inputs:
-  - name: specID
+  - name: classID
     type: number
   outputs:
   - name: specCount
@@ -20075,6 +20075,11 @@ HasLoadedCUFProfiles:
   inputs: {}
   outputs:
   - type: boolean
+HasLootSpecializations:
+  inputs: {}
+  outputs:
+  - name: hasLootSpecializations
+    type: boolean
 HasNewMail:
   inputs: {}
   outputs:
