@@ -102,6 +102,27 @@ describe('tedit', function()
         bar = 'baz',
       },
     },
+    ['multichange'] = {
+      edit = {
+        k1 = {
+          _add = {
+            k2 = 42,
+          },
+        },
+        _add = {
+          k3 = 99,
+        },
+      },
+      input = {
+        k1 = {},
+      },
+      output = {
+        k1 = {
+          k2 = 42,
+        },
+        k3 = 99,
+      },
+    },
   }
   for k, v in pairs(tests) do
     it(k, function()
