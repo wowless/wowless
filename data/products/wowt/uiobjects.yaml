@@ -6523,6 +6523,24 @@ TextureBase:
         - name: try
         - name: brx
         - name: bry
+      inputs: {}
+      outputs:
+      - name: ulx
+        type: number
+      - name: uly
+        type: number
+      - name: llx
+        type: number
+      - name: lly
+        type: number
+      - name: urx
+        type: number
+      - name: ury
+        type: number
+      - name: lrx
+        type: number
+      - name: lry
+        type: number
     GetTexelSnappingBias:
       inputs: {}
       outputs:

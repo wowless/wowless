@@ -107,6 +107,39 @@ lies:
               name: button
               type: string
     TextureBase:
+      GetTexCoord:
+        _remove:
+          outstride: 2
+        outputs:
+          1:
+            name:
+              _change:
+                from: x
+                to: ulx
+          2:
+            name:
+              _change:
+                from: y
+                to: uly
+          _add:
+            3:
+              name: llx
+              type: number
+            4:
+              name: lly
+              type: number
+            5:
+              name: urx
+              type: number
+            6:
+              name: ury
+              type: number
+            7:
+              name: lrx
+              type: number
+            8:
+              name: lry
+              type: number
       SetAtlas:
         inputs:
         - _add:
@@ -209,7 +242,6 @@ skip_uiobject_methods:
   StatusBar:
     SetStatusBarTexture: {}
   TextureBase:
-    GetTexCoord: {}
     GetTexture: {}
     SetTexture: {}
 typedefs:
