@@ -201,27 +201,10 @@ local function default(x)
   return enum[x.Type] and enum[x.Type][x.Default] or x.Default
 end
 
--- Super duper hack, sorry world.
-local unitHacks = {
-  UnitFactionGroup = 'unitName',
-  UnitName = 'unit',
-  UnitIsUnit = 'unitName',
-  UnitRace = 'name',
-}
-
 local function insig(fn, ns)
-  local unitHack = unitHacks[fn.Name]
   local t = {}
   for _, a in ipairs(fn.Arguments or {}) do
-    if unitHack and a.Name:sub(1, unitHack:len()) == unitHack then
-      assert(a.Type == 'cstring')
-      assert(not a.Default)
-      assert(not a.Nilable)
-      table.insert(t, {
-        name = a.Name,
-        type = 'unit',
-      })
-    elseif a.Type == 'UnitToken' and a.Default == 'WOWGUID_NULL' then
+    if a.Type == 'UnitToken' and a.Default == 'WOWGUID_NULL' then
       table.insert(t, {
         name = a.Name,
         nilable = true,

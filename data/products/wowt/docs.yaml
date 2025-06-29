@@ -14,12 +14,38 @@ lies:
     UnitFactionGroup:
       _add:
         mayreturnnothing: true
+      inputs:
+      - type:
+          _change:
+            from: string
+            to: unit
+    UnitIsUnit:
+      inputs:
+      - type:
+          _change:
+            from: string
+            to: unit
+      - type:
+          _change:
+            from: string
+            to: unit
     UnitName:
+      inputs:
+      - type:
+          _change:
+            from: string
+            to: unit
       outputs:
       - _add:
           nilable: true
       - _add:
           nilable: true
+    UnitRace:
+      inputs:
+      - type:
+          _change:
+            from: string
+            to: unit
   extra_apis:
     C_BattleNet.InstallHighResTextures: {}
     ShowCloak: {}
