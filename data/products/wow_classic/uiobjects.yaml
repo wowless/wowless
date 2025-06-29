@@ -4598,6 +4598,11 @@ ParentedObjectBase:
         type: UIObject
     GetParentKey:
       impl: ParentedObjectBase/GetParentKey
+      inputs: {}
+      outputs:
+      - name: parentKey
+        nilable: true
+        type: string
     SetParentKey:
       impl: ParentedObjectBase/SetParentKey
       inputs:

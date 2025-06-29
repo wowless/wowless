@@ -92,6 +92,11 @@ lies:
           _add:
           - name: actor
             type: Actor
+    ParentedObjectBase:
+      GetParentKey:
+        outputs:
+        - _add:
+            nilable: true
     Region:
       SetPassThroughButtons:
         inputs:
@@ -184,8 +189,6 @@ skip_uiobject_methods:
     SetBlingTexture: {}
     SetEdgeTexture: {}
     SetSwipeTexture: {}
-  ParentedObjectBase:
-    GetParentKey: {}
   Region:
     GetBottom: {}
     GetDrawLayer: {}
