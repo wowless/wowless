@@ -76,6 +76,7 @@ local function loadFunctions(api, loader)
   end
 
   local function mkfn(fname, apicfg, nowrap)
+    local incheck = apicfg.inputs and funchecker.makeCheckInputs(fname, apicfg)
     local basefn
     if apicfg.stub then
       local text = ('local api, Mixin = ...; return function() %s end'):format(apicfg.stub)
@@ -85,27 +86,23 @@ local function loadFunctions(api, loader)
     else
       error(('invalid function %q'):format(fname))
     end
-
-    local infn
-    if not apicfg.inputs then
-      infn = basefn
-    else
-      local doCheckInputs = funchecker.makeCheckInputs(fname, apicfg)
-      infn = function(...)
-        return basefn(doCheckInputs(...))
-      end
-    end
-
+    local outcheck = apicfg.impl and apicfg.outputs and funchecker.makeCheckOutputs(fname, apicfg)
     local outfn
-    if not apicfg.impl or not apicfg.outputs then
-      outfn = infn
-    else
-      local doCheckOutputs = funchecker.makeCheckOutputs(fname, apicfg)
+    if not incheck and not outcheck then
+      outfn = basefn
+    elseif incheck and not outcheck then
       outfn = function(...)
-        return doCheckOutputs(infn(...))
+        return basefn(incheck(...))
+      end
+    elseif not incheck and outcheck then
+      outfn = function(...)
+        return outcheck(basefn(...))
+      end
+    else
+      outfn = function(...)
+        return outcheck(basefn(incheck(...)))
       end
     end
-
     if nowrap then
       return outfn
     else
