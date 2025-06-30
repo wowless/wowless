@@ -94,14 +94,18 @@ end
 local function parseRoot(product, root, intrinsics, snapshot)
   local warnings = {}
   local function run(e, tn, tk)
-    assert(e._type == 'ELEMENT', 'invalid xml type ' .. e._type .. ' on child of ' .. tn)
+    if e._type ~= 'ELEMENT' then
+      error('invalid xml type ' .. e._type .. ' on child of ' .. tn)
+    end
     local tname = string.lower(e._name)
     local ty = lang[product][tname] or snapshot[tname]
     if not ty then
       table.insert(warnings, 'unknown type ' .. tname)
       return nil
     end
-    assert(not ty.virtual, tname .. ' is virtual and cannot be instantiated')
+    if ty.virtual then
+      error(tname .. ' is virtual and cannot be instantiated')
+    end
     local extends = false
     for k in pairs(tk) do
       extends = extends or ty.supertypes[k]
@@ -127,11 +131,15 @@ local function parseRoot(product, root, intrinsics, snapshot)
       end
     end
     if ty.text then
-      assert(e._children, 'missing text in ' .. tname)
+      if not e._children then
+        error('missing text in ' .. tname)
+      end
       local texts = {}
       local line
       for _, kid in ipairs(e._children) do
-        assert(kid._type == 'TEXT', 'invalid xml type ' .. kid._type .. ' on ' .. tname)
+        if kid._type ~= 'TEXT' then
+          error('invalid xml type ' .. kid._type .. ' on ' .. tname)
+        end
         table.insert(texts, kid._text)
         line = line or kid._line
       end
