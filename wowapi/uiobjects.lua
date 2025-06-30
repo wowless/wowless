@@ -65,7 +65,12 @@ local function mkBaseUIObjectTypes(api)
 
   local function check(spec, v, isout)
     local vv, errmsg = typechecker(spec, v, isout)
-    return errmsg and error(errmsg, 2) or vv
+    if errmsg then
+      local inout = isout and 'output' or 'input'
+      local name = spec.name and (' %q'):format(spec.name) or ''
+      error(('%s%s %s'):format(inout, name, errmsg), 2)
+    end
+    return vv
   end
 
   local function stubMixin(t, name)
