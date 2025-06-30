@@ -63,9 +63,9 @@ local function mkBaseUIObjectTypes(api)
   local typechecker = require('wowless.typecheck')(api)
   local funchecker = require('wowless.funcheck')(typechecker, api.log)
 
-  local function check(spec, v)
-    local vv, errmsg = typechecker(spec, v)
-    return errmsg and error(errmsg) or vv
+  local function check(spec, v, isout)
+    local vv, errmsg = typechecker(spec, v, isout)
+    return errmsg and error(errmsg, 2) or vv
   end
 
   local function stubMixin(t, name)

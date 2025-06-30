@@ -267,15 +267,22 @@ for k, v in pairs(uiobjectdata) do
         src = src,
       }
     elseif mv.impl and mv.impl.getter then
-      local t = {}
-      for _, f in ipairs(mv.impl.getter) do
-        if uiobjectdata[fieldset[f.name].type] then
-          table.insert(t, 'self.' .. f.name .. ' and self.' .. f.name .. '.luarep')
-        else
-          table.insert(t, 'self.' .. f.name)
-        end
+      local t = { 'local _,_,check=...;' }
+      for i, f in ipairs(mv.impl.getter) do
+        local cf = fieldset[f.name]
+        table.insert(t, 'local spec' .. i .. '=')
+        local output = { -- issue #421
+          nilable = cf.nilable,
+          type = cf.type,
+        }
+        table.insert(t, plprettywrite(output, '') .. ';')
       end
-      methods[mk] = 'return function(self) return ' .. table.concat(t, ',') .. ' end'
+      table.insert(t, 'return function(self)return ')
+      for i, f in ipairs(mv.impl.getter) do
+        table.insert(t, (i == 1 and '' or ',') .. 'check(spec' .. i .. ',self.' .. f.name .. ',true)')
+      end
+      table.insert(t, 'end')
+      methods[mk] = table.concat(t)
     elseif mv.impl and mv.impl.setter then
       local t = { 'local api,toTexture,check,Mixin=...;' }
       for i, f in ipairs(mv.impl.setter) do
