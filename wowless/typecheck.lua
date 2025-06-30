@@ -159,7 +159,10 @@ return function(api)
 
   local function typecheck(spec, value, isout)
     if value == nil then
-      if not spec.nilable and spec.default == nil and not nilables[spec.type] then
+      if spec.default ~= nil then
+        return spec.default
+      end
+      if not spec.nilable and not nilables[spec.type] then
         return nil, 'is not nilable, but nil was passed'
       end
       return nil

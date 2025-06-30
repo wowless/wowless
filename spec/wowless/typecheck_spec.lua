@@ -61,6 +61,10 @@ local tests = {
     spec = { type = 'wat' },
     value = 42,
   },
+  ['number type, nil value, default'] = {
+    out = { 42 },
+    spec = { default = 42, type = 'number' },
+  },
   ['number type, number value'] = {
     out = { 42 },
     spec = { type = 'number' },
