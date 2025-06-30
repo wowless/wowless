@@ -61,7 +61,7 @@ local function mkBaseUIObjectTypes(api)
   end
 
   local typechecker = require('wowless.typecheck')(api)
-  local funchecker = require('wowless.funcheck')(typechecker)
+  local funchecker = require('wowless.funcheck')(typechecker, api.log)
 
   local function check(spec, v)
     local vv, errmsg = typechecker(spec, v)
@@ -96,43 +96,29 @@ local function mkBaseUIObjectTypes(api)
     local mixin = {}
     for mname, method in pairs(cfg.methods) do
       local fname = name .. ':' .. mname
-      local function checkInputs(fn)
-        if not method.inputs then
-          return fn
-        end
-        local sig = method.inputs
-        local nsig = #method.inputs
-        return function(self, ...)
-          local args = {}
-          for i, param in ipairs(sig) do
-            local v, errmsg, iswarn = typechecker(param, (select(i, ...)))
-            if not errmsg then
-              args[i] = v
-            else
-              local msg = ('arg %d (%q) of %q %s'):format(i, tostring(param.name), fname, errmsg)
-              if iswarn then
-                api.log(1, 'warning: ' .. msg)
-              else
-                error(msg)
-              end
-            end
-          end
-          return fn(self, unpack(args, 1, nsig))
-        end
-      end
-      local function checkOutputs(fn)
-        if not method.outputs then
-          return fn
-        end
-        local doCheckOutputs = funchecker.makeCheckOutputs(fname, method)
-        return function(...)
-          return doCheckOutputs(fn(...))
-        end
-      end
+      local incheck = method.inputs and funchecker.makeCheckInputs(fname, method)
+      local outcheck = method.outputs and funchecker.makeCheckOutputs(fname, method)
       local mtext = method.impl or method
       local src = method.src and ('@' .. method.src) or fname
       local fn = assert(loadstring_untainted(mtext, src))(api, toTexture, check, stubMixin)
-      mixin[mname] = checkOutputs(checkInputs(wrap(mname, fn)))
+      local basefn = wrap(fname, fn)
+      local outfn
+      if not incheck and not outcheck then
+        outfn = basefn
+      elseif incheck and not outcheck then
+        outfn = function(self, ...)
+          return basefn(self, incheck(...))
+        end
+      elseif not incheck and outcheck then
+        outfn = function(...)
+          return outcheck(basefn(...))
+        end
+      else
+        outfn = function(self, ...)
+          return outcheck(basefn(self, incheck(...)))
+        end
+      end
+      mixin[mname] = outfn
     end
     uiobjects[name] = {
       cfg = cfg,
