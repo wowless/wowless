@@ -70,8 +70,6 @@ type:
                                   name:
                                     required: true
                                     type: string
-                                  nilable:
-                                    type: boolean
                       - ref: uiobjectimpl
                   inputs:
                     type:

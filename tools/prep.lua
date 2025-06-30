@@ -291,7 +291,7 @@ for k, v in pairs(uiobjectdata) do
           table.insert(t, 'local spec' .. i .. '=')
           local input = mv.inputs and mv.inputs[i]
             or { -- issue #416
-              nilable = cf.type == 'boolean' or cf.nilable or f.nilable or nil,
+              nilable = cf.type == 'boolean' or cf.nilable or nil,
               type = cf.type,
             }
           table.insert(t, plprettywrite(input, '') .. ';')
