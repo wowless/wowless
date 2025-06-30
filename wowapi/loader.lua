@@ -69,7 +69,7 @@ local function loadFunctions(api, loader)
 
   local bubblewrap = require('wowless.bubblewrap')
   local typechecker = require('wowless.typecheck')(api)
-  local funchecker = require('wowless.funcheck')(typechecker)
+  local funchecker = require('wowless.funcheck')(typechecker, api.log)
 
   local function stubMixin(t, name)
     return util.mixin(t, api.env[name])
@@ -86,33 +86,13 @@ local function loadFunctions(api, loader)
       error(('invalid function %q'):format(fname))
     end
 
-    local edepth = 2
     local infn
     if not apicfg.inputs then
       infn = basefn
     else
-      local sig = apicfg.inputs
-      local nsig = #apicfg.inputs
+      local doCheckInputs = funchecker.makeCheckInputs(fname, apicfg)
       infn = function(...)
-        local args = {}
-        for i, param in ipairs(sig) do
-          local v, errmsg, iswarn = typechecker(param, (select(i, ...)))
-          if not errmsg then
-            args[i] = v
-          else
-            local msg = ('arg %d (%q) of %q %s'):format(i, tostring(param.name), fname, errmsg)
-            if iswarn then
-              api.log(1, 'warning: ' .. msg)
-            else
-              error(msg)
-            end
-          end
-        end
-        if select('#', ...) > nsig then
-          local d = debug.getinfo(edepth)
-          api.log(1, 'warning: too many arguments passed to %s at %s:%d', fname, d.source:sub(2), d.currentline)
-        end
-        return basefn(unpack(args, 1, nsig))
+        return basefn(doCheckInputs(...))
       end
     end
 
@@ -120,7 +100,6 @@ local function loadFunctions(api, loader)
     if not apicfg.impl or not apicfg.outputs then
       outfn = infn
     else
-      edepth = edepth + 1
       local doCheckOutputs = funchecker.makeCheckOutputs(fname, apicfg)
       outfn = function(...)
         return doCheckOutputs(infn(...))
@@ -130,7 +109,6 @@ local function loadFunctions(api, loader)
     if nowrap then
       return outfn
     else
-      edepth = edepth + 1
       return bubblewrap(outfn)
     end
   end

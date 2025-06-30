@@ -1,4 +1,29 @@
-return function(typechecker)
+return function(typechecker, log)
+  local function makeCheckInputs(fname, apicfg)
+    local sig = apicfg.inputs
+    local nsig = #apicfg.inputs
+    return function(...)
+      local args = {}
+      for i, param in ipairs(sig) do
+        local v, errmsg, iswarn = typechecker(param, (select(i, ...)))
+        if not errmsg then
+          args[i] = v
+        else
+          local msg = ('arg %d (%q) of %q %s'):format(i, tostring(param.name), fname, errmsg)
+          if iswarn then
+            log(1, 'warning: ' .. msg)
+          else
+            error(msg)
+          end
+        end
+      end
+      if select('#', ...) > nsig then
+        local d = debug.getinfo(4)
+        log(1, 'warning: too many arguments passed to %s at %s:%d', fname, d.source:sub(2), d.currentline)
+      end
+      return unpack(args, 1, nsig)
+    end
+  end
   local function makeCheckOutputs(fname, apicfg)
     local mayreturnnothing = apicfg.mayreturnnothing
     local mayreturnnils = apicfg.mayreturnnils
@@ -52,6 +77,7 @@ return function(typechecker)
     end
   end
   return {
+    makeCheckInputs = makeCheckInputs,
     makeCheckOutputs = makeCheckOutputs,
   }
 end
