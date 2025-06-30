@@ -3540,7 +3540,13 @@ LayeredRegion:
         setter:
         - name: layer
         - name: sublevel
-          nilable: true
+      inputs:
+      - name: layer
+        type: DrawLayer
+      - default: 0
+        name: sublevel
+        type: number
+      outputs: {}
     SetVertexColor:
       impl: LayeredRegion/SetVertexColor
   virtual: true
