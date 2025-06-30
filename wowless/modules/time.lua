@@ -1,3 +1,5 @@
+local bubblewrap = require('wowless.bubblewrap')
+
 return function(api)
   local stamp = 1234
   local timers = require('minheap'):new()
@@ -8,13 +10,13 @@ return function(api)
   local state = setmetatable({}, { __mode = 'k' })
 
   local index = {
-    Cancel = debug.newcfunction(function(self)
+    Cancel = bubblewrap(function(self)
       state[self].cancelled = true
     end),
-    Invoke = debug.newcfunction(function(self, ...)
+    Invoke = bubblewrap(function(self, ...)
       state[self].callback(...)
     end),
-    IsCancelled = debug.newcfunction(function(self)
+    IsCancelled = bubblewrap(function(self)
       return state[self].cancelled
     end),
   }
