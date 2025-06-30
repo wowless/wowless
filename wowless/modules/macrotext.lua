@@ -2,10 +2,8 @@ return function(api)
   local callback
   return {
     RunMacroText = function(cmd)
-      if callback then
-        for _, line in ipairs({ strsplit('\n', cmd) }) do
-          api.CallSandbox(callback, line)
-        end
+      for _, line in ipairs({ strsplit('\n', cmd) }) do
+        api.CallSandbox(callback, line)
       end
     end,
     SetCallback = function(cb)
