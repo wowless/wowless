@@ -60,54 +60,6 @@ local lang = setmetatable({}, {
   end,
 })
 
-local attrBasedElementMT = {
-  __index = (function()
-    local fields = {
-      attr = true,
-      kids = true,
-      line = true,
-      text = true,
-      type = true,
-    }
-    return function(_, k)
-      assert(fields[k], 'invalid table key ' .. k)
-    end
-  end)(),
-  __metatable = 'attrBasedElementMT',
-  __newindex = function()
-    error('cannot add fields')
-  end,
-}
-
-local attrMTs = setmetatable({}, {
-  __index = function(t, k)
-    local result = {}
-    for name, spec in pairs(lang[k]) do
-      -- TODO be more defensive in loader.lua and remove these
-      local attrs = {
-        inherits = true,
-        intrinsic = true,
-        name = true,
-        virtual = true,
-      }
-      for attr in pairs(spec.attributes) do
-        attrs[attr] = true
-      end
-      result[name] = {
-        __index = function(_, kk)
-          assert(attrs[kk], 'invalid table key ' .. kk)
-        end,
-        __metatable = 'attrMT:' .. name,
-        __newindex = function()
-          error('cannot add fields')
-        end,
-      }
-    end
-    t[k] = result
-    return result
-  end,
-})
-
 local attributeTypes = {
   boolean = function(s)
     local x = string.lower(s)
@@ -183,13 +135,13 @@ local function parseRoot(product, root, intrinsics, snapshot)
         table.insert(texts, kid._text)
         line = line or kid._line
       end
-      return setmetatable({
-        attr = setmetatable(resultAttrs, attrMTs[product][tname]),
+      return {
+        attr = resultAttrs,
         kids = {},
         line = line,
         text = #texts > 0 and table.concat(texts, '\n') or nil,
         type = tname,
-      }, attrBasedElementMT)
+      }
     else
       local resultKids = {}
       for _, kid in ipairs(e._children or {}) do
@@ -210,11 +162,11 @@ local function parseRoot(product, root, intrinsics, snapshot)
           text = ty.text,
         }
       end
-      return setmetatable({
-        attr = setmetatable(resultAttrs, attrMTs[product][tname]),
+      return {
+        attr = resultAttrs,
         kids = resultKids,
         type = tname,
-      }, attrBasedElementMT)
+      }
     end
   end
   local result = run(root, 'toplevel', {
