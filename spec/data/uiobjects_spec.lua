@@ -120,6 +120,9 @@ describe('uiobjects', function()
                         assert.True(hasMember(k, 'fields', field.name))
                       end
                     end)
+                    it('has both inputs and outputs, or neither', function()
+                      assert.same(type(mv.inputs), type(mv.outputs))
+                    end)
                     if mv.impl.getter then
                       it('has the right prototype', function()
                         local outputs = {}
