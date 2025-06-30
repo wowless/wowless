@@ -1,7 +1,7 @@
 local traceback = require('wowless.ext').traceback
 local hlist = require('wowless.hlist')
 
-local function new(log, maxErrors, product)
+local function new(log, maxErrors, product, loglevel)
   local env = {}
   local errors = 0
   local frames = hlist()
@@ -257,7 +257,9 @@ local function new(log, maxErrors, product)
     if id then
       ud:SetID(id)
     end
-    log(3, 'running load scripts on %s named %s', objtype.name, GetDebugName(ud))
+    if loglevel >= 3 then
+      log(3, 'running load scripts on %s named %s', objtype.name, GetDebugName(ud))
+    end
     RunScript(ud, 'OnLoad')
     if InheritsFrom(typename, 'region') and ud:IsVisible() then
       RunScript(ud, 'OnShow')

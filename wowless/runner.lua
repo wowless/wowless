@@ -9,7 +9,7 @@ local function run(cfg)
       io.write(string.format('[%.3f] ' .. fmt .. '\n', os.clock() - time0, ...))
     end
   end
-  local api = require('wowless.api').new(log, cfg.maxErrors, cfg.product)
+  local api = require('wowless.api').new(log, cfg.maxErrors, cfg.product, cfg.loglevel or 0)
 
   -- begin WARNING WARNING WARNING
   --[[

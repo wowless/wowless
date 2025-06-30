@@ -1,6 +1,6 @@
 describe('structures', function()
   for _, p in ipairs(require('build.data.products')) do
-    local api = require('wowless.api').new(function() end, 0, p)
+    local api = require('wowless.api').new(function() end, 0, p, 0)
     local typechecker = require('wowless.typecheck')(api)
     local function typecheck(spec, val)
       local value, errmsg = typechecker(spec, val, true)
