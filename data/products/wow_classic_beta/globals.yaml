@@ -5707,6 +5707,13 @@ Enum:
     MaxValue: 1
     MinValue: 1
     NumValues: 1
+  SpecializationSystem:
+    ChrSpecialization: 1
+    TalentTab: 0
+  SpecializationSystemMeta:
+    MaxValue: 1
+    MinValue: 0
+    NumValues: 2
   SpellBookItemType:
     Flyout: 4
     FutureSpell: 2
@@ -6586,6 +6593,7 @@ Enum:
     IneligibleMapID: 20076
     IneligibleTargetRealm: 20022
     InvalidDestinationAccount: 6
+    InvalidName: 777777700
     InvalidSourceAccount: 7
     IsNpeRestricted: 20091
     LastCustomizeTooRecent: 20058

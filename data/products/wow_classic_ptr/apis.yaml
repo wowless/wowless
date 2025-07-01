@@ -17187,6 +17187,16 @@ GetLegacyRaidDifficultyID:
   - name: result
     nilable: true
     type: number
+GetLevelUpInstances:
+  inputs:
+  - name: currPlayerLevel
+    type: number
+  - name: isRaid
+    type: boolean
+  outputs:
+  - name: instances
+    type:
+      arrayof: number
 GetLFDChoiceCollapseState:
   inputs:
   - name: LFGCollapseList

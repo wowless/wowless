@@ -6528,6 +6528,10 @@ UNIT_FORM_CHANGED:
   payload:
   - name: unitTarget
     type: unit
+UNIT_GUILD_LEVEL:
+  payload:
+  - name: newLevel
+    type: number
 UNIT_HAPPINESS:
   payload:
   - name: unitTarget

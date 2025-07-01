@@ -11139,7 +11139,7 @@ C_SpecializationInfo.GetActiveSpecGroup:
     type: number
 C_SpecializationInfo.GetNumSpecializationsForClassID:
   inputs:
-  - name: specID
+  - name: classID
     type: number
   outputs:
   - name: specCount
@@ -17187,6 +17187,16 @@ GetLegacyRaidDifficultyID:
   - name: result
     nilable: true
     type: number
+GetLevelUpInstances:
+  inputs:
+  - name: currPlayerLevel
+    type: number
+  - name: isRaid
+    type: boolean
+  outputs:
+  - name: instances
+    type:
+      arrayof: number
 GetLFDChoiceCollapseState:
   inputs:
   - name: LFGCollapseList
@@ -20075,6 +20085,11 @@ HasLoadedCUFProfiles:
   inputs: {}
   outputs:
   - type: boolean
+HasLootSpecializations:
+  inputs: {}
+  outputs:
+  - name: hasLootSpecializations
+    type: boolean
 HasNewMail:
   inputs: {}
   outputs:
