@@ -11,6 +11,9 @@ describe('apis', function()
               assert.Truthy(api.impl)
             end
           end)
+          it('has outputs if it has inputs', function()
+            assert.Truthy(not api.inputs or api.outputs)
+          end)
           describe('inputs', function()
             for k, input in ipairs(api.inputs or {}) do
               describe(k, function()
