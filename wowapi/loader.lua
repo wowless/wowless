@@ -75,7 +75,7 @@ local function loadFunctions(api, loader)
     return util.mixin(t, api.env[name])
   end
 
-  local function mkfn(fname, apicfg, nowrap)
+  local function mkfn(fname, apicfg)
     local incheck = apicfg.inputs and funchecker.makeCheckInputs(fname, apicfg)
     local basefn
     if apicfg.stub then
@@ -87,26 +87,20 @@ local function loadFunctions(api, loader)
       error(('invalid function %q'):format(fname))
     end
     local outcheck = apicfg.impl and apicfg.outputs and funchecker.makeCheckOutputs(fname, apicfg)
-    local outfn
     if not incheck and not outcheck then
-      outfn = basefn
+      return basefn
     elseif incheck and not outcheck then
-      outfn = function(...)
+      return function(...)
         return basefn(incheck(...))
       end
     elseif not incheck and outcheck then
-      outfn = function(...)
+      return function(...)
         return outcheck(basefn(...))
       end
     else
-      outfn = function(...)
+      return function(...)
         return outcheck(basefn(incheck(...)))
       end
-    end
-    if nowrap then
-      return outfn
-    else
-      return bubblewrap(outfn)
     end
   end
 
@@ -118,8 +112,9 @@ local function loadFunctions(api, loader)
       util.tset(fns, fn, v)
       util.tset(rawfns, fn, v)
     else
-      util.tset(fns, fn, mkfn(fn, apicfg))
-      util.tset(rawfns, fn, mkfn(fn, apicfg, true))
+      local v = mkfn(fn, apicfg)
+      util.tset(fns, fn, bubblewrap(v))
+      util.tset(rawfns, fn, v)
     end
   end
   api.log(1, 'functions loaded')
