@@ -300,7 +300,7 @@ GetTalentInfo_Vanilla:
   - api
   sqls:
   - GetTalentInfo_Vanilla
-GetTalentPrereqs_Vanilla:
+GetTalentPrereqs:
   frameworks:
   - api
   sqls:

@@ -19422,12 +19422,22 @@ GetTalentGroupRole: {}
 GetTalentInfoByID: {}
 GetTalentLink: {}
 GetTalentPrereqs:
-  impl: GetTalentPrereqs_Vanilla
+  impl: GetTalentPrereqs
   inputs:
   - name: tabIndex
     type: number
   - name: talentIndex
     type: number
+  outputs:
+  - name: tier
+    type: number
+  - name: column
+    type: number
+  - name: isLearnable
+    type: oneornil
+  - name: isPreviewLearnable
+    type: oneornil
+  outstride: 4
 GetTalentTierInfo: {}
 GetTalentTreeEarlySpells: {}
 GetTalentTreeRoles: {}
