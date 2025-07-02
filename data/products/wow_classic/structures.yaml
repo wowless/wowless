@@ -33,6 +33,8 @@ AnchorBinding:
       type: Region
 AppearanceSourceInfo:
   fields:
+    canDisplayOnPlayer:
+      type: boolean
     categoryID:
       default: 0
       type:
@@ -149,6 +151,53 @@ C_ActionBar.ActionUsableState:
       type: number
     usable:
       type: boolean
+C_AddOnProfiler.AddOnPerformanceMessage:
+  fields:
+    addOnName:
+      nilable: true
+      type: string
+    metric:
+      type:
+        enum: AddOnProfilerMetric
+    metricValue:
+      type: number
+    thresholdValue:
+      type: number
+    type:
+      type:
+        enum: AddOnPerformanceMessageType
+C_AddOnProfiler.AddOnProfilerCallEvent:
+  fields:
+    allocatedBytes:
+      type: number
+    deallocatedBytes:
+      type: number
+    elapsedMilliseconds:
+      type: number
+    elapsedTicks:
+      type: number
+    name:
+      type: string
+C_AddOnProfiler.AddOnProfilerCallResults:
+  fields:
+    allocatedBytes:
+      type: number
+    deallocatedBytes:
+      type: number
+    elapsedMilliseconds:
+      type: number
+    elapsedTicks:
+      type: number
+    events:
+      type:
+        arrayof:
+          structure: C_AddOnProfiler.AddOnProfilerCallEvent
+C_AddOnProfiler.AddOnProfilerResult:
+  fields:
+    addOnName:
+      type: string
+    metricValue:
+      type: number
 C_AreaPoiInfo.AreaPOIInfo:
   fields:
     addPaddingAboveTooltipWidgets:
@@ -597,6 +646,103 @@ C_Calendar.CalendarRaidInfo:
     time:
       type:
         structure: CalendarTime
+C_ChallengeMode.ChallengeCompletionInfo:
+  fields:
+    isAffixRecord:
+      default: false
+      type: boolean
+    isEligibleForScore:
+      default: false
+      type: boolean
+    isMapRecord:
+      default: false
+      type: boolean
+    keystoneUpgradeLevels:
+      default: 0
+      type: number
+    level:
+      default: 0
+      type: number
+    mapChallengeModeID:
+      default: 0
+      type: number
+    members:
+      type:
+        arrayof:
+          structure: C_ChallengeMode.ChallengeModeCompletionMemberInfo
+    newOverallDungeonScore:
+      nilable: true
+      type: number
+    oldOverallDungeonScore:
+      nilable: true
+      type: number
+    onTime:
+      default: false
+      type: boolean
+    practiceRun:
+      default: false
+      type: boolean
+    time:
+      default: 0
+      type: number
+C_ChallengeMode.ChallengeModeBestTime:
+  fields:
+    durationMs:
+      type: number
+    mapChallengeModeID:
+      type: number
+    members:
+      type:
+        arrayof:
+          structure: C_ChallengeMode.ChallengeModeBestTimeMember
+C_ChallengeMode.ChallengeModeBestTimeMember:
+  fields:
+    classFileName:
+      type: string
+    className:
+      type: string
+    name:
+      type: string
+    specializationID:
+      type: number
+C_ChallengeMode.ChallengeModeCompletionMemberInfo:
+  fields:
+    memberGUID:
+      type: string
+    name:
+      type: string
+C_ChallengeMode.ChallengeModeGuildAttemptMember:
+  fields:
+    classFileName:
+      type: string
+    name:
+      type: string
+C_ChallengeMode.ChallengeModeGuildTopAttempt:
+  fields:
+    classFileName:
+      type: string
+    isYou:
+      type: boolean
+    keystoneLevel:
+      type: number
+    mapChallengeModeID:
+      type: number
+    members:
+      type:
+        arrayof:
+          structure: C_ChallengeMode.ChallengeModeGuildAttemptMember
+    name:
+      type: string
+C_ChallengeMode.ChallengeModeReward:
+  fields:
+    displayInfoID:
+      type: number
+    isCurrency:
+      type: boolean
+    quantity:
+      type: number
+    rewardID:
+      type: number
 C_Club.ClubInfo:
   fields:
     avatarId:
@@ -1216,6 +1362,25 @@ C_Container.ItemQuestInfo:
     questID:
       nilable: true
       type: number
+C_CooldownViewer.CooldownViewerCooldown:
+  fields:
+    charges:
+      type: boolean
+    flags:
+      type:
+        enum: CooldownSetSpellFlags
+    hasAura:
+      type: boolean
+    linkedSpellIDs:
+      type:
+        arrayof: number
+    overrideSpellID:
+      nilable: true
+      type: number
+    selfAura:
+      type: boolean
+    spellID:
+      type: number
 C_CreatureInfo.ClassInfo:
   fields:
     classFile:
@@ -1223,6 +1388,21 @@ C_CreatureInfo.ClassInfo:
     classID:
       type: number
     className:
+      type: string
+C_CreatureInfo.CreatureFamilyInfo:
+  fields:
+    iconFile:
+      nilable: true
+      type: number
+    id:
+      type: number
+    name:
+      type: string
+C_CreatureInfo.CreatureTypeInfo:
+  fields:
+    id:
+      type: number
+    name:
       type: string
 C_CreatureInfo.FactionInfo:
   fields:
@@ -1336,6 +1516,16 @@ C_DeathInfo.SelfResurrectOption:
         enum: SelfResurrectOptionType
     priority:
       type: number
+C_EncodingUtil.CBORSerializationOptions:
+  fields:
+    ignoreSerializationErrors:
+      default: false
+      type: boolean
+C_EncodingUtil.JSONSerializationOptions:
+  fields:
+    ignoreSerializationErrors:
+      default: false
+      type: boolean
 C_EncounterJournal.DungeonEntranceMapInfo:
   fields:
     areaPoiID:
@@ -1747,6 +1937,22 @@ C_GamePad.GamePadStickConfig:
       type: number
     stick:
       type: string
+C_GameRules.GameModeDisplayInfo:
+  fields:
+    characterCreateExtraHeight:
+      type: number
+    characterCreateOuterBorder:
+      type: number
+    logo:
+      type: number
+    logoHeight:
+      type: number
+    logoShrunkenHeight:
+      type: number
+    logoUsesDarkBackdrop:
+      type: boolean
+    logoVerticalOffset:
+      type: number
 C_GenericWidgetDisplay.GenericWidgetDisplayFrameInfo:
   fields:
     closeButtonText:
@@ -1802,7 +2008,6 @@ C_GossipInfo.GossipOptionUIInfo:
       nilable: true
       type: string
     flags:
-      stub: 0
       type: number
     gossipOptionID:
       nilable: true
@@ -1890,6 +2095,136 @@ C_GuildInfo.GuildNewsInfo:
       nilable: true
       type: string
     year:
+      type: number
+C_GuildInfo.GuildRenameStatus:
+  fields:
+    currentGuildMoney:
+      type: number
+    isNameChangeEnabled:
+      type: boolean
+    isPlayerGuildMaster:
+      type: boolean
+    nextRenameTime:
+      type: number
+    oldGuildName:
+      type: string
+    refundAmount:
+      type: number
+    refundEligibleEndTime:
+      type: number
+    renamePrice:
+      type: number
+    reservedName:
+      type: string
+    reservedNameExpirationTime:
+      type: number
+    result:
+      type:
+        enum: GuildErrorType
+C_ItemUpgrade.ItemUpgradeCostDiscountInfo:
+  fields:
+    discountHighWatermark:
+      type: number
+    doesCurrentCharacterMeetHighWatermark:
+      type: boolean
+    isAccountWideDiscount:
+      type: boolean
+    isDiscounted:
+      type: boolean
+    isPartialTwoHandDiscount:
+      type: boolean
+C_ItemUpgrade.ItemUpgradeCurrencyCost:
+  fields:
+    cost:
+      type: number
+    currencyID:
+      type: number
+    discountInfo:
+      type:
+        structure: C_ItemUpgrade.ItemUpgradeCostDiscountInfo
+C_ItemUpgrade.ItemUpgradeItemCost:
+  fields:
+    cost:
+      type: number
+    discountInfo:
+      type:
+        structure: C_ItemUpgrade.ItemUpgradeCostDiscountInfo
+    itemID:
+      type: number
+C_ItemUpgrade.ItemUpgradeItemInfo:
+  fields:
+    currUpgrade:
+      type: number
+    customUpgradeString:
+      nilable: true
+      type: string
+    displayQuality:
+      type: number
+    highWatermarkSlot:
+      type: number
+    iconID:
+      type: number
+    itemUpgradeable:
+      type: boolean
+    maxItemLevel:
+      type: number
+    maxUpgrade:
+      type: number
+    minItemLevel:
+      type: number
+    name:
+      type: string
+    upgradeCostTypesForSeason:
+      type:
+        arrayof:
+          structure: C_ItemUpgrade.ItemUpgradeSeasonalCostType
+    upgradeLevelInfos:
+      type:
+        arrayof:
+          structure: C_ItemUpgrade.ItemUpgradeLevelInfo
+C_ItemUpgrade.ItemUpgradeLevelInfo:
+  fields:
+    currencyCostsToUpgrade:
+      type:
+        arrayof:
+          structure: C_ItemUpgrade.ItemUpgradeCurrencyCost
+    displayQuality:
+      type: number
+    failureMessage:
+      nilable: true
+      type: string
+    itemCostsToUpgrade:
+      type:
+        arrayof:
+          structure: C_ItemUpgrade.ItemUpgradeItemCost
+    itemLevelIncrement:
+      type: number
+    levelStats:
+      type:
+        arrayof:
+          structure: C_ItemUpgrade.ItemUpgradeStat
+    upgradeLevel:
+      type: number
+C_ItemUpgrade.ItemUpgradeSeasonalCostType:
+  fields:
+    currencyID:
+      nilable: true
+      type: number
+    itemID:
+      nilable: true
+      type: number
+    orderIndex:
+      type: number
+    sourceString:
+      nilable: true
+      type: string
+C_ItemUpgrade.ItemUpgradeStat:
+  fields:
+    active:
+      type: boolean
+    displayString:
+      type: string
+    statValue:
       type: number
 C_LFGInfo.LFGDungeonInfo:
   fields:
@@ -2489,6 +2824,125 @@ C_MountJournal.MountCreatureDisplayInfo:
       type: number
     isVisible:
       type: boolean
+C_MythicPlus.MapSeasonBestInfo:
+  fields:
+    affixIDs:
+      type:
+        arrayof: number
+    completionDate:
+      type:
+        structure: C_MythicPlus.MythicPlusDate
+    dungeonScore:
+      type: number
+    durationSec:
+      type: number
+    level:
+      type: number
+    members:
+      type:
+        arrayof:
+          structure: C_MythicPlus.MythicPlusMember
+C_MythicPlus.MythicPlusDate:
+  fields:
+    day:
+      type: number
+    hour:
+      type: number
+    minute:
+      type: number
+    month:
+      type: number
+    year:
+      type: number
+C_MythicPlus.MythicPlusKeystoneAffix:
+  fields:
+    id:
+      type: number
+    seasonID:
+      type: number
+C_MythicPlus.MythicPlusMember:
+  fields:
+    classID:
+      type: number
+    name:
+      nilable: true
+      type: string
+    specID:
+      type: number
+C_MythicPlus.MythicPlusRunInfo:
+  fields:
+    completed:
+      type: boolean
+    level:
+      type: number
+    mapChallengeModeID:
+      type: number
+    runScore:
+      type: number
+    thisWeek:
+      type: boolean
+C_MythicPlus.SeasonTimeInfo:
+  fields:
+    bestTime:
+      type: number
+    lastTime:
+      type: number
+    medal:
+      type: number
+C_PaperDollInfo.InspectRatedBGData:
+  fields:
+    played:
+      type: number
+    rating:
+      type: number
+    won:
+      type: number
+C_PetJournal.PetAbilityLevelInfo:
+  fields:
+    abilityID:
+      type: number
+    level:
+      type: number
+C_PetJournal.PetJournalPetInfo:
+  fields:
+    canBattle:
+      type: boolean
+    creatureID:
+      type: number
+    customName:
+      nilable: true
+      type: string
+    description:
+      type: string
+    displayID:
+      type: number
+    icon:
+      type: number
+    isFavorite:
+      type: boolean
+    isWild:
+      type: boolean
+    maxXP:
+      type: number
+    name:
+      nilable: true
+      type: string
+    obtainable:
+      type: boolean
+    petLevel:
+      type: number
+    petType:
+      type: number
+    sourceText:
+      type: string
+    speciesID:
+      type: number
+    tradable:
+      type: boolean
+    unique:
+      type: boolean
+    xp:
+      type: number
 C_PvP.BattlefieldCurrencyReward:
   fields:
     id:
@@ -2529,15 +2983,42 @@ C_PvP.BattlefieldVehicleInfo:
       type: number
     y:
       type: number
-C_PvP.RoleShortageReward:
+C_PvP.RandomBGInfo:
   fields:
-    rewardItemID:
+    bgID:
       type: number
-    rewardSpellID:
+    bgIndex:
       type: number
-    validRoles:
-      type:
-        arrayof: string
+    canQueue:
+      type: boolean
+    hasRandomWinToday:
+      type: boolean
+    maxLevel:
+      type: number
+    minLevel:
+      type: number
+    name:
+      type: string
+C_PvP.RoleShortageReward:
+  fields: {}
+C_PvP.WorldPVPBattlegroundInfo:
+  fields:
+    bgID:
+      type: number
+    canEnter:
+      type: boolean
+    canQueue:
+      type: boolean
+    isActive:
+      type: boolean
+    maxLevel:
+      type: number
+    minLevel:
+      type: number
+    name:
+      type: string
+    startTime:
+      type: number
 C_QuestInfoSystem.QuestRewardSpellInfo:
   fields:
     garrFollowerID:
@@ -2567,6 +3048,9 @@ C_QuestLog.QuestObjectiveInfo:
     numFulfilled:
       type: number
     numRequired:
+      type: number
+    objectiveType:
+      nilable: true
       type: number
     text:
       type: string
@@ -3023,6 +3507,81 @@ C_ScriptedAnimations.ScriptedAnimationEffect:
       type: number
     yawRadians:
       type: number
+C_SpecializationInfo.TalentInfoQuery:
+  fields:
+    column:
+      nilable: true
+      type: number
+    groupIndex:
+      nilable: true
+      type: number
+    isInspect:
+      default: false
+      type: boolean
+    isPet:
+      default: false
+      type: boolean
+    specializationIndex:
+      nilable: true
+      type: number
+    talentIndex:
+      nilable: true
+      type: number
+    target:
+      nilable: true
+      type: unit
+    tier:
+      nilable: true
+      type: number
+C_SpecializationInfo.TalentInfoResult:
+  fields:
+    available:
+      default: false
+      type: boolean
+    column:
+      type: number
+    grantedByAura:
+      default: false
+      type: boolean
+    hasGoldBorder:
+      default: false
+      type: boolean
+    icon:
+      type: number
+    isExceptional:
+      default: false
+      type: boolean
+    isPVPTalentUnlocked:
+      default: false
+      type: boolean
+    known:
+      default: false
+      type: boolean
+    maxRank:
+      type: number
+    meetsPrereq:
+      default: false
+      type: boolean
+    meetsPreviewPrereq:
+      default: false
+      type: boolean
+    name:
+      type: string
+    previewRank:
+      type: number
+    rank:
+      type: number
+    selected:
+      default: false
+      type: boolean
+    spellID:
+      default: 0
+      type: number
+    talentID:
+      default: 0
+      type: number
+    tier:
+      type: number
 C_Spell.SpellInfo:
   fields:
     castTime:
@@ -3079,6 +3638,8 @@ C_Texture.AtlasInfo:
   fields:
     bottomTexCoord:
       type: number
+    elementName:
+      type: string
     file:
       nilable: true
       type: number
@@ -3402,6 +3963,10 @@ C_TransmogCollection.TransmogAppearanceInfoBySourceData:
       type: boolean
     appearanceNumSources:
       type: number
+    canDisplayOnPlayer:
+      type: boolean
+    isAnySourceValidForPlayer:
+      type: boolean
     meetsTransmogPlayerCondition:
       type: boolean
     sourceIsCollected:
@@ -3431,6 +3996,8 @@ C_TransmogCollection.TransmogCategoryAppearanceInfo:
     alwaysShowItem:
       nilable: true
       type: boolean
+    canDisplayOnPlayer:
+      type: boolean
     exclusions:
       type: number
     hasActiveRequiredHoliday:
@@ -3445,13 +4012,52 @@ C_TransmogCollection.TransmogCategoryAppearanceInfo:
       type: boolean
     isUsable:
       type: boolean
-    restrictedSlotID:
-      nilable: true
-      type: number
     uiOrder:
       type: number
     visualID:
       type: number
+C_TransmogSets.TransmogSetInfo:
+  fields:
+    baseSetID:
+      nilable: true
+      type: number
+    classMask:
+      type: number
+    collected:
+      type: boolean
+    description:
+      nilable: true
+      type: string
+    expansionID:
+      type: number
+    favorite:
+      type: boolean
+    hiddenUntilCollected:
+      type: boolean
+    label:
+      nilable: true
+      type: string
+    limitedTimeSet:
+      type: boolean
+    name:
+      type: string
+    patchID:
+      type: number
+    requiredFaction:
+      nilable: true
+      type: string
+    setID:
+      type: number
+    uiOrder:
+      type: number
+    validForCharacter:
+      type: boolean
+C_TransmogSets.TransmogSetPrimaryAppearanceInfo:
+  fields:
+    appearanceID:
+      type: number
+    collected:
+      type: boolean
 C_UIColor.DBColorExport:
   fields:
     baseTag:
@@ -3987,6 +4593,16 @@ ConsoleCommandInfo:
       type: string
     scriptParameters:
       type: string
+CreateFontFamilyMemberInfo:
+  fields:
+    alphabet:
+      type: string
+    file:
+      type: string
+    flags:
+      type: string
+    height:
+      type: number
 ExpansionDisplayInfo:
   fields:
     banner:
@@ -4103,6 +4719,30 @@ ModelLight:
     point:
       type:
         structure: vector3
+MythicPlusAffixScoreInfo:
+  fields:
+    durationSec:
+      type: number
+    level:
+      type: number
+    name:
+      type: string
+    overTime:
+      type: boolean
+    score:
+      type: number
+MythicPlusRatingLinkInfo:
+  fields:
+    completedInTime:
+      type: number
+    dungeonScore:
+      type: number
+    level:
+      type: number
+    mapChallengeModeID:
+      type: number
+    name:
+      type: string
 PlayerInfoCharacterData:
   fields:
     alternateFormRaceData:
@@ -4206,6 +4846,19 @@ SpellChargeInfo:
       type: number
     maxCharges:
       type: number
+SpellCooldownInfo:
+  fields:
+    activeCategory:
+      nilable: true
+      type: number
+    duration:
+      type: number
+    isEnabled:
+      type: boolean
+    modRate:
+      type: number
+    startTime:
+      type: number
 SpellPowerCostInfo:
   fields:
     cost:
@@ -4283,6 +4936,8 @@ UnitPowerBarInfo:
     anchorTop:
       type: boolean
     animateNumbers:
+      type: boolean
+    attachTooltipToBar:
       type: boolean
     barType:
       type: number

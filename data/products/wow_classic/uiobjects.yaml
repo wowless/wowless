@@ -208,6 +208,26 @@ Actor:
       - name: pitch
         type: number
       outputs: {}
+    SetPlayerModelFromGlues:
+      inputs:
+      - name: characterIndex
+        nilable: true
+        type: number
+      - default: false
+        name: sheatheWeapons
+        type: boolean
+      - default: true
+        name: autoDress
+        type: boolean
+      - default: false
+        name: hideWeapons
+        type: boolean
+      - default: true
+        name: usePlayerNativeForm
+        type: boolean
+      outputs:
+      - name: success
+        type: boolean
     SetPosition:
       inputs:
       - name: positionX
@@ -251,6 +271,21 @@ Actor:
     StopAnimationKit:
       inputs: {}
       outputs: {}
+    TryOn:
+      inputs:
+      - name: itemLinkOrItemModifiedAppearanceID
+        type: string
+      - name: handSlotName
+        nilable: true
+        type: string
+      - default: 0
+        name: spellEnchantmentID
+        type: number
+      outputs:
+      - name: reason
+        nilable: true
+        type:
+          enum: ItemTryOnReason
   objectType: ModelSceneActor
 Alpha:
   fields: {}
@@ -1447,6 +1482,11 @@ Cooldown:
       outputs:
       - name: edgeScale
         type: number
+    GetHideCountdownNumbers:
+      inputs: {}
+      outputs:
+      - name: hideNumbers
+        type: boolean
     GetReverse:
       inputs: {}
       outputs:
@@ -1457,6 +1497,11 @@ Cooldown:
       outputs:
       - name: rotationRadians
         type: number
+    GetUseAuraDisplayTime:
+      inputs: {}
+      outputs:
+      - name: useAuraDisplayTime
+        type: boolean
     IsPaused:
       inputs: {}
       outputs:
@@ -1528,6 +1573,18 @@ Cooldown:
         name: drawSwipe
         type: boolean
       outputs: {}
+    SetEdgeColor:
+      inputs:
+      - name: colorR
+        type: number
+      - name: colorG
+        type: number
+      - name: colorB
+        type: number
+      - name: a
+        nilable: true
+        type: number
+      outputs: {}
     SetEdgeScale:
       inputs:
       - name: scale
@@ -1579,6 +1636,12 @@ Cooldown:
         type:
           structure: vector2
       outputs: {}
+    SetUseAuraDisplayTime:
+      inputs:
+      - default: false
+        name: useAuraDisplayTime
+        type: boolean
+      outputs: {}
     SetUseCircularEdge:
       inputs:
       - default: false
@@ -1609,6 +1672,7 @@ DressUpModel:
       inputs:
       - name: inventorySlot
         type: number
+      mayreturnnothing: true
       outputs:
       - name: itemTransmogInfo
         type:
@@ -1791,6 +1855,7 @@ EditBox:
         type: number
     GetDisplayText:
       inputs: {}
+      mayreturnnothing: true
       outputs:
       - name: displayText
         type: string
@@ -1843,8 +1908,14 @@ EditBox:
         type: number
     GetNumLetters:
       inputs: {}
+      mayreturnnothing: true
       outputs:
       - name: numLetters
+        type: number
+    GetNumLines:
+      inputs: {}
+      outputs:
+      - name: lines
         type: number
     GetText:
       impl:
@@ -2272,6 +2343,13 @@ Font:
       outputs:
       - name: alpha
         type: number
+    GetFontObjectForAlphabet:
+      inputs:
+      - name: alphabet
+        type: string
+      outputs:
+      - name: font
+        type: Font
     SetAlpha:
       inputs:
       - name: alpha
@@ -2393,6 +2471,7 @@ FontString:
         type: number
       - name: y
         type: number
+      mayreturnnothing: true
       outputs:
       - name: characterIndex
         type: number
@@ -2468,6 +2547,9 @@ FontString:
       outputs:
       - name: isTruncated
         type: boolean
+    OnColorsUpdated:
+      inputs: {}
+      outputs: {}
     SetAlphaGradient:
       inputs:
       - name: start
@@ -2607,6 +2689,9 @@ Frame:
       outputs:
       - name: canChangeAttributes
         type: boolean
+    ClearAlphaGradient:
+      inputs: {}
+      outputs: {}
     CreateFontString:
       impl: Frame/CreateFontString
       inputs:
@@ -2813,6 +2898,14 @@ Frame:
       outputs:
       - name: strata
         type: FrameStrata
+    GetHighestFrameLevel:
+      inputs:
+      - default: false
+        name: iterateAllChildren
+        type: boolean
+      outputs:
+      - name: frameLevel
+        type: number
     GetHitRectInsets:
       inputs: {}
       outputs:
@@ -2924,6 +3017,13 @@ Frame:
       inputs: {}
       outputs:
       - name: clampedToScreen
+        type: boolean
+    IsDrawLayerEnabled:
+      inputs:
+      - name: layer
+        type: DrawLayer
+      outputs:
+      - name: isEnabled
         type: boolean
     IsEventRegistered:
       impl: Frame/IsEventRegistered
@@ -3040,6 +3140,14 @@ Frame:
       - default: 0.5
         name: y
         type: number
+      outputs: {}
+    SetAlphaGradient:
+      inputs:
+      - name: index
+        type: number
+      - name: gradient
+        type:
+          structure: vector2
       outputs: {}
     SetAttribute:
       impl: Frame/SetAttribute
@@ -3332,6 +3440,7 @@ GameTooltip:
         getter:
         - name: tooltipLines
     ResetSecondaryCompareItem: {}
+    SetAchievementByID: {}
     SetAction: {}
     SetAnchorType: {}
     SetAuctionItem: {}
@@ -3344,6 +3453,7 @@ GameTooltip:
     SetCompareItem: {}
     SetCraftItem: {}
     SetCraftSpell: {}
+    SetCurrencyByID: {}
     SetCurrencyToken: {}
     SetCurrencyTokenByID: {}
     SetEngravingRune: {}
@@ -3408,6 +3518,7 @@ GameTooltip:
     SetUnitAura: {}
     SetUnitBuff: {}
     SetUnitDebuff: {}
+    SetUpgradeItem: {}
 LayeredRegion:
   fields:
     layer:
@@ -4296,6 +4407,7 @@ ModelScene:
         type: number
       - name: pointZ
         type: number
+      mayreturnnothing: true
       outputs:
       - name: point2DX
         type: number
@@ -4832,20 +4944,77 @@ POIFrame:
   fields: {}
   inherits: {}
   methods:
-    DrawAll: {}
-    DrawBlob: {}
-    DrawNone: {}
-    EnableMerging: {}
-    EnableSmoothing: {}
-    GetMapID: {}
-    SetBorderAlpha: {}
-    SetBorderScalar: {}
-    SetBorderTexture: {}
-    SetFillAlpha: {}
-    SetFillTexture: {}
-    SetMapID: {}
-    SetMergeThreshold: {}
-    SetNumSplinePoints: {}
+    DrawAll:
+      inputs: {}
+      outputs: {}
+    DrawBlob:
+      inputs:
+      - name: questID
+        type: number
+      - default: false
+        name: draw
+        type: boolean
+      outputs: {}
+    DrawNone:
+      inputs: {}
+      outputs: {}
+    EnableMerging:
+      inputs:
+      - default: false
+        name: enable
+        type: boolean
+      outputs: {}
+    EnableSmoothing:
+      inputs:
+      - default: false
+        name: enable
+        type: boolean
+      outputs: {}
+    GetMapID:
+      inputs: {}
+      outputs:
+      - name: uiMapID
+        type: number
+    SetBorderAlpha:
+      inputs:
+      - name: alpha
+        type: number
+      outputs: {}
+    SetBorderScalar:
+      inputs:
+      - name: scalar
+        type: number
+      outputs: {}
+    SetBorderTexture:
+      inputs:
+      - name: asset
+        type: string
+      outputs: {}
+    SetFillAlpha:
+      inputs:
+      - name: alpha
+        type: number
+      outputs: {}
+    SetFillTexture:
+      inputs:
+      - name: asset
+        type: string
+      outputs: {}
+    SetMapID:
+      inputs:
+      - name: uiMapID
+        type: number
+      outputs: {}
+    SetMergeThreshold:
+      inputs:
+      - name: threshold
+        type: number
+      outputs: {}
+    SetNumSplinePoints:
+      inputs:
+      - name: numSplinePoints
+        type: number
+      outputs: {}
   virtual: true
 QuestPOIFrame:
   fields: {}
@@ -4932,6 +5101,16 @@ Region:
       outputs:
       - name: canChange
         type: boolean
+    CanPropagateMouseClicks:
+      inputs: {}
+      outputs:
+      - name: canPropagate
+        type: boolean
+    CanPropagateMouseMotion:
+      inputs: {}
+      outputs:
+      - name: canPropagate
+        type: boolean
     ClearAllPoints:
       impl: Region/ClearAllPoints
       inputs: {}
@@ -4997,6 +5176,7 @@ Region:
     GetCenter:
       impl: Region/GetCenter
       inputs: {}
+      mayreturnnothing: true
       outputs:
       - name: x
         type: number
@@ -5049,6 +5229,7 @@ Region:
       - default: false
         name: resolveCollapsed
         type: boolean
+      mayreturnnothing: true
       outputs:
       - name: point
         type: FramePoint
@@ -5070,12 +5251,14 @@ Region:
     GetRight:
       impl: Region/GetRight
       inputs: {}
+      mayreturnnothing: true
       outputs:
       - name: right
         type: number
     GetScaledRect:
       impl: Region/GetScaledRect
       inputs: {}
+      mayreturnnothing: true
       outputs:
       - name: left
         type: number
@@ -5098,6 +5281,7 @@ Region:
     GetTop:
       impl: Region/GetTop
       inputs: {}
+      mayreturnnothing: true
       outputs:
       - name: top
         type: number
@@ -5105,6 +5289,13 @@ Region:
       impl:
         getter:
         - name: width
+    Intersects:
+      inputs:
+      - name: region
+        type: Region
+      outputs:
+      - name: intersects
+        type: boolean
     IsAnchoringRestricted:
       inputs: {}
       outputs:
@@ -5925,6 +6116,11 @@ TabardModel:
       outputs:
       - name: path
         type: string
+    GetLowerBorderFile:
+      inputs: {}
+      outputs:
+      - name: file
+        type: number
     GetLowerEmblemFileName:
       inputs: {}
       outputs:
@@ -5940,6 +6136,11 @@ TabardModel:
       outputs:
       - name: path
         type: string
+    GetUpperBorderFile:
+      inputs: {}
+      outputs:
+      - name: file
+        type: number
     GetUpperEmblemFileName:
       inputs: {}
       outputs:
@@ -6137,6 +6338,7 @@ TextureBase:
         type: string
     GetTextureSliceMargins:
       inputs: {}
+      mayreturnnothing: true
       outputs:
       - name: left
         type: number
@@ -6148,6 +6350,7 @@ TextureBase:
         type: number
     GetTextureSliceMode:
       inputs: {}
+      mayreturnnothing: true
       outputs:
       - name: sliceMode
         type:

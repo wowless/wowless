@@ -46,13 +46,13 @@ describe('wowless.toc', function()
         it('does AllowLoadGameType filtering', function()
           local lines = {
             'aaa [AllowLoadGameType mainline]',
-            'bbb [AllowLoadGameType vanilla, cata]',
+            'bbb [AllowLoadGameType vanilla]',
             'ccc [AllowLoadGameType classic]',
+            'ddd [AllowLoadGameType mists]',
           }
           local _, files = parse(gametype, table.concat(lines, '\n'))
           local expected = {
-            Cata = { 'bbb', 'ccc' },
-            Mists = { 'ccc' },
+            Mists = { 'ccc', 'ddd' },
             Standard = { 'aaa' },
             Vanilla = { 'bbb', 'ccc' },
           }

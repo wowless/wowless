@@ -10,6 +10,8 @@ lies:
       outputs:
       - _add:
           nilable: true
+  extra_apis:
+    C_BattleNet.InstallHighResTextures: {}
   uiobjects:
     Button:
       GetText:
@@ -143,9 +145,10 @@ lies:
         inputs:
         - _add:
             nilable: true
+mayreturnnothing: true
 script_objects:
   FrameAPIArchaeologyDigSiteFrame: ArchaeologyDigSiteFrame
-  FrameAPIBlob: QuestPOIFrame
+  FrameAPIBlob: POIFrame
   FrameAPICharacterModelBase: PlayerModel
   FrameAPICinematicModel: CinematicModel
   FrameAPICooldown: Cooldown
@@ -257,6 +260,7 @@ typedefs:
   cstring: string
   FileAsset: string
   fileID: number
+  FontAlphabet: string
   HTMLTextType: string
   IDOrLink: string
   ItemInfo: string
@@ -266,6 +270,7 @@ typedefs:
   kstringLfgListSearch: string
   luaFunction: function
   luaIndex: number
+  LuaValueVariant: table
   ModelAsset: string
   ModelSceneFrame: ModelScene
   ModelSceneFrameActor: Actor
@@ -273,6 +278,7 @@ typedefs:
   normalizedValue: number
   NotificationDbId: string
   number: number
+  QuestObjectiveType: number
   RecruitAcceptanceID: string
   ScriptObject: UIObject
   ScriptRegion: Region
@@ -291,6 +297,7 @@ typedefs:
   size: number
   SpellIdentifier: string
   string: string
+  stringView: string
   TBFFlags: string
   TextureAsset: Texture
   TextureAssetDisk: string

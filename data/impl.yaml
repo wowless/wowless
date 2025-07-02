@@ -1,14 +1,6 @@
 ---
-acos:
-  stdlib: acos
-asin:
-  stdlib: asin
 assert:
   stdlib: assert
-atan:
-  stdlib: atan
-atan2:
-  stdlib: atan2
 bit.arshift:
   stdlib: bit.arshift
 bit.band:
@@ -171,8 +163,6 @@ coroutine.wrap:
   stdlib: coroutine.wrap
 coroutine.yield:
   stdlib: coroutine.yield
-cos:
-  stdlib: cos
 CreateFont:
   frameworks:
   - api
@@ -311,11 +301,6 @@ GetTalentInfo_Vanilla:
   sqls:
   - GetTalentInfo_Vanilla
 GetTalentPrereqs_Vanilla:
-  frameworks:
-  - api
-  sqls:
-  - GetTalentPrereqs
-GetTalentPrereqs_Wrath:
   frameworks:
   - api
   sqls:
@@ -464,8 +449,6 @@ setfenv:
 setmetatable:
   stdlib: setmetatable
 SetPortraitTexture: {}
-sin:
-  stdlib: sin
 strcmputf8i:
   stdlib: strcmputf8i
 strconcat:
@@ -538,8 +521,6 @@ table.sort:
   stdlib: table.sort
 table.wipe:
   stdlib: table.wipe
-tan:
-  stdlib: tan
 time:
   stdlib: time
 tonumber:
