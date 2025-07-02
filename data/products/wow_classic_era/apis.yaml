@@ -14688,6 +14688,10 @@ GetCraftSpellFocus:
   inputs:
   - name: id
     type: number
+  outputs:
+  - name: catalystName
+    type: string
+  outstride: 1
 GetCritChance:
   inputs: {}
   outputs:
@@ -17667,6 +17671,10 @@ GetStablePetFoodTypes:
   inputs:
   - name: index
     type: number
+  outputs:
+  - name: foodType
+    type: string
+  outstride: 1
 GetStablePetInfo:
   inputs:
   - name: index
@@ -17991,6 +17999,10 @@ GetTradeSkillTools:
   inputs:
   - name: skillIndex
     type: number
+  outputs:
+  - name: tool
+    type: string
+  outstride: 1
 GetTradeTargetItemInfo:
   inputs:
   - name: index
