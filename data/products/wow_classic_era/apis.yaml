@@ -20470,10 +20470,54 @@ UnitCanCooperate:
   - type: oneornil
 UnitCastingInfo:
   inputs:
-  - type: string
+  - name: unit
+    type: unit
+  mayreturnnothing: true
+  outputs:
+  - name: name
+    type: string
+  - name: displayName
+    type: string
+  - name: textureID
+    type: number
+  - name: startTimeMs
+    type: number
+  - name: endTimeMs
+    type: number
+  - name: isTradeskill
+    type: boolean
+  - name: castID
+    type: string
+  - name: notInterruptible
+    type: boolean
+  - name: castingSpellID
+    type: number
 UnitChannelInfo:
   inputs:
-  - type: string
+  - name: unit
+    type: unit
+  mayreturnnothing: true
+  outputs:
+  - name: name
+    type: string
+  - name: displayName
+    type: string
+  - name: textureID
+    type: number
+  - name: startTimeMs
+    type: number
+  - name: endTimeMs
+    type: number
+  - name: isTradeskill
+    type: boolean
+  - name: notInterruptible
+    type: boolean
+  - name: spellID
+    type: number
+  - name: isEmpowered
+    type: boolean
+  - name: numEmpowerStages
+    type: number
 UnitCharacterPoints:
   inputs:
   - type: string
