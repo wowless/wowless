@@ -94,7 +94,6 @@ add_executable(bootstraplua ${elune_SOURCE_DIR}/lua/lua.c)
 target_link_libraries(bootstraplua PRIVATE elune)
 
 find_package(expat CONFIG REQUIRED)
-add_library(expat ALIAS expat::expat)
 
 function(lua2c name)
   foreach(arg ${ARGN})
@@ -133,7 +132,7 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(luaexpat)
 lua2c(luaexpat lxp=c)
 target_sources(luaexpat PRIVATE ${luaexpat_SOURCE_DIR}/src/lxplib.c)
-target_link_libraries(luaexpat PRIVATE expat)
+target_link_libraries(luaexpat PRIVATE expat::expat)
 
 find_package(yaml CONFIG REQUIRED)
 
@@ -163,7 +162,6 @@ set_property(
 target_link_libraries(lyaml PRIVATE yaml)
 
 find_package(ZLIB REQUIRED)
-add_library(zlib ALIAS ZLIB::ZLIB)
 
 FetchContent_Declare(
   lzlib
@@ -173,10 +171,9 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(lzlib)
 lua2c(lzlib zlib=c)
 target_sources(lzlib PRIVATE ${lzlib_SOURCE_DIR}/lzlib.c)
-target_link_libraries(lzlib PRIVATE zlib)
+target_link_libraries(lzlib PRIVATE ZLIB::ZLIB)
 
 find_package(unofficial-sqlite3 CONFIG REQUIRED)
-add_library(sqlite3 ALIAS unofficial::sqlite3::sqlite3)
 
 FetchContent_Declare(
   lsqlite3
@@ -186,7 +183,7 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(lsqlite3)
 lua2c(lsqlite3 lsqlite3=c)
 target_sources(lsqlite3 PRIVATE ${lsqlite3_SOURCE_DIR}/lsqlite3.c)
-target_link_libraries(lsqlite3 PRIVATE sqlite3)
+target_link_libraries(lsqlite3 PRIVATE unofficial::sqlite3::sqlite3)
 
 FetchContent_Declare(
   luafilesystem
@@ -553,7 +550,7 @@ endforeach()
 
 lua2c(toolssqlite3ext tools.sqlite3ext=c)
 target_sources(toolssqlite3ext PRIVATE tools/sqlite3ext.c)
-target_link_libraries(toolssqlite3ext PRIVATE sqlite3)
+target_link_libraries(toolssqlite3ext PRIVATE unofficial::sqlite3::sqlite3)
 
 add_lua_executable(
   sqlite
@@ -570,7 +567,7 @@ find_package(OpenSSL REQUIRED)
 add_library(tactless STATIC vendor/tactless/tactless.c
                             vendor/tactless/tactless.h)
 target_include_directories(tactless PUBLIC vendor/tactless)
-target_link_libraries(tactless PRIVATE OpenSSL::Crypto CURL::libcurl zlib)
+target_link_libraries(tactless PRIVATE OpenSSL::Crypto CURL::libcurl ZLIB::ZLIB)
 
 lua2c(toolstactless tactless=c)
 target_sources(toolstactless PRIVATE tools/tactless.c)
@@ -592,7 +589,6 @@ add_lua_executable(
   wowlesstoc)
 
 find_package(PNG REQUIRED)
-add_library(libpng ALIAS PNG::PNG)
 
 FetchContent_Declare(
   imagemagick
@@ -902,7 +898,8 @@ add_library(
 target_include_directories(imagemagick PUBLIC ${imagemagick_SOURCE_DIR})
 target_compile_definitions(imagemagick PUBLIC $<$<PLATFORM_ID:Windows>:_LIB>)
 target_link_libraries(
-  imagemagick PRIVATE libpng zlib $<$<PLATFORM_ID:Windows>:urlmon ws2_32>)
+  imagemagick PRIVATE PNG::PNG ZLIB::ZLIB $<$<PLATFORM_ID:Windows>:urlmon
+                      ws2_32>)
 
 FetchContent_Declare(
   luamagick
