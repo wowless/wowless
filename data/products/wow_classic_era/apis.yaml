@@ -17711,6 +17711,23 @@ GetTalentInfo:
     type: number
   - name: talentIndex
     type: number
+  outputs:
+  - name: name
+    type: string
+  - name: icon
+    type: number
+  - name: tier
+    type: number
+  - name: column
+    type: number
+  - name: rank
+    type: number
+  - name: maxRank
+    type: number
+  - name: isExceptional
+    type: number
+  - name: available
+    type: number
 GetTalentLink: {}
 GetTalentPrereqs:
   impl: GetTalentPrereqs

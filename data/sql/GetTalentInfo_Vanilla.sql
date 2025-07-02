@@ -5,7 +5,8 @@ SELECT
   Column,
   0,
   1,
-  FALSE
+  0,
+  0
 FROM
   (
     SELECT
