@@ -191,7 +191,6 @@ lies:
               _change:
                 from: FilterMode
                 to: string
-mayreturnnothing: true
 script_objects:
   FrameAPIArchaeologyDigSiteFrame: ArchaeologyDigSiteFrame
   FrameAPIBlob: POIFrame

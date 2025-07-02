@@ -277,17 +277,6 @@ local function outsig(fn, ns, api)
   return outputs
 end
 
-local sawmayreturnnothing = false
-
-local function mayreturnnothing(fn, api)
-  sawmayreturnnothing = sawmayreturnnothing or fn.MayReturnNothing
-  if config.mayreturnnothing then
-    return fn.MayReturnNothing
-  else
-    return api and api.mayreturnnothing
-  end
-end
-
 local function rewriteApis()
   local y = require('wowapi.yaml')
   local f = 'data/products/' .. product .. '/apis.yaml'
@@ -302,7 +291,7 @@ local function rewriteApis()
       inputs = insig(fn, ns),
       instride = stride(fn.Arguments),
       mayreturnnils = api and api.mayreturnnils,
-      mayreturnnothing = mayreturnnothing(fn, api),
+      mayreturnnothing = fn.MayReturnNothing,
       outputs = outsig(fn, ns, api),
       outstride = stride(fn.Returns),
       stubnothing = api and api.stubnothing,
@@ -470,7 +459,7 @@ local function rewriteUIObjects()
         impl = mm and mm.impl,
         inputs = insig(mv),
         instride = stride(mv.Arguments),
-        mayreturnnothing = mayreturnnothing(mv, mm),
+        mayreturnnothing = mv.MayReturnNothing,
         outputs = outsig(mv, nil, mm),
         outstride = stride(mv.Returns),
         stuboutstrides = mm and mm.stuboutstrides,
@@ -517,7 +506,3 @@ for k in pairs(typedefs) do
   end
 end
 assert(not next(unused_typedefs), 'unused typedefs = ' .. require('pl.pretty').write(unused_typedefs))
-
-if sawmayreturnnothing and not config.mayreturnnothing then
-  print('warning: saw MayReturnNothing but mayreturnnothing: false in config')
-end

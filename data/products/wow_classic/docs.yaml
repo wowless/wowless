@@ -145,7 +145,6 @@ lies:
         inputs:
         - _add:
             nilable: true
-mayreturnnothing: true
 script_objects:
   FrameAPIArchaeologyDigSiteFrame: ArchaeologyDigSiteFrame
   FrameAPIBlob: POIFrame

@@ -38,8 +38,6 @@ type:
                     key: string
                     value:
                       schema: any
-    mayreturnnothing:
-      type: boolean
     script_objects:
       type:
         mapof:
