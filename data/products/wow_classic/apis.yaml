@@ -15336,6 +15336,10 @@ EnumerateFrames:
     type: Frame
 EnumerateServerChannels:
   inputs: {}
+  outputs:
+  - name: channel
+    type: string
+  outstride: 1
 EquipCursorItem:
   inputs:
   - name: slot
@@ -15963,6 +15967,9 @@ GetBuildInfo:
 GetButtonMetatable:
   impl: GetButtonMetatable
   inputs: {}
+  outputs:
+  - name: metatable
+    type: table
 GetBuybackItemInfo:
   inputs:
   - name: index
@@ -16087,6 +16094,10 @@ GetChatWindowMessages:
   inputs:
   - name: index
     type: number
+  outputs:
+  - name: type
+    type: string
+  outstride: 1
 GetChatWindowSavedDimensions: {}
 GetChatWindowSavedPosition: {}
 GetClassicExpansionLevel:
@@ -16633,6 +16644,9 @@ GetFonts:
 GetFontStringMetatable:
   impl: GetFontStringMetatable
   inputs: {}
+  outputs:
+  - name: metatable
+    type: table
 GetFrameCPUUsage:
   inputs:
   - name: frame
@@ -16648,6 +16662,9 @@ GetFrameCPUUsage:
 GetFrameMetatable:
   impl: GetFrameMetatable
   inputs: {}
+  outputs:
+  - name: metatable
+    type: table
 GetFramerate:
   inputs: {}
   outputs:
