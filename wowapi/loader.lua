@@ -112,11 +112,8 @@ local function loadFunctions(api, loader)
 
   local rawfns = {}
   local fns = {}
-  local aliases = {}
   for fn, apicfg in pairs(apis) do
-    if apicfg.alias then
-      aliases[fn] = apicfg.alias
-    elseif apicfg.stdlib then
+    if apicfg.stdlib then
       local v = assert(util.tget(_G, fn))
       util.tset(fns, fn, v)
       util.tset(rawfns, fn, v)
@@ -124,10 +121,6 @@ local function loadFunctions(api, loader)
       util.tset(fns, fn, mkfn(fn, apicfg))
       util.tset(rawfns, fn, mkfn(fn, apicfg, true))
     end
-  end
-  for k, v in pairs(aliases) do
-    util.tset(fns, k, util.tget(fns, v))
-    util.tset(rawfns, k, util.tget(rawfns, v))
   end
   api.log(1, 'functions loaded')
   return fns, rawfns

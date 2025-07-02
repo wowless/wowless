@@ -8,7 +8,7 @@ describe('apis', function()
         describe(name, function()
           it('is not stubbed if provided by elune', function()
             if _G[name] then
-              assert.Truthy(api.impl or api.alias)
+              assert.Truthy(api.impl)
             end
           end)
           describe('inputs', function()

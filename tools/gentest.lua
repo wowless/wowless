@@ -68,7 +68,6 @@ local ptablemap = {
     for name, api in pairs(perproduct(p, 'apis')) do
       if not name:find('%.') then
         local vv = {
-          alias = api.alias,
           islua = islua(api) or nil,
           overwritten = tpath(config, 'addon', 'overwritten_apis', name) and true,
           stdlib = api.impl and tpath(impls, api.impl, 'stdlib'),
@@ -114,7 +113,6 @@ local ptablemap = {
       local mt = {}
       for mk, mv in pairs(v.methods) do
         local tt = {
-          alias = mv.alias,
           overwritten = tpath(config, 'addon', 'overwritten_apis', k .. '.' .. mk) and true,
           stdlib = mv.impl and tpath(impls, mv.impl, 'stdlib'),
         }
