@@ -172,6 +172,7 @@ CreateForbiddenFrame:
 CreateFrame:
   frameworks:
   - api
+CreateFromMixins: {}
 CreateWindow: {}
 date:
   stdlib: date
@@ -406,6 +407,7 @@ math.tan:
   stdlib: math.tan
 math.tanh:
   stdlib: math.tanh
+Mixin: {}
 newproxy:
   stdlib: newproxy
 next:

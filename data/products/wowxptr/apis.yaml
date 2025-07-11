@@ -26616,6 +26616,7 @@ CreateFrame:
   - name: frame
     type: Frame
 CreateFromMixins:
+  impl: CreateFromMixins
   inputs:
   - name: mixin
     type: table
@@ -31839,6 +31840,7 @@ math.tan:
 math.tanh:
   impl: math.tanh
 Mixin:
+  impl: Mixin
   inputs:
   - name: object
     type: table
