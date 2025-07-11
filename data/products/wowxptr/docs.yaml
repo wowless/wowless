@@ -8,9 +8,28 @@ lies:
       outputs:
       - _add:
           nilable: true
+    CreateFromMixins:
+      inputs:
+      - _change:
+          from:
+            name: unpackedPrimitiveType
+            type: number
+          to:
+            name: mixin
+            type: table
     GetSpecializationInfoForClassID:
       _add:
         mayreturnnothing: true
+    Mixin:
+      inputs:
+        2:
+          _change:
+            from:
+              name: unpackedPrimitiveType
+              type: number
+            to:
+              name: mixin
+              type: table
     UnitFactionGroup:
       _add:
         mayreturnnothing: true
@@ -326,8 +345,8 @@ typedefs:
   ModelAsset: string
   ModelSceneFrame: ModelScene
   ModelSceneFrameActor: Actor
-  mouseButton: string
   MouseButton: string
+  mouseButton: string
   NamePlateFrame: table
   normalizedValue: number
   NotificationDbId: string

@@ -26617,8 +26617,8 @@ CreateFrame:
     type: Frame
 CreateFromMixins:
   inputs:
-  - name: unpackedPrimitiveType
-    type: number
+  - name: mixin
+    type: table
   instride: 1
   outputs:
   - name: object
@@ -31842,8 +31842,8 @@ Mixin:
   inputs:
   - name: object
     type: table
-  - name: unpackedPrimitiveType
-    type: number
+  - name: mixin
+    type: table
   instride: 1
   outputs:
   - name: outObject
