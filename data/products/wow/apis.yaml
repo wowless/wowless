@@ -32832,7 +32832,6 @@ UnitCastingInfo:
   inputs:
   - name: unit
     type: unit
-  mayreturnnothing: true
   outputs:
   - name: name
     type: string
@@ -32854,9 +32853,8 @@ UnitCastingInfo:
     type: number
 UnitChannelInfo:
   inputs:
-  - name: unit
-    type: unit
-  mayreturnnothing: true
+  - name: unitToken
+    type: string
   outputs:
   - name: name
     type: string
