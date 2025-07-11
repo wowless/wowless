@@ -5994,6 +5994,10 @@ PLAYER_GUILD_UPDATE:
     type: unit
 PLAYER_IMPULSE_APPLIED:
   payload: {}
+PLAYER_IN_COMBAT_CHANGED:
+  payload:
+  - name: inCombat
+    type: boolean
 PLAYER_INSIDE_QUEST_BLOB_STATE_CHANGED:
   payload:
   - name: questID
@@ -7704,6 +7708,10 @@ UNIT_FORM_CHANGED:
   payload:
   - name: unitTarget
     type: unit
+UNIT_GUILD_LEVEL:
+  payload:
+  - name: newLevel
+    type: number
 UNIT_HEAL_ABSORB_AMOUNT_CHANGED:
   payload:
   - name: unitTarget

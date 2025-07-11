@@ -7104,6 +7104,16 @@ C_Container.GetSortBagsRightToLeft:
   outputs:
   - name: isEnabled
     type: boolean
+C_Container.HasContainerItem:
+  inputs:
+  - name: containerIndex
+    type:
+      enum: BagIndex
+  - name: slotIndex
+    type: number
+  outputs:
+  - name: hasItem
+    type: boolean
 C_Container.IsBattlePayItem:
   inputs:
   - name: containerIndex
@@ -14914,11 +14924,6 @@ C_PartyInfo.GetRestrictPings:
   - name: restrictTo
     type:
       enum: RestrictPingsTo
-C_PartyInfo.HasChallengeModeLeaver:
-  inputs: {}
-  outputs:
-  - name: hasLeaver
-    type: boolean
 C_PartyInfo.InviteUnit:
   inputs:
   - name: targetName
@@ -19165,7 +19170,7 @@ C_SpecializationInfo.GetInspectSelectedPvpTalent:
 C_SpecializationInfo.GetNumSpecializationsForClassID:
   impl: GetNumSpecializationsForClassID
   inputs:
-  - name: specID
+  - name: classID
     type: number
   outputs:
   - name: specCount
@@ -19358,6 +19363,11 @@ C_SpecializationInfo.SetSpecialization:
   outputs:
   - name: success
     type: boolean
+C_Spell.CancelSpellByID:
+  inputs:
+  - name: spellID
+    type: number
+  outputs: {}
 C_Spell.DoesSpellExist:
   inputs:
   - name: spellIdentifier
@@ -19724,6 +19734,13 @@ C_Spell.ToggleSpellAutoCast:
   - name: spellIdentifier
     type: string
   outputs: {}
+C_SpellActivationOverlay.IsSpellOverlayed:
+  inputs:
+  - name: spellID
+    type: number
+  outputs:
+  - name: isSpellOverlayed
+    type: boolean
 C_SpellBook.CastSpellBookItem:
   inputs:
   - name: spellBookItemSlotIndex
@@ -26598,6 +26615,14 @@ CreateFrame:
   outputs:
   - name: frame
     type: Frame
+CreateFromMixins:
+  inputs:
+  - name: unpackedPrimitiveType
+    type: number
+  instride: 1
+  outputs:
+  - name: object
+    type: table
 CreateMacro: {}
 CreateNewRaidProfile: {}
 CreateWindow:
@@ -28304,6 +28329,16 @@ GetLegacyRaidDifficultyID:
   - name: result
     nilable: true
     type: number
+GetLevelUpInstances:
+  inputs:
+  - name: currPlayerLevel
+    type: number
+  - name: isRaid
+    type: boolean
+  outputs:
+  - name: instances
+    type:
+      arrayof: number
 GetLFDChoiceCollapseState:
   inputs:
   - name: LFGCollapseList
@@ -30892,6 +30927,11 @@ HasLoadedCUFProfiles:
   inputs: {}
   outputs:
   - type: boolean
+HasLootSpecializations:
+  inputs: {}
+  outputs:
+  - name: hasLootSpecializations
+    type: boolean
 HasNewMail:
   inputs: {}
   outputs:
@@ -31512,7 +31552,6 @@ IsSpellKnownOrOverridesKnown:
   outputs:
   - name: value
     type: boolean
-IsSpellOverlayed: {}
 IsSpellValidForPendingGlyph: {}
 IsStackableAction: {}
 IsStealthed:
@@ -31799,6 +31838,16 @@ math.tan:
   impl: math.tan
 math.tanh:
   impl: math.tanh
+Mixin:
+  inputs:
+  - name: object
+    type: table
+  - name: unpackedPrimitiveType
+    type: number
+  instride: 1
+  outputs:
+  - name: outObject
+    type: table
 MouselookStart: {}
 MouselookStop: {}
 MouseOverrideCinematicDisable:
@@ -31965,6 +32014,11 @@ PlayerHasToy:
     type: number
   outputs:
   - name: value
+    type: boolean
+PlayerIsInCombat:
+  inputs: {}
+  outputs:
+  - name: playerIsInCombat
     type: boolean
 PlayerIsPVPInactive:
   inputs:
@@ -33035,7 +33089,6 @@ UnitCastingInfo:
   inputs:
   - name: unit
     type: unit
-  mayreturnnothing: true
   outputs:
   - name: name
     type: string
@@ -33057,9 +33110,8 @@ UnitCastingInfo:
     type: number
 UnitChannelInfo:
   inputs:
-  - name: unit
-    type: unit
-  mayreturnnothing: true
+  - name: unitToken
+    type: string
   outputs:
   - name: name
     type: string

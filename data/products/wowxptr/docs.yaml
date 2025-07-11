@@ -327,6 +327,7 @@ typedefs:
   ModelSceneFrame: ModelScene
   ModelSceneFrameActor: Actor
   mouseButton: string
+  MouseButton: string
   NamePlateFrame: table
   normalizedValue: number
   NotificationDbId: string

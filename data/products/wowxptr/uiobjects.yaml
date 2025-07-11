@@ -1752,6 +1752,18 @@ Cooldown:
         name: drawSwipe
         type: boolean
       outputs: {}
+    SetEdgeColor:
+      inputs:
+      - name: colorR
+        type: number
+      - name: colorG
+        type: number
+      - name: colorB
+        type: number
+      - name: a
+        nilable: true
+        type: number
+      outputs: {}
     SetEdgeScale:
       inputs:
       - name: scale
@@ -2518,6 +2530,11 @@ Font:
       outputs:
       - name: alpha
         type: number
+    GetFontHeight:
+      inputs: {}
+      outputs:
+      - name: height
+        type: number
     GetFontObjectForAlphabet:
       inputs:
       - name: alphabet
@@ -2640,6 +2657,9 @@ FontString:
       outputs:
       - name: wrap
         type: boolean
+    ClearAlphaGradient:
+      inputs: {}
+      outputs: {}
     FindCharacterIndexAtCoordinate:
       inputs:
       - name: x
@@ -2652,10 +2672,25 @@ FontString:
         type: number
       - name: inside
         type: boolean
+    GetAlphaGradient:
+      inputs: {}
+      outputs:
+      - name: start
+        type: number
+      - name: length
+        type: number
     GetFieldSize:
       inputs: {}
       outputs:
       - name: fieldSize
+        type: number
+    GetFontHeight:
+      inputs:
+      - default: true
+        name: calculated
+        type: boolean
+      outputs:
+      - name: height
         type: number
     GetLineHeight:
       inputs: {}
@@ -2867,6 +2902,16 @@ Frame:
       - name: canChangeAttributes
         type: boolean
     ClearAlphaGradient:
+      inputs: {}
+      outputs: {}
+    ClearAttribute:
+      inputs:
+      - name: attributeName
+        type: string
+      outputs:
+      - name: cleared
+        type: boolean
+    ClearAttributes:
       inputs: {}
       outputs: {}
     CreateFontString:
@@ -3164,6 +3209,11 @@ Frame:
       outputs:
       - name: window
         type: nil
+    HasAlphaGradient:
+      inputs: {}
+      outputs:
+      - name: hasAlphaGradient
+        type: boolean
     HasFixedFrameLevel:
       impl:
         getter:
@@ -3214,6 +3264,11 @@ Frame:
         nilable: true
         type: string
       outstride: 1
+    IsFrameBuffer:
+      inputs: {}
+      outputs:
+      - name: isFrameBuffer
+        type: boolean
     IsGamePadButtonEnabled:
       inputs: {}
       outputs:
@@ -3223,6 +3278,11 @@ Frame:
       inputs: {}
       outputs:
       - name: enabled
+        type: boolean
+    IsHighlightLocked:
+      inputs: {}
+      outputs:
+      - name: locked
         type: boolean
     IsKeyboardEnabled:
       inputs: {}
@@ -5336,6 +5396,9 @@ Region:
     ClearPointsOffset:
       inputs: {}
       outputs: {}
+    ClearScripts:
+      inputs: {}
+      outputs: {}
     CollapsesLayout:
       inputs: {}
       outputs:
@@ -5696,6 +5759,13 @@ Region:
       - name: width
         type: number
       outputs: {}
+    ShouldButtonPassThrough:
+      inputs:
+      - name: button
+        type: string
+      outputs:
+      - name: shouldPassThrough
+        type: boolean
     StopAnimating:
       inputs: {}
       outputs: {}
@@ -6486,6 +6556,9 @@ TextureBase:
     ClearTextureSlice:
       inputs: {}
       outputs: {}
+    ClearVertexOffsets:
+      inputs: {}
+      outputs: {}
     GetAtlas:
       impl:
         getter:
@@ -6846,6 +6919,9 @@ UIObject:
         type: boolean
     SetForbidden:
       impl: ForbiddenMixin/SetForbidden
+      inputs: {}
+      outputs: {}
+    SetToDefaults:
       inputs: {}
       outputs: {}
   virtual: true
