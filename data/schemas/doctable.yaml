@@ -85,11 +85,33 @@ type:
             Documentation:
               type:
                 sequenceof: string
+            HasRestrictions:
+              type: boolean
+            IsProtectedFunction:
+              type: boolean
             MayReturnNothing:
               type: boolean
             Name:
               required: true
               type: string
+            RequiresActiveCommentator:
+              type: boolean
+            RequiresClubsInitialized:
+              type: boolean
+            RequiresCommentator:
+              type: boolean
+            RequiresFriendList:
+              type: boolean
+            RequiresIndexInRange:
+              type: boolean
+            RequiresNonReadOnlyCVar:
+              type: boolean
+            RequiresNonSecureCVar:
+              type: boolean
+            RequiresValidAndPublicCVar:
+              type: boolean
+            RequiresValidInviteTarget:
+              type: boolean
             Returns:
               type:
                 sequenceof:

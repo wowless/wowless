@@ -1,8 +1,8 @@
 ---
-build: '61703'
-date: Jun 26 2025
+build: '61871'
+date: Jul  7 2025
 gametype: Standard
-hash: b97e17a2fedd33508d872f88506ec87c
+hash: dc047382ce020ec3f681e234a8d9095e
 test: true
 tocversion: 110200
 version: 11.2.0
