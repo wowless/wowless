@@ -22,8 +22,6 @@ type:
                 schema: type
     instride:
       type: number
-    mayreturnnils:
-      type: boolean
     mayreturnnothing:
       type: boolean
     outputs:

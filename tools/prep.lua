@@ -260,7 +260,6 @@ for k, v in pairs(uiobjectdata) do
       methods[mk] = {
         impl = readFile(src),
         inputs = mv.inputs,
-        mayreturnnils = mv.mayreturnnils,
         mayreturnnothing = mv.mayreturnnothing,
         outputs = mv.outputs,
         outstride = mv.outstride,

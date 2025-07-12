@@ -290,7 +290,6 @@ local function rewriteApis()
       impl = api and api.impl,
       inputs = insig(fn, ns),
       instride = stride(fn.Arguments),
-      mayreturnnils = api and api.mayreturnnils,
       mayreturnnothing = fn.MayReturnNothing,
       outputs = outsig(fn, ns, api),
       outstride = stride(fn.Returns),
