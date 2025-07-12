@@ -7,11 +7,16 @@ describe('funcheck', function()
       uiobjects = {},
     },
   })
-  local funcheck = require('wowless.funcheck')(typecheck)
+  local function log(_, fmt, ...)
+    return error(fmt:format(...))
+  end
+  local funcheck = require('wowless.funcheck')(typecheck, log)
   local function checkret(nexpected, expected, ...)
     assert.same(nexpected, select('#', ...))
     assert.same(expected, { ... })
   end
+  local tv = {}
+  local uv = newproxy()
   describe('makeCheckInputs', function()
     local tests = {
       ['fills nils'] = {
@@ -26,6 +31,33 @@ describe('funcheck', function()
         retn = 2,
         rets = { 'wat' },
       },
+      ['instride=1, no strides'] = {
+        argn = 0,
+        args = {},
+        spec = {
+          inputs = {
+            { name = 'i1', type = 'string' },
+          },
+          instride = 1,
+        },
+        retn = 0,
+        rets = {},
+      },
+      ['instride=3, multiple strides'] = {
+        argn = 7,
+        args = { 'cow', tv, uv, 42, tv, uv, 99 },
+        spec = {
+          inputs = {
+            { name = 'o1', type = 'string' },
+            { name = 'o2', type = 'table' },
+            { name = 'o3', type = 'userdata' },
+            { name = 'o4', type = 'number' },
+          },
+          instride = 3,
+        },
+        retn = 7,
+        rets = { 'cow', tv, uv, 42, tv, uv, 99 },
+      },
     }
     for k, v in pairs(tests) do
       it(k, function()
@@ -35,8 +67,6 @@ describe('funcheck', function()
     end
   end)
   describe('makeCheckOutputs', function()
-    local tv = {}
-    local uv = newproxy()
     local tests = {
       ['outstride=1'] = {
         argn = 2,
