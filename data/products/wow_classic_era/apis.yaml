@@ -705,9 +705,9 @@ C_AddOns.GetAddOnMetadata:
     type: uiAddon
   - name: variable
     type: string
-  mayreturnnils: true
   outputs:
   - name: value
+    nilable: true
     type: string
 C_AddOns.GetAddOnOptionalDependencies:
   inputs:

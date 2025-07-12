@@ -5,6 +5,10 @@ events:
     SECURE_TRANSFER_CONFIRM_SEND_MAIL: {}
 lies:
   apis:
+    C_AddOns.GetAddOnMetadata:
+      outputs:
+      - _add:
+          nilable: true
     C_Item.GetItemClassInfo:
       outputs:
       - _add:
