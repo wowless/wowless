@@ -190,7 +190,7 @@ return function(api)
       end
       local st = api.datalua.structures[spec.type.structure]
       for fname, fspec in pairs(st.fields) do
-        local _, err = typecheck(fspec, value[fname])
+        local _, err = typecheck(fspec, value[fname], isout)
         if err then
           return nil, 'field ' .. fname .. ' ' .. err
         end
