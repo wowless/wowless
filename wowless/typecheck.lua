@@ -215,10 +215,11 @@ return function(api)
       end
       local espec = { type = spec.type.arrayof }
       for i, v in ipairs(value) do
-        local _, err = typecheck(espec, v)
+        local vv, err = typecheck(espec, v, isout)
         if err then
           return nil, 'element ' .. i .. ' ' .. err
         end
+        value[i] = vv
       end
       if isout then
         local n = 0
