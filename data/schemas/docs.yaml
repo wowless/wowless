@@ -2,16 +2,6 @@
 name: docs
 type:
   record:
-    events:
-      type:
-        record:
-          never_sent:
-            type:
-              mapof:
-                key:
-                  ref: event
-                value:
-                  record: null
     lies:
       type:
         record:

@@ -318,17 +318,11 @@ end
 
 local function rewriteEvents()
   local filename = ('data/products/%s/events.yaml'):format(product)
-  local neversent = deref(config, 'events', 'never_sent') or {}
   local out = require('wowapi.yaml').parseFile(filename)
-  local seen = {}
   for name, ev in pairs(events) do
-    seen[ev.LiteralName] = true
     local ns = split(name)
     out[ev.LiteralName] = {
       payload = (function()
-        if neversent[ev.LiteralName] then
-          return nil
-        end
         local t = {}
         for _, arg in ipairs(ev.Payload or {}) do
           table.insert(t, {
@@ -340,9 +334,6 @@ local function rewriteEvents()
         return t
       end)(),
     }
-  end
-  for k in pairs(neversent) do
-    assert(seen[k], k .. ' is marked never_sent but not present in docs')
   end
   writeifchanged(filename, pprintYaml(out))
   return out

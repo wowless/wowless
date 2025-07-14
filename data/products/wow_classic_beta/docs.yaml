@@ -1,6 +1,4 @@
 ---
-events:
-  never_sent: {}
 lies:
   apis:
     C_AddOns.GetAddOnMetadata:
