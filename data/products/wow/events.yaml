@@ -8071,7 +8071,11 @@ USER_WAYPOINT_UPDATED:
 VARIABLES_LOADED:
   payload: {}
 VAS_CHARACTER_QUEUE_STATUS_UPDATE:
-  payload: {}
+  payload:
+  - name: guid
+    type: string
+  - name: minutes
+    type: number
 VAS_QUEUE_STATUS_UPDATE:
   payload: {}
 VAS_TRANSFER_VALIDATION_UPDATE:
