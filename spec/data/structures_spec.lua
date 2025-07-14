@@ -26,7 +26,7 @@ describe('structures', function()
         reflist(v.outputs)
       end
       for _, v in pairs(require('build.data.products.' .. p .. '.events')) do
-        for _, pv in ipairs(v.payload or {}) do
+        for _, pv in ipairs(v.payload) do
           refty(pv.type)
         end
       end

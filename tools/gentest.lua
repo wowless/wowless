@@ -37,7 +37,7 @@ local ptablemap = {
     local t = {}
     for k, v in pairs(perproduct(p, 'events')) do
       t[k] = {
-        payload = v.payload and #v.payload or -1,
+        payload = #v.payload,
         registerable = true,
       }
     end

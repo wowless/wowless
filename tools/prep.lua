@@ -192,9 +192,9 @@ end
 local events = {}
 for k, v in pairs(parseYaml('data/products/' .. product .. '/events.yaml')) do
   events[k] = {
-    payload = v.payload and (function()
+    payload = (function()
       local t = {}
-      for _, f in ipairs(v.payload or {}) do
+      for _, f in ipairs(v.payload) do
         table.insert(t, specDefault(f))
       end
       return 'return ' .. table.concat(t, ',')

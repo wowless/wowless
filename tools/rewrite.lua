@@ -46,7 +46,7 @@ local function rewriteSpecs(fn)
   end)
   rewriteFile('events', function(_, t)
     for _, ev in pairs(t) do
-      for _, f in ipairs(ev.payload or {}) do
+      for _, f in ipairs(ev.payload) do
         fn(f)
       end
     end

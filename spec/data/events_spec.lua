@@ -5,7 +5,7 @@ describe('events', function()
         describe(name, function()
           it('elements are uniquely named', function()
             local names = {}
-            for _, arg in ipairs(event.payload or {}) do
+            for _, arg in ipairs(event.payload) do
               assert.Nil(names[arg.name])
               names[arg.name] = true
             end

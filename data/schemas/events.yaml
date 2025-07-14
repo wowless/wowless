@@ -6,6 +6,7 @@ type:
     value:
       record:
         payload:
+          required: true
           type:
             sequenceof:
               record:
