@@ -3771,6 +3771,7 @@ CONTRIBUTION_CHANGED:
     type: string
   - name: contributionID
     type: number
+  stride: 1
 CONTRIBUTION_COLLECTOR_PENDING:
   payload:
   - name: contributionID

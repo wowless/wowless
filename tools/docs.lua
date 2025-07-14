@@ -321,18 +321,17 @@ local function rewriteEvents()
   local out = require('wowapi.yaml').parseFile(filename)
   for name, ev in pairs(events) do
     local ns = split(name)
+    local payload = {}
+    for _, arg in ipairs(ev.Payload or {}) do
+      table.insert(payload, {
+        name = arg.Name,
+        nilable = arg.Nilable or nil,
+        type = t2nty(arg, ns),
+      })
+    end
     out[ev.LiteralName] = {
-      payload = (function()
-        local t = {}
-        for _, arg in ipairs(ev.Payload or {}) do
-          table.insert(t, {
-            name = arg.Name,
-            nilable = arg.Nilable or nil,
-            type = t2nty(arg, ns),
-          })
-        end
-        return t
-      end)(),
+      payload = payload,
+      stride = stride(ev.Payload),
     }
   end
   writeifchanged(filename, pprintYaml(out))
