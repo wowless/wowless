@@ -4777,7 +4777,8 @@ OWNED_AUCTION_BIDDER_INFO_RECEIVED:
   payload: {}
 OWNED_AUCTIONS_UPDATED:
   payload: {}
-PARTY_INVITE_CANCEL: {}
+PARTY_INVITE_CANCEL:
+  payload: {}
 PARTY_INVITE_REQUEST:
   payload:
   - name: name

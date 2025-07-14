@@ -57,6 +57,7 @@ runner:
     AUCTION_HOUSE_SHOW: no C_AuctionHouse
     DUEL_OUTOFBOUNDS: error in StaticPopup infrastructure
     LFG_PROPOSAL_SHOW: TODO figure out if there's an ordering issue here
+    PARTY_INVITE_CANCEL: LFGInvitePopup does not exist
   skip_slashcmds:
     ACHIEVEMENTUI: {}
     CASTRANDOM: {}

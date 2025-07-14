@@ -2,7 +2,6 @@
 events:
   never_sent:
     INVENTORY_SEARCH_UPDATE: {}
-    PARTY_INVITE_CANCEL: {}
 lies:
   apis:
     C_AddOns.GetAddOnMetadata:

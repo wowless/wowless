@@ -4563,7 +4563,8 @@ OPEN_TABARD_FRAME:
   payload: {}
 OWNED_AUCTIONS_UPDATED:
   payload: {}
-PARTY_INVITE_CANCEL: {}
+PARTY_INVITE_CANCEL:
+  payload: {}
 PARTY_INVITE_REQUEST:
   payload:
   - name: name
