@@ -6054,7 +6054,8 @@ STREAMING_ICON:
   payload:
   - name: streamingStatus
     type: number
-SUBSCRIPTION_CHANGED_KICK_IMMINENT: {}
+SUBSCRIPTION_CHANGED_KICK_IMMINENT:
+  payload: {}
 SUPER_TRACKED_QUEST_CHANGED:
   payload:
   - name: superTrackedQuestID

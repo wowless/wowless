@@ -62,6 +62,7 @@ runner:
     DUEL_OUTOFBOUNDS: error in StaticPopup infrastructure
     LFG_PROPOSAL_SHOW: TODO figure out if there's an ordering issue here
     SHOW_LFG_EXPAND_SEARCH_PROMPT: missing text
+    SUBSCRIPTION_CHANGED_KICK_IMMINENT: depends on GlueDialog_Show
   skip_slashcmds:
     ACHIEVEMENTUI: {}
     CASTRANDOM: {}
