@@ -22,7 +22,7 @@ local tests = {
     value = { 'foo', 'bar' },
   },
   ['array of string type, table value, non-empty with numbers'] = {
-    out = { { '1', '2', '3' } },
+    out = { { 1, 2, 3 } },
     spec = { type = { arrayof = 'string' } },
     value = { 1, 2, 3 },
   },
