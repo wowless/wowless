@@ -62,6 +62,7 @@ runner:
     LFG_PROPOSAL_SHOW: TODO figure out if there's an ordering issue here
     PARTY_INVITE_CANCEL: LFGInvitePopup does not exist
     SUBSCRIPTION_CHANGED_KICK_IMMINENT: depends on GlueDialog_Show
+    VAS_QUEUE_STATUS_UPDATE: depends on C_StoreGlue
   skip_slashcmds:
     ACHIEVEMENTUI: {}
     CASTRANDOM: {}
