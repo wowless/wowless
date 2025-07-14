@@ -5,6 +5,7 @@ addon:
   capsule:
     apinamespaces:
       C_AuthChallenge: {}
+      C_SecureTransfer: {}
       C_StoreSecure: {}
       C_WowTokenSecure: {}
     enums:

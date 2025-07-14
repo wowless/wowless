@@ -2,7 +2,6 @@
 events:
   never_sent:
     PARTY_INVITE_CANCEL: {}
-    SECURE_TRANSFER_CONFIRM_SEND_MAIL: {}
 lies:
   apis:
     C_AddOns.GetAddOnMetadata:

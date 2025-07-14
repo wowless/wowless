@@ -5866,6 +5866,12 @@ C_ScriptedAnimations.ScriptedAnimationEffect:
       type: number
     yawRadians:
       type: number
+C_SecureTransfer.MailInfo:
+  fields:
+    sendMoney:
+      type: number
+    target:
+      type: string
 C_SocialQueue.SocialQueueConfig:
   fields:
     DELAY_DURATION:

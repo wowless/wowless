@@ -1,7 +1,6 @@
 ---
 events:
-  never_sent:
-    SECURE_TRANSFER_CONFIRM_SEND_MAIL: {}
+  never_sent: {}
 lies:
   apis:
     C_AddOns.GetAddOnMetadata:

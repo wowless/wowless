@@ -11032,6 +11032,18 @@ C_Seasons.HasActiveSeason:
   outputs:
   - name: value
     type: boolean
+C_SecureTransfer.AcceptTrade:
+  inputs: {}
+  outputs: {}
+C_SecureTransfer.GetMailInfo:
+  inputs: {}
+  outputs:
+  - name: mailInfo
+    type:
+      structure: C_SecureTransfer.MailInfo
+C_SecureTransfer.SendMail:
+  inputs: {}
+  outputs: {}
 C_SharedCharacterServices.GetLastSeenCharacterUpgradePopup: {}
 C_SharedCharacterServices.GetLastSeenExpansionTrialPopup: {}
 C_SharedCharacterServices.GetUpgradeDistributions: {}

@@ -6,6 +6,7 @@ addon:
     apinamespaces:
       C_AuthChallenge: {}
       C_PingSecure: {}
+      C_SecureTransfer: {}
       C_StoreSecure: {}
       C_UnitAurasPrivate: {}
       C_WowTokenSecure: {}
