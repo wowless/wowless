@@ -189,14 +189,47 @@ for k, v in pairs(parseYaml('data/products/' .. product .. '/cvars.yaml')) do
   }
 end
 
+local function mkeventcheck(e)
+  local t = { 'local check=...;' }
+  local p = e.payload
+  local nsp = #p - (e.stride or 0)
+  for i = 1, #p do
+    table.insert(t, 'local spec' .. i .. '=' .. plprettywrite(p[i], '') .. ';')
+  end
+  table.insert(t, 'return function(')
+  local tt = {}
+  for i = 1, nsp do
+    table.insert(tt, 'arg' .. i)
+  end
+  if e.stride then
+    table.insert(tt, '...')
+  end
+  table.insert(t, table.concat(tt, ','))
+  table.insert(t, ')return ')
+  tt = {}
+  for i = 1, nsp do
+    table.insert(tt, 'check(spec' .. i .. ',arg' .. i .. ')')
+  end
+  if e.stride then
+    -- TODO actually check stride
+    table.insert(tt, '...')
+  end
+  table.insert(t, table.concat(tt, ','))
+  table.insert(t, 'end')
+  return table.concat(t)
+end
+local function mkeventstub(e)
+  local t = {}
+  for i, f in ipairs(e.payload) do
+    t[i] = specDefault(f)
+  end
+  return 'return ' .. table.concat(t, ',')
+end
 local events = {}
 for k, v in pairs(parseYaml('data/products/' .. product .. '/events.yaml')) do
-  local t = {}
-  for _, f in ipairs(v.payload) do
-    table.insert(t, specDefault(f))
-  end
   events[k] = {
-    stub = 'return ' .. table.concat(t, ','),
+    check = mkeventcheck(v),
+    stub = mkeventstub(v),
   }
 end
 

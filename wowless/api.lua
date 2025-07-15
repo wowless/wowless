@@ -272,9 +272,24 @@ local function new(log, maxErrors, product, loglevel)
     obj.scripts[bindingType][string.lower(name)] = script
   end
 
+  local typechecker
+  local function docheck(spec, v)
+    local vv, errmsg = typechecker(spec, v, true)
+    if errmsg then
+      error(('param %q %s'):format(spec.name, errmsg), 2)
+    end
+    return vv
+  end
+  local echecks = {}
+
   local function SendEvent(event, ...)
     if not events.IsEventValid(event) then
       error('internal error: cannot send ' .. event)
+    end
+    local check = echecks[event]
+    if not check then
+      check = assert(loadstring_untainted(datalua.events[event].check, event))(docheck)
+      echecks[event] = check
     end
     if loglevel >= 1 then
       local largs = {}
@@ -285,7 +300,7 @@ local function new(log, maxErrors, product, loglevel)
       log(1, 'sending event %s (%s)', event, table.concat(largs, ', '))
     end
     for _, reg in ipairs(events.GetFramesRegisteredForEvent(event)) do
-      RunScript(reg, 'OnEvent', event, ...)
+      RunScript(reg, 'OnEvent', event, check(...))
     end
   end
 
@@ -406,6 +421,7 @@ local function new(log, maxErrors, product, loglevel)
   api.modules = modules
   events = api.modules.events -- setting upvalue for SendEvent, TODO clean this up
   time = api.modules.time -- setting upvalue for NextFrame, TODO clean this up
+  typechecker = require('wowless.typecheck')(api)
 
   require('wowless.util').mixin(uiobjectTypes, require('wowapi.uiobjects')(api))
   return api
