@@ -19,6 +19,12 @@
       "type": "shell"
     },
     {
+      "command": "ninja build/cmake/bump && build/cmake/bump",
+      "label": "bump",
+      "problemMatcher": [],
+      "type": "shell"
+    },
+    {
       "command": "ninja | cat -",
       "group": {
         "isDefault": true,
