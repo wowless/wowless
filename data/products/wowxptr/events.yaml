@@ -4866,6 +4866,10 @@ INSTANCE_ENCOUNTER_OBJECTIVE_UPDATE:
     type: number
 INSTANCE_GROUP_SIZE_CHANGED:
   payload: {}
+INSTANCE_LEAVER_STATUS_CHANGED:
+  payload:
+  - name: isLeaver
+    type: boolean
 INSTANCE_LOCK_START:
   payload: {}
 INSTANCE_LOCK_STOP:
@@ -6159,13 +6163,7 @@ PLAYER_XP_UPDATE:
   payload:
   - name: unitTarget
     type: unit
-PLAYERBANKBAGSLOTS_CHANGED:
-  payload: {}
 PLAYERBANKSLOTS_CHANGED:
-  payload:
-  - name: slot
-    type: number
-PLAYERREAGENTBANKSLOTS_CHANGED:
   payload:
   - name: slot
     type: number
@@ -6484,10 +6482,6 @@ READY_CHECK_FINISHED:
   payload:
   - name: preempted
     type: boolean
-REAGENTBANK_PURCHASED:
-  payload: {}
-REAGENTBANK_UPDATE:
-  payload: {}
 RECEIVED_ACHIEVEMENT_LIST:
   payload: {}
 RECEIVED_ACHIEVEMENT_MEMBER_LIST:
@@ -8434,24 +8428,6 @@ VOICE_CHAT_TTS_SPEAK_TEXT_UPDATE:
 VOICE_CHAT_TTS_VOICES_UPDATE:
   payload: {}
 VOICE_CHAT_VAD_SETTINGS_UPDATED:
-  payload: {}
-VOID_DEPOSIT_WARNING:
-  payload:
-  - name: slot
-    type: number
-  - name: link
-    type: string
-VOID_STORAGE_CONTENTS_UPDATE:
-  payload: {}
-VOID_STORAGE_DEPOSIT_UPDATE:
-  payload:
-  - name: slot
-    type: number
-VOID_STORAGE_UPDATE:
-  payload: {}
-VOID_TRANSFER_DONE:
-  payload: {}
-VOID_TRANSFER_SUCCESS:
   payload: {}
 VOTE_KICK_REASON_NEEDED:
   payload:

@@ -721,6 +721,22 @@ C_Bank.BankTabData:
       type: number
     name:
       type: string
+    tabCleanupConfirmation:
+      type: string
+    tabNameEditBoxHeader:
+      type: string
+C_Bank.PurchasableBankTabData:
+  fields:
+    canAfford:
+      type: boolean
+    purchasePromptBody:
+      type: string
+    purchasePromptConfirmation:
+      type: string
+    purchasePromptTitle:
+      type: string
+    tabCost:
+      type: number
 C_BattleNet.BNetAccountInfo:
   fields:
     accountName:
@@ -3852,6 +3868,9 @@ C_LFGList.LfgSearchResultPlayerInfo:
     className:
       type: string
     isLeader:
+      type: boolean
+    isLeaver:
+      default: false
       type: boolean
     level:
       nilable: true

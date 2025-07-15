@@ -87,13 +87,6 @@ AutoEquipCursorItem:
   outputs: {}
 AutoLootMailItem: {}
 AutoStoreGuildBankItem: {}
-BankButtonIDToInvSlotID:
-  inputs:
-  - type: number
-  - nilable: true
-    type: number
-  outputs:
-  - type: number
 BattlefieldMgrEntryInviteResponse: {}
 BattlefieldMgrExitRequest: {}
 BattlefieldMgrQueueInviteResponse: {}
@@ -223,7 +216,6 @@ BuybackItem: {}
 BuyGuildBankTab: {}
 BuyGuildCharter: {}
 BuyMerchantItem: {}
-BuyReagentBank: {}
 BuyTrainerService: {}
 C_AccountInfo.GetIDFromBattleNetAccountGUID:
   inputs:
@@ -2704,6 +2696,11 @@ C_AzeriteItem.IsUnlimitedLevelingUnlocked:
   outputs:
   - name: isUnlimitedLevelingUnlocked
     type: boolean
+C_Bank.AreAnyBankTypesViewable:
+  inputs: {}
+  outputs:
+  - name: areAnyBankTypesViewable
+    type: boolean
 C_Bank.AutoDepositItemsIntoBank:
   inputs:
   - name: bankType
@@ -2761,6 +2758,32 @@ C_Bank.DepositMoney:
   - name: amount
     type: number
   outputs: {}
+C_Bank.DoesBankTypeSupportAutoDeposit:
+  inputs:
+  - name: bankType
+    type:
+      enum: BankType
+  outputs:
+  - name: doesBankTypeSupportAutoDeposit
+    type: boolean
+C_Bank.DoesBankTypeSupportMoneyTransfer:
+  inputs:
+  - name: bankType
+    type:
+      enum: BankType
+  outputs:
+  - name: doesBankTypeSupportMoneyTransfer
+    type: boolean
+C_Bank.FetchBankLockedReason:
+  inputs:
+  - name: bankType
+    type:
+      enum: BankType
+  outputs:
+  - name: reason
+    nilable: true
+    type:
+      enum: BankLockedReason
 C_Bank.FetchDepositedMoney:
   inputs:
   - name: bankType
@@ -2769,15 +2792,16 @@ C_Bank.FetchDepositedMoney:
   outputs:
   - name: amount
     type: number
-C_Bank.FetchNextPurchasableBankTabCost:
+C_Bank.FetchNextPurchasableBankTabData:
   inputs:
   - name: bankType
     type:
       enum: BankType
   outputs:
-  - name: nextPurchasableTabCost
+  - name: nextPurchasableTabData
     nilable: true
-    type: number
+    type:
+      structure: C_Bank.PurchasableBankTabData
 C_Bank.FetchNumPurchasedBankTabs:
   inputs:
   - name: bankType
@@ -2806,6 +2830,13 @@ C_Bank.FetchPurchasedBankTabIDs:
     type:
       arrayof:
         enum: BagIndex
+C_Bank.FetchViewableBankTypes:
+  inputs: {}
+  outputs:
+  - name: viewableBankTypes
+    type:
+      arrayof:
+        enum: BankType
 C_Bank.HasMaxBankTabs:
   inputs:
   - name: bankType
@@ -7219,10 +7250,13 @@ C_Container.SortAccountBankBags:
 C_Container.SortBags:
   inputs: {}
   outputs: {}
-C_Container.SortBankBags:
-  inputs: {}
+C_Container.SortBank:
+  inputs:
+  - name: bankType
+    type:
+      enum: BankType
   outputs: {}
-C_Container.SortReagentBankBags:
+C_Container.SortBankBags:
   inputs: {}
   outputs: {}
 C_Container.SplitContainerItem:
@@ -10907,6 +10941,11 @@ C_IncomingSummon.IncomingSummonStatus:
   - name: status
     type:
       enum: SummonStatus
+C_InstanceLeaver.IsPlayerLeaver:
+  inputs: {}
+  outputs:
+  - name: isLeaver
+    type: boolean
 C_InterfaceFileManifest.GetInterfaceArtFiles:
   inputs: {}
   mayreturnnothing: true
@@ -12725,6 +12764,15 @@ C_LFGList.GetFilteredSearchResults:
   - name: filteredResults
     type:
       arrayof: number
+C_LFGList.GetGroupLeaverCountsByRole:
+  inputs: {}
+  outputs:
+  - name: tankLeavers
+    type: number
+  - name: healerLeavers
+    type: number
+  - name: damageLeavers
+    type: number
 C_LFGList.GetKeystoneForActivity:
   inputs:
   - name: activityID
@@ -14835,6 +14883,13 @@ C_PartyInfo.GetActiveCategories:
   - name: categories
     type:
       arrayof: number
+C_PartyInfo.GetAvailableLootMethods:
+  inputs: {}
+  outputs:
+  - name: methods
+    type:
+      arrayof:
+        enum: LootMethod
 C_PartyInfo.GetInstanceAbandonShutdownTime:
   inputs: {}
   outputs:
@@ -14895,6 +14950,18 @@ C_PartyInfo.GetInviteReferralInfo:
     type: boolean
   - name: outClubId
     type: string
+C_PartyInfo.GetLootMethod:
+  inputs: {}
+  outputs:
+  - name: method
+    type:
+      enum: LootMethod
+  - name: masterLootPartyID
+    nilable: true
+    type: number
+  - name: masterLooterRaidID
+    nilable: true
+    type: number
 C_PartyInfo.GetMinItemLevel:
   inputs:
   - name: avgItemLevelCategory
@@ -15000,6 +15067,17 @@ C_PartyInfo.SetInstanceAbandonVoteResponse:
   - name: response
     type: boolean
   outputs: {}
+C_PartyInfo.SetLootMethod:
+  inputs:
+  - name: method
+    type:
+      enum: LootMethod
+  - name: lootMaster
+    nilable: true
+    type: string
+  outputs:
+  - name: success
+    type: boolean
 C_PartyInfo.SetRestrictPings:
   inputs:
   - name: restrictTo
@@ -16072,6 +16150,16 @@ C_PlayerInfo.HasVisibleInvSlot:
     type: number
   outputs:
   - name: isVisible
+    type: boolean
+C_PlayerInfo.IsAccountBankEnabled:
+  inputs: {}
+  outputs:
+  - name: isAccountBankEnabled
+    type: boolean
+C_PlayerInfo.IsCharacterBankEnabled:
+  inputs: {}
+  outputs:
+  - name: isCharacterBankEnabled
     type: boolean
 C_PlayerInfo.IsConnected:
   inputs:
@@ -21706,35 +21794,6 @@ C_TooltipInfo.GetUpgradeItem:
   - name: data
     type:
       structure: TooltipData
-C_TooltipInfo.GetVoidDepositItem:
-  inputs:
-  - name: slot
-    type: number
-  mayreturnnothing: true
-  outputs:
-  - name: data
-    type:
-      structure: TooltipData
-C_TooltipInfo.GetVoidItem:
-  inputs:
-  - name: tab
-    type: number
-  - name: slot
-    type: number
-  mayreturnnothing: true
-  outputs:
-  - name: data
-    type:
-      structure: TooltipData
-C_TooltipInfo.GetVoidWithdrawalItem:
-  inputs:
-  - name: slot
-    type: number
-  mayreturnnothing: true
-  outputs:
-  - name: data
-    type:
-      structure: TooltipData
 C_TooltipInfo.GetWeeklyReward:
   inputs:
   - name: itemDBID
@@ -26229,11 +26288,6 @@ CanUpgradeExpansion:
   outputs:
   - name: canUpgradeExpansion
     type: boolean
-CanUseVoidStorage:
-  inputs: {}
-  outputs:
-  - name: value
-    type: boolean
 CanViewGuildRecipes: {}
 CanWithdrawGuildBankMoney:
   inputs: {}
@@ -26364,14 +26418,10 @@ ClearTarget:
   - name: willMakeChange
     type: boolean
 ClearTutorials: {}
-ClearVoidTransferDepositSlot: {}
 ClickSendMailItemButton: {}
 ClickSocketButton: {}
 ClickTargetTradeButton: {}
 ClickTradeButton: {}
-ClickVoidStorageSlot: {}
-ClickVoidTransferDepositSlot: {}
-ClickVoidTransferWithdrawalSlot: {}
 ClickWorldMapActionButton: {}
 CloseGuildBankFrame:
   inputs: {}
@@ -26725,7 +26775,6 @@ DeleteMacro:
 DeleteRaidProfile: {}
 DemoteAssistant: {}
 DepositGuildBankMoney: {}
-DepositReagentBank: {}
 DescendStop:
   inputs: {}
   outputs: {}
@@ -26856,7 +26905,6 @@ EquipPendingItem:
   outputs: {}
 error:
   impl: error
-ExecuteVoidTransfer: {}
 ExpandGuildTradeSkillHeader: {}
 ExpandQuestHeader: {}
 ExpandWarGameHeader: {}
@@ -27217,14 +27265,6 @@ GetBackgroundLoadingStatus:
   inputs: {}
   outputs:
   - name: result
-    type: number
-GetBankSlotCost:
-  inputs:
-  - name: numSlots
-    nilable: true
-    type: number
-  outputs:
-  - name: cost
     type: number
 GetBattlefieldArenaFaction:
   inputs: {}
@@ -28680,16 +28720,6 @@ GetLooseMacroIcons:
   outputs: {}
 GetLooseMacroItemIcons: {}
 GetLootInfo: {}
-GetLootMethod:
-  inputs: {}
-  outputs:
-  - name: lootMethod
-    stub: freeforall
-    type: string
-  - name: partyMaster
-    type: number
-  - name: raidMaster
-    type: number
 GetLootRollItemInfo:
   inputs:
   - name: rollID
@@ -29066,11 +29096,6 @@ GetNumAvailableQuests:
   outputs:
   - name: numAvailableQuests
     type: number
-GetNumBankSlots:
-  inputs: {}
-  outputs:
-  - type: number
-  - type: oneornil
 GetNumBattlefieldFlagPositions:
   outputs:
   - type: number
@@ -29304,16 +29329,6 @@ GetNumUnspentTalents:
   inputs: {}
   outputs:
   - name: numUnspentTalents
-    type: number
-GetNumVoidTransferDeposit:
-  inputs: {}
-  outputs:
-  - name: numDeposits
-    type: number
-GetNumVoidTransferWithdrawal:
-  inputs: {}
-  outputs:
-  - name: numWithdrawals
     type: number
 GetNumWarGameTypes: {}
 GetObjectiveText: {}
@@ -29821,7 +29836,6 @@ GetReadyCheckStatus:
     nilable: true
     type: string
 GetReadyCheckTimeLeft: {}
-GetReagentBankCost: {}
 GetRealmID:
   inputs: {}
   outputs:
@@ -30771,59 +30785,6 @@ GetVersatilityBonus:
   - name: result
     type: number
 GetVideoCaps: {}
-GetVoidItemHyperlinkString: {}
-GetVoidItemInfo:
-  inputs:
-  - name: page
-    type: number
-  - name: slot
-    type: number
-  outputs:
-  - name: itemID
-    type: number
-  - name: textureName
-    type: number
-  - name: locked
-    type: boolean
-  - name: recentDeposit
-    type: boolean
-  - name: isFiltered
-    type: boolean
-  - name: quality
-    type: number
-GetVoidStorageSlotPageIndex: {}
-GetVoidTransferCost:
-  inputs: {}
-  outputs:
-  - name: cost
-    type: number
-GetVoidTransferDepositInfo:
-  inputs:
-  - name: index
-    type: number
-  outputs:
-  - name: itemID
-    type: number
-  - name: textureName
-    type: number
-  - name: quality
-    type: number
-GetVoidTransferWithdrawalInfo:
-  inputs:
-  - name: index
-    type: number
-  outputs:
-  - name: itemID
-    type: number
-  - name: textureName
-    type: number
-  - name: quality
-    type: number
-GetVoidUnlockCost:
-  inputs: {}
-  outputs:
-  - name: voidStorageUnlockCost
-    type: number
 GetWarGameQueueStatus: {}
 GetWarGameTypeInfo: {}
 GetWeaponEnchantInfo: {}
@@ -31504,11 +31465,6 @@ IsRangedWeapon:
   outputs:
   - name: result
     type: boolean
-IsReagentBankUnlocked:
-  inputs: {}
-  outputs:
-  - name: value
-    type: boolean
 IsRecognizedName: {}
 IsResting:
   inputs: {}
@@ -31653,11 +31609,6 @@ IsVeteranTrialAccount:
   inputs: {}
   outputs:
   - name: isVeteranTrialAccount
-    type: boolean
-IsVoidStorageReady:
-  inputs: {}
-  outputs:
-  - name: ready
     type: boolean
 IsWargame: {}
 IsWindowsClient:
@@ -32068,7 +32019,6 @@ PromoteToLeader:
   - name: unit
     type: unit
   outputs: {}
-PurchaseSlot: {}
 PutItemInBackpack: {}
 PutItemInBag: {}
 QueryGuildBankLog: {}
@@ -32119,7 +32069,6 @@ rawget:
   impl: rawget
 rawset:
   impl: rawset
-ReagentBankButtonIDToInvSlotID: {}
 RedockChatWindows:
   inputs: {}
   outputs: {}
@@ -32461,7 +32410,6 @@ SetLFGDungeon: {}
 SetLFGDungeonEnabled: {}
 SetLFGHeaderCollapsed: {}
 SetLFGRoles: {}
-SetLootMethod: {}
 SetLootPortrait: {}
 SetLootSpecialization:
   inputs:
@@ -34398,7 +34346,6 @@ UnitXPMax:
   - name: result
     type: number
 UnlearnSpecialization: {}
-UnlockVoidStorage: {}
 UnmuteSoundFile: {}
 unpack:
   impl: unpack
