@@ -324,6 +324,7 @@ local function rewriteEvents()
     local payload = {}
     for _, arg in ipairs(ev.Payload or {}) do
       table.insert(payload, {
+        default = default(arg),
         name = arg.Name,
         nilable = arg.Nilable or nil,
         type = t2nty(arg, ns),

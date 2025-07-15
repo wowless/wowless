@@ -618,7 +618,8 @@ BN_CHAT_WHISPER_UNDELIVERABLE:
     type: number
 BN_CONNECTED:
   payload:
-  - name: suppressNotification
+  - default: false
+    name: suppressNotification
     type: boolean
 BN_CUSTOM_MESSAGE_CHANGED:
   payload:
@@ -631,19 +632,22 @@ BN_DISCONNECTED:
   payload:
   - name: result
     type: boolean
-  - name: suppressNotification
+  - default: false
+    name: suppressNotification
     type: boolean
 BN_FRIEND_ACCOUNT_OFFLINE:
   payload:
   - name: friendId
     type: number
-  - name: isCompanionApp
+  - default: false
+    name: isCompanionApp
     type: boolean
 BN_FRIEND_ACCOUNT_ONLINE:
   payload:
   - name: friendId
     type: number
-  - name: isCompanionApp
+  - default: false
+    name: isCompanionApp
     type: boolean
 BN_FRIEND_INFO_CHANGED:
   payload:

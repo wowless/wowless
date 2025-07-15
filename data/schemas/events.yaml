@@ -10,6 +10,9 @@ type:
           type:
             sequenceof:
               record:
+                default:
+                  type:
+                    schema: any
                 name:
                   required: true
                   type: string

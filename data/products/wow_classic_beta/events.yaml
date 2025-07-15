@@ -556,13 +556,15 @@ BN_FRIEND_ACCOUNT_OFFLINE:
   payload:
   - name: friendId
     type: number
-  - name: isCompanionApp
+  - default: false
+    name: isCompanionApp
     type: boolean
 BN_FRIEND_ACCOUNT_ONLINE:
   payload:
   - name: friendId
     type: number
-  - name: isCompanionApp
+  - default: false
+    name: isCompanionApp
     type: boolean
 BN_FRIEND_INFO_CHANGED:
   payload:
