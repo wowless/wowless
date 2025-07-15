@@ -273,13 +273,17 @@ local function new(log, maxErrors, product, loglevel)
   end
 
   local function SendEvent(event, ...)
-    assert(events.IsEventValid(event), 'internal error: cannot send ' .. event)
-    local largs = {}
-    for i = 1, select('#', ...) do
-      local arg = select(i, ...)
-      table.insert(largs, type(arg) == 'string' and ('%q'):format(arg) or tostring(arg))
+    if not events.IsEventValid(event) then
+      error('internal error: cannot send ' .. event)
     end
-    log(1, 'sending event %s (%s)', event, table.concat(largs, ', '))
+    if loglevel >= 1 then
+      local largs = {}
+      for i = 1, select('#', ...) do
+        local arg = select(i, ...)
+        table.insert(largs, type(arg) == 'string' and ('%q'):format(arg) or tostring(arg))
+      end
+      log(1, 'sending event %s (%s)', event, table.concat(largs, ', '))
+    end
     for _, reg in ipairs(events.GetFramesRegisteredForEvent(event)) do
       RunScript(reg, 'OnEvent', event, ...)
     end
