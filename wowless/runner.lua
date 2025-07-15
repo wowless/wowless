@@ -159,8 +159,8 @@ local function run(cfg)
       end
       for k, v in sorted(datalua.events) do
         if not eventBlacklist[k] and not skip[k] then
-          if v.payload == 'return ' or cfg.allevents then
-            local text = 'local Mixin = ...;' .. v.payload
+          if v.stub == 'return ' or cfg.allevents then
+            local text = 'local Mixin = ...;' .. v.stub
             api.SendEvent(k, assert(loadstring_untainted(text))(stubMixin))
           end
         end
