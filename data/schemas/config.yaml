@@ -71,6 +71,8 @@ type:
     runtime:
       type:
         record:
+          send_warntype:
+            type: boolean
           warners:
             type:
               mapof:

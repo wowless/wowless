@@ -291,7 +291,6 @@ local function new(log, maxErrors, product, loglevel)
     CHAT_MSG_SYSTEM = true,
     CHAT_MSG_TEXT_EMOTE = true,
     LOOT_OPENED = true,
-    LUA_WARNING = true,
   }
   for k in pairs(echeckdeny) do
     echecks[k] = forward
@@ -322,7 +321,11 @@ local function new(log, maxErrors, product, loglevel)
     local ltype = string.lower(type)
     if not IsIntrinsicType(ltype) or not InheritsFrom(ltype, 'frame') then
       if datalua.config.runtime.warners[ltype] then
-        SendEvent('LUA_WARNING', 0, 'Unknown frame type: ' .. type)
+        if datalua.config.runtime.send_warntype then
+          SendEvent('LUA_WARNING', 0, 'Unknown frame type: ' .. type)
+        else
+          SendEvent('LUA_WARNING', 'Unknown frame type: ' .. type)
+        end
       end
       error('CreateFrame: Unknown frame type \'' .. type .. '\'')
     end

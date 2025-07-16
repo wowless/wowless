@@ -72,6 +72,7 @@ runner:
     RAIDFINDER: {}
     USERANDOM: {}
 runtime:
+  send_warntype: true
   warners:
     archaeologydigsiteframe: {}
     fontstring: {}
