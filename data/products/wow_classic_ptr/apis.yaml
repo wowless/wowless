@@ -19230,8 +19230,66 @@ GetSourceLocation:
     type: string
 GetSpecChangeCost: {}
 GetSpecializationInfoByID: {}
-GetSpecializationInfoForClassID: {}
-GetSpecializationInfoForSpecID: {}
+GetSpecializationInfoForClassID:
+  inputs:
+  - name: classID
+    type: number
+  - name: index
+    type: number
+  - name: gender
+    nilable: true
+    type:
+      enum: UnitSex
+  outputs:
+  - name: id
+    type: number
+  - name: name
+    type: string
+  - name: description
+    type: string
+  - name: icon
+    type: number
+  - name: role
+    type: string
+  - name: recommended
+    type: boolean
+  - name: allowedForBoost
+    type: boolean
+  - name: masterySpell1
+    nilable: true
+    type: number
+  - name: masterySpell2
+    nilable: true
+    type: number
+GetSpecializationInfoForSpecID:
+  inputs:
+  - name: specID
+    type: number
+  - name: gender
+    nilable: true
+    type:
+      enum: UnitSex
+  outputs:
+  - name: id
+    type: number
+  - name: name
+    type: string
+  - name: description
+    type: string
+  - name: icon
+    type: number
+  - name: role
+    type: string
+  - name: recommended
+    type: boolean
+  - name: allowedForBoost
+    type: boolean
+  - name: masterySpell1
+    nilable: true
+    type: number
+  - name: masterySpell2
+    nilable: true
+    type: number
 GetSpecializationNameForSpecID:
   inputs:
   - name: specID
