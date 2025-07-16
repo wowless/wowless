@@ -168,7 +168,11 @@ local function run(cfg)
     end,
     loot = function()
       api.SendEvent('LOOT_READY', false)
-      api.SendEvent('LOOT_OPENED', false, false)
+      if datalua.config.runtime.send_isfromitem then
+        api.SendEvent('LOOT_OPENED', false, false)
+      else
+        api.SendEvent('LOOT_OPENED', false)
+      end
       api.SendEvent('LOOT_CLOSED')
     end,
     macrotext = function()

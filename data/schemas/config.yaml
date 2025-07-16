@@ -71,6 +71,8 @@ type:
     runtime:
       type:
         record:
+          send_isfromitem:
+            type: boolean
           send_warntype:
             type: boolean
           warners:

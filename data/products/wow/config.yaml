@@ -75,6 +75,7 @@ runner:
     GUILD_UNINVITE: {}
     USERANDOM: {}
 runtime:
+  send_isfromitem: true
   warners:
     fontstring: {}
     line: {}
