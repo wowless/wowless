@@ -289,7 +289,6 @@ local function new(log, maxErrors, product, loglevel)
   end
   local echeckdeny = {
     CHAT_MSG_SYSTEM = true,
-    CHAT_MSG_TEXT_EMOTE = true,
   }
   for k in pairs(echeckdeny) do
     echecks[k] = forward
