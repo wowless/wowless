@@ -272,6 +272,38 @@ local function new(log, maxErrors, product, loglevel)
     obj.scripts[bindingType][string.lower(name)] = script
   end
 
+  local funcheck -- TODO clean up ordering hell here
+  local echecks = setmetatable({}, {
+    __index = function(t, k)
+      local e = datalua.events[k]
+      local v = funcheck.makeCheckOutputs(k, {
+        outputs = e.payload,
+        outstride = e.stride,
+      })
+      t[k] = v
+      return v
+    end,
+  })
+  local function forward(...)
+    return ...
+  end
+  local echeckdeny = {
+    ADDON_LOADED = true,
+    CHAT_MSG_SYSTEM = true,
+    CHAT_MSG_TEXT_EMOTE = true,
+    LOOT_OPENED = true,
+    LUA_WARNING = true,
+  }
+  for k in pairs(echeckdeny) do
+    echecks[k] = forward
+  end
+
+  local function DoSendEvent(event, ...)
+    for _, reg in ipairs(events.GetFramesRegisteredForEvent(event)) do
+      RunScript(reg, 'OnEvent', event, ...)
+    end
+  end
+
   local function SendEvent(event, ...)
     if not events.IsEventValid(event) then
       error('internal error: cannot send ' .. event)
@@ -284,9 +316,7 @@ local function new(log, maxErrors, product, loglevel)
       end
       log(1, 'sending event %s (%s)', event, table.concat(largs, ', '))
     end
-    for _, reg in ipairs(events.GetFramesRegisteredForEvent(event)) do
-      RunScript(reg, 'OnEvent', event, ...)
-    end
+    DoSendEvent(event, echecks[event](...))
   end
 
   local function CreateFrame(type, name, parent, templateNames, id)
@@ -406,6 +436,9 @@ local function new(log, maxErrors, product, loglevel)
   api.modules = modules
   events = api.modules.events -- setting upvalue for SendEvent, TODO clean this up
   time = api.modules.time -- setting upvalue for NextFrame, TODO clean this up
+
+  local typecheck = require('wowless.typecheck')(api)
+  funcheck = require('wowless.funcheck')(typecheck, log)
 
   require('wowless.util').mixin(uiobjectTypes, require('wowapi.uiobjects')(api))
   return api
