@@ -284,15 +284,6 @@ local function new(log, maxErrors, product, loglevel)
       return v
     end,
   })
-  local function forward(...)
-    return ...
-  end
-  local echeckdeny = {
-    CHAT_MSG_SYSTEM = true,
-  }
-  for k in pairs(echeckdeny) do
-    echecks[k] = forward
-  end
 
   local function DoSendEvent(event, ...)
     for _, reg in ipairs(events.GetFramesRegisteredForEvent(event)) do
