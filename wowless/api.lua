@@ -288,7 +288,6 @@ local function new(log, maxErrors, product, loglevel)
     return ...
   end
   local echeckdeny = {
-    ADDON_LOADED = true,
     CHAT_MSG_SYSTEM = true,
     CHAT_MSG_TEXT_EMOTE = true,
     LOOT_OPENED = true,

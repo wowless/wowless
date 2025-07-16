@@ -851,7 +851,7 @@ local function loader(api, cfg)
       toc.loaded = true
     end
     api.log(1, 'done loading %s', addonName)
-    api.SendEvent('ADDON_LOADED', addonName)
+    api.SendEvent('ADDON_LOADED', addonName, not not toc.bindings)
     for _, revwith in ipairs(toc.revwiths) do
       api.log(1, 'processing LoadWith %q -> %q', addonName, revwith)
       doLoadAddon(revwith)
