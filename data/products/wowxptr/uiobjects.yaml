@@ -6081,6 +6081,14 @@ SimpleHTML:
       outputs:
       - name: format
         type: string
+    GetJustifyH:
+      inputs:
+      - name: textType
+        type: string
+      outputs:
+      - name: justifyH
+        type: JustifyHorizontal
+      override: true
     GetJustifyV:
       inputs:
       - name: textType
@@ -6101,6 +6109,14 @@ SimpleHTML:
       - name: format
         type: string
       outputs: {}
+    SetJustifyH:
+      inputs:
+      - name: textType
+        type: string
+      - name: justifyH
+        type: JustifyHorizontal
+      outputs: {}
+      override: true
     SetJustifyV:
       inputs:
       - name: textType
