@@ -715,8 +715,8 @@ AnimationGroup:
       impl: AnimationGroup/GetAnimations
       inputs: {}
       outputs:
-      - name: scriptObject
-        type: UIObject
+      - name: anims
+        type: Animation
       outstride: 1
     GetAnimationSpeedMultiplier:
       inputs: {}
@@ -1083,13 +1083,13 @@ Button:
     RegisterForClicks:
       impl: Button/RegisterForClicks
       inputs:
-      - name: button
+      - name: buttons
         type: string
       instride: 1
       outputs: {}
     RegisterForMouse:
       inputs:
-      - name: button
+      - name: buttons
         type: string
       instride: 1
       outputs: {}
@@ -3048,13 +3048,15 @@ Frame:
       inputs:
       - name: attributeName
         type: string
-      - name: unpackedPrimitiveType
+      - name: arguments
+        nilable: true
         type: string
       instride: 1
       outputs:
       - name: success
         type: boolean
-      - name: unpackedPrimitiveType
+      - name: returns
+        nilable: true
         type: string
       outstride: 1
     GetAttribute:
@@ -3081,8 +3083,8 @@ Frame:
       impl: Frame/GetChildren
       inputs: {}
       outputs:
-      - name: scriptObject
-        type: UIObject
+      - name: children
+        type: Frame
       outstride: 1
     GetClampRectInsets:
       inputs: {}
@@ -3202,8 +3204,8 @@ Frame:
       impl: Frame/GetRegions
       inputs: {}
       outputs:
-      - name: scriptObject
-        type: UIObject
+      - name: regions
+        type: Region
       outstride: 1
     GetResizeBounds:
       impl:
@@ -3367,7 +3369,7 @@ Frame:
         type: boolean
     RegisterForDrag:
       inputs:
-      - name: button
+      - name: buttons
         type: string
       instride: 1
       outputs: {}
@@ -5052,8 +5054,8 @@ Path:
       impl: Path/GetControlPoints
       inputs: {}
       outputs:
-      - name: scriptObject
-        type: UIObject
+      - name: points
+        type: ControlPoint
       outstride: 1
     GetCurveType:
       impl:
@@ -5466,8 +5468,8 @@ Region:
       impl: Region/GetAnimationGroups
       inputs: {}
       outputs:
-      - name: scriptObject
-        type: UIObject
+      - name: groups
+        type: AnimationGroup
       outstride: 1
     GetBottom:
       impl:
@@ -5748,7 +5750,7 @@ Region:
       outputs: {}
     SetPassThroughButtons:
       inputs:
-      - name: button
+      - name: buttons
         type: string
       instride: 1
       outputs: {}

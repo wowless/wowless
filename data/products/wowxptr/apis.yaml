@@ -629,15 +629,15 @@ C_AddOnProfiler.MeasureCall:
   inputs:
   - name: func
     type: table
-  - name: unpackedPrimitiveType
-    type: number
+  - name: arguments
+    type: table
   instride: 1
   outputs:
   - name: results
     type:
       structure: C_AddOnProfiler.AddOnProfilerCallResults
-  - name: unpackedPrimitiveType
-    type: number
+  - name: returns
+    type: table
   outstride: 1
 C_AddOns.DisableAddOn:
   inputs:
@@ -686,7 +686,7 @@ C_AddOns.GetAddOnDependencies:
   - name: name
     type: uiAddon
   outputs:
-  - name: unpackedPrimitiveType
+  - name: deps
     type: string
   outstride: 1
 C_AddOns.GetAddOnEnableState:
@@ -751,7 +751,7 @@ C_AddOns.GetAddOnOptionalDependencies:
   - name: name
     type: uiAddon
   outputs:
-  - name: unpackedPrimitiveType
+  - name: deps
     type: string
   outstride: 1
 C_AddOns.GetNumAddOns:
@@ -20208,6 +20208,45 @@ C_SpellBook.IsSpellBookItemUsable:
     type: boolean
   - name: insufficientPower
     type: boolean
+C_SpellBook.IsSpellInSpellBook:
+  inputs:
+  - name: spellID
+    type: number
+  - default: 0
+    name: spellBank
+    type:
+      enum: SpellBookSpellBank
+  - default: true
+    name: includeOverrides
+    type: boolean
+  outputs:
+  - name: isInSpellBook
+    type: boolean
+C_SpellBook.IsSpellKnown:
+  inputs:
+  - name: spellID
+    type: number
+  - default: 0
+    name: spellBank
+    type:
+      enum: SpellBookSpellBank
+  outputs:
+  - name: isKnown
+    type: boolean
+C_SpellBook.IsSpellKnownOrInSpellBook:
+  inputs:
+  - name: spellID
+    type: number
+  - default: 0
+    name: spellBank
+    type:
+      enum: SpellBookSpellBank
+  - default: true
+    name: includeOverrides
+    type: boolean
+  outputs:
+  - name: isKnownOrInSpellBook
+    type: boolean
 C_SpellBook.PickupSpellBookItem:
   inputs:
   - name: spellBookItemSlotIndex
@@ -26680,7 +26719,7 @@ CreateFrame:
 CreateFromMixins:
   impl: CreateFromMixins
   inputs:
-  - name: mixin
+  - name: mixins
     type: table
   instride: 1
   outputs:
@@ -27222,7 +27261,7 @@ GetAvailableLocales:
     name: ignoreLocaleRestrictions
     type: boolean
   outputs:
-  - name: unpackedPrimitiveType
+  - name: localeName
     type: string
   outstride: 1
 GetAvailableQuestInfo:
@@ -31425,7 +31464,6 @@ IsPlayerMoving:
   - name: result
     type: boolean
 IsPlayerNeutral: {}
-IsPlayerSpell: {}
 IsPossessBarVisible: {}
 IsPublicBuild:
   impl: IsPublicBuild
@@ -31510,17 +31548,6 @@ IsShiftKeyDown:
     type: boolean
 IsSpecializationActivateSpell: {}
 IsSpellClassOrSpec: {}
-IsSpellKnown: {}
-IsSpellKnownOrOverridesKnown:
-  inputs:
-  - name: spellID
-    type: number
-  - name: isPet
-    nilable: true
-    type: boolean
-  outputs:
-  - name: value
-    type: boolean
 IsSpellValidForPendingGlyph: {}
 IsStackableAction: {}
 IsStealthed:
@@ -31807,7 +31834,7 @@ Mixin:
   inputs:
   - name: object
     type: table
-  - name: mixin
+  - name: mixins
     type: table
   instride: 1
   outputs:

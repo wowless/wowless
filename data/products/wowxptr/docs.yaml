@@ -9,28 +9,9 @@ lies:
       outputs:
       - _add:
           nilable: true
-    CreateFromMixins:
-      inputs:
-      - _change:
-          from:
-            name: unpackedPrimitiveType
-            type: number
-          to:
-            name: mixin
-            type: table
     GetSpecializationInfoForClassID:
       _add:
         mayreturnnothing: true
-    Mixin:
-      inputs:
-        2:
-          _change:
-            from:
-              name: unpackedPrimitiveType
-              type: number
-            to:
-              name: mixin
-              type: table
     UnitFactionGroup:
       _add:
         mayreturnnothing: true
@@ -78,24 +59,6 @@ lies:
         outputs:
         - _add:
             nilable: true
-      RegisterForClicks:
-        inputs:
-        - _change:
-            from:
-              name: unpackedPrimitiveType
-              type: number
-            to:
-              name: button
-              type: string
-      RegisterForMouse:
-        inputs:
-        - _change:
-            from:
-              name: unpackedPrimitiveType
-              type: number
-            to:
-              name: button
-              type: string
       SetFormattedText:
         _add:
           instride: 1
@@ -114,15 +77,6 @@ lies:
             _change:
               from: string
               to: unknown
-      RegisterForDrag:
-        inputs:
-        - _change:
-            from:
-              name: unpackedPrimitiveType
-              type: number
-            to:
-              name: button
-              type: string
       SetAttribute:
         inputs:
           2:
@@ -157,16 +111,6 @@ lies:
         outputs:
         - _add:
             nilable: true
-    Region:
-      SetPassThroughButtons:
-        inputs:
-        - _change:
-            from:
-              name: unpackedPrimitiveType
-              type: number
-            to:
-              name: button
-              type: string
     TextureBase:
       GetTexCoord:
         _remove:
@@ -322,6 +266,7 @@ typedefs:
   bool: boolean
   CalendarEventID: string
   ChatBubbleFrame: table
+  ClickButton: string
   ClubId: string
   ClubInvitationId: string
   ClubStreamId: string
@@ -354,7 +299,6 @@ typedefs:
   number: number
   QuestObjectiveType: number
   RecruitAcceptanceID: string
-  ScriptObject: UIObject
   ScriptRegion: Region
   SendChatMessageType: string
   SimpleAnim: Animation
@@ -366,6 +310,7 @@ typedefs:
   SimpleLine: Line
   SimpleMaskTexture: MaskTexture
   SimplePathAnim: Path
+  SimpleRegion: Region
   SimpleTexture: Texture
   SimpleWindow: nil
   SingleColorValue: number

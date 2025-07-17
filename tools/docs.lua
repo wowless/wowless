@@ -298,7 +298,11 @@ local function rewriteApis()
     }
     local lie = lies[name]
     if lie then
-      apis[name] = tedit(newapi, lie)
+      local success, val = pcall(tedit, newapi, lie)
+      if not success then
+        error(('tedit failure on %s: %s'):format(name, val))
+      end
+      apis[name] = val
       lies[name] = nil
     elseif extras[name] then
       extras[name] = nil
@@ -467,7 +471,11 @@ local function rewriteUIObjects()
       if okay then
         local lie = deref(lies, k, mk)
         if lie then
-          u.methods[mk] = tedit(mmv, lie)
+          local success, val = pcall(tedit, mmv, lie)
+          if not success then
+            error(('tedit failure on %s.%s: %s'):format(k, mk, val))
+          end
+          u.methods[mk] = val
           lies[k][mk] = nil
         else
           u.methods[mk] = mmv
