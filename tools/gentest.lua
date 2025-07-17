@@ -147,7 +147,7 @@ local ptablemap = {
           cfg.fields[n] = f
         end
         for n, m in pairs(inh.methods) do
-          cfg.methods[n] = m
+          cfg.methods[n] = cfg.methods[n] or m -- overrides
         end
       end
     end
