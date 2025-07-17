@@ -891,6 +891,42 @@
     </Animations>
   </Frame>
 
+  <Frame>
+    <HitRectInsets left="1" right="2" top="3" bottom="4" />
+    <Scripts>
+      <OnLoad>
+        Wowless.check4(1, 2, 3, 4, self:GetHitRectInsets())
+      </OnLoad>
+    </Scripts>
+  </Frame>
+
+  <Frame>
+    <HitRectInsets>
+      <AbsInset left="1" right="2" top="3" bottom="4" />
+    </HitRectInsets>
+    <Scripts>
+      <OnLoad>
+        Wowless.check4(1, 2, 3, 4, self:GetHitRectInsets())
+      </OnLoad>
+    </Scripts>
+  </Frame>
+
+  <Frame>
+    <HitRectInsets>
+      <RelInset left="1" right="2" top="3" bottom="4" />
+    </HitRectInsets>
+    <Scripts>
+      <OnLoad>
+        -- RelInset has scale applied; rather than worry about that, just test ratios.
+        local l, r, t, b = Wowless.retn(4, self:GetHitRectInsets())
+        Wowless.assertEquals(1, l / l)
+        Wowless.assertEquals(2, r / l)
+        Wowless.assertEquals(3, t / l)
+        Wowless.assertEquals(4, b / l)
+      </OnLoad>
+    </Scripts>
+  </Frame>
+
   <Script>
     if WowlessOldErrorHandler then
       seterrorhandler(WowlessOldErrorHandler)

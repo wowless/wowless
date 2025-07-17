@@ -573,6 +573,7 @@ Insets:
       type: number
   contents:
     AbsInset: {}
+    RelInset: {}
   virtual: true
 KeyValue:
   attributes:
@@ -1106,6 +1107,16 @@ Rect:
     urx:
       type: number
     ury:
+      type: number
+RelInset:
+  attributes:
+    bottom:
+      type: number
+    left:
+      type: number
+    right:
+      type: number
+    top:
       type: number
 ResizeBounds:
   contents:

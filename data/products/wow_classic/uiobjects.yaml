@@ -2635,6 +2635,18 @@ Frame:
     hasFixedFrameStrata:
       init: false
       type: boolean
+    hitBottom:
+      init: 0
+      type: number
+    hitLeft:
+      init: 0
+      type: number
+    hitRight:
+      init: 0
+      type: number
+    hitTop:
+      init: 0
+      type: number
     hyperlinkPropagateToParent:
       init: false
       type: boolean
@@ -2907,6 +2919,12 @@ Frame:
       - name: frameLevel
         type: number
     GetHitRectInsets:
+      impl:
+        getter:
+        - name: hitLeft
+        - name: hitRight
+        - name: hitTop
+        - name: hitBottom
       inputs: {}
       outputs:
       - name: left
@@ -3245,6 +3263,12 @@ Frame:
         type: boolean
       outputs: {}
     SetHitRectInsets:
+      impl:
+        setter:
+        - name: hitLeft
+        - name: hitRight
+        - name: hitTop
+        - name: hitBottom
       inputs:
       - name: left
         type: number
