@@ -90,7 +90,7 @@ local specDefault = (function()
       for k in pairs(stringenums[ty]) do
         least = (least == nil or k < least) and k or least
       end
-      return least
+      return ('%q'):format(least)
     end
     if ty.arrayof then
       return '{' .. specDefault({ type = ty.arrayof }) .. '}'
