@@ -108,11 +108,21 @@ describe('uiobjects', function()
           describe('methods', function()
             for mk, mv in pairs(v.methods) do
               describe(mk, function()
-                it('is not defined up inheritance tree', function()
-                  for inh in pairs(v.inherits) do
-                    assert.False(hasMember(inh, 'methods', mk))
-                  end
-                end)
+                if mv.override then
+                  it('is defined up inheritance tree', function()
+                    local found = false
+                    for inh in pairs(v.inherits) do
+                      found = found or hasMember(inh, 'methods', mk)
+                    end
+                    assert.True(found)
+                  end)
+                else
+                  it('is not defined up inheritance tree', function()
+                    for inh in pairs(v.inherits) do
+                      assert.False(hasMember(inh, 'methods', mk))
+                    end
+                  end)
+                end
                 if mv.impl then
                   describe('impl', function()
                     it('manipulates only declared fields', function()

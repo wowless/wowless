@@ -26,7 +26,6 @@ local function mkBaseUIObjectTypes(api)
           flattenOne(inh)
           Mixin(isa, result[string.lower(inh)].isa)
           for mk, mv in pairs(result[string.lower(inh)].metaindex) do
-            assert(not metaindex[mk], 'multiple implementations of ' .. mk)
             metaindex[mk] = mv
           end
         end

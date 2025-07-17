@@ -5777,6 +5777,14 @@ SimpleHTML:
       outputs:
       - name: format
         type: string
+    GetJustifyV:
+      inputs:
+      - name: textType
+        type: string
+      outputs:
+      - name: justifyV
+        type: JustifyVertical
+      override: true
     GetTextData:
       inputs: {}
       outputs:
@@ -5789,6 +5797,14 @@ SimpleHTML:
       - name: format
         type: string
       outputs: {}
+    SetJustifyV:
+      inputs:
+      - name: textType
+        type: string
+      - name: justifyV
+        type: JustifyVertical
+      outputs: {}
+      override: true
     SetText:
       inputs:
       - name: text
