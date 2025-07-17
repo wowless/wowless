@@ -21,7 +21,8 @@ local function loadSqls(sqlitedb, sqls)
       end,
       [true] = function(stmt)
         local f, s = stmt:nrows()
-        return f(s)
+        -- "or nil" allows table-returning directsql to satisfy a nilable output
+        return f(s) or nil
       end,
     },
   }
