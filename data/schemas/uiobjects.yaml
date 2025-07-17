@@ -110,6 +110,8 @@ type:
                               schema: type
                   outstride:
                     type: number
+                  override:
+                    type: boolean
                   stuboutstrides:
                     type: number
         objectType:

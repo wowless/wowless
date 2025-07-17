@@ -450,12 +450,13 @@ local function rewriteUIObjects()
         inputs = insig(mv),
         instride = stride(mv.Arguments),
         mayreturnnothing = mv.MayReturnNothing,
+        override = mm and mm.override,
         outputs = outsig(mv, nil, mm),
         outstride = stride(mv.Returns),
         stuboutstrides = mm and mm.stuboutstrides,
       }
       local okay = (function()
-        if inhm[k][mk] then
+        if inhm[k][mk] and not mmv.override then
           return false
         end
         if deref(config, 'skip_uiobject_methods', k, mk) then

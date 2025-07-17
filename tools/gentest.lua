@@ -201,9 +201,6 @@ local ptablemap = {
         ft.name.init = 'WowlessFont1'
       elseif k == 'Minimap' then
         ft = {}
-      elseif k == 'SimpleHTML' then
-        ft.justifyh = nil
-        ft.justifyv = nil
       end
       t[k] = {
         fields = ft,

@@ -21,15 +21,15 @@ local function mkBaseUIObjectTypes(api)
       if not result[lk] then
         local ty = types[k]
         local isa = { [lk] = true }
-        local metaindex = Mixin({}, ty.mixin)
+        local metaindex = {}
         for inh in pairs(ty.inherits) do
           flattenOne(inh)
           Mixin(isa, result[string.lower(inh)].isa)
           for mk, mv in pairs(result[string.lower(inh)].metaindex) do
-            assert(not metaindex[mk], 'multiple implementations of ' .. mk)
             metaindex[mk] = mv
           end
         end
+        Mixin(metaindex, ty.mixin) -- do this last in case of overrides
         result[lk] = {
           constructor = ty.constructor,
           isa = isa,
