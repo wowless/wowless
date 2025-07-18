@@ -24,8 +24,7 @@ jobs:
     - uses: actions/cache@v4
       with:
         path: ~/.cache/vcpkg/archives
-        key: vcpkg-${{ github.run_id }}
-        restore-keys: vcpkg
+        key: vcpkg-${{ runner.os }}
     - uses: devcontainers/ci@v0.3
       with:
         env: |
@@ -68,8 +67,7 @@ jobs:
     - uses: actions/cache@v4
       with:
         path: ~/.cache/vcpkg/archives
-        key: vcpkg-${{ github.run_id }}
-        restore-keys: vcpkg
+        key: vcpkg-${{ runner.os }}
     - uses: actions/checkout@v4
       with:
         submodules: true
