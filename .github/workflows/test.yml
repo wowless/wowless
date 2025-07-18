@@ -62,11 +62,11 @@ jobs:
     steps:
     - name: Get AppData Directory
       if: ${{ runner.os == 'Windows' }}
-      run: echo ("APPDATA_DIR=" + $env:APPDATA) >> $env:GITHUB_ENV
+      run: echo ("LOCALAPPDATA=" + $env:LOCALAPPDATA) >> $env:GITHUB_ENV
     - uses: actions/cache@v4
       if: ${{ runner.os == 'Windows' }}
       with:
-        path: ${{ env.APPDATA_DIR }}\vcpkg\archives
+        path: ${{ env.LOCALAPPDATA }}\vcpkg\archives
         key: vcpkg-${{ runner.os }}
     - uses: actions/cache@v4
       if: ${{ runner.os != 'Windows' }}
