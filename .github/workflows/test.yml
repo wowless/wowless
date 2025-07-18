@@ -4,10 +4,10 @@ on:
   push:
     branches:
     - main
+env:
+  VCPKG_DEFAULT_BINARY_CACHE: ${{ github.workspace }}/vcpkg-cache
 jobs:
   test:
-    env:
-      VCPKG_DEFAULT_BINARY_CACHE: vcpkg-cache
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
@@ -25,12 +25,13 @@ jobs:
         restore-keys: cache
     - uses: actions/cache@v4
       with:
-        path: vcpkg-cache
+        path: ${{ env.VCPKG_DEFAULT_BINARY_CACHE }}
         key: vcpkg-${{ runner.os }}
     - uses: devcontainers/ci@v0.3
       with:
         env: |
           GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}
+          VCPKG_DEFAULT_BINARY_CACHE=${{ env.VCPKG_DEFAULT_BINARY_CACHE }}
         imageName: ghcr.io/wowless/wowless-devcontainer
         refFilterForPush: refs/heads/main
         runCmd: pre-commit run -a -v
@@ -64,17 +65,14 @@ jobs:
         - name: Windows / Ninja
           generator: Ninja
           os: windows-latest
-    env:
-      VCPKG_DEFAULT_BINARY_CACHE: vcpkg-cache
     runs-on: ${{ matrix.config.os }}
     steps:
     - uses: actions/checkout@v4
       with:
         submodules: true
-    - run: mkdir vcpkg-cache
     - uses: actions/cache@v4
       with:
-        path: vcpkg-cache
+        path: ${{ env.VCPKG_DEFAULT_BINARY_CACHE }}
         key: vcpkg-${{ runner.os }}
     - uses: lukka/get-cmake@v4.0.3
     - run: cmake -B build -G "${{ matrix.config.generator }}"
