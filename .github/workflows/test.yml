@@ -6,6 +6,8 @@ on:
     - main
 jobs:
   test:
+    env:
+      VCPKG_DEFAULT_BINARY_CACHE: vcpkg-cache
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
@@ -21,6 +23,10 @@ jobs:
         path: cache
         key: cache-${{ github.run_id }}
         restore-keys: cache
+    - uses: actions/cache@v4
+      with:
+        path: vcpkg-cache
+        key: vcpkg-${{ runner.os }}
     - uses: devcontainers/ci@v0.3
       with:
         env: |
@@ -58,24 +64,17 @@ jobs:
         - name: Windows / Ninja
           generator: Ninja
           os: windows-latest
+    env:
+      VCPKG_DEFAULT_BINARY_CACHE: vcpkg-cache
     runs-on: ${{ matrix.config.os }}
     steps:
-    - name: Get AppData Directory
-      if: ${{ runner.os == 'Windows' }}
-      run: echo ("LOCALAPPDATA=" + $env:LOCALAPPDATA) >> $env:GITHUB_ENV
-    - uses: actions/cache@v4
-      if: ${{ runner.os == 'Windows' }}
-      with:
-        path: ${{ env.LOCALAPPDATA }}\vcpkg\archives
-        key: vcpkg-${{ runner.os }}
-    - uses: actions/cache@v4
-      if: ${{ runner.os != 'Windows' }}
-      with:
-        path: ~/.cache/vcpkg/archives
-        key: vcpkg-${{ runner.os }}
     - uses: actions/checkout@v4
       with:
         submodules: true
+    - uses: actions/cache@v4
+      with:
+        path: vcpkg-cache
+        key: vcpkg-${{ runner.os }}
     - uses: lukka/get-cmake@v4.0.3
     - run: cmake -B build -G "${{ matrix.config.generator }}"
     - run: cmake --build build --verbose
