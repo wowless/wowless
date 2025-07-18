@@ -104,6 +104,11 @@ lies:
             to:
               name: button
               type: string
+      RegisterUnitEvent:
+        inputs:
+          2:
+            _add:
+              nilable: true
       SetAttribute:
         inputs:
           2:

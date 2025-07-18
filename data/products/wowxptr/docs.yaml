@@ -77,6 +77,11 @@ lies:
             _change:
               from: string
               to: unknown
+      RegisterUnitEvent:
+        inputs:
+          2:
+            _add:
+              nilable: true
       SetAttribute:
         inputs:
           2:

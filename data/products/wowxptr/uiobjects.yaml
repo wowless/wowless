@@ -3379,6 +3379,7 @@ Frame:
       - name: eventName
         type: string
       - name: units
+        nilable: true
         type: string
       instride: 1
       outputs:
