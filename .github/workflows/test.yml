@@ -21,10 +21,6 @@ jobs:
         path: cache
         key: cache-${{ github.run_id }}
         restore-keys: cache
-    - uses: actions/cache@v4
-      with:
-        path: ~/.cache/vcpkg/archives
-        key: vcpkg-${{ runner.os }}
     - uses: devcontainers/ci@v0.3
       with:
         env: |
