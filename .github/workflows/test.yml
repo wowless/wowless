@@ -23,6 +23,7 @@ jobs:
         path: cache
         key: cache-${{ github.run_id }}
         restore-keys: cache
+    - run: mkdir ${{ env.VCPKG_DEFAULT_BINARY_CACHE }}
     - uses: actions/cache@v4
       with:
         path: ${{ env.VCPKG_DEFAULT_BINARY_CACHE }}
@@ -70,6 +71,7 @@ jobs:
     - uses: actions/checkout@v4
       with:
         submodules: true
+    - run: mkdir ${{ env.VCPKG_DEFAULT_BINARY_CACHE }}
     - uses: actions/cache@v4
       with:
         path: ${{ env.VCPKG_DEFAULT_BINARY_CACHE }}
