@@ -23,16 +23,10 @@ jobs:
         path: cache
         key: cache-${{ github.run_id }}
         restore-keys: cache
-    - run: mkdir ${{ env.VCPKG_DEFAULT_BINARY_CACHE }}
-    - uses: actions/cache@v4
-      with:
-        path: ${{ env.VCPKG_DEFAULT_BINARY_CACHE }}
-        key: vcpkg-${{ runner.os }}
     - uses: devcontainers/ci@v0.3
       with:
         env: |
           GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}
-          VCPKG_DEFAULT_BINARY_CACHE=/workspaces/wowless/vcpkg-cache
         imageName: ghcr.io/wowless/wowless-devcontainer
         refFilterForPush: refs/heads/main
         runCmd: pre-commit run -a -v
@@ -75,7 +69,8 @@ jobs:
     - uses: actions/cache@v4
       with:
         path: ${{ env.VCPKG_DEFAULT_BINARY_CACHE }}
-        key: vcpkg-${{ runner.os }}
+        key: vcpkg-${{ runner.os }}-${{ github.run_id }}
+        restore-keys: vcpkg-${{ runner.os }}
     - uses: lukka/get-cmake@v4.0.3
     - run: cmake -B build -G "${{ matrix.config.generator }}"
     - run: cmake --build build --verbose
