@@ -4,17 +4,10 @@ on:
   push:
     branches:
     - main
-env:
-  VCPKG_BINARY_SOURCES: "clear;x-gha,readwrite"
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/github-script@v7
-      with:
-        script: |
-          core.exportVariable('ACTIONS_CACHE_URL', process.env.ACTIONS_CACHE_URL || '');
-          core.exportVariable('ACTIONS_RUNTIME_TOKEN', process.env.ACTIONS_RUNTIME_TOKEN || '');
     - uses: actions/checkout@v4
       with:
         submodules: true
@@ -28,6 +21,11 @@ jobs:
         path: cache
         key: cache-${{ github.run_id }}
         restore-keys: cache
+    - uses: actions/cache@v4
+      with:
+        path: ~/.cache/vcpkg/archives
+        key: vcpkg-${{ github.run_id }}
+        restore-keys: vcpkg
     - uses: devcontainers/ci@v0.3
       with:
         env: |
@@ -67,11 +65,11 @@ jobs:
           os: windows-latest
     runs-on: ${{ matrix.config.os }}
     steps:
-    - uses: actions/github-script@v7
+    - uses: actions/cache@v4
       with:
-        script: |
-          core.exportVariable('ACTIONS_CACHE_URL', process.env.ACTIONS_CACHE_URL || '');
-          core.exportVariable('ACTIONS_RUNTIME_TOKEN', process.env.ACTIONS_RUNTIME_TOKEN || '');
+        path: ~/.cache/vcpkg/archives
+        key: vcpkg-${{ github.run_id }}
+        restore-keys: vcpkg
     - uses: actions/checkout@v4
       with:
         submodules: true
