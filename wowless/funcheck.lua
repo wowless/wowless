@@ -42,6 +42,9 @@ return function(typechecker, log)
         end
       elseif n > nins then
         local d = debug.getinfo(4)
+        if d.source == '=[C]' then
+          d = debug.getinfo(5)
+        end
         log(1, 'warning: too many arguments passed to %s at %s:%d', fname, d.source:sub(2), d.currentline)
       end
       return unpack(args, 1, argn)
