@@ -5,16 +5,11 @@ on:
     branches:
     - main
 env:
-  VCPKG_BINARY_SOURCES: "clear;x-gha,readwrite"
+  VCPKG_DEFAULT_BINARY_CACHE: ${{ github.workspace }}/vcpkg-cache
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/github-script@v7
-      with:
-        script: |
-          core.exportVariable('ACTIONS_CACHE_URL', process.env.ACTIONS_CACHE_URL || '');
-          core.exportVariable('ACTIONS_RUNTIME_TOKEN', process.env.ACTIONS_RUNTIME_TOKEN || '');
     - uses: actions/checkout@v4
       with:
         submodules: true
@@ -67,14 +62,15 @@ jobs:
           os: windows-latest
     runs-on: ${{ matrix.config.os }}
     steps:
-    - uses: actions/github-script@v7
-      with:
-        script: |
-          core.exportVariable('ACTIONS_CACHE_URL', process.env.ACTIONS_CACHE_URL || '');
-          core.exportVariable('ACTIONS_RUNTIME_TOKEN', process.env.ACTIONS_RUNTIME_TOKEN || '');
     - uses: actions/checkout@v4
       with:
         submodules: true
+    - run: mkdir ${{ env.VCPKG_DEFAULT_BINARY_CACHE }}
+    - uses: actions/cache@v4
+      with:
+        path: ${{ env.VCPKG_DEFAULT_BINARY_CACHE }}
+        key: vcpkg-${{ runner.os }}-${{ github.run_id }}
+        restore-keys: vcpkg-${{ runner.os }}
     - uses: lukka/get-cmake@v4.0.3
     - run: cmake -B build -G "${{ matrix.config.generator }}"
     - run: cmake --build build --verbose
