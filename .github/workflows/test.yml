@@ -32,7 +32,7 @@ jobs:
       with:
         env: |
           GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}
-          VCPKG_DEFAULT_BINARY_CACHE=${{ env.VCPKG_DEFAULT_BINARY_CACHE }}
+          VCPKG_DEFAULT_BINARY_CACHE=/workspaces/wowless/vcpkg-cache
         imageName: ghcr.io/wowless/wowless-devcontainer
         refFilterForPush: refs/heads/main
         runCmd: pre-commit run -a -v
