@@ -23,6 +23,22 @@ local function deref(t, ...)
   return t
 end
 
+local function take(t, k, ...)
+  local tk = t[k]
+  if tk == nil then
+    return nil
+  elseif select('#', ...) == 0 then
+    t[k] = nil
+    return tk
+  else
+    local v = take(tk, ...)
+    if not next(tk) then
+      t[k] = nil
+    end
+    return v
+  end
+end
+
 local docs = {}
 do
   local mixmt = {
@@ -296,17 +312,14 @@ local function rewriteApis()
       stubnothing = api and api.stubnothing,
       stuboutstrides = api and api.stuboutstrides,
     }
-    local lie = lies[name]
+    local lie = take(lies, name)
     if lie then
       local success, val = pcall(tedit, newapi, lie)
       if not success then
         error(('tedit failure on %s: %s'):format(name, val))
       end
       apis[name] = val
-      lies[name] = nil
-    elseif extras[name] then
-      extras[name] = nil
-    else
+    elseif not take(extras, name) then
       apis[name] = newapi
     end
   end
@@ -424,6 +437,7 @@ local function rewriteUIObjects()
   local filename = ('data/products/%s/uiobjects.yaml'):format(product)
   local uiobjects = require('wowapi.yaml').parseFile(filename)
   local lies = deref(config, 'lies', 'uiobjects') or {}
+  local skips = config.skip_uiobject_methods or {}
   local inhm = {}
   local function inhprocess(k)
     if inhm[k] then
@@ -463,31 +477,30 @@ local function rewriteUIObjects()
         if inhm[k][mk] and not mmv.override then
           return false
         end
-        if deref(config, 'skip_uiobject_methods', k, mk) then
+        if take(skips, k, mk) then
           return false
         end
         return true
       end)()
       if okay then
-        local lie = deref(lies, k, mk)
+        local lie = take(lies, k, mk)
         if lie then
           local success, val = pcall(tedit, mmv, lie)
           if not success then
             error(('tedit failure on %s.%s: %s'):format(k, mk, val))
           end
           u.methods[mk] = val
-          lies[k][mk] = nil
         else
           u.methods[mk] = mmv
         end
       end
     end
-    if lies[k] and not next(lies[k]) then
-      lies[k] = nil
-    end
   end
   if next(lies) then
     error('not all lies were consumed: ' .. require('pl.pretty').write(lies))
+  end
+  if next(skips) then
+    error('not all skips were consumed: ' .. require('pl.pretty').write(skips))
   end
   writeifchanged(filename, pprintYaml(uiobjects))
   return uiobjects
