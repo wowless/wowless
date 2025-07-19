@@ -41,7 +41,6 @@ G.testsuite.uiobjects = function()
             check3(f, k, v, unpack(t, 1, 3))
             check0(f:SetScript('OnAttributeChanged', nil))
           end
-          local real = not _G.__wowless -- issue #429
           local err = 'Arguments: ("name")\nLua Taint: ' .. addonName
           local function happy(v, ...)
             local t, n = { ... }, select('#', ...)
@@ -52,13 +51,7 @@ G.testsuite.uiobjects = function()
           local function errcase(...)
             local t, n = { ... }, select('#', ...)
             return function()
-              if real then
-                return match(2, false, err, pcall(f.GetAttribute, f, unpack(t, 1, n)))
-              else
-                local success, msg = pcall(f.GetAttribute, f, unpack(t, 1, n))
-                assertEquals(false, success)
-                assertEquals(false, msg == err)
-              end
+              return match(2, false, err, pcall(f.GetAttribute, f, unpack(t, 1, n)))
             end
           end
           return {
@@ -71,10 +64,10 @@ G.testsuite.uiobjects = function()
             justpost = errcase(nil, nil, 'a'),
             justpre = happy('va', 'a', nil, nil),
             noarg = errcase(),
-            preaa = happy(real and 'vaa' or 'va', 'a', 'a', nil),
+            preaa = happy('vaa', 'a', 'a', nil),
             prepostaaa = happy('vaaa', 'a', 'a', 'a'),
-            postaa = real and happy('vaa', nil, 'a', 'a') or errcase(nil, 'a', 'a'),
-            threearg = real and happy('va', nil, 'a', nil) or errcase(nil, 'a', nil),
+            postaa = happy('vaa', nil, 'a', 'a'),
+            threearg = happy('va', nil, 'a', nil),
             twoargoutofthree = errcase(nil, 'a'),
           }
         end,
