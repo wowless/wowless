@@ -3736,6 +3736,12 @@ LayeredRegion:
         getter:
         - name: layer
         - name: sublevel
+      inputs: {}
+      outputs:
+      - name: layer
+        type: DrawLayer
+      - name: sublayer
+        type: number
     SetDrawLayer:
       impl:
         setter:

@@ -438,6 +438,7 @@ local function rewriteUIObjects()
   local uiobjects = require('wowapi.yaml').parseFile(filename)
   local lies = deref(config, 'lies', 'uiobjects') or {}
   local skips = config.skip_uiobject_methods or {}
+  local reassigns = config.uiobject_method_reassignments or {}
   local inhm = {}
   local function inhprocess(k)
     if inhm[k] then
@@ -462,7 +463,9 @@ local function rewriteUIObjects()
   for k, v in pairs(mapped) do
     local u = assert(uiobjects[k], 'unknown uiobject type ' .. k)
     for mk, mv in pairs(v) do
-      local mm = u.methods[mk]
+      local reassign = take(reassigns, k, mk)
+      local uu = reassign and uiobjects[reassign] or u
+      local mm = uu.methods[mk]
       local mmv = {
         impl = mm and mm.impl,
         inputs = insig(mv),
@@ -489,10 +492,9 @@ local function rewriteUIObjects()
           if not success then
             error(('tedit failure on %s.%s: %s'):format(k, mk, val))
           end
-          u.methods[mk] = val
-        else
-          u.methods[mk] = mmv
+          mmv = val
         end
+        uu.methods[mk] = mmv
       end
     end
   end
@@ -501,6 +503,9 @@ local function rewriteUIObjects()
   end
   if next(skips) then
     error('not all skips were consumed: ' .. require('pl.pretty').write(skips))
+  end
+  if next(reassigns) then
+    error('not all reassigns were consumed: ' .. require('pl.pretty').write(reassigns))
   end
   writeifchanged(filename, pprintYaml(uiobjects))
   return uiobjects

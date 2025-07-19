@@ -56,3 +56,13 @@ type:
           key: string
           value:
             schema: type
+    uiobject_method_reassignments:
+      type:
+        mapof:
+          key:
+            ref: uiobject
+          value:
+            mapof:
+              key: string
+              value:
+                ref: uiobject

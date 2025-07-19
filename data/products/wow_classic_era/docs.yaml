@@ -231,7 +231,6 @@ skip_uiobject_methods:
     SetSwipeTexture: {}
   Region:
     GetBottom: {}
-    GetDrawLayer: {}
     GetHeight: {}
     GetLeft: {}
     GetPoint: {}
@@ -243,7 +242,6 @@ skip_uiobject_methods:
     HasScript: {}
     HookScript: {}
     SetAllPoints: {}
-    SetDrawLayer: {}
     SetPoint: {}
     SetScript: {}
     SetVertexColor: {}
@@ -316,3 +314,7 @@ typedefs:
   UnitToken: unit
   WOWGUID: string
   WOWMONEY: number
+uiobject_method_reassignments:
+  Region:
+    GetDrawLayer: LayeredRegion
+    SetDrawLayer: LayeredRegion

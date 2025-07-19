@@ -57,6 +57,22 @@ describe('docs', function()
           end
         end)
       end)
+      describe('uiobject_method_reassignments', function()
+        for k, v in pairs(docs.uiobject_method_reassignments or {}) do
+          describe(k, function()
+            for vk, vv in pairs(v) do
+              describe(vk, function()
+                it('does not exist in the source', function()
+                  assert.Nil(uiobjects[k].methods[vk])
+                end)
+                it('exists in the target', function()
+                  assert.Not.Nil(uiobjects[vv].methods[vk])
+                end)
+              end)
+            end
+          end)
+        end
+      end)
     end)
   end
 end)
