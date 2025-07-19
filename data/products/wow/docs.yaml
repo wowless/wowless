@@ -88,6 +88,10 @@ lies:
               type: unknown
     Frame:
       GetAttribute:
+        _remove:
+          inputs:
+          - name: attributeName
+            type: string
         outputs:
         - _add:
             nilable: true

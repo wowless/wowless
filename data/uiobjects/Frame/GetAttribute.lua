@@ -15,6 +15,6 @@ return function(self, arg1, arg2, arg3)
     end
     return nil
   else
-    return attrs[arg1]
+    return attrs[assert(arg1)]
   end
 end

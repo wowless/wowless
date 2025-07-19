@@ -110,6 +110,10 @@ local function mkBaseUIObjectTypes(api)
       local outfn
       if not incheck and not outcheck then
         outfn = basefn
+      elseif not incheck then
+        outfn = function(...)
+          return outcheck(basefn(...))
+        end
       else
         outfn = function(self, ...)
           return outcheck(basefn(self, incheck(...)))
