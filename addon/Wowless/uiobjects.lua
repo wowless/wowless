@@ -1,4 +1,4 @@
-local _, G = ...
+local addonName, G = ...
 G.testsuite.uiobjects = function()
   local assertEquals = G.assertEquals
   local check0 = G.check0
@@ -7,6 +7,7 @@ G.testsuite.uiobjects = function()
   local check3 = G.check3
   local check4 = G.check4
   local check6 = G.check6
+  local match = G.match
   local retn = G.retn
   return {
     Animation = function()
@@ -24,26 +25,53 @@ G.testsuite.uiobjects = function()
     Frame = function()
       return {
         ['attributes'] = function()
+          local attrs = {
+            a = 'va',
+            aa = 'vaa',
+            aaa = 'vaaa',
+          }
           local f = CreateFrame('Frame')
-          local real = not _G.__wowless -- issue #429
-          local function setAttribute(k, v)
-            local n, t
+          for k, v in pairs(attrs) do
+            local t, n
             check0(f:SetScript('OnAttributeChanged', function(...)
-              n = select('#', ...)
-              t = { ... }
+              t, n = { ... }, select('#', ...)
             end))
             check0(f:SetAttribute(k, v))
             assertEquals(3, n)
             check3(f, k, v, unpack(t, 1, 3))
             check0(f:SetScript('OnAttributeChanged', nil))
           end
-          setAttribute('moo', 'cow')
-          check1('cow', f:GetAttribute('moo'))
-          check1(real and 'cow' or nil, f:GetAttribute('pre', 'moo', 'post'))
-          setAttribute('moo', 'cow')
-          check1('cow', f:GetAttribute('moo'))
-          setAttribute('moo', 'pig')
-          check1('pig', f:GetAttribute('moo'))
+          local real = not _G.__wowless -- issue #429
+          local err = 'Arguments: ("name")\nLua Taint: ' .. addonName
+          local function happy(v, ...)
+            local t, n = { ... }, select('#', ...)
+            return function()
+              return match(1, v, f:GetAttribute(unpack(t, 1, n)))
+            end
+          end
+          local function errcase(...)
+            local t, n = { ... }, select('#', ...)
+            return function()
+              if real then
+                return match(2, false, err, pcall(f.GetAttribute, f, unpack(t, 1, n)))
+              else
+                local success, msg = pcall(f.GetAttribute, f, unpack(t, 1, n))
+                assertEquals(false, success)
+                assertEquals(false, msg == err)
+              end
+            end
+          end
+          return {
+            a = happy('va', 'a'),
+            aa = happy('vaa', 'aa'),
+            aaa = happy('vaaa', 'aaa'),
+            allnil = errcase(nil, nil, nil),
+            justnil = errcase(nil),
+            noarg = errcase(),
+            preaa = happy(real and 'vaa' or 'va', 'a', 'a', nil),
+            prepostaaa = happy(real and 'vaaa' or 'va', 'a', 'a', 'a'),
+            postaa = real and happy('vaa', nil, 'a', 'a') or errcase(nil, 'a', 'a'),
+          }
         end,
         ['creation with frame in name position'] = function()
           local f = CreateFrame('Frame')
