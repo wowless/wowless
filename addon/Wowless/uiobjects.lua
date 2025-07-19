@@ -23,6 +23,28 @@ G.testsuite.uiobjects = function()
 
     Frame = function()
       return {
+        ['attributes'] = function()
+          local f = CreateFrame('Frame')
+          local real = not _G.__wowless -- issue #429
+          local function setAttribute(k, v)
+            local n, t
+            check0(f:SetScript('OnAttributeChanged', function(...)
+              n = select('#', ...)
+              t = { ... }
+            end))
+            check0(f:SetAttribute(k, v))
+            assertEquals(3, n)
+            check3(f, k, v, unpack(t, 1, 3))
+            check0(f:SetScript('OnAttributeChanged', nil))
+          end
+          setAttribute('moo', 'cow')
+          check1('cow', f:GetAttribute('moo'))
+          check1(real and 'cow' or nil, f:GetAttribute('pre', 'moo', 'post'))
+          setAttribute('moo', 'cow')
+          check1('cow', f:GetAttribute('moo'))
+          setAttribute('moo', 'pig')
+          check1('pig', f:GetAttribute('moo'))
+        end,
         ['creation with frame in name position'] = function()
           local f = CreateFrame('Frame')
           local g = CreateFrame('Frame', f)
