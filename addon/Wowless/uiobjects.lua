@@ -66,11 +66,16 @@ G.testsuite.uiobjects = function()
             aa = happy('vaa', 'aa'),
             aaa = happy('vaaa', 'aaa'),
             allnil = errcase(nil, nil, nil),
+            extranil = happy('va', 'a', nil),
             justnil = errcase(nil),
+            justpost = errcase(nil, nil, 'a'),
+            justpre = happy('va', 'a', nil, nil),
             noarg = errcase(),
             preaa = happy(real and 'vaa' or 'va', 'a', 'a', nil),
             prepostaaa = happy(real and 'vaaa' or 'va', 'a', 'a', 'a'),
             postaa = real and happy('vaa', nil, 'a', 'a') or errcase(nil, 'a', 'a'),
+            threearg = real and happy('va', nil, 'a', nil) or errcase(nil, 'a', nil),
+            twoargoutofthree = errcase(nil, 'a'),
           }
         end,
         ['creation with frame in name position'] = function()
