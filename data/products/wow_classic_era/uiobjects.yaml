@@ -2507,7 +2507,6 @@ FontString:
       outputs:
       - name: width
         type: number
-    GetVertexColor: {}
     GetWrappedWidth:
       inputs: {}
       outputs:
@@ -3516,6 +3515,13 @@ LayeredRegion:
         type: DrawLayer
       - name: sublayer
         type: number
+    GetVertexColor:
+      impl:
+        getter:
+        - name: vertexColorR
+        - name: vertexColorG
+        - name: vertexColorB
+        - name: vertexColorA
     SetDrawLayer:
       impl:
         setter:
@@ -6229,13 +6235,6 @@ TextureBase:
       - name: sliceMode
         type:
           enum: UITextureSliceMode
-    GetVertexColor:
-      impl:
-        getter:
-        - name: vertexColorR
-        - name: vertexColorG
-        - name: vertexColorB
-        - name: vertexColorA
     GetVertexOffset:
       inputs:
       - name: vertexIndex
