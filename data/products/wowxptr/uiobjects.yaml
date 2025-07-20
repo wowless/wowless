@@ -3715,9 +3715,6 @@ LayeredRegion:
     sublevel:
       init: 0
       type: number
-    vertexColorA:
-      init: 1
-      type: number
     vertexColorB:
       init: 1
       type: number
@@ -3747,7 +3744,7 @@ LayeredRegion:
         - name: vertexColorR
         - name: vertexColorG
         - name: vertexColorB
-        - name: vertexColorA
+        - name: alpha
       inputs: {}
       outputs:
       - name: colorR
