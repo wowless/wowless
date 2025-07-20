@@ -17047,8 +17047,11 @@ GetQuestLogRewardTitle: {}
 GetQuestLogRewardXP: {}
 GetQuestLogSelectedID: {}
 GetQuestLogSelection:
+  inputs: {}
   outputs:
-  - type: number
+  - name: index
+    stub: 0
+    type: number
 GetQuestLogSpecialItemCooldown: {}
 GetQuestLogSpecialItemInfo: {}
 GetQuestLogTimeLeft:
