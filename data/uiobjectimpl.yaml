@@ -52,7 +52,6 @@ Frame/UnregisterAllEvents: {}
 Frame/UnregisterEvent: {}
 GameTooltip/IsOwned: {}
 GameTooltip/SetOwner: {}
-LayeredRegion/SetVertexColor: {}
 MessageFrame/AddMessage: {}
 ModelScene/CreateActor: {}
 MouseMixin/EnableMouse: {}

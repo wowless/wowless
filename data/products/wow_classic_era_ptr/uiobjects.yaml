@@ -3545,7 +3545,12 @@ LayeredRegion:
         type: number
       outputs: {}
     SetVertexColor:
-      impl: LayeredRegion/SetVertexColor
+      impl:
+        setter:
+        - name: vertexColorR
+        - name: vertexColorG
+        - name: vertexColorB
+        - name: vertexColorA
       inputs:
       - name: colorR
         type: number
