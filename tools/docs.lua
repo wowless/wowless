@@ -486,11 +486,11 @@ local function rewriteUIObjects()
         return true
       end)()
       if okay then
-        local lie = take(lies, k, mk)
+        local lie = take(lies, reassign or k, mk)
         if lie then
           local success, val = pcall(tedit, mmv, lie)
           if not success then
-            error(('tedit failure on %s.%s: %s'):format(k, mk, val))
+            error(('tedit failure on %s.%s: %s'):format(reassign or k, mk, val))
           end
           mmv = val
         end
