@@ -89,6 +89,10 @@ lies:
               _change:
                 from: string
                 to: unknown
+    LayeredRegion:
+      GetVertexColor:
+        _remove:
+          mayreturnnothing: true
     ModelScene:
       CreateActor:
         inputs:
@@ -237,14 +241,12 @@ skip_uiobject_methods:
     GetRect: {}
     GetScript: {}
     GetSize: {}
-    GetVertexColor: {}
     GetWidth: {}
     HasScript: {}
     HookScript: {}
     SetAllPoints: {}
     SetPoint: {}
     SetScript: {}
-    SetVertexColor: {}
   StatusBar:
     SetStatusBarTexture: {}
   TextureBase:
@@ -317,4 +319,6 @@ typedefs:
 uiobject_method_reassignments:
   Region:
     GetDrawLayer: LayeredRegion
+    GetVertexColor: LayeredRegion
     SetDrawLayer: LayeredRegion
+    SetVertexColor: LayeredRegion

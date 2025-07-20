@@ -3748,6 +3748,16 @@ LayeredRegion:
         - name: vertexColorG
         - name: vertexColorB
         - name: vertexColorA
+      inputs: {}
+      outputs:
+      - name: colorR
+        type: number
+      - name: colorG
+        type: number
+      - name: colorB
+        type: number
+      - name: colorA
+        type: number
     SetDrawLayer:
       impl:
         setter:
@@ -3762,6 +3772,17 @@ LayeredRegion:
       outputs: {}
     SetVertexColor:
       impl: LayeredRegion/SetVertexColor
+      inputs:
+      - name: colorR
+        type: number
+      - name: colorG
+        type: number
+      - name: colorB
+        type: number
+      - name: a
+        nilable: true
+        type: number
+      outputs: {}
   virtual: true
 Line:
   fields:
