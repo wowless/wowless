@@ -10,6 +10,7 @@ type:
   - literal: oneornil
   - literal: string
   - literal: table
+  - literal: TextureAsset
   - literal: tonumber
   - literal: tostring
   - literal: uiAddon

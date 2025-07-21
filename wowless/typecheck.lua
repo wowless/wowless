@@ -81,6 +81,14 @@ return function(api)
     table = function(value)
       return luatypecheck('table', value)
     end,
+    TextureAsset = function(value)
+      local ty = type(value)
+      if ty == 'number' or ty == 'string' then
+        return value
+      else
+        return resolveobj('Texture', value)
+      end
+    end,
     tonumber = function(value)
       local v = type(value) == 'string' and tonumber(value) or value
       return type(v) == 'number' and v or nil
