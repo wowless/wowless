@@ -1599,21 +1599,12 @@ ControlPoint:
       outputs: {}
 Cooldown:
   fields:
-    blingTexture:
-      nilable: true
-      type: Texture
     durationMillis:
       init: 0
       type: number
-    edgeTexture:
-      nilable: true
-      type: Texture
     startTimeMillis:
       init: 0
       type: number
-    swipeTexture:
-      nilable: true
-      type: Texture
   inherits:
     Frame: {}
   methods:
@@ -1693,9 +1684,22 @@ Cooldown:
       inputs: {}
       outputs: {}
     SetBlingTexture:
-      impl:
-        setter:
-        - name: blingTexture
+      inputs:
+      - name: texture
+        type: string
+      - name: colorR
+        nilable: true
+        type: number
+      - name: colorG
+        nilable: true
+        type: number
+      - name: colorB
+        nilable: true
+        type: number
+      - name: colorA
+        nilable: true
+        type: number
+      outputs: {}
     SetCooldown:
       inputs:
       - name: start
@@ -1770,9 +1774,22 @@ Cooldown:
         type: number
       outputs: {}
     SetEdgeTexture:
-      impl:
-        setter:
-        - name: edgeTexture
+      inputs:
+      - name: texture
+        type: string
+      - name: colorR
+        nilable: true
+        type: number
+      - name: colorG
+        nilable: true
+        type: number
+      - name: colorB
+        nilable: true
+        type: number
+      - name: colorA
+        nilable: true
+        type: number
+      outputs: {}
     SetHideCountdownNumbers:
       inputs:
       - default: false
@@ -1803,9 +1820,22 @@ Cooldown:
         type: number
       outputs: {}
     SetSwipeTexture:
-      impl:
-        setter:
-        - name: swipeTexture
+      inputs:
+      - name: texture
+        type: string
+      - name: colorR
+        nilable: true
+        type: number
+      - name: colorG
+        nilable: true
+        type: number
+      - name: colorB
+        nilable: true
+        type: number
+      - name: colorA
+        nilable: true
+        type: number
+      outputs: {}
     SetTexCoordRange:
       inputs:
       - name: low

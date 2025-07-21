@@ -159,10 +159,6 @@ Bindings:
   impl: transparent
 BlingTexture:
   extends: Texture
-  impl:
-    argument: self
-    parentmethod: SetBlingTexture
-    parenttype: Cooldown
 Browser:
   attributes:
     imefont:
@@ -329,10 +325,6 @@ DressUpModel:
   extends: Frame
 EdgeTexture:
   extends: Texture
-  impl:
-    argument: self
-    parentmethod: SetEdgeTexture
-    parenttype: Cooldown
 EditBox:
   attributes:
     autofocus:
@@ -1275,10 +1267,6 @@ StatusBar:
   extends: Frame
 SwipeTexture:
   extends: Texture
-  impl:
-    argument: self
-    parentmethod: SetSwipeTexture
-    parenttype: Cooldown
 TabardModel:
   extends: Frame
 TexCoords:

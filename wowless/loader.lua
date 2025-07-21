@@ -250,6 +250,9 @@ local function loader(api, cfg)
     barcolor = function(_, e, parent)
       parent:SetStatusBarColor(getColor(e))
     end,
+    blingtexture = function(_, e, parent)
+      parent:SetBlingTexture(e.attr.file or '', getColor(e))
+    end,
     color = function(ctx, e, parent)
       local r, g, b, a = getColor(e)
       if api.InheritsFrom(parent.type, 'texturebase') then
@@ -265,6 +268,9 @@ local function loader(api, cfg)
       else
         error('cannot apply color to ' .. parent.type)
       end
+    end,
+    edgetexture = function(_, e, parent)
+      parent:SetEdgeTexture(e.attr.file or '', getColor(e))
     end,
     fontheight = function(_, e, parent)
       local name, _, flags = parent:GetFont()
@@ -340,6 +346,9 @@ local function loader(api, cfg)
       if y then
         parent:SetHeight(y)
       end
+    end,
+    swipetexture = function(_, e, parent)
+      parent:SetSwipeTexture(e.attr.file or '', getColor(e))
     end,
     texcoords = function(_, e, parent)
       local rect = e.kids[#e.kids]

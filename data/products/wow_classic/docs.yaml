@@ -44,6 +44,49 @@ lies:
               name: arg
               nilable: true
               type: unknown
+    Cooldown:
+      SetBlingTexture:
+        inputs:
+          2:
+            _add:
+              nilable: true
+          3:
+            _add:
+              nilable: true
+          4:
+            _add:
+              nilable: true
+          5:
+            _add:
+              nilable: true
+      SetEdgeTexture:
+        inputs:
+          2:
+            _add:
+              nilable: true
+          3:
+            _add:
+              nilable: true
+          4:
+            _add:
+              nilable: true
+          5:
+            _add:
+              nilable: true
+      SetSwipeTexture:
+        inputs:
+          2:
+            _add:
+              nilable: true
+          3:
+            _add:
+              nilable: true
+          4:
+            _add:
+              nilable: true
+          5:
+            _add:
+              nilable: true
     Frame:
       GetAttribute:
         _remove:
@@ -241,10 +284,6 @@ skip_uiobject_methods:
     SetPushedTexture: {}
   CheckButton:
     SetCheckedTexture: {}
-  Cooldown:
-    SetBlingTexture: {}
-    SetEdgeTexture: {}
-    SetSwipeTexture: {}
   Region:
     GetBottom: {}
     GetHeight: {}
