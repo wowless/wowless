@@ -126,7 +126,6 @@ local function frames2rects(api, product, screenWidth, screenHeight)
                   path = t:GetTexture(),
                   scale = t:GetEffectiveScale(),
                   vertexColor = t.vertexColorR and {
-                    alpha = t.vertexColorA,
                     blue = t.vertexColorB,
                     green = t.vertexColorG,
                     red = t.vertexColorR,
