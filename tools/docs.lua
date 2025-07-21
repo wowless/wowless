@@ -237,10 +237,11 @@ local function insig(fn, ns)
         })
       end
     else
+      local def = default(a)
       table.insert(t, {
-        default = default(a),
+        default = def,
         name = a.Name,
-        nilable = a.Nilable or nil,
+        nilable = a.Nilable and def == nil or nil,
         type = t2nty(a, ns),
       })
     end

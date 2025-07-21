@@ -7462,7 +7462,6 @@ C_LFGList.Search:
       structure: C_LFGList.WowLocale
   - default: false
     name: searchCrossFactionListings
-    nilable: true
     type: boolean
   - name: advancedFilter
     nilable: true
@@ -17774,7 +17773,6 @@ GetTalentTabInfo:
     type: boolean
   - default: 1
     name: talentGroup
-    nilable: true
     type: number
   outputs:
   - name: id

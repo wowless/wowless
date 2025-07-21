@@ -5297,7 +5297,6 @@ Region:
       inputs:
       - default: 1
         name: anchorIndex
-        nilable: true
         type: tonumber
       mayreturnnothing: true
       outputs:

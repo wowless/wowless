@@ -12935,7 +12935,6 @@ C_LFGList.Search:
       structure: C_LFGList.WowLocale
   - default: false
     name: searchCrossFactionListings
-    nilable: true
     type: boolean
   - name: advancedFilter
     nilable: true

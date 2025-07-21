@@ -179,6 +179,9 @@ describe('uiobjects', function()
                         it('has default of the right type', function()
                           typecheck(input, input.default)
                         end)
+                        it('is not explicitly nilable', function()
+                          assert.Nil(input.nilable)
+                        end)
                       end
                     end)
                   end

@@ -33,6 +33,9 @@ describe('apis', function()
                     assert.Nil(errmsg)
                     assert.same(value, input.default)
                   end)
+                  it('is not explicitly nilable', function()
+                    assert.Nil(input.nilable)
+                  end)
                 end
                 if api.impl then
                   it('has a name', function()
