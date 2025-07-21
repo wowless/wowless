@@ -930,6 +930,10 @@ Button:
       outputs: {}
     SetDisabledTexture:
       impl: Button/SetDisabledTexture
+      inputs:
+      - name: asset
+        type: TextureAsset
+      outputs: {}
     SetEnabled:
       impl: Button/SetEnabled
       inputs:
@@ -969,6 +973,13 @@ Button:
       outputs: {}
     SetHighlightTexture:
       impl: Button/SetHighlightTexture
+      inputs:
+      - name: asset
+        type: TextureAsset
+      - name: blendMode
+        nilable: true
+        type: BlendMode
+      outputs: {}
     SetMotionScriptsWhileDisabled:
       impl:
         setter:
@@ -993,6 +1004,10 @@ Button:
       outputs: {}
     SetNormalTexture:
       impl: Button/SetNormalTexture
+      inputs:
+      - name: asset
+        type: TextureAsset
+      outputs: {}
     SetPushedAtlas:
       impl: Button/SetPushedAtlas
       inputs:
@@ -1012,6 +1027,10 @@ Button:
       outputs: {}
     SetPushedTexture:
       impl: Button/SetPushedTexture
+      inputs:
+      - name: asset
+        type: TextureAsset
+      outputs: {}
     SetText:
       impl: Button/SetText
       inputs:
@@ -1066,13 +1085,17 @@ CheckButton:
       outputs: {}
     SetCheckedTexture:
       impl: CheckButton/SetCheckedTexture
+      inputs:
+      - name: asset
+        type: TextureAsset
+      outputs: {}
     SetDisabledCheckedTexture:
       impl:
         setter:
         - name: disabledCheckedTexture
       inputs:
       - name: asset
-        type: Texture
+        type: TextureAsset
       outputs: {}
 Checkout:
   fieldinitoverrides:
@@ -1331,7 +1354,7 @@ ColorSelect:
         - name: colorAlphaThumbTexture
       inputs:
       - name: texture
-        type: Texture
+        type: TextureAsset
       outputs: {}
     SetColorHSV:
       inputs:
@@ -1365,7 +1388,7 @@ ColorSelect:
         - name: colorValueThumbTexture
       inputs:
       - name: texture
-        type: Texture
+        type: TextureAsset
       outputs: {}
     SetColorWheelTexture:
       impl:
@@ -1381,7 +1404,7 @@ ColorSelect:
         - name: colorWheelThumbTexture
       inputs:
       - name: texture
-        type: Texture
+        type: TextureAsset
       outputs: {}
 ControlPoint:
   fields: {}
@@ -3780,37 +3803,37 @@ Minimap:
     SetBlipTexture:
       inputs:
       - name: asset
-        type: Texture
+        type: TextureAsset
       outputs: {}
     SetCorpsePOIArrowTexture:
       inputs:
       - name: asset
-        type: Texture
+        type: TextureAsset
       outputs: {}
     SetIconTexture:
       inputs:
       - name: asset
-        type: Texture
+        type: TextureAsset
       outputs: {}
     SetMaskTexture:
       inputs:
       - name: asset
-        type: Texture
+        type: TextureAsset
       outputs: {}
     SetPlayerTexture:
       inputs:
       - name: asset
-        type: Texture
+        type: TextureAsset
       outputs: {}
     SetPOIArrowTexture:
       inputs:
       - name: asset
-        type: Texture
+        type: TextureAsset
       outputs: {}
     SetStaticPOIArrowTexture:
       inputs:
       - name: asset
-        type: Texture
+        type: TextureAsset
       outputs: {}
     SetZoom:
       inputs:
@@ -5846,7 +5869,7 @@ Slider:
         - name: thumbTexture
       inputs:
       - name: asset
-        type: Texture
+        type: TextureAsset
       outputs: {}
     SetValue:
       inputs:
@@ -6025,6 +6048,12 @@ StatusBar:
       outputs: {}
     SetStatusBarTexture:
       impl: StatusBar/SetStatusBarTexture
+      inputs:
+      - name: asset
+        type: TextureAsset
+      outputs:
+      - name: success
+        type: boolean
     SetValue:
       impl:
         setter:
