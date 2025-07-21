@@ -11,7 +11,10 @@ describe('uiobjects', function()
       if expected.inputs then
         assert.same(#expected.inputs, #actual.inputs)
         for i, x in ipairs(expected.inputs) do
-          assert.same(x.type, actual.inputs[i].type)
+          local a = actual.inputs[i]
+          assert.same(x.type, a.type)
+          -- e.g. nilable field can have a non-nilable setter arg
+          assert.True(not x.nilable or a.nilable)
         end
       end
       if expected.outputs then
