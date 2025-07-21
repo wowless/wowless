@@ -5711,15 +5711,46 @@ ScriptObject:
   methods:
     GetScript:
       impl: ScriptObject/GetScript
+      inputs:
+      - name: scriptTypeName
+        type: string
+      - name: bindingType
+        nilable: true
+        type: number
+      outputs:
+      - name: script
+        nilable: true
+        type: function
     HasScript:
+      inputs:
+      - name: scriptName
+        type: string
       outputs:
       - name: hasScript
         stub: true
         type: boolean
     HookScript:
       impl: ScriptObject/HookScript
+      inputs:
+      - name: scriptTypeName
+        type: string
+      - name: script
+        type: function
+      - name: bindingType
+        nilable: true
+        type: number
+      outputs:
+      - name: success
+        type: boolean
     SetScript:
       impl: ScriptObject/SetScript
+      inputs:
+      - name: scriptTypeName
+        type: string
+      - name: script
+        nilable: true
+        type: function
+      outputs: {}
   virtual: true
 ScriptObjectBase:
   fields:

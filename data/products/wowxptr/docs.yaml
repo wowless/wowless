@@ -124,6 +124,18 @@ lies:
         outputs:
         - _add:
             nilable: true
+    ScriptObject:
+      GetScript:
+        outputs:
+        - _add:
+            nilable: true
+      HookScript:
+        outputs:
+          _change:
+            from: {}
+            to:
+            - name: success
+              type: boolean
     TextureBase:
       GetTexCoord:
         _remove:
@@ -254,14 +266,10 @@ skip_uiobject_methods:
     GetLeft: {}
     GetPoint: {}
     GetRect: {}
-    GetScript: {}
     GetSize: {}
     GetWidth: {}
-    HasScript: {}
-    HookScript: {}
     SetAllPoints: {}
     SetPoint: {}
-    SetScript: {}
   StatusBar:
     SetStatusBarTexture: {}
   TextureBase:
@@ -345,6 +353,10 @@ typedefs:
 uiobject_method_reassignments:
   Region:
     GetDrawLayer: LayeredRegion
+    GetScript: ScriptObject
     GetVertexColor: LayeredRegion
+    HasScript: ScriptObject
+    HookScript: ScriptObject
     SetDrawLayer: LayeredRegion
+    SetScript: ScriptObject
     SetVertexColor: LayeredRegion
