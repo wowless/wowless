@@ -461,11 +461,10 @@ local function rewriteUIObjects()
     inhprocess(k)
   end
   for k, v in pairs(mapped) do
-    local u = assert(uiobjects[k], 'unknown uiobject type ' .. k)
     for mk, mv in pairs(v) do
-      local reassign = take(reassigns, k, mk)
-      local uu = reassign and uiobjects[reassign] or u
-      local mm = uu.methods[mk]
+      local kk = take(reassigns, k, mk) or k
+      local u = assert(uiobjects[kk], 'unknown uiobject type ' .. kk)
+      local mm = u.methods[mk]
       local mmv = {
         impl = mm and mm.impl,
         inputs = insig(mv),
@@ -477,24 +476,24 @@ local function rewriteUIObjects()
         stuboutstrides = mm and mm.stuboutstrides,
       }
       local okay = (function()
-        if inhm[k][mk] and not mmv.override then
+        if inhm[kk][mk] and not mmv.override then
           return false
         end
-        if take(skips, k, mk) then
+        if take(skips, kk, mk) then
           return false
         end
         return true
       end)()
       if okay then
-        local lie = take(lies, reassign or k, mk)
+        local lie = take(lies, kk, mk)
         if lie then
           local success, val = pcall(tedit, mmv, lie)
           if not success then
-            error(('tedit failure on %s.%s: %s'):format(reassign or k, mk, val))
+            error(('tedit failure on %s.%s: %s'):format(kk, mk, val))
           end
           mmv = val
         end
-        uu.methods[mk] = mmv
+        u.methods[mk] = mmv
       end
     end
   end

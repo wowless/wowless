@@ -351,6 +351,9 @@ typedefs:
   WOWGUID: string
   WOWMONEY: number
 uiobject_method_reassignments:
+  FontString:
+    SetJustifyH: FontInstance
+    SetJustifyV: FontInstance
   Region:
     GetDrawLayer: LayeredRegion
     GetScript: ScriptObject

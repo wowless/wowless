@@ -2610,10 +2610,18 @@ FontInstance:
       impl:
         setter:
         - name: justifyh
+      inputs:
+      - name: justifyH
+        type: JustifyHorizontal
+      outputs: {}
     SetJustifyV:
       impl:
         setter:
         - name: justifyv
+      inputs:
+      - name: justifyV
+        type: JustifyVertical
+      outputs: {}
     SetShadowColor: {}
     SetShadowOffset: {}
     SetSpacing: {}
