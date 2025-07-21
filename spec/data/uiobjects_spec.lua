@@ -147,6 +147,12 @@ describe('uiobjects', function()
                         })
                       end)
                     elseif mv.impl.setter then
+                      it('has declared inputs', function()
+                        assert.Not.Nil(mv.inputs)
+                      end)
+                      it('has declared outputs', function()
+                        assert.Not.Nil(mv.outputs)
+                      end)
                       it('has the right prototype', function()
                         local inputs = {}
                         for i, f in ipairs(mv.impl.setter) do
