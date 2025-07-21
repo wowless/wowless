@@ -249,13 +249,6 @@ skip_docfiles:
   SimpleModelFFXAPIDocumentation: {}
   WorldSafeLocsUIInternalDocumentation: {}
 skip_uiobject_methods:
-  Button:
-    SetDisabledTexture: {}
-    SetHighlightTexture: {}
-    SetNormalTexture: {}
-    SetPushedTexture: {}
-  CheckButton:
-    SetCheckedTexture: {}
   Cooldown:
     SetBlingTexture: {}
     SetEdgeTexture: {}
@@ -270,8 +263,6 @@ skip_uiobject_methods:
     GetWidth: {}
     SetAllPoints: {}
     SetPoint: {}
-  StatusBar:
-    SetStatusBarTexture: {}
   TextureBase:
     GetTexture: {}
     SetTexture: {}
@@ -336,7 +327,7 @@ typedefs:
   string: string
   stringView: string
   TBFFlags: string
-  TextureAsset: Texture
+  TextureAsset: TextureAsset
   TextureAssetDisk: string
   textureAtlas: string
   textureKit: string
