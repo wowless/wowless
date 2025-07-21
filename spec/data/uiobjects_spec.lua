@@ -20,7 +20,10 @@ describe('uiobjects', function()
       if expected.outputs then
         assert.same(#expected.outputs, #actual.outputs)
         for i, x in ipairs(expected.outputs) do
-          assert.same(x.type, actual.outputs[i].type)
+          local a = actual.outputs[i]
+          assert.same(x.type, a.type)
+          -- e.g. nilable getter arg can have a non-nilable field
+          -- assert.True(not a.nilable or x.nilable) issue #434
         end
       end
       assert.same(expected.instride, actual.instride)
