@@ -223,7 +223,13 @@ local function default(x)
   return enum[x.Type] and enum[x.Type][x.Default] or x.Default
 end
 
-local function insig(fn, ns)
+local function insig(fn, ns, api)
+  local permissives = {}
+  for _, input in ipairs(api and api.inputs or {}) do
+    if input.name then
+      permissives[input.name] = input.permissive
+    end
+  end
   local t = {}
   for _, a in ipairs(fn.Arguments or {}) do
     if a.Type == 'UnitToken' and a.Default == 'WOWGUID_NULL' then
@@ -248,10 +254,13 @@ local function insig(fn, ns)
         default = def,
         name = a.Name,
         nilable = a.Nilable and def == nil or nil,
+        permissive = take(permissives, a.Name),
         type = t2nty(a, ns),
       })
     end
   end
+  local fname = (ns and (ns .. '.') or '') .. fn.Name
+  assertTaken(fname .. ' permissives', permissives)
   return t
 end
 
@@ -305,7 +314,7 @@ local function rewriteApis()
     local api = apis[name]
     local newapi = {
       impl = api and api.impl,
-      inputs = insig(fn, ns),
+      inputs = insig(fn, ns, api),
       instride = stride(fn.Arguments),
       mayreturnnothing = fn.MayReturnNothing,
       outputs = outsig(fn, ns, api),
@@ -464,7 +473,7 @@ local function rewriteUIObjects()
       local mm = u.methods[mk]
       local mmv = {
         impl = mm and mm.impl,
-        inputs = insig(mv),
+        inputs = insig(mv, nil, mm),
         instride = stride(mv.Arguments),
         mayreturnnothing = mv.MayReturnNothing,
         override = mm and mm.override,

@@ -157,16 +157,9 @@ return function(api)
     oneornil = true,
   }
 
-  local function typecheck(spec, value, isout)
-    if value == nil then
-      if spec.default ~= nil then
-        return spec.default
-      end
-      if not spec.nilable and not nilables[spec.type] then
-        return nil, 'is not nilable, but nil was passed'
-      end
-      return nil
-    end
+  local typecheck
+
+  local function dotypecheck(spec, value, isout)
     local scalartypecheck = scalartypechecks[spec.type]
     if scalartypecheck then
       return scalartypecheck(value, isout)
@@ -233,6 +226,23 @@ return function(api)
     else
       return nil, 'invalid spec'
     end
+  end
+
+  function typecheck(spec, value, isout)
+    if value == nil then
+      if spec.default ~= nil then
+        return spec.default
+      end
+      if not spec.nilable and not nilables[spec.type] then
+        return nil, 'is not nilable, but nil was passed'
+      end
+      return nil
+    end
+    local val, msg, warn = dotypecheck(spec, value, isout)
+    if msg and spec.permissive then
+      return spec.default
+    end
+    return val, msg, warn
   end
 
   return typecheck

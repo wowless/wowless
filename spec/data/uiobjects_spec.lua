@@ -182,6 +182,10 @@ describe('uiobjects', function()
                         it('is not explicitly nilable', function()
                           assert.Nil(input.nilable)
                         end)
+                      else
+                        it('is not permissive', function()
+                          assert.Nil(input.permissive)
+                        end)
                       end
                     end)
                   end
