@@ -137,9 +137,7 @@ describe('uiobjects', function()
                       end
                     end)
                     it('has both inputs and outputs, or neither', function()
-                      if k ~= 'Frame' or mk ~= 'GetAttribute' then -- issue #430
-                        assert.same(type(mv.inputs), type(mv.outputs))
-                      end
+                      assert.same(not not (mv.inputs or mv.manualinputs), not not mv.outputs)
                     end)
                     if mv.impl.getter then
                       it('has the right prototype', function()
@@ -202,6 +200,16 @@ describe('uiobjects', function()
                     assert(not mv.instride or mv.instride <= #mv.inputs)
                   end)
                 end)
+                if mv.manualinputs then
+                  describe('manualinputs', function()
+                    it('must be implemented in lua', function()
+                      assert.True(type(mv.impl) == 'string')
+                    end)
+                    it('must not have declared inputs', function()
+                      assert.Nil(mv.inputs)
+                    end)
+                  end)
+                end
                 describe('outputs', function()
                   for i, output in ipairs(mv.outputs or {}) do
                     describe(output.name or i, function()

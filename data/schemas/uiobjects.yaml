@@ -91,6 +91,8 @@ type:
                               schema: type
                   instride:
                     type: number
+                  manualinputs:
+                    type: boolean
                   mayreturnnothing:
                     type: boolean
                   outputs:

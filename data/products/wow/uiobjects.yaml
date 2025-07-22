@@ -3046,6 +3046,7 @@ Frame:
       outstride: 1
     GetAttribute:
       impl: Frame/GetAttribute
+      manualinputs: true
       outputs:
       - name: value
         nilable: true
