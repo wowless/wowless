@@ -1,15 +1,5 @@
 local api = ...
-local validPoints = {
-  BOTTOM = true,
-  BOTTOMLEFT = true,
-  BOTTOMRIGHT = true,
-  CENTER = true,
-  LEFT = true,
-  RIGHT = true,
-  TOP = true,
-  TOPLEFT = true,
-  TOPRIGHT = true,
-}
+local validPoints = require('runtime.stringenums').FramePoint
 return function(self, point, ...)
   -- TODO handle resetting points
   point = point and point:upper() or 'CENTER'
