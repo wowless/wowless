@@ -475,6 +475,7 @@ local function rewriteUIObjects()
         impl = mm and mm.impl,
         inputs = insig(mv, nil, mm),
         instride = stride(mv.Arguments),
+        manualinputs = mm and mm.manualinputs,
         mayreturnnothing = mv.MayReturnNothing,
         override = mm and mm.override,
         outputs = outsig(mv, nil, mm),
