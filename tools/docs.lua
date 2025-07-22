@@ -39,6 +39,12 @@ local function take(t, k, ...)
   end
 end
 
+local function assertTaken(s, t)
+  if next(t) then
+    error(('not all %s were consumed:\n%s'):format(s, pprintYaml(t)), 0)
+  end
+end
+
 local docs = {}
 do
   local mixmt = {
@@ -276,21 +282,15 @@ local function outsig(fn, ns, api)
         default = default(r),
         name = r.Name,
         nilable = r.Nilable and ty ~= 'nil' or nil,
-        stub = stubs[r.Name],
-        stubnotnil = stubnotnils[r.Name],
+        stub = take(stubs, r.Name),
+        stubnotnil = take(stubnotnils, r.Name),
         type = ty,
       })
-      stubs[r.Name] = nil
     end
   end
-  if next(stubs) ~= nil then
-    error(table.concat({
-      'stub merge error on',
-      ns and (' ns = ' .. ns) or '',
-      '\n',
-      require('pl.pretty').write(fn),
-    }))
-  end
+  local fname = (ns and (ns .. '.') or '') .. fn.Name
+  assertTaken(fname .. ' stubs', stubs)
+  assertTaken(fname .. ' stubnotnils', stubnotnils)
   return outputs
 end
 
@@ -324,12 +324,8 @@ local function rewriteApis()
       apis[name] = newapi
     end
   end
-  if next(lies) then
-    error('not all lies were consumed: ' .. require('pl.pretty').write(lies))
-  end
-  if next(extras) then
-    error('not all extras were consumed: ' .. require('pl.pretty').write(extras))
-  end
+  assertTaken('lies', lies)
+  assertTaken('extras', extras)
   writeifchanged(f, y.pprint(apis))
   return apis
 end
@@ -498,15 +494,9 @@ local function rewriteUIObjects()
       end
     end
   end
-  if next(lies) then
-    error('not all lies were consumed: ' .. require('pl.pretty').write(lies))
-  end
-  if next(skips) then
-    error('not all skips were consumed: ' .. require('pl.pretty').write(skips))
-  end
-  if next(reassigns) then
-    error('not all reassigns were consumed: ' .. require('pl.pretty').write(reassigns))
-  end
+  assertTaken('lies', lies)
+  assertTaken('skips', skips)
+  assertTaken('reassigns', reassigns)
   writeifchanged(filename, pprintYaml(uiobjects))
   return uiobjects
 end
@@ -522,4 +512,4 @@ for k in pairs(typedefs) do
     unused_typedefs[k] = true
   end
 end
-assert(not next(unused_typedefs), 'unused typedefs = ' .. require('pl.pretty').write(unused_typedefs))
+assert(not next(unused_typedefs), 'unused typedefs:\n' .. pprintYaml(unused_typedefs))
