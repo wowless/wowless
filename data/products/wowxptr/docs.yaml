@@ -219,10 +219,10 @@ lies:
             _add:
               nilable: true
           3:
-            type:
-              _change:
-                from: FilterMode
-                to: string
+            _add:
+              default: LINEAR
+            _remove:
+              nilable: true
 script_objects:
   FrameAPIArchaeologyDigSiteFrame: ArchaeologyDigSiteFrame
   FrameAPIBlob: POIFrame

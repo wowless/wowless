@@ -210,8 +210,14 @@ lies:
               type: number
       SetAtlas:
         inputs:
-        - _add:
-            nilable: true
+          1:
+            _add:
+              nilable: true
+          3:
+            _add:
+              default: LINEAR
+            _remove:
+              nilable: true
 script_objects:
   FrameAPIArchaeologyDigSiteFrame: ArchaeologyDigSiteFrame
   FrameAPIBlob: POIFrame

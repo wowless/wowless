@@ -6777,9 +6777,10 @@ TextureBase:
       - default: false
         name: useAtlasSize
         type: boolean
-      - name: filterMode
-        nilable: true
-        type: string
+      - default: LINEAR
+        name: filterMode
+        permissive: true
+        type: FilterMode
       - name: resetTexCoords
         nilable: true
         type: boolean
