@@ -9833,8 +9833,9 @@ C_Sound.PlayVocalErrorSound:
       enum: Vocalerrorsounds
   outputs: {}
 C_SpecializationInfo.GetNumSpecializationsForClassID:
+  impl: GetNumSpecializationsForClassID
   inputs:
-  - name: specID
+  - name: classID
     type: number
   outputs:
   - name: specCount

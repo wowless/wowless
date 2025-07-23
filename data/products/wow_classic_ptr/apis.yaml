@@ -11150,6 +11150,7 @@ C_SpecializationInfo.GetActiveSpecGroup:
   - name: groupIndex
     type: number
 C_SpecializationInfo.GetNumSpecializationsForClassID:
+  impl: GetNumSpecializationsForClassID
   inputs:
   - name: classID
     type: number

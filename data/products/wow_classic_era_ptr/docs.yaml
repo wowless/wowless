@@ -9,6 +9,12 @@ lies:
       outputs:
       - _add:
           nilable: true
+    C_SpecializationInfo.GetNumSpecializationsForClassID:
+      inputs:
+      - name:
+          _change:
+            from: specID
+            to: classID
   extra_apis:
     C_BattleNet.InstallHighResTextures: {}
   uiobjects:
