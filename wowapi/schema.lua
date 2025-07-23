@@ -18,18 +18,25 @@ local productDomains = {
   xml = wdata.xml,
 }
 
+local function checkty(ty, v)
+  local vty = type(v)
+  if vty ~= ty then
+    return ('want %s, got %s'):format(ty, vty)
+  end
+end
+
 local validators = {
   boolean = function(v)
-    assert(type(v) == 'boolean', 'expected boolean')
+    return checkty('boolean', v)
   end,
   number = function(v)
-    assert(type(v) == 'number', 'expected number')
+    return checkty('number', v)
   end,
   string = function(v)
-    assert(type(v) == 'string', 'expected string')
+    return checkty('string', v)
   end,
   table = function(v)
-    assert(type(v) == 'table', 'expected table')
+    return checkty('table', v)
   end,
 }
 
@@ -61,41 +68,55 @@ local function docompile(schematype)
       required[k] = v.required or nil
     end
     return function(v, product)
-      assert(type(v) == 'table', 'expected table')
+      if type(v) ~= 'table' then
+        return 'expected table'
+      end
+      local errors = {}
       for vk, vv in pairs(v) do
         local field = fields[vk]
-        if not field then
-          error('unknown field ' .. vk)
-        end
-        field(vv, product)
+        errors[vk] = not field and 'unknown field' or field(vv, product)
       end
       for k in pairs(required) do
         if v[k] == nil then
-          error('missing required field ' .. k)
+          errors[k] = 'missing required field'
         end
       end
+      return next(errors) and errors or nil
     end
   elseif schematype.mapof then
     local key = compile(schematype.mapof.key)
     local value = compile(schematype.mapof.value)
     return function(v, product)
-      assert(type(v) == 'table', 'expected table')
-      for vk, vv in pairs(v) do
-        key(vk, product)
-        value(vv, product)
+      if type(v) ~= 'table' then
+        return 'expected table'
       end
+      local errors = {}
+      for vk, vv in pairs(v) do
+        local ek = key(vk, product)
+        local ev = value(vv, product)
+        if ek or ev then
+          errors[vk] = { key = ek, value = ev }
+        end
+      end
+      return next(errors) and errors or nil
     end
   elseif schematype.sequenceof then
     local element = compile(schematype.sequenceof)
     return function(v, product)
-      assert(type(v) == 'table', 'expected table')
+      if type(v) ~= 'table' then
+        return 'expected table'
+      end
+      local errors = {}
       local max = 0
       for vk, vv in pairs(v) do
-        assert(type(vk) == 'number', 'expected number key')
-        max = vk > max and vk or max
-        element(vv, product)
+        if type(vk) ~= 'number' then
+          errors[vk] = 'expected number'
+        else
+          max = vk > max and vk or max
+          errors[vk] = element(vv, product)
+        end
       end
-      assert(max == #v, 'expected array')
+      return max ~= #v and 'expected array' or next(errors) and errors or nil
     end
   elseif schematype.oneof then
     local oneof = {}
@@ -104,32 +125,37 @@ local function docompile(schematype)
     end
     return function(v, product)
       local errors = {}
-      for _, element in ipairs(oneof) do
-        local success, err = pcall(element, v, product)
-        if success then
+      for i, element in ipairs(oneof) do
+        local err = element(v, product)
+        if not err then
           return
         else
-          table.insert(errors, err)
+          errors[i] = err
         end
       end
-      error('did not validate against any element of oneof: ' .. pretty(errors))
+      return errors
     end
   elseif schematype.literal then
     local s = schematype.literal
     return function(v)
-      assert(type(v) == 'string', 'expected string')
-      assert(v == s, 'string literal mismatch')
+      if v ~= s then
+        return 'string literal mismatch'
+      end
     end
   elseif schematype.ref then
     local ref = schematype.ref
     local gdomain = domains[ref]
     local pdomains = productDomains[ref]
     return function(v, product)
-      assert(type(v) == 'string', 'expected string in ref')
+      if type(v) ~= 'string' then
+        return 'expected string'
+      end
       local domain = gdomain or pdomains and pdomains[product]
-      assert(domain, 'bad schema: invalid domain')
+      if not domain then
+        return 'invalid domain'
+      end
       if not domain[v] then
-        error('unknown domain value ' .. v)
+        return 'unknown domain value'
       end
     end
   else
@@ -148,7 +174,10 @@ function compile(schematype)
 end
 
 local function validate(product, schematype, v)
-  return compile(schematype)(v, product)
+  local errors = compile(schematype)(v, product)
+  if errors then
+    error(pretty(errors), 0)
+  end
 end
 
 return {
