@@ -119,6 +119,7 @@ local function docompile(schematype)
       return max ~= #v and 'expected array' or next(errors) and errors or nil
     end
   elseif schematype.oneof then
+    assert(schematype.oneof[1], 'expected nonempty sequence')
     local oneof = {}
     for i, v in ipairs(schematype.oneof) do
       oneof[i] = compile(v)
@@ -174,7 +175,7 @@ end
 local function validate(product, schematype, v)
   local errors = compile(schematype)(v, product)
   if errors then
-    error(pretty(errors), 0)
+    error(errors, 0)
   end
 end
 
