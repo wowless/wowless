@@ -18,71 +18,137 @@ local productDomains = {
   xml = wdata.xml,
 }
 
-local function validate(product, schematype, v)
-  if schematype == 'number' then
-    assert(type(v) == 'number', 'expected number')
-  elseif schematype == 'string' then
-    assert(type(v) == 'string', 'expected string')
-  elseif schematype == 'boolean' then
+local validators = {
+  boolean = function(v)
     assert(type(v) == 'boolean', 'expected boolean')
-  elseif schematype == 'table' then
+  end,
+  number = function(v)
+    assert(type(v) == 'number', 'expected number')
+  end,
+  string = function(v)
+    assert(type(v) == 'string', 'expected string')
+  end,
+  table = function(v)
     assert(type(v) == 'table', 'expected table')
-  elseif type(schematype) ~= 'table' then
-    error('unexpected schema type ' .. tostring(schematype))
+  end,
+}
+
+local pretty = require('pl.pretty').write
+
+local compile
+
+local function docompile(schematype)
+  if type(schematype) ~= 'table' then
+    error('unexpected schema type ' .. pretty(schematype))
   elseif schematype.schema then
     local schema = wdata.schemas[schematype.schema]
-    assert(schema and schema.type, 'bad schema: ' .. schematype.schema)
-    validate(product, schema.type, v)
+    if not schema then
+      error('bad schema: ' .. schematype.schema)
+    end
+    local cached
+    return function(v, product)
+      if not cached then
+        -- We have to handle schema refs lazily to support circular refs.
+        cached = compile(schema.type)
+      end
+      return cached(v, product)
+    end
   elseif schematype.record then
-    assert(type(v) == 'table', 'expected table')
-    for k2, v2 in pairs(v) do
-      local info = schematype.record[k2]
-      assert(info, 'unknown field ' .. k2)
-      validate(product, info.type, v2)
+    local fields = {}
+    local required = {}
+    for k, v in pairs(schematype.record) do
+      fields[k] = compile(v.type)
+      required[k] = v.required or nil
     end
-    for field, info in pairs(schematype.record) do
-      assert(not info.required or v[field] ~= nil, 'missing required field ' .. field)
-    end
-  elseif schematype.mapof then
-    local kty = assert(schematype.mapof.key, 'missing key type')
-    local vty = assert(schematype.mapof.value, 'missing value type')
-    assert(type(v) == 'table', 'expected table')
-    for k2, v2 in pairs(v) do
-      validate(product, kty, k2)
-      validate(product, vty, v2)
-    end
-  elseif schematype.sequenceof then
-    assert(type(v) == 'table', 'expected table')
-    local max = 0
-    for k2, v2 in pairs(v) do
-      assert(type(k2) == 'number', 'expected number key')
-      max = k2 > max and k2 or max
-      validate(product, schematype.sequenceof, v2)
-    end
-    assert(max == #v, 'expected array')
-  elseif schematype.oneof then
-    local errors = {}
-    for _, ty in ipairs(schematype.oneof) do
-      local success, err = pcall(validate, product, ty, v)
-      if success then
-        return
-      else
-        table.insert(errors, err)
+    return function(v, product)
+      assert(type(v) == 'table', 'expected table')
+      for vk, vv in pairs(v) do
+        local field = fields[vk]
+        if not field then
+          error('unknown field ' .. vk)
+        end
+        field(vv, product)
+      end
+      for k in pairs(required) do
+        if v[k] == nil then
+          error('missing required field ' .. k)
+        end
       end
     end
-    error('did not validate against any element of oneof: ' .. require('pl.pretty').write(errors))
+  elseif schematype.mapof then
+    local key = compile(schematype.mapof.key)
+    local value = compile(schematype.mapof.value)
+    return function(v, product)
+      assert(type(v) == 'table', 'expected table')
+      for vk, vv in pairs(v) do
+        key(vk, product)
+        value(vv, product)
+      end
+    end
+  elseif schematype.sequenceof then
+    local element = compile(schematype.sequenceof)
+    return function(v, product)
+      assert(type(v) == 'table', 'expected table')
+      local max = 0
+      for vk, vv in pairs(v) do
+        assert(type(vk) == 'number', 'expected number key')
+        max = vk > max and vk or max
+        element(vv, product)
+      end
+      assert(max == #v, 'expected array')
+    end
+  elseif schematype.oneof then
+    local oneof = {}
+    for i, v in ipairs(schematype.oneof) do
+      oneof[i] = compile(v)
+    end
+    return function(v, product)
+      local errors = {}
+      for _, element in ipairs(oneof) do
+        local success, err = pcall(element, v, product)
+        if success then
+          return
+        else
+          table.insert(errors, err)
+        end
+      end
+      error('did not validate against any element of oneof: ' .. pretty(errors))
+    end
   elseif schematype.literal then
-    assert(type(v) == 'string', 'expected string')
-    assert(v == schematype.literal, 'string literal mismatch')
+    local s = schematype.literal
+    return function(v)
+      assert(type(v) == 'string', 'expected string')
+      assert(v == s, 'string literal mismatch')
+    end
   elseif schematype.ref then
-    assert(type(v) == 'string', 'expected string in ref')
     local ref = schematype.ref
-    local domain = domains[ref] or productDomains[ref] and productDomains[ref][product]
-    assert(domain, 'bad schema: invalid domain')
-    assert(domain[v], 'unknown domain value ' .. v)
+    local gdomain = domains[ref]
+    local pdomains = productDomains[ref]
+    return function(v, product)
+      assert(type(v) == 'string', 'expected string in ref')
+      local domain = gdomain or pdomains and pdomains[product]
+      assert(domain, 'bad schema: invalid domain')
+      if not domain[v] then
+        error('unknown domain value ' .. v)
+      end
+    end
   else
     error('expected record/mapof/sequenceof/oneof')
   end
+end
+
+function compile(schematype)
+  local key = type(schematype) == 'string' and schematype or pretty(schematype, '')
+  local validator = validators[key]
+  if not validator then
+    validator = docompile(schematype)
+    validators[key] = validator
+  end
+  return validator
+end
+
+local function validate(product, schematype, v)
+  return compile(schematype)(v, product)
 end
 
 return {
