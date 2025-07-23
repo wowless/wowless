@@ -15812,7 +15812,21 @@ GetAvailableLocales:
   - name: unpackedPrimitiveType
     type: string
   outstride: 1
-GetAvailableQuestInfo: {}
+GetAvailableQuestInfo:
+  inputs:
+  - name: index
+    type: number
+  outputs:
+  - name: isTrivial
+    type: boolean
+  - name: frequency
+    type: number
+  - name: isRepeatable
+    type: boolean
+  - name: isLegendary
+    type: boolean
+  - name: questID
+    type: number
 GetAvailableTitle:
   inputs:
   - name: index
@@ -22276,9 +22290,30 @@ UnitAttackSpeed:
   - type: number
   - type: number
 UnitAura: {}
-UnitBattlePetLevel: {}
-UnitBattlePetSpeciesID: {}
-UnitBattlePetType: {}
+UnitBattlePetLevel:
+  inputs:
+  - name: unit
+    type: unit
+  outputs:
+  - name: result
+    nilable: true
+    type: number
+UnitBattlePetSpeciesID:
+  inputs:
+  - name: unit
+    type: unit
+  outputs:
+  - name: result
+    nilable: true
+    type: number
+UnitBattlePetType:
+  inputs:
+  - name: unit
+    type: unit
+  outputs:
+  - name: result
+    nilable: true
+    type: number
 UnitBuff: {}
 UnitCanAssist:
   inputs:
@@ -22568,8 +22603,22 @@ UnitHasRelicSlot:
     type: string
   outputs:
   - type: boolean
-UnitHasVehiclePlayerFrameUI: {}
-UnitHasVehicleUI: {}
+UnitHasVehiclePlayerFrameUI:
+  inputs:
+  - name: unit
+    nilable: true
+    type: unit
+  outputs:
+  - name: result
+    type: boolean
+UnitHasVehicleUI:
+  inputs:
+  - name: unit
+    nilable: true
+    type: unit
+  outputs:
+  - name: result
+    type: boolean
 UnitHealth:
   inputs:
   - type: string
@@ -22663,7 +22712,13 @@ UnitInSubgroup:
   outputs:
   - name: result
     type: boolean
-UnitInVehicle: {}
+UnitInVehicle:
+  inputs:
+  - name: unit
+    type: unit
+  outputs:
+  - name: result
+    type: boolean
 UnitInVehicleControlSeat:
   inputs:
   - name: unit
@@ -22685,8 +22740,21 @@ UnitIsAFK:
   - type: string
   outputs:
   - type: oneornil
-UnitIsBattlePet: {}
-UnitIsBattlePetCompanion: {}
+UnitIsBattlePet:
+  inputs:
+  - name: unit
+    type: unit
+  outputs:
+  - name: result
+    nilable: true
+    type: boolean
+UnitIsBattlePetCompanion:
+  inputs:
+  - name: unit
+    type: unit
+  outputs:
+  - name: result
+    type: boolean
 UnitIsCharmed:
   inputs:
   - name: unit
@@ -22800,7 +22868,14 @@ UnitIsInteractable:
   outputs:
   - name: result
     type: boolean
-UnitIsOtherPlayersBattlePet: {}
+UnitIsOtherPlayersBattlePet:
+  inputs:
+  - name: unit
+    nilable: true
+    type: unit
+  outputs:
+  - name: result
+    type: boolean
 UnitIsOtherPlayersPet:
   inputs:
   - nilable: true
@@ -22901,7 +22976,13 @@ UnitIsVisible:
     type: string
   outputs:
   - type: boolean
-UnitIsWildBattlePet: {}
+UnitIsWildBattlePet:
+  inputs:
+  - name: unit
+    type: unit
+  outputs:
+  - name: result
+    type: boolean
 UnitLeadsAnyGroup:
   inputs:
   - name: unit
@@ -23235,7 +23316,14 @@ UnitSwitchToVehicleSeat:
   - name: virtualSeatIndex
     type: number
   outputs: {}
-UnitTargetsVehicleInRaidUI: {}
+UnitTargetsVehicleInRaidUI:
+  inputs:
+  - name: unit
+    nilable: true
+    type: unit
+  outputs:
+  - name: result
+    type: boolean
 UnitThreatPercentageOfLead:
   inputs:
   - name: unit

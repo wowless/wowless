@@ -8614,7 +8614,11 @@ C_PetJournal.ClearRecentFanfares:
 C_PetJournal.ClearSearchFilter:
   inputs: {}
   outputs: {}
-C_PetJournal.DismissSummonedPet: {}
+C_PetJournal.DismissSummonedPet:
+  inputs:
+  - name: petID
+    type: string
+  outputs: {}
 C_PetJournal.FindPetIDByName: {}
 C_PetJournal.GetBattlePetLink: {}
 C_PetJournal.GetBattlePetLinkFromSpecies: {}
@@ -8704,7 +8708,13 @@ C_PetJournal.GetSummonBattlePetCooldown:
   - name: enable
     type: boolean
 C_PetJournal.GetSummonedPetGUID: {}
-C_PetJournal.IsCurrentlySummoned: {}
+C_PetJournal.IsCurrentlySummoned:
+  inputs:
+  - name: petID
+    type: string
+  outputs:
+  - name: isSummoned
+    type: boolean
 C_PetJournal.IsFilterChecked: {}
 C_PetJournal.IsJournalReadOnly: {}
 C_PetJournal.IsJournalUnlocked: {}
@@ -20593,8 +20603,24 @@ UnitControllingVehicle:
   outputs:
   - name: result
     type: boolean
-UnitCreatureFamily: {}
-UnitCreatureType: {}
+UnitCreatureFamily:
+  inputs:
+  - name: unit
+    type: unit
+  outputs:
+  - name: name
+    type: string
+  - name: id
+    type: number
+UnitCreatureType:
+  inputs:
+  - name: unit
+    type: unit
+  outputs:
+  - name: name
+    type: string
+  - name: id
+    type: number
 UnitDamage:
   inputs:
   - type: string
@@ -20738,8 +20764,22 @@ UnitHasRelicSlot:
     type: string
   outputs:
   - type: boolean
-UnitHasVehiclePlayerFrameUI: {}
-UnitHasVehicleUI: {}
+UnitHasVehiclePlayerFrameUI:
+  inputs:
+  - name: unit
+    nilable: true
+    type: unit
+  outputs:
+  - name: result
+    type: boolean
+UnitHasVehicleUI:
+  inputs:
+  - name: unit
+    nilable: true
+    type: unit
+  outputs:
+  - name: result
+    type: boolean
 UnitHealth:
   inputs:
   - type: string
@@ -20833,7 +20873,13 @@ UnitInSubgroup:
   outputs:
   - name: result
     type: boolean
-UnitInVehicle: {}
+UnitInVehicle:
+  inputs:
+  - name: unit
+    type: unit
+  outputs:
+  - name: result
+    type: boolean
 UnitInVehicleControlSeat:
   inputs:
   - name: unit
@@ -21380,7 +21426,14 @@ UnitSwitchToVehicleSeat:
   - name: virtualSeatIndex
     type: number
   outputs: {}
-UnitTargetsVehicleInRaidUI: {}
+UnitTargetsVehicleInRaidUI:
+  inputs:
+  - name: unit
+    nilable: true
+    type: unit
+  outputs:
+  - name: result
+    type: boolean
 UnitThreatPercentageOfLead:
   inputs:
   - name: unit
