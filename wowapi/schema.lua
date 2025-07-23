@@ -125,15 +125,13 @@ local function docompile(schematype)
     end
     return function(v, product)
       local errors = {}
+      local n = 0
       for i, element in ipairs(oneof) do
         local err = element(v, product)
-        if not err then
-          return
-        else
-          errors[i] = err
-        end
+        errors[i] = err
+        n = n + (err and 0 or 1)
       end
-      return errors
+      return n == 0 and errors or n > 1 and 'multiple matches' or nil
     end
   elseif schematype.literal then
     local s = schematype.literal

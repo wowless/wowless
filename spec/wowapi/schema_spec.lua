@@ -253,6 +253,9 @@ describe('schema', function()
         reject({ oneof = { 'string' } }, {})
         accept({ oneof = { 'table' } }, {})
       end)
+      it('rejects multiple matches', function()
+        reject({ oneof = { 'number', 'number' } }, 42)
+      end)
       it('accepts oneof each', function()
         local ty = {
           oneof = {
