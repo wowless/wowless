@@ -7,17 +7,6 @@ type:
   - literal: string
   - literal: table
   - record:
-      enumset:
-        required: true
-        type:
-          record:
-            nonempty:
-              type: boolean
-            values:
-              required: true
-              type:
-                sequenceof: string
-  - record:
       literal:
         required: true
         type: string

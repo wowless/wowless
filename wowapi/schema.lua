@@ -74,20 +74,6 @@ local function validate(product, schematype, v)
   elseif schematype.literal then
     assert(type(v) == 'string', 'expected string')
     assert(v == schematype.literal, 'string literal mismatch')
-  elseif schematype.enumset then
-    assert(type(v) == 'table', 'expected table for enumset')
-    local values = {}
-    for _, vv in ipairs(schematype.enumset.values) do
-      values[vv] = true
-    end
-    local seen = {}
-    for _, vv in ipairs(v) do
-      assert(type(vv) == 'string', 'expected string value in enumset')
-      assert(values[vv], 'unknown value ' .. vv)
-      assert(not seen[vv], 'duplicate value ' .. vv)
-      seen[vv] = true
-    end
-    assert(not schematype.enumset.nonempty or next(seen), 'missing value in enumset')
   elseif schematype.ref then
     assert(type(v) == 'string', 'expected string in ref')
     local ref = schematype.ref
