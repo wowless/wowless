@@ -11,6 +11,7 @@ local function doit(name, f)
   depth = depth - 1
 end
 _G.assert = require('luassert')
+_G.assert:set_parameter('TableFormatLevel', -1)
 _G.describe = doit
 _G.it = doit
 for _, f in ipairs(arg) do

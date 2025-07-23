@@ -10,7 +10,6 @@ describe('addon', function()
           product = product,
         })
         assert.True(api.env.WowlessTestsDone)
-        assert:set_parameter('TableFormatLevel', -1)
         assert.same({}, api.env.WowlessTestFailures)
         assert.same(0, api.GetErrorCount())
       end)
