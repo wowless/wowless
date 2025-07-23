@@ -32,6 +32,12 @@ type:
       - record:
           function:
             type: string
+          luamodule:
+            required: true
+            type: string
+      - record:
+          function:
+            type: string
           module:
             required: true
             type: string

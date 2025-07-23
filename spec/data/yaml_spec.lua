@@ -1,4 +1,11 @@
-local validate = require('wowapi.schema').validate
+local validate
+do
+  local inner = require('wowapi.schema').validate
+  local pretty = require('wowapi.yaml').pprint
+  function validate(...)
+    assert(xpcall(inner, pretty, ...))
+  end
+end
 
 local globalschemas = {
   ['data/families'] = 'families',

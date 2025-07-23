@@ -144,6 +144,11 @@ do
             frameworks = { 'api' },
             src = fmt:format(ic.module, ic['function'] or apicfg.impl),
           }
+        elseif ic.luamodule then
+          local fmt = 'return require(%q)[%q]'
+          impls[apicfg.impl] = {
+            src = fmt:format(ic.luamodule, ic['function'] or apicfg.impl),
+          }
         elseif ic.delegate then
           impls[apicfg.impl] = {
             src = 'return ' .. ic.delegate,

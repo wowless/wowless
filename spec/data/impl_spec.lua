@@ -2,7 +2,7 @@ describe('impl', function()
   it('references exactly the files in data/impl, except for specials', function()
     local expected = {}
     for k, v in pairs(require('build.data.impl')) do
-      local haslua = not (v.delegate or v.directsql or v.module or v.stdlib)
+      local haslua = not (v.delegate or v.directsql or v.module or v.luamodule or v.stdlib)
       expected['data/impl/' .. k .. '.lua'] = haslua or nil
     end
     local actual = {}

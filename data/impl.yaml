@@ -413,7 +413,9 @@ math.tan:
   stdlib: math.tan
 math.tanh:
   stdlib: math.tanh
-Mixin: {}
+Mixin:
+  function: mixin
+  luamodule: wowless.util
 newproxy:
   stdlib: newproxy
 next:
