@@ -668,6 +668,7 @@ C_AddOns.GetAddOnDependencies:
     type: string
   outstride: 1
 C_AddOns.GetAddOnEnableState:
+  impl: GetAddOnEnableState
   inputs:
   - name: name
     type: uiAddon
@@ -10550,6 +10551,7 @@ C_Traits.GetConfigIDByTreeID:
   - name: configID
     type: number
 C_Traits.GetConfigInfo:
+  impl: C_Traits.GetConfigInfo
   inputs:
   - name: configID
     type: number
@@ -10604,6 +10606,7 @@ C_Traits.GetNodeCost:
       arrayof:
         structure: C_Traits.TraitCurrencyCost
 C_Traits.GetNodeInfo:
+  impl: C_Traits.GetNodeInfo
   inputs:
   - name: configID
     type: number
@@ -10731,6 +10734,7 @@ C_Traits.GetTreeInfo:
     type:
       structure: C_Traits.TraitTreeInfo
 C_Traits.GetTreeNodes:
+  impl: C_Traits.GetTreeNodes
   inputs:
   - name: treeID
     type: number
