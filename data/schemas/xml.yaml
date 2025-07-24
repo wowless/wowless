@@ -13,84 +13,72 @@ type:
                 record:
                   impl:
                     type:
-                      oneof:
-                      - literal: internal
-                      - literal: loadfile
-                      - record:
-                          field:
-                            required: true
-                            type: string
-                      - record:
-                          method:
-                            required: true
-                            type: string
-                      - record:
-                          scope:
-                            required: true
-                            type: string
+                      taggedunion:
+                        field: string
+                        internal: tag
+                        loadfile: tag
+                        method: string
+                        scope: string
                   phase:
                     type:
-                      oneof:
-                      - literal: early
-                      - literal: middle
-                      - literal: late
+                      taggedunion:
+                        early: tag
+                        late: tag
+                        middle: tag
                   required:
                     type: boolean
                   type:
                     required: true
                     type:
-                      oneof:
-                      - literal: boolean
-                      - literal: number
-                      - literal: string
-                      - literal: stringlist
-                      - ref: stringenum
+                      taggedunion:
+                        boolean: tag
+                        number: tag
+                        string: tag
+                        stringenum:
+                          ref: stringenum
+                        stringlist: tag
         contents:
           type:
-            oneof:
-            - literal: text
-            - mapof:
-                key:
-                  ref: xml
-                value:
-                  record: {}
+            taggedunion:
+              tags:
+                mapof:
+                  key:
+                    ref: xml
+                  value:
+                    record: null
+              text: tag
         extends:
           type:
             ref: xml
         impl:
           type:
-            oneof:
-            - record:
-                argument:
-                  required: true
-                  type:
-                    oneof:
-                    - literal: lastkid
-                    - literal: self
-                parentmethod:
-                  required: true
-                  type: string
-                parenttype:
-                  required: true
-                  type:
-                    ref: uiobject
-            - record:
-                scope:
-                  required: true
-                  type: string
-            - record:
-                script:
-                  required: true
-                  type:
-                    record:
-                      args:
-                        type: string
-            - literal: loadstring
-            - literal: transparent
+            taggedunion:
+              call:
+                record:
+                  argument:
+                    required: true
+                    type:
+                      taggedunion:
+                        lastkid: tag
+                        self: tag
+                  parentmethod:
+                    required: true
+                    type: string
+                  parenttype:
+                    required: true
+                    type:
+                      ref: uiobject
+              loadstring: tag
+              scope: string
+              script:
+                record:
+                  args:
+                    type: string
+              transparent: tag
         phase:
           type:
-            oneof:
-            - literal: middle
-            - literal: late
+            taggedunion:
+              late: tag
+              middle: tag
         virtual:
           type: boolean

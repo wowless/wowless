@@ -5,20 +5,18 @@ local function preprocess(tree)
   for k, v in pairs(tree) do
     local attrs = {}
     for ak, av in pairs(v.attributes or {}) do
-      attrs[ak] = av.type
+      attrs[ak] = av.type.stringenum or av.type
     end
     local kids = {}
     local text = false
-    if type(v.contents) == 'table' then
-      for kid in pairs(v.contents) do
+    if v.contents == 'text' then
+      text = true
+    elseif v.contents then
+      for kid in pairs(v.contents.tags) do
         local key = kid:lower()
         assert(not kids[key], kid .. ' is already a child of ' .. k)
         kids[key] = true
       end
-    elseif v.contents == 'text' then
-      text = true
-    elseif v.contents ~= nil then
-      error('invalid contents on ' .. k)
     end
     local supertypes = { [k:lower()] = true }
     local t = v
@@ -27,18 +25,16 @@ local function preprocess(tree)
       t = tree[t.extends]
       for ak, av in pairs(t.attributes or {}) do
         assert(not attrs[ak], ak .. ' is already an attribute of ' .. k)
-        attrs[ak] = av.type
+        attrs[ak] = av.type.stringenum or av.type
       end
-      if type(t.contents) == 'table' then
-        for kid in pairs(t.contents) do
+      if t.contents == 'text' then
+        text = true
+      elseif t.contents then
+        for kid in pairs(t.contents.tags) do
           local key = kid:lower()
           assert(not kids[key], kid .. ' is already a child of ' .. k)
           kids[key] = true
         end
-      elseif t.contents == 'text' then
-        text = true
-      elseif t.contents ~= nil then
-        error('invalid contents on ' .. k)
       end
     end
     assert(not text or #kids == 0, 'both text and kids on ' .. k)

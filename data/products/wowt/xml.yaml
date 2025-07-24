@@ -30,7 +30,8 @@ Actor:
     virtual:
       type: boolean
   contents:
-    Scripts: {}
+    tags:
+      Scripts: {}
 Alpha:
   attributes:
     fromalpha:
@@ -57,10 +58,12 @@ Anchor:
     y:
       type: number
   contents:
-    Offset: {}
+    tags:
+      Offset: {}
 Anchors:
   contents:
-    Anchor: {}
+    tags:
+      Anchor: {}
   impl: transparent
 Animation:
   attributes:
@@ -94,8 +97,9 @@ Animation:
         method: SetTargetName
       type: string
   contents:
-    KeyValues: {}
-    Scripts: {}
+    tags:
+      KeyValues: {}
+      Scripts: {}
 AnimationGroup:
   attributes:
     looping:
@@ -107,11 +111,13 @@ AnimationGroup:
         method: SetToFinalAlpha
       type: boolean
   contents:
-    Animation: {}
+    tags:
+      Animation: {}
   extends: LayoutFrame
 Animations:
   contents:
-    AnimationGroup: {}
+    tags:
+      AnimationGroup: {}
   impl: transparent
 Attribute:
   attributes:
@@ -123,16 +129,18 @@ Attribute:
       type: string
 Attributes:
   contents:
-    Attribute: {}
+    tags:
+      Attribute: {}
   impl: transparent
 BarColor:
   extends: Color
 BarTexture:
   extends: Texture
   impl:
-    argument: self
-    parentmethod: SetStatusBarTexture
-    parenttype: StatusBar
+    call:
+      argument: self
+      parentmethod: SetStatusBarTexture
+      parenttype: StatusBar
 Binding:
   attributes:
     category:
@@ -154,8 +162,9 @@ Binding:
   contents: text
 Bindings:
   contents:
-    Binding: {}
-    ModifiedClick: {}
+    tags:
+      Binding: {}
+      ModifiedClick: {}
   impl: transparent
 BlingTexture:
   extends: Texture
@@ -180,13 +189,14 @@ Button:
       phase: late
       type: string
   contents:
-    ButtonFont: {}
-    ButtonText: {}
-    DisabledTexture: {}
-    HighlightTexture: {}
-    NormalTexture: {}
-    PushedTextOffset: {}
-    PushedTexture: {}
+    tags:
+      ButtonFont: {}
+      ButtonText: {}
+      DisabledTexture: {}
+      HighlightTexture: {}
+      NormalTexture: {}
+      PushedTextOffset: {}
+      PushedTexture: {}
   extends: Frame
 ButtonFont:
   attributes:
@@ -197,9 +207,10 @@ ButtonFont:
 ButtonText:
   extends: FontString
   impl:
-    argument: self
-    parentmethod: SetFontString
-    parenttype: Button
+    call:
+      argument: self
+      parentmethod: SetFontString
+      parenttype: Button
   phase: late
 CheckButton:
   attributes:
@@ -208,15 +219,17 @@ CheckButton:
         method: SetChecked
       type: boolean
   contents:
-    CheckedTexture: {}
-    DisabledCheckedTexture: {}
+    tags:
+      CheckedTexture: {}
+      DisabledCheckedTexture: {}
   extends: Button
 CheckedTexture:
   extends: Texture
   impl:
-    argument: self
-    parentmethod: SetCheckedTexture
-    parenttype: CheckButton
+    call:
+      argument: self
+      parentmethod: SetCheckedTexture
+      parenttype: CheckButton
 Checkout:
   attributes:
     imefont:
@@ -238,35 +251,40 @@ Color:
       type: number
 ColorSelect:
   contents:
-    ColorValueTexture: {}
-    ColorValueThumbTexture: {}
-    ColorWheelTexture: {}
-    ColorWheelThumbTexture: {}
+    tags:
+      ColorValueTexture: {}
+      ColorValueThumbTexture: {}
+      ColorWheelTexture: {}
+      ColorWheelThumbTexture: {}
   extends: Frame
 ColorValueTexture:
   extends: Texture
   impl:
-    argument: self
-    parentmethod: SetColorValueTexture
-    parenttype: ColorSelect
+    call:
+      argument: self
+      parentmethod: SetColorValueTexture
+      parenttype: ColorSelect
 ColorValueThumbTexture:
   extends: Texture
   impl:
-    argument: self
-    parentmethod: SetColorValueThumbTexture
-    parenttype: ColorSelect
+    call:
+      argument: self
+      parentmethod: SetColorValueThumbTexture
+      parenttype: ColorSelect
 ColorWheelTexture:
   extends: Texture
   impl:
-    argument: self
-    parentmethod: SetColorWheelTexture
-    parenttype: ColorSelect
+    call:
+      argument: self
+      parentmethod: SetColorWheelTexture
+      parenttype: ColorSelect
 ColorWheelThumbTexture:
   extends: Texture
   impl:
-    argument: self
-    parentmethod: SetColorWheelThumbTexture
-    parenttype: ColorSelect
+    call:
+      argument: self
+      parentmethod: SetColorWheelThumbTexture
+      parenttype: ColorSelect
 ControlPoint:
   attributes:
     offsetx:
@@ -275,7 +293,8 @@ ControlPoint:
       type: number
 ControlPoints:
   contents:
-    ControlPoint: {}
+    tags:
+      ControlPoint: {}
   impl: transparent
 Cooldown:
   attributes:
@@ -292,32 +311,37 @@ Cooldown:
         method: SetReverse
       type: boolean
   contents:
-    BlingTexture: {}
-    EdgeTexture: {}
-    SwipeTexture: {}
+    tags:
+      BlingTexture: {}
+      EdgeTexture: {}
+      SwipeTexture: {}
   extends: Frame
 Dimension:
   contents:
-    AbsDimension: {}
+    tags:
+      AbsDimension: {}
   virtual: true
 DisabledCheckedTexture:
   extends: Texture
   impl:
-    argument: self
-    parentmethod: SetDisabledCheckedTexture
-    parenttype: CheckButton
+    call:
+      argument: self
+      parentmethod: SetDisabledCheckedTexture
+      parenttype: CheckButton
 DisabledFont:
   extends: ButtonFont
   impl:
-    argument: self
-    parentmethod: SetDisabledFontObject
-    parenttype: Button
+    call:
+      argument: self
+      parentmethod: SetDisabledFontObject
+      parenttype: Button
 DisabledTexture:
   extends: Texture
   impl:
-    argument: self
-    parentmethod: SetDisabledTexture
-    parenttype: Button
+    call:
+      argument: self
+      parentmethod: SetDisabledTexture
+      parenttype: Button
 DressUpModel:
   attributes:
     modelscale:
@@ -348,9 +372,10 @@ EditBox:
     visiblebytes:
       type: number
   contents:
-    FontString: {}
-    HighlightColor: {}
-    TextInsets: {}
+    tags:
+      FontString: {}
+      HighlightColor: {}
+      TextInsets: {}
   extends: Frame
 FlipBook:
   extends: Animation
@@ -371,11 +396,13 @@ Font:
     justifyh:
       impl:
         method: SetJustifyH
-      type: JustifyHorizontal
+      type:
+        stringenum: JustifyHorizontal
     justifyv:
       impl:
         method: SetJustifyV
-      type: JustifyVertical
+      type:
+        stringenum: JustifyVertical
     monochrome:
       type: boolean
     name:
@@ -387,8 +414,9 @@ Font:
     virtual:
       type: boolean
   contents:
-    Color: {}
-    Shadow: {}
+    tags:
+      Color: {}
+      Shadow: {}
 FontFamily:
   attributes:
     name:
@@ -397,7 +425,8 @@ FontFamily:
     virtual:
       type: boolean
   contents:
-    Member: {}
+    tags:
+      Member: {}
 FontHeight:
   extends: Value
 FontString:
@@ -407,11 +436,13 @@ FontString:
     justifyh:
       impl:
         method: SetJustifyH
-      type: JustifyHorizontal
+      type:
+        stringenum: JustifyHorizontal
     justifyv:
       impl:
         method: SetJustifyV
-      type: JustifyVertical
+      type:
+        stringenum: JustifyVertical
     maxlines:
       type: number
     nonspacewrap:
@@ -423,8 +454,9 @@ FontString:
     wordwrap:
       type: boolean
   contents:
-    FontHeight: {}
-    Shadow: {}
+    tags:
+      FontHeight: {}
+      Shadow: {}
   extends: LayoutFrame
 FontStringHeader1:
   extends: FontString
@@ -510,16 +542,18 @@ Frame:
     useparentlevel:
       type: boolean
   contents:
-    Animations: {}
-    Attributes: {}
-    Frames: {}
-    HitRectInsets: {}
-    Layers: {}
-    ResizeBounds: {}
+    tags:
+      Animations: {}
+      Attributes: {}
+      Frames: {}
+      HitRectInsets: {}
+      Layers: {}
+      ResizeBounds: {}
   extends: LayoutFrame
 Frames:
   contents:
-    Frame: {}
+    tags:
+      Frame: {}
   impl: transparent
   phase: late
 GameTooltip:
@@ -529,22 +563,25 @@ Gradient:
     orientation:
       type: string
   contents:
-    MaxColor: {}
-    MinColor: {}
+    tags:
+      MaxColor: {}
+      MinColor: {}
 HighlightColor:
   extends: Color
 HighlightFont:
   extends: ButtonFont
   impl:
-    argument: self
-    parentmethod: SetHighlightFontObject
-    parenttype: Button
+    call:
+      argument: self
+      parentmethod: SetHighlightFontObject
+      parenttype: Button
 HighlightTexture:
   extends: Texture
   impl:
-    argument: self
-    parentmethod: SetHighlightTexture
-    parenttype: Button
+    call:
+      argument: self
+      parentmethod: SetHighlightTexture
+      parenttype: Button
   phase: late
 HitRectInsets:
   extends: Insets
@@ -566,8 +603,9 @@ Insets:
     top:
       type: number
   contents:
-    AbsInset: {}
-    RelInset: {}
+    tags:
+      AbsInset: {}
+      RelInset: {}
   virtual: true
 KeyValue:
   attributes:
@@ -581,7 +619,8 @@ KeyValue:
       type: string
 KeyValues:
   contents:
-    KeyValue: {}
+    tags:
+      KeyValue: {}
   impl: transparent
 Layer:
   attributes:
@@ -593,13 +632,15 @@ Layer:
     texturesublevel:
       type: number
   contents:
-    FontString: {}
-    Line: {}
-    Texture: {}
+    tags:
+      FontString: {}
+      Line: {}
+      Texture: {}
   impl: transparent
 Layers:
   contents:
-    Layer: {}
+    tags:
+      Layer: {}
   impl: transparent
   phase: late
 LayoutFrame:
@@ -643,11 +684,12 @@ LayoutFrame:
     virtual:
       type: boolean
   contents:
-    Anchors: {}
-    Color: {}
-    KeyValues: {}
-    Scripts: {}
-    Size: {}
+    tags:
+      Anchors: {}
+      Color: {}
+      KeyValues: {}
+      Scripts: {}
+      Size: {}
   virtual: true
 Line:
   attributes:
@@ -669,7 +711,8 @@ LineScale:
     toscaley:
       type: number
   contents:
-    Origin: {}
+    tags:
+      Origin: {}
   extends: Animation
 MaskedTexture:
   attributes:
@@ -677,7 +720,8 @@ MaskedTexture:
       type: string
 MaskedTextures:
   contents:
-    MaskedTexture: {}
+    tags:
+      MaskedTexture: {}
   impl: transparent
 MaskTexture:
   attributes:
@@ -686,7 +730,8 @@ MaskTexture:
     vwrapmode:
       type: string
   contents:
-    MaskedTextures: {}
+    tags:
+      MaskedTextures: {}
   extends: Texture
 MaxColor:
   extends: Color
@@ -698,7 +743,8 @@ Member:
       required: true
       type: string
   contents:
-    Font: {}
+    tags:
+      Font: {}
 MessageFrame:
   attributes:
     displayduration:
@@ -710,7 +756,8 @@ MessageFrame:
     insertmode:
       type: string
   contents:
-    FontString: {}
+    tags:
+      FontString: {}
   extends: Frame
 MinColor:
   extends: Color
@@ -722,7 +769,8 @@ Model:
   extends: Frame
 ModelScene:
   contents:
-    ViewInsets: {}
+    tags:
+      ViewInsets: {}
   extends: Frame
 ModifiedClick:
   attributes:
@@ -735,15 +783,17 @@ MovieFrame:
 NormalFont:
   extends: ButtonFont
   impl:
-    argument: self
-    parentmethod: SetNormalFontObject
-    parenttype: Button
+    call:
+      argument: self
+      parentmethod: SetNormalFontObject
+      parenttype: Button
 NormalTexture:
   extends: Texture
   impl:
-    argument: self
-    parentmethod: SetNormalTexture
-    parenttype: Button
+    call:
+      argument: self
+      parentmethod: SetNormalTexture
+      parenttype: Button
 OffScreenFrame:
   extends: Frame
 Offset:
@@ -753,7 +803,8 @@ Offset:
     y:
       type: number
   contents:
-    AbsDimension: {}
+    tags:
+      AbsDimension: {}
 OnAnimFinished:
   extends: ScriptType
   impl:
@@ -1049,13 +1100,15 @@ Origin:
     point:
       type: string
   contents:
-    Offset: {}
+    tags:
+      Offset: {}
 Path:
   attributes:
     curve:
       type: string
   contents:
-    ControlPoints: {}
+    tags:
+      ControlPoints: {}
   extends: Animation
 PlayerModel:
   extends: Frame
@@ -1079,9 +1132,10 @@ PushedTextOffset:
 PushedTexture:
   extends: Texture
   impl:
-    argument: self
-    parentmethod: SetPushedTexture
-    parenttype: Button
+    call:
+      argument: self
+      parentmethod: SetPushedTexture
+      parenttype: Button
 QuestPOIFrame:
   extends: POIFrame
 Rect:
@@ -1114,8 +1168,9 @@ RelInset:
       type: number
 ResizeBounds:
   contents:
-    MaxResize: {}
-    MinResize: {}
+    tags:
+      MaxResize: {}
+      MinResize: {}
   impl: transparent
 Rotation:
   attributes:
@@ -1137,7 +1192,8 @@ Scale:
     toscaley:
       type: number
   contents:
-    Origin: {}
+    tags:
+      Origin: {}
   extends: Animation
 ScenarioPOIFrame:
   extends: POIFrame
@@ -1152,9 +1208,10 @@ ScopedModifier:
         scope: useAddonEnv
       type: boolean
   contents:
-    Actor: {}
-    LayoutFrame: {}
-    Script: {}
+    tags:
+      Actor: {}
+      LayoutFrame: {}
+      Script: {}
   impl: transparent
 Script:
   attributes:
@@ -1165,7 +1222,8 @@ Script:
   impl: loadstring
 Scripts:
   contents:
-    ScriptType: {}
+    tags:
+      ScriptType: {}
   impl: transparent
 ScriptType:
   attributes:
@@ -1183,14 +1241,17 @@ ScriptType:
   virtual: true
 ScrollChild:
   contents:
-    Frame: {}
+    tags:
+      Frame: {}
   impl:
-    argument: lastkid
-    parentmethod: SetScrollChild
-    parenttype: ScrollFrame
+    call:
+      argument: lastkid
+      parentmethod: SetScrollChild
+      parenttype: ScrollFrame
 ScrollFrame:
   contents:
-    ScrollChild: {}
+    tags:
+      ScrollChild: {}
   extends: Frame
 Shadow:
   attributes:
@@ -1199,16 +1260,18 @@ Shadow:
     y:
       type: number
   contents:
-    Color: {}
-    Offset: {}
+    tags:
+      Color: {}
+      Offset: {}
   impl:
     scope: shadow
 SimpleHTML:
   contents:
-    FontString: {}
-    FontStringHeader1: {}
-    FontStringHeader2: {}
-    FontStringHeader3: {}
+    tags:
+      FontString: {}
+      FontStringHeader1: {}
+      FontStringHeader2: {}
+      FontStringHeader3: {}
   extends: Frame
 Size:
   attributes:
@@ -1217,7 +1280,8 @@ Size:
     y:
       type: number
   contents:
-    AbsDimension: {}
+    tags:
+      AbsDimension: {}
 Slider:
   attributes:
     defaultvalue:
@@ -1245,7 +1309,8 @@ Slider:
         method: SetValueStep
       type: number
   contents:
-    ThumbTexture: {}
+    tags:
+      ThumbTexture: {}
   extends: Frame
 StatusBar:
   attributes:
@@ -1264,8 +1329,9 @@ StatusBar:
         method: SetReverseFill
       type: boolean
   contents:
-    BarColor: {}
-    BarTexture: {}
+    tags:
+      BarColor: {}
+      BarTexture: {}
   extends: Frame
 SwipeTexture:
   extends: Texture
@@ -1282,7 +1348,8 @@ TexCoords:
     top:
       type: number
   contents:
-    Rect: {}
+    tags:
+      Rect: {}
 TextInsets:
   extends: Insets
 Texture:
@@ -1290,7 +1357,8 @@ Texture:
     alphamode:
       impl:
         method: SetBlendMode
-      type: BlendMode
+      type:
+        stringenum: BlendMode
     atlas:
       impl:
         method: SetAtlas
@@ -1326,18 +1394,20 @@ Texture:
         method: SetVertTile
       type: boolean
   contents:
-    Animations: {}
-    Gradient: {}
-    TexCoords: {}
+    tags:
+      Animations: {}
+      Gradient: {}
+      TexCoords: {}
   extends: LayoutFrame
 TextureCoordTranslation:
   extends: Animation
 ThumbTexture:
   extends: Texture
   impl:
-    argument: self
-    parentmethod: SetThumbTexture
-    parenttype: Slider
+    call:
+      argument: self
+      parentmethod: SetThumbTexture
+      parenttype: Slider
 Translation:
   attributes:
     offsetx:
@@ -1347,19 +1417,21 @@ Translation:
   extends: Animation
 Ui:
   contents:
-    Actor: {}
-    Font: {}
-    FontFamily: {}
-    Include: {}
-    LayoutFrame: {}
-    ScopedModifier: {}
-    Script: {}
+    tags:
+      Actor: {}
+      Font: {}
+      FontFamily: {}
+      Include: {}
+      LayoutFrame: {}
+      ScopedModifier: {}
+      Script: {}
   impl: transparent
 UnitPositionFrame:
   extends: Frame
 Value:
   contents:
-    AbsValue: {}
+    tags:
+      AbsValue: {}
 ViewInsets:
   attributes:
     bottom:

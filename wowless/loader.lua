@@ -35,12 +35,12 @@ local function loader(api, cfg)
         end
       end
       local tag = v.impl
-      if type(tag) == 'table' and tag.argument == 'self' then
+      if type(tag) == 'table' and tag.call and tag.call.argument == 'self' then
         local arg = v.extends
         while tree[arg].virtual do
           arg = tree[arg].extends
         end
-        tag.argument = arg:lower()
+        tag.call.argument = arg:lower()
       end
       newtree[k:lower()] = {
         attrs = aimpls,
@@ -588,12 +588,13 @@ local function loader(api, cfg)
             loadScript(e, parent, env, filename, ctx.intrinsic)
           elseif type(impl) == 'table' and impl.scope then
             loadElements(mixin({}, ctx, { [impl.scope] = true }), e.kids, parent)
-          elseif type(impl) == 'table' then
-            local elt = impl.argument == 'lastkid' and e.kids[#e.kids] or mixin({}, e, { type = impl.argument })
+          elseif type(impl) == 'table' and impl.call then
+            local elt = impl.call.argument == 'lastkid' and e.kids[#e.kids]
+              or mixin({}, e, { type = impl.call.argument })
             local obj = loadElement(ctx, elt, parent)
             -- TODO find if this if needs to be broader to everything here including kids
-            if parent:IsObjectType(impl.parenttype) then
-              parent[impl.parentmethod](parent, obj.luarep)
+            if parent:IsObjectType(impl.call.parenttype) then
+              parent[impl.call.parentmethod](parent, obj.luarep)
             end
           elseif impl == 'transparent' or impl == 'loadstring' then
             local ctxmix = mixin({}, ctx)
