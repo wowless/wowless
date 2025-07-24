@@ -65,23 +65,6 @@ local complex = {
       return next(errors) and errors or nil
     end
   end,
-  oneof = function(s)
-    assert(s[1], 'expected nonempty sequence')
-    local oneof = {}
-    for i, v in ipairs(s) do
-      oneof[i] = compile(v)
-    end
-    return function(v, product)
-      local errors = {}
-      local n = 0
-      for i, element in ipairs(oneof) do
-        local err = element(v, product)
-        errors[i] = err
-        n = n + (err and 0 or 1)
-      end
-      return n == 0 and errors or n > 1 and 'multiple matches' or nil
-    end
-  end,
   record = function(s)
     local fields = {}
     local required = {}

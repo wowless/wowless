@@ -236,56 +236,6 @@ describe('schema', function()
         accept(snest, { { 'foo', 'bar' }, { 'baz', 'quux' } })
       end)
     end)
-    describe('oneof', function()
-      it('rejects nil', function()
-        reject({ oneof = { 'string' } }, nil, { 'want string, got nil' })
-      end)
-      it('rejects numbers', function()
-        reject({ oneof = { 'string' } }, 42, { 'want string, got number' })
-      end)
-      it('accepts strings when specified', function()
-        accept({ oneof = { 'string' } }, 'foo')
-      end)
-      it('rejects tables when specified', function()
-        reject({ oneof = { 'string' } }, {}, { 'want string, got table' })
-        accept({ oneof = { 'table' } }, {})
-      end)
-      it('rejects multiple matches', function()
-        reject({ oneof = { 'number', 'number' } }, 42, 'multiple matches')
-      end)
-      it('accepts oneof each', function()
-        local ty = {
-          oneof = {
-            'string',
-            'boolean',
-            { mapof = { key = 'string', value = 'string' } },
-            { sequenceof = 'string' },
-          },
-        }
-        accept(ty, 'foo')
-        accept(ty, true)
-        accept(ty, { foo = 'bar' })
-        accept(ty, { 'foo', 'bar' })
-      end)
-      it('nests', function()
-        local ty = {
-          oneof = {
-            'string',
-            {
-              oneof = {
-                'boolean',
-                { mapof = { key = 'string', value = 'string' } },
-                { sequenceof = 'string' },
-              },
-            },
-          },
-        }
-        accept(ty, 'foo')
-        accept(ty, true)
-        accept(ty, { foo = 'bar' })
-        accept(ty, { 'foo', 'bar' })
-      end)
-    end)
     describe('literal', function()
       local ty = { literal = 'foo' }
       it('rejects nil', function()

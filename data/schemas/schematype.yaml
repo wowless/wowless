@@ -16,9 +16,6 @@ type:
           type:
             schema: schematype
     number: tag
-    oneof:
-      sequenceof:
-        schema: schematype
     record:
       mapof:
         key: string
