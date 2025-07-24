@@ -132,7 +132,7 @@ do
         apicfg.impl = nil
         apicfg.stdlib = ic.stdlib
       end
-      for _, v in ipairs(ic.sqls or { ic.directsql }) do
+      for _, v in ipairs(ic.impl and ic.impl.sqls or { ic.directsql }) do
         if not sqls[v] then
           local sql = sqlcfg[v]
           sqls[v] = {
@@ -143,16 +143,16 @@ do
         end
       end
       if not impls[apicfg.impl] then
-        if ic.module then
+        if ic.moduledelegate then
           local fmt = 'return (...).modules[%q][%q]'
           impls[apicfg.impl] = {
             frameworks = { 'api' },
-            src = fmt:format(ic.module, ic['function'] or apicfg.impl),
+            src = fmt:format(ic.moduledelegate.name, ic.moduledelegate['function'] or apicfg.impl),
           }
-        elseif ic.luamodule then
+        elseif ic.luadelegate then
           local fmt = 'return require(%q)[%q]'
           impls[apicfg.impl] = {
-            src = fmt:format(ic.luamodule, ic['function'] or apicfg.impl),
+            src = fmt:format(ic.luadelegate.module, ic.luadelegate['function'] or apicfg.impl),
           }
         elseif ic.delegate then
           impls[apicfg.impl] = {
@@ -163,10 +163,10 @@ do
             sqls = { ic.directsql },
             src = 'return (...)',
           }
-        elseif not ic.stdlib then
+        elseif ic.impl then
           impls[apicfg.impl] = {
-            frameworks = ic.frameworks,
-            sqls = ic.sqls,
+            frameworks = ic.impl.frameworks,
+            sqls = ic.impl.sqls,
             src = readFile('data/impl/' .. apicfg.impl .. '.lua'),
           }
         end

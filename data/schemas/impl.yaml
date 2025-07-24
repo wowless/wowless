@@ -4,44 +4,38 @@ type:
   mapof:
     key: string
     value:
-      oneof:
-      - record:
-          delegate:
-            required: true
-            type:
-              ref: impl
-      - record:
-          directsql:
-            required: true
-            type:
-              ref: sql
-      - record:
-          frameworks:
-            type:
-              sequenceof:
-                oneof:
-                - literal: api
-                - literal: datalua
-                - literal: env
-                - literal: events
-                - literal: loader
-          sqls:
-            type:
-              sequenceof:
-                ref: sql
-      - record:
-          function:
-            type: string
-          luamodule:
-            required: true
-            type: string
-      - record:
-          function:
-            type: string
-          module:
-            required: true
-            type: string
-      - record:
-          stdlib:
-            required: true
-            type: string
+      taggedunion:
+        delegate:
+          ref: impl
+        directsql:
+          ref: sql
+        impl:
+          record:
+            frameworks:
+              type:
+                sequenceof:
+                  taggedunion:
+                    api: tag
+                    datalua: tag
+                    env: tag
+                    events: tag
+                    loader: tag
+            sqls:
+              type:
+                sequenceof:
+                  ref: sql
+        luadelegate:
+          record:
+            function:
+              type: string
+            module:
+              required: true
+              type: string
+        moduledelegate:
+          record:
+            function:
+              type: string
+            name:
+              required: true
+              type: string
+        stdlib: string
