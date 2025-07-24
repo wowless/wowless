@@ -155,6 +155,37 @@ local complex = {
       return max ~= #v and 'expected array' or next(errors) and errors or nil
     end
   end,
+  taggedunion = function(s)
+    local sf = {}
+    local tf = {}
+    for k, v in pairs(s) do
+      if v == 'tag' then
+        sf[k] = true
+      else
+        tf[k] = compile(v)
+      end
+    end
+    return function(v, product)
+      if sf[v] then
+        return
+      end
+      if type(v) ~= 'table' then
+        return 'expected table'
+      end
+      local vk, vv = next(v)
+      if vk == nil then
+        return 'missing element'
+      end
+      if next(v, vk) ~= nil then
+        return 'multiple elements'
+      end
+      local tfvk = tf[vk]
+      if tfvk == nil then
+        return 'bad key'
+      end
+      return tfvk(vv, product)
+    end
+  end,
 }
 
 local function docompile(schematype)

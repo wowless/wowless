@@ -305,5 +305,33 @@ describe('schema', function()
         reject(ty, {}, 'string literal mismatch')
       end)
     end)
+    describe('taggedunion', function()
+      local ty = {
+        taggedunion = {
+          bar = 'number',
+          foo = {
+            sequenceof = 'string',
+          },
+        },
+      }
+      it('accepts one', function()
+        accept(ty, { bar = 42 })
+      end)
+      it('accepts the other', function()
+        accept(ty, { foo = { 'baz', 'quux' } })
+      end)
+      it('rejects non-table', function()
+        reject(ty, 42, 'expected table')
+      end)
+      it('rejects empty', function()
+        reject(ty, {}, 'missing element')
+      end)
+      it('rejects multiple', function()
+        reject(ty, { bar = 42, foo = { 'baz', 'quux' } }, 'multiple elements')
+      end)
+      it('rejects bad keys', function()
+        reject(ty, { baz = 99 }, 'bad key')
+      end)
+    end)
   end)
 end)

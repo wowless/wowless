@@ -1,74 +1,59 @@
 ---
 name: schematype
 type:
-  oneof:
-  - literal: boolean
-  - literal: number
-  - literal: string
-  - literal: table
-  - record:
-      literal:
-        required: true
-        type: string
-  - record:
-      mapof:
-        required: true
-        type:
-          record:
-            key:
-              required: true
-              type:
-                schema: schematype
-            value:
-              required: true
-              type:
-                schema: schematype
-  - record:
-      oneof:
-        required: true
-        type:
-          sequenceof:
-            schema: schematype
-  - record:
+  taggedunion:
+    boolean: tag
+    literal: string
+    mapof:
       record:
-        required: true
-        type:
-          mapof:
-            key: string
-            value:
-              record:
-                required:
-                  type: boolean
-                type:
-                  required: true
-                  type:
-                    schema: schematype
-  - record:
-      ref:
-        required: true
-        type:
-          oneof:
-          - literal: api
-          - literal: cvar
-          - literal: enum
-          - literal: event
-          - literal: family
-          - literal: gametype
-          - literal: impl
-          - literal: schema
-          - literal: sql
-          - literal: stringenum
-          - literal: structure
-          - literal: uiobject
-          - literal: uiobjectimpl
-          - literal: xml
-  - record:
-      schema:
-        required: true
-        type:
-          ref: schema
-  - record:
+        key:
+          required: true
+          type:
+            schema: schematype
+        value:
+          required: true
+          type:
+            schema: schematype
+    number: tag
+    oneof:
       sequenceof:
-        required: true
-        type:
+        schema: schematype
+    record:
+      mapof:
+        key: string
+        value:
+          record:
+            required:
+              type: boolean
+            type:
+              required: true
+              type:
+                schema: schematype
+    ref:
+      taggedunion:
+        api: tag
+        cvar: tag
+        enum: tag
+        event: tag
+        family: tag
+        gametype: tag
+        impl: tag
+        schema: tag
+        sql: tag
+        stringenum: tag
+        structure: tag
+        uiobject: tag
+        uiobjectimpl: tag
+        xml: tag
+    schema:
+      ref: schema
+    sequenceof:
+      schema: schematype
+    string: tag
+    table: tag
+    tag: tag
+    taggedunion:
+      mapof:
+        key: string
+        value:
           schema: schematype
