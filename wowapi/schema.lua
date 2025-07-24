@@ -18,52 +18,73 @@ local productDomains = {
   xml = wdata.xml,
 }
 
-local function checkty(ty, v)
-  local vty = type(v)
-  if vty ~= ty then
-    return ('want %s, got %s'):format(ty, vty)
+local function mksimple(ty)
+  return function(v)
+    local vty = type(v)
+    if vty ~= ty then
+      return ('want %s, got %s'):format(ty, vty)
+    end
   end
 end
 
-local validators = {
-  boolean = function(v)
-    return checkty('boolean', v)
-  end,
-  number = function(v)
-    return checkty('number', v)
-  end,
-  string = function(v)
-    return checkty('string', v)
-  end,
-  table = function(v)
-    return checkty('table', v)
-  end,
+local simple = {
+  boolean = mksimple('boolean'),
+  number = mksimple('number'),
+  string = mksimple('string'),
+  table = mksimple('table'),
 }
-
-local pretty = require('pl.pretty').write
 
 local compile
 
-local function docompile(schematype)
-  if type(schematype) ~= 'table' then
-    error('unexpected schema type ' .. pretty(schematype))
-  elseif schematype.schema then
-    local schema = wdata.schemas[schematype.schema]
-    if not schema then
-      error('bad schema: ' .. schematype.schema)
-    end
-    local cached
-    return function(v, product)
-      if not cached then
-        -- We have to handle schema refs lazily to support circular refs.
-        cached = compile(schema.type)
+local schemas = {}
+
+local complex = {
+  literal = function(s)
+    return function(v)
+      if v ~= s then
+        return 'string literal mismatch'
       end
-      return cached(v, product)
     end
-  elseif schematype.record then
+  end,
+  mapof = function(s)
+    local key = compile(s.key)
+    local value = compile(s.value)
+    return function(v, product)
+      if type(v) ~= 'table' then
+        return 'expected table'
+      end
+      local errors = {}
+      for vk, vv in pairs(v) do
+        local ek = key(vk, product)
+        local ev = value(vv, product)
+        if ek or ev then
+          errors[vk] = { key = ek, value = ev }
+        end
+      end
+      return next(errors) and errors or nil
+    end
+  end,
+  oneof = function(s)
+    assert(s[1], 'expected nonempty sequence')
+    local oneof = {}
+    for i, v in ipairs(s) do
+      oneof[i] = compile(v)
+    end
+    return function(v, product)
+      local errors = {}
+      local n = 0
+      for i, element in ipairs(oneof) do
+        local err = element(v, product)
+        errors[i] = err
+        n = n + (err and 0 or 1)
+      end
+      return n == 0 and errors or n > 1 and 'multiple matches' or nil
+    end
+  end,
+  record = function(s)
     local fields = {}
     local required = {}
-    for k, v in pairs(schematype.record) do
+    for k, v in pairs(s) do
       fields[k] = compile(v.type)
       required[k] = v.required or nil
     end
@@ -83,25 +104,40 @@ local function docompile(schematype)
       end
       return next(errors) and errors or nil
     end
-  elseif schematype.mapof then
-    local key = compile(schematype.mapof.key)
-    local value = compile(schematype.mapof.value)
+  end,
+  ref = function(s)
+    local gdomain = domains[s]
+    local pdomains = productDomains[s]
     return function(v, product)
-      if type(v) ~= 'table' then
-        return 'expected table'
+      if type(v) ~= 'string' then
+        return 'expected string'
       end
-      local errors = {}
-      for vk, vv in pairs(v) do
-        local ek = key(vk, product)
-        local ev = value(vv, product)
-        if ek or ev then
-          errors[vk] = { key = ek, value = ev }
-        end
+      local domain = gdomain or pdomains and pdomains[product]
+      if not domain then
+        return 'invalid domain'
       end
-      return next(errors) and errors or nil
+      if not domain[v] then
+        return 'unknown domain value'
+      end
     end
-  elseif schematype.sequenceof then
-    local element = compile(schematype.sequenceof)
+  end,
+  schema = function(s)
+    local schema = wdata.schemas[s]
+    if not schema then
+      error('bad schema: ' .. s)
+    end
+    return function(v, product)
+      local fn = schemas[s]
+      if not fn then
+        -- We have to handle schema refs lazily to support circular refs.
+        fn = compile(schema.type)
+        schemas[s] = fn
+      end
+      return fn(v, product)
+    end
+  end,
+  sequenceof = function(s)
+    local element = compile(s)
     return function(v, product)
       if type(v) ~= 'table' then
         return 'expected table'
@@ -118,58 +154,22 @@ local function docompile(schematype)
       end
       return max ~= #v and 'expected array' or next(errors) and errors or nil
     end
-  elseif schematype.oneof then
-    assert(schematype.oneof[1], 'expected nonempty sequence')
-    local oneof = {}
-    for i, v in ipairs(schematype.oneof) do
-      oneof[i] = compile(v)
-    end
-    return function(v, product)
-      local errors = {}
-      local n = 0
-      for i, element in ipairs(oneof) do
-        local err = element(v, product)
-        errors[i] = err
-        n = n + (err and 0 or 1)
-      end
-      return n == 0 and errors or n > 1 and 'multiple matches' or nil
-    end
-  elseif schematype.literal then
-    local s = schematype.literal
-    return function(v)
-      if v ~= s then
-        return 'string literal mismatch'
-      end
-    end
-  elseif schematype.ref then
-    local ref = schematype.ref
-    local gdomain = domains[ref]
-    local pdomains = productDomains[ref]
-    return function(v, product)
-      if type(v) ~= 'string' then
-        return 'expected string'
-      end
-      local domain = gdomain or pdomains and pdomains[product]
-      if not domain then
-        return 'invalid domain'
-      end
-      if not domain[v] then
-        return 'unknown domain value'
-      end
-    end
-  else
-    error('expected record/mapof/sequenceof/oneof')
+  end,
+}
+
+local function docompile(schematype)
+  if type(schematype) ~= 'table' then
+    error('unexpected schema type ' .. type(schematype))
   end
+  local k, v = next(schematype)
+  if next(schematype, k) then
+    error('multiple keys in schematype')
+  end
+  return assert(complex[k], 'unknown complex schematype')(v)
 end
 
 function compile(schematype)
-  local key = type(schematype) == 'string' and schematype or pretty(schematype, '')
-  local validator = validators[key]
-  if not validator then
-    validator = docompile(schematype)
-    validators[key] = validator
-  end
-  return validator
+  return simple[schematype] or docompile(schematype)
 end
 
 local function validate(product, schematype, v)
