@@ -207,11 +207,11 @@ type:
             Type:
               required: true
               type:
-                oneof:
-                - literal: CallbackType
-                - literal: Constants
-                - literal: Enumeration
-                - literal: Structure
+                taggedunion:
+                  CallbackType: tag
+                  Constants: tag
+                  Enumeration: tag
+                  Structure: tag
             Values:
               type:
                 sequenceof:
@@ -226,6 +226,6 @@ type:
                       type: number
     Type:
       type:
-        oneof:
-        - literal: ScriptObject
-        - literal: System
+        taggedunion:
+          ScriptObject: tag
+          System: tag
