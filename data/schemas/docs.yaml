@@ -10,8 +10,7 @@ type:
               mapof:
                 key:
                   ref: api
-                value:
-                  schema: any
+                value: any
           extra_apis:
             type:
               mapof:
@@ -26,8 +25,7 @@ type:
                 value:
                   mapof:
                     key: string
-                    value:
-                      schema: any
+                    value: any
     script_objects:
       type:
         mapof:

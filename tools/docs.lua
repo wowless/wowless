@@ -73,7 +73,7 @@ do
             success, err = pcall(setfenv(fn, {
               APIDocumentation = {
                 AddDocumentationTable = function(_, t)
-                  require('wowapi.schema').validate(product, schema, t)
+                  assert(xpcall(require('wowapi.schema').validate, pprintYaml, product, schema, t))
                   docs[f] = t
                 end,
               },

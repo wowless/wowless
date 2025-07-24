@@ -9,8 +9,7 @@ type:
           type:
             mapof:
               key: string
-              value:
-                schema: any
+              value: any
         fields:
           required: true
           type:
@@ -19,8 +18,7 @@ type:
               value:
                 record:
                   init:
-                    type:
-                      schema: any
+                    type: any
                   nilable:
                     type: boolean
                   type:
@@ -64,8 +62,7 @@ type:
                       sequenceof:
                         record:
                           default:
-                            type:
-                              schema: any
+                            type: any
                           name:
                             required: true
                             type: string
@@ -92,8 +89,7 @@ type:
                           nilable:
                             type: boolean
                           stub:
-                            type:
-                              schema: any
+                            type: any
                           stubnotnil:
                             type: boolean
                           type:

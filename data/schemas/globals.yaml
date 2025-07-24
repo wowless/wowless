@@ -3,5 +3,4 @@ name: globals
 type:
   mapof:
     key: string
-    value:
-      schema: any
+    value: any

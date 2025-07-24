@@ -2,6 +2,7 @@
 name: schematype
 type:
   taggedunion:
+    any: tag
     boolean: tag
     literal: string
     mapof:

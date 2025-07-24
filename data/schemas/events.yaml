@@ -11,8 +11,7 @@ type:
             sequenceof:
               record:
                 default:
-                  type:
-                    schema: any
+                  type: any
                 name:
                   required: true
                   type: string

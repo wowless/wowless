@@ -10,8 +10,7 @@ type:
         sequenceof:
           record:
             default:
-              type:
-                schema: any
+              type: any
             name:
               type: string
             nilable:
@@ -29,15 +28,13 @@ type:
         sequenceof:
           record:
             default:
-              type:
-                schema: any
+              type: any
             name:
               type: string
             nilable:
               type: boolean
             stub:
-              type:
-                schema: any
+              type: any
             stubnotnil:
               type: boolean
             type:

@@ -28,6 +28,7 @@ local function mksimple(ty)
 end
 
 local simple = {
+  any = function() end,
   boolean = mksimple('boolean'),
   number = mksimple('number'),
   string = mksimple('string'),

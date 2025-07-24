@@ -974,7 +974,6 @@ endforeach()
 list(
   APPEND
   schemas
-  any
   apis
   build
   config

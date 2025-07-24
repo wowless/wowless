@@ -23,11 +23,7 @@ type:
                 sequenceof:
                   record:
                     Default:
-                      type:
-                        oneof:
-                        - boolean
-                        - number
-                        - string
+                      type: any
                     Documentation:
                       type:
                         sequenceof: string
@@ -59,11 +55,7 @@ type:
                 sequenceof:
                   record:
                     Default:
-                      type:
-                        oneof:
-                        - boolean
-                        - number
-                        - string
+                      type: any
                     Documentation:
                       type:
                         sequenceof: string
@@ -117,11 +109,7 @@ type:
                 sequenceof:
                   record:
                     Default:
-                      type:
-                        oneof:
-                        - boolean
-                        - number
-                        - string
+                      type: any
                     Documentation:
                       type:
                         sequenceof: string
@@ -173,11 +161,7 @@ type:
                 sequenceof:
                   record:
                     Default:
-                      type:
-                        oneof:
-                        - boolean
-                        - number
-                        - string
+                      type: any
                     Documentation:
                       type:
                         sequenceof: string
