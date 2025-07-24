@@ -435,7 +435,8 @@ yaml2lua(stringenums)
 
 lua2c(toolsutil tools.util=${CMAKE_CURRENT_SOURCE_DIR}/tools/util.lua)
 
-lua2c(wowlessutil wowless.util=${CMAKE_CURRENT_SOURCE_DIR}/wowless/util.lua)
+lua2c(wowlessutil luapath=p
+      wowless.util=${CMAKE_CURRENT_SOURCE_DIR}/wowless/util.lua)
 
 FetchContent_Declare(
   cjson
@@ -506,7 +507,6 @@ add_lua_executable(
   prep
   ${CMAKE_CURRENT_SOURCE_DIR}/tools/prep.lua
   argparse
-  luapath
   penlight
   toolsutil
   wowlessutil
@@ -1015,6 +1015,7 @@ lua2c(
   build.data.test=runtime/test.lua
   build.data.uiobjectimpl=runtime/uiobjectimpl.lua
   ${yamlluas}
+  luapath=p
   wowapi.data=${CMAKE_CURRENT_SOURCE_DIR}/wowapi/data.lua
   wowapi.schema=${CMAKE_CURRENT_SOURCE_DIR}/wowapi/schema.lua)
 
@@ -1024,7 +1025,6 @@ add_lua_executable(
   docs
   ${CMAKE_CURRENT_SOURCE_DIR}/tools/docs.lua
   argparse
-  luapath
   penlight
   toolstedit
   toolsutil
@@ -1042,6 +1042,9 @@ add_lua_executable(db2dump ${CMAKE_CURRENT_SOURCE_DIR}/tools/db2dump.lua
 add_lua_executable(rewrite ${CMAKE_CURRENT_SOURCE_DIR}/tools/rewrite.lua
                    argparse penlight wowlessyaml)
 
+add_lua_executable(schema ${CMAKE_CURRENT_SOURCE_DIR}/tools/schema.lua argparse
+                   penlight wowapischema wowlessyaml)
+
 add_lua_executable(yedit ${CMAKE_CURRENT_SOURCE_DIR}/tools/yedit.lua argparse
                    penlight toolstedit wowlessyaml)
 
@@ -1058,6 +1061,7 @@ $<$<PLATFORM_ID:Windows>:windows>\
 
 lua2c(
   wowlesslib
+  luapath=p
   runtime.platform=runtime/platform.lua
   runtime.stringenums=runtime/stringenums.lua
   wowapi.loader=${CMAKE_CURRENT_SOURCE_DIR}/wowapi/loader.lua
@@ -1093,7 +1097,6 @@ add_lua_executable(
   date
   lsqlite3
   luaexpat
-  luapath
   lzlib
   minheap
   penlight
@@ -1114,7 +1117,6 @@ add_lua_executable(
   date
   lsqlite3
   luaexpat
-  luapath
   luassert
   lzlib
   minheap
