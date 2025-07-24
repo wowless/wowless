@@ -203,7 +203,7 @@ describe('uiobjects', function()
                 if mv.manualinputs then
                   describe('manualinputs', function()
                     it('must be implemented in lua', function()
-                      assert.True(type(mv.impl) == 'string')
+                      assert.Truthy(mv.impl and mv.impl.uiobjectimpl)
                     end)
                     it('must not have declared inputs', function()
                       assert.Nil(mv.inputs)

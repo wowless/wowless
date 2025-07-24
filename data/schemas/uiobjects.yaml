@@ -51,26 +51,21 @@ type:
                 record:
                   impl:
                     type:
-                      oneof:
-                      - record:
-                          getter:
-                            required: true
-                            type:
-                              sequenceof:
-                                record:
-                                  name:
-                                    required: true
-                                    type: string
-                      - record:
-                          setter:
-                            required: true
-                            type:
-                              sequenceof:
-                                record:
-                                  name:
-                                    required: true
-                                    type: string
-                      - ref: uiobjectimpl
+                      taggedunion:
+                        getter:
+                          sequenceof:
+                            record:
+                              name:
+                                required: true
+                                type: string
+                        setter:
+                          sequenceof:
+                            record:
+                              name:
+                                required: true
+                                type: string
+                        uiobjectimpl:
+                          ref: uiobjectimpl
                   inputs:
                     type:
                       sequenceof:

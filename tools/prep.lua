@@ -259,9 +259,9 @@ for k, v in pairs(uiobjectdata) do
   local fieldset = mkuiobjectfieldset(k)
   local methods = {}
   for mk, mv in pairs(v.methods) do
-    if type(mv.impl) == 'string' then
-      assert(uiobjectimpl[mv.impl])
-      local src = 'data/uiobjects/' .. mv.impl .. '.lua'
+    if mv.impl and mv.impl.uiobjectimpl then
+      assert(uiobjectimpl[mv.impl.uiobjectimpl])
+      local src = 'data/uiobjects/' .. mv.impl.uiobjectimpl .. '.lua'
       methods[mk] = {
         impl = readFile(src),
         inputs = mv.inputs,

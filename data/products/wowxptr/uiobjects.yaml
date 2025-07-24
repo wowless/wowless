@@ -535,7 +535,8 @@ Animation:
       - name: progress
         type: number
     GetRegionParent:
-      impl: Animation/GetRegionParent
+      impl:
+        uiobjectimpl: Animation/GetRegionParent
       inputs: {}
       outputs:
       - name: region
@@ -562,7 +563,8 @@ Animation:
       - name: delaySec
         type: number
     GetTarget:
-      impl: Animation/GetTarget
+      impl:
+        uiobjectimpl: Animation/GetTarget
       inputs: {}
       outputs:
       - name: target
@@ -694,7 +696,8 @@ AnimationGroup:
     ScriptObject: {}
   methods:
     CreateAnimation:
-      impl: AnimationGroup/CreateAnimation
+      impl:
+        uiobjectimpl: AnimationGroup/CreateAnimation
       inputs:
       - name: animationType
         nilable: true
@@ -712,7 +715,8 @@ AnimationGroup:
       inputs: {}
       outputs: {}
     GetAnimations:
-      impl: AnimationGroup/GetAnimations
+      impl:
+        uiobjectimpl: AnimationGroup/GetAnimations
       inputs: {}
       outputs:
       - name: anims
@@ -955,7 +959,8 @@ Button:
       inputs: {}
       outputs: {}
     Click:
-      impl: Button/Click
+      impl:
+        uiobjectimpl: Button/Click
       inputs:
       - default: LeftButton
         name: button
@@ -965,11 +970,13 @@ Button:
         type: boolean
       outputs: {}
     Disable:
-      impl: Button/Disable
+      impl:
+        uiobjectimpl: Button/Disable
       inputs: {}
       outputs: {}
     Enable:
-      impl: Button/Enable
+      impl:
+        uiobjectimpl: Button/Enable
       inputs: {}
       outputs: {}
     GetButtonState:
@@ -1058,7 +1065,8 @@ Button:
       - name: texture
         type: Texture
     GetText:
-      impl: Button/GetText
+      impl:
+        uiobjectimpl: Button/GetText
       inputs: {}
       outputs:
       - name: text
@@ -1075,13 +1083,15 @@ Button:
       - name: width
         type: number
     IsEnabled:
-      impl: Button/IsEnabled
+      impl:
+        uiobjectimpl: Button/IsEnabled
       inputs: {}
       outputs:
       - name: isEnabled
         type: boolean
     RegisterForClicks:
-      impl: Button/RegisterForClicks
+      impl:
+        uiobjectimpl: Button/RegisterForClicks
       inputs:
       - name: buttons
         type: string
@@ -1094,7 +1104,8 @@ Button:
       instride: 1
       outputs: {}
     SetButtonState:
-      impl: Button/SetButtonState
+      impl:
+        uiobjectimpl: Button/SetButtonState
       inputs:
       - name: buttonState
         type: SimpleButtonStateToken
@@ -1103,7 +1114,8 @@ Button:
         type: boolean
       outputs: {}
     SetDisabledAtlas:
-      impl: Button/SetDisabledAtlas
+      impl:
+        uiobjectimpl: Button/SetDisabledAtlas
       inputs:
       - name: atlas
         type: string
@@ -1114,22 +1126,26 @@ Button:
         type: Font
       outputs: {}
     SetDisabledTexture:
-      impl: Button/SetDisabledTexture
+      impl:
+        uiobjectimpl: Button/SetDisabledTexture
     SetEnabled:
-      impl: Button/SetEnabled
+      impl:
+        uiobjectimpl: Button/SetEnabled
       inputs:
       - default: false
         name: enabled
         type: boolean
       outputs: {}
     SetFontString:
-      impl: Button/SetFontString
+      impl:
+        uiobjectimpl: Button/SetFontString
       inputs:
       - name: fontString
         type: FontString
       outputs: {}
     SetFormattedText:
-      impl: Button/SetFormattedText
+      impl:
+        uiobjectimpl: Button/SetFormattedText
       inputs:
       - name: text
         type: string
@@ -1139,7 +1155,8 @@ Button:
       instride: 1
       outputs: {}
     SetHighlightAtlas:
-      impl: Button/SetHighlightAtlas
+      impl:
+        uiobjectimpl: Button/SetHighlightAtlas
       inputs:
       - name: atlas
         type: string
@@ -1153,7 +1170,8 @@ Button:
         type: Font
       outputs: {}
     SetHighlightTexture:
-      impl: Button/SetHighlightTexture
+      impl:
+        uiobjectimpl: Button/SetHighlightTexture
     SetMotionScriptsWhileDisabled:
       impl:
         setter:
@@ -1163,7 +1181,8 @@ Button:
         type: boolean
       outputs: {}
     SetNormalAtlas:
-      impl: Button/SetNormalAtlas
+      impl:
+        uiobjectimpl: Button/SetNormalAtlas
       inputs:
       - name: atlas
         type: string
@@ -1177,9 +1196,11 @@ Button:
         type: Font
       outputs: {}
     SetNormalTexture:
-      impl: Button/SetNormalTexture
+      impl:
+        uiobjectimpl: Button/SetNormalTexture
     SetPushedAtlas:
-      impl: Button/SetPushedAtlas
+      impl:
+        uiobjectimpl: Button/SetPushedAtlas
       inputs:
       - name: atlas
         type: string
@@ -1196,9 +1217,11 @@ Button:
         type: number
       outputs: {}
     SetPushedTexture:
-      impl: Button/SetPushedTexture
+      impl:
+        uiobjectimpl: Button/SetPushedTexture
     SetText:
-      impl: Button/SetText
+      impl:
+        uiobjectimpl: Button/SetText
       inputs:
       - default: ''
         name: text
@@ -1243,14 +1266,16 @@ CheckButton:
       - name: texture
         type: Texture
     SetChecked:
-      impl: CheckButton/SetChecked
+      impl:
+        uiobjectimpl: CheckButton/SetChecked
       inputs:
       - default: false
         name: checked
         type: boolean
       outputs: {}
     SetCheckedTexture:
-      impl: CheckButton/SetCheckedTexture
+      impl:
+        uiobjectimpl: CheckButton/SetCheckedTexture
     SetDisabledCheckedTexture:
       impl:
         setter:
@@ -2048,11 +2073,13 @@ EditBox:
       inputs: {}
       outputs: {}
     Disable:
-      impl: EditBox/Disable
+      impl:
+        uiobjectimpl: EditBox/Disable
       inputs: {}
       outputs: {}
     Enable:
-      impl: EditBox/Enable
+      impl:
+        uiobjectimpl: EditBox/Enable
       inputs: {}
       outputs: {}
     GetAltArrowKeyMode:
@@ -2183,7 +2210,8 @@ EditBox:
         type: number
       outputs: {}
     Insert:
-      impl: EditBox/Insert
+      impl:
+        uiobjectimpl: EditBox/Insert
       inputs:
       - name: text
         type: string
@@ -2602,7 +2630,8 @@ FontInstance:
       - name: fontFlags
         type: string
     GetFontObject:
-      impl: FontInstance/GetFontObject
+      impl:
+        uiobjectimpl: FontInstance/GetFontObject
       inputs: {}
       outputs:
       - name: font
@@ -2840,7 +2869,8 @@ FontString:
         type: number
       outputs: {}
     SetText:
-      impl: FontString/SetText
+      impl:
+        uiobjectimpl: FontString/SetText
       inputs:
       - default: ''
         name: text
@@ -2964,7 +2994,8 @@ Frame:
       inputs: {}
       outputs: {}
     CreateFontString:
-      impl: Frame/CreateFontString
+      impl:
+        uiobjectimpl: Frame/CreateFontString
       inputs:
       - name: name
         nilable: true
@@ -2979,7 +3010,8 @@ Frame:
       - name: line
         type: FontString
     CreateLine:
-      impl: Frame/CreateLine
+      impl:
+        uiobjectimpl: Frame/CreateLine
       inputs:
       - name: name
         nilable: true
@@ -2997,7 +3029,8 @@ Frame:
       - name: line
         type: Line
     CreateMaskTexture:
-      impl: Frame/CreateMaskTexture
+      impl:
+        uiobjectimpl: Frame/CreateMaskTexture
       inputs:
       - name: name
         nilable: true
@@ -3015,7 +3048,8 @@ Frame:
       - name: maskTexture
         type: MaskTexture
     CreateTexture:
-      impl: Frame/CreateTexture
+      impl:
+        uiobjectimpl: Frame/CreateTexture
       inputs:
       - name: name
         nilable: true
@@ -3097,7 +3131,8 @@ Frame:
         type: string
       outstride: 1
     GetAttribute:
-      impl: Frame/GetAttribute
+      impl:
+        uiobjectimpl: Frame/GetAttribute
       manualinputs: true
       outputs:
       - name: value
@@ -3115,7 +3150,8 @@ Frame:
       - name: height
         type: number
     GetChildren:
-      impl: Frame/GetChildren
+      impl:
+        uiobjectimpl: Frame/GetChildren
       inputs: {}
       outputs:
       - name: children
@@ -3138,7 +3174,8 @@ Frame:
       - name: dontSave
         type: boolean
     GetEffectiveAlpha:
-      impl: Frame/GetEffectiveAlpha
+      impl:
+        uiobjectimpl: Frame/GetEffectiveAlpha
       inputs: {}
       outputs:
       - name: effectiveAlpha
@@ -3211,13 +3248,15 @@ Frame:
       - name: id
         type: number
     GetNumChildren:
-      impl: Frame/GetNumChildren
+      impl:
+        uiobjectimpl: Frame/GetNumChildren
       inputs: {}
       outputs:
       - name: numChildren
         type: number
     GetNumRegions:
-      impl: Frame/GetNumRegions
+      impl:
+        uiobjectimpl: Frame/GetNumRegions
       inputs: {}
       outputs:
       - name: numRegions
@@ -3236,7 +3275,8 @@ Frame:
       - name: frameLevel
         type: number
     GetRegions:
-      impl: Frame/GetRegions
+      impl:
+        uiobjectimpl: Frame/GetRegions
       inputs: {}
       outputs:
       - name: regions
@@ -3308,7 +3348,8 @@ Frame:
       - name: isEnabled
         type: boolean
     IsEventRegistered:
-      impl: Frame/IsEventRegistered
+      impl:
+        uiobjectimpl: Frame/IsEventRegistered
       inputs:
       - name: eventName
         type: string
@@ -3391,11 +3432,13 @@ Frame:
       inputs: {}
       outputs: {}
     RegisterAllEvents:
-      impl: Frame/RegisterAllEvents
+      impl:
+        uiobjectimpl: Frame/RegisterAllEvents
       inputs: {}
       outputs: {}
     RegisterEvent:
-      impl: Frame/RegisterEvent
+      impl:
+        uiobjectimpl: Frame/RegisterEvent
       inputs:
       - name: eventName
         type: string
@@ -3409,7 +3452,8 @@ Frame:
       instride: 1
       outputs: {}
     RegisterUnitEvent:
-      impl: Frame/RegisterUnitEvent
+      impl:
+        uiobjectimpl: Frame/RegisterUnitEvent
       inputs:
       - name: eventName
         type: string
@@ -3440,7 +3484,8 @@ Frame:
           structure: vector2
       outputs: {}
     SetAttribute:
-      impl: Frame/SetAttribute
+      impl:
+        uiobjectimpl: Frame/SetAttribute
       inputs:
       - name: attributeName
         type: string
@@ -3449,7 +3494,8 @@ Frame:
         type: unknown
       outputs: {}
     SetAttributeNoHandler:
-      impl: Frame/SetAttributeNoHandler
+      impl:
+        uiobjectimpl: Frame/SetAttributeNoHandler
       inputs:
       - name: attributeName
         type: string
@@ -3516,7 +3562,8 @@ Frame:
         type: boolean
       outputs: {}
     SetFrameLevel:
-      impl: Frame/SetFrameLevel
+      impl:
+        uiobjectimpl: Frame/SetFrameLevel
       inputs:
       - name: frameLevel
         type: number
@@ -3606,7 +3653,8 @@ Frame:
         type: boolean
       outputs: {}
     SetResizeBounds:
-      impl: Frame/SetResizeBounds
+      impl:
+        uiobjectimpl: Frame/SetResizeBounds
       inputs:
       - name: minWidth
         type: number
@@ -3668,11 +3716,13 @@ Frame:
       inputs: {}
       outputs: {}
     UnregisterAllEvents:
-      impl: Frame/UnregisterAllEvents
+      impl:
+        uiobjectimpl: Frame/UnregisterAllEvents
       inputs: {}
       outputs: {}
     UnregisterEvent:
-      impl: Frame/UnregisterEvent
+      impl:
+        uiobjectimpl: Frame/UnregisterEvent
       inputs:
       - name: eventName
         type: string
@@ -3716,7 +3766,8 @@ GameTooltip:
         - name: tooltipOwner
     GetPadding: {}
     IsOwned:
-      impl: GameTooltip/IsOwned
+      impl:
+        uiobjectimpl: GameTooltip/IsOwned
       inputs:
       - name: frame
         type: Frame
@@ -3735,7 +3786,8 @@ GameTooltip:
     SetMinimumWidth: {}
     SetObjectTooltipPosition: {}
     SetOwner:
-      impl: GameTooltip/SetOwner
+      impl:
+        uiobjectimpl: GameTooltip/SetOwner
       inputs:
       - name: owner
         type: Frame
@@ -3807,7 +3859,8 @@ LayeredRegion:
         type: number
       outputs: {}
     SetVertexColor:
-      impl: LayeredRegion/SetVertexColor
+      impl:
+        uiobjectimpl: LayeredRegion/SetVertexColor
       inputs:
       - name: colorR
         type: number
@@ -3924,7 +3977,8 @@ MessageFrame:
     Frame: {}
   methods:
     AddMessage:
-      impl: MessageFrame/AddMessage
+      impl:
+        uiobjectimpl: MessageFrame/AddMessage
       inputs:
       - name: text
         type: string
@@ -4598,7 +4652,8 @@ ModelScene:
       inputs: {}
       outputs: {}
     CreateActor:
-      impl: ModelScene/CreateActor
+      impl:
+        uiobjectimpl: ModelScene/CreateActor
       inputs:
       - name: name
         nilable: true
@@ -5039,7 +5094,8 @@ ParentedObject:
     ParentedObjectBase: {}
   methods:
     SetParent:
-      impl: ParentedObject/SetParent
+      impl:
+        uiobjectimpl: ParentedObject/SetParent
       inputs:
       - name: parent
         nilable: true
@@ -5057,11 +5113,13 @@ ParentedObjectBase:
     UIObject: {}
   methods:
     ClearParentKey:
-      impl: ParentedObjectBase/ClearParentKey
+      impl:
+        uiobjectimpl: ParentedObjectBase/ClearParentKey
       inputs: {}
       outputs: {}
     GetDebugName:
-      impl: ParentedObject/GetDebugName
+      impl:
+        uiobjectimpl: ParentedObject/GetDebugName
       inputs:
       - default: false
         name: preferParentKey
@@ -5078,14 +5136,16 @@ ParentedObjectBase:
       - name: parent
         type: UIObject
     GetParentKey:
-      impl: ParentedObjectBase/GetParentKey
+      impl:
+        uiobjectimpl: ParentedObjectBase/GetParentKey
       inputs: {}
       outputs:
       - name: parentKey
         nilable: true
         type: string
     SetParentKey:
-      impl: ParentedObjectBase/SetParentKey
+      impl:
+        uiobjectimpl: ParentedObjectBase/SetParentKey
       inputs:
       - name: parentKey
         type: string
@@ -5103,7 +5163,8 @@ Path:
     Animation: {}
   methods:
     CreateControlPoint:
-      impl: Path/CreateControlPoint
+      impl:
+        uiobjectimpl: Path/CreateControlPoint
       inputs:
       - name: name
         nilable: true
@@ -5118,7 +5179,8 @@ Path:
       - name: point
         type: ControlPoint
     GetControlPoints:
-      impl: Path/GetControlPoints
+      impl:
+        uiobjectimpl: Path/GetControlPoints
       inputs: {}
       outputs:
       - name: points
@@ -5478,7 +5540,8 @@ Region:
       - name: canPropagate
         type: boolean
     ClearAllPoints:
-      impl: Region/ClearAllPoints
+      impl:
+        uiobjectimpl: Region/ClearAllPoints
       inputs: {}
       outputs: {}
     ClearPoint:
@@ -5498,7 +5561,8 @@ Region:
       - name: collapsesLayout
         type: boolean
     CreateAnimationGroup:
-      impl: Region/CreateAnimationGroup
+      impl:
+        uiobjectimpl: Region/CreateAnimationGroup
       inputs:
       - name: name
         nilable: true
@@ -5510,7 +5574,8 @@ Region:
       - name: group
         type: AnimationGroup
     EnableMouse:
-      impl: MouseMixin/EnableMouse
+      impl:
+        uiobjectimpl: MouseMixin/EnableMouse
       inputs:
       - default: false
         name: enable
@@ -5532,7 +5597,8 @@ Region:
         type: boolean
       outputs: {}
     GetAnimationGroups:
-      impl: Region/GetAnimationGroups
+      impl:
+        uiobjectimpl: Region/GetAnimationGroups
       inputs: {}
       outputs:
       - name: groups
@@ -5543,7 +5609,8 @@ Region:
         getter:
         - name: bottom
     GetCenter:
-      impl: Region/GetCenter
+      impl:
+        uiobjectimpl: Region/GetCenter
       inputs: {}
       mayreturnnothing: true
       outputs:
@@ -5552,7 +5619,8 @@ Region:
       - name: y
         type: number
     GetEffectiveScale:
-      impl: Region/GetEffectiveScale
+      impl:
+        uiobjectimpl: Region/GetEffectiveScale
       inputs: {}
       outputs:
       - name: effectiveScale
@@ -5566,13 +5634,15 @@ Region:
         getter:
         - name: left
     GetNumPoints:
-      impl: Region/GetNumPoints
+      impl:
+        uiobjectimpl: Region/GetNumPoints
       inputs: {}
       outputs:
       - name: numPoints
         type: number
     GetPoint:
-      impl: Region/GetPoint
+      impl:
+        uiobjectimpl: Region/GetPoint
       inputs:
       - default: 1
         name: anchorIndex
@@ -5617,14 +5687,16 @@ Region:
         - name: width
         - name: height
     GetRight:
-      impl: Region/GetRight
+      impl:
+        uiobjectimpl: Region/GetRight
       inputs: {}
       mayreturnnothing: true
       outputs:
       - name: right
         type: number
     GetScaledRect:
-      impl: Region/GetScaledRect
+      impl:
+        uiobjectimpl: Region/GetScaledRect
       inputs: {}
       mayreturnnothing: true
       outputs:
@@ -5647,7 +5719,8 @@ Region:
       - name: location
         type: string
     GetTop:
-      impl: Region/GetTop
+      impl:
+        uiobjectimpl: Region/GetTop
       inputs: {}
       mayreturnnothing: true
       outputs:
@@ -5704,7 +5777,8 @@ Region:
       - name: enabled
         type: boolean
     IsMouseEnabled:
-      impl: MouseMixin/IsMouseEnabled
+      impl:
+        uiobjectimpl: MouseMixin/IsMouseEnabled
       inputs: {}
       outputs:
       - name: enabled
@@ -5753,7 +5827,8 @@ Region:
       - name: isLoaded
         type: boolean
     IsProtected:
-      impl: Region/IsProtected
+      impl:
+        uiobjectimpl: Region/IsProtected
       inputs: {}
       outputs:
       - name: isProtected
@@ -5766,7 +5841,8 @@ Region:
       - name: isValid
         type: boolean
     SetAllPoints:
-      impl: Region/SetAllPoints
+      impl:
+        uiobjectimpl: Region/SetAllPoints
     SetCollapsesLayout:
       inputs:
       - name: collapsesLayout
@@ -5821,7 +5897,8 @@ Region:
       instride: 1
       outputs: {}
     SetPoint:
-      impl: Region/SetPoint
+      impl:
+        uiobjectimpl: Region/SetPoint
     SetPropagateMouseClicks:
       inputs:
       - name: propagate
@@ -5884,21 +5961,27 @@ RegionBase:
         getter:
         - name: scale
     Hide:
-      impl: Region/Hide
+      impl:
+        uiobjectimpl: Region/Hide
     IsShown:
       impl:
         getter:
         - name: shown
     IsVisible:
-      impl: Region/IsVisible
+      impl:
+        uiobjectimpl: Region/IsVisible
     SetAlpha:
-      impl: Region/SetAlpha
+      impl:
+        uiobjectimpl: Region/SetAlpha
     SetScale:
-      impl: Region/SetScale
+      impl:
+        uiobjectimpl: Region/SetScale
     SetShown:
-      impl: Region/SetShown
+      impl:
+        uiobjectimpl: Region/SetShown
     Show:
-      impl: Region/Show
+      impl:
+        uiobjectimpl: Region/Show
   virtual: true
 Rotation:
   fields: {}
@@ -6054,7 +6137,8 @@ ScriptObject:
     ScriptObjectBase: {}
   methods:
     GetScript:
-      impl: ScriptObject/GetScript
+      impl:
+        uiobjectimpl: ScriptObject/GetScript
       inputs:
       - name: scriptTypeName
         type: string
@@ -6074,7 +6158,8 @@ ScriptObject:
         stub: true
         type: boolean
     HookScript:
-      impl: ScriptObject/HookScript
+      impl:
+        uiobjectimpl: ScriptObject/HookScript
       inputs:
       - name: scriptTypeName
         type: string
@@ -6087,7 +6172,8 @@ ScriptObject:
       - name: success
         type: boolean
     SetScript:
-      impl: ScriptObject/SetScript
+      impl:
+        uiobjectimpl: ScriptObject/SetScript
       inputs:
       - name: scriptTypeName
         type: string
@@ -6149,7 +6235,8 @@ ScrollFrame:
         type: number
       outputs: {}
     SetScrollChild:
-      impl: ScrollFrame/SetScrollChild
+      impl:
+        uiobjectimpl: ScrollFrame/SetScrollChild
       inputs:
       - name: scrollChild
         type: Frame
@@ -6259,11 +6346,13 @@ Slider:
     Frame: {}
   methods:
     Disable:
-      impl: Slider/Disable
+      impl:
+        uiobjectimpl: Slider/Disable
       inputs: {}
       outputs: {}
     Enable:
-      impl: Slider/Enable
+      impl:
+        uiobjectimpl: Slider/Enable
       inputs: {}
       outputs: {}
     GetMinMaxValues:
@@ -6436,7 +6525,8 @@ StatusBar:
       - name: rotatesTexture
         type: boolean
     GetStatusBarColor:
-      impl: StatusBar/GetStatusBarColor
+      impl:
+        uiobjectimpl: StatusBar/GetStatusBarColor
       inputs: {}
       outputs:
       - name: colorR
@@ -6520,7 +6610,8 @@ StatusBar:
         type: boolean
       outputs: {}
     SetStatusBarColor:
-      impl: StatusBar/SetStatusBarColor
+      impl:
+        uiobjectimpl: StatusBar/SetStatusBarColor
       inputs:
       - name: colorR
         type: number
@@ -6544,7 +6635,8 @@ StatusBar:
         type: number
       outputs: {}
     SetStatusBarTexture:
-      impl: StatusBar/SetStatusBarTexture
+      impl:
+        uiobjectimpl: StatusBar/SetStatusBarTexture
     SetValue:
       impl:
         setter:
@@ -6786,7 +6878,8 @@ TextureBase:
       - name: bias
         type: number
     GetTexture:
-      impl: Texture/GetTexture
+      impl:
+        uiobjectimpl: Texture/GetTexture
     GetTextureFileID:
       inputs: {}
       outputs:
@@ -6850,7 +6943,8 @@ TextureBase:
       - name: snap
         type: boolean
     SetAtlas:
-      impl: Texture/SetAtlas
+      impl:
+        uiobjectimpl: Texture/SetAtlas
       inputs:
       - name: atlas
         nilable: true
@@ -6881,7 +6975,8 @@ TextureBase:
         type: boolean
       outputs: {}
     SetColorTexture:
-      impl: Texture/SetColorTexture
+      impl:
+        uiobjectimpl: Texture/SetColorTexture
       inputs:
       - name: colorR
         type: number
@@ -6948,7 +7043,8 @@ TextureBase:
         type: boolean
       outputs: {}
     SetTexCoord:
-      impl: Texture/SetTexCoord
+      impl:
+        uiobjectimpl: Texture/SetTexCoord
       inputs:
       - name: left
         type: number
@@ -6965,7 +7061,8 @@ TextureBase:
         type: number
       outputs: {}
     SetTexture:
-      impl: Texture/SetTexture
+      impl:
+        uiobjectimpl: Texture/SetTexture
     SetTextureSliceMargins:
       inputs:
       - name: left
@@ -7045,7 +7142,8 @@ UIObject:
       - name: name
         type: string
     GetObjectType:
-      impl: UIObject/GetObjectType
+      impl:
+        uiobjectimpl: UIObject/GetObjectType
       inputs: {}
       outputs:
       - name: objectType
@@ -7059,7 +7157,8 @@ UIObject:
       - name: isForbidden
         type: boolean
     IsObjectType:
-      impl: UIObject/IsObjectType
+      impl:
+        uiobjectimpl: UIObject/IsObjectType
       inputs:
       - name: objectType
         type: string
@@ -7067,7 +7166,8 @@ UIObject:
       - name: isType
         type: boolean
     SetForbidden:
-      impl: ForbiddenMixin/SetForbidden
+      impl:
+        uiobjectimpl: ForbiddenMixin/SetForbidden
       inputs: {}
       outputs: {}
     SetToDefaults:
