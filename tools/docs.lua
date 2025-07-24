@@ -169,7 +169,7 @@ local function t2nty(field, ns)
   elseif t == 'table' and field.Mixin then
     error('no struct for mixin ' .. field.Mixin)
   elseif stringenums[t] then
-    return t
+    return { stringenum = t }
   elseif typedefs[t] then
     used_typedefs[t] = true
     return typedefs[t]
