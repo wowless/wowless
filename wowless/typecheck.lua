@@ -12,6 +12,12 @@ return function(api)
     if type(ty) == 'string' then
       return ty
     end
+    if ty.uiobject then
+      return ty.uiobject
+    end
+    if ty.stringenum then
+      return ty.stringenum
+    end
     if ty.structure then
       return ty.structure
     end
@@ -126,9 +132,10 @@ return function(api)
       end
     end
   end
+
+  local stringenumchecks = {}
   for etype, evalues in pairs(require('runtime.stringenums')) do
-    assert(not scalartypechecks[etype])
-    scalartypechecks[etype] = function(value)
+    stringenumchecks[etype] = function(value)
       if type(value) ~= 'string' then
         return plainmismatch(etype, value)
       end
@@ -139,9 +146,10 @@ return function(api)
       return value
     end
   end
+
+  local uiobjectchecks = {}
   for k in pairs(api.datalua.uiobjects) do
-    assert(not scalartypechecks[k])
-    scalartypechecks[k] = function(value, isout)
+    uiobjectchecks[k] = function(value, isout)
       local v, err = resolveobj(k, value, isout)
       if err then
         return plainmismatch(k, v)
@@ -163,6 +171,12 @@ return function(api)
     local scalartypecheck = scalartypechecks[spec.type]
     if scalartypecheck then
       return scalartypecheck(value, isout)
+    end
+    if spec.type.uiobject then
+      return uiobjectchecks[spec.type.uiobject](value, isout)
+    end
+    if spec.type.stringenum then
+      return stringenumchecks[spec.type.stringenum](value, isout)
     end
     if spec.type.enum then
       local v = type(value) == 'string' and tonumber(value) or value

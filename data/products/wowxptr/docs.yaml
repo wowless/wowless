@@ -161,7 +161,8 @@ lies:
         outputs:
           _add:
           - name: actor
-            type: Actor
+            type:
+              uiobject: Actor
     ParentedObjectBase:
       GetParentKey:
         outputs:
@@ -327,7 +328,8 @@ typedefs:
   ClubInvitationId: string
   ClubStreamId: string
   ConnectionIptype: string
-  CScriptObject: UIObject
+  CScriptObject:
+    uiobject: UIObject
   cstring: string
   FileAsset: string
   fileID: number
@@ -345,8 +347,10 @@ typedefs:
   luaIndex: number
   LuaValueVariant: table
   ModelAsset: string
-  ModelSceneFrame: ModelScene
-  ModelSceneFrameActor: Actor
+  ModelSceneFrame:
+    uiobject: ModelScene
+  ModelSceneFrameActor:
+    uiobject: Actor
   MouseButton: string
   mouseButton: string
   NamePlateFrame: table
@@ -355,19 +359,31 @@ typedefs:
   number: number
   QuestObjectiveType: number
   RecruitAcceptanceID: string
-  ScriptRegion: Region
+  ScriptRegion:
+    uiobject: Region
   SendChatMessageType: string
-  SimpleAnim: Animation
-  SimpleAnimGroup: AnimationGroup
-  SimpleControlPoint: ControlPoint
-  SimpleFont: Font
-  SimpleFontString: FontString
-  SimpleFrame: Frame
-  SimpleLine: Line
-  SimpleMaskTexture: MaskTexture
-  SimplePathAnim: Path
-  SimpleRegion: Region
-  SimpleTexture: Texture
+  SimpleAnim:
+    uiobject: Animation
+  SimpleAnimGroup:
+    uiobject: AnimationGroup
+  SimpleControlPoint:
+    uiobject: ControlPoint
+  SimpleFont:
+    uiobject: Font
+  SimpleFontString:
+    uiobject: FontString
+  SimpleFrame:
+    uiobject: Frame
+  SimpleLine:
+    uiobject: Line
+  SimpleMaskTexture:
+    uiobject: MaskTexture
+  SimplePathAnim:
+    uiobject: Path
+  SimpleRegion:
+    uiobject: Region
+  SimpleTexture:
+    uiobject: Texture
   SimpleWindow: nil
   SingleColorValue: number
   size: number
@@ -375,7 +391,8 @@ typedefs:
   string: string
   stringView: string
   TBFFlags: string
-  TextureAsset: Texture
+  TextureAsset:
+    uiobject: Texture
   TextureAssetDisk: string
   textureAtlas: string
   textureKit: string

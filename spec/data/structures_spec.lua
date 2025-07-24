@@ -49,7 +49,7 @@ describe('structures', function()
             end
           end
         else
-          assert(ty.enum or type(ty) == 'string', 'weird type ' .. tostring(ty))
+          assert(ty.enum or ty.stringenum or ty.uiobject or type(ty) == 'string', 'weird type ' .. tostring(ty))
         end
       end
       for k in pairs(refs) do

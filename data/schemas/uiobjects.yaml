@@ -26,14 +26,7 @@ type:
                   type:
                     required: true
                     type:
-                      oneof:
-                      - literal: boolean
-                      - literal: hlist
-                      - literal: number
-                      - literal: string
-                      - literal: table
-                      - ref: stringenum
-                      - ref: uiobject
+                      schema: type
         inherits:
           required: true
           type:

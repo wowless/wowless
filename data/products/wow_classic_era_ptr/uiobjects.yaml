@@ -319,7 +319,8 @@ Animation:
       type: number
     smoothing:
       init: NONE
-      type: SmoothingType
+      type:
+        stringenum: SmoothingType
     startDelay:
       init: 0
       type: number
@@ -361,7 +362,8 @@ Animation:
       inputs: {}
       outputs:
       - name: region
-        type: UIObject
+        type:
+          uiobject: UIObject
     GetSmoothing:
       impl:
         getter:
@@ -369,7 +371,8 @@ Animation:
       inputs: {}
       outputs:
       - name: weights
-        type: SmoothingType
+        type:
+          stringenum: SmoothingType
     GetSmoothProgress:
       inputs: {}
       outputs:
@@ -389,7 +392,8 @@ Animation:
       inputs: {}
       outputs:
       - name: target
-        type: UIObject
+        type:
+          uiobject: UIObject
     IsDelaying:
       inputs: {}
       outputs:
@@ -463,7 +467,8 @@ Animation:
         - name: smoothing
       inputs:
       - name: weights
-        type: SmoothingType
+        type:
+          stringenum: SmoothingType
       outputs: {}
     SetSmoothProgress:
       inputs:
@@ -481,7 +486,8 @@ Animation:
     SetTarget:
       inputs:
       - name: target
-        type: UIObject
+        type:
+          uiobject: UIObject
       outputs:
       - name: success
         type: boolean
@@ -511,7 +517,8 @@ AnimationGroup:
   fields:
     looping:
       init: NONE
-      type: LoopType
+      type:
+        stringenum: LoopType
   inherits:
     ParentedObjectBase: {}
     ScriptObject: {}
@@ -531,7 +538,8 @@ AnimationGroup:
         type: string
       outputs:
       - name: anim
-        type: Animation
+        type:
+          uiobject: Animation
     Finish:
       inputs: {}
       outputs: {}
@@ -541,7 +549,8 @@ AnimationGroup:
       inputs: {}
       outputs:
       - name: scriptObject
-        type: UIObject
+        type:
+          uiobject: UIObject
       outstride: 1
     GetAnimationSpeedMultiplier:
       inputs: {}
@@ -565,7 +574,8 @@ AnimationGroup:
       inputs: {}
       outputs:
       - name: loopType
-        type: LoopType
+        type:
+          stringenum: LoopType
     GetLoopState:
       inputs: {}
       outputs:
@@ -641,7 +651,8 @@ AnimationGroup:
         - name: looping
       inputs:
       - name: loopType
-        type: LoopType
+        type:
+          stringenum: LoopType
       outputs: {}
     SetPlaying:
       inputs:
@@ -726,25 +737,31 @@ Button:
       type: boolean
     buttonState:
       init: NORMAL
-      type: SimpleButtonStateToken
+      type:
+        stringenum: SimpleButtonStateToken
     disabledTexture:
       nilable: true
-      type: Texture
+      type:
+        uiobject: Texture
     fontstring:
       nilable: true
-      type: FontString
+      type:
+        uiobject: FontString
     highlightTexture:
       nilable: true
-      type: Texture
+      type:
+        uiobject: Texture
     motionScriptsWhileDisabled:
       init: false
       type: boolean
     normalFontObject:
       nilable: true
-      type: Font
+      type:
+        uiobject: Font
     normalTexture:
       nilable: true
-      type: Texture
+      type:
+        uiobject: Texture
     pushedTextOffsetX:
       init: 0
       type: number
@@ -753,7 +770,8 @@ Button:
       type: number
     pushedTexture:
       nilable: true
-      type: Texture
+      type:
+        uiobject: Texture
     registeredClicks:
       init:
         leftbuttonup: true
@@ -801,12 +819,14 @@ Button:
       inputs: {}
       outputs:
       - name: buttonState
-        type: SimpleButtonStateToken
+        type:
+          stringenum: SimpleButtonStateToken
     GetDisabledFontObject:
       inputs: {}
       outputs:
       - name: font
-        type: Font
+        type:
+          uiobject: Font
     GetDisabledTexture:
       impl:
         getter:
@@ -814,7 +834,8 @@ Button:
       inputs: {}
       outputs:
       - name: texture
-        type: Texture
+        type:
+          uiobject: Texture
     GetFontString:
       impl:
         getter:
@@ -822,12 +843,14 @@ Button:
       inputs: {}
       outputs:
       - name: fontString
-        type: FontString
+        type:
+          uiobject: FontString
     GetHighlightFontObject:
       inputs: {}
       outputs:
       - name: font
-        type: Font
+        type:
+          uiobject: Font
     GetHighlightTexture:
       impl:
         getter:
@@ -835,7 +858,8 @@ Button:
       inputs: {}
       outputs:
       - name: texture
-        type: Texture
+        type:
+          uiobject: Texture
     GetMotionScriptsWhileDisabled:
       impl:
         getter:
@@ -851,7 +875,8 @@ Button:
       inputs: {}
       outputs:
       - name: font
-        type: Font
+        type:
+          uiobject: Font
     GetNormalTexture:
       impl:
         getter:
@@ -859,7 +884,8 @@ Button:
       inputs: {}
       outputs:
       - name: texture
-        type: Texture
+        type:
+          uiobject: Texture
     GetPushedTextOffset:
       impl:
         getter:
@@ -878,7 +904,8 @@ Button:
       inputs: {}
       outputs:
       - name: texture
-        type: Texture
+        type:
+          uiobject: Texture
     GetText:
       impl:
         uiobjectimpl: Button/GetText
@@ -923,7 +950,8 @@ Button:
         uiobjectimpl: Button/SetButtonState
       inputs:
       - name: buttonState
-        type: SimpleButtonStateToken
+        type:
+          stringenum: SimpleButtonStateToken
       - default: false
         name: lock
         type: boolean
@@ -938,7 +966,8 @@ Button:
     SetDisabledFontObject:
       inputs:
       - name: font
-        type: Font
+        type:
+          uiobject: Font
       outputs: {}
     SetDisabledTexture:
       impl:
@@ -956,7 +985,8 @@ Button:
         uiobjectimpl: Button/SetFontString
       inputs:
       - name: fontString
-        type: FontString
+        type:
+          uiobject: FontString
       outputs: {}
     SetFormattedText:
       impl:
@@ -977,12 +1007,14 @@ Button:
         type: string
       - name: blendMode
         nilable: true
-        type: BlendMode
+        type:
+          stringenum: BlendMode
       outputs: {}
     SetHighlightFontObject:
       inputs:
       - name: font
-        type: Font
+        type:
+          uiobject: Font
       outputs: {}
     SetHighlightTexture:
       impl:
@@ -1008,7 +1040,8 @@ Button:
         - name: normalFontObject
       inputs:
       - name: font
-        type: Font
+        type:
+          uiobject: Font
       outputs: {}
     SetNormalTexture:
       impl:
@@ -1049,10 +1082,12 @@ CheckButton:
       type: boolean
     checkedTexture:
       nilable: true
-      type: Texture
+      type:
+        uiobject: Texture
     disabledCheckedTexture:
       nilable: true
-      type: Texture
+      type:
+        uiobject: Texture
   inherits:
     Button: {}
   methods:
@@ -1071,7 +1106,8 @@ CheckButton:
       inputs: {}
       outputs:
       - name: texture
-        type: Texture
+        type:
+          uiobject: Texture
     GetDisabledCheckedTexture:
       impl:
         getter:
@@ -1079,7 +1115,8 @@ CheckButton:
       inputs: {}
       outputs:
       - name: texture
-        type: Texture
+        type:
+          uiobject: Texture
     SetChecked:
       impl:
         uiobjectimpl: CheckButton/SetChecked
@@ -1097,7 +1134,8 @@ CheckButton:
         - name: disabledCheckedTexture
       inputs:
       - name: asset
-        type: Texture
+        type:
+          uiobject: Texture
       outputs: {}
 Checkout:
   fieldinitoverrides:
@@ -1244,22 +1282,28 @@ ColorSelect:
   fields:
     colorAlphaTexture:
       nilable: true
-      type: Texture
+      type:
+        uiobject: Texture
     colorAlphaThumbTexture:
       nilable: true
-      type: Texture
+      type:
+        uiobject: Texture
     colorValueTexture:
       nilable: true
-      type: Texture
+      type:
+        uiobject: Texture
     colorValueThumbTexture:
       nilable: true
-      type: Texture
+      type:
+        uiobject: Texture
     colorWheelTexture:
       nilable: true
-      type: Texture
+      type:
+        uiobject: Texture
     colorWheelThumbTexture:
       nilable: true
-      type: Texture
+      type:
+        uiobject: Texture
   inherits:
     Frame: {}
   methods:
@@ -1278,7 +1322,8 @@ ColorSelect:
       inputs: {}
       outputs:
       - name: texture
-        type: Texture
+        type:
+          uiobject: Texture
     GetColorAlphaThumbTexture:
       impl:
         getter:
@@ -1286,7 +1331,8 @@ ColorSelect:
       inputs: {}
       outputs:
       - name: texture
-        type: Texture
+        type:
+          uiobject: Texture
     GetColorHSV:
       inputs: {}
       outputs:
@@ -1312,7 +1358,8 @@ ColorSelect:
       inputs: {}
       outputs:
       - name: texture
-        type: Texture
+        type:
+          uiobject: Texture
     GetColorValueThumbTexture:
       impl:
         getter:
@@ -1320,7 +1367,8 @@ ColorSelect:
       inputs: {}
       outputs:
       - name: texture
-        type: Texture
+        type:
+          uiobject: Texture
     GetColorWheelTexture:
       impl:
         getter:
@@ -1328,7 +1376,8 @@ ColorSelect:
       inputs: {}
       outputs:
       - name: texture
-        type: Texture
+        type:
+          uiobject: Texture
     GetColorWheelThumbTexture:
       impl:
         getter:
@@ -1336,7 +1385,8 @@ ColorSelect:
       inputs: {}
       outputs:
       - name: texture
-        type: Texture
+        type:
+          uiobject: Texture
     SetColorAlpha:
       inputs:
       - name: alpha
@@ -1348,7 +1398,8 @@ ColorSelect:
         - name: colorAlphaTexture
       inputs:
       - name: texture
-        type: Texture
+        type:
+          uiobject: Texture
       outputs: {}
     SetColorAlphaThumbTexture:
       impl:
@@ -1356,7 +1407,8 @@ ColorSelect:
         - name: colorAlphaThumbTexture
       inputs:
       - name: texture
-        type: Texture
+        type:
+          uiobject: Texture
       outputs: {}
     SetColorHSV:
       inputs:
@@ -1382,7 +1434,8 @@ ColorSelect:
         - name: colorValueTexture
       inputs:
       - name: texture
-        type: Texture
+        type:
+          uiobject: Texture
       outputs: {}
     SetColorValueThumbTexture:
       impl:
@@ -1390,7 +1443,8 @@ ColorSelect:
         - name: colorValueThumbTexture
       inputs:
       - name: texture
-        type: Texture
+        type:
+          uiobject: Texture
       outputs: {}
     SetColorWheelTexture:
       impl:
@@ -1398,7 +1452,8 @@ ColorSelect:
         - name: colorWheelTexture
       inputs:
       - name: texture
-        type: Texture
+        type:
+          uiobject: Texture
       outputs: {}
     SetColorWheelThumbTexture:
       impl:
@@ -1406,7 +1461,8 @@ ColorSelect:
         - name: colorWheelThumbTexture
       inputs:
       - name: texture
-        type: Texture
+        type:
+          uiobject: Texture
       outputs: {}
 ControlPoint:
   fields: {}
@@ -2365,7 +2421,8 @@ Font:
     CopyFontObject:
       inputs:
       - name: sourceFont
-        type: Font
+        type:
+          uiobject: Font
       outputs: {}
     GetAlpha:
       inputs: {}
@@ -2378,7 +2435,8 @@ Font:
         type: string
       outputs:
       - name: font
-        type: Font
+        type:
+          uiobject: Font
     SetAlpha:
       inputs:
       - name: alpha
@@ -2393,10 +2451,12 @@ FontInstance:
   fields:
     justifyh:
       init: CENTER
-      type: JustifyHorizontal
+      type:
+        stringenum: JustifyHorizontal
     justifyv:
       init: MIDDLE
-      type: JustifyVertical
+      type:
+        stringenum: JustifyVertical
   inherits: {}
   methods:
     GetFont:
@@ -2415,7 +2475,8 @@ FontInstance:
       outputs:
       - name: font
         nilable: true
-        type: FontInstance
+        type:
+          uiobject: FontInstance
     GetIndentedWordWrap: {}
     GetJustifyH:
       impl:
@@ -2450,7 +2511,8 @@ FontInstance:
         - name: justifyh
       inputs:
       - name: justifyH
-        type: JustifyHorizontal
+        type:
+          stringenum: JustifyHorizontal
       outputs: {}
     SetJustifyV:
       impl:
@@ -2458,7 +2520,8 @@ FontInstance:
         - name: justifyv
       inputs:
       - name: justifyV
-        type: JustifyVertical
+        type:
+          stringenum: JustifyVertical
       outputs: {}
     SetShadowColor: {}
     SetShadowOffset: {}
@@ -2663,7 +2726,8 @@ Frame:
       type: number
     frameStrata:
       init: MEDIUM
-      type: FrameStrata
+      type:
+        stringenum: FrameStrata
     hasFixedFrameLevel:
       init: false
       type: boolean
@@ -2745,13 +2809,15 @@ Frame:
         type: string
       - name: drawLayer
         nilable: true
-        type: DrawLayer
+        type:
+          stringenum: DrawLayer
       - name: templateName
         nilable: true
         type: string
       outputs:
       - name: line
-        type: FontString
+        type:
+          uiobject: FontString
     CreateLine:
       impl:
         uiobjectimpl: Frame/CreateLine
@@ -2761,7 +2827,8 @@ Frame:
         type: string
       - name: drawLayer
         nilable: true
-        type: DrawLayer
+        type:
+          stringenum: DrawLayer
       - name: templateName
         nilable: true
         type: string
@@ -2770,7 +2837,8 @@ Frame:
         type: number
       outputs:
       - name: line
-        type: Line
+        type:
+          uiobject: Line
     CreateMaskTexture:
       impl:
         uiobjectimpl: Frame/CreateMaskTexture
@@ -2780,7 +2848,8 @@ Frame:
         type: string
       - name: drawLayer
         nilable: true
-        type: DrawLayer
+        type:
+          stringenum: DrawLayer
       - name: templateName
         nilable: true
         type: string
@@ -2789,7 +2858,8 @@ Frame:
         type: number
       outputs:
       - name: maskTexture
-        type: MaskTexture
+        type:
+          uiobject: MaskTexture
     CreateTexture:
       impl:
         uiobjectimpl: Frame/CreateTexture
@@ -2799,7 +2869,8 @@ Frame:
         type: string
       - name: drawLayer
         nilable: true
-        type: DrawLayer
+        type:
+          stringenum: DrawLayer
       - name: templateName
         nilable: true
         type: string
@@ -2808,7 +2879,8 @@ Frame:
         type: number
       outputs:
       - name: texture
-        type: Texture
+        type:
+          uiobject: Texture
     DesaturateHierarchy:
       inputs:
       - name: desaturation
@@ -2820,7 +2892,8 @@ Frame:
     DisableDrawLayer:
       inputs:
       - name: layer
-        type: DrawLayer
+        type:
+          stringenum: DrawLayer
       outputs: {}
     DoesClipChildren:
       inputs: {}
@@ -2838,7 +2911,8 @@ Frame:
     EnableDrawLayer:
       inputs:
       - name: layer
-        type: DrawLayer
+        type:
+          stringenum: DrawLayer
       outputs: {}
     EnableGamePadButton:
       inputs:
@@ -2896,7 +2970,8 @@ Frame:
       inputs: {}
       outputs:
       - name: scriptObject
-        type: UIObject
+        type:
+          uiobject: UIObject
       outstride: 1
     GetClampRectInsets:
       inputs: {}
@@ -2946,7 +3021,8 @@ Frame:
       inputs: {}
       outputs:
       - name: strata
-        type: FrameStrata
+        type:
+          stringenum: FrameStrata
     GetHitRectInsets:
       impl:
         getter:
@@ -3013,7 +3089,8 @@ Frame:
       inputs: {}
       outputs:
       - name: scriptObject
-        type: UIObject
+        type:
+          uiobject: UIObject
       outstride: 1
     GetResizeBounds:
       impl:
@@ -3056,7 +3133,8 @@ Frame:
     InterceptStartDrag:
       inputs:
       - name: delegate
-        type: Frame
+        type:
+          uiobject: Frame
       outputs:
       - name: success
         type: boolean
@@ -3071,7 +3149,8 @@ Frame:
     IsDrawLayerEnabled:
       inputs:
       - name: layer
-        type: DrawLayer
+        type:
+          stringenum: DrawLayer
       outputs:
       - name: isEnabled
         type: boolean
@@ -3248,7 +3327,8 @@ Frame:
     SetDrawLayerEnabled:
       inputs:
       - name: layer
-        type: DrawLayer
+        type:
+          stringenum: DrawLayer
       - default: false
         name: isEnabled
         type: boolean
@@ -3287,7 +3367,8 @@ Frame:
         - name: frameStrata
       inputs:
       - name: strata
-        type: FrameStrata
+        type:
+          stringenum: FrameStrata
       outputs: {}
     SetHighlightLocked:
       inputs:
@@ -3420,7 +3501,8 @@ Frame:
       inputs:
       - name: resizePoint
         nilable: true
-        type: FramePoint
+        type:
+          stringenum: FramePoint
       - default: false
         name: alwaysStartFromMouse
         type: boolean
@@ -3455,7 +3537,8 @@ GameTooltip:
       type: number
     tooltipOwner:
       nilable: true
-      type: Frame
+      type:
+        uiobject: Frame
   inherits:
     Frame: {}
   methods:
@@ -3490,7 +3573,8 @@ GameTooltip:
         uiobjectimpl: GameTooltip/IsOwned
       inputs:
       - name: frame
-        type: Frame
+        type:
+          uiobject: Frame
       outputs:
       - name: isOwned
         type: boolean
@@ -3539,7 +3623,8 @@ GameTooltip:
         uiobjectimpl: GameTooltip/SetOwner
       inputs:
       - name: owner
-        type: Frame
+        type:
+          uiobject: Frame
       - name: anchorType
         nilable: true
         type: string
@@ -3576,7 +3661,8 @@ LayeredRegion:
   fields:
     layer:
       init: ARTWORK
-      type: DrawLayer
+      type:
+        stringenum: DrawLayer
     sublevel:
       init: 0
       type: number
@@ -3600,7 +3686,8 @@ LayeredRegion:
       inputs: {}
       outputs:
       - name: layer
-        type: DrawLayer
+        type:
+          stringenum: DrawLayer
       - name: sublayer
         type: number
     GetVertexColor:
@@ -3627,7 +3714,8 @@ LayeredRegion:
         - name: sublevel
       inputs:
       - name: layer
-        type: DrawLayer
+        type:
+          stringenum: DrawLayer
       - default: 0
         name: sublevel
         type: number
@@ -3659,9 +3747,11 @@ Line:
       inputs: {}
       outputs:
       - name: relativePoint
-        type: FramePoint
+        type:
+          stringenum: FramePoint
       - name: relativeTo
-        type: Region
+        type:
+          uiobject: Region
       - name: offsetX
         type: number
       - name: offsetY
@@ -3675,9 +3765,11 @@ Line:
       inputs: {}
       outputs:
       - name: relativePoint
-        type: FramePoint
+        type:
+          stringenum: FramePoint
       - name: relativeTo
-        type: Region
+        type:
+          uiobject: Region
       - name: offsetX
         type: number
       - name: offsetY
@@ -3693,9 +3785,11 @@ Line:
     SetEndPoint:
       inputs:
       - name: relativePoint
-        type: FramePoint
+        type:
+          stringenum: FramePoint
       - name: relativeTo
-        type: Region
+        type:
+          uiobject: Region
       - default: 0
         name: offsetX
         type: number
@@ -3711,9 +3805,11 @@ Line:
     SetStartPoint:
       inputs:
       - name: relativePoint
-        type: FramePoint
+        type:
+          stringenum: FramePoint
       - name: relativeTo
-        type: Region
+        type:
+          uiobject: Region
       - default: 0
         name: offsetX
         type: number
@@ -3793,12 +3889,14 @@ MessageFrame:
         type: number
       outputs:
       - name: fontString
-        type: FontString
+        type:
+          uiobject: FontString
     GetInsertMode:
       inputs: {}
       outputs:
       - name: mode
-        type: InsertMode
+        type:
+          stringenum: InsertMode
     GetTimeVisible:
       inputs: {}
       outputs:
@@ -3834,7 +3932,8 @@ MessageFrame:
     SetInsertMode:
       inputs:
       - name: mode
-        type: InsertMode
+        type:
+          stringenum: InsertMode
       outputs: {}
     SetTimeVisible:
       inputs:
@@ -3873,37 +3972,44 @@ Minimap:
     SetBlipTexture:
       inputs:
       - name: asset
-        type: Texture
+        type:
+          uiobject: Texture
       outputs: {}
     SetCorpsePOIArrowTexture:
       inputs:
       - name: asset
-        type: Texture
+        type:
+          uiobject: Texture
       outputs: {}
     SetIconTexture:
       inputs:
       - name: asset
-        type: Texture
+        type:
+          uiobject: Texture
       outputs: {}
     SetMaskTexture:
       inputs:
       - name: asset
-        type: Texture
+        type:
+          uiobject: Texture
       outputs: {}
     SetPlayerTexture:
       inputs:
       - name: asset
-        type: Texture
+        type:
+          uiobject: Texture
       outputs: {}
     SetPOIArrowTexture:
       inputs:
       - name: asset
-        type: Texture
+        type:
+          uiobject: Texture
       outputs: {}
     SetStaticPOIArrowTexture:
       inputs:
       - name: asset
-        type: Texture
+        type:
+          uiobject: Texture
       outputs: {}
     SetZoom:
       inputs:
@@ -4015,7 +4121,8 @@ Model:
       inputs: {}
       outputs:
       - name: layer
-        type: DrawLayer
+        type:
+          stringenum: DrawLayer
       - name: sublayer
         type: number
     GetModelFileID:
@@ -4210,7 +4317,8 @@ Model:
     SetModelDrawLayer:
       inputs:
       - name: layer
-        type: DrawLayer
+        type:
+          stringenum: DrawLayer
       outputs: {}
     SetModelScale:
       impl:
@@ -4332,7 +4440,8 @@ ModelScene:
         type: string
       outputs:
       - name: actor
-        type: Actor
+        type:
+          uiobject: Actor
     GetActorAtIndex:
       inputs:
       - name: index
@@ -4393,7 +4502,8 @@ ModelScene:
       inputs: {}
       outputs:
       - name: layer
-        type: DrawLayer
+        type:
+          stringenum: DrawLayer
       - name: sublevel
         type: number
     GetFogColor:
@@ -4564,7 +4674,8 @@ ModelScene:
     SetDrawLayer:
       inputs:
       - name: layer
-        type: DrawLayer
+        type:
+          stringenum: DrawLayer
       outputs: {}
     SetFogColor:
       inputs:
@@ -4710,7 +4821,8 @@ OffScreenFrame:
     ApplySnapshot:
       inputs:
       - name: texture
-        type: Texture
+        type:
+          uiobject: Texture
       - name: snapshotID
         type: number
       outputs:
@@ -4768,7 +4880,8 @@ ParentedObject:
       inputs:
       - name: parent
         nilable: true
-        type: UIObject
+        type:
+          uiobject: UIObject
       outputs: {}
   virtual: true
 ParentedObjectBase:
@@ -4777,7 +4890,8 @@ ParentedObjectBase:
       type: hlist
     parent:
       nilable: true
-      type: UIObject
+      type:
+        uiobject: UIObject
   inherits:
     UIObject: {}
   methods:
@@ -4803,7 +4917,8 @@ ParentedObjectBase:
       inputs: {}
       outputs:
       - name: parent
-        type: UIObject
+        type:
+          uiobject: UIObject
     GetParentKey:
       impl:
         uiobjectimpl: ParentedObjectBase/GetParentKey
@@ -4827,7 +4942,8 @@ Path:
   fields:
     curveType:
       init: NONE
-      type: CurveType
+      type:
+        stringenum: CurveType
   inherits:
     Animation: {}
   methods:
@@ -4846,14 +4962,16 @@ Path:
         type: number
       outputs:
       - name: point
-        type: ControlPoint
+        type:
+          uiobject: ControlPoint
     GetControlPoints:
       impl:
         uiobjectimpl: Path/GetControlPoints
       inputs: {}
       outputs:
       - name: scriptObject
-        type: UIObject
+        type:
+          uiobject: UIObject
       outstride: 1
     GetCurveType:
       impl:
@@ -4862,7 +4980,8 @@ Path:
       inputs: {}
       outputs:
       - name: curveType
-        type: CurveType
+        type:
+          stringenum: CurveType
     GetMaxControlPointOrder:
       inputs: {}
       outputs:
@@ -4874,7 +4993,8 @@ Path:
         - name: curveType
       inputs:
       - name: curveType
-        type: CurveType
+        type:
+          stringenum: CurveType
       outputs: {}
 PlayerModel:
   fields: {}
@@ -5096,7 +5216,8 @@ Region:
     ClearPoint:
       inputs:
       - name: point
-        type: FramePoint
+        type:
+          stringenum: FramePoint
       outputs: {}
     ClearPointsOffset:
       inputs: {}
@@ -5118,7 +5239,8 @@ Region:
         type: string
       outputs:
       - name: group
-        type: AnimationGroup
+        type:
+          uiobject: AnimationGroup
     EnableMouse:
       impl:
         uiobjectimpl: MouseMixin/EnableMouse
@@ -5148,7 +5270,8 @@ Region:
       inputs: {}
       outputs:
       - name: scriptObject
-        type: UIObject
+        type:
+          uiobject: UIObject
       outstride: 1
     GetBottom:
       impl:
@@ -5196,12 +5319,15 @@ Region:
       mayreturnnothing: true
       outputs:
       - name: point
-        type: FramePoint
+        type:
+          stringenum: FramePoint
       - name: relativeTo
         nilable: true
-        type: UIObject
+        type:
+          uiobject: UIObject
       - name: relativePoint
-        type: FramePoint
+        type:
+          stringenum: FramePoint
       - name: offsetX
         type: number
       - name: offsetY
@@ -5209,18 +5335,22 @@ Region:
     GetPointByName:
       inputs:
       - name: point
-        type: FramePoint
+        type:
+          stringenum: FramePoint
       - default: false
         name: resolveCollapsed
         type: boolean
       mayreturnnothing: true
       outputs:
       - name: point
-        type: FramePoint
+        type:
+          stringenum: FramePoint
       - name: relativeTo
-        type: Region
+        type:
+          uiobject: Region
       - name: relativePoint
-        type: FramePoint
+        type:
+          stringenum: FramePoint
       - name: offsetX
         type: number
       - name: offsetY
@@ -5279,7 +5409,8 @@ Region:
     Intersects:
       inputs:
       - name: region
-        type: Region
+        type:
+          uiobject: Region
       outputs:
       - name: intersects
         type: boolean
@@ -5536,7 +5667,8 @@ Rotation:
       inputs: {}
       outputs:
       - name: point
-        type: FramePoint
+        type:
+          stringenum: FramePoint
       - name: originX
         type: number
       - name: originY
@@ -5554,7 +5686,8 @@ Rotation:
     SetOrigin:
       inputs:
       - name: point
-        type: FramePoint
+        type:
+          stringenum: FramePoint
       - name: originX
         type: number
       - name: originY
@@ -5569,7 +5702,8 @@ Scale:
   fields:
     originPoint:
       init: CENTER
-      type: FramePoint
+      type:
+        stringenum: FramePoint
     originX:
       init: 0
       type: number
@@ -5588,7 +5722,8 @@ Scale:
       inputs: {}
       outputs:
       - name: point
-        type: FramePoint
+        type:
+          stringenum: FramePoint
       - name: originX
         type: number
       - name: originY
@@ -5622,7 +5757,8 @@ Scale:
         - name: originY
       inputs:
       - name: point
-        type: FramePoint
+        type:
+          stringenum: FramePoint
       - name: originX
         type: number
       - name: originY
@@ -5715,7 +5851,8 @@ ScrollFrame:
   fields:
     scrollChild:
       nilable: true
-      type: Frame
+      type:
+        uiobject: Frame
   inherits:
     Frame: {}
   methods:
@@ -5736,7 +5873,8 @@ ScrollFrame:
       inputs: {}
       outputs:
       - name: scrollChild
-        type: Frame
+        type:
+          uiobject: Frame
     GetVerticalScroll:
       inputs: {}
       outputs:
@@ -5757,7 +5895,8 @@ ScrollFrame:
         uiobjectimpl: ScrollFrame/SetScrollChild
       inputs:
       - name: scrollChild
-        type: Frame
+        type:
+          uiobject: Frame
       outputs: {}
     SetVerticalScroll:
       inputs:
@@ -5791,7 +5930,8 @@ SimpleHTML:
         type: string
       outputs:
       - name: justifyH
-        type: JustifyHorizontal
+        type:
+          stringenum: JustifyHorizontal
       override: true
     GetJustifyV:
       inputs:
@@ -5799,7 +5939,8 @@ SimpleHTML:
         type: string
       outputs:
       - name: justifyV
-        type: JustifyVertical
+        type:
+          stringenum: JustifyVertical
       override: true
     GetTextData:
       inputs: {}
@@ -5818,7 +5959,8 @@ SimpleHTML:
       - name: textType
         type: string
       - name: justifyH
-        type: JustifyHorizontal
+        type:
+          stringenum: JustifyHorizontal
       outputs: {}
       override: true
     SetJustifyV:
@@ -5826,7 +5968,8 @@ SimpleHTML:
       - name: textType
         type: string
       - name: justifyV
-        type: JustifyVertical
+        type:
+          stringenum: JustifyVertical
       outputs: {}
       override: true
     SetText:
@@ -5853,10 +5996,12 @@ Slider:
       type: number
     orientation:
       init: VERTICAL
-      type: Orientation
+      type:
+        stringenum: Orientation
     thumbTexture:
       nilable: true
-      type: Texture
+      type:
+        uiobject: Texture
     value:
       init: 0
       type: number
@@ -5896,7 +6041,8 @@ Slider:
       inputs: {}
       outputs:
       - name: orientation
-        type: Orientation
+        type:
+          stringenum: Orientation
     GetStepsPerPage:
       inputs: {}
       outputs:
@@ -5909,7 +6055,8 @@ Slider:
       inputs: {}
       outputs:
       - name: texture
-        type: Texture
+        type:
+          uiobject: Texture
     GetValue:
       impl:
         getter:
@@ -5960,7 +6107,8 @@ Slider:
         - name: orientation
       inputs:
       - name: orientation
-        type: Orientation
+        type:
+          stringenum: Orientation
       outputs: {}
     SetStepsPerPage:
       inputs:
@@ -5973,7 +6121,8 @@ Slider:
         - name: thumbTexture
       inputs:
       - name: asset
-        type: Texture
+        type:
+          uiobject: Texture
       outputs: {}
     SetValue:
       inputs:
@@ -5992,7 +6141,8 @@ StatusBar:
   fields:
     fillStyle:
       init: STANDARD
-      type: StatusBarFillStyle
+      type:
+        stringenum: StatusBarFillStyle
     max:
       init: 0
       type: number
@@ -6001,7 +6151,8 @@ StatusBar:
       type: number
     statusBarTexture:
       nilable: true
-      type: Texture
+      type:
+        uiobject: Texture
     value:
       init: 0
       type: number
@@ -6015,7 +6166,8 @@ StatusBar:
       inputs: {}
       outputs:
       - name: fillStyle
-        type: StatusBarFillStyle
+        type:
+          stringenum: StatusBarFillStyle
     GetMinMaxValues:
       impl:
         getter:
@@ -6031,7 +6183,8 @@ StatusBar:
       inputs: {}
       outputs:
       - name: orientation
-        type: Orientation
+        type:
+          stringenum: Orientation
     GetReverseFill:
       inputs: {}
       outputs:
@@ -6067,7 +6220,8 @@ StatusBar:
       inputs: {}
       outputs:
       - name: texture
-        type: Texture
+        type:
+          uiobject: Texture
     GetValue:
       impl:
         getter:
@@ -6099,7 +6253,8 @@ StatusBar:
         - name: fillStyle
       inputs:
       - name: fillStyle
-        type: StatusBarFillStyle
+        type:
+          stringenum: StatusBarFillStyle
       outputs: {}
     SetMinMaxValues:
       impl:
@@ -6115,7 +6270,8 @@ StatusBar:
     SetOrientation:
       inputs:
       - name: orientation
-        type: Orientation
+        type:
+          stringenum: Orientation
       outputs: {}
     SetReverseFill:
       inputs:
@@ -6193,7 +6349,8 @@ TabardModel:
     GetLowerEmblemTexture:
       inputs:
       - name: texture
-        type: Texture
+        type:
+          uiobject: Texture
       outputs: {}
     GetUpperBackgroundFileName:
       inputs: {}
@@ -6208,7 +6365,8 @@ TabardModel:
     GetUpperEmblemTexture:
       inputs:
       - name: texture
-        type: Texture
+        type:
+          uiobject: Texture
       outputs: {}
     InitializeTabardColors:
       inputs: {}
@@ -6229,7 +6387,8 @@ Texture:
     AddMaskTexture:
       inputs:
       - name: mask
-        type: MaskTexture
+        type:
+          uiobject: MaskTexture
       outputs: {}
     GetMaskTexture:
       inputs:
@@ -6237,7 +6396,8 @@ Texture:
         type: number
       outputs:
       - name: mask
-        type: MaskTexture
+        type:
+          uiobject: MaskTexture
     GetNumMaskTextures:
       inputs: {}
       outputs:
@@ -6246,7 +6406,8 @@ Texture:
     RemoveMaskTexture:
       inputs:
       - name: mask
-        type: MaskTexture
+        type:
+          uiobject: MaskTexture
       outputs: {}
 TextureBase:
   fields:
@@ -6255,7 +6416,8 @@ TextureBase:
       type: string
     blendMode:
       init: BLEND
-      type: BlendMode
+      type:
+        stringenum: BlendMode
     blx:
       init: 0
       type: number
@@ -6326,7 +6488,8 @@ TextureBase:
       inputs: {}
       outputs:
       - name: blendMode
-        type: BlendMode
+        type:
+          stringenum: BlendMode
     GetDesaturation:
       inputs: {}
       outputs:
@@ -6460,7 +6623,8 @@ TextureBase:
       - default: LINEAR
         name: filterMode
         permissive: true
-        type: FilterMode
+        type:
+          stringenum: FilterMode
       - name: resetTexCoords
         nilable: true
         type: boolean
@@ -6471,7 +6635,8 @@ TextureBase:
         - name: blendMode
       inputs:
       - name: blendMode
-        type: BlendMode
+        type:
+          stringenum: BlendMode
       outputs: {}
     SetBlockingLoadsRequested:
       inputs:
@@ -6507,7 +6672,8 @@ TextureBase:
     SetGradient:
       inputs:
       - name: orientation
-        type: Orientation
+        type:
+          stringenum: Orientation
       - name: minColor
         type:
           structure: colorRGBA

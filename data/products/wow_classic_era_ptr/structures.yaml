@@ -12,7 +12,8 @@ AddPrivateAuraAnchorArgs:
       type:
         structure: PrivateAuraIconInfo
     parent:
-      type: Frame
+      type:
+        uiobject: Frame
     showCountdownFrame:
       type: boolean
     showCountdownNumbers:
@@ -26,11 +27,14 @@ AnchorBinding:
     offsetY:
       type: number
     point:
-      type: FramePoint
+      type:
+        stringenum: FramePoint
     relativePoint:
-      type: FramePoint
+      type:
+        stringenum: FramePoint
     relativeTo:
-      type: Region
+      type:
+        uiobject: Region
 AppearanceSourceInfo:
   fields:
     canDisplayOnPlayer:
@@ -4107,7 +4111,8 @@ FontScriptInfo:
       type:
         structure: colorRGBA
     fontObject:
-      type: Font
+      type:
+        uiobject: Font
     height:
       type: number
     outline:
@@ -4145,7 +4150,8 @@ GuildTabardInfo:
 HTMLContentNode:
   fields:
     align:
-      type: JustifyHorizontal
+      type:
+        stringenum: JustifyHorizontal
     text:
       type: string
     type:

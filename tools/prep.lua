@@ -41,18 +41,20 @@ end
 local specDefault = (function()
   local defaultOutputs = {
     boolean = 'false',
-    Font = 'api.CreateUIObject("font").luarep',
-    FontString = 'api.CreateUIObject("fontstring").luarep',
     ['function'] = 'function() end',
-    MaskTexture = 'api.CreateUIObject("masktexture").luarep',
     ['nil'] = 'nil',
     number = '1',
     oneornil = 'nil',
-    Region = 'nil',
     string = '\'\'',
     table = '{}',
     unit = '\'player\'',
     unknown = 'nil',
+  }
+  local uiobjectOutputs = {
+    Font = 'api.CreateUIObject("font").luarep',
+    FontString = 'api.CreateUIObject("fontstring").luarep',
+    MaskTexture = 'api.CreateUIObject("masktexture").luarep',
+    Region = 'nil',
   }
   local structureDefaults = {}
   local specDefault
@@ -85,9 +87,9 @@ local specDefault = (function()
     if defaultOutputs[ty] then
       return defaultOutputs[ty]
     end
-    if stringenums[ty] then
+    if ty.stringenum then
       local least
-      for k in pairs(stringenums[ty]) do
+      for k in pairs(stringenums[ty.stringenum]) do
         least = (least == nil or k < least) and k or least
       end
       return ('%q'):format(least)
@@ -107,6 +109,9 @@ local specDefault = (function()
         x = (not x or v < x) and v or x
       end
       return valstr(x)
+    end
+    if ty.uiobject then
+      return uiobjectOutputs[ty.uiobject]
     end
     error('unexpected type: ' .. require('pl.pretty').write(ty))
   end
@@ -292,7 +297,7 @@ for k, v in pairs(uiobjectdata) do
       local t = { 'local api,toTexture,check,Mixin=...;' }
       for i, f in ipairs(mv.impl.setter) do
         local cf = fieldset[f.name]
-        if cf.type ~= 'Texture' then
+        if cf.type.uiobject ~= 'Texture' then
           table.insert(t, 'local spec' .. i .. '=' .. plprettywrite(mv.inputs[i], '') .. ';')
         end
       end
@@ -307,7 +312,7 @@ for k, v in pairs(uiobjectdata) do
         table.insert(t, 'self.')
         table.insert(t, f.name)
         table.insert(t, '=')
-        if cf.type == 'Texture' then
+        if cf.type.uiobject == 'Texture' then
           table.insert(t, 'toTexture(self,' .. f.name .. ',self.')
         else
           table.insert(t, 'check(spec')

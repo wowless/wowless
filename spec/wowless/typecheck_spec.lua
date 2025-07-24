@@ -59,12 +59,12 @@ local tests = {
   },
   ['framepoint type, invalid value'] = {
     out = { nil, 'is of type "FramePoint", which does not have value "NOTAPOINT"' },
-    spec = { type = 'FramePoint' },
+    spec = { type = { stringenum = 'FramePoint' } },
     value = 'notapoint',
   },
   ['framepoint type, valid value'] = {
     out = { 'TOPRIGHT' },
-    spec = { type = 'FramePoint' },
+    spec = { type = { stringenum = 'FramePoint' } },
     value = 'TOPRIGHT',
   },
   ['invalid spec'] = {

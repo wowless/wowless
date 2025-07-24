@@ -444,7 +444,8 @@ C_AchievementInfo.IsValidAchievement:
 C_AchievementInfo.SetPortraitTexture:
   inputs:
   - name: textureObject
-    type: Texture
+    type:
+      uiobject: Texture
   outputs: {}
 C_AchievementTelemetry.LinkAchievementInClub:
   inputs:
@@ -1358,7 +1359,8 @@ C_BarberShop.SetModelDressState:
 C_BarberShop.SetPortraitTexture:
   inputs:
   - name: texture
-    type: Texture
+    type:
+      uiobject: Texture
   - name: raceID
     type: number
   - name: sex
@@ -2921,7 +2923,8 @@ C_Club.SetAutoAdvanceStreamViewMarker:
 C_Club.SetAvatarTexture:
   inputs:
   - name: texture
-    type: Texture
+    type:
+      uiobject: Texture
   - name: avatarId
     type: number
   - name: clubType
@@ -4622,7 +4625,8 @@ C_Container.PickupContainerItem:
 C_Container.SetBagPortraitTexture:
   inputs:
   - name: texture
-    type: Texture
+    type:
+      uiobject: Texture
   - name: bagIndex
     type:
       enum: BagIndex
@@ -8055,26 +8059,30 @@ C_Minimap.SetTracking:
 C_ModelInfo.AddActiveModelScene:
   inputs:
   - name: modelSceneFrame
-    type: ModelScene
+    type:
+      uiobject: ModelScene
   - name: modelSceneID
     type: number
   outputs: {}
 C_ModelInfo.AddActiveModelSceneActor:
   inputs:
   - name: modelSceneFrameActor
-    type: Actor
+    type:
+      uiobject: Actor
   - name: modelSceneActorID
     type: number
   outputs: {}
 C_ModelInfo.ClearActiveModelScene:
   inputs:
   - name: modelSceneFrame
-    type: ModelScene
+    type:
+      uiobject: ModelScene
   outputs: {}
 C_ModelInfo.ClearActiveModelSceneActor:
   inputs:
   - name: modelSceneFrameActor
-    type: Actor
+    type:
+      uiobject: Actor
   outputs: {}
 C_ModelInfo.GetModelSceneActorDisplayInfoByID:
   inputs:
@@ -10187,7 +10195,8 @@ C_System.GetFrameStack:
   outputs:
   - name: objects
     type:
-      arrayof: Region
+      arrayof:
+        uiobject: Region
 C_SystemVisibilityManager.IsSystemVisible:
   inputs:
   - name: system
@@ -10313,7 +10322,8 @@ C_TaxiMap.GetTaxiNodesForMap:
 C_Texture.ClearTitleIconTexture:
   inputs:
   - name: texture
-    type: Texture
+    type:
+      uiobject: Texture
   outputs: {}
 C_Texture.GetAtlasElementID:
   inputs:
@@ -10369,7 +10379,8 @@ C_Texture.IsTitleIconTextureReady:
 C_Texture.SetTitleIconTexture:
   inputs:
   - name: texture
-    type: Texture
+    type:
+      uiobject: Texture
   - name: titleID
     type: string
   - name: version
@@ -12282,7 +12293,8 @@ C_UnitAuras.RemovePrivateAuraAppliedSound:
 C_UnitAuras.SetPrivateWarningTextAnchor:
   inputs:
   - name: parent
-    type: Frame
+    type:
+      uiobject: Frame
   - name: anchor
     nilable: true
     type:
@@ -12811,7 +12823,8 @@ C_VoiceChat.SetOutputVolume:
 C_VoiceChat.SetPortraitTexture:
   inputs:
   - name: textureObject
-    type: Texture
+    type:
+      uiobject: Texture
   - name: memberID
     type: number
   - name: channelID
@@ -13546,7 +13559,8 @@ CreateFont:
     type: string
   outputs:
   - name: font
-    type: Font
+    type:
+      uiobject: Font
 CreateFontFamily:
   inputs:
   - name: name
@@ -13557,7 +13571,8 @@ CreateFontFamily:
         structure: CreateFontFamilyMemberInfo
   outputs:
   - name: fontFamily
-    type: Font
+    type:
+      uiobject: Font
 CreateForbiddenFrame:
   impl: CreateForbiddenFrame
   inputs:
@@ -13568,7 +13583,8 @@ CreateForbiddenFrame:
     type: tostring
   - name: parent
     nilable: true
-    type: Frame
+    type:
+      uiobject: Frame
   - name: template
     nilable: true
     type: string
@@ -13577,7 +13593,8 @@ CreateForbiddenFrame:
     type: number
   outputs:
   - name: frame
-    type: Frame
+    type:
+      uiobject: Frame
 CreateFrame:
   impl: CreateFrame
   inputs:
@@ -13588,7 +13605,8 @@ CreateFrame:
     type: tostring
   - name: parent
     nilable: true
-    type: Frame
+    type:
+      uiobject: Frame
   - name: template
     nilable: true
     type: string
@@ -13597,7 +13615,8 @@ CreateFrame:
     type: number
   outputs:
   - name: frame
-    type: Frame
+    type:
+      uiobject: Frame
 CreateMacro: {}
 CreateNewRaidProfile: {}
 CreateWindow:
@@ -13812,11 +13831,13 @@ EnumerateFrames:
   inputs:
   - name: frame
     nilable: true
-    type: Frame
+    type:
+      uiobject: Frame
   outputs:
   - name: next
     nilable: true
-    type: Frame
+    type:
+      uiobject: Frame
 EnumerateServerChannels:
   inputs: {}
   outputs:
@@ -14581,7 +14602,8 @@ GetClickFrame:
   outputs:
   - name: frame
     nilable: true
-    type: Frame
+    type:
+      uiobject: Frame
 GetClientDisplayExpansionLevel:
   inputs: {}
   outputs:
@@ -15099,7 +15121,8 @@ GetFontStringMetatable:
 GetFrameCPUUsage:
   inputs:
   - name: frame
-    type: Frame
+    type:
+      uiobject: Frame
   - default: false
     name: includeChildren
     type: boolean
@@ -16224,7 +16247,8 @@ GetMouseFoci:
   outputs:
   - name: region
     type:
-      arrayof: Region
+      arrayof:
+        uiobject: Region
 GetMovieDownloadProgress:
   inputs:
   - name: movieId
@@ -19957,7 +19981,8 @@ SetPortraitTexture:
   impl: SetPortraitTexture
   inputs:
   - name: textureObject
-    type: Texture
+    type:
+      uiobject: Texture
   - name: unitToken
     type: unit
   - default: false
@@ -19967,7 +19992,8 @@ SetPortraitTexture:
 SetPortraitTextureFromCreatureDisplayID:
   inputs:
   - name: textureObject
-    type: Texture
+    type:
+      uiobject: Texture
   - name: creatureDisplayID
     type: number
   outputs: {}
@@ -20037,7 +20063,8 @@ SetUIVisibility:
 SetUnitCursorTexture:
   inputs:
   - name: textureObject
-    type: Texture
+    type:
+      uiobject: Texture
   - name: unit
     type: unit
   - name: style
