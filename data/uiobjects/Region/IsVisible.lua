@@ -1,9 +1,5 @@
+local api = ...
+local IsVisible = api.IsVisible
 return function(self)
-  repeat
-    if not self.shown then
-      return false
-    end
-    self = self.parent
-  until not self
-  return true
+  return self.shown and IsVisible(self.parent)
 end

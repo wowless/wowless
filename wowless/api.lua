@@ -181,10 +181,20 @@ local function new(log, maxErrors, product, loglevel)
     DoUpdateVisible(obj, visible and 'OnShow' or 'OnHide')
   end
 
+  local function IsVisible(obj)
+    while obj do
+      if not obj.shown then
+        return false
+      end
+      obj = obj.parent
+    end
+    return true
+  end
+
   local function SetParent(obj, parent)
     if obj.shown then
-      local opv = not obj.parent or obj.parent:IsVisible()
-      local npv = not parent or parent:IsVisible()
+      local opv = IsVisible(obj.parent)
+      local npv = IsVisible(parent)
       DoSetParent(obj, parent)
       if opv ~= npv then
         UpdateVisible(obj, npv)
@@ -259,7 +269,7 @@ local function new(log, maxErrors, product, loglevel)
       log(3, 'running load scripts on %s named %s', objtype.name, GetDebugName(ud))
     end
     RunScript(ud, 'OnLoad')
-    if InheritsFrom(typename, 'region') and ud:IsVisible() then
+    if IsVisible(ud) then
       RunScript(ud, 'OnShow')
     end
     return ud
@@ -328,7 +338,7 @@ local function new(log, maxErrors, product, loglevel)
   local function NextFrame(elapsed)
     time.Advance(elapsed)
     for frame in frames:entries() do
-      if frame:IsVisible() then
+      if IsVisible(frame) then
         RunScript(frame, 'OnUpdate', 1)
       end
     end
@@ -352,6 +362,7 @@ local function new(log, maxErrors, product, loglevel)
     GetParentKey = GetParentKey,
     InheritsFrom = InheritsFrom,
     IsIntrinsicType = IsIntrinsicType,
+    IsVisible = IsVisible,
     log = log,
     NextFrame = NextFrame,
     ParentSub = ParentSub,
