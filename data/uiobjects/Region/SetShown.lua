@@ -1,6 +1,9 @@
 local api = ...
 return function(self, shown)
-  api.UpdateVisible(self, function()
-    self.shown = not not shown
-  end)
+  local oldv = self.shown
+  local newv = not not shown
+  self.shown = newv
+  if oldv ~= newv and (not self.parent or self.parent:IsVisible()) then
+    api.UpdateVisible(self, newv)
+  end
 end

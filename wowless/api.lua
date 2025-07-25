@@ -177,20 +177,18 @@ local function new(log, maxErrors, product, loglevel)
     RunScript(obj, script)
   end
 
-  local function UpdateVisible(obj, fn)
-    local wasVisible = obj:IsVisible()
-    fn()
-    local visibleNow = obj:IsVisible()
-    if wasVisible ~= visibleNow then
-      DoUpdateVisible(obj, visibleNow and 'OnShow' or 'OnHide')
-    end
+  local function UpdateVisible(obj, visible)
+    DoUpdateVisible(obj, visible and 'OnShow' or 'OnHide')
   end
 
   local function SetParent(obj, parent)
-    if obj.IsVisible then
-      UpdateVisible(obj, function()
-        DoSetParent(obj, parent)
-      end)
+    if obj.shown then
+      local opv = not obj.parent or obj.parent:IsVisible()
+      local npv = not parent or parent:IsVisible()
+      DoSetParent(obj, parent)
+      if opv ~= npv then
+        UpdateVisible(obj, npv)
+      end
     else
       DoSetParent(obj, parent)
     end
