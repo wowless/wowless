@@ -6015,6 +6015,9 @@ RegionBase:
     shown:
       init: true
       type: boolean
+    visible:
+      init: true
+      type: boolean
   inherits: {}
   methods:
     GetAlpha:
@@ -6034,7 +6037,8 @@ RegionBase:
         - name: shown
     IsVisible:
       impl:
-        uiobjectimpl: Region/IsVisible
+        getter:
+        - name: visible
     SetAlpha:
       impl:
         uiobjectimpl: Region/SetAlpha

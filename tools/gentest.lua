@@ -197,6 +197,7 @@ local ptablemap = {
       ft.width = nil
       if k == 'EditBox' then
         ft.shown.init = false
+        ft.visible.init = false
       elseif k == 'Font' then
         ft.name.init = 'WowlessFont1'
       elseif k == 'Minimap' then

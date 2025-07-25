@@ -76,7 +76,6 @@ Region/GetScaledRect: {}
 Region/GetTop: {}
 Region/Hide: {}
 Region/IsProtected: {}
-Region/IsVisible: {}
 Region/SetAllPoints: {}
 Region/SetAlpha: {}
 Region/SetPoint: {}

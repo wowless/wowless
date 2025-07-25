@@ -168,21 +168,31 @@ local function new(log, maxErrors, product, loglevel)
     end
   end
 
-  local function DoUpdateVisible(obj, script)
+  local function PropagateVisible(obj)
+    obj.visible = true
     for kid in obj.children:entries() do
       if kid.shown then
-        DoUpdateVisible(kid, script)
+        PropagateVisible(kid)
       end
     end
-    RunScript(obj, script)
+    RunScript(obj, 'OnShow')
+  end
+
+  local function PropagateInvisible(obj)
+    obj.visible = false
+    for kid in obj.children:entries() do
+      if kid.shown then
+        PropagateInvisible(kid)
+      end
+    end
+    RunScript(obj, 'OnHide')
   end
 
   local function UpdateVisible(obj, fn)
-    local wasVisible = obj:IsVisible()
     fn()
-    local visibleNow = obj:IsVisible()
-    if wasVisible ~= visibleNow then
-      DoUpdateVisible(obj, visibleNow and 'OnShow' or 'OnHide')
+    local v = obj.shown and (not obj.parent or obj.parent.visible)
+    if v ~= obj.visible then
+      (v and PropagateVisible or PropagateInvisible)(obj)
     end
   end
 
@@ -251,6 +261,7 @@ local function new(log, maxErrors, product, loglevel)
     for _, template in ipairs(tmpls) do
       template.initAttrs(ud)
     end
+    ud.visible = ud.shown and (not ud.parent or ud.parent.visible)
     for _, template in ipairs(tmpls) do
       template.initKids(ud)
     end
@@ -261,7 +272,7 @@ local function new(log, maxErrors, product, loglevel)
       log(3, 'running load scripts on %s named %s', objtype.name, GetDebugName(ud))
     end
     RunScript(ud, 'OnLoad')
-    if InheritsFrom(typename, 'region') and ud:IsVisible() then
+    if ud.visible then
       RunScript(ud, 'OnShow')
     end
     return ud
