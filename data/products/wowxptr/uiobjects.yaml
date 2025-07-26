@@ -6046,6 +6046,8 @@ Region:
     SetPoint:
       impl:
         uiobjectimpl: Region/SetPoint
+      manualinputs: true
+      outputs: {}
     SetPropagateMouseClicks:
       inputs:
       - name: propagate

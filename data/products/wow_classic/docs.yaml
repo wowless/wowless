@@ -177,6 +177,22 @@ lies:
             to:
               name: button
               type: string
+      SetPoint:
+        _remove:
+          inputs:
+          - name: point
+            type:
+              stringenum: FramePoint
+          - name: relativeTo
+            type:
+              uiobject: Region
+          - name: relativePoint
+            type:
+              stringenum: FramePoint
+          - name: offsetX
+            type: number
+          - name: offsetY
+            type: number
     ScriptObject:
       GetScript:
         outputs:
@@ -312,7 +328,6 @@ skip_uiobject_methods:
     GetRect: {}
     GetSize: {}
     GetWidth: {}
-    SetPoint: {}
   StatusBar:
     SetStatusBarTexture: {}
   TextureBase:
