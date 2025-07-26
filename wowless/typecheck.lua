@@ -87,10 +87,6 @@ return function(api)
     table = function(value)
       return luatypecheck('table', value)
     end,
-    tonumber = function(value)
-      local v = type(value) == 'string' and tonumber(value) or value
-      return type(v) == 'number' and v or nil
-    end,
     tostring = function(value)
       local v = type(value) == 'number' and tostring(value) or value
       return type(v) == 'string' and v or nil

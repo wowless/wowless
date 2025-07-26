@@ -19,7 +19,6 @@ type:
     structure:
       ref: structure
     table: tag
-    tonumber: tag
     tostring: tag
     uiAddon: tag
     uiobject:
