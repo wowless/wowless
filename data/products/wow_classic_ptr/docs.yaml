@@ -154,6 +154,11 @@ lies:
         - _add:
             nilable: true
     Region:
+      GetPoint:
+        outputs:
+          2:
+            _add:
+              nilable: true
       SetPassThroughButtons:
         inputs:
         - _change:
@@ -295,7 +300,6 @@ skip_uiobject_methods:
     GetBottom: {}
     GetHeight: {}
     GetLeft: {}
-    GetPoint: {}
     GetRect: {}
     GetSize: {}
     GetWidth: {}

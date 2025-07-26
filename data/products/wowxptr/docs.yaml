@@ -168,6 +168,12 @@ lies:
         outputs:
         - _add:
             nilable: true
+    Region:
+      GetPoint:
+        outputs:
+          2:
+            _add:
+              nilable: true
     ScriptObject:
       GetScript:
         outputs:
@@ -304,7 +310,6 @@ skip_uiobject_methods:
     GetBottom: {}
     GetHeight: {}
     GetLeft: {}
-    GetPoint: {}
     GetRect: {}
     GetSize: {}
     GetWidth: {}

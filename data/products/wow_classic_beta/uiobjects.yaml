@@ -5491,7 +5491,10 @@ Region:
       inputs:
       - default: 1
         name: anchorIndex
-        type: tonumber
+        type: number
+      - default: false
+        name: resolveCollapsed
+        type: boolean
       mayreturnnothing: true
       outputs:
       - name: point
@@ -5500,7 +5503,7 @@ Region:
       - name: relativeTo
         nilable: true
         type:
-          uiobject: UIObject
+          uiobject: Region
       - name: relativePoint
         type:
           stringenum: FramePoint
