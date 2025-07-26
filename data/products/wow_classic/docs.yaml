@@ -159,6 +159,15 @@ lies:
           2:
             _add:
               nilable: true
+      SetAllPoints:
+        _remove:
+          inputs:
+          - name: relativeTo
+            type:
+              uiobject: Region
+          - default: true
+            name: doResize
+            type: boolean
       SetPassThroughButtons:
         inputs:
         - _change:
@@ -303,7 +312,6 @@ skip_uiobject_methods:
     GetRect: {}
     GetSize: {}
     GetWidth: {}
-    SetAllPoints: {}
     SetPoint: {}
   StatusBar:
     SetStatusBarTexture: {}

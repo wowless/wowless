@@ -5918,6 +5918,8 @@ Region:
     SetAllPoints:
       impl:
         uiobjectimpl: Region/SetAllPoints
+      manualinputs: true
+      outputs: {}
     SetCollapsesLayout:
       inputs:
       - name: collapsesLayout
