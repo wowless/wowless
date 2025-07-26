@@ -12495,6 +12495,16 @@ C_LFGInfo.GetDungeonInfo:
   - name: dungeonInfo
     type:
       structure: C_LFGInfo.LFGDungeonInfo
+C_LFGInfo.GetLevelUpInstances:
+  inputs:
+  - name: currPlayerLevel
+    type: number
+  - name: isRaid
+    type: boolean
+  outputs:
+  - name: instances
+    type:
+      arrayof: number
 C_LFGInfo.GetLFDLockStates:
   inputs: {}
   outputs:
@@ -14929,6 +14939,7 @@ C_PartyInfo.GetInstanceAbandonVoteTime:
     type: number
   - default: 0
     name: timeLeftSeconds
+    stub: 1
     type: number
 C_PartyInfo.GetInviteConfirmationInvalidQueues:
   inputs:
@@ -28447,16 +28458,6 @@ GetLegacyRaidDifficultyID:
   - name: result
     nilable: true
     type: number
-GetLevelUpInstances:
-  inputs:
-  - name: currPlayerLevel
-    type: number
-  - name: isRaid
-    type: boolean
-  outputs:
-  - name: instances
-    type:
-      arrayof: number
 GetLFDChoiceCollapseState:
   inputs:
   - name: LFGCollapseList
