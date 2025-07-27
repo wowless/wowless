@@ -324,7 +324,7 @@ for k, v in pairs(uiobjectdata) do
       table.insert(t, 'local t=toTexture(self,tex,self.')
       table.insert(t, x.field)
       table.insert(t, ');if t then api.SetParent(t,self);if t:GetNumPoints()==0 then t:SetAllPoints()end t:SetShown(')
-      table.insert(t, x.shown)
+      table.insert(t, x.shown or 'true')
       table.insert(t, ');')
       if x.extra then
         table.insert(t, x.extra)

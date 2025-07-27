@@ -1210,7 +1210,6 @@ Button:
         settexture:
           extra: t:SetDrawLayer('HIGHLIGHT')
           field: highlightTexture
-          shown: 'true'
     SetMotionScriptsWhileDisabled:
       impl:
         setter:
@@ -6747,7 +6746,6 @@ StatusBar:
         settexture:
           field: statusBarTexture
           return: true
-          shown: 'true'
     SetValue:
       impl:
         setter:

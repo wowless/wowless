@@ -65,7 +65,6 @@ type:
                             return:
                               type: boolean
                             shown:
-                              required: true
                               type: string
                         uiobjectimpl:
                           ref: uiobjectimpl
