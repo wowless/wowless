@@ -131,11 +131,6 @@ describe('uiobjects', function()
                 end
                 if mv.impl then
                   describe('impl', function()
-                    it('manipulates only declared fields', function()
-                      for _, field in ipairs(mv.impl.getter or mv.impl.setter or {}) do
-                        assert.True(hasMember(k, 'fields', field.name))
-                      end
-                    end)
                     it('has both inputs and outputs, or neither', function()
                       assert.same(not not (mv.inputs or mv.manualinputs), not not mv.outputs)
                     end)
@@ -143,7 +138,7 @@ describe('uiobjects', function()
                       it('has the right prototype', function()
                         local outputs = {}
                         for i, f in ipairs(mv.impl.getter) do
-                          outputs[i] = getMember(k, 'fields', f.name)
+                          outputs[i] = assert(getMember(k, 'fields', f.name))
                         end
                         protocheck(mv, {
                           inputs = {},
@@ -160,12 +155,25 @@ describe('uiobjects', function()
                       it('has the right prototype', function()
                         local inputs = {}
                         for i, f in ipairs(mv.impl.setter) do
-                          inputs[i] = getMember(k, 'fields', f.name)
+                          inputs[i] = assert(getMember(k, 'fields', f.name))
                         end
                         protocheck(mv, {
                           inputs = inputs,
                           outputs = {},
                         })
+                      end)
+                    elseif mv.impl.settexture then
+                      local c = mv.impl.settexture
+                      it('manipulates a declared texture', function()
+                        local f = assert(getMember(k, 'fields', c.field))
+                        assert.same({ uiobject = 'Texture' }, f.type)
+                        assert.True(f.nilable)
+                      end)
+                      it('has declared inputs', function()
+                        assert.Not.Nil(mv.inputs)
+                      end)
+                      it('has declared outputs', function()
+                        assert.Not.Nil(mv.outputs)
                       end)
                     end
                   end)
