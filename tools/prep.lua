@@ -50,12 +50,6 @@ local specDefault = (function()
     unit = '\'player\'',
     unknown = 'nil',
   }
-  local uiobjectOutputs = {
-    Font = 'api.CreateUIObject("font").luarep',
-    FontString = 'api.CreateUIObject("fontstring").luarep',
-    MaskTexture = 'api.CreateUIObject("masktexture").luarep',
-    Region = 'nil',
-  }
   local structureDefaults = {}
   local specDefault
   local function valstruct(name)
@@ -111,7 +105,7 @@ local specDefault = (function()
       return valstr(x)
     end
     if ty.uiobject then
-      return uiobjectOutputs[ty.uiobject]
+      return ('api.CreateUIObject(%q).luarep'):format(ty.uiobject)
     end
     error('unexpected type: ' .. require('pl.pretty').write(ty))
   end

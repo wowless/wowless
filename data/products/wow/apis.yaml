@@ -15653,6 +15653,7 @@ C_PingSecure.GetTargetPingReceiver:
     type: number
   outputs:
   - name: frame
+    nilable: true
     type:
       uiobject: Region
 C_PingSecure.GetTargetWorldPing:
@@ -20247,6 +20248,7 @@ C_System.GetFrameStack:
   inputs: {}
   outputs:
   - name: objects
+    stub: {}
     type:
       arrayof:
         uiobject: Region
@@ -28701,6 +28703,7 @@ GetMouseFoci:
   inputs: {}
   outputs:
   - name: region
+    stub: {}
     type:
       arrayof:
         uiobject: Region

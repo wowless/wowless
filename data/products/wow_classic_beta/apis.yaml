@@ -11642,6 +11642,7 @@ C_System.GetFrameStack:
   inputs: {}
   outputs:
   - name: objects
+    stub: {}
     type:
       arrayof:
         uiobject: Region
@@ -17890,6 +17891,7 @@ GetMouseFoci:
   inputs: {}
   outputs:
   - name: region
+    stub: {}
     type:
       arrayof:
         uiobject: Region
