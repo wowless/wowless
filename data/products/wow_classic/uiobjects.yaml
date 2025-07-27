@@ -6932,6 +6932,27 @@ TextureBase:
     SetTexture:
       impl:
         uiobjectimpl: Texture/SetTexture
+      inputs:
+      - name: textureAsset
+        nilable: true
+        type: string
+      - default: CLAMP
+        name: wrapModeHorizontal
+        permissive: true
+        type:
+          stringenum: WrapMode
+      - default: CLAMP
+        name: wrapModeVertical
+        permissive: true
+        type:
+          stringenum: WrapMode
+      - default: LINEAR
+        name: filterMode
+        type:
+          stringenum: FilterMode
+      outputs:
+      - name: success
+        type: boolean
     SetTextureSliceMargins:
       inputs:
       - name: left

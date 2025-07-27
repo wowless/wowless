@@ -72,3 +72,10 @@ StatusBarFillStyle:
   REVERSE: {}
   STANDARD: {}
   STANDARD_NO_RANGE_FILL: {}
+WrapMode:
+  CLAMP: {}
+  CLAMPTOBLACK: {}
+  CLAMPTOBLACKADDITIVE: {}
+  CLAMPTOWHITE: {}
+  MIRROR: {}
+  REPEAT: {}

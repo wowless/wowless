@@ -307,6 +307,38 @@ lies:
               default: LINEAR
             _remove:
               nilable: true
+      SetTexture:
+        inputs:
+          2:
+            _add:
+              default: CLAMP
+            _remove:
+              nilable: true
+            type:
+              _change:
+                from: string
+                to:
+                  stringenum: WrapMode
+          3:
+            _add:
+              default: CLAMP
+            _remove:
+              nilable: true
+            type:
+              _change:
+                from: string
+                to:
+                  stringenum: WrapMode
+          4:
+            _add:
+              default: LINEAR
+            _remove:
+              nilable: true
+            type:
+              _change:
+                from: string
+                to:
+                  stringenum: FilterMode
 script_objects:
   FrameAPIArchaeologyDigSiteFrame: ArchaeologyDigSiteFrame
   FrameAPIBlob: POIFrame
@@ -392,8 +424,6 @@ skip_uiobject_methods:
     GetWidth: {}
   StatusBar:
     SetStatusBarTexture: {}
-  TextureBase:
-    SetTexture: {}
 typedefs:
   AnimationDataEnum: number
   ArtifactTiers: number
