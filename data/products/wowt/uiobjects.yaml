@@ -1158,7 +1158,9 @@ Button:
       outputs: {}
     SetDisabledTexture:
       impl:
-        uiobjectimpl: Button/SetDisabledTexture
+        settexture:
+          field: disabledTexture
+          shown: self.buttonState == 'DISABLED'
     SetEnabled:
       impl:
         uiobjectimpl: Button/SetEnabled
@@ -1205,7 +1207,10 @@ Button:
       outputs: {}
     SetHighlightTexture:
       impl:
-        uiobjectimpl: Button/SetHighlightTexture
+        settexture:
+          extra: t:SetDrawLayer('HIGHLIGHT')
+          field: highlightTexture
+          shown: 'true'
     SetMotionScriptsWhileDisabled:
       impl:
         setter:
@@ -1232,7 +1237,9 @@ Button:
       outputs: {}
     SetNormalTexture:
       impl:
-        uiobjectimpl: Button/SetNormalTexture
+        settexture:
+          field: normalTexture
+          shown: self.buttonState == 'NORMAL'
     SetPushedAtlas:
       impl:
         uiobjectimpl: Button/SetPushedAtlas
@@ -1253,7 +1260,9 @@ Button:
       outputs: {}
     SetPushedTexture:
       impl:
-        uiobjectimpl: Button/SetPushedTexture
+        settexture:
+          field: pushedTexture
+          shown: self.buttonState == 'PUSHED'
     SetText:
       impl:
         uiobjectimpl: Button/SetText
@@ -1314,7 +1323,9 @@ CheckButton:
       outputs: {}
     SetCheckedTexture:
       impl:
-        uiobjectimpl: CheckButton/SetCheckedTexture
+        settexture:
+          field: checkedTexture
+          shown: self.checked
     SetDisabledCheckedTexture:
       impl:
         setter:
@@ -6733,7 +6744,10 @@ StatusBar:
       outputs: {}
     SetStatusBarTexture:
       impl:
-        uiobjectimpl: StatusBar/SetStatusBarTexture
+        settexture:
+          field: statusBarTexture
+          return: true
+          shown: 'true'
     SetValue:
       impl:
         setter:

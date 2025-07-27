@@ -11,19 +11,14 @@ Button/IsEnabled: {}
 Button/RegisterForClicks: {}
 Button/SetButtonState: {}
 Button/SetDisabledAtlas: {}
-Button/SetDisabledTexture: {}
 Button/SetEnabled: {}
 Button/SetFontString: {}
 Button/SetFormattedText: {}
 Button/SetHighlightAtlas: {}
-Button/SetHighlightTexture: {}
 Button/SetNormalAtlas: {}
-Button/SetNormalTexture: {}
 Button/SetPushedAtlas: {}
-Button/SetPushedTexture: {}
 Button/SetText: {}
 CheckButton/SetChecked: {}
-CheckButton/SetCheckedTexture: {}
 EditBox/Disable: {}
 EditBox/Enable: {}
 EditBox/Insert: {}
@@ -91,7 +86,6 @@ Slider/Disable: {}
 Slider/Enable: {}
 StatusBar/GetStatusBarColor: {}
 StatusBar/SetStatusBarColor: {}
-StatusBar/SetStatusBarTexture: {}
 Texture/GetTexture: {}
 Texture/SetAtlas: {}
 Texture/SetColorTexture: {}

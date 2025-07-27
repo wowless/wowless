@@ -55,6 +55,18 @@ type:
                               name:
                                 required: true
                                 type: string
+                        settexture:
+                          record:
+                            extra:
+                              type: string
+                            field:
+                              required: true
+                              type: string
+                            return:
+                              type: boolean
+                            shown:
+                              required: true
+                              type: string
                         uiobjectimpl:
                           ref: uiobjectimpl
                   inputs:

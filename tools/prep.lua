@@ -318,6 +318,26 @@ for k, v in pairs(uiobjectdata) do
       end
       table.insert(t, 'end')
       methods[mk] = table.concat(t)
+    elseif mv.impl and mv.impl.settexture then
+      local x = mv.impl.settexture
+      local t = { 'local api,toTexture=...;return function(self,tex)' }
+      table.insert(t, 'local t=toTexture(self,tex,self.')
+      table.insert(t, x.field)
+      table.insert(t, ');if t then api.SetParent(t,self);if t:GetNumPoints()==0 then t:SetAllPoints()end t:SetShown(')
+      table.insert(t, x.shown)
+      table.insert(t, ');')
+      if x.extra then
+        table.insert(t, x.extra)
+        table.insert(t, ';')
+      end
+      table.insert(t, 'end self.')
+      table.insert(t, x.field)
+      table.insert(t, '=t;')
+      if x['return'] then
+        table.insert(t, 'return true;')
+      end
+      table.insert(t, 'end')
+      methods[mk] = table.concat(t)
     else
       local t = { 'local api,toTexture,check,Mixin=...;' }
       local ins = mv.inputs or {}
