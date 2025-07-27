@@ -441,8 +441,7 @@ typedefs:
   SpellIdentifier: string
   string: string
   TBFFlags: string
-  TextureAsset:
-    uiobject: Texture
+  TextureAsset: TextureAsset
   TextureAssetDisk: string
   textureAtlas: string
   textureKit: string

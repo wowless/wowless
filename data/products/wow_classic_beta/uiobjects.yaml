@@ -1150,8 +1150,7 @@ CheckButton:
           field: disabledCheckedTexture
       inputs:
       - name: asset
-        type:
-          uiobject: Texture
+        type: TextureAsset
       outputs: {}
 Checkout:
   fieldinitoverrides:
@@ -1423,8 +1422,7 @@ ColorSelect:
           field: colorAlphaThumbTexture
       inputs:
       - name: texture
-        type:
-          uiobject: Texture
+        type: TextureAsset
       outputs: {}
     SetColorHSV:
       inputs:
@@ -1459,8 +1457,7 @@ ColorSelect:
           field: colorValueThumbTexture
       inputs:
       - name: texture
-        type:
-          uiobject: Texture
+        type: TextureAsset
       outputs: {}
     SetColorWheelTexture:
       impl:
@@ -1477,8 +1474,7 @@ ColorSelect:
           field: colorWheelThumbTexture
       inputs:
       - name: texture
-        type:
-          uiobject: Texture
+        type: TextureAsset
       outputs: {}
 ControlPoint:
   fields: {}
@@ -4041,44 +4037,37 @@ Minimap:
     SetBlipTexture:
       inputs:
       - name: asset
-        type:
-          uiobject: Texture
+        type: TextureAsset
       outputs: {}
     SetCorpsePOIArrowTexture:
       inputs:
       - name: asset
-        type:
-          uiobject: Texture
+        type: TextureAsset
       outputs: {}
     SetIconTexture:
       inputs:
       - name: asset
-        type:
-          uiobject: Texture
+        type: TextureAsset
       outputs: {}
     SetMaskTexture:
       inputs:
       - name: asset
-        type:
-          uiobject: Texture
+        type: TextureAsset
       outputs: {}
     SetPlayerTexture:
       inputs:
       - name: asset
-        type:
-          uiobject: Texture
+        type: TextureAsset
       outputs: {}
     SetPOIArrowTexture:
       inputs:
       - name: asset
-        type:
-          uiobject: Texture
+        type: TextureAsset
       outputs: {}
     SetStaticPOIArrowTexture:
       inputs:
       - name: asset
-        type:
-          uiobject: Texture
+        type: TextureAsset
       outputs: {}
     SetZoom:
       inputs:
@@ -6314,8 +6303,7 @@ Slider:
           field: thumbTexture
       inputs:
       - name: asset
-        type:
-          uiobject: Texture
+        type: TextureAsset
       outputs: {}
     SetValue:
       inputs:

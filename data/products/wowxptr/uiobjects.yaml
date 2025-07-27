@@ -1331,8 +1331,7 @@ CheckButton:
           field: disabledCheckedTexture
       inputs:
       - name: asset
-        type:
-          uiobject: Texture
+        type: TextureAsset
       outputs: {}
 Checkout:
   fieldinitoverrides:
@@ -1604,8 +1603,7 @@ ColorSelect:
           field: colorAlphaThumbTexture
       inputs:
       - name: texture
-        type:
-          uiobject: Texture
+        type: TextureAsset
       outputs: {}
     SetColorHSV:
       inputs:
@@ -1640,8 +1638,7 @@ ColorSelect:
           field: colorValueThumbTexture
       inputs:
       - name: texture
-        type:
-          uiobject: Texture
+        type: TextureAsset
       outputs: {}
     SetColorWheelTexture:
       impl:
@@ -1658,8 +1655,7 @@ ColorSelect:
           field: colorWheelThumbTexture
       inputs:
       - name: texture
-        type:
-          uiobject: Texture
+        type: TextureAsset
       outputs: {}
 ControlPoint:
   fields: {}
@@ -4215,8 +4211,7 @@ Minimap:
     SetArchBlobInsideTexture:
       inputs:
       - name: asset
-        type:
-          uiobject: Texture
+        type: TextureAsset
       outputs: {}
     SetArchBlobOutsideAlpha:
       inputs:
@@ -4226,8 +4221,7 @@ Minimap:
     SetArchBlobOutsideTexture:
       inputs:
       - name: asset
-        type:
-          uiobject: Texture
+        type: TextureAsset
       outputs: {}
     SetArchBlobRingAlpha:
       inputs:
@@ -4242,44 +4236,37 @@ Minimap:
     SetArchBlobRingTexture:
       inputs:
       - name: asset
-        type:
-          uiobject: Texture
+        type: TextureAsset
       outputs: {}
     SetBlipTexture:
       inputs:
       - name: asset
-        type:
-          uiobject: Texture
+        type: TextureAsset
       outputs: {}
     SetCorpsePOIArrowTexture:
       inputs:
       - name: asset
-        type:
-          uiobject: Texture
+        type: TextureAsset
       outputs: {}
     SetIconTexture:
       inputs:
       - name: asset
-        type:
-          uiobject: Texture
+        type: TextureAsset
       outputs: {}
     SetMaskTexture:
       inputs:
       - name: asset
-        type:
-          uiobject: Texture
+        type: TextureAsset
       outputs: {}
     SetPlayerTexture:
       inputs:
       - name: asset
-        type:
-          uiobject: Texture
+        type: TextureAsset
       outputs: {}
     SetPOIArrowTexture:
       inputs:
       - name: asset
-        type:
-          uiobject: Texture
+        type: TextureAsset
       outputs: {}
     SetQuestBlobInsideAlpha:
       inputs:
@@ -4289,8 +4276,7 @@ Minimap:
     SetQuestBlobInsideTexture:
       inputs:
       - name: asset
-        type:
-          uiobject: Texture
+        type: TextureAsset
       outputs: {}
     SetQuestBlobOutsideAlpha:
       inputs:
@@ -4300,8 +4286,7 @@ Minimap:
     SetQuestBlobOutsideTexture:
       inputs:
       - name: asset
-        type:
-          uiobject: Texture
+        type: TextureAsset
       outputs: {}
     SetQuestBlobRingAlpha:
       inputs:
@@ -4316,14 +4301,12 @@ Minimap:
     SetQuestBlobRingTexture:
       inputs:
       - name: asset
-        type:
-          uiobject: Texture
+        type: TextureAsset
       outputs: {}
     SetStaticPOIArrowTexture:
       inputs:
       - name: asset
-        type:
-          uiobject: Texture
+        type: TextureAsset
       outputs: {}
     SetTaskBlobInsideAlpha:
       inputs:
@@ -4333,8 +4316,7 @@ Minimap:
     SetTaskBlobInsideTexture:
       inputs:
       - name: asset
-        type:
-          uiobject: Texture
+        type: TextureAsset
       outputs: {}
     SetTaskBlobOutsideAlpha:
       inputs:
@@ -4344,8 +4326,7 @@ Minimap:
     SetTaskBlobOutsideTexture:
       inputs:
       - name: asset
-        type:
-          uiobject: Texture
+        type: TextureAsset
       outputs: {}
     SetTaskBlobRingAlpha:
       inputs:
@@ -4360,8 +4341,7 @@ Minimap:
     SetTaskBlobRingTexture:
       inputs:
       - name: asset
-        type:
-          uiobject: Texture
+        type: TextureAsset
       outputs: {}
     SetZoom:
       inputs:
@@ -6631,8 +6611,7 @@ Slider:
           field: thumbTexture
       inputs:
       - name: asset
-        type:
-          uiobject: Texture
+        type: TextureAsset
       outputs: {}
     SetValue:
       inputs:
