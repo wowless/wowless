@@ -366,13 +366,6 @@ skip_docfiles:
   SimpleModelFFXAPIDocumentation: {}
   WorldSafeLocsUIInternalDocumentation: {}
 skip_uiobject_methods:
-  Button:
-    SetDisabledTexture: {}
-    SetHighlightTexture: {}
-    SetNormalTexture: {}
-    SetPushedTexture: {}
-  CheckButton:
-    SetCheckedTexture: {}
   Region:
     GetBottom: {}
     GetHeight: {}
@@ -380,8 +373,6 @@ skip_uiobject_methods:
     GetRect: {}
     GetSize: {}
     GetWidth: {}
-  StatusBar:
-    SetStatusBarTexture: {}
 typedefs:
   AnimationDataEnum: number
   ArtifactTiers: number

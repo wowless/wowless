@@ -1161,6 +1161,10 @@ Button:
         settexture:
           field: disabledTexture
           shown: self.buttonState == 'DISABLED'
+      inputs:
+      - name: asset
+        type: TextureAsset
+      outputs: {}
     SetEnabled:
       impl:
         uiobjectimpl: Button/SetEnabled
@@ -1210,6 +1214,14 @@ Button:
         settexture:
           extra: t:SetDrawLayer('HIGHLIGHT')
           field: highlightTexture
+      inputs:
+      - name: asset
+        type: TextureAsset
+      - name: blendMode
+        nilable: true
+        type:
+          stringenum: BlendMode
+      outputs: {}
     SetMotionScriptsWhileDisabled:
       impl:
         setter:
@@ -1239,6 +1251,10 @@ Button:
         settexture:
           field: normalTexture
           shown: self.buttonState == 'NORMAL'
+      inputs:
+      - name: asset
+        type: TextureAsset
+      outputs: {}
     SetPushedAtlas:
       impl:
         uiobjectimpl: Button/SetPushedAtlas
@@ -1262,6 +1278,10 @@ Button:
         settexture:
           field: pushedTexture
           shown: self.buttonState == 'PUSHED'
+      inputs:
+      - name: asset
+        type: TextureAsset
+      outputs: {}
     SetText:
       impl:
         uiobjectimpl: Button/SetText
@@ -1325,6 +1345,10 @@ CheckButton:
         settexture:
           field: checkedTexture
           shown: self.checked
+      inputs:
+      - name: asset
+        type: TextureAsset
+      outputs: {}
     SetDisabledCheckedTexture:
       impl:
         settexture:
@@ -6802,6 +6826,12 @@ StatusBar:
         settexture:
           field: statusBarTexture
           return: true
+      inputs:
+      - name: asset
+        type: TextureAsset
+      outputs:
+      - name: success
+        type: boolean
     SetValue:
       impl:
         setter:
