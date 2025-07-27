@@ -1140,8 +1140,8 @@ CheckButton:
           shown: self.checked
     SetDisabledCheckedTexture:
       impl:
-        setter:
-        - name: disabledCheckedTexture
+        settexture:
+          field: disabledCheckedTexture
       inputs:
       - name: asset
         type:
@@ -1413,8 +1413,8 @@ ColorSelect:
       outputs: {}
     SetColorAlphaThumbTexture:
       impl:
-        setter:
-        - name: colorAlphaThumbTexture
+        settexture:
+          field: colorAlphaThumbTexture
       inputs:
       - name: texture
         type:
@@ -1449,8 +1449,8 @@ ColorSelect:
       outputs: {}
     SetColorValueThumbTexture:
       impl:
-        setter:
-        - name: colorValueThumbTexture
+        settexture:
+          field: colorValueThumbTexture
       inputs:
       - name: texture
         type:
@@ -1467,8 +1467,8 @@ ColorSelect:
       outputs: {}
     SetColorWheelThumbTexture:
       impl:
-        setter:
-        - name: colorWheelThumbTexture
+        settexture:
+          field: colorWheelThumbTexture
       inputs:
       - name: texture
         type:
@@ -6134,8 +6134,8 @@ Slider:
       outputs: {}
     SetThumbTexture:
       impl:
-        setter:
-        - name: thumbTexture
+        settexture:
+          field: thumbTexture
       inputs:
       - name: asset
         type:
