@@ -105,7 +105,7 @@ local specDefault = (function()
       return valstr(x)
     end
     if ty.uiobject then
-      return ('api.CreateUIObject(%q).luarep'):format(ty.uiobject)
+      return ('api.CreateUIObject(%q).luarep'):format(ty.uiobject:lower())
     end
     error('unexpected type: ' .. require('pl.pretty').write(ty))
   end
