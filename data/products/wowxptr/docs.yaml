@@ -249,6 +249,12 @@ lies:
             8:
               name: lry
               type: number
+      GetTexture:
+        outputs:
+        - type:
+            _change:
+              from: string
+              to: FileAsset
       SetAtlas:
         inputs:
           1:
@@ -345,7 +351,6 @@ skip_uiobject_methods:
   StatusBar:
     SetStatusBarTexture: {}
   TextureBase:
-    GetTexture: {}
     SetTexture: {}
 typedefs:
   AnimationDataEnum: number

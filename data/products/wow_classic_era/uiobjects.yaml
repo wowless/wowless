@@ -6555,6 +6555,11 @@ TextureBase:
     GetTexture:
       impl:
         uiobjectimpl: Texture/GetTexture
+      inputs: {}
+      outputs:
+      - name: textureFile
+        nilable: true
+        type: FileAsset
     GetTextureFileID:
       inputs: {}
       outputs:
