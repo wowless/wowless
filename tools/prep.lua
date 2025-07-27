@@ -288,12 +288,9 @@ for k, v in pairs(uiobjectdata) do
       table.insert(t, 'end')
       methods[mk] = table.concat(t)
     elseif mv.impl and mv.impl.setter then
-      local t = { 'local api,toTexture,check,Mixin=...;' }
-      for i, f in ipairs(mv.impl.setter) do
-        local cf = fieldset[f.name]
-        if cf.type.uiobject ~= 'Texture' then
-          table.insert(t, 'local spec' .. i .. '=' .. plprettywrite(mv.inputs[i], '') .. ';')
-        end
+      local t = { 'local api,_,check,Mixin=...;' }
+      for i in ipairs(mv.impl.setter) do
+        table.insert(t, 'local spec' .. i .. '=' .. plprettywrite(mv.inputs[i], '') .. ';')
       end
       table.insert(t, 'return function(self')
       for _, f in ipairs(mv.impl.setter) do
@@ -302,17 +299,11 @@ for k, v in pairs(uiobjectdata) do
       end
       table.insert(t, ')')
       for i, f in ipairs(mv.impl.setter) do
-        local cf = fieldset[f.name]
         table.insert(t, 'self.')
         table.insert(t, f.name)
-        table.insert(t, '=')
-        if cf.type.uiobject == 'Texture' then
-          table.insert(t, 'toTexture(self,' .. f.name .. ',self.')
-        else
-          table.insert(t, 'check(spec')
-          table.insert(t, tostring(i))
-          table.insert(t, ',')
-        end
+        table.insert(t, '=check(spec')
+        table.insert(t, tostring(i))
+        table.insert(t, ',')
         table.insert(t, f.name)
         table.insert(t, ');')
       end
@@ -339,7 +330,7 @@ for k, v in pairs(uiobjectdata) do
       table.insert(t, 'end')
       methods[mk] = table.concat(t)
     else
-      local t = { 'local api,toTexture,check,Mixin=...;' }
+      local t = { 'local api,_,check,Mixin=...;' }
       local ins = mv.inputs or {}
       local nsins = #ins - (mv.instride or 0)
       for i = 1, #ins do
