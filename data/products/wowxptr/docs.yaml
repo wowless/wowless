@@ -9,6 +9,10 @@ lies:
       outputs:
       - _add:
           nilable: true
+    C_PingSecure.GetTargetPingReceiver:
+      outputs:
+      - _add:
+          nilable: true
     GetSpecializationInfoForClassID:
       _add:
         mayreturnnothing: true
