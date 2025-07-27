@@ -61,6 +61,15 @@ return function(api)
         return not not value
       end
     end,
+    FileAsset = function(value, isout)
+      local ty = type(value)
+      local notnors = ty ~= 'number' and ty ~= 'string'
+      if isout then
+        return value, notnors
+      else
+        return tonumber(value) or tostring(value), notnors
+      end
+    end,
     gender = function(value)
       return tonumber(value) or 0
     end,

@@ -404,7 +404,7 @@ typedefs:
   CScriptObject:
     uiobject: UIObject
   cstring: string
-  FileAsset: string
+  FileAsset: FileAsset
   fileID: number
   FontAlphabet: string
   GarrisonFollower: string
