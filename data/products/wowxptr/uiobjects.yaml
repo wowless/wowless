@@ -3990,7 +3990,8 @@ GameTooltip:
     GetCustomLineSpacing: {}
     GetMinimumWidth:
       outputs:
-      - type: number
+      - name: minimumWidth
+        type: number
     GetOwner:
       impl:
         getter:

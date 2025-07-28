@@ -228,8 +228,8 @@ describe('uiobjects', function()
                   end)
                 end
                 describe('outputs', function()
-                  for i, output in ipairs(mv.outputs or {}) do
-                    describe(output.name or i, function()
+                  for _, output in ipairs(mv.outputs or {}) do
+                    describe(output.name, function()
                       if output.stub ~= nil then
                         it('has stub of the right type', function()
                           typecheck(output, output.stub)
@@ -248,20 +248,11 @@ describe('uiobjects', function()
                       end
                     end)
                   end
-                  it('either all have names or none have names', function()
-                    local named = 0
-                    for _, output in ipairs(mv.outputs or {}) do
-                      named = named + (output.name and 1 or 0)
-                    end
-                    assert.True(named == 0 or named == #mv.outputs)
-                  end)
                   it('are uniquely named', function()
                     local names = {}
                     for _, output in ipairs(mv.outputs or {}) do
-                      if output.name then
-                        assert.Nil(names[output.name])
-                        names[output.name] = true
-                      end
+                      assert.Nil(names[output.name])
+                      names[output.name] = true
                     end
                   end)
                 end)
