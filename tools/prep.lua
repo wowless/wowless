@@ -231,23 +231,6 @@ local function mkuiobjectinit(k)
   end
   return init
 end
--- Getters can manipulate inherited fields, so we need that info.
-local uiobjectfieldsets = {}
-local function mkuiobjectfieldset(k)
-  local set = uiobjectfieldsets[k]
-  if not set then
-    set = {}
-    local v = uiobjectdata[k]
-    for inh in pairs(v.inherits) do
-      Mixin(set, mkuiobjectfieldset(inh))
-    end
-    for fk, fv in pairs(v.fields) do
-      set[fk] = fv
-    end
-    uiobjectfieldsets[k] = set
-  end
-  return set
-end
 local uiobjects = {}
 for k, v in pairs(uiobjectdata) do
   local constructor = { 'local hlist=...;return function()return{' }
@@ -255,7 +238,6 @@ for k, v in pairs(uiobjectdata) do
     table.insert(constructor, ('%s=%s,'):format(fk, fv))
   end
   table.insert(constructor, '}end')
-  local fieldset = mkuiobjectfieldset(k)
   local methods = {}
   for mk, mv in pairs(v.methods) do
     if mv.impl and mv.impl.uiobjectimpl then
@@ -272,14 +254,8 @@ for k, v in pairs(uiobjectdata) do
       }
     elseif mv.impl and mv.impl.getter then
       local t = { 'local _,_,check=...;' }
-      for i, f in ipairs(mv.impl.getter) do
-        local cf = fieldset[f.name]
-        table.insert(t, 'local spec' .. i .. '=')
-        local output = { -- issue #434
-          nilable = cf.nilable,
-          type = cf.type,
-        }
-        table.insert(t, plprettywrite(output, '') .. ';')
+      for i in ipairs(mv.impl.getter) do
+        table.insert(t, 'local spec' .. i .. '=' .. plprettywrite(mv.outputs[i], '') .. ';')
       end
       table.insert(t, 'return function(self)return ')
       for i, f in ipairs(mv.impl.getter) do

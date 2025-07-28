@@ -23,7 +23,7 @@ describe('uiobjects', function()
           local a = actual.outputs[i]
           assert.same(x.type, a.type)
           -- e.g. nilable getter arg can have a non-nilable field
-          -- assert.True(not a.nilable or x.nilable) issue #434
+          assert.True(not a.nilable or x.nilable)
         end
       end
       assert.same(expected.instride, actual.instride)
