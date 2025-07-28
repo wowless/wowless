@@ -172,7 +172,7 @@ local function t2nty(field, ns)
     return { stringenum = t }
   elseif typedefs[t] then
     used_typedefs[t] = true
-    return typedefs[t]
+    return typedefs[t].type
   end
   local n = ns and tys[ns .. '.' .. t] and (ns .. '.' .. t) or t
   n = structRewrites[n] or n

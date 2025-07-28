@@ -374,95 +374,169 @@ skip_uiobject_methods:
     GetSize: {}
     GetWidth: {}
 typedefs:
-  AnimationDataEnum: number
-  ArtifactTiers: number
-  BigInteger: number
-  BigUInteger: number
-  bool: boolean
-  CalendarEventID: string
-  ChatBubbleFrame: table
-  ClickButton: string
-  ClubId: string
-  ClubInvitationId: string
-  ClubStreamId: string
-  ConnectionIptype: string
+  AnimationDataEnum:
+    type: number
+  ArtifactTiers:
+    type: number
+  BigInteger:
+    type: number
+  BigUInteger:
+    type: number
+  bool:
+    type: boolean
+  CalendarEventID:
+    type: string
+  ChatBubbleFrame:
+    type: table
+  ClickButton:
+    type: string
+  ClubId:
+    type: string
+  ClubInvitationId:
+    type: string
+  ClubStreamId:
+    type: string
+  ConnectionIptype:
+    type: string
   CScriptObject:
-    uiobject: UIObject
-  cstring: string
-  FileAsset: string
-  fileID: number
-  FontAlphabet: string
-  GarrisonFollower: string
-  HTMLTextType: string
-  IDOrLink: string
-  InventorySlots: number
-  ItemInfo: string
-  kstringClubMessage: string
-  kstringLfgListApplicant: string
-  kstringLfgListChat: string
-  kstringLfgListSearch: string
-  luaFunction: function
-  luaIndex: number
-  LuaValueVariant: table
-  ModelAsset: string
+    type:
+      uiobject: UIObject
+  cstring:
+    type: string
+  FileAsset:
+    type: string
+  fileID:
+    type: number
+  FontAlphabet:
+    type: string
+  GarrisonFollower:
+    type: string
+  HTMLTextType:
+    type: string
+  IDOrLink:
+    type: string
+  InventorySlots:
+    type: number
+  ItemInfo:
+    type: string
+  kstringClubMessage:
+    type: string
+  kstringLfgListApplicant:
+    type: string
+  kstringLfgListChat:
+    type: string
+  kstringLfgListSearch:
+    type: string
+  luaFunction:
+    type: function
+  luaIndex:
+    type: number
+  LuaValueVariant:
+    type: table
+  ModelAsset:
+    type: string
   ModelSceneFrame:
-    uiobject: ModelScene
+    type:
+      uiobject: ModelScene
   ModelSceneFrameActor:
-    uiobject: Actor
-  MouseButton: string
-  mouseButton: string
-  NamePlateFrame: table
-  normalizedValue: number
-  NotificationDbId: string
-  number: number
-  QuestObjectiveType: number
-  RecruitAcceptanceID: string
+    type:
+      uiobject: Actor
+  MouseButton:
+    type: string
+  mouseButton:
+    type: string
+  NamePlateFrame:
+    type: table
+  normalizedValue:
+    type: number
+  NotificationDbId:
+    type: string
+  number:
+    type: number
+  QuestObjectiveType:
+    type: number
+  RecruitAcceptanceID:
+    type: string
   ScriptRegion:
-    uiobject: Region
-  SendChatMessageType: string
+    type:
+      uiobject: Region
+  SendChatMessageType:
+    type: string
   SimpleAnim:
-    uiobject: Animation
+    type:
+      uiobject: Animation
   SimpleAnimGroup:
-    uiobject: AnimationGroup
+    type:
+      uiobject: AnimationGroup
   SimpleControlPoint:
-    uiobject: ControlPoint
+    type:
+      uiobject: ControlPoint
   SimpleFont:
-    uiobject: Font
+    type:
+      uiobject: Font
   SimpleFontString:
-    uiobject: FontString
+    type:
+      uiobject: FontString
   SimpleFrame:
-    uiobject: Frame
+    type:
+      uiobject: Frame
   SimpleLine:
-    uiobject: Line
+    type:
+      uiobject: Line
   SimpleMaskTexture:
-    uiobject: MaskTexture
+    type:
+      uiobject: MaskTexture
   SimplePathAnim:
-    uiobject: Path
+    type:
+      uiobject: Path
   SimpleRegion:
-    uiobject: Region
+    type:
+      uiobject: Region
   SimpleTexture:
-    uiobject: Texture
-  SimpleWindow: nil
-  SingleColorValue: number
-  size: number
-  SpellIdentifier: string
-  string: string
-  stringView: string
-  TBFFlags: string
-  TextureAsset: TextureAsset
-  TextureAssetDisk: string
-  textureAtlas: string
-  textureKit: string
-  time_t: number
-  TooltipComparisonItem: table
-  uiAddon: uiAddon
-  uiFontHeight: number
-  UiMapPoint: table
-  uiUnit: number
-  UnitToken: unit
-  WeeklyRewardItemDBID: string
-  WOWGUID: string
-  WOWMONEY: number
+    type:
+      uiobject: Texture
+  SimpleWindow:
+    type: nil
+  SingleColorValue:
+    type: number
+  size:
+    type: number
+  SpellIdentifier:
+    type: string
+  string:
+    type: string
+  stringView:
+    type: string
+  TBFFlags:
+    type: string
+  TextureAsset:
+    type: TextureAsset
+  TextureAssetDisk:
+    type: string
+  textureAtlas:
+    type: string
+  textureKit:
+    type: string
+  time_t:
+    type: number
+  TooltipComparisonItem:
+    type: table
+  uiAddon:
+    type: uiAddon
+  uiFontHeight:
+    type: number
+  UiMapPoint:
+    type: table
+  uiUnit:
+    type: number
+  UnitToken:
+    type: unit
+  WeeklyRewardItemDBID:
+    type: string
+  WOWGUID:
+    type: string
+  WOWMONEY:
+    type: number
 uiobject_method_reassignments:
   FontString:
     SetJustifyH: FontInstance
