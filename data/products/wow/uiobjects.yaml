@@ -3855,6 +3855,10 @@ GameTooltip:
       impl:
         getter:
         - name: tooltipAnchorType
+      inputs: {}
+      outputs:
+      - name: anchorType
+        type: string
     GetCustomLineSpacing: {}
     GetMinimumWidth:
       outputs:
@@ -3863,6 +3867,12 @@ GameTooltip:
       impl:
         getter:
         - name: tooltipOwner
+      inputs: {}
+      outputs:
+      - name: owner
+        nilable: true
+        type:
+          uiobject: Frame
     GetPadding: {}
     IsOwned:
       impl:
@@ -3878,6 +3888,10 @@ GameTooltip:
       impl:
         getter:
         - name: tooltipLines
+      inputs: {}
+      outputs:
+      - name: numLines
+        type: number
     SetAllowShowWithNoLines: {}
     SetAnchorType: {}
     SetCustomLineSpacing: {}
