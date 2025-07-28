@@ -2580,10 +2580,20 @@ FontInstance:
       impl:
         getter:
         - name: justifyh
+      inputs: {}
+      outputs:
+      - name: justifyH
+        type:
+          stringenum: JustifyHorizontal
     GetJustifyV:
       impl:
         getter:
         - name: justifyv
+      inputs: {}
+      outputs:
+      - name: justifyV
+        type:
+          stringenum: JustifyVertical
     GetShadowColor:
       outputs:
       - type: number
