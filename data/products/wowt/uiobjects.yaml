@@ -926,6 +926,10 @@ Button:
       init: NORMAL
       type:
         stringenum: SimpleButtonStateToken
+    disabledFontObject:
+      nilable: true
+      type:
+        uiobject: Font
     disabledTexture:
       nilable: true
       type:
@@ -934,6 +938,10 @@ Button:
       nilable: true
       type:
         uiobject: FontString
+    highlightFontObject:
+      nilable: true
+      type:
+        uiobject: Font
     highlightTexture:
       nilable: true
       type:
@@ -1009,6 +1017,9 @@ Button:
         type:
           stringenum: SimpleButtonStateToken
     GetDisabledFontObject:
+      impl:
+        getter:
+        - name: disabledFontObject
       inputs: {}
       outputs:
       - name: font
@@ -1034,6 +1045,9 @@ Button:
         type:
           uiobject: FontString
     GetHighlightFontObject:
+      impl:
+        getter:
+        - name: highlightFontObject
       inputs: {}
       outputs:
       - name: font
@@ -1155,6 +1169,9 @@ Button:
         type: string
       outputs: {}
     SetDisabledFontObject:
+      impl:
+        setter:
+        - name: disabledFontObject
       inputs:
       - name: font
         type:
@@ -1208,6 +1225,9 @@ Button:
           stringenum: BlendMode
       outputs: {}
     SetHighlightFontObject:
+      impl:
+        setter:
+        - name: highlightFontObject
       inputs:
       - name: font
         type:
