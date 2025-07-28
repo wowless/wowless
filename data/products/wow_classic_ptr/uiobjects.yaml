@@ -6119,6 +6119,7 @@ ScrollFrame:
       inputs: {}
       outputs:
       - name: scrollChild
+        nilable: true
         type:
           uiobject: Frame
     GetVerticalScroll:

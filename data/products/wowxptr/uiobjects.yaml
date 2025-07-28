@@ -3300,6 +3300,7 @@ Frame:
       inputs: {}
       outputs:
       - name: children
+        nilable: true
         type:
           uiobject: Frame
       outstride: 1
@@ -6427,6 +6428,7 @@ ScrollFrame:
       inputs: {}
       outputs:
       - name: scrollChild
+        nilable: true
         type:
           uiobject: Frame
     GetVerticalScroll:

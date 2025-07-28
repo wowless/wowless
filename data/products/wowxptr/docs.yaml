@@ -480,6 +480,7 @@ typedefs:
     type:
       uiobject: FontString
   SimpleFrame:
+    outnil: true
     type:
       uiobject: Frame
   SimpleLine:

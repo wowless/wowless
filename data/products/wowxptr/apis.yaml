@@ -24556,6 +24556,7 @@ C_UI.GetUIParent:
   inputs: {}
   outputs:
   - name: uiParent
+    nilable: true
     type:
       uiobject: Frame
 C_UI.GetWorldFrame:
@@ -24563,6 +24564,7 @@ C_UI.GetWorldFrame:
   inputs: {}
   outputs:
   - name: worldFrame
+    nilable: true
     type:
       uiobject: Frame
 C_UI.Reload:
