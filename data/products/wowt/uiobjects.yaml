@@ -6490,11 +6490,41 @@ SimpleHTML:
       outputs:
       - name: height
         type: number
+    GetFont:
+      inputs:
+      - name: textType
+        type: string
+      outputs:
+      - name: fontFile
+        type: string
+      - name: height
+        type: number
+      - name: flags
+        type: string
+      override: true
+    GetFontObject:
+      inputs:
+      - name: textType
+        type: string
+      outputs:
+      - name: font
+        nilable: true
+        type:
+          uiobject: Font
+      override: true
     GetHyperlinkFormat:
       inputs: {}
       outputs:
       - name: format
         type: string
+    GetIndentedWordWrap:
+      inputs:
+      - name: textType
+        type: string
+      outputs:
+      - name: wordWrap
+        type: boolean
+      override: true
     GetJustifyH:
       inputs:
       - name: textType
@@ -6513,6 +6543,52 @@ SimpleHTML:
         type:
           stringenum: JustifyVertical
       override: true
+    GetShadowColor:
+      inputs:
+      - name: textType
+        type: string
+      outputs:
+      - name: colorR
+        type: number
+      - name: colorG
+        type: number
+      - name: colorB
+        type: number
+      - name: colorA
+        type: number
+      override: true
+    GetShadowOffset:
+      inputs:
+      - name: textType
+        type: string
+      outputs:
+      - name: offsetX
+        type: number
+      - name: offsetY
+        type: number
+      override: true
+    GetSpacing:
+      inputs:
+      - name: textType
+        type: string
+      outputs:
+      - name: spacing
+        type: number
+      override: true
+    GetTextColor:
+      inputs:
+      - name: textType
+        type: string
+      outputs:
+      - name: colorR
+        type: number
+      - name: colorG
+        type: number
+      - name: colorB
+        type: number
+      - name: colorA
+        type: number
+      override: true
     GetTextData:
       inputs: {}
       outputs:
@@ -6520,11 +6596,40 @@ SimpleHTML:
         type:
           arrayof:
             structure: HTMLContentNode
+    SetFont:
+      inputs:
+      - name: textType
+        type: string
+      - name: fontFile
+        type: string
+      - name: height
+        type: number
+      - name: flags
+        type: string
+      outputs: {}
+      override: true
+    SetFontObject:
+      inputs:
+      - name: textType
+        type: string
+      - name: font
+        type:
+          uiobject: Font
+      outputs: {}
+      override: true
     SetHyperlinkFormat:
       inputs:
       - name: format
         type: string
       outputs: {}
+    SetIndentedWordWrap:
+      inputs:
+      - name: textType
+        type: string
+      - name: wordWrap
+        type: boolean
+      outputs: {}
+      override: true
     SetJustifyH:
       inputs:
       - name: textType
@@ -6543,6 +6648,39 @@ SimpleHTML:
           stringenum: JustifyVertical
       outputs: {}
       override: true
+    SetShadowColor:
+      inputs:
+      - name: textType
+        type: string
+      - name: colorR
+        type: number
+      - name: colorG
+        type: number
+      - name: colorB
+        type: number
+      - name: a
+        nilable: true
+        type: number
+      outputs: {}
+      override: true
+    SetShadowOffset:
+      inputs:
+      - name: textType
+        type: string
+      - name: offsetX
+        type: number
+      - name: offsetY
+        type: number
+      outputs: {}
+      override: true
+    SetSpacing:
+      inputs:
+      - name: textType
+        type: string
+      - name: spacing
+        type: number
+      outputs: {}
+      override: true
     SetText:
       inputs:
       - name: text
@@ -6551,6 +6689,21 @@ SimpleHTML:
         name: ignoreMarkup
         type: boolean
       outputs: {}
+    SetTextColor:
+      inputs:
+      - name: textType
+        type: string
+      - name: colorR
+        type: number
+      - name: colorG
+        type: number
+      - name: colorB
+        type: number
+      - name: a
+        nilable: true
+        type: number
+      outputs: {}
+      override: true
 Slider:
   fieldinitoverrides:
     mouseClickEnabled: true
