@@ -5709,32 +5709,65 @@ RegionBase:
       impl:
         getter:
         - name: alpha
+      inputs: {}
+      outputs:
+      - name: alpha
+        type: number
     GetScale:
       impl:
         getter:
         - name: scale
+      inputs: {}
+      outputs:
+      - name: scale
+        type: number
     Hide:
       impl:
         uiobjectimpl: Region/Hide
+      inputs: {}
+      outputs: {}
     IsShown:
       impl:
         getter:
         - name: shown
+      inputs: {}
+      outputs:
+      - name: isShown
+        type: boolean
     IsVisible:
       impl:
         uiobjectimpl: Region/IsVisible
+      inputs: {}
+      outputs:
+      - name: isVisible
+        type: boolean
     SetAlpha:
       impl:
         uiobjectimpl: Region/SetAlpha
+      inputs:
+      - name: alpha
+        type: number
+      outputs: {}
     SetScale:
       impl:
         uiobjectimpl: Region/SetScale
+      inputs:
+      - name: scale
+        type: number
+      outputs: {}
     SetShown:
       impl:
         uiobjectimpl: Region/SetShown
+      inputs:
+      - default: false
+        name: show
+        type: boolean
+      outputs: {}
     Show:
       impl:
         uiobjectimpl: Region/Show
+      inputs: {}
+      outputs: {}
   virtual: true
 Rotation:
   fields: {}

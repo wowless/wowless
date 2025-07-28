@@ -517,11 +517,20 @@ uiobject_method_reassignments:
     SetJustifyH: FontInstance
     SetJustifyV: FontInstance
   Region:
+    GetAlpha: RegionBase
     GetDrawLayer: LayeredRegion
+    GetScale: RegionBase
     GetScript: ScriptObject
     GetVertexColor: LayeredRegion
     HasScript: ScriptObject
+    Hide: RegionBase
     HookScript: ScriptObject
+    IsShown: RegionBase
+    IsVisible: RegionBase
+    SetAlpha: RegionBase
     SetDrawLayer: LayeredRegion
+    SetScale: RegionBase
     SetScript: ScriptObject
+    SetShown: RegionBase
     SetVertexColor: LayeredRegion
+    Show: RegionBase
