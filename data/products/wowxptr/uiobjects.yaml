@@ -2769,7 +2769,11 @@ FontInstance:
         nilable: true
         type:
           uiobject: FontInstance
-    GetIndentedWordWrap: {}
+    GetIndentedWordWrap:
+      inputs: {}
+      outputs:
+      - name: wrap
+        type: boolean
     GetJustifyH:
       impl:
         getter:
@@ -2789,24 +2793,47 @@ FontInstance:
         type:
           stringenum: JustifyVertical
     GetShadowColor:
+      inputs: {}
       outputs:
-      - type: number
-      - type: number
-      - type: number
+      - name: colorR
+        type: number
+      - name: colorG
+        type: number
+      - name: colorB
+        type: number
+      - name: colorA
+        type: number
     GetShadowOffset:
+      inputs: {}
       outputs:
-      - type: number
+      - name: offsetX
+        type: number
+      - name: offsetY
+        type: number
     GetSpacing:
+      inputs: {}
       outputs:
-      - type: number
+      - name: spacing
+        type: number
     GetTextColor:
+      inputs: {}
+      mayreturnnothing: true
       outputs:
-      - type: number
-      - type: number
-      - type: number
+      - name: colorR
+        type: number
+      - name: colorG
+        type: number
+      - name: colorB
+        type: number
+      - name: colorA
+        type: number
     SetFont: {}
     SetFontObject: {}
-    SetIndentedWordWrap: {}
+    SetIndentedWordWrap:
+      inputs:
+      - name: wrap
+        type: boolean
+      outputs: {}
     SetJustifyH:
       impl:
         setter:
@@ -2825,10 +2852,42 @@ FontInstance:
         type:
           stringenum: JustifyVertical
       outputs: {}
-    SetShadowColor: {}
-    SetShadowOffset: {}
-    SetSpacing: {}
-    SetTextColor: {}
+    SetShadowColor:
+      inputs:
+      - name: colorR
+        type: number
+      - name: colorG
+        type: number
+      - name: colorB
+        type: number
+      - name: a
+        nilable: true
+        type: number
+      outputs: {}
+    SetShadowOffset:
+      inputs:
+      - name: offsetX
+        type: number
+      - name: offsetY
+        type: number
+      outputs: {}
+    SetSpacing:
+      inputs:
+      - name: spacing
+        type: number
+      outputs: {}
+    SetTextColor:
+      inputs:
+      - name: colorR
+        type: number
+      - name: colorG
+        type: number
+      - name: colorB
+        type: number
+      - name: a
+        nilable: true
+        type: number
+      outputs: {}
   virtual: true
 FontString:
   fields:

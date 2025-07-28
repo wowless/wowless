@@ -567,10 +567,20 @@ typedefs:
     type: number
 uiobject_method_reassignments:
   FontString:
+    GetIndentedWordWrap: FontInstance
     GetJustifyH: FontInstance
     GetJustifyV: FontInstance
+    GetShadowColor: FontInstance
+    GetShadowOffset: FontInstance
+    GetSpacing: FontInstance
+    GetTextColor: FontInstance
+    SetIndentedWordWrap: FontInstance
     SetJustifyH: FontInstance
     SetJustifyV: FontInstance
+    SetShadowColor: FontInstance
+    SetShadowOffset: FontInstance
+    SetSpacing: FontInstance
+    SetTextColor: FontInstance
   Region:
     GetAlpha: RegionBase
     GetDrawLayer: LayeredRegion
