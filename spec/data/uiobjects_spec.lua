@@ -169,6 +169,18 @@ describe('uiobjects', function()
                         assert.same({ uiobject = 'Texture' }, f.type)
                         assert.True(f.nilable)
                       end)
+                      it('has the right prototype', function()
+                        protocheck(mv, {
+                          inputs = {
+                            [1] = { type = 'TextureAsset' },
+                            [2] = c.extra and {
+                              nilable = true,
+                              type = { stringenum = 'BlendMode' },
+                            },
+                          },
+                          outputs = { c['return'] and { type = 'boolean' } },
+                        })
+                      end)
                       it('has declared inputs', function()
                         assert.Not.Nil(mv.inputs)
                       end)
