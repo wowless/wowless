@@ -87,6 +87,11 @@ lies:
           5:
             _add:
               nilable: true
+    FontString:
+      GetText:
+        outputs:
+        - _add:
+            nilable: true
     Frame:
       GetAttribute:
         _remove:
@@ -206,6 +211,10 @@ lies:
             - name: success
               type: boolean
     TextureBase:
+      GetAtlas:
+        outputs:
+        - _add:
+            nilable: true
       GetTexCoord:
         _remove:
           outstride: 2
@@ -287,6 +296,11 @@ lies:
                 from: string
                 to:
                   stringenum: FilterMode
+    UIObject:
+      GetName:
+        outputs:
+        - _add:
+            nilable: true
 script_objects:
   FrameAPIArchaeologyDigSiteFrame: ArchaeologyDigSiteFrame
   FrameAPIBlob: POIFrame

@@ -2908,6 +2908,7 @@ FontString:
       inputs: {}
       outputs:
       - name: text
+        nilable: true
         type: string
     GetTextScale:
       impl:
@@ -7069,6 +7070,7 @@ TextureBase:
       inputs: {}
       outputs:
       - name: atlas
+        nilable: true
         type: string
     GetBlendMode:
       impl:
@@ -7426,6 +7428,7 @@ UIObject:
       inputs: {}
       outputs:
       - name: name
+        nilable: true
         type: string
     GetObjectType:
       impl:
