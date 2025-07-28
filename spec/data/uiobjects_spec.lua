@@ -132,17 +132,17 @@ describe('uiobjects', function()
                 if mv.impl then
                   describe('impl', function()
                     if mv.impl.uiobjectimpl then
-                      it('has both inputs and outputs, or neither', function()
-                        assert.same(not not (mv.inputs or mv.manualinputs), not not mv.outputs)
+                      it('has declared inputs or manual inputs', function()
+                        assert.truthy(mv.inputs or mv.manualinputs)
                       end)
                     else
                       it('has declared inputs', function()
                         assert.Not.Nil(mv.inputs)
                       end)
-                      it('has declared outputs', function()
-                        assert.Not.Nil(mv.outputs)
-                      end)
                     end
+                    it('has declared outputs', function()
+                      assert.Not.Nil(mv.outputs)
+                    end)
                     if mv.impl.getter then
                       it('has the right prototype', function()
                         local outputs = {}
