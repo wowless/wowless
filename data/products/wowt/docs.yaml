@@ -434,6 +434,12 @@ typedefs:
     type: number
   ArtifactTiers:
     type: number
+  AzeriteEmpoweredItemLocation:
+    type:
+      structure: ItemLocation
+  AzeriteItemLocation:
+    type:
+      structure: ItemLocation
   BigInteger:
     type: number
   BigUInteger:
@@ -458,6 +464,9 @@ typedefs:
       uiobject: UIObject
   cstring:
     type: string
+  EmptiableItemLocation:
+    type:
+      structure: ItemLocation
   FileAsset:
     type: string
   fileID:

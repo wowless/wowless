@@ -155,11 +155,6 @@ for k in pairs(enum) do
     tys[k] = 'Enumeration'
   end
 end
-local structRewrites = {
-  AzeriteEmpoweredItemLocation = 'ItemLocation',
-  AzeriteItemLocation = 'ItemLocation',
-  EmptiableItemLocation = 'ItemLocation',
-}
 local used_typedefs = {}
 local function t2nty(field, ns)
   local t = field.Type
@@ -175,7 +170,6 @@ local function t2nty(field, ns)
     return typedefs[t].type, typedefs[t].outnil
   end
   local n = ns and tys[ns .. '.' .. t] and (ns .. '.' .. t) or t
-  n = structRewrites[n] or n
   local ty = tys[n]
   assert(ty, 'wtf ' .. n)
   if ty == 'Constants' then
