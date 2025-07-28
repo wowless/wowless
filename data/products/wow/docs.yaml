@@ -439,6 +439,7 @@ typedefs:
   ConnectionIptype:
     type: string
   CScriptObject:
+    outnil: true
     type:
       uiobject: UIObject
   cstring:

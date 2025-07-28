@@ -362,6 +362,7 @@ Animation:
       inputs: {}
       outputs:
       - name: region
+        nilable: true
         type:
           uiobject: UIObject
     GetSmoothing:
@@ -392,6 +393,7 @@ Animation:
       inputs: {}
       outputs:
       - name: target
+        nilable: true
         type:
           uiobject: UIObject
     IsDelaying:
@@ -4980,6 +4982,7 @@ ParentedObjectBase:
       inputs: {}
       outputs:
       - name: parent
+        nilable: true
         type:
           uiobject: UIObject
     GetParentKey:
