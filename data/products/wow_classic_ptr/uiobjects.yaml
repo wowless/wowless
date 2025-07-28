@@ -5543,6 +5543,10 @@ Region:
       impl:
         getter:
         - name: bottom
+      inputs: {}
+      outputs:
+      - name: bottom
+        type: number
     GetCenter:
       impl:
         uiobjectimpl: Region/GetCenter
@@ -5564,10 +5568,18 @@ Region:
       impl:
         getter:
         - name: height
+      inputs: {}
+      outputs:
+      - name: height
+        type: number
     GetLeft:
       impl:
         getter:
         - name: left
+      inputs: {}
+      outputs:
+      - name: left
+        type: number
     GetNumPoints:
       impl:
         uiobjectimpl: Region/GetNumPoints
@@ -5631,6 +5643,16 @@ Region:
         - name: left
         - name: width
         - name: height
+      inputs: {}
+      outputs:
+      - name: bottom
+        type: number
+      - name: left
+        type: number
+      - name: width
+        type: number
+      - name: height
+        type: number
     GetRight:
       impl:
         uiobjectimpl: Region/GetRight
@@ -5658,6 +5680,12 @@ Region:
         getter:
         - name: width
         - name: height
+      inputs: {}
+      outputs:
+      - name: width
+        type: number
+      - name: height
+        type: number
     GetSourceLocation:
       inputs: {}
       outputs:
@@ -5675,6 +5703,10 @@ Region:
       impl:
         getter:
         - name: width
+      inputs: {}
+      outputs:
+      - name: width
+        type: number
     Intersects:
       inputs:
       - name: region
