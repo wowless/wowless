@@ -511,9 +511,11 @@ typedefs:
     type:
       uiobject: ControlPoint
   SimpleFont:
+    outnil: true
     type:
       uiobject: Font
   SimpleFontString:
+    outnil: true
     type:
       uiobject: FontString
   SimpleFrame:

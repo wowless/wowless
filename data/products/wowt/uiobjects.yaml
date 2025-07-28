@@ -1023,6 +1023,7 @@ Button:
       inputs: {}
       outputs:
       - name: font
+        nilable: true
         type:
           uiobject: Font
     GetDisabledTexture:
@@ -1042,6 +1043,7 @@ Button:
       inputs: {}
       outputs:
       - name: fontString
+        nilable: true
         type:
           uiobject: FontString
     GetHighlightFontObject:
@@ -1051,6 +1053,7 @@ Button:
       inputs: {}
       outputs:
       - name: font
+        nilable: true
         type:
           uiobject: Font
     GetHighlightTexture:
@@ -1078,6 +1081,7 @@ Button:
       inputs: {}
       outputs:
       - name: font
+        nilable: true
         type:
           uiobject: Font
     GetNormalTexture:
@@ -2703,6 +2707,7 @@ Font:
         type: string
       outputs:
       - name: font
+        nilable: true
         type:
           uiobject: Font
     SetAlpha:
@@ -3087,6 +3092,7 @@ Frame:
         type: string
       outputs:
       - name: line
+        nilable: true
         type:
           uiobject: FontString
     CreateLine:
@@ -4113,6 +4119,7 @@ MessageFrame:
         type: number
       outputs:
       - name: fontString
+        nilable: true
         type:
           uiobject: FontString
     GetInsertMode:

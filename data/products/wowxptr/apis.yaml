@@ -26704,6 +26704,7 @@ CreateFontFamily:
         structure: CreateFontFamilyMemberInfo
   outputs:
   - name: fontFamily
+    nilable: true
     type:
       uiobject: Font
 CreateForbiddenFrame:
