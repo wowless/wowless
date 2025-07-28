@@ -131,9 +131,18 @@ describe('uiobjects', function()
                 end
                 if mv.impl then
                   describe('impl', function()
-                    it('has both inputs and outputs, or neither', function()
-                      assert.same(not not (mv.inputs or mv.manualinputs), not not mv.outputs)
-                    end)
+                    if mv.impl.uiobjectimpl then
+                      it('has both inputs and outputs, or neither', function()
+                        assert.same(not not (mv.inputs or mv.manualinputs), not not mv.outputs)
+                      end)
+                    else
+                      it('has declared inputs', function()
+                        assert.Not.Nil(mv.inputs)
+                      end)
+                      it('has declared outputs', function()
+                        assert.Not.Nil(mv.outputs)
+                      end)
+                    end
                     if mv.impl.getter then
                       it('has the right prototype', function()
                         local outputs = {}
@@ -146,12 +155,6 @@ describe('uiobjects', function()
                         })
                       end)
                     elseif mv.impl.setter then
-                      it('has declared inputs', function()
-                        assert.Not.Nil(mv.inputs)
-                      end)
-                      it('has declared outputs', function()
-                        assert.Not.Nil(mv.outputs)
-                      end)
                       it('has the right prototype', function()
                         local inputs = {}
                         for i, f in ipairs(mv.impl.setter) do
@@ -180,12 +183,6 @@ describe('uiobjects', function()
                           },
                           outputs = { c['return'] and { type = 'boolean' } },
                         })
-                      end)
-                      it('has declared inputs', function()
-                        assert.Not.Nil(mv.inputs)
-                      end)
-                      it('has declared outputs', function()
-                        assert.Not.Nil(mv.outputs)
                       end)
                     end
                   end)

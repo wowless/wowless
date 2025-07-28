@@ -275,7 +275,7 @@ for k, v in pairs(uiobjectdata) do
       for i, f in ipairs(mv.impl.getter) do
         local cf = fieldset[f.name]
         table.insert(t, 'local spec' .. i .. '=')
-        local output = { -- issue #421
+        local output = { -- issue #434
           nilable = cf.nilable,
           type = cf.type,
         }
