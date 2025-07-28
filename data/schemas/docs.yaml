@@ -54,6 +54,8 @@ type:
           key: string
           value:
             record:
+              outnil:
+                type: boolean
               type:
                 required: true
                 type:

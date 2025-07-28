@@ -840,6 +840,7 @@ Button:
       inputs: {}
       outputs:
       - name: texture
+        nilable: true
         type:
           uiobject: Texture
     GetFontString:
@@ -864,6 +865,7 @@ Button:
       inputs: {}
       outputs:
       - name: texture
+        nilable: true
         type:
           uiobject: Texture
     GetMotionScriptsWhileDisabled:
@@ -890,6 +892,7 @@ Button:
       inputs: {}
       outputs:
       - name: texture
+        nilable: true
         type:
           uiobject: Texture
     GetPushedTextOffset:
@@ -910,6 +913,7 @@ Button:
       inputs: {}
       outputs:
       - name: texture
+        nilable: true
         type:
           uiobject: Texture
     GetText:
@@ -1140,6 +1144,7 @@ CheckButton:
       inputs: {}
       outputs:
       - name: texture
+        nilable: true
         type:
           uiobject: Texture
     GetDisabledCheckedTexture:
@@ -1149,6 +1154,7 @@ CheckButton:
       inputs: {}
       outputs:
       - name: texture
+        nilable: true
         type:
           uiobject: Texture
     SetChecked:
@@ -1361,6 +1367,7 @@ ColorSelect:
       inputs: {}
       outputs:
       - name: texture
+        nilable: true
         type:
           uiobject: Texture
     GetColorAlphaThumbTexture:
@@ -1370,6 +1377,7 @@ ColorSelect:
       inputs: {}
       outputs:
       - name: texture
+        nilable: true
         type:
           uiobject: Texture
     GetColorHSV:
@@ -1397,6 +1405,7 @@ ColorSelect:
       inputs: {}
       outputs:
       - name: texture
+        nilable: true
         type:
           uiobject: Texture
     GetColorValueThumbTexture:
@@ -1406,6 +1415,7 @@ ColorSelect:
       inputs: {}
       outputs:
       - name: texture
+        nilable: true
         type:
           uiobject: Texture
     GetColorWheelTexture:
@@ -1415,6 +1425,7 @@ ColorSelect:
       inputs: {}
       outputs:
       - name: texture
+        nilable: true
         type:
           uiobject: Texture
     GetColorWheelThumbTexture:
@@ -1424,6 +1435,7 @@ ColorSelect:
       inputs: {}
       outputs:
       - name: texture
+        nilable: true
         type:
           uiobject: Texture
     SetColorAlpha:
@@ -2944,6 +2956,7 @@ Frame:
         type: number
       outputs:
       - name: texture
+        nilable: true
         type:
           uiobject: Texture
     DesaturateHierarchy:
@@ -6261,6 +6274,7 @@ Slider:
       inputs: {}
       outputs:
       - name: texture
+        nilable: true
         type:
           uiobject: Texture
     GetValue:
@@ -6425,6 +6439,7 @@ StatusBar:
       inputs: {}
       outputs:
       - name: texture
+        nilable: true
         type:
           uiobject: Texture
     GetValue:

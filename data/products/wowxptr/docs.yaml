@@ -493,6 +493,7 @@ typedefs:
     type:
       uiobject: Region
   SimpleTexture:
+    outnil: true
     type:
       uiobject: Texture
   SimpleWindow:

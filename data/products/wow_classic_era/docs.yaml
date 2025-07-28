@@ -469,6 +469,7 @@ typedefs:
     type:
       uiobject: Path
   SimpleTexture:
+    outnil: true
     type:
       uiobject: Texture
   SimpleWindow:

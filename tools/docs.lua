@@ -172,7 +172,7 @@ local function t2nty(field, ns)
     return { stringenum = t }
   elseif typedefs[t] then
     used_typedefs[t] = true
-    return typedefs[t].type
+    return typedefs[t].type, typedefs[t].outnil
   end
   local n = ns and tys[ns .. '.' .. t] and (ns .. '.' .. t) or t
   n = structRewrites[n] or n
@@ -286,11 +286,11 @@ local function outsig(fn, ns, api)
         })
       end
     else
-      local ty = t2nty(r, ns)
+      local ty, outnil = t2nty(r, ns)
       table.insert(outputs, {
         default = default(r),
         name = r.Name,
-        nilable = r.Nilable and ty ~= 'nil' or nil,
+        nilable = r.Nilable and ty ~= 'nil' or outnil,
         stub = take(stubs, r.Name),
         stubnotnil = take(stubnotnils, r.Name),
         type = ty,
