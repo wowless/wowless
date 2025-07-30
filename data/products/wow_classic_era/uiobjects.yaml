@@ -1,6 +1,18 @@
 ---
 Actor:
-  fields: {}
+  fields:
+    desaturation:
+      init: 0
+      type: number
+    pitch:
+      init: 0
+      type: number
+    roll:
+      init: 0
+      type: number
+    yaw:
+      init: 0
+      type: number
   inherits:
     ParentedObjectBase: {}
     RegionBase: {}
@@ -35,6 +47,9 @@ Actor:
       - name: variation
         type: number
     GetDesaturation:
+      impl:
+        getter:
+        - name: desaturation
       inputs: {}
       outputs:
       - name: strength
@@ -70,6 +85,9 @@ Actor:
         nilable: true
         type: number
     GetPitch:
+      impl:
+        getter:
+        - name: pitch
       inputs: {}
       outputs:
       - name: pitch
@@ -84,6 +102,9 @@ Actor:
       - name: positionZ
         type: number
     GetRoll:
+      impl:
+        getter:
+        - name: roll
       inputs: {}
       outputs:
       - name: roll
@@ -94,6 +115,9 @@ Actor:
       - name: spellVisualKitID
         type: number
     GetYaw:
+      impl:
+        getter:
+        - name: yaw
       inputs: {}
       outputs:
       - name: yaw
@@ -141,6 +165,9 @@ Actor:
           enum: ModelBlendOperation
       outputs: {}
     SetDesaturation:
+      impl:
+        setter:
+        - name: desaturation
       inputs:
       - name: strength
         type: number
@@ -204,6 +231,9 @@ Actor:
         type: number
       outputs: {}
     SetPitch:
+      impl:
+        setter:
+        - name: pitch
       inputs:
       - name: pitch
         type: number
@@ -238,6 +268,9 @@ Actor:
         type: number
       outputs: {}
     SetRoll:
+      impl:
+        setter:
+        - name: roll
       inputs:
       - name: roll
         type: number
@@ -264,6 +297,9 @@ Actor:
         type: boolean
       outputs: {}
     SetYaw:
+      impl:
+        setter:
+        - name: yaw
       inputs:
       - name: yaw
         type: number
@@ -288,26 +324,44 @@ Actor:
           enum: ItemTryOnReason
   objectType: ModelSceneActor
 Alpha:
-  fields: {}
+  fields:
+    fromAlpha:
+      init: 0
+      type: number
+    toAlpha:
+      init: 0
+      type: number
   inherits:
     Animation: {}
   methods:
     GetFromAlpha:
+      impl:
+        getter:
+        - name: fromAlpha
       inputs: {}
       outputs:
       - name: normalizedAlpha
         type: number
     GetToAlpha:
+      impl:
+        getter:
+        - name: toAlpha
       inputs: {}
       outputs:
       - name: normalizedAlpha
         type: number
     SetFromAlpha:
+      impl:
+        setter:
+        - name: fromAlpha
       inputs:
       - name: normalizedAlpha
         type: number
       outputs: {}
     SetToAlpha:
+      impl:
+        setter:
+        - name: toAlpha
       inputs:
       - name: normalizedAlpha
         type: number
@@ -517,6 +571,9 @@ Animation:
       outputs: {}
 AnimationGroup:
   fields:
+    animationSpeedMultiplier:
+      init: 1
+      type: number
     looping:
       init: NONE
       type:
@@ -555,6 +612,9 @@ AnimationGroup:
           uiobject: UIObject
       outstride: 1
     GetAnimationSpeedMultiplier:
+      impl:
+        getter:
+        - name: animationSpeedMultiplier
       inputs: {}
       outputs:
       - name: animationSpeedMultiplier
@@ -643,6 +703,9 @@ AnimationGroup:
         type: number
       outputs: {}
     SetAnimationSpeedMultiplier:
+      impl:
+        setter:
+        - name: animationSpeedMultiplier
       inputs:
       - name: animationSpeedMultiplier
         type: number
@@ -1345,6 +1408,9 @@ ColorSelect:
     mouseClickEnabled: true
     mouseMotionEnabled: true
   fields:
+    colorAlpha:
+      init: 1
+      type: number
     colorAlphaTexture:
       nilable: true
       type:
@@ -1376,6 +1442,9 @@ ColorSelect:
       inputs: {}
       outputs: {}
     GetColorAlpha:
+      impl:
+        getter:
+        - name: colorAlpha
       inputs: {}
       outputs:
       - name: alpha
@@ -1459,6 +1528,9 @@ ColorSelect:
         type:
           uiobject: Texture
     SetColorAlpha:
+      impl:
+        setter:
+        - name: colorAlpha
       inputs:
       - name: alpha
         type: number
@@ -1533,7 +1605,10 @@ ColorSelect:
         type: TextureAsset
       outputs: {}
 ControlPoint:
-  fields: {}
+  fields:
+    order:
+      init: 99
+      type: number
   inherits:
     ParentedObject: {}
   methods:
@@ -1545,6 +1620,9 @@ ControlPoint:
       - name: offsetY
         type: number
     GetOrder:
+      impl:
+        getter:
+        - name: order
       inputs: {}
       outputs:
       - name: order
@@ -1557,6 +1635,9 @@ ControlPoint:
         type: number
       outputs: {}
     SetOrder:
+      impl:
+        setter:
+        - name: order
       inputs:
       - name: order
         type: number
@@ -1564,6 +1645,9 @@ ControlPoint:
 Cooldown:
   fields:
     durationMillis:
+      init: 0
+      type: number
+    rotation:
       init: 0
       type: number
     startTimeMillis:
@@ -1622,6 +1706,9 @@ Cooldown:
       - name: reverse
         type: boolean
     GetRotation:
+      impl:
+        getter:
+        - name: rotation
       inputs: {}
       outputs:
       - name: rotationRadians
@@ -1745,6 +1832,9 @@ Cooldown:
         type: boolean
       outputs: {}
     SetRotation:
+      impl:
+        setter:
+        - name: rotation
       inputs:
       - name: rotationRadians
         type: number
@@ -1930,6 +2020,12 @@ EditBox:
     mouseClickEnabled: true
     mouseMotionEnabled: true
   fields:
+    blinkSpeed:
+      init: 0.5
+      type: number
+    cursorPosition:
+      init: 0
+      type: number
     editboxText:
       init: ''
       type: string
@@ -1955,6 +2051,9 @@ EditBox:
       init: 0
       type: number
     maxLetters:
+      init: 0
+      type: number
+    visibleTextByteLimit:
       init: 0
       type: number
   inherits:
@@ -1991,11 +2090,17 @@ EditBox:
       - name: altMode
         type: boolean
     GetBlinkSpeed:
+      impl:
+        getter:
+        - name: blinkSpeed
       inputs: {}
       outputs:
       - name: cursorBlinkSpeedSec
         type: number
     GetCursorPosition:
+      impl:
+        getter:
+        - name: cursorPosition
       inputs: {}
       outputs:
       - name: cursorPosition
@@ -2089,6 +2194,9 @@ EditBox:
       - name: cursorPosition
         type: number
     GetVisibleTextByteLimit:
+      impl:
+        getter:
+        - name: visibleTextByteLimit
       inputs: {}
       outputs:
       - name: maxVisibleBytes
@@ -2209,6 +2317,9 @@ EditBox:
         type: boolean
       outputs: {}
     SetBlinkSpeed:
+      impl:
+        setter:
+        - name: blinkSpeed
       inputs:
       - name: cursorBlinkSpeedSec
         type: number
@@ -2223,6 +2334,9 @@ EditBox:
         type: boolean
       outputs: {}
     SetCursorPosition:
+      impl:
+        setter:
+        - name: cursorPosition
       inputs:
       - name: cursorPosition
         type: number
@@ -2347,6 +2461,9 @@ EditBox:
         type: number
       outputs: {}
     SetVisibleTextByteLimit:
+      impl:
+        setter:
+        - name: visibleTextByteLimit
       inputs:
       - name: maxVisibleBytes
         type: number
@@ -2355,62 +2472,113 @@ EditBox:
       inputs: {}
       outputs: {}
 FlipBook:
-  fields: {}
+  fields:
+    flipBookColumns:
+      init: 0
+      type: number
+    flipBookFrameHeight:
+      init: 0
+      type: number
+    flipBookFrames:
+      init: 0
+      type: number
+    flipBookFrameWidth:
+      init: 0
+      type: number
+    flipBookRows:
+      init: 0
+      type: number
   inherits:
     Animation: {}
   methods:
     GetFlipBookColumns:
+      impl:
+        getter:
+        - name: flipBookColumns
       inputs: {}
       outputs:
       - name: columns
         type: number
     GetFlipBookFrameHeight:
+      impl:
+        getter:
+        - name: flipBookFrameHeight
       inputs: {}
       outputs:
       - name: height
         type: number
     GetFlipBookFrames:
+      impl:
+        getter:
+        - name: flipBookFrames
       inputs: {}
       outputs:
       - name: frames
         type: number
     GetFlipBookFrameWidth:
+      impl:
+        getter:
+        - name: flipBookFrameWidth
       inputs: {}
       outputs:
       - name: width
         type: number
     GetFlipBookRows:
+      impl:
+        getter:
+        - name: flipBookRows
       inputs: {}
       outputs:
       - name: rows
         type: number
     SetFlipBookColumns:
+      impl:
+        setter:
+        - name: flipBookColumns
       inputs:
       - name: columns
         type: number
       outputs: {}
     SetFlipBookFrameHeight:
+      impl:
+        setter:
+        - name: flipBookFrameHeight
       inputs:
       - name: height
         type: number
       outputs: {}
     SetFlipBookFrames:
+      impl:
+        setter:
+        - name: flipBookFrames
       inputs:
       - name: frames
         type: number
       outputs: {}
     SetFlipBookFrameWidth:
+      impl:
+        setter:
+        - name: flipBookFrameWidth
       inputs:
       - name: width
         type: number
       outputs: {}
     SetFlipBookRows:
+      impl:
+        setter:
+        - name: flipBookRows
       inputs:
       - name: rows
         type: number
       outputs: {}
 FogOfWarFrame:
-  fields: {}
+  fields:
+    maskScalar:
+      init: 1
+      type: number
+    uiMapID:
+      init: 0
+      type: number
   inherits:
     Frame: {}
   methods:
@@ -2437,11 +2605,17 @@ FogOfWarFrame:
         nilable: true
         type: string
     GetMaskScalar:
+      impl:
+        getter:
+        - name: maskScalar
       inputs: {}
       outputs:
       - name: scalar
         type: number
     GetUiMapID:
+      impl:
+        getter:
+        - name: uiMapID
       inputs: {}
       outputs:
       - name: uiMapID
@@ -2471,17 +2645,26 @@ FogOfWarFrame:
         type: string
       outputs: {}
     SetMaskScalar:
+      impl:
+        setter:
+        - name: maskScalar
       inputs:
       - name: scalar
         type: number
       outputs: {}
     SetUiMapID:
+      impl:
+        setter:
+        - name: uiMapID
       inputs:
       - name: uiMapID
         type: number
       outputs: {}
 Font:
-  fields: {}
+  fields:
+    alpha:
+      init: 1
+      type: number
   inherits:
     FontInstance: {}
     UIObject: {}
@@ -2493,6 +2676,9 @@ Font:
           uiobject: Font
       outputs: {}
     GetAlpha:
+      impl:
+        getter:
+        - name: alpha
       inputs: {}
       outputs:
       - name: alpha
@@ -2507,6 +2693,9 @@ Font:
         type:
           uiobject: Font
     SetAlpha:
+      impl:
+        setter:
+        - name: alpha
       inputs:
       - name: alpha
         type: number
@@ -2526,6 +2715,9 @@ FontInstance:
       init: MIDDLE
       type:
         stringenum: JustifyVertical
+    spacing:
+      init: 0
+      type: number
   inherits: {}
   methods:
     GetFont:
@@ -2588,6 +2780,9 @@ FontInstance:
       - name: offsetY
         type: number
     GetSpacing:
+      impl:
+        getter:
+        - name: spacing
       inputs: {}
       outputs:
       - name: spacing
@@ -2649,6 +2844,9 @@ FontInstance:
         type: number
       outputs: {}
     SetSpacing:
+      impl:
+        setter:
+        - name: spacing
       inputs:
       - name: spacing
         type: number
@@ -2669,6 +2867,9 @@ FontInstance:
 FontString:
   fields:
     maxLines:
+      init: 0
+      type: number
+    rotation:
       init: 0
       type: number
     text:
@@ -2740,6 +2941,9 @@ FontString:
       - name: numLines
         type: number
     GetRotation:
+      impl:
+        getter:
+        - name: rotation
       inputs: {}
       outputs:
       - name: radians
@@ -2819,6 +3023,9 @@ FontString:
         type: boolean
       outputs: {}
     SetRotation:
+      impl:
+        setter:
+        - name: rotation
       inputs:
       - name: radians
         type: number
@@ -3893,6 +4100,9 @@ LayeredRegion:
   virtual: true
 Line:
   fields:
+    hitRectThickness:
+      init: 0
+      type: number
     thickness:
       init: 4
       type: number
@@ -3913,6 +4123,9 @@ Line:
       - name: offsetY
         type: number
     GetHitRectThickness:
+      impl:
+        getter:
+        - name: hitRectThickness
       inputs: {}
       outputs:
       - name: thickness
@@ -3954,6 +4167,9 @@ Line:
         type: number
       outputs: {}
     SetHitRectThickness:
+      impl:
+        setter:
+        - name: hitRectThickness
       inputs:
       - name: thickness
         type: number
@@ -3997,7 +4213,16 @@ MaskTexture:
     TextureBase: {}
   methods: {}
 MessageFrame:
-  fields: {}
+  fields:
+    fadeDuration:
+      init: 3
+      type: number
+    fadePower:
+      init: 1
+      type: number
+    timeVisible:
+      init: 10
+      type: number
   inherits:
     FontInstance: {}
     Frame: {}
@@ -4025,11 +4250,17 @@ MessageFrame:
       inputs: {}
       outputs: {}
     GetFadeDuration:
+      impl:
+        getter:
+        - name: fadeDuration
       inputs: {}
       outputs:
       - name: fadeDurationSeconds
         type: number
     GetFadePower:
+      impl:
+        getter:
+        - name: fadePower
       inputs: {}
       outputs:
       - name: fadePower
@@ -4055,6 +4286,9 @@ MessageFrame:
         type:
           stringenum: InsertMode
     GetTimeVisible:
+      impl:
+        getter:
+        - name: timeVisible
       inputs: {}
       outputs:
       - name: timeVisibleSeconds
@@ -4072,11 +4306,17 @@ MessageFrame:
         type: number
       outputs: {}
     SetFadeDuration:
+      impl:
+        setter:
+        - name: fadeDuration
       inputs:
       - name: fadeDurationSeconds
         type: number
       outputs: {}
     SetFadePower:
+      impl:
+        setter:
+        - name: fadePower
       inputs:
       - name: fadePower
         type: number
@@ -4093,12 +4333,18 @@ MessageFrame:
           stringenum: InsertMode
       outputs: {}
     SetTimeVisible:
+      impl:
+        setter:
+        - name: timeVisible
       inputs:
       - name: timeVisibleSeconds
         type: number
       outputs: {}
 Minimap:
-  fields: {}
+  fields:
+    zoom:
+      init: 0
+      type: number
   inherits:
     Frame: {}
   methods:
@@ -4110,6 +4356,9 @@ Minimap:
       - name: positionY
         type: number
     GetZoom:
+      impl:
+        getter:
+        - name: zoom
       inputs: {}
       outputs:
       - name: zoomFactor
@@ -4162,6 +4411,9 @@ Minimap:
         type: TextureAsset
       outputs: {}
     SetZoom:
+      impl:
+        setter:
+        - name: zoom
       inputs:
       - name: zoomFactor
         type: number
@@ -4172,8 +4424,41 @@ Minimap:
   singleton: true
 Model:
   fields:
+    cameraDistance:
+      init: 0
+      type: number
+    cameraFacing:
+      init: 0
+      type: number
+    cameraRoll:
+      init: 0
+      type: number
+    desaturation:
+      init: 0
+      type: number
+    facing:
+      init: 0
+      type: number
+    fogFar:
+      init: 1
+      type: number
+    fogNear:
+      init: 0
+      type: number
+    modelAlpha:
+      init: 1
+      type: number
     modelScale:
       init: 1
+      type: number
+    pitch:
+      init: 0
+      type: number
+    roll:
+      init: 0
+      type: number
+    shadowEffect:
+      init: 0
       type: number
   inherits:
     Frame: {}
@@ -4191,11 +4476,17 @@ Model:
       inputs: {}
       outputs: {}
     GetCameraDistance:
+      impl:
+        getter:
+        - name: cameraDistance
       inputs: {}
       outputs:
       - name: distance
         type: number
     GetCameraFacing:
+      impl:
+        getter:
+        - name: cameraFacing
       inputs: {}
       outputs:
       - name: radians
@@ -4210,6 +4501,9 @@ Model:
       - name: positionZ
         type: number
     GetCameraRoll:
+      impl:
+        getter:
+        - name: cameraRoll
       inputs: {}
       outputs:
       - name: radians
@@ -4224,11 +4518,17 @@ Model:
       - name: targetZ
         type: number
     GetDesaturation:
+      impl:
+        getter:
+        - name: desaturation
       inputs: {}
       outputs:
       - name: strength
         type: number
     GetFacing:
+      impl:
+        getter:
+        - name: facing
       inputs: {}
       outputs:
       - name: facing
@@ -4245,11 +4545,17 @@ Model:
       - name: colorA
         type: number
     GetFogFar:
+      impl:
+        getter:
+        - name: fogFar
       inputs: {}
       outputs:
       - name: fogFar
         type: number
     GetFogNear:
+      impl:
+        getter:
+        - name: fogNear
       inputs: {}
       outputs:
       - name: fogNear
@@ -4263,6 +4569,9 @@ Model:
         type:
           structure: ModelLight
     GetModelAlpha:
+      impl:
+        getter:
+        - name: modelAlpha
       inputs: {}
       outputs:
       - name: alpha
@@ -4294,6 +4603,9 @@ Model:
       - name: paused
         type: boolean
     GetPitch:
+      impl:
+        getter:
+        - name: pitch
       inputs: {}
       outputs:
       - name: pitch
@@ -4308,11 +4620,17 @@ Model:
       - name: positionZ
         type: number
     GetRoll:
+      impl:
+        getter:
+        - name: roll
       inputs: {}
       outputs:
       - name: roll
         type: number
     GetShadowEffect:
+      impl:
+        getter:
+        - name: shadowEffect
       inputs: {}
       outputs:
       - name: strength
@@ -4369,11 +4687,17 @@ Model:
         type: number
       outputs: {}
     SetCameraDistance:
+      impl:
+        setter:
+        - name: cameraDistance
       inputs:
       - name: distance
         type: number
       outputs: {}
     SetCameraFacing:
+      impl:
+        setter:
+        - name: cameraFacing
       inputs:
       - name: radians
         type: number
@@ -4388,6 +4712,9 @@ Model:
         type: number
       outputs: {}
     SetCameraRoll:
+      impl:
+        setter:
+        - name: cameraRoll
       inputs:
       - name: radians
         type: number
@@ -4407,11 +4734,17 @@ Model:
         type: number
       outputs: {}
     SetDesaturation:
+      impl:
+        setter:
+        - name: desaturation
       inputs:
       - name: strength
         type: number
       outputs: {}
     SetFacing:
+      impl:
+        setter:
+        - name: facing
       inputs:
       - name: facing
         type: number
@@ -4429,11 +4762,17 @@ Model:
         type: number
       outputs: {}
     SetFogFar:
+      impl:
+        setter:
+        - name: fogFar
       inputs:
       - name: fogFar
         type: number
       outputs: {}
     SetFogNear:
+      impl:
+        setter:
+        - name: fogNear
       inputs:
       - name: fogNear
         type: number
@@ -4460,6 +4799,9 @@ Model:
         type: boolean
       outputs: {}
     SetModelAlpha:
+      impl:
+        setter:
+        - name: modelAlpha
       inputs:
       - name: alpha
         type: number
@@ -4489,6 +4831,9 @@ Model:
         type: boolean
       outputs: {}
     SetPitch:
+      impl:
+        setter:
+        - name: pitch
       inputs:
       - name: pitch
         type: number
@@ -4503,6 +4848,9 @@ Model:
         type: number
       outputs: {}
     SetRoll:
+      impl:
+        setter:
+        - name: roll
       inputs:
       - name: roll
         type: number
@@ -4520,6 +4868,9 @@ Model:
         type: number
       outputs: {}
     SetShadowEffect:
+      impl:
+        setter:
+        - name: shadowEffect
       inputs:
       - name: strength
         type: number
@@ -4571,7 +4922,22 @@ Model:
         type: boolean
       outputs: {}
 ModelScene:
-  fields: {}
+  fields:
+    cameraFarClip:
+      init: 100
+      type: number
+    cameraFieldOfView:
+      init: 0.94248
+      type: number
+    cameraNearClip:
+      init: 0.2
+      type: number
+    fogFar:
+      init: 100000000
+      type: number
+    fogNear:
+      init: 10000000
+      type: number
   inherits:
     Frame: {}
   methods:
@@ -4598,11 +4964,17 @@ ModelScene:
         type: number
       outputs: {}
     GetCameraFarClip:
+      impl:
+        getter:
+        - name: cameraFarClip
       inputs: {}
       outputs:
       - name: farClip
         type: number
     GetCameraFieldOfView:
+      impl:
+        getter:
+        - name: cameraFieldOfView
       inputs: {}
       outputs:
       - name: fov
@@ -4617,6 +4989,9 @@ ModelScene:
       - name: forwardZ
         type: number
     GetCameraNearClip:
+      impl:
+        getter:
+        - name: cameraNearClip
       inputs: {}
       outputs:
       - name: nearClip
@@ -4666,11 +5041,17 @@ ModelScene:
       - name: colorB
         type: number
     GetFogFar:
+      impl:
+        getter:
+        - name: fogFar
       inputs: {}
       outputs:
       - name: far
         type: number
     GetFogNear:
+      impl:
+        getter:
+        - name: fogNear
       inputs: {}
       outputs:
       - name: near
@@ -4763,16 +5144,25 @@ ModelScene:
       - name: depth
         type: number
     SetCameraFarClip:
+      impl:
+        setter:
+        - name: cameraFarClip
       inputs:
       - name: farClip
         type: number
       outputs: {}
     SetCameraFieldOfView:
+      impl:
+        setter:
+        - name: cameraFieldOfView
       inputs:
       - name: fov
         type: number
       outputs: {}
     SetCameraNearClip:
+      impl:
+        setter:
+        - name: cameraNearClip
       inputs:
       - name: nearClip
         type: number
@@ -4837,11 +5227,17 @@ ModelScene:
         type: number
       outputs: {}
     SetFogFar:
+      impl:
+        setter:
+        - name: fogFar
       inputs:
       - name: far
         type: number
       outputs: {}
     SetFogNear:
+      impl:
+        setter:
+        - name: fogNear
       inputs:
       - name: near
         type: number
@@ -4964,7 +5360,10 @@ MovieFrame:
       inputs: {}
       outputs: {}
 OffScreenFrame:
-  fields: {}
+  fields:
+    maxSnapshots:
+      init: 1
+      type: number
   inherits:
     Frame: {}
   methods:
@@ -4982,6 +5381,9 @@ OffScreenFrame:
       inputs: {}
       outputs: {}
     GetMaxSnapshots:
+      impl:
+        getter:
+        - name: maxSnapshots
       inputs: {}
       outputs:
       - name: maxSnapshots
@@ -4994,6 +5396,9 @@ OffScreenFrame:
       - name: isValid
         type: boolean
     SetMaxSnapshots:
+      impl:
+        setter:
+        - name: maxSnapshots
       inputs:
       - name: maxSnapshots
         type: number
@@ -5877,11 +6282,20 @@ RegionBase:
       outputs: {}
   virtual: true
 Rotation:
-  fields: {}
+  fields:
+    degrees:
+      init: 0
+      type: number
+    radians:
+      init: 0
+      type: number
   inherits:
     Animation: {}
   methods:
     GetDegrees:
+      impl:
+        getter:
+        - name: degrees
       inputs: {}
       outputs:
       - name: angle
@@ -5897,11 +6311,17 @@ Rotation:
       - name: originY
         type: number
     GetRadians:
+      impl:
+        getter:
+        - name: radians
       inputs: {}
       outputs:
       - name: angle
         type: number
     SetDegrees:
+      impl:
+        setter:
+        - name: degrees
       inputs:
       - name: angle
         type: number
@@ -5917,6 +6337,9 @@ Rotation:
         type: number
       outputs: {}
     SetRadians:
+      impl:
+        setter:
+        - name: radians
       inputs:
       - name: angle
         type: number
@@ -6072,14 +6495,23 @@ ScriptObjectBase:
   virtual: true
 ScrollFrame:
   fields:
+    horizontalScroll:
+      init: 0
+      type: number
     scrollChild:
       nilable: true
       type:
         uiobject: Frame
+    verticalScroll:
+      init: 0
+      type: number
   inherits:
     Frame: {}
   methods:
     GetHorizontalScroll:
+      impl:
+        getter:
+        - name: horizontalScroll
       inputs: {}
       outputs:
       - name: offset
@@ -6100,6 +6532,9 @@ ScrollFrame:
         type:
           uiobject: Frame
     GetVerticalScroll:
+      impl:
+        getter:
+        - name: verticalScroll
       inputs: {}
       outputs:
       - name: offset
@@ -6110,6 +6545,9 @@ ScrollFrame:
       - name: range
         type: number
     SetHorizontalScroll:
+      impl:
+        setter:
+        - name: horizontalScroll
       inputs:
       - name: offset
         type: number
@@ -6123,6 +6561,9 @@ ScrollFrame:
           uiobject: Frame
       outputs: {}
     SetVerticalScroll:
+      impl:
+        setter:
+        - name: verticalScroll
       inputs:
       - name: offset
         type: number
@@ -6375,12 +6816,18 @@ Slider:
       init: VERTICAL
       type:
         stringenum: Orientation
+    stepsPerPage:
+      init: 0
+      type: number
     thumbTexture:
       nilable: true
       type:
         uiobject: Texture
     value:
       init: 0
+      type: number
+    valueStep:
+      init: 0.001
       type: number
   inherits:
     Frame: {}
@@ -6421,6 +6868,9 @@ Slider:
         type:
           stringenum: Orientation
     GetStepsPerPage:
+      impl:
+        getter:
+        - name: stepsPerPage
       inputs: {}
       outputs:
       - name: stepsPerPage
@@ -6444,6 +6894,9 @@ Slider:
       - name: value
         type: number
     GetValueStep:
+      impl:
+        getter:
+        - name: valueStep
       inputs: {}
       outputs:
       - name: valueStep
@@ -6489,6 +6942,9 @@ Slider:
           stringenum: Orientation
       outputs: {}
     SetStepsPerPage:
+      impl:
+        setter:
+        - name: stepsPerPage
       inputs:
       - name: stepsPerPage
         type: number
@@ -6510,6 +6966,9 @@ Slider:
         type: boolean
       outputs: {}
     SetValueStep:
+      impl:
+        setter:
+        - name: valueStep
       inputs:
       - name: valueStep
         type: number
@@ -6524,6 +6983,9 @@ StatusBar:
       init: 0
       type: number
     min:
+      init: 0
+      type: number
+    statusBarDesaturation:
       init: 0
       type: number
     statusBarTexture:
@@ -6586,6 +7048,9 @@ StatusBar:
       - name: colorA
         type: number
     GetStatusBarDesaturation:
+      impl:
+        getter:
+        - name: statusBarDesaturation
       inputs: {}
       outputs:
       - name: desaturation
@@ -6682,6 +7147,9 @@ StatusBar:
         type: boolean
       outputs: {}
     SetStatusBarDesaturation:
+      impl:
+        setter:
+        - name: statusBarDesaturation
       inputs:
       - name: desaturation
         type: number
@@ -6828,12 +7296,18 @@ TextureBase:
     colorTextureR:
       nilable: true
       type: number
+    desaturation:
+      init: 0
+      type: number
     horizTile:
       init: false
       type: boolean
     maskName:
       nilable: true
       type: string
+    texelSnappingBias:
+      init: 0.3
+      type: number
     texture:
       nilable: true
       type: string
@@ -6878,6 +7352,9 @@ TextureBase:
         type:
           stringenum: BlendMode
     GetDesaturation:
+      impl:
+        getter:
+        - name: desaturation
       inputs: {}
       outputs:
       - name: desaturation
@@ -6928,6 +7405,9 @@ TextureBase:
       - name: lry
         type: number
     GetTexelSnappingBias:
+      impl:
+        getter:
+        - name: texelSnappingBias
       inputs: {}
       outputs:
       - name: bias
@@ -7057,6 +7537,9 @@ TextureBase:
         type: boolean
       outputs: {}
     SetDesaturation:
+      impl:
+        setter:
+        - name: desaturation
       inputs:
       - name: desaturation
         type: number
@@ -7119,6 +7602,9 @@ TextureBase:
         type: number
       outputs: {}
     SetTexelSnappingBias:
+      impl:
+        setter:
+        - name: texelSnappingBias
       inputs:
       - name: bias
         type: number
@@ -7257,7 +7743,13 @@ UIObject:
       outputs: {}
   virtual: true
 UnitPositionFrame:
-  fields: {}
+  fields:
+    playerPingScale:
+      init: 1
+      type: number
+    uiMapID:
+      init: 0
+      type: number
   inherits:
     Frame: {}
   methods:
@@ -7306,16 +7798,25 @@ UnitPositionFrame:
       outstride: 1
       stuboutstrides: 0
     GetPlayerPingScale:
+      impl:
+        getter:
+        - name: playerPingScale
       inputs: {}
       outputs:
       - name: scale
         type: number
     GetUiMapID:
+      impl:
+        getter:
+        - name: uiMapID
       inputs: {}
       outputs:
       - name: mapID
         type: number
     SetPlayerPingScale:
+      impl:
+        setter:
+        - name: playerPingScale
       inputs:
       - name: scale
         type: number
@@ -7335,6 +7836,9 @@ UnitPositionFrame:
         type: number
       outputs: {}
     SetUiMapID:
+      impl:
+        setter:
+        - name: uiMapID
       inputs:
       - name: mapID
         type: number
