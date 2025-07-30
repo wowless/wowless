@@ -242,23 +242,19 @@ local filemap, alldeps = (function()
       return tt
     end
   end)()
-  local function style(ss)
-    -- workaround elune issue with formatting %d
-    return ss:gsub('DeprecatedCurrencyFlag = [-0-9]+', 'DeprecatedCurrencyFlag = 2147483648')
-  end
   for k in pairs(files) do
     if ptablemap[k] then
       for _, p in ipairs(next(args.product) and args.product or dofile('build/cmake/runtime/products.lua')) do
         local nn, tt, dd = ptablemap[k](p)
         local ss = '_G.WowlessData.' .. nn .. ' = ' .. require('pl.pretty').write(tt) .. '\n'
         local ff = 'build/products/' .. p .. '/WowlessData/' .. k .. '.lua'
-        t[ff] = style(ss)
+        t[ff] = ss
         deps[ff] = dd
       end
     elseif k == 'product' then
       for _, p in ipairs(next(args.product) and args.product or dofile('build/cmake/runtime/products.lua')) do
         local ss = ('_G.WowlessData = { product = %q }'):format(p)
-        t['build/products/' .. p .. '/WowlessData/' .. k .. '.lua'] = style(ss)
+        t['build/products/' .. p .. '/WowlessData/' .. k .. '.lua'] = ss
       end
     elseif k == 'toc' then
       local tt = {}
