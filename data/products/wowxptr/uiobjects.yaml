@@ -4458,6 +4458,10 @@ MessageFrame:
     fadePower:
       init: 1
       type: number
+    insertMode:
+      init: BOTTOM
+      type:
+        stringenum: InsertMode
     timeVisible:
       init: 10
       type: number
@@ -4518,6 +4522,9 @@ MessageFrame:
         type:
           uiobject: FontString
     GetInsertMode:
+      impl:
+        getter:
+        - name: insertMode
       inputs: {}
       outputs:
       - name: mode
@@ -4565,6 +4572,9 @@ MessageFrame:
         type: boolean
       outputs: {}
     SetInsertMode:
+      impl:
+        setter:
+        - name: insertMode
       inputs:
       - name: mode
         type:
@@ -7497,6 +7507,10 @@ StatusBar:
     min:
       init: 0
       type: number
+    orientation:
+      init: HORIZONTAL
+      type:
+        stringenum: Orientation
     statusBarDesaturation:
       init: 0
       type: number
@@ -7531,6 +7545,9 @@ StatusBar:
       - name: maxValue
         type: number
     GetOrientation:
+      impl:
+        getter:
+        - name: orientation
       inputs: {}
       outputs:
       - name: orientation
@@ -7623,6 +7640,9 @@ StatusBar:
         type: number
       outputs: {}
     SetOrientation:
+      impl:
+        setter:
+        - name: orientation
       inputs:
       - name: orientation
         type:
