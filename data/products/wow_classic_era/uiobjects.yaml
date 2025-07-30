@@ -6574,7 +6574,10 @@ ScrollFrame:
 SimpleHTML:
   fieldinitoverrides:
     hyperlinksEnabled: true
-  fields: {}
+  fields:
+    hyperlinkFormat:
+      init: '|H%s|h%s|h'
+      type: string
   inherits:
     FontInstance: {}
     Frame: {}
@@ -6607,6 +6610,9 @@ SimpleHTML:
           uiobject: Font
       override: true
     GetHyperlinkFormat:
+      impl:
+        getter:
+        - name: hyperlinkFormat
       inputs: {}
       outputs:
       - name: format
@@ -6712,6 +6718,9 @@ SimpleHTML:
       outputs: {}
       override: true
     SetHyperlinkFormat:
+      impl:
+        setter:
+        - name: hyperlinkFormat
       inputs:
       - name: format
         type: string
