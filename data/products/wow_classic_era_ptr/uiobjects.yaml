@@ -2707,6 +2707,9 @@ Font:
       outputs: {}
 FontInstance:
   fields:
+    indentedWordWrap:
+      init: false
+      type: boolean
     justifyh:
       init: CENTER
       type:
@@ -2739,6 +2742,9 @@ FontInstance:
         type:
           uiobject: FontInstance
     GetIndentedWordWrap:
+      impl:
+        getter:
+        - name: indentedWordWrap
       inputs: {}
       outputs:
       - name: wrap
@@ -2802,6 +2808,9 @@ FontInstance:
     SetFont: {}
     SetFontObject: {}
     SetIndentedWordWrap:
+      impl:
+        setter:
+        - name: indentedWordWrap
       inputs:
       - name: wrap
         type: boolean
@@ -3067,6 +3076,12 @@ Frame:
     attributes:
       init: {}
       type: table
+    dontSavePosition:
+      init: false
+      type: boolean
+    flattensRenderLayers:
+      init: false
+      type: boolean
     frameLevel:
       init: 0
       type: number
@@ -3333,6 +3348,9 @@ Frame:
       - name: bottom
         type: number
     GetDontSavePosition:
+      impl:
+        getter:
+        - name: dontSavePosition
       inputs: {}
       outputs:
       - name: dontSave
@@ -3350,6 +3368,9 @@ Frame:
       - name: flatten
         type: boolean
     GetFlattensRenderLayers:
+      impl:
+        getter:
+        - name: flattensRenderLayers
       inputs: {}
       outputs:
       - name: flatten
@@ -3668,6 +3689,9 @@ Frame:
         type: boolean
       outputs: {}
     SetDontSavePosition:
+      impl:
+        setter:
+        - name: dontSavePosition
       inputs:
       - name: dontSave
         type: boolean
@@ -3698,6 +3722,9 @@ Frame:
         type: boolean
       outputs: {}
     SetFlattensRenderLayers:
+      impl:
+        setter:
+        - name: flattensRenderLayers
       inputs:
       - name: flatten
         type: boolean
@@ -4461,6 +4488,9 @@ Model:
     modelScale:
       init: 1
       type: number
+    paused:
+      init: false
+      type: boolean
     pitch:
       init: 0
       type: number
@@ -4608,6 +4638,9 @@ Model:
       - name: scale
         type: number
     GetPaused:
+      impl:
+        getter:
+        - name: paused
       inputs: {}
       outputs:
       - name: paused
@@ -4836,6 +4869,9 @@ Model:
         type: boolean
       outputs: {}
     SetPaused:
+      impl:
+        setter:
+        - name: paused
       inputs:
       - name: paused
         type: boolean
@@ -5563,7 +5599,10 @@ Path:
           stringenum: CurveType
       outputs: {}
 PlayerModel:
-  fields: {}
+  fields:
+    keepModelOnHide:
+      init: false
+      type: boolean
   inherits:
     Model: {}
   methods:
@@ -5600,6 +5639,9 @@ PlayerModel:
       - name: doBlend
         type: boolean
     GetKeepModelOnHide:
+      impl:
+        getter:
+        - name: keepModelOnHide
       inputs: {}
       outputs:
       - name: keepModelOnHide
@@ -5687,6 +5729,9 @@ PlayerModel:
           enum: ItemWeaponSubclass
       outputs: {}
     SetKeepModelOnHide:
+      impl:
+        setter:
+        - name: keepModelOnHide
       inputs:
       - name: keepModelOnHide
         type: boolean
@@ -7008,6 +7053,12 @@ StatusBar:
       init: HORIZONTAL
       type:
         stringenum: Orientation
+    reverseFill:
+      init: false
+      type: boolean
+    rotatesTexture:
+      init: false
+      type: boolean
     statusBarDesaturation:
       init: 0
       type: number
@@ -7051,11 +7102,17 @@ StatusBar:
         type:
           stringenum: Orientation
     GetReverseFill:
+      impl:
+        getter:
+        - name: reverseFill
       inputs: {}
       outputs:
       - name: isReverseFill
         type: boolean
     GetRotatesTexture:
+      impl:
+        getter:
+        - name: rotatesTexture
       inputs: {}
       outputs:
       - name: rotatesTexture
@@ -7146,11 +7203,17 @@ StatusBar:
           stringenum: Orientation
       outputs: {}
     SetReverseFill:
+      impl:
+        setter:
+        - name: reverseFill
       inputs:
       - name: isReverseFill
         type: boolean
       outputs: {}
     SetRotatesTexture:
+      impl:
+        setter:
+        - name: rotatesTexture
       inputs:
       - name: rotatesTexture
         type: boolean
