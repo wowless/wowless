@@ -603,6 +603,7 @@ typedefs:
     type: number
 uiobject_method_reassignments:
   FontString:
+    GetFontObject: FontInstance
     GetIndentedWordWrap: FontInstance
     GetJustifyH: FontInstance
     GetJustifyV: FontInstance
@@ -610,6 +611,7 @@ uiobject_method_reassignments:
     GetShadowOffset: FontInstance
     GetSpacing: FontInstance
     GetTextColor: FontInstance
+    SetFontObject: FontInstance
     SetIndentedWordWrap: FontInstance
     SetJustifyH: FontInstance
     SetJustifyV: FontInstance

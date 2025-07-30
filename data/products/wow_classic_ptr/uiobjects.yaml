@@ -2779,7 +2779,7 @@ FontInstance:
       - name: font
         nilable: true
         type:
-          uiobject: FontInstance
+          uiobject: Font
     GetIndentedWordWrap:
       impl:
         getter:
@@ -2845,7 +2845,12 @@ FontInstance:
       - name: colorA
         type: number
     SetFont: {}
-    SetFontObject: {}
+    SetFontObject:
+      inputs:
+      - name: font
+        type:
+          uiobject: Font
+      outputs: {}
     SetIndentedWordWrap:
       impl:
         setter:
