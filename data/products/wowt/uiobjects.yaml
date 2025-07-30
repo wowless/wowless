@@ -1,6 +1,10 @@
 ---
 Actor:
   fields:
+    animationBlendOperation:
+      init: 1
+      type:
+        enum: ModelBlendOperation
     autoDress:
       init: true
       type: boolean
@@ -77,6 +81,9 @@ Actor:
       - name: animation
         type: number
     GetAnimationBlendOperation:
+      impl:
+        getter:
+        - name: animationBlendOperation
       inputs: {}
       outputs:
       - name: blendOp
@@ -288,6 +295,9 @@ Actor:
         type: number
       outputs: {}
     SetAnimationBlendOperation:
+      impl:
+        setter:
+        - name: animationBlendOperation
       inputs:
       - name: blendOp
         type:

@@ -1,6 +1,10 @@
 ---
 Actor:
   fields:
+    animationBlendOperation:
+      init: 1
+      type:
+        enum: ModelBlendOperation
     desaturation:
       init: 0
       type: number
@@ -36,6 +40,9 @@ Actor:
       - name: animation
         type: number
     GetAnimationBlendOperation:
+      impl:
+        getter:
+        - name: animationBlendOperation
       inputs: {}
       outputs:
       - name: blendOp
@@ -159,6 +166,9 @@ Actor:
         type: number
       outputs: {}
     SetAnimationBlendOperation:
+      impl:
+        setter:
+        - name: animationBlendOperation
       inputs:
       - name: blendOp
         type:
