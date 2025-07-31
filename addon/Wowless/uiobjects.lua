@@ -237,6 +237,23 @@ G.testsuite.uiobjects = function()
           up.cow = nil
           check1(nil, down:GetParentKey())
         end,
+        ['parent keys and metamethods'] = function()
+          local f = CreateFrame('Frame')
+          local g = CreateFrame('Frame', nil, f)
+          local mt, mk, mv
+          setmetatable(f, {
+            __newindex = function(t, k, v)
+              mt = t
+              mk = k
+              mv = v
+            end,
+          })
+          g:SetParentKey('moo')
+          assertEquals(f, mt)
+          assertEquals('moo', mk)
+          assertEquals(g, mv)
+          assertEquals(nil, f.moo)
+        end,
         ['support $parent in frame names'] = function()
           local moo = retn(1, CreateFrame('Frame', 'WowlessParentNameTestMoo'))
           local mooCow = retn(1, CreateFrame('Frame', '$parentWowlessCow', moo))
