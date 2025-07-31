@@ -15,6 +15,7 @@ type:
           required: true
           type:
             schema: schematype
+    none: tag
     number: tag
     record:
       mapof:

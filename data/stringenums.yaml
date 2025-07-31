@@ -1,81 +1,81 @@
 ---
 BlendMode:
-  ADD: {}
-  ALPHAKEY: {}
-  BLEND: {}
-  DISABLE: {}
-  MOD: {}
+  ADD:
+  ALPHAKEY:
+  BLEND:
+  DISABLE:
+  MOD:
 CurveType:
-  NONE: {}
-  SMOOTH: {}
+  NONE:
+  SMOOTH:
 DrawLayer:
-  ARTWORK: {}
-  BACKGROUND: {}
-  BORDER: {}
-  HIGHLIGHT: {}
-  OVERLAY: {}
+  ARTWORK:
+  BACKGROUND:
+  BORDER:
+  HIGHLIGHT:
+  OVERLAY:
 FilterMode:
-  LINEAR: {}
-  NEAREST: {}
-  TRILINEAR: {}
+  LINEAR:
+  NEAREST:
+  TRILINEAR:
 FramePoint:
-  BOTTOM: {}
-  BOTTOMLEFT: {}
-  BOTTOMRIGHT: {}
-  CENTER: {}
-  LEFT: {}
-  RIGHT: {}
-  TOP: {}
-  TOPLEFT: {}
-  TOPRIGHT: {}
+  BOTTOM:
+  BOTTOMLEFT:
+  BOTTOMRIGHT:
+  CENTER:
+  LEFT:
+  RIGHT:
+  TOP:
+  TOPLEFT:
+  TOPRIGHT:
 FrameStrata:
-  BACKGROUND: {}
-  BLIZZARD: {}
-  DIALOG: {}
-  FULLSCREEN: {}
-  FULLSCREEN_DIALOG: {}
-  HIGH: {}
-  LOW: {}
-  MEDIUM: {}
-  PARENT: {}
-  TOOLTIP: {}
+  BACKGROUND:
+  BLIZZARD:
+  DIALOG:
+  FULLSCREEN:
+  FULLSCREEN_DIALOG:
+  HIGH:
+  LOW:
+  MEDIUM:
+  PARENT:
+  TOOLTIP:
 InsertMode:
-  BOTTOM: {}
-  TOP: {}
+  BOTTOM:
+  TOP:
 JustifyHorizontal:
-  CENTER: {}
-  LEFT: {}
-  RIGHT: {}
+  CENTER:
+  LEFT:
+  RIGHT:
 JustifyVertical:
-  BOTTOM: {}
-  MIDDLE: {}
-  TOP: {}
+  BOTTOM:
+  MIDDLE:
+  TOP:
 LoopType:
-  BOUNCE: {}
-  NONE: {}
-  REPEAT: {}
+  BOUNCE:
+  NONE:
+  REPEAT:
 Orientation:
-  HORIZONTAL: {}
-  VERTICAL: {}
+  HORIZONTAL:
+  VERTICAL:
 SimpleButtonStateToken:
-  DISABLED: {}
-  NORMAL: {}
-  PUSHED: {}
+  DISABLED:
+  NORMAL:
+  PUSHED:
 SmoothingType:
-  IN: {}
-  IN_OUT: {}
-  NONE: {}
-  OUT: {}
-  OUT_IN: {}
+  IN:
+  IN_OUT:
+  NONE:
+  OUT:
+  OUT_IN:
 StatusBarFillStyle:
-  CENTER: {}
-  REVERSE: {}
-  STANDARD: {}
-  STANDARD_NO_RANGE_FILL: {}
+  CENTER:
+  REVERSE:
+  STANDARD:
+  STANDARD_NO_RANGE_FILL:
 WrapMode:
-  CLAMP: {}
-  CLAMPTOBLACK: {}
-  CLAMPTOBLACKADDITIVE: {}
-  CLAMPTOWHITE: {}
-  MIRROR: {}
-  REPEAT: {}
+  CLAMP:
+  CLAMPTOBLACK:
+  CLAMPTOBLACKADDITIVE:
+  CLAMPTOWHITE:
+  MIRROR:
+  REPEAT:
