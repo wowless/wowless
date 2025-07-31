@@ -358,21 +358,21 @@ script_objects:
   SimpleTextureAPI: Texture
   SimpleTextureBaseAPI: TextureBase
 skip_docfiles:
-  AuctionHouseDocumentation: {}
-  BarberShopInternalDocumentation: {}
-  ConfigurationWarningsDocumentation: {}
-  DebugToggleDocumentation: {}
-  EditModeManagerDocumentation: {}
-  PingPinFrameAPIDocumentation: {}
-  SimpleModelFFXAPIDocumentation: {}
+  AuctionHouseDocumentation:
+  BarberShopInternalDocumentation:
+  ConfigurationWarningsDocumentation:
+  DebugToggleDocumentation:
+  EditModeManagerDocumentation:
+  PingPinFrameAPIDocumentation:
+  SimpleModelFFXAPIDocumentation:
 skip_uiobject_methods:
   Region:
-    GetBottom: {}
-    GetHeight: {}
-    GetLeft: {}
-    GetRect: {}
-    GetSize: {}
-    GetWidth: {}
+    GetBottom:
+    GetHeight:
+    GetLeft:
+    GetRect:
+    GetSize:
+    GetWidth:
 typedefs:
   AnimationDataEnum:
     type: number

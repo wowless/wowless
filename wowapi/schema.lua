@@ -31,8 +31,8 @@ local simple = {
   any = function() end,
   boolean = mksimple('boolean'),
   none = function(v)
-    if v ~= require('lyaml').null then
-      return ('want yaml null, got %s'):format(type(v))
+    if type(v) ~= 'table' or next(v) ~= nil then
+      return ('want none, got %s'):format(type(v))
     end
   end,
   number = mksimple('number'),
