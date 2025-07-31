@@ -45,7 +45,7 @@ type:
                   key:
                     ref: xml
                   value:
-                    record: null
+                    record:
               text: tag
         extends:
           type:
