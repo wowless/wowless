@@ -1,6 +1,7 @@
 local mkemitter = require('yaml').emitter
 local parse = require('lyaml').load
 local lyamlnull = require('lyaml').null
+local sorted = require('pl.tablex').sort
 
 local function isarray(t)
   local i = 0
@@ -53,19 +54,9 @@ local function api2yaml(api)
         assert(emit({ type = 'SEQUENCE_END' }))
       else
         assert(emit({ type = 'MAPPING_START' }))
-        local names = {}
-        for name in pairs(v) do
-          table.insert(names, name)
-        end
-        table.sort(names, keycomp)
-        local handled = {}
-        for _, name in ipairs(names) do
-          local value = v[name]
-          if value ~= nil and not handled[name] then
-            handled[name] = true
-            run(name)
-            run(value)
-          end
+        for vk, vv in sorted(v, keycomp) do
+          run(vk)
+          run(vv)
         end
         assert(emit({ type = 'MAPPING_END' }))
       end
