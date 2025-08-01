@@ -31,7 +31,7 @@ C_Calendar.SetMonth:
   moduledelegate:
     name: calendar
 C_ChatInfo.ReplaceIconAndGroupExpressions:
-  impl: {}
+  impl:
 C_ClassTalents.GetActiveConfigID:
   impl:
     frameworks:
@@ -225,9 +225,9 @@ CreateFrame:
     frameworks:
     - api
 CreateFromMixins:
-  impl: {}
+  impl:
 CreateWindow:
-  impl: {}
+  impl:
 date:
   stdlib: date
 debuglocals:
@@ -263,11 +263,11 @@ forceinsecure:
 gcinfo:
   stdlib: gcinfo
 GetAddOnEnableState:
-  impl: {}
+  impl:
 GetAddOnInfo:
-  impl: {}
+  impl:
 GetAddOnMetadata:
-  impl: {}
+  impl:
 GetAuctionItemSubClasses:
   impl:
     sqls:
@@ -289,7 +289,7 @@ GetButtonMetatable:
     frameworks:
     - api
 GetChatWindowInfo:
-  impl: {}
+  impl:
 GetChatWindowMessages:
   impl:
     frameworks:
@@ -328,7 +328,7 @@ GetGlobalEnvironment:
 GetInventorySlotInfo:
   directsql: GetInventorySlotInfo
 GetItemQualityColor:
-  impl: {}
+  impl:
 GetLootSpecialization:
   moduledelegate:
     name: units
@@ -406,13 +406,13 @@ hooksecurefunc:
 ipairs:
   stdlib: ipairs
 IsAddOnLoaded:
-  impl: {}
+  impl:
 IsAddOnLoadOnDemand:
-  impl: {}
+  impl:
 IsDebugBuild:
-  impl: {}
+  impl:
 IsGMClient:
-  impl: {}
+  impl:
 IsInGlobalEnvironment:
   moduledelegate:
     name: env
@@ -428,7 +428,7 @@ IsMacClient:
     frameworks:
     - api
 IsPublicBuild:
-  impl: {}
+  impl:
 issecure:
   stdlib: issecure
 issecurevariable:
@@ -535,7 +535,7 @@ RunMacroText:
   moduledelegate:
     name: macrotext
 RunScript:
-  impl: {}
+  impl:
 scrub:
   stdlib: scrub
 securecall:
@@ -543,7 +543,7 @@ securecall:
 securecallfunction:
   stdlib: securecallfunction
 SecureCmdOptionParse:
-  impl: {}
+  impl:
 secureexecuterange:
   stdlib: secureexecuterange
 select:
@@ -559,7 +559,7 @@ setfenv:
 setmetatable:
   stdlib: setmetatable
 SetPortraitTexture:
-  impl: {}
+  impl:
 strcmputf8i:
   stdlib: strcmputf8i
 strconcat:
@@ -650,21 +650,21 @@ UnitClassBase:
     sqls:
     - UnitClassBase
 UnitExists:
-  impl: {}
+  impl:
 UnitFactionGroup:
   impl:
     sqls:
     - UnitFactionGroup
 UnitGUID:
-  impl: {}
+  impl:
 UnitIsPlayer:
-  impl: {}
+  impl:
 UnitIsUnit:
-  impl: {}
+  impl:
 UnitLevel:
-  impl: {}
+  impl:
 UnitName:
-  impl: {}
+  impl:
 UnitPowerType:
   impl:
     sqls:
@@ -674,7 +674,7 @@ UnitRace:
     sqls:
     - UnitRace
 UnitSex:
-  impl: {}
+  impl:
 unpack:
   stdlib: unpack
 xpcall:

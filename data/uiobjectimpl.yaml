@@ -1,95 +1,95 @@
 ---
-Animation/GetRegionParent: {}
-Animation/GetTarget: {}
-AnimationGroup/CreateAnimation: {}
-AnimationGroup/GetAnimations: {}
-Button/Click: {}
-Button/Disable: {}
-Button/Enable: {}
-Button/GetText: {}
-Button/IsEnabled: {}
-Button/RegisterForClicks: {}
-Button/SetButtonState: {}
-Button/SetDisabledAtlas: {}
-Button/SetEnabled: {}
-Button/SetFontString: {}
-Button/SetFormattedText: {}
-Button/SetHighlightAtlas: {}
-Button/SetNormalAtlas: {}
-Button/SetPushedAtlas: {}
-Button/SetText: {}
-CheckButton/SetChecked: {}
-EditBox/Disable: {}
-EditBox/Enable: {}
-EditBox/Insert: {}
-FontInstance/GetFontObject: {}
-FontString/SetText: {}
-ForbiddenMixin/SetForbidden: {}
-Frame/CreateFontString: {}
-Frame/CreateLine: {}
-Frame/CreateMaskTexture: {}
-Frame/CreateTexture: {}
-Frame/GetAttribute: {}
-Frame/GetChildren: {}
-Frame/GetEffectiveAlpha: {}
-Frame/GetNumChildren: {}
-Frame/GetNumRegions: {}
-Frame/GetRegions: {}
-Frame/IsEventRegistered: {}
-Frame/RegisterAllEvents: {}
-Frame/RegisterEvent: {}
-Frame/RegisterUnitEvent: {}
-Frame/SetAttribute: {}
-Frame/SetAttributeNoHandler: {}
-Frame/SetFrameLevel: {}
-Frame/SetResizeBounds: {}
-Frame/UnregisterAllEvents: {}
-Frame/UnregisterEvent: {}
-GameTooltip/IsOwned: {}
-GameTooltip/SetOwner: {}
-LayeredRegion/SetVertexColor: {}
-MessageFrame/AddMessage: {}
-ModelScene/CreateActor: {}
-MouseMixin/EnableMouse: {}
-MouseMixin/IsMouseEnabled: {}
-ParentedObject/GetDebugName: {}
-ParentedObject/SetParent: {}
-ParentedObjectBase/ClearParentKey: {}
-ParentedObjectBase/GetParentKey: {}
-ParentedObjectBase/SetParentKey: {}
-Path/CreateControlPoint: {}
-Path/GetControlPoints: {}
-Region/ClearAllPoints: {}
-Region/CreateAnimationGroup: {}
-Region/GetAnimationGroups: {}
-Region/GetCenter: {}
-Region/GetEffectiveScale: {}
-Region/GetNumPoints: {}
-Region/GetPoint: {}
-Region/GetRight: {}
-Region/GetScaledRect: {}
-Region/GetTop: {}
-Region/Hide: {}
-Region/IsProtected: {}
-Region/IsVisible: {}
-Region/SetAllPoints: {}
-Region/SetAlpha: {}
-Region/SetPoint: {}
-Region/SetScale: {}
-Region/SetShown: {}
-Region/Show: {}
-ScriptObject/GetScript: {}
-ScriptObject/HookScript: {}
-ScriptObject/SetScript: {}
-ScrollFrame/SetScrollChild: {}
-Slider/Disable: {}
-Slider/Enable: {}
-StatusBar/GetStatusBarColor: {}
-StatusBar/SetStatusBarColor: {}
-Texture/GetTexture: {}
-Texture/SetAtlas: {}
-Texture/SetColorTexture: {}
-Texture/SetTexCoord: {}
-Texture/SetTexture: {}
-UIObject/GetObjectType: {}
-UIObject/IsObjectType: {}
+Animation/GetRegionParent:
+Animation/GetTarget:
+AnimationGroup/CreateAnimation:
+AnimationGroup/GetAnimations:
+Button/Click:
+Button/Disable:
+Button/Enable:
+Button/GetText:
+Button/IsEnabled:
+Button/RegisterForClicks:
+Button/SetButtonState:
+Button/SetDisabledAtlas:
+Button/SetEnabled:
+Button/SetFontString:
+Button/SetFormattedText:
+Button/SetHighlightAtlas:
+Button/SetNormalAtlas:
+Button/SetPushedAtlas:
+Button/SetText:
+CheckButton/SetChecked:
+EditBox/Disable:
+EditBox/Enable:
+EditBox/Insert:
+FontInstance/GetFontObject:
+FontString/SetText:
+ForbiddenMixin/SetForbidden:
+Frame/CreateFontString:
+Frame/CreateLine:
+Frame/CreateMaskTexture:
+Frame/CreateTexture:
+Frame/GetAttribute:
+Frame/GetChildren:
+Frame/GetEffectiveAlpha:
+Frame/GetNumChildren:
+Frame/GetNumRegions:
+Frame/GetRegions:
+Frame/IsEventRegistered:
+Frame/RegisterAllEvents:
+Frame/RegisterEvent:
+Frame/RegisterUnitEvent:
+Frame/SetAttribute:
+Frame/SetAttributeNoHandler:
+Frame/SetFrameLevel:
+Frame/SetResizeBounds:
+Frame/UnregisterAllEvents:
+Frame/UnregisterEvent:
+GameTooltip/IsOwned:
+GameTooltip/SetOwner:
+LayeredRegion/SetVertexColor:
+MessageFrame/AddMessage:
+ModelScene/CreateActor:
+MouseMixin/EnableMouse:
+MouseMixin/IsMouseEnabled:
+ParentedObject/GetDebugName:
+ParentedObject/SetParent:
+ParentedObjectBase/ClearParentKey:
+ParentedObjectBase/GetParentKey:
+ParentedObjectBase/SetParentKey:
+Path/CreateControlPoint:
+Path/GetControlPoints:
+Region/ClearAllPoints:
+Region/CreateAnimationGroup:
+Region/GetAnimationGroups:
+Region/GetCenter:
+Region/GetEffectiveScale:
+Region/GetNumPoints:
+Region/GetPoint:
+Region/GetRight:
+Region/GetScaledRect:
+Region/GetTop:
+Region/Hide:
+Region/IsProtected:
+Region/IsVisible:
+Region/SetAllPoints:
+Region/SetAlpha:
+Region/SetPoint:
+Region/SetScale:
+Region/SetShown:
+Region/Show:
+ScriptObject/GetScript:
+ScriptObject/HookScript:
+ScriptObject/SetScript:
+ScrollFrame/SetScrollChild:
+Slider/Disable:
+Slider/Enable:
+StatusBar/GetStatusBarColor:
+StatusBar/SetStatusBarColor:
+Texture/GetTexture:
+Texture/SetAtlas:
+Texture/SetColorTexture:
+Texture/SetTexCoord:
+Texture/SetTexture:
+UIObject/GetObjectType:
+UIObject/IsObjectType:

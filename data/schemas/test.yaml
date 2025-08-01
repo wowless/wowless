@@ -5,4 +5,4 @@ type:
     key:
       ref: impl
     value:
-      record: {}
+      record:

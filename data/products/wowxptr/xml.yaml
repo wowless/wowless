@@ -31,7 +31,7 @@ Actor:
       type: boolean
   contents:
     tags:
-      Scripts: {}
+      Scripts:
 Alpha:
   attributes:
     fromalpha:
@@ -59,11 +59,11 @@ Anchor:
       type: number
   contents:
     tags:
-      Offset: {}
+      Offset:
 Anchors:
   contents:
     tags:
-      Anchor: {}
+      Anchor:
   impl: transparent
 Animation:
   attributes:
@@ -98,8 +98,8 @@ Animation:
       type: string
   contents:
     tags:
-      KeyValues: {}
-      Scripts: {}
+      KeyValues:
+      Scripts:
 AnimationGroup:
   attributes:
     looping:
@@ -112,12 +112,12 @@ AnimationGroup:
       type: boolean
   contents:
     tags:
-      Animation: {}
+      Animation:
   extends: LayoutFrame
 Animations:
   contents:
     tags:
-      AnimationGroup: {}
+      AnimationGroup:
   impl: transparent
 Attribute:
   attributes:
@@ -130,7 +130,7 @@ Attribute:
 Attributes:
   contents:
     tags:
-      Attribute: {}
+      Attribute:
   impl: transparent
 BarColor:
   extends: Color
@@ -163,8 +163,8 @@ Binding:
 Bindings:
   contents:
     tags:
-      Binding: {}
-      ModifiedClick: {}
+      Binding:
+      ModifiedClick:
   impl: transparent
 BlingTexture:
   extends: Texture
@@ -190,13 +190,13 @@ Button:
       type: string
   contents:
     tags:
-      ButtonFont: {}
-      ButtonText: {}
-      DisabledTexture: {}
-      HighlightTexture: {}
-      NormalTexture: {}
-      PushedTextOffset: {}
-      PushedTexture: {}
+      ButtonFont:
+      ButtonText:
+      DisabledTexture:
+      HighlightTexture:
+      NormalTexture:
+      PushedTextOffset:
+      PushedTexture:
   extends: Frame
 ButtonFont:
   attributes:
@@ -220,8 +220,8 @@ CheckButton:
       type: boolean
   contents:
     tags:
-      CheckedTexture: {}
-      DisabledCheckedTexture: {}
+      CheckedTexture:
+      DisabledCheckedTexture:
   extends: Button
 CheckedTexture:
   extends: Texture
@@ -252,10 +252,10 @@ Color:
 ColorSelect:
   contents:
     tags:
-      ColorValueTexture: {}
-      ColorValueThumbTexture: {}
-      ColorWheelTexture: {}
-      ColorWheelThumbTexture: {}
+      ColorValueTexture:
+      ColorValueThumbTexture:
+      ColorWheelTexture:
+      ColorWheelThumbTexture:
   extends: Frame
 ColorValueTexture:
   extends: Texture
@@ -294,7 +294,7 @@ ControlPoint:
 ControlPoints:
   contents:
     tags:
-      ControlPoint: {}
+      ControlPoint:
   impl: transparent
 Cooldown:
   attributes:
@@ -312,14 +312,14 @@ Cooldown:
       type: boolean
   contents:
     tags:
-      BlingTexture: {}
-      EdgeTexture: {}
-      SwipeTexture: {}
+      BlingTexture:
+      EdgeTexture:
+      SwipeTexture:
   extends: Frame
 Dimension:
   contents:
     tags:
-      AbsDimension: {}
+      AbsDimension:
   virtual: true
 DisabledCheckedTexture:
   extends: Texture
@@ -373,9 +373,9 @@ EditBox:
       type: number
   contents:
     tags:
-      FontString: {}
-      HighlightColor: {}
-      TextInsets: {}
+      FontString:
+      HighlightColor:
+      TextInsets:
   extends: Frame
 FlipBook:
   extends: Animation
@@ -415,8 +415,8 @@ Font:
       type: boolean
   contents:
     tags:
-      Color: {}
-      Shadow: {}
+      Color:
+      Shadow:
 FontFamily:
   attributes:
     name:
@@ -426,7 +426,7 @@ FontFamily:
       type: boolean
   contents:
     tags:
-      Member: {}
+      Member:
 FontHeight:
   extends: Value
 FontString:
@@ -455,8 +455,8 @@ FontString:
       type: boolean
   contents:
     tags:
-      FontHeight: {}
-      Shadow: {}
+      FontHeight:
+      Shadow:
   extends: LayoutFrame
 FontStringHeader1:
   extends: FontString
@@ -543,17 +543,17 @@ Frame:
       type: boolean
   contents:
     tags:
-      Animations: {}
-      Attributes: {}
-      Frames: {}
-      HitRectInsets: {}
-      Layers: {}
-      ResizeBounds: {}
+      Animations:
+      Attributes:
+      Frames:
+      HitRectInsets:
+      Layers:
+      ResizeBounds:
   extends: LayoutFrame
 Frames:
   contents:
     tags:
-      Frame: {}
+      Frame:
   impl: transparent
   phase: late
 GameTooltip:
@@ -564,8 +564,8 @@ Gradient:
       type: string
   contents:
     tags:
-      MaxColor: {}
-      MinColor: {}
+      MaxColor:
+      MinColor:
 HighlightColor:
   extends: Color
 HighlightFont:
@@ -604,8 +604,8 @@ Insets:
       type: number
   contents:
     tags:
-      AbsInset: {}
-      RelInset: {}
+      AbsInset:
+      RelInset:
   virtual: true
 KeyValue:
   attributes:
@@ -620,7 +620,7 @@ KeyValue:
 KeyValues:
   contents:
     tags:
-      KeyValue: {}
+      KeyValue:
   impl: transparent
 Layer:
   attributes:
@@ -633,14 +633,14 @@ Layer:
       type: number
   contents:
     tags:
-      FontString: {}
-      Line: {}
-      Texture: {}
+      FontString:
+      Line:
+      Texture:
   impl: transparent
 Layers:
   contents:
     tags:
-      Layer: {}
+      Layer:
   impl: transparent
   phase: late
 LayoutFrame:
@@ -685,11 +685,11 @@ LayoutFrame:
       type: boolean
   contents:
     tags:
-      Anchors: {}
-      Color: {}
-      KeyValues: {}
-      Scripts: {}
-      Size: {}
+      Anchors:
+      Color:
+      KeyValues:
+      Scripts:
+      Size:
   virtual: true
 Line:
   attributes:
@@ -712,7 +712,7 @@ LineScale:
       type: number
   contents:
     tags:
-      Origin: {}
+      Origin:
   extends: Animation
 MaskedTexture:
   attributes:
@@ -721,7 +721,7 @@ MaskedTexture:
 MaskedTextures:
   contents:
     tags:
-      MaskedTexture: {}
+      MaskedTexture:
   impl: transparent
 MaskTexture:
   attributes:
@@ -731,7 +731,7 @@ MaskTexture:
       type: string
   contents:
     tags:
-      MaskedTextures: {}
+      MaskedTextures:
   extends: Texture
 MaxColor:
   extends: Color
@@ -744,7 +744,7 @@ Member:
       type: string
   contents:
     tags:
-      Font: {}
+      Font:
 MessageFrame:
   attributes:
     displayduration:
@@ -757,7 +757,7 @@ MessageFrame:
       type: string
   contents:
     tags:
-      FontString: {}
+      FontString:
   extends: Frame
 MinColor:
   extends: Color
@@ -770,7 +770,7 @@ Model:
 ModelScene:
   contents:
     tags:
-      ViewInsets: {}
+      ViewInsets:
   extends: Frame
 ModifiedClick:
   attributes:
@@ -804,19 +804,19 @@ Offset:
       type: number
   contents:
     tags:
-      AbsDimension: {}
+      AbsDimension:
 OnAnimFinished:
   extends: ScriptType
   impl:
-    script: {}
+    script:
 OnAnimStarted:
   extends: ScriptType
   impl:
-    script: {}
+    script:
 OnArrowPressed:
   extends: ScriptType
   impl:
-    script: {}
+    script:
 OnAttributeChanged:
   extends: ScriptType
   impl:
@@ -825,15 +825,15 @@ OnAttributeChanged:
 OnButtonUpdate:
   extends: ScriptType
   impl:
-    script: {}
+    script:
 OnChar:
   extends: ScriptType
   impl:
-    script: {}
+    script:
 OnCharComposition:
   extends: ScriptType
   impl:
-    script: {}
+    script:
 OnClick:
   extends: ScriptType
   impl:
@@ -842,47 +842,47 @@ OnClick:
 OnColorSelect:
   extends: ScriptType
   impl:
-    script: {}
+    script:
 OnCooldownDone:
   extends: ScriptType
   impl:
-    script: {}
+    script:
 OnCursorChanged:
   extends: ScriptType
   impl:
-    script: {}
+    script:
 OnDisable:
   extends: ScriptType
   impl:
-    script: {}
+    script:
 OnDoubleClick:
   extends: ScriptType
   impl:
-    script: {}
+    script:
 OnDragStart:
   extends: ScriptType
   impl:
-    script: {}
+    script:
 OnDragStop:
   extends: ScriptType
   impl:
-    script: {}
+    script:
 OnDressModel:
   extends: ScriptType
   impl:
-    script: {}
+    script:
 OnEditFocusGained:
   extends: ScriptType
   impl:
-    script: {}
+    script:
 OnEditFocusLost:
   extends: ScriptType
   impl:
-    script: {}
+    script:
 OnEnable:
   extends: ScriptType
   impl:
-    script: {}
+    script:
 OnEnter:
   extends: ScriptType
   impl:
@@ -891,15 +891,15 @@ OnEnter:
 OnEnterPressed:
   extends: ScriptType
   impl:
-    script: {}
+    script:
 OnError:
   extends: ScriptType
   impl:
-    script: {}
+    script:
 OnEscapePressed:
   extends: ScriptType
   impl:
-    script: {}
+    script:
 OnEvent:
   extends: ScriptType
   impl:
@@ -908,51 +908,51 @@ OnEvent:
 OnExternalLink:
   extends: ScriptType
   impl:
-    script: {}
+    script:
 OnFinished:
   extends: ScriptType
   impl:
-    script: {}
+    script:
 OnFocusGained:
   extends: ScriptType
   impl:
-    script: {}
+    script:
 OnGamePadButtonDown:
   extends: ScriptType
   impl:
-    script: {}
+    script:
 OnGamePadButtonUp:
   extends: ScriptType
   impl:
-    script: {}
+    script:
 OnHide:
   extends: ScriptType
   impl:
-    script: {}
+    script:
 OnHyperlinkClick:
   extends: ScriptType
   impl:
-    script: {}
+    script:
 OnHyperlinkEnter:
   extends: ScriptType
   impl:
-    script: {}
+    script:
 OnHyperlinkLeave:
   extends: ScriptType
   impl:
-    script: {}
+    script:
 OnInputLanguageChanged:
   extends: ScriptType
   impl:
-    script: {}
+    script:
 OnKeyDown:
   extends: ScriptType
   impl:
-    script: {}
+    script:
 OnKeyUp:
   extends: ScriptType
   impl:
-    script: {}
+    script:
 OnLeave:
   extends: ScriptType
   impl:
@@ -961,127 +961,127 @@ OnLeave:
 OnLoad:
   extends: ScriptType
   impl:
-    script: {}
+    script:
 OnLoop:
   extends: ScriptType
   impl:
-    script: {}
+    script:
 OnModelCleared:
   extends: ScriptType
   impl:
-    script: {}
+    script:
 OnModelLoaded:
   extends: ScriptType
   impl:
-    script: {}
+    script:
 OnMouseDown:
   extends: ScriptType
   impl:
-    script: {}
+    script:
 OnMouseEnter:
   extends: ScriptType
   impl:
-    script: {}
+    script:
 OnMouseLeave:
   extends: ScriptType
   impl:
-    script: {}
+    script:
 OnMouseUp:
   extends: ScriptType
   impl:
-    script: {}
+    script:
 OnMouseWheel:
   extends: ScriptType
   impl:
-    script: {}
+    script:
 OnMovieFinished:
   extends: ScriptType
   impl:
-    script: {}
+    script:
 OnMovieHideSubtitle:
   extends: ScriptType
   impl:
-    script: {}
+    script:
 OnMovieShowSubtitle:
   extends: ScriptType
   impl:
-    script: {}
+    script:
 OnPlay:
   extends: ScriptType
   impl:
-    script: {}
+    script:
 OnReceiveDrag:
   extends: ScriptType
   impl:
-    script: {}
+    script:
 OnRequestNewSize:
   extends: ScriptType
   impl:
-    script: {}
+    script:
 OnScrollRangeChanged:
   extends: ScriptType
   impl:
-    script: {}
+    script:
 OnShow:
   extends: ScriptType
   impl:
-    script: {}
+    script:
 OnSizeChanged:
   extends: ScriptType
   impl:
-    script: {}
+    script:
 OnSpacePressed:
   extends: ScriptType
   impl:
-    script: {}
+    script:
 OnStop:
   extends: ScriptType
   impl:
-    script: {}
+    script:
 OnTabPressed:
   extends: ScriptType
   impl:
-    script: {}
+    script:
 OnTextChanged:
   extends: ScriptType
   impl:
-    script: {}
+    script:
 OnTextSet:
   extends: ScriptType
   impl:
-    script: {}
+    script:
 OnTooltipAddMoney:
   extends: ScriptType
   impl:
-    script: {}
+    script:
 OnTooltipCleared:
   extends: ScriptType
   impl:
-    script: {}
+    script:
 OnTooltipSetDefaultAnchor:
   extends: ScriptType
   impl:
-    script: {}
+    script:
 OnTooltipSetFrameStack:
   extends: ScriptType
   impl:
-    script: {}
+    script:
 OnTooltipSetItem:
   extends: ScriptType
   impl:
-    script: {}
+    script:
 OnTooltipSetSpell:
   extends: ScriptType
   impl:
-    script: {}
+    script:
 OnTooltipSetUnit:
   extends: ScriptType
   impl:
-    script: {}
+    script:
 OnUiMapChanged:
   extends: ScriptType
   impl:
-    script: {}
+    script:
 OnUpdate:
   extends: ScriptType
   impl:
@@ -1090,25 +1090,25 @@ OnUpdate:
 OnValueChanged:
   extends: ScriptType
   impl:
-    script: {}
+    script:
 OnVerticalScroll:
   extends: ScriptType
   impl:
-    script: {}
+    script:
 Origin:
   attributes:
     point:
       type: string
   contents:
     tags:
-      Offset: {}
+      Offset:
 Path:
   attributes:
     curve:
       type: string
   contents:
     tags:
-      ControlPoints: {}
+      ControlPoints:
   extends: Animation
 PlayerModel:
   extends: Frame
@@ -1169,8 +1169,8 @@ RelInset:
 ResizeBounds:
   contents:
     tags:
-      MaxResize: {}
-      MinResize: {}
+      MaxResize:
+      MinResize:
   impl: transparent
 Rotation:
   attributes:
@@ -1193,7 +1193,7 @@ Scale:
       type: number
   contents:
     tags:
-      Origin: {}
+      Origin:
   extends: Animation
 ScenarioPOIFrame:
   extends: POIFrame
@@ -1209,9 +1209,9 @@ ScopedModifier:
       type: boolean
   contents:
     tags:
-      Actor: {}
-      LayoutFrame: {}
-      Script: {}
+      Actor:
+      LayoutFrame:
+      Script:
   impl: transparent
 Script:
   attributes:
@@ -1223,7 +1223,7 @@ Script:
 Scripts:
   contents:
     tags:
-      ScriptType: {}
+      ScriptType:
   impl: transparent
 ScriptType:
   attributes:
@@ -1242,7 +1242,7 @@ ScriptType:
 ScrollChild:
   contents:
     tags:
-      Frame: {}
+      Frame:
   impl:
     call:
       argument: lastkid
@@ -1251,7 +1251,7 @@ ScrollChild:
 ScrollFrame:
   contents:
     tags:
-      ScrollChild: {}
+      ScrollChild:
   extends: Frame
 Shadow:
   attributes:
@@ -1261,17 +1261,17 @@ Shadow:
       type: number
   contents:
     tags:
-      Color: {}
-      Offset: {}
+      Color:
+      Offset:
   impl:
     scope: shadow
 SimpleHTML:
   contents:
     tags:
-      FontString: {}
-      FontStringHeader1: {}
-      FontStringHeader2: {}
-      FontStringHeader3: {}
+      FontString:
+      FontStringHeader1:
+      FontStringHeader2:
+      FontStringHeader3:
   extends: Frame
 Size:
   attributes:
@@ -1281,7 +1281,7 @@ Size:
       type: number
   contents:
     tags:
-      AbsDimension: {}
+      AbsDimension:
 Slider:
   attributes:
     defaultvalue:
@@ -1310,7 +1310,7 @@ Slider:
       type: number
   contents:
     tags:
-      ThumbTexture: {}
+      ThumbTexture:
   extends: Frame
 StatusBar:
   attributes:
@@ -1330,8 +1330,8 @@ StatusBar:
       type: boolean
   contents:
     tags:
-      BarColor: {}
-      BarTexture: {}
+      BarColor:
+      BarTexture:
   extends: Frame
 SwipeTexture:
   extends: Texture
@@ -1349,7 +1349,7 @@ TexCoords:
       type: number
   contents:
     tags:
-      Rect: {}
+      Rect:
 TextInsets:
   extends: Insets
 Texture:
@@ -1395,9 +1395,9 @@ Texture:
       type: boolean
   contents:
     tags:
-      Animations: {}
-      Gradient: {}
-      TexCoords: {}
+      Animations:
+      Gradient:
+      TexCoords:
   extends: LayoutFrame
 TextureCoordTranslation:
   extends: Animation
@@ -1418,20 +1418,20 @@ Translation:
 Ui:
   contents:
     tags:
-      Actor: {}
-      Font: {}
-      FontFamily: {}
-      Include: {}
-      LayoutFrame: {}
-      ScopedModifier: {}
-      Script: {}
+      Actor:
+      Font:
+      FontFamily:
+      Include:
+      LayoutFrame:
+      ScopedModifier:
+      Script:
   impl: transparent
 UnitPositionFrame:
   extends: Frame
 Value:
   contents:
     tags:
-      AbsValue: {}
+      AbsValue:
 ViewInsets:
   attributes:
     bottom:

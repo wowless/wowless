@@ -86,7 +86,7 @@ AppearanceSourceInfo:
     visualID:
       type: number
 AuraData:
-  fields: {}
+  fields:
 C_AccountStore.AccountStoreCategoryInfo:
   fields:
     icon:
@@ -3004,7 +3004,7 @@ C_PvP.RandomBGInfo:
     name:
       type: string
 C_PvP.RoleShortageReward:
-  fields: {}
+  fields:
 C_PvP.WorldPVPBattlegroundInfo:
   fields:
     bgID:
@@ -4693,7 +4693,7 @@ ItemLocation:
       type: number
   mixin: ItemLocationMixin
 ItemTransmogInfo:
-  fields: {}
+  fields:
   mixin: ItemTransmogInfoMixin
 LFGRoles:
   fields:
@@ -4771,7 +4771,7 @@ PlayerInfoCharacterData:
       type:
         enum: UnitSex
 PlayerLocation:
-  fields: {}
+  fields:
   mixin: PlayerLocationMixin
 PrivateAuraIconInfo:
   fields:
@@ -4844,7 +4844,7 @@ QueueSpecificInfo:
       nilable: true
       type: number
 ReportInfo:
-  fields: {}
+  fields:
   mixin: ReportInfoMixin
 SpellChargeInfo:
   fields:
@@ -4900,7 +4900,7 @@ TransmogLocation:
       type: number
   mixin: TransmogLocationMixin
 TransmogPendingInfo:
-  fields: {}
+  fields:
   mixin: TransmogPendingInfoMixin
 uiBoundsRect:
   fields:

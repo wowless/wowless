@@ -1,7 +1,23 @@
 local mkemitter = require('yaml').emitter
-local parse = require('lyaml').load
+local load = require('lyaml').load
 local lyamlnull = require('lyaml').null
 local sorted = require('pl.tablex').sort
+
+local function rewritenulls(t)
+  if t == lyamlnull then
+    return {}
+  end
+  if type(t) == 'table' then
+    for k, v in pairs(t) do
+      t[k] = rewritenulls(v)
+    end
+  end
+  return t
+end
+
+local function parse(s)
+  return rewritenulls(load(s))
+end
 
 local function isarray(t)
   local i = 0
@@ -44,8 +60,7 @@ local function api2yaml(api)
       assert(emit({ type = 'SCALAR', value = v, style = sq and 'SINGLE_QUOTED' or nil }))
     elseif ty == 'table' then
       if not next(v) then
-        assert(emit({ type = 'MAPPING_START' }))
-        assert(emit({ type = 'MAPPING_END' }))
+        assert(emit({ type = 'SCALAR', value = '' }))
       elseif isarray(v) then
         assert(emit({ type = 'SEQUENCE_START' }))
         for _, value in ipairs(v) do

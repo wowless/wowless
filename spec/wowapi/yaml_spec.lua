@@ -35,7 +35,7 @@ record:
   end)
   describe('pprint', function()
     it('works on empty', function()
-      assert.same('--- {}\n', yaml.pprint({}))
+      assert.same('---\n', yaml.pprint({}))
     end)
   end)
 end)

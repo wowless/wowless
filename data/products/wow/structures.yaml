@@ -9827,7 +9827,7 @@ ItemLocation:
       type: number
   mixin: ItemLocationMixin
 ItemTransmogInfo:
-  fields: {}
+  fields:
   mixin: ItemTransmogInfoMixin
 LFGRoles:
   fields:
@@ -9951,7 +9951,7 @@ PlayerInfoCharacterData:
       type:
         enum: UnitSex
 PlayerLocation:
-  fields: {}
+  fields:
   mixin: PlayerLocationMixin
 PrivateAuraAnchor:
   fields:
@@ -10110,7 +10110,7 @@ RegularReagentInfo:
     quantity:
       type: number
 ReportInfo:
-  fields: {}
+  fields:
   mixin: ReportInfoMixin
 RuneforgeItemPreviewInfo:
   fields:
@@ -10396,7 +10396,7 @@ TransmogLocation:
       type: number
   mixin: TransmogLocationMixin
 TransmogPendingInfo:
-  fields: {}
+  fields:
   mixin: TransmogPendingInfoMixin
 uiBoundsRect:
   fields:
