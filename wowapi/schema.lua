@@ -30,11 +30,6 @@ end
 local simple = {
   any = function() end,
   boolean = mksimple('boolean'),
-  none = function(v)
-    if v ~= require('lyaml').null then
-      return ('want yaml null, got %s'):format(type(v))
-    end
-  end,
   number = mksimple('number'),
   string = mksimple('string'),
   table = mksimple('table'),

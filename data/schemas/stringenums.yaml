@@ -6,4 +6,5 @@ type:
     value:
       mapof:
         key: string
-        value: none
+        value:
+          record:
