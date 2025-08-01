@@ -35,7 +35,7 @@ local function api2yaml(api)
   local function run(v)
     local ty = type(v)
     if v == require('lyaml').null then
-      assert(emit({ type = 'SCALAR', value = '' }))
+      assert(emit({ type = 'SCALAR', value = 'null' }))
     elseif ty == 'number' or ty == 'boolean' then
       assert(emit({ type = 'SCALAR', value = tostring(v) }))
     elseif ty == 'string' then

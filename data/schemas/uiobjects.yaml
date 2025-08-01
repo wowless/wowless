@@ -32,7 +32,7 @@ type:
               key:
                 ref: uiobject
               value:
-                record:
+                record: null
         methods:
           required: true
           type:

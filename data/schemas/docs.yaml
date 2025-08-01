@@ -16,7 +16,7 @@ type:
               mapof:
                 key: string
                 value:
-                  record:
+                  record: null
           uiobjects:
             type:
               mapof:
@@ -37,7 +37,7 @@ type:
         mapof:
           key: string
           value:
-            record:
+            record: null
     skip_uiobject_methods:
       type:
         mapof:
@@ -47,7 +47,7 @@ type:
             mapof:
               key: string
               value:
-                record:
+                record: null
     typedefs:
       type:
         mapof:

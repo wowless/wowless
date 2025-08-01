@@ -4,4 +4,4 @@ type:
   mapof:
     key: string
     value:
-      record:
+      record: null
