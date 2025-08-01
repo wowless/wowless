@@ -136,31 +136,6 @@ target_link_libraries(luaexpat PRIVATE expat::expat)
 
 find_package(yaml CONFIG REQUIRED)
 
-FetchContent_Declare(
-  lyaml
-  GIT_REPOSITORY https://github.com/gvvaughan/lyaml.git
-  GIT_TAG v6.2.8
-  SOURCE_SUBDIR disable_cmakelists_txt)
-FetchContent_MakeAvailable(lyaml)
-lua2c(
-  lyaml
-  lyaml=${lyaml_SOURCE_DIR}/lib/lyaml/init.lua
-  lyaml.explicit=${lyaml_SOURCE_DIR}/lib/lyaml/explicit.lua
-  lyaml.functional=${lyaml_SOURCE_DIR}/lib/lyaml/functional.lua
-  lyaml.implicit=${lyaml_SOURCE_DIR}/lib/lyaml/implicit.lua
-  yaml=c)
-target_sources(
-  lyaml
-  PRIVATE ${lyaml_SOURCE_DIR}/ext/yaml/emitter.c
-          ${lyaml_SOURCE_DIR}/ext/yaml/parser.c
-          ${lyaml_SOURCE_DIR}/ext/yaml/scanner.c
-          ${lyaml_SOURCE_DIR}/ext/yaml/yaml.c)
-set_property(
-  SOURCE ${lyaml_SOURCE_DIR}/ext/yaml/yaml.c
-  APPEND
-  PROPERTY COMPILE_DEFINITIONS VERSION="wowless")
-target_link_libraries(lyaml PRIVATE yaml)
-
 find_package(ZLIB REQUIRED)
 
 FetchContent_Declare(
@@ -413,8 +388,9 @@ function(add_lua_executable name main)
   target_link_libraries(${name} PRIVATE ${ARGN} luamain)
 endfunction()
 
-lua2c(wowlessyaml lyaml=p
-      wowapi.yaml=${CMAKE_CURRENT_SOURCE_DIR}/wowapi/yaml.lua)
+lua2c(wowlessyaml wowapi.yaml=c)
+target_sources(wowlessyaml PRIVATE wowapi/yaml.c)
+target_link_libraries(wowlessyaml PRIVATE yaml)
 
 add_lua_executable(yaml2lua ${CMAKE_CURRENT_SOURCE_DIR}/tools/yaml2lua.lua
                    penlight wowlessyaml)
