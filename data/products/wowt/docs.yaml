@@ -411,24 +411,24 @@ script_objects:
   SimpleTextureAPI: Texture
   SimpleTextureBaseAPI: TextureBase
 skip_docfiles:
-  ArenaTeamDocumentation:
-  BarberShopInternalDocumentation:
-  CinematicListDocumentation:
-  ConfigurationWarningsDocumentation:
-  DebugToggleDocumentation:
-  LiveEventDocumentation:
-  PingPinFrameAPIDocumentation:
-  SimpleMapSceneAPIDocumentation:
-  SimpleModelFFXAPIDocumentation:
-  WorldSafeLocsUIInternalDocumentation:
+  ArenaTeamDocumentation: {}
+  BarberShopInternalDocumentation: {}
+  CinematicListDocumentation: {}
+  ConfigurationWarningsDocumentation: {}
+  DebugToggleDocumentation: {}
+  LiveEventDocumentation: {}
+  PingPinFrameAPIDocumentation: {}
+  SimpleMapSceneAPIDocumentation: {}
+  SimpleModelFFXAPIDocumentation: {}
+  WorldSafeLocsUIInternalDocumentation: {}
 skip_uiobject_methods:
   Region:
-    GetBottom:
-    GetHeight:
-    GetLeft:
-    GetRect:
-    GetSize:
-    GetWidth:
+    GetBottom: {}
+    GetHeight: {}
+    GetLeft: {}
+    GetRect: {}
+    GetSize: {}
+    GetWidth: {}
 typedefs:
   AnimationDataEnum:
     type: number
