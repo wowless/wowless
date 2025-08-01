@@ -10,7 +10,7 @@ type:
               mapof:
                 key: string
                 value:
-                  record: null
+                  record: {}
           capsule:
             type:
               record:
@@ -19,40 +19,40 @@ type:
                     mapof:
                       key: string
                       value:
-                        record: null
+                        record: {}
                 enums:
                   type:
                     mapof:
                       key: string
                       value:
-                        record: null
+                        record: {}
                 globalapis:
                   type:
                     mapof:
                       key:
                         ref: api
                       value:
-                        record: null
+                        record: {}
           hooked_globals:
             type:
               mapof:
                 key: string
                 value:
-                  record: null
+                  record: {}
           ignore_cvar_value:
             type:
               mapof:
                 key:
                   ref: cvar
                 value:
-                  record: null
+                  record: {}
           overwritten_apis:
             type:
               mapof:
                 key:
                   ref: api
                 value:
-                  record: null
+                  record: {}
     runner:
       type:
         record:
@@ -67,7 +67,7 @@ type:
               mapof:
                 key: string
                 value:
-                  record: null
+                  record: {}
     runtime:
       type:
         record:
@@ -80,4 +80,4 @@ type:
               mapof:
                 key: string
                 value:
-                  record: null
+                  record: {}

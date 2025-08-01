@@ -1,5 +1,6 @@
 local mkemitter = require('yaml').emitter
 local parse = require('lyaml').load
+local lyamlnull = require('lyaml').null
 
 local function isarray(t)
   local i = 0
@@ -33,10 +34,9 @@ local function api2yaml(api)
   assert(emit({ type = 'STREAM_START' }))
   assert(emit({ type = 'DOCUMENT_START' }))
   local function run(v)
+    assert(v ~= lyamlnull)
     local ty = type(v)
-    if v == require('lyaml').null then
-      assert(emit({ type = 'SCALAR', value = 'null' }))
-    elseif ty == 'number' or ty == 'boolean' then
+    if ty == 'number' or ty == 'boolean' then
       assert(emit({ type = 'SCALAR', value = tostring(v) }))
     elseif ty == 'string' then
       local sq = v == '' or v == 'true' or v == 'false' or v == 'on' or tonumber(v)
