@@ -846,9 +846,11 @@ Button:
       type:
         uiobject: Texture
     pushedTextOffsetX:
+      dynamicinit: true
       init: 0
       type: number
     pushedTextOffsetY:
+      dynamicinit: true
       init: 0
       type: number
     pushedTexture:
@@ -4477,6 +4479,7 @@ Minimap:
 Model:
   fields:
     cameraDistance:
+      dynamicinit: true
       init: 0
       type: number
     cameraFacing:

@@ -17,6 +17,8 @@ type:
               key: string
               value:
                 record:
+                  dynamicinit:
+                    type: boolean
                   init:
                     type: any
                   nilable:

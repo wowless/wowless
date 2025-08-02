@@ -174,6 +174,7 @@ local ptablemap = {
           init = override
         end
         ft[fk] = {
+          dynamicinit = fv.dynamicinit,
           getters = {},
           init = init,
         }
@@ -185,13 +186,16 @@ local ptablemap = {
           table.insert(ft[gv.name].getters, { index = gk, method = mk })
         end
       end
+      for fk, fv in pairs(ft) do
+        if fv.dynamicinit then
+          ft[fk] = nil
+        end
+      end
       -- TODO remove these super duper field hacks
       ft.bottom = nil
       ft.height = nil
       ft.left = nil
       ft.parent = nil
-      ft.pushedTextOffsetX = nil
-      ft.pushedTextOffsetY = nil
       ft.top = nil
       ft.right = nil
       ft.width = nil
