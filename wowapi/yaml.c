@@ -1,6 +1,7 @@
-#include "lua.h"
-#include "lauxlib.h"
 #include "yaml.h"
+
+#include "lauxlib.h"
+#include "lua.h"
 
 static void x(lua_State *L, int err) {
   if (err == 0) {
@@ -11,30 +12,35 @@ static void x(lua_State *L, int err) {
 static void eat(lua_State *L, yaml_parser_t *parser, int type) {
   yaml_event_t event;
   x(L, yaml_parser_parse(parser, &event));
-  
 }
 
 static int doparse(lua_State *L) {
   size_t size;
-  const char *str = luaL_checklstring(L, 1, &size);
+  const unsigned char *str =
+      (const unsigned char *)luaL_checklstring(L, 1, &size);
   yaml_parser_t *parser = lua_touserdata(L, 2);
   lua_settop(L, 0);
   yaml_parser_set_input_string(parser, str, size);
   yaml_event_t event;
   x(L, yaml_parser_parse(parser, &event));
   if (event.type != YAML_STREAM_START_EVENT) {
-    {{}}
+    {
+      {
+      }
+    }
   }
   int done = 0;
   while (!done) {
     switch (event.type) {
-      case YAML_STREAM_END_EVENT:
+      case YAML_STREAM_END_EVENT: {
         done = 1;
         break;
-      default:
+      }
+      default: {
         int ty = event.type;
         yaml_event_delete(&event);
         luaL_error(L, "yaml: unexpected event %d", ty);
+      }
     }
     yaml_event_delete(&event);
   }
@@ -83,7 +89,7 @@ static void emit_scalar(lua_State *L, int idx, yaml_emitter_t *emitter) {
     case LUA_TSTRING: {
       yaml_event_t event;
       size_t z;
-      const char *s = lua_tolstring(L, idx, &z);
+      const unsigned char *s = (const unsigned char *)lua_tolstring(L, idx, &z);
       x(L, yaml_scalar_event_initialize(&event, 0, 0, s, z, 1, 1, 0));
       x(L, yaml_emitter_emit(emitter, &event));
       break;
@@ -130,7 +136,7 @@ static int dopprint(lua_State *L) {
   x(L, yaml_emitter_emit(emitter, &event));
   x(L, yaml_stream_end_event_initialize(&event));
   x(L, yaml_emitter_emit(emitter, &event));
-  lua_pushlstring(L, buf.p, buf.z);
+  lua_pushlstring(L, (const char *)buf.p, buf.z);
   return 1;
 }
 
