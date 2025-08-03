@@ -14,23 +14,27 @@ static void advance(lua_State *L, yaml_parser_t *parser, yaml_token_t *token) {
   x(L, yaml_parser_scan(parser, token));
 }
 
-static void checktype(lua_State *L, yaml_token_t *token, yaml_token_type_t type) {
+static void checktype(lua_State *L, yaml_token_t *token,
+                      yaml_token_type_t type) {
   if (token->type != type) {
     luaL_error(L, "yaml: want %d, got %d", type, token->type);
   }
 }
 
-static void eat(lua_State *L, yaml_parser_t *parser, yaml_token_t *token, yaml_token_type_t type) {
+static void eat(lua_State *L, yaml_parser_t *parser, yaml_token_t *token,
+                yaml_token_type_t type) {
   advance(L, parser, token);
   checktype(L, token, type);
 }
 
 static void parsescalar(lua_State *L, yaml_token_t *token) {
   checktype(L, token, YAML_SCALAR_TOKEN);
-  lua_pushlstring(L, (const char *)token->data.scalar.value, token->data.scalar.length);
+  lua_pushlstring(L, (const char *)token->data.scalar.value,
+                  token->data.scalar.length);
 }
 
-static void parsevalue(lua_State *L, yaml_parser_t *parser, yaml_token_t *token) {
+static void parsevalue(lua_State *L, yaml_parser_t *parser,
+                       yaml_token_t *token) {
   switch (token->type) {
     case YAML_BLOCK_MAPPING_START_TOKEN: {
       lua_newtable(L);
