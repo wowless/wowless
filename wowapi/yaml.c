@@ -127,7 +127,8 @@ static int dooutput(void *data, unsigned char *buffer, size_t size) {
   return 1;
 }
 
-static void printscalar(lua_State *L, yaml_emitter_t *emitter, yaml_event_t *event, int idx) {
+static void printscalar(lua_State *L, yaml_emitter_t *emitter,
+                        yaml_event_t *event, int idx) {
   int type = lua_type(L, idx);
   switch (type) {
     case LUA_TSTRING: {
@@ -142,7 +143,8 @@ static void printscalar(lua_State *L, yaml_emitter_t *emitter, yaml_event_t *eve
   }
 }
 
-static void printvalue(lua_State *L, yaml_emitter_t *emitter, yaml_event_t *event) {
+static void printvalue(lua_State *L, yaml_emitter_t *emitter,
+                       yaml_event_t *event) {
   if (lua_istable(L, -1)) {
     lua_pushnil(L);
     if (!lua_next(L, -2)) {
