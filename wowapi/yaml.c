@@ -127,21 +127,35 @@ static int dooutput(void *data, unsigned char *buffer, size_t size) {
   return 1;
 }
 
-static void emit_scalar(lua_State *L, int idx, yaml_emitter_t *emitter) {
+static void printscalar(lua_State *L, yaml_emitter_t *emitter, yaml_event_t *event, int idx) {
   int type = lua_type(L, idx);
   switch (type) {
     case LUA_TSTRING: {
-      yaml_event_t event;
       size_t z;
       const unsigned char *s = (const unsigned char *)lua_tolstring(L, idx, &z);
-      x(L, yaml_scalar_event_initialize(&event, 0, 0, s, z, 1, 1, 0));
-      x(L, yaml_emitter_emit(emitter, &event));
+      x(L, yaml_scalar_event_initialize(event, 0, 0, s, z, 1, 1, 0));
+      x(L, yaml_emitter_emit(emitter, event));
       break;
     }
-    case LUA_TTABLE:
-      luaL_error(L, "yaml: want scalar, got table");
     default:
       luaL_error(L, "yaml: unsupported type %s", lua_typename(L, type));
+  }
+}
+
+static void printvalue(lua_State *L, yaml_emitter_t *emitter, yaml_event_t *event, int idx) {
+  if (lua_istable(L, idx)) {
+    x(L, yaml_mapping_start_event_initialize(event, 0, 0, 1, 0));
+    x(L, yaml_emitter_emit(emitter, event));
+    lua_pushnil(L);
+    while (lua_next(L, -2)) {
+      printscalar(L, emitter, event, -2);
+      printvalue(L, emitter, event, -1);
+      lua_pop(L, 1);
+    }
+    x(L, yaml_mapping_end_event_initialize(event));
+    x(L, yaml_emitter_emit(emitter, event));
+  } else {
+    printscalar(L, emitter, event, -1);
   }
 }
 
@@ -159,23 +173,7 @@ static int dopprint(lua_State *L) {
   x(L, yaml_document_start_event_initialize(&event, 0, 0, 0, 0));
   x(L, yaml_emitter_emit(emitter, &event));
   lua_settop(L, 1);
-  while (lua_gettop(L) != 0) {
-    if (lua_istable(L, -1)) {
-      x(L, yaml_mapping_start_event_initialize(&event, 0, 0, 1, 0));
-      x(L, yaml_emitter_emit(emitter, &event));
-      lua_pushnil(L);
-      while (lua_next(L, -2)) {
-        emit_scalar(L, -2, emitter);
-        emit_scalar(L, -1, emitter);
-        lua_pop(L, 1);
-      }
-      x(L, yaml_mapping_end_event_initialize(&event));
-      x(L, yaml_emitter_emit(emitter, &event));
-    } else {
-      emit_scalar(L, -1, emitter);
-    }
-    lua_pop(L, 1);
-  }
+  printvalue(L, emitter, &event, -1);
   x(L, yaml_document_end_event_initialize(&event, 1));
   x(L, yaml_emitter_emit(emitter, &event));
   x(L, yaml_stream_end_event_initialize(&event));
