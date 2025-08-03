@@ -9,9 +9,49 @@ static void x(lua_State *L, int err) {
   }
 }
 
-static void eat(lua_State *L, yaml_parser_t *parser, int type) {
-  yaml_event_t event;
-  x(L, yaml_parser_parse(parser, &event));
+static void advance(lua_State *L, yaml_parser_t *parser, yaml_token_t *token) {
+  yaml_token_delete(token);
+  x(L, yaml_parser_scan(parser, token));
+}
+
+static void checktype(lua_State *L, yaml_token_t *token, yaml_token_type_t type) {
+  if (token->type != type) {
+    luaL_error(L, "yaml: want %d, got %d", type, token->type);
+  }
+}
+
+static void eat(lua_State *L, yaml_parser_t *parser, yaml_token_t *token, yaml_token_type_t type) {
+  advance(L, parser, token);
+  checktype(L, token, type);
+}
+
+static void parsescalar(lua_State *L, yaml_token_t *token) {
+  checktype(L, token, YAML_SCALAR_TOKEN);
+  lua_pushlstring(L, (const char *)token->data.scalar.value, token->data.scalar.length);
+}
+
+static void parsevalue(lua_State *L, yaml_parser_t *parser, yaml_token_t *token) {
+  switch (token->type) {
+    case YAML_BLOCK_MAPPING_START_TOKEN: {
+      lua_newtable(L);
+      advance(L, parser, token);
+      while (token->type != YAML_BLOCK_END_TOKEN) {
+        checktype(L, token, YAML_KEY_TOKEN);
+        advance(L, parser, token);
+        parsescalar(L, token);
+        eat(L, parser, token, YAML_VALUE_TOKEN);
+        advance(L, parser, token);
+        parsevalue(L, parser, token);
+        lua_rawset(L, -3);
+      }
+      advance(L, parser, token);
+      break;
+    }
+    default: {
+      lua_newtable(L);
+      break;
+    }
+  }
 }
 
 static int doparse(lua_State *L) {
@@ -19,31 +59,27 @@ static int doparse(lua_State *L) {
   const unsigned char *str =
       (const unsigned char *)luaL_checklstring(L, 1, &size);
   yaml_parser_t *parser = lua_touserdata(L, 2);
-  lua_settop(L, 0);
+  yaml_token_t *token = lua_touserdata(L, 3);
   yaml_parser_set_input_string(parser, str, size);
-  yaml_event_t event;
-  x(L, yaml_parser_parse(parser, &event));
-  if (event.type != YAML_STREAM_START_EVENT) {
-    {
-      {
-      }
+#if 0
+  for (;;) {
+    yaml_token_t token;
+    x(L, yaml_parser_scan(parser, &token));
+    int ty = token.type;
+    printf("%d\n", ty);
+    yaml_token_delete(&token);
+    if (ty == YAML_STREAM_END_TOKEN) {
+      break;
     }
   }
-  int done = 0;
-  while (!done) {
-    switch (event.type) {
-      case YAML_STREAM_END_EVENT: {
-        done = 1;
-        break;
-      }
-      default: {
-        int ty = event.type;
-        yaml_event_delete(&event);
-        luaL_error(L, "yaml: unexpected event %d", ty);
-      }
-    }
-    yaml_event_delete(&event);
-  }
+  lua_newtable(L);
+#else
+  eat(L, parser, token, YAML_STREAM_START_TOKEN);
+  eat(L, parser, token, YAML_DOCUMENT_START_TOKEN);
+  advance(L, parser, token);
+  parsevalue(L, parser, token);
+  checktype(L, token, YAML_STREAM_END_TOKEN);
+#endif
   return 1;
 }
 
@@ -54,7 +90,11 @@ static int wowapi_yaml_parse(lua_State *L) {
   yaml_parser_t parser;
   yaml_parser_initialize(&parser);
   lua_pushlightuserdata(L, &parser);
-  int err = lua_pcall(L, 2, 1, 0);
+  yaml_token_t token;
+  memset(&token, 0, sizeof(token));
+  lua_pushlightuserdata(L, &token);
+  int err = lua_pcall(L, 3, 1, 0);
+  yaml_token_delete(&token);
   yaml_parser_delete(&parser);
   return err ? lua_error(L) : 1;
 }
@@ -112,7 +152,7 @@ static int dopprint(lua_State *L) {
   yaml_event_t event;
   x(L, yaml_stream_start_event_initialize(&event, YAML_UTF8_ENCODING));
   x(L, yaml_emitter_emit(emitter, &event));
-  x(L, yaml_document_start_event_initialize(&event, 0, 0, 0, 1));
+  x(L, yaml_document_start_event_initialize(&event, 0, 0, 0, 0));
   x(L, yaml_emitter_emit(emitter, &event));
   lua_settop(L, 1);
   while (lua_gettop(L) != 0) {
