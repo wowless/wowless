@@ -142,18 +142,24 @@ static void printscalar(lua_State *L, yaml_emitter_t *emitter, yaml_event_t *eve
   }
 }
 
-static void printvalue(lua_State *L, yaml_emitter_t *emitter, yaml_event_t *event, int idx) {
-  if (lua_istable(L, idx)) {
-    x(L, yaml_mapping_start_event_initialize(event, 0, 0, 1, 0));
-    x(L, yaml_emitter_emit(emitter, event));
+static void printvalue(lua_State *L, yaml_emitter_t *emitter, yaml_event_t *event) {
+  if (lua_istable(L, -1)) {
     lua_pushnil(L);
-    while (lua_next(L, -2)) {
-      printscalar(L, emitter, event, -2);
-      printvalue(L, emitter, event, -1);
-      lua_pop(L, 1);
+    if (!lua_next(L, -2)) {
+      unsigned char nil;
+      x(L, yaml_scalar_event_initialize(event, 0, 0, &nil, 0, 1, 1, 0));
+      x(L, yaml_emitter_emit(emitter, event));
+    } else {
+      x(L, yaml_mapping_start_event_initialize(event, 0, 0, 1, 0));
+      x(L, yaml_emitter_emit(emitter, event));
+      do {
+        printscalar(L, emitter, event, -2);
+        printvalue(L, emitter, event);
+        lua_pop(L, 1);
+      } while (lua_next(L, -2));
+      x(L, yaml_mapping_end_event_initialize(event));
+      x(L, yaml_emitter_emit(emitter, event));
     }
-    x(L, yaml_mapping_end_event_initialize(event));
-    x(L, yaml_emitter_emit(emitter, event));
   } else {
     printscalar(L, emitter, event, -1);
   }
@@ -173,7 +179,7 @@ static int dopprint(lua_State *L) {
   x(L, yaml_document_start_event_initialize(&event, 0, 0, 0, 0));
   x(L, yaml_emitter_emit(emitter, &event));
   lua_settop(L, 1);
-  printvalue(L, emitter, &event, -1);
+  printvalue(L, emitter, &event);
   x(L, yaml_document_end_event_initialize(&event, 1));
   x(L, yaml_emitter_emit(emitter, &event));
   x(L, yaml_stream_end_event_initialize(&event));
