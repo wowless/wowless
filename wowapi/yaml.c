@@ -210,7 +210,7 @@ static int wowapi_yaml_pprint(lua_State *L) {
     luaL_error(L, "yaml: internal error");
   }
   lua_pushlightuserdata(L, &emitter);
-  struct buf buf = { .a = 4096, .p = malloc(4096), .z = 0 };
+  struct buf buf = {.a = 4096, .p = malloc(4096), .z = 0};
   if (!buf.p) {
     yaml_emitter_delete(&emitter);
     luaL_error(L, "yaml: internal error");
