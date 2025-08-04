@@ -38,14 +38,12 @@ static void parsescalar(lua_State *L, yaml_token_t *token) {
   } else if (z == 5 && !memcmp("false", s, z)) {
     lua_pushboolean(L, 0);
   } else {
-    lua_pushlstring(L, s, z);
-    lua_Number n = lua_tonumber(L, -1);
-    if (n != 0) {
-      lua_pop(L, 1);
-      lua_pushnumber(L, n);
-    } else if (z == 1 && *s == '0') {
-      lua_pop(L, 1);
-      lua_pushnumber(L, 0);
+    char *end;
+    double d = strtod(s, &end);
+    if (end == s + z) {
+      lua_pushnumber(L, d);
+    } else {
+      lua_pushlstring(L, s, z);
     }
   }
 }
