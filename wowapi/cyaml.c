@@ -1,7 +1,6 @@
-#include "yaml.h"
-
 #include "lauxlib.h"
 #include "lua.h"
+#include "yaml.h"
 
 static void x(lua_State *L, int err) {
   if (err == 0) {
@@ -29,8 +28,24 @@ static void eat(lua_State *L, yaml_parser_t *parser, yaml_token_t *token,
 
 static void parsescalar(lua_State *L, yaml_token_t *token) {
   checktype(L, token, YAML_SCALAR_TOKEN);
-  lua_pushlstring(L, (const char *)token->data.scalar.value,
-                  token->data.scalar.length);
+  const char *s = (const char *)token->data.scalar.value;
+  size_t z = token->data.scalar.length;
+  yaml_scalar_style_t y = token->data.scalar.style;
+  if (y != YAML_PLAIN_SCALAR_STYLE) {
+    lua_pushlstring(L, s, z);
+  } else if (z == 4 && !memcmp("true", s, z)) {
+    lua_pushboolean(L, 1);
+  } else if (z == 5 && !memcmp("false", s, z)) {
+    lua_pushboolean(L, 0);
+  } else {
+    char *end;
+    double d = strtod(s, &end);
+    if (end == s + z) {
+      lua_pushnumber(L, d);
+    } else {
+      lua_pushlstring(L, s, z);
+    }
+  }
 }
 
 static void parsevalue(lua_State *L, yaml_parser_t *parser,
@@ -61,13 +76,20 @@ static void parsevalue(lua_State *L, yaml_parser_t *parser,
       } while (token->type == YAML_BLOCK_ENTRY_TOKEN);
       break;
     }
+    case YAML_BLOCK_SEQUENCE_START_TOKEN: {
+      eat(L, parser, token, YAML_BLOCK_ENTRY_TOKEN);
+      parsevalue(L, parser, token);
+      checktype(L, token, YAML_BLOCK_END_TOKEN);
+      advance(L, parser, token);
+      break;
+    }
     case YAML_SCALAR_TOKEN: {
       parsescalar(L, token);
       advance(L, parser, token);
       break;
     }
     default: {
-      lua_newtable(L);
+      lua_createtable(L, 0, 0);
       break;
     }
   }
@@ -222,8 +244,8 @@ static int wowapi_yaml_pprint(lua_State *L) {
   return err ? lua_error(L) : 1;
 }
 
-int luaopen_wowapi_yaml(lua_State *L) {
-  lua_newtable(L);
+int luaopen_wowapi_cyaml(lua_State *L) {
+  lua_createtable(L, 0, 1);
   lua_pushcfunction(L, doparse);
   lua_pushcclosure(L, wowapi_yaml_parse, 1);
   lua_setfield(L, -2, "parse");
