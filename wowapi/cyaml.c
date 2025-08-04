@@ -164,6 +164,15 @@ static void printscalar(lua_State *L, yaml_emitter_t *emitter,
                         yaml_event_t *event, int idx) {
   int type = lua_type(L, idx);
   switch (type) {
+    case LUA_TBOOLEAN: {
+      if (lua_toboolean(L, idx)) {
+        x(L, yaml_scalar_event_initialize(event, 0, 0, "true", 4, 1, 1, 0));
+      } else {
+        x(L, yaml_scalar_event_initialize(event, 0, 0, "false", 5, 1, 1, 0));
+      }
+      x(L, yaml_emitter_emit(emitter, event));
+      break;
+    }
     case LUA_TNUMBER: {
       lua_pushvalue(L, idx);
       printstring(L, emitter, event, -1);
