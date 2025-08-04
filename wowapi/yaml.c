@@ -37,7 +37,7 @@ static void parsevalue(lua_State *L, yaml_parser_t *parser,
                        yaml_token_t *token) {
   switch (token->type) {
     case YAML_BLOCK_MAPPING_START_TOKEN: {
-      lua_newtable(L);
+      lua_createtable(L, 0, 1);
       advance(L, parser, token);
       while (token->type != YAML_BLOCK_END_TOKEN) {
         checktype(L, token, YAML_KEY_TOKEN);
@@ -48,6 +48,21 @@ static void parsevalue(lua_State *L, yaml_parser_t *parser,
         parsevalue(L, parser, token);
         lua_rawset(L, -3);
       }
+      advance(L, parser, token);
+      break;
+    }
+    case YAML_BLOCK_ENTRY_TOKEN: {
+      lua_createtable(L, 1, 0);
+      int i = 1;
+      do {
+        advance(L, parser, token);
+        parsevalue(L, parser, token);
+        lua_rawseti(L, -2, i++);
+      } while (token->type == YAML_BLOCK_ENTRY_TOKEN);
+      break;
+    }
+    case YAML_SCALAR_TOKEN: {
+      parsescalar(L, token);
       advance(L, parser, token);
       break;
     }
@@ -65,25 +80,11 @@ static int doparse(lua_State *L) {
   yaml_parser_t *parser = lua_touserdata(L, 2);
   yaml_token_t *token = lua_touserdata(L, 3);
   yaml_parser_set_input_string(parser, str, size);
-#if 0
-  for (;;) {
-    yaml_token_t token;
-    x(L, yaml_parser_scan(parser, &token));
-    int ty = token.type;
-    printf("%d\n", ty);
-    yaml_token_delete(&token);
-    if (ty == YAML_STREAM_END_TOKEN) {
-      break;
-    }
-  }
-  lua_newtable(L);
-#else
   eat(L, parser, token, YAML_STREAM_START_TOKEN);
   eat(L, parser, token, YAML_DOCUMENT_START_TOKEN);
   advance(L, parser, token);
   parsevalue(L, parser, token);
   checktype(L, token, YAML_STREAM_END_TOKEN);
-#endif
   return 1;
 }
 
@@ -92,7 +93,7 @@ static int wowapi_yaml_parse(lua_State *L) {
   lua_pushvalue(L, lua_upvalueindex(1));
   lua_insert(L, 1);
   yaml_parser_t parser;
-  yaml_parser_initialize(&parser);
+  x(L, yaml_parser_initialize(&parser));
   lua_pushlightuserdata(L, &parser);
   yaml_token_t token;
   memset(&token, 0, sizeof(token));
@@ -112,30 +113,43 @@ struct buf {
 static int dooutput(void *data, unsigned char *buffer, size_t size) {
   struct buf *buf = data;
   if (size > buf->a - buf->z) {
-    size_t aa = buf->a * 2;
-    if (aa <= buf->a) {
-      return 0;
-    }
-    buf->p = realloc(buf->p, aa);
+    do {
+      size_t aa = buf->a * 4;
+      if (aa <= buf->a) {
+        return 0;
+      }
+      buf->a = aa;
+    } while (size > buf->a - buf->z);
+    buf->p = realloc(buf->p, buf->a);
     if (!buf->p) {
       return 0;
     }
-    buf->a = aa;
   }
   memcpy(buf->p + buf->z, buffer, size);
   buf->z += size;
   return 1;
 }
 
+static void printstring(lua_State *L, yaml_emitter_t *emitter,
+                        yaml_event_t *event, int idx) {
+  size_t z;
+  const unsigned char *s = (const unsigned char *)lua_tolstring(L, idx, &z);
+  x(L, yaml_scalar_event_initialize(event, 0, 0, s, z, 1, 1, 0));
+  x(L, yaml_emitter_emit(emitter, event));
+}
+
 static void printscalar(lua_State *L, yaml_emitter_t *emitter,
                         yaml_event_t *event, int idx) {
   int type = lua_type(L, idx);
   switch (type) {
+    case LUA_TNUMBER: {
+      lua_pushvalue(L, idx);
+      printstring(L, emitter, event, -1);
+      lua_pop(L, 1);
+      break;
+    }
     case LUA_TSTRING: {
-      size_t z;
-      const unsigned char *s = (const unsigned char *)lua_tolstring(L, idx, &z);
-      x(L, yaml_scalar_event_initialize(event, 0, 0, s, z, 1, 1, 0));
-      x(L, yaml_emitter_emit(emitter, event));
+      printstring(L, emitter, event, idx);
       break;
     }
     default:
@@ -168,13 +182,10 @@ static void printvalue(lua_State *L, yaml_emitter_t *emitter,
 }
 
 static int dopprint(lua_State *L) {
-  struct buf buf;
-  buf.a = 4096;
-  buf.p = malloc(buf.a);
-  buf.z = 0;
-  x(L, buf.p != 0);
+  luaL_checkstack(L, 100, "yaml");
   yaml_emitter_t *emitter = lua_touserdata(L, 2);
-  yaml_emitter_set_output(emitter, &dooutput, &buf);
+  struct buf *buf = lua_touserdata(L, 3);
+  yaml_emitter_set_output(emitter, &dooutput, buf);
   yaml_event_t event;
   x(L, yaml_stream_start_event_initialize(&event, YAML_UTF8_ENCODING));
   x(L, yaml_emitter_emit(emitter, &event));
@@ -186,7 +197,7 @@ static int dopprint(lua_State *L) {
   x(L, yaml_emitter_emit(emitter, &event));
   x(L, yaml_stream_end_event_initialize(&event));
   x(L, yaml_emitter_emit(emitter, &event));
-  lua_pushlstring(L, (const char *)buf.p, buf.z);
+  lua_pushlstring(L, (const char *)buf->p, buf->z);
   return 1;
 }
 
@@ -195,9 +206,18 @@ static int wowapi_yaml_pprint(lua_State *L) {
   lua_pushvalue(L, lua_upvalueindex(1));
   lua_insert(L, 1);
   yaml_emitter_t emitter;
-  yaml_emitter_initialize(&emitter);
+  if (!yaml_emitter_initialize(&emitter)) {
+    luaL_error(L, "yaml: internal error");
+  }
   lua_pushlightuserdata(L, &emitter);
-  int err = lua_pcall(L, 2, 1, 0);
+  struct buf buf = { .a = 4096, .p = malloc(4096), .z = 0 };
+  if (!buf.p) {
+    yaml_emitter_delete(&emitter);
+    luaL_error(L, "yaml: internal error");
+  }
+  lua_pushlightuserdata(L, &buf);
+  int err = lua_pcall(L, 3, 1, 0);
+  free(buf.p);
   yaml_emitter_delete(&emitter);
   return err ? lua_error(L) : 1;
 }
