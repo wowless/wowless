@@ -15,18 +15,9 @@ local function isarray(t)
 end
 
 local function keycomp(a, b)
-  local ta, tb = type(a), type(b)
-  if ta ~= tb then
-    return ta < tb
-  end
-  if ta == 'number' then
-    return a < b
-  elseif ta == 'string' then
-    local la, lb = a:lower(), b:lower()
-    return la < lb or la == lb and a < b
-  else
-    error('invalid table key type ' .. ta)
-  end
+  a, b = tostring(a), tostring(b)
+  local aa, bb = a:lower(), b:lower()
+  return aa < bb or aa == bb and a < b
 end
 
 local function api2yaml(api)
