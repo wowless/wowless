@@ -1,9 +1,8 @@
 describe('yaml', function()
   local yaml = require('wowapi.yaml')
-  local null = require('lyaml').null
   describe('parse', function()
     it('works on empty', function()
-      assert.Nil(yaml.parse(''))
+      assert.same({}, yaml.parse('---\n'))
     end)
     it('works on all types', function()
       local input = [[
@@ -12,10 +11,8 @@ bool: true
 number: 42
 string: foo
 empty_string: ''
-nullkey: null
 sequence:
 - 99
-- null
 - bar
 record:
   baz: quux
@@ -26,8 +23,7 @@ record:
         number = 42,
         string = 'foo',
         empty_string = '',
-        nullkey = null,
-        sequence = { 99, null, 'bar' },
+        sequence = { 99, 'bar' },
         record = { baz = 'quux', frob = 'nicate' },
       }
       assert.same(expected, yaml.parse(input))

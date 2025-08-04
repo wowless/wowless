@@ -1,23 +1,7 @@
 local mkemitter = require('yaml').emitter
-local load = require('lyaml').load
 local lyamlnull = require('lyaml').null
+local parse = require('wowapi.cyaml').parse
 local sorted = require('pl.tablex').sort
-
-local function rewritenulls(t)
-  if t == lyamlnull then
-    return {}
-  end
-  if type(t) == 'table' then
-    for k, v in pairs(t) do
-      t[k] = rewritenulls(v)
-    end
-  end
-  return t
-end
-
-local function parse(s)
-  return rewritenulls(load(s))
-end
 
 local function isarray(t)
   local i = 0

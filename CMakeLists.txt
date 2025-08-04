@@ -413,8 +413,9 @@ function(add_lua_executable name main)
   target_link_libraries(${name} PRIVATE ${ARGN} luamain)
 endfunction()
 
-lua2c(wowlessyaml lyaml=p
+lua2c(wowlessyaml lyaml=p wowapi.cyaml=c
       wowapi.yaml=${CMAKE_CURRENT_SOURCE_DIR}/wowapi/yaml.lua)
+target_sources(wowlessyaml PRIVATE wowapi/cyaml.c)
 
 add_lua_executable(yaml2lua ${CMAKE_CURRENT_SOURCE_DIR}/tools/yaml2lua.lua
                    penlight wowlessyaml)
