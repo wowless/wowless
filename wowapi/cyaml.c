@@ -197,15 +197,40 @@ static void printvalue(lua_State *L, yaml_emitter_t *emitter,
       x(L, yaml_scalar_event_initialize(event, 0, 0, &nil, 0, 1, 1, 0));
       x(L, yaml_emitter_emit(emitter, event));
     } else {
-      x(L, yaml_mapping_start_event_initialize(event, 0, 0, 1, 0));
-      x(L, yaml_emitter_emit(emitter, event));
-      do {
-        printscalar(L, emitter, event, -2);
-        printvalue(L, emitter, event);
+      int n = 1;
+      lua_pop(L, 1);
+      while (lua_next(L, -2)) {
+        ++n;
         lua_pop(L, 1);
-      } while (lua_next(L, -2));
-      x(L, yaml_mapping_end_event_initialize(event));
-      x(L, yaml_emitter_emit(emitter, event));
+      }
+      int isarray = 1;
+      for (int i = 1; isarray && i <= n; ++i) {
+        lua_rawgeti(L, -1, i);
+        isarray = !lua_isnil(L, -1);
+        lua_pop(L, 1);
+      }
+      if (isarray) {
+        x(L, yaml_sequence_start_event_initialize(event, 0, 0, 1, 0));
+        x(L, yaml_emitter_emit(emitter, event));
+        for (int i = 1; i <= n; ++i) {
+          lua_rawgeti(L, -1, i);
+          printvalue(L, emitter, event);
+          lua_pop(L, 1);
+        }
+        x(L, yaml_sequence_end_event_initialize(event));
+        x(L, yaml_emitter_emit(emitter, event));
+      } else {
+        x(L, yaml_mapping_start_event_initialize(event, 0, 0, 1, 0));
+        x(L, yaml_emitter_emit(emitter, event));
+        lua_pushnil(L);
+        while (lua_next(L, -2)) {
+          printscalar(L, emitter, event, -2);
+          printvalue(L, emitter, event);
+          lua_pop(L, 1);
+        }
+        x(L, yaml_mapping_end_event_initialize(event));
+        x(L, yaml_emitter_emit(emitter, event));
+      }
     }
   } else {
     printscalar(L, emitter, event, -1);
