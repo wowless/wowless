@@ -8054,7 +8054,7 @@ C_Minimap.SetTracking:
   inputs:
   - name: index
     type: number
-  - name: 'on'
+  - name: on
     type: boolean
   outputs:
 C_ModelInfo.AddActiveModelScene:
