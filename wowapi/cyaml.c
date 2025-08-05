@@ -96,12 +96,8 @@ static void parsevalue(lua_State *L, yaml_parser_t *parser,
 }
 
 static int doparse(lua_State *L) {
-  size_t size;
-  const unsigned char *str =
-      (const unsigned char *)luaL_checklstring(L, 1, &size);
-  yaml_parser_t *parser = lua_touserdata(L, 2);
-  yaml_token_t *token = lua_touserdata(L, 3);
-  yaml_parser_set_input_string(parser, str, size);
+  yaml_parser_t *parser = lua_touserdata(L, 1);
+  yaml_token_t *token = lua_touserdata(L, 2);
   eat(L, parser, token, YAML_STREAM_START_TOKEN);
   eat(L, parser, token, YAML_DOCUMENT_START_TOKEN);
   advance(L, parser, token);
@@ -112,15 +108,18 @@ static int doparse(lua_State *L) {
 
 static int wowapi_yaml_parse(lua_State *L) {
   lua_settop(L, 1);
+  size_t size;
+  const unsigned char *str =
+      (const unsigned char *)luaL_checklstring(L, 1, &size);
   lua_pushvalue(L, lua_upvalueindex(1));
-  lua_insert(L, 1);
   yaml_parser_t parser;
   x(L, yaml_parser_initialize(&parser));
+  yaml_parser_set_input_string(&parser, str, size);
   lua_pushlightuserdata(L, &parser);
   yaml_token_t token;
   memset(&token, 0, sizeof(token));
   lua_pushlightuserdata(L, &token);
-  int err = lua_pcall(L, 3, 1, 0);
+  int err = lua_pcall(L, 2, 1, 0);
   yaml_token_delete(&token);
   yaml_parser_delete(&parser);
   return err ? lua_error(L) : 1;
