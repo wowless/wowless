@@ -237,11 +237,11 @@ static void printstring(lua_State *L, yaml_emitter_t *emitter,
 }
 
 static void printscalar(lua_State *L, yaml_emitter_t *emitter,
-                        yaml_event_t *event, int idx) {
-  int type = lua_type(L, idx);
+                        yaml_event_t *event) {
+  int type = lua_type(L, -1);
   switch (type) {
     case LUA_TBOOLEAN: {
-      if (lua_toboolean(L, idx)) {
+      if (lua_toboolean(L, -1)) {
         x(L, yaml_scalar_event_initialize(event, 0, 0, "true", 4, 1, 1, 0));
       } else {
         x(L, yaml_scalar_event_initialize(event, 0, 0, "false", 5, 1, 1, 0));
@@ -250,13 +250,13 @@ static void printscalar(lua_State *L, yaml_emitter_t *emitter,
       break;
     }
     case LUA_TNUMBER: {
-      lua_pushvalue(L, idx);
+      lua_pushvalue(L, -1);
       printstring(L, emitter, event, -1);
       lua_pop(L, 1);
       break;
     }
     case LUA_TSTRING: {
-      printstring(L, emitter, event, idx);
+      printstring(L, emitter, event, -1);
       break;
     }
     default:
@@ -307,7 +307,7 @@ static void printvalue(lua_State *L, yaml_emitter_t *emitter,
         auxsort(L, lua_gettop(L), 1, lua_objlen(L, -1));
         for (int i = 1; i <= n; ++i) {
           lua_rawgeti(L, -1, i);
-          printscalar(L, emitter, event, -1);
+          printscalar(L, emitter, event);
           lua_rawget(L, -3);
           printvalue(L, emitter, event);
           lua_pop(L, 1);
@@ -318,7 +318,7 @@ static void printvalue(lua_State *L, yaml_emitter_t *emitter,
       lua_pop(L, 1);
     }
   } else {
-    printscalar(L, emitter, event, -1);
+    printscalar(L, emitter, event);
   }
 }
 
