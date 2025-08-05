@@ -10,11 +10,14 @@ static void set2(lua_State *L, int idx, int i, int j) {
 }
 
 static int sort_comp(lua_State *L, int a, int b) {
+  lua_pushvalue(L, a);
+  lua_pushvalue(L, b - 1);
   size_t na;
   size_t nb;
-  const char *sa = lua_tolstring(L, a, &na);
-  const char *sb = lua_tolstring(L, b, &nb);
+  const char *sa = lua_tolstring(L, -2, &na);
+  const char *sb = lua_tolstring(L, -1, &nb);
   int cmp = strncasecmp(sa, sb, na < nb ? na : nb);
+  lua_pop(L, 2);
   return cmp < 0 || cmp == 0 && na < nb;
 }
 
