@@ -10,15 +10,30 @@ static void set2(lua_State *L, int idx, int i, int j) {
 }
 
 static int sort_comp(lua_State *L, int a, int b) {
-  lua_pushvalue(L, a);
-  lua_pushvalue(L, b - 1);
+  int ta = lua_type(L, a);
+  int tb = lua_type(L, b);
+  if (ta < tb) {
+    return 1;
+  }
+  if (ta > tb) {
+    return 0;
+  }
+  if (ta == LUA_TNUMBER) {
+    return lua_tonumber(L, a) < lua_tonumber(L, b);
+  }
   size_t na;
   size_t nb;
-  const char *sa = lua_tolstring(L, -2, &na);
-  const char *sb = lua_tolstring(L, -1, &nb);
-  int cmp = strncasecmp(sa, sb, na < nb ? na : nb);
-  lua_pop(L, 2);
-  return cmp < 0 || cmp == 0 && na < nb;
+  const char *sa = lua_tolstring(L, a, &na);
+  const char *sb = lua_tolstring(L, b, &nb);
+  size_t n = na < nb ? na : nb;
+  int cmp = strncasecmp(sa, sb, n);
+  if (cmp < 0) {
+    return 1;
+  }
+  if (cmp > 0) {
+    return 0;
+  }
+  return na < nb || na == nb && strncmp(sa, sb, n) < 0;
 }
 
 static void auxsort(lua_State *L, int idx, int l, int u) {
@@ -231,14 +246,6 @@ static int dooutput(void *data, unsigned char *buffer, size_t size) {
   return 1;
 }
 
-static void printstring(lua_State *L, yaml_emitter_t *emitter,
-                        yaml_event_t *event, int idx) {
-  size_t z;
-  const unsigned char *s = (const unsigned char *)lua_tolstring(L, idx, &z);
-  x(L, yaml_scalar_event_initialize(event, 0, 0, s, z, 1, 1, 0));
-  x(L, yaml_emitter_emit(emitter, event));
-}
-
 static void printscalar(lua_State *L, yaml_emitter_t *emitter,
                         yaml_event_t *event) {
   int type = lua_type(L, -1);
@@ -254,12 +261,19 @@ static void printscalar(lua_State *L, yaml_emitter_t *emitter,
     }
     case LUA_TNUMBER: {
       lua_pushvalue(L, -1);
-      printstring(L, emitter, event, -1);
+      size_t z;
+      const unsigned char *s = (const unsigned char *)lua_tolstring(L, -1, &z);
+      x(L, yaml_scalar_event_initialize(event, 0, 0, s, z, 1, 1, 1));
+      x(L, yaml_emitter_emit(emitter, event));
       lua_pop(L, 1);
       break;
     }
     case LUA_TSTRING: {
-      printstring(L, emitter, event, -1);
+      size_t z;
+      const unsigned char *s = (const unsigned char *)lua_tolstring(L, -1, &z);
+      int q = (!z || lua_isnumber(L, -1)) ? YAML_SINGLE_QUOTED_SCALAR_STYLE : 0;
+      x(L, yaml_scalar_event_initialize(event, 0, 0, s, z, 1, 1, q));
+      x(L, yaml_emitter_emit(emitter, event));
       break;
     }
     default:
