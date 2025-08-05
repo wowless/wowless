@@ -125,29 +125,10 @@ static int wowapi_yaml_parse(lua_State *L) {
   return err ? lua_error(L) : 1;
 }
 
-struct buf {
-  unsigned char *p;
-  size_t a;
-  size_t z;
-};
-
 static int dooutput(void *data, unsigned char *buffer, size_t size) {
-  struct buf *buf = data;
-  if (size > buf->a - buf->z) {
-    do {
-      size_t aa = buf->a * 4;
-      if (aa <= buf->a) {
-        return 0;
-      }
-      buf->a = aa;
-    } while (size > buf->a - buf->z);
-    buf->p = realloc(buf->p, buf->a);
-    if (!buf->p) {
-      return 0;
-    }
-  }
-  memcpy(buf->p + buf->z, buffer, size);
-  buf->z += size;
+  lua_State *L = data;
+  lua_pushlstring(L, (const char *)buffer, size);
+  lua_rawseti(L, 1, lua_objlen(L, 1) + 1);
   return 1;
 }
 
@@ -238,43 +219,45 @@ static void printvalue(lua_State *L, yaml_emitter_t *emitter,
 
 static int dopprint(lua_State *L) {
   luaL_checkstack(L, 100, "yaml");
+  lua_settop(L, 3);
   yaml_emitter_t *emitter = lua_touserdata(L, 2);
-  struct buf *buf = lua_touserdata(L, 3);
-  yaml_emitter_set_output(emitter, &dooutput, buf);
   yaml_event_t event;
   x(L, yaml_stream_start_event_initialize(&event, YAML_UTF8_ENCODING));
   x(L, yaml_emitter_emit(emitter, &event));
   x(L, yaml_document_start_event_initialize(&event, 0, 0, 0, 0));
   x(L, yaml_emitter_emit(emitter, &event));
-  lua_settop(L, 1);
   printvalue(L, emitter, &event);
   x(L, yaml_document_end_event_initialize(&event, 1));
   x(L, yaml_emitter_emit(emitter, &event));
   x(L, yaml_stream_end_event_initialize(&event));
   x(L, yaml_emitter_emit(emitter, &event));
-  lua_pushlstring(L, (const char *)buf->p, buf->z);
   return 1;
 }
 
 static int wowapi_yaml_pprint(lua_State *L) {
   lua_settop(L, 1);
+  lua_createtable(L, 1, 0);
   lua_pushvalue(L, lua_upvalueindex(1));
-  lua_insert(L, 1);
+  lua_pushvalue(L, 2);
   yaml_emitter_t emitter;
-  if (!yaml_emitter_initialize(&emitter)) {
-    luaL_error(L, "yaml: internal error");
-  }
+  x(L, yaml_emitter_initialize(&emitter));
+  yaml_emitter_set_output(&emitter, &dooutput, L);
   lua_pushlightuserdata(L, &emitter);
-  struct buf buf = {.a = 4096, .p = malloc(4096), .z = 0};
-  if (!buf.p) {
-    yaml_emitter_delete(&emitter);
-    luaL_error(L, "yaml: internal error");
-  }
-  lua_pushlightuserdata(L, &buf);
+  lua_pushvalue(L, 1);
   int err = lua_pcall(L, 3, 1, 0);
-  free(buf.p);
   yaml_emitter_delete(&emitter);
-  return err ? lua_error(L) : 1;
+  if (err) {
+    return lua_error(L);
+  }
+  luaL_Buffer buf;
+  luaL_buffinit(L, &buf);
+  int n = lua_objlen(L, 2);
+  for (int i = 1; i <= n; ++i) {
+    lua_rawgeti(L, 2, i);
+    luaL_addvalue(&buf);
+  }
+  luaL_pushresult(&buf);
+  return 1;
 }
 
 int luaopen_wowapi_cyaml(lua_State *L) {
