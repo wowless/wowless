@@ -31,7 +31,7 @@ local function api2yaml(api)
     if ty == 'number' or ty == 'boolean' then
       assert(emit({ type = 'SCALAR', value = tostring(v) }))
     elseif ty == 'string' then
-      local sq = v == '' or v == 'true' or v == 'false' or v == 'on' or tonumber(v)
+      local sq = v == '' or v == 'true' or v == 'false' or tonumber(v)
       assert(emit({ type = 'SCALAR', value = v, style = sq and 'SINGLE_QUOTED' or nil }))
     elseif ty == 'table' then
       if not next(v) then
