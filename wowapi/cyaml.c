@@ -1,3 +1,5 @@
+#include <ctype.h>
+
 #include "lauxlib.h"
 #include "lua.h"
 #include "yaml.h"
@@ -25,15 +27,18 @@ static int sort_comp(lua_State *L, int a, int b) {
   size_t nb;
   const char *sa = lua_tolstring(L, a, &na);
   const char *sb = lua_tolstring(L, b, &nb);
-  size_t n = na < nb ? na : nb;
-  int cmp = strncasecmp(sa, sb, n);
-  if (cmp < 0) {
-    return 1;
+  size_t nx = na < nb ? na : nb;
+  for (size_t i = 0; i < nx; ++i) {
+    int la = tolower(sa[i]);
+    int lb = tolower(sb[i]);
+    if (la < lb) {
+      return 1;
+    }
+    if (la > lb) {
+      return 0;
+    }
   }
-  if (cmp > 0) {
-    return 0;
-  }
-  return na < nb || na == nb && strncmp(sa, sb, n) < 0;
+  return na < nb || na == nb && memcmp(sa, sb, nx) < 0;
 }
 
 static void auxsort(lua_State *L, int idx, int l, int u) {
