@@ -218,8 +218,8 @@ static void printvalue(lua_State *L, yaml_emitter_t *emitter,
 }
 
 static int dopprint(lua_State *L) {
-  luaL_checkstack(L, 100, "yaml");
   lua_settop(L, 3);
+  luaL_checkstack(L, 100, "yaml");
   yaml_emitter_t *emitter = lua_touserdata(L, 2);
   yaml_event_t event;
   x(L, yaml_stream_start_event_initialize(&event, YAML_UTF8_ENCODING));
