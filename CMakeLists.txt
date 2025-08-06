@@ -451,8 +451,8 @@ add_lua_executable(dblist ${CMAKE_CURRENT_SOURCE_DIR}/tools/dblist.lua argparse
 
 FetchContent_Declare(
   lpeg
-  URL http://www.inf.puc-rio.br/~roberto/lpeg/lpeg-1.0.2.tar.gz
-  URL_HASH MD5=d342571886f1abcb7afe6a83d024d583
+  URL http://www.inf.puc-rio.br/~roberto/lpeg/lpeg-1.1.0.tar.gz
+  URL_HASH MD5=842a538b403b5639510c9b6fffd2c75b
   SOURCE_SUBDIR disable_cmakelists_txt
   TLS_VERIFY OFF)
 FetchContent_MakeAvailable(lpeg)
@@ -460,8 +460,8 @@ lua2c(lpeg lpeg=c)
 target_sources(
   lpeg
   PRIVATE ${lpeg_SOURCE_DIR}/lpcap.c ${lpeg_SOURCE_DIR}/lpcode.c
-          ${lpeg_SOURCE_DIR}/lpprint.c ${lpeg_SOURCE_DIR}/lptree.c
-          ${lpeg_SOURCE_DIR}/lpvm.c)
+          ${lpeg_SOURCE_DIR}/lpcset.c ${lpeg_SOURCE_DIR}/lpprint.c
+          ${lpeg_SOURCE_DIR}/lptree.c ${lpeg_SOURCE_DIR}/lpvm.c)
 
 FetchContent_Declare(
   luadbd
