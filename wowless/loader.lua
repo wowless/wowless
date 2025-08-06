@@ -377,68 +377,68 @@ local function loader(api, cfg)
     end,
   }
 
+  local xmlattrlang = {
+    hidden = function(_, obj, value)
+      obj.shown = not value
+    end,
+    mixin = function(ctx, obj, value)
+      local env = ctx.useAddonEnv and ctx.addonEnv or ctx.useSecureEnv and api.secureenv or api.env
+      for _, m in ipairs(value) do
+        mixin(obj.luarep, env[m])
+      end
+    end,
+    parent = function(ctx, obj, value)
+      local env = ctx.useAddonEnv and ctx.addonEnv or ctx.useSecureEnv and api.secureenv or api.env
+      local parent = env[value]
+      api.SetParent(obj, parent and api.UserData(parent))
+    end,
+    parentarray = function(_, obj, value)
+      local p = obj.parent
+      if p then
+        p = p.luarep
+        p[value] = p[value] or {}
+        table.insert(p[value], obj.luarep)
+      end
+    end,
+    parentkey = function(_, obj, value)
+      local p = obj.parent
+      if p then
+        p.luarep[value] = obj.luarep
+      end
+    end,
+    securemixin = function(ctx, obj, value)
+      local env = ctx.useAddonEnv and ctx.addonEnv or ctx.useSecureEnv and api.secureenv or api.env
+      for _, m in ipairs(value) do
+        local mv = env[m]
+        local sm = securemixins[mv]
+        if not sm then
+          local vv = {}
+          for k, v in pairs(mv) do
+            vv[k] = v
+            mv[k] = nil
+          end
+          setmetatable(mv, {
+            __index = vv,
+            __metatable = 0,
+          })
+          sm = {}
+          for k, v in pairs(vv) do
+            sm[k] = type(v) == 'function' and debug.newsecurefunction(v) or v
+          end
+          securemixins[mv] = sm
+        end
+        mixin(obj.luarep, sm)
+      end
+    end,
+    setallpoints = function(_, obj, value)
+      if value and not obj:IsObjectType('texturebase') then
+        obj:SetAllPoints()
+      end
+    end,
+  }
+
   local function forAddon(addonName, addonEnv, addonRoot, useSecureEnv, skipObjects)
     local loadFile
-
-    local xmlattrlang = {
-      hidden = function(_, obj, value)
-        obj.shown = not value
-      end,
-      mixin = function(ctx, obj, value)
-        local env = ctx.useAddonEnv and addonEnv or ctx.useSecureEnv and api.secureenv or api.env
-        for _, m in ipairs(value) do
-          mixin(obj.luarep, env[m])
-        end
-      end,
-      parent = function(ctx, obj, value)
-        local env = ctx.useAddonEnv and addonEnv or ctx.useSecureEnv and api.secureenv or api.env
-        local parent = env[value]
-        api.SetParent(obj, parent and api.UserData(parent))
-      end,
-      parentarray = function(_, obj, value)
-        local p = obj.parent
-        if p then
-          p = p.luarep
-          p[value] = p[value] or {}
-          table.insert(p[value], obj.luarep)
-        end
-      end,
-      parentkey = function(_, obj, value)
-        local p = obj.parent
-        if p then
-          p.luarep[value] = obj.luarep
-        end
-      end,
-      securemixin = function(ctx, obj, value)
-        local env = ctx.useAddonEnv and addonEnv or ctx.useSecureEnv and api.secureenv or api.env
-        for _, m in ipairs(value) do
-          local mv = env[m]
-          local sm = securemixins[mv]
-          if not sm then
-            local vv = {}
-            for k, v in pairs(mv) do
-              vv[k] = v
-              mv[k] = nil
-            end
-            setmetatable(mv, {
-              __index = vv,
-              __metatable = 0,
-            })
-            sm = {}
-            for k, v in pairs(vv) do
-              sm[k] = type(v) == 'function' and debug.newsecurefunction(v) or v
-            end
-            securemixins[mv] = sm
-          end
-          mixin(obj.luarep, sm)
-        end
-      end,
-      setallpoints = function(_, obj, value)
-        if value and not obj:IsObjectType('texturebase') then
-          obj:SetAllPoints()
-        end
-      end,
-    }
 
     local function loadXml(filename, xmlstr)
       local dir = path.dirname(filename)
@@ -635,6 +635,7 @@ local function loader(api, cfg)
           api.log(3, filename .. ': ' .. warning)
         end
         local ctx = {
+          addonEnv = addonEnv,
           ignoreVirtual = false,
           intrinsic = false,
           skipObjects = skipObjects,
