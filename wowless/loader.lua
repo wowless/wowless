@@ -452,8 +452,9 @@ local function loader(api, cfg)
           return { [attr.impl.scope] = v }
         elseif attr.impl.method then
           local fn = obj[attr.impl.method]
-          assert(fn, ('missing method %q on object type %q'):format(attr.impl.method, obj.type))
-          if type(v) == 'table' then -- stringlist
+          if not fn then
+            error(('missing method %q on object type %q'):format(attr.impl.method, obj.type))
+          elseif type(v) == 'table' then -- stringlist
             fn(obj, unpack(v))
           else
             fn(obj, v)
