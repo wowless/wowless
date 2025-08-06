@@ -364,6 +364,7 @@ local function new(log, maxErrors, product, loglevel)
     IsIntrinsicType = IsIntrinsicType,
     IsVisible = IsVisible,
     log = log,
+    loglevel = loglevel,
     NextFrame = NextFrame,
     ParentSub = ParentSub,
     platform = require('runtime.platform'),

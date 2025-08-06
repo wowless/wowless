@@ -308,7 +308,7 @@ local function loader(api, cfg)
       if t then
         api.UserData(t):AddMaskTexture(parent.luarep)
       else
-        api.log(1, 'cannot find maskedtexture childkey ' .. e.attr.childkey)
+        api.log(1, 'cannot find maskedtexture childkey %s', e.attr.childkey)
       end
     end,
     maxresize = function(_, e, parent)
@@ -545,9 +545,9 @@ local function loader(api, cfg)
             assert(e.attr.name, 'cannot create anonymous intrinsic')
             local name = string.lower(e.attr.name)
             if api.uiobjectTypes[name] then
-              api.log(1, 'overwriting intrinsic ' .. e.attr.name)
+              api.log(1, 'overwriting intrinsic %s', e.attr.name)
             end
-            api.log(3, 'creating intrinsic ' .. e.attr.name)
+            api.log(3, 'creating intrinsic %s', e.attr.name)
             local basetype = string.lower(e.type)
             local base = api.uiobjectTypes[basetype]
             api.uiobjectTypes[name] = {
@@ -565,15 +565,15 @@ local function loader(api, cfg)
               assert(e.attr.name, 'cannot create anonymous template')
               local name = string.lower(e.attr.name)
               if api.templates[name] then
-                api.log(1, 'overwriting template ' .. e.attr.name)
+                api.log(1, 'overwriting template %s', e.attr.name)
               end
-              api.log(3, 'creating template ' .. e.attr.name)
+              api.log(3, 'creating template %s', e.attr.name)
               api.templates[name] = template
             end
             if ltype == 'font' or (not virtual or ctx.ignoreVirtual) then
               local name = e.attr.name
               if virtual and ctx.ignoreVirtual then
-                api.log(1, 'ignoring virtual on ' .. tostring(name))
+                api.log(1, 'ignoring virtual on %s', tostring(name))
               end
               local ety = e.type == 'worldframe' and 'frame' or e.type
               local env = ctx.useAddonEnv and addonEnv or ctx.useSecureEnv and api.secureenv or api.env
@@ -631,8 +631,10 @@ local function loader(api, cfg)
 
       api.CallSafely(function()
         local root, warnings = parseXml(xmlstr)
-        for _, warning in ipairs(warnings) do
-          api.log(3, filename .. ': ' .. warning)
+        if api.loglevel >= 3 then
+          for _, warning in ipairs(warnings) do
+            api.log(3, filename .. ': ' .. warning)
+          end
         end
         local ctx = {
           addonEnv = addonEnv,
