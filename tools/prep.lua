@@ -215,7 +215,9 @@ end
 
 local cvars = {}
 for k, v in pairs(parseYaml('data/products/' .. product .. '/cvars.yaml')) do
-  cvars[k:lower()] = {
+  local lk = k:lower()
+  assert(not cvars[lk], lk)
+  cvars[lk] = {
     name = k,
     value = v,
   }
