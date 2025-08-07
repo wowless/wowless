@@ -1,4 +1,3 @@
----
 name: families
 type:
   mapof:

@@ -1,4 +1,3 @@
----
 C_AuctionHouse.GetAuctionItemSubClasses:
   indexes:
     ItemSubClass: ClassID

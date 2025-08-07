@@ -1,4 +1,3 @@
----
 assert:
   stdlib: assert
 bit.arshift:

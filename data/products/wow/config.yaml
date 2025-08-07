@@ -1,4 +1,3 @@
----
 addon:
   aliased_in_framexml:
     C_LFGInfo.IsPremadeGroupEnabled:

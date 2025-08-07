@@ -218,7 +218,6 @@ static int doparse(lua_State *L) {
   yaml_parser_t *parser = lua_touserdata(L, 1);
   yaml_token_t *token = lua_touserdata(L, 2);
   eat(L, parser, token, YAML_STREAM_START_TOKEN);
-  eat(L, parser, token, YAML_DOCUMENT_START_TOKEN);
   advance(L, parser, token);
   parsevalue(L, parser, token);
   checktype(L, token, YAML_STREAM_END_TOKEN);
@@ -351,7 +350,7 @@ static int dopprint(lua_State *L) {
   yaml_event_t event;
   x(L, yaml_stream_start_event_initialize(&event, YAML_UTF8_ENCODING));
   x(L, yaml_emitter_emit(emitter, &event));
-  x(L, yaml_document_start_event_initialize(&event, 0, 0, 0, 0));
+  x(L, yaml_document_start_event_initialize(&event, 0, 0, 0, 1));
   x(L, yaml_emitter_emit(emitter, &event));
   printvalue(L, emitter, &event);
   x(L, yaml_document_end_event_initialize(&event, 1));
