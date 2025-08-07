@@ -416,7 +416,7 @@ typedefs:
     type:
       structure: ItemLocation
   FileAsset:
-    type: string
+    type: FileAsset
   fileID:
     type: number
   FontAlphabet:

@@ -354,7 +354,7 @@ Actor:
     SetModelByFileID:
       inputs:
       - name: asset
-        type: string
+        type: FileAsset
       - default: false
         name: useMips
         type: boolean
@@ -371,7 +371,7 @@ Actor:
     SetModelByPath:
       inputs:
       - name: asset
-        type: string
+        type: FileAsset
       - default: false
         name: useMips
         type: boolean
@@ -1972,7 +1972,7 @@ Cooldown:
     SetBlingTexture:
       inputs:
       - name: texture
-        type: string
+        type: FileAsset
       - name: colorR
         nilable: true
         type: number
@@ -2050,7 +2050,7 @@ Cooldown:
     SetEdgeTexture:
       inputs:
       - name: texture
-        type: string
+        type: FileAsset
       - name: colorR
         nilable: true
         type: number
@@ -2099,7 +2099,7 @@ Cooldown:
     SetSwipeTexture:
       inputs:
       - name: texture
-        type: string
+        type: FileAsset
       - name: colorR
         nilable: true
         type: number
@@ -2846,7 +2846,7 @@ FogOfWarFrame:
       outputs:
       - name: asset
         nilable: true
-        type: string
+        type: FileAsset
     GetFogOfWarMaskAtlas:
       inputs:
       outputs:
@@ -2857,7 +2857,7 @@ FogOfWarFrame:
       outputs:
       - name: asset
         nilable: true
-        type: string
+        type: FileAsset
     GetMaskScalar:
       impl:
         getter:
@@ -2882,7 +2882,7 @@ FogOfWarFrame:
     SetFogOfWarBackgroundTexture:
       inputs:
       - name: asset
-        type: string
+        type: FileAsset
       - name: horizontalTile
         type: boolean
       - name: verticalTile
@@ -2896,7 +2896,7 @@ FogOfWarFrame:
     SetFogOfWarMaskTexture:
       inputs:
       - name: asset
-        type: string
+        type: FileAsset
       outputs:
     SetMaskScalar:
       impl:
@@ -5042,7 +5042,7 @@ Model:
     ReplaceIconTexture:
       inputs:
       - name: asset
-        type: string
+        type: FileAsset
       outputs:
     SetCamera:
       inputs:
@@ -6142,7 +6142,7 @@ POIFrame:
     SetBorderTexture:
       inputs:
       - name: asset
-        type: string
+        type: FileAsset
       outputs:
     SetFillAlpha:
       inputs:
@@ -6152,7 +6152,7 @@ POIFrame:
     SetFillTexture:
       inputs:
       - name: asset
-        type: string
+        type: FileAsset
       outputs:
     SetMapID:
       impl:
@@ -8399,7 +8399,7 @@ UnitPositionFrame:
         type:
           enum: PingTextureType
       - name: asset
-        type: string
+        type: FileAsset
       - default: 0
         name: width
         type: number
