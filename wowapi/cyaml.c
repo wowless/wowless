@@ -256,9 +256,11 @@ static void printscalar(lua_State *L, yaml_emitter_t *emitter,
   switch (type) {
     case LUA_TBOOLEAN: {
       if (lua_toboolean(L, -1)) {
-        x(L, yaml_scalar_event_initialize(event, 0, 0, "true", 4, 1, 1, 0));
+        x(L, yaml_scalar_event_initialize(
+                 event, 0, 0, (const unsigned char *)"true", 4, 1, 1, 0));
       } else {
-        x(L, yaml_scalar_event_initialize(event, 0, 0, "false", 5, 1, 1, 0));
+        x(L, yaml_scalar_event_initialize(
+                 event, 0, 0, (const unsigned char *)"false", 5, 1, 1, 0));
       }
       x(L, yaml_emitter_emit(emitter, event));
       break;
