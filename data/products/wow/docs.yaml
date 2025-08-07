@@ -12,12 +12,6 @@ lies:
       outputs:
       - _add:
           nilable: true
-    C_SpecializationInfo.GetNumSpecializationsForClassID:
-      inputs:
-      - name:
-          _change:
-            from: specID
-            to: classID
     GetSpecializationInfoForClassID:
       _add:
         mayreturnnothing: true
@@ -68,24 +62,6 @@ lies:
         outputs:
         - _add:
             nilable: true
-      RegisterForClicks:
-        inputs:
-        - _change:
-            from:
-              name: unpackedPrimitiveType
-              type: number
-            to:
-              name: button
-              type: string
-      RegisterForMouse:
-        inputs:
-        - _change:
-            from:
-              name: unpackedPrimitiveType
-              type: number
-            to:
-              name: button
-              type: string
       SetFormattedText:
         _add:
           instride: 1
@@ -156,15 +132,6 @@ lies:
             _change:
               from: string
               to: unknown
-      RegisterForDrag:
-        inputs:
-        - _change:
-            from:
-              name: unpackedPrimitiveType
-              type: number
-            to:
-              name: button
-              type: string
       RegisterUnitEvent:
         inputs:
           2:
@@ -224,15 +191,6 @@ lies:
           - default: true
             name: doResize
             type: boolean
-      SetPassThroughButtons:
-        inputs:
-        - _change:
-            from:
-              name: unpackedPrimitiveType
-              type: number
-            to:
-              name: button
-              type: string
       SetPoint:
         _remove:
           inputs:
@@ -449,6 +407,8 @@ typedefs:
     type: string
   ChatBubbleFrame:
     type: table
+  ClickButton:
+    type: string
   ClubId:
     type: string
   ClubInvitationId:
@@ -504,6 +464,8 @@ typedefs:
   ModelSceneFrameActor:
     type:
       uiobject: Actor
+  MouseButton:
+    type: string
   mouseButton:
     type: string
   NamePlateFrame:
@@ -518,12 +480,11 @@ typedefs:
     type: number
   RecruitAcceptanceID:
     type: string
-  ScriptObject:
-    type:
-      uiobject: UIObject
   ScriptRegion:
     type:
       uiobject: Region
+  SendChatMessageType:
+    type: string
   SimpleAnim:
     type:
       uiobject: Animation
@@ -554,6 +515,9 @@ typedefs:
   SimplePathAnim:
     type:
       uiobject: Path
+  SimpleRegion:
+    type:
+      uiobject: Region
   SimpleTexture:
     outnil: true
     type:
