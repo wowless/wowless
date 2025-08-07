@@ -112,58 +112,86 @@ local specDefault = (function()
   return specDefault
 end)()
 
-local apis = {}
-local impls = {}
+local function dispatch(t, u, ...)
+  if type(u) == 'string' then
+    return assert(t[u], u)(...)
+  else
+    local uk, uv = next(u)
+    assert(next(u, uk) == nil, uk)
+    return assert(t[uk], uk)(uv, ...)
+  end
+end
+
+local sqlcfg = parseYaml('data/sql.yaml')
 local sqls = {}
+local function ensuresql(k)
+  if not sqls[k] then
+    local sql = assert(sqlcfg[k], k)
+    sqls[k] = {
+      sql = readFile('data/sql/' .. k .. '.sql'),
+      table = sql.table,
+      type = sql.type,
+    }
+  end
+end
+
+local implimpls = {
+  delegate = function(impl)
+    return {
+      src = 'return ' .. impl,
+    }
+  end,
+  directsql = function(impl)
+    ensuresql(impl)
+    return {
+      sqls = { impl },
+      src = 'return (...)',
+    }
+  end,
+  impl = function(impl, name)
+    for _, sql in ipairs(impl.sqls or {}) do
+      ensuresql(sql)
+    end
+    return {
+      frameworks = impl.frameworks,
+      sqls = impl.sqls,
+      src = readFile('data/impl/' .. name .. '.lua'),
+    }
+  end,
+  luadelegate = function(impl, name)
+    local fmt = 'return require(%q)[%q]'
+    return {
+      src = fmt:format(impl.module, impl['function'] or name),
+    }
+  end,
+  moduledelegate = function(impl, name)
+    local fmt = 'return (...).modules[%q][%q]'
+    return {
+      frameworks = { 'api' },
+      src = fmt:format(impl.name, impl['function'] or name),
+    }
+  end,
+}
+local implcfg = parseYaml('data/impl.yaml')
+local impls = {}
+local function ensureimpl(k)
+  if not impls[k] then
+    local cfg = assert(implcfg[k], k)
+    impls[k] = dispatch(implimpls, cfg, k)
+  end
+end
+
+local apis = {}
 do
   local cfg = parseYaml('data/products/' .. product .. '/apis.yaml')
-  local implcfg = parseYaml('data/impl.yaml')
-  local sqlcfg = parseYaml('data/sql.yaml')
   for name, apicfg in pairs(cfg) do
     if apicfg.impl then
       local ic = assert(implcfg[apicfg.impl], 'missing impl ' .. apicfg.impl)
       if ic.stdlib then
         apicfg.impl = nil
         apicfg.stdlib = ic.stdlib
-      end
-      for _, v in ipairs(ic.impl and ic.impl.sqls or { ic.directsql }) do
-        if not sqls[v] then
-          local sql = sqlcfg[v]
-          sqls[v] = {
-            sql = readFile('data/sql/' .. v .. '.sql'),
-            table = sql.table,
-            type = sql.type,
-          }
-        end
-      end
-      if not impls[apicfg.impl] then
-        if ic.moduledelegate then
-          local fmt = 'return (...).modules[%q][%q]'
-          impls[apicfg.impl] = {
-            frameworks = { 'api' },
-            src = fmt:format(ic.moduledelegate.name, ic.moduledelegate['function'] or apicfg.impl),
-          }
-        elseif ic.luadelegate then
-          local fmt = 'return require(%q)[%q]'
-          impls[apicfg.impl] = {
-            src = fmt:format(ic.luadelegate.module, ic.luadelegate['function'] or apicfg.impl),
-          }
-        elseif ic.delegate then
-          impls[apicfg.impl] = {
-            src = 'return ' .. ic.delegate,
-          }
-        elseif ic.directsql then
-          impls[apicfg.impl] = {
-            sqls = { ic.directsql },
-            src = 'return (...)',
-          }
-        elseif ic.impl then
-          impls[apicfg.impl] = {
-            frameworks = ic.impl.frameworks,
-            sqls = ic.impl.sqls,
-            src = readFile('data/impl/' .. apicfg.impl .. '.lua'),
-          }
-        end
+      else
+        ensureimpl(apicfg.impl)
       end
     elseif apicfg.stubnothing then
       apicfg.stub = ''
@@ -356,8 +384,7 @@ for k, v in pairs(uiobjectdata) do
   table.insert(constructor, '}end')
   local methods = {}
   for mk, mv in pairs(v.methods) do
-    local ik, iv = next(mv.impl or { none = true })
-    methods[mk] = uiobjectimplmakers[ik](iv, mv)
+    methods[mk] = dispatch(uiobjectimplmakers, mv.impl or { none = true }, mv)
   end
   uiobjects[k] = {
     constructor = table.concat(constructor),
