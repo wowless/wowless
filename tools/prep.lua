@@ -231,6 +231,122 @@ local function mkuiobjectinit(k)
   end
   return init
 end
+local uiobjectimplmakers = {
+  getter = function(impl, mv)
+    local t = { 'local _,_,check=...;' }
+    for i in ipairs(impl) do
+      table.insert(t, 'local spec' .. i .. '=' .. plprettywrite(mv.outputs[i], '') .. ';')
+    end
+    table.insert(t, 'return function(self)return ')
+    for i, f in ipairs(impl) do
+      table.insert(t, (i == 1 and '' or ',') .. 'check(spec' .. i .. ',self.' .. f.name .. ',true)')
+    end
+    table.insert(t, 'end')
+    return table.concat(t)
+  end,
+  none = function(_, mv)
+    local t = { 'local api,_,check,Mixin=...;' }
+    local ins = mv.inputs or {}
+    local nsins = #ins - (mv.instride or 0)
+    for i = 1, #ins do
+      table.insert(t, 'local spec' .. i .. '=' .. plprettywrite(mv.inputs[i], '') .. ';')
+    end
+    table.insert(t, 'return function(_')
+    for i = 1, nsins do
+      table.insert(t, ',arg' .. i)
+    end
+    if mv.instride then
+      table.insert(t, ',...')
+    end
+    table.insert(t, ')')
+    for i = 1, nsins do
+      table.insert(t, 'check(spec' .. i .. ',arg' .. i .. ');')
+    end
+    if mv.instride then
+      table.insert(t, 'for i=1,select("#",...),' .. mv.instride .. ' do ')
+      table.insert(t, 'local arg' .. nsins + 1)
+      for i = nsins + 2, #ins do
+        table.insert(t, ',arg' .. i)
+      end
+      table.insert(t, '=select(i,...);')
+      for i = nsins + 1, #ins do
+        table.insert(t, 'check(spec' .. i .. ',arg' .. i .. ');')
+      end
+      table.insert(t, 'end ')
+    end
+    table.insert(t, 'return ')
+    local outs = mv.outputs or {}
+    local rets = {}
+    local nonstride = #outs - (mv.outstride or 0)
+    for i = 1, nonstride do
+      table.insert(rets, specDefault(outs[i]))
+    end
+    for _ = 1, mv.stuboutstrides or 1 do
+      for j = nonstride + 1, #outs do
+        table.insert(rets, specDefault(outs[j]))
+      end
+    end
+    table.insert(t, table.concat(rets, ','))
+    table.insert(t, ' end')
+    return table.concat(t)
+  end,
+  setter = function(impl, mv)
+    local t = { 'local api,_,check,Mixin=...;' }
+    for i in ipairs(impl) do
+      table.insert(t, 'local spec' .. i .. '=' .. plprettywrite(mv.inputs[i], '') .. ';')
+    end
+    table.insert(t, 'return function(self')
+    for _, f in ipairs(impl) do
+      table.insert(t, ',')
+      table.insert(t, f.name)
+    end
+    table.insert(t, ')')
+    for i, f in ipairs(impl) do
+      table.insert(t, 'self.')
+      table.insert(t, f.name)
+      table.insert(t, '=check(spec')
+      table.insert(t, tostring(i))
+      table.insert(t, ',')
+      table.insert(t, f.name)
+      table.insert(t, ');')
+    end
+    table.insert(t, 'end')
+    return table.concat(t)
+  end,
+  settexture = function(impl)
+    local t = { 'local api,toTexture=...;return function(self,tex)' }
+    table.insert(t, 'local t=toTexture(self,tex,self.')
+    table.insert(t, impl.field)
+    table.insert(t, ');if t then api.SetParent(t,self);if t:GetNumPoints()==0 then t:SetAllPoints()end t:SetShown(')
+    table.insert(t, impl.shown or 'true')
+    table.insert(t, ');')
+    if impl.extra then
+      table.insert(t, impl.extra)
+      table.insert(t, ';')
+    end
+    table.insert(t, 'end self.')
+    table.insert(t, impl.field)
+    table.insert(t, '=t;')
+    if impl['return'] then
+      table.insert(t, 'return true;')
+    end
+    table.insert(t, 'end')
+    return table.concat(t)
+  end,
+  uiobjectimpl = function(impl, mv)
+    assert(uiobjectimpl[impl], 'missing impl ' .. impl)
+    local src = 'data/uiobjects/' .. impl .. '.lua'
+    return {
+      impl = readFile(src),
+      inputs = mv.inputs,
+      instride = mv.instride,
+      mayreturnnothing = mv.mayreturnnothing,
+      outputs = mv.outputs,
+      outstride = mv.outstride,
+      src = src,
+    }
+  end,
+}
 local uiobjects = {}
 for k, v in pairs(uiobjectdata) do
   local constructor = { 'local hlist=...;return function()return{' }
@@ -240,117 +356,8 @@ for k, v in pairs(uiobjectdata) do
   table.insert(constructor, '}end')
   local methods = {}
   for mk, mv in pairs(v.methods) do
-    if mv.impl and mv.impl.uiobjectimpl then
-      assert(uiobjectimpl[mv.impl.uiobjectimpl])
-      local src = 'data/uiobjects/' .. mv.impl.uiobjectimpl .. '.lua'
-      methods[mk] = {
-        impl = readFile(src),
-        inputs = mv.inputs,
-        instride = mv.instride,
-        mayreturnnothing = mv.mayreturnnothing,
-        outputs = mv.outputs,
-        outstride = mv.outstride,
-        src = src,
-      }
-    elseif mv.impl and mv.impl.getter then
-      local t = { 'local _,_,check=...;' }
-      for i in ipairs(mv.impl.getter) do
-        table.insert(t, 'local spec' .. i .. '=' .. plprettywrite(mv.outputs[i], '') .. ';')
-      end
-      table.insert(t, 'return function(self)return ')
-      for i, f in ipairs(mv.impl.getter) do
-        table.insert(t, (i == 1 and '' or ',') .. 'check(spec' .. i .. ',self.' .. f.name .. ',true)')
-      end
-      table.insert(t, 'end')
-      methods[mk] = table.concat(t)
-    elseif mv.impl and mv.impl.setter then
-      local t = { 'local api,_,check,Mixin=...;' }
-      for i in ipairs(mv.impl.setter) do
-        table.insert(t, 'local spec' .. i .. '=' .. plprettywrite(mv.inputs[i], '') .. ';')
-      end
-      table.insert(t, 'return function(self')
-      for _, f in ipairs(mv.impl.setter) do
-        table.insert(t, ',')
-        table.insert(t, f.name)
-      end
-      table.insert(t, ')')
-      for i, f in ipairs(mv.impl.setter) do
-        table.insert(t, 'self.')
-        table.insert(t, f.name)
-        table.insert(t, '=check(spec')
-        table.insert(t, tostring(i))
-        table.insert(t, ',')
-        table.insert(t, f.name)
-        table.insert(t, ');')
-      end
-      table.insert(t, 'end')
-      methods[mk] = table.concat(t)
-    elseif mv.impl and mv.impl.settexture then
-      local x = mv.impl.settexture
-      local t = { 'local api,toTexture=...;return function(self,tex)' }
-      table.insert(t, 'local t=toTexture(self,tex,self.')
-      table.insert(t, x.field)
-      table.insert(t, ');if t then api.SetParent(t,self);if t:GetNumPoints()==0 then t:SetAllPoints()end t:SetShown(')
-      table.insert(t, x.shown or 'true')
-      table.insert(t, ');')
-      if x.extra then
-        table.insert(t, x.extra)
-        table.insert(t, ';')
-      end
-      table.insert(t, 'end self.')
-      table.insert(t, x.field)
-      table.insert(t, '=t;')
-      if x['return'] then
-        table.insert(t, 'return true;')
-      end
-      table.insert(t, 'end')
-      methods[mk] = table.concat(t)
-    else
-      local t = { 'local api,_,check,Mixin=...;' }
-      local ins = mv.inputs or {}
-      local nsins = #ins - (mv.instride or 0)
-      for i = 1, #ins do
-        table.insert(t, 'local spec' .. i .. '=' .. plprettywrite(mv.inputs[i], '') .. ';')
-      end
-      table.insert(t, 'return function(_')
-      for i = 1, nsins do
-        table.insert(t, ',arg' .. i)
-      end
-      if mv.instride then
-        table.insert(t, ',...')
-      end
-      table.insert(t, ')')
-      for i = 1, nsins do
-        table.insert(t, 'check(spec' .. i .. ',arg' .. i .. ');')
-      end
-      if mv.instride then
-        table.insert(t, 'for i=1,select("#",...),' .. mv.instride .. ' do ')
-        table.insert(t, 'local arg' .. nsins + 1)
-        for i = nsins + 2, #ins do
-          table.insert(t, ',arg' .. i)
-        end
-        table.insert(t, '=select(i,...);')
-        for i = nsins + 1, #ins do
-          table.insert(t, 'check(spec' .. i .. ',arg' .. i .. ');')
-        end
-        table.insert(t, 'end ')
-      end
-      table.insert(t, 'return ')
-      local outs = mv.outputs or {}
-      local rets = {}
-      local nonstride = #outs - (mv.outstride or 0)
-      for i = 1, nonstride do
-        table.insert(rets, specDefault(outs[i]))
-      end
-      for _ = 1, mv.stuboutstrides or 1 do
-        for j = nonstride + 1, #outs do
-          table.insert(rets, specDefault(outs[j]))
-        end
-      end
-      table.insert(t, table.concat(rets, ','))
-      table.insert(t, ' end')
-      methods[mk] = table.concat(t)
-    end
+    local ik, iv = next(mv.impl or { none = true })
+    methods[mk] = uiobjectimplmakers[ik](iv, mv)
   end
   uiobjects[k] = {
     constructor = table.concat(constructor),
