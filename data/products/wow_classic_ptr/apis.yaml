@@ -6410,6 +6410,16 @@ C_GlyphInfo.GetGlyphInfoByID:
     type: number
   - name: link
     type: string
+C_GlyphInfo.GetGlyphLink:
+  inputs:
+  - name: glyphIndex
+    type: number
+  - name: glyphID
+    type: number
+  mayreturnnothing: true
+  outputs:
+  - name: link
+    type: string
 C_GossipInfo.CloseGossip:
   inputs:
   outputs:
@@ -11954,6 +11964,11 @@ C_ToyBoxInfo.NeedsFanfare:
 C_TradeInfo.AddTradeMoney:
   inputs:
   outputs:
+C_TradeInfo.PickupTradeMoney:
+  inputs:
+  - name: amount
+    type: number
+  outputs:
 C_TradeInfo.SetTradeMoney:
   inputs:
   - name: amount
@@ -16776,7 +16791,6 @@ GetGlyphInfo:
   - name: glyphLink
     nilable: true
     type: string
-GetGlyphLink:
 GetGlyphSocketInfo:
 GetGMStatus:
 GetGMTicket:
@@ -21240,7 +21254,6 @@ PickupSpell:
 PickupSpellBookItem:
 PickupStablePet:
 PickupTalent:
-PickupTradeMoney:
 PitchDownStart:
   inputs:
   outputs:
