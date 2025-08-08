@@ -3,7 +3,6 @@ local args = (function()
   parser:argument('product', 'product to fetch')
   parser:option('--sqls', 'sqls file')
   parser:option('-o --output', 'output file')
-  parser:option('-s --stamp', 'stamp file')
   return parser:parse()
 end)()
 
@@ -415,5 +414,5 @@ local data = {
 
 local outfn = args.output or ('build/products/' .. args.product .. '/data.lua')
 local tu = require('tools.util')
-tu.writedeps(outfn, deps, args.stamp)
+tu.writedeps(outfn, deps)
 require('pl.file').write(outfn, tu.returntable(data))

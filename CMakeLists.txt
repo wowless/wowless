@@ -529,10 +529,8 @@ foreach(product ${products})
   add_custom_command(
     OUTPUT stamp/${product}.txt
     BYPRODUCTS runtime/${product}.lua
-    COMMAND
-      prep ${product} --sqls ${CMAKE_CURRENT_BINARY_DIR}/runtime/sqls.yaml
-      --output ${CMAKE_CURRENT_BINARY_DIR}/generated/${product}.lua --stamp
-      ${CMAKE_CURRENT_BINARY_DIR}/stamp/${product}.txt
+    COMMAND prep ${product} --sqls ${CMAKE_CURRENT_BINARY_DIR}/runtime/sqls.yaml
+            --output ${CMAKE_CURRENT_BINARY_DIR}/generated/${product}.lua
     COMMAND
       ${CMAKE_COMMAND} -E copy_if_different
       ${CMAKE_CURRENT_BINARY_DIR}/generated/${product}.lua

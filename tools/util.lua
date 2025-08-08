@@ -11,8 +11,8 @@ end
 
 local abs = require('pl.path').abspath
 
-local function writedeps(f, deps, stamp)
-  local t = { stamp or f, ':' }
+local function writedeps(f, deps)
+  local t = { f, ':' }
   for dep in require('pl.tablex').sort(deps) do
     table.insert(t, ' \\\n ')
     table.insert(t, abs(dep))
