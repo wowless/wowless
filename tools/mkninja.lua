@@ -193,9 +193,8 @@ for _, p in ipairs(productList) do
     },
     ins_implicit = {
       'build/cmake/dblist',
-      'build/cmake/runtime/impl.lua',
-      'build/cmake/runtime/products/' .. p .. '/apis.lua',
       'build/cmake/stamp/sqls.txt',
+      'build/cmake/stamp/' .. p .. '.txt',
     },
     outs = dblist,
     rule = 'dblist',

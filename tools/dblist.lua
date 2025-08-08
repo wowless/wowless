@@ -8,19 +8,9 @@ local function dblist(product)
   local dbset = {
     GlobalStrings = {},
   }
-  local impls = dofile('build/cmake/runtime/impl.lua')
+  local datalua = dofile('build/cmake/runtime/' .. product .. '.lua')
   local sqlcfgs = require('wowapi.yaml').parseFile('build/cmake/runtime/sqls.yaml')
-  local productapis = dofile('build/cmake/runtime/products/' .. product .. '/apis.lua')
-  local sqls = {}
-  for _, api in pairs(productapis) do
-    local impl = impls[api.impl]
-    if impl then
-      for _, sql in ipairs(impl.impl and impl.impl.sqls or { impl.directsql }) do
-        sqls[sql] = true
-      end
-    end
-  end
-  for sql in pairs(sqls) do
+  for sql in pairs(datalua.sqls) do
     -- We are fortunate that sqlite complains about missing tables first.
     local sqltext = sqlcfgs[sql].text
     local db = require('lsqlite3').open_memory()
