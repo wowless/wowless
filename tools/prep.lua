@@ -415,4 +415,4 @@ local data = {
 local outfn = args.output or ('build/products/' .. args.product .. '/data.lua')
 local tu = require('tools.util')
 tu.writedeps(outfn, deps, args.stamp)
-tu.writeifchanged(outfn, tu.returntable(data))
+require('pl.file').write(outfn, tu.returntable(data))
