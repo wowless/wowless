@@ -464,6 +464,19 @@ add_custom_target(listfilelua DEPENDS stamp/listfile.txt)
 lua2c(runtimelistfile runtime.listfile=runtime/listfile.lua)
 add_dependencies(runtimelistfile listfilelua)
 
+# TODO derive this from data/products.yaml, or vice versa
+list(
+  APPEND
+  products
+  wow
+  wowt
+  wowxptr
+  wow_classic
+  wow_classic_beta
+  wow_classic_era
+  wow_classic_era_ptr
+  wow_classic_ptr)
+
 add_lua_executable(
   dblist
   ${CMAKE_CURRENT_SOURCE_DIR}/tools/dblist.lua
@@ -472,6 +485,19 @@ add_lua_executable(
   penlight
   toolsutil
   wowlessyaml)
+
+foreach(product ${products})
+  set(f ${product}_dblist.lua)
+  add_custom_command(
+    OUTPUT stamp/${f}
+    BYPRODUCTS runtime/${f}
+    COMMAND dblist ${product}
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different generated/${f} runtime/${f}
+    COMMAND ${CMAKE_COMMAND} -E touch stamp/${f}
+    DEPENDS dblist stamp/sqls.txt stamp/${product}.txt)
+  # TODO remove this dummy target when dependencies are migrated from mkninja
+  add_custom_target(dummy_${product}_dblist DEPENDS stamp/${f})
+endforeach()
 
 FetchContent_Declare(
   lpeg
@@ -513,18 +539,6 @@ add_lua_executable(
   wowlessutil
   wowlessyaml)
 
-# TODO derive this from data/products.yaml, or vice versa
-list(
-  APPEND
-  products
-  wow
-  wowt
-  wowxptr
-  wow_classic
-  wow_classic_beta
-  wow_classic_era
-  wow_classic_era_ptr
-  wow_classic_ptr)
 foreach(product ${products})
   add_custom_command(
     OUTPUT stamp/${product}.txt
