@@ -93,8 +93,6 @@ local rules = {
   },
   dblist = {
     command = 'build/cmake/dblist $product',
-    depfile = '$out.d',
-    deps = 'gcc',
   },
   dbschema = {
     command = 'build/cmake/sqlite $product',
@@ -196,8 +194,8 @@ for _, p in ipairs(productList) do
     ins_implicit = {
       'build/cmake/dblist',
       'build/cmake/runtime/impl.lua',
-      'build/cmake/runtime/sql.lua',
       'build/cmake/runtime/products/' .. p .. '/apis.lua',
+      'build/cmake/stamp/sqls.txt',
     },
     outs = dblist,
     rule = 'dblist',

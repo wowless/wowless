@@ -1,6 +1,7 @@
 local args = (function()
   local parser = require('argparse')()
   parser:argument('product', 'product to fetch')
+  parser:option('--sqls', 'sqls file')
   parser:option('-o --output', 'output file')
   parser:option('-s --stamp', 'stamp file')
   return parser:parse()
@@ -122,15 +123,15 @@ local function dispatch(t, u, ...)
   end
 end
 
-local sqlcfg = parseYaml('data/sql.yaml')
+local sqlcfg = parseYaml(args.sqls)
 local sqls = {}
 local function ensuresql(k)
   if not sqls[k] then
     local sql = assert(sqlcfg[k], k)
     sqls[k] = {
-      sql = readFile('data/sql/' .. k .. '.sql'),
-      table = sql.table,
-      type = sql.type,
+      sql = sql.text,
+      table = sql.config.table,
+      type = sql.config.type,
     }
   end
 end

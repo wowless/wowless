@@ -414,6 +414,22 @@ yaml2lua(stringenums)
 
 lua2c(toolsutil tools.util=${CMAKE_CURRENT_SOURCE_DIR}/tools/util.lua)
 
+add_lua_executable(sqls ${CMAKE_CURRENT_SOURCE_DIR}/tools/sqls.lua penlight
+                   toolsutil wowlessyaml)
+add_custom_command(
+  COMMENT "Collecting SQL"
+  OUTPUT stamp/sqls.txt
+  BYPRODUCTS runtime/sqls.yaml
+  COMMAND sqls ${CMAKE_CURRENT_BINARY_DIR}/generated/sqls.yaml
+  COMMAND
+    ${CMAKE_COMMAND} -E copy_if_different
+    ${CMAKE_CURRENT_BINARY_DIR}/generated/sqls.yaml
+    ${CMAKE_CURRENT_BINARY_DIR}/runtime/sqls.yaml
+  COMMAND ${CMAKE_COMMAND} -E touch ${CMAKE_CURRENT_BINARY_DIR}/stamp/sqls.txt
+  WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+  DEPFILE generated/sqls.yaml.d
+  DEPENDS sqls data/sql.yaml)
+
 lua2c(wowlessutil luapath=p
       wowless.util=${CMAKE_CURRENT_SOURCE_DIR}/wowless/util.lua)
 
@@ -448,8 +464,14 @@ add_custom_target(listfilelua DEPENDS stamp/listfile.txt)
 lua2c(runtimelistfile runtime.listfile=runtime/listfile.lua)
 add_dependencies(runtimelistfile listfilelua)
 
-add_lua_executable(dblist ${CMAKE_CURRENT_SOURCE_DIR}/tools/dblist.lua argparse
-                   lsqlite3 penlight toolsutil)
+add_lua_executable(
+  dblist
+  ${CMAKE_CURRENT_SOURCE_DIR}/tools/dblist.lua
+  argparse
+  lsqlite3
+  penlight
+  toolsutil
+  wowlessyaml)
 
 FetchContent_Declare(
   lpeg
@@ -508,8 +530,8 @@ foreach(product ${products})
     OUTPUT stamp/${product}.txt
     BYPRODUCTS runtime/${product}.lua
     COMMAND
-      prep ${product} --output
-      ${CMAKE_CURRENT_BINARY_DIR}/generated/${product}.lua --stamp
+      prep ${product} --sqls ${CMAKE_CURRENT_BINARY_DIR}/runtime/sqls.yaml
+      --output ${CMAKE_CURRENT_BINARY_DIR}/generated/${product}.lua --stamp
       ${CMAKE_CURRENT_BINARY_DIR}/stamp/${product}.txt
     COMMAND
       ${CMAKE_COMMAND} -E copy_if_different
@@ -518,8 +540,8 @@ foreach(product ${products})
     COMMAND ${CMAKE_COMMAND} -E touch
             ${CMAKE_CURRENT_BINARY_DIR}/stamp/${product}.txt
     WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-    DEPFILE ${CMAKE_CURRENT_BINARY_DIR}/generated/${product}.lua.d
-    DEPENDS prep)
+    DEPFILE generated/${product}.lua.d
+    DEPENDS prep stamp/sqls.txt)
   add_custom_target(datalua_${product}_lua DEPENDS stamp/${product}.txt)
   lua2c(datalua_${product}
         build.products.${product}.data=runtime/${product}.lua)
