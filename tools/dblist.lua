@@ -8,8 +8,8 @@ local function dblist(product)
   local dbset = {
     GlobalStrings = {},
   }
-  local datalua = dofile('build/cmake/runtime/' .. product .. '.lua')
-  local sqlcfgs = require('wowapi.yaml').parseFile('build/cmake/runtime/sqls.yaml')
+  local datalua = dofile('runtime/' .. product .. '.lua')
+  local sqlcfgs = require('wowapi.yaml').parseFile('runtime/sqls.yaml')
   for sql in pairs(datalua.sqls) do
     -- We are fortunate that sqlite complains about missing tables first.
     local sqltext = sqlcfgs[sql].text
@@ -48,6 +48,6 @@ local function dblist(product)
 end
 
 local u = require('tools.util')
-local outfn = 'build/products/' .. args.product .. '/dblist.lua'
+local outfn = 'generated/' .. args.product .. '_dblist.lua'
 local out = dblist(args.product)
-u.writeifchanged(outfn, u.returntable(out))
+require('pl.file').write(outfn, u.returntable(out))

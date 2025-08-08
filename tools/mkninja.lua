@@ -91,9 +91,6 @@ local rules = {
     depfile = '$out.d',
     deps = 'gcc',
   },
-  dblist = {
-    command = 'build/cmake/dblist $product',
-  },
   dbschema = {
     command = 'build/cmake/sqlite $product',
   },
@@ -185,20 +182,7 @@ local schemadbs = {}
 local runouts = {}
 local pngs = {}
 for _, p in ipairs(productList) do
-  local dblist = 'build/products/' .. p .. '/dblist.lua'
-  table.insert(builds, {
-    args = {
-      product = p,
-      restat = 1,
-    },
-    ins_implicit = {
-      'build/cmake/dblist',
-      'build/cmake/stamp/sqls.txt',
-      'build/cmake/stamp/' .. p .. '.txt',
-    },
-    outs = dblist,
-    rule = 'dblist',
-  })
+  local dblist = 'build/cmake/runtime/' .. p .. '_dblist.lua'
   local dbdefs = 'build/products/' .. p .. '/dbdefs.lua'
   table.insert(builds, {
     args = {

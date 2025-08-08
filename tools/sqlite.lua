@@ -3,7 +3,7 @@ local sqlquote = require('tools.sqlite3ext').quote
 
 local function factory(theProduct)
   local defs = dofile('build/products/' .. theProduct .. '/dbdefs.lua')
-  local dblist = dofile('build/products/' .. theProduct .. '/dblist.lua')
+  local dblist = dofile('build/cmake/runtime/' .. theProduct .. '_dblist.lua')
 
   local function create(filename)
     local dbinit = { 'BEGIN' }

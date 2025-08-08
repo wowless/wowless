@@ -113,7 +113,7 @@ local function processTocDir(dir)
   end
 end
 
-for db in pairs(dofile('build/products/' .. product .. '/dblist.lua')) do
+for db in pairs(dofile('build/cmake/runtime/' .. product .. '_dblist.lua')) do
   save(path.join('db2', db .. '.db2'), fetch(fdids[db:lower()]))
 end
 
