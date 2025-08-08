@@ -395,6 +395,8 @@ target_link_libraries(wowlessyaml PRIVATE yaml)
 
 add_lua_executable(yaml2lua ${CMAKE_CURRENT_SOURCE_DIR}/tools/yaml2lua.lua
                    penlight wowlessyaml)
+add_lua_executable(lua2yaml ${CMAKE_CURRENT_SOURCE_DIR}/tools/lua2yaml.lua
+                   penlight wowlessyaml)
 
 function(yaml2lua basename)
   set(input ${CMAKE_CURRENT_SOURCE_DIR}/data/${basename}.yaml)
