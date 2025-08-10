@@ -1,18 +1,83 @@
-local traceback = require('wowless.ext').traceback
 local hlist = require('wowless.hlist')
 
+local function loadmodules(roots)
+  local modulespecs = {
+    calendar = {},
+    cvars = {
+      deps = { 'datalua' },
+    },
+    datalua = {
+      value = assert(roots.datalua),
+    },
+    datetime = {
+      deps = { 'datalua' },
+    },
+    env = {},
+    events = {
+      deps = { 'datalua' },
+    },
+    log = {
+      value = assert(roots.log),
+    },
+    macrotext = {
+      deps = { 'security' },
+    },
+    maxErrors = {
+      value = assert(roots.maxErrors),
+    },
+    security = {
+      deps = { 'log', 'maxErrors' },
+    },
+    system = {},
+    talents = {},
+    time = {
+      deps = { 'log', 'security' },
+    },
+    units = {},
+  }
+  local tt = require('resty.tsort').new()
+  for k, v in pairs(modulespecs) do
+    assert(not v.value or not v.deps)
+    tt:add(k)
+    for _, vv in ipairs(v.deps or {}) do
+      assert(modulespecs[vv])
+      tt:add(vv, k)
+    end
+  end
+  local modules = {}
+  for _, m in ipairs(assert(tt:sort())) do
+    local spec = modulespecs[m]
+    modules[m] = spec.value
+      or (function()
+        local deps = {}
+        for _, d in ipairs(spec.deps or {}) do
+          table.insert(deps, (assert(modules[d])))
+        end
+        return require('wowless.modules.' .. m)(unpack(deps))
+      end)()
+  end
+  return modules
+end
+
 local function new(log, maxErrors, product, loglevel)
-  local env = {}
-  local errors = 0
+  local datalua = require('build.products.' .. product .. '.data')
+  local modules = loadmodules({
+    datalua = datalua,
+    log = log,
+    maxErrors = maxErrors or math.huge,
+  })
+  local env = modules.env.env
   local frames = hlist()
   local secureenv = {}
   local templates = {}
   local uiobjectTypes = {}
   local userdata = {}
 
-  local datalua = require('build.products.' .. product .. '.data')
-  local events -- module loaded later
-  local time -- module loaded later
+  local events = modules.events
+  local time = modules.time
+
+  local CallSafely = modules.security.CallSafely
+  local CallSandbox = modules.security.CallSandbox
 
   local function UserData(obj)
     return userdata[obj[0]]
@@ -74,55 +139,6 @@ local function new(log, maxErrors, product, loglevel)
     else
       return name
     end
-  end
-
-  local function ErrorHandler(str)
-    errors = errors + 1
-    log(0, 'error: ' .. str .. '\n' .. traceback())
-    if maxErrors and errors >= maxErrors then
-      log(0, 'maxerrors reached, quitting')
-      os.exit(0)
-    end
-  end
-
-  local function assertHostMode()
-    local tm = debug.gettaintmode()
-    if tm ~= 'disabled' then
-      error(('wowless bug: host taint mode %q'):format(tm))
-    end
-    local st = debug.getstacktaint()
-    if st ~= nil then
-      error(('wowless bug: host stack taint %q'):format(st))
-    end
-  end
-
-  local function assertSandboxMode()
-    local tm = debug.gettaintmode()
-    if tm ~= 'rw' then
-      error(('wowless bug: sandbox taint mode %q'):format(tm))
-    end
-  end
-
-  local function CallSafely(fun, ...)
-    assertHostMode()
-    assert(getfenv(fun) == _G, 'wowless bug: expected framework function')
-    xpcall(fun, ErrorHandler, ...)
-    assertHostMode()
-  end
-
-  local function postSandbox(...)
-    assertSandboxMode()
-    debug.settaintmode('disabled')
-    debug.setstacktaint(nil)
-    assertHostMode()
-    return ...
-  end
-
-  local function CallSandbox(fun, ...)
-    assertHostMode()
-    assert(getfenv(fun) ~= _G, 'wowless bug: expected sandbox function')
-    debug.settaintmode('rw')
-    return postSandbox(xpcall(fun, ErrorHandler, ...))
   end
 
   local function GetParentKey(ud)
@@ -344,10 +360,6 @@ local function new(log, maxErrors, product, loglevel)
     end
   end
 
-  local function GetErrorCount()
-    return errors
-  end
-
   local api = {
     addons = {},
     CallSafely = CallSafely,
@@ -358,13 +370,14 @@ local function new(log, maxErrors, product, loglevel)
     env = env,
     frames = frames,
     GetDebugName = GetDebugName,
-    GetErrorCount = GetErrorCount,
+    GetErrorCount = modules.security.GetErrorCount,
     GetParentKey = GetParentKey,
     InheritsFrom = InheritsFrom,
     IsIntrinsicType = IsIntrinsicType,
     IsVisible = IsVisible,
     log = log,
     loglevel = loglevel,
+    modules = modules,
     NextFrame = NextFrame,
     ParentSub = ParentSub,
     platform = require('runtime.platform'),
@@ -380,63 +393,6 @@ local function new(log, maxErrors, product, loglevel)
     UpdateVisible = UpdateVisible,
     UserData = UserData,
   }
-
-  local modulespecs = {
-    api = {
-      value = api,
-    },
-    calendar = {},
-    cvars = {
-      deps = { 'datalua' },
-    },
-    datalua = {
-      value = datalua,
-    },
-    datetime = {
-      deps = { 'datalua' },
-    },
-    env = {
-      deps = { 'api' },
-    },
-    events = {
-      deps = { 'datalua' },
-    },
-    macrotext = {
-      deps = { 'api' },
-    },
-    system = {},
-    talents = {},
-    time = {
-      deps = { 'api' },
-    },
-    units = {},
-  }
-
-  local tt = require('resty.tsort').new()
-  for k, v in pairs(modulespecs) do
-    assert(not v.value or not v.deps)
-    tt:add(k)
-    for _, vv in ipairs(v.deps or {}) do
-      assert(modulespecs[vv])
-      tt:add(vv, k)
-    end
-  end
-  local modules = {}
-  for _, m in ipairs(assert(tt:sort())) do
-    local spec = modulespecs[m]
-    modules[m] = spec.value
-      or (function()
-        local deps = {}
-        for _, d in ipairs(spec.deps or {}) do
-          table.insert(deps, (assert(modules[d])))
-        end
-        return require('wowless.modules.' .. m)(unpack(deps))
-      end)()
-  end
-
-  api.modules = modules
-  events = api.modules.events -- setting upvalue for SendEvent, TODO clean this up
-  time = api.modules.time -- setting upvalue for NextFrame, TODO clean this up
 
   local typecheck = require('wowless.typecheck')(api)
   funcheck = require('wowless.funcheck')(typecheck, log)

@@ -1,6 +1,6 @@
 local bubblewrap = require('wowless.bubblewrap')
 
-return function(api)
+return function(log, security)
   local stamp = 1234
   local timers = require('minheap'):new()
   timers:push(math.huge, function()
@@ -58,7 +58,7 @@ return function(api)
       if not state[p].cancelled and count < iterations then
         local np = newproxy(p)
         state[np] = state[p]
-        api.CallSandbox(callback, np)
+        security.CallSandbox(callback, np)
         count = count + 1
         addTimer(seconds, cb)
       end
@@ -73,9 +73,9 @@ return function(api)
       stamp = stamp + (elapsed or 1)
       while timers:peek().pri < stamp do
         local timer = timers:pop()
-        api.log(2, 'running timer %.2f %s', timer.pri, tostring(timer.val))
+        log(2, 'running timer %.2f %s', timer.pri, tostring(timer.val))
         assert(getfenv(timer.val) == _G, 'wowless bug: sandbox callback in NextFrame')
-        api.CallSafely(timer.val)
+        security.CallSafely(timer.val)
       end
     end,
     ['C_Timer.After'] = function(seconds, callback)

@@ -1,9 +1,9 @@
-return function(api)
+return function(security)
   local callback
   return {
     RunMacroText = function(cmd)
       for _, line in ipairs({ strsplit('\n', cmd) }) do
-        api.CallSandbox(callback, line)
+        security.CallSandbox(callback, line)
       end
     end,
     SetCallback = function(cb)

@@ -1,6 +1,7 @@
-return function(api)
-  local env = api.env
+return function()
+  local env = {}
   return {
+    env = env,
     getfenv = function(arg)
       local narg = tonumber(arg)
       local fenv = getfenv(narg and narg + 2 or arg)
