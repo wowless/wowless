@@ -25,6 +25,9 @@ local function loadmodules(roots)
     maxErrors = {
       value = assert(roots.maxErrors),
     },
+    scripts = {
+      deps = { 'security' },
+    },
     security = {
       deps = { 'log', 'maxErrors' },
     },
@@ -78,6 +81,7 @@ local function new(log, maxErrors, product, loglevel)
 
   local CallSafely = modules.security.CallSafely
   local CallSandbox = modules.security.CallSandbox
+  local RunScript = modules.scripts.RunScript
 
   local function UserData(obj)
     return userdata[obj[0]]
@@ -171,17 +175,6 @@ local function new(log, maxErrors, product, loglevel)
       parent = parent.parent
     end
     return name
-  end
-
-  local function RunScript(obj, name, ...)
-    if obj.scripts then
-      for i = 0, 2 do
-        local script = obj.scripts[i][string.lower(name)]
-        if script then
-          CallSandbox(script, obj.luarep, ...)
-        end
-      end
-    end
   end
 
   local function DoUpdateVisible(obj, script)
@@ -291,11 +284,6 @@ local function new(log, maxErrors, product, loglevel)
     return ud
   end
 
-  local function SetScript(obj, name, bindingType, script)
-    assert(script == nil or getfenv(script) ~= _G, 'wowless bug: scripts must run in the sandbox')
-    obj.scripts[bindingType][string.lower(name)] = script
-  end
-
   local funcheck -- TODO clean up ordering hell here
   local echecks = setmetatable({}, {
     __index = function(t, k)
@@ -386,7 +374,7 @@ local function new(log, maxErrors, product, loglevel)
     secureenv = secureenv,
     SendEvent = SendEvent,
     SetParent = SetParent,
-    SetScript = SetScript,
+    SetScript = modules.scripts.SetScript,
     templates = templates,
     uiobjects = userdata,
     uiobjectTypes = uiobjectTypes,

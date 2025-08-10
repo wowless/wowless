@@ -1091,6 +1091,7 @@ lua2c(
   wowless.modules.env=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/env.lua
   wowless.modules.events=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/events.lua
   wowless.modules.macrotext=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/macrotext.lua
+  wowless.modules.scripts=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/scripts.lua
   wowless.modules.security=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/security.lua
   wowless.modules.system=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/system.lua
   wowless.modules.talents=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/talents.lua
