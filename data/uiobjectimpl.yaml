@@ -89,9 +89,15 @@ Region/SetPoint: luafile
 Region/SetScale: luafile
 Region/SetShown: luafile
 Region/Show: luafile
-ScriptObject/GetScript: luafile
-ScriptObject/HookScript: luafile
-ScriptObject/SetScript: luafile
+ScriptObject/GetScript:
+  moduledelegate:
+    name: scripts
+ScriptObject/HookScript:
+  moduledelegate:
+    name: scripts
+ScriptObject/SetScript:
+  moduledelegate:
+    name: scripts
 ScrollFrame/SetScrollChild: luafile
 Slider/Disable: luafile
 Slider/Enable: luafile

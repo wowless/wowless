@@ -31,7 +31,7 @@ local specs = {
   },
   platform = {},
   scripts = {
-    deps = { 'security' },
+    deps = { 'env', 'log', 'security' },
   },
   security = {
     deps = { 'log', 'maxErrors' },

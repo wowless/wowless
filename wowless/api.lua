@@ -274,7 +274,7 @@ local function new(log, maxErrors, product, loglevel)
     secureenv = secureenv,
     SendEvent = SendEvent,
     SetParent = SetParent,
-    SetScript = modules.scripts.SetScript,
+    SetScript = modules.scripts.SetScriptWithBindingType,
     templates = templates,
     uiobjects = userdata,
     uiobjectTypes = uiobjectTypes,
