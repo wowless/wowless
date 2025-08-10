@@ -1,5 +1,5 @@
 local hlist = require('wowless.hlist')
-return function(datalua)
+return function(datalua, funcheck, log, loglevel, scripts)
   local allregs = hlist()
   local regs = {}
   for k in pairs(datalua.events) do
@@ -64,6 +64,39 @@ return function(datalua)
     return unpack(GetFramesRegisteredForEvent(event))
   end
 
+  local echecks = setmetatable({}, {
+    __index = function(t, k)
+      local e = datalua.events[k]
+      local v = funcheck.makeCheckOutputs(k, {
+        outputs = e.payload,
+        outstride = e.stride,
+      })
+      t[k] = v
+      return v
+    end,
+  })
+
+  local function DoSendEvent(event, ...)
+    for _, reg in ipairs(GetFramesRegisteredForEvent(event)) do
+      scripts.RunScript(reg, 'OnEvent', event, ...)
+    end
+  end
+
+  local function SendEvent(event, ...)
+    if not IsEventValid(event) then
+      error('internal error: cannot send ' .. event)
+    end
+    if loglevel >= 1 then
+      local largs = {}
+      for i = 1, select('#', ...) do
+        local arg = select(i, ...)
+        table.insert(largs, type(arg) == 'string' and ('%q'):format(arg) or tostring(arg))
+      end
+      log(1, 'sending event %s (%s)', event, table.concat(largs, ', '))
+    end
+    DoSendEvent(event, echecks[event](...))
+  end
+
   return {
     GetFramesRegisteredForEvent = GetFramesRegisteredForEvent,
     GetFramesRegisteredForEventUnpacked = GetFramesRegisteredForEventUnpacked,
@@ -71,6 +104,7 @@ return function(datalua)
     IsEventValid = IsEventValid,
     RegisterAllEvents = RegisterAllEvents,
     RegisterEvent = RegisterEvent,
+    SendEvent = SendEvent,
     UnregisterAllEvents = UnregisterAllEvents,
     UnregisterEvent = UnregisterEvent,
   }

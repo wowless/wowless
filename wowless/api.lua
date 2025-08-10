@@ -15,13 +15,16 @@ local function loadmodules(roots)
     },
     env = {},
     events = {
-      deps = { 'datalua' },
+      deps = { 'datalua', 'funcheck', 'log', 'loglevel', 'scripts' },
     },
     funcheck = {
       deps = { 'typecheck', 'log' },
     },
     log = {
       value = assert(roots.log),
+    },
+    loglevel = {
+      value = assert(roots.loglevel),
     },
     macrotext = {
       deps = { 'security' },
@@ -75,6 +78,7 @@ local function new(log, maxErrors, product, loglevel)
   local modules = loadmodules({
     datalua = datalua,
     log = log,
+    loglevel = loglevel,
     maxErrors = maxErrors or math.huge,
   })
   local env = modules.env.env
@@ -84,12 +88,12 @@ local function new(log, maxErrors, product, loglevel)
   local uiobjectTypes = {}
   local userdata = modules.uiobjects.userdata
 
-  local events = modules.events
   local time = modules.time
 
   local CallSafely = modules.security.CallSafely
   local CallSandbox = modules.security.CallSandbox
   local RunScript = modules.scripts.RunScript
+  local SendEvent = modules.events.SendEvent
 
   local function InheritsFrom(a, b)
     local t = uiobjectTypes[a]
@@ -286,39 +290,6 @@ local function new(log, maxErrors, product, loglevel)
       RunScript(ud, 'OnShow')
     end
     return ud
-  end
-
-  local echecks = setmetatable({}, {
-    __index = function(t, k)
-      local e = datalua.events[k]
-      local v = modules.funcheck.makeCheckOutputs(k, {
-        outputs = e.payload,
-        outstride = e.stride,
-      })
-      t[k] = v
-      return v
-    end,
-  })
-
-  local function DoSendEvent(event, ...)
-    for _, reg in ipairs(events.GetFramesRegisteredForEvent(event)) do
-      RunScript(reg, 'OnEvent', event, ...)
-    end
-  end
-
-  local function SendEvent(event, ...)
-    if not events.IsEventValid(event) then
-      error('internal error: cannot send ' .. event)
-    end
-    if loglevel >= 1 then
-      local largs = {}
-      for i = 1, select('#', ...) do
-        local arg = select(i, ...)
-        table.insert(largs, type(arg) == 'string' and ('%q'):format(arg) or tostring(arg))
-      end
-      log(1, 'sending event %s (%s)', event, table.concat(largs, ', '))
-    end
-    DoSendEvent(event, echecks[event](...))
   end
 
   local function CreateFrame(type, name, parent, templateNames, id)
