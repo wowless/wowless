@@ -1,6 +1,6 @@
-return function(api)
+return function(addons, datalua, env, uiobjects, units)
   local enumrev = {}
-  for k, v in pairs(api.datalua.globals.Enum) do
+  for k, v in pairs(datalua.globals.Enum) do
     local t = {}
     for vk, vv in pairs(v) do
       t[vv] = vk
@@ -43,12 +43,12 @@ return function(api)
       end
     else
       if ty == 'Font' and type(value) == 'string' then
-        value = api.env[value]
+        value = env.env[value]
       end
       if type(value) ~= 'table' then
         return nil, true
       end
-      local ud = api.UserData(value)
+      local ud = uiobjects.UserData(value)
       return ud, not ud or not ud:IsObjectType(ty)
     end
   end
@@ -101,13 +101,13 @@ return function(api)
       return type(v) == 'string' and v or nil
     end,
     uiAddon = function(value)
-      return api.addons[tonumber(value) or tostring(value):lower()]
+      return addons.addons[tonumber(value) or tostring(value):lower()]
     end,
     unit = function(value)
       if type(value) ~= 'string' then
         return nil, true
       end
-      return api.modules.units.GetUnit(value)
+      return units.GetUnit(value)
     end,
     unknown = function(value)
       return value
@@ -153,7 +153,7 @@ return function(api)
   end
 
   local uiobjectchecks = {}
-  for k in pairs(api.datalua.uiobjects) do
+  for k in pairs(datalua.uiobjects) do
     uiobjectchecks[k] = function(value, isout)
       local v, err = resolveobj(k, value, isout)
       if err then
@@ -200,7 +200,7 @@ return function(api)
       if type(value) ~= 'table' then
         return mismatch(spec, value)
       end
-      local st = api.datalua.structures[spec.type.structure]
+      local st = datalua.structures[spec.type.structure]
       for fname, fspec in pairs(st.fields) do
         local _, err = typecheck(fspec, value[fname], isout)
         if err then
@@ -208,7 +208,7 @@ return function(api)
         end
       end
       if isout then
-        local m = st.mixin and api.env[st.mixin] or {}
+        local m = st.mixin and env.env[st.mixin] or {}
         for k, v in pairs(m) do
           if value[k] ~= v then
             return nil, 'has incorrect mixin value ' .. k

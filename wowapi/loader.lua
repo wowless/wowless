@@ -69,8 +69,7 @@ local function loadFunctions(api, loader)
   end
 
   local bubblewrap = require('wowless.bubblewrap')
-  local typechecker = require('wowless.typecheck')(api)
-  local funchecker = require('wowless.funcheck')(typechecker, api.log)
+  local funchecker = api.modules.funcheck
 
   local function stubMixin(t, name)
     return util.mixin(t, api.env[name])

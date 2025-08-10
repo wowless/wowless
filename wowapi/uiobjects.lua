@@ -60,8 +60,8 @@ local function mkBaseUIObjectTypes(api)
     return t
   end
 
-  local typechecker = require('wowless.typecheck')(api)
-  local funchecker = require('wowless.funcheck')(typechecker, api.log)
+  local typechecker = api.modules.typecheck
+  local funchecker = api.modules.funcheck
 
   local function check(spec, v, isout)
     local vv, errmsg = typechecker(spec, v, isout)

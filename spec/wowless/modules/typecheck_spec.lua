@@ -152,8 +152,9 @@ local tests = {
 }
 
 describe('typecheck', function()
-  local typecheck = require('wowless.typecheck')({
-    datalua = {
+  local typecheck = require('wowless.modules.typecheck')(unpack({
+    nil,
+    {
       globals = {
         Enum = {
           Foo = {
@@ -177,15 +178,16 @@ describe('typecheck', function()
       },
       uiobjects = {},
     },
-    env = {
-      roflmixin = {
-        b = issecure,
+    {
+      env = {
+        roflmixin = {
+          b = issecure,
+        },
       },
     },
-    modules = {
-      units = units,
-    },
-  })
+    nil,
+    units,
+  }))
   for name, test in pairs(tests) do
     it(name, function()
       assert.same(test.out, { typecheck(test.spec, test.value, test.isout) })

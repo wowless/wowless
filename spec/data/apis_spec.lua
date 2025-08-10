@@ -1,7 +1,7 @@
 describe('apis', function()
   for _, p in ipairs(require('build.data.products')) do
     local wapi = require('wowless.api').new(function() end, 0, p, 0)
-    local typechecker = require('wowless.typecheck')(wapi)
+    local typechecker = wapi.modules.typecheck
     describe(p, function()
       local apis = require('build.data.products.' .. p .. '.apis')
       for name, api in pairs(apis) do

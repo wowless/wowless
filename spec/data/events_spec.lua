@@ -1,7 +1,7 @@
 describe('events', function()
   for _, p in ipairs(require('build.data.products')) do
     local wapi = require('wowless.api').new(function() end, 0, p, 0)
-    local typechecker = require('wowless.typecheck')(wapi)
+    local typechecker = wapi.modules.typecheck
     describe(p, function()
       for name, event in pairs(require('build.data.products.' .. p .. '.events')) do
         describe(name, function()

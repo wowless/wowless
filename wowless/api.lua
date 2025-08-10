@@ -2,6 +2,7 @@ local hlist = require('wowless.hlist')
 
 local function loadmodules(roots)
   local modulespecs = {
+    addons = {},
     calendar = {},
     cvars = {
       deps = { 'datalua' },
@@ -15,6 +16,9 @@ local function loadmodules(roots)
     env = {},
     events = {
       deps = { 'datalua' },
+    },
+    funcheck = {
+      deps = { 'typecheck', 'log' },
     },
     log = {
       value = assert(roots.log),
@@ -36,6 +40,10 @@ local function loadmodules(roots)
     time = {
       deps = { 'log', 'security' },
     },
+    typecheck = {
+      deps = { 'addons', 'datalua', 'env', 'uiobjects', 'units' },
+    },
+    uiobjects = {},
     units = {},
   }
   local tt = require('resty.tsort').new()
@@ -74,7 +82,7 @@ local function new(log, maxErrors, product, loglevel)
   local secureenv = {}
   local templates = {}
   local uiobjectTypes = {}
-  local userdata = {}
+  local userdata = modules.uiobjects.userdata
 
   local events = modules.events
   local time = modules.time
@@ -82,10 +90,6 @@ local function new(log, maxErrors, product, loglevel)
   local CallSafely = modules.security.CallSafely
   local CallSandbox = modules.security.CallSandbox
   local RunScript = modules.scripts.RunScript
-
-  local function UserData(obj)
-    return userdata[obj[0]]
-  end
 
   local function InheritsFrom(a, b)
     local t = uiobjectTypes[a]
@@ -284,11 +288,10 @@ local function new(log, maxErrors, product, loglevel)
     return ud
   end
 
-  local funcheck -- TODO clean up ordering hell here
   local echecks = setmetatable({}, {
     __index = function(t, k)
       local e = datalua.events[k]
-      local v = funcheck.makeCheckOutputs(k, {
+      local v = modules.funcheck.makeCheckOutputs(k, {
         outputs = e.payload,
         outstride = e.stride,
       })
@@ -349,7 +352,7 @@ local function new(log, maxErrors, product, loglevel)
   end
 
   local api = {
-    addons = {},
+    addons = modules.addons.addons,
     CallSafely = CallSafely,
     CallSandbox = CallSandbox,
     CreateFrame = CreateFrame,
@@ -379,11 +382,8 @@ local function new(log, maxErrors, product, loglevel)
     uiobjects = userdata,
     uiobjectTypes = uiobjectTypes,
     UpdateVisible = UpdateVisible,
-    UserData = UserData,
+    UserData = modules.uiobjects.UserData,
   }
-
-  local typecheck = require('wowless.typecheck')(api)
-  funcheck = require('wowless.funcheck')(typecheck, log)
 
   require('wowless.util').mixin(uiobjectTypes, require('wowapi.uiobjects')(api))
   return api
