@@ -1,94 +1,106 @@
-Animation/GetRegionParent:
-Animation/GetTarget:
-AnimationGroup/CreateAnimation:
-AnimationGroup/GetAnimations:
-Button/Click:
-Button/Disable:
-Button/Enable:
-Button/GetText:
-Button/IsEnabled:
-Button/RegisterForClicks:
-Button/SetButtonState:
-Button/SetDisabledAtlas:
-Button/SetEnabled:
-Button/SetFontString:
-Button/SetFormattedText:
-Button/SetHighlightAtlas:
-Button/SetNormalAtlas:
-Button/SetPushedAtlas:
-Button/SetText:
-CheckButton/SetChecked:
-EditBox/Disable:
-EditBox/Enable:
-EditBox/Insert:
-FontInstance/GetFontObject:
-FontString/SetText:
-ForbiddenMixin/SetForbidden:
-Frame/CreateFontString:
-Frame/CreateLine:
-Frame/CreateMaskTexture:
-Frame/CreateTexture:
-Frame/GetAttribute:
-Frame/GetChildren:
-Frame/GetEffectiveAlpha:
-Frame/GetNumChildren:
-Frame/GetNumRegions:
-Frame/GetRegions:
+Animation/GetRegionParent: luafile
+Animation/GetTarget: luafile
+AnimationGroup/CreateAnimation: luafile
+AnimationGroup/GetAnimations: luafile
+Button/Click: luafile
+Button/Disable: luafile
+Button/Enable: luafile
+Button/GetText: luafile
+Button/IsEnabled: luafile
+Button/RegisterForClicks: luafile
+Button/SetButtonState: luafile
+Button/SetDisabledAtlas: luafile
+Button/SetEnabled: luafile
+Button/SetFontString: luafile
+Button/SetFormattedText: luafile
+Button/SetHighlightAtlas: luafile
+Button/SetNormalAtlas: luafile
+Button/SetPushedAtlas: luafile
+Button/SetText: luafile
+CheckButton/SetChecked: luafile
+EditBox/Disable: luafile
+EditBox/Enable: luafile
+EditBox/Insert: luafile
+FontInstance/GetFontObject: luafile
+FontString/SetText: luafile
+ForbiddenMixin/SetForbidden: luafile
+Frame/CreateFontString: luafile
+Frame/CreateLine: luafile
+Frame/CreateMaskTexture: luafile
+Frame/CreateTexture: luafile
+Frame/GetAttribute: luafile
+Frame/GetChildren: luafile
+Frame/GetEffectiveAlpha: luafile
+Frame/GetNumChildren: luafile
+Frame/GetNumRegions: luafile
+Frame/GetRegions: luafile
 Frame/IsEventRegistered:
+  moduledelegate:
+    name: events
 Frame/RegisterAllEvents:
+  moduledelegate:
+    name: events
 Frame/RegisterEvent:
+  moduledelegate:
+    name: events
 Frame/RegisterUnitEvent:
-Frame/SetAttribute:
-Frame/SetAttributeNoHandler:
-Frame/SetFrameLevel:
-Frame/SetResizeBounds:
+  moduledelegate:
+    name: events
+Frame/SetAttribute: luafile
+Frame/SetAttributeNoHandler: luafile
+Frame/SetFrameLevel: luafile
+Frame/SetResizeBounds: luafile
 Frame/UnregisterAllEvents:
+  moduledelegate:
+    name: events
 Frame/UnregisterEvent:
-GameTooltip/IsOwned:
-GameTooltip/SetOwner:
-LayeredRegion/SetVertexColor:
-MessageFrame/AddMessage:
-ModelScene/CreateActor:
-MouseMixin/EnableMouse:
-MouseMixin/IsMouseEnabled:
-ParentedObject/GetDebugName:
-ParentedObject/SetParent:
-ParentedObjectBase/ClearParentKey:
-ParentedObjectBase/GetParentKey:
-ParentedObjectBase/SetParentKey:
-Path/CreateControlPoint:
-Path/GetControlPoints:
-Region/ClearAllPoints:
-Region/CreateAnimationGroup:
-Region/GetAnimationGroups:
-Region/GetCenter:
-Region/GetEffectiveScale:
-Region/GetNumPoints:
-Region/GetPoint:
-Region/GetRight:
-Region/GetScaledRect:
-Region/GetTop:
-Region/Hide:
-Region/IsProtected:
-Region/IsVisible:
-Region/SetAllPoints:
-Region/SetAlpha:
-Region/SetPoint:
-Region/SetScale:
-Region/SetShown:
-Region/Show:
-ScriptObject/GetScript:
-ScriptObject/HookScript:
-ScriptObject/SetScript:
-ScrollFrame/SetScrollChild:
-Slider/Disable:
-Slider/Enable:
-StatusBar/GetStatusBarColor:
-StatusBar/SetStatusBarColor:
-Texture/GetTexture:
-Texture/SetAtlas:
-Texture/SetColorTexture:
-Texture/SetTexCoord:
-Texture/SetTexture:
-UIObject/GetObjectType:
-UIObject/IsObjectType:
+  moduledelegate:
+    name: events
+GameTooltip/IsOwned: luafile
+GameTooltip/SetOwner: luafile
+LayeredRegion/SetVertexColor: luafile
+MessageFrame/AddMessage: luafile
+ModelScene/CreateActor: luafile
+MouseMixin/EnableMouse: luafile
+MouseMixin/IsMouseEnabled: luafile
+ParentedObject/GetDebugName: luafile
+ParentedObject/SetParent: luafile
+ParentedObjectBase/ClearParentKey: luafile
+ParentedObjectBase/GetParentKey: luafile
+ParentedObjectBase/SetParentKey: luafile
+Path/CreateControlPoint: luafile
+Path/GetControlPoints: luafile
+Region/ClearAllPoints: luafile
+Region/CreateAnimationGroup: luafile
+Region/GetAnimationGroups: luafile
+Region/GetCenter: luafile
+Region/GetEffectiveScale: luafile
+Region/GetNumPoints: luafile
+Region/GetPoint: luafile
+Region/GetRight: luafile
+Region/GetScaledRect: luafile
+Region/GetTop: luafile
+Region/Hide: luafile
+Region/IsProtected: luafile
+Region/IsVisible: luafile
+Region/SetAllPoints: luafile
+Region/SetAlpha: luafile
+Region/SetPoint: luafile
+Region/SetScale: luafile
+Region/SetShown: luafile
+Region/Show: luafile
+ScriptObject/GetScript: luafile
+ScriptObject/HookScript: luafile
+ScriptObject/SetScript: luafile
+ScrollFrame/SetScrollChild: luafile
+Slider/Disable: luafile
+Slider/Enable: luafile
+StatusBar/GetStatusBarColor: luafile
+StatusBar/SetStatusBarColor: luafile
+Texture/GetTexture: luafile
+Texture/SetAtlas: luafile
+Texture/SetColorTexture: luafile
+Texture/SetTexCoord: luafile
+Texture/SetTexture: luafile
+UIObject/GetObjectType: luafile
+UIObject/IsObjectType: luafile

@@ -3,4 +3,10 @@ type:
   mapof:
     key: string
     value:
-      record:
+      taggedunion:
+        luafile: tag
+        moduledelegate:
+          record:
+            name:
+              required: true
+              type: string

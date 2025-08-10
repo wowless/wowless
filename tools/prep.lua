@@ -261,6 +261,20 @@ local function mkuiobjectinit(k)
   end
   return init
 end
+local uiobjectimplimplmakers = {
+  luafile = function(k)
+    local src = 'data/uiobjects/' .. k .. '.lua'
+    return {
+      impl = readFile(src),
+      src = src,
+    }
+  end,
+  moduledelegate = function(impl, k)
+    return {
+      impl = ('return (...).modules[%q][%q]'):format(impl.name, k:sub(k:find('/') + 1)),
+    }
+  end,
+}
 local uiobjectimplmakers = {
   getter = function(impl, mv)
     local t = { 'local _,_,check=...;' }
@@ -364,16 +378,15 @@ local uiobjectimplmakers = {
     return table.concat(t)
   end,
   uiobjectimpl = function(impl, mv)
-    assert(uiobjectimpl[impl], 'missing impl ' .. impl)
-    local src = 'data/uiobjects/' .. impl .. '.lua'
+    local implimpl = dispatch(uiobjectimplimplmakers, uiobjectimpl[impl], impl)
     return {
-      impl = readFile(src),
+      impl = implimpl.impl,
       inputs = mv.inputs,
       instride = mv.instride,
       mayreturnnothing = mv.mayreturnnothing,
       outputs = mv.outputs,
       outstride = mv.outstride,
-      src = src,
+      src = implimpl.src,
     }
   end,
 }

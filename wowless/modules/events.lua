@@ -104,6 +104,7 @@ return function(datalua, funcheck, log, loglevel, scripts)
     IsEventValid = IsEventValid,
     RegisterAllEvents = RegisterAllEvents,
     RegisterEvent = RegisterEvent,
+    RegisterUnitEvent = RegisterEvent, -- TODO implement properly
     SendEvent = SendEvent,
     UnregisterAllEvents = UnregisterAllEvents,
     UnregisterEvent = UnregisterEvent,
