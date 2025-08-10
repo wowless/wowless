@@ -416,16 +416,14 @@ IsInGlobalEnvironment:
   moduledelegate:
     name: env
 IsLinuxClient:
-  impl:
-    frameworks:
-    - api
+  moduledelegate:
+    name: platform
 IsLoggedIn:
   moduledelegate:
     name: system
 IsMacClient:
-  impl:
-    frameworks:
-    - api
+  moduledelegate:
+    name: platform
 IsPublicBuild:
   impl:
 issecure:
@@ -437,9 +435,8 @@ IsTestBuild:
     frameworks:
     - datalua
 IsWindowsClient:
-  impl:
-    frameworks:
-    - api
+  moduledelegate:
+    name: platform
 LoadAddOn:
   impl:
     frameworks:

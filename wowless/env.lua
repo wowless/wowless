@@ -53,7 +53,7 @@ local function init(api, loader, lite)
     debug = wowlessDebug,
     dump = dump(api),
     lite = lite,
-    platform = api.platform,
+    platform = api.modules.platform.platform,
     product = api.product,
     quit = function(exitCode)
       api.log(1, 'Bye!')

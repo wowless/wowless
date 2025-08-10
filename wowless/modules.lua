@@ -29,6 +29,7 @@ local specs = {
   maxErrors = {
     root = true,
   },
+  platform = {},
   scripts = {
     deps = { 'security' },
   },

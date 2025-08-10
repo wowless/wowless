@@ -269,7 +269,6 @@ local function new(log, maxErrors, product, loglevel)
     modules = modules,
     NextFrame = NextFrame,
     ParentSub = ParentSub,
-    platform = require('runtime.platform'),
     product = product,
     RunScript = RunScript,
     secureenv = secureenv,
