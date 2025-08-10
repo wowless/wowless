@@ -1,81 +1,8 @@
 local hlist = require('wowless.hlist')
 
-local function loadmodules(roots)
-  local modulespecs = {
-    addons = {},
-    calendar = {},
-    cvars = {
-      deps = { 'datalua' },
-    },
-    datalua = {
-      value = assert(roots.datalua),
-    },
-    datetime = {
-      deps = { 'datalua' },
-    },
-    env = {},
-    events = {
-      deps = { 'datalua', 'funcheck', 'log', 'loglevel', 'scripts' },
-    },
-    funcheck = {
-      deps = { 'typecheck', 'log' },
-    },
-    log = {
-      value = assert(roots.log),
-    },
-    loglevel = {
-      value = assert(roots.loglevel),
-    },
-    macrotext = {
-      deps = { 'security' },
-    },
-    maxErrors = {
-      value = assert(roots.maxErrors),
-    },
-    scripts = {
-      deps = { 'security' },
-    },
-    security = {
-      deps = { 'log', 'maxErrors' },
-    },
-    system = {},
-    talents = {},
-    time = {
-      deps = { 'log', 'security' },
-    },
-    typecheck = {
-      deps = { 'addons', 'datalua', 'env', 'uiobjects', 'units' },
-    },
-    uiobjects = {},
-    units = {},
-  }
-  local tt = require('resty.tsort').new()
-  for k, v in pairs(modulespecs) do
-    assert(not v.value or not v.deps)
-    tt:add(k)
-    for _, vv in ipairs(v.deps or {}) do
-      assert(modulespecs[vv])
-      tt:add(vv, k)
-    end
-  end
-  local modules = {}
-  for _, m in ipairs(assert(tt:sort())) do
-    local spec = modulespecs[m]
-    modules[m] = spec.value
-      or (function()
-        local deps = {}
-        for _, d in ipairs(spec.deps or {}) do
-          table.insert(deps, (assert(modules[d])))
-        end
-        return require('wowless.modules.' .. m)(unpack(deps))
-      end)()
-  end
-  return modules
-end
-
 local function new(log, maxErrors, product, loglevel)
   local datalua = require('build.products.' .. product .. '.data')
-  local modules = loadmodules({
+  local modules = require('wowless.modules')({
     datalua = datalua,
     log = log,
     loglevel = loglevel,
