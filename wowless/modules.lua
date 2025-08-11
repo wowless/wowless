@@ -38,6 +38,7 @@ local specs = {
   },
   system = {},
   talents = {},
+  templates = {},
   time = {
     deps = { 'log', 'security' },
   },

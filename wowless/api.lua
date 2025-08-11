@@ -11,7 +11,7 @@ local function new(log, maxErrors, product, loglevel)
   local env = modules.env.env
   local frames = hlist()
   local secureenv = {}
-  local templates = {}
+  local templates = modules.templates.templates
   local uiobjectTypes = {}
   local userdata = modules.uiobjects.userdata
 

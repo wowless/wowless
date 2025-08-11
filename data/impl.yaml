@@ -190,9 +190,9 @@ C_UIColor.GetColors:
     sqls:
     - C_UIColor.GetColors
 C_XMLUtil.GetTemplateInfo_10_2:
-  impl:
-    frameworks:
-    - api
+  moduledelegate:
+    function: GetTemplateInfo
+    name: templates
 ClassicExpansionAtLeast:
   impl:
     modules:

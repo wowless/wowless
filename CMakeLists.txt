@@ -1098,6 +1098,7 @@ lua2c(
   wowless.modules.security=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/security.lua
   wowless.modules.system=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/system.lua
   wowless.modules.talents=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/talents.lua
+  wowless.modules.templates=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/templates.lua
   wowless.modules.time=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/time.lua
   wowless.modules.typecheck=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/typecheck.lua
   wowless.modules.uiobjects=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/uiobjects.lua
