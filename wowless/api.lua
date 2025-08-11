@@ -249,7 +249,7 @@ local function new(log, maxErrors, product, loglevel)
     end
   end
 
-  local api = {
+  return {
     addons = modules.addons.addons,
     CallSafely = CallSafely,
     CallSandbox = CallSandbox,
@@ -281,9 +281,6 @@ local function new(log, maxErrors, product, loglevel)
     UpdateVisible = UpdateVisible,
     UserData = modules.uiobjects.UserData,
   }
-
-  require('wowless.util').mixin(uiobjectTypes, require('wowapi.uiobjects')(api))
-  return api
 end
 
 return {

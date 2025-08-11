@@ -49,6 +49,7 @@ local function run(cfg)
     rootDir = cfg.dir,
   })
   require('wowless.env').init(api, loader, not cfg.dir)
+  require('wowless.util').mixin(api.uiobjectTypes, require('wowapi.uiobjects')(api))
   loader.initAddons()
   if cfg.dir then
     loader.loadFrameXml()
