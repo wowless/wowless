@@ -1,6 +1,6 @@
-local api, sql = ...
+local units, sql = ...
 return function(classID, specIndex, sex)
-  local player = api.modules.units.player
+  local player = units.player
   local id, name, desc, icon, role, mastery = sql(classID, specIndex, sex)
   if id == nil then
     return

@@ -343,14 +343,14 @@ GetNumSpecializationsForClassID:
   directsql: GetNumSpecializationsForClassID
 GetNumTalents:
   impl:
-    frameworks:
-    - api
+    modules:
+    - units
     sqls:
     - GetNumTalents
 GetNumTalentTabs:
   impl:
-    frameworks:
-    - api
+    modules:
+    - units
     sqls:
     - GetNumTalentTabs
 GetScreenHeight:
@@ -361,40 +361,40 @@ GetScreenWidth:
     name: system
 GetSpecializationInfo:
   impl:
-    frameworks:
-    - api
+    modules:
+    - units
     sqls:
     - GetSpecializationInfo
 GetSpecializationInfoByID:
   directsql: GetSpecializationInfoByID
 GetSpecializationInfoForClassID:
   impl:
-    frameworks:
-    - api
+    modules:
+    - units
     sqls:
     - GetSpecializationInfoForClassID
 GetSpecializationInfoForSpecID:
   impl:
-    frameworks:
-    - api
+    modules:
+    - units
     sqls:
     - GetSpecializationInfoForSpecID
 GetTalentInfo_Vanilla:
   impl:
-    frameworks:
-    - api
+    modules:
+    - units
     sqls:
     - GetTalentInfo_Vanilla
 GetTalentPrereqs:
   impl:
-    frameworks:
-    - api
+    modules:
+    - units
     sqls:
     - GetTalentPrereqs
 GetTalentTabInfo:
   impl:
-    frameworks:
-    - api
+    modules:
+    - units
     sqls:
     - GetTalentTabInfo
 GetTime:
@@ -546,8 +546,10 @@ select:
   stdlib: select
 SendSystemMessage:
   impl:
-    frameworks:
-    - api
+    modules:
+    - events
+    - time
+    - units
 seterrorhandler:
   stdlib: seterrorhandler
 setfenv:
