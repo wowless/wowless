@@ -2,9 +2,6 @@ describe('events', function()
   for _, p in ipairs(require('build.data.products')) do
     local typechecker = require('wowless.modules')({
       datalua = require('build.products.' .. p .. '.data'),
-      log = function() end,
-      loglevel = 0,
-      maxErrors = 0,
     }).typecheck
     describe(p, function()
       for name, event in pairs(require('build.data.products.' .. p .. '.events')) do

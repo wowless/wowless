@@ -2,9 +2,6 @@ describe('uiobjects', function()
   for _, p in ipairs(require('build.data.products')) do
     local typechecker = require('wowless.modules')({
       datalua = require('build.products.' .. p .. '.data'),
-      log = function() end,
-      loglevel = 0,
-      maxErrors = 0,
     }).typecheck
     local function typecheck(spec, val)
       local value, errmsg = typechecker(spec, val, true)

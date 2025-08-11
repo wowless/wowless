@@ -33,15 +33,18 @@ local specs = {
     deps = { 'typecheck', 'log' },
   },
   log = {
+    default = function() end,
     root = true,
   },
   loglevel = {
+    default = 0,
     root = true,
   },
   macrotext = {
     deps = { 'security' },
   },
   maxErrors = {
+    default = 0,
     root = true,
   },
   platform = {},
@@ -79,7 +82,7 @@ return function(roots)
   local modules = {}
   for _, m in ipairs(specorder) do
     local spec = specs[m]
-    modules[m] = spec.root and assert(roots[m])
+    modules[m] = spec.root and assert(roots[m] or spec.default)
       or (function()
         local deps = {}
         for _, d in ipairs(spec.deps or {}) do
