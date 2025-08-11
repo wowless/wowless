@@ -166,10 +166,9 @@ local implimpls = {
     }
   end,
   moduledelegate = function(impl, name)
-    local fmt = 'return (...).modules[%q][%q]'
     return {
-      frameworks = { 'api' },
-      src = fmt:format(impl.name, impl['function'] or name),
+      modules = { impl.name },
+      src = ('return (...)[%q]'):format(impl['function'] or name),
     }
   end,
 }
