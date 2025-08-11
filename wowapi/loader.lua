@@ -50,7 +50,6 @@ local function loadFunctions(api, loader)
 
   local frameworks = {
     api = api, -- TODO replace api framework with something finer grained
-    env = api.env,
     events = api.events,
     loader = loader,
   }

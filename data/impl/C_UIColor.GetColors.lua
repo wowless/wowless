@@ -10,7 +10,7 @@ return function()
         g = 0.35,
         b = 0.45,
         a = 1,
-      }, env.ColorMixin),
+      }, env.env.ColorMixin),
     })
   end
   return t

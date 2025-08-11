@@ -1,4 +1,4 @@
 local env = ...
 return function()
-  return env.UIParent
+  return env.env.UIParent
 end
