@@ -217,7 +217,7 @@ coroutine.yield:
   stdlib: coroutine.yield
 CreateFont:
   impl:
-    frameworks:
+    modules:
     - api
 CreateForbiddenFrame:
   moduledelegate:
@@ -250,7 +250,7 @@ DoEmote:
     - DoEmote
 EnumerateFrames:
   impl:
-    frameworks:
+    modules:
     - api
 error:
   stdlib: error
@@ -288,7 +288,7 @@ GetBuildInfo_3_4_2:
     - datalua
 GetButtonMetatable:
   impl:
-    frameworks:
+    modules:
     - api
 GetChatWindowInfo:
   impl:
@@ -302,7 +302,7 @@ GetClassInfo_Classic:
   directsql: GetClassInfo_Classic
 GetClickFrame:
   impl:
-    frameworks:
+    modules:
     - api
 GetCurrentEnvironment:
   moduledelegate:
@@ -314,11 +314,11 @@ getfenv:
     name: env
 GetFontStringMetatable:
   impl:
-    frameworks:
+    modules:
     - api
 GetFrameMetatable:
   impl:
-    frameworks:
+    modules:
     - api
 GetFramesRegisteredForEvent:
   moduledelegate:

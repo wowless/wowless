@@ -49,7 +49,6 @@ local function loadFunctions(api, loader)
   local sqls = loadSqls(loader.sqlitedb, datalua.sqls)
 
   local frameworks = {
-    api = api, -- TODO replace api framework with something finer grained
     loader = loader,
   }
 
