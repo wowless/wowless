@@ -339,9 +339,8 @@ GetLootSpecialization:
 getmetatable:
   stdlib: getmetatable
 GetNumAddOns:
-  impl:
-    frameworks:
-    - api
+  moduledelegate:
+    name: addons
 GetNumClasses:
   directsql: GetNumClasses
 GetNumSpecializationsForClassID:
