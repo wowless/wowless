@@ -73,9 +73,7 @@ local function mkBaseUIObjectTypes(api)
     return vv
   end
 
-  local function stubMixin(t, name)
-    return Mixin(t, api.env[name])
-  end
+  local stubMixin = api.modules.env.mixin
 
   local uiobjects = {}
   for name, cfg in pairs(api.datalua.uiobjects) do

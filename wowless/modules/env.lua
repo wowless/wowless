@@ -1,3 +1,4 @@
+local mixin = require('wowless.util').mixin
 return function()
   local env = {}
   return {
@@ -17,6 +18,9 @@ return function()
     IsInGlobalEnvironment = function()
       -- getfenv(2) but accounting for the api loading stack
       return getfenv(3) == env
+    end,
+    mixin = function(t, k)
+      return mixin(t, env[k])
     end,
     SwapToGlobalEnvironment = function()
       -- setfenv(2, env) but accounting for the api loading stack
