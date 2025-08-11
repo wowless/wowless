@@ -15,10 +15,12 @@ type:
                 sequenceof:
                   taggedunion:
                     api: tag
-                    datalua: tag
                     env: tag
                     events: tag
                     loader: tag
+            modules:
+              type:
+                sequenceof: string
             sqls:
               type:
                 sequenceof:

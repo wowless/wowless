@@ -191,13 +191,13 @@ C_XMLUtil.GetTemplateInfo_10_2:
     - api
 ClassicExpansionAtLeast:
   impl:
-    frameworks:
+    modules:
     - datalua
 collectgarbage:
   stdlib: collectgarbage
 ConsoleGetAllCommands:
   impl:
-    frameworks:
+    modules:
     - datalua
 coroutine.create:
   stdlib: coroutine.create
@@ -273,15 +273,15 @@ GetAuctionItemSubClasses:
     - C_AuctionHouse.GetAuctionItemSubClasses
 GetBuildInfo_10_1:
   impl:
-    frameworks:
+    modules:
     - datalua
 GetBuildInfo_1_15_0:
   impl:
-    frameworks:
+    modules:
     - datalua
 GetBuildInfo_3_4_2:
   impl:
-    frameworks:
+    modules:
     - datalua
 GetButtonMetatable:
   impl:
@@ -432,7 +432,7 @@ issecurevariable:
   stdlib: issecurevariable
 IsTestBuild:
   impl:
-    frameworks:
+    modules:
     - datalua
 IsWindowsClient:
   moduledelegate:

@@ -50,7 +50,6 @@ local function loadFunctions(api, loader)
 
   local frameworks = {
     api = api, -- TODO replace api framework with something finer grained
-    datalua = api.datalua,
     env = api.env,
     events = api.events,
     loader = loader,
@@ -61,6 +60,9 @@ local function loadFunctions(api, loader)
     local specials = {}
     for _, fw in ipairs(v.frameworks or {}) do
       table.insert(specials, (assert(frameworks[fw], 'unknown framework ' .. fw)))
+    end
+    for _, m in ipairs(v.modules or {}) do
+      table.insert(specials, (assert(api.modules[m], 'unknown module ' .. m)))
     end
     for _, sql in ipairs(v.sqls or {}) do
       table.insert(specials, sqls[sql])

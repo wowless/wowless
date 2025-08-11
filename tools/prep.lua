@@ -154,6 +154,7 @@ local implimpls = {
     end
     return {
       frameworks = impl.frameworks,
+      modules = impl.modules,
       sqls = impl.sqls,
       src = readFile('data/impl/' .. name .. '.lua'),
     }
