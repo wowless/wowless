@@ -245,8 +245,9 @@ difftime:
   stdlib: difftime
 DoEmote:
   impl:
-    frameworks:
-    - api
+    modules:
+    - events
+    - log
     sqls:
     - DoEmote
 EnumerateFrames:
