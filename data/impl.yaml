@@ -33,20 +33,20 @@ C_ChatInfo.ReplaceIconAndGroupExpressions:
   impl:
 C_ClassTalents.GetActiveConfigID:
   impl:
-    frameworks:
-    - api
+    modules:
+    - talents
 C_ClassTalents.GetTraitTreeForSpec:
   impl:
     sqls:
     - C_ClassTalents.GetTraitTreeForSpec
 C_ClassTalents.InitializeViewLoadout:
   impl:
-    frameworks:
-    - api
+    modules:
+    - talents
 C_ClassTalents.ViewLoadout:
   impl:
-    frameworks:
-    - api
+    modules:
+    - talents
     sqls:
     - GetSpecializationInfoByID
 C_Covenants.GetCovenantData:
@@ -122,8 +122,8 @@ C_ScriptedAnimations.GetAllScriptedAnimationEffects:
     - C_ScriptedAnimations.GetAllScriptedAnimationEffects
 C_SpecializationInfo.GetSpecializationInfo:
   impl:
-    frameworks:
-    - api
+    modules:
+    - units
     sqls:
     - GetSpecializationInfo
 C_SpecializationInfo.GetSpecIDs:
@@ -153,14 +153,18 @@ C_Timer.NewTimer:
     name: time
 C_Traits.GetConfigInfo:
   impl:
-    frameworks:
-    - api
+    modules:
+    - datalua
+    - talents
+    - units
     sqls:
     - C_Traits.GetConfigInfo
 C_Traits.GetNodeInfo:
   impl:
-    frameworks:
-    - api
+    modules:
+    - datalua
+    - talents
+    - units
     sqls:
     - C_Traits.GetNodeInfo
     - C_Traits.GetNodeInfo.entries
@@ -525,8 +529,9 @@ rawset:
   stdlib: rawset
 RequestTimePlayed:
   impl:
-    frameworks:
-    - api
+    modules:
+    - events
+    - time
 RunMacroText:
   moduledelegate:
     name: macrotext

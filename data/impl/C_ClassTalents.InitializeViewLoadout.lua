@@ -1,6 +1,6 @@
-local api = ...
+local talents = ...
 return function(specID, level)
-  api.modules.talents.pendingViewLoadoutSpecID = specID
-  api.modules.talents.pendingViewLoadoutLevel = level
-  api.modules.talents.viewLoadoutDataImported = false
+  talents.pendingViewLoadoutSpecID = specID
+  talents.pendingViewLoadoutLevel = level
+  talents.viewLoadoutDataImported = false
 end
