@@ -220,13 +220,11 @@ CreateFont:
     frameworks:
     - api
 CreateForbiddenFrame:
-  impl:
-    frameworks:
-    - api
+  moduledelegate:
+    name: api
 CreateFrame:
-  impl:
-    frameworks:
-    - api
+  moduledelegate:
+    name: api
 CreateFromMixins:
   impl:
 CreateWindow:

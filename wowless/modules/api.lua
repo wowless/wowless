@@ -1,26 +1,17 @@
 local hlist = require('wowless.hlist')
 
-local function new(log, maxErrors, product, loglevel)
-  local datalua = require('build.products.' .. product .. '.data')
-  local modules = require('wowless.modules')({
-    datalua = datalua,
-    log = log,
-    loglevel = loglevel,
-    maxErrors = maxErrors or math.huge,
-  })
-  local env = modules.env.env
+return function(addons, datalua, envmodule, events, log, loglevel, scripts, security, templatesmodule, time, uiobjects)
+  local env = envmodule.env
   local frames = hlist()
   local secureenv = {}
-  local templates = modules.templates.templates
+  local templates = templatesmodule.templates
   local uiobjectTypes = {}
-  local userdata = modules.uiobjects.userdata
+  local userdata = uiobjects.userdata
 
-  local time = modules.time
-
-  local CallSafely = modules.security.CallSafely
-  local CallSandbox = modules.security.CallSandbox
-  local RunScript = modules.scripts.RunScript
-  local SendEvent = modules.events.SendEvent
+  local CallSafely = security.CallSafely
+  local CallSandbox = security.CallSandbox
+  local RunScript = scripts.RunScript
+  local SendEvent = events.SendEvent
 
   local function InheritsFrom(a, b)
     local t = uiobjectTypes[a]
@@ -250,39 +241,35 @@ local function new(log, maxErrors, product, loglevel)
   end
 
   return {
-    addons = modules.addons.addons,
+    addons = addons.addons,
     CallSafely = CallSafely,
     CallSandbox = CallSandbox,
+    CreateForbiddenFrame = CreateFrame, -- TODO implement properly
     CreateFrame = CreateFrame,
     CreateUIObject = CreateUIObject,
     datalua = datalua,
     env = env,
     frames = frames,
     GetDebugName = GetDebugName,
-    GetErrorCount = modules.security.GetErrorCount,
+    GetErrorCount = security.GetErrorCount,
     GetParentKey = GetParentKey,
     InheritsFrom = InheritsFrom,
     IsIntrinsicType = IsIntrinsicType,
     IsVisible = IsVisible,
     log = log,
     loglevel = loglevel,
-    modules = modules,
     NextFrame = NextFrame,
     ParentSub = ParentSub,
-    product = product,
+    product = datalua.product,
     RunScript = RunScript,
     secureenv = secureenv,
     SendEvent = SendEvent,
     SetParent = SetParent,
-    SetScript = modules.scripts.SetScriptWithBindingType,
+    SetScript = scripts.SetScriptWithBindingType,
     templates = templates,
     uiobjects = userdata,
     uiobjectTypes = uiobjectTypes,
     UpdateVisible = UpdateVisible,
-    UserData = modules.uiobjects.UserData,
+    UserData = uiobjects.UserData,
   }
 end
-
-return {
-  new = new,
-}

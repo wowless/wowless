@@ -9,7 +9,16 @@ local function run(cfg)
       io.write(string.format('[%.3f] ' .. fmt .. '\n', os.clock() - time0, ...))
     end
   end
-  local api = require('wowless.api').new(log, cfg.maxErrors, cfg.product, cfg.loglevel or 0)
+  local modules = require('wowless.modules')({
+    datalua = require('build.products.' .. cfg.product .. '.data'),
+    log = log,
+    loglevel = cfg.loglevel or 0,
+    maxErrors = cfg.maxErrors or math.huge,
+  })
+  local api = { modules = modules } -- issue #447
+  for k, v in pairs(modules.api) do
+    api[k] = v
+  end
 
   -- begin WARNING WARNING WARNING
   --[[
@@ -61,7 +70,7 @@ local function run(cfg)
       api.log(1, 'failed to load %s: %s', addon, reason)
     end
   end
-  local system = api.modules.system
+  local system = modules.system
   system.LogIn()
   api.SendEvent('PLAYER_LOGIN')
   api.SendEvent('UPDATE_CHAT_WINDOWS')
@@ -127,7 +136,7 @@ local function run(cfg)
       end
       for cmd in sorted(cmds) do
         api.log(2, 'firing emote chat command %s', cmd)
-        api.modules.macrotext.RunMacroText(cmd)
+        modules.macrotext.RunMacroText(cmd)
       end
     end,
     enterleave = function()
@@ -207,7 +216,7 @@ local function run(cfg)
       end
       for k, v in sorted(cmds) do
         api.log(2, 'firing chat command ' .. k .. ' via ' .. v)
-        api.modules.macrotext.RunMacroText(v)
+        modules.macrotext.RunMacroText(v)
       end
     end,
     update = function()

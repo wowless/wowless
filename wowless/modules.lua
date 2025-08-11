@@ -1,5 +1,20 @@
 local specs = {
   addons = {},
+  api = {
+    deps = {
+      'addons',
+      'datalua',
+      'env',
+      'events',
+      'log',
+      'loglevel',
+      'scripts',
+      'security',
+      'templates',
+      'time',
+      'uiobjects',
+    },
+  },
   calendar = {},
   cvars = {
     deps = { 'datalua' },
