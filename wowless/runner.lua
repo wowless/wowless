@@ -9,8 +9,18 @@ local function run(cfg)
       io.write(string.format('[%.3f] ' .. fmt .. '\n', os.clock() - time0, ...))
     end
   end
+  local path = require('path')
+  local otherAddonDirs = {}
+  for _, d in ipairs(cfg.otherAddonDirs or {}) do
+    local dd = path.basename(d) == '' and path.dirname(d) or d
+    table.insert(otherAddonDirs, dd)
+  end
   local modules = require('wowless.modules')({
     datalua = require('build.products.' .. cfg.product .. '.data'),
+    loadercfg = {
+      otherAddonDirs = otherAddonDirs,
+      rootDir = cfg.dir,
+    },
     log = log,
     loglevel = cfg.loglevel or 0,
     maxErrors = cfg.maxErrors or math.huge,
@@ -46,17 +56,7 @@ local function run(cfg)
   require('wowless.ext').setglobaltable(api.env)
   -- end WARNING WARNING WARNING
 
-  local path = require('path')
-  local otherAddonDirs = {}
-  for _, d in ipairs(cfg.otherAddonDirs or {}) do
-    local dd = path.basename(d) == '' and path.dirname(d) or d
-    table.insert(otherAddonDirs, dd)
-  end
-  local loader = require('wowless.loader').loader(api, {
-    otherAddonDirs = otherAddonDirs,
-    product = cfg.product,
-    rootDir = cfg.dir,
-  })
+  local loader = api.modules.loader
   require('wowless.env').init(api, loader, not cfg.dir)
   require('wowless.util').mixin(api.uiobjectTypes, require('wowapi.uiobjects')(api))
   loader.initAddons()

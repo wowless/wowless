@@ -48,16 +48,9 @@ local function loadFunctions(api, loader)
   local apis = datalua.apis
   local sqls = loadSqls(loader.sqlitedb, datalua.sqls)
 
-  local frameworks = {
-    loader = loader,
-  }
-
   local impls = {}
   for k, v in pairs(datalua.impls) do
     local specials = {}
-    for _, fw in ipairs(v.frameworks or {}) do
-      table.insert(specials, (assert(frameworks[fw], 'unknown framework ' .. fw)))
-    end
     for _, m in ipairs(v.modules or {}) do
       table.insert(specials, (assert(api.modules[m], 'unknown module ' .. m)))
     end

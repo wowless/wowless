@@ -1,9 +1,9 @@
-local function loader(api, cfg)
-  local rootDir = cfg and cfg.rootDir
-  local product = cfg and cfg.product
+return function(api, cfg)
+  local rootDir = cfg.rootDir
+  local product = api.product
   assert(product, 'loader requires a product')
-  local otherAddonDirs = cfg and cfg.otherAddonDirs or {}
-  local datalua = require('build.products.' .. product .. '.data')
+  local otherAddonDirs = cfg.otherAddonDirs or {}
+  local datalua = api.datalua
 
   local path = require('path')
   local parseXml = require('wowless.xml').newParser(product)
@@ -963,7 +963,3 @@ local function loader(api, cfg)
     sqlitedb = sqlitedb,
   }
 end
-
-return {
-  loader = loader,
-}

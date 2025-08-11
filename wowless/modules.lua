@@ -32,6 +32,13 @@ local specs = {
   funcheck = {
     deps = { 'typecheck', 'log' },
   },
+  loader = {
+    deps = { 'api', 'loadercfg' },
+  },
+  loadercfg = {
+    default = {},
+    root = true,
+  },
   log = {
     default = function() end,
     root = true,

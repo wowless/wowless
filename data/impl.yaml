@@ -441,7 +441,7 @@ IsWindowsClient:
     name: platform
 LoadAddOn:
   impl:
-    frameworks:
+    modules:
     - loader
 loadstring:
   stdlib: loadstring

@@ -10,11 +10,6 @@ type:
           ref: sql
         impl:
           record:
-            frameworks:
-              type:
-                sequenceof:
-                  taggedunion:
-                    loader: tag
             modules:
               type:
                 sequenceof: string
