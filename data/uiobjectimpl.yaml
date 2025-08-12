@@ -4,6 +4,8 @@ Animation/GetTarget:
   luafile:
 AnimationGroup/CreateAnimation:
   luafile:
+    modules:
+    - api
 AnimationGroup/GetAnimations:
   luafile:
 Button/Click:
@@ -24,20 +26,32 @@ Button/SetButtonState:
   luafile:
 Button/SetDisabledAtlas:
   luafile:
+    modules:
+    - api
 Button/SetEnabled:
   luafile:
 Button/SetFontString:
   luafile:
+    modules:
+    - api
 Button/SetFormattedText:
   luafile:
 Button/SetHighlightAtlas:
   luafile:
+    modules:
+    - api
 Button/SetNormalAtlas:
   luafile:
+    modules:
+    - api
 Button/SetPushedAtlas:
   luafile:
+    modules:
+    - api
 Button/SetText:
   luafile:
+    modules:
+    - api
 CheckButton/SetChecked:
   luafile:
 EditBox/Disable:
@@ -54,12 +68,20 @@ ForbiddenMixin/SetForbidden:
   luafile:
 Frame/CreateFontString:
   luafile:
+    modules:
+    - api
 Frame/CreateLine:
   luafile:
+    modules:
+    - api
 Frame/CreateMaskTexture:
   luafile:
+    modules:
+    - api
 Frame/CreateTexture:
   luafile:
+    modules:
+    - api
 Frame/GetAttribute:
   luafile:
 Frame/GetChildren:
@@ -86,6 +108,8 @@ Frame/RegisterUnitEvent:
     name: events
 Frame/SetAttribute:
   luafile:
+    modules:
+    - api
 Frame/SetAttributeNoHandler:
   luafile:
 Frame/SetFrameLevel:
@@ -106,30 +130,44 @@ LayeredRegion/SetVertexColor:
   luafile:
 MessageFrame/AddMessage:
   luafile:
+    modules:
+    - api
 ModelScene/CreateActor:
   luafile:
+    modules:
+    - api
 MouseMixin/EnableMouse:
   luafile:
 MouseMixin/IsMouseEnabled:
   luafile:
 ParentedObject/GetDebugName:
   luafile:
+    modules:
+    - api
 ParentedObject/SetParent:
   luafile:
+    modules:
+    - api
 ParentedObjectBase/ClearParentKey:
   luafile:
 ParentedObjectBase/GetParentKey:
   luafile:
+    modules:
+    - api
 ParentedObjectBase/SetParentKey:
   luafile:
 Path/CreateControlPoint:
   luafile:
+    modules:
+    - api
 Path/GetControlPoints:
   luafile:
 Region/ClearAllPoints:
   luafile:
 Region/CreateAnimationGroup:
   luafile:
+    modules:
+    - api
 Region/GetAnimationGroups:
   luafile:
 Region/GetCenter:
@@ -152,16 +190,22 @@ Region/IsProtected:
   luafile:
 Region/IsVisible:
   luafile:
+    modules:
+    - api
 Region/SetAllPoints:
   luafile:
 Region/SetAlpha:
   luafile:
 Region/SetPoint:
   luafile:
+    modules:
+    - api
 Region/SetScale:
   luafile:
 Region/SetShown:
   luafile:
+    modules:
+    - api
 Region/Show:
   luafile:
 ScriptObject/GetScript:
@@ -175,6 +219,8 @@ ScriptObject/SetScript:
     name: scripts
 ScrollFrame/SetScrollChild:
   luafile:
+    modules:
+    - api
 Slider/Disable:
   luafile:
 Slider/Enable:
@@ -185,8 +231,12 @@ StatusBar/SetStatusBarColor:
   luafile:
 Texture/GetTexture:
   luafile:
+    modules:
+    - api
 Texture/SetAtlas:
   luafile:
+    modules:
+    - api
 Texture/SetColorTexture:
   luafile:
 Texture/SetTexCoord:
@@ -195,5 +245,9 @@ Texture/SetTexture:
   luafile:
 UIObject/GetObjectType:
   luafile:
+    modules:
+    - api
 UIObject/IsObjectType:
   luafile:
+    modules:
+    - api

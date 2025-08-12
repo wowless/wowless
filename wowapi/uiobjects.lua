@@ -105,9 +105,9 @@ local function mkBaseUIObjectTypes(api)
       local src = method.src and ('@' .. method.src) or fname
       local mkfn = setfenv(assert(loadstring_untainted(mtext, src)), _G)
       local fn
-      if method.modules then
+      if method.modules or method.src then
         local args = {}
-        for _, m in ipairs(method.modules) do
+        for _, m in ipairs(method.modules or {}) do
           table.insert(args, (assert(api.modules[m], m)))
         end
         fn = mkfn(unpack(args))

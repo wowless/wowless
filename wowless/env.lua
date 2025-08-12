@@ -18,6 +18,7 @@ end
 local function init(api, loader, lite)
   local impls, rawimpls = require('wowapi.loader').loadFunctions(api, loader)
   api.impls = rawimpls
+  api.modules.api.impls = rawimpls -- TODO remove this hack
   api.env._G = api.env
   Mixin(api.env, deepcopy(impls))
   Mixin(api.env, deepcopy(api.datalua.globals))
