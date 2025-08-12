@@ -1,4 +1,4 @@
-return function(addons, api, datalua, events, loadercfg, log, loglevel, scripts, security)
+return function(addons, api, datalua, events, loadercfg, log, loglevel, scripts, security, templates)
   local SendEvent = events.SendEvent
 
   local rootDir = loadercfg.rootDir
@@ -520,7 +520,7 @@ return function(addons, api, datalua, events, loadercfg, log, loglevel, scripts,
         local phase = phases[phaseName]
         return function(obj)
           for _, inh in ipairs(e.attr.inherits or {}) do
-            local t = assert(api.templates[string.lower(inh)], 'unknown template ' .. inh)
+            local t = templates.GetTemplateOrThrow(inh)
             t['init' .. phaseName](obj)
           end
           phase(ctx, e, obj)
@@ -565,12 +565,7 @@ return function(addons, api, datalua, events, loadercfg, log, loglevel, scripts,
             local ltype = string.lower(e.type)
             if (ltype == 'font' and e.attr.name) or (virtual and not ctx.ignoreVirtual) then
               assert(e.attr.name, 'cannot create anonymous template')
-              local name = string.lower(e.attr.name)
-              if api.templates[name] then
-                log(1, 'overwriting template %s', e.attr.name)
-              end
-              log(3, 'creating template %s', e.attr.name)
-              api.templates[name] = template
+              templates.SetTemplate(e.attr.name, template)
             end
             if ltype == 'font' or (not virtual or ctx.ignoreVirtual) then
               local name = e.attr.name

@@ -1,11 +1,9 @@
-local api = ...
+local api, templates = ...
 return function(self, name, layer, inherits, sublayer)
   -- TODO unify with api
   local tmpls = {}
   for templateName in string.gmatch(inherits or '', '[^, ]+') do
-    local template = api.templates[string.lower(templateName)]
-    assert(template, 'unknown template ' .. templateName)
-    table.insert(tmpls, template)
+    table.insert(tmpls, templates.GetTemplateOrThrow(templateName))
   end
   local tex = api.CreateUIObject('texture', name, self, nil, tmpls)
   if layer then

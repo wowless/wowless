@@ -1,22 +1,9 @@
 local hlist = require('wowless.hlist')
 
-return function(
-  datalua,
-  envmodule,
-  events,
-  log,
-  loglevel,
-  parentkey,
-  scripts,
-  templatesmodule,
-  time,
-  uiobjects,
-  visibility
-)
+return function(datalua, envmodule, events, log, loglevel, parentkey, scripts, templates, time, uiobjects, visibility)
   local env = envmodule.env
   local frames = hlist()
   local secureenv = {}
-  local templates = templatesmodule.templates
   local uiobjectTypes = {}
   local userdata = uiobjects.userdata
 
@@ -204,9 +191,7 @@ return function(
     end
     local tmpls = {}
     for templateName in string.gmatch(templateNames or '', '[^, ]+') do
-      local template = templates[string.lower(templateName)]
-      assert(template, 'unknown template ' .. templateName)
-      table.insert(tmpls, template)
+      table.insert(tmpls, templates.GetTemplateOrThrow(templateName))
     end
     return CreateUIObject(ltype, name, parent, nil, tmpls, id)
   end
@@ -233,7 +218,6 @@ return function(
     ParentSub = ParentSub,
     secureenv = secureenv,
     SetParent = SetParent,
-    templates = templates,
     uiobjectTypes = uiobjectTypes,
     UserData = uiobjects.UserData,
   }

@@ -82,6 +82,7 @@ Frame/CreateTexture:
   luafile:
     modules:
     - api
+    - templates
 Frame/GetAttribute:
   luafile:
 Frame/GetChildren:
@@ -136,6 +137,7 @@ ModelScene/CreateActor:
   luafile:
     modules:
     - api
+    - templates
 MouseMixin/EnableMouse:
   luafile:
 MouseMixin/IsMouseEnabled:
