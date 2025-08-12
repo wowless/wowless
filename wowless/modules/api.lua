@@ -12,7 +12,8 @@ return function(
   security,
   templatesmodule,
   time,
-  uiobjects
+  uiobjects,
+  visibility
 )
   local env = envmodule.env
   local frames = hlist()
@@ -23,8 +24,10 @@ return function(
 
   local CallSafely = security.CallSafely
   local CallSandbox = security.CallSandbox
+  local IsVisible = visibility.IsVisible
   local RunScript = scripts.RunScript
   local SendEvent = events.SendEvent
+  local UpdateVisible = visibility.UpdateVisible
 
   local function InheritsFrom(a, b)
     local t = uiobjectTypes[a]
@@ -105,29 +108,6 @@ return function(
       parent = parent.parent
     end
     return name
-  end
-
-  local function DoUpdateVisible(obj, script)
-    for kid in obj.children:entries() do
-      if kid.shown then
-        DoUpdateVisible(kid, script)
-      end
-    end
-    RunScript(obj, script)
-  end
-
-  local function UpdateVisible(obj, visible)
-    DoUpdateVisible(obj, visible and 'OnShow' or 'OnHide')
-  end
-
-  local function IsVisible(obj)
-    while obj do
-      if not obj.shown then
-        return false
-      end
-      obj = obj.parent
-    end
-    return true
   end
 
   local function SetParent(obj, parent)
@@ -258,7 +238,6 @@ return function(
     GetErrorCount = security.GetErrorCount,
     InheritsFrom = InheritsFrom,
     IsIntrinsicType = IsIntrinsicType,
-    IsVisible = IsVisible,
     log = log,
     loglevel = loglevel,
     NextFrame = NextFrame,
@@ -272,7 +251,6 @@ return function(
     templates = templates,
     uiobjects = userdata,
     uiobjectTypes = uiobjectTypes,
-    UpdateVisible = UpdateVisible,
     UserData = uiobjects.UserData,
   }
 end

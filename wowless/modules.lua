@@ -14,6 +14,7 @@ local specs = {
       'templates',
       'time',
       'uiobjects',
+      'visibility',
     },
   },
   calendar = {},
@@ -74,6 +75,9 @@ local specs = {
   },
   uiobjects = {},
   units = {},
+  visibility = {
+    deps = { 'scripts' },
+  },
 }
 
 local tt = require('resty.tsort').new()

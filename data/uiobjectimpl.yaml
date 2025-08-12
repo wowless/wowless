@@ -184,13 +184,13 @@ Region/GetScaledRect:
 Region/GetTop:
   luafile:
 Region/Hide:
-  luafile:
+  moduledelegate:
+    name: visibility
 Region/IsProtected:
   luafile:
 Region/IsVisible:
-  luafile:
-    modules:
-    - api
+  moduledelegate:
+    name: visibility
 Region/SetAllPoints:
   luafile:
 Region/SetAlpha:
@@ -202,11 +202,11 @@ Region/SetPoint:
 Region/SetScale:
   luafile:
 Region/SetShown:
-  luafile:
-    modules:
-    - api
+  moduledelegate:
+    name: visibility
 Region/Show:
-  luafile:
+  moduledelegate:
+    name: visibility
 ScriptObject/GetScript:
   moduledelegate:
     name: scripts
