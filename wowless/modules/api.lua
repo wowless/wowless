@@ -227,7 +227,6 @@ return function(
     CreateForbiddenFrame = CreateFrame, -- TODO implement properly
     CreateFrame = CreateFrame,
     CreateUIObject = CreateUIObject,
-    datalua = datalua,
     env = env,
     frames = frames,
     GetDebugName = GetDebugName,

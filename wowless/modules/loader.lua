@@ -1,11 +1,10 @@
-return function(api, events, loadercfg, log, loglevel, security)
+return function(api, datalua, events, loadercfg, log, loglevel, security)
   local SendEvent = events.SendEvent
 
   local rootDir = loadercfg.rootDir
   local product = api.product
   assert(product, 'loader requires a product')
   local otherAddonDirs = loadercfg.otherAddonDirs or {}
-  local datalua = api.datalua
 
   local path = require('path')
   local parseXml = require('wowless.xml').newParser(product)

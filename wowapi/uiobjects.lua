@@ -76,7 +76,7 @@ local function mkBaseUIObjectTypes(api)
   local stubMixin = api.modules.env.mixin
 
   local uiobjects = {}
-  for name, cfg in pairs(api.datalua.uiobjects) do
+  for name, cfg in pairs(api.modules.datalua.uiobjects) do
     local lname = name:lower()
     local function wrap(fname, fn)
       return function(self, ...)

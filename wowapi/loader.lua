@@ -44,7 +44,7 @@ end
 
 local function loadFunctions(api, loader)
   api.modules.log(1, 'loading functions')
-  local datalua = api.datalua
+  local datalua = api.modules.datalua
   local apis = datalua.apis
   local sqls = loadSqls(loader.sqlitedb, datalua.sqls)
 

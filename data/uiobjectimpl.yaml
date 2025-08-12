@@ -232,7 +232,7 @@ StatusBar/SetStatusBarColor:
 Texture/GetTexture:
   luafile:
     modules:
-    - api
+    - datalua
 Texture/SetAtlas:
   luafile:
     modules:
