@@ -6,7 +6,7 @@ describe('uiobjectimpl', function()
   it('references all the files in data/uiobjects', function()
     local expected = {}
     for k, v in pairs(require('build.data.uiobjectimpl')) do
-      if v == 'luafile' then
+      if v.luafile then
         expected['data/uiobjects/' .. k .. '.lua'] = true
       end
     end

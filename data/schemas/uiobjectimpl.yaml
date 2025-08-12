@@ -4,7 +4,11 @@ type:
     key: string
     value:
       taggedunion:
-        luafile: tag
+        luafile:
+          record:
+            modules:
+              type:
+                sequenceof: string
         moduledelegate:
           record:
             name:

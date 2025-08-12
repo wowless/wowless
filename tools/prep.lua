@@ -261,10 +261,11 @@ local function mkuiobjectinit(k)
   return init
 end
 local uiobjectimplimplmakers = {
-  luafile = function(k)
+  luafile = function(impl, k)
     local src = 'data/uiobjects/' .. k .. '.lua'
     return {
       impl = readFile(src),
+      modules = impl.modules,
       src = src,
     }
   end,

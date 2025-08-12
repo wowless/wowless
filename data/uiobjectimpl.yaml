@@ -1,39 +1,77 @@
-Animation/GetRegionParent: luafile
-Animation/GetTarget: luafile
-AnimationGroup/CreateAnimation: luafile
-AnimationGroup/GetAnimations: luafile
-Button/Click: luafile
-Button/Disable: luafile
-Button/Enable: luafile
-Button/GetText: luafile
-Button/IsEnabled: luafile
-Button/RegisterForClicks: luafile
-Button/SetButtonState: luafile
-Button/SetDisabledAtlas: luafile
-Button/SetEnabled: luafile
-Button/SetFontString: luafile
-Button/SetFormattedText: luafile
-Button/SetHighlightAtlas: luafile
-Button/SetNormalAtlas: luafile
-Button/SetPushedAtlas: luafile
-Button/SetText: luafile
-CheckButton/SetChecked: luafile
-EditBox/Disable: luafile
-EditBox/Enable: luafile
-EditBox/Insert: luafile
-FontInstance/GetFontObject: luafile
-FontString/SetText: luafile
-ForbiddenMixin/SetForbidden: luafile
-Frame/CreateFontString: luafile
-Frame/CreateLine: luafile
-Frame/CreateMaskTexture: luafile
-Frame/CreateTexture: luafile
-Frame/GetAttribute: luafile
-Frame/GetChildren: luafile
-Frame/GetEffectiveAlpha: luafile
-Frame/GetNumChildren: luafile
-Frame/GetNumRegions: luafile
-Frame/GetRegions: luafile
+Animation/GetRegionParent:
+  luafile:
+Animation/GetTarget:
+  luafile:
+AnimationGroup/CreateAnimation:
+  luafile:
+AnimationGroup/GetAnimations:
+  luafile:
+Button/Click:
+  luafile:
+    modules:
+    - scripts
+Button/Disable:
+  luafile:
+Button/Enable:
+  luafile:
+Button/GetText:
+  luafile:
+Button/IsEnabled:
+  luafile:
+Button/RegisterForClicks:
+  luafile:
+Button/SetButtonState:
+  luafile:
+Button/SetDisabledAtlas:
+  luafile:
+Button/SetEnabled:
+  luafile:
+Button/SetFontString:
+  luafile:
+Button/SetFormattedText:
+  luafile:
+Button/SetHighlightAtlas:
+  luafile:
+Button/SetNormalAtlas:
+  luafile:
+Button/SetPushedAtlas:
+  luafile:
+Button/SetText:
+  luafile:
+CheckButton/SetChecked:
+  luafile:
+EditBox/Disable:
+  luafile:
+EditBox/Enable:
+  luafile:
+EditBox/Insert:
+  luafile:
+FontInstance/GetFontObject:
+  luafile:
+FontString/SetText:
+  luafile:
+ForbiddenMixin/SetForbidden:
+  luafile:
+Frame/CreateFontString:
+  luafile:
+Frame/CreateLine:
+  luafile:
+Frame/CreateMaskTexture:
+  luafile:
+Frame/CreateTexture:
+  luafile:
+Frame/GetAttribute:
+  luafile:
+Frame/GetChildren:
+  luafile:
+Frame/GetEffectiveAlpha:
+  luafile:
+Frame/GetNumChildren:
+  luafile:
+Frame/GetNumRegions:
+  luafile:
+Frame/GetRegions:
+  luafile:
 Frame/IsEventRegistered:
   moduledelegate:
     name: events
@@ -46,49 +84,86 @@ Frame/RegisterEvent:
 Frame/RegisterUnitEvent:
   moduledelegate:
     name: events
-Frame/SetAttribute: luafile
-Frame/SetAttributeNoHandler: luafile
-Frame/SetFrameLevel: luafile
-Frame/SetResizeBounds: luafile
+Frame/SetAttribute:
+  luafile:
+Frame/SetAttributeNoHandler:
+  luafile:
+Frame/SetFrameLevel:
+  luafile:
+Frame/SetResizeBounds:
+  luafile:
 Frame/UnregisterAllEvents:
   moduledelegate:
     name: events
 Frame/UnregisterEvent:
   moduledelegate:
     name: events
-GameTooltip/IsOwned: luafile
-GameTooltip/SetOwner: luafile
-LayeredRegion/SetVertexColor: luafile
-MessageFrame/AddMessage: luafile
-ModelScene/CreateActor: luafile
-MouseMixin/EnableMouse: luafile
-MouseMixin/IsMouseEnabled: luafile
-ParentedObject/GetDebugName: luafile
-ParentedObject/SetParent: luafile
-ParentedObjectBase/ClearParentKey: luafile
-ParentedObjectBase/GetParentKey: luafile
-ParentedObjectBase/SetParentKey: luafile
-Path/CreateControlPoint: luafile
-Path/GetControlPoints: luafile
-Region/ClearAllPoints: luafile
-Region/CreateAnimationGroup: luafile
-Region/GetAnimationGroups: luafile
-Region/GetCenter: luafile
-Region/GetEffectiveScale: luafile
-Region/GetNumPoints: luafile
-Region/GetPoint: luafile
-Region/GetRight: luafile
-Region/GetScaledRect: luafile
-Region/GetTop: luafile
-Region/Hide: luafile
-Region/IsProtected: luafile
-Region/IsVisible: luafile
-Region/SetAllPoints: luafile
-Region/SetAlpha: luafile
-Region/SetPoint: luafile
-Region/SetScale: luafile
-Region/SetShown: luafile
-Region/Show: luafile
+GameTooltip/IsOwned:
+  luafile:
+GameTooltip/SetOwner:
+  luafile:
+LayeredRegion/SetVertexColor:
+  luafile:
+MessageFrame/AddMessage:
+  luafile:
+ModelScene/CreateActor:
+  luafile:
+MouseMixin/EnableMouse:
+  luafile:
+MouseMixin/IsMouseEnabled:
+  luafile:
+ParentedObject/GetDebugName:
+  luafile:
+ParentedObject/SetParent:
+  luafile:
+ParentedObjectBase/ClearParentKey:
+  luafile:
+ParentedObjectBase/GetParentKey:
+  luafile:
+ParentedObjectBase/SetParentKey:
+  luafile:
+Path/CreateControlPoint:
+  luafile:
+Path/GetControlPoints:
+  luafile:
+Region/ClearAllPoints:
+  luafile:
+Region/CreateAnimationGroup:
+  luafile:
+Region/GetAnimationGroups:
+  luafile:
+Region/GetCenter:
+  luafile:
+Region/GetEffectiveScale:
+  luafile:
+Region/GetNumPoints:
+  luafile:
+Region/GetPoint:
+  luafile:
+Region/GetRight:
+  luafile:
+Region/GetScaledRect:
+  luafile:
+Region/GetTop:
+  luafile:
+Region/Hide:
+  luafile:
+Region/IsProtected:
+  luafile:
+Region/IsVisible:
+  luafile:
+Region/SetAllPoints:
+  luafile:
+Region/SetAlpha:
+  luafile:
+Region/SetPoint:
+  luafile:
+Region/SetScale:
+  luafile:
+Region/SetShown:
+  luafile:
+Region/Show:
+  luafile:
 ScriptObject/GetScript:
   moduledelegate:
     name: scripts
@@ -98,15 +173,27 @@ ScriptObject/HookScript:
 ScriptObject/SetScript:
   moduledelegate:
     name: scripts
-ScrollFrame/SetScrollChild: luafile
-Slider/Disable: luafile
-Slider/Enable: luafile
-StatusBar/GetStatusBarColor: luafile
-StatusBar/SetStatusBarColor: luafile
-Texture/GetTexture: luafile
-Texture/SetAtlas: luafile
-Texture/SetColorTexture: luafile
-Texture/SetTexCoord: luafile
-Texture/SetTexture: luafile
-UIObject/GetObjectType: luafile
-UIObject/IsObjectType: luafile
+ScrollFrame/SetScrollChild:
+  luafile:
+Slider/Disable:
+  luafile:
+Slider/Enable:
+  luafile:
+StatusBar/GetStatusBarColor:
+  luafile:
+StatusBar/SetStatusBarColor:
+  luafile:
+Texture/GetTexture:
+  luafile:
+Texture/SetAtlas:
+  luafile:
+Texture/SetColorTexture:
+  luafile:
+Texture/SetTexCoord:
+  luafile:
+Texture/SetTexture:
+  luafile:
+UIObject/GetObjectType:
+  luafile:
+UIObject/IsObjectType:
+  luafile:
