@@ -55,7 +55,7 @@ local function init(api, loader, lite)
     dump = dump(api),
     lite = lite,
     platform = api.modules.platform.platform,
-    product = api.product,
+    product = api.modules.datalua.product,
     quit = function(exitCode)
       api.modules.log(1, 'Bye!')
       os.exit(exitCode or 1)

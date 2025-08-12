@@ -231,7 +231,6 @@ return function(
     IsIntrinsicType = IsIntrinsicType,
     NextFrame = NextFrame,
     ParentSub = ParentSub,
-    product = datalua.product,
     secureenv = secureenv,
     SetParent = SetParent,
     SetScript = scripts.SetScriptWithBindingType,

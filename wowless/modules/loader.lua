@@ -2,7 +2,7 @@ return function(addons, api, datalua, events, loadercfg, log, loglevel, security
   local SendEvent = events.SendEvent
 
   local rootDir = loadercfg.rootDir
-  local product = api.product
+  local product = datalua.product
   assert(product, 'loader requires a product')
   local otherAddonDirs = loadercfg.otherAddonDirs or {}
 
