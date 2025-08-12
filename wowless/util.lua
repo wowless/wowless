@@ -1,11 +1,4 @@
-local function mixin(t, ...)
-  for _, kv in ipairs({ ... }) do
-    for k, v in pairs(kv) do
-      t[k] = v
-    end
-  end
-  return t
-end
+local mixin = require('wowless.mixin').Mixin
 
 local readfile = (function()
   local lfs = require('lfs')

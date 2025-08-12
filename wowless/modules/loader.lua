@@ -18,11 +18,11 @@ return function(api, cfg)
     local tree = datalua.xml
     local newtree = {}
     for k, v in pairs(tree) do
-      local attrs = mixin({}, v.attributes)
+      local attrs = mixin({}, v.attributes or {})
       local t = v
       while t.extends do
         t = tree[t.extends]
-        mixin(attrs, t.attributes)
+        mixin(attrs, t.attributes or {})
       end
       local aimpls = {}
       for n, a in pairs(attrs) do

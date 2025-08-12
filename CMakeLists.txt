@@ -430,8 +430,9 @@ add_custom_command(
   DEPFILE generated/sqls.yaml.d
   DEPENDS sqls data/sql.yaml)
 
-lua2c(wowlessutil luapath=p
+lua2c(wowlessutil luapath=p wowless.mixin=c
       wowless.util=${CMAKE_CURRENT_SOURCE_DIR}/wowless/util.lua)
+target_sources(wowlessutil PRIVATE wowless/mixin.c)
 
 FetchContent_Declare(
   cjson

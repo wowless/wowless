@@ -226,7 +226,8 @@ CreateFrame:
   moduledelegate:
     name: api
 CreateFromMixins:
-  impl:
+  luadelegate:
+    module: wowless.mixin
 CreateWindow:
   impl:
 date:
@@ -507,8 +508,7 @@ math.tanh:
   stdlib: math.tanh
 Mixin:
   luadelegate:
-    function: mixin
-    module: wowless.util
+    module: wowless.mixin
 newproxy:
   stdlib: newproxy
 next:
