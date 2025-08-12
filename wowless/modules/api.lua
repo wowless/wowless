@@ -1,7 +1,6 @@
 local hlist = require('wowless.hlist')
 
 return function(
-  addons,
   datalua,
   envmodule,
   events,
@@ -223,7 +222,6 @@ return function(
   end
 
   return {
-    addons = addons.addons,
     CreateForbiddenFrame = CreateFrame, -- TODO implement properly
     CreateFrame = CreateFrame,
     CreateUIObject = CreateUIObject,

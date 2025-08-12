@@ -1,4 +1,4 @@
-return function(api, datalua, events, loadercfg, log, loglevel, security)
+return function(addons, api, datalua, events, loadercfg, log, loglevel, security)
   local SendEvent = events.SendEvent
 
   local rootDir = loadercfg.rootDir
@@ -726,7 +726,7 @@ return function(api, datalua, events, loadercfg, log, loglevel, security)
     return require('lsqlite3').open(dbfile)
   end)()
 
-  local addonData = assert(api.addons)
+  local addonData = addons.addons
 
   local function initAddons()
     local lfs = require('lfs')

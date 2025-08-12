@@ -2,7 +2,6 @@ local specs = {
   addons = {},
   api = {
     deps = {
-      'addons',
       'datalua',
       'env',
       'events',
@@ -35,7 +34,7 @@ local specs = {
     deps = { 'typecheck', 'log' },
   },
   loader = {
-    deps = { 'api', 'datalua', 'events', 'loadercfg', 'log', 'loglevel', 'security' },
+    deps = { 'addons', 'api', 'datalua', 'events', 'loadercfg', 'log', 'loglevel', 'security' },
   },
   loadercfg = {
     default = {},
