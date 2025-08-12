@@ -103,7 +103,17 @@ local function mkBaseUIObjectTypes(api)
       local outcheck = method.outputs and funchecker.makeCheckOutputs(fname, method)
       local mtext = method.impl or method
       local src = method.src and ('@' .. method.src) or fname
-      local fn = setfenv(assert(loadstring_untainted(mtext, src)), _G)(api, toTexture, check, stubMixin)
+      local mkfn = setfenv(assert(loadstring_untainted(mtext, src)), _G)
+      local fn
+      if method.modules then
+        local args = {}
+        for _, m in ipairs(method.modules) do
+          table.insert(args, (assert(api.modules[m], m)))
+        end
+        fn = mkfn(unpack(args))
+      else
+        fn = mkfn(api, toTexture, check, stubMixin)
+      end
       local basefn = wrap(fname, fn)
       local outfn
       if not incheck and not outcheck then

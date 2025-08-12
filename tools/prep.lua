@@ -270,7 +270,8 @@ local uiobjectimplimplmakers = {
   end,
   moduledelegate = function(impl, k)
     return {
-      impl = ('return (...).modules[%q][%q]'):format(impl.name, k:sub(k:find('/') + 1)),
+      impl = ('return (...)[%q]'):format(k:sub(k:find('/') + 1)),
+      modules = { impl.name },
     }
   end,
 }
@@ -383,6 +384,7 @@ local uiobjectimplmakers = {
       inputs = mv.inputs,
       instride = mv.instride,
       mayreturnnothing = mv.mayreturnnothing,
+      modules = implimpl.modules,
       outputs = mv.outputs,
       outstride = mv.outstride,
       src = implimpl.src,
