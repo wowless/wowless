@@ -11,7 +11,7 @@ describe('addon', function()
         })
         assert.True(api.env.WowlessTestsDone)
         assert.same({}, api.env.WowlessTestFailures)
-        assert.same(0, api.GetErrorCount())
+        assert.same(0, api.modules.security.GetErrorCount())
       end)
     end)
   end

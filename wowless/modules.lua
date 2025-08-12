@@ -9,7 +9,6 @@ local specs = {
       'loglevel',
       'parentkey',
       'scripts',
-      'security',
       'templates',
       'time',
       'uiobjects',
