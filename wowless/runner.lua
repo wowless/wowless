@@ -56,9 +56,11 @@ local function run(cfg)
   require('wowless.ext').setglobaltable(api.env)
   -- end WARNING WARNING WARNING
 
-  local loader = api.modules.loader
+  local loader = modules.loader
   require('wowless.env').init(api, loader, not cfg.dir)
-  require('wowless.util').mixin(api.uiobjectTypes, require('wowapi.uiobjects')(api))
+  for k, v in pairs(require('wowapi.uiobjects')(api)) do
+    modules.uiobjecttypes.Add(k, v)
+  end
   loader.initAddons()
   if cfg.dir then
     loader.loadFrameXml()

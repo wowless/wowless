@@ -1,4 +1,4 @@
-return function(addons, api, datalua, events, loadercfg, log, loglevel, scripts, security, templates)
+return function(addons, api, datalua, events, loadercfg, log, loglevel, scripts, security, templates, uiobjecttypes)
   local SendEvent = events.SendEvent
 
   local rootDir = loadercfg.rootDir
@@ -256,15 +256,15 @@ return function(addons, api, datalua, events, loadercfg, log, loglevel, scripts,
     end,
     color = function(ctx, e, parent)
       local r, g, b, a = getColor(e)
-      if api.InheritsFrom(parent.type, 'texturebase') then
+      if uiobjecttypes.InheritsFrom(parent.type, 'texturebase') then
         parent:SetColorTexture(r, g, b, a)
-      elseif api.InheritsFrom(parent.type, 'fontinstance') then
+      elseif uiobjecttypes.InheritsFrom(parent.type, 'fontinstance') then
         if ctx.shadow then
           parent:SetShadowColor(r, g, b, a)
         else
           parent:SetTextColor(r, g, b, a)
         end
-      elseif api.InheritsFrom(parent.type, 'statusbar') then
+      elseif uiobjecttypes.InheritsFrom(parent.type, 'statusbar') then
         parent:SetStatusBarColor(r, g, b, a)
       else
         error('cannot apply color to ' .. parent.type)
@@ -529,7 +529,7 @@ return function(addons, api, datalua, events, loadercfg, log, loglevel, scripts,
 
       function loadElement(ctx, e, parent)
         -- This assumes that uiobject types and xml types are the same "space" of strings.
-        if api.IsIntrinsicType(e.type) or e.type == 'worldframe' then
+        if uiobjecttypes.IsIntrinsicType(e.type) or e.type == 'worldframe' then
           ctx = not e.attr.intrinsic and ctx or mixin({}, ctx, { intrinsic = true })
           local template = {
             inherits = e.attr.inherits,
@@ -546,20 +546,20 @@ return function(addons, api, datalua, events, loadercfg, log, loglevel, scripts,
             assert(virtual ~= false, 'intrinsics cannot be explicitly non-virtual: ' .. e.type)
             assert(e.attr.name, 'cannot create anonymous intrinsic')
             local name = string.lower(e.attr.name)
-            if api.uiobjectTypes[name] then
+            if uiobjecttypes.Has(name) then
               log(1, 'overwriting intrinsic %s', e.attr.name)
             end
             log(3, 'creating intrinsic %s', e.attr.name)
             local basetype = string.lower(e.type)
-            local base = api.uiobjectTypes[basetype]
-            api.uiobjectTypes[name] = {
+            local base = uiobjecttypes.GetOrThrow(basetype)
+            uiobjecttypes.Add(name, {
               constructor = base.constructor,
               hostMT = base.hostMT,
               isa = mixin({ [name] = true }, base.isa),
               name = base.name,
               sandboxMT = base.sandboxMT,
               template = template,
-            }
+            })
             intrinsics[name] = xmlimpls[basetype]
           else
             local ltype = string.lower(e.type)

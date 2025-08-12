@@ -74,13 +74,14 @@ local function mkBaseUIObjectTypes(api)
   end
 
   local stubMixin = api.modules.env.mixin
+  local InheritsFrom = api.modules.uiobjecttypes.InheritsFrom
 
   local uiobjects = {}
   for name, cfg in pairs(api.modules.datalua.uiobjects) do
     local lname = name:lower()
     local function wrap(fname, fn)
       return function(self, ...)
-        if not api.InheritsFrom(self.type, lname) then
+        if not InheritsFrom(self.type, lname) then
           error(('invalid self to %s.%s, got %s'):format(name, fname, tostring(self.type)))
         end
         return fn(self, ...)

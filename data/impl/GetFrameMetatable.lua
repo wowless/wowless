@@ -1,4 +1,4 @@
-local api = ...
+local uiobjecttypes = ...
 return function()
-  return api.uiobjectTypes.frame.sandboxMT
+  return uiobjecttypes.GetSandboxMetatable('frame')
 end

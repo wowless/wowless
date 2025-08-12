@@ -12,6 +12,7 @@ local specs = {
       'templates',
       'time',
       'uiobjects',
+      'uiobjecttypes',
       'visibility',
     },
   },
@@ -33,7 +34,19 @@ local specs = {
     deps = { 'typecheck', 'log' },
   },
   loader = {
-    deps = { 'addons', 'api', 'datalua', 'events', 'loadercfg', 'log', 'loglevel', 'scripts', 'security', 'templates' },
+    deps = {
+      'addons',
+      'api',
+      'datalua',
+      'events',
+      'loadercfg',
+      'log',
+      'loglevel',
+      'scripts',
+      'security',
+      'templates',
+      'uiobjecttypes',
+    },
   },
   loadercfg = {
     default = {},
@@ -74,6 +87,7 @@ local specs = {
     deps = { 'addons', 'datalua', 'env', 'uiobjects', 'units' },
   },
   uiobjects = {},
+  uiobjecttypes = {},
   units = {},
   visibility = {
     deps = { 'scripts' },

@@ -1,4 +1,4 @@
-local api = ...
+local uiobjecttypes = ...
 return function()
-  return api.uiobjectTypes.fontstring.sandboxMT
+  return uiobjecttypes.GetSandboxMetatable('fontstring')
 end

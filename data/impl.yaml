@@ -290,7 +290,7 @@ GetBuildInfo_3_4_2:
 GetButtonMetatable:
   impl:
     modules:
-    - api
+    - uiobjecttypes
 GetChatWindowInfo:
   impl:
 GetChatWindowMessages:
@@ -316,11 +316,11 @@ getfenv:
 GetFontStringMetatable:
   impl:
     modules:
-    - api
+    - uiobjecttypes
 GetFrameMetatable:
   impl:
     modules:
-    - api
+    - uiobjecttypes
 GetFramesRegisteredForEvent:
   moduledelegate:
     function: GetFramesRegisteredForEventUnpacked

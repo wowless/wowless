@@ -1,4 +1,4 @@
-local api = ...
+local uiobjecttypes = ...
 return function(self)
-  return api.uiobjectTypes[self.type].name
+  return uiobjecttypes.GetOrThrow(self.type).name
 end

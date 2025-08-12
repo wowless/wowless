@@ -1,28 +1,30 @@
 local hlist = require('wowless.hlist')
 
-return function(datalua, envmodule, events, log, loglevel, parentkey, scripts, templates, time, uiobjects, visibility)
+return function(
+  datalua,
+  envmodule,
+  events,
+  log,
+  loglevel,
+  parentkey,
+  scripts,
+  templates,
+  time,
+  uiobjects,
+  uiobjecttypes,
+  visibility
+)
   local env = envmodule.env
   local frames = hlist()
   local secureenv = {}
-  local uiobjectTypes = {}
   local userdata = uiobjects.userdata
 
+  local InheritsFrom = uiobjecttypes.InheritsFrom
+  local IsIntrinsicType = uiobjecttypes.IsIntrinsicType
   local IsVisible = visibility.IsVisible
   local RunScript = scripts.RunScript
   local SendEvent = events.SendEvent
   local UpdateVisible = visibility.UpdateVisible
-
-  local function InheritsFrom(a, b)
-    local t = uiobjectTypes[a]
-    if not t then
-      error('unknown type ' .. a)
-    end
-    return t.isa[b]
-  end
-
-  local function IsIntrinsicType(t)
-    return uiobjectTypes[string.lower(t)] ~= nil
-  end
 
   local parentFieldsToClear = {
     'disabledTexture',
@@ -113,10 +115,7 @@ return function(datalua, envmodule, events, log, loglevel, parentkey, scripts, t
     elseif type(objnamearg) == 'number' then
       objname = tostring(objnamearg)
     end
-    local objtype = uiobjectTypes[typename]
-    if not objtype then
-      error('unknown type ' .. tostring(typename) .. ' for ' .. tostring(objname))
-    end
+    local objtype = uiobjecttypes.GetOrThrow(typename)
     log(3, 'creating %s%s', objtype.name, objname and (' named ' .. objname) or '')
     local objp = newproxy()
     local obj = setmetatable({ [0] = objp }, objtype.sandboxMT)
@@ -212,13 +211,10 @@ return function(datalua, envmodule, events, log, loglevel, parentkey, scripts, t
     env = env,
     frames = frames,
     GetDebugName = GetDebugName,
-    InheritsFrom = InheritsFrom,
-    IsIntrinsicType = IsIntrinsicType,
     NextFrame = NextFrame,
     ParentSub = ParentSub,
     secureenv = secureenv,
     SetParent = SetParent,
-    uiobjectTypes = uiobjectTypes,
     UserData = uiobjects.UserData,
   }
 end
