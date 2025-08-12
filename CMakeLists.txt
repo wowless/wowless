@@ -1094,6 +1094,7 @@ lua2c(
   wowless.modules.funcheck=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/funcheck.lua
   wowless.modules.loader=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/loader.lua
   wowless.modules.macrotext=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/macrotext.lua
+  wowless.modules.parentkey=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/parentkey.lua
   wowless.modules.platform=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/platform.lua
   wowless.modules.scripts=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/scripts.lua
   wowless.modules.security=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/security.lua

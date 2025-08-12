@@ -149,13 +149,14 @@ ParentedObject/SetParent:
     modules:
     - api
 ParentedObjectBase/ClearParentKey:
-  luafile:
+  moduledelegate:
+    name: parentkey
 ParentedObjectBase/GetParentKey:
-  luafile:
-    modules:
-    - api
+  moduledelegate:
+    name: parentkey
 ParentedObjectBase/SetParentKey:
-  luafile:
+  moduledelegate:
+    name: parentkey
 Path/CreateControlPoint:
   luafile:
     modules:

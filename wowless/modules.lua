@@ -8,6 +8,7 @@ local specs = {
       'events',
       'log',
       'loglevel',
+      'parentkey',
       'scripts',
       'security',
       'templates',
@@ -54,6 +55,7 @@ local specs = {
     default = 0,
     root = true,
   },
+  parentkey = {},
   platform = {},
   scripts = {
     deps = { 'env', 'log', 'security' },

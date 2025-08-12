@@ -1,6 +1,19 @@
 local hlist = require('wowless.hlist')
 
-return function(addons, datalua, envmodule, events, log, loglevel, scripts, security, templatesmodule, time, uiobjects)
+return function(
+  addons,
+  datalua,
+  envmodule,
+  events,
+  log,
+  loglevel,
+  parentkey,
+  scripts,
+  security,
+  templatesmodule,
+  time,
+  uiobjects
+)
   local env = envmodule.env
   local frames = hlist()
   local secureenv = {}
@@ -71,15 +84,6 @@ return function(addons, datalua, envmodule, events, log, loglevel, scripts, secu
     end
   end
 
-  local function GetParentKey(ud)
-    for k, v in pairs(ud.parent.luarep) do
-      if ud.luarep == v then
-        return k
-      end
-    end
-    return nil
-  end
-
   local function GetDebugName(frame)
     local name = frame.name
     if name ~= nil then
@@ -88,7 +92,7 @@ return function(addons, datalua, envmodule, events, log, loglevel, scripts, secu
     name = ''
     local parent = frame.parent
     while parent do
-      local key = GetParentKey(frame) or string.match(tostring(frame), '^table: 0x0*(.*)$'):lower()
+      local key = parentkey.GetParentKey(frame) or string.match(tostring(frame), '^table: 0x0*(.*)$'):lower()
       name = key .. (name == '' and '' or ('.' .. name))
       local parentName = parent.name
       if parentName == 'UIParent' then
@@ -252,7 +256,6 @@ return function(addons, datalua, envmodule, events, log, loglevel, scripts, secu
     frames = frames,
     GetDebugName = GetDebugName,
     GetErrorCount = security.GetErrorCount,
-    GetParentKey = GetParentKey,
     InheritsFrom = InheritsFrom,
     IsIntrinsicType = IsIntrinsicType,
     IsVisible = IsVisible,
