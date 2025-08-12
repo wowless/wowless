@@ -243,7 +243,6 @@ return function(
     NextFrame = NextFrame,
     ParentSub = ParentSub,
     product = datalua.product,
-    RunScript = RunScript,
     secureenv = secureenv,
     SendEvent = SendEvent,
     SetParent = SetParent,

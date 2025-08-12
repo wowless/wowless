@@ -109,7 +109,7 @@ Frame/RegisterUnitEvent:
 Frame/SetAttribute:
   luafile:
     modules:
-    - api
+    - scripts
 Frame/SetAttributeNoHandler:
   luafile:
 Frame/SetFrameLevel:
