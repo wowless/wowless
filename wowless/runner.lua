@@ -254,7 +254,7 @@ local function run(cfg)
   loader.saveAllVariables()
 
   -- Last ditch invariant check.
-  for _, obj in pairs(api.uiobjects) do
+  for _, obj in pairs(modules.uiobjects.userdata) do
     assert(api.UserData(obj.luarep) == obj)
     for k, v in pairs(obj) do
       assert(type(v) ~= 'table' or (k ~= 'luarep') == not api.UserData(v), k)

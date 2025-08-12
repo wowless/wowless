@@ -236,7 +236,6 @@ return function(
     SetParent = SetParent,
     SetScript = scripts.SetScriptWithBindingType,
     templates = templates,
-    uiobjects = userdata,
     uiobjectTypes = uiobjectTypes,
     UserData = uiobjects.UserData,
   }
