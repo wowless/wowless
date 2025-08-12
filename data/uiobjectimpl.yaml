@@ -131,7 +131,7 @@ LayeredRegion/SetVertexColor:
 MessageFrame/AddMessage:
   luafile:
     modules:
-    - api
+    - log
 ModelScene/CreateActor:
   luafile:
     modules:
@@ -199,6 +199,7 @@ Region/SetPoint:
   luafile:
     modules:
     - api
+    - log
 Region/SetScale:
   luafile:
 Region/SetShown:

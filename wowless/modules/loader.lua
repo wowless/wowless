@@ -1,4 +1,4 @@
-return function(api, events, loadercfg)
+return function(api, events, loadercfg, log, loglevel)
   local SendEvent = events.SendEvent
 
   local rootDir = loadercfg.rootDir
@@ -62,7 +62,7 @@ return function(api, events, loadercfg)
       local t = api.env
       for part in value:gmatch('[^.]+') do
         if type(t) ~= 'table' then
-          api.log(1, 'warning: cannot find %q in _G', value)
+          log(1, 'warning: cannot find %q in _G', value)
           return nil
         end
         t = t[part]
@@ -77,7 +77,7 @@ return function(api, events, loadercfg)
       return n ~= nil and n ~= 0
     end
     if ty and ty ~= 'string' then
-      api.log(1, 'warning: bogus keyvalue/attribute type %q', ty)
+      log(1, 'warning: bogus keyvalue/attribute type %q', ty)
     end
     return value
   end
@@ -125,7 +125,7 @@ return function(api, events, loadercfg)
     if color then
       return color.r, color.g, color.b, color.a
     end
-    api.log(1, 'unknown color %q', name) -- issue #303 for why we warn instead of error
+    log(1, 'unknown color %q', name) -- issue #303 for why we warn instead of error
     return 0, 0, 0, 1
   end
 
@@ -143,7 +143,7 @@ return function(api, events, loadercfg)
     if after and not before then
       local f = after.AddMessage
       after.AddMessage = function(self, text, ...)
-        api.log(1, '[%s] %s', self:GetDebugName(), tostring(text))
+        log(1, '[%s] %s', self:GetDebugName(), tostring(text))
         f(self, text, ...)
       end
     end
@@ -157,13 +157,13 @@ return function(api, events, loadercfg)
       local fnattr = script.attr['function']
       fn = env[fnattr]
       if not fn then
-        api.log(2, 'unknown script function %q on %q', fnattr, obj:GetDebugName())
+        log(2, 'unknown script function %q on %q', fnattr, obj:GetDebugName())
       end
     elseif script.attr.method then
       local mattr = script.attr.method
       fn = obj.luarep[mattr]
       if not fn then
-        api.log(2, 'unknown script method %q on %q', mattr, obj:GetDebugName())
+        log(2, 'unknown script method %q on %q', mattr, obj:GetDebugName())
       end
     elseif scriptCache[env] and scriptCache[env][script] then
       fn = scriptCache[env][script]
@@ -218,7 +218,7 @@ return function(api, events, loadercfg)
         obj = ud.parent and ud.parent.luarep
       else
         if not obj[p] then
-          api.log(1, 'invalid relativeKey %q', key)
+          log(1, 'invalid relativeKey %q', key)
           return nil
         end
         obj = obj[p]
@@ -310,7 +310,7 @@ return function(api, events, loadercfg)
       if t then
         api.UserData(t):AddMaskTexture(parent.luarep)
       else
-        api.log(1, 'cannot find maskedtexture childkey %s', e.attr.childkey)
+        log(1, 'cannot find maskedtexture childkey %s', e.attr.childkey)
       end
     end,
     maxresize = function(_, e, parent)
@@ -548,9 +548,9 @@ return function(api, events, loadercfg)
             assert(e.attr.name, 'cannot create anonymous intrinsic')
             local name = string.lower(e.attr.name)
             if api.uiobjectTypes[name] then
-              api.log(1, 'overwriting intrinsic %s', e.attr.name)
+              log(1, 'overwriting intrinsic %s', e.attr.name)
             end
-            api.log(3, 'creating intrinsic %s', e.attr.name)
+            log(3, 'creating intrinsic %s', e.attr.name)
             local basetype = string.lower(e.type)
             local base = api.uiobjectTypes[basetype]
             api.uiobjectTypes[name] = {
@@ -568,15 +568,15 @@ return function(api, events, loadercfg)
               assert(e.attr.name, 'cannot create anonymous template')
               local name = string.lower(e.attr.name)
               if api.templates[name] then
-                api.log(1, 'overwriting template %s', e.attr.name)
+                log(1, 'overwriting template %s', e.attr.name)
               end
-              api.log(3, 'creating template %s', e.attr.name)
+              log(3, 'creating template %s', e.attr.name)
               api.templates[name] = template
             end
             if ltype == 'font' or (not virtual or ctx.ignoreVirtual) then
               local name = e.attr.name
               if virtual and ctx.ignoreVirtual then
-                api.log(1, 'ignoring virtual on %s', tostring(name))
+                log(1, 'ignoring virtual on %s', tostring(name))
               end
               local ety = e.type == 'worldframe' and 'frame' or e.type
               local env = ctx.useAddonEnv and addonEnv or ctx.useSecureEnv and api.secureenv or api.env
@@ -634,9 +634,9 @@ return function(api, events, loadercfg)
 
       api.CallSafely(function()
         local root, warnings = parseXml(xmlstr)
-        if api.loglevel >= 3 then
+        if loglevel >= 3 then
           for _, warning in ipairs(warnings) do
-            api.log(3, filename .. ': ' .. warning)
+            log(3, filename .. ': ' .. warning)
           end
         end
         local ctx = {
@@ -654,7 +654,7 @@ return function(api, events, loadercfg)
     function loadFile(filename, closureTaint, secondaryFileName)
       filename = path.normalize(filename)
       api.CallSafely(function()
-        api.log(2, 'loading file %s', filename)
+        log(2, 'loading file %s', filename)
         local loadFn
         if filename:sub(-4) == '.lua' then
           loadFn = loadLuaString
@@ -670,7 +670,7 @@ return function(api, events, loadercfg)
         if success then
           loadFn(filename, content, nil, useSecureEnv, closureTaint, addonName, addonEnv)
         else
-          api.log(1, 'skipping missing file %s', filename)
+          log(1, 'skipping missing file %s', filename)
         end
       end)
     end
@@ -694,31 +694,31 @@ return function(api, events, loadercfg)
   end
 
   local function resolveTocDir(tocDir)
-    api.log(1, 'resolving %s', tocDir)
+    log(1, 'resolving %s', tocDir)
     local base = path.basename(tocDir)
     for _, suffix in ipairs(tocsuffixes) do
       local tocFile = path.join(tocDir, base .. suffix .. '.toc')
       local success, content = pcall(readFile, tocFile)
       if success then
-        api.log(1, 'using toc %s', tocFile)
+        log(1, 'using toc %s', tocFile)
         return parseToc(tocFile, content)
       end
     end
-    api.log(1, 'no valid toc for %s', tocDir)
+    log(1, 'no valid toc for %s', tocDir)
     return nil
   end
 
   local function resolveBindingsXml(tocDir)
-    api.log(1, 'resolving bindings for %s', tocDir)
+    log(1, 'resolving bindings for %s', tocDir)
     for _, suffix in ipairs(tocsuffixes) do
       local bindingsFile = path.join(tocDir, 'Bindings' .. suffix .. '.xml')
       local success, content = pcall(readFile, bindingsFile)
       if success then
-        api.log(1, 'using bindings %s', bindingsFile)
+        log(1, 'using bindings %s', bindingsFile)
         return bindingsFile, content
       end
     end
-    api.log(1, 'no valid bindings for %s', tocDir)
+    log(1, 'no valid bindings for %s', tocDir)
     return nil
   end
 
@@ -782,7 +782,7 @@ return function(api, events, loadercfg)
       for name in string.gmatch(addon.attrs.LoadWith or '', '[^, ]+') do
         local dep = addonData[name:lower()]
         if not dep then
-          api.log(1, 'skipping unknown addon %q in LoadWith of %q', name, addon.name)
+          log(1, 'skipping unknown addon %q in LoadWith of %q', name, addon.name)
         else
           table.insert(dep.revwiths, addon.name)
         end
@@ -807,36 +807,36 @@ return function(api, events, loadercfg)
     end
     addonName = toc.name
     if toc.attrs.AllowLoad and toc.attrs.AllowLoad:lower() == 'glue' then
-      api.log(1, 'skipping glue-only addon %s', addonName)
+      log(1, 'skipping glue-only addon %s', addonName)
       return
     end
     if forceSecure then
       if not toc.loaded then
-        api.log(1, 'UseSecureEnvironment dep addon %s not yet loaded insecurely, loading', addonName)
+        log(1, 'UseSecureEnvironment dep addon %s not yet loaded insecurely, loading', addonName)
         doLoadAddon(addonName, false)
       end
       if toc.secdeploaded then
-        api.log(1, 'UseSecureEnvironment dep addon %s is already loaded, skipping', addonName)
+        log(1, 'UseSecureEnvironment dep addon %s is already loaded, skipping', addonName)
         return
       end
       if toc.secdeploadattempted then
-        api.log(1, 'UseSecureEnvironment dep addon %s has a load pending already, skipping', addonName)
+        log(1, 'UseSecureEnvironment dep addon %s has a load pending already, skipping', addonName)
         return
       end
       toc.secdeploadattempted = true
     else
       if toc.loaded then
-        api.log(1, 'addon %s is already loaded, skipping', addonName)
+        log(1, 'addon %s is already loaded, skipping', addonName)
         return
       end
       if toc.loadattempted then
-        api.log(1, 'addon %s has a load pending already, skipping', addonName)
+        log(1, 'addon %s has a load pending already, skipping', addonName)
         return
       end
       toc.loadattempted = true
     end
     local useSecureEnv = forceSecure or toc.attrs.UseSecureEnvironment == '1'
-    api.log(1, 'loading addon dependencies for %s', addonName)
+    log(1, 'loading addon dependencies for %s', addonName)
     for _, attr in ipairs(depAttrs) do
       for dep in string.gmatch(toc.attrs[attr] or '', '[^, ]+') do
         doLoadAddon(dep, useSecureEnv)
@@ -850,7 +850,7 @@ return function(api, events, loadercfg)
       end
     end
     local kindstr = forceSecure and ' (secure dependency)' or useSecureEnv and ' (secure)' or ''
-    api.log(1, 'loading addon files for %s%s', addonName, kindstr)
+    log(1, 'loading addon files for %s%s', addonName, kindstr)
     local addonEnv = toc.attrs.SuppressLocalTableRef ~= '1' and {} or nil
     local loadFile = forAddon(addonName, addonEnv, toc.dir, useSecureEnv, forceSecure)
     for _, file in ipairs(toc.files) do
@@ -866,10 +866,10 @@ return function(api, events, loadercfg)
     else
       toc.loaded = true
     end
-    api.log(1, 'done loading %s', addonName)
+    log(1, 'done loading %s', addonName)
     SendEvent('ADDON_LOADED', addonName, not not toc.bindings)
     for _, revwith in ipairs(toc.revwiths) do
-      api.log(1, 'processing LoadWith %q -> %q', addonName, revwith)
+      log(1, 'processing LoadWith %q -> %q', addonName, revwith)
       doLoadAddon(revwith)
     end
   end
@@ -879,7 +879,7 @@ return function(api, events, loadercfg)
     if success then
       return true, nil
     else
-      api.log(1, 'loading %s failed: %s', addonName, tostring(msg))
+      log(1, 'loading %s failed: %s', addonName, tostring(msg))
       return false, 'LOAD_FAILED'
     end
   end

@@ -238,8 +238,6 @@ return function(
     GetErrorCount = security.GetErrorCount,
     InheritsFrom = InheritsFrom,
     IsIntrinsicType = IsIntrinsicType,
-    log = log,
-    loglevel = loglevel,
     NextFrame = NextFrame,
     ParentSub = ParentSub,
     product = datalua.product,

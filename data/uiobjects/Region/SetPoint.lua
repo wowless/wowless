@@ -1,4 +1,4 @@
-local api = ...
+local api, log = ...
 local validPoints = require('runtime.stringenums').FramePoint
 return function(self, point, ...)
   -- TODO handle resetting points
@@ -13,7 +13,7 @@ return function(self, point, ...)
     local name = api.ParentSub(maybeRelativeTo, relativeTo)
     local frame = api.env[name]
     if not frame then
-      api.log(1, 'SetPoint to unknown frame %q', name)
+      log(1, 'SetPoint to unknown frame %q', name)
     end
     relativeTo = frame and api.UserData(frame)
     idx = idx + 1

@@ -35,7 +35,7 @@ local specs = {
     deps = { 'typecheck', 'log' },
   },
   loader = {
-    deps = { 'api', 'events', 'loadercfg' },
+    deps = { 'api', 'events', 'loadercfg', 'log', 'loglevel' },
   },
   loadercfg = {
     default = {},

@@ -43,7 +43,7 @@ local function loadSqls(sqlitedb, sqls)
 end
 
 local function loadFunctions(api, loader)
-  api.log(1, 'loading functions')
+  api.modules.log(1, 'loading functions')
   local datalua = api.datalua
   local apis = datalua.apis
   local sqls = loadSqls(loader.sqlitedb, datalua.sqls)
@@ -106,7 +106,7 @@ local function loadFunctions(api, loader)
       util.tset(rawfns, fn, v)
     end
   end
-  api.log(1, 'functions loaded')
+  api.modules.log(1, 'functions loaded')
   return fns, rawfns
 end
 

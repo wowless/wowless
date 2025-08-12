@@ -67,7 +67,7 @@ local function run(cfg)
     local addon = path.basename(d)
     local success, reason = loader.loadAddon(addon)
     if not success then
-      api.log(1, 'failed to load %s: %s', addon, reason)
+      log(1, 'failed to load %s: %s', addon, reason)
     end
   end
   local SendEvent = modules.events.SendEvent
@@ -111,7 +111,7 @@ local function run(cfg)
   local scripts = {
     bindings = function()
       for name, fn in sorted(loader.bindings) do
-        api.log(2, 'firing binding ' .. name)
+        log(2, 'firing binding ' .. name)
         api.CallSandbox(fn, 'down')
         api.CallSandbox(fn, 'up')
       end
@@ -119,7 +119,7 @@ local function run(cfg)
     clicks = function()
       for frame in api.frames:entries() do
         if frame:IsObjectType('button') and frame:IsVisible() then
-          api.log(2, 'clicking %s', frame:GetDebugName())
+          log(2, 'clicking %s', frame:GetDebugName())
           api.CallSafely(frame.Click, frame)
         end
       end
@@ -136,14 +136,14 @@ local function run(cfg)
         cmds[v] = k:match('^EMOTE%d+_CMD%d+$') or nil
       end
       for cmd in sorted(cmds) do
-        api.log(2, 'firing emote chat command %s', cmd)
+        log(2, 'firing emote chat command %s', cmd)
         modules.macrotext.RunMacroText(cmd)
       end
     end,
     enterleave = function()
       for frame in api.frames:entries() do
         if frame:IsVisible() then
-          api.log(2, 'enter/leave %s', frame:GetDebugName())
+          log(2, 'enter/leave %s', frame:GetDebugName())
           modules.scripts.RunScript(frame, 'OnEnter', true)
           modules.scripts.RunScript(frame, 'OnLeave', true)
         end
@@ -216,7 +216,7 @@ local function run(cfg)
         end
       end
       for k, v in sorted(cmds) do
-        api.log(2, 'firing chat command ' .. k .. ' via ' .. v)
+        log(2, 'firing chat command ' .. k .. ' via ' .. v)
         modules.macrotext.RunMacroText(v)
       end
     end,
@@ -241,7 +241,7 @@ local function run(cfg)
   for _, script in ipairs(cfg.scripts and { strsplit(',', cfg.scripts) } or defaultScripts) do
     local fn = scripts[script]
     if fn then
-      api.log(1, 'running script %s', script)
+      log(1, 'running script %s', script)
       fn()
     end
   end
