@@ -70,18 +70,19 @@ local function run(cfg)
       api.log(1, 'failed to load %s: %s', addon, reason)
     end
   end
+  local SendEvent = modules.events.SendEvent
   local system = modules.system
   system.LogIn()
-  api.SendEvent('PLAYER_LOGIN')
-  api.SendEvent('UPDATE_CHAT_WINDOWS')
-  api.SendEvent('VARIABLES_LOADED')
-  api.SendEvent('PLAYER_ENTERING_WORLD', true, false)
-  api.SendEvent('TRIAL_STATUS_UPDATE')
-  api.SendEvent('DISPLAY_SIZE_CHANGED')
+  SendEvent('PLAYER_LOGIN')
+  SendEvent('UPDATE_CHAT_WINDOWS')
+  SendEvent('VARIABLES_LOADED')
+  SendEvent('PLAYER_ENTERING_WORLD', true, false)
+  SendEvent('TRIAL_STATUS_UPDATE')
+  SendEvent('DISPLAY_SIZE_CHANGED')
   if api.env.UIParent then -- Super duper hack to unblock 10.0 UIPanel code.
     api.UserData(api.env.UIParent):SetSize(system.GetScreenWidth(), system.GetScreenHeight())
   end
-  api.SendEvent('SPELLS_CHANGED')
+  SendEvent('SPELLS_CHANGED')
   if cfg.debug then
     print('_, api = debug.getlocal(3, 5)')
     debug.debug()
@@ -125,9 +126,9 @@ local function run(cfg)
     end,
     combat = function()
       api.NextFrame()
-      api.SendEvent('PLAYER_REGEN_DISABLED')
+      SendEvent('PLAYER_REGEN_DISABLED')
       api.NextFrame()
-      api.SendEvent('PLAYER_REGEN_ENABLED')
+      SendEvent('PLAYER_REGEN_ENABLED')
     end,
     emotes = function()
       local cmds = {}
@@ -171,19 +172,19 @@ local function run(cfg)
         if not eventBlacklist[k] and not skip[k] then
           if v.stub == 'return ' or cfg.allevents then
             local text = 'local Mixin = ...;' .. v.stub
-            api.SendEvent(k, assert(loadstring_untainted(text))(stubMixin))
+            SendEvent(k, assert(loadstring_untainted(text))(stubMixin))
           end
         end
       end
     end,
     loot = function()
-      api.SendEvent('LOOT_READY', false)
+      SendEvent('LOOT_READY', false)
       if datalua.config.runtime.send_isfromitem then
-        api.SendEvent('LOOT_OPENED', false, false)
+        SendEvent('LOOT_OPENED', false, false)
       else
-        api.SendEvent('LOOT_OPENED', false)
+        SendEvent('LOOT_OPENED', false)
       end
-      api.SendEvent('LOOT_CLOSED')
+      SendEvent('LOOT_CLOSED')
     end,
     macrotext = function()
       local b = api.env.ActionButton1
@@ -245,7 +246,7 @@ local function run(cfg)
     end
   end
 
-  api.SendEvent('PLAYER_LOGOUT')
+  SendEvent('PLAYER_LOGOUT')
   loader.saveAllVariables()
 
   -- Last ditch invariant check.

@@ -244,7 +244,6 @@ return function(
     ParentSub = ParentSub,
     product = datalua.product,
     secureenv = secureenv,
-    SendEvent = SendEvent,
     SetParent = SetParent,
     SetScript = scripts.SetScriptWithBindingType,
     templates = templates,

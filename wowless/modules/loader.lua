@@ -1,8 +1,10 @@
-return function(api, cfg)
-  local rootDir = cfg.rootDir
+return function(api, events, loadercfg)
+  local SendEvent = events.SendEvent
+
+  local rootDir = loadercfg.rootDir
   local product = api.product
   assert(product, 'loader requires a product')
-  local otherAddonDirs = cfg.otherAddonDirs or {}
+  local otherAddonDirs = loadercfg.otherAddonDirs or {}
   local datalua = api.datalua
 
   local path = require('path')
@@ -856,7 +858,7 @@ return function(api, cfg)
     end
     if toc.bindings then
       loadFile(toc.bindings)
-      api.SendEvent('UPDATE_BINDINGS')
+      SendEvent('UPDATE_BINDINGS')
     end
     loadFile(('out/%s/SavedVariables/%s.lua'):format(product, addonName), toc.signed and 'SavedVariables' or nil)
     if forceSecure then
@@ -865,7 +867,7 @@ return function(api, cfg)
       toc.loaded = true
     end
     api.log(1, 'done loading %s', addonName)
-    api.SendEvent('ADDON_LOADED', addonName, not not toc.bindings)
+    SendEvent('ADDON_LOADED', addonName, not not toc.bindings)
     for _, revwith in ipairs(toc.revwiths) do
       api.log(1, 'processing LoadWith %q -> %q', addonName, revwith)
       doLoadAddon(revwith)
