@@ -1,4 +1,4 @@
-return function(addons, api, datalua, events, loadercfg, log, loglevel, security)
+return function(addons, api, datalua, events, loadercfg, log, loglevel, scripts, security)
   local SendEvent = events.SendEvent
 
   local rootDir = loadercfg.rootDir
@@ -206,7 +206,7 @@ return function(addons, api, datalua, events, loadercfg, log, loglevel, security
       elseif intrinsic then
         bindingType = 0
       end
-      api.SetScript(obj, script.type, bindingType, fn)
+      scripts.SetScriptWithBindingType(obj, script.type, bindingType, fn)
     end
   end
 

@@ -233,7 +233,6 @@ return function(
     ParentSub = ParentSub,
     secureenv = secureenv,
     SetParent = SetParent,
-    SetScript = scripts.SetScriptWithBindingType,
     templates = templates,
     uiobjectTypes = uiobjectTypes,
     UserData = uiobjects.UserData,
