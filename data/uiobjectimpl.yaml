@@ -141,13 +141,11 @@ MouseMixin/EnableMouse:
 MouseMixin/IsMouseEnabled:
   luafile:
 ParentedObject/GetDebugName:
-  luafile:
-    modules:
-    - api
+  moduledelegate:
+    name: api
 ParentedObject/SetParent:
-  luafile:
-    modules:
-    - api
+  moduledelegate:
+    name: api
 ParentedObjectBase/ClearParentKey:
   moduledelegate:
     name: parentkey
