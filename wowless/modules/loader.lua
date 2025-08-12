@@ -1,4 +1,4 @@
-return function(api, events, loadercfg, log, loglevel)
+return function(api, events, loadercfg, log, loglevel, security)
   local SendEvent = events.SendEvent
 
   local rootDir = loadercfg.rootDir
@@ -136,7 +136,7 @@ return function(api, events, loadercfg, log, loglevel)
       setfenv(fn, api.secureenv)
     end
     debug.setnewclosuretaint(closureTaint)
-    api.CallSandbox(fn, ...)
+    security.CallSandbox(fn, ...)
     debug.setnewclosuretaint(nil)
     -- Super hacky hack to hook ScrollingMessageFrameMixin.AddMessage
     local after = api.env.ScrollingMessageFrameMixin
@@ -171,7 +171,7 @@ return function(api, events, loadercfg, log, loglevel)
       local args = xmlimpls[string.lower(script.type)].tag.script.args or 'self, ...'
       local fnstr = 'return function(' .. args .. ') ' .. script.text .. ' end'
       local outfn = loadstr(fnstr, filename, script.line)
-      local success, ret = api.CallSandbox(outfn)
+      local success, ret = security.CallSandbox(outfn)
       assert(success)
       fn = setfenv(ret, env)
       scriptCache[env] = scriptCache[env] or {}
@@ -632,7 +632,7 @@ return function(api, events, loadercfg, log, loglevel)
         end
       end
 
-      api.CallSafely(function()
+      security.CallSafely(function()
         local root, warnings = parseXml(xmlstr)
         if loglevel >= 3 then
           for _, warning in ipairs(warnings) do
@@ -653,7 +653,7 @@ return function(api, events, loadercfg, log, loglevel)
 
     function loadFile(filename, closureTaint, secondaryFileName)
       filename = path.normalize(filename)
-      api.CallSafely(function()
+      security.CallSafely(function()
         log(2, 'loading file %s', filename)
         local loadFn
         if filename:sub(-4) == '.lua' then

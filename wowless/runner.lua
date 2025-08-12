@@ -70,7 +70,11 @@ local function run(cfg)
       log(1, 'failed to load %s: %s', addon, reason)
     end
   end
+
   local SendEvent = modules.events.SendEvent
+  local CallSafely = modules.security.CallSafely
+  local CallSandbox = modules.security.CallSandbox
+
   local system = modules.system
   system.LogIn()
   SendEvent('PLAYER_LOGIN')
@@ -99,7 +103,7 @@ local function run(cfg)
     doit('frame0')
     doit('frame1')
     if api.env.ToggleTalentFrame then
-      api.CallSandbox(api.env.ToggleTalentFrame)
+      CallSandbox(api.env.ToggleTalentFrame)
       doit('frame1')
     end
     os.exit(0)
@@ -112,15 +116,15 @@ local function run(cfg)
     bindings = function()
       for name, fn in sorted(loader.bindings) do
         log(2, 'firing binding ' .. name)
-        api.CallSandbox(fn, 'down')
-        api.CallSandbox(fn, 'up')
+        CallSandbox(fn, 'down')
+        CallSandbox(fn, 'up')
       end
     end,
     clicks = function()
       for frame in api.frames:entries() do
         if frame:IsObjectType('button') and frame:IsVisible() then
           log(2, 'clicking %s', frame:GetDebugName())
-          api.CallSafely(frame.Click, frame)
+          CallSafely(frame.Click, frame)
         end
       end
     end,
@@ -209,7 +213,7 @@ local function run(cfg)
       end
       if cfg.dir then
         for k in pairs(runnercfg.skip_slashcmds or {}) do
-          api.CallSafely(function()
+          CallSafely(function()
             assert(cmds[k], 'missing skip_slashcmd ' .. k)
           end)
           cmds[k] = nil

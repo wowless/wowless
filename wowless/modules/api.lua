@@ -22,8 +22,6 @@ return function(
   local uiobjectTypes = {}
   local userdata = uiobjects.userdata
 
-  local CallSafely = security.CallSafely
-  local CallSandbox = security.CallSandbox
   local IsVisible = visibility.IsVisible
   local RunScript = scripts.RunScript
   local SendEvent = events.SendEvent
@@ -226,8 +224,6 @@ return function(
 
   return {
     addons = addons.addons,
-    CallSafely = CallSafely,
-    CallSandbox = CallSandbox,
     CreateForbiddenFrame = CreateFrame, -- TODO implement properly
     CreateFrame = CreateFrame,
     CreateUIObject = CreateUIObject,
