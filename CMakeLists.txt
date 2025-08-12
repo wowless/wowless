@@ -409,6 +409,7 @@ endfunction()
 
 yaml2lua(families)
 yaml2lua(gametypes)
+yaml2lua(modules)
 yaml2lua(products)
 yaml2lua(stringenums)
 
@@ -1000,6 +1001,7 @@ list(
   gametypes
   globals
   impl
+  modules
   products
   schema
   schematype
@@ -1022,6 +1024,7 @@ lua2c(
   build.data.families=runtime/families.lua
   build.data.gametypes=runtime/gametypes.lua
   build.data.impl=runtime/impl.lua
+  build.data.modules=runtime/modules.lua
   build.data.products=runtime/products.lua
   build.data.sql=runtime/sql.lua
   build.data.stringenums=runtime/stringenums.lua
@@ -1075,6 +1078,7 @@ $<$<PLATFORM_ID:Windows>:windows>\
 lua2c(
   wowlesslib
   luapath=p
+  runtime.modules=runtime/modules.lua
   runtime.platform=runtime/platform.lua
   runtime.stringenums=runtime/stringenums.lua
   wowapi.loader=${CMAKE_CURRENT_SOURCE_DIR}/wowapi/loader.lua

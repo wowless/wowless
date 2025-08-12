@@ -3,6 +3,7 @@ local domains = {
   family = wdata.families,
   gametype = wdata.gametypes,
   impl = wdata.impl,
+  module = wdata.modules,
   schema = wdata.schemas,
   sql = wdata.sql,
   stringenum = wdata.stringenums,

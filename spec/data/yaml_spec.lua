@@ -11,6 +11,7 @@ local globalschemas = {
   ['data/families'] = 'families',
   ['data/gametypes'] = 'gametypes',
   ['data/impl'] = 'impl',
+  ['data/modules'] = 'modules',
   ['data/products'] = 'products',
   ['data/sql'] = 'sql',
   ['data/stringenums'] = 'stringenums',

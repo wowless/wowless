@@ -1,0 +1,107 @@
+addons:
+  deps:
+api:
+  deps:
+    datalua:
+    env:
+    events:
+    log:
+    loglevel:
+    parentkey:
+    scripts:
+    templates:
+    time:
+    uiobjects:
+    uiobjecttypes:
+    visibility:
+calendar:
+  deps:
+cvars:
+  deps:
+    datalua:
+datalua:
+  root:
+datetime:
+  deps:
+    datalua:
+env:
+  deps:
+events:
+  deps:
+    datalua:
+    funcheck:
+    log:
+    loglevel:
+    scripts:
+funcheck:
+  deps:
+    log:
+    typecheck:
+loader:
+  deps:
+    addons:
+    api:
+    datalua:
+    events:
+    loadercfg:
+    log:
+    loglevel:
+    scripts:
+    security:
+    templates:
+    uiobjecttypes:
+loadercfg:
+  root:
+    default: '{}'
+log:
+  root:
+    default: function() end
+loglevel:
+  root:
+    default: '0'
+macrotext:
+  deps:
+    security:
+maxErrors:
+  root:
+    default: '0'
+parentkey:
+  deps:
+platform:
+  deps:
+scripts:
+  deps:
+    env:
+    log:
+    security:
+security:
+  deps:
+    log:
+    maxErrors:
+system:
+  deps:
+talents:
+  deps:
+templates:
+  deps:
+    log:
+time:
+  deps:
+    log:
+    security:
+typecheck:
+  deps:
+    addons:
+    datalua:
+    env:
+    uiobjects:
+    units:
+uiobjects:
+  deps:
+uiobjecttypes:
+  deps:
+units:
+  deps:
+visibility:
+  deps:
+    scripts:

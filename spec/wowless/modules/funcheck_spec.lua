@@ -8,7 +8,7 @@ describe('funcheck', function()
   local function log(_, fmt, ...)
     return error(fmt:format(...))
   end
-  local funcheck = require('wowless.modules.funcheck')(typecheck, log)
+  local funcheck = require('wowless.modules.funcheck')(log, typecheck)
   local function checkret(nexpected, expected, ...)
     assert.same(nexpected, select('#', ...))
     assert.same(expected, { ... })

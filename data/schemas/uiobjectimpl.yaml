@@ -8,9 +8,11 @@ type:
           record:
             modules:
               type:
-                sequenceof: string
+                sequenceof:
+                  ref: module
         moduledelegate:
           record:
             name:
               required: true
-              type: string
+              type:
+                ref: module

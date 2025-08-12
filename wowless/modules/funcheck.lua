@@ -1,4 +1,4 @@
-return function(typechecker, log)
+return function(log, typechecker)
   local function makeCheckInputs(fname, apicfg)
     local ins = apicfg.inputs
     local nins = #apicfg.inputs

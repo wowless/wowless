@@ -12,7 +12,8 @@ type:
           record:
             modules:
               type:
-                sequenceof: string
+                sequenceof:
+                  ref: module
             sqls:
               type:
                 sequenceof:
@@ -30,5 +31,6 @@ type:
               type: string
             name:
               required: true
-              type: string
+              type:
+                ref: module
         stdlib: string

@@ -35,6 +35,7 @@ type:
         family: tag
         gametype: tag
         impl: tag
+        module: tag
         schema: tag
         sql: tag
         stringenum: tag
