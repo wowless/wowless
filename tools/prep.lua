@@ -20,6 +20,7 @@ local function readFile(f)
 end
 local plprettywrite = require('pl.pretty').write
 local Mixin = require('wowless.util').mixin
+local sorted = require('pl.tablex').sort
 
 local globals = parseYaml('data/products/' .. product .. '/globals.yaml')
 local structures = parseYaml('data/products/' .. product .. '/structures.yaml')
@@ -56,7 +57,7 @@ local specDefault = (function()
     if not structureDefaults[name] then
       local st = assert(structures[name], name)
       local t = {}
-      for fname, field in require('pl.tablex').sort(st.fields) do
+      for fname, field in sorted(st.fields) do
         local v = specDefault(field)
         if v ~= 'nil' then
           table.insert(t, ('[%q]=%s'):format(fname, v))
@@ -149,11 +150,18 @@ local implimpls = {
     }
   end,
   impl = function(impl, name)
+    local modules
+    if impl.modules then
+      modules = {}
+      for m in sorted(impl.modules) do
+        table.insert(modules, m)
+      end
+    end
     for _, sql in ipairs(impl.sqls or {}) do
       ensuresql(sql)
     end
     return {
-      modules = impl.modules,
+      modules = modules,
       sqls = impl.sqls,
       src = readFile('data/impl/' .. name .. '.lua'),
     }
@@ -262,10 +270,17 @@ local function mkuiobjectinit(k)
 end
 local uiobjectimplimplmakers = {
   luafile = function(impl, k)
+    local modules
+    if impl.modules then
+      modules = {}
+      for m in sorted(impl.modules) do
+        table.insert(modules, m)
+      end
+    end
     local src = 'data/uiobjects/' .. k .. '.lua'
     return {
       impl = readFile(src),
-      modules = impl.modules,
+      modules = modules,
       src = src,
     }
   end,
@@ -395,7 +410,7 @@ local uiobjectimplmakers = {
 local uiobjects = {}
 for k, v in pairs(uiobjectdata) do
   local constructor = { 'local hlist=...;return function()return{' }
-  for fk, fv in require('pl.tablex').sort(mkuiobjectinit(k)) do
+  for fk, fv in sorted(mkuiobjectinit(k)) do
     table.insert(constructor, ('%s=%s,'):format(fk, fv))
   end
   table.insert(constructor, '}end')

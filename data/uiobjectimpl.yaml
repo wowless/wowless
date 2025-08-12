@@ -5,14 +5,14 @@ Animation/GetTarget:
 AnimationGroup/CreateAnimation:
   luafile:
     modules:
-    - api
-    - uiobjecttypes
+      api:
+      uiobjecttypes:
 AnimationGroup/GetAnimations:
   luafile:
 Button/Click:
   luafile:
     modules:
-    - scripts
+      scripts:
 Button/Disable:
   luafile:
 Button/Enable:
@@ -28,31 +28,31 @@ Button/SetButtonState:
 Button/SetDisabledAtlas:
   luafile:
     modules:
-    - api
+      api:
 Button/SetEnabled:
   luafile:
 Button/SetFontString:
   luafile:
     modules:
-    - api
+      api:
 Button/SetFormattedText:
   luafile:
 Button/SetHighlightAtlas:
   luafile:
     modules:
-    - api
+      api:
 Button/SetNormalAtlas:
   luafile:
     modules:
-    - api
+      api:
 Button/SetPushedAtlas:
   luafile:
     modules:
-    - api
+      api:
 Button/SetText:
   luafile:
     modules:
-    - api
+      api:
 CheckButton/SetChecked:
   luafile:
 EditBox/Disable:
@@ -70,20 +70,20 @@ ForbiddenMixin/SetForbidden:
 Frame/CreateFontString:
   luafile:
     modules:
-    - api
+      api:
 Frame/CreateLine:
   luafile:
     modules:
-    - api
+      api:
 Frame/CreateMaskTexture:
   luafile:
     modules:
-    - api
+      api:
 Frame/CreateTexture:
   luafile:
     modules:
-    - api
-    - templates
+      api:
+      templates:
 Frame/GetAttribute:
   luafile:
 Frame/GetChildren:
@@ -111,7 +111,7 @@ Frame/RegisterUnitEvent:
 Frame/SetAttribute:
   luafile:
     modules:
-    - scripts
+      scripts:
 Frame/SetAttributeNoHandler:
   luafile:
 Frame/SetFrameLevel:
@@ -133,12 +133,12 @@ LayeredRegion/SetVertexColor:
 MessageFrame/AddMessage:
   luafile:
     modules:
-    - log
+      log:
 ModelScene/CreateActor:
   luafile:
     modules:
-    - api
-    - templates
+      api:
+      templates:
 MouseMixin/EnableMouse:
   luafile:
 MouseMixin/IsMouseEnabled:
@@ -161,7 +161,7 @@ ParentedObjectBase/SetParentKey:
 Path/CreateControlPoint:
   luafile:
     modules:
-    - api
+      api:
 Path/GetControlPoints:
   luafile:
 Region/ClearAllPoints:
@@ -169,7 +169,7 @@ Region/ClearAllPoints:
 Region/CreateAnimationGroup:
   luafile:
     modules:
-    - api
+      api:
 Region/GetAnimationGroups:
   luafile:
 Region/GetCenter:
@@ -201,8 +201,8 @@ Region/SetAlpha:
 Region/SetPoint:
   luafile:
     modules:
-    - api
-    - log
+      api:
+      log:
 Region/SetScale:
   luafile:
 Region/SetShown:
@@ -223,7 +223,7 @@ ScriptObject/SetScript:
 ScrollFrame/SetScrollChild:
   luafile:
     modules:
-    - api
+      api:
 Slider/Disable:
   luafile:
 Slider/Enable:
@@ -235,11 +235,11 @@ StatusBar/SetStatusBarColor:
 Texture/GetTexture:
   luafile:
     modules:
-    - datalua
+      datalua:
 Texture/SetAtlas:
   luafile:
     modules:
-    - api
+      api:
 Texture/SetColorTexture:
   luafile:
 Texture/SetTexCoord:
@@ -249,8 +249,8 @@ Texture/SetTexture:
 UIObject/GetObjectType:
   luafile:
     modules:
-    - uiobjecttypes
+      uiobjecttypes:
 UIObject/IsObjectType:
   luafile:
     modules:
-    - uiobjecttypes
+      uiobjecttypes:

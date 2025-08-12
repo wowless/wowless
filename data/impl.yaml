@@ -34,7 +34,7 @@ C_ChatInfo.ReplaceIconAndGroupExpressions:
 C_ClassTalents.GetActiveConfigID:
   impl:
     modules:
-    - talents
+      talents:
 C_ClassTalents.GetTraitTreeForSpec:
   impl:
     sqls:
@@ -42,11 +42,11 @@ C_ClassTalents.GetTraitTreeForSpec:
 C_ClassTalents.InitializeViewLoadout:
   impl:
     modules:
-    - talents
+      talents:
 C_ClassTalents.ViewLoadout:
   impl:
     modules:
-    - talents
+      talents:
     sqls:
     - GetSpecializationInfoByID
 C_Covenants.GetCovenantData:
@@ -123,7 +123,7 @@ C_ScriptedAnimations.GetAllScriptedAnimationEffects:
 C_SpecializationInfo.GetSpecializationInfo:
   impl:
     modules:
-    - units
+      units:
     sqls:
     - GetSpecializationInfo
 C_SpecializationInfo.GetSpecIDs:
@@ -133,13 +133,13 @@ C_SpecializationInfo.GetSpecIDs:
 C_Texture.GetAtlasInfo:
   impl:
     modules:
-    - env
+      env:
     sqls:
     - C_Texture.GetAtlasInfo
 C_Texture.GetAtlasInfo_11_1_5:
   impl:
     modules:
-    - env
+      env:
     sqls:
     - C_Texture.GetAtlasInfo_11_1_5
 C_Timer.After:
@@ -154,17 +154,17 @@ C_Timer.NewTimer:
 C_Traits.GetConfigInfo:
   impl:
     modules:
-    - datalua
-    - talents
-    - units
+      datalua:
+      talents:
+      units:
     sqls:
     - C_Traits.GetConfigInfo
 C_Traits.GetNodeInfo:
   impl:
     modules:
-    - datalua
-    - talents
-    - units
+      datalua:
+      talents:
+      units:
     sqls:
     - C_Traits.GetNodeInfo
     - C_Traits.GetNodeInfo.entries
@@ -178,15 +178,15 @@ C_Traits.GetTreeNodes:
 C_UI.GetUIParent:
   impl:
     modules:
-    - env
+      env:
 C_UI.GetWorldFrame:
   impl:
     modules:
-    - env
+      env:
 C_UIColor.GetColors:
   impl:
     modules:
-    - env
+      env:
     sqls:
     - C_UIColor.GetColors
 C_XMLUtil.GetTemplateInfo_10_2:
@@ -196,13 +196,13 @@ C_XMLUtil.GetTemplateInfo_10_2:
 ClassicExpansionAtLeast:
   impl:
     modules:
-    - datalua
+      datalua:
 collectgarbage:
   stdlib: collectgarbage
 ConsoleGetAllCommands:
   impl:
     modules:
-    - datalua
+      datalua:
 coroutine.create:
   stdlib: coroutine.create
 coroutine.resume:
@@ -218,7 +218,7 @@ coroutine.yield:
 CreateFont:
   impl:
     modules:
-    - api
+      api:
 CreateForbiddenFrame:
   moduledelegate:
     name: api
@@ -245,14 +245,14 @@ difftime:
 DoEmote:
   impl:
     modules:
-    - events
-    - log
+      events:
+      log:
     sqls:
     - DoEmote
 EnumerateFrames:
   impl:
     modules:
-    - api
+      api:
 error:
   stdlib: error
 fastrandom:
@@ -278,25 +278,25 @@ GetAuctionItemSubClasses:
 GetBuildInfo_10_1:
   impl:
     modules:
-    - datalua
+      datalua:
 GetBuildInfo_1_15_0:
   impl:
     modules:
-    - datalua
+      datalua:
 GetBuildInfo_3_4_2:
   impl:
     modules:
-    - datalua
+      datalua:
 GetButtonMetatable:
   impl:
     modules:
-    - uiobjecttypes
+      uiobjecttypes:
 GetChatWindowInfo:
   impl:
 GetChatWindowMessages:
   impl:
     modules:
-    - env
+      env:
 GetClassInfo:
   directsql: GetClassInfo
 GetClassInfo_Classic:
@@ -304,7 +304,7 @@ GetClassInfo_Classic:
 GetClickFrame:
   impl:
     modules:
-    - api
+      api:
 GetCurrentEnvironment:
   moduledelegate:
     name: env
@@ -316,11 +316,11 @@ getfenv:
 GetFontStringMetatable:
   impl:
     modules:
-    - uiobjecttypes
+      uiobjecttypes:
 GetFrameMetatable:
   impl:
     modules:
-    - uiobjecttypes
+      uiobjecttypes:
 GetFramesRegisteredForEvent:
   moduledelegate:
     function: GetFramesRegisteredForEventUnpacked
@@ -347,13 +347,13 @@ GetNumSpecializationsForClassID:
 GetNumTalents:
   impl:
     modules:
-    - units
+      units:
     sqls:
     - GetNumTalents
 GetNumTalentTabs:
   impl:
     modules:
-    - units
+      units:
     sqls:
     - GetNumTalentTabs
 GetScreenHeight:
@@ -365,7 +365,7 @@ GetScreenWidth:
 GetSpecializationInfo:
   impl:
     modules:
-    - units
+      units:
     sqls:
     - GetSpecializationInfo
 GetSpecializationInfoByID:
@@ -373,31 +373,31 @@ GetSpecializationInfoByID:
 GetSpecializationInfoForClassID:
   impl:
     modules:
-    - units
+      units:
     sqls:
     - GetSpecializationInfoForClassID
 GetSpecializationInfoForSpecID:
   impl:
     modules:
-    - units
+      units:
     sqls:
     - GetSpecializationInfoForSpecID
 GetTalentInfo_Vanilla:
   impl:
     modules:
-    - units
+      units:
     sqls:
     - GetTalentInfo_Vanilla
 GetTalentPrereqs:
   impl:
     modules:
-    - units
+      units:
     sqls:
     - GetTalentPrereqs
 GetTalentTabInfo:
   impl:
     modules:
-    - units
+      units:
     sqls:
     - GetTalentTabInfo
 GetTime:
@@ -436,14 +436,14 @@ issecurevariable:
 IsTestBuild:
   impl:
     modules:
-    - datalua
+      datalua:
 IsWindowsClient:
   moduledelegate:
     name: platform
 LoadAddOn:
   impl:
     modules:
-    - loader
+      loader:
 loadstring:
   stdlib: loadstring
 loadstring_untainted:
@@ -528,8 +528,8 @@ rawset:
 RequestTimePlayed:
   impl:
     modules:
-    - events
-    - time
+      events:
+      time:
 RunMacroText:
   moduledelegate:
     name: macrotext
@@ -550,9 +550,9 @@ select:
 SendSystemMessage:
   impl:
     modules:
-    - events
-    - time
-    - units
+      events:
+      time:
+      units:
 seterrorhandler:
   stdlib: seterrorhandler
 setfenv:

@@ -8,8 +8,11 @@ type:
           record:
             modules:
               type:
-                sequenceof:
-                  ref: module
+                mapof:
+                  key:
+                    ref: module
+                  value:
+                    record:
         moduledelegate:
           record:
             name:
