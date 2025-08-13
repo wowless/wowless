@@ -54,6 +54,7 @@ loader:
     loglevel:
     scripts:
     security:
+    sqlitedb:
     templates:
     uiobjecttypes:
 loadercfg:
@@ -84,6 +85,10 @@ security:
   deps:
     log:
     maxErrors:
+sqlitedb:
+  deps:
+    datalua:
+    loadercfg:
 system:
   deps:
 talents:

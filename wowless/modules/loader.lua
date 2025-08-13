@@ -1,4 +1,17 @@
-return function(addons, api, datalua, events, loadercfg, log, loglevel, scripts, security, templates, uiobjecttypes)
+return function(
+  addons,
+  api,
+  datalua,
+  events,
+  loadercfg,
+  log,
+  loglevel,
+  scripts,
+  security,
+  sqlitedb,
+  templates,
+  uiobjecttypes
+)
   local SendEvent = events.SendEvent
 
   local rootDir = loadercfg.rootDir
@@ -716,11 +729,6 @@ return function(addons, api, datalua, events, loadercfg, log, loglevel, scripts,
     return nil
   end
 
-  local sqlitedb = (function()
-    local dbfile = ('build/products/%s/%s.sqlite3'):format(product, rootDir and 'data' or 'schema')
-    return require('lsqlite3').open(dbfile)
-  end)()
-
   local addonData = addons.addons
 
   local function initAddons()
@@ -956,6 +964,5 @@ return function(addons, api, datalua, events, loadercfg, log, loglevel, scripts,
     loadAddon = loadAddon,
     loadFrameXml = loadFrameXml,
     saveAllVariables = saveAllVariables,
-    sqlitedb = sqlitedb,
   }
 end

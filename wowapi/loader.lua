@@ -46,7 +46,7 @@ local function loadFunctions(api)
   api.modules.log(1, 'loading functions')
   local datalua = api.modules.datalua
   local apis = datalua.apis
-  local sqls = loadSqls(api.modules.loader.sqlitedb, datalua.sqls)
+  local sqls = loadSqls(api.modules.sqlitedb, datalua.sqls)
 
   local impls = {}
   for k, v in pairs(datalua.impls) do
