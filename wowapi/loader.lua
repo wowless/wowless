@@ -11,7 +11,7 @@ local function loadFunctions(api)
       table.insert(specials, (assert(api.modules[m], 'unknown module ' .. m)))
     end
     for _, sql in ipairs(v.sqls or {}) do
-      table.insert(specials, api.modules.sql[sql])
+      table.insert(specials, api.modules.sqls[sql])
     end
     impls[k] = setfenv(assert(loadstring_untainted(v.src, '@./data/impl/' .. k .. '.lua'), k), _G)(unpack(specials))
   end

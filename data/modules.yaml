@@ -85,14 +85,14 @@ security:
   deps:
     log:
     maxErrors:
-sql:
-  deps:
-    datalua:
-    sqlitedb:
 sqlitedb:
   deps:
     datalua:
     loadercfg:
+sqls:
+  deps:
+    datalua:
+    sqlitedb:
 system:
   deps:
 talents:
