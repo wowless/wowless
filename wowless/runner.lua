@@ -169,16 +169,11 @@ local function run(cfg)
         VARIABLES_LOADED = true,
       }
       local skip = runnercfg.skip_events or {}
-      -- TODO unify with wowapi/loader
-      local mixin = require('wowless.util').mixin
-      local function stubMixin(t, name)
-        return mixin(t, api.env[name])
-      end
       for k, v in sorted(datalua.events) do
         if not eventBlacklist[k] and not skip[k] then
           if v.stub == 'return ' or cfg.allevents then
-            local text = 'local Mixin = ...;' .. v.stub
-            SendEvent(k, assert(loadstring_untainted(text))(stubMixin))
+            local text = 'local gencode = ...;' .. v.stub
+            SendEvent(k, assert(loadstring_untainted(text))(modules.gencode))
           end
         end
       end
