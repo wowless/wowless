@@ -57,7 +57,7 @@ local function run(cfg)
   -- end WARNING WARNING WARNING
 
   local loader = modules.loader
-  require('wowless.env').init(api, loader, not cfg.dir)
+  require('wowless.env').init(api, not cfg.dir)
   for k, v in pairs(require('wowapi.uiobjects')(api)) do
     modules.uiobjecttypes.Add(k, v)
   end

@@ -15,8 +15,8 @@ local function dump(api)
   end
 end
 
-local function init(api, loader, lite)
-  local impls, rawimpls = require('wowapi.loader').loadFunctions(api, loader)
+local function init(api, lite)
+  local impls, rawimpls = require('wowapi.loader').loadFunctions(api)
   api.impls = rawimpls
   api.modules.api.impls = rawimpls -- TODO remove this hack
   api.env._G = api.env
