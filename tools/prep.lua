@@ -304,7 +304,7 @@ local uiobjectimplmakers = {
     table.insert(t, 'end')
     return table.concat(t)
   end,
-  none = function(_, mv)
+  none = function(mv)
     local t = { 'local api,_,check,Mixin=...;' }
     local ins = mv.inputs or {}
     local nsins = #ins - (mv.instride or 0)
@@ -416,7 +416,7 @@ for k, v in pairs(uiobjectdata) do
   table.insert(constructor, '}end')
   local methods = {}
   for mk, mv in pairs(v.methods) do
-    methods[mk] = dispatch(uiobjectimplmakers, mv.impl or { none = true }, mv)
+    methods[mk] = dispatch(uiobjectimplmakers, mv.impl or 'none', mv)
   end
   uiobjects[k] = {
     constructor = table.concat(constructor),
