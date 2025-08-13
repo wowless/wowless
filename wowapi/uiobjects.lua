@@ -4,16 +4,6 @@ local Mixin = util.mixin
 local hlist = require('wowless.hlist')
 
 local function mkBaseUIObjectTypes(api)
-  local function toTexture(parent, tex, obj)
-    if type(tex) == 'string' or type(tex) == 'number' then
-      local t = obj or api.UserData(parent:CreateTexture())
-      t:SetTexture(tex)
-      return t
-    else
-      return tex and api.UserData(tex)
-    end
-  end
-
   local function flatten(types)
     local result = {}
     local function flattenOne(k)
@@ -60,20 +50,8 @@ local function mkBaseUIObjectTypes(api)
     return t
   end
 
-  local typechecker = api.modules.typecheck
   local funchecker = api.modules.funcheck
-
-  local function check(spec, v, isout)
-    local vv, errmsg = typechecker(spec, v, isout)
-    if errmsg then
-      local inout = isout and 'output' or 'input'
-      local name = spec.name and (' %q'):format(spec.name) or ''
-      error(('%s%s %s'):format(inout, name, errmsg), 2)
-    end
-    return vv
-  end
-
-  local stubMixin = api.modules.env.mixin
+  local gencode = api.modules.gencode
   local InheritsFrom = api.modules.uiobjecttypes.InheritsFrom
 
   local uiobjects = {}
@@ -113,7 +91,7 @@ local function mkBaseUIObjectTypes(api)
         end
         fn = mkfn(unpack(args))
       else
-        fn = mkfn(api, toTexture, check, stubMixin)
+        fn = mkfn(gencode)
       end
       local basefn = wrap(fname, fn)
       local outfn

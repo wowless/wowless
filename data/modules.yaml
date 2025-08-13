@@ -37,6 +37,12 @@ funcheck:
   deps:
     log:
     typecheck:
+gencode:
+  deps:
+    api:
+    env:
+    typecheck:
+    uiobjects:
 loader:
   deps:
     addons:

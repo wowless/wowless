@@ -62,14 +62,14 @@ local function loadFunctions(api)
 
   local bubblewrap = require('wowless.bubblewrap')
   local funchecker = api.modules.funcheck
-  local stubMixin = api.modules.env.mixin
+  local gencode = api.modules.gencode
 
   local function mkfn(fname, apicfg)
     local incheck = apicfg.inputs and funchecker.makeCheckInputs(fname, apicfg)
     local basefn
     if apicfg.stub then
-      local text = ('local api, Mixin = ...; return function() %s end'):format(apicfg.stub)
-      basefn = assert(setfenv(loadstring_untainted(text), _G))(api, stubMixin)
+      local text = ('local gencode = ...; return function() %s end'):format(apicfg.stub)
+      basefn = assert(setfenv(loadstring_untainted(text), _G))(gencode)
     elseif apicfg.impl then
       basefn = impls[apicfg.impl]
     else

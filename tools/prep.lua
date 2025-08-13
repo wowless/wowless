@@ -64,7 +64,7 @@ local specDefault = (function()
         end
       end
       local str = '{' .. table.concat(t, ',') .. '}'
-      structureDefaults[name] = st.mixin and ('Mixin(%s,%q)'):format(str, st.mixin) or str
+      structureDefaults[name] = st.mixin and ('gencode.Mixin(%s,%q)'):format(str, st.mixin) or str
     end
     return structureDefaults[name]
   end
@@ -106,7 +106,7 @@ local specDefault = (function()
       return valstr(x)
     end
     if ty.uiobject then
-      return ('api.CreateUIObject(%q).luarep'):format(ty.uiobject:lower())
+      return ('gencode.CreateUIObject(%q).luarep'):format(ty.uiobject:lower())
     end
     error('unexpected type: ' .. require('pl.pretty').write(ty))
   end
@@ -293,19 +293,19 @@ local uiobjectimplimplmakers = {
 }
 local uiobjectimplmakers = {
   getter = function(impl, mv)
-    local t = { 'local _,_,check=...;' }
+    local t = { 'local gencode=...;' }
     for i in ipairs(impl) do
       table.insert(t, 'local spec' .. i .. '=' .. plprettywrite(mv.outputs[i], '') .. ';')
     end
     table.insert(t, 'return function(self)return ')
     for i, f in ipairs(impl) do
-      table.insert(t, (i == 1 and '' or ',') .. 'check(spec' .. i .. ',self.' .. f.name .. ',true)')
+      table.insert(t, (i == 1 and '' or ',') .. 'gencode.Check(spec' .. i .. ',self.' .. f.name .. ',true)')
     end
     table.insert(t, 'end')
     return table.concat(t)
   end,
   none = function(mv)
-    local t = { 'local api,_,check,Mixin=...;' }
+    local t = { 'local gencode=...;' }
     local ins = mv.inputs or {}
     local nsins = #ins - (mv.instride or 0)
     for i = 1, #ins do
@@ -320,7 +320,7 @@ local uiobjectimplmakers = {
     end
     table.insert(t, ')')
     for i = 1, nsins do
-      table.insert(t, 'check(spec' .. i .. ',arg' .. i .. ');')
+      table.insert(t, 'gencode.Check(spec' .. i .. ',arg' .. i .. ');')
     end
     if mv.instride then
       table.insert(t, 'for i=1,select("#",...),' .. mv.instride .. ' do ')
@@ -330,7 +330,7 @@ local uiobjectimplmakers = {
       end
       table.insert(t, '=select(i,...);')
       for i = nsins + 1, #ins do
-        table.insert(t, 'check(spec' .. i .. ',arg' .. i .. ');')
+        table.insert(t, 'gencode.Check(spec' .. i .. ',arg' .. i .. ');')
       end
       table.insert(t, 'end ')
     end
@@ -351,7 +351,7 @@ local uiobjectimplmakers = {
     return table.concat(t)
   end,
   setter = function(impl, mv)
-    local t = { 'local api,_,check,Mixin=...;' }
+    local t = { 'local gencode=...;' }
     for i in ipairs(impl) do
       table.insert(t, 'local spec' .. i .. '=' .. plprettywrite(mv.inputs[i], '') .. ';')
     end
@@ -364,7 +364,7 @@ local uiobjectimplmakers = {
     for i, f in ipairs(impl) do
       table.insert(t, 'self.')
       table.insert(t, f.name)
-      table.insert(t, '=check(spec')
+      table.insert(t, '=gencode.Check(spec')
       table.insert(t, tostring(i))
       table.insert(t, ',')
       table.insert(t, f.name)
@@ -374,10 +374,10 @@ local uiobjectimplmakers = {
     return table.concat(t)
   end,
   settexture = function(impl)
-    local t = { 'local api,toTexture=...;return function(self,tex)' }
-    table.insert(t, 'local t=toTexture(self,tex,self.')
+    local t = { 'local gencode=...;return function(self,tex)' }
+    table.insert(t, 'local t=gencode.ToTexture(self,tex,self.')
     table.insert(t, impl.field)
-    table.insert(t, ');if t then api.SetParent(t,self);if t:GetNumPoints()==0 then t:SetAllPoints()end t:SetShown(')
+    table.insert(t, ');if t then gencode.SetParent(t,self);if t:GetNumPoints()==0 then t:SetAllPoints()end t:SetShown(')
     table.insert(t, impl.shown or 'true')
     table.insert(t, ');')
     if impl.extra then
