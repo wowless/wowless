@@ -1,52 +1,8 @@
 local util = require('wowless.util')
 
-local function loadSqls(sqlitedb, sqls)
-  local types = {
-    cursor = {
-      [false] = function(stmt)
-        return stmt:urows()
-      end,
-      [true] = function(stmt)
-        return stmt:nrows()
-      end,
-    },
-    lookup = {
-      -- Manually pull out the first element of these iterators.
-      [false] = function(stmt)
-        local f, s = stmt:rows()
-        local t = f(s)
-        if t then
-          return unpack(t)
-        end
-      end,
-      [true] = function(stmt)
-        local f, s = stmt:nrows()
-        -- "or nil" allows table-returning directsql to satisfy a nilable output
-        return f(s) or nil
-      end,
-    },
-  }
-  local ret = {}
-  for k, v in pairs(sqls) do
-    local stmt = sqlitedb:prepare(v.sql)
-    if not stmt then
-      error('could not prepare ' .. k .. ': ' .. sqlitedb:errmsg())
-    end
-    local f = types[v.type][not not v.table]
-    ret[k] = function(...)
-      stmt:reset()
-      stmt:bind_values(...)
-      return f(stmt)
-    end
-  end
-  return ret
-end
-
 local function loadFunctions(api)
   api.modules.log(1, 'loading functions')
   local datalua = api.modules.datalua
-  local apis = datalua.apis
-  local sqls = loadSqls(api.modules.sqlitedb, datalua.sqls)
 
   local impls = {}
   for k, v in pairs(datalua.impls) do
@@ -55,7 +11,7 @@ local function loadFunctions(api)
       table.insert(specials, (assert(api.modules[m], 'unknown module ' .. m)))
     end
     for _, sql in ipairs(v.sqls or {}) do
-      table.insert(specials, sqls[sql])
+      table.insert(specials, api.modules.sql[sql])
     end
     impls[k] = setfenv(assert(loadstring_untainted(v.src, '@./data/impl/' .. k .. '.lua'), k), _G)(unpack(specials))
   end
@@ -95,7 +51,7 @@ local function loadFunctions(api)
 
   local rawfns = {}
   local fns = {}
-  for fn, apicfg in pairs(apis) do
+  for fn, apicfg in pairs(datalua.apis) do
     if apicfg.stdlib then
       local v = assert(util.tget(_G, fn))
       util.tset(fns, fn, v)

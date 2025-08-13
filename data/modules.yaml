@@ -85,6 +85,10 @@ security:
   deps:
     log:
     maxErrors:
+sql:
+  deps:
+    datalua:
+    sqlitedb:
 sqlitedb:
   deps:
     datalua:
