@@ -122,7 +122,6 @@ uiobjectloader:
   deps:
     datalua:
     funcheck:
-    gencode:
     uiobjects:
     uiobjecttypes:
 uiobjects:

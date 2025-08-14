@@ -302,7 +302,10 @@ local uiobjectimplmakers = {
       table.insert(t, (i == 1 and '' or ',') .. 'gencode.Check(spec' .. i .. ',self.' .. f.name .. ',true)')
     end
     table.insert(t, 'end')
-    return table.concat(t)
+    return {
+      impl = table.concat(t),
+      modules = { 'gencode' },
+    }
   end,
   none = function(mv)
     local t = { 'local gencode=...;' }
@@ -348,7 +351,10 @@ local uiobjectimplmakers = {
     end
     table.insert(t, table.concat(rets, ','))
     table.insert(t, ' end')
-    return table.concat(t)
+    return {
+      impl = table.concat(t),
+      modules = { 'gencode' },
+    }
   end,
   setter = function(impl, mv)
     local t = { 'local gencode=...;' }
@@ -371,7 +377,10 @@ local uiobjectimplmakers = {
       table.insert(t, ');')
     end
     table.insert(t, 'end')
-    return table.concat(t)
+    return {
+      impl = table.concat(t),
+      modules = { 'gencode' },
+    }
   end,
   settexture = function(impl)
     local t = { 'local gencode=...;return function(self,tex)' }
@@ -391,7 +400,10 @@ local uiobjectimplmakers = {
       table.insert(t, 'return true;')
     end
     table.insert(t, 'end')
-    return table.concat(t)
+    return {
+      impl = table.concat(t),
+      modules = { 'gencode' },
+    }
   end,
   uiobjectimpl = function(impl, mv)
     local implimpl = dispatch(uiobjectimplimplmakers, uiobjectimpl[impl], impl)

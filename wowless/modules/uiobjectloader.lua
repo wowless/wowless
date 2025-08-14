@@ -3,7 +3,7 @@ local bubblewrap = require('wowless.bubblewrap')
 local Mixin = util.mixin
 local hlist = require('wowless.hlist')
 
-return function(datalua, funcheck, gencode, uiobjectsmodule, uiobjecttypes)
+return function(datalua, funcheck, uiobjectsmodule, uiobjecttypes)
   local InheritsFrom = uiobjecttypes.InheritsFrom
   local UserData = uiobjectsmodule.UserData
 
@@ -79,20 +79,13 @@ return function(datalua, funcheck, gencode, uiobjectsmodule, uiobjecttypes)
         local fname = name .. ':' .. mname
         local incheck = method.inputs and funcheck.makeCheckInputs(fname, method)
         local outcheck = method.outputs and funcheck.makeCheckOutputs(fname, method)
-        local mtext = method.impl or method
         local src = method.src and ('@' .. method.src) or fname
-        local mkfn = setfenv(assert(loadstring_untainted(mtext, src)), _G)
-        local fn
-        if method.modules or method.src then
-          local args = {}
-          for _, m in ipairs(method.modules or {}) do
-            table.insert(args, (assert(modules[m], m)))
-          end
-          fn = mkfn(unpack(args))
-        else
-          fn = mkfn(gencode)
+        local mkfn = setfenv(assert(loadstring_untainted(method.impl, src)), _G)
+        local args = {}
+        for _, m in ipairs(method.modules or {}) do
+          table.insert(args, (assert(modules[m], m)))
         end
-        local basefn = wrap(fname, fn)
+        local basefn = wrap(fname, mkfn(unpack(args)))
         local outfn
         if not incheck and not outcheck then
           outfn = basefn
