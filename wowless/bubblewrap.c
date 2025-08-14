@@ -1,5 +1,5 @@
-#include <lauxlib.h>
-#include <lualib.h>
+#include "lauxlib.h"
+#include "lualib.h"
 
 static int bubblewrapper(lua_State *L) {
   int inmode = lua_gettaintmode(L);

@@ -1,7 +1,7 @@
-#include <lauxlib.h>
-#include <lua.h>
-#include <luaconf.h>
-#include <lualib.h>
+#include "lauxlib.h"
+#include "lua.h"
+#include "luaconf.h"
+#include "lualib.h"
 
 #ifndef ELUNE_VERSION
 #error Must be compiled against Elune headers.
