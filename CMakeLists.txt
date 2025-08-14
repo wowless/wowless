@@ -1089,6 +1089,7 @@ lua2c(
   wowless.modules.addons=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/addons.lua
   wowless.modules.api=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/api.lua
   wowless.modules.apiloader=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/apiloader.lua
+  wowless.modules.atlas=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/atlas.lua
   wowless.modules.calendar=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/calendar.lua
   wowless.modules.cvars=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/cvars.lua
   wowless.modules.datetime=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/datetime.lua

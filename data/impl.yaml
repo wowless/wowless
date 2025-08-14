@@ -133,13 +133,13 @@ C_SpecializationInfo.GetSpecIDs:
 C_Texture.GetAtlasInfo:
   impl:
     modules:
-      env:
+      atlas:
     sqls:
     - C_Texture.GetAtlasInfo
 C_Texture.GetAtlasInfo_11_1_5:
   impl:
     modules:
-      env:
+      atlas:
     sqls:
     - C_Texture.GetAtlasInfo_11_1_5
 C_Timer.After:

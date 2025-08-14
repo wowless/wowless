@@ -20,6 +20,9 @@ apiloader:
     funcheck:
     log:
     sqls:
+atlas:
+  deps:
+    env:
 calendar:
   deps:
 cvars:
