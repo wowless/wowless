@@ -143,30 +143,34 @@ local complex = {
   taggedunion = function(s)
     local sf = {}
     local tf = {}
+    local ks = {}
     for k, v in pairs(s) do
       if v == 'tag' then
         sf[k] = true
       else
         tf[k] = compile(v)
       end
+      table.insert(ks, k)
     end
+    table.sort(ks)
+    local err = 'expected one of {' .. table.concat(ks, ', ') .. '}'
     return function(v, product)
       if sf[v] then
         return
       end
       if type(v) ~= 'table' then
-        return 'expected table'
+        return err
       end
       local vk, vv = next(v)
       if vk == nil then
-        return 'missing element'
+        return 'missing element, ' .. err
       end
       if next(v, vk) ~= nil then
-        return 'multiple elements'
+        return 'multiple elements, ' .. err
       end
       local tfvk = tf[vk]
       if tfvk == nil then
-        return 'bad key'
+        return 'bad key, ' .. err
       end
       return tfvk(vv, product)
     end
