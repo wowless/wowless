@@ -15,20 +15,19 @@ local function dump(api)
   end
 end
 
-local function init(api, lite)
-  local impls, rawimpls = api.modules.apiloader(api.modules)
-  api.impls = rawimpls
-  api.modules.api.impls = rawimpls -- TODO remove this hack
-  api.env._G = api.env
-  Mixin(api.env, deepcopy(impls))
-  Mixin(api.env, deepcopy(api.modules.datalua.globals))
-  Mixin(api.secureenv, deepcopy(impls))
-  Mixin(api.secureenv, deepcopy(api.modules.datalua.globals))
+local function init(modules, lite)
+  local impls, rawimpls = modules.apiloader(modules)
+  modules.api.impls = rawimpls
+  modules.api.env._G = modules.api.env
+  Mixin(modules.api.env, deepcopy(impls))
+  Mixin(modules.api.env, deepcopy(modules.datalua.globals))
+  Mixin(modules.api.secureenv, deepcopy(impls))
+  Mixin(modules.api.secureenv, deepcopy(modules.datalua.globals))
 
   local wowlessDebug = Mixin({}, debug)
   wowlessDebug.debug = function()
     -- luacheck: ignore 211
-    local _G = api.env
+    local _G = modules.api.env
     local function getLocals(stackLevel)
       stackLevel = (stackLevel or 0) + 5 -- 5 = 3 (this function) + 2 (caller)
       local locals = {}
@@ -50,14 +49,14 @@ local function init(api, lite)
     debug.debug()
   end
 
-  api.env.__wowless = {
+  modules.api.env.__wowless = {
     debug = wowlessDebug,
-    dump = dump(api),
+    dump = dump(modules.api),
     lite = lite,
-    platform = api.modules.platform.platform,
-    product = api.modules.datalua.product,
+    platform = modules.platform.platform,
+    product = modules.datalua.product,
     quit = function(exitCode)
-      api.modules.log(1, 'Bye!')
+      modules.log(1, 'Bye!')
       os.exit(exitCode or 1)
     end,
   }

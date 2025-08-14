@@ -15,7 +15,7 @@ local args = (function()
 end)()
 debug.setprofilingenabled(args.profile)
 local runner = require('wowless.runner')
-local api = runner.run({
+local modules = runner.run({
   allevents = args.allevents,
   debug = args.debug,
   dir = 'extracts/' .. args.product,
@@ -28,7 +28,7 @@ local api = runner.run({
 })
 if args.profile then
   require('wowless.profiler').write({
-    api = api,
+    modules = modules,
     product = args.product,
     runner = runner,
   })

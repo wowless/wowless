@@ -25,10 +25,7 @@ local function run(cfg)
     loglevel = cfg.loglevel or 0,
     maxErrors = cfg.maxErrors or math.huge,
   })
-  local api = { modules = modules } -- issue #447
-  for k, v in pairs(modules.api) do
-    api[k] = v
-  end
+  local api = modules.api
 
   -- begin WARNING WARNING WARNING
   --[[
@@ -57,7 +54,7 @@ local function run(cfg)
   -- end WARNING WARNING WARNING
 
   local loader = modules.loader
-  require('wowless.env').init(api, not cfg.dir)
+  require('wowless.env').init(modules, not cfg.dir)
   for k, v in pairs(modules.uiobjectloader(modules)) do
     modules.uiobjecttypes.Add(k, v)
   end
@@ -259,7 +256,7 @@ local function run(cfg)
   end
   assert(issecure(), 'wowless bug: framework is tainted')
 
-  return api, loader
+  return modules
 end
 
 return {
