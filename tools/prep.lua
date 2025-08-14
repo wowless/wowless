@@ -139,14 +139,14 @@ end
 local implimpls = {
   delegate = function(impl)
     return {
-      src = 'return ' .. impl,
+      impl = 'return ' .. impl,
     }
   end,
   directsql = function(impl)
     ensuresql(impl)
     return {
+      impl = 'return (...)',
       sqls = { impl },
-      src = 'return (...)',
     }
   end,
   impl = function(impl, name)
@@ -160,22 +160,24 @@ local implimpls = {
     for _, sql in ipairs(impl.sqls or {}) do
       ensuresql(sql)
     end
+    local src = 'data/impl/' .. name .. '.lua'
     return {
+      impl = readFile(src),
       modules = modules,
       sqls = impl.sqls,
-      src = readFile('data/impl/' .. name .. '.lua'),
+      src = '@./' .. src,
     }
   end,
   luadelegate = function(impl, name)
     local fmt = 'return require(%q)[%q]'
     return {
-      src = fmt:format(impl.module, impl['function'] or name),
+      impl = fmt:format(impl.module, impl['function'] or name),
     }
   end,
   moduledelegate = function(impl, name)
     return {
+      impl = ('return (...)[%q]'):format(impl['function'] or name),
       modules = { impl.name },
-      src = ('return (...)[%q]'):format(impl['function'] or name),
     }
   end,
 }
@@ -197,6 +199,7 @@ local function mkapi(apicfg)
     else
       local impl = ensureimpl(apicfg.impl)
       return {
+        impl = impl.impl,
         inputs = apicfg.inputs,
         instride = apicfg.instride,
         mayreturnnothing = apicfg.mayreturnnothing,
@@ -209,9 +212,9 @@ local function mkapi(apicfg)
     end
   elseif apicfg.stubnothing then
     return {
+      impl = 'return function() end',
       inputs = apicfg.inputs,
       instride = apicfg.instride,
-      src = 'return function() end',
     }
   else
     local outs = apicfg.outputs or {}
@@ -226,10 +229,10 @@ local function mkapi(apicfg)
       end
     end
     return {
+      impl = 'local gencode=...;return function()return ' .. table.concat(rets, ',') .. ' end',
       inputs = apicfg.inputs,
       instride = apicfg.instride,
       modules = { 'gencode' },
-      src = 'local gencode=...;return function()return ' .. table.concat(rets, ',') .. ' end',
     }
   end
 end
@@ -300,7 +303,7 @@ local uiobjectimplimplmakers = {
     return {
       impl = readFile(src),
       modules = modules,
-      src = src,
+      src = '@./' .. src,
     }
   end,
   moduledelegate = function(impl, k)

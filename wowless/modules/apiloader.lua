@@ -7,17 +7,17 @@ return function(datalua, funcheck, log, sqls)
 
     local function mkfn(fname, apicfg)
       local incheck = apicfg.inputs and funcheck.makeCheckInputs(fname, apicfg)
-      local specials = {}
+      local outcheck = apicfg.outputs and funcheck.makeCheckOutputs(fname, apicfg)
+      local src = apicfg.src or fname
+      local mkbasefn = setfenv(assert(loadstring_untainted(apicfg.impl, src), fname), _G)
+      local args = {}
       for _, m in ipairs(apicfg.modules or {}) do
-        table.insert(specials, (assert(modules[m], 'unknown module ' .. m)))
+        table.insert(args, (assert(modules[m], 'unknown module ' .. m)))
       end
       for _, sql in ipairs(apicfg.sqls or {}) do
-        table.insert(specials, sqls[sql])
+        table.insert(args, sqls[sql])
       end
-      local basefn = setfenv(assert(loadstring_untainted(apicfg.src, '@./data/impl/' .. fname .. '.lua'), fname), _G)(
-        unpack(specials)
-      )
-      local outcheck = apicfg.outputs and funcheck.makeCheckOutputs(fname, apicfg)
+      local basefn = mkbasefn(unpack(args))
       if not incheck and not outcheck then
         return basefn
       elseif incheck and not outcheck then

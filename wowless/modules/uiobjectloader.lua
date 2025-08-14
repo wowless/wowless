@@ -79,8 +79,8 @@ return function(datalua, funcheck, uiobjectsmodule, uiobjecttypes)
         local fname = name .. ':' .. mname
         local incheck = method.inputs and funcheck.makeCheckInputs(fname, method)
         local outcheck = method.outputs and funcheck.makeCheckOutputs(fname, method)
-        local src = method.src and ('@' .. method.src) or fname
-        local mkfn = setfenv(assert(loadstring_untainted(method.impl, src)), _G)
+        local src = method.src or fname
+        local mkfn = setfenv(assert(loadstring_untainted(method.impl, src), fname), _G)
         local args = {}
         for _, m in ipairs(method.modules or {}) do
           table.insert(args, (assert(modules[m], m)))
