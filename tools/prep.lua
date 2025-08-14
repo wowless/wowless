@@ -186,38 +186,57 @@ local function ensureimpl(k)
     local cfg = assert(implcfg[k], k)
     impls[k] = dispatch(implimpls, cfg, k)
   end
+  return impls[k]
+end
+
+local function mkapi(apicfg)
+  if apicfg.impl then
+    local ic = assert(implcfg[apicfg.impl], 'missing impl ' .. apicfg.impl)
+    if ic.stdlib then
+      return { stdlib = ic.stdlib }
+    else
+      local impl = ensureimpl(apicfg.impl)
+      return {
+        inputs = apicfg.inputs,
+        instride = apicfg.instride,
+        mayreturnnothing = apicfg.mayreturnnothing,
+        modules = impl.modules,
+        outputs = apicfg.outputs,
+        outstride = apicfg.outstride,
+        sqls = impl.sqls,
+        src = impl.src,
+      }
+    end
+  elseif apicfg.stubnothing then
+    return {
+      inputs = apicfg.inputs,
+      instride = apicfg.instride,
+      src = 'return function() end',
+    }
+  else
+    local outs = apicfg.outputs or {}
+    local rets = {}
+    local nonstride = #outs - (apicfg.outstride or 0)
+    for i = 1, nonstride do
+      table.insert(rets, specDefault(outs[i]))
+    end
+    for _ = 1, apicfg.stuboutstrides or 1 do
+      for j = nonstride + 1, #outs do
+        table.insert(rets, specDefault(outs[j]))
+      end
+    end
+    return {
+      inputs = apicfg.inputs,
+      instride = apicfg.instride,
+      modules = { 'gencode' },
+      src = 'local gencode=...;return function()return ' .. table.concat(rets, ',') .. ' end',
+    }
+  end
 end
 
 local apis = {}
-do
-  local cfg = parseYaml('data/products/' .. product .. '/apis.yaml')
-  for name, apicfg in pairs(cfg) do
-    if apicfg.impl then
-      local ic = assert(implcfg[apicfg.impl], 'missing impl ' .. apicfg.impl)
-      if ic.stdlib then
-        apicfg.impl = nil
-        apicfg.stdlib = ic.stdlib
-      else
-        ensureimpl(apicfg.impl)
-      end
-    elseif apicfg.stubnothing then
-      apicfg.stub = ''
-    else
-      local outs = apicfg.outputs or {}
-      local rets = {}
-      local nonstride = #outs - (apicfg.outstride or 0)
-      for i = 1, nonstride do
-        table.insert(rets, specDefault(outs[i]))
-      end
-      for _ = 1, apicfg.stuboutstrides or 1 do
-        for j = nonstride + 1, #outs do
-          table.insert(rets, specDefault(outs[j]))
-        end
-      end
-      apicfg.stub = 'return ' .. table.concat(rets, ',')
-    end
-    apis[name] = apicfg
-  end
+for k, v in pairs(parseYaml('data/products/' .. product .. '/apis.yaml')) do
+  apis[k] = mkapi(v)
 end
 
 local cvars = {}
@@ -446,7 +465,6 @@ local data = {
   cvars = cvars,
   events = events,
   globals = globals,
-  impls = impls,
   product = product,
   sqls = sqls,
   structures = structures,
