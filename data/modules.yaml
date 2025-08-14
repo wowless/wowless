@@ -118,6 +118,13 @@ typecheck:
     env:
     uiobjects:
     units:
+uiobjectloader:
+  deps:
+    datalua:
+    funcheck:
+    gencode:
+    uiobjects:
+    uiobjecttypes:
 uiobjects:
   deps:
 uiobjecttypes:

@@ -1081,7 +1081,6 @@ lua2c(
   runtime.modules=runtime/modules.lua
   runtime.platform=runtime/platform.lua
   runtime.stringenums=runtime/stringenums.lua
-  wowapi.uiobjects=${CMAKE_CURRENT_SOURCE_DIR}/wowapi/uiobjects.lua
   wowless.bubblewrap=c
   wowless.env=${CMAKE_CURRENT_SOURCE_DIR}/wowless/env.lua
   wowless.ext=c
@@ -1110,6 +1109,7 @@ lua2c(
   wowless.modules.templates=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/templates.lua
   wowless.modules.time=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/time.lua
   wowless.modules.typecheck=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/typecheck.lua
+  wowless.modules.uiobjectloader=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/uiobjectloader.lua
   wowless.modules.uiobjects=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/uiobjects.lua
   wowless.modules.uiobjecttypes=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/uiobjecttypes.lua
   wowless.modules.units=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/units.lua

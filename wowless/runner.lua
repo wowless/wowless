@@ -58,7 +58,7 @@ local function run(cfg)
 
   local loader = modules.loader
   require('wowless.env').init(api, not cfg.dir)
-  for k, v in pairs(require('wowapi.uiobjects')(api)) do
+  for k, v in pairs(modules.uiobjectloader(modules)) do
     modules.uiobjecttypes.Add(k, v)
   end
   loader.initAddons()
