@@ -1,7 +1,7 @@
 local band = require('bit').band
 
 return function(env)
-  return function(
+  local function GetAtlasInfo(
     elementName,
     atlasHeight,
     atlasWidth,
@@ -30,4 +30,8 @@ return function(env)
       }
     end
   end
+
+  return {
+    GetAtlasInfo = GetAtlasInfo,
+  }
 end

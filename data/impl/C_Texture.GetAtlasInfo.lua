@@ -1,4 +1,4 @@
 local atlas, sql = ...
 return function(atlasName)
-  return atlas(nil, sql(atlasName))
+  return atlas.GetAtlasInfo(nil, sql(atlasName))
 end
