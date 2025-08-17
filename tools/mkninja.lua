@@ -303,6 +303,7 @@ table.insert(builds, {
     'spec/wowless/modules/funcheck_spec.lua',
     'spec/wowless/modules/typecheck_spec.lua',
     'spec/wowless/png_spec.lua',
+    'spec/wowless/sqlite_spec.lua',
     'spec/wowless/toc_spec.lua',
     'spec/wowless/util_spec.lua',
   },

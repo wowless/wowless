@@ -50,6 +50,11 @@ static int dbprepare(lua_State *L) {
   return sqlite3_prepare_v2(db, sql, sz + 1, stmt, 0) == SQLITE_OK ? 1 : 0;
 }
 
+static int dburows(lua_State *L) {
+  sqlite3 *db = checkdb(L, 1);
+  return 0;
+}
+
 static int doopen(lua_State *L, const char *filename) {
   sqlite3 **db = lua_newuserdata(L, sizeof(*db));
   luaL_getmetatable(L, "wowless.sqlite.db");
@@ -119,6 +124,8 @@ int luaopen_lsqlite3(lua_State *L) {
     lua_setfield(L, -2, "exec");
     lua_pushcfunction(L, dbprepare);
     lua_setfield(L, -2, "prepare");
+    lua_pushcfunction(L, dburows);
+    lua_setfield(L, -2, "urows");
     lua_setfield(L, -2, "__index");
     lua_pushcfunction(L, dbgc);
     lua_setfield(L, -2, "__gc");
