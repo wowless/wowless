@@ -46,11 +46,11 @@ static int dbclose(lua_State *L) {
 }
 
 static int dbopen(lua_State *L) {
-  lua_settop(L, 0);
+  const char *filename = luaL_checkstring(L, 1);
   sqlite3 **db = lua_newuserdata(L, sizeof(*db));
   luaL_getmetatable(L, "wowless.sqlite.db");
   lua_setmetatable(L, -2);
-  if (sqlite3_open(":memory:", db) != SQLITE_OK) {
+  if (sqlite3_open(filename, db) != SQLITE_OK) {
     if (!*db) {
       return luaL_error(L, "sqlite: out of memory");
     } else {
