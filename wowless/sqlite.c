@@ -95,6 +95,14 @@ static int stmtgc(lua_State *L) {
   return 0;
 }
 
+static int stmtgeniter(lua_State *L) {
+  checkstmt(L, 1);
+  lua_settop(L, 1);
+  lua_pushvalue(L, lua_upvalueindex(1));
+  lua_insert(L, 1);
+  return 2;
+}
+
 static int stmtreset(lua_State *L) {
   sqlite3_stmt *stmt = checkstmt(L, 1);
   int code = sqlite3_reset(stmt);
@@ -102,6 +110,42 @@ static int stmtreset(lua_State *L) {
     return luaL_error(L, "sqlite error on reset: %s", sqlite3_errstr(code));
   }
   return 0;
+}
+
+static void pushcolval(lua_State *L, sqlite3_stmt *stmt, int col) {
+  int ty = sqlite3_column_type(stmt, col);
+  switch (ty) {
+    case SQLITE_FLOAT:
+    case SQLITE_INTEGER:
+      lua_pushnumber(L, sqlite3_column_double(stmt, col));
+      break;
+    case SQLITE_TEXT: {
+      const char *text = (const char *)sqlite3_column_text(stmt, col);
+      int len = sqlite3_column_bytes(stmt, col);
+      lua_pushlstring(L, text, len);
+      break;
+    }
+    default:
+      luaL_error(L, "unexpected sqlite type %d", ty);
+  }
+}
+
+static int stmtrowsaux(lua_State *L) {
+  sqlite3_stmt *stmt = checkstmt(L, 1);
+  int code = sqlite3_step(stmt);
+  if (code == SQLITE_DONE) {
+    return 0;
+  } else if (code != SQLITE_ROW) {
+    return luaL_error(L, "sqlite error on step: %s", sqlite3_errstr(code));
+  }
+  lua_settop(L, 0);
+  int cols = sqlite3_column_count(stmt);
+  lua_createtable(L, cols, 0);
+  for (int i = 0; i < cols; ++i) {
+    pushcolval(L, stmt, i);
+    lua_rawseti(L, -2, i + 1);
+  }
+  return 1;
 }
 
 static int stmturowsaux(lua_State *L) {
@@ -116,31 +160,9 @@ static int stmturowsaux(lua_State *L) {
   int cols = sqlite3_column_count(stmt);
   luaL_checkstack(L, cols, "sqlite: too many columns for stack");
   for (int i = 0; i < cols; ++i) {
-    int ty = sqlite3_column_type(stmt, i);
-    switch (ty) {
-      case SQLITE_FLOAT:
-      case SQLITE_INTEGER:
-        lua_pushnumber(L, sqlite3_column_double(stmt, i));
-        break;
-      case SQLITE_TEXT: {
-        const char *text = (const char *)sqlite3_column_text(stmt, i);
-        int len = sqlite3_column_bytes(stmt, i);
-        lua_pushlstring(L, text, len);
-        break;
-      }
-      default:
-        return luaL_error(L, "unexpected sqlite type %d", ty);
-    }
+    pushcolval(L, stmt, i);
   }
   return cols;
-}
-
-static int stmturows(lua_State *L) {
-  checkstmt(L, 1);
-  lua_settop(L, 1);
-  lua_pushvalue(L, lua_upvalueindex(1));
-  lua_insert(L, 1);
-  return 2;
 }
 
 int luaopen_lsqlite3(lua_State *L) {
@@ -168,8 +190,11 @@ int luaopen_lsqlite3(lua_State *L) {
     lua_setfield(L, -2, "bind_values");
     lua_pushcfunction(L, stmtreset);
     lua_setfield(L, -2, "reset");
+    lua_pushcfunction(L, stmtrowsaux);
+    lua_pushcclosure(L, stmtgeniter, 1);
+    lua_setfield(L, -2, "rows");
     lua_pushcfunction(L, stmturowsaux);
-    lua_pushcclosure(L, stmturows, 1);
+    lua_pushcclosure(L, stmtgeniter, 1);
     lua_setfield(L, -2, "urows");
     lua_setfield(L, -2, "__index");
     lua_pushcfunction(L, stmtgc);

@@ -16,6 +16,13 @@ describe('sqlite', function()
   end)
   describe('stmt', function()
     local stmt = db:prepare('SELECT F2, F1 FROM Foo')
+    it('rows', function()
+      local t = {}
+      for a in stmt:rows() do
+        table.insert(t, a)
+      end
+      assert.same({ { 'rofl', 1 }, { 'copter', 2 } }, t)
+    end)
     it('urows', function()
       local t = {}
       for a, b in stmt:urows() do
