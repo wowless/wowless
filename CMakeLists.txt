@@ -150,7 +150,7 @@ target_link_libraries(lzlib PRIVATE ZLIB::ZLIB)
 
 find_package(unofficial-sqlite3 CONFIG REQUIRED)
 
-lua2c(wowlesssqlite wowless.sqlite=c)
+lua2c(wowlesssqlite lsqlite3=c)
 target_sources(wowlesssqlite PRIVATE wowless/sqlite.c)
 target_link_libraries(wowlesssqlite PRIVATE unofficial::sqlite3::sqlite3)
 

@@ -1,4 +1,4 @@
-local lsqlite3 = require('wowless.sqlite')
+local lsqlite3 = require('lsqlite3')
 local sqlquote = require('tools.sqlite3ext').quote
 
 local function factory(theProduct)

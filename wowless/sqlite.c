@@ -32,10 +32,34 @@ static int prepare(lua_State *L) {
 
 static int db_gc(lua_State *L) {
   sqlite3 *db = checkdb(L, 1);
-  if (sqlite3_close_v2(db) != SQLITE_OK) {
-    return luaL_error(L, "sqlite error on close: %s", sqlite3_errmsg(db));
-  }
+  sqlite3_close_v2(db);
   return 0;
+}
+
+static int dbclose(lua_State *L) {
+  sqlite3 **db = luaL_checkudata(L, 1, "wowless.sqlite.db");
+  if (sqlite3_close_v2(*db) != SQLITE_OK) {
+    return luaL_error(L, "sqlite error on close: %s", sqlite3_errmsg(*db));
+  }
+  *db = 0;
+  return 0;
+}
+
+static int dbopen(lua_State *L) {
+  lua_settop(L, 0);
+  sqlite3 **db = lua_newuserdata(L, sizeof(*db));
+  luaL_getmetatable(L, "wowless.sqlite.db");
+  lua_setmetatable(L, -2);
+  if (sqlite3_open(":memory:", db) != SQLITE_OK) {
+    if (!*db) {
+      return luaL_error(L, "sqlite: out of memory");
+    } else {
+      int errcode = sqlite3_errcode(*db);
+      sqlite3_close(*db);
+      return luaL_error(L, "sqlite error on open: %s", sqlite3_errstr(errcode));
+    }
+  }
+  return 1;
 }
 
 static int open_memory(lua_State *L) {
@@ -55,9 +79,11 @@ static int open_memory(lua_State *L) {
   return 1;
 }
 
-int luaopen_wowless_sqlite(lua_State *L) {
+int luaopen_lsqlite3(lua_State *L) {
   if (luaL_newmetatable(L, "wowless.sqlite.db")) {
     lua_newtable(L);
+    lua_pushcfunction(L, dbclose);
+    lua_setfield(L, -2, "close");
     lua_pushcfunction(L, errmsg);
     lua_setfield(L, -2, "errmsg");
     lua_pushcfunction(L, exec);
@@ -70,7 +96,11 @@ int luaopen_wowless_sqlite(lua_State *L) {
   }
   lua_pop(L, 1);
   lua_newtable(L);
+  lua_pushcfunction(L, dbopen);
+  lua_setfield(L, -2, "open");
   lua_pushcfunction(L, open_memory);
   lua_setfield(L, -2, "open_memory");
+  lua_pushnumber(L, 0);
+  lua_setfield(L, -2, "OK");
   return 1;
 }
