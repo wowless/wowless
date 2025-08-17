@@ -1,5 +1,5 @@
-#include "lua.h"
 #include "lauxlib.h"
+#include "lua.h"
 #include "sqlite3.h"
 
 static sqlite3 *checkdb(lua_State *L, int idx) {
@@ -7,33 +7,9 @@ static sqlite3 *checkdb(lua_State *L, int idx) {
   return *db;
 }
 
-static int errmsg(lua_State *L) {
-  sqlite3 *db = checkdb(L, 1);
-  lua_pushstring(L, sqlite3_errmsg(db));
-  return 1;
-}
-
-static int exec(lua_State *L) {
-  sqlite3 *db = checkdb(L, 1);
-  const char *sql = luaL_checkstring(L, 2);
-  lua_pushnumber(L, sqlite3_exec(db, sql, 0, 0, 0));
-  return 1;
-}
-
-static int prepare(lua_State *L) {
-  sqlite3 *db = checkdb(L, 1);
-  size_t sz;
-  const char *sql = luaL_checklstring(L, 2, &sz);
-  sqlite3_stmt **stmt = lua_newuserdata(L, sizeof(*stmt));
-  luaL_getmetatable(L, "wowless.sqlite.stmt");
-  lua_setmetatable(L, -2);
-  return sqlite3_prepare_v2(db, sql, sz + 1, stmt, 0) == SQLITE_OK ? 1 : 0;
-}
-
-static int db_gc(lua_State *L) {
-  sqlite3 *db = checkdb(L, 1);
-  sqlite3_close_v2(db);
-  return 0;
+static sqlite3_stmt *checkstmt(lua_State *L, int idx) {
+  sqlite3_stmt **stmt = luaL_checkudata(L, idx, "wowless.sqlite.stmt");
+  return *stmt;
 }
 
 static int dbclose(lua_State *L) {
@@ -45,7 +21,36 @@ static int dbclose(lua_State *L) {
   return 0;
 }
 
-static int dbopen(lua_State *L) {
+static int dberrmsg(lua_State *L) {
+  sqlite3 *db = checkdb(L, 1);
+  lua_pushstring(L, sqlite3_errmsg(db));
+  return 1;
+}
+
+static int dbexec(lua_State *L) {
+  sqlite3 *db = checkdb(L, 1);
+  const char *sql = luaL_checkstring(L, 2);
+  lua_pushnumber(L, sqlite3_exec(db, sql, 0, 0, 0));
+  return 1;
+}
+
+static int dbgc(lua_State *L) {
+  sqlite3 *db = checkdb(L, 1);
+  sqlite3_close_v2(db);
+  return 0;
+}
+
+static int dbprepare(lua_State *L) {
+  sqlite3 *db = checkdb(L, 1);
+  size_t sz;
+  const char *sql = luaL_checklstring(L, 2, &sz);
+  sqlite3_stmt **stmt = lua_newuserdata(L, sizeof(*stmt));
+  luaL_getmetatable(L, "wowless.sqlite.stmt");
+  lua_setmetatable(L, -2);
+  return sqlite3_prepare_v2(db, sql, sz + 1, stmt, 0) == SQLITE_OK ? 1 : 0;
+}
+
+static int sqliteopen(lua_State *L) {
   const char *filename = luaL_checkstring(L, 1);
   sqlite3 **db = lua_newuserdata(L, sizeof(*db));
   luaL_getmetatable(L, "wowless.sqlite.db");
@@ -62,7 +67,7 @@ static int dbopen(lua_State *L) {
   return 1;
 }
 
-static int open_memory(lua_State *L) {
+static int sqliteopenmemory(lua_State *L) {
   lua_settop(L, 0);
   sqlite3 **db = lua_newuserdata(L, sizeof(*db));
   luaL_getmetatable(L, "wowless.sqlite.db");
@@ -79,26 +84,39 @@ static int open_memory(lua_State *L) {
   return 1;
 }
 
+static int stmtgc(lua_State *L) {
+  sqlite3_stmt *stmt = checkstmt(L, 1);
+  sqlite3_finalize(stmt);
+  return 0;
+}
+
 int luaopen_lsqlite3(lua_State *L) {
   if (luaL_newmetatable(L, "wowless.sqlite.db")) {
     lua_newtable(L);
     lua_pushcfunction(L, dbclose);
     lua_setfield(L, -2, "close");
-    lua_pushcfunction(L, errmsg);
+    lua_pushcfunction(L, dberrmsg);
     lua_setfield(L, -2, "errmsg");
-    lua_pushcfunction(L, exec);
+    lua_pushcfunction(L, dbexec);
     lua_setfield(L, -2, "exec");
-    lua_pushcfunction(L, prepare);
+    lua_pushcfunction(L, dbprepare);
     lua_setfield(L, -2, "prepare");
     lua_setfield(L, -2, "__index");
-    lua_pushcfunction(L, db_gc);
+    lua_pushcfunction(L, dbgc);
+    lua_setfield(L, -2, "__gc");
+  }
+  lua_pop(L, 1);
+  if (luaL_newmetatable(L, "wowless.sqlite.stmt")) {
+    lua_newtable(L);
+    lua_setfield(L, -2, "__index");
+    lua_pushcfunction(L, stmtgc);
     lua_setfield(L, -2, "__gc");
   }
   lua_pop(L, 1);
   lua_newtable(L);
-  lua_pushcfunction(L, dbopen);
+  lua_pushcfunction(L, sqliteopen);
   lua_setfield(L, -2, "open");
-  lua_pushcfunction(L, open_memory);
+  lua_pushcfunction(L, sqliteopenmemory);
   lua_setfield(L, -2, "open_memory");
   lua_pushnumber(L, 0);
   lua_setfield(L, -2, "OK");
