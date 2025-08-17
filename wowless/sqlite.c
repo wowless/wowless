@@ -71,8 +71,12 @@ static int sqliteopen(lua_State *L) {
   return doopen(L, filename);
 }
 
-static int sqliteopenmemory(lua_State *L) {
-  return doopen(L, ":memory:");
+static int sqliteopenmemory(lua_State *L) { return doopen(L, ":memory:"); }
+
+static int stmtbindvalues(lua_State *L) {
+  sqlite3_stmt *stmt = checkstmt(L, 1);
+  /* TODO implement */
+  return 0;
 }
 
 static int stmtgc(lua_State *L) {
@@ -88,6 +92,20 @@ static int stmtreset(lua_State *L) {
     return luaL_error(L, "sqlite error on reset: %s", sqlite3_errstr(code));
   }
   return 0;
+}
+
+static int stmturowsaux(lua_State *L) {
+  sqlite3_stmt *stmt = checkstmt(L, 1);
+  /* TODO implement */
+  return 0;
+}
+
+static int stmturows(lua_State *L) {
+  checkstmt(L, 1);
+  lua_settop(L, 1);
+  lua_pushvalue(L, lua_upvalueindex(1));
+  lua_insert(L, 1);
+  return 2;
 }
 
 int luaopen_lsqlite3(lua_State *L) {
@@ -108,8 +126,13 @@ int luaopen_lsqlite3(lua_State *L) {
   lua_pop(L, 1);
   if (luaL_newmetatable(L, "wowless.sqlite.stmt")) {
     lua_newtable(L);
+    lua_pushcfunction(L, stmtbindvalues);
+    lua_setfield(L, -2, "bind_values");
     lua_pushcfunction(L, stmtreset);
     lua_setfield(L, -2, "reset");
+    lua_pushcfunction(L, stmturowsaux);
+    lua_pushcclosure(L, stmturows, 1);
+    lua_setfield(L, -2, "urows");
     lua_setfield(L, -2, "__index");
     lua_pushcfunction(L, stmtgc);
     lua_setfield(L, -2, "__gc");
