@@ -11,7 +11,7 @@ describe('sqlite', function()
       for a, b in db:urows('SELECT F1, F2 FROM Foo') do
         table.insert(t, { a, b })
       end
-      assert.same({ { 1, 'rofl' }, { 2, 'copter'} }, t)
+      assert.same({ { 1, 'rofl' }, { 2, 'copter' } }, t)
     end)
   end)
   describe('stmt', function()
