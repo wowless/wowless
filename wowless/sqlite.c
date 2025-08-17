@@ -51,8 +51,13 @@ static int dbprepare(lua_State *L) {
 }
 
 static int dburows(lua_State *L) {
-  sqlite3 *db = checkdb(L, 1);
-  return 0;
+  lua_settop(L, 2);
+  lua_pushcfunction(L, dbprepare);
+  lua_insert(L, 1);
+  lua_call(L, 2, 1);
+  lua_pushvalue(L, lua_upvalueindex(1));
+  lua_insert(L, 1);
+  return 2;
 }
 
 static int doopen(lua_State *L, const char *filename) {
@@ -149,7 +154,8 @@ int luaopen_lsqlite3(lua_State *L) {
     lua_setfield(L, -2, "exec");
     lua_pushcfunction(L, dbprepare);
     lua_setfield(L, -2, "prepare");
-    lua_pushcfunction(L, dburows);
+    lua_pushcfunction(L, stmturowsaux);
+    lua_pushcclosure(L, dburows, 1);
     lua_setfield(L, -2, "urows");
     lua_setfield(L, -2, "__index");
     lua_pushcfunction(L, dbgc);
