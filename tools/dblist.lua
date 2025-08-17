@@ -13,7 +13,7 @@ local function dblist(product)
   for sql in pairs(datalua.sqls) do
     -- We are fortunate that sqlite complains about missing tables first.
     local sqltext = sqlcfgs[sql].text
-    local db = require('lsqlite3').open_memory()
+    local db = require('wowless.sqlite').open_memory()
     local tables = {}
     while not db:prepare(sqltext) do
       local t = db:errmsg():match('^no such table: (%a+)$')

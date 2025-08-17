@@ -150,15 +150,9 @@ target_link_libraries(lzlib PRIVATE ZLIB::ZLIB)
 
 find_package(unofficial-sqlite3 CONFIG REQUIRED)
 
-FetchContent_Declare(
-  lsqlite3
-  URL http://lua.sqlite.org/home/zip/lsqlite3_v096.zip
-  URL_HASH MD5=70e87bc7efa1ec4a7d69ccebdcd91e09
-  SOURCE_SUBDIR disable_cmakelists_txt)
-FetchContent_MakeAvailable(lsqlite3)
-lua2c(lsqlite3 lsqlite3=c)
-target_sources(lsqlite3 PRIVATE ${lsqlite3_SOURCE_DIR}/lsqlite3.c)
-target_link_libraries(lsqlite3 PRIVATE unofficial::sqlite3::sqlite3)
+lua2c(wowlesssqlite wowless.sqlite=c)
+target_sources(wowlesssqlite PRIVATE wowless/sqlite.c)
+target_link_libraries(wowlesssqlite PRIVATE unofficial::sqlite3::sqlite3)
 
 FetchContent_Declare(
   luafilesystem
@@ -483,9 +477,9 @@ add_lua_executable(
   dblist
   ${CMAKE_CURRENT_SOURCE_DIR}/tools/dblist.lua
   argparse
-  lsqlite3
   penlight
   toolsutil
+  wowlesssqlite
   wowlessyaml)
 
 foreach(product ${products})
@@ -571,10 +565,10 @@ add_lua_executable(
   sqlite
   ${CMAKE_CURRENT_SOURCE_DIR}/tools/sqlite.lua
   argparse
-  lsqlite3
   penlight
   toolsdb2
-  toolssqlite3ext)
+  toolssqlite3ext
+  wowlesssqlite)
 
 find_package(CURL REQUIRED)
 find_package(OpenSSL REQUIRED)
@@ -1126,7 +1120,6 @@ add_lua_executable(
   argparse
   ${dataluas}
   date
-  lsqlite3
   luaexpat
   lzlib
   minheap
@@ -1136,6 +1129,7 @@ add_lua_executable(
   tsort
   wowlesslib
   wowlessrender
+  wowlesssqlite
   wowlesstoc
   wowlessutil
   wowlessyaml)
@@ -1146,7 +1140,6 @@ add_lua_executable(
   argparse
   ${dataluas}
   date
-  lsqlite3
   luaexpat
   luassert
   lzlib
@@ -1159,6 +1152,7 @@ add_lua_executable(
   wowapischema
   wowlesslib
   wowlessrender
+  wowlesssqlite
   wowlesstoc
   wowlessutil
   wowlessyaml)
