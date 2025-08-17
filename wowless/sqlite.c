@@ -50,8 +50,7 @@ static int dbprepare(lua_State *L) {
   return sqlite3_prepare_v2(db, sql, sz + 1, stmt, 0) == SQLITE_OK ? 1 : 0;
 }
 
-static int sqliteopen(lua_State *L) {
-  const char *filename = luaL_checkstring(L, 1);
+static int doopen(lua_State *L, const char *filename) {
   sqlite3 **db = lua_newuserdata(L, sizeof(*db));
   luaL_getmetatable(L, "wowless.sqlite.db");
   lua_setmetatable(L, -2);
@@ -67,21 +66,13 @@ static int sqliteopen(lua_State *L) {
   return 1;
 }
 
+static int sqliteopen(lua_State *L) {
+  const char *filename = luaL_checkstring(L, 1);
+  return doopen(L, filename);
+}
+
 static int sqliteopenmemory(lua_State *L) {
-  lua_settop(L, 0);
-  sqlite3 **db = lua_newuserdata(L, sizeof(*db));
-  luaL_getmetatable(L, "wowless.sqlite.db");
-  lua_setmetatable(L, -2);
-  if (sqlite3_open(":memory:", db) != SQLITE_OK) {
-    if (!*db) {
-      return luaL_error(L, "sqlite: out of memory");
-    } else {
-      int errcode = sqlite3_errcode(*db);
-      sqlite3_close(*db);
-      return luaL_error(L, "sqlite error on open: %s", sqlite3_errstr(errcode));
-    }
-  }
-  return 1;
+  return doopen(L, ":memory:");
 }
 
 static int stmtgc(lua_State *L) {
