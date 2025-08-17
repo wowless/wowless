@@ -81,6 +81,15 @@ static int stmtgc(lua_State *L) {
   return 0;
 }
 
+static int stmtreset(lua_State *L) {
+  sqlite3_stmt *stmt = checkstmt(L, 1);
+  int code = sqlite3_reset(stmt);
+  if (code != SQLITE_OK) {
+    return luaL_error(L, "sqlite error on reset: %s", sqlite3_errstr(code));
+  }
+  return 0;
+}
+
 int luaopen_lsqlite3(lua_State *L) {
   if (luaL_newmetatable(L, "wowless.sqlite.db")) {
     lua_newtable(L);
@@ -99,6 +108,8 @@ int luaopen_lsqlite3(lua_State *L) {
   lua_pop(L, 1);
   if (luaL_newmetatable(L, "wowless.sqlite.stmt")) {
     lua_newtable(L);
+    lua_pushcfunction(L, stmtreset);
+    lua_setfield(L, -2, "reset");
     lua_setfield(L, -2, "__index");
     lua_pushcfunction(L, stmtgc);
     lua_setfield(L, -2, "__gc");
