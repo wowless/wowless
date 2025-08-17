@@ -18,10 +18,10 @@ describe('sqlite', function()
     local stmt = db:prepare('SELECT F2, F1 FROM Foo')
     it('urows', function()
       local t = {}
-      for a, b in stmt:urows('SELECT F1, F2 FROM Foo') do
+      for a, b in stmt:urows() do
         table.insert(t, { a, b })
       end
-      assert.same({ { 1, 'rofl' }, { 2, 'copter'} }, t)
+      assert.same({ { 'rofl', 1 }, { 'copter', 2 } }, t)
     end)
     stmt:reset()
   end)

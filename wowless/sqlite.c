@@ -101,8 +101,33 @@ static int stmtreset(lua_State *L) {
 
 static int stmturowsaux(lua_State *L) {
   sqlite3_stmt *stmt = checkstmt(L, 1);
-  /* TODO implement */
-  return 0;
+  int code = sqlite3_step(stmt);
+  if (code == SQLITE_DONE) {
+    return 0;
+  } else if (code != SQLITE_ROW) {
+    return luaL_error(L, "sqlite error on step: %s", sqlite3_errstr(code));
+  }
+  lua_settop(L, 0);
+  int cols = sqlite3_column_count(stmt);
+  luaL_checkstack(L, cols, "sqlite: too many columns for stack");
+  for (int i = 0; i < cols; ++i) {
+    int ty = sqlite3_column_type(stmt, i);
+    switch (ty) {
+      case SQLITE_FLOAT:
+      case SQLITE_INTEGER:
+        lua_pushnumber(L, sqlite3_column_double(stmt, i));
+        break;
+      case SQLITE_TEXT: {
+        const char *text = (const char *)sqlite3_column_text(stmt, i);
+        int len = sqlite3_column_bytes(stmt, i);
+        lua_pushlstring(L, text, len);
+        break;
+      }
+      default:
+        return luaL_error(L, "unexpected sqlite type %d", ty);
+    }
+  }
+  return cols;
 }
 
 static int stmturows(lua_State *L) {
