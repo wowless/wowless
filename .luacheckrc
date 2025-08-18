@@ -41,3 +41,6 @@ files['addon/Wowless'] = {
     'SendSystemMessage',
   },
 }
+exclude_files = {
+  'meta.lua',
+}
