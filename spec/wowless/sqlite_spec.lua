@@ -1,5 +1,5 @@
 describe('sqlite', function()
-  local db = require('lsqlite3').open_memory()
+  local db = require('wowless.sqlite').open_memory()
   db:exec([=[
     CREATE TABLE Foo (F1 INT, F2 STRING);
     INSERT INTO Foo VALUES (1, "rofl");

@@ -208,7 +208,7 @@ static int stmturowsaux(lua_State *L) {
   return cols;
 }
 
-int luaopen_lsqlite3(lua_State *L) {
+int luaopen_wowless_sqlite(lua_State *L) {
   if (luaL_newmetatable(L, "wowless.sqlite.db")) {
     lua_newtable(L);
     lua_pushcfunction(L, dbclose);

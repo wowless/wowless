@@ -1,4 +1,4 @@
-local lsqlite3 = require('lsqlite3')
+local sqlite = require('wowless.sqlite')
 local sqlquote = require('tools.sqlite3ext').quote
 
 local function factory(theProduct)
@@ -24,8 +24,8 @@ local function factory(theProduct)
     end
     table.insert(dbinit, 'COMMIT')
     table.insert(dbinit, '')
-    local db = filename and lsqlite3.open(filename) or lsqlite3.open_memory()
-    if db:exec(table.concat(dbinit, ';\n')) ~= lsqlite3.OK then
+    local db = filename and sqlite.open(filename) or sqlite.open_memory()
+    if db:exec(table.concat(dbinit, ';\n')) ~= sqlite.OK then
       error('sqlite failure: ' .. db:errmsg() .. '\n' .. table.concat(dbinit, ';\n'))
     end
     return db
@@ -62,7 +62,7 @@ local function factory(theProduct)
     end
     table.insert(dbinit, 'COMMIT')
     table.insert(dbinit, '')
-    if db:exec(table.concat(dbinit, ';\n')) ~= lsqlite3.OK then
+    if db:exec(table.concat(dbinit, ';\n')) ~= sqlite.OK then
       error('sqlite failure: ' .. db:errmsg())
     end
   end

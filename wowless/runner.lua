@@ -49,7 +49,7 @@ local function run(cfg)
   the global table.
   ]]
   require('lfs')
-  require('lsqlite3')
+  require('wowless.sqlite')
   require('wowless.ext').setglobaltable(api.env)
   -- end WARNING WARNING WARNING
 
