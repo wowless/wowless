@@ -153,34 +153,35 @@ static void pushcolval(lua_State *L, sqlite3_stmt *stmt, int col) {
   }
 }
 
-static int stmtrowsaux(lua_State *L) {
-  sqlite3_stmt *stmt = checkstmt(L, 1);
+static int stepaux(lua_State *L, sqlite3_stmt *stmt) {
   int code = sqlite3_step(stmt);
   if (code == SQLITE_DONE) {
     return 0;
   } else if (code != SQLITE_ROW) {
     return luaL_error(L, "sqlite error on step: %s", sqlite3_errstr(code));
   }
-  lua_settop(L, 0);
-  int cols = sqlite3_column_count(stmt);
-  lua_createtable(L, cols, 0);
-  for (int i = 0; i < cols; ++i) {
-    pushcolval(L, stmt, i);
-    lua_rawseti(L, -2, i + 1);
+  return sqlite3_column_count(stmt);
+}
+
+static int stmtrowsaux(lua_State *L) {
+  sqlite3_stmt *stmt = checkstmt(L, 1);
+  int cols = stepaux(L, stmt);
+  if (cols == 0) {
+    return 0;
+  } else {
+    lua_createtable(L, cols, 0);
+    for (int i = 0; i < cols; ++i) {
+      pushcolval(L, stmt, i);
+      lua_rawseti(L, -2, i + 1);
+    }
+    return 1;
   }
-  return 1;
 }
 
 static int stmturowsaux(lua_State *L) {
   sqlite3_stmt *stmt = checkstmt(L, 1);
-  int code = sqlite3_step(stmt);
-  if (code == SQLITE_DONE) {
-    return 0;
-  } else if (code != SQLITE_ROW) {
-    return luaL_error(L, "sqlite error on step: %s", sqlite3_errstr(code));
-  }
+  int cols = stepaux(L, stmt);
   lua_settop(L, 0);
-  int cols = sqlite3_column_count(stmt);
   luaL_checkstack(L, cols, "sqlite: too many columns for stack");
   for (int i = 0; i < cols; ++i) {
     pushcolval(L, stmt, i);
