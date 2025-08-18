@@ -93,6 +93,9 @@ static int stmtbindvalues(lua_State *L) {
       case LUA_TBOOLEAN:
         code = sqlite3_bind_int(stmt, i - 1, lua_toboolean(L, i));
         break;
+      case LUA_TNIL:
+        code = sqlite3_bind_null(stmt, i - 1);
+        break;
       case LUA_TNUMBER:
         code = sqlite3_bind_double(stmt, i - 1, lua_tonumber(L, i));
         break;
