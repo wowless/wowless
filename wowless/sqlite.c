@@ -88,37 +88,25 @@ static int stmtbindvalues(lua_State *L) {
   int n = lua_gettop(L);
   for (int i = 2; i <= n; ++i) {
     int ty = lua_type(L, i);
+    int code;
     switch (ty) {
-      case LUA_TBOOLEAN: {
-        int k = lua_toboolean(L, i);
-        int code = sqlite3_bind_int(stmt, i - 1, k);
-        if (code != SQLITE_OK) {
-          return luaL_error(L, "sqlite error in bind: %s",
-                            sqlite3_errstr(code));
-        }
+      case LUA_TBOOLEAN:
+        code = sqlite3_bind_int(stmt, i - 1, lua_toboolean(L, i));
         break;
-      }
-      case LUA_TNUMBER: {
-        lua_Number k = lua_tonumber(L, i);
-        int code = sqlite3_bind_double(stmt, i - 1, k);
-        if (code != SQLITE_OK) {
-          return luaL_error(L, "sqlite error in bind: %s",
-                            sqlite3_errstr(code));
-        }
+      case LUA_TNUMBER:
+        code = sqlite3_bind_double(stmt, i - 1, lua_tonumber(L, i));
         break;
-      }
       case LUA_TSTRING: {
         size_t sz;
         const char *text = lua_tolstring(L, i, &sz);
-        int code = sqlite3_bind_text(stmt, i - 1, text, sz, SQLITE_TRANSIENT);
-        if (code != SQLITE_OK) {
-          return luaL_error(L, "sqlite error in bind: %s",
-                            sqlite3_errstr(code));
-        }
+        code = sqlite3_bind_text(stmt, i - 1, text, sz, SQLITE_TRANSIENT);
         break;
       }
       default:
         return luaL_error(L, "unexpected value type %s", lua_typename(L, ty));
+    }
+    if (code != SQLITE_OK) {
+      return luaL_error(L, "sqlite error in bind: %s", sqlite3_errstr(code));
     }
   }
   return 0;
