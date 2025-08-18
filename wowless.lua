@@ -8,7 +8,6 @@ local args = (function()
   run:option('-e --maxerrors', 'quit once this number of errors occur'):convert(tonumber)
   run:option('-s --scripts', 'scripts to execute')
   run:flag('--allevents', 'send all nullary events')
-  run:flag('--debug', 'enter debug mode after load')
   run:flag('--frame0', 'write frame0 debug')
   run:flag('--profile', 'dump profile')
   return parser:parse()
@@ -17,7 +16,6 @@ debug.setprofilingenabled(args.profile)
 local runner = require('wowless.runner')
 local modules = runner.run({
   allevents = args.allevents,
-  debug = args.debug,
   dir = 'extracts/' .. args.product,
   frame0 = args.frame0,
   loglevel = args.loglevel,

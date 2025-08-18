@@ -85,11 +85,6 @@ local function run(cfg)
     api.UserData(api.env.UIParent):SetSize(system.GetScreenWidth(), system.GetScreenHeight())
   end
   SendEvent('SPELLS_CHANGED')
-  if cfg.debug then
-    print('_, api = debug.getlocal(3, 5)')
-    debug.debug()
-    os.exit(0)
-  end
   if cfg.frame0 then
     local render = require('wowless.render')
     local screenWidth, screenHeight = system.GetScreenWidth(), system.GetScreenHeight()
