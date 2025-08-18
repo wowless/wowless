@@ -18,7 +18,7 @@ return function(env, log, security)
       end
       script(...)
     end
-    scripts[lname] = setfenv(newfn, env.env)
+    scripts[lname] = setfenv(newfn, env.genv)
     return true
   end
 

@@ -1,30 +1,33 @@
 local mixin = require('wowless.util').mixin
 return function()
-  local env = {}
+  local genv = {}
+  local secureenv = {}
+  genv._G = genv
   return {
-    env = env,
+    genv = genv,
     getfenv = function(arg)
       local narg = tonumber(arg)
       local fenv = getfenv(narg and narg + 2 or arg)
-      return fenv == _G and env or fenv
+      return fenv == _G and genv or fenv
     end,
     GetCurrentEnvironment = function()
       -- getfenv(2) but accounting for the api loading stack
       return getfenv(3)
     end,
     GetGlobalEnvironment = function()
-      return env
+      return genv
     end,
     IsInGlobalEnvironment = function()
       -- getfenv(2) but accounting for the api loading stack
-      return getfenv(3) == env
+      return getfenv(3) == genv
     end,
     mixin = function(t, k)
-      return mixin(t, env[k])
+      return mixin(t, genv[k])
     end,
+    secureenv = secureenv,
     SwapToGlobalEnvironment = function()
-      -- setfenv(2, env) but accounting for the api loading stack
-      setfenv(3, env)
+      -- setfenv(2, genv) but accounting for the api loading stack
+      setfenv(3, genv)
     end,
   }
 end

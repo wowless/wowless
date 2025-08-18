@@ -202,6 +202,7 @@ Region/SetPoint:
   luafile:
     modules:
       api:
+      env:
       log:
 Region/SetScale:
   luafile:

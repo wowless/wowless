@@ -18,16 +18,15 @@ end
 local function init(modules, lite)
   local impls, rawimpls = modules.apiloader(modules)
   modules.api.impls = rawimpls
-  modules.api.env._G = modules.api.env
-  Mixin(modules.api.env, deepcopy(impls))
-  Mixin(modules.api.env, deepcopy(modules.datalua.globals))
-  Mixin(modules.api.secureenv, deepcopy(impls))
-  Mixin(modules.api.secureenv, deepcopy(modules.datalua.globals))
+  Mixin(modules.env.genv, deepcopy(impls))
+  Mixin(modules.env.genv, deepcopy(modules.datalua.globals))
+  Mixin(modules.env.secureenv, deepcopy(impls))
+  Mixin(modules.env.secureenv, deepcopy(modules.datalua.globals))
 
   local wowlessDebug = Mixin({}, debug)
   wowlessDebug.debug = function()
     -- luacheck: ignore 211
-    local _G = modules.api.env
+    local _G = modules.env.genv
     local function getLocals(stackLevel)
       stackLevel = (stackLevel or 0) + 5 -- 5 = 3 (this function) + 2 (caller)
       local locals = {}
@@ -49,7 +48,7 @@ local function init(modules, lite)
     debug.debug()
   end
 
-  modules.api.env.__wowless = {
+  modules.env.genv.__wowless = {
     debug = wowlessDebug,
     dump = dump(modules.api),
     lite = lite,

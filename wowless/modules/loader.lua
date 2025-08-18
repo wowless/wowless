@@ -2,6 +2,7 @@ return function(
   addons,
   api,
   datalua,
+  envmodule,
   events,
   loadercfg,
   log,
@@ -12,6 +13,8 @@ return function(
   templates,
   uiobjecttypes
 )
+  local genv = envmodule.genv
+  local secureenv = envmodule.secureenv
   local SendEvent = events.SendEvent
 
   local rootDir = loadercfg.rootDir
@@ -71,7 +74,7 @@ return function(
       return tonumber(value) or 0
     end
     if ty == 'global' then
-      local t = api.env
+      local t = genv
       for part in value:gmatch('[^.]+') do
         if type(t) ~= 'table' then
           log(1, 'warning: cannot find %q in _G', value)
@@ -133,7 +136,7 @@ return function(
     if not name then
       return e.attr.r or 0, e.attr.g or 0, e.attr.b or 0, e.attr.a or 1
     end
-    local color = api.env[name]
+    local color = genv[name]
     if color then
       return color.r, color.g, color.b, color.a
     end
@@ -142,16 +145,16 @@ return function(
   end
 
   local function loadLuaString(filename, str, line, useSecureEnv, closureTaint, ...)
-    local before = api.env.ScrollingMessageFrameMixin
+    local before = genv.ScrollingMessageFrameMixin
     local fn = loadstr(str, filename, line)
     if useSecureEnv then
-      setfenv(fn, api.secureenv)
+      setfenv(fn, secureenv)
     end
     debug.setnewclosuretaint(closureTaint)
     security.CallSandbox(fn, ...)
     debug.setnewclosuretaint(nil)
     -- Super hacky hack to hook ScrollingMessageFrameMixin.AddMessage
-    local after = api.env.ScrollingMessageFrameMixin
+    local after = genv.ScrollingMessageFrameMixin
     if after and not before then
       local f = after.AddMessage
       after.AddMessage = function(self, text, ...)
@@ -396,13 +399,13 @@ return function(
       obj.shown = not value
     end,
     mixin = function(ctx, obj, value)
-      local env = ctx.useAddonEnv and ctx.addonEnv or ctx.useSecureEnv and api.secureenv or api.env
+      local env = ctx.useAddonEnv and ctx.addonEnv or ctx.useSecureEnv and secureenv or genv
       for _, m in ipairs(value) do
         mixin(obj.luarep, env[m])
       end
     end,
     parent = function(ctx, obj, value)
-      local env = ctx.useAddonEnv and ctx.addonEnv or ctx.useSecureEnv and api.secureenv or api.env
+      local env = ctx.useAddonEnv and ctx.addonEnv or ctx.useSecureEnv and secureenv or genv
       local parent = env[value]
       api.SetParent(obj, parent and api.UserData(parent))
     end,
@@ -421,7 +424,7 @@ return function(
       end
     end,
     securemixin = function(ctx, obj, value)
-      local env = ctx.useAddonEnv and ctx.addonEnv or ctx.useSecureEnv and api.secureenv or api.env
+      local env = ctx.useAddonEnv and ctx.addonEnv or ctx.useSecureEnv and secureenv or genv
       for _, m in ipairs(value) do
         local mv = env[m]
         local sm = securemixins[mv]
@@ -586,7 +589,7 @@ return function(
                 log(1, 'ignoring virtual on %s', tostring(name))
               end
               local ety = e.type == 'worldframe' and 'frame' or e.type
-              local env = ctx.useAddonEnv and addonEnv or ctx.useSecureEnv and api.secureenv or api.env
+              local env = ctx.useAddonEnv and addonEnv or ctx.useSecureEnv and secureenv or genv
               return api.CreateUIObject(ety, name, parent, env, { template })
             end
           end
@@ -594,7 +597,7 @@ return function(
           local impl = xmlimpls[e.type] and xmlimpls[e.type].tag or nil
           local fn = xmllang[e.type]
           if type(impl) == 'table' and impl.script then
-            local env = ctx.useAddonEnv and addonEnv or ctx.useSecureEnv and api.secureenv or api.env
+            local env = ctx.useAddonEnv and addonEnv or ctx.useSecureEnv and secureenv or genv
             loadScript(e, parent, env, filename, ctx.intrinsic)
           elseif type(impl) == 'table' and impl.scope then
             loadElements(mixin({}, ctx, { [impl.scope] = true }), e.kids, parent)
@@ -909,8 +912,8 @@ return function(
 
   local function loadFrameXml()
     for tag, text in sqlitedb:urows('SELECT BaseTag, TagText_lang FROM GlobalStrings') do
-      api.env[tag] = text
-      api.secureenv[tag] = text
+      genv[tag] = text
+      secureenv[tag] = text
     end
     local blizzardAddons = {}
     for _, toc in ipairs(addonData) do
@@ -940,7 +943,7 @@ return function(
         local t = {}
         for _, attr in ipairs({ 'SavedVariables', 'SavedVariablesPerCharacter' }) do
           for var in (v.attrs[attr] or ''):gmatch('[^, ]+') do
-            local val = api.env[var]
+            local val = genv[var]
             if val ~= nil then
               table.insert(t, var)
               table.insert(t, ' = ')

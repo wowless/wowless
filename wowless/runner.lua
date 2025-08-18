@@ -26,6 +26,9 @@ local function run(cfg)
     maxErrors = cfg.maxErrors or math.huge,
   })
   local api = modules.api
+  local loader = modules.loader
+  local system = modules.system
+  local genv = modules.env.genv
 
   -- begin WARNING WARNING WARNING
   --[[
@@ -49,10 +52,9 @@ local function run(cfg)
   the global table.
   ]]
   require('lfs')
-  require('wowless.ext').setglobaltable(api.env)
+  require('wowless.ext').setglobaltable(genv)
   -- end WARNING WARNING WARNING
 
-  local loader = modules.loader
   require('wowless.env').init(modules, not cfg.dir)
   for k, v in pairs(modules.uiobjectloader(modules)) do
     modules.uiobjecttypes.Add(k, v)
@@ -73,7 +75,6 @@ local function run(cfg)
   local CallSafely = modules.security.CallSafely
   local CallSandbox = modules.security.CallSandbox
 
-  local system = modules.system
   system.LogIn()
   SendEvent('PLAYER_LOGIN')
   SendEvent('UPDATE_CHAT_WINDOWS')
@@ -81,8 +82,8 @@ local function run(cfg)
   SendEvent('PLAYER_ENTERING_WORLD', true, false)
   SendEvent('TRIAL_STATUS_UPDATE')
   SendEvent('DISPLAY_SIZE_CHANGED')
-  if api.env.UIParent then -- Super duper hack to unblock 10.0 UIPanel code.
-    api.UserData(api.env.UIParent):SetSize(system.GetScreenWidth(), system.GetScreenHeight())
+  if genv.UIParent then -- Super duper hack to unblock 10.0 UIPanel code.
+    api.UserData(genv.UIParent):SetSize(system.GetScreenWidth(), system.GetScreenHeight())
   end
   SendEvent('SPELLS_CHANGED')
   if cfg.frame0 then
@@ -95,8 +96,8 @@ local function run(cfg)
     end
     doit('frame0')
     doit('frame1')
-    if api.env.ToggleTalentFrame then
-      CallSandbox(api.env.ToggleTalentFrame)
+    if genv.ToggleTalentFrame then
+      CallSandbox(genv.ToggleTalentFrame)
       doit('frame1')
     end
     os.exit(0)
@@ -129,7 +130,7 @@ local function run(cfg)
     end,
     emotes = function()
       local cmds = {}
-      for k, v in pairs(api.env) do
+      for k, v in pairs(genv) do
         cmds[v] = k:match('^EMOTE%d+_CMD%d+$') or nil
       end
       for cmd in sorted(cmds) do
@@ -179,7 +180,7 @@ local function run(cfg)
       SendEvent('LOOT_CLOSED')
     end,
     macrotext = function()
-      local b = api.env.ActionButton1
+      local b = genv.ActionButton1
       if b then
         b = api.UserData(b)
         b:SetAttribute('type', 'macro')
@@ -193,7 +194,7 @@ local function run(cfg)
     end,
     slashcmds = function()
       local cmds = {}
-      for k, v in pairs(api.env) do
+      for k, v in pairs(genv) do
         local cmd = k:match('^SLASH_(.+)1$')
         if cmd then
           cmds[cmd] = v

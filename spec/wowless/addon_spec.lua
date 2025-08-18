@@ -9,8 +9,8 @@ describe('addon', function()
           },
           product = product,
         })
-        assert.True(modules.api.env.WowlessTestsDone)
-        assert.same({}, modules.api.env.WowlessTestFailures)
+        assert.True(modules.env.genv.WowlessTestsDone)
+        assert.same({}, modules.env.genv.WowlessTestFailures)
         assert.same(0, modules.security.GetErrorCount())
       end)
     end)

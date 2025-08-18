@@ -57,6 +57,7 @@ loader:
     addons:
     api:
     datalua:
+    env:
     events:
     loadercfg:
     log:

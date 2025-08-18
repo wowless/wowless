@@ -179,7 +179,7 @@ describe('typecheck', function()
       uiobjects = {},
     },
     {
-      env = {
+      genv = {
         roflmixin = {
           b = issecure,
         },

@@ -2,7 +2,7 @@ local hlist = require('wowless.hlist')
 
 return function(
   datalua,
-  envmodule,
+  env,
   events,
   log,
   loglevel,
@@ -14,9 +14,9 @@ return function(
   uiobjecttypes,
   visibility
 )
-  local env = envmodule.env
   local frames = hlist()
-  local secureenv = {}
+  local genv = env.genv
+  local secureenv = env.secureenv
   local userdata = uiobjects.userdata
 
   local InheritsFrom = uiobjecttypes.InheritsFrom
@@ -148,10 +148,10 @@ return function(
         objname = tostring(objnamearg)
       end
       ud.name = objname
-      if env[objname] then
+      if genv[objname] then
         log(3, 'overwriting global ' .. objname)
       end
-      env[objname] = obj
+      genv[objname] = obj
       secureenv[objname] = obj
       if addonEnv then
         addonEnv[objname] = obj
@@ -208,12 +208,10 @@ return function(
     CreateForbiddenFrame = CreateFrame, -- TODO implement properly
     CreateFrame = CreateFrame,
     CreateUIObject = CreateUIObject,
-    env = env,
     frames = frames,
     GetDebugName = GetDebugName,
     NextFrame = NextFrame,
     ParentSub = ParentSub,
-    secureenv = secureenv,
     SetParent = SetParent,
     UserData = uiobjects.UserData,
   }

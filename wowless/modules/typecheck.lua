@@ -43,7 +43,7 @@ return function(addons, datalua, env, uiobjects, units)
       end
     else
       if ty == 'Font' and type(value) == 'string' then
-        value = env.env[value]
+        value = env.genv[value]
       end
       if type(value) ~= 'table' then
         return nil, true
@@ -208,7 +208,7 @@ return function(addons, datalua, env, uiobjects, units)
         end
       end
       if isout then
-        local m = st.mixin and env.env[st.mixin] or {}
+        local m = st.mixin and env.genv[st.mixin] or {}
         for k, v in pairs(m) do
           if value[k] ~= v then
             return nil, 'has incorrect mixin value ' .. k

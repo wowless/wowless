@@ -305,6 +305,7 @@ GetClickFrame:
   impl:
     modules:
       api:
+      env:
 GetCurrentEnvironment:
   moduledelegate:
     name: env
