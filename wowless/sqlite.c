@@ -178,6 +178,22 @@ static int stmtrowsaux(lua_State *L) {
   }
 }
 
+static int stmtnrowsaux(lua_State *L) {
+  sqlite3_stmt *stmt = checkstmt(L, 1);
+  int cols = stepaux(L, stmt);
+  if (cols == 0) {
+    return 0;
+  } else {
+    lua_createtable(L, 0, cols);
+    for (int i = 0; i < cols; ++i) {
+      lua_pushstring(L, sqlite3_column_name(stmt, i));
+      pushcolval(L, stmt, i);
+      lua_rawset(L, -3);
+    }
+    return 1;
+  }
+}
+
 static int stmturowsaux(lua_State *L) {
   sqlite3_stmt *stmt = checkstmt(L, 1);
   int cols = stepaux(L, stmt);
@@ -217,6 +233,9 @@ int luaopen_lsqlite3(lua_State *L) {
     lua_pushcfunction(L, stmtrowsaux);
     lua_pushcclosure(L, stmtgeniter, 1);
     lua_setfield(L, -2, "rows");
+    lua_pushcfunction(L, stmtnrowsaux);
+    lua_pushcclosure(L, stmtgeniter, 1);
+    lua_setfield(L, -2, "nrows");
     lua_pushcfunction(L, stmturowsaux);
     lua_pushcclosure(L, stmtgeniter, 1);
     lua_setfield(L, -2, "urows");

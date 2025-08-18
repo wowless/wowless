@@ -24,6 +24,14 @@ describe('sqlite', function()
       assert.same({ { 'rofl', 1 }, { 'copter', 2 } }, t)
     end)
     stmt:reset()
+    it('nrows', function()
+      local t = {}
+      for a in stmt:nrows() do
+        table.insert(t, a)
+      end
+      assert.same({ { F2 = 'rofl', F1 = 1 }, { F2 = 'copter', F1 = 2 } }, t)
+    end)
+    stmt:reset()
     it('urows', function()
       local t = {}
       for a, b in stmt:urows() do
