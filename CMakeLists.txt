@@ -150,14 +150,8 @@ target_link_libraries(lzlib PRIVATE ZLIB::ZLIB)
 
 find_package(unofficial-sqlite3 CONFIG REQUIRED)
 
-FetchContent_Declare(
-  lsqlite3
-  URL http://lua.sqlite.org/home/zip/lsqlite3_v096.zip
-  URL_HASH MD5=70e87bc7efa1ec4a7d69ccebdcd91e09
-  SOURCE_SUBDIR disable_cmakelists_txt)
-FetchContent_MakeAvailable(lsqlite3)
 lua2c(lsqlite3 lsqlite3=c)
-target_sources(lsqlite3 PRIVATE ${lsqlite3_SOURCE_DIR}/lsqlite3.c)
+target_sources(lsqlite3 PRIVATE wowless/sqlite.c)
 target_link_libraries(lsqlite3 PRIVATE unofficial::sqlite3::sqlite3)
 
 FetchContent_Declare(
