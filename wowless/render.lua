@@ -211,8 +211,8 @@ local function rects2png(data, fetch, outfile)
     end
     local content = fetch(fpath)
     local success, width, height, png = pcall(function()
-      local width, height, rgba = require('wowless.blp').read(content)
-      return width, height, require('wowless.png').write(width, height, rgba)
+      local w, h, rgba = require('wowless.blp').read(content)
+      return w, h, require('wowless.png').write(w, h, rgba)
     end)
     if success then
       blobs[fpath] = {

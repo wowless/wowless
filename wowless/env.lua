@@ -27,7 +27,7 @@ local function init(modules, lite)
   wowlessDebug.debug = function()
     -- luacheck: ignore 211
     local _G = modules.env.genv
-    local function getLocals(stackLevel)
+    local function _getLocals(stackLevel)
       stackLevel = (stackLevel or 0) + 5 -- 5 = 3 (this function) + 2 (caller)
       local locals = {}
       local i = 1
