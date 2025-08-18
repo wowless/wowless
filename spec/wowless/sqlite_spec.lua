@@ -23,6 +23,7 @@ describe('sqlite', function()
       end
       assert.same({ { 'rofl', 1 }, { 'copter', 2 } }, t)
     end)
+    stmt:reset()
     it('urows', function()
       local t = {}
       for a, b in stmt:urows() do
@@ -30,6 +31,14 @@ describe('sqlite', function()
       end
       assert.same({ { 'rofl', 1 }, { 'copter', 2 } }, t)
     end)
-    stmt:reset()
+    stmt = db:prepare('SELECT F2 FROM Foo WHERE F1 = ?1')
+    it('bind_values', function()
+      stmt:bind_values(2)
+      local t = {}
+      for a in stmt:rows() do
+        table.insert(t, a)
+      end
+      assert.same({ { 'copter' } }, t)
+    end)
   end)
 end)
