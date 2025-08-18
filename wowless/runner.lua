@@ -31,7 +31,7 @@ local function run(cfg)
   --[[
   The following lines of code are very magical.
 
-  The third line sets the global table for this Lua state to the
+  The second line sets the global table for this Lua state to the
   sandbox env table. This is necessary for the correct behavior of
   some elune functionality, like securecall, hooksecurefunc,
   and loadstring.
@@ -45,11 +45,10 @@ local function run(cfg)
   environment pointing to the current global table. See the api and
   uiobject loaders for where this happens.
 
-  The first and second lines eagerly load modules which write to
+  The first line eagerly loads a module which writes to
   the global table.
   ]]
   require('lfs')
-  require('wowless.sqlite')
   require('wowless.ext').setglobaltable(api.env)
   -- end WARNING WARNING WARNING
 
