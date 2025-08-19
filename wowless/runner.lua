@@ -71,9 +71,10 @@ local function run(cfg)
     end
   end
 
-  local SendEvent = modules.events.SendEvent
   local CallSafely = modules.security.CallSafely
   local CallSandbox = modules.security.CallSandbox
+  local NextFrame = modules.mainloop.NextFrame
+  local SendEvent = modules.events.SendEvent
   local UserData = modules.uiobjects.UserData
 
   system.LogIn()
@@ -124,9 +125,9 @@ local function run(cfg)
       end
     end,
     combat = function()
-      api.NextFrame()
+      NextFrame()
       SendEvent('PLAYER_REGEN_DISABLED')
-      api.NextFrame()
+      NextFrame()
       SendEvent('PLAYER_REGEN_ENABLED')
     end,
     emotes = function()
@@ -216,7 +217,7 @@ local function run(cfg)
     end,
     update = function()
       for i = 1, 12 do
-        api.NextFrame(math.pow(2, i))
+        NextFrame(math.pow(2, i))
       end
     end,
   }

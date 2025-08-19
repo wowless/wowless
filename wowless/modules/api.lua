@@ -9,7 +9,6 @@ return function(
   parentkey,
   scripts,
   templates,
-  time,
   uiobjects,
   uiobjecttypes,
   visibility
@@ -195,22 +194,12 @@ return function(
     return CreateUIObject(ltype, name, parent, nil, tmpls, id)
   end
 
-  local function NextFrame(elapsed)
-    time.Advance(elapsed)
-    for frame in frames:entries() do
-      if IsVisible(frame) then
-        RunScript(frame, 'OnUpdate', 1)
-      end
-    end
-  end
-
   return {
     CreateForbiddenFrame = CreateFrame, -- TODO implement properly
     CreateFrame = CreateFrame,
     CreateUIObject = CreateUIObject,
     frames = frames,
     GetDebugName = GetDebugName,
-    NextFrame = NextFrame,
     ParentSub = ParentSub,
     SetParent = SetParent,
   }

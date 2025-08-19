@@ -10,7 +10,6 @@ api:
     parentkey:
     scripts:
     templates:
-    time:
     uiobjects:
     uiobjecttypes:
     visibility:
@@ -80,6 +79,12 @@ loglevel:
 macrotext:
   deps:
     security:
+mainloop:
+  deps:
+    api:
+    scripts:
+    time:
+    visibility:
 maxErrors:
   root:
     default: '0'
