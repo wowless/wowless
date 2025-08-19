@@ -92,7 +92,7 @@ local function run(cfg)
     local render = require('wowless.render')
     local screenWidth, screenHeight = system.GetScreenWidth(), system.GetScreenHeight()
     local function doit(name)
-      local data = render.frames2rects(api, cfg.product, screenWidth, screenHeight)
+      local data = render.frames2rects(api.frames, cfg.product, screenWidth, screenHeight)
       local fn = 'out/' .. cfg.product .. '/' .. name .. '.yaml'
       require('pl.file').write(fn, require('wowapi.yaml').pprint(data))
     end

@@ -8,7 +8,7 @@ local function kidregions(r)
   end)
 end
 
-local function frames2rects(api, product, screenWidth, screenHeight)
+local function frames2rects(hframes, product, screenWidth, screenHeight)
   local tt = require('resty.tsort').new()
   local function addPoints(r)
     for _, pt in ipairs(r.points) do
@@ -18,7 +18,7 @@ local function frames2rects(api, product, screenWidth, screenHeight)
       end
     end
   end
-  for frame in api.frames:entries() do
+  for frame in hframes:entries() do
     addPoints(frame)
     for r in kidregions(frame) do
       addPoints(r)
@@ -85,7 +85,7 @@ local function frames2rects(api, product, screenWidth, screenHeight)
     }
   end
   local frames = {}
-  for frame in api.frames:entries() do
+  for frame in hframes:entries() do
     local regions = {}
     for r in kidregions(frame) do
       local rect = rects[r]
