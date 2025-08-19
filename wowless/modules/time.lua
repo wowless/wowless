@@ -74,7 +74,7 @@ return function(log, security)
       while timers:peek().pri < stamp do
         local timer = timers:pop()
         log(2, 'running timer %.2f %s', timer.pri, tostring(timer.val))
-        assert(getfenv(timer.val) == _G, 'wowless bug: sandbox callback in NextFrame')
+        assert(getfenv(timer.val) == _G, 'wowless bug: sandbox callback in time.Advance')
         security.CallSafely(timer.val)
       end
     end,
