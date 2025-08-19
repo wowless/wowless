@@ -213,6 +213,5 @@ return function(
     NextFrame = NextFrame,
     ParentSub = ParentSub,
     SetParent = SetParent,
-    UserData = uiobjects.UserData,
   }
 end

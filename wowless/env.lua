@@ -1,14 +1,14 @@
 local Mixin = require('wowless.util').mixin
 local deepcopy = require('pl.tablex').deepcopy
 
-local function dump(api)
+local function dump(uiobjects)
   local d = require('pl.pretty').dump
   return function(...)
     for _, x in ipairs({ ... }) do
       d(x)
-      if type(x) == 'table' and api.UserData(x) then
+      if type(x) == 'table' and uiobjects.UserData(x) then
         print('===[begin userdata]===')
-        d(api.UserData(x))
+        d(uiobjects.UserData(x))
         print('===[ end userdata ]===')
       end
     end
@@ -50,7 +50,7 @@ local function init(modules, lite)
 
   modules.env.genv.__wowless = {
     debug = wowlessDebug,
-    dump = dump(modules.api),
+    dump = dump(modules.uiobjects),
     lite = lite,
     platform = modules.platform.platform,
     product = modules.datalua.product,

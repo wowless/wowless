@@ -28,7 +28,7 @@ Button/SetButtonState:
 Button/SetDisabledAtlas:
   luafile:
     modules:
-      api:
+      uiobjects:
 Button/SetEnabled:
   luafile:
 Button/SetFontString:
@@ -40,19 +40,19 @@ Button/SetFormattedText:
 Button/SetHighlightAtlas:
   luafile:
     modules:
-      api:
+      uiobjects:
 Button/SetNormalAtlas:
   luafile:
     modules:
-      api:
+      uiobjects:
 Button/SetPushedAtlas:
   luafile:
     modules:
-      api:
+      uiobjects:
 Button/SetText:
   luafile:
     modules:
-      api:
+      uiobjects:
 CheckButton/SetChecked:
   luafile:
 EditBox/Disable:
@@ -204,6 +204,7 @@ Region/SetPoint:
       api:
       env:
       log:
+      uiobjects:
 Region/SetScale:
   luafile:
 Region/SetShown:

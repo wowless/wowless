@@ -304,8 +304,8 @@ GetClassInfo_Classic:
 GetClickFrame:
   impl:
     modules:
-      api:
       env:
+      uiobjects:
 GetCurrentEnvironment:
   moduledelegate:
     name: env

@@ -11,6 +11,7 @@ return function(
   security,
   sqlitedb,
   templates,
+  uiobjects,
   uiobjecttypes
 )
   local genv = envmodule.genv
@@ -229,7 +230,7 @@ return function(
   local function navigate(obj, key)
     for _, p in ipairs({ strsplit('.', key) }) do
       if p == '$parent' or p == '$parentKey' then
-        local ud = api.UserData(obj)
+        local ud = uiobjects.UserData(obj)
         obj = ud.parent and ud.parent.luarep
       else
         if not obj[p] then
@@ -323,7 +324,7 @@ return function(
     maskedtexture = function(_, e, parent)
       local t = navigate(parent.parent and parent.parent.luarep, e.attr.childkey)
       if t then
-        api.UserData(t):AddMaskTexture(parent.luarep)
+        uiobjects.UserData(t):AddMaskTexture(parent.luarep)
       else
         log(1, 'cannot find maskedtexture childkey %s', e.attr.childkey)
       end
@@ -407,7 +408,7 @@ return function(
     parent = function(ctx, obj, value)
       local env = ctx.useAddonEnv and ctx.addonEnv or ctx.useSecureEnv and secureenv or genv
       local parent = env[value]
-      api.SetParent(obj, parent and api.UserData(parent))
+      api.SetParent(obj, parent and uiobjects.UserData(parent))
     end,
     parentarray = function(_, obj, value)
       local p = obj.parent

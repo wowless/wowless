@@ -1,4 +1,4 @@
-local api, env, log = ...
+local api, env, log, uiobjects = ...
 local validPoints = require('runtime.stringenums').FramePoint
 return function(self, point, ...)
   -- TODO handle resetting points
@@ -15,10 +15,10 @@ return function(self, point, ...)
     if not frame then
       log(1, 'SetPoint to unknown frame %q', name)
     end
-    relativeTo = frame and api.UserData(frame)
+    relativeTo = frame and uiobjects.UserData(frame)
     idx = idx + 1
   elseif type(maybeRelativeTo) == 'table' then
-    relativeTo = api.UserData(maybeRelativeTo)
+    relativeTo = uiobjects.UserData(maybeRelativeTo)
     idx = idx + 1
   elseif type(maybeRelativeTo) == 'nil' then
     idx = idx + 1

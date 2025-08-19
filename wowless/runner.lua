@@ -74,6 +74,7 @@ local function run(cfg)
   local SendEvent = modules.events.SendEvent
   local CallSafely = modules.security.CallSafely
   local CallSandbox = modules.security.CallSandbox
+  local UserData = modules.uiobjects.UserData
 
   system.LogIn()
   SendEvent('PLAYER_LOGIN')
@@ -83,7 +84,7 @@ local function run(cfg)
   SendEvent('TRIAL_STATUS_UPDATE')
   SendEvent('DISPLAY_SIZE_CHANGED')
   if genv.UIParent then -- Super duper hack to unblock 10.0 UIPanel code.
-    api.UserData(genv.UIParent):SetSize(system.GetScreenWidth(), system.GetScreenHeight())
+    UserData(genv.UIParent):SetSize(system.GetScreenWidth(), system.GetScreenHeight())
   end
   SendEvent('SPELLS_CHANGED')
   if cfg.frame0 then
@@ -182,7 +183,7 @@ local function run(cfg)
     macrotext = function()
       local b = genv.ActionButton1
       if b then
-        b = api.UserData(b)
+        b = UserData(b)
         b:SetAttribute('type', 'macro')
         b:SetAttribute('macrotext', '/startattack')
         b:Click()
@@ -244,9 +245,9 @@ local function run(cfg)
 
   -- Last ditch invariant check.
   for _, obj in pairs(modules.uiobjects.userdata) do
-    assert(api.UserData(obj.luarep) == obj)
+    assert(UserData(obj.luarep) == obj)
     for k, v in pairs(obj) do
-      assert(type(v) ~= 'table' or (k ~= 'luarep') == not api.UserData(v), k)
+      assert(type(v) ~= 'table' or (k ~= 'luarep') == not UserData(v), k)
     end
   end
   assert(issecure(), 'wowless bug: framework is tainted')
