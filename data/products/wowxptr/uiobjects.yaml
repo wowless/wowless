@@ -7640,6 +7640,8 @@ Slider:
       - name: valueStep
         type: number
       outputs:
+  scripts:
+    OnValueChanged:
 StatusBar:
   fields:
     fillStyle:
@@ -7868,6 +7870,8 @@ StatusBar:
       - name: value
         type: number
       outputs:
+  scripts:
+    OnValueChanged:
 TabardModel:
   fields:
   inherits:
