@@ -815,6 +815,13 @@ Browser:
       - name: zoom
         type: number
       outputs:
+  scripts:
+    OnButtonUpdate:
+    OnEditFocusGained:
+    OnEditFocusLost:
+    OnError:
+    OnEscapePressed:
+    OnExternalLink:
 Button:
   fieldinitoverrides:
     mouseClickEnabled: true
@@ -1339,6 +1346,14 @@ Checkout:
         type: number
       outputs:
   objectType: BlizzardCheckout
+  scripts:
+    OnButtonUpdate:
+    OnEditFocusGained:
+    OnEditFocusLost:
+    OnError:
+    OnEscapePressed:
+    OnExternalLink:
+    OnRequestNewSize:
 CinematicModel:
   fields:
   inherits:
@@ -2533,6 +2548,19 @@ EditBox:
     ToggleInputLanguage:
       inputs:
       outputs:
+  scripts:
+    OnArrowPressed:
+    OnCharComposition:
+    OnCursorChanged:
+    OnEditFocusGained:
+    OnEditFocusLost:
+    OnEnterPressed:
+    OnEscapePressed:
+    OnInputLanguageChanged:
+    OnSpacePressed:
+    OnTabPressed:
+    OnTextChanged:
+    OnTextSet:
 FlipBook:
   fields:
     flipBookColumns:
