@@ -150,6 +150,12 @@ local ptablemap = {
         for n, m in pairs(inh.methods) do
           cfg.methods[n] = cfg.methods[n] or m -- overrides
         end
+        if inh.scripts then
+          cfg.scripts = cfg.scripts or {}
+          for n in pairs(inh.scripts) do
+            cfg.scripts[n] = {}
+          end
+        end
       end
     end
     for _, cfg in pairs(uiobjects) do
@@ -210,7 +216,7 @@ local ptablemap = {
       local st = {}
       if mt.HasScript then
         for scripttype in pairs(allscripts) do
-          st[scripttype] = false
+          st[scripttype] = not not (v.scripts and v.scripts[scripttype])
         end
       end
       t[k] = {

@@ -6783,6 +6783,9 @@ RegionBase:
         uiobjectimpl: Region/Show
       inputs:
       outputs:
+  scripts:
+    OnHide:
+    OnShow:
   virtual: true
 Rotation:
   fields:
