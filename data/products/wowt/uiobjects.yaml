@@ -5286,6 +5286,9 @@ Model:
       - name: useCenter
         type: boolean
       outputs:
+  scripts:
+    OnAnimFinished:
+    OnAnimStarted:
 ModelScene:
   fields:
     cameraFarClip:
