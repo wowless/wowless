@@ -963,6 +963,12 @@ AnimationGroup:
     Stop:
       inputs:
       outputs:
+  scripts:
+    OnFinished:
+    OnLoop:
+    OnPlay:
+    OnStop:
+    OnUpdate:
 ArchaeologyDigSiteFrame:
   fields:
   inherits:
@@ -1848,6 +1854,8 @@ ColorSelect:
       - name: texture
         type: TextureAsset
       outputs:
+  scripts:
+    OnColorSelect:
 ControlPoint:
   fields:
     order:
@@ -2155,6 +2163,8 @@ Cooldown:
         name: useCircularEdge
         type: boolean
       outputs:
+  scripts:
+    OnCooldownDone:
 DressUpModel:
   fields:
   inherits:
@@ -2937,6 +2947,8 @@ FogOfWarFrame:
       - name: uiMapID
         type: number
       outputs:
+  scripts:
+    OnUiMapChanged:
 Font:
   fields:
     alpha:
@@ -5837,6 +5849,8 @@ MovieFrame:
     StopMovie:
       inputs:
       outputs:
+  scripts:
+    OnMovieFinished:
 OffScreenFrame:
   fields:
     maxSnapshots:
@@ -7229,6 +7243,9 @@ ScrollFrame:
     UpdateScrollChildRect:
       inputs:
       outputs:
+  scripts:
+    OnScrollRangeChanged:
+    OnVerticalScroll:
 SimpleHTML:
   fieldinitoverrides:
     hyperlinksEnabled: true
