@@ -2035,6 +2035,8 @@ DressUpModel:
       - name: inventorySlot
         type: number
       outputs:
+  scripts:
+    OnDressModel:
 EditBox:
   fieldinitoverrides:
     justifyh: LEFT
@@ -5414,6 +5416,8 @@ ModelScene:
     TakeActor:
       inputs:
       outputs:
+  scripts:
+    OnDressModel:
 MovieFrame:
   fields:
   inherits:
