@@ -4179,7 +4179,23 @@ Frame:
       - name: registered
         type: boolean
   scripts:
+    OnAttributeChanged:
+    OnChar:
+    OnDisable:
+    OnDragStart:
+    OnDragStop:
+    OnEnable:
     OnEvent:
+    OnGamePadButtonDown:
+    OnGamePadButtonUp:
+    OnHyperlinkClick:
+    OnHyperlinkEnter:
+    OnHyperlinkLeave:
+    OnKeyDown:
+    OnKeyUp:
+    OnReceiveDrag:
+    OnSizeChanged:
+    OnUpdate:
 GameTooltip:
   fields:
     tooltipAnchorType:
