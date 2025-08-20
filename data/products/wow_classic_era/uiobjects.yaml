@@ -4105,6 +4105,14 @@ GameTooltip:
     SetUnitAura:
     SetUnitBuff:
     SetUnitDebuff:
+  scripts:
+    OnTooltipAddMoney:
+    OnTooltipCleared:
+    OnTooltipSetDefaultAnchor:
+    OnTooltipSetFrameStack:
+    OnTooltipSetItem:
+    OnTooltipSetSpell:
+    OnTooltipSetUnit:
 LayeredRegion:
   fields:
     layer:

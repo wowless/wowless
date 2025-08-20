@@ -4379,6 +4379,14 @@ GameTooltip:
     SetPadding:
     SetShrinkToFitWrapped:
     SetText:
+  scripts:
+    OnTooltipAddMoney:
+    OnTooltipCleared:
+    OnTooltipSetDefaultAnchor:
+    OnTooltipSetFrameStack:
+    OnTooltipSetItem:
+    OnTooltipSetSpell:
+    OnTooltipSetUnit:
 LayeredRegion:
   fields:
     layer:
