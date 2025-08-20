@@ -1,0 +1,6 @@
+name: scripttypes
+type:
+  mapof:
+    key: string
+    value:
+      record:

@@ -53,6 +53,7 @@ local fns = {
   modules = global('modules'),
   products = global('products'),
   schemas = loaddir('schemas', 'yaml'),
+  scripttypes = global('scripttypes'),
   sql = global('sql'),
   stringenums = global('stringenums'),
   structures = perproduct('structures'),

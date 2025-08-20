@@ -3,6 +3,10 @@ return function(env, log, security)
     return obj.scripts[bindingType or 1][string.lower(name)]
   end
 
+  local function HasScript()
+    return false
+  end
+
   local function HookScript(obj, name, script, bindingType)
     local btype = bindingType or 1
     local lname = string.lower(name)
@@ -44,6 +48,7 @@ return function(env, log, security)
 
   return {
     GetScript = GetScript,
+    HasScript = HasScript,
     HookScript = HookScript,
     RunScript = RunScript,
     SetScript = SetScript,

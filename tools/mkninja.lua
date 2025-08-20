@@ -54,7 +54,9 @@ local perProductAddonGeneratedTypes = {
     return {}
   end,
   uiobjectapis = function()
-    local t = {}
+    local t = {
+      'build/cmake/runtime/scripttypes.lua',
+    }
     for _, p in ipairs(productList) do
       table.insert(t, 'build/cmake/runtime/products/' .. p .. '/uiobjects.lua')
     end

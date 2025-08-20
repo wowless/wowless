@@ -117,6 +117,13 @@ type:
                     type: number
         objectType:
           type: string
+        scripts:
+          type:
+            mapof:
+              key:
+                ref: scripttype
+              value:
+                record:
         singleton:
           type: boolean
         virtual:

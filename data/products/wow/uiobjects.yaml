@@ -7061,12 +7061,13 @@ ScriptObject:
         nilable: true
         type: function
     HasScript:
+      impl:
+        uiobjectimpl: ScriptObject/HasScript
       inputs:
       - name: scriptName
         type: string
       outputs:
       - name: hasScript
-        stub: true
         type: boolean
     HookScript:
       impl:

@@ -37,6 +37,7 @@ type:
         impl: tag
         module: tag
         schema: tag
+        scripttype: tag
         sql: tag
         stringenum: tag
         structure: tag

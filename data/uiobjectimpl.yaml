@@ -216,6 +216,9 @@ Region/Show:
 ScriptObject/GetScript:
   moduledelegate:
     name: scripts
+ScriptObject/HasScript:
+  moduledelegate:
+    name: scripts
 ScriptObject/HookScript:
   moduledelegate:
     name: scripts
