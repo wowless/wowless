@@ -5317,6 +5317,7 @@ Model:
   scripts:
     OnAnimFinished:
     OnAnimStarted:
+    OnModelLoaded:
 ModelScene:
   fields:
     cameraFarClip:
