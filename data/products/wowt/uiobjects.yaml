@@ -1435,6 +1435,11 @@ Button:
         name: text
         type: string
       outputs:
+  scripts:
+    OnClick:
+    OnDoubleClick:
+    PostClick:
+    PreClick:
 CheckButton:
   fields:
     checked:
