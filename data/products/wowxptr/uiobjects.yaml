@@ -6876,7 +6876,12 @@ RegionBase:
       inputs:
       outputs:
   scripts:
+    OnEnter:
     OnHide:
+    OnLeave:
+    OnMouseDown:
+    OnMouseUp:
+    OnMouseWheel:
     OnShow:
   virtual: true
 Rotation:
