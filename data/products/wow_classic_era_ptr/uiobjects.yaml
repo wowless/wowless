@@ -578,6 +578,11 @@ Animation:
     Stop:
       inputs:
       outputs:
+  scripts:
+    OnFinished:
+    OnPlay:
+    OnStop:
+    OnUpdate:
 AnimationGroup:
   fields:
     animationSpeedMultiplier:
