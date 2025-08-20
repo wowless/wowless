@@ -4173,6 +4173,8 @@ Frame:
       outputs:
       - name: registered
         type: boolean
+  scripts:
+    OnEvent:
 GameTooltip:
   fields:
     tooltipAnchorType:
