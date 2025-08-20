@@ -7020,6 +7020,8 @@ ScriptObjectBase:
       type: table
   inherits:
   methods:
+  scripts:
+    OnLoad:
   virtual: true
 ScrollFrame:
   fields:
