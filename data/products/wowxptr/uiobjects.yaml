@@ -4408,13 +4408,9 @@ GameTooltip:
     SetShrinkToFitWrapped:
     SetText:
   scripts:
-    OnTooltipAddMoney:
     OnTooltipCleared:
     OnTooltipSetDefaultAnchor:
     OnTooltipSetFrameStack:
-    OnTooltipSetItem:
-    OnTooltipSetSpell:
-    OnTooltipSetUnit:
 LayeredRegion:
   fields:
     layer:
