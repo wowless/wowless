@@ -97,6 +97,7 @@ scripts:
     env:
     log:
     security:
+    uiobjecttypes:
 security:
   deps:
     log:

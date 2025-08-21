@@ -1,10 +1,10 @@
-return function(env, log, security)
+return function(env, log, security, uiobjecttypes)
   local function GetScript(obj, name, bindingType)
     return obj.scripts[bindingType or 1][string.lower(name)]
   end
 
-  local function HasScript()
-    return false
+  local function HasScript(obj, script)
+    return uiobjecttypes.HasScript(obj.type, script)
   end
 
   local function HookScript(obj, name, script, bindingType)

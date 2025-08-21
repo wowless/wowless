@@ -14,10 +14,12 @@ return function(datalua, funcheck, uiobjectsmodule, uiobjecttypes)
       if not result[lk] then
         local ty = types[k]
         local isa = { [lk] = true }
+        local scripts = Mixin({}, ty.scripts or {})
         local metaindex = {}
         for inh in pairs(ty.inherits) do
           flattenOne(inh)
           Mixin(isa, result[string.lower(inh)].isa)
+          Mixin(scripts, result[string.lower(inh)].scripts)
           for mk, mv in pairs(result[string.lower(inh)].metaindex) do
             metaindex[mk] = mv
           end
@@ -28,6 +30,7 @@ return function(datalua, funcheck, uiobjectsmodule, uiobjecttypes)
           isa = isa,
           metaindex = metaindex,
           name = ty.cfg.objectType or k,
+          scripts = scripts,
         }
       end
     end
@@ -48,6 +51,7 @@ return function(datalua, funcheck, uiobjectsmodule, uiobjecttypes)
         isa = v.isa,
         name = v.name,
         sandboxMT = { __index = sandboxIndex },
+        scripts = v.scripts,
       }
     end
     return t
@@ -105,6 +109,7 @@ return function(datalua, funcheck, uiobjectsmodule, uiobjecttypes)
         constructor = constructor,
         inherits = cfg.inherits,
         mixin = mixin,
+        scripts = cfg.scripts,
       }
     end
     return flatten(uiobjects)

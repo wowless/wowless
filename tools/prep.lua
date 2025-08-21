@@ -452,11 +452,16 @@ for k, v in pairs(uiobjectdata) do
   for mk, mv in pairs(v.methods) do
     methods[mk] = dispatch(uiobjectimplmakers, mv.impl or 'none', mv)
   end
+  local scripts = {}
+  for sk in pairs(v.scripts or {}) do
+    scripts[sk] = true
+  end
   uiobjects[k] = {
     constructor = table.concat(constructor),
     inherits = v.inherits,
     methods = methods,
     objectType = v.objectType,
+    scripts = scripts,
     singleton = v.singleton,
   }
 end

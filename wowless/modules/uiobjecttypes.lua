@@ -21,6 +21,10 @@ return function()
     return not not uiobjectTypes[name]
   end
 
+  local function HasScript(name, script)
+    return not not uiobjectTypes[name].scripts[script]
+  end
+
   local function InheritsFrom(a, b)
     local t = uiobjectTypes[a]
     if not t then
@@ -38,6 +42,7 @@ return function()
     GetOrThrow = GetOrThrow,
     GetSandboxMetatable = GetSandboxMetatable,
     Has = Has,
+    HasScript = HasScript,
     InheritsFrom = InheritsFrom,
     IsIntrinsicType = IsIntrinsicType,
   }
