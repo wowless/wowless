@@ -39,6 +39,7 @@ OnLoad:
 OnLoop:
 OnModelCleared:
 OnModelLoaded:
+OnModelLoading:
 OnMouseDown:
 OnMouseEnter:
 OnMouseLeave:

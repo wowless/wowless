@@ -549,6 +549,13 @@ Actor:
         type: number
       outputs:
   objectType: ModelSceneActor
+  scripts:
+    OnAnimFinished:
+    OnLoad:
+    OnModelCleared:
+    OnModelLoaded:
+    OnModelLoading:
+    OnUpdate:
 Alpha:
   fields:
     fromAlpha:

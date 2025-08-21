@@ -332,6 +332,13 @@ Actor:
         type:
           enum: ItemTryOnReason
   objectType: ModelSceneActor
+  scripts:
+    OnAnimFinished:
+    OnLoad:
+    OnModelCleared:
+    OnModelLoaded:
+    OnModelLoading:
+    OnUpdate:
 Alpha:
   fields:
     fromAlpha:
