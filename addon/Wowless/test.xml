@@ -453,6 +453,7 @@
       <OnLoop>end, table.insert(WowlessLog, 'OnLoop')--</OnLoop>
       <OnModelCleared>end, table.insert(WowlessLog, 'OnModelCleared')--</OnModelCleared>
       <OnModelLoaded>end, table.insert(WowlessLog, 'OnModelLoaded')--</OnModelLoaded>
+      <OnModelLoading>end, table.insert(WowlessLog, 'OnModelLoading')--</OnModelLoading>
       <OnMouseDown>end, table.insert(WowlessLog, 'OnMouseDown')--</OnMouseDown>
       <OnMouseEnter>end, table.insert(WowlessLog, 'OnMouseEnter')--</OnMouseEnter>
       <OnMouseLeave>end, table.insert(WowlessLog, 'OnMouseLeave')--</OnMouseLeave>
@@ -490,7 +491,15 @@
   <Script>
     CreateFrame('ModelScene'):CreateActor(nil, 'WowlessActorTemplate')
     if not __wowless then -- issue #452
-      assertEquals('OnAnimFinished,OnLoad,OnModelCleared,OnModelLoaded,OnUpdate', table.concat(WowlessLog, ','))
+      local expected = {
+        'OnAnimFinished',
+        'OnLoad',
+        'OnModelCleared',
+        'OnModelLoaded',
+        'OnModelLoading',
+        'OnUpdate',
+      }
+      assertEquals(table.concat(expected, ','), table.concat(WowlessLog, ','))
     end
   </Script>
 
