@@ -5,6 +5,7 @@ local domains = {
   impl = wdata.impl,
   module = wdata.modules,
   schema = wdata.schemas,
+  scripttype = wdata.scripttypes,
   sql = wdata.sql,
   stringenum = wdata.stringenums,
   uiobjectimpl = wdata.uiobjectimpl,

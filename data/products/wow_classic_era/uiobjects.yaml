@@ -578,6 +578,11 @@ Animation:
     Stop:
       inputs:
       outputs:
+  scripts:
+    OnFinished:
+    OnPlay:
+    OnStop:
+    OnUpdate:
 AnimationGroup:
   fields:
     animationSpeedMultiplier:
@@ -741,6 +746,12 @@ AnimationGroup:
     Stop:
       inputs:
       outputs:
+  scripts:
+    OnFinished:
+    OnLoop:
+    OnPlay:
+    OnStop:
+    OnUpdate:
 Browser:
   fieldinitoverrides:
     mouseClickEnabled: true
@@ -798,6 +809,13 @@ Browser:
       - name: zoom
         type: number
       outputs:
+  scripts:
+    OnButtonUpdate:
+    OnEditFocusGained:
+    OnEditFocusLost:
+    OnError:
+    OnEscapePressed:
+    OnExternalLink:
 Button:
   fieldinitoverrides:
     mouseClickEnabled: true
@@ -1207,6 +1225,11 @@ Button:
         name: text
         type: string
       outputs:
+  scripts:
+    OnClick:
+    OnDoubleClick:
+    PostClick:
+    PreClick:
 CheckButton:
   fields:
     checked:
@@ -1317,6 +1340,14 @@ Checkout:
         type: number
       outputs:
   objectType: BlizzardCheckout
+  scripts:
+    OnButtonUpdate:
+    OnEditFocusGained:
+    OnEditFocusLost:
+    OnError:
+    OnEscapePressed:
+    OnExternalLink:
+    OnRequestNewSize:
 CinematicModel:
   fields:
   inherits:
@@ -1615,6 +1646,8 @@ ColorSelect:
       - name: texture
         type: TextureAsset
       outputs:
+  scripts:
+    OnColorSelect:
 ControlPoint:
   fields:
     order:
@@ -1894,6 +1927,8 @@ Cooldown:
         name: useCircularEdge
         type: boolean
       outputs:
+  scripts:
+    OnCooldownDone:
 DressUpModel:
   fields:
   inherits:
@@ -2025,6 +2060,8 @@ DressUpModel:
       - name: inventorySlot
         type: number
       outputs:
+  scripts:
+    OnDressModel:
 EditBox:
   fieldinitoverrides:
     justifyh: LEFT
@@ -2482,6 +2519,19 @@ EditBox:
     ToggleInputLanguage:
       inputs:
       outputs:
+  scripts:
+    OnArrowPressed:
+    OnCharComposition:
+    OnCursorChanged:
+    OnEditFocusGained:
+    OnEditFocusLost:
+    OnEnterPressed:
+    OnEscapePressed:
+    OnInputLanguageChanged:
+    OnSpacePressed:
+    OnTabPressed:
+    OnTextChanged:
+    OnTextSet:
 FlipBook:
   fields:
     flipBookColumns:
@@ -2671,6 +2721,8 @@ FogOfWarFrame:
       - name: uiMapID
         type: number
       outputs:
+  scripts:
+    OnUiMapChanged:
 Font:
   fields:
     alpha:
@@ -3918,6 +3970,24 @@ Frame:
       outputs:
       - name: registered
         type: boolean
+  scripts:
+    OnAttributeChanged:
+    OnChar:
+    OnDisable:
+    OnDragStart:
+    OnDragStop:
+    OnEnable:
+    OnEvent:
+    OnGamePadButtonDown:
+    OnGamePadButtonUp:
+    OnHyperlinkClick:
+    OnHyperlinkEnter:
+    OnHyperlinkLeave:
+    OnKeyDown:
+    OnKeyUp:
+    OnReceiveDrag:
+    OnSizeChanged:
+    OnUpdate:
 GameTooltip:
   fields:
     tooltipAnchorType:
@@ -4063,6 +4133,14 @@ GameTooltip:
     SetUnitAura:
     SetUnitBuff:
     SetUnitDebuff:
+  scripts:
+    OnTooltipAddMoney:
+    OnTooltipCleared:
+    OnTooltipSetDefaultAnchor:
+    OnTooltipSetFrameStack:
+    OnTooltipSetItem:
+    OnTooltipSetSpell:
+    OnTooltipSetUnit:
 LayeredRegion:
   fields:
     layer:
@@ -4984,6 +5062,10 @@ Model:
       - name: useCenter
         type: boolean
       outputs:
+  scripts:
+    OnAnimFinished:
+    OnAnimStarted:
+    OnModelLoaded:
 ModelScene:
   fields:
     cameraFarClip:
@@ -5382,6 +5464,8 @@ ModelScene:
     TakeActor:
       inputs:
       outputs:
+  scripts:
+    OnDressModel:
 MovieFrame:
   fields:
   inherits:
@@ -5422,6 +5506,8 @@ MovieFrame:
     StopMovie:
       inputs:
       outputs:
+  scripts:
+    OnMovieFinished:
 OffScreenFrame:
   fields:
     maxSnapshots:
@@ -6352,6 +6438,14 @@ RegionBase:
         uiobjectimpl: Region/Show
       inputs:
       outputs:
+  scripts:
+    OnEnter:
+    OnHide:
+    OnLeave:
+    OnMouseDown:
+    OnMouseUp:
+    OnMouseWheel:
+    OnShow:
   virtual: true
 Rotation:
   fields:
@@ -6522,12 +6616,13 @@ ScriptObject:
         nilable: true
         type: function
     HasScript:
+      impl:
+        uiobjectimpl: ScriptObject/HasScript
       inputs:
       - name: scriptName
         type: string
       outputs:
       - name: hasScript
-        stub: true
         type: boolean
     HookScript:
       impl:
@@ -6564,6 +6659,8 @@ ScriptObjectBase:
       type: table
   inherits:
   methods:
+  scripts:
+    OnLoad:
   virtual: true
 ScrollFrame:
   fields:
@@ -6643,6 +6740,9 @@ ScrollFrame:
     UpdateScrollChildRect:
       inputs:
       outputs:
+  scripts:
+    OnScrollRangeChanged:
+    OnVerticalScroll:
 SimpleHTML:
   fieldinitoverrides:
     hyperlinksEnabled: true
@@ -7054,6 +7154,8 @@ Slider:
       - name: valueStep
         type: number
       outputs:
+  scripts:
+    OnValueChanged:
 StatusBar:
   fields:
     fillStyle:
@@ -7282,6 +7384,8 @@ StatusBar:
       - name: value
         type: number
       outputs:
+  scripts:
+    OnValueChanged:
 TabardModel:
   fields:
   inherits:

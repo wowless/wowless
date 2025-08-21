@@ -124,6 +124,7 @@ local ptablemap = {
   end,
   uiobjectapis = function(p)
     local uiobjects = perproduct(p, 'uiobjects')
+    local allscripts = dofile('build/cmake/runtime/scripttypes.lua')
     local inhrev = {}
     for k, cfg in pairs(uiobjects) do
       for inh in pairs(cfg.inherits) do
@@ -148,6 +149,12 @@ local ptablemap = {
         end
         for n, m in pairs(inh.methods) do
           cfg.methods[n] = cfg.methods[n] or m -- overrides
+        end
+        if inh.scripts then
+          cfg.scripts = cfg.scripts or {}
+          for n in pairs(inh.scripts) do
+            cfg.scripts[n] = {}
+          end
         end
       end
     end
@@ -206,11 +213,18 @@ local ptablemap = {
       elseif k == 'Minimap' then
         ft = {}
       end
+      local st = {}
+      if mt.HasScript then
+        for scripttype in pairs(allscripts) do
+          st[scripttype] = not not (v.scripts and v.scripts[scripttype])
+        end
+      end
       t[k] = {
         fields = ft,
         frametype = not not frametypes[k],
         methods = mt,
         objtype = objTypes[k],
+        scripts = st,
         virtual = v.virtual,
       }
     end

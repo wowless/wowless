@@ -332,7 +332,7 @@ G.testsuite.generated = function()
       assertEquals(nil, getmetatable(__index))
       assertEquals(nil, indexes[__index])
       indexes[__index] = true
-      local ftests, mtests = tests(__index, obj)
+      local ftests, mtests, stests = tests(__index, obj)
       return {
         contents = function()
           local udk, udv = next(obj)
@@ -351,6 +351,9 @@ G.testsuite.generated = function()
             end
           end
           return mtests
+        end,
+        scripts = function()
+          return stests
         end,
       }
     end
@@ -470,7 +473,13 @@ G.testsuite.generated = function()
                 return checkCFunc(__index[mname])
               end
             end
-            return ftests, mtests
+            local stests = {}
+            for k, v in pairs(cfg.scripts) do
+              stests[k] = function()
+                return G.match(1, v, obj:HasScript(k))
+              end
+            end
+            return ftests, mtests, stests
           end)
         end
       end

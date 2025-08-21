@@ -955,6 +955,7 @@ add_lua_executable(
   wowlessyaml)
 
 yaml2lua(impl)
+yaml2lua(scripttypes)
 yaml2lua(sql)
 yaml2lua(test)
 yaml2lua(uiobjectimpl)
@@ -999,6 +1000,7 @@ list(
   products
   schema
   schematype
+  scripttypes
   sql
   stringenums
   structures
@@ -1020,6 +1022,7 @@ lua2c(
   build.data.impl=runtime/impl.lua
   build.data.modules=runtime/modules.lua
   build.data.products=runtime/products.lua
+  build.data.scripttypes=runtime/scripttypes.lua
   build.data.sql=runtime/sql.lua
   build.data.stringenums=runtime/stringenums.lua
   build.data.test=runtime/test.lua
