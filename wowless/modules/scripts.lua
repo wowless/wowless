@@ -4,7 +4,7 @@ return function(env, log, security, uiobjecttypes)
   end
 
   local function HasScript(obj, script)
-    return uiobjecttypes.HasScript(obj.type, script)
+    return uiobjecttypes.HasScript(obj.type, script:lower())
   end
 
   local function HookScript(obj, name, script, bindingType)
@@ -43,6 +43,9 @@ return function(env, log, security, uiobjecttypes)
   end
 
   local function SetScript(obj, name, script)
+    if not HasScript(obj, name) then
+      error(('object type %s does not support script type %s'):format(obj.type, name))
+    end
     return SetScriptWithBindingType(obj, name, 1, script)
   end
 

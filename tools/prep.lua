@@ -454,7 +454,7 @@ for k, v in pairs(uiobjectdata) do
   end
   local scripts = {}
   for sk in pairs(v.scripts or {}) do
-    scripts[sk] = true
+    scripts[sk:lower()] = true
   end
   uiobjects[k] = {
     constructor = table.concat(constructor),

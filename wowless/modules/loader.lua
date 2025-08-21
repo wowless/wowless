@@ -575,6 +575,7 @@ return function(
               isa = mixin({ [name] = true }, base.isa),
               name = base.name,
               sandboxMT = base.sandboxMT,
+              scripts = base.scripts,
               template = template,
             })
             intrinsics[name] = xmlimpls[basetype]
