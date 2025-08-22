@@ -99,6 +99,8 @@ type:
               type: boolean
             RequiresNonSecureCVar:
               type: boolean
+            RequiresRecentAllies:
+              type: boolean
             RequiresValidAndPublicCVar:
               type: boolean
             RequiresValidInviteTarget:
