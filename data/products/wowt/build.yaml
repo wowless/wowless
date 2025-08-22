@@ -1,7 +1,7 @@
-build: '61967'
-date: Jul 10 2025
+build: '62687'
+date: Aug 19 2025
 gametype: Standard
-hash: 7c78c182a0b3b81efc3d95aa682ab824
-test: false
-tocversion: 110107
-version: 11.1.7
+hash: bf68edcb49fcc75f5851b0fc6559e851
+test: true
+tocversion: 110205
+version: 11.2.5

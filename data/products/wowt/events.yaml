@@ -820,6 +820,20 @@ CEMETERY_PREFERENCE_UPDATED:
   payload:
 CHALLENGE_MODE_COMPLETED:
   payload:
+CHALLENGE_MODE_COMPLETED_REWARDS:
+  payload:
+  - name: mapID
+    type: number
+  - name: medal
+    type: number
+  - name: timeMS
+    type: number
+  - name: money
+    type: number
+  - name: rewards
+    type:
+      arrayof:
+        structure: C_ChallengeMode.ChallengeModeReward
 CHALLENGE_MODE_DEATH_COUNT_UPDATED:
   payload:
 CHALLENGE_MODE_KEYSTONE_RECEPTABLE_OPEN:
@@ -830,10 +844,22 @@ CHALLENGE_MODE_KEYSTONE_SLOTTED:
     type: number
 CHALLENGE_MODE_LEADERS_UPDATE:
   payload:
+CHALLENGE_MODE_LEAVER_TIMER_ENDED:
+  payload:
+CHALLENGE_MODE_LEAVER_TIMER_STARTED:
+  payload:
 CHALLENGE_MODE_MAPS_UPDATE:
   payload:
 CHALLENGE_MODE_MEMBER_INFO_UPDATED:
   payload:
+CHALLENGE_MODE_NEW_RECORD:
+  payload:
+  - name: mapID
+    type: number
+  - name: timeMS
+    type: number
+  - name: medal
+    type: number
 CHALLENGE_MODE_RESET:
   payload:
   - name: mapID
@@ -3502,6 +3528,10 @@ CLUB_MEMBER_UPDATED:
     type: string
   - name: memberId
     type: number
+CLUB_MEMBERS_UPDATED:
+  payload:
+  - name: clubId
+    type: string
 CLUB_MESSAGE_ADDED:
   payload:
   - name: clubId
@@ -3981,6 +4011,8 @@ CURRENCY_TRANSFER_INITIATED:
   payload:
 CURRENCY_TRANSFER_LOG_UPDATE:
   payload:
+CURRENCY_TRANSFER_SUCCESS:
+  payload:
 CURRENT_SPELL_CAST_CHANGED:
   payload:
   - name: cancelledCast
@@ -4021,6 +4053,11 @@ DELETE_ITEM_CONFIRM:
     type: number
   - name: questWarn
     type: number
+DELVE_ASSIST_ACTION:
+  payload:
+  - name: data
+    type:
+      structure: DelveAssistActionData
 DELVES_ACCOUNT_DATA_ELEMENT_CHANGED:
   payload:
 DISABLE_DECLINE_GUILD_INVITE:
@@ -4792,6 +4829,14 @@ INSPECT_READY:
   payload:
   - name: inspecteeGUID
     type: string
+INSTANCE_ABANDON_VOTE_FINISHED:
+  payload:
+  - name: votePassed
+    type: boolean
+INSTANCE_ABANDON_VOTE_STARTED:
+  payload:
+INSTANCE_ABANDON_VOTE_UPDATED:
+  payload:
 INSTANCE_BOOT_START:
   payload:
 INSTANCE_BOOT_STOP:
@@ -4820,6 +4865,10 @@ INSTANCE_ENCOUNTER_OBJECTIVE_UPDATE:
     type: number
 INSTANCE_GROUP_SIZE_CHANGED:
   payload:
+INSTANCE_LEAVER_STATUS_CHANGED:
+  payload:
+  - name: isLeaver
+    type: boolean
 INSTANCE_LOCK_START:
   payload:
 INSTANCE_LOCK_STOP:
@@ -4969,6 +5018,8 @@ ITEM_UPGRADE_FAILED:
   payload:
 ITEM_UPGRADE_MASTER_SET_ITEM:
   payload:
+ITEM_UPGRADE_MASTER_UPDATE:
+  payload:
 JAILERS_TOWER_LEVEL_UPDATE:
   payload:
   - name: level
@@ -5010,6 +5061,9 @@ LEARNED_SPELL_IN_TAB:
     type: boolean
 LEAVE_PARTY_CONFIRMATION:
   payload:
+  - name: reason
+    type:
+      enum: LeavePartyConfirmReason
 LEAVING_TUTORIAL_AREA:
   payload:
 LFG_BOOT_PROPOSAL_UPDATE:
@@ -5949,6 +6003,10 @@ PLAYER_GUILD_UPDATE:
     type: unit
 PLAYER_IMPULSE_APPLIED:
   payload:
+PLAYER_IN_COMBAT_CHANGED:
+  payload:
+  - name: inCombat
+    type: boolean
 PLAYER_INSIDE_QUEST_BLOB_STATE_CHANGED:
   payload:
   - name: questID
@@ -6105,13 +6163,7 @@ PLAYER_XP_UPDATE:
   payload:
   - name: unitTarget
     type: unit
-PLAYERBANKBAGSLOTS_CHANGED:
-  payload:
 PLAYERBANKSLOTS_CHANGED:
-  payload:
-  - name: slot
-    type: number
-PLAYERREAGENTBANKSLOTS_CHANGED:
   payload:
   - name: slot
     type: number
@@ -6430,10 +6482,6 @@ READY_CHECK_FINISHED:
   payload:
   - name: preempted
     type: boolean
-REAGENTBANK_PURCHASED:
-  payload:
-REAGENTBANK_UPDATE:
-  payload:
 RECEIVED_ACHIEVEMENT_LIST:
   payload:
 RECEIVED_ACHIEVEMENT_MEMBER_LIST:
@@ -7661,6 +7709,10 @@ UNIT_FORM_CHANGED:
   payload:
   - name: unitTarget
     type: unit
+UNIT_GUILD_LEVEL:
+  payload:
+  - name: newLevel
+    type: number
 UNIT_HEAL_ABSORB_AMOUNT_CHANGED:
   payload:
   - name: unitTarget
@@ -8376,24 +8428,6 @@ VOICE_CHAT_TTS_SPEAK_TEXT_UPDATE:
 VOICE_CHAT_TTS_VOICES_UPDATE:
   payload:
 VOICE_CHAT_VAD_SETTINGS_UPDATED:
-  payload:
-VOID_DEPOSIT_WARNING:
-  payload:
-  - name: slot
-    type: number
-  - name: link
-    type: string
-VOID_STORAGE_CONTENTS_UPDATE:
-  payload:
-VOID_STORAGE_DEPOSIT_UPDATE:
-  payload:
-  - name: slot
-    type: number
-VOID_STORAGE_UPDATE:
-  payload:
-VOID_TRANSFER_DONE:
-  payload:
-VOID_TRANSFER_SUCCESS:
   payload:
 VOTE_KICK_REASON_NEEDED:
   payload:
