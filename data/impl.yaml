@@ -363,12 +363,6 @@ GetScreenHeight:
 GetScreenWidth:
   moduledelegate:
     name: system
-GetSpecializationInfo:
-  impl:
-    modules:
-      units:
-    sqls:
-    - GetSpecializationInfo
 GetSpecializationInfoByID:
   directsql: GetSpecializationInfoByID
 GetSpecializationInfoForClassID:
