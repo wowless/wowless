@@ -454,6 +454,8 @@ typedefs:
     type: function
   luaIndex:
     type: number
+  LuaValueReference:
+    type: table
   LuaValueVariant:
     type: table
   ModelAsset:

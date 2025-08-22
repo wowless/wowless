@@ -806,6 +806,38 @@ CAPTUREFRAMES_FAILED:
   payload:
 CAPTUREFRAMES_SUCCEEDED:
   payload:
+CATALOG_SHOP_ADD_PENDING_PRODUCT:
+  payload:
+  - name: productID
+    type: number
+CATALOG_SHOP_DATA_REFRESH:
+  payload:
+CATALOG_SHOP_DISABLED:
+  payload:
+CATALOG_SHOP_FETCH_FAILURE:
+  payload:
+CATALOG_SHOP_FETCH_SUCCESS:
+  payload:
+CATALOG_SHOP_OPEN_SIMPLE_CHECKOUT:
+  payload:
+  - name: checkoutID
+    type: number
+CATALOG_SHOP_PMT_IMAGE_DOWNLOADED:
+  payload:
+  - name: catalogProductID
+    type: number
+CATALOG_SHOP_PURCHASE_SUCCESS:
+  payload:
+  - name: productID
+    type: number
+CATALOG_SHOP_REMOVE_PENDING_PRODUCT:
+  payload:
+  - name: productID
+    type: number
+CATALOG_SHOP_SPECIFIC_PRODUCT_REFRESH:
+  payload:
+  - name: productID
+    type: number
 CAUTIONARY_CHANNEL_MESSAGE:
   payload:
   - name: confirmNumber
@@ -6488,10 +6520,26 @@ RECEIVED_ACHIEVEMENT_MEMBER_LIST:
   payload:
   - name: achievementID
     type: number
+RECENT_ALLIES_CACHE_UPDATE:
+  payload:
+RECENT_ALLIES_DATA_READY:
+  payload:
+RECENT_ALLIES_SYSTEM_STATUS_UPDATED:
+  payload:
+RECENT_ALLY_DATA_UPDATED:
+  payload:
+  - name: characterGUID
+    type: string
 REJECTED_MATCHMAKING_PARTY_INVITE:
   payload:
   - name: name
     type: string
+REMIX_ARTIFACT_ITEM_SPECS_LOADED:
+  payload:
+  - name: success
+    type: boolean
+REMIX_ARTIFACT_UPDATE:
+  payload:
 REMIX_END_OF_EVENT:
   payload:
 REPLACE_ENCHANT:
@@ -6852,6 +6900,11 @@ SOCKET_INFO_REFUNDABLE_CONFIRM:
   payload:
 SOCKET_INFO_SUCCESS:
   payload:
+SOCKET_INFO_UI_EVENT_REGISTRATION_UPDATE:
+  payload:
+  - name: uiType
+    type:
+      enum: ItemSocketInfoUIType
 SOCKET_INFO_UPDATE:
   payload:
 SOULBIND_ACTIVATED:
@@ -7164,6 +7217,8 @@ SUBSCRIPTION_CHANGED_KICK_IMMINENT:
 SUPER_TRACKING_CHANGED:
   payload:
 SUPER_TRACKING_PATH_UPDATED:
+  payload:
+SURVEY_DELIVERED:
   payload:
 SYSMSG:
   payload:

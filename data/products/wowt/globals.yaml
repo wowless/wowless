@@ -8184,6 +8184,7 @@ Enum:
     MaxValue: 9
     MinValue: 0
     NumValues: 10
+  VasTransactionPurchaseResult:
   VasTransactionPurchaseResultMeta:
     MaxValue: 20096
     MinValue: 0
