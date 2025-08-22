@@ -20,6 +20,7 @@ addon:
       StoreError:
       VasError:
       VasServiceType:
+      VasTransactionPurchaseResult:
     globalapis:
       C_Macro.SetMacroExecuteLineCallback:
       CreateForbiddenFrame:

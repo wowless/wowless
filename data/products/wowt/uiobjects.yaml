@@ -4513,6 +4513,7 @@ LayeredRegion:
 Line:
   fields:
     hitRectThickness:
+      dynamicinit: true
       init: 0
       type: number
     thickness:
