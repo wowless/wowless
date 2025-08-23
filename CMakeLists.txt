@@ -11,87 +11,9 @@ cmake_policy(SET CMP0116 OLD)
 
 include(FetchContent)
 
-set(elune_SOURCE_DIR vendor/elune)
-set(elune_BINARY_DIR ${CMAKE_BINARY_DIR}/_deps/elune-build)
-add_library(
-  elune STATIC
-  ${elune_SOURCE_DIR}/liblua/lapi.c
-  ${elune_SOURCE_DIR}/liblua/lapi.c
-  ${elune_SOURCE_DIR}/liblua/lauxlib.c
-  ${elune_SOURCE_DIR}/liblua/lbaselib.c
-  ${elune_SOURCE_DIR}/liblua/lbitlib.c
-  ${elune_SOURCE_DIR}/liblua/lcode.c
-  ${elune_SOURCE_DIR}/liblua/lcompatlib.c
-  ${elune_SOURCE_DIR}/liblua/lcorolib.c
-  ${elune_SOURCE_DIR}/liblua/ldblib.c
-  ${elune_SOURCE_DIR}/liblua/ldebug.c
-  ${elune_SOURCE_DIR}/liblua/ldo.c
-  ${elune_SOURCE_DIR}/liblua/ldump.c
-  ${elune_SOURCE_DIR}/liblua/lfunc.c
-  ${elune_SOURCE_DIR}/liblua/lgc.c
-  ${elune_SOURCE_DIR}/liblua/linit.c
-  ${elune_SOURCE_DIR}/liblua/liolib.c
-  ${elune_SOURCE_DIR}/liblua/llex.c
-  ${elune_SOURCE_DIR}/liblua/lmanip.c
-  ${elune_SOURCE_DIR}/liblua/lmathlib.c
-  ${elune_SOURCE_DIR}/liblua/lmem.c
-  ${elune_SOURCE_DIR}/liblua/loadlib.c
-  ${elune_SOURCE_DIR}/liblua/lobject.c
-  ${elune_SOURCE_DIR}/liblua/lopcodes.c
-  ${elune_SOURCE_DIR}/liblua/loslib.c
-  ${elune_SOURCE_DIR}/liblua/lparser.c
-  ${elune_SOURCE_DIR}/liblua/lreadline.c
-  ${elune_SOURCE_DIR}/liblua/lsec.c
-  ${elune_SOURCE_DIR}/liblua/lseclib.c
-  ${elune_SOURCE_DIR}/liblua/lstate.c
-  ${elune_SOURCE_DIR}/liblua/lstatslib.c
-  ${elune_SOURCE_DIR}/liblua/lstring.c
-  ${elune_SOURCE_DIR}/liblua/lstrlib.c
-  ${elune_SOURCE_DIR}/liblua/ltable.c
-  ${elune_SOURCE_DIR}/liblua/ltablib.c
-  ${elune_SOURCE_DIR}/liblua/ltm.c
-  ${elune_SOURCE_DIR}/liblua/lundump.c
-  ${elune_SOURCE_DIR}/liblua/lvm.c
-  ${elune_SOURCE_DIR}/liblua/lzio.c)
-block()
-set(LUA_CPATH_ESCAPED "")
-set(LUA_DISABLE_LOADLIB ON)
-set(LUA_PATH_ESCAPED "")
-set(LUAI_BITSINT 32)
-if(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
-  set(LUA_DIRSEP_ESCAPED "/")
-  set(LUA_USE_LINUX OFF)
-  set(LUA_USE_MACOS ON)
-  set(LUA_USE_POSIX ON)
-  set(LUA_USE_WINDOWS OFF)
-elseif(CMAKE_SYSTEM_NAME STREQUAL "Linux")
-  set(LUA_DIRSEP_ESCAPED "/")
-  set(LUA_USE_LINUX ON)
-  set(LUA_USE_MACOS OFF)
-  set(LUA_USE_POSIX ON)
-  set(LUA_USE_WINDOWS OFF)
-elseif(CMAKE_SYSTEM_NAME STREQUAL "Windows")
-  set(LUA_DIRSEP_ESCAPED "\\\\")
-  set(LUA_USE_LINUX OFF)
-  set(LUA_USE_MACOS OFF)
-  set(LUA_USE_POSIX OFF)
-  set(LUA_USE_WINDOWS ON)
-else()
-  message(FATAL_ERROR "unsupported platform")
-endif()
-configure_file(${elune_SOURCE_DIR}/liblua/include/luaconf.h.in
-               ${elune_BINARY_DIR}/luaconf.h)
-endblock()
-find_path(UTF8H_INCLUDE_DIRS utf8h/utf8.h)
-target_include_directories(elune PRIVATE ${UTF8H_INCLUDE_DIRS}/utf8h)
-target_include_directories(elune PUBLIC ${elune_SOURCE_DIR}/liblua/include
-                                        ${elune_BINARY_DIR})
-target_link_libraries(elune PRIVATE $<$<PLATFORM_ID:Darwin,Linux>:m>
-                                    $<$<PLATFORM_ID:Windows>:bcrypt>)
-set_target_properties(elune PROPERTIES C_STANDARD 11)
-
-add_executable(bootstraplua ${elune_SOURCE_DIR}/lua/lua.c)
-target_link_libraries(bootstraplua PRIVATE elune)
+add_subdirectory(vendor/elune)
+add_executable(bootstraplua ALIAS lua)
+add_library(elune ALIAS liblua)
 
 find_package(expat CONFIG REQUIRED)
 
