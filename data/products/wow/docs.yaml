@@ -69,6 +69,9 @@ lies:
     TogglePlayerBounds:
     TogglePortals:
     ToggleTris:
+  extra_script_objects:
+    PingPinFrameAPI:
+    SimpleModelFFXAPI:
   uiobjects:
     Button:
       GetText:
@@ -384,9 +387,7 @@ skip_docfiles:
   ArenaTeamDocumentation:
   CinematicListDocumentation:
   LiveEventDocumentation:
-  PingPinFrameAPIDocumentation:
   SimpleMapSceneAPIDocumentation:
-  SimpleModelFFXAPIDocumentation:
   WorldSafeLocsUIInternalDocumentation:
 skip_uiobject_methods:
   Region:

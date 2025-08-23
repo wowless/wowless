@@ -29,6 +29,9 @@ lies:
     TogglePlayerBounds:
     TogglePortals:
     ToggleTris:
+  extra_script_objects:
+    PingPinFrameAPI:
+    SimpleModelFFXAPI:
   uiobjects:
     Button:
       GetText:
@@ -378,8 +381,6 @@ skip_docfiles:
   FrameAPIArchaeologyDigsiteDocumentation:
   FrameAPIBlobDocumentation:
   FrameAPIQuestPOIDocumentation:
-  PingPinFrameAPIDocumentation:
-  SimpleModelFFXAPIDocumentation:
 skip_uiobject_methods:
   Region:
     GetBottom:
