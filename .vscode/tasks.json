@@ -13,7 +13,7 @@
       "type": "shell"
     },
     {
-      "command": "ninja build/cmake/docs && for p in $(tail +2 data/products.yaml | cut -c3-); do echo $p && build/cmake/docs $p; done",
+      "command": "ninja build/cmake/docs && for p in $(cut -c3- data/products.yaml); do echo $p && build/cmake/docs $p; done",
       "label": "alldocs",
       "problemMatcher": [],
       "type": "shell"
