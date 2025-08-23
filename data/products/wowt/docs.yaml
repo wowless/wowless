@@ -57,11 +57,24 @@ lies:
             from: string
             to: unit
   extra_apis:
+    C_BarberShopInternal.SetQAMode:
     C_BattleNet.InstallHighResTextures:
+    C_ConfigurationWarnings.GetConfigurationWarnings:
+    C_ConfigurationWarnings.GetConfigurationWarningSeen:
+    C_ConfigurationWarnings.GetConfigurationWarningString:
+    C_ConfigurationWarnings.SetConfigurationWarningSeen:
     ShowCloak:
     ShowHelm:
     ShowingCloak:
     ShowingHelm:
+    ToggleAnimKitDisplay:
+    ToggleCollision:
+    ToggleCollisionDisplay:
+    ToggleDebugAIDisplay:
+    ToggleGravity:
+    TogglePlayerBounds:
+    TogglePortals:
+    ToggleTris:
   uiobjects:
     Button:
       GetText:
@@ -411,10 +424,7 @@ script_objects:
   SimpleTextureBaseAPI: TextureBase
 skip_docfiles:
   ArenaTeamDocumentation:
-  BarberShopInternalDocumentation:
   CinematicListDocumentation:
-  ConfigurationWarningsDocumentation:
-  DebugToggleDocumentation:
   LiveEventDocumentation:
   PingPinFrameAPIDocumentation:
   SimpleMapSceneAPIDocumentation:

@@ -9,7 +9,20 @@ lies:
       - _add:
           nilable: true
   extra_apis:
+    C_BarberShopInternal.SetQAMode:
     C_BattleNet.InstallHighResTextures:
+    C_ConfigurationWarnings.GetConfigurationWarnings:
+    C_ConfigurationWarnings.GetConfigurationWarningSeen:
+    C_ConfigurationWarnings.GetConfigurationWarningString:
+    C_ConfigurationWarnings.SetConfigurationWarningSeen:
+    ToggleAnimKitDisplay:
+    ToggleCollision:
+    ToggleCollisionDisplay:
+    ToggleDebugAIDisplay:
+    ToggleGravity:
+    TogglePlayerBounds:
+    TogglePortals:
+    ToggleTris:
   uiobjects:
     Button:
       GetText:
@@ -358,9 +371,6 @@ script_objects:
   SimpleTextureBaseAPI: TextureBase
 skip_docfiles:
   AuctionHouseDocumentation:
-  BarberShopInternalDocumentation:
-  ConfigurationWarningsDocumentation:
-  DebugToggleDocumentation:
   EditModeManagerDocumentation:
   PingPinFrameAPIDocumentation:
   SimpleModelFFXAPIDocumentation:
