@@ -99,12 +99,6 @@ end
 local config = parseYaml('data/products/' .. product .. '/docs.yaml')
 local enum = parseYaml('data/products/' .. product .. '/globals.yaml').Enum
 
-for k in pairs(deref(config, 'skip_docfiles') or {}) do
-  local f = k .. '.lua'
-  assert(docs[f], 'missing skip_docfiles ' .. f)
-  docs[f] = nil
-end
-
 local extra_events = deref(config, 'lies', 'extra_events') or {}
 local extra_script_objects = deref(config, 'lies', 'extra_script_objects') or {}
 local tabs, funcs, events, scrobjs = {}, {}, {}, {}

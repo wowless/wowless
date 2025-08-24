@@ -43,12 +43,6 @@ type:
           key: string
           value:
             ref: uiobject
-    skip_docfiles:
-      type:
-        mapof:
-          key: string
-          value:
-            record:
     skip_uiobject_methods:
       type:
         mapof:
