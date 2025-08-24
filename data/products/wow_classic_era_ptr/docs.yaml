@@ -15,12 +15,108 @@ lies:
             from: specID
             to: classID
   extra_apis:
+    C_AuctionHouse.CalculateCommodityDeposit:
+    C_AuctionHouse.CalculateItemDeposit:
+    C_AuctionHouse.CanCancelAuction:
+    C_AuctionHouse.CancelAuction:
+    C_AuctionHouse.CancelCommoditiesPurchase:
+    C_AuctionHouse.CancelSell:
+    C_AuctionHouse.CloseAuctionHouse:
+    C_AuctionHouse.ConfirmCommoditiesPurchase:
+    C_AuctionHouse.ConfirmPostCommodity:
+    C_AuctionHouse.ConfirmPostItem:
+    C_AuctionHouse.FavoritesAreAvailable:
+    C_AuctionHouse.GetAuctionInfoByID:
+    C_AuctionHouse.GetAuctionItemSubClasses:
+    C_AuctionHouse.GetAvailablePostCount:
+    C_AuctionHouse.GetBidInfo:
+    C_AuctionHouse.GetBids:
+    C_AuctionHouse.GetBidType:
+    C_AuctionHouse.GetBrowseResults:
+    C_AuctionHouse.GetCancelCost:
+    C_AuctionHouse.GetCommoditySearchResultInfo:
+    C_AuctionHouse.GetCommoditySearchResultsQuantity:
+    C_AuctionHouse.GetExtraBrowseInfo:
+    C_AuctionHouse.GetFilterGroups:
+    C_AuctionHouse.GetItemCommodityStatus:
+    C_AuctionHouse.GetItemKeyFromItem:
+    C_AuctionHouse.GetItemKeyInfo:
+    C_AuctionHouse.GetItemKeyRequiredLevel:
+    C_AuctionHouse.GetItemSearchResultInfo:
+    C_AuctionHouse.GetItemSearchResultsQuantity:
+    C_AuctionHouse.GetMaxBidItemBid:
+    C_AuctionHouse.GetMaxBidItemBuyout:
+    C_AuctionHouse.GetMaxCommoditySearchResultPrice:
+    C_AuctionHouse.GetMaxItemSearchResultBid:
+    C_AuctionHouse.GetMaxItemSearchResultBuyout:
+    C_AuctionHouse.GetMaxOwnedAuctionBid:
+    C_AuctionHouse.GetMaxOwnedAuctionBuyout:
+    C_AuctionHouse.GetNumBids:
+    C_AuctionHouse.GetNumBidTypes:
+    C_AuctionHouse.GetNumCommoditySearchResults:
+    C_AuctionHouse.GetNumItemSearchResults:
+    C_AuctionHouse.GetNumOwnedAuctions:
+    C_AuctionHouse.GetNumOwnedAuctionTypes:
+    C_AuctionHouse.GetNumReplicateItems:
+    C_AuctionHouse.GetOwnedAuctionInfo:
+    C_AuctionHouse.GetOwnedAuctions:
+    C_AuctionHouse.GetOwnedAuctionType:
+    C_AuctionHouse.GetQuoteDurationRemaining:
+    C_AuctionHouse.GetReplicateItemBattlePetInfo:
+    C_AuctionHouse.GetReplicateItemInfo:
+    C_AuctionHouse.GetReplicateItemLink:
+    C_AuctionHouse.GetReplicateItemTimeLeft:
+    C_AuctionHouse.GetTimeLeftBandInfo:
+    C_AuctionHouse.HasFavorites:
+    C_AuctionHouse.HasFullBidResults:
+    C_AuctionHouse.HasFullBrowseResults:
+    C_AuctionHouse.HasFullCommoditySearchResults:
+    C_AuctionHouse.HasFullItemSearchResults:
+    C_AuctionHouse.HasFullOwnedAuctionResults:
+    C_AuctionHouse.HasMaxFavorites:
+    C_AuctionHouse.HasSearchResults:
+    C_AuctionHouse.IsFavoriteItem:
+    C_AuctionHouse.IsSellItemValid:
+    C_AuctionHouse.IsThrottledMessageSystemReady:
+    C_AuctionHouse.MakeItemKey:
+    C_AuctionHouse.PlaceBid:
+    C_AuctionHouse.PostCommodity:
+    C_AuctionHouse.PostItem:
+    C_AuctionHouse.QueryBids:
+    C_AuctionHouse.QueryOwnedAuctions:
+    C_AuctionHouse.RefreshCommoditySearchResults:
+    C_AuctionHouse.RefreshItemSearchResults:
+    C_AuctionHouse.ReplicateItems:
+    C_AuctionHouse.RequestMoreBrowseResults:
+    C_AuctionHouse.RequestMoreCommoditySearchResults:
+    C_AuctionHouse.RequestMoreItemSearchResults:
+    C_AuctionHouse.RequestOwnedAuctionBidderInfo:
+    C_AuctionHouse.SearchForFavorites:
+    C_AuctionHouse.SearchForItemKeys:
+    C_AuctionHouse.SendBrowseQuery:
+    C_AuctionHouse.SendSearchQuery:
+    C_AuctionHouse.SendSellSearchQuery:
+    C_AuctionHouse.SetFavoriteItem:
+    C_AuctionHouse.ShouldAutoPopulatePrice:
+    C_AuctionHouse.StartCommoditiesPurchase:
+    C_AuctionHouse.SupportsCopperValues:
     C_BarberShopInternal.SetQAMode:
     C_BattleNet.InstallHighResTextures:
     C_ConfigurationWarnings.GetConfigurationWarnings:
     C_ConfigurationWarnings.GetConfigurationWarningSeen:
     C_ConfigurationWarnings.GetConfigurationWarningString:
     C_ConfigurationWarnings.SetConfigurationWarningSeen:
+    C_EditMode.ConvertLayoutInfoToString:
+    C_EditMode.ConvertStringToLayoutInfo:
+    C_EditMode.GetAccountSettings:
+    C_EditMode.GetLayouts:
+    C_EditMode.IsValidLayoutName:
+    C_EditMode.OnEditModeExit:
+    C_EditMode.OnLayoutAdded:
+    C_EditMode.OnLayoutDeleted:
+    C_EditMode.SaveLayouts:
+    C_EditMode.SetAccountSetting:
+    C_EditMode.SetActiveLayout:
     ToggleAnimKitDisplay:
     ToggleCollision:
     ToggleCollisionDisplay:
@@ -29,6 +125,43 @@ lies:
     TogglePlayerBounds:
     TogglePortals:
     ToggleTris:
+  extra_events:
+    AUCTION_CANCELED:
+    AUCTION_HOUSE_AUCTION_CREATED:
+    AUCTION_HOUSE_AUCTIONS_EXPIRED:
+    AUCTION_HOUSE_BROWSE_FAILURE:
+    AUCTION_HOUSE_BROWSE_RESULTS_ADDED:
+    AUCTION_HOUSE_BROWSE_RESULTS_UPDATED:
+    AUCTION_HOUSE_FAVORITES_UPDATED:
+    AUCTION_HOUSE_ITEM_DELIVERY_DELAY_UPDATE:
+    AUCTION_HOUSE_NEW_BID_RECEIVED:
+    AUCTION_HOUSE_NEW_RESULTS_RECEIVED:
+    AUCTION_HOUSE_PURCHASE_COMPLETED:
+    AUCTION_HOUSE_SHOW_COMMODITY_WON_NOTIFICATION:
+    AUCTION_HOUSE_SHOW_ERROR:
+    AUCTION_HOUSE_THROTTLED_MESSAGE_DROPPED:
+    AUCTION_HOUSE_THROTTLED_MESSAGE_QUEUED:
+    AUCTION_HOUSE_THROTTLED_MESSAGE_RESPONSE_RECEIVED:
+    AUCTION_HOUSE_THROTTLED_MESSAGE_SENT:
+    AUCTION_HOUSE_THROTTLED_SYSTEM_READY:
+    BID_ADDED:
+    BIDS_UPDATED:
+    COMMODITY_PRICE_UNAVAILABLE:
+    COMMODITY_PRICE_UPDATED:
+    COMMODITY_PURCHASE_FAILED:
+    COMMODITY_PURCHASE_SUCCEEDED:
+    COMMODITY_PURCHASED:
+    COMMODITY_SEARCH_RESULTS_ADDED:
+    COMMODITY_SEARCH_RESULTS_RECEIVED:
+    COMMODITY_SEARCH_RESULTS_UPDATED:
+    EDIT_MODE_LAYOUTS_UPDATED:
+    EXTRA_BROWSE_INFO_RECEIVED:
+    ITEM_KEY_ITEM_INFO_RECEIVED:
+    ITEM_PURCHASED:
+    ITEM_SEARCH_RESULTS_ADDED:
+    ITEM_SEARCH_RESULTS_UPDATED:
+    OWNED_AUCTION_BIDDER_INFO_RECEIVED:
+    REPLICATE_ITEM_LIST_UPDATE:
   extra_script_objects:
     PingPinFrameAPI:
     SimpleModelFFXAPI:
@@ -376,8 +509,6 @@ script_objects:
   SimpleTextureAPI: Texture
   SimpleTextureBaseAPI: TextureBase
 skip_docfiles:
-  AuctionHouseDocumentation:
-  EditModeManagerDocumentation:
   FrameAPIArchaeologyDigsiteDocumentation:
   FrameAPIBlobDocumentation:
   FrameAPIQuestPOIDocumentation:
