@@ -911,6 +911,724 @@ C_AssistedCombat.IsAvailable:
     type: boolean
   - name: failureReason
     type: string
+C_AuctionHouse.CalculateCommodityDeposit:
+  inputs:
+  - name: itemID
+    type: number
+  - name: duration
+    type: number
+  - name: quantity
+    type: number
+  outputs:
+  - name: depositCost
+    nilable: true
+    type: number
+C_AuctionHouse.CalculateItemDeposit:
+  inputs:
+  - name: item
+    type:
+      structure: ItemLocation
+  - name: duration
+    type: number
+  - name: quantity
+    type: number
+  outputs:
+  - name: depositCost
+    nilable: true
+    type: number
+C_AuctionHouse.CanCancelAuction:
+  inputs:
+  - name: ownedAuctionID
+    type: number
+  outputs:
+  - name: canCancelAuction
+    type: boolean
+C_AuctionHouse.CancelAuction:
+  inputs:
+  - name: ownedAuctionID
+    type: number
+  outputs:
+C_AuctionHouse.CancelCommoditiesPurchase:
+  inputs:
+  outputs:
+C_AuctionHouse.CancelSell:
+  inputs:
+  outputs:
+C_AuctionHouse.CloseAuctionHouse:
+  inputs:
+  outputs:
+C_AuctionHouse.ConfirmCommoditiesPurchase:
+  inputs:
+  - name: itemID
+    type: number
+  - name: quantity
+    type: number
+  outputs:
+C_AuctionHouse.ConfirmPostCommodity:
+  inputs:
+  - name: item
+    type:
+      structure: ItemLocation
+  - name: duration
+    type: number
+  - name: quantity
+    type: number
+  - name: unitPrice
+    type: number
+  outputs:
+C_AuctionHouse.ConfirmPostItem:
+  inputs:
+  - name: item
+    type:
+      structure: ItemLocation
+  - name: duration
+    type: number
+  - name: quantity
+    type: number
+  - name: bid
+    nilable: true
+    type: number
+  - name: buyout
+    nilable: true
+    type: number
+  outputs:
+C_AuctionHouse.FavoritesAreAvailable:
+  inputs:
+  outputs:
+  - name: favoritesAreAvailable
+    type: boolean
+C_AuctionHouse.GetAuctionInfoByID:
+  inputs:
+  - name: auctionID
+    type: number
+  outputs:
+  - name: priceInfo
+    nilable: true
+    type:
+      structure: C_AuctionHouse.AuctionInfo
+C_AuctionHouse.GetAuctionItemSubClasses:
+  inputs:
+  - name: classID
+    type: number
+  outputs:
+  - name: subClasses
+    type:
+      arrayof: number
+C_AuctionHouse.GetAvailablePostCount:
+  inputs:
+  - name: item
+    type:
+      structure: ItemLocation
+  outputs:
+  - name: listCount
+    type: number
+C_AuctionHouse.GetBidInfo:
+  inputs:
+  - name: bidIndex
+    type: number
+  outputs:
+  - name: bid
+    nilable: true
+    type:
+      structure: C_AuctionHouse.BidInfo
+C_AuctionHouse.GetBids:
+  inputs:
+  outputs:
+  - name: bids
+    type:
+      arrayof:
+        structure: C_AuctionHouse.BidInfo
+C_AuctionHouse.GetBidType:
+  inputs:
+  - name: bidTypeIndex
+    type: number
+  outputs:
+  - name: typeItemKey
+    nilable: true
+    type:
+      structure: C_AuctionHouse.ItemKey
+C_AuctionHouse.GetBrowseResults:
+  inputs:
+  outputs:
+  - name: browseResults
+    type:
+      arrayof:
+        structure: C_AuctionHouse.BrowseResultInfo
+C_AuctionHouse.GetCancelCost:
+  inputs:
+  - name: ownedAuctionID
+    type: number
+  outputs:
+  - name: cancelCost
+    type: number
+C_AuctionHouse.GetCommoditySearchResultInfo:
+  inputs:
+  - name: itemID
+    type: number
+  - name: commoditySearchResultIndex
+    type: number
+  outputs:
+  - name: result
+    nilable: true
+    type:
+      structure: C_AuctionHouse.CommoditySearchResultInfo
+C_AuctionHouse.GetCommoditySearchResultsQuantity:
+  inputs:
+  - name: itemID
+    type: number
+  outputs:
+  - name: totalQuantity
+    type: number
+C_AuctionHouse.GetExtraBrowseInfo:
+  inputs:
+  - name: itemKey
+    type:
+      structure: C_AuctionHouse.ItemKey
+  mayreturnnothing: true
+  outputs:
+  - name: extraInfo
+    type: number
+C_AuctionHouse.GetFilterGroups:
+  inputs:
+  outputs:
+  - name: filterGroups
+    type:
+      arrayof:
+        structure: C_AuctionHouse.AuctionHouseFilterGroup
+C_AuctionHouse.GetItemCommodityStatus:
+  inputs:
+  - name: item
+    type:
+      structure: ItemLocation
+  outputs:
+  - name: isCommodity
+    type:
+      enum: ItemCommodityStatus
+C_AuctionHouse.GetItemKeyFromItem:
+  inputs:
+  - name: item
+    type:
+      structure: ItemLocation
+  outputs:
+  - name: itemKey
+    type:
+      structure: C_AuctionHouse.ItemKey
+C_AuctionHouse.GetItemKeyInfo:
+  inputs:
+  - name: itemKey
+    type:
+      structure: C_AuctionHouse.ItemKey
+  - default: false
+    name: restrictQualityToFilter
+    type: boolean
+  outputs:
+  - name: itemKeyInfo
+    nilable: true
+    type:
+      structure: C_AuctionHouse.ItemKeyInfo
+C_AuctionHouse.GetItemKeyRequiredLevel:
+  inputs:
+  - name: itemKey
+    type:
+      structure: C_AuctionHouse.ItemKey
+  mayreturnnothing: true
+  outputs:
+  - name: requiredLevel
+    type: number
+C_AuctionHouse.GetItemSearchResultInfo:
+  inputs:
+  - name: itemKey
+    type:
+      structure: C_AuctionHouse.ItemKey
+  - name: itemSearchResultIndex
+    type: number
+  outputs:
+  - name: result
+    nilable: true
+    type:
+      structure: C_AuctionHouse.ItemSearchResultInfo
+C_AuctionHouse.GetItemSearchResultsQuantity:
+  inputs:
+  - name: itemKey
+    type:
+      structure: C_AuctionHouse.ItemKey
+  outputs:
+  - name: totalQuantity
+    type: number
+C_AuctionHouse.GetMaxBidItemBid:
+  inputs:
+  outputs:
+  - name: maxBid
+    nilable: true
+    type: number
+C_AuctionHouse.GetMaxBidItemBuyout:
+  inputs:
+  outputs:
+  - name: maxBuyout
+    nilable: true
+    type: number
+C_AuctionHouse.GetMaxCommoditySearchResultPrice:
+  inputs:
+  - name: itemID
+    type: number
+  outputs:
+  - name: maxUnitPrice
+    nilable: true
+    type: number
+C_AuctionHouse.GetMaxItemSearchResultBid:
+  inputs:
+  - name: itemKey
+    type:
+      structure: C_AuctionHouse.ItemKey
+  outputs:
+  - name: maxBid
+    nilable: true
+    type: number
+C_AuctionHouse.GetMaxItemSearchResultBuyout:
+  inputs:
+  - name: itemKey
+    type:
+      structure: C_AuctionHouse.ItemKey
+  outputs:
+  - name: maxBuyout
+    nilable: true
+    type: number
+C_AuctionHouse.GetMaxOwnedAuctionBid:
+  inputs:
+  outputs:
+  - name: maxBid
+    nilable: true
+    type: number
+C_AuctionHouse.GetMaxOwnedAuctionBuyout:
+  inputs:
+  outputs:
+  - name: maxBuyout
+    nilable: true
+    type: number
+C_AuctionHouse.GetNumBids:
+  inputs:
+  outputs:
+  - name: numBids
+    type: number
+C_AuctionHouse.GetNumBidTypes:
+  inputs:
+  outputs:
+  - name: numBidTypes
+    type: number
+C_AuctionHouse.GetNumCommoditySearchResults:
+  inputs:
+  - name: itemID
+    type: number
+  outputs:
+  - name: numSearchResults
+    type: number
+C_AuctionHouse.GetNumItemSearchResults:
+  inputs:
+  - name: itemKey
+    type:
+      structure: C_AuctionHouse.ItemKey
+  outputs:
+  - name: numItemSearchResults
+    type: number
+C_AuctionHouse.GetNumOwnedAuctions:
+  inputs:
+  outputs:
+  - name: numOwnedAuctions
+    type: number
+C_AuctionHouse.GetNumOwnedAuctionTypes:
+  inputs:
+  outputs:
+  - name: numOwnedAuctionTypes
+    type: number
+C_AuctionHouse.GetNumReplicateItems:
+  inputs:
+  outputs:
+  - name: numReplicateItems
+    type: number
+C_AuctionHouse.GetOwnedAuctionInfo:
+  inputs:
+  - name: ownedAuctionIndex
+    type: number
+  outputs:
+  - name: ownedAuction
+    nilable: true
+    type:
+      structure: C_AuctionHouse.OwnedAuctionInfo
+C_AuctionHouse.GetOwnedAuctions:
+  inputs:
+  outputs:
+  - name: ownedAuctions
+    type:
+      arrayof:
+        structure: C_AuctionHouse.OwnedAuctionInfo
+C_AuctionHouse.GetOwnedAuctionType:
+  inputs:
+  - name: ownedAuctionTypeIndex
+    type: number
+  outputs:
+  - name: typeItemKey
+    nilable: true
+    type:
+      structure: C_AuctionHouse.ItemKey
+C_AuctionHouse.GetQuoteDurationRemaining:
+  inputs:
+  outputs:
+  - name: quoteDurationSeconds
+    type: number
+C_AuctionHouse.GetReplicateItemBattlePetInfo:
+  inputs:
+  - name: index
+    type: number
+  mayreturnnothing: true
+  outputs:
+  - name: creatureID
+    type: number
+  - name: displayID
+    type: number
+C_AuctionHouse.GetReplicateItemInfo:
+  inputs:
+  - name: index
+    type: number
+  outputs:
+  - name: name
+    nilable: true
+    type: string
+  - name: texture
+    nilable: true
+    type: number
+  - name: count
+    type: number
+  - name: qualityID
+    type: number
+  - name: usable
+    nilable: true
+    type: boolean
+  - name: level
+    type: number
+  - name: levelType
+    nilable: true
+    type: string
+  - name: minBid
+    type: number
+  - name: minIncrement
+    type: number
+  - name: buyoutPrice
+    type: number
+  - name: bidAmount
+    type: number
+  - name: highBidder
+    nilable: true
+    type: string
+  - name: bidderFullName
+    nilable: true
+    type: string
+  - name: owner
+    nilable: true
+    type: string
+  - name: ownerFullName
+    nilable: true
+    type: string
+  - name: saleStatus
+    type: number
+  - name: itemID
+    type: number
+  - name: hasAllInfo
+    nilable: true
+    type: boolean
+C_AuctionHouse.GetReplicateItemLink:
+  inputs:
+  - name: index
+    type: number
+  outputs:
+  - name: itemLink
+    nilable: true
+    type: string
+C_AuctionHouse.GetReplicateItemTimeLeft:
+  inputs:
+  - name: index
+    type: number
+  outputs:
+  - name: timeLeft
+    type: number
+C_AuctionHouse.GetTimeLeftBandInfo:
+  inputs:
+  - name: timeLeftBand
+    type:
+      enum: AuctionHouseTimeLeftBand
+  outputs:
+  - name: timeLeftMinSeconds
+    type: number
+  - name: timeLeftMaxSeconds
+    type: number
+C_AuctionHouse.HasFavorites:
+  inputs:
+  outputs:
+  - name: hasFavorites
+    type: boolean
+C_AuctionHouse.HasFullBidResults:
+  inputs:
+  outputs:
+  - name: hasFullBidResults
+    type: boolean
+C_AuctionHouse.HasFullBrowseResults:
+  inputs:
+  outputs:
+  - name: hasFullBrowseResults
+    type: boolean
+C_AuctionHouse.HasFullCommoditySearchResults:
+  inputs:
+  - name: itemID
+    type: number
+  outputs:
+  - name: hasFullResults
+    type: boolean
+C_AuctionHouse.HasFullItemSearchResults:
+  inputs:
+  - name: itemKey
+    type:
+      structure: C_AuctionHouse.ItemKey
+  outputs:
+  - name: hasFullResults
+    type: boolean
+C_AuctionHouse.HasFullOwnedAuctionResults:
+  inputs:
+  outputs:
+  - name: hasFullOwnedAuctionResults
+    type: boolean
+C_AuctionHouse.HasMaxFavorites:
+  inputs:
+  outputs:
+  - name: hasMaxFavorites
+    type: boolean
+C_AuctionHouse.HasSearchResults:
+  inputs:
+  - name: itemKey
+    type:
+      structure: C_AuctionHouse.ItemKey
+  outputs:
+  - name: hasSearchResults
+    type: boolean
+C_AuctionHouse.IsFavoriteItem:
+  inputs:
+  - name: itemKey
+    type:
+      structure: C_AuctionHouse.ItemKey
+  outputs:
+  - name: isFavorite
+    type: boolean
+C_AuctionHouse.IsSellItemValid:
+  inputs:
+  - name: item
+    type:
+      structure: ItemLocation
+  - default: true
+    name: displayError
+    type: boolean
+  outputs:
+  - name: valid
+    type: boolean
+C_AuctionHouse.IsThrottledMessageSystemReady:
+  inputs:
+  outputs:
+  - name: canSendThrottledMessage
+    type: boolean
+C_AuctionHouse.MakeItemKey:
+  inputs:
+  - name: itemID
+    type: number
+  - default: 0
+    name: itemLevel
+    type: number
+  - default: 0
+    name: itemSuffix
+    type: number
+  - default: 0
+    name: battlePetSpeciesID
+    type: number
+  outputs:
+  - name: itemKey
+    type:
+      structure: C_AuctionHouse.ItemKey
+C_AuctionHouse.PlaceBid:
+  inputs:
+  - name: auctionID
+    type: number
+  - name: bidAmount
+    type: number
+  outputs:
+C_AuctionHouse.PostCommodity:
+  inputs:
+  - name: item
+    type:
+      structure: ItemLocation
+  - name: duration
+    type: number
+  - name: quantity
+    type: number
+  - name: unitPrice
+    type: number
+  outputs:
+  - name: needsConfirmation
+    type: boolean
+C_AuctionHouse.PostItem:
+  inputs:
+  - name: item
+    type:
+      structure: ItemLocation
+  - name: duration
+    type: number
+  - name: quantity
+    type: number
+  - name: bid
+    nilable: true
+    type: number
+  - name: buyout
+    nilable: true
+    type: number
+  outputs:
+  - name: needsConfirmation
+    type: boolean
+C_AuctionHouse.QueryBids:
+  inputs:
+  - name: sorts
+    type:
+      arrayof:
+        structure: C_AuctionHouse.AuctionHouseSortType
+  - name: auctionIDs
+    type:
+      arrayof: number
+  outputs:
+C_AuctionHouse.QueryOwnedAuctions:
+  inputs:
+  - name: sorts
+    type:
+      arrayof:
+        structure: C_AuctionHouse.AuctionHouseSortType
+  outputs:
+C_AuctionHouse.RefreshCommoditySearchResults:
+  inputs:
+  - name: itemID
+    type: number
+  outputs:
+C_AuctionHouse.RefreshItemSearchResults:
+  inputs:
+  - name: itemKey
+    type:
+      structure: C_AuctionHouse.ItemKey
+  - name: minLevelFilter
+    nilable: true
+    type: number
+  - name: maxLevelFilter
+    nilable: true
+    type: number
+  outputs:
+C_AuctionHouse.ReplicateItems:
+  inputs:
+  outputs:
+C_AuctionHouse.RequestMoreBrowseResults:
+  inputs:
+  outputs:
+C_AuctionHouse.RequestMoreCommoditySearchResults:
+  inputs:
+  - name: itemID
+    type: number
+  outputs:
+  - name: hasFullResults
+    type: boolean
+C_AuctionHouse.RequestMoreItemSearchResults:
+  inputs:
+  - name: itemKey
+    type:
+      structure: C_AuctionHouse.ItemKey
+  outputs:
+  - name: hasFullResults
+    type: boolean
+C_AuctionHouse.RequestOwnedAuctionBidderInfo:
+  inputs:
+  - name: auctionID
+    type: number
+  outputs:
+  - name: bidderName
+    type: string
+C_AuctionHouse.SearchForFavorites:
+  inputs:
+  - name: sorts
+    type:
+      arrayof:
+        structure: C_AuctionHouse.AuctionHouseSortType
+  outputs:
+C_AuctionHouse.SearchForItemKeys:
+  inputs:
+  - name: itemKeys
+    type:
+      arrayof:
+        structure: C_AuctionHouse.ItemKey
+  - name: sorts
+    type:
+      arrayof:
+        structure: C_AuctionHouse.AuctionHouseSortType
+  outputs:
+C_AuctionHouse.SendBrowseQuery:
+  inputs:
+  - name: query
+    type:
+      structure: C_AuctionHouse.AuctionHouseBrowseQuery
+  outputs:
+C_AuctionHouse.SendSearchQuery:
+  inputs:
+  - name: itemKey
+    type:
+      structure: C_AuctionHouse.ItemKey
+  - name: sorts
+    type:
+      arrayof:
+        structure: C_AuctionHouse.AuctionHouseSortType
+  - name: separateOwnerItems
+    type: boolean
+  - default: 0
+    name: minLevelFilter
+    type: number
+  - default: 0
+    name: maxLevelFilter
+    type: number
+  outputs:
+C_AuctionHouse.SendSellSearchQuery:
+  inputs:
+  - name: itemKey
+    type:
+      structure: C_AuctionHouse.ItemKey
+  - name: sorts
+    type:
+      arrayof:
+        structure: C_AuctionHouse.AuctionHouseSortType
+  - name: separateOwnerItems
+    type: boolean
+  outputs:
+C_AuctionHouse.SetFavoriteItem:
+  inputs:
+  - name: itemKey
+    type:
+      structure: C_AuctionHouse.ItemKey
+  - name: setFavorite
+    type: boolean
+  outputs:
+C_AuctionHouse.ShouldAutoPopulatePrice:
+  inputs:
+  outputs:
+  - name: shouldAutoPopulatePrice
+    type: boolean
+C_AuctionHouse.StartCommoditiesPurchase:
+  inputs:
+  - name: itemID
+    type: number
+  - name: quantity
+    type: number
+  outputs:
+C_AuctionHouse.SupportsCopperValues:
+  inputs:
+  outputs:
+  - name: supportsCopperValues
+    type: boolean
 C_AuthChallenge.Cancel:
 C_AuthChallenge.DidChallengeSucceed:
 C_AuthChallenge.OnTabPressed:

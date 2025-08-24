@@ -373,7 +373,6 @@ script_objects:
   SimpleTextureAPI: Texture
   SimpleTextureBaseAPI: TextureBase
 skip_docfiles:
-  AuctionHouseDocumentation:
   EditModeManagerDocumentation:
 skip_uiobject_methods:
   Region:

@@ -233,14 +233,24 @@ AUCTION_BIDDER_LIST_UPDATE:
   payload:
 AUCTION_CANCELED:
   payload:
+  - name: auctionID
+    type: number
 AUCTION_HOUSE_AUCTION_CREATED:
   payload:
+  - name: auctionID
+    type: number
 AUCTION_HOUSE_AUCTIONS_EXPIRED:
   payload:
+  - name: auctionID
+    type: number
 AUCTION_HOUSE_BROWSE_FAILURE:
   payload:
 AUCTION_HOUSE_BROWSE_RESULTS_ADDED:
   payload:
+  - name: addedBrowseResults
+    type:
+      arrayof:
+        structure: C_AuctionHouse.BrowseResultInfo
 AUCTION_HOUSE_BROWSE_RESULTS_UPDATED:
   payload:
 AUCTION_HOUSE_CLOSED:
@@ -251,24 +261,43 @@ AUCTION_HOUSE_FAVORITES_UPDATED:
   payload:
 AUCTION_HOUSE_ITEM_DELIVERY_DELAY_UPDATE:
   payload:
+  - name: purchasedItemDeliveryDelay
+    type: number
+  - name: cancelledItemDeliveryDelay
+    type: number
 AUCTION_HOUSE_NEW_BID_RECEIVED:
   payload:
+  - name: auctionID
+    type: number
 AUCTION_HOUSE_NEW_RESULTS_RECEIVED:
   payload:
+  - name: itemKey
+    nilable: true
+    type:
+      structure: C_AuctionHouse.ItemKey
 AUCTION_HOUSE_POST_ERROR:
   payload:
 AUCTION_HOUSE_POST_WARNING:
   payload:
 AUCTION_HOUSE_PURCHASE_COMPLETED:
   payload:
+  - name: auctionID
+    type: number
 AUCTION_HOUSE_SCRIPT_DEPRECATED:
   payload:
 AUCTION_HOUSE_SHOW:
   payload:
 AUCTION_HOUSE_SHOW_COMMODITY_WON_NOTIFICATION:
   payload:
+  - name: commodityName
+    type: string
+  - name: commodityQuantity
+    type: number
 AUCTION_HOUSE_SHOW_ERROR:
   payload:
+  - name: error
+    type:
+      enum: AuctionHouseError
 AUCTION_HOUSE_SHOW_FORMATTED_NOTIFICATION:
   payload:
   - name: notification
@@ -486,6 +515,8 @@ BEHAVIORAL_NOTIFICATION:
     type: string
 BID_ADDED:
   payload:
+  - name: bidID
+    type: number
 BIDS_UPDATED:
   payload:
 BILLING_NAG_DIALOG:
@@ -3558,18 +3589,30 @@ COMMODITY_PRICE_UNAVAILABLE:
   payload:
 COMMODITY_PRICE_UPDATED:
   payload:
+  - name: updatedUnitPrice
+    type: number
+  - name: updatedTotalPrice
+    type: number
 COMMODITY_PURCHASE_FAILED:
   payload:
 COMMODITY_PURCHASE_SUCCEEDED:
   payload:
 COMMODITY_PURCHASED:
   payload:
+  - name: itemID
+    type: number
+  - name: quantity
+    type: number
 COMMODITY_SEARCH_RESULTS_ADDED:
   payload:
+  - name: itemID
+    type: number
 COMMODITY_SEARCH_RESULTS_RECEIVED:
   payload:
 COMMODITY_SEARCH_RESULTS_UPDATED:
   payload:
+  - name: itemID
+    type: number
 COMPACT_UNIT_FRAME_PROFILES_LOADED:
   payload:
 COMPANION_LEARNED:
@@ -3880,6 +3923,8 @@ EXPERIMENTAL_CVAR_CONFIRMATION_NEEDED:
   payload:
 EXTRA_BROWSE_INFO_RECEIVED:
   payload:
+  - name: itemID
+    type: number
 FIRST_FRAME_RENDERED:
   payload:
 FORBIDDEN_NAME_PLATE_CREATED:
@@ -4248,6 +4293,8 @@ ITEM_DATA_LOAD_RESULT:
     type: boolean
 ITEM_KEY_ITEM_INFO_RECEIVED:
   payload:
+  - name: itemID
+    type: number
 ITEM_LOCK_CHANGED:
   payload:
   - name: bagOrSlotIndex
@@ -4266,6 +4313,8 @@ ITEM_LOCKED:
     type: number
 ITEM_PURCHASED:
   payload:
+  - name: itemID
+    type: number
 ITEM_PUSH:
   payload:
   - name: bagSlot
@@ -4276,8 +4325,17 @@ ITEM_RESTORATION_BUTTON_STATUS:
   payload:
 ITEM_SEARCH_RESULTS_ADDED:
   payload:
+  - name: itemKey
+    type:
+      structure: C_AuctionHouse.ItemKey
 ITEM_SEARCH_RESULTS_UPDATED:
   payload:
+  - name: itemKey
+    type:
+      structure: C_AuctionHouse.ItemKey
+  - name: newAuctionID
+    nilable: true
+    type: number
 ITEM_TEXT_BEGIN:
   payload:
 ITEM_TEXT_CLOSED:
@@ -4777,6 +4835,10 @@ OPEN_TABARD_FRAME:
   payload:
 OWNED_AUCTION_BIDDER_INFO_RECEIVED:
   payload:
+  - name: auctionID
+    type: number
+  - name: bidderName
+    type: string
 OWNED_AUCTIONS_UPDATED:
   payload:
 PARTY_INVITE_CANCEL:
