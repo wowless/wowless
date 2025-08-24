@@ -163,6 +163,9 @@ lies:
     OWNED_AUCTION_BIDDER_INFO_RECEIVED:
     REPLICATE_ITEM_LIST_UPDATE:
   extra_script_objects:
+    FrameAPIArchaeologyDigSiteFrame:
+    FrameAPIBlob:
+    FrameAPIQuestPOI:
     PingPinFrameAPI:
     SimpleModelFFXAPI:
   uiobjects:
@@ -508,10 +511,6 @@ script_objects:
   SimpleStatusBarAPI: StatusBar
   SimpleTextureAPI: Texture
   SimpleTextureBaseAPI: TextureBase
-skip_docfiles:
-  FrameAPIArchaeologyDigsiteDocumentation:
-  FrameAPIBlobDocumentation:
-  FrameAPIQuestPOIDocumentation:
 skip_uiobject_methods:
   Region:
     GetBottom:
