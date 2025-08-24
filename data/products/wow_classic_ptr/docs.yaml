@@ -15,6 +15,17 @@ lies:
     C_ConfigurationWarnings.GetConfigurationWarningSeen:
     C_ConfigurationWarnings.GetConfigurationWarningString:
     C_ConfigurationWarnings.SetConfigurationWarningSeen:
+    C_EditMode.ConvertLayoutInfoToString:
+    C_EditMode.ConvertStringToLayoutInfo:
+    C_EditMode.GetAccountSettings:
+    C_EditMode.GetLayouts:
+    C_EditMode.IsValidLayoutName:
+    C_EditMode.OnEditModeExit:
+    C_EditMode.OnLayoutAdded:
+    C_EditMode.OnLayoutDeleted:
+    C_EditMode.SaveLayouts:
+    C_EditMode.SetAccountSetting:
+    C_EditMode.SetActiveLayout:
     ToggleAnimKitDisplay:
     ToggleCollision:
     ToggleCollisionDisplay:
@@ -23,6 +34,8 @@ lies:
     TogglePlayerBounds:
     TogglePortals:
     ToggleTris:
+  extra_events:
+    EDIT_MODE_LAYOUTS_UPDATED:
   extra_script_objects:
     PingPinFrameAPI:
     SimpleModelFFXAPI:
@@ -372,8 +385,6 @@ script_objects:
   SimpleStatusBarAPI: StatusBar
   SimpleTextureAPI: Texture
   SimpleTextureBaseAPI: TextureBase
-skip_docfiles:
-  EditModeManagerDocumentation:
 skip_uiobject_methods:
   Region:
     GetBottom:

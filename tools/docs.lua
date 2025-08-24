@@ -105,7 +105,8 @@ for k in pairs(deref(config, 'skip_docfiles') or {}) do
   docs[f] = nil
 end
 
-local extra_script_objects = deref(config, 'lies', 'extra_script_objects')
+local extra_events = deref(config, 'lies', 'extra_events') or {}
+local extra_script_objects = deref(config, 'lies', 'extra_script_objects') or {}
 local tabs, funcs, events, scrobjs = {}, {}, {}, {}
 for _, t in pairs(docs) do
   if not t.Type or t.Type == 'System' then
@@ -122,7 +123,7 @@ for _, t in pairs(docs) do
     for _, event in ipairs(t.Events or {}) do
       local name = (t.Namespace and (t.Namespace .. '.') or '') .. event.Name
       assert(not events[name])
-      events[name] = event
+      events[name] = not take(extra_events, event.LiteralName) and event or nil
     end
   elseif t.Type == 'ScriptObject' and not take(extra_script_objects, t.Name) then
     assert(config.script_objects[t.Name], 'missing script object mapping for ' .. t.Name)
@@ -130,6 +131,7 @@ for _, t in pairs(docs) do
     scrobjs[t.Name] = t
   end
 end
+assertTaken('lies.extra_events', extra_events)
 assertTaken('lies.extra_script_objects', extra_script_objects)
 
 for k in pairs(config.script_objects) do

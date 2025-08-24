@@ -16,6 +16,12 @@ type:
                 key: string
                 value:
                   record:
+          extra_events:
+            type:
+              mapof:
+                key: string
+                value:
+                  record:
           extra_script_objects:
             type:
               mapof:

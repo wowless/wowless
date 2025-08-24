@@ -22,6 +22,7 @@ describe('docs', function()
     describe(p, function()
       local docs = require('build.data.products.' .. p .. '.docs')
       local apis = require('build.data.products.' .. p .. '.apis')
+      local events = require('build.data.products.' .. p .. '.events')
       local uiobjects = require('build.data.products.' .. p .. '.uiobjects')
       describe('lies', function()
         local lies = docs.lies or {}
@@ -39,6 +40,15 @@ describe('docs', function()
             describe(k, function()
               it('must not be a global api', function()
                 assert.Nil(apis[k])
+              end)
+            end)
+          end
+        end)
+        describe('extra_events', function()
+          for k in pairs(lies.extra_events or {}) do
+            describe(k, function()
+              it('must not be a declared event', function()
+                assert.Nil(events[k])
               end)
             end)
           end
