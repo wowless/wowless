@@ -12288,6 +12288,7 @@ C_ItemSocketInfo.GetSocketItemInfo:
     type: string
   - name: icon
     nilable: true
+    stubnotnil: true
     type: number
   - name: quality
     type:
