@@ -39,6 +39,18 @@ local function take(t, k, ...)
   end
 end
 
+local function takelieor(v, lies, ...)
+  local lie = take(lies, ...)
+  if not lie then
+    return v
+  end
+  local success, val = pcall(tedit, v, lie)
+  if not success then
+    error(('tedit failure on %s: %s'):format(table.concat({ ... }, '.'), val))
+  end
+  return val
+end
+
 local function assertTaken(s, t)
   if next(t) then
     error(('not all %s were consumed:\n%s'):format(s, pprintYaml(t)), 0)
@@ -99,12 +111,8 @@ end
 local config = parseYaml('data/products/' .. product .. '/docs.yaml')
 local enum = parseYaml('data/products/' .. product .. '/globals.yaml').Enum
 
-for k in pairs(deref(config, 'skip_docfiles') or {}) do
-  local f = k .. '.lua'
-  assert(docs[f], 'missing skip_docfiles ' .. f)
-  docs[f] = nil
-end
-
+local extra_events = deref(config, 'lies', 'extra_events') or {}
+local extra_script_objects = deref(config, 'lies', 'extra_script_objects') or {}
 local tabs, funcs, events, scrobjs = {}, {}, {}, {}
 for _, t in pairs(docs) do
   if not t.Type or t.Type == 'System' then
@@ -121,14 +129,16 @@ for _, t in pairs(docs) do
     for _, event in ipairs(t.Events or {}) do
       local name = (t.Namespace and (t.Namespace .. '.') or '') .. event.Name
       assert(not events[name])
-      events[name] = event
+      events[name] = not take(extra_events, event.LiteralName) and event or nil
     end
-  elseif t.Type == 'ScriptObject' then
+  elseif t.Type == 'ScriptObject' and not take(extra_script_objects, t.Name) then
     assert(config.script_objects[t.Name], 'missing script object mapping for ' .. t.Name)
     assert(not scrobjs[t.Name])
     scrobjs[t.Name] = t
   end
 end
+assertTaken('lies.extra_events', extra_events)
+assertTaken('lies.extra_script_objects', extra_script_objects)
 
 for k in pairs(config.script_objects) do
   assert(scrobjs[k], 'redundant script object mapping ' .. k)
@@ -316,15 +326,8 @@ local function rewriteApis()
       stubnothing = api and api.stubnothing,
       stuboutstrides = api and api.stuboutstrides,
     }
-    local lie = take(lies, name)
-    if lie then
-      local success, val = pcall(tedit, newapi, lie)
-      if not success then
-        error(('tedit failure on %s: %s'):format(name, val))
-      end
-      apis[name] = val
-    elseif not take(extras, name) then
-      apis[name] = newapi
+    if not take(extras, name) then
+      apis[name] = takelieor(newapi, lies, name)
     end
   end
   assertTaken('lies', lies)
@@ -354,6 +357,31 @@ local function rewriteEvents()
   end
   writeifchanged(filename, pprintYaml(out))
   return out
+end
+
+local function rewriteGlobals()
+  local lies = deref(config, 'lies', 'enums') or {}
+  local extras = deref(config, 'lies', 'extra_enums') or {}
+  local filename = ('data/products/%s/globals.yaml'):format(product)
+  local out = require('wowapi.yaml').parseFile(filename)
+  for _, tab in pairs(tabs) do
+    if tab.Type == 'Enumeration' and not take(extras, tab.Name) then
+      local t = {}
+      for _, v in ipairs(tab.Fields) do
+        assert(v.Type == tab.Name, v.Name)
+        t[v.Name] = v.EnumValue
+      end
+      out.Enum[tab.Name] = takelieor(t, lies, tab.Name)
+      out.Enum[tab.Name .. 'Meta'] = {
+        MaxValue = tab.MaxValue < 2 ^ 31 and tab.MaxValue or tab.MaxValue - 2 ^ 32,
+        MinValue = tab.MinValue,
+        NumValues = tab.NumValues,
+      }
+    end
+  end
+  assertTaken('lies.enums', lies)
+  assertTaken('lies.extra_enums', extras)
+  writeifchanged(filename, pprintYaml(out))
 end
 
 local function rewriteStructures(outApis, outEvents, outUIObjects)
@@ -486,15 +514,7 @@ local function rewriteUIObjects()
         return true
       end)()
       if okay then
-        local lie = take(lies, kk, mk)
-        if lie then
-          local success, val = pcall(tedit, mmv, lie)
-          if not success then
-            error(('tedit failure on %s.%s: %s'):format(kk, mk, val))
-          end
-          mmv = val
-        end
-        u.methods[mk] = mmv
+        u.methods[mk] = takelieor(mmv, lies, kk, mk)
       end
     end
   end
@@ -509,6 +529,7 @@ local outApis = rewriteApis()
 local outEvents = rewriteEvents()
 local outUIObjects = rewriteUIObjects()
 rewriteStructures(outApis, outEvents, outUIObjects)
+rewriteGlobals()
 
 local unused_typedefs = {}
 for k in pairs(typedefs) do

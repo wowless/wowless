@@ -51,11 +51,49 @@ lies:
             from: string
             to: unit
   extra_apis:
+    AcceptArenaTeam:
+    ArenaTeamDisband:
+    ArenaTeamInviteByName:
+    ArenaTeamLeave:
+    ArenaTeamSetLeaderByName:
+    ArenaTeamUninviteByName:
+    C_BarberShopInternal.SetQAMode:
     C_BattleNet.InstallHighResTextures:
+    C_CinematicList.GetUICinematicList:
+    C_ConfigurationWarnings.GetConfigurationWarnings:
+    C_ConfigurationWarnings.GetConfigurationWarningSeen:
+    C_ConfigurationWarnings.GetConfigurationWarningString:
+    C_ConfigurationWarnings.SetConfigurationWarningSeen:
+    C_LiveEvent.OnLiveEventBannerClicked:
+    C_LiveEvent.OnLiveEventPopupClicked:
+    C_WorldSafeLocsUIInternal.GetWorldSafeLocs:
+    DeclineArenaTeam:
     ShowCloak:
     ShowHelm:
     ShowingCloak:
     ShowingHelm:
+    ToggleAnimKitDisplay:
+    ToggleCollision:
+    ToggleCollisionDisplay:
+    ToggleDebugAIDisplay:
+    ToggleGravity:
+    TogglePlayerBounds:
+    TogglePortals:
+    ToggleTris:
+  extra_enums:
+    ConfigurationWarning:
+    WarbandEventState:
+    WarbandGroupFlags:
+    WarbandPlacementDisplayInfoType:
+    WarbandSceneAnimationEvent:
+    WarbandSceneAnimationSheatheState:
+    WarbandSceneAnimationStandState:
+    WarbandSceneAnimationStandStateFlags:
+    WarbandScenePlacementType:
+  extra_script_objects:
+    PingPinFrameAPI:
+    SimpleMapSceneAPI:
+    SimpleModelFFXAPI:
   uiobjects:
     Button:
       GetText:
@@ -367,17 +405,6 @@ script_objects:
   SimpleStatusBarAPI: StatusBar
   SimpleTextureAPI: Texture
   SimpleTextureBaseAPI: TextureBase
-skip_docfiles:
-  ArenaTeamDocumentation:
-  BarberShopInternalDocumentation:
-  CinematicListDocumentation:
-  ConfigurationWarningsDocumentation:
-  DebugToggleDocumentation:
-  LiveEventDocumentation:
-  PingPinFrameAPIDocumentation:
-  SimpleMapSceneAPIDocumentation:
-  SimpleModelFFXAPIDocumentation:
-  WorldSafeLocsUIInternalDocumentation:
 skip_uiobject_methods:
   Region:
     GetBottom:

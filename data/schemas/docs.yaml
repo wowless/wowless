@@ -10,7 +10,31 @@ type:
                 key:
                   ref: api
                 value: any
+          enums:
+            type:
+              mapof:
+                key:
+                  ref: enum
+                value: any
           extra_apis:
+            type:
+              mapof:
+                key: string
+                value:
+                  record:
+          extra_enums:
+            type:
+              mapof:
+                key: string
+                value:
+                  record:
+          extra_events:
+            type:
+              mapof:
+                key: string
+                value:
+                  record:
+          extra_script_objects:
             type:
               mapof:
                 key: string
@@ -31,12 +55,6 @@ type:
           key: string
           value:
             ref: uiobject
-    skip_docfiles:
-      type:
-        mapof:
-          key: string
-          value:
-            record:
     skip_uiobject_methods:
       type:
         mapof:
