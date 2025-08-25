@@ -12304,6 +12304,7 @@ C_ItemSocketInfo.GetSocketTypes:
   outputs:
   - name: socketType
     nilable: true
+    stub: Blue
     type: string
 C_ItemSocketInfo.HasBoundGemProposed:
   inputs:
