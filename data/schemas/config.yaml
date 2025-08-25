@@ -52,6 +52,14 @@ type:
                   ref: api
                 value:
                   record:
+    modules:
+      type:
+        record:
+          addons:
+            type:
+              record:
+                GetAddOnInfo_noUpdateAvailable:
+                  type: boolean
     runner:
       type:
         record:

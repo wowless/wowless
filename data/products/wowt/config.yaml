@@ -20,6 +20,7 @@ addon:
       StoreError:
       VasError:
       VasServiceType:
+      VasTransactionPurchaseResult:
     globalapis:
       C_Macro.SetMacroExecuteLineCallback:
       CreateForbiddenFrame:
@@ -60,10 +61,14 @@ addon:
     C_Traits.GetConditionInfo:
     C_Traits.GetEntryInfo:
     C_Traits.GetTreeInfo:
+modules:
+  addons:
+    GetAddOnInfo_noUpdateAvailable: true
 runner:
   skip_events:
     PERKS_PROGRAM_OPEN: needs C_ModelInfo.GetModelSceneInfoByID implemented
     RAF_REWARD_CLAIM_FAILED: numAffordableRewards never set
+    REMIX_ARTIFACT_UPDATE: appears to require timerunning, fails in RemixArtifactTutorialUI
     SHOW_DELVES_COMPANION_CONFIGURATION_UI: https://github.com/wowless/wowless/issues/346
     SUBSCRIPTION_CHANGED_KICK_IMMINENT: depends on GlueDialog_Show
     VAS_QUEUE_STATUS_UPDATE: depends on C_StoreGlue
