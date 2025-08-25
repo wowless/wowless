@@ -56,6 +56,14 @@ lies:
           _change:
             from: string
             to: unit
+  enums:
+    ChatChannelType:
+      _add:
+        Private_Party: 2
+        Public_Party: 3
+      _remove:
+        PrivateParty: 2
+        PublicParty: 3
   extra_apis:
     AcceptArenaTeam:
     ArenaTeamDisband:
@@ -86,6 +94,14 @@ lies:
     TogglePlayerBounds:
     TogglePortals:
     ToggleTris:
+  extra_enums:
+    ConfigurationWarning:
+    WarbandEventState:
+    WarbandGroupFlags:
+    WarbandSceneAnimationEvent:
+    WarbandSceneAnimationSheatheState:
+    WarbandSceneAnimationStandState:
+    WarbandScenePlacementType:
   extra_script_objects:
     PingPinFrameAPI:
     SimpleMapSceneAPI:

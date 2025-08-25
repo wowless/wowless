@@ -8,6 +8,10 @@ lies:
       outputs:
       - _add:
           nilable: true
+  enums:
+    SeasonID:
+      _add:
+        Placeholder: 2
   extra_apis:
     C_BarberShopInternal.SetQAMode:
     C_BattleNet.InstallHighResTextures:
@@ -34,6 +38,56 @@ lies:
     TogglePlayerBounds:
     TogglePortals:
     ToggleTris:
+  extra_enums:
+    ActionBarOrientation:
+    ActionBarVisibleSetting:
+    AuraFrameIconDirection:
+    AuraFrameIconWrap:
+    AuraFrameOrientation:
+    BagsDirection:
+    BagsOrientation:
+    ConfigurationWarning:
+    CooldownViewerBarContent:
+    CooldownViewerIconDirection:
+    CooldownViewerOrientation:
+    CooldownViewerVisibleSetting:
+    EditModeAccountSetting:
+    EditModeActionBarSetting:
+    EditModeActionBarSystemIndices:
+    EditModeArchaeologyBarSetting:
+    EditModeAuraFrameSetting:
+    EditModeAuraFrameSystemIndices:
+    EditModeBagsSetting:
+    EditModeCastBarSetting:
+    EditModeChatFrameSetting:
+    EditModeCooldownViewerSetting:
+    EditModeCooldownViewerSystemIndices:
+    EditModeDurabilityFrameSetting:
+    EditModeLayoutType:
+    EditModeMicroMenuSetting:
+    EditModeMinimapSetting:
+    EditModeObjectiveTrackerSetting:
+    EditModePresetLayouts:
+    EditModeSettingDisplayType:
+    EditModeStatusTrackingBarSetting:
+    EditModeStatusTrackingBarSystemIndices:
+    EditModeSystem:
+    EditModeTimerBarsSetting:
+    EditModeUnitFrameSetting:
+    EditModeUnitFrameSystemIndices:
+    EditModeVehicleSeatIndicatorSetting:
+    MicroMenuOrder:
+    MicroMenuOrientation:
+    RaidGroupDisplayType:
+    SortPlayersBy:
+    ViewArenaSize:
+    ViewRaidSize:
+    WarbandEventState:
+    WarbandGroupFlags:
+    WarbandSceneAnimationEvent:
+    WarbandSceneAnimationSheatheState:
+    WarbandSceneAnimationStandState:
+    WarbandScenePlacementType:
   extra_events:
     EDIT_MODE_LAYOUTS_UPDATED:
   extra_script_objects:

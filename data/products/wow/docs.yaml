@@ -80,6 +80,16 @@ lies:
     TogglePlayerBounds:
     TogglePortals:
     ToggleTris:
+  extra_enums:
+    ConfigurationWarning:
+    WarbandEventState:
+    WarbandGroupFlags:
+    WarbandPlacementDisplayInfoType:
+    WarbandSceneAnimationEvent:
+    WarbandSceneAnimationSheatheState:
+    WarbandSceneAnimationStandState:
+    WarbandSceneAnimationStandStateFlags:
+    WarbandScenePlacementType:
   extra_script_objects:
     PingPinFrameAPI:
     SimpleMapSceneAPI:

@@ -14,6 +14,10 @@ lies:
           _change:
             from: specID
             to: classID
+  enums:
+    SeasonID:
+      _add:
+        Placeholder: 2
   extra_apis:
     C_AuctionHouse.CalculateCommodityDeposit:
     C_AuctionHouse.CalculateItemDeposit:
@@ -125,6 +129,52 @@ lies:
     TogglePlayerBounds:
     TogglePortals:
     ToggleTris:
+  extra_enums:
+    ActionBarOrientation:
+    ActionBarVisibleSetting:
+    AuctionHouseFilterCategory:
+    AuraFrameIconDirection:
+    AuraFrameIconWrap:
+    AuraFrameOrientation:
+    BagsDirection:
+    BagsOrientation:
+    ConfigurationWarning:
+    EditModeAccountSetting:
+    EditModeActionBarSetting:
+    EditModeActionBarSystemIndices:
+    EditModeArchaeologyBarSetting:
+    EditModeAuraFrameSetting:
+    EditModeAuraFrameSystemIndices:
+    EditModeBagsSetting:
+    EditModeCastBarSetting:
+    EditModeChatFrameSetting:
+    EditModeDurabilityFrameSetting:
+    EditModeLayoutType:
+    EditModeMicroMenuSetting:
+    EditModeMinimapSetting:
+    EditModeObjectiveTrackerSetting:
+    EditModePresetLayouts:
+    EditModeSettingDisplayType:
+    EditModeStatusTrackingBarSetting:
+    EditModeStatusTrackingBarSystemIndices:
+    EditModeSystem:
+    EditModeTimerBarsSetting:
+    EditModeUnitFrameSetting:
+    EditModeUnitFrameSystemIndices:
+    EditModeVehicleSeatIndicatorSetting:
+    ItemCommodityStatus:
+    MicroMenuOrder:
+    MicroMenuOrientation:
+    RaidGroupDisplayType:
+    SortPlayersBy:
+    ViewArenaSize:
+    ViewRaidSize:
+    WarbandEventState:
+    WarbandGroupFlags:
+    WarbandSceneAnimationEvent:
+    WarbandSceneAnimationSheatheState:
+    WarbandSceneAnimationStandState:
+    WarbandScenePlacementType:
   extra_events:
     AUCTION_CANCELED:
     AUCTION_HOUSE_AUCTION_CREATED:

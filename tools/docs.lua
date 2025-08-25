@@ -354,6 +354,39 @@ local function rewriteEvents()
   return out
 end
 
+local function rewriteGlobals()
+  local lies = deref(config, 'lies', 'enums') or {}
+  local extras = deref(config, 'lies', 'extra_enums') or {}
+  local filename = ('data/products/%s/globals.yaml'):format(product)
+  local out = require('wowapi.yaml').parseFile(filename)
+  for _, tab in pairs(tabs) do
+    if tab.Type == 'Enumeration' and not take(extras, tab.Name) then
+      local t = {}
+      for _, v in ipairs(tab.Fields) do
+        assert(v.Type == tab.Name, v.Name)
+        t[v.Name] = v.EnumValue
+      end
+      local lie = take(lies, tab.Name)
+      if lie then
+        local success, val = pcall(tedit, t, lie)
+        if not success then
+          error(('tedit failure on %s: %s'):format(tab.Name, val))
+        end
+        t = val
+      end
+      out.Enum[tab.Name] = t
+      out.Enum[tab.Name .. 'Meta'] = {
+        MaxValue = tab.MaxValue < 2 ^ 31 and tab.MaxValue or tab.MaxValue - 2 ^ 32,
+        MinValue = tab.MinValue,
+        NumValues = tab.NumValues,
+      }
+    end
+  end
+  assertTaken('lies.enums', lies)
+  assertTaken('lies.extra_enums', extras)
+  writeifchanged(filename, pprintYaml(out))
+end
+
 local function rewriteStructures(outApis, outEvents, outUIObjects)
   local filename = ('data/products/%s/structures.yaml'):format(product)
   local structures = require('wowapi.yaml').parseFile(filename)
@@ -507,6 +540,7 @@ local outApis = rewriteApis()
 local outEvents = rewriteEvents()
 local outUIObjects = rewriteUIObjects()
 rewriteStructures(outApis, outEvents, outUIObjects)
+rewriteGlobals()
 
 local unused_typedefs = {}
 for k in pairs(typedefs) do

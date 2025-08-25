@@ -10,7 +10,19 @@ type:
                 key:
                   ref: api
                 value: any
+          enums:
+            type:
+              mapof:
+                key:
+                  ref: enum
+                value: any
           extra_apis:
+            type:
+              mapof:
+                key: string
+                value:
+                  record:
+          extra_enums:
             type:
               mapof:
                 key: string
