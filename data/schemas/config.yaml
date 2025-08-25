@@ -22,7 +22,8 @@ type:
                 enums:
                   type:
                     mapof:
-                      key: string
+                      key:
+                        ref: enum
                       value:
                         record:
                 globalapis:
