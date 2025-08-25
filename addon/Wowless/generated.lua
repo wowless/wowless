@@ -207,6 +207,13 @@ G.testsuite.generated = function()
         expectedEnum[k] = v
       end
     end
+    if not iswowlesslite then
+      for k, v in pairs(_G.WowlessData.Config.addon.enum_values_set_in_framexml or {}) do
+        for vk, vv in pairs(v) do
+          expectedEnum[k][vk] = vv
+        end
+      end
+    end
     local tests = {
       Enum = function()
         return G.assertRecursivelyEqual(expectedEnum, actualEnum)

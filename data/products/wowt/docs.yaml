@@ -50,11 +50,6 @@ lies:
           _change:
             from: string
             to: unit
-  enums:
-    CooldownViewerCategory:
-      _add:
-        HiddenAura: -2
-        HiddenSpell: -1
   extra_apis:
     AcceptArenaTeam:
     ArenaTeamDisband:

@@ -2324,8 +2324,6 @@ Enum:
     NumValues: 3
   CooldownViewerCategory:
     Essential: 0
-    HiddenAura: -2
-    HiddenSpell: -1
     TrackedBar: 3
     TrackedBuff: 2
     Utility: 1

@@ -33,6 +33,15 @@ type:
                         ref: api
                       value:
                         record:
+          enum_values_set_in_framexml:
+            type:
+              mapof:
+                key:
+                  ref: enum
+                value:
+                  mapof:
+                    key: string
+                    value: number
           hooked_globals:
             type:
               mapof:

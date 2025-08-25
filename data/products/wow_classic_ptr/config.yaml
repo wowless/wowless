@@ -21,6 +21,9 @@ addon:
       C_Macro.SetMacroExecuteLineCallback:
       CreateForbiddenFrame:
       loadstring_untainted:
+  enum_values_set_in_framexml:
+    SeasonID:
+      Placeholder: 2
   hooked_globals:
     FauxScrollFrame_Update:
     SetItemRef:

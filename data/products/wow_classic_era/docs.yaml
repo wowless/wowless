@@ -14,10 +14,6 @@ lies:
           _change:
             from: specID
             to: classID
-  enums:
-    SeasonID:
-      _add:
-        Placeholder: 2
   extra_apis:
     C_AuctionHouse.CalculateCommodityDeposit:
     C_AuctionHouse.CalculateItemDeposit:

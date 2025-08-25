@@ -8,10 +8,6 @@ lies:
       outputs:
       - _add:
           nilable: true
-  enums:
-    SeasonID:
-      _add:
-        Placeholder: 2
   extra_apis:
     C_BarberShopInternal.SetQAMode:
     C_BattleNet.InstallHighResTextures:

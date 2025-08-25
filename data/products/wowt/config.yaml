@@ -25,6 +25,10 @@ addon:
       C_Macro.SetMacroExecuteLineCallback:
       CreateForbiddenFrame:
       loadstring_untainted:
+  enum_values_set_in_framexml:
+    CooldownViewerCategory:
+      HiddenAura: -2
+      HiddenSpell: -1
   hooked_globals:
     SetItemRef:
     UpdateUIParentPosition:
