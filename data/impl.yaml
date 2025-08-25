@@ -268,7 +268,8 @@ gcinfo:
 GetAddOnEnableState:
   impl:
 GetAddOnInfo:
-  impl:
+  moduledelegate:
+    name: addons
 GetAddOnMetadata:
   impl:
 GetAuctionItemSubClasses:
