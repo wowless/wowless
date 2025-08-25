@@ -39,6 +39,18 @@ local function take(t, k, ...)
   end
 end
 
+local function takelieor(v, lies, ...)
+  local lie = take(lies, ...)
+  if not lie then
+    return v
+  end
+  local success, val = pcall(tedit, v, lie)
+  if not success then
+    error(('tedit failure on %s: %s'):format(table.concat({ ... }, '.'), val))
+  end
+  return val
+end
+
 local function assertTaken(s, t)
   if next(t) then
     error(('not all %s were consumed:\n%s'):format(s, pprintYaml(t)), 0)
@@ -314,15 +326,8 @@ local function rewriteApis()
       stubnothing = api and api.stubnothing,
       stuboutstrides = api and api.stuboutstrides,
     }
-    local lie = take(lies, name)
-    if lie then
-      local success, val = pcall(tedit, newapi, lie)
-      if not success then
-        error(('tedit failure on %s: %s'):format(name, val))
-      end
-      apis[name] = val
-    elseif not take(extras, name) then
-      apis[name] = newapi
+    if not take(extras, name) then
+      apis[name] = takelieor(newapi, lies, name)
     end
   end
   assertTaken('lies', lies)
@@ -366,15 +371,7 @@ local function rewriteGlobals()
         assert(v.Type == tab.Name, v.Name)
         t[v.Name] = v.EnumValue
       end
-      local lie = take(lies, tab.Name)
-      if lie then
-        local success, val = pcall(tedit, t, lie)
-        if not success then
-          error(('tedit failure on %s: %s'):format(tab.Name, val))
-        end
-        t = val
-      end
-      out.Enum[tab.Name] = t
+      out.Enum[tab.Name] = takelieor(t, lies, tab.Name)
       out.Enum[tab.Name .. 'Meta'] = {
         MaxValue = tab.MaxValue < 2 ^ 31 and tab.MaxValue or tab.MaxValue - 2 ^ 32,
         MinValue = tab.MinValue,
@@ -517,15 +514,7 @@ local function rewriteUIObjects()
         return true
       end)()
       if okay then
-        local lie = take(lies, kk, mk)
-        if lie then
-          local success, val = pcall(tedit, mmv, lie)
-          if not success then
-            error(('tedit failure on %s.%s: %s'):format(kk, mk, val))
-          end
-          mmv = val
-        end
-        u.methods[mk] = mmv
+        u.methods[mk] = takelieor(mmv, lies, kk, mk)
       end
     end
   end
