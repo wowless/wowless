@@ -8,7 +8,7 @@ local product = args.product
 
 local log = args.verbose and print or function() end
 
-local build = dofile('build/cmake/runtime/products/' .. product .. '/build.lua')
+local build = dofile('runtime/products/' .. product .. '/build.lua')
 local fdids = require('runtime.listfile')
 
 local path = require('path')
@@ -113,7 +113,7 @@ local function processTocDir(dir)
   end
 end
 
-for db in pairs(dofile('build/cmake/runtime/' .. product .. '_dblist.lua')) do
+for db in pairs(dofile('runtime/' .. product .. '_dblist.lua')) do
   save(path.join('db2', db .. '.db2'), fetch(fdids[db:lower()]))
 end
 

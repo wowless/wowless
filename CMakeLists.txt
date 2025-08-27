@@ -610,6 +610,18 @@ add_lua_executable(
   toolstactless
   wowlesstoc)
 
+foreach(product ${products})
+  set(out ${product}_fetch.txt)
+  add_custom_command(
+    OUTPUT ${out}
+    COMMAND fetch ${product}
+    COMMAND ${CMAKE_COMMAND} -E touch ${out}
+    DEPENDS fetch stamp/${product}_dblist.lua
+            runtime/products/${product}/build.lua)
+  # TODO remove this dummy target when dependencies are migrated from mkninja
+  add_custom_target(dummy_${product}_fetch DEPENDS ${out})
+endforeach()
+
 find_package(PNG REQUIRED)
 
 FetchContent_Declare(
