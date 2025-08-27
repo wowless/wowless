@@ -42,6 +42,12 @@ type:
                 schema: type
     outstride:
       type: number
+    platform:
+      type:
+        taggedunion:
+          linux: tag
+          mac: tag
+          windows: tag
     stubnothing:
       type: boolean
     stuboutstrides:

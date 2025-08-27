@@ -13467,45 +13467,55 @@ C_MacOptions.AreOSShortcutsDisabled:
     type: boolean
   - name: osShortcutsDisabled
     type: boolean
+  platform: mac
 C_MacOptions.GetGameBundleName:
   inputs:
   outputs:
   - name: result
     type: string
+  platform: mac
 C_MacOptions.HasNewStyleInputMonitoring:
   inputs:
   outputs:
   - name: result
     type: boolean
+  platform: mac
 C_MacOptions.IsInputMonitoringEnabled:
   inputs:
   outputs:
   - name: result
     type: boolean
+  platform: mac
 C_MacOptions.IsMicrophoneEnabled:
   inputs:
   outputs:
   - name: result
     type: boolean
+  platform: mac
 C_MacOptions.IsUniversalAccessEnabled:
   inputs:
   outputs:
   - name: result
     type: boolean
+  platform: mac
 C_MacOptions.OpenInputMonitoring:
   inputs:
   outputs:
+  platform: mac
 C_MacOptions.OpenMicrophoneRequestDialogue:
   inputs:
   outputs:
+  platform: mac
 C_MacOptions.OpenUniversalAccess:
   inputs:
   outputs:
+  platform: mac
 C_MacOptions.SetOSShortcutsDisabled:
   inputs:
   - name: disable
     type: boolean
   outputs:
+  platform: mac
 C_Macro.GetMacroName:
   inputs:
   - name: macroId

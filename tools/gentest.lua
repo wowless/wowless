@@ -97,12 +97,13 @@ local ptablemap = {
     return 'ImplTests', t, deps
   end,
   namespaceapis = function(p)
+    local platform = dofile('build/cmake/runtime/platform.lua')
     local impls = dofile('build/cmake/runtime/impl.lua')
     local config = perproduct(p, 'config')
     local apiNamespaces = {}
     for k, api in pairs(perproduct(p, 'apis')) do
       local dot = k:find('%.')
-      if dot then
+      if dot and (not api.platform or api.platform == platform) then
         local name = k:sub(1, dot - 1)
         apiNamespaces[name] = apiNamespaces[name] or { methods = {} }
         apiNamespaces[name].methods[k:sub(dot + 1)] = api
