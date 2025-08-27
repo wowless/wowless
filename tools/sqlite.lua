@@ -2,8 +2,8 @@ local sqlite = require('wowless.sqlite')
 local sqlquote = require('tools.sqlite3ext').quote
 
 local function factory(theProduct)
-  local defs = dofile('build/cmake/runtime/' .. theProduct .. '_dbdefs.lua')
-  local dblist = dofile('build/cmake/runtime/' .. theProduct .. '_dblist.lua')
+  local defs = dofile('runtime/' .. theProduct .. '_dbdefs.lua')
+  local dblist = dofile('runtime/' .. theProduct .. '_dblist.lua')
 
   local function create(filename)
     local dbinit = { 'BEGIN' }
@@ -78,7 +78,7 @@ local args = (function()
 end)()
 
 local filebase = args.full and 'data' or 'schema'
-local filename = ('build/products/%s/%s.sqlite3'):format(args.product, filebase)
+local filename = ('%s_%s.sqlite3'):format(args.product, filebase)
 
 require('pl.file').delete(filename)
 local create, populate = factory(args.product)

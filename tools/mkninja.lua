@@ -85,12 +85,6 @@ local pools = {
 }
 
 local rules = {
-  dbdata = {
-    command = 'build/cmake/sqlite -f $product',
-  },
-  dbschema = {
-    command = 'build/cmake/sqlite $product',
-  },
   frame0 = {
     command = 'build/cmake/wowless run -p $product --frame0 > /dev/null',
     pool = 'run_pool',
@@ -175,13 +169,10 @@ local schemadbs = {}
 local runouts = {}
 local pngs = {}
 for _, p in ipairs(productList) do
-  local dblist = 'build/cmake/runtime/' .. p .. '_dblist.lua'
-  local dbdefs = 'build/cmake/runtime/' .. p .. '_dbdefs.lua'
-  local fetchStamp = 'build/cmake/' .. p .. '_fetch.txt'
   local runout = 'out/' .. p .. '/log.txt'
   table.insert(runouts, runout)
-  local schemadb = 'build/products/' .. p .. '/schema.sqlite3'
-  local datadb = 'build/products/' .. p .. '/data.sqlite3'
+  local schemadb = 'build/cmake/' .. p .. '_schema.sqlite3'
+  local datadb = 'build/cmake/' .. p .. '_data.sqlite3'
   table.insert(schemadbs, schemadb)
   local rundeps = {
     'build/cmake/wowless',
@@ -214,27 +205,6 @@ for _, p in ipairs(productList) do
       rule = 'render',
     })
   end
-  table.insert(builds, {
-    args = { product = p },
-    ins_implicit = {
-      dbdefs,
-      dblist,
-      'build/cmake/sqlite',
-    },
-    outs = schemadb,
-    rule = 'dbschema',
-  })
-  table.insert(builds, {
-    args = { product = p },
-    ins_implicit = {
-      dbdefs,
-      dblist,
-      fetchStamp,
-      'build/cmake/sqlite',
-    },
-    outs = datadb,
-    rule = 'dbdata',
-  })
   table.insert(builds, {
     args = { product = p },
     ins = { datadb },

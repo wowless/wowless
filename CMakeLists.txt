@@ -535,8 +535,6 @@ foreach(product ${products})
     DEPFILE generated/${f}.d
     DEPENDS dbdefs stamp/${product}_dblist.lua
             runtime/products/${product}/build.lua)
-  # TODO remove this dummy target when dependencies are migrated from mkninja
-  add_custom_target(dummy_${product}_dbdefs DEPENDS stamp/${f})
 endforeach()
 
 add_lua_executable(
@@ -583,6 +581,21 @@ add_lua_executable(
   toolssqlite3ext
   wowlesssqlite)
 
+foreach(product ${products})
+  add_custom_command(
+    OUTPUT ${product}_schema.sqlite3
+    COMMAND sqlite ${product}
+    DEPENDS sqlite stamp/${product}_dbdefs.lua stamp/${product}_dblist.lua)
+  add_custom_command(
+    OUTPUT ${product}_data.sqlite3
+    COMMAND sqlite -f ${product}
+    DEPENDS sqlite stamp/${product}_dbdefs.lua stamp/${product}_dblist.lua
+            ${product}_fetch.txt)
+  # TODO remove this dummy target when dependencies are migrated from mkninja
+  add_custom_target(dummy_${product}_sqlite DEPENDS ${product}_schema.sqlite3
+                                                    ${product}_data.sqlite3)
+endforeach()
+
 find_package(CURL REQUIRED)
 find_package(OpenSSL REQUIRED)
 
@@ -618,8 +631,6 @@ foreach(product ${products})
     COMMAND ${CMAKE_COMMAND} -E touch ${out}
     DEPENDS fetch stamp/${product}_dblist.lua
             runtime/products/${product}/build.lua)
-  # TODO remove this dummy target when dependencies are migrated from mkninja
-  add_custom_target(dummy_${product}_fetch DEPENDS ${out})
 endforeach()
 
 find_package(PNG REQUIRED)
