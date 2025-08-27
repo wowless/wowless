@@ -3917,13 +3917,34 @@ C_CatalogShop.GetSpellVisualInfoForMount:
   - name: spellVisualInfo
     type:
       structure: C_CatalogShop.CatalogShopSpellVisualInfo
+C_CatalogShop.IsShop2Enabled:
+  inputs:
+  outputs:
+  - name: value
+    nilable: true
+    type: boolean
 C_CatalogShop.OpenCatalogShopInteraction:
   inputs:
   outputs:
-C_CatalogShop.ProductSelectedTelemetry:
+C_CatalogShop.ProductDisplayedTelemetry:
   inputs:
+  - name: categoryId
+    type: number
+  - name: sectionId
+    type: number
   - name: catalogShopProductID
     type: number
+  outputs:
+C_CatalogShop.ProductSelectedTelemetry:
+  inputs:
+  - name: categoryId
+    type: number
+  - name: sectionId
+    type: number
+  - name: catalogShopProductID
+    type: number
+  - name: wasCodeSelection
+    type: boolean
   outputs:
 C_CatalogShop.PurchaseProduct:
   inputs:
@@ -14816,6 +14837,9 @@ C_MythicPlus.GetRunHistory:
     type: boolean
   - default: false
     name: includeIncompleteRuns
+    type: boolean
+  - default: false
+    name: currentSeasonOnly
     type: boolean
   outputs:
   - name: runs

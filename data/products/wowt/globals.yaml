@@ -1643,6 +1643,13 @@ Enum:
     MaxValue: 3
     MinValue: 0
     NumValues: 4
+  CanRedeemTokenForBalanceResult:
+    FailureCap: 1
+    Ok: 0
+  CanRedeemTokenForBalanceResultMeta:
+    MaxValue: 1
+    MinValue: 0
+    NumValues: 2
   CaptureBarWidgetFillDirectionType:
     LeftToRight: 1
     RightToLeft: 0
@@ -2307,6 +2314,12 @@ Enum:
     MaxValue: 4
     MinValue: 0
     NumValues: 5
+  CooldownSetLinkedSpellFlags:
+    UseAsTooltip: 1
+  CooldownSetLinkedSpellFlagsMeta:
+    MaxValue: 1
+    MinValue: 1
+    NumValues: 1
   CooldownSetSpellFlags:
     HideAura: 1
     HideByDefault: 2
@@ -5903,80 +5916,6 @@ Enum:
     MaxValue: 3
     MinValue: 0
     NumValues: 4
-  PointsModifierSourceType:
-    AreaGroup: 48
-    AutoMissionScalar: 52
-    BaseItemLevel: 5
-    ChallengeModeLevel: 16
-    CraftSkill: 58
-    CreatureClassification: 29
-    CreatureHealthMod: 64
-    CurrencyMaxDelta: 17
-    CurrencyMaxWeeklyDelta: 67
-    CurrencyQuantity: 47
-    FirstTimeQuestCompletionRewards: 65
-    FollowerLevelForCurrentShipment: 13
-    FollowerLevelInBuilding: 10
-    FollowerQualityForCurrentShipment: 14
-    FollowerQualityInBuilding: 11
-    HasLegendaryCloakUpdgradeAvailable: 43
-    HonorEarnedThisPvPMatch: 30
-    InstanceGroupSize: 7
-    ItemLevelHighWaterMarkAverage: 24
-    JailersTowerActiveFloorDifficulty: 41
-    LootLevel: 6
-    NumGroupFriends: 12
-    NumLooters: 4
-    NumLootSourceAuraStacks: 42
-    NumPlayersThatGainedDungeonScore: 56
-    NumTappers: 31
-    NumWeeklyRewardsThresholdsEarned: 59
-    ObjectLabelID: 49
-    ObjectLevel: 44
-    ParagonLevel: 55
-    PassesTreasureTrackingQuestEligibility: 21
-    PercentThroughContentTuning: 45
-    PercentThroughExpansion: 51
-    PlayerCondition: 20
-    PlayerKeystoneLevel: 19
-    PlayerLevel: 0
-    PlayerLevelContentTuningMax: 33
-    PointsModifierSet: 66
-    ProfessionQualityLevel: 57
-    ProfessionRatingFinessePercent: 61
-    ProfessionRatingPerceptionPercent: 62
-    ProfessionTraitRanksByLabel: 63
-    ProgressiveEventItemWinCount: 3
-    ProgressiveEventMissCount: 2
-    ProgressiveEventNumRemainingForClass: 28
-    ProgressiveEventNumRemainingForLootSpec: 26
-    ProgressiveEventNumWinsForLootSpec: 25
-    PvPBracketRatingCurrentInstance: 22
-    PvPBracketRatingSpecific: 15
-    PvPJackpotTier: 32
-    PvPTeamSize: 23
-    PvPTier: 46
-    QuestExpansionID: 39
-    QuestItemGroupMissCount: 8
-    RaidEncounterLevel: 68
-    RenownCatchup: 53
-    RenownRapidCatchup: 54
-    Reserved_2: 40
-    SalvagedItemIsCloth: 34
-    SalvagedItemIsLeather: 35
-    SalvagedItemIsMail: 36
-    SalvagedItemIsMisc: 38
-    SalvagedItemIsPlate: 37
-    SalvagedItemLevel: 60
-    SkillRank: 1
-    TreasureItemPvalue: 9
-    WeeklyMythicPlusCount: 50
-    WorldStateExpression: 27
-    WorldStateValue: 18
-  PointsModifierSourceTypeMeta:
-    MaxValue: 68
-    MinValue: 0
-    NumValues: 69
   PowerType:
     Alternate: 10
     AlternateEncounter: 24

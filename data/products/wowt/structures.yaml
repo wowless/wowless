@@ -2105,6 +2105,9 @@ C_CooldownViewer.CooldownViewerCooldown:
     overrideSpellID:
       nilable: true
       type: number
+    overrideTooltipSpellID:
+      nilable: true
+      type: number
     selfAura:
       type: boolean
     spellID:
@@ -4652,11 +4655,18 @@ C_MythicPlus.MythicPlusRunInfo:
   fields:
     completed:
       type: boolean
+    completionDate:
+      type:
+        structure: C_MythicPlus.MythicPlusDate
+    durationSec:
+      type: number
     level:
       type: number
     mapChallengeModeID:
       type: number
     runScore:
+      type: number
+    season:
       type: number
     thisWeek:
       type: boolean
