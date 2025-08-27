@@ -2,7 +2,7 @@ local sqlite = require('wowless.sqlite')
 local sqlquote = require('tools.sqlite3ext').quote
 
 local function factory(theProduct)
-  local defs = dofile('build/products/' .. theProduct .. '/dbdefs.lua')
+  local defs = dofile('build/cmake/runtime/' .. theProduct .. '_dbdefs.lua')
   local dblist = dofile('build/cmake/runtime/' .. theProduct .. '_dblist.lua')
 
   local function create(filename)
