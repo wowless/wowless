@@ -491,8 +491,6 @@ foreach(product ${products})
     COMMAND ${CMAKE_COMMAND} -E copy_if_different generated/${f} runtime/${f}
     COMMAND ${CMAKE_COMMAND} -E touch stamp/${f}
     DEPENDS dblist stamp/sqls.txt stamp/${product}.txt)
-  # TODO remove this dummy target when dependencies are migrated from mkninja
-  add_custom_target(dummy_${product}_dblist DEPENDS stamp/${f})
 endforeach()
 
 FetchContent_Declare(
@@ -525,6 +523,21 @@ add_lua_executable(
   luadbd
   penlight
   toolsutil)
+
+foreach(product ${products})
+  set(f ${product}_dbdefs.lua)
+  add_custom_command(
+    OUTPUT stamp/${f}
+    BYPRODUCTS runtime/${f}
+    COMMAND dbdefs ${product} ${CMAKE_CURRENT_SOURCE_DIR}
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different generated/${f} runtime/${f}
+    COMMAND ${CMAKE_COMMAND} -E touch stamp/${f}
+    DEPFILE generated/${f}.d
+    DEPENDS dbdefs stamp/${product}_dblist.lua
+            runtime/products/${product}/build.lua)
+  # TODO remove this dummy target when dependencies are migrated from mkninja
+  add_custom_target(dummy_${product}_dbdefs DEPENDS stamp/${f})
+endforeach()
 
 add_lua_executable(
   prep
