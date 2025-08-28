@@ -977,6 +977,34 @@ add_lua_executable(
 add_lua_executable(gentest ${CMAKE_CURRENT_SOURCE_DIR}/tools/gentest.lua
                    argparse penlight toolsutil wowlessyaml)
 
+foreach(product ${products})
+  set(d ${CMAKE_CURRENT_BINARY_DIR}/products/${product}/WowlessData)
+  file(MAKE_DIRECTORY ${d})
+  macro(gentest file name)
+    set(out ${d}/${file})
+    list(APPEND outs ${out})
+    add_custom_command(
+      OUTPUT ${out}
+      COMMAND gentest ${product} ${name} ${out}
+      WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+      DEPFILE ${out}.d
+      DEPENDS gentest)
+  endmacro()
+  gentest(WowlessData.toc toc)
+  gentest(build.lua build)
+  gentest(config.lua config)
+  gentest(cvars.lua cvars)
+  gentest(events.lua events)
+  gentest(globalapis.lua globalapis)
+  gentest(globals.lua globals)
+  gentest(impltests.lua impltests)
+  gentest(namespaceapis.lua namespaceapis)
+  gentest(product.lua product)
+  gentest(uiobjectapis.lua uiobjectapis)
+  # TODO remove this dummy target when dependencies are migrated from mkninja
+  add_custom_target(dummy_${product}_gentest DEPENDS ${outs})
+endforeach()
+
 lua2c(runtimegametypes runtime.gametypes=runtime/gametypes.lua)
 lua2c(runtimeproducts runtime.products=runtime/products.lua)
 
