@@ -1,5 +1,5 @@
 local function perproduct(p, f)
-  return assert(dofile(('build/cmake/runtime/products/%s/%s.lua'):format(p, f)))
+  return assert(dofile(('runtime/products/%s/%s.lua'):format(p, f)))
 end
 
 local function tpath(t, ...)
@@ -31,7 +31,7 @@ local ptablemap = {
         registerable = true,
       }
     end
-    for _, product in ipairs(dofile('build/cmake/runtime/products.lua')) do
+    for _, product in ipairs(dofile('runtime/products.lua')) do
       for k in pairs(perproduct(product, 'events')) do
         if not t[k] then
           t[k] = {
@@ -44,7 +44,7 @@ local ptablemap = {
     return 'Events', t
   end,
   globalapis = function(p)
-    local impls = dofile('build/cmake/runtime/impl.lua')
+    local impls = dofile('runtime/impl.lua')
     local function islua(api)
       local impl = impls[api.impl]
       if not impl or not impl.stdlib then
@@ -87,8 +87,8 @@ local ptablemap = {
     return 'ImplTests', t, deps
   end,
   namespaceapis = function(p)
-    local platform = dofile('build/cmake/runtime/platform.lua')
-    local impls = dofile('build/cmake/runtime/impl.lua')
+    local platform = dofile('runtime/platform.lua')
+    local impls = dofile('runtime/impl.lua')
     local config = perproduct(p, 'config')
     local apiNamespaces = {}
     for k, api in pairs(perproduct(p, 'apis')) do
@@ -115,7 +115,7 @@ local ptablemap = {
   end,
   uiobjectapis = function(p)
     local uiobjects = perproduct(p, 'uiobjects')
-    local allscripts = dofile('build/cmake/runtime/scripttypes.lua')
+    local allscripts = dofile('runtime/scripttypes.lua')
     local inhrev = {}
     for k, cfg in pairs(uiobjects) do
       for inh in pairs(cfg.inherits) do
@@ -219,7 +219,7 @@ local ptablemap = {
         virtual = v.virtual,
       }
     end
-    for _, product in ipairs(dofile('build/cmake/runtime/products.lua')) do
+    for _, product in ipairs(dofile('runtime/products.lua')) do
       for k in pairs(perproduct(product, 'uiobjects')) do
         if not t[k] then
           t[k] = { unsupported = true }
@@ -244,12 +244,12 @@ local filemap, alldeps = (function()
   if ptablemap[k] then
     local nn, tt, dd = ptablemap[k](p)
     local ss = '_G.WowlessData.' .. nn .. ' = ' .. require('pl.pretty').write(tt) .. '\n'
-    local ff = 'build/products/' .. p .. '/WowlessData/' .. k .. '.lua'
+    local ff = 'products/' .. p .. '/WowlessData/' .. k .. '.lua'
     t[ff] = ss
     deps[ff] = dd
   elseif k == 'product' then
     local ss = ('_G.WowlessData = { product = %q }'):format(p)
-    t['build/products/' .. p .. '/WowlessData/' .. k .. '.lua'] = ss
+    t['products/' .. p .. '/WowlessData/' .. k .. '.lua'] = ss
   elseif k == 'toc' then
     local tt = {}
     for kk in pairs(ptablemap) do
@@ -259,7 +259,7 @@ local filemap, alldeps = (function()
     table.insert(tt, 1, 'product.lua')
     table.insert(tt, '')
     local content = table.concat(tt, '\n')
-    t['build/products/' .. p .. '/WowlessData/WowlessData.toc'] = content
+    t['products/' .. p .. '/WowlessData/WowlessData.toc'] = content
   else
     error('invalid file type ' .. k)
   end
