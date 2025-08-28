@@ -49,7 +49,7 @@ local rules = {
     pool = 'run_pool',
   },
   mkaddon = {
-    command = 'build/cmake/gentest $product $type',
+    command = 'build/cmake/gentest $product $type $out',
     depfile = '$out.d',
     deps = 'gcc',
   },
@@ -109,7 +109,7 @@ for _, p in ipairs(productList) do
   table.insert(builds, {
     args = { product = p, ['type'] = 'toc' },
     ins = 'build/cmake/gentest',
-    outs_implicit = prefix .. 'WowlessData.toc',
+    outs = prefix .. 'WowlessData.toc',
     rule = 'mkaddon',
   })
   for k in pairs(perProductAddonGeneratedTypes) do
