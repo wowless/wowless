@@ -21,7 +21,7 @@ local perProductAddonGeneratedTypes = {
     return { 'build/cmake/runtime/products/' .. p .. '/cvars.lua' }
   end,
   events = function()
-    local t = {}
+    local t = { 'build/cmake/runtime/products.lua' }
     for _, p in ipairs(productList) do
       table.insert(t, 'build/cmake/runtime/products/' .. p .. '/events.lua')
     end
@@ -55,6 +55,7 @@ local perProductAddonGeneratedTypes = {
   end,
   uiobjectapis = function()
     local t = {
+      'build/cmake/runtime/products.lua',
       'build/cmake/runtime/scripttypes.lua',
     }
     for _, p in ipairs(productList) do
@@ -90,7 +91,7 @@ local rules = {
     pool = 'run_pool',
   },
   mkaddon = {
-    command = 'build/cmake/gentest -f $type -p $product',
+    command = 'build/cmake/gentest $product $type',
     depfile = '$out.d',
     deps = 'gcc',
   },
@@ -150,7 +151,6 @@ for _, p in ipairs(productList) do
   table.insert(builds, {
     args = { product = p, ['type'] = 'toc' },
     ins = 'build/cmake/gentest',
-    ins_implicit = 'build/cmake/runtime/products.lua',
     outs_implicit = prefix .. 'WowlessData.toc',
     rule = 'mkaddon',
   })
@@ -158,7 +158,6 @@ for _, p in ipairs(productList) do
     table.insert(builds, {
       args = { product = p, ['type'] = k },
       ins = { v(p), 'build/cmake/gentest' },
-      ins_implicit = 'build/cmake/runtime/products.lua',
       outs = prefix .. k .. '.lua',
       rule = 'mkaddon',
     })

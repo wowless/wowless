@@ -1,13 +1,3 @@
-local function mapify(t)
-  if t then
-    local tt = {}
-    for _, p in ipairs(t) do
-      tt[p] = true
-    end
-    return tt
-  end
-end
-
 local function perproduct(p, f)
   return assert(dofile(('build/cmake/runtime/products/%s/%s.lua'):format(p, f)))
 end
@@ -242,53 +232,36 @@ local ptablemap = {
 
 local args = (function()
   local parser = require('argparse')()
-  parser:option('-f --file', 'files to generate, default all'):count('*')
-  parser:option('-p --product', 'products to generate, default all'):count('*')
+  parser:argument('product')
+  parser:argument('file')
   return parser:parse()
 end)()
 local filemap, alldeps = (function()
   local t = {}
   local deps = {}
-  local files = (function()
-    if next(args.file) then
-      return mapify(args.file)
-    else
-      local tt = {}
-      for k in pairs(ptablemap) do
-        tt[k] = true
-      end
-      return tt
+  local k = args.file
+  local p = args.product
+  if ptablemap[k] then
+    local nn, tt, dd = ptablemap[k](p)
+    local ss = '_G.WowlessData.' .. nn .. ' = ' .. require('pl.pretty').write(tt) .. '\n'
+    local ff = 'build/products/' .. p .. '/WowlessData/' .. k .. '.lua'
+    t[ff] = ss
+    deps[ff] = dd
+  elseif k == 'product' then
+    local ss = ('_G.WowlessData = { product = %q }'):format(p)
+    t['build/products/' .. p .. '/WowlessData/' .. k .. '.lua'] = ss
+  elseif k == 'toc' then
+    local tt = {}
+    for kk in pairs(ptablemap) do
+      table.insert(tt, kk .. '.lua')
     end
-  end)()
-  for k in pairs(files) do
-    if ptablemap[k] then
-      for _, p in ipairs(next(args.product) and args.product or dofile('build/cmake/runtime/products.lua')) do
-        local nn, tt, dd = ptablemap[k](p)
-        local ss = '_G.WowlessData.' .. nn .. ' = ' .. require('pl.pretty').write(tt) .. '\n'
-        local ff = 'build/products/' .. p .. '/WowlessData/' .. k .. '.lua'
-        t[ff] = ss
-        deps[ff] = dd
-      end
-    elseif k == 'product' then
-      for _, p in ipairs(next(args.product) and args.product or dofile('build/cmake/runtime/products.lua')) do
-        local ss = ('_G.WowlessData = { product = %q }'):format(p)
-        t['build/products/' .. p .. '/WowlessData/' .. k .. '.lua'] = ss
-      end
-    elseif k == 'toc' then
-      local tt = {}
-      for kk in pairs(ptablemap) do
-        table.insert(tt, kk .. '.lua')
-      end
-      table.sort(tt)
-      table.insert(tt, 1, 'product.lua')
-      table.insert(tt, '')
-      local content = table.concat(tt, '\n')
-      for _, p in ipairs(next(args.product) and args.product or dofile('build/cmake/runtime/products.lua')) do
-        t['build/products/' .. p .. '/WowlessData/WowlessData.toc'] = content
-      end
-    else
-      error('invalid file type ' .. k)
-    end
+    table.sort(tt)
+    table.insert(tt, 1, 'product.lua')
+    table.insert(tt, '')
+    local content = table.concat(tt, '\n')
+    t['build/products/' .. p .. '/WowlessData/WowlessData.toc'] = content
+  else
+    error('invalid file type ' .. k)
   end
   return t, deps
 end)()
