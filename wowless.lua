@@ -16,7 +16,7 @@ debug.setprofilingenabled(args.profile)
 local runner = require('wowless.runner')
 local modules = runner.run({
   allevents = args.allevents,
-  dir = 'extracts/' .. args.product,
+  dir = 'build/cmake/extracts/' .. args.product,
   frame0 = args.frame0,
   loglevel = args.loglevel,
   maxErrors = args.maxerrors,
