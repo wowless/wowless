@@ -986,7 +986,7 @@ foreach(product ${products})
     list(APPEND outs ${out})
     add_custom_command(
       OUTPUT ${out}
-      COMMAND gentest ${product} ${name}
+      COMMAND gentest ${product} ${name} ${out}
       WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
       DEPFILE ${out}.d
       DEPENDS gentest ${ARGN})

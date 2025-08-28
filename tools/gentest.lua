@@ -239,17 +239,15 @@ local args = (function()
   local parser = require('argparse')()
   parser:argument('product')
   parser:argument('file')
+  parser:argument('output')
   return parser:parse()
 end)()
 local function doit(k, p)
   if ptablemap[k] then
     local nn, tt = ptablemap[k](p)
-    local ss = '_G.WowlessData.' .. nn .. ' = ' .. require('pl.pretty').write(tt) .. '\n'
-    local ff = 'products/' .. p .. '/WowlessData/' .. k .. '.lua'
-    return ff, ss
+    return '_G.WowlessData.' .. nn .. ' = ' .. require('pl.pretty').write(tt) .. '\n'
   elseif k == 'product' then
-    local ss = ('_G.WowlessData = { product = %q }'):format(p)
-    return 'products/' .. p .. '/WowlessData/' .. k .. '.lua', ss
+    return ('_G.WowlessData = { product = %q }'):format(p)
   elseif k == 'toc' then
     local tt = {}
     for kk in pairs(ptablemap) do
@@ -258,12 +256,11 @@ local function doit(k, p)
     table.sort(tt)
     table.insert(tt, 1, 'product.lua')
     table.insert(tt, '')
-    local content = table.concat(tt, '\n')
-    return 'products/' .. p .. '/WowlessData/WowlessData.toc', content
+    return table.concat(tt, '\n')
   else
     error('invalid file type ' .. k)
   end
 end
-local file, content = doit(args.file, args.product)
-require('pl.file').write(file, content)
-require('tools.util').writedeps(file, deps)
+local content = doit(args.file, args.product)
+require('pl.file').write(args.output, content)
+require('tools.util').writedeps(args.output, deps)
