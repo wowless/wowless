@@ -242,7 +242,6 @@ local ptablemap = {
 
 local args = (function()
   local parser = require('argparse')()
-  parser:flag('-n --dryrun', 'do not write files')
   parser:option('-f --file', 'files to generate, default all'):count('*')
   parser:option('-p --product', 'products to generate, default all'):count('*')
   return parser:parse()
@@ -294,12 +293,10 @@ local filemap, alldeps = (function()
   return t, deps
 end)()
 
-if not args.dryrun then
-  local w = require('pl.file').write
-  for k, v in pairs(filemap) do
-    w(k, v)
-  end
-  for k, v in pairs(alldeps) do
-    require('tools.util').writedeps(k, v)
-  end
+local w = require('pl.file').write
+for k, v in pairs(filemap) do
+  w(k, v)
+end
+for k, v in pairs(alldeps) do
+  require('tools.util').writedeps(k, v)
 end
