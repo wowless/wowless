@@ -298,7 +298,6 @@ if not args.dryrun then
   local w = require('pl.file').write
   for k, v in pairs(filemap) do
     w(k, v)
-    os.execute('chmod a+x ' .. k)
   end
   for k, v in pairs(alldeps) do
     require('tools.util').writedeps(k, v)

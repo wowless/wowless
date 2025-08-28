@@ -48,11 +48,6 @@ repos:
     language: system
     types: [file]
     files: (\.lua|^.luacheckrc)$
-  - id: addon-chmod
-    name: addon execute bits
-    entry: chmod 755
-    language: system
-    files: ^addon/
   - id: mkninja
     name: create build system
     entry: lua tools/mkninja.lua
