@@ -1,5 +1,16 @@
+local deps = {}
+
+local function readfile(f)
+  deps[f] = true
+  return assert((require('pl.file').read(f)))
+end
+
+local function readyaml(f)
+  return require('wowapi.yaml').parse(readfile(f))
+end
+
 local function perproduct(p, f)
-  return assert(dofile(('runtime/products/%s/%s.lua'):format(p, f)))
+  return readyaml(('data/products/%s/%s.yaml'):format(p, f))
 end
 
 local function tpath(t, ...)
@@ -31,7 +42,7 @@ local ptablemap = {
         registerable = true,
       }
     end
-    for _, product in ipairs(dofile('runtime/products.lua')) do
+    for _, product in ipairs(readyaml('data/products.yaml')) do
       for k in pairs(perproduct(product, 'events')) do
         if not t[k] then
           t[k] = {
@@ -44,7 +55,7 @@ local ptablemap = {
     return 'Events', t
   end,
   globalapis = function(p)
-    local impls = dofile('runtime/impl.lua')
+    local impls = readyaml('data/impl.yaml')
     local function islua(api)
       local impl = impls[api.impl]
       if not impl or not impl.stdlib then
@@ -71,24 +82,18 @@ local ptablemap = {
     return 'Globals', perproduct(p, 'globals')
   end,
   impltests = function(p)
-    local r = require('pl.file').read
+    local test = readyaml('data/test.yaml')
     local t = {}
-    local deps = {}
     for _, api in pairs(perproduct(p, 'apis')) do
-      if api.impl and not t[api.impl] then
-        local f = 'data/test/' .. api.impl .. '.lua'
-        local content = r(f)
-        if content then
-          t[api.impl] = content
-          deps[f] = true
-        end
+      if test[api.impl] and not t[api.impl] then
+        t[api.impl] = readfile('data/test/' .. api.impl .. '.lua')
       end
     end
-    return 'ImplTests', t, deps
+    return 'ImplTests', t
   end,
   namespaceapis = function(p)
-    local platform = dofile('runtime/platform.lua')
-    local impls = dofile('runtime/impl.lua')
+    local platform = dofile('build/cmake/runtime/platform.lua')
+    local impls = readyaml('data/impl.yaml')
     local config = perproduct(p, 'config')
     local apiNamespaces = {}
     for k, api in pairs(perproduct(p, 'apis')) do
@@ -115,7 +120,7 @@ local ptablemap = {
   end,
   uiobjectapis = function(p)
     local uiobjects = perproduct(p, 'uiobjects')
-    local allscripts = dofile('runtime/scripttypes.lua')
+    local allscripts = readyaml('data/scripttypes.yaml')
     local inhrev = {}
     for k, cfg in pairs(uiobjects) do
       for inh in pairs(cfg.inherits) do
@@ -219,7 +224,7 @@ local ptablemap = {
         virtual = v.virtual,
       }
     end
-    for _, product in ipairs(dofile('runtime/products.lua')) do
+    for _, product in ipairs(readyaml('data/products.yaml')) do
       for k in pairs(perproduct(product, 'uiobjects')) do
         if not t[k] then
           t[k] = { unsupported = true }
@@ -236,20 +241,15 @@ local args = (function()
   parser:argument('file')
   return parser:parse()
 end)()
-local filemap, alldeps = (function()
-  local t = {}
-  local deps = {}
-  local k = args.file
-  local p = args.product
+local function doit(k, p)
   if ptablemap[k] then
-    local nn, tt, dd = ptablemap[k](p)
+    local nn, tt = ptablemap[k](p)
     local ss = '_G.WowlessData.' .. nn .. ' = ' .. require('pl.pretty').write(tt) .. '\n'
     local ff = 'products/' .. p .. '/WowlessData/' .. k .. '.lua'
-    t[ff] = ss
-    deps[ff] = dd
+    return ff, ss
   elseif k == 'product' then
     local ss = ('_G.WowlessData = { product = %q }'):format(p)
-    t['products/' .. p .. '/WowlessData/' .. k .. '.lua'] = ss
+    return 'products/' .. p .. '/WowlessData/' .. k .. '.lua', ss
   elseif k == 'toc' then
     local tt = {}
     for kk in pairs(ptablemap) do
@@ -259,17 +259,11 @@ local filemap, alldeps = (function()
     table.insert(tt, 1, 'product.lua')
     table.insert(tt, '')
     local content = table.concat(tt, '\n')
-    t['products/' .. p .. '/WowlessData/WowlessData.toc'] = content
+    return 'products/' .. p .. '/WowlessData/WowlessData.toc', content
   else
     error('invalid file type ' .. k)
   end
-  return t, deps
-end)()
-
-local w = require('pl.file').write
-for k, v in pairs(filemap) do
-  w(k, v)
 end
-for k, v in pairs(alldeps) do
-  require('tools.util').writedeps(k, v)
-end
+local file, content = doit(args.file, args.product)
+require('pl.file').write(file, content)
+require('tools.util').writedeps(file, deps)

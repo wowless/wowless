@@ -975,7 +975,7 @@ add_lua_executable(
   wowlessyaml)
 
 add_lua_executable(gentest ${CMAKE_CURRENT_SOURCE_DIR}/tools/gentest.lua
-                   argparse penlight toolsutil)
+                   argparse penlight toolsutil wowlessyaml)
 
 foreach(product ${products})
   set(d products/${product}/WowlessData)
@@ -987,6 +987,7 @@ foreach(product ${products})
     add_custom_command(
       OUTPUT ${out}
       COMMAND gentest ${product} ${name}
+      WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
       DEPFILE ${out}.d
       DEPENDS gentest ${ARGN})
   endmacro()

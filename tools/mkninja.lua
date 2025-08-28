@@ -11,58 +11,16 @@ local productList = {
 
 -- TODO get this from gentest.lua
 local perProductAddonGeneratedTypes = {
-  build = function(p)
-    return { 'build/cmake/runtime/products/' .. p .. '/build.lua' }
-  end,
-  config = function(p)
-    return { 'build/cmake/runtime/products/' .. p .. '/config.lua' }
-  end,
-  cvars = function(p)
-    return { 'build/cmake/runtime/products/' .. p .. '/cvars.lua' }
-  end,
-  events = function()
-    local t = { 'build/cmake/runtime/products.lua' }
-    for _, p in ipairs(productList) do
-      table.insert(t, 'build/cmake/runtime/products/' .. p .. '/events.lua')
-    end
-    return t
-  end,
-  globalapis = function(p)
-    return {
-      'build/cmake/runtime/products/' .. p .. '/apis.lua',
-      'build/cmake/runtime/products/' .. p .. '/config.lua',
-      'build/cmake/runtime/impl.lua',
-    }
-  end,
-  globals = function(p)
-    return { 'build/cmake/runtime/products/' .. p .. '/globals.lua' }
-  end,
-  impltests = function(p)
-    return {
-      'build/cmake/runtime/products/' .. p .. '/apis.lua',
-      'build/cmake/runtime/test.lua',
-    }
-  end,
-  namespaceapis = function(p)
-    return {
-      'build/cmake/runtime/products/' .. p .. '/apis.lua',
-      'build/cmake/runtime/products/' .. p .. '/config.lua',
-      'build/cmake/runtime/impl.lua',
-    }
-  end,
-  product = function()
-    return {}
-  end,
-  uiobjectapis = function()
-    local t = {
-      'build/cmake/runtime/products.lua',
-      'build/cmake/runtime/scripttypes.lua',
-    }
-    for _, p in ipairs(productList) do
-      table.insert(t, 'build/cmake/runtime/products/' .. p .. '/uiobjects.lua')
-    end
-    return t
-  end,
+  build = true,
+  config = true,
+  cvars = true,
+  events = true,
+  globalapis = true,
+  globals = true,
+  impltests = true,
+  namespaceapis = true,
+  product = true,
+  uiobjectapis = true,
 }
 
 local perProductAddonGeneratedFiles = {}
@@ -154,10 +112,10 @@ for _, p in ipairs(productList) do
     outs_implicit = prefix .. 'WowlessData.toc',
     rule = 'mkaddon',
   })
-  for k, v in pairs(perProductAddonGeneratedTypes) do
+  for k in pairs(perProductAddonGeneratedTypes) do
     table.insert(builds, {
       args = { product = p, ['type'] = k },
-      ins = { v(p), 'build/cmake/gentest' },
+      ins = 'build/cmake/gentest',
       outs = prefix .. k .. '.lua',
       rule = 'mkaddon',
     })
