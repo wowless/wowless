@@ -9,35 +9,6 @@ local productList = {
   'wowxptr',
 }
 
--- TODO get this from gentest.lua
-local perProductAddonGeneratedTypes = {
-  build = true,
-  config = true,
-  cvars = true,
-  events = true,
-  globalapis = true,
-  globals = true,
-  impltests = true,
-  namespaceapis = true,
-  product = true,
-  uiobjectapis = true,
-}
-
-local perProductAddonGeneratedFiles = {}
-local addonGeneratedFiles = {}
-for _, p in ipairs(productList) do
-  local pp = {}
-  local prefix = 'build/cmake/products/' .. p .. '/WowlessData/'
-  table.insert(pp, prefix .. 'WowlessData.toc')
-  for k in pairs(perProductAddonGeneratedTypes) do
-    table.insert(pp, prefix .. k .. '.lua')
-  end
-  for _, file in ipairs(pp) do
-    table.insert(addonGeneratedFiles, file)
-  end
-  perProductAddonGeneratedFiles[p] = pp
-end
-
 local pools = {
   fetch_pool = 1,
   run_pool = 2,
@@ -92,7 +63,7 @@ local builds = {
     rule = 'phony',
   },
   {
-    ins = addonGeneratedFiles,
+    ins = 'build/cmake/addons.txt',
     outs = 'addon',
     rule = 'phony',
   },
@@ -122,7 +93,7 @@ for _, p in ipairs(productList) do
   }
   table.insert(builds, {
     args = { product = p },
-    ins = { perProductAddonGeneratedFiles[p], rundeps },
+    ins = { 'build/cmake/products/' .. p .. '/addon.txt', rundeps },
     outs = runout,
     rule = 'run',
   })
@@ -189,12 +160,12 @@ table.insert(builds, {
     'spec/wowless/util_spec.lua',
   },
   ins_implicit = {
+    'build/cmake/addons.txt',
     'build/cmake/runtests',
     'spec/wowless/green.png',
     'spec/wowless/temp.blp',
     'spec/wowless/temp.png',
     addonFiles,
-    addonGeneratedFiles,
     schemadbs,
   },
   outs = 'test.out',

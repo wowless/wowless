@@ -1001,9 +1001,18 @@ foreach(product ${products})
   gentest(namespaceapis.lua namespaceapis)
   gentest(product.lua product)
   gentest(uiobjectapis.lua uiobjectapis)
-  # TODO remove this dummy target when dependencies are migrated from mkninja
-  add_custom_target(dummy_${product}_gentest DEPENDS ${outs})
+  add_custom_command(
+    OUTPUT ${product}_addon.txt
+    COMMAND ${CMAKE_COMMAND} -E touch ${product}_addon.txt
+    DEPENDS ${outs})
+  list(APPEND addons ${product}_addon.txt)
 endforeach()
+add_custom_command(
+  OUTPUT addons.txt
+  COMMAND ${CMAKE_COMMAND} -E touch addons.txt
+  DEPENDS ${addons})
+# TODO remove this dummy target when dependencies are migrated from mkninja
+add_custom_target(dummy_addons DEPENDS addons.txt)
 
 lua2c(runtimegametypes runtime.gametypes=runtime/gametypes.lua)
 lua2c(runtimeproducts runtime.products=runtime/products.lua)
