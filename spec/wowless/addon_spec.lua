@@ -5,7 +5,7 @@ describe('addon', function()
         local modules = require('wowless.runner').run({
           otherAddonDirs = {
             'addon/Wowless/', -- trailing slash to validate fix for #235
-            'build/products/' .. product .. '/WowlessData',
+            'build/cmake/products/' .. product .. '/WowlessData',
           },
           product = product,
         })

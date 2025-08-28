@@ -978,7 +978,7 @@ add_lua_executable(gentest ${CMAKE_CURRENT_SOURCE_DIR}/tools/gentest.lua
                    argparse penlight toolsutil wowlessyaml)
 
 foreach(product ${products})
-  set(d products/${product}/WowlessData)
+  set(d ${CMAKE_CURRENT_BINARY_DIR}/products/${product}/WowlessData)
   file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/${d})
   macro(gentest file name)
     set(out ${d}/${file})

@@ -27,7 +27,7 @@ local perProductAddonGeneratedFiles = {}
 local addonGeneratedFiles = {}
 for _, p in ipairs(productList) do
   local pp = {}
-  local prefix = 'build/products/' .. p .. '/WowlessData/'
+  local prefix = 'build/cmake/products/' .. p .. '/WowlessData/'
   table.insert(pp, prefix .. 'WowlessData.toc')
   for k in pairs(perProductAddonGeneratedTypes) do
     table.insert(pp, prefix .. k .. '.lua')
@@ -48,11 +48,6 @@ local rules = {
     command = 'build/cmake/wowless run -p $product --frame0 > /dev/null',
     pool = 'run_pool',
   },
-  mkaddon = {
-    command = 'build/cmake/gentest $product $type $out',
-    depfile = '$out.d',
-    deps = 'gcc',
-  },
   mkninja = {
     command = 'lua tools/mkninja.lua',
     pool = 'console',
@@ -65,7 +60,14 @@ local rules = {
     pool = 'fetch_pool',
   },
   run = {
-    command = 'build/cmake/wowless run -p $product -e5 -a addon/Wowless -a build/products/$product/WowlessData > $out',
+    command = table.concat({
+      'build/cmake/wowless run ',
+      '-p $product ',
+      '-e5 ',
+      '-a addon/Wowless ',
+      '-a build/cmake/products/$product/WowlessData ',
+      '> $out',
+    }),
     pool = 'run_pool',
   },
 }
@@ -103,24 +105,6 @@ local builds = {
     rule = 'mkninja',
   },
 }
-
-for _, p in ipairs(productList) do
-  local prefix = 'build/products/' .. p .. '/WowlessData/'
-  table.insert(builds, {
-    args = { product = p, ['type'] = 'toc' },
-    ins = 'build/cmake/gentest',
-    outs = prefix .. 'WowlessData.toc',
-    rule = 'mkaddon',
-  })
-  for k in pairs(perProductAddonGeneratedTypes) do
-    table.insert(builds, {
-      args = { product = p, ['type'] = k },
-      ins = 'build/cmake/gentest',
-      outs = prefix .. k .. '.lua',
-      rule = 'mkaddon',
-    })
-  end
-end
 
 local schemadbs = {}
 local runouts = {}
