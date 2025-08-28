@@ -979,7 +979,6 @@ add_lua_executable(gentest ${CMAKE_CURRENT_SOURCE_DIR}/tools/gentest.lua
 
 foreach(product ${products})
   set(d products/${product}/WowlessData)
-  set(r runtime/products/${product})
   file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/${d})
   macro(gentest file name)
     set(out ${d}/${file})
@@ -989,21 +988,19 @@ foreach(product ${products})
       COMMAND gentest ${product} ${name} ${out}
       WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
       DEPFILE ${out}.d
-      DEPENDS gentest ${ARGN})
+      DEPENDS gentest)
   endmacro()
   gentest(WowlessData.toc toc)
-  gentest(build.lua build ${r}/build.lua)
-  gentest(config.lua config ${r}/config.lua)
-  gentest(cvars.lua cvars ${r}/cvars.lua)
-  gentest(events.lua events) # FIXME
-  gentest(globalapis.lua globalapis ${r}/apis.lua ${r}/config.lua
-          runtime/impl.lua)
-  gentest(globals.lua globals ${r}/globals.lua)
-  gentest(impltests.lua impltests ${r}/apis.lua runtime/test.lua)
-  gentest(namespaceapis.lua namespaceapis ${r}/apis.lua ${r}/config.lua
-          runtime/impl.lua)
+  gentest(build.lua build)
+  gentest(config.lua config)
+  gentest(cvars.lua cvars)
+  gentest(events.lua events)
+  gentest(globalapis.lua globalapis)
+  gentest(globals.lua globals)
+  gentest(impltests.lua impltests)
+  gentest(namespaceapis.lua namespaceapis)
   gentest(product.lua product)
-  gentest(uiobjectapis.lua uiobjectapis) # FIXME
+  gentest(uiobjectapis.lua uiobjectapis)
   # TODO remove this dummy target when dependencies are migrated from mkninja
   add_custom_target(dummy_${product}_gentest DEPENDS ${outs})
 endforeach()
