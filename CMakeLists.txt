@@ -979,7 +979,7 @@ add_lua_executable(gentest ${CMAKE_CURRENT_SOURCE_DIR}/tools/gentest.lua
 
 foreach(product ${products})
   set(d ${CMAKE_CURRENT_BINARY_DIR}/products/${product}/WowlessData)
-  file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/${d})
+  file(MAKE_DIRECTORY ${d})
   macro(gentest file name)
     set(out ${d}/${file})
     list(APPEND outs ${out})
