@@ -975,7 +975,7 @@ add_lua_executable(
   wowlessyaml)
 
 add_lua_executable(gentest ${CMAKE_CURRENT_SOURCE_DIR}/tools/gentest.lua
-                   argparse penlight toolsutil)
+                   argparse penlight toolsutil wowlessyaml)
 
 lua2c(runtimegametypes runtime.gametypes=runtime/gametypes.lua)
 lua2c(runtimeproducts runtime.products=runtime/products.lua)
