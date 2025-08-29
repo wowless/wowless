@@ -23,9 +23,6 @@ local rules = {
     command = 'lua tools/mkninja.lua',
     pool = 'console',
   },
-  mktestout = {
-    command = 'bash -c "set -o pipefail && build/cmake/runtests $in 2>&1 | tee $out"',
-  },
   render = {
     command = 'build/cmake/render $in',
     pool = 'fetch_pool',
@@ -43,22 +40,9 @@ local rules = {
   },
 }
 
-local addonFiles = {
-  'addon/Wowless/evenmoreintrinsic.xml',
-  'addon/Wowless/framework.lua',
-  'addon/Wowless/generated.lua',
-  'addon/Wowless/init.lua',
-  'addon/Wowless/statemachine.lua',
-  'addon/Wowless/test.lua',
-  'addon/Wowless/test.xml',
-  'addon/Wowless/uiobjects.lua',
-  'addon/Wowless/util.lua',
-  'addon/Wowless/Wowless.toc',
-}
-
 local builds = {
   {
-    ins = { 'test.out', 'outs', 'pngs' },
+    ins = { 'build/cmake/test', 'outs', 'pngs' },
     outs = 'all',
     rule = 'phony',
   },
@@ -87,8 +71,8 @@ for _, p in ipairs(productList) do
   local datadb = 'build/cmake/' .. p .. '_data.sqlite3'
   table.insert(schemadbs, schemadb)
   local rundeps = {
+    'build/cmake/testaddon.txt',
     'build/cmake/wowless',
-    addonFiles,
     datadb,
   }
   table.insert(builds, {
@@ -125,52 +109,6 @@ for _, p in ipairs(productList) do
   })
 end
 
-table.insert(builds, {
-  ins = {
-    'spec/addon/framework_spec.lua',
-    'spec/addon/statemachine_spec.lua',
-    'spec/addon/util_spec.lua',
-    'spec/data/apis_spec.lua',
-    'spec/data/config_spec.lua',
-    'spec/data/docs_spec.lua',
-    'spec/data/events_spec.lua',
-    'spec/data/families_spec.lua',
-    'spec/data/gametypes_spec.lua',
-    'spec/data/globals_spec.lua',
-    'spec/data/impl_spec.lua',
-    'spec/data/sql_spec.lua',
-    'spec/data/structures_spec.lua',
-    'spec/data/test_spec.lua',
-    'spec/data/uiobjectimpl_spec.lua',
-    'spec/data/uiobjects_spec.lua',
-    'spec/data/yaml_spec.lua',
-    'spec/elune_spec.lua',
-    'spec/tools/tedit_spec.lua',
-    'spec/wowapi/schema_spec.lua',
-    'spec/wowapi/yaml_spec.lua',
-    'spec/wowless/addon_spec.lua',
-    'spec/wowless/blp_spec.lua',
-    'spec/wowless/bubblewrap_spec.lua',
-    'spec/wowless/hlist_spec.lua',
-    'spec/wowless/modules/funcheck_spec.lua',
-    'spec/wowless/modules/typecheck_spec.lua',
-    'spec/wowless/png_spec.lua',
-    'spec/wowless/sqlite_spec.lua',
-    'spec/wowless/toc_spec.lua',
-    'spec/wowless/util_spec.lua',
-  },
-  ins_implicit = {
-    'build/cmake/addons.txt',
-    'build/cmake/runtests',
-    'spec/wowless/green.png',
-    'spec/wowless/temp.blp',
-    'spec/wowless/temp.png',
-    addonFiles,
-    schemadbs,
-  },
-  outs = 'test.out',
-  rule = 'mktestout',
-})
 table.insert(builds, {
   ins = runouts,
   outs = 'outs',
@@ -254,8 +192,8 @@ for _, b in ipairs(builds) do
     table.insert(out, '  ' .. k .. ' = ' .. v)
   end
 end
-table.insert(out, 'default test.out')
 table.insert(out, 'subninja build/cmake/build.ninja')
+table.insert(out, 'default build/cmake/test')
 
 local f = io.open('build.ninja', 'w')
 f:write(table.concat(out, '\n'))
