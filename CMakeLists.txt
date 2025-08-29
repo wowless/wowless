@@ -1264,29 +1264,46 @@ add_custom_command(
           addon/Wowless/util.lua
           addon/Wowless/Wowless.toc)
 
+set(specs
+    spec/addon/framework_spec.lua
+    spec/addon/statemachine_spec.lua
+    spec/addon/util_spec.lua
+    spec/data/apis_spec.lua
+    spec/data/config_spec.lua
+    spec/data/docs_spec.lua
+    spec/data/events_spec.lua
+    spec/data/families_spec.lua
+    spec/data/gametypes_spec.lua
+    spec/data/globals_spec.lua
+    spec/data/impl_spec.lua
+    spec/data/sql_spec.lua
+    spec/data/structures_spec.lua
+    spec/data/test_spec.lua
+    spec/data/uiobjectimpl_spec.lua
+    spec/data/uiobjects_spec.lua
+    spec/data/yaml_spec.lua
+    spec/elune_spec.lua
+    spec/tools/tedit_spec.lua
+    spec/wowapi/schema_spec.lua
+    spec/wowapi/yaml_spec.lua
+    spec/wowless/addon_spec.lua
+    spec/wowless/blp_spec.lua
+    spec/wowless/bubblewrap_spec.lua
+    spec/wowless/hlist_spec.lua
+    spec/wowless/modules/funcheck_spec.lua
+    spec/wowless/modules/typecheck_spec.lua
+    spec/wowless/png_spec.lua
+    spec/wowless/sqlite_spec.lua
+    spec/wowless/toc_spec.lua
+    spec/wowless/util_spec.lua)
 add_custom_command(
   COMMENT "Running tests"
   OUTPUT test.out
-  COMMAND
-    runtests -o ${CMAKE_CURRENT_BINARY_DIR}/test.out
-    spec/addon/framework_spec.lua spec/addon/statemachine_spec.lua
-    spec/addon/util_spec.lua spec/data/apis_spec.lua spec/data/config_spec.lua
-    spec/data/docs_spec.lua spec/data/events_spec.lua
-    spec/data/families_spec.lua spec/data/gametypes_spec.lua
-    spec/data/globals_spec.lua spec/data/impl_spec.lua spec/data/sql_spec.lua
-    spec/data/structures_spec.lua spec/data/test_spec.lua
-    spec/data/uiobjectimpl_spec.lua spec/data/uiobjects_spec.lua
-    spec/data/yaml_spec.lua spec/elune_spec.lua spec/tools/tedit_spec.lua
-    spec/wowapi/schema_spec.lua spec/wowapi/yaml_spec.lua
-    spec/wowless/addon_spec.lua spec/wowless/blp_spec.lua
-    spec/wowless/bubblewrap_spec.lua spec/wowless/hlist_spec.lua
-    spec/wowless/modules/funcheck_spec.lua
-    spec/wowless/modules/typecheck_spec.lua spec/wowless/png_spec.lua
-    spec/wowless/sqlite_spec.lua spec/wowless/toc_spec.lua
-    spec/wowless/util_spec.lua
+  COMMAND runtests -o ${CMAKE_CURRENT_BINARY_DIR}/test.out ${specs}
   DEPENDS runtests
           addons.txt
           ${schemadbs}
+          ${specs}
           spec/wowless/green.png
           spec/wowless/temp.blp
           spec/wowless/temp.png
