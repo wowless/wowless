@@ -13,9 +13,6 @@ local args = (function()
   run:flag('--profile', 'dump profile')
   return parser:parse()
 end)()
-if args.output then
-  io.output(args.output)
-end
 debug.setprofilingenabled(args.profile)
 local runner = require('wowless.runner')
 local modules = runner.run({
@@ -25,6 +22,7 @@ local modules = runner.run({
   loglevel = args.loglevel,
   maxErrors = args.maxerrors,
   otherAddonDirs = args.addondir,
+  output = args.output,
   product = args.product,
   scripts = args.scripts,
 })
