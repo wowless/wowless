@@ -586,6 +586,7 @@ foreach(product ${products})
     OUTPUT ${product}_schema.sqlite3
     COMMAND sqlite ${product}
     DEPENDS sqlite stamp/${product}_dbdefs.lua stamp/${product}_dblist.lua)
+  list(APPEND schemadbs ${product}_schema.sqlite3)
   add_custom_command(
     OUTPUT ${product}_data.sqlite3
     COMMAND sqlite -f ${product}
@@ -1233,6 +1234,50 @@ add_lua_executable(
   wowlesstoc
   wowlessutil
   wowlessyaml)
+
+add_custom_command(
+  OUTPUT testaddon.txt
+  COMMAND ${CMAKE_COMMAND} -E touch testaddon.txt
+  DEPENDS addon/Wowless/evenmoreintrinsic.xml
+          addon/Wowless/framework.lua
+          addon/Wowless/generated.lua
+          addon/Wowless/init.lua
+          addon/Wowless/statemachine.lua
+          addon/Wowless/test.lua
+          addon/Wowless/test.xml
+          addon/Wowless/uiobjects.lua
+          addon/Wowless/util.lua
+          addon/Wowless/Wowless.toc)
+
+add_custom_command(
+  COMMENT "Running tests"
+  OUTPUT test.out
+  COMMAND
+    runtests -o ${CMAKE_CURRENT_BINARY_DIR}/test.out
+    spec/addon/framework_spec.lua spec/addon/statemachine_spec.lua
+    spec/addon/util_spec.lua spec/data/apis_spec.lua spec/data/config_spec.lua
+    spec/data/docs_spec.lua spec/data/events_spec.lua
+    spec/data/families_spec.lua spec/data/gametypes_spec.lua
+    spec/data/globals_spec.lua spec/data/impl_spec.lua spec/data/sql_spec.lua
+    spec/data/structures_spec.lua spec/data/test_spec.lua
+    spec/data/uiobjectimpl_spec.lua spec/data/uiobjects_spec.lua
+    spec/data/yaml_spec.lua spec/elune_spec.lua spec/tools/tedit_spec.lua
+    spec/wowapi/schema_spec.lua spec/wowapi/yaml_spec.lua
+    spec/wowless/addon_spec.lua spec/wowless/blp_spec.lua
+    spec/wowless/bubblewrap_spec.lua spec/wowless/hlist_spec.lua
+    spec/wowless/modules/funcheck_spec.lua
+    spec/wowless/modules/typecheck_spec.lua spec/wowless/png_spec.lua
+    spec/wowless/sqlite_spec.lua spec/wowless/toc_spec.lua
+    spec/wowless/util_spec.lua
+  DEPENDS runtests
+          addons.txt
+          ${schemadbs}
+          spec/wowless/green.png
+          spec/wowless/temp.blp
+          spec/wowless/temp.png
+          testaddon.txt
+  WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
+add_custom_target(test DEPENDS test.out)
 
 add_lua_executable(yamlfmt ${CMAKE_CURRENT_SOURCE_DIR}/tools/yamlfmt.lua
                    penlight wowlessyaml)

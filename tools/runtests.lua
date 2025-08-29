@@ -14,7 +14,17 @@ _G.assert = require('luassert')
 _G.assert:set_parameter('TableFormatLevel', -1)
 _G.describe = doit
 _G.it = doit
-for _, f in ipairs(arg) do
+local args
+do
+  local parser = require('argparse')()
+  parser:option('-o --output', 'output file')
+  parser:argument('specs'):args('*')
+  args = parser:parse()
+end
+if args.output then
+  io.output(args.output)
+end
+for _, f in ipairs(args.specs) do
   require('wowless.ext').setglobaltable(_G)
   local success, msg = pcall(dofile, f)
   if not success then
