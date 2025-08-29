@@ -6,9 +6,6 @@ set(CMAKE_TOOLCHAIN_FILE
 
 project(wowless LANGUAGES C)
 
-# https://gitlab.kitware.com/cmake/cmake/-/issues/25245
-cmake_policy(SET CMP0116 OLD)
-
 include(FetchContent)
 
 set(elune_SOURCE_DIR vendor/elune)
