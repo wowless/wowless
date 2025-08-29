@@ -74,3 +74,28 @@ jobs:
     - uses: lukka/get-cmake@v4.1.0
     - run: cmake -B build -G "${{ matrix.config.generator }}"
     - run: cmake --build build --verbose
+  buildpreset:
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+        - name: Linux
+          os: ubuntu-latest
+        - name: MacOS
+          os: macos-latest
+        - name: Windows
+          os: windows-latest
+    runs-on: ${{ matrix.config.os }}
+    steps:
+    - uses: actions/checkout@v5
+      with:
+        submodules: true
+    - run: mkdir ${{ env.VCPKG_DEFAULT_BINARY_CACHE }}
+    - uses: actions/cache@v4
+      with:
+        path: ${{ env.VCPKG_DEFAULT_BINARY_CACHE }}
+        key: vcpkg-${{ runner.os }}-${{ github.run_id }}
+        restore-keys: vcpkg-${{ runner.os }}
+    - uses: lukka/get-cmake@v4.1.0
+    - run: cmake --preset default
+    - run: cmake --build --preset default --target all test --verbose
