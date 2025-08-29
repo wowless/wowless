@@ -108,5 +108,5 @@ os.execute([[
   -G Ninja \
   -DCMAKE_EXPORT_COMPILE_COMMANDS=1 \
   -DCMAKE_NINJA_OUTPUT_PATH_PREFIX=build/cmake/ \
-  -DCMAKE_C_FLAGS="-D_GNU_SOURCE -DNDEBUG -ffast-math -O3" \
+  -DCMAKE_C_FLAGS="-DNDEBUG -ffast-math -O3" \
 ]])

@@ -88,6 +88,8 @@ target_include_directories(elune PUBLIC ${elune_SOURCE_DIR}/liblua/include
                                         ${elune_BINARY_DIR})
 target_link_libraries(elune PRIVATE $<$<PLATFORM_ID:Darwin,Linux>:m>
                                     $<$<PLATFORM_ID:Windows>:bcrypt>)
+target_compile_definitions(elune
+                           PRIVATE $<$<PLATFORM_ID:Darwin,Linux>:_GNU_SOURCE>)
 set_target_properties(elune PROPERTIES C_STANDARD 11)
 
 add_executable(bootstraplua ${elune_SOURCE_DIR}/lua/lua.c)
