@@ -61,15 +61,12 @@ local builds = {
   },
 }
 
-local schemadbs = {}
 local runouts = {}
 local pngs = {}
 for _, p in ipairs(productList) do
   local runout = 'out/' .. p .. '/log.txt'
   table.insert(runouts, runout)
-  local schemadb = 'build/cmake/' .. p .. '_schema.sqlite3'
   local datadb = 'build/cmake/' .. p .. '_data.sqlite3'
-  table.insert(schemadbs, schemadb)
   local rundeps = {
     'build/cmake/testaddon.txt',
     'build/cmake/wowless',
