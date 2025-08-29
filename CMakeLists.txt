@@ -594,9 +594,6 @@ foreach(product ${products})
     COMMAND sqlite -f ${product}
     DEPENDS sqlite stamp/${product}_dbdefs.lua stamp/${product}_dblist.lua
             ${product}_fetch.txt)
-  # TODO remove this dummy target when dependencies are migrated from mkninja
-  add_custom_target(dummy_${product}_sqlite DEPENDS ${product}_schema.sqlite3
-                                                    ${product}_data.sqlite3)
 endforeach()
 
 find_package(CURL REQUIRED)
@@ -1014,8 +1011,6 @@ add_custom_command(
   OUTPUT addons.txt
   COMMAND ${CMAKE_COMMAND} -E touch addons.txt
   DEPENDS ${addons})
-# TODO remove this dummy target when dependencies are migrated from mkninja
-add_custom_target(dummy_addons DEPENDS addons.txt)
 
 lua2c(runtimegametypes runtime.gametypes=runtime/gametypes.lua)
 lua2c(runtimeproducts runtime.products=runtime/products.lua)
@@ -1219,6 +1214,9 @@ set(pngs)
 foreach(product ${products})
   set(out products/${product}/log.txt)
   list(APPEND outs ${out})
+  add_custom_target(
+    ${product} DEPENDS wowless testaddon.txt ${product}_addon.txt
+                       ${product}_data.sqlite3)
   add_custom_command(
     OUTPUT ${out}
     COMMAND

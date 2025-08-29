@@ -48,14 +48,14 @@ repos:
     language: system
     types: [file]
     files: (\.lua|^.luacheckrc)$
-  - id: mkninja
+  - id: cmake-configure
     name: create build system
-    entry: lua tools/mkninja.lua
+    entry: cmake --preset default
     language: system
     pass_filenames: false
   - id: build-yamlfmt
     name: build yamlfmt
-    entry: ninja build/cmake/yamlfmt
+    entry: cmake --build --preset default --target yamlfmt
     language: system
     pass_filenames: false
   - id: yamlfmt
@@ -66,7 +66,7 @@ repos:
     files: ^data/
   - id: test
     name: build and test
-    entry: ninja -v
+    entry: cmake --build --preset default --target test
     language: system
     pass_filenames: false
 - repo: meta
