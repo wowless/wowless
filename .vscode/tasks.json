@@ -7,7 +7,7 @@
       "type": "shell"
     },
     {
-      "command": "ninja out/*/log.txt | cat - && ls -l out/*/log.txt",
+      "command": "ninja build/cmake/outs | cat - && ls -l build/cmake/products/*/log.txt",
       "label": "runall",
       "problemMatcher": [],
       "type": "shell"

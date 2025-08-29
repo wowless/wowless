@@ -27,22 +27,11 @@ local rules = {
     command = 'build/cmake/render $in',
     pool = 'fetch_pool',
   },
-  run = {
-    command = table.concat({
-      'build/cmake/wowless run ',
-      '-p $product ',
-      '-e5 ',
-      '-a addon/Wowless ',
-      '-a build/cmake/products/$product/WowlessData ',
-      '> $out',
-    }),
-    pool = 'run_pool',
-  },
 }
 
 local builds = {
   {
-    ins = { 'build/cmake/test', 'outs', 'pngs' },
+    ins = { 'build/cmake/test', 'build/cmake/outs', 'pngs' },
     outs = 'all',
     rule = 'phony',
   },
@@ -61,26 +50,12 @@ local builds = {
   },
 }
 
-local runouts = {}
 local pngs = {}
 for _, p in ipairs(productList) do
-  local runout = 'out/' .. p .. '/log.txt'
-  table.insert(runouts, runout)
   local datadb = 'build/cmake/' .. p .. '_data.sqlite3'
-  local rundeps = {
-    'build/cmake/testaddon.txt',
-    'build/cmake/wowless',
-    datadb,
-  }
   table.insert(builds, {
     args = { product = p },
-    ins = { 'build/cmake/' .. p .. '_addon.txt', rundeps },
-    outs = runout,
-    rule = 'run',
-  })
-  table.insert(builds, {
-    args = { product = p },
-    ins = rundeps,
+    ins = { 'build/cmake/wowless', datadb },
     outs_implicit = { 'out/' .. p .. '/frame0.yaml', 'out/' .. p .. '/frame1.yaml' },
     rule = 'frame0',
   })
@@ -106,11 +81,6 @@ for _, p in ipairs(productList) do
   })
 end
 
-table.insert(builds, {
-  ins = runouts,
-  outs = 'outs',
-  rule = 'phony',
-})
 table.insert(builds, {
   ins = pngs,
   outs = 'pngs',

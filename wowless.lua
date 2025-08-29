@@ -7,11 +7,15 @@ local args = (function()
   run:option('-a --addondir', 'addon directory to test'):count('*')
   run:option('-e --maxerrors', 'quit once this number of errors occur'):convert(tonumber)
   run:option('-s --scripts', 'scripts to execute')
+  run:option('-o --output', 'output file')
   run:flag('--allevents', 'send all nullary events')
   run:flag('--frame0', 'write frame0 debug')
   run:flag('--profile', 'dump profile')
   return parser:parse()
 end)()
+if args.output then
+  io.output(args.output)
+end
 debug.setprofilingenabled(args.profile)
 local runner = require('wowless.runner')
 local modules = runner.run({
