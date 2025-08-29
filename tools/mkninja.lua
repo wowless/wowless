@@ -77,7 +77,7 @@ for _, p in ipairs(productList) do
   }
   table.insert(builds, {
     args = { product = p },
-    ins = { 'build/cmake/products/' .. p .. '/addon.txt', rundeps },
+    ins = { 'build/cmake/' .. p .. '_addon.txt', rundeps },
     outs = runout,
     rule = 'run',
   })
