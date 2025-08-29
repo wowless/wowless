@@ -1212,6 +1212,21 @@ add_lua_executable(
   wowlessutil
   wowlessyaml)
 
+set(outs)
+foreach(product ${products})
+  set(out products/${product}/log.txt)
+  list(APPEND outs ${out})
+  add_custom_command(
+    OUTPUT ${out}
+    COMMAND
+      wowless run -p ${product} -e5 -a addon/Wowless -a
+      ${CMAKE_CURRENT_BINARY_DIR}/products/${product}/WowlessData -o
+      ${CMAKE_CURRENT_BINARY_DIR}/${out}
+    DEPENDS wowless testaddon.txt ${product}_addon.txt ${product}_data.sqlite3
+    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
+endforeach()
+add_custom_target(outs DEPENDS ${outs})
+
 add_lua_executable(
   runtests
   ${CMAKE_CURRENT_SOURCE_DIR}/tools/runtests.lua
