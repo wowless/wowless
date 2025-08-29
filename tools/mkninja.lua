@@ -1,37 +1,13 @@
-local productList = {
-  'wow',
-  'wow_classic',
-  'wow_classic_beta',
-  'wow_classic_era',
-  'wow_classic_era_ptr',
-  'wow_classic_ptr',
-  'wowt',
-  'wowxptr',
-}
-
-local pools = {
-  fetch_pool = 1,
-  run_pool = 2,
-}
-
 local rules = {
-  frame0 = {
-    command = 'build/cmake/wowless run -p $product --frame0 > /dev/null',
-    pool = 'run_pool',
-  },
   mkninja = {
     command = 'lua tools/mkninja.lua',
     pool = 'console',
-  },
-  render = {
-    command = 'build/cmake/render $in',
-    pool = 'fetch_pool',
   },
 }
 
 local builds = {
   {
-    ins = { 'build/cmake/test', 'build/cmake/outs', 'pngs' },
+    ins = { 'build/cmake/test', 'build/cmake/outs', 'build/cmake/pngs' },
     outs = 'all',
     rule = 'phony',
   },
@@ -49,43 +25,6 @@ local builds = {
     rule = 'mkninja',
   },
 }
-
-local pngs = {}
-for _, p in ipairs(productList) do
-  local datadb = 'build/cmake/' .. p .. '_data.sqlite3'
-  table.insert(builds, {
-    args = { product = p },
-    ins = { 'build/cmake/wowless', datadb },
-    outs_implicit = { 'out/' .. p .. '/frame0.yaml', 'out/' .. p .. '/frame1.yaml' },
-    rule = 'frame0',
-  })
-  for i = 0, 1 do
-    local prefix = 'out/' .. p .. '/frame' .. i
-    table.insert(pngs, prefix .. '.png')
-    table.insert(builds, {
-      args = { product = p },
-      ins = { prefix .. '.yaml' },
-      ins_implicit = {
-        'build/cmake/render',
-        'data/products/' .. p .. '/build.yaml',
-      },
-      outs = { prefix .. '.png' },
-      rule = 'render',
-    })
-  end
-  table.insert(builds, {
-    args = { product = p },
-    ins = { datadb },
-    outs = p,
-    rule = 'phony',
-  })
-end
-
-table.insert(builds, {
-  ins = pngs,
-  outs = 'pngs',
-  rule = 'phony',
-})
 
 local function flatten(x)
   local t = {}
@@ -126,10 +65,6 @@ local function sorted(t)
 end
 
 local out = {}
-for p, n in pairs(pools) do
-  table.insert(out, 'pool ' .. p)
-  table.insert(out, '  depth = ' .. n)
-end
 for k, v in sorted(rules) do
   table.insert(out, 'rule ' .. k)
   for rk, rv in sorted(v) do

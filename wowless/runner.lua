@@ -4,6 +4,9 @@ local function run(cfg)
   assert(cfg.product, 'missing product')
   local loglevel = cfg.loglevel or 0
   local time0 = os.clock()
+  if cfg.output then
+    io.output(cfg.output)
+  end
   local function log(level, fmt, ...)
     if level <= loglevel then
       io.write(string.format('[%.3f] ' .. fmt .. '\n', os.clock() - time0, ...))
@@ -88,12 +91,12 @@ local function run(cfg)
     UserData(genv.UIParent):SetSize(system.GetScreenWidth(), system.GetScreenHeight())
   end
   SendEvent('SPELLS_CHANGED')
-  if cfg.frame0 then
+  if cfg.frame0 and cfg.output then
     local render = require('wowless.render')
     local screenWidth, screenHeight = system.GetScreenWidth(), system.GetScreenHeight()
     local function doit(name)
       local data = render.frames2rects(api.frames, cfg.product, screenWidth, screenHeight)
-      local fn = 'out/' .. cfg.product .. '/' .. name .. '.yaml'
+      local fn = path.join(path.dirname(cfg.output), name .. '.yaml')
       require('pl.file').write(fn, require('wowapi.yaml').pprint(data))
     end
     doit('frame0')

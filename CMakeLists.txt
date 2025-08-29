@@ -1213,6 +1213,7 @@ add_lua_executable(
   wowlessyaml)
 
 set(outs)
+set(pngs)
 foreach(product ${products})
   set(out products/${product}/log.txt)
   list(APPEND outs ${out})
@@ -1224,8 +1225,27 @@ foreach(product ${products})
       ${CMAKE_CURRENT_BINARY_DIR}/${out}
     DEPENDS wowless testaddon.txt ${product}_addon.txt ${product}_data.sqlite3
     WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
+  add_custom_command(
+    OUTPUT products/${product}/frame0.yaml products/${product}/frame1.yaml
+    COMMAND wowless run -p ${product} -e0 -o
+            ${CMAKE_CURRENT_BINARY_DIR}/products/${product}/frame0.txt --frame0
+    DEPENDS wowless ${product}_data.sqlite3
+    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
+  add_custom_command(
+    OUTPUT products/${product}/frame0.png
+    COMMAND render products/${product}/frame0.yaml
+    DEPENDS render products/${product}/frame0.yaml
+            runtime/products/${product}/build.lua)
+  add_custom_command(
+    OUTPUT products/${product}/frame1.png
+    COMMAND render products/${product}/frame1.yaml
+    DEPENDS render products/${product}/frame1.yaml
+            runtime/products/${product}/build.lua)
+  list(APPEND pngs products/${product}/frame0.png
+       products/${product}/frame1.png)
 endforeach()
 add_custom_target(outs DEPENDS ${outs})
+add_custom_target(pngs DEPENDS ${pngs})
 
 add_lua_executable(
   runtests

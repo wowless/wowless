@@ -11,7 +11,7 @@ local parseYaml = require('wowapi.yaml').parseFile
 local data = parseYaml(args.input)
 
 local fetch = (function()
-  local build = parseYaml('data/products/' .. data.product .. '/build.yaml')
+  local build = dofile('runtime/products/' .. data.product .. '/build.lua')
   local fetch = require('tactless')(data.product, build.hash)
   if not fetch then
     print('unable to open ' .. build.hash)
