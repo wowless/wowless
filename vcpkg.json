@@ -6,9 +6,14 @@
     "libyaml",
     "openssl",
     "sdl3",
-    "sdl3-image",
     "sqlite3",
     "utf8h",
-    "zlib"
+    "zlib",
+    {
+      "features": [
+        "png"
+      ],
+      "name": "sdl3-image"
+    }
   ]
 }
