@@ -5,6 +5,8 @@
     "libpng",
     "libyaml",
     "openssl",
+    "sdl3",
+    "sdl3-image",
     "sqlite3",
     "utf8h",
     "zlib"
