@@ -39,7 +39,13 @@ static int createSurfaceFromRGBA(lua_State *L) {
   return 1;
 }
 
-static int saveBMP(lua_State *L) {
+static int surfaceHeight(lua_State *L) {
+  surface *sur = luaL_checkudata(L, 1, "tools.sdl.surface");
+  lua_pushnumber(L, sur->sdl->h);
+  return 1;
+}
+
+static int surfaceSaveBMP(lua_State *L) {
   surface *sur = luaL_checkudata(L, 1, "tools.sdl.surface");
   const char *file = luaL_checkstring(L, 2);
   if (!SDL_SaveBMP(sur->sdl, file)) {
@@ -48,13 +54,23 @@ static int saveBMP(lua_State *L) {
   return 0;
 }
 
+static int surfaceWidth(lua_State *L) {
+  surface *sur = luaL_checkudata(L, 1, "tools.sdl.surface");
+  lua_pushnumber(L, sur->sdl->w);
+  return 1;
+}
+
 int luaopen_tools_sdl(lua_State *L) {
   SDL_Init(SDL_INIT_VIDEO);
   atexit(SDL_Quit);
   if (luaL_newmetatable(L, "tools.sdl.surface")) {
     lua_newtable(L);
-    lua_pushcfunction(L, saveBMP);
+    lua_pushcfunction(L, surfaceHeight);
+    lua_setfield(L, -2, "height");
+    lua_pushcfunction(L, surfaceSaveBMP);
     lua_setfield(L, -2, "SaveBMP");
+    lua_pushcfunction(L, surfaceWidth);
+    lua_setfield(L, -2, "width");
     lua_setfield(L, -2, "__index");
     lua_pushcfunction(L, surfaceGC);
     lua_setfield(L, -2, "__gc");
