@@ -8,12 +8,6 @@
     "sdl3",
     "sqlite3",
     "utf8h",
-    "zlib",
-    {
-      "features": [
-        "png"
-      ],
-      "name": "sdl3-image"
-    }
+    "zlib"
   ]
 }

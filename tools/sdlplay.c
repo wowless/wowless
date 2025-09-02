@@ -1,18 +1,29 @@
+#include <stdio.h>
 #include <stdlib.h>
 
 #include "SDL3/SDL.h"
-#include "SDL3_image/SDL_image.h"
 
 int main(int argc, char **argv) {
+  if (argc != 2) {
+    fputs("usage: sdlplay file.bmp\n", stderr);
+    return EXIT_FAILURE;
+  }
   if (!SDL_Init(SDL_INIT_VIDEO)) {
     SDL_LogCritical(SDL_LOG_CATEGORY_APPLICATION,
                     "could not initialize SDL: %s", SDL_GetError());
+    return EXIT_FAILURE;
+  }
+  SDL_Surface *bmp = SDL_LoadBMP(argv[1]);
+  if (!bmp) {
+    SDL_LogCritical(SDL_LOG_CATEGORY_APPLICATION, "could not load bitmap: %s",
+                    SDL_GetError());
     return EXIT_FAILURE;
   }
   SDL_Window *win = SDL_CreateWindow("moo", 640, 480, 0);
   if (!win) {
     SDL_LogCritical(SDL_LOG_CATEGORY_APPLICATION,
                     "could not create SDL window: %s", SDL_GetError());
+    SDL_DestroySurface(bmp);
     SDL_Quit();
     return EXIT_FAILURE;
   }
@@ -25,12 +36,15 @@ int main(int argc, char **argv) {
     SDL_LogCritical(SDL_LOG_CATEGORY_APPLICATION,
                     "could not create SDL renderer: %s", SDL_GetError());
     SDL_DestroyWindow(win);
+    SDL_DestroySurface(bmp);
     SDL_Quit();
     return EXIT_FAILURE;
   }
-  SDL_Texture *tex = IMG_LoadTexture(ren, "spec/wowless/temp.png");
+  SDL_Texture *tex = SDL_CreateTextureFromSurface(ren, bmp);
+  SDL_DestroySurface(bmp);
   if (!tex) {
-    SDL_LogCritical(SDL_LOG_CATEGORY_APPLICATION, "could not load texture");
+    SDL_LogCritical(SDL_LOG_CATEGORY_APPLICATION,
+                    "could not load texture from surface: %s", SDL_GetError());
     SDL_DestroyRenderer(ren);
     SDL_DestroyWindow(win);
     SDL_Quit();

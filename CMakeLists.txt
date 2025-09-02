@@ -1332,6 +1332,5 @@ add_lua_executable(yamlfmt ${CMAKE_CURRENT_SOURCE_DIR}/tools/yamlfmt.lua
                    penlight wowlessyaml)
 
 find_package(SDL3 CONFIG REQUIRED)
-find_package(SDL3_image CONFIG REQUIRED)
 add_executable(sdlplay tools/sdlplay.c)
-target_link_libraries(sdlplay PRIVATE SDL3_image::SDL3_image-static)
+target_link_libraries(sdlplay PRIVATE SDL3::SDL3)
