@@ -43,8 +43,11 @@ local layers = {
   HIGHLIGHT = 5,
 }
 
-local surfaces = {}
-local function getsurface(path)
+local screensurface = sdl.CreateSurface(data.screenWidth, data.screenHeight)
+local renderer = screensurface:CreateSoftwareRenderer()
+
+local textures = {}
+local function gettexture(path)
   local fpath
   if tonumber(path) then
     fpath = tonumber(path)
@@ -54,17 +57,20 @@ local function getsurface(path)
       fpath = fpath .. '.blp'
     end
   end
-  local prev = surfaces[fpath]
+  local prev = textures[fpath]
   if prev then
     return prev
   end
   local content = fetch(fpath)
-  local success, surface = pcall(function()
-    return sdl.CreateSurfaceFromRGBA(parseblp(content))
+  local success, texture = pcall(function()
+    local surface = sdl.CreateSurface(parseblp(content))
+    return renderer:CreateTextureFromSurface(surface)
   end)
   if success then
-    surfaces[fpath] = surface
-    return surface
+    textures[fpath] = texture
+    return texture
+  else
+    print('womp ' .. tostring(texture))
   end
 end
 
@@ -88,11 +94,11 @@ for _, f in ipairs(data.frames) do
       local x = v.content.texture.path
       x = x ~= 'FileData ID 0' and x or nil
       if x and left < right and top < bottom then
-        getsurface(x)
+        gettexture(x)
       end
     end
   end
 end
-for k, v in pairs(surfaces) do
-  v:SaveBMP('asdf_' .. tostring(k):gsub('/', '_') .. '.bmp')
+for k, v in pairs(textures) do
+  print(k, v:Width(), v:Height())
 end
