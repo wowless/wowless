@@ -80,9 +80,11 @@ lies:
     ViewRaidSize:
     WarbandEventState:
     WarbandGroupFlags:
+    WarbandPlacementDisplayInfoType:
     WarbandSceneAnimationEvent:
     WarbandSceneAnimationSheatheState:
     WarbandSceneAnimationStandState:
+    WarbandSceneAnimationStandStateFlags:
     WarbandScenePlacementType:
   extra_events:
     EDIT_MODE_LAYOUTS_UPDATED:
