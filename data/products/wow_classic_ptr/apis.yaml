@@ -641,15 +641,15 @@ C_AddOnProfiler.MeasureCall:
   inputs:
   - name: func
     type: table
-  - name: unpackedPrimitiveType
-    type: number
+  - name: arguments
+    type: table
   instride: 1
   outputs:
   - name: results
     type:
       structure: C_AddOnProfiler.AddOnProfilerCallResults
-  - name: unpackedPrimitiveType
-    type: number
+  - name: returns
+    type: table
   outstride: 1
 C_AddOns.DisableAddOn:
   inputs:
@@ -698,7 +698,7 @@ C_AddOns.GetAddOnDependencies:
   - name: name
     type: uiAddon
   outputs:
-  - name: unpackedPrimitiveType
+  - name: deps
     type: string
   outstride: 1
 C_AddOns.GetAddOnEnableState:
@@ -763,7 +763,7 @@ C_AddOns.GetAddOnOptionalDependencies:
   - name: name
     type: uiAddon
   outputs:
-  - name: unpackedPrimitiveType
+  - name: deps
     type: string
   outstride: 1
 C_AddOns.GetNumAddOns:
@@ -3220,6 +3220,20 @@ C_ChatInfo.SendCautionaryChatMessage:
   - name: confirmNumber
     type: number
   outputs:
+C_ChatInfo.SendChatMessage:
+  inputs:
+  - name: message
+    type: string
+  - name: chatType
+    nilable: true
+    type: string
+  - name: languageID
+    nilable: true
+    type: number
+  - name: target
+    nilable: true
+    type: string
+  outputs:
 C_ChatInfo.SwapChatChannelsByChannelIndex:
   inputs:
   - name: firstChannelIndex
@@ -3251,6 +3265,13 @@ C_Club.AdvanceStreamViewMarker:
   - name: streamId
     type: string
   outputs:
+C_Club.AreMembersReady:
+  inputs:
+  - name: clubId
+    type: string
+  outputs:
+  - name: membersReady
+    type: boolean
 C_Club.AssignMemberRole:
   inputs:
   - name: clubId
@@ -3439,6 +3460,11 @@ C_Club.Flush:
   outputs:
 C_Club.FocusCommunityStreams:
   inputs:
+  outputs:
+C_Club.FocusMembers:
+  inputs:
+  - name: clubId
+    type: string
   outputs:
 C_Club.FocusStream:
   inputs:
@@ -3931,6 +3957,11 @@ C_Club.UnfocusAllStreams:
   inputs:
   - name: unsubscribe
     type: boolean
+  outputs:
+C_Club.UnfocusMembers:
+  inputs:
+  - name: clubId
+    type: string
   outputs:
 C_Club.UnfocusStream:
   inputs:
@@ -5542,6 +5573,16 @@ C_Container.GetItemCooldown:
     type: number
   - name: enable
     type: number
+C_Container.HasContainerItem:
+  inputs:
+  - name: containerIndex
+    type:
+      enum: BagIndex
+  - name: slotIndex
+    type: number
+  outputs:
+  - name: hasItem
+    type: boolean
 C_Container.IsBagSlotFlagEnabledOnOtherBankBags:
   inputs:
   - name: bagIndex
@@ -8375,6 +8416,16 @@ C_LFGInfo.GetDungeonInfo:
   - name: dungeonInfo
     type:
       structure: C_LFGInfo.LFGDungeonInfo
+C_LFGInfo.GetLevelUpInstances:
+  inputs:
+  - name: currPlayerLevel
+    type: number
+  - name: isRaid
+    type: boolean
+  outputs:
+  - name: instances
+    type:
+      arrayof: number
 C_LFGInfo.GetLFDLockStates:
   inputs:
   outputs:
@@ -8608,6 +8659,15 @@ C_LFGList.GetFilteredSearchResults:
   - name: filteredResults
     type:
       arrayof: number
+C_LFGList.GetGroupLeaverCountsByRole:
+  inputs:
+  outputs:
+  - name: tankLeavers
+    type: number
+  - name: healerLeavers
+    type: number
+  - name: damageLeavers
+    type: number
 C_LFGList.GetKeystoneForActivity:
   inputs:
   - name: activityID
@@ -9906,6 +9966,9 @@ C_MythicPlus.GetRunHistory:
   - default: false
     name: includeIncompleteRuns
     type: boolean
+  - default: false
+    name: currentSeasonOnly
+    type: boolean
   outputs:
   - name: runs
     type:
@@ -10138,6 +10201,13 @@ C_PartyInfo.GetActiveCategories:
   - name: categories
     type:
       arrayof: number
+C_PartyInfo.GetAvailableLootMethods:
+  inputs:
+  outputs:
+  - name: methods
+    type:
+      arrayof:
+        enum: LootMethod
 C_PartyInfo.GetInviteConfirmationInvalidQueues:
   inputs:
   - name: inviteGUID
@@ -10148,6 +10218,18 @@ C_PartyInfo.GetInviteConfirmationInvalidQueues:
     type:
       arrayof:
         structure: QueueSpecificInfo
+C_PartyInfo.GetLootMethod:
+  inputs:
+  outputs:
+  - name: method
+    type:
+      enum: LootMethod
+  - name: masterLootPartyID
+    nilable: true
+    type: number
+  - name: masterLooterRaidID
+    nilable: true
+    type: number
 C_PartyInfo.GetMinLevel:
   inputs:
   - name: category
@@ -10176,6 +10258,17 @@ C_PartyInfo.IsPartyFull:
     type: number
   outputs:
   - name: isFull
+    type: boolean
+C_PartyInfo.SetLootMethod:
+  inputs:
+  - name: method
+    type:
+      enum: LootMethod
+  - name: lootMaster
+    nilable: true
+    type: string
+  outputs:
+  - name: success
     type: boolean
 C_PetBattles.AcceptPVPDuel:
 C_PetBattles.AcceptQueuedPVPMatch:
@@ -10357,6 +10450,15 @@ C_PetBattles.StartPVPMatchmaking:
 C_PetBattles.StopPVPMatchmaking:
 C_PetBattles.UseAbility:
 C_PetBattles.UseTrap:
+C_PetInfo.GetPetTalentTree:
+  inputs:
+  mayreturnnothing: true
+  outputs:
+  - name: talentTreeName
+    type: string
+C_PetInfo.PetAssistMode:
+  inputs:
+  outputs:
 C_PetJournal.CagePetByID:
 C_PetJournal.ClearFanfare:
 C_PetJournal.ClearHoveredBattlePet:
@@ -12001,6 +12103,11 @@ C_SpecializationInfo.SetActiveSpecGroup:
   - name: groupIndex
     type: number
   outputs:
+C_Spell.CancelSpellByID:
+  inputs:
+  - name: spellID
+    type: number
+  outputs:
 C_Spell.DoesSpellExist:
   inputs:
   - name: spellIdentifier
@@ -12248,6 +12355,13 @@ C_Spell.TargetSpellReplacesBonusTree:
   outputs:
   - name: result
     type: boolean
+C_SpellActivationOverlay.IsSpellOverlayed:
+  inputs:
+  - name: spellID
+    type: number
+  outputs:
+  - name: isSpellOverlayed
+    type: boolean
 C_SpellBook.HasPetSpells:
   inputs:
   mayreturnnothing: true
@@ -12256,6 +12370,45 @@ C_SpellBook.HasPetSpells:
     type: number
   - name: petNameToken
     type: string
+C_SpellBook.IsSpellInSpellBook:
+  inputs:
+  - name: spellID
+    type: number
+  - default: 0
+    name: spellBank
+    type:
+      enum: SpellBookSpellBank
+  - default: true
+    name: includeOverrides
+    type: boolean
+  outputs:
+  - name: isInSpellBook
+    type: boolean
+C_SpellBook.IsSpellKnown:
+  inputs:
+  - name: spellID
+    type: number
+  - default: 0
+    name: spellBank
+    type:
+      enum: SpellBookSpellBank
+  outputs:
+  - name: isKnown
+    type: boolean
+C_SpellBook.IsSpellKnownOrInSpellBook:
+  inputs:
+  - name: spellID
+    type: number
+  - default: 0
+    name: spellBank
+    type:
+      enum: SpellBookSpellBank
+  - default: true
+    name: includeOverrides
+    type: boolean
+  outputs:
+  - name: isKnownOrInSpellBook
+    type: boolean
 C_StableInfo.GetNumActivePets:
   inputs:
   outputs:
@@ -15739,6 +15892,9 @@ ConfirmBinder:
 ConfirmBNRequestInviteFriend:
 ConfirmLootRoll:
 ConfirmLootSlot:
+ConfirmPetUnlearn:
+  inputs:
+  outputs:
 ConfirmReadyCheck:
 ConfirmTalentWipe:
   inputs:
@@ -15893,6 +16049,15 @@ CreateFrame:
   - name: frame
     type:
       uiobject: Frame
+CreateFromMixins:
+  impl: CreateFromMixins
+  inputs:
+  - name: mixins
+    type: table
+  instride: 1
+  outputs:
+  - name: object
+    type: table
 CreateMacro:
 CreateNewRaidProfile:
 CreateWindow:
@@ -16580,7 +16745,7 @@ GetAvailableLocales:
     name: ignoreLocaleRestrictions
     type: boolean
   outputs:
-  - name: unpackedPrimitiveType
+  - name: localeName
     type: string
   outstride: 1
 GetAvailableQuestInfo:
@@ -16743,7 +16908,7 @@ GetBlockChance:
 GetBonusBarIndex:
 GetBonusBarOffset:
 GetBuildInfo:
-  impl: GetBuildInfo_3_4_2
+  impl: GetBuildInfo_1_15_0
   inputs:
   outputs:
   - name: version
@@ -17440,6 +17605,7 @@ GetFonts:
   inputs:
   outputs:
   - name: fontNames
+    stub:
     type:
       arrayof: string
 GetFontStringMetatable:
@@ -18005,16 +18171,6 @@ GetLegacyRaidDifficultyID:
   - name: result
     nilable: true
     type: number
-GetLevelUpInstances:
-  inputs:
-  - name: currPlayerLevel
-    type: number
-  - name: isRaid
-    type: boolean
-  outputs:
-  - name: instances
-    type:
-      arrayof: number
 GetLFDChoiceCollapseState:
   inputs:
   - name: LFGCollapseList
@@ -18338,16 +18494,6 @@ GetLooseMacroIcons:
   outputs:
 GetLooseMacroItemIcons:
 GetLootInfo:
-GetLootMethod:
-  inputs:
-  outputs:
-  - name: lootMethod
-    stub: freeforall
-    type: string
-  - name: partyMaster
-    type: number
-  - name: raidMaster
-    type: number
 GetLootRollItemInfo:
   inputs:
   - name: rollID
@@ -19185,7 +19331,6 @@ GetPetSpellBonusDamage:
   outputs:
   - name: spellDamageBonus
     type: number
-GetPetTalentTree:
 GetPetTimeRemaining:
 GetPetTrainingPoints:
   inputs:
@@ -21476,7 +21621,6 @@ IsPlayerMoving:
   - name: result
     type: boolean
 IsPlayerNeutral:
-IsPlayerSpell:
 IsPossessBarVisible:
 IsPublicBuild:
   impl: IsPublicBuild
@@ -21564,18 +21708,6 @@ IsShiftKeyDown:
 IsSpellClassOrSpec:
 IsSpellHidden:
 IsSpellInRange:
-IsSpellKnown:
-IsSpellKnownOrOverridesKnown:
-  inputs:
-  - name: spellID
-    type: number
-  - name: isPet
-    nilable: true
-    type: boolean
-  outputs:
-  - name: value
-    type: boolean
-IsSpellOverlayed:
 IsStackableAction:
 IsStealthed:
   inputs:
@@ -21857,6 +21989,17 @@ math.tan:
   impl: math.tan
 math.tanh:
   impl: math.tanh
+Mixin:
+  impl: Mixin
+  inputs:
+  - name: object
+    type: table
+  - name: mixins
+    type: table
+  instride: 1
+  outputs:
+  - name: outObject
+    type: table
 MouselookStart:
 MouselookStop:
 MouseOverrideCinematicDisable:
@@ -21940,7 +22083,6 @@ pcallwithenv:
   impl: pcallwithenv
 PetAbandon:
 PetAggressiveMode:
-PetAssistMode:
 PetAttack:
   inputs:
   - name: unit
@@ -22022,6 +22164,11 @@ PlayerHasToy:
     type: number
   outputs:
   - name: value
+    type: boolean
+PlayerIsInCombat:
+  inputs:
+  outputs:
+  - name: playerIsInCombat
     type: boolean
 PlayerIsPVPInactive:
   inputs:
@@ -22300,19 +22447,6 @@ SelectTrainerService:
 SellCursorItem:
   inputs:
   outputs:
-SendChatMessage:
-  inputs:
-  - name: message
-    type: string
-  - name: type
-    type: string
-  - name: languageID
-    nilable: true
-    type: number
-  - name: target
-    nilable: true
-    type: string
-  outputs:
 SendMail:
 SendSystemMessage:
   impl: SendSystemMessage
@@ -22465,7 +22599,6 @@ SetLFGDungeon:
 SetLFGDungeonEnabled:
 SetLFGHeaderCollapsed:
 SetLFGRoles:
-SetLootMethod:
 SetLootPortrait:
 SetLootSpecialization:
   inputs:
@@ -22620,13 +22753,6 @@ ShouldKnowUnitHealth:
     type: unit
   outputs:
   - name: shouldKnowUnitHealth
-    type: boolean
-ShowBossFrameWhenUninteractable:
-  inputs:
-  - name: unit
-    type: unit
-  outputs:
-  - name: result
     type: boolean
 ShowBuybackSellCursor:
 ShowCloak:
