@@ -37,37 +37,49 @@ static lua_Number optnum(lua_State *L, int idx, const char *f, lua_Number def) {
 static int rendererRenderGeometry(lua_State *L) {
   SDL_Renderer **ren = luaL_checkudata(L, 1, "tools.sdl.renderer");
   SDL_Texture **tex = luaL_checkudata(L, 2, "tools.sdl.texture");
-  int n = lua_gettop(L);
-  for (int i = 3; i <= n; ++i) {
-    luaL_checktype(L, i, LUA_TTABLE);
-  }
-  SDL_Vertex *vertices = malloc((n - 2) * sizeof(*vertices));
-  if (!vertices) {
+  luaL_checktype(L, 3, LUA_TTABLE);
+  luaL_checktype(L, 4, LUA_TTABLE);
+  lua_settop(L, 4);
+  int nv = lua_objlen(L, 3);
+  int ni = lua_objlen(L, 4);
+  SDL_Vertex *vertices = malloc(nv * sizeof(*vertices));
+  int *indices = malloc(ni * sizeof(*indices));
+  if (!vertices || !indices) {
+    free(vertices);
+    free(indices);
     return luaL_error(L, "out of memory");
   }
-  for (int i = 3; i <= n; ++i) {
-    *(vertices + i - 3) = (SDL_Vertex){
+  for (int i = 1; i <= nv; ++i) {
+    lua_rawgeti(L, 3, i);
+    vertices[i - 1] = (SDL_Vertex){
         .color =
             {
-                    .r = optnum(L, i, "r", 1),
-                    .g = optnum(L, i, "g", 1),
-                    .b = optnum(L, i, "b", 1),
-                    .a = optnum(L, i, "a", 1),
+                    .r = optnum(L, 5, "r", 1),
+                    .g = optnum(L, 5, "g", 1),
+                    .b = optnum(L, 5, "b", 1),
+                    .a = optnum(L, 5, "a", 1),
                     },
         .position =
             {
-                    .x = optnum(L, i, "px", 0),
-                    .y = optnum(L, i, "py", 0),
+                    .x = optnum(L, 5, "px", 0),
+                    .y = optnum(L, 5, "py", 0),
                     },
         .tex_coord =
             {
-                    .x = optnum(L, i, "tx", 0),
-                    .y = optnum(L, i, "ty", 0),
+                    .x = optnum(L, 5, "tx", 0),
+                    .y = optnum(L, 5, "ty", 0),
                     },
     };
+    lua_pop(L, 1);
   }
-  bool okay = SDL_RenderGeometry(*ren, *tex, vertices, n - 2, 0, 0);
+  for (int i = 1; i <= ni; ++i) {
+    lua_rawgeti(L, 4, i);
+    indices[i - 1] = lua_tonumber(L, -1) - 1;
+    lua_pop(L, 1);
+  }
+  bool okay = SDL_RenderGeometry(*ren, *tex, vertices, nv, indices, ni);
   free(vertices);
+  free(indices);
   if (!okay) {
     return luaL_error(L, "SDL error: %s", SDL_GetError());
   }
