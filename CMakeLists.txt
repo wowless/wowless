@@ -1333,8 +1333,6 @@ add_lua_executable(yamlfmt ${CMAKE_CURRENT_SOURCE_DIR}/tools/yamlfmt.lua
 
 if(NOT CMAKE_SYSTEM_NAME STREQUAL "Linux")
   find_package(SDL3 CONFIG REQUIRED)
-  add_executable(sdlplay tools/sdlplay.c)
-  target_link_libraries(sdlplay PRIVATE SDL3::SDL3)
   lua2c(toolssdl tools.sdl=c)
   target_sources(toolssdl PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/tools/sdl.c)
   target_link_libraries(toolssdl PRIVATE SDL3::SDL3)
