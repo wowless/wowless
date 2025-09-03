@@ -100,5 +100,7 @@ for _, f in ipairs(data.frames) do
   end
 end
 for k, v in pairs(textures) do
-  print(k, v:Width(), v:Height())
+  renderer:RenderTexture(v)
+  screensurface:SaveBMP('asdf_' .. tostring(k):gsub('/', '_') .. '.bmp')
+  renderer:RenderClear()
 end
