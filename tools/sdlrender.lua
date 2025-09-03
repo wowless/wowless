@@ -92,7 +92,6 @@ local function render(region)
   if not sdltex then
     return
   end
-  sdltex:SetTextureBlendMode(tex.blendMode == 'ADD' and 'add' or 'none')
   local c = tex.coords
   renderer:RenderGeometry(sdltex, {
     { px = left, py = top, tx = c.tlx, ty = c.tly },
