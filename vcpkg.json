@@ -5,9 +5,12 @@
     "libpng",
     "libyaml",
     "openssl",
-    "sdl3",
     "sqlite3",
     "utf8h",
-    "zlib"
+    "zlib",
+    {
+      "default-features": false,
+      "name": "sdl3"
+    }
   ]
 }
