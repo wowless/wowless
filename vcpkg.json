@@ -7,6 +7,10 @@
     "openssl",
     "sqlite3",
     "utf8h",
-    "zlib"
+    "zlib",
+    {
+      "name": "sdl3",
+      "platform": "!linux"
+    }
   ]
 }
