@@ -92,7 +92,7 @@ local function render(region)
   if not sdltex then
     return
   end
-  sdltex:SetTextureBlendMode('blend')
+  sdltex:SetTextureBlendMode(tex.blendMode == 'ADD' and 'add' or 'none')
   renderer:RenderTexture(sdltex)
 end
 

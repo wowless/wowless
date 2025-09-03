@@ -109,8 +109,9 @@ static int textureHeight(lua_State *L) {
 }
 
 static int blendmodes[] = {SDL_BLENDMODE_ADD, SDL_BLENDMODE_BLEND,
-                           SDL_BLENDMODE_MOD, SDL_BLENDMODE_MUL};
-static const char *blendmodeopt[] = {"add", "blend", "mod", "mul", 0};
+                           SDL_BLENDMODE_MOD, SDL_BLENDMODE_MUL,
+                           SDL_BLENDMODE_NONE};
+static const char *blendmodeopt[] = {"add", "blend", "mod", "mul", "none", 0};
 
 static int textureSetTextureBlendMode(lua_State *L) {
   SDL_Texture **tex = luaL_checkudata(L, 1, "tools.sdl.texture");
