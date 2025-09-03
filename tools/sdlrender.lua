@@ -101,6 +101,7 @@ for _, f in ipairs(data.frames) do
 end
 for k, v in pairs(textures) do
   renderer:RenderTexture(v)
+  renderer:RenderPresent()
   screensurface:SaveBMP('asdf_' .. tostring(k):gsub('/', '_') .. '.bmp')
   renderer:RenderClear()
 end

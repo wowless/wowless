@@ -27,6 +27,14 @@ static int rendererRenderClear(lua_State *L) {
   return 0;
 }
 
+static int rendererRenderPresent(lua_State *L) {
+  SDL_Renderer **ren = luaL_checkudata(L, 1, "tools.sdl.renderer");
+  if (!SDL_RenderPresent(*ren)) {
+    return luaL_error(L, "SDL error: %s", SDL_GetError());
+  }
+  return 0;
+}
+
 static int rendererRenderTexture(lua_State *L) {
   SDL_Renderer **ren = luaL_checkudata(L, 1, "tools.sdl.renderer");
   SDL_Texture **tex = luaL_checkudata(L, 2, "tools.sdl.texture");
@@ -135,6 +143,8 @@ int luaopen_tools_sdl(lua_State *L) {
     lua_setfield(L, -2, "CreateTextureFromSurface");
     lua_pushcfunction(L, rendererRenderClear);
     lua_setfield(L, -2, "RenderClear");
+    lua_pushcfunction(L, rendererRenderPresent);
+    lua_setfield(L, -2, "RenderPresent");
     lua_pushcfunction(L, rendererRenderTexture);
     lua_setfield(L, -2, "RenderTexture");
     lua_setfield(L, -2, "__index");
