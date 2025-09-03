@@ -108,6 +108,19 @@ static int textureHeight(lua_State *L) {
   return 1;
 }
 
+static int blendmodes[] = {SDL_BLENDMODE_ADD, SDL_BLENDMODE_BLEND,
+                           SDL_BLENDMODE_MOD, SDL_BLENDMODE_MUL};
+static const char *blendmodeopt[] = {"add", "blend", "mod", "mul", 0};
+
+static int textureSetTextureBlendMode(lua_State *L) {
+  SDL_Texture **tex = luaL_checkudata(L, 1, "tools.sdl.texture");
+  int mode = luaL_checkoption(L, 2, 0, blendmodeopt);
+  if (!SDL_SetTextureBlendMode(*tex, blendmodes[mode])) {
+    return luaL_error(L, "SDL error: %s", SDL_GetError());
+  }
+  return 0;
+}
+
 static int textureWidth(lua_State *L) {
   SDL_Texture **tex = luaL_checkudata(L, 1, "tools.sdl.texture");
   lua_pushnumber(L, (*tex)->w);
@@ -171,6 +184,8 @@ int luaopen_tools_sdl(lua_State *L) {
     lua_newtable(L);
     lua_pushcfunction(L, textureHeight);
     lua_setfield(L, -2, "Height");
+    lua_pushcfunction(L, textureSetTextureBlendMode);
+    lua_setfield(L, -2, "SetTextureBlendMode");
     lua_pushcfunction(L, textureWidth);
     lua_setfield(L, -2, "Width");
     lua_setfield(L, -2, "__index");

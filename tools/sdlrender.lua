@@ -17,9 +17,6 @@ do
   end
 end
 
-local out = args.output or require('pl.path').splitext(args.input) .. '.bmp'
-print(out)
-
 local parseblp = require('wowless.blp').read
 local sdl = require('tools.sdl')
 
@@ -74,6 +71,31 @@ local function gettexture(path)
   end
 end
 
+local function render(region)
+  local tex = region.content.texture
+  if not tex or tex.alpha <= 0 or tex.drawLayer == 'HIGHLIGHT' then
+    return
+  end
+  local path = tex.path
+  if not path or path == 'FileData ID 0' then
+    return
+  end
+  local rect = region.rect
+  local left = rect.left
+  local top = data.screenHeight - rect.top
+  local right = rect.right
+  local bottom = data.screenHeight - rect.bottom
+  if left >= right or top >= bottom then
+    return
+  end
+  local sdltex = gettexture(path)
+  if not sdltex then
+    return
+  end
+  sdltex:SetTextureBlendMode('blend')
+  renderer:RenderTexture(sdltex)
+end
+
 table.sort(data.frames, function(a, b)
   local sa = strata[a.strata] or 0
   local sb = strata[b.strata] or 0
@@ -87,21 +109,11 @@ for _, f in ipairs(data.frames) do
     local lb = layers[bb.drawLayer] or 0
     return la < lb or la == lb and (aa.drawSubLayer or 0) < (bb.drawSubLayer or 0)
   end)
-  for _, v in ipairs(f.regions) do
-    if v.content.texture and v.content.texture.drawLayer ~= 'HIGHLIGHT' then
-      local r = v.rect
-      local left, top, right, bottom = r.left, data.screenHeight - r.top, r.right, data.screenHeight - r.bottom
-      local x = v.content.texture.path
-      x = x ~= 'FileData ID 0' and x or nil
-      if x and left < right and top < bottom then
-        gettexture(x)
-      end
-    end
+  for _, region in ipairs(f.regions) do
+    render(region)
   end
 end
-for k, v in pairs(textures) do
-  renderer:RenderTexture(v)
-  renderer:RenderPresent()
-  screensurface:SaveBMP('asdf_' .. tostring(k):gsub('/', '_') .. '.bmp')
-  renderer:RenderClear()
-end
+renderer:RenderPresent()
+local out = args.output or require('pl.path').splitext(args.input) .. '.bmp'
+screensurface:SaveBMP(out)
+print(out)
