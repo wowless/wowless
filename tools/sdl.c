@@ -27,6 +27,53 @@ static int rendererRenderClear(lua_State *L) {
   return 0;
 }
 
+static lua_Number optnum(lua_State *L, int idx, const char *f, lua_Number def) {
+  lua_getfield(L, idx, f);
+  lua_Number ret = lua_isnumber(L, -1) ? lua_tonumber(L, -1) : def;
+  lua_pop(L, 1);
+  return ret;
+}
+
+static int rendererRenderGeometry(lua_State *L) {
+  SDL_Renderer **ren = luaL_checkudata(L, 1, "tools.sdl.renderer");
+  SDL_Texture **tex = luaL_checkudata(L, 2, "tools.sdl.texture");
+  int n = lua_gettop(L);
+  for (int i = 3; i <= n; ++i) {
+    luaL_checktype(L, i, LUA_TTABLE);
+  }
+  SDL_Vertex *vertices = malloc((n - 2) * sizeof(*vertices));
+  if (!vertices) {
+    return luaL_error(L, "out of memory");
+  }
+  for (int i = 3; i <= n; ++i) {
+    *(vertices + i - 3) = (SDL_Vertex){
+        .color =
+            {
+                    .r = optnum(L, i, "r", 1),
+                    .g = optnum(L, i, "g", 1),
+                    .b = optnum(L, i, "b", 1),
+                    .a = optnum(L, i, "a", 1),
+                    },
+        .position =
+            {
+                    .x = optnum(L, i, "px", 0),
+                    .y = optnum(L, i, "py", 0),
+                    },
+        .tex_coord =
+            {
+                    .x = optnum(L, i, "tx", 0),
+                    .y = optnum(L, i, "ty", 0),
+                    },
+    };
+  }
+  bool okay = SDL_RenderGeometry(*ren, *tex, vertices, n - 2, 0, 0);
+  free(vertices);
+  if (!okay) {
+    return luaL_error(L, "SDL error: %s", SDL_GetError());
+  }
+  return 0;
+}
+
 static int rendererRenderPresent(lua_State *L) {
   SDL_Renderer **ren = luaL_checkudata(L, 1, "tools.sdl.renderer");
   if (!SDL_RenderPresent(*ren)) {
@@ -157,6 +204,8 @@ int luaopen_tools_sdl(lua_State *L) {
     lua_setfield(L, -2, "CreateTextureFromSurface");
     lua_pushcfunction(L, rendererRenderClear);
     lua_setfield(L, -2, "RenderClear");
+    lua_pushcfunction(L, rendererRenderGeometry);
+    lua_setfield(L, -2, "RenderGeometry");
     lua_pushcfunction(L, rendererRenderPresent);
     lua_setfield(L, -2, "RenderPresent");
     lua_pushcfunction(L, rendererRenderTexture);

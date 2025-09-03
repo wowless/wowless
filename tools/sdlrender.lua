@@ -93,7 +93,15 @@ local function render(region)
     return
   end
   sdltex:SetTextureBlendMode(tex.blendMode == 'ADD' and 'add' or 'none')
-  renderer:RenderTexture(sdltex)
+  renderer:RenderGeometry(
+    sdltex,
+    { px = left, py = top, tx = 0, ty = 0 },
+    { px = left, py = bottom, tx = 0, ty = 1 },
+    { px = right, py = top, tx = 1, ty = 0 },
+    { px = left, py = bottom, tx = 0, ty = 1 },
+    { px = right, py = top, tx = 1, ty = 0 },
+    { px = right, py = bottom, tx = 1, ty = 1 }
+  )
 end
 
 table.sort(data.frames, function(a, b)
