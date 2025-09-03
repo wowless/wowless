@@ -9,8 +9,8 @@
     "utf8h",
     "zlib",
     {
-      "default-features": false,
-      "name": "sdl3"
+      "name": "sdl3",
+      "platform": "!linux"
     }
   ]
 }
