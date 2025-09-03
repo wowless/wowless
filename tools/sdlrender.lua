@@ -93,14 +93,15 @@ local function render(region)
     return
   end
   sdltex:SetTextureBlendMode(tex.blendMode == 'ADD' and 'add' or 'none')
+  local c = tex.coords
   renderer:RenderGeometry(
     sdltex,
-    { px = left, py = top, tx = 0, ty = 0 },
-    { px = left, py = bottom, tx = 0, ty = 1 },
-    { px = right, py = top, tx = 1, ty = 0 },
-    { px = left, py = bottom, tx = 0, ty = 1 },
-    { px = right, py = top, tx = 1, ty = 0 },
-    { px = right, py = bottom, tx = 1, ty = 1 }
+    { px = left, py = top, tx = c.tlx, ty = c.tly },
+    { px = left, py = bottom, tx = c.blx, ty = c.bly },
+    { px = right, py = top, tx = c.trx, ty = c.try },
+    { px = left, py = bottom, tx = c.blx, ty = c.bly },
+    { px = right, py = top, tx = c.trx, ty = c.try },
+    { px = right, py = bottom, tx = c.brx, ty = c.bry }
   )
 end
 
