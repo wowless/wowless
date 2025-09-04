@@ -19,6 +19,7 @@ end
 
 local parseblp = require('wowless.blp').read
 local sdl = require('tools.sdl')
+local Mixin = require('wowless.mixin').Mixin
 
 local strata = {
   WORLD = 1,
@@ -93,11 +94,17 @@ local function render(region)
     return
   end
   local c = tex.coords
+  local colors = {
+    a = tex.alpha,
+    b = tex.vertexColor.blue,
+    g = tex.vertexColor.green,
+    r = tex.vertexColor.red,
+  }
   renderer:RenderGeometry(sdltex, {
-    { px = left, py = top, tx = c.tlx, ty = c.tly },
-    { px = left, py = bottom, tx = c.blx, ty = c.bly },
-    { px = right, py = top, tx = c.trx, ty = c.try },
-    { px = right, py = bottom, tx = c.brx, ty = c.bry },
+    Mixin({ px = left, py = top, tx = c.tlx, ty = c.tly }, colors),
+    Mixin({ px = left, py = bottom, tx = c.blx, ty = c.bly }, colors),
+    Mixin({ px = right, py = top, tx = c.trx, ty = c.try }, colors),
+    Mixin({ px = right, py = bottom, tx = c.brx, ty = c.bry }, colors),
   }, { 1, 2, 3, 2, 3, 4 })
 end
 

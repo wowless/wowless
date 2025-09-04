@@ -1346,5 +1346,6 @@ if(NOT CMAKE_SYSTEM_NAME STREQUAL "Linux")
     toolssdl
     toolstactless
     wowlessblp
+    wowlessutil
     wowlessyaml)
 endif()
