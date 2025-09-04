@@ -1331,21 +1331,19 @@ add_custom_target(test DEPENDS test.out)
 add_lua_executable(yamlfmt ${CMAKE_CURRENT_SOURCE_DIR}/tools/yamlfmt.lua
                    penlight wowlessyaml)
 
-if(NOT CMAKE_SYSTEM_NAME STREQUAL "Linux")
-  find_package(SDL3 CONFIG REQUIRED)
-  lua2c(toolssdl tools.sdl=c)
-  target_sources(toolssdl PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/tools/sdl.c)
-  target_link_libraries(toolssdl PRIVATE SDL3::SDL3)
-  lua2c(wowlessblp vstruct=p
-        wowless.blp=${CMAKE_CURRENT_SOURCE_DIR}/wowless/blp.lua)
-  add_lua_executable(
-    sdlrender
-    ${CMAKE_CURRENT_SOURCE_DIR}/tools/sdlrender.lua
-    argparse
-    penlight
-    toolssdl
-    toolstactless
-    wowlessblp
-    wowlessutil
-    wowlessyaml)
-endif()
+find_package(SDL3 CONFIG REQUIRED)
+lua2c(toolssdl tools.sdl=c)
+target_sources(toolssdl PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/tools/sdl.c)
+target_link_libraries(toolssdl PRIVATE SDL3::SDL3)
+lua2c(wowlessblp vstruct=p
+      wowless.blp=${CMAKE_CURRENT_SOURCE_DIR}/wowless/blp.lua)
+add_lua_executable(
+  sdlrender
+  ${CMAKE_CURRENT_SOURCE_DIR}/tools/sdlrender.lua
+  argparse
+  penlight
+  toolssdl
+  toolstactless
+  wowlessblp
+  wowlessutil
+  wowlessyaml)
