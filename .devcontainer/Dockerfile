@@ -6,6 +6,7 @@ RUN apt-get update \
         ca-certificates \
         git \
         ninja-build \
+        python3-jinja2 \
         ruby-dev \
     && pip install git+https://github.com/luarocks/hererocks cmake pre-commit \
     && hererocks -l 5.1 -r 3.8.0 /usr/local \
