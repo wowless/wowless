@@ -1152,11 +1152,17 @@ C_CatalogShop.CatalogShopProductDisplayInfo:
     customLoopingSoundStart:
       nilable: true
       type: number
+    decorFileDataID:
+      nilable: true
+      type: number
     defaultCardModelSceneID:
       type: number
     defaultPreviewModelSceneID:
       type: number
     defaultWideCardModelSceneID:
+      type: number
+    gameFlavorID:
+      nilable: true
       type: number
     hasUnknownLicense:
       type: boolean
@@ -1180,6 +1186,12 @@ C_CatalogShop.CatalogShopProductDisplayInfo:
     offHandItemModifiedAppearanceID:
       nilable: true
       type: number
+    otherProductGameTitleBaseTag:
+      nilable: true
+      type: string
+    otherProductGameType:
+      nilable: true
+      type: string
     otherProductImageAtlasName:
       nilable: true
       type: string
@@ -1200,25 +1212,22 @@ C_CatalogShop.CatalogShopProductDisplayInfo:
       type: string
     specialActorID_1:
       nilable: true
-      type: number
+      type: string
     specialActorID_2:
       nilable: true
-      type: number
+      type: string
     specialActorID_3:
       nilable: true
-      type: number
+      type: string
     specialActorID_4:
       nilable: true
-      type: number
+      type: string
     specialActorID_5:
       nilable: true
-      type: number
+      type: string
     spellVisualIDs:
       type:
         arrayof: number
-    subTitleID:
-      nilable: true
-      type: number
 C_CatalogShop.CatalogShopProductInfo:
   fields:
     backgroundTexture:
@@ -1229,11 +1238,18 @@ C_CatalogShop.CatalogShopProductInfo:
       type: number
     description:
       type: string
+    foregroundTexture:
+      nilable: true
+      type: string
     hasTimeRemaining:
       type: boolean
     iconTexture:
       type: string
     isBundle:
+      type: boolean
+    isFullyOwned:
+      type: boolean
+    isHidden:
       type: boolean
     isPurchasePending:
       type: boolean
@@ -1256,12 +1272,14 @@ C_CatalogShop.CatalogShopProductInfo:
       type: string
     price:
       type: string
-    productCardType:
-      type: number
-    purchased:
-      type: boolean
     refundable:
       type: boolean
+    smallCardBGTexture:
+      nilable: true
+      type: string
+    smallCardFGTexture:
+      nilable: true
+      type: string
     speciesID:
       type: number
     subItems:
@@ -1276,6 +1294,12 @@ C_CatalogShop.CatalogShopProductInfo:
       type:
         arrayof:
           structure: C_CatalogShop.CatalogShopVirtualCurrency
+    wideCardBGTexture:
+      nilable: true
+      type: string
+    wideCardFGTexture:
+      nilable: true
+      type: string
 C_CatalogShop.CatalogShopSectionInfo:
   fields:
     cardType:
@@ -5779,6 +5803,7 @@ C_RecentAllies.RecentAllyInteractionData:
 C_RecentAllies.RecentAllyStateData:
   fields:
     currentLocation:
+      nilable: true
       type: string
     hasFriendRequestPending:
       type: boolean

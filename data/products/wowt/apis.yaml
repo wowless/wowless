@@ -3887,6 +3887,7 @@ C_CatalogShop.GetProductInfo:
     type: number
   outputs:
   - name: productInfo
+    nilable: true
     type:
       structure: C_CatalogShop.CatalogShopProductInfo
 C_CatalogShop.GetProductSortOrder:
@@ -9561,6 +9562,19 @@ C_ExpansionTrial.OnTrialLevelUpDialogClicked:
   inputs:
   outputs:
 C_ExpansionTrial.OnTrialLevelUpDialogShown:
+  inputs:
+  outputs:
+C_ExternalEventURL.HasURL:
+  inputs:
+  outputs:
+  - name: hasURL
+    type: boolean
+C_ExternalEventURL.IsNew:
+  inputs:
+  outputs:
+  - name: isNew
+    type: boolean
+C_ExternalEventURL.LaunchURL:
   inputs:
   outputs:
 C_FogOfWar.GetFogOfWarForMap:
@@ -16548,6 +16562,11 @@ C_PlayerInfo.IsPlayerInChromieTime:
   inputs:
   outputs:
   - name: inChromieTime
+    type: boolean
+C_PlayerInfo.IsPlayerInTimerunningHeroicWorldTier:
+  inputs:
+  outputs:
+  - name: inTimerunningHeroicWorldTier
     type: boolean
 C_PlayerInfo.IsPlayerNPERestricted:
   inputs:

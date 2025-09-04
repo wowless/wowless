@@ -164,6 +164,8 @@ Constants:
     MAX_QUEST_WATCHES: 25
     MAX_WORLD_QUEST_WATCHES_AUTOMATIC: 1
     MAX_WORLD_QUEST_WATCHES_MANUAL: 5
+  RecentAlliesConsts:
+    PIN_EXPIRATION_WARNING_DAYS: 5
   SpellBookSpellIDs:
     SPELL_ID_DISMISS_PET: 2641
   SpellCooldownConsts:
@@ -4166,6 +4168,7 @@ Enum:
     MinValue: 0
     NumValues: 20
   ItemCollectionType:
+    ItemCollectionExteriorFixture: 9
     ItemCollectionHeirloom: 2
     ItemCollectionNone: 0
     ItemCollectionRoom: 8
@@ -4175,11 +4178,11 @@ Enum:
     ItemCollectionTransmogIllusion: 6
     ItemCollectionTransmogSetFavorite: 4
     ItemCollectionWarbandScene: 7
-    NumItemCollectionTypes: 8
+    NumItemCollectionTypes: 9
   ItemCollectionTypeMeta:
-    MaxValue: 8
+    MaxValue: 9
     MinValue: 0
-    NumValues: 10
+    NumValues: 11
   ItemCommodityStatus:
     Commodity: 2
     Item: 1
@@ -5719,11 +5722,12 @@ Enum:
     ChromieTime: 3
     Phasing: 0
     Sharding: 1
+    TimerunningHwt: 4
     WarMode: 2
   PhaseReasonMeta:
-    MaxValue: 3
+    MaxValue: 4
     MinValue: 0
-    NumValues: 4
+    NumValues: 5
   PingMode:
     ClickDrag: 1
     KeyDown: 0
@@ -6406,6 +6410,13 @@ Enum:
     MaxValue: 6
     MinValue: 0
     NumValues: 7
+  RecentAllyPinResult:
+    ServerError: 1
+    Success: 0
+  RecentAllyPinResultMeta:
+    MaxValue: 1
+    MinValue: 0
+    NumValues: 2
   RecipeRequirementType:
     Area: 2
     SpellFocus: 0
@@ -9858,6 +9869,7 @@ LE_GAME_ERR_REAGENTBAG_ITEM_TYPE: 25
 LE_GAME_ERR_REAGENTBAG_WRONG_SLOT: 23
 LE_GAME_ERR_REALM_NOT_FOUND: 453
 LE_GAME_ERR_RECEIVE_ITEM_S: 49
+LE_GAME_ERR_RECENT_ALLY_PIN_SERVER_ERROR: 1203
 LE_GAME_ERR_RECRUIT_A_FRIEND_ACCOUNT_LIMIT: 1025
 LE_GAME_ERR_RECRUIT_A_FRIEND_FAILED: 1026
 LE_GAME_ERR_RECRUIT_A_FRIEND_INSUF_EXPAN_LVL: 708
