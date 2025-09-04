@@ -795,11 +795,6 @@ Browser:
     NavigateStop:
       inputs:
       outputs:
-    NavigateTo:
-      inputs:
-      - name: url
-        type: string
-      outputs:
     OpenExternalLink:
       inputs:
       outputs:
