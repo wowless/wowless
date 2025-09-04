@@ -5,12 +5,9 @@
     "libpng",
     "libyaml",
     "openssl",
+    "sdl3",
     "sqlite3",
     "utf8h",
-    "zlib",
-    {
-      "name": "sdl3",
-      "platform": "!linux"
-    }
+    "zlib"
   ]
 }
