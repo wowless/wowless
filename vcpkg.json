@@ -2,7 +2,6 @@
   "dependencies": [
     "curl",
     "expat",
-    "libpng",
     "libyaml",
     "openssl",
     "sdl3",
