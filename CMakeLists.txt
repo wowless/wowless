@@ -137,16 +137,6 @@ find_package(yaml CONFIG REQUIRED)
 
 find_package(ZLIB REQUIRED)
 
-FetchContent_Declare(
-  lzlib
-  GIT_REPOSITORY https://github.com/luadist/lzlib.git
-  GIT_TAG 0.4.3
-  SOURCE_SUBDIR disable_cmakelists_txt)
-FetchContent_MakeAvailable(lzlib)
-lua2c(lzlib zlib=c)
-target_sources(lzlib PRIVATE ${lzlib_SOURCE_DIR}/lzlib.c)
-target_link_libraries(lzlib PRIVATE ZLIB::ZLIB)
-
 find_package(unofficial-sqlite3 CONFIG REQUIRED)
 
 lua2c(wowlesssqlite wowless.sqlite=c)
@@ -632,8 +622,6 @@ endforeach()
 
 lua2c(wowlessblp vstruct=p
       wowless.blp=${CMAKE_CURRENT_SOURCE_DIR}/wowless/blp.lua)
-lua2c(wowlesspng lzlib=p vstruct=p
-      wowless.png=${CMAKE_CURRENT_SOURCE_DIR}/wowless/png.lua)
 
 lua2c(wowlessrender
       wowless.render=${CMAKE_CURRENT_SOURCE_DIR}/wowless/render.lua)
@@ -926,7 +914,6 @@ add_lua_executable(
   wowapischema
   wowlessblp
   wowlesslib
-  wowlesspng
   wowlessrender
   wowlesssqlite
   wowlesstoc
@@ -975,7 +962,6 @@ set(specs
     spec/wowless/hlist_spec.lua
     spec/wowless/modules/funcheck_spec.lua
     spec/wowless/modules/typecheck_spec.lua
-    spec/wowless/png_spec.lua
     spec/wowless/sqlite_spec.lua
     spec/wowless/toc_spec.lua
     spec/wowless/util_spec.lua)
@@ -983,13 +969,7 @@ add_custom_command(
   COMMENT "Running tests"
   OUTPUT test.out
   COMMAND runtests -o ${CMAKE_CURRENT_BINARY_DIR}/test.out ${specs}
-  DEPENDS runtests
-          addons.txt
-          ${schemadbs}
-          ${specs}
-          spec/wowless/green.png
-          spec/wowless/temp.blp
-          spec/wowless/temp.png
+  DEPENDS runtests addons.txt ${schemadbs} ${specs} spec/wowless/temp.blp
           testaddon.txt
   WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
 add_custom_target(test DEPENDS test.out)
@@ -1015,6 +995,5 @@ add_lua_executable(
   toolssdl
   toolstactless
   wowlessblp
-  wowlesspng
   wowlessutil
   wowlessyaml)
