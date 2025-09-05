@@ -10181,6 +10181,11 @@ C_PaperDollInfo.OffhandHasWeapon:
   outputs:
   - name: offhandHasWeapon
     type: boolean
+C_PartyInfo.ChallengeModeRestrictionsActive:
+  inputs:
+  outputs:
+  - name: restrictionsActive
+    type: boolean
 C_PartyInfo.ConfirmLeaveParty:
   inputs:
   - name: category
