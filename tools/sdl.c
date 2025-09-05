@@ -2,6 +2,7 @@
 
 #include <stdlib.h>
 
+#include "SDL3_image/SDL_image.h"
 #include "lauxlib.h"
 #include "lua.h"
 
@@ -159,6 +160,15 @@ static int surfaceSaveBMP(lua_State *L) {
   return 0;
 }
 
+static int surfaceSavePNG(lua_State *L) {
+  SDL_Surface **sur = luaL_checkudata(L, 1, "tools.sdl.surface");
+  const char *file = luaL_checkstring(L, 2);
+  if (!IMG_SavePNG(*sur, file)) {
+    return luaL_error(L, "SDL error: %s", SDL_GetError());
+  }
+  return 0;
+}
+
 static int textureGC(lua_State *L) {
   SDL_Texture **tex = luaL_checkudata(L, 1, "tools.sdl.texture");
   if (*tex) {
@@ -245,6 +255,8 @@ int luaopen_tools_sdl(lua_State *L) {
     lua_setfield(L, -2, "GetWidth");
     lua_pushcfunction(L, surfaceSaveBMP);
     lua_setfield(L, -2, "SaveBMP");
+    lua_pushcfunction(L, surfaceSavePNG);
+    lua_setfield(L, -2, "SavePNG");
     lua_setfield(L, -2, "__index");
     lua_pushcfunction(L, surfaceGC);
     lua_setfield(L, -2, "__gc");
