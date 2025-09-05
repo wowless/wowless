@@ -132,9 +132,21 @@ static int surfaceCreateSoftwareRenderer(lua_State *L) {
   return 1;
 }
 
-static int surfaceHeight(lua_State *L) {
+static int surfaceGetHeight(lua_State *L) {
   SDL_Surface **sur = luaL_checkudata(L, 1, "tools.sdl.surface");
   lua_pushnumber(L, (*sur)->h);
+  return 1;
+}
+
+static int surfaceGetPixels(lua_State *L) {
+  SDL_Surface **sur = luaL_checkudata(L, 1, "tools.sdl.surface");
+  lua_pushlstring(L, (*sur)->pixels, (*sur)->h * (*sur)->w * 4);
+  return 1;
+}
+
+static int surfaceGetWidth(lua_State *L) {
+  SDL_Surface **sur = luaL_checkudata(L, 1, "tools.sdl.surface");
+  lua_pushnumber(L, (*sur)->w);
   return 1;
 }
 
@@ -145,12 +157,6 @@ static int surfaceSaveBMP(lua_State *L) {
     return luaL_error(L, "SDL error: %s", SDL_GetError());
   }
   return 0;
-}
-
-static int surfaceWidth(lua_State *L) {
-  SDL_Surface **sur = luaL_checkudata(L, 1, "tools.sdl.surface");
-  lua_pushnumber(L, (*sur)->w);
-  return 1;
 }
 
 static int textureGC(lua_State *L) {
@@ -231,12 +237,14 @@ int luaopen_tools_sdl(lua_State *L) {
     lua_newtable(L);
     lua_pushcfunction(L, surfaceCreateSoftwareRenderer);
     lua_setfield(L, -2, "CreateSoftwareRenderer");
-    lua_pushcfunction(L, surfaceHeight);
-    lua_setfield(L, -2, "Height");
+    lua_pushcfunction(L, surfaceGetHeight);
+    lua_setfield(L, -2, "GetHeight");
+    lua_pushcfunction(L, surfaceGetPixels);
+    lua_setfield(L, -2, "GetPixels");
+    lua_pushcfunction(L, surfaceGetWidth);
+    lua_setfield(L, -2, "GetWidth");
     lua_pushcfunction(L, surfaceSaveBMP);
     lua_setfield(L, -2, "SaveBMP");
-    lua_pushcfunction(L, surfaceWidth);
-    lua_setfield(L, -2, "Width");
     lua_setfield(L, -2, "__index");
     lua_pushcfunction(L, surfaceGC);
     lua_setfield(L, -2, "__gc");

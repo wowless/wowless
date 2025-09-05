@@ -126,6 +126,8 @@ for _, f in ipairs(data.frames) do
   end
 end
 renderer:RenderPresent()
-local out = args.output or require('pl.path').splitext(args.input) .. '.bmp'
-screensurface:SaveBMP(out)
-print(out)
+local out = args.output or require('pl.path').splitext(args.input) .. '.png'
+require('pl.file').write(
+  out,
+  require('wowless.png').write(data.screenWidth, data.screenHeight, screensurface:GetPixels())
+)

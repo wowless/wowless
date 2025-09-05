@@ -953,19 +953,19 @@ lua2c(luamagick luamagick=c)
 target_sources(luamagick PRIVATE ${luamagick_SOURCE_DIR}/luamagick.c)
 target_link_libraries(luamagick PRIVATE imagemagick)
 
-lua2c(
-  wowlessrender
-  vstruct=p
-  wowless.blp=${CMAKE_CURRENT_SOURCE_DIR}/wowless/blp.lua
-  wowless.render=${CMAKE_CURRENT_SOURCE_DIR}/wowless/render.lua
-  wowless.png=${CMAKE_CURRENT_SOURCE_DIR}/wowless/png.lua)
+lua2c(wowlessblp vstruct=p
+      wowless.blp=${CMAKE_CURRENT_SOURCE_DIR}/wowless/blp.lua)
+lua2c(wowlesspng lzlib=p vstruct=p
+      wowless.png=${CMAKE_CURRENT_SOURCE_DIR}/wowless/png.lua)
+
+lua2c(wowlessrender wowlessblp=p wowlesspng=p
+      wowless.render=${CMAKE_CURRENT_SOURCE_DIR}/wowless/render.lua)
 
 add_lua_executable(
   render
   ${CMAKE_CURRENT_SOURCE_DIR}/tools/render.lua
   argparse
   luamagick
-  lzlib
   penlight
   toolstactless
   wowlessrender
@@ -1016,7 +1016,6 @@ add_lua_executable(
   bump
   ${CMAKE_CURRENT_SOURCE_DIR}/tools/bump.lua
   argparse
-  lzlib
   penlight
   runtimeproducts
   toolstactless
@@ -1193,7 +1192,6 @@ add_lua_executable(
   ${dataluas}
   date
   luaexpat
-  lzlib
   minheap
   penlight
   runtimegametypes
@@ -1252,7 +1250,6 @@ add_lua_executable(
   date
   luaexpat
   luassert
-  lzlib
   minheap
   penlight
   runtimegametypes
@@ -1335,8 +1332,6 @@ find_package(SDL3 CONFIG REQUIRED)
 lua2c(toolssdl tools.sdl=c)
 target_sources(toolssdl PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/tools/sdl.c)
 target_link_libraries(toolssdl PRIVATE SDL3::SDL3)
-lua2c(wowlessblp vstruct=p
-      wowless.blp=${CMAKE_CURRENT_SOURCE_DIR}/wowless/blp.lua)
 add_lua_executable(
   sdlrender
   ${CMAKE_CURRENT_SOURCE_DIR}/tools/sdlrender.lua
@@ -1345,5 +1340,6 @@ add_lua_executable(
   toolssdl
   toolstactless
   wowlessblp
+  wowlesspng
   wowlessutil
   wowlessyaml)
