@@ -998,9 +998,15 @@ add_lua_executable(yamlfmt ${CMAKE_CURRENT_SOURCE_DIR}/tools/yamlfmt.lua
                    penlight wowlessyaml)
 
 find_package(SDL3 CONFIG REQUIRED)
+find_package(SDL3_image CONFIG REQUIRED)
 lua2c(toolssdl tools.sdl=c)
 target_sources(toolssdl PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/tools/sdl.c)
-target_link_libraries(toolssdl PRIVATE SDL3::SDL3)
+target_link_libraries(
+  toolssdl
+  PRIVATE
+    SDL3::SDL3
+    $<IF:$<TARGET_EXISTS:SDL3_image::SDL3_image-shared>,SDL3_image::SDL3_image-shared,SDL3_image::SDL3_image-static>
+)
 add_lua_executable(
   render
   ${CMAKE_CURRENT_SOURCE_DIR}/tools/sdlrender.lua
