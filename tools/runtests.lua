@@ -25,7 +25,6 @@ if args.output then
   io.output(args.output)
 end
 for _, f in ipairs(args.specs) do
-  require('wowless.ext').setglobaltable(_G)
   local success, msg = pcall(dofile, f)
   if not success then
     table.insert(errors, f .. '\n' .. msg)
