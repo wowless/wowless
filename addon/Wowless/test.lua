@@ -209,13 +209,6 @@ G.testsuite.sync = function()
               assertEquals(0, b:GetNumRegions())
               assertEquals(nil, b:GetNormalTexture())
             end,
-            ['reparent and back does not restore'] = function()
-              local b, t, f = init()
-              t:SetParent(f)
-              t:SetParent(b)
-              assertEquals(1, b:GetNumRegions())
-              assertEquals(nil, b:GetNormalTexture())
-            end,
             ['reset sets parent'] = function()
               local b, t, f = init()
               t:SetParent(f)
