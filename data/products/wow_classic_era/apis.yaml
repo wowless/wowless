@@ -10443,6 +10443,11 @@ C_ToyBoxInfo.NeedsFanfare:
 C_TradeInfo.AddTradeMoney:
   inputs:
   outputs:
+C_TradeInfo.PickupTradeMoney:
+  inputs:
+  - name: amount
+    type: number
+  outputs:
 C_TradeInfo.SetTradeMoney:
   inputs:
   - name: amount
@@ -19479,7 +19484,6 @@ PickupPlayerMoney:
 PickupSpell:
 PickupSpellBookItem:
 PickupStablePet:
-PickupTradeMoney:
 PitchDownStart:
   inputs:
   outputs:

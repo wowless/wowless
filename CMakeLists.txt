@@ -137,16 +137,6 @@ find_package(yaml CONFIG REQUIRED)
 
 find_package(ZLIB REQUIRED)
 
-FetchContent_Declare(
-  lzlib
-  GIT_REPOSITORY https://github.com/luadist/lzlib.git
-  GIT_TAG 0.4.3
-  SOURCE_SUBDIR disable_cmakelists_txt)
-FetchContent_MakeAvailable(lzlib)
-lua2c(lzlib zlib=c)
-target_sources(lzlib PRIVATE ${lzlib_SOURCE_DIR}/lzlib.c)
-target_link_libraries(lzlib PRIVATE ZLIB::ZLIB)
-
 find_package(unofficial-sqlite3 CONFIG REQUIRED)
 
 lua2c(wowlesssqlite wowless.sqlite=c)
@@ -630,346 +620,11 @@ foreach(product ${products})
             runtime/products/${product}/build.lua)
 endforeach()
 
-find_package(PNG REQUIRED)
+lua2c(wowlessblp vstruct=p
+      wowless.blp=${CMAKE_CURRENT_SOURCE_DIR}/wowless/blp.lua)
 
-FetchContent_Declare(
-  imagemagick
-  GIT_REPOSITORY https://github.com/ImageMagick/ImageMagick6
-  GIT_TAG 41e02a5b17b3f64565839134197fe169a838dd12
-  SOURCE_SUBDIR disable_cmakelists_txt)
-FetchContent_MakeAvailable(imagemagick)
-file(
-  WRITE ${imagemagick_SOURCE_DIR}/magick/magick-baseconfig.h.in
-  [=[
-#define MAGICKCORE_HAVE_STDINT_H
-#define MAGICKCORE_HAVE_STRING_H
-#define MAGICKCORE_HDRI_ENABLE 0
-#define MAGICKCORE_CONFIGURE_RELATIVE_PATH "foo"
-#define MAGICKCORE_LIBRARY_PATH "foo"
-#define MAGICKCORE_LIBRARY_RELATIVE_PATH "foo"
-#define MAGICKCORE_PACKAGE_NAME "ImageMagick"
-#define MAGICKCORE_PNG_DELEGATE
-#define MAGICKCORE_QUANTUM_DEPTH 16
-#define MAGICKCORE_SHARE_RELATIVE_PATH "foo"
-#define MAGICKCORE_SHAREARCH_BASEDIRNAME "foo"
-#define MAGICKCORE_SIZEOF_VOID_P 8
-#define MAGICKCORE_STDC_HEADERS
-#cmakedefine MAGICKCORE_HAVE__ALIGNED_MALLOC
-#cmakedefine MAGICKCORE_HAVE_UNISTD_H
-#cmakedefine ssize_t @ssize_t@
-]=])
-block()
-if(CMAKE_SYSTEM_NAME STREQUAL "Windows")
-  set(MAGICKCORE_HAVE__ALIGNED_MALLOC ON)
-  set(ssize_t int)
-else()
-  set(MAGICKCORE_HAVE_UNISTD_H ON)
-endif()
-configure_file(${imagemagick_SOURCE_DIR}/magick/magick-baseconfig.h.in
-               ${imagemagick_SOURCE_DIR}/magick/magick-baseconfig.h)
-endblock()
-block()
-set(DOCUMENTATION_PATH foo)
-set(PACKAGE_LIB_VERSION 0x69C)
-set(PACKAGE_NAME ImageMagick)
-set(PACKAGE_RELEASE_DATE 2023-09-04)
-set(PACKAGE_VERSION_ADDENDUM -94)
-set(MAGICK_GIT_REVISION 41e02a5b17b3f64565839134197fe169a838dd12)
-set(MAGICK_LIB_VERSION_NUMBER 6,0,0)
-set(MAGICK_LIB_VERSION_TEXT 6.9.12)
-set(MAGICK_LIBRARY_CURRENT 6)
-set(MAGICK_LIBRARY_CURRENT_MIN 6)
-set(MAGICK_TARGET_CPU x86_64)
-set(MAGICKPP_LIB_VERSION_TEXT 6.9.12)
-set(MAGICKPP_LIBRARY_CURRENT 8)
-set(MAGICKPP_LIBRARY_CURRENT_MIN 8)
-set(MAGICKPP_LIBRARY_VERSION_INFO 8:0:0)
-configure_file(${imagemagick_SOURCE_DIR}/magick/version.h.in
-               ${imagemagick_SOURCE_DIR}/magick/version.h)
-endblock()
-add_library(
-  imagemagick STATIC
-  ${imagemagick_SOURCE_DIR}/coders/aai.c
-  ${imagemagick_SOURCE_DIR}/coders/art.c
-  ${imagemagick_SOURCE_DIR}/coders/avs.c
-  ${imagemagick_SOURCE_DIR}/coders/bgr.c
-  ${imagemagick_SOURCE_DIR}/coders/bmp.c
-  ${imagemagick_SOURCE_DIR}/coders/braille.c
-  ${imagemagick_SOURCE_DIR}/coders/bytebuffer-private.h
-  ${imagemagick_SOURCE_DIR}/coders/cals.c
-  ${imagemagick_SOURCE_DIR}/coders/caption.c
-  ${imagemagick_SOURCE_DIR}/coders/cin.c
-  ${imagemagick_SOURCE_DIR}/coders/cip.c
-  ${imagemagick_SOURCE_DIR}/coders/clip.c
-  ${imagemagick_SOURCE_DIR}/coders/clipboard.c
-  ${imagemagick_SOURCE_DIR}/coders/cmyk.c
-  ${imagemagick_SOURCE_DIR}/coders/cut.c
-  ${imagemagick_SOURCE_DIR}/coders/dcm.c
-  ${imagemagick_SOURCE_DIR}/coders/dds.c
-  ${imagemagick_SOURCE_DIR}/coders/debug.c
-  ${imagemagick_SOURCE_DIR}/coders/dib.c
-  ${imagemagick_SOURCE_DIR}/coders/djvu.c
-  ${imagemagick_SOURCE_DIR}/coders/dng.c
-  ${imagemagick_SOURCE_DIR}/coders/dot.c
-  ${imagemagick_SOURCE_DIR}/coders/dps.c
-  ${imagemagick_SOURCE_DIR}/coders/dpx.c
-  ${imagemagick_SOURCE_DIR}/coders/emf.c
-  ${imagemagick_SOURCE_DIR}/coders/ept.c
-  ${imagemagick_SOURCE_DIR}/coders/exr.c
-  ${imagemagick_SOURCE_DIR}/coders/fax.c
-  ${imagemagick_SOURCE_DIR}/coders/fd.c
-  ${imagemagick_SOURCE_DIR}/coders/fits.c
-  ${imagemagick_SOURCE_DIR}/coders/flif.c
-  ${imagemagick_SOURCE_DIR}/coders/fpx.c
-  ${imagemagick_SOURCE_DIR}/coders/ghostscript-private.h
-  ${imagemagick_SOURCE_DIR}/coders/gif.c
-  ${imagemagick_SOURCE_DIR}/coders/gradient.c
-  ${imagemagick_SOURCE_DIR}/coders/gray.c
-  ${imagemagick_SOURCE_DIR}/coders/hald.c
-  ${imagemagick_SOURCE_DIR}/coders/hdr.c
-  ${imagemagick_SOURCE_DIR}/coders/heic.c
-  ${imagemagick_SOURCE_DIR}/coders/histogram.c
-  ${imagemagick_SOURCE_DIR}/coders/hrz.c
-  ${imagemagick_SOURCE_DIR}/coders/html.c
-  ${imagemagick_SOURCE_DIR}/coders/icon.c
-  ${imagemagick_SOURCE_DIR}/coders/info.c
-  ${imagemagick_SOURCE_DIR}/coders/inline.c
-  ${imagemagick_SOURCE_DIR}/coders/ipl.c
-  ${imagemagick_SOURCE_DIR}/coders/jbig.c
-  ${imagemagick_SOURCE_DIR}/coders/jnx.c
-  ${imagemagick_SOURCE_DIR}/coders/jp2.c
-  ${imagemagick_SOURCE_DIR}/coders/jpeg.c
-  ${imagemagick_SOURCE_DIR}/coders/json.c
-  ${imagemagick_SOURCE_DIR}/coders/label.c
-  ${imagemagick_SOURCE_DIR}/coders/mac.c
-  ${imagemagick_SOURCE_DIR}/coders/magick.c
-  ${imagemagick_SOURCE_DIR}/coders/map.c
-  ${imagemagick_SOURCE_DIR}/coders/mask.c
-  ${imagemagick_SOURCE_DIR}/coders/mat.c
-  ${imagemagick_SOURCE_DIR}/coders/matte.c
-  ${imagemagick_SOURCE_DIR}/coders/meta.c
-  ${imagemagick_SOURCE_DIR}/coders/miff.c
-  ${imagemagick_SOURCE_DIR}/coders/mono.c
-  ${imagemagick_SOURCE_DIR}/coders/mpc.c
-  ${imagemagick_SOURCE_DIR}/coders/mpr.c
-  ${imagemagick_SOURCE_DIR}/coders/msl.c
-  ${imagemagick_SOURCE_DIR}/coders/mtv.c
-  ${imagemagick_SOURCE_DIR}/coders/mvg.c
-  ${imagemagick_SOURCE_DIR}/coders/null.c
-  ${imagemagick_SOURCE_DIR}/coders/otb.c
-  ${imagemagick_SOURCE_DIR}/coders/palm.c
-  ${imagemagick_SOURCE_DIR}/coders/pango.c
-  ${imagemagick_SOURCE_DIR}/coders/pattern.c
-  ${imagemagick_SOURCE_DIR}/coders/pcd.c
-  ${imagemagick_SOURCE_DIR}/coders/pcl.c
-  ${imagemagick_SOURCE_DIR}/coders/pcx.c
-  ${imagemagick_SOURCE_DIR}/coders/pdb.c
-  ${imagemagick_SOURCE_DIR}/coders/pdf.c
-  ${imagemagick_SOURCE_DIR}/coders/pes.c
-  ${imagemagick_SOURCE_DIR}/coders/pgx.c
-  ${imagemagick_SOURCE_DIR}/coders/pict.c
-  ${imagemagick_SOURCE_DIR}/coders/pix.c
-  ${imagemagick_SOURCE_DIR}/coders/plasma.c
-  ${imagemagick_SOURCE_DIR}/coders/png.c
-  ${imagemagick_SOURCE_DIR}/coders/pnm.c
-  ${imagemagick_SOURCE_DIR}/coders/preview.c
-  ${imagemagick_SOURCE_DIR}/coders/ps.c
-  ${imagemagick_SOURCE_DIR}/coders/ps2.c
-  ${imagemagick_SOURCE_DIR}/coders/ps3.c
-  ${imagemagick_SOURCE_DIR}/coders/psd-private.h
-  ${imagemagick_SOURCE_DIR}/coders/psd.c
-  ${imagemagick_SOURCE_DIR}/coders/pwp.c
-  ${imagemagick_SOURCE_DIR}/coders/raw.c
-  ${imagemagick_SOURCE_DIR}/coders/rgb.c
-  ${imagemagick_SOURCE_DIR}/coders/rgf.c
-  ${imagemagick_SOURCE_DIR}/coders/rla.c
-  ${imagemagick_SOURCE_DIR}/coders/rle.c
-  ${imagemagick_SOURCE_DIR}/coders/scr.c
-  ${imagemagick_SOURCE_DIR}/coders/screenshot.c
-  ${imagemagick_SOURCE_DIR}/coders/sct.c
-  ${imagemagick_SOURCE_DIR}/coders/sfw.c
-  ${imagemagick_SOURCE_DIR}/coders/sgi.c
-  ${imagemagick_SOURCE_DIR}/coders/sixel.c
-  ${imagemagick_SOURCE_DIR}/coders/stegano.c
-  ${imagemagick_SOURCE_DIR}/coders/sun.c
-  ${imagemagick_SOURCE_DIR}/coders/svg.c
-  ${imagemagick_SOURCE_DIR}/coders/tga.c
-  ${imagemagick_SOURCE_DIR}/coders/thumbnail.c
-  ${imagemagick_SOURCE_DIR}/coders/tiff.c
-  ${imagemagick_SOURCE_DIR}/coders/tile.c
-  ${imagemagick_SOURCE_DIR}/coders/tim.c
-  ${imagemagick_SOURCE_DIR}/coders/ttf.c
-  ${imagemagick_SOURCE_DIR}/coders/txt.c
-  ${imagemagick_SOURCE_DIR}/coders/uil.c
-  ${imagemagick_SOURCE_DIR}/coders/url.c
-  ${imagemagick_SOURCE_DIR}/coders/uyvy.c
-  ${imagemagick_SOURCE_DIR}/coders/vicar.c
-  ${imagemagick_SOURCE_DIR}/coders/vid.c
-  ${imagemagick_SOURCE_DIR}/coders/video.c
-  ${imagemagick_SOURCE_DIR}/coders/viff.c
-  ${imagemagick_SOURCE_DIR}/coders/vips.c
-  ${imagemagick_SOURCE_DIR}/coders/wbmp.c
-  ${imagemagick_SOURCE_DIR}/coders/webp.c
-  ${imagemagick_SOURCE_DIR}/coders/wmf.c
-  ${imagemagick_SOURCE_DIR}/coders/wpg.c
-  ${imagemagick_SOURCE_DIR}/coders/x.c
-  ${imagemagick_SOURCE_DIR}/coders/xbm.c
-  ${imagemagick_SOURCE_DIR}/coders/xc.c
-  ${imagemagick_SOURCE_DIR}/coders/xcf.c
-  ${imagemagick_SOURCE_DIR}/coders/xpm.c
-  ${imagemagick_SOURCE_DIR}/coders/xps.c
-  ${imagemagick_SOURCE_DIR}/coders/xwd.c
-  ${imagemagick_SOURCE_DIR}/coders/ycbcr.c
-  ${imagemagick_SOURCE_DIR}/coders/yuv.c
-  ${imagemagick_SOURCE_DIR}/magick/accelerate.c
-  ${imagemagick_SOURCE_DIR}/magick/animate.c
-  ${imagemagick_SOURCE_DIR}/magick/annotate.c
-  ${imagemagick_SOURCE_DIR}/magick/artifact.c
-  ${imagemagick_SOURCE_DIR}/magick/attribute.c
-  ${imagemagick_SOURCE_DIR}/magick/blob.c
-  ${imagemagick_SOURCE_DIR}/magick/cache-view.c
-  ${imagemagick_SOURCE_DIR}/magick/cache.c
-  ${imagemagick_SOURCE_DIR}/magick/channel.c
-  ${imagemagick_SOURCE_DIR}/magick/cipher.c
-  ${imagemagick_SOURCE_DIR}/magick/client.c
-  ${imagemagick_SOURCE_DIR}/magick/coder.c
-  ${imagemagick_SOURCE_DIR}/magick/color.c
-  ${imagemagick_SOURCE_DIR}/magick/colormap.c
-  ${imagemagick_SOURCE_DIR}/magick/colorspace.c
-  ${imagemagick_SOURCE_DIR}/magick/compare.c
-  ${imagemagick_SOURCE_DIR}/magick/composite.c
-  ${imagemagick_SOURCE_DIR}/magick/compress.c
-  ${imagemagick_SOURCE_DIR}/magick/configure.c
-  ${imagemagick_SOURCE_DIR}/magick/constitute.c
-  ${imagemagick_SOURCE_DIR}/magick/decorate.c
-  ${imagemagick_SOURCE_DIR}/magick/delegate.c
-  ${imagemagick_SOURCE_DIR}/magick/deprecate.c
-  ${imagemagick_SOURCE_DIR}/magick/display.c
-  ${imagemagick_SOURCE_DIR}/magick/distort.c
-  ${imagemagick_SOURCE_DIR}/magick/distribute-cache.c
-  ${imagemagick_SOURCE_DIR}/magick/draw.c
-  ${imagemagick_SOURCE_DIR}/magick/effect.c
-  ${imagemagick_SOURCE_DIR}/magick/enhance.c
-  ${imagemagick_SOURCE_DIR}/magick/exception.c
-  ${imagemagick_SOURCE_DIR}/magick/feature.c
-  ${imagemagick_SOURCE_DIR}/magick/fourier.c
-  ${imagemagick_SOURCE_DIR}/magick/fx.c
-  ${imagemagick_SOURCE_DIR}/magick/gem.c
-  ${imagemagick_SOURCE_DIR}/magick/geometry.c
-  ${imagemagick_SOURCE_DIR}/magick/hashmap.c
-  ${imagemagick_SOURCE_DIR}/magick/histogram.c
-  ${imagemagick_SOURCE_DIR}/magick/identify.c
-  ${imagemagick_SOURCE_DIR}/magick/image-view.c
-  ${imagemagick_SOURCE_DIR}/magick/image.c
-  ${imagemagick_SOURCE_DIR}/magick/layer.c
-  ${imagemagick_SOURCE_DIR}/magick/list.c
-  ${imagemagick_SOURCE_DIR}/magick/locale.c
-  ${imagemagick_SOURCE_DIR}/magick/log.c
-  ${imagemagick_SOURCE_DIR}/magick/mac.c
-  ${imagemagick_SOURCE_DIR}/magick/magic.c
-  ${imagemagick_SOURCE_DIR}/magick/magick.c
-  ${imagemagick_SOURCE_DIR}/magick/matrix.c
-  ${imagemagick_SOURCE_DIR}/magick/memory.c
-  ${imagemagick_SOURCE_DIR}/magick/mime.c
-  ${imagemagick_SOURCE_DIR}/magick/module.c
-  ${imagemagick_SOURCE_DIR}/magick/monitor.c
-  ${imagemagick_SOURCE_DIR}/magick/montage.c
-  ${imagemagick_SOURCE_DIR}/magick/morphology.c
-  ${imagemagick_SOURCE_DIR}/magick/nt-base.c
-  ${imagemagick_SOURCE_DIR}/magick/nt-feature.c
-  ${imagemagick_SOURCE_DIR}/magick/opencl.c
-  ${imagemagick_SOURCE_DIR}/magick/option.c
-  ${imagemagick_SOURCE_DIR}/magick/paint.c
-  ${imagemagick_SOURCE_DIR}/magick/pixel.c
-  ${imagemagick_SOURCE_DIR}/magick/policy.c
-  ${imagemagick_SOURCE_DIR}/magick/prepress.c
-  ${imagemagick_SOURCE_DIR}/magick/profile.c
-  ${imagemagick_SOURCE_DIR}/magick/property.c
-  ${imagemagick_SOURCE_DIR}/magick/quantize.c
-  ${imagemagick_SOURCE_DIR}/magick/quantum-export.c
-  ${imagemagick_SOURCE_DIR}/magick/quantum-import.c
-  ${imagemagick_SOURCE_DIR}/magick/quantum.c
-  ${imagemagick_SOURCE_DIR}/magick/random.c
-  ${imagemagick_SOURCE_DIR}/magick/registry.c
-  ${imagemagick_SOURCE_DIR}/magick/resample.c
-  ${imagemagick_SOURCE_DIR}/magick/resize.c
-  ${imagemagick_SOURCE_DIR}/magick/resource.c
-  ${imagemagick_SOURCE_DIR}/magick/segment.c
-  ${imagemagick_SOURCE_DIR}/magick/semaphore.c
-  ${imagemagick_SOURCE_DIR}/magick/shear.c
-  ${imagemagick_SOURCE_DIR}/magick/signature.c
-  ${imagemagick_SOURCE_DIR}/magick/splay-tree.c
-  ${imagemagick_SOURCE_DIR}/magick/static.c
-  ${imagemagick_SOURCE_DIR}/magick/statistic.c
-  ${imagemagick_SOURCE_DIR}/magick/stream.c
-  ${imagemagick_SOURCE_DIR}/magick/string.c
-  ${imagemagick_SOURCE_DIR}/magick/thread.c
-  ${imagemagick_SOURCE_DIR}/magick/threshold.c
-  ${imagemagick_SOURCE_DIR}/magick/timer.c
-  ${imagemagick_SOURCE_DIR}/magick/token.c
-  ${imagemagick_SOURCE_DIR}/magick/transform.c
-  ${imagemagick_SOURCE_DIR}/magick/type.c
-  ${imagemagick_SOURCE_DIR}/magick/utility.c
-  ${imagemagick_SOURCE_DIR}/magick/version.c
-  ${imagemagick_SOURCE_DIR}/magick/vision.c
-  ${imagemagick_SOURCE_DIR}/magick/visual-effects.c
-  ${imagemagick_SOURCE_DIR}/magick/vms.c
-  ${imagemagick_SOURCE_DIR}/magick/widget.c
-  ${imagemagick_SOURCE_DIR}/magick/xml-tree.c
-  ${imagemagick_SOURCE_DIR}/magick/xwindow.c
-  ${imagemagick_SOURCE_DIR}/wand/animate.c
-  ${imagemagick_SOURCE_DIR}/wand/compare.c
-  ${imagemagick_SOURCE_DIR}/wand/composite.c
-  ${imagemagick_SOURCE_DIR}/wand/conjure.c
-  ${imagemagick_SOURCE_DIR}/wand/convert.c
-  ${imagemagick_SOURCE_DIR}/wand/deprecate.c
-  ${imagemagick_SOURCE_DIR}/wand/display.c
-  ${imagemagick_SOURCE_DIR}/wand/drawing-wand.c
-  ${imagemagick_SOURCE_DIR}/wand/identify.c
-  ${imagemagick_SOURCE_DIR}/wand/import.c
-  ${imagemagick_SOURCE_DIR}/wand/magick-image.c
-  ${imagemagick_SOURCE_DIR}/wand/magick-property.c
-  ${imagemagick_SOURCE_DIR}/wand/magick-wand.c
-  ${imagemagick_SOURCE_DIR}/wand/mogrify.c
-  ${imagemagick_SOURCE_DIR}/wand/montage.c
-  ${imagemagick_SOURCE_DIR}/wand/pixel-iterator.c
-  ${imagemagick_SOURCE_DIR}/wand/pixel-wand.c
-  ${imagemagick_SOURCE_DIR}/wand/stream.c
-  ${imagemagick_SOURCE_DIR}/wand/wand-view.c
-  ${imagemagick_SOURCE_DIR}/wand/wand.c)
-target_include_directories(imagemagick PUBLIC ${imagemagick_SOURCE_DIR})
-target_compile_definitions(imagemagick PUBLIC $<$<PLATFORM_ID:Windows>:_LIB>)
-target_link_libraries(
-  imagemagick PRIVATE PNG::PNG ZLIB::ZLIB $<$<PLATFORM_ID:Windows>:urlmon
-                      ws2_32>)
-
-FetchContent_Declare(
-  luamagick
-  GIT_REPOSITORY https://github.com/lua-wow-tools/luamagick
-  GIT_TAG 91ade4c984835fc57bdb3b399e2d7a5fa3b63546
-  SOURCE_SUBDIR disable_cmakelists_txt)
-FetchContent_MakeAvailable(luamagick)
-lua2c(luamagick luamagick=c)
-target_sources(luamagick PRIVATE ${luamagick_SOURCE_DIR}/luamagick.c)
-target_link_libraries(luamagick PRIVATE imagemagick)
-
-lua2c(
-  wowlessrender
-  vstruct=p
-  wowless.blp=${CMAKE_CURRENT_SOURCE_DIR}/wowless/blp.lua
-  wowless.render=${CMAKE_CURRENT_SOURCE_DIR}/wowless/render.lua
-  wowless.png=${CMAKE_CURRENT_SOURCE_DIR}/wowless/png.lua)
-
-add_lua_executable(
-  render
-  ${CMAKE_CURRENT_SOURCE_DIR}/tools/render.lua
-  argparse
-  luamagick
-  lzlib
-  penlight
-  toolstactless
-  wowlessrender
-  wowlessyaml)
+lua2c(wowlessrender
+      wowless.render=${CMAKE_CURRENT_SOURCE_DIR}/wowless/render.lua)
 
 add_lua_executable(gentest ${CMAKE_CURRENT_SOURCE_DIR}/tools/gentest.lua
                    argparse penlight toolsutil wowlessyaml)
@@ -1016,7 +671,6 @@ add_lua_executable(
   bump
   ${CMAKE_CURRENT_SOURCE_DIR}/tools/bump.lua
   argparse
-  lzlib
   penlight
   runtimeproducts
   toolstactless
@@ -1193,7 +847,6 @@ add_lua_executable(
   ${dataluas}
   date
   luaexpat
-  lzlib
   minheap
   penlight
   runtimegametypes
@@ -1252,7 +905,6 @@ add_lua_executable(
   date
   luaexpat
   luassert
-  lzlib
   minheap
   penlight
   runtimegametypes
@@ -1260,6 +912,7 @@ add_lua_executable(
   toolstedit
   tsort
   wowapischema
+  wowlessblp
   wowlesslib
   wowlessrender
   wowlesssqlite
@@ -1309,7 +962,6 @@ set(specs
     spec/wowless/hlist_spec.lua
     spec/wowless/modules/funcheck_spec.lua
     spec/wowless/modules/typecheck_spec.lua
-    spec/wowless/png_spec.lua
     spec/wowless/sqlite_spec.lua
     spec/wowless/toc_spec.lua
     spec/wowless/util_spec.lua)
@@ -1317,16 +969,31 @@ add_custom_command(
   COMMENT "Running tests"
   OUTPUT test.out
   COMMAND runtests -o ${CMAKE_CURRENT_BINARY_DIR}/test.out ${specs}
-  DEPENDS runtests
-          addons.txt
-          ${schemadbs}
-          ${specs}
-          spec/wowless/green.png
-          spec/wowless/temp.blp
-          spec/wowless/temp.png
+  DEPENDS runtests addons.txt ${schemadbs} ${specs} spec/wowless/temp.blp
           testaddon.txt
   WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
 add_custom_target(test DEPENDS test.out)
 
 add_lua_executable(yamlfmt ${CMAKE_CURRENT_SOURCE_DIR}/tools/yamlfmt.lua
                    penlight wowlessyaml)
+
+find_package(SDL3 CONFIG REQUIRED)
+find_package(SDL3_image CONFIG REQUIRED)
+lua2c(toolssdl tools.sdl=c)
+target_sources(toolssdl PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/tools/sdl.c)
+target_link_libraries(
+  toolssdl
+  PRIVATE
+    SDL3::SDL3
+    $<IF:$<TARGET_EXISTS:SDL3_image::SDL3_image-shared>,SDL3_image::SDL3_image-shared,SDL3_image::SDL3_image-static>
+)
+add_lua_executable(
+  render
+  ${CMAKE_CURRENT_SOURCE_DIR}/tools/sdlrender.lua
+  argparse
+  penlight
+  toolssdl
+  toolstactless
+  wowlessblp
+  wowlessutil
+  wowlessyaml)

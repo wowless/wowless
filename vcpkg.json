@@ -2,11 +2,17 @@
   "dependencies": [
     "curl",
     "expat",
-    "libpng",
     "libyaml",
     "openssl",
+    "sdl3",
     "sqlite3",
     "utf8h",
-    "zlib"
+    "zlib",
+    {
+      "features": [
+        "png"
+      ],
+      "name": "sdl3-image"
+    }
   ]
 }

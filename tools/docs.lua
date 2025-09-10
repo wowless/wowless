@@ -103,7 +103,7 @@ do
       end
     end
   end
-  local prefix = 'extracts/' .. product .. '/Interface/AddOns/'
+  local prefix = 'build/cmake/extracts/' .. product .. '/Interface/AddOns/'
   processDocDir(prefix .. 'Blizzard_APIDocumentation')
   processDocDir(prefix .. 'Blizzard_APIDocumentationGenerated')
 end

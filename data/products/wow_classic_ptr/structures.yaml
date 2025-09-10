@@ -2799,6 +2799,9 @@ C_LFGList.LfgSearchResultPlayerInfo:
       type: string
     isLeader:
       type: boolean
+    isLeaver:
+      default: false
+      type: boolean
     level:
       nilable: true
       type: number
@@ -3120,11 +3123,18 @@ C_MythicPlus.MythicPlusRunInfo:
   fields:
     completed:
       type: boolean
+    completionDate:
+      type:
+        structure: C_MythicPlus.MythicPlusDate
+    durationSec:
+      type: number
     level:
       type: number
     mapChallengeModeID:
       type: number
     runScore:
+      type: number
+    season:
       type: number
     thisWeek:
       type: boolean
@@ -4866,6 +4876,8 @@ ExpansionDisplayInfo:
           structure: ExpansionDisplayInfoFeature
     logo:
       type: number
+    textureKit:
+      type: string
 ExpansionDisplayInfoFeature:
   fields:
     icon:
@@ -4874,6 +4886,8 @@ ExpansionDisplayInfoFeature:
       type: string
 FontScriptInfo:
   fields:
+    canBeUserScaled:
+      type: boolean
     color:
       type:
         structure: colorRGBA

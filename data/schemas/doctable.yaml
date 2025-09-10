@@ -78,7 +78,15 @@ type:
                 sequenceof: string
             HasRestrictions:
               type: boolean
+            IsIndexInRange:
+              type: boolean
+            IsNotReadOnly:
+              type: boolean
+            IsNotSecure:
+              type: boolean
             IsProtectedFunction:
+              type: boolean
+            IsValidAndPublic:
               type: boolean
             MayReturnNothing:
               type: boolean

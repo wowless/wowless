@@ -795,11 +795,6 @@ Browser:
     NavigateStop:
       inputs:
       outputs:
-    NavigateTo:
-      inputs:
-      - name: url
-        type: string
-      outputs:
     OpenExternalLink:
       inputs:
       outputs:
@@ -7765,6 +7760,8 @@ TextureBase:
         type: number
       outputs:
     SetGradient:
+      impl:
+        uiobjectimpl: Texture/SetGradient
       inputs:
       - name: orientation
         type:

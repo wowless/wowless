@@ -247,6 +247,8 @@ Texture/SetAtlas:
       api:
 Texture/SetColorTexture:
   luafile:
+Texture/SetGradient:
+  luafile:
 Texture/SetTexCoord:
   luafile:
 Texture/SetTexture:
