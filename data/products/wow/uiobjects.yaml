@@ -8308,6 +8308,8 @@ TextureBase:
         type: number
       outputs:
     SetGradient:
+      impl:
+        uiobjectimpl: Texture/SetGradient
       inputs:
       - name: orientation
         type:

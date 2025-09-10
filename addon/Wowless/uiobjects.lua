@@ -425,6 +425,44 @@ G.testsuite.uiobjects = function()
           check0(t:SetDrawLayer('ARTWORK'))
           check2('ARTWORK', 0, t:GetDrawLayer())
         end,
+        ['color texture, vertex color, and gradient'] = function()
+          local t = CreateFrame('Frame'):CreateTexture()
+          local states = {
+            init = function()
+              check4(1, 1, 1, 1, t:GetVertexColor())
+              check1(1, t:GetAlpha())
+            end,
+            vertex = function()
+              check4(0.2, 0.4, 0.6, 0.8, t:GetVertexColor())
+              check1(0.8, t:GetAlpha())
+            end,
+          }
+          local transitions = {
+            hg = {
+              to = 'init',
+              func = function()
+                local c1 = { r = 1, g = 1, b = 0, a = 1 }
+                local c2 = { r = 0, g = 1, b = 1, a = 1 }
+                t:SetGradient('HORIZONTAL', c1, c2)
+              end,
+            },
+            vc = {
+              to = 'vertex',
+              func = function()
+                t:SetVertexColor(0.2, 0.4, 0.6, 0.8)
+              end,
+            },
+            vg = {
+              to = 'init',
+              func = function()
+                local c1 = { r = 1, g = 0, b = 0, a = 1 }
+                local c2 = { r = 0, g = 1, b = 0, a = 1 }
+                t:SetGradient('VERTICAL', c1, c2)
+              end,
+            },
+          }
+          return G.checkStateMachine(states, transitions, 'init')
+        end,
       }
     end,
   }
