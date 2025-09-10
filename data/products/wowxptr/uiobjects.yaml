@@ -6601,15 +6601,15 @@ Region:
     GetRect:
       impl:
         getter:
-        - name: bottom
         - name: left
+        - name: bottom
         - name: width
         - name: height
       inputs:
       outputs:
-      - name: bottom
-        type: number
       - name: left
+        type: number
+      - name: bottom
         type: number
       - name: width
         type: number
