@@ -435,14 +435,6 @@ script_objects:
   SimpleStatusBarAPI: StatusBar
   SimpleTextureAPI: Texture
   SimpleTextureBaseAPI: TextureBase
-skip_uiobject_methods:
-  Region:
-    GetBottom:
-    GetHeight:
-    GetLeft:
-    GetRect:
-    GetSize:
-    GetWidth:
 typedefs:
   AnimationDataEnum:
     type: number

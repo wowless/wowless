@@ -5999,6 +5999,7 @@ Region:
         getter:
         - name: bottom
       inputs:
+      mayreturnnothing: true
       outputs:
       - name: bottom
         type: number
@@ -6024,6 +6025,9 @@ Region:
         getter:
         - name: height
       inputs:
+      - default: false
+        name: ignoreRect
+        type: boolean
       outputs:
       - name: height
         type: number
@@ -6032,6 +6036,7 @@ Region:
         getter:
         - name: left
       inputs:
+      mayreturnnothing: true
       outputs:
       - name: left
         type: number
@@ -6099,10 +6104,11 @@ Region:
         - name: width
         - name: height
       inputs:
+      mayreturnnothing: true
       outputs:
-      - name: bottom
-        type: number
       - name: left
+        type: number
+      - name: bottom
         type: number
       - name: width
         type: number
@@ -6136,6 +6142,9 @@ Region:
         - name: width
         - name: height
       inputs:
+      - default: false
+        name: ignoreRect
+        type: boolean
       outputs:
       - name: width
         type: number
@@ -6159,6 +6168,9 @@ Region:
         getter:
         - name: width
       inputs:
+      - default: false
+        name: ignoreRect
+        type: boolean
       outputs:
       - name: width
         type: number
