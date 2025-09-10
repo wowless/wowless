@@ -5,7 +5,7 @@ describe('sql', function()
       expected['data/sql/' .. k .. '.sql'] = true
     end
     local actual = {}
-    for _, f in ipairs(require('pl.dir').getfiles('data/sql')) do
+    for _, f in ipairs(require('wowless.util').getfiles('data/sql')) do
       actual[f] = true
     end
     assert.same(expected, actual)
