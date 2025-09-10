@@ -6606,8 +6606,8 @@ Region:
     GetRect:
       impl:
         getter:
-        - name: bottom
         - name: left
+        - name: bottom
         - name: width
         - name: height
       inputs:
