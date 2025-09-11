@@ -1210,6 +1210,9 @@ C_CatalogShop.CatalogShopProductDisplayInfo:
     productType:
       nilable: true
       type: string
+    quantity:
+      nilable: true
+      type: number
     specialActorID_1:
       nilable: true
       type: string
@@ -1238,6 +1241,8 @@ C_CatalogShop.CatalogShopProductInfo:
       type: number
     description:
       type: string
+    discountPercentage:
+      type: number
     foregroundTexture:
       nilable: true
       type: string
@@ -1270,6 +1275,8 @@ C_CatalogShop.CatalogShopProductInfo:
     optionalWideCardBackgroundTexture:
       nilable: true
       type: string
+    originalPrice:
+      type: string
     price:
       type: string
     refundable:
@@ -1290,6 +1297,9 @@ C_CatalogShop.CatalogShopProductInfo:
       type: boolean
     transmogSetID:
       type: number
+    type:
+      nilable: true
+      type: string
     virtualCurrencies:
       type:
         arrayof:

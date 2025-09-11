@@ -4172,17 +4172,19 @@ Enum:
     ItemCollectionHeirloom: 2
     ItemCollectionNone: 0
     ItemCollectionRoom: 8
+    ItemCollectionRoomMaterials: 11
+    ItemCollectionRoomThemes: 10
     ItemCollectionRuneforgeLegendaryAbility: 5
     ItemCollectionToy: 1
     ItemCollectionTransmog: 3
     ItemCollectionTransmogIllusion: 6
     ItemCollectionTransmogSetFavorite: 4
     ItemCollectionWarbandScene: 7
-    NumItemCollectionTypes: 9
+    NumItemCollectionTypes: 11
   ItemCollectionTypeMeta:
-    MaxValue: 9
+    MaxValue: 11
     MinValue: 0
-    NumValues: 11
+    NumValues: 13
   ItemCommodityStatus:
     Commodity: 2
     Item: 1
@@ -4277,6 +4279,7 @@ Enum:
     DungeonMythicJackpot: 103
     DungeonNormal: 1
     DungeonNormalJackpot: 101
+    Endeavors: 185
     ForceNone: 21
     LegendaryCrafting_1: 63
     LegendaryCrafting_2: 64
@@ -4396,9 +4399,9 @@ Enum:
     WorldQuest_9: 42
     WorldQuestJackpot: 74
   ItemCreationContextMeta:
-    MaxValue: 184
+    MaxValue: 185
     MinValue: 0
-    NumValues: 185
+    NumValues: 186
   ItemDisplayTextDisplayStyle:
     ItemNameAndInfoText: 1
     ItemNameOnlyCentered: 2
