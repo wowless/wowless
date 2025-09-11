@@ -361,6 +361,21 @@ G.testsuite.uiobjects = function()
       }
     end,
 
+    Region = function()
+      local f = CreateFrame('Frame')
+      check0(f:GetBottom())
+      check0(f:GetCenter())
+      check1(0, f:GetHeight())
+      check0(f:GetLeft())
+      check1(0, f:GetNumPoints())
+      check0(f:GetRect())
+      check0(f:GetRight())
+      check2(0, 0, f:GetSize())
+      check0(f:GetTop())
+      check1(0, f:GetWidth())
+      check1(false, f:IsRectValid())
+    end,
+
     Scale = function()
       return {
         origin = function()
