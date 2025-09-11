@@ -5098,6 +5098,8 @@ LEAVE_PARTY_CONFIRMATION:
       enum: LeavePartyConfirmReason
 LEAVING_TUTORIAL_AREA:
   payload:
+LET_RECENT_ALLIES_SEE_LOCATION_SETTING_UPDATED:
+  payload:
 LFG_BOOT_PROPOSAL_UPDATE:
   payload:
 LFG_COMPLETION_REWARD:
@@ -7603,6 +7605,10 @@ TRIAL_CAP_REACHED_MONEY:
   payload:
 TRIAL_STATUS_UPDATE:
   payload:
+TRY_PURCHASE_TO_NODE_PARTIAL_SUCCESS:
+  payload:
+  - name: nodeFinishedOn
+    type: number
 TUTORIAL_HIGHLIGHT_SPELL:
   payload:
   - name: spellID

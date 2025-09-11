@@ -744,6 +744,8 @@ GxNewResolution: '0x0'
 GxPrismEnabled: '1'
 GxSlowShaderWarnThreshold: '30000'
 GxWindowedResolution: 1920x1080
+hardcoreDeathAlertType: '0'
+hardcoreDeathChatType: '0'
 hardTrackedQuests: ''
 hardTrackedWorldQuests: ''
 HardwareCursor: '1'

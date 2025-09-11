@@ -3924,6 +3924,11 @@ C_CatalogShop.IsShop2Enabled:
   - name: value
     nilable: true
     type: boolean
+C_CatalogShop.OnLegalDisclaimerClicked:
+  inputs:
+  - name: catalogShopProductID
+    type: number
+  outputs:
 C_CatalogShop.OpenCatalogShopInteraction:
   inputs:
   outputs:
@@ -18616,6 +18621,11 @@ C_RaidLocks.IsEncounterComplete:
   outputs:
   - name: encounterIsComplete
     type: boolean
+C_RaidLocks.IsRaidLockExtendFeatureEnabled:
+  inputs:
+  outputs:
+  - name: raidLockExtendFeatureEnabled
+    type: boolean
 C_RecentAllies.CanSetRecentAllyNote:
   inputs:
   - name: characterGUID
@@ -27782,6 +27792,11 @@ GetAllowLowLevelRaid:
   outputs:
   - name: result
     type: boolean
+GetAllowRecentAlliesSeeLocation:
+  inputs:
+  outputs:
+  - name: allowRecentAlliesSeeLocation
+    type: boolean
 GetAlternativeDefaultLanguage:
 GetArchaeologyInfo:
 GetArchaeologyRaceInfo:
@@ -32851,6 +32866,11 @@ SetAllowLowLevelRaid:
   inputs:
   - default: false
     name: allow
+    type: boolean
+  outputs:
+SetAllowRecentAlliesSeeLocation:
+  inputs:
+  - name: allowRecentAlliesSeeLocation
     type: boolean
   outputs:
 SetAutoDeclineGuildInvites:
