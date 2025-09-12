@@ -363,6 +363,7 @@ G.testsuite.uiobjects = function()
 
     Region = function()
       local f = CreateFrame('Frame')
+      local w, h = GetScreenWidth(), GetScreenHeight()
       local states = {
         init = function()
           check1(false, f:IsRectValid())
@@ -378,11 +379,128 @@ G.testsuite.uiobjects = function()
           check1(0, f:GetWidth())
           check1(false, f:IsRectValid())
         end,
+        screen0 = function()
+          check1(false, f:IsRectValid())
+        end,
+        screen1 = function()
+          check1(true, f:IsRectValid())
+          check1(0, f:GetBottom())
+          check2(w / 2, h / 2, f:GetCenter())
+          check1(h, f:GetHeight())
+          check1(0, f:GetLeft())
+          check1(2, f:GetNumPoints())
+          check4(0, 0, w, h, f:GetRect())
+          check1(w, f:GetRight())
+          check2(w, h, f:GetSize())
+          check1(h, f:GetTop())
+          check1(w, f:GetWidth())
+          check1(true, f:IsRectValid())
+        end,
       }
       local transitions = {
+        getbottom = {
+          edges = {
+            init = 'init',
+            screen0 = 'screen1',
+            screen1 = 'screen1',
+          },
+          func = function()
+            f:GetBottom()
+          end,
+        },
+        getcenter = {
+          edges = {
+            init = 'init',
+            screen0 = 'screen1',
+            screen1 = 'screen1',
+          },
+          func = function()
+            f:GetCenter()
+          end,
+        },
+        getheight = {
+          edges = {
+            init = 'init',
+            screen0 = 'screen1',
+            screen1 = 'screen1',
+          },
+          func = function()
+            f:GetHeight()
+          end,
+        },
+        getleft = {
+          edges = {
+            init = 'init',
+            screen0 = 'screen1',
+            screen1 = 'screen1',
+          },
+          func = function()
+            f:GetLeft()
+          end,
+        },
+        getrect = {
+          edges = {
+            init = 'init',
+            screen0 = 'screen1',
+            screen1 = 'screen1',
+          },
+          func = function()
+            f:GetRect()
+          end,
+        },
+        getright = {
+          edges = {
+            init = 'init',
+            screen0 = 'screen1',
+            screen1 = 'screen1',
+          },
+          func = function()
+            f:GetRight()
+          end,
+        },
+        getsize = {
+          edges = {
+            init = 'init',
+            screen0 = 'screen1',
+            screen1 = 'screen1',
+          },
+          func = function()
+            f:GetSize()
+          end,
+        },
+        gettop = {
+          edges = {
+            init = 'init',
+            screen0 = 'screen1',
+            screen1 = 'screen1',
+          },
+          func = function()
+            f:GetTop()
+          end,
+        },
+        getwidth = {
+          edges = {
+            init = 'init',
+            screen0 = 'screen1',
+            screen1 = 'screen1',
+          },
+          func = function()
+            f:GetWidth()
+          end,
+        },
+        setallpoints = {
+          to = 'screen0',
+          func = function()
+            f:SetAllPoints()
+          end,
+        },
         reset = {
           to = 'init',
           func = function()
+            f:ClearAllPoints()
+            f:SetPoint('CENTER')
+            f:ClearPoint('CENTER')
+            f:SetSize(0, 0)
           end,
         },
       }
