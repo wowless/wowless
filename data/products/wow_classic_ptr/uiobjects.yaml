@@ -4339,7 +4339,7 @@ LayeredRegion:
 Line:
   fields:
     hitRectThickness:
-      init: -10108589309952
+      init: 0
       type: number
     thickness:
       init: 4
@@ -6235,8 +6235,7 @@ Region:
       outstride: 1
     GetBottom:
       impl:
-        getter:
-        - name: bottom
+        uiobjectimpl: Region/GetBottom
       inputs:
       mayreturnnothing: true
       outputs:
@@ -6261,8 +6260,7 @@ Region:
         type: number
     GetHeight:
       impl:
-        getter:
-        - name: height
+        uiobjectimpl: Region/GetHeight
       inputs:
       - default: false
         name: ignoreRect
@@ -6272,8 +6270,7 @@ Region:
         type: number
     GetLeft:
       impl:
-        getter:
-        - name: left
+        uiobjectimpl: Region/GetLeft
       inputs:
       mayreturnnothing: true
       outputs:
@@ -6337,11 +6334,7 @@ Region:
         type: number
     GetRect:
       impl:
-        getter:
-        - name: left
-        - name: bottom
-        - name: width
-        - name: height
+        uiobjectimpl: Region/GetRect
       inputs:
       mayreturnnothing: true
       outputs:
@@ -6377,9 +6370,7 @@ Region:
         type: number
     GetSize:
       impl:
-        getter:
-        - name: width
-        - name: height
+        uiobjectimpl: Region/GetSize
       inputs:
       - default: false
         name: ignoreRect
@@ -6404,8 +6395,7 @@ Region:
         type: number
     GetWidth:
       impl:
-        getter:
-        - name: width
+        uiobjectimpl: Region/GetWidth
       inputs:
       - default: false
         name: ignoreRect

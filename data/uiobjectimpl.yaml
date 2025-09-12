@@ -172,20 +172,41 @@ Region/CreateAnimationGroup:
       api:
 Region/GetAnimationGroups:
   luafile:
+Region/GetBottom:
+  moduledelegate:
+    name: region
 Region/GetCenter:
-  luafile:
+  moduledelegate:
+    name: region
 Region/GetEffectiveScale:
   luafile:
+Region/GetHeight:
+  moduledelegate:
+    name: region
+Region/GetLeft:
+  moduledelegate:
+    name: region
 Region/GetNumPoints:
   luafile:
 Region/GetPoint:
   luafile:
+Region/GetRect:
+  moduledelegate:
+    name: region
 Region/GetRight:
-  luafile:
+  moduledelegate:
+    name: region
 Region/GetScaledRect:
   luafile:
+Region/GetSize:
+  moduledelegate:
+    name: region
 Region/GetTop:
-  luafile:
+  moduledelegate:
+    name: region
+Region/GetWidth:
+  moduledelegate:
+    name: region
 Region/Hide:
   moduledelegate:
     name: visibility

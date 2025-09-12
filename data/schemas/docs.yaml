@@ -55,16 +55,6 @@ type:
           key: string
           value:
             ref: uiobject
-    skip_uiobject_methods:
-      type:
-        mapof:
-          key:
-            ref: uiobject
-          value:
-            mapof:
-              key: string
-              value:
-                record:
     typedefs:
       type:
         mapof:
