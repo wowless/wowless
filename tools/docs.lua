@@ -466,7 +466,6 @@ local function rewriteUIObjects()
   local filename = ('data/products/%s/uiobjects.yaml'):format(product)
   local uiobjects = require('wowapi.yaml').parseFile(filename)
   local lies = deref(config, 'lies', 'uiobjects') or {}
-  local skips = config.skip_uiobject_methods or {}
   local reassigns = config.uiobject_method_reassignments or {}
   local inhm = {}
   local function inhprocess(k)
@@ -505,22 +504,12 @@ local function rewriteUIObjects()
         outstride = stride(mv.Returns),
         stuboutstrides = mm and mm.stuboutstrides,
       }
-      local okay = (function()
-        if inhm[kk][mk] and not mmv.override then
-          return false
-        end
-        if take(skips, kk, mk) then
-          return false
-        end
-        return true
-      end)()
-      if okay then
+      if not inhm[kk][mk] or mmv.override then
         u.methods[mk] = takelieor(mmv, lies, kk, mk)
       end
     end
   end
   assertTaken('lies', lies)
-  assertTaken('skips', skips)
   assertTaken('reassigns', reassigns)
   writeifchanged(filename, pprintYaml(uiobjects))
   return uiobjects
