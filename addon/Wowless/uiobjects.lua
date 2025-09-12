@@ -438,6 +438,12 @@ G.testsuite.uiobjects = function()
             f:GetLeft()
           end,
         },
+        getnumpoints = {
+          loop = true,
+          func = function()
+            f:GetNumPoints()
+          end,
+        },
         getrect = {
           edges = {
             init = 'init',
