@@ -6178,6 +6178,7 @@ Region:
       impl:
         uiobjectimpl: Region/GetBottom
       inputs:
+      mayreturnnothing: true
       outputs:
       - name: bottom
         type: number
@@ -6202,6 +6203,9 @@ Region:
       impl:
         uiobjectimpl: Region/GetHeight
       inputs:
+      - default: false
+        name: ignoreRect
+        type: boolean
       outputs:
       - name: height
         type: number
@@ -6209,6 +6213,7 @@ Region:
       impl:
         uiobjectimpl: Region/GetLeft
       inputs:
+      mayreturnnothing: true
       outputs:
       - name: left
         type: number
@@ -6272,6 +6277,7 @@ Region:
       impl:
         uiobjectimpl: Region/GetRect
       inputs:
+      mayreturnnothing: true
       outputs:
       - name: left
         type: number
@@ -6307,6 +6313,9 @@ Region:
       impl:
         uiobjectimpl: Region/GetSize
       inputs:
+      - default: false
+        name: ignoreRect
+        type: boolean
       outputs:
       - name: width
         type: number
@@ -6329,6 +6338,9 @@ Region:
       impl:
         uiobjectimpl: Region/GetWidth
       inputs:
+      - default: false
+        name: ignoreRect
+        type: boolean
       outputs:
       - name: width
         type: number
