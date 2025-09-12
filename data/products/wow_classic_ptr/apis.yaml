@@ -11511,6 +11511,11 @@ C_RaidLocks.IsEncounterComplete:
   outputs:
   - name: encounterIsComplete
     type: boolean
+C_RaidLocks.IsRaidLockExtendFeatureEnabled:
+  inputs:
+  outputs:
+  - name: raidLockExtendFeatureEnabled
+    type: boolean
 C_RecruitAFriend.CanSummonFriend:
   inputs:
   - name: guid
@@ -16913,7 +16918,7 @@ GetBlockChance:
 GetBonusBarIndex:
 GetBonusBarOffset:
 GetBuildInfo:
-  impl: GetBuildInfo_1_15_0
+  impl: GetBuildInfo_3_4_2
   inputs:
   outputs:
   - name: version

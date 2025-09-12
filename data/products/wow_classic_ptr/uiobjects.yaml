@@ -4339,7 +4339,7 @@ LayeredRegion:
 Line:
   fields:
     hitRectThickness:
-      init: -10108589309952
+      init: 0
       type: number
     thickness:
       init: 4
