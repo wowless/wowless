@@ -362,6 +362,9 @@ G.testsuite.uiobjects = function()
     end,
 
     Region = function()
+      if _G.__wowless then -- FIXME #473
+        return
+      end
       local f = CreateFrame('Frame')
       local w, h = GetScreenWidth(), GetScreenHeight()
       local states = {
