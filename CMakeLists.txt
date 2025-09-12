@@ -821,6 +821,7 @@ lua2c(
   wowless.modules.mainloop=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/mainloop.lua
   wowless.modules.parentkey=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/parentkey.lua
   wowless.modules.platform=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/platform.lua
+  wowless.modules.region=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/region.lua
   wowless.modules.scripts=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/scripts.lua
   wowless.modules.security=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/security.lua
   wowless.modules.sqlitedb=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/sqlitedb.lua

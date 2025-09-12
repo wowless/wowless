@@ -93,6 +93,8 @@ parentkey:
   deps:
 platform:
   deps:
+region:
+  deps:
 scripts:
   deps:
     env:

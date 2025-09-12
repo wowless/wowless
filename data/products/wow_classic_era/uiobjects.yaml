@@ -5991,8 +5991,7 @@ Region:
       outstride: 1
     GetBottom:
       impl:
-        getter:
-        - name: bottom
+        uiobjectimpl: Region/GetBottom
       inputs:
       outputs:
       - name: bottom
@@ -6016,16 +6015,14 @@ Region:
         type: number
     GetHeight:
       impl:
-        getter:
-        - name: height
+        uiobjectimpl: Region/GetHeight
       inputs:
       outputs:
       - name: height
         type: number
     GetLeft:
       impl:
-        getter:
-        - name: left
+        uiobjectimpl: Region/GetLeft
       inputs:
       outputs:
       - name: left
@@ -6088,11 +6085,7 @@ Region:
         type: number
     GetRect:
       impl:
-        getter:
-        - name: left
-        - name: bottom
-        - name: width
-        - name: height
+        uiobjectimpl: Region/GetRect
       inputs:
       outputs:
       - name: left
@@ -6127,9 +6120,7 @@ Region:
         type: number
     GetSize:
       impl:
-        getter:
-        - name: width
-        - name: height
+        uiobjectimpl: Region/GetSize
       inputs:
       outputs:
       - name: width
@@ -6151,8 +6142,7 @@ Region:
         type: number
     GetWidth:
       impl:
-        getter:
-        - name: width
+        uiobjectimpl: Region/GetWidth
       inputs:
       outputs:
       - name: width
