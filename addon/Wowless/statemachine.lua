@@ -93,20 +93,16 @@ local function checkStateMachine(states, transitions, init, arg)
   for k in pairs(edges) do
     toinit[k] = bfs(edges, k, init)
   end
-  local function trimerr(s)
-    local _, n = s:find(':%d+: ')
-    return n and s:sub(n + 1) or s
-  end
   local function checkState(s, n)
     local success, msg = pcall(states[s], arg)
     if not success then
-      error(('%s state: %s'):format(n, trimerr(msg)))
+      error(('%s state: %s'):format(n, msg))
     end
   end
   local function checkTransition(t, n)
     local success, msg = pcall(transitions[t].func, arg)
     if not success then
-      error(('%s transition: %s'):format(n, trimerr(msg)))
+      error(('%s transition: %s'):format(n, msg))
     end
   end
   local function checkPath(p, n)
@@ -128,7 +124,7 @@ local function checkStateMachine(states, transitions, init, arg)
           checkState(init, 'postinit')
         end)
         if not success then
-          error(('failure on %s -> %s transition %s: %s'):format(from, to, t, trimerr(msg)))
+          error(('failure on %s -> %s transition %s: %s'):format(from, to, t, msg))
         end
       end
     end
