@@ -480,6 +480,12 @@ G.testsuite.uiobjects = function()
             f:GetHeight()
           end,
         },
+        getheightignorerect = {
+          loop = true,
+          func = function()
+            f:GetHeight(true)
+          end,
+        },
         getleft = {
           edges = {
             init = 'init',
@@ -538,6 +544,12 @@ G.testsuite.uiobjects = function()
             f:GetSize()
           end,
         },
+        getsizeignorerect = {
+          loop = true,
+          func = function()
+            f:GetSize(true)
+          end,
+        },
         gettop = {
           edges = {
             init = 'init',
@@ -562,6 +574,12 @@ G.testsuite.uiobjects = function()
           },
           func = function()
             f:GetWidth()
+          end,
+        },
+        getwidthignorerect = {
+          loop = true,
+          func = function()
+            f:GetWidth(true)
           end,
         },
         setallpoints = {
