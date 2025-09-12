@@ -500,6 +500,12 @@ G.testsuite.uiobjects = function()
             f:SetAllPoints()
           end,
         },
+        setsizezerozero = {
+          loop = true,
+          func = function()
+            f:SetSize(0, 0)
+          end,
+        },
         reset = {
           to = 'init',
           func = function()
