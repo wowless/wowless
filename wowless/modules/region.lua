@@ -35,6 +35,19 @@ return function()
     return r.width
   end
 
+  local function SetHeight(r, h)
+    r.height = h
+  end
+
+  local function SetSize(r, w, h)
+    r.width = w
+    r.height = h
+  end
+
+  local function SetWidth(r, w)
+    r.width = w
+  end
+
   return {
     GetBottom = GetBottom,
     GetCenter = GetCenter,
@@ -45,5 +58,8 @@ return function()
     GetSize = GetSize,
     GetTop = GetTop,
     GetWidth = GetWidth,
+    SetHeight = SetHeight,
+    SetSize = SetSize,
+    SetWidth = SetWidth,
   }
 end

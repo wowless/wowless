@@ -219,6 +219,9 @@ Region/SetAllPoints:
   luafile:
 Region/SetAlpha:
   luafile:
+Region/SetHeight:
+  moduledelegate:
+    name: region
 Region/SetPoint:
   luafile:
     modules:
@@ -231,6 +234,12 @@ Region/SetScale:
 Region/SetShown:
   moduledelegate:
     name: visibility
+Region/SetSize:
+  moduledelegate:
+    name: region
+Region/SetWidth:
+  moduledelegate:
+    name: region
 Region/Show:
   moduledelegate:
     name: visibility
