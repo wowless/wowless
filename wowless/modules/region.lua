@@ -35,6 +35,10 @@ return function()
     return r.width
   end
 
+  local function IsRectValid()
+    return false
+  end
+
   local function SetHeight(r, h)
     r.height = h
   end
@@ -58,6 +62,7 @@ return function()
     GetSize = GetSize,
     GetTop = GetTop,
     GetWidth = GetWidth,
+    IsRectValid = IsRectValid,
     SetHeight = SetHeight,
     SetSize = SetSize,
     SetWidth = SetWidth,

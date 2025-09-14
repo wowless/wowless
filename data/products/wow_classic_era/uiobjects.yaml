@@ -6266,6 +6266,8 @@ Region:
       - name: isProtectedExplicitly
         type: boolean
     IsRectValid:
+      impl:
+        uiobjectimpl: Region/IsRectValid
       inputs:
       outputs:
       - name: isValid
