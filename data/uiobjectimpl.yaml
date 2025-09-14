@@ -212,6 +212,9 @@ Region/Hide:
     name: visibility
 Region/IsProtected:
   luafile:
+Region/IsRectValid:
+  moduledelegate:
+    name: region
 Region/IsVisible:
   moduledelegate:
     name: visibility
