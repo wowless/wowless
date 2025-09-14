@@ -6813,8 +6813,7 @@ Region:
       outputs:
     SetHeight:
       impl:
-        setter:
-        - name: height
+        uiobjectimpl: Region/SetHeight
       inputs:
       - name: height
         type: number
@@ -6883,9 +6882,7 @@ Region:
       outputs:
     SetSize:
       impl:
-        setter:
-        - name: width
-        - name: height
+        uiobjectimpl: Region/SetSize
       inputs:
       - name: x
         type: number
@@ -6894,8 +6891,7 @@ Region:
       outputs:
     SetWidth:
       impl:
-        setter:
-        - name: width
+        uiobjectimpl: Region/SetWidth
       inputs:
       - name: width
         type: number
