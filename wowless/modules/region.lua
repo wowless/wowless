@@ -1,6 +1,9 @@
 return function()
-  local function validate()
-    return false
+  local function validate(r)
+    if r.dirty then
+      r.dirty = false
+    end
+    return r.valid
   end
 
   local function GetBottom(r)
@@ -63,21 +66,30 @@ return function()
     end
   end
 
-  local function IsRectValid()
-    return false
+  local function IsRectValid(r)
+    return r.valid and not r.dirty
   end
 
   local function SetHeight(r, h)
-    r.height = h
+    if h ~= r.height then
+      r.dirty = true
+      r.height = h
+    end
   end
 
   local function SetSize(r, w, h)
-    r.width = w
-    r.height = h
+    if w ~= r.width or h ~= r.height then
+      r.dirty = true
+      r.width = w
+      r.height = h
+    end
   end
 
   local function SetWidth(r, w)
-    r.width = w
+    if w ~= r.width then
+      r.dirty = true
+      r.width = w
+    end
   end
 
   return {
