@@ -197,7 +197,8 @@ Region/GetRight:
   moduledelegate:
     name: region
 Region/GetScaledRect:
-  luafile:
+  moduledelegate:
+    name: region
 Region/GetSize:
   moduledelegate:
     name: region

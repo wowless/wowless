@@ -23,6 +23,11 @@ return function()
     return r.left + r.width
   end
 
+  local function GetScaledRect(r)
+    local s = r:GetEffectiveScale()
+    return r.left * s, r.bottom * s, r.width * s, r.height * s
+  end
+
   local function GetSize(r)
     return r.width, r.height
   end
@@ -59,6 +64,7 @@ return function()
     GetLeft = GetLeft,
     GetRect = GetRect,
     GetRight = GetRight,
+    GetScaledRect = GetScaledRect,
     GetSize = GetSize,
     GetTop = GetTop,
     GetWidth = GetWidth,
