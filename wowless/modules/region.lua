@@ -44,6 +44,11 @@ return function()
     end
   end
 
+  local function GetScaledRect(r)
+    local s = r:GetEffectiveScale()
+    return r.left * s, r.bottom * s, r.width * s, r.height * s
+  end
+
   local function GetSize(r, ignoreRect)
     if ignoreRect or not validate(r) then
       return r.width, r.height
@@ -99,6 +104,7 @@ return function()
     GetLeft = GetLeft,
     GetRect = GetRect,
     GetRight = GetRight,
+    GetScaledRect = GetScaledRect,
     GetSize = GetSize,
     GetTop = GetTop,
     GetWidth = GetWidth,
