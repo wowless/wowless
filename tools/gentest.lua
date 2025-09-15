@@ -195,13 +195,7 @@ local ptablemap = {
         end
       end
       -- TODO remove these super duper field hacks
-      ft.bottom = nil
-      ft.height = nil
-      ft.left = nil
       ft.parent = nil
-      ft.top = nil
-      ft.right = nil
-      ft.width = nil
       if k == 'EditBox' then
         ft.shown.init = false
       elseif k == 'Font' then
