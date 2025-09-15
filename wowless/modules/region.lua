@@ -45,8 +45,10 @@ return function()
   end
 
   local function GetScaledRect(r)
-    local s = r:GetEffectiveScale()
-    return r.left * s, r.bottom * s, r.width * s, r.height * s
+    if validate(r) then
+      local s = r:GetEffectiveScale()
+      return r.left * s, r.bottom * s, (r.right - r.left) * s, (r.top - r.bottom) * s
+    end
   end
 
   local function GetSize(r, ignoreRect)
