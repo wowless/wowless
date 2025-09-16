@@ -50,14 +50,12 @@ return function(self, point, ...)
   if type(maybeX) == 'number' and type(maybeY) == 'number' then
     x, y = maybeX, maybeY
   end
-  if relativeTo ~= self then
-    local newPoint = { point, relativeTo, relativePoint, x, y }
-    for i, p in ipairs(self.points) do
-      if p[1] == point then
-        self.points[i] = newPoint
-        return
-      end
+  local newPoint = { point, relativeTo, relativePoint, x, y }
+  for i, p in ipairs(self.points) do
+    if p[1] == point then
+      self.points[i] = newPoint
+      return
     end
-    table.insert(self.points, newPoint)
   end
+  table.insert(self.points, newPoint)
 end

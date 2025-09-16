@@ -1049,6 +1049,15 @@
     </Scripts>
   </Frame>
 
+  <Frame name='WowlessSelfAnchor'>
+    <Anchors>
+      <Anchor relativeTo='WowlessSelfAnchor' />
+    </Anchors>
+  </Frame>
+  <Script>
+    Wowless.check1(0, WowlessSelfAnchor:GetNumPoints())
+  </Script>
+
   <Script>
     if WowlessOldErrorHandler then
       seterrorhandler(WowlessOldErrorHandler)
