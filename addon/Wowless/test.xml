@@ -1058,6 +1058,22 @@
     Wowless.check1(0, WowlessSelfAnchor:GetNumPoints())
   </Script>
 
+  <Frame>
+    <Frames>
+      <Frame parentKey='foo'>
+        <Anchors>
+          <Anchor relativeKey='$parent.foo' />
+        </Anchors>
+      </Frame>
+    </Frames>
+    <Scripts>
+      <OnLoad>
+        Wowless.check1(1, self.foo:GetNumPoints())
+        Wowless.check5('TOPLEFT', self, 'TOPLEFT', 0, 0, self.foo:GetPoint(1))
+      </OnLoad>
+    </Scripts>
+  </Frame>
+
   <Script>
     if WowlessOldErrorHandler then
       seterrorhandler(WowlessOldErrorHandler)
