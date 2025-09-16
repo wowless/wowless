@@ -16,4 +16,4 @@ SELECT
 FROM
   UiItemInteraction
 WHERE
-  ID == ?1;
+  ID = ?1;

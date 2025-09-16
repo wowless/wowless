@@ -7,4 +7,4 @@ SELECT
 FROM
   UiMap
 WHERE
-  ID == ?1;
+  ID = ?1;
