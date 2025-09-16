@@ -257,6 +257,9 @@ return function(
       else
         relativeTo = parent.parent and parent.parent.luarep
       end
+      if relativeTo == parent.luarep then
+        return
+      end
       local relativePoint = anchor.attr.relativepoint or point
       local offsetX, offsetY = getXY(anchor.kids[#anchor.kids])
       local x = anchor.attr.x or offsetX
