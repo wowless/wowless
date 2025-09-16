@@ -1,5 +1,10 @@
 local api, env, log, uiobjects = ...
 local validPoints = require('runtime.stringenums').FramePoint
+local selfErr = table.concat({
+  'Action[SetPoint] failed because',
+  '[Cannot anchor to itself]: ',
+  'attempted from: %s:SetPoint.',
+})
 return function(self, point, ...)
   -- TODO handle resetting points
   point = point and point:upper() or 'CENTER'
@@ -22,6 +27,9 @@ return function(self, point, ...)
     idx = idx + 1
   elseif type(maybeRelativeTo) == 'nil' then
     idx = idx + 1
+  end
+  if relativeTo == self then
+    error(selfErr:format(self:GetObjectType()), 0)
   end
   local maybeRelativePoint = select(idx, ...)
   if type(maybeRelativePoint) == 'string' then
