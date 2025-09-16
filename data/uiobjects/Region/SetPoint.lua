@@ -1,10 +1,10 @@
 local api, env, log, uiobjects = ...
 local validPoints = require('runtime.stringenums').FramePoint
+local badpointErr = '%s:SetPoint(): Invalid region point %s'
 local usageErr = table.concat({
   '%s:SetPoint(): Usage: (',
   '"point" [, region or nil] [, "relativePoint"] [, offsetX, offsetY]',
 })
-local badpointErr = '%s:SetPoint(): Invalid region point %s'
 local selfErr = table.concat({
   'Action[SetPoint] failed because',
   '[Cannot anchor to itself]: ',
