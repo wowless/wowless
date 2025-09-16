@@ -1,8 +1,8 @@
 SELECT
   Filename AS classFile,
-  ID as classID,
+  ID AS classID,
   Name_lang AS className
 FROM
   ChrClasses
 WHERE
-  ID == ?1;
+  ID = ?1;

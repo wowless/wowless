@@ -4,5 +4,5 @@ SELECT
 FROM
   ItemSubClass
 WHERE
-  ClassID == ?1
-  AND SubClassID == ?2;
+  ClassID = ?1
+  AND SubClassID = ?2;

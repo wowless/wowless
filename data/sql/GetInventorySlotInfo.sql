@@ -4,4 +4,4 @@ SELECT
 FROM
   PaperDollItemFrame
 WHERE
-  LOWER(ItemButtonName) == LOWER(?1);
+  LOWER(ItemButtonName) = LOWER(?1);
