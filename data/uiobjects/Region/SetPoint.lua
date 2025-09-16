@@ -5,6 +5,11 @@ local usageErr = table.concat({
   '%s:SetPoint(): Usage: (',
   '"point" [, region or nil] [, "relativePoint"] [, offsetX, offsetY]',
 })
+local selfErr = table.concat({
+  'Action[SetPoint] failed because',
+  '[Cannot anchor to itself]: ',
+  'attempted from: %s:SetPoint.',
+})
 return function(self, point, ...)
   -- TODO handle resetting points
   if point == nil then
@@ -33,6 +38,9 @@ return function(self, point, ...)
   elseif type(maybeRelativeTo) == 'nil' then
     idx = idx + 1
   end
+  if relativeTo == self then
+    error(selfErr:format(self:GetObjectType()), 0)
+  end
   local maybeRelativePoint = select(idx, ...)
   if type(maybeRelativePoint) == 'string' then
     relativePoint = maybeRelativePoint
@@ -42,14 +50,12 @@ return function(self, point, ...)
   if type(maybeX) == 'number' and type(maybeY) == 'number' then
     x, y = maybeX, maybeY
   end
-  if relativeTo ~= self then
-    local newPoint = { point, relativeTo, relativePoint, x, y }
-    for i, p in ipairs(self.points) do
-      if p[1] == point then
-        self.points[i] = newPoint
-        return
-      end
+  local newPoint = { point, relativeTo, relativePoint, x, y }
+  for i, p in ipairs(self.points) do
+    if p[1] == point then
+      self.points[i] = newPoint
+      return
     end
-    table.insert(self.points, newPoint)
   end
+  table.insert(self.points, newPoint)
 end
