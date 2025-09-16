@@ -7,4 +7,4 @@ templater = placeholder
 tab_space_size = 2
 
 [sqlfluff:templater:placeholder]
-param_regex = \?\d+
+param_style = question_mark
