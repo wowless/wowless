@@ -361,6 +361,84 @@ G.testsuite.uiobjects = function()
       }
     end,
 
+    Region = function()
+      return {
+        points = function()
+          return {
+            dag = function()
+              if _G.__wowless then -- TODO remove this
+                return
+              end
+              local function rstr(r)
+                return tostring(r):gsub('^.*0x(.*)$', '%1')
+              end
+              return {
+                ['0'] = function()
+                  local f = CreateFrame('Frame')
+                  local msg = table.concat({
+                    'Action[SetPoint] failed because',
+                    '[Cannot anchor to itself]: ',
+                    'attempted from: Frame:SetPoint.',
+                  })
+                  check2(false, msg, pcall(f.SetPoint, f, 'CENTER', f))
+                end,
+                ['1'] = function()
+                  local f = CreateFrame('Frame')
+                  local g = CreateFrame('Frame')
+                  local msg = table.concat({
+                    'Action[SetPoint] failed because',
+                    '[Cannot anchor to a region dependent on it]: ',
+                    'attempted from: Frame:SetPoint.\n',
+                    'Relative: [' .. rstr(g) .. ']\n',
+                    'Dependent: [' .. rstr(g) .. ']',
+                  })
+                  check0(g:SetPoint('CENTER', f))
+                  check2(false, msg, pcall(f.SetPoint, f, 'CENTER', g))
+                end,
+                ['2'] = function()
+                  local f = CreateFrame('Frame')
+                  local g = CreateFrame('Frame')
+                  local h = CreateFrame('Frame')
+                  local msg = table.concat({
+                    'Action[SetPoint] failed because',
+                    '[Cannot anchor to a region dependent on it]: ',
+                    'attempted from: Frame:SetPoint.\n',
+                    'Relative: [' .. rstr(h) .. ']\n',
+                    'Dependent: [' .. rstr(g) .. ']\n',
+                    'Dependent ancestors:\n',
+                    '[' .. rstr(h) .. ']',
+                  })
+                  check0(g:SetPoint('CENTER', f))
+                  check0(h:SetPoint('CENTER', g))
+                  check2(false, msg, pcall(f.SetPoint, f, 'CENTER', h))
+                end,
+                ['3'] = function()
+                  local f = CreateFrame('Frame')
+                  local g = CreateFrame('Frame')
+                  local h = CreateFrame('Frame')
+                  local i = CreateFrame('Frame')
+                  local msg = table.concat({
+                    'Action[SetPoint] failed because',
+                    '[Cannot anchor to a region dependent on it]: ',
+                    'attempted from: Frame:SetPoint.\n',
+                    'Relative: [' .. rstr(i) .. ']\n',
+                    'Dependent: [' .. rstr(g) .. ']\n',
+                    'Dependent ancestors:\n',
+                    '[' .. rstr(h) .. ']\n',
+                    '[' .. rstr(i) .. ']',
+                  })
+                  check0(g:SetPoint('CENTER', f))
+                  check0(h:SetPoint('CENTER', g))
+                  check0(i:SetPoint('CENTER', h))
+                  check2(false, msg, pcall(f.SetPoint, f, 'CENTER', i))
+                end,
+              }
+            end,
+          }
+        end,
+      }
+    end,
+
     Scale = function()
       return {
         origin = function()
