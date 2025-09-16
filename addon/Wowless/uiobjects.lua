@@ -436,6 +436,18 @@ G.testsuite.uiobjects = function()
             end,
           }
         end,
+        SetPoint = function()
+          return {
+            noarg = function()
+              local f = CreateFrame('Frame')
+              local msg = table.concat({
+                'Frame:SetPoint(): Usage: (',
+                '"point" [, region or nil] [, "relativePoint"] [, offsetX, offsetY]',
+              })
+              check2(false, msg, pcall(f.SetPoint, f))
+            end,
+          }
+        end,
       }
     end,
 

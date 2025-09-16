@@ -1,8 +1,15 @@
 local api, env, log, uiobjects = ...
 local validPoints = require('runtime.stringenums').FramePoint
+local usageErr = table.concat({
+  '%s:SetPoint(): Usage: (',
+  '"point" [, region or nil] [, "relativePoint"] [, offsetX, offsetY]',
+})
 return function(self, point, ...)
   -- TODO handle resetting points
-  point = point and point:upper() or 'CENTER'
+  if point == nil then
+    error(usageErr:format(self:GetObjectType()), 0)
+  end
+  point = point:upper()
   assert(validPoints[point])
   local relativeTo = self.parent
   local relativePoint = point
