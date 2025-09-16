@@ -1,4 +1,4 @@
-local api = ...
+local uiobjecttypes = ...
 return function()
-  return api.uiobjectTypes.button.sandboxMT
+  return uiobjecttypes.GetSandboxMetatable('button')
 end

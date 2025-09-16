@@ -1,4 +1,4 @@
-local api = ...
+local talents = ...
 return function()
-  return api.modules.talents.activeConfigID
+  return talents.activeConfigID
 end

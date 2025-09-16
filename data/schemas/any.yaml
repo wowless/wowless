@@ -1,8 +1,0 @@
----
-name: any
-type:
-  oneof:
-  - boolean
-  - number
-  - string
-  - table

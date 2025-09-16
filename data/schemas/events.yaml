@@ -1,4 +1,3 @@
----
 name: events
 type:
   mapof:
@@ -6,9 +5,12 @@ type:
     value:
       record:
         payload:
+          required: true
           type:
             sequenceof:
               record:
+                default:
+                  type: any
                 name:
                   required: true
                   type: string
@@ -18,3 +20,5 @@ type:
                   required: true
                   type:
                     schema: type
+        stride:
+          type: number

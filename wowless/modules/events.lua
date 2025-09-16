@@ -1,5 +1,5 @@
 local hlist = require('wowless.hlist')
-return function(datalua)
+return function(datalua, funcheck, log, loglevel, scripts)
   local allregs = hlist()
   local regs = {}
   for k in pairs(datalua.events) do
@@ -9,15 +9,21 @@ return function(datalua)
   local function RegisterEvent(frame, event)
     event = event:upper()
     local reg = assert(regs[event], 'cannot register ' .. event)
-    if not allregs:has(frame) then
-      reg:insert(frame)
+    if reg:has(frame) then
+      return false
     end
+    reg:insert(frame)
+    return true
   end
 
   local function UnregisterEvent(frame, event)
     event = event:upper()
     local reg = assert(regs[event], 'cannot unregister ' .. event)
-    reg:remove(frame)
+    if reg:has(frame) then
+      reg:remove(frame)
+      return true
+    end
+    return false
   end
 
   local function UnregisterAllEvents(frame)
@@ -28,12 +34,11 @@ return function(datalua)
   end
 
   local function RegisterAllEvents(frame)
-    UnregisterAllEvents(frame)
     allregs:insert(frame)
   end
 
   local function IsEventRegistered(frame, event)
-    return allregs:has(frame) or regs[event:upper()]:has(frame)
+    return regs[event:upper()]:has(frame), nil
   end
 
   local function IsEventValid(event)
@@ -59,6 +64,39 @@ return function(datalua)
     return unpack(GetFramesRegisteredForEvent(event))
   end
 
+  local echecks = setmetatable({}, {
+    __index = function(t, k)
+      local e = datalua.events[k]
+      local v = funcheck.makeCheckOutputs(k, {
+        outputs = e.payload,
+        outstride = e.stride,
+      })
+      t[k] = v
+      return v
+    end,
+  })
+
+  local function DoSendEvent(event, ...)
+    for _, reg in ipairs(GetFramesRegisteredForEvent(event)) do
+      scripts.RunScript(reg, 'OnEvent', event, ...)
+    end
+  end
+
+  local function SendEvent(event, ...)
+    if not IsEventValid(event) then
+      error('internal error: cannot send ' .. event)
+    end
+    if loglevel >= 1 then
+      local largs = {}
+      for i = 1, select('#', ...) do
+        local arg = select(i, ...)
+        table.insert(largs, type(arg) == 'string' and ('%q'):format(arg) or tostring(arg))
+      end
+      log(1, 'sending event %s (%s)', event, table.concat(largs, ', '))
+    end
+    DoSendEvent(event, echecks[event](...))
+  end
+
   return {
     GetFramesRegisteredForEvent = GetFramesRegisteredForEvent,
     GetFramesRegisteredForEventUnpacked = GetFramesRegisteredForEventUnpacked,
@@ -66,6 +104,8 @@ return function(datalua)
     IsEventValid = IsEventValid,
     RegisterAllEvents = RegisterAllEvents,
     RegisterEvent = RegisterEvent,
+    RegisterUnitEvent = RegisterEvent, -- TODO implement properly
+    SendEvent = SendEvent,
     UnregisterAllEvents = UnregisterAllEvents,
     UnregisterEvent = UnregisterEvent,
   }

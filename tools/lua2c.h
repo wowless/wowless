@@ -10,6 +10,8 @@ struct cmodule {
 };
 
 struct preload {
+  const struct preload **preloads;
+  int npreloads;
   const struct module **modules;
   int nmodules;
   const struct cmodule *cmodules;

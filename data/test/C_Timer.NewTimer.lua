@@ -26,6 +26,9 @@ for k, v in pairs(readonly) do
   end)
   assertEquals(false, success, k)
   assertEquals('Attempted to assign to read-only key ' .. k, msg:sub(-37 - k:len()))
+  if v == 'function' then
+    assertEquals(false, pcall(coroutine.create, t[k]))
+  end
 end
 assertEquals(nil, t.WowlessStuff)
 t.WowlessStuff = 'wowless'

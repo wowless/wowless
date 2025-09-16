@@ -1,4 +1,3 @@
----
 AddPrivateAuraAnchorArgs:
   fields:
     auraIndex:
@@ -12,7 +11,8 @@ AddPrivateAuraAnchorArgs:
       type:
         structure: PrivateAuraIconInfo
     parent:
-      type: Frame
+      type:
+        uiobject: Frame
     showCountdownFrame:
       type: boolean
     showCountdownNumbers:
@@ -26,11 +26,14 @@ AnchorBinding:
     offsetY:
       type: number
     point:
-      type: FramePoint
+      type:
+        stringenum: FramePoint
     relativePoint:
-      type: FramePoint
+      type:
+        stringenum: FramePoint
     relativeTo:
-      type: Region
+      type:
+        uiobject: Region
 AppearanceSourceInfo:
   fields:
     canDisplayOnPlayer:
@@ -189,6 +192,32 @@ C_AddOnProfiler.AddOnPerformanceMessage:
     type:
       type:
         enum: AddOnPerformanceMessageType
+C_AddOnProfiler.AddOnProfilerCallEvent:
+  fields:
+    allocatedBytes:
+      type: number
+    deallocatedBytes:
+      type: number
+    elapsedMilliseconds:
+      type: number
+    elapsedTicks:
+      type: number
+    name:
+      type: string
+C_AddOnProfiler.AddOnProfilerCallResults:
+  fields:
+    allocatedBytes:
+      type: number
+    deallocatedBytes:
+      type: number
+    elapsedMilliseconds:
+      type: number
+    elapsedTicks:
+      type: number
+    events:
+      type:
+        arrayof:
+          structure: C_AddOnProfiler.AddOnProfilerCallEvent
 C_AddOnProfiler.AddOnProfilerResult:
   fields:
     addOnName:
@@ -695,6 +724,22 @@ C_Bank.BankTabData:
       type: number
     name:
       type: string
+    tabCleanupConfirmation:
+      type: string
+    tabNameEditBoxHeader:
+      type: string
+C_Bank.PurchasableBankTabData:
+  fields:
+    canAfford:
+      type: boolean
+    purchasePromptBody:
+      type: string
+    purchasePromptConfirmation:
+      type: string
+    purchasePromptTitle:
+      type: string
+    tabCost:
+      type: number
 C_BattleNet.BNetAccountInfo:
   fields:
     accountName:
@@ -1136,6 +1181,16 @@ C_ChallengeMode.ChallengeModeGuildTopAttempt:
           structure: C_ChallengeMode.ChallengeModeGuildAttemptMember
     name:
       type: string
+C_ChallengeMode.ChallengeModeReward:
+  fields:
+    displayInfoID:
+      type: number
+    isCurrency:
+      type: boolean
+    quantity:
+      type: number
+    rewardID:
+      type: number
 C_ChromieTime.ChromieTimeExpansionInfo:
   fields:
     alreadyOn:
@@ -1606,6 +1661,16 @@ C_ClubFinder.RecruitingClubInfo:
       nilable: true
       type:
         structure: GuildTabardInfo
+C_ColorOverrides.ColorOverrideInfo:
+  fields:
+    overrideColor:
+      type:
+        structure: colorRGB
+    overrideColorString:
+      type: string
+    overrideType:
+      type:
+        enum: ColorOverride
 C_Commentator.CommentatorHistory:
   fields:
     overrideNameDirectory:
@@ -1819,6 +1884,25 @@ C_ContributionCollector.ContributionMapInfo:
     position:
       type:
         structure: vector2
+C_CooldownViewer.CooldownViewerCooldown:
+  fields:
+    charges:
+      type: boolean
+    flags:
+      type:
+        enum: CooldownSetSpellFlags
+    hasAura:
+      type: boolean
+    linkedSpellIDs:
+      type:
+        arrayof: number
+    overrideSpellID:
+      nilable: true
+      type: number
+    selfAura:
+      type: boolean
+    spellID:
+      type: number
 C_CovenantPreview.CovenantAbilityInfo:
   fields:
     spellID:
@@ -2014,6 +2098,21 @@ C_CreatureInfo.ClassInfo:
       type: number
     className:
       type: string
+C_CreatureInfo.CreatureFamilyInfo:
+  fields:
+    iconFile:
+      nilable: true
+      type: number
+    id:
+      type: number
+    name:
+      type: string
+C_CreatureInfo.CreatureTypeInfo:
+  fields:
+    id:
+      type: number
+    name:
+      type: string
 C_CreatureInfo.FactionInfo:
   fields:
     groupTag:
@@ -2181,9 +2280,11 @@ C_EditMode.EditModeAnchorInfo:
     offsetY:
       type: number
     point:
-      type: FramePoint
+      type:
+        stringenum: FramePoint
     relativePoint:
-      type: FramePoint
+      type:
+        stringenum: FramePoint
     relativeTo:
       type: string
 C_EditMode.EditModeLayoutInfo:
@@ -2232,6 +2333,16 @@ C_EditMode.EditModeSystemInfo:
     systemIndex:
       nilable: true
       type: number
+C_EncodingUtil.CBORSerializationOptions:
+  fields:
+    ignoreSerializationErrors:
+      default: false
+      type: boolean
+C_EncodingUtil.JSONSerializationOptions:
+  fields:
+    ignoreSerializationErrors:
+      default: false
+      type: boolean
 C_EncounterJournal.DungeonEntranceMapInfo:
   fields:
     areaPoiID:
@@ -2660,6 +2771,22 @@ C_GamePad.GamePadStickConfig:
       type: number
     stick:
       type: string
+C_GameRules.GameModeDisplayInfo:
+  fields:
+    characterCreateExtraHeight:
+      type: number
+    characterCreateOuterBorder:
+      type: number
+    logo:
+      type: number
+    logoHeight:
+      type: number
+    logoShrunkenHeight:
+      type: number
+    logoUsesDarkBackdrop:
+      type: boolean
+    logoVerticalOffset:
+      type: number
 C_Garrison.AutoCombatDamageClassString:
   fields:
     damageClassValue:
@@ -3211,6 +3338,31 @@ C_GuildInfo.GuildNewsInfo:
       type: string
     year:
       type: number
+C_GuildInfo.GuildRenameStatus:
+  fields:
+    currentGuildMoney:
+      type: number
+    isNameChangeEnabled:
+      type: boolean
+    isPlayerGuildMaster:
+      type: boolean
+    nextRenameTime:
+      type: number
+    oldGuildName:
+      type: string
+    refundAmount:
+      type: number
+    refundEligibleEndTime:
+      type: number
+    renamePrice:
+      type: number
+    reservedName:
+      type: string
+    reservedNameExpirationTime:
+      type: number
+    result:
+      type:
+        enum: GuildErrorType
 C_InvasionInfo.InvasionMapInfo:
   fields:
     atlasName:
@@ -3230,6 +3382,20 @@ C_IslandsQueue.IslandsQueueDifficultyInfo:
     difficultyId:
       type: number
     previewRewardQuestId:
+      type: number
+C_Item.ItemUpgradeInfo:
+  fields:
+    currentLevel:
+      type: number
+    maxItemLevel:
+      type: number
+    maxLevel:
+      type: number
+    trackString:
+      nilable: true
+      type: string
+    trackStringID:
+      nilable: true
       type: number
 C_ItemInteraction.ConversionCurrencyCost:
   fields:
@@ -3707,6 +3873,9 @@ C_LFGList.LfgSearchResultPlayerInfo:
     className:
       type: string
     isLeader:
+      type: boolean
+    isLeaver:
+      default: false
       type: boolean
     level:
       nilable: true
@@ -4295,6 +4464,14 @@ C_PaperDollInfo.InspectPVPData:
       type: number
     roundsWon:
       type: number
+C_PaperDollInfo.InspectRatedBGData:
+  fields:
+    played:
+      type: number
+    rating:
+      type: number
+    won:
+      type: number
 C_PartyPose.PartyPoseInfo:
   fields:
     defeatModelSceneID:
@@ -4480,6 +4657,8 @@ C_PerksProgram.PerksVendorItemInfo:
       type: boolean
     iconTexture:
       type: string
+    invType:
+      type: string
     isPurchasePending:
       type: boolean
     itemID:
@@ -4503,6 +4682,9 @@ C_PerksProgram.PerksVendorItemInfo:
       type: number
     purchased:
       type: boolean
+    quality:
+      type:
+        enum: ItemQuality
     refundable:
       type: boolean
     showSaleBanner:
@@ -4535,9 +4717,9 @@ C_PerksProgram.PerksVendorSubItemInfo:
   fields:
     invType:
       type: string
-    itemAppearanceID:
-      type: number
     itemID:
+      type: number
+    itemModifiedAppearanceID:
       type: number
     name:
       type: string
@@ -4650,6 +4832,8 @@ C_PlayerChoice.PlayerChoiceOptionButtonInfo:
     rewardQuestID:
       nilable: true
       type: number
+    selected:
+      type: boolean
     showCheckmark:
       type: boolean
     soundKitID:
@@ -4691,10 +4875,6 @@ C_PlayerChoice.PlayerChoiceOptionInfo:
       nilable: true
       type:
         enum: PlayerChoiceRarity
-    rarityColor:
-      nilable: true
-      type:
-        structure: colorRGBA
     rewardInfo:
       type:
         structure: C_PlayerChoice.PlayerChoiceOptionRewardInfo
@@ -4816,10 +4996,11 @@ C_PvP.BattlemasterListInfo:
   fields:
     icon:
       type: number
-    instanceType:
-      type: number
     longDescription:
       type: string
+    matchmakingType:
+      type:
+        enum: PvPMatchmakingType
     maxPlayers:
       type: number
     minPlayers:
@@ -5073,6 +5254,8 @@ C_PvP.RandomBGInfo:
   fields:
     bgID:
       type: number
+    bgIndex:
+      type: number
     canQueue:
       type: boolean
     hasRandomWinToday:
@@ -5081,6 +5264,8 @@ C_PvP.RandomBGInfo:
       type: number
     minLevel:
       type: number
+    name:
+      type: string
 C_PvP.RatedBGBlitzSpecStats:
   fields:
     seasonMostPlayedSpecGames:
@@ -5727,6 +5912,12 @@ C_ScriptedAnimations.ScriptedAnimationEffect:
       type: number
     yawRadians:
       type: number
+C_SecureTransfer.MailInfo:
+  fields:
+    sendMoney:
+      type: number
+    target:
+      type: string
 C_SocialQueue.SocialQueueConfig:
   fields:
     DELAY_DURATION:
@@ -5942,6 +6133,81 @@ C_SpecializationInfo.PvpTalentSlotInfo:
     selectedTalentID:
       nilable: true
       type: number
+C_SpecializationInfo.TalentInfoQuery:
+  fields:
+    column:
+      nilable: true
+      type: number
+    groupIndex:
+      nilable: true
+      type: number
+    isInspect:
+      default: false
+      type: boolean
+    isPet:
+      default: false
+      type: boolean
+    specializationIndex:
+      nilable: true
+      type: number
+    talentIndex:
+      nilable: true
+      type: number
+    target:
+      nilable: true
+      type: unit
+    tier:
+      nilable: true
+      type: number
+C_SpecializationInfo.TalentInfoResult:
+  fields:
+    available:
+      default: false
+      type: boolean
+    column:
+      type: number
+    grantedByAura:
+      default: false
+      type: boolean
+    hasGoldBorder:
+      default: false
+      type: boolean
+    icon:
+      type: number
+    isExceptional:
+      default: false
+      type: boolean
+    isPVPTalentUnlocked:
+      default: false
+      type: boolean
+    known:
+      default: false
+      type: boolean
+    maxRank:
+      type: number
+    meetsPrereq:
+      default: false
+      type: boolean
+    meetsPreviewPrereq:
+      default: false
+      type: boolean
+    name:
+      type: string
+    previewRank:
+      type: number
+    rank:
+      type: number
+    selected:
+      default: false
+      type: boolean
+    spellID:
+      default: 0
+      type: number
+    talentID:
+      default: 0
+      type: number
+    tier:
+      type: number
 C_Spell.DeadlyDebuffInfo:
   fields:
     criticalStacks:
@@ -6143,6 +6409,8 @@ C_Texture.AtlasInfo:
   fields:
     bottomTexCoord:
       type: number
+    elementName:
+      type: string
     file:
       nilable: true
       type: number
@@ -6536,9 +6804,6 @@ C_TransmogCollection.TransmogCategoryAppearanceInfo:
       type: boolean
     isUsable:
       type: boolean
-    restrictedSlotID:
-      nilable: true
-      type: number
     uiOrder:
       type: number
     visualID:
@@ -6639,6 +6904,51 @@ C_UIWidgetManager.BulletTextListWidgetVisualizationInfo:
         enum: WidgetShownState
     textureKit:
       type: string
+    widgetScale:
+      type:
+        enum: UIWidgetScale
+    widgetSizeSetting:
+      type: number
+    widgetTag:
+      type: string
+C_UIWidgetManager.ButtonHeaderWidgetVisualizationInfo:
+  fields:
+    buttons:
+      type:
+        arrayof:
+          structure: C_UIWidgetManager.UIWidgetSpellButtonInfo
+    frameTextureKit:
+      type: string
+    hasTimer:
+      type: boolean
+    headerText:
+      type: string
+    inAnimType:
+      type:
+        enum: WidgetAnimationType
+    layoutDirection:
+      type:
+        enum: UIWidgetLayoutDirection
+    modelSceneLayer:
+      type:
+        enum: UIWidgetModelSceneLayer
+    orderIndex:
+      type: number
+    outAnimType:
+      type:
+        enum: WidgetAnimationType
+    scriptedAnimationEffectID:
+      type: number
+    shownState:
+      type:
+        enum: WidgetShownState
+    textureKit:
+      type: string
+    tooltip:
+      type: string
+    tooltipLoc:
+      type:
+        enum: UIWidgetTooltipLocation
     widgetScale:
       type:
         enum: UIWidgetScale
@@ -7755,6 +8065,9 @@ C_UIWidgetManager.TextureAndTextVisualizationInfo:
         enum: WidgetShownState
     text:
       type: string
+    textFormatType:
+      type:
+        enum: UIWidgetTextFormatType
     textSizeType:
       type:
         enum: UIWidgetTextureAndTextSizeType
@@ -7765,6 +8078,9 @@ C_UIWidgetManager.TextureAndTextVisualizationInfo:
     tooltipLoc:
       type:
         enum: UIWidgetTooltipLocation
+    updateAnimType:
+      type:
+        enum: UIWidgetUpdateAnimType
     widgetScale:
       type:
         enum: UIWidgetScale
@@ -8118,6 +8434,21 @@ C_UIWidgetManager.UIWidgetSetInfo:
         enum: UIWidgetSetLayoutDirection
     verticalPadding:
       type: number
+C_UIWidgetManager.UIWidgetSpellButtonInfo:
+  fields:
+    cooldownType:
+      type:
+        enum: UIWidgetSpellButtonCooldownType
+    enabledState:
+      type:
+        enum: UIWidgetButtonEnabledState
+    icon:
+      type:
+        enum: UIWidgetButtonIconType
+    spellID:
+      type: number
+    tooltip:
+      type: string
 C_UIWidgetManager.UIWidgetSpellInfo:
   fields:
     borderColor:
@@ -8445,9 +8776,6 @@ C_WarbandScene.WarbandSceneEntry:
       type: string
     quality:
       type: number
-    qualityColor:
-      type:
-        structure: colorRGB
     source:
       type: string
     sourceType:
@@ -9239,6 +9567,8 @@ CraftingReagentSlotSchematic:
       default: 1
       type:
         enum: TradeskillSlotDataType
+    hiddenInCraftingForm:
+      type: boolean
     orderSource:
       nilable: true
       type:
@@ -9349,6 +9679,22 @@ DBColorExport:
     color:
       type:
         structure: colorRGBA
+DelveAssistActionData:
+  fields:
+    assistAction:
+      type:
+        enum: AssistActionType
+    assistedPlayer:
+      type: string
+    creatureName:
+      nilable: true
+      type: string
+    mapName:
+      nilable: true
+      type: string
+    receivedSpellID:
+      nilable: true
+      type: number
 EncounterTrackingInfo:
   fields:
     difficultyID:
@@ -9387,6 +9733,8 @@ ExpansionDisplayInfo:
       type: number
     lowResBackgroundID:
       type: number
+    textureKit:
+      type: string
 ExpansionDisplayInfoFeature:
   fields:
     icon:
@@ -9395,11 +9743,14 @@ ExpansionDisplayInfoFeature:
       type: string
 FontScriptInfo:
   fields:
+    canBeUserScaled:
+      type: boolean
     color:
       type:
         structure: colorRGBA
     fontObject:
-      type: Font
+      type:
+        uiobject: Font
     height:
       type: number
     outline:
@@ -9594,7 +9945,8 @@ GuildTabardInfo:
 HTMLContentNode:
   fields:
     align:
-      type: JustifyHorizontal
+      type:
+        stringenum: JustifyHorizontal
     text:
       type: string
     type:
@@ -9612,7 +9964,7 @@ ItemLocation:
       type: number
   mixin: ItemLocationMixin
 ItemTransmogInfo:
-  fields: {}
+  fields:
   mixin: ItemTransmogInfoMixin
 LFGRoles:
   fields:
@@ -9736,7 +10088,7 @@ PlayerInfoCharacterData:
       type:
         enum: UnitSex
 PlayerLocation:
-  fields: {}
+  fields:
   mixin: PlayerLocationMixin
 PrivateAuraAnchor:
   fields:
@@ -9895,7 +10247,7 @@ RegularReagentInfo:
     quantity:
       type: number
 ReportInfo:
-  fields: {}
+  fields:
   mixin: ReportInfoMixin
 RuneforgeItemPreviewInfo:
   fields:
@@ -9986,6 +10338,9 @@ SpellChargeInfo:
       type: number
 SpellCooldownInfo:
   fields:
+    activeCategory:
+      nilable: true
+      type: number
     duration:
       type: number
     isEnabled:
@@ -10178,7 +10533,7 @@ TransmogLocation:
       type: number
   mixin: TransmogLocationMixin
 TransmogPendingInfo:
-  fields: {}
+  fields:
   mixin: TransmogPendingInfoMixin
 uiBoundsRect:
   fields:

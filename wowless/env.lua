@@ -1,34 +1,33 @@
 local Mixin = require('wowless.util').mixin
 local deepcopy = require('pl.tablex').deepcopy
 
-local function dump(api)
+local function dump(uiobjects)
   local d = require('pl.pretty').dump
   return function(...)
     for _, x in ipairs({ ... }) do
       d(x)
-      if type(x) == 'table' and api.UserData(x) then
+      if type(x) == 'table' and uiobjects.UserData(x) then
         print('===[begin userdata]===')
-        d(api.UserData(x))
+        d(uiobjects.UserData(x))
         print('===[ end userdata ]===')
       end
     end
   end
 end
 
-local function init(api, loader, lite)
-  local impls, rawimpls = require('wowapi.loader').loadFunctions(api, loader)
-  api.impls = rawimpls
-  api.env._G = api.env
-  Mixin(api.env, deepcopy(impls))
-  Mixin(api.env, deepcopy(api.datalua.globals))
-  Mixin(api.secureenv, deepcopy(impls))
-  Mixin(api.secureenv, deepcopy(api.datalua.globals))
+local function init(modules, lite)
+  local impls, rawimpls = modules.apiloader(modules)
+  modules.api.impls = rawimpls
+  Mixin(modules.env.genv, deepcopy(impls))
+  Mixin(modules.env.genv, deepcopy(modules.datalua.globals))
+  Mixin(modules.env.secureenv, deepcopy(impls))
+  Mixin(modules.env.secureenv, deepcopy(modules.datalua.globals))
 
   local wowlessDebug = Mixin({}, debug)
   wowlessDebug.debug = function()
     -- luacheck: ignore 211
-    local _G = api.env
-    local function getLocals(stackLevel)
+    local _G = modules.env.genv
+    local function _getLocals(stackLevel)
       stackLevel = (stackLevel or 0) + 5 -- 5 = 3 (this function) + 2 (caller)
       local locals = {}
       local i = 1
@@ -49,14 +48,14 @@ local function init(api, loader, lite)
     debug.debug()
   end
 
-  api.env.__wowless = {
+  modules.env.genv.__wowless = {
     debug = wowlessDebug,
-    dump = dump(api),
+    dump = dump(modules.uiobjects),
     lite = lite,
-    platform = api.platform,
-    product = api.product,
+    platform = modules.platform.platform,
+    product = modules.datalua.product,
     quit = function(exitCode)
-      api.log(1, 'Bye!')
+      modules.log(1, 'Bye!')
       os.exit(exitCode or 1)
     end,
   }

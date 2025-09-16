@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/vscode/devcontainers/python:0-bullseye AS devcontainer
+FROM mcr.microsoft.com/vscode/devcontainers/python:3 AS devcontainer
 RUN apt-get update \
     && export DEBIAN_FRONTEND=noninteractive \
     && apt-get -y install --no-install-recommends \
@@ -7,7 +7,7 @@ RUN apt-get update \
         git \
         ninja-build \
         ruby-dev \
-    && pip install git+https://github.com/luarocks/hererocks cmake pre-commit \
+    && pip install git+https://github.com/luarocks/hererocks cmake jinja2 pre-commit \
     && hererocks -l 5.1 -r 3.8.0 /usr/local \
     && luarocks install luacheck \
     && git config --system --add safe.directory '*'

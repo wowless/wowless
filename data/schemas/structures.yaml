@@ -1,4 +1,3 @@
----
 name: structures
 type:
   mapof:
@@ -13,13 +12,11 @@ type:
               value:
                 record:
                   default:
-                    type:
-                      schema: any
+                    type: any
                   nilable:
                     type: boolean
                   stub:
-                    type:
-                      schema: any
+                    type: any
                   type:
                     required: true
                     type:

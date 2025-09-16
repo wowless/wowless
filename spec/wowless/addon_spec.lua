@@ -2,17 +2,16 @@ describe('addon', function()
   for _, product in ipairs(require('build.data.products')) do
     describe(product, function()
       it('runs', function()
-        local api = require('wowless.runner').run({
+        local modules = require('wowless.runner').run({
           otherAddonDirs = {
             'addon/Wowless/', -- trailing slash to validate fix for #235
-            'build/products/' .. product .. '/WowlessData',
+            'build/cmake/products/' .. product .. '/WowlessData',
           },
           product = product,
         })
-        assert.True(api.env.WowlessTestsDone)
-        assert:set_parameter('TableFormatLevel', -1)
-        assert.same({}, api.env.WowlessTestFailures)
-        assert.same(0, api.GetErrorCount())
+        assert.True(modules.env.genv.WowlessTestsDone)
+        assert.same({}, modules.env.genv.WowlessTestFailures)
+        assert.same(0, modules.security.GetErrorCount())
       end)
     end)
   end

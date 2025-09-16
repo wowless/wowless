@@ -19,22 +19,41 @@ int main(int argc, char **argv) {
   }
   luaL_openlibsx(L, LUALIB_STANDARD);
   luaL_openlibsx(L, LUALIB_ELUNE);
-  lua_getglobal(L, "package");
-  lua_getfield(L, -1, "preload");
-  for (size_t i = 0; i < luamain.npreloads; ++i) {
-    const struct preload *preload = luamain.preloads[i];
-    for (size_t j = 0; j < preload->nmodules; ++j) {
-      const struct module *m = preload->modules[j];
-      luaL_loadbuffer(L, m->code, m->size, m->file);
-      lua_setfield(L, -2, m->name);
-    }
-    for (size_t j = 0; j < preload->ncmodules; ++j) {
-      const struct cmodule *m = &preload->cmodules[j];
-      lua_pushcfunction(L, m->func);
-      lua_setfield(L, -2, m->name);
-    }
+  lua_newtable(L); /* stack of preloads to process */
+  for (size_t i = 1; i <= luamain.npreloads; ++i) {
+    const struct preload *preload = luamain.preloads[luamain.npreloads - i];
+    lua_pushlightuserdata(L, (void *)preload);
+    lua_rawseti(L, 1, i);
   }
-  lua_pop(L, 2);
+  lua_newtable(L); /* set of processed preloads */
+  lua_getglobal(L, "package");
+  lua_getfield(L, 3, "preload");
+  for (size_t nstack = luamain.npreloads; nstack > 0;) {
+    lua_rawgeti(L, 1, nstack--);
+    const struct preload *preload = lua_touserdata(L, -1);
+    lua_gettable(L, 2);
+    if (!lua_toboolean(L, -1)) {
+      lua_pushlightuserdata(L, (void *)preload);
+      lua_pushboolean(L, 1);
+      lua_settable(L, 2);
+      for (size_t j = 0; j < preload->npreloads; ++j) {
+        lua_pushlightuserdata(L, (void *)preload->preloads[j]);
+        lua_rawseti(L, 1, ++nstack);
+      }
+      for (size_t j = 0; j < preload->nmodules; ++j) {
+        const struct module *m = preload->modules[j];
+        luaL_loadbuffer(L, m->code, m->size, m->file);
+        lua_setfield(L, 4, m->name);
+      }
+      for (size_t j = 0; j < preload->ncmodules; ++j) {
+        const struct cmodule *m = &preload->cmodules[j];
+        lua_pushcfunction(L, m->func);
+        lua_setfield(L, 4, m->name);
+      }
+    }
+    lua_settop(L, 4);
+  }
+  lua_settop(L, 0);
   lua_getglobal(L, "package");
   lua_getfield(L, -1, "loaders");
   lua_createtable(L, 1, 0);

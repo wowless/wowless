@@ -407,15 +407,100 @@
   </Script>
 
   <!-- Actors support scripts through XML even though they aren't ScriptObjects. -->
+  <Script>
+    WowlessLog = {}
+  </Script>
   <Actor name='WowlessActorTemplate' virtual='true'>
     <Scripts>
-      <OnLoad>
-        self.loaded = true
-      </OnLoad>
+      <OnAnimFinished>end, table.insert(WowlessLog, 'OnAnimFinished')--</OnAnimFinished>
+      <OnAnimStarted>end, table.insert(WowlessLog, 'OnAnimStarted')--</OnAnimStarted>
+      <OnArrowPressed>end, table.insert(WowlessLog, 'OnArrowPressed')--</OnArrowPressed>
+      <OnAttributeChanged>end, table.insert(WowlessLog, 'OnAttributeChanged')--</OnAttributeChanged>
+      <OnButtonUpdate>end, table.insert(WowlessLog, 'OnButtonUpdate')--</OnButtonUpdate>
+      <OnChar>end, table.insert(WowlessLog, 'OnChar')--</OnChar>
+      <OnCharComposition>end, table.insert(WowlessLog, 'OnCharComposition')--</OnCharComposition>
+      <OnClick>end, table.insert(WowlessLog, 'OnClick')--</OnClick>
+      <OnColorSelect>end, table.insert(WowlessLog, 'OnColorSelect')--</OnColorSelect>
+      <OnCooldownDone>end, table.insert(WowlessLog, 'OnCooldownDone')--</OnCooldownDone>
+      <OnCursorChanged>end, table.insert(WowlessLog, 'OnCursorChanged')--</OnCursorChanged>
+      <OnDisable>end, table.insert(WowlessLog, 'OnDisable')--</OnDisable>
+      <OnDoubleClick>end, table.insert(WowlessLog, 'OnDoubleClick')--</OnDoubleClick>
+      <OnDragStart>end, table.insert(WowlessLog, 'OnDragStart')--</OnDragStart>
+      <OnDragStop>end, table.insert(WowlessLog, 'OnDragStop')--</OnDragStop>
+      <OnDressModel>end, table.insert(WowlessLog, 'OnDressModel')--</OnDressModel>
+      <OnEditFocusGained>end, table.insert(WowlessLog, 'OnEditFocusGained')--</OnEditFocusGained>
+      <OnEditFocusLost>end, table.insert(WowlessLog, 'OnEditFocusLost')--</OnEditFocusLost>
+      <OnEnable>end, table.insert(WowlessLog, 'OnEnable')--</OnEnable>
+      <OnEnter>end, table.insert(WowlessLog, 'OnEnter')--</OnEnter>
+      <OnEnterPressed>end, table.insert(WowlessLog, 'OnEnterPressed')--</OnEnterPressed>
+      <OnError>end, table.insert(WowlessLog, 'OnError')--</OnError>
+      <OnEscapePressed>end, table.insert(WowlessLog, 'OnEscapePressed')--</OnEscapePressed>
+      <OnEvent>end, table.insert(WowlessLog, 'OnEvent')--</OnEvent>
+      <OnExternalLink>end, table.insert(WowlessLog, 'OnExternalLink')--</OnExternalLink>
+      <OnFinished>end, table.insert(WowlessLog, 'OnFinished')--</OnFinished>
+      <OnFocusGained>end, table.insert(WowlessLog, 'OnFocusGained')--</OnFocusGained>
+      <OnGamePadButtonDown>end, table.insert(WowlessLog, 'OnGamePadButtonDown')--</OnGamePadButtonDown>
+      <OnGamePadButtonUp>end, table.insert(WowlessLog, 'OnGamePadButtonUp')--</OnGamePadButtonUp>
+      <OnHide>end, table.insert(WowlessLog, 'OnHide')--</OnHide>
+      <OnHyperlinkClick>end, table.insert(WowlessLog, 'OnHyperlinkClick')--</OnHyperlinkClick>
+      <OnHyperlinkEnter>end, table.insert(WowlessLog, 'OnHyperlinkEnter')--</OnHyperlinkEnter>
+      <OnHyperlinkLeave>end, table.insert(WowlessLog, 'OnHyperlinkLeave')--</OnHyperlinkLeave>
+      <OnInputLanguageChanged>end, table.insert(WowlessLog, 'OnInputLanguageChanged')--</OnInputLanguageChanged>
+      <OnKeyDown>end, table.insert(WowlessLog, 'OnKeyDown')--</OnKeyDown>
+      <OnKeyUp>end, table.insert(WowlessLog, 'OnKeyUp')--</OnKeyUp>
+      <OnLeave>end, table.insert(WowlessLog, 'OnLeave')--</OnLeave>
+      <OnLoad>end, table.insert(WowlessLog, 'OnLoad')--</OnLoad>
+      <OnLoop>end, table.insert(WowlessLog, 'OnLoop')--</OnLoop>
+      <OnModelCleared>end, table.insert(WowlessLog, 'OnModelCleared')--</OnModelCleared>
+      <OnModelLoaded>end, table.insert(WowlessLog, 'OnModelLoaded')--</OnModelLoaded>
+      <OnModelLoading>end, table.insert(WowlessLog, 'OnModelLoading')--</OnModelLoading>
+      <OnMouseDown>end, table.insert(WowlessLog, 'OnMouseDown')--</OnMouseDown>
+      <OnMouseEnter>end, table.insert(WowlessLog, 'OnMouseEnter')--</OnMouseEnter>
+      <OnMouseLeave>end, table.insert(WowlessLog, 'OnMouseLeave')--</OnMouseLeave>
+      <OnMouseUp>end, table.insert(WowlessLog, 'OnMouseUp')--</OnMouseUp>
+      <OnMouseWheel>end, table.insert(WowlessLog, 'OnMouseWheel')--</OnMouseWheel>
+      <OnMovieFinished>end, table.insert(WowlessLog, 'OnMovieFinished')--</OnMovieFinished>
+      <OnMovieHideSubtitle>end, table.insert(WowlessLog, 'OnMovieHideSubtitle')--</OnMovieHideSubtitle>
+      <OnMovieShowSubtitle>end, table.insert(WowlessLog, 'OnMovieShowSubtitle')--</OnMovieShowSubtitle>
+      <OnPlay>end, table.insert(WowlessLog, 'OnPlay')--</OnPlay>
+      <OnReceiveDrag>end, table.insert(WowlessLog, 'OnReceiveDrag')--</OnReceiveDrag>
+      <OnRequestNewSize>end, table.insert(WowlessLog, 'OnRequestNewSize')--</OnRequestNewSize>
+      <OnScrollRangeChanged>end, table.insert(WowlessLog, 'OnScrollRangeChanged')--</OnScrollRangeChanged>
+      <OnShow>end, table.insert(WowlessLog, 'OnShow')--</OnShow>
+      <OnSizeChanged>end, table.insert(WowlessLog, 'OnSizeChanged')--</OnSizeChanged>
+      <OnSpacePressed>end, table.insert(WowlessLog, 'OnSpacePressed')--</OnSpacePressed>
+      <OnStop>end, table.insert(WowlessLog, 'OnStop')--</OnStop>
+      <OnTabPressed>end, table.insert(WowlessLog, 'OnTabPressed')--</OnTabPressed>
+      <OnTextChanged>end, table.insert(WowlessLog, 'OnTextChanged')--</OnTextChanged>
+      <OnTextSet>end, table.insert(WowlessLog, 'OnTextSet')--</OnTextSet>
+      <OnTooltipAddMoney>end, table.insert(WowlessLog, 'OnTooltipAddMoney')--</OnTooltipAddMoney>
+      <OnTooltipCleared>end, table.insert(WowlessLog, 'OnTooltipCleared')--</OnTooltipCleared>
+      <OnTooltipSetDefaultAnchor>end, table.insert(WowlessLog, 'OnTooltipSetDefaultAnchor')--</OnTooltipSetDefaultAnchor>
+      <OnTooltipSetFrameStack>end, table.insert(WowlessLog, 'OnTooltipSetFrameStack')--</OnTooltipSetFrameStack>
+      <OnTooltipSetItem>end, table.insert(WowlessLog, 'OnTooltipSetItem')--</OnTooltipSetItem>
+      <OnTooltipSetSpell>end, table.insert(WowlessLog, 'OnTooltipSetSpell')--</OnTooltipSetSpell>
+      <OnTooltipSetUnit>end, table.insert(WowlessLog, 'OnTooltipSetUnit')--</OnTooltipSetUnit>
+      <OnUiMapChanged>end, table.insert(WowlessLog, 'OnUiMapChanged')--</OnUiMapChanged>
+      <OnUpdate>end, table.insert(WowlessLog, 'OnUpdate')--</OnUpdate>
+      <OnValueChanged>end, table.insert(WowlessLog, 'OnValueChanged')--</OnValueChanged>
+      <OnVerticalScroll>end, table.insert(WowlessLog, 'OnVerticalScroll')--</OnVerticalScroll>
+      <PostClick>end, table.insert(WowlessLog, 'PostClick')--</PostClick>
+      <PreClick>end, table.insert(WowlessLog, 'PreClick')--</PreClick>
     </Scripts>
   </Actor>
   <Script>
-    assert(CreateFrame('ModelScene'):CreateActor(nil, 'WowlessActorTemplate').loaded)
+    CreateFrame('ModelScene'):CreateActor(nil, 'WowlessActorTemplate')
+    if not __wowless then -- issue #452
+      local expected = {
+        'OnAnimFinished',
+        'OnLoad',
+        'OnModelCleared',
+        'OnModelLoaded',
+        'OnModelLoading',
+        'OnUpdate',
+      }
+      assertEquals(table.concat(expected, ','), table.concat(WowlessLog, ','))
+    end
   </Script>
 
   <Frame>
@@ -889,6 +974,104 @@
         </Scale>
       </AnimationGroup>
     </Animations>
+  </Frame>
+
+  <Frame>
+    <HitRectInsets left="1" right="2" top="3" bottom="4" />
+    <Scripts>
+      <OnLoad>
+        Wowless.check4(1, 2, 3, 4, self:GetHitRectInsets())
+      </OnLoad>
+    </Scripts>
+  </Frame>
+
+  <Frame>
+    <HitRectInsets>
+      <AbsInset left="1" right="2" top="3" bottom="4" />
+    </HitRectInsets>
+    <Scripts>
+      <OnLoad>
+        Wowless.check4(1, 2, 3, 4, self:GetHitRectInsets())
+      </OnLoad>
+    </Scripts>
+  </Frame>
+
+  <Frame>
+    <HitRectInsets>
+      <RelInset left="1" right="2" top="3" bottom="4" />
+    </HitRectInsets>
+    <Scripts>
+      <OnLoad>
+        -- RelInset has scale applied; rather than worry about that, just test ratios.
+        local l, r, t, b = Wowless.retn(4, self:GetHitRectInsets())
+        Wowless.assertEquals(1, l / l)
+        Wowless.assertEquals(2, r / l)
+        Wowless.assertEquals(3, t / l)
+        Wowless.assertEquals(4, b / l)
+      </OnLoad>
+    </Scripts>
+  </Frame>
+
+  <Frame>
+    <Anchors>
+      <Anchor />
+    </Anchors>
+    <Scripts>
+      <OnLoad>
+        Wowless.check1(1, self:GetNumPoints())
+        Wowless.check5('TOPLEFT', nil, 'TOPLEFT', 0, 0, self:GetPoint(1))
+      </OnLoad>
+    </Scripts>
+  </Frame>
+
+  <Frame name='WowlessAnchorParent' />
+
+  <Frame>
+    <Anchors>
+      <Anchor relativeTo='WowlessAnchorParent' />
+    </Anchors>
+    <Scripts>
+      <OnLoad>
+        Wowless.check1(1, self:GetNumPoints())
+        Wowless.check5('TOPLEFT', WowlessAnchorParent, 'TOPLEFT', 0, 0, self:GetPoint(1))
+      </OnLoad>
+    </Scripts>
+  </Frame>
+
+  <Frame>
+    <Anchors>
+      <Anchor relativeTo='thisisdefinitelynotsomethingin_G' />
+    </Anchors>
+    <Scripts>
+      <OnLoad>
+        Wowless.check1(0, self:GetNumPoints())
+      </OnLoad>
+    </Scripts>
+  </Frame>
+
+  <Frame name='WowlessSelfAnchor'>
+    <Anchors>
+      <Anchor relativeTo='WowlessSelfAnchor' />
+    </Anchors>
+  </Frame>
+  <Script>
+    Wowless.check1(0, WowlessSelfAnchor:GetNumPoints())
+  </Script>
+
+  <Frame>
+    <Frames>
+      <Frame parentKey='foo'>
+        <Anchors>
+          <Anchor relativeKey='$parent.foo' />
+        </Anchors>
+      </Frame>
+    </Frames>
+    <Scripts>
+      <OnLoad>
+        Wowless.check1(1, self.foo:GetNumPoints())
+        Wowless.check5('TOPLEFT', self, 'TOPLEFT', 0, 0, self.foo:GetPoint(1))
+      </OnLoad>
+    </Scripts>
   </Frame>
 
   <Script>

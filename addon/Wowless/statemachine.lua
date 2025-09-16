@@ -7,6 +7,34 @@ local tkeys = {
   to = 'string',
 }
 
+local function bfs(edges, from, to)
+  local q = { { from } }
+  if from == to then
+    return q[1]
+  end
+  repeat
+    local e = q[#q]
+    q[#q] = nil
+    for k, v in pairs(edges[e[#e]]) do
+      if next(v) then
+        local p = {}
+        local loop = false
+        for pk, pv in ipairs(e) do
+          p[pk] = pv
+          loop = loop or k == pv
+        end
+        p[#p + 1] = k
+        if k == to then
+          return p
+        elseif not loop then
+          q[#q + 1] = p
+        end
+      end
+    end
+  until not next(q)
+  error(('failed to find a path from %q to %q'):format(from, to))
+end
+
 local function checkStateMachine(states, transitions, init, arg)
   assert(type(states) == 'table', 'states must be a table')
   for k, v in pairs(states) do
@@ -59,30 +87,28 @@ local function checkStateMachine(states, transitions, init, arg)
   end
   local frominit = {}
   for k in pairs(edges) do
-    local t = next(edges[init][k])
-    assert(t, 'no way to ' .. k .. ' from ' .. init) -- TODO generalize
-    frominit[k] = t
+    frominit[k] = bfs(edges, init, k)
   end
   local toinit = {}
-  for k, v in pairs(edges) do
-    local t = next(v[init])
-    assert(t, 'no way back to ' .. init .. ' from ' .. k) -- TODO generalize
-    toinit[k] = t
-  end
-  local function trimerr(s)
-    local _, n = s:find(':%d+: ')
-    return n and s:sub(n + 1) or s
+  for k in pairs(edges) do
+    toinit[k] = bfs(edges, k, init)
   end
   local function checkState(s, n)
     local success, msg = pcall(states[s], arg)
     if not success then
-      error(('%s state: %s'):format(n, trimerr(msg)))
+      error(('%s state: %s'):format(n, msg))
     end
   end
   local function checkTransition(t, n)
     local success, msg = pcall(transitions[t].func, arg)
     if not success then
-      error(('%s transition: %s'):format(n, trimerr(msg)))
+      error(('%s transition: %s'):format(n, msg))
+    end
+  end
+  local function checkPath(p, n)
+    for i = 2, #p do
+      -- Just take the first available transition, we don't care what it is.
+      checkTransition(next(edges[p[i - 1]][p[i]]), n)
     end
   end
   for from, tos in pairs(edges) do
@@ -90,15 +116,15 @@ local function checkStateMachine(states, transitions, init, arg)
       for t in pairs(ts) do
         local success, msg = pcall(function()
           checkState(init, 'init')
-          checkTransition(frominit[from], 'init -> from')
+          checkPath(frominit[from], 'init -> from')
           checkState(from, 'from')
           checkTransition(t, 'from -> to')
           checkState(to, 'to')
-          checkTransition(toinit[to], 'to -> init')
-          checkState(init, 'postinit(' .. toinit[to] .. ')')
+          checkPath(toinit[to], 'to -> init')
+          checkState(init, 'postinit')
         end)
         if not success then
-          error(('failure on %s -> %s transition %s: %s'):format(from, to, t, trimerr(msg)))
+          error(('failure on %s -> %s transition %s: %s'):format(from, to, t, msg))
         end
       end
     end

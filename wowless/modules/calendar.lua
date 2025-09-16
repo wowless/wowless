@@ -18,7 +18,7 @@ return function()
       currentYear = year
     end,
     ['C_Calendar.SetMonth'] = function(offset)
-      local d = require('date')(currentYear, currentMonth, 1)
+      local d = date(currentYear, currentMonth, 1)
       assert(d:addmonths(offset))
       currentYear = d:getyear()
       currentMonth = d:getmonth()

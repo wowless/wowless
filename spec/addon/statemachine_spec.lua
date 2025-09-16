@@ -66,7 +66,7 @@ describe('statemachine', function()
     },
     transitivity = {
       init = '0',
-      success = false, -- issue #417
+      success = true,
       state = {
         value = 0,
       },

@@ -1,101 +1,297 @@
----
-Animation/GetRegionParent: {}
-Animation/GetTarget: {}
-AnimationGroup/CreateAnimation: {}
-AnimationGroup/GetAnimations: {}
-Button/Click: {}
-Button/Disable: {}
-Button/Enable: {}
-Button/GetText: {}
-Button/IsEnabled: {}
-Button/RegisterForClicks: {}
-Button/SetButtonState: {}
-Button/SetDisabledAtlas: {}
-Button/SetDisabledTexture: {}
-Button/SetEnabled: {}
-Button/SetFontString: {}
-Button/SetFormattedText: {}
-Button/SetHighlightAtlas: {}
-Button/SetHighlightTexture: {}
-Button/SetNormalAtlas: {}
-Button/SetNormalTexture: {}
-Button/SetPushedAtlas: {}
-Button/SetPushedTexture: {}
-Button/SetText: {}
-CheckButton/SetChecked: {}
-CheckButton/SetCheckedTexture: {}
-EditBox/Disable: {}
-EditBox/Enable: {}
-EditBox/Insert: {}
-FontInstance/GetFontObject: {}
-FontString/SetText: {}
-ForbiddenMixin/SetForbidden: {}
-Frame/CreateFontString: {}
-Frame/CreateLine: {}
-Frame/CreateMaskTexture: {}
-Frame/CreateTexture: {}
-Frame/GetAttribute: {}
-Frame/GetChildren: {}
-Frame/GetEffectiveAlpha: {}
-Frame/GetNumChildren: {}
-Frame/GetNumRegions: {}
-Frame/GetRegions: {}
-Frame/IsEventRegistered: {}
-Frame/RegisterAllEvents: {}
-Frame/RegisterEvent: {}
-Frame/RegisterUnitEvent: {}
-Frame/SetAttribute: {}
-Frame/SetAttributeNoHandler: {}
-Frame/SetFrameLevel: {}
-Frame/SetResizeBounds: {}
-Frame/UnregisterAllEvents: {}
-Frame/UnregisterEvent: {}
-GameTooltip/IsOwned: {}
-GameTooltip/SetOwner: {}
-LayeredRegion/SetVertexColor: {}
-MessageFrame/AddMessage: {}
-ModelScene/CreateActor: {}
-MouseMixin/EnableMouse: {}
-MouseMixin/IsMouseEnabled: {}
-ParentedObject/GetDebugName: {}
-ParentedObject/SetParent: {}
-ParentedObjectBase/ClearParentKey: {}
-ParentedObjectBase/GetParentKey: {}
-ParentedObjectBase/SetParentKey: {}
-Path/CreateControlPoint: {}
-Path/GetControlPoints: {}
-Region/ClearAllPoints: {}
-Region/CreateAnimationGroup: {}
-Region/GetAnimationGroups: {}
-Region/GetCenter: {}
-Region/GetEffectiveScale: {}
-Region/GetNumPoints: {}
-Region/GetPoint: {}
-Region/GetRight: {}
-Region/GetScaledRect: {}
-Region/GetTop: {}
-Region/Hide: {}
-Region/IsProtected: {}
-Region/IsVisible: {}
-Region/SetAllPoints: {}
-Region/SetAlpha: {}
-Region/SetPoint: {}
-Region/SetScale: {}
-Region/SetShown: {}
-Region/Show: {}
-ScriptObject/GetScript: {}
-ScriptObject/HookScript: {}
-ScriptObject/SetScript: {}
-ScrollFrame/SetScrollChild: {}
-Slider/Disable: {}
-Slider/Enable: {}
-StatusBar/GetStatusBarColor: {}
-StatusBar/SetStatusBarColor: {}
-StatusBar/SetStatusBarTexture: {}
-Texture/GetTexture: {}
-Texture/SetAtlas: {}
-Texture/SetColorTexture: {}
-Texture/SetTexCoord: {}
-Texture/SetTexture: {}
-UIObject/GetObjectType: {}
-UIObject/IsObjectType: {}
+Animation/GetRegionParent:
+  luafile:
+Animation/GetTarget:
+  luafile:
+AnimationGroup/CreateAnimation:
+  luafile:
+    modules:
+      api:
+      uiobjecttypes:
+AnimationGroup/GetAnimations:
+  luafile:
+Button/Click:
+  luafile:
+    modules:
+      scripts:
+Button/Disable:
+  luafile:
+Button/Enable:
+  luafile:
+Button/GetText:
+  luafile:
+Button/IsEnabled:
+  luafile:
+Button/RegisterForClicks:
+  luafile:
+Button/SetButtonState:
+  luafile:
+Button/SetDisabledAtlas:
+  luafile:
+    modules:
+      uiobjects:
+Button/SetEnabled:
+  luafile:
+Button/SetFontString:
+  luafile:
+    modules:
+      api:
+Button/SetFormattedText:
+  luafile:
+Button/SetHighlightAtlas:
+  luafile:
+    modules:
+      uiobjects:
+Button/SetNormalAtlas:
+  luafile:
+    modules:
+      uiobjects:
+Button/SetPushedAtlas:
+  luafile:
+    modules:
+      uiobjects:
+Button/SetText:
+  luafile:
+    modules:
+      uiobjects:
+CheckButton/SetChecked:
+  luafile:
+EditBox/Disable:
+  luafile:
+EditBox/Enable:
+  luafile:
+EditBox/Insert:
+  luafile:
+FontInstance/GetFontObject:
+  luafile:
+FontString/SetText:
+  luafile:
+ForbiddenMixin/SetForbidden:
+  luafile:
+Frame/CreateFontString:
+  luafile:
+    modules:
+      api:
+Frame/CreateLine:
+  luafile:
+    modules:
+      api:
+Frame/CreateMaskTexture:
+  luafile:
+    modules:
+      api:
+Frame/CreateTexture:
+  luafile:
+    modules:
+      api:
+      templates:
+Frame/GetAttribute:
+  luafile:
+Frame/GetChildren:
+  luafile:
+Frame/GetEffectiveAlpha:
+  luafile:
+Frame/GetNumChildren:
+  luafile:
+Frame/GetNumRegions:
+  luafile:
+Frame/GetRegions:
+  luafile:
+Frame/IsEventRegistered:
+  moduledelegate:
+    name: events
+Frame/RegisterAllEvents:
+  moduledelegate:
+    name: events
+Frame/RegisterEvent:
+  moduledelegate:
+    name: events
+Frame/RegisterUnitEvent:
+  moduledelegate:
+    name: events
+Frame/SetAttribute:
+  luafile:
+    modules:
+      scripts:
+Frame/SetAttributeNoHandler:
+  luafile:
+Frame/SetFrameLevel:
+  luafile:
+Frame/SetResizeBounds:
+  luafile:
+Frame/UnregisterAllEvents:
+  moduledelegate:
+    name: events
+Frame/UnregisterEvent:
+  moduledelegate:
+    name: events
+GameTooltip/IsOwned:
+  luafile:
+GameTooltip/SetOwner:
+  luafile:
+LayeredRegion/SetVertexColor:
+  luafile:
+MessageFrame/AddMessage:
+  luafile:
+    modules:
+      log:
+ModelScene/CreateActor:
+  luafile:
+    modules:
+      api:
+      templates:
+MouseMixin/EnableMouse:
+  luafile:
+MouseMixin/IsMouseEnabled:
+  luafile:
+ParentedObject/GetDebugName:
+  moduledelegate:
+    name: api
+ParentedObject/SetParent:
+  moduledelegate:
+    name: api
+ParentedObjectBase/ClearParentKey:
+  moduledelegate:
+    name: parentkey
+ParentedObjectBase/GetParentKey:
+  moduledelegate:
+    name: parentkey
+ParentedObjectBase/SetParentKey:
+  moduledelegate:
+    name: parentkey
+Path/CreateControlPoint:
+  luafile:
+    modules:
+      api:
+Path/GetControlPoints:
+  luafile:
+Region/ClearAllPoints:
+  luafile:
+Region/CreateAnimationGroup:
+  luafile:
+    modules:
+      api:
+Region/GetAnimationGroups:
+  luafile:
+Region/GetBottom:
+  moduledelegate:
+    name: region
+Region/GetCenter:
+  moduledelegate:
+    name: region
+Region/GetEffectiveScale:
+  luafile:
+Region/GetHeight:
+  moduledelegate:
+    name: region
+Region/GetLeft:
+  moduledelegate:
+    name: region
+Region/GetNumPoints:
+  luafile:
+Region/GetPoint:
+  luafile:
+Region/GetRect:
+  moduledelegate:
+    name: region
+Region/GetRight:
+  moduledelegate:
+    name: region
+Region/GetScaledRect:
+  moduledelegate:
+    name: region
+Region/GetSize:
+  moduledelegate:
+    name: region
+Region/GetTop:
+  moduledelegate:
+    name: region
+Region/GetWidth:
+  moduledelegate:
+    name: region
+Region/Hide:
+  moduledelegate:
+    name: visibility
+Region/IsProtected:
+  luafile:
+Region/IsRectValid:
+  moduledelegate:
+    name: region
+Region/IsVisible:
+  moduledelegate:
+    name: visibility
+Region/SetAllPoints:
+  luafile:
+Region/SetAlpha:
+  luafile:
+Region/SetHeight:
+  moduledelegate:
+    name: region
+Region/SetPoint:
+  luafile:
+    modules:
+      api:
+      env:
+      log:
+      uiobjects:
+Region/SetScale:
+  luafile:
+Region/SetShown:
+  moduledelegate:
+    name: visibility
+Region/SetSize:
+  moduledelegate:
+    name: region
+Region/SetWidth:
+  moduledelegate:
+    name: region
+Region/Show:
+  moduledelegate:
+    name: visibility
+ScriptObject/GetScript:
+  moduledelegate:
+    name: scripts
+ScriptObject/HasScript:
+  moduledelegate:
+    name: scripts
+ScriptObject/HookScript:
+  moduledelegate:
+    name: scripts
+ScriptObject/SetScript:
+  moduledelegate:
+    name: scripts
+ScrollFrame/SetScrollChild:
+  luafile:
+    modules:
+      api:
+Slider/Disable:
+  luafile:
+Slider/Enable:
+  luafile:
+StatusBar/GetStatusBarColor:
+  luafile:
+StatusBar/SetStatusBarColor:
+  luafile:
+Texture/GetTexture:
+  luafile:
+    modules:
+      datalua:
+Texture/SetAtlas:
+  luafile:
+    modules:
+      api:
+Texture/SetColorTexture:
+  luafile:
+Texture/SetGradient:
+  luafile:
+Texture/SetTexCoord:
+  luafile:
+Texture/SetTexture:
+  luafile:
+UIObject/GetObjectType:
+  luafile:
+    modules:
+      uiobjecttypes:
+UIObject/IsObjectType:
+  luafile:
+    modules:
+      uiobjecttypes:

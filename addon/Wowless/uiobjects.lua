@@ -1,4 +1,4 @@
-local _, G = ...
+local addonName, G = ...
 G.testsuite.uiobjects = function()
   local assertEquals = G.assertEquals
   local check0 = G.check0
@@ -7,6 +7,7 @@ G.testsuite.uiobjects = function()
   local check3 = G.check3
   local check4 = G.check4
   local check6 = G.check6
+  local match = G.match
   local retn = G.retn
   return {
     Animation = function()
@@ -23,6 +24,53 @@ G.testsuite.uiobjects = function()
 
     Frame = function()
       return {
+        ['attributes'] = function()
+          local attrs = {
+            a = 'va',
+            aa = 'vaa',
+            aaa = 'vaaa',
+          }
+          local f = CreateFrame('Frame')
+          for k, v in pairs(attrs) do
+            local t, n
+            check0(f:SetScript('OnAttributeChanged', function(...)
+              t, n = { ... }, select('#', ...)
+            end))
+            check0(f:SetAttribute(k, v))
+            assertEquals(3, n)
+            check3(f, k, v, unpack(t, 1, 3))
+            check0(f:SetScript('OnAttributeChanged', nil))
+          end
+          local err = 'Arguments: ("name")\nLua Taint: ' .. addonName
+          local function happy(v, ...)
+            local t, n = { ... }, select('#', ...)
+            return function()
+              return match(1, v, f:GetAttribute(unpack(t, 1, n)))
+            end
+          end
+          local function errcase(...)
+            local t, n = { ... }, select('#', ...)
+            return function()
+              return match(2, false, err, pcall(f.GetAttribute, f, unpack(t, 1, n)))
+            end
+          end
+          return {
+            a = happy('va', 'a'),
+            aa = happy('vaa', 'aa'),
+            aaa = happy('vaaa', 'aaa'),
+            allnil = errcase(nil, nil, nil),
+            extranil = happy('va', 'a', nil),
+            justnil = errcase(nil),
+            justpost = errcase(nil, nil, 'a'),
+            justpre = happy('va', 'a', nil, nil),
+            noarg = errcase(),
+            preaa = happy('vaa', 'a', 'a', nil),
+            prepostaaa = happy('vaaa', 'a', 'a', 'a'),
+            postaa = happy('vaa', nil, 'a', 'a'),
+            threearg = happy('va', nil, 'a', nil),
+            twoargoutofthree = errcase(nil, 'a'),
+          }
+        end,
         ['creation with frame in name position'] = function()
           local f = CreateFrame('Frame')
           local g = CreateFrame('Frame', f)
@@ -184,15 +232,27 @@ G.testsuite.uiobjects = function()
           check1('moo', down:GetParentKey())
           check0(down:SetParentKey('cow', true))
           assertEquals(down, up.cow)
-          if up.ClearParentKey then
-            assertEquals(nil, up.moo)
-          else
-            assertEquals(down, up.moo)
-            up.moo = nil
-          end
+          assertEquals(nil, up.moo)
           check1('cow', down:GetParentKey())
           up.cow = nil
           check1(nil, down:GetParentKey())
+        end,
+        ['parent keys and metamethods'] = function()
+          local f = CreateFrame('Frame')
+          local g = CreateFrame('Frame', nil, f)
+          local mt, mk, mv
+          setmetatable(f, {
+            __newindex = function(t, k, v)
+              mt = t
+              mk = k
+              mv = v
+            end,
+          })
+          g:SetParentKey('moo')
+          assertEquals(f, mt)
+          assertEquals('moo', mk)
+          assertEquals(g, mv)
+          assertEquals(nil, f.moo)
         end,
         ['support $parent in frame names'] = function()
           local moo = retn(1, CreateFrame('Frame', 'WowlessParentNameTestMoo'))
@@ -301,6 +361,101 @@ G.testsuite.uiobjects = function()
       }
     end,
 
+    Region = function()
+      return {
+        points = function()
+          return {
+            dag = function()
+              if _G.__wowless then -- TODO remove this
+                return
+              end
+              local function rstr(r)
+                return tostring(r):gsub('^.*0x(.*)$', '%1')
+              end
+              return {
+                ['0'] = function()
+                  local f = CreateFrame('Frame')
+                  local msg = table.concat({
+                    'Action[SetPoint] failed because',
+                    '[Cannot anchor to itself]: ',
+                    'attempted from: Frame:SetPoint.',
+                  })
+                  check2(false, msg, pcall(f.SetPoint, f, 'CENTER', f))
+                end,
+                ['1'] = function()
+                  local f = CreateFrame('Frame')
+                  local g = CreateFrame('Frame')
+                  local msg = table.concat({
+                    'Action[SetPoint] failed because',
+                    '[Cannot anchor to a region dependent on it]: ',
+                    'attempted from: Frame:SetPoint.\n',
+                    'Relative: [' .. rstr(g) .. ']\n',
+                    'Dependent: [' .. rstr(g) .. ']',
+                  })
+                  check0(g:SetPoint('CENTER', f))
+                  check2(false, msg, pcall(f.SetPoint, f, 'CENTER', g))
+                end,
+                ['2'] = function()
+                  local f = CreateFrame('Frame')
+                  local g = CreateFrame('Frame')
+                  local h = CreateFrame('Frame')
+                  local msg = table.concat({
+                    'Action[SetPoint] failed because',
+                    '[Cannot anchor to a region dependent on it]: ',
+                    'attempted from: Frame:SetPoint.\n',
+                    'Relative: [' .. rstr(h) .. ']\n',
+                    'Dependent: [' .. rstr(g) .. ']\n',
+                    'Dependent ancestors:\n',
+                    '[' .. rstr(h) .. ']',
+                  })
+                  check0(g:SetPoint('CENTER', f))
+                  check0(h:SetPoint('CENTER', g))
+                  check2(false, msg, pcall(f.SetPoint, f, 'CENTER', h))
+                end,
+                ['3'] = function()
+                  local f = CreateFrame('Frame')
+                  local g = CreateFrame('Frame')
+                  local h = CreateFrame('Frame')
+                  local i = CreateFrame('Frame')
+                  local msg = table.concat({
+                    'Action[SetPoint] failed because',
+                    '[Cannot anchor to a region dependent on it]: ',
+                    'attempted from: Frame:SetPoint.\n',
+                    'Relative: [' .. rstr(i) .. ']\n',
+                    'Dependent: [' .. rstr(g) .. ']\n',
+                    'Dependent ancestors:\n',
+                    '[' .. rstr(h) .. ']\n',
+                    '[' .. rstr(i) .. ']',
+                  })
+                  check0(g:SetPoint('CENTER', f))
+                  check0(h:SetPoint('CENTER', g))
+                  check0(i:SetPoint('CENTER', h))
+                  check2(false, msg, pcall(f.SetPoint, f, 'CENTER', i))
+                end,
+              }
+            end,
+          }
+        end,
+        SetPoint = function()
+          return {
+            badpoint = function()
+              local f = CreateFrame('Frame')
+              local msg = 'Frame:SetPoint(): Invalid region point nonsense'
+              check2(false, msg, pcall(f.SetPoint, f, 'nonsense'))
+            end,
+            noarg = function()
+              local f = CreateFrame('Frame')
+              local msg = table.concat({
+                'Frame:SetPoint(): Usage: (',
+                '"point" [, region or nil] [, "relativePoint"] [, offsetX, offsetY]',
+              })
+              check2(false, msg, pcall(f.SetPoint, f))
+            end,
+          }
+        end,
+      }
+    end,
+
     Scale = function()
       return {
         origin = function()
@@ -344,16 +499,66 @@ G.testsuite.uiobjects = function()
     end,
 
     Texture = function()
-      local colortex = _G.WowlessData.Build.test and 'FileData ID 0' or nil
-      local t = CreateFrame('Frame'):CreateTexture()
-      assertEquals('BLEND', t:GetBlendMode())
-      t:SetColorTexture(0.8, 0.6, 0.4, 0.2)
-      assertEquals(colortex, t:GetTexture())
-      check4(1, 1, 1, 1, t:GetVertexColor())
-      t:SetTexture(136235)
-      assertEquals(136235, t:GetTexture())
-      t:SetColorTexture(0.8, 0.6, 0.4, 0.2)
-      assertEquals(colortex, t:GetTexture())
+      return {
+        SetColorTexture = function()
+          local colortex = _G.WowlessData.Build.test and 'FileData ID 0' or nil
+          local t = CreateFrame('Frame'):CreateTexture()
+          assertEquals('BLEND', t:GetBlendMode())
+          t:SetColorTexture(0.8, 0.6, 0.4, 0.2)
+          assertEquals(colortex, t:GetTexture())
+          check4(1, 1, 1, 1, t:GetVertexColor())
+          t:SetTexture(136235)
+          assertEquals(136235, t:GetTexture())
+          t:SetColorTexture(0.8, 0.6, 0.4, 0.2)
+          assertEquals(colortex, t:GetTexture())
+        end,
+        SetDrawLayer = function()
+          local t = CreateFrame('Frame'):CreateTexture()
+          check2('ARTWORK', 0, t:GetDrawLayer())
+          check0(t:SetDrawLayer('ARTWORK', 5))
+          check2('ARTWORK', 5, t:GetDrawLayer())
+          check0(t:SetDrawLayer('ARTWORK'))
+          check2('ARTWORK', 0, t:GetDrawLayer())
+        end,
+        ['color texture, vertex color, and gradient'] = function()
+          local t = CreateFrame('Frame'):CreateTexture()
+          local states = {
+            init = function()
+              check4(1, 1, 1, 1, t:GetVertexColor())
+              check1(1, t:GetAlpha())
+            end,
+            vertex = function()
+              check4(0.2, 0.4, 0.6, 0.8, t:GetVertexColor())
+              check1(0.8, t:GetAlpha())
+            end,
+          }
+          local transitions = {
+            hg = {
+              to = 'init',
+              func = function()
+                local c1 = { r = 1, g = 1, b = 0, a = 1 }
+                local c2 = { r = 0, g = 1, b = 1, a = 1 }
+                t:SetGradient('HORIZONTAL', c1, c2)
+              end,
+            },
+            vc = {
+              to = 'vertex',
+              func = function()
+                t:SetVertexColor(0.2, 0.4, 0.6, 0.8)
+              end,
+            },
+            vg = {
+              to = 'init',
+              func = function()
+                local c1 = { r = 1, g = 0, b = 0, a = 1 }
+                local c2 = { r = 0, g = 1, b = 0, a = 1 }
+                t:SetGradient('VERTICAL', c1, c2)
+              end,
+            },
+          }
+          return G.checkStateMachine(states, transitions, 'init')
+        end,
+      }
     end,
   }
 end

@@ -130,19 +130,6 @@ G.testsuite.sync = function()
         end,
       }
       local transitions = {
-        Hack = { -- TODO remove when we can walk from init
-          edges = { reset = 'both' },
-          func = function()
-            check0(f:SetText('Moo'))
-            check0(g:SetText('Moo'))
-          end,
-        },
-        Hack2 = {
-          edges = { reset = 'fstr' },
-          func = function()
-            f:CreateFontString()
-          end,
-        },
         Reset = {
           to = 'reset',
           func = function()
@@ -324,6 +311,135 @@ G.testsuite.sync = function()
       assertEquals('a,b,c,d,e,f', table.concat(log, ','))
     end,
 
+    ['event registration'] = function()
+      local f = CreateFrame('Frame')
+      local states = {
+        both = function()
+          check2(true, nil, f:IsEventRegistered('PLAYER_LOGIN'))
+          check2(true, nil, f:IsEventRegistered('PLAYER_ENTERING_WORLD'))
+          check2(false, nil, f:IsEventRegistered('PLAYER_LOGOUT'))
+        end,
+        justlogin = function()
+          check2(true, nil, f:IsEventRegistered('PLAYER_LOGIN'))
+          check2(false, nil, f:IsEventRegistered('PLAYER_ENTERING_WORLD'))
+          check2(false, nil, f:IsEventRegistered('PLAYER_LOGOUT'))
+        end,
+        justpew = function()
+          check2(false, nil, f:IsEventRegistered('PLAYER_LOGIN'))
+          check2(true, nil, f:IsEventRegistered('PLAYER_ENTERING_WORLD'))
+          check2(false, nil, f:IsEventRegistered('PLAYER_LOGOUT'))
+        end,
+        none = function()
+          check2(false, nil, f:IsEventRegistered('PLAYER_LOGIN'))
+          check2(false, nil, f:IsEventRegistered('PLAYER_ENTERING_WORLD'))
+          check2(false, nil, f:IsEventRegistered('PLAYER_LOGOUT'))
+        end,
+      }
+      local transitions = {
+        registerall = {
+          func = function()
+            check0(f:RegisterAllEvents())
+          end,
+          loop = true,
+        },
+        registergarbage = {
+          func = function()
+            assert(not pcall(function()
+              f:RegisterEvent('WOWLESS_NOPE')
+            end))
+          end,
+          loop = true,
+        },
+        registerloginfailure = {
+          edges = {
+            both = 'both',
+            justlogin = 'justlogin',
+          },
+          func = function()
+            check1(false, f:RegisterEvent('PLAYER_LOGIN'))
+          end,
+        },
+        registerloginsuccess = {
+          edges = {
+            justpew = 'both',
+            none = 'justlogin',
+          },
+          func = function()
+            check1(true, f:RegisterEvent('PLAYER_LOGIN'))
+          end,
+        },
+        registerpewfailure = {
+          edges = {
+            both = 'both',
+            justpew = 'justpew',
+          },
+          func = function()
+            check1(false, f:RegisterEvent('PLAYER_ENTERING_WORLD'))
+          end,
+        },
+        registerpewsuccess = {
+          edges = {
+            justlogin = 'both',
+            none = 'justpew',
+          },
+          func = function()
+            check1(true, f:RegisterEvent('PLAYER_ENTERING_WORLD'))
+          end,
+        },
+        unregisterall = {
+          func = function()
+            check0(f:UnregisterAllEvents())
+          end,
+          to = 'none',
+        },
+        unregistergarbage = {
+          func = function()
+            assert(not pcall(function()
+              f:UnregisterEvent('WOWLESS_NOPE')
+            end))
+          end,
+          loop = true,
+        },
+        unregisterloginfailure = {
+          edges = {
+            justpew = 'justpew',
+            none = 'none',
+          },
+          func = function()
+            check1(false, f:UnregisterEvent('PLAYER_LOGIN'))
+          end,
+        },
+        unregisterloginsuccess = {
+          edges = {
+            both = 'justpew',
+            justlogin = 'none',
+          },
+          func = function()
+            check1(true, f:UnregisterEvent('PLAYER_LOGIN'))
+          end,
+        },
+        unregisterpewfailure = {
+          edges = {
+            justlogin = 'justlogin',
+            none = 'none',
+          },
+          func = function()
+            check1(false, f:UnregisterEvent('PLAYER_ENTERING_WORLD'))
+          end,
+        },
+        unregisterpewsuccess = {
+          edges = {
+            both = 'justlogin',
+            justpew = 'none',
+          },
+          func = function()
+            check1(true, f:UnregisterEvent('PLAYER_ENTERING_WORLD'))
+          end,
+        },
+      }
+      return checkStateMachine(states, transitions, 'none')
+    end,
+
     loading = function()
       return {
         addonName = function()
@@ -365,13 +481,6 @@ G.testsuite.sync = function()
         end,
       }
       local transitions = {
-        Hack = { -- TODO remove when we can walk from init
-          to = 'colorTexture',
-          func = function()
-            checkSetStatusBarTexture()
-            check0(sb:SetStatusBarColor(0.8, 0.6, 0.4, 0.2))
-          end,
-        },
         SetStatusBarColor = {
           edges = {
             colorTexture = 'colorTexture',

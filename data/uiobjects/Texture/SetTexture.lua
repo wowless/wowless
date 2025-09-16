@@ -5,4 +5,5 @@ return function(self, tex)
   self.colorTextureA = nil
   self.atlas = nil
   self.texture = tonumber(tex) or tostring(tex)
+  return true
 end

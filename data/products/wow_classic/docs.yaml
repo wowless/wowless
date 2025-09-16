@@ -1,64 +1,387 @@
----
-events:
-  never_sent:
-    INVENTORY_SEARCH_UPDATE: {}
-    PARTY_INVITE_CANCEL: {}
-    SECURE_TRANSFER_CONFIRM_SEND_MAIL: {}
 lies:
   apis:
-    C_Item.GetItemClassInfo:
-      inputs:
-      - name: itemClassID
-        type: number
+    C_AddOns.GetAddOnMetadata:
       outputs:
-      - name: result
-        type: string
+      - _add:
+          nilable: true
+    C_Item.GetItemClassInfo:
+      outputs:
+      - _add:
+          nilable: true
+  extra_apis:
+    C_BarberShopInternal.SetQAMode:
+    C_BattleNet.InstallHighResTextures:
+    C_ConfigurationWarnings.GetConfigurationWarnings:
+    C_ConfigurationWarnings.GetConfigurationWarningSeen:
+    C_ConfigurationWarnings.GetConfigurationWarningString:
+    C_ConfigurationWarnings.SetConfigurationWarningSeen:
+    C_EditMode.ConvertLayoutInfoToString:
+    C_EditMode.ConvertStringToLayoutInfo:
+    C_EditMode.GetAccountSettings:
+    C_EditMode.GetLayouts:
+    C_EditMode.IsValidLayoutName:
+    C_EditMode.OnEditModeExit:
+    C_EditMode.OnLayoutAdded:
+    C_EditMode.OnLayoutDeleted:
+    C_EditMode.SaveLayouts:
+    C_EditMode.SetAccountSetting:
+    C_EditMode.SetActiveLayout:
+    ToggleAnimKitDisplay:
+    ToggleCollision:
+    ToggleCollisionDisplay:
+    ToggleDebugAIDisplay:
+    ToggleGravity:
+    TogglePlayerBounds:
+    TogglePortals:
+    ToggleTris:
+  extra_enums:
+    ActionBarOrientation:
+    ActionBarVisibleSetting:
+    AuraFrameIconDirection:
+    AuraFrameIconWrap:
+    AuraFrameOrientation:
+    BagsDirection:
+    BagsOrientation:
+    ConfigurationWarning:
+    CooldownViewerBarContent:
+    CooldownViewerIconDirection:
+    CooldownViewerOrientation:
+    CooldownViewerVisibleSetting:
+    EditModeAccountSetting:
+    EditModeActionBarSetting:
+    EditModeActionBarSystemIndices:
+    EditModeArchaeologyBarSetting:
+    EditModeAuraFrameSetting:
+    EditModeAuraFrameSystemIndices:
+    EditModeBagsSetting:
+    EditModeCastBarSetting:
+    EditModeChatFrameSetting:
+    EditModeCooldownViewerSetting:
+    EditModeCooldownViewerSystemIndices:
+    EditModeDurabilityFrameSetting:
+    EditModeLayoutType:
+    EditModeMicroMenuSetting:
+    EditModeMinimapSetting:
+    EditModeObjectiveTrackerSetting:
+    EditModePresetLayouts:
+    EditModeSettingDisplayType:
+    EditModeStatusTrackingBarSetting:
+    EditModeStatusTrackingBarSystemIndices:
+    EditModeSystem:
+    EditModeTimerBarsSetting:
+    EditModeUnitFrameSetting:
+    EditModeUnitFrameSystemIndices:
+    EditModeVehicleSeatIndicatorSetting:
+    MicroMenuOrder:
+    MicroMenuOrientation:
+    RaidGroupDisplayType:
+    SortPlayersBy:
+    ViewArenaSize:
+    ViewRaidSize:
+    WarbandEventState:
+    WarbandGroupFlags:
+    WarbandSceneAnimationEvent:
+    WarbandSceneAnimationSheatheState:
+    WarbandSceneAnimationStandState:
+    WarbandScenePlacementType:
+  extra_events:
+    EDIT_MODE_LAYOUTS_UPDATED:
+  extra_script_objects:
+    PingPinFrameAPI:
+    SimpleModelFFXAPI:
   uiobjects:
     Button:
+      GetText:
+        outputs:
+        - _add:
+            nilable: true
       RegisterForClicks:
         inputs:
-        - name: unpackedPrimitiveType
-          type: number
-        instride: 1
-        outputs: {}
+        - _change:
+            from:
+              name: unpackedPrimitiveType
+              type: number
+            to:
+              name: button
+              type: string
       RegisterForMouse:
         inputs:
-        - name: unpackedPrimitiveType
-          type: number
-        instride: 1
-        outputs: {}
+        - _change:
+            from:
+              name: unpackedPrimitiveType
+              type: number
+            to:
+              name: button
+              type: string
+      SetFormattedText:
+        _add:
+          instride: 1
+        inputs:
+          _add:
+            2:
+              name: arg
+              nilable: true
+              type: unknown
+    Cooldown:
+      SetBlingTexture:
+        inputs:
+          2:
+            _add:
+              nilable: true
+          3:
+            _add:
+              nilable: true
+          4:
+            _add:
+              nilable: true
+          5:
+            _add:
+              nilable: true
+      SetEdgeTexture:
+        inputs:
+          2:
+            _add:
+              nilable: true
+          3:
+            _add:
+              nilable: true
+          4:
+            _add:
+              nilable: true
+          5:
+            _add:
+              nilable: true
+      SetSwipeTexture:
+        inputs:
+          2:
+            _add:
+              nilable: true
+          3:
+            _add:
+              nilable: true
+          4:
+            _add:
+              nilable: true
+          5:
+            _add:
+              nilable: true
+    FontString:
+      GetText:
+        outputs:
+        - _add:
+            nilable: true
     Frame:
+      GetAttribute:
+        _remove:
+          inputs:
+          - name: attributeName
+            type: string
+        outputs:
+        - _add:
+            nilable: true
+          type:
+            _change:
+              from: string
+              to: unknown
       RegisterForDrag:
         inputs:
-        - name: unpackedPrimitiveType
-          type: number
-        instride: 1
-        outputs: {}
+        - _change:
+            from:
+              name: unpackedPrimitiveType
+              type: number
+            to:
+              name: button
+              type: string
+      RegisterUnitEvent:
+        inputs:
+          2:
+            _add:
+              nilable: true
+      SetAttribute:
+        inputs:
+          2:
+            _add:
+              nilable: true
+            type:
+              _change:
+                from: string
+                to: unknown
+      SetAttributeNoHandler:
+        inputs:
+          2:
+            _add:
+              nilable: true
+            type:
+              _change:
+                from: string
+                to: unknown
+    LayeredRegion:
+      GetVertexColor:
+        _remove:
+          mayreturnnothing: true
+    ModelScene:
+      CreateActor:
+        inputs:
+        - _add:
+            nilable: true
+        - _add:
+            nilable: true
+        outputs:
+          _add:
+          - name: actor
+            type:
+              uiobject: Actor
+    ParentedObjectBase:
+      GetParentKey:
+        outputs:
+        - _add:
+            nilable: true
     Region:
+      GetPoint:
+        outputs:
+          2:
+            _add:
+              nilable: true
+      SetAllPoints:
+        _remove:
+          inputs:
+          - name: relativeTo
+            type:
+              uiobject: Region
+          - default: true
+            name: doResize
+            type: boolean
       SetPassThroughButtons:
         inputs:
-        - name: unpackedPrimitiveType
-          type: number
-        instride: 1
-        outputs: {}
+        - _change:
+            from:
+              name: unpackedPrimitiveType
+              type: number
+            to:
+              name: button
+              type: string
+      SetPoint:
+        _remove:
+          inputs:
+          - name: point
+            type:
+              stringenum: FramePoint
+          - name: relativeTo
+            type:
+              uiobject: Region
+          - name: relativePoint
+            type:
+              stringenum: FramePoint
+          - name: offsetX
+            type: number
+          - name: offsetY
+            type: number
+    ScriptObject:
+      GetScript:
+        outputs:
+        - _add:
+            nilable: true
+      HookScript:
+        outputs:
+          _change:
+            from:
+            to:
+            - name: success
+              type: boolean
     TextureBase:
+      GetAtlas:
+        outputs:
+        - _add:
+            nilable: true
+      GetTexCoord:
+        _remove:
+          outstride: 2
+        outputs:
+          1:
+            name:
+              _change:
+                from: x
+                to: ulx
+          2:
+            name:
+              _change:
+                from: y
+                to: uly
+          _add:
+            3:
+              name: llx
+              type: number
+            4:
+              name: lly
+              type: number
+            5:
+              name: urx
+              type: number
+            6:
+              name: ury
+              type: number
+            7:
+              name: lrx
+              type: number
+            8:
+              name: lry
+              type: number
+      GetTexture:
+        outputs:
+        - type:
+            _change:
+              from: string
+              to: FileAsset
       SetAtlas:
         inputs:
-        - name: atlas
-          type: string
-        - default: false
-          name: useAtlasSize
-          type: boolean
-        - name: filterMode
-          nilable: true
-          type: FilterMode
-        - name: resetTexCoords
-          nilable: true
-          type: boolean
-        outputs: {}
+          1:
+            _add:
+              nilable: true
+          3:
+            _add:
+              default: LINEAR
+            _remove:
+              nilable: true
+      SetTexture:
+        inputs:
+          2:
+            _add:
+              default: CLAMP
+            _remove:
+              nilable: true
+            type:
+              _change:
+                from: string
+                to:
+                  stringenum: WrapMode
+          3:
+            _add:
+              default: CLAMP
+            _remove:
+              nilable: true
+            type:
+              _change:
+                from: string
+                to:
+                  stringenum: WrapMode
+          4:
+            _add:
+              default: LINEAR
+            _remove:
+              nilable: true
+            type:
+              _change:
+                from: string
+                to:
+                  stringenum: FilterMode
+    UIObject:
+      GetName:
+        outputs:
+        - _add:
+            nilable: true
 script_objects:
   FrameAPIArchaeologyDigSiteFrame: ArchaeologyDigSiteFrame
-  FrameAPIBlob: QuestPOIFrame
+  FrameAPIBlob: POIFrame
   FrameAPICharacterModelBase: PlayerModel
   FrameAPICinematicModel: CinematicModel
   FrameAPICooldown: Cooldown
@@ -112,122 +435,199 @@ script_objects:
   SimpleStatusBarAPI: StatusBar
   SimpleTextureAPI: Texture
   SimpleTextureBaseAPI: TextureBase
-skip_docfiles:
-  AuctionHouseDocumentation: {}
-  BarberShopInternalDocumentation: {}
-  ConfigurationWarningsDocumentation: {}
-  DebugToggleDocumentation: {}
-  EditModeManagerDocumentation: {}
-  PingPinFrameAPIDocumentation: {}
-  SimpleModelFFXAPIDocumentation: {}
-skip_uiobject_methods:
-  Button:
-    GetText: {}
-    SetDisabledTexture: {}
-    SetFormattedText: {}
-    SetHighlightTexture: {}
-    SetNormalTexture: {}
-    SetPushedTexture: {}
-  CheckButton:
-    SetCheckedTexture: {}
-  Cooldown:
-    SetBlingTexture: {}
-    SetEdgeTexture: {}
-    SetSwipeTexture: {}
-  Frame:
-    GetAttribute: {}
-    RegisterEvent: {}
-    RegisterUnitEvent: {}
-    SetAttribute: {}
-    SetAttributeNoHandler: {}
-    UnregisterEvent: {}
-  ModelScene:
-    CreateActor: {}
-  ParentedObjectBase:
-    GetParentKey: {}
-  Region:
-    GetBottom: {}
-    GetDrawLayer: {}
-    GetHeight: {}
-    GetLeft: {}
-    GetPoint: {}
-    GetRect: {}
-    GetScript: {}
-    GetSize: {}
-    GetVertexColor: {}
-    GetWidth: {}
-    HasScript: {}
-    HookScript: {}
-    SetAllPoints: {}
-    SetDrawLayer: {}
-    SetPoint: {}
-    SetScript: {}
-    SetVertexColor: {}
-  StatusBar:
-    SetStatusBarTexture: {}
-  TextureBase:
-    GetTexCoord: {}
-    GetTexture: {}
-    SetTexture: {}
 typedefs:
-  AnimationDataEnum: number
-  BigInteger: number
-  BigUInteger: number
-  bool: boolean
-  CalendarEventID: string
-  ChatBubbleFrame: table
-  ClubId: string
-  ClubInvitationId: string
-  ClubStreamId: string
-  ConnectionIptype: string
-  CScriptObject: UIObject
-  cstring: string
-  FileAsset: string
-  fileID: number
-  HTMLTextType: string
-  IDOrLink: string
-  ItemInfo: string
-  kstringClubMessage: string
-  kstringLfgListApplicant: string
-  kstringLfgListChat: string
-  kstringLfgListSearch: string
-  luaFunction: function
-  luaIndex: number
-  ModelAsset: string
-  ModelSceneFrame: ModelScene
-  ModelSceneFrameActor: Actor
-  NamePlateFrame: table
-  normalizedValue: number
-  NotificationDbId: string
-  number: number
-  RecruitAcceptanceID: string
-  ScriptObject: UIObject
-  ScriptRegion: Region
-  SimpleAnim: Animation
-  SimpleAnimGroup: AnimationGroup
-  SimpleControlPoint: ControlPoint
-  SimpleFont: Font
-  SimpleFontString: FontString
-  SimpleFrame: Frame
-  SimpleLine: Line
-  SimpleMaskTexture: MaskTexture
-  SimplePathAnim: Path
-  SimpleTexture: Texture
-  SimpleWindow: nil
-  SingleColorValue: number
-  size: number
-  SpellIdentifier: string
-  string: string
-  TBFFlags: string
-  TextureAsset: Texture
-  TextureAssetDisk: string
-  textureAtlas: string
-  textureKit: string
-  time_t: number
-  TooltipComparisonItem: table
-  uiAddon: uiAddon
-  uiFontHeight: number
-  uiUnit: number
-  UnitToken: unit
-  WOWGUID: string
-  WOWMONEY: number
+  AnimationDataEnum:
+    type: number
+  AzeriteEmpoweredItemLocation:
+    type:
+      structure: ItemLocation
+  AzeriteItemLocation:
+    type:
+      structure: ItemLocation
+  BigInteger:
+    type: number
+  BigUInteger:
+    type: number
+  bool:
+    type: boolean
+  CalendarEventID:
+    type: string
+  ChatBubbleFrame:
+    type: table
+  ClubId:
+    type: string
+  ClubInvitationId:
+    type: string
+  ClubStreamId:
+    type: string
+  ConnectionIptype:
+    type: string
+  CScriptObject:
+    outnil: true
+    type:
+      uiobject: UIObject
+  cstring:
+    type: string
+  EmptiableItemLocation:
+    type:
+      structure: ItemLocation
+  FileAsset:
+    type: FileAsset
+  fileID:
+    type: number
+  FontAlphabet:
+    type: string
+  HTMLTextType:
+    type: string
+  IDOrLink:
+    type: string
+  ItemInfo:
+    type: string
+  kstringClubMessage:
+    type: string
+  kstringLfgListApplicant:
+    type: string
+  kstringLfgListChat:
+    type: string
+  kstringLfgListSearch:
+    type: string
+  luaFunction:
+    type: function
+  luaIndex:
+    type: number
+  LuaValueVariant:
+    type: table
+  ModelAsset:
+    type: string
+  ModelSceneFrame:
+    type:
+      uiobject: ModelScene
+  ModelSceneFrameActor:
+    type:
+      uiobject: Actor
+  NamePlateFrame:
+    type: table
+  normalizedValue:
+    type: number
+  NotificationDbId:
+    type: string
+  number:
+    type: number
+  QuestObjectiveType:
+    type: number
+  RecruitAcceptanceID:
+    type: string
+  ScriptObject:
+    type:
+      uiobject: UIObject
+  ScriptRegion:
+    type:
+      uiobject: Region
+  SimpleAnim:
+    type:
+      uiobject: Animation
+  SimpleAnimGroup:
+    type:
+      uiobject: AnimationGroup
+  SimpleControlPoint:
+    type:
+      uiobject: ControlPoint
+  SimpleFont:
+    outnil: true
+    type:
+      uiobject: Font
+  SimpleFontString:
+    outnil: true
+    type:
+      uiobject: FontString
+  SimpleFrame:
+    outnil: true
+    type:
+      uiobject: Frame
+  SimpleLine:
+    type:
+      uiobject: Line
+  SimpleMaskTexture:
+    type:
+      uiobject: MaskTexture
+  SimplePathAnim:
+    type:
+      uiobject: Path
+  SimpleTexture:
+    outnil: true
+    type:
+      uiobject: Texture
+  SimpleWindow:
+    type: nil
+  SingleColorValue:
+    type: number
+  size:
+    type: number
+  SpellIdentifier:
+    type: string
+  string:
+    type: string
+  stringView:
+    type: string
+  TBFFlags:
+    type: string
+  TextureAsset:
+    type: TextureAsset
+  TextureAssetDisk:
+    type: string
+  textureAtlas:
+    type: string
+  textureKit:
+    type: string
+  time_t:
+    type: number
+  TooltipComparisonItem:
+    type: table
+  uiAddon:
+    type: uiAddon
+  uiFontHeight:
+    type: number
+  uiUnit:
+    type: number
+  UnitToken:
+    type: unit
+  WOWGUID:
+    type: string
+  WOWMONEY:
+    type: number
+uiobject_method_reassignments:
+  FontString:
+    GetFontObject: FontInstance
+    GetIndentedWordWrap: FontInstance
+    GetJustifyH: FontInstance
+    GetJustifyV: FontInstance
+    GetShadowColor: FontInstance
+    GetShadowOffset: FontInstance
+    GetSpacing: FontInstance
+    GetTextColor: FontInstance
+    SetFontObject: FontInstance
+    SetIndentedWordWrap: FontInstance
+    SetJustifyH: FontInstance
+    SetJustifyV: FontInstance
+    SetShadowColor: FontInstance
+    SetShadowOffset: FontInstance
+    SetSpacing: FontInstance
+    SetTextColor: FontInstance
+  Region:
+    GetAlpha: RegionBase
+    GetDrawLayer: LayeredRegion
+    GetScale: RegionBase
+    GetScript: ScriptObject
+    GetVertexColor: LayeredRegion
+    HasScript: ScriptObject
+    Hide: RegionBase
+    HookScript: ScriptObject
+    IsShown: RegionBase
+    IsVisible: RegionBase
+    SetAlpha: RegionBase
+    SetDrawLayer: LayeredRegion
+    SetScale: RegionBase
+    SetScript: ScriptObject
+    SetShown: RegionBase
+    SetVertexColor: LayeredRegion
+    Show: RegionBase

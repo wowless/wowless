@@ -1,4 +1,3 @@
----
 name: doctable
 type:
   record:
@@ -23,11 +22,7 @@ type:
                 sequenceof:
                   record:
                     Default:
-                      type:
-                        oneof:
-                        - boolean
-                        - number
-                        - string
+                      type: any
                     Documentation:
                       type:
                         sequenceof: string
@@ -59,11 +54,7 @@ type:
                 sequenceof:
                   record:
                     Default:
-                      type:
-                        oneof:
-                        - boolean
-                        - number
-                        - string
+                      type: any
                     Documentation:
                       type:
                         sequenceof: string
@@ -85,21 +76,49 @@ type:
             Documentation:
               type:
                 sequenceof: string
+            HasRestrictions:
+              type: boolean
+            IsIndexInRange:
+              type: boolean
+            IsNotReadOnly:
+              type: boolean
+            IsNotSecure:
+              type: boolean
+            IsProtectedFunction:
+              type: boolean
+            IsValidAndPublic:
+              type: boolean
             MayReturnNothing:
               type: boolean
             Name:
               required: true
               type: string
+            RequiresActiveCommentator:
+              type: boolean
+            RequiresClubsInitialized:
+              type: boolean
+            RequiresCommentator:
+              type: boolean
+            RequiresFriendList:
+              type: boolean
+            RequiresIndexInRange:
+              type: boolean
+            RequiresNonReadOnlyCVar:
+              type: boolean
+            RequiresNonSecureCVar:
+              type: boolean
+            RequiresRecentAllies:
+              type: boolean
+            RequiresValidAndPublicCVar:
+              type: boolean
+            RequiresValidInviteTarget:
+              type: boolean
             Returns:
               type:
                 sequenceof:
                   record:
                     Default:
-                      type:
-                        oneof:
-                        - boolean
-                        - number
-                        - string
+                      type: any
                     Documentation:
                       type:
                         sequenceof: string
@@ -151,11 +170,7 @@ type:
                 sequenceof:
                   record:
                     Default:
-                      type:
-                        oneof:
-                        - boolean
-                        - number
-                        - string
+                      type: any
                     Documentation:
                       type:
                         sequenceof: string
@@ -185,11 +200,11 @@ type:
             Type:
               required: true
               type:
-                oneof:
-                - literal: CallbackType
-                - literal: Constants
-                - literal: Enumeration
-                - literal: Structure
+                taggedunion:
+                  CallbackType: tag
+                  Constants: tag
+                  Enumeration: tag
+                  Structure: tag
             Values:
               type:
                 sequenceof:
@@ -204,6 +219,6 @@ type:
                       type: number
     Type:
       type:
-        oneof:
-        - literal: ScriptObject
-        - literal: System
+        taggedunion:
+          ScriptObject: tag
+          System: tag

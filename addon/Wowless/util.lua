@@ -91,6 +91,16 @@ local function check4(e1, e2, e3, e4, ...)
   checkEquals(e4, a4)
 end
 
+local function check5(e1, e2, e3, e4, e5, ...)
+  checkEquals(5, select('#', ...))
+  local a1, a2, a3, a4, a5 = ...
+  checkEquals(e1, a1)
+  checkEquals(e2, a2)
+  checkEquals(e3, a3)
+  checkEquals(e4, a4)
+  checkEquals(e5, a5)
+end
+
 local function check6(e1, e2, e3, e4, e5, e6, ...)
   checkEquals(6, select('#', ...))
   local a1, a2, a3, a4, a5, a6 = ...
@@ -139,6 +149,7 @@ G.check1 = check1
 G.check2 = check2
 G.check3 = check3
 G.check4 = check4
+G.check5 = check5
 G.check6 = check6
 G.check7 = check7
 G.globalEnv = _G

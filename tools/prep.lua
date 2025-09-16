@@ -1,8 +1,8 @@
 local args = (function()
   local parser = require('argparse')()
   parser:argument('product', 'product to fetch')
+  parser:option('--sqls', 'sqls file')
   parser:option('-o --output', 'output file')
-  parser:option('-s --stamp', 'stamp file')
   return parser:parse()
 end)()
 
@@ -20,6 +20,7 @@ local function readFile(f)
 end
 local plprettywrite = require('pl.pretty').write
 local Mixin = require('wowless.util').mixin
+local sorted = require('pl.tablex').sort
 
 local globals = parseYaml('data/products/' .. product .. '/globals.yaml')
 local structures = parseYaml('data/products/' .. product .. '/structures.yaml')
@@ -41,14 +42,10 @@ end
 local specDefault = (function()
   local defaultOutputs = {
     boolean = 'false',
-    Font = 'api.CreateUIObject("font").luarep',
-    FontString = 'api.CreateUIObject("fontstring").luarep',
     ['function'] = 'function() end',
-    MaskTexture = 'api.CreateUIObject("masktexture").luarep',
     ['nil'] = 'nil',
     number = '1',
     oneornil = 'nil',
-    Region = 'nil',
     string = '\'\'',
     table = '{}',
     unit = '\'player\'',
@@ -60,14 +57,14 @@ local specDefault = (function()
     if not structureDefaults[name] then
       local st = assert(structures[name], name)
       local t = {}
-      for fname, field in require('pl.tablex').sort(st.fields) do
+      for fname, field in sorted(st.fields) do
         local v = specDefault(field)
         if v ~= 'nil' then
           table.insert(t, ('[%q]=%s'):format(fname, v))
         end
       end
       local str = '{' .. table.concat(t, ',') .. '}'
-      structureDefaults[name] = st.mixin and ('Mixin(%s,%q)'):format(str, st.mixin) or str
+      structureDefaults[name] = st.mixin and ('gencode.Mixin(%s,%q)'):format(str, st.mixin) or str
     end
     return structureDefaults[name]
   end
@@ -85,12 +82,12 @@ local specDefault = (function()
     if defaultOutputs[ty] then
       return defaultOutputs[ty]
     end
-    if stringenums[ty] then
+    if ty.stringenum then
       local least
-      for k in pairs(stringenums[ty]) do
+      for k in pairs(stringenums[ty.stringenum]) do
         least = (least == nil or k < least) and k or least
       end
-      return least
+      return ('%q'):format(least)
     end
     if ty.arrayof then
       return '{' .. specDefault({ type = ty.arrayof }) .. '}'
@@ -108,82 +105,148 @@ local specDefault = (function()
       end
       return valstr(x)
     end
+    if ty.uiobject then
+      return ('gencode.CreateUIObject(%q).luarep'):format(ty.uiobject:lower())
+    end
     error('unexpected type: ' .. require('pl.pretty').write(ty))
   end
   return specDefault
 end)()
 
-local apis = {}
-local impls = {}
-local sqls = {}
-do
-  local cfg = parseYaml('data/products/' .. product .. '/apis.yaml')
-  local implcfg = parseYaml('data/impl.yaml')
-  local sqlcfg = parseYaml('data/sql.yaml')
-  for name, apicfg in pairs(cfg) do
-    if apicfg.impl then
-      local ic = assert(implcfg[apicfg.impl], 'missing impl ' .. apicfg.impl)
-      if ic.stdlib then
-        apicfg.impl = nil
-        apicfg.stdlib = ic.stdlib
-      end
-      for _, v in ipairs(ic.sqls or { ic.directsql }) do
-        if not sqls[v] then
-          local sql = sqlcfg[v]
-          sqls[v] = {
-            sql = readFile('data/sql/' .. v .. '.sql'),
-            table = sql.table,
-            type = sql.type,
-          }
-        end
-      end
-      if not impls[apicfg.impl] then
-        if ic.module then
-          local fmt = 'return (...).modules[%q][%q]'
-          impls[apicfg.impl] = {
-            frameworks = { 'api' },
-            src = fmt:format(ic.module, ic['function'] or apicfg.impl),
-          }
-        elseif ic.delegate then
-          impls[apicfg.impl] = {
-            src = 'return ' .. ic.delegate,
-          }
-        elseif ic.directsql then
-          impls[apicfg.impl] = {
-            sqls = { ic.directsql },
-            src = 'return (...)',
-          }
-        elseif not ic.stdlib then
-          impls[apicfg.impl] = {
-            frameworks = ic.frameworks,
-            sqls = ic.sqls,
-            src = readFile('data/impl/' .. apicfg.impl .. '.lua'),
-          }
-        end
-      end
-    elseif apicfg.stubnothing then
-      apicfg.stub = ''
-    else
-      local outs = apicfg.outputs or {}
-      local rets = {}
-      local nonstride = #outs - (apicfg.outstride or 0)
-      for i = 1, nonstride do
-        table.insert(rets, specDefault(outs[i]))
-      end
-      for _ = 1, apicfg.stuboutstrides or 1 do
-        for j = nonstride + 1, #outs do
-          table.insert(rets, specDefault(outs[j]))
-        end
-      end
-      apicfg.stub = 'return ' .. table.concat(rets, ',')
-    end
-    apis[name] = apicfg
+local function dispatch(t, u, ...)
+  if type(u) == 'string' then
+    return assert(t[u], u)(...)
+  else
+    local uk, uv = next(u)
+    assert(next(u, uk) == nil, uk)
+    return assert(t[uk], uk)(uv, ...)
   end
+end
+
+local sqlcfg = parseYaml(args.sqls)
+local sqls = {}
+local function ensuresql(k)
+  if not sqls[k] then
+    local sql = assert(sqlcfg[k], k)
+    sqls[k] = {
+      sql = sql.text,
+      table = sql.config.table,
+      type = sql.config.type,
+    }
+  end
+end
+
+local implimpls = {
+  delegate = function(impl)
+    return {
+      impl = 'return ' .. impl,
+    }
+  end,
+  directsql = function(impl)
+    ensuresql(impl)
+    return {
+      impl = 'return (...)',
+      sqls = { impl },
+    }
+  end,
+  impl = function(impl, name)
+    local modules
+    if impl.modules then
+      modules = {}
+      for m in sorted(impl.modules) do
+        table.insert(modules, m)
+      end
+    end
+    for _, sql in ipairs(impl.sqls or {}) do
+      ensuresql(sql)
+    end
+    local src = 'data/impl/' .. name .. '.lua'
+    return {
+      impl = readFile(src),
+      modules = modules,
+      sqls = impl.sqls,
+      src = '@./' .. src,
+    }
+  end,
+  luadelegate = function(impl, name)
+    local fmt = 'return require(%q)[%q]'
+    return {
+      impl = fmt:format(impl.module, impl['function'] or name),
+    }
+  end,
+  moduledelegate = function(impl, name)
+    return {
+      impl = ('return (...)[%q]'):format(impl['function'] or name),
+      modules = { impl.name },
+    }
+  end,
+}
+local implcfg = parseYaml('data/impl.yaml')
+local impls = {}
+local function ensureimpl(k)
+  if not impls[k] then
+    local cfg = assert(implcfg[k], k)
+    impls[k] = dispatch(implimpls, cfg, k)
+  end
+  return impls[k]
+end
+
+local function mkapi(apicfg)
+  if apicfg.impl then
+    local ic = assert(implcfg[apicfg.impl], 'missing impl ' .. apicfg.impl)
+    if ic.stdlib then
+      return { stdlib = ic.stdlib }
+    else
+      local impl = ensureimpl(apicfg.impl)
+      return {
+        impl = impl.impl,
+        inputs = apicfg.inputs,
+        instride = apicfg.instride,
+        mayreturnnothing = apicfg.mayreturnnothing,
+        modules = impl.modules,
+        outputs = apicfg.outputs,
+        outstride = apicfg.outstride,
+        sqls = impl.sqls,
+        src = impl.src,
+      }
+    end
+  elseif apicfg.stubnothing then
+    return {
+      impl = 'return function() end',
+      inputs = apicfg.inputs,
+      instride = apicfg.instride,
+    }
+  else
+    local outs = apicfg.outputs or {}
+    local rets = {}
+    local nonstride = #outs - (apicfg.outstride or 0)
+    for i = 1, nonstride do
+      table.insert(rets, specDefault(outs[i]))
+    end
+    for _ = 1, apicfg.stuboutstrides or 1 do
+      for j = nonstride + 1, #outs do
+        table.insert(rets, specDefault(outs[j]))
+      end
+    end
+    return {
+      impl = 'local gencode=...;return function()return ' .. table.concat(rets, ',') .. ' end',
+      inputs = apicfg.inputs,
+      instride = apicfg.instride,
+      modules = { 'gencode' },
+    }
+  end
+end
+
+local apis = {}
+for k, v in pairs(parseYaml('data/products/' .. product .. '/apis.yaml')) do
+  apis[k] = mkapi(v)
 end
 
 local cvars = {}
 for k, v in pairs(parseYaml('data/products/' .. product .. '/cvars.yaml')) do
-  cvars[k:lower()] = {
+  local lk = k:lower()
+  assert(not cvars[lk], lk)
+  cvars[lk] = {
     name = k,
     value = v,
   }
@@ -191,14 +254,14 @@ end
 
 local events = {}
 for k, v in pairs(parseYaml('data/products/' .. product .. '/events.yaml')) do
+  local t = {}
+  for _, f in ipairs(v.payload) do
+    table.insert(t, specDefault(f))
+  end
   events[k] = {
-    payload = v.payload and (function()
-      local t = {}
-      for _, f in ipairs(v.payload or {}) do
-        table.insert(t, specDefault(f))
-      end
-      return 'return ' .. table.concat(t, ',')
-    end)(),
+    payload = v.payload,
+    stride = v.stride,
+    stub = 'return ' .. table.concat(t, ','),
   }
 end
 
@@ -227,144 +290,178 @@ local function mkuiobjectinit(k)
   end
   return init
 end
--- Getters can manipulate inherited fields, so we need that info.
-local uiobjectfieldsets = {}
-local function mkuiobjectfieldset(k)
-  local set = uiobjectfieldsets[k]
-  if not set then
-    set = {}
-    local v = uiobjectdata[k]
-    for inh in pairs(v.inherits) do
-      Mixin(set, mkuiobjectfieldset(inh))
+local uiobjectimplimplmakers = {
+  luafile = function(impl, k)
+    local modules
+    if impl.modules then
+      modules = {}
+      for m in sorted(impl.modules) do
+        table.insert(modules, m)
+      end
     end
-    for fk, fv in pairs(v.fields) do
-      set[fk] = fv
+    local src = 'data/uiobjects/' .. k .. '.lua'
+    return {
+      impl = readFile(src),
+      modules = modules,
+      src = '@./' .. src,
+    }
+  end,
+  moduledelegate = function(impl, k)
+    return {
+      impl = ('return (...)[%q]'):format(k:sub(k:find('/') + 1)),
+      modules = { impl.name },
+    }
+  end,
+}
+local uiobjectimplmakers = {
+  getter = function(impl, mv)
+    local t = { 'local gencode=...;' }
+    for i in ipairs(impl) do
+      table.insert(t, 'local spec' .. i .. '=' .. plprettywrite(mv.outputs[i], '') .. ';')
     end
-    uiobjectfieldsets[k] = set
-  end
-  return set
-end
+    table.insert(t, 'return function(self)return ')
+    for i, f in ipairs(impl) do
+      table.insert(t, (i == 1 and '' or ',') .. 'gencode.Check(spec' .. i .. ',self.' .. f.name .. ',true)')
+    end
+    table.insert(t, 'end')
+    return {
+      impl = table.concat(t),
+      modules = { 'gencode' },
+    }
+  end,
+  none = function(mv)
+    local t = { 'local gencode=...;' }
+    local ins = mv.inputs or {}
+    local nsins = #ins - (mv.instride or 0)
+    for i = 1, #ins do
+      table.insert(t, 'local spec' .. i .. '=' .. plprettywrite(mv.inputs[i], '') .. ';')
+    end
+    table.insert(t, 'return function(_')
+    for i = 1, nsins do
+      table.insert(t, ',arg' .. i)
+    end
+    if mv.instride then
+      table.insert(t, ',...')
+    end
+    table.insert(t, ')')
+    for i = 1, nsins do
+      table.insert(t, 'gencode.Check(spec' .. i .. ',arg' .. i .. ');')
+    end
+    if mv.instride then
+      table.insert(t, 'for i=1,select("#",...),' .. mv.instride .. ' do ')
+      table.insert(t, 'local arg' .. nsins + 1)
+      for i = nsins + 2, #ins do
+        table.insert(t, ',arg' .. i)
+      end
+      table.insert(t, '=select(i,...);')
+      for i = nsins + 1, #ins do
+        table.insert(t, 'gencode.Check(spec' .. i .. ',arg' .. i .. ');')
+      end
+      table.insert(t, 'end ')
+    end
+    table.insert(t, 'return ')
+    local outs = mv.outputs or {}
+    local rets = {}
+    local nonstride = #outs - (mv.outstride or 0)
+    for i = 1, nonstride do
+      table.insert(rets, specDefault(outs[i]))
+    end
+    for _ = 1, mv.stuboutstrides or 1 do
+      for j = nonstride + 1, #outs do
+        table.insert(rets, specDefault(outs[j]))
+      end
+    end
+    table.insert(t, table.concat(rets, ','))
+    table.insert(t, ' end')
+    return {
+      impl = table.concat(t),
+      modules = { 'gencode' },
+    }
+  end,
+  setter = function(impl, mv)
+    local t = { 'local gencode=...;' }
+    for i in ipairs(impl) do
+      table.insert(t, 'local spec' .. i .. '=' .. plprettywrite(mv.inputs[i], '') .. ';')
+    end
+    table.insert(t, 'return function(self')
+    for _, f in ipairs(impl) do
+      table.insert(t, ',')
+      table.insert(t, f.name)
+    end
+    table.insert(t, ')')
+    for i, f in ipairs(impl) do
+      table.insert(t, 'self.')
+      table.insert(t, f.name)
+      table.insert(t, '=gencode.Check(spec')
+      table.insert(t, tostring(i))
+      table.insert(t, ',')
+      table.insert(t, f.name)
+      table.insert(t, ');')
+    end
+    table.insert(t, 'end')
+    return {
+      impl = table.concat(t),
+      modules = { 'gencode' },
+    }
+  end,
+  settexture = function(impl)
+    local t = { 'local gencode=...;return function(self,tex)' }
+    table.insert(t, 'local t=gencode.ToTexture(self,tex,self.')
+    table.insert(t, impl.field)
+    table.insert(t, ');if t then gencode.SetParent(t,self);if t:GetNumPoints()==0 then t:SetAllPoints()end t:SetShown(')
+    table.insert(t, impl.shown or 'true')
+    table.insert(t, ');')
+    if impl.extra then
+      table.insert(t, impl.extra)
+      table.insert(t, ';')
+    end
+    table.insert(t, 'end self.')
+    table.insert(t, impl.field)
+    table.insert(t, '=t;')
+    if impl['return'] then
+      table.insert(t, 'return true;')
+    end
+    table.insert(t, 'end')
+    return {
+      impl = table.concat(t),
+      modules = { 'gencode' },
+    }
+  end,
+  uiobjectimpl = function(impl, mv)
+    local implimpl = dispatch(uiobjectimplimplmakers, uiobjectimpl[impl], impl)
+    return {
+      impl = implimpl.impl,
+      inputs = mv.inputs,
+      instride = mv.instride,
+      mayreturnnothing = mv.mayreturnnothing,
+      modules = implimpl.modules,
+      outputs = mv.outputs,
+      outstride = mv.outstride,
+      src = implimpl.src,
+    }
+  end,
+}
 local uiobjects = {}
 for k, v in pairs(uiobjectdata) do
   local constructor = { 'local hlist=...;return function()return{' }
-  for fk, fv in require('pl.tablex').sort(mkuiobjectinit(k)) do
+  for fk, fv in sorted(mkuiobjectinit(k)) do
     table.insert(constructor, ('%s=%s,'):format(fk, fv))
   end
   table.insert(constructor, '}end')
-  local fieldset = mkuiobjectfieldset(k)
   local methods = {}
   for mk, mv in pairs(v.methods) do
-    if type(mv.impl) == 'string' then
-      assert(uiobjectimpl[mv.impl])
-      local src = 'data/uiobjects/' .. mv.impl .. '.lua'
-      methods[mk] = {
-        impl = readFile(src),
-        inputs = mv.inputs,
-        mayreturnnils = mv.mayreturnnils,
-        mayreturnnothing = mv.mayreturnnothing,
-        outputs = mv.outputs,
-        outstride = mv.outstride,
-        src = src,
-      }
-    elseif mv.impl and mv.impl.getter then
-      local t = {}
-      for _, f in ipairs(mv.impl.getter) do
-        if uiobjectdata[fieldset[f.name].type] then
-          table.insert(t, 'self.' .. f.name .. ' and self.' .. f.name .. '.luarep')
-        else
-          table.insert(t, 'self.' .. f.name)
-        end
-      end
-      methods[mk] = 'return function(self) return ' .. table.concat(t, ',') .. ' end'
-    elseif mv.impl and mv.impl.setter then
-      local t = { 'local api,toTexture,check,Mixin=...;' }
-      for i, f in ipairs(mv.impl.setter) do
-        local cf = fieldset[f.name]
-        if cf.type ~= 'Texture' then
-          table.insert(t, 'local spec' .. i .. '=')
-          local input = mv.inputs and mv.inputs[i]
-            or { -- issue #416
-              nilable = cf.type == 'boolean' or cf.nilable or f.nilable or nil,
-              type = cf.type,
-            }
-          table.insert(t, plprettywrite(input, '') .. ';')
-        end
-      end
-      table.insert(t, 'return function(self')
-      for _, f in ipairs(mv.impl.setter) do
-        table.insert(t, ',')
-        table.insert(t, f.name)
-      end
-      table.insert(t, ')')
-      for i, f in ipairs(mv.impl.setter) do
-        local cf = fieldset[f.name]
-        table.insert(t, 'self.')
-        table.insert(t, f.name)
-        table.insert(t, '=')
-        if cf.type == 'Texture' then
-          table.insert(t, 'toTexture(self,' .. f.name .. ',self.')
-        else
-          table.insert(t, 'check(spec')
-          table.insert(t, tostring(i))
-          table.insert(t, ',')
-        end
-        table.insert(t, f.name)
-        table.insert(t, ');')
-      end
-      table.insert(t, 'end')
-      methods[mk] = table.concat(t)
-    else
-      local t = { 'local api,toTexture,check,Mixin=...;' }
-      local ins = mv.inputs or {}
-      local nsins = #ins - (mv.instride or 0)
-      for i = 1, #ins do
-        table.insert(t, 'local spec' .. i .. '=' .. plprettywrite(mv.inputs[i], '') .. ';')
-      end
-      table.insert(t, 'return function(_')
-      for i = 1, nsins do
-        table.insert(t, ',arg' .. i)
-      end
-      if mv.instride then
-        table.insert(t, ',...')
-      end
-      table.insert(t, ')')
-      for i = 1, nsins do
-        table.insert(t, 'check(spec' .. i .. ',arg' .. i .. ');')
-      end
-      if mv.instride then
-        table.insert(t, 'for i=1,select("#",...),' .. mv.instride .. ' do ')
-        table.insert(t, 'local arg' .. nsins + 1)
-        for i = nsins + 2, #ins do
-          table.insert(t, ',arg' .. i)
-        end
-        table.insert(t, '=select(i,...);')
-        for i = nsins + 1, #ins do
-          table.insert(t, 'check(spec' .. i .. ',arg' .. i .. ');')
-        end
-        table.insert(t, 'end ')
-      end
-      table.insert(t, 'return ')
-      local outs = mv.outputs or {}
-      local rets = {}
-      local nonstride = #outs - (mv.outstride or 0)
-      for i = 1, nonstride do
-        table.insert(rets, specDefault(outs[i]))
-      end
-      for _ = 1, mv.stuboutstrides or 1 do
-        for j = nonstride + 1, #outs do
-          table.insert(rets, specDefault(outs[j]))
-        end
-      end
-      table.insert(t, table.concat(rets, ','))
-      table.insert(t, ' end')
-      methods[mk] = table.concat(t)
-    end
+    methods[mk] = dispatch(uiobjectimplmakers, mv.impl or 'none', mv)
+  end
+  local scripts = {}
+  for sk in pairs(v.scripts or {}) do
+    scripts[sk:lower()] = true
   end
   uiobjects[k] = {
     constructor = table.concat(constructor),
     inherits = v.inherits,
     methods = methods,
     objectType = v.objectType,
+    scripts = scripts,
     singleton = v.singleton,
   }
 end
@@ -376,7 +473,6 @@ local data = {
   cvars = cvars,
   events = events,
   globals = globals,
-  impls = impls,
   product = product,
   sqls = sqls,
   structures = structures,
@@ -386,5 +482,5 @@ local data = {
 
 local outfn = args.output or ('build/products/' .. args.product .. '/data.lua')
 local tu = require('tools.util')
-tu.writedeps(outfn, deps, args.stamp)
-tu.writeifchanged(outfn, tu.returntable(data))
+tu.writedeps(outfn, deps)
+require('pl.file').write(outfn, tu.returntable(data))

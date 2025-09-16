@@ -1,4 +1,3 @@
----
 name: function
 type:
   record:
@@ -10,8 +9,7 @@ type:
         sequenceof:
           record:
             default:
-              type:
-                schema: any
+              type: any
             name:
               type: string
             nilable:
@@ -22,8 +20,6 @@ type:
                 schema: type
     instride:
       type: number
-    mayreturnnils:
-      type: boolean
     mayreturnnothing:
       type: boolean
     outputs:
@@ -31,15 +27,13 @@ type:
         sequenceof:
           record:
             default:
-              type:
-                schema: any
+              type: any
             name:
               type: string
             nilable:
               type: boolean
             stub:
-              type:
-                schema: any
+              type: any
             stubnotnil:
               type: boolean
             type:
@@ -48,6 +42,12 @@ type:
                 schema: type
     outstride:
       type: number
+    platform:
+      type:
+        taggedunion:
+          linux: tag
+          mac: tag
+          windows: tag
     stubnothing:
       type: boolean
     stuboutstrides:

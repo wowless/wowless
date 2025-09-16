@@ -1,4 +1,3 @@
----
 AddPrivateAuraAnchorArgs:
   fields:
     auraIndex:
@@ -12,7 +11,8 @@ AddPrivateAuraAnchorArgs:
       type:
         structure: PrivateAuraIconInfo
     parent:
-      type: Frame
+      type:
+        uiobject: Frame
     showCountdownFrame:
       type: boolean
     showCountdownNumbers:
@@ -26,11 +26,14 @@ AnchorBinding:
     offsetY:
       type: number
     point:
-      type: FramePoint
+      type:
+        stringenum: FramePoint
     relativePoint:
-      type: FramePoint
+      type:
+        stringenum: FramePoint
     relativeTo:
-      type: Region
+      type:
+        uiobject: Region
 AppearanceSourceInfo:
   fields:
     canDisplayOnPlayer:
@@ -82,7 +85,7 @@ AppearanceSourceInfo:
     visualID:
       type: number
 AuraData:
-  fields: {}
+  fields:
 C_AccountStore.AccountStoreCategoryInfo:
   fields:
     icon:
@@ -241,6 +244,250 @@ C_AreaPoiInfo.AreaPOIInfo:
       nilable: true
       type: number
     tooltipWidgetSet:
+      nilable: true
+      type: number
+C_AuctionHouse.AuctionHouseBrowseQuery:
+  fields:
+    filters:
+      nilable: true
+      type:
+        arrayof:
+          enum: AuctionHouseFilter
+    itemClassFilters:
+      nilable: true
+      type:
+        arrayof:
+          structure: C_AuctionHouse.AuctionHouseItemClassFilter
+    maxLevel:
+      nilable: true
+      type: number
+    minLevel:
+      nilable: true
+      type: number
+    searchString:
+      type: string
+    sorts:
+      type:
+        arrayof:
+          structure: C_AuctionHouse.AuctionHouseSortType
+C_AuctionHouse.AuctionHouseFilterGroup:
+  fields:
+    category:
+      type:
+        enum: AuctionHouseFilterCategory
+    filters:
+      type:
+        arrayof:
+          enum: AuctionHouseFilter
+C_AuctionHouse.AuctionHouseItemClassFilter:
+  fields:
+    classID:
+      type: number
+    inventoryType:
+      nilable: true
+      type:
+        enum: InventoryType
+    subClassID:
+      nilable: true
+      type: number
+C_AuctionHouse.AuctionHouseSortType:
+  fields:
+    reverseSort:
+      type: boolean
+    sortOrder:
+      type:
+        enum: AuctionHouseSortOrder
+C_AuctionHouse.AuctionInfo:
+  fields:
+    bidAmount:
+      nilable: true
+      type: number
+    bidder:
+      nilable: true
+      type: string
+    buyoutAmount:
+      nilable: true
+      type: number
+    itemKey:
+      type:
+        structure: C_AuctionHouse.ItemKey
+    itemLink:
+      nilable: true
+      type: string
+    minBid:
+      nilable: true
+      type: number
+C_AuctionHouse.BidInfo:
+  fields:
+    auctionID:
+      type: number
+    bidAmount:
+      nilable: true
+      type: number
+    bidder:
+      nilable: true
+      type: string
+    buyoutAmount:
+      nilable: true
+      type: number
+    itemKey:
+      type:
+        structure: C_AuctionHouse.ItemKey
+    itemLink:
+      nilable: true
+      type: string
+    minBid:
+      nilable: true
+      type: number
+    timeLeft:
+      type:
+        enum: AuctionHouseTimeLeftBand
+C_AuctionHouse.BrowseResultInfo:
+  fields:
+    appearanceLink:
+      nilable: true
+      type: string
+    containsOwnerItem:
+      type: boolean
+    itemKey:
+      type:
+        structure: C_AuctionHouse.ItemKey
+    minPrice:
+      type: number
+    totalQuantity:
+      type: number
+C_AuctionHouse.CommoditySearchResultInfo:
+  fields:
+    auctionID:
+      type: number
+    containsAccountItem:
+      type: boolean
+    containsOwnerItem:
+      type: boolean
+    itemID:
+      type: number
+    numOwnerItems:
+      type: number
+    owners:
+      type:
+        arrayof: string
+    quantity:
+      type: number
+    timeLeftSeconds:
+      nilable: true
+      type: number
+    totalNumberOfOwners:
+      type: number
+    unitPrice:
+      type: number
+C_AuctionHouse.ItemKey:
+  fields:
+    battlePetSpeciesID:
+      default: 0
+      type: number
+    itemID:
+      type: number
+    itemLevel:
+      default: 0
+      type: number
+    itemSuffix:
+      default: 0
+      type: number
+C_AuctionHouse.ItemKeyInfo:
+  fields:
+    appearanceLink:
+      nilable: true
+      type: string
+    battlePetLink:
+      nilable: true
+      type: string
+    battlePetSpeciesID:
+      type: number
+    iconFileID:
+      type: number
+    isCommodity:
+      type: boolean
+    isEquipment:
+      type: boolean
+    isPet:
+      type: boolean
+    itemID:
+      type: number
+    itemName:
+      type: string
+    quality:
+      type:
+        enum: ItemQuality
+C_AuctionHouse.ItemSearchResultInfo:
+  fields:
+    auctionID:
+      type: number
+    bidAmount:
+      nilable: true
+      type: number
+    bidder:
+      nilable: true
+      type: string
+    buyoutAmount:
+      nilable: true
+      type: number
+    containsAccountItem:
+      type: boolean
+    containsOwnerItem:
+      type: boolean
+    containsSocketedItem:
+      type: boolean
+    itemKey:
+      type:
+        structure: C_AuctionHouse.ItemKey
+    itemLink:
+      nilable: true
+      type: string
+    minBid:
+      nilable: true
+      type: number
+    owners:
+      type:
+        arrayof: string
+    quantity:
+      type: number
+    timeLeft:
+      type:
+        enum: AuctionHouseTimeLeftBand
+    timeLeftSeconds:
+      nilable: true
+      type: number
+    totalNumberOfOwners:
+      type: number
+C_AuctionHouse.OwnedAuctionInfo:
+  fields:
+    auctionID:
+      type: number
+    bidAmount:
+      nilable: true
+      type: number
+    bidder:
+      nilable: true
+      type: string
+    buyoutAmount:
+      nilable: true
+      type: number
+    itemKey:
+      type:
+        structure: C_AuctionHouse.ItemKey
+    itemLink:
+      nilable: true
+      type: string
+    quantity:
+      type: number
+    status:
+      type:
+        enum: AuctionStatus
+    timeLeft:
+      nilable: true
+      type:
+        enum: AuctionHouseTimeLeftBand
+    timeLeftSeconds:
       nilable: true
       type: number
 C_AzeriteEmpoweredItem.AzeriteEmpoweredItemPowerInfo:
@@ -3000,7 +3247,7 @@ C_PvP.RandomBGInfo:
     name:
       type: string
 C_PvP.RoleShortageReward:
-  fields: {}
+  fields:
 C_PvP.WorldPVPBattlegroundInfo:
   fields:
     bgID:
@@ -3507,6 +3754,12 @@ C_ScriptedAnimations.ScriptedAnimationEffect:
       type: number
     yawRadians:
       type: number
+C_SecureTransfer.MailInfo:
+  fields:
+    sendMoney:
+      type: number
+    target:
+      type: string
 C_SpecializationInfo.TalentInfoQuery:
   fields:
     column:
@@ -4625,7 +4878,8 @@ FontScriptInfo:
       type:
         structure: colorRGBA
     fontObject:
-      type: Font
+      type:
+        uiobject: Font
     height:
       type: number
     outline:
@@ -4663,7 +4917,8 @@ GuildTabardInfo:
 HTMLContentNode:
   fields:
     align:
-      type: JustifyHorizontal
+      type:
+        stringenum: JustifyHorizontal
     text:
       type: string
     type:
@@ -4681,7 +4936,7 @@ ItemLocation:
       type: number
   mixin: ItemLocationMixin
 ItemTransmogInfo:
-  fields: {}
+  fields:
   mixin: ItemTransmogInfoMixin
 LFGRoles:
   fields:
@@ -4759,7 +5014,7 @@ PlayerInfoCharacterData:
       type:
         enum: UnitSex
 PlayerLocation:
-  fields: {}
+  fields:
   mixin: PlayerLocationMixin
 PrivateAuraIconInfo:
   fields:
@@ -4832,7 +5087,7 @@ QueueSpecificInfo:
       nilable: true
       type: number
 ReportInfo:
-  fields: {}
+  fields:
   mixin: ReportInfoMixin
 SpellChargeInfo:
   fields:
@@ -4888,7 +5143,7 @@ TransmogLocation:
       type: number
   mixin: TransmogLocationMixin
 TransmogPendingInfo:
-  fields: {}
+  fields:
   mixin: TransmogPendingInfoMixin
 uiBoundsRect:
   fields:

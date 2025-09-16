@@ -1,15 +1,19 @@
 describe('apis', function()
   for _, p in ipairs(require('build.data.products')) do
-    local wapi = require('wowless.api').new(function() end, 0, p)
-    local typechecker = require('wowless.typecheck')(wapi)
+    local typechecker = require('wowless.modules')({
+      datalua = require('build.products.' .. p .. '.data'),
+    }).typecheck
     describe(p, function()
       local apis = require('build.data.products.' .. p .. '.apis')
       for name, api in pairs(apis) do
         describe(name, function()
           it('is not stubbed if provided by elune', function()
             if _G[name] then
-              assert.Truthy(api.impl or api.alias)
+              assert.Truthy(api.impl)
             end
+          end)
+          it('has outputs if it has inputs', function()
+            assert.Truthy(not api.inputs or api.outputs)
           end)
           describe('inputs', function()
             for k, input in ipairs(api.inputs or {}) do
@@ -29,6 +33,9 @@ describe('apis', function()
                     local value, errmsg = typechecker(input, input.default, true)
                     assert.Nil(errmsg)
                     assert.same(value, input.default)
+                  end)
+                  it('is not explicitly nilable', function()
+                    assert.Nil(input.nilable)
                   end)
                 end
                 if api.impl then

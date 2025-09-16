@@ -1,81 +1,84 @@
----
 addon:
   aliased_in_framexml:
-    C_LFGInfo.IsPremadeGroupEnabled: {}
+    C_LFGInfo.IsPremadeGroupEnabled:
   capsule:
     apinamespaces:
-      C_AuthChallenge: {}
-      C_PingSecure: {}
-      C_StoreSecure: {}
-      C_UnitAurasPrivate: {}
-      C_WowTokenSecure: {}
+      C_AuthChallenge:
+      C_PingSecure:
+      C_SecureTransfer:
+      C_StoreSecure:
+      C_UnitAurasPrivate:
+      C_WowTokenSecure:
     enums:
-      BattlepayBannerType: {}
-      BattlepayCardType: {}
-      BattlepayDisplayFlags: {}
-      BattlepayGroupDisplayType: {}
-      BattlepayProductDecorator: {}
-      BattlepayProductGroupFlags: {}
-      PurchaseEligibility: {}
-      StoreError: {}
-      VasError: {}
-      VasServiceType: {}
+      BattlepayBannerType:
+      BattlepayCardType:
+      BattlepayDisplayFlags:
+      BattlepayGroupDisplayType:
+      BattlepayProductDecorator:
+      BattlepayProductGroupFlags:
+      PurchaseEligibility:
+      StoreError:
+      VasError:
+      VasServiceType:
     globalapis:
-      C_Macro.SetMacroExecuteLineCallback: {}
-      CreateForbiddenFrame: {}
-      loadstring_untainted: {}
+      C_Macro.SetMacroExecuteLineCallback:
+      CreateForbiddenFrame:
+      loadstring_untainted:
   hooked_globals:
-    SetItemRef: {}
-    UpdateUIParentPosition: {}
+    SetItemRef:
+    UpdateUIParentPosition:
   ignore_cvar_value:
-    graphicsComputeEffects: {}
-    graphicsDepthEffects: {}
-    graphicsEnvironmentDetail: {}
-    graphicsGroundClutter: {}
-    graphicsLiquidDetail: {}
-    graphicsOutlineMode: {}
-    graphicsParticleDensity: {}
-    graphicsQuality: {}
-    graphicsShadowQuality: {}
-    graphicsSpellDensity: {}
-    graphicsSSAO: {}
-    graphicsTextureResolution: {}
-    graphicsViewDistance: {}
-    mouseSpeed: {}
-    raidGraphicsComputeEffects: {}
-    raidGraphicsDepthEffects: {}
-    raidGraphicsEnvironmentDetail: {}
-    raidGraphicsGroundClutter: {}
-    raidGraphicsLiquidDetail: {}
-    raidGraphicsOutlineMode: {}
-    raidGraphicsParticleDensity: {}
-    RAIDgraphicsQuality: {}
-    raidGraphicsShadowQuality: {}
-    raidGraphicsSpellDensity: {}
-    raidGraphicsSSAO: {}
-    raidGraphicsTextureResolution: {}
-    raidGraphicsViewDistance: {}
-    RenderScale: {}
+    graphicsComputeEffects:
+    graphicsDepthEffects:
+    graphicsEnvironmentDetail:
+    graphicsGroundClutter:
+    graphicsLiquidDetail:
+    graphicsOutlineMode:
+    graphicsParticleDensity:
+    graphicsQuality:
+    graphicsShadowQuality:
+    graphicsSpellDensity:
+    graphicsSSAO:
+    graphicsTextureResolution:
+    graphicsViewDistance:
+    mouseSpeed:
+    raidGraphicsComputeEffects:
+    raidGraphicsDepthEffects:
+    raidGraphicsEnvironmentDetail:
+    raidGraphicsGroundClutter:
+    raidGraphicsLiquidDetail:
+    raidGraphicsOutlineMode:
+    raidGraphicsParticleDensity:
+    RAIDgraphicsQuality:
+    raidGraphicsShadowQuality:
+    raidGraphicsSpellDensity:
+    raidGraphicsSSAO:
+    raidGraphicsTextureResolution:
+    raidGraphicsViewDistance:
+    RenderScale:
   overwritten_apis:
-    C_Traits.GetConditionInfo: {}
-    C_Traits.GetEntryInfo: {}
-    C_Traits.GetTreeInfo: {}
+    C_Traits.GetConditionInfo:
+    C_Traits.GetEntryInfo:
+    C_Traits.GetTreeInfo:
 runner:
   skip_events:
     PERKS_PROGRAM_OPEN: needs C_ModelInfo.GetModelSceneInfoByID implemented
     RAF_REWARD_CLAIM_FAILED: numAffordableRewards never set
     SHOW_DELVES_COMPANION_CONFIGURATION_UI: https://github.com/wowless/wowless/issues/346
+    SUBSCRIPTION_CHANGED_KICK_IMMINENT: depends on GlueDialog_Show
+    VAS_QUEUE_STATUS_UPDATE: depends on C_StoreGlue
   skip_slashcmds:
-    CASTRANDOM: {}
-    EDITMODE: {}
-    EVENT: {}
-    GUILD_INVITE: {}
-    GUILD_UNINVITE: {}
-    PTRFEEDBACK: {}
-    USERANDOM: {}
+    CASTRANDOM:
+    EDITMODE:
+    EVENT:
+    GUILD_INVITE:
+    GUILD_UNINVITE:
+    PTRFEEDBACK:
+    USERANDOM:
 runtime:
+  send_isfromitem: true
   warners:
-    fontstring: {}
-    line: {}
-    texture: {}
-    worldframe: {}
+    fontstring:
+    line:
+    texture:
+    worldframe:

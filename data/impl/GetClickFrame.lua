@@ -1,6 +1,6 @@
-local api = ...
+local env, uiobjects = ...
 return function(name)
   -- TODO a real implementation of GetClickFrame
-  local frame = api.env[name]
-  return frame and api.UserData(frame)
+  local frame = env.genv[name]
+  return frame and uiobjects.UserData(frame)
 end

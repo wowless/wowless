@@ -1,13 +1,6 @@
----
 name: apis
 type:
   mapof:
     key: string
     value:
-      oneof:
-      - record:
-          alias:
-            required: true
-            type:
-              ref: api
-      - schema: function
+      schema: function

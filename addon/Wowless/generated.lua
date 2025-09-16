@@ -58,9 +58,7 @@ G.testsuite.generated = function()
       cfg = cfg == true and {} or cfg
       ret[name] = function()
         local func = env[name]
-        if cfg.alias then
-          assertEquals(func, assert(tget(_G, cfg.alias)))
-        elseif cfg.stdlib then
+        if cfg.stdlib then
           local ty = type(tget(_G, cfg.stdlib))
           if ty == 'function' then
             return checkFunc(func, cfg.islua or false)
@@ -209,6 +207,13 @@ G.testsuite.generated = function()
         expectedEnum[k] = v
       end
     end
+    if not iswowlesslite then
+      for k, v in pairs(_G.WowlessData.Config.addon.enum_values_set_in_framexml or {}) do
+        for vk, vv in pairs(v) do
+          expectedEnum[k][vk] = vv
+        end
+      end
+    end
     local tests = {
       Enum = function()
         return G.assertRecursivelyEqual(expectedEnum, actualEnum)
@@ -334,7 +339,7 @@ G.testsuite.generated = function()
       assertEquals(nil, getmetatable(__index))
       assertEquals(nil, indexes[__index])
       indexes[__index] = true
-      local ftests, mtests = tests(__index, obj)
+      local ftests, mtests, stests = tests(__index, obj)
       return {
         contents = function()
           local udk, udv = next(obj)
@@ -353,6 +358,9 @@ G.testsuite.generated = function()
             end
           end
           return mtests
+        end,
+        scripts = function()
+          return stests
         end,
       }
     end
@@ -472,7 +480,13 @@ G.testsuite.generated = function()
                 return checkCFunc(__index[mname])
               end
             end
-            return ftests, mtests
+            local stests = {}
+            for k, v in pairs(cfg.scripts) do
+              stests[k] = function()
+                return G.match(1, v, obj:HasScript(k))
+              end
+            end
+            return ftests, mtests, stests
           end)
         end
       end

@@ -6,9 +6,9 @@ end)()
 
 local lfs = require('lfs')
 local writeifchanged = require('tools.util').writeifchanged
+local tedit = require('tools.tedit')
 local parseYaml = require('wowapi.yaml').parseFile
 local pprintYaml = require('wowapi.yaml').pprint
-local tableeq = require('pl.tablex').deepcompare
 local product = args.product
 
 local function deref(t, ...)
@@ -21,6 +21,40 @@ local function deref(t, ...)
     end
   end
   return t
+end
+
+local function take(t, k, ...)
+  local tk = t[k]
+  if tk == nil then
+    return nil
+  elseif select('#', ...) == 0 then
+    t[k] = nil
+    return tk
+  else
+    local v = take(tk, ...)
+    if not next(tk) then
+      t[k] = nil
+    end
+    return v
+  end
+end
+
+local function takelieor(v, lies, ...)
+  local lie = take(lies, ...)
+  if not lie then
+    return v
+  end
+  local success, val = pcall(tedit, v, lie)
+  if not success then
+    error(('tedit failure on %s: %s'):format(table.concat({ ... }, '.'), val))
+  end
+  return val
+end
+
+local function assertTaken(s, t)
+  if next(t) then
+    error(('not all %s were consumed:\n%s'):format(s, pprintYaml(t)), 0)
+  end
 end
 
 local docs = {}
@@ -51,7 +85,7 @@ do
             success, err = pcall(setfenv(fn, {
               APIDocumentation = {
                 AddDocumentationTable = function(_, t)
-                  require('wowapi.schema').validate(product, schema, t)
+                  assert(xpcall(require('wowapi.schema').validate, pprintYaml, product, schema, t))
                   docs[f] = t
                 end,
               },
@@ -69,7 +103,7 @@ do
       end
     end
   end
-  local prefix = 'extracts/' .. product .. '/Interface/AddOns/'
+  local prefix = 'build/cmake/extracts/' .. product .. '/Interface/AddOns/'
   processDocDir(prefix .. 'Blizzard_APIDocumentation')
   processDocDir(prefix .. 'Blizzard_APIDocumentationGenerated')
 end
@@ -77,12 +111,8 @@ end
 local config = parseYaml('data/products/' .. product .. '/docs.yaml')
 local enum = parseYaml('data/products/' .. product .. '/globals.yaml').Enum
 
-for k in pairs(deref(config, 'skip_docfiles') or {}) do
-  local f = k .. '.lua'
-  assert(docs[f], 'missing skip_docfiles ' .. f)
-  docs[f] = nil
-end
-
+local extra_events = deref(config, 'lies', 'extra_events') or {}
+local extra_script_objects = deref(config, 'lies', 'extra_script_objects') or {}
 local tabs, funcs, events, scrobjs = {}, {}, {}, {}
 for _, t in pairs(docs) do
   if not t.Type or t.Type == 'System' then
@@ -99,14 +129,16 @@ for _, t in pairs(docs) do
     for _, event in ipairs(t.Events or {}) do
       local name = (t.Namespace and (t.Namespace .. '.') or '') .. event.Name
       assert(not events[name])
-      events[name] = event
+      events[name] = not take(extra_events, event.LiteralName) and event or nil
     end
-  elseif t.Type == 'ScriptObject' then
+  elseif t.Type == 'ScriptObject' and not take(extra_script_objects, t.Name) then
     assert(config.script_objects[t.Name], 'missing script object mapping for ' .. t.Name)
     assert(not scrobjs[t.Name])
     scrobjs[t.Name] = t
   end
 end
+assertTaken('lies.extra_events', extra_events)
+assertTaken('lies.extra_script_objects', extra_script_objects)
 
 for k in pairs(config.script_objects) do
   assert(scrobjs[k], 'redundant script object mapping ' .. k)
@@ -133,11 +165,6 @@ for k in pairs(enum) do
     tys[k] = 'Enumeration'
   end
 end
-local structRewrites = {
-  AzeriteEmpoweredItemLocation = 'ItemLocation',
-  AzeriteItemLocation = 'ItemLocation',
-  EmptiableItemLocation = 'ItemLocation',
-}
 local used_typedefs = {}
 local function t2nty(field, ns)
   local t = field.Type
@@ -147,13 +174,12 @@ local function t2nty(field, ns)
   elseif t == 'table' and field.Mixin then
     error('no struct for mixin ' .. field.Mixin)
   elseif stringenums[t] then
-    return t
+    return { stringenum = t }
   elseif typedefs[t] then
     used_typedefs[t] = true
-    return typedefs[t]
+    return typedefs[t].type, typedefs[t].outnil
   end
   local n = ns and tys[ns .. '.' .. t] and (ns .. '.' .. t) or t
-  n = structRewrites[n] or n
   local ty = tys[n]
   assert(ty, 'wtf ' .. n)
   if ty == 'Constants' then
@@ -201,27 +227,16 @@ local function default(x)
   return enum[x.Type] and enum[x.Type][x.Default] or x.Default
 end
 
--- Super duper hack, sorry world.
-local unitHacks = {
-  UnitFactionGroup = 'unitName',
-  UnitName = 'unit',
-  UnitIsUnit = 'unitName',
-  UnitRace = 'name',
-}
-
-local function insig(fn, ns)
-  local unitHack = unitHacks[fn.Name]
+local function insig(fn, ns, api)
+  local permissives = {}
+  for _, input in ipairs(api and api.inputs or {}) do
+    if input.name then
+      permissives[input.name] = input.permissive
+    end
+  end
   local t = {}
   for _, a in ipairs(fn.Arguments or {}) do
-    if unitHack and a.Name:sub(1, unitHack:len()) == unitHack then
-      assert(a.Type == 'cstring')
-      assert(not a.Default)
-      assert(not a.Nilable)
-      table.insert(t, {
-        name = a.Name,
-        type = 'unit',
-      })
-    elseif a.Type == 'UnitToken' and a.Default == 'WOWGUID_NULL' then
+    if a.Type == 'UnitToken' and a.Default == 'WOWGUID_NULL' then
       table.insert(t, {
         name = a.Name,
         nilable = true,
@@ -238,14 +253,18 @@ local function insig(fn, ns)
         })
       end
     else
+      local def = default(a)
       table.insert(t, {
-        default = default(a),
+        default = def,
         name = a.Name,
-        nilable = a.Nilable or nil,
+        nilable = a.Nilable and def == nil or nil,
+        permissive = take(permissives, a.Name),
         type = t2nty(a, ns),
       })
     end
   end
+  local fname = (ns and (ns .. '.') or '') .. fn.Name
+  assertTaken(fname .. ' permissives', permissives)
   return t
 end
 
@@ -271,42 +290,21 @@ local function outsig(fn, ns, api)
         })
       end
     else
-      local ty = t2nty(r, ns)
+      local ty, outnil = t2nty(r, ns)
       table.insert(outputs, {
         default = default(r),
         name = r.Name,
-        nilable = r.Nilable and ty ~= 'nil' or nil,
-        stub = stubs[r.Name],
-        stubnotnil = stubnotnils[r.Name],
+        nilable = r.Nilable and ty ~= 'nil' or outnil,
+        stub = take(stubs, r.Name),
+        stubnotnil = take(stubnotnils, r.Name),
         type = ty,
       })
-      stubs[r.Name] = nil
     end
   end
-  if next(stubs) ~= nil then
-    error(table.concat({
-      'stub merge error on',
-      ns and (' ns = ' .. ns) or '',
-      '\n',
-      require('pl.pretty').write(fn),
-    }))
-  end
+  local fname = (ns and (ns .. '.') or '') .. fn.Name
+  assertTaken(fname .. ' stubs', stubs)
+  assertTaken(fname .. ' stubnotnils', stubnotnils)
   return outputs
-end
-
-local sawmayreturnnothing = false
-
-local function mayreturnnothing(fn, api)
-  sawmayreturnnothing = sawmayreturnnothing or fn.MayReturnNothing
-  local v = api and api.mayreturnnothing
-  if not config.mayreturnnothing then
-    return v
-  elseif fn.MayReturnNothing then
-    return true
-  elseif v then
-    print('mayreturnnothing problem on ' .. fn.Name)
-    return true
-  end
 end
 
 local function rewriteApis()
@@ -314,64 +312,77 @@ local function rewriteApis()
   local f = 'data/products/' .. product .. '/apis.yaml'
   local apis = y.parseFile(f)
   local lies = deref(config, 'lies', 'apis') or {}
+  local extras = deref(config, 'lies', 'extra_apis') or {}
   for name, fn in pairs(funcs) do
     local ns = split(name)
     local api = apis[name]
     local newapi = {
-      inputs = insig(fn, ns),
+      impl = api and api.impl,
+      inputs = insig(fn, ns, api),
       instride = stride(fn.Arguments),
-      mayreturnnils = api and api.mayreturnnils,
-      mayreturnnothing = mayreturnnothing(fn, api),
+      mayreturnnothing = fn.MayReturnNothing,
       outputs = outsig(fn, ns, api),
       outstride = stride(fn.Returns),
+      platform = api and api.platform,
       stubnothing = api and api.stubnothing,
       stuboutstrides = api and api.stuboutstrides,
     }
-    if lies[name] then
-      assert(tableeq(lies[name], newapi), 'lie mismatch on ' .. name)
-      lies[name] = nil
-    else
-      newapi.impl = api and api.impl
-      apis[name] = newapi
+    if not take(extras, name) then
+      apis[name] = takelieor(newapi, lies, name)
     end
   end
-  if next(lies) then
-    error('not all lies were consumed: ' .. require('pl.pretty').write(lies))
-  end
+  assertTaken('lies', lies)
+  assertTaken('extras', extras)
   writeifchanged(f, y.pprint(apis))
   return apis
 end
 
 local function rewriteEvents()
   local filename = ('data/products/%s/events.yaml'):format(product)
-  local neversent = deref(config, 'events', 'never_sent') or {}
   local out = require('wowapi.yaml').parseFile(filename)
-  local seen = {}
   for name, ev in pairs(events) do
-    seen[ev.LiteralName] = true
     local ns = split(name)
+    local payload = {}
+    for _, arg in ipairs(ev.Payload or {}) do
+      table.insert(payload, {
+        default = default(arg),
+        name = arg.Name,
+        nilable = arg.Nilable or nil,
+        type = t2nty(arg, ns),
+      })
+    end
     out[ev.LiteralName] = {
-      payload = (function()
-        if neversent[ev.LiteralName] then
-          return nil
-        end
-        local t = {}
-        for _, arg in ipairs(ev.Payload or {}) do
-          table.insert(t, {
-            name = arg.Name,
-            nilable = arg.Nilable or nil,
-            type = t2nty(arg, ns),
-          })
-        end
-        return t
-      end)(),
+      payload = payload,
+      stride = stride(ev.Payload),
     }
-  end
-  for k in pairs(neversent) do
-    assert(seen[k], k .. ' is marked never_sent but not present in docs')
   end
   writeifchanged(filename, pprintYaml(out))
   return out
+end
+
+local function rewriteGlobals()
+  local lies = deref(config, 'lies', 'enums') or {}
+  local extras = deref(config, 'lies', 'extra_enums') or {}
+  local filename = ('data/products/%s/globals.yaml'):format(product)
+  local out = require('wowapi.yaml').parseFile(filename)
+  for _, tab in pairs(tabs) do
+    if tab.Type == 'Enumeration' and not take(extras, tab.Name) then
+      local t = {}
+      for _, v in ipairs(tab.Fields) do
+        assert(v.Type == tab.Name, v.Name)
+        t[v.Name] = v.EnumValue
+      end
+      out.Enum[tab.Name] = takelieor(t, lies, tab.Name)
+      out.Enum[tab.Name .. 'Meta'] = {
+        MaxValue = tab.MaxValue < 2 ^ 31 and tab.MaxValue or tab.MaxValue - 2 ^ 32,
+        MinValue = tab.MinValue,
+        NumValues = tab.NumValues,
+      }
+    end
+  end
+  assertTaken('lies.enums', lies)
+  assertTaken('lies.extra_enums', extras)
+  writeifchanged(filename, pprintYaml(out))
 end
 
 local function rewriteStructures(outApis, outEvents, outUIObjects)
@@ -455,6 +466,7 @@ local function rewriteUIObjects()
   local filename = ('data/products/%s/uiobjects.yaml'):format(product)
   local uiobjects = require('wowapi.yaml').parseFile(filename)
   local lies = deref(config, 'lies', 'uiobjects') or {}
+  local reassigns = config.uiobject_method_reassignments or {}
   local inhm = {}
   local function inhprocess(k)
     if inhm[k] then
@@ -477,44 +489,28 @@ local function rewriteUIObjects()
     inhprocess(k)
   end
   for k, v in pairs(mapped) do
-    local u = assert(uiobjects[k], 'unknown uiobject type ' .. k)
     for mk, mv in pairs(v) do
+      local kk = take(reassigns, k, mk) or k
+      local u = assert(uiobjects[kk], 'unknown uiobject type ' .. kk)
       local mm = u.methods[mk]
       local mmv = {
-        inputs = insig(mv),
+        impl = mm and mm.impl,
+        inputs = insig(mv, nil, mm),
         instride = stride(mv.Arguments),
-        mayreturnnothing = mayreturnnothing(mv, mm),
+        manualinputs = mm and mm.manualinputs,
+        mayreturnnothing = mv.MayReturnNothing,
+        override = mm and mm.override,
         outputs = outsig(mv, nil, mm),
         outstride = stride(mv.Returns),
         stuboutstrides = mm and mm.stuboutstrides,
       }
-      local okay = (function()
-        if inhm[k][mk] then
-          return false
-        end
-        if deref(config, 'skip_uiobject_methods', k, mk) then
-          return false
-        end
-        return true
-      end)()
-      if okay then
-        local lie = deref(lies, k, mk)
-        if lie then
-          assert(tableeq(lie, mmv), 'lie mismatch on ' .. k .. '.' .. mk)
-          lies[k][mk] = nil
-        else
-          mmv.impl = mm and mm.impl
-          u.methods[mk] = mmv
-        end
+      if not inhm[kk][mk] or mmv.override then
+        u.methods[mk] = takelieor(mmv, lies, kk, mk)
       end
     end
-    if lies[k] and not next(lies[k]) then
-      lies[k] = nil
-    end
   end
-  if next(lies) then
-    error('not all lies were consumed: ' .. require('pl.pretty').write(lies))
-  end
+  assertTaken('lies', lies)
+  assertTaken('reassigns', reassigns)
   writeifchanged(filename, pprintYaml(uiobjects))
   return uiobjects
 end
@@ -523,6 +519,7 @@ local outApis = rewriteApis()
 local outEvents = rewriteEvents()
 local outUIObjects = rewriteUIObjects()
 rewriteStructures(outApis, outEvents, outUIObjects)
+rewriteGlobals()
 
 local unused_typedefs = {}
 for k in pairs(typedefs) do
@@ -530,8 +527,4 @@ for k in pairs(typedefs) do
     unused_typedefs[k] = true
   end
 end
-assert(not next(unused_typedefs), 'unused typedefs = ' .. require('pl.pretty').write(unused_typedefs))
-
-if sawmayreturnnothing and not config.mayreturnnothing then
-  print('warning: saw MayReturnNothing but mayreturnnothing: false in config')
-end
+assert(not next(unused_typedefs), 'unused typedefs:\n' .. pprintYaml(unused_typedefs))

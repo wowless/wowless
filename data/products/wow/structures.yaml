@@ -1,4 +1,3 @@
----
 AddPrivateAuraAnchorArgs:
   fields:
     auraIndex:
@@ -12,7 +11,8 @@ AddPrivateAuraAnchorArgs:
       type:
         structure: PrivateAuraIconInfo
     parent:
-      type: Frame
+      type:
+        uiobject: Frame
     showCountdownFrame:
       type: boolean
     showCountdownNumbers:
@@ -26,11 +26,14 @@ AnchorBinding:
     offsetY:
       type: number
     point:
-      type: FramePoint
+      type:
+        stringenum: FramePoint
     relativePoint:
-      type: FramePoint
+      type:
+        stringenum: FramePoint
     relativeTo:
-      type: Region
+      type:
+        uiobject: Region
 AppearanceSourceInfo:
   fields:
     canDisplayOnPlayer:
@@ -721,6 +724,22 @@ C_Bank.BankTabData:
       type: number
     name:
       type: string
+    tabCleanupConfirmation:
+      type: string
+    tabNameEditBoxHeader:
+      type: string
+C_Bank.PurchasableBankTabData:
+  fields:
+    canAfford:
+      type: boolean
+    purchasePromptBody:
+      type: string
+    purchasePromptConfirmation:
+      type: string
+    purchasePromptTitle:
+      type: string
+    tabCost:
+      type: number
 C_BattleNet.BNetAccountInfo:
   fields:
     accountName:
@@ -1162,6 +1181,16 @@ C_ChallengeMode.ChallengeModeGuildTopAttempt:
           structure: C_ChallengeMode.ChallengeModeGuildAttemptMember
     name:
       type: string
+C_ChallengeMode.ChallengeModeReward:
+  fields:
+    displayInfoID:
+      type: number
+    isCurrency:
+      type: boolean
+    quantity:
+      type: number
+    rewardID:
+      type: number
 C_ChromieTime.ChromieTimeExpansionInfo:
   fields:
     alreadyOn:
@@ -2251,9 +2280,11 @@ C_EditMode.EditModeAnchorInfo:
     offsetY:
       type: number
     point:
-      type: FramePoint
+      type:
+        stringenum: FramePoint
     relativePoint:
-      type: FramePoint
+      type:
+        stringenum: FramePoint
     relativeTo:
       type: string
 C_EditMode.EditModeLayoutInfo:
@@ -3843,6 +3874,9 @@ C_LFGList.LfgSearchResultPlayerInfo:
       type: string
     isLeader:
       type: boolean
+    isLeaver:
+      default: false
+      type: boolean
     level:
       nilable: true
       type: number
@@ -4429,6 +4463,14 @@ C_PaperDollInfo.InspectPVPData:
     roundsPlayed:
       type: number
     roundsWon:
+      type: number
+C_PaperDollInfo.InspectRatedBGData:
+  fields:
+    played:
+      type: number
+    rating:
+      type: number
+    won:
       type: number
 C_PartyPose.PartyPoseInfo:
   fields:
@@ -5212,6 +5254,8 @@ C_PvP.RandomBGInfo:
   fields:
     bgID:
       type: number
+    bgIndex:
+      type: number
     canQueue:
       type: boolean
     hasRandomWinToday:
@@ -5220,6 +5264,8 @@ C_PvP.RandomBGInfo:
       type: number
     minLevel:
       type: number
+    name:
+      type: string
 C_PvP.RatedBGBlitzSpecStats:
   fields:
     seasonMostPlayedSpecGames:
@@ -5866,6 +5912,12 @@ C_ScriptedAnimations.ScriptedAnimationEffect:
       type: number
     yawRadians:
       type: number
+C_SecureTransfer.MailInfo:
+  fields:
+    sendMoney:
+      type: number
+    target:
+      type: string
 C_SocialQueue.SocialQueueConfig:
   fields:
     DELAY_DURATION:
@@ -6080,6 +6132,81 @@ C_SpecializationInfo.PvpTalentSlotInfo:
       type: number
     selectedTalentID:
       nilable: true
+      type: number
+C_SpecializationInfo.TalentInfoQuery:
+  fields:
+    column:
+      nilable: true
+      type: number
+    groupIndex:
+      nilable: true
+      type: number
+    isInspect:
+      default: false
+      type: boolean
+    isPet:
+      default: false
+      type: boolean
+    specializationIndex:
+      nilable: true
+      type: number
+    talentIndex:
+      nilable: true
+      type: number
+    target:
+      nilable: true
+      type: unit
+    tier:
+      nilable: true
+      type: number
+C_SpecializationInfo.TalentInfoResult:
+  fields:
+    available:
+      default: false
+      type: boolean
+    column:
+      type: number
+    grantedByAura:
+      default: false
+      type: boolean
+    hasGoldBorder:
+      default: false
+      type: boolean
+    icon:
+      type: number
+    isExceptional:
+      default: false
+      type: boolean
+    isPVPTalentUnlocked:
+      default: false
+      type: boolean
+    known:
+      default: false
+      type: boolean
+    maxRank:
+      type: number
+    meetsPrereq:
+      default: false
+      type: boolean
+    meetsPreviewPrereq:
+      default: false
+      type: boolean
+    name:
+      type: string
+    previewRank:
+      type: number
+    rank:
+      type: number
+    selected:
+      default: false
+      type: boolean
+    spellID:
+      default: 0
+      type: number
+    talentID:
+      default: 0
+      type: number
+    tier:
       type: number
 C_Spell.DeadlyDebuffInfo:
   fields:
@@ -9440,6 +9567,8 @@ CraftingReagentSlotSchematic:
       default: 1
       type:
         enum: TradeskillSlotDataType
+    hiddenInCraftingForm:
+      type: boolean
     orderSource:
       nilable: true
       type:
@@ -9550,6 +9679,22 @@ DBColorExport:
     color:
       type:
         structure: colorRGBA
+DelveAssistActionData:
+  fields:
+    assistAction:
+      type:
+        enum: AssistActionType
+    assistedPlayer:
+      type: string
+    creatureName:
+      nilable: true
+      type: string
+    mapName:
+      nilable: true
+      type: string
+    receivedSpellID:
+      nilable: true
+      type: number
 EncounterTrackingInfo:
   fields:
     difficultyID:
@@ -9588,6 +9733,8 @@ ExpansionDisplayInfo:
       type: number
     lowResBackgroundID:
       type: number
+    textureKit:
+      type: string
 ExpansionDisplayInfoFeature:
   fields:
     icon:
@@ -9596,11 +9743,14 @@ ExpansionDisplayInfoFeature:
       type: string
 FontScriptInfo:
   fields:
+    canBeUserScaled:
+      type: boolean
     color:
       type:
         structure: colorRGBA
     fontObject:
-      type: Font
+      type:
+        uiobject: Font
     height:
       type: number
     outline:
@@ -9795,7 +9945,8 @@ GuildTabardInfo:
 HTMLContentNode:
   fields:
     align:
-      type: JustifyHorizontal
+      type:
+        stringenum: JustifyHorizontal
     text:
       type: string
     type:
@@ -9813,7 +9964,7 @@ ItemLocation:
       type: number
   mixin: ItemLocationMixin
 ItemTransmogInfo:
-  fields: {}
+  fields:
   mixin: ItemTransmogInfoMixin
 LFGRoles:
   fields:
@@ -9937,7 +10088,7 @@ PlayerInfoCharacterData:
       type:
         enum: UnitSex
 PlayerLocation:
-  fields: {}
+  fields:
   mixin: PlayerLocationMixin
 PrivateAuraAnchor:
   fields:
@@ -10096,7 +10247,7 @@ RegularReagentInfo:
     quantity:
       type: number
 ReportInfo:
-  fields: {}
+  fields:
   mixin: ReportInfoMixin
 RuneforgeItemPreviewInfo:
   fields:
@@ -10382,7 +10533,7 @@ TransmogLocation:
       type: number
   mixin: TransmogLocationMixin
 TransmogPendingInfo:
-  fields: {}
+  fields:
   mixin: TransmogPendingInfoMixin
 uiBoundsRect:
   fields:

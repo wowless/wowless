@@ -2,11 +2,10 @@ describe('impl', function()
   it('references exactly the files in data/impl, except for specials', function()
     local expected = {}
     for k, v in pairs(require('build.data.impl')) do
-      local haslua = not (v.delegate or v.directsql or v.module or v.stdlib)
-      expected['data/impl/' .. k .. '.lua'] = haslua or nil
+      expected['data/impl/' .. k .. '.lua'] = v.impl and true or nil
     end
     local actual = {}
-    for _, f in ipairs(require('pl.dir').getfiles('data/impl')) do
+    for _, f in ipairs(require('wowless.util').getfiles('data/impl')) do
       actual[f] = true
     end
     assert.same(expected, actual)

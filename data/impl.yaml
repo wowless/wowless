@@ -1,14 +1,5 @@
----
-acos:
-  stdlib: acos
-asin:
-  stdlib: asin
 assert:
   stdlib: assert
-atan:
-  stdlib: atan
-atan2:
-  stdlib: atan2
 bit.arshift:
   stdlib: bit.arshift
 bit.band:
@@ -26,134 +17,192 @@ bit.mod:
 bit.rshift:
   stdlib: bit.rshift
 C_AuctionHouse.GetAuctionItemSubClasses:
-  sqls:
-  - C_AuctionHouse.GetAuctionItemSubClasses
+  impl:
+    sqls:
+    - C_AuctionHouse.GetAuctionItemSubClasses
 C_Calendar.GetMonthInfo:
-  module: calendar
+  moduledelegate:
+    name: calendar
 C_Calendar.SetAbsMonth:
-  module: calendar
+  moduledelegate:
+    name: calendar
 C_Calendar.SetMonth:
-  module: calendar
-C_ChatInfo.ReplaceIconAndGroupExpressions: {}
+  moduledelegate:
+    name: calendar
+C_ChatInfo.ReplaceIconAndGroupExpressions:
+  impl:
 C_ClassTalents.GetActiveConfigID:
-  frameworks:
-  - api
+  impl:
+    modules:
+      talents:
 C_ClassTalents.GetTraitTreeForSpec:
-  sqls:
-  - C_ClassTalents.GetTraitTreeForSpec
+  impl:
+    sqls:
+    - C_ClassTalents.GetTraitTreeForSpec
 C_ClassTalents.InitializeViewLoadout:
-  frameworks:
-  - api
+  impl:
+    modules:
+      talents:
 C_ClassTalents.ViewLoadout:
-  frameworks:
-  - api
-  sqls:
-  - GetSpecializationInfoByID
+  impl:
+    modules:
+      talents:
+    sqls:
+    - GetSpecializationInfoByID
 C_Covenants.GetCovenantData:
-  sqls:
-  - C_Covenants.GetCovenantData
-  - C_Covenants.GetCovenantData.soulbinds
+  impl:
+    sqls:
+    - C_Covenants.GetCovenantData
+    - C_Covenants.GetCovenantData.soulbinds
 C_CovenantSanctumUI.GetRenownLevels:
-  sqls:
-  - C_CovenantSanctumUI.GetRenownLevels
+  impl:
+    sqls:
+    - C_CovenantSanctumUI.GetRenownLevels
 C_CovenantSanctumUI.GetRenownRewardsForLevel:
-  sqls:
-  - C_CovenantSanctumUI.GetRenownRewardsForLevel
+  impl:
+    sqls:
+    - C_CovenantSanctumUI.GetRenownRewardsForLevel
 C_CreatureInfo.GetClassInfo:
   directsql: C_CreatureInfo.GetClassInfo
 C_CVar.GetCVar:
-  module: cvars
+  moduledelegate:
+    name: cvars
 C_CVar.GetCVarBool:
-  module: cvars
+  moduledelegate:
+    name: cvars
 C_CVar.GetCVarDefault:
-  module: cvars
+  moduledelegate:
+    name: cvars
 C_CVar.RegisterCVar:
-  module: cvars
+  moduledelegate:
+    name: cvars
 C_CVar.SetCVar:
-  module: cvars
+  moduledelegate:
+    name: cvars
 C_DateAndTime.AdjustTimeByDays:
-  module: datetime
+  moduledelegate:
+    name: datetime
 C_DateAndTime.AdjustTimeByMinutes:
-  module: datetime
+  moduledelegate:
+    name: datetime
 C_DateAndTime.CompareCalendarTime:
-  module: datetime
+  moduledelegate:
+    name: datetime
 C_EventUtils.IsEventValid:
-  function: IsEventValid
-  module: events
+  moduledelegate:
+    function: IsEventValid
+    name: events
 C_Item.DoesItemExistByID:
-  sqls:
-  - C_Item.DoesItemExistByID
+  impl:
+    sqls:
+    - C_Item.DoesItemExistByID
 C_Item.GetItemClassInfo:
-  sqls:
-  - C_Item.GetItemClassInfo
+  impl:
+    sqls:
+    - C_Item.GetItemClassInfo
 C_Item.GetItemSubClassInfo:
-  sqls:
-  - C_Item.GetItemSubClassInfo
+  impl:
+    sqls:
+    - C_Item.GetItemSubClassInfo
 C_ItemInteraction.GetItemInteractionInfo:
-  sqls:
-  - C_ItemInteraction.GetItemInteractionInfo
+  impl:
+    sqls:
+    - C_ItemInteraction.GetItemInteractionInfo
 C_Macro.SetMacroExecuteLineCallback:
-  function: SetCallback
-  module: macrotext
+  moduledelegate:
+    function: SetCallback
+    name: macrotext
 C_Map.GetMapInfo:
   directsql: C_Map.GetMapInfo
 C_Map.GetMapInfo_Vanilla:
   directsql: C_Map.GetMapInfo_Vanilla
 C_ScriptedAnimations.GetAllScriptedAnimationEffects:
-  sqls:
-  - C_ScriptedAnimations.GetAllScriptedAnimationEffects
+  impl:
+    sqls:
+    - C_ScriptedAnimations.GetAllScriptedAnimationEffects
+C_SpecializationInfo.GetSpecializationInfo:
+  impl:
+    modules:
+      units:
+    sqls:
+    - GetSpecializationInfo
 C_SpecializationInfo.GetSpecIDs:
-  sqls:
-  - C_SpecializationInfo.GetSpecIDs
+  impl:
+    sqls:
+    - C_SpecializationInfo.GetSpecIDs
 C_Texture.GetAtlasInfo:
-  sqls:
-  - C_Texture.GetAtlasInfo
+  impl:
+    modules:
+      atlas:
+    sqls:
+    - C_Texture.GetAtlasInfo
 C_Texture.GetAtlasInfo_11_1_5:
-  sqls:
-  - C_Texture.GetAtlasInfo_11_1_5
+  impl:
+    modules:
+      atlas:
+    sqls:
+    - C_Texture.GetAtlasInfo_11_1_5
 C_Timer.After:
-  module: time
+  moduledelegate:
+    name: time
 C_Timer.NewTicker:
-  module: time
+  moduledelegate:
+    name: time
 C_Timer.NewTimer:
-  module: time
+  moduledelegate:
+    name: time
 C_Traits.GetConfigInfo:
-  frameworks:
-  - api
-  sqls:
-  - C_Traits.GetConfigInfo
+  impl:
+    modules:
+      datalua:
+      talents:
+      units:
+    sqls:
+    - C_Traits.GetConfigInfo
 C_Traits.GetNodeInfo:
-  frameworks:
-  - api
-  sqls:
-  - C_Traits.GetNodeInfo
-  - C_Traits.GetNodeInfo.entries
-  - C_Traits.GetNodeInfo.edges
-  - C_Traits.GetNodeInfo.groups
-  - C_Traits.GetNodeInfo.conditions
+  impl:
+    modules:
+      datalua:
+      talents:
+      units:
+    sqls:
+    - C_Traits.GetNodeInfo
+    - C_Traits.GetNodeInfo.entries
+    - C_Traits.GetNodeInfo.edges
+    - C_Traits.GetNodeInfo.groups
+    - C_Traits.GetNodeInfo.conditions
 C_Traits.GetTreeNodes:
-  sqls:
-  - C_Traits.GetTreeNodes
+  impl:
+    sqls:
+    - C_Traits.GetTreeNodes
 C_UI.GetUIParent:
-  frameworks:
-  - env
+  impl:
+    modules:
+      env:
 C_UI.GetWorldFrame:
-  frameworks:
-  - env
+  impl:
+    modules:
+      env:
 C_UIColor.GetColors:
-  sqls:
-  - C_UIColor.GetColors
+  impl:
+    modules:
+      env:
+    sqls:
+    - C_UIColor.GetColors
 C_XMLUtil.GetTemplateInfo_10_2:
-  frameworks:
-  - api
+  moduledelegate:
+    function: GetTemplateInfo
+    name: templates
 ClassicExpansionAtLeast:
-  frameworks:
-  - datalua
+  impl:
+    modules:
+      datalua:
 collectgarbage:
   stdlib: collectgarbage
 ConsoleGetAllCommands:
-  frameworks:
-  - datalua
+  impl:
+    modules:
+      datalua:
 coroutine.create:
   stdlib: coroutine.create
 coroutine.resume:
@@ -166,18 +215,21 @@ coroutine.wrap:
   stdlib: coroutine.wrap
 coroutine.yield:
   stdlib: coroutine.yield
-cos:
-  stdlib: cos
 CreateFont:
-  frameworks:
-  - api
+  impl:
+    modules:
+      api:
 CreateForbiddenFrame:
-  frameworks:
-  - api
+  moduledelegate:
+    name: api
 CreateFrame:
-  frameworks:
-  - api
-CreateWindow: {}
+  moduledelegate:
+    name: api
+CreateFromMixins:
+  luadelegate:
+    module: wowless.mixin
+CreateWindow:
+  impl:
 date:
   stdlib: date
 debuglocals:
@@ -191,169 +243,203 @@ debugstack:
 difftime:
   stdlib: difftime
 DoEmote:
-  frameworks:
-  - api
-  sqls:
-  - DoEmote
+  impl:
+    modules:
+      events:
+      log:
+    sqls:
+    - DoEmote
 EnumerateFrames:
-  frameworks:
-  - api
+  impl:
+    modules:
+      api:
 error:
   stdlib: error
 fastrandom:
   stdlib: fastrandom
 FillLocalizedClassList:
-  sqls:
-  - FillLocalizedClassList
+  impl:
+    sqls:
+    - FillLocalizedClassList
 forceinsecure:
   stdlib: forceinsecure
 gcinfo:
   stdlib: gcinfo
-GetAddOnEnableState: {}
-GetAddOnInfo: {}
-GetAddOnMetadata: {}
+GetAddOnEnableState:
+  impl:
+GetAddOnInfo:
+  moduledelegate:
+    name: addons
+GetAddOnMetadata:
+  impl:
 GetAuctionItemSubClasses:
-  sqls:
-  - C_AuctionHouse.GetAuctionItemSubClasses
+  impl:
+    sqls:
+    - C_AuctionHouse.GetAuctionItemSubClasses
 GetBuildInfo_10_1:
-  frameworks:
-  - datalua
+  impl:
+    modules:
+      datalua:
 GetBuildInfo_1_15_0:
-  frameworks:
-  - datalua
+  impl:
+    modules:
+      datalua:
 GetBuildInfo_3_4_2:
-  frameworks:
-  - datalua
+  impl:
+    modules:
+      datalua:
 GetButtonMetatable:
-  frameworks:
-  - api
-GetChatWindowInfo: {}
+  impl:
+    modules:
+      uiobjecttypes:
+GetChatWindowInfo:
+  impl:
 GetChatWindowMessages:
-  frameworks:
-  - env
+  impl:
+    modules:
+      env:
 GetClassInfo:
   directsql: GetClassInfo
 GetClassInfo_Classic:
   directsql: GetClassInfo_Classic
 GetClickFrame:
-  frameworks:
-  - api
+  impl:
+    modules:
+      env:
+      uiobjects:
 GetCurrentEnvironment:
-  module: env
+  moduledelegate:
+    name: env
 geterrorhandler:
   stdlib: geterrorhandler
 getfenv:
-  module: env
+  moduledelegate:
+    name: env
 GetFontStringMetatable:
-  frameworks:
-  - api
+  impl:
+    modules:
+      uiobjecttypes:
 GetFrameMetatable:
-  frameworks:
-  - api
+  impl:
+    modules:
+      uiobjecttypes:
 GetFramesRegisteredForEvent:
-  function: GetFramesRegisteredForEventUnpacked
-  module: events
+  moduledelegate:
+    function: GetFramesRegisteredForEventUnpacked
+    name: events
 GetGlobalEnvironment:
-  module: env
+  moduledelegate:
+    name: env
 GetInventorySlotInfo:
   directsql: GetInventorySlotInfo
-GetItemQualityColor: {}
+GetItemQualityColor:
+  impl:
 GetLootSpecialization:
-  module: units
+  moduledelegate:
+    name: units
 getmetatable:
   stdlib: getmetatable
 GetNumAddOns:
-  frameworks:
-  - api
+  moduledelegate:
+    name: addons
 GetNumClasses:
   directsql: GetNumClasses
 GetNumSpecializationsForClassID:
   directsql: GetNumSpecializationsForClassID
 GetNumTalents:
-  frameworks:
-  - api
-  sqls:
-  - GetNumTalents
+  impl:
+    modules:
+      units:
+    sqls:
+    - GetNumTalents
 GetNumTalentTabs:
-  frameworks:
-  - api
-  sqls:
-  - GetNumTalentTabs
+  impl:
+    modules:
+      units:
+    sqls:
+    - GetNumTalentTabs
 GetScreenHeight:
-  module: system
+  moduledelegate:
+    name: system
 GetScreenWidth:
-  module: system
-GetSpecializationInfo:
-  frameworks:
-  - api
-  sqls:
-  - GetSpecializationInfo
+  moduledelegate:
+    name: system
 GetSpecializationInfoByID:
   directsql: GetSpecializationInfoByID
 GetSpecializationInfoForClassID:
-  frameworks:
-  - api
-  sqls:
-  - GetSpecializationInfoForClassID
+  impl:
+    modules:
+      units:
+    sqls:
+    - GetSpecializationInfoForClassID
 GetSpecializationInfoForSpecID:
-  frameworks:
-  - api
-  sqls:
-  - GetSpecializationInfoForSpecID
+  impl:
+    modules:
+      units:
+    sqls:
+    - GetSpecializationInfoForSpecID
 GetTalentInfo_Vanilla:
-  frameworks:
-  - api
-  sqls:
-  - GetTalentInfo_Vanilla
-GetTalentPrereqs_Vanilla:
-  frameworks:
-  - api
-  sqls:
-  - GetTalentPrereqs
-GetTalentPrereqs_Wrath:
-  frameworks:
-  - api
-  sqls:
-  - GetTalentPrereqs
+  impl:
+    modules:
+      units:
+    sqls:
+    - GetTalentInfo_Vanilla
+GetTalentPrereqs:
+  impl:
+    modules:
+      units:
+    sqls:
+    - GetTalentPrereqs
 GetTalentTabInfo:
-  frameworks:
-  - api
-  sqls:
-  - GetTalentTabInfo
+  impl:
+    modules:
+      units:
+    sqls:
+    - GetTalentTabInfo
 GetTime:
-  module: time
+  moduledelegate:
+    name: time
 hooksecurefunc:
   stdlib: hooksecurefunc
 ipairs:
   stdlib: ipairs
-IsAddOnLoaded: {}
-IsAddOnLoadOnDemand: {}
-IsDebugBuild: {}
-IsGMClient: {}
+IsAddOnLoaded:
+  impl:
+IsAddOnLoadOnDemand:
+  impl:
+IsDebugBuild:
+  impl:
+IsGMClient:
+  impl:
 IsInGlobalEnvironment:
-  module: env
+  moduledelegate:
+    name: env
 IsLinuxClient:
-  frameworks:
-  - api
+  moduledelegate:
+    name: platform
 IsLoggedIn:
-  module: system
+  moduledelegate:
+    name: system
 IsMacClient:
-  frameworks:
-  - api
-IsPublicBuild: {}
+  moduledelegate:
+    name: platform
+IsPublicBuild:
+  impl:
 issecure:
   stdlib: issecure
 issecurevariable:
   stdlib: issecurevariable
 IsTestBuild:
-  frameworks:
-  - datalua
+  impl:
+    modules:
+      datalua:
 IsWindowsClient:
-  frameworks:
-  - api
+  moduledelegate:
+    name: platform
 LoadAddOn:
-  frameworks:
-  - loader
+  impl:
+    modules:
+      loader:
 loadstring:
   stdlib: loadstring
 loadstring_untainted:
@@ -416,6 +502,9 @@ math.tan:
   stdlib: math.tan
 math.tanh:
   stdlib: math.tanh
+Mixin:
+  luadelegate:
+    module: wowless.mixin
 newproxy:
   stdlib: newproxy
 next:
@@ -433,34 +522,41 @@ rawget:
 rawset:
   stdlib: rawset
 RequestTimePlayed:
-  frameworks:
-  - api
+  impl:
+    modules:
+      events:
+      time:
 RunMacroText:
-  module: macrotext
-RunScript: {}
+  moduledelegate:
+    name: macrotext
+RunScript:
+  impl:
 scrub:
   stdlib: scrub
 securecall:
   stdlib: securecall
 securecallfunction:
   stdlib: securecallfunction
-SecureCmdOptionParse: {}
+SecureCmdOptionParse:
+  impl:
 secureexecuterange:
   stdlib: secureexecuterange
 select:
   stdlib: select
 SendSystemMessage:
-  frameworks:
-  - api
+  impl:
+    modules:
+      events:
+      time:
+      units:
 seterrorhandler:
   stdlib: seterrorhandler
 setfenv:
   stdlib: setfenv
 setmetatable:
   stdlib: setmetatable
-SetPortraitTexture: {}
-sin:
-  stdlib: sin
+SetPortraitTexture:
+  impl:
 strcmputf8i:
   stdlib: strcmputf8i
 strconcat:
@@ -510,7 +606,8 @@ strsplittable:
 strtrim:
   stdlib: strtrim
 SwapToGlobalEnvironment:
-  module: env
+  moduledelegate:
+    name: env
 table.concat:
   stdlib: table.concat
 table.foreach:
@@ -533,8 +630,6 @@ table.sort:
   stdlib: table.sort
 table.wipe:
   stdlib: table.wipe
-tan:
-  stdlib: tan
 time:
   stdlib: time
 tonumber:
@@ -544,27 +639,39 @@ tostring:
 type:
   stdlib: type
 UnitClass:
-  sqls:
-  - UnitClass
+  impl:
+    sqls:
+    - UnitClass
 UnitClassBase:
-  sqls:
-  - UnitClassBase
-UnitExists: {}
+  impl:
+    sqls:
+    - UnitClassBase
+UnitExists:
+  impl:
 UnitFactionGroup:
-  sqls:
-  - UnitFactionGroup
-UnitGUID: {}
-UnitIsPlayer: {}
-UnitIsUnit: {}
-UnitLevel: {}
-UnitName: {}
+  impl:
+    sqls:
+    - UnitFactionGroup
+UnitGUID:
+  impl:
+UnitIsPlayer:
+  impl:
+UnitIsUnit:
+  impl:
+UnitLevel:
+  impl:
+UnitName:
+  impl:
 UnitPowerType:
-  sqls:
-  - UnitPowerType
+  impl:
+    sqls:
+    - UnitPowerType
 UnitRace:
-  sqls:
-  - UnitRace
-UnitSex: {}
+  impl:
+    sqls:
+    - UnitRace
+UnitSex:
+  impl:
 unpack:
   stdlib: unpack
 xpcall:

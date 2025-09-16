@@ -1,7 +1,8 @@
 describe('uiobjects', function()
   for _, p in ipairs(require('build.data.products')) do
-    local api = require('wowless.api').new(function() end, 0, p)
-    local typechecker = require('wowless.typecheck')(api)
+    local typechecker = require('wowless.modules')({
+      datalua = require('build.products.' .. p .. '.data'),
+    }).typecheck
     local function typecheck(spec, val)
       local value, errmsg = typechecker(spec, val, true)
       assert.Nil(errmsg)
@@ -11,13 +12,19 @@ describe('uiobjects', function()
       if expected.inputs then
         assert.same(#expected.inputs, #actual.inputs)
         for i, x in ipairs(expected.inputs) do
-          assert.same(x.type, actual.inputs[i].type)
+          local a = actual.inputs[i]
+          assert.same(x.type, a.type)
+          -- e.g. nilable field can have a non-nilable setter arg
+          assert.True(not x.nilable or a.nilable)
         end
       end
       if expected.outputs then
         assert.same(#expected.outputs, #actual.outputs)
         for i, x in ipairs(expected.outputs) do
-          assert.same(x.type, actual.outputs[i].type)
+          local a = actual.outputs[i]
+          assert.same(x.type, a.type)
+          -- e.g. nilable getter arg can have a non-nilable field
+          assert.True(not a.nilable or x.nilable)
         end
       end
       assert.same(expected.instride, actual.instride)
@@ -108,23 +115,40 @@ describe('uiobjects', function()
           describe('methods', function()
             for mk, mv in pairs(v.methods) do
               describe(mk, function()
-                it('is not defined up inheritance tree', function()
-                  for inh in pairs(v.inherits) do
-                    assert.False(hasMember(inh, 'methods', mk))
-                  end
-                end)
+                if mv.override then
+                  it('is defined up inheritance tree', function()
+                    local found = false
+                    for inh in pairs(v.inherits) do
+                      found = found or hasMember(inh, 'methods', mk)
+                    end
+                    assert.True(found)
+                  end)
+                else
+                  it('is not defined up inheritance tree', function()
+                    for inh in pairs(v.inherits) do
+                      assert.False(hasMember(inh, 'methods', mk))
+                    end
+                  end)
+                end
                 if mv.impl then
                   describe('impl', function()
-                    it('manipulates only declared fields', function()
-                      for _, field in ipairs(mv.impl.getter or mv.impl.setter or {}) do
-                        assert.True(hasMember(k, 'fields', field.name))
-                      end
+                    if mv.impl.uiobjectimpl then
+                      it('has declared inputs or manual inputs', function()
+                        assert.truthy(mv.inputs or mv.manualinputs)
+                      end)
+                    else
+                      it('has declared inputs', function()
+                        assert.Not.Nil(mv.inputs)
+                      end)
+                    end
+                    it('has declared outputs', function()
+                      assert.Not.Nil(mv.outputs)
                     end)
                     if mv.impl.getter then
                       it('has the right prototype', function()
                         local outputs = {}
                         for i, f in ipairs(mv.impl.getter) do
-                          outputs[i] = getMember(k, 'fields', f.name)
+                          outputs[i] = assert(getMember(k, 'fields', f.name))
                         end
                         protocheck(mv, {
                           inputs = {},
@@ -135,11 +159,30 @@ describe('uiobjects', function()
                       it('has the right prototype', function()
                         local inputs = {}
                         for i, f in ipairs(mv.impl.setter) do
-                          inputs[i] = getMember(k, 'fields', f.name)
+                          inputs[i] = assert(getMember(k, 'fields', f.name))
                         end
                         protocheck(mv, {
                           inputs = inputs,
                           outputs = {},
+                        })
+                      end)
+                    elseif mv.impl.settexture then
+                      local c = mv.impl.settexture
+                      it('manipulates a declared texture', function()
+                        local f = assert(getMember(k, 'fields', c.field))
+                        assert.same({ uiobject = 'Texture' }, f.type)
+                        assert.True(f.nilable)
+                      end)
+                      it('has the right prototype', function()
+                        protocheck(mv, {
+                          inputs = {
+                            [1] = { type = 'TextureAsset' },
+                            [2] = c.extra and {
+                              nilable = true,
+                              type = { stringenum = 'BlendMode' },
+                            },
+                          },
+                          outputs = { c['return'] and { type = 'boolean' } },
                         })
                       end)
                     end
@@ -151,6 +194,13 @@ describe('uiobjects', function()
                       if input.default ~= nil then
                         it('has default of the right type', function()
                           typecheck(input, input.default)
+                        end)
+                        it('is not explicitly nilable', function()
+                          assert.Nil(input.nilable)
+                        end)
+                      else
+                        it('is not permissive', function()
+                          assert.Nil(input.permissive)
                         end)
                       end
                     end)
@@ -168,9 +218,19 @@ describe('uiobjects', function()
                     assert(not mv.instride or mv.instride <= #mv.inputs)
                   end)
                 end)
+                if mv.manualinputs then
+                  describe('manualinputs', function()
+                    it('must be implemented in lua', function()
+                      assert.Truthy(mv.impl and mv.impl.uiobjectimpl)
+                    end)
+                    it('must not have declared inputs', function()
+                      assert.Nil(mv.inputs)
+                    end)
+                  end)
+                end
                 describe('outputs', function()
-                  for i, output in ipairs(mv.outputs or {}) do
-                    describe(output.name or i, function()
+                  for _, output in ipairs(mv.outputs or {}) do
+                    describe(output.name, function()
                       if output.stub ~= nil then
                         it('has stub of the right type', function()
                           typecheck(output, output.stub)
@@ -186,26 +246,14 @@ describe('uiobjects', function()
                         it('cannot specify return value', function()
                           assert.Nil(output.stub)
                         end)
-                        it('cannot be unknown type', function()
-                          assert.Not.same('unknown', output.type)
-                        end)
                       end
                     end)
                   end
-                  it('either all have names or none have names', function()
-                    local named = 0
-                    for _, output in ipairs(mv.outputs or {}) do
-                      named = named + (output.name and 1 or 0)
-                    end
-                    assert.True(named == 0 or named == #mv.outputs)
-                  end)
                   it('are uniquely named', function()
                     local names = {}
                     for _, output in ipairs(mv.outputs or {}) do
-                      if output.name then
-                        assert.Nil(names[output.name])
-                        names[output.name] = true
-                      end
+                      assert.Nil(names[output.name])
+                      names[output.name] = true
                     end
                   end)
                 end)

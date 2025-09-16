@@ -5,33 +5,30 @@ on:
     branches:
     - main
 env:
-  VCPKG_BINARY_SOURCES: "clear;x-gha,readwrite"
+  VCPKG_DEFAULT_BINARY_CACHE: ${{ github.workspace }}/vcpkg-cache
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/github-script@v7
-      with:
-        script: |
-          core.exportVariable('ACTIONS_CACHE_URL', process.env.ACTIONS_CACHE_URL || '');
-          core.exportVariable('ACTIONS_RUNTIME_TOKEN', process.env.ACTIONS_RUNTIME_TOKEN || '');
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v5
       with:
         submodules: true
+    - run: mkdir vcpkg-cache
+    - uses: actions/cache@v4
+      with:
+        path: vcpkg-cache
+        key: vcpkg-devcontainer-${{ github.run_id }}
+        restore-keys: vcpkg-devcontainer
     - uses: docker/login-action@v3
       with:
         registry: ghcr.io
         username: ${{ github.repository_owner }}
         password: ${{ secrets.GITHUB_TOKEN }}
-    - uses: actions/cache@v4
-      with:
-        path: cache
-        key: cache-${{ github.run_id }}
-        restore-keys: cache
     - uses: devcontainers/ci@v0.3
       with:
         env: |
           GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}
+          VCPKG_DEFAULT_BINARY_CACHE=/workspaces/wowless/vcpkg-cache
         imageName: ghcr.io/wowless/wowless-devcontainer
         refFilterForPush: refs/heads/main
         runCmd: pre-commit run -a -v
@@ -67,14 +64,17 @@ jobs:
           os: windows-latest
     runs-on: ${{ matrix.config.os }}
     steps:
-    - uses: actions/github-script@v7
-      with:
-        script: |
-          core.exportVariable('ACTIONS_CACHE_URL', process.env.ACTIONS_CACHE_URL || '');
-          core.exportVariable('ACTIONS_RUNTIME_TOKEN', process.env.ACTIONS_RUNTIME_TOKEN || '');
-    - uses: actions/checkout@v4
+    - if:  ${{ matrix.config.os == 'ubuntu-latest' }}
+      run: sudo apt-get install libltdl-dev
+    - uses: actions/checkout@v5
       with:
         submodules: true
-    - uses: lukka/get-cmake@v4.0.3
+    - run: mkdir ${{ env.VCPKG_DEFAULT_BINARY_CACHE }}
+    - uses: actions/cache@v4
+      with:
+        path: ${{ env.VCPKG_DEFAULT_BINARY_CACHE }}
+        key: vcpkg-${{ runner.os }}-${{ github.run_id }}
+        restore-keys: vcpkg-${{ runner.os }}
+    - uses: lukka/get-cmake@v4.1.1
     - run: cmake -B build -G "${{ matrix.config.generator }}"
     - run: cmake --build build --verbose

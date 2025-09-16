@@ -1,0 +1,32 @@
+{
+  "$schema": "https://raw.githubusercontent.com/EmmyLuaLs/emmylua-analyzer-rust/refs/heads/main/crates/emmylua_code_analysis/resources/schema.json",
+  "diagnostics": {
+    "disable": [
+      "need-check-nil",
+      "param-type-not-match",
+      "unnecessary-assert",
+      "unnecessary-if"
+    ]
+  },
+  "runtime": {
+    "version": "Lua5.1"
+  },
+  "workspace": {
+    "ignoreDir": [
+      "addon",
+      "build",
+      "cache",
+      "data",
+      "extracts",
+      "out",
+      "spec",
+      "tools",
+      "vcpkg",
+      "vendor",
+      "wowapi"
+    ],
+    "ignoreGlobs": [
+      ".luacheckrc"
+    ]
+  }
+}

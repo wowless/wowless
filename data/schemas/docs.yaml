@@ -1,26 +1,45 @@
----
 name: docs
 type:
   record:
-    events:
-      type:
-        record:
-          never_sent:
-            type:
-              mapof:
-                key:
-                  ref: event
-                value:
-                  record: null
     lies:
       type:
         record:
           apis:
             type:
               mapof:
+                key:
+                  ref: api
+                value: any
+          enums:
+            type:
+              mapof:
+                key:
+                  ref: enum
+                value: any
+          extra_apis:
+            type:
+              mapof:
                 key: string
                 value:
-                  schema: function
+                  record:
+          extra_enums:
+            type:
+              mapof:
+                key: string
+                value:
+                  record:
+          extra_events:
+            type:
+              mapof:
+                key: string
+                value:
+                  record:
+          extra_script_objects:
+            type:
+              mapof:
+                key: string
+                value:
+                  record:
           uiobjects:
             type:
               mapof:
@@ -29,23 +48,26 @@ type:
                 value:
                   mapof:
                     key: string
-                    value:
-                      schema: function
-    mayreturnnothing:
-      type: boolean
+                    value: any
     script_objects:
       type:
         mapof:
           key: string
           value:
             ref: uiobject
-    skip_docfiles:
+    typedefs:
       type:
         mapof:
           key: string
           value:
-            record: null
-    skip_uiobject_methods:
+            record:
+              outnil:
+                type: boolean
+              type:
+                required: true
+                type:
+                  schema: type
+    uiobject_method_reassignments:
       type:
         mapof:
           key:
@@ -54,10 +76,4 @@ type:
             mapof:
               key: string
               value:
-                record: null
-    typedefs:
-      type:
-        mapof:
-          key: string
-          value:
-            schema: type
+                ref: uiobject

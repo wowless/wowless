@@ -1,4 +1,3 @@
----
 name: uiobjects
 type:
   mapof:
@@ -9,8 +8,7 @@ type:
           type:
             mapof:
               key: string
-              value:
-                schema: any
+              value: any
         fields:
           required: true
           type:
@@ -18,22 +16,16 @@ type:
               key: string
               value:
                 record:
+                  dynamicinit:
+                    type: boolean
                   init:
-                    type:
-                      schema: any
+                    type: any
                   nilable:
                     type: boolean
                   type:
                     required: true
                     type:
-                      oneof:
-                      - literal: boolean
-                      - literal: hlist
-                      - literal: number
-                      - literal: string
-                      - literal: table
-                      - ref: stringenum
-                      - ref: uiobject
+                      schema: type
         inherits:
           required: true
           type:
@@ -41,7 +33,7 @@ type:
               key:
                 ref: uiobject
               value:
-                record: null
+                record:
         methods:
           required: true
           type:
@@ -51,39 +43,44 @@ type:
                 record:
                   impl:
                     type:
-                      oneof:
-                      - record:
-                          getter:
-                            required: true
-                            type:
-                              sequenceof:
-                                record:
-                                  name:
-                                    required: true
-                                    type: string
-                      - record:
-                          setter:
-                            required: true
-                            type:
-                              sequenceof:
-                                record:
-                                  name:
-                                    required: true
-                                    type: string
-                                  nilable:
-                                    type: boolean
-                      - ref: uiobjectimpl
+                      taggedunion:
+                        getter:
+                          sequenceof:
+                            record:
+                              name:
+                                required: true
+                                type: string
+                        setter:
+                          sequenceof:
+                            record:
+                              name:
+                                required: true
+                                type: string
+                        settexture:
+                          record:
+                            extra:
+                              type: string
+                            field:
+                              required: true
+                              type: string
+                            return:
+                              type: boolean
+                            shown:
+                              type: string
+                        uiobjectimpl:
+                          ref: uiobjectimpl
                   inputs:
                     type:
                       sequenceof:
                         record:
                           default:
-                            type:
-                              schema: any
+                            type: any
                           name:
                             required: true
                             type: string
                           nilable:
+                            type: boolean
+                          permissive:
                             type: boolean
                           type:
                             required: true
@@ -91,7 +88,7 @@ type:
                               schema: type
                   instride:
                     type: number
-                  mayreturnnils:
+                  manualinputs:
                     type: boolean
                   mayreturnnothing:
                     type: boolean
@@ -100,12 +97,12 @@ type:
                       sequenceof:
                         record:
                           name:
+                            required: true
                             type: string
                           nilable:
                             type: boolean
                           stub:
-                            type:
-                              schema: any
+                            type: any
                           stubnotnil:
                             type: boolean
                           type:
@@ -114,10 +111,19 @@ type:
                               schema: type
                   outstride:
                     type: number
+                  override:
+                    type: boolean
                   stuboutstrides:
                     type: number
         objectType:
           type: string
+        scripts:
+          type:
+            mapof:
+              key:
+                ref: scripttype
+              value:
+                record:
         singleton:
           type: boolean
         virtual:

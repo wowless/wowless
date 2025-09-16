@@ -1,7 +1,21 @@
----
 name: uiobjectimpl
 type:
   mapof:
     key: string
     value:
-      record: null
+      taggedunion:
+        luafile:
+          record:
+            modules:
+              type:
+                mapof:
+                  key:
+                    ref: module
+                  value:
+                    record:
+        moduledelegate:
+          record:
+            name:
+              required: true
+              type:
+                ref: module

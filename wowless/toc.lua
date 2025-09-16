@@ -36,7 +36,7 @@ local function parse(gametype, content)
       local file, filter, fdata = line:match('^(.-)%s*%[(.-):?%s+(.-)%]$')
       file = file or line
       local function allow()
-        if not filter or filter == 'AllowLoad' and fdata == 'Game' then
+        if not filter or filter == 'AllowLoad' and fdata:lower() == 'game' then
           return true
         end
         if filter == 'AllowLoadGameType' then

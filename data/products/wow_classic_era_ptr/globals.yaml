@@ -1,4 +1,3 @@
----
 Constants:
   AccountStoreConsts:
     PlunderstormPlunderCurrencyID: 3139
@@ -5407,7 +5406,6 @@ Enum:
     FreshHardcore: 12
     Hardcore: 3
     NoSeason: 0
-    Placeholder: 2
     SeasonOfDiscovery: 2
     SeasonOfMastery: 1
   SeasonIDMeta:
