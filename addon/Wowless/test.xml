@@ -1012,6 +1012,18 @@
     </Scripts>
   </Frame>
 
+  <Frame>
+    <Anchors>
+      <Anchor />
+    </Anchors>
+    <Scripts>
+      <OnLoad>
+        Wowless.check1(1, self:GetNumPoints())
+        Wowless.check5('TOPLEFT', nil, 'TOPLEFT', 0, 0, self:GetPoint(1))
+      </OnLoad>
+    </Scripts>
+  </Frame>
+
   <Script>
     if WowlessOldErrorHandler then
       seterrorhandler(WowlessOldErrorHandler)
