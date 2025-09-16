@@ -1,5 +1,10 @@
 local api, env, log, uiobjects = ...
 local validPoints = require('runtime.stringenums').FramePoint
+local usageErr = table.concat({
+  '%s:SetPoint(): Usage: (',
+  '"point" [, region or nil] [, "relativePoint"] [, offsetX, offsetY]',
+})
+local badpointErr = '%s:SetPoint(): Invalid region point %s'
 local selfErr = table.concat({
   'Action[SetPoint] failed because',
   '[Cannot anchor to itself]: ',
@@ -7,10 +12,15 @@ local selfErr = table.concat({
 })
 return function(self, point, ...)
   -- TODO handle resetting points
-  point = point and point:upper() or 'CENTER'
-  assert(validPoints[point])
+  if point == nil then
+    error(usageErr:format(self:GetObjectType()), 0)
+  end
+  local upoint = point:upper()
+  if not validPoints[upoint] then
+    error(badpointErr:format(self:GetObjectType(), point), 0)
+  end
   local relativeTo = self.parent
-  local relativePoint = point
+  local relativePoint = upoint
   local x, y = 0, 0
   local idx = 1
   local maybeRelativeTo = select(idx, ...)

@@ -245,10 +245,13 @@ return function(
 
   local xmllang = {
     anchor = function(_, anchor, parent)
-      local point = anchor.attr.point
+      local point = anchor.attr.point or 'TOPLEFT'
       local relativeTo
       if anchor.attr.relativeto then
-        relativeTo = api.ParentSub(anchor.attr.relativeto, parent.parent)
+        relativeTo = genv[api.ParentSub(anchor.attr.relativeto, parent.parent)]
+        if not relativeTo then
+          return
+        end
       elseif anchor.attr.relativekey then
         relativeTo = navigate(parent and parent.luarep, anchor.attr.relativekey)
       else
