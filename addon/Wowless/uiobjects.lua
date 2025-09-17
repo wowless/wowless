@@ -437,9 +437,6 @@ G.testsuite.uiobjects = function()
           }
         end,
         GetPoint = function()
-          if _G.__wowless then -- TODO remove this
-            return
-          end
           local f = CreateFrame('Frame')
           f:SetPoint('TOPRIGHT')
           f:SetPoint('LEFT')

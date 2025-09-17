@@ -1,5 +1,24 @@
 local api, env, log, uiobjects = ...
 local validPoints = require('runtime.stringenums').FramePoint
+local pointsInOrder = {
+  'TOPLEFT',
+  'TOP',
+  'TOPRIGHT',
+  'LEFT',
+  'CENTER',
+  'RIGHT',
+  'BOTTOMLEFT',
+  'BOTTOM',
+  'BOTTOMRIGHT',
+}
+local pointOrder = {}
+for i, p in ipairs(pointsInOrder) do
+  assert(validPoints[p], p)
+  pointOrder[p] = i
+end
+for p in pairs(validPoints) do
+  assert(pointOrder[p], p)
+end
 local badpointErr = '%s:SetPoint(): Invalid region point %s'
 local badrelpointErr = '%s:SetPoint(): Unknown region point %s'
 local usageErr = table.concat({
@@ -54,10 +73,14 @@ return function(self, point, ...)
   if type(maybeX) == 'number' and type(maybeY) == 'number' then
     x, y = maybeX, maybeY
   end
-  local newPoint = { point, relativeTo, relativePoint, x, y }
+  local newPoint = { upoint, relativeTo, relativePoint, x, y }
+  local po = pointOrder[upoint]
   for i, p in ipairs(self.points) do
     if p[1] == point then
       self.points[i] = newPoint
+      return
+    elseif pointOrder[p[1]] > po then
+      table.insert(self.points, i, newPoint)
       return
     end
   end
