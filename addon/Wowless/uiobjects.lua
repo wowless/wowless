@@ -436,6 +436,40 @@ G.testsuite.uiobjects = function()
             end,
           }
         end,
+        GetPoint = function()
+          if _G.__wowless then -- TODO remove this
+            return
+          end
+          local f = CreateFrame('Frame')
+          f:SetPoint('TOPRIGHT')
+          f:SetPoint('LEFT')
+          f:SetPoint('BOTTOM')
+          f:SetPoint('TOP')
+          f:SetPoint('RIGHT')
+          f:SetPoint('BOTTOMLEFT')
+          f:SetPoint('CENTER')
+          f:SetPoint('TOPLEFT')
+          f:SetPoint('BOTTOMRIGHT')
+          local function p(k, s)
+            return function()
+              return match(5, s, nil, s, 0, 0, f:GetPoint(k))
+            end
+          end
+          return {
+            num = function()
+              return match(1, 9, f:GetNumPoints())
+            end,
+            p1 = p(1, 'TOPLEFT'),
+            p2 = p(2, 'TOP'),
+            p3 = p(3, 'TOPRIGHT'),
+            p4 = p(4, 'LEFT'),
+            p5 = p(5, 'CENTER'),
+            p6 = p(6, 'RIGHT'),
+            p7 = p(7, 'BOTTOMLEFT'),
+            p8 = p(8, 'BOTTOM'),
+            p9 = p(9, 'BOTTOMRIGHT'),
+          }
+        end,
         SetPoint = function()
           return {
             badpoint = function()
