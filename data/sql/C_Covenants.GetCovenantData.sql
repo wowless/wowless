@@ -10,11 +10,12 @@ SELECT
   UiCovenantDisplayInfo.AnimaNewGemSoundKitID AS animaNewGemSoundKit,
   UiCovenantDisplayInfo.AnimaReinforceSelectSoundKitID
     AS animaReinforceSelectSoundKit,
-  UiCovenantDisplayInfo.BeginResearchSoundKitID AS beginResearchSoundKitID,
+  UiCovenantDisplayInfo.BeginResearchSoundKitID AS 'beginResearchSoundKitID',
   UiCovenantDisplayInfo.CelebrationSoundKitID AS celebrationSoundKit,
-  UiCovenantDisplayInfo.RenownFanfareSoundKitID AS renownFanfareSoundKitID,
-  UiCovenantDisplayInfo.ReservoirFullSoundKitID AS reservoirFullSoundKitID,
-  UiCovenantDisplayInfo.UpgradeTabSelectSoundKitID AS upgradeTabSelectSoundKitID
+  UiCovenantDisplayInfo.RenownFanfareSoundKitID AS 'renownFanfareSoundKitID',
+  UiCovenantDisplayInfo.ReservoirFullSoundKitID AS 'reservoirFullSoundKitID',
+  UiCovenantDisplayInfo.UpgradeTabSelectSoundKitID
+    AS 'upgradeTabSelectSoundKitID'
 FROM
   Covenant
 INNER JOIN

@@ -1,4 +1,4 @@
-SELECT DISTINCT Level AS level
+SELECT DISTINCT Level AS 'level'
 FROM
   RenownRewards
 WHERE

@@ -1,5 +1,5 @@
 SELECT
-  Flags AS flags,
+  Flags AS 'flags',
   ID AS mapID,
   Name_Lang AS name,
   ParentUiMapID AS parentMapID,
