@@ -44,7 +44,6 @@ repos:
   rev: 3.4.2
   hooks:
   - id: sqlfluff-fix
-  - id: sqlfluff-lint
 - repo: local
   hooks:
   - id: luacheck

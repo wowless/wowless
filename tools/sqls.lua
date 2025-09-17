@@ -7,7 +7,8 @@ for k, v in pairs(yaml.parse(assert(file.read('data/sql.yaml')))) do
   deps[f] = true
   t[k] = {
     config = v,
-    text = assert(file.read(f)),
+    -- the gsub is a sqlfluff parser workaround
+    text = assert(file.read(f)):gsub('; /%*COLLATE NOCASE%*/', ' COLLATE NOCASE;'),
   }
 end
 require('tools.util').writedeps(arg[1], deps)
