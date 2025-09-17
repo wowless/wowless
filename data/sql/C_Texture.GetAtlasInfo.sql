@@ -10,8 +10,8 @@ SELECT
   m.OverrideHeight,
   m.OverrideWidth
 FROM
-  UiTextureAtlasMember m
-  JOIN UiTextureAtlas a ON a.ID = m.UiTextureAtlasID
-  JOIN UiTextureAtlasElement e ON e.ID = m.UiTextureAtlasElementID
+  UiTextureAtlasMember AS m
+INNER JOIN UiTextureAtlas AS a ON m.UiTextureAtlasID = a.ID
+INNER JOIN UiTextureAtlasElement AS e ON m.UiTextureAtlasElementID = e.ID
 WHERE
-  e.Name = ?1 COLLATE NOCASE;
+  e.Name = ?1 COLLATE NOCASE; -- noqa

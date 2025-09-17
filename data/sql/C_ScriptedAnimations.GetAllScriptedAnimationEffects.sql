@@ -22,10 +22,10 @@ SELECT
   StartBehavior AS startBehavior,
   StartSoundKitID AS startSoundKitID,
   Trajectory AS trajectory,
-  Flags & 0x1 != 0 AS useTargetAsSource,
   Visual AS visual,
   VisualScale AS visualScale,
-  YawRadians AS yawRadians
+  YawRadians AS yawRadians,
+  Flags & 0x1 != 0 AS useTargetAsSource
 FROM
   UIScriptedAnimationEffect
 ORDER BY

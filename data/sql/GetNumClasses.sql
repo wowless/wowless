@@ -1,5 +1,4 @@
-SELECT
-  COUNT(*)
+SELECT COUNT(*)
 FROM
   ChrClasses
 WHERE

@@ -1,4 +1,3 @@
-SELECT
-  LuaConstantName
+SELECT LuaConstantName
 FROM
   GlobalColor;
