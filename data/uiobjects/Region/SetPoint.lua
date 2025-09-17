@@ -31,7 +31,6 @@ local selfErr = table.concat({
   'attempted from: %s:SetPoint.',
 })
 return function(self, point, ...)
-  -- TODO handle resetting points
   if point == nil then
     error(usageErr:format(self:GetObjectType()), 0)
   end
