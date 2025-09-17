@@ -1,6 +1,6 @@
 SELECT
-  Talent.TierID + 1,
-  Talent.ColumnIndex + 1
+  Talent.TierID + 1 AS tier,
+  Talent.ColumnIndex + 1 AS 'column'
 FROM
   Talent -- noqa:aliasing.unique.table
 INNER JOIN (

@@ -7,8 +7,8 @@ SELECT
     WHEN Role = 0 THEN 'TANK'
     WHEN Role = 1 THEN 'HEALER'
     WHEN Role = 2 THEN 'DAMAGER'
-  END,
-  0  -- TODO implement primary stat
+  END AS role,
+  0 AS primaryStat  -- TODO implement primary stat
 FROM
   ChrSpecialization
 WHERE

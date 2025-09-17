@@ -7,7 +7,7 @@ SELECT
     WHEN Spec.Role = 0 THEN 'TANK'
     WHEN Spec.Role = 1 THEN 'HEALER'
     WHEN Spec.Role = 2 THEN 'DAMAGER'
-  END,
+  END AS role,
   ChrClasses.Filename,
   ChrClasses.Name_lang
 FROM

@@ -7,7 +7,7 @@ SELECT
     WHEN Role = 0 THEN 'TANK'
     WHEN Role = 1 THEN 'HEALER'
     WHEN Role = 2 THEN 'DAMAGER'
-  END,
+  END AS role,
   ClassID,
   MasterySpellID
 FROM

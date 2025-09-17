@@ -3,10 +3,10 @@ SELECT
   Icon,
   _Row,
   _Column,
-  0,
-  1,
-  0,
-  0
+  0 AS rank,
+  1 AS maxRank,
+  0 AS isExceptional,
+  0 AS available
 FROM
   (
     SELECT
