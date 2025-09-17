@@ -477,6 +477,11 @@ G.testsuite.uiobjects = function()
               local msg = 'Frame:SetPoint(): Invalid region point nonsense'
               check2(false, msg, pcall(f.SetPoint, f, 'nonsense'))
             end,
+            badrelpoint = function()
+              local f = CreateFrame('Frame')
+              local msg = 'Frame:SetPoint(): Unknown region point nonsense'
+              check2(false, msg, pcall(f.SetPoint, f, 'TOPLEFT', nil, 'nonsense'))
+            end,
             noarg = function()
               local f = CreateFrame('Frame')
               local msg = table.concat({

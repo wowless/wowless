@@ -1,6 +1,7 @@
 local api, env, log, uiobjects = ...
 local validPoints = require('runtime.stringenums').FramePoint
 local badpointErr = '%s:SetPoint(): Invalid region point %s'
+local badrelpointErr = '%s:SetPoint(): Unknown region point %s'
 local usageErr = table.concat({
   '%s:SetPoint(): Usage: (',
   '"point" [, region or nil] [, "relativePoint"] [, offsetX, offsetY]',
@@ -43,7 +44,10 @@ return function(self, point, ...)
   end
   local maybeRelativePoint = select(idx, ...)
   if type(maybeRelativePoint) == 'string' then
-    relativePoint = maybeRelativePoint
+    relativePoint = maybeRelativePoint:upper()
+    if not validPoints[relativePoint] then
+      error(badrelpointErr:format(self:GetObjectType(), maybeRelativePoint), 0)
+    end
     idx = idx + 1
   end
   local maybeX, maybeY = select(idx, ...)
