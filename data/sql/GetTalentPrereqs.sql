@@ -2,7 +2,7 @@ SELECT
   Talent.TierID + 1,
   Talent.ColumnIndex + 1
 FROM
-  Talent
+  Talent -- noqa:aliasing.unique.table
 INNER JOIN (
   SELECT
     Talent.PrereqTalent AS ID,

@@ -1,6 +1,6 @@
 [sqlfluff]
 dialect = sqlite
-exclude_rules = aliasing.expression,aliasing.self_alias.column,aliasing.unique.table,capitalisation.identifiers
+exclude_rules = aliasing.expression,aliasing.self_alias.column,capitalisation.identifiers
 templater = placeholder
 
 [sqlfluff:indentation]
