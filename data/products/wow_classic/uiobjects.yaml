@@ -6053,6 +6053,9 @@ Region:
     bottom:
       init: 0
       type: number
+    collapsesLayout:
+      init: false
+      type: boolean
     explicitlyProtected:
       init: false
       type: boolean
@@ -6124,6 +6127,9 @@ Region:
       inputs:
       outputs:
     CollapsesLayout:
+      impl:
+        getter:
+        - name: collapsesLayout
       inputs:
       outputs:
       - name: collapsesLayout
@@ -6463,6 +6469,9 @@ Region:
       manualinputs: true
       outputs:
     SetCollapsesLayout:
+      impl:
+        setter:
+        - name: collapsesLayout
       inputs:
       - name: collapsesLayout
         type: boolean
