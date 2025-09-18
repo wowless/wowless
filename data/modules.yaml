@@ -95,6 +95,7 @@ platform:
   deps:
 region:
   deps:
+    visibility:
 scripts:
   deps:
     env:

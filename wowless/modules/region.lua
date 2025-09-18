@@ -1,4 +1,6 @@
-return function()
+return function(visibility)
+  local IsVisible = visibility.IsVisible
+
   local function GetBottom(r)
     return r.bottom
   end
@@ -40,6 +42,10 @@ return function()
     return r.width
   end
 
+  local function IsCollapsed(r)
+    return r.collapsesLayout and not IsVisible(r)
+  end
+
   local function IsRectValid()
     return false
   end
@@ -68,6 +74,7 @@ return function()
     GetSize = GetSize,
     GetTop = GetTop,
     GetWidth = GetWidth,
+    IsCollapsed = IsCollapsed,
     IsRectValid = IsRectValid,
     SetHeight = SetHeight,
     SetSize = SetSize,

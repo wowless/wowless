@@ -6184,6 +6184,8 @@ Region:
       - name: isRestricted
         type: boolean
     IsCollapsed:
+      impl:
+        uiobjectimpl: Region/IsCollapsed
       inputs:
       outputs:
       - name: isCollapsed

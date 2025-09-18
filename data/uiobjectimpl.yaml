@@ -211,6 +211,9 @@ Region/GetWidth:
 Region/Hide:
   moduledelegate:
     name: visibility
+Region/IsCollapsed:
+  moduledelegate:
+    name: region
 Region/IsProtected:
   luafile:
 Region/IsRectValid:

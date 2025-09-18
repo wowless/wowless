@@ -496,6 +496,108 @@ G.testsuite.uiobjects = function()
             p9 = p(9, 'BOTTOMRIGHT'),
           }
         end,
+        IsCollapsed = function()
+          local f = CreateFrame('Frame')
+          local p = CreateFrame('Frame')
+          p:Hide()
+          local states = {
+            ['hidden, will collapse, collapsed'] = function()
+              check1(false, f:IsShown())
+              check1(false, f:IsVisible())
+              check1(true, f:CollapsesLayout())
+              check1(true, f:IsCollapsed())
+            end,
+            ['hidden, will not collapse, not collapsed'] = function()
+              check1(false, f:IsShown())
+              check1(false, f:IsVisible())
+              check1(false, f:CollapsesLayout())
+              check1(false, f:IsCollapsed())
+            end,
+            ['invisible, will collapse, collapsed'] = function()
+              check1(true, f:IsShown())
+              check1(false, f:IsVisible())
+              check1(true, f:CollapsesLayout())
+              check1(true, f:IsCollapsed())
+            end,
+            ['invisible, will not collapse, not collapsed'] = function()
+              check1(true, f:IsShown())
+              check1(false, f:IsVisible())
+              check1(false, f:CollapsesLayout())
+              check1(false, f:IsCollapsed())
+            end,
+            ['shown, will collapse, not collapsed'] = function()
+              check1(true, f:IsShown())
+              check1(true, f:IsVisible())
+              check1(true, f:CollapsesLayout())
+              check1(false, f:IsCollapsed())
+            end,
+            ['shown, will not collapse, not collapsed'] = function()
+              check1(true, f:IsShown())
+              check1(true, f:IsVisible())
+              check1(false, f:CollapsesLayout())
+              check1(false, f:IsCollapsed())
+            end,
+          }
+          local transitions = {
+            hide = {
+              edges = {
+                ['shown, will collapse, not collapsed'] = 'hidden, will collapse, collapsed',
+                ['shown, will not collapse, not collapsed'] = 'hidden, will not collapse, not collapsed',
+              },
+              func = function()
+                check0(f:Hide())
+              end,
+            },
+            setCollapsesLayoutFalse = {
+              edges = {
+                ['hidden, will collapse, collapsed'] = 'hidden, will not collapse, not collapsed',
+                ['invisible, will collapse, collapsed'] = 'invisible, will not collapse, not collapsed',
+                ['shown, will collapse, not collapsed'] = 'shown, will not collapse, not collapsed',
+              },
+              func = function()
+                check0(f:SetCollapsesLayout(false))
+              end,
+            },
+            setCollapsesLayoutTrue = {
+              edges = {
+                ['hidden, will not collapse, not collapsed'] = 'hidden, will collapse, collapsed',
+                ['invisible, will not collapse, not collapsed'] = 'invisible, will collapse, collapsed',
+                ['shown, will not collapse, not collapsed'] = 'shown, will collapse, not collapsed',
+              },
+              func = function()
+                check0(f:SetCollapsesLayout(true))
+              end,
+            },
+            setParentFrame = {
+              edges = {
+                ['shown, will collapse, not collapsed'] = 'invisible, will collapse, collapsed',
+                ['shown, will not collapse, not collapsed'] = 'invisible, will not collapse, not collapsed',
+              },
+              func = function()
+                check0(f:SetParent(p))
+              end,
+            },
+            setParentNil = {
+              edges = {
+                ['invisible, will collapse, collapsed'] = 'shown, will collapse, not collapsed',
+                ['invisible, will not collapse, not collapsed'] = 'shown, will not collapse, not collapsed',
+              },
+              func = function()
+                check0(f:SetParent(nil))
+              end,
+            },
+            show = {
+              edges = {
+                ['hidden, will collapse, collapsed'] = 'shown, will collapse, not collapsed',
+                ['hidden, will not collapse, not collapsed'] = 'shown, will not collapse, not collapsed',
+              },
+              func = function()
+                check0(f:Show())
+              end,
+            },
+          }
+          return G.checkStateMachine(states, transitions, 'shown, will not collapse, not collapsed')
+        end,
         SetPoint = function()
           return {
             badpoint = function()
