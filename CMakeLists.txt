@@ -522,7 +522,7 @@ foreach(product ${products})
     COMMAND ${CMAKE_COMMAND} -E copy_if_different generated/${f} runtime/${f}
     COMMAND ${CMAKE_COMMAND} -E touch stamp/${f}
     DEPFILE generated/${f}.d
-    DEPENDS dbdefs runtime/${product}_dblist.lua
+    DEPENDS dbdefs stamp/${product}_dblist.lua
             runtime/products/${product}/build.lua)
 endforeach()
 
@@ -574,12 +574,12 @@ foreach(product ${products})
   add_custom_command(
     OUTPUT ${product}_schema.sqlite3
     COMMAND sqlite ${product}
-    DEPENDS sqlite runtime/${product}_dbdefs.lua runtime/${product}_dblist.lua)
+    DEPENDS sqlite stamp/${product}_dbdefs.lua stamp/${product}_dblist.lua)
   list(APPEND schemadbs ${product}_schema.sqlite3)
   add_custom_command(
     OUTPUT ${product}_data.sqlite3
     COMMAND sqlite -f ${product}
-    DEPENDS sqlite runtime/${product}_dbdefs.lua runtime/${product}_dblist.lua
+    DEPENDS sqlite stamp/${product}_dbdefs.lua stamp/${product}_dblist.lua
             ${product}_fetch.txt)
 endforeach()
 
@@ -616,7 +616,7 @@ foreach(product ${products})
     OUTPUT ${out}
     COMMAND fetch ${product}
     COMMAND ${CMAKE_COMMAND} -E touch ${out}
-    DEPENDS fetch runtime/${product}_dblist.lua
+    DEPENDS fetch stamp/${product}_dblist.lua
             runtime/products/${product}/build.lua)
 endforeach()
 
