@@ -598,6 +598,56 @@ G.testsuite.uiobjects = function()
           }
           return G.checkStateMachine(states, transitions, 'shown, will not collapse, not collapsed')
         end,
+        SetAllPoints = function()
+          if _G.__wowless then -- TODO remove this
+            return
+          end
+          return {
+            relativeTo = function()
+              local t = {
+                explicitregion = function()
+                  local r = CreateFrame('Frame')
+                  return r, r
+                end,
+                explicitscreen = function(f)
+                  local r = CreateFrame('Frame')
+                  f:SetParent(r)
+                  return nil, nil
+                end,
+                implicitparent = function(f)
+                  local r = CreateFrame('Frame')
+                  f:SetParent(r)
+                  return r
+                end,
+                implicitscreen = function()
+                  return nil
+                end,
+              }
+              local function docheck(f, r, ...)
+                check0(f:SetAllPoints(...))
+                return {
+                  num = function()
+                    return match(1, 2, f:GetNumPoints())
+                  end,
+                  pt1 = function()
+                    return match(5, 'TOPLEFT', r, 'TOPLEFT', 0, 0, f:GetPoint(1))
+                  end,
+                  pt2 = function()
+                    return match(5, 'BOTTOMRIGHT', r, 'BOTTOMRIGHT', 0, 0, f:GetPoint(2))
+                  end,
+                }
+              end
+              local tests = {}
+              for k, v in pairs(t) do
+                tests[k] = function()
+                  local f = CreateFrame('Frame')
+                  return docheck(f, v(f))
+                end
+              end
+              return tests
+            end,
+          }
+        end,
         SetPoint = function()
           return {
             badpoint = function()
