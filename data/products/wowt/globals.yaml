@@ -214,6 +214,8 @@ Enum:
     ClickBindings: 12
     Config: 0
     Config2: 1
+    CooldownManager: 17
+    CooldownManager2: 18
     FlaggedIDs: 10
     FlaggedIDs2: 11
     FrontendChatSettings: 15
@@ -225,9 +227,9 @@ Enum:
     UIEditModeChar: 14
     UILayout: 6
   AccountDataMeta:
-    MaxValue: 16
+    MaxValue: 18
     MinValue: 0
-    NumValues: 17
+    NumValues: 19
   AccountDataUpdateStatus:
     AccountDataUpdateCorrupt: 2
     AccountDataUpdateFailed: 1
@@ -5175,7 +5177,7 @@ Enum:
     ItemUpgrade: 524288
     Mailbox: 64
     POI: 8192
-    QuestPoIs: 65536
+    QuestPOIs: 65536
     Repair: 512
     Stablemaster: 2048
     Target: 16384
@@ -7462,13 +7464,14 @@ Enum:
     MinValue: -1
     NumValues: 3
   TraitSystemFlag:
+    AllowEditInChallengeMode: 8
     AllowEditInCombat: 4
     AllowMultipleLoadoutsPerTree: 1
     ShowSpendConfirmation: 2
   TraitSystemFlagMeta:
-    MaxValue: 4
+    MaxValue: 8
     MinValue: 1
-    NumValues: 3
+    NumValues: 4
   TraitSystemVariationType:
     None: 0
     Spec: 1

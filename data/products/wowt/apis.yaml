@@ -3854,6 +3854,16 @@ C_CatalogShop.GetCategorySectionInfo:
   - name: sectionInfo
     type:
       structure: C_CatalogShop.CatalogShopSectionInfo
+C_CatalogShop.GetFailureInfo:
+  inputs:
+  outputs:
+  - name: errorResultEnum
+    nilable: true
+    type:
+      enum: StoreError
+  - name: errorResultRaw
+    nilable: true
+    type: number
 C_CatalogShop.GetProductAvailabilityTimeRemainingSecs:
   inputs:
   - name: catalogShopProductID
@@ -4686,6 +4696,9 @@ C_ClassTalents.ImportLoadout:
         structure: C_ClassTalents.ImportLoadoutEntryInfo
   - name: name
     type: string
+  - name: importString
+    nilable: true
+    type: string
   outputs:
   - name: success
     type: boolean
@@ -4775,6 +4788,9 @@ C_ClassTalents.ViewLoadout:
     type:
       arrayof:
         structure: C_ClassTalents.ImportLoadoutEntryInfo
+  - name: importString
+    nilable: true
+    type: string
   outputs:
   - name: success
     type: boolean
@@ -7853,6 +7869,11 @@ C_CooldownViewer.GetCooldownViewerCooldownInfo:
   - name: cooldownInfo
     type:
       structure: C_CooldownViewer.CooldownViewerCooldown
+C_CooldownViewer.GetLayoutData:
+  inputs:
+  outputs:
+  - name: data
+    type: string
 C_CooldownViewer.IsCooldownViewerAvailable:
   inputs:
   outputs:
@@ -7860,6 +7881,11 @@ C_CooldownViewer.IsCooldownViewerAvailable:
     type: boolean
   - name: failureReason
     type: string
+C_CooldownViewer.SetLayoutData:
+  inputs:
+  - name: data
+    type: string
+  outputs:
 C_CovenantCallings.AreCallingsUnlocked:
   inputs:
   outputs:
@@ -13231,6 +13257,11 @@ C_LFGList.IsPremadeGroupFinderEnabled:
 C_LFGList.RefreshApplicants:
 C_LFGList.RemoveApplicant:
 C_LFGList.RemoveListing:
+C_LFGList.ReportGroupAsAdvertisement:
+  inputs:
+  - name: searchResultID
+    type: number
+  outputs:
 C_LFGList.RequestAvailableActivities:
   inputs:
   outputs:
@@ -25646,6 +25677,17 @@ C_UnitAuras.GetDebuffDataByIndex:
       structure: AuraData
 C_UnitAuras.GetPlayerAuraBySpellID:
   inputs:
+  - name: spellID
+    type: number
+  outputs:
+  - name: aura
+    nilable: true
+    type:
+      structure: AuraData
+C_UnitAuras.GetUnitAuraBySpellID:
+  inputs:
+  - name: unit
+    type: unit
   - name: spellID
     type: number
   outputs:
