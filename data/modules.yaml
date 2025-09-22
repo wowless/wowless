@@ -93,6 +93,12 @@ parentkey:
   deps:
 platform:
   deps:
+points:
+  deps:
+    api:
+    env:
+    log:
+    uiobjects:
 region:
   deps:
     visibility:
