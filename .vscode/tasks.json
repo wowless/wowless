@@ -19,12 +19,6 @@
       "type": "shell"
     },
     {
-      "command": "cmake --build --preset default --target bump && build/cmake/bump",
-      "label": "bump",
-      "problemMatcher": [],
-      "type": "shell"
-    },
-    {
       "command": "cmake --build --preset default --target test",
       "group": {
         "isDefault": true,

@@ -675,6 +675,16 @@ add_lua_executable(
   runtimeproducts
   toolstactless
   wowlessyaml)
+foreach(product ${products})
+  add_custom_target(
+    bump-${product}
+    COMMAND bump ${product}
+    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
+endforeach()
+add_custom_target(
+  bump-all
+  COMMAND bump
+  WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
 
 yaml2lua(impl)
 yaml2lua(scripttypes)
