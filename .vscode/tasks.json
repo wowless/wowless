@@ -13,12 +13,6 @@
       "type": "shell"
     },
     {
-      "command": "cmake --build --preset default --target docs && for p in $(cut -c3- data/products.yaml); do echo $p && build/cmake/docs $p; done",
-      "label": "alldocs",
-      "problemMatcher": [],
-      "type": "shell"
-    },
-    {
       "command": "cmake --build --preset default --target test",
       "group": {
         "isDefault": true,

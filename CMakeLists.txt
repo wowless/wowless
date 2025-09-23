@@ -775,6 +775,17 @@ add_lua_executable(
   toolsutil
   wowapischema
   wowlessyaml)
+foreach(product ${products})
+  add_custom_target(
+    docs-${product}
+    COMMAND docs ${product}
+    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
+  list(APPEND docsallcmds COMMAND docs ${product})
+endforeach()
+add_custom_target(
+  docs-all
+  ${docsallcmds}
+  WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
 
 add_lua_executable(errsv ${CMAKE_CURRENT_SOURCE_DIR}/tools/errsv.lua penlight
                    wowlessyaml)
