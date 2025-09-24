@@ -260,21 +260,31 @@ G.testsuite.uiobjects = function()
             embeddedsubstitution = {
               arg = 'Wowless$parentCowSubstitution',
               name = 'Wowless$parentCowSubstitution',
-              parent = true,
+              parent = parent,
             },
             embeddedtop = {
               arg = 'Wowless$parentCowTop',
               name = 'Wowless$parentCowTop',
             },
+            ignoresanonsubtitution = {
+              arg = '$parentIgnoreAnonSub',
+              name = 'WowlessParentNameTestMooIgnoreAnonSub',
+              parent = CreateFrame('Frame', nil, parent),
+            },
+            ignoresanontop = {
+              arg = '$parentIgnoreAnonTop',
+              name = 'TopIgnoreAnonTop',
+              parent = CreateFrame('Frame'),
+            },
             mixedcase = {
               arg = '$pArEnTMixed',
               name = 'WowlessParentNameTestMooMixed',
-              parent = true,
+              parent = parent,
             },
             multisubstitution = {
               arg = '$parent$parentWowless$parentCow',
               name = 'WowlessParentNameTestMoo$parentWowless$parentCow',
-              parent = true,
+              parent = parent,
             },
             multitop = {
               arg = '$parent$parentWowless$parentCow',
@@ -283,7 +293,7 @@ G.testsuite.uiobjects = function()
             substitution = {
               arg = '$parentWowlessCow',
               name = 'WowlessParentNameTestMooWowlessCow',
-              parent = true,
+              parent = parent,
             },
             top = {
               arg = '$parentWowlessCow',
@@ -293,7 +303,7 @@ G.testsuite.uiobjects = function()
           local tests = {}
           for k, v in pairs(t) do
             tests[k] = function()
-              local frame = retn(1, CreateFrame('Frame', v.arg, v.parent and parent))
+              local frame = retn(1, CreateFrame('Frame', v.arg, v.parent))
               check1(v.name, frame:GetName())
               assertEquals(frame, _G[v.name])
             end
