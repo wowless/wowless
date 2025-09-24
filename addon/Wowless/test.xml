@@ -1064,14 +1064,61 @@
         <Anchors>
           <Anchor relativeKey='$parent.foo' />
         </Anchors>
+        <Scripts>
+          <OnLoad>
+            Wowless.check1(1, self:GetNumPoints())
+            Wowless.check5('TOPLEFT', self:GetParent(), 'TOPLEFT', 0, 0, self:GetPoint(1))
+          </OnLoad>
+        </Scripts>
+      </Frame>
+      <Frame parentKey='bar'>
+        <Anchors>
+          <Anchor point='TOPLEFT' relativeKey='$parent.foo' />
+          <Anchor point='TOP' relativeKey='$pArEnT.foo' />
+          <Anchor point='TOPRIGHT' relativeKey='$pArEnTanyoldgarbage.foo' />
+          <Anchor point='LEFT' relativeKey='anyoldgarbage$parent.foo' /> <!-- ignored -->
+          <Anchor point='CENTER' relativeKey='$parent' />
+          <Anchor point='RIGHT' relativeKey='$parent..foo' />
+          <Anchor point='BOTTOMLEFT' relativeKey='$parentfoo' />
+          <Anchor point='BOTTOM' relativeKey='$parent...' />
+        </Anchors>
+        <Scripts>
+          <OnLoad>
+            if _G.__wowless then
+              return
+            end
+            Wowless.check1(7, self:GetNumPoints())
+            Wowless.check5('TOPLEFT', self:GetParent().foo, 'TOPLEFT', 0, 0, self:GetPoint(1))
+            Wowless.check5('TOP', self:GetParent().foo, 'TOP', 0, 0, self:GetPoint(2))
+            Wowless.check5('TOPRIGHT', self:GetParent().foo, 'TOPRIGHT', 0, 0, self:GetPoint(3))
+            Wowless.check5('CENTER', self:GetParent(), 'CENTER', 0, 0, self:GetPoint(4))
+            Wowless.check5('RIGHT', self:GetParent().foo, 'RIGHT', 0, 0, self:GetPoint(5))
+            Wowless.check5('BOTTOMLEFT', self:GetParent(), 'BOTTOMLEFT', 0, 0, self:GetPoint(6))
+            Wowless.check5('BOTTOM', self:GetParent(), 'BOTTOM', 0, 0, self:GetPoint(7))
+          </OnLoad>
+        </Scripts>
+      </Frame>
+      <Frame parentKey='baz'>
+        <Frames>
+          <Frame parentKey='quux'>
+            <Anchors>
+              <Anchor point='TOPLEFT' relativeKey='$pArEnT.$PaReNt.foo' />
+              <Anchor point='TOP' relativeKey='$pArEnT$PaReNt.foo' />
+            </Anchors>
+            <Scripts>
+              <OnLoad>
+                if _G.__wowless then
+                  return
+                end
+                Wowless.check1(2, self:GetNumPoints())
+                Wowless.check5('TOPLEFT', self:GetParent():GetParent().foo, 'TOPLEFT', 0, 0, self:GetPoint(1))
+                Wowless.check5('TOP', self:GetParent(), 'TOP', 0, 0, self:GetPoint(2))
+              </OnLoad>
+            </Scripts>
+          </Frame>
+        </Frames>
       </Frame>
     </Frames>
-    <Scripts>
-      <OnLoad>
-        Wowless.check1(1, self.foo:GetNumPoints())
-        Wowless.check5('TOPLEFT', self, 'TOPLEFT', 0, 0, self.foo:GetPoint(1))
-      </OnLoad>
-    </Scripts>
   </Frame>
 
   <Script>
