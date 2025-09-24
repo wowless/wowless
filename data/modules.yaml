@@ -62,6 +62,7 @@ loader:
     loadercfg:
     log:
     loglevel:
+    points:
     scripts:
     security:
     sqlitedb:

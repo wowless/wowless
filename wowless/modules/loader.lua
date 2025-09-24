@@ -7,6 +7,7 @@ return function(
   loadercfg,
   log,
   loglevel,
+  points,
   scripts,
   security,
   sqlitedb,
@@ -249,22 +250,24 @@ return function(
       local relativeTo
       if anchor.attr.relativeto then
         relativeTo = genv[api.ParentSub(anchor.attr.relativeto, parent.parent)]
-        if not relativeTo or relativeTo == parent.luarep then
+        relativeTo = relativeTo and uiobjects.UserData(relativeTo)
+        if not relativeTo or relativeTo == parent then
           return
         end
       elseif anchor.attr.relativekey then
         relativeTo = navigate(parent and parent.luarep, anchor.attr.relativekey)
-        if relativeTo == parent.luarep then
-          relativeTo = parent.parent and parent.parent.luarep
+        relativeTo = relativeTo and uiobjects.UserData(relativeTo)
+        if relativeTo == parent then
+          relativeTo = parent.parent
         end
       else
-        relativeTo = parent.parent and parent.parent.luarep
+        relativeTo = parent.parent
       end
       local relativePoint = anchor.attr.relativepoint or point
       local offsetX, offsetY = getXY(anchor.kids[#anchor.kids])
-      local x = anchor.attr.x or offsetX
-      local y = anchor.attr.y or offsetY
-      parent:SetPoint(point, relativeTo, relativePoint, x, y)
+      local x = anchor.attr.x or offsetX or 0
+      local y = anchor.attr.y or offsetY or 0
+      points.SetPointInternal(parent, point:upper(), relativeTo, relativePoint:upper(), x, y)
     end,
     attribute = function(_, e, parent)
       -- TODO share code with SetAttribute somehow
@@ -456,7 +459,7 @@ return function(
     end,
     setallpoints = function(_, obj, value)
       if value and not obj:IsObjectType('texturebase') then
-        obj:SetAllPoints()
+        points.SetAllPointsInternal(obj, obj.parent)
       end
     end,
   }
@@ -534,7 +537,7 @@ return function(
           processAttrs(ctx, e, obj, 'late')
           -- Implicit setallpoints hack for textures.
           if obj:IsObjectType('texture') and obj:GetNumPoints() == 0 then
-            obj:SetAllPoints()
+            points.SetAllPointsInternal(obj, obj.parent)
           end
         end,
       }

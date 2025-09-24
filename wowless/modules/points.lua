@@ -117,10 +117,13 @@ return function(api, env, log, uiobjects)
     SetPointInternal(r, upoint, relativeTo, relativePoint, x, y)
   end
 
-  local function SetAllPoints(r, ...)
-    local relativeTo = resolveRelativeTo(r, ...)
+  local function SetAllPointsInternal(r, relativeTo)
     SetPointInternal(r, 'TOPLEFT', relativeTo, 'TOPLEFT', 0, 0)
     SetPointInternal(r, 'BOTTOMRIGHT', relativeTo, 'BOTTOMRIGHT', 0, 0)
+  end
+
+  local function SetAllPoints(r, ...)
+    SetAllPointsInternal(r, resolveRelativeTo(r, ...))
   end
 
   return {
@@ -128,6 +131,8 @@ return function(api, env, log, uiobjects)
     GetNumPoints = GetNumPoints,
     GetPoint = GetPoint,
     SetAllPoints = SetAllPoints,
+    SetAllPointsInternal = SetAllPointsInternal,
     SetPoint = SetPoint,
+    SetPointInternal = SetPointInternal,
   }
 end
