@@ -33,7 +33,6 @@ return function(env)
 
   local function SetAtlas(
     t,
-    name,
     elementName,
     atlasHeight,
     atlasWidth,
@@ -54,7 +53,7 @@ return function(env)
         committedTop / atlasHeight,
         committedBottom / atlasHeight
       )
-      t.atlas = elementName or name
+      t.atlas = elementName
     end
   end
 

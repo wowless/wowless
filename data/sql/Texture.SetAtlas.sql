@@ -1,4 +1,5 @@
 SELECT
+  e.Name,
   a.AtlasHeight,
   a.AtlasWidth,
   a.FileDataID,

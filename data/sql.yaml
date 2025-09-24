@@ -120,11 +120,6 @@ Texture.SetAtlas:
     UiTextureAtlasElement: Name COLLATE NOCASE
     UiTextureAtlasMember: UiTextureAtlasElementID
   type: lookup
-Texture.SetAtlas_11_1_5:
-  indexes:
-    UiTextureAtlasElement: Name COLLATE NOCASE
-    UiTextureAtlasMember: UiTextureAtlasElementID
-  type: lookup
 UnitClass:
   type: lookup
 UnitClassBase:
