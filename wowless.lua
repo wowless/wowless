@@ -10,6 +10,7 @@ local args = (function()
   run:option('-o --output', 'output file')
   run:flag('--allevents', 'send all nullary events')
   run:flag('--frame0', 'write frame0 debug')
+  run:flag('--lite', 'do not load framexml')
   run:flag('--profile', 'dump profile')
   return parser:parse()
 end)()
@@ -17,7 +18,7 @@ debug.setprofilingenabled(args.profile)
 local runner = require('wowless.runner')
 local modules = runner.run({
   allevents = args.allevents,
-  dir = 'build/cmake/extracts/' .. args.product,
+  dir = not args.lite and 'build/cmake/extracts/' .. args.product or nil,
   frame0 = args.frame0,
   loglevel = args.loglevel,
   maxErrors = args.maxerrors,
