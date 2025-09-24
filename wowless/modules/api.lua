@@ -57,7 +57,7 @@ return function(
     end
   end
 
-  local parentMatch = '$[pP][aA][rR][eE][nN][tT]'
+  local parentMatch = '^$[pP][aA][rR][eE][nN][tT]'
 
   local function ParentSub(name, parent)
     if name and string.match(name, parentMatch) then

@@ -255,21 +255,50 @@ G.testsuite.uiobjects = function()
           assertEquals(nil, f.moo)
         end,
         ['support $parent in frame names'] = function()
-          local moo = retn(1, CreateFrame('Frame', 'WowlessParentNameTestMoo'))
-          local mooCow = retn(1, CreateFrame('Frame', '$parentWowlessCow', moo))
-          local topCow = retn(1, CreateFrame('Frame', '$parentWowlessCow'))
-          return {
-            substitution = function()
-              local name = 'WowlessParentNameTestMooWowlessCow'
-              check1(name, mooCow:GetName())
-              assertEquals(mooCow, _G[name])
-            end,
-            top = function()
-              local name = 'TopWowlessCow'
-              check1(name, topCow:GetName())
-              assertEquals(topCow, _G[name])
-            end,
+          local parent = retn(1, CreateFrame('Frame', 'WowlessParentNameTestMoo'))
+          local t = {
+            embeddedsubstitution = {
+              arg = 'Wowless$parentCowSubstitution',
+              name = 'Wowless$parentCowSubstitution',
+              parent = true,
+            },
+            embeddedtop = {
+              arg = 'Wowless$parentCowTop',
+              name = 'Wowless$parentCowTop',
+            },
+            mixedcase = {
+              arg = '$pArEnTMixed',
+              name = 'WowlessParentNameTestMooMixed',
+              parent = true,
+            },
+            multisubstitution = {
+              arg = '$parent$parentWowless$parentCow',
+              name = 'WowlessParentNameTestMoo$parentWowless$parentCow',
+              parent = true,
+            },
+            multitop = {
+              arg = '$parent$parentWowless$parentCow',
+              name = 'Top$parentWowless$parentCow',
+            },
+            substitution = {
+              arg = '$parentWowlessCow',
+              name = 'WowlessParentNameTestMooWowlessCow',
+              parent = true,
+            },
+            top = {
+              arg = '$parentWowlessCow',
+              name = 'TopWowlessCow',
+            },
           }
+          local tests = {}
+          for k, v in pairs(t) do
+            tests[k] = function()
+              local frame = retn(1, CreateFrame('Frame', v.arg, v.parent and parent))
+              check1(v.name, frame:GetName())
+              assertEquals(frame, _G[v.name])
+            end
+          end
+          return tests
         end,
       }
     end,
