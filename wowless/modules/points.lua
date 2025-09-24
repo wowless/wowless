@@ -50,6 +50,46 @@ return function(api, env, log, uiobjects)
     end
   end
 
+  local function resolveRelativeTo(r, ...)
+    if select('#', ...) == 0 then
+      return r.parent
+    end
+    local arg = select(1, ...)
+    if arg == nil then
+      return nil
+    end
+    local relativeTo
+    if type(arg) == 'string' then
+      local name = ParentSub(arg, r.parent)
+      local frame = genv[name]
+      if not frame then
+        log(1, 'SetPoint to unknown frame %q', name)
+      end
+      relativeTo = frame and UserData(frame)
+    elseif type(arg) == 'table' then
+      relativeTo = UserData(arg)
+    end
+    if relativeTo == r then
+      error(selfErr:format(r:GetObjectType()), 0)
+    end
+    return relativeTo
+  end
+
+  local function SetPointInternal(r, point, relativeTo, relativePoint, x, y)
+    local t = { point, relativeTo, relativePoint, x, y }
+    local po = pointOrder[point]
+    for i, p in ipairs(r.points) do
+      if p[1] == point then
+        r.points[i] = t
+        return
+      elseif pointOrder[p[1]] > po then
+        table.insert(r.points, i, t)
+        return
+      end
+    end
+    table.insert(r.points, t)
+  end
+
   local function SetPoint(r, point, ...)
     if point == nil then
       error(usageErr:format(r:GetObjectType()), 0)
@@ -58,28 +98,10 @@ return function(api, env, log, uiobjects)
     if not validPoints[upoint] then
       error(badpointErr:format(r:GetObjectType(), point), 0)
     end
-    local relativeTo = r.parent
+    local relativeTo = resolveRelativeTo(r, ...)
     local relativePoint = upoint
     local x, y = 0, 0
-    local idx = 1
-    local maybeRelativeTo = select(idx, ...)
-    if type(maybeRelativeTo) == 'string' then
-      local name = ParentSub(maybeRelativeTo, relativeTo)
-      local frame = genv[name]
-      if not frame then
-        log(1, 'SetPoint to unknown frame %q', name)
-      end
-      relativeTo = frame and UserData(frame)
-      idx = idx + 1
-    elseif type(maybeRelativeTo) == 'table' then
-      relativeTo = UserData(maybeRelativeTo)
-      idx = idx + 1
-    elseif type(maybeRelativeTo) == 'nil' then
-      idx = idx + 1
-    end
-    if relativeTo == r then
-      error(selfErr:format(r:GetObjectType()), 0)
-    end
+    local idx = 2
     local maybeRelativePoint = select(idx, ...)
     if type(maybeRelativePoint) == 'string' then
       relativePoint = maybeRelativePoint:upper()
@@ -92,25 +114,13 @@ return function(api, env, log, uiobjects)
     if type(maybeX) == 'number' and type(maybeY) == 'number' then
       x, y = maybeX, maybeY
     end
-    local newPoint = { upoint, relativeTo, relativePoint, x, y }
-    local po = pointOrder[upoint]
-    for i, p in ipairs(r.points) do
-      if p[1] == point then
-        r.points[i] = newPoint
-        return
-      elseif pointOrder[p[1]] > po then
-        table.insert(r.points, i, newPoint)
-        return
-      end
-    end
-    table.insert(r.points, newPoint)
+    SetPointInternal(r, upoint, relativeTo, relativePoint, x, y)
   end
 
-  local function SetAllPoints(r)
-    -- TODO handle relative argument to SetAllPoints
-    local relative = nil
-    SetPoint(r, 'TOPLEFT', relative, 'TOPLEFT', 0, 0)
-    SetPoint(r, 'BOTTOMRIGHT', relative, 'BOTTOMRIGHT', 0, 0)
+  local function SetAllPoints(r, ...)
+    local relativeTo = resolveRelativeTo(r, ...)
+    SetPointInternal(r, 'TOPLEFT', relativeTo, 'TOPLEFT', 0, 0)
+    SetPointInternal(r, 'BOTTOMRIGHT', relativeTo, 'BOTTOMRIGHT', 0, 0)
   end
 
   return {

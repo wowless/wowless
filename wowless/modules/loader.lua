@@ -255,7 +255,7 @@ return function(
       elseif anchor.attr.relativekey then
         relativeTo = navigate(parent and parent.luarep, anchor.attr.relativekey)
         if relativeTo == parent.luarep then
-          relativeTo = nil
+          relativeTo = parent.parent and parent.parent.luarep
         end
       else
         relativeTo = parent.parent and parent.parent.luarep

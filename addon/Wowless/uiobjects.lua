@@ -599,9 +599,6 @@ G.testsuite.uiobjects = function()
           return G.checkStateMachine(states, transitions, 'shown, will not collapse, not collapsed')
         end,
         SetAllPoints = function()
-          if _G.__wowless then -- TODO remove this
-            return
-          end
           return {
             relativeTo = function()
               local t = {
