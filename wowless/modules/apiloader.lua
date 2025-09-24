@@ -35,20 +35,17 @@ return function(datalua, funcheck, log, sqls)
       end
     end
 
-    local rawfns = {}
     local fns = {}
     for fn, apicfg in pairs(datalua.apis) do
       if apicfg.stdlib then
         local v = assert(util.tget(_G, fn))
         util.tset(fns, fn, v)
-        util.tset(rawfns, fn, v)
       else
         local v = mkfn(fn, apicfg)
         util.tset(fns, fn, bubblewrap(v))
-        util.tset(rawfns, fn, v)
       end
     end
     log(1, 'functions loaded')
-    return fns, rawfns
+    return fns
   end
 end

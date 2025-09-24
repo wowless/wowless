@@ -16,8 +16,7 @@ local function dump(uiobjects)
 end
 
 local function init(modules, lite)
-  local impls, rawimpls = modules.apiloader(modules)
-  modules.api.impls = rawimpls
+  local impls = modules.apiloader(modules)
   Mixin(modules.env.genv, deepcopy(impls))
   Mixin(modules.env.genv, deepcopy(modules.datalua.globals))
   Mixin(modules.env.secureenv, deepcopy(impls))
