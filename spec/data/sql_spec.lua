@@ -21,6 +21,11 @@ describe('sql', function()
         actual[sql] = true
       end
     end
+    for _, v in pairs(require('build.data.uiobjectimpl')) do
+      for _, sql in ipairs(v.luafile and v.luafile.sqls or {}) do
+        actual[sql] = true
+      end
+    end
     assert.same(expected, actual)
   end)
 end)

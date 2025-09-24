@@ -281,7 +281,15 @@ Texture/GetTexture:
 Texture/SetAtlas:
   luafile:
     modules:
-      api:
+      atlas:
+    sqls:
+    - Texture.SetAtlas
+Texture/SetAtlas_11_1_5:
+  luafile:
+    modules:
+      atlas:
+    sqls:
+    - Texture.SetAtlas_11_1_5
 Texture/SetColorTexture:
   luafile:
 Texture/SetGradient:

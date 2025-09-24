@@ -31,7 +31,35 @@ return function(env)
     end
   end
 
+  local function SetAtlas(
+    t,
+    name,
+    elementName,
+    atlasHeight,
+    atlasWidth,
+    fileDataID,
+    committedBottom,
+    committedFlags,
+    committedLeft,
+    committedRight,
+    committedTop
+  )
+    if atlasHeight then
+      t:SetTexture(fileDataID)
+      t:SetHorizTile(band(committedFlags, 0x4) ~= 0)
+      t:SetVertTile(band(committedFlags, 0x2) ~= 0)
+      t:SetTexCoord(
+        committedLeft / atlasWidth,
+        committedRight / atlasWidth,
+        committedTop / atlasHeight,
+        committedBottom / atlasHeight
+      )
+      t.atlas = elementName or name
+    end
+  end
+
   return {
     GetAtlasInfo = GetAtlasInfo,
+    SetAtlas = SetAtlas,
   }
 end

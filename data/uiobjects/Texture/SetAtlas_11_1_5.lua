@@ -4,5 +4,5 @@ return function(self, name)
     -- TODO error here instead of silently ignoring
     return
   end
-  return atlas.SetAtlas(self, name, nil, sql(name))
+  return atlas.SetAtlas(self, name, sql(name))
 end

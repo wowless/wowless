@@ -7981,7 +7981,7 @@ TextureBase:
         type: boolean
     SetAtlas:
       impl:
-        uiobjectimpl: Texture/SetAtlas
+        uiobjectimpl: Texture/SetAtlas_11_1_5
       inputs:
       - name: atlas
         nilable: true
