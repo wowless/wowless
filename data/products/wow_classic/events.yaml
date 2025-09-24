@@ -777,6 +777,10 @@ CHALLENGE_MODE_KEYSTONE_SLOTTED:
     type: number
 CHALLENGE_MODE_LEADERS_UPDATE:
   payload:
+CHALLENGE_MODE_LEAVER_TIMER_ENDED:
+  payload:
+CHALLENGE_MODE_LEAVER_TIMER_STARTED:
+  payload:
 CHALLENGE_MODE_MAPS_UPDATE:
   payload:
 CHALLENGE_MODE_MEMBER_INFO_UPDATED:
@@ -3437,6 +3441,10 @@ CLUB_MEMBER_UPDATED:
     type: string
   - name: memberId
     type: number
+CLUB_MEMBERS_UPDATED:
+  payload:
+  - name: clubId
+    type: string
 CLUB_MESSAGE_ADDED:
   payload:
   - name: clubId
@@ -4237,6 +4245,14 @@ INSPECT_READY:
   payload:
   - name: inspecteeGUID
     type: string
+INSTANCE_ABANDON_VOTE_FINISHED:
+  payload:
+  - name: votePassed
+    type: boolean
+INSTANCE_ABANDON_VOTE_STARTED:
+  payload:
+INSTANCE_ABANDON_VOTE_UPDATED:
+  payload:
 INSTANCE_BOOT_START:
   payload:
 INSTANCE_BOOT_STOP:
@@ -5160,6 +5176,10 @@ PLAYER_GUILD_UPDATE:
     type: unit
 PLAYER_IMPULSE_APPLIED:
   payload:
+PLAYER_IN_COMBAT_CHANGED:
+  payload:
+  - name: inCombat
+    type: boolean
 PLAYER_INSIDE_QUEST_BLOB_STATE_CHANGED:
   payload:
   - name: questID
@@ -7268,24 +7288,6 @@ VOICE_CHAT_TTS_SPEAK_TEXT_UPDATE:
 VOICE_CHAT_TTS_VOICES_UPDATE:
   payload:
 VOICE_CHAT_VAD_SETTINGS_UPDATED:
-  payload:
-VOID_DEPOSIT_WARNING:
-  payload:
-  - name: slot
-    type: number
-  - name: link
-    type: string
-VOID_STORAGE_CONTENTS_UPDATE:
-  payload:
-VOID_STORAGE_DEPOSIT_UPDATE:
-  payload:
-  - name: slot
-    type: number
-VOID_STORAGE_UPDATE:
-  payload:
-VOID_TRANSFER_DONE:
-  payload:
-VOID_TRANSFER_SUCCESS:
   payload:
 VOTE_KICK_REASON_NEEDED:
   payload:

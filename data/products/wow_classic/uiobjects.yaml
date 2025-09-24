@@ -628,9 +628,9 @@ AnimationGroup:
         uiobjectimpl: AnimationGroup/GetAnimations
       inputs:
       outputs:
-      - name: scriptObject
+      - name: anims
         type:
-          uiobject: UIObject
+          uiobject: Animation
       outstride: 1
     GetAnimationSpeedMultiplier:
       impl:
@@ -1059,13 +1059,13 @@ Button:
       impl:
         uiobjectimpl: Button/RegisterForClicks
       inputs:
-      - name: button
+      - name: buttons
         type: string
       instride: 1
       outputs:
     RegisterForMouse:
       inputs:
-      - name: button
+      - name: buttons
         type: string
       instride: 1
       outputs:
@@ -2777,6 +2777,11 @@ Font:
       outputs:
       - name: alpha
         type: number
+    GetFontHeight:
+      inputs:
+      outputs:
+      - name: height
+        type: number
     GetFontObjectForAlphabet:
       inputs:
       - name: alphabet
@@ -3013,6 +3018,9 @@ FontString:
       outputs:
       - name: wrap
         type: boolean
+    ClearAlphaGradient:
+      inputs:
+      outputs:
     FindCharacterIndexAtCoordinate:
       inputs:
       - name: x
@@ -3025,10 +3033,25 @@ FontString:
         type: number
       - name: inside
         type: boolean
+    GetAlphaGradient:
+      inputs:
+      outputs:
+      - name: start
+        type: number
+      - name: length
+        type: number
     GetFieldSize:
       inputs:
       outputs:
       - name: fieldSize
+        type: number
+    GetFontHeight:
+      inputs:
+      - default: true
+        name: calculated
+        type: boolean
+      outputs:
+      - name: height
         type: number
     GetLineHeight:
       inputs:
@@ -3114,6 +3137,11 @@ FontString:
       inputs:
       - name: fixedColor
         type: boolean
+      outputs:
+    SetFontHeight:
+      inputs:
+      - name: height
+        type: number
       outputs:
     SetFormattedText:
       inputs:
@@ -3266,6 +3294,16 @@ Frame:
     ClearAlphaGradient:
       inputs:
       outputs:
+    ClearAttribute:
+      inputs:
+      - name: attributeName
+        type: string
+      outputs:
+      - name: cleared
+        type: boolean
+    ClearAttributes:
+      inputs:
+      outputs:
     CreateFontString:
       impl:
         uiobjectimpl: Frame/CreateFontString
@@ -3404,13 +3442,15 @@ Frame:
       inputs:
       - name: attributeName
         type: string
-      - name: unpackedPrimitiveType
+      - name: arguments
+        nilable: true
         type: string
       instride: 1
       outputs:
       - name: success
         type: boolean
-      - name: unpackedPrimitiveType
+      - name: returns
+        nilable: true
         type: string
       outstride: 1
     GetAttribute:
@@ -3437,9 +3477,10 @@ Frame:
         uiobjectimpl: Frame/GetChildren
       inputs:
       outputs:
-      - name: scriptObject
+      - name: children
+        nilable: true
         type:
-          uiobject: UIObject
+          uiobject: Frame
       outstride: 1
     GetClampRectInsets:
       inputs:
@@ -3570,9 +3611,9 @@ Frame:
         uiobjectimpl: Frame/GetRegions
       inputs:
       outputs:
-      - name: scriptObject
+      - name: regions
         type:
-          uiobject: UIObject
+          uiobject: Region
       outstride: 1
     GetResizeBounds:
       impl:
@@ -3596,6 +3637,11 @@ Frame:
       outputs:
       - name: window
         type: nil
+    HasAlphaGradient:
+      inputs:
+      outputs:
+      - name: hasAlphaGradient
+        type: boolean
     HasFixedFrameLevel:
       impl:
         getter:
@@ -3649,6 +3695,11 @@ Frame:
         nilable: true
         type: string
       outstride: 1
+    IsFrameBuffer:
+      inputs:
+      outputs:
+      - name: isFrameBuffer
+        type: boolean
     IsGamePadButtonEnabled:
       inputs:
       outputs:
@@ -3658,6 +3709,11 @@ Frame:
       inputs:
       outputs:
       - name: enabled
+        type: boolean
+    IsHighlightLocked:
+      inputs:
+      outputs:
+      - name: locked
         type: boolean
     IsKeyboardEnabled:
       inputs:
@@ -3729,7 +3785,7 @@ Frame:
         type: boolean
     RegisterForDrag:
       inputs:
-      - name: button
+      - name: buttons
         type: string
       instride: 1
       outputs:
@@ -5735,9 +5791,9 @@ Path:
         uiobjectimpl: Path/GetControlPoints
       inputs:
       outputs:
-      - name: scriptObject
+      - name: points
         type:
-          uiobject: UIObject
+          uiobject: ControlPoint
       outstride: 1
     GetCurveType:
       impl:
@@ -6126,6 +6182,9 @@ Region:
     ClearPointsOffset:
       inputs:
       outputs:
+    ClearScripts:
+      inputs:
+      outputs:
     CollapsesLayout:
       impl:
         getter:
@@ -6176,9 +6235,9 @@ Region:
         uiobjectimpl: Region/GetAnimationGroups
       inputs:
       outputs:
-      - name: scriptObject
+      - name: groups
         type:
-          uiobject: UIObject
+          uiobject: AnimationGroup
       outstride: 1
     GetBottom:
       impl:
@@ -6521,7 +6580,7 @@ Region:
       outputs:
     SetPassThroughButtons:
       inputs:
-      - name: button
+      - name: buttons
         type: string
       instride: 1
       outputs:
@@ -6529,6 +6588,13 @@ Region:
       impl:
         uiobjectimpl: Region/SetPoint
       manualinputs: true
+      outputs:
+    SetPointsOffset:
+      inputs:
+      - name: x
+        type: number
+      - name: y
+        type: number
       outputs:
     SetPropagateMouseClicks:
       inputs:
@@ -6556,6 +6622,13 @@ Region:
       - name: width
         type: number
       outputs:
+    ShouldButtonPassThrough:
+      inputs:
+      - name: button
+        type: string
+      outputs:
+      - name: shouldPassThrough
+        type: boolean
     StopAnimating:
       inputs:
       outputs:
@@ -7754,6 +7827,9 @@ TextureBase:
     ClearTextureSlice:
       inputs:
       outputs:
+    ClearVertexOffsets:
+      inputs:
+      outputs:
     GetAtlas:
       impl:
         getter:
@@ -8162,6 +8238,9 @@ UIObject:
     SetForbidden:
       impl:
         uiobjectimpl: ForbiddenMixin/SetForbidden
+      inputs:
+      outputs:
+    SetToDefaults:
       inputs:
       outputs:
   virtual: true
