@@ -196,6 +196,9 @@ Region/GetNumPoints:
 Region/GetPoint:
   moduledelegate:
     name: points
+Region/GetPointByName:
+  moduledelegate:
+    name: points
 Region/GetRect:
   moduledelegate:
     name: region

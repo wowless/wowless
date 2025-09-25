@@ -71,6 +71,13 @@ return function(api, env, log, uiobjects)
     end
   end
 
+  local function GetPointByName(r, point)
+    local rp = r.points[point]
+    if rp then
+      return point, unpack(rp)
+    end
+  end
+
   local function rstr(r)
     return tostring(r):gsub('^.*0x(.*)$', '%1')
   end
@@ -175,6 +182,7 @@ return function(api, env, log, uiobjects)
     ClearPoint = ClearPoint,
     GetNumPoints = GetNumPoints,
     GetPoint = GetPoint,
+    GetPointByName = GetPointByName,
     SetAllPoints = SetAllPoints,
     SetAllPointsInternal = SetAllPointsInternal,
     SetPoint = SetPoint,

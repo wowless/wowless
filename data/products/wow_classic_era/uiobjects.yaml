@@ -6076,6 +6076,8 @@ Region:
       - name: offsetY
         type: number
     GetPointByName:
+      impl:
+        uiobjectimpl: Region/GetPointByName
       inputs:
       - name: point
         type:
