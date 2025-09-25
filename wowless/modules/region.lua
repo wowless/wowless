@@ -8,6 +8,42 @@ return function(system, visibility)
     top = system.GetScreenHeight(),
   }
 
+  local pxf = {
+    BOTTOMLEFT = 'left',
+    BOTTOMRIGHT = 'right',
+    LEFT = 'left',
+    RIGHT = 'right',
+    TOPLEFT = 'left',
+    TOPRIGHT = 'right',
+  }
+
+  local pyf = {
+    BOTTOM = 'bottom',
+    BOTTOMLEFT = 'bottom',
+    BOTTOMRIGHT = 'bottom',
+    TOP = 'top',
+    TOPLEFT = 'top',
+    TOPRIGHT = 'top',
+  }
+
+  local function resolvex(p)
+    if p then
+      local rt, rp, x, _ = unpack(p)
+      rt = rt or screen
+      local f = pxf[rp]
+      return (f and rt[f] or (rt.left + rt.right) / 2) + x
+    end
+  end
+
+  local function resolvey(p)
+    if p then
+      local rt, rp, _, y = unpack(p)
+      rt = rt or screen
+      local f = pyf[rp]
+      return (f and rt[f] or (rt.top + rt.bottom) / 2) + y
+    end
+  end
+
   local validate
 
   local function validated(p)
@@ -18,14 +54,24 @@ return function(system, visibility)
     if r.dirty then
       r.dirty = false
       local p = r.points
-      local tp = validated(p.TOPLEFT) or validated(p.TOP) or validated(p.TOPRIGHT)
-      local lp = validated(p.TOPLEFT) or validated(p.LEFT) or validated(p.BOTTOMLEFT)
-      local bp = validated(p.BOTTOMLEFT) or validated(p.BOTTOM) or validated(p.BOTTOMRIGHT)
-      local rp = validated(p.TOPRIGHT) or validated(p.RIGHT) or validated(p.BOTTOMRIGHT)
-      local mxp = validated(p.TOP) or validated(p.CENTER) or validated(p.BOTTOM)
-      local myp = validated(p.LEFT) or validated(p.CENTER) or validated(p.BOTTOM)
-      if tp or lp or bp or rp or mxp or myp then
-        screen = screen -- TODO something
+      local h = r.height ~= 0 and r.height or nil
+      local w = r.width ~= 0 and r.width or nil
+      local by = resolvey(validated(p.BOTTOMLEFT) or validated(p.BOTTOM) or validated(p.BOTTOMRIGHT))
+      local lx = resolvex(validated(p.TOPLEFT) or validated(p.LEFT) or validated(p.BOTTOMLEFT))
+      local rx = resolvex(validated(p.TOPRIGHT) or validated(p.RIGHT) or validated(p.BOTTOMRIGHT))
+      local ty = resolvey(validated(p.TOPLEFT) or validated(p.TOP) or validated(p.TOPRIGHT))
+      local mx = resolvex(validated(p.TOP) or validated(p.CENTER) or validated(p.BOTTOM))
+      local my = resolvey(validated(p.LEFT) or validated(p.CENTER) or validated(p.RIGHT))
+      local bb = by or (ty and h and ty - h) or (my and h and my - h / 2)
+      local ll = lx or (rx and w and rx - w) or (mx and w and mx - w / 2)
+      local rr = rx or (lx and w and lx + w) or (mx and w and mx + w / 2)
+      local tt = ty or (by and h and by + h) or (my and h and my + h / 2)
+      if bb and ll and rr and tt then
+        r.bottom = bb
+        r.left = ll
+        r.right = rr
+        r.top = tt
+        r.valid = true
       end
     end
     return r.valid
