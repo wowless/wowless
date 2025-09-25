@@ -405,9 +405,6 @@ G.testsuite.uiobjects = function()
         points = function()
           return {
             dag = function()
-              if _G.__wowless then -- TODO remove this
-                return
-              end
               local function rstr(r)
                 return tostring(r):gsub('^.*0x(.*)$', '%1')
               end

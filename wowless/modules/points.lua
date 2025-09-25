@@ -34,6 +34,13 @@ return function(api, env, log, uiobjects)
     '[Cannot anchor to itself]: ',
     'attempted from: %s:%s.',
   })
+  local cycleErr = table.concat({
+    'Action[SetPoint] failed because',
+    '[Cannot anchor to a region dependent on it]: ',
+    'attempted from: %s:%s.\n',
+    'Relative: [%s]\n',
+    'Dependent: [%s]',
+  })
 
   local function ClearAllPoints(r)
     table.wipe(r.points)
@@ -48,6 +55,38 @@ return function(api, env, log, uiobjects)
     if p then
       return unpack(p)
     end
+  end
+
+  local function rstr(r)
+    return tostring(r):gsub('^.*0x(.*)$', '%1')
+  end
+
+  local function cycleCheck(r, relativeTo, fn)
+    local queue = { relativeTo }
+    local seen = {}
+    local n = 1
+    repeat
+      local x = queue[n]
+      n = n - 1
+      for _, p in ipairs(x.points) do
+        local y = p[2]
+        if y == r then
+          local err = cycleErr:format(r:GetObjectType(), fn, rstr(relativeTo.luarep), rstr(x.luarep))
+          local anc = {}
+          local z = seen[x]
+          while z do
+            table.insert(anc, '[' .. rstr(z.luarep) .. ']')
+            z = seen[z]
+          end
+          local extra = next(anc) and '\nDependent ancestors:\n' .. table.concat(anc, '\n') or ''
+          error(err .. extra, 0)
+        elseif y and not seen[y] then
+          seen[y] = x
+          n = n + 1
+          queue[n] = y
+        end
+      end
+    until n == 0
   end
 
   local function resolveRelativeTo(r, fn, ...)
@@ -71,6 +110,8 @@ return function(api, env, log, uiobjects)
     end
     if relativeTo == r then
       error(selfErr:format(r:GetObjectType(), fn), 0)
+    elseif relativeTo then
+      cycleCheck(r, relativeTo, fn)
     end
     return relativeTo
   end
