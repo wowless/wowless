@@ -1022,3 +1022,9 @@ add_lua_executable(
   wowlessblp
   wowlessutil
   wowlessyaml)
+
+add_custom_target(
+  bump-dbdefs
+  COMMAND ${GIT_EXECUTABLE} -C vendor/dbdefs checkout master
+  COMMAND ${GIT_EXECUTABLE} -C vendor/dbdefs pull
+  WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
