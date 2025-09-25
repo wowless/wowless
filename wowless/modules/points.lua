@@ -32,7 +32,7 @@ return function(api, env, log, uiobjects)
   local selfErr = table.concat({
     'Action[SetPoint] failed because',
     '[Cannot anchor to itself]: ',
-    'attempted from: %s:SetPoint.',
+    'attempted from: %s:%s.',
   })
 
   local function ClearAllPoints(r)
@@ -50,7 +50,7 @@ return function(api, env, log, uiobjects)
     end
   end
 
-  local function resolveRelativeTo(r, ...)
+  local function resolveRelativeTo(r, fn, ...)
     if select('#', ...) == 0 then
       return r.parent
     end
@@ -70,7 +70,7 @@ return function(api, env, log, uiobjects)
       relativeTo = UserData(arg)
     end
     if relativeTo == r then
-      error(selfErr:format(r:GetObjectType()), 0)
+      error(selfErr:format(r:GetObjectType(), fn), 0)
     end
     return relativeTo
   end
@@ -98,7 +98,7 @@ return function(api, env, log, uiobjects)
     if not validPoints[upoint] then
       error(badpointErr:format(r:GetObjectType(), point), 0)
     end
-    local relativeTo = resolveRelativeTo(r, ...)
+    local relativeTo = resolveRelativeTo(r, 'SetPoint', ...)
     local relativePoint = upoint
     local x, y = 0, 0
     local idx = 2
@@ -123,7 +123,7 @@ return function(api, env, log, uiobjects)
   end
 
   local function SetAllPoints(r, ...)
-    SetAllPointsInternal(r, resolveRelativeTo(r, ...))
+    SetAllPointsInternal(r, resolveRelativeTo(r, 'SetAllPoints', ...))
   end
 
   return {
