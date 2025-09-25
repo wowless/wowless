@@ -8,10 +8,6 @@ lies:
       outputs:
       - _add:
           nilable: true
-    C_PingSecure.GetTargetPingReceiver:
-      outputs:
-      - _add:
-          nilable: true
     GetSpecializationInfoForClassID:
       _add:
         mayreturnnothing: true
@@ -215,11 +211,6 @@ lies:
         - _add:
             nilable: true
     Region:
-      GetPoint:
-        outputs:
-          2:
-            _add:
-              nilable: true
       SetAllPoints:
         _remove:
           inputs:
@@ -500,6 +491,7 @@ typedefs:
   RecruitAcceptanceID:
     type: string
   ScriptRegion:
+    outnil: true
     type:
       uiobject: Region
   SendChatMessageType:

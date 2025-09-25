@@ -6,6 +6,7 @@ G.testsuite.uiobjects = function()
   local check2 = G.check2
   local check3 = G.check3
   local check4 = G.check4
+  local check5 = G.check5
   local check6 = G.check6
   local match = G.match
   local retn = G.retn
@@ -541,6 +542,12 @@ G.testsuite.uiobjects = function()
             p8 = p(8, 'BOTTOM'),
             p9 = p(9, 'BOTTOMRIGHT'),
           }
+        end,
+        GetPointByName = function()
+          local f = CreateFrame('Frame')
+          check0(f:GetPointByName('CENTER'))
+          check0(f:SetPoint('CENTER'))
+          check5('CENTER', nil, 'CENTER', 0, 0, f:GetPointByName('CENTER'))
         end,
         IsCollapsed = function()
           local f = CreateFrame('Frame')
