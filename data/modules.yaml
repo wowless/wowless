@@ -102,6 +102,7 @@ points:
     uiobjects:
 region:
   deps:
+    system:
     visibility:
 scripts:
   deps:

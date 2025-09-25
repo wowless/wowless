@@ -1,9 +1,32 @@
-return function(visibility)
+return function(system, visibility)
   local IsVisible = visibility.IsVisible
 
-  local function validate(r)
+  local screen = {
+    bottom = 0,
+    left = 0,
+    right = system.GetScreenWidth(),
+    top = system.GetScreenHeight(),
+  }
+
+  local validate
+
+  local function validated(p)
+    return p and (not p[1] or validate(p[1])) and p
+  end
+
+  function validate(r)
     if r.dirty then
       r.dirty = false
+      local p = r.points
+      local tp = validated(p.TOPLEFT) or validated(p.TOP) or validated(p.TOPRIGHT)
+      local lp = validated(p.TOPLEFT) or validated(p.LEFT) or validated(p.BOTTOMLEFT)
+      local bp = validated(p.BOTTOMLEFT) or validated(p.BOTTOM) or validated(p.BOTTOMRIGHT)
+      local rp = validated(p.TOPRIGHT) or validated(p.RIGHT) or validated(p.BOTTOMRIGHT)
+      local mxp = validated(p.TOP) or validated(p.CENTER) or validated(p.BOTTOM)
+      local myp = validated(p.LEFT) or validated(p.CENTER) or validated(p.BOTTOM)
+      if tp or lp or bp or rp or mxp or myp then
+        screen = screen -- TODO something
+      end
     end
     return r.valid
   end
