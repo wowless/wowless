@@ -4239,6 +4239,7 @@ Line:
         type:
           stringenum: FramePoint
       - name: relativeTo
+        nilable: true
         type:
           uiobject: Region
       - name: offsetX
@@ -4260,6 +4261,7 @@ Line:
         type:
           stringenum: FramePoint
       - name: relativeTo
+        nilable: true
         type:
           uiobject: Region
       - name: offsetX
@@ -6087,6 +6089,7 @@ Region:
         type:
           stringenum: FramePoint
       - name: relativeTo
+        nilable: true
         type:
           uiobject: Region
       - name: relativePoint

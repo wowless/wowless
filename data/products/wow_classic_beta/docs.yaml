@@ -237,11 +237,6 @@ lies:
         - _add:
             nilable: true
     Region:
-      GetPoint:
-        outputs:
-          2:
-            _add:
-              nilable: true
       SetAllPoints:
         _remove:
           inputs:
@@ -521,6 +516,7 @@ typedefs:
     type:
       uiobject: UIObject
   ScriptRegion:
+    outnil: true
     type:
       uiobject: Region
   SimpleAnim:

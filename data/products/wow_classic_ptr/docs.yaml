@@ -211,11 +211,6 @@ lies:
         - _add:
             nilable: true
     Region:
-      GetPoint:
-        outputs:
-          2:
-            _add:
-              nilable: true
       SetAllPoints:
         _remove:
           inputs:
@@ -487,6 +482,7 @@ typedefs:
   RecruitAcceptanceID:
     type: string
   ScriptRegion:
+    outnil: true
     type:
       uiobject: Region
   SendChatMessageType:
