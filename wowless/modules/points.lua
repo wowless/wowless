@@ -47,22 +47,27 @@ return function(api, env, log, uiobjects)
   end
 
   local function ClearPoint(r, point)
-    for i, p in ipairs(r.points) do
-      if p[1] == point then
-        table.remove(r.points, i)
-        return
-      end
-    end
+    r.points[point] = nil
   end
 
   local function GetNumPoints(r)
-    return #r.points
+    local n = 0
+    for _ in pairs(r.points) do
+      n = n + 1
+    end
+    return n
   end
 
   local function GetPoint(r, index)
-    local p = r.points[index]
-    if p then
-      return unpack(p)
+    local k = 0
+    for _, p in ipairs(pointsInOrder) do
+      local rp = r.points[p]
+      if rp then
+        k = k + 1
+        if k == index then
+          return p, unpack(rp)
+        end
+      end
     end
   end
 
@@ -77,8 +82,8 @@ return function(api, env, log, uiobjects)
     repeat
       local x = queue[n]
       n = n - 1
-      for _, p in ipairs(x.points) do
-        local y = p[2]
+      for _, p in pairs(x.points) do
+        local y = p[1]
         if y == r then
           local err = cycleErr:format(r:GetObjectType(), fn, rstr(relativeTo.luarep), rstr(x.luarep))
           local anc = {}
@@ -126,18 +131,7 @@ return function(api, env, log, uiobjects)
   end
 
   local function SetPointInternal(r, point, relativeTo, relativePoint, x, y)
-    local t = { point, relativeTo, relativePoint, x, y }
-    local po = pointOrder[point]
-    for i, p in ipairs(r.points) do
-      if p[1] == point then
-        r.points[i] = t
-        return
-      elseif pointOrder[p[1]] > po then
-        table.insert(r.points, i, t)
-        return
-      end
-    end
-    table.insert(r.points, t)
+    r.points[point] = { relativeTo, relativePoint, x, y }
   end
 
   local function SetPoint(r, point, ...)
