@@ -6483,6 +6483,8 @@ Region:
       inputs:
       outputs:
     ClearPoint:
+      impl:
+        uiobjectimpl: Region/ClearPoint
       inputs:
       - name: point
         type:

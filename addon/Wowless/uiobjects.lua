@@ -501,6 +501,16 @@ G.testsuite.uiobjects = function()
             end,
           }
         end,
+        ClearPoint = function()
+          local f = CreateFrame('Frame')
+          check0(f:SetPoint('TOPLEFT'))
+          check0(f:SetPoint('TOPRIGHT'))
+          check0(f:ClearPoint('TOP'))
+          check1(2, f:GetNumPoints())
+          check0(f:ClearPoint('TOPLEFT'))
+          check1(1, f:GetNumPoints())
+          check1('TOPRIGHT', (f:GetPoint(1)))
+        end,
         GetPoint = function()
           local f = CreateFrame('Frame')
           f:SetPoint('TOPRIGHT')

@@ -46,6 +46,15 @@ return function(api, env, log, uiobjects)
     table.wipe(r.points)
   end
 
+  local function ClearPoint(r, point)
+    for i, p in ipairs(r.points) do
+      if p[1] == point then
+        table.remove(r.points, i)
+        return
+      end
+    end
+  end
+
   local function GetNumPoints(r)
     return #r.points
   end
@@ -169,6 +178,7 @@ return function(api, env, log, uiobjects)
 
   return {
     ClearAllPoints = ClearAllPoints,
+    ClearPoint = ClearPoint,
     GetNumPoints = GetNumPoints,
     GetPoint = GetPoint,
     SetAllPoints = SetAllPoints,

@@ -167,6 +167,9 @@ Path/GetControlPoints:
 Region/ClearAllPoints:
   moduledelegate:
     name: points
+Region/ClearPoint:
+  moduledelegate:
+    name: points
 Region/CreateAnimationGroup:
   luafile:
     modules:
