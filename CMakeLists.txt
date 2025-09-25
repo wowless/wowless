@@ -675,6 +675,16 @@ add_lua_executable(
   runtimeproducts
   toolstactless
   wowlessyaml)
+foreach(product ${products})
+  add_custom_target(
+    bump-${product}
+    COMMAND bump ${product}
+    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
+endforeach()
+add_custom_target(
+  bump-all
+  COMMAND bump
+  WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
 
 yaml2lua(impl)
 yaml2lua(scripttypes)
@@ -765,6 +775,19 @@ add_lua_executable(
   toolsutil
   wowapischema
   wowlessyaml)
+foreach(product ${products})
+  add_custom_target(
+    docs-${product}
+    COMMAND docs ${product}
+    DEPENDS ${product}
+    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
+  list(APPEND docsallcmds COMMAND docs ${product})
+endforeach()
+add_custom_target(
+  docs-all
+  ${docsallcmds}
+  DEPENDS ${products}
+  WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
 
 add_lua_executable(errsv ${CMAKE_CURRENT_SOURCE_DIR}/tools/errsv.lua penlight
                    wowlessyaml)
@@ -821,6 +844,7 @@ lua2c(
   wowless.modules.mainloop=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/mainloop.lua
   wowless.modules.parentkey=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/parentkey.lua
   wowless.modules.platform=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/platform.lua
+  wowless.modules.points=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/points.lua
   wowless.modules.region=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/region.lua
   wowless.modules.scripts=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/scripts.lua
   wowless.modules.security=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/security.lua
@@ -998,3 +1022,9 @@ add_lua_executable(
   wowlessblp
   wowlessutil
   wowlessyaml)
+
+add_custom_target(
+  bump-dbdefs
+  COMMAND ${GIT_EXECUTABLE} -C vendor/dbdefs checkout master
+  COMMAND ${GIT_EXECUTABLE} -C vendor/dbdefs pull
+  WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})

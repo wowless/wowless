@@ -1,4 +1,6 @@
-return function()
+return function(visibility)
+  local IsVisible = visibility.IsVisible
+
   local function validate(r)
     if r.dirty then
       r.dirty = false
@@ -73,6 +75,10 @@ return function()
     end
   end
 
+  local function IsCollapsed(r)
+    return r.collapsesLayout and not IsVisible(r)
+  end
+
   local function IsRectValid(r)
     return r.valid and not r.dirty
   end
@@ -110,6 +116,7 @@ return function()
     GetSize = GetSize,
     GetTop = GetTop,
     GetWidth = GetWidth,
+    IsCollapsed = IsCollapsed,
     IsRectValid = IsRectValid,
     SetHeight = SetHeight,
     SetSize = SetSize,

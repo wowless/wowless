@@ -1,5 +1,4 @@
-SELECT
-  ID
+SELECT ID
 FROM
   Soulbind
 WHERE

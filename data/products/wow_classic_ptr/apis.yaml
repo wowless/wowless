@@ -2265,6 +2265,9 @@ C_BattleNet.GetGameAccountInfoByID:
     nilable: true
     type:
       structure: C_BattleNet.BNetGameAccountInfo
+C_BattleNet.InstallHighResTextures:
+  inputs:
+  outputs:
 C_BehavioralMessaging.SendNotificationReceipt:
   inputs:
   - name: dbId

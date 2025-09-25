@@ -1,4 +1,5 @@
 SELECT
+  e.Name,
   a.AtlasHeight,
   a.AtlasWidth,
   a.FileDataID,
@@ -6,9 +7,7 @@ SELECT
   m.CommittedFlags,
   m.CommittedLeft,
   m.CommittedRight,
-  m.CommittedTop,
-  m.OverrideHeight,
-  m.OverrideWidth
+  m.CommittedTop
 FROM
   UiTextureAtlasMember AS m
 INNER JOIN UiTextureAtlas AS a ON m.UiTextureAtlasID = a.ID

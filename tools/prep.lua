@@ -299,10 +299,14 @@ local uiobjectimplimplmakers = {
         table.insert(modules, m)
       end
     end
+    for _, sql in ipairs(impl.sqls or {}) do
+      ensuresql(sql)
+    end
     local src = 'data/uiobjects/' .. k .. '.lua'
     return {
       impl = readFile(src),
       modules = modules,
+      sqls = impl.sqls,
       src = '@./' .. src,
     }
   end,
@@ -437,6 +441,7 @@ local uiobjectimplmakers = {
       modules = implimpl.modules,
       outputs = mv.outputs,
       outstride = mv.outstride,
+      sqls = implimpl.sqls,
       src = implimpl.src,
     }
   end,

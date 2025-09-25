@@ -6109,6 +6109,9 @@ Region:
     bottom:
       nilable: true
       type: number
+    collapsesLayout:
+      init: false
+      type: boolean
     dirty:
       init: false
       type: boolean
@@ -6195,6 +6198,9 @@ Region:
       inputs:
       outputs:
     CollapsesLayout:
+      impl:
+        getter:
+        - name: collapsesLayout
       inputs:
       outputs:
       - name: collapsesLayout
@@ -6429,6 +6435,8 @@ Region:
       - name: isRestricted
         type: boolean
     IsCollapsed:
+      impl:
+        uiobjectimpl: Region/IsCollapsed
       inputs:
       outputs:
       - name: isCollapsed
@@ -6534,6 +6542,9 @@ Region:
       manualinputs: true
       outputs:
     SetCollapsesLayout:
+      impl:
+        setter:
+        - name: collapsesLayout
       inputs:
       - name: collapsesLayout
         type: boolean

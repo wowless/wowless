@@ -1277,6 +1277,9 @@ C_CatalogShop.CatalogShopProductInfo:
       type: string
     originalPrice:
       type: string
+    previewIconTexture:
+      nilable: true
+      type: string
     price:
       type: string
     refundable:
@@ -4667,6 +4670,8 @@ C_MythicPlus.MythicPlusDate:
     minute:
       type: number
     month:
+      type: number
+    weekday:
       type: number
     year:
       type: number

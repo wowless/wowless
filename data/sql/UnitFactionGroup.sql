@@ -4,4 +4,4 @@ SELECT
 FROM
   FactionGroup
 WHERE
-  InternalName == ?1;
+  InternalName = ?1;

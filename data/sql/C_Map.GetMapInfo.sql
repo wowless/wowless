@@ -1,5 +1,5 @@
 SELECT
-  Flags AS flags,
+  Flags AS 'flags',
   ID AS mapID,
   Name_Lang AS name,
   ParentUiMapID AS parentMapID,
@@ -7,4 +7,4 @@ SELECT
 FROM
   UiMap
 WHERE
-  ID == ?1;
+  ID = ?1;

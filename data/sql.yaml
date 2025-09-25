@@ -115,6 +115,11 @@ GetTalentPrereqs:
   type: cursor
 GetTalentTabInfo:
   type: lookup
+Texture.SetAtlas:
+  indexes:
+    UiTextureAtlasElement: Name COLLATE NOCASE
+    UiTextureAtlasMember: UiTextureAtlasElementID
+  type: lookup
 UnitClass:
   type: lookup
 UnitClassBase:

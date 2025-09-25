@@ -1,5 +1,4 @@
-SELECT
-  ChrSpecializationID
+SELECT ChrSpecializationID
 FROM
   SpecSetMember
 WHERE

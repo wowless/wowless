@@ -165,7 +165,8 @@ Path/CreateControlPoint:
 Path/GetControlPoints:
   luafile:
 Region/ClearAllPoints:
-  luafile:
+  moduledelegate:
+    name: points
 Region/CreateAnimationGroup:
   luafile:
     modules:
@@ -187,9 +188,11 @@ Region/GetLeft:
   moduledelegate:
     name: region
 Region/GetNumPoints:
-  luafile:
+  moduledelegate:
+    name: points
 Region/GetPoint:
-  luafile:
+  moduledelegate:
+    name: points
 Region/GetRect:
   moduledelegate:
     name: region
@@ -211,6 +214,9 @@ Region/GetWidth:
 Region/Hide:
   moduledelegate:
     name: visibility
+Region/IsCollapsed:
+  moduledelegate:
+    name: region
 Region/IsProtected:
   luafile:
 Region/IsRectValid:
@@ -220,19 +226,16 @@ Region/IsVisible:
   moduledelegate:
     name: visibility
 Region/SetAllPoints:
-  luafile:
+  moduledelegate:
+    name: points
 Region/SetAlpha:
   luafile:
 Region/SetHeight:
   moduledelegate:
     name: region
 Region/SetPoint:
-  luafile:
-    modules:
-      api:
-      env:
-      log:
-      uiobjects:
+  moduledelegate:
+    name: points
 Region/SetScale:
   luafile:
 Region/SetShown:
@@ -278,7 +281,9 @@ Texture/GetTexture:
 Texture/SetAtlas:
   luafile:
     modules:
-      api:
+      atlas:
+    sqls:
+    - Texture.SetAtlas
 Texture/SetColorTexture:
   luafile:
 Texture/SetGradient:

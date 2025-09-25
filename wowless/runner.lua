@@ -86,6 +86,9 @@ local function run(cfg)
     local SendEvent = modules.events.SendEvent
     local UserData = modules.uiobjects.UserData
 
+    local datalua = require('build.products.' .. cfg.product .. '.data')
+    local runnercfg = datalua.config.runner or {}
+
     system.LogIn()
     SendEvent('PLAYER_LOGIN')
     SendEvent('UPDATE_CHAT_WINDOWS')
@@ -97,6 +100,9 @@ local function run(cfg)
       UserData(genv.UIParent):SetSize(system.GetScreenWidth(), system.GetScreenHeight())
     end
     SendEvent('SPELLS_CHANGED')
+    if datalua.events.COOLDOWN_VIEWER_DATA_LOADED then
+      SendEvent('COOLDOWN_VIEWER_DATA_LOADED')
+    end
     if cfg.frame0 and cfg.output then
       local render = require('wowless.render')
       local screenWidth, screenHeight = system.GetScreenWidth(), system.GetScreenHeight()
@@ -113,9 +119,6 @@ local function run(cfg)
       end
       os.exit(0)
     end
-
-    local datalua = require('build.products.' .. cfg.product .. '.data')
-    local runnercfg = datalua.config.runner or {}
 
     local scripts = {
       bindings = function()

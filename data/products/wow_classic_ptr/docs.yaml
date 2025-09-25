@@ -10,7 +10,6 @@ lies:
           nilable: true
   extra_apis:
     C_BarberShopInternal.SetQAMode:
-    C_BattleNet.InstallHighResTextures:
     C_ConfigurationWarnings.GetConfigurationWarnings:
     C_ConfigurationWarnings.GetConfigurationWarningSeen:
     C_ConfigurationWarnings.GetConfigurationWarningString:

@@ -62,6 +62,7 @@ loader:
     loadercfg:
     log:
     loglevel:
+    points:
     scripts:
     security:
     sqlitedb:
@@ -93,8 +94,15 @@ parentkey:
   deps:
 platform:
   deps:
+points:
+  deps:
+    api:
+    env:
+    log:
+    uiobjects:
 region:
   deps:
+    visibility:
 scripts:
   deps:
     env:
@@ -135,6 +143,7 @@ uiobjectloader:
   deps:
     datalua:
     funcheck:
+    sqls:
     uiobjects:
     uiobjecttypes:
 uiobjects:

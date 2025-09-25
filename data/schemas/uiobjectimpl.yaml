@@ -13,6 +13,10 @@ type:
                     ref: module
                   value:
                     record:
+            sqls:
+              type:
+                sequenceof:
+                  ref: sql
         moduledelegate:
           record:
             name:
