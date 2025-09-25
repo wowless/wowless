@@ -1085,9 +1085,6 @@
         </Anchors>
         <Scripts>
           <OnLoad>
-            if _G.__wowless then
-              return
-            end
             Wowless.check1(8, self:GetNumPoints())
             Wowless.check5('TOPLEFT', self:GetParent().foo, 'TOPLEFT', 0, 0, self:GetPoint(1))
             Wowless.check5('TOP', self:GetParent().foo, 'TOP', 0, 0, self:GetPoint(2))
@@ -1112,9 +1109,6 @@
             </Anchors>
             <Scripts>
               <OnLoad>
-                if _G.__wowless then
-                  return
-                end
                 Wowless.check1(4, self:GetNumPoints())
                 Wowless.check5('TOPLEFT', self:GetParent():GetParent().foo, 'TOPLEFT', 0, 0, self:GetPoint(1))
                 Wowless.check5('TOP', self:GetParent(), 'TOP', 0, 0, self:GetPoint(2))

@@ -228,17 +228,20 @@ return function(
     end
   end
 
+  local parentMatch = '^$[pP][aA][rR][eE][nN][tT]'
+
   local function navigate(obj, key)
-    for _, p in ipairs({ strsplit('.', key) }) do
-      if p == '$parent' or p == '$parentKey' then
+    local orig = obj
+    for p in key:gmatch('([^.]+)') do
+      if p:match(parentMatch) then
         local ud = uiobjects.UserData(obj)
         obj = ud.parent and ud.parent.luarep
       else
-        if not obj[p] then
-          log(1, 'invalid relativeKey %q', key)
-          return nil
-        end
         obj = obj[p]
+      end
+      if not obj or obj == orig then
+        log(1, 'invalid relativeKey %q', key)
+        return nil
       end
     end
     return obj
@@ -255,9 +258,12 @@ return function(
           return
         end
       elseif anchor.attr.relativekey then
+        if not anchor.attr.relativekey:match(parentMatch) then
+          return
+        end
         relativeTo = navigate(parent and parent.luarep, anchor.attr.relativekey)
         relativeTo = relativeTo and uiobjects.UserData(relativeTo)
-        if relativeTo == parent then
+        if not relativeTo or relativeTo == parent then
           relativeTo = parent.parent
         end
       else
