@@ -72,6 +72,12 @@ return function(system, visibility)
         r.right = rr
         r.top = tt
         r.valid = true
+      else
+        r.bottom = nil
+        r.left = nil
+        r.right = nil
+        r.top = nil
+        r.valid = false
       end
     end
     return r.valid
