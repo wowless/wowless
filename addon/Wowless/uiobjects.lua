@@ -53,12 +53,6 @@ G.testsuite.uiobjects = function()
               check1(0, fs:GetNumPoints())
               check1(nil, fs:GetText())
             end,
-            ['norect, nosize, nopoint, text'] = function()
-              invalidrect(1, 1)
-              explicitsize(1, 1)
-              check1(0, fs:GetNumPoints())
-              check1('foo', fs:GetText())
-            end,
             ['norect, 8040size, nopoint, notext'] = function()
               invalidrect(80, 40)
               explicitsize(80, 40)
@@ -94,8 +88,8 @@ G.testsuite.uiobjects = function()
               edges = {
                 ['norect, nosize, nopoint, notext'] = 'norect, nosize, nopoint, notext',
                 ['norect, 8040size, nopoint, notext'] = 'norect, nosize, nopoint, notext',
-                ['norect, 8040size, nopoint, text'] = 'norect, nosize, nopoint, text',
-                ['norect, textsize, nopoint, text'] = 'norect, nosize, nopoint, text',
+                ['norect, 8040size, nopoint, text'] = 'norect, textsize, nopoint, text',
+                ['norect, textsize, nopoint, text'] = 'norect, textsize, nopoint, text',
               },
               func = function()
                 check0(fs:SetSize(0, 0))
@@ -104,8 +98,8 @@ G.testsuite.uiobjects = function()
             settextfoo = {
               edges = {
                 ['norect, nosize, nopoint, notext'] = 'norect, textsize, nopoint, text',
-                ['norect, 8040size, nopoint, notext'] = 'norect, textsize, nopoint, text',
-                ['norect, 8040size, nopoint, text'] = 'norect, textsize, nopoint, text',
+                ['norect, 8040size, nopoint, notext'] = 'norect, 8040size, nopoint, text',
+                ['norect, 8040size, nopoint, text'] = 'norect, 8040size, nopoint, text',
                 ['norect, textsize, nopoint, text'] = 'norect, textsize, nopoint, text',
               },
               func = function()
@@ -115,9 +109,8 @@ G.testsuite.uiobjects = function()
             settextnil = {
               edges = {
                 ['norect, nosize, nopoint, notext'] = 'norect, nosize, nopoint, notext',
-                ['norect, nosize, nopoint, text'] = 'norect, nosize, nopoint, notext',
-                ['norect, 8040size, nopoint, notext'] = 'norect, nosize, nopoint, notext',
-                ['norect, 8040size, nopoint, text'] = 'norect, nosize, nopoint, notext',
+                ['norect, 8040size, nopoint, notext'] = 'norect, 8040size, nopoint, notext',
+                ['norect, 8040size, nopoint, text'] = 'norect, 8040size, nopoint, notext',
                 ['norect, textsize, nopoint, text'] = 'norect, nosize, nopoint, notext',
               },
               func = function()
