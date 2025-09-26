@@ -73,7 +73,7 @@ G.testsuite.uiobjects = function()
               check1(0, fs:GetNumPoints())
               check1(nil, fs:GetText())
             end,
-            ['nosize, point, notext'] = function()
+            ['nosize, blpoint, notext'] = function()
               validrect(0, 0, 1, 1)
               explicitsize(1, 1)
               check1(1, fs:GetNumPoints())
@@ -86,7 +86,7 @@ G.testsuite.uiobjects = function()
               check1(0, fs:GetNumPoints())
               check1(nil, fs:GetText())
             end,
-            ['11size, point, notext'] = function()
+            ['11size, blpoint, notext'] = function()
               validrect(0, 0, 1, 1)
               explicitsize(1, 1)
               check1(1, fs:GetNumPoints())
@@ -98,7 +98,7 @@ G.testsuite.uiobjects = function()
               check1(0, fs:GetNumPoints())
               check1('foo', fs:GetText())
             end,
-            ['11size, point, text'] = function()
+            ['11size, blpoint, text'] = function()
               validrect(0, 0, 1, 1)
               explicitsize(1, 1)
               check1(1, fs:GetNumPoints())
@@ -110,7 +110,7 @@ G.testsuite.uiobjects = function()
               check1(0, fs:GetNumPoints())
               check1(nil, fs:GetText())
             end,
-            ['8040size, point, notext'] = function()
+            ['8040size, blpoint, notext'] = function()
               validrect(0, 0, 80, 40)
               explicitsize(80, 40)
               check1(1, fs:GetNumPoints())
@@ -122,7 +122,7 @@ G.testsuite.uiobjects = function()
               check1(0, fs:GetNumPoints())
               check1('foo', fs:GetText())
             end,
-            ['8040size, point, text'] = function()
+            ['8040size, blpoint, text'] = function()
               validrect(0, 0, 80, 40)
               explicitsize(80, 40)
               check1(1, fs:GetNumPoints())
@@ -134,7 +134,7 @@ G.testsuite.uiobjects = function()
               check1(0, fs:GetNumPoints())
               check1('foo', fs:GetText())
             end,
-            ['textsize, point, text'] = function()
+            ['textsize, blpoint, text'] = function()
               validrect(0, 0, tw, th)
               explicitsize(tw, th)
               check1(1, fs:GetNumPoints())
@@ -145,17 +145,17 @@ G.testsuite.uiobjects = function()
             clearpoint = {
               edges = {
                 ['nosize, nopoint, notext'] = 'nosize, nopoint, notext',
-                ['nosize, point, notext'] = 'nosize, nopoint, notext',
+                ['nosize, blpoint, notext'] = 'nosize, nopoint, notext',
                 ['11size, nopoint, notext'] = '11size, nopoint, notext',
-                ['11size, point, notext'] = '11size, nopoint, notext',
+                ['11size, blpoint, notext'] = '11size, nopoint, notext',
                 ['11size, nopoint, text'] = '11size, nopoint, text',
-                ['11size, point, text'] = '11size, nopoint, text',
+                ['11size, blpoint, text'] = '11size, nopoint, text',
                 ['8040size, nopoint, notext'] = '8040size, nopoint, notext',
-                ['8040size, point, notext'] = '8040size, nopoint, notext',
+                ['8040size, blpoint, notext'] = '8040size, nopoint, notext',
                 ['8040size, nopoint, text'] = '8040size, nopoint, text',
-                ['8040size, point, text'] = '8040size, nopoint, text',
+                ['8040size, blpoint, text'] = '8040size, nopoint, text',
                 ['textsize, nopoint, text'] = 'textsize, nopoint, text',
-                ['textsize, point, text'] = 'textsize, nopoint, text',
+                ['textsize, blpoint, text'] = 'textsize, nopoint, text',
               },
               func = function()
                 check0(fs:ClearPoint('BOTTOMLEFT'))
@@ -166,18 +166,18 @@ G.testsuite.uiobjects = function()
             },
             setpoint = {
               edges = {
-                ['nosize, nopoint, notext'] = 'nosize, point, notext',
-                ['nosize, point, notext'] = 'nosize, point, notext',
-                ['11size, nopoint, notext'] = '11size, point, notext',
-                ['11size, point, notext'] = '11size, point, notext',
-                ['11size, nopoint, text'] = '11size, point, text',
-                ['11size, point, text'] = '11size, point, text',
-                ['8040size, nopoint, notext'] = '8040size, point, notext',
-                ['8040size, point, notext'] = '8040size, point, notext',
-                ['8040size, nopoint, text'] = '8040size, point, text',
-                ['8040size, point, text'] = '8040size, point, text',
-                ['textsize, nopoint, text'] = 'textsize, point, text',
-                ['textsize, point, text'] = 'textsize, point, text',
+                ['nosize, nopoint, notext'] = 'nosize, blpoint, notext',
+                ['nosize, blpoint, notext'] = 'nosize, blpoint, notext',
+                ['11size, nopoint, notext'] = '11size, blpoint, notext',
+                ['11size, blpoint, notext'] = '11size, blpoint, notext',
+                ['11size, nopoint, text'] = '11size, blpoint, text',
+                ['11size, blpoint, text'] = '11size, blpoint, text',
+                ['8040size, nopoint, notext'] = '8040size, blpoint, notext',
+                ['8040size, blpoint, notext'] = '8040size, blpoint, notext',
+                ['8040size, nopoint, text'] = '8040size, blpoint, text',
+                ['8040size, blpoint, text'] = '8040size, blpoint, text',
+                ['textsize, nopoint, text'] = 'textsize, blpoint, text',
+                ['textsize, blpoint, text'] = 'textsize, blpoint, text',
               },
               func = function()
                 check0(fs:SetPoint('BOTTOMLEFT'))
