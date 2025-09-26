@@ -56,6 +56,19 @@ G.testsuite.uiobjects = function()
               check1(0, fs:GetNumPoints())
               check1(nil, fs:GetText())
             end,
+            ['norect, 11size, nopoint, notext'] = function()
+              -- Yes, this state is otherwise indistinguishable from nosize.
+              invalidrect(1, 1)
+              explicitsize(1, 1)
+              check1(0, fs:GetNumPoints())
+              check1(nil, fs:GetText())
+            end,
+            ['norect, 11size, nopoint, text'] = function()
+              invalidrect(1, 1)
+              explicitsize(1, 1)
+              check1(0, fs:GetNumPoints())
+              check1('foo', fs:GetText())
+            end,
             ['norect, 8040size, nopoint, notext'] = function()
               invalidrect(80, 40)
               explicitsize(80, 40)
@@ -76,20 +89,11 @@ G.testsuite.uiobjects = function()
             end,
           }
           local transitions = {
-            setsize8040 = {
-              edges = {
-                ['norect, nosize, nopoint, notext'] = 'norect, 8040size, nopoint, notext',
-                ['norect, 8040size, nopoint, notext'] = 'norect, 8040size, nopoint, notext',
-                ['norect, 8040size, nopoint, text'] = 'norect, 8040size, nopoint, text',
-                ['norect, textsize, nopoint, text'] = 'norect, 8040size, nopoint, text',
-              },
-              func = function()
-                check0(fs:SetSize(80, 40))
-              end,
-            },
             setsize00 = {
               edges = {
                 ['norect, nosize, nopoint, notext'] = 'norect, nosize, nopoint, notext',
+                ['norect, 11size, nopoint, notext'] = 'norect, nosize, nopoint, notext',
+                ['norect, 11size, nopoint, text'] = 'norect, textsize, nopoint, text',
                 ['norect, 8040size, nopoint, notext'] = 'norect, nosize, nopoint, notext',
                 ['norect, 8040size, nopoint, text'] = 'norect, textsize, nopoint, text',
                 ['norect, textsize, nopoint, text'] = 'norect, textsize, nopoint, text',
@@ -98,9 +102,37 @@ G.testsuite.uiobjects = function()
                 check0(fs:SetSize(0, 0))
               end,
             },
+            setsize11 = {
+              edges = {
+                ['norect, nosize, nopoint, notext'] = 'norect, 11size, nopoint, notext',
+                ['norect, 11size, nopoint, notext'] = 'norect, 11size, nopoint, notext',
+                ['norect, 11size, nopoint, text'] = 'norect, 11size, nopoint, text',
+                ['norect, 8040size, nopoint, notext'] = 'norect, 11size, nopoint, notext',
+                ['norect, 8040size, nopoint, text'] = 'norect, 11size, nopoint, text',
+                ['norect, textsize, nopoint, text'] = 'norect, 11size, nopoint, text',
+              },
+              func = function()
+                check0(fs:SetSize(1, 1))
+              end,
+            },
+            setsize8040 = {
+              edges = {
+                ['norect, nosize, nopoint, notext'] = 'norect, 8040size, nopoint, notext',
+                ['norect, 11size, nopoint, notext'] = 'norect, 8040size, nopoint, notext',
+                ['norect, 11size, nopoint, text'] = 'norect, 8040size, nopoint, text',
+                ['norect, 8040size, nopoint, notext'] = 'norect, 8040size, nopoint, notext',
+                ['norect, 8040size, nopoint, text'] = 'norect, 8040size, nopoint, text',
+                ['norect, textsize, nopoint, text'] = 'norect, 8040size, nopoint, text',
+              },
+              func = function()
+                check0(fs:SetSize(80, 40))
+              end,
+            },
             settextfoo = {
               edges = {
                 ['norect, nosize, nopoint, notext'] = 'norect, textsize, nopoint, text',
+                ['norect, 11size, nopoint, notext'] = 'norect, 11size, nopoint, text',
+                ['norect, 11size, nopoint, text'] = 'norect, 11size, nopoint, text',
                 ['norect, 8040size, nopoint, notext'] = 'norect, 8040size, nopoint, text',
                 ['norect, 8040size, nopoint, text'] = 'norect, 8040size, nopoint, text',
                 ['norect, textsize, nopoint, text'] = 'norect, textsize, nopoint, text',
@@ -112,6 +144,8 @@ G.testsuite.uiobjects = function()
             settextnil = {
               edges = {
                 ['norect, nosize, nopoint, notext'] = 'norect, nosize, nopoint, notext',
+                ['norect, 11size, nopoint, notext'] = 'norect, 11size, nopoint, notext',
+                ['norect, 11size, nopoint, text'] = 'norect, 11size, nopoint, notext',
                 ['norect, 8040size, nopoint, notext'] = 'norect, 8040size, nopoint, notext',
                 ['norect, 8040size, nopoint, text'] = 'norect, 8040size, nopoint, notext',
                 ['norect, textsize, nopoint, text'] = 'norect, nosize, nopoint, notext',
