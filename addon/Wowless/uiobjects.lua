@@ -23,6 +23,113 @@ G.testsuite.uiobjects = function()
       }
     end,
 
+    FontString = function()
+      return {
+        rectstatemachine = function()
+          local fs = CreateFrame('Frame'):CreateFontString()
+          fs:SetFontObject('GameFontNormal')
+          local function invalidrect(w, h)
+            check1(false, fs:IsRectValid())
+            check0(fs:GetBottom())
+            check0(fs:GetCenter())
+            check0(fs:GetLeft())
+            check0(fs:GetRect())
+            check0(fs:GetRight())
+            check0(fs:GetTop())
+            check1(h, fs:GetHeight())
+            check2(w, h, fs:GetSize())
+            check1(w, fs:GetWidth())
+            check1(false, fs:IsRectValid())
+          end
+          local function explicitsize(w, h)
+            check1(h, fs:GetHeight(true))
+            check2(w, h, fs:GetSize(true))
+            check1(w, fs:GetWidth(true))
+          end
+          local states = {
+            ['norect, nosize, nopoint, notext'] = function()
+              invalidrect(1, 1)
+              explicitsize(1, 1)
+              check1(0, fs:GetNumPoints())
+              check1(nil, fs:GetText())
+            end,
+            ['norect, nosize, nopoint, text'] = function()
+              invalidrect(1, 1)
+              explicitsize(1, 1)
+              check1(0, fs:GetNumPoints())
+              check1('foo', fs:GetText())
+            end,
+            ['norect, 8040size, nopoint, notext'] = function()
+              invalidrect(80, 40)
+              explicitsize(80, 40)
+              check1(0, fs:GetNumPoints())
+              check1(nil, fs:GetText())
+            end,
+            ['norect, 8040size, nopoint, text'] = function()
+              invalidrect(80, 40)
+              explicitsize(80, 40)
+              check1(0, fs:GetNumPoints())
+              check1('foo', fs:GetText())
+            end,
+            ['norect, textsize, nopoint, text'] = function()
+              invalidrect(22.08, 11.52)
+              explicitsize(22.08, 11.52)
+              check1(0, fs:GetNumPoints())
+              check1('foo', fs:GetText())
+            end,
+          }
+          local transitions = {
+            setsize8040 = {
+              edges = {
+                ['norect, nosize, nopoint, notext'] = 'norect, 8040size, nopoint, notext',
+                ['norect, 8040size, nopoint, notext'] = 'norect, 8040size, nopoint, notext',
+                ['norect, 8040size, nopoint, text'] = 'norect, 8040size, nopoint, text',
+                ['norect, textsize, nopoint, text'] = 'norect, 8040size, nopoint, text',
+              },
+              func = function()
+                check0(fs:SetSize(80, 40))
+              end,
+            },
+            setsize00 = {
+              edges = {
+                ['norect, nosize, nopoint, notext'] = 'norect, nosize, nopoint, notext',
+                ['norect, 8040size, nopoint, notext'] = 'norect, nosize, nopoint, notext',
+                ['norect, 8040size, nopoint, text'] = 'norect, nosize, nopoint, text',
+                ['norect, textsize, nopoint, text'] = 'norect, nosize, nopoint, text',
+              },
+              func = function()
+                check0(fs:SetSize(0, 0))
+              end,
+            },
+            settextfoo = {
+              edges = {
+                ['norect, nosize, nopoint, notext'] = 'norect, textsize, nopoint, text',
+                ['norect, 8040size, nopoint, notext'] = 'norect, textsize, nopoint, text',
+                ['norect, 8040size, nopoint, text'] = 'norect, textsize, nopoint, text',
+                ['norect, textsize, nopoint, text'] = 'norect, textsize, nopoint, text',
+              },
+              func = function()
+                check0(fs:SetText('foo'))
+              end,
+            },
+            settextnil = {
+              edges = {
+                ['norect, nosize, nopoint, notext'] = 'norect, nosize, nopoint, notext',
+                ['norect, nosize, nopoint, text'] = 'norect, nosize, nopoint, notext',
+                ['norect, 8040size, nopoint, notext'] = 'norect, nosize, nopoint, notext',
+                ['norect, 8040size, nopoint, text'] = 'norect, nosize, nopoint, notext',
+                ['norect, textsize, nopoint, text'] = 'norect, nosize, nopoint, notext',
+              },
+              func = function()
+                check0(fs:SetText(nil))
+              end,
+            },
+          }
+          return G.checkStateMachine(states, transitions, 'norect, nosize, nopoint, notext')
+        end,
+      }
+    end,
+
     Frame = function()
       return {
         ['attributes'] = function()
