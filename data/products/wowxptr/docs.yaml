@@ -11,6 +11,10 @@ lies:
     GetSpecializationInfoForClassID:
       _add:
         mayreturnnothing: true
+    ResurrectGetOfferer:
+      outputs:
+      - _add:
+          nilable: true
     UnitFactionGroup:
       _add:
         mayreturnnothing: true

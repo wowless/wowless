@@ -12354,6 +12354,7 @@ C_SummonInfo.GetSummonConfirmTimeLeft:
   inputs:
   outputs:
   - name: timeLeft
+    stub: 0
     type: number
 C_SummonInfo.GetSummonReason:
   inputs:
@@ -19707,6 +19708,7 @@ GetReleaseTimeRemaining:
   inputs:
   outputs:
   - name: result
+    stub: 0
     type: number
 GetRepairAllCost:
   outputs:
@@ -22198,6 +22200,7 @@ ResurrectGetOfferer:
   inputs:
   outputs:
   - name: name
+    nilable: true
     type: string
 ResurrectHasSickness:
   inputs:

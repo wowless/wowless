@@ -14,6 +14,10 @@ lies:
           _change:
             from: specID
             to: classID
+    ResurrectGetOfferer:
+      outputs:
+      - _add:
+          nilable: true
   extra_apis:
     C_AuctionHouse.CalculateCommodityDeposit:
     C_AuctionHouse.CalculateItemDeposit:
