@@ -37,6 +37,8 @@ files['addon/Wowless'] = {
     'debugprofilestop',
     'DevTools_Dump',
     'format',
+    'GetScreenHeight',
+    'GetScreenWidth',
     'RequestTimePlayed',
     'SendSystemMessage',
   },

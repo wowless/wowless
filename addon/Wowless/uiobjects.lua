@@ -720,6 +720,278 @@ G.testsuite.uiobjects = function()
             end,
           }
         end,
+        rect = function()
+          if _G.__wowless then -- issue #473
+            return
+          end
+          local f = CreateFrame('Frame')
+          local w, h = GetScreenWidth(), GetScreenHeight()
+          local states = {
+            init = function()
+              check1(false, f:IsRectValid())
+              check0(f:GetBottom())
+              check0(f:GetCenter())
+              check1(0, f:GetHeight())
+              check1(0, f:GetHeight(true))
+              check0(f:GetLeft())
+              check1(0, f:GetNumPoints())
+              check0(f:GetRect())
+              check0(f:GetRight())
+              check2(0, 0, f:GetSize())
+              check2(0, 0, f:GetSize(true))
+              check0(f:GetTop())
+              check1(0, f:GetWidth())
+              check1(0, f:GetWidth(true))
+              check1(false, f:IsRectValid())
+            end,
+            fiveten = function()
+              check1(false, f:IsRectValid())
+              check0(f:GetBottom())
+              check0(f:GetCenter())
+              check1(10, f:GetHeight())
+              check0(f:GetLeft())
+              check1(0, f:GetNumPoints())
+              check0(f:GetRect())
+              check0(f:GetRight())
+              check2(5, 10, f:GetSize())
+              check0(f:GetTop())
+              check1(5, f:GetWidth())
+              check1(false, f:IsRectValid())
+            end,
+            screen0 = function()
+              check1(false, f:IsRectValid())
+            end,
+            screen1 = function()
+              check1(true, f:IsRectValid())
+              check1(0, f:GetBottom())
+              check2(w / 2, h / 2, f:GetCenter())
+              check1(h, f:GetHeight())
+              check1(0, f:GetHeight(true))
+              check1(0, f:GetLeft())
+              check1(2, f:GetNumPoints())
+              check4(0, 0, w, h, f:GetRect())
+              check1(w, f:GetRight())
+              check2(w, h, f:GetSize())
+              check2(0, 0, f:GetSize(true))
+              check1(h, f:GetTop())
+              check1(w, f:GetWidth())
+              check1(0, f:GetWidth(true))
+              check1(true, f:IsRectValid())
+            end,
+            screenfiveten0 = function()
+              check1(false, f:IsRectValid())
+            end,
+            screenfiveten1 = function()
+              check1(true, f:IsRectValid())
+              check1(0, f:GetBottom())
+              check2(w / 2, h / 2, f:GetCenter())
+              check1(h, f:GetHeight())
+              check1(10, f:GetHeight(true))
+              check1(0, f:GetLeft())
+              check1(2, f:GetNumPoints())
+              check4(0, 0, w, h, f:GetRect())
+              check1(w, f:GetRight())
+              check2(w, h, f:GetSize())
+              check2(5, 10, f:GetSize(true))
+              check1(h, f:GetTop())
+              check1(w, f:GetWidth())
+              check1(5, f:GetWidth(true))
+              check1(true, f:IsRectValid())
+            end,
+          }
+          local transitions = {
+            getbottom = {
+              edges = {
+                init = 'init',
+                fiveten = 'fiveten',
+                screen0 = 'screen1',
+                screen1 = 'screen1',
+                screenfiveten0 = 'screenfiveten1',
+                screenfiveten1 = 'screenfiveten1',
+              },
+              func = function()
+                f:GetBottom()
+              end,
+            },
+            getcenter = {
+              edges = {
+                init = 'init',
+                fiveten = 'fiveten',
+                screen0 = 'screen1',
+                screen1 = 'screen1',
+                screenfiveten0 = 'screenfiveten1',
+                screenfiveten1 = 'screenfiveten1',
+              },
+              func = function()
+                f:GetCenter()
+              end,
+            },
+            getheight = {
+              edges = {
+                init = 'init',
+                fiveten = 'fiveten',
+                screen0 = 'screen1',
+                screen1 = 'screen1',
+                screenfiveten0 = 'screenfiveten1',
+                screenfiveten1 = 'screenfiveten1',
+              },
+              func = function()
+                f:GetHeight()
+              end,
+            },
+            getheightignorerect = {
+              loop = true,
+              func = function()
+                f:GetHeight(true)
+              end,
+            },
+            getleft = {
+              edges = {
+                init = 'init',
+                fiveten = 'fiveten',
+                screen0 = 'screen1',
+                screen1 = 'screen1',
+                screenfiveten0 = 'screenfiveten1',
+                screenfiveten1 = 'screenfiveten1',
+              },
+              func = function()
+                f:GetLeft()
+              end,
+            },
+            getnumpoints = {
+              loop = true,
+              func = function()
+                f:GetNumPoints()
+              end,
+            },
+            getrect = {
+              edges = {
+                init = 'init',
+                fiveten = 'fiveten',
+                screen0 = 'screen1',
+                screen1 = 'screen1',
+                screenfiveten0 = 'screenfiveten1',
+                screenfiveten1 = 'screenfiveten1',
+              },
+              func = function()
+                f:GetRect()
+              end,
+            },
+            getright = {
+              edges = {
+                init = 'init',
+                fiveten = 'fiveten',
+                screen0 = 'screen1',
+                screen1 = 'screen1',
+                screenfiveten0 = 'screenfiveten1',
+                screenfiveten1 = 'screenfiveten1',
+              },
+              func = function()
+                f:GetRight()
+              end,
+            },
+            getsize = {
+              edges = {
+                init = 'init',
+                fiveten = 'fiveten',
+                screen0 = 'screen1',
+                screen1 = 'screen1',
+                screenfiveten0 = 'screenfiveten1',
+                screenfiveten1 = 'screenfiveten1',
+              },
+              func = function()
+                f:GetSize()
+              end,
+            },
+            getsizeignorerect = {
+              loop = true,
+              func = function()
+                f:GetSize(true)
+              end,
+            },
+            gettop = {
+              edges = {
+                init = 'init',
+                fiveten = 'fiveten',
+                screen0 = 'screen1',
+                screen1 = 'screen1',
+                screenfiveten0 = 'screenfiveten1',
+                screenfiveten1 = 'screenfiveten1',
+              },
+              func = function()
+                f:GetTop()
+              end,
+            },
+            getwidth = {
+              edges = {
+                init = 'init',
+                fiveten = 'fiveten',
+                screen0 = 'screen1',
+                screen1 = 'screen1',
+                screenfiveten0 = 'screenfiveten1',
+                screenfiveten1 = 'screenfiveten1',
+              },
+              func = function()
+                f:GetWidth()
+              end,
+            },
+            getwidthignorerect = {
+              loop = true,
+              func = function()
+                f:GetWidth(true)
+              end,
+            },
+            setallpoints = {
+              edges = {
+                init = 'screen0',
+                fiveten = 'screenfiveten0',
+                screen0 = 'screen0',
+                screen1 = 'screen0',
+                screenfiveten0 = 'screenfiveten0',
+                screenfiveten1 = 'screenfiveten0',
+              },
+              func = function()
+                f:SetAllPoints()
+              end,
+            },
+            setsizezerozero = {
+              edges = {
+                init = 'init',
+                fiveten = 'init',
+                screen0 = 'screen0',
+                screen1 = 'screen1',
+                screenfiveten0 = 'screen0',
+                screenfiveten1 = 'screen0',
+              },
+              func = function()
+                f:SetSize(0, 0)
+              end,
+            },
+            setsizefiveten = {
+              edges = {
+                init = 'fiveten',
+                fiveten = 'fiveten',
+                screen0 = 'screenfiveten0',
+                screen1 = 'screenfiveten0',
+                screenfiveten0 = 'screenfiveten0',
+                screenfiveten1 = 'screenfiveten1',
+              },
+              func = function()
+                f:SetSize(5, 10)
+              end,
+            },
+            reset = {
+              to = 'init',
+              func = function()
+                f:ClearAllPoints()
+                f:SetPoint('CENTER')
+                f:ClearPoint('CENTER')
+                f:SetSize(0, 0)
+              end,
+            },
+          }
+          return G.checkStateMachine(states, transitions, 'init')
+        end,
       }
     end,
 
