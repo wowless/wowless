@@ -26,6 +26,9 @@ G.testsuite.uiobjects = function()
     FontString = function()
       return {
         rectstatemachine = function()
+          if _G.__wowless then -- issue #473
+            return
+          end
           local fs = CreateFrame('Frame'):CreateFontString()
           fs:SetFontObject('GameFontNormal')
           local function invalidrect(w, h)
