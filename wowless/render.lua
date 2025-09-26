@@ -11,8 +11,8 @@ end
 local function frames2rects(hframes, product, screenWidth, screenHeight)
   local tt = require('resty.tsort').new()
   local function addPoints(r)
-    for _, pt in ipairs(r.points) do
-      local relativeTo = pt[2]
+    for _, pt in pairs(r.points) do
+      local relativeTo = pt[1]
       if relativeTo ~= nil and relativeTo ~= r then
         tt:add(relativeTo, r)
       end
@@ -31,8 +31,8 @@ local function frames2rects(hframes, product, screenWidth, screenHeight)
     top = screenHeight,
   }
   local rects = {}
-  local function p2c(r, i)
-    local p, rt, rp, px, py = unpack(r.points[i])
+  local function p2c(r, p)
+    local rt, rp, px, py = unpack(r.points[p])
     local pr = rt == nil and screen or assert(rects[rt], 'moo ' .. r:GetDebugName()) -- relies on tsort
     local x = (function()
       if rp == 'TOPLEFT' or rp == 'LEFT' or rp == 'BOTTOMLEFT' then
@@ -52,12 +52,12 @@ local function frames2rects(hframes, product, screenWidth, screenHeight)
         return pr.top and pr.bottom and (pr.top + pr.bottom) / 2 or nil
       end
     end)()
-    return p, x and x + px, y and y + py
+    return x and x + px, y and y + py
   end
   for _, r in ipairs(assert(tt:sort())) do
     local points = {}
-    for i = 1, #r.points do
-      local p, x, y = p2c(r, i)
+    for p in pairs(r.points) do
+      local x, y = p2c(r, p)
       points[p] = { x = x, y = y }
     end
     local pts = {

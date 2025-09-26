@@ -8,6 +8,10 @@ lies:
       outputs:
       - _add:
           nilable: true
+    ResurrectGetOfferer:
+      outputs:
+      - _add:
+          nilable: true
   extra_apis:
     C_BarberShopInternal.SetQAMode:
     C_BattleNet.InstallHighResTextures:

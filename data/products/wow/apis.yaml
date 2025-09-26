@@ -32248,6 +32248,7 @@ ResurrectGetOfferer:
   inputs:
   outputs:
   - name: name
+    nilable: true
     type: string
 ResurrectHasSickness:
   inputs:
