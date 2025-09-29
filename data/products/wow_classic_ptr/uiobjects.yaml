@@ -7036,7 +7036,6 @@ SimpleHTML:
       init: '|H%s|h%s|h'
       type: string
   inherits:
-    FontInstance:
     Frame:
   methods:
     GetContentHeight:
@@ -7055,7 +7054,6 @@ SimpleHTML:
         type: number
       - name: flags
         type: string
-      override: true
     GetFontObject:
       inputs:
       - name: textType
@@ -7065,7 +7063,6 @@ SimpleHTML:
         nilable: true
         type:
           uiobject: Font
-      override: true
     GetHyperlinkFormat:
       impl:
         getter:
@@ -7081,7 +7078,6 @@ SimpleHTML:
       outputs:
       - name: wordWrap
         type: boolean
-      override: true
     GetJustifyH:
       inputs:
       - name: textType
@@ -7090,7 +7086,6 @@ SimpleHTML:
       - name: justifyH
         type:
           stringenum: JustifyHorizontal
-      override: true
     GetJustifyV:
       inputs:
       - name: textType
@@ -7099,7 +7094,6 @@ SimpleHTML:
       - name: justifyV
         type:
           stringenum: JustifyVertical
-      override: true
     GetShadowColor:
       inputs:
       - name: textType
@@ -7113,7 +7107,6 @@ SimpleHTML:
         type: number
       - name: colorA
         type: number
-      override: true
     GetShadowOffset:
       inputs:
       - name: textType
@@ -7123,7 +7116,6 @@ SimpleHTML:
         type: number
       - name: offsetY
         type: number
-      override: true
     GetSpacing:
       inputs:
       - name: textType
@@ -7131,7 +7123,6 @@ SimpleHTML:
       outputs:
       - name: spacing
         type: number
-      override: true
     GetTextColor:
       inputs:
       - name: textType
@@ -7145,7 +7136,6 @@ SimpleHTML:
         type: number
       - name: colorA
         type: number
-      override: true
     GetTextData:
       inputs:
       outputs:
@@ -7164,7 +7154,6 @@ SimpleHTML:
       - name: flags
         type: string
       outputs:
-      override: true
     SetFontObject:
       inputs:
       - name: textType
@@ -7173,7 +7162,6 @@ SimpleHTML:
         type:
           uiobject: Font
       outputs:
-      override: true
     SetHyperlinkFormat:
       impl:
         setter:
@@ -7189,7 +7177,6 @@ SimpleHTML:
       - name: wordWrap
         type: boolean
       outputs:
-      override: true
     SetJustifyH:
       inputs:
       - name: textType
@@ -7198,7 +7185,6 @@ SimpleHTML:
         type:
           stringenum: JustifyHorizontal
       outputs:
-      override: true
     SetJustifyV:
       inputs:
       - name: textType
@@ -7207,7 +7193,6 @@ SimpleHTML:
         type:
           stringenum: JustifyVertical
       outputs:
-      override: true
     SetShadowColor:
       inputs:
       - name: textType
@@ -7222,7 +7207,6 @@ SimpleHTML:
         nilable: true
         type: number
       outputs:
-      override: true
     SetShadowOffset:
       inputs:
       - name: textType
@@ -7232,7 +7216,6 @@ SimpleHTML:
       - name: offsetY
         type: number
       outputs:
-      override: true
     SetSpacing:
       inputs:
       - name: textType
@@ -7240,7 +7223,6 @@ SimpleHTML:
       - name: spacing
         type: number
       outputs:
-      override: true
     SetText:
       inputs:
       - name: text
@@ -7263,7 +7245,6 @@ SimpleHTML:
         nilable: true
         type: number
       outputs:
-      override: true
 Slider:
   fieldinitoverrides:
     mouseClickEnabled: true
