@@ -23,6 +23,35 @@ G.testsuite.uiobjects = function()
       }
     end,
 
+    Font = function()
+      if _G.__wowless then -- TODO support
+        return
+      end
+      return {
+        loop0 = function()
+          local font = CreateFont('WowlessFontObjectLoop0Test')
+          local err = 'WowlessFontObjectLoop0Test:SetFontObject(): Can\'t create a font object loop'
+          check2(false, err, pcall(font.SetFontObject, font, font))
+        end,
+        loop1 = function()
+          local font1 = CreateFont('WowlessFontObjectLoop1Test1')
+          local font2 = CreateFont('WowlessFontObjectLoop1Test2')
+          check0(font2:SetFontObject(font1))
+          local err = 'WowlessFontObjectLoop1Test1:SetFontObject(): Can\'t create a font object loop'
+          check2(false, err, pcall(font1.SetFontObject, font1, font2))
+        end,
+        vfs = function()
+          local font = CreateFont('WowlessFontObjectVfsTest')
+          local fontname = ('Interface\\AddOns\\%s\\framework.lua'):format(addonName)
+          check1(nil, font:GetFontObject())
+          check3(nil, 0, '', font:GetFont())
+          check0(font:SetFont(fontname, 12, ''))
+          check1(nil, font:GetFontObject())
+          check3(fontname, 12, '', font:GetFont())
+        end,
+      }
+    end,
+
     Frame = function()
       return {
         ['attributes'] = function()
