@@ -2772,6 +2772,10 @@ Font:
       outputs:
 FontInstance:
   fields:
+    fontObject:
+      nilable: true
+      type:
+        uiobject: Font
     indentedWordWrap:
       init: false
       type: boolean
@@ -2799,7 +2803,8 @@ FontInstance:
         type: string
     GetFontObject:
       impl:
-        uiobjectimpl: FontInstance/GetFontObject
+        getter:
+        - name: fontObject
       inputs:
       outputs:
       - name: font
@@ -2872,6 +2877,9 @@ FontInstance:
         type: number
     SetFont:
     SetFontObject:
+      impl:
+        setter:
+        - name: fontObject
       inputs:
       - name: font
         type:

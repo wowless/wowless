@@ -61,8 +61,6 @@ EditBox/Enable:
   luafile:
 EditBox/Insert:
   luafile:
-FontInstance/GetFontObject:
-  luafile:
 FontString/SetText:
   luafile:
 ForbiddenMixin/SetForbidden:
