@@ -2808,8 +2808,7 @@ FontInstance:
         type: string
     GetFontObject:
       impl:
-        getter:
-        - name: fontObject
+        uiobjectimpl: FontInstance/GetFontObject
       inputs:
       outputs:
       - name: font

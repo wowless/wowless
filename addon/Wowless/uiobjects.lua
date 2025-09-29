@@ -23,6 +23,30 @@ G.testsuite.uiobjects = function()
       }
     end,
 
+    EditBox = function()
+      return {
+        fontobject = function()
+          if _G.__wowless then
+            return
+          end
+          local eb = CreateFrame('EditBox')
+          eb:Hide()
+          local fo = assert(retn(1, eb:GetFontObject()))
+          local eb2 = CreateFrame('EditBox')
+          eb2:Hide()
+          local fo2 = assert(retn(1, eb2:GetFontObject()))
+          assert(fo ~= fo2)
+          check1('Font', fo:GetObjectType())
+          check1(nil, fo:GetFontObject())
+          check3(nil, 0, '', fo:GetFont())
+          check1(fo, eb:GetFontObject())
+          check0(eb:SetFontObject(fo2))
+          check1(fo, eb:GetFontObject())
+          assert(not pcall(eb.SetFontObject, eb, nil))
+        end,
+      }
+    end,
+
     Font = function()
       return {
         loop0 = function()
@@ -426,6 +450,30 @@ G.testsuite.uiobjects = function()
               }
             end,
           }
+        end,
+      }
+    end,
+
+    MessageFrame = function()
+      return {
+        fontobject = function()
+          if _G.__wowless then
+            return
+          end
+          local mf = CreateFrame('MessageFrame')
+          mf:Hide()
+          local fo = assert(retn(1, mf:GetFontObject()))
+          local mf2 = CreateFrame('MessageFrame')
+          mf2:Hide()
+          local fo2 = assert(retn(1, mf2:GetFontObject()))
+          assert(fo ~= fo2)
+          check1('Font', fo:GetObjectType())
+          check1(nil, fo:GetFontObject())
+          check3(nil, 0, '', fo:GetFont())
+          check1(fo, mf:GetFontObject())
+          check0(mf:SetFontObject(fo2))
+          check1(fo, mf:GetFontObject())
+          assert(not pcall(mf.SetFontObject, mf, nil))
         end,
       }
     end,

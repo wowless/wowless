@@ -1,4 +1,8 @@
 return function()
+  local function GetFontObject(fi)
+    return fi.fontObject
+  end
+
   local function SetFontObject(fi, obj)
     local p = obj
     while p do
@@ -11,6 +15,7 @@ return function()
   end
 
   return {
+    GetFontObject = GetFontObject,
     SetFontObject = SetFontObject,
   }
 end
