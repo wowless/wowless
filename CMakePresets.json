@@ -3,6 +3,10 @@
     {
       "configurePreset": "default",
       "name": "default"
+    },
+    {
+      "configurePreset": "emscripten",
+      "name": "emscripten"
     }
   ],
   "cmakeMinimumRequired": {
@@ -18,6 +22,14 @@
       },
       "generator": "Ninja",
       "name": "default"
+    },
+    {
+      "cacheVariables": {
+        "VCPKG_CHAINLOAD_TOOLCHAIN_FILE": "$env{EMSCRIPTEN_ROOT}/cmake/Modules/Platform/Emscripten.cmake",
+        "VCPKG_TARGET_TRIPLET": "wasm32-emscripten"
+      },
+      "inherits": "default",
+      "name": "emscripten"
     }
   ],
   "version": 3
