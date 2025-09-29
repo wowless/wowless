@@ -24,9 +24,6 @@ G.testsuite.uiobjects = function()
     end,
 
     Font = function()
-      if _G.__wowless then -- TODO support
-        return
-      end
       return {
         loop0 = function()
           local font = CreateFont('WowlessFontObjectLoop0Test')
@@ -41,6 +38,9 @@ G.testsuite.uiobjects = function()
           check2(false, err, pcall(font1.SetFontObject, font1, font2))
         end,
         vfs = function()
+          if _G.__wowless then -- TODO support
+            return
+          end
           local font = CreateFont('WowlessFontObjectVfsTest')
           local fontname = ('Interface\\AddOns\\%s\\framework.lua'):format(addonName)
           check1(nil, font:GetFontObject())

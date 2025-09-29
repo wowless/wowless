@@ -61,6 +61,9 @@ EditBox/Enable:
   luafile:
 EditBox/Insert:
   luafile:
+FontInstance/SetFontObject:
+  moduledelegate:
+    name: fontinstance
 FontString/SetText:
   luafile:
 ForbiddenMixin/SetForbidden:

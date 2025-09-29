@@ -2912,8 +2912,7 @@ FontInstance:
     SetFont:
     SetFontObject:
       impl:
-        setter:
-        - name: fontObject
+        uiobjectimpl: FontInstance/SetFontObject
       inputs:
       - name: font
         type:

@@ -42,6 +42,8 @@ events:
     log:
     loglevel:
     scripts:
+fontinstance:
+  deps:
 funcheck:
   deps:
     log:
