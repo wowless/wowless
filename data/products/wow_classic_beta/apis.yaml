@@ -17380,11 +17380,13 @@ GetFactionInfoByID:
 getfenv:
   impl: getfenv
 GetFileIDFromPath:
+  impl: GetFileIDFromPath
   inputs:
   - name: filePath
     type: string
   outputs:
   - name: fileID
+    nilable: true
     type: number
 GetFileStreamingStatus:
   inputs:

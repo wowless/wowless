@@ -315,6 +315,10 @@ geterrorhandler:
 getfenv:
   moduledelegate:
     name: env
+GetFileIDFromPath:
+  impl:
+    sqls:
+    - GetFileIDFromPath
 GetFontStringMetatable:
   impl:
     modules:

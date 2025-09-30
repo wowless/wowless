@@ -8,6 +8,10 @@ lies:
       outputs:
       - _add:
           nilable: true
+    GetFileIDFromPath:
+      outputs:
+      - _add:
+          nilable: true
     GetSpecializationInfoForClassID:
       _add:
         mayreturnnothing: true

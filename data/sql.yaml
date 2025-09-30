@@ -89,6 +89,8 @@ GetClassInfo:
   type: lookup
 GetClassInfo_Classic:
   type: lookup
+GetFileIDFromPath:
+  type: lookup
 GetInventorySlotInfo:
   type: lookup
 GetNumClasses:

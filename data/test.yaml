@@ -17,6 +17,7 @@ GetClassInfo_Classic:
 GetClickFrame:
 GetCurrentEnvironment:
 getfenv:
+GetFileIDFromPath:
 GetGlobalEnvironment:
 hooksecurefunc:
 IsDebugBuild:
