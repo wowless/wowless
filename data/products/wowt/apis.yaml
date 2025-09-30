@@ -27328,6 +27328,7 @@ CreateFont:
   - name: font
     type:
       uiobject: Font
+  usage: CreateFont("name")
 CreateFontFamily:
   inputs:
   - name: name

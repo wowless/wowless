@@ -61,6 +61,30 @@ G.testsuite.uiobjects = function()
           local err = 'WowlessFontObjectLoop1Test1:SetFontObject(): Can\'t create a font object loop'
           check2(false, err, pcall(font1.SetFontObject, font1, font2))
         end,
+        name = function()
+          local name = 'WowlessFontObjectNameTest'
+          local font1 = retn(1, CreateFont(name))
+          assertEquals(font1, _G[name])
+          check1(name, font1:GetName())
+          check1(font1, CreateFont(name))
+          _G[name] = nil
+          check1(name, font1:GetName())
+          check1(font1, CreateFont(name))
+        end,
+        noname = function()
+          local usage = 'Usage: CreateFont("name")'
+          check2(false, usage, pcall(CreateFont))
+          check2(false, usage, pcall(CreateFont, nil))
+        end,
+        numbername = function()
+          local n = 1759244889
+          local s = tostring(n)
+          local font = retn(1, CreateFont(n))
+          assertEquals(nil, _G[n])
+          assertEquals(font, _G[s])
+          check1(s, font:GetName())
+          assertEquals(font, retn(1, CreateFont(s)))
+        end,
         vfs = function()
           if _G.__wowless then -- TODO support
             return

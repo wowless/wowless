@@ -52,3 +52,5 @@ type:
       type: boolean
     stuboutstrides:
       type: number
+    usage:
+      type: string

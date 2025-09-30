@@ -208,6 +208,7 @@ local function mkapi(apicfg)
         outstride = apicfg.outstride,
         sqls = impl.sqls,
         src = impl.src,
+        usage = apicfg.usage,
       }
     end
   elseif apicfg.stubnothing then
