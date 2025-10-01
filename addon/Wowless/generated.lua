@@ -417,13 +417,10 @@ G.testsuite.generated = function()
       Texture = function()
         return CreateFrame('Frame'):CreateTexture()
       end,
-      TextureCoordTranslation = (function()
-        local count = 0
-        return function()
-          count = count + 1
-          return _G.WowlessUIObjectTest.AnimationGroup['TextureCoordTranslation' .. count]
-        end
-      end)(),
+      TextureCoordTranslation = function()
+        local frame = CreateFrame('Frame', nil, nil, 'WowlessTextureCoordTranslationFactory')
+        return frame.AnimationGroup.TextureCoordTranslation
+      end,
       Translation = function()
         return CreateFrame('Frame'):CreateAnimationGroup():CreateAnimation('Translation')
       end,
