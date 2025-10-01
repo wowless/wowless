@@ -145,6 +145,7 @@ uiobjectloader:
   deps:
     datalua:
     funcheck:
+    gencode:
     sqls:
     uiobjects:
     uiobjecttypes:

@@ -383,13 +383,9 @@ G.testsuite.generated = function()
       FlipBook = function()
         return CreateFrame('Frame'):CreateAnimationGroup():CreateAnimation('FlipBook')
       end,
-      Font = (function()
-        local count = 0
-        return function()
-          count = count + 1
-          return CreateFont('WowlessFont' .. count)
-        end
-      end)(),
+      Font = function()
+        return CreateFrame('MessageFrame'):GetFontObject()
+      end,
       FontString = function()
         return CreateFrame('Frame'):CreateFontString()
       end,

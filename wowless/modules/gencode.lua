@@ -1,3 +1,5 @@
+local hlist = require('wowless.hlist')
+
 return function(api, env, typecheck, uiobjects)
   local function Check(spec, v, isout)
     local vv, errmsg = typecheck(spec, v, isout)
@@ -22,6 +24,7 @@ return function(api, env, typecheck, uiobjects)
   return {
     Check = Check,
     CreateUIObject = api.CreateUIObject,
+    hlist = hlist,
     Mixin = env.mixin,
     SetParent = api.SetParent,
     ToTexture = ToTexture,

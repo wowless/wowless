@@ -284,8 +284,11 @@ local function mkuiobjectinit(k)
       if fv.init ~= nil then
         init[fk] = valstr(fv.init)
       elseif fv.type == 'hlist' then
-        init[fk] = 'hlist()'
+        init[fk] = 'gencode.hlist()'
       end
+    end
+    if k == 'EditBox' or k == 'MessageFrame' then -- TODO unhack
+      init.fontObject = 'gencode.CreateUIObject(\'font\')'
     end
     uiobjectinits[k] = init
   end
@@ -449,7 +452,7 @@ local uiobjectimplmakers = {
 }
 local uiobjects = {}
 for k, v in pairs(uiobjectdata) do
-  local constructor = { 'local hlist=...;return function()return{' }
+  local constructor = { 'local gencode=...;return function()return{' }
   for fk, fv in sorted(mkuiobjectinit(k)) do
     table.insert(constructor, ('%s=%s,'):format(fk, fv))
   end
