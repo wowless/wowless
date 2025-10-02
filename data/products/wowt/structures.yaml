@@ -1246,6 +1246,8 @@ C_CatalogShop.CatalogShopProductInfo:
     foregroundTexture:
       nilable: true
       type: string
+    hasPendingOrders:
+      type: boolean
     hasTimeRemaining:
       type: boolean
     iconTexture:
