@@ -3942,6 +3942,8 @@ C_CatalogShop.OnLegalDisclaimerClicked:
 C_CatalogShop.OpenCatalogShopInteraction:
   inputs:
   outputs:
+  - name: shoppingSessionUUIDStr
+    type: string
 C_CatalogShop.ProductDisplayedTelemetry:
   inputs:
   - name: categoryId

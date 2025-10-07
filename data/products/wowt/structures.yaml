@@ -1248,8 +1248,6 @@ C_CatalogShop.CatalogShopProductInfo:
       type: string
     hasPendingOrders:
       type: boolean
-    hasTimeRemaining:
-      type: boolean
     iconTexture:
       type: string
     isBundle:
@@ -1274,6 +1272,8 @@ C_CatalogShop.CatalogShopProductInfo:
       type: string
     name:
       type: string
+    numBundleDetailCards:
+      type: number
     optionalWideCardBackgroundTexture:
       nilable: true
       type: string

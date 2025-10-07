@@ -812,12 +812,21 @@ CATALOG_SHOP_ADD_PENDING_PRODUCT:
     type: number
 CATALOG_SHOP_DATA_REFRESH:
   payload:
+  - name: shoppingSessionUUIDStr
+    nilable: true
+    type: string
 CATALOG_SHOP_DISABLED:
   payload:
 CATALOG_SHOP_FETCH_FAILURE:
   payload:
+  - name: shoppingSessionUUIDStr
+    nilable: true
+    type: string
 CATALOG_SHOP_FETCH_SUCCESS:
   payload:
+  - name: shoppingSessionUUIDStr
+    nilable: true
+    type: string
 CATALOG_SHOP_OPEN_SIMPLE_CHECKOUT:
   payload:
   - name: checkoutID
