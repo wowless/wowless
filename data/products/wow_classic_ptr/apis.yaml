@@ -8350,6 +8350,13 @@ C_ItemUpgrade.UpgradeItem:
     name: numUpgrades
     type: number
   outputs:
+C_KeyBindings.GetBindingByKey:
+  inputs:
+  - name: action
+    type: string
+  outputs:
+  - name: binding
+    type: string
 C_KeyBindings.GetBindingIndex:
   inputs:
   - name: action
@@ -16905,7 +16912,6 @@ GetBinding:
     type: string
   outstride: 1
 GetBindingAction:
-GetBindingByKey:
 GetBindingKey:
 GetBindingText:
   outputs:
