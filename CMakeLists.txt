@@ -1029,3 +1029,6 @@ add_custom_target(
   COMMAND ${GIT_EXECUTABLE} -C vendor/dbdefs checkout master
   COMMAND ${GIT_EXECUTABLE} -C vendor/dbdefs pull
   WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
+
+add_lua_executable(warnings ${CMAKE_CURRENT_SOURCE_DIR}/tools/warnings.lua
+                   wowlessyaml)
