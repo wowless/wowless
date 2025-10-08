@@ -8461,9 +8461,14 @@ TextureBase:
 TextureCoordTranslation:
   fields:
   inherits:
-    Translation:
+    TranslationBase:
   methods:
 Translation:
+  fields:
+  inherits:
+    TranslationBase:
+  methods:
+TranslationBase:
   fields:
     offsetX:
       init: 0
@@ -8496,6 +8501,7 @@ Translation:
       - name: offsetY
         type: number
       outputs:
+  virtual: true
 UIObject:
   fields:
     forbidden:
