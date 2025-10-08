@@ -121,14 +121,16 @@ local ptablemap = {
   uiobjectapis = function(p)
     local uiobjects = perproduct(p, 'uiobjects')
     local allscripts = readyaml('data/scripttypes.yaml')
-    local inhrev = {}
     for k, cfg in pairs(uiobjects) do
-      for inh in pairs(cfg.inherits) do
-        inhrev[inh] = inhrev[inh] or {}
-        table.insert(inhrev[inh], k)
-      end
       cfg.fieldinitoverrides = cfg.fieldinitoverrides or {}
       cfg.objectType = cfg.objectType or k
+    end
+    for _, cfg in pairs(uiobjects) do
+      cfg.isa = {}
+      for _, cfg2 in pairs(uiobjects) do
+        cfg.isa[cfg2.objectType] = false
+      end
+      cfg.isa[cfg.objectType] = true
     end
     local function fixup(cfg)
       for inhname in pairs(cfg.inherits) do
@@ -149,21 +151,16 @@ local ptablemap = {
             cfg.scripts[n] = {}
           end
         end
+        for ik, iv in pairs(inh.isa) do
+          if iv then
+            cfg.isa[ik] = true
+          end
+        end
       end
     end
     for _, cfg in pairs(uiobjects) do
       fixup(cfg)
     end
-    local frametypes = {}
-    local function addtype(ty)
-      if not frametypes[ty] then
-        frametypes[ty] = true
-        for _, inh in ipairs(inhrev[ty] or {}) do
-          addtype(inh)
-        end
-      end
-    end
-    addtype('Frame')
     local t = {}
     for k, v in pairs(uiobjects) do
       local ft = {}
@@ -206,7 +203,7 @@ local ptablemap = {
       end
       t[k] = {
         fields = ft,
-        frametype = not not frametypes[k],
+        isa = v.isa,
         methods = mt,
         objtype = v.objectType,
         scripts = st,

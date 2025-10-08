@@ -387,14 +387,14 @@ G.testsuite.generated = function()
             end,
           }
         end
-        if not cfg.frametype then
+        if not cfg.isa.Frame then
           assertCreateFrameFails(name)
         end
         if cfg.virtual then
           return
         end
         local factory = factories[name]
-          or cfg.frametype
+          or cfg.isa.Frame
             and function()
               local frame = G.retn(1, CreateFrame(name))
               assert(type(frame) == 'table')
