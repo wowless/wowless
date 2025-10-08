@@ -128,10 +128,7 @@ local ptablemap = {
         table.insert(inhrev[inh], k)
       end
       cfg.fieldinitoverrides = cfg.fieldinitoverrides or {}
-    end
-    local objTypes = {}
-    for k, cfg in pairs(uiobjects) do
-      objTypes[k] = cfg.objectType or k
+      cfg.objectType = cfg.objectType or k
     end
     local function fixup(cfg)
       for inhname in pairs(cfg.inherits) do
@@ -211,7 +208,7 @@ local ptablemap = {
         fields = ft,
         frametype = not not frametypes[k],
         methods = mt,
-        objtype = objTypes[k],
+        objtype = v.objectType,
         scripts = st,
         singleton = v.singleton,
         virtual = v.virtual,
