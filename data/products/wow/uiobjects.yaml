@@ -1875,6 +1875,12 @@ ColorSelect:
     OnColorSelect:
 ControlPoint:
   fields:
+    offsetX:
+      init: 0
+      type: number
+    offsetY:
+      init: 0
+      type: number
     order:
       init: 99
       type: number
@@ -1882,6 +1888,10 @@ ControlPoint:
     ParentedObject:
   methods:
     GetOffset:
+      impl:
+        getter:
+        - name: offsetX
+        - name: offsetY
       inputs:
       outputs:
       - name: offsetX
@@ -1897,6 +1907,10 @@ ControlPoint:
       - name: order
         type: number
     SetOffset:
+      impl:
+        setter:
+        - name: offsetX
+        - name: offsetY
       inputs:
       - name: offsetX
         type: number
@@ -8446,10 +8460,20 @@ TextureCoordTranslation:
   methods:
 Translation:
   fields:
+    offsetX:
+      init: 0
+      type: number
+    offsetY:
+      init: 0
+      type: number
   inherits:
     Animation:
   methods:
     GetOffset:
+      impl:
+        getter:
+        - name: offsetX
+        - name: offsetY
       inputs:
       outputs:
       - name: offsetX
@@ -8457,6 +8481,10 @@ Translation:
       - name: offsetY
         type: number
     SetOffset:
+      impl:
+        setter:
+        - name: offsetX
+        - name: offsetY
       inputs:
       - name: offsetX
         type: number
