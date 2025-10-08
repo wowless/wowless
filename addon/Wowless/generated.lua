@@ -300,10 +300,7 @@ G.testsuite.generated = function()
     end
     local warners = _G.WowlessData.Config.runtime.warners
     local function assertCreateFrameFails(ty)
-      local success, err = pcall(CreateFrame, ty)
-      assert(not success)
-      local expectedErr = 'CreateFrame: Unknown frame type \'' .. ty .. '\''
-      assertEquals(expectedErr, err:sub(err:len() - expectedErr:len() + 1))
+      G.check2(false, 'CreateFrame: Unknown frame type \'' .. ty .. '\'', pcall(CreateFrame, ty))
       if warners[ty:lower()] then
         table.insert(G.ExpectedLuaWarnings, {
           warnText = 'Unknown frame type: ' .. ty,

@@ -193,7 +193,7 @@ return function(
           SendEvent('LUA_WARNING', 'Unknown frame type: ' .. type)
         end
       end
-      error('CreateFrame: Unknown frame type \'' .. type .. '\'')
+      error('CreateFrame: Unknown frame type \'' .. type .. '\'', 0)
     end
     local tmpls = {}
     for templateName in string.gmatch(templateNames or '', '[^, ]+') do
