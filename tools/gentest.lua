@@ -121,16 +121,20 @@ local ptablemap = {
   uiobjectapis = function(p)
     local uiobjects = perproduct(p, 'uiobjects')
     local allscripts = readyaml('data/scripttypes.yaml')
-    for k, cfg in pairs(uiobjects) do
-      cfg.fieldinitoverrides = cfg.fieldinitoverrides or {}
-      cfg.objectType = cfg.objectType or k
-    end
     for _, cfg in pairs(uiobjects) do
+      cfg.fieldinitoverrides = cfg.fieldinitoverrides or {}
+    end
+    for k, cfg in pairs(uiobjects) do
       cfg.isa = {}
-      for _, cfg2 in pairs(uiobjects) do
-        cfg.isa[cfg2.objectType] = false
+      for k2, cfg2 in pairs(uiobjects) do
+        cfg.isa[k2] = false
+        if cfg2.objectType then
+          cfg.isa[cfg2.objectType] = false
+        end
       end
-      cfg.isa[cfg.objectType] = true
+      if not cfg.virtual or cfg.objectType then
+        cfg.isa[cfg.objectType or k] = true
+      end
     end
     local function fixup(cfg)
       for inhname in pairs(cfg.inherits) do
@@ -205,7 +209,7 @@ local ptablemap = {
         fields = ft,
         isa = v.isa,
         methods = mt,
-        objtype = v.objectType,
+        objtype = v.objectType or k,
         scripts = st,
         singleton = v.singleton,
         virtual = v.virtual,

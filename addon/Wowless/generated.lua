@@ -446,6 +446,15 @@ G.testsuite.generated = function()
             end
             return ftests
           end,
+          isa = (not _G.__wowless or nil) and function()
+            local t = {}
+            for k, v in pairs(cfg.isa) do
+              t[k] = function()
+                return G.match(1, v, obj:IsObjectType(k))
+              end
+            end
+            return t
+          end,
           methods = function()
             local mtests = {}
             for mname in pairs(cfg.methods) do

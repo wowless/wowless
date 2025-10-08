@@ -6401,6 +6401,7 @@ Region:
     StopAnimating:
       inputs:
       outputs:
+  objectType: Region
   virtual: true
 RegionBase:
   fields:
@@ -7904,6 +7905,7 @@ TextureBase:
         name: tiling
         type: boolean
       outputs:
+  objectType: Texture
   virtual: true
 TextureCoordTranslation:
   fields:
