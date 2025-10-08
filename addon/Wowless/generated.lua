@@ -289,15 +289,6 @@ G.testsuite.generated = function()
   end
 
   local function uiobjects()
-    local function assertCreateFrame(ty)
-      local function process(...)
-        assertEquals(1, select('#', ...))
-        local frame = ...
-        assert(type(frame) == 'table')
-        return frame
-      end
-      return process(CreateFrame(ty))
-    end
     local warners = _G.WowlessData.Config.runtime.warners
     local function assertCreateFrameFails(ty)
       G.check2(false, 'CreateFrame: Unknown frame type \'' .. ty .. '\'', pcall(CreateFrame, ty))
@@ -307,59 +298,6 @@ G.testsuite.generated = function()
           warnType = 0,
         })
       end
-    end
-    local indexes = {}
-    local function mkTests(objectTypeName, factory, tests)
-      local obj, mt
-      if objectTypeName == 'Minimap' then
-        obj = _G.Minimap or CreateFrame('Minimap')
-        mt = getmetatable(obj)
-      else
-        obj = assert(factory(), 'factory failed')
-        local obj2 = assert(factory(), 'factory failed')
-        if objectTypeName == 'EditBox' then
-          obj:Hide() -- captures input focus otherwise
-          obj2:Hide() -- captures input focus otherwise
-        end
-        assert(obj ~= obj2)
-        mt = getmetatable(obj)
-        assert(mt == getmetatable(obj2))
-      end
-      assert(mt ~= nil)
-      assertEquals(objectTypeName, obj:GetObjectType())
-      assertEquals(objectTypeName ~= 'Font', obj:IsObjectType('Object'))
-      assert(getmetatable(mt) == nil)
-      local mtk, __index = next(mt)
-      assertEquals('__index', mtk)
-      assertEquals('table', type(__index))
-      assertEquals(nil, next(mt, mtk))
-      assertEquals(nil, getmetatable(__index))
-      assertEquals(nil, indexes[__index])
-      indexes[__index] = true
-      local ftests, mtests, stests = tests(__index, obj)
-      return {
-        contents = function()
-          local udk, udv = next(obj)
-          assertEquals(udk, 0)
-          assertEquals('userdata', type(udv))
-          assert(getmetatable(udv) == nil)
-          assert(next(obj, udk) == nil or objectTypeName == 'Minimap')
-        end,
-        fields = function()
-          return ftests
-        end,
-        methods = function()
-          for k in pairs(__index) do
-            mtests[k] = mtests[k] or function()
-              error('missing')
-            end
-          end
-          return mtests
-        end,
-        scripts = function()
-          return stests
-        end,
-      }
     end
     local factories = {
       Actor = function()
@@ -421,6 +359,7 @@ G.testsuite.generated = function()
         return CreateFrame('Frame'):CreateAnimationGroup():CreateAnimation('VertexColor')
       end,
     }
+    local indexes = {}
     local tests = {}
     for name, cfg in pairs(_G.WowlessData.UIObjectApis) do
       tests[name] = function()
@@ -445,13 +384,53 @@ G.testsuite.generated = function()
         if not cfg.frametype then
           assertCreateFrameFails(name)
         end
-        if not cfg.virtual then
-          local factory = factories[name]
-            or cfg.frametype and function()
-              return assertCreateFrame(name)
+        if cfg.virtual then
+          return
+        end
+        local factory = factories[name]
+          or cfg.frametype
+            and function()
+              local frame = G.retn(1, CreateFrame(name))
+              assert(type(frame) == 'table')
+              return frame
             end
-          assert(factory, 'missing factory')
-          return mkTests(cfg.objtype, factory, function(__index, obj)
+        assert(factory, name)
+        local objectTypeName = cfg.objtype
+        local obj, mt
+        if objectTypeName == 'Minimap' then
+          obj = _G.Minimap or CreateFrame('Minimap')
+          mt = getmetatable(obj)
+        else
+          obj = assert(factory(), 'factory failed')
+          local obj2 = assert(factory(), 'factory failed')
+          if objectTypeName == 'EditBox' then
+            obj:Hide() -- captures input focus otherwise
+            obj2:Hide() -- captures input focus otherwise
+          end
+          assert(obj ~= obj2)
+          mt = getmetatable(obj)
+          assert(mt == getmetatable(obj2))
+        end
+        assert(mt ~= nil)
+        assertEquals(objectTypeName, obj:GetObjectType())
+        assertEquals(objectTypeName ~= 'Font', obj:IsObjectType('Object'))
+        assert(getmetatable(mt) == nil)
+        local mtk, __index = next(mt)
+        assertEquals('__index', mtk)
+        assertEquals('table', type(__index))
+        assertEquals(nil, next(mt, mtk))
+        assertEquals(nil, getmetatable(__index))
+        assertEquals(nil, indexes[__index])
+        indexes[__index] = true
+        return {
+          contents = function()
+            local udk, udv = next(obj)
+            assertEquals(udk, 0)
+            assertEquals('userdata', type(udv))
+            assert(getmetatable(udv) == nil)
+            assert(next(obj, udk) == nil or objectTypeName == 'Minimap')
+          end,
+          fields = function()
             local ftests = {}
             for fk, fv in pairs(cfg.fields) do
               ftests[fk] = function()
@@ -464,21 +443,32 @@ G.testsuite.generated = function()
                 return t
               end
             end
+            return ftests
+          end,
+          methods = function()
             local mtests = {}
             for mname in pairs(cfg.methods) do
               mtests[mname] = function()
                 return checkCFunc(__index[mname])
               end
             end
+            for k in pairs(__index) do
+              mtests[k] = mtests[k] or function()
+                error('missing')
+              end
+            end
+            return mtests
+          end,
+          scripts = function()
             local stests = {}
             for k, v in pairs(cfg.scripts) do
               stests[k] = function()
                 return G.match(1, v, obj:HasScript(k))
               end
             end
-            return ftests, mtests, stests
-          end)
-        end
+            return stests
+          end,
+        }
       end
     end
     return tests
