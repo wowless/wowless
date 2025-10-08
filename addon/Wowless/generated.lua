@@ -414,7 +414,6 @@ G.testsuite.generated = function()
         end
         assert(mt ~= nil)
         assertEquals(cfg.objtype, obj:GetObjectType())
-        assertEquals(cfg.objtype ~= 'Font', obj:IsObjectType('Object'))
         assert(getmetatable(mt) == nil)
         local mtk, __index = next(mt)
         assertEquals('__index', mtk)

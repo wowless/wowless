@@ -6046,6 +6046,7 @@ ParentedObjectBase:
         name: clearOtherKeys
         type: boolean
       outputs:
+  objectType: Object
   virtual: true
 Path:
   fields:
