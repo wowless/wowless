@@ -315,6 +315,12 @@ G.testsuite.generated = function()
       ControlPoint = function()
         return CreateFrame('Frame'):CreateAnimationGroup():CreateAnimation('Path'):CreateControlPoint()
       end,
+      EditBox = function()
+        -- Hide to avoid focus issues. Using a hidden parent instead breaks the default frame level test.
+        local frame = CreateFrame('EditBox')
+        frame:Hide()
+        return frame
+      end,
       FlipBook = function()
         return CreateFrame('Frame'):CreateAnimationGroup():CreateAnimation('FlipBook')
       end,
@@ -402,10 +408,6 @@ G.testsuite.generated = function()
         else
           obj = assert(factory(), 'factory failed')
           local obj2 = assert(factory(), 'factory failed')
-          if cfg.objtype == 'EditBox' then
-            obj:Hide() -- captures input focus otherwise
-            obj2:Hide() -- captures input focus otherwise
-          end
           assert(obj ~= obj2)
           mt = getmetatable(obj)
           assert(mt == getmetatable(obj2))
