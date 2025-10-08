@@ -395,15 +395,14 @@ G.testsuite.generated = function()
               return frame
             end
         assert(factory, name)
-        local objectTypeName = cfg.objtype
         local obj, mt
-        if objectTypeName == 'Minimap' then
-          obj = _G.Minimap or CreateFrame('Minimap')
+        if cfg.singleton then
+          obj = _G[name] or CreateFrame(name)
           mt = getmetatable(obj)
         else
           obj = assert(factory(), 'factory failed')
           local obj2 = assert(factory(), 'factory failed')
-          if objectTypeName == 'EditBox' then
+          if cfg.objtype == 'EditBox' then
             obj:Hide() -- captures input focus otherwise
             obj2:Hide() -- captures input focus otherwise
           end
@@ -412,8 +411,8 @@ G.testsuite.generated = function()
           assert(mt == getmetatable(obj2))
         end
         assert(mt ~= nil)
-        assertEquals(objectTypeName, obj:GetObjectType())
-        assertEquals(objectTypeName ~= 'Font', obj:IsObjectType('Object'))
+        assertEquals(cfg.objtype, obj:GetObjectType())
+        assertEquals(cfg.objtype ~= 'Font', obj:IsObjectType('Object'))
         assert(getmetatable(mt) == nil)
         local mtk, __index = next(mt)
         assertEquals('__index', mtk)
@@ -428,7 +427,7 @@ G.testsuite.generated = function()
             assertEquals(udk, 0)
             assertEquals('userdata', type(udv))
             assert(getmetatable(udv) == nil)
-            assert(next(obj, udk) == nil or objectTypeName == 'Minimap')
+            assert(next(obj, udk) == nil or cfg.singleton)
           end,
           fields = function()
             local ftests = {}

@@ -196,10 +196,10 @@ local ptablemap = {
       end
       -- TODO remove these super duper field hacks
       ft.parent = nil
-      if k == 'EditBox' then
-        ft.shown.init = false
-      elseif k == 'Minimap' then
+      if v.singleton then
         ft = {}
+      elseif k == 'EditBox' then
+        ft.shown.init = false
       end
       local st = {}
       if mt.HasScript then
@@ -213,6 +213,7 @@ local ptablemap = {
         methods = mt,
         objtype = objTypes[k],
         scripts = st,
+        singleton = v.singleton,
         virtual = v.virtual,
       }
     end
