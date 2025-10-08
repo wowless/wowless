@@ -303,10 +303,8 @@ Texture/SetTexCoord:
 Texture/SetTexture:
   luafile:
 UIObject/GetObjectType:
-  luafile:
-    modules:
-      uiobjecttypes:
+  moduledelegate:
+    name: uiobjecttypes
 UIObject/IsObjectType:
-  luafile:
-    modules:
-      uiobjecttypes:
+  moduledelegate:
+    name: uiobjecttypes
