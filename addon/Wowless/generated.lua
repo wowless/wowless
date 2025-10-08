@@ -449,7 +449,14 @@ G.testsuite.generated = function()
             local t = {}
             for k, v in pairs(cfg.isa) do
               t[k] = function()
-                return G.match(1, v, obj:IsObjectType(k))
+                return {
+                  lowercase = function()
+                    return G.match(1, v, obj:IsObjectType(k:lower()))
+                  end,
+                  mixedcase = function()
+                    return G.match(1, v, obj:IsObjectType(k))
+                  end,
+                }
               end
             end
             return t
