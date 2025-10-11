@@ -57,6 +57,14 @@ Actor:
     ClearModel:
       inputs:
       outputs:
+    DetachFromMount:
+      inputs:
+      - name: rider
+        type:
+          uiobject: Actor
+      outputs:
+      - name: success
+        type: boolean
     Dress:
       inputs:
       outputs:
@@ -396,6 +404,9 @@ Actor:
       - default: false
         name: holdBowString
         type: boolean
+      - name: customRaceID
+        nilable: true
+        type: number
       outputs:
       - name: success
         type: boolean
@@ -446,6 +457,9 @@ Actor:
       - default: true
         name: usePlayerNativeForm
         type: boolean
+      - name: customRaceID
+        nilable: true
+        type: number
       outputs:
       - name: success
         type: boolean
@@ -1017,11 +1031,6 @@ Browser:
       outputs:
     NavigateStop:
       inputs:
-      outputs:
-    NavigateTo:
-      inputs:
-      - name: url
-        type: string
       outputs:
     OpenExternalLink:
       inputs:
@@ -1993,6 +2002,11 @@ Cooldown:
       outputs:
       - name: hideNumbers
         type: boolean
+    GetMinimumCountdownDuration:
+      inputs:
+      outputs:
+      - name: milliseconds
+        type: number
     GetReverse:
       inputs:
       outputs:
@@ -2134,6 +2148,11 @@ Cooldown:
       - default: false
         name: hideNumbers
         type: boolean
+      outputs:
+    SetMinimumCountdownDuration:
+      inputs:
+      - name: milliseconds
+        type: number
       outputs:
     SetReverse:
       inputs:
@@ -5512,6 +5531,11 @@ ModelScene:
       - name: index
         type: number
       outputs:
+    GetAllowOverlappedModels:
+      inputs:
+      outputs:
+      - name: allowOverlappedModels
+        type: boolean
     GetCameraFarClip:
       impl:
         getter:
@@ -5692,6 +5716,11 @@ ModelScene:
         type: number
       - name: depth
         type: number
+    SetAllowOverlappedModels:
+      inputs:
+      - name: allowOverlappedModels
+        type: boolean
+      outputs:
     SetCameraFarClip:
       impl:
         setter:
@@ -6884,6 +6913,13 @@ Region:
       impl:
         uiobjectimpl: Region/SetPoint
       manualinputs: true
+      outputs:
+    SetPointsOffset:
+      inputs:
+      - name: x
+        type: number
+      - name: y
+        type: number
       outputs:
     SetPropagateMouseClicks:
       inputs:

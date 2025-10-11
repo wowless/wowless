@@ -806,6 +806,51 @@ CAPTUREFRAMES_FAILED:
   payload:
 CAPTUREFRAMES_SUCCEEDED:
   payload:
+CATALOG_SHOP_ADD_PENDING_PRODUCT:
+  payload:
+  - name: productID
+    type: number
+CATALOG_SHOP_DATA_REFRESH:
+  payload:
+  - name: shoppingSessionUUIDStr
+    nilable: true
+    type: string
+CATALOG_SHOP_DISABLED:
+  payload:
+CATALOG_SHOP_FETCH_FAILURE:
+  payload:
+  - name: shoppingSessionUUIDStr
+    nilable: true
+    type: string
+CATALOG_SHOP_FETCH_SUCCESS:
+  payload:
+  - name: shoppingSessionUUIDStr
+    nilable: true
+    type: string
+CATALOG_SHOP_OPEN_SIMPLE_CHECKOUT:
+  payload:
+  - name: checkoutID
+    type: number
+CATALOG_SHOP_PMT_IMAGE_DOWNLOADED:
+  payload:
+  - name: catalogProductID
+    type: number
+CATALOG_SHOP_PURCHASE_SUCCESS:
+  payload:
+  - name: productID
+    type: number
+CATALOG_SHOP_REBUILD_SCROLL_BOX:
+  payload:
+CATALOG_SHOP_REMOVE_PENDING_PRODUCT:
+  payload:
+  - name: productID
+    type: number
+CATALOG_SHOP_RESULT_ERROR:
+  payload:
+CATALOG_SHOP_SPECIFIC_PRODUCT_REFRESH:
+  payload:
+  - name: productID
+    type: number
 CAUTIONARY_CHANNEL_MESSAGE:
   payload:
   - name: confirmNumber
@@ -3823,6 +3868,8 @@ CONVERT_TO_BIND_TO_ACCOUNT_CONFIRM:
   payload:
 CONVERT_TO_RAID_CONFIRMATION:
   payload:
+COOLDOWN_VIEWER_DATA_LOADED:
+  payload:
 COOLDOWN_VIEWER_SPELL_OVERRIDE_UPDATED:
   payload:
   - name: baseSpellID
@@ -5066,9 +5113,13 @@ LEAVE_PARTY_CONFIRMATION:
       enum: LeavePartyConfirmReason
 LEAVING_TUTORIAL_AREA:
   payload:
+LET_RECENT_ALLIES_SEE_LOCATION_SETTING_UPDATED:
+  payload:
 LFG_BOOT_PROPOSAL_UPDATE:
   payload:
 LFG_COMPLETION_REWARD:
+  payload:
+LFG_COOLDOWNS_UPDATED:
   payload:
 LFG_ENABLED_STATE_CHANGED:
   payload:
@@ -5137,6 +5188,8 @@ LFG_LIST_SEARCH_RESULT_UPDATED:
   - name: searchResultID
     type: number
 LFG_LIST_SEARCH_RESULTS_RECEIVED:
+  payload:
+LFG_LIST_UPDATE_SEARCH_RESULTS:
   payload:
 LFG_LOCK_INFO_RECEIVED:
   payload:
@@ -6488,10 +6541,26 @@ RECEIVED_ACHIEVEMENT_MEMBER_LIST:
   payload:
   - name: achievementID
     type: number
+RECENT_ALLIES_CACHE_UPDATE:
+  payload:
+RECENT_ALLIES_DATA_READY:
+  payload:
+RECENT_ALLIES_SYSTEM_STATUS_UPDATED:
+  payload:
+RECENT_ALLY_DATA_UPDATED:
+  payload:
+  - name: characterGUID
+    type: string
 REJECTED_MATCHMAKING_PARTY_INVITE:
   payload:
   - name: name
     type: string
+REMIX_ARTIFACT_ITEM_SPECS_LOADED:
+  payload:
+  - name: success
+    type: boolean
+REMIX_ARTIFACT_UPDATE:
+  payload:
 REMIX_END_OF_EVENT:
   payload:
 REPLACE_ENCHANT:
@@ -6852,6 +6921,11 @@ SOCKET_INFO_REFUNDABLE_CONFIRM:
   payload:
 SOCKET_INFO_SUCCESS:
   payload:
+SOCKET_INFO_UI_EVENT_REGISTRATION_UPDATE:
+  payload:
+  - name: uiType
+    type:
+      enum: ItemSocketInfoUIType
 SOCKET_INFO_UPDATE:
   payload:
 SOULBIND_ACTIVATED:
@@ -7164,6 +7238,8 @@ SUBSCRIPTION_CHANGED_KICK_IMMINENT:
 SUPER_TRACKING_CHANGED:
   payload:
 SUPER_TRACKING_PATH_UPDATED:
+  payload:
+SURVEY_DELIVERED:
   payload:
 SYSMSG:
   payload:
@@ -7548,6 +7624,10 @@ TRIAL_CAP_REACHED_MONEY:
   payload:
 TRIAL_STATUS_UPDATE:
   payload:
+TRY_PURCHASE_TO_NODE_PARTIAL_SUCCESS:
+  payload:
+  - name: nodeFinishedOn
+    type: number
 TUTORIAL_HIGHLIGHT_SPELL:
   payload:
   - name: spellID
