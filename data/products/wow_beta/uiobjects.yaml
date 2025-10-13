@@ -1,0 +1,8750 @@
+Actor:
+  fields:
+    animationBlendOperation:
+      init: 1
+      type:
+        enum: ModelBlendOperation
+    autoDress:
+      init: true
+      type: boolean
+    desaturation:
+      init: 0
+      type: number
+    obeyHideInTransmogFlag:
+      init: false
+      type: boolean
+    pitch:
+      init: 0
+      type: number
+    roll:
+      init: 0
+      type: number
+    useTransmogChoices:
+      init: false
+      type: boolean
+    useTransmogSkin:
+      init: false
+      type: boolean
+    yaw:
+      init: 0
+      type: number
+  inherits:
+    ParentedObjectBase:
+    RegionBase:
+    ScriptObjectBase:
+  methods:
+    AttachToMount:
+      inputs:
+      - name: rider
+        type:
+          uiobject: Actor
+      - name: animation
+        type: number
+      - name: spellKitVisualID
+        nilable: true
+        type: number
+      outputs:
+      - name: success
+        type: boolean
+    CalculateMountScale:
+      inputs:
+      - name: rider
+        type:
+          uiobject: Actor
+      outputs:
+      - name: scale
+        type: number
+    ClearModel:
+      inputs:
+      outputs:
+    DetachFromMount:
+      inputs:
+      - name: rider
+        type:
+          uiobject: Actor
+      outputs:
+      - name: success
+        type: boolean
+    Dress:
+      inputs:
+      outputs:
+    DressPlayerSlot:
+      inputs:
+      - name: invSlot
+        type: number
+      outputs:
+    GetActiveBoundingBox:
+      inputs:
+      outputs:
+      - name: boxBottom
+        type:
+          structure: vector3
+      - name: boxTop
+        type:
+          structure: vector3
+    GetAnimation:
+      inputs:
+      outputs:
+      - name: animation
+        type: number
+    GetAnimationBlendOperation:
+      impl:
+        getter:
+        - name: animationBlendOperation
+      inputs:
+      outputs:
+      - name: blendOp
+        type:
+          enum: ModelBlendOperation
+    GetAnimationVariation:
+      inputs:
+      outputs:
+      - name: variation
+        type: number
+    GetAutoDress:
+      impl:
+        getter:
+        - name: autoDress
+      inputs:
+      outputs:
+      - name: autoDress
+        type: boolean
+    GetDesaturation:
+      impl:
+        getter:
+        - name: desaturation
+      inputs:
+      outputs:
+      - name: strength
+        type: number
+    GetItemTransmogInfo:
+      inputs:
+      - name: inventorySlots
+        type: number
+      mayreturnnothing: true
+      outputs:
+      - name: itemTransmogInfo
+        nilable: true
+        type:
+          structure: ItemTransmogInfo
+    GetItemTransmogInfoList:
+      inputs:
+      outputs:
+      - name: infoList
+        type:
+          arrayof:
+            structure: ItemTransmogInfo
+    GetMaxBoundingBox:
+      inputs:
+      outputs:
+      - name: boxBottom
+        type:
+          structure: vector3
+      - name: boxTop
+        type:
+          structure: vector3
+    GetModelFileID:
+      inputs:
+      outputs:
+      - name: file
+        type: number
+    GetModelPath:
+      inputs:
+      outputs:
+      - name: path
+        type: string
+    GetModelUnitGUID:
+      inputs:
+      outputs:
+      - name: guid
+        type: string
+    GetObeyHideInTransmogFlag:
+      impl:
+        getter:
+        - name: obeyHideInTransmogFlag
+      inputs:
+      outputs:
+      - name: obey
+        type: boolean
+    GetParticleOverrideScale:
+      inputs:
+      outputs:
+      - name: scale
+        nilable: true
+        type: number
+    GetPaused:
+      inputs:
+      outputs:
+      - name: paused
+        type: boolean
+      - name: globalPaused
+        type: boolean
+    GetPitch:
+      impl:
+        getter:
+        - name: pitch
+      inputs:
+      outputs:
+      - name: pitch
+        type: number
+    GetPosition:
+      inputs:
+      outputs:
+      - name: positionX
+        type: number
+      - name: positionY
+        type: number
+      - name: positionZ
+        type: number
+    GetRoll:
+      impl:
+        getter:
+        - name: roll
+      inputs:
+      outputs:
+      - name: roll
+        type: number
+    GetSheathed:
+      inputs:
+      outputs:
+      - name: sheathed
+        type: boolean
+    GetSpellVisualKit:
+      inputs:
+      outputs:
+      - name: spellVisualKitID
+        type: number
+    GetUseTransmogChoices:
+      impl:
+        getter:
+        - name: useTransmogChoices
+      inputs:
+      outputs:
+      - name: use
+        type: boolean
+    GetUseTransmogSkin:
+      impl:
+        getter:
+        - name: useTransmogSkin
+      inputs:
+      outputs:
+      - name: use
+        type: boolean
+    GetYaw:
+      impl:
+        getter:
+        - name: yaw
+      inputs:
+      outputs:
+      - name: yaw
+        type: number
+    IsGeoReady:
+      inputs:
+      outputs:
+      - name: isReady
+        type: boolean
+    IsLoaded:
+      inputs:
+      outputs:
+      - name: isLoaded
+        type: boolean
+    IsSlotAllowed:
+      inputs:
+      - name: inventorySlots
+        type: number
+      outputs:
+      - name: allowed
+        type: boolean
+    IsSlotVisible:
+      inputs:
+      - name: inventorySlots
+        type: number
+      outputs:
+      - name: visible
+        type: boolean
+    IsUsingCenterForOrigin:
+      inputs:
+      outputs:
+      - name: x
+        type: boolean
+      - name: y
+        type: boolean
+      - name: z
+        type: boolean
+    PlayAnimationKit:
+      inputs:
+      - name: animationKit
+        type: number
+      - default: false
+        name: isLooping
+        type: boolean
+      outputs:
+    ReleaseFrontEndCharacterDisplays:
+      inputs:
+      outputs:
+      - name: success
+        type: boolean
+    ResetNextHandSlot:
+      inputs:
+      outputs:
+    SetAnimation:
+      inputs:
+      - name: animation
+        type: number
+      - name: variation
+        nilable: true
+        type: number
+      - default: 1
+        name: animSpeed
+        type: number
+      - default: 0
+        name: animOffsetSeconds
+        type: number
+      outputs:
+    SetAnimationBlendOperation:
+      impl:
+        setter:
+        - name: animationBlendOperation
+      inputs:
+      - name: blendOp
+        type:
+          enum: ModelBlendOperation
+      outputs:
+    SetAutoDress:
+      impl:
+        setter:
+        - name: autoDress
+      inputs:
+      - name: autoDress
+        type: boolean
+      outputs:
+    SetDesaturation:
+      impl:
+        setter:
+        - name: desaturation
+      inputs:
+      - name: strength
+        type: number
+      outputs:
+    SetFrontEndLobbyModelFromDefaultCharacterDisplay:
+      inputs:
+      - name: characterIndex
+        type: number
+      outputs:
+      - name: success
+        type: boolean
+    SetItemTransmogInfo:
+      inputs:
+      - name: transmogInfo
+        type:
+          structure: ItemTransmogInfo
+      - name: inventorySlots
+        nilable: true
+        type: number
+      - default: false
+        name: ignoreChildItems
+        type: boolean
+      outputs:
+      - name: result
+        type:
+          enum: ItemTryOnReason
+    SetModelByCreatureDisplayID:
+      inputs:
+      - name: creatureDisplayID
+        type: number
+      - default: false
+        name: useActivePlayerCustomizations
+        type: boolean
+      outputs:
+      - name: success
+        type: boolean
+    SetModelByFileID:
+      inputs:
+      - name: asset
+        type: FileAsset
+      - default: false
+        name: useMips
+        type: boolean
+      outputs:
+      - name: success
+        type: boolean
+    SetModelByHyperlink:
+      inputs:
+      - name: link
+        type: string
+      outputs:
+      - name: success
+        type: boolean
+    SetModelByPath:
+      inputs:
+      - name: asset
+        type: FileAsset
+      - default: false
+        name: useMips
+        type: boolean
+      outputs:
+      - name: success
+        type: boolean
+    SetModelByUnit:
+      inputs:
+      - name: unit
+        type: unit
+      - default: false
+        name: sheatheWeapons
+        type: boolean
+      - default: true
+        name: autoDress
+        type: boolean
+      - default: false
+        name: hideWeapons
+        type: boolean
+      - default: true
+        name: usePlayerNativeForm
+        type: boolean
+      - default: false
+        name: holdBowString
+        type: boolean
+      - name: customRaceID
+        nilable: true
+        type: number
+      outputs:
+      - name: success
+        type: boolean
+    SetObeyHideInTransmogFlag:
+      impl:
+        setter:
+        - name: obeyHideInTransmogFlag
+      inputs:
+      - name: obey
+        type: boolean
+      outputs:
+    SetParticleOverrideScale:
+      inputs:
+      - name: scale
+        nilable: true
+        type: number
+      outputs:
+    SetPaused:
+      inputs:
+      - name: paused
+        type: boolean
+      - default: true
+        name: affectsGlobalPause
+        type: boolean
+      outputs:
+    SetPitch:
+      impl:
+        setter:
+        - name: pitch
+      inputs:
+      - name: pitch
+        type: number
+      outputs:
+    SetPlayerModelFromGlues:
+      inputs:
+      - name: characterIndex
+        nilable: true
+        type: number
+      - default: false
+        name: sheatheWeapons
+        type: boolean
+      - default: true
+        name: autoDress
+        type: boolean
+      - default: false
+        name: hideWeapons
+        type: boolean
+      - default: true
+        name: usePlayerNativeForm
+        type: boolean
+      - name: customRaceID
+        nilable: true
+        type: number
+      outputs:
+      - name: success
+        type: boolean
+    SetPosition:
+      inputs:
+      - name: positionX
+        type: number
+      - name: positionY
+        type: number
+      - name: positionZ
+        type: number
+      outputs:
+    SetRoll:
+      impl:
+        setter:
+        - name: roll
+      inputs:
+      - name: roll
+        type: number
+      outputs:
+    SetSheathed:
+      inputs:
+      - name: sheathed
+        type: boolean
+      - default: false
+        name: hidden
+        type: boolean
+      outputs:
+    SetSpellVisualKit:
+      inputs:
+      - default: 0
+        name: spellVisualKitID
+        type: number
+      - default: false
+        name: oneShot
+        type: boolean
+      outputs:
+    SetUseCenterForOrigin:
+      inputs:
+      - default: false
+        name: x
+        type: boolean
+      - default: false
+        name: y
+        type: boolean
+      - default: false
+        name: z
+        type: boolean
+      outputs:
+    SetUseTransmogChoices:
+      impl:
+        setter:
+        - name: useTransmogChoices
+      inputs:
+      - name: use
+        type: boolean
+      outputs:
+    SetUseTransmogSkin:
+      impl:
+        setter:
+        - name: useTransmogSkin
+      inputs:
+      - name: use
+        type: boolean
+      outputs:
+    SetYaw:
+      impl:
+        setter:
+        - name: yaw
+      inputs:
+      - name: yaw
+        type: number
+      outputs:
+    StopAnimationKit:
+      inputs:
+      outputs:
+    TryOn:
+      inputs:
+      - name: itemLinkOrItemModifiedAppearanceID
+        type: string
+      - name: handSlotName
+        nilable: true
+        type: string
+      - default: 0
+        name: spellEnchantmentID
+        type: number
+      outputs:
+      - name: reason
+        nilable: true
+        type:
+          enum: ItemTryOnReason
+    Undress:
+      inputs:
+      - default: true
+        name: includeWeapons
+        type: boolean
+      outputs:
+    UndressSlot:
+      inputs:
+      - name: inventorySlots
+        type: number
+      outputs:
+  objectType: ModelSceneActor
+  scripts:
+    OnAnimFinished:
+    OnLoad:
+    OnModelCleared:
+    OnModelLoaded:
+    OnModelLoading:
+    OnUpdate:
+Alpha:
+  fields:
+    fromAlpha:
+      init: 0
+      type: number
+    toAlpha:
+      init: 0
+      type: number
+  inherits:
+    Animation:
+  methods:
+    GetFromAlpha:
+      impl:
+        getter:
+        - name: fromAlpha
+      inputs:
+      outputs:
+      - name: normalizedAlpha
+        type: number
+    GetToAlpha:
+      impl:
+        getter:
+        - name: toAlpha
+      inputs:
+      outputs:
+      - name: normalizedAlpha
+        type: number
+    SetFromAlpha:
+      impl:
+        setter:
+        - name: fromAlpha
+      inputs:
+      - name: normalizedAlpha
+        type: number
+      outputs:
+    SetToAlpha:
+      impl:
+        setter:
+        - name: toAlpha
+      inputs:
+      - name: normalizedAlpha
+        type: number
+      outputs:
+Animation:
+  fields:
+    endDelay:
+      init: 0
+      type: number
+    smoothing:
+      init: NONE
+      type:
+        stringenum: SmoothingType
+    startDelay:
+      init: 0
+      type: number
+  inherits:
+    ParentedObject:
+    ScriptObject:
+  methods:
+    GetDuration:
+      inputs:
+      outputs:
+      - name: durationSec
+        type: number
+    GetElapsed:
+      inputs:
+      outputs:
+      - name: elapsedSec
+        type: number
+    GetEndDelay:
+      impl:
+        getter:
+        - name: endDelay
+      inputs:
+      outputs:
+      - name: delaySec
+        type: number
+    GetOrder:
+      inputs:
+      outputs:
+      - name: order
+        type: number
+    GetProgress:
+      inputs:
+      outputs:
+      - name: progress
+        type: number
+    GetRegionParent:
+      impl:
+        uiobjectimpl: Animation/GetRegionParent
+      inputs:
+      outputs:
+      - name: region
+        nilable: true
+        type:
+          uiobject: UIObject
+    GetSmoothing:
+      impl:
+        getter:
+        - name: smoothing
+      inputs:
+      outputs:
+      - name: weights
+        type:
+          stringenum: SmoothingType
+    GetSmoothProgress:
+      inputs:
+      outputs:
+      - name: progress
+        type: number
+    GetStartDelay:
+      impl:
+        getter:
+        - name: startDelay
+      inputs:
+      outputs:
+      - name: delaySec
+        type: number
+    GetTarget:
+      impl:
+        uiobjectimpl: Animation/GetTarget
+      inputs:
+      outputs:
+      - name: target
+        nilable: true
+        type:
+          uiobject: UIObject
+    IsDelaying:
+      inputs:
+      outputs:
+      - name: isDelaying
+        type: boolean
+    IsDone:
+      inputs:
+      outputs:
+      - name: isDone
+        type: boolean
+    IsPaused:
+      inputs:
+      outputs:
+      - name: isPaused
+        type: boolean
+    IsPlaying:
+      inputs:
+      outputs:
+      - name: isPlaying
+        type: boolean
+    IsStopped:
+      inputs:
+      outputs:
+      - name: isStopped
+        type: boolean
+    Pause:
+      inputs:
+      outputs:
+    Play:
+      inputs:
+      outputs:
+    Restart:
+      inputs:
+      outputs:
+    SetChildKey:
+      inputs:
+      - name: childKey
+        type: string
+      outputs:
+      - name: success
+        type: boolean
+    SetDuration:
+      inputs:
+      - name: durationSec
+        type: number
+      - default: true
+        name: recomputeGroupDuration
+        type: boolean
+      outputs:
+    SetEndDelay:
+      inputs:
+      - name: delaySec
+        type: number
+      - default: true
+        name: recomputeGroupDuration
+        type: boolean
+      outputs:
+    SetOrder:
+      inputs:
+      - name: newOrder
+        type: number
+      outputs:
+    SetPlaying:
+      inputs:
+      - name: play
+        type: boolean
+      outputs:
+    SetSmoothing:
+      impl:
+        setter:
+        - name: smoothing
+      inputs:
+      - name: weights
+        type:
+          stringenum: SmoothingType
+      outputs:
+    SetSmoothProgress:
+      inputs:
+      - name: durationSec
+        type: number
+      outputs:
+    SetStartDelay:
+      inputs:
+      - name: delaySec
+        type: number
+      - default: true
+        name: recomputeGroupDuration
+        type: boolean
+      outputs:
+    SetTarget:
+      inputs:
+      - name: target
+        type:
+          uiobject: UIObject
+      outputs:
+      - name: success
+        type: boolean
+    SetTargetKey:
+      inputs:
+      - name: key
+        type: string
+      outputs:
+      - name: success
+        type: boolean
+    SetTargetName:
+      inputs:
+      - name: name
+        type: string
+      outputs:
+      - name: success
+        type: boolean
+    SetTargetParent:
+      inputs:
+      outputs:
+      - name: success
+        type: boolean
+    Stop:
+      inputs:
+      outputs:
+  scripts:
+    OnFinished:
+    OnPlay:
+    OnStop:
+    OnUpdate:
+AnimationGroup:
+  fields:
+    animationSpeedMultiplier:
+      init: 1
+      type: number
+    looping:
+      init: NONE
+      type:
+        stringenum: LoopType
+  inherits:
+    ParentedObjectBase:
+    ScriptObject:
+  methods:
+    CreateAnimation:
+      impl:
+        uiobjectimpl: AnimationGroup/CreateAnimation
+      inputs:
+      - name: animationType
+        nilable: true
+        type: string
+      - name: name
+        nilable: true
+        type: string
+      - name: templateName
+        nilable: true
+        type: string
+      outputs:
+      - name: anim
+        type:
+          uiobject: Animation
+    Finish:
+      inputs:
+      outputs:
+    GetAnimations:
+      impl:
+        uiobjectimpl: AnimationGroup/GetAnimations
+      inputs:
+      outputs:
+      - name: anims
+        type:
+          uiobject: Animation
+      outstride: 1
+    GetAnimationSpeedMultiplier:
+      impl:
+        getter:
+        - name: animationSpeedMultiplier
+      inputs:
+      outputs:
+      - name: animationSpeedMultiplier
+        type: number
+    GetDuration:
+      inputs:
+      outputs:
+      - name: durationSec
+        type: number
+    GetElapsed:
+      inputs:
+      outputs:
+      - name: elapsedSec
+        type: number
+    GetLooping:
+      impl:
+        getter:
+        - name: looping
+      inputs:
+      outputs:
+      - name: loopType
+        type:
+          stringenum: LoopType
+    GetLoopState:
+      inputs:
+      outputs:
+      - name: loopState
+        type: string
+    GetProgress:
+      inputs:
+      outputs:
+      - name: progress
+        type: number
+    IsDone:
+      inputs:
+      outputs:
+      - name: isDone
+        type: boolean
+    IsPaused:
+      inputs:
+      outputs:
+      - name: isPaused
+        type: boolean
+    IsPendingFinish:
+      inputs:
+      outputs:
+      - name: isPendingFinish
+        type: boolean
+    IsPlaying:
+      inputs:
+      outputs:
+      - name: isPlaying
+        type: boolean
+    IsReverse:
+      inputs:
+      outputs:
+      - name: isReverse
+        type: boolean
+    IsSetToFinalAlpha:
+      inputs:
+      outputs:
+      - name: isSetToFinalAlpha
+        type: boolean
+    Pause:
+      inputs:
+      outputs:
+    Play:
+      inputs:
+      - default: false
+        name: reverse
+        type: boolean
+      - default: 0
+        name: offset
+        type: number
+      outputs:
+    RemoveAnimations:
+      inputs:
+      outputs:
+    Restart:
+      inputs:
+      - default: false
+        name: reverse
+        type: boolean
+      - default: 0
+        name: offset
+        type: number
+      outputs:
+    SetAnimationSpeedMultiplier:
+      impl:
+        setter:
+        - name: animationSpeedMultiplier
+      inputs:
+      - name: animationSpeedMultiplier
+        type: number
+      outputs:
+    SetLooping:
+      impl:
+        setter:
+        - name: looping
+      inputs:
+      - name: loopType
+        type:
+          stringenum: LoopType
+      outputs:
+    SetPlaying:
+      inputs:
+      - name: play
+        type: boolean
+      outputs:
+    SetToFinalAlpha:
+      inputs:
+      - name: setToFinalAlpha
+        type: boolean
+      outputs:
+    Stop:
+      inputs:
+      outputs:
+  scripts:
+    OnFinished:
+    OnLoop:
+    OnPlay:
+    OnStop:
+    OnUpdate:
+ArchaeologyDigSiteFrame:
+  fields:
+  inherits:
+    Frame:
+    POIFrame:
+  methods:
+Browser:
+  fieldinitoverrides:
+    mouseClickEnabled: true
+    mouseMotionEnabled: true
+    mouseWheelEnabled: true
+    resizable: true
+  fields:
+  inherits:
+    Frame:
+  methods:
+    ClearFocus:
+      inputs:
+      outputs:
+    CopyExternalLink:
+      inputs:
+      outputs:
+    DeleteCookies:
+      inputs:
+      outputs:
+    NavigateBack:
+      inputs:
+      outputs:
+    NavigateForward:
+      inputs:
+      outputs:
+    NavigateHome:
+      inputs:
+      - name: urlType
+        type: string
+      outputs:
+    NavigateReload:
+      inputs:
+      outputs:
+    NavigateStop:
+      inputs:
+      outputs:
+    OpenExternalLink:
+      inputs:
+      outputs:
+    OpenTicket:
+      inputs:
+      - name: index
+        type: number
+      outputs:
+    SetFocus:
+      inputs:
+      outputs:
+    SetZoom:
+      inputs:
+      - name: zoom
+        type: number
+      outputs:
+  scripts:
+    OnButtonUpdate:
+    OnEditFocusGained:
+    OnEditFocusLost:
+    OnError:
+    OnEscapePressed:
+    OnExternalLink:
+Button:
+  fieldinitoverrides:
+    mouseClickEnabled: true
+    mouseMotionEnabled: true
+  fields:
+    beingClicked:
+      init: false
+      type: boolean
+    buttonLocked:
+      init: false
+      type: boolean
+    buttonState:
+      init: NORMAL
+      type:
+        stringenum: SimpleButtonStateToken
+    disabledFontObject:
+      nilable: true
+      type:
+        uiobject: Font
+    disabledTexture:
+      nilable: true
+      type:
+        uiobject: Texture
+    fontstring:
+      nilable: true
+      type:
+        uiobject: FontString
+    highlightFontObject:
+      nilable: true
+      type:
+        uiobject: Font
+    highlightTexture:
+      nilable: true
+      type:
+        uiobject: Texture
+    motionScriptsWhileDisabled:
+      init: false
+      type: boolean
+    normalFontObject:
+      nilable: true
+      type:
+        uiobject: Font
+    normalTexture:
+      nilable: true
+      type:
+        uiobject: Texture
+    pushedTextOffsetX:
+      dynamicinit: true
+      init: 0
+      type: number
+    pushedTextOffsetY:
+      dynamicinit: true
+      init: 0
+      type: number
+    pushedTexture:
+      nilable: true
+      type:
+        uiobject: Texture
+    registeredClicks:
+      init:
+        leftbuttonup: true
+      type: table
+  inherits:
+    Frame:
+  methods:
+    ClearDisabledTexture:
+      inputs:
+      outputs:
+    ClearHighlightTexture:
+      inputs:
+      outputs:
+    ClearNormalTexture:
+      inputs:
+      outputs:
+    ClearPushedTexture:
+      inputs:
+      outputs:
+    Click:
+      impl:
+        uiobjectimpl: Button/Click
+      inputs:
+      - default: LeftButton
+        name: button
+        type: string
+      - default: false
+        name: isDown
+        type: boolean
+      outputs:
+    Disable:
+      impl:
+        uiobjectimpl: Button/Disable
+      inputs:
+      outputs:
+    Enable:
+      impl:
+        uiobjectimpl: Button/Enable
+      inputs:
+      outputs:
+    GetButtonState:
+      impl:
+        getter:
+        - name: buttonState
+      inputs:
+      outputs:
+      - name: buttonState
+        type:
+          stringenum: SimpleButtonStateToken
+    GetDisabledFontObject:
+      impl:
+        getter:
+        - name: disabledFontObject
+      inputs:
+      outputs:
+      - name: font
+        nilable: true
+        type:
+          uiobject: Font
+    GetDisabledTexture:
+      impl:
+        getter:
+        - name: disabledTexture
+      inputs:
+      outputs:
+      - name: texture
+        nilable: true
+        type:
+          uiobject: Texture
+    GetFontString:
+      impl:
+        getter:
+        - name: fontstring
+      inputs:
+      outputs:
+      - name: fontString
+        nilable: true
+        type:
+          uiobject: FontString
+    GetHighlightFontObject:
+      impl:
+        getter:
+        - name: highlightFontObject
+      inputs:
+      outputs:
+      - name: font
+        nilable: true
+        type:
+          uiobject: Font
+    GetHighlightTexture:
+      impl:
+        getter:
+        - name: highlightTexture
+      inputs:
+      outputs:
+      - name: texture
+        nilable: true
+        type:
+          uiobject: Texture
+    GetMotionScriptsWhileDisabled:
+      impl:
+        getter:
+        - name: motionScriptsWhileDisabled
+      inputs:
+      outputs:
+      - name: motionScriptsWhileDisabled
+        type: boolean
+    GetNormalFontObject:
+      impl:
+        getter:
+        - name: normalFontObject
+      inputs:
+      outputs:
+      - name: font
+        nilable: true
+        type:
+          uiobject: Font
+    GetNormalTexture:
+      impl:
+        getter:
+        - name: normalTexture
+      inputs:
+      outputs:
+      - name: texture
+        nilable: true
+        type:
+          uiobject: Texture
+    GetPushedTextOffset:
+      impl:
+        getter:
+        - name: pushedTextOffsetX
+        - name: pushedTextOffsetY
+      inputs:
+      outputs:
+      - name: offsetX
+        type: number
+      - name: offsetY
+        type: number
+    GetPushedTexture:
+      impl:
+        getter:
+        - name: pushedTexture
+      inputs:
+      outputs:
+      - name: texture
+        nilable: true
+        type:
+          uiobject: Texture
+    GetText:
+      impl:
+        uiobjectimpl: Button/GetText
+      inputs:
+      outputs:
+      - name: text
+        nilable: true
+        type: string
+    GetTextHeight:
+      inputs:
+      outputs:
+      - name: height
+        type: number
+    GetTextWidth:
+      inputs:
+      outputs:
+      - name: width
+        type: number
+    IsEnabled:
+      impl:
+        uiobjectimpl: Button/IsEnabled
+      inputs:
+      outputs:
+      - name: isEnabled
+        type: boolean
+    RegisterForClicks:
+      impl:
+        uiobjectimpl: Button/RegisterForClicks
+      inputs:
+      - name: buttons
+        type: string
+      instride: 1
+      outputs:
+    RegisterForMouse:
+      inputs:
+      - name: buttons
+        type: string
+      instride: 1
+      outputs:
+    SetButtonState:
+      impl:
+        uiobjectimpl: Button/SetButtonState
+      inputs:
+      - name: buttonState
+        type:
+          stringenum: SimpleButtonStateToken
+      - default: false
+        name: lock
+        type: boolean
+      outputs:
+    SetDisabledAtlas:
+      impl:
+        uiobjectimpl: Button/SetDisabledAtlas
+      inputs:
+      - name: atlas
+        type: string
+      outputs:
+    SetDisabledFontObject:
+      impl:
+        setter:
+        - name: disabledFontObject
+      inputs:
+      - name: font
+        type:
+          uiobject: Font
+      outputs:
+    SetDisabledTexture:
+      impl:
+        settexture:
+          field: disabledTexture
+          shown: self.buttonState == 'DISABLED'
+      inputs:
+      - name: asset
+        type: TextureAsset
+      outputs:
+    SetEnabled:
+      impl:
+        uiobjectimpl: Button/SetEnabled
+      inputs:
+      - default: false
+        name: enabled
+        type: boolean
+      outputs:
+    SetFontString:
+      impl:
+        uiobjectimpl: Button/SetFontString
+      inputs:
+      - name: fontString
+        type:
+          uiobject: FontString
+      outputs:
+    SetFormattedText:
+      impl:
+        uiobjectimpl: Button/SetFormattedText
+      inputs:
+      - name: text
+        type: string
+      - name: arg
+        nilable: true
+        type: unknown
+      instride: 1
+      outputs:
+    SetHighlightAtlas:
+      impl:
+        uiobjectimpl: Button/SetHighlightAtlas
+      inputs:
+      - name: atlas
+        type: string
+      - name: blendMode
+        nilable: true
+        type:
+          stringenum: BlendMode
+      outputs:
+    SetHighlightFontObject:
+      impl:
+        setter:
+        - name: highlightFontObject
+      inputs:
+      - name: font
+        type:
+          uiobject: Font
+      outputs:
+    SetHighlightTexture:
+      impl:
+        settexture:
+          extra: t:SetDrawLayer('HIGHLIGHT')
+          field: highlightTexture
+      inputs:
+      - name: asset
+        type: TextureAsset
+      - name: blendMode
+        nilable: true
+        type:
+          stringenum: BlendMode
+      outputs:
+    SetMotionScriptsWhileDisabled:
+      impl:
+        setter:
+        - name: motionScriptsWhileDisabled
+      inputs:
+      - name: motionScriptsWhileDisabled
+        type: boolean
+      outputs:
+    SetNormalAtlas:
+      impl:
+        uiobjectimpl: Button/SetNormalAtlas
+      inputs:
+      - name: atlas
+        type: string
+      outputs:
+    SetNormalFontObject:
+      impl:
+        setter:
+        - name: normalFontObject
+      inputs:
+      - name: font
+        type:
+          uiobject: Font
+      outputs:
+    SetNormalTexture:
+      impl:
+        settexture:
+          field: normalTexture
+          shown: self.buttonState == 'NORMAL'
+      inputs:
+      - name: asset
+        type: TextureAsset
+      outputs:
+    SetPushedAtlas:
+      impl:
+        uiobjectimpl: Button/SetPushedAtlas
+      inputs:
+      - name: atlas
+        type: string
+      outputs:
+    SetPushedTextOffset:
+      impl:
+        setter:
+        - name: pushedTextOffsetX
+        - name: pushedTextOffsetY
+      inputs:
+      - name: offsetX
+        type: number
+      - name: offsetY
+        type: number
+      outputs:
+    SetPushedTexture:
+      impl:
+        settexture:
+          field: pushedTexture
+          shown: self.buttonState == 'PUSHED'
+      inputs:
+      - name: asset
+        type: TextureAsset
+      outputs:
+    SetText:
+      impl:
+        uiobjectimpl: Button/SetText
+      inputs:
+      - default: ''
+        name: text
+        type: string
+      outputs:
+  scripts:
+    OnClick:
+    OnDoubleClick:
+    PostClick:
+    PreClick:
+CheckButton:
+  fields:
+    checked:
+      init: false
+      type: boolean
+    checkedTexture:
+      nilable: true
+      type:
+        uiobject: Texture
+    disabledCheckedTexture:
+      nilable: true
+      type:
+        uiobject: Texture
+  inherits:
+    Button:
+  methods:
+    GetChecked:
+      impl:
+        getter:
+        - name: checked
+      inputs:
+      outputs:
+      - name: checked
+        type: boolean
+    GetCheckedTexture:
+      impl:
+        getter:
+        - name: checkedTexture
+      inputs:
+      outputs:
+      - name: texture
+        nilable: true
+        type:
+          uiobject: Texture
+    GetDisabledCheckedTexture:
+      impl:
+        getter:
+        - name: disabledCheckedTexture
+      inputs:
+      outputs:
+      - name: texture
+        nilable: true
+        type:
+          uiobject: Texture
+    SetChecked:
+      impl:
+        uiobjectimpl: CheckButton/SetChecked
+      inputs:
+      - default: false
+        name: checked
+        type: boolean
+      outputs:
+    SetCheckedTexture:
+      impl:
+        settexture:
+          field: checkedTexture
+          shown: self.checked
+      inputs:
+      - name: asset
+        type: TextureAsset
+      outputs:
+    SetDisabledCheckedTexture:
+      impl:
+        settexture:
+          field: disabledCheckedTexture
+      inputs:
+      - name: asset
+        type: TextureAsset
+      outputs:
+Checkout:
+  fieldinitoverrides:
+    mouseClickEnabled: true
+    mouseMotionEnabled: true
+    mouseWheelEnabled: true
+    resizable: true
+  fields:
+  inherits:
+    Frame:
+  methods:
+    CancelOpenCheckout:
+      inputs:
+      outputs:
+    ClearFocus:
+      inputs:
+      outputs:
+    CloseCheckout:
+      inputs:
+      outputs:
+    CopyExternalLink:
+      inputs:
+      outputs:
+    OpenCheckout:
+      inputs:
+      - name: checkoutID
+        type: number
+      outputs:
+      - name: wasOpened
+        type: boolean
+    OpenExternalLink:
+      inputs:
+      outputs:
+    SetFocus:
+      inputs:
+      outputs:
+    SetZoom:
+      inputs:
+      - name: zoomLevel
+        type: number
+      outputs:
+  objectType: BlizzardCheckout
+  scripts:
+    OnButtonUpdate:
+    OnEditFocusGained:
+    OnEditFocusLost:
+    OnError:
+    OnEscapePressed:
+    OnExternalLink:
+    OnRequestNewSize:
+CinematicModel:
+  fields:
+  inherits:
+    PlayerModel:
+  methods:
+    EquipItem:
+      inputs:
+      - name: itemID
+        type: number
+      outputs:
+    InitializeCamera:
+      inputs:
+      - default: 0
+        name: scaleFactor
+        type: number
+      outputs:
+    InitializePanCamera:
+      inputs:
+      - default: 0
+        name: scaleFactor
+        type: number
+      outputs:
+    SetAnimOffset:
+      inputs:
+      - name: offset
+        type: number
+      outputs:
+    SetCreatureData:
+      inputs:
+      - name: creatureID
+        type: number
+      outputs:
+    SetFacingLeft:
+      inputs:
+      - default: false
+        name: isFacingLeft
+        type: boolean
+      outputs:
+    SetFadeTimes:
+      inputs:
+      - name: fadeInSeconds
+        type: number
+      - name: fadeOutSeconds
+        type: number
+      outputs:
+    SetHeightFactor:
+      inputs:
+      - name: factor
+        type: number
+      outputs:
+    SetJumpInfo:
+      inputs:
+      - name: jumpLength
+        type: number
+      - name: jumpHeight
+        type: number
+      outputs:
+    SetPanDistance:
+      inputs:
+      - name: scale
+        type: number
+      outputs:
+    SetSpellVisualKit:
+      inputs:
+      - name: visualKitID
+        type: number
+      outputs:
+    SetTargetDistance:
+      inputs:
+      - name: scale
+        type: number
+      outputs:
+    StartPan:
+      inputs:
+      - name: panType
+        type: number
+      - name: durationSeconds
+        type: number
+      - default: false
+        name: doFade
+        type: boolean
+      - default: 0
+        name: visKitID
+        type: number
+      - default: 0
+        name: startPositionScale
+        type: number
+      - default: 1
+        name: speedMultiplier
+        type: number
+      outputs:
+    StopPan:
+      inputs:
+      outputs:
+    UnequipItems:
+      inputs:
+      outputs:
+ColorSelect:
+  fieldinitoverrides:
+    mouseClickEnabled: true
+    mouseMotionEnabled: true
+  fields:
+    colorAlpha:
+      init: 1
+      type: number
+    colorAlphaTexture:
+      nilable: true
+      type:
+        uiobject: Texture
+    colorAlphaThumbTexture:
+      nilable: true
+      type:
+        uiobject: Texture
+    colorValueTexture:
+      nilable: true
+      type:
+        uiobject: Texture
+    colorValueThumbTexture:
+      nilable: true
+      type:
+        uiobject: Texture
+    colorWheelTexture:
+      nilable: true
+      type:
+        uiobject: Texture
+    colorWheelThumbTexture:
+      nilable: true
+      type:
+        uiobject: Texture
+  inherits:
+    Frame:
+  methods:
+    ClearColorWheelTexture:
+      inputs:
+      outputs:
+    GetColorAlpha:
+      impl:
+        getter:
+        - name: colorAlpha
+      inputs:
+      outputs:
+      - name: alpha
+        type: number
+    GetColorAlphaTexture:
+      impl:
+        getter:
+        - name: colorAlphaTexture
+      inputs:
+      outputs:
+      - name: texture
+        nilable: true
+        type:
+          uiobject: Texture
+    GetColorAlphaThumbTexture:
+      impl:
+        getter:
+        - name: colorAlphaThumbTexture
+      inputs:
+      outputs:
+      - name: texture
+        nilable: true
+        type:
+          uiobject: Texture
+    GetColorHSV:
+      inputs:
+      outputs:
+      - name: hsvX
+        type: number
+      - name: hsvY
+        type: number
+      - name: hsvZ
+        type: number
+    GetColorRGB:
+      inputs:
+      outputs:
+      - name: rgbR
+        type: number
+      - name: rgbG
+        type: number
+      - name: rgbB
+        type: number
+    GetColorValueTexture:
+      impl:
+        getter:
+        - name: colorValueTexture
+      inputs:
+      outputs:
+      - name: texture
+        nilable: true
+        type:
+          uiobject: Texture
+    GetColorValueThumbTexture:
+      impl:
+        getter:
+        - name: colorValueThumbTexture
+      inputs:
+      outputs:
+      - name: texture
+        nilable: true
+        type:
+          uiobject: Texture
+    GetColorWheelTexture:
+      impl:
+        getter:
+        - name: colorWheelTexture
+      inputs:
+      outputs:
+      - name: texture
+        nilable: true
+        type:
+          uiobject: Texture
+    GetColorWheelThumbTexture:
+      impl:
+        getter:
+        - name: colorWheelThumbTexture
+      inputs:
+      outputs:
+      - name: texture
+        nilable: true
+        type:
+          uiobject: Texture
+    SetColorAlpha:
+      impl:
+        setter:
+        - name: colorAlpha
+      inputs:
+      - name: alpha
+        type: number
+      outputs:
+    SetColorAlphaTexture:
+      impl:
+        setter:
+        - name: colorAlphaTexture
+      inputs:
+      - name: texture
+        type:
+          uiobject: Texture
+      outputs:
+    SetColorAlphaThumbTexture:
+      impl:
+        settexture:
+          field: colorAlphaThumbTexture
+      inputs:
+      - name: texture
+        type: TextureAsset
+      outputs:
+    SetColorHSV:
+      inputs:
+      - name: hsvX
+        type: number
+      - name: hsvY
+        type: number
+      - name: hsvZ
+        type: number
+      outputs:
+    SetColorRGB:
+      inputs:
+      - name: rgbR
+        type: number
+      - name: rgbG
+        type: number
+      - name: rgbB
+        type: number
+      outputs:
+    SetColorValueTexture:
+      impl:
+        setter:
+        - name: colorValueTexture
+      inputs:
+      - name: texture
+        type:
+          uiobject: Texture
+      outputs:
+    SetColorValueThumbTexture:
+      impl:
+        settexture:
+          field: colorValueThumbTexture
+      inputs:
+      - name: texture
+        type: TextureAsset
+      outputs:
+    SetColorWheelTexture:
+      impl:
+        setter:
+        - name: colorWheelTexture
+      inputs:
+      - name: texture
+        type:
+          uiobject: Texture
+      outputs:
+    SetColorWheelThumbTexture:
+      impl:
+        settexture:
+          field: colorWheelThumbTexture
+      inputs:
+      - name: texture
+        type: TextureAsset
+      outputs:
+  scripts:
+    OnColorSelect:
+ControlPoint:
+  fields:
+    offsetX:
+      init: 0
+      type: number
+    offsetY:
+      init: 0
+      type: number
+    order:
+      init: 99
+      type: number
+  inherits:
+    ParentedObject:
+  methods:
+    GetOffset:
+      impl:
+        getter:
+        - name: offsetX
+        - name: offsetY
+      inputs:
+      outputs:
+      - name: offsetX
+        type: number
+      - name: offsetY
+        type: number
+    GetOrder:
+      impl:
+        getter:
+        - name: order
+      inputs:
+      outputs:
+      - name: order
+        type: number
+    SetOffset:
+      impl:
+        setter:
+        - name: offsetX
+        - name: offsetY
+      inputs:
+      - name: offsetX
+        type: number
+      - name: offsetY
+        type: number
+      outputs:
+    SetOrder:
+      impl:
+        setter:
+        - name: order
+      inputs:
+      - name: order
+        type: number
+      outputs:
+Cooldown:
+  fields:
+    durationMillis:
+      init: 0
+      type: number
+    rotation:
+      init: 0
+      type: number
+    startTimeMillis:
+      init: 0
+      type: number
+  inherits:
+    Frame:
+  methods:
+    Clear:
+      inputs:
+      outputs:
+    GetCooldownDisplayDuration:
+      inputs:
+      outputs:
+      - name: duration
+        type: number
+    GetCooldownDuration:
+      inputs:
+      outputs:
+      - name: duration
+        type: number
+    GetCooldownTimes:
+      impl:
+        getter:
+        - name: startTimeMillis
+        - name: durationMillis
+      inputs:
+      outputs:
+      - name: start
+        type: number
+      - name: duration
+        type: number
+    GetDrawBling:
+      inputs:
+      outputs:
+      - name: drawBling
+        type: boolean
+    GetDrawEdge:
+      inputs:
+      outputs:
+      - name: drawEdge
+        type: boolean
+    GetDrawSwipe:
+      inputs:
+      outputs:
+      - name: drawSwipe
+        type: boolean
+    GetEdgeScale:
+      inputs:
+      outputs:
+      - name: edgeScale
+        type: number
+    GetHideCountdownNumbers:
+      inputs:
+      outputs:
+      - name: hideNumbers
+        type: boolean
+    GetMinimumCountdownDuration:
+      inputs:
+      outputs:
+      - name: milliseconds
+        type: number
+    GetReverse:
+      inputs:
+      outputs:
+      - name: reverse
+        type: boolean
+    GetRotation:
+      impl:
+        getter:
+        - name: rotation
+      inputs:
+      outputs:
+      - name: rotationRadians
+        type: number
+    GetUseAuraDisplayTime:
+      inputs:
+      outputs:
+      - name: useAuraDisplayTime
+        type: boolean
+    IsPaused:
+      inputs:
+      outputs:
+      - name: isPaused
+        type: boolean
+    Pause:
+      inputs:
+      outputs:
+    Resume:
+      inputs:
+      outputs:
+    SetBlingTexture:
+      inputs:
+      - name: texture
+        type: FileAsset
+      - name: colorR
+        nilable: true
+        type: number
+      - name: colorG
+        nilable: true
+        type: number
+      - name: colorB
+        nilable: true
+        type: number
+      - name: colorA
+        nilable: true
+        type: number
+      outputs:
+    SetCooldown:
+      inputs:
+      - name: start
+        type: number
+      - name: duration
+        type: number
+      - default: 1
+        name: modRate
+        type: number
+      outputs:
+    SetCooldownDuration:
+      inputs:
+      - name: duration
+        type: number
+      - default: 1
+        name: modRate
+        type: number
+      outputs:
+    SetCooldownUNIX:
+      inputs:
+      - name: start
+        type: number
+      - name: duration
+        type: number
+      - default: 1
+        name: modRate
+        type: number
+      outputs:
+    SetCountdownAbbrevThreshold:
+      inputs:
+      - name: seconds
+        type: number
+      outputs:
+    SetCountdownFont:
+      inputs:
+      - name: fontName
+        type: string
+      outputs:
+    SetDrawBling:
+      inputs:
+      - default: false
+        name: drawBling
+        type: boolean
+      outputs:
+    SetDrawEdge:
+      inputs:
+      - default: false
+        name: drawEdge
+        type: boolean
+      outputs:
+    SetDrawSwipe:
+      inputs:
+      - default: false
+        name: drawSwipe
+        type: boolean
+      outputs:
+    SetEdgeColor:
+      inputs:
+      - name: colorR
+        type: number
+      - name: colorG
+        type: number
+      - name: colorB
+        type: number
+      - name: a
+        nilable: true
+        type: number
+      outputs:
+    SetEdgeScale:
+      inputs:
+      - name: scale
+        type: number
+      outputs:
+    SetEdgeTexture:
+      inputs:
+      - name: texture
+        type: FileAsset
+      - name: colorR
+        nilable: true
+        type: number
+      - name: colorG
+        nilable: true
+        type: number
+      - name: colorB
+        nilable: true
+        type: number
+      - name: colorA
+        nilable: true
+        type: number
+      outputs:
+    SetHideCountdownNumbers:
+      inputs:
+      - default: false
+        name: hideNumbers
+        type: boolean
+      outputs:
+    SetMinimumCountdownDuration:
+      inputs:
+      - name: milliseconds
+        type: number
+      outputs:
+    SetReverse:
+      inputs:
+      - default: false
+        name: reverse
+        type: boolean
+      outputs:
+    SetRotation:
+      impl:
+        setter:
+        - name: rotation
+      inputs:
+      - name: rotationRadians
+        type: number
+      outputs:
+    SetSwipeColor:
+      inputs:
+      - name: colorR
+        type: number
+      - name: colorG
+        type: number
+      - name: colorB
+        type: number
+      - name: a
+        nilable: true
+        type: number
+      outputs:
+    SetSwipeTexture:
+      inputs:
+      - name: texture
+        type: FileAsset
+      - name: colorR
+        nilable: true
+        type: number
+      - name: colorG
+        nilable: true
+        type: number
+      - name: colorB
+        nilable: true
+        type: number
+      - name: colorA
+        nilable: true
+        type: number
+      outputs:
+    SetTexCoordRange:
+      inputs:
+      - name: low
+        type:
+          structure: vector2
+      - name: high
+        type:
+          structure: vector2
+      outputs:
+    SetUseAuraDisplayTime:
+      inputs:
+      - default: false
+        name: useAuraDisplayTime
+        type: boolean
+      outputs:
+    SetUseCircularEdge:
+      inputs:
+      - default: false
+        name: useCircularEdge
+        type: boolean
+      outputs:
+  scripts:
+    OnCooldownDone:
+DressUpModel:
+  fields:
+  inherits:
+    PlayerModel:
+  methods:
+    Dress:
+      inputs:
+      outputs:
+    GetAutoDress:
+      inputs:
+      outputs:
+      - name: enabled
+        type: boolean
+    GetItemTransmogInfo:
+      inputs:
+      - name: inventorySlot
+        type: number
+      mayreturnnothing: true
+      outputs:
+      - name: itemTransmogInfo
+        type:
+          structure: ItemTransmogInfo
+    GetItemTransmogInfoList:
+      inputs:
+      outputs:
+      - name: infoList
+        type:
+          arrayof:
+            structure: ItemTransmogInfo
+    GetObeyHideInTransmogFlag:
+      inputs:
+      outputs:
+      - name: enabled
+        type: boolean
+    GetSheathed:
+      inputs:
+      outputs:
+      - name: sheathed
+        type: boolean
+    GetUseTransmogChoices:
+      inputs:
+      outputs:
+      - name: enabled
+        type: boolean
+    GetUseTransmogSkin:
+      inputs:
+      outputs:
+      - name: enabled
+        type: boolean
+    IsGeoReady:
+      inputs:
+      outputs:
+      - name: ready
+        type: boolean
+    IsSlotAllowed:
+      inputs:
+      - name: slot
+        type: number
+      outputs:
+      - name: allowed
+        type: boolean
+    IsSlotVisible:
+      inputs:
+      - name: slot
+        type: number
+      outputs:
+      - name: visible
+        type: boolean
+    SetAutoDress:
+      inputs:
+      - default: false
+        name: enabled
+        type: boolean
+      outputs:
+    SetItemTransmogInfo:
+      inputs:
+      - name: itemTransmogInfo
+        type:
+          structure: ItemTransmogInfo
+      - name: inventorySlot
+        nilable: true
+        type: number
+      - default: false
+        name: ignoreChildItems
+        type: boolean
+      outputs:
+      - name: result
+        type:
+          enum: ItemTryOnReason
+    SetObeyHideInTransmogFlag:
+      inputs:
+      - default: false
+        name: enabled
+        type: boolean
+      outputs:
+    SetSheathed:
+      inputs:
+      - default: false
+        name: sheathed
+        type: boolean
+      - default: false
+        name: hideWeapons
+        type: boolean
+      outputs:
+    SetUseTransmogChoices:
+      inputs:
+      - default: false
+        name: enabled
+        type: boolean
+      outputs:
+    SetUseTransmogSkin:
+      inputs:
+      - default: false
+        name: enabled
+        type: boolean
+      outputs:
+    TryOn:
+      inputs:
+      - name: linkOrItemModifiedAppearanceID
+        type: string
+      - name: handSlotName
+        nilable: true
+        type: string
+      - name: spellEnchantID
+        nilable: true
+        type: number
+      outputs:
+      - name: result
+        nilable: true
+        type:
+          enum: ItemTryOnReason
+    Undress:
+      inputs:
+      outputs:
+    UndressSlot:
+      inputs:
+      - name: inventorySlot
+        type: number
+      outputs:
+  scripts:
+    OnDressModel:
+EditBox:
+  fieldinitoverrides:
+    justifyh: LEFT
+    mouseClickEnabled: true
+    mouseMotionEnabled: true
+  fields:
+    blinkSpeed:
+      init: 0.5
+      type: number
+    cursorPosition:
+      init: 0
+      type: number
+    editboxText:
+      init: ''
+      type: string
+    enabled:
+      init: true
+      type: boolean
+    historyLines:
+      init: 0
+      type: number
+    isAutoFocus:
+      init: true
+      type: boolean
+    isCountInvisibleLetters:
+      init: false
+      type: boolean
+    isMultiLine:
+      init: false
+      type: boolean
+    isSecureText:
+      init: false
+      type: boolean
+    maxBytes:
+      init: 0
+      type: number
+    maxLetters:
+      init: 0
+      type: number
+    visibleTextByteLimit:
+      init: 0
+      type: number
+  inherits:
+    FontInstance:
+    Frame:
+  methods:
+    AddHistoryLine:
+      inputs:
+      - name: text
+        type: string
+      outputs:
+    ClearFocus:
+      inputs:
+      outputs:
+    ClearHighlightText:
+      inputs:
+      outputs:
+    ClearHistory:
+      inputs:
+      outputs:
+    Disable:
+      impl:
+        uiobjectimpl: EditBox/Disable
+      inputs:
+      outputs:
+    Enable:
+      impl:
+        uiobjectimpl: EditBox/Enable
+      inputs:
+      outputs:
+    GetAltArrowKeyMode:
+      inputs:
+      outputs:
+      - name: altMode
+        type: boolean
+    GetBlinkSpeed:
+      impl:
+        getter:
+        - name: blinkSpeed
+      inputs:
+      outputs:
+      - name: cursorBlinkSpeedSec
+        type: number
+    GetCursorPosition:
+      impl:
+        getter:
+        - name: cursorPosition
+      inputs:
+      outputs:
+      - name: cursorPosition
+        type: number
+    GetDisplayText:
+      inputs:
+      mayreturnnothing: true
+      outputs:
+      - name: displayText
+        type: string
+    GetHighlightColor:
+      inputs:
+      outputs:
+      - name: colorR
+        type: number
+      - name: colorG
+        type: number
+      - name: colorB
+        type: number
+      - name: colorA
+        type: number
+    GetHistoryLines:
+      impl:
+        getter:
+        - name: historyLines
+      inputs:
+      outputs:
+      - name: numHistoryLines
+        type: number
+    GetInputLanguage:
+      inputs:
+      outputs:
+      - name: language
+        type: string
+    GetMaxBytes:
+      impl:
+        getter:
+        - name: maxBytes
+      inputs:
+      outputs:
+      - name: maxBytes
+        type: number
+    GetMaxLetters:
+      impl:
+        getter:
+        - name: maxLetters
+      inputs:
+      outputs:
+      - name: maxLetters
+        type: number
+    GetNumber:
+      inputs:
+      outputs:
+      - name: number
+        nilable: true
+        stubnotnil: true
+        type: number
+    GetNumLetters:
+      inputs:
+      mayreturnnothing: true
+      outputs:
+      - name: numLetters
+        type: number
+    GetNumLines:
+      inputs:
+      outputs:
+      - name: lines
+        type: number
+    GetText:
+      impl:
+        getter:
+        - name: editboxText
+      inputs:
+      outputs:
+      - name: text
+        type: string
+    GetTextInsets:
+      inputs:
+      outputs:
+      - name: left
+        type: number
+      - name: right
+        type: number
+      - name: top
+        type: number
+      - name: bottom
+        type: number
+    GetUTF8CursorPosition:
+      inputs:
+      outputs:
+      - name: cursorPosition
+        type: number
+    GetVisibleTextByteLimit:
+      impl:
+        getter:
+        - name: visibleTextByteLimit
+      inputs:
+      outputs:
+      - name: maxVisibleBytes
+        type: number
+    HasFocus:
+      inputs:
+      outputs:
+      - name: hasFocus
+        type: boolean
+    HasText:
+      inputs:
+      outputs:
+      - name: hasText
+        type: boolean
+    HighlightText:
+      inputs:
+      - default: 0
+        name: start
+        type: number
+      - default: -1
+        name: stop
+        type: number
+      outputs:
+    Insert:
+      impl:
+        uiobjectimpl: EditBox/Insert
+      inputs:
+      - name: text
+        type: string
+      outputs:
+    IsAlphabeticOnly:
+      inputs:
+      outputs:
+      - name: enabled
+        type: boolean
+    IsAutoFocus:
+      impl:
+        getter:
+        - name: isAutoFocus
+      inputs:
+      outputs:
+      - name: autoFocus
+        type: boolean
+    IsCountInvisibleLetters:
+      impl:
+        getter:
+        - name: isCountInvisibleLetters
+      inputs:
+      outputs:
+      - name: countInvisibleLetters
+        type: boolean
+    IsEnabled:
+      impl:
+        getter:
+        - name: enabled
+      inputs:
+      outputs:
+      - name: isEnabled
+        type: boolean
+    IsInIMECompositionMode:
+      inputs:
+      outputs:
+      - name: isInIMECompositionMode
+        type: boolean
+    IsMultiLine:
+      impl:
+        getter:
+        - name: isMultiLine
+      inputs:
+      outputs:
+      - name: multiline
+        type: boolean
+    IsNumeric:
+      inputs:
+      outputs:
+      - name: isNumeric
+        type: boolean
+    IsNumericFullRange:
+      inputs:
+      outputs:
+      - name: isNumeric
+        type: boolean
+    IsPassword:
+      inputs:
+      outputs:
+      - name: isPassword
+        type: boolean
+    IsSecureText:
+      impl:
+        getter:
+        - name: isSecureText
+      inputs:
+      outputs:
+      - name: isSecure
+        type: boolean
+    ResetInputMode:
+      inputs:
+      outputs:
+    SetAlphabeticOnly:
+      inputs:
+      - default: false
+        name: enabled
+        type: boolean
+      outputs:
+    SetAltArrowKeyMode:
+      inputs:
+      - default: false
+        name: altMode
+        type: boolean
+      outputs:
+    SetAutoFocus:
+      impl:
+        setter:
+        - name: isAutoFocus
+      inputs:
+      - default: false
+        name: autoFocus
+        type: boolean
+      outputs:
+    SetBlinkSpeed:
+      impl:
+        setter:
+        - name: blinkSpeed
+      inputs:
+      - name: cursorBlinkSpeedSec
+        type: number
+      outputs:
+    SetCountInvisibleLetters:
+      impl:
+        setter:
+        - name: isCountInvisibleLetters
+      inputs:
+      - default: false
+        name: countInvisibleLetters
+        type: boolean
+      outputs:
+    SetCursorPosition:
+      impl:
+        setter:
+        - name: cursorPosition
+      inputs:
+      - name: cursorPosition
+        type: number
+      outputs:
+    SetEnabled:
+      impl:
+        setter:
+        - name: enabled
+      inputs:
+      - default: false
+        name: enabled
+        type: boolean
+      outputs:
+    SetFocus:
+      inputs:
+      outputs:
+    SetHighlightColor:
+      inputs:
+      - name: colorR
+        type: number
+      - name: colorG
+        type: number
+      - name: colorB
+        type: number
+      - name: a
+        nilable: true
+        type: number
+      outputs:
+    SetHistoryLines:
+      impl:
+        setter:
+        - name: historyLines
+      inputs:
+      - name: numHistoryLines
+        type: number
+      outputs:
+    SetMaxBytes:
+      impl:
+        setter:
+        - name: maxBytes
+      inputs:
+      - name: maxBytes
+        type: number
+      outputs:
+    SetMaxLetters:
+      impl:
+        setter:
+        - name: maxLetters
+      inputs:
+      - name: maxLetters
+        type: number
+      outputs:
+    SetMultiLine:
+      impl:
+        setter:
+        - name: isMultiLine
+      inputs:
+      - default: false
+        name: multiline
+        type: boolean
+      outputs:
+    SetNumber:
+      inputs:
+      - name: number
+        type: number
+      outputs:
+    SetNumeric:
+      inputs:
+      - default: false
+        name: isNumeric
+        type: boolean
+      outputs:
+    SetNumericFullRange:
+      inputs:
+      - default: false
+        name: isNumeric
+        type: boolean
+      outputs:
+    SetPassword:
+      inputs:
+      - default: false
+        name: isPassword
+        type: boolean
+      outputs:
+    SetSecureText:
+      impl:
+        setter:
+        - name: isSecureText
+      inputs:
+      - default: false
+        name: isSecure
+        type: boolean
+      outputs:
+    SetSecurityDisablePaste:
+      inputs:
+      outputs:
+    SetSecurityDisableSetText:
+      inputs:
+      outputs:
+    SetText:
+      impl:
+        setter:
+        - name: editboxText
+      inputs:
+      - name: text
+        type: string
+      outputs:
+    SetTextInsets:
+      inputs:
+      - name: left
+        type: number
+      - name: right
+        type: number
+      - name: top
+        type: number
+      - name: bottom
+        type: number
+      outputs:
+    SetVisibleTextByteLimit:
+      impl:
+        setter:
+        - name: visibleTextByteLimit
+      inputs:
+      - name: maxVisibleBytes
+        type: number
+      outputs:
+    ToggleInputLanguage:
+      inputs:
+      outputs:
+  scripts:
+    OnArrowPressed:
+    OnCharComposition:
+    OnCursorChanged:
+    OnEditFocusGained:
+    OnEditFocusLost:
+    OnEnterPressed:
+    OnEscapePressed:
+    OnInputLanguageChanged:
+    OnSpacePressed:
+    OnTabPressed:
+    OnTextChanged:
+    OnTextSet:
+FlipBook:
+  fields:
+    flipBookColumns:
+      init: 0
+      type: number
+    flipBookFrameHeight:
+      init: 0
+      type: number
+    flipBookFrames:
+      init: 0
+      type: number
+    flipBookFrameWidth:
+      init: 0
+      type: number
+    flipBookRows:
+      init: 0
+      type: number
+  inherits:
+    Animation:
+  methods:
+    GetFlipBookColumns:
+      impl:
+        getter:
+        - name: flipBookColumns
+      inputs:
+      outputs:
+      - name: columns
+        type: number
+    GetFlipBookFrameHeight:
+      impl:
+        getter:
+        - name: flipBookFrameHeight
+      inputs:
+      outputs:
+      - name: height
+        type: number
+    GetFlipBookFrames:
+      impl:
+        getter:
+        - name: flipBookFrames
+      inputs:
+      outputs:
+      - name: frames
+        type: number
+    GetFlipBookFrameWidth:
+      impl:
+        getter:
+        - name: flipBookFrameWidth
+      inputs:
+      outputs:
+      - name: width
+        type: number
+    GetFlipBookRows:
+      impl:
+        getter:
+        - name: flipBookRows
+      inputs:
+      outputs:
+      - name: rows
+        type: number
+    SetFlipBookColumns:
+      impl:
+        setter:
+        - name: flipBookColumns
+      inputs:
+      - name: columns
+        type: number
+      outputs:
+    SetFlipBookFrameHeight:
+      impl:
+        setter:
+        - name: flipBookFrameHeight
+      inputs:
+      - name: height
+        type: number
+      outputs:
+    SetFlipBookFrames:
+      impl:
+        setter:
+        - name: flipBookFrames
+      inputs:
+      - name: frames
+        type: number
+      outputs:
+    SetFlipBookFrameWidth:
+      impl:
+        setter:
+        - name: flipBookFrameWidth
+      inputs:
+      - name: width
+        type: number
+      outputs:
+    SetFlipBookRows:
+      impl:
+        setter:
+        - name: flipBookRows
+      inputs:
+      - name: rows
+        type: number
+      outputs:
+FogOfWarFrame:
+  fields:
+    maskScalar:
+      init: 1
+      type: number
+    uiMapID:
+      init: 0
+      type: number
+  inherits:
+    Frame:
+  methods:
+    GetFogOfWarBackgroundAtlas:
+      inputs:
+      outputs:
+      - name: atlas
+        type: string
+    GetFogOfWarBackgroundTexture:
+      inputs:
+      outputs:
+      - name: asset
+        nilable: true
+        type: FileAsset
+    GetFogOfWarMaskAtlas:
+      inputs:
+      outputs:
+      - name: atlas
+        type: string
+    GetFogOfWarMaskTexture:
+      inputs:
+      outputs:
+      - name: asset
+        nilable: true
+        type: FileAsset
+    GetMaskScalar:
+      impl:
+        getter:
+        - name: maskScalar
+      inputs:
+      outputs:
+      - name: scalar
+        type: number
+    GetUiMapID:
+      impl:
+        getter:
+        - name: uiMapID
+      inputs:
+      outputs:
+      - name: uiMapID
+        type: number
+    SetFogOfWarBackgroundAtlas:
+      inputs:
+      - name: atlas
+        type: string
+      outputs:
+    SetFogOfWarBackgroundTexture:
+      inputs:
+      - name: asset
+        type: FileAsset
+      - name: horizontalTile
+        type: boolean
+      - name: verticalTile
+        type: boolean
+      outputs:
+    SetFogOfWarMaskAtlas:
+      inputs:
+      - name: atlas
+        type: string
+      outputs:
+    SetFogOfWarMaskTexture:
+      inputs:
+      - name: asset
+        type: FileAsset
+      outputs:
+    SetMaskScalar:
+      impl:
+        setter:
+        - name: maskScalar
+      inputs:
+      - name: scalar
+        type: number
+      outputs:
+    SetUiMapID:
+      impl:
+        setter:
+        - name: uiMapID
+      inputs:
+      - name: uiMapID
+        type: number
+      outputs:
+  scripts:
+    OnUiMapChanged:
+Font:
+  fields:
+    alpha:
+      init: 1
+      type: number
+    fontHeight:
+      init: 0
+      type: number
+  inherits:
+    FontInstance:
+    UIObject:
+  methods:
+    CopyFontObject:
+      inputs:
+      - name: sourceFont
+        type:
+          uiobject: Font
+      outputs:
+    GetAlpha:
+      impl:
+        getter:
+        - name: alpha
+      inputs:
+      outputs:
+      - name: alpha
+        type: number
+    GetFontHeight:
+      impl:
+        getter:
+        - name: fontHeight
+      inputs:
+      outputs:
+      - name: height
+        type: number
+    GetFontObjectForAlphabet:
+      inputs:
+      - name: alphabet
+        type: string
+      outputs:
+      - name: font
+        nilable: true
+        type:
+          uiobject: Font
+    SetAlpha:
+      impl:
+        setter:
+        - name: alpha
+      inputs:
+      - name: alpha
+        type: number
+      outputs:
+    SetFontHeight:
+      impl:
+        setter:
+        - name: fontHeight
+      inputs:
+      - name: height
+        type: number
+      outputs:
+FontInstance:
+  fields:
+    fontObject:
+      nilable: true
+      type:
+        uiobject: Font
+    indentedWordWrap:
+      init: false
+      type: boolean
+    justifyh:
+      init: CENTER
+      type:
+        stringenum: JustifyHorizontal
+    justifyv:
+      init: MIDDLE
+      type:
+        stringenum: JustifyVertical
+    spacing:
+      init: 0
+      type: number
+  inherits:
+  methods:
+    GetFont:
+      outputs:
+      - name: fontName
+        type: string
+      - name: fontHeight
+        stub: 12
+        type: number
+      - name: fontFlags
+        type: string
+    GetFontObject:
+      impl:
+        uiobjectimpl: FontInstance/GetFontObject
+      inputs:
+      outputs:
+      - name: font
+        nilable: true
+        type:
+          uiobject: Font
+    GetIndentedWordWrap:
+      impl:
+        getter:
+        - name: indentedWordWrap
+      inputs:
+      outputs:
+      - name: wrap
+        type: boolean
+    GetJustifyH:
+      impl:
+        getter:
+        - name: justifyh
+      inputs:
+      outputs:
+      - name: justifyH
+        type:
+          stringenum: JustifyHorizontal
+    GetJustifyV:
+      impl:
+        getter:
+        - name: justifyv
+      inputs:
+      outputs:
+      - name: justifyV
+        type:
+          stringenum: JustifyVertical
+    GetShadowColor:
+      inputs:
+      outputs:
+      - name: colorR
+        type: number
+      - name: colorG
+        type: number
+      - name: colorB
+        type: number
+      - name: colorA
+        type: number
+    GetShadowOffset:
+      inputs:
+      outputs:
+      - name: offsetX
+        type: number
+      - name: offsetY
+        type: number
+    GetSpacing:
+      impl:
+        getter:
+        - name: spacing
+      inputs:
+      outputs:
+      - name: spacing
+        type: number
+    GetTextColor:
+      inputs:
+      mayreturnnothing: true
+      outputs:
+      - name: colorR
+        type: number
+      - name: colorG
+        type: number
+      - name: colorB
+        type: number
+      - name: colorA
+        type: number
+    SetFont:
+    SetFontObject:
+      impl:
+        uiobjectimpl: FontInstance/SetFontObject
+      inputs:
+      - name: font
+        type:
+          uiobject: Font
+      outputs:
+    SetIndentedWordWrap:
+      impl:
+        setter:
+        - name: indentedWordWrap
+      inputs:
+      - name: wrap
+        type: boolean
+      outputs:
+    SetJustifyH:
+      impl:
+        setter:
+        - name: justifyh
+      inputs:
+      - name: justifyH
+        type:
+          stringenum: JustifyHorizontal
+      outputs:
+    SetJustifyV:
+      impl:
+        setter:
+        - name: justifyv
+      inputs:
+      - name: justifyV
+        type:
+          stringenum: JustifyVertical
+      outputs:
+    SetShadowColor:
+      inputs:
+      - name: colorR
+        type: number
+      - name: colorG
+        type: number
+      - name: colorB
+        type: number
+      - name: a
+        nilable: true
+        type: number
+      outputs:
+    SetShadowOffset:
+      inputs:
+      - name: offsetX
+        type: number
+      - name: offsetY
+        type: number
+      outputs:
+    SetSpacing:
+      impl:
+        setter:
+        - name: spacing
+      inputs:
+      - name: spacing
+        type: number
+      outputs:
+    SetTextColor:
+      inputs:
+      - name: colorR
+        type: number
+      - name: colorG
+        type: number
+      - name: colorB
+        type: number
+      - name: a
+        nilable: true
+        type: number
+      outputs:
+  virtual: true
+FontString:
+  fields:
+    maxLines:
+      init: 0
+      type: number
+    rotation:
+      init: 0
+      type: number
+    text:
+      nilable: true
+      type: string
+    textScale:
+      init: 1
+      type: number
+  inherits:
+    FontInstance:
+    LayeredRegion:
+    ScriptObject:
+  methods:
+    CalculateScreenAreaFromCharacterSpan:
+      inputs:
+      - name: leftIndex
+        type: number
+      - name: rightIndex
+        type: number
+      outputs:
+      - name: areas
+        nilable: true
+        type:
+          arrayof:
+            structure: uiBoundsRect
+    CanNonSpaceWrap:
+      inputs:
+      outputs:
+      - name: wrap
+        type: boolean
+    CanWordWrap:
+      inputs:
+      outputs:
+      - name: wrap
+        type: boolean
+    ClearAlphaGradient:
+      inputs:
+      outputs:
+    FindCharacterIndexAtCoordinate:
+      inputs:
+      - name: x
+        type: number
+      - name: y
+        type: number
+      mayreturnnothing: true
+      outputs:
+      - name: characterIndex
+        type: number
+      - name: inside
+        type: boolean
+    GetAlphaGradient:
+      inputs:
+      outputs:
+      - name: start
+        type: number
+      - name: length
+        type: number
+    GetFieldSize:
+      inputs:
+      outputs:
+      - name: fieldSize
+        type: number
+    GetFontHeight:
+      inputs:
+      - default: true
+        name: calculated
+        type: boolean
+      outputs:
+      - name: height
+        type: number
+    GetLineHeight:
+      inputs:
+      outputs:
+      - name: lineHeight
+        type: number
+    GetMaxLines:
+      impl:
+        getter:
+        - name: maxLines
+      inputs:
+      outputs:
+      - name: maxLines
+        type: number
+    GetNumLines:
+      inputs:
+      outputs:
+      - name: numLines
+        type: number
+    GetRotation:
+      impl:
+        getter:
+        - name: rotation
+      inputs:
+      outputs:
+      - name: radians
+        type: number
+    GetStringHeight:
+      inputs:
+      outputs:
+      - name: height
+        type: number
+    GetStringWidth:
+      inputs:
+      outputs:
+      - name: width
+        type: number
+    GetText:
+      impl:
+        getter:
+        - name: text
+      inputs:
+      outputs:
+      - name: text
+        nilable: true
+        type: string
+    GetTextScale:
+      impl:
+        getter:
+        - name: textScale
+      inputs:
+      outputs:
+      - name: textScale
+        type: number
+    GetUnboundedStringWidth:
+      inputs:
+      outputs:
+      - name: width
+        type: number
+    GetWrappedWidth:
+      inputs:
+      outputs:
+      - name: width
+        type: number
+    IsTruncated:
+      inputs:
+      outputs:
+      - name: isTruncated
+        type: boolean
+    OnColorsUpdated:
+      inputs:
+      outputs:
+    SetAlphaGradient:
+      inputs:
+      - name: start
+        type: number
+      - name: length
+        type: number
+      outputs:
+      - name: isWithinText
+        type: boolean
+    SetFixedColor:
+      inputs:
+      - name: fixedColor
+        type: boolean
+      outputs:
+    SetFontHeight:
+      inputs:
+      - name: height
+        type: number
+      outputs:
+    SetFormattedText:
+      inputs:
+      - name: text
+        type: string
+      outputs:
+    SetMaxLines:
+      impl:
+        setter:
+        - name: maxLines
+      inputs:
+      - name: maxLines
+        type: number
+      outputs:
+    SetNonSpaceWrap:
+      inputs:
+      - name: wrap
+        type: boolean
+      outputs:
+    SetRotation:
+      impl:
+        setter:
+        - name: rotation
+      inputs:
+      - name: radians
+        type: number
+      outputs:
+    SetText:
+      impl:
+        uiobjectimpl: FontString/SetText
+      inputs:
+      - default: ''
+        name: text
+        type: string
+      outputs:
+    SetTextHeight:
+      inputs:
+      - name: height
+        type: number
+      outputs:
+    SetTextScale:
+      impl:
+        setter:
+        - name: textScale
+      inputs:
+      - name: textScale
+        type: number
+      outputs:
+    SetTextToFit:
+      inputs:
+      - default: ''
+        name: text
+        type: string
+      outputs:
+    SetWordWrap:
+      inputs:
+      - name: wrap
+        type: boolean
+      outputs:
+Frame:
+  fields:
+    attributes:
+      init:
+      type: table
+    dontSavePosition:
+      init: false
+      type: boolean
+    flattensRenderLayers:
+      init: false
+      type: boolean
+    frameLevel:
+      init: 0
+      type: number
+    frameStrata:
+      init: MEDIUM
+      type:
+        stringenum: FrameStrata
+    hasFixedFrameLevel:
+      init: false
+      type: boolean
+    hasFixedFrameStrata:
+      init: false
+      type: boolean
+    hitBottom:
+      init: 0
+      type: number
+    hitLeft:
+      init: 0
+      type: number
+    hitRight:
+      init: 0
+      type: number
+    hitTop:
+      init: 0
+      type: number
+    hyperlinkPropagateToParent:
+      init: false
+      type: boolean
+    hyperlinksEnabled:
+      init: false
+      type: boolean
+    id:
+      init: 0
+      type: number
+    isClampedToScreen:
+      init: false
+      type: boolean
+    isUserPlaced:
+      init: false
+      type: boolean
+    maxResizeHeight:
+      init: 0
+      type: number
+    maxResizeWidth:
+      init: 0
+      type: number
+    minResizeHeight:
+      init: 0
+      type: number
+    minResizeWidth:
+      init: 0
+      type: number
+    movable:
+      init: false
+      type: boolean
+    propagateKeyboardInput:
+      init: false
+      type: boolean
+    resizable:
+      init: false
+      type: boolean
+    toplevel:
+      init: false
+      type: boolean
+  inherits:
+    Region:
+    ScriptObject:
+  methods:
+    AbortDrag:
+      inputs:
+      outputs:
+    CanChangeAttribute:
+      inputs:
+      outputs:
+      - name: canChangeAttributes
+        type: boolean
+    ClearAlphaGradient:
+      inputs:
+      outputs:
+    ClearAttribute:
+      inputs:
+      - name: attributeName
+        type: string
+      outputs:
+      - name: cleared
+        type: boolean
+    ClearAttributes:
+      inputs:
+      outputs:
+    CreateFontString:
+      impl:
+        uiobjectimpl: Frame/CreateFontString
+      inputs:
+      - name: name
+        nilable: true
+        type: string
+      - name: drawLayer
+        nilable: true
+        type:
+          stringenum: DrawLayer
+      - name: templateName
+        nilable: true
+        type: string
+      outputs:
+      - name: line
+        nilable: true
+        type:
+          uiobject: FontString
+    CreateLine:
+      impl:
+        uiobjectimpl: Frame/CreateLine
+      inputs:
+      - name: name
+        nilable: true
+        type: string
+      - name: drawLayer
+        nilable: true
+        type:
+          stringenum: DrawLayer
+      - name: templateName
+        nilable: true
+        type: string
+      - name: subLevel
+        nilable: true
+        type: number
+      outputs:
+      - name: line
+        type:
+          uiobject: Line
+    CreateMaskTexture:
+      impl:
+        uiobjectimpl: Frame/CreateMaskTexture
+      inputs:
+      - name: name
+        nilable: true
+        type: string
+      - name: drawLayer
+        nilable: true
+        type:
+          stringenum: DrawLayer
+      - name: templateName
+        nilable: true
+        type: string
+      - name: subLevel
+        nilable: true
+        type: number
+      outputs:
+      - name: maskTexture
+        type:
+          uiobject: MaskTexture
+    CreateTexture:
+      impl:
+        uiobjectimpl: Frame/CreateTexture
+      inputs:
+      - name: name
+        nilable: true
+        type: string
+      - name: drawLayer
+        nilable: true
+        type:
+          stringenum: DrawLayer
+      - name: templateName
+        nilable: true
+        type: string
+      - name: subLevel
+        nilable: true
+        type: number
+      outputs:
+      - name: texture
+        nilable: true
+        type:
+          uiobject: Texture
+    DesaturateHierarchy:
+      inputs:
+      - name: desaturation
+        type: number
+      - default: false
+        name: excludeRoot
+        type: boolean
+      outputs:
+    DisableDrawLayer:
+      inputs:
+      - name: layer
+        type:
+          stringenum: DrawLayer
+      outputs:
+    DoesClipChildren:
+      inputs:
+      outputs:
+      - name: clipsChildren
+        type: boolean
+    DoesHyperlinkPropagateToParent:
+      impl:
+        getter:
+        - name: hyperlinkPropagateToParent
+      inputs:
+      outputs:
+      - name: canPropagate
+        type: boolean
+    EnableDrawLayer:
+      inputs:
+      - name: layer
+        type:
+          stringenum: DrawLayer
+      outputs:
+    EnableGamePadButton:
+      inputs:
+      - default: false
+        name: enable
+        type: boolean
+      outputs:
+    EnableGamePadStick:
+      inputs:
+      - default: false
+        name: enable
+        type: boolean
+      outputs:
+    EnableKeyboard:
+      inputs:
+      - default: false
+        name: enable
+        type: boolean
+      outputs:
+    ExecuteAttribute:
+      inputs:
+      - name: attributeName
+        type: string
+      - name: arguments
+        nilable: true
+        type: string
+      instride: 1
+      outputs:
+      - name: success
+        type: boolean
+      - name: returns
+        nilable: true
+        type: string
+      outstride: 1
+    GetAttribute:
+      impl:
+        uiobjectimpl: Frame/GetAttribute
+      manualinputs: true
+      outputs:
+      - name: value
+        nilable: true
+        type: unknown
+    GetBoundsRect:
+      inputs:
+      outputs:
+      - name: left
+        type: number
+      - name: bottom
+        type: number
+      - name: width
+        type: number
+      - name: height
+        type: number
+    GetChildren:
+      impl:
+        uiobjectimpl: Frame/GetChildren
+      inputs:
+      outputs:
+      - name: children
+        nilable: true
+        type:
+          uiobject: Frame
+      outstride: 1
+    GetClampRectInsets:
+      inputs:
+      outputs:
+      - name: left
+        type: number
+      - name: right
+        type: number
+      - name: top
+        type: number
+      - name: bottom
+        type: number
+    GetDontSavePosition:
+      impl:
+        getter:
+        - name: dontSavePosition
+      inputs:
+      outputs:
+      - name: dontSave
+        type: boolean
+    GetEffectiveAlpha:
+      impl:
+        uiobjectimpl: Frame/GetEffectiveAlpha
+      inputs:
+      outputs:
+      - name: effectiveAlpha
+        type: number
+    GetEffectivelyFlattensRenderLayers:
+      inputs:
+      outputs:
+      - name: flatten
+        type: boolean
+    GetFlattensRenderLayers:
+      impl:
+        getter:
+        - name: flattensRenderLayers
+      inputs:
+      outputs:
+      - name: flatten
+        type: boolean
+    GetFrameLevel:
+      impl:
+        getter:
+        - name: frameLevel
+      inputs:
+      outputs:
+      - name: frameLevel
+        type: number
+    GetFrameStrata:
+      impl:
+        getter:
+        - name: frameStrata
+      inputs:
+      outputs:
+      - name: strata
+        type:
+          stringenum: FrameStrata
+    GetHighestFrameLevel:
+      inputs:
+      - default: false
+        name: iterateAllChildren
+        type: boolean
+      outputs:
+      - name: frameLevel
+        type: number
+    GetHitRectInsets:
+      impl:
+        getter:
+        - name: hitLeft
+        - name: hitRight
+        - name: hitTop
+        - name: hitBottom
+      inputs:
+      outputs:
+      - name: left
+        type: number
+      - name: right
+        type: number
+      - name: top
+        type: number
+      - name: bottom
+        type: number
+    GetHyperlinksEnabled:
+      impl:
+        getter:
+        - name: hyperlinksEnabled
+      inputs:
+      outputs:
+      - name: enabled
+        type: boolean
+    GetID:
+      impl:
+        getter:
+        - name: id
+      inputs:
+      outputs:
+      - name: id
+        type: number
+    GetNumChildren:
+      impl:
+        uiobjectimpl: Frame/GetNumChildren
+      inputs:
+      outputs:
+      - name: numChildren
+        type: number
+    GetNumRegions:
+      impl:
+        uiobjectimpl: Frame/GetNumRegions
+      inputs:
+      outputs:
+      - name: numRegions
+        type: number
+    GetPropagateKeyboardInput:
+      impl:
+        getter:
+        - name: propagateKeyboardInput
+      inputs:
+      outputs:
+      - name: propagate
+        type: boolean
+    GetRaisedFrameLevel:
+      inputs:
+      outputs:
+      - name: frameLevel
+        type: number
+    GetRegions:
+      impl:
+        uiobjectimpl: Frame/GetRegions
+      inputs:
+      outputs:
+      - name: regions
+        type:
+          uiobject: Region
+      outstride: 1
+    GetResizeBounds:
+      impl:
+        getter:
+        - name: minResizeWidth
+        - name: minResizeHeight
+        - name: maxResizeWidth
+        - name: maxResizeHeight
+      inputs:
+      outputs:
+      - name: minWidth
+        type: number
+      - name: minHeight
+        type: number
+      - name: maxWidth
+        type: number
+      - name: maxHeight
+        type: number
+    GetWindow:
+      inputs:
+      outputs:
+      - name: window
+        type: nil
+    HasAlphaGradient:
+      inputs:
+      outputs:
+      - name: hasAlphaGradient
+        type: boolean
+    HasFixedFrameLevel:
+      impl:
+        getter:
+        - name: hasFixedFrameLevel
+      inputs:
+      outputs:
+      - name: isFixed
+        type: boolean
+    HasFixedFrameStrata:
+      impl:
+        getter:
+        - name: hasFixedFrameStrata
+      inputs:
+      outputs:
+      - name: isFixed
+        type: boolean
+    InterceptStartDrag:
+      inputs:
+      - name: delegate
+        type:
+          uiobject: Frame
+      outputs:
+      - name: success
+        type: boolean
+    IsClampedToScreen:
+      impl:
+        getter:
+        - name: isClampedToScreen
+      inputs:
+      outputs:
+      - name: clampedToScreen
+        type: boolean
+    IsDrawLayerEnabled:
+      inputs:
+      - name: layer
+        type:
+          stringenum: DrawLayer
+      outputs:
+      - name: isEnabled
+        type: boolean
+    IsEventRegistered:
+      impl:
+        uiobjectimpl: Frame/IsEventRegistered
+      inputs:
+      - name: eventName
+        type: string
+      outputs:
+      - name: isRegistered
+        type: boolean
+      - name: units
+        nilable: true
+        type: string
+      outstride: 1
+    IsFrameBuffer:
+      inputs:
+      outputs:
+      - name: isFrameBuffer
+        type: boolean
+    IsGamePadButtonEnabled:
+      inputs:
+      outputs:
+      - name: enabled
+        type: boolean
+    IsGamePadStickEnabled:
+      inputs:
+      outputs:
+      - name: enabled
+        type: boolean
+    IsHighlightLocked:
+      inputs:
+      outputs:
+      - name: locked
+        type: boolean
+    IsKeyboardEnabled:
+      inputs:
+      outputs:
+      - name: enabled
+        type: boolean
+    IsMovable:
+      impl:
+        getter:
+        - name: movable
+      inputs:
+      outputs:
+      - name: isMovable
+        type: boolean
+    IsResizable:
+      impl:
+        getter:
+        - name: resizable
+      inputs:
+      outputs:
+      - name: resizable
+        type: boolean
+    IsToplevel:
+      impl:
+        getter:
+        - name: toplevel
+      inputs:
+      outputs:
+      - name: isTopLevel
+        type: boolean
+    IsUserPlaced:
+      impl:
+        getter:
+        - name: isUserPlaced
+      inputs:
+      outputs:
+      - name: isUserPlaced
+        type: boolean
+    IsUsingParentLevel:
+      inputs:
+      outputs:
+      - name: usingParentLevel
+        type: boolean
+    LockHighlight:
+      inputs:
+      outputs:
+    Lower:
+      inputs:
+      outputs:
+    Raise:
+      inputs:
+      outputs:
+    RegisterAllEvents:
+      impl:
+        uiobjectimpl: Frame/RegisterAllEvents
+      inputs:
+      outputs:
+    RegisterEvent:
+      impl:
+        uiobjectimpl: Frame/RegisterEvent
+      inputs:
+      - name: eventName
+        type: string
+      outputs:
+      - name: registered
+        type: boolean
+    RegisterForDrag:
+      inputs:
+      - name: buttons
+        type: string
+      instride: 1
+      outputs:
+    RegisterUnitEvent:
+      impl:
+        uiobjectimpl: Frame/RegisterUnitEvent
+      inputs:
+      - name: eventName
+        type: string
+      - name: units
+        nilable: true
+        type: string
+      instride: 1
+      outputs:
+      - name: registered
+        type: boolean
+    RotateTextures:
+      inputs:
+      - name: radians
+        type: number
+      - default: 0.5
+        name: x
+        type: number
+      - default: 0.5
+        name: y
+        type: number
+      outputs:
+    SetAlphaGradient:
+      inputs:
+      - name: index
+        type: number
+      - name: gradient
+        type:
+          structure: vector2
+      outputs:
+    SetAttribute:
+      impl:
+        uiobjectimpl: Frame/SetAttribute
+      inputs:
+      - name: attributeName
+        type: string
+      - name: value
+        nilable: true
+        type: unknown
+      outputs:
+    SetAttributeNoHandler:
+      impl:
+        uiobjectimpl: Frame/SetAttributeNoHandler
+      inputs:
+      - name: attributeName
+        type: string
+      - name: value
+        nilable: true
+        type: unknown
+      outputs:
+    SetClampedToScreen:
+      impl:
+        setter:
+        - name: isClampedToScreen
+      inputs:
+      - name: clampedToScreen
+        type: boolean
+      outputs:
+    SetClampRectInsets:
+      inputs:
+      - name: left
+        type: number
+      - name: right
+        type: number
+      - name: top
+        type: number
+      - name: bottom
+        type: number
+      outputs:
+    SetClipsChildren:
+      inputs:
+      - name: clipsChildren
+        type: boolean
+      outputs:
+    SetDontSavePosition:
+      impl:
+        setter:
+        - name: dontSavePosition
+      inputs:
+      - name: dontSave
+        type: boolean
+      outputs:
+    SetDrawLayerEnabled:
+      inputs:
+      - name: layer
+        type:
+          stringenum: DrawLayer
+      - default: false
+        name: isEnabled
+        type: boolean
+      outputs:
+    SetFixedFrameLevel:
+      impl:
+        setter:
+        - name: hasFixedFrameLevel
+      inputs:
+      - name: isFixed
+        type: boolean
+      outputs:
+    SetFixedFrameStrata:
+      impl:
+        setter:
+        - name: hasFixedFrameStrata
+      inputs:
+      - name: isFixed
+        type: boolean
+      outputs:
+    SetFlattensRenderLayers:
+      impl:
+        setter:
+        - name: flattensRenderLayers
+      inputs:
+      - name: flatten
+        type: boolean
+      outputs:
+    SetFrameLevel:
+      impl:
+        uiobjectimpl: Frame/SetFrameLevel
+      inputs:
+      - name: frameLevel
+        type: number
+      outputs:
+    SetFrameStrata:
+      impl:
+        setter:
+        - name: frameStrata
+      inputs:
+      - name: strata
+        type:
+          stringenum: FrameStrata
+      outputs:
+    SetHighlightLocked:
+      inputs:
+      - name: locked
+        type: boolean
+      outputs:
+    SetHitRectInsets:
+      impl:
+        setter:
+        - name: hitLeft
+        - name: hitRight
+        - name: hitTop
+        - name: hitBottom
+      inputs:
+      - name: left
+        type: number
+      - name: right
+        type: number
+      - name: top
+        type: number
+      - name: bottom
+        type: number
+      outputs:
+    SetHyperlinkPropagateToParent:
+      impl:
+        setter:
+        - name: hyperlinkPropagateToParent
+      inputs:
+      - name: canPropagate
+        type: boolean
+      outputs:
+    SetHyperlinksEnabled:
+      impl:
+        setter:
+        - name: hyperlinksEnabled
+      inputs:
+      - default: false
+        name: enabled
+        type: boolean
+      outputs:
+    SetID:
+      impl:
+        setter:
+        - name: id
+      inputs:
+      - name: id
+        type: number
+      outputs:
+    SetIsFrameBuffer:
+      inputs:
+      - name: isFrameBuffer
+        type: boolean
+      outputs:
+    SetMovable:
+      impl:
+        setter:
+        - name: movable
+      inputs:
+      - name: movable
+        type: boolean
+      outputs:
+    SetPropagateKeyboardInput:
+      impl:
+        setter:
+        - name: propagateKeyboardInput
+      inputs:
+      - name: propagate
+        type: boolean
+      outputs:
+    SetResizable:
+      impl:
+        setter:
+        - name: resizable
+      inputs:
+      - name: resizable
+        type: boolean
+      outputs:
+    SetResizeBounds:
+      impl:
+        uiobjectimpl: Frame/SetResizeBounds
+      inputs:
+      - name: minWidth
+        type: number
+      - name: minHeight
+        type: number
+      - name: maxWidth
+        nilable: true
+        type: number
+      - name: maxHeight
+        nilable: true
+        type: number
+      outputs:
+    SetToplevel:
+      impl:
+        setter:
+        - name: toplevel
+      inputs:
+      - name: topLevel
+        type: boolean
+      outputs:
+    SetUserPlaced:
+      impl:
+        setter:
+        - name: isUserPlaced
+      inputs:
+      - name: userPlaced
+        type: boolean
+      outputs:
+    SetUsingParentLevel:
+      inputs:
+      - name: usingParentLevel
+        type: boolean
+      outputs:
+    SetWindow:
+      inputs:
+      - name: window
+        nilable: true
+        type: nil
+      outputs:
+    StartMoving:
+      inputs:
+      - default: false
+        name: alwaysStartFromMouse
+        type: boolean
+      outputs:
+    StartSizing:
+      inputs:
+      - name: resizePoint
+        nilable: true
+        type:
+          stringenum: FramePoint
+      - default: false
+        name: alwaysStartFromMouse
+        type: boolean
+      outputs:
+    StopMovingOrSizing:
+      inputs:
+      outputs:
+    UnlockHighlight:
+      inputs:
+      outputs:
+    UnregisterAllEvents:
+      impl:
+        uiobjectimpl: Frame/UnregisterAllEvents
+      inputs:
+      outputs:
+    UnregisterEvent:
+      impl:
+        uiobjectimpl: Frame/UnregisterEvent
+      inputs:
+      - name: eventName
+        type: string
+      outputs:
+      - name: registered
+        type: boolean
+  scripts:
+    OnAttributeChanged:
+    OnChar:
+    OnDisable:
+    OnDragStart:
+    OnDragStop:
+    OnEnable:
+    OnEvent:
+    OnGamePadButtonDown:
+    OnGamePadButtonUp:
+    OnHyperlinkClick:
+    OnHyperlinkEnter:
+    OnHyperlinkLeave:
+    OnKeyDown:
+    OnKeyUp:
+    OnReceiveDrag:
+    OnSizeChanged:
+    OnUpdate:
+GameTooltip:
+  fields:
+    tooltipAnchorType:
+      init: ANCHOR_NONE
+      type: string
+    tooltipLines:
+      init: 0
+      type: number
+    tooltipOwner:
+      nilable: true
+      type:
+        uiobject: Frame
+  inherits:
+    Frame:
+  methods:
+    AddAtlas:
+    AddDoubleLine:
+    AddFontStrings:
+    AddLine:
+    AddTexture:
+    AppendText:
+    ClearLines:
+    CopyTooltip:
+    FadeOut:
+    GetAnchorType:
+      impl:
+        getter:
+        - name: tooltipAnchorType
+      inputs:
+      outputs:
+      - name: anchorType
+        type: string
+    GetCustomLineSpacing:
+    GetMinimumWidth:
+      outputs:
+      - name: minimumWidth
+        type: number
+    GetOwner:
+      impl:
+        getter:
+        - name: tooltipOwner
+      inputs:
+      outputs:
+      - name: owner
+        nilable: true
+        type:
+          uiobject: Frame
+    GetPadding:
+    IsOwned:
+      impl:
+        uiobjectimpl: GameTooltip/IsOwned
+      inputs:
+      - name: frame
+        type:
+          uiobject: Frame
+      outputs:
+      - name: isOwned
+        type: boolean
+    NumLines:
+      impl:
+        getter:
+        - name: tooltipLines
+      inputs:
+      outputs:
+      - name: numLines
+        type: number
+    SetAllowShowWithNoLines:
+    SetAnchorType:
+    SetCustomLineSpacing:
+    SetCustomWordWrapMinWidth:
+    SetFrameStack:
+    SetMinimumWidth:
+    SetObjectTooltipPosition:
+    SetOwner:
+      impl:
+        uiobjectimpl: GameTooltip/SetOwner
+      inputs:
+      - name: owner
+        type:
+          uiobject: Frame
+      - name: anchorType
+        nilable: true
+        type: string
+      outputs:
+    SetPadding:
+    SetShrinkToFitWrapped:
+    SetText:
+  scripts:
+    OnTooltipCleared:
+    OnTooltipSetDefaultAnchor:
+    OnTooltipSetFrameStack:
+LayeredRegion:
+  fields:
+    layer:
+      init: ARTWORK
+      type:
+        stringenum: DrawLayer
+    sublevel:
+      init: 0
+      type: number
+    vertexColorB:
+      init: 1
+      type: number
+    vertexColorG:
+      init: 1
+      type: number
+    vertexColorR:
+      init: 1
+      type: number
+  inherits:
+    Region:
+  methods:
+    GetDrawLayer:
+      impl:
+        getter:
+        - name: layer
+        - name: sublevel
+      inputs:
+      outputs:
+      - name: layer
+        type:
+          stringenum: DrawLayer
+      - name: sublayer
+        type: number
+    GetVertexColor:
+      impl:
+        getter:
+        - name: vertexColorR
+        - name: vertexColorG
+        - name: vertexColorB
+        - name: alpha
+      inputs:
+      outputs:
+      - name: colorR
+        type: number
+      - name: colorG
+        type: number
+      - name: colorB
+        type: number
+      - name: colorA
+        type: number
+    SetDrawLayer:
+      impl:
+        setter:
+        - name: layer
+        - name: sublevel
+      inputs:
+      - name: layer
+        type:
+          stringenum: DrawLayer
+      - default: 0
+        name: sublevel
+        type: number
+      outputs:
+    SetVertexColor:
+      impl:
+        uiobjectimpl: LayeredRegion/SetVertexColor
+      inputs:
+      - name: colorR
+        type: number
+      - name: colorG
+        type: number
+      - name: colorB
+        type: number
+      - name: a
+        nilable: true
+        type: number
+      outputs:
+  virtual: true
+Line:
+  fields:
+    hitRectThickness:
+      init: 0
+      type: number
+    thickness:
+      init: 4
+      type: number
+  inherits:
+    TextureBase:
+  methods:
+    GetEndPoint:
+      inputs:
+      outputs:
+      - name: relativePoint
+        type:
+          stringenum: FramePoint
+      - name: relativeTo
+        nilable: true
+        type:
+          uiobject: Region
+      - name: offsetX
+        type: number
+      - name: offsetY
+        type: number
+    GetHitRectThickness:
+      impl:
+        getter:
+        - name: hitRectThickness
+      inputs:
+      outputs:
+      - name: thickness
+        type: number
+    GetStartPoint:
+      inputs:
+      outputs:
+      - name: relativePoint
+        type:
+          stringenum: FramePoint
+      - name: relativeTo
+        nilable: true
+        type:
+          uiobject: Region
+      - name: offsetX
+        type: number
+      - name: offsetY
+        type: number
+    GetThickness:
+      impl:
+        getter:
+        - name: thickness
+      inputs:
+      outputs:
+      - name: thickness
+        type: number
+    SetEndPoint:
+      inputs:
+      - name: relativePoint
+        type:
+          stringenum: FramePoint
+      - name: relativeTo
+        type:
+          uiobject: Region
+      - default: 0
+        name: offsetX
+        type: number
+      - default: 0
+        name: offsetY
+        type: number
+      outputs:
+    SetHitRectThickness:
+      impl:
+        setter:
+        - name: hitRectThickness
+      inputs:
+      - name: thickness
+        type: number
+      outputs:
+    SetStartPoint:
+      inputs:
+      - name: relativePoint
+        type:
+          stringenum: FramePoint
+      - name: relativeTo
+        type:
+          uiobject: Region
+      - default: 0
+        name: offsetX
+        type: number
+      - default: 0
+        name: offsetY
+        type: number
+      outputs:
+    SetThickness:
+      impl:
+        setter:
+        - name: thickness
+      inputs:
+      - name: thickness
+        type: number
+      outputs:
+LineScale:
+  fields:
+  inherits:
+    Scale:
+  methods:
+LineTranslation:
+  fields:
+  inherits:
+    Translation:
+  methods:
+MaskTexture:
+  fields:
+  inherits:
+    TextureBase:
+  methods:
+MessageFrame:
+  fields:
+    fadeDuration:
+      init: 3
+      type: number
+    fadePower:
+      init: 1
+      type: number
+    insertMode:
+      init: BOTTOM
+      type:
+        stringenum: InsertMode
+    timeVisible:
+      init: 10
+      type: number
+  inherits:
+    FontInstance:
+    Frame:
+  methods:
+    AddMessage:
+      impl:
+        uiobjectimpl: MessageFrame/AddMessage
+      inputs:
+      - name: text
+        type: string
+      - name: colorR
+        type: number
+      - name: colorG
+        type: number
+      - name: colorB
+        type: number
+      - name: a
+        nilable: true
+        type: number
+      - name: messageID
+        nilable: true
+        type: number
+      outputs:
+    Clear:
+      inputs:
+      outputs:
+    GetFadeDuration:
+      impl:
+        getter:
+        - name: fadeDuration
+      inputs:
+      outputs:
+      - name: fadeDurationSeconds
+        type: number
+    GetFadePower:
+      impl:
+        getter:
+        - name: fadePower
+      inputs:
+      outputs:
+      - name: fadePower
+        type: number
+    GetFading:
+      inputs:
+      outputs:
+      - name: isFading
+        type: boolean
+    GetFontStringByID:
+      inputs:
+      - name: messageID
+        type: number
+      outputs:
+      - name: fontString
+        nilable: true
+        type:
+          uiobject: FontString
+    GetInsertMode:
+      impl:
+        getter:
+        - name: insertMode
+      inputs:
+      outputs:
+      - name: mode
+        type:
+          stringenum: InsertMode
+    GetTimeVisible:
+      impl:
+        getter:
+        - name: timeVisible
+      inputs:
+      outputs:
+      - name: timeVisibleSeconds
+        type: number
+    HasMessageByID:
+      inputs:
+      - name: messageID
+        type: number
+      outputs:
+      - name: hasMessage
+        type: boolean
+    ResetMessageFadeByID:
+      inputs:
+      - name: messageID
+        type: number
+      outputs:
+    SetFadeDuration:
+      impl:
+        setter:
+        - name: fadeDuration
+      inputs:
+      - name: fadeDurationSeconds
+        type: number
+      outputs:
+    SetFadePower:
+      impl:
+        setter:
+        - name: fadePower
+      inputs:
+      - name: fadePower
+        type: number
+      outputs:
+    SetFading:
+      inputs:
+      - name: fading
+        type: boolean
+      outputs:
+    SetInsertMode:
+      impl:
+        setter:
+        - name: insertMode
+      inputs:
+      - name: mode
+        type:
+          stringenum: InsertMode
+      outputs:
+    SetTimeVisible:
+      impl:
+        setter:
+        - name: timeVisible
+      inputs:
+      - name: timeVisibleSeconds
+        type: number
+      outputs:
+Minimap:
+  fields:
+    zoom:
+      init: 0
+      type: number
+  inherits:
+    Frame:
+  methods:
+    GetPingPosition:
+      inputs:
+      outputs:
+      - name: positionX
+        type: number
+      - name: positionY
+        type: number
+    GetZoom:
+      impl:
+        getter:
+        - name: zoom
+      inputs:
+      outputs:
+      - name: zoomFactor
+        type: number
+    GetZoomLevels:
+      inputs:
+      outputs:
+      - name: zoomLevels
+        type: number
+    PingLocation:
+      inputs:
+      - name: locationX
+        type: number
+      - name: locationY
+        type: number
+      outputs:
+    SetArchBlobInsideAlpha:
+      inputs:
+      - name: alpha
+        type: number
+      outputs:
+    SetArchBlobInsideTexture:
+      inputs:
+      - name: asset
+        type: TextureAsset
+      outputs:
+    SetArchBlobOutsideAlpha:
+      inputs:
+      - name: alpha
+        type: number
+      outputs:
+    SetArchBlobOutsideTexture:
+      inputs:
+      - name: asset
+        type: TextureAsset
+      outputs:
+    SetArchBlobRingAlpha:
+      inputs:
+      - name: alpha
+        type: number
+      outputs:
+    SetArchBlobRingScalar:
+      inputs:
+      - name: scalar
+        type: number
+      outputs:
+    SetArchBlobRingTexture:
+      inputs:
+      - name: asset
+        type: TextureAsset
+      outputs:
+    SetBlipTexture:
+      inputs:
+      - name: asset
+        type: TextureAsset
+      outputs:
+    SetCorpsePOIArrowTexture:
+      inputs:
+      - name: asset
+        type: TextureAsset
+      outputs:
+    SetIconTexture:
+      inputs:
+      - name: asset
+        type: TextureAsset
+      outputs:
+    SetMaskTexture:
+      inputs:
+      - name: asset
+        type: TextureAsset
+      outputs:
+    SetPlayerTexture:
+      inputs:
+      - name: asset
+        type: TextureAsset
+      outputs:
+    SetPOIArrowTexture:
+      inputs:
+      - name: asset
+        type: TextureAsset
+      outputs:
+    SetQuestBlobInsideAlpha:
+      inputs:
+      - name: alpha
+        type: number
+      outputs:
+    SetQuestBlobInsideTexture:
+      inputs:
+      - name: asset
+        type: TextureAsset
+      outputs:
+    SetQuestBlobOutsideAlpha:
+      inputs:
+      - name: alpha
+        type: number
+      outputs:
+    SetQuestBlobOutsideTexture:
+      inputs:
+      - name: asset
+        type: TextureAsset
+      outputs:
+    SetQuestBlobRingAlpha:
+      inputs:
+      - name: alpha
+        type: number
+      outputs:
+    SetQuestBlobRingScalar:
+      inputs:
+      - name: scalar
+        type: number
+      outputs:
+    SetQuestBlobRingTexture:
+      inputs:
+      - name: asset
+        type: TextureAsset
+      outputs:
+    SetStaticPOIArrowTexture:
+      inputs:
+      - name: asset
+        type: TextureAsset
+      outputs:
+    SetTaskBlobInsideAlpha:
+      inputs:
+      - name: alpha
+        type: number
+      outputs:
+    SetTaskBlobInsideTexture:
+      inputs:
+      - name: asset
+        type: TextureAsset
+      outputs:
+    SetTaskBlobOutsideAlpha:
+      inputs:
+      - name: alpha
+        type: number
+      outputs:
+    SetTaskBlobOutsideTexture:
+      inputs:
+      - name: asset
+        type: TextureAsset
+      outputs:
+    SetTaskBlobRingAlpha:
+      inputs:
+      - name: alpha
+        type: number
+      outputs:
+    SetTaskBlobRingScalar:
+      inputs:
+      - name: scalar
+        type: number
+      outputs:
+    SetTaskBlobRingTexture:
+      inputs:
+      - name: asset
+        type: TextureAsset
+      outputs:
+    SetZoom:
+      impl:
+        setter:
+        - name: zoom
+      inputs:
+      - name: zoomFactor
+        type: number
+      outputs:
+    UpdateBlips:
+      inputs:
+      outputs:
+  singleton: true
+Model:
+  fields:
+    cameraDistance:
+      dynamicinit: true
+      init: 0
+      type: number
+    cameraFacing:
+      init: 0
+      type: number
+    cameraRoll:
+      init: 0
+      type: number
+    desaturation:
+      init: 0
+      type: number
+    facing:
+      init: 0
+      type: number
+    fogFar:
+      init: 1
+      type: number
+    fogNear:
+      init: 0
+      type: number
+    modelAlpha:
+      init: 1
+      type: number
+    modelScale:
+      init: 1
+      type: number
+    paused:
+      init: false
+      type: boolean
+    pitch:
+      init: 0
+      type: number
+    roll:
+      init: 0
+      type: number
+    shadowEffect:
+      init: 0
+      type: number
+  inherits:
+    Frame:
+  methods:
+    AdvanceTime:
+      inputs:
+      outputs:
+    ClearFog:
+      inputs:
+      outputs:
+    ClearModel:
+      inputs:
+      outputs:
+    ClearTransform:
+      inputs:
+      outputs:
+    GetCameraDistance:
+      impl:
+        getter:
+        - name: cameraDistance
+      inputs:
+      outputs:
+      - name: distance
+        type: number
+    GetCameraFacing:
+      impl:
+        getter:
+        - name: cameraFacing
+      inputs:
+      outputs:
+      - name: radians
+        type: number
+    GetCameraPosition:
+      inputs:
+      outputs:
+      - name: positionX
+        type: number
+      - name: positionY
+        type: number
+      - name: positionZ
+        type: number
+    GetCameraRoll:
+      impl:
+        getter:
+        - name: cameraRoll
+      inputs:
+      outputs:
+      - name: radians
+        type: number
+    GetCameraTarget:
+      inputs:
+      outputs:
+      - name: targetX
+        type: number
+      - name: targetY
+        type: number
+      - name: targetZ
+        type: number
+    GetDesaturation:
+      impl:
+        getter:
+        - name: desaturation
+      inputs:
+      outputs:
+      - name: strength
+        type: number
+    GetFacing:
+      impl:
+        getter:
+        - name: facing
+      inputs:
+      outputs:
+      - name: facing
+        type: number
+    GetFogColor:
+      inputs:
+      outputs:
+      - name: colorR
+        type: number
+      - name: colorG
+        type: number
+      - name: colorB
+        type: number
+      - name: colorA
+        type: number
+    GetFogFar:
+      impl:
+        getter:
+        - name: fogFar
+      inputs:
+      outputs:
+      - name: fogFar
+        type: number
+    GetFogNear:
+      impl:
+        getter:
+        - name: fogNear
+      inputs:
+      outputs:
+      - name: fogNear
+        type: number
+    GetLight:
+      inputs:
+      outputs:
+      - name: enabled
+        type: boolean
+      - name: light
+        type:
+          structure: ModelLight
+    GetModelAlpha:
+      impl:
+        getter:
+        - name: modelAlpha
+      inputs:
+      outputs:
+      - name: alpha
+        type: number
+    GetModelDrawLayer:
+      inputs:
+      outputs:
+      - name: layer
+        type:
+          stringenum: DrawLayer
+      - name: sublayer
+        type: number
+    GetModelFileID:
+      inputs:
+      outputs:
+      - name: modelFileID
+        type: number
+    GetModelScale:
+      impl:
+        getter:
+        - name: modelScale
+      inputs:
+      outputs:
+      - name: scale
+        type: number
+    GetPaused:
+      impl:
+        getter:
+        - name: paused
+      inputs:
+      outputs:
+      - name: paused
+        type: boolean
+    GetPitch:
+      impl:
+        getter:
+        - name: pitch
+      inputs:
+      outputs:
+      - name: pitch
+        type: number
+    GetPosition:
+      inputs:
+      outputs:
+      - name: positionX
+        type: number
+      - name: positionY
+        type: number
+      - name: positionZ
+        type: number
+    GetRoll:
+      impl:
+        getter:
+        - name: roll
+      inputs:
+      outputs:
+      - name: roll
+        type: number
+    GetShadowEffect:
+      impl:
+        getter:
+        - name: shadowEffect
+      inputs:
+      outputs:
+      - name: strength
+        type: number
+    GetViewInsets:
+      inputs:
+      outputs:
+      - name: left
+        type: number
+      - name: right
+        type: number
+      - name: top
+        type: number
+      - name: bottom
+        type: number
+    GetViewTranslation:
+      inputs:
+      outputs:
+      - name: x
+        type: number
+      - name: y
+        type: number
+    GetWorldScale:
+      inputs:
+      outputs:
+      - name: worldScale
+        type: number
+    HasAttachmentPoints:
+      inputs:
+      outputs:
+      - name: hasAttachmentPoints
+        type: boolean
+    HasCustomCamera:
+      inputs:
+      outputs:
+      - name: hasCustomCamera
+        type: boolean
+    IsUsingModelCenterToTransform:
+      inputs:
+      outputs:
+      - name: useCenter
+        type: boolean
+    MakeCurrentCameraCustom:
+      inputs:
+      outputs:
+    ReplaceIconTexture:
+      inputs:
+      - name: asset
+        type: FileAsset
+      outputs:
+    SetCamera:
+      inputs:
+      - name: cameraIndex
+        type: number
+      outputs:
+    SetCameraDistance:
+      impl:
+        setter:
+        - name: cameraDistance
+      inputs:
+      - name: distance
+        type: number
+      outputs:
+    SetCameraFacing:
+      impl:
+        setter:
+        - name: cameraFacing
+      inputs:
+      - name: radians
+        type: number
+      outputs:
+    SetCameraPosition:
+      inputs:
+      - name: positionX
+        type: number
+      - name: positionY
+        type: number
+      - name: positionZ
+        type: number
+      outputs:
+    SetCameraRoll:
+      impl:
+        setter:
+        - name: cameraRoll
+      inputs:
+      - name: radians
+        type: number
+      outputs:
+    SetCameraTarget:
+      inputs:
+      - name: targetX
+        type: number
+      - name: targetY
+        type: number
+      - name: targetZ
+        type: number
+      outputs:
+    SetCustomCamera:
+      inputs:
+      - name: cameraIndex
+        type: number
+      outputs:
+    SetDesaturation:
+      impl:
+        setter:
+        - name: desaturation
+      inputs:
+      - name: strength
+        type: number
+      outputs:
+    SetFacing:
+      impl:
+        setter:
+        - name: facing
+      inputs:
+      - name: facing
+        type: number
+      outputs:
+    SetFogColor:
+      inputs:
+      - name: colorR
+        type: number
+      - name: colorG
+        type: number
+      - name: colorB
+        type: number
+      - name: a
+        nilable: true
+        type: number
+      outputs:
+    SetFogFar:
+      impl:
+        setter:
+        - name: fogFar
+      inputs:
+      - name: fogFar
+        type: number
+      outputs:
+    SetFogNear:
+      impl:
+        setter:
+        - name: fogNear
+      inputs:
+      - name: fogNear
+        type: number
+      outputs:
+    SetGlow:
+      inputs:
+      - name: glow
+        type: number
+      outputs:
+    SetLight:
+      inputs:
+      - name: enabled
+        type: boolean
+      - name: light
+        type:
+          structure: ModelLight
+      outputs:
+    SetModel:
+      inputs:
+      - name: asset
+        type: string
+      - default: false
+        name: noMip
+        type: boolean
+      outputs:
+    SetModelAlpha:
+      impl:
+        setter:
+        - name: modelAlpha
+      inputs:
+      - name: alpha
+        type: number
+      outputs:
+    SetModelDrawLayer:
+      inputs:
+      - name: layer
+        type:
+          stringenum: DrawLayer
+      outputs:
+    SetModelScale:
+      impl:
+        setter:
+        - name: modelScale
+      inputs:
+      - name: scale
+        type: number
+      outputs:
+    SetParticlesEnabled:
+      inputs:
+      - name: enabled
+        type: boolean
+      outputs:
+    SetPaused:
+      impl:
+        setter:
+        - name: paused
+      inputs:
+      - name: paused
+        type: boolean
+      outputs:
+    SetPitch:
+      impl:
+        setter:
+        - name: pitch
+      inputs:
+      - name: pitch
+        type: number
+      outputs:
+    SetPosition:
+      inputs:
+      - name: positionX
+        type: number
+      - name: positionY
+        type: number
+      - name: positionZ
+        type: number
+      outputs:
+    SetRoll:
+      impl:
+        setter:
+        - name: roll
+      inputs:
+      - name: roll
+        type: number
+      outputs:
+    SetSequence:
+      inputs:
+      - name: sequence
+        type: number
+      outputs:
+    SetSequenceTime:
+      inputs:
+      - name: sequence
+        type: number
+      - name: timeOffset
+        type: number
+      outputs:
+    SetShadowEffect:
+      impl:
+        setter:
+        - name: shadowEffect
+      inputs:
+      - name: strength
+        type: number
+      outputs:
+    SetTransform:
+      inputs:
+      - name: translation
+        nilable: true
+        type:
+          structure: vector3
+      - name: rotation
+        nilable: true
+        type:
+          structure: vector3
+      - name: scale
+        nilable: true
+        type: number
+      outputs:
+    SetViewInsets:
+      inputs:
+      - name: left
+        type: number
+      - name: right
+        type: number
+      - name: top
+        type: number
+      - name: bottom
+        type: number
+      outputs:
+    SetViewTranslation:
+      inputs:
+      - name: x
+        type: number
+      - name: y
+        type: number
+      outputs:
+    TransformCameraSpaceToModelSpace:
+      inputs:
+      - name: cameraPosition
+        type:
+          structure: vector3
+      outputs:
+      - name: modelPosition
+        type:
+          structure: vector3
+    UseModelCenterToTransform:
+      inputs:
+      - name: useCenter
+        type: boolean
+      outputs:
+  scripts:
+    OnAnimFinished:
+    OnAnimStarted:
+    OnModelLoaded:
+ModelScene:
+  fields:
+    cameraFarClip:
+      init: 100
+      type: number
+    cameraFieldOfView:
+      init: 0.94248
+      type: number
+    cameraNearClip:
+      init: 0.2
+      type: number
+    fogFar:
+      init: 100000000
+      type: number
+    fogNear:
+      init: 10000000
+      type: number
+  inherits:
+    Frame:
+  methods:
+    ClearFog:
+      inputs:
+      outputs:
+    CreateActor:
+      impl:
+        uiobjectimpl: ModelScene/CreateActor
+      inputs:
+      - name: name
+        nilable: true
+        type: string
+      - name: template
+        nilable: true
+        type: string
+      outputs:
+      - name: actor
+        type:
+          uiobject: Actor
+    GetActorAtIndex:
+      inputs:
+      - name: index
+        type: number
+      outputs:
+    GetAllowOverlappedModels:
+      inputs:
+      outputs:
+      - name: allowOverlappedModels
+        type: boolean
+    GetCameraFarClip:
+      impl:
+        getter:
+        - name: cameraFarClip
+      inputs:
+      outputs:
+      - name: farClip
+        type: number
+    GetCameraFieldOfView:
+      impl:
+        getter:
+        - name: cameraFieldOfView
+      inputs:
+      outputs:
+      - name: fov
+        type: number
+    GetCameraForward:
+      inputs:
+      outputs:
+      - name: forwardX
+        type: number
+      - name: forwardY
+        type: number
+      - name: forwardZ
+        type: number
+    GetCameraNearClip:
+      impl:
+        getter:
+        - name: cameraNearClip
+      inputs:
+      outputs:
+      - name: nearClip
+        type: number
+    GetCameraPosition:
+      inputs:
+      outputs:
+      - name: positionX
+        type: number
+      - name: positionY
+        type: number
+      - name: positionZ
+        type: number
+    GetCameraRight:
+      inputs:
+      outputs:
+      - name: rightX
+        type: number
+      - name: rightY
+        type: number
+      - name: rightZ
+        type: number
+    GetCameraUp:
+      inputs:
+      outputs:
+      - name: upX
+        type: number
+      - name: upY
+        type: number
+      - name: upZ
+        type: number
+    GetDrawLayer:
+      inputs:
+      outputs:
+      - name: layer
+        type:
+          stringenum: DrawLayer
+      - name: sublevel
+        type: number
+    GetFogColor:
+      inputs:
+      outputs:
+      - name: colorR
+        type: number
+      - name: colorG
+        type: number
+      - name: colorB
+        type: number
+    GetFogFar:
+      impl:
+        getter:
+        - name: fogFar
+      inputs:
+      outputs:
+      - name: far
+        type: number
+    GetFogNear:
+      impl:
+        getter:
+        - name: fogNear
+      inputs:
+      outputs:
+      - name: near
+        type: number
+    GetLightAmbientColor:
+      inputs:
+      outputs:
+      - name: colorR
+        type: number
+      - name: colorG
+        type: number
+      - name: colorB
+        type: number
+    GetLightDiffuseColor:
+      inputs:
+      outputs:
+      - name: colorR
+        type: number
+      - name: colorG
+        type: number
+      - name: colorB
+        type: number
+    GetLightDirection:
+      inputs:
+      outputs:
+      - name: directionX
+        type: number
+      - name: directionY
+        type: number
+      - name: directionZ
+        type: number
+    GetLightPosition:
+      inputs:
+      outputs:
+      - name: positionX
+        type: number
+      - name: positionY
+        type: number
+      - name: positionZ
+        type: number
+    GetLightType:
+      inputs:
+      outputs:
+      - name: lightType
+        nilable: true
+        type:
+          enum: ModelLightType
+    GetNumActors:
+      inputs:
+      outputs:
+      - name: numActors
+        type: number
+    GetViewInsets:
+      inputs:
+      outputs:
+      - name: insetsLeft
+        type: number
+      - name: insetsRight
+        type: number
+      - name: insetsTop
+        type: number
+      - name: insetsBottom
+        type: number
+    GetViewTranslation:
+      inputs:
+      outputs:
+      - name: translationX
+        type: number
+      - name: translationY
+        type: number
+    IsLightVisible:
+      inputs:
+      outputs:
+      - name: isVisible
+        type: boolean
+    Project3DPointTo2D:
+      inputs:
+      - name: pointX
+        type: number
+      - name: pointY
+        type: number
+      - name: pointZ
+        type: number
+      mayreturnnothing: true
+      outputs:
+      - name: point2DX
+        type: number
+      - name: point2DY
+        type: number
+      - name: depth
+        type: number
+    SetAllowOverlappedModels:
+      inputs:
+      - name: allowOverlappedModels
+        type: boolean
+      outputs:
+    SetCameraFarClip:
+      impl:
+        setter:
+        - name: cameraFarClip
+      inputs:
+      - name: farClip
+        type: number
+      outputs:
+    SetCameraFieldOfView:
+      impl:
+        setter:
+        - name: cameraFieldOfView
+      inputs:
+      - name: fov
+        type: number
+      outputs:
+    SetCameraNearClip:
+      impl:
+        setter:
+        - name: cameraNearClip
+      inputs:
+      - name: nearClip
+        type: number
+      outputs:
+    SetCameraOrientationByAxisVectors:
+      inputs:
+      - name: forwardX
+        type: number
+      - name: forwardY
+        type: number
+      - name: forwardZ
+        type: number
+      - name: rightX
+        type: number
+      - name: rightY
+        type: number
+      - name: rightZ
+        type: number
+      - name: upX
+        type: number
+      - name: upY
+        type: number
+      - name: upZ
+        type: number
+      outputs:
+    SetCameraOrientationByYawPitchRoll:
+      inputs:
+      - name: yaw
+        type: number
+      - name: pitch
+        type: number
+      - name: roll
+        type: number
+      outputs:
+    SetCameraPosition:
+      inputs:
+      - name: positionX
+        type: number
+      - name: positionY
+        type: number
+      - name: positionZ
+        type: number
+      outputs:
+    SetDesaturation:
+      inputs:
+      - name: strength
+        type: number
+      outputs:
+    SetDrawLayer:
+      inputs:
+      - name: layer
+        type:
+          stringenum: DrawLayer
+      outputs:
+    SetFogColor:
+      inputs:
+      - name: colorR
+        type: number
+      - name: colorG
+        type: number
+      - name: colorB
+        type: number
+      outputs:
+    SetFogFar:
+      impl:
+        setter:
+        - name: fogFar
+      inputs:
+      - name: far
+        type: number
+      outputs:
+    SetFogNear:
+      impl:
+        setter:
+        - name: fogNear
+      inputs:
+      - name: near
+        type: number
+      outputs:
+    SetLightAmbientColor:
+      inputs:
+      - name: colorR
+        type: number
+      - name: colorG
+        type: number
+      - name: colorB
+        type: number
+      outputs:
+    SetLightDiffuseColor:
+      inputs:
+      - name: colorR
+        type: number
+      - name: colorG
+        type: number
+      - name: colorB
+        type: number
+      outputs:
+    SetLightDirection:
+      inputs:
+      - name: directionX
+        type: number
+      - name: directionY
+        type: number
+      - name: directionZ
+        type: number
+      outputs:
+    SetLightPosition:
+      inputs:
+      - name: positionX
+        type: number
+      - name: positionY
+        type: number
+      - name: positionZ
+        type: number
+      outputs:
+    SetLightType:
+      inputs:
+      - name: lightType
+        type:
+          enum: ModelLightType
+      outputs:
+    SetLightVisible:
+      inputs:
+      - default: false
+        name: visible
+        type: boolean
+      outputs:
+    SetPaused:
+      inputs:
+      - name: paused
+        type: boolean
+      - default: true
+        name: affectsGlobalPause
+        type: boolean
+      outputs:
+    SetViewInsets:
+      inputs:
+      - name: insetsLeft
+        type: number
+      - name: insetsRight
+        type: number
+      - name: insetsTop
+        type: number
+      - name: insetsBottom
+        type: number
+      outputs:
+    SetViewTranslation:
+      inputs:
+      - name: translationX
+        type: number
+      - name: translationY
+        type: number
+      outputs:
+    TakeActor:
+      inputs:
+      outputs:
+  scripts:
+    OnDressModel:
+MovieFrame:
+  fields:
+  inherits:
+    Frame:
+  methods:
+    EnableSubtitles:
+      inputs:
+      - name: enable
+        type: boolean
+      outputs:
+    StartMovie:
+      inputs:
+      - name: movieID
+        type: number
+      - default: false
+        name: looping
+        type: boolean
+      outputs:
+      - name: success
+        type: boolean
+      - name: returnCode
+        type: number
+    StartMovieByName:
+      inputs:
+      - name: movieName
+        type: string
+      - default: false
+        name: looping
+        type: boolean
+      - default: 0
+        name: resolution
+        type: number
+      outputs:
+      - name: success
+        type: boolean
+      - name: returnCode
+        type: number
+    StopMovie:
+      inputs:
+      outputs:
+  scripts:
+    OnMovieFinished:
+OffScreenFrame:
+  fields:
+    maxSnapshots:
+      init: 1
+      type: number
+  inherits:
+    Frame:
+  methods:
+    ApplySnapshot:
+      inputs:
+      - name: texture
+        type:
+          uiobject: Texture
+      - name: snapshotID
+        type: number
+      outputs:
+      - name: success
+        type: boolean
+    Flush:
+      inputs:
+      outputs:
+    GetMaxSnapshots:
+      impl:
+        getter:
+        - name: maxSnapshots
+      inputs:
+      outputs:
+      - name: maxSnapshots
+        type: number
+    IsSnapshotValid:
+      inputs:
+      - name: snapshotID
+        type: number
+      outputs:
+      - name: isValid
+        type: boolean
+    SetMaxSnapshots:
+      impl:
+        setter:
+        - name: maxSnapshots
+      inputs:
+      - name: maxSnapshots
+        type: number
+      outputs:
+    TakeSnapshot:
+      inputs:
+      outputs:
+      - name: snapshotID
+        nilable: true
+        type: number
+    TestPrintToFile:
+      inputs:
+      - name: snapshotID
+        type: number
+      - name: filename
+        type: string
+      outputs:
+      - name: success
+        type: boolean
+    UsesNPOT:
+      inputs:
+      outputs:
+      - name: usesNPOT
+        nilable: true
+        type: boolean
+ParentedObject:
+  fields:
+  inherits:
+    ParentedObjectBase:
+  methods:
+    SetParent:
+      impl:
+        uiobjectimpl: ParentedObject/SetParent
+      inputs:
+      - name: parent
+        nilable: true
+        type:
+          uiobject: UIObject
+      outputs:
+  virtual: true
+ParentedObjectBase:
+  fields:
+    children:
+      type: hlist
+    parent:
+      nilable: true
+      type:
+        uiobject: UIObject
+  inherits:
+    UIObject:
+  methods:
+    ClearParentKey:
+      impl:
+        uiobjectimpl: ParentedObjectBase/ClearParentKey
+      inputs:
+      outputs:
+    GetDebugName:
+      impl:
+        uiobjectimpl: ParentedObject/GetDebugName
+      inputs:
+      - default: false
+        name: preferParentKey
+        type: boolean
+      outputs:
+      - name: debugName
+        type: string
+    GetParent:
+      impl:
+        getter:
+        - name: parent
+      inputs:
+      outputs:
+      - name: parent
+        nilable: true
+        type:
+          uiobject: UIObject
+    GetParentKey:
+      impl:
+        uiobjectimpl: ParentedObjectBase/GetParentKey
+      inputs:
+      outputs:
+      - name: parentKey
+        nilable: true
+        type: string
+    SetParentKey:
+      impl:
+        uiobjectimpl: ParentedObjectBase/SetParentKey
+      inputs:
+      - name: parentKey
+        type: string
+      - default: false
+        name: clearOtherKeys
+        type: boolean
+      outputs:
+  objectType: Object
+  virtual: true
+Path:
+  fields:
+    curveType:
+      init: NONE
+      type:
+        stringenum: CurveType
+  inherits:
+    Animation:
+  methods:
+    CreateControlPoint:
+      impl:
+        uiobjectimpl: Path/CreateControlPoint
+      inputs:
+      - name: name
+        nilable: true
+        type: string
+      - name: templateName
+        nilable: true
+        type: string
+      - name: order
+        nilable: true
+        type: number
+      outputs:
+      - name: point
+        type:
+          uiobject: ControlPoint
+    GetControlPoints:
+      impl:
+        uiobjectimpl: Path/GetControlPoints
+      inputs:
+      outputs:
+      - name: points
+        type:
+          uiobject: ControlPoint
+      outstride: 1
+    GetCurveType:
+      impl:
+        getter:
+        - name: curveType
+      inputs:
+      outputs:
+      - name: curveType
+        type:
+          stringenum: CurveType
+    GetMaxControlPointOrder:
+      inputs:
+      outputs:
+      - name: maxOrder
+        type: number
+    SetCurveType:
+      impl:
+        setter:
+        - name: curveType
+      inputs:
+      - name: curveType
+        type:
+          stringenum: CurveType
+      outputs:
+PlayerModel:
+  fields:
+    keepModelOnHide:
+      init: false
+      type: boolean
+  inherits:
+    Model:
+  methods:
+    ApplySpellVisualKit:
+      inputs:
+      - name: spellVisualKitID
+        type: number
+      - default: false
+        name: oneShot
+        type: boolean
+      outputs:
+    CanSetUnit:
+      inputs:
+      - name: unit
+        type: unit
+      outputs:
+    FreezeAnimation:
+      inputs:
+      - name: anim
+        type: number
+      - name: variation
+        type: number
+      - name: frame
+        type: number
+      outputs:
+    GetDisplayInfo:
+      inputs:
+      outputs:
+      - name: displayID
+        type: number
+    GetDoBlend:
+      inputs:
+      outputs:
+      - name: doBlend
+        type: boolean
+    GetKeepModelOnHide:
+      impl:
+        getter:
+        - name: keepModelOnHide
+      inputs:
+      outputs:
+      - name: keepModelOnHide
+        type: boolean
+    HasAnimation:
+      inputs:
+      - name: anim
+        type: number
+      outputs:
+      - name: hasAnimation
+        type: boolean
+    PlayAnimKit:
+      inputs:
+      - name: animKit
+        type: number
+      - default: false
+        name: loop
+        type: boolean
+      outputs:
+    RefreshCamera:
+      inputs:
+      outputs:
+    RefreshUnit:
+      inputs:
+      outputs:
+    SetAnimation:
+      inputs:
+      - name: anim
+        type: number
+      - name: variation
+        nilable: true
+        type: number
+      outputs:
+    SetBarberShopAlternateForm:
+      inputs:
+      outputs:
+    SetCamDistanceScale:
+      inputs:
+      - name: scale
+        type: number
+      outputs:
+    SetCreature:
+      inputs:
+      - name: creatureID
+        type: number
+      - default: 0
+        name: displayID
+        type: number
+      outputs:
+    SetDisplayInfo:
+      inputs:
+      - name: displayID
+        type: number
+      - name: mountDisplayID
+        nilable: true
+        type: number
+      outputs:
+    SetDoBlend:
+      inputs:
+      - default: false
+        name: doBlend
+        type: boolean
+      outputs:
+    SetItem:
+      inputs:
+      - name: itemID
+        type: number
+      - name: appearanceModID
+        nilable: true
+        type: number
+      - name: itemVisualID
+        nilable: true
+        type: number
+      outputs:
+    SetItemAppearance:
+      inputs:
+      - name: itemAppearanceID
+        type: number
+      - name: itemVisualID
+        nilable: true
+        type: number
+      - name: itemSubclass
+        nilable: true
+        type:
+          enum: ItemWeaponSubclass
+      outputs:
+    SetKeepModelOnHide:
+      impl:
+        setter:
+        - name: keepModelOnHide
+      inputs:
+      - name: keepModelOnHide
+        type: boolean
+      outputs:
+    SetPortraitZoom:
+      inputs:
+      - name: zoom
+        type: number
+      outputs:
+    SetRotation:
+      inputs:
+      - name: radians
+        type: number
+      - default: true
+        name: animate
+        type: boolean
+      outputs:
+    SetUnit:
+      inputs:
+      - name: unit
+        type: unit
+      - default: true
+        name: blend
+        type: boolean
+      - name: useNativeForm
+        nilable: true
+        type: boolean
+      outputs:
+      - name: success
+        type: boolean
+    StopAnimKit:
+      inputs:
+      outputs:
+    ZeroCachedCenterXY:
+      inputs:
+      outputs:
+POIFrame:
+  fields:
+    mapID:
+      init: 0
+      type: number
+  inherits:
+  methods:
+    DrawAll:
+      inputs:
+      outputs:
+    DrawBlob:
+      inputs:
+      - name: questID
+        type: number
+      - default: false
+        name: draw
+        type: boolean
+      outputs:
+    DrawNone:
+      inputs:
+      outputs:
+    EnableMerging:
+      inputs:
+      - default: false
+        name: enable
+        type: boolean
+      outputs:
+    EnableSmoothing:
+      inputs:
+      - default: false
+        name: enable
+        type: boolean
+      outputs:
+    GetMapID:
+      impl:
+        getter:
+        - name: mapID
+      inputs:
+      outputs:
+      - name: uiMapID
+        type: number
+    SetBorderAlpha:
+      inputs:
+      - name: alpha
+        type: number
+      outputs:
+    SetBorderScalar:
+      inputs:
+      - name: scalar
+        type: number
+      outputs:
+    SetBorderTexture:
+      inputs:
+      - name: asset
+        type: FileAsset
+      outputs:
+    SetFillAlpha:
+      inputs:
+      - name: alpha
+        type: number
+      outputs:
+    SetFillTexture:
+      inputs:
+      - name: asset
+        type: FileAsset
+      outputs:
+    SetMapID:
+      impl:
+        setter:
+        - name: mapID
+      inputs:
+      - name: uiMapID
+        type: number
+      outputs:
+    SetMergeThreshold:
+      inputs:
+      - name: threshold
+        type: number
+      outputs:
+    SetNumSplinePoints:
+      inputs:
+      - name: numSplinePoints
+        type: number
+      outputs:
+  virtual: true
+QuestPOIFrame:
+  fields:
+  inherits:
+    Frame:
+    POIFrame:
+  methods:
+    GetNumTooltips:
+      inputs:
+      outputs:
+      - name: numObjectives
+        type: number
+    GetTooltipIndex:
+      inputs:
+      - name: index
+        type: number
+      outputs:
+      - name: objectiveIndex
+        type: number
+    UpdateMouseOverTooltip:
+      inputs:
+      - name: x
+        type: number
+      - name: y
+        type: number
+      outputs:
+      - name: questID
+        nilable: true
+        type: number
+      - name: numObjectives
+        nilable: true
+        type: number
+Region:
+  fields:
+    animationGroups:
+      init:
+      type: table
+    bottom:
+      init: 0
+      type: number
+    collapsesLayout:
+      init: false
+      type: boolean
+    explicitlyProtected:
+      init: false
+      type: boolean
+    height:
+      init: 0
+      type: number
+    isIgnoringParentAlpha:
+      init: false
+      type: boolean
+    isIgnoringParentScale:
+      init: false
+      type: boolean
+    left:
+      init: 0
+      type: number
+    mouseClickEnabled:
+      init: false
+      type: boolean
+    mouseMotionEnabled:
+      init: false
+      type: boolean
+    mouseWheelEnabled:
+      init: false
+      type: boolean
+    points:
+      init:
+      type: table
+    width:
+      init: 0
+      type: number
+  inherits:
+    ParentedObject:
+    RegionBase:
+  methods:
+    AdjustPointsOffset:
+      inputs:
+      - name: x
+        type: number
+      - name: y
+        type: number
+      outputs:
+    CanChangeProtectedState:
+      inputs:
+      outputs:
+      - name: canChange
+        type: boolean
+    CanPropagateMouseClicks:
+      inputs:
+      outputs:
+      - name: canPropagate
+        type: boolean
+    CanPropagateMouseMotion:
+      inputs:
+      outputs:
+      - name: canPropagate
+        type: boolean
+    ClearAllPoints:
+      impl:
+        uiobjectimpl: Region/ClearAllPoints
+      inputs:
+      outputs:
+    ClearPoint:
+      impl:
+        uiobjectimpl: Region/ClearPoint
+      inputs:
+      - name: point
+        type:
+          stringenum: FramePoint
+      outputs:
+    ClearPointsOffset:
+      inputs:
+      outputs:
+    ClearScripts:
+      inputs:
+      outputs:
+    CollapsesLayout:
+      impl:
+        getter:
+        - name: collapsesLayout
+      inputs:
+      outputs:
+      - name: collapsesLayout
+        type: boolean
+    CreateAnimationGroup:
+      impl:
+        uiobjectimpl: Region/CreateAnimationGroup
+      inputs:
+      - name: name
+        nilable: true
+        type: string
+      - name: templateName
+        nilable: true
+        type: string
+      outputs:
+      - name: group
+        type:
+          uiobject: AnimationGroup
+    EnableMouse:
+      impl:
+        uiobjectimpl: MouseMixin/EnableMouse
+      inputs:
+      - default: false
+        name: enable
+        type: boolean
+      outputs:
+    EnableMouseMotion:
+      inputs:
+      - default: false
+        name: enable
+        type: boolean
+      outputs:
+    EnableMouseWheel:
+      impl:
+        setter:
+        - name: mouseWheelEnabled
+      inputs:
+      - default: false
+        name: enable
+        type: boolean
+      outputs:
+    GetAnimationGroups:
+      impl:
+        uiobjectimpl: Region/GetAnimationGroups
+      inputs:
+      outputs:
+      - name: groups
+        type:
+          uiobject: AnimationGroup
+      outstride: 1
+    GetBottom:
+      impl:
+        uiobjectimpl: Region/GetBottom
+      inputs:
+      mayreturnnothing: true
+      outputs:
+      - name: bottom
+        type: number
+    GetCenter:
+      impl:
+        uiobjectimpl: Region/GetCenter
+      inputs:
+      mayreturnnothing: true
+      outputs:
+      - name: x
+        type: number
+      - name: y
+        type: number
+    GetEffectiveScale:
+      impl:
+        uiobjectimpl: Region/GetEffectiveScale
+      inputs:
+      outputs:
+      - name: effectiveScale
+        type: number
+    GetHeight:
+      impl:
+        uiobjectimpl: Region/GetHeight
+      inputs:
+      - default: false
+        name: ignoreRect
+        type: boolean
+      outputs:
+      - name: height
+        type: number
+    GetLeft:
+      impl:
+        uiobjectimpl: Region/GetLeft
+      inputs:
+      mayreturnnothing: true
+      outputs:
+      - name: left
+        type: number
+    GetNumPoints:
+      impl:
+        uiobjectimpl: Region/GetNumPoints
+      inputs:
+      outputs:
+      - name: numPoints
+        type: number
+    GetPoint:
+      impl:
+        uiobjectimpl: Region/GetPoint
+      inputs:
+      - default: 1
+        name: anchorIndex
+        type: number
+      - default: false
+        name: resolveCollapsed
+        type: boolean
+      mayreturnnothing: true
+      outputs:
+      - name: point
+        type:
+          stringenum: FramePoint
+      - name: relativeTo
+        nilable: true
+        type:
+          uiobject: Region
+      - name: relativePoint
+        type:
+          stringenum: FramePoint
+      - name: offsetX
+        type: number
+      - name: offsetY
+        type: number
+    GetPointByName:
+      impl:
+        uiobjectimpl: Region/GetPointByName
+      inputs:
+      - name: point
+        type:
+          stringenum: FramePoint
+      - default: false
+        name: resolveCollapsed
+        type: boolean
+      mayreturnnothing: true
+      outputs:
+      - name: point
+        type:
+          stringenum: FramePoint
+      - name: relativeTo
+        nilable: true
+        type:
+          uiobject: Region
+      - name: relativePoint
+        type:
+          stringenum: FramePoint
+      - name: offsetX
+        type: number
+      - name: offsetY
+        type: number
+    GetRect:
+      impl:
+        uiobjectimpl: Region/GetRect
+      inputs:
+      mayreturnnothing: true
+      outputs:
+      - name: left
+        type: number
+      - name: bottom
+        type: number
+      - name: width
+        type: number
+      - name: height
+        type: number
+    GetRight:
+      impl:
+        uiobjectimpl: Region/GetRight
+      inputs:
+      mayreturnnothing: true
+      outputs:
+      - name: right
+        type: number
+    GetScaledRect:
+      impl:
+        uiobjectimpl: Region/GetScaledRect
+      inputs:
+      mayreturnnothing: true
+      outputs:
+      - name: left
+        type: number
+      - name: bottom
+        type: number
+      - name: width
+        type: number
+      - name: height
+        type: number
+    GetSize:
+      impl:
+        uiobjectimpl: Region/GetSize
+      inputs:
+      - default: false
+        name: ignoreRect
+        type: boolean
+      outputs:
+      - name: width
+        type: number
+      - name: height
+        type: number
+    GetSourceLocation:
+      inputs:
+      outputs:
+      - name: location
+        type: string
+    GetTop:
+      impl:
+        uiobjectimpl: Region/GetTop
+      inputs:
+      mayreturnnothing: true
+      outputs:
+      - name: top
+        type: number
+    GetWidth:
+      impl:
+        uiobjectimpl: Region/GetWidth
+      inputs:
+      - default: false
+        name: ignoreRect
+        type: boolean
+      outputs:
+      - name: width
+        type: number
+    Intersects:
+      inputs:
+      - name: region
+        type:
+          uiobject: Region
+      outputs:
+      - name: intersects
+        type: boolean
+    IsAnchoringRestricted:
+      inputs:
+      outputs:
+      - name: isRestricted
+        type: boolean
+    IsCollapsed:
+      impl:
+        uiobjectimpl: Region/IsCollapsed
+      inputs:
+      outputs:
+      - name: isCollapsed
+        type: boolean
+    IsDragging:
+      inputs:
+      outputs:
+      - name: isDragging
+        type: boolean
+    IsIgnoringParentAlpha:
+      impl:
+        getter:
+        - name: isIgnoringParentAlpha
+      inputs:
+      outputs:
+      - name: isIgnoring
+        type: boolean
+    IsIgnoringParentScale:
+      impl:
+        getter:
+        - name: isIgnoringParentScale
+      inputs:
+      outputs:
+      - name: isIgnoring
+        type: boolean
+    IsMouseClickEnabled:
+      impl:
+        getter:
+        - name: mouseClickEnabled
+      inputs:
+      outputs:
+      - name: enabled
+        type: boolean
+    IsMouseEnabled:
+      impl:
+        uiobjectimpl: MouseMixin/IsMouseEnabled
+      inputs:
+      outputs:
+      - name: enabled
+        type: boolean
+    IsMouseMotionEnabled:
+      impl:
+        getter:
+        - name: mouseMotionEnabled
+      inputs:
+      outputs:
+      - name: enabled
+        type: boolean
+    IsMouseMotionFocus:
+      inputs:
+      outputs:
+      - name: isMouseMotionFocus
+        type: boolean
+    IsMouseOver:
+      inputs:
+      - default: 0
+        name: offsetTop
+        type: number
+      - default: 0
+        name: offsetBottom
+        type: number
+      - default: 0
+        name: offsetLeft
+        type: number
+      - default: 0
+        name: offsetRight
+        type: number
+      outputs:
+      - name: isMouseOver
+        type: boolean
+    IsMouseWheelEnabled:
+      impl:
+        getter:
+        - name: mouseWheelEnabled
+      inputs:
+      outputs:
+      - name: enabled
+        type: boolean
+    IsObjectLoaded:
+      inputs:
+      outputs:
+      - name: isLoaded
+        type: boolean
+    IsProtected:
+      impl:
+        uiobjectimpl: Region/IsProtected
+      inputs:
+      outputs:
+      - name: isProtected
+        type: boolean
+      - name: isProtectedExplicitly
+        type: boolean
+    IsRectValid:
+      impl:
+        uiobjectimpl: Region/IsRectValid
+      inputs:
+      outputs:
+      - name: isValid
+        type: boolean
+    SetAllPoints:
+      impl:
+        uiobjectimpl: Region/SetAllPoints
+      manualinputs: true
+      outputs:
+    SetCollapsesLayout:
+      impl:
+        setter:
+        - name: collapsesLayout
+      inputs:
+      - name: collapsesLayout
+        type: boolean
+      outputs:
+    SetHeight:
+      impl:
+        uiobjectimpl: Region/SetHeight
+      inputs:
+      - name: height
+        type: number
+      outputs:
+    SetIgnoreParentAlpha:
+      impl:
+        setter:
+        - name: isIgnoringParentAlpha
+      inputs:
+      - name: ignore
+        type: boolean
+      outputs:
+    SetIgnoreParentScale:
+      impl:
+        setter:
+        - name: isIgnoringParentScale
+      inputs:
+      - name: ignore
+        type: boolean
+      outputs:
+    SetMouseClickEnabled:
+      impl:
+        setter:
+        - name: mouseClickEnabled
+      inputs:
+      - default: false
+        name: enabled
+        type: boolean
+      outputs:
+    SetMouseMotionEnabled:
+      impl:
+        setter:
+        - name: mouseMotionEnabled
+      inputs:
+      - default: false
+        name: enabled
+        type: boolean
+      outputs:
+    SetPassThroughButtons:
+      inputs:
+      - name: buttons
+        type: string
+      instride: 1
+      outputs:
+    SetPoint:
+      impl:
+        uiobjectimpl: Region/SetPoint
+      manualinputs: true
+      outputs:
+    SetPointsOffset:
+      inputs:
+      - name: x
+        type: number
+      - name: y
+        type: number
+      outputs:
+    SetPropagateMouseClicks:
+      inputs:
+      - name: propagate
+        type: boolean
+      outputs:
+    SetPropagateMouseMotion:
+      inputs:
+      - name: propagate
+        type: boolean
+      outputs:
+    SetSize:
+      impl:
+        uiobjectimpl: Region/SetSize
+      inputs:
+      - name: x
+        type: number
+      - name: y
+        type: number
+      outputs:
+    SetWidth:
+      impl:
+        uiobjectimpl: Region/SetWidth
+      inputs:
+      - name: width
+        type: number
+      outputs:
+    ShouldButtonPassThrough:
+      inputs:
+      - name: button
+        type: string
+      outputs:
+      - name: shouldPassThrough
+        type: boolean
+    StopAnimating:
+      inputs:
+      outputs:
+  objectType: Region
+  virtual: true
+RegionBase:
+  fields:
+    alpha:
+      init: 1
+      type: number
+    scale:
+      init: 1
+      type: number
+    shown:
+      init: true
+      type: boolean
+  inherits:
+  methods:
+    GetAlpha:
+      impl:
+        getter:
+        - name: alpha
+      inputs:
+      outputs:
+      - name: alpha
+        type: number
+    GetScale:
+      impl:
+        getter:
+        - name: scale
+      inputs:
+      outputs:
+      - name: scale
+        type: number
+    Hide:
+      impl:
+        uiobjectimpl: Region/Hide
+      inputs:
+      outputs:
+    IsShown:
+      impl:
+        getter:
+        - name: shown
+      inputs:
+      outputs:
+      - name: isShown
+        type: boolean
+    IsVisible:
+      impl:
+        uiobjectimpl: Region/IsVisible
+      inputs:
+      outputs:
+      - name: isVisible
+        type: boolean
+    SetAlpha:
+      impl:
+        uiobjectimpl: Region/SetAlpha
+      inputs:
+      - name: alpha
+        type: number
+      outputs:
+    SetScale:
+      impl:
+        uiobjectimpl: Region/SetScale
+      inputs:
+      - name: scale
+        type: number
+      outputs:
+    SetShown:
+      impl:
+        uiobjectimpl: Region/SetShown
+      inputs:
+      - default: false
+        name: show
+        type: boolean
+      outputs:
+    Show:
+      impl:
+        uiobjectimpl: Region/Show
+      inputs:
+      outputs:
+  scripts:
+    OnEnter:
+    OnHide:
+    OnLeave:
+    OnMouseDown:
+    OnMouseUp:
+    OnMouseWheel:
+    OnShow:
+  virtual: true
+Rotation:
+  fields:
+    degrees:
+      init: 0
+      type: number
+    radians:
+      init: 0
+      type: number
+  inherits:
+    Animation:
+  methods:
+    GetDegrees:
+      impl:
+        getter:
+        - name: degrees
+      inputs:
+      outputs:
+      - name: angle
+        type: number
+    GetOrigin:
+      inputs:
+      outputs:
+      - name: point
+        type:
+          stringenum: FramePoint
+      - name: originX
+        type: number
+      - name: originY
+        type: number
+    GetRadians:
+      impl:
+        getter:
+        - name: radians
+      inputs:
+      outputs:
+      - name: angle
+        type: number
+    SetDegrees:
+      impl:
+        setter:
+        - name: degrees
+      inputs:
+      - name: angle
+        type: number
+      outputs:
+    SetOrigin:
+      inputs:
+      - name: point
+        type:
+          stringenum: FramePoint
+      - name: originX
+        type: number
+      - name: originY
+        type: number
+      outputs:
+    SetRadians:
+      impl:
+        setter:
+        - name: radians
+      inputs:
+      - name: angle
+        type: number
+      outputs:
+Scale:
+  fields:
+    originPoint:
+      init: CENTER
+      type:
+        stringenum: FramePoint
+    originX:
+      init: 0
+      type: number
+    originY:
+      init: 0
+      type: number
+  inherits:
+    Animation:
+  methods:
+    GetOrigin:
+      impl:
+        getter:
+        - name: originPoint
+        - name: originX
+        - name: originY
+      inputs:
+      outputs:
+      - name: point
+        type:
+          stringenum: FramePoint
+      - name: originX
+        type: number
+      - name: originY
+        type: number
+    GetScale:
+      inputs:
+      outputs:
+      - name: scaleX
+        type: number
+      - name: scaleY
+        type: number
+    GetScaleFrom:
+      inputs:
+      outputs:
+      - name: scaleX
+        type: number
+      - name: scaleY
+        type: number
+    GetScaleTo:
+      inputs:
+      outputs:
+      - name: scaleX
+        type: number
+      - name: scaleY
+        type: number
+    SetOrigin:
+      impl:
+        setter:
+        - name: originPoint
+        - name: originX
+        - name: originY
+      inputs:
+      - name: point
+        type:
+          stringenum: FramePoint
+      - name: originX
+        type: number
+      - name: originY
+        type: number
+      outputs:
+    SetScale:
+      inputs:
+      - name: scaleX
+        type: number
+      - name: scaleY
+        type: number
+      outputs:
+    SetScaleFrom:
+      inputs:
+      - name: scaleX
+        type: number
+      - name: scaleY
+        type: number
+      outputs:
+    SetScaleTo:
+      inputs:
+      - name: scaleX
+        type: number
+      - name: scaleY
+        type: number
+      outputs:
+ScenarioPOIFrame:
+  fields:
+  inherits:
+    Frame:
+    POIFrame:
+  methods:
+    GetScenarioTooltipText:
+      inputs:
+      outputs:
+      - name: tooltipText
+        nilable: true
+        type: string
+    UpdateMouseOverTooltip:
+      inputs:
+      - name: x
+        type: number
+      - name: y
+        type: number
+      outputs:
+      - name: hasTooltip
+        type: boolean
+ScriptObject:
+  fields:
+  inherits:
+    ScriptObjectBase:
+  methods:
+    GetScript:
+      impl:
+        uiobjectimpl: ScriptObject/GetScript
+      inputs:
+      - name: scriptTypeName
+        type: string
+      - name: bindingType
+        nilable: true
+        type: number
+      outputs:
+      - name: script
+        nilable: true
+        type: function
+    HasScript:
+      impl:
+        uiobjectimpl: ScriptObject/HasScript
+      inputs:
+      - name: scriptName
+        type: string
+      outputs:
+      - name: hasScript
+        type: boolean
+    HookScript:
+      impl:
+        uiobjectimpl: ScriptObject/HookScript
+      inputs:
+      - name: scriptTypeName
+        type: string
+      - name: script
+        type: function
+      - name: bindingType
+        nilable: true
+        type: number
+      outputs:
+      - name: success
+        type: boolean
+    SetScript:
+      impl:
+        uiobjectimpl: ScriptObject/SetScript
+      inputs:
+      - name: scriptTypeName
+        type: string
+      - name: script
+        nilable: true
+        type: function
+      outputs:
+  virtual: true
+ScriptObjectBase:
+  fields:
+    scripts:
+      init:
+        0:
+        1:
+        2:
+      type: table
+  inherits:
+  methods:
+  scripts:
+    OnLoad:
+  virtual: true
+ScrollFrame:
+  fields:
+    horizontalScroll:
+      init: 0
+      type: number
+    scrollChild:
+      nilable: true
+      type:
+        uiobject: Frame
+    verticalScroll:
+      init: 0
+      type: number
+  inherits:
+    Frame:
+  methods:
+    GetHorizontalScroll:
+      impl:
+        getter:
+        - name: horizontalScroll
+      inputs:
+      outputs:
+      - name: offset
+        type: number
+    GetHorizontalScrollRange:
+      inputs:
+      outputs:
+      - name: range
+        type: number
+    GetScrollChild:
+      impl:
+        getter:
+        - name: scrollChild
+      inputs:
+      outputs:
+      - name: scrollChild
+        nilable: true
+        type:
+          uiobject: Frame
+    GetVerticalScroll:
+      impl:
+        getter:
+        - name: verticalScroll
+      inputs:
+      outputs:
+      - name: offset
+        type: number
+    GetVerticalScrollRange:
+      inputs:
+      outputs:
+      - name: range
+        type: number
+    SetHorizontalScroll:
+      impl:
+        setter:
+        - name: horizontalScroll
+      inputs:
+      - name: offset
+        type: number
+      outputs:
+    SetScrollChild:
+      impl:
+        uiobjectimpl: ScrollFrame/SetScrollChild
+      inputs:
+      - name: scrollChild
+        type:
+          uiobject: Frame
+      outputs:
+    SetVerticalScroll:
+      impl:
+        setter:
+        - name: verticalScroll
+      inputs:
+      - name: offset
+        type: number
+      outputs:
+    UpdateScrollChildRect:
+      inputs:
+      outputs:
+  scripts:
+    OnScrollRangeChanged:
+    OnVerticalScroll:
+SimpleHTML:
+  fieldinitoverrides:
+    hyperlinksEnabled: true
+  fields:
+    hyperlinkFormat:
+      init: '|H%s|h%s|h'
+      type: string
+  inherits:
+    Frame:
+  methods:
+    GetContentHeight:
+      inputs:
+      outputs:
+      - name: height
+        type: number
+    GetFont:
+      inputs:
+      - name: textType
+        type: string
+      outputs:
+      - name: fontFile
+        type: string
+      - name: height
+        type: number
+      - name: flags
+        type: string
+    GetFontObject:
+      inputs:
+      - name: textType
+        type: string
+      outputs:
+      - name: font
+        nilable: true
+        type:
+          uiobject: Font
+    GetHyperlinkFormat:
+      impl:
+        getter:
+        - name: hyperlinkFormat
+      inputs:
+      outputs:
+      - name: format
+        type: string
+    GetIndentedWordWrap:
+      inputs:
+      - name: textType
+        type: string
+      outputs:
+      - name: wordWrap
+        type: boolean
+    GetJustifyH:
+      inputs:
+      - name: textType
+        type: string
+      outputs:
+      - name: justifyH
+        type:
+          stringenum: JustifyHorizontal
+    GetJustifyV:
+      inputs:
+      - name: textType
+        type: string
+      outputs:
+      - name: justifyV
+        type:
+          stringenum: JustifyVertical
+    GetShadowColor:
+      inputs:
+      - name: textType
+        type: string
+      outputs:
+      - name: colorR
+        type: number
+      - name: colorG
+        type: number
+      - name: colorB
+        type: number
+      - name: colorA
+        type: number
+    GetShadowOffset:
+      inputs:
+      - name: textType
+        type: string
+      outputs:
+      - name: offsetX
+        type: number
+      - name: offsetY
+        type: number
+    GetSpacing:
+      inputs:
+      - name: textType
+        type: string
+      outputs:
+      - name: spacing
+        type: number
+    GetTextColor:
+      inputs:
+      - name: textType
+        type: string
+      outputs:
+      - name: colorR
+        type: number
+      - name: colorG
+        type: number
+      - name: colorB
+        type: number
+      - name: colorA
+        type: number
+    GetTextData:
+      inputs:
+      outputs:
+      - name: content
+        type:
+          arrayof:
+            structure: HTMLContentNode
+    SetFont:
+      inputs:
+      - name: textType
+        type: string
+      - name: fontFile
+        type: string
+      - name: height
+        type: number
+      - name: flags
+        type: string
+      outputs:
+    SetFontObject:
+      inputs:
+      - name: textType
+        type: string
+      - name: font
+        type:
+          uiobject: Font
+      outputs:
+    SetHyperlinkFormat:
+      impl:
+        setter:
+        - name: hyperlinkFormat
+      inputs:
+      - name: format
+        type: string
+      outputs:
+    SetIndentedWordWrap:
+      inputs:
+      - name: textType
+        type: string
+      - name: wordWrap
+        type: boolean
+      outputs:
+    SetJustifyH:
+      inputs:
+      - name: textType
+        type: string
+      - name: justifyH
+        type:
+          stringenum: JustifyHorizontal
+      outputs:
+    SetJustifyV:
+      inputs:
+      - name: textType
+        type: string
+      - name: justifyV
+        type:
+          stringenum: JustifyVertical
+      outputs:
+    SetShadowColor:
+      inputs:
+      - name: textType
+        type: string
+      - name: colorR
+        type: number
+      - name: colorG
+        type: number
+      - name: colorB
+        type: number
+      - name: a
+        nilable: true
+        type: number
+      outputs:
+    SetShadowOffset:
+      inputs:
+      - name: textType
+        type: string
+      - name: offsetX
+        type: number
+      - name: offsetY
+        type: number
+      outputs:
+    SetSpacing:
+      inputs:
+      - name: textType
+        type: string
+      - name: spacing
+        type: number
+      outputs:
+    SetText:
+      inputs:
+      - name: text
+        type: string
+      - default: false
+        name: ignoreMarkup
+        type: boolean
+      outputs:
+    SetTextColor:
+      inputs:
+      - name: textType
+        type: string
+      - name: colorR
+        type: number
+      - name: colorG
+        type: number
+      - name: colorB
+        type: number
+      - name: a
+        nilable: true
+        type: number
+      outputs:
+Slider:
+  fieldinitoverrides:
+    mouseClickEnabled: true
+    mouseMotionEnabled: true
+  fields:
+    enabled:
+      init: true
+      type: boolean
+    max:
+      init: 0
+      type: number
+    min:
+      init: 0
+      type: number
+    orientation:
+      init: VERTICAL
+      type:
+        stringenum: Orientation
+    stepsPerPage:
+      init: 0
+      type: number
+    thumbTexture:
+      nilable: true
+      type:
+        uiobject: Texture
+    value:
+      init: 0
+      type: number
+    valueStep:
+      init: 0.001
+      type: number
+  inherits:
+    Frame:
+  methods:
+    Disable:
+      impl:
+        uiobjectimpl: Slider/Disable
+      inputs:
+      outputs:
+    Enable:
+      impl:
+        uiobjectimpl: Slider/Enable
+      inputs:
+      outputs:
+    GetMinMaxValues:
+      impl:
+        getter:
+        - name: min
+        - name: max
+      inputs:
+      outputs:
+      - name: minValue
+        type: number
+      - name: maxValue
+        type: number
+    GetObeyStepOnDrag:
+      inputs:
+      outputs:
+      - name: isObeyStepOnDrag
+        type: boolean
+    GetOrientation:
+      impl:
+        getter:
+        - name: orientation
+      inputs:
+      outputs:
+      - name: orientation
+        type:
+          stringenum: Orientation
+    GetStepsPerPage:
+      impl:
+        getter:
+        - name: stepsPerPage
+      inputs:
+      outputs:
+      - name: stepsPerPage
+        type: number
+    GetThumbTexture:
+      impl:
+        getter:
+        - name: thumbTexture
+      inputs:
+      outputs:
+      - name: texture
+        nilable: true
+        type:
+          uiobject: Texture
+    GetValue:
+      impl:
+        getter:
+        - name: value
+      inputs:
+      outputs:
+      - name: value
+        type: number
+    GetValueStep:
+      impl:
+        getter:
+        - name: valueStep
+      inputs:
+      outputs:
+      - name: valueStep
+        type: number
+    IsDraggingThumb:
+      inputs:
+      outputs:
+      - name: isDraggingThumb
+        type: boolean
+    IsEnabled:
+      inputs:
+      outputs:
+      - name: enabled
+        type: boolean
+    SetEnabled:
+      inputs:
+      - name: enabled
+        type: boolean
+      outputs:
+    SetMinMaxValues:
+      impl:
+        setter:
+        - name: min
+        - name: max
+      inputs:
+      - name: minValue
+        type: number
+      - name: maxValue
+        type: number
+      outputs:
+    SetObeyStepOnDrag:
+      inputs:
+      - name: obeyStepOnDrag
+        type: boolean
+      outputs:
+    SetOrientation:
+      impl:
+        setter:
+        - name: orientation
+      inputs:
+      - name: orientation
+        type:
+          stringenum: Orientation
+      outputs:
+    SetStepsPerPage:
+      impl:
+        setter:
+        - name: stepsPerPage
+      inputs:
+      - name: stepsPerPage
+        type: number
+      outputs:
+    SetThumbTexture:
+      impl:
+        settexture:
+          field: thumbTexture
+      inputs:
+      - name: asset
+        type: TextureAsset
+      outputs:
+    SetValue:
+      inputs:
+      - name: value
+        type: number
+      - default: false
+        name: treatAsMouseEvent
+        type: boolean
+      outputs:
+    SetValueStep:
+      impl:
+        setter:
+        - name: valueStep
+      inputs:
+      - name: valueStep
+        type: number
+      outputs:
+  scripts:
+    OnValueChanged:
+StatusBar:
+  fields:
+    fillStyle:
+      init: STANDARD
+      type:
+        stringenum: StatusBarFillStyle
+    max:
+      init: 0
+      type: number
+    min:
+      init: 0
+      type: number
+    orientation:
+      init: HORIZONTAL
+      type:
+        stringenum: Orientation
+    reverseFill:
+      init: false
+      type: boolean
+    rotatesTexture:
+      init: false
+      type: boolean
+    statusBarDesaturation:
+      init: 0
+      type: number
+    statusBarTexture:
+      nilable: true
+      type:
+        uiobject: Texture
+    value:
+      init: 0
+      type: number
+  inherits:
+    Frame:
+  methods:
+    GetFillStyle:
+      impl:
+        getter:
+        - name: fillStyle
+      inputs:
+      outputs:
+      - name: fillStyle
+        type:
+          stringenum: StatusBarFillStyle
+    GetMinMaxValues:
+      impl:
+        getter:
+        - name: min
+        - name: max
+      inputs:
+      outputs:
+      - name: minValue
+        type: number
+      - name: maxValue
+        type: number
+    GetOrientation:
+      impl:
+        getter:
+        - name: orientation
+      inputs:
+      outputs:
+      - name: orientation
+        type:
+          stringenum: Orientation
+    GetReverseFill:
+      impl:
+        getter:
+        - name: reverseFill
+      inputs:
+      outputs:
+      - name: isReverseFill
+        type: boolean
+    GetRotatesTexture:
+      impl:
+        getter:
+        - name: rotatesTexture
+      inputs:
+      outputs:
+      - name: rotatesTexture
+        type: boolean
+    GetStatusBarColor:
+      impl:
+        uiobjectimpl: StatusBar/GetStatusBarColor
+      inputs:
+      outputs:
+      - name: colorR
+        type: number
+      - name: colorG
+        type: number
+      - name: colorB
+        type: number
+      - name: colorA
+        type: number
+    GetStatusBarDesaturation:
+      impl:
+        getter:
+        - name: statusBarDesaturation
+      inputs:
+      outputs:
+      - name: desaturation
+        type: number
+    GetStatusBarTexture:
+      impl:
+        getter:
+        - name: statusBarTexture
+      inputs:
+      outputs:
+      - name: texture
+        nilable: true
+        type:
+          uiobject: Texture
+    GetValue:
+      impl:
+        getter:
+        - name: value
+      inputs:
+      outputs:
+      - name: value
+        type: number
+    IsStatusBarDesaturated:
+      inputs:
+      outputs:
+      - name: desaturated
+        type: boolean
+    SetColorFill:
+      inputs:
+      - name: colorR
+        type: number
+      - name: colorG
+        type: number
+      - name: colorB
+        type: number
+      - name: a
+        nilable: true
+        type: number
+      outputs:
+    SetFillStyle:
+      impl:
+        setter:
+        - name: fillStyle
+      inputs:
+      - name: fillStyle
+        type:
+          stringenum: StatusBarFillStyle
+      outputs:
+    SetMinMaxValues:
+      impl:
+        setter:
+        - name: min
+        - name: max
+      inputs:
+      - name: minValue
+        type: number
+      - name: maxValue
+        type: number
+      outputs:
+    SetOrientation:
+      impl:
+        setter:
+        - name: orientation
+      inputs:
+      - name: orientation
+        type:
+          stringenum: Orientation
+      outputs:
+    SetReverseFill:
+      impl:
+        setter:
+        - name: reverseFill
+      inputs:
+      - name: isReverseFill
+        type: boolean
+      outputs:
+    SetRotatesTexture:
+      impl:
+        setter:
+        - name: rotatesTexture
+      inputs:
+      - name: rotatesTexture
+        type: boolean
+      outputs:
+    SetStatusBarColor:
+      impl:
+        uiobjectimpl: StatusBar/SetStatusBarColor
+      inputs:
+      - name: colorR
+        type: number
+      - name: colorG
+        type: number
+      - name: colorB
+        type: number
+      - name: a
+        nilable: true
+        type: number
+      outputs:
+    SetStatusBarDesaturated:
+      inputs:
+      - default: false
+        name: desaturated
+        type: boolean
+      outputs:
+    SetStatusBarDesaturation:
+      impl:
+        setter:
+        - name: statusBarDesaturation
+      inputs:
+      - name: desaturation
+        type: number
+      outputs:
+    SetStatusBarTexture:
+      impl:
+        settexture:
+          field: statusBarTexture
+          return: true
+      inputs:
+      - name: asset
+        type: TextureAsset
+      outputs:
+      - name: success
+        type: boolean
+    SetValue:
+      impl:
+        setter:
+        - name: value
+      inputs:
+      - name: value
+        type: number
+      outputs:
+  scripts:
+    OnValueChanged:
+TabardModel:
+  fields:
+  inherits:
+    PlayerModel:
+  methods:
+    CanSaveTabardNow:
+      inputs:
+      outputs:
+      - name: canSave
+        type: boolean
+    CycleVariation:
+      inputs:
+      - name: variationIndex
+        type: number
+      - name: delta
+        type: number
+      outputs:
+    GetLowerBackgroundFileName:
+      inputs:
+      outputs:
+      - name: file
+        type: number
+    GetLowerBorderFile:
+      inputs:
+      outputs:
+      - name: file
+        type: number
+    GetLowerEmblemFile:
+      inputs:
+      outputs:
+      - name: file
+        type: number
+    GetLowerEmblemTexture:
+      inputs:
+      - name: texture
+        type:
+          uiobject: Texture
+      outputs:
+    GetUpperBackgroundFileName:
+      inputs:
+      outputs:
+      - name: file
+        type: number
+    GetUpperBorderFile:
+      inputs:
+      outputs:
+      - name: file
+        type: number
+    GetUpperEmblemFile:
+      inputs:
+      outputs:
+      - name: file
+        type: number
+    GetUpperEmblemTexture:
+      inputs:
+      - name: texture
+        type:
+          uiobject: Texture
+      outputs:
+    InitializeTabardColors:
+      inputs:
+      outputs:
+    IsGuildTabard:
+      inputs:
+      outputs:
+      - name: isGuildTabard
+        type: boolean
+    Save:
+      inputs:
+      outputs:
+Texture:
+  fields:
+  inherits:
+    TextureBase:
+  methods:
+    AddMaskTexture:
+      inputs:
+      - name: mask
+        type:
+          uiobject: MaskTexture
+      outputs:
+    GetMaskTexture:
+      inputs:
+      - name: index
+        type: number
+      outputs:
+      - name: mask
+        type:
+          uiobject: MaskTexture
+    GetNumMaskTextures:
+      inputs:
+      outputs:
+      - name: count
+        type: number
+    RemoveMaskTexture:
+      inputs:
+      - name: mask
+        type:
+          uiobject: MaskTexture
+      outputs:
+TextureBase:
+  fields:
+    atlas:
+      nilable: true
+      type: string
+    blendMode:
+      init: BLEND
+      type:
+        stringenum: BlendMode
+    blx:
+      init: 0
+      type: number
+    bly:
+      init: 1
+      type: number
+    brx:
+      init: 1
+      type: number
+    bry:
+      init: 1
+      type: number
+    colorTextureA:
+      nilable: true
+      type: number
+    colorTextureB:
+      nilable: true
+      type: number
+    colorTextureG:
+      nilable: true
+      type: number
+    colorTextureR:
+      nilable: true
+      type: number
+    desaturation:
+      init: 0
+      type: number
+    horizTile:
+      init: false
+      type: boolean
+    maskName:
+      nilable: true
+      type: string
+    texelSnappingBias:
+      init: 0.3
+      type: number
+    texture:
+      nilable: true
+      type: string
+    tlx:
+      init: 0
+      type: number
+    tly:
+      init: 0
+      type: number
+    trx:
+      init: 1
+      type: number
+    try:
+      init: 0
+      type: number
+    vertTile:
+      init: false
+      type: boolean
+  inherits:
+    LayeredRegion:
+    ScriptObject:
+  methods:
+    ClearTextureSlice:
+      inputs:
+      outputs:
+    ClearVertexOffsets:
+      inputs:
+      outputs:
+    GetAtlas:
+      impl:
+        getter:
+        - name: atlas
+      inputs:
+      outputs:
+      - name: atlas
+        nilable: true
+        type: string
+    GetBlendMode:
+      impl:
+        getter:
+        - name: blendMode
+      inputs:
+      outputs:
+      - name: blendMode
+        type:
+          stringenum: BlendMode
+    GetDesaturation:
+      impl:
+        getter:
+        - name: desaturation
+      inputs:
+      outputs:
+      - name: desaturation
+        type: number
+    GetHorizTile:
+      impl:
+        getter:
+        - name: horizTile
+      inputs:
+      outputs:
+      - name: tiling
+        type: boolean
+    GetRotation:
+      inputs:
+      outputs:
+      - name: radians
+        type: number
+      - name: normalizedRotationPoint
+        type:
+          structure: vector2
+    GetTexCoord:
+      impl:
+        getter:
+        - name: tlx
+        - name: tly
+        - name: blx
+        - name: bly
+        - name: trx
+        - name: try
+        - name: brx
+        - name: bry
+      inputs:
+      outputs:
+      - name: ulx
+        type: number
+      - name: uly
+        type: number
+      - name: llx
+        type: number
+      - name: lly
+        type: number
+      - name: urx
+        type: number
+      - name: ury
+        type: number
+      - name: lrx
+        type: number
+      - name: lry
+        type: number
+    GetTexelSnappingBias:
+      impl:
+        getter:
+        - name: texelSnappingBias
+      inputs:
+      outputs:
+      - name: bias
+        type: number
+    GetTexture:
+      impl:
+        uiobjectimpl: Texture/GetTexture
+      inputs:
+      outputs:
+      - name: textureFile
+        nilable: true
+        type: FileAsset
+    GetTextureFileID:
+      inputs:
+      outputs:
+      - name: textureFile
+        type: number
+    GetTextureFilePath:
+      inputs:
+      outputs:
+      - name: textureFile
+        nilable: true
+        type: string
+    GetTextureSliceMargins:
+      inputs:
+      mayreturnnothing: true
+      outputs:
+      - name: left
+        type: number
+      - name: top
+        type: number
+      - name: right
+        type: number
+      - name: bottom
+        type: number
+    GetTextureSliceMode:
+      inputs:
+      mayreturnnothing: true
+      outputs:
+      - name: sliceMode
+        type:
+          enum: UITextureSliceMode
+    GetVertexOffset:
+      inputs:
+      - name: vertexIndex
+        type: number
+      outputs:
+      - name: offsetX
+        type: number
+      - name: offsetY
+        type: number
+    GetVertTile:
+      impl:
+        getter:
+        - name: vertTile
+      inputs:
+      outputs:
+      - name: tiling
+        type: boolean
+    IsBlockingLoadRequested:
+      inputs:
+      outputs:
+      - name: blocking
+        type: boolean
+    IsDesaturated:
+      inputs:
+      outputs:
+      - name: desaturated
+        type: boolean
+    IsSnappingToPixelGrid:
+      inputs:
+      outputs:
+      - name: snap
+        type: boolean
+    SetAtlas:
+      impl:
+        uiobjectimpl: Texture/SetAtlas
+      inputs:
+      - name: atlas
+        nilable: true
+        type: string
+      - default: false
+        name: useAtlasSize
+        type: boolean
+      - default: LINEAR
+        name: filterMode
+        permissive: true
+        type:
+          stringenum: FilterMode
+      - name: resetTexCoords
+        nilable: true
+        type: boolean
+      outputs:
+    SetBlendMode:
+      impl:
+        setter:
+        - name: blendMode
+      inputs:
+      - name: blendMode
+        type:
+          stringenum: BlendMode
+      outputs:
+    SetBlockingLoadsRequested:
+      inputs:
+      - default: false
+        name: blocking
+        type: boolean
+      outputs:
+    SetColorTexture:
+      impl:
+        uiobjectimpl: Texture/SetColorTexture
+      inputs:
+      - name: colorR
+        type: number
+      - name: colorG
+        type: number
+      - name: colorB
+        type: number
+      - name: a
+        nilable: true
+        type: number
+      outputs:
+    SetDesaturated:
+      inputs:
+      - default: false
+        name: desaturated
+        type: boolean
+      outputs:
+    SetDesaturation:
+      impl:
+        setter:
+        - name: desaturation
+      inputs:
+      - name: desaturation
+        type: number
+      outputs:
+    SetGradient:
+      impl:
+        uiobjectimpl: Texture/SetGradient
+      inputs:
+      - name: orientation
+        type:
+          stringenum: Orientation
+      - name: minColor
+        type:
+          structure: colorRGBA
+      - name: maxColor
+        type:
+          structure: colorRGBA
+      outputs:
+    SetHorizTile:
+      impl:
+        setter:
+        - name: horizTile
+      inputs:
+      - default: false
+        name: tiling
+        type: boolean
+      outputs:
+    SetMask:
+      impl:
+        setter:
+        - name: maskName
+      inputs:
+      - name: file
+        type: string
+      outputs:
+    SetRotation:
+      inputs:
+      - name: radians
+        type: number
+      - name: normalizedRotationPoint
+        nilable: true
+        type:
+          structure: vector2
+      outputs:
+    SetSnapToPixelGrid:
+      inputs:
+      - default: false
+        name: snap
+        type: boolean
+      outputs:
+    SetTexCoord:
+      impl:
+        uiobjectimpl: Texture/SetTexCoord
+      inputs:
+      - name: left
+        type: number
+      - name: right
+        type: number
+      - name: bottom
+        type: number
+      - name: top
+        type: number
+      outputs:
+    SetTexelSnappingBias:
+      impl:
+        setter:
+        - name: texelSnappingBias
+      inputs:
+      - name: bias
+        type: number
+      outputs:
+    SetTexture:
+      impl:
+        uiobjectimpl: Texture/SetTexture
+      inputs:
+      - name: textureAsset
+        nilable: true
+        type: string
+      - default: CLAMP
+        name: wrapModeHorizontal
+        permissive: true
+        type:
+          stringenum: WrapMode
+      - default: CLAMP
+        name: wrapModeVertical
+        permissive: true
+        type:
+          stringenum: WrapMode
+      - default: LINEAR
+        name: filterMode
+        type:
+          stringenum: FilterMode
+      outputs:
+      - name: success
+        type: boolean
+    SetTextureSliceMargins:
+      inputs:
+      - name: left
+        type: number
+      - name: top
+        type: number
+      - name: right
+        type: number
+      - name: bottom
+        type: number
+      outputs:
+    SetTextureSliceMode:
+      inputs:
+      - name: sliceMode
+        type:
+          enum: UITextureSliceMode
+      outputs:
+    SetVertexOffset:
+      inputs:
+      - name: vertexIndex
+        type: number
+      - name: offsetX
+        type: number
+      - name: offsetY
+        type: number
+      outputs:
+    SetVertTile:
+      impl:
+        setter:
+        - name: vertTile
+      inputs:
+      - default: false
+        name: tiling
+        type: boolean
+      outputs:
+  objectType: Texture
+  virtual: true
+TextureCoordTranslation:
+  fields:
+  inherits:
+    TranslationBase:
+  methods:
+Translation:
+  fields:
+  inherits:
+    TranslationBase:
+  methods:
+TranslationBase:
+  fields:
+    offsetX:
+      init: 0
+      type: number
+    offsetY:
+      init: 0
+      type: number
+  inherits:
+    Animation:
+  methods:
+    GetOffset:
+      impl:
+        getter:
+        - name: offsetX
+        - name: offsetY
+      inputs:
+      outputs:
+      - name: offsetX
+        type: number
+      - name: offsetY
+        type: number
+    SetOffset:
+      impl:
+        setter:
+        - name: offsetX
+        - name: offsetY
+      inputs:
+      - name: offsetX
+        type: number
+      - name: offsetY
+        type: number
+      outputs:
+  virtual: true
+UIObject:
+  fields:
+    forbidden:
+      init: false
+      type: boolean
+    name:
+      nilable: true
+      type: string
+  inherits:
+  methods:
+    GetName:
+      impl:
+        getter:
+        - name: name
+      inputs:
+      outputs:
+      - name: name
+        nilable: true
+        type: string
+    GetObjectType:
+      impl:
+        uiobjectimpl: UIObject/GetObjectType
+      inputs:
+      outputs:
+      - name: objectType
+        type: string
+    IsForbidden:
+      impl:
+        getter:
+        - name: forbidden
+      inputs:
+      outputs:
+      - name: isForbidden
+        type: boolean
+    IsObjectType:
+      impl:
+        uiobjectimpl: UIObject/IsObjectType
+      inputs:
+      - name: objectType
+        type: string
+      outputs:
+      - name: isType
+        type: boolean
+    SetForbidden:
+      impl:
+        uiobjectimpl: ForbiddenMixin/SetForbidden
+      inputs:
+      outputs:
+    SetToDefaults:
+      inputs:
+      outputs:
+  virtual: true
+UnitPositionFrame:
+  fields:
+    playerPingScale:
+      init: 1
+      type: number
+    uiMapID:
+      init: 0
+      type: number
+  inherits:
+    Frame:
+  methods:
+    AddUnit:
+      inputs:
+      - name: unitTokenString
+        type: string
+      - name: asset
+        type: string
+      - name: width
+        nilable: true
+        type: number
+      - name: height
+        nilable: true
+        type: number
+      - name: r
+        nilable: true
+        type: number
+      - name: g
+        nilable: true
+        type: number
+      - name: b
+        nilable: true
+        type: number
+      - name: a
+        nilable: true
+        type: number
+      - name: sublayer
+        nilable: true
+        type: number
+      - name: showFacing
+        nilable: true
+        type: boolean
+      outputs:
+    ClearUnits:
+      inputs:
+      outputs:
+    FinalizeUnits:
+      inputs:
+      outputs:
+    GetMouseOverUnits:
+      inputs:
+      outputs:
+      - name: units
+        type: string
+      outstride: 1
+      stuboutstrides: 0
+    GetPlayerPingScale:
+      impl:
+        getter:
+        - name: playerPingScale
+      inputs:
+      outputs:
+      - name: scale
+        type: number
+    GetUiMapID:
+      impl:
+        getter:
+        - name: uiMapID
+      inputs:
+      outputs:
+      - name: mapID
+        type: number
+    SetPlayerPingScale:
+      impl:
+        setter:
+        - name: playerPingScale
+      inputs:
+      - name: scale
+        type: number
+      outputs:
+    SetPlayerPingTexture:
+      inputs:
+      - name: textureType
+        type:
+          enum: PingTextureType
+      - name: asset
+        type: FileAsset
+      - default: 0
+        name: width
+        type: number
+      - default: 0
+        name: height
+        type: number
+      outputs:
+    SetUiMapID:
+      impl:
+        setter:
+        - name: uiMapID
+      inputs:
+      - name: mapID
+        type: number
+      outputs:
+    SetUnitColor:
+      inputs:
+      - name: unit
+        type: string
+      - name: colorR
+        type: number
+      - name: colorG
+        type: number
+      - name: colorB
+        type: number
+      - name: colorA
+        type: number
+      outputs:
+    StartPlayerPing:
+      inputs:
+      - default: 0
+        name: duration
+        type: number
+      - default: 0
+        name: fadeDuration
+        type: number
+      outputs:
+    StopPlayerPing:
+      inputs:
+      outputs:
+VertexColor:
+  fields:
+  inherits:
+    Animation:
+  methods:
+    GetEndColor:
+      inputs:
+      outputs:
+      - name: color
+        type:
+          structure: colorRGBA
+    GetStartColor:
+      inputs:
+      outputs:
+      - name: color
+        type:
+          structure: colorRGBA
+    SetEndColor:
+      inputs:
+      - name: color
+        type:
+          structure: colorRGBA
+      outputs:
+    SetStartColor:
+      inputs:
+      - name: color
+        type:
+          structure: colorRGBA
+      outputs:

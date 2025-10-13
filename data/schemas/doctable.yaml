@@ -21,6 +21,8 @@ type:
               type:
                 sequenceof:
                   record:
+                    ConditionalSecret:
+                      type: boolean
                     Default:
                       type: any
                     Documentation:
@@ -41,6 +43,10 @@ type:
                     Type:
                       required: true
                       type: string
+            SecretPayloads:
+              type: boolean
+            SecretWhenInCombat:
+              type: boolean
             Type:
               required: true
               type:
@@ -73,6 +79,8 @@ type:
                     Type:
                       required: true
                       type: string
+            ConstSecretAccessor:
+              type: boolean
             Documentation:
               type:
                 sequenceof: string
@@ -93,6 +101,8 @@ type:
             Name:
               required: true
               type: string
+            RequireNPERestricted:
+              type: boolean
             RequiresActiveCommentator:
               type: boolean
             RequiresClubsInitialized:
@@ -113,10 +123,14 @@ type:
               type: boolean
             RequiresValidInviteTarget:
               type: boolean
+            RequiresValidTimelineEvent:
+              type: boolean
             Returns:
               type:
                 sequenceof:
                   record:
+                    ConditionalSecret:
+                      type: boolean
                     Default:
                       type: any
                     Documentation:
@@ -137,6 +151,24 @@ type:
                     Type:
                       required: true
                       type: string
+            SecretArguments:
+              type:
+                taggedunion:
+                  AllowedWhenTainted: tag
+                  AllowedWhenUntainted: tag
+                  NotAllowed: tag
+            SecretArgumentsAddAspect:
+              type: table
+            SecretInChatMessagingLockdown:
+              type: boolean
+            SecretNonPlayerUnitOrMinionWhileInCombat:
+              type: boolean
+            SecretReturns:
+              type: boolean
+            SecretReturnsForAspect:
+              type: table
+            SecretWhenInCombat:
+              type: boolean
             Type:
               required: true
               type:
@@ -169,6 +201,8 @@ type:
               type:
                 sequenceof:
                   record:
+                    ConditionalSecret:
+                      type: boolean
                     Default:
                       type: any
                     Documentation:
@@ -209,6 +243,9 @@ type:
               type:
                 sequenceof:
                   record:
+                    Documentation:
+                      type:
+                        sequenceof: string
                     Name:
                       required: true
                       type: string

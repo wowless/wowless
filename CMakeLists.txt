@@ -456,6 +456,7 @@ list(
   wow
   wowt
   wowxptr
+  wow_beta
   wow_classic
   wow_classic_beta
   wow_classic_era
