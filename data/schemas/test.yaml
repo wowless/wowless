@@ -2,6 +2,7 @@ name: test
 type:
   mapof:
     key:
-      ref: impl
+      ref:
+        schema: impl
     value:
       record:

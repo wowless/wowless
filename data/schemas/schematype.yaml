@@ -27,25 +27,30 @@ type:
               type:
                 schema: schematype
     ref:
-      taggedunion:
-        api: tag
-        cvar: tag
-        enum: tag
-        event: tag
-        family: tag
-        gametype: tag
-        impl: tag
-        module: tag
-        schema: tag
-        scripttype: tag
-        sql: tag
-        stringenum: tag
-        structure: tag
-        uiobject: tag
-        uiobjectimpl: tag
-        xml: tag
+      record:
+        schema:
+          required: true
+          type:
+            taggedunion:
+              api: tag
+              cvar: tag
+              enum: tag
+              event: tag
+              family: tag
+              gametype: tag
+              impl: tag
+              module: tag
+              schema: tag
+              scripttype: tag
+              sql: tag
+              stringenum: tag
+              structure: tag
+              uiobject: tag
+              uiobjectimpl: tag
+              xml: tag
     schema:
-      ref: schema
+      ref:
+        schema: schema
     sequenceof:
       schema: schematype
     string: tag

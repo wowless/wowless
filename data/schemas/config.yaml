@@ -23,21 +23,24 @@ type:
                   type:
                     mapof:
                       key:
-                        ref: enum
+                        ref:
+                          schema: enum
                       value:
                         record:
                 globalapis:
                   type:
                     mapof:
                       key:
-                        ref: api
+                        ref:
+                          schema: api
                       value:
                         record:
           enum_values_set_in_framexml:
             type:
               mapof:
                 key:
-                  ref: enum
+                  ref:
+                    schema: enum
                 value:
                   mapof:
                     key: string
@@ -52,14 +55,16 @@ type:
             type:
               mapof:
                 key:
-                  ref: cvar
+                  ref:
+                    schema: cvar
                 value:
                   record:
           overwritten_apis:
             type:
               mapof:
                 key:
-                  ref: api
+                  ref:
+                    schema: api
                 value:
                   record:
     modules:
@@ -77,7 +82,8 @@ type:
             type:
               mapof:
                 key:
-                  ref: event
+                  ref:
+                    schema: event
                 value: string
           skip_slashcmds:
             type:

@@ -92,8 +92,8 @@ local complex = {
     end
   end,
   ref = function(s)
-    local gdomain = domains[s]
-    local pdomains = productDomains[s]
+    local gdomain = domains[s.schema]
+    local pdomains = productDomains[s.schema]
     return function(v, product)
       if type(v) ~= 'string' then
         return 'expected string'

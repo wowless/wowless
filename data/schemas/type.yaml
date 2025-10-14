@@ -5,7 +5,8 @@ type:
       schema: type
     boolean: tag
     enum:
-      ref: enum
+      ref:
+        schema: enum
     FileAsset: tag
     function: tag
     gender: tag
@@ -15,15 +16,18 @@ type:
     oneornil: tag
     string: tag
     stringenum:
-      ref: stringenum
+      ref:
+        schema: stringenum
     structure:
-      ref: structure
+      ref:
+        schema: structure
     table: tag
     TextureAsset: tag
     tostring: tag
     uiAddon: tag
     uiobject:
-      ref: uiobject
+      ref:
+        schema: uiobject
     unit: tag
     unknown: tag
     userdata: tag
