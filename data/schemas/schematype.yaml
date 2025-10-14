@@ -28,6 +28,8 @@ type:
                 schema: schematype
     ref:
       record:
+        negative:
+          type: boolean
         schema:
           required: true
           type:

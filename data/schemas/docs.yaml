@@ -21,19 +21,28 @@ type:
           extra_apis:
             type:
               mapof:
-                key: string
+                key:
+                  ref:
+                    negative: true
+                    schema: api
                 value:
                   record:
           extra_enums:
             type:
               mapof:
-                key: string
+                key:
+                  ref:
+                    negative: true
+                    schema: enum
                 value:
                   record:
           extra_events:
             type:
               mapof:
-                key: string
+                key:
+                  ref:
+                    negative: true
+                    schema: event
                 value:
                   record:
           extra_script_objects:
