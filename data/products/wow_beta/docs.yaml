@@ -38,11 +38,6 @@ lies:
             from: string
             to: unit
     UnitName:
-      inputs:
-      - type:
-          _change:
-            from: string
-            to: unit
       outputs:
       - _add:
           nilable: true
@@ -451,6 +446,8 @@ typedefs:
   EmptiableItemLocation:
     type:
       structure: ItemLocation
+  EncounterTimelineEventID:
+    type: number
   FileAsset:
     type: FileAsset
   fileID:
@@ -458,6 +455,12 @@ typedefs:
   FontAlphabet:
     type: string
   GarrisonFollower:
+    type: string
+  HousingCatalogSearcher:
+    type: string
+  HousingFixturePointFrame:
+    type: string
+  HousingLayoutPinFrame:
     type: string
   HTMLTextType:
     type: string
@@ -556,6 +559,8 @@ typedefs:
     type: number
   size:
     type: number
+  SoundHandle:
+    type: string
   SpellIdentifier:
     type: string
   string:
@@ -582,9 +587,13 @@ typedefs:
     type: number
   UiMapPoint:
     type: table
+  UISoundSubType:
+    type: string
   uiUnit:
     type: number
   UnitToken:
+    type: unit
+  UnitTokenVariant:
     type: unit
   WeeklyRewardItemDBID:
     type: string
