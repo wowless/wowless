@@ -9,10 +9,8 @@ addon:
       C_WowTokenSecure:
     enums:
       BattlepayBannerType:
-      BattlepayDisplayFlag:
       BattlepayGroupDisplayType:
       BattlepayProductDecorator:
-      BattlepayProductGroupFlag:
       PurchaseEligibility:
       StoreError:
       VasError:
