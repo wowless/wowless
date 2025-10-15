@@ -18,7 +18,6 @@ addon:
       BattlepayProductGroupFlags:
       PurchaseEligibility:
       StoreError:
-      VasError:
       VasServiceType:
       VasTransactionPurchaseResult:
     globalapis:
