@@ -100,6 +100,8 @@ Constants:
   HousingCatalogConsts:
     HOUSING_CATALOG_ALL_CATEGORY_ID: 18
     HOUSING_CATALOG_CATEGORIES_EXPECTED: 20
+    HOUSING_CATALOG_DECOR_MODELSCENEID_DEFAULT: 1317
+    HOUSING_CATALOG_DECOR_MODELSCENEID_FLAT: 1318
     HOUSING_CATALOG_ENTRY_TAGS_EXPECTED: 5
     HOUSING_CATALOG_FEATURED_CATEGORY_ID: 17
     HOUSING_CATALOG_FILTER_TAGS_EXPECTED: 90
@@ -169,30 +171,6 @@ Constants:
     NUM_PET_SLOTS_HUNTER: 205
     NUM_PET_SLOTS_MAGE: 1
     NUM_PET_SLOTS_THAT_NEED_LEARNED_SPELL: 5
-    NUM_PET_SLOTS_WARLOCK: 25
-    STABLED_PETS_FIRST_SLOT_INDEX: 5
-  PetConsts_PreWrath:
-    DEATHKNIGHT_PET_CREATURE_ID: 0
-    EXTRA_PET_STABLE_SLOT: -1
-    MAX_NUM_PET_SLOTS: 25
-    MAX_STABLE_SLOTS: 2
-    MAX_SUMMONABLE_HUNTER_PETS: 5
-    NUM_PET_SLOTS_DEATHKNIGHT: 0
-    NUM_PET_SLOTS_HUNTER: 205
-    NUM_PET_SLOTS_MAGE: 1
-    NUM_PET_SLOTS_THAT_NEED_LEARNED_SPELL: 1
-    NUM_PET_SLOTS_WARLOCK: 25
-    STABLED_PETS_FIRST_SLOT_INDEX: 5
-  PetConsts_Wrath:
-    DEATHKNIGHT_PET_CREATURE_ID: 26125
-    EXTRA_PET_STABLE_SLOT: -1
-    MAX_NUM_PET_SLOTS: 25
-    MAX_STABLE_SLOTS: 4
-    MAX_SUMMONABLE_HUNTER_PETS: 5
-    NUM_PET_SLOTS_DEATHKNIGHT: 25
-    NUM_PET_SLOTS_HUNTER: 205
-    NUM_PET_SLOTS_MAGE: 1
-    NUM_PET_SLOTS_THAT_NEED_LEARNED_SPELL: 1
     NUM_PET_SLOTS_WARLOCK: 25
     STABLED_PETS_FIRST_SLOT_INDEX: 5
   ProfessionConsts:
@@ -301,10 +279,10 @@ Enum:
     MinValue: 0
     NumValues: 20
   AccountDataUpdateStatus:
-    AccountDataUpdateCorrupt: 2
-    AccountDataUpdateFailed: 1
-    AccountDataUpdateSuccess: 0
-    AccountDataUpdateToobig: 3
+    Corrupt: 2
+    Failed: 1
+    Success: 0
+    Toobig: 3
   AccountDataUpdateStatusMeta:
     MaxValue: 3
     MinValue: 0
@@ -357,53 +335,53 @@ Enum:
     MinValue: 0
     NumValues: 5
   AccountStateLoadedFlags:
-    AccountStateAccountCurrenciesLoaded: '0x0000000000200000'
-    AccountStateAccountFactionsLoaded: '0x0000000200000000'
-    AccountStateAccountItemsLoaded: '0x0000000400000000'
-    AccountStateAccountMappingLoaded: '0x0000008000000000'
-    AccountStateAccountNotificationsLoaded: '0x0000000008000000'
-    AccountStateAccountWowlabsLoaded: '0x0000000020000000'
-    AccountStateAchievementsLoaded: '0x0000000000000001'
-    AccountStateArchivedPurchasesLoaded: '0x0000000000000200'
-    AccountStateAuctionableTokensLoaded: '0x0000000000002000'
-    AccountStateBanktabSettingsLoaded: '0x0000004000000000'
-    AccountStateBattleNetAccountLoaded: '0x0000000000100000'
-    AccountStateBitVectorsLoaded: '0x0000000100000000'
-    AccountStateBpayAddLicenseObjectsLoaded: '0x0000000000000800'
-    AccountStateBpayDistributionObjectsLoaded: '0x0000000000000100'
-    AccountStateBpayProductitemObjectsLoaded: '0x0000000000020000'
-    AccountStateCharacterItemsLoaded: '0x0000010000000000'
-    AccountStateCharactersLoaded: '0x0000000000000040'
-    AccountStateCombinedQuestLogLoaded: '0x0000000800000000'
-    AccountStateConsumableTokensLoaded: '0x0000000000004000'
-    AccountStateCriteriaLoaded: '0x0000000000000002'
-    AccountStateCurrencyCapsLoaded: '0x0000000000000010'
-    AccountStateCurrencyTransferLogLoaded: '0x0000020000000000'
-    AccountStateDataElementsLoaded: '0x0000001000000000'
-    AccountStateDynamicCriteriaLoaded: '0x0000000001000000'
-    AccountStateEventRecordsLoaded: '0x0000200000000000'
-    AccountStateHousingDataLoaded: '0x0000080000000000'
-    AccountStateItemCollectionsLoaded: '0x0000000000001000'
-    AccountStateLgVendorPurchaseLoaded: '0x0000040000000000'
-    AccountStateMountsLoaded: '0x0000000000000004'
-    AccountStatePerksHeldItemLoaded: '0x0000000040000000'
-    AccountStatePerksPastRewardsLoaded: '0x0000000000008000'
-    AccountStatePerksPendingPurchaseLoaded: '0x0000000010000000'
-    AccountStatePerksPendingRewardsLoaded: '0x0000000080000000'
-    AccountStatePetjournalInitialized: '0x0000000000000008'
-    AccountStatePurchasesLoaded: '0x0000000000000080'
-    AccountStateQuestCriteriaLoaded: '0x0000000000080000'
-    AccountStateQuestLogLoaded: '0x0000000000000020'
-    AccountStateRafActivityLoaded: '0x0000000002000000'
-    AccountStateRafBalanceLoaded: '0x0000000000400000'
-    AccountStateRafRewardsLoaded: '0x0000000000800000'
-    AccountStateRevokedRafRewardsLoaded: '0x0000000004000000'
-    AccountStateSettingsLoaded: '0x0000000000000400'
-    AccountStateTrialBoostHistoryLoaded: '0x0000000000040000'
-    AccountStateVasTransactionsLoaded: '0x0000000000010000'
-    AccountStateWarbandScenesLoaded: '0x0000100000000000'
-    AccountStateWarbandsLoaded: '0x0000002000000000'
-    None: '0x0000000000000000'
+    AccountCurrenciesLoaded: '0x0000000000200000'
+    AccountFactionsLoaded: '0x0000000200000000'
+    AccountItemsLoaded: '0x0000000400000000'
+    AccountMappingLoaded: '0x0000008000000000'
+    AccountNotificationsLoaded: '0x0000000008000000'
+    AccountWowlabsLoaded: '0x0000000020000000'
+    AchievementsLoaded: '0x0000000000000001'
+    ArchivedPurchasesLoaded: '0x0000000000000200'
+    AuctionableTokensLoaded: '0x0000000000002000'
+    BanktabSettingsLoaded: '0x0000004000000000'
+    BattleNetAccountLoaded: '0x0000000000100000'
+    BitVectorsLoaded: '0x0000000100000000'
+    BpayAddLicenseObjectsLoaded: '0x0000000000000800'
+    BpayDistributionObjectsLoaded: '0x0000000000000100'
+    BpayProductitemObjectsLoaded: '0x0000000000020000'
+    CharacterItemsLoaded: '0x0000010000000000'
+    CharactersLoaded: '0x0000000000000040'
+    CombinedQuestLogLoaded: '0x0000000800000000'
+    ConsumableTokensLoaded: '0x0000000000004000'
+    CriteriaLoaded: '0x0000000000000002'
+    CurrencyCapsLoaded: '0x0000000000000010'
+    CurrencyTransferLogLoaded: '0x0000020000000000'
+    DataElementsLoaded: '0x0000001000000000'
+    DynamicCriteriaLoaded: '0x0000000001000000'
+    EventRecordsLoaded: '0x0000200000000000'
+    HousingDataLoaded: '0x0000080000000000'
+    ItemCollectionsLoaded: '0x0000000000001000'
+    LgVendorPurchaseLoaded: '0x0000040000000000'
+    LoadedNone: '0x0000000000000000'
+    MountsLoaded: '0x0000000000000004'
+    PerksHeldItemLoaded: '0x0000000040000000'
+    PerksPastRewardsLoaded: '0x0000000000008000'
+    PerksPendingPurchaseLoaded: '0x0000000010000000'
+    PerksPendingRewardsLoaded: '0x0000000080000000'
+    PetjournalInitialized: '0x0000000000000008'
+    PurchasesLoaded: '0x0000000000000080'
+    QuestCriteriaLoaded: '0x0000000000080000'
+    QuestLogLoaded: '0x0000000000000020'
+    RafActivityLoaded: '0x0000000002000000'
+    RafBalanceLoaded: '0x0000000000400000'
+    RafRewardsLoaded: '0x0000000000800000'
+    RevokedRafRewardsLoaded: '0x0000000004000000'
+    SettingsLoaded: '0x0000000000000400'
+    TrialBoostHistoryLoaded: '0x0000000000040000'
+    VasTransactionsLoaded: '0x0000000000010000'
+    WarbandScenesLoaded: '0x0000100000000000'
+    WarbandsLoaded: '0x0000002000000000'
   AccountStateLoadedFlagsMeta:
     MaxValue: -2147483648
     MinValue: 0
@@ -1895,6 +1873,14 @@ Enum:
     MaxValue: 4
     MinValue: 0
     NumValues: 5
+  ChatMessagingLockdownReason:
+    ActiveEncounter: 0
+    ActiveMythicKeystoneOrChallengeMode: 1
+    ActivePvPMatch: 2
+  ChatMessagingLockdownReasonMeta:
+    MaxValue: 2
+    MinValue: 0
+    NumValues: 3
   ChatToxityFilterOptOut:
     ExcludeFilterAll: 4294967295
     ExcludeFilterFriend: 1
@@ -2771,53 +2757,53 @@ Enum:
     MinValue: 0
     NumValues: 4
   CreateAllAccountData:
-    CreateAllAccountCurrenciesDone: '0x0000000000200000'
-    CreateAllAccountDynamicCriteriaDone: '0x0000000001000000'
-    CreateAllAccountFactionsDone: '0x0000000200000000'
-    CreateAllAccountItemsDone: '0x0000000400000000'
-    CreateAllAccountMappingDone: '0x0000008000000000'
-    CreateAllAccountNotificationsDone: '0x0000000008000000'
-    CreateAllAccountStateHousingData: '0x0000080000000000'
-    CreateAllAchievementsDone: '0x0000000000000001'
-    CreateAllArchivedPurchasesDone: '0x0000000000000200'
-    CreateAllAuctionableTokensDone: '0x0000000000002000'
-    CreateAllBanktabSettingsDone: '0x0000004000000000'
-    CreateAllBattlepetsDone: '0x0000000000000008'
-    CreateAllBitVectorsDone: '0x0000000100000000'
-    CreateAllBpayAddLicenseObjectsDone: '0x0000000000000800'
-    CreateAllBpayDistributionObjectsDone: '0x0000000000000100'
-    CreateAllBpayProductitemObjectsDone: '0x0000000000020000'
-    CreateAllCharacterItemsDone: '0x0000010000000000'
-    CreateAllCharactersDone: '0x0000000000000040'
-    CreateAllCombinedQuestLogEntriesDone: '0x0000000800000000'
-    CreateAllConsumableTokensDone: '0x0000000000004000'
-    CreateAllCriteriaDone: '0x0000000000000002'
-    CreateAllCurrencycapsDone: '0x0000000000000010'
-    CreateAllCurrencyTransferLogDone: '0x0000020000000000'
-    CreateAllDataElementsDone: '0x0000001000000000'
-    CreateAllEventRecordsDone: '0x0000200000000000'
-    CreateAllItemCollectionItemsDone: '0x0000000000001000'
-    CreateAllLgVendorPurchaseDone: '0x0000040000000000'
-    CreateAllMountsDone: '0x0000000000000004'
-    CreateAllNone: '0x0000000000000000'
-    CreateAllPerkHeldItemsDone: '0x0000000040000000'
-    CreateAllPerkPastRewardsDone: '0x0000000000008000'
-    CreateAllPerkPendingPurchasesDone: '0x0000000010000000'
-    CreateAllPerkPendingRewardsDone: '0x0000000080000000'
-    CreateAllPurchasesDone: '0x0000000000000080'
-    CreateAllQuestCriteriaDone: '0x0000000000080000'
-    CreateAllQuestLogDone: '0x0000000000000020'
-    CreateAllRafActivitiesDone: '0x0000000002000000'
-    CreateAllRafBalanceDone: '0x0000000000400000'
-    CreateAllRafRewardsDone: '0x0000000000800000'
-    CreateAllRevokedRafRewardsDone: '0x0000000004000000'
-    CreateAllSettingsDone: '0x0000000000000400'
-    CreateAllTrialBoostHistoryDone: '0x0000000000040000'
-    CreateAllVasTransactionsDone: '0x0000000000010000'
-    CreateAllWarbandGroupsDone: '0x0000002000000000'
-    CreateAllWarbandScenesLoadedDone: '0x0000100000000000'
-    CreateAllWowlabsDataDone: '0x0000000020000000'
-    CreateObject: '0x0000000000100000'
+    AccountCurrenciesDone: '0x0000000000200000'
+    AccountDynamicCriteriaDone: '0x0000000001000000'
+    AccountFactionsDone: '0x0000000200000000'
+    AccountItemsDone: '0x0000000400000000'
+    AccountMappingDone: '0x0000008000000000'
+    AccountNotificationsDone: '0x0000000008000000'
+    AccountStateHousingData: '0x0000080000000000'
+    AchievementsDone: '0x0000000000000001'
+    ArchivedPurchasesDone: '0x0000000000000200'
+    AuctionableTokensDone: '0x0000000000002000'
+    BanktabSettingsDone: '0x0000004000000000'
+    BattlepetsDone: '0x0000000000000008'
+    BitVectorsDone: '0x0000000100000000'
+    BpayAddLicenseObjectsDone: '0x0000000000000800'
+    BpayDistributionObjectsDone: '0x0000000000000100'
+    BpayProductitemObjectsDone: '0x0000000000020000'
+    CharacterItemsDone: '0x0000010000000000'
+    CharactersDone: '0x0000000000000040'
+    CombinedQuestLogEntriesDone: '0x0000000800000000'
+    ConsumableTokensDone: '0x0000000000004000'
+    CriteriaDone: '0x0000000000000002'
+    CurrencycapsDone: '0x0000000000000010'
+    CurrencyTransferLogDone: '0x0000020000000000'
+    DataElementsDone: '0x0000001000000000'
+    EventRecordsDone: '0x0000200000000000'
+    ItemCollectionItemsDone: '0x0000000000001000'
+    LgVendorPurchaseDone: '0x0000040000000000'
+    MountsDone: '0x0000000000000004'
+    None: '0x0000000000000000'
+    Object: '0x0000000000100000'
+    PerkHeldItemsDone: '0x0000000040000000'
+    PerkPastRewardsDone: '0x0000000000008000'
+    PerkPendingPurchasesDone: '0x0000000010000000'
+    PerkPendingRewardsDone: '0x0000000080000000'
+    PurchasesDone: '0x0000000000000080'
+    QuestCriteriaDone: '0x0000000000080000'
+    QuestLogDone: '0x0000000000000020'
+    RafActivitiesDone: '0x0000000002000000'
+    RafBalanceDone: '0x0000000000400000'
+    RafRewardsDone: '0x0000000000800000'
+    RevokedRafRewardsDone: '0x0000000004000000'
+    SettingsDone: '0x0000000000000400'
+    TrialBoostHistoryDone: '0x0000000000040000'
+    VasTransactionsDone: '0x0000000000010000'
+    WarbandGroupsDone: '0x0000002000000000'
+    WarbandScenesLoadedDone: '0x0000100000000000'
+    WowlabsDataDone: '0x0000000020000000'
   CreateAllAccountDataMeta:
     MaxValue: -2147483648
     MinValue: 0
@@ -2956,6 +2942,7 @@ Enum:
     ConvertOldItem: 0
     ConvertOldPvPCurrency: 1
     CraftingOrder: 56
+    CurrencyWalletClaim: 29
     DailyQuestReward: 38
     DailyQuestWarModeReward: 39
     DailyReset: 45
@@ -2989,7 +2976,6 @@ Enum:
     PvPScriptedAward: 8
     PvPTeamContribution: 49
     QuestReward: 3
-    QuestRewardIgnoreCapsDeprecated: 29
     RandomBattleground: 16
     RatedBattleground: 15
     RenownRepGain: 55
@@ -3185,6 +3171,21 @@ Enum:
     Magical: 1
     Physical: 0
   DamageclassTypeMeta:
+    MaxValue: 1
+    MinValue: 0
+    NumValues: 2
+  DamageMeterNumbers:
+    Compact: 1
+    Complete: 2
+    Minimal: 0
+  DamageMeterNumbersMeta:
+    MaxValue: 2
+    MinValue: 0
+    NumValues: 3
+  DamageMeterStyle:
+    Default: 0
+    Thin: 1
+  DamageMeterStyleMeta:
     MaxValue: 1
     MinValue: 0
     NumValues: 2
@@ -3388,11 +3389,20 @@ Enum:
     MinValue: 1
     NumValues: 4
   EditModeDamageMeterSetting:
+    FrameHeight: 4
+    FrameWidth: 3
+    LockScroll: 7
+    Numbers: 2
+    Padding: 5
+    ShowClassColor: 9
+    ShowSpecIcon: 8
+    Style: 1
+    Transparency: 6
     Visibility: 0
   EditModeDamageMeterSettingMeta:
-    MaxValue: 0
+    MaxValue: 9
     MinValue: 0
-    NumValues: 1
+    NumValues: 10
   EditModeDurabilityFrameSetting:
     Size: 0
   EditModeDurabilityFrameSettingMeta:
@@ -3864,6 +3874,13 @@ Enum:
     MaxValue: 14
     MinValue: 0
     NumValues: 15
+  FontStringScaleAnimationMode:
+    FontSize: 0
+    Vertex: 1
+  FontStringScaleAnimationModeMeta:
+    MaxValue: 1
+    MinValue: 0
+    NumValues: 2
   FragmentID:
     Actor: 15
     CgObject: 2
@@ -3973,19 +3990,14 @@ Enum:
     NpcCraftingOrderTabNew: 18
     PerksProgramActivitiesIntro: 2
     PerksProgramActivitiesOpen: 32
+    RPETalentStarterBuild: 36
     TimerunnersAdvantage: 8
     TransferableCurrencies: 10
     TransmogSetsTab: 4
   FrameTutorialAccountMeta:
-    MaxValue: 35
+    MaxValue: 36
     MinValue: 1
-    NumValues: 35
-  FrameTutorialRPE:
-    TalentStarterBuild: 1
-  FrameTutorialRPEMeta:
-    MaxValue: 1
-    MinValue: 1
-    NumValues: 1
+    NumValues: 36
   GameMode:
     Plunderstorm: 2
     Standard: 1
@@ -4431,6 +4443,7 @@ Enum:
     ProfessionsCustomerOrder: 50
     ProfessionsOpen: 49
     QueueScenario: 25
+    RenameNeighborhood: 59
     RuneforgeLegendaryCrafting: 42
     RuneforgeLegendaryUpgrade: 44
     ShipmentCrafter: 28
@@ -4445,7 +4458,6 @@ Enum:
     TraitSystem: 51
     Transmogrify: 34
     UIItemInteraction: 37
-    Unused: 59
     Vendor: 1
     WorldMap: 38
     WorldPvPQueue: 19
@@ -4726,6 +4738,13 @@ Enum:
     MaxValue: 2
     MinValue: 0
     NumValues: 3
+  HousingCatalogSortType:
+    Alphabetical: 1
+    DateAdded: 0
+  HousingCatalogSortTypeMeta:
+    MaxValue: 1
+    MinValue: 0
+    NumValues: 2
   HousingCustomizeModeTargetType:
     Decor: 1
     None: 0
@@ -4784,13 +4803,14 @@ Enum:
     MinValue: 0
     NumValues: 3
   HousingDecorPlacementRestriction:
-    InvalidCollision: 4
-    InvalidTarget: 2
-    NotInsideRoom: 1
+    InvalidCollision: 8
+    InvalidTarget: 4
+    NotInsideRoom: 2
+    TooFarAway: 1
   HousingDecorPlacementRestrictionMeta:
-    MaxValue: 4
+    MaxValue: 8
     MinValue: 1
-    NumValues: 3
+    NumValues: 4
   HousingDecorSourceType:
     Cheat: 1
     DeferredRedeem: 3
@@ -4843,6 +4863,15 @@ Enum:
     MaxValue: 2
     MinValue: 0
     NumValues: 3
+  HousingExpertSubmodeRestriction:
+    NoHouseExteriorScale: 2
+    None: 0
+    NotInExpertMode: 1
+    NoWMOScale: 3
+  HousingExpertSubmodeRestrictionMeta:
+    MaxValue: 3
+    MinValue: 0
+    NumValues: 4
   HousingFixtureFlags:
     IsDefaultFixture: 1
     None: 0
@@ -4875,6 +4904,14 @@ Enum:
     MaxValue: 16
     MinValue: 0
     NumValues: 9
+  HousingHouseScope:
+    Exterior: 2
+    Interior: 1
+    None: 0
+  HousingHouseScopeMeta:
+    MaxValue: 2
+    MinValue: 0
+    NumValues: 3
   HousingIncrementType:
     Back: 8
     Down: 32
@@ -4890,6 +4927,15 @@ Enum:
     MaxValue: 512
     MinValue: 1
     NumValues: 10
+  HousingItemToastType:
+    Customization: 2
+    Decor: 3
+    Fixture: 1
+    Room: 0
+  HousingItemToastTypeMeta:
+    MaxValue: 3
+    MinValue: 0
+    NumValues: 4
   HousingLayoutCameraDirection:
     Down: 2
     Left: 4
@@ -4939,16 +4985,15 @@ Enum:
     MoveDecor: 8
     RemoveDecor: 16
   HousingPermissionFlags:
-    HousingPermissionFlagNone: 0
-    HousingPermissionFlagPlayersAreFriends: 2
-    HousingPermissionFlagPlayersAreGuildMates: 4
-    HousingPermissionFlagPlayersAreNeighbors: 16
-    HousingPermissionFlagPlayersArePartyMates: 8
-    HousingPermissionFlagSourceIsIgnored: 1
+    PlayersAreFriends: 2
+    PlayersAreGuildMates: 4
+    PlayersAreNeighbors: 16
+    PlayersArePartyMates: 8
+    SourceIsIgnored: 1
   HousingPermissionFlagsMeta:
     MaxValue: 16
-    MinValue: 0
-    NumValues: 6
+    MinValue: 1
+    NumValues: 5
   HousingPermissionMeta:
     MaxValue: 128
     MinValue: 1
@@ -4990,73 +5035,74 @@ Enum:
     CharterComplete: 2
     CollisionInvalid: 3
     DbError: 4
-    DecorCannotBeRedeemed: 64
-    DecorItemNotDestroyable: 62
-    DecorNotFound: 5
-    DecorNotFoundInStorage: 52
-    DuplicateCharterSignature: 6
-    FilterRejected: 7
-    FixtureCantDeleteDoor: 50
-    FixtureHookEmpty: 48
-    FixtureHookOccupied: 49
-    FixtureHouseTypeMismatch: 47
-    FixtureNotFound: 51
-    FixtureNotOwned: 61
-    FixtureSizeMismatch: 41
-    FixtureTypeMismatch: 42
-    GenericFailure: 8
-    GuildNotLoaded: 9
-    HookNotChildOfFixture: 46
-    HouseExteriorRootNotFound: 63
-    HouseNotFound: 10
-    IncorrectFaction: 11
-    InvalidDecorItem: 12
-    InvalidGuild: 13
-    InvalidHouse: 58
-    InvalidInstance: 59
-    InvalidInteraction: 14
-    InvalidMap: 57
-    InvalidNameProvided: 15
-    InvalidRoomLayout: 16
-    LockedByOtherPlayer: 17
-    LockOperationFailed: 18
-    MaxDecorReached: 19
-    MissingCoreFixture: 43
-    MissingDye: 55
-    MissingExpansionAccess: 54
-    MissingFactionMap: 56
-    MissingPrivateNeighborhoodInvite: 53
-    MoreHouseSlotsNeeded: 20
-    MoreSignaturesNeeded: 21
-    NeighborhoodNotFound: 22
-    NotInDecorEditMode: 23
-    NotInFixtureEditMode: 40
-    NotInLayoutEditMode: 24
-    NotInsideHouse: 25
-    NotOnOwnedPlot: 26
-    OperationAborted: 27
-    PermissionDenied: 28
-    PlacementTargetInvalid: 29
-    PlayerNotInInstance: 60
-    PlotNotFound: 30
-    PlotNotVacant: 44
-    PlotReservationCooldown: 45
-    PlotReserved: 31
-    RoomNotFound: 32
-    RoomUpdateFailed: 33
-    RpcFailure: 34
-    ServiceNotAvailable: 35
+    DecorCannotBeRedeemed: 5
+    DecorItemNotDestroyable: 6
+    DecorNotFound: 7
+    DecorNotFoundInStorage: 8
+    DuplicateCharterSignature: 9
+    FilterRejected: 10
+    FixtureCantDeleteDoor: 11
+    FixtureHookEmpty: 12
+    FixtureHookOccupied: 13
+    FixtureHouseTypeMismatch: 14
+    FixtureNotFound: 15
+    FixtureNotOwned: 16
+    FixtureSizeMismatch: 17
+    FixtureTypeMismatch: 18
+    GenericFailure: 19
+    GuildNotLoaded: 20
+    HookNotChildOfFixture: 22
+    HouseExteriorRootNotFound: 21
+    HouseNotFound: 23
+    IncorrectFaction: 24
+    InvalidDecorItem: 25
+    InvalidDistance: 26
+    InvalidGuild: 27
+    InvalidHouse: 28
+    InvalidInstance: 29
+    InvalidInteraction: 30
+    InvalidMap: 31
+    InvalidNeighborhoodName: 32
+    InvalidRoomLayout: 33
+    LockedByOtherPlayer: 34
+    LockOperationFailed: 35
+    MaxDecorReached: 36
+    MissingCoreFixture: 37
+    MissingDye: 38
+    MissingExpansionAccess: 39
+    MissingFactionMap: 40
+    MissingPrivateNeighborhoodInvite: 41
+    MoreHouseSlotsNeeded: 42
+    MoreSignaturesNeeded: 43
+    NeighborhoodNotFound: 44
+    NotInDecorEditMode: 45
+    NotInFixtureEditMode: 46
+    NotInLayoutEditMode: 47
+    NotInsideHouse: 48
+    NotOnOwnedPlot: 49
+    OperationAborted: 50
+    PermissionDenied: 51
+    PlacementTargetInvalid: 52
+    PlayerNotInInstance: 53
+    PlotNotFound: 54
+    PlotNotVacant: 55
+    PlotReservationCooldown: 56
+    PlotReserved: 57
+    RoomNotFound: 58
+    RoomUpdateFailed: 59
+    RpcFailure: 60
+    ServiceNotAvailable: 61
     Success: 0
-    TimeoutLimit: 36
-    TimerunningNotAllowed: 65
-    TokenRequired: 37
-    TooManyRequests: 66
-    TransactionFailure: 38
-    UnlockOperationFailed: 39
+    TimeoutLimit: 62
+    TimerunningNotAllowed: 63
+    TokenRequired: 64
+    TooManyRequests: 65
+    TransactionFailure: 66
+    UnlockOperationFailed: 67
   HousingResultMeta:
-    MaxValue: 66
+    MaxValue: 67
     MinValue: 0
-    NumValues: 67
+    NumValues: 68
   HousingRoomComponentCeilingType:
     Flat: 0
     Vaulted: 1
@@ -5372,23 +5418,22 @@ Enum:
     MinValue: 0
     NumValues: 21
   ItemCollectionType:
-    ItemCollectionExteriorFixture: 9
-    ItemCollectionHeirloom: 2
-    ItemCollectionNone: 0
-    ItemCollectionRoom: 8
-    ItemCollectionRoomMaterial: 11
-    ItemCollectionRoomTheme: 10
-    ItemCollectionRuneforgeLegendaryAbility: 5
-    ItemCollectionToy: 1
-    ItemCollectionTransmog: 3
-    ItemCollectionTransmogIllusion: 6
-    ItemCollectionTransmogSetFavorite: 4
-    ItemCollectionWarbandScene: 7
-    NumItemCollectionTypes: 11
+    ExteriorFixture: 9
+    Heirloom: 2
+    None: 0
+    Room: 8
+    RoomMaterial: 11
+    RoomTheme: 10
+    RuneforgeLegendaryAbility: 5
+    Toy: 1
+    Transmog: 3
+    TransmogIllusion: 6
+    TransmogSetFavorite: 4
+    WarbandScene: 7
   ItemCollectionTypeMeta:
     MaxValue: 11
     MinValue: 0
-    NumValues: 13
+    NumValues: 12
   ItemCommodityStatus:
     Commodity: 2
     Item: 1
@@ -5824,7 +5869,7 @@ Enum:
     MinValue: 0
     NumValues: 12
   ItemRecraftFlags:
-    ItemRecraftFlagInvalid: 1
+    Invalid: 1
   ItemRecraftFlagsMeta:
     MaxValue: 1
     MinValue: 1
@@ -6629,10 +6674,10 @@ Enum:
     MinValue: 0
     NumValues: 3
   NeighborhoodInitiativeUpdateStatus:
-    NeighborhoodInitiativeUpdateStatusCompleted: 2
-    NeighborhoodInitiativeUpdateStatusFailed: 3
-    NeighborhoodInitiativeUpdateStatusMilestoneCompleted: 1
-    NeighborhoodInitiativeUpdateStatusStarted: 0
+    Completed: 2
+    Failed: 3
+    MilestoneCompleted: 1
+    Started: 0
   NeighborhoodInitiativeUpdateStatusMeta:
     MaxValue: 3
     MinValue: 0
@@ -6718,8 +6763,8 @@ Enum:
     MinValue: 0
     NumValues: 27
   NpcCraftingOrderSetFlags:
-    CraftingOrderFlagAllowDuplicate: 2
-    CraftingOrderFlagAllowMultiple: 1
+    AllowDuplicate: 2
+    AllowMultiple: 1
   NpcCraftingOrderSetFlagsMeta:
     MaxValue: 2
     MinValue: 1
@@ -6756,11 +6801,11 @@ Enum:
     Illusion: 7
     Mount: 2
     Pet: 3
+    RefundUnused: 24
     Stipend: 20
     Toy: 5
     Transmog: 1
     Transmogset: 8
-    UnusedPerksVendorCategoryRefundUnused: 24
     WarbandScene: 9
   PerksVendorCategoryTypeMeta:
     MaxValue: 24
@@ -7276,6 +7321,7 @@ Enum:
     ProfessionsCustomerOrder: 60
     QuestGiver: 4
     Registrar: 11
+    RenameNeighborhood: 71
     Renown: 55
     ScrappingMachine: 40
     ShipmentCrafter: 33
@@ -7290,7 +7336,6 @@ Enum:
     TraitSystem: 61
     Transmogrifier: 24
     Trophy: 36
-    Unused: 71
     Vendor: 12
     VoidStorageBanker: 26
     WeeklyRewards: 49
@@ -7832,13 +7877,13 @@ Enum:
     MinValue: 0
     NumValues: 4
   RcoCloseReason:
-    RcoCloseCancel: 2
-    RcoCloseCrafterFulfill: 5
-    RcoCloseExpire: 1
-    RcoCloseFulfill: 0
-    RcoCloseGmCancel: 4
-    RcoCloseInvalid: 6
-    RcoCloseReject: 3
+    Cancel: 2
+    CrafterFulfill: 5
+    Expire: 1
+    Fulfill: 0
+    GmCancel: 4
+    Invalid: 6
+    Reject: 3
   RcoCloseReasonMeta:
     MaxValue: 6
     MinValue: 0
@@ -7886,6 +7931,13 @@ Enum:
     MaxValue: 4
     MinValue: 0
     NumValues: 5
+  ReleaseType:
+    Classic: 2
+    Original: 1
+  ReleaseTypeMeta:
+    MaxValue: 2
+    MinValue: 1
+    NumValues: 2
   RenownRewardDisplayType:
     Currency: 9
     GarrFollower: 8
@@ -8017,6 +8069,22 @@ Enum:
     MaxValue: 2
     MinValue: 0
     NumValues: 3
+  RestrictedActionReason:
+    ActiveEncounter: 1
+    ActiveMythicKeystoneOrChallengeMode: 2
+    ActivePvPMatch: 3
+    InCombat: 0
+  RestrictedActionReasonMeta:
+    MaxValue: 3
+    MinValue: 0
+    NumValues: 4
+  RestrictedActionType:
+    SecretAuras: 0
+    SecretCooldowns: 1
+  RestrictedActionTypeMeta:
+    MaxValue: 1
+    MinValue: 0
+    NumValues: 2
   RestrictPingsTo:
     Assist: 2
     Lead: 1
@@ -8179,26 +8247,30 @@ Enum:
     NumValues: 6
   SecretAspect:
     Alpha: 128
-    BarValue: 32768
-    Cooldown: 65536
+    BarValue: 16384
+    Cooldown: 32768
     Cursor: 1024
-    Desaturation: 8192
+    Desaturation: 4096
     FrameLevel: 256
-    Hierarchy: 4096
+    Hierarchy: 1
     ID: 2
+    ObjectDebug: 1
+    ObjectName: 1
+    ObjectSecrets: 1
+    ObjectSecurity: 1
     ObjectType: 1
     Scale: 64
     ScrollRange: 512
     SecureText: 16
     Shown: 32
-    TexCoords: 16384
+    TexCoords: 8192
     Text: 8
     Toplevel: 4
     VertexColor: 2048
   SecretAspectMeta:
-    MaxValue: 65536
+    MaxValue: 32768
     MinValue: 1
-    NumValues: 17
+    NumValues: 21
   SelfResurrectOptionType:
     Item: 1
     Spell: 0

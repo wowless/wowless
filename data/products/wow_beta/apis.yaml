@@ -884,6 +884,7 @@ C_AdventureMap.GetNumQuestOffers:
 C_AdventureMap.GetNumZoneChoices:
 C_AdventureMap.GetQuestInfo:
 C_AdventureMap.GetQuestOfferInfo:
+C_AdventureMap.GetQuestPortraitInfo:
 C_AdventureMap.GetZoneChoiceInfo:
 C_AdventureMap.StartQuest:
 C_AlliedRaces.GetAllRacialAbilitiesFromID:
@@ -17522,6 +17523,7 @@ C_PvP.HasArenaSkirmishWinToday:
   outputs:
   - name: hasArenaSkirmishWinToday
     type: boolean
+C_PvP.HasMatchStarted:
 C_PvP.IsActiveBattlefield:
   inputs:
   outputs:
@@ -17649,6 +17651,7 @@ C_PvP.IsWarModeFeatureEnabled:
   outputs:
   - name: warModeEnabled
     type: boolean
+C_PvP.JoinBattlefield:
 C_PvP.JoinBrawl:
   inputs:
   - default: false
@@ -25701,6 +25704,7 @@ C_UnitAuras.GetPlayerAuraBySpellID:
     nilable: true
     type:
       structure: AuraData
+C_UnitAuras.GetRefreshExtendedDuration:
 C_UnitAuras.GetUnitAuraBySpellID:
   inputs:
   - name: unit
@@ -27006,11 +27010,7 @@ CanSwitchVehicleSeat:
   - name: result
     type: boolean
 CanSwitchVehicleSeats:
-CanUpgradeExpansion:
-  inputs:
-  outputs:
-  - name: canUpgradeExpansion
-    type: boolean
+CanUpgradeToCurrentExpansion:
 CanViewGuildRecipes:
 CanWithdrawGuildBankMoney:
   inputs:
@@ -27211,6 +27211,11 @@ CollapseQuestHeader:
 CollapseWarGameHeader:
 collectgarbage:
   impl: collectgarbage
+CombatLog_Object_IsA:
+CombatLogClearEntries:
+CombatLogGetRetentionTime:
+CombatLogSetRetentionTime:
+CombatTextSetActiveUnit:
 CompleteLFGReadyCheck:
 CompleteLFGRoleCheck:
 CompleteQuest:
@@ -27419,6 +27424,8 @@ CursorHasSpell:
     type: boolean
 date:
   impl: date
+DeathRecap_GetEvents:
+DeathRecap_HasEvents:
 debuglocals:
   impl: debuglocals
 debugprofilestart:
@@ -27610,6 +27617,7 @@ FlipCameraYaw:
   - name: angle
     type: number
   outputs:
+FloorToNearestString:
 FlyoutHasSpell:
 FocusUnit:
   inputs:
@@ -28287,6 +28295,7 @@ GetCurrentBindingSet:
   inputs:
   outputs:
   - type: number
+GetCurrentCombatTextEventInfo:
 GetCurrentEnvironment:
   impl: GetCurrentEnvironment
 GetCurrentEventID:
@@ -28352,6 +28361,7 @@ GetCursorPosition:
 GetDailyQuestsCompleted:
   outputs:
   - type: number
+GetDeathRecapLink:
 GetDefaultLanguage:
   inputs:
   outputs:
@@ -30500,6 +30510,7 @@ GetRestrictedAccountData:
     type: number
   - name: professionCap
     type: number
+GetRestrictedActionStatus:
 GetRestState:
   inputs:
   mayreturnnothing: true
@@ -31342,6 +31353,7 @@ GetUnitTotalModifiedMaxHealthPercent:
   outputs:
   - name: result
     type: number
+GetUpgradeExpansionLevel:
 GetVehicleBarIndex:
   inputs:
   outputs:
@@ -32224,7 +32236,6 @@ ItemTextIsFullPage:
 ItemTextNextPage:
 ItemTextPrevPage:
 JoinArena:
-JoinBattlefield:
 JoinChannelByName:
 JoinLFG:
 JoinPermanentChannel:
@@ -32759,6 +32770,7 @@ RetrieveCorpse:
   outputs:
 ReturnInboxItem:
 RollOnLoot:
+RoundToNearestString:
 RunBinding:
 RunMacro:
 RunScript:
@@ -33121,6 +33133,7 @@ SetView:
   - name: view
     type: number
   outputs:
+ShouldShowExpansionUpgradeBanner:
 ShouldShowIslandsWeeklyPOI:
   inputs:
   outputs:
@@ -33952,6 +33965,8 @@ UnitHealthMax:
   outputs:
   - name: result
     type: number
+UnitHealthMissing:
+UnitHealthPercent:
 UnitHonor:
   inputs:
   - name: unit
@@ -34589,6 +34604,8 @@ UnitPowerMax:
   outputs:
   - name: maxPower
     type: number
+UnitPowerMissing:
+UnitPowerPercent:
 UnitPowerType:
   impl: UnitPowerType
   inputs:
@@ -34755,6 +34772,7 @@ UnitSex:
   - name: sex
     nilable: true
     type: number
+UnitSexBase:
 UnitShouldDisplayName:
   inputs:
   - name: unit
