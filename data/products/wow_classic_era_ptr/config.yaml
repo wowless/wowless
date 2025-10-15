@@ -9,10 +9,8 @@ addon:
       C_WowTokenSecure:
     enums:
       BattlepayBannerType:
-      BattlepayDisplayFlag:
       BattlepayGroupDisplayType:
       BattlepayProductDecorator:
-      BattlepayProductGroupFlag:
       PurchaseEligibility:
       StoreError:
       VasError:
@@ -23,7 +21,9 @@ addon:
       loadstring_untainted:
   enum_values_set_in_framexml:
     SeasonID:
-      Placeholder: 2
+      Placeholder:
+  enums_set_in_framexml:
+    Unitsex:
   hooked_globals:
     FauxScrollFrame_Update:
     SetItemRef:

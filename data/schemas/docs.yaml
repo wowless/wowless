@@ -8,30 +8,41 @@ type:
             type:
               mapof:
                 key:
-                  ref: api
+                  ref:
+                    schema: api
                 value: any
           enums:
             type:
               mapof:
                 key:
-                  ref: enum
+                  ref:
+                    schema: enum
                 value: any
           extra_apis:
             type:
               mapof:
-                key: string
+                key:
+                  ref:
+                    negative: true
+                    schema: api
                 value:
                   record:
           extra_enums:
             type:
               mapof:
-                key: string
+                key:
+                  ref:
+                    negative: true
+                    schema: enum
                 value:
                   record:
           extra_events:
             type:
               mapof:
-                key: string
+                key:
+                  ref:
+                    negative: true
+                    schema: event
                 value:
                   record:
           extra_script_objects:
@@ -44,7 +55,8 @@ type:
             type:
               mapof:
                 key:
-                  ref: uiobject
+                  ref:
+                    schema: uiobject
                 value:
                   mapof:
                     key: string
@@ -54,7 +66,8 @@ type:
         mapof:
           key: string
           value:
-            ref: uiobject
+            ref:
+              schema: uiobject
     typedefs:
       type:
         mapof:
@@ -71,9 +84,11 @@ type:
       type:
         mapof:
           key:
-            ref: uiobject
+            ref:
+              schema: uiobject
           value:
             mapof:
               key: string
               value:
-                ref: uiobject
+                ref:
+                  schema: uiobject

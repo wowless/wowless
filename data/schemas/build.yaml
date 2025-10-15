@@ -10,7 +10,8 @@ type:
     gametype:
       required: true
       type:
-        ref: gametype
+        ref:
+          schema: gametype
     hash:
       required: true
       type: string

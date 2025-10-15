@@ -31,7 +31,8 @@ type:
           type:
             mapof:
               key:
-                ref: uiobject
+                ref:
+                  schema: uiobject
               value:
                 record:
         methods:
@@ -68,7 +69,8 @@ type:
                             shown:
                               type: string
                         uiobjectimpl:
-                          ref: uiobjectimpl
+                          ref:
+                            schema: uiobjectimpl
                   inputs:
                     type:
                       sequenceof:
@@ -121,7 +123,8 @@ type:
           type:
             mapof:
               key:
-                ref: scripttype
+                ref:
+                  schema: scripttype
               value:
                 record:
         singleton:

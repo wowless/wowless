@@ -5,22 +5,26 @@ type:
     value:
       taggedunion:
         delegate:
-          ref: impl
+          ref:
+            schema: impl
         directsql:
-          ref: sql
+          ref:
+            schema: sql
         impl:
           record:
             modules:
               type:
                 mapof:
                   key:
-                    ref: module
+                    ref:
+                      schema: module
                   value:
                     record:
             sqls:
               type:
                 sequenceof:
-                  ref: sql
+                  ref:
+                    schema: sql
         luadelegate:
           record:
             function:
@@ -35,5 +39,6 @@ type:
             name:
               required: true
               type:
-                ref: module
+                ref:
+                  schema: module
         stdlib: string

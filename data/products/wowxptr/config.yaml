@@ -24,6 +24,8 @@ addon:
       C_Macro.SetMacroExecuteLineCallback:
       CreateForbiddenFrame:
       loadstring_untainted:
+  enums_set_in_framexml:
+    EditModeChatFrameDisplayOnlySetting:
   hooked_globals:
     SetItemRef:
     UpdateUIParentPosition:

@@ -731,18 +731,6 @@ Enum:
     MaxValue: 3
     MinValue: 0
     NumValues: 4
-  BattlepayDisplayFlag:
-    CardAlwaysShowsTexture: 4
-    CardDoesNotShowModel: 2
-    Deprecated1: 32
-    Deprecated2: 64
-    Expansion: 1
-    HiddenPrice: 8
-    HideWhenOwned: 256
-    RafReward: 512
-    ShowFancyToast: 1024
-    UseHorizontalLayoutForFullCard: 16
-    UseSquareIconBorder: 128
   BattlepayDisplayFlags:
     CardAlwaysShowsTexture: 4
     CardDoesNotShowModel: 2
@@ -793,12 +781,6 @@ Enum:
     MaxValue: 3
     MinValue: 0
     NumValues: 4
-  BattlepayProductGroupFlag:
-    Deprecated: 16
-    DisableOwnedProducts: 4
-    EnabledForTrial: 2
-    EnabledForVeteran: 8
-    HideOwnedProducts: 1
   BattlepayProductGroupFlags:
     DisableOwnedProducts: 4
     EnabledForTrial: 2
@@ -6299,12 +6281,6 @@ Enum:
     MinValue: 1
     NumValues: 5
   UnitSex:
-    Both: 3
-    Female: 1
-    Male: 0
-    Neutral: 4
-    None: 2
-  Unitsex:
     Both: 3
     Female: 1
     Male: 0

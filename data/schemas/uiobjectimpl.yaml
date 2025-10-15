@@ -10,16 +10,19 @@ type:
               type:
                 mapof:
                   key:
-                    ref: module
+                    ref:
+                      schema: module
                   value:
                     record:
             sqls:
               type:
                 sequenceof:
-                  ref: sql
+                  ref:
+                    schema: sql
         moduledelegate:
           record:
             name:
               required: true
               type:
-                ref: module
+                ref:
+                  schema: module
