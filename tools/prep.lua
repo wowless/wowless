@@ -96,14 +96,10 @@ local specDefault = (function()
       return valstruct(ty.structure)
     end
     if ty.enum then
-      local e = assert(globals.Enum[ty.enum], 'missing enum ' .. ty.enum)
-      -- Unfortunately we cannot rely on the existence of a Meta enum,
-      -- so we go fishing for the minimum value manually.
-      local x
-      for _, v in pairs(e) do
-        x = (not x or v < x) and v or x
-      end
-      return valstr(x)
+      assert(globals.Enum[ty.enum], 'missing enum ' .. ty.enum)
+      local meta = assert(globals.Enum[ty.enum .. 'Meta'], 'missing meta enum for ' .. ty.enum)
+      local min = assert(meta.MinValue, 'missing MinValue in meta for ' .. ty.enum)
+      return valstr(min)
     end
     if ty.uiobject then
       return ('gencode.CreateUIObject(%q).luarep'):format(ty.uiobject:lower())
