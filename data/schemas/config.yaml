@@ -44,7 +44,8 @@ type:
                 value:
                   mapof:
                     key: string
-                    value: number
+                    value:
+                      record:
           hooked_globals:
             type:
               mapof:

@@ -27,8 +27,8 @@ addon:
       loadstring_untainted:
   enum_values_set_in_framexml:
     CooldownViewerCategory:
-      HiddenAura: -2
-      HiddenSpell: -1
+      HiddenAura:
+      HiddenSpell:
   hooked_globals:
     SetItemRef:
     UpdateUIParentPosition:

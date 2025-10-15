@@ -209,7 +209,11 @@ G.testsuite.generated = function()
     end
     if not iswowlesslite then
       for k, v in pairs(_G.WowlessData.Config.addon.enum_values_set_in_framexml or {}) do
-        for vk, vv in pairs(v) do
+        for vk in pairs(v) do
+          local vv = actualEnum[k][vk]
+          if vv == nil then
+            error(('enum_values_set_in_framexml %s.%s was not set'):format(k, vk), 0)
+          end
           expectedEnum[k][vk] = vv
         end
       end

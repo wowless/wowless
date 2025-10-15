@@ -23,7 +23,7 @@ addon:
       loadstring_untainted:
   enum_values_set_in_framexml:
     SeasonID:
-      Placeholder: 2
+      Placeholder:
   hooked_globals:
     FauxScrollFrame_Update:
     SetItemRef:
