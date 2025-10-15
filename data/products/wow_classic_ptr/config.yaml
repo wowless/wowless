@@ -24,6 +24,9 @@ addon:
   enum_values_set_in_framexml:
     SeasonID:
       Placeholder:
+  enums_set_in_framexml:
+    QuestPOIQuestTypes:
+    Unitsex:
   hooked_globals:
     FauxScrollFrame_Update:
     SetItemRef:

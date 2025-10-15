@@ -6304,12 +6304,6 @@ Enum:
     Male: 0
     Neutral: 4
     None: 2
-  Unitsex:
-    Both: 3
-    Female: 1
-    Male: 0
-    Neutral: 4
-    None: 2
   UnitSexMeta:
     MaxValue: 4
     MinValue: 0

@@ -46,6 +46,15 @@ type:
                     key: string
                     value:
                       record:
+          enums_set_in_framexml:
+            type:
+              mapof:
+                key:
+                  ref:
+                    negative: true
+                    schema: enum
+                value:
+                  record:
           hooked_globals:
             type:
               mapof:

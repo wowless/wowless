@@ -21,6 +21,8 @@ addon:
       C_Macro.SetMacroExecuteLineCallback:
       CreateForbiddenFrame:
       loadstring_untainted:
+  enums_set_in_framexml:
+    QuestPOIQuestTypes:
   hooked_globals:
     FauxScrollFrame_Update:
     SetItemRef:

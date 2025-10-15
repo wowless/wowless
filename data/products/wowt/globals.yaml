@@ -3084,9 +3084,6 @@ Enum:
     MaxValue: 2
     MinValue: 0
     NumValues: 3
-  EditModeChatFrameDisplayOnlySetting:
-    Height: 5
-    Width: 4
   EditModeChatFrameSetting:
     HeightHundreds: 2
     HeightTensAndOnes: 3

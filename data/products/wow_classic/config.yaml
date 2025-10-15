@@ -24,6 +24,9 @@ addon:
   enum_values_set_in_framexml:
     SeasonID:
       Placeholder:
+  enums_set_in_framexml:
+    QuestPOIQuestTypes:
+    Unitsex:
   ignore_cvar_value:
     graphicsEnvironmentDetail:
     graphicsGroundClutter:

@@ -29,6 +29,8 @@ addon:
     CooldownViewerCategory:
       HiddenAura:
       HiddenSpell:
+  enums_set_in_framexml:
+    EditModeChatFrameDisplayOnlySetting:
   hooked_globals:
     UpdateUIParentPosition:
   ignore_cvar_value:
