@@ -25,6 +25,7 @@ addon:
     globalapis:
       C_Macro.SetMacroExecuteLineCallback:
       CreateForbiddenFrame:
+      CreateSecureDelegate:
       loadstring_untainted:
   enum_values_set_in_framexml:
     CooldownViewerCategory:
