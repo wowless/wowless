@@ -1835,6 +1835,13 @@ Enum:
     MaxValue: 2
     MinValue: 1
     NumValues: 2
+  CharCreateAnimTurnType:
+    Normal: 0
+    Torso: 1
+  CharCreateAnimTurnTypeMeta:
+    MaxValue: 1
+    MinValue: 0
+    NumValues: 2
   CharCustomizationType:
     CustomOptionFacewear: 7
     CustomOptionHorn: 6
@@ -1849,6 +1856,15 @@ Enum:
     MaxValue: 8
     MinValue: 0
     NumValues: 9
+  CharSectionCondition:
+    AlliedRace: 0
+    ConditionalAppeareance: 2
+    HeritageArmor: 1
+    RaceClassCombo: 3
+  CharSectionConditionMeta:
+    MaxValue: 3
+    MinValue: 0
+    NumValues: 4
   ChatChannelRuleset:
     ChromieTimeBuringCrusade: 4
     ChromieTimeCataclysm: 3

@@ -248,6 +248,11 @@ Actor:
       outputs:
       - name: isLoaded
         type: boolean
+    IsPreferringModelCollisionBounds:
+      inputs:
+      outputs:
+      - name: preferringCollisionBounds
+        type: boolean
     IsSlotAllowed:
       inputs:
       - name: inventorySlots
@@ -333,6 +338,17 @@ Actor:
       outputs:
       - name: success
         type: boolean
+    SetGradientMask:
+      inputs:
+      - name: gradientIndex0
+        type: number
+      - name: gradientIndex1
+        type: number
+      - name: gradientIndex2
+        type: number
+      - name: gradientIndex3
+        type: number
+      outputs:
     SetItemTransmogInfo:
       inputs:
       - name: transmogInfo
@@ -471,6 +487,11 @@ Actor:
         type: number
       - name: positionZ
         type: number
+      outputs:
+    SetPreferModelCollisionBounds:
+      inputs:
+      - name: preferCollisionBounds
+        type: boolean
       outputs:
     SetRoll:
       impl:
@@ -3357,6 +3378,12 @@ FontString:
       outputs:
       - name: radians
         type: number
+    GetScaleAnimationMode:
+      inputs:
+      outputs:
+      - name: scaleAnimationMode
+        type:
+          enum: FontStringScaleAnimationMode
     GetStringHeight:
       inputs:
       outputs:
@@ -3446,6 +3473,12 @@ FontString:
       inputs:
       - name: radians
         type: number
+      outputs:
+    SetScaleAnimationMode:
+      inputs:
+      - name: scaleAnimationMode
+        type:
+          enum: FontStringScaleAnimationMode
       outputs:
     SetText:
       impl:
@@ -4055,6 +4088,15 @@ Frame:
       outputs:
       - name: registered
         type: boolean
+    RegisterEventCallback:
+      inputs:
+      - name: eventName
+        type: string
+      - name: cb
+        type: function
+      outputs:
+      - name: registered
+        type: boolean
     RegisterForDrag:
       inputs:
       - name: buttons
@@ -4069,6 +4111,18 @@ Frame:
         type: string
       - name: units
         nilable: true
+        type: string
+      instride: 1
+      outputs:
+      - name: registered
+        type: boolean
+    RegisterUnitEventCallback:
+      inputs:
+      - name: eventName
+        type: string
+      - name: cb
+        type: function
+      - name: units
         type: string
       instride: 1
       outputs:
@@ -5341,6 +5395,17 @@ Model:
     SetGlow:
       inputs:
       - name: glow
+        type: number
+      outputs:
+    SetGradientMask:
+      inputs:
+      - name: grad0
+        type: number
+      - name: grad1
+        type: number
+      - name: grad2
+        type: number
+      - name: grad3
         type: number
       outputs:
     SetLight:
@@ -6746,6 +6811,11 @@ Region:
       inputs:
       outputs:
       - name: isRestricted
+        type: boolean
+    IsAnchoringSecret:
+      inputs:
+      outputs:
+      - name: isAnchoringSecret
         type: boolean
     IsCollapsed:
       impl:
@@ -8213,21 +8283,21 @@ TextureBase:
         - name: bry
       inputs:
       outputs:
-      - name: ulx
+      - name: ulX
         type: number
-      - name: uly
+      - name: ulY
         type: number
-      - name: llx
+      - name: llX
         type: number
-      - name: lly
+      - name: llY
         type: number
-      - name: urx
+      - name: urX
         type: number
-      - name: ury
+      - name: urY
         type: number
-      - name: lrx
+      - name: lrX
         type: number
-      - name: lry
+      - name: lrY
         type: number
     GetTexelSnappingBias:
       impl:
@@ -8415,6 +8485,21 @@ TextureBase:
         name: snap
         type: boolean
       outputs:
+    SetSpriteSheetCell:
+      inputs:
+      - name: cell
+        type: number
+      - name: numRows
+        type: number
+      - name: numColumns
+        type: number
+      - name: cellWidth
+        nilable: true
+        type: number
+      - name: cellHeight
+        nilable: true
+        type: number
+      outputs:
     SetTexCoord:
       impl:
         uiobjectimpl: Texture/SetTexCoord
@@ -8567,6 +8652,24 @@ UIObject:
       outputs:
       - name: objectType
         type: string
+    HasAnySecretAspect:
+      inputs:
+      outputs:
+      - name: hasSecretAspect
+        type: boolean
+    HasSecretAspect:
+      inputs:
+      - name: aspect
+        type:
+          enum: SecretAspect
+      outputs:
+      - name: hasSecretAspect
+        type: boolean
+    HasSecretValues:
+      inputs:
+      outputs:
+      - name: hasSecretValues
+        type: boolean
     IsForbidden:
       impl:
         getter:
@@ -8584,10 +8687,20 @@ UIObject:
       outputs:
       - name: isType
         type: boolean
+    IsPreventingSecretValues:
+      inputs:
+      outputs:
+      - name: isPreventingSecretValues
+        type: boolean
     SetForbidden:
       impl:
         uiobjectimpl: ForbiddenMixin/SetForbidden
       inputs:
+      outputs:
+    SetPreventSecretValues:
+      inputs:
+      - name: preventSecretValues
+        type: boolean
       outputs:
     SetToDefaults:
       inputs:
