@@ -10,4 +10,5 @@ type:
         family:
           required: true
           type:
-            ref: family
+            ref:
+              schema: family

@@ -92,8 +92,9 @@ local complex = {
     end
   end,
   ref = function(s)
-    local gdomain = domains[s]
-    local pdomains = productDomains[s]
+    local gdomain = domains[s.schema]
+    local pdomains = productDomains[s.schema]
+    local mustexist = not s.negative
     return function(v, product)
       if type(v) ~= 'string' then
         return 'expected string'
@@ -102,8 +103,8 @@ local complex = {
       if not domain then
         return 'invalid domain'
       end
-      if not domain[v] then
-        return 'unknown domain value'
+      if (domain[v] ~= nil) ~= mustexist then
+        return (mustexist and 'unknown' or 'known') .. ' domain value'
       end
     end
   end,

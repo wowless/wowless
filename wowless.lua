@@ -12,6 +12,7 @@ local args = (function()
   run:flag('--frame0', 'write frame0 debug')
   run:flag('--lite', 'do not load framexml')
   run:flag('--profile', 'dump profile')
+  run:flag('--trackenums', 'track enums')
   return parser:parse()
 end)()
 debug.setprofilingenabled(args.profile)
@@ -26,6 +27,7 @@ local modules = runner.run({
   output = args.output,
   product = args.product,
   scripts = args.scripts,
+  trackenums = args.trackenums,
 })
 if args.profile then
   require('wowless.profiler').write({

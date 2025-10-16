@@ -3,7 +3,8 @@ type:
   record:
     impl:
       type:
-        ref: impl
+        ref:
+          schema: impl
     inputs:
       type:
         sequenceof:

@@ -3084,9 +3084,6 @@ Enum:
     MaxValue: 2
     MinValue: 0
     NumValues: 3
-  EditModeChatFrameDisplayOnlySetting:
-    Height: 5
-    Width: 4
   EditModeChatFrameSetting:
     HeightHundreds: 2
     HeightTensAndOnes: 3
@@ -8062,58 +8059,6 @@ Enum:
     MaxValue: 17
     MinValue: 0
     NumValues: 18
-  VasError:
-    AccountRestricted: 20082
-    AllianceNotEligible: 20027
-    AlreadyRenameFlagged: 20055
-    ArenaTeamCaptain: 20064
-    AuthenticatorInsufficient: 20073
-    BattlepayDeliveryPending: 20078
-    BoostedTooRecently: 20085
-    CannotMoveGuildMaster: 20012
-    CharacterHasVasPending: 4
-    CharacterTransferTooSoon: 20023
-    CharacterWithoutGuild: 20070
-    CharLocked: 20026
-    CustomizeAlreadyRequested: 20057
-    DisallowedDestinationAccount: 9
-    DisallowedSourceAccount: 8
-    DuplicateCharacterName: 20015
-    FactionChangeTooSoon: 20061
-    GmSeniorityInsufficient: 20072
-    GuildRankInsufficient: 20069
-    HasAuctions: 20033
-    HasCagedBattlePet: 20084
-    HasCraftingOrders: 20092
-    HasHeirloom: 20080
-    HasMail: 20016
-    HasWoWToken: 20079
-    IneligibleMapID: 20076
-    IneligibleTargetRealm: 20022
-    InvalidDestinationAccount: 6
-    InvalidName: 777777700
-    InvalidSourceAccount: 7
-    IsNpeRestricted: 20091
-    LastCustomizeTooRecent: 20058
-    LastRenameTooRecent: 20052
-    LastSaveTooDistant: 20083
-    LastSaveTooRecent: 20034
-    LockedForVas: 40
-    LowerBoxLevel: 11
-    MaxCharactersOnServer: 20013
-    MoveInProgress: 20018
-    NameNotAvailable: 20051
-    NeedsEraChoice: 20090
-    NeedsLevelSquish: 20088
-    NewLeaderInvalid: 20086
-    NoMixedAlliance: 20014
-    OperationAlreadyInProgress: 33
-    PendingItemAudit: 20066
-    PvEToPvPTransferNotAllowed: 20087
-    RaceClassComboIneligible: 20062
-    RealmNotEligible: 20011
-    TooMuchMoneyForLevel: 20032
-    UnderMinLevelReq: 20021
   VasPurchaseProgress:
     ApplyingLicense: 3
     Complete: 7

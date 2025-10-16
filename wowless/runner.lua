@@ -65,6 +65,24 @@ local function run(cfg)
   local genv = modules.env.genv
   return withglobaltable(genv, function()
     require('wowless.env').init(modules, not cfg.dir)
+    if cfg.trackenums then
+      for ek, ev in pairs(genv.Enum) do
+        setmetatable(ev, {
+          __newindex = function(t, k, v)
+            log(0, 'TRACKENUMS %s VALUE %s %s', v == nil and 'DELETING' or 'WRITING', ek, k)
+            rawset(t, k, v)
+          end,
+        })
+      end
+      local enums = genv.Enum
+      genv.Enum = setmetatable({}, {
+        __index = enums,
+        __newindex = function(_, k, v)
+          log(0, 'TRACKENUMS %s %s', v == nil and 'DELETING' or 'WRITING', k)
+          enums[k] = v
+        end,
+      })
+    end
     for k, v in pairs(modules.uiobjectloader(modules)) do
       modules.uiobjecttypes.Add(k, v)
     end

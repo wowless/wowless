@@ -34,7 +34,8 @@ type:
                         number: tag
                         string: tag
                         stringenum:
-                          ref: stringenum
+                          ref:
+                            schema: stringenum
                         stringlist: tag
         contents:
           type:
@@ -42,13 +43,15 @@ type:
               tags:
                 mapof:
                   key:
-                    ref: xml
+                    ref:
+                      schema: xml
                   value:
                     record:
               text: tag
         extends:
           type:
-            ref: xml
+            ref:
+              schema: xml
         impl:
           type:
             taggedunion:
@@ -66,7 +69,8 @@ type:
                   parenttype:
                     required: true
                     type:
-                      ref: uiobject
+                      ref:
+                        schema: uiobject
               loadstring: tag
               scope: string
               script:
