@@ -307,10 +307,7 @@ local function outsig(fn, ns, api)
   return outputs
 end
 
-local function rewriteApis()
-  local y = require('wowapi.yaml')
-  local f = 'data/products/' .. product .. '/apis.yaml'
-  local apis = y.parseFile(f)
+local function rewriteApis(apis)
   local lies = deref(config, 'lies', 'apis') or {}
   local extras = deref(config, 'lies', 'extra_apis') or {}
   for name, fn in pairs(funcs) do
@@ -333,13 +330,9 @@ local function rewriteApis()
   end
   assertTaken('lies', lies)
   assertTaken('extras', extras)
-  writeifchanged(f, y.pprint(apis))
-  return apis
 end
 
-local function rewriteEvents()
-  local filename = ('data/products/%s/events.yaml'):format(product)
-  local out = require('wowapi.yaml').parseFile(filename)
+local function rewriteEvents(out)
   for name, ev in pairs(events) do
     local ns = split(name)
     local payload = {}
@@ -356,15 +349,11 @@ local function rewriteEvents()
       stride = stride(ev.Payload),
     }
   end
-  writeifchanged(filename, pprintYaml(out))
-  return out
 end
 
-local function rewriteGlobals()
+local function rewriteGlobals(out)
   local lies = deref(config, 'lies', 'enums') or {}
   local extras = deref(config, 'lies', 'extra_enums') or {}
-  local filename = ('data/products/%s/globals.yaml'):format(product)
-  local out = require('wowapi.yaml').parseFile(filename)
   for _, tab in pairs(tabs) do
     if tab.Type == 'Enumeration' and not take(extras, tab.Name) then
       local t = {}
@@ -382,12 +371,9 @@ local function rewriteGlobals()
   end
   assertTaken('lies.enums', lies)
   assertTaken('lies.extra_enums', extras)
-  writeifchanged(filename, pprintYaml(out))
 end
 
-local function rewriteStructures(outApis, outEvents, outUIObjects)
-  local filename = ('data/products/%s/structures.yaml'):format(product)
-  local structures = require('wowapi.yaml').parseFile(filename)
+local function rewriteStructures(structures, outApis, outEvents, outUIObjects)
   for name, tab in pairs(tabs) do
     if tab.Type == 'Structure' then
       local ns = split(name)
@@ -438,10 +424,15 @@ local function rewriteStructures(outApis, outEvents, outUIObjects)
       processList(method.outputs)
     end
   end
-  writeifchanged(filename, pprintYaml(out))
+  for k in pairs(structures) do
+    structures[k] = nil
+  end
+  for k, v in pairs(out) do
+    structures[k] = v
+  end
 end
 
-local function rewriteUIObjects()
+local function rewriteUIObjects(uiobjects)
   local pscrobjs = {}
   for _, t in pairs(scrobjs) do
     assert(not next(t.Events))
@@ -463,8 +454,6 @@ local function rewriteUIObjects()
     end
     mapped[mmk] = t
   end
-  local filename = ('data/products/%s/uiobjects.yaml'):format(product)
-  local uiobjects = require('wowapi.yaml').parseFile(filename)
   local lies = deref(config, 'lies', 'uiobjects') or {}
   local reassigns = config.uiobject_method_reassignments or {}
   local inhm = {}
@@ -511,15 +500,38 @@ local function rewriteUIObjects()
   end
   assertTaken('lies', lies)
   assertTaken('reassigns', reassigns)
-  writeifchanged(filename, pprintYaml(uiobjects))
-  return uiobjects
 end
 
-local outApis = rewriteApis()
-local outEvents = rewriteEvents()
-local outUIObjects = rewriteUIObjects()
-rewriteStructures(outApis, outEvents, outUIObjects)
-rewriteGlobals()
+local rewriteFuncs = {
+  apis = rewriteApis,
+  events = rewriteEvents,
+  globals = rewriteGlobals,
+  structures = rewriteStructures,
+  uiobjects = rewriteUIObjects,
+}
+local rewriteDeps = {
+  structures = { 'apis', 'events', 'uiobjects' },
+}
+local tt = require('resty.tsort').new()
+for k in pairs(rewriteFuncs) do
+  tt:add(k)
+end
+for k, v in pairs(rewriteDeps) do
+  for _, vv in ipairs(v) do
+    tt:add(vv, k)
+  end
+end
+
+local datas = {}
+for _, r in ipairs(assert(tt:sort())) do
+  local data = parseYaml(('data/products/%s/%s.yaml'):format(product, r))
+  local rargs = {}
+  for _, vv in ipairs(rewriteDeps[r] or {}) do
+    table.insert(rargs, datas[vv])
+  end
+  rewriteFuncs[r](data, unpack(rargs))
+  datas[r] = data
+end
 
 local unused_typedefs = {}
 for k in pairs(typedefs) do
@@ -528,3 +540,7 @@ for k in pairs(typedefs) do
   end
 end
 assert(not next(unused_typedefs), 'unused typedefs:\n' .. pprintYaml(unused_typedefs))
+
+for k, v in pairs(datas) do
+  writeifchanged(('data/products/%s/%s.yaml'):format(product, k), pprintYaml(v))
+end

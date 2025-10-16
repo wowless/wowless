@@ -774,6 +774,7 @@ add_lua_executable(
   penlight
   toolstedit
   toolsutil
+  tsort
   wowapischema
   wowlessyaml)
 foreach(product ${products})
