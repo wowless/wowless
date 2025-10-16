@@ -61,6 +61,15 @@ lies:
     ArenaTeamUninviteByName:
     C_BarberShopInternal.SetQAMode:
     C_CinematicList.GetUICinematicList:
+    C_CombatLog.AddEventFilter:
+    C_CombatLog.ClearEventFilters:
+    C_CombatLog.GetCurrentEntryInfo:
+    C_CombatLog.GetCurrentEventInfo:
+    C_CombatLog.GetEntryCount:
+    C_CombatLog.SeekToNewestEntry:
+    C_CombatLog.SeekToPreviousEntry:
+    C_CombatLog.ShouldShowCurrentEntry:
+    C_CombatLogInternal.GetCurrentEventInfo:
     C_ConfigurationWarnings.GetConfigurationWarnings:
     C_ConfigurationWarnings.GetConfigurationWarningSeen:
     C_ConfigurationWarnings.GetConfigurationWarningString:

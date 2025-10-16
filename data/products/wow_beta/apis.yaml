@@ -6115,9 +6115,6 @@ C_ColorOverrides.SetColorOverride:
     type:
       structure: colorRGBA
   outputs:
-C_CombatLog.AddEventFilter:
-  inputs:
-  outputs:
 C_CombatLog.ApplyFilterSettings:
   inputs:
   - name: filterSettings
@@ -6131,9 +6128,6 @@ C_CombatLog.AreFilteredEventsEnabled:
 C_CombatLog.ClearEntries:
   inputs:
   outputs:
-C_CombatLog.ClearEventFilters:
-  inputs:
-  outputs:
 C_CombatLog.DoesObjectMatchFilter:
   inputs:
   - name: mask
@@ -6145,20 +6139,6 @@ C_CombatLog.DoesObjectMatchFilter:
   outputs:
   - name: matches
     type: boolean
-C_CombatLog.GetCurrentEntryInfo:
-  inputs:
-  outputs:
-C_CombatLog.GetCurrentEventInfo:
-  inputs:
-  outputs:
-C_CombatLog.GetEntryCount:
-  inputs:
-  - default: false
-    name: ignoreFilter
-    type: boolean
-  outputs:
-  - name: count
-    type: number
 C_CombatLog.GetEntryRetentionTime:
   inputs:
   outputs:
@@ -6177,22 +6157,6 @@ C_CombatLog.IsCombatLogRestricted:
 C_CombatLog.RefilterEntries:
   inputs:
   outputs:
-C_CombatLog.SeekToNewestEntry:
-  inputs:
-  - default: false
-    name: ignoreFilter
-    type: boolean
-  outputs:
-  - name: isValidEntry
-    type: boolean
-C_CombatLog.SeekToPreviousEntry:
-  inputs:
-  - default: false
-    name: ignoreFilter
-    type: boolean
-  outputs:
-  - name: isValidEntry
-    type: boolean
 C_CombatLog.SetEntryRetentionTime:
   inputs:
   - name: retentionTime
@@ -6207,14 +6171,6 @@ C_CombatLog.SetMessageLimit:
   inputs:
   - name: messageLimit
     type: number
-  outputs:
-C_CombatLog.ShouldShowCurrentEntry:
-  inputs:
-  outputs:
-  - name: shouldShow
-    type: boolean
-C_CombatLogInternal.GetCurrentEventInfo:
-  inputs:
   outputs:
 C_CombatLogSecure.AddEventFilter:
   inputs:
@@ -12136,6 +12092,7 @@ C_HousingCatalog.GetCatalogCategoryInfo:
     nilable: true
     type:
       structure: C_HousingCatalog.HousingCatalogCategoryInfo
+C_HousingCatalog.GetCatalogEntryDebugInfoForID:
 C_HousingCatalog.GetCatalogEntryInfo:
   inputs:
   - name: entryID
@@ -12396,6 +12353,8 @@ C_HousingDecor.EnterPreviewState:
 C_HousingDecor.ExitPreviewState:
   inputs:
   outputs:
+C_HousingDecor.GetDecorDebugInfoForGUID:
+C_HousingDecor.GetHoveredDecorDebugInfo:
 C_HousingDecor.GetHoveredDecorInfo:
   inputs:
   outputs:
@@ -12423,6 +12382,7 @@ C_HousingDecor.GetNumPreviewDecor:
   outputs:
   - name: numDecor
     type: number
+C_HousingDecor.GetSelectedDecorDebugInfo:
 C_HousingDecor.GetSelectedDecorInfo:
   inputs:
   outputs:
