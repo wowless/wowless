@@ -115,12 +115,12 @@ local extra_events = deref(config, 'lies', 'extra_events') or {}
 local extra_script_objects = deref(config, 'lies', 'extra_script_objects') or {}
 local tabs, funcs, events, scrobjs = {}, {}, {}, {}
 for _, t in pairs(docs) do
+  for _, tab in ipairs(t.Tables or {}) do
+    local name = (t.Namespace and (t.Namespace .. '.') or '') .. tab.Name
+    assert(not tabs[name])
+    tabs[name] = tab
+  end
   if not t.Type or t.Type == 'System' then
-    for _, tab in ipairs(t.Tables or {}) do
-      local name = (t.Namespace and (t.Namespace .. '.') or '') .. tab.Name
-      assert(not tabs[name])
-      tabs[name] = tab
-    end
     for _, func in ipairs(t.Functions or {}) do
       local name = (t.Namespace and (t.Namespace .. '.') or '') .. func.Name
       assert(not funcs[name])
@@ -134,6 +134,7 @@ for _, t in pairs(docs) do
   elseif t.Type == 'ScriptObject' and not take(extra_script_objects, t.Name) then
     assert(config.script_objects[t.Name], 'missing script object mapping for ' .. t.Name)
     assert(not scrobjs[t.Name])
+    assert(not next(t.Events))
     scrobjs[t.Name] = t
   end
 end
@@ -435,8 +436,6 @@ end
 local function rewriteUIObjects(uiobjects)
   local pscrobjs = {}
   for _, t in pairs(scrobjs) do
-    assert(not next(t.Events))
-    assert(not next(t.Tables))
     local fns = {}
     for _, fn in ipairs(t.Functions) do
       assert(not fns[fn.Name])
