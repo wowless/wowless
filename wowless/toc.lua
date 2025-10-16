@@ -23,12 +23,20 @@ local filters = {
   AllowLoad = function(s)
     return s:lower() == 'game'
   end,
+  AllowLoadEnvironment = function(s)
+    assert(s == 'Global', s)
+    return true
+  end,
   AllowLoadGameType = function(s, gts)
     for gt in s:gmatch('[^, ]+') do
       if gts[gt] then
         return true
       end
     end
+  end,
+  LoadIntoEnvironment = function(s)
+    assert(s == 'secure', s)
+    return true
   end,
 }
 

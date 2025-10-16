@@ -95,6 +95,9 @@ lies:
     WarbandSceneAnimationStandStateFlags:
     WarbandScenePlacementType:
   extra_script_objects:
+    HousingCatalogSearcherAPI:
+    HousingFixturePointFrameAPI:
+    HousingLayoutPinFrameAPI:
     PingPinFrameAPI:
     SimpleMapSceneAPI:
     SimpleModelFFXAPI:
@@ -409,6 +412,8 @@ typedefs:
     type: number
   ArtifactTiers:
     type: number
+  AuraFilters:
+    type: string
   AzeriteEmpoweredItemLocation:
     type:
       structure: ItemLocation
@@ -451,6 +456,12 @@ typedefs:
   FontAlphabet:
     type: string
   GarrisonFollower:
+    type: string
+  HousingCatalogSearcher:
+    type: string
+  HousingFixturePointFrame:
+    type: string
+  HousingLayoutPinFrame:
     type: string
   HTMLTextType:
     type: string

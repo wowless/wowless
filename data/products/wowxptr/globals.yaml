@@ -4017,6 +4017,22 @@ Enum:
     MaxValue: 64
     MinValue: 1
     NumValues: 7
+  HouseSettingFlags:
+    HouseAccessAnyone: 1
+    HouseAccessFriends: 8
+    HouseAccessGuild: 4
+    HouseAccessNeighbors: 2
+    HouseAccessParty: 16
+    None: 0
+    PlotAccessAnyone: 32
+    PlotAccessFriends: 256
+    PlotAccessGuild: 128
+    PlotAccessNeighbors: 64
+    PlotAccessParty: 512
+  HouseSettingFlagsMeta:
+    MaxValue: 512
+    MinValue: 0
+    NumValues: 11
   IconAndTextShiftTextType:
     None: 0
     ShiftText: 1
@@ -6118,6 +6134,20 @@ Enum:
     MaxValue: 5
     MinValue: 0
     NumValues: 6
+  PurchaseHouseDisabledReason:
+    CharterLockout: 7
+    GuildLockout: 6
+    MaxHouses: 8
+    NoExpansion: 4
+    None: 0
+    NotInvited: 3
+    Reserved: 5
+    WrongFaction: 1
+    WrongGuild: 2
+  PurchaseHouseDisabledReasonMeta:
+    MaxValue: 8
+    MinValue: 0
+    NumValues: 9
   PvPFaction:
     Alliance: 1
     Horde: 0
