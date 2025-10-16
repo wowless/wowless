@@ -82,6 +82,8 @@ lies:
     TogglePortals:
     ToggleTris:
   extra_enums:
+    CharCreateAnimTurnType:
+    CharSectionCondition:
     ConfigurationWarning:
     WarbandEventState:
     WarbandGroupFlags:
