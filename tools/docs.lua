@@ -434,15 +434,17 @@ local function rewriteStructures(structures, outApis, outEvents, outUIObjects)
 end
 
 local function rewriteUIObjects(uiobjects)
+  local ignores = config.ignore_script_object_methods or {}
   local pscrobjs = {}
   for _, t in pairs(scrobjs) do
     local fns = {}
     for _, fn in ipairs(t.Functions) do
       assert(not fns[fn.Name])
-      fns[fn.Name] = fn
+      fns[fn.Name] = not take(ignores, t.Name, fn.Name) and fn or nil
     end
     pscrobjs[t.Name] = fns
   end
+  assertTaken('ignore_script_object_methods', ignores)
   local mapped = {}
   for k, v in pairs(pscrobjs) do
     local mmk = assert(config.script_objects[k], 'unknown doc type ' .. k)

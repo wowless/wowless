@@ -1,3 +1,6 @@
+ignore_script_object_methods:
+  SimpleScriptRegionAPI:
+    IsAnchoringSecret:
 lies:
   apis:
     C_AddOns.GetAddOnMetadata:
