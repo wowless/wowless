@@ -228,6 +228,8 @@ CreateFrame:
 CreateFromMixins:
   luadelegate:
     module: wowless.mixin
+CreateSecureDelegate:
+  impl:
 CreateWindow:
   impl:
 date:
