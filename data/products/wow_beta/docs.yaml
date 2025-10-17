@@ -113,6 +113,10 @@ lies:
     WarbandSceneAnimationStandState:
     WarbandSceneAnimationStandStateFlags:
     WarbandScenePlacementType:
+  extra_events:
+    COMBAT_LOG_APPLY_FILTER_SETTINGS:
+    COMBAT_LOG_EVENT_INTERNAL_UNFILTERED:
+    COMBAT_LOG_REFILTER_ENTRIES:
   extra_script_objects:
     FrameAPITooltip:
     HousingCatalogSearcherAPI:

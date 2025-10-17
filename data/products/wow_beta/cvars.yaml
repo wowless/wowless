@@ -1367,8 +1367,8 @@ TargetPriorityCombatLock: '1'
 TargetPriorityCombatLockContextualRelaxation: '1'
 TargetPriorityCombatLockHighlight: '0'
 TargetPriorityPvp: '1'
-telemetryWowlabsPackage: Blizzard.Telemetry.Wow_Labs_PTR
-telemetryWowPackage: Blizzard.Telemetry.Wow_Mainline_PTR
+telemetryWowlabsPackage: Blizzard.Telemetry.Wow_Labs_DEV
+telemetryWowPackage: Blizzard.Telemetry.Wow_Mainline_DEV
 teleportMaxNoLoadDist: '200'
 terrainLodDist: '400'
 TerrainLodDiv: '768'
@@ -1496,12 +1496,8 @@ VoiceSelfDeafened: '0'
 VoiceSelfMuted: '0'
 VoiceVADSensitivity: '43'
 volumeFog: '0'
-volumeFogDisableLightScattering: '0'
-volumeFogDisableNoise: '0'
-volumeFogDisableShadows: '0'
 volumeFogInterior: '1'
 volumeFogLevel: '2'
-volumeFogUse16BitTexture: '0'
 vrsValar: '0'
 vrsValarGPUMode: '0'
 vsync: '1'

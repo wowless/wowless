@@ -3775,15 +3775,9 @@ COLOR_OVERRIDE_UPDATED:
       enum: ColorOverride
 COLOR_OVERRIDES_RESET:
   payload:
-COMBAT_LOG_APPLY_FILTER_SETTINGS:
-  payload:
-  - name: filterSettings
-    type: table
 COMBAT_LOG_ENTRIES_CLEARED:
   payload:
 COMBAT_LOG_EVENT:
-  payload:
-COMBAT_LOG_EVENT_INTERNAL_UNFILTERED:
   payload:
 COMBAT_LOG_EVENT_UNFILTERED:
   payload:
@@ -3804,8 +3798,6 @@ COMBAT_LOG_MESSAGE_LIMIT_CHANGED:
   payload:
   - name: messageLimit
     type: number
-COMBAT_LOG_REFILTER_ENTRIES:
-  payload:
 COMBAT_RATING_UPDATE:
   payload:
 COMBAT_TEXT_UPDATE:
