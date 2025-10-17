@@ -333,6 +333,17 @@ Actor:
       outputs:
       - name: success
         type: boolean
+    SetGradientMask:
+      inputs:
+      - name: gradientIndex0
+        type: number
+      - name: gradientIndex1
+        type: number
+      - name: gradientIndex2
+        type: number
+      - name: gradientIndex3
+        type: number
+      outputs:
     SetItemTransmogInfo:
       inputs:
       - name: transmogInfo
@@ -5341,6 +5352,17 @@ Model:
     SetGlow:
       inputs:
       - name: glow
+        type: number
+      outputs:
+    SetGradientMask:
+      inputs:
+      - name: grad0
+        type: number
+      - name: grad1
+        type: number
+      - name: grad2
+        type: number
+      - name: grad3
         type: number
       outputs:
     SetLight:

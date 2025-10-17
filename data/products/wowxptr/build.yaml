@@ -2,6 +2,6 @@ build: '63853'
 date: Oct 14 2025
 gametype: Standard
 hash: 43b615ab2b779ab039e18d918e1137d7
-test: false
+test: true
 tocversion: 110207
 version: 11.2.7

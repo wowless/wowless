@@ -62,7 +62,6 @@ lies:
     ArenaTeamSetLeaderByName:
     ArenaTeamUninviteByName:
     C_BarberShopInternal.SetQAMode:
-    C_BattleNet.InstallHighResTextures:
     C_CinematicList.GetUICinematicList:
     C_ConfigurationWarnings.GetConfigurationWarnings:
     C_ConfigurationWarnings.GetConfigurationWarningSeen:
