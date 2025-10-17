@@ -933,7 +933,7 @@ endforeach()
 add_custom_target(outs DEPENDS ${outs})
 add_dependencies(outs ${outdeps})
 add_custom_target(pngs DEPENDS ${pngs})
-add_dependencies(outs ${outdeps})
+add_dependencies(pngs ${outdeps})
 
 add_lua_executable(
   runtests
