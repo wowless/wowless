@@ -29057,14 +29057,14 @@ canaccesssecrets:
 canaccesstable:
   inputs:
   - name: table
-    type: table
+    type: unknown
   outputs:
   - name: canAccessTable
     type: boolean
 canaccessvalue:
   inputs:
   - name: value
-    type: table
+    type: unknown
   outputs:
   - name: canAccessValue
     type: boolean
@@ -29629,12 +29629,13 @@ CreateFromMixins:
 CreateMacro:
 CreateNewRaidProfile:
 CreateSecureDelegate:
+  impl: CreateSecureDelegate
   inputs:
   - name: luaFunction
-    type: table
+    type: function
   outputs:
   - name: secureDelegateFunction
-    type: table
+    type: function
 CreateWindow:
   impl: CreateWindow
   inputs:
@@ -34374,14 +34375,14 @@ IsRightShiftKeyDown:
 issecrettable:
   inputs:
   - name: table
-    type: table
+    type: unknown
   outputs:
   - name: isSecretOrContentsSecret
     type: boolean
 issecretvalue:
   inputs:
   - name: values
-    type: table
+    type: unknown
   outputs:
   - name: isSecret
     type: boolean
@@ -35139,20 +35140,20 @@ SearchLFGSort:
 secretunwrap:
   inputs:
   - name: values
-    type: table
+    type: unknown
   instride: 1
   outputs:
   - name: unwrapped
-    type: table
+    type: unknown
   outstride: 1
 secretwrap:
   inputs:
   - name: values
-    type: table
+    type: unknown
   instride: 1
   outputs:
   - name: wrapped
-    type: table
+    type: unknown
   outstride: 1
 securecall:
   impl: securecall
@@ -35713,7 +35714,7 @@ table.concat:
 table.count:
   inputs:
   - name: table
-    type: table
+    type: unknown
   mayreturnnothing: true
   outputs:
   - name: numTableNodes
@@ -35731,7 +35732,7 @@ table.create:
     type: number
   outputs:
   - name: table
-    type: table
+    type: unknown
 table.foreach:
   impl: table.foreach
 table.foreachi:
