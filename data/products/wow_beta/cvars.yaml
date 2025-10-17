@@ -1367,8 +1367,8 @@ TargetPriorityCombatLock: '1'
 TargetPriorityCombatLockContextualRelaxation: '1'
 TargetPriorityCombatLockHighlight: '0'
 TargetPriorityPvp: '1'
-telemetryWowlabsPackage: Blizzard.Telemetry.Wow_Labs_DEV
-telemetryWowPackage: Blizzard.Telemetry.Wow_Mainline_DEV
+telemetryWowlabsPackage: Blizzard.Telemetry.Wow_Labs_PTR
+telemetryWowPackage: Blizzard.Telemetry.Wow_Mainline_PTR
 teleportMaxNoLoadDist: '200'
 terrainLodDist: '400'
 TerrainLodDiv: '768'
