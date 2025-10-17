@@ -20,37 +20,25 @@ type:
                 value: any
           extra_apis:
             type:
-              mapof:
-                key:
-                  ref:
-                    negative: true
-                    schema: api
-                value:
-                  record:
+              setof:
+                ref:
+                  negative: true
+                  schema: api
           extra_enums:
             type:
-              mapof:
-                key:
-                  ref:
-                    negative: true
-                    schema: enum
-                value:
-                  record:
+              setof:
+                ref:
+                  negative: true
+                  schema: enum
           extra_events:
             type:
-              mapof:
-                key:
-                  ref:
-                    negative: true
-                    schema: event
-                value:
-                  record:
+              setof:
+                ref:
+                  negative: true
+                  schema: event
           extra_script_objects:
             type:
-              mapof:
-                key: string
-                value:
-                  record:
+              setof: string
           uiobjects:
             type:
               mapof:

@@ -6,35 +6,23 @@ type:
         record:
           aliased_in_framexml:
             type:
-              mapof:
-                key: string
-                value:
-                  record:
+              setof: string
           capsule:
             type:
               record:
                 apinamespaces:
                   type:
-                    mapof:
-                      key: string
-                      value:
-                        record:
+                    setof: string
                 enums:
                   type:
-                    mapof:
-                      key:
-                        ref:
-                          schema: enum
-                      value:
-                        record:
+                    setof:
+                      ref:
+                        schema: enum
                 globalapis:
                   type:
-                    mapof:
-                      key:
-                        ref:
-                          schema: api
-                      value:
-                        record:
+                    setof:
+                      ref:
+                        schema: api
           enum_values_set_in_framexml:
             type:
               mapof:
@@ -42,41 +30,26 @@ type:
                   ref:
                     schema: enum
                 value:
-                  mapof:
-                    key: string
-                    value:
-                      record:
+                  setof: string
           enums_set_in_framexml:
             type:
-              mapof:
-                key:
-                  ref:
-                    negative: true
-                    schema: enum
-                value:
-                  record:
+              setof:
+                ref:
+                  negative: true
+                  schema: enum
           hooked_globals:
             type:
-              mapof:
-                key: string
-                value:
-                  record:
+              setof: string
           ignore_cvar_value:
             type:
-              mapof:
-                key:
-                  ref:
-                    schema: cvar
-                value:
-                  record:
+              setof:
+                ref:
+                  schema: cvar
           overwritten_apis:
             type:
-              mapof:
-                key:
-                  ref:
-                    schema: api
-                value:
-                  record:
+              setof:
+                ref:
+                  schema: api
     modules:
       type:
         record:
@@ -97,10 +70,7 @@ type:
                 value: string
           skip_slashcmds:
             type:
-              mapof:
-                key: string
-                value:
-                  record:
+              setof: string
     runtime:
       type:
         record:
@@ -110,7 +80,4 @@ type:
             type: boolean
           warners:
             type:
-              mapof:
-                key: string
-                value:
-                  record:
+              setof: string

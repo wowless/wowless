@@ -1,6 +1,3 @@
 name: families
 type:
-  mapof:
-    key: string
-    value:
-      record:
+  setof: string
