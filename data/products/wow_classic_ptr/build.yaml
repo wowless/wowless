@@ -1,7 +1,7 @@
-build: '63538'
-date: Sep 30 2025
+build: '63832'
+date: Oct 13 2025
 gametype: Mists
-hash: c886e072664d9fb822bcea476e1d782c
+hash: 5883d1d9f1ca8462f6f94bffbe104d87
 test: false
-tocversion: 50501
-version: 5.5.1
+tocversion: 50502
+version: 5.5.2
