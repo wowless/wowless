@@ -25,6 +25,7 @@ function install() {
 install _retail_ wow
 install _ptr_ wowt
 install _xptr_ wowxptr
+install _beta_ wow_beta
 install _classic_ wow_classic
 install _classic_beta_ wow_classic_beta
 install _classic_era_ wow_classic_era
