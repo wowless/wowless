@@ -483,7 +483,7 @@ typedefs:
   luaIndex:
     type: number
   LuaValueReference:
-    type: table
+    type: unknown
   LuaValueVariant:
     type: table
   ModelAsset:

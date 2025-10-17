@@ -28890,10 +28890,10 @@ CreateNewRaidProfile:
 CreateSecureDelegate:
   inputs:
   - name: luaFunction
-    type: table
+    type: unknown
   outputs:
   - name: secureDelegateFunction
-    type: table
+    type: unknown
 CreateWindow:
   impl: CreateWindow
   inputs:
@@ -34921,7 +34921,7 @@ table.concat:
 table.count:
   inputs:
   - name: table
-    type: table
+    type: unknown
   mayreturnnothing: true
   outputs:
   - name: numTableNodes
@@ -34939,7 +34939,7 @@ table.create:
     type: number
   outputs:
   - name: table
-    type: table
+    type: unknown
 table.foreach:
   impl: table.foreach
 table.foreachi:
