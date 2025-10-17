@@ -8,12 +8,9 @@ type:
           record:
             modules:
               type:
-                mapof:
-                  key:
-                    ref:
-                      schema: module
-                  value:
-                    record:
+                setof:
+                  ref:
+                    schema: module
             sqls:
               type:
                 sequenceof:

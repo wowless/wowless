@@ -255,6 +255,24 @@ describe('schema', function()
         reject(ty, {}, 'string literal mismatch')
       end)
     end)
+    describe('setof', function()
+      it('accepts empty set', function()
+        accept({ setof = 'string' }, {})
+      end)
+      it('accepts non empty set', function()
+        accept({ setof = 'string' }, { a = {}, b = {} })
+      end)
+      it('rejects wrong keys', function()
+        reject({ setof = 'string' }, { [42] = {} }, { [42] = { key = 'want string, got number' } })
+      end)
+      it('rejects wrong values', function()
+        reject(
+          { setof = 'string' },
+          { a = 42, b = { 99 } },
+          { a = { value = 'bad value' }, b = { value = 'bad value' } }
+        )
+      end)
+    end)
     describe('taggedunion', function()
       local ty = {
         taggedunion = {

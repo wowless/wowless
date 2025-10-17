@@ -41,12 +41,9 @@ type:
           type:
             taggedunion:
               tags:
-                mapof:
-                  key:
-                    ref:
-                      schema: xml
-                  value:
-                    record:
+                setof:
+                  ref:
+                    schema: xml
               text: tag
         extends:
           type:

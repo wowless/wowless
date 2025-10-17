@@ -142,6 +142,23 @@ local complex = {
       return max ~= #v and 'expected array' or next(errors) and errors or nil
     end
   end,
+  setof = function(s)
+    local element = compile(s)
+    return function(v, product)
+      if type(v) ~= 'table' then
+        return 'expected table'
+      end
+      local errors = {}
+      for vk, vv in pairs(v) do
+        local ek = element(vk, product)
+        local ev = (type(vv) ~= 'table' or next(vv)) and 'bad value' or nil
+        if ek or ev then
+          errors[vk] = { key = ek, value = ev }
+        end
+      end
+      return next(errors) and errors or nil
+    end
+  end,
   taggedunion = function(s)
     local sf = {}
     local tf = {}

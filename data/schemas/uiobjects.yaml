@@ -29,12 +29,9 @@ type:
         inherits:
           required: true
           type:
-            mapof:
-              key:
-                ref:
-                  schema: uiobject
-              value:
-                record:
+            setof:
+              ref:
+                schema: uiobject
         methods:
           required: true
           type:
@@ -121,12 +118,9 @@ type:
           type: string
         scripts:
           type:
-            mapof:
-              key:
-                ref:
-                  schema: scripttype
-              value:
-                record:
+            setof:
+              ref:
+                schema: scripttype
         singleton:
           type: boolean
         virtual:

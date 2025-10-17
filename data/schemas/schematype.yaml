@@ -55,6 +55,8 @@ type:
         schema: schema
     sequenceof:
       schema: schematype
+    setof:
+      schema: schematype
     string: tag
     table: tag
     tag: tag

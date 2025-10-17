@@ -1,8 +1,5 @@
 name: test
 type:
-  mapof:
-    key:
-      ref:
-        schema: impl
-    value:
-      record:
+  setof:
+    ref:
+      schema: impl
