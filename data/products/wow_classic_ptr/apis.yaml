@@ -2960,6 +2960,13 @@ C_ChallengeMode.GetNumChallengeMapRewards:
   outputs:
   - name: numRewards
     type: number
+C_ChallengeMode.GetNumMedals:
+  inputs:
+  - name: mapID
+    type: number
+  outputs:
+  - name: numMedals
+    type: number
 C_ChallengeMode.IsChallengeModeActive:
   inputs:
   outputs:
@@ -2975,6 +2982,15 @@ C_ChallengeMode.IsChallengeModeResettable:
   outputs:
   - name: canReset
     type: boolean
+C_ChallengeMode.RequestChallengeModeLeaderboard:
+  inputs:
+  - name: mapID
+    type: number
+  - name: challengeModeID
+    type: number
+  - name: page
+    type: number
+  outputs:
 C_ChallengeMode.RequestLeaders:
   inputs:
   - name: mapChallengeModeID
@@ -17453,7 +17469,9 @@ GetExpansionDisplayInfo:
   - name: expansionLevel
     type: number
   - name: desiredReleaseType
-    type: number
+    nilable: true
+    type:
+      enum: ReleaseType
   outputs:
   - name: info
     nilable: true
@@ -20188,7 +20206,6 @@ GetSourceLocation:
   outputs:
   - name: location
     type: string
-GetSpecChangeCost:
 GetSpecializationInfoByID:
 GetSpecializationInfoForClassID:
   inputs:
