@@ -413,6 +413,7 @@ add_custom_command(
   WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
   DEPFILE generated/sqls.yaml.d
   DEPENDS sqls data/sql.yaml)
+add_custom_target(stamp_sqls DEPENDS stamp/sqls.txt)
 
 lua2c(wowlessutil luapath=p wowless.mixin=c
       wowless.util=${CMAKE_CURRENT_SOURCE_DIR}/wowless/util.lua)
@@ -480,7 +481,9 @@ foreach(product ${products})
     COMMAND dblist ${product}
     COMMAND ${CMAKE_COMMAND} -E copy_if_different generated/${f} runtime/${f}
     COMMAND ${CMAKE_COMMAND} -E touch stamp/${f}
-    DEPENDS dblist stamp/sqls.txt stamp/${product}.txt)
+    DEPENDS dblist runtime/sqls.yaml runtime/${product}.lua)
+  add_custom_target(stamp_${product}_dblist DEPENDS stamp/${f})
+  add_dependencies(stamp_${product}_dblist datalua_${product}_lua stamp_sqls)
 endforeach()
 
 FetchContent_Declare(
@@ -523,8 +526,10 @@ foreach(product ${products})
     COMMAND ${CMAKE_COMMAND} -E copy_if_different generated/${f} runtime/${f}
     COMMAND ${CMAKE_COMMAND} -E touch stamp/${f}
     DEPFILE generated/${f}.d
-    DEPENDS dbdefs stamp/${product}_dblist.lua
+    DEPENDS dbdefs runtime/${product}_dblist.lua
             runtime/products/${product}/build.lua)
+  add_custom_target(stamp_${product}_dbdefs DEPENDS stamp/${f})
+  add_dependencies(stamp_${product}_dbdefs stamp_${product}_dblist)
 endforeach()
 
 add_lua_executable(
@@ -550,8 +555,9 @@ foreach(product ${products})
             ${CMAKE_CURRENT_BINARY_DIR}/stamp/${product}.txt
     WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
     DEPFILE generated/${product}.lua.d
-    DEPENDS prep stamp/sqls.txt)
+    DEPENDS prep runtime/sqls.yaml)
   add_custom_target(datalua_${product}_lua DEPENDS stamp/${product}.txt)
+  add_dependencies(datalua_${product}_lua stamp_sqls)
   lua2c(datalua_${product}
         build.products.${product}.data=runtime/${product}.lua)
   add_dependencies(datalua_${product} datalua_${product}_lua)
@@ -575,12 +581,12 @@ foreach(product ${products})
   add_custom_command(
     OUTPUT ${product}_schema.sqlite3
     COMMAND sqlite ${product}
-    DEPENDS sqlite stamp/${product}_dbdefs.lua stamp/${product}_dblist.lua)
+    DEPENDS sqlite runtime/${product}_dbdefs.lua runtime/${product}_dblist.lua)
   list(APPEND schemadbs ${product}_schema.sqlite3)
   add_custom_command(
     OUTPUT ${product}_data.sqlite3
     COMMAND sqlite -f ${product}
-    DEPENDS sqlite stamp/${product}_dbdefs.lua stamp/${product}_dblist.lua
+    DEPENDS sqlite runtime/${product}_dbdefs.lua runtime/${product}_dblist.lua
             ${product}_fetch.txt)
 endforeach()
 
@@ -617,7 +623,7 @@ foreach(product ${products})
     OUTPUT ${out}
     COMMAND fetch ${product}
     COMMAND ${CMAKE_COMMAND} -E touch ${out}
-    DEPENDS fetch stamp/${product}_dblist.lua
+    DEPENDS fetch runtime/${product}_dblist.lua
             runtime/products/${product}/build.lua)
 endforeach()
 
@@ -887,14 +893,17 @@ add_lua_executable(
   wowlessutil
   wowlessyaml)
 
+set(outdeps)
 set(outs)
 set(pngs)
 foreach(product ${products})
   set(out products/${product}/log.txt)
   list(APPEND outs ${out})
+  list(APPEND outdeps stamp_${product}_dbdefs stamp_${product}_dblist)
   add_custom_target(
     ${product} DEPENDS wowless testaddon.txt ${product}_addon.txt
                        ${product}_data.sqlite3)
+  add_dependencies(${product} stamp_${product}_dbdefs stamp_${product}_dblist)
   add_custom_command(
     OUTPUT ${out}
     COMMAND
@@ -923,7 +932,9 @@ foreach(product ${products})
        products/${product}/frame1.png)
 endforeach()
 add_custom_target(outs DEPENDS ${outs})
+add_dependencies(outs ${outdeps})
 add_custom_target(pngs DEPENDS ${pngs})
+add_dependencies(outs ${outdeps})
 
 add_lua_executable(
   runtests

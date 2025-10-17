@@ -8,6 +8,17 @@ lies:
       outputs:
       - _add:
           nilable: true
+    CreateSecureDelegate:
+      inputs:
+      - type:
+          _change:
+            from: unknown
+            to: function
+      outputs:
+      - type:
+          _change:
+            from: unknown
+            to: function
     GetFileIDFromPath:
       outputs:
       - _add:
@@ -62,7 +73,6 @@ lies:
     ArenaTeamSetLeaderByName:
     ArenaTeamUninviteByName:
     C_BarberShopInternal.SetQAMode:
-    C_BattleNet.InstallHighResTextures:
     C_CinematicList.GetUICinematicList:
     C_ConfigurationWarnings.GetConfigurationWarnings:
     C_ConfigurationWarnings.GetConfigurationWarningSeen:
@@ -95,6 +105,9 @@ lies:
     WarbandSceneAnimationStandStateFlags:
     WarbandScenePlacementType:
   extra_script_objects:
+    HousingCatalogSearcherAPI:
+    HousingFixturePointFrameAPI:
+    HousingLayoutPinFrameAPI:
     PingPinFrameAPI:
     SimpleMapSceneAPI:
     SimpleModelFFXAPI:
@@ -409,6 +422,8 @@ typedefs:
     type: number
   ArtifactTiers:
     type: number
+  AuraFilters:
+    type: string
   AzeriteEmpoweredItemLocation:
     type:
       structure: ItemLocation
@@ -452,6 +467,12 @@ typedefs:
     type: string
   GarrisonFollower:
     type: string
+  HousingCatalogSearcher:
+    type: string
+  HousingFixturePointFrame:
+    type: string
+  HousingLayoutPinFrame:
+    type: string
   HTMLTextType:
     type: string
   IDOrLink:
@@ -472,6 +493,8 @@ typedefs:
     type: function
   luaIndex:
     type: number
+  LuaValueReference:
+    type: unknown
   LuaValueVariant:
     type: table
   ModelAsset:
