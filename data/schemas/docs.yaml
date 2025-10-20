@@ -6,10 +6,7 @@ type:
         mapof:
           key: string
           value:
-            mapof:
-              key: string
-              value:
-                record:
+            setof: string
     lies:
       type:
         record:
