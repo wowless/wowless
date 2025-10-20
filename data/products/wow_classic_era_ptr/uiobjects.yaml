@@ -230,6 +230,9 @@ Actor:
       - default: false
         name: holdBowString
         type: boolean
+      - name: customRaceID
+        nilable: true
+        type: number
       outputs:
       - name: success
         type: boolean
@@ -264,6 +267,9 @@ Actor:
       - default: true
         name: usePlayerNativeForm
         type: boolean
+      - name: customRaceID
+        nilable: true
+        type: number
       outputs:
       - name: success
         type: boolean
@@ -628,9 +634,9 @@ AnimationGroup:
         uiobjectimpl: AnimationGroup/GetAnimations
       inputs:
       outputs:
-      - name: scriptObject
+      - name: anims
         type:
-          uiobject: UIObject
+          uiobject: Animation
       outstride: 1
     GetAnimationSpeedMultiplier:
       impl:
@@ -794,11 +800,6 @@ Browser:
       outputs:
     NavigateStop:
       inputs:
-      outputs:
-    NavigateTo:
-      inputs:
-      - name: url
-        type: string
       outputs:
     OpenExternalLink:
       inputs:
@@ -1058,13 +1059,13 @@ Button:
       impl:
         uiobjectimpl: Button/RegisterForClicks
       inputs:
-      - name: button
+      - name: buttons
         type: string
       instride: 1
       outputs:
     RegisterForMouse:
       inputs:
-      - name: button
+      - name: buttons
         type: string
       instride: 1
       outputs:
@@ -1765,6 +1766,16 @@ Cooldown:
       outputs:
       - name: edgeScale
         type: number
+    GetHideCountdownNumbers:
+      inputs:
+      outputs:
+      - name: hideNumbers
+        type: boolean
+    GetMinimumCountdownDuration:
+      inputs:
+      outputs:
+      - name: milliseconds
+        type: number
     GetReverse:
       inputs:
       outputs:
@@ -1778,6 +1789,11 @@ Cooldown:
       outputs:
       - name: rotationRadians
         type: number
+    GetUseAuraDisplayTime:
+      inputs:
+      outputs:
+      - name: useAuraDisplayTime
+        type: boolean
     IsPaused:
       inputs:
       outputs:
@@ -1862,6 +1878,18 @@ Cooldown:
         name: drawSwipe
         type: boolean
       outputs:
+    SetEdgeColor:
+      inputs:
+      - name: colorR
+        type: number
+      - name: colorG
+        type: number
+      - name: colorB
+        type: number
+      - name: a
+        nilable: true
+        type: number
+      outputs:
     SetEdgeScale:
       inputs:
       - name: scale
@@ -1889,6 +1917,11 @@ Cooldown:
       - default: false
         name: hideNumbers
         type: boolean
+      outputs:
+    SetMinimumCountdownDuration:
+      inputs:
+      - name: milliseconds
+        type: number
       outputs:
     SetReverse:
       inputs:
@@ -1941,6 +1974,12 @@ Cooldown:
       - name: high
         type:
           structure: vector2
+      outputs:
+    SetUseAuraDisplayTime:
+      inputs:
+      - default: false
+        name: useAuraDisplayTime
+        type: boolean
       outputs:
     SetUseCircularEdge:
       inputs:
@@ -2422,11 +2461,6 @@ EditBox:
     SetFocus:
       inputs:
       outputs:
-    SetFontStringIgnoreParentAlpha:
-      inputs:
-      - name: ignoreParentAlpha
-        type: boolean
-      outputs:
     SetHighlightColor:
       inputs:
       - name: colorR
@@ -2767,6 +2801,11 @@ Font:
       outputs:
       - name: alpha
         type: number
+    GetFontHeight:
+      inputs:
+      outputs:
+      - name: height
+        type: number
     GetFontObjectForAlphabet:
       inputs:
       - name: alphabet
@@ -3009,6 +3048,9 @@ FontString:
       outputs:
       - name: wrap
         type: boolean
+    ClearAlphaGradient:
+      inputs:
+      outputs:
     FindCharacterIndexAtCoordinate:
       inputs:
       - name: x
@@ -3021,10 +3063,25 @@ FontString:
         type: number
       - name: inside
         type: boolean
+    GetAlphaGradient:
+      inputs:
+      outputs:
+      - name: start
+        type: number
+      - name: length
+        type: number
     GetFieldSize:
       inputs:
       outputs:
       - name: fieldSize
+        type: number
+    GetFontHeight:
+      inputs:
+      - default: true
+        name: calculated
+        type: boolean
+      outputs:
+      - name: height
         type: number
     GetLineHeight:
       inputs:
@@ -3094,6 +3151,9 @@ FontString:
       outputs:
       - name: isTruncated
         type: boolean
+    OnColorsUpdated:
+      inputs:
+      outputs:
     SetAlphaGradient:
       inputs:
       - name: start
@@ -3107,6 +3167,11 @@ FontString:
       inputs:
       - name: fixedColor
         type: boolean
+      outputs:
+    SetFontHeight:
+      inputs:
+      - name: height
+        type: number
       outputs:
     SetFormattedText:
       inputs:
@@ -3256,6 +3321,19 @@ Frame:
       outputs:
       - name: canChangeAttributes
         type: boolean
+    ClearAlphaGradient:
+      inputs:
+      outputs:
+    ClearAttribute:
+      inputs:
+      - name: attributeName
+        type: string
+      outputs:
+      - name: cleared
+        type: boolean
+    ClearAttributes:
+      inputs:
+      outputs:
     CreateFontString:
       impl:
         uiobjectimpl: Frame/CreateFontString
@@ -3394,13 +3472,15 @@ Frame:
       inputs:
       - name: attributeName
         type: string
-      - name: unpackedPrimitiveType
+      - name: arguments
+        nilable: true
         type: string
       instride: 1
       outputs:
       - name: success
         type: boolean
-      - name: unpackedPrimitiveType
+      - name: returns
+        nilable: true
         type: string
       outstride: 1
     GetAttribute:
@@ -3427,9 +3507,10 @@ Frame:
         uiobjectimpl: Frame/GetChildren
       inputs:
       outputs:
-      - name: scriptObject
+      - name: children
+        nilable: true
         type:
-          uiobject: UIObject
+          uiobject: Frame
       outstride: 1
     GetClampRectInsets:
       inputs:
@@ -3487,6 +3568,14 @@ Frame:
       - name: strata
         type:
           stringenum: FrameStrata
+    GetHighestFrameLevel:
+      inputs:
+      - default: false
+        name: iterateAllChildren
+        type: boolean
+      outputs:
+      - name: frameLevel
+        type: number
     GetHitRectInsets:
       impl:
         getter:
@@ -3552,9 +3641,9 @@ Frame:
         uiobjectimpl: Frame/GetRegions
       inputs:
       outputs:
-      - name: scriptObject
+      - name: regions
         type:
-          uiobject: UIObject
+          uiobject: Region
       outstride: 1
     GetResizeBounds:
       impl:
@@ -3578,6 +3667,11 @@ Frame:
       outputs:
       - name: window
         type: nil
+    HasAlphaGradient:
+      inputs:
+      outputs:
+      - name: hasAlphaGradient
+        type: boolean
     HasFixedFrameLevel:
       impl:
         getter:
@@ -3631,6 +3725,11 @@ Frame:
         nilable: true
         type: string
       outstride: 1
+    IsFrameBuffer:
+      inputs:
+      outputs:
+      - name: isFrameBuffer
+        type: boolean
     IsGamePadButtonEnabled:
       inputs:
       outputs:
@@ -3640,6 +3739,11 @@ Frame:
       inputs:
       outputs:
       - name: enabled
+        type: boolean
+    IsHighlightLocked:
+      inputs:
+      outputs:
+      - name: locked
         type: boolean
     IsKeyboardEnabled:
       inputs:
@@ -3711,7 +3815,7 @@ Frame:
         type: boolean
     RegisterForDrag:
       inputs:
-      - name: button
+      - name: buttons
         type: string
       instride: 1
       outputs:
@@ -3738,6 +3842,14 @@ Frame:
       - default: 0.5
         name: y
         type: number
+      outputs:
+    SetAlphaGradient:
+      inputs:
+      - name: index
+        type: number
+      - name: gradient
+        type:
+          structure: vector2
       outputs:
     SetAttribute:
       impl:
@@ -4087,6 +4199,7 @@ GameTooltip:
       - name: numLines
         type: number
     ResetSecondaryCompareItem:
+    SetAchievementByID:
     SetAction:
     SetAnchorType:
     SetAuctionItem:
@@ -4098,6 +4211,7 @@ GameTooltip:
     SetCompareItem:
     SetCraftItem:
     SetCraftSpell:
+    SetCurrencyByID:
     SetCurrencyToken:
     SetCurrencyTokenByID:
     SetEngravingRune:
@@ -4160,6 +4274,7 @@ GameTooltip:
     SetUnitAura:
     SetUnitBuff:
     SetUnitDebuff:
+    SetUpgradeItem:
   scripts:
     OnTooltipAddMoney:
     OnTooltipCleared:
@@ -5137,6 +5252,11 @@ ModelScene:
       - name: index
         type: number
       outputs:
+    GetAllowOverlappedModels:
+      inputs:
+      outputs:
+      - name: allowOverlappedModels
+        type: boolean
     GetCameraFarClip:
       impl:
         getter:
@@ -5317,6 +5437,11 @@ ModelScene:
         type: number
       - name: depth
         type: number
+    SetAllowOverlappedModels:
+      inputs:
+      - name: allowOverlappedModels
+        type: boolean
+      outputs:
     SetCameraFarClip:
       impl:
         setter:
@@ -5704,9 +5829,9 @@ Path:
         uiobjectimpl: Path/GetControlPoints
       inputs:
       outputs:
-      - name: scriptObject
+      - name: points
         type:
-          uiobject: UIObject
+          uiobject: ControlPoint
       outstride: 1
     GetCurveType:
       impl:
@@ -5955,6 +6080,16 @@ Region:
       outputs:
       - name: canChange
         type: boolean
+    CanPropagateMouseClicks:
+      inputs:
+      outputs:
+      - name: canPropagate
+        type: boolean
+    CanPropagateMouseMotion:
+      inputs:
+      outputs:
+      - name: canPropagate
+        type: boolean
     ClearAllPoints:
       impl:
         uiobjectimpl: Region/ClearAllPoints
@@ -5969,6 +6104,9 @@ Region:
           stringenum: FramePoint
       outputs:
     ClearPointsOffset:
+      inputs:
+      outputs:
+    ClearScripts:
       inputs:
       outputs:
     CollapsesLayout:
@@ -6021,9 +6159,9 @@ Region:
         uiobjectimpl: Region/GetAnimationGroups
       inputs:
       outputs:
-      - name: scriptObject
+      - name: groups
         type:
-          uiobject: UIObject
+          uiobject: AnimationGroup
       outstride: 1
     GetBottom:
       impl:
@@ -6369,7 +6507,7 @@ Region:
       outputs:
     SetPassThroughButtons:
       inputs:
-      - name: button
+      - name: buttons
         type: string
       instride: 1
       outputs:
@@ -6377,6 +6515,13 @@ Region:
       impl:
         uiobjectimpl: Region/SetPoint
       manualinputs: true
+      outputs:
+    SetPointsOffset:
+      inputs:
+      - name: x
+        type: number
+      - name: y
+        type: number
       outputs:
     SetPropagateMouseClicks:
       inputs:
@@ -6404,6 +6549,13 @@ Region:
       - name: width
         type: number
       outputs:
+    ShouldButtonPassThrough:
+      inputs:
+      - name: button
+        type: string
+      outputs:
+      - name: shouldPassThrough
+        type: boolean
     StopAnimating:
       inputs:
       outputs:
@@ -7436,6 +7588,11 @@ TabardModel:
       outputs:
       - name: path
         type: string
+    GetLowerBorderFile:
+      inputs:
+      outputs:
+      - name: file
+        type: number
     GetLowerEmblemFileName:
       inputs:
       outputs:
@@ -7452,6 +7609,11 @@ TabardModel:
       outputs:
       - name: path
         type: string
+    GetUpperBorderFile:
+      inputs:
+      outputs:
+      - name: file
+        type: number
     GetUpperEmblemFileName:
       inputs:
       outputs:
@@ -7572,6 +7734,9 @@ TextureBase:
     ScriptObject:
   methods:
     ClearTextureSlice:
+      inputs:
+      outputs:
+    ClearVertexOffsets:
       inputs:
       outputs:
     GetAtlas:
@@ -8003,6 +8168,9 @@ UIObject:
     SetForbidden:
       impl:
         uiobjectimpl: ForbiddenMixin/SetForbidden
+      inputs:
+      outputs:
+    SetToDefaults:
       inputs:
       outputs:
   virtual: true

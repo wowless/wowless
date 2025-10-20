@@ -13,8 +13,8 @@ addon:
       BattlepayProductDecorator:
       PurchaseEligibility:
       StoreError:
-      VasError:
       VasServiceType:
+      VasTransactionPurchaseResult:
     globalapis:
       C_Macro.SetMacroExecuteLineCallback:
       CreateForbiddenFrame:
@@ -34,7 +34,6 @@ addon:
     graphicsParticleDensity:
     graphicsQuality:
     graphicsShadowQuality:
-    graphicsSpellDensity:
     graphicsSSAO:
     graphicsTextureResolution:
     mouseSpeed:
@@ -44,7 +43,6 @@ addon:
     raidGraphicsParticleDensity:
     RAIDgraphicsQuality:
     raidGraphicsShadowQuality:
-    raidGraphicsSpellDensity:
     raidGraphicsSSAO:
     raidGraphicsTextureResolution:
     RenderScale:
@@ -74,7 +72,6 @@ runner:
     RAIDFINDER:
     USERANDOM:
 runtime:
-  send_warntype: true
   warners:
     archaeologydigsiteframe:
     fontstring:
