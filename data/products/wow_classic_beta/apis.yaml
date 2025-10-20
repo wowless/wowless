@@ -17430,6 +17430,7 @@ GetFonts:
   inputs:
   outputs:
   - name: fontNames
+    stub:
     type:
       arrayof: string
 GetFontStringMetatable:
