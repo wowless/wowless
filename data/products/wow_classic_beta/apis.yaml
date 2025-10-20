@@ -1007,6 +1007,7 @@ C_AuctionHouse.GetAuctionInfoByID:
     type:
       structure: C_AuctionHouse.AuctionInfo
 C_AuctionHouse.GetAuctionItemSubClasses:
+  impl: C_AuctionHouse.GetAuctionItemSubClasses
   inputs:
   - name: classID
     type: number
@@ -17429,6 +17430,7 @@ GetFonts:
   inputs:
   outputs:
   - name: fontNames
+    stub:
     type:
       arrayof: string
 GetFontStringMetatable:

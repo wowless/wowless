@@ -13,8 +13,8 @@ addon:
       BattlepayProductDecorator:
       PurchaseEligibility:
       StoreError:
-      VasError:
       VasServiceType:
+      VasTransactionPurchaseResult:
     globalapis:
       C_Macro.SetMacroExecuteLineCallback:
       CreateForbiddenFrame:
@@ -34,7 +34,6 @@ addon:
     graphicsParticleDensity:
     graphicsQuality:
     graphicsShadowQuality:
-    graphicsSpellDensity:
     graphicsSSAO:
     graphicsTextureResolution:
     mouseSpeed:
@@ -44,7 +43,6 @@ addon:
     raidGraphicsParticleDensity:
     RAIDgraphicsQuality:
     raidGraphicsShadowQuality:
-    raidGraphicsSpellDensity:
     raidGraphicsSSAO:
     raidGraphicsTextureResolution:
     RenderScale:
@@ -55,6 +53,9 @@ addon:
     C_Traits.GetConditionInfo:
     C_Traits.GetEntryInfo:
     C_Traits.GetTreeInfo:
+modules:
+  addons:
+    GetAddOnInfo_noUpdateAvailable: true
 runner:
   skip_events:
     AJ_PVP_RBG_ACTION: missing HonorFrame_SetType
@@ -74,7 +75,6 @@ runner:
     RAIDFINDER:
     USERANDOM:
 runtime:
-  send_warntype: true
   warners:
     archaeologydigsiteframe:
     fontstring:
