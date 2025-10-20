@@ -29449,11 +29449,6 @@ CollapseQuestHeader:
 CollapseWarGameHeader:
 collectgarbage:
   impl: collectgarbage
-CombatLog_Object_IsA:
-CombatLogClearEntries:
-CombatLogGetRetentionTime:
-CombatLogSetRetentionTime:
-CombatTextSetActiveUnit:
 CompleteLFGReadyCheck:
 CompleteLFGRoleCheck:
 CompleteQuest:
@@ -29670,8 +29665,6 @@ CursorHasSpell:
     type: boolean
 date:
   impl: date
-DeathRecap_GetEvents:
-DeathRecap_HasEvents:
 debuglocals:
   impl: debuglocals
 debugprofilestart:
@@ -30557,7 +30550,6 @@ GetCurrentBindingSet:
   inputs:
   outputs:
   - type: number
-GetCurrentCombatTextEventInfo:
 GetCurrentEnvironment:
   impl: GetCurrentEnvironment
 GetCurrentEventID:
@@ -30623,7 +30615,6 @@ GetCursorPosition:
 GetDailyQuestsCompleted:
   outputs:
   - type: number
-GetDeathRecapLink:
 GetDefaultLanguage:
   inputs:
   outputs:
