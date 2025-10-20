@@ -16,6 +16,14 @@ lies:
       outputs:
       - _add:
           nilable: true
+    UnitFactionGroup:
+      _add:
+        mayreturnnothing: true
+      inputs:
+      - type:
+          _change:
+            from: string
+            to: unit
   extra_apis:
     C_AuctionHouse.CalculateCommodityDeposit:
     C_AuctionHouse.CalculateItemDeposit:

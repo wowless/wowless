@@ -22700,10 +22700,11 @@ UnitFactionGroup:
   impl: UnitFactionGroup
   inputs:
   - name: unitName
-    type: string
+    type: unit
   - default: false
     name: checkDisplayRace
     type: boolean
+  mayreturnnothing: true
   outputs:
   - name: factionGroupTag
     type: string
