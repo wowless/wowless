@@ -1,6 +1,12 @@
 name: docs
 type:
   record:
+    ignore_script_object_methods:
+      type:
+        mapof:
+          key: string
+          value:
+            setof: string
     lies:
       type:
         record:
