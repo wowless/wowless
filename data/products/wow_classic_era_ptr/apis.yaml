@@ -11503,6 +11503,7 @@ C_SpecializationInfo.GetSpecialization:
   - name: specializationIndex
     type: number
 C_SpecializationInfo.GetSpecializationInfo:
+  impl: C_SpecializationInfo.GetSpecializationInfo
   inputs:
   - name: specializationIndex
     type: number
@@ -15548,6 +15549,7 @@ CreateFrame:
     type:
       uiobject: Frame
 CreateFromMixins:
+  impl: CreateFromMixins
   inputs:
   - name: mixins
     type: table
@@ -16705,6 +16707,7 @@ GetCurrentBindingSet:
   - type: number
 GetCurrentCombatTextEventInfo:
 GetCurrentEnvironment:
+  impl: GetCurrentEnvironment
 GetCurrentEventID:
   inputs:
   outputs:
@@ -17101,6 +17104,7 @@ GetGameTime:
   - name: minute
     type: number
 GetGlobalEnvironment:
+  impl: GetGlobalEnvironment
 GetGMStatus:
 GetGMTicket:
 GetGraphicsAPIs:
@@ -17961,6 +17965,7 @@ GetLootSlotType:
     type: number
 GetLootSourceInfo:
 GetLootSpecialization:
+  impl: GetLootSpecialization
   inputs:
   outputs:
   - name: specializationID
@@ -20733,6 +20738,7 @@ IsIndoors:
   - name: result
     type: boolean
 IsInGlobalEnvironment:
+  impl: IsInGlobalEnvironment
 IsInGroup:
 IsInGuild:
   inputs:
@@ -21293,6 +21299,7 @@ math.tan:
 math.tanh:
   impl: math.tanh
 Mixin:
+  impl: Mixin
   inputs:
   - name: object
     type: table
@@ -22254,6 +22261,7 @@ SupportsClipCursor:
     type: boolean
 SwapRaidSubgroup:
 SwapToGlobalEnvironment:
+  impl: SwapToGlobalEnvironment
 SwitchAchievementSearchTab:
 table.concat:
   impl: table.concat
