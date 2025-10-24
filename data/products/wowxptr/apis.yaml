@@ -4205,7 +4205,6 @@ C_CharacterServices.GetCharacterServiceDisplayInfo:
 C_CharacterServices.GetVASDistributions:
 C_CharacterServices.HasRequiredBoostForClassTrial:
 C_CharacterServices.HasRequiredBoostForUnrevoke:
-C_CharacterServices.RPEResetCharacter:
 C_CharacterServices.SetAutomaticBoost:
 C_CharacterServices.SetAutomaticBoostCharacter:
 C_CharacterServicesPublic.ShouldSeeControlPopup:
@@ -11383,14 +11382,54 @@ C_HouseExterior.SelectFixtureOption:
 C_Housing.AcceptNeighborhoodOwnership:
   inputs:
   outputs:
+C_Housing.CanEditCharter:
+  inputs:
+  outputs:
+  - name: canEditCharter
+    type: boolean
+C_Housing.CreateGuildNeighborhood:
+  inputs:
+  - name: neighborhoodName
+    type: string
+  outputs:
+C_Housing.CreateNeighborhoodCharter:
+  inputs:
+  - name: neighborhoodName
+    type: string
+  outputs:
 C_Housing.DeclineNeighborhoodOwnership:
   inputs:
   outputs:
+C_Housing.DoesFactionMatchNeighborhood:
+  inputs:
+  - name: neighborhoodGUID
+    type: string
+  outputs:
+  - name: factionMatches
+    type: boolean
+C_Housing.EditNeighborhoodCharter:
+  inputs:
+  - name: neighborhoodName
+    type: string
+  outputs:
+C_Housing.GetCurrentHouseInfo:
+  inputs:
+  outputs:
+  - name: houseInfo
+    nilable: true
+    type:
+      structure: HouseInfo
 C_Housing.GetCurrentHouseLevelFavor:
   inputs:
   - name: houseGuid
     type: string
   outputs:
+C_Housing.GetCurrentNeighborhoodGUID:
+  inputs:
+  outputs:
+  - name: neighborhoodGUID
+    nilable: true
+    type: string
 C_Housing.GetHouseLevelFavorForLevel:
   inputs:
   - name: level
@@ -11449,11 +11488,21 @@ C_Housing.GetUIMapIDForNeighborhood:
   - name: uiMapID
     nilable: true
     type: number
+C_Housing.GetVisitCooldownInfo:
+  inputs:
+  mayreturnnothing: true
+  outputs:
+  - name: spellCooldownInfo
+    type:
+      structure: SpellCooldownInfo
 C_Housing.HasHousingExpansionAccess:
   inputs:
   outputs:
   - name: hasAccess
     type: boolean
+C_Housing.HouseFinderDeclineNeighborhoodInvitation:
+  inputs:
+  outputs:
 C_Housing.HouseFinderRequestNeighborhoods:
   inputs:
   outputs:
@@ -11494,6 +11543,29 @@ C_Housing.IsOnNeighborhoodMap:
   outputs:
   - name: isOnNeighborhoodMap
     type: boolean
+C_Housing.LeaveHouse:
+  inputs:
+  outputs:
+C_Housing.OnCharterConfirmationAccepted:
+  inputs:
+  outputs:
+C_Housing.OnCharterConfirmationClosed:
+  inputs:
+  outputs:
+C_Housing.OnCreateCharterNeighborhoodClosed:
+  inputs:
+  outputs:
+C_Housing.OnCreateGuildNeighborhoodClosed:
+  inputs:
+  outputs:
+C_Housing.OnRequestSignatureClicked:
+  inputs:
+  outputs:
+C_Housing.OnSignCharterClicked:
+  inputs:
+  - name: charterOwnerGUID
+    type: string
+  outputs:
 C_Housing.RelinquishHouse:
   inputs:
   - name: houseGuid
@@ -11508,6 +11580,9 @@ C_Housing.RequestHouseFinderNeighborhoodData:
     type: string
   outputs:
 C_Housing.RequestPlayerCharacterList:
+  inputs:
+  outputs:
+C_Housing.ReturnAfterVisitingHouse:
   inputs:
   outputs:
 C_Housing.SaveHouseSettings:
@@ -11541,6 +11616,28 @@ C_Housing.SetTrackedHouseGuid:
 C_Housing.StartTutorial:
   inputs:
   outputs:
+C_Housing.TeleportHome:
+  inputs:
+  - name: neighborhoodGUID
+    type: string
+  - name: houseGUID
+    type: string
+  - name: plotID
+    type: number
+  outputs:
+C_Housing.TryRenameNeighborhood:
+  inputs:
+  - name: neighborhoodName
+    type: string
+  outputs:
+C_Housing.ValidateCreateGuildNeighborhoodSize:
+  inputs:
+  outputs:
+C_Housing.ValidateNeighborhoodName:
+  inputs:
+  - name: neighborhoodName
+    type: string
+  outputs:
 C_Housing.ValidateReportScreenshot:
   inputs:
   - name: plotIndex
@@ -11548,6 +11645,15 @@ C_Housing.ValidateReportScreenshot:
   outputs:
   - name: isValid
     type: boolean
+C_Housing.VisitHouse:
+  inputs:
+  - name: neighborhoodGUID
+    type: string
+  - name: houseGUID
+    type: string
+  - name: plotID
+    type: number
+  outputs:
 C_HousingBasicMode.CancelActiveEditing:
   inputs:
   outputs:
@@ -11555,9 +11661,6 @@ C_HousingBasicMode.CommitDecorMovement:
   inputs:
   outputs:
 C_HousingBasicMode.CommitHouseExteriorPosition:
-  inputs:
-  outputs:
-C_HousingBasicMode.DeleteDecor:
   inputs:
   outputs:
 C_HousingBasicMode.FinishPlacingNewDecor:
@@ -11617,6 +11720,9 @@ C_HousingBasicMode.IsPlacingNewDecor:
   outputs:
   - name: hasPendingDecor
     type: boolean
+C_HousingBasicMode.RemoveSelectedDecor:
+  inputs:
+  outputs:
 C_HousingBasicMode.RotateDecor:
   inputs:
   - name: rotDegrees
@@ -11676,6 +11782,15 @@ C_HousingCatalog.GetAllFilterTagGroups:
     type:
       arrayof:
         structure: HousingCatalogFilterTagGroupInfo
+C_HousingCatalog.GetBasicDecorInfo:
+  inputs:
+  - name: decorID
+    type: number
+  outputs:
+  - name: info
+    nilable: true
+    type:
+      structure: C_HousingCatalog.HousingCatalogEntryInfo
 C_HousingCatalog.GetCatalogCategoryInfo:
   inputs:
   - name: categoryID
@@ -11740,9 +11855,6 @@ C_HousingCatalog.SearchCatalogSubcategories:
   - name: subcategoryIDs
     type:
       arrayof: number
-C_HousingCleanupMode.DeleteDecor:
-  inputs:
-  outputs:
 C_HousingCleanupMode.GetHoveredDecorInfo:
   inputs:
   outputs:
@@ -11755,6 +11867,9 @@ C_HousingCleanupMode.IsHoveringDecor:
   outputs:
   - name: isHoveringDecor
     type: boolean
+C_HousingCleanupMode.RemoveSelectedDecor:
+  inputs:
+  outputs:
 C_HousingCustomizeMode.ApplyDyeToSelectedDecor:
   inputs:
   - name: dyeSlotID
@@ -11897,6 +12012,15 @@ C_HousingCustomizeMode.IsRoomComponentSelected:
   outputs:
   - name: hasSelectedComponent
     type: boolean
+C_HousingCustomizeMode.RoomComponentSupportsVariant:
+  inputs:
+  - name: componentID
+    type: number
+  - name: variant
+    type: number
+  outputs:
+  - name: variantSupported
+    type: boolean
 C_HousingCustomizeMode.SetRoomComponentCeilingType:
   inputs:
   - name: roomGUID
@@ -11923,10 +12047,23 @@ C_HousingDecor.CancelActiveEditing:
 C_HousingDecor.CommitDecorMovement:
   inputs:
   outputs:
-C_HousingDecor.DeleteDecor:
+C_HousingDecor.GetAllPlacedDecor:
   inputs:
   outputs:
+  - name: placedDecor
+    type:
+      arrayof:
+        structure: C_HousingDecor.HousingDecorInstanceListEntry
 C_HousingDecor.GetDecorDebugInfoForGUID:
+C_HousingDecor.GetDecorInstanceInfoForGUID:
+  inputs:
+  - name: decorGUID
+    type: string
+  outputs:
+  - name: info
+    nilable: true
+    type:
+      structure: HousingDecorInstanceInfo
 C_HousingDecor.GetHoveredDecorDebugInfo:
 C_HousingDecor.GetHoveredDecorInfo:
   inputs:
@@ -11978,19 +12115,31 @@ C_HousingDecor.IsHoveringDecor:
   outputs:
   - name: isHoveringDecor
     type: boolean
-C_HousingDecor.IsIncludeTargetDecorChildrenEnabled:
+C_HousingDecor.RemovePlacedDecorEntry:
+  inputs:
+  - name: decorGUID
+    type: string
+  outputs:
+C_HousingDecor.RemoveSelectedDecor:
   inputs:
   outputs:
-  - name: includeChildrenEnabled
-    type: boolean
 C_HousingDecor.SetGridVisible:
   inputs:
   - name: gridVisible
     type: boolean
   outputs:
-C_HousingDecor.SetIncludeTargetDecorChildrenEnabled:
+C_HousingDecor.SetPlacedDecorEntryHovered:
   inputs:
-  - name: includeChildren
+  - name: decorGUID
+    type: string
+  - name: hovered
+    type: boolean
+  outputs:
+C_HousingDecor.SetPlacedDecorEntrySelected:
+  inputs:
+  - name: decorGUID
+    type: string
+  - name: selected
     type: boolean
   outputs:
 C_HousingExpertMode.CancelActiveEditing:
@@ -12000,9 +12149,6 @@ C_HousingExpertMode.CommitDecorMovement:
   inputs:
   outputs:
 C_HousingExpertMode.CommitHouseExteriorPosition:
-  inputs:
-  outputs:
-C_HousingExpertMode.DeleteDecor:
   inputs:
   outputs:
 C_HousingExpertMode.GetHoveredDecorInfo:
@@ -12019,6 +12165,15 @@ C_HousingExpertMode.GetPrecisionSubmode:
     nilable: true
     type:
       enum: HousingPrecisionSubmode
+C_HousingExpertMode.GetPrecisionSubmodeRestriction:
+  inputs:
+  - name: subMode
+    type:
+      enum: HousingPrecisionSubmode
+  outputs:
+  - name: restriction
+    type:
+      enum: HousingExpertSubmodeRestriction
 C_HousingExpertMode.GetSelectedDecorInfo:
   inputs:
   outputs:
@@ -12051,6 +12206,9 @@ C_HousingExpertMode.IsHoveringDecor:
   outputs:
   - name: isHoveringDecor
     type: boolean
+C_HousingExpertMode.RemoveSelectedDecor:
+  inputs:
+  outputs:
 C_HousingExpertMode.ResetPrecisionChanges:
   inputs:
   - name: activeSubmodeOnly
@@ -12225,11 +12383,6 @@ C_HousingLayout.RemoveRoom:
   - name: roomGUID
     type: string
   outputs:
-C_HousingLayout.RotateDraggedRoom:
-  inputs:
-  - name: isLeft
-    type: boolean
-  outputs:
 C_HousingLayout.RotateFocusedRoom:
   inputs:
   - name: isLeft
@@ -12271,29 +12424,14 @@ C_HousingNeighborhood.CancelInviteToNeighborhood:
   - name: playerName
     type: string
   outputs:
-C_HousingNeighborhood.CanEditCharter:
+C_HousingNeighborhood.CanReturnAfterVisitingHouse:
   inputs:
   outputs:
-  - name: canEditCharter
+  - name: canReturn
     type: boolean
-C_HousingNeighborhood.CreateGuildNeighborhood:
-  inputs:
-  - name: neighborhoodName
-    type: string
-  outputs:
-C_HousingNeighborhood.CreateNeighborhoodCharter:
-  inputs:
-  - name: neighborhoodName
-    type: string
-  outputs:
 C_HousingNeighborhood.DemoteToResident:
   inputs:
   - name: playerGUID
-    type: string
-  outputs:
-C_HousingNeighborhood.EditNeighborhoodCharter:
-  inputs:
-  - name: neighborhoodName
     type: string
   outputs:
 C_HousingNeighborhood.GetCornerstoneHouseInfo:
@@ -12353,13 +12491,6 @@ C_HousingNeighborhood.GetPreviousHouseIdentifier:
   outputs:
   - name: previousHouseIdentifier
     type: string
-C_HousingNeighborhood.GetVisitCooldownInfo:
-  inputs:
-  mayreturnnothing: true
-  outputs:
-  - name: spellCooldownInfo
-    type:
-      structure: SpellCooldownInfo
 C_HousingNeighborhood.HasPermissionToPurchase:
   inputs:
   outputs:
@@ -12391,31 +12522,8 @@ C_HousingNeighborhood.IsPlotOwnedByPlayer:
   outputs:
   - name: isPlayerOwned
     type: boolean
-C_HousingNeighborhood.LeaveHouse:
-  inputs:
-  outputs:
 C_HousingNeighborhood.OnBulletinBoardClosed:
   inputs:
-  outputs:
-C_HousingNeighborhood.OnCharterConfirmationAccepted:
-  inputs:
-  outputs:
-C_HousingNeighborhood.OnCharterConfirmationClosed:
-  inputs:
-  outputs:
-C_HousingNeighborhood.OnCreateCharterNeighborhoodClosed:
-  inputs:
-  outputs:
-C_HousingNeighborhood.OnCreateGuildNeighborhoodClosed:
-  inputs:
-  outputs:
-C_HousingNeighborhood.OnRequestSignatureClicked:
-  inputs:
-  outputs:
-C_HousingNeighborhood.OnSignCharterClicked:
-  inputs:
-  - name: charterOwnerGUID
-    type: string
   outputs:
 C_HousingNeighborhood.PromoteToManager:
   inputs:
@@ -12430,18 +12538,6 @@ C_HousingNeighborhood.RequestNeighborhoodRoster:
   outputs:
 C_HousingNeighborhood.RequestPendingNeighborhoodInvites:
   inputs:
-  outputs:
-C_HousingNeighborhood.ReturnAfterVisitingHouse:
-  inputs:
-  outputs:
-C_HousingNeighborhood.TeleportHome:
-  inputs:
-  - name: neighborhoodGUID
-    type: string
-  - name: houseGUID
-    type: string
-  - name: plotID
-    type: number
   outputs:
 C_HousingNeighborhood.TransferNeighborhoodOwnership:
   inputs:
@@ -12458,28 +12554,6 @@ C_HousingNeighborhood.TryMoveHouse:
   outputs:
 C_HousingNeighborhood.TryPurchasePlot:
   inputs:
-  outputs:
-C_HousingNeighborhood.TryRenameNeighborhood:
-  inputs:
-  - name: neighborhoodName
-    type: string
-  outputs:
-C_HousingNeighborhood.ValidateCreateGuildNeighborhoodSize:
-  inputs:
-  outputs:
-C_HousingNeighborhood.ValidateNeighborhoodName:
-  inputs:
-  - name: neighborhoodName
-    type: string
-  outputs:
-C_HousingNeighborhood.VisitHouse:
-  inputs:
-  - name: neighborhoodGUID
-    type: string
-  - name: houseGUID
-    type: string
-  - name: plotID
-    type: number
   outputs:
 C_ImmersiveInteraction.HasImmersiveInteraction:
   inputs:
@@ -13337,6 +13411,14 @@ C_Item.IsCurrentItem:
     type: string
   outputs:
   - name: result
+    type: boolean
+C_Item.IsDecorItem:
+  inputs:
+  - name: itemInfo
+    type: string
+  outputs:
+  - name: isDecor
+    nilable: true
     type: boolean
 C_Item.IsDressableItemByID:
   inputs:
@@ -18048,6 +18130,11 @@ C_PlayerInfo.IsTravelersLogAvailable:
   outputs:
   - name: isAvailable
     type: boolean
+C_PlayerInfo.IsTutorialsTabAvailable:
+  inputs:
+  outputs:
+  - name: isAvailable
+    type: boolean
 C_PlayerInfo.UnitIsSameServer:
   inputs:
   - name: playerLocation
@@ -19064,6 +19151,11 @@ C_PvP.IsWarModeFeatureEnabled:
   outputs:
   - name: warModeEnabled
     type: boolean
+C_PvP.JoinBattlefield:
+  inputs:
+  - name: battlemasterListId
+    type: number
+  outputs:
 C_PvP.JoinBrawl:
   inputs:
   - default: false
@@ -28475,7 +28567,7 @@ CanSwitchVehicleSeat:
   - name: result
     type: boolean
 CanSwitchVehicleSeats:
-CanUpgradeExpansion:
+CanUpgradeToCurrentExpansion:
   inputs:
   outputs:
   - name: canUpgradeExpansion
@@ -30009,6 +30101,10 @@ GetExpansionDisplayInfo:
   inputs:
   - name: expansionLevel
     type: number
+  - name: desiredReleaseType
+    nilable: true
+    type:
+      enum: ReleaseType
   outputs:
   - name: info
     nilable: true
@@ -32907,6 +33003,11 @@ GetUnitTotalModifiedMaxHealthPercent:
   outputs:
   - name: result
     type: number
+GetUpgradeExpansionLevel:
+  inputs:
+  outputs:
+  - name: upgradeExpansionLevel
+    type: number
 GetVehicleBarIndex:
   inputs:
   outputs:
@@ -33797,7 +33898,6 @@ ItemTextIsFullPage:
 ItemTextNextPage:
 ItemTextPrevPage:
 JoinArena:
-JoinBattlefield:
 JoinChannelByName:
 JoinLFG:
 JoinPermanentChannel:
@@ -34714,6 +34814,11 @@ SetView:
   - name: view
     type: number
   outputs:
+ShouldShowExpansionUpgradeBanner:
+  inputs:
+  outputs:
+  - name: showUpgradeBanner
+    type: boolean
 ShouldShowIslandsWeeklyPOI:
   inputs:
   outputs:

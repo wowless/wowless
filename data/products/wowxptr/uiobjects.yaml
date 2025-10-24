@@ -248,6 +248,11 @@ Actor:
       outputs:
       - name: isLoaded
         type: boolean
+    IsPreferringModelCollisionBounds:
+      inputs:
+      outputs:
+      - name: preferringCollisionBounds
+        type: boolean
     IsSlotAllowed:
       inputs:
       - name: inventorySlots
@@ -482,6 +487,11 @@ Actor:
         type: number
       - name: positionZ
         type: number
+      outputs:
+    SetPreferModelCollisionBounds:
+      inputs:
+      - name: preferCollisionBounds
+        type: boolean
       outputs:
     SetRoll:
       impl:

@@ -922,6 +922,18 @@ CHALLENGE_MODE_KEYSTONE_SLOTTED:
   payload:
   - name: keystoneID
     type: number
+CHALLENGE_MODE_LEADERBOARD_RESULT:
+  payload:
+  - name: mapID
+    type: number
+  - name: challengeModeID
+    type: number
+  - name: page
+    type: number
+  - name: results
+    type:
+      arrayof:
+        structure: MythicPlusLeaderboardResult
 CHALLENGE_MODE_LEADERS_UPDATE:
   payload:
 CHALLENGE_MODE_LEAVER_TIMER_ENDED:
@@ -4151,6 +4163,10 @@ DAILY_RESET_INSTANCE_WELCOME:
     type: number
 DEBUG_MENU_TOGGLED:
   payload:
+DECLINE_NEIGHBORHOOD_INVITATION_RESPONSE:
+  payload:
+  - name: success
+    type: boolean
 DELETE_ITEM_CONFIRM:
   payload:
   - name: itemName
@@ -4979,6 +4995,14 @@ HOUSING_BASIC_MODE_HOVERED_TARGET_CHANGED:
   - name: targetType
     type:
       enum: HousingBasicModeTargetType
+HOUSING_BASIC_MODE_PLACEMENT_FLAGS_UPDATED:
+  payload:
+  - name: targetType
+    type:
+      enum: HousingBasicModeTargetType
+  - name: placementInfo
+    type:
+      structure: C_HousingBasicMode.InvalidPlacementInfo
 HOUSING_BASIC_MODE_SELECTED_TARGET_CHANGED:
   payload:
   - name: hasSelectedTarget
@@ -5055,9 +5079,13 @@ HOUSING_DECOR_PLACE_FAILURE:
       enum: HousingResult
 HOUSING_DECOR_PLACE_SUCCESS:
   payload:
+  - name: decorGUID
+    type: string
   - name: size
     type:
       enum: HousingCatalogEntrySize
+  - name: isNew
+    type: boolean
 HOUSING_DECOR_PRECISION_MANIPULATION_EVENT:
   payload:
   - name: event
@@ -5075,6 +5103,8 @@ HOUSING_DECOR_PRECISION_SUBMODE_CHANGED:
       enum: HousingPrecisionSubmode
 HOUSING_DECOR_REMOVED:
   payload:
+  - name: decorGUID
+    type: string
 HOUSING_DECOR_SELECT_RESPONSE:
   payload:
   - name: result
@@ -5189,6 +5219,15 @@ HOUSING_MARKET_AVAILABILITY_UPDATED:
   payload:
 HOUSING_NUM_DECOR_PLACED_CHANGED:
   payload:
+HOUSING_ROOM_COMPONENT_CUSTOMIZATION_CHANGE_FAILED:
+  payload:
+  - name: roomGUID
+    type: string
+  - name: componentID
+    type: number
+  - name: housingResult
+    type:
+      enum: HousingResult
 HOUSING_ROOM_COMPONENT_CUSTOMIZATION_CHANGED:
   payload:
   - name: roomGUID
@@ -5958,15 +5997,20 @@ NEIGHBORHOOD_NAME_VALIDATED:
   payload:
   - name: approved
     type: boolean
-NEIGHBORHOOD_TYPE_CHANGED:
-  payload:
-  - name: result
-    type:
-      enum: HousingResult
 NEUTRAL_FACTION_SELECT_RESULT:
   payload:
   - name: success
     type: boolean
+NEW_HOUSING_ITEM_ACQUIRED:
+  payload:
+  - name: itemType
+    type:
+      enum: HousingItemToastType
+  - name: itemName
+    type: string
+  - name: icon
+    nilable: true
+    type: number
 NEW_MATCHMAKING_PARTY_INVITE:
   payload:
 NEW_MOUNT_ADDED:

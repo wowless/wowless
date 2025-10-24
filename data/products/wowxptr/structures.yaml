@@ -3629,6 +3629,18 @@ C_GuildInfo.GuildRenameStatus:
     result:
       type:
         enum: GuildErrorType
+C_HousingBasicMode.InvalidPlacementInfo:
+  fields:
+    anyRestrictions:
+      type: boolean
+    invalidCollision:
+      type: boolean
+    invalidTarget:
+      type: boolean
+    notInRoom:
+      type: boolean
+    tooFar:
+      type: boolean
 C_HousingCatalog.HousingBundleDecorEntryInfo:
   fields:
     decorID:
@@ -3692,6 +3704,8 @@ C_HousingCatalog.HousingCatalogEntryInfo:
       type: boolean
     isAllowedOutdoors:
       type: boolean
+    isPrefab:
+      type: boolean
     marketInfo:
       nilable: true
       type:
@@ -3704,6 +3718,10 @@ C_HousingCatalog.HousingCatalogEntryInfo:
       type: number
     placementCost:
       type: number
+    quality:
+      nilable: true
+      type:
+        enum: ItemQuality
     quantity:
       type: number
     remainingRedeemable:
@@ -3713,9 +3731,14 @@ C_HousingCatalog.HousingCatalogEntryInfo:
     size:
       type:
         enum: HousingCatalogEntrySize
+    sourceText:
+      type: string
     subcategoryIDs:
       type:
         arrayof: number
+    uiModelSceneID:
+      nilable: true
+      type: number
 C_HousingCatalog.HousingCatalogSubcategoryInfo:
   fields:
     anyOwnedEntries:
@@ -3784,8 +3807,6 @@ C_HousingCustomizeMode.HousingRoomComponentInstanceInfo:
     doorType:
       type:
         enum: HousingRoomComponentDoorType
-    name:
-      type: string
     roomGUID:
       type: string
     type:
@@ -3797,6 +3818,12 @@ C_HousingCustomizeMode.RoomComponentWallpaper:
       type: string
     roomComponentTextureRecID:
       type: number
+C_HousingDecor.HousingDecorInstanceListEntry:
+  fields:
+    decorGUID:
+      type: string
+    name:
+      type: string
 C_HousingDecor.HousingLevelInfo:
   fields:
     exteriorDecorPlacementBudget:
@@ -10597,6 +10624,9 @@ HouseLevelReward:
     oldValue:
       nilable: true
       type: number
+    tooltipText:
+      nilable: true
+      type: string
     type:
       type:
         enum: HouseLevelRewardType
@@ -10798,6 +10828,20 @@ MythicPlusAffixScoreInfo:
       type: boolean
     score:
       type: number
+MythicPlusLeaderboardPlayerResult:
+  fields:
+    playerGUID:
+      type: string
+    specID:
+      type: number
+MythicPlusLeaderboardResult:
+  fields:
+    completionTime:
+      type: number
+    players:
+      type:
+        arrayof:
+          structure: MythicPlusLeaderboardPlayerResult
 MythicPlusRatingLinkInfo:
   fields:
     completedInTime:
