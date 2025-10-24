@@ -130,6 +130,12 @@ C_SpecializationInfo.GetSpecIDs:
   impl:
     sqls:
     - C_SpecializationInfo.GetSpecIDs
+C_SpecializationInfo.GetTalentInfo:
+  impl:
+    modules:
+      units:
+    sqls:
+    - GetTalentInfo_Vanilla
 C_Texture.GetAtlasInfo:
   impl:
     modules:
