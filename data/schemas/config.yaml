@@ -61,6 +61,11 @@ type:
               record:
                 GetAddOnInfo_noUpdateAvailable:
                   type: boolean
+          time:
+            type:
+              record:
+                tostring_metamethod:
+                  type: boolean
     runner:
       type:
         record:

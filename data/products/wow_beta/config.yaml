@@ -75,6 +75,8 @@ addon:
 modules:
   addons:
     GetAddOnInfo_noUpdateAvailable: true
+  time:
+    tostring_metamethod: true
 runner:
   skip_events:
     PERKS_PROGRAM_OPEN: needs C_ModelInfo.GetModelSceneInfoByID implemented

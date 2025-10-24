@@ -1,5 +1,6 @@
 local T = ...
 local assertEquals = T.assertEquals
+local cfg = T.data.config.modules and T.data.config.modules.time or {}
 local cbargs
 local function capture(...)
   cbargs = { ... }
@@ -7,6 +8,11 @@ end
 local t = T.retn(1, T.env.C_Timer.NewTimer(0, capture))
 assertEquals('userdata', type(t))
 assertEquals(t, t)
+if cfg.tostring_metamethod then
+  assert(tostring(t):match('^LuaFunctionContainer: 0x[0-9a-f]+$'))
+else
+  assert(tostring(t):match('^userdata: 0x[0-9a-f]+$'))
+end
 local mt = getmetatable(t)
 assertEquals('boolean', type(mt))
 assertEquals(false, mt)
@@ -15,6 +21,7 @@ local readonly = {
   __index = 'nil',
   __metatable = 'nil',
   __newindex = 'nil',
+  __tostring = cfg.tostring_metamethod and 'nil',
   Cancel = 'function',
   Invoke = 'function',
   IsCancelled = 'function',

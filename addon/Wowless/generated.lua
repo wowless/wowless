@@ -283,6 +283,7 @@ G.testsuite.generated = function()
       check7 = G.check7,
       data = {
         build = _G.WowlessData.Build,
+        config = _G.WowlessData.Config,
       },
       env = _G,
       match = G.match,

@@ -1,6 +1,8 @@
 local bubblewrap = require('wowless.bubblewrap')
 
-return function(log, security)
+return function(datalua, log, security)
+  local cfg = datalua.config.modules and datalua.config.modules.time or {}
+
   local stamp = 1234
   local timers = require('minheap'):new()
   timers:push(math.huge, function()
@@ -35,6 +37,9 @@ return function(log, security)
         error('Attempted to assign to read-only key ' .. k)
       end
       state[u].table[k] = v
+    end,
+    __tostring = cfg.tostring_metamethod and function(u)
+      return 'LuaFunctionContainer: ' .. tostring(state[u].table):sub(8)
     end,
   }
 

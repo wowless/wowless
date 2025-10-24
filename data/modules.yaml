@@ -132,6 +132,7 @@ templates:
     log:
 time:
   deps:
+    datalua:
     log:
     security:
 typecheck:
