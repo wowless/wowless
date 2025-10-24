@@ -854,8 +854,8 @@ local asyncTests = {
         local args = { ... }
         done(function()
           assertEquals(1, #args)
-          assertEquals(t, args[1])
-          assert(tostring(t) ~= tostring(args[1]))
+          assertEquals(t, args[1]) -- because of eq metamethod
+          assertEquals(nil, ({ [t] = true })[args[1]]) -- they're still not the same object
           assertEquals('bar', args[1].foo)
         end)
       end
