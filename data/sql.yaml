@@ -43,10 +43,9 @@ C_SpecializationInfo.GetSpecIDs:
   indexes:
     SpecSetMember: SpecSet
   type: cursor
-C_Texture.GetAtlasInfo:
+C_SpecializationInfo.GetTalentInfo:
   indexes:
-    UiTextureAtlasElement: Name COLLATE NOCASE
-    UiTextureAtlasMember: UiTextureAtlasElementID
+    SpellMisc: SpellID
   type: lookup
 C_Texture.GetAtlasInfo_11_1_5:
   indexes:
@@ -109,14 +108,8 @@ GetSpecializationInfoForClassID:
   type: lookup
 GetSpecializationInfoForSpecID:
   type: lookup
-GetTalentInfo_Vanilla:
-  indexes:
-    SpellMisc: SpellID
-  type: lookup
 GetTalentPrereqs:
   type: cursor
-GetTalentTabInfo:
-  type: lookup
 Texture.SetAtlas:
   indexes:
     UiTextureAtlasElement: Name COLLATE NOCASE

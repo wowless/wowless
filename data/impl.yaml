@@ -135,13 +135,7 @@ C_SpecializationInfo.GetTalentInfo:
     modules:
       units:
     sqls:
-    - GetTalentInfo_Vanilla
-C_Texture.GetAtlasInfo:
-  impl:
-    modules:
-      atlas:
-    sqls:
-    - C_Texture.GetAtlasInfo
+    - C_SpecializationInfo.GetTalentInfo
 C_Texture.GetAtlasInfo_11_1_5:
   impl:
     modules:
@@ -390,24 +384,12 @@ GetSpecializationInfoForSpecID:
       units:
     sqls:
     - GetSpecializationInfoForSpecID
-GetTalentInfo_Vanilla:
-  impl:
-    modules:
-      units:
-    sqls:
-    - GetTalentInfo_Vanilla
 GetTalentPrereqs:
   impl:
     modules:
       units:
     sqls:
     - GetTalentPrereqs
-GetTalentTabInfo:
-  impl:
-    modules:
-      units:
-    sqls:
-    - GetTalentTabInfo
 GetTime:
   moduledelegate:
     name: time

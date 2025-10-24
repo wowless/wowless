@@ -8,12 +8,6 @@ lies:
       outputs:
       - _add:
           nilable: true
-    C_SpecializationInfo.GetNumSpecializationsForClassID:
-      inputs:
-      - name:
-          _change:
-            from: specID
-            to: classID
     GetFileIDFromPath:
       outputs:
       - _add:
@@ -22,6 +16,14 @@ lies:
       outputs:
       - _add:
           nilable: true
+    UnitFactionGroup:
+      _add:
+        mayreturnnothing: true
+      inputs:
+      - type:
+          _change:
+            from: string
+            to: unit
   extra_apis:
     C_AuctionHouse.CalculateCommodityDeposit:
     C_AuctionHouse.CalculateItemDeposit:
@@ -143,6 +145,10 @@ lies:
     BagsDirection:
     BagsOrientation:
     ConfigurationWarning:
+    CooldownViewerBarContent:
+    CooldownViewerIconDirection:
+    CooldownViewerOrientation:
+    CooldownViewerVisibleSetting:
     EditModeAccountSetting:
     EditModeActionBarSetting:
     EditModeActionBarSystemIndices:
@@ -152,6 +158,8 @@ lies:
     EditModeBagsSetting:
     EditModeCastBarSetting:
     EditModeChatFrameSetting:
+    EditModeCooldownViewerSetting:
+    EditModeCooldownViewerSystemIndices:
     EditModeDurabilityFrameSetting:
     EditModeLayoutType:
     EditModeMicroMenuSetting:
@@ -175,9 +183,11 @@ lies:
     ViewRaidSize:
     WarbandEventState:
     WarbandGroupFlags:
+    WarbandPlacementDisplayInfoType:
     WarbandSceneAnimationEvent:
     WarbandSceneAnimationSheatheState:
     WarbandSceneAnimationStandState:
+    WarbandSceneAnimationStandStateFlags:
     WarbandScenePlacementType:
   extra_events:
     AUCTION_CANCELED:
@@ -228,24 +238,6 @@ lies:
         outputs:
         - _add:
             nilable: true
-      RegisterForClicks:
-        inputs:
-        - _change:
-            from:
-              name: unpackedPrimitiveType
-              type: number
-            to:
-              name: button
-              type: string
-      RegisterForMouse:
-        inputs:
-        - _change:
-            from:
-              name: unpackedPrimitiveType
-              type: number
-            to:
-              name: button
-              type: string
       SetFormattedText:
         _add:
           instride: 1
@@ -316,15 +308,6 @@ lies:
             _change:
               from: string
               to: unknown
-      RegisterForDrag:
-        inputs:
-        - _change:
-            from:
-              name: unpackedPrimitiveType
-              type: number
-            to:
-              name: button
-              type: string
       RegisterUnitEvent:
         inputs:
           2:
@@ -379,15 +362,6 @@ lies:
           - default: true
             name: doResize
             type: boolean
-      SetPassThroughButtons:
-        inputs:
-        - _change:
-            from:
-              name: unpackedPrimitiveType
-              type: number
-            to:
-              name: button
-              type: string
       SetPoint:
         _remove:
           inputs:
@@ -579,6 +553,8 @@ typedefs:
     type: string
   ChatBubbleFrame:
     type: table
+  ClickButton:
+    type: string
   ClubId:
     type: string
   ClubInvitationId:
@@ -620,6 +596,10 @@ typedefs:
     type: function
   luaIndex:
     type: number
+  LuaValueReference:
+    type: unknown
+  LuaValueVariant:
+    type: table
   ModelAsset:
     type: string
   ModelSceneFrame:
@@ -628,6 +608,8 @@ typedefs:
   ModelSceneFrameActor:
     type:
       uiobject: Actor
+  MouseButton:
+    type: string
   NamePlateFrame:
     type: table
   normalizedValue:
@@ -640,13 +622,12 @@ typedefs:
     type: number
   RecruitAcceptanceID:
     type: string
-  ScriptObject:
-    type:
-      uiobject: UIObject
   ScriptRegion:
     outnil: true
     type:
       uiobject: Region
+  SendChatMessageType:
+    type: string
   SimpleAnim:
     type:
       uiobject: Animation
@@ -677,6 +658,9 @@ typedefs:
   SimplePathAnim:
     type:
       uiobject: Path
+  SimpleRegion:
+    type:
+      uiobject: Region
   SimpleTexture:
     outnil: true
     type:
@@ -690,6 +674,8 @@ typedefs:
   SpellIdentifier:
     type: string
   string:
+    type: string
+  stringView:
     type: string
   TBFFlags:
     type: string
