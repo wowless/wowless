@@ -20046,6 +20046,7 @@ GetSpecializationInfoForClassID:
     nilable: true
     type: number
 GetSpecializationInfoForSpecID:
+  impl: GetSpecializationInfoForSpecID
   inputs:
   - name: specID
     type: number
