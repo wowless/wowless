@@ -22,7 +22,6 @@ AcceptSpellConfirmationPrompt:
 AcceptTrade:
 AcknowledgeAutoAcceptQuest:
 AcknowledgeSurvey:
-ActionHasRange:
 AddAutoQuestPopUp:
 AddChatWindowChannel:
 AddChatWindowMessages:
@@ -416,6 +415,72 @@ C_ActionBar.ForceUpdateAction:
   - name: slotID
     type: number
   outputs:
+C_ActionBar.GetActionAutocast:
+  inputs:
+  - name: actionID
+    type: number
+  outputs:
+  - name: autocastAllowed
+    type: boolean
+  - name: autocastEnabled
+    type: boolean
+C_ActionBar.GetActionBarPage:
+  inputs:
+  outputs:
+  - name: currentPage
+    type: number
+C_ActionBar.GetActionCharges:
+  inputs:
+  - name: actionID
+    type: number
+  outputs:
+  - name: chargeInfo
+    type:
+      structure: C_ActionBar.ActionBarChargeInfo
+C_ActionBar.GetActionCooldown:
+  inputs:
+  - name: actionID
+    type: number
+  outputs:
+  - name: cooldownInfo
+    type:
+      structure: C_ActionBar.ActionBarCooldownInfo
+C_ActionBar.GetActionLossOfControlCooldown:
+  inputs:
+  - name: actionID
+    type: number
+  outputs:
+  - name: startTime
+    type: number
+  - name: duration
+    type: number
+C_ActionBar.GetActionText:
+  inputs:
+  - name: actionID
+    type: number
+  mayreturnnothing: true
+  outputs:
+  - name: text
+    type: string
+C_ActionBar.GetActionTexture:
+  inputs:
+  - name: actionID
+    type: number
+  outputs:
+  - name: textureFileID
+    type: number
+C_ActionBar.GetActionUseCount:
+  inputs:
+  - name: actionID
+    type: number
+  outputs:
+  - name: count
+    type: number
+C_ActionBar.GetBonusBarIndex:
+  inputs:
+  outputs:
+  - name: bonusBarIndex
+    type: number
 C_ActionBar.GetBonusBarIndexForSlot:
   inputs:
   - name: slotID
@@ -424,12 +489,38 @@ C_ActionBar.GetBonusBarIndexForSlot:
   - name: bonusBarIndex
     nilable: true
     type: number
+C_ActionBar.GetBonusBarOffset:
+  inputs:
+  outputs:
+  - name: bonusBarOffset
+    type: number
+C_ActionBar.GetExtraBarIndex:
+  inputs:
+  outputs:
+  - name: extraBarIndex
+    type: number
 C_ActionBar.GetItemActionOnEquipSpellID:
   inputs:
   - name: actionID
     type: number
   outputs:
   - name: onEquipSpellID
+    nilable: true
+    type: number
+C_ActionBar.GetMultiCastBarIndex:
+  inputs:
+  outputs:
+  - name: multiCastBarIndex
+    type: number
+C_ActionBar.GetOverrideBarIndex:
+  inputs:
+  outputs:
+  - name: overrideBarIndex
+    type: number
+C_ActionBar.GetOverrideBarSkin:
+  inputs:
+  outputs:
+  - name: textureFileID
     nilable: true
     type: number
 C_ActionBar.GetPetActionPetBarIndices:
@@ -465,10 +556,37 @@ C_ActionBar.GetSpell:
   outputs:
   - name: spellID
     type: number
+C_ActionBar.GetTempShapeshiftBarIndex:
+  inputs:
+  outputs:
+  - name: tempShapeshiftBarIndex
+    type: number
+C_ActionBar.GetVehicleBarIndex:
+  inputs:
+  outputs:
+  - name: vehicleBarIndex
+    type: number
+C_ActionBar.HasAction:
+  inputs:
+  - name: actionID
+    type: number
+  outputs:
+  - name: hasAction
+    type: boolean
 C_ActionBar.HasAssistedCombatActionButtons:
   inputs:
   outputs:
   - name: hasButtons
+    type: boolean
+C_ActionBar.HasBonusActionBar:
+  inputs:
+  outputs:
+  - name: hasBonusActionBar
+    type: boolean
+C_ActionBar.HasExtraActionBar:
+  inputs:
+  outputs:
+  - name: hasExtraActionBar
     type: boolean
 C_ActionBar.HasFlyoutActionButtons:
   inputs:
@@ -476,6 +594,11 @@ C_ActionBar.HasFlyoutActionButtons:
     type: number
   outputs:
   - name: hasFlyoutActionButtons
+    type: boolean
+C_ActionBar.HasOverrideActionBar:
+  inputs:
+  outputs:
+  - name: hasOverrideActionBar
     type: boolean
 C_ActionBar.HasPetActionButtons:
   inputs:
@@ -491,12 +614,40 @@ C_ActionBar.HasPetActionPetBarIndices:
   outputs:
   - name: hasPetActionPetBarIndices
     type: boolean
+C_ActionBar.HasRangeRequirements:
+  inputs:
+  - name: actionID
+    type: number
+  outputs:
+  - name: hasRangeRequirements
+    type: boolean
 C_ActionBar.HasSpellActionButtons:
   inputs:
   - name: spellID
     type: number
   outputs:
   - name: hasSpellActionButtons
+    type: boolean
+C_ActionBar.HasTempShapeshiftActionBar:
+  inputs:
+  outputs:
+  - name: hasTempShapeshiftActionBar
+    type: boolean
+C_ActionBar.HasVehicleActionBar:
+  inputs:
+  outputs:
+  - name: hasVehicleActionBar
+    type: boolean
+C_ActionBar.IsActionInRange:
+  inputs:
+  - name: actionID
+    type: number
+  - name: target
+    nilable: true
+    type: unit
+  outputs:
+  - name: isInRange
+    nilable: true
     type: boolean
 C_ActionBar.IsAssistedCombatAction:
   inputs:
@@ -505,6 +656,13 @@ C_ActionBar.IsAssistedCombatAction:
   outputs:
   - name: isAssistedCombatAction
     type: boolean
+C_ActionBar.IsAttackAction:
+  inputs:
+  - name: actionID
+    type: number
+  outputs:
+  - name: isAttackAction
+    type: boolean
 C_ActionBar.IsAutoCastPetAction:
   inputs:
   - name: slotID
@@ -512,12 +670,40 @@ C_ActionBar.IsAutoCastPetAction:
   outputs:
   - name: isAutoCastPetAction
     type: boolean
+C_ActionBar.IsAutoRepeatAction:
+  inputs:
+  - name: actionID
+    type: number
+  outputs:
+  - name: isAutoRepeatAction
+    type: boolean
+C_ActionBar.IsConsumableAction:
+  inputs:
+  - name: actionID
+    type: number
+  outputs:
+  - name: isConsumableAction
+    type: boolean
+C_ActionBar.IsCurrentAction:
+  inputs:
+  - name: actionID
+    type: number
+  outputs:
+  - name: isCurrentAction
+    type: boolean
 C_ActionBar.IsEnabledAutoCastPetAction:
   inputs:
   - name: slotID
     type: number
   outputs:
   - name: isEnabledAutoCastPetAction
+    type: boolean
+C_ActionBar.IsEquippedAction:
+  inputs:
+  - name: actionID
+    type: number
+  outputs:
+  - name: isEquippedAction
     type: boolean
 C_ActionBar.IsHarmfulAction:
   inputs:
@@ -537,6 +723,13 @@ C_ActionBar.IsHelpfulAction:
   outputs:
   - name: isHelpful
     type: boolean
+C_ActionBar.IsItemAction:
+  inputs:
+  - name: actionID
+    type: number
+  outputs:
+  - name: isItemAction
+    type: boolean
 C_ActionBar.IsOnBarOrSpecialBar:
   inputs:
   - name: spellID
@@ -544,9 +737,46 @@ C_ActionBar.IsOnBarOrSpecialBar:
   outputs:
   - name: isOnBarOrSpecialBar
     type: boolean
+C_ActionBar.IsPossessBarVisible:
+  inputs:
+  outputs:
+  - name: isPossessBarVisible
+    type: boolean
+C_ActionBar.IsStackableAction:
+  inputs:
+  - name: actionID
+    type: number
+  outputs:
+  - name: isStackableAction
+    type: boolean
+C_ActionBar.IsUsableAction:
+  inputs:
+  - name: actionID
+    type: number
+  outputs:
+  - name: isUsable
+    type: boolean
+  - name: isLackingResources
+    type: boolean
 C_ActionBar.PutActionInSlot:
   inputs:
   - name: slotID
+    type: number
+  outputs:
+C_ActionBar.RegisterActionUIButton:
+  inputs:
+  - name: checkboxFrame
+    type:
+      uiobject: CheckButton
+  - name: actionID
+    type: number
+  - name: cooldownFrame
+    type:
+      uiobject: Cooldown
+  outputs:
+C_ActionBar.SetActionBarPage:
+  inputs:
+  - name: pageIndex
     type: number
   outputs:
 C_ActionBar.ShouldOverrideBarShowHealthBar:
@@ -563,6 +793,12 @@ C_ActionBar.ToggleAutoCastPetAction:
   inputs:
   - name: slotID
     type: number
+  outputs:
+C_ActionBar.UnregisterActionUIButton:
+  inputs:
+  - name: checkboxFrame
+    type:
+      uiobject: CheckButton
   outputs:
 C_AddOnProfiler.AddMeasuredCallEvent:
   inputs:
@@ -4248,7 +4484,6 @@ C_CharacterServices.GetCharacterServiceDisplayInfo:
 C_CharacterServices.GetVASDistributions:
 C_CharacterServices.HasRequiredBoostForClassTrial:
 C_CharacterServices.HasRequiredBoostForUnrevoke:
-C_CharacterServices.RPEResetCharacter:
 C_CharacterServices.SetAutomaticBoost:
 C_CharacterServices.SetAutomaticBoostCharacter:
 C_CharacterServicesPublic.ShouldSeeControlPopup:
@@ -8849,6 +9084,25 @@ C_Cursor.GetCursorItem:
   - name: item
     type:
       structure: ItemLocation
+C_CurveUtil.CreateColorCurve:
+  inputs:
+  outputs:
+  - name: curve
+    type: table
+C_CurveUtil.CreateCurve:
+  inputs:
+  outputs:
+  - name: curve
+    type: table
+C_CurveUtil.EvaluateGameCurve:
+  inputs:
+  - name: curveID
+    type: number
+  - name: x
+    type: number
+  outputs:
+  - name: y
+    type: number
 C_CVar.GetCVar:
   impl: C_CVar.GetCVar
   inputs:
@@ -9753,15 +10007,15 @@ C_EncounterTimeline.HasPausedEvents:
   outputs:
   - name: hasPausedEvents
     type: boolean
-C_EncounterTimeline.IsTimelineEnabled:
+C_EncounterTimeline.IsFeatureAvailable:
   inputs:
   outputs:
-  - name: isSupportedAndEnabled
+  - name: isAvailable
     type: boolean
-C_EncounterTimeline.IsTimelineSupported:
+C_EncounterTimeline.IsFeatureEnabled:
   inputs:
   outputs:
-  - name: isSupported
+  - name: isAvailableAndEnabled
     type: boolean
 C_EncounterTimeline.PauseScriptEvent:
   inputs:
@@ -9773,6 +10027,14 @@ C_EncounterTimeline.ResumeScriptEvent:
   - name: eventID
     type: number
   outputs:
+C_EncounterWarnings.GetSoundKitForSeverity:
+  inputs:
+  - name: severity
+    type:
+      enum: EncounterEventSeverity
+  outputs:
+  - name: soundKitID
+    type: number
 C_EncounterWarnings.IsFeatureAvailable:
   inputs:
   outputs:
@@ -9781,8 +10043,17 @@ C_EncounterWarnings.IsFeatureAvailable:
 C_EncounterWarnings.IsFeatureEnabled:
   inputs:
   outputs:
-  - name: isEnabled
+  - name: isAvailableAndEnabled
     type: boolean
+C_EncounterWarnings.PlaySound:
+  inputs:
+  - name: severity
+    type:
+      enum: EncounterEventSeverity
+  mayreturnnothing: true
+  outputs:
+  - name: soundHandle
+    type: number
 C_EndOfMatchUI.GetEndOfMatchDetails:
   inputs:
   outputs:
@@ -9962,6 +10233,11 @@ C_EquipmentSet.UseEquipmentSet:
     type: number
   outputs:
   - name: setWasEquipped
+    type: boolean
+C_EventScheduler.CanShowEvents:
+  inputs:
+  outputs:
+  - name: canShow
     type: boolean
 C_EventScheduler.ClearReminder:
   inputs:
@@ -11779,14 +12055,54 @@ C_HouseExterior.SelectFixtureOption:
 C_Housing.AcceptNeighborhoodOwnership:
   inputs:
   outputs:
+C_Housing.CanEditCharter:
+  inputs:
+  outputs:
+  - name: canEditCharter
+    type: boolean
+C_Housing.CreateGuildNeighborhood:
+  inputs:
+  - name: neighborhoodName
+    type: string
+  outputs:
+C_Housing.CreateNeighborhoodCharter:
+  inputs:
+  - name: neighborhoodName
+    type: string
+  outputs:
 C_Housing.DeclineNeighborhoodOwnership:
   inputs:
   outputs:
+C_Housing.DoesFactionMatchNeighborhood:
+  inputs:
+  - name: neighborhoodGUID
+    type: string
+  outputs:
+  - name: factionMatches
+    type: boolean
+C_Housing.EditNeighborhoodCharter:
+  inputs:
+  - name: neighborhoodName
+    type: string
+  outputs:
+C_Housing.GetCurrentHouseInfo:
+  inputs:
+  outputs:
+  - name: houseInfo
+    nilable: true
+    type:
+      structure: HouseInfo
 C_Housing.GetCurrentHouseLevelFavor:
   inputs:
   - name: houseGuid
     type: string
   outputs:
+C_Housing.GetCurrentNeighborhoodGUID:
+  inputs:
+  outputs:
+  - name: neighborhoodGUID
+    nilable: true
+    type: string
 C_Housing.GetHouseLevelFavorForLevel:
   inputs:
   - name: level
@@ -11845,11 +12161,21 @@ C_Housing.GetUIMapIDForNeighborhood:
   - name: uiMapID
     nilable: true
     type: number
+C_Housing.GetVisitCooldownInfo:
+  inputs:
+  mayreturnnothing: true
+  outputs:
+  - name: spellCooldownInfo
+    type:
+      structure: SpellCooldownInfo
 C_Housing.HasHousingExpansionAccess:
   inputs:
   outputs:
   - name: hasAccess
     type: boolean
+C_Housing.HouseFinderDeclineNeighborhoodInvitation:
+  inputs:
+  outputs:
 C_Housing.HouseFinderRequestNeighborhoods:
   inputs:
   outputs:
@@ -11890,6 +12216,29 @@ C_Housing.IsOnNeighborhoodMap:
   outputs:
   - name: isOnNeighborhoodMap
     type: boolean
+C_Housing.LeaveHouse:
+  inputs:
+  outputs:
+C_Housing.OnCharterConfirmationAccepted:
+  inputs:
+  outputs:
+C_Housing.OnCharterConfirmationClosed:
+  inputs:
+  outputs:
+C_Housing.OnCreateCharterNeighborhoodClosed:
+  inputs:
+  outputs:
+C_Housing.OnCreateGuildNeighborhoodClosed:
+  inputs:
+  outputs:
+C_Housing.OnRequestSignatureClicked:
+  inputs:
+  outputs:
+C_Housing.OnSignCharterClicked:
+  inputs:
+  - name: charterOwnerGUID
+    type: string
+  outputs:
 C_Housing.RelinquishHouse:
   inputs:
   - name: houseGuid
@@ -11904,6 +12253,9 @@ C_Housing.RequestHouseFinderNeighborhoodData:
     type: string
   outputs:
 C_Housing.RequestPlayerCharacterList:
+  inputs:
+  outputs:
+C_Housing.ReturnAfterVisitingHouse:
   inputs:
   outputs:
 C_Housing.SaveHouseSettings:
@@ -11937,6 +12289,28 @@ C_Housing.SetTrackedHouseGuid:
 C_Housing.StartTutorial:
   inputs:
   outputs:
+C_Housing.TeleportHome:
+  inputs:
+  - name: neighborhoodGUID
+    type: string
+  - name: houseGUID
+    type: string
+  - name: plotID
+    type: number
+  outputs:
+C_Housing.TryRenameNeighborhood:
+  inputs:
+  - name: neighborhoodName
+    type: string
+  outputs:
+C_Housing.ValidateCreateGuildNeighborhoodSize:
+  inputs:
+  outputs:
+C_Housing.ValidateNeighborhoodName:
+  inputs:
+  - name: neighborhoodName
+    type: string
+  outputs:
 C_Housing.ValidateReportScreenshot:
   inputs:
   - name: plotIndex
@@ -11944,6 +12318,15 @@ C_Housing.ValidateReportScreenshot:
   outputs:
   - name: isValid
     type: boolean
+C_Housing.VisitHouse:
+  inputs:
+  - name: neighborhoodGUID
+    type: string
+  - name: houseGUID
+    type: string
+  - name: plotID
+    type: number
+  outputs:
 C_HousingBasicMode.CancelActiveEditing:
   inputs:
   outputs:
@@ -11951,9 +12334,6 @@ C_HousingBasicMode.CommitDecorMovement:
   inputs:
   outputs:
 C_HousingBasicMode.CommitHouseExteriorPosition:
-  inputs:
-  outputs:
-C_HousingBasicMode.DeleteDecor:
   inputs:
   outputs:
 C_HousingBasicMode.FinishPlacingNewDecor:
@@ -12013,6 +12393,9 @@ C_HousingBasicMode.IsPlacingNewDecor:
   outputs:
   - name: hasPendingDecor
     type: boolean
+C_HousingBasicMode.RemoveSelectedDecor:
+  inputs:
+  outputs:
 C_HousingBasicMode.RotateDecor:
   inputs:
   - name: rotDegrees
@@ -12083,6 +12466,15 @@ C_HousingCatalog.GetAllFilterTagGroups:
     type:
       arrayof:
         structure: HousingCatalogFilterTagGroupInfo
+C_HousingCatalog.GetBasicDecorInfo:
+  inputs:
+  - name: decorID
+    type: number
+  outputs:
+  - name: info
+    nilable: true
+    type:
+      structure: C_HousingCatalog.HousingCatalogEntryInfo
 C_HousingCatalog.GetCatalogCategoryInfo:
   inputs:
   - name: categoryID
@@ -12161,9 +12553,6 @@ C_HousingCatalog.SetPreviewCartItemShown:
   - name: shown
     type: boolean
   outputs:
-C_HousingCleanupMode.DeleteDecor:
-  inputs:
-  outputs:
 C_HousingCleanupMode.GetHoveredDecorInfo:
   inputs:
   outputs:
@@ -12176,6 +12565,9 @@ C_HousingCleanupMode.IsHoveringDecor:
   outputs:
   - name: isHoveringDecor
     type: boolean
+C_HousingCleanupMode.RemoveSelectedDecor:
+  inputs:
+  outputs:
 C_HousingCustomizeMode.ApplyDyeToSelectedDecor:
   inputs:
   - name: dyeSlotID
@@ -12318,6 +12710,15 @@ C_HousingCustomizeMode.IsRoomComponentSelected:
   outputs:
   - name: hasSelectedComponent
     type: boolean
+C_HousingCustomizeMode.RoomComponentSupportsVariant:
+  inputs:
+  - name: componentID
+    type: number
+  - name: variant
+    type: number
+  outputs:
+  - name: variantSupported
+    type: boolean
 C_HousingCustomizeMode.SetRoomComponentCeilingType:
   inputs:
   - name: roomGUID
@@ -12344,16 +12745,29 @@ C_HousingDecor.CancelActiveEditing:
 C_HousingDecor.CommitDecorMovement:
   inputs:
   outputs:
-C_HousingDecor.DeleteDecor:
-  inputs:
-  outputs:
 C_HousingDecor.EnterPreviewState:
   inputs:
   outputs:
 C_HousingDecor.ExitPreviewState:
   inputs:
   outputs:
+C_HousingDecor.GetAllPlacedDecor:
+  inputs:
+  outputs:
+  - name: placedDecor
+    type:
+      arrayof:
+        structure: C_HousingDecor.HousingDecorInstanceListEntry
 C_HousingDecor.GetDecorDebugInfoForGUID:
+C_HousingDecor.GetDecorInstanceInfoForGUID:
+  inputs:
+  - name: decorGUID
+    type: string
+  outputs:
+  - name: info
+    nilable: true
+    type:
+      structure: HousingDecorInstanceInfo
 C_HousingDecor.GetHoveredDecorDebugInfo:
 C_HousingDecor.GetHoveredDecorInfo:
   inputs:
@@ -12410,11 +12824,6 @@ C_HousingDecor.IsHoveringDecor:
   outputs:
   - name: isHoveringDecor
     type: boolean
-C_HousingDecor.IsIncludeTargetDecorChildrenEnabled:
-  inputs:
-  outputs:
-  - name: includeChildrenEnabled
-    type: boolean
 C_HousingDecor.IsModeDisabledForPreviewState:
   inputs:
   - name: mode
@@ -12428,14 +12837,31 @@ C_HousingDecor.IsPreviewState:
   outputs:
   - name: isPreviewState
     type: boolean
+C_HousingDecor.RemovePlacedDecorEntry:
+  inputs:
+  - name: decorGUID
+    type: string
+  outputs:
+C_HousingDecor.RemoveSelectedDecor:
+  inputs:
+  outputs:
 C_HousingDecor.SetGridVisible:
   inputs:
   - name: gridVisible
     type: boolean
   outputs:
-C_HousingDecor.SetIncludeTargetDecorChildrenEnabled:
+C_HousingDecor.SetPlacedDecorEntryHovered:
   inputs:
-  - name: includeChildren
+  - name: decorGUID
+    type: string
+  - name: hovered
+    type: boolean
+  outputs:
+C_HousingDecor.SetPlacedDecorEntrySelected:
+  inputs:
+  - name: decorGUID
+    type: string
+  - name: selected
     type: boolean
   outputs:
 C_HousingExpertMode.CancelActiveEditing:
@@ -12445,9 +12871,6 @@ C_HousingExpertMode.CommitDecorMovement:
   inputs:
   outputs:
 C_HousingExpertMode.CommitHouseExteriorPosition:
-  inputs:
-  outputs:
-C_HousingExpertMode.DeleteDecor:
   inputs:
   outputs:
 C_HousingExpertMode.GetHoveredDecorInfo:
@@ -12505,6 +12928,9 @@ C_HousingExpertMode.IsHoveringDecor:
   outputs:
   - name: isHoveringDecor
     type: boolean
+C_HousingExpertMode.RemoveSelectedDecor:
+  inputs:
+  outputs:
 C_HousingExpertMode.ResetPrecisionChanges:
   inputs:
   - name: activeSubmodeOnly
@@ -12720,29 +13146,14 @@ C_HousingNeighborhood.CancelInviteToNeighborhood:
   - name: playerName
     type: string
   outputs:
-C_HousingNeighborhood.CanEditCharter:
+C_HousingNeighborhood.CanReturnAfterVisitingHouse:
   inputs:
   outputs:
-  - name: canEditCharter
+  - name: canReturn
     type: boolean
-C_HousingNeighborhood.CreateGuildNeighborhood:
-  inputs:
-  - name: neighborhoodName
-    type: string
-  outputs:
-C_HousingNeighborhood.CreateNeighborhoodCharter:
-  inputs:
-  - name: neighborhoodName
-    type: string
-  outputs:
 C_HousingNeighborhood.DemoteToResident:
   inputs:
   - name: playerGUID
-    type: string
-  outputs:
-C_HousingNeighborhood.EditNeighborhoodCharter:
-  inputs:
-  - name: neighborhoodName
     type: string
   outputs:
 C_HousingNeighborhood.GetCornerstoneHouseInfo:
@@ -12802,13 +13213,6 @@ C_HousingNeighborhood.GetPreviousHouseIdentifier:
   outputs:
   - name: previousHouseIdentifier
     type: string
-C_HousingNeighborhood.GetVisitCooldownInfo:
-  inputs:
-  mayreturnnothing: true
-  outputs:
-  - name: spellCooldownInfo
-    type:
-      structure: SpellCooldownInfo
 C_HousingNeighborhood.HasPermissionToPurchase:
   inputs:
   outputs:
@@ -12840,31 +13244,8 @@ C_HousingNeighborhood.IsPlotOwnedByPlayer:
   outputs:
   - name: isPlayerOwned
     type: boolean
-C_HousingNeighborhood.LeaveHouse:
-  inputs:
-  outputs:
 C_HousingNeighborhood.OnBulletinBoardClosed:
   inputs:
-  outputs:
-C_HousingNeighborhood.OnCharterConfirmationAccepted:
-  inputs:
-  outputs:
-C_HousingNeighborhood.OnCharterConfirmationClosed:
-  inputs:
-  outputs:
-C_HousingNeighborhood.OnCreateCharterNeighborhoodClosed:
-  inputs:
-  outputs:
-C_HousingNeighborhood.OnCreateGuildNeighborhoodClosed:
-  inputs:
-  outputs:
-C_HousingNeighborhood.OnRequestSignatureClicked:
-  inputs:
-  outputs:
-C_HousingNeighborhood.OnSignCharterClicked:
-  inputs:
-  - name: charterOwnerGUID
-    type: string
   outputs:
 C_HousingNeighborhood.PromoteToManager:
   inputs:
@@ -12879,18 +13260,6 @@ C_HousingNeighborhood.RequestNeighborhoodRoster:
   outputs:
 C_HousingNeighborhood.RequestPendingNeighborhoodInvites:
   inputs:
-  outputs:
-C_HousingNeighborhood.ReturnAfterVisitingHouse:
-  inputs:
-  outputs:
-C_HousingNeighborhood.TeleportHome:
-  inputs:
-  - name: neighborhoodGUID
-    type: string
-  - name: houseGUID
-    type: string
-  - name: plotID
-    type: number
   outputs:
 C_HousingNeighborhood.TransferNeighborhoodOwnership:
   inputs:
@@ -12907,28 +13276,6 @@ C_HousingNeighborhood.TryMoveHouse:
   outputs:
 C_HousingNeighborhood.TryPurchasePlot:
   inputs:
-  outputs:
-C_HousingNeighborhood.TryRenameNeighborhood:
-  inputs:
-  - name: neighborhoodName
-    type: string
-  outputs:
-C_HousingNeighborhood.ValidateCreateGuildNeighborhoodSize:
-  inputs:
-  outputs:
-C_HousingNeighborhood.ValidateNeighborhoodName:
-  inputs:
-  - name: neighborhoodName
-    type: string
-  outputs:
-C_HousingNeighborhood.VisitHouse:
-  inputs:
-  - name: neighborhoodGUID
-    type: string
-  - name: houseGUID
-    type: string
-  - name: plotID
-    type: number
   outputs:
 C_ImmersiveInteraction.HasImmersiveInteraction:
   inputs:
@@ -13808,6 +14155,14 @@ C_Item.IsCurrentItem:
     type: string
   outputs:
   - name: result
+    type: boolean
+C_Item.IsDecorItem:
+  inputs:
+  - name: itemInfo
+    type: string
+  outputs:
+  - name: isDecor
+    nilable: true
     type: boolean
 C_Item.IsDressableItemByID:
   inputs:
@@ -18357,11 +18712,6 @@ C_PlayerInfo.CanPlayerUseAreaLoot:
   outputs:
   - name: canUseAreaLoot
     type: boolean
-C_PlayerInfo.CanPlayerUseEventScheduler:
-  inputs:
-  outputs:
-  - name: canUseEventScheduler
-    type: boolean
 C_PlayerInfo.CanPlayerUseMountEquipment:
   inputs:
   outputs:
@@ -18594,6 +18944,11 @@ C_PlayerInfo.IsTradingPostAvailable:
   - name: isAvailable
     type: boolean
 C_PlayerInfo.IsTravelersLogAvailable:
+  inputs:
+  outputs:
+  - name: isAvailable
+    type: boolean
+C_PlayerInfo.IsTutorialsTabAvailable:
   inputs:
   outputs:
   - name: isAvailable
@@ -21797,7 +22152,7 @@ C_Sound.PlaySound:
   inputs:
   - name: soundKitID
     type: number
-  - default: SI3UISoundSubType_Default
+  - default: g_defaultSI3UISoundSubTypeForLua
     name: uiSoundSubType
     type: string
   - default: false
@@ -22367,6 +22722,13 @@ C_Spell.IsCurrentSpell:
     type: string
   outputs:
   - name: isCurrentSpell
+    type: boolean
+C_Spell.IsExternalDefensive:
+  inputs:
+  - name: spellID
+    type: number
+  outputs:
+  - name: isExternalDefensive
     type: boolean
 C_Spell.IsPressHoldReleaseSpell:
   inputs:
@@ -22988,6 +23350,38 @@ C_SpellBook.ToggleSpellBookItemAutoCast:
     type:
       enum: SpellBookSpellBank
   outputs:
+C_SpellDiminish.GetAllSpellDiminishCategories:
+  inputs:
+  - name: ruleset
+    nilable: true
+    type:
+      enum: SpellDiminishRuleset
+  outputs:
+  - name: categories
+    type:
+      arrayof:
+        structure: C_SpellDiminish.SpellDiminishCategoryInfo
+C_SpellDiminish.GetSpellDiminishCategoryInfo:
+  inputs:
+  - name: category
+    type:
+      enum: SpellDiminishCategory
+  outputs:
+  - name: categoryInfo
+    nilable: true
+    type:
+      structure: C_SpellDiminish.SpellDiminishCategoryInfo
+C_SpellDiminish.ShouldTrackSpellDiminishCategory:
+  inputs:
+  - name: category
+    type:
+      enum: SpellDiminishCategory
+  - name: ruleset
+    type:
+      enum: SpellDiminishRuleset
+  outputs:
+  - name: isTracked
+    type: boolean
 C_SplashScreen.AcknowledgeSplash:
   inputs:
   outputs:
@@ -24486,6 +24880,20 @@ C_TooltipInfo.GetUnitAura:
   - name: unitToken
     type: unit
   - name: index
+    type: number
+  - name: filter
+    nilable: true
+    type: string
+  mayreturnnothing: true
+  outputs:
+  - name: data
+    type:
+      structure: TooltipData
+C_TooltipInfo.GetUnitAuraByAuraInstanceID:
+  inputs:
+  - name: unitToken
+    type: unit
+  - name: auraInstanceID
     type: number
   - name: filter
     nilable: true
@@ -27802,6 +28210,16 @@ C_UnitAuras.GetAuraDataBySpellName:
     nilable: true
     type:
       structure: AuraData
+C_UnitAuras.GetAuraDurationRemainingByAuraInstanceID:
+  inputs:
+  - name: unit
+    type: unit
+  - name: auraInstanceID
+    type: number
+  outputs:
+  - name: durationRemaining
+    nilable: true
+    type: number
 C_UnitAuras.GetAuraSlots:
   inputs:
   - name: unit
@@ -28589,7 +29007,8 @@ C_VoiceChat.SpeakText:
     type: number
   - name: volume
     type: number
-  - name: overlap
+  - default: false
+    name: overlap
     type: boolean
   outputs:
 C_VoiceChat.StopSpeakingText:
@@ -29269,7 +29688,6 @@ CastSpellByName:
 CenterCamera:
   inputs:
   outputs:
-ChangeActionBarPage:
 ChangeChatColor:
 ChannelBan:
 ChannelInvite:
@@ -29834,6 +30252,13 @@ EquipPendingItem:
   outputs:
 error:
   impl: error
+EscapeQuotedCodes:
+  inputs:
+  - name: text
+    type: string
+  outputs:
+  - name: escaped
+    type: string
 ExpandGuildTradeSkillHeader:
 ExpandQuestHeader:
 ExpandWarGameHeader:
@@ -29972,11 +30397,6 @@ GetAchievementNumRewards:
 GetAchievementReward:
 GetAchievementSearchProgress:
 GetAchievementSearchSize:
-GetActionAutocast:
-GetActionBarPage:
-  inputs:
-  outputs:
-  - type: number
 GetActionBarToggles:
   inputs:
   outputs:
@@ -29994,32 +30414,7 @@ GetActionBarToggles:
     type: boolean
   - name: extra3State
     type: boolean
-GetActionCharges:
-GetActionCooldown:
-  inputs:
-  - name: action
-    type: number
-  outputs:
-  - name: start
-    type: number
-  - name: duration
-    type: number
-  - name: enable
-    type: number
-  - name: modRate
-    type: number
-GetActionCount:
-  outputs:
-  - type: number
 GetActionInfo:
-GetActionLossOfControlCooldown:
-  inputs:
-  - type: number
-  outputs:
-  - type: number
-  - type: number
-GetActionText:
-GetActionTexture:
 GetActiveArtifactByRace:
 GetActiveLevel:
 GetActiveLootRollIDs:
@@ -30281,8 +30676,6 @@ GetBlockChance:
   outputs:
   - name: result
     type: number
-GetBonusBarIndex:
-GetBonusBarOffset:
 GetBuildInfo:
   impl: GetBuildInfo_10_1
   inputs:
@@ -30754,11 +31147,6 @@ GetExpertisePercent:
   - name: offhandExpertisePercent
     type: number
   - name: rangedExpertisePercent
-    type: number
-GetExtraBarIndex:
-  inputs:
-  outputs:
-  - name: value
     type: number
 GetFailedPVPTalentIDs:
 GetFailedTalentIDs:
@@ -31917,9 +32305,6 @@ GetMovieDownloadProgress:
     type: number
   - name: total
     type: number
-GetMultiCastBarIndex:
-  outputs:
-  - type: number
 GetMultiCastTotemSpells:
 GetNativeRealmID:
   inputs:
@@ -32231,11 +32616,6 @@ GetOverrideAPBySpellPower:
   outputs:
   - name: result
     type: number
-GetOverrideBarIndex:
-  inputs:
-  outputs:
-  - type: number
-GetOverrideBarSkin:
 GetOverrideSpellPowerByAP:
   inputs:
   outputs:
@@ -33224,7 +33604,6 @@ GetTaxiBenchmarkMode:
   - name: result
     type: boolean
 GetTaxiMapID:
-GetTempShapeshiftBarIndex:
 GetText:
   inputs:
   - name: token
@@ -33633,10 +34012,6 @@ GetUpgradeExpansionLevel:
   outputs:
   - name: upgradeExpansionLevel
     type: number
-GetVehicleBarIndex:
-  inputs:
-  outputs:
-  - type: number
 GetVehicleUIIndicator:
   inputs:
   - name: vehicleIndicatorID
@@ -33736,7 +34111,6 @@ GuildNewsSort:
 GuildRosterSetOfficerNote:
 GuildRosterSetPublicNote:
 HandleAtlasMemberCommand:
-HasAction:
 HasAPEffectsSpellPower:
   inputs:
   outputs:
@@ -33747,17 +34121,11 @@ HasArtifactEquipped:
   outputs:
   - type: oneornil
 HasAttachedGlyph:
-HasBonusActionBar:
 HasCompletedAnyAchievement:
 HasDualWieldPenalty:
   inputs:
   outputs:
   - name: result
-    type: boolean
-HasExtraActionBar:
-  inputs:
-  outputs:
-  - name: value
     type: boolean
 HasFullControl:
   inputs:
@@ -33799,7 +34167,6 @@ HasNoReleaseAura:
     type: number
   - name: hasUntilCancelledDuration
     type: boolean
-HasOverrideActionBar:
 HasPendingGlyphCast:
 HasPetUI:
 HasSendMailItem:
@@ -33814,8 +34181,6 @@ HasSPEffectsAttackPower:
   outputs:
   - name: result
     type: boolean
-HasTempShapeshiftActionBar:
-HasVehicleActionBar:
 HasWandEquipped:
 HaveQuestData:
   inputs:
@@ -33887,7 +34252,6 @@ IsAccountSecured:
   - name: result
     type: boolean
 IsAchievementEligible:
-IsActionInRange:
 IsActiveBattlefieldArena:
 IsActiveQuestTrivial:
   inputs:
@@ -33909,20 +34273,6 @@ IsAltKeyDown:
     type: boolean
 IsArenaSkirmish:
 IsArtifactCompletionHistoryAvailable:
-IsAttackAction:
-  inputs:
-  - name: action
-    type: number
-  outputs:
-  - name: value
-    type: boolean
-IsAutoRepeatAction:
-  inputs:
-  - name: action
-    type: number
-  outputs:
-  - name: value
-    type: boolean
 IsAvailableQuestTrivial:
 IsBetaBuild:
   inputs:
@@ -33946,7 +34296,6 @@ IsCharacterNewlyBoosted:
 IsChatAFK:
 IsChatChannelRaid:
 IsChatDND:
-IsConsumableAction:
 IsConsumableSpell:
   inputs:
   - name: spellName
@@ -33965,13 +34314,6 @@ IsCpuBound:
   outputs:
   - name: isCpuBound
     nilable: true
-    type: boolean
-IsCurrentAction:
-  inputs:
-  - name: action
-    type: number
-  outputs:
-  - name: value
     type: boolean
 IsCurrentQuestFailed:
 IsDebugBuild:
@@ -33997,7 +34339,6 @@ IsDualWielding:
   outputs:
   - name: result
     type: boolean
-IsEquippedAction:
 IsEuropeanNumbers:
   inputs:
   outputs:
@@ -34097,7 +34438,6 @@ IsInsane:
 IsInScenarioGroup:
 IsInventoryItemLocked:
 IsInventoryItemProfessionBag:
-IsItemAction:
 IsItemPreferredArmorType:
   inputs:
   - name: itemLocation
@@ -34287,7 +34627,6 @@ IsPlayerMoving:
   - name: result
     type: boolean
 IsPlayerNeutral:
-IsPossessBarVisible:
 IsPublicBuild:
   impl: IsPublicBuild
   inputs:
@@ -34392,7 +34731,6 @@ IsShiftKeyDown:
 IsSpecializationActivateSpell:
 IsSpellClassOrSpec:
 IsSpellValidForPendingGlyph:
-IsStackableAction:
 IsStealthed:
   inputs:
   outputs:
@@ -34456,7 +34794,6 @@ IsUnitModelReadyForUI:
   outputs:
   - name: isReady
     type: boolean
-IsUsableAction:
 IsUsingFixedTimeStep:
   inputs:
   outputs:
@@ -35193,7 +35530,6 @@ SendSystemMessage:
 SetAchievementComparisonUnit:
 SetAchievementSearchString:
 SetActionBarToggles:
-SetActionUIButton:
 SetAllowDangerousScripts:
   inputs:
   - default: false
@@ -36364,6 +36700,19 @@ UnitHealthPercent:
   outputs:
   - name: percent
     type: number
+UnitHealthPercentColor:
+  inputs:
+  - name: unit
+    type: unit
+  - name: colorCurve
+    type: table
+  - default: true
+    name: usePredicted
+    type: boolean
+  outputs:
+  - name: color
+    type:
+      structure: colorRGBA
 UnitHonor:
   inputs:
   - name: unit
@@ -37228,6 +37577,13 @@ UnitSexBase:
     type:
       enum: UnitSex
 UnitShouldDisplayName:
+  inputs:
+  - name: unit
+    type: unit
+  outputs:
+  - name: result
+    type: boolean
+UnitShouldDisplaySpellTargetName:
   inputs:
   - name: unit
     type: unit

@@ -4220,6 +4220,10 @@ DAILY_RESET_INSTANCE_WELCOME:
     type: number
 DEBUG_MENU_TOGGLED:
   payload:
+DECLINE_NEIGHBORHOOD_INVITATION_RESPONSE:
+  payload:
+  - name: success
+    type: boolean
 DELETE_ITEM_CONFIRM:
   payload:
   - name: itemName
@@ -4457,6 +4461,12 @@ EXPERIMENTAL_CVAR_CONFIRMATION_NEEDED:
 EXTRA_BROWSE_INFO_RECEIVED:
   payload:
   - name: itemID
+    type: number
+FACTION_STANDING_CHANGED:
+  payload:
+  - name: factionID
+    type: number
+  - name: updatedStanding
     type: number
 FIRST_FRAME_RENDERED:
   payload:
@@ -5084,6 +5094,14 @@ HOUSING_BASIC_MODE_HOVERED_TARGET_CHANGED:
   - name: targetType
     type:
       enum: HousingBasicModeTargetType
+HOUSING_BASIC_MODE_PLACEMENT_FLAGS_UPDATED:
+  payload:
+  - name: targetType
+    type:
+      enum: HousingBasicModeTargetType
+  - name: placementInfo
+    type:
+      structure: C_HousingBasicMode.InvalidPlacementInfo
 HOUSING_BASIC_MODE_SELECTED_TARGET_CHANGED:
   payload:
   - name: hasSelectedTarget
@@ -5165,9 +5183,13 @@ HOUSING_DECOR_PLACE_FAILURE:
       enum: HousingResult
 HOUSING_DECOR_PLACE_SUCCESS:
   payload:
+  - name: decorGUID
+    type: string
   - name: size
     type:
       enum: HousingCatalogEntrySize
+  - name: isNew
+    type: boolean
 HOUSING_DECOR_PRECISION_MANIPULATION_EVENT:
   payload:
   - name: event
@@ -5195,6 +5217,8 @@ HOUSING_DECOR_PREVIEW_STATE_CHANGED:
     type: boolean
 HOUSING_DECOR_REMOVED:
   payload:
+  - name: decorGUID
+    type: string
 HOUSING_DECOR_SELECT_RESPONSE:
   payload:
   - name: result
@@ -5309,6 +5333,15 @@ HOUSING_MARKET_AVAILABILITY_UPDATED:
   payload:
 HOUSING_NUM_DECOR_PLACED_CHANGED:
   payload:
+HOUSING_ROOM_COMPONENT_CUSTOMIZATION_CHANGE_FAILED:
+  payload:
+  - name: roomGUID
+    type: string
+  - name: componentID
+    type: number
+  - name: housingResult
+    type:
+      enum: HousingResult
 HOUSING_ROOM_COMPONENT_CUSTOMIZATION_CHANGED:
   payload:
   - name: roomGUID
@@ -6092,11 +6125,6 @@ NEIGHBORHOOD_NAME_VALIDATED:
   payload:
   - name: approved
     type: boolean
-NEIGHBORHOOD_TYPE_CHANGED:
-  payload:
-  - name: result
-    type:
-      enum: HousingResult
 NEUTRAL_FACTION_SELECT_RESULT:
   payload:
   - name: success
@@ -8549,6 +8577,13 @@ UNIT_RESISTANCES:
   payload:
   - name: unitTarget
     type: unit
+UNIT_SPELL_DIMINISH_CATEGORY_STATE_UPDATED:
+  payload:
+  - name: unitTarget
+    type: unit
+  - name: trackerInfo
+    type:
+      structure: C_SpellDiminish.SpellDiminishTrackerInfo
 UNIT_SPELL_HASTE:
   payload:
   - name: unitTarget

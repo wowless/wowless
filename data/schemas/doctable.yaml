@@ -8,9 +8,13 @@ type:
       type:
         sequenceof:
           record:
+            CallbackEvent:
+              type: boolean
             Documentation:
               type:
                 sequenceof: string
+            HasRestrictions:
+              type: boolean
             LiteralName:
               required: true
               type: string
@@ -43,14 +47,20 @@ type:
                     Type:
                       required: true
                       type: string
+            RequireNPERestricted:
+              type: boolean
             SecretPayloads:
               type: boolean
             SecretWhenAurasRestricted:
+              type: boolean
+            SynchronousEvent:
               type: boolean
             Type:
               required: true
               type:
                 literal: Event
+            UniqueEvent:
+              type: boolean
     Functions:
       type:
         sequenceof:
@@ -59,6 +69,8 @@ type:
               type:
                 sequenceof:
                   record:
+                    ConditionalSecret:
+                      type: boolean
                     Default:
                       type: any
                     Documentation:
@@ -119,6 +131,10 @@ type:
               type: boolean
             RequiresRecentAllies:
               type: boolean
+            RequiresSpellDiminishUI:
+              type: boolean
+            RequiresValidActionSlot:
+              type: boolean
             RequiresValidAndPublicCVar:
               type: boolean
             RequiresValidInviteTarget:
@@ -172,6 +188,8 @@ type:
             SecretWhenAurasRestricted:
               type: boolean
             SecretWhenCooldownsRestricted:
+              type: boolean
+            SecretWhenInCombat:
               type: boolean
             Type:
               required: true

@@ -122,6 +122,8 @@ lies:
     HousingCatalogSearcherAPI:
     HousingFixturePointFrameAPI:
     HousingLayoutPinFrameAPI:
+    LuaColorCurveObjectAPI:
+    LuaCurveObjectAPI:
     PingPinFrameAPI:
     SimpleMapSceneAPI:
     SimpleModelFFXAPI:
@@ -431,6 +433,9 @@ typedefs:
     type: string
   ConnectionIptype:
     type: string
+  CooldownFrame:
+    type:
+      uiobject: Cooldown
   CScriptObject:
     outnil: true
     type:
@@ -474,6 +479,10 @@ typedefs:
     type: string
   kstringLfgListSearch:
     type: string
+  LuaColorCurveObject:
+    type: table
+  LuaCurveObject:
+    type: table
   luaFunction:
     type: function
   luaIndex:
@@ -518,6 +527,9 @@ typedefs:
   SimpleAnimGroup:
     type:
       uiobject: AnimationGroup
+  SimpleCheckbox:
+    type:
+      uiobject: CheckButton
   SimpleControlPoint:
     type:
       uiobject: ControlPoint

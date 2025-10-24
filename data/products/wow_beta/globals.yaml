@@ -101,7 +101,6 @@ Constants:
     HOUSING_CATALOG_ALL_CATEGORY_ID: 18
     HOUSING_CATALOG_CATEGORIES_EXPECTED: 20
     HOUSING_CATALOG_DECOR_MODELSCENEID_DEFAULT: 1317
-    HOUSING_CATALOG_DECOR_MODELSCENEID_FLAT: 1318
     HOUSING_CATALOG_ENTRY_TAGS_EXPECTED: 5
     HOUSING_CATALOG_FEATURED_CATEGORY_ID: 17
     HOUSING_CATALOG_FILTER_TAGS_EXPECTED: 90
@@ -306,16 +305,6 @@ Enum:
     MaxValue: 13
     MinValue: 0
     NumValues: 14
-  AccountHousingLoadProgress:
-    None: 0
-    OwnedHomes: 2
-    OwnedNeighborhoods: 4
-    PendingHousingItems: 8
-    Storage: 1
-  AccountHousingLoadProgressMeta:
-    MaxValue: 8
-    MinValue: 0
-    NumValues: 5
   AccountSequenceCacheType:
     HouseDecor: 2
     Invalid: 0
@@ -822,6 +811,14 @@ Enum:
     MaxValue: 1
     MinValue: 0
     NumValues: 2
+  AuraFrameVisibleSetting:
+    Always: 0
+    Hidden: 2
+    InCombat: 1
+  AuraFrameVisibleSettingMeta:
+    MaxValue: 2
+    MinValue: 0
+    NumValues: 3
   AvgItemLevelCategories:
     Base: 0
     EquippedBase: 1
@@ -3258,6 +3255,7 @@ Enum:
     ShowDurabilityFrame: 21
     ShowEncounterBar: 8
     ShowEncounterEvents: 30
+    ShowExternalDefensives: 32
     ShowExtraAbilities: 9
     ShowGrid: 0
     ShowHudTooltip: 19
@@ -3276,9 +3274,9 @@ Enum:
     ShowVehicleLeaveButton: 15
     ShowVehicleSeatIndicator: 26
   EditModeAccountSettingMeta:
-    MaxValue: 31
+    MaxValue: 32
     MinValue: 0
-    NumValues: 32
+    NumValues: 33
   EditModeActionBarSetting:
     AlwaysShowButtons: 9
     DeprecatedSnapToSide: 7
@@ -3324,18 +3322,21 @@ Enum:
     IconPadding: 6
     IconSize: 5
     IconWrap: 1
+    Opacity: 9
     Orientation: 0
+    VisibleSetting: 8
   EditModeAuraFrameSettingMeta:
-    MaxValue: 7
+    MaxValue: 9
     MinValue: 0
-    NumValues: 8
+    NumValues: 10
   EditModeAuraFrameSystemIndices:
     BuffFrame: 1
     DebuffFrame: 2
+    ExternalDefensivesFrame: 3
   EditModeAuraFrameSystemIndicesMeta:
-    MaxValue: 2
+    MaxValue: 3
     MinValue: 1
-    NumValues: 2
+    NumValues: 3
   EditModeBagsSetting:
     BagSlotPadding: 3
     Direction: 1
@@ -3468,14 +3469,13 @@ Enum:
     MinValue: 0
     NumValues: 3
   EditModePersonalResourceDisplaySetting:
-    HideHealthAndPower: 2
-    OnlyShowInCombat: 3
+    HideHealthAndPower: 1
+    OnlyShowInCombat: 2
     ShowFriendlyBuffs: 0
-    ShowResourceOnTarget: 1
   EditModePersonalResourceDisplaySettingMeta:
-    MaxValue: 3
+    MaxValue: 2
     MinValue: 0
-    NumValues: 4
+    NumValues: 3
   EditModePresetLayouts:
     Classic: 1
     Modern: 0
@@ -3632,16 +3632,18 @@ Enum:
     MaxValue: 5
     MinValue: 0
     NumValues: 6
-  EncounterTimelineEventDispelType:
+  EncounterTimelineEventEffectType:
+    Bleed: 6
     Curse: 3
     Disease: 4
+    Enrage: 5
     Magic: 2
     None: 0
     Poison: 1
-  EncounterTimelineEventDispelTypeMeta:
-    MaxValue: 4
+  EncounterTimelineEventEffectTypeMeta:
+    MaxValue: 6
     MinValue: 0
-    NumValues: 5
+    NumValues: 7
   EncounterTimelineEventPriority:
     Deadly: 1
     Normal: 0
@@ -3976,6 +3978,7 @@ Enum:
     HousingDecorPlace: 24
     HousingHouseFinderMap: 28
     HousingHouseFinderVisitHouse: 29
+    HousingInvalidCollision: 37
     HousingItemAcquisition: 30
     HousingMarketTab: 34
     HousingNewPip: 31
@@ -3995,9 +3998,9 @@ Enum:
     TransferableCurrencies: 10
     TransmogSetsTab: 4
   FrameTutorialAccountMeta:
-    MaxValue: 36
+    MaxValue: 37
     MinValue: 1
-    NumValues: 36
+    NumValues: 37
   GameMode:
     Plunderstorm: 2
     Standard: 1
@@ -4454,6 +4457,7 @@ Enum:
     Stablemaster: 12
     TalentMaster: 11
     Taxinode: 2
+    TieredEntrance: 66
     Trainer: 3
     TraitSystem: 51
     Transmogrify: 34
@@ -4468,9 +4472,9 @@ Enum:
     MinValue: 1
     NumValues: 1
   GossipNpcOptionMeta:
-    MaxValue: 65
+    MaxValue: 66
     MinValue: 0
-    NumValues: 66
+    NumValues: 67
   GossipOptionRecFlags:
     HideOptionIDFromClient: 2
     PlayMovieLabelPrepend: 4
@@ -4709,6 +4713,20 @@ Enum:
     MaxValue: 2
     MinValue: 0
     NumValues: 3
+  HousingCatalogEntryModelScenePresets:
+    DecorCeiling: 1338
+    DecorDefault: 1317
+    DecorFlat: 1318
+    DecorHuge: 1337
+    DecorLarge: 1336
+    DecorMedium: 1335
+    DecorSmall: 1334
+    DecorTiny: 1333
+    DecorWall: 1339
+  HousingCatalogEntryModelScenePresetsMeta:
+    MaxValue: 1339
+    MinValue: 1317
+    NumValues: 9
   HousingCatalogEntrySize:
     Huge: 69
     Large: 68
@@ -4762,38 +4780,15 @@ Enum:
     MaintainLastTarget: 256
     None: 0
     PrecisionMove: 8
-    PreviewDecor: 1024
+    PreviewDecor: 2048
     Remove: 2
     TargetHouseExterior: 128
     TargetRoomComponents: 64
+    UsePlacedDecorList: 1024
   HousingDecorActionFlagsMeta:
-    MaxValue: 1024
+    MaxValue: 2048
     MinValue: 0
-    NumValues: 12
-  HousingDecorDeleteReason:
-    Cheat: 2
-    CustomerService: 3
-    None: 0
-    PlayerDestroyed: 1
-  HousingDecorDeleteReasonMeta:
-    MaxValue: 3
-    MinValue: 0
-    NumValues: 4
-  HousingDecorFlags:
-    AllowOnPedestal: 16
-    CreateAsGameObjectProxy: 32
-    Deprecated: 64
-    Exterior: 1
-    HiddenInCatalog: 128
-    Interior: 2
-    None: 0
-    NonRemovable: 8
-    PreventRemovalFromHouseChest: 256
-    Unlimited: 4
-  HousingDecorFlagsMeta:
-    MaxValue: 256
-    MinValue: 0
-    NumValues: 10
+    NumValues: 13
   HousingDecorModelType:
     M2: 1
     None: 0
@@ -4811,19 +4806,6 @@ Enum:
     MaxValue: 8
     MinValue: 1
     NumValues: 4
-  HousingDecorSourceType:
-    Cheat: 1
-    DeferredRedeem: 3
-    Entitlement: 7
-    Import: 4
-    Invalid: 0
-    Item: 6
-    Spell: 5
-    StarterHouse: 2
-  HousingDecorSourceTypeMeta:
-    MaxValue: 7
-    MinValue: 0
-    NumValues: 8
   HousingDecorTheme:
     BloodElf: 5
     Folk: 1
@@ -4842,16 +4824,6 @@ Enum:
     None: 0
     Wall: 2
   HousingDecorTypeMeta:
-    MaxValue: 4
-    MinValue: 0
-    NumValues: 5
-  HousingDeleteReason:
-    Cheat: 1
-    CustomerService: 2
-    Evicted: 4
-    None: 0
-    Relinquished: 3
-  HousingDeleteReasonMeta:
     MaxValue: 4
     MinValue: 0
     NumValues: 5
@@ -4904,14 +4876,6 @@ Enum:
     MaxValue: 16
     MinValue: 0
     NumValues: 9
-  HousingHouseScope:
-    Exterior: 2
-    Interior: 1
-    None: 0
-  HousingHouseScopeMeta:
-    MaxValue: 2
-    MinValue: 0
-    NumValues: 3
   HousingIncrementType:
     Back: 8
     Down: 32
@@ -4975,36 +4939,6 @@ Enum:
     MaxValue: 1
     MinValue: 0
     NumValues: 2
-  HousingPermission:
-    AddDecor: 1
-    ChangeDecorParam: 2
-    EditAlterations: 128
-    EditFixtures: 64
-    EditLayout: 32
-    EnterDecorEditMode: 4
-    MoveDecor: 8
-    RemoveDecor: 16
-  HousingPermissionFlags:
-    PlayersAreFriends: 2
-    PlayersAreGuildMates: 4
-    PlayersAreNeighbors: 16
-    PlayersArePartyMates: 8
-    SourceIsIgnored: 1
-  HousingPermissionFlagsMeta:
-    MaxValue: 16
-    MinValue: 1
-    NumValues: 5
-  HousingPermissionMeta:
-    MaxValue: 128
-    MinValue: 1
-    NumValues: 8
-  HousingPlacedDecorFlags:
-    None: 0
-    PrecisionRotationApplied: 1
-  HousingPlacedDecorFlagsMeta:
-    MaxValue: 1
-    MinValue: 0
-    NumValues: 2
   HousingPlotOwnerType:
     Friend: 2
     None: 0
@@ -5031,78 +4965,81 @@ Enum:
     MinValue: 0
     NumValues: 3
   HousingResult:
-    CannotAfford: 1
-    CharterComplete: 2
-    CollisionInvalid: 3
-    DbError: 4
-    DecorCannotBeRedeemed: 5
-    DecorItemNotDestroyable: 6
-    DecorNotFound: 7
-    DecorNotFoundInStorage: 8
-    DuplicateCharterSignature: 9
-    FilterRejected: 10
-    FixtureCantDeleteDoor: 11
-    FixtureHookEmpty: 12
-    FixtureHookOccupied: 13
-    FixtureHouseTypeMismatch: 14
-    FixtureNotFound: 15
-    FixtureNotOwned: 16
-    FixtureSizeMismatch: 17
-    FixtureTypeMismatch: 18
-    GenericFailure: 19
-    GuildNotLoaded: 20
-    HookNotChildOfFixture: 22
-    HouseExteriorRootNotFound: 21
-    HouseNotFound: 23
-    IncorrectFaction: 24
-    InvalidDecorItem: 25
-    InvalidDistance: 26
-    InvalidGuild: 27
-    InvalidHouse: 28
-    InvalidInstance: 29
-    InvalidInteraction: 30
-    InvalidMap: 31
-    InvalidNeighborhoodName: 32
-    InvalidRoomLayout: 33
-    LockedByOtherPlayer: 34
-    LockOperationFailed: 35
-    MaxDecorReached: 36
-    MissingCoreFixture: 37
-    MissingDye: 38
-    MissingExpansionAccess: 39
-    MissingFactionMap: 40
-    MissingPrivateNeighborhoodInvite: 41
-    MoreHouseSlotsNeeded: 42
-    MoreSignaturesNeeded: 43
-    NeighborhoodNotFound: 44
-    NotInDecorEditMode: 45
-    NotInFixtureEditMode: 46
-    NotInLayoutEditMode: 47
-    NotInsideHouse: 48
-    NotOnOwnedPlot: 49
-    OperationAborted: 50
-    PermissionDenied: 51
-    PlacementTargetInvalid: 52
-    PlayerNotInInstance: 53
-    PlotNotFound: 54
-    PlotNotVacant: 55
-    PlotReservationCooldown: 56
-    PlotReserved: 57
-    RoomNotFound: 58
-    RoomUpdateFailed: 59
-    RpcFailure: 60
-    ServiceNotAvailable: 61
+    ActionLockedByCombat: 1
+    CannotAfford: 2
+    CharterComplete: 3
+    CollisionInvalid: 4
+    DbError: 5
+    DecorCannotBeRedeemed: 6
+    DecorItemNotDestroyable: 7
+    DecorNotFound: 8
+    DecorNotFoundInStorage: 9
+    DuplicateCharterSignature: 10
+    FilterRejected: 11
+    FixtureCantDeleteDoor: 12
+    FixtureHookEmpty: 13
+    FixtureHookOccupied: 14
+    FixtureHouseTypeMismatch: 15
+    FixtureNotFound: 16
+    FixtureNotOwned: 17
+    FixtureSizeMismatch: 18
+    FixtureTypeMismatch: 19
+    GenericFailure: 20
+    GuildNotLoaded: 21
+    HookNotChildOfFixture: 23
+    HouseExteriorRootNotFound: 22
+    HouseNotFound: 24
+    IncorrectFaction: 25
+    InvalidDecorItem: 26
+    InvalidDistance: 27
+    InvalidGuild: 28
+    InvalidHouse: 29
+    InvalidInstance: 30
+    InvalidInteraction: 31
+    InvalidMap: 32
+    InvalidNeighborhoodName: 33
+    InvalidRoomLayout: 34
+    LockedByOtherPlayer: 35
+    LockOperationFailed: 36
+    MaxDecorReached: 37
+    MissingCoreFixture: 38
+    MissingDye: 39
+    MissingExpansionAccess: 40
+    MissingFactionMap: 41
+    MissingPrivateNeighborhoodInvite: 42
+    MissingTheme: 43
+    MoreHouseSlotsNeeded: 44
+    MoreSignaturesNeeded: 45
+    NeighborhoodNotFound: 46
+    NoNeighborhoodOwnershipRequests: 48
+    NotInDecorEditMode: 47
+    NotInFixtureEditMode: 49
+    NotInLayoutEditMode: 50
+    NotInsideHouse: 51
+    NotOnOwnedPlot: 52
+    OperationAborted: 53
+    PermissionDenied: 54
+    PlacementTargetInvalid: 55
+    PlayerNotInInstance: 56
+    PlotNotFound: 57
+    PlotNotVacant: 58
+    PlotReservationCooldown: 59
+    PlotReserved: 60
+    RoomNotFound: 61
+    RoomUpdateFailed: 62
+    RpcFailure: 63
+    ServiceNotAvailable: 64
     Success: 0
-    TimeoutLimit: 62
-    TimerunningNotAllowed: 63
-    TokenRequired: 64
-    TooManyRequests: 65
-    TransactionFailure: 66
-    UnlockOperationFailed: 67
+    TimeoutLimit: 65
+    TimerunningNotAllowed: 66
+    TokenRequired: 67
+    TooManyRequests: 68
+    TransactionFailure: 69
+    UnlockOperationFailed: 70
   HousingResultMeta:
-    MaxValue: 67
+    MaxValue: 70
     MinValue: 0
-    NumValues: 68
+    NumValues: 71
   HousingRoomComponentCeilingType:
     Flat: 0
     Vaulted: 1
@@ -5158,16 +5095,17 @@ Enum:
     NumValues: 2
   HousingRoomComponentType:
     Ceiling: 3
-    Doorway: 6
+    Doorway: 7
+    DoorwayWall: 6
     Floor: 2
     None: 0
     Pillar: 5
     Stairs: 4
     Wall: 1
   HousingRoomComponentTypeMeta:
-    MaxValue: 6
+    MaxValue: 7
     MinValue: 0
-    NumValues: 7
+    NumValues: 8
   HousingRoomFlags:
     BaseRoom: 1
     HasCustomGeometry: 8
@@ -5178,78 +5116,6 @@ Enum:
     MaxValue: 8
     MinValue: 0
     NumValues: 5
-  HousingRpcCode:
-    RpcErrorAccountDataNotLoaded: 1
-    RpcErrorAlreadyOwner: 2
-    RpcErrorBannedAccountsLookup: 3
-    RpcErrorCharacterNotInWarband: 4
-    RpcErrorDbErrorGeneric: 5
-    RpcErrorDbErrorUniqueKey: 6
-    RpcErrorDecorAlreadyInHouse: 7
-    RpcErrorDecorAlreadyInStorage: 8
-    RpcErrorDecorLockFailed: 9
-    RpcErrorDecorNotFound: 10
-    RpcErrorDecorNotInStorage: 11
-    RpcErrorDecorRecordNotFound: 13
-    RpcErrorDecorRevoked: 12
-    RpcErrorDeferredDecorAlreadyRedeemed: 14
-    RpcErrorFactionMismatch: 15
-    RpcErrorGeneric: 16
-    RpcErrorGuildDataNotLoaded: 17
-    RpcErrorGuildMoreAccountsNeeded: 18
-    RpcErrorGuildMoreActivePlayersNeeded: 19
-    RpcErrorHasExistingPlotReservation: 20
-    RpcErrorHouseGuildMismatchNewOwner: 21
-    RpcErrorHouseIndexNotAvailable: 22
-    RpcErrorHouseListLockFailed: 23
-    RpcErrorHouseLockFailed: 24
-    RpcErrorHouseNotFound: 25
-    RpcErrorHousingFeatureNotEnabled: 56
-    RpcErrorInstanceNotFound: 26
-    RpcErrorInstanceShutdownFailure: 27
-    RpcErrorInstanceStartupFailure: 28
-    RpcErrorInstanceTrackerLostConnection: 29
-    RpcErrorInstanceWasDeleted: 30
-    RpcErrorInvalidFaction: 34
-    RpcErrorInvalidMap: 31
-    RpcErrorInviteLimitReached: 33
-    RpcErrorInviteNotFound: 32
-    RpcErrorInvitesBlocked: 35
-    RpcErrorManagerLimitReached: 36
-    RpcErrorMaxInstancesPerGuidReached: 37
-    RpcErrorNeighborhoodDataNotLoaded: 38
-    RpcErrorNeighborhoodLimit: 39
-    RpcErrorNeighborhoodLockFailed: 40
-    RpcErrorNeighborhoodNameInvalid: 41
-    RpcErrorNeighborhoodNotFound: 42
-    RpcErrorNeighborhoodPoolNotFound: 43
-    RpcErrorNoAvailableHouseSlots: 44
-    RpcErrorNoPermission: 45
-    RpcErrorPlotAlreadyReserved: 46
-    RpcErrorPlotAlreadyReservedByMe: 47
-    RpcErrorPlotLockFailed: 48
-    RpcErrorPlotNotVacant: 49
-    RpcErrorPlotReservationCooldown: 50
-    RpcErrorPlotReservationNotFound: 51
-    RpcErrorPlotReservationsNotLoaded: 52
-    RpcErrorResidentNotFound: 53
-    RpcErrorServiceNotReady: 54
-    RpcErrorServiceUnavailable: 55
-    RpcErrorTimeout: 57
-    RpcErrorUnexpectedHello: 58
-    RpcOk: 0
-  HousingRpcCodeMeta:
-    MaxValue: 58
-    MinValue: 0
-    NumValues: 59
-  HousingStorageDecorFlags:
-    Licensed: 1
-    None: 0
-    Revoke: 2
-  HousingStorageDecorFlagsMeta:
-    MaxValue: 2
-    MinValue: 0
-    NumValues: 3
   HousingThemeFlags:
     None: 0
     UnlockedByDefault: 1
@@ -5774,6 +5640,9 @@ Enum:
     CraftingSkillLineAbilityID: 39
     CraftingSkillReagents: 41
     CraftingSkillWatermark: 42
+    CurrencyWalletID: 61
+    CurrencyWalletQuantity: 62
+    CurrencyWalletVersion: 63
     DbidHigh: 59
     DbidLow: 60
     IncrementLevelObsolete: 2
@@ -5807,9 +5676,9 @@ Enum:
     TransmogrifySecondaryItemModifiedAppearanceIDSpec_4: 36
     TransmogrifySecondaryItemModifiedAppearanceIDSpecAll: 31
   ItemModificationMeta:
-    MaxValue: 60
+    MaxValue: 63
     MinValue: 0
-    NumValues: 61
+    NumValues: 64
   ItemProfessionSubclass:
     Alchemy: 2
     Archaeology: 13
@@ -6329,6 +6198,15 @@ Enum:
     Money: 2
     None: 0
   LootSlotTypeMeta:
+    MaxValue: 3
+    MinValue: 0
+    NumValues: 4
+  LuaCurveType:
+    Cosine: 2
+    Cubic: 3
+    Linear: 0
+    Step: 1
+  LuaCurveTypeMeta:
     MaxValue: 3
     MinValue: 0
     NumValues: 4
@@ -7331,6 +7209,7 @@ Enum:
     StableMaster: 22
     TalentMaster: 15
     TaxiNode: 6
+    TieredEntrance: 79
     TradePartner: 1
     Trainer: 7
     TraitSystem: 61
@@ -7341,9 +7220,9 @@ Enum:
     WeeklyRewards: 49
     WorldMap: 29
   PlayerInteractionTypeMeta:
-    MaxValue: 78
+    MaxValue: 79
     MinValue: 0
-    NumValues: 79
+    NumValues: 80
   PlayerMentorshipApplicationResult:
     AlreadyMentor: 1
     Ineligible: 2
@@ -8094,6 +7973,13 @@ Enum:
     MaxValue: 3
     MinValue: 0
     NumValues: 4
+  RetroactiveDecorRewardFlags:
+    AllCriteriaRequired: 1
+    None: 0
+  RetroactiveDecorRewardFlagsMeta:
+    MaxValue: 1
+    MinValue: 0
+    NumValues: 2
   RolodexContextIDType:
     AreaID: 2
     ItemID: 1
@@ -8152,16 +8038,6 @@ Enum:
     MaxValue: 1
     MinValue: 0
     NumValues: 2
-  RoomModificationFlags:
-    Added: 2
-    ComponentAltered: 8
-    Moved: 1
-    None: 0
-    Removed: 4
-  RoomModificationFlagsMeta:
-    MaxValue: 8
-    MinValue: 0
-    NumValues: 5
   RuneforgePowerFilter:
     All: 0
     Available: 2
@@ -8259,6 +8135,7 @@ Enum:
     ObjectSecrets: 1
     ObjectSecurity: 1
     ObjectType: 1
+    Rotation: 65536
     Scale: 64
     ScrollRange: 512
     SecureText: 16
@@ -8268,9 +8145,9 @@ Enum:
     Toplevel: 4
     VertexColor: 2048
   SecretAspectMeta:
-    MaxValue: 32768
+    MaxValue: 65536
     MinValue: 1
-    NumValues: 21
+    NumValues: 22
   SelfResurrectOptionType:
     Item: 1
     Spell: 0
@@ -8506,6 +8383,27 @@ Enum:
     MaxValue: 1
     MinValue: 0
     NumValues: 2
+  SpellDiminishCategory:
+    AoEKnockback: 3
+    Disarm: 7
+    Disorient: 5
+    Incapacitate: 4
+    Root: 0
+    Silence: 6
+    Stun: 2
+    Taunt: 1
+  SpellDiminishCategoryMeta:
+    MaxValue: 7
+    MinValue: 0
+    NumValues: 8
+  SpellDiminishRuleset:
+    None: 0
+    PvE: 1
+    PvP: 2
+  SpellDiminishRulesetMeta:
+    MaxValue: 2
+    MinValue: 0
+    NumValues: 3
   SpellDisplayBorderColor:
     Black: 1
     Blue: 8
