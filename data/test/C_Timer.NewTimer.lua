@@ -32,7 +32,7 @@ for k, v in pairs(readonly) do
     t[k] = nil
   end)
   assertEquals(false, success, k)
-  assertEquals('Attempted to assign to read-only key ' .. k, msg:sub(-37 - k:len()))
+  assertEquals('Attempted to assign to read-only key ' .. k, msg)
   if v == 'function' then
     assertEquals(false, pcall(coroutine.create, t[k]))
   end
