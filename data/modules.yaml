@@ -48,6 +48,10 @@ funcheck:
   deps:
     log:
     typecheck:
+funtainer:
+  deps:
+    datalua:
+    security:
 gencode:
   deps:
     api:
@@ -132,7 +136,7 @@ templates:
     log:
 time:
   deps:
-    datalua:
+    funtainer:
     log:
     security:
 typecheck:

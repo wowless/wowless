@@ -1,69 +1,20 @@
-local bubblewrap = require('wowless.bubblewrap')
-
-return function(datalua, log, security)
-  local cfg = datalua.config.modules and datalua.config.modules.time or {}
-
+return function(funtainer, log, security)
   local stamp = 1234
   local timers = require('minheap'):new()
   timers:push(math.huge, function()
     error('fell off the end of time')
   end)
 
-  local state = setmetatable({}, { __mode = 'k' })
-
-  local index = {
-    Cancel = bubblewrap(function(self)
-      state[self].cancelled = true
-    end),
-    Invoke = bubblewrap(function(self, ...)
-      state[self].callback(...)
-    end),
-    IsCancelled = bubblewrap(function(self)
-      return state[self].cancelled
-    end),
-  }
-
-  local tickerMT
-  tickerMT = {
-    __eq = function(u1, u2)
-      return state[u1].table == state[u2].table
-    end,
-    __index = function(u, k)
-      return index[k] or state[u].table[k]
-    end,
-    __metatable = false,
-    __newindex = function(u, k, v)
-      if index[k] or tickerMT[k] ~= nil then
-        error('Attempted to assign to read-only key ' .. k)
-      end
-      state[u].table[k] = v
-    end,
-    __tostring = cfg.tostring_metamethod and function(u)
-      return 'LuaFunctionContainer: ' .. tostring(state[u].table):sub(8)
-    end,
-  }
-
-  local mtproxy = newproxy(true)
-  require('wowless.util').mixin(getmetatable(mtproxy), tickerMT)
-
   local function addTimer(seconds, callback)
     timers:push(stamp + seconds, callback)
   end
 
   local function newTicker(seconds, callback, iterations)
-    assert(getfenv(callback) ~= _G, 'wowless bug: framework callback in newTicker')
-    local p = newproxy(mtproxy)
-    state[p] = {
-      callback = callback,
-      cancelled = false,
-      table = {},
-    }
+    local p = funtainer.CreateCallback(callback)
     local count = 0
     local function cb()
-      if not state[p].cancelled and count < iterations then
-        local np = newproxy(p)
-        state[np] = state[p]
-        security.CallSandbox(callback, np)
+      if not funtainer.IsCancelled(p) and count < iterations then
+        funtainer.Invoke(p, funtainer.CreateProxy(p))
         count = count + 1
         addTimer(seconds, cb)
       end

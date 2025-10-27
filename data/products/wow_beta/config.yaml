@@ -75,7 +75,7 @@ addon:
 modules:
   addons:
     GetAddOnInfo_noUpdateAvailable: true
-  time:
+  funtainer:
     tostring_metamethod: true
 runner:
   skip_events:

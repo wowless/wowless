@@ -61,7 +61,7 @@ type:
               record:
                 GetAddOnInfo_noUpdateAvailable:
                   type: boolean
-          time:
+          funtainer:
             type:
               record:
                 tostring_metamethod:

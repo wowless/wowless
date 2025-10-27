@@ -847,6 +847,7 @@ lua2c(
   wowless.modules.events=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/events.lua
   wowless.modules.fontinstance=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/fontinstance.lua
   wowless.modules.funcheck=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/funcheck.lua
+  wowless.modules.funtainer=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/funtainer.lua
   wowless.modules.gencode=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/gencode.lua
   wowless.modules.loader=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/loader.lua
   wowless.modules.macrotext=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/macrotext.lua

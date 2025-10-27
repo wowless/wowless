@@ -1,6 +1,6 @@
 local T = ...
 local assertEquals = T.assertEquals
-local cfg = T.data.config.modules and T.data.config.modules.time or {}
+local cfg = T.data.config.modules and T.data.config.modules.funtainer or {}
 local cbargs
 local function capture(...)
   cbargs = { ... }
