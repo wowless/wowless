@@ -3778,8 +3778,10 @@ COLOR_OVERRIDES_RESET:
 COMBAT_LOG_ENTRIES_CLEARED:
   payload:
 COMBAT_LOG_EVENT:
+  callback: true
   payload:
 COMBAT_LOG_EVENT_UNFILTERED:
+  callback: true
   payload:
 COMBAT_LOG_MESSAGE:
   payload:
@@ -4358,10 +4360,12 @@ ENCOUNTER_START:
   - name: groupSize
     type: number
 ENCOUNTER_STATE_CHANGED:
+  callback: true
   payload:
   - name: isInProgress
     type: boolean
 ENCOUNTER_TIMELINE_EVENT_ADDED:
+  callback: true
   payload:
   - name: eventInfo
     type:
@@ -4370,14 +4374,17 @@ ENCOUNTER_TIMELINE_EVENT_ADDED:
     type:
       enum: EncounterTimelineEventState
 ENCOUNTER_TIMELINE_EVENT_POSITION_CHANGED:
+  callback: true
   payload:
   - name: eventID
     type: number
 ENCOUNTER_TIMELINE_EVENT_REMOVED:
+  callback: true
   payload:
   - name: eventID
     type: number
 ENCOUNTER_TIMELINE_EVENT_STATE_CHANGED:
+  callback: true
   payload:
   - name: eventID
     type: number
@@ -4385,8 +4392,10 @@ ENCOUNTER_TIMELINE_EVENT_STATE_CHANGED:
     type:
       enum: EncounterTimelineEventState
 ENCOUNTER_TIMELINE_LAYOUT_UPDATED:
+  callback: true
   payload:
 ENCOUNTER_TIMELINE_STATE_UPDATED:
+  callback: true
   payload:
 ENCOUNTER_WARNING:
   payload:
@@ -8721,6 +8730,7 @@ UNIT_SPELLCAST_STOP:
   - name: spellID
     type: number
 UNIT_SPELLCAST_SUCCEEDED:
+  callback: true
   payload:
   - name: unitTarget
     type: unit

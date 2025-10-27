@@ -38,6 +38,7 @@ local ptablemap = {
     local t = {}
     for k, v in pairs(perproduct(p, 'events')) do
       t[k] = {
+        callback = v.callback or false,
         payload = #v.payload,
         registerable = true,
       }
@@ -46,6 +47,7 @@ local ptablemap = {
       for k in pairs(perproduct(product, 'events')) do
         if not t[k] then
           t[k] = {
+            callback = false,
             payload = -1,
             registerable = false,
           }

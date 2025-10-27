@@ -10321,6 +10321,7 @@ C_EventToastManager.RemoveCurrentToast:
   inputs:
   outputs:
 C_EventUtils.IsCallbackEvent:
+  impl: C_EventUtils.IsCallbackEvent
   inputs:
   - name: eventName
     type: string

@@ -256,6 +256,7 @@ for k, v in pairs(parseYaml('data/products/' .. product .. '/events.yaml')) do
     table.insert(t, specDefault(f))
   end
   events[k] = {
+    callback = v.callback,
     payload = v.payload,
     stride = v.stride,
     stub = 'return ' .. table.concat(t, ','),

@@ -88,6 +88,10 @@ C_DateAndTime.AdjustTimeByMinutes:
 C_DateAndTime.CompareCalendarTime:
   moduledelegate:
     name: datetime
+C_EventUtils.IsCallbackEvent:
+  moduledelegate:
+    function: IsCallbackEvent
+    name: events
 C_EventUtils.IsEventValid:
   moduledelegate:
     function: IsEventValid

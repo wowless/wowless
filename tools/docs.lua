@@ -346,6 +346,7 @@ local function rewriteEvents(out)
       })
     end
     out[ev.LiteralName] = {
+      callback = ev.CallbackEvent,
       payload = payload,
       stride = stride(ev.Payload),
     }
