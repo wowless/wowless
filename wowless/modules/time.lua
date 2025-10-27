@@ -34,7 +34,7 @@ return function(datalua, log, security)
     __metatable = false,
     __newindex = function(u, k, v)
       if index[k] or tickerMT[k] ~= nil then
-        error('Attempted to assign to read-only key ' .. k, 0)
+        error('Attempted to assign to read-only key ' .. k)
       end
       state[u].table[k] = v
     end,
