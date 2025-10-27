@@ -6871,6 +6871,14 @@ C_FriendList.SortWho:
   - name: sorting
     type: string
   outputs:
+C_FunctionContainers.CreateCallback:
+  impl: C_FunctionContainers.CreateCallback
+  inputs:
+  - name: callback
+    type: function
+  outputs:
+  - name: functionContainer
+    type: userdata
 C_GamePad.AddSDLMapping:
   inputs:
   - name: platform

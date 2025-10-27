@@ -92,6 +92,10 @@ C_EventUtils.IsEventValid:
   moduledelegate:
     function: IsEventValid
     name: events
+C_FunctionContainers.CreateCallback:
+  moduledelegate:
+    function: CreateCallback
+    name: funtainer
 C_Item.DoesItemExistByID:
   impl:
     sqls:

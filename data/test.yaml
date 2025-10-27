@@ -2,6 +2,7 @@ C_CovenantSanctumUI.GetRenownLevels:
 C_DateAndTime.AdjustTimeByDays:
 C_DateAndTime.AdjustTimeByMinutes:
 C_DateAndTime.CompareCalendarTime:
+C_FunctionContainers.CreateCallback:
 C_Timer.NewTimer:
 ClassicExpansionAtLeast:
 CreateFrame:
