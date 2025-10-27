@@ -10,6 +10,7 @@ return function(funtainer, log, security)
   end
 
   local function newTicker(seconds, callback, iterations)
+    assert(seconds >= 0 and seconds < 5000000) -- TODO tighten this
     local p = funtainer.CreateCallback(callback)
     local count = 0
     local function cb()

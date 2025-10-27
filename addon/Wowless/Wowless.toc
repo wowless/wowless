@@ -8,6 +8,7 @@ util.lua
 init.lua
 framework.lua
 statemachine.lua
+funtainer.lua
 test.xml
 generated.lua
 uiobjects.lua

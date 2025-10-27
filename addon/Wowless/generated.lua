@@ -281,6 +281,7 @@ G.testsuite.generated = function()
       check5 = G.check5,
       check6 = G.check6,
       check7 = G.check7,
+      checkFuntainer = G.checkFuntainer,
       data = {
         build = _G.WowlessData.Build,
         config = _G.WowlessData.Config,

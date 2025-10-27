@@ -10,7 +10,7 @@ return function(datalua, security)
   end
 
   local function Invoke(p, ...)
-    return security.CallSandbox(state[p].callback, ...)
+    security.CallSandbox(state[p].callback, ...)
   end
 
   local function IsCancelled(p)
