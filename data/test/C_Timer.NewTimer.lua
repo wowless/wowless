@@ -9,7 +9,10 @@ return {
   negative = function()
     T.assertEquals(false, pcall(factory, -1))
   end,
+  positive = function()
+    T.assertEquals(true, pcall(factory, math.floor((2 ^ 32 - 1) / 1000)))
+  end,
   toobig = function()
-    T.assertEquals(false, pcall(factory, 5000000))
+    T.assertEquals(false, pcall(factory, math.floor(2 ^ 32 - 1) / 1000 + 1))
   end,
 }

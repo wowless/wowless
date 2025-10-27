@@ -15,7 +15,7 @@ local readonly = {
 }
 
 local function factory(f)
-  return _G.C_Timer.NewTimer(4000000, f)
+  return _G.C_Timer.NewTimer((2 ^ 32 - 1) / 1000, f)
 end
 
 local repft = factory(function() end)
