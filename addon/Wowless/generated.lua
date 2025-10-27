@@ -285,6 +285,7 @@ G.testsuite.generated = function()
       data = {
         build = _G.WowlessData.Build,
         config = _G.WowlessData.Config,
+        events = _G.WowlessData.Events,
       },
       env = _G,
       match = G.match,
