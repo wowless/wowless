@@ -1771,6 +1771,11 @@ Cooldown:
       outputs:
       - name: hideNumbers
         type: boolean
+    GetMinimumCountdownDuration:
+      inputs:
+      outputs:
+      - name: milliseconds
+        type: number
     GetReverse:
       inputs:
       outputs:
@@ -1912,6 +1917,11 @@ Cooldown:
       - default: false
         name: hideNumbers
         type: boolean
+      outputs:
+    SetMinimumCountdownDuration:
+      inputs:
+      - name: milliseconds
+        type: number
       outputs:
     SetReverse:
       inputs:

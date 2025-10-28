@@ -14737,6 +14737,17 @@ C_UnitAuras.GetPlayerAuraBySpellID:
     nilable: true
     type:
       structure: AuraData
+C_UnitAuras.GetUnitAuraBySpellID:
+  inputs:
+  - name: unit
+    type: unit
+  - name: spellID
+    type: number
+  outputs:
+  - name: aura
+    nilable: true
+    type:
+      structure: AuraData
 C_UnitAuras.IsAuraFilteredOutByInstanceID:
   inputs:
   - name: unitToken

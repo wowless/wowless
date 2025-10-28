@@ -775,6 +775,18 @@ CHALLENGE_MODE_KEYSTONE_SLOTTED:
   payload:
   - name: keystoneID
     type: number
+CHALLENGE_MODE_LEADERBOARD_RESULT:
+  payload:
+  - name: mapID
+    type: number
+  - name: challengeModeID
+    type: number
+  - name: page
+    type: number
+  - name: results
+    type:
+      arrayof:
+        structure: MythicPlusLeaderboardResult
 CHALLENGE_MODE_LEADERS_UPDATE:
   payload:
 CHALLENGE_MODE_LEAVER_TIMER_ENDED:

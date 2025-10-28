@@ -4874,7 +4874,11 @@ ExpansionDisplayInfo:
       type:
         arrayof:
           structure: ExpansionDisplayInfoFeature
+    highResBackgroundID:
+      type: number
     logo:
+      type: number
+    lowResBackgroundID:
       type: number
     textureKit:
       type: string
@@ -5000,6 +5004,20 @@ MythicPlusAffixScoreInfo:
       type: boolean
     score:
       type: number
+MythicPlusLeaderboardPlayerResult:
+  fields:
+    playerGUID:
+      type: string
+    specID:
+      type: number
+MythicPlusLeaderboardResult:
+  fields:
+    completionTime:
+      type: number
+    players:
+      type:
+        arrayof:
+          structure: MythicPlusLeaderboardPlayerResult
 MythicPlusRatingLinkInfo:
   fields:
     completedInTime:
