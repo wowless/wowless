@@ -34721,6 +34721,7 @@ issecrettable:
 issecretvalue:
   inputs:
   - name: values
+    nilable: true
     type: unknown
   outputs:
   - name: isSecret
@@ -35310,7 +35311,7 @@ RegisterEventCallback:
   - name: eventName
     type: string
   - name: callback
-    type: function
+    type: funtainer
   outputs:
 RegisterStaticConstants:
 RegisterUnitEventCallback:
@@ -35318,7 +35319,7 @@ RegisterUnitEventCallback:
   - name: eventName
     type: string
   - name: callback
-    type: function
+    type: funtainer
   - name: unit
     type: unit
   outputs:
@@ -37804,14 +37805,14 @@ UnregisterEventCallback:
   - name: eventName
     type: string
   - name: callback
-    type: function
+    type: funtainer
   outputs:
 UnregisterUnitEventCallback:
   inputs:
   - name: eventName
     type: string
   - name: callback
-    type: function
+    type: funtainer
   - name: unit
     type: unit
   outputs:

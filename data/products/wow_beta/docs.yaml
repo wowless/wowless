@@ -29,6 +29,10 @@ lies:
     GetSpecializationInfoForClassID:
       _add:
         mayreturnnothing: true
+    issecretvalue:
+      inputs:
+      - _add:
+          nilable: true
     ResurrectGetOfferer:
       outputs:
       - _add:
@@ -449,6 +453,8 @@ typedefs:
       structure: ItemLocation
   EncounterTimelineEventID:
     type: number
+  EventCallbackType:
+    type: funtainer
   FileAsset:
     type: FileAsset
   fileID:
