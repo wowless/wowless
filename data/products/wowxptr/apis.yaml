@@ -22768,7 +22768,7 @@ C_TalkingHead.GetCurrentLineInfo:
   - name: cameraID
     type: number
   - name: vo
-    type: string
+    type: number
   - name: duration
     type: number
   - name: lineNumber
