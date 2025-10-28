@@ -1,10 +1,13 @@
 local T = ...
+local f = T.env.C_Timer.NewTimer
 local function factory(k)
-  return T.retn(1, T.env.C_Timer.NewTimer(k, function() end))
+  return T.retn(1, f(k, function() end))
 end
 return {
   funtainer = function()
-    return T.checkFuntainer(factory(0))
+    return T.checkFuntainerFactory(function(cb)
+      return f(0, cb)
+    end)
   end,
   negative = function()
     T.assertEquals(false, pcall(factory, -1))

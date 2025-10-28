@@ -14,13 +14,9 @@ local readonly = {
   IsCancelled = 'function',
 }
 
-local function factory(f)
-  return _G.C_Timer.NewTimer((2 ^ 32 - 1) / 1000, f)
-end
+local repft = _G.C_FunctionContainers.CreateCallback(function() end)
 
-local repft = factory(function() end)
-
-G.checkFuntainer = function(ft)
+local function checkFuntainer(ft)
   return {
     metatable = function()
       local mt = getmetatable(ft)
@@ -85,8 +81,31 @@ G.checkFuntainer = function(ft)
   }
 end
 
-G.testsuite.funtainer = function()
+G.checkFuntainerFactory = function(factory)
   return {
+    cancel = function()
+      local n = 0
+      local ft = factory(function()
+        n = n + 1
+      end)
+      assertEquals(0, n)
+      G.check1(false, ft:IsCancelled())
+      G.check0(ft:Invoke())
+      assertEquals(1, n)
+      G.check1(false, ft:IsCancelled())
+      G.check0(ft:Invoke())
+      assertEquals(2, n)
+      G.check1(false, ft:IsCancelled())
+      G.check0(ft:Cancel())
+      assertEquals(2, n)
+      G.check1(true, ft:IsCancelled())
+      G.check0(ft:Invoke())
+      assertEquals(2, n)
+      G.check1(true, ft:IsCancelled())
+      G.check0(ft:Cancel())
+      assertEquals(2, n)
+      G.check1(true, ft:IsCancelled())
+    end,
     capture = function()
       local t, n
       local function capture(...)
@@ -108,8 +127,12 @@ G.testsuite.funtainer = function()
       ft.WowlessStuff = nil
       assertEquals(nil, ft.WowlessStuff)
     end,
-    repft = function()
-      return G.checkFuntainer(repft)
+    funtainer = function()
+      return checkFuntainer(factory(function() end))
+    end,
+    unique = function()
+      local f = function() end
+      assertEquals(false, factory(f) == factory(f))
     end,
   }
 end

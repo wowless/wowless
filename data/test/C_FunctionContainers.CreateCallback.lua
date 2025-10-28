@@ -1,2 +1,2 @@
 local T = ...
-return T.checkFuntainer(T.env.C_FunctionContainers.CreateCallback(function() end))
+return T.checkFuntainerFactory(T.env.C_FunctionContainers.CreateCallback)
