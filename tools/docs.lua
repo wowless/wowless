@@ -193,7 +193,7 @@ local function t2nty(field, ns)
     end
     return { structure = n }
   elseif ty == 'CallbackType' then
-    return ns == 'C_Timer' and 'funtainer' or field.Name == 'cbObject' and 'userdata' or 'function'
+    return 'function'
   else
     error(('%s has unexpected type %s'):format(n, ty))
   end

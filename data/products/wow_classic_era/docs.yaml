@@ -687,8 +687,12 @@ typedefs:
     type: string
   textureKit:
     type: string
+  TickerCallback:
+    type: funtainer
   time_t:
     type: number
+  TimerCallback:
+    type: funtainer
   TooltipComparisonItem:
     type: table
   uiAddon:
