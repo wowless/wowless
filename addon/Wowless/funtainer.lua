@@ -16,7 +16,7 @@ local readonly = {
 
 local repft = _G.C_FunctionContainers.CreateCallback(function() end)
 
-local function checkFuntainer(ft)
+G.checkFuntainer = function(ft)
   return {
     metatable = function()
       local mt = getmetatable(ft)
@@ -128,7 +128,10 @@ G.checkFuntainerFactory = function(factory)
       assertEquals(nil, ft.WowlessStuff)
     end,
     funtainer = function()
-      return checkFuntainer(factory(function() end))
+      return G.checkFuntainer(factory(function() end))
+    end,
+    luaonly = function()
+      assertEquals(false, (pcall(factory, pcall)))
     end,
     unique = function()
       local f = function() end

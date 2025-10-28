@@ -4,10 +4,13 @@ local function factory(k)
   return T.retn(1, f(k, function() end))
 end
 return {
-  funtainer = function()
+  factory = function()
     return T.checkFuntainerFactory(function(cb)
       return f(0, cb)
     end)
+  end,
+  funtainerarg = function()
+    return T.checkFuntainer(T.retn(1, f(0, f(0, function() end))))
   end,
   negative = function()
     T.assertEquals(false, pcall(factory, -1))

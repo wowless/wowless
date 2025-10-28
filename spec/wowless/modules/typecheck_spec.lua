@@ -186,6 +186,7 @@ describe('typecheck', function()
       },
     },
     nil,
+    nil,
     units,
   }))
   for name, test in pairs(tests) do

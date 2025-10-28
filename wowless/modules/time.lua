@@ -9,9 +9,8 @@ return function(funtainer, log, security)
     timers:push(stamp + seconds, callback)
   end
 
-  local function newTicker(seconds, callback, iterations)
+  local function newTicker(seconds, p, iterations)
     assert(seconds >= 0 and seconds < 4294968) -- (2 ^ 32 - 1) / 1000
-    local p = funtainer.CreateCallback(callback)
     local count = 0
     local function cb()
       if not funtainer.IsCancelled(p) and count < iterations then

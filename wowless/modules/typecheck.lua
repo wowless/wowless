@@ -1,4 +1,4 @@
-return function(addons, datalua, env, uiobjects, units)
+return function(addons, datalua, env, funtainer, uiobjects, units)
   local enumrev = {}
   for k, v in pairs(datalua.globals.Enum) do
     local t = {}
@@ -70,11 +70,17 @@ return function(addons, datalua, env, uiobjects, units)
         return tonumber(value) or tostring(value), notnors
       end
     end,
-    gender = function(value)
-      return tonumber(value) or 0
-    end,
     ['function'] = function(value)
       return luatypecheck('function', value)
+    end,
+    funtainer = function(value, isout)
+      if not isout and not funtainer.IsFuntainer(value) and funtainer.IsEligible(value) then
+        value = funtainer.CreateCallback(value)
+      end
+      return value, not funtainer.IsFuntainer(value)
+    end,
+    gender = function(value)
+      return tonumber(value) or 0
     end,
     number = function(value, isout)
       if isout then

@@ -6894,7 +6894,8 @@ C_FunctionContainers.CreateCallback:
     type: function
   outputs:
   - name: functionContainer
-    type: userdata
+    type: funtainer
+  usage: C_FunctionContainers.CreateCallback(func)
 C_GamePad.AddSDLMapping:
   inputs:
   - name: platform
@@ -12784,7 +12785,7 @@ C_Timer.After:
   - name: seconds
     type: number
   - name: callback
-    type: function
+    type: funtainer
   outputs:
 C_Timer.NewTicker:
   impl: C_Timer.NewTicker
@@ -12792,23 +12793,23 @@ C_Timer.NewTicker:
   - name: seconds
     type: number
   - name: callback
-    type: function
+    type: funtainer
   - name: iterations
     nilable: true
     type: number
   outputs:
   - name: cbObject
-    type: userdata
+    type: funtainer
 C_Timer.NewTimer:
   impl: C_Timer.NewTimer
   inputs:
   - name: seconds
     type: number
   - name: callback
-    type: function
+    type: funtainer
   outputs:
   - name: cbObject
-    type: userdata
+    type: funtainer
 C_ToyBox.ForceToyRefilter:
   inputs:
   outputs:

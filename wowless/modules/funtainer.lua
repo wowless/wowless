@@ -49,7 +49,12 @@ return function(datalua, security)
   local mtproxy = newproxy(true)
   require('wowless.util').mixin(getmetatable(mtproxy), mt)
 
+  local function IsEligible(callback)
+    return type(callback) == 'function' and not debug.iscfunction(callback)
+  end
+
   local function CreateCallback(callback)
+    assert(IsEligible(callback), type(callback))
     assert(getfenv(callback) ~= _G, 'wowless bug: framework callback in newTicker')
     local p = newproxy(mtproxy)
     state[p] = {
@@ -66,10 +71,16 @@ return function(datalua, security)
     return np
   end
 
+  local function IsFuntainer(p)
+    return not not state[p]
+  end
+
   return {
     CreateCallback = CreateCallback,
     CreateProxy = CreateProxy,
     Invoke = Invoke,
     IsCancelled = IsCancelled,
+    IsEligible = IsEligible,
+    IsFuntainer = IsFuntainer,
   }
 end
