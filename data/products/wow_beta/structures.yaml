@@ -2170,8 +2170,13 @@ C_ContributionCollector.ContributionMapInfo:
         structure: vector2
 C_CooldownViewer.CooldownViewerCooldown:
   fields:
+    category:
+      type:
+        enum: CooldownViewerCategory
     charges:
       type: boolean
+    cooldownID:
+      type: number
     flags:
       type:
         enum: CooldownSetSpellFlags
@@ -2542,6 +2547,35 @@ C_CurrencyInfo.PlayerCurrencyCategoryInfo:
     currencyTypes:
       type:
         arrayof: number
+C_DamageMeter.DamageMeterCombatSession:
+  fields:
+    combatSources:
+      type:
+        arrayof:
+          structure: C_DamageMeter.DamageMeterCombatSource
+    maxAmount:
+      default: 0
+      type: number
+C_DamageMeter.DamageMeterCombatSessionSource:
+  fields:
+    combatSpells:
+      type:
+        arrayof:
+          structure: C_DamageMeter.DamageMeterCombatSpell
+    maxAmount:
+      type: number
+C_DamageMeter.DamageMeterCombatSource:
+  fields:
+    totalAmount:
+      type: number
+    unitToken:
+      type: string
+C_DamageMeter.DamageMeterCombatSpell:
+  fields:
+    spellID:
+      type: number
+    totalAmount:
+      type: number
 C_DeathInfo.GraveyardMapInfo:
   fields:
     areaPoiID:
@@ -3843,6 +3877,9 @@ C_HousingCatalog.HousingBundleInfo:
       type:
         arrayof:
           structure: C_HousingCatalog.HousingBundleDecorEntryInfo
+    originalPrice:
+      nilable: true
+      type: number
     price:
       type: number
     productID:
@@ -3978,12 +4015,14 @@ C_HousingCatalog.HousingMarketInfo:
       type: number
 C_HousingCatalog.HousingPreviewItemData:
   fields:
-    decorEntryID:
-      type:
-        structure: HousingCatalogEntryID
+    bundleCatalogShopProductID:
+      nilable: true
+      type: number
     decorGUID:
       nilable: true
       type: string
+    decorID:
+      type: number
     icon:
       type: number
     id:
@@ -10191,9 +10230,9 @@ CraftingItemSlotModification:
   fields:
     dataSlotIndex:
       type: number
-    itemID:
-      default: 0
-      type: number
+    reagent:
+      type:
+        structure: CraftingReagent
 CraftingOperationBonusStatInfo:
   fields:
     bonusRatingPct:
@@ -10504,7 +10543,7 @@ CraftingOrderReagentInfo:
   fields:
     isBasicReagent:
       type: boolean
-    reagent:
+    reagentInfo:
       type:
         structure: CraftingReagentInfo
     slotIndex:
@@ -10567,10 +10606,11 @@ CraftingReagentInfo:
   fields:
     dataSlotIndex:
       type: number
-    itemID:
-      type: number
     quantity:
       type: number
+    reagent:
+      type:
+        structure: CraftingReagent
 CraftingReagentSlotInfo:
   fields:
     mcrSlotID:
@@ -10611,6 +10651,10 @@ CraftingReagentSlotSchematic:
       nilable: true
       type:
         structure: CraftingReagentSlotInfo
+    variableQuantities:
+      type:
+        arrayof:
+          structure: CraftingVariableQuantities
 CraftingRecipeOutputInfo:
   fields:
     hyperlink:
@@ -10662,10 +10706,11 @@ CraftingRecipeSchematic:
         enum: TradeskillRecipeType
 CraftingResourceReturnInfo:
   fields:
-    itemID:
-      type: number
     quantity:
       type: number
+    reagent:
+      type:
+        structure: CraftingReagent
 CraftingTargetItem:
   fields:
     hyperlink:
@@ -10677,6 +10722,13 @@ CraftingTargetItem:
       type: number
     quantity:
       type: number
+CraftingVariableQuantities:
+  fields:
+    quantity:
+      type: number
+    reagent:
+      type:
+        structure: CraftingReagent
 CreateFontFamilyMemberInfo:
   fields:
     alphabet:
@@ -11168,10 +11220,14 @@ HousingDecorInstanceInfo:
         enum: HousingCatalogEntrySize
 HousingFixtureOption:
   fields:
+    colorID:
+      type: number
     fixtureID:
       type: number
     isLocked:
       type: boolean
+    lockReasonString:
+      type: string
     name:
       type: string
     typeID:
@@ -11378,7 +11434,7 @@ NewCraftingOrderInfo:
     orderType:
       type:
         enum: CraftingOrderType
-    reagentItems:
+    reagentInfos:
       type:
         arrayof:
           structure: RegularReagentInfo
@@ -11574,10 +11630,11 @@ QueueSpecificInfo:
       type: number
 RegularReagentInfo:
   fields:
-    itemID:
-      type: number
     quantity:
       type: number
+    reagent:
+      type:
+        structure: CraftingReagent
 ReportInfo:
   fields:
   mixin: ReportInfoMixin

@@ -8314,6 +8314,15 @@ C_CooldownViewer.GetLayoutData:
   outputs:
   - name: data
     type: string
+C_CooldownViewer.GetValidAlertTypes:
+  inputs:
+  - name: cooldownID
+    type: number
+  outputs:
+  - name: validAlertTypes
+    type:
+      arrayof:
+        enum: CooldownViewerAlertEventType
 C_CooldownViewer.IsCooldownViewerAvailable:
   inputs:
   outputs:
@@ -9193,6 +9202,27 @@ C_CVar.SetCVarBitfield:
   outputs:
   - name: success
     type: boolean
+C_DamageMeter.GetCurrentCombatSession:
+  inputs:
+  - name: type
+    type:
+      enum: DamageMeterType
+  outputs:
+  - name: session
+    type:
+      structure: C_DamageMeter.DamageMeterCombatSession
+C_DamageMeter.GetCurrentCombatSessionSource:
+  inputs:
+  - name: type
+    type:
+      enum: DamageMeterType
+  - name: unitToken
+    type: unit
+  mayreturnnothing: true
+  outputs:
+  - name: sessionSource
+    type:
+      structure: C_DamageMeter.DamageMeterCombatSessionSource
 C_DamageMeter.IsDamageMeterAvailable:
   inputs:
   outputs:
@@ -12438,9 +12468,11 @@ C_HousingBasicMode.StartPlacingNewDecor:
   outputs:
 C_HousingBasicMode.StartPlacingPreviewDecor:
   inputs:
-  - name: catalogEntryID
-    type:
-      structure: HousingCatalogEntryID
+  - name: decorRecordID
+    type: number
+  - name: bundleCatalogShopProductID
+    nilable: true
+    type: number
   outputs:
 C_HousingCatalog.CanDestroyEntry:
   inputs:
@@ -12484,6 +12516,15 @@ C_HousingCatalog.GetBasicDecorInfo:
     nilable: true
     type:
       structure: C_HousingCatalog.HousingCatalogEntryInfo
+C_HousingCatalog.GetBundleInfo:
+  inputs:
+  - name: bundleCatalogShopProductID
+    type: number
+  outputs:
+  - name: bundleInfo
+    nilable: true
+    type:
+      structure: C_HousingCatalog.HousingBundleInfo
 C_HousingCatalog.GetCatalogCategoryInfo:
   inputs:
   - name: categoryID
@@ -12768,6 +12809,14 @@ C_HousingDecor.GetAllPlacedDecor:
       arrayof:
         structure: C_HousingDecor.HousingDecorInstanceListEntry
 C_HousingDecor.GetDecorDebugInfoForGUID:
+C_HousingDecor.GetDecorIcon:
+  inputs:
+  - name: decorID
+    type: number
+  mayreturnnothing: true
+  outputs:
+  - name: icon
+    type: number
 C_HousingDecor.GetDecorInstanceInfoForGUID:
   inputs:
   - name: decorGUID
@@ -12777,6 +12826,14 @@ C_HousingDecor.GetDecorInstanceInfoForGUID:
     nilable: true
     type:
       structure: HousingDecorInstanceInfo
+C_HousingDecor.GetDecorName:
+  inputs:
+  - name: decorID
+    type: number
+  mayreturnnothing: true
+  outputs:
+  - name: name
+    type: string
 C_HousingDecor.GetHoveredDecorDebugInfo:
 C_HousingDecor.GetHoveredDecorInfo:
   inputs:
@@ -13044,6 +13101,11 @@ C_HousingLayout.HasAnySelections:
   inputs:
   outputs:
   - name: hasAnySelections
+    type: boolean
+C_HousingLayout.HasRoomPlacementBudget:
+  inputs:
+  outputs:
+  - name: hasBudget
     type: boolean
 C_HousingLayout.HasSelectedDoor:
   inputs:
@@ -24643,7 +24705,7 @@ C_TooltipInfo.GetRecipeResultItem:
   inputs:
   - name: recipeID
     type: number
-  - name: craftingReagents
+  - name: reagentInfos
     nilable: true
     type:
       arrayof:
@@ -24666,7 +24728,7 @@ C_TooltipInfo.GetRecipeResultItemForOrder:
   inputs:
   - name: recipeID
     type: number
-  - name: craftingReagents
+  - name: reagentInfos
     nilable: true
     type:
       arrayof:
@@ -25321,10 +25383,25 @@ C_TradeSkillUI.GetCraftingTargetItems:
     type:
       arrayof:
         structure: CraftingTargetItem
+C_TradeSkillUI.GetDependentReagents:
+  inputs:
+  - name: reagent
+    type:
+      structure: CraftingReagent
+  outputs:
+  - name: reagents
+    type:
+      arrayof:
+        structure: CraftingReagent
 C_TradeSkillUI.GetEnchantItems:
   inputs:
   - name: recipeID
     type: number
+  - name: craftingReagents
+    nilable: true
+    type:
+      arrayof:
+        structure: CraftingReagentInfo
   outputs:
   - name: items
     type:
@@ -25536,14 +25613,6 @@ C_TradeSkillUI.GetReagentDifficultyText:
   outputs:
   - name: bonusText
     type: string
-C_TradeSkillUI.GetReagentRequirementItemIDs:
-  inputs:
-  - name: itemID
-    type: number
-  outputs:
-  - name: itemIDs
-    type:
-      arrayof: number
 C_TradeSkillUI.GetReagentSlotStatus:
   inputs:
   - name: mcrSlotID
@@ -25571,15 +25640,6 @@ C_TradeSkillUI.GetRecipeDescription:
     type: string
   outputs:
   - name: description
-    type: string
-C_TradeSkillUI.GetRecipeFixedReagentItemLink:
-  inputs:
-  - name: recipeID
-    type: number
-  - name: dataSlotIndex
-    type: number
-  outputs:
-  - name: link
     type: string
 C_TradeSkillUI.GetRecipeInfo:
   inputs:
@@ -25655,7 +25715,7 @@ C_TradeSkillUI.GetRecipeQualityItemIDs:
     nilable: true
     type:
       arrayof: number
-C_TradeSkillUI.GetRecipeQualityReagentItemLink:
+C_TradeSkillUI.GetRecipeQualityReagentLink:
   inputs:
   - name: recipeID
     type: number
@@ -25710,9 +25770,10 @@ C_TradeSkillUI.GetRecraftRemovalWarnings:
   inputs:
   - name: itemGUID
     type: string
-  - name: replacedItemIDs
+  - name: replacedReagents
     type:
-      arrayof: number
+      arrayof:
+        structure: CraftingReagent
   outputs:
   - name: warnings
     type:
@@ -25873,8 +25934,9 @@ C_TradeSkillUI.IsRecraftReagentValid:
   inputs:
   - name: itemGUID
     type: string
-  - name: itemID
-    type: number
+  - name: reagent
+    type:
+      structure: CraftingReagent
   outputs:
   - name: valid
     type: boolean
@@ -25909,8 +25971,9 @@ C_TradeSkillUI.OpenTradeSkill:
     type: boolean
 C_TradeSkillUI.RecraftLimitCategoryValid:
   inputs:
-  - name: reagentItemID
-    type: number
+  - name: reagent
+    type:
+      structure: CraftingReagent
   outputs:
   - name: recraftValid
     type: boolean

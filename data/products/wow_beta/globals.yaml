@@ -62,6 +62,7 @@ Constants:
     CURRENCY_ID_RENOWN_VENTHYR: 1830
     CURRENCY_ID_RESERVOIR_ANIMA: 1813
     CURRENCY_ID_WILLING_SOUL: 1810
+    CURRENCY_WALLET_TYPE_WOWMONEY: 0
     DRAGON_ISLES_SUPPLIES_CURRENCY_ID: 2003
     ECHOES_OF_NYALOTHA_CURRENCY_ID: 1803
     HONOR_CURRENCY_ID: 1792
@@ -175,6 +176,7 @@ Constants:
   ProfessionConsts:
     CLASSIC_PROFESSION_PARENT_TIER_INDEX: 4
     CRAFTING_ORDER_CLAIM_DURATION: 1800
+    CRAFTING_ORDER_CURRENCY_WALLET_ITEM_ID: 262724
     CRAFTING_ORDER_ITEM_RETENTION: 30
     MAX_CRAFTING_REAGENT_SLOTS: 12
     NUM_PRIMARY_PROFESSIONS: 2
@@ -2444,11 +2446,12 @@ Enum:
   ContentTrackingType:
     Achievement: 2
     Appearance: 0
+    Decor: 3
     Mount: 1
   ContentTrackingTypeMeta:
-    MaxValue: 2
+    MaxValue: 3
     MinValue: 0
-    NumValues: 3
+    NumValues: 4
   ContributionAppearanceFlags:
     TooltipUseTimeRemaining: 0
   ContributionAppearanceFlagsMeta:
@@ -2616,16 +2619,25 @@ Enum:
     MaxValue: 16
     MinValue: 0
     NumValues: 6
+  CraftingOrderItemFlags:
+    HasEnchantmentData: 2
+    None: 0
+    NpcProvided: 1
+  CraftingOrderItemFlagsMeta:
+    MaxValue: 2
+    MinValue: 0
+    NumValues: 3
   CraftingOrderItemType:
     CraftedResult: 2
-    NpcProvided: 4
-    Reagent: 0
+    Currency: 5
+    Deprecated: 4
+    Item: 0
     Recraft: 1
     RemoveReagent: 3
   CraftingOrderItemTypeMeta:
-    MaxValue: 4
+    MaxValue: 5
     MinValue: 0
-    NumValues: 5
+    NumValues: 6
   CraftingOrderReagentSource:
     Any: 0
     Crafter: 2
@@ -2673,28 +2685,30 @@ Enum:
     Locked: 17
     MaxOrdersReached: 28
     MissingCraftingTable: 29
-    MissingItem: 30
-    MissingNpc: 31
-    MissingOrder: 32
-    MissingRecraftItem: 33
-    NoAccountItems: 34
-    NotClaimed: 35
-    NotCrafted: 36
-    NotInGuild: 37
-    NotYetImplemented: 38
+    MissingCurrency: 30
+    MissingItem: 31
+    MissingNpc: 32
+    MissingOrder: 33
+    MissingRecraftItem: 34
+    NoAccountItems: 35
+    NotClaimed: 36
+    NotCrafted: 37
+    NotInGuild: 38
+    NotYetImplemented: 39
     Ok: 0
-    OutOfPublicOrderCapacity: 39
-    ServerIsNotAvailable: 40
-    TargetCannotCraft: 42
-    TargetLocked: 43
-    ThrottleViolation: 41
-    Timeout: 44
-    TooManyItems: 45
-    WrongVersion: 46
+    OutOfPublicOrderCapacity: 40
+    ServerIsNotAvailable: 41
+    TargetCannotCraft: 43
+    TargetLocked: 44
+    ThrottleViolation: 42
+    Timeout: 45
+    TooManyCurrencies: 46
+    TooManyItems: 47
+    WrongVersion: 48
   CraftingOrderResultMeta:
-    MaxValue: 46
+    MaxValue: 48
     MinValue: 0
-    NumValues: 47
+    NumValues: 49
   CraftingOrderSortType:
     AveTip: 1
     ItemName: 0
@@ -2836,6 +2850,7 @@ Enum:
     Capped: 6
     Cheat: 0
     ConcentrationCast: 13
+    CraftingOrderReagent: 16
     DroppedToCorpse: 8
     FactionConversion: 10
     FulfillCraftingOrder: 11
@@ -2848,9 +2863,9 @@ Enum:
     Vendor: 4
     VersionUpdate: 2
   CurrencyDestroyReasonMeta:
-    MaxValue: 15
+    MaxValue: 16
     MinValue: 0
-    NumValues: 16
+    NumValues: 17
   CurrencyFilterType:
     DiscoveredAndAllAccountTransferable: 2
     DiscoveredOnly: 1
@@ -2893,6 +2908,7 @@ Enum:
     CurrencyUpdateVersionIgnoreMax: 512
     CurrencyUsesLedgerBalance: 2147483648
   CurrencyFlagsB:
+    CurrencyBAllowReductionByResourcefulness: 1024
     CurrencyBBattlenetVirtualCurrency: 8
     CurrencyBDontDisplayIfZero: 32
     CurrencyBForceMaxQuantityOnConversion: 256
@@ -2904,9 +2920,9 @@ Enum:
     CurrencyBUseTotalEarnedForEarned: 1
     FutureCurrencyFlag: 16
   CurrencyFlagsBMeta:
-    MaxValue: 512
+    MaxValue: 1024
     MinValue: 1
-    NumValues: 10
+    NumValues: 11
   CurrencyFlagsMeta:
     MaxValue: -2147483648
     MinValue: 1
@@ -3186,6 +3202,15 @@ Enum:
     MaxValue: 1
     MinValue: 0
     NumValues: 2
+  DamageMeterType:
+    DamageDone: 0
+    Dps: 1
+    HealingDone: 2
+    Hps: 3
+  DamageMeterTypeMeta:
+    MaxValue: 3
+    MinValue: 0
+    NumValues: 4
   DamageMeterVisibility:
     Always: 0
     Hidden: 2
@@ -3390,20 +3415,22 @@ Enum:
     MinValue: 1
     NumValues: 4
   EditModeDamageMeterSetting:
-    FrameHeight: 4
-    FrameWidth: 3
+    BarHeight: 10
+    DeprecatedFrameHeight: 4
+    DeprecatedFrameWidth: 3
     LockScroll: 7
     Numbers: 2
     Padding: 5
     ShowClassColor: 9
     ShowSpecIcon: 8
     Style: 1
+    TextSize: 11
     Transparency: 6
     Visibility: 0
   EditModeDamageMeterSettingMeta:
-    MaxValue: 9
+    MaxValue: 11
     MinValue: 0
-    NumValues: 10
+    NumValues: 12
   EditModeDurabilityFrameSetting:
     Size: 0
   EditModeDurabilityFrameSettingMeta:
@@ -4705,6 +4732,15 @@ Enum:
     MaxValue: 512
     MinValue: 0
     NumValues: 11
+  HouseVisitType:
+    Friend: 1
+    Guild: 2
+    Party: 3
+    Unknown: 0
+  HouseVisitTypeMeta:
+    MaxValue: 3
+    MinValue: 0
+    NumValues: 4
   HousingBasicModeTargetType:
     Decor: 1
     House: 2
@@ -5116,6 +5152,22 @@ Enum:
     MaxValue: 8
     MinValue: 0
     NumValues: 5
+  HousingTeleportReason:
+    Booted: 3
+    Cheat: 1
+    ExitingHouse: 9
+    Friend: 6
+    GuildMember: 7
+    Homestone: 4
+    None: 0
+    PartyMember: 8
+    Portal: 10
+    UnspecifiedSpellcast: 2
+    Visit: 5
+  HousingTeleportReasonMeta:
+    MaxValue: 10
+    MinValue: 0
+    NumValues: 11
   HousingThemeFlags:
     None: 0
     UnlockedByDefault: 1
@@ -6489,7 +6541,7 @@ Enum:
     Block: 3
     CastFocus: 4
     Default: 0
-    Legacy: 1
+    Modern: 1
     Thin: 2
   NamePlateStyleMeta:
     MaxValue: 4
@@ -7137,6 +7189,13 @@ Enum:
   PlayerCurrencyFlagsMeta:
     MaxValue: 2
     MinValue: 1
+    NumValues: 2
+  PlayerDataElementType:
+    Float: 1
+    Int: 0
+  PlayerDataElementTypeMeta:
+    MaxValue: 1
+    MinValue: 0
     NumValues: 2
   PlayerInteractionType:
     AccountBanker: 68
@@ -10841,6 +10900,7 @@ LE_GAME_ERR_GUILDEMBLEM_SUCCESS: 392
 LE_GAME_ERR_HAS_RESTRICTION: 1005
 LE_GAME_ERR_HOUSE_MOVED: 1209
 LE_GAME_ERR_HOUSING_ACTION_UNAVAILABLE: 1216
+LE_GAME_ERR_HOUSING_RESULT_MISSING_EXPANSION_ACCESS: 1217
 LE_GAME_ERR_HOUSING_RESULT_NEIGHBORHOOD_NOT_FOUND: 1204
 LE_GAME_ERR_IGNORE_ADDED_S: 341
 LE_GAME_ERR_IGNORE_ALREADY_S: 340
@@ -11407,7 +11467,7 @@ LE_GAME_ERR_REAGENTBAG_ITEM_TYPE: 25
 LE_GAME_ERR_REAGENTBAG_WRONG_SLOT: 23
 LE_GAME_ERR_REALM_NOT_FOUND: 453
 LE_GAME_ERR_RECEIVE_ITEM_S: 49
-LE_GAME_ERR_RECENT_ALLY_PIN_SERVER_ERROR: 1217
+LE_GAME_ERR_RECENT_ALLY_PIN_SERVER_ERROR: 1218
 LE_GAME_ERR_RECRUIT_A_FRIEND_ACCOUNT_LIMIT: 1025
 LE_GAME_ERR_RECRUIT_A_FRIEND_FAILED: 1026
 LE_GAME_ERR_RECRUIT_A_FRIEND_INSUF_EXPAN_LVL: 708

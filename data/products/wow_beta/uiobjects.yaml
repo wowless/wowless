@@ -1998,6 +1998,13 @@ Cooldown:
         type: number
       - name: duration
         type: number
+    GetCountdownFontString:
+      inputs:
+      outputs:
+      - name: countdownString
+        nilable: true
+        type:
+          uiobject: FontString
     GetDrawBling:
       inputs:
       outputs:
