@@ -50,9 +50,11 @@ static int tactbuild(lua_State *L) {
 }
 
 static int tactnamehash(lua_State *L) {
-  char hash[17];
-  tactless_prettynamehash(luaL_checkstring(L, 1), hash);
-  lua_pushlstring(L, hash, 16);
+  unsigned char hash[8];
+  tactless_name_to_namehash(luaL_checkstring(L, 1), hash);
+  char hex[17];
+  tactless_namehash_to_hex(hash, hex);
+  lua_pushlstring(L, hex, 16);
   return 1;
 }
 
