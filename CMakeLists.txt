@@ -615,6 +615,7 @@ add_lua_executable(
   runtimelistfile
   toolsdb2
   toolstactless
+  toolsutil
   wowlesstoc)
 
 foreach(product ${products})
