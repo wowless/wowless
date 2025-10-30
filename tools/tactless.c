@@ -49,6 +49,13 @@ static int tactbuild(lua_State *L) {
   return 5;
 }
 
+static int tactnamehash(lua_State *L) {
+  char hash[17];
+  tactless_prettynamehash(luaL_checkstring(L, 1), hash);
+  lua_pushlstring(L, hash, 16);
+  return 1;
+}
+
 static int tactgc(lua_State *L) {
   tactless **u = luaL_checkudata(L, 1, "tactless");
   tactless_close(*u);
@@ -71,6 +78,8 @@ int luaopen_tactless(lua_State *L) {
     lua_newtable(L);
     lua_pushcfunction(L, tactbuild);
     lua_setfield(L, -2, "build");
+    lua_pushcfunction(L, tactnamehash);
+    lua_setfield(L, -2, "namehash");
     lua_setfield(L, -2, "__index");
     lua_pushstring(L, "tactlesslib");
     lua_setfield(L, -2, "__metatable");
