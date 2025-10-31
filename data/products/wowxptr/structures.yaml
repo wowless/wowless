@@ -10733,10 +10733,14 @@ HousingDecorInstanceInfo:
         enum: HousingCatalogEntrySize
 HousingFixtureOption:
   fields:
+    colorID:
+      type: number
     fixtureID:
       type: number
     isLocked:
       type: boolean
+    lockReasonString:
+      type: string
     name:
       type: string
     typeID:

@@ -4941,6 +4941,8 @@ HOUSE_DECOR_ADDED_TO_CHEST:
   payload:
   - name: decorGUID
     type: string
+  - name: decorID
+    type: number
 HOUSE_EDITOR_AVAILABILITY_CHANGED:
   payload:
 HOUSE_EDITOR_MODE_CHANGE_FAILURE:

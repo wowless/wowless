@@ -12063,6 +12063,14 @@ C_HousingDecor.GetAllPlacedDecor:
       arrayof:
         structure: C_HousingDecor.HousingDecorInstanceListEntry
 C_HousingDecor.GetDecorDebugInfoForGUID:
+C_HousingDecor.GetDecorIcon:
+  inputs:
+  - name: decorID
+    type: number
+  mayreturnnothing: true
+  outputs:
+  - name: icon
+    type: number
 C_HousingDecor.GetDecorInstanceInfoForGUID:
   inputs:
   - name: decorGUID
@@ -12072,6 +12080,14 @@ C_HousingDecor.GetDecorInstanceInfoForGUID:
     nilable: true
     type:
       structure: HousingDecorInstanceInfo
+C_HousingDecor.GetDecorName:
+  inputs:
+  - name: decorID
+    type: number
+  mayreturnnothing: true
+  outputs:
+  - name: name
+    type: string
 C_HousingDecor.GetHoveredDecorDebugInfo:
 C_HousingDecor.GetHoveredDecorInfo:
   inputs:
@@ -12321,6 +12337,11 @@ C_HousingLayout.HasAnySelections:
   inputs:
   outputs:
   - name: hasAnySelections
+    type: boolean
+C_HousingLayout.HasRoomPlacementBudget:
+  inputs:
+  outputs:
+  - name: hasBudget
     type: boolean
 C_HousingLayout.HasSelectedDoor:
   inputs:
