@@ -65,7 +65,7 @@ jobs:
     runs-on: ${{ matrix.config.os }}
     steps:
     - if:  ${{ matrix.config.os == 'ubuntu-latest' }}
-      run: sudo apt-get install libltdl-dev
+      run: sudo apt-get install autoconf-archive libltdl-dev
     - uses: actions/checkout@v5
       with:
         submodules: true
