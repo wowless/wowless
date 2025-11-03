@@ -230,6 +230,9 @@ Actor:
       - default: false
         name: holdBowString
         type: boolean
+      - name: customRaceID
+        nilable: true
+        type: number
       outputs:
       - name: success
         type: boolean
@@ -264,6 +267,9 @@ Actor:
       - default: true
         name: usePlayerNativeForm
         type: boolean
+      - name: customRaceID
+        nilable: true
+        type: number
       outputs:
       - name: success
         type: boolean
@@ -5257,6 +5263,11 @@ ModelScene:
       - name: index
         type: number
       outputs:
+    GetAllowOverlappedModels:
+      inputs:
+      outputs:
+      - name: allowOverlappedModels
+        type: boolean
     GetCameraFarClip:
       impl:
         getter:
@@ -5437,6 +5448,11 @@ ModelScene:
         type: number
       - name: depth
         type: number
+    SetAllowOverlappedModels:
+      inputs:
+      - name: allowOverlappedModels
+        type: boolean
+      outputs:
     SetCameraFarClip:
       impl:
         setter:
