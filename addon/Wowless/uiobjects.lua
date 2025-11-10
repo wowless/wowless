@@ -826,7 +826,7 @@ G.testsuite.uiobjects = function()
             return
           end
           local f = CreateFrame('Frame')
-          local w, h = GetScreenWidth(), GetScreenHeight()
+          local _, _, w, h = _G.WorldFrame:GetRect()
           local states = {
             init = function()
               check1(false, f:IsRectValid())
