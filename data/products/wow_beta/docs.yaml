@@ -68,12 +68,6 @@ lies:
             from: string
             to: unit
   extra_apis:
-    AcceptArenaTeam:
-    ArenaTeamDisband:
-    ArenaTeamInviteByName:
-    ArenaTeamLeave:
-    ArenaTeamSetLeaderByName:
-    ArenaTeamUninviteByName:
     C_BarberShopInternal.SetQAMode:
     C_CinematicList.GetUICinematicList:
     C_CombatLogInternal.GetCurrentEventInfo:
@@ -84,7 +78,6 @@ lies:
     C_LiveEvent.OnLiveEventBannerClicked:
     C_LiveEvent.OnLiveEventPopupClicked:
     C_WorldSafeLocsUIInternal.GetWorldSafeLocs:
-    DeclineArenaTeam:
     ShowCloak:
     ShowHelm:
     ShowingCloak:

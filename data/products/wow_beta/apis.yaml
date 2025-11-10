@@ -1,4 +1,26 @@
 AbandonSkill:
+AbbreviateLargeNumbers:
+  inputs:
+  - name: number
+    type: number
+  - name: options
+    nilable: true
+    type:
+      structure: NumberAbbrevOptions
+  outputs:
+  - name: result
+    type: string
+AbbreviateNumbers:
+  inputs:
+  - name: number
+    type: number
+  - name: options
+    nilable: true
+    type:
+      structure: NumberAbbrevOptions
+  outputs:
+  - name: result
+    type: string
 AcceptAreaSpiritHeal:
   inputs:
   outputs:
@@ -722,6 +744,13 @@ C_ActionBar.IsHelpfulAction:
     type: boolean
   outputs:
   - name: isHelpful
+    type: boolean
+C_ActionBar.IsInterruptAction:
+  inputs:
+  - name: slotID
+    type: number
+  outputs:
+  - name: isInterruptAction
     type: boolean
 C_ActionBar.IsItemAction:
   inputs:
@@ -6350,6 +6379,58 @@ C_ColorOverrides.SetColorOverride:
     type:
       structure: colorRGBA
   outputs:
+C_CombatAudioAlert.GetCurrentUnitHealthFormat:
+  inputs:
+  - name: unit
+    type:
+      enum: CombatAudioAlertUnit
+  outputs:
+  - name: formatVal
+    type: number
+C_CombatAudioAlert.GetSpeakerSpeed:
+  inputs:
+  outputs:
+  - name: speed
+    type: number
+C_CombatAudioAlert.GetSpeakerVolume:
+  inputs:
+  outputs:
+  - name: volume
+    type: number
+C_CombatAudioAlert.GetThrottle:
+  inputs:
+  - name: unit
+    type:
+      enum: CombatAudioAlertUnit
+  outputs:
+  - name: throttle
+    type: number
+C_CombatAudioAlert.SetCurrentUnitHealthFormat:
+  inputs:
+  - name: unit
+    type:
+      enum: CombatAudioAlertUnit
+  - name: newVal
+    type: number
+  outputs:
+C_CombatAudioAlert.SetSpeakerSpeed:
+  inputs:
+  - name: newVal
+    type: number
+  outputs:
+C_CombatAudioAlert.SetSpeakerVolume:
+  inputs:
+  - name: newVal
+    type: number
+  outputs:
+C_CombatAudioAlert.SetThrottle:
+  inputs:
+  - name: unit
+    type:
+      enum: CombatAudioAlertUnit
+  - name: newVal
+    type: number
+  outputs:
 C_CombatLog.ApplyFilterSettings:
   inputs:
   - name: filterSettings
@@ -9202,8 +9283,17 @@ C_CVar.SetCVarBitfield:
   outputs:
   - name: success
     type: boolean
-C_DamageMeter.GetCurrentCombatSession:
+C_DamageMeter.GetAvailableCombatSessions:
   inputs:
+  outputs:
+  - name: availableSessions
+    type:
+      arrayof:
+        structure: C_DamageMeter.DamageMeterAvailableCombatSession
+C_DamageMeter.GetCombatSessionFromID:
+  inputs:
+  - name: sessionID
+    type: number
   - name: type
     type:
       enum: DamageMeterType
@@ -9211,14 +9301,41 @@ C_DamageMeter.GetCurrentCombatSession:
   - name: session
     type:
       structure: C_DamageMeter.DamageMeterCombatSession
-C_DamageMeter.GetCurrentCombatSessionSource:
+C_DamageMeter.GetCombatSessionFromType:
   inputs:
+  - name: sessionType
+    type:
+      enum: DamageMeterSessionType
   - name: type
     type:
       enum: DamageMeterType
-  - name: unitToken
-    type: unit
-  mayreturnnothing: true
+  outputs:
+  - name: session
+    type:
+      structure: C_DamageMeter.DamageMeterCombatSession
+C_DamageMeter.GetCombatSessionSourceFromID:
+  inputs:
+  - name: sessionID
+    type: number
+  - name: type
+    type:
+      enum: DamageMeterType
+  - name: sourceGUID
+    type: string
+  outputs:
+  - name: sessionSource
+    type:
+      structure: C_DamageMeter.DamageMeterCombatSessionSource
+C_DamageMeter.GetCombatSessionSourceFromType:
+  inputs:
+  - name: sessionType
+    type:
+      enum: DamageMeterSessionType
+  - name: type
+    type:
+      enum: DamageMeterType
+  - name: sourceGUID
+    type: string
   outputs:
   - name: sessionSource
     type:
@@ -9230,6 +9347,9 @@ C_DamageMeter.IsDamageMeterAvailable:
     type: boolean
   - name: failureReason
     type: string
+C_DamageMeter.ResetAllCombatSessions:
+  inputs:
+  outputs:
 C_DateAndTime.AdjustTimeByDays:
   impl: C_DateAndTime.AdjustTimeByDays
   inputs:
@@ -12136,6 +12256,11 @@ C_Housing.GetCurrentHouseLevelFavor:
   - name: houseGuid
     type: string
   outputs:
+C_Housing.GetCurrentHouseRefundAmount:
+  inputs:
+  outputs:
+  - name: refundAmount
+    type: number
 C_Housing.GetCurrentNeighborhoodGUID:
   inputs:
   outputs:
@@ -12244,6 +12369,11 @@ C_Housing.IsInsideHouseOrPlot:
   inputs:
   outputs:
   - name: isInside
+    type: boolean
+C_Housing.IsInsideOwnHouse:
+  inputs:
+  outputs:
+  - name: isInsideOwnHouse
     type: boolean
 C_Housing.IsInsidePlot:
   inputs:
@@ -12507,15 +12637,6 @@ C_HousingCatalog.GetAllFilterTagGroups:
     type:
       arrayof:
         structure: HousingCatalogFilterTagGroupInfo
-C_HousingCatalog.GetBasicDecorInfo:
-  inputs:
-  - name: decorID
-    type: number
-  outputs:
-  - name: info
-    nilable: true
-    type:
-      structure: C_HousingCatalog.HousingCatalogEntryInfo
 C_HousingCatalog.GetBundleInfo:
   inputs:
   - name: bundleCatalogShopProductID
@@ -12545,6 +12666,31 @@ C_HousingCatalog.GetCatalogEntryInfo:
     nilable: true
     type:
       structure: C_HousingCatalog.HousingCatalogEntryInfo
+C_HousingCatalog.GetCatalogEntryInfoByItem:
+  inputs:
+  - name: itemInfo
+    type: string
+  - name: tryGetOwnedInfo
+    type: boolean
+  outputs:
+  - name: info
+    nilable: true
+    type:
+      structure: C_HousingCatalog.HousingCatalogEntryInfo
+C_HousingCatalog.GetCatalogEntryInfoByRecordID:
+  inputs:
+  - name: entryType
+    type:
+      enum: HousingCatalogEntryType
+  - name: recordID
+    type: number
+  - name: tryGetOwnedInfo
+    type: boolean
+  outputs:
+  - name: info
+    nilable: true
+    type:
+      structure: C_HousingCatalog.HousingCatalogEntryInfo
 C_HousingCatalog.GetCatalogSubcategoryInfo:
   inputs:
   - name: subcategoryID
@@ -12554,6 +12700,18 @@ C_HousingCatalog.GetCatalogSubcategoryInfo:
     nilable: true
     type:
       structure: C_HousingCatalog.HousingCatalogSubcategoryInfo
+C_HousingCatalog.GetDecorMaxOwnedCount:
+  inputs:
+  outputs:
+  - name: maxOwnedCount
+    type: number
+C_HousingCatalog.GetDecorTotalOwnedCount:
+  inputs:
+  outputs:
+  - name: totalOwnedCount
+    type: number
+  - name: exemptDecorCount
+    type: number
 C_HousingCatalog.GetFeaturedBundles:
   inputs:
   outputs:
@@ -12689,7 +12847,8 @@ C_HousingCustomizeMode.GetPreviewDyesOnSelectedDecor:
   outputs:
   - name: previewDyes
     type:
-      arrayof: number
+      arrayof:
+        structure: C_HousingCustomizeMode.PreviewDyeSlotInfo
 C_HousingCustomizeMode.GetRecentlyUsedDyes:
   inputs:
   outputs:
@@ -12885,6 +13044,16 @@ C_HousingDecor.IsGridVisible:
   outputs:
   - name: gridVisible
     type: boolean
+C_HousingDecor.IsHouseExteriorDoorHovered:
+  inputs:
+  outputs:
+  - name: isHouseExteriorDoorHovered
+    type: boolean
+C_HousingDecor.IsHouseExteriorHovered:
+  inputs:
+  outputs:
+  - name: isHouseExteriorHovered
+    type: boolean
 C_HousingDecor.IsHoveringDecor:
   inputs:
   outputs:
@@ -13002,6 +13171,9 @@ C_HousingExpertMode.ResetPrecisionChanges:
   - name: activeSubmodeOnly
     type: boolean
   outputs:
+C_HousingExpertMode.SelectNextRotationAxis:
+  inputs:
+  outputs:
 C_HousingExpertMode.SetGridVisible:
   inputs:
   - name: gridVisible
@@ -13012,14 +13184,6 @@ C_HousingExpertMode.SetPrecisionIncrementingActive:
   - name: incrementType
     type:
       enum: HousingIncrementType
-  - name: active
-    type: boolean
-  outputs:
-C_HousingExpertMode.SetPrecisionIncrementRotationAxisActive:
-  inputs:
-  - name: axis
-    type:
-      enum: HousingPrecisionAxis
   - name: active
     type: boolean
   outputs:
@@ -13212,6 +13376,8 @@ C_HousingLayout.ZoomLayoutCamera:
   - name: zoomIn
     type: boolean
   outputs:
+  - name: zoomChanged
+    type: boolean
 C_HousingNeighborhood.CancelInviteToNeighborhood:
   inputs:
   - name: playerName
@@ -13304,6 +13470,11 @@ C_HousingNeighborhood.IsNeighborhoodOwner:
   inputs:
   outputs:
   - name: isOwner
+    type: boolean
+C_HousingNeighborhood.IsPlayerInOtherPlayersPlot:
+  inputs:
+  outputs:
+  - name: isInUnownedPlot
     type: boolean
 C_HousingNeighborhood.IsPlotAvailableForPurchase:
   inputs:
@@ -15265,6 +15436,10 @@ C_LFGList.DoesEntryTitleMatchPrebuiltTitle:
     nilable: true
     type:
       enum: LFGEntryPlaystyle
+  - name: generalPlaystyle
+    nilable: true
+    type:
+      enum: LFGEntryGeneralPlaystyle
   outputs:
   - name: matches
     type: boolean
@@ -15475,6 +15650,9 @@ C_LFGList.GetPlaystyleString:
   - name: playstyle
     type:
       enum: LFGEntryPlaystyle
+  - name: generalPlaystyle
+    type:
+      enum: LFGEntryGeneralPlaystyle
   - name: activityInfo
     type:
       structure: C_LFGList.GroupFinderActivityInfo
@@ -15615,6 +15793,10 @@ C_LFGList.SetEntryTitle:
     nilable: true
     type:
       enum: LFGEntryPlaystyle
+  - name: generalPlaystyle
+    nilable: true
+    type:
+      enum: LFGEntryGeneralPlaystyle
   outputs:
 C_LFGList.SetSearchToActivity:
   inputs:
@@ -19330,6 +19512,11 @@ C_PvP.ArePvpTalentsUnlocked:
   inputs:
   outputs:
   - name: arePvpTalentsUnlocked
+    type: boolean
+C_PvP.AreTrainingGroundsEnabled:
+  inputs:
+  outputs:
+  - name: areTrainingGroundsEnabled
     type: boolean
 C_PvP.CanDisplayDamage:
   inputs:
@@ -36192,9 +36379,6 @@ TargetLastFriend:
 TargetLastTarget:
   inputs:
   outputs:
-TargetLockOnToggle:
-  inputs:
-  outputs:
 TargetNearest:
   inputs:
   - default: false
@@ -36455,8 +36639,8 @@ UnitCastingInfo:
     type: number
 UnitChannelInfo:
   inputs:
-  - name: unitToken
-    type: string
+  - name: unit
+    type: unit
   outputs:
   - name: name
     type: string

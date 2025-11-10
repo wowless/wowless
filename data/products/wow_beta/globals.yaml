@@ -6,6 +6,17 @@ Constants:
     WowhackStoreFrontID: 3
   AuctionConstants:
     DEFAULT_AUCTION_PRICE_MULTIPLIER: 1.5
+  CAAConstants:
+    CAAEnabledDefault: false
+    CAAPlayerHealthFormatDefault: 2
+    CAAPlayerHealthPercentDefault: 0
+    CAATargetHealthFormatDefault: 4
+    CAATargetHealthPercentDefault: 20
+    CAAThrottleDefault: 0
+    CAAThrottleMax: 5
+    CAAThrottleMin: 0
+    CAAThrottleStep: 0.5
+    CAAVoiceDefault: 2
   CalendarGetEventTypeConstants:
     DEFAULT_CALENDAR_GET_EVENT_TYPE: 0
   Callings:
@@ -203,7 +214,7 @@ Constants:
     TIMERUNNING_SEASON_NONE: 0
     TIMERUNNING_SEASON_PANDARIA: 1
   TrainingGroundConstants:
-    RANDOM_TRAINING_GROUND_LFG_DUNGEON_ID: 0
+    RANDOM_TRAINING_GROUND_LFG_DUNGEON_ID: 3178
   TraitConsts:
     COMMIT_COMBAT_TRAIT_CONFIG_CHANGES_SPELL_ID: 384255
     INSPECT_TRAIT_CONFIG_ID: -1
@@ -214,6 +225,13 @@ Constants:
     MainHandTransmogIsIndividualWeapon: -1
     MainHandTransmogIsPairedWeapon: 0
     NoTransmogID: 0
+  TTSConstants:
+    TTSRateDefault: 0
+    TTSRateMax: 10
+    TTSRateMin: -10
+    TTSVolumeDefault: 100
+    TTSVolumeMax: 100
+    TTSVolumeMin: 0
   UICharacterClasses:
     DeathKnight: 6
     DemonHunter: 12
@@ -1491,17 +1509,23 @@ Enum:
     MinValue: 0
     NumValues: 6
   BulkPurchaseResult:
+    ResultFailed: 3
+    ResultInProgress: 1
     ResultOk: 0
+    ResultSuccess: 2
   BulkPurchaseResultMeta:
-    MaxValue: 0
+    MaxValue: 3
     MinValue: 0
-    NumValues: 1
+    NumValues: 4
   BulkRefundResult:
+    ResultFailed: 1
+    ResultInvalidRequest: 2
     ResultOk: 0
+    ResultRefundWindowExpired: 3
   BulkRefundResultMeta:
-    MaxValue: 0
+    MaxValue: 3
     MinValue: 0
-    NumValues: 1
+    NumValues: 4
   CachedRewardType:
     Currency: 2
     Item: 1
@@ -2243,6 +2267,13 @@ Enum:
     MaxValue: 7
     MinValue: 0
     NumValues: 8
+  CombatAudioAlertUnit:
+    Player: 0
+    Target: 1
+  CombatAudioAlertUnitMeta:
+    MaxValue: 1
+    MinValue: 0
+    NumValues: 2
   CombatLogMessageOrder:
     Newest: 0
     Oldest: 1
@@ -3195,6 +3226,13 @@ Enum:
     MaxValue: 2
     MinValue: 0
     NumValues: 3
+  DamageMeterSessionType:
+    Current: 1
+    Overall: 0
+  DamageMeterSessionTypeMeta:
+    MaxValue: 1
+    MinValue: 0
+    NumValues: 2
   DamageMeterStyle:
     Default: 0
     Thin: 1
@@ -3204,13 +3242,15 @@ Enum:
     NumValues: 2
   DamageMeterType:
     DamageDone: 0
+    Dispels: 5
     Dps: 1
     HealingDone: 2
     Hps: 3
+    Interrupts: 4
   DamageMeterTypeMeta:
-    MaxValue: 3
+    MaxValue: 5
     MinValue: 0
-    NumValues: 4
+    NumValues: 6
   DamageMeterVisibility:
     Always: 0
     Hidden: 2
@@ -3998,16 +4038,19 @@ Enum:
     EnconterJournalTutorialsTabSeen: 33
     EventSchedulerTabSeen: 20
     HeirloomJournalLevel: 7
+    HousingCleanupMode: 40
     HousingDecorCleanup: 23
     HousingDecorClippingGrid: 25
     HousingDecorCustomization: 26
     HousingDecorLayout: 27
     HousingDecorPlace: 24
+    HousingExpertMode: 39
     HousingHouseFinderMap: 28
     HousingHouseFinderVisitHouse: 29
     HousingInvalidCollision: 37
     HousingItemAcquisition: 30
     HousingMarketTab: 34
+    HousingModesUnlocked: 38
     HousingNewPip: 31
     HousingTeleportButton: 35
     HudRevampBagChanges: 1
@@ -4025,9 +4068,9 @@ Enum:
     TransferableCurrencies: 10
     TransmogSetsTab: 4
   FrameTutorialAccountMeta:
-    MaxValue: 37
+    MaxValue: 40
     MinValue: 1
-    NumValues: 37
+    NumValues: 40
   GameMode:
     Plunderstorm: 2
     Standard: 1
@@ -4801,12 +4844,13 @@ Enum:
     NumValues: 2
   HousingCustomizeModeTargetType:
     Decor: 1
+    ExteriorHouse: 3
     None: 0
     RoomComponent: 2
   HousingCustomizeModeTargetTypeMeta:
-    MaxValue: 2
+    MaxValue: 3
     MinValue: 0
-    NumValues: 3
+    NumValues: 4
   HousingDecorActionFlags:
     Add: 1
     ClickTarget: 16
@@ -4984,14 +5028,6 @@ Enum:
     MaxValue: 3
     MinValue: 0
     NumValues: 4
-  HousingPrecisionAxis:
-    X: 1
-    Y: 2
-    Z: 4
-  HousingPrecisionAxisMeta:
-    MaxValue: 4
-    MinValue: 1
-    NumValues: 3
   HousingPrecisionSubmode:
     Rotate: 1
     Scale: 2
@@ -5056,26 +5092,28 @@ Enum:
     OperationAborted: 53
     PermissionDenied: 54
     PlacementTargetInvalid: 55
-    PlayerNotInInstance: 56
-    PlotNotFound: 57
-    PlotNotVacant: 58
-    PlotReservationCooldown: 59
-    PlotReserved: 60
-    RoomNotFound: 61
-    RoomUpdateFailed: 62
-    RpcFailure: 63
-    ServiceNotAvailable: 64
+    PlayerNotFound: 56
+    PlayerNotInInstance: 57
+    PlotNotFound: 58
+    PlotNotVacant: 59
+    PlotReservationCooldown: 60
+    PlotReserved: 61
+    RoomNotFound: 62
+    RoomUpdateFailed: 63
+    RpcFailure: 64
+    ServiceNotAvailable: 65
+    StaticDataNotFound: 66
     Success: 0
-    TimeoutLimit: 65
-    TimerunningNotAllowed: 66
-    TokenRequired: 67
-    TooManyRequests: 68
-    TransactionFailure: 69
-    UnlockOperationFailed: 70
+    TimeoutLimit: 67
+    TimerunningNotAllowed: 68
+    TokenRequired: 69
+    TooManyRequests: 70
+    TransactionFailure: 71
+    UnlockOperationFailed: 72
   HousingResultMeta:
-    MaxValue: 70
+    MaxValue: 72
     MinValue: 0
-    NumValues: 71
+    NumValues: 73
   HousingRoomComponentCeilingType:
     Flat: 0
     Vaulted: 1
@@ -5162,16 +5200,25 @@ Enum:
     None: 0
     PartyMember: 8
     Portal: 10
+    Tutorial: 11
     UnspecifiedSpellcast: 2
     Visit: 5
   HousingTeleportReasonMeta:
-    MaxValue: 10
+    MaxValue: 11
     MinValue: 0
-    NumValues: 11
+    NumValues: 12
   HousingThemeFlags:
     None: 0
+    ShowInStyleSelector: 2
     UnlockedByDefault: 1
   HousingThemeFlagsMeta:
+    MaxValue: 2
+    MinValue: 0
+    NumValues: 3
+  HousingThrottleType:
+    Decoration: 1
+    General: 0
+  HousingThrottleTypeMeta:
     MaxValue: 1
     MinValue: 0
     NumValues: 2
@@ -6071,6 +6118,16 @@ Enum:
     MaxValue: 1
     MinValue: 0
     NumValues: 2
+  LFGEntryGeneralPlaystyle:
+    Expert: 4
+    FunRelaxed: 2
+    FunSerious: 3
+    Learning: 1
+    None: 0
+  LFGEntryGeneralPlaystyleMeta:
+    MaxValue: 4
+    MinValue: 0
+    NumValues: 5
   LFGEntryPlaystyle:
     Casual: 2
     Hardcore: 3
@@ -7519,15 +7576,16 @@ Enum:
     GuildLockout: 6
     MaxHouses: 8
     NoExpansion: 4
+    NoGameTimeRemaining: 9
     None: 0
     NotInvited: 3
     Reserved: 5
     WrongFaction: 1
     WrongGuild: 2
   PurchaseHouseDisabledReasonMeta:
-    MaxValue: 8
+    MaxValue: 9
     MinValue: 0
-    NumValues: 9
+    NumValues: 10
   PvPFaction:
     Alliance: 1
     Horde: 0
@@ -7943,6 +8001,14 @@ Enum:
     MaxValue: 524288
     MinValue: 1
     NumValues: 20
+  ReportStorageProvider:
+    Alibaba: 1
+    Aws: 0
+    Gcp: 2
+  ReportStorageProviderMeta:
+    MaxValue: 2
+    MinValue: 0
+    NumValues: 3
   ReportSubComplaintTypes:
     Advertising: 1
     Inappropriate: 0
@@ -7994,11 +8060,12 @@ Enum:
   ReservationFlags:
     Canceled: 2
     None: 0
+    Plotless: 4
     Relinquish: 1
   ReservationFlagsMeta:
-    MaxValue: 2
+    MaxValue: 4
     MinValue: 0
-    NumValues: 3
+    NumValues: 4
   ResidentType:
     Manager: 1
     Owner: 2
@@ -8012,10 +8079,11 @@ Enum:
     ActiveMythicKeystoneOrChallengeMode: 2
     ActivePvPMatch: 3
     InCombat: 0
+    RestrictedMap: 4
   RestrictedActionReasonMeta:
-    MaxValue: 3
+    MaxValue: 4
     MinValue: 0
-    NumValues: 4
+    NumValues: 5
   RestrictedActionType:
     SecretAuras: 0
     SecretCooldowns: 1
@@ -8131,6 +8199,14 @@ Enum:
     MaxValue: 11
     MinValue: 0
     NumValues: 12
+  ScreenshotSource:
+    Automatic: 0
+    Cheat: 2
+    PlayerReport: 1
+  ScreenshotSourceMeta:
+    MaxValue: 2
+    MinValue: 0
+    NumValues: 3
   ScriptedAnimationBehavior:
     None: 0
     SourceCollideWithTarget: 4
@@ -8284,6 +8360,15 @@ Enum:
     MaxValue: 65536
     MinValue: 0
     NumValues: 18
+  SimpleOrderStatus:
+    Failed: 3
+    InProgress: 1
+    Invalid: 0
+    Success: 2
+  SimpleOrderStatusMeta:
+    MaxValue: 3
+    MinValue: 0
+    NumValues: 4
   SkinningState:
     Looting: 3
     None: 0
@@ -9098,15 +9183,16 @@ Enum:
     NumValues: 3
   TransformManipulatorControlState:
     Default: 0
-    ExternallyHighlighted: 2
+    Dimmed: 2
+    ExternallyHighlighted: 3
     Hidden: 1
-    Hovered: 3
-    Moving: 5
-    Selected: 4
+    Hovered: 4
+    Moving: 6
+    Selected: 5
   TransformManipulatorControlStateMeta:
-    MaxValue: 5
+    MaxValue: 6
     MinValue: 0
-    NumValues: 6
+    NumValues: 7
   TransformManipulatorDirection:
     Negative: 1
     Positive: 0
@@ -10216,6 +10302,14 @@ Enum:
     MaxValue: 2
     MinValue: 0
     NumValues: 3
+  WMOExteriorID:
+    DefaultAlliance: 9
+    DefaultHorde: 87
+    Invalid: -1
+  WMOExteriorIDMeta:
+    MaxValue: 87
+    MinValue: -1
+    NumValues: 3
   WorldCursorAnchorType:
     Cursor: 2
     Default: 1
@@ -10868,6 +10962,10 @@ LE_GAME_ERR_GUILD_LEADER_SELF: 137
 LE_GAME_ERR_GUILD_LEAVE_S: 131
 LE_GAME_ERR_GUILD_NAME_EXISTS_S: 156
 LE_GAME_ERR_GUILD_NAME_INVALID: 429
+LE_GAME_ERR_GUILD_NEIGHBORHOOD_BUILT_HOUSE_S: 1219
+LE_GAME_ERR_GUILD_NEIGHBORHOOD_NEW_SUBDIVISION: 1221
+LE_GAME_ERR_GUILD_NEIGHBORHOOD_RENAME_S: 1222
+LE_GAME_ERR_GUILD_NEIGHBORHOOD_SOLD_HOUSE_S: 1220
 LE_GAME_ERR_GUILD_NEW_LEADER_NOT_ALLIED: 150
 LE_GAME_ERR_GUILD_NEW_LEADER_WRONG_REALM: 169
 LE_GAME_ERR_GUILD_NOT_ALLIED: 149
@@ -10902,6 +11000,7 @@ LE_GAME_ERR_HOUSE_MOVED: 1209
 LE_GAME_ERR_HOUSING_ACTION_UNAVAILABLE: 1216
 LE_GAME_ERR_HOUSING_RESULT_MISSING_EXPANSION_ACCESS: 1217
 LE_GAME_ERR_HOUSING_RESULT_NEIGHBORHOOD_NOT_FOUND: 1204
+LE_GAME_ERR_HOUSING_RESULT_PERMISSION_DENIED: 1218
 LE_GAME_ERR_IGNORE_ADDED_S: 341
 LE_GAME_ERR_IGNORE_ALREADY_S: 340
 LE_GAME_ERR_IGNORE_AMBIGUOUS: 343
@@ -11007,6 +11106,7 @@ LE_GAME_ERR_LFG_JOINED_LIST: 839
 LE_GAME_ERR_LFG_JOINED_QUEUE: 833
 LE_GAME_ERR_LFG_JOINED_RF_QUEUE: 835
 LE_GAME_ERR_LFG_JOINED_SCENARIO_QUEUE: 836
+LE_GAME_ERR_LFG_JOINED_TRAINING_GROUNDS_QUEUE: 1225
 LE_GAME_ERR_LFG_JOINED_WORLD_PVP_QUEUE: 837
 LE_GAME_ERR_LFG_LEADER_IS_LFM_S: 634
 LE_GAME_ERR_LFG_LEFT_LIST: 842
@@ -11362,6 +11462,7 @@ LE_GAME_ERR_PVP_MAP_NOT_SET: 983
 LE_GAME_ERR_PVP_PLAYER_ABANDONED: 869
 LE_GAME_ERR_PVP_TOGGLE_OFF: 587
 LE_GAME_ERR_PVP_TOGGLE_ON: 586
+LE_GAME_ERR_PVP_TRAINING_GROUNDS_DISABLED: 1224
 LE_GAME_ERR_PVP_WARMODE_TOGGLE_OFF: 1075
 LE_GAME_ERR_PVP_WARMODE_TOGGLE_ON: 1074
 LE_GAME_ERR_QUEST_ACCEPTED_S: 185
@@ -11467,7 +11568,7 @@ LE_GAME_ERR_REAGENTBAG_ITEM_TYPE: 25
 LE_GAME_ERR_REAGENTBAG_WRONG_SLOT: 23
 LE_GAME_ERR_REALM_NOT_FOUND: 453
 LE_GAME_ERR_RECEIVE_ITEM_S: 49
-LE_GAME_ERR_RECENT_ALLY_PIN_SERVER_ERROR: 1218
+LE_GAME_ERR_RECENT_ALLY_PIN_SERVER_ERROR: 1223
 LE_GAME_ERR_RECRUIT_A_FRIEND_ACCOUNT_LIMIT: 1025
 LE_GAME_ERR_RECRUIT_A_FRIEND_FAILED: 1026
 LE_GAME_ERR_RECRUIT_A_FRIEND_INSUF_EXPAN_LVL: 708

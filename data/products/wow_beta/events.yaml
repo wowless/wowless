@@ -4220,6 +4220,24 @@ DAILY_RESET_INSTANCE_WELCOME:
     type: string
   - name: timeLeft
     type: number
+DAMAGE_METER_COMBAT_SESSION_SOURCE_UPDATED:
+  payload:
+  - name: type
+    type:
+      enum: DamageMeterType
+  - name: sessionID
+    type: number
+  - name: sourceGUID
+    type: string
+DAMAGE_METER_COMBAT_SESSION_UPDATED:
+  payload:
+  - name: type
+    type:
+      enum: DamageMeterType
+  - name: sessionID
+    type: number
+DAMAGE_METER_RESET:
+  payload:
 DEBUG_MENU_TOGGLED:
   payload:
 DECLINE_NEIGHBORHOOD_INVITATION_RESPONSE:
@@ -4493,6 +4511,8 @@ FORBIDDEN_NAME_PLATE_UNIT_REMOVED:
   payload:
   - name: unitToken
     type: string
+FORCE_REFRESH_HOUSE_FINDER:
+  payload:
 FRAME_MANAGER_UPDATE_ALL:
   payload:
 FRAME_MANAGER_UPDATE_FRAME:
@@ -8157,6 +8177,8 @@ TRAINER_SERVICE_INFO_NAME_UPDATE:
 TRAINER_SHOW:
   payload:
 TRAINER_UPDATE:
+  payload:
+TRAINING_GROUNDS_ENABLED_STATUS_UPDATED:
   payload:
 TRAIT_COND_INFO_CHANGED:
   payload:

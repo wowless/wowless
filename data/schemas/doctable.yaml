@@ -53,6 +53,8 @@ type:
               type: boolean
             SecretWhenAurasRestricted:
               type: boolean
+            SecretWhenSpellCastRestricted:
+              type: boolean
             SynchronousEvent:
               type: boolean
             Type:
@@ -177,6 +179,8 @@ type:
                   NotAllowed: tag
             SecretArgumentsAddAspect:
               type: table
+            SecretForAttackableUnits:
+              type: boolean
             SecretInChatMessagingLockdown:
               type: boolean
             SecretNonPlayerUnitOrMinionWhileInCombat:
@@ -190,6 +194,10 @@ type:
             SecretWhenCooldownsRestricted:
               type: boolean
             SecretWhenInCombat:
+              type: boolean
+            SecretWhenUnitIdentityRestricted:
+              type: boolean
+            SecretWhenUnitSpellCastsRestricted:
               type: boolean
             Type:
               required: true
@@ -277,7 +285,7 @@ type:
                       required: true
                       type: string
                     Value:
-                      type: number
+                      type: any
     Type:
       type:
         taggedunion:

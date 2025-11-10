@@ -1293,6 +1293,8 @@ C_CatalogShop.CatalogShopProductInfo:
       type: string
     isBundle:
       type: boolean
+    isDynamicallyDiscounted:
+      type: boolean
     isFullyOwned:
       type: boolean
     isHidden:
@@ -1326,6 +1328,8 @@ C_CatalogShop.CatalogShopProductInfo:
     price:
       type: string
     refundable:
+      type: boolean
+    shouldShowOriginalPrice:
       type: boolean
     smallCardBGTexture:
       nilable: true
@@ -2547,6 +2551,12 @@ C_CurrencyInfo.PlayerCurrencyCategoryInfo:
     currencyTypes:
       type:
         arrayof: number
+C_DamageMeter.DamageMeterAvailableCombatSession:
+  fields:
+    name:
+      type: string
+    sessionID:
+      type: number
 C_DamageMeter.DamageMeterCombatSession:
   fields:
     combatSources:
@@ -2566,10 +2576,14 @@ C_DamageMeter.DamageMeterCombatSessionSource:
       type: number
 C_DamageMeter.DamageMeterCombatSource:
   fields:
+    classFilename:
+      type: string
+    name:
+      type: string
+    sourceGUID:
+      type: string
     totalAmount:
       type: number
-    unitToken:
-      type: string
 C_DamageMeter.DamageMeterCombatSpell:
   fields:
     spellID:
@@ -4067,6 +4081,12 @@ C_HousingCustomizeMode.HousingRoomComponentInstanceInfo:
     type:
       type:
         enum: HousingRoomComponentType
+C_HousingCustomizeMode.PreviewDyeSlotInfo:
+  fields:
+    dyeColorID:
+      type: number
+    dyeSlotID:
+      type: number
 C_HousingCustomizeMode.RoomComponentWallpaper:
   fields:
     name:
@@ -4319,6 +4339,18 @@ C_LFGList.AdvancedFilterOptions:
     difficultyNormal:
       default: false
       type: boolean
+    generalPlaystyle1:
+      default: false
+      type: boolean
+    generalPlaystyle2:
+      default: false
+      type: boolean
+    generalPlaystyle3:
+      default: false
+      type: boolean
+    generalPlaystyle4:
+      default: false
+      type: boolean
     hasHealer:
       default: false
       type: boolean
@@ -4454,6 +4486,10 @@ C_LFGList.LfgEntryData:
       type: string
     duration:
       type: number
+    generalPlaystyle:
+      nilable: true
+      type:
+        enum: LFGEntryGeneralPlaystyle
     isCrossFactionListing:
       type: boolean
     name:
@@ -4486,6 +4522,10 @@ C_LFGList.LfgListingCreateData:
     activityIDs:
       type:
         arrayof: number
+    generalPlaystyle:
+      default: 0
+      type:
+        enum: LFGEntryGeneralPlaystyle
     isAutoAccept:
       default: false
       type: boolean
@@ -4528,6 +4568,10 @@ C_LFGList.LfgSearchResultData:
     crossFactionListing:
       nilable: true
       type: boolean
+    generalPlaystyle:
+      nilable: true
+      type:
+        enum: LFGEntryGeneralPlaystyle
     hasSelf:
       type: boolean
     isDelisted:
@@ -11445,6 +11489,26 @@ NewCraftingOrderInfo:
       type: number
     tipAmount:
       type: number
+NumberAbbrevData:
+  fields:
+    abbreviation:
+      type: string
+    breakpoint:
+      type: number
+    fractionDivisor:
+      type: number
+    significandDivisor:
+      type: number
+NumberAbbrevOptions:
+  fields:
+    breakpointData:
+      nilable: true
+      type:
+        arrayof:
+          structure: NumberAbbrevData
+    locale:
+      nilable: true
+      type: string
 PingCooldownInfo:
   fields:
     endTimeMs:
