@@ -16724,6 +16724,13 @@ GetBinding:
 GetBindingAction:
 GetBindingByKey:
 GetBindingKey:
+  inputs:
+  - name: command
+    type: string
+  outputs:
+  - name: key
+    type: string
+  outstride: 1
 GetBindingText:
   outputs:
   - type: string
