@@ -6459,9 +6459,12 @@ Region:
       init:
       type: table
     bottom:
-      init: 0
+      nilable: true
       type: number
     collapsesLayout:
+      init: false
+      type: boolean
+    dirty:
       init: false
       type: boolean
     explicitlyProtected:
@@ -6477,7 +6480,7 @@ Region:
       init: false
       type: boolean
     left:
-      init: 0
+      nilable: true
       type: number
     mouseClickEnabled:
       init: false
@@ -6491,6 +6494,15 @@ Region:
     points:
       init:
       type: table
+    right:
+      nilable: true
+      type: number
+    top:
+      nilable: true
+      type: number
+    valid:
+      init: false
+      type: boolean
     width:
       init: 0
       type: number
