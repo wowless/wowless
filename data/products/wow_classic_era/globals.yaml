@@ -2443,6 +2443,7 @@ Enum:
     CurrencyUpdateVersionIgnoreMax: 512
     CurrencyUsesLedgerBalance: 2147483648
   CurrencyFlagsB:
+    CurrencyBAllowReductionByResourcefulness: 1024
     CurrencyBBattlenetVirtualCurrency: 8
     CurrencyBDontDisplayIfZero: 32
     CurrencyBForceMaxQuantityOnConversion: 256
@@ -2454,9 +2455,9 @@ Enum:
     CurrencyBUseTotalEarnedForEarned: 1
     FutureCurrencyFlag: 16
   CurrencyFlagsBMeta:
-    MaxValue: 512
+    MaxValue: 1024
     MinValue: 1
-    NumValues: 10
+    NumValues: 11
   CurrencyFlagsMeta:
     MaxValue: -2147483648
     MinValue: 1
@@ -3260,6 +3261,8 @@ Enum:
     Placeholder_2: 60
     Placeholder_3: 61
     Placeholder_4: 63
+    Placeholder_5: 65
+    Placeholder_6: 66
     ProfessionRespec: 58
     ProfessionsCraftingOrder: 48
     ProfessionsCustomerOrder: 50
@@ -3289,9 +3292,9 @@ Enum:
     MinValue: 1
     NumValues: 1
   GossipNpcOptionMeta:
-    MaxValue: 64
+    MaxValue: 66
     MinValue: 0
-    NumValues: 65
+    NumValues: 67
   GossipOptionRecFlags:
     HideOptionIDFromClient: 2
     PlayMovieLabelPrepend: 4
@@ -3896,6 +3899,9 @@ Enum:
     CraftingSkillLineAbilityID: 39
     CraftingSkillReagents: 41
     CraftingSkillWatermark: 42
+    CurrencyWalletID: 61
+    CurrencyWalletQuantity: 62
+    CurrencyWalletVersion: 63
     DbidHigh: 59
     DbidLow: 60
     IncrementLevel: 2
@@ -3929,9 +3935,9 @@ Enum:
     TransmogrifySecondaryItemModifiedAppearanceIDSpec_4: 36
     TransmogrifySecondaryItemModifiedAppearanceIDSpecAll: 31
   ItemModificationMeta:
-    MaxValue: 60
+    MaxValue: 63
     MinValue: 0
-    NumValues: 61
+    NumValues: 64
   ItemProfessionSubclass:
     Alchemy: 2
     Archaeology: 13
@@ -5109,6 +5115,8 @@ Enum:
     PlaceholderType75: 74
     PlaceholderType76: 75
     PlaceholderType77: 77
+    PlaceholderType78: 78
+    PlaceholderType79: 79
     PlayerChoice: 37
     ProfessionRespec: 69
     Professions: 59
@@ -5135,9 +5143,9 @@ Enum:
     WeeklyRewards: 49
     WorldMap: 29
   PlayerInteractionTypeMeta:
-    MaxValue: 77
+    MaxValue: 79
     MinValue: 0
-    NumValues: 78
+    NumValues: 80
   PlayerMentorshipApplicationResult:
     AlreadyMentor: 1
     Ineligible: 2
@@ -5624,6 +5632,13 @@ Enum:
     MaxValue: 4
     MinValue: 0
     NumValues: 5
+  ReleaseType:
+    Classic: 2
+    Original: 1
+  ReleaseTypeMeta:
+    MaxValue: 2
+    MinValue: 1
+    NumValues: 2
   ReportMajorCategory:
     Cheating: 2
     GameplaySabotage: 1
@@ -8734,8 +8749,6 @@ LE_QUEST_TAG_TYPE_TAG: 0
 LE_REALM_RELATION_COALESCED: 2
 LE_REALM_RELATION_SAME: 1
 LE_REALM_RELATION_VIRTUAL: 3
-LE_RELEASE_TYPE_CLASSIC: 2
-LE_RELEASE_TYPE_ORIGINAL: 1
 LE_SCENARIO_TYPE_BOOST_TUTORIAL: 5
 LE_SCENARIO_TYPE_CHALLENGE_MODE: 1
 LE_SCENARIO_TYPE_DEFAULT: 0
@@ -8831,7 +8844,6 @@ NUM_LE_QUEST_FACTIONS: 2
 NUM_LE_QUEST_FREQUENCYS: 3
 NUM_LE_QUEST_TAG_TYPES: 12
 NUM_LE_REALM_RELATIONS: 3
-NUM_LE_RELEASE_TYPES: 3
 NUM_LE_SCENARIO_TYPES: 7
 NUM_LE_SCRIPT_BINDING_TYPES: 2
 NUM_LE_TOKEN_CHOICES: 2

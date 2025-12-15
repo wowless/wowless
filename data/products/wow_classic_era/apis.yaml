@@ -2426,6 +2426,21 @@ C_ChallengeMode.GetNumChallengeMapRewards:
   outputs:
   - name: numRewards
     type: number
+C_ChallengeMode.GetNumMedals:
+  inputs:
+  - name: mapID
+    type: number
+  outputs:
+  - name: numMedals
+    type: number
+C_ChallengeMode.GetSpecificDungeonOverallScoreRarityColor:
+  inputs:
+  - name: specificDungeonOverallScore
+    type: number
+  outputs:
+  - name: specificDungeonOverallScoreColor
+    type:
+      structure: colorRGB
 C_ChallengeMode.IsChallengeModeActive:
   inputs:
   outputs:
@@ -2441,6 +2456,15 @@ C_ChallengeMode.IsChallengeModeResettable:
   outputs:
   - name: canReset
     type: boolean
+C_ChallengeMode.RequestChallengeModeLeaderboard:
+  inputs:
+  - name: mapID
+    type: number
+  - name: challengeModeID
+    type: number
+  - name: page
+    type: number
+  outputs:
 C_ChallengeMode.RequestLeaders:
   inputs:
   - name: mapChallengeModeID
@@ -10548,6 +10572,11 @@ C_PvP.GetRatedBGRewards:
     nilable: true
     type:
       structure: C_PvP.RoleShortageReward
+C_PvP.GetSelectedBattlefieldIndex:
+  inputs:
+  outputs:
+  - name: index
+    type: number
 C_PvP.GetWorldPVPAreaInfo:
   inputs:
   - name: index
@@ -10594,6 +10623,17 @@ C_PvP.IsSubZonePVPPOI:
   outputs:
   - name: result
     type: boolean
+C_PvP.JoinBattlefield:
+  inputs:
+  - name: battlemasterListId
+    type: number
+  - name: joinAsGroup
+    nilable: true
+    type: boolean
+  - name: instanceIndex
+    nilable: true
+    type: number
+  outputs:
 C_PvP.RequestCrowdControlSpell:
   inputs:
   - name: playerToken
@@ -10609,6 +10649,11 @@ C_PvP.SetPVP:
   - default: false
     name: enablePVP
     type: boolean
+  outputs:
+C_PvP.SetSelectedBattlefieldByIndex:
+  inputs:
+  - name: index
+    type: number
   outputs:
 C_PvP.TogglePVP:
   inputs:
@@ -16841,6 +16886,8 @@ GetDifficultyInfo:
   - name: maxPlayers
     nilable: true
     type: number
+  - name: isUserSelectable
+    type: boolean
 GetDodgeChance:
   inputs:
   outputs:
@@ -16892,7 +16939,9 @@ GetExpansionDisplayInfo:
   - name: expansionLevel
     type: number
   - name: desiredReleaseType
-    type: number
+    nilable: true
+    type:
+      enum: ReleaseType
   outputs:
   - name: info
     nilable: true
@@ -19430,11 +19479,6 @@ GetSelectedAuctionItem:
   outputs:
   - name: index
     type: number
-GetSelectedBattlefield:
-  inputs:
-  outputs:
-  - name: value
-    type: number
 GetSelectedDisplayChannel:
 GetSelectedFaction:
   inputs:
@@ -21193,7 +21237,6 @@ ItemTextIsFullPage:
 ItemTextNextPage:
 ItemTextPrevPage:
 JoinArena:
-JoinBattlefield:
 JoinChannelByName:
 JoinLFG:
 JoinPermanentChannel:
@@ -22010,7 +22053,6 @@ SetSavedInstanceExtend:
 SetScreenResolution:
 setsecurehookforbidden:
 SetSelectedAuctionItem:
-SetSelectedBattlefield:
 SetSelectedDisplayChannel:
 SetSelectedFaction:
 SetSelectedScreenResolutionIndex:

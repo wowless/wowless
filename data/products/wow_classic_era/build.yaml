@@ -1,7 +1,7 @@
-build: '64272'
-date: Nov  4 2025
+build: '64907'
+date: Dec 11 2025
 gametype: Vanilla
-hash: c11ce61c5c40f3cbde67fcff1a6930f2
+hash: 315b6a49a35e26c90bece38e6b60f401
 test: false
 tocversion: 11508
 version: 1.15.8
