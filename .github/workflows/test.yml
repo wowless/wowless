@@ -14,7 +14,7 @@ jobs:
       with:
         submodules: true
     - run: mkdir vcpkg-cache
-    - uses: actions/cache@v4
+    - uses: actions/cache@v5
       with:
         path: vcpkg-cache
         key: vcpkg-devcontainer-${{ github.run_id }}
@@ -70,7 +70,7 @@ jobs:
       with:
         submodules: true
     - run: mkdir ${{ env.VCPKG_DEFAULT_BINARY_CACHE }}
-    - uses: actions/cache@v4
+    - uses: actions/cache@v5
       with:
         path: ${{ env.VCPKG_DEFAULT_BINARY_CACHE }}
         key: vcpkg-${{ runner.os }}-${{ github.run_id }}
