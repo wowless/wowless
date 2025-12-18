@@ -1088,6 +1088,9 @@ C_CatalogShop.CatalogShopProductInfo:
       type:
         arrayof:
           structure: C_CatalogShop.CatalogShopVirtualCurrency
+    wideCardBGOverrideProductURL:
+      nilable: true
+      type: string
     wideCardBGTexture:
       nilable: true
       type: string

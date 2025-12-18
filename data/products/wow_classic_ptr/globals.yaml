@@ -6113,12 +6113,13 @@ Enum:
   SurveyDeliveryMoment:
     ChestLooted: 3
     Login: 0
+    MythicPusCompleted: 4
     ProfessionTable: 1
     QuestTurnIn: 2
   SurveyDeliveryMomentMeta:
-    MaxValue: 3
+    MaxValue: 4
     MinValue: 0
-    NumValues: 4
+    NumValues: 5
   TimeEventFlag:
     GlueScreenShortcut: 1
   TimeEventFlagMeta:

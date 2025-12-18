@@ -7022,6 +7022,27 @@ Scale:
       - name: scaleY
         type: number
       outputs:
+ScenarioPOIFrame:
+  fields:
+  inherits:
+    Frame:
+    POIFrame:
+  methods:
+    GetScenarioTooltipText:
+      inputs:
+      outputs:
+      - name: tooltipText
+        nilable: true
+        type: string
+    UpdateMouseOverTooltip:
+      inputs:
+      - name: x
+        type: number
+      - name: y
+        type: number
+      outputs:
+      - name: hasTooltip
+        type: boolean
 ScriptObject:
   fields:
   inherits:

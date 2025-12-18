@@ -367,6 +367,7 @@ script_objects:
   FrameAPIModelSceneFrameActor: Actor
   FrameAPIModelSceneFrameActorBase: Actor
   FrameAPIQuestPOI: QuestPOIFrame
+  FrameAPIScenarioPOI: ScenarioPOIFrame
   FrameAPISimpleCheckout: Checkout
   FrameAPITabardModel: TabardModel
   FrameAPITabardModelBase: TabardModel
