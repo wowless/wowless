@@ -1258,6 +1258,8 @@ C_CatalogShop.CatalogShopProductInfo:
       type: string
     isBundle:
       type: boolean
+    isDynamicallyDiscounted:
+      type: boolean
     isFullyOwned:
       type: boolean
     isHidden:
@@ -1291,6 +1293,8 @@ C_CatalogShop.CatalogShopProductInfo:
     price:
       type: string
     refundable:
+      type: boolean
+    shouldShowOriginalPrice:
       type: boolean
     smallCardBGTexture:
       nilable: true
@@ -3812,6 +3816,12 @@ C_HousingCustomizeMode.HousingRoomComponentInstanceInfo:
     type:
       type:
         enum: HousingRoomComponentType
+C_HousingCustomizeMode.PreviewDyeSlotInfo:
+  fields:
+    dyeColorID:
+      type: number
+    dyeSlotID:
+      type: number
 C_HousingCustomizeMode.RoomComponentWallpaper:
   fields:
     name:

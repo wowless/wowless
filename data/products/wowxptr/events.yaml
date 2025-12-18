@@ -4385,6 +4385,8 @@ FORBIDDEN_NAME_PLATE_UNIT_REMOVED:
   payload:
   - name: unitToken
     type: string
+FORCE_REFRESH_HOUSE_FINDER:
+  payload:
 FRAME_MANAGER_UPDATE_ALL:
   payload:
 FRAME_MANAGER_UPDATE_FRAME:

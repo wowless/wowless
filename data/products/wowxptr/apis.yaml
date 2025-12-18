@@ -531,6 +531,13 @@ C_ActionBar.IsHelpfulAction:
   outputs:
   - name: isHelpful
     type: boolean
+C_ActionBar.IsInterruptAction:
+  inputs:
+  - name: slotID
+    type: number
+  outputs:
+  - name: isInterruptAction
+    type: boolean
 C_ActionBar.IsOnBarOrSpecialBar:
   inputs:
   - name: spellID
@@ -11395,6 +11402,14 @@ C_Housing.CanEditCharter:
   outputs:
   - name: canEditCharter
     type: boolean
+C_Housing.CanTakeReportScreenshot:
+  inputs:
+  - name: plotIndex
+    type: number
+  outputs:
+  - name: reason
+    type:
+      enum: InvalidPlotScreenshotReason
 C_Housing.CreateGuildNeighborhood:
   inputs:
   - name: neighborhoodName
@@ -11432,6 +11447,11 @@ C_Housing.GetCurrentHouseLevelFavor:
   - name: houseGuid
     type: string
   outputs:
+C_Housing.GetCurrentHouseRefundAmount:
+  inputs:
+  outputs:
+  - name: refundAmount
+    type: number
 C_Housing.GetCurrentNeighborhoodGUID:
   inputs:
   outputs:
@@ -11540,6 +11560,11 @@ C_Housing.IsInsideHouseOrPlot:
   inputs:
   outputs:
   - name: isInside
+    type: boolean
+C_Housing.IsInsideOwnHouse:
+  inputs:
+  outputs:
+  - name: isInsideOwnHouse
     type: boolean
 C_Housing.IsInsidePlot:
   inputs:
@@ -11819,6 +11844,31 @@ C_HousingCatalog.GetCatalogEntryInfo:
     nilable: true
     type:
       structure: C_HousingCatalog.HousingCatalogEntryInfo
+C_HousingCatalog.GetCatalogEntryInfoByItem:
+  inputs:
+  - name: itemInfo
+    type: string
+  - name: tryGetOwnedInfo
+    type: boolean
+  outputs:
+  - name: info
+    nilable: true
+    type:
+      structure: C_HousingCatalog.HousingCatalogEntryInfo
+C_HousingCatalog.GetCatalogEntryInfoByRecordID:
+  inputs:
+  - name: entryType
+    type:
+      enum: HousingCatalogEntryType
+  - name: recordID
+    type: number
+  - name: tryGetOwnedInfo
+    type: boolean
+  outputs:
+  - name: info
+    nilable: true
+    type:
+      structure: C_HousingCatalog.HousingCatalogEntryInfo
 C_HousingCatalog.GetCatalogSubcategoryInfo:
   inputs:
   - name: subcategoryID
@@ -11828,6 +11878,18 @@ C_HousingCatalog.GetCatalogSubcategoryInfo:
     nilable: true
     type:
       structure: C_HousingCatalog.HousingCatalogSubcategoryInfo
+C_HousingCatalog.GetDecorMaxOwnedCount:
+  inputs:
+  outputs:
+  - name: maxOwnedCount
+    type: number
+C_HousingCatalog.GetDecorTotalOwnedCount:
+  inputs:
+  outputs:
+  - name: totalOwnedCount
+    type: number
+  - name: exemptDecorCount
+    type: number
 C_HousingCatalog.GetFeaturedBundles:
   inputs:
   outputs:
@@ -11949,7 +12011,8 @@ C_HousingCustomizeMode.GetPreviewDyesOnSelectedDecor:
   outputs:
   - name: previewDyes
     type:
-      arrayof: number
+      arrayof:
+        structure: C_HousingCustomizeMode.PreviewDyeSlotInfo
 C_HousingCustomizeMode.GetRecentlyUsedDyes:
   inputs:
   outputs:
@@ -12124,6 +12187,11 @@ C_HousingDecor.GetSpentPlacementBudget:
   outputs:
   - name: totalCost
     type: number
+C_HousingDecor.HasMaxPlacementBudget:
+  inputs:
+  outputs:
+  - name: hasMaxBudget
+    type: boolean
 C_HousingDecor.IsDecorSelected:
   inputs:
   outputs:
@@ -12133,6 +12201,16 @@ C_HousingDecor.IsGridVisible:
   inputs:
   outputs:
   - name: gridVisible
+    type: boolean
+C_HousingDecor.IsHouseExteriorDoorHovered:
+  inputs:
+  outputs:
+  - name: isHouseExteriorDoorHovered
+    type: boolean
+C_HousingDecor.IsHouseExteriorHovered:
+  inputs:
+  outputs:
+  - name: isHouseExteriorHovered
     type: boolean
 C_HousingDecor.IsHoveringDecor:
   inputs:
@@ -12237,6 +12315,9 @@ C_HousingExpertMode.ResetPrecisionChanges:
   inputs:
   - name: activeSubmodeOnly
     type: boolean
+  outputs:
+C_HousingExpertMode.SelectNextRotationAxis:
+  inputs:
   outputs:
 C_HousingExpertMode.SetGridVisible:
   inputs:
@@ -12448,6 +12529,8 @@ C_HousingLayout.ZoomLayoutCamera:
   - name: zoomIn
     type: boolean
   outputs:
+  - name: zoomChanged
+    type: boolean
 C_HousingNeighborhood.CancelInviteToNeighborhood:
   inputs:
   - name: playerName
@@ -12540,6 +12623,11 @@ C_HousingNeighborhood.IsNeighborhoodOwner:
   inputs:
   outputs:
   - name: isOwner
+    type: boolean
+C_HousingNeighborhood.IsPlayerInOtherPlayersPlot:
+  inputs:
+  outputs:
+  - name: isInUnownedPlot
     type: boolean
 C_HousingNeighborhood.IsPlotAvailableForPurchase:
   inputs:
@@ -20524,6 +20612,9 @@ C_ReportSystem.RequiresScreenshotForReportType:
   - name: reportType
     type:
       enum: ReportType
+  - name: majorCategory
+    type:
+      enum: ReportMajorCategory
   outputs:
   - name: requiresScreenshot
     type: boolean
@@ -30088,6 +30179,8 @@ GetDifficultyInfo:
   - name: maxPlayers
     nilable: true
     type: number
+  - name: isUserSelectable
+    type: boolean
 GetDodgeChance:
   inputs:
   outputs:

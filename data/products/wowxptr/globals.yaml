@@ -3597,16 +3597,19 @@ Enum:
     EnconterJournalTutorialsTabSeen: 33
     EventSchedulerTabSeen: 20
     HeirloomJournalLevel: 7
+    HousingCleanupMode: 40
     HousingDecorCleanup: 23
     HousingDecorClippingGrid: 25
     HousingDecorCustomization: 26
     HousingDecorLayout: 27
     HousingDecorPlace: 24
+    HousingExpertMode: 39
     HousingHouseFinderMap: 28
     HousingHouseFinderVisitHouse: 29
     HousingInvalidCollision: 37
     HousingItemAcquisition: 30
     HousingMarketTab: 34
+    HousingModesUnlocked: 38
     HousingNewPip: 31
     HousingTeleportButton: 35
     HudRevampBagChanges: 1
@@ -3624,9 +3627,9 @@ Enum:
     TransferableCurrencies: 10
     TransmogSetsTab: 4
   FrameTutorialAccountMeta:
-    MaxValue: 37
+    MaxValue: 40
     MinValue: 1
-    NumValues: 37
+    NumValues: 40
   GameMode:
     Plunderstorm: 2
     Standard: 1
@@ -4399,12 +4402,13 @@ Enum:
     NumValues: 2
   HousingCustomizeModeTargetType:
     Decor: 1
+    ExteriorHouse: 3
     None: 0
     RoomComponent: 2
   HousingCustomizeModeTargetTypeMeta:
-    MaxValue: 2
+    MaxValue: 3
     MinValue: 0
-    NumValues: 3
+    NumValues: 4
   HousingDecorActionFlags:
     Add: 1
     ClickTarget: 16
@@ -4619,60 +4623,63 @@ Enum:
     FixtureTypeMismatch: 19
     GenericFailure: 20
     GuildNotLoaded: 21
-    HookNotChildOfFixture: 23
-    HouseExteriorRootNotFound: 22
-    HouseNotFound: 24
-    IncorrectFaction: 25
-    InvalidDecorItem: 26
-    InvalidDistance: 27
-    InvalidGuild: 28
-    InvalidHouse: 29
-    InvalidInstance: 30
-    InvalidInteraction: 31
-    InvalidMap: 32
-    InvalidNeighborhoodName: 33
-    InvalidRoomLayout: 34
-    LockedByOtherPlayer: 35
-    LockOperationFailed: 36
-    MaxDecorReached: 37
-    MissingCoreFixture: 38
-    MissingDye: 39
-    MissingExpansionAccess: 40
-    MissingFactionMap: 41
-    MissingPrivateNeighborhoodInvite: 42
-    MissingTheme: 43
-    MoreHouseSlotsNeeded: 44
-    MoreSignaturesNeeded: 45
-    NeighborhoodNotFound: 46
-    NoNeighborhoodOwnershipRequests: 48
-    NotInDecorEditMode: 47
-    NotInFixtureEditMode: 49
-    NotInLayoutEditMode: 50
-    NotInsideHouse: 51
-    NotOnOwnedPlot: 52
-    OperationAborted: 53
-    PermissionDenied: 54
-    PlacementTargetInvalid: 55
-    PlayerNotInInstance: 56
-    PlotNotFound: 57
-    PlotNotVacant: 58
-    PlotReservationCooldown: 59
-    PlotReserved: 60
-    RoomNotFound: 61
-    RoomUpdateFailed: 62
-    RpcFailure: 63
-    ServiceNotAvailable: 64
+    HookNotChildOfFixture: 24
+    HouseEditLockFailed: 22
+    HouseExteriorRootNotFound: 23
+    HouseNotFound: 25
+    IncorrectFaction: 26
+    InvalidDecorItem: 27
+    InvalidDistance: 28
+    InvalidGuild: 29
+    InvalidHouse: 30
+    InvalidInstance: 31
+    InvalidInteraction: 32
+    InvalidMap: 33
+    InvalidNeighborhoodName: 34
+    InvalidRoomLayout: 35
+    LockedByOtherPlayer: 36
+    LockOperationFailed: 37
+    MaxDecorReached: 38
+    MissingCoreFixture: 39
+    MissingDye: 40
+    MissingExpansionAccess: 41
+    MissingFactionMap: 42
+    MissingPrivateNeighborhoodInvite: 43
+    MissingTheme: 44
+    MoreHouseSlotsNeeded: 45
+    MoreSignaturesNeeded: 46
+    NeighborhoodNotFound: 47
+    NoNeighborhoodOwnershipRequests: 49
+    NotInDecorEditMode: 48
+    NotInFixtureEditMode: 50
+    NotInLayoutEditMode: 51
+    NotInsideHouse: 52
+    NotOnOwnedPlot: 53
+    OperationAborted: 54
+    PermissionDenied: 55
+    PlacementTargetInvalid: 56
+    PlayerNotFound: 57
+    PlayerNotInInstance: 58
+    PlotNotFound: 59
+    PlotNotVacant: 60
+    PlotReservationCooldown: 61
+    PlotReserved: 62
+    RoomNotFound: 63
+    RoomUpdateFailed: 64
+    RpcFailure: 65
+    ServiceNotAvailable: 66
+    StaticDataNotFound: 67
     Success: 0
-    TimeoutLimit: 65
-    TimerunningNotAllowed: 66
-    TokenRequired: 67
-    TooManyRequests: 68
-    TransactionFailure: 69
-    UnlockOperationFailed: 70
+    TimeoutLimit: 68
+    TimerunningNotAllowed: 69
+    TokenRequired: 70
+    TooManyRequests: 71
+    TransactionFailure: 72
+    UnlockOperationFailed: 73
   HousingResultMeta:
-    MaxValue: 70
+    MaxValue: 73
     MinValue: 0
-    NumValues: 71
+    NumValues: 74
   HousingRoomComponentCeilingType:
     Flat: 0
     Vaulted: 1
@@ -4767,8 +4774,16 @@ Enum:
     NumValues: 11
   HousingThemeFlags:
     None: 0
+    ShowInStyleSelector: 2
     UnlockedByDefault: 1
   HousingThemeFlagsMeta:
+    MaxValue: 2
+    MinValue: 0
+    NumValues: 3
+  HousingThrottleType:
+    Decoration: 1
+    General: 0
+  HousingThrottleTypeMeta:
     MaxValue: 1
     MinValue: 0
     NumValues: 2
@@ -4805,6 +4820,16 @@ Enum:
     MaxValue: 3
     MinValue: 0
     NumValues: 4
+  InvalidPlotScreenshotReason:
+    Facing: 2
+    NoActivePlayer: 4
+    None: 0
+    NoNeighborhoodFound: 3
+    OutOfBounds: 1
+  InvalidPlotScreenshotReasonMeta:
+    MaxValue: 4
+    MinValue: 0
+    NumValues: 5
   InventoryType:
     Index2HweaponType: 17
     IndexAmmoType: 24
@@ -6960,15 +6985,16 @@ Enum:
     GuildLockout: 6
     MaxHouses: 8
     NoExpansion: 4
+    NoGameTimeRemaining: 9
     None: 0
     NotInvited: 3
     Reserved: 5
     WrongFaction: 1
     WrongGuild: 2
   PurchaseHouseDisabledReasonMeta:
-    MaxValue: 8
+    MaxValue: 9
     MinValue: 0
-    NumValues: 9
+    NumValues: 10
   PvPFaction:
     Alliance: 1
     Horde: 0
@@ -7360,6 +7386,14 @@ Enum:
     MaxValue: 524288
     MinValue: 1
     NumValues: 20
+  ReportStorageProvider:
+    Alibaba: 1
+    Aws: 0
+    Gcp: 2
+  ReportStorageProviderMeta:
+    MaxValue: 2
+    MinValue: 0
+    NumValues: 3
   ReportSubComplaintTypes:
     Advertising: 1
     Inappropriate: 0
@@ -7391,15 +7425,16 @@ Enum:
     InWorld: 1
     Mail: 12
     Neighborhood: 19
+    NeighborhoodRoster: 20
     Pet: 9
     PvP: 13
     PvPGroupMember: 15
     PvPScoreboard: 14
     RecentAlly: 17
   ReportTypeMeta:
-    MaxValue: 19
+    MaxValue: 20
     MinValue: 0
-    NumValues: 20
+    NumValues: 21
   ReputationSortType:
     Account: 1
     Character: 2
@@ -7532,6 +7567,14 @@ Enum:
     MaxValue: 11
     MinValue: 0
     NumValues: 12
+  ScreenshotSource:
+    Automatic: 0
+    Cheat: 2
+    PlayerReport: 1
+  ScreenshotSourceMeta:
+    MaxValue: 2
+    MinValue: 0
+    NumValues: 3
   ScriptedAnimationBehavior:
     None: 0
     SourceCollideWithTarget: 4
@@ -8423,15 +8466,16 @@ Enum:
     NumValues: 3
   TransformManipulatorControlState:
     Default: 0
-    ExternallyHighlighted: 2
+    Dimmed: 2
+    ExternallyHighlighted: 3
     Hidden: 1
-    Hovered: 3
-    Moving: 5
-    Selected: 4
+    Hovered: 4
+    Moving: 6
+    Selected: 5
   TransformManipulatorControlStateMeta:
-    MaxValue: 5
+    MaxValue: 6
     MinValue: 0
-    NumValues: 6
+    NumValues: 7
   TransformManipulatorDirection:
     Negative: 1
     Positive: 0
@@ -9546,6 +9590,14 @@ Enum:
   WidgetUnitPowerBarFlashMomentTypeMeta:
     MaxValue: 2
     MinValue: 0
+    NumValues: 3
+  WMOExteriorID:
+    DefaultAlliance: 9
+    DefaultHorde: 87
+    Invalid: -1
+  WMOExteriorIDMeta:
+    MaxValue: 87
+    MinValue: -1
     NumValues: 3
   WorldCursorAnchorType:
     Cursor: 2
