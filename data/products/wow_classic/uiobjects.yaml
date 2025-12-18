@@ -21,7 +21,39 @@ Actor:
     RegionBase:
     ScriptObjectBase:
   methods:
+    AttachToMount:
+      inputs:
+      - name: rider
+        type:
+          uiobject: Actor
+      - name: animation
+        type: number
+      - name: spellKitVisualID
+        nilable: true
+        type: number
+      outputs:
+      - name: success
+        type: boolean
+    CalculateMountScale:
+      inputs:
+      - name: rider
+        type:
+          uiobject: Actor
+      outputs:
+      - name: scale
+        type: number
     ClearModel:
+      inputs:
+      outputs:
+    DetachFromMount:
+      inputs:
+      - name: rider
+        type:
+          uiobject: Actor
+      outputs:
+      - name: success
+        type: boolean
+    Dress:
       inputs:
       outputs:
     GetActiveBoundingBox:
@@ -52,6 +84,11 @@ Actor:
       outputs:
       - name: variation
         type: number
+    GetAutoDress:
+      inputs:
+      outputs:
+      - name: autoDress
+        type: boolean
     GetDesaturation:
       impl:
         getter:
@@ -84,6 +121,11 @@ Actor:
       outputs:
       - name: guid
         type: string
+    GetObeyHideInTransmogFlag:
+      inputs:
+      outputs:
+      - name: obey
+        type: boolean
     GetParticleOverrideScale:
       inputs:
       outputs:
@@ -115,11 +157,26 @@ Actor:
       outputs:
       - name: roll
         type: number
+    GetSheathed:
+      inputs:
+      outputs:
+      - name: sheathed
+        type: boolean
     GetSpellVisualKit:
       inputs:
       outputs:
       - name: spellVisualKitID
         type: number
+    GetUseTransmogChoices:
+      inputs:
+      outputs:
+      - name: use
+        type: boolean
+    GetUseTransmogSkin:
+      inputs:
+      outputs:
+      - name: use
+        type: boolean
     GetYaw:
       impl:
         getter:
@@ -128,6 +185,11 @@ Actor:
       outputs:
       - name: yaw
         type: number
+    IsGeoReady:
+      inputs:
+      outputs:
+      - name: isReady
+        type: boolean
     IsLoaded:
       inputs:
       outputs:
@@ -149,6 +211,9 @@ Actor:
       - default: false
         name: isLooping
         type: boolean
+      outputs:
+    ResetNextHandSlot:
+      inputs:
       outputs:
     SetAnimation:
       inputs:
@@ -172,6 +237,11 @@ Actor:
       - name: blendOp
         type:
           enum: ModelBlendOperation
+      outputs:
+    SetAutoDress:
+      inputs:
+      - name: autoDress
+        type: boolean
       outputs:
     SetDesaturation:
       impl:
@@ -230,9 +300,17 @@ Actor:
       - default: false
         name: holdBowString
         type: boolean
+      - name: customRaceID
+        nilable: true
+        type: number
       outputs:
       - name: success
         type: boolean
+    SetObeyHideInTransmogFlag:
+      inputs:
+      - name: obey
+        type: boolean
+      outputs:
     SetParticleOverrideScale:
       inputs:
       - name: scale
@@ -264,6 +342,9 @@ Actor:
       - default: true
         name: usePlayerNativeForm
         type: boolean
+      - name: customRaceID
+        nilable: true
+        type: number
       outputs:
       - name: success
         type: boolean
@@ -284,6 +365,14 @@ Actor:
       - name: roll
         type: number
       outputs:
+    SetSheathed:
+      inputs:
+      - name: sheathed
+        type: boolean
+      - default: false
+        name: hidden
+        type: boolean
+      outputs:
     SetSpellVisualKit:
       inputs:
       - default: 0
@@ -303,6 +392,16 @@ Actor:
         type: boolean
       - default: false
         name: z
+        type: boolean
+      outputs:
+    SetUseTransmogChoices:
+      inputs:
+      - name: use
+        type: boolean
+      outputs:
+    SetUseTransmogSkin:
+      inputs:
+      - name: use
         type: boolean
       outputs:
     SetYaw:
@@ -331,6 +430,12 @@ Actor:
         nilable: true
         type:
           enum: ItemTryOnReason
+    Undress:
+      inputs:
+      - default: true
+        name: includeWeapons
+        type: boolean
+      outputs:
   objectType: ModelSceneActor
   scripts:
     OnAnimFinished:
@@ -5257,6 +5362,11 @@ ModelScene:
       - name: index
         type: number
       outputs:
+    GetAllowOverlappedModels:
+      inputs:
+      outputs:
+      - name: allowOverlappedModels
+        type: boolean
     GetCameraFarClip:
       impl:
         getter:
@@ -5437,6 +5547,11 @@ ModelScene:
         type: number
       - name: depth
         type: number
+    SetAllowOverlappedModels:
+      inputs:
+      - name: allowOverlappedModels
+        type: boolean
+      outputs:
     SetCameraFarClip:
       impl:
         setter:
@@ -6907,6 +7022,27 @@ Scale:
       - name: scaleY
         type: number
       outputs:
+ScenarioPOIFrame:
+  fields:
+  inherits:
+    Frame:
+    POIFrame:
+  methods:
+    GetScenarioTooltipText:
+      inputs:
+      outputs:
+      - name: tooltipText
+        nilable: true
+        type: string
+    UpdateMouseOverTooltip:
+      inputs:
+      - name: x
+        type: number
+      - name: y
+        type: number
+      outputs:
+      - name: hasTooltip
+        type: boolean
 ScriptObject:
   fields:
   inherits:

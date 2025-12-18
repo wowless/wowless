@@ -16,6 +16,14 @@ lies:
       outputs:
       - _add:
           nilable: true
+    UnitFactionGroup:
+      _add:
+        mayreturnnothing: true
+      inputs:
+      - type:
+          _change:
+            from: string
+            to: unit
   extra_apis:
     C_BarberShopInternal.SetQAMode:
     C_ConfigurationWarnings.GetConfigurationWarnings:
@@ -359,6 +367,7 @@ script_objects:
   FrameAPIModelSceneFrameActor: Actor
   FrameAPIModelSceneFrameActorBase: Actor
   FrameAPIQuestPOI: QuestPOIFrame
+  FrameAPIScenarioPOI: ScenarioPOIFrame
   FrameAPISimpleCheckout: Checkout
   FrameAPITabardModel: TabardModel
   FrameAPITabardModelBase: TabardModel
@@ -465,6 +474,8 @@ typedefs:
     type: function
   luaIndex:
     type: number
+  LuaValueReference:
+    type: unknown
   LuaValueVariant:
     type: table
   ModelAsset:
