@@ -1161,6 +1161,20 @@ C_CatalogShop.AvailableRaceInfo:
       type: string
     raceID:
       type: number
+C_CatalogShop.BulkPurchaseIndividualProductResult:
+  fields:
+    entitlementId:
+      type: string
+    externalTransactionId:
+      type: string
+    parentProductId:
+      nilable: true
+      type: number
+    recordId:
+      type: number
+    status:
+      type:
+        enum: SimpleOrderStatus
 C_CatalogShop.CatalogShopBundleChildInfo:
   fields:
     childProductID:
@@ -1179,6 +1193,8 @@ C_CatalogShop.CatalogShopCategoryInfo:
       type: boolean
     linkTag:
       type: string
+    showPersistentRefundButton:
+      type: boolean
 C_CatalogShop.CatalogShopProductDisplayInfo:
   fields:
     creatureDisplayInfoIDs:
@@ -1280,6 +1296,9 @@ C_CatalogShop.CatalogShopProductInfo:
       type: number
     catalogShopProductID:
       type: number
+    consumableQuantity:
+      nilable: true
+      type: number
     description:
       type: string
     discountPercentage:
@@ -1354,6 +1373,9 @@ C_CatalogShop.CatalogShopProductInfo:
       type:
         arrayof:
           structure: C_CatalogShop.CatalogShopVirtualCurrency
+    wideCardBGOverrideProductURL:
+      nilable: true
+      type: string
     wideCardBGTexture:
       nilable: true
       type: string
@@ -1402,6 +1424,14 @@ C_CatalogShop.CatalogShopVirtualCurrency:
       type: number
     currencyCode:
       type: string
+C_CatalogShop.RefundableDecorInfo:
+  fields:
+    decorGUID:
+      type: string
+    standaloneDecorProductID:
+      type: number
+    timeRemainingSeconds:
+      type: number
 C_ChallengeMode.ChallengeCompletionInfo:
   fields:
     isAffixRecord:
@@ -2576,20 +2606,43 @@ C_DamageMeter.DamageMeterCombatSessionSource:
       type: number
 C_DamageMeter.DamageMeterCombatSource:
   fields:
+    amountPerSecond:
+      type: number
     classFilename:
       type: string
+    isLocalPlayer:
+      type: boolean
     name:
       type: string
     sourceGUID:
       type: string
+    specIconID:
+      type: number
     totalAmount:
       type: number
 C_DamageMeter.DamageMeterCombatSpell:
   fields:
+    amountPerSecond:
+      type: number
+    combatSpellDetails:
+      type:
+        structure: C_DamageMeter.DamageMeterCombatSpellUnitDetails
+    creatureName:
+      type: string
     spellID:
       type: number
     totalAmount:
       type: number
+C_DamageMeter.DamageMeterCombatSpellUnitDetails:
+  fields:
+    amount:
+      type: number
+    classification:
+      type: string
+    unitClassFilename:
+      type: string
+    unitName:
+      type: string
 C_DeathInfo.GraveyardMapInfo:
   fields:
     areaPoiID:
@@ -2795,24 +2848,27 @@ C_EncounterTimeline.EncounterTimelineEventInfo:
   fields:
     duration:
       type: number
-    effectType:
-      type:
-        enum: EncounterTimelineEventEffectType
     iconFileID:
       type: number
+    icons:
+      type:
+        enum: EncounterEventIconmask
     id:
       type: number
-    priority:
+    isApproximate:
+      type: boolean
+    maxQueueDuration:
+      type: number
+    severity:
       type:
-        enum: EncounterTimelineEventPriority
-    role:
-      type:
-        enum: EncounterTimelineEventRole
+        enum: EncounterEventSeverity
     source:
       type:
         enum: EncounterTimelineEventSource
-    tooltipSpellID:
+    spellID:
       type: number
+    spellName:
+      type: string
 C_EncounterTimeline.EncounterTimelineEventPosition:
   fields:
     order:
@@ -2833,24 +2889,26 @@ C_EncounterTimeline.EncounterTimelineScriptEventRequest:
   fields:
     duration:
       type: number
-    effectType:
-      default: 0
-      type:
-        enum: EncounterTimelineEventEffectType
     iconFileID:
       type: number
+    icons:
+      nilable: true
+      type:
+        enum: EncounterEventIconmask
+    maxQueueDuration:
+      default: 0
+      type: number
+    overrideName:
+      default: ''
+      type: string
     paused:
       default: false
       type: boolean
-    priority:
-      default: 0
+    severity:
+      default: 1
       type:
-        enum: EncounterTimelineEventPriority
-    role:
-      default: 0
-      type:
-        enum: EncounterTimelineEventRole
-    tooltipSpellID:
+        enum: EncounterEventSeverity
+    spellID:
       type: number
 C_EncounterTimeline.EncounterTimelineSectionInfo:
   fields:
@@ -2871,29 +2929,29 @@ C_EncounterTimeline.EncounterTimelineSectionInfo:
         enum: EncounterTimelineTrackType
 C_EncounterTimeline.EncounterTimelineTrackInfo:
   fields:
-    maxEventCount:
-      nilable: true
-      type: number
-    maxEventDuration:
-      nilable: true
-      type: number
-    minEventDuration:
-      nilable: true
-      type: number
-    minEventGapDuration:
-      nilable: true
-      type: number
-    minEventIntroDuration:
-      nilable: true
-      type: number
-    sections:
-      type:
-        arrayof:
-          enum: EncounterTimelineSection
-    track:
+    id:
       type:
         enum: EncounterTimelineTrack
-    trackType:
+    maximumDuration:
+      nilable: true
+      type: number
+    maximumEventCount:
+      nilable: true
+      type: number
+    minimumDuration:
+      nilable: true
+      type: number
+    minimumEventGapDuration:
+      nilable: true
+      type: number
+    minimumEventIntroDuration:
+      nilable: true
+      type: number
+    sortDirection:
+      nilable: true
+      type:
+        enum: EncounterTimelineEventSortDirection
+    type:
       type:
         enum: EncounterTimelineTrackType
 C_EncounterWarnings.EncounterWarningInfo:
@@ -2906,12 +2964,16 @@ C_EncounterWarnings.EncounterWarningInfo:
       type: number
     iconFileID:
       type: number
+    isDeadly:
+      type: boolean
     severity:
       type:
         enum: EncounterEventSeverity
     shouldPlaySound:
       type: boolean
     shouldShowChatMessage:
+      type: boolean
+    shouldShowWarning:
       type: boolean
     targetGUID:
       type: string
@@ -2920,7 +2982,6 @@ C_EncounterWarnings.EncounterWarningInfo:
     text:
       type: string
     tooltipSpellID:
-      nilable: true
       type: number
 C_EndOfMatchUI.MatchDetail:
   fields:
@@ -3887,6 +3948,9 @@ C_HousingCatalog.HousingBundleDecorEntryInfo:
       type: number
 C_HousingCatalog.HousingBundleInfo:
   fields:
+    canPreview:
+      default: true
+      type: boolean
     decorEntries:
       type:
         arrayof:
@@ -3947,6 +4011,8 @@ C_HousingCatalog.HousingCatalogEntryInfo:
       type: boolean
     isPrefab:
       type: boolean
+    isUniqueTrophy:
+      type: boolean
     itemID:
       nilable: true
       type: number
@@ -3957,8 +4023,6 @@ C_HousingCatalog.HousingCatalogEntryInfo:
     name:
       type: string
     numPlaced:
-      type: number
-    numStored:
       type: number
     placementCost:
       type: number
@@ -4049,6 +4113,9 @@ C_HousingCatalog.HousingPreviewItemData:
       type: string
     price:
       type: number
+    productID:
+      nilable: true
+      type: number
     salePrice:
       nilable: true
       type: number
@@ -4099,18 +4166,6 @@ C_HousingDecor.HousingDecorInstanceListEntry:
       type: string
     name:
       type: string
-C_HousingDecor.HousingLevelInfo:
-  fields:
-    exteriorDecorPlacementBudget:
-      type: number
-    exteriorFixtureBudget:
-      type: number
-    interiorDecorPlacementBudget:
-      type: number
-    level:
-      type: number
-    roomPlacementBudget:
-      type: number
 C_InvasionInfo.InvasionMapInfo:
   fields:
     atlasName:
@@ -4835,7 +4890,8 @@ C_MajorFactions.MajorFactionData:
       type: number
     highlights:
       type:
-        arrayof: string
+        arrayof:
+          structure: C_MajorFactions.RenownHighlightInfo
     isUnlocked:
       type: boolean
     name:
@@ -4925,6 +4981,14 @@ C_MajorFactions.MajorFactionRenownRewardInfo:
       type: number
     uiOrder:
       type: number
+C_MajorFactions.RenownHighlightInfo:
+  fields:
+    description:
+      type: string
+    level:
+      type: number
+    title:
+      type: string
 C_Map.MapBannerInfo:
   fields:
     areaPoiID:
@@ -5263,6 +5327,8 @@ C_NeighborhoodInitiative.InitiativeActivityLogInfo:
       type: boolean
     neighborhoodGUID:
       type: string
+    nextUpdateTime:
+      type: number
     taskActivity:
       type:
         arrayof:
@@ -5289,6 +5355,8 @@ C_NeighborhoodInitiative.InitiativeMilestoneRewardInfo:
       type: number
     money:
       type: number
+    rewardQuestID:
+      type: number
     title:
       type: string
 C_NeighborhoodInitiative.InitiativeTaskInfo:
@@ -5311,6 +5379,8 @@ C_NeighborhoodInitiative.InitiativeTaskInfo:
       type:
         arrayof:
           structure: CriteriaRequirement
+    rewardQuestID:
+      type: number
     sortOrder:
       type: number
     supersedes:
@@ -7809,6 +7879,26 @@ C_Transmog.TransmogSetItemInfo:
       type: number
     itemModifiedAppearanceID:
       type: number
+C_Transmog.TransmogSlotVisualInfo:
+  fields:
+    appliedSourceID:
+      type: number
+    appliedVisualID:
+      type: number
+    baseSourceID:
+      type: number
+    baseVisualID:
+      type: number
+    hasUndo:
+      type: boolean
+    isHideVisual:
+      type: boolean
+    itemSubclass:
+      type: number
+    pendingSourceID:
+      type: number
+    pendingVisualID:
+      type: number
 C_TransmogCollection.TransmogAppearanceInfoBySourceData:
   fields:
     appearanceHasAnyNonLevelRequirements:
@@ -7851,6 +7941,28 @@ C_TransmogCollection.TransmogAppearanceJournalEncounterInfo:
     tiers:
       type:
         arrayof: string
+C_TransmogCollection.TransmogAppearanceSourceInfoData:
+  fields:
+    canHaveIllusion:
+      type: boolean
+    category:
+      type:
+        enum: TransmogCollectionType
+    icon:
+      type: number
+    isCollected:
+      type: boolean
+    itemAppearanceID:
+      type: number
+    itemLink:
+      type: string
+    itemSubclass:
+      type: number
+    sourceType:
+      nilable: true
+      type: number
+    transmoglink:
+      type: string
 C_TransmogCollection.TransmogCategoryAppearanceInfo:
   fields:
     alwaysShowItem:
@@ -7890,6 +8002,145 @@ C_TransmogCollection.TransmogIllusionInfo:
       type: number
     visualID:
       type: number
+C_TransmogOutfitInfo.TransmogOutfitEntryInfo:
+  fields:
+    icon:
+      type: number
+    isDisabled:
+      type: boolean
+    isEventOutfit:
+      type: boolean
+    name:
+      type: string
+    outfitID:
+      type: number
+    situationCategories:
+      type:
+        arrayof: string
+C_TransmogOutfitInfo.TransmogOutfitLinkedSlotInfo:
+  fields:
+    primarySlotInfo:
+      type:
+        structure: C_TransmogOutfitInfo.TransmogOutfitSlotInfo
+    secondarySlotInfo:
+      type:
+        structure: C_TransmogOutfitInfo.TransmogOutfitSlotInfo
+C_TransmogOutfitInfo.TransmogOutfitSlotGroup:
+  fields:
+    appearanceSlotInfo:
+      type:
+        arrayof:
+          structure: C_TransmogOutfitInfo.TransmogOutfitSlotInfo
+    illusionSlotInfo:
+      type:
+        arrayof:
+          structure: C_TransmogOutfitInfo.TransmogOutfitSlotInfo
+    position:
+      type:
+        enum: TransmogOutfitSlotPosition
+C_TransmogOutfitInfo.TransmogOutfitSlotInfo:
+  fields:
+    collectionType:
+      type:
+        enum: TransmogCollectionType
+    isSecondary:
+      type: boolean
+    slot:
+      type:
+        enum: TransmogOutfitSlot
+    slotName:
+      type: string
+    type:
+      type:
+        enum: TransmogType
+C_TransmogOutfitInfo.TransmogOutfitWeaponCollectionInfo:
+  fields:
+    canHaveIllusions:
+      type: boolean
+    isWeapon:
+      type: boolean
+    name:
+      type: string
+C_TransmogOutfitInfo.TransmogOutfitWeaponOptionInfo:
+  fields:
+    enabled:
+      type: boolean
+    name:
+      type: string
+    weaponOption:
+      type:
+        enum: TransmogOutfitSlotOption
+C_TransmogOutfitInfo.TransmogSituationCategory:
+  fields:
+    description:
+      type: string
+    groupData:
+      type:
+        arrayof:
+          structure: C_TransmogOutfitInfo.TransmogSituationGroup
+    isRadioButton:
+      type: boolean
+    name:
+      type: string
+    triggerID:
+      type: number
+C_TransmogOutfitInfo.TransmogSituationGroup:
+  fields:
+    groupID:
+      type: number
+    optionData:
+      type:
+        arrayof:
+          structure: C_TransmogOutfitInfo.TransmogSituationOptionData
+    secondaryID:
+      type: number
+C_TransmogOutfitInfo.TransmogSituationOption:
+  fields:
+    equipmentSetID:
+      type: number
+    loadoutID:
+      type: number
+    situationID:
+      type: number
+    specID:
+      type: number
+C_TransmogOutfitInfo.TransmogSituationOptionData:
+  fields:
+    name:
+      type: string
+    option:
+      type:
+        structure: C_TransmogOutfitInfo.TransmogSituationOption
+    value:
+      type: boolean
+C_TransmogOutfitInfo.ViewedTransmogOutfitSlotInfo:
+  fields:
+    canTransmogrify:
+      type: boolean
+    displayType:
+      type:
+        enum: TransmogOutfitDisplayType
+    error:
+      type:
+        enum: TransmogOutfitSlotError
+    errorText:
+      type: string
+    hasPending:
+      type: boolean
+    isPendingCollected:
+      type: boolean
+    isTransmogrified:
+      type: boolean
+    texture:
+      nilable: true
+      type: number
+    transmogID:
+      type: number
+    warning:
+      type:
+        enum: TransmogOutfitSlotWarning
+    warningText:
+      type: string
 C_TransmogSets.TransmogSetInfo:
   fields:
     baseSetID:
@@ -8631,6 +8882,48 @@ C_UIWidgetManager.MapPinAnimationWidgetVisualizationInfo:
         enum: WidgetShownState
     textureKit:
       type: string
+    widgetScale:
+      type:
+        enum: UIWidgetScale
+    widgetSizeSetting:
+      type: number
+    widgetTag:
+      type: string
+C_UIWidgetManager.PreyHuntProgressWidgetVisualizationInfo:
+  fields:
+    frameTextureKit:
+      type: string
+    hasTimer:
+      type: boolean
+    inAnimType:
+      type:
+        enum: WidgetAnimationType
+    layoutDirection:
+      type:
+        enum: UIWidgetLayoutDirection
+    modelSceneLayer:
+      type:
+        enum: UIWidgetModelSceneLayer
+    orderIndex:
+      type: number
+    outAnimType:
+      type:
+        enum: WidgetAnimationType
+    progressState:
+      type:
+        enum: PreyHuntProgressState
+    scriptedAnimationEffectID:
+      type: number
+    shownState:
+      type:
+        enum: WidgetShownState
+    textureKit:
+      type: string
+    tooltip:
+      type: string
+    tooltipLoc:
+      type:
+        enum: UIWidgetTooltipLocation
     widgetScale:
       type:
         enum: UIWidgetScale
@@ -10883,6 +11176,15 @@ ExpansionDisplayInfo:
       type:
         arrayof:
           structure: ExpansionDisplayInfoFeature
+    glueAmbianceSoundKit:
+      nilable: true
+      type: number
+    glueCreditsSoundKit:
+      nilable: true
+      type: number
+    glueMusicSoundKit:
+      nilable: true
+      type: number
     highResBackgroundID:
       type: number
     logo:
@@ -11098,6 +11400,42 @@ GuildTabardInfo:
       type: number
     emblemStyle:
       type: number
+HouseExteriorSizeOption:
+  fields:
+    isLocked:
+      type: boolean
+    name:
+      type: string
+    size:
+      type:
+        enum: HousingFixtureSize
+HouseExteriorSizeOptionsInfo:
+  fields:
+    options:
+      type:
+        arrayof:
+          structure: HouseExteriorSizeOption
+    selectedSize:
+      type:
+        enum: HousingFixtureSize
+HouseExteriorTypeOption:
+  fields:
+    houseExteriorTypeID:
+      type: number
+    isLocked:
+      type: boolean
+    lockReasonString:
+      type: string
+    name:
+      type: string
+HouseExteriorTypeOptionsInfo:
+  fields:
+    options:
+      type:
+        arrayof:
+          structure: HouseExteriorTypeOption
+    selectedExteriorType:
+      type: number
 HouseInfo:
   fields:
     houseGUID:
@@ -11134,6 +11472,18 @@ HouseLevelFavor:
       nilable: true
       type: string
     houseLevel:
+      type: number
+HouseLevelInfo:
+  fields:
+    exteriorDecorPlacementBudget:
+      type: number
+    exteriorFixtureBudget:
+      type: number
+    interiorDecorPlacementBudget:
+      type: number
+    level:
+      type: number
+    roomPlacementBudget:
       type: number
 HouseLevelReward:
   fields:
@@ -11256,6 +11606,8 @@ HousingDecorInstanceInfo:
     isAllowedOutdoors:
       type: boolean
     isLocked:
+      type: boolean
+    isRefundable:
       type: boolean
     name:
       type: string
@@ -11493,6 +11845,9 @@ NumberAbbrevData:
   fields:
     abbreviation:
       type: string
+    abbreviationIsGlobal:
+      default: true
+      type: boolean
     breakpoint:
       type: number
     fractionDivisor:
@@ -11506,6 +11861,9 @@ NumberAbbrevOptions:
       type:
         arrayof:
           structure: NumberAbbrevData
+    config:
+      nilable: true
+      type: table
     locale:
       nilable: true
       type: string
@@ -11801,6 +12159,7 @@ SpellCooldownInfo:
     isEnabled:
       type: boolean
     isOnGCD:
+      nilable: true
       type: boolean
     modRate:
       type: number

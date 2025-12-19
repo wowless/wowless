@@ -4,6 +4,11 @@ type:
     Documentation:
       type:
         sequenceof: string
+    Environment:
+      type:
+        taggedunion:
+          All: tag
+          SecureOnly: tag
     Events:
       type:
         sequenceof:
@@ -39,6 +44,8 @@ type:
                     Name:
                       required: true
                       type: string
+                    NeverSecret:
+                      type: boolean
                     Nilable:
                       required: true
                       type: boolean
@@ -49,11 +56,23 @@ type:
                       type: string
             RequireNPERestricted:
               type: boolean
+            SecretBasedOnTimelineEventSource:
+              type: boolean
+            SecretInChatMessagingLockdown:
+              type: boolean
             SecretPayloads:
               type: boolean
             SecretWhenAurasRestricted:
               type: boolean
             SecretWhenSpellCastRestricted:
+              type: boolean
+            SecretWhenUnitChargedPowerPointsRestricted:
+              type: boolean
+            SecretWhenUnitIdentityRestricted:
+              type: boolean
+            SecretWhenUnitSpellCastRestricted:
+              type: boolean
+            SecretWhenUnitSpellCastsRestricted:
               type: boolean
             SynchronousEvent:
               type: boolean
@@ -88,6 +107,8 @@ type:
                     Nilable:
                       required: true
                       type: boolean
+                    NilableContents:
+                      type: boolean
                     StrideIndex:
                       type: number
                     Type:
@@ -115,6 +136,8 @@ type:
             Name:
               required: true
               type: string
+            Namespace:
+              type: string
             RequireNPERestricted:
               type: boolean
             RequiresActiveCommentator:
@@ -123,11 +146,19 @@ type:
               type: boolean
             RequiresCommentator:
               type: boolean
+            RequiresFontStringTextAccess:
+              type: boolean
             RequiresFriendList:
               type: boolean
             RequiresIndexInRange:
               type: boolean
+            RequiresLimitedInput:
+              type: boolean
             RequiresNonReadOnlyCVar:
+              type: boolean
+            RequiresNonSecretAuraSpellID:
+              type: boolean
+            RequiresNonSecretAuraSpellName:
               type: boolean
             RequiresNonSecureCVar:
               type: boolean
@@ -141,13 +172,19 @@ type:
               type: boolean
             RequiresValidInviteTarget:
               type: boolean
+            RequiresValidSpellIdentifier:
+              type: boolean
             RequiresValidTimelineEvent:
+              type: boolean
+            RequiresValidUnitAuraInstance:
               type: boolean
             Returns:
               type:
                 sequenceof:
                   record:
                     ConditionalSecret:
+                      type: boolean
+                    ConditionalSecretContents:
                       type: boolean
                     Default:
                       type: any
@@ -164,6 +201,8 @@ type:
                     Nilable:
                       required: true
                       type: boolean
+                    NilableContents:
+                      type: boolean
                     StrideIndex:
                       type: number
                     Type:
@@ -179,6 +218,8 @@ type:
                   NotAllowed: tag
             SecretArgumentsAddAspect:
               type: table
+            SecretBasedOnTimelineEventSource:
+              type: boolean
             SecretForAttackableUnits:
               type: boolean
             SecretInChatMessagingLockdown:
@@ -189,15 +230,55 @@ type:
               type: boolean
             SecretReturnsForAspect:
               type: table
+            SecretWhenActionCooldownRestricted:
+              type: boolean
+            SecretWhenAnchoringSecret:
+              type: boolean
+            SecretWhenAuraDataRestricted:
+              type: boolean
             SecretWhenAurasRestricted:
               type: boolean
             SecretWhenCooldownsRestricted:
               type: boolean
+            SecretWhenCurveSecret:
+              type: boolean
             SecretWhenInCombat:
+              type: boolean
+            SecretWhenSpellAuraRestricted:
+              type: boolean
+            SecretWhenSpellBookItemCooldownRestricted:
+              type: boolean
+            SecretWhenSpellCooldownRestricted:
+              type: boolean
+            SecretWhenUnitAuraIndexRestricted:
+              type: boolean
+            SecretWhenUnitAuraInstanceRestricted:
+              type: boolean
+            SecretWhenUnitCastingInfoRestricted:
+              type: boolean
+            SecretWhenUnitChannelInfoRestricted:
+              type: boolean
+            SecretWhenUnitChargedPowerPointsRestricted:
+              type: boolean
+            SecretWhenUnitComboPointsRestricted:
+              type: boolean
+            SecretWhenUnitComparisonRestricted:
+              type: boolean
+            SecretWhenUnitHealthMaxRestricted:
               type: boolean
             SecretWhenUnitIdentityRestricted:
               type: boolean
+            SecretWhenUnitPowerMaxRestricted:
+              type: boolean
+            SecretWhenUnitPowerRestricted:
+              type: boolean
             SecretWhenUnitSpellCastsRestricted:
+              type: boolean
+            SecretWhenUnitSpellCastingRestricted:
+              type: boolean
+            SecretWhenUnpackedUnitAuraInstanceRestricted:
+              type: boolean
+            SecureHooksAllowed:
               type: boolean
             Type:
               required: true
@@ -233,6 +314,8 @@ type:
                   record:
                     ConditionalSecret:
                       type: boolean
+                    ConditionalSecretContents:
+                      type: boolean
                     Default:
                       type: any
                     Documentation:
@@ -247,6 +330,10 @@ type:
                     Name:
                       required: true
                       type: string
+                    NeverSecret:
+                      type: boolean
+                    NeverSecretContents:
+                      type: boolean
                     Nilable:
                       type: boolean
                     SecretValue:

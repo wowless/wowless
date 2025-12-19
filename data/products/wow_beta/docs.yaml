@@ -45,16 +45,6 @@ lies:
           _change:
             from: string
             to: unit
-    UnitIsUnit:
-      inputs:
-      - type:
-          _change:
-            from: string
-            to: unit
-      - type:
-          _change:
-            from: string
-            to: unit
     UnitName:
       outputs:
       - _add:
@@ -107,15 +97,19 @@ lies:
     COMBAT_LOG_EVENT_INTERNAL_UNFILTERED:
     COMBAT_LOG_REFILTER_ENTRIES:
   extra_script_objects:
+    AbbreviateConfigAPI:
     FrameAPITooltip:
     HousingCatalogSearcherAPI:
     HousingFixturePointFrameAPI:
     HousingLayoutPinFrameAPI:
     LuaColorCurveObjectAPI:
     LuaCurveObjectAPI:
+    LuaCurveObjectBaseAPI:
+    LuaDurationObjectAPI:
     PingPinFrameAPI:
     SimpleMapSceneAPI:
     SimpleModelFFXAPI:
+    UnitHealPredictionCalculatorAPI:
   uiobjects:
     Button:
       GetText:
@@ -390,6 +384,8 @@ script_objects:
   SimpleTextureAPI: Texture
   SimpleTextureBaseAPI: TextureBase
 typedefs:
+  AbbreviateConfig:
+    type: table
   AnimationDataEnum:
     type: number
   ArtifactTiers:
@@ -446,6 +442,10 @@ typedefs:
     type: number
   FontAlphabet:
     type: string
+  FrameScriptObject:
+    type: UIObject
+  FrameTime:
+    type: number
   GarrisonFollower:
     type: string
   HousingCatalogSearcher:
@@ -472,7 +472,13 @@ typedefs:
     type: string
   LuaColorCurveObject:
     type: table
+  LuaCurveEvaluatedResult:
+    type: table
   LuaCurveObject:
+    type: table
+  LuaCurveObjectBase:
+    type: table
+  LuaDurationObject:
     type: table
   luaFunction:
     type: function
@@ -594,6 +600,8 @@ typedefs:
     type: string
   uiUnit:
     type: number
+  UnitHealPredictionCalculator:
+    type: table
   UnitToken:
     type: unit
   UnitTokenVariant:
