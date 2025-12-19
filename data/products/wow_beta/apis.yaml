@@ -22400,7 +22400,8 @@ C_ResearchInfo.GetDigSitesForMap:
 C_RestrictedActions.CheckAllowProtectedFunctions:
   inputs:
   - name: object
-    type: UIObject
+    type:
+      uiobject: UIObject
   - default: false
     name: silent
     type: boolean

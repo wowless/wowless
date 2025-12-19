@@ -443,7 +443,8 @@ typedefs:
   FontAlphabet:
     type: string
   FrameScriptObject:
-    type: UIObject
+    type:
+      uiobject: UIObject
   FrameTime:
     type: number
   GarrisonFollower:
