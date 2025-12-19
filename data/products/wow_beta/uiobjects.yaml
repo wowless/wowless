@@ -4174,17 +4174,6 @@ Frame:
         name: y
         type: number
       outputs:
-    SetAlphaFromBoolean:
-      inputs:
-      - name: value
-        type: boolean
-      - default: 255
-        name: alphaIfTrue
-        type: number
-      - default: 0
-        name: alphaIfFalse
-        type: number
-      outputs:
     SetAlphaGradient:
       inputs:
       - name: index
