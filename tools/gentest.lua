@@ -248,6 +248,7 @@ local function doit(k, p)
     end
     table.sort(tt)
     table.insert(tt, 1, 'product.lua')
+    table.insert(tt, 1, '## Interface: ' .. perproduct(p, 'build').tocversion)
     table.insert(tt, '')
     return table.concat(tt, '\n')
   else
