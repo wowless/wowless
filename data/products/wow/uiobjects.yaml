@@ -7934,9 +7934,7 @@ StatusBar:
       outputs:
     SetMinMaxValues:
       impl:
-        setter:
-        - name: min
-        - name: max
+        uiobjectimpl: StatusBar/SetMinMaxValues
       inputs:
       - name: minValue
         type: number
@@ -8009,8 +8007,7 @@ StatusBar:
         type: boolean
     SetValue:
       impl:
-        setter:
-        - name: value
+        uiobjectimpl: StatusBar/SetValue
       inputs:
       - name: value
         type: number

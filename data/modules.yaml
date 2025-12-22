@@ -127,6 +127,8 @@ sqls:
   deps:
     datalua:
     sqlitedb:
+statusbar:
+  deps:
 system:
   deps:
 talents:
