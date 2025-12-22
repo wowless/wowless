@@ -37,6 +37,16 @@ lies:
       outputs:
       - _add:
           nilable: true
+    scrub:
+      _remove:
+        inputs:
+        - name: values
+          type: unknown
+        instride: 1
+        outputs:
+        - name: scrubbed
+          type: unknown
+        outstride: 1
     UnitFactionGroup:
       _add:
         mayreturnnothing: true

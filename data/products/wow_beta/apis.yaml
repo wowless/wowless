@@ -37421,14 +37421,6 @@ Screenshot:
   outputs:
 scrub:
   impl: scrub
-  inputs:
-  - name: values
-    type: unknown
-  instride: 1
-  outputs:
-  - name: scrubbed
-    type: unknown
-  outstride: 1
 scrubsecretvalues:
   inputs:
   - name: values
