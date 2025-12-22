@@ -281,9 +281,11 @@ Slider/Disable:
 Slider/Enable:
   luafile:
 StatusBar/GetStatusBarColor:
-  luafile:
+  moduledelegate:
+    name: statusbar
 StatusBar/SetStatusBarColor:
-  luafile:
+  moduledelegate:
+    name: statusbar
 Texture/GetTexture:
   luafile:
     modules:
