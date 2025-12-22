@@ -283,7 +283,13 @@ Slider/Enable:
 StatusBar/GetStatusBarColor:
   moduledelegate:
     name: statusbar
+StatusBar/SetMinMaxValues:
+  moduledelegate:
+    name: statusbar
 StatusBar/SetStatusBarColor:
+  moduledelegate:
+    name: statusbar
+StatusBar/SetValue:
   moduledelegate:
     name: statusbar
 Texture/GetTexture:
