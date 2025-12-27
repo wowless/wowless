@@ -146,7 +146,6 @@ for k in pairs(config.script_objects) do
 end
 
 local typedefs = config.typedefs or {}
-local stringenums = parseYaml('data/stringenums.yaml')
 local tys = {}
 for name, tab in pairs(tabs) do
   tys[name] = tab.Type
@@ -166,6 +165,9 @@ for k in pairs(enum) do
     tys[k] = 'Enumeration'
   end
 end
+for k in pairs(parseYaml('data/stringenums.yaml')) do
+  tys[k] = tys[k] or 'stringenum'
+end
 local used_typedefs = {}
 local function t2nty(field, ns)
   local t = field.Type
@@ -174,8 +176,6 @@ local function t2nty(field, ns)
     return { arrayof = t2nty({ Type = field.InnerType }, ns) }
   elseif t == 'table' and field.Mixin then
     error('no struct for mixin ' .. field.Mixin)
-  elseif stringenums[t] then
-    return { stringenum = t }
   elseif typedefs[t] then
     used_typedefs[t] = true
     return typedefs[t].type, typedefs[t].outnil
@@ -187,6 +187,8 @@ local function t2nty(field, ns)
     return 'number'
   elseif ty == 'Enumeration' then
     return { enum = t }
+  elseif ty == 'stringenum' then
+    return { stringenum = t }
   elseif ty == 'Structure' then
     if field.Mixin and field.Mixin ~= structs[n].mixin then
       error(('expected struct %s to have mixin %s'):format(n, field.Mixin))
