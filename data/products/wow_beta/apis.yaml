@@ -31799,13 +31799,6 @@ EquipPendingItem:
   outputs:
 error:
   impl: error
-EscapeQuotedCodes:
-  inputs:
-  - name: text
-    type: string
-  outputs:
-  - name: escaped
-    type: string
 ExpandGuildTradeSkillHeader:
 ExpandQuestHeader:
 ExpandWarGameHeader:
@@ -31830,13 +31823,6 @@ FlipCameraYaw:
   - name: angle
     type: number
   outputs:
-FloorToNearestString:
-  inputs:
-  - name: number
-    type: number
-  outputs:
-  - name: result
-    type: string
 FlyoutHasSpell:
 FocusUnit:
   inputs:
@@ -35848,14 +35834,6 @@ IsCharacterNewlyBoosted:
 IsChatAFK:
 IsChatChannelRaid:
 IsChatDND:
-IsConsumableSpell:
-  inputs:
-  - name: spellName
-    nilable: true
-    type: string
-  outputs:
-  - name: value
-    type: boolean
 IsControlKeyDown:
   inputs:
   outputs:
@@ -36999,13 +36977,6 @@ RetrieveCorpse:
   outputs:
 ReturnInboxItem:
 RollOnLoot:
-RoundToNearestString:
-  inputs:
-  - name: number
-    type: number
-  outputs:
-  - name: result
-    type: string
 RunBinding:
 RunMacro:
 RunScript:
@@ -37436,6 +37407,26 @@ ShouldShowSpecialSplashScreen:
   - name: result
     type: boolean
 ShowBuybackSellCursor:
+ShowCloak:
+  inputs:
+  - name: show
+    type: boolean
+  outputs:
+ShowHelm:
+  inputs:
+  - name: show
+    type: boolean
+  outputs:
+ShowingCloak:
+  inputs:
+  outputs:
+  - name: result
+    type: boolean
+ShowingHelm:
+  inputs:
+  outputs:
+  - name: result
+    type: boolean
 ShowQuestComplete:
 ShowQuestOffer:
 ShowRepairCursor:
@@ -37600,25 +37591,6 @@ string.trim:
   impl: string.trim
 string.upper:
   impl: string.upper
-StripHyperlinks:
-  inputs:
-  - name: text
-    type: string
-  - default: false
-    name: maintainColor
-    type: boolean
-  - default: false
-    name: maintainBrackets
-    type: boolean
-  - default: false
-    name: stripNewlines
-    type: boolean
-  - default: false
-    name: maintainAtlases
-    type: boolean
-  outputs:
-  - name: stripped
-    type: string
 strjoin:
   impl: strjoin
 strlenutf8:
@@ -37627,8 +37599,6 @@ strsplit:
   impl: strsplit
 strsplittable:
   impl: strsplittable
-strtrim:
-  impl: strtrim
 Stuck:
   inputs:
   outputs:
@@ -38343,19 +38313,6 @@ UnitHealthPercent:
   outputs:
   - name: result
     type: table
-UnitHealthPercentColor:
-  inputs:
-  - name: unit
-    type: unit
-  - name: colorCurve
-    type: table
-  - default: true
-    name: usePredicted
-    type: boolean
-  outputs:
-  - name: color
-    type:
-      structure: colorRGBA
 UnitHonor:
   inputs:
   - name: unit

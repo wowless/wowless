@@ -80,10 +80,6 @@ lies:
     C_RestrictedActions.InCombatLockdown:
     C_StringUtil.trim:
     C_WorldSafeLocsUIInternal.GetWorldSafeLocs:
-    ShowCloak:
-    ShowHelm:
-    ShowingCloak:
-    ShowingHelm:
     ToggleAnimKitDisplay:
     ToggleCollision:
     ToggleCollisionDisplay:

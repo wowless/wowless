@@ -26,6 +26,7 @@ addon:
       CreateForbiddenFrame:
       CreateSecureDelegate:
       loadstring_untainted:
+      secretunwrap:
   enum_values_set_in_framexml:
     CooldownViewerCategory:
       HiddenAura:
