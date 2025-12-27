@@ -272,9 +272,9 @@ type:
               type: boolean
             SecretWhenUnitPowerRestricted:
               type: boolean
-            SecretWhenUnitSpellCastsRestricted:
-              type: boolean
             SecretWhenUnitSpellCastingRestricted:
+              type: boolean
+            SecretWhenUnitSpellCastsRestricted:
               type: boolean
             SecretWhenUnpackedUnitAuraInstanceRestricted:
               type: boolean
