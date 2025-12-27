@@ -587,7 +587,7 @@ G.testsuite.sync = function()
       end
       return {
         mixin = function()
-          local m = _G.ScrollingMessageFrameMixin
+          local m = _G.ScrollingMessageFrameSecureMixin or _G.ScrollingMessageFrameMixin
           return {
             empty = function()
               check1(nil, next(m))
