@@ -7890,9 +7890,9 @@ Slider:
 StatusBar:
   fields:
     fillStyle:
-      init: STANDARD
+      init: 0
       type:
-        stringenum: StatusBarFillStyle
+        enum: StatusBarFillStyle
     max:
       init: 0
       type: number
@@ -7930,7 +7930,7 @@ StatusBar:
       outputs:
       - name: fillStyle
         type:
-          stringenum: StatusBarFillStyle
+          enum: StatusBarFillStyle
     GetInterpolatedValue:
       inputs:
       outputs:
@@ -8045,7 +8045,7 @@ StatusBar:
       inputs:
       - name: fillStyle
         type:
-          stringenum: StatusBarFillStyle
+          enum: StatusBarFillStyle
       outputs:
     SetMinMaxValues:
       impl:
