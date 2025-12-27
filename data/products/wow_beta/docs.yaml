@@ -77,6 +77,8 @@ lies:
     C_ConfigurationWarnings.SetConfigurationWarningSeen:
     C_LiveEvent.OnLiveEventBannerClicked:
     C_LiveEvent.OnLiveEventPopupClicked:
+    C_RestrictedActions.InCombatLockdown:
+    C_StringUtil.trim:
     C_WorldSafeLocsUIInternal.GetWorldSafeLocs:
     ShowCloak:
     ShowHelm:
@@ -658,4 +660,5 @@ uiobject_method_reassignments:
     SetScript: ScriptObject
     SetShown: RegionBase
     SetVertexColor: LayeredRegion
+    SetVertexColorFromBoolean: LayeredRegion
     Show: RegionBase

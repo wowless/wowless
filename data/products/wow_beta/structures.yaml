@@ -2869,22 +2869,6 @@ C_EncounterTimeline.EncounterTimelineEventInfo:
       type: number
     spellName:
       type: string
-C_EncounterTimeline.EncounterTimelineEventPosition:
-  fields:
-    order:
-      nilable: true
-      type: number
-    section:
-      type:
-        enum: EncounterTimelineSection
-    state:
-      type:
-        enum: EncounterTimelineEventState
-    timeRemaining:
-      type: number
-    track:
-      type:
-        enum: EncounterTimelineTrack
 C_EncounterTimeline.EncounterTimelineScriptEventRequest:
   fields:
     duration:
@@ -2910,23 +2894,6 @@ C_EncounterTimeline.EncounterTimelineScriptEventRequest:
         enum: EncounterEventSeverity
     spellID:
       type: number
-C_EncounterTimeline.EncounterTimelineSectionInfo:
-  fields:
-    maxEventDuration:
-      nilable: true
-      type: number
-    minEventDuration:
-      nilable: true
-      type: number
-    section:
-      type:
-        enum: EncounterTimelineSection
-    track:
-      type:
-        enum: EncounterTimelineTrack
-    trackType:
-      type:
-        enum: EncounterTimelineTrackType
 C_EncounterTimeline.EncounterTimelineTrackInfo:
   fields:
     id:
@@ -7863,12 +7830,6 @@ C_Traits.TreeCurrencyInfo:
       type: number
     traitCurrencyID:
       type: number
-C_Transmog.TransmogApplyWarningInfo:
-  fields:
-    itemLink:
-      type: string
-    text:
-      type: string
 C_Transmog.TransmogSetItemInfo:
   fields:
     invSlot:
@@ -12351,9 +12312,6 @@ TransmogLocation:
     type:
       type: number
   mixin: TransmogLocationMixin
-TransmogPendingInfo:
-  fields:
-  mixin: TransmogPendingInfoMixin
 uiBoundsRect:
   fields:
     bottom:

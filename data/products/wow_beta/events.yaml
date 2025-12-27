@@ -4249,15 +4249,6 @@ DAILY_RESET_INSTANCE_WELCOME:
     type: string
   - name: timeLeft
     type: number
-DAMAGE_METER_COMBAT_SESSION_SOURCE_UPDATED:
-  payload:
-  - name: type
-    type:
-      enum: DamageMeterType
-  - name: sessionID
-    type: number
-  - name: sourceGUID
-    type: string
 DAMAGE_METER_COMBAT_SESSION_UPDATED:
   payload:
   - name: type
@@ -4423,11 +4414,6 @@ ENCOUNTER_TIMELINE_EVENT_BLOCK_STATE_CHANGED:
   - name: eventID
     type: number
 ENCOUNTER_TIMELINE_EVENT_HIGHLIGHT:
-  payload:
-  - name: eventID
-    type: number
-ENCOUNTER_TIMELINE_EVENT_POSITION_CHANGED:
-  callback: true
   payload:
   - name: eventID
     type: number
@@ -5244,10 +5230,6 @@ HOUSING_DECOR_GRID_SNAP_STATUS_CHANGED:
 HOUSING_DECOR_GRID_VISIBILITY_STATUS_CHANGED:
   payload:
   - name: isGridVisible
-    type: boolean
-HOUSING_DECOR_NUDGE_STATUS_CHANGED:
-  payload:
-  - name: isNudgeEnabled
     type: boolean
 HOUSING_DECOR_PLACE_FAILURE:
   payload:
@@ -7384,8 +7366,6 @@ RESURRECT_REQUEST:
   payload:
   - name: inviter
     type: string
-RETURNING_PLAYER_PROMPT:
-  payload:
 ROLE_CHANGED_INFORM:
   payload:
   - name: changedName
@@ -7549,8 +7529,6 @@ SHIPMENT_UPDATE:
     nilable: true
     type: boolean
 SHOW_DELVES_COMPANION_CONFIGURATION_UI:
-  payload:
-SHOW_DELVES_DISPLAY_UI:
   payload:
 SHOW_END_OF_MATCH_UI:
   payload:
