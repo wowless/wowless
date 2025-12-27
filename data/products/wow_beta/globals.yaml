@@ -25,12 +25,15 @@ Constants:
     CAAPlayerResourceFormatDefault: 1
     CAAPlayerResourcePercentDefault: 0
     CAASampleTextThrottleTime: 1
+    CAASayCombatEndDefault: true
+    CAASayCombatStartDefault: true
     CAASayIfTargetedDefault: 1
     CAATargetCastFormatDefault: 0
     CAATargetCastModeDefault: 0
     CAATargetDeathBehaviorDefault: 0
     CAATargetHealthFormatDefault: 3
     CAATargetHealthPercentDefault: 2
+    CAATargetNameDefault: true
     CAAThrottleDefault: 0
     CAAThrottleMax: 5
     CAAThrottleMin: 0
@@ -41,6 +44,8 @@ Constants:
   Callings:
     MaxCallings: 3
   CatalogShopVirtualCurrencyConstants:
+    HEARTHSTEEL_VC_CURRENCY_CODE: XVV
+    TRADERS_TENDER_VC_CURRENCY_CODE: XWP
   CharCustomizationConstants:
     CHAR_CUSTOMIZE_CUSTOM_DISPLAY_OPTION_FIRST: 5
     CHAR_CUSTOMIZE_CUSTOM_DISPLAY_OPTION_LAST: 8
