@@ -9459,6 +9459,7 @@ C_CurveUtil.CreateColorCurve:
   - name: curve
     type: table
 C_CurveUtil.CreateCurve:
+  impl: C_CurveUtil.CreateCurve
   inputs:
   outputs:
   - name: curve
