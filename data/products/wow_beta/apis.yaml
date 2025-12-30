@@ -29910,6 +29910,7 @@ C_UnitAurasPrivate.SetPrivateAuraAnchorAddedCallback:
 C_UnitAurasPrivate.SetPrivateAuraAnchorRemovedCallback:
 C_UnitAurasPrivate.SetPrivateRaidBossMessageCallback:
 C_UnitAurasPrivate.SetPrivateWarningTextFrame:
+C_UnitAurasPrivate.SetShowDispelTypeCallback:
 C_UserFeedback.SubmitBug:
   inputs:
   - name: bugInfo
