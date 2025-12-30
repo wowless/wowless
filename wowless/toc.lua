@@ -54,9 +54,14 @@ local function parse(gametype, content)
         attrs[key] = value
       end
     elseif line ~= '' and line:sub(1, 1) ~= '#' then
-      local file, filter, fdata = line:match('^(.-)%s*%[(.-):?%s+(.-)%]$')
-      if not filter or assert(filters[filter], filter)(fdata, gts) then
-        table.insert(files, file or line)
+      local file, filterstr = line:match('^([^%s]+)(.*)$')
+      local allok = true
+      for filter, fdata in filterstr:gmatch('%[(.-):?%s+(.-)%]') do
+        local ok = assert(filters[filter], filter)(fdata, gts)
+        allok = allok and ok
+      end
+      if allok then
+        table.insert(files, file)
       end
     end
   end
