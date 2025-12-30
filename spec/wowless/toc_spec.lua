@@ -60,6 +60,11 @@ describe('wowless.toc', function()
         end)
       end)
     end
+    it('handles multiple filters', function()
+      local line = 'aaa [AllowLoadGameType standard] [AllowLoadEnvironment Global]'
+      local _, files = parse('Standard', line)
+      assert.same({ 'aaa' }, files)
+    end)
   end)
   describe('suffixes', function()
     local allsuffixes = wowlesstoc.suffixes
