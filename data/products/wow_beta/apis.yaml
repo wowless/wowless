@@ -28343,6 +28343,7 @@ C_TransmogOutfitInfo.GetAllSlotLocationInfo:
     type:
       arrayof:
         structure: C_TransmogOutfitInfo.TransmogOutfitSlotInfo
+  stubnothing: true
 C_TransmogOutfitInfo.GetCollectionInfoForSlotAndOption:
   inputs:
   - name: slot
