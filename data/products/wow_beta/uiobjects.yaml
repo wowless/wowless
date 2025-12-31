@@ -2099,6 +2099,24 @@ Cooldown:
         name: modRate
         type: number
       outputs:
+    SetCooldownFromDurationObject:
+      inputs:
+      - name: duration
+        type: table
+      - default: true
+        name: clearIfZero
+        type: boolean
+      outputs:
+    SetCooldownFromExpirationTime:
+      inputs:
+      - name: expirationTime
+        type: number
+      - name: duration
+        type: number
+      - default: 1
+        name: modRate
+        type: number
+      outputs:
     SetCooldownUNIX:
       inputs:
       - name: start
@@ -2181,6 +2199,11 @@ Cooldown:
       inputs:
       - name: milliseconds
         type: number
+      outputs:
+    SetPaused:
+      inputs:
+      - name: paused
+        type: boolean
       outputs:
     SetReverse:
       inputs:
@@ -4030,6 +4053,11 @@ Frame:
       outputs:
       - name: locked
         type: boolean
+    IsIgnoringChildrenForBounds:
+      inputs:
+      outputs:
+      - name: ignore
+        type: boolean
     IsKeyboardEnabled:
       inputs:
       outputs:
@@ -4301,6 +4329,11 @@ Frame:
       inputs:
       - name: id
         type: number
+      outputs:
+    SetIgnoringChildrenForBounds:
+      inputs:
+      - name: ignore
+        type: boolean
       outputs:
     SetIsFrameBuffer:
       inputs:
@@ -4594,6 +4627,17 @@ LayeredRegion:
       - name: a
         nilable: true
         type: number
+      outputs:
+    SetVertexColorFromBoolean:
+      inputs:
+      - name: value
+        type: boolean
+      - name: colorIfTrue
+        type:
+          structure: colorRGBA
+      - name: colorIfFalse
+        type:
+          structure: colorRGBA
       outputs:
   virtual: true
 Line:
@@ -6931,6 +6975,17 @@ Region:
         uiobjectimpl: Region/SetAllPoints
       manualinputs: true
       outputs:
+    SetAlphaFromBoolean:
+      inputs:
+      - name: value
+        type: boolean
+      - default: 255
+        name: alphaIfTrue
+        type: number
+      - default: 0
+        name: alphaIfFalse
+        type: number
+      outputs:
     SetCollapsesLayout:
       impl:
         setter:
@@ -7835,9 +7890,9 @@ Slider:
 StatusBar:
   fields:
     fillStyle:
-      init: STANDARD
+      init: 0
       type:
-        stringenum: StatusBarFillStyle
+        enum: StatusBarFillStyle
     max:
       init: 0
       type: number
@@ -7875,7 +7930,12 @@ StatusBar:
       outputs:
       - name: fillStyle
         type:
-          stringenum: StatusBarFillStyle
+          enum: StatusBarFillStyle
+    GetInterpolatedValue:
+      inputs:
+      outputs:
+      - name: value
+        type: number
     GetMinMaxValues:
       impl:
         getter:
@@ -7943,6 +8003,11 @@ StatusBar:
         nilable: true
         type:
           uiobject: Texture
+    GetTimerDuration:
+      inputs:
+      outputs:
+      - name: duration
+        type: table
     GetValue:
       impl:
         getter:
@@ -7951,6 +8016,11 @@ StatusBar:
       outputs:
       - name: value
         type: number
+    IsInterpolating:
+      inputs:
+      outputs:
+      - name: isInterpolating
+        type: boolean
     IsStatusBarDesaturated:
       inputs:
       outputs:
@@ -7975,7 +8045,7 @@ StatusBar:
       inputs:
       - name: fillStyle
         type:
-          stringenum: StatusBarFillStyle
+          enum: StatusBarFillStyle
       outputs:
     SetMinMaxValues:
       impl:
@@ -7985,6 +8055,10 @@ StatusBar:
         type: number
       - name: maxValue
         type: number
+      - default: 0
+        name: interpolation
+        type:
+          enum: StatusBarInterpolation
       outputs:
     SetOrientation:
       impl:
@@ -8050,12 +8124,32 @@ StatusBar:
       outputs:
       - name: success
         type: boolean
+    SetTimerDuration:
+      inputs:
+      - name: duration
+        type: table
+      - default: 0
+        name: interpolation
+        type:
+          enum: StatusBarInterpolation
+      - default: 0
+        name: direction
+        type:
+          enum: StatusBarTimerDirection
+      outputs:
+    SetToTargetValue:
+      inputs:
+      outputs:
     SetValue:
       impl:
         uiobjectimpl: StatusBar/SetValue
       inputs:
       - name: value
         type: number
+      - default: 0
+        name: interpolation
+        type:
+          enum: StatusBarInterpolation
       outputs:
   scripts:
     OnValueChanged:
@@ -8381,6 +8475,9 @@ TextureBase:
       outputs:
       - name: snap
         type: boolean
+    ResetTexCoord:
+      inputs:
+      outputs:
     SetAtlas:
       impl:
         uiobjectimpl: Texture/SetAtlas
@@ -8399,6 +8496,12 @@ TextureBase:
       - name: resetTexCoords
         nilable: true
         type: boolean
+      - name: wrapModeHorizontal
+        nilable: true
+        type: string
+      - name: wrapModeVertical
+        nilable: true
+        type: string
       outputs:
     SetBlendMode:
       impl:

@@ -26,6 +26,7 @@ addon:
       CreateForbiddenFrame:
       CreateSecureDelegate:
       loadstring_untainted:
+      secretunwrap:
   enum_values_set_in_framexml:
     CooldownViewerCategory:
       HiddenAura:
@@ -78,6 +79,8 @@ modules:
   funtainer:
     tostring_metamethod: true
 runner:
+  skip_bindings:
+    TOGGLECOLLECTIONSWARDROBE: requires better implementation of transmog slots
   skip_events:
     PERKS_PROGRAM_OPEN: needs C_ModelInfo.GetModelSceneInfoByID implemented
     RAF_REWARD_CLAIM_FAILED: numAffordableRewards never set
