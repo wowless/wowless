@@ -140,10 +140,23 @@ local function run(cfg)
 
     local scripts = {
       bindings = function()
+        local skip = runnercfg.skip_bindings or {}
+        if cfg.dir then
+          for name in pairs(skip) do
+            CallSafely(function()
+              assert(loader.bindings[name], 'missing skip_bindings ' .. name)
+            end)
+          end
+        end
         for name, fn in sorted(loader.bindings) do
-          log(2, 'firing binding ' .. name)
-          CallSandbox(fn, 'down')
-          CallSandbox(fn, 'up')
+          if skip[name] then
+            log(2, 'skipping binding %s per config', name)
+            skip[name] = nil
+          else
+            log(2, 'firing binding %s', name)
+            CallSandbox(fn, 'down')
+            CallSandbox(fn, 'up')
+          end
         end
       end,
       clicks = function()
