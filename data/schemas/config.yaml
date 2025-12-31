@@ -69,6 +69,11 @@ type:
     runner:
       type:
         record:
+          skip_bindings:
+            type:
+              mapof:
+                key: string
+                value: string
           skip_events:
             type:
               mapof:
