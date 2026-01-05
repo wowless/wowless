@@ -8,10 +8,19 @@ ACCOUNT_STORE_CURRENCY_AVAILABLE_UPDATED:
   payload:
   - name: currencyID
     type: number
+ACCOUNT_STORE_FRONT_UPDATED:
+  payload:
+  - name: storeFrontID
+    type: number
 ACCOUNT_STORE_ITEM_INFO_UPDATED:
   payload:
   - name: itemID
     type: number
+ACCOUNT_STORE_TRANSACTION_ERROR:
+  payload:
+  - name: result
+    type:
+      enum: AccountStoreTransactionResult
 ACHIEVEMENT_EARNED:
   payload:
   - name: achievementID
@@ -84,6 +93,10 @@ ACTIVE_TALENT_GROUP_CHANGED:
     type: number
 ADAPTER_LIST_CHANGED:
   payload:
+ADD_NEIGHBORHOOD_CHARTER_SIGNATURE:
+  payload:
+  - name: signature
+    type: string
 ADDON_ACTION_BLOCKED:
   payload:
   - name: isTainted
@@ -102,6 +115,14 @@ ADDON_LOADED:
     type: string
   - name: containsBindings
     type: boolean
+ADDON_RESTRICTION_STATE_CHANGED:
+  payload:
+  - name: type
+    type:
+      enum: AddOnRestrictionType
+  - name: state
+    type:
+      enum: AddOnRestrictionState
 ADDONS_UNLOADING:
   payload:
   - name: closingClient
@@ -381,6 +402,8 @@ AUTOFOLLOW_BEGIN:
     type: string
 AUTOFOLLOW_END:
   payload:
+AVAILABLE_GAME_MODES_UPDATED:
+  payload:
 AVATAR_LIST_UPDATED:
   payload:
   - name: clubType
@@ -459,6 +482,16 @@ AZERITE_ITEM_POWER_LEVEL_CHANGED:
         structure: C_AzeriteItem.UnlockedAzeriteEmpoweredItems
   - name: azeriteItemID
     type: number
+B_NET_NEIGHBORHOOD_LIST_UPDATED:
+  payload:
+  - name: result
+    type:
+      enum: HousingResult
+  - name: neighborhoodInfos
+    nilable: true
+    type:
+      arrayof:
+        structure: NeighborhoodInfo
 BAG_CLOSED:
   payload:
   - name: bagID
@@ -568,6 +601,8 @@ BIDS_UPDATED:
 BILLING_NAG_DIALOG:
   payload:
 BIND_ENCHANT:
+  payload:
+BINDINGS_LOADED:
   payload:
 BLACK_MARKET_BID_RESULT:
   payload:
@@ -719,6 +754,15 @@ BOSS_KILL:
     type: number
   - name: encounterName
     type: string
+BULK_PURCHASE_RESULT_RECEIVED:
+  payload:
+  - name: result
+    type:
+      enum: BulkPurchaseResult
+  - name: productResults
+    type:
+      arrayof:
+        structure: C_CatalogShop.BulkPurchaseIndividualProductResult
 CALENDAR_ACTION_PENDING:
   payload:
   - name: pending
@@ -791,6 +835,14 @@ CANCEL_LOOT_ROLL:
   payload:
   - name: rollID
     type: number
+CANCEL_NEIGHBORHOOD_INVITE_RESPONSE:
+  payload:
+  - name: result
+    type:
+      enum: NeighborhoodInviteResult
+  - name: playerName
+    nilable: true
+    type: string
 CANCEL_PLAYER_COUNTDOWN:
   payload:
   - name: initiatedBy
@@ -841,6 +893,8 @@ CATALOG_SHOP_PURCHASE_SUCCESS:
     type: number
 CATALOG_SHOP_REBUILD_SCROLL_BOX:
   payload:
+CATALOG_SHOP_REFUNDABLE_DECORS_UPDATED:
+  payload:
 CATALOG_SHOP_REMOVE_PENDING_PRODUCT:
   payload:
   - name: productID
@@ -851,6 +905,16 @@ CATALOG_SHOP_SPECIFIC_PRODUCT_REFRESH:
   payload:
   - name: productID
     type: number
+CATALOG_SHOP_VIRTUAL_CURRENCY_BALANCE_UPDATE:
+  payload:
+  - name: currencyCode
+    type: string
+  - name: balance
+    type: string
+CATALOG_SHOP_VIRTUAL_CURRENCY_BALANCE_UPDATE_FAILURE:
+  payload:
+  - name: currencyCode
+    type: string
 CAUTIONARY_CHANNEL_MESSAGE:
   payload:
   - name: confirmNumber
@@ -887,6 +951,18 @@ CHALLENGE_MODE_KEYSTONE_SLOTTED:
   payload:
   - name: keystoneID
     type: number
+CHALLENGE_MODE_LEADERBOARD_RESULT:
+  payload:
+  - name: mapID
+    type: number
+  - name: challengeModeID
+    type: number
+  - name: page
+    type: number
+  - name: results
+    type:
+      arrayof:
+        structure: MythicPlusLeaderboardResult
 CHALLENGE_MODE_LEADERS_UPDATE:
   payload:
 CHALLENGE_MODE_LEAVER_TIMER_ENDED:
@@ -993,7 +1069,7 @@ CHAT_COMBAT_MSG_ARENA_POINTS_GAIN:
     type: boolean
   - name: hideSenderInLetterbox
     type: boolean
-  - name: supressRaidIcons
+  - name: suppressRaidIcons
     type: boolean
 CHAT_DISABLED_CHANGE_FAILED:
   payload:
@@ -1043,7 +1119,7 @@ CHAT_MSG_ACHIEVEMENT:
     type: boolean
   - name: hideSenderInLetterbox
     type: boolean
-  - name: supressRaidIcons
+  - name: suppressRaidIcons
     type: boolean
 CHAT_MSG_ADDON:
   payload:
@@ -1119,7 +1195,7 @@ CHAT_MSG_AFK:
     type: boolean
   - name: hideSenderInLetterbox
     type: boolean
-  - name: supressRaidIcons
+  - name: suppressRaidIcons
     type: boolean
 CHAT_MSG_BG_SYSTEM_ALLIANCE:
   payload:
@@ -1155,7 +1231,7 @@ CHAT_MSG_BG_SYSTEM_ALLIANCE:
     type: boolean
   - name: hideSenderInLetterbox
     type: boolean
-  - name: supressRaidIcons
+  - name: suppressRaidIcons
     type: boolean
 CHAT_MSG_BG_SYSTEM_HORDE:
   payload:
@@ -1191,7 +1267,7 @@ CHAT_MSG_BG_SYSTEM_HORDE:
     type: boolean
   - name: hideSenderInLetterbox
     type: boolean
-  - name: supressRaidIcons
+  - name: suppressRaidIcons
     type: boolean
 CHAT_MSG_BG_SYSTEM_NEUTRAL:
   payload:
@@ -1227,7 +1303,7 @@ CHAT_MSG_BG_SYSTEM_NEUTRAL:
     type: boolean
   - name: hideSenderInLetterbox
     type: boolean
-  - name: supressRaidIcons
+  - name: suppressRaidIcons
     type: boolean
 CHAT_MSG_BN:
   payload:
@@ -1263,7 +1339,7 @@ CHAT_MSG_BN:
     type: boolean
   - name: hideSenderInLetterbox
     type: boolean
-  - name: supressRaidIcons
+  - name: suppressRaidIcons
     type: boolean
 CHAT_MSG_BN_INLINE_TOAST_ALERT:
   payload:
@@ -1299,7 +1375,7 @@ CHAT_MSG_BN_INLINE_TOAST_ALERT:
     type: boolean
   - name: hideSenderInLetterbox
     type: boolean
-  - name: supressRaidIcons
+  - name: suppressRaidIcons
     type: boolean
 CHAT_MSG_BN_INLINE_TOAST_BROADCAST:
   payload:
@@ -1335,7 +1411,7 @@ CHAT_MSG_BN_INLINE_TOAST_BROADCAST:
     type: boolean
   - name: hideSenderInLetterbox
     type: boolean
-  - name: supressRaidIcons
+  - name: suppressRaidIcons
     type: boolean
 CHAT_MSG_BN_INLINE_TOAST_BROADCAST_INFORM:
   payload:
@@ -1371,7 +1447,7 @@ CHAT_MSG_BN_INLINE_TOAST_BROADCAST_INFORM:
     type: boolean
   - name: hideSenderInLetterbox
     type: boolean
-  - name: supressRaidIcons
+  - name: suppressRaidIcons
     type: boolean
 CHAT_MSG_BN_INLINE_TOAST_CONVERSATION:
   payload:
@@ -1407,7 +1483,7 @@ CHAT_MSG_BN_INLINE_TOAST_CONVERSATION:
     type: boolean
   - name: hideSenderInLetterbox
     type: boolean
-  - name: supressRaidIcons
+  - name: suppressRaidIcons
     type: boolean
 CHAT_MSG_BN_WHISPER:
   payload:
@@ -1443,7 +1519,7 @@ CHAT_MSG_BN_WHISPER:
     type: boolean
   - name: hideSenderInLetterbox
     type: boolean
-  - name: supressRaidIcons
+  - name: suppressRaidIcons
     type: boolean
 CHAT_MSG_BN_WHISPER_INFORM:
   payload:
@@ -1479,7 +1555,7 @@ CHAT_MSG_BN_WHISPER_INFORM:
     type: boolean
   - name: hideSenderInLetterbox
     type: boolean
-  - name: supressRaidIcons
+  - name: suppressRaidIcons
     type: boolean
 CHAT_MSG_BN_WHISPER_PLAYER_OFFLINE:
   payload:
@@ -1515,7 +1591,7 @@ CHAT_MSG_BN_WHISPER_PLAYER_OFFLINE:
     type: boolean
   - name: hideSenderInLetterbox
     type: boolean
-  - name: supressRaidIcons
+  - name: suppressRaidIcons
     type: boolean
 CHAT_MSG_CHANNEL:
   payload:
@@ -1551,7 +1627,7 @@ CHAT_MSG_CHANNEL:
     type: boolean
   - name: hideSenderInLetterbox
     type: boolean
-  - name: supressRaidIcons
+  - name: suppressRaidIcons
     type: boolean
 CHAT_MSG_CHANNEL_JOIN:
   payload:
@@ -1587,7 +1663,7 @@ CHAT_MSG_CHANNEL_JOIN:
     type: boolean
   - name: hideSenderInLetterbox
     type: boolean
-  - name: supressRaidIcons
+  - name: suppressRaidIcons
     type: boolean
 CHAT_MSG_CHANNEL_LEAVE:
   payload:
@@ -1623,7 +1699,7 @@ CHAT_MSG_CHANNEL_LEAVE:
     type: boolean
   - name: hideSenderInLetterbox
     type: boolean
-  - name: supressRaidIcons
+  - name: suppressRaidIcons
     type: boolean
 CHAT_MSG_CHANNEL_LEAVE_PREVENTED:
   payload:
@@ -1663,7 +1739,7 @@ CHAT_MSG_CHANNEL_LIST:
     type: boolean
   - name: hideSenderInLetterbox
     type: boolean
-  - name: supressRaidIcons
+  - name: suppressRaidIcons
     type: boolean
 CHAT_MSG_CHANNEL_NOTICE:
   payload:
@@ -1699,7 +1775,7 @@ CHAT_MSG_CHANNEL_NOTICE:
     type: boolean
   - name: hideSenderInLetterbox
     type: boolean
-  - name: supressRaidIcons
+  - name: suppressRaidIcons
     type: boolean
 CHAT_MSG_CHANNEL_NOTICE_USER:
   payload:
@@ -1735,7 +1811,7 @@ CHAT_MSG_CHANNEL_NOTICE_USER:
     type: boolean
   - name: hideSenderInLetterbox
     type: boolean
-  - name: supressRaidIcons
+  - name: suppressRaidIcons
     type: boolean
 CHAT_MSG_COMBAT_FACTION_CHANGE:
   payload:
@@ -1771,7 +1847,7 @@ CHAT_MSG_COMBAT_FACTION_CHANGE:
     type: boolean
   - name: hideSenderInLetterbox
     type: boolean
-  - name: supressRaidIcons
+  - name: suppressRaidIcons
     type: boolean
 CHAT_MSG_COMBAT_HONOR_GAIN:
   payload:
@@ -1807,7 +1883,7 @@ CHAT_MSG_COMBAT_HONOR_GAIN:
     type: boolean
   - name: hideSenderInLetterbox
     type: boolean
-  - name: supressRaidIcons
+  - name: suppressRaidIcons
     type: boolean
 CHAT_MSG_COMBAT_MISC_INFO:
   payload:
@@ -1843,7 +1919,7 @@ CHAT_MSG_COMBAT_MISC_INFO:
     type: boolean
   - name: hideSenderInLetterbox
     type: boolean
-  - name: supressRaidIcons
+  - name: suppressRaidIcons
     type: boolean
 CHAT_MSG_COMBAT_XP_GAIN:
   payload:
@@ -1879,7 +1955,7 @@ CHAT_MSG_COMBAT_XP_GAIN:
     type: boolean
   - name: hideSenderInLetterbox
     type: boolean
-  - name: supressRaidIcons
+  - name: suppressRaidIcons
     type: boolean
 CHAT_MSG_COMMUNITIES_CHANNEL:
   payload:
@@ -1915,7 +1991,7 @@ CHAT_MSG_COMMUNITIES_CHANNEL:
     type: boolean
   - name: hideSenderInLetterbox
     type: boolean
-  - name: supressRaidIcons
+  - name: suppressRaidIcons
     type: boolean
 CHAT_MSG_CURRENCY:
   payload:
@@ -1951,7 +2027,7 @@ CHAT_MSG_CURRENCY:
     type: boolean
   - name: hideSenderInLetterbox
     type: boolean
-  - name: supressRaidIcons
+  - name: suppressRaidIcons
     type: boolean
 CHAT_MSG_DND:
   payload:
@@ -1987,7 +2063,7 @@ CHAT_MSG_DND:
     type: boolean
   - name: hideSenderInLetterbox
     type: boolean
-  - name: supressRaidIcons
+  - name: suppressRaidIcons
     type: boolean
 CHAT_MSG_EMOTE:
   payload:
@@ -2023,7 +2099,43 @@ CHAT_MSG_EMOTE:
     type: boolean
   - name: hideSenderInLetterbox
     type: boolean
-  - name: supressRaidIcons
+  - name: suppressRaidIcons
+    type: boolean
+CHAT_MSG_ENCOUNTER_EVENT:
+  payload:
+  - name: text
+    type: string
+  - name: playerName
+    type: string
+  - name: languageName
+    type: string
+  - name: channelName
+    type: string
+  - name: playerName2
+    type: string
+  - name: specialFlags
+    type: string
+  - name: zoneChannelID
+    type: number
+  - name: channelIndex
+    type: number
+  - name: channelBaseName
+    type: string
+  - name: languageID
+    type: number
+  - name: lineID
+    type: number
+  - name: guid
+    type: string
+  - name: bnSenderID
+    type: number
+  - name: isMobile
+    type: boolean
+  - name: isSubtitle
+    type: boolean
+  - name: hideSenderInLetterbox
+    type: boolean
+  - name: suppressRaidIcons
     type: boolean
 CHAT_MSG_FILTERED:
   payload:
@@ -2059,7 +2171,7 @@ CHAT_MSG_FILTERED:
     type: boolean
   - name: hideSenderInLetterbox
     type: boolean
-  - name: supressRaidIcons
+  - name: suppressRaidIcons
     type: boolean
 CHAT_MSG_GUILD:
   payload:
@@ -2095,7 +2207,7 @@ CHAT_MSG_GUILD:
     type: boolean
   - name: hideSenderInLetterbox
     type: boolean
-  - name: supressRaidIcons
+  - name: suppressRaidIcons
     type: boolean
 CHAT_MSG_GUILD_ACHIEVEMENT:
   payload:
@@ -2131,7 +2243,7 @@ CHAT_MSG_GUILD_ACHIEVEMENT:
     type: boolean
   - name: hideSenderInLetterbox
     type: boolean
-  - name: supressRaidIcons
+  - name: suppressRaidIcons
     type: boolean
 CHAT_MSG_GUILD_ITEM_LOOTED:
   payload:
@@ -2167,7 +2279,7 @@ CHAT_MSG_GUILD_ITEM_LOOTED:
     type: boolean
   - name: hideSenderInLetterbox
     type: boolean
-  - name: supressRaidIcons
+  - name: suppressRaidIcons
     type: boolean
 CHAT_MSG_IGNORED:
   payload:
@@ -2203,7 +2315,7 @@ CHAT_MSG_IGNORED:
     type: boolean
   - name: hideSenderInLetterbox
     type: boolean
-  - name: supressRaidIcons
+  - name: suppressRaidIcons
     type: boolean
 CHAT_MSG_INSTANCE_CHAT:
   payload:
@@ -2239,7 +2351,7 @@ CHAT_MSG_INSTANCE_CHAT:
     type: boolean
   - name: hideSenderInLetterbox
     type: boolean
-  - name: supressRaidIcons
+  - name: suppressRaidIcons
     type: boolean
 CHAT_MSG_INSTANCE_CHAT_LEADER:
   payload:
@@ -2275,7 +2387,7 @@ CHAT_MSG_INSTANCE_CHAT_LEADER:
     type: boolean
   - name: hideSenderInLetterbox
     type: boolean
-  - name: supressRaidIcons
+  - name: suppressRaidIcons
     type: boolean
 CHAT_MSG_LOOT:
   payload:
@@ -2311,7 +2423,7 @@ CHAT_MSG_LOOT:
     type: boolean
   - name: hideSenderInLetterbox
     type: boolean
-  - name: supressRaidIcons
+  - name: suppressRaidIcons
     type: boolean
 CHAT_MSG_MONEY:
   payload:
@@ -2347,7 +2459,7 @@ CHAT_MSG_MONEY:
     type: boolean
   - name: hideSenderInLetterbox
     type: boolean
-  - name: supressRaidIcons
+  - name: suppressRaidIcons
     type: boolean
 CHAT_MSG_MONSTER_EMOTE:
   payload:
@@ -2383,7 +2495,7 @@ CHAT_MSG_MONSTER_EMOTE:
     type: boolean
   - name: hideSenderInLetterbox
     type: boolean
-  - name: supressRaidIcons
+  - name: suppressRaidIcons
     type: boolean
 CHAT_MSG_MONSTER_PARTY:
   payload:
@@ -2419,7 +2531,7 @@ CHAT_MSG_MONSTER_PARTY:
     type: boolean
   - name: hideSenderInLetterbox
     type: boolean
-  - name: supressRaidIcons
+  - name: suppressRaidIcons
     type: boolean
 CHAT_MSG_MONSTER_SAY:
   payload:
@@ -2455,7 +2567,7 @@ CHAT_MSG_MONSTER_SAY:
     type: boolean
   - name: hideSenderInLetterbox
     type: boolean
-  - name: supressRaidIcons
+  - name: suppressRaidIcons
     type: boolean
 CHAT_MSG_MONSTER_WHISPER:
   payload:
@@ -2491,7 +2603,7 @@ CHAT_MSG_MONSTER_WHISPER:
     type: boolean
   - name: hideSenderInLetterbox
     type: boolean
-  - name: supressRaidIcons
+  - name: suppressRaidIcons
     type: boolean
 CHAT_MSG_MONSTER_YELL:
   payload:
@@ -2527,7 +2639,7 @@ CHAT_MSG_MONSTER_YELL:
     type: boolean
   - name: hideSenderInLetterbox
     type: boolean
-  - name: supressRaidIcons
+  - name: suppressRaidIcons
     type: boolean
 CHAT_MSG_OFFICER:
   payload:
@@ -2563,7 +2675,7 @@ CHAT_MSG_OFFICER:
     type: boolean
   - name: hideSenderInLetterbox
     type: boolean
-  - name: supressRaidIcons
+  - name: suppressRaidIcons
     type: boolean
 CHAT_MSG_OPENING:
   payload:
@@ -2599,7 +2711,7 @@ CHAT_MSG_OPENING:
     type: boolean
   - name: hideSenderInLetterbox
     type: boolean
-  - name: supressRaidIcons
+  - name: suppressRaidIcons
     type: boolean
 CHAT_MSG_PARTY:
   payload:
@@ -2635,7 +2747,7 @@ CHAT_MSG_PARTY:
     type: boolean
   - name: hideSenderInLetterbox
     type: boolean
-  - name: supressRaidIcons
+  - name: suppressRaidIcons
     type: boolean
 CHAT_MSG_PARTY_LEADER:
   payload:
@@ -2671,7 +2783,7 @@ CHAT_MSG_PARTY_LEADER:
     type: boolean
   - name: hideSenderInLetterbox
     type: boolean
-  - name: supressRaidIcons
+  - name: suppressRaidIcons
     type: boolean
 CHAT_MSG_PET_BATTLE_COMBAT_LOG:
   payload:
@@ -2707,7 +2819,7 @@ CHAT_MSG_PET_BATTLE_COMBAT_LOG:
     type: boolean
   - name: hideSenderInLetterbox
     type: boolean
-  - name: supressRaidIcons
+  - name: suppressRaidIcons
     type: boolean
 CHAT_MSG_PET_BATTLE_INFO:
   payload:
@@ -2743,7 +2855,7 @@ CHAT_MSG_PET_BATTLE_INFO:
     type: boolean
   - name: hideSenderInLetterbox
     type: boolean
-  - name: supressRaidIcons
+  - name: suppressRaidIcons
     type: boolean
 CHAT_MSG_PET_INFO:
   payload:
@@ -2779,7 +2891,7 @@ CHAT_MSG_PET_INFO:
     type: boolean
   - name: hideSenderInLetterbox
     type: boolean
-  - name: supressRaidIcons
+  - name: suppressRaidIcons
     type: boolean
 CHAT_MSG_PING:
   payload:
@@ -2815,7 +2927,7 @@ CHAT_MSG_PING:
     type: boolean
   - name: hideSenderInLetterbox
     type: boolean
-  - name: supressRaidIcons
+  - name: suppressRaidIcons
     type: boolean
 CHAT_MSG_RAID:
   payload:
@@ -2851,7 +2963,7 @@ CHAT_MSG_RAID:
     type: boolean
   - name: hideSenderInLetterbox
     type: boolean
-  - name: supressRaidIcons
+  - name: suppressRaidIcons
     type: boolean
 CHAT_MSG_RAID_BOSS_EMOTE:
   payload:
@@ -2887,7 +2999,7 @@ CHAT_MSG_RAID_BOSS_EMOTE:
     type: boolean
   - name: hideSenderInLetterbox
     type: boolean
-  - name: supressRaidIcons
+  - name: suppressRaidIcons
     type: boolean
 CHAT_MSG_RAID_BOSS_WHISPER:
   payload:
@@ -2923,7 +3035,7 @@ CHAT_MSG_RAID_BOSS_WHISPER:
     type: boolean
   - name: hideSenderInLetterbox
     type: boolean
-  - name: supressRaidIcons
+  - name: suppressRaidIcons
     type: boolean
 CHAT_MSG_RAID_LEADER:
   payload:
@@ -2959,7 +3071,7 @@ CHAT_MSG_RAID_LEADER:
     type: boolean
   - name: hideSenderInLetterbox
     type: boolean
-  - name: supressRaidIcons
+  - name: suppressRaidIcons
     type: boolean
 CHAT_MSG_RAID_WARNING:
   payload:
@@ -2995,7 +3107,7 @@ CHAT_MSG_RAID_WARNING:
     type: boolean
   - name: hideSenderInLetterbox
     type: boolean
-  - name: supressRaidIcons
+  - name: suppressRaidIcons
     type: boolean
 CHAT_MSG_RESTRICTED:
   payload:
@@ -3031,7 +3143,7 @@ CHAT_MSG_RESTRICTED:
     type: boolean
   - name: hideSenderInLetterbox
     type: boolean
-  - name: supressRaidIcons
+  - name: suppressRaidIcons
     type: boolean
 CHAT_MSG_SAY:
   payload:
@@ -3067,7 +3179,7 @@ CHAT_MSG_SAY:
     type: boolean
   - name: hideSenderInLetterbox
     type: boolean
-  - name: supressRaidIcons
+  - name: suppressRaidIcons
     type: boolean
 CHAT_MSG_SKILL:
   payload:
@@ -3103,7 +3215,7 @@ CHAT_MSG_SKILL:
     type: boolean
   - name: hideSenderInLetterbox
     type: boolean
-  - name: supressRaidIcons
+  - name: suppressRaidIcons
     type: boolean
 CHAT_MSG_SYSTEM:
   payload:
@@ -3139,7 +3251,7 @@ CHAT_MSG_SYSTEM:
     type: boolean
   - name: hideSenderInLetterbox
     type: boolean
-  - name: supressRaidIcons
+  - name: suppressRaidIcons
     type: boolean
 CHAT_MSG_TARGETICONS:
   payload:
@@ -3175,7 +3287,7 @@ CHAT_MSG_TARGETICONS:
     type: boolean
   - name: hideSenderInLetterbox
     type: boolean
-  - name: supressRaidIcons
+  - name: suppressRaidIcons
     type: boolean
 CHAT_MSG_TEXT_EMOTE:
   payload:
@@ -3211,7 +3323,7 @@ CHAT_MSG_TEXT_EMOTE:
     type: boolean
   - name: hideSenderInLetterbox
     type: boolean
-  - name: supressRaidIcons
+  - name: suppressRaidIcons
     type: boolean
 CHAT_MSG_TRADESKILLS:
   payload:
@@ -3247,7 +3359,7 @@ CHAT_MSG_TRADESKILLS:
     type: boolean
   - name: hideSenderInLetterbox
     type: boolean
-  - name: supressRaidIcons
+  - name: suppressRaidIcons
     type: boolean
 CHAT_MSG_VOICE_TEXT:
   payload:
@@ -3283,7 +3395,7 @@ CHAT_MSG_VOICE_TEXT:
     type: boolean
   - name: hideSenderInLetterbox
     type: boolean
-  - name: supressRaidIcons
+  - name: suppressRaidIcons
     type: boolean
 CHAT_MSG_WHISPER:
   payload:
@@ -3319,7 +3431,7 @@ CHAT_MSG_WHISPER:
     type: boolean
   - name: hideSenderInLetterbox
     type: boolean
-  - name: supressRaidIcons
+  - name: suppressRaidIcons
     type: boolean
 CHAT_MSG_WHISPER_INFORM:
   payload:
@@ -3355,7 +3467,7 @@ CHAT_MSG_WHISPER_INFORM:
     type: boolean
   - name: hideSenderInLetterbox
     type: boolean
-  - name: supressRaidIcons
+  - name: suppressRaidIcons
     type: boolean
 CHAT_MSG_YELL:
   payload:
@@ -3391,7 +3503,7 @@ CHAT_MSG_YELL:
     type: boolean
   - name: hideSenderInLetterbox
     type: boolean
-  - name: supressRaidIcons
+  - name: suppressRaidIcons
     type: boolean
 CHAT_REGIONAL_SEND_FAILED:
   payload:
@@ -3434,10 +3546,18 @@ CLIENT_SCENE_OPENED:
   - name: sceneType
     type:
       enum: ClientSceneType
+CLOSE_CHARTER_CONFIRMATION_UI:
+  payload:
+CLOSE_CREATE_CHARTER_NEIGHBORHOOD_UI:
+  payload:
+CLOSE_CREATE_GUILD_NEIGHBORHOOD_UI:
+  payload:
 CLOSE_INBOX_ITEM:
   payload:
   - name: mailIndex
     type: number
+CLOSE_PLOT_CORNERSTONE:
+  payload:
 CLOSE_TABARD_FRAME:
   payload:
 CLUB_ADDED:
@@ -3684,10 +3804,31 @@ COLOR_OVERRIDE_UPDATED:
       enum: ColorOverride
 COLOR_OVERRIDES_RESET:
   payload:
+COMBAT_LOG_ENTRIES_CLEARED:
+  payload:
 COMBAT_LOG_EVENT:
+  callback: true
   payload:
 COMBAT_LOG_EVENT_UNFILTERED:
+  callback: true
   payload:
+COMBAT_LOG_MESSAGE:
+  payload:
+  - name: message
+    type: string
+  - name: colorR
+    type: number
+  - name: colorG
+    type: number
+  - name: colorB
+    type: number
+  - name: order
+    type:
+      enum: CombatLogMessageOrder
+COMBAT_LOG_MESSAGE_LIMIT_CHANGED:
+  payload:
+  - name: messageLimit
+    type: number
 COMBAT_RATING_UPDATE:
   payload:
 COMBAT_TEXT_UPDATE:
@@ -3695,6 +3836,8 @@ COMBAT_TEXT_UPDATE:
   - name: combatTextType
     type: string
 COMBO_TARGET_CHANGED:
+  payload:
+COMMENTATOR_COMBAT_EVENT:
   payload:
 COMMENTATOR_ENTER_WORLD:
   payload:
@@ -4018,6 +4161,14 @@ CRAFTINGORDERS_UPDATE_REWARDS:
         structure: CraftingOrderRewardInfo
   - name: orderID
     type: number
+CREATE_NEIGHBORHOOD_RESULT:
+  payload:
+  - name: result
+    type:
+      enum: HousingResult
+  - name: neighborhoodName
+    nilable: true
+    type: string
 CRITERIA_COMPLETE:
   payload:
   - name: criteriaID
@@ -4060,6 +4211,16 @@ CURRENCY_TRANSFER_LOG_UPDATE:
   payload:
 CURRENCY_TRANSFER_SUCCESS:
   payload:
+CURRENT_HOUSE_INFO_RECIEVED:
+  payload:
+  - name: houseInfo
+    type:
+      structure: HouseInfo
+CURRENT_HOUSE_INFO_UPDATED:
+  payload:
+  - name: houseInfo
+    type:
+      structure: HouseInfo
 CURRENT_SPELL_CAST_CHANGED:
   payload:
   - name: cancelledCast
@@ -4088,8 +4249,23 @@ DAILY_RESET_INSTANCE_WELCOME:
     type: string
   - name: timeLeft
     type: number
+DAMAGE_METER_COMBAT_SESSION_UPDATED:
+  payload:
+  - name: type
+    type:
+      enum: DamageMeterType
+  - name: sessionID
+    type: number
+DAMAGE_METER_CURRENT_SESSION_UPDATED:
+  payload:
+DAMAGE_METER_RESET:
+  payload:
 DEBUG_MENU_TOGGLED:
   payload:
+DECLINE_NEIGHBORHOOD_INVITATION_RESPONSE:
+  payload:
+  - name: success
+    type: boolean
 DELETE_ITEM_CONFIRM:
   payload:
   - name: itemName
@@ -4137,6 +4313,14 @@ DUEL_TO_THE_DEATH_REQUESTED:
   payload:
   - name: playerName
     type: string
+DYE_COLOR_CATEGORY_UPDATED:
+  payload:
+  - name: dyeColorCategoryID
+    type: number
+DYE_COLOR_UPDATED:
+  payload:
+  - name: dyeColorID
+    type: number
 DYNAMIC_BUNDLE_PRICE_UPDATED:
   payload:
 DYNAMIC_GOSSIP_POI_UPDATED:
@@ -4215,6 +4399,45 @@ ENCOUNTER_START:
     type: number
   - name: groupSize
     type: number
+ENCOUNTER_STATE_CHANGED:
+  callback: true
+  payload:
+  - name: isInProgress
+    type: boolean
+ENCOUNTER_TIMELINE_EVENT_ADDED:
+  payload:
+  - name: eventInfo
+    type:
+      structure: C_EncounterTimeline.EncounterTimelineEventInfo
+ENCOUNTER_TIMELINE_EVENT_BLOCK_STATE_CHANGED:
+  payload:
+  - name: eventID
+    type: number
+ENCOUNTER_TIMELINE_EVENT_HIGHLIGHT:
+  payload:
+  - name: eventID
+    type: number
+ENCOUNTER_TIMELINE_EVENT_REMOVED:
+  payload:
+  - name: eventID
+    type: number
+ENCOUNTER_TIMELINE_EVENT_STATE_CHANGED:
+  payload:
+  - name: eventID
+    type: number
+ENCOUNTER_TIMELINE_EVENT_TRACK_CHANGED:
+  payload:
+  - name: eventID
+    type: number
+ENCOUNTER_TIMELINE_LAYOUT_UPDATED:
+  payload:
+ENCOUNTER_TIMELINE_STATE_UPDATED:
+  payload:
+ENCOUNTER_WARNING:
+  payload:
+  - name: encounterWarningInfo
+    type:
+      structure: C_EncounterWarnings.EncounterWarningInfo
 END_BOUND_TRADEABLE:
   payload:
   - name: reason
@@ -4284,6 +4507,12 @@ EXTRA_BROWSE_INFO_RECEIVED:
   payload:
   - name: itemID
     type: number
+FACTION_STANDING_CHANGED:
+  payload:
+  - name: factionID
+    type: number
+  - name: updatedStanding
+    type: number
 FIRST_FRAME_RENDERED:
   payload:
 FOG_OF_WAR_UPDATED:
@@ -4300,6 +4529,8 @@ FORBIDDEN_NAME_PLATE_UNIT_REMOVED:
   payload:
   - name: unitToken
     type: string
+FORCE_REFRESH_HOUSE_FINDER:
+  payload:
 FRAME_MANAGER_UPDATE_ALL:
   payload:
 FRAME_MANAGER_UPDATE_FRAME:
@@ -4315,6 +4546,12 @@ FRIENDLIST_UPDATE:
   payload:
 GAME_MODE_DISPLAY_INFO_UPDATED:
   payload:
+GAME_MODE_DISPLAY_MODE_TOGGLE_DISABLED:
+  payload:
+  - name: gameModeRecordID
+    type: number
+  - name: disabled
+    type: boolean
 GAME_PAD_ACTIVE_CHANGED:
   payload:
   - name: isActive
@@ -4846,6 +5083,362 @@ HONOR_XP_UPDATE:
   payload:
   - name: unitTarget
     type: unit
+HOUSE_DECOR_ADDED_TO_CHEST:
+  payload:
+  - name: decorGUID
+    type: string
+  - name: decorID
+    type: number
+HOUSE_EDITOR_AVAILABILITY_CHANGED:
+  payload:
+HOUSE_EDITOR_MODE_CHANGE_FAILURE:
+  payload:
+  - name: result
+    type:
+      enum: HousingResult
+HOUSE_EDITOR_MODE_CHANGED:
+  payload:
+  - name: currentEditMode
+    type:
+      enum: HouseEditorMode
+HOUSE_EXTERIOR_POSITION_FAILURE:
+  payload:
+  - name: housingResult
+    type:
+      enum: HousingResult
+HOUSE_EXTERIOR_POSITION_SUCCESS:
+  payload:
+HOUSE_EXTERIOR_TYPE_UNLOCKED:
+  payload:
+  - name: fixtureID
+    type: number
+HOUSE_FINDER_NEIGHBORHOOD_DATA_RECIEVED:
+  payload:
+  - name: neighborhoodPlots
+    type:
+      arrayof:
+        structure: NeighborhoodPlotMapInfo
+HOUSE_INFO_UPDATED:
+  payload:
+HOUSE_LEVEL_CHANGED:
+  payload:
+  - name: newHouseLevelInfo
+    nilable: true
+    type:
+      structure: HouseLevelInfo
+HOUSE_LEVEL_FAVOR_UPDATED:
+  payload:
+  - name: houseLevelFavor
+    type:
+      structure: HouseLevelFavor
+HOUSE_PLOT_ENTERED:
+  payload:
+HOUSE_PLOT_EXITED:
+  payload:
+HOUSE_RESERVATION_RESPONSE_RECIEVED:
+  payload:
+  - name: result
+    type:
+      enum: HousingResult
+HOUSING_BASIC_MODE_HOVERED_TARGET_CHANGED:
+  payload:
+  - name: hasHoveredTarget
+    type: boolean
+  - name: targetType
+    type:
+      enum: HousingBasicModeTargetType
+HOUSING_BASIC_MODE_PLACEMENT_FLAGS_UPDATED:
+  payload:
+  - name: targetType
+    type:
+      enum: HousingBasicModeTargetType
+  - name: activeFlags
+    type:
+      enum: HousingDecorPlacementRestriction
+HOUSING_BASIC_MODE_SELECTED_TARGET_CHANGED:
+  payload:
+  - name: hasSelectedTarget
+    type: boolean
+  - name: targetType
+    type:
+      enum: HousingBasicModeTargetType
+  - name: isPreview
+    type: boolean
+HOUSING_CATALOG_CATEGORY_UPDATED:
+  payload:
+  - name: categoryID
+    type: number
+HOUSING_CATALOG_SUBCATEGORY_UPDATED:
+  payload:
+  - name: subcategoryID
+    type: number
+HOUSING_CLEANUP_MODE_HOVERED_TARGET_CHANGED:
+  payload:
+  - name: hasHoveredTarget
+    type: boolean
+HOUSING_CLEANUP_MODE_TARGET_SELECTED:
+  payload:
+HOUSING_CORE_FIXTURE_CHANGED:
+  payload:
+  - name: coreFixtureType
+    type:
+      enum: HousingFixtureType
+HOUSING_CUSTOMIZE_MODE_HOVERED_TARGET_CHANGED:
+  payload:
+  - name: hasHoveredTarget
+    type: boolean
+  - name: targetType
+    type:
+      enum: HousingCustomizeModeTargetType
+HOUSING_CUSTOMIZE_MODE_SELECTED_TARGET_CHANGED:
+  payload:
+  - name: hasSelectedTarget
+    type: boolean
+  - name: targetType
+    type:
+      enum: HousingCustomizeModeTargetType
+HOUSING_DECOR_ADD_TO_PREVIEW_LIST:
+  payload:
+  - name: previewItemData
+    type:
+      structure: C_HousingCatalog.HousingPreviewItemData
+HOUSING_DECOR_CUSTOMIZATION_CHANGED:
+  payload:
+  - name: decorGUID
+    type: string
+HOUSING_DECOR_DYE_FAILURE:
+  payload:
+  - name: decorGUID
+    type: string
+  - name: housingResult
+    type:
+      enum: HousingResult
+HOUSING_DECOR_FREE_PLACE_STATUS_CHANGED:
+  payload:
+  - name: isFreePlaceEnabled
+    type: boolean
+HOUSING_DECOR_GRID_SNAP_OCCURRED:
+  payload:
+HOUSING_DECOR_GRID_SNAP_STATUS_CHANGED:
+  payload:
+  - name: isGridSnapEnabled
+    type: boolean
+HOUSING_DECOR_GRID_VISIBILITY_STATUS_CHANGED:
+  payload:
+  - name: isGridVisible
+    type: boolean
+HOUSING_DECOR_PLACE_FAILURE:
+  payload:
+  - name: housingResult
+    type:
+      enum: HousingResult
+HOUSING_DECOR_PLACE_SUCCESS:
+  payload:
+  - name: decorGUID
+    type: string
+  - name: size
+    type:
+      enum: HousingCatalogEntrySize
+  - name: isNew
+    type: boolean
+  - name: isPreview
+    type: boolean
+HOUSING_DECOR_PRECISION_MANIPULATION_EVENT:
+  payload:
+  - name: event
+    type:
+      enum: TransformManipulatorEvent
+HOUSING_DECOR_PRECISION_MANIPULATION_STATUS_CHANGED:
+  payload:
+  - name: isManipulatingSelection
+    type: boolean
+HOUSING_DECOR_PRECISION_SUBMODE_CHANGED:
+  payload:
+  - name: activeSubmode
+    nilable: true
+    type:
+      enum: HousingPrecisionSubmode
+HOUSING_DECOR_PREVIEW_LIST_REMOVE_FROM_WORLD:
+  payload:
+  - name: decorGUID
+    type: string
+HOUSING_DECOR_PREVIEW_LIST_UPDATED:
+  payload:
+HOUSING_DECOR_PREVIEW_STATE_CHANGED:
+  payload:
+  - name: isPreviewState
+    type: boolean
+HOUSING_DECOR_REMOVED:
+  payload:
+  - name: decorGUID
+    type: string
+HOUSING_DECOR_SELECT_RESPONSE:
+  payload:
+  - name: result
+    type:
+      enum: HousingResult
+HOUSING_EXPERT_MODE_HOVERED_TARGET_CHANGED:
+  payload:
+  - name: hasHoveredTarget
+    type: boolean
+  - name: targetType
+    type:
+      enum: HousingExpertModeTargetType
+HOUSING_EXPERT_MODE_PLACEMENT_FLAGS_UPDATED:
+  payload:
+  - name: targetType
+    type:
+      enum: HousingExpertModeTargetType
+  - name: activeFlags
+    type:
+      enum: HousingDecorPlacementRestriction
+HOUSING_EXPERT_MODE_SELECTED_TARGET_CHANGED:
+  payload:
+  - name: hasSelectedTarget
+    type: boolean
+  - name: targetType
+    type:
+      enum: HousingExpertModeTargetType
+HOUSING_FIXTURE_HOVER_CHANGED:
+  payload:
+  - name: anyHovered
+    type: boolean
+HOUSING_FIXTURE_POINT_FRAME_ADDED:
+  payload:
+  - name: pointFrame
+    type: string
+HOUSING_FIXTURE_POINT_FRAME_RELEASED:
+  payload:
+  - name: pointFrame
+    type: string
+HOUSING_FIXTURE_POINT_FRAMES_RELEASED:
+  payload:
+HOUSING_FIXTURE_POINT_SELECTION_CHANGED:
+  payload:
+  - name: hasSelection
+    type: boolean
+HOUSING_FIXTURE_UNLOCKED:
+  payload:
+  - name: fixtureID
+    type: number
+HOUSING_LAYOUT_DOOR_SELECTED:
+  payload:
+  - name: roomGUID
+    type: string
+  - name: componentID
+    type: number
+HOUSING_LAYOUT_DOOR_SELECTION_CHANGED:
+  payload:
+  - name: hasSelection
+    type: boolean
+HOUSING_LAYOUT_DRAG_TARGET_CHANGED:
+  payload:
+  - name: isDraggingRoom
+    type: boolean
+HOUSING_LAYOUT_FLOORPLAN_SELECTION_CHANGED:
+  payload:
+  - name: hasSelection
+    type: boolean
+  - name: roomID
+    type: number
+HOUSING_LAYOUT_NUM_FLOORS_CHANGED:
+  payload:
+  - name: prevNumFloors
+    type: number
+  - name: numFloors
+    type: number
+HOUSING_LAYOUT_PIN_FRAME_ADDED:
+  payload:
+  - name: pinFrame
+    type: string
+HOUSING_LAYOUT_PIN_FRAME_RELEASED:
+  payload:
+  - name: pinFrame
+    type: string
+HOUSING_LAYOUT_PIN_FRAMES_RELEASED:
+  payload:
+HOUSING_LAYOUT_ROOM_COMPONENT_THEME_SET_CHANGED:
+  payload:
+  - name: roomGUID
+    type: string
+  - name: componentID
+    type: number
+  - name: newThemeSet
+    type: number
+  - name: result
+    type:
+      enum: HousingResult
+HOUSING_LAYOUT_ROOM_MOVE_INVALID:
+  payload:
+HOUSING_LAYOUT_ROOM_MOVED:
+  payload:
+HOUSING_LAYOUT_ROOM_RECEIVED:
+  payload:
+  - name: prevNumFloors
+    type: number
+  - name: currNumFloors
+    type: number
+  - name: isUpstairs
+    type: boolean
+HOUSING_LAYOUT_ROOM_REMOVED:
+  payload:
+HOUSING_LAYOUT_ROOM_RETURNED:
+  payload:
+HOUSING_LAYOUT_ROOM_SELECTION_CHANGED:
+  payload:
+  - name: hasSelection
+    type: boolean
+HOUSING_LAYOUT_ROOM_SNAPPED:
+  payload:
+HOUSING_LAYOUT_VIEWED_FLOOR_CHANGED:
+  payload:
+  - name: floor
+    type: number
+HOUSING_MARKET_AVAILABILITY_UPDATED:
+  payload:
+HOUSING_NUM_DECOR_PLACED_CHANGED:
+  payload:
+HOUSING_REFUND_LIST_UPDATED:
+  payload:
+HOUSING_ROOM_COMPONENT_CUSTOMIZATION_CHANGE_FAILED:
+  payload:
+  - name: roomGUID
+    type: string
+  - name: componentID
+    type: number
+  - name: housingResult
+    type:
+      enum: HousingResult
+HOUSING_ROOM_COMPONENT_CUSTOMIZATION_CHANGED:
+  payload:
+  - name: roomGUID
+    type: string
+  - name: componentID
+    type: number
+HOUSING_SERVICES_AVAILABILITY_UPDATED:
+  payload:
+HOUSING_SET_EXTERIOR_HOUSE_SIZE_RESPONSE:
+  payload:
+  - name: result
+    type:
+      enum: HousingResult
+HOUSING_SET_EXTERIOR_HOUSE_TYPE_RESPONSE:
+  payload:
+  - name: result
+    type:
+      enum: HousingResult
+HOUSING_SET_FIXTURE_RESPONSE:
+  payload:
+  - name: result
+    type:
+      enum: HousingResult
+HOUSING_STORAGE_ENTRY_UPDATED:
+  payload:
+  - name: entryID
+    type:
+      structure: HousingCatalogEntryID
+HOUSING_STORAGE_UPDATED:
+  payload:
 IGNORELIST_UPDATE:
   payload:
 IGR_BILLING_NAG_DIALOG:
@@ -4865,6 +5458,24 @@ INCOMING_SUMMON_CHANGED:
 INITIAL_CLUBS_LOADED:
   payload:
 INITIAL_HOTFIXES_APPLIED:
+  payload:
+INITIATIVE_ACTIVITY_LOG_UPDATED:
+  payload:
+INITIATIVE_COMPLETED:
+  payload:
+  - name: initiativeTitle
+    type: string
+INITIATIVE_TASK_COMPLETED:
+  payload:
+  - name: taskName
+    type: string
+INITIATIVE_TASKS_TRACKED_LIST_CHANGED:
+  payload:
+  - name: initiativeTaskID
+    type: number
+  - name: added
+    type: boolean
+INITIATIVE_TASKS_TRACKED_UPDATED:
   payload:
 INSPECT_ACHIEVEMENT_READY:
   payload:
@@ -5098,14 +5709,6 @@ LEARNED_SPELL_IN_SKILL_LINE:
     type: number
   - name: isGuildPerkSpell
     type: boolean
-LEARNED_SPELL_IN_TAB:
-  payload:
-  - name: spellID
-    type: number
-  - name: skillInfoIndex
-    type: number
-  - name: isGuildPerkSpell
-    type: boolean
 LEAVE_PARTY_CONFIRMATION:
   payload:
   - name: reason
@@ -5113,6 +5716,10 @@ LEAVE_PARTY_CONFIRMATION:
       enum: LeavePartyConfirmReason
 LEAVING_TUTORIAL_AREA:
   payload:
+LEGACY_LOOT_RULES_CHANGED:
+  payload:
+  - name: isLegacyLootModeEnabled
+    type: boolean
 LET_RECENT_ALLIES_SEE_LOCATION_SETTING_UPDATED:
   payload:
 LFG_BOOT_PROPOSAL_UPDATE:
@@ -5527,6 +6134,8 @@ MOUNT_JOURNAL_SEARCH_UPDATED:
   payload:
 MOUNT_JOURNAL_USABILITY_CHANGED:
   payload:
+MOVE_OUT_RESERVATION_UPDATED:
+  payload:
 MUTELIST_UPDATE:
   payload:
 MYTHIC_PLUS_CURRENT_AFFIX_UPDATE:
@@ -5547,6 +6156,12 @@ NAME_PLATE_UNIT_ADDED:
   payload:
   - name: unitToken
     type: string
+NAME_PLATE_UNIT_BEHIND_CAMERA_CHANGED:
+  payload:
+  - name: unitTarget
+    type: unit
+  - name: isBehindCamera
+    type: boolean
 NAME_PLATE_UNIT_REMOVED:
   payload:
   - name: unitToken
@@ -5562,10 +6177,58 @@ NAVIGATION_FRAME_CREATED:
       uiobject: Region
 NAVIGATION_FRAME_DESTROYED:
   payload:
+NEIGHBORHOOD_GUILD_SIZE_VALIDATED:
+  payload:
+  - name: approved
+    type: boolean
+NEIGHBORHOOD_INFO_UPDATED:
+  payload:
+  - name: neighborhoodInfo
+    type:
+      structure: NeighborhoodInfo
+NEIGHBORHOOD_INITIATIVE_UPDATED:
+  payload:
+NEIGHBORHOOD_INVITE_RESPONSE:
+  payload:
+  - name: result
+    type:
+      enum: NeighborhoodInviteResult
+NEIGHBORHOOD_LIST_UPDATED:
+  payload:
+  - name: result
+    type:
+      enum: HousingResult
+  - name: neighborhoodInfos
+    nilable: true
+    type:
+      arrayof:
+        structure: NeighborhoodInfo
+NEIGHBORHOOD_MAP_DATA_UPDATED:
+  payload:
+NEIGHBORHOOD_NAME_UPDATED:
+  payload:
+  - name: neighborhoodGuid
+    type: string
+  - name: neighborhoodName
+    type: string
+NEIGHBORHOOD_NAME_VALIDATED:
+  payload:
+  - name: approved
+    type: boolean
 NEUTRAL_FACTION_SELECT_RESULT:
   payload:
   - name: success
     type: boolean
+NEW_HOUSING_ITEM_ACQUIRED:
+  payload:
+  - name: itemType
+    type:
+      enum: HousingItemToastType
+  - name: itemName
+    type: string
+  - name: icon
+    nilable: true
+    type: number
 NEW_MATCHMAKING_PARTY_INVITE:
   payload:
 NEW_MOUNT_ADDED:
@@ -5614,6 +6277,8 @@ NOTIFY_PVP_AFK_RESULT:
     type: number
   - name: numPlayersIHaveReported
     type: number
+NOTIFY_TURN_STRAFE_CHANGE:
+  payload:
 NPE_TUTORIAL_UPDATE:
   payload:
 OBJECT_ENTERED_AOI:
@@ -5626,7 +6291,38 @@ OBJECT_LEFT_AOI:
     type: string
 OBLITERUM_FORGE_PENDING_ITEM_CHANGED:
   payload:
+OPEN_CHARTER_CONFIRMATION_UI:
+  payload:
+  - name: neighborhoodName
+    type: string
+  - name: locationName
+    type: string
+OPEN_CREATE_CHARTER_NEIGHBORHOOD_UI:
+  payload:
+  - name: locationName
+    type: string
+OPEN_CREATE_GUILD_NEIGHBORHOOD_UI:
+  payload:
+  - name: locationName
+    type: string
 OPEN_MASTER_LOOT_LIST:
+  payload:
+OPEN_NEIGHBORHOOD_CHARTER:
+  payload:
+  - name: neighborhoodInfo
+    type:
+      structure: NeighborhoodInfo
+  - name: signatures
+    type:
+      arrayof: string
+  - name: requiredSignatures
+    type: number
+OPEN_NEIGHBORHOOD_CHARTER_SIGNATURE_REQUEST:
+  payload:
+  - name: neighborhoodInfo
+    type:
+      structure: NeighborhoodInfo
+OPEN_PLOT_CORNERSTONE:
   payload:
 OPEN_RECIPE_RESPONSE:
   payload:
@@ -5678,6 +6374,12 @@ PARTY_INVITE_REQUEST:
     type: string
   - name: questSessionActive
     type: boolean
+PARTY_KILL:
+  payload:
+  - name: attackerGUID
+    type: string
+  - name: targetGUID
+    type: string
 PARTY_LEADER_CHANGED:
   payload:
 PARTY_LFG_RESTRICTED:
@@ -5697,6 +6399,15 @@ PENDING_AZERITE_ESSENCE_CHANGED:
   - name: essenceID
     nilable: true
     type: number
+PENDING_NEIGHBORHOOD_INVITES_RECIEVED:
+  payload:
+  - name: result
+    type:
+      enum: NeighborhoodInviteResult
+  - name: pendingInviteList
+    nilable: true
+    type:
+      arrayof: string
 PERKS_ACTIVITIES_TRACKED_LIST_CHANGED:
   payload:
   - name: perksActivityID
@@ -6004,6 +6715,14 @@ PLAYER_CAN_GLIDE_CHANGED:
   payload:
   - name: canGlide
     type: boolean
+PLAYER_CHARACTER_LIST_UPDATED:
+  payload:
+  - name: characterInfos
+    type:
+      arrayof:
+        structure: HouseOwnerCharacterInfo
+  - name: ownerListIndex
+    type: number
 PLAYER_CHOICE_CLOSE:
   payload:
 PLAYER_CHOICE_UPDATE:
@@ -6054,6 +6773,12 @@ PLAYER_GUILD_UPDATE:
   payload:
   - name: unitTarget
     type: unit
+PLAYER_HOUSE_LIST_UPDATED:
+  payload:
+  - name: houseInfos
+    type:
+      arrayof:
+        structure: HouseInfo
 PLAYER_IMPULSE_APPLIED:
   payload:
 PLAYER_IN_COMBAT_CHANGED:
@@ -6196,6 +6921,8 @@ PLAYER_TALENT_UPDATE:
   payload:
 PLAYER_TARGET_CHANGED:
   payload:
+PLAYER_TARGET_DIED:
+  payload:
 PLAYER_TOTEM_UPDATE:
   payload:
   - name: totemSlot
@@ -6248,6 +6975,10 @@ PROFESSION_RESPEC_CONFIRMATION:
 PROVING_GROUNDS_SCORE_UPDATE:
   payload:
   - name: points
+    type: number
+PURCHASE_PLOT_RESULT:
+  payload:
+  - name: result
     type: number
 PVP_BRAWL_INFO_UPDATED:
   payload:
@@ -6541,6 +7272,14 @@ RECEIVED_ACHIEVEMENT_MEMBER_LIST:
   payload:
   - name: achievementID
     type: number
+RECEIVED_HOUSE_LEVEL_REWARDS:
+  payload:
+  - name: level
+    type: number
+  - name: rewards
+    type:
+      arrayof:
+        structure: HouseLevelReward
 RECENT_ALLIES_CACHE_UPDATE:
   payload:
 RECENT_ALLIES_DATA_READY:
@@ -6563,6 +7302,10 @@ REMIX_ARTIFACT_UPDATE:
   payload:
 REMIX_END_OF_EVENT:
   payload:
+REMOVE_NEIGHBORHOOD_CHARTER_SIGNATURE:
+  payload:
+  - name: signature
+    type: string
 REPLACE_ENCHANT:
   payload:
   - name: existingStr
@@ -6585,6 +7328,8 @@ REPORT_PLAYER_RESULT:
   - name: reportType
     type:
       enum: ReportType
+REPORT_SCREENSHOT_READY:
+  payload:
 REQUEST_CEMETERY_LIST_RESPONSE:
   payload:
   - name: isGossipTriggered
@@ -6629,8 +7374,6 @@ RESURRECT_REQUEST:
   payload:
   - name: inviter
     type: string
-RETURNING_PLAYER_PROMPT:
-  payload:
 ROLE_CHANGED_INFORM:
   payload:
   - name: changedName
@@ -6728,9 +7471,13 @@ SEARCH_DB_LOADED:
   payload:
 SECURE_TRANSFER_CANCEL:
   payload:
+SECURE_TRANSFER_CONFIRM_HOUSING_PURCHASE:
+  payload:
 SECURE_TRANSFER_CONFIRM_SEND_MAIL:
   payload:
 SECURE_TRANSFER_CONFIRM_TRADE_ACCEPT:
+  payload:
+SECURE_TRANSFER_HOUSING_CURRENCY_PURCHASE_CONFIRMATION:
   payload:
 SELECTED_LOADOUT_CHANGED:
   payload:
@@ -6746,8 +7493,21 @@ SESSION_TIME_ALERT:
     type: number
 SET_DEBUG_TOOL_VISIBLE:
   payload:
+SET_SEEN_PRODUCTS:
+  payload:
+  - name: productIds
+    type:
+      arrayof: number
 SETTINGS_LOADED:
   payload:
+SETTINGS_PANEL_OPEN:
+  payload:
+  - name: openToCategoryID
+    nilable: true
+    type: number
+  - name: scrollToElementName
+    nilable: true
+    type: string
 SHIPMENT_CRAFTER_CLOSED:
   payload:
 SHIPMENT_CRAFTER_INFO:
@@ -6778,8 +7538,6 @@ SHIPMENT_UPDATE:
     type: boolean
 SHOW_DELVES_COMPANION_CONFIGURATION_UI:
   payload:
-SHOW_DELVES_DISPLAY_UI:
-  payload:
 SHOW_END_OF_MATCH_UI:
   payload:
 SHOW_FACTION_SELECT_UI:
@@ -6788,6 +7546,10 @@ SHOW_HYPERLINK_TOOLTIP:
   payload:
   - name: hyperlink
     type: string
+SHOW_JOURNEYS_UI:
+  payload:
+  - name: factionID
+    type: number
 SHOW_LFG_EXPAND_SEARCH_PROMPT:
   payload:
 SHOW_LOOT_TOAST:
@@ -6832,12 +7594,22 @@ SHOW_LOOT_TOAST_UPGRADE:
     type: boolean
   - name: lessAwesome
     type: boolean
+SHOW_NEIGHBORHOOD_OWNERSHIP_TRANSFER_DIALOG:
+  payload:
+  - name: neighborhoodName
+    type: string
+  - name: cosmeticOwnerName
+    type: string
+SHOW_NEW_PRODUCT_NOTIFICATION:
+  payload:
 SHOW_PARTY_POSE_UI:
   payload:
   - name: mapID
     type: number
   - name: won
     type: boolean
+SHOW_PLAYER_EVICTED_DIALOG:
+  payload:
 SHOW_PVP_FACTION_LOOT_TOAST:
   payload:
   - name: typeIdentifier
@@ -6870,6 +7642,8 @@ SHOW_RATED_PVP_REWARD_TOAST:
     type: boolean
   - name: lessAwesome
     type: boolean
+SHOW_STAIR_DIRECTION_CONFIRMATION:
+  payload:
 SHOW_SUBSCRIPTION_INTERSTITIAL:
   payload:
   - name: type
@@ -7378,6 +8152,11 @@ TRACKED_ACHIEVEMENT_UPDATE:
   - name: duration
     nilable: true
     type: number
+TRACKED_HOUSE_CHANGED:
+  payload:
+  - name: trackedHouse
+    nilable: true
+    type: string
 TRACKED_RECIPE_UPDATE:
   payload:
   - name: recipeID
@@ -7489,6 +8268,8 @@ TRAINER_SHOW:
   payload:
 TRAINER_UPDATE:
   payload:
+TRAINING_GROUNDS_ENABLED_STATUS_UPDATED:
+  payload:
 TRAIT_COND_INFO_CHANGED:
   payload:
   - name: condID
@@ -7577,8 +8358,15 @@ TRANSMOG_COSMETIC_COLLECTION_SOURCE_ADDED:
   payload:
   - name: itemModifiedAppearanceID
     type: number
+TRANSMOG_CUSTOM_SETS_CHANGED:
+  payload:
+TRANSMOG_DISPLAYED_OUTFIT_CHANGED:
+  payload:
 TRANSMOG_OUTFITS_CHANGED:
   payload:
+  - name: newOutfitID
+    nilable: true
+    type: number
 TRANSMOG_SEARCH_UPDATED:
   payload:
   - name: searchType
@@ -7628,6 +8416,8 @@ TRY_PURCHASE_TO_NODE_PARTIAL_SUCCESS:
   payload:
   - name: nodeFinishedOn
     type: number
+TUTORIAL_COMBAT_EVENT:
+  payload:
 TUTORIAL_HIGHLIGHT_SPELL:
   payload:
   - name: spellID
@@ -7727,6 +8517,10 @@ UNIT_DEFENSE:
   payload:
   - name: unitTarget
     type: unit
+UNIT_DIED:
+  payload:
+  - name: unitGUID
+    type: string
 UNIT_DISPLAYPOWER:
   payload:
   - name: unitTarget
@@ -7819,6 +8613,12 @@ UNIT_LEVEL:
   payload:
   - name: unitTarget
     type: unit
+UNIT_LOOT:
+  payload:
+  - name: unitGUID
+    type: string
+  - name: hasLoot
+    type: boolean
 UNIT_MANA:
   payload:
   - name: unitTarget
@@ -7911,6 +8711,13 @@ UNIT_RESISTANCES:
   payload:
   - name: unitTarget
     type: unit
+UNIT_SPELL_DIMINISH_CATEGORY_STATE_UPDATED:
+  payload:
+  - name: unitTarget
+    type: unit
+  - name: trackerInfo
+    type:
+      structure: C_SpellDiminish.SpellDiminishTrackerInfo
 UNIT_SPELL_HASTE:
   payload:
   - name: unitTarget
@@ -7923,6 +8730,9 @@ UNIT_SPELLCAST_CHANNEL_START:
     type: string
   - name: spellID
     type: number
+  - name: castBarID
+    nilable: true
+    type: number
 UNIT_SPELLCAST_CHANNEL_STOP:
   payload:
   - name: unitTarget
@@ -7930,6 +8740,11 @@ UNIT_SPELLCAST_CHANNEL_STOP:
   - name: castGUID
     type: string
   - name: spellID
+    type: number
+  - name: interruptedBy
+    type: string
+  - name: castBarID
+    nilable: true
     type: number
 UNIT_SPELLCAST_CHANNEL_UPDATE:
   payload:
@@ -7939,6 +8754,9 @@ UNIT_SPELLCAST_CHANNEL_UPDATE:
     type: string
   - name: spellID
     type: number
+  - name: castBarID
+    nilable: true
+    type: number
 UNIT_SPELLCAST_DELAYED:
   payload:
   - name: unitTarget
@@ -7947,6 +8765,9 @@ UNIT_SPELLCAST_DELAYED:
     type: string
   - name: spellID
     type: number
+  - name: castBarID
+    nilable: true
+    type: number
 UNIT_SPELLCAST_EMPOWER_START:
   payload:
   - name: unitTarget
@@ -7954,6 +8775,9 @@ UNIT_SPELLCAST_EMPOWER_START:
   - name: castGUID
     type: string
   - name: spellID
+    type: number
+  - name: castBarID
+    nilable: true
     type: number
 UNIT_SPELLCAST_EMPOWER_STOP:
   payload:
@@ -7965,6 +8789,11 @@ UNIT_SPELLCAST_EMPOWER_STOP:
     type: number
   - name: complete
     type: boolean
+  - name: interruptedBy
+    type: string
+  - name: castBarID
+    nilable: true
+    type: number
 UNIT_SPELLCAST_EMPOWER_UPDATE:
   payload:
   - name: unitTarget
@@ -7972,6 +8801,9 @@ UNIT_SPELLCAST_EMPOWER_UPDATE:
   - name: castGUID
     type: string
   - name: spellID
+    type: number
+  - name: castBarID
+    nilable: true
     type: number
 UNIT_SPELLCAST_FAILED:
   payload:
@@ -7981,6 +8813,9 @@ UNIT_SPELLCAST_FAILED:
     type: string
   - name: spellID
     type: number
+  - name: castBarID
+    nilable: true
+    type: number
 UNIT_SPELLCAST_FAILED_QUIET:
   payload:
   - name: unitTarget
@@ -7989,6 +8824,9 @@ UNIT_SPELLCAST_FAILED_QUIET:
     type: string
   - name: spellID
     type: number
+  - name: castBarID
+    nilable: true
+    type: number
 UNIT_SPELLCAST_INTERRUPTED:
   payload:
   - name: unitTarget
@@ -7996,6 +8834,11 @@ UNIT_SPELLCAST_INTERRUPTED:
   - name: castGUID
     type: string
   - name: spellID
+    type: number
+  - name: interruptedBy
+    type: string
+  - name: castBarID
+    nilable: true
     type: number
 UNIT_SPELLCAST_INTERRUPTIBLE:
   payload:
@@ -8023,8 +8866,8 @@ UNIT_SPELLCAST_RETICLE_TARGET:
     type: number
 UNIT_SPELLCAST_SENT:
   payload:
-  - name: unit
-    type: string
+  - name: unitTarget
+    type: unit
   - name: target
     type: string
   - name: castGUID
@@ -8039,6 +8882,9 @@ UNIT_SPELLCAST_START:
     type: string
   - name: spellID
     type: number
+  - name: castBarID
+    nilable: true
+    type: number
 UNIT_SPELLCAST_STOP:
   payload:
   - name: unitTarget
@@ -8047,6 +8893,9 @@ UNIT_SPELLCAST_STOP:
     type: string
   - name: spellID
     type: number
+  - name: castBarID
+    nilable: true
+    type: number
 UNIT_SPELLCAST_SUCCEEDED:
   payload:
   - name: unitTarget
@@ -8054,6 +8903,9 @@ UNIT_SPELLCAST_SUCCEEDED:
   - name: castGUID
     type: string
   - name: spellID
+    type: number
+  - name: castBarID
+    nilable: true
     type: number
 UNIT_STATS:
   payload:
@@ -8089,6 +8941,28 @@ UPDATE_BINDINGS:
   payload:
 UPDATE_BONUS_ACTIONBAR:
   payload:
+UPDATE_BULLETIN_BOARD_MEMBER_TYPE:
+  payload:
+  - name: player
+    type: string
+  - name: residentType
+    type:
+      enum: ResidentType
+UPDATE_BULLETIN_BOARD_ROSTER:
+  payload:
+  - name: neighborhoodInfo
+    type:
+      structure: NeighborhoodInfo
+  - name: rosterMemberList
+    type:
+      arrayof:
+        structure: NeighborhoodRosterMemberInfo
+UPDATE_BULLETIN_BOARD_ROSTER_STATUSES:
+  payload:
+  - name: rosterMemberList
+    type:
+      arrayof:
+        structure: NeighborhoodRosterMemberUpdateInfo
 UPDATE_CHAT_COLOR:
   payload:
   - name: name
@@ -8237,6 +9111,39 @@ VEHICLE_POWER_SHOW:
     type: number
 VEHICLE_UPDATE:
   payload:
+VIEW_HOUSES_LIST_RECIEVED:
+  payload:
+  - name: houseInfos
+    type:
+      arrayof:
+        structure: HouseInfo
+VIEWED_TRANSMOG_OUTFIT_CHANGED:
+  payload:
+VIEWED_TRANSMOG_OUTFIT_SECONDARY_SLOTS_CHANGED:
+  payload:
+VIEWED_TRANSMOG_OUTFIT_SITUATIONS_CHANGED:
+  payload:
+VIEWED_TRANSMOG_OUTFIT_SLOT_REFRESH:
+  payload:
+VIEWED_TRANSMOG_OUTFIT_SLOT_SAVE_SUCCESS:
+  payload:
+  - name: slot
+    type:
+      enum: TransmogOutfitSlot
+  - name: type
+    type:
+      enum: TransmogType
+  - name: option
+    type:
+      enum: TransmogOutfitSlotOption
+VIEWED_TRANSMOG_OUTFIT_SLOT_WEAPON_OPTION_CHANGED:
+  payload:
+  - name: slot
+    type:
+      enum: TransmogOutfitSlot
+  - name: weaponOption
+    type:
+      enum: TransmogOutfitSlotOption
 VIGNETTE_MINIMAP_UPDATED:
   payload:
   - name: vignetteGUID
@@ -8468,36 +9375,27 @@ VOICE_CHAT_SPEAK_FOR_ME_ACTIVE_STATUS_UPDATED:
   payload:
 VOICE_CHAT_SPEAK_FOR_ME_FEATURE_STATUS_UPDATED:
   payload:
+VOICE_CHAT_TTS_PLAYBACK_BOOKMARK:
+  payload:
+  - name: utteranceID
+    type: number
+  - name: bookmarkName
+    type: string
 VOICE_CHAT_TTS_PLAYBACK_FAILED:
   payload:
+  - name: utteranceID
+    type: number
   - name: status
     type:
       enum: VoiceTtsStatusCode
-  - name: utteranceID
-    type: number
-  - name: destination
-    type:
-      enum: VoiceTtsDestination
 VOICE_CHAT_TTS_PLAYBACK_FINISHED:
   payload:
-  - name: numConsumers
-    type: number
   - name: utteranceID
     type: number
-  - name: destination
-    type:
-      enum: VoiceTtsDestination
 VOICE_CHAT_TTS_PLAYBACK_STARTED:
   payload:
-  - name: numConsumers
-    type: number
   - name: utteranceID
     type: number
-  - name: durationMS
-    type: number
-  - name: destination
-    type:
-      enum: VoiceTtsDestination
 VOICE_CHAT_TTS_SPEAK_TEXT_UPDATE:
   payload:
   - name: status
