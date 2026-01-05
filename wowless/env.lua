@@ -2,7 +2,10 @@ local Mixin = require('wowless.util').mixin
 local deepcopy = require('pl.tablex').deepcopy
 
 local function dump(uiobjects)
-  local d = require('pl.pretty').dump
+  local function d(x)
+    io.write(require('pl.pretty').write(x))
+    io.write('\n')
+  end
   return function(...)
     for _, x in ipairs({ ... }) do
       d(x)
