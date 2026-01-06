@@ -41,6 +41,7 @@ type:
               family: tag
               gametype: tag
               impl: tag
+              luaobject: tag
               module: tag
               schema: tag
               scripttype: tag

@@ -710,6 +710,7 @@ foreach(product ${products})
     docs
     events
     globals
+    luaobjects
     structures
     uiobjects
     xml)
@@ -736,6 +737,7 @@ list(
   gametypes
   globals
   impl
+  luaobjects
   modules
   products
   schema

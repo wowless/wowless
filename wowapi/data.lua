@@ -50,6 +50,7 @@ local fns = {
   families = global('families'),
   gametypes = global('gametypes'),
   impl = global('impl'),
+  luaobjects = perproduct('luaobjects'),
   modules = global('modules'),
   products = global('products'),
   schemas = loaddir('schemas', 'yaml'),

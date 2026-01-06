@@ -61,6 +61,9 @@ type:
           key: string
           value:
             taggedunion:
+              luaobject:
+                ref:
+                  schema: luaobject
               uiobject:
                 ref:
                   schema: uiobject

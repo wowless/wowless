@@ -15,6 +15,7 @@ local productDomains = {
   cvar = wdata.cvars,
   enum = wdata.enums,
   event = wdata.events,
+  luaobject = wdata.luaobjects,
   structure = wdata.structures,
   uiobject = wdata.uiobjects,
   xml = wdata.xml,

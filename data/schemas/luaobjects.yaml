@@ -1,0 +1,6 @@
+name: luaobjects
+type:
+  mapof:
+    key: string
+    value:
+      record:
