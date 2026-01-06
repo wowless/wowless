@@ -4,11 +4,8 @@ addon:
   capsule:
     apinamespaces:
       C_AuthChallenge:
-      C_CombatLogSecure:
-      C_PingSecure:
       C_SecureTransfer:
       C_StoreSecure:
-      C_UnitAurasPrivate:
       C_WowTokenSecure:
     enums:
       BattlepayBannerType:

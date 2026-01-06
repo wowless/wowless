@@ -100,7 +100,7 @@ local ptablemap = {
     local apiNamespaces = {}
     for k, api in pairs(perproduct(p, 'apis')) do
       local dot = k:find('%.')
-      if dot and (not api.platform or api.platform == platform) then
+      if dot and (not api.platform or api.platform == platform) and not api.secureonly then
         local name = k:sub(1, dot - 1)
         apiNamespaces[name] = apiNamespaces[name] or { methods = {} }
         apiNamespaces[name].methods[k:sub(dot + 1)] = api

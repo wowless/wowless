@@ -125,6 +125,7 @@ for _, t in pairs(docs) do
       local name = (t.Namespace and (t.Namespace .. '.') or '') .. func.Name
       assert(not funcs[name])
       funcs[name] = func
+      func.Environment = t.Environment
     end
     for _, event in ipairs(t.Events or {}) do
       local name = (t.Namespace and (t.Namespace .. '.') or '') .. event.Name
@@ -324,6 +325,7 @@ local function rewriteApis(apis)
       outputs = outsig(fn, ns, api),
       outstride = stride(fn.Returns),
       platform = api and api.platform,
+      secureonly = fn.Environment == 'SecureOnly' or nil,
       stubnothing = api and api.stubnothing,
       stuboutstrides = api and api.stuboutstrides,
     }

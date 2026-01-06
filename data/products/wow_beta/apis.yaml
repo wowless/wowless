@@ -6762,9 +6762,11 @@ C_CombatLog.SetMessageLimit:
 C_CombatLogSecure.AddEventFilter:
   inputs:
   outputs:
+  secureonly: true
 C_CombatLogSecure.ClearEventFilters:
   inputs:
   outputs:
+  secureonly: true
 C_CombatLogSecure.CreateCombatLogMessage:
   inputs:
   - name: message
@@ -6779,12 +6781,15 @@ C_CombatLogSecure.CreateCombatLogMessage:
     type:
       enum: CombatLogMessageOrder
   outputs:
+  secureonly: true
 C_CombatLogSecure.GetCurrentEntryInfo:
   inputs:
   outputs:
+  secureonly: true
 C_CombatLogSecure.GetCurrentEventInfo:
   inputs:
   outputs:
+  secureonly: true
 C_CombatLogSecure.GetEntryCount:
   inputs:
   - default: false
@@ -6793,6 +6798,7 @@ C_CombatLogSecure.GetEntryCount:
   outputs:
   - name: count
     type: number
+  secureonly: true
 C_CombatLogSecure.SeekToNewestEntry:
   inputs:
   - default: false
@@ -6801,6 +6807,7 @@ C_CombatLogSecure.SeekToNewestEntry:
   outputs:
   - name: isValidEntry
     type: boolean
+  secureonly: true
 C_CombatLogSecure.SeekToPreviousEntry:
   inputs:
   - default: false
@@ -6809,11 +6816,13 @@ C_CombatLogSecure.SeekToPreviousEntry:
   outputs:
   - name: isValidEntry
     type: boolean
+  secureonly: true
 C_CombatLogSecure.ShouldShowCurrentEntry:
   inputs:
   outputs:
   - name: shouldShow
     type: boolean
+  secureonly: true
 C_CombatText.GetActiveUnit:
   inputs:
   outputs:
@@ -19287,27 +19296,17 @@ C_Ping.TogglePingListener:
 C_PingSecure.ClearPendingPingInfo:
   inputs:
   outputs:
+  secureonly: true
 C_PingSecure.CreateFrame:
   inputs:
   outputs:
+  secureonly: true
 C_PingSecure.DisplayError:
   inputs:
   - name: error
     type: string
   outputs:
-C_PingSecure.GetCooldownInfo:
-  inputs:
-  outputs:
-  - name: cooldownInfo
-    type:
-      structure: PingCooldownInfo
-C_PingSecure.GetDefaultPingOptions:
-  inputs:
-  outputs:
-  - name: pingTypes
-    type:
-      arrayof:
-        structure: PingTypeInfo
+  secureonly: true
 C_PingSecure.GetTargetPingReceiver:
   inputs:
   - name: mousePosX
@@ -19319,6 +19318,7 @@ C_PingSecure.GetTargetPingReceiver:
     nilable: true
     type:
       uiobject: Region
+  secureonly: true
 C_PingSecure.GetTargetWorldPing:
   inputs:
   - name: mousePosX
@@ -19328,20 +19328,14 @@ C_PingSecure.GetTargetWorldPing:
   outputs:
   - name: foundTarget
     type: boolean
+  secureonly: true
 C_PingSecure.GetTargetWorldPingAndSend:
   inputs:
   outputs:
   - name: result
     type:
       structure: ContextualWorldPingResult
-C_PingSecure.GetTextureKitForType:
-  inputs:
-  - name: type
-    type:
-      enum: PingSubjectType
-  outputs:
-  - name: uiTextureKitID
-    type: string
+  secureonly: true
 C_PingSecure.SendPing:
   inputs:
   - name: type
@@ -19354,46 +19348,55 @@ C_PingSecure.SendPing:
   - name: result
     type:
       enum: PingResult
+  secureonly: true
 C_PingSecure.SetPendingPingOffScreenCallback:
   inputs:
   - name: cb
     type: function
   outputs:
+  secureonly: true
 C_PingSecure.SetPingCooldownStartedCallback:
   inputs:
   - name: cb
     type: function
   outputs:
+  secureonly: true
 C_PingSecure.SetPingPinFrameAddedCallback:
   inputs:
   - name: cb
     type: function
   outputs:
+  secureonly: true
 C_PingSecure.SetPingPinFrameRemovedCallback:
   inputs:
   - name: cb
     type: function
   outputs:
+  secureonly: true
 C_PingSecure.SetPingPinFrameScreenClampStateUpdatedCallback:
   inputs:
   - name: cb
     type: function
   outputs:
+  secureonly: true
 C_PingSecure.SetPingRadialWheelCreatedCallback:
   inputs:
   - name: cb
     type: function
   outputs:
+  secureonly: true
 C_PingSecure.SetSendMacroPingCallback:
   inputs:
   - name: cb
     type: function
   outputs:
+  secureonly: true
 C_PingSecure.SetTogglePingListenerCallback:
   inputs:
   - name: cb
     type: function
   outputs:
+  secureonly: true
 C_PlayerChoice.GetCurrentPlayerChoiceInfo:
   inputs:
   mayreturnnothing: true
@@ -29890,7 +29893,9 @@ C_UnitAuras.WantsAlteredForm:
   - name: wantsAlteredForm
     type: boolean
 C_UnitAurasPrivate.AddPrivateAuraUpdateCallback:
+  secureonly: true
 C_UnitAurasPrivate.AnchorPrivateAura:
+  secureonly: true
 C_UnitAurasPrivate.GetAllPrivateAuras:
   inputs:
   outputs:
@@ -29898,7 +29903,9 @@ C_UnitAurasPrivate.GetAllPrivateAuras:
     type:
       arrayof:
         structure: AuraData
+  secureonly: true
 C_UnitAurasPrivate.GetAuraDataByAuraInstanceIDPrivate:
+  secureonly: true
 C_UnitAurasPrivate.GetPrivateAuraAnchors:
   inputs:
   outputs:
@@ -29906,11 +29913,17 @@ C_UnitAurasPrivate.GetPrivateAuraAnchors:
     type:
       arrayof:
         structure: PrivateAuraAnchor
+  secureonly: true
 C_UnitAurasPrivate.SetPrivateAuraAnchorAddedCallback:
+  secureonly: true
 C_UnitAurasPrivate.SetPrivateAuraAnchorRemovedCallback:
+  secureonly: true
 C_UnitAurasPrivate.SetPrivateRaidBossMessageCallback:
+  secureonly: true
 C_UnitAurasPrivate.SetPrivateWarningTextFrame:
+  secureonly: true
 C_UnitAurasPrivate.SetShowDispelTypeCallback:
+  secureonly: true
 C_UserFeedback.SubmitBug:
   inputs:
   - name: bugInfo

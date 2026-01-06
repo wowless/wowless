@@ -49,6 +49,8 @@ type:
           linux: tag
           mac: tag
           windows: tag
+    secureonly:
+      type: boolean
     stubnothing:
       type: boolean
     stuboutstrides:

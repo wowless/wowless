@@ -230,6 +230,7 @@ local function mkapi(apicfg)
       inputs = apicfg.inputs,
       instride = apicfg.instride,
       modules = { 'gencode' },
+      secureonly = apicfg.secureonly,
     }
   end
 end

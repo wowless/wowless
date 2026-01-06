@@ -19,10 +19,10 @@ local function dump(uiobjects)
 end
 
 local function init(modules, lite)
-  local impls = modules.apiloader(modules)
+  local impls, secureimpls = modules.apiloader(modules)
   Mixin(modules.env.genv, deepcopy(impls))
   Mixin(modules.env.genv, deepcopy(modules.datalua.globals))
-  Mixin(modules.env.secureenv, deepcopy(impls))
+  Mixin(modules.env.secureenv, deepcopy(secureimpls))
   Mixin(modules.env.secureenv, deepcopy(modules.datalua.globals))
 
   local wowlessDebug = Mixin({}, debug)
