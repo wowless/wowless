@@ -122,7 +122,8 @@ for _, t in pairs(docs) do
   end
   if not t.Type or t.Type == 'System' then
     for _, func in ipairs(t.Functions or {}) do
-      local name = (t.Namespace and (t.Namespace .. '.') or '') .. func.Name
+      local ns = func.Namespace or t.Namespace
+      local name = (ns and ns ~= '' and (ns .. '.') or '') .. func.Name
       assert(not funcs[name])
       funcs[name] = func
       func.Environment = t.Environment

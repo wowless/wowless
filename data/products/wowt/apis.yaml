@@ -37640,6 +37640,15 @@ string.sub:
   impl: string.sub
 string.trim:
   impl: string.trim
+  inputs:
+  - name: str
+    type: string
+  - default: ' \r\n\t'
+    name: characters
+    type: string
+  outputs:
+  - name: trimmed
+    type: string
 string.upper:
   impl: string.upper
 strjoin:

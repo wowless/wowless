@@ -77,8 +77,6 @@ lies:
     C_ConfigurationWarnings.SetConfigurationWarningSeen:
     C_LiveEvent.OnLiveEventBannerClicked:
     C_LiveEvent.OnLiveEventPopupClicked:
-    C_RestrictedActions.InCombatLockdown:
-    C_StringUtil.trim:
     C_WorldSafeLocsUIInternal.GetWorldSafeLocs:
     ToggleAnimKitDisplay:
     ToggleCollision:
