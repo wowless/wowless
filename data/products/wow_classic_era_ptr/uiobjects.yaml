@@ -21,7 +21,39 @@ Actor:
     RegionBase:
     ScriptObjectBase:
   methods:
+    AttachToMount:
+      inputs:
+      - name: rider
+        type:
+          uiobject: Actor
+      - name: animation
+        type: number
+      - name: spellKitVisualID
+        nilable: true
+        type: number
+      outputs:
+      - name: success
+        type: boolean
+    CalculateMountScale:
+      inputs:
+      - name: rider
+        type:
+          uiobject: Actor
+      outputs:
+      - name: scale
+        type: number
     ClearModel:
+      inputs:
+      outputs:
+    DetachFromMount:
+      inputs:
+      - name: rider
+        type:
+          uiobject: Actor
+      outputs:
+      - name: success
+        type: boolean
+    Dress:
       inputs:
       outputs:
     GetActiveBoundingBox:
@@ -52,6 +84,11 @@ Actor:
       outputs:
       - name: variation
         type: number
+    GetAutoDress:
+      inputs:
+      outputs:
+      - name: autoDress
+        type: boolean
     GetDesaturation:
       impl:
         getter:
@@ -84,6 +121,11 @@ Actor:
       outputs:
       - name: guid
         type: string
+    GetObeyHideInTransmogFlag:
+      inputs:
+      outputs:
+      - name: obey
+        type: boolean
     GetParticleOverrideScale:
       inputs:
       outputs:
@@ -115,11 +157,26 @@ Actor:
       outputs:
       - name: roll
         type: number
+    GetSheathed:
+      inputs:
+      outputs:
+      - name: sheathed
+        type: boolean
     GetSpellVisualKit:
       inputs:
       outputs:
       - name: spellVisualKitID
         type: number
+    GetUseTransmogChoices:
+      inputs:
+      outputs:
+      - name: use
+        type: boolean
+    GetUseTransmogSkin:
+      inputs:
+      outputs:
+      - name: use
+        type: boolean
     GetYaw:
       impl:
         getter:
@@ -128,10 +185,20 @@ Actor:
       outputs:
       - name: yaw
         type: number
+    IsGeoReady:
+      inputs:
+      outputs:
+      - name: isReady
+        type: boolean
     IsLoaded:
       inputs:
       outputs:
       - name: isLoaded
+        type: boolean
+    IsPreferringModelCollisionBounds:
+      inputs:
+      outputs:
+      - name: preferringCollisionBounds
         type: boolean
     IsUsingCenterForOrigin:
       inputs:
@@ -149,6 +216,9 @@ Actor:
       - default: false
         name: isLooping
         type: boolean
+      outputs:
+    ResetNextHandSlot:
+      inputs:
       outputs:
     SetAnimation:
       inputs:
@@ -173,12 +243,28 @@ Actor:
         type:
           enum: ModelBlendOperation
       outputs:
+    SetAutoDress:
+      inputs:
+      - name: autoDress
+        type: boolean
+      outputs:
     SetDesaturation:
       impl:
         setter:
         - name: desaturation
       inputs:
       - name: strength
+        type: number
+      outputs:
+    SetGradientMask:
+      inputs:
+      - name: gradientIndex0
+        type: number
+      - name: gradientIndex1
+        type: number
+      - name: gradientIndex2
+        type: number
+      - name: gradientIndex3
         type: number
       outputs:
     SetModelByCreatureDisplayID:
@@ -236,6 +322,11 @@ Actor:
       outputs:
       - name: success
         type: boolean
+    SetObeyHideInTransmogFlag:
+      inputs:
+      - name: obey
+        type: boolean
+      outputs:
     SetParticleOverrideScale:
       inputs:
       - name: scale
@@ -282,6 +373,11 @@ Actor:
       - name: positionZ
         type: number
       outputs:
+    SetPreferModelCollisionBounds:
+      inputs:
+      - name: preferCollisionBounds
+        type: boolean
+      outputs:
     SetRoll:
       impl:
         setter:
@@ -289,6 +385,14 @@ Actor:
       inputs:
       - name: roll
         type: number
+      outputs:
+    SetSheathed:
+      inputs:
+      - name: sheathed
+        type: boolean
+      - default: false
+        name: hidden
+        type: boolean
       outputs:
     SetSpellVisualKit:
       inputs:
@@ -309,6 +413,16 @@ Actor:
         type: boolean
       - default: false
         name: z
+        type: boolean
+      outputs:
+    SetUseTransmogChoices:
+      inputs:
+      - name: use
+        type: boolean
+      outputs:
+    SetUseTransmogSkin:
+      inputs:
+      - name: use
         type: boolean
       outputs:
     SetYaw:
@@ -337,6 +451,12 @@ Actor:
         nilable: true
         type:
           enum: ItemTryOnReason
+    Undress:
+      inputs:
+      - default: true
+        name: includeWeapons
+        type: boolean
+      outputs:
   objectType: ModelSceneActor
   scripts:
     OnAnimFinished:
@@ -4273,7 +4393,9 @@ GameTooltip:
     SetUnit:
     SetUnitAura:
     SetUnitBuff:
+    SetUnitBuffByAuraInstanceID:
     SetUnitDebuff:
+    SetUnitDebuffByAuraInstanceID:
     SetUpgradeItem:
   scripts:
     OnTooltipAddMoney:
@@ -5062,6 +5184,17 @@ Model:
     SetGlow:
       inputs:
       - name: glow
+        type: number
+      outputs:
+    SetGradientMask:
+      inputs:
+      - name: grad0
+        type: number
+      - name: grad1
+        type: number
+      - name: grad2
+        type: number
+      - name: grad3
         type: number
       outputs:
     SetLight:

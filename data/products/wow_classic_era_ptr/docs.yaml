@@ -8,6 +8,17 @@ lies:
       outputs:
       - _add:
           nilable: true
+    CreateSecureDelegate:
+      inputs:
+      - type:
+          _change:
+            from: unknown
+            to: function
+      outputs:
+      - type:
+          _change:
+            from: unknown
+            to: function
     GetFileIDFromPath:
       outputs:
       - _add:
@@ -111,7 +122,6 @@ lies:
     C_AuctionHouse.StartCommoditiesPurchase:
     C_AuctionHouse.SupportsCopperValues:
     C_BarberShopInternal.SetQAMode:
-    C_BattleNet.InstallHighResTextures:
     C_ConfigurationWarnings.GetConfigurationWarnings:
     C_ConfigurationWarnings.GetConfigurationWarningSeen:
     C_ConfigurationWarnings.GetConfigurationWarningString:
@@ -136,51 +146,9 @@ lies:
     TogglePortals:
     ToggleTris:
   extra_enums:
-    ActionBarOrientation:
-    ActionBarVisibleSetting:
     AuctionHouseFilterCategory:
-    AuraFrameIconDirection:
-    AuraFrameIconWrap:
-    AuraFrameOrientation:
-    BagsDirection:
-    BagsOrientation:
     ConfigurationWarning:
-    CooldownViewerBarContent:
-    CooldownViewerIconDirection:
-    CooldownViewerOrientation:
-    CooldownViewerVisibleSetting:
-    EditModeAccountSetting:
-    EditModeActionBarSetting:
-    EditModeActionBarSystemIndices:
-    EditModeArchaeologyBarSetting:
-    EditModeAuraFrameSetting:
-    EditModeAuraFrameSystemIndices:
-    EditModeBagsSetting:
-    EditModeCastBarSetting:
-    EditModeChatFrameSetting:
-    EditModeCooldownViewerSetting:
-    EditModeCooldownViewerSystemIndices:
-    EditModeDurabilityFrameSetting:
-    EditModeLayoutType:
-    EditModeMicroMenuSetting:
-    EditModeMinimapSetting:
-    EditModeObjectiveTrackerSetting:
-    EditModePresetLayouts:
-    EditModeSettingDisplayType:
-    EditModeStatusTrackingBarSetting:
-    EditModeStatusTrackingBarSystemIndices:
-    EditModeSystem:
-    EditModeTimerBarsSetting:
-    EditModeUnitFrameSetting:
-    EditModeUnitFrameSystemIndices:
-    EditModeVehicleSeatIndicatorSetting:
     ItemCommodityStatus:
-    MicroMenuOrder:
-    MicroMenuOrientation:
-    RaidGroupDisplayType:
-    SortPlayersBy:
-    ViewArenaSize:
-    ViewRaidSize:
     WarbandEventState:
     WarbandGroupFlags:
     WarbandPlacementDisplayInfoType:
@@ -218,18 +186,22 @@ lies:
     COMMODITY_SEARCH_RESULTS_ADDED:
     COMMODITY_SEARCH_RESULTS_RECEIVED:
     COMMODITY_SEARCH_RESULTS_UPDATED:
-    EDIT_MODE_LAYOUTS_UPDATED:
     EXTRA_BROWSE_INFO_RECEIVED:
     ITEM_KEY_ITEM_INFO_RECEIVED:
     ITEM_PURCHASED:
     ITEM_SEARCH_RESULTS_ADDED:
     ITEM_SEARCH_RESULTS_UPDATED:
+    LEARNED_SPELL_IN_TAB:
     OWNED_AUCTION_BIDDER_INFO_RECEIVED:
     REPLICATE_ITEM_LIST_UPDATE:
   extra_script_objects:
     FrameAPIArchaeologyDigSiteFrame:
     FrameAPIBlob:
     FrameAPIQuestPOI:
+    FrameAPIScenarioPOI:
+    HousingCatalogSearcherAPI:
+    HousingFixturePointFrameAPI:
+    HousingLayoutPinFrameAPI:
     PingPinFrameAPI:
     SimpleModelFFXAPI:
   uiobjects:
@@ -537,6 +509,8 @@ script_objects:
 typedefs:
   AnimationDataEnum:
     type: number
+  AuraFilters:
+    type: string
   AzeriteEmpoweredItemLocation:
     type:
       structure: ItemLocation
@@ -577,6 +551,12 @@ typedefs:
   fileID:
     type: number
   FontAlphabet:
+    type: string
+  HousingCatalogSearcher:
+    type: string
+  HousingFixturePointFrame:
+    type: string
+  HousingLayoutPinFrame:
     type: string
   HTMLTextType:
     type: string

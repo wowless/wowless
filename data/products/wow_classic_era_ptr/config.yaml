@@ -18,12 +18,10 @@ addon:
     globalapis:
       C_Macro.SetMacroExecuteLineCallback:
       CreateForbiddenFrame:
+      CreateSecureDelegate:
       loadstring_untainted:
-  enum_values_set_in_framexml:
-    SeasonID:
-      Placeholder:
   enums_set_in_framexml:
-    Unitsex:
+    EditModeChatFrameDisplayOnlySetting:
   hooked_globals:
     FauxScrollFrame_Update:
     SetItemRef:
@@ -47,9 +45,6 @@ addon:
     raidGraphicsTextureResolution:
     RenderScale:
   overwritten_apis:
-    C_ChatInfo.RegisterAddonMessagePrefix:
-    C_ChatInfo.SendAddonMessage:
-    C_ChatInfo.SendAddonMessageLogged:
     C_Traits.GetConditionInfo:
     C_Traits.GetEntryInfo:
     C_Traits.GetTreeInfo:
@@ -61,6 +56,7 @@ runner:
     AJ_PVP_RBG_ACTION: missing HonorFrame_SetType
     AJ_PVP_SKIRMISH_ACTION: missing HonorFrame_SetType
     AUCTION_HOUSE_SHOW: no C_AuctionHouse
+    BARBER_SHOP_OPEN: breaks PTR_IssueReporter
     DUEL_OUTOFBOUNDS: error in StaticPopup infrastructure
     LFG_PROPOSAL_SHOW: TODO figure out if there's an ordering issue here
     PARTY_INVITE_CANCEL: LFGInvitePopup does not exist

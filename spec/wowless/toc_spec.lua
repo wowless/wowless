@@ -49,11 +49,13 @@ describe('wowless.toc', function()
             'bbb [AllowLoadGameType vanilla]',
             'ccc [AllowLoadGameType classic]',
             'ddd [AllowLoadGameType mists]',
+            'eee [AllowLoadGameType tbc]',
           }
           local _, files = parse(gametype, table.concat(lines, '\n'))
           local expected = {
             Mists = { 'ccc', 'ddd' },
             Standard = { 'aaa' },
+            TBC = { 'ccc', 'eee' },
             Vanilla = { 'bbb', 'ccc' },
           }
           assert.same(assert(expected[gametype]), files)

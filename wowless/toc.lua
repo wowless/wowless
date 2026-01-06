@@ -34,6 +34,14 @@ local filters = {
       end
     end
   end,
+  ExcludeLoadGameType = function(s, gts)
+    for gt in s:gmatch('[^, ]+') do
+      if gts[gt] then
+        return
+      end
+    end
+    return true
+  end,
   LoadIntoEnvironment = function(s)
     assert(s == 'secure', s)
     return true

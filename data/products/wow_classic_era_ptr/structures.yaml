@@ -131,6 +131,9 @@ C_AccountStore.AccountStoreItemInfo:
         enum: AccountStoreItemFlag
     id:
       type: number
+    mode:
+      type:
+        enum: AccountStoreItemMode
     name:
       type: string
     nonrefundable:
@@ -356,6 +359,9 @@ C_BattleNet.BNetGameAccountInfo:
     characterName:
       nilable: true
       type: string
+    classID:
+      nilable: true
+      type: number
     className:
       nilable: true
       type: string
@@ -787,6 +793,8 @@ C_CatalogShop.CatalogShopProductInfo:
       type: string
     isBundle:
       type: boolean
+    isDynamicallyDiscounted:
+      type: boolean
     isFullyOwned:
       type: boolean
     isHidden:
@@ -821,6 +829,8 @@ C_CatalogShop.CatalogShopProductInfo:
       type: string
     refundable:
       type: boolean
+    shouldShowOriginalPrice:
+      type: boolean
     smallCardBGTexture:
       nilable: true
       type: string
@@ -844,6 +854,9 @@ C_CatalogShop.CatalogShopProductInfo:
       type:
         arrayof:
           structure: C_CatalogShop.CatalogShopVirtualCurrency
+    wideCardBGOverrideProductURL:
+      nilable: true
+      type: string
     wideCardBGTexture:
       nilable: true
       type: string
@@ -1767,6 +1780,66 @@ C_DeathInfo.SelfResurrectOption:
         enum: SelfResurrectOptionType
     priority:
       type: number
+C_EditMode.EditModeAnchorInfo:
+  fields:
+    offsetX:
+      type: number
+    offsetY:
+      type: number
+    point:
+      type:
+        stringenum: FramePoint
+    relativePoint:
+      type:
+        stringenum: FramePoint
+    relativeTo:
+      type: string
+C_EditMode.EditModeLayoutInfo:
+  fields:
+    layoutName:
+      type: string
+    layoutType:
+      type:
+        enum: EditModeLayoutType
+    systems:
+      type:
+        arrayof:
+          structure: C_EditMode.EditModeSystemInfo
+C_EditMode.EditModeLayouts:
+  fields:
+    activeLayout:
+      type: number
+    layouts:
+      type:
+        arrayof:
+          structure: C_EditMode.EditModeLayoutInfo
+C_EditMode.EditModeSettingInfo:
+  fields:
+    setting:
+      type: number
+    value:
+      type: number
+C_EditMode.EditModeSystemInfo:
+  fields:
+    anchorInfo:
+      type:
+        structure: C_EditMode.EditModeAnchorInfo
+    anchorInfo2:
+      nilable: true
+      type:
+        structure: C_EditMode.EditModeAnchorInfo
+    isInDefaultPosition:
+      type: boolean
+    settings:
+      type:
+        arrayof:
+          structure: C_EditMode.EditModeSettingInfo
+    system:
+      type:
+        enum: EditModeSystem
+    systemIndex:
+      nilable: true
+      type: number
 C_EncodingUtil.CBORSerializationOptions:
   fields:
     ignoreSerializationErrors:
@@ -2374,6 +2447,219 @@ C_GuildInfo.GuildRenameStatus:
     result:
       type:
         enum: GuildErrorType
+C_HousingBasicMode.InvalidPlacementInfo:
+  fields:
+    anyRestrictions:
+      type: boolean
+    invalidCollision:
+      type: boolean
+    invalidTarget:
+      type: boolean
+    notInRoom:
+      type: boolean
+    tooFar:
+      type: boolean
+C_HousingCatalog.HousingBundleDecorEntryInfo:
+  fields:
+    decorID:
+      type: number
+    quantity:
+      type: number
+C_HousingCatalog.HousingBundleInfo:
+  fields:
+    decorEntries:
+      type:
+        arrayof:
+          structure: C_HousingCatalog.HousingBundleDecorEntryInfo
+    price:
+      type: number
+    productID:
+      type: number
+C_HousingCatalog.HousingCatalogCategoryInfo:
+  fields:
+    anyOwnedEntries:
+      type: boolean
+    icon:
+      nilable: true
+      type: string
+    ID:
+      type: number
+    name:
+      nilable: true
+      type: string
+    orderIndex:
+      type: number
+    subcategoryIDs:
+      type:
+        arrayof: number
+C_HousingCatalog.HousingCatalogEntryInfo:
+  fields:
+    asset:
+      nilable: true
+      type: string
+    canCustomize:
+      type: boolean
+    categoryIDs:
+      type:
+        arrayof: number
+    customizations:
+      type:
+        arrayof: string
+    dataTagsByID:
+      type: table
+    entryID:
+      type:
+        structure: HousingCatalogEntryID
+    firstAcquisitionBonus:
+      type: number
+    iconAtlas:
+      nilable: true
+      type: string
+    iconTexture:
+      nilable: true
+      type: FileAsset
+    isAllowedIndoors:
+      type: boolean
+    isAllowedOutdoors:
+      type: boolean
+    isPrefab:
+      type: boolean
+    marketInfo:
+      nilable: true
+      type:
+        structure: C_HousingCatalog.HousingMarketInfo
+    name:
+      type: string
+    numPlaced:
+      type: number
+    numStored:
+      type: number
+    placementCost:
+      type: number
+    quality:
+      nilable: true
+      type:
+        enum: ItemQuality
+    quantity:
+      type: number
+    remainingRedeemable:
+      type: number
+    showQuantity:
+      type: boolean
+    size:
+      type:
+        enum: HousingCatalogEntrySize
+    sourceText:
+      type: string
+    subcategoryIDs:
+      type:
+        arrayof: number
+    uiModelSceneID:
+      nilable: true
+      type: number
+C_HousingCatalog.HousingCatalogSubcategoryInfo:
+  fields:
+    anyOwnedEntries:
+      type: boolean
+    icon:
+      nilable: true
+      type: string
+    ID:
+      type: number
+    name:
+      nilable: true
+      type: string
+    orderIndex:
+      type: number
+    parentCategoryID:
+      type: number
+C_HousingCatalog.HousingCategorySearchInfo:
+  fields:
+    editorModeContext:
+      nilable: true
+      type:
+        enum: HouseEditorMode
+    includeFeaturedCategory:
+      default: false
+      type: boolean
+    withOwnedEntriesOnly:
+      default: false
+      type: boolean
+C_HousingCatalog.HousingFeaturedDecorEntry:
+  fields:
+    entryID:
+      type:
+        structure: HousingCatalogEntryID
+    productID:
+      type: number
+C_HousingCatalog.HousingMarketInfo:
+  fields:
+    bundleIDs:
+      type:
+        arrayof: number
+    price:
+      type: number
+    productID:
+      type: number
+C_HousingCustomizeMode.HousingRoomComponentInstanceInfo:
+  fields:
+    availableThemeSets:
+      type:
+        arrayof: number
+    canBeCustomized:
+      type: boolean
+    ceilingType:
+      type:
+        enum: HousingRoomComponentCeilingType
+    componentID:
+      type: number
+    currentRoomComponentTextureRecID:
+      nilable: true
+      type: number
+    currentThemeSet:
+      nilable: true
+      type: number
+    currentWallpaper:
+      nilable: true
+      type: number
+    doorType:
+      type:
+        enum: HousingRoomComponentDoorType
+    roomGUID:
+      type: string
+    type:
+      type:
+        enum: HousingRoomComponentType
+C_HousingCustomizeMode.PreviewDyeSlotInfo:
+  fields:
+    dyeColorID:
+      type: number
+    dyeSlotID:
+      type: number
+C_HousingCustomizeMode.RoomComponentWallpaper:
+  fields:
+    name:
+      type: string
+    roomComponentTextureRecID:
+      type: number
+C_HousingDecor.HousingDecorInstanceListEntry:
+  fields:
+    decorGUID:
+      type: string
+    name:
+      type: string
+C_HousingDecor.HousingLevelInfo:
+  fields:
+    exteriorDecorPlacementBudget:
+      type: number
+    exteriorFixtureBudget:
+      type: number
+    interiorDecorPlacementBudget:
+      type: number
+    level:
+      type: number
+    roomPlacementBudget:
+      type: number
 C_ItemUpgrade.ItemUpgradeCostDiscountInfo:
   fields:
     discountHighWatermark:
@@ -4971,6 +5257,33 @@ CreateFontFamilyMemberInfo:
       type: string
     height:
       type: number
+DyeColorCategoryDisplayInfo:
+  fields:
+    ID:
+      type: number
+    name:
+      type: string
+DyeColorDisplayInfo:
+  fields:
+    dyeColorCategoryID:
+      type: number
+    ID:
+      type: number
+    itemID:
+      nilable: true
+      type: number
+    name:
+      type: string
+    numOwned:
+      type: number
+    sortOrder:
+      type: number
+    swatchColorEnd:
+      type:
+        structure: colorRGB
+    swatchColorStart:
+      type:
+        structure: colorRGB
 ExpansionDisplayInfo:
   fields:
     banner:
@@ -4979,7 +5292,11 @@ ExpansionDisplayInfo:
       type:
         arrayof:
           structure: ExpansionDisplayInfoFeature
+    highResBackgroundID:
+      type: number
     logo:
+      type: number
+    lowResBackgroundID:
       type: number
     textureKit:
       type: string
@@ -5032,6 +5349,199 @@ GuildTabardInfo:
     emblemFilename:
       type: string
     emblemStyle:
+      type: number
+HouseInfo:
+  fields:
+    houseGUID:
+      nilable: true
+      type: string
+    houseName:
+      nilable: true
+      type: string
+    moveOutTime:
+      nilable: true
+      type: number
+    neighborhoodGUID:
+      nilable: true
+      type: string
+    neighborhoodName:
+      nilable: true
+      type: string
+    ownerName:
+      nilable: true
+      type: string
+    plotCost:
+      nilable: true
+      type: number
+    plotID:
+      type: number
+    plotReserved:
+      nilable: true
+      type: boolean
+HouseLevelFavor:
+  fields:
+    houseFavor:
+      type: number
+    houseGUID:
+      nilable: true
+      type: string
+    houseLevel:
+      type: number
+HouseLevelReward:
+  fields:
+    asset:
+      nilable: true
+      type: string
+    iconAtlas:
+      nilable: true
+      type: string
+    iconTexture:
+      nilable: true
+      type: FileAsset
+    newValue:
+      nilable: true
+      type: number
+    objectName:
+      nilable: true
+      type: string
+    oldValue:
+      nilable: true
+      type: number
+    tooltipText:
+      nilable: true
+      type: string
+    type:
+      type:
+        enum: HouseLevelRewardType
+    valueType:
+      nilable: true
+      type:
+        enum: HouseLevelRewardValueType
+HouseOwnerCharacterInfo:
+  fields:
+    characterName:
+      type: string
+    classID:
+      type: number
+    error:
+      type:
+        enum: HouseOwnerError
+    playerGUID:
+      type: string
+HousingCatalogEntryID:
+  fields:
+    entrySubtype:
+      type:
+        enum: HousingCatalogEntrySubtype
+    entryType:
+      type:
+        enum: HousingCatalogEntryType
+    recordID:
+      type: number
+    subtypeIdentifier:
+      type: number
+HousingCatalogFilterTagGroupInfo:
+  fields:
+    groupID:
+      type: number
+    groupName:
+      type: string
+    tags:
+      type:
+        arrayof:
+          structure: HousingCatalogFilterTagInfo
+HousingCatalogFilterTagInfo:
+  fields:
+    anyAssociatedEntries:
+      type: boolean
+    orderIndex:
+      type: number
+    tagID:
+      type: number
+    tagName:
+      type: string
+HousingCoreFixtureInfo:
+  fields:
+    currentStyleVariantOptions:
+      type:
+        arrayof:
+          structure: HousingFixtureOption
+    selectedStyleFixtureID:
+      type: number
+    selectedVariantFixtureID:
+      type: number
+    styleOptions:
+      type:
+        arrayof:
+          structure: HousingFixtureOption
+HousingDecorDyeSlot:
+  fields:
+    channel:
+      type: number
+    dyeColorCategoryID:
+      type: number
+    dyeColorID:
+      nilable: true
+      type: number
+    ID:
+      type: number
+    orderIndex:
+      type: number
+HousingDecorInstanceInfo:
+  fields:
+    canBeCustomized:
+      type: boolean
+    canBeRemoved:
+      type: boolean
+    dataTagsByID:
+      type: table
+    decorGUID:
+      type: string
+    decorID:
+      type: number
+    dyeSlots:
+      type:
+        arrayof:
+          structure: HousingDecorDyeSlot
+    isAllowedIndoors:
+      type: boolean
+    isAllowedOutdoors:
+      type: boolean
+    isLocked:
+      type: boolean
+    name:
+      type: string
+    size:
+      type:
+        enum: HousingCatalogEntrySize
+HousingFixtureOption:
+  fields:
+    colorID:
+      type: number
+    fixtureID:
+      type: number
+    isLocked:
+      type: boolean
+    lockReasonString:
+      type: string
+    name:
+      type: string
+    typeID:
+      type: number
+    typeName:
+      type: string
+HousingFixturePointInfo:
+  fields:
+    canSelectionBeRemoved:
+      type: boolean
+    fixtureOptions:
+      type:
+        arrayof:
+          structure: HousingFixtureOption
+    ownerHash:
+      type: number
+    selectedFixtureID:
+      nilable: true
       type: number
 HTMLContentNode:
   fields:
@@ -5105,6 +5615,20 @@ MythicPlusAffixScoreInfo:
       type: boolean
     score:
       type: number
+MythicPlusLeaderboardPlayerResult:
+  fields:
+    playerGUID:
+      type: string
+    specID:
+      type: number
+MythicPlusLeaderboardResult:
+  fields:
+    completionTime:
+      type: number
+    players:
+      type:
+        arrayof:
+          structure: MythicPlusLeaderboardPlayerResult
 MythicPlusRatingLinkInfo:
   fields:
     completedInTime:
@@ -5117,6 +5641,75 @@ MythicPlusRatingLinkInfo:
       type: number
     name:
       type: string
+NeighborhoodInfo:
+  fields:
+    locationName:
+      nilable: true
+      type: string
+    neighborhoodGUID:
+      type: string
+    neighborhoodName:
+      type: string
+    neighborhoodOwnerType:
+      default: 0
+      type:
+        enum: NeighborhoodOwnerType
+    neighborhoodType:
+      type:
+        enum: NeighborhoodType
+    ownerGUID:
+      type: string
+    ownerName:
+      nilable: true
+      type: string
+    suggestionReason:
+      nilable: true
+      type:
+        enum: HouseFinderSuggestionReason
+NeighborhoodPlotMapInfo:
+  fields:
+    mapPosition:
+      type:
+        structure: vector2
+    ownerName:
+      nilable: true
+      type: string
+    ownerType:
+      default: 0
+      type:
+        enum: HousingPlotOwnerType
+    plotCost:
+      nilable: true
+      type: number
+    plotDataID:
+      type: number
+    plotID:
+      type: number
+NeighborhoodRosterMemberInfo:
+  fields:
+    isOnline:
+      type: boolean
+    playerGUID:
+      type: string
+    plotID:
+      type: number
+    residentName:
+      type: string
+    residentType:
+      type:
+        enum: ResidentType
+    subdivision:
+      nilable: true
+      type: number
+NeighborhoodRosterMemberUpdateInfo:
+  fields:
+    isOnline:
+      type: boolean
+    playerGUID:
+      type: string
+    residentType:
+      type:
+        enum: ResidentType
 PlayerInfoCharacterData:
   fields:
     alternateFormRaceData:
