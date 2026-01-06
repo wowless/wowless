@@ -60,8 +60,10 @@ type:
         mapof:
           key: string
           value:
-            ref:
-              schema: uiobject
+            taggedunion:
+              uiobject:
+                ref:
+                  schema: uiobject
     typedefs:
       type:
         mapof:

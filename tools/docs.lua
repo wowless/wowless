@@ -453,13 +453,15 @@ local function rewriteUIObjects(uiobjects)
   assertTaken('ignore_script_object_methods', ignores)
   local mapped = {}
   for k, v in pairs(pscrobjs) do
-    local mmk = assert(config.script_objects[k], 'unknown doc type ' .. k)
-    local t = mapped[mmk] or {}
-    for mk, mv in pairs(v) do
-      assert(not t[mk], 'multiple specs for ' .. k .. '.' .. mk)
-      t[mk] = mv
+    local so = assert(config.script_objects[k], 'unknown doc type ' .. k)
+    if so.uiobject then
+      local t = mapped[so.uiobject] or {}
+      for mk, mv in pairs(v) do
+        assert(not t[mk], 'multiple specs for ' .. k .. '.' .. mk)
+        t[mk] = mv
+      end
+      mapped[so.uiobject] = t
     end
-    mapped[mmk] = t
   end
   local lies = deref(config, 'lies', 'uiobjects') or {}
   local reassigns = config.uiobject_method_reassignments or {}
