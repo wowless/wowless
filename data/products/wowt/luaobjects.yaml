@@ -1,0 +1,77 @@
+AbbreviateConfig:
+  methods:
+    GetAbbreviateNumberData:
+    SetAbbreviateNumberData:
+LuaColorCurveObject:
+  methods:
+    AddPoint:
+    ClearPoints:
+    Copy:
+    Evaluate:
+    EvaluateUnpacked:
+    GetPoint:
+    GetPointCount:
+    GetPoints:
+    RemovePoint:
+    SetPoints:
+    SetToDefaults:
+LuaCurveObject:
+  methods:
+    AddPoint:
+    ClearPoints:
+    Copy:
+    Evaluate:
+    GetPoint:
+    GetPointCount:
+    GetPoints:
+    RemovePoint:
+    SetPoints:
+    SetToDefaults:
+LuaCurveObjectBase:
+  methods:
+    GetType:
+    HasSecretValues:
+    SetType:
+LuaDurationObject:
+  methods:
+    Assign:
+    Copy:
+    EvaluateElapsedDuration:
+    EvaluateElapsedPercent:
+    EvaluateRemainingDuration:
+    EvaluateRemainingPercent:
+    GetElapsedDuration:
+    GetElapsedPercent:
+    GetEndTime:
+    GetModRate:
+    GetRemainingDuration:
+    GetRemainingPercent:
+    GetStartTime:
+    GetTotalDuration:
+    HasSecretValues:
+    IsZero:
+    Reset:
+    SetTimeFromEnd:
+    SetTimeFromStart:
+    SetTimeSpan:
+    SetToDefaults:
+UnitHealPredictionCalculator:
+  methods:
+    GetDamageAbsorbClampMode:
+    GetDamageAbsorbs:
+    GetHealAbsorbClampMode:
+    GetHealAbsorbMode:
+    GetHealAbsorbs:
+    GetIncomingHealClampMode:
+    GetIncomingHealOverflowPercent:
+    GetIncomingHeals:
+    GetPredictedValues:
+    HasSecretValues:
+    Reset:
+    SetDamageAbsorbClampMode:
+    SetHealAbsorbClampMode:
+    SetHealAbsorbMode:
+    SetIncomingHealClampMode:
+    SetIncomingHealOverflowPercent:
+    SetPredictedValues:
+    SetToDefaults:

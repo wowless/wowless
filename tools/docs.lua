@@ -511,10 +511,24 @@ local function rewriteUIObjects(uiobjects)
   assertTaken('reassigns', reassigns)
 end
 
+local function rewriteLuaObjects(luaobjects)
+  for _, t in pairs(scrobjs) do
+    local so = assert(config.script_objects[t.Name], 'unknown doc type ' .. t.Name)
+    if so.luaobject then
+      local o = assert(luaobjects[so.luaobject], so.luaobject)
+      o.methods = o.methods or {}
+      for _, fn in ipairs(t.Functions) do
+        o.methods[fn.Name] = {}
+      end
+    end
+  end
+end
+
 local rewriteFuncs = {
   apis = rewriteApis,
   events = rewriteEvents,
   globals = rewriteGlobals,
+  luaobjects = rewriteLuaObjects,
   structures = rewriteStructures,
   uiobjects = rewriteUIObjects,
 }
@@ -551,5 +565,6 @@ end
 assert(not next(unused_typedefs), 'unused typedefs:\n' .. pprintYaml(unused_typedefs))
 
 for k, v in pairs(datas) do
-  writeifchanged(('data/products/%s/%s.yaml'):format(product, k), pprintYaml(v))
+  local s = pprintYaml(v)
+  writeifchanged(('data/products/%s/%s.yaml'):format(product, k), s == '\n' and '' or s)
 end

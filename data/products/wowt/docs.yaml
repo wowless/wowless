@@ -103,19 +103,13 @@ lies:
     COMBAT_LOG_EVENT_INTERNAL_UNFILTERED:
     COMBAT_LOG_REFILTER_ENTRIES:
   extra_script_objects:
-    AbbreviateConfigAPI:
     FrameAPITooltip:
     HousingCatalogSearcherAPI:
     HousingFixturePointFrameAPI:
     HousingLayoutPinFrameAPI:
-    LuaColorCurveObjectAPI:
-    LuaCurveObjectAPI:
-    LuaCurveObjectBaseAPI:
-    LuaDurationObjectAPI:
     PingPinFrameAPI:
     SimpleMapSceneAPI:
     SimpleModelFFXAPI:
-    UnitHealPredictionCalculatorAPI:
   uiobjects:
     Button:
       GetText:
@@ -333,6 +327,8 @@ lies:
         - _add:
             nilable: true
 script_objects:
+  AbbreviateConfigAPI:
+    luaobject: AbbreviateConfig
   FrameAPIArchaeologyDigSiteFrame:
     uiobject: ArchaeologyDigSiteFrame
   FrameAPIBlob:
@@ -365,6 +361,14 @@ script_objects:
     uiobject: TabardModel
   FrameAPIUnitPositionFrame:
     uiobject: UnitPositionFrame
+  LuaColorCurveObjectAPI:
+    luaobject: LuaColorCurveObject
+  LuaCurveObjectAPI:
+    luaobject: LuaCurveObject
+  LuaCurveObjectBaseAPI:
+    luaobject: LuaCurveObjectBase
+  LuaDurationObjectAPI:
+    luaobject: LuaDurationObject
   MinimapFrameAPI:
     uiobject: Minimap
   SimpleAnimAlphaAPI:
@@ -445,6 +449,8 @@ script_objects:
     uiobject: Texture
   SimpleTextureBaseAPI:
     uiobject: TextureBase
+  UnitHealPredictionCalculatorAPI:
+    luaobject: UnitHealPredictionCalculator
 typedefs:
   AbbreviateConfig:
     type: table

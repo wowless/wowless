@@ -4,3 +4,7 @@ type:
     key: string
     value:
       record:
+        methods:
+          required: true
+          type:
+            setof: string
