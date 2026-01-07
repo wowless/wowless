@@ -453,7 +453,8 @@ script_objects:
     luaobject: UnitHealPredictionCalculator
 typedefs:
   AbbreviateConfig:
-    type: table
+    type:
+      luaobject: AbbreviateConfig
   AnimationDataEnum:
     type: number
   ArtifactTiers:
@@ -540,7 +541,8 @@ typedefs:
   kstringLfgListSearch:
     type: string
   LuaColorCurveObject:
-    type: table
+    type:
+      luaobject: LuaColorCurveObject
   LuaCurveEvaluatedResult:
     type: table
   LuaCurveObject:
@@ -672,7 +674,8 @@ typedefs:
   uiUnit:
     type: number
   UnitHealPredictionCalculator:
-    type: table
+    type:
+      luaobject: UnitHealPredictionCalculator
   UnitToken:
     type: unit
   UnitTokenVariant:

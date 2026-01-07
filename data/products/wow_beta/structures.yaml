@@ -11824,7 +11824,8 @@ NumberAbbrevOptions:
           structure: NumberAbbrevData
     config:
       nilable: true
-      type: table
+      type:
+        luaobject: AbbreviateConfig
     locale:
       nilable: true
       type: string

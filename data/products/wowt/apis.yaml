@@ -9452,7 +9452,8 @@ C_CurveUtil.CreateColorCurve:
   inputs:
   outputs:
   - name: curve
-    type: table
+    type:
+      luaobject: LuaColorCurveObject
 C_CurveUtil.CreateCurve:
   impl: C_CurveUtil.CreateCurve
   inputs:
@@ -29748,7 +29749,8 @@ C_UnitAuras.GetAuraDispelTypeColor:
   - name: auraInstanceID
     type: number
   - name: curve
-    type: table
+    type:
+      luaobject: LuaColorCurveObject
   outputs:
   - name: dispelTypeColor
     type:
@@ -31566,7 +31568,8 @@ CreateAbbreviateConfig:
         structure: NumberAbbrevData
   outputs:
   - name: config
-    type: table
+    type:
+      luaobject: AbbreviateConfig
 CreateFont:
   impl: CreateFont
   inputs:
@@ -31657,7 +31660,8 @@ CreateUnitHealPredictionCalculator:
   inputs:
   outputs:
   - name: healPredictionCalculator
-    type: table
+    type:
+      luaobject: UnitHealPredictionCalculator
 CreateWindow:
   impl: CreateWindow
   inputs:
@@ -38294,7 +38298,8 @@ UnitGetDetailedHealPrediction:
     nilable: true
     type: unit
   - name: healPredictionCalculator
-    type: table
+    type:
+      luaobject: UnitHealPredictionCalculator
   outputs:
 UnitGetIncomingHeals:
   inputs:
