@@ -549,7 +549,8 @@ typedefs:
   LuaCurveObjectBase:
     type: table
   LuaDurationObject:
-    type: table
+    type:
+      luaobject: LuaDurationObject
   luaFunction:
     type: function
   luaIndex:

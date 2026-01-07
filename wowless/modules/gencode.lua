@@ -1,6 +1,6 @@
 local hlist = require('wowless.hlist')
 
-return function(api, env, typecheck, uiobjects)
+return function(api, env, luaobjects, typecheck, uiobjects)
   local function Check(spec, v, isout)
     local vv, errmsg = typecheck(spec, v, isout)
     if errmsg then
@@ -23,6 +23,7 @@ return function(api, env, typecheck, uiobjects)
 
   return {
     Check = Check,
+    CreateLuaObject = luaobjects.Create,
     CreateUIObject = api.CreateUIObject,
     hlist = hlist,
     Mixin = env.mixin,

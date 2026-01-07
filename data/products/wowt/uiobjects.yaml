@@ -2102,7 +2102,8 @@ Cooldown:
     SetCooldownFromDurationObject:
       inputs:
       - name: duration
-        type: table
+        type:
+          luaobject: LuaDurationObject
       - default: true
         name: clearIfZero
         type: boolean
@@ -8007,7 +8008,8 @@ StatusBar:
       inputs:
       outputs:
       - name: duration
-        type: table
+        type:
+          luaobject: LuaDurationObject
     GetValue:
       impl:
         getter:
@@ -8127,7 +8129,8 @@ StatusBar:
     SetTimerDuration:
       inputs:
       - name: duration
-        type: table
+        type:
+          luaobject: LuaDurationObject
       - default: 0
         name: interpolation
         type:

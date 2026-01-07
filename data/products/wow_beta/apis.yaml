@@ -462,7 +462,8 @@ C_ActionBar.GetActionChargeDuration:
     type: number
   outputs:
   - name: duration
-    type: table
+    type:
+      luaobject: LuaDurationObject
 C_ActionBar.GetActionCharges:
   inputs:
   - name: actionID
@@ -485,7 +486,8 @@ C_ActionBar.GetActionCooldownDuration:
     type: number
   outputs:
   - name: duration
-    type: table
+    type:
+      luaobject: LuaDurationObject
 C_ActionBar.GetActionCooldownRemaining:
   inputs:
   - name: actionID
@@ -531,7 +533,8 @@ C_ActionBar.GetActionLossOfControlCooldownDuration:
     type: number
   outputs:
   - name: duration
-    type: table
+    type:
+      luaobject: LuaDurationObject
 C_ActionBar.GetActionText:
   inputs:
   - name: actionID
@@ -9966,7 +9969,8 @@ C_DurationUtil.CreateDuration:
   inputs:
   outputs:
   - name: duration
-    type: table
+    type:
+      luaobject: LuaDurationObject
 C_DurationUtil.GetCurrentTime:
   inputs:
   outputs:
@@ -23504,7 +23508,8 @@ C_Spell.GetSpellChargeDuration:
   mayreturnnothing: true
   outputs:
   - name: duration
-    type: table
+    type:
+      luaobject: LuaDurationObject
 C_Spell.GetSpellCharges:
   inputs:
   - name: spellIdentifier
@@ -23530,7 +23535,8 @@ C_Spell.GetSpellCooldownDuration:
   mayreturnnothing: true
   outputs:
   - name: duration
-    type: table
+    type:
+      luaobject: LuaDurationObject
 C_Spell.GetSpellCooldownRemaining:
   inputs:
   - name: spellIdentifier
@@ -23621,7 +23627,8 @@ C_Spell.GetSpellLossOfControlCooldownDuration:
   mayreturnnothing: true
   outputs:
   - name: duration
-    type: table
+    type:
+      luaobject: LuaDurationObject
 C_Spell.GetSpellMaxCumulativeAuraApplications:
   inputs:
   - name: spellID
@@ -24015,7 +24022,8 @@ C_SpellBook.GetSpellBookItemChargeDuration:
   mayreturnnothing: true
   outputs:
   - name: duration
-    type: table
+    type:
+      luaobject: LuaDurationObject
 C_SpellBook.GetSpellBookItemCharges:
   inputs:
   - name: spellBookItemSlotIndex
@@ -24050,7 +24058,8 @@ C_SpellBook.GetSpellBookItemCooldownDuration:
   mayreturnnothing: true
   outputs:
   - name: duration
-    type: table
+    type:
+      luaobject: LuaDurationObject
 C_SpellBook.GetSpellBookItemDescription:
   inputs:
   - name: spellBookItemSlotIndex
@@ -24121,7 +24130,8 @@ C_SpellBook.GetSpellBookItemLossOfControlCooldownDuration:
   mayreturnnothing: true
   outputs:
   - name: duration
-    type: table
+    type:
+      luaobject: LuaDurationObject
 C_SpellBook.GetSpellBookItemName:
   inputs:
   - name: spellBookItemSlotIndex
@@ -29696,7 +29706,8 @@ C_UnitAuras.GetAuraDuration:
     type: number
   outputs:
   - name: duration
-    type: table
+    type:
+      luaobject: LuaDurationObject
 C_UnitAuras.GetAuraDurationRemaining:
   inputs:
   - name: auraInstanceUnit
@@ -37958,7 +37969,8 @@ UnitCastingDuration:
   mayreturnnothing: true
   outputs:
   - name: duration
-    type: table
+    type:
+      luaobject: LuaDurationObject
 UnitCastingInfo:
   inputs:
   - name: unit
@@ -37989,7 +38001,8 @@ UnitChannelDuration:
   mayreturnnothing: true
   outputs:
   - name: duration
-    type: table
+    type:
+      luaobject: LuaDurationObject
 UnitChannelInfo:
   inputs:
   - name: unit
