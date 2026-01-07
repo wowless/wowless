@@ -9472,7 +9472,6 @@ C_CurveUtil.CreateColorCurve:
     type:
       luaobject: LuaColorCurveObject
 C_CurveUtil.CreateCurve:
-  impl: C_CurveUtil.CreateCurve
   inputs:
   outputs:
   - name: curve

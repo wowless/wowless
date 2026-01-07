@@ -64,10 +64,6 @@ C_CovenantSanctumUI.GetRenownRewardsForLevel:
     - C_CovenantSanctumUI.GetRenownRewardsForLevel
 C_CreatureInfo.GetClassInfo:
   directsql: C_CreatureInfo.GetClassInfo
-C_CurveUtil.CreateCurve:
-  impl:
-    modules:
-      luaobjects:
 C_CVar.GetCVar:
   moduledelegate:
     name: cvars
