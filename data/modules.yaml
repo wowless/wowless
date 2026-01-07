@@ -84,6 +84,9 @@ log:
 loglevel:
   root:
     default: '0'
+luaobjects:
+  deps:
+    datalua:
 macrotext:
   deps:
     security:

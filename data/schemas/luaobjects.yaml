@@ -4,7 +4,13 @@ type:
     key: string
     value:
       record:
+        inherits:
+          type:
+            ref:
+              schema: luaobject
         methods:
           required: true
           type:
             setof: string
+        virtual:
+          type: boolean

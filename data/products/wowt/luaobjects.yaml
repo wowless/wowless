@@ -3,6 +3,7 @@ AbbreviateConfig:
     GetAbbreviateNumberData:
     SetAbbreviateNumberData:
 LuaColorCurveObject:
+  inherits: LuaCurveObjectBase
   methods:
     AddPoint:
     ClearPoints:
@@ -16,6 +17,7 @@ LuaColorCurveObject:
     SetPoints:
     SetToDefaults:
 LuaCurveObject:
+  inherits: LuaCurveObjectBase
   methods:
     AddPoint:
     ClearPoints:
@@ -32,6 +34,7 @@ LuaCurveObjectBase:
     GetType:
     HasSecretValues:
     SetType:
+  virtual: true
 LuaDurationObject:
   methods:
     Assign:

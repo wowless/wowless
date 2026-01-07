@@ -1,7 +1,4 @@
-local nop = function() end
+local luaobjects = ...
 return function()
-  return {
-    AddPoint = nop,
-    SetType = nop,
-  }
+  return luaobjects('LuaCurveObject')
 end

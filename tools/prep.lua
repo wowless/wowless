@@ -473,6 +473,37 @@ for k, v in pairs(uiobjectdata) do
   }
 end
 
+local luaobjects = {}
+do
+  local luaobjectdata = parseYaml('data/products/' .. product .. '/luaobjects.yaml')
+  local function pop(k)
+    if luaobjects[k] then
+      return
+    end
+    local t = {}
+    local v = luaobjectdata[k]
+    if v.inherits then
+      pop(v.inherits)
+      for ik in pairs(luaobjects[v.inherits]) do
+        t[ik] = true
+      end
+    end
+    for mk in pairs(v.methods) do
+      assert(not t[mk], mk)
+      t[mk] = true
+    end
+    luaobjects[k] = t
+  end
+  for k in pairs(luaobjectdata) do
+    pop(k)
+  end
+  for k, v in pairs(luaobjectdata) do
+    if v.virtual then
+      luaobjects[k] = nil
+    end
+  end
+end
+
 local data = {
   apis = apis,
   build = parseYaml('data/products/' .. product .. '/build.yaml'),
@@ -480,6 +511,7 @@ local data = {
   cvars = cvars,
   events = events,
   globals = globals,
+  luaobjects = luaobjects,
   product = product,
   sqls = sqls,
   structures = structures,
