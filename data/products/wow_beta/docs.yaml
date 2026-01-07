@@ -544,7 +544,8 @@ typedefs:
   LuaCurveEvaluatedResult:
     type: table
   LuaCurveObject:
-    type: table
+    type:
+      luaobject: LuaCurveObject
   LuaCurveObjectBase:
     type: table
   LuaDurationObject:

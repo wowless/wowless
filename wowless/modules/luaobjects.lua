@@ -11,8 +11,25 @@ return function(datalua)
       __metatable = false,
     }
   end
-  return function(k)
-    local mt = assert(mts[k], k)
-    return setmetatable({}, mt)
+
+  local objs = {}
+  for k in pairs(datalua.luaobjects) do
+    objs[k] = setmetatable({}, { __mode = 'k' })
   end
+
+  local function Create(k)
+    local mt = assert(mts[k], k)
+    local v = setmetatable({}, mt)
+    objs[k][v] = true
+    return v
+  end
+
+  local function IsType(k, v)
+    return assert(objs[k], k)[v] ~= nil
+  end
+
+  return {
+    Create = Create,
+    IsType = IsType,
+  }
 end

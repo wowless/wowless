@@ -1,4 +1,4 @@
-return function(addons, datalua, env, funtainer, uiobjects, units)
+return function(addons, datalua, env, funtainer, luaobjects, uiobjects, units)
   local enumrev = {}
   for k, v in pairs(datalua.globals.Enum) do
     local t = {}
@@ -246,6 +246,11 @@ return function(addons, datalua, env, funtainer, uiobjects, units)
         if #value ~= n then
           return nil, 'is not strictly an array'
         end
+      end
+      return value
+    elseif spec.type.luaobject then
+      if not luaobjects.IsType(spec.type.luaobject, value) then
+        return nil, 'is not of luaobject type ' .. spec.type.luaobject
       end
       return value
     else

@@ -150,6 +150,7 @@ typecheck:
     datalua:
     env:
     funtainer:
+    luaobjects:
     uiobjects:
     units:
 uiobjectloader:

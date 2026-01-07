@@ -1,4 +1,4 @@
 local luaobjects = ...
 return function()
-  return luaobjects('LuaCurveObject')
+  return luaobjects.Create('LuaCurveObject')
 end

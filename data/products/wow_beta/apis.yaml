@@ -9472,7 +9472,8 @@ C_CurveUtil.CreateCurve:
   inputs:
   outputs:
   - name: curve
-    type: table
+    type:
+      luaobject: LuaCurveObject
 C_CurveUtil.EvaluateGameCurve:
   inputs:
   - name: curveID

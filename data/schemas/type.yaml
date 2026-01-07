@@ -12,6 +12,9 @@ type:
     funtainer: tag
     gender: tag
     hlist: tag
+    luaobject:
+      ref:
+        schema: luaobject
     nil: tag
     number: tag
     oneornil: tag
