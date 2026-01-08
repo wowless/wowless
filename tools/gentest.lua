@@ -93,6 +93,13 @@ local ptablemap = {
     end
     return 'ImplTests', t
   end,
+  luaobjects = function(p)
+    local t = {}
+    for k, v in pairs(perproduct(p, 'luaobjects')) do
+      t[k] = not v.virtual or nil
+    end
+    return 'LuaObjects', t
+  end,
   namespaceapis = function(p)
     local platform = dofile('build/cmake/runtime/platform.lua')
     local impls = readyaml('data/impl.yaml')

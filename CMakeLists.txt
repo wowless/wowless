@@ -658,6 +658,7 @@ foreach(product ${products})
   gentest(globalapis.lua globalapis)
   gentest(globals.lua globals)
   gentest(impltests.lua impltests)
+  gentest(luaobjects.lua luaobjects)
   gentest(namespaceapis.lua namespaceapis)
   gentest(product.lua product)
   gentest(uiobjectapis.lua uiobjectapis)
@@ -974,6 +975,7 @@ add_custom_command(
           addon/Wowless/init.lua
           addon/Wowless/statemachine.lua
           addon/Wowless/funtainer.lua
+          addon/Wowless/luaobjects.lua
           addon/Wowless/test.lua
           addon/Wowless/test.xml
           addon/Wowless/uiobjects.lua
