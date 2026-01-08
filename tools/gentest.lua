@@ -94,9 +94,32 @@ local ptablemap = {
     return 'ImplTests', t
   end,
   luaobjects = function(p)
+    local raw = perproduct(p, 'luaobjects')
     local t = {}
-    for k, v in pairs(perproduct(p, 'luaobjects')) do
-      t[k] = not v.virtual or nil
+    local function pop(k)
+      if t[k] then
+        return
+      end
+      local v = raw[k]
+      local methods = {}
+      if v.inherits then
+        pop(v.inherits)
+        for mk in pairs(t[v.inherits]) do
+          methods[mk] = true
+        end
+      end
+      for mk in pairs(v.methods or {}) do
+        methods[mk] = true
+      end
+      t[k] = methods
+    end
+    for k in pairs(raw) do
+      pop(k)
+    end
+    for k, v in pairs(raw) do
+      if v.virtual then
+        t[k] = nil
+      end
     end
     return 'LuaObjects', t
   end,

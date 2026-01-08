@@ -4,7 +4,7 @@ local function nop() end
 
 return function(datalua)
   local objs = setmetatable({}, { __mode = 'k' })
-  local mts = {}
+  local mtps = {}
 
   for k, v in pairs(datalua.luaobjects) do
     local index = {}
@@ -12,21 +12,35 @@ return function(datalua)
       index[vk] = nop
     end
 
-    local mt = newproxy(true)
-    mixin(getmetatable(mt), {
-      __index = index,
-      __metatable = false,
-      __tostring = function(u)
-        return k .. ': ' .. tostring(objs[u]):sub(8)
+    local mt
+    mt = {
+      __eq = function(u1, u2)
+        return objs[u1].table == objs[u2].table
       end,
-    })
-    mts[k] = mt
+      __index = function(u, key)
+        return index[key] or objs[u].table[key]
+      end,
+      __metatable = false,
+      __newindex = function(u, key, value)
+        if index[key] or mt[key] ~= nil then
+          error('Attempted to assign to read-only key ' .. key)
+        end
+        objs[u].table[key] = value
+      end,
+      __tostring = function(u)
+        return k .. ': ' .. tostring(objs[u].table):sub(8)
+      end,
+    }
+
+    local mtp = newproxy(true)
+    mixin(getmetatable(mtp), mt)
+    mtps[k] = mtp
   end
 
   local function Create(k)
-    local mt = assert(mts[k], k)
+    local mt = assert(mtps[k], k)
     local p = newproxy(mt)
-    objs[p] = { type = k }
+    objs[p] = { type = k, table = {} }
     return p
   end
 
