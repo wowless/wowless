@@ -3,12 +3,10 @@ local mixin = require('wowless.util').mixin
 local function nop() end
 
 return function(datalua)
-  local objs = {}
+  local objs = setmetatable({}, { __mode = 'k' })
   local mts = {}
 
   for k, v in pairs(datalua.luaobjects) do
-    objs[k] = setmetatable({}, { __mode = 'k' })
-
     local index = {}
     for vk in pairs(v) do
       index[vk] = nop
@@ -19,7 +17,7 @@ return function(datalua)
       __index = index,
       __metatable = false,
       __tostring = function(u)
-        return k .. ': ' .. tostring(objs[k][u]):sub(8)
+        return k .. ': ' .. tostring(objs[u]):sub(8)
       end,
     })
     mts[k] = mt
@@ -28,12 +26,13 @@ return function(datalua)
   local function Create(k)
     local mt = assert(mts[k], k)
     local p = newproxy(mt)
-    objs[k][p] = {}
+    objs[p] = { type = k }
     return p
   end
 
   local function IsType(k, v)
-    return assert(objs[k], k)[v] ~= nil
+    local obj = objs[v]
+    return obj ~= nil and obj.type == k
   end
 
   return {
