@@ -1,86 +1,41 @@
-local bubblewrap = require('wowless.bubblewrap')
-
-return function(datalua, security)
-  local cfg = datalua.config.modules and datalua.config.modules.funtainer or {}
-
-  local state = setmetatable({}, { __mode = 'k' })
-
-  local function Cancel(p)
-    state[p].cancelled = true
-  end
-
-  local function Invoke(p, ...)
-    local s = state[p]
-    if not s.cancelled then
-      security.CallSandbox(s.callback, ...)
-    end
-  end
-
-  local function IsCancelled(p)
-    return state[p].cancelled
-  end
-
-  local index = {
-    Cancel = bubblewrap(Cancel),
-    Invoke = bubblewrap(Invoke),
-    IsCancelled = bubblewrap(IsCancelled),
-  }
-
-  local mt
-  mt = {
-    __eq = function(u1, u2)
-      return state[u1].table == state[u2].table
-    end,
-    __index = function(u, k)
-      return index[k] or state[u].table[k]
-    end,
-    __metatable = false,
-    __newindex = function(u, k, v)
-      if index[k] or mt[k] ~= nil then
-        error('Attempted to assign to read-only key ' .. k)
-      end
-      state[u].table[k] = v
-    end,
-    __tostring = cfg.tostring_metamethod and function(u)
-      return 'LuaFunctionContainer: ' .. tostring(state[u].table):sub(8)
-    end,
-  }
-
-  local mtproxy = newproxy(true)
-  require('wowless.util').mixin(getmetatable(mtproxy), mt)
-
+return function(_datalua, security)
   local function IsEligible(callback)
     return type(callback) == 'function' and not debug.iscfunction(callback)
   end
 
-  local function CreateCallback(callback)
+  local function create(callback)
     assert(IsEligible(callback), type(callback))
     assert(getfenv(callback) ~= _G, 'wowless bug: framework callback in newTicker')
-    local p = newproxy(mtproxy)
-    state[p] = {
+    return {
       callback = callback,
       cancelled = false,
-      table = {},
     }
-    return p
   end
 
-  local function CreateProxy(p)
-    local np = newproxy(p)
-    state[np] = state[p]
-    return np
+  local function coerce(value)
+    if not IsEligible(value) then
+      return value
+    end
+    return nil, create(value)
   end
 
-  local function IsFuntainer(p)
-    return not not state[p]
-  end
+  local methods = {
+    Cancel = function(state)
+      state.cancelled = true
+    end,
+    Invoke = function(state, ...)
+      if not state.cancelled then
+        security.CallSandbox(state.callback, ...)
+      end
+    end,
+    IsCancelled = function(state)
+      return state.cancelled
+    end,
+  }
 
   return {
-    CreateCallback = CreateCallback,
-    CreateProxy = CreateProxy,
-    Invoke = Invoke,
-    IsCancelled = IsCancelled,
-    IsEligible = IsEligible,
-    IsFuntainer = IsFuntainer,
+    coerce = coerce,
+    create = create,
+    methods = methods,
   }
 end

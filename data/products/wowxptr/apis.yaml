@@ -9931,7 +9931,8 @@ C_FunctionContainers.CreateCallback:
     type: function
   outputs:
   - name: functionContainer
-    type: funtainer
+    type:
+      luaobject: LuaFunctionContainer
   usage: C_FunctionContainers.CreateCallback(func)
 C_GamePad.AddSDLMapping:
   inputs:
@@ -23138,7 +23139,8 @@ C_Timer.After:
   - name: seconds
     type: number
   - name: callback
-    type: funtainer
+    type:
+      luaobject: LuaFunctionContainer
   outputs:
 C_Timer.NewTicker:
   impl: C_Timer.NewTicker
@@ -23146,23 +23148,27 @@ C_Timer.NewTicker:
   - name: seconds
     type: number
   - name: callback
-    type: funtainer
+    type:
+      luaobject: LuaFunctionContainer
   - name: iterations
     nilable: true
     type: number
   outputs:
   - name: cbObject
-    type: funtainer
+    type:
+      luaobject: LuaFunctionContainer
 C_Timer.NewTimer:
   impl: C_Timer.NewTimer
   inputs:
   - name: seconds
     type: number
   - name: callback
-    type: funtainer
+    type:
+      luaobject: LuaFunctionContainer
   outputs:
   - name: cbObject
-    type: funtainer
+    type:
+      luaobject: LuaFunctionContainer
 C_TimerunningUI.GetActiveTimerunningSeasonID:
   inputs:
   outputs:

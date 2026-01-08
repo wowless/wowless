@@ -49,7 +49,7 @@ local function checkLuaObject(ty, o)
     end,
     methods = function()
       local t = {}
-      for k in pairs(_G.WowlessData.LuaObjects[ty]) do
+      for _, k in ipairs(_G.WowlessData.LuaObjects[ty].methods) do
         t[k] = function()
           return {
             modify = function()
@@ -68,7 +68,7 @@ local function checkLuaObject(ty, o)
     end,
     methodsunique = function()
       local seen = {}
-      for k in pairs(_G.WowlessData.LuaObjects[ty]) do
+      for _, k in ipairs(_G.WowlessData.LuaObjects[ty].methods) do
         local fn = o[k]
         assertEquals(nil, seen[fn], k)
         seen[fn] = k
@@ -110,7 +110,7 @@ local function checkLuaObjectFactory(ty, fn)
       local o1 = fn()
       local o2 = fn()
       local t = {}
-      for k in pairs(_G.WowlessData.LuaObjects[ty]) do
+      for _, k in ipairs(_G.WowlessData.LuaObjects[ty].methods) do
         t[k] = function()
           assertEquals(o1[k], o2[k])
         end
@@ -135,6 +135,9 @@ local factories = {
   end,
   LuaDurationObject = function()
     return _G.C_DurationUtil.CreateDuration()
+  end,
+  LuaFunctionContainer = function()
+    return _G.C_FunctionContainers.CreateCallback(function() end)
   end,
   UnitHealPredictionCalculator = function()
     return _G.CreateUnitHealPredictionCalculator()

@@ -1,14 +1,13 @@
 local _, G = ...
 
 local assertEquals = G.assertEquals
-local cfg = _G.WowlessData.Config.modules and _G.WowlessData.Config.modules.funtainer or {}
 
 local readonly = {
   __eq = 'nil',
   __index = 'nil',
   __metatable = 'nil',
   __newindex = 'nil',
-  __tostring = cfg.tostring_metamethod and 'nil',
+  __tostring = 'nil',
   Cancel = 'function',
   Invoke = 'function',
   IsCancelled = 'function',
@@ -69,11 +68,7 @@ G.checkFuntainer = function(ft)
       assertEquals(ft, ft)
     end,
     tostring = function()
-      if cfg.tostring_metamethod then
-        assert(tostring(ft):match('^LuaFunctionContainer: 0x[0-9a-f]+$'))
-      else
-        assert(tostring(ft):match('^userdata: 0x[0-9a-f]+$'))
-      end
+      assert(tostring(ft):match('^LuaFunctionContainer: 0x[0-9a-f]+$'))
     end,
     type = function()
       assertEquals('userdata', type(ft))

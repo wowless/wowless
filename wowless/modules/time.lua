@@ -1,4 +1,4 @@
-return function(funtainer, log, security)
+return function(log, luaobjects, security)
   local stamp = 1234
   local timers = require('minheap'):new()
   timers:push(math.huge, function()
@@ -13,8 +13,9 @@ return function(funtainer, log, security)
     assert(seconds >= 0 and seconds < 4294968) -- (2 ^ 32 - 1) / 1000
     local count = 0
     local function cb()
-      if not funtainer.IsCancelled(p) and count < iterations then
-        funtainer.Invoke(p, funtainer.CreateProxy(p))
+      local state = luaobjects.GetState(p)
+      if not state.cancelled and count < iterations then
+        security.CallSandbox(state.callback, luaobjects.CreateProxy(p))
         count = count + 1
         addTimer(seconds, cb)
       end

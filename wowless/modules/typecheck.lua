@@ -1,4 +1,4 @@
-return function(addons, datalua, env, funtainer, luaobjects, uiobjects, units)
+return function(addons, datalua, env, luaobjects, uiobjects, units)
   local enumrev = {}
   for k, v in pairs(datalua.globals.Enum) do
     local t = {}
@@ -72,12 +72,6 @@ return function(addons, datalua, env, funtainer, luaobjects, uiobjects, units)
     end,
     ['function'] = function(value)
       return luatypecheck('function', value)
-    end,
-    funtainer = function(value, isout)
-      if not isout and not funtainer.IsFuntainer(value) and funtainer.IsEligible(value) then
-        value = funtainer.CreateCallback(value)
-      end
-      return value, not funtainer.IsFuntainer(value)
     end,
     gender = function(value)
       return tonumber(value) or 0
@@ -249,6 +243,9 @@ return function(addons, datalua, env, funtainer, luaobjects, uiobjects, units)
       end
       return value
     elseif spec.type.luaobject then
+      if not isout then
+        value = luaobjects.Coerce(spec.type.luaobject, value)
+      end
       if not luaobjects.IsType(spec.type.luaobject, value) then
         return nil, 'is not of luaobject type ' .. spec.type.luaobject
       end

@@ -9,7 +9,6 @@ type:
         schema: enum
     FileAsset: tag
     function: tag
-    funtainer: tag
     gender: tag
     hlist: tag
     luaobject:

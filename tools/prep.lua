@@ -483,19 +483,22 @@ do
     if luaobjects[k] then
       return
     end
-    local t = {}
+    local methods = {}
     local v = luaobjectdata[k]
     if v.inherits then
       pop(v.inherits)
-      for ik in pairs(luaobjects[v.inherits]) do
-        t[ik] = true
+      for _, ik in ipairs(luaobjects[v.inherits].methods) do
+        table.insert(methods, ik)
       end
     end
     for mk in pairs(v.methods) do
-      assert(not t[mk], mk)
-      t[mk] = true
+      table.insert(methods, mk)
     end
-    luaobjects[k] = t
+    table.sort(methods)
+    luaobjects[k] = {
+      impl = v.impl,
+      methods = methods,
+    }
   end
   for k in pairs(luaobjectdata) do
     pop(k)

@@ -857,12 +857,7 @@ local asyncTests = {
           assertEquals(t, args[1]) -- because of eq metamethod
           assertEquals(nil, ({ [t] = true })[args[1]]) -- they're still not the same object
           assertEquals('bar', args[1].foo)
-          local cfg = _G.WowlessData.Config.modules and _G.WowlessData.Config.modules.funtainer or {}
-          if cfg.tostring_metamethod then
-            assertEquals(tostring(t), tostring(args[1]))
-          else
-            assert(tostring(t) ~= tostring(args[1]))
-          end
+          assertEquals(tostring(t), tostring(args[1]))
         end)
       end
       t = G.retn(1, _G.C_Timer.NewTimer(0, cb))
