@@ -1,6 +1,7 @@
+local bubblewrap = require('wowless.bubblewrap')
 local mixin = require('wowless.util').mixin
 
-local function nop() end
+local nop = bubblewrap(function() end)
 
 return function(datalua)
   local objs = setmetatable({}, { __mode = 'k' })

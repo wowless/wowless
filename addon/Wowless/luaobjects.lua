@@ -2,19 +2,20 @@ local _, G = ...
 
 local assertEquals = G.assertEquals
 
-local readonlys = {}
-for k, v in pairs(_G.WowlessData.LuaObjects) do
-  local readonly = {
-    __eq = 'nil',
-    __index = 'nil',
-    __metatable = 'nil',
-    __newindex = 'nil',
-    __tostring = 'nil',
-  }
-  for method in pairs(v) do
-    readonly[method] = 'function'
-  end
-  readonlys[k] = readonly
+local metamethods = {
+  __eq = true,
+  __index = true,
+  __metatable = true,
+  __newindex = true,
+  __tostring = true,
+}
+
+local function checkReadonly(o, k)
+  local success, msg = pcall(function()
+    o[k] = nil
+  end)
+  assertEquals(false, success, k)
+  assertEquals('Attempted to assign to read-only key ' .. k, msg:sub(-37 - k:len()))
 end
 
 local function checkLuaObject(ty, o)
@@ -30,20 +31,35 @@ local function checkLuaObject(ty, o)
         end,
       }
     end,
-    readonly = function()
+    metamethods = function()
       local t = {}
-      for k, v in pairs(readonlys[ty]) do
+      for k in pairs(metamethods) do
         t[k] = function()
           return {
             modify = function()
-              local success, msg = pcall(function()
-                o[k] = nil
-              end)
-              assertEquals(false, success, k)
-              assertEquals('Attempted to assign to read-only key ' .. k, msg:sub(-37 - k:len()))
+              return checkReadonly(o, k)
             end,
             type = function()
-              assertEquals(v, type(o[k]))
+              assertEquals('nil', type(o[k]))
+            end,
+          }
+        end
+      end
+      return t
+    end,
+    methods = function()
+      local t = {}
+      for k in pairs(_G.WowlessData.LuaObjects[ty]) do
+        t[k] = function()
+          return {
+            modify = function()
+              return checkReadonly(o, k)
+            end,
+            notluafunc = function()
+              assertEquals(false, (pcall(coroutine.create, o[k])))
+            end,
+            type = function()
+              assertEquals('function', type(o[k]))
             end,
           }
         end
