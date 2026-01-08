@@ -66,6 +66,14 @@ local function checkLuaObject(ty, o)
       end
       return t
     end,
+    methodsunique = function()
+      local seen = {}
+      for k in pairs(_G.WowlessData.LuaObjects[ty]) do
+        local fn = o[k]
+        assertEquals(nil, seen[fn], k)
+        seen[fn] = k
+      end
+    end,
     selfeq = function()
       assertEquals(o, o)
     end,
@@ -97,6 +105,17 @@ local function checkLuaObjectFactory(ty, fn)
     end,
     instance = function()
       return checkLuaObject(ty, fn())
+    end,
+    sharedmethods = function()
+      local o1 = fn()
+      local o2 = fn()
+      local t = {}
+      for k in pairs(_G.WowlessData.LuaObjects[ty]) do
+        t[k] = function()
+          assertEquals(o1[k], o2[k])
+        end
+      end
+      return t
     end,
     unique = function()
       assertEquals(false, fn() == fn())

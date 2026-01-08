@@ -1,16 +1,14 @@
 local bubblewrap = require('wowless.bubblewrap')
 local mixin = require('wowless.util').mixin
 
-local nop = bubblewrap(function() end)
-
 return function(datalua)
   local objs = setmetatable({}, { __mode = 'k' })
   local mtps = {}
 
   for k, v in pairs(datalua.luaobjects) do
-    local index = {}
+    local methods = {}
     for vk in pairs(v) do
-      index[vk] = nop
+      methods[vk] = bubblewrap(function() end)
     end
 
     local mt
@@ -19,11 +17,11 @@ return function(datalua)
         return objs[u1].table == objs[u2].table
       end,
       __index = function(u, key)
-        return index[key] or objs[u].table[key]
+        return methods[key] or objs[u].table[key]
       end,
       __metatable = false,
       __newindex = function(u, key, value)
-        if index[key] or mt[key] ~= nil then
+        if methods[key] or mt[key] ~= nil then
           error('Attempted to assign to read-only key ' .. key)
         end
         objs[u].table[key] = value
