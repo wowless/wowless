@@ -130,6 +130,13 @@ G.checkFuntainerFactory = function(factory)
     funtainer = function()
       return G.checkFuntainer(factory(function() end))
     end,
+    independentfields = function()
+      local ft = factory(function() end)
+      local ft2 = factory(function() end)
+      ft.WowlessStuff = 'wowless'
+      assertEquals('wowless', ft.WowlessStuff)
+      assertEquals(nil, ft2.WowlessStuff)
+    end,
     luaonly = function()
       assertEquals(false, (pcall(factory, pcall)))
     end,
