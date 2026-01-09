@@ -1,4 +1,4 @@
-return function(_datalua, security)
+return function(security)
   local function IsEligible(callback)
     return type(callback) == 'function' and not debug.iscfunction(callback)
   end

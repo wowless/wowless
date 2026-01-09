@@ -50,7 +50,6 @@ funcheck:
     typecheck:
 funtainer:
   deps:
-    datalua:
     security:
 gencode:
   deps:
