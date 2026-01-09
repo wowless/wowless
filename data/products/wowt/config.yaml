@@ -73,7 +73,7 @@ addon:
 modules:
   addons:
     GetAddOnInfo_noUpdateAvailable: true
-  funtainer:
+  luaobjects:
     tostring_metamethod: true
 runner:
   skip_bindings:
