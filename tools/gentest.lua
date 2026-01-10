@@ -104,15 +104,14 @@ local ptablemap = {
       local methods = {}
       if v.inherits then
         pop(v.inherits)
-        for _, mk in ipairs(t[v.inherits].methods) do
-          table.insert(methods, mk)
+        for mk in pairs(t[v.inherits]) do
+          methods[mk] = true
         end
       end
       for mk in pairs(v.methods or {}) do
-        table.insert(methods, mk)
+        methods[mk] = true
       end
-      table.sort(methods)
-      t[k] = { methods = methods }
+      t[k] = methods
     end
     for k in pairs(raw) do
       pop(k)
