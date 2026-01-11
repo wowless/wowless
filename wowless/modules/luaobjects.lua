@@ -65,23 +65,19 @@ return function(datalua, funtainer)
   local function Coerce(k, value)
     local impl = implsByType[k]
     if impl and impl.coerce then
-      local newvalue, state = impl.coerce(value)
+      local state = impl.coerce(value)
       if state then
         local mt = assert(mtps[k], k)
         local p = newproxy(mt)
         objs[p] = { type = k, table = {}, state = state }
         return p
       end
-      return newvalue
     end
-    return value
   end
 
   local function CreateProxy(p)
-    local obj = objs[p]
-    assert(obj, 'not a luaobject')
-    local mt = assert(mtps[obj.type])
-    local np = newproxy(mt)
+    local obj = assert(objs[p], 'not a luaobject')
+    local np = newproxy(mtps[obj.type])
     objs[np] = obj
     return np
   end

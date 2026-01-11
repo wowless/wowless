@@ -13,10 +13,9 @@ return function(security)
   end
 
   local function coerce(value)
-    if not IsEligible(value) then
-      return value
+    if IsEligible(value) then
+      return create(value)
     end
-    return nil, create(value)
   end
 
   local methods = {

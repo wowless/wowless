@@ -244,7 +244,10 @@ return function(addons, datalua, env, luaobjects, uiobjects, units)
       return value
     elseif spec.type.luaobject then
       if not isout then
-        value = luaobjects.Coerce(spec.type.luaobject, value)
+        local coerced = luaobjects.Coerce(spec.type.luaobject, value)
+        if coerced then
+          return coerced
+        end
       end
       if not luaobjects.IsType(spec.type.luaobject, value) then
         return nil, 'is not of luaobject type ' .. spec.type.luaobject
