@@ -79,9 +79,13 @@ local function checkLuaObject(ty, o)
     selfeq = function()
       assertEquals(o, o)
     end,
-    tostring = config.tostring_metamethod and function()
-      assert(tostring(o):match('^' .. ty .. ': 0x[0-9a-f]+$'))
-    end or nil,
+    tostring = function()
+      if config.tostring_metamethod then
+        assert(tostring(o):match('^' .. ty .. ': 0x[0-9a-f]+$'))
+      else
+        assert(tostring(o):match('^userdata: 0x[0-9a-f]+$'))
+      end
+    end,
     type = function()
       assertEquals('userdata', type(o))
     end,
@@ -145,6 +149,8 @@ local factories = {
     return _G.CreateUnitHealPredictionCalculator()
   end,
 }
+
+G.checkLuaObject = checkLuaObject
 
 G.testsuite.luaobjects = function()
   local tests = {}
