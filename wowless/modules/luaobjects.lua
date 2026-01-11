@@ -53,26 +53,21 @@ return function(datalua, funtainer)
     mtps[k] = mtp
   end
 
-  local function Create(k, ...)
-    local mt = assert(mtps[k], k)
-    local p = newproxy(mt)
-    local impl = implsByType[k]
-    local state = impl and impl.create(...) or nil
+  local function make(k, state)
+    local p = newproxy(assert(mtps[k], k))
     objs[p] = { type = k, table = {}, state = state }
     return p
   end
 
+  local function Create(k, ...)
+    local impl = implsByType[k]
+    return make(k, impl and impl.create(...) or nil)
+  end
+
   local function Coerce(k, value)
     local impl = implsByType[k]
-    if impl and impl.coerce then
-      local state = impl.coerce(value)
-      if state then
-        local mt = assert(mtps[k], k)
-        local p = newproxy(mt)
-        objs[p] = { type = k, table = {}, state = state }
-        return p
-      end
-    end
+    local state = impl and impl.coerce and impl.coerce(value)
+    return state and make(k, state)
   end
 
   local function CreateProxy(p)
