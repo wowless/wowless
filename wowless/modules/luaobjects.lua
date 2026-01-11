@@ -2,19 +2,19 @@ local bubblewrap = require('wowless.bubblewrap')
 local mixin = require('wowless.util').mixin
 
 return function(datalua, funtainer)
-  local implModules = {
+  local implmods = {
     funtainer = funtainer,
   }
 
   local config = datalua.config.modules and datalua.config.modules.luaobjects or {}
   local objs = setmetatable({}, { __mode = 'k' })
   local mtps = {}
-  local implsByType = {}
+  local impltypes = {}
 
   for k, v in pairs(datalua.luaobjects) do
-    local impl = v.impl and implModules[v.impl]
+    local impl = v.impl and implmods[v.impl]
     if impl then
-      implsByType[k] = impl
+      impltypes[k] = impl
     end
 
     local methods = {}
@@ -60,12 +60,12 @@ return function(datalua, funtainer)
   end
 
   local function Create(k, ...)
-    local impl = implsByType[k]
+    local impl = impltypes[k]
     return make(k, impl and impl.create(...) or nil)
   end
 
   local function Coerce(k, value)
-    local impl = implsByType[k]
+    local impl = impltypes[k]
     local state = impl and impl.coerce and impl.coerce(value)
     return state and make(k, state)
   end
