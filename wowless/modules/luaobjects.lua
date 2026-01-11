@@ -18,7 +18,7 @@ return function(datalua, funtainer)
     end
 
     local methods = {}
-    for _, mk in ipairs(v.methods) do
+    for mk in pairs(v.methods) do
       if impl and impl.methods and impl.methods[mk] then
         methods[mk] = bubblewrap(function(u, ...)
           return impl.methods[mk](objs[u].state, ...)
