@@ -50,7 +50,6 @@ funcheck:
     typecheck:
 funtainer:
   deps:
-    datalua:
     security:
 gencode:
   deps:
@@ -88,6 +87,7 @@ loglevel:
 luaobjects:
   deps:
     datalua:
+    funtainer:
 macrotext:
   deps:
     security:
@@ -142,15 +142,14 @@ templates:
     log:
 time:
   deps:
-    funtainer:
     log:
+    luaobjects:
     security:
 typecheck:
   deps:
     addons:
     datalua:
     env:
-    funtainer:
     luaobjects:
     uiobjects:
     units:

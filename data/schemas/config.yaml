@@ -61,7 +61,7 @@ type:
               record:
                 GetAddOnInfo_noUpdateAvailable:
                   type: boolean
-          funtainer:
+          luaobjects:
             type:
               record:
                 tostring_metamethod:

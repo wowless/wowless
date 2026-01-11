@@ -56,6 +56,12 @@ LuaDurationObject:
     SetTimeFromStart:
     SetTimeSpan:
     SetToDefaults:
+LuaFunctionContainer:
+  impl: funtainer
+  methods:
+    Cancel:
+    Invoke:
+    IsCancelled:
 UnitHealPredictionCalculator:
   methods:
     GetDamageAbsorbClampMode:

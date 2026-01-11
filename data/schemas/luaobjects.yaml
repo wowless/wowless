@@ -4,6 +4,10 @@ type:
     key: string
     value:
       record:
+        impl:
+          type:
+            ref:
+              schema: module
         inherits:
           type:
             ref:

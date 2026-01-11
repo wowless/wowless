@@ -153,8 +153,8 @@ local tests = {
 
 describe('typecheck', function()
   local typecheck = require('wowless.modules.typecheck')(unpack({
-    nil,
-    {
+    nil, -- addons
+    { -- datalua
       globals = {
         Enum = {
           Foo = {
@@ -178,17 +178,16 @@ describe('typecheck', function()
       },
       uiobjects = {},
     },
-    {
+    { -- env
       genv = {
         roflmixin = {
           b = issecure,
         },
       },
     },
-    nil,
-    nil,
-    nil,
-    units,
+    nil, -- luaobjects
+    nil, -- uiobjects
+    units, -- units
   }))
   for name, test in pairs(tests) do
     it(name, function()
