@@ -13,15 +13,14 @@ return function(datalua, funtainer)
 
   for k, v in pairs(datalua.luaobjects) do
     local impl = v.impl and implmods[v.impl]
-    if impl then
-      impltypes[k] = impl
-    end
+    impltypes[k] = impl
 
     local methods = {}
     for mk in pairs(v.methods) do
-      if impl and impl.methods and impl.methods[mk] then
+      local mfn = impl and impl.methods and impl.methods[mk]
+      if mfn then
         methods[mk] = bubblewrap(function(u, ...)
-          return impl.methods[mk](objs[u].state, ...)
+          return mfn(objs[u].state, ...)
         end)
       else
         methods[mk] = bubblewrap(function() end)
