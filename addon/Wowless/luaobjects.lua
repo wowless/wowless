@@ -2,12 +2,14 @@ local _, G = ...
 
 local assertEquals = G.assertEquals
 
+local config = _G.WowlessData.Config.modules and _G.WowlessData.Config.modules.luaobjects or {}
+
 local metamethods = {
   __eq = true,
   __index = true,
   __metatable = true,
   __newindex = true,
-  __tostring = true,
+  __tostring = config.tostring_metamethod or nil,
 }
 
 local function checkReadonly(o, k)
@@ -77,9 +79,9 @@ local function checkLuaObject(ty, o)
     selfeq = function()
       assertEquals(o, o)
     end,
-    tostring = function()
+    tostring = config.tostring_metamethod and function()
       assert(tostring(o):match('^' .. ty .. ': 0x[0-9a-f]+$'))
-    end,
+    end or nil,
     type = function()
       assertEquals('userdata', type(o))
     end,

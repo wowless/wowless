@@ -6,6 +6,7 @@ return function(datalua, funtainer)
     funtainer = funtainer,
   }
 
+  local config = datalua.config.modules and datalua.config.modules.luaobjects or {}
   local objs = setmetatable({}, { __mode = 'k' })
   local mtps = {}
   local implsByType = {}
@@ -42,9 +43,9 @@ return function(datalua, funtainer)
         end
         objs[u].table[key] = value
       end,
-      __tostring = function(u)
+      __tostring = config.tostring_metamethod and function(u)
         return k .. ': ' .. tostring(objs[u].table):sub(8)
-      end,
+      end or nil,
     }
 
     local mtp = newproxy(true)

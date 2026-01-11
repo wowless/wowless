@@ -2,12 +2,14 @@ local _, G = ...
 
 local assertEquals = G.assertEquals
 
+local config = _G.WowlessData.Config.modules and _G.WowlessData.Config.modules.luaobjects or {}
+
 local readonly = {
   __eq = 'nil',
   __index = 'nil',
   __metatable = 'nil',
   __newindex = 'nil',
-  __tostring = 'nil',
+  __tostring = config.tostring_metamethod and 'nil' or nil,
   Cancel = 'function',
   Invoke = 'function',
   IsCancelled = 'function',
@@ -67,9 +69,9 @@ G.checkFuntainer = function(ft)
     selfeq = function()
       assertEquals(ft, ft)
     end,
-    tostring = function()
+    tostring = config.tostring_metamethod and function()
       assert(tostring(ft):match('^LuaFunctionContainer: 0x[0-9a-f]+$'))
-    end,
+    end or nil,
     type = function()
       assertEquals('userdata', type(ft))
     end,
