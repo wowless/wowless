@@ -1,7 +1,7 @@
-build: '65000'
-date: Dec 17 2025
+build: '65295'
+date: Jan  7 2026
 gametype: TBC
-hash: 563e4a4904de0826f45452380d32bace
+hash: 84eef1812be911ccbc1f850ce55d5d93
 test: false
 tocversion: 20505
 version: 2.5.5
