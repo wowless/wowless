@@ -9,19 +9,18 @@ return function(log, luaobjects, security)
     timers:push(stamp + seconds, callback)
   end
 
-  local function newTicker(seconds, p, iterations)
+  local function newTicker(seconds, obj, iterations)
     assert(seconds >= 0 and seconds < 4294968) -- (2 ^ 32 - 1) / 1000
     local count = 0
     local function cb()
-      local obj = luaobjects.UserData(p)
       if not obj.cancelled and count < iterations then
-        security.CallSandbox(obj.callback, luaobjects.CreateProxy(p))
+        security.CallSandbox(obj.callback, luaobjects.CreateProxy(obj))
         count = count + 1
         addTimer(seconds, cb)
       end
     end
     addTimer(seconds, cb)
-    return p
+    return obj
   end
 
   return {

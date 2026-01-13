@@ -59,25 +59,25 @@ return function(datalua)
 
   local function Create(k, ...)
     local impl = impltypes[k]
-    local p, obj = make(k)
+    local _, obj = make(k)
     if impl and impl.construct then
       impl.construct(obj, ...)
     end
-    return p
+    return obj
   end
 
   local function Coerce(k, value)
     local impl = impltypes[k]
     if impl and impl.coerce then
-      local p, obj = make(k)
+      local _, obj = make(k)
       if impl.coerce(obj, value) then
-        return p
+        return obj
       end
     end
   end
 
-  local function CreateProxy(p)
-    local obj = assert(objs[p], 'not a luaobject')
+  local function CreateProxy(obj)
+    assert(obj and obj.luarep, 'not a luaobject')
     local np = newproxy(mtps[obj.type])
     objs[np] = obj
     return np

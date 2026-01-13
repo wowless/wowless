@@ -243,16 +243,23 @@ return function(addons, datalua, env, luaobjects, uiobjects, units)
       end
       return value
     elseif spec.type.luaobject then
-      if not isout then
+      if isout then
+        if value and value.luarep then
+          return value.luarep
+        else
+          return nil, 'is not of luaobject type ' .. spec.type.luaobject
+        end
+      else
         local coerced = luaobjects.Coerce(spec.type.luaobject, value)
         if coerced then
           return coerced
         end
+        local obj = luaobjects.UserData(value)
+        if not obj or obj.type ~= spec.type.luaobject then
+          return nil, 'is not of luaobject type ' .. spec.type.luaobject
+        end
+        return obj
       end
-      if not luaobjects.IsType(spec.type.luaobject, value) then
-        return nil, 'is not of luaobject type ' .. spec.type.luaobject
-      end
-      return value
     else
       return nil, 'invalid spec'
     end

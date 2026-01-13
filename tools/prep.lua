@@ -105,7 +105,7 @@ local specDefault = (function()
       return ('gencode.CreateUIObject(%q).luarep'):format(ty.uiobject:lower())
     end
     if ty.luaobject then
-      return ('gencode.CreateLuaObject(%q)'):format(ty.luaobject)
+      return ('gencode.CreateLuaObject(%q).luarep'):format(ty.luaobject)
     end
     error('unexpected type: ' .. require('pl.pretty').write(ty))
   end
