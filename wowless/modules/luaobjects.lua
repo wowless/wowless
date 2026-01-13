@@ -17,7 +17,7 @@ return function(datalua)
         local mfn = impl and impl.methods and impl.methods[mk]
         if mfn then
           methods[mk] = bubblewrap(function(u, ...)
-            return mfn(objs[u].state, ...)
+            return mfn(objs[u], ...)
           end)
         else
           methods[mk] = bubblewrap(function() end)
@@ -50,21 +50,30 @@ return function(datalua)
     end
   end
 
-  local function make(k, state)
+  local function make(k)
+    local obj = { type = k, table = {} }
     local p = newproxy(assert(mtps[k], k))
-    objs[p] = { type = k, table = {}, state = state }
-    return p
+    objs[p] = obj
+    return p, obj
   end
 
   local function Create(k, ...)
     local impl = impltypes[k]
-    return make(k, impl and impl.create(...) or nil)
+    local p, obj = make(k)
+    if impl and impl.construct then
+      impl.construct(obj, ...)
+    end
+    return p
   end
 
   local function Coerce(k, value)
     local impl = impltypes[k]
-    local state = impl and impl.coerce and impl.coerce(value)
-    return state and make(k, state)
+    if impl and impl.coerce then
+      local p, obj = make(k)
+      if impl.coerce(obj, value) then
+        return p
+      end
+    end
   end
 
   local function CreateProxy(p)
@@ -74,9 +83,8 @@ return function(datalua)
     return np
   end
 
-  local function GetState(p)
-    local obj = objs[p]
-    return obj and obj.state
+  local function GetObj(p)
+    return objs[p]
   end
 
   local function IsType(k, v)
@@ -88,7 +96,7 @@ return function(datalua)
     Coerce = Coerce,
     Create = Create,
     CreateProxy = CreateProxy,
-    GetState = GetState,
+    GetObj = GetObj,
     IsType = IsType,
     LoadTypes = LoadTypes,
   }

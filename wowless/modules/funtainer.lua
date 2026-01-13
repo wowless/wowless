@@ -3,32 +3,31 @@ return function(luaobjects, security)
     return type(callback) == 'function' and not debug.iscfunction(callback)
   end
 
-  local function create(callback)
+  local function construct(obj, callback)
     assert(IsEligible(callback), type(callback))
     assert(getfenv(callback) ~= _G, 'wowless bug: framework callback in newTicker')
-    return {
-      callback = callback,
-      cancelled = false,
-    }
+    obj.callback = callback
+    obj.cancelled = false
   end
 
-  local function coerce(value)
+  local function coerce(obj, value)
     if IsEligible(value) then
-      return create(value)
+      construct(obj, value)
+      return true
     end
   end
 
   local methods = {
-    Cancel = function(state)
-      state.cancelled = true
+    Cancel = function(obj)
+      obj.cancelled = true
     end,
-    Invoke = function(state, ...)
-      if not state.cancelled then
-        security.CallSandbox(state.callback, ...)
+    Invoke = function(obj, ...)
+      if not obj.cancelled then
+        security.CallSandbox(obj.callback, ...)
       end
     end,
-    IsCancelled = function(state)
-      return state.cancelled
+    IsCancelled = function(obj)
+      return obj.cancelled
     end,
   }
 
@@ -39,7 +38,7 @@ return function(luaobjects, security)
   return {
     CreateCallback = CreateCallback,
     coerce = coerce,
-    create = create,
+    construct = construct,
     methods = methods,
   }
 end

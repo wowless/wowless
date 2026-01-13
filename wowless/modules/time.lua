@@ -13,9 +13,9 @@ return function(log, luaobjects, security)
     assert(seconds >= 0 and seconds < 4294968) -- (2 ^ 32 - 1) / 1000
     local count = 0
     local function cb()
-      local state = luaobjects.GetState(p)
-      if not state.cancelled and count < iterations then
-        security.CallSandbox(state.callback, luaobjects.CreateProxy(p))
+      local obj = luaobjects.GetObj(p)
+      if not obj.cancelled and count < iterations then
+        security.CallSandbox(obj.callback, luaobjects.CreateProxy(p))
         count = count + 1
         addTimer(seconds, cb)
       end
