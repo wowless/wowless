@@ -87,7 +87,6 @@ loglevel:
 luaobjects:
   deps:
     datalua:
-    funtainer:
 macrotext:
   deps:
     security:

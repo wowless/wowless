@@ -1,55 +1,53 @@
 local bubblewrap = require('wowless.bubblewrap')
 local mixin = require('wowless.util').mixin
 
-return function(datalua, funtainer)
-  local implmods = {
-    funtainer = funtainer,
-  }
-
+return function(datalua)
   local config = datalua.config.modules and datalua.config.modules.luaobjects or {}
   local objs = setmetatable({}, { __mode = 'k' })
   local mtps = {}
   local impltypes = {}
 
-  for k, v in pairs(datalua.luaobjects) do
-    local impl = v.impl and implmods[v.impl]
-    impltypes[k] = impl
+  local function LoadTypes(modules)
+    for k, v in pairs(datalua.luaobjects) do
+      local impl = v.impl and modules[v.impl]
+      impltypes[k] = impl
 
-    local methods = {}
-    for mk in pairs(v.methods) do
-      local mfn = impl and impl.methods and impl.methods[mk]
-      if mfn then
-        methods[mk] = bubblewrap(function(u, ...)
-          return mfn(objs[u].state, ...)
-        end)
-      else
-        methods[mk] = bubblewrap(function() end)
-      end
-    end
-
-    local mt
-    mt = {
-      __eq = function(u1, u2)
-        return objs[u1].table == objs[u2].table
-      end,
-      __index = function(u, key)
-        return methods[key] or objs[u].table[key]
-      end,
-      __metatable = false,
-      __newindex = function(u, key, value)
-        if methods[key] or mt[key] ~= nil then
-          error('Attempted to assign to read-only key ' .. key)
+      local methods = {}
+      for mk in pairs(v.methods) do
+        local mfn = impl and impl.methods and impl.methods[mk]
+        if mfn then
+          methods[mk] = bubblewrap(function(u, ...)
+            return mfn(objs[u].state, ...)
+          end)
+        else
+          methods[mk] = bubblewrap(function() end)
         end
-        objs[u].table[key] = value
-      end,
-      __tostring = config.tostring_metamethod and function(u)
-        return k .. ': ' .. tostring(objs[u].table):sub(8)
-      end or nil,
-    }
+      end
 
-    local mtp = newproxy(true)
-    mixin(getmetatable(mtp), mt)
-    mtps[k] = mtp
+      local mt
+      mt = {
+        __eq = function(u1, u2)
+          return objs[u1].table == objs[u2].table
+        end,
+        __index = function(u, key)
+          return methods[key] or objs[u].table[key]
+        end,
+        __metatable = false,
+        __newindex = function(u, key, value)
+          if methods[key] or mt[key] ~= nil then
+            error('Attempted to assign to read-only key ' .. key)
+          end
+          objs[u].table[key] = value
+        end,
+        __tostring = config.tostring_metamethod and function(u)
+          return k .. ': ' .. tostring(objs[u].table):sub(8)
+        end or nil,
+      }
+
+      local mtp = newproxy(true)
+      mixin(getmetatable(mtp), mt)
+      mtps[k] = mtp
+    end
   end
 
   local function make(k, state)
@@ -95,5 +93,6 @@ return function(datalua, funtainer)
     CreateProxy = CreateProxy,
     GetState = GetState,
     IsType = IsType,
+    LoadTypes = LoadTypes,
   }
 end
