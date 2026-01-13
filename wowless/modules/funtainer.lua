@@ -1,4 +1,4 @@
-return function(security)
+return function(luaobjects, security)
   local function IsEligible(callback)
     return type(callback) == 'function' and not debug.iscfunction(callback)
   end
@@ -32,7 +32,12 @@ return function(security)
     end,
   }
 
+  local function CreateCallback(callback)
+    return luaobjects.Create('LuaFunctionContainer', callback)
+  end
+
   return {
+    CreateCallback = CreateCallback,
     coerce = coerce,
     create = create,
     methods = methods,

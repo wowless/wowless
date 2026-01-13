@@ -87,9 +87,6 @@ return function(datalua)
   return {
     Coerce = Coerce,
     Create = Create,
-    CreateLuaFunctionContainer = function(callback)
-      return Create('LuaFunctionContainer', callback)
-    end,
     CreateProxy = CreateProxy,
     GetState = GetState,
     IsType = IsType,

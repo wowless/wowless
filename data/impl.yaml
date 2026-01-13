@@ -98,8 +98,8 @@ C_EventUtils.IsEventValid:
     name: events
 C_FunctionContainers.CreateCallback:
   moduledelegate:
-    function: CreateLuaFunctionContainer
-    name: luaobjects
+    function: CreateCallback
+    name: funtainer
 C_Item.DoesItemExistByID:
   impl:
     sqls:

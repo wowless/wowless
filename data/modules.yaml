@@ -50,6 +50,7 @@ funcheck:
     typecheck:
 funtainer:
   deps:
+    luaobjects:
     security:
 gencode:
   deps:
