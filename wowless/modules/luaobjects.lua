@@ -54,12 +54,12 @@ return function(datalua)
     local p = newproxy(assert(mtps[k], k))
     local obj = { type = k, table = {}, luarep = p }
     objs[p] = obj
-    return p, obj
+    return obj
   end
 
   local function Create(k, ...)
     local impl = impltypes[k]
-    local _, obj = make(k)
+    local obj = make(k)
     if impl and impl.construct then
       impl.construct(obj, ...)
     end
@@ -69,7 +69,7 @@ return function(datalua)
   local function Coerce(k, value)
     local impl = impltypes[k]
     if impl and impl.coerce then
-      local _, obj = make(k)
+      local obj = make(k)
       if impl.coerce(obj, value) then
         return obj
       end
