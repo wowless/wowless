@@ -51,8 +51,8 @@ return function(datalua)
   end
 
   local function make(k)
-    local obj = { type = k, table = {} }
     local p = newproxy(assert(mtps[k], k))
+    local obj = { type = k, table = {}, luarep = p }
     objs[p] = obj
     return p, obj
   end
@@ -83,7 +83,7 @@ return function(datalua)
     return np
   end
 
-  local function GetObj(p)
+  local function UserData(p)
     return objs[p]
   end
 
@@ -96,8 +96,8 @@ return function(datalua)
     Coerce = Coerce,
     Create = Create,
     CreateProxy = CreateProxy,
-    GetObj = GetObj,
     IsType = IsType,
     LoadTypes = LoadTypes,
+    UserData = UserData,
   }
 end
