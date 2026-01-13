@@ -87,16 +87,10 @@ return function(datalua)
     return objs[p]
   end
 
-  local function IsType(k, v)
-    local obj = objs[v]
-    return obj ~= nil and obj.type == k
-  end
-
   return {
     Coerce = Coerce,
     Create = Create,
     CreateProxy = CreateProxy,
-    IsType = IsType,
     LoadTypes = LoadTypes,
     UserData = UserData,
   }
