@@ -86,6 +86,7 @@ local function run(cfg)
     for k, v in pairs(modules.uiobjectloader(modules)) do
       modules.uiobjecttypes.Add(k, v)
     end
+    modules.luaobjects.LoadTypes(modules)
     loader.initAddons()
     if cfg.dir then
       loader.loadFrameXml()

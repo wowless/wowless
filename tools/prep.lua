@@ -105,7 +105,7 @@ local specDefault = (function()
       return ('gencode.CreateUIObject(%q).luarep'):format(ty.uiobject:lower())
     end
     if ty.luaobject then
-      return ('gencode.CreateLuaObject(%q)'):format(ty.luaobject)
+      return ('gencode.CreateLuaObject(%q).luarep'):format(ty.luaobject)
     end
     error('unexpected type: ' .. require('pl.pretty').write(ty))
   end
@@ -483,19 +483,21 @@ do
     if luaobjects[k] then
       return
     end
-    local t = {}
+    local methods = {}
     local v = luaobjectdata[k]
     if v.inherits then
       pop(v.inherits)
-      for ik in pairs(luaobjects[v.inherits]) do
-        t[ik] = true
+      for mk in pairs(luaobjects[v.inherits].methods) do
+        methods[mk] = true
       end
     end
     for mk in pairs(v.methods) do
-      assert(not t[mk], mk)
-      t[mk] = true
+      methods[mk] = true
     end
-    luaobjects[k] = t
+    luaobjects[k] = {
+      impl = v.impl,
+      methods = methods,
+    }
   end
   for k in pairs(luaobjectdata) do
     pop(k)

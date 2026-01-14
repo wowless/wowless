@@ -639,11 +639,13 @@ typedefs:
   textureKit:
     type: string
   TickerCallback:
-    type: funtainer
+    type:
+      luaobject: LuaFunctionContainer
   time_t:
     type: number
   TimerCallback:
-    type: funtainer
+    type:
+      luaobject: LuaFunctionContainer
   TooltipComparisonItem:
     type: table
   uiAddon:

@@ -1,4 +1,4 @@
-return function(funtainer, log, security)
+return function(log, luaobjects, security)
   local stamp = 1234
   local timers = require('minheap'):new()
   timers:push(math.huge, function()
@@ -9,18 +9,18 @@ return function(funtainer, log, security)
     timers:push(stamp + seconds, callback)
   end
 
-  local function newTicker(seconds, p, iterations)
+  local function newTicker(seconds, obj, iterations)
     assert(seconds >= 0 and seconds < 4294968) -- (2 ^ 32 - 1) / 1000
     local count = 0
     local function cb()
-      if not funtainer.IsCancelled(p) and count < iterations then
-        funtainer.Invoke(p, funtainer.CreateProxy(p))
+      if not obj.cancelled and count < iterations then
+        security.CallSandbox(obj.callback, luaobjects.CreateProxy(obj))
         count = count + 1
         addTimer(seconds, cb)
       end
     end
     addTimer(seconds, cb)
-    return p
+    return obj
   end
 
   return {

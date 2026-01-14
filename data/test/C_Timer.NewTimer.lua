@@ -10,7 +10,7 @@ return {
     end)
   end,
   funtainerarg = function()
-    return T.checkFuntainer(T.retn(1, f(0, f(0, function() end))))
+    return T.checkLuaObject('LuaFunctionContainer', T.retn(1, f(0, f(0, function() end))))
   end,
   negative = function()
     T.assertEquals(false, pcall(factory, -1))
