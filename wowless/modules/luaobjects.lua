@@ -13,13 +13,16 @@ return function(datalua)
       impltypes[k] = impl
 
       local methods = {}
-      for mk in pairs(v.methods) do
-        local mfn = impl and impl.methods and impl.methods[mk]
-        if mfn then
+      if impl then
+        local implmethods = assert(impl.methods, k .. ' impl missing methods')
+        for mk in pairs(v.methods) do
+          local mfn = assert(implmethods[mk], k .. ':' .. mk .. ' not implemented')
           methods[mk] = bubblewrap(function(u, ...)
             return mfn(objs[u], ...)
           end)
-        else
+        end
+      else
+        for mk in pairs(v.methods) do
           methods[mk] = bubblewrap(function() end)
         end
       end
