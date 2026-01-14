@@ -22,9 +22,6 @@ addon:
       loadstring_untainted:
   enums_set_in_framexml:
     EditModeChatFrameDisplayOnlySetting:
-  hooked_globals:
-    FauxScrollFrame_Update:
-    SetItemRef:
   ignore_cvar_value:
     graphicsEnvironmentDetail:
     graphicsGroundClutter:
