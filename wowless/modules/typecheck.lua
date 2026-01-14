@@ -244,7 +244,7 @@ return function(addons, datalua, env, luaobjects, uiobjects, units)
       return value
     elseif spec.type.luaobject then
       if isout then
-        if value and value.luarep then
+        if value and value.type == spec.type.luaobject then
           return value.luarep
         else
           return nil, 'is not of luaobject type ' .. spec.type.luaobject
