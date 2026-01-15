@@ -6,10 +6,14 @@ type:
         record:
           aliased_in_framexml:
             type:
-              setof:
-                ref:
-                  negative: true
-                  schema: api
+              mapof:
+                key:
+                  ref:
+                    negative: true
+                    schema: api
+                value:
+                  ref:
+                    schema: api
           capsule:
             type:
               record:

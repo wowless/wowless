@@ -84,11 +84,13 @@ G.testsuite.generated = function()
         -- Anything left over must be a FrameXML-defined function.
         if not tests[k] then
           tests['~' .. k] = function()
-            if not aliased_in_framexml[name .. '.' .. k] then
+            local aliased = aliased_in_framexml[name .. '.' .. k]
+            if not aliased then
               return checkNotCFunc(v)
+            elseif iswowlesslite then
+              assertEquals(nil, v)
             else
-              -- TODO make it possible to check non-unique C functions
-              assertEquals(iswowlesslite and 'nil' or 'function', type(v))
+              assertEquals(tget(_G, aliased), v)
             end
           end
         end
