@@ -79,24 +79,6 @@ G.testsuite.generated = function()
 
   local function apiNamespaces()
     local capsulens = capsuleconfig.apinamespaces or {}
-    local function mkTests(name, ns, tests)
-      for k, v in pairs(ns) do
-        -- Anything left over must be a FrameXML-defined function.
-        if not tests[k] then
-          tests[k] = function()
-            local aliased = aliased_in_framexml[name .. '.' .. k]
-            if not aliased then
-              return checkNotCFunc(v)
-            elseif iswowlesslite then
-              assertEquals(nil, v)
-            else
-              assertEquals(tget(_G, aliased), v)
-            end
-          end
-        end
-      end
-      return tests
-    end
     local tests = {}
     for name, ncfg in pairs(_G.WowlessData.NamespaceApis) do
       tests[name] = function()
@@ -106,8 +88,22 @@ G.testsuite.generated = function()
           local ns = _G[name]
           assertEquals('table', type(ns))
           assert(getmetatable(ns) == nil)
-          local mtests = mkftests(ncfg, name)
-          return mkTests(name, ns, mtests)
+          local nstests = mkftests(ncfg, name)
+          for k, v in pairs(ns) do
+            if not nstests[k] then
+              nstests[k] = function()
+                local aliased = aliased_in_framexml[name .. '.' .. k]
+                if aliased then
+                  assertEquals(tget(_G, aliased), v)
+                elseif iswowlesslite then
+                  assertEquals(nil, v)
+                else
+                  return checkNotCFunc(v)
+                end
+              end
+            end
+          end
+          return nstests
         end
       end
     end
