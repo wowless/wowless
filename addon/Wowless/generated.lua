@@ -83,7 +83,7 @@ G.testsuite.generated = function()
       for k, v in pairs(ns) do
         -- Anything left over must be a FrameXML-defined function.
         if not tests[k] then
-          tests['~' .. k] = function()
+          tests[k] = function()
             local aliased = aliased_in_framexml[name .. '.' .. k]
             if not aliased then
               return checkNotCFunc(v)
@@ -190,8 +190,8 @@ G.testsuite.generated = function()
       end
     end
     for k, v in pairs(_G) do
-      if type(v) == 'function' and not tests[k] and not tests['~' .. k] then
-        tests['~' .. k] = function()
+      if type(v) == 'function' and not tests[k] then
+        tests[k] = function()
           return checkNotCFunc(v)
         end
       end

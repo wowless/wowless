@@ -1,6 +1,7 @@
 addon:
   aliased_in_framexml:
     C_LFGInfo.IsPremadeGroupEnabled: C_LFGList.IsPremadeGroupFinderEnabled
+    C_TaskQuest.GetQuestsForPlayerByMapID: C_TaskQuest.GetQuestsOnMap
   capsule:
     apinamespaces:
       C_AuthChallenge:
