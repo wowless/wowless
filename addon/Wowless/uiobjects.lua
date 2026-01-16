@@ -822,9 +822,6 @@ G.testsuite.uiobjects = function()
           }
         end,
         rect = function()
-          if _G.__wowless then -- issue #473
-            return
-          end
           local f = CreateFrame('Frame')
           local _, _, w, h = _G.WorldFrame:GetRect()
           local states = {
