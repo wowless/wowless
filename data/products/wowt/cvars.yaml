@@ -927,7 +927,7 @@ movieSubtitleBackgroundAlpha: '70'
 MSAAAlphaTest: '1'
 MSAAQuality: '0'
 nameplateAuraScale: '1.000000'
-nameplateCastBarDisplay: "\x02K"
+nameplateCastBarDisplay: "\x02["
 nameplateDebuffPadding: '0'
 nameplateEnemyNpcAuraDisplay: "\x02C"
 nameplateEnemyPlayerAuraDisplay: "\x02C"
