@@ -6,7 +6,7 @@ RUN apt-get update \
         build-essential \
         ca-certificates \
         git \
-        luacheck \
+        lua-check \
         ninja-build \
         ruby-dev \
     && pip install cmake jinja2 pre-commit \
