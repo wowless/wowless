@@ -944,11 +944,6 @@ return function(
       end
     end
     for _, name in ipairs(blizzardAddons) do
-      if addonData[name].attrs.GuardedAddOn == '1' then
-        loadAddon(name)
-      end
-    end
-    for _, name in ipairs(blizzardAddons) do
       loadAddon(name)
     end
   end
