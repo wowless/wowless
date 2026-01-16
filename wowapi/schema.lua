@@ -33,6 +33,13 @@ end
 local simple = {
   any = function() end,
   boolean = mksimple('boolean'),
+  flag = function(v)
+    if v ~= true then
+      local vty = type(v)
+      local suffix = vty == 'boolean' and ' (false)' or ''
+      return ('want flag (boolean true), got %s%s'):format(vty, suffix)
+    end
+  end,
   number = mksimple('number'),
   string = mksimple('string'),
   table = mksimple('table'),

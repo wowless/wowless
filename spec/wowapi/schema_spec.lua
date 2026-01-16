@@ -80,6 +80,38 @@ describe('schema', function()
         accept('table', {})
       end)
     end)
+    describe('flag', function()
+      it('accepts true', function()
+        accept('flag', true)
+      end)
+      it('rejects false', function()
+        reject('flag', false, 'want flag (boolean true), got boolean (false)')
+      end)
+      it('rejects nil', function()
+        reject('flag', nil, 'want flag (boolean true), got nil')
+      end)
+      it('rejects numbers', function()
+        reject('flag', 42, 'want flag (boolean true), got number')
+      end)
+      it('rejects strings', function()
+        reject('flag', 'true', 'want flag (boolean true), got string')
+      end)
+      it('rejects tables', function()
+        reject('flag', {}, 'want flag (boolean true), got table')
+      end)
+      it('works in optional record fields', function()
+        local ty = {
+          record = {
+            optionalFlag = { type = 'flag' },
+            other = { type = 'string' },
+          },
+        }
+        accept(ty, { other = 'test' })
+        accept(ty, { optionalFlag = true, other = 'test' })
+        reject(ty, { optionalFlag = false, other = 'test' },
+               { optionalFlag = 'want flag (boolean true), got boolean (false)' })
+      end)
+    end)
     describe('record', function()
       local ty = {
         record = {

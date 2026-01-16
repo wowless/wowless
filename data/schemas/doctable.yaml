@@ -14,12 +14,12 @@ type:
         sequenceof:
           record:
             CallbackEvent:
-              type: boolean
+              type: flag
             Documentation:
               type:
                 sequenceof: string
             HasRestrictions:
-              type: boolean
+              type: flag
             LiteralName:
               required: true
               type: string
@@ -31,7 +31,7 @@ type:
                 sequenceof:
                   record:
                     ConditionalSecret:
-                      type: boolean
+                      type: flag
                     Default:
                       type: any
                     Documentation:
@@ -45,7 +45,7 @@ type:
                       required: true
                       type: string
                     NeverSecret:
-                      type: boolean
+                      type: flag
                     Nilable:
                       required: true
                       type: boolean
@@ -55,35 +55,35 @@ type:
                       required: true
                       type: string
             RequireNPERestricted:
-              type: boolean
+              type: flag
             SecretBasedOnTimelineEventSource:
-              type: boolean
+              type: flag
             SecretInChatMessagingLockdown:
-              type: boolean
+              type: flag
             SecretPayloads:
-              type: boolean
+              type: flag
             SecretWhenAurasRestricted:
-              type: boolean
+              type: flag
             SecretWhenSpellCastRestricted:
-              type: boolean
+              type: flag
             SecretWhenUnitChargedPowerPointsRestricted:
-              type: boolean
+              type: flag
             SecretWhenUnitIdentityRestricted:
-              type: boolean
+              type: flag
             SecretWhenUnitPowerRestricted:
-              type: boolean
+              type: flag
             SecretWhenUnitSpellCastRestricted:
-              type: boolean
+              type: flag
             SecretWhenUnitSpellCastsRestricted:
-              type: boolean
+              type: flag
             SynchronousEvent:
-              type: boolean
+              type: flag
             Type:
               required: true
               type:
                 literal: Event
             UniqueEvent:
-              type: boolean
+              type: flag
     Functions:
       type:
         sequenceof:
@@ -93,7 +93,7 @@ type:
                 sequenceof:
                   record:
                     ConditionalSecret:
-                      type: boolean
+                      type: flag
                     Default:
                       type: any
                     Documentation:
@@ -117,79 +117,79 @@ type:
                       required: true
                       type: string
             ConstSecretAccessor:
-              type: boolean
+              type: flag
             Documentation:
               type:
                 sequenceof: string
             HasRestrictions:
-              type: boolean
+              type: flag
             IsIndexInRange:
-              type: boolean
+              type: flag
             IsNotReadOnly:
-              type: boolean
+              type: flag
             IsNotSecure:
-              type: boolean
+              type: flag
             IsProtectedFunction:
-              type: boolean
+              type: flag
             IsValidAndPublic:
-              type: boolean
+              type: flag
             MayReturnNothing:
-              type: boolean
+              type: flag
             Name:
               required: true
               type: string
             Namespace:
               type: string
             RequireNPERestricted:
-              type: boolean
+              type: flag
             RequiresActiveCommentator:
-              type: boolean
+              type: flag
             RequiresClubsInitialized:
-              type: boolean
+              type: flag
             RequiresCommentator:
-              type: boolean
+              type: flag
             RequiresFontStringTextAccess:
-              type: boolean
+              type: flag
             RequiresFriendList:
-              type: boolean
+              type: flag
             RequiresIndexInRange:
-              type: boolean
+              type: flag
             RequiresLimitedInput:
-              type: boolean
+              type: flag
             RequiresNonReadOnlyCVar:
-              type: boolean
+              type: flag
             RequiresNonSecretAura:
-              type: boolean
+              type: flag
             RequiresNonSecretAuraSpellID:
-              type: boolean
+              type: flag
             RequiresNonSecretAuraSpellName:
-              type: boolean
+              type: flag
             RequiresNonSecureCVar:
-              type: boolean
+              type: flag
             RequiresRecentAllies:
-              type: boolean
+              type: flag
             RequiresSpellDiminishUI:
-              type: boolean
+              type: flag
             RequiresValidActionSlot:
-              type: boolean
+              type: flag
             RequiresValidAndPublicCVar:
-              type: boolean
+              type: flag
             RequiresValidInviteTarget:
-              type: boolean
+              type: flag
             RequiresValidSpellIdentifier:
-              type: boolean
+              type: flag
             RequiresValidTimelineEvent:
-              type: boolean
+              type: flag
             RequiresValidUnitAuraInstance:
-              type: boolean
+              type: flag
             Returns:
               type:
                 sequenceof:
                   record:
                     ConditionalSecret:
-                      type: boolean
+                      type: flag
                     ConditionalSecretContents:
-                      type: boolean
+                      type: flag
                     Default:
                       type: any
                     Documentation:
@@ -203,7 +203,7 @@ type:
                       required: true
                       type: string
                     NeverSecret:
-                      type: boolean
+                      type: flag
                     Nilable:
                       required: true
                       type: boolean
@@ -215,7 +215,7 @@ type:
                       required: true
                       type: string
             ReturnsNeverSecret:
-              type: boolean
+              type: flag
             SecretArguments:
               type:
                 taggedunion:
@@ -225,69 +225,69 @@ type:
             SecretArgumentsAddAspect:
               type: table
             SecretBasedOnTimelineEventSource:
-              type: boolean
+              type: flag
             SecretForAttackableUnits:
-              type: boolean
+              type: flag
             SecretInChatMessagingLockdown:
-              type: boolean
+              type: flag
             SecretNonPlayerUnitOrMinionWhileInCombat:
-              type: boolean
+              type: flag
             SecretReturns:
-              type: boolean
+              type: flag
             SecretReturnsForAspect:
               type: table
             SecretWhenActionCooldownRestricted:
-              type: boolean
+              type: flag
             SecretWhenAnchoringSecret:
-              type: boolean
+              type: flag
             SecretWhenAuraDataRestricted:
-              type: boolean
+              type: flag
             SecretWhenAurasRestricted:
-              type: boolean
+              type: flag
             SecretWhenCooldownsRestricted:
-              type: boolean
+              type: flag
             SecretWhenCurveSecret:
-              type: boolean
+              type: flag
             SecretWhenInCombat:
-              type: boolean
+              type: flag
             SecretWhenSpellAuraRestricted:
-              type: boolean
+              type: flag
             SecretWhenSpellBookItemCooldownRestricted:
-              type: boolean
+              type: flag
             SecretWhenSpellCooldownRestricted:
-              type: boolean
+              type: flag
             SecretWhenUnitAuraIndexRestricted:
-              type: boolean
+              type: flag
             SecretWhenUnitAuraInstanceRestricted:
-              type: boolean
+              type: flag
             SecretWhenUnitAuraRestricted:
-              type: boolean
+              type: flag
             SecretWhenUnitCastingInfoRestricted:
-              type: boolean
+              type: flag
             SecretWhenUnitChannelInfoRestricted:
-              type: boolean
+              type: flag
             SecretWhenUnitChargedPowerPointsRestricted:
-              type: boolean
+              type: flag
             SecretWhenUnitComboPointsRestricted:
-              type: boolean
+              type: flag
             SecretWhenUnitComparisonRestricted:
-              type: boolean
+              type: flag
             SecretWhenUnitHealthMaxRestricted:
-              type: boolean
+              type: flag
             SecretWhenUnitIdentityRestricted:
-              type: boolean
+              type: flag
             SecretWhenUnitPowerMaxRestricted:
-              type: boolean
+              type: flag
             SecretWhenUnitPowerRestricted:
-              type: boolean
+              type: flag
             SecretWhenUnitSpellCastingRestricted:
-              type: boolean
+              type: flag
             SecretWhenUnitSpellCastRestricted:
-              type: boolean
+              type: flag
             SecretWhenUnitSpellCastsRestricted:
-              type: boolean
+              type: flag
             SecretWhenUnpackedUnitAuraInstanceRestricted:
-              type: boolean
+              type: flag
             SecureHooksAllowed:
               type: boolean
             Type:
@@ -323,9 +323,9 @@ type:
                 sequenceof:
                   record:
                     ConditionalSecret:
-                      type: boolean
+                      type: flag
                     ConditionalSecretContents:
-                      type: boolean
+                      type: flag
                     Default:
                       type: any
                     Documentation:
@@ -341,13 +341,13 @@ type:
                       required: true
                       type: string
                     NeverSecret:
-                      type: boolean
+                      type: flag
                     NeverSecretContents:
-                      type: boolean
+                      type: flag
                     Nilable:
                       type: boolean
                     SecretValue:
-                      type: boolean
+                      type: flag
                     Type:
                       required: true
                       type: string
