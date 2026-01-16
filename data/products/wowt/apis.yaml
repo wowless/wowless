@@ -18080,6 +18080,11 @@ C_NeighborhoodInitiative.IsViewingActiveNeighborhood:
   outputs:
   - name: isViewingActiveNeighborhood
     type: boolean
+C_NeighborhoodInitiative.PlayerHasInitiativeAccess:
+  inputs:
+  outputs:
+  - name: success
+    type: boolean
 C_NeighborhoodInitiative.PlayerMeetsRequiredLevel:
   inputs:
   outputs:

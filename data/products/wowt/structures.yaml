@@ -11861,6 +11861,9 @@ PrivateAuraAnchor:
       type: string
 PrivateAuraIconInfo:
   fields:
+    borderScale:
+      nilable: true
+      type: number
     iconAnchor:
       type:
         structure: AnchorBinding
