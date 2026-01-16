@@ -939,7 +939,8 @@ return function(
       end
     end
     for _, name in ipairs(blizzardAddons) do
-      if addonData[name].attrs.LoadFirst == '1' then
+      local a = addonData[name].attrs
+      if a.LoadFirst == '1' or a.UseSecureEnvironment == '1' then
         loadAddon(name)
       end
     end
