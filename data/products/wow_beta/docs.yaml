@@ -11,6 +11,10 @@ lies:
       outputs:
       - _add:
           nilable: true
+    C_NamePlate.GetNamePlateForUnit:
+      outputs:
+      - _add:
+          nilable: true
     CreateSecureDelegate:
       inputs:
       - type:
@@ -103,6 +107,7 @@ lies:
     COMBAT_LOG_EVENT_INTERNAL_UNFILTERED:
     COMBAT_LOG_REFILTER_ENTRIES:
   extra_script_objects:
+    FrameAPINamePlate:
     FrameAPITooltip:
     HousingCatalogSearcherAPI:
     HousingFixturePointFrameAPI:

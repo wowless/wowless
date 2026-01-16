@@ -488,23 +488,6 @@ C_ActionBar.GetActionCooldownDuration:
   - name: duration
     type:
       luaobject: LuaDurationObject
-C_ActionBar.GetActionCooldownRemaining:
-  inputs:
-  - name: actionID
-    type: number
-  outputs:
-  - name: remainingSeconds
-    type: number
-C_ActionBar.GetActionCooldownRemainingPercent:
-  inputs:
-  - name: actionID
-    type: number
-  - name: curve
-    nilable: true
-    type: table
-  outputs:
-  - name: result
-    type: table
 C_ActionBar.GetActionDisplayCount:
   inputs:
   - name: actionID
@@ -4352,6 +4335,13 @@ C_CatalogShop.GetSpellVisualInfoForMount:
   - name: spellVisualInfo
     type:
       structure: C_CatalogShop.CatalogShopSpellVisualInfo
+C_CatalogShop.GetVCProductInfos:
+  inputs:
+  outputs:
+  - name: vcProductInfos
+    type:
+      arrayof:
+        structure: C_CatalogShop.CatalogShopVCProductInfo
 C_CatalogShop.GetVirtualCurrencyBalance:
   inputs:
   - name: currencyCode
@@ -6608,6 +6598,22 @@ C_ColorUtil.WrapTextInColorCode:
   outputs:
   - name: coloredText
     type: string
+C_CombatAudioAlert.GetCategoryVoice:
+  inputs:
+  - name: category
+    type:
+      enum: CombatAudioAlertCategory
+  outputs:
+  - name: voice
+    type: number
+C_CombatAudioAlert.GetCategoryVolume:
+  inputs:
+  - name: category
+    type:
+      enum: CombatAudioAlertCategory
+  outputs:
+  - name: volume
+    type: number
 C_CombatAudioAlert.GetFormatSetting:
   inputs:
   - name: unit
@@ -6623,11 +6629,6 @@ C_CombatAudioAlert.GetSpeakerSpeed:
   inputs:
   outputs:
   - name: speed
-    type: number
-C_CombatAudioAlert.GetSpeakerVolume:
-  inputs:
-  outputs:
-  - name: volume
     type: number
 C_CombatAudioAlert.GetSpecSetting:
   inputs:
@@ -6650,6 +6651,26 @@ C_CombatAudioAlert.IsEnabled:
   outputs:
   - name: isEnabled
     type: boolean
+C_CombatAudioAlert.SetCategoryVoice:
+  inputs:
+  - name: category
+    type:
+      enum: CombatAudioAlertCategory
+  - name: newVal
+    type: number
+  outputs:
+  - name: success
+    type: boolean
+C_CombatAudioAlert.SetCategoryVolume:
+  inputs:
+  - name: category
+    type:
+      enum: CombatAudioAlertCategory
+  - name: newVal
+    type: number
+  outputs:
+  - name: success
+    type: boolean
 C_CombatAudioAlert.SetFormatSetting:
   inputs:
   - name: unit
@@ -6664,13 +6685,6 @@ C_CombatAudioAlert.SetFormatSetting:
   - name: success
     type: boolean
 C_CombatAudioAlert.SetSpeakerSpeed:
-  inputs:
-  - name: newVal
-    type: number
-  outputs:
-  - name: success
-    type: boolean
-C_CombatAudioAlert.SetSpeakerVolume:
   inputs:
   - name: newVal
     type: number
@@ -6701,6 +6715,9 @@ C_CombatAudioAlert.SpeakText:
   inputs:
   - name: text
     type: string
+  - name: category
+    type:
+      enum: CombatAudioAlertCategory
   - default: true
     name: allowOverlap
     type: boolean
@@ -9477,6 +9494,31 @@ C_CurveUtil.CreateCurve:
   - name: curve
     type:
       luaobject: LuaCurveObject
+C_CurveUtil.EvaluateColorFromBoolean:
+  inputs:
+  - name: boolean
+    type: boolean
+  - name: valueIfTrue
+    type:
+      structure: colorRGBA
+  - name: valueIfFalse
+    type:
+      structure: colorRGBA
+  outputs:
+  - name: value
+    type:
+      structure: colorRGBA
+C_CurveUtil.EvaluateColorValueFromBoolean:
+  inputs:
+  - name: boolean
+    type: boolean
+  - name: valueIfTrue
+    type: number
+  - name: valueIfFalse
+    type: number
+  outputs:
+  - name: value
+    type: number
 C_CurveUtil.EvaluateGameCurve:
   inputs:
   - name: curveID
@@ -9633,6 +9675,15 @@ C_DamageMeter.GetCombatSessionSourceFromType:
   - name: sessionSource
     type:
       structure: C_DamageMeter.DamageMeterCombatSessionSource
+C_DamageMeter.GetSessionDurationSeconds:
+  inputs:
+  - name: sessionType
+    type:
+      enum: DamageMeterSessionType
+  outputs:
+  - name: durationSeconds
+    nilable: true
+    type: number
 C_DamageMeter.IsDamageMeterAvailable:
   inputs:
   outputs:
@@ -9785,6 +9836,14 @@ C_DeathRecap.GetRecapLink:
   outputs:
   - name: link
     type: string
+C_DeathRecap.GetRecapMaxHealth:
+  inputs:
+  - name: recapID
+    nilable: true
+    type: number
+  outputs:
+  - name: maxHealth
+    type: number
 C_DeathRecap.HasRecapEvents:
   inputs:
   - name: recapID
@@ -12790,6 +12849,11 @@ C_Housing.OnCreateCharterNeighborhoodClosed:
 C_Housing.OnCreateGuildNeighborhoodClosed:
   inputs:
   outputs:
+C_Housing.OnHouseFinderClickPlot:
+  inputs:
+  - name: plotID
+    type: number
+  outputs:
 C_Housing.OnRequestSignatureClicked:
   inputs:
   outputs:
@@ -12809,6 +12873,8 @@ C_Housing.RequestCurrentHouseInfo:
 C_Housing.RequestHouseFinderNeighborhoodData:
   inputs:
   - name: neighborhoodGuid
+    type: string
+  - name: neighborhoodName
     type: string
   outputs:
 C_Housing.RequestPlayerCharacterList:
@@ -13641,6 +13707,11 @@ C_HousingLayout.GetNumActiveRooms:
   inputs:
   outputs:
   - name: numRooms
+    type: number
+C_HousingLayout.GetNumFloors:
+  inputs:
+  outputs:
+  - name: numFloors
     type: number
 C_HousingLayout.GetRoomPlacementBudget:
   inputs:
@@ -17909,13 +17980,53 @@ C_MythicPlus.RequestRewards:
   inputs:
   outputs:
 C_NamePlate.GetNamePlateForUnit:
-C_NamePlate.GetNamePlates:
+  inputs:
+  - name: unitToken
+    type: unit
+  - default: false
+    name: includeForbidden
+    type: boolean
   outputs:
-  - type: table
+  - name: nameplate
+    nilable: true
+    type: table
+C_NamePlate.GetNamePlates:
+  inputs:
+  outputs:
+  - name: nameplates
+    stub:
+    type:
+      arrayof: table
 C_NamePlate.GetNamePlateSize:
+  inputs:
+  outputs:
+  - name: width
+    type: number
+  - name: height
+    type: number
 C_NamePlate.GetTargetClampingInsets:
+  inputs:
+  outputs:
+  - name: top
+    type: number
+  - name: bottom
+    type: number
 C_NamePlate.SetNamePlateSize:
+  inputs:
+  - name: width
+    type: number
+  - name: height
+    type: number
+  outputs:
 C_NamePlate.SetTargetClampingInsets:
+  inputs:
+  - default: 0
+    name: top
+    type: number
+  - default: 0
+    name: bottom
+    type: number
+  outputs:
 C_NamePlateManager.GetNamePlateHitTestInsets:
   inputs:
   - name: type
@@ -18004,6 +18115,11 @@ C_NeighborhoodInitiative.AddTrackedInitiativeTask:
   - name: initiativeTaskID
     type: number
   outputs:
+C_NeighborhoodInitiative.GetActiveNeighborhood:
+  inputs:
+  outputs:
+  - name: neighborhoodGUID
+    type: string
 C_NeighborhoodInitiative.GetInitiativeActivityLogInfo:
   inputs:
   outputs:
@@ -20759,6 +20875,9 @@ C_PvP.JoinBrawl:
     name: isSpecialBrawl
     type: boolean
   outputs:
+C_PvP.JoinRandomTrainingGround:
+  inputs:
+  outputs:
 C_PvP.JoinRatedBGBlitz:
   inputs:
   outputs:
@@ -20834,6 +20953,9 @@ C_QuestInfoSystem.GetQuestLogRewardFavor:
   inputs:
   - name: questID
     type: number
+  - name: clampFavorToCycleCap
+    nilable: true
+    type: boolean
   outputs:
   - name: amount
     type: number
@@ -22477,6 +22599,39 @@ C_SeasonInfo.GetCurrentDisplaySeasonID:
   outputs:
   - name: seasonID
     type: number
+C_Secrets.GetPowerTypeSecrecy:
+  inputs:
+  - name: powerType
+    type:
+      enum: PowerType
+  outputs:
+  - name: secrecy
+    type:
+      enum: SecrecyLevel
+C_Secrets.GetSpellAuraSecrecy:
+  inputs:
+  - name: spellIdentifier
+    type: string
+  outputs:
+  - name: secrecy
+    type:
+      enum: SecrecyLevel
+C_Secrets.GetSpellCastSecrecy:
+  inputs:
+  - name: spellIdentifier
+    type: string
+  outputs:
+  - name: secrecy
+    type:
+      enum: SecrecyLevel
+C_Secrets.GetSpellCooldownSecrecy:
+  inputs:
+  - name: spellIdentifier
+    type: string
+  outputs:
+  - name: secrecy
+    type:
+      enum: SecrecyLevel
 C_Secrets.HasSecretRestrictions:
   inputs:
   outputs:
@@ -22561,6 +22716,13 @@ C_Secrets.ShouldUnitComparisonBeSecret:
     type: unit
   outputs:
   - name: isUnitComparisonSecret
+    type: boolean
+C_Secrets.ShouldUnitHealthMaxBeSecret:
+  inputs:
+  - name: unit
+    type: unit
+  outputs:
+  - name: isUnitHealthMaxSecret
     type: boolean
 C_Secrets.ShouldUnitIdentityBeSecret:
   inputs:
@@ -23538,23 +23700,6 @@ C_Spell.GetSpellCooldownDuration:
   - name: duration
     type:
       luaobject: LuaDurationObject
-C_Spell.GetSpellCooldownRemaining:
-  inputs:
-  - name: spellIdentifier
-    type: string
-  outputs:
-  - name: remainingSeconds
-    type: number
-C_Spell.GetSpellCooldownRemainingPercent:
-  inputs:
-  - name: spellIdentifier
-    type: string
-  - name: curve
-    nilable: true
-    type: table
-  outputs:
-  - name: result
-    type: table
 C_Spell.GetSpellDescription:
   inputs:
   - name: spellIdentifier
@@ -24625,6 +24770,13 @@ C_StoreSecure.RequestRealmGuildMasterInfo:
 C_StoreSecure.SetDisconnectOnLogout:
 C_StoreSecure.SetVASProductReady:
 C_StoreSecure.ValidateBnetTransfer:
+C_StringUtil.EscapeLuaFormatString:
+  inputs:
+  - name: text
+    type: string
+  outputs:
+  - name: escapedText
+    type: string
 C_StringUtil.EscapeLuaPatterns:
   inputs:
   - name: text
@@ -24678,6 +24830,13 @@ C_StringUtil.StripHyperlinks:
   - default: false
     name: maintainAtlases
     type: boolean
+  outputs:
+  - name: stripped
+    type: string
+C_StringUtil.StripTextureMarkupForLooseFiles:
+  inputs:
+  - name: text
+    type: string
   outputs:
   - name: stripped
     type: string
@@ -27610,15 +27769,6 @@ C_Transmog.GetItemIDForSource:
   - name: itemID
     nilable: true
     type: number
-C_Transmog.GetSlotEffectiveCategory:
-  inputs:
-  - name: transmogLocation
-    type:
-      structure: TransmogLocation
-  outputs:
-  - name: categoryID
-    type:
-      enum: TransmogCollectionType
 C_Transmog.GetSlotForInventoryType:
   inputs:
   - name: inventoryType
@@ -28404,6 +28554,14 @@ C_TransmogOutfitInfo.GetIllusionDefaultIMAIDForCollectionType:
   outputs:
   - name: imaID
     type: number
+C_TransmogOutfitInfo.GetItemModifiedAppearanceEffectiveCategory:
+  inputs:
+  - name: imaID
+    type: number
+  outputs:
+  - name: categoryID
+    type:
+      enum: TransmogCollectionType
 C_TransmogOutfitInfo.GetLinkedSlotInfo:
   inputs:
   - name: slot
@@ -28603,6 +28761,11 @@ C_TransmogOutfitInfo.HasPendingOutfitTransmogs:
   outputs:
   - name: hasPending
     type: boolean
+C_TransmogOutfitInfo.InTransmogEvent:
+  inputs:
+  outputs:
+  - name: inTransmogEvent
+    type: boolean
 C_TransmogOutfitInfo.IsEquippedGearOutfitDisplayed:
   inputs:
   outputs:
@@ -28665,6 +28828,11 @@ C_TransmogOutfitInfo.SetOutfitToCustomSet:
   - name: transmogCustomSetID
     type: number
   outputs:
+C_TransmogOutfitInfo.SetOutfitToOutfit:
+  inputs:
+  - name: outfitID
+    type: number
+  outputs:
 C_TransmogOutfitInfo.SetOutfitToSet:
   inputs:
   - name: transmogSetID
@@ -28712,6 +28880,11 @@ C_TransmogOutfitInfo.SlotHasSecondary:
       enum: TransmogOutfitSlot
   outputs:
   - name: hasSecondary
+    type: boolean
+C_TransmogOutfitInfo.TransmogEventActive:
+  inputs:
+  outputs:
+  - name: transmogEventActive
     type: boolean
 C_TransmogOutfitInfo.UpdatePendingSituation:
   inputs:
@@ -29715,27 +29888,6 @@ C_UnitAuras.GetAuraDuration:
   - name: duration
     type:
       luaobject: LuaDurationObject
-C_UnitAuras.GetAuraDurationRemaining:
-  inputs:
-  - name: auraInstanceUnit
-    type: unit
-  - name: auraInstanceID
-    type: number
-  outputs:
-  - name: durationRemaining
-    type: number
-C_UnitAuras.GetAuraDurationRemainingPercent:
-  inputs:
-  - name: auraInstanceUnit
-    type: unit
-  - name: auraInstanceID
-    type: number
-  - name: curve
-    nilable: true
-    type: table
-  outputs:
-  - name: result
-    type: table
 C_UnitAuras.GetAuraSlots:
   inputs:
   - name: unit
@@ -31536,7 +31688,7 @@ CreateAbbreviateConfig:
   - name: data
     type:
       arrayof:
-        structure: NumberAbbrevData
+        structure: NumberAbbreviationBreakpoint
   outputs:
   - name: config
     type:
@@ -31745,6 +31897,15 @@ DropCursorMoney:
 dropsecretaccess:
   inputs:
   outputs:
+dumpobject:
+  inputs:
+  - name: value
+    nilable: true
+    type: unknown
+  outputs:
+  - name: result
+    nilable: true
+    type: unknown
 DungeonAppearsInRandomLFD:
 EditMacro:
 EJ_ClearSearch:
@@ -32530,7 +32691,6 @@ GetCurrentEventID:
     type: number
 GetCurrentGlyphNameForSpell:
 GetCurrentGraphicsAPI:
-GetCurrentGraphicsSetting:
 GetCurrentGuildBankTab:
   outputs:
   - type: number
@@ -37186,7 +37346,6 @@ SetConsoleKey:
   - name: keystring
     type: string
   outputs:
-SetCurrentGraphicsSetting:
 SetCurrentGuildBankTab:
 SetCurrentTitle:
   inputs:
@@ -37600,6 +37759,7 @@ string.byte:
   impl: string.byte
 string.char:
   impl: string.char
+string.concat:
 string.find:
   impl: string.find
 string.format:
@@ -38002,8 +38162,12 @@ UnitCastingInfo:
   - name: castID
     type: string
   - name: notInterruptible
+    nilable: true
     type: boolean
   - name: castingSpellID
+    type: number
+  - name: castBarID
+    nilable: true
     type: number
 UnitChannelDuration:
   inputs:
@@ -38032,12 +38196,16 @@ UnitChannelInfo:
   - name: isTradeskill
     type: boolean
   - name: notInterruptible
+    nilable: true
     type: boolean
   - name: spellID
     type: number
   - name: isEmpowered
     type: boolean
   - name: numEmpowerStages
+    type: number
+  - name: castBarID
+    nilable: true
     type: number
 UnitChromieTimeID:
   inputs:
@@ -38176,6 +38344,40 @@ UnitEffectiveLevel:
   outputs:
   - name: result
     type: number
+UnitEmpoweredChannelDuration:
+  inputs:
+  - name: unit
+    type: unit
+  - default: true
+    name: includeHoldAtMaxTime
+    type: boolean
+  mayreturnnothing: true
+  outputs:
+  - name: duration
+    type:
+      luaobject: LuaDurationObject
+UnitEmpoweredStageDurations:
+  inputs:
+  - name: unit
+    type: unit
+  mayreturnnothing: true
+  outputs:
+  - name: duration
+    type:
+      arrayof:
+        luaobject: LuaDurationObject
+UnitEmpoweredStagePercentages:
+  inputs:
+  - name: unit
+    type: unit
+  - default: true
+    name: includeHoldAtMaxTime
+    type: boolean
+  mayreturnnothing: true
+  outputs:
+  - name: percentages
+    type:
+      arrayof: number
 UnitExists:
   impl: UnitExists
   inputs:

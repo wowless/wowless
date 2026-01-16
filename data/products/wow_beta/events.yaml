@@ -5152,9 +5152,9 @@ HOUSING_BASIC_MODE_PLACEMENT_FLAGS_UPDATED:
   - name: targetType
     type:
       enum: HousingBasicModeTargetType
-  - name: placementInfo
+  - name: activeFlags
     type:
-      structure: C_HousingBasicMode.InvalidPlacementInfo
+      enum: HousingDecorPlacementRestriction
 HOUSING_BASIC_MODE_SELECTED_TARGET_CHANGED:
   payload:
   - name: hasSelectedTarget
@@ -5168,10 +5168,6 @@ HOUSING_CATALOG_CATEGORY_UPDATED:
   payload:
   - name: categoryID
     type: number
-HOUSING_CATALOG_SEARCHER_RELEASED:
-  payload:
-  - name: searcher
-    type: string
 HOUSING_CATALOG_SUBCATEGORY_UPDATED:
   payload:
   - name: subcategoryID
@@ -5288,6 +5284,14 @@ HOUSING_EXPERT_MODE_HOVERED_TARGET_CHANGED:
   - name: targetType
     type:
       enum: HousingExpertModeTargetType
+HOUSING_EXPERT_MODE_PLACEMENT_FLAGS_UPDATED:
+  payload:
+  - name: targetType
+    type:
+      enum: HousingExpertModeTargetType
+  - name: activeFlags
+    type:
+      enum: HousingDecorPlacementRestriction
 HOUSING_EXPERT_MODE_SELECTED_TARGET_CHANGED:
   payload:
   - name: hasSelectedTarget
@@ -5457,10 +5461,14 @@ INITIAL_HOTFIXES_APPLIED:
   payload:
 INITIATIVE_ACTIVITY_LOG_UPDATED:
   payload:
+INITIATIVE_COMPLETED:
+  payload:
+  - name: initiativeTitle
+    type: string
 INITIATIVE_TASK_COMPLETED:
   payload:
-  - name: initiativeTaskID
-    type: number
+  - name: taskName
+    type: string
 INITIATIVE_TASKS_TRACKED_LIST_CHANGED:
   payload:
   - name: initiativeTaskID
@@ -8722,6 +8730,9 @@ UNIT_SPELLCAST_CHANNEL_START:
     type: string
   - name: spellID
     type: number
+  - name: castBarID
+    nilable: true
+    type: number
 UNIT_SPELLCAST_CHANNEL_STOP:
   payload:
   - name: unitTarget
@@ -8732,6 +8743,9 @@ UNIT_SPELLCAST_CHANNEL_STOP:
     type: number
   - name: interruptedBy
     type: string
+  - name: castBarID
+    nilable: true
+    type: number
 UNIT_SPELLCAST_CHANNEL_UPDATE:
   payload:
   - name: unitTarget
@@ -8739,6 +8753,9 @@ UNIT_SPELLCAST_CHANNEL_UPDATE:
   - name: castGUID
     type: string
   - name: spellID
+    type: number
+  - name: castBarID
+    nilable: true
     type: number
 UNIT_SPELLCAST_DELAYED:
   payload:
@@ -8748,6 +8765,9 @@ UNIT_SPELLCAST_DELAYED:
     type: string
   - name: spellID
     type: number
+  - name: castBarID
+    nilable: true
+    type: number
 UNIT_SPELLCAST_EMPOWER_START:
   payload:
   - name: unitTarget
@@ -8755,6 +8775,9 @@ UNIT_SPELLCAST_EMPOWER_START:
   - name: castGUID
     type: string
   - name: spellID
+    type: number
+  - name: castBarID
+    nilable: true
     type: number
 UNIT_SPELLCAST_EMPOWER_STOP:
   payload:
@@ -8768,6 +8791,9 @@ UNIT_SPELLCAST_EMPOWER_STOP:
     type: boolean
   - name: interruptedBy
     type: string
+  - name: castBarID
+    nilable: true
+    type: number
 UNIT_SPELLCAST_EMPOWER_UPDATE:
   payload:
   - name: unitTarget
@@ -8775,6 +8801,9 @@ UNIT_SPELLCAST_EMPOWER_UPDATE:
   - name: castGUID
     type: string
   - name: spellID
+    type: number
+  - name: castBarID
+    nilable: true
     type: number
 UNIT_SPELLCAST_FAILED:
   payload:
@@ -8784,6 +8813,9 @@ UNIT_SPELLCAST_FAILED:
     type: string
   - name: spellID
     type: number
+  - name: castBarID
+    nilable: true
+    type: number
 UNIT_SPELLCAST_FAILED_QUIET:
   payload:
   - name: unitTarget
@@ -8791,6 +8823,9 @@ UNIT_SPELLCAST_FAILED_QUIET:
   - name: castGUID
     type: string
   - name: spellID
+    type: number
+  - name: castBarID
+    nilable: true
     type: number
 UNIT_SPELLCAST_INTERRUPTED:
   payload:
@@ -8802,6 +8837,9 @@ UNIT_SPELLCAST_INTERRUPTED:
     type: number
   - name: interruptedBy
     type: string
+  - name: castBarID
+    nilable: true
+    type: number
 UNIT_SPELLCAST_INTERRUPTIBLE:
   payload:
   - name: unitTarget
@@ -8844,6 +8882,9 @@ UNIT_SPELLCAST_START:
     type: string
   - name: spellID
     type: number
+  - name: castBarID
+    nilable: true
+    type: number
 UNIT_SPELLCAST_STOP:
   payload:
   - name: unitTarget
@@ -8852,6 +8893,9 @@ UNIT_SPELLCAST_STOP:
     type: string
   - name: spellID
     type: number
+  - name: castBarID
+    nilable: true
+    type: number
 UNIT_SPELLCAST_SUCCEEDED:
   payload:
   - name: unitTarget
@@ -8859,6 +8903,9 @@ UNIT_SPELLCAST_SUCCEEDED:
   - name: castGUID
     type: string
   - name: spellID
+    type: number
+  - name: castBarID
+    nilable: true
     type: number
 UNIT_STATS:
   payload:
@@ -8894,6 +8941,13 @@ UPDATE_BINDINGS:
   payload:
 UPDATE_BONUS_ACTIONBAR:
   payload:
+UPDATE_BULLETIN_BOARD_MEMBER_TYPE:
+  payload:
+  - name: player
+    type: string
+  - name: residentType
+    type:
+      enum: ResidentType
 UPDATE_BULLETIN_BOARD_ROSTER:
   payload:
   - name: neighborhoodInfo

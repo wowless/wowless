@@ -158,6 +158,8 @@ type:
               type: boolean
             RequiresNonReadOnlyCVar:
               type: boolean
+            RequiresNonSecretAura:
+              type: boolean
             RequiresNonSecretAuraSpellID:
               type: boolean
             RequiresNonSecretAuraSpellName:

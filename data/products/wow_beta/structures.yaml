@@ -1320,6 +1320,8 @@ C_CatalogShop.CatalogShopProductInfo:
       type: boolean
     isPurchasePending:
       type: boolean
+    isVCProduct:
+      type: boolean
     itemID:
       type: number
     itemModifiedAppearanceID:
@@ -1418,6 +1420,10 @@ C_CatalogShop.CatalogShopSubItemInfo:
     quality:
       type:
         enum: ItemQuality
+C_CatalogShop.CatalogShopVCProductInfo:
+  fields:
+    vcProductID:
+      type: number
 C_CatalogShop.CatalogShopVirtualCurrency:
   fields:
     amount:
@@ -2583,6 +2589,9 @@ C_CurrencyInfo.PlayerCurrencyCategoryInfo:
         arrayof: number
 C_DamageMeter.DamageMeterAvailableCombatSession:
   fields:
+    durationSeconds:
+      nilable: true
+      type: number
     name:
       type: string
     sessionID:
@@ -2593,7 +2602,13 @@ C_DamageMeter.DamageMeterCombatSession:
       type:
         arrayof:
           structure: C_DamageMeter.DamageMeterCombatSource
+    durationSeconds:
+      nilable: true
+      type: number
     maxAmount:
+      default: 0
+      type: number
+    totalAmount:
       default: 0
       type: number
 C_DamageMeter.DamageMeterCombatSessionSource:
@@ -2603,6 +2618,10 @@ C_DamageMeter.DamageMeterCombatSessionSource:
         arrayof:
           structure: C_DamageMeter.DamageMeterCombatSpell
     maxAmount:
+      default: 0
+      type: number
+    totalAmount:
+      default: 0
       type: number
 C_DamageMeter.DamageMeterCombatSource:
   fields:
@@ -2610,6 +2629,10 @@ C_DamageMeter.DamageMeterCombatSource:
       type: number
     classFilename:
       type: string
+    deathRecapID:
+      type: number
+    deathTimeSeconds:
+      type: number
     isLocalPlayer:
       type: boolean
     name:
@@ -2629,6 +2652,12 @@ C_DamageMeter.DamageMeterCombatSpell:
         structure: C_DamageMeter.DamageMeterCombatSpellUnitDetails
     creatureName:
       type: string
+    isAvoidable:
+      type: boolean
+    isDeadly:
+      type: boolean
+    overkillAmount:
+      type: number
     spellID:
       type: number
     totalAmount:
@@ -2639,6 +2668,10 @@ C_DamageMeter.DamageMeterCombatSpellUnitDetails:
       type: number
     classification:
       type: string
+    isMob:
+      type: boolean
+    isPet:
+      type: boolean
     unitClassFilename:
       type: string
     unitName:
@@ -3895,18 +3928,6 @@ C_GuildInfo.GuildRenameStatus:
     result:
       type:
         enum: GuildErrorType
-C_HousingBasicMode.InvalidPlacementInfo:
-  fields:
-    anyRestrictions:
-      type: boolean
-    invalidCollision:
-      type: boolean
-    invalidTarget:
-      type: boolean
-    notInRoom:
-      type: boolean
-    tooFar:
-      type: boolean
 C_HousingCatalog.HousingBundleDecorEntryInfo:
   fields:
     decorID:
@@ -3961,6 +3982,9 @@ C_HousingCatalog.HousingCatalogEntryInfo:
         arrayof: string
     dataTagsByID:
       type: table
+    dyeIDs:
+      type:
+        arrayof: number
     entryID:
       type:
         structure: HousingCatalogEntryID
@@ -7729,6 +7753,8 @@ C_Traits.TraitNodeInfo:
     subTreeID:
       nilable: true
       type: number
+    totalMaxRanks:
+      type: number
     type:
       type:
         enum: TraitNodeType
@@ -7819,6 +7845,11 @@ C_Traits.TraitTreeInfo:
     rootNodeID:
       nilable: true
       type: number
+    titleText:
+      nilable: true
+      type: string
+    uiTextureKit:
+      type: string
 C_Traits.TreeCurrencyInfo:
   fields:
     maxQuantity:
@@ -11802,7 +11833,7 @@ NewCraftingOrderInfo:
       type: number
     tipAmount:
       type: number
-NumberAbbrevData:
+NumberAbbreviationBreakpoint:
   fields:
     abbreviation:
       type: string
@@ -11821,7 +11852,7 @@ NumberAbbrevOptions:
       nilable: true
       type:
         arrayof:
-          structure: NumberAbbrevData
+          structure: NumberAbbreviationBreakpoint
     config:
       nilable: true
       type:
@@ -11870,6 +11901,9 @@ PrivateAuraAnchor:
       type: string
 PrivateAuraIconInfo:
   fields:
+    borderScale:
+      nilable: true
+      type: number
     iconAnchor:
       type:
         structure: AnchorBinding
@@ -12115,8 +12149,6 @@ SpellCooldownInfo:
       nilable: true
       type: number
     duration:
-      type: number
-    endTime:
       type: number
     isEnabled:
       type: boolean

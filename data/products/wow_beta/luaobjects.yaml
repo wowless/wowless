@@ -39,8 +39,11 @@ LuaDurationObject:
   methods:
     Assign:
     Copy:
+    EvaluateElapsedDuration:
     EvaluateElapsedPercent:
+    EvaluateRemainingDuration:
     EvaluateRemainingPercent:
+    GetClockTime:
     GetElapsedDuration:
     GetElapsedPercent:
     GetEndTime:
@@ -64,6 +67,7 @@ LuaFunctionContainer:
     IsCancelled:
 UnitHealPredictionCalculator:
   methods:
+    GetCurrentHealth:
     GetDamageAbsorbClampMode:
     GetDamageAbsorbs:
     GetHealAbsorbClampMode:
@@ -72,13 +76,25 @@ UnitHealPredictionCalculator:
     GetIncomingHealClampMode:
     GetIncomingHealOverflowPercent:
     GetIncomingHeals:
+    GetMaximumDamageAbsorbs:
+    GetMaximumHealAbsorbs:
+    GetMaximumHealth:
+    GetMaximumHealthMode:
+    GetMaximumIncomingHeals:
+    GetMissingHealth:
     GetPredictedValues:
+    GetTotalDamageAbsorbs:
+    GetTotalHealAbsorbs:
+    GetTotalIncomingHeals:
+    GetTotalIncomingHealsFromHealer:
     HasSecretValues:
     Reset:
+    ResetPredictedValues:
     SetDamageAbsorbClampMode:
     SetHealAbsorbClampMode:
     SetHealAbsorbMode:
     SetIncomingHealClampMode:
     SetIncomingHealOverflowPercent:
+    SetMaximumHealthMode:
     SetPredictedValues:
     SetToDefaults:

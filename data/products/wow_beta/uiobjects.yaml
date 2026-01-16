@@ -3351,6 +3351,9 @@ FontString:
     ClearAlphaGradient:
       inputs:
       outputs:
+    ClearText:
+      inputs:
+      outputs:
     FindCharacterIndexAtCoordinate:
       inputs:
       - name: x
