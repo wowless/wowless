@@ -1,4 +1,4 @@
-return function(addons, datalua, env, uiobjects, units)
+return function(addons, datalua, env, luaobjects, uiobjects, units)
   local enumrev = {}
   for k, v in pairs(datalua.globals.Enum) do
     local t = {}
@@ -70,11 +70,11 @@ return function(addons, datalua, env, uiobjects, units)
         return tonumber(value) or tostring(value), notnors
       end
     end,
-    gender = function(value)
-      return tonumber(value) or 0
-    end,
     ['function'] = function(value)
       return luatypecheck('function', value)
+    end,
+    gender = function(value)
+      return tonumber(value) or 0
     end,
     number = function(value, isout)
       if isout then
@@ -242,6 +242,24 @@ return function(addons, datalua, env, uiobjects, units)
         end
       end
       return value
+    elseif spec.type.luaobject then
+      if isout then
+        if value and value.type == spec.type.luaobject then
+          return value.luarep
+        else
+          return nil, 'is not of luaobject type ' .. spec.type.luaobject
+        end
+      else
+        local coerced = luaobjects.Coerce(spec.type.luaobject, value)
+        if coerced then
+          return coerced
+        end
+        local obj = luaobjects.UserData(value)
+        if not obj or obj.type ~= spec.type.luaobject then
+          return nil, 'is not of luaobject type ' .. spec.type.luaobject
+        end
+        return obj
+      end
     else
       return nil, 'invalid spec'
     end

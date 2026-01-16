@@ -5,6 +5,10 @@ return function()
     uiobjectTypes[name] = t
   end
 
+  local function GetObjectType(obj)
+    return uiobjectTypes[obj.type].name
+  end
+
   local function GetOrThrow(name)
     local t = uiobjectTypes[name]
     if not t then
@@ -37,13 +41,24 @@ return function()
     return uiobjectTypes[string.lower(t)] ~= nil
   end
 
+  local function IsObjectType(obj, ty)
+    ty = string.lower(ty)
+    if ty == 'object' then
+      return obj.type ~= 'font'
+    else
+      return uiobjectTypes[obj.type].isa[ty] or false
+    end
+  end
+
   return {
     Add = Add,
+    GetObjectType = GetObjectType,
     GetOrThrow = GetOrThrow,
     GetSandboxMetatable = GetSandboxMetatable,
     Has = Has,
     HasScript = HasScript,
     InheritsFrom = InheritsFrom,
     IsIntrinsicType = IsIntrinsicType,
+    IsObjectType = IsObjectType,
   }
 end

@@ -49,17 +49,24 @@ describe('wowless.toc', function()
             'bbb [AllowLoadGameType vanilla]',
             'ccc [AllowLoadGameType classic]',
             'ddd [AllowLoadGameType mists]',
+            'eee [AllowLoadGameType tbc]',
           }
           local _, files = parse(gametype, table.concat(lines, '\n'))
           local expected = {
             Mists = { 'ccc', 'ddd' },
             Standard = { 'aaa' },
+            TBC = { 'ccc', 'eee' },
             Vanilla = { 'bbb', 'ccc' },
           }
           assert.same(assert(expected[gametype]), files)
         end)
       end)
     end
+    it('handles multiple filters', function()
+      local line = 'aaa [AllowLoadGameType standard] [AllowLoadEnvironment Global]'
+      local _, files = parse('Standard', line)
+      assert.same({ 'aaa' }, files)
+    end)
   end)
   describe('suffixes', function()
     local allsuffixes = wowlesstoc.suffixes

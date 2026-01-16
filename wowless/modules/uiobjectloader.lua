@@ -1,9 +1,8 @@
 local util = require('wowless.util')
 local bubblewrap = require('wowless.bubblewrap')
 local Mixin = util.mixin
-local hlist = require('wowless.hlist')
 
-return function(datalua, funcheck, uiobjectsmodule, uiobjecttypes)
+return function(datalua, funcheck, gencode, sqls, uiobjectsmodule, uiobjecttypes)
   local InheritsFrom = uiobjecttypes.InheritsFrom
   local UserData = uiobjectsmodule.UserData
 
@@ -68,7 +67,7 @@ return function(datalua, funcheck, uiobjectsmodule, uiobjecttypes)
           return fn(self, ...)
         end
       end
-      local constructor = assert(loadstring_untainted(cfg.constructor, name))(hlist)
+      local constructor = assert(loadstring_untainted(cfg.constructor, name))(gencode)
       if cfg.singleton then
         local orig = constructor
         local called = false
@@ -88,6 +87,9 @@ return function(datalua, funcheck, uiobjectsmodule, uiobjecttypes)
         local args = {}
         for _, m in ipairs(method.modules or {}) do
           table.insert(args, (assert(modules[m], m)))
+        end
+        for _, sql in ipairs(method.sqls or {}) do
+          table.insert(args, (assert(sqls[sql], sql)))
         end
         local basefn = wrap(fname, mkfn(unpack(args)))
         local outfn

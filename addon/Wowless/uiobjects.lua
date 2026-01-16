@@ -6,6 +6,7 @@ G.testsuite.uiobjects = function()
   local check2 = G.check2
   local check3 = G.check3
   local check4 = G.check4
+  local check5 = G.check5
   local check6 = G.check6
   local match = G.match
   local retn = G.retn
@@ -18,6 +19,83 @@ G.testsuite.uiobjects = function()
           check1(f, a:GetTarget())
           assertEquals(false, pcall(a.SetTarget, a))
           assertEquals(false, pcall(a.SetTarget, a, nil))
+        end,
+      }
+    end,
+
+    EditBox = function()
+      return {
+        fontobject = function()
+          if _G.__wowless then
+            return
+          end
+          local eb = CreateFrame('EditBox')
+          eb:Hide()
+          local fo = assert(retn(1, eb:GetFontObject()))
+          local eb2 = CreateFrame('EditBox')
+          eb2:Hide()
+          local fo2 = assert(retn(1, eb2:GetFontObject()))
+          assert(fo ~= fo2)
+          check1('Font', fo:GetObjectType())
+          check1(nil, fo:GetFontObject())
+          check3(nil, 0, '', fo:GetFont())
+          check1(fo, eb:GetFontObject())
+          check0(eb:SetFontObject(fo2))
+          check1(fo, eb:GetFontObject())
+          assert(not pcall(eb.SetFontObject, eb, nil))
+        end,
+      }
+    end,
+
+    Font = function()
+      return {
+        loop0 = function()
+          local font = CreateFont('WowlessFontObjectLoop0Test')
+          local err = 'WowlessFontObjectLoop0Test:SetFontObject(): Can\'t create a font object loop'
+          check2(false, err, pcall(font.SetFontObject, font, font))
+        end,
+        loop1 = function()
+          local font1 = CreateFont('WowlessFontObjectLoop1Test1')
+          local font2 = CreateFont('WowlessFontObjectLoop1Test2')
+          check0(font2:SetFontObject(font1))
+          local err = 'WowlessFontObjectLoop1Test1:SetFontObject(): Can\'t create a font object loop'
+          check2(false, err, pcall(font1.SetFontObject, font1, font2))
+        end,
+        name = function()
+          local name = 'WowlessFontObjectNameTest'
+          local font1 = retn(1, CreateFont(name))
+          assertEquals(font1, _G[name])
+          check1(name, font1:GetName())
+          check1(font1, CreateFont(name))
+          _G[name] = nil
+          check1(name, font1:GetName())
+          check1(font1, CreateFont(name))
+        end,
+        noname = function()
+          local usage = 'Usage: CreateFont("name")'
+          check2(false, usage, pcall(CreateFont))
+          check2(false, usage, pcall(CreateFont, nil))
+        end,
+        numbername = function()
+          local n = 1759244889
+          local s = tostring(n)
+          local font = retn(1, CreateFont(n))
+          assertEquals(nil, _G[n])
+          assertEquals(font, _G[s])
+          check1(s, font:GetName())
+          assertEquals(font, retn(1, CreateFont(s)))
+        end,
+        vfs = function()
+          if _G.__wowless then -- TODO support
+            return
+          end
+          local font = CreateFont('WowlessFontObjectVfsTest')
+          local fontname = ('Interface\\AddOns\\%s\\framework.lua'):format(addonName)
+          check1(nil, font:GetFontObject())
+          check3(nil, 0, '', font:GetFont())
+          check0(font:SetFont(fontname, 12, ''))
+          check1(nil, font:GetFontObject())
+          check3(fontname, 12, '', font:GetFont())
         end,
       }
     end,
@@ -255,21 +333,60 @@ G.testsuite.uiobjects = function()
           assertEquals(nil, f.moo)
         end,
         ['support $parent in frame names'] = function()
-          local moo = retn(1, CreateFrame('Frame', 'WowlessParentNameTestMoo'))
-          local mooCow = retn(1, CreateFrame('Frame', '$parentWowlessCow', moo))
-          local topCow = retn(1, CreateFrame('Frame', '$parentWowlessCow'))
-          return {
-            substitution = function()
-              local name = 'WowlessParentNameTestMooWowlessCow'
-              check1(name, mooCow:GetName())
-              assertEquals(mooCow, _G[name])
-            end,
-            top = function()
-              local name = 'TopWowlessCow'
-              check1(name, topCow:GetName())
-              assertEquals(topCow, _G[name])
-            end,
+          local parent = retn(1, CreateFrame('Frame', 'WowlessParentNameTestMoo'))
+          local t = {
+            embeddedsubstitution = {
+              arg = 'Wowless$parentCowSubstitution',
+              name = 'Wowless$parentCowSubstitution',
+              parent = parent,
+            },
+            embeddedtop = {
+              arg = 'Wowless$parentCowTop',
+              name = 'Wowless$parentCowTop',
+            },
+            ignoresanonsubtitution = {
+              arg = '$parentIgnoreAnonSub',
+              name = 'WowlessParentNameTestMooIgnoreAnonSub',
+              parent = CreateFrame('Frame', nil, parent),
+            },
+            ignoresanontop = {
+              arg = '$parentIgnoreAnonTop',
+              name = 'TopIgnoreAnonTop',
+              parent = CreateFrame('Frame'),
+            },
+            mixedcase = {
+              arg = '$pArEnTMixed',
+              name = 'WowlessParentNameTestMooMixed',
+              parent = parent,
+            },
+            multisubstitution = {
+              arg = '$parent$parentWowless$parentCow',
+              name = 'WowlessParentNameTestMoo$parentWowless$parentCow',
+              parent = parent,
+            },
+            multitop = {
+              arg = '$parent$parentWowless$parentCow',
+              name = 'Top$parentWowless$parentCow',
+            },
+            substitution = {
+              arg = '$parentWowlessCow',
+              name = 'WowlessParentNameTestMooWowlessCow',
+              parent = parent,
+            },
+            top = {
+              arg = '$parentWowlessCow',
+              name = 'TopWowlessCow',
+            },
           }
+          local tests = {}
+          for k, v in pairs(t) do
+            tests[k] = function()
+              local frame = retn(1, CreateFrame('Frame', v.arg, v.parent))
+              check1(v.name, frame:GetName())
+              assertEquals(frame, _G[v.name])
+            end
+          end
+          return tests
         end,
       }
     end,
@@ -357,6 +474,624 @@ G.testsuite.uiobjects = function()
               }
             end,
           }
+        end,
+      }
+    end,
+
+    MessageFrame = function()
+      return {
+        fontobject = function()
+          if _G.__wowless then
+            return
+          end
+          local mf = CreateFrame('MessageFrame')
+          mf:Hide()
+          local fo = assert(retn(1, mf:GetFontObject()))
+          local mf2 = CreateFrame('MessageFrame')
+          mf2:Hide()
+          local fo2 = assert(retn(1, mf2:GetFontObject()))
+          assert(fo ~= fo2)
+          check1('Font', fo:GetObjectType())
+          check1(nil, fo:GetFontObject())
+          check3(nil, 0, '', fo:GetFont())
+          check1(fo, mf:GetFontObject())
+          check0(mf:SetFontObject(fo2))
+          check1(fo, mf:GetFontObject())
+          assert(not pcall(mf.SetFontObject, mf, nil))
+        end,
+      }
+    end,
+
+    Region = function()
+      return {
+        points = function()
+          return {
+            dag = function()
+              local function rstr(r)
+                return tostring(r):gsub('^.*0x(.*)$', '%1')
+              end
+              return {
+                ['0'] = function()
+                  local f = CreateFrame('Frame')
+                  local msg = table.concat({
+                    'Action[SetPoint] failed because',
+                    '[Cannot anchor to itself]: ',
+                    'attempted from: Frame:SetPoint.',
+                  })
+                  check2(false, msg, pcall(f.SetPoint, f, 'CENTER', f))
+                end,
+                ['1'] = function()
+                  local f = CreateFrame('Frame')
+                  local g = CreateFrame('Frame')
+                  local msg = table.concat({
+                    'Action[SetPoint] failed because',
+                    '[Cannot anchor to a region dependent on it]: ',
+                    'attempted from: Frame:SetPoint.\n',
+                    'Relative: [' .. rstr(g) .. ']\n',
+                    'Dependent: [' .. rstr(g) .. ']',
+                  })
+                  check0(g:SetPoint('CENTER', f))
+                  check2(false, msg, pcall(f.SetPoint, f, 'CENTER', g))
+                end,
+                ['2'] = function()
+                  local f = CreateFrame('Frame')
+                  local g = CreateFrame('Frame')
+                  local h = CreateFrame('Frame')
+                  local msg = table.concat({
+                    'Action[SetPoint] failed because',
+                    '[Cannot anchor to a region dependent on it]: ',
+                    'attempted from: Frame:SetPoint.\n',
+                    'Relative: [' .. rstr(h) .. ']\n',
+                    'Dependent: [' .. rstr(g) .. ']\n',
+                    'Dependent ancestors:\n',
+                    '[' .. rstr(h) .. ']',
+                  })
+                  check0(g:SetPoint('CENTER', f))
+                  check0(h:SetPoint('CENTER', g))
+                  check2(false, msg, pcall(f.SetPoint, f, 'CENTER', h))
+                end,
+                ['3'] = function()
+                  local f = CreateFrame('Frame')
+                  local g = CreateFrame('Frame')
+                  local h = CreateFrame('Frame')
+                  local i = CreateFrame('Frame')
+                  local msg = table.concat({
+                    'Action[SetPoint] failed because',
+                    '[Cannot anchor to a region dependent on it]: ',
+                    'attempted from: Frame:SetPoint.\n',
+                    'Relative: [' .. rstr(i) .. ']\n',
+                    'Dependent: [' .. rstr(g) .. ']\n',
+                    'Dependent ancestors:\n',
+                    '[' .. rstr(h) .. ']\n',
+                    '[' .. rstr(i) .. ']',
+                  })
+                  check0(g:SetPoint('CENTER', f))
+                  check0(h:SetPoint('CENTER', g))
+                  check0(i:SetPoint('CENTER', h))
+                  check2(false, msg, pcall(f.SetPoint, f, 'CENTER', i))
+                end,
+                all0 = function()
+                  local f = CreateFrame('Frame')
+                  local msg = table.concat({
+                    'Action[SetPoint] failed because',
+                    '[Cannot anchor to itself]: ',
+                    'attempted from: Frame:SetAllPoints.',
+                  })
+                  check2(false, msg, pcall(f.SetAllPoints, f, f))
+                end,
+                all3 = function()
+                  local f = CreateFrame('Frame')
+                  local g = CreateFrame('Frame')
+                  local h = CreateFrame('Frame')
+                  local i = CreateFrame('Frame')
+                  local msg = table.concat({
+                    'Action[SetPoint] failed because',
+                    '[Cannot anchor to a region dependent on it]: ',
+                    'attempted from: Frame:SetAllPoints.\n',
+                    'Relative: [' .. rstr(i) .. ']\n',
+                    'Dependent: [' .. rstr(g) .. ']\n',
+                    'Dependent ancestors:\n',
+                    '[' .. rstr(h) .. ']\n',
+                    '[' .. rstr(i) .. ']',
+                  })
+                  check0(g:SetAllPoints(f))
+                  check0(h:SetAllPoints(g))
+                  check0(i:SetAllPoints(h))
+                  check2(false, msg, pcall(f.SetAllPoints, f, i))
+                end,
+              }
+            end,
+          }
+        end,
+        ClearPoint = function()
+          local f = CreateFrame('Frame')
+          check0(f:SetPoint('TOPLEFT'))
+          check0(f:SetPoint('TOPRIGHT'))
+          check0(f:ClearPoint('TOP'))
+          check1(2, f:GetNumPoints())
+          check0(f:ClearPoint('TOPLEFT'))
+          check1(1, f:GetNumPoints())
+          check1('TOPRIGHT', (f:GetPoint(1)))
+        end,
+        GetPoint = function()
+          local f = CreateFrame('Frame')
+          f:SetPoint('TOPRIGHT')
+          f:SetPoint('LEFT')
+          f:SetPoint('BOTTOM')
+          f:SetPoint('TOP')
+          f:SetPoint('RIGHT')
+          f:SetPoint('BOTTOMLEFT')
+          f:SetPoint('CENTER')
+          f:SetPoint('TOPLEFT')
+          f:SetPoint('BOTTOMRIGHT')
+          local function p(k, s)
+            return function()
+              return match(5, s, nil, s, 0, 0, f:GetPoint(k))
+            end
+          end
+          return {
+            num = function()
+              return match(1, 9, f:GetNumPoints())
+            end,
+            p1 = p(1, 'TOPLEFT'),
+            p2 = p(2, 'TOP'),
+            p3 = p(3, 'TOPRIGHT'),
+            p4 = p(4, 'LEFT'),
+            p5 = p(5, 'CENTER'),
+            p6 = p(6, 'RIGHT'),
+            p7 = p(7, 'BOTTOMLEFT'),
+            p8 = p(8, 'BOTTOM'),
+            p9 = p(9, 'BOTTOMRIGHT'),
+          }
+        end,
+        GetPointByName = function()
+          local f = CreateFrame('Frame')
+          check0(f:GetPointByName('CENTER'))
+          check0(f:SetPoint('CENTER'))
+          check5('CENTER', nil, 'CENTER', 0, 0, f:GetPointByName('CENTER'))
+        end,
+        IsCollapsed = function()
+          local f = CreateFrame('Frame')
+          local p = CreateFrame('Frame')
+          p:Hide()
+          local states = {
+            ['hidden, will collapse, collapsed'] = function()
+              check1(false, f:IsShown())
+              check1(false, f:IsVisible())
+              check1(true, f:CollapsesLayout())
+              check1(true, f:IsCollapsed())
+            end,
+            ['hidden, will not collapse, not collapsed'] = function()
+              check1(false, f:IsShown())
+              check1(false, f:IsVisible())
+              check1(false, f:CollapsesLayout())
+              check1(false, f:IsCollapsed())
+            end,
+            ['invisible, will collapse, collapsed'] = function()
+              check1(true, f:IsShown())
+              check1(false, f:IsVisible())
+              check1(true, f:CollapsesLayout())
+              check1(true, f:IsCollapsed())
+            end,
+            ['invisible, will not collapse, not collapsed'] = function()
+              check1(true, f:IsShown())
+              check1(false, f:IsVisible())
+              check1(false, f:CollapsesLayout())
+              check1(false, f:IsCollapsed())
+            end,
+            ['shown, will collapse, not collapsed'] = function()
+              check1(true, f:IsShown())
+              check1(true, f:IsVisible())
+              check1(true, f:CollapsesLayout())
+              check1(false, f:IsCollapsed())
+            end,
+            ['shown, will not collapse, not collapsed'] = function()
+              check1(true, f:IsShown())
+              check1(true, f:IsVisible())
+              check1(false, f:CollapsesLayout())
+              check1(false, f:IsCollapsed())
+            end,
+          }
+          local transitions = {
+            hide = {
+              edges = {
+                ['shown, will collapse, not collapsed'] = 'hidden, will collapse, collapsed',
+                ['shown, will not collapse, not collapsed'] = 'hidden, will not collapse, not collapsed',
+              },
+              func = function()
+                check0(f:Hide())
+              end,
+            },
+            setCollapsesLayoutFalse = {
+              edges = {
+                ['hidden, will collapse, collapsed'] = 'hidden, will not collapse, not collapsed',
+                ['invisible, will collapse, collapsed'] = 'invisible, will not collapse, not collapsed',
+                ['shown, will collapse, not collapsed'] = 'shown, will not collapse, not collapsed',
+              },
+              func = function()
+                check0(f:SetCollapsesLayout(false))
+              end,
+            },
+            setCollapsesLayoutTrue = {
+              edges = {
+                ['hidden, will not collapse, not collapsed'] = 'hidden, will collapse, collapsed',
+                ['invisible, will not collapse, not collapsed'] = 'invisible, will collapse, collapsed',
+                ['shown, will not collapse, not collapsed'] = 'shown, will collapse, not collapsed',
+              },
+              func = function()
+                check0(f:SetCollapsesLayout(true))
+              end,
+            },
+            setParentFrame = {
+              edges = {
+                ['shown, will collapse, not collapsed'] = 'invisible, will collapse, collapsed',
+                ['shown, will not collapse, not collapsed'] = 'invisible, will not collapse, not collapsed',
+              },
+              func = function()
+                check0(f:SetParent(p))
+              end,
+            },
+            setParentNil = {
+              edges = {
+                ['invisible, will collapse, collapsed'] = 'shown, will collapse, not collapsed',
+                ['invisible, will not collapse, not collapsed'] = 'shown, will not collapse, not collapsed',
+              },
+              func = function()
+                check0(f:SetParent(nil))
+              end,
+            },
+            show = {
+              edges = {
+                ['hidden, will collapse, collapsed'] = 'shown, will collapse, not collapsed',
+                ['hidden, will not collapse, not collapsed'] = 'shown, will not collapse, not collapsed',
+              },
+              func = function()
+                check0(f:Show())
+              end,
+            },
+          }
+          return G.checkStateMachine(states, transitions, 'shown, will not collapse, not collapsed')
+        end,
+        SetAllPoints = function()
+          return {
+            relativeTo = function()
+              local t = {
+                explicitregion = function()
+                  local r = CreateFrame('Frame')
+                  return r, r
+                end,
+                explicitscreen = function(f)
+                  local r = CreateFrame('Frame')
+                  f:SetParent(r)
+                  return nil, nil
+                end,
+                implicitparent = function(f)
+                  local r = CreateFrame('Frame')
+                  f:SetParent(r)
+                  return r
+                end,
+                implicitscreen = function()
+                  return nil
+                end,
+              }
+              local function docheck(f, r, ...)
+                check0(f:SetAllPoints(...))
+                return {
+                  num = function()
+                    return match(1, 2, f:GetNumPoints())
+                  end,
+                  pt1 = function()
+                    return match(5, 'TOPLEFT', r, 'TOPLEFT', 0, 0, f:GetPoint(1))
+                  end,
+                  pt2 = function()
+                    return match(5, 'BOTTOMRIGHT', r, 'BOTTOMRIGHT', 0, 0, f:GetPoint(2))
+                  end,
+                }
+              end
+              local tests = {}
+              for k, v in pairs(t) do
+                tests[k] = function()
+                  local f = CreateFrame('Frame')
+                  return docheck(f, v(f))
+                end
+              end
+              return tests
+            end,
+          }
+        end,
+        SetPoint = function()
+          return {
+            badpoint = function()
+              local f = CreateFrame('Frame')
+              local msg = 'Frame:SetPoint(): Invalid region point nonsense'
+              check2(false, msg, pcall(f.SetPoint, f, 'nonsense'))
+            end,
+            badrelpoint = function()
+              local f = CreateFrame('Frame')
+              local msg = 'Frame:SetPoint(): Unknown region point nonsense'
+              check2(false, msg, pcall(f.SetPoint, f, 'TOPLEFT', nil, 'nonsense'))
+            end,
+            noarg = function()
+              local f = CreateFrame('Frame')
+              local msg = table.concat({
+                'Frame:SetPoint(): Usage: (',
+                '"point" [, region or nil] [, "relativePoint"] [, offsetX, offsetY]',
+              })
+              check2(false, msg, pcall(f.SetPoint, f))
+            end,
+          }
+        end,
+        rect = function()
+          if _G.__wowless then -- issue #473
+            return
+          end
+          local f = CreateFrame('Frame')
+          local _, _, w, h = _G.WorldFrame:GetRect()
+          local states = {
+            init = function()
+              check1(false, f:IsRectValid())
+              check0(f:GetBottom())
+              check0(f:GetCenter())
+              check1(0, f:GetHeight())
+              check1(0, f:GetHeight(true))
+              check0(f:GetLeft())
+              check1(0, f:GetNumPoints())
+              check0(f:GetRect())
+              check0(f:GetRight())
+              check2(0, 0, f:GetSize())
+              check2(0, 0, f:GetSize(true))
+              check0(f:GetTop())
+              check1(0, f:GetWidth())
+              check1(0, f:GetWidth(true))
+              check1(false, f:IsRectValid())
+            end,
+            fiveten = function()
+              check1(false, f:IsRectValid())
+              check0(f:GetBottom())
+              check0(f:GetCenter())
+              check1(10, f:GetHeight())
+              check0(f:GetLeft())
+              check1(0, f:GetNumPoints())
+              check0(f:GetRect())
+              check0(f:GetRight())
+              check2(5, 10, f:GetSize())
+              check0(f:GetTop())
+              check1(5, f:GetWidth())
+              check1(false, f:IsRectValid())
+            end,
+            screen0 = function()
+              check1(false, f:IsRectValid())
+            end,
+            screen1 = function()
+              check1(true, f:IsRectValid())
+              check1(0, f:GetBottom())
+              check2(w / 2, h / 2, f:GetCenter())
+              check1(h, f:GetHeight())
+              check1(0, f:GetHeight(true))
+              check1(0, f:GetLeft())
+              check1(2, f:GetNumPoints())
+              check4(0, 0, w, h, f:GetRect())
+              check1(w, f:GetRight())
+              check2(w, h, f:GetSize())
+              check2(0, 0, f:GetSize(true))
+              check1(h, f:GetTop())
+              check1(w, f:GetWidth())
+              check1(0, f:GetWidth(true))
+              check1(true, f:IsRectValid())
+            end,
+            screenfiveten0 = function()
+              check1(false, f:IsRectValid())
+            end,
+            screenfiveten1 = function()
+              check1(true, f:IsRectValid())
+              check1(0, f:GetBottom())
+              check2(w / 2, h / 2, f:GetCenter())
+              check1(h, f:GetHeight())
+              check1(10, f:GetHeight(true))
+              check1(0, f:GetLeft())
+              check1(2, f:GetNumPoints())
+              check4(0, 0, w, h, f:GetRect())
+              check1(w, f:GetRight())
+              check2(w, h, f:GetSize())
+              check2(5, 10, f:GetSize(true))
+              check1(h, f:GetTop())
+              check1(w, f:GetWidth())
+              check1(5, f:GetWidth(true))
+              check1(true, f:IsRectValid())
+            end,
+          }
+          local transitions = {
+            getbottom = {
+              edges = {
+                init = 'init',
+                fiveten = 'fiveten',
+                screen0 = 'screen1',
+                screen1 = 'screen1',
+                screenfiveten0 = 'screenfiveten1',
+                screenfiveten1 = 'screenfiveten1',
+              },
+              func = function()
+                f:GetBottom()
+              end,
+            },
+            getcenter = {
+              edges = {
+                init = 'init',
+                fiveten = 'fiveten',
+                screen0 = 'screen1',
+                screen1 = 'screen1',
+                screenfiveten0 = 'screenfiveten1',
+                screenfiveten1 = 'screenfiveten1',
+              },
+              func = function()
+                f:GetCenter()
+              end,
+            },
+            getheight = {
+              edges = {
+                init = 'init',
+                fiveten = 'fiveten',
+                screen0 = 'screen1',
+                screen1 = 'screen1',
+                screenfiveten0 = 'screenfiveten1',
+                screenfiveten1 = 'screenfiveten1',
+              },
+              func = function()
+                f:GetHeight()
+              end,
+            },
+            getheightignorerect = {
+              loop = true,
+              func = function()
+                f:GetHeight(true)
+              end,
+            },
+            getleft = {
+              edges = {
+                init = 'init',
+                fiveten = 'fiveten',
+                screen0 = 'screen1',
+                screen1 = 'screen1',
+                screenfiveten0 = 'screenfiveten1',
+                screenfiveten1 = 'screenfiveten1',
+              },
+              func = function()
+                f:GetLeft()
+              end,
+            },
+            getnumpoints = {
+              loop = true,
+              func = function()
+                f:GetNumPoints()
+              end,
+            },
+            getrect = {
+              edges = {
+                init = 'init',
+                fiveten = 'fiveten',
+                screen0 = 'screen1',
+                screen1 = 'screen1',
+                screenfiveten0 = 'screenfiveten1',
+                screenfiveten1 = 'screenfiveten1',
+              },
+              func = function()
+                f:GetRect()
+              end,
+            },
+            getright = {
+              edges = {
+                init = 'init',
+                fiveten = 'fiveten',
+                screen0 = 'screen1',
+                screen1 = 'screen1',
+                screenfiveten0 = 'screenfiveten1',
+                screenfiveten1 = 'screenfiveten1',
+              },
+              func = function()
+                f:GetRight()
+              end,
+            },
+            getsize = {
+              edges = {
+                init = 'init',
+                fiveten = 'fiveten',
+                screen0 = 'screen1',
+                screen1 = 'screen1',
+                screenfiveten0 = 'screenfiveten1',
+                screenfiveten1 = 'screenfiveten1',
+              },
+              func = function()
+                f:GetSize()
+              end,
+            },
+            getsizeignorerect = {
+              loop = true,
+              func = function()
+                f:GetSize(true)
+              end,
+            },
+            gettop = {
+              edges = {
+                init = 'init',
+                fiveten = 'fiveten',
+                screen0 = 'screen1',
+                screen1 = 'screen1',
+                screenfiveten0 = 'screenfiveten1',
+                screenfiveten1 = 'screenfiveten1',
+              },
+              func = function()
+                f:GetTop()
+              end,
+            },
+            getwidth = {
+              edges = {
+                init = 'init',
+                fiveten = 'fiveten',
+                screen0 = 'screen1',
+                screen1 = 'screen1',
+                screenfiveten0 = 'screenfiveten1',
+                screenfiveten1 = 'screenfiveten1',
+              },
+              func = function()
+                f:GetWidth()
+              end,
+            },
+            getwidthignorerect = {
+              loop = true,
+              func = function()
+                f:GetWidth(true)
+              end,
+            },
+            setallpoints = {
+              edges = {
+                init = 'screen0',
+                fiveten = 'screenfiveten0',
+                screen0 = 'screen0',
+                screen1 = 'screen0',
+                screenfiveten0 = 'screenfiveten0',
+                screenfiveten1 = 'screenfiveten0',
+              },
+              func = function()
+                f:SetAllPoints()
+              end,
+            },
+            setsizezerozero = {
+              edges = {
+                init = 'init',
+                fiveten = 'init',
+                screen0 = 'screen0',
+                screen1 = 'screen1',
+                screenfiveten0 = 'screen0',
+                screenfiveten1 = 'screen0',
+              },
+              func = function()
+                f:SetSize(0, 0)
+              end,
+            },
+            setsizefiveten = {
+              edges = {
+                init = 'fiveten',
+                fiveten = 'fiveten',
+                screen0 = 'screenfiveten0',
+                screen1 = 'screenfiveten0',
+                screenfiveten0 = 'screenfiveten0',
+                screenfiveten1 = 'screenfiveten1',
+              },
+              func = function()
+                f:SetSize(5, 10)
+              end,
+            },
+            reset = {
+              to = 'init',
+              func = function()
+                f:ClearAllPoints()
+                f:SetPoint('CENTER')
+                f:ClearPoint('CENTER')
+                f:SetSize(0, 0)
+              end,
+            },
+          }
+          return G.checkStateMachine(states, transitions, 'init')
         end,
       }
     end,
@@ -464,6 +1199,14 @@ G.testsuite.uiobjects = function()
           return G.checkStateMachine(states, transitions, 'init')
         end,
       }
+    end,
+    TextureCoordTranslation = function()
+      if _G.__wowless then
+        return
+      end
+      -- Cannot be created via Lua CreateAnimation.
+      local a = retn(1, CreateFrame('Frame'):CreateAnimationGroup():CreateAnimation('TextureCoordTranslation'))
+      return match(1, 'Animation', a:GetObjectType())
     end,
   }
 end

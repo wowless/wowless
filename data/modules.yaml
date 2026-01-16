@@ -42,14 +42,21 @@ events:
     log:
     loglevel:
     scripts:
+fontinstance:
+  deps:
 funcheck:
   deps:
     log:
     typecheck:
+funtainer:
+  deps:
+    luaobjects:
+    security:
 gencode:
   deps:
     api:
     env:
+    luaobjects:
     typecheck:
     uiobjects:
 loader:
@@ -62,6 +69,7 @@ loader:
     loadercfg:
     log:
     loglevel:
+    points:
     scripts:
     security:
     sqlitedb:
@@ -77,6 +85,9 @@ log:
 loglevel:
   root:
     default: '0'
+luaobjects:
+  deps:
+    datalua:
 macrotext:
   deps:
     security:
@@ -93,6 +104,15 @@ parentkey:
   deps:
 platform:
   deps:
+points:
+  deps:
+    api:
+    env:
+    log:
+    uiobjects:
+region:
+  deps:
+    visibility:
 scripts:
   deps:
     env:
@@ -111,6 +131,8 @@ sqls:
   deps:
     datalua:
     sqlitedb:
+statusbar:
+  deps:
 system:
   deps:
 talents:
@@ -121,18 +143,22 @@ templates:
 time:
   deps:
     log:
+    luaobjects:
     security:
 typecheck:
   deps:
     addons:
     datalua:
     env:
+    luaobjects:
     uiobjects:
     units:
 uiobjectloader:
   deps:
     datalua:
     funcheck:
+    gencode:
+    sqls:
     uiobjects:
     uiobjecttypes:
 uiobjects:

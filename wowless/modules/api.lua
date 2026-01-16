@@ -57,7 +57,7 @@ return function(
     end
   end
 
-  local parentMatch = '$[pP][aA][rR][eE][nN][tT]'
+  local parentMatch = '^$[pP][aA][rR][eE][nN][tT]'
 
   local function ParentSub(name, parent)
     if name and string.match(name, parentMatch) then
@@ -95,6 +95,14 @@ return function(
   end
 
   local function SetParent(obj, parent)
+    local p = parent
+    while p do
+      if obj == p then
+        io.stderr:write('SetParent loop, crashing\n' .. require('wowless.ext').traceback())
+        os.exit(1)
+      end
+      p = p.parent
+    end
     if obj.shown then
       local opv = IsVisible(obj.parent)
       local npv = IsVisible(parent)
@@ -185,7 +193,7 @@ return function(
           SendEvent('LUA_WARNING', 'Unknown frame type: ' .. type)
         end
       end
-      error('CreateFrame: Unknown frame type \'' .. type .. '\'')
+      error('CreateFrame: Unknown frame type \'' .. type .. '\'', 0)
     end
     local tmpls = {}
     for templateName in string.gmatch(templateNames or '', '[^, ]+') do

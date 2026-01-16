@@ -96,17 +96,16 @@ local specDefault = (function()
       return valstruct(ty.structure)
     end
     if ty.enum then
-      local e = assert(globals.Enum[ty.enum], 'missing enum ' .. ty.enum)
-      -- Unfortunately we cannot rely on the existence of a Meta enum,
-      -- so we go fishing for the minimum value manually.
-      local x
-      for _, v in pairs(e) do
-        x = (not x or v < x) and v or x
-      end
-      return valstr(x)
+      assert(globals.Enum[ty.enum], 'missing enum ' .. ty.enum)
+      local meta = assert(globals.Enum[ty.enum .. 'Meta'], 'missing meta enum for ' .. ty.enum)
+      local min = assert(meta.MinValue, 'missing MinValue in meta for ' .. ty.enum)
+      return valstr(min)
     end
     if ty.uiobject then
       return ('gencode.CreateUIObject(%q).luarep'):format(ty.uiobject:lower())
+    end
+    if ty.luaobject then
+      return ('gencode.CreateLuaObject(%q).luarep'):format(ty.luaobject)
     end
     error('unexpected type: ' .. require('pl.pretty').write(ty))
   end
@@ -208,6 +207,7 @@ local function mkapi(apicfg)
         outstride = apicfg.outstride,
         sqls = impl.sqls,
         src = impl.src,
+        usage = apicfg.usage,
       }
     end
   elseif apicfg.stubnothing then
@@ -233,6 +233,7 @@ local function mkapi(apicfg)
       inputs = apicfg.inputs,
       instride = apicfg.instride,
       modules = { 'gencode' },
+      secureonly = apicfg.secureonly,
     }
   end
 end
@@ -259,6 +260,7 @@ for k, v in pairs(parseYaml('data/products/' .. product .. '/events.yaml')) do
     table.insert(t, specDefault(f))
   end
   events[k] = {
+    callback = v.callback,
     payload = v.payload,
     stride = v.stride,
     stub = 'return ' .. table.concat(t, ','),
@@ -283,8 +285,11 @@ local function mkuiobjectinit(k)
       if fv.init ~= nil then
         init[fk] = valstr(fv.init)
       elseif fv.type == 'hlist' then
-        init[fk] = 'hlist()'
+        init[fk] = 'gencode.hlist()'
       end
+    end
+    if k == 'EditBox' or k == 'MessageFrame' then -- TODO unhack
+      init.fontObject = 'gencode.CreateUIObject(\'font\')'
     end
     uiobjectinits[k] = init
   end
@@ -299,10 +304,14 @@ local uiobjectimplimplmakers = {
         table.insert(modules, m)
       end
     end
+    for _, sql in ipairs(impl.sqls or {}) do
+      ensuresql(sql)
+    end
     local src = 'data/uiobjects/' .. k .. '.lua'
     return {
       impl = readFile(src),
       modules = modules,
+      sqls = impl.sqls,
       src = '@./' .. src,
     }
   end,
@@ -437,13 +446,14 @@ local uiobjectimplmakers = {
       modules = implimpl.modules,
       outputs = mv.outputs,
       outstride = mv.outstride,
+      sqls = implimpl.sqls,
       src = implimpl.src,
     }
   end,
 }
 local uiobjects = {}
 for k, v in pairs(uiobjectdata) do
-  local constructor = { 'local hlist=...;return function()return{' }
+  local constructor = { 'local gencode=...;return function()return{' }
   for fk, fv in sorted(mkuiobjectinit(k)) do
     table.insert(constructor, ('%s=%s,'):format(fk, fv))
   end
@@ -466,6 +476,39 @@ for k, v in pairs(uiobjectdata) do
   }
 end
 
+local luaobjects = {}
+do
+  local luaobjectdata = parseYaml('data/products/' .. product .. '/luaobjects.yaml')
+  local function pop(k)
+    if luaobjects[k] then
+      return
+    end
+    local methods = {}
+    local v = luaobjectdata[k]
+    if v.inherits then
+      pop(v.inherits)
+      for mk in pairs(luaobjects[v.inherits].methods) do
+        methods[mk] = true
+      end
+    end
+    for mk in pairs(v.methods) do
+      methods[mk] = true
+    end
+    luaobjects[k] = {
+      impl = v.impl,
+      methods = methods,
+    }
+  end
+  for k in pairs(luaobjectdata) do
+    pop(k)
+  end
+  for k, v in pairs(luaobjectdata) do
+    if v.virtual then
+      luaobjects[k] = nil
+    end
+  end
+end
+
 local data = {
   apis = apis,
   build = parseYaml('data/products/' .. product .. '/build.yaml'),
@@ -473,6 +516,7 @@ local data = {
   cvars = cvars,
   events = events,
   globals = globals,
+  luaobjects = luaobjects,
   product = product,
   sqls = sqls,
   structures = structures,

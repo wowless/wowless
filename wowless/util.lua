@@ -1,5 +1,14 @@
 local mixin = require('wowless.mixin').Mixin
 
+local plgetallfiles = require('pl.dir').getallfiles
+local function getfiles(d)
+  local t = {}
+  for i, v in ipairs(plgetallfiles(d)) do
+    t[i] = v:gsub('\\', '/')
+  end
+  return t
+end
+
 local readfile = (function()
   local lfs = require('lfs')
   local function dirtab(dir, t)
@@ -77,6 +86,7 @@ local function tset(t, s, v)
 end
 
 return {
+  getfiles = getfiles,
   mixin = mixin,
   readfile = readfile,
   tget = tget,

@@ -7,61 +7,56 @@ type:
           aliased_in_framexml:
             type:
               mapof:
-                key: string
+                key:
+                  ref:
+                    negative: true
+                    schema: api
                 value:
-                  record:
+                  ref:
+                    schema: api
           capsule:
             type:
               record:
                 apinamespaces:
                   type:
-                    mapof:
-                      key: string
-                      value:
-                        record:
+                    setof: string
                 enums:
                   type:
-                    mapof:
-                      key:
-                        ref: enum
-                      value:
-                        record:
+                    setof:
+                      ref:
+                        schema: enum
                 globalapis:
                   type:
-                    mapof:
-                      key:
-                        ref: api
-                      value:
-                        record:
+                    setof:
+                      ref:
+                        schema: api
           enum_values_set_in_framexml:
             type:
               mapof:
                 key:
-                  ref: enum
+                  ref:
+                    schema: enum
                 value:
-                  mapof:
-                    key: string
-                    value: number
+                  setof: string
+          enums_set_in_framexml:
+            type:
+              setof:
+                ref:
+                  negative: true
+                  schema: enum
           hooked_globals:
             type:
-              mapof:
-                key: string
-                value:
-                  record:
+              setof: string
           ignore_cvar_value:
             type:
-              mapof:
-                key:
-                  ref: cvar
-                value:
-                  record:
+              setof:
+                ref:
+                  schema: cvar
           overwritten_apis:
             type:
-              mapof:
-                key:
-                  ref: api
-                value:
-                  record:
+              setof:
+                ref:
+                  schema: api
     modules:
       type:
         record:
@@ -70,21 +65,29 @@ type:
               record:
                 GetAddOnInfo_noUpdateAvailable:
                   type: boolean
+          luaobjects:
+            type:
+              record:
+                tostring_metamethod:
+                  type: boolean
     runner:
       type:
         record:
+          skip_bindings:
+            type:
+              mapof:
+                key: string
+                value: string
           skip_events:
             type:
               mapof:
                 key:
-                  ref: event
+                  ref:
+                    schema: event
                 value: string
           skip_slashcmds:
             type:
-              mapof:
-                key: string
-                value:
-                  record:
+              setof: string
     runtime:
       type:
         record:
@@ -94,7 +97,4 @@ type:
             type: boolean
           warners:
             type:
-              mapof:
-                key: string
-                value:
-                  record:
+              setof: string

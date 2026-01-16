@@ -4,6 +4,8 @@ type:
     key: string
     value:
       record:
+        callback:
+          type: boolean
         payload:
           required: true
           type:

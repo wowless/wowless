@@ -1,7 +1,6 @@
-SELECT
-    ID
+SELECT ID
 FROM
-    TraitNode
+  TraitNode
 WHERE
-    TraitTreeID = ?1
+  TraitTreeID = ?1
 ORDER BY ID

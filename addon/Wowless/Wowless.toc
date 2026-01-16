@@ -1,13 +1,13 @@
 ## Dependencies: WowlessData
-## Interface-Retail: 90105
-## Interface-Classic: 11401
-## Interface-BCC: 20503
+## Interface: 120000
 ## SavedVariables: WowlessLastTestFailures
 ## Notes: WoW client unit tests
 util.lua
 init.lua
 framework.lua
 statemachine.lua
+funtainer.lua
+luaobjects.lua
 test.xml
 generated.lua
 uiobjects.lua

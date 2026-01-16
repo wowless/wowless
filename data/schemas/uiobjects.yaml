@@ -29,11 +29,9 @@ type:
         inherits:
           required: true
           type:
-            mapof:
-              key:
-                ref: uiobject
-              value:
-                record:
+            setof:
+              ref:
+                schema: uiobject
         methods:
           required: true
           type:
@@ -68,7 +66,8 @@ type:
                             shown:
                               type: string
                         uiobjectimpl:
-                          ref: uiobjectimpl
+                          ref:
+                            schema: uiobjectimpl
                   inputs:
                     type:
                       sequenceof:
@@ -119,11 +118,9 @@ type:
           type: string
         scripts:
           type:
-            mapof:
-              key:
-                ref: scripttype
-              value:
-                record:
+            setof:
+              ref:
+                schema: scripttype
         singleton:
           type: boolean
         virtual:

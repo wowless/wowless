@@ -34,6 +34,19 @@ static int tactcall(lua_State *L) {
   return 1;
 }
 
+static int tactrootnamehashes(lua_State *L) {
+  tactless **u = luaL_checkudata(L, 1, "tactless");
+  const struct tactless_root *r = tactless_get_root(*u);
+  lua_createtable(L, r->num_names, 0);
+  for (int i = 0; i < r->num_names; ++i) {
+    char hex[17];
+    tactless_namehash_to_hex(r->names[i].name, hex);
+    lua_pushlstring(L, hex, 16);
+    lua_rawseti(L, -2, i + 1);
+  }
+  return 1;
+}
+
 static int tactbuild(lua_State *L) {
   char hash[33];
   int major, minor, patch, build;
@@ -49,6 +62,15 @@ static int tactbuild(lua_State *L) {
   return 5;
 }
 
+static int tactnamehash(lua_State *L) {
+  unsigned char hash[8];
+  tactless_name_to_namehash(luaL_checkstring(L, 1), hash);
+  char hex[17];
+  tactless_namehash_to_hex(hash, hex);
+  lua_pushlstring(L, hex, 16);
+  return 1;
+}
+
 static int tactgc(lua_State *L) {
   tactless **u = luaL_checkudata(L, 1, "tactless");
   tactless_close(*u);
@@ -61,6 +83,10 @@ int luaopen_tactless(lua_State *L) {
     lua_setfield(L, -2, "__call");
     lua_pushcfunction(L, tactgc);
     lua_setfield(L, -2, "__gc");
+    lua_newtable(L);
+    lua_pushcfunction(L, tactrootnamehashes);
+    lua_setfield(L, -2, "rootnamehashes");
+    lua_setfield(L, -2, "__index");
     lua_pushstring(L, "tactless");
     lua_setfield(L, -2, "__metatable");
   }
@@ -71,6 +97,8 @@ int luaopen_tactless(lua_State *L) {
     lua_newtable(L);
     lua_pushcfunction(L, tactbuild);
     lua_setfield(L, -2, "build");
+    lua_pushcfunction(L, tactnamehash);
+    lua_setfield(L, -2, "namehash");
     lua_setfield(L, -2, "__index");
     lua_pushstring(L, "tactlesslib");
     lua_setfield(L, -2, "__metatable");

@@ -3,7 +3,8 @@ type:
   record:
     impl:
       type:
-        ref: impl
+        ref:
+          schema: impl
     inputs:
       type:
         sequenceof:
@@ -48,7 +49,11 @@ type:
           linux: tag
           mac: tag
           windows: tag
+    secureonly:
+      type: boolean
     stubnothing:
       type: boolean
     stuboutstrides:
       type: number
+    usage:
+      type: string

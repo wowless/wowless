@@ -1,6 +1,6 @@
 addon:
   aliased_in_framexml:
-    C_LFGInfo.IsPremadeGroupEnabled:
+    C_LFGInfo.IsPremadeGroupEnabled: C_LFGList.IsPremadeGroupFinderEnabled
   capsule:
     apinamespaces:
       C_AuthChallenge:
@@ -9,21 +9,22 @@ addon:
       C_WowTokenSecure:
     enums:
       BattlepayBannerType:
-      BattlepayDisplayFlag:
       BattlepayGroupDisplayType:
       BattlepayProductDecorator:
-      BattlepayProductGroupFlag:
       PurchaseEligibility:
       StoreError:
-      VasError:
       VasServiceType:
+      VasTransactionPurchaseResult:
     globalapis:
       C_Macro.SetMacroExecuteLineCallback:
       CreateForbiddenFrame:
       loadstring_untainted:
   enum_values_set_in_framexml:
     SeasonID:
-      Placeholder: 2
+      Placeholder:
+  enums_set_in_framexml:
+    QuestPOIQuestTypes:
+    Unitsex:
   hooked_globals:
     FauxScrollFrame_Update:
     SetItemRef:
@@ -34,7 +35,6 @@ addon:
     graphicsParticleDensity:
     graphicsQuality:
     graphicsShadowQuality:
-    graphicsSpellDensity:
     graphicsSSAO:
     graphicsTextureResolution:
     mouseSpeed:
@@ -44,7 +44,6 @@ addon:
     raidGraphicsParticleDensity:
     RAIDgraphicsQuality:
     raidGraphicsShadowQuality:
-    raidGraphicsSpellDensity:
     raidGraphicsSSAO:
     raidGraphicsTextureResolution:
     RenderScale:
@@ -55,6 +54,9 @@ addon:
     C_Traits.GetConditionInfo:
     C_Traits.GetEntryInfo:
     C_Traits.GetTreeInfo:
+modules:
+  addons:
+    GetAddOnInfo_noUpdateAvailable: true
 runner:
   skip_events:
     AJ_PVP_RBG_ACTION: missing HonorFrame_SetType

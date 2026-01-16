@@ -38,6 +38,7 @@ local ptablemap = {
     local t = {}
     for k, v in pairs(perproduct(p, 'events')) do
       t[k] = {
+        callback = v.callback or false,
         payload = #v.payload,
         registerable = true,
       }
@@ -46,6 +47,7 @@ local ptablemap = {
       for k in pairs(perproduct(product, 'events')) do
         if not t[k] then
           t[k] = {
+            callback = false,
             payload = -1,
             registerable = false,
           }
@@ -91,6 +93,36 @@ local ptablemap = {
     end
     return 'ImplTests', t
   end,
+  luaobjects = function(p)
+    local raw = perproduct(p, 'luaobjects')
+    local t = {}
+    local function pop(k)
+      if t[k] then
+        return
+      end
+      local v = raw[k]
+      local methods = {}
+      if v.inherits then
+        pop(v.inherits)
+        for mk in pairs(t[v.inherits]) do
+          methods[mk] = true
+        end
+      end
+      for mk in pairs(v.methods or {}) do
+        methods[mk] = true
+      end
+      t[k] = methods
+    end
+    for k in pairs(raw) do
+      pop(k)
+    end
+    for k, v in pairs(raw) do
+      if v.virtual then
+        t[k] = nil
+      end
+    end
+    return 'LuaObjects', t
+  end,
   namespaceapis = function(p)
     local platform = dofile('build/cmake/runtime/platform.lua')
     local impls = readyaml('data/impl.yaml')
@@ -98,7 +130,7 @@ local ptablemap = {
     local apiNamespaces = {}
     for k, api in pairs(perproduct(p, 'apis')) do
       local dot = k:find('%.')
-      if dot and (not api.platform or api.platform == platform) then
+      if dot and (not api.platform or api.platform == platform) and not api.secureonly then
         local name = k:sub(1, dot - 1)
         apiNamespaces[name] = apiNamespaces[name] or { methods = {} }
         apiNamespaces[name].methods[k:sub(dot + 1)] = api
@@ -121,17 +153,20 @@ local ptablemap = {
   uiobjectapis = function(p)
     local uiobjects = perproduct(p, 'uiobjects')
     local allscripts = readyaml('data/scripttypes.yaml')
-    local inhrev = {}
-    for k, cfg in pairs(uiobjects) do
-      for inh in pairs(cfg.inherits) do
-        inhrev[inh] = inhrev[inh] or {}
-        table.insert(inhrev[inh], k)
-      end
+    for _, cfg in pairs(uiobjects) do
       cfg.fieldinitoverrides = cfg.fieldinitoverrides or {}
     end
-    local objTypes = {}
     for k, cfg in pairs(uiobjects) do
-      objTypes[k] = cfg.objectType or k
+      cfg.isa = {}
+      for k2, cfg2 in pairs(uiobjects) do
+        cfg.isa[k2] = false
+        if cfg2.objectType then
+          cfg.isa[cfg2.objectType] = false
+        end
+      end
+      if not cfg.virtual or cfg.objectType then
+        cfg.isa[cfg.objectType or k] = true
+      end
     end
     local function fixup(cfg)
       for inhname in pairs(cfg.inherits) do
@@ -152,21 +187,16 @@ local ptablemap = {
             cfg.scripts[n] = {}
           end
         end
+        for ik, iv in pairs(inh.isa) do
+          if iv then
+            cfg.isa[ik] = true
+          end
+        end
       end
     end
     for _, cfg in pairs(uiobjects) do
       fixup(cfg)
     end
-    local frametypes = {}
-    local function addtype(ty)
-      if not frametypes[ty] then
-        frametypes[ty] = true
-        for _, inh in ipairs(inhrev[ty] or {}) do
-          addtype(inh)
-        end
-      end
-    end
-    addtype('Frame')
     local t = {}
     for k, v in pairs(uiobjects) do
       local ft = {}
@@ -195,19 +225,11 @@ local ptablemap = {
         end
       end
       -- TODO remove these super duper field hacks
-      ft.bottom = nil
-      ft.height = nil
-      ft.left = nil
       ft.parent = nil
-      ft.top = nil
-      ft.right = nil
-      ft.width = nil
-      if k == 'EditBox' then
-        ft.shown.init = false
-      elseif k == 'Font' then
-        ft.name.init = 'WowlessFont1'
-      elseif k == 'Minimap' then
+      if v.singleton then
         ft = {}
+      elseif k == 'EditBox' then
+        ft.shown.init = false
       end
       local st = {}
       if mt.HasScript then
@@ -217,10 +239,11 @@ local ptablemap = {
       end
       t[k] = {
         fields = ft,
-        frametype = not not frametypes[k],
+        isa = v.isa,
         methods = mt,
-        objtype = objTypes[k],
+        objtype = v.objectType or k,
         scripts = st,
+        singleton = v.singleton,
         virtual = v.virtual,
       }
     end
@@ -255,6 +278,7 @@ local function doit(k, p)
     end
     table.sort(tt)
     table.insert(tt, 1, 'product.lua')
+    table.insert(tt, 1, '## Interface: ' .. perproduct(p, 'build').tocversion)
     table.insert(tt, '')
     return table.concat(tt, '\n')
   else

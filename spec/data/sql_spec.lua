@@ -5,7 +5,7 @@ describe('sql', function()
       expected['data/sql/' .. k .. '.sql'] = true
     end
     local actual = {}
-    for _, f in ipairs(require('pl.dir').getfiles('data/sql')) do
+    for _, f in ipairs(require('wowless.util').getfiles('data/sql')) do
       actual[f] = true
     end
     assert.same(expected, actual)
@@ -18,6 +18,11 @@ describe('sql', function()
     local actual = {}
     for _, v in pairs(require('build.data.impl')) do
       for _, sql in ipairs(v.impl and v.impl.sqls or { v.directsql }) do
+        actual[sql] = true
+      end
+    end
+    for _, v in pairs(require('build.data.uiobjectimpl')) do
+      for _, sql in ipairs(v.luafile and v.luafile.sqls or {}) do
         actual[sql] = true
       end
     end

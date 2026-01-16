@@ -1,0 +1,20 @@
+name: luaobjects
+type:
+  mapof:
+    key: string
+    value:
+      record:
+        impl:
+          type:
+            ref:
+              schema: module
+        inherits:
+          type:
+            ref:
+              schema: luaobject
+        methods:
+          required: true
+          type:
+            setof: string
+        virtual:
+          type: boolean

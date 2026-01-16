@@ -230,6 +230,9 @@ Actor:
       - default: false
         name: holdBowString
         type: boolean
+      - name: customRaceID
+        nilable: true
+        type: number
       outputs:
       - name: success
         type: boolean
@@ -264,6 +267,9 @@ Actor:
       - default: true
         name: usePlayerNativeForm
         type: boolean
+      - name: customRaceID
+        nilable: true
+        type: number
       outputs:
       - name: success
         type: boolean
@@ -628,9 +634,9 @@ AnimationGroup:
         uiobjectimpl: AnimationGroup/GetAnimations
       inputs:
       outputs:
-      - name: scriptObject
+      - name: anims
         type:
-          uiobject: UIObject
+          uiobject: Animation
       outstride: 1
     GetAnimationSpeedMultiplier:
       impl:
@@ -1053,13 +1059,13 @@ Button:
       impl:
         uiobjectimpl: Button/RegisterForClicks
       inputs:
-      - name: button
+      - name: buttons
         type: string
       instride: 1
       outputs:
     RegisterForMouse:
       inputs:
-      - name: button
+      - name: buttons
         type: string
       instride: 1
       outputs:
@@ -1652,6 +1658,12 @@ ColorSelect:
     OnColorSelect:
 ControlPoint:
   fields:
+    offsetX:
+      init: 0
+      type: number
+    offsetY:
+      init: 0
+      type: number
     order:
       init: 99
       type: number
@@ -1659,6 +1671,10 @@ ControlPoint:
     ParentedObject:
   methods:
     GetOffset:
+      impl:
+        getter:
+        - name: offsetX
+        - name: offsetY
       inputs:
       outputs:
       - name: offsetX
@@ -1674,6 +1690,10 @@ ControlPoint:
       - name: order
         type: number
     SetOffset:
+      impl:
+        setter:
+        - name: offsetX
+        - name: offsetY
       inputs:
       - name: offsetX
         type: number
@@ -1746,6 +1766,16 @@ Cooldown:
       outputs:
       - name: edgeScale
         type: number
+    GetHideCountdownNumbers:
+      inputs:
+      outputs:
+      - name: hideNumbers
+        type: boolean
+    GetMinimumCountdownDuration:
+      inputs:
+      outputs:
+      - name: milliseconds
+        type: number
     GetReverse:
       inputs:
       outputs:
@@ -1759,6 +1789,11 @@ Cooldown:
       outputs:
       - name: rotationRadians
         type: number
+    GetUseAuraDisplayTime:
+      inputs:
+      outputs:
+      - name: useAuraDisplayTime
+        type: boolean
     IsPaused:
       inputs:
       outputs:
@@ -1843,6 +1878,18 @@ Cooldown:
         name: drawSwipe
         type: boolean
       outputs:
+    SetEdgeColor:
+      inputs:
+      - name: colorR
+        type: number
+      - name: colorG
+        type: number
+      - name: colorB
+        type: number
+      - name: a
+        nilable: true
+        type: number
+      outputs:
     SetEdgeScale:
       inputs:
       - name: scale
@@ -1870,6 +1917,11 @@ Cooldown:
       - default: false
         name: hideNumbers
         type: boolean
+      outputs:
+    SetMinimumCountdownDuration:
+      inputs:
+      - name: milliseconds
+        type: number
       outputs:
     SetReverse:
       inputs:
@@ -1922,6 +1974,12 @@ Cooldown:
       - name: high
         type:
           structure: vector2
+      outputs:
+    SetUseAuraDisplayTime:
+      inputs:
+      - default: false
+        name: useAuraDisplayTime
+        type: boolean
       outputs:
     SetUseCircularEdge:
       inputs:
@@ -2403,11 +2461,6 @@ EditBox:
     SetFocus:
       inputs:
       outputs:
-    SetFontStringIgnoreParentAlpha:
-      inputs:
-      - name: ignoreParentAlpha
-        type: boolean
-      outputs:
     SetHighlightColor:
       inputs:
       - name: colorR
@@ -2748,6 +2801,11 @@ Font:
       outputs:
       - name: alpha
         type: number
+    GetFontHeight:
+      inputs:
+      outputs:
+      - name: height
+        type: number
     GetFontObjectForAlphabet:
       inputs:
       - name: alphabet
@@ -2772,6 +2830,10 @@ Font:
       outputs:
 FontInstance:
   fields:
+    fontObject:
+      nilable: true
+      type:
+        uiobject: Font
     indentedWordWrap:
       init: false
       type: boolean
@@ -2872,6 +2934,8 @@ FontInstance:
         type: number
     SetFont:
     SetFontObject:
+      impl:
+        uiobjectimpl: FontInstance/SetFontObject
       inputs:
       - name: font
         type:
@@ -2984,6 +3048,9 @@ FontString:
       outputs:
       - name: wrap
         type: boolean
+    ClearAlphaGradient:
+      inputs:
+      outputs:
     FindCharacterIndexAtCoordinate:
       inputs:
       - name: x
@@ -2996,10 +3063,25 @@ FontString:
         type: number
       - name: inside
         type: boolean
+    GetAlphaGradient:
+      inputs:
+      outputs:
+      - name: start
+        type: number
+      - name: length
+        type: number
     GetFieldSize:
       inputs:
       outputs:
       - name: fieldSize
+        type: number
+    GetFontHeight:
+      inputs:
+      - default: true
+        name: calculated
+        type: boolean
+      outputs:
+      - name: height
         type: number
     GetLineHeight:
       inputs:
@@ -3069,6 +3151,9 @@ FontString:
       outputs:
       - name: isTruncated
         type: boolean
+    OnColorsUpdated:
+      inputs:
+      outputs:
     SetAlphaGradient:
       inputs:
       - name: start
@@ -3082,6 +3167,11 @@ FontString:
       inputs:
       - name: fixedColor
         type: boolean
+      outputs:
+    SetFontHeight:
+      inputs:
+      - name: height
+        type: number
       outputs:
     SetFormattedText:
       inputs:
@@ -3231,6 +3321,19 @@ Frame:
       outputs:
       - name: canChangeAttributes
         type: boolean
+    ClearAlphaGradient:
+      inputs:
+      outputs:
+    ClearAttribute:
+      inputs:
+      - name: attributeName
+        type: string
+      outputs:
+      - name: cleared
+        type: boolean
+    ClearAttributes:
+      inputs:
+      outputs:
     CreateFontString:
       impl:
         uiobjectimpl: Frame/CreateFontString
@@ -3369,13 +3472,15 @@ Frame:
       inputs:
       - name: attributeName
         type: string
-      - name: unpackedPrimitiveType
+      - name: arguments
+        nilable: true
         type: string
       instride: 1
       outputs:
       - name: success
         type: boolean
-      - name: unpackedPrimitiveType
+      - name: returns
+        nilable: true
         type: string
       outstride: 1
     GetAttribute:
@@ -3402,9 +3507,10 @@ Frame:
         uiobjectimpl: Frame/GetChildren
       inputs:
       outputs:
-      - name: scriptObject
+      - name: children
+        nilable: true
         type:
-          uiobject: UIObject
+          uiobject: Frame
       outstride: 1
     GetClampRectInsets:
       inputs:
@@ -3462,6 +3568,14 @@ Frame:
       - name: strata
         type:
           stringenum: FrameStrata
+    GetHighestFrameLevel:
+      inputs:
+      - default: false
+        name: iterateAllChildren
+        type: boolean
+      outputs:
+      - name: frameLevel
+        type: number
     GetHitRectInsets:
       impl:
         getter:
@@ -3527,9 +3641,9 @@ Frame:
         uiobjectimpl: Frame/GetRegions
       inputs:
       outputs:
-      - name: scriptObject
+      - name: regions
         type:
-          uiobject: UIObject
+          uiobject: Region
       outstride: 1
     GetResizeBounds:
       impl:
@@ -3553,6 +3667,11 @@ Frame:
       outputs:
       - name: window
         type: nil
+    HasAlphaGradient:
+      inputs:
+      outputs:
+      - name: hasAlphaGradient
+        type: boolean
     HasFixedFrameLevel:
       impl:
         getter:
@@ -3606,6 +3725,11 @@ Frame:
         nilable: true
         type: string
       outstride: 1
+    IsFrameBuffer:
+      inputs:
+      outputs:
+      - name: isFrameBuffer
+        type: boolean
     IsGamePadButtonEnabled:
       inputs:
       outputs:
@@ -3615,6 +3739,11 @@ Frame:
       inputs:
       outputs:
       - name: enabled
+        type: boolean
+    IsHighlightLocked:
+      inputs:
+      outputs:
+      - name: locked
         type: boolean
     IsKeyboardEnabled:
       inputs:
@@ -3686,7 +3815,7 @@ Frame:
         type: boolean
     RegisterForDrag:
       inputs:
-      - name: button
+      - name: buttons
         type: string
       instride: 1
       outputs:
@@ -3713,6 +3842,14 @@ Frame:
       - default: 0.5
         name: y
         type: number
+      outputs:
+    SetAlphaGradient:
+      inputs:
+      - name: index
+        type: number
+      - name: gradient
+        type:
+          structure: vector2
       outputs:
     SetAttribute:
       impl:
@@ -4062,6 +4199,7 @@ GameTooltip:
       - name: numLines
         type: number
     ResetSecondaryCompareItem:
+    SetAchievementByID:
     SetAction:
     SetAnchorType:
     SetAuctionItem:
@@ -4073,6 +4211,7 @@ GameTooltip:
     SetCompareItem:
     SetCraftItem:
     SetCraftSpell:
+    SetCurrencyByID:
     SetCurrencyToken:
     SetCurrencyTokenByID:
     SetEngravingRune:
@@ -4135,6 +4274,7 @@ GameTooltip:
     SetUnitAura:
     SetUnitBuff:
     SetUnitDebuff:
+    SetUpgradeItem:
   scripts:
     OnTooltipAddMoney:
     OnTooltipCleared:
@@ -4239,6 +4379,7 @@ Line:
         type:
           stringenum: FramePoint
       - name: relativeTo
+        nilable: true
         type:
           uiobject: Region
       - name: offsetX
@@ -4260,6 +4401,7 @@ Line:
         type:
           stringenum: FramePoint
       - name: relativeTo
+        nilable: true
         type:
           uiobject: Region
       - name: offsetX
@@ -5110,6 +5252,11 @@ ModelScene:
       - name: index
         type: number
       outputs:
+    GetAllowOverlappedModels:
+      inputs:
+      outputs:
+      - name: allowOverlappedModels
+        type: boolean
     GetCameraFarClip:
       impl:
         getter:
@@ -5290,6 +5437,11 @@ ModelScene:
         type: number
       - name: depth
         type: number
+    SetAllowOverlappedModels:
+      inputs:
+      - name: allowOverlappedModels
+        type: boolean
+      outputs:
     SetCameraFarClip:
       impl:
         setter:
@@ -5644,6 +5796,7 @@ ParentedObjectBase:
         name: clearOtherKeys
         type: boolean
       outputs:
+  objectType: Object
   virtual: true
 Path:
   fields:
@@ -5676,9 +5829,9 @@ Path:
         uiobjectimpl: Path/GetControlPoints
       inputs:
       outputs:
-      - name: scriptObject
+      - name: points
         type:
-          uiobject: UIObject
+          uiobject: ControlPoint
       outstride: 1
     GetCurveType:
       impl:
@@ -5878,6 +6031,9 @@ Region:
     bottom:
       init: 0
       type: number
+    collapsesLayout:
+      init: false
+      type: boolean
     explicitlyProtected:
       init: false
       type: boolean
@@ -5924,12 +6080,24 @@ Region:
       outputs:
       - name: canChange
         type: boolean
+    CanPropagateMouseClicks:
+      inputs:
+      outputs:
+      - name: canPropagate
+        type: boolean
+    CanPropagateMouseMotion:
+      inputs:
+      outputs:
+      - name: canPropagate
+        type: boolean
     ClearAllPoints:
       impl:
         uiobjectimpl: Region/ClearAllPoints
       inputs:
       outputs:
     ClearPoint:
+      impl:
+        uiobjectimpl: Region/ClearPoint
       inputs:
       - name: point
         type:
@@ -5938,7 +6106,13 @@ Region:
     ClearPointsOffset:
       inputs:
       outputs:
+    ClearScripts:
+      inputs:
+      outputs:
     CollapsesLayout:
+      impl:
+        getter:
+        - name: collapsesLayout
       inputs:
       outputs:
       - name: collapsesLayout
@@ -5985,15 +6159,15 @@ Region:
         uiobjectimpl: Region/GetAnimationGroups
       inputs:
       outputs:
-      - name: scriptObject
+      - name: groups
         type:
-          uiobject: UIObject
+          uiobject: AnimationGroup
       outstride: 1
     GetBottom:
       impl:
-        getter:
-        - name: bottom
+        uiobjectimpl: Region/GetBottom
       inputs:
+      mayreturnnothing: true
       outputs:
       - name: bottom
         type: number
@@ -6016,17 +6190,19 @@ Region:
         type: number
     GetHeight:
       impl:
-        getter:
-        - name: height
+        uiobjectimpl: Region/GetHeight
       inputs:
+      - default: false
+        name: ignoreRect
+        type: boolean
       outputs:
       - name: height
         type: number
     GetLeft:
       impl:
-        getter:
-        - name: left
+        uiobjectimpl: Region/GetLeft
       inputs:
+      mayreturnnothing: true
       outputs:
       - name: left
         type: number
@@ -6064,6 +6240,8 @@ Region:
       - name: offsetY
         type: number
     GetPointByName:
+      impl:
+        uiobjectimpl: Region/GetPointByName
       inputs:
       - name: point
         type:
@@ -6077,6 +6255,7 @@ Region:
         type:
           stringenum: FramePoint
       - name: relativeTo
+        nilable: true
         type:
           uiobject: Region
       - name: relativePoint
@@ -6088,16 +6267,13 @@ Region:
         type: number
     GetRect:
       impl:
-        getter:
-        - name: bottom
-        - name: left
-        - name: width
-        - name: height
+        uiobjectimpl: Region/GetRect
       inputs:
+      mayreturnnothing: true
       outputs:
-      - name: bottom
-        type: number
       - name: left
+        type: number
+      - name: bottom
         type: number
       - name: width
         type: number
@@ -6127,10 +6303,11 @@ Region:
         type: number
     GetSize:
       impl:
-        getter:
-        - name: width
-        - name: height
+        uiobjectimpl: Region/GetSize
       inputs:
+      - default: false
+        name: ignoreRect
+        type: boolean
       outputs:
       - name: width
         type: number
@@ -6151,9 +6328,11 @@ Region:
         type: number
     GetWidth:
       impl:
-        getter:
-        - name: width
+        uiobjectimpl: Region/GetWidth
       inputs:
+      - default: false
+        name: ignoreRect
+        type: boolean
       outputs:
       - name: width
         type: number
@@ -6171,6 +6350,8 @@ Region:
       - name: isRestricted
         type: boolean
     IsCollapsed:
+      impl:
+        uiobjectimpl: Region/IsCollapsed
       inputs:
       outputs:
       - name: isCollapsed
@@ -6264,6 +6445,8 @@ Region:
       - name: isProtectedExplicitly
         type: boolean
     IsRectValid:
+      impl:
+        uiobjectimpl: Region/IsRectValid
       inputs:
       outputs:
       - name: isValid
@@ -6274,14 +6457,16 @@ Region:
       manualinputs: true
       outputs:
     SetCollapsesLayout:
+      impl:
+        setter:
+        - name: collapsesLayout
       inputs:
       - name: collapsesLayout
         type: boolean
       outputs:
     SetHeight:
       impl:
-        setter:
-        - name: height
+        uiobjectimpl: Region/SetHeight
       inputs:
       - name: height
         type: number
@@ -6322,7 +6507,7 @@ Region:
       outputs:
     SetPassThroughButtons:
       inputs:
-      - name: button
+      - name: buttons
         type: string
       instride: 1
       outputs:
@@ -6330,6 +6515,13 @@ Region:
       impl:
         uiobjectimpl: Region/SetPoint
       manualinputs: true
+      outputs:
+    SetPointsOffset:
+      inputs:
+      - name: x
+        type: number
+      - name: y
+        type: number
       outputs:
     SetPropagateMouseClicks:
       inputs:
@@ -6343,9 +6535,7 @@ Region:
       outputs:
     SetSize:
       impl:
-        setter:
-        - name: width
-        - name: height
+        uiobjectimpl: Region/SetSize
       inputs:
       - name: x
         type: number
@@ -6354,15 +6544,22 @@ Region:
       outputs:
     SetWidth:
       impl:
-        setter:
-        - name: width
+        uiobjectimpl: Region/SetWidth
       inputs:
       - name: width
         type: number
       outputs:
+    ShouldButtonPassThrough:
+      inputs:
+      - name: button
+        type: string
+      outputs:
+      - name: shouldPassThrough
+        type: boolean
     StopAnimating:
       inputs:
       outputs:
+  objectType: Region
   virtual: true
 RegionBase:
   fields:
@@ -6753,7 +6950,6 @@ SimpleHTML:
       init: '|H%s|h%s|h'
       type: string
   inherits:
-    FontInstance:
     Frame:
   methods:
     GetContentHeight:
@@ -6772,7 +6968,6 @@ SimpleHTML:
         type: number
       - name: flags
         type: string
-      override: true
     GetFontObject:
       inputs:
       - name: textType
@@ -6782,7 +6977,6 @@ SimpleHTML:
         nilable: true
         type:
           uiobject: Font
-      override: true
     GetHyperlinkFormat:
       impl:
         getter:
@@ -6798,7 +6992,6 @@ SimpleHTML:
       outputs:
       - name: wordWrap
         type: boolean
-      override: true
     GetJustifyH:
       inputs:
       - name: textType
@@ -6807,7 +7000,6 @@ SimpleHTML:
       - name: justifyH
         type:
           stringenum: JustifyHorizontal
-      override: true
     GetJustifyV:
       inputs:
       - name: textType
@@ -6816,7 +7008,6 @@ SimpleHTML:
       - name: justifyV
         type:
           stringenum: JustifyVertical
-      override: true
     GetShadowColor:
       inputs:
       - name: textType
@@ -6830,7 +7021,6 @@ SimpleHTML:
         type: number
       - name: colorA
         type: number
-      override: true
     GetShadowOffset:
       inputs:
       - name: textType
@@ -6840,7 +7030,6 @@ SimpleHTML:
         type: number
       - name: offsetY
         type: number
-      override: true
     GetSpacing:
       inputs:
       - name: textType
@@ -6848,7 +7037,6 @@ SimpleHTML:
       outputs:
       - name: spacing
         type: number
-      override: true
     GetTextColor:
       inputs:
       - name: textType
@@ -6862,7 +7050,6 @@ SimpleHTML:
         type: number
       - name: colorA
         type: number
-      override: true
     GetTextData:
       inputs:
       outputs:
@@ -6881,7 +7068,6 @@ SimpleHTML:
       - name: flags
         type: string
       outputs:
-      override: true
     SetFontObject:
       inputs:
       - name: textType
@@ -6890,7 +7076,6 @@ SimpleHTML:
         type:
           uiobject: Font
       outputs:
-      override: true
     SetHyperlinkFormat:
       impl:
         setter:
@@ -6906,7 +7091,6 @@ SimpleHTML:
       - name: wordWrap
         type: boolean
       outputs:
-      override: true
     SetJustifyH:
       inputs:
       - name: textType
@@ -6915,7 +7099,6 @@ SimpleHTML:
         type:
           stringenum: JustifyHorizontal
       outputs:
-      override: true
     SetJustifyV:
       inputs:
       - name: textType
@@ -6924,7 +7107,6 @@ SimpleHTML:
         type:
           stringenum: JustifyVertical
       outputs:
-      override: true
     SetShadowColor:
       inputs:
       - name: textType
@@ -6939,7 +7121,6 @@ SimpleHTML:
         nilable: true
         type: number
       outputs:
-      override: true
     SetShadowOffset:
       inputs:
       - name: textType
@@ -6949,7 +7130,6 @@ SimpleHTML:
       - name: offsetY
         type: number
       outputs:
-      override: true
     SetSpacing:
       inputs:
       - name: textType
@@ -6957,7 +7137,6 @@ SimpleHTML:
       - name: spacing
         type: number
       outputs:
-      override: true
     SetText:
       inputs:
       - name: text
@@ -6980,7 +7159,6 @@ SimpleHTML:
         nilable: true
         type: number
       outputs:
-      override: true
 Slider:
   fieldinitoverrides:
     mouseClickEnabled: true
@@ -7305,9 +7483,7 @@ StatusBar:
       outputs:
     SetMinMaxValues:
       impl:
-        setter:
-        - name: min
-        - name: max
+        uiobjectimpl: StatusBar/SetMinMaxValues
       inputs:
       - name: minValue
         type: number
@@ -7380,8 +7556,7 @@ StatusBar:
         type: boolean
     SetValue:
       impl:
-        setter:
-        - name: value
+        uiobjectimpl: StatusBar/SetValue
       inputs:
       - name: value
         type: number
@@ -7410,6 +7585,11 @@ TabardModel:
       outputs:
       - name: path
         type: string
+    GetLowerBorderFile:
+      inputs:
+      outputs:
+      - name: file
+        type: number
     GetLowerEmblemFileName:
       inputs:
       outputs:
@@ -7426,6 +7606,11 @@ TabardModel:
       outputs:
       - name: path
         type: string
+    GetUpperBorderFile:
+      inputs:
+      outputs:
+      - name: file
+        type: number
     GetUpperEmblemFileName:
       inputs:
       outputs:
@@ -7546,6 +7731,9 @@ TextureBase:
     ScriptObject:
   methods:
     ClearTextureSlice:
+      inputs:
+      outputs:
+    ClearVertexOffsets:
       inputs:
       outputs:
     GetAtlas:
@@ -7885,18 +8073,34 @@ TextureBase:
         name: tiling
         type: boolean
       outputs:
+  objectType: Texture
   virtual: true
 TextureCoordTranslation:
   fields:
   inherits:
-    Translation:
+    TranslationBase:
   methods:
 Translation:
   fields:
   inherits:
+    TranslationBase:
+  methods:
+TranslationBase:
+  fields:
+    offsetX:
+      init: 0
+      type: number
+    offsetY:
+      init: 0
+      type: number
+  inherits:
     Animation:
   methods:
     GetOffset:
+      impl:
+        getter:
+        - name: offsetX
+        - name: offsetY
       inputs:
       outputs:
       - name: offsetX
@@ -7904,12 +8108,17 @@ Translation:
       - name: offsetY
         type: number
     SetOffset:
+      impl:
+        setter:
+        - name: offsetX
+        - name: offsetY
       inputs:
       - name: offsetX
         type: number
       - name: offsetY
         type: number
       outputs:
+  virtual: true
 UIObject:
   fields:
     forbidden:
@@ -7956,6 +8165,9 @@ UIObject:
     SetForbidden:
       impl:
         uiobjectimpl: ForbiddenMixin/SetForbidden
+      inputs:
+      outputs:
+    SetToDefaults:
       inputs:
       outputs:
   virtual: true

@@ -22,7 +22,6 @@ AcceptQuest:
 AcceptResurrect:
   inputs:
   outputs:
-AcceptSockets:
 AcceptSpellConfirmationPrompt:
 AcceptTrade:
 AcknowledgeSurvey:
@@ -731,8 +730,6 @@ C_AddOns.GetAddOnInfo:
     type: string
   - name: security
     type: string
-  - name: updateAvailable
-    type: boolean
 C_AddOns.GetAddOnInterfaceVersion:
   inputs:
   - name: name
@@ -758,6 +755,20 @@ C_AddOns.GetAddOnMetadata:
   - name: value
     nilable: true
     type: string
+C_AddOns.GetAddOnName:
+  inputs:
+  - name: index
+    type: uiAddon
+  outputs:
+  - name: name
+    type: string
+C_AddOns.GetAddOnNotes:
+  inputs:
+  - name: name
+    type: uiAddon
+  outputs:
+  - name: notes
+    type: string
 C_AddOns.GetAddOnOptionalDependencies:
   inputs:
   - name: name
@@ -766,6 +777,21 @@ C_AddOns.GetAddOnOptionalDependencies:
   - name: deps
     type: string
   outstride: 1
+C_AddOns.GetAddOnSecurity:
+  inputs:
+  - name: name
+    type: uiAddon
+  outputs:
+  - name: security
+    type:
+      enum: AddOnSecurityStatus
+C_AddOns.GetAddOnTitle:
+  inputs:
+  - name: name
+    type: uiAddon
+  outputs:
+  - name: title
+    type: string
 C_AddOns.GetNumAddOns:
   impl: GetNumAddOns
   inputs:
@@ -1007,6 +1033,7 @@ C_AuctionHouse.GetAuctionInfoByID:
     type:
       structure: C_AuctionHouse.AuctionInfo
 C_AuctionHouse.GetAuctionItemSubClasses:
+  impl: C_AuctionHouse.GetAuctionItemSubClasses
   inputs:
   - name: classID
     type: number
@@ -2196,6 +2223,11 @@ C_BattleNet.AreHighResTexturesInstalled:
   outputs:
   - name: installed
     type: boolean
+C_BattleNet.BNCheckBattleTagInviteToRecentAlly:
+  inputs:
+  - name: recentAllyGUID
+    type: string
+  outputs:
 C_BattleNet.GetAccountInfoByGUID:
   inputs:
   - name: guid
@@ -2265,6 +2297,9 @@ C_BattleNet.GetGameAccountInfoByID:
     nilable: true
     type:
       structure: C_BattleNet.BNetGameAccountInfo
+C_BattleNet.InstallHighResTextures:
+  inputs:
+  outputs:
 C_BehavioralMessaging.SendNotificationReceipt:
   inputs:
   - name: dbId
@@ -2837,6 +2872,165 @@ C_Calendar.SetNextClubId:
 C_Calendar.UpdateEvent:
   inputs:
   outputs:
+C_CatalogShop.CloseCatalogShopInteraction:
+  inputs:
+  outputs:
+C_CatalogShop.GetAvailableCategoryIDs:
+  inputs:
+  outputs:
+  - name: categoryIDs
+    type:
+      arrayof: number
+C_CatalogShop.GetAvailableTransmogRaceInfos:
+  inputs:
+  outputs:
+  - name: raceIDs
+    type:
+      arrayof:
+        structure: C_CatalogShop.AvailableRaceInfo
+C_CatalogShop.GetCatalogShopProductDisplayInfo:
+  inputs:
+  - name: catalogShopProductID
+    type: number
+  outputs:
+  - name: item
+    type:
+      structure: C_CatalogShop.CatalogShopProductDisplayInfo
+C_CatalogShop.GetCategoryInfo:
+  inputs:
+  - name: categoryID
+    type: number
+  outputs:
+  - name: categoryInfo
+    type:
+      structure: C_CatalogShop.CatalogShopCategoryInfo
+C_CatalogShop.GetCategorySectionInfo:
+  inputs:
+  - name: categoryID
+    type: number
+  - name: sectionID
+    type: number
+  outputs:
+  - name: sectionInfo
+    type:
+      structure: C_CatalogShop.CatalogShopSectionInfo
+C_CatalogShop.GetFailureInfo:
+  inputs:
+  outputs:
+  - name: errorResultEnum
+    nilable: true
+    type:
+      enum: StoreError
+  - name: errorResultRaw
+    nilable: true
+    type: number
+C_CatalogShop.GetProductAvailabilityTimeRemainingSecs:
+  inputs:
+  - name: catalogShopProductID
+    type: number
+  outputs:
+  - name: timeRemainingSecs
+    nilable: true
+    type: number
+C_CatalogShop.GetProductIDsForBundle:
+  inputs:
+  - name: bundleProductID
+    type: number
+  outputs:
+  - name: childIDs
+    type:
+      arrayof:
+        structure: C_CatalogShop.CatalogShopBundleChildInfo
+C_CatalogShop.GetProductIDsForCategorySection:
+  inputs:
+  - name: categoryID
+    type: number
+  - name: sectionID
+    type: number
+  outputs:
+  - name: productIDs
+    type:
+      arrayof: number
+C_CatalogShop.GetProductInfo:
+  inputs:
+  - name: productID
+    type: number
+  outputs:
+  - name: productInfo
+    nilable: true
+    type:
+      structure: C_CatalogShop.CatalogShopProductInfo
+C_CatalogShop.GetProductSortOrder:
+  inputs:
+  - name: categoryID
+    type: number
+  - name: sectionID
+    type: number
+  - name: productID
+    type: number
+  outputs:
+  - name: sortOrder
+    nilable: true
+    type: number
+C_CatalogShop.GetSectionIDsForCategory:
+  inputs:
+  - name: categoryID
+    type: number
+  outputs:
+  - name: sectionIDs
+    type:
+      arrayof: number
+C_CatalogShop.GetSpellVisualInfoForMount:
+  inputs:
+  - name: spellVisualID
+    type: number
+  outputs:
+  - name: spellVisualInfo
+    type:
+      structure: C_CatalogShop.CatalogShopSpellVisualInfo
+C_CatalogShop.IsShop2Enabled:
+  inputs:
+  outputs:
+  - name: value
+    nilable: true
+    type: boolean
+C_CatalogShop.OnLegalDisclaimerClicked:
+  inputs:
+  - name: catalogShopProductID
+    type: number
+  outputs:
+C_CatalogShop.OpenCatalogShopInteraction:
+  inputs:
+  outputs:
+  - name: shoppingSessionUUIDStr
+    type: string
+C_CatalogShop.ProductDisplayedTelemetry:
+  inputs:
+  - name: categoryId
+    type: number
+  - name: sectionId
+    type: number
+  - name: catalogShopProductID
+    type: number
+  outputs:
+C_CatalogShop.ProductSelectedTelemetry:
+  inputs:
+  - name: categoryId
+    type: number
+  - name: sectionId
+    type: number
+  - name: catalogShopProductID
+    type: number
+  - name: wasCodeSelection
+    type: boolean
+  outputs:
+C_CatalogShop.PurchaseProduct:
+  inputs:
+  - name: productID
+    type: number
+  outputs:
+  - name: canPurchase
+    type: boolean
 C_ChallengeMode.GetActiveChallengeMapID:
   inputs:
   outputs:
@@ -2957,6 +3151,21 @@ C_ChallengeMode.GetNumChallengeMapRewards:
   outputs:
   - name: numRewards
     type: number
+C_ChallengeMode.GetNumMedals:
+  inputs:
+  - name: mapID
+    type: number
+  outputs:
+  - name: numMedals
+    type: number
+C_ChallengeMode.GetSpecificDungeonOverallScoreRarityColor:
+  inputs:
+  - name: specificDungeonOverallScore
+    type: number
+  outputs:
+  - name: specificDungeonOverallScoreColor
+    type:
+      structure: colorRGB
 C_ChallengeMode.IsChallengeModeActive:
   inputs:
   outputs:
@@ -2972,6 +3181,15 @@ C_ChallengeMode.IsChallengeModeResettable:
   outputs:
   - name: canReset
     type: boolean
+C_ChallengeMode.RequestChallengeModeLeaderboard:
+  inputs:
+  - name: mapID
+    type: number
+  - name: challengeModeID
+    type: number
+  - name: page
+    type: number
+  outputs:
 C_ChallengeMode.RequestLeaders:
   inputs:
   - name: mapChallengeModeID
@@ -5690,6 +5908,9 @@ C_CooldownViewer.GetCooldownViewerCategorySet:
   - name: category
     type:
       enum: CooldownViewerCategory
+  - default: false
+    name: allowUnlearned
+    type: boolean
   outputs:
   - name: cooldownIDs
     type:
@@ -5703,6 +5924,11 @@ C_CooldownViewer.GetCooldownViewerCooldownInfo:
   - name: cooldownInfo
     type:
       structure: C_CooldownViewer.CooldownViewerCooldown
+C_CooldownViewer.GetLayoutData:
+  inputs:
+  outputs:
+  - name: data
+    type: string
 C_CooldownViewer.IsCooldownViewerAvailable:
   inputs:
   outputs:
@@ -5710,6 +5936,11 @@ C_CooldownViewer.IsCooldownViewerAvailable:
     type: boolean
   - name: failureReason
     type: string
+C_CooldownViewer.SetLayoutData:
+  inputs:
+  - name: data
+    type: string
+  outputs:
 C_CreatureInfo.GetClassInfo:
   impl: C_CreatureInfo.GetClassInfo
   inputs:
@@ -6672,6 +6903,19 @@ C_EventUtils.IsEventValid:
 C_EventUtils.NotifySettingsLoaded:
   inputs:
   outputs:
+C_ExternalEventURL.HasURL:
+  inputs:
+  outputs:
+  - name: hasURL
+    type: boolean
+C_ExternalEventURL.IsNew:
+  inputs:
+  outputs:
+  - name: isNew
+    type: boolean
+C_ExternalEventURL.LaunchURL:
+  inputs:
+  outputs:
 C_FriendList.AddFriend:
   inputs:
   - name: name
@@ -6867,6 +7111,16 @@ C_FriendList.SortWho:
   - name: sorting
     type: string
   outputs:
+C_FunctionContainers.CreateCallback:
+  impl: C_FunctionContainers.CreateCallback
+  inputs:
+  - name: callback
+    type: function
+  outputs:
+  - name: functionContainer
+    type:
+      luaobject: LuaFunctionContainer
+  usage: C_FunctionContainers.CreateCallback(func)
 C_GamePad.AddSDLMapping:
   inputs:
   - name: platform
@@ -8290,9 +8544,103 @@ C_Item.UseItemByName:
     nilable: true
     type: string
   outputs:
+C_ItemSocketInfo.AcceptSockets:
+  inputs:
+  outputs:
+C_ItemSocketInfo.ClickSocketButton:
+  inputs:
+  - name: index
+    type: number
+  outputs:
+C_ItemSocketInfo.CloseSocketInfo:
+  inputs:
+  outputs:
 C_ItemSocketInfo.CompleteSocketing:
   inputs:
   outputs:
+C_ItemSocketInfo.GetExistingSocketInfo:
+  inputs:
+  - name: index
+    type: number
+  outputs:
+  - name: name
+    nilable: true
+    type: string
+  - name: icon
+    nilable: true
+    type: number
+  - name: gemMatchesSocket
+    type: boolean
+C_ItemSocketInfo.GetExistingSocketLink:
+  inputs:
+  - name: index
+    type: number
+  outputs:
+  - name: existingSocketLink
+    nilable: true
+    type: string
+C_ItemSocketInfo.GetNewSocketInfo:
+  inputs:
+  - name: index
+    type: number
+  outputs:
+  - name: name
+    nilable: true
+    type: string
+  - name: icon
+    nilable: true
+    type: number
+  - name: gemMatchesSocket
+    type: boolean
+C_ItemSocketInfo.GetNewSocketLink:
+  inputs:
+  - name: index
+    type: number
+  outputs:
+  - name: newSocketLink
+    nilable: true
+    type: string
+C_ItemSocketInfo.GetNumSockets:
+  inputs:
+  outputs:
+  - name: numSockets
+    type: number
+C_ItemSocketInfo.GetSocketItemBoundTradeable:
+  inputs:
+  outputs:
+  - name: socketItemTradeable
+    type: boolean
+C_ItemSocketInfo.GetSocketItemInfo:
+  inputs:
+  outputs:
+  - name: name
+    nilable: true
+    type: string
+  - name: icon
+    nilable: true
+    type: number
+  - name: quality
+    type:
+      enum: ItemQuality
+C_ItemSocketInfo.GetSocketItemRefundable:
+  inputs:
+  outputs:
+  - name: socketItemRefundable
+    type: boolean
+C_ItemSocketInfo.GetSocketTypes:
+  inputs:
+  - name: index
+    type: number
+  outputs:
+  - name: socketType
+    nilable: true
+    stub: Blue
+    type: string
+C_ItemSocketInfo.HasBoundGemProposed:
+  inputs:
+  outputs:
+  - name: hasBoundGemProposed
+    type: boolean
 C_ItemUpgrade.CanUpgradeItem:
   inputs:
   - name: baseItem
@@ -8347,6 +8695,13 @@ C_ItemUpgrade.UpgradeItem:
     name: numUpgrades
     type: number
   outputs:
+C_KeyBindings.GetBindingByKey:
+  inputs:
+  - name: action
+    type: string
+  outputs:
+  - name: binding
+    type: string
 C_KeyBindings.GetBindingIndex:
   inputs:
   - name: action
@@ -8804,6 +9159,11 @@ C_LFGList.IsPremadeGroupFinderEnabled:
 C_LFGList.RefreshApplicants:
 C_LFGList.RemoveApplicant:
 C_LFGList.RemoveListing:
+C_LFGList.ReportGroupAsAdvertisement:
+  inputs:
+  - name: searchResultID
+    type: number
+  outputs:
 C_LFGList.RequestAvailableActivities:
   inputs:
   outputs:
@@ -10502,6 +10862,13 @@ C_PetJournal.GetDisplayProbabilityByIndex:
   - name: displayProbability
     nilable: true
     type: number
+C_PetJournal.GetNonBattlePetLinkByIndex:
+  inputs:
+  - name: index
+    type: number
+  outputs:
+  - name: link
+    type: string
 C_PetJournal.GetNumCollectedInfo:
 C_PetJournal.GetNumDisplays:
   inputs:
@@ -11131,6 +11498,11 @@ C_PvP.GetRatedBGRewards:
     nilable: true
     type:
       structure: C_PvP.RoleShortageReward
+C_PvP.GetSelectedBattlefieldIndex:
+  inputs:
+  outputs:
+  - name: index
+    type: number
 C_PvP.GetWorldPVPAreaInfo:
   inputs:
   - name: index
@@ -11177,6 +11549,17 @@ C_PvP.IsSubZonePVPPOI:
   outputs:
   - name: result
     type: boolean
+C_PvP.JoinBattlefield:
+  inputs:
+  - name: battlemasterListId
+    type: number
+  - name: joinAsGroup
+    nilable: true
+    type: boolean
+  - name: instanceIndex
+    nilable: true
+    type: number
+  outputs:
 C_PvP.RequestCrowdControlSpell:
   inputs:
   - name: playerToken
@@ -11192,6 +11575,11 @@ C_PvP.SetPVP:
   - default: false
     name: enablePVP
     type: boolean
+  outputs:
+C_PvP.SetSelectedBattlefieldByIndex:
+  inputs:
+  - name: index
+    type: number
   outputs:
 C_PvP.TogglePVP:
   inputs:
@@ -11511,6 +11899,96 @@ C_RaidLocks.IsEncounterComplete:
   outputs:
   - name: encounterIsComplete
     type: boolean
+C_RaidLocks.IsRaidLockExtendFeatureEnabled:
+  inputs:
+  outputs:
+  - name: raidLockExtendFeatureEnabled
+    type: boolean
+C_RecentAllies.CanSetRecentAllyNote:
+  inputs:
+  - name: characterGUID
+    type: string
+  outputs:
+  - name: canSetNote
+    type: boolean
+C_RecentAllies.GetRecentAllies:
+  inputs:
+  outputs:
+  - name: recentAlliesData
+    type:
+      arrayof:
+        structure: C_RecentAllies.RecentAllyData
+C_RecentAllies.GetRecentAllyByFullName:
+  inputs:
+  - name: fullCharacterName
+    type: string
+  outputs:
+  - name: recentAllyData
+    nilable: true
+    type:
+      structure: C_RecentAllies.RecentAllyData
+C_RecentAllies.GetRecentAllyByGUID:
+  inputs:
+  - name: characterGUID
+    type: string
+  outputs:
+  - name: recentAllyData
+    nilable: true
+    type:
+      structure: C_RecentAllies.RecentAllyData
+C_RecentAllies.IsRecentAllyByFullName:
+  inputs:
+  - name: fullCharacterName
+    type: string
+  outputs:
+  - name: isRecentAlly
+    type: boolean
+C_RecentAllies.IsRecentAllyByGUID:
+  inputs:
+  - name: characterGUID
+    type: string
+  outputs:
+  - name: isRecentAlly
+    type: boolean
+C_RecentAllies.IsRecentAllyDataReady:
+  inputs:
+  outputs:
+  - name: isReady
+    type: boolean
+C_RecentAllies.IsRecentAllyPinned:
+  inputs:
+  - name: characterGUID
+    type: string
+  outputs:
+  - name: isPinned
+    type: boolean
+C_RecentAllies.IsSystemEnabled:
+  inputs:
+  outputs:
+  - name: isRecentAllySystemEnabled
+    type: boolean
+C_RecentAllies.IsSystemSupported:
+  inputs:
+  outputs:
+  - name: isRecentAllySystemSupported
+    type: boolean
+C_RecentAllies.SetRecentAllyNote:
+  inputs:
+  - name: characterGUID
+    type: string
+  - name: note
+    type: string
+  outputs:
+C_RecentAllies.SetRecentAllyPinned:
+  inputs:
+  - name: characterGUID
+    type: string
+  - name: isPinned
+    type: boolean
+  outputs:
+C_RecentAllies.TryRequestRecentAlliesData:
+  inputs:
+  outputs:
 C_RecruitAFriend.CanSummonFriend:
   inputs:
   - name: guid
@@ -12522,6 +13000,7 @@ C_SummonInfo.GetSummonConfirmTimeLeft:
   inputs:
   outputs:
   - name: timeLeft
+    stub: 0
     type: number
 C_SummonInfo.GetSummonReason:
   inputs:
@@ -12737,13 +13216,22 @@ C_Texture.SetTitleIconTexture:
     type:
       enum: TitleIconVersion
   outputs:
+C_Texture.SetURLTexture:
+  inputs:
+  - name: texture
+    type:
+      uiobject: Texture
+  - name: url
+    type: string
+  outputs:
 C_Timer.After:
   impl: C_Timer.After
   inputs:
   - name: seconds
     type: number
   - name: callback
-    type: function
+    type:
+      luaobject: LuaFunctionContainer
   outputs:
 C_Timer.NewTicker:
   impl: C_Timer.NewTicker
@@ -12751,23 +13239,27 @@ C_Timer.NewTicker:
   - name: seconds
     type: number
   - name: callback
-    type: function
+    type:
+      luaobject: LuaFunctionContainer
   - name: iterations
     nilable: true
     type: number
   outputs:
   - name: cbObject
-    type: userdata
+    type:
+      luaobject: LuaFunctionContainer
 C_Timer.NewTimer:
   impl: C_Timer.NewTimer
   inputs:
   - name: seconds
     type: number
   - name: callback
-    type: function
+    type:
+      luaobject: LuaFunctionContainer
   outputs:
   - name: cbObject
-    type: userdata
+    type:
+      luaobject: LuaFunctionContainer
 C_ToyBox.ForceToyRefilter:
   inputs:
   outputs:
@@ -13002,6 +13494,14 @@ C_Traits.GetConfigsByType:
   - name: configIDs
     type:
       arrayof: number
+C_Traits.GetConfigVariationID:
+  inputs:
+  - name: systemID
+    type: number
+  mayreturnnothing: true
+  outputs:
+  - name: variationID
+    type: number
 C_Traits.GetDefinitionInfo:
   inputs:
   - name: definitionID
@@ -13022,6 +13522,18 @@ C_Traits.GetEntryInfo:
   - name: entryInfo
     type:
       structure: C_Traits.TraitEntryInfo
+C_Traits.GetIncreasedTraitData:
+  inputs:
+  - name: nodeID
+    type: number
+  - name: entryID
+    type: number
+  mayreturnnothing: true
+  outputs:
+  - name: itemName
+    type:
+      arrayof:
+        structure: C_Traits.IncreasedTraitData
 C_Traits.GetLoadoutSerializationVersion:
   inputs:
   outputs:
@@ -13186,6 +13698,17 @@ C_Traits.IsReadyForCommit:
   outputs:
   - name: isReadyForCommit
     type: boolean
+C_Traits.PurchaseAllRanks:
+  inputs:
+  - name: configID
+    type: number
+  - name: nodeID
+    type: number
+  - name: ignoreCost
+    type: boolean
+  outputs:
+  - name: success
+    type: boolean
 C_Traits.PurchaseRank:
   inputs:
   - name: configID
@@ -13268,6 +13791,35 @@ C_Traits.StageConfig:
 C_Traits.TalentTestUnlearnSpells:
   inputs:
   outputs:
+C_Traits.TryPurchaseAllRanks:
+  inputs:
+  - name: configID
+    type: number
+  - name: nodeID
+    type: number
+  outputs:
+  - name: success
+    type: boolean
+C_Traits.TryPurchaseToNode:
+  inputs:
+  - name: configID
+    type: number
+  - name: nodeID
+    type: number
+  outputs:
+  - name: success
+    type: boolean
+C_Traits.TryRefundToNode:
+  inputs:
+  - name: configID
+    type: number
+  - name: nodeID
+    type: number
+  - name: entryID
+    type: number
+  outputs:
+  - name: success
+    type: boolean
 C_Transmog.ApplyAllPending:
   inputs:
   - default: false
@@ -14695,6 +15247,17 @@ C_UnitAuras.GetPlayerAuraBySpellID:
     nilable: true
     type:
       structure: AuraData
+C_UnitAuras.GetUnitAuraBySpellID:
+  inputs:
+  - name: unit
+    type: unit
+  - name: spellID
+    type: number
+  outputs:
+  - name: aura
+    nilable: true
+    type:
+      structure: AuraData
 C_UnitAuras.IsAuraFilteredOutByInstanceID:
   inputs:
   - name: unitToken
@@ -14782,6 +15345,11 @@ C_VideoOptions.GetGxAdapterInfo:
     type:
       arrayof:
         structure: C_VideoOptions.GxAdapterInfoDetails
+C_VideoOptions.IsSpellVisualDensitySystemSupported:
+  inputs:
+  outputs:
+  - name: isSupported
+    type: boolean
 C_VideoOptions.SetGameWindowSize:
   inputs:
   - name: x
@@ -15322,6 +15890,15 @@ C_Widget.IsWidget:
   outputs:
   - name: value
     type: boolean
+C_WowSurvey.OpenSurvey:
+  inputs:
+  outputs:
+C_WowSurvey.TriggerSurveyServe:
+  inputs:
+  - name: deliveryMoment
+    type:
+      enum: SurveyDeliveryMoment
+  outputs:
 C_WowTokenPublic.BuyToken:
 C_WowTokenPublic.GetCommerceSystemStatus:
 C_WowTokenPublic.GetCurrentMarketPrice:
@@ -15760,7 +16337,6 @@ ClearTarget:
 ClearTutorials:
 ClickAuctionSellItemButton:
 ClickSendMailItemButton:
-ClickSocketButton:
 ClickStablePet:
 ClickTargetTradeButton:
 ClickTradeButton:
@@ -15801,9 +16377,6 @@ CloseQuest:
   inputs:
   outputs:
 CloseResearch:
-  inputs:
-  outputs:
-CloseSocketInfo:
   inputs:
   outputs:
 ClosestGameObjectPosition:
@@ -15997,6 +16570,7 @@ CreateFont:
   - name: font
     type:
       uiobject: Font
+  usage: CreateFont("name")
 CreateFontFamily:
   inputs:
   - name: name
@@ -16895,8 +17469,14 @@ GetBinding:
     type: string
   outstride: 1
 GetBindingAction:
-GetBindingByKey:
 GetBindingKey:
+  inputs:
+  - name: command
+    type: string
+  outputs:
+  - name: key
+    type: string
+  outstride: 1
 GetBindingText:
   outputs:
   - type: string
@@ -17374,6 +17954,8 @@ GetDifficultyInfo:
   - name: maxPlayers
     nilable: true
     type: number
+  - name: isUserSelectable
+    type: boolean
 GetDodgeChance:
   inputs:
   outputs:
@@ -17420,24 +18002,14 @@ GetEventTime:
     type: string
   - name: slowestHandlerTime
     type: number
-GetExistingSocketInfo:
-  inputs:
-  - name: index
-    type: number
-  outputs:
-  - name: name
-    type: string
-  - name: icon
-    type: number
-  - name: gemMatchesSocket
-    type: boolean
-GetExistingSocketLink:
 GetExpansionDisplayInfo:
   inputs:
   - name: expansionLevel
     type: number
   - name: desiredReleaseType
-    type: number
+    nilable: true
+    type:
+      enum: ReleaseType
   outputs:
   - name: info
     nilable: true
@@ -17563,11 +18135,13 @@ GetFactionInfoByID:
 getfenv:
   impl: getfenv
 GetFileIDFromPath:
+  impl: GetFileIDFromPath
   inputs:
   - name: filePath
     type: string
   outputs:
   - name: fileID
+    nilable: true
     type: number
 GetFileStreamingStatus:
   inputs:
@@ -18825,18 +19399,6 @@ GetNetStats:
     type: number
   outstride: 1
   stuboutstrides: 2
-GetNewSocketInfo:
-  inputs:
-  - name: index
-    type: number
-  outputs:
-  - name: name
-    type: string
-  - name: icon
-    type: number
-  - name: gemMatchesSocket
-    type: boolean
-GetNewSocketLink:
 GetNextAchievement:
 GetNextCompleatedTutorial:
 GetNextPendingInviteConfirmation:
@@ -19139,11 +19701,6 @@ GetNumShapeshiftForms:
 GetNumSkillLines:
   outputs:
   - type: number
-GetNumSockets:
-  inputs:
-  outputs:
-  - name: value
-    type: number
 GetNumSpecGroups:
   outputs:
   - type: number
@@ -19871,6 +20428,7 @@ GetReleaseTimeRemaining:
   inputs:
   outputs:
   - name: result
+    stub: 0
     type: number
 GetRepairAllCost:
   outputs:
@@ -20041,11 +20599,6 @@ GetSelectedAuctionItem:
   outputs:
   - name: index
     type: number
-GetSelectedBattlefield:
-  inputs:
-  outputs:
-  - name: value
-    type: number
 GetSelectedDisplayChannel:
 GetSelectedFaction:
   inputs:
@@ -20135,33 +20688,6 @@ GetSkillLineInfo:
     type: number
   - name: skillDescription
     type: string
-GetSocketItemBoundTradeable:
-  inputs:
-  outputs:
-  - name: value
-    type: boolean
-GetSocketItemInfo:
-  inputs:
-  outputs:
-  - name: name
-    type: string
-  - name: icon
-    type: number
-  - name: quality
-    type: number
-GetSocketItemRefundable:
-  inputs:
-  outputs:
-  - name: value
-    type: boolean
-GetSocketTypes:
-  inputs:
-  - name: index
-    type: number
-  outputs:
-  - name: gemColor
-    stub: Blue
-    type: string
 GetSoundEntryCount:
 GetSourceLocation:
   inputs:
@@ -20169,7 +20695,6 @@ GetSourceLocation:
   outputs:
   - name: location
     type: string
-GetSpecChangeCost:
 GetSpecializationInfoByID:
 GetSpecializationInfoForClassID:
   inputs:
@@ -20203,6 +20728,7 @@ GetSpecializationInfoForClassID:
     nilable: true
     type: number
 GetSpecializationInfoForSpecID:
+  impl: GetSpecializationInfoForSpecID
   inputs:
   - name: specID
     type: number
@@ -21092,11 +21618,6 @@ GuildRosterSetPublicNote:
 HandleAtlasMemberCommand:
 HasAction:
 HasBonusActionBar:
-HasBoundGemProposed:
-  inputs:
-  outputs:
-  - name: value
-    type: boolean
 HasCompletedAnyAchievement:
 HasDualWieldPenalty:
   inputs:
@@ -21865,7 +22386,6 @@ ItemTextIsFullPage:
 ItemTextNextPage:
 ItemTextPrevPage:
 JoinArena:
-JoinBattlefield:
 JoinChannelByName:
 JoinLFG:
 JoinPermanentChannel:
@@ -22363,6 +22883,7 @@ ResurrectGetOfferer:
   inputs:
   outputs:
   - name: name
+    nilable: true
     type: string
 ResurrectHasSickness:
   inputs:
@@ -22687,7 +23208,6 @@ SetScreenResolution:
 setsecurehookforbidden:
 SetSelectedArtifact:
 SetSelectedAuctionItem:
-SetSelectedBattlefield:
 SetSelectedDisplayChannel:
 SetSelectedFaction:
 SetSelectedScreenResolutionIndex:
@@ -22970,16 +23490,28 @@ SwapToGlobalEnvironment:
 SwitchAchievementSearchTab:
 table.concat:
   impl: table.concat
+table.count:
+  inputs:
+  - name: table
+    type: unknown
+  mayreturnnothing: true
+  outputs:
+  - name: numTableNodes
+    type: number
+  - name: numArrayNodes
+    type: number
+  - name: maxArrayIndex
+    type: number
 table.create:
   inputs:
   - name: arraySizeHint
     type: number
-  - name: nodeSizeHint
-    nilable: true
+  - default: 0
+    name: nodeSizeHint
     type: number
   outputs:
   - name: table
-    type: table
+    type: unknown
 table.foreach:
   impl: table.foreach
 table.foreachi:
@@ -23413,13 +23945,16 @@ UnitExists:
 UnitFactionGroup:
   impl: UnitFactionGroup
   inputs:
-  - name: unit
+  - name: unitName
     type: unit
+  - default: false
+    name: checkDisplayRace
+    type: boolean
   mayreturnnothing: true
   outputs:
-  - name: factionTag
+  - name: factionGroupTag
     type: string
-  - name: localizedFactionName
+  - name: localized
     type: string
 UnitFullName:
   inputs:

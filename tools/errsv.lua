@@ -141,36 +141,22 @@ do
       end
     elseif type(nt) == 'table' then
       for mn, mv in pairs(nt) do
-        if mn:sub(1, 1) == '~' then
-          mn = mn:sub(2)
+        local funcname = ns .. '.' .. mn
+        if type(mv) == 'string' then
+          assert(mv:match(': want "function", got "nil"$'))
+          apis[funcname] = nil
+        elseif type(mv) == 'table' then
           assert(next(mv) == 'impltype')
           assert(next(mv, 'impltype') == nil)
           if mv.impltype:match(': want true, got false$') then
-            local funcname = ns .. '.' .. mn
             apis[funcname] = {}
+          elseif mv.impltype:match(': want false, got true$') then
+            apis[funcname] = nil
           else
-            error(mv)
+            error('unexpected error on ' .. funcname)
           end
         else
-          local funcname = ns .. '.' .. mn
-          if type(mv) == 'string' then
-            assert(mv:match(': want "function", got "nil"$'))
-            apis[funcname] = nil
-          elseif type(mv) == 'table' then
-            assert(next(mv) == 'impltype')
-            assert(next(mv, 'impltype') == nil)
-            if
-              mv.impltype:match(': bad argument #1 to \'create\' %(Lua function expected%): want true, got false$')
-            then
-              apis[funcname] = {}
-            elseif mv.impltype:match(': want false, got true$') then
-              apis[funcname] = nil
-            else
-              error('unexpected error on ' .. funcname)
-            end
-          else
-            error('unexpected type for ' .. ns .. '.' .. mn)
-          end
+          error('unexpected type for ' .. ns .. '.' .. mn)
         end
       end
     else
@@ -199,32 +185,21 @@ do
   local fn = 'data/products/' .. product .. '/apis.yaml'
   local apis = yaml.parseFile(fn)
   for k, v in pairs(data.generated.globalApis or {}) do
-    if k:sub(1, 1) == '~' then
-      k = k:sub(2)
-      assert(next(v) == 'impltype')
+    if type(v) == 'string' then
+      assert(v:match(': want "function", got "nil"$'))
+      apis[k] = nil
+    elseif type(v) == 'table' then
+      assert(next(v) == 'impltype', ('%q: expected impltype, got %q'):format(k, next(v)))
       assert(next(v, 'impltype') == nil)
       if v.impltype:match(': want true, got false$') then
         apis[k] = {}
+      elseif v.impltype:match(': want false, got true$') then
+        apis[k] = nil
       else
         error(k)
       end
     else
-      if type(v) == 'string' then
-        assert(v:match(': want "function", got "nil"$'))
-        apis[k] = nil
-      elseif type(v) == 'table' then
-        assert(next(v) == 'impltype', ('%q: expected impltype, got %q'):format(k, next(v)))
-        assert(next(v, 'impltype') == nil)
-        if v.impltype:match(': bad argument #1 to \'create\' %(Lua function expected%): want true, got false$') then
-          apis[k] = {}
-        elseif v.impltype:match(': want false, got true$') then
-          apis[k] = nil
-        else
-          error(k)
-        end
-      else
-        error('invalid type at globalApi ' .. k)
-      end
+      error('invalid type at globalApi ' .. k)
     end
   end
   write(fn, yaml.pprint(apis))

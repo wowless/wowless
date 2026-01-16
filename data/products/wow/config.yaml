@@ -1,6 +1,7 @@
 addon:
   aliased_in_framexml:
-    C_LFGInfo.IsPremadeGroupEnabled:
+    C_LFGInfo.IsPremadeGroupEnabled: C_LFGList.IsPremadeGroupFinderEnabled
+    C_TaskQuest.GetQuestsForPlayerByMapID: C_TaskQuest.GetQuestsOnMap
   capsule:
     apinamespaces:
       C_AuthChallenge:
@@ -18,12 +19,19 @@ addon:
       BattlepayProductGroupFlags:
       PurchaseEligibility:
       StoreError:
-      VasError:
       VasServiceType:
+      VasTransactionPurchaseResult:
     globalapis:
       C_Macro.SetMacroExecuteLineCallback:
       CreateForbiddenFrame:
+      CreateSecureDelegate:
       loadstring_untainted:
+  enum_values_set_in_framexml:
+    CooldownViewerCategory:
+      HiddenAura:
+      HiddenSpell:
+  enums_set_in_framexml:
+    EditModeChatFrameDisplayOnlySetting:
   hooked_globals:
     UpdateUIParentPosition:
   ignore_cvar_value:
@@ -59,10 +67,14 @@ addon:
     C_Traits.GetConditionInfo:
     C_Traits.GetEntryInfo:
     C_Traits.GetTreeInfo:
+modules:
+  addons:
+    GetAddOnInfo_noUpdateAvailable: true
 runner:
   skip_events:
     PERKS_PROGRAM_OPEN: needs C_ModelInfo.GetModelSceneInfoByID implemented
     RAF_REWARD_CLAIM_FAILED: numAffordableRewards never set
+    REMIX_ARTIFACT_UPDATE: appears to require timerunning, fails in RemixArtifactTutorialUI
     SHOW_DELVES_COMPANION_CONFIGURATION_UI: https://github.com/wowless/wowless/issues/346
     SUBSCRIPTION_CHANGED_KICK_IMMINENT: depends on GlueDialog_Show
     VAS_QUEUE_STATUS_UPDATE: depends on C_StoreGlue

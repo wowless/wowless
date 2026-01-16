@@ -88,10 +88,18 @@ C_DateAndTime.AdjustTimeByMinutes:
 C_DateAndTime.CompareCalendarTime:
   moduledelegate:
     name: datetime
+C_EventUtils.IsCallbackEvent:
+  moduledelegate:
+    function: IsCallbackEvent
+    name: events
 C_EventUtils.IsEventValid:
   moduledelegate:
     function: IsEventValid
     name: events
+C_FunctionContainers.CreateCallback:
+  moduledelegate:
+    function: CreateCallback
+    name: funtainer
 C_Item.DoesItemExistByID:
   impl:
     sqls:
@@ -130,12 +138,12 @@ C_SpecializationInfo.GetSpecIDs:
   impl:
     sqls:
     - C_SpecializationInfo.GetSpecIDs
-C_Texture.GetAtlasInfo:
+C_SpecializationInfo.GetTalentInfo:
   impl:
     modules:
-      atlas:
+      units:
     sqls:
-    - C_Texture.GetAtlasInfo
+    - C_SpecializationInfo.GetTalentInfo
 C_Texture.GetAtlasInfo_11_1_5:
   impl:
     modules:
@@ -228,6 +236,8 @@ CreateFrame:
 CreateFromMixins:
   luadelegate:
     module: wowless.mixin
+CreateSecureDelegate:
+  impl:
 CreateWindow:
   impl:
 date:
@@ -315,6 +325,10 @@ geterrorhandler:
 getfenv:
   moduledelegate:
     name: env
+GetFileIDFromPath:
+  impl:
+    sqls:
+    - GetFileIDFromPath
 GetFontStringMetatable:
   impl:
     modules:
@@ -378,24 +392,12 @@ GetSpecializationInfoForSpecID:
       units:
     sqls:
     - GetSpecializationInfoForSpecID
-GetTalentInfo_Vanilla:
-  impl:
-    modules:
-      units:
-    sqls:
-    - GetTalentInfo_Vanilla
 GetTalentPrereqs:
   impl:
     modules:
       units:
     sqls:
     - GetTalentPrereqs
-GetTalentTabInfo:
-  impl:
-    modules:
-      units:
-    sqls:
-    - GetTalentTabInfo
 GetTime:
   moduledelegate:
     name: time

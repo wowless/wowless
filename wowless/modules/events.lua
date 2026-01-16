@@ -45,6 +45,11 @@ return function(datalua, funcheck, log, loglevel, scripts)
     return not not regs[event:upper()]
   end
 
+  local function IsCallbackEvent(event)
+    local e = datalua.events[event:upper()]
+    return e and e.callback or false
+  end
+
   local function GetFramesRegisteredForEvent(event)
     event = event:upper()
     local ret = {}
@@ -100,6 +105,7 @@ return function(datalua, funcheck, log, loglevel, scripts)
   return {
     GetFramesRegisteredForEvent = GetFramesRegisteredForEvent,
     GetFramesRegisteredForEventUnpacked = GetFramesRegisteredForEventUnpacked,
+    IsCallbackEvent = IsCallbackEvent,
     IsEventRegistered = IsEventRegistered,
     IsEventValid = IsEventValid,
     RegisterAllEvents = RegisterAllEvents,

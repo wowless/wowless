@@ -62,7 +62,11 @@ EditBox/Enable:
 EditBox/Insert:
   luafile:
 FontInstance/GetFontObject:
-  luafile:
+  moduledelegate:
+    name: fontinstance
+FontInstance/SetFontObject:
+  moduledelegate:
+    name: fontinstance
 FontString/SetText:
   luafile:
 ForbiddenMixin/SetForbidden:
@@ -165,51 +169,94 @@ Path/CreateControlPoint:
 Path/GetControlPoints:
   luafile:
 Region/ClearAllPoints:
-  luafile:
+  moduledelegate:
+    name: points
+Region/ClearPoint:
+  moduledelegate:
+    name: points
 Region/CreateAnimationGroup:
   luafile:
     modules:
       api:
 Region/GetAnimationGroups:
   luafile:
+Region/GetBottom:
+  moduledelegate:
+    name: region
 Region/GetCenter:
-  luafile:
+  moduledelegate:
+    name: region
 Region/GetEffectiveScale:
   luafile:
+Region/GetHeight:
+  moduledelegate:
+    name: region
+Region/GetLeft:
+  moduledelegate:
+    name: region
 Region/GetNumPoints:
-  luafile:
+  moduledelegate:
+    name: points
 Region/GetPoint:
-  luafile:
+  moduledelegate:
+    name: points
+Region/GetPointByName:
+  moduledelegate:
+    name: points
+Region/GetRect:
+  moduledelegate:
+    name: region
 Region/GetRight:
-  luafile:
+  moduledelegate:
+    name: region
 Region/GetScaledRect:
-  luafile:
+  moduledelegate:
+    name: region
+Region/GetSize:
+  moduledelegate:
+    name: region
 Region/GetTop:
-  luafile:
+  moduledelegate:
+    name: region
+Region/GetWidth:
+  moduledelegate:
+    name: region
 Region/Hide:
   moduledelegate:
     name: visibility
+Region/IsCollapsed:
+  moduledelegate:
+    name: region
 Region/IsProtected:
   luafile:
+Region/IsRectValid:
+  moduledelegate:
+    name: region
 Region/IsVisible:
   moduledelegate:
     name: visibility
 Region/SetAllPoints:
-  luafile:
+  moduledelegate:
+    name: points
 Region/SetAlpha:
   luafile:
+Region/SetHeight:
+  moduledelegate:
+    name: region
 Region/SetPoint:
-  luafile:
-    modules:
-      api:
-      env:
-      log:
-      uiobjects:
+  moduledelegate:
+    name: points
 Region/SetScale:
   luafile:
 Region/SetShown:
   moduledelegate:
     name: visibility
+Region/SetSize:
+  moduledelegate:
+    name: region
+Region/SetWidth:
+  moduledelegate:
+    name: region
 Region/Show:
   moduledelegate:
     name: visibility
@@ -234,9 +281,17 @@ Slider/Disable:
 Slider/Enable:
   luafile:
 StatusBar/GetStatusBarColor:
-  luafile:
+  moduledelegate:
+    name: statusbar
+StatusBar/SetMinMaxValues:
+  moduledelegate:
+    name: statusbar
 StatusBar/SetStatusBarColor:
-  luafile:
+  moduledelegate:
+    name: statusbar
+StatusBar/SetValue:
+  moduledelegate:
+    name: statusbar
 Texture/GetTexture:
   luafile:
     modules:
@@ -244,7 +299,9 @@ Texture/GetTexture:
 Texture/SetAtlas:
   luafile:
     modules:
-      api:
+      atlas:
+    sqls:
+    - Texture.SetAtlas
 Texture/SetColorTexture:
   luafile:
 Texture/SetGradient:
@@ -254,10 +311,8 @@ Texture/SetTexCoord:
 Texture/SetTexture:
   luafile:
 UIObject/GetObjectType:
-  luafile:
-    modules:
-      uiobjecttypes:
+  moduledelegate:
+    name: uiobjecttypes
 UIObject/IsObjectType:
-  luafile:
-    modules:
-      uiobjecttypes:
+  moduledelegate:
+    name: uiobjecttypes

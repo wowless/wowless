@@ -4,13 +4,22 @@ type:
     Documentation:
       type:
         sequenceof: string
+    Environment:
+      type:
+        taggedunion:
+          All: tag
+          SecureOnly: tag
     Events:
       type:
         sequenceof:
           record:
+            CallbackEvent:
+              type: flag
             Documentation:
               type:
                 sequenceof: string
+            HasRestrictions:
+              type: flag
             LiteralName:
               required: true
               type: string
@@ -21,6 +30,8 @@ type:
               type:
                 sequenceof:
                   record:
+                    ConditionalSecret:
+                      type: flag
                     Default:
                       type: any
                     Documentation:
@@ -33,6 +44,8 @@ type:
                     Name:
                       required: true
                       type: string
+                    NeverSecret:
+                      type: flag
                     Nilable:
                       required: true
                       type: boolean
@@ -41,10 +54,36 @@ type:
                     Type:
                       required: true
                       type: string
+            RequireNPERestricted:
+              type: flag
+            SecretBasedOnTimelineEventSource:
+              type: flag
+            SecretInChatMessagingLockdown:
+              type: flag
+            SecretPayloads:
+              type: flag
+            SecretWhenAurasRestricted:
+              type: flag
+            SecretWhenSpellCastRestricted:
+              type: flag
+            SecretWhenUnitChargedPowerPointsRestricted:
+              type: flag
+            SecretWhenUnitIdentityRestricted:
+              type: flag
+            SecretWhenUnitPowerRestricted:
+              type: flag
+            SecretWhenUnitSpellCastRestricted:
+              type: flag
+            SecretWhenUnitSpellCastsRestricted:
+              type: flag
+            SynchronousEvent:
+              type: flag
             Type:
               required: true
               type:
                 literal: Event
+            UniqueEvent:
+              type: flag
     Functions:
       type:
         sequenceof:
@@ -53,6 +92,8 @@ type:
               type:
                 sequenceof:
                   record:
+                    ConditionalSecret:
+                      type: flag
                     Default:
                       type: any
                     Documentation:
@@ -68,55 +109,87 @@ type:
                     Nilable:
                       required: true
                       type: boolean
+                    NilableContents:
+                      type: boolean
                     StrideIndex:
                       type: number
                     Type:
                       required: true
                       type: string
+            ConstSecretAccessor:
+              type: flag
             Documentation:
               type:
                 sequenceof: string
             HasRestrictions:
-              type: boolean
+              type: flag
             IsIndexInRange:
-              type: boolean
+              type: flag
             IsNotReadOnly:
-              type: boolean
+              type: flag
             IsNotSecure:
-              type: boolean
+              type: flag
             IsProtectedFunction:
-              type: boolean
+              type: flag
             IsValidAndPublic:
-              type: boolean
+              type: flag
             MayReturnNothing:
-              type: boolean
+              type: flag
             Name:
               required: true
               type: string
+            Namespace:
+              type: string
+            RequireNPERestricted:
+              type: flag
             RequiresActiveCommentator:
-              type: boolean
+              type: flag
             RequiresClubsInitialized:
-              type: boolean
+              type: flag
             RequiresCommentator:
-              type: boolean
+              type: flag
+            RequiresFontStringTextAccess:
+              type: flag
             RequiresFriendList:
-              type: boolean
+              type: flag
             RequiresIndexInRange:
-              type: boolean
+              type: flag
+            RequiresLimitedInput:
+              type: flag
             RequiresNonReadOnlyCVar:
-              type: boolean
+              type: flag
+            RequiresNonSecretAura:
+              type: flag
+            RequiresNonSecretAuraSpellID:
+              type: flag
+            RequiresNonSecretAuraSpellName:
+              type: flag
             RequiresNonSecureCVar:
-              type: boolean
+              type: flag
             RequiresRecentAllies:
-              type: boolean
+              type: flag
+            RequiresSpellDiminishUI:
+              type: flag
+            RequiresValidActionSlot:
+              type: flag
             RequiresValidAndPublicCVar:
-              type: boolean
+              type: flag
             RequiresValidInviteTarget:
-              type: boolean
+              type: flag
+            RequiresValidSpellIdentifier:
+              type: flag
+            RequiresValidTimelineEvent:
+              type: flag
+            RequiresValidUnitAuraInstance:
+              type: flag
             Returns:
               type:
                 sequenceof:
                   record:
+                    ConditionalSecret:
+                      type: flag
+                    ConditionalSecretContents:
+                      type: flag
                     Default:
                       type: any
                     Documentation:
@@ -129,14 +202,94 @@ type:
                     Name:
                       required: true
                       type: string
+                    NeverSecret:
+                      type: flag
                     Nilable:
                       required: true
+                      type: boolean
+                    NilableContents:
                       type: boolean
                     StrideIndex:
                       type: number
                     Type:
                       required: true
                       type: string
+            ReturnsNeverSecret:
+              type: flag
+            SecretArguments:
+              type:
+                taggedunion:
+                  AllowedWhenTainted: tag
+                  AllowedWhenUntainted: tag
+                  NotAllowed: tag
+            SecretArgumentsAddAspect:
+              type: table
+            SecretBasedOnTimelineEventSource:
+              type: flag
+            SecretForAttackableUnits:
+              type: flag
+            SecretInChatMessagingLockdown:
+              type: flag
+            SecretNonPlayerUnitOrMinionWhileInCombat:
+              type: flag
+            SecretReturns:
+              type: flag
+            SecretReturnsForAspect:
+              type: table
+            SecretWhenActionCooldownRestricted:
+              type: flag
+            SecretWhenAnchoringSecret:
+              type: flag
+            SecretWhenAuraDataRestricted:
+              type: flag
+            SecretWhenAurasRestricted:
+              type: flag
+            SecretWhenCooldownsRestricted:
+              type: flag
+            SecretWhenCurveSecret:
+              type: flag
+            SecretWhenInCombat:
+              type: flag
+            SecretWhenSpellAuraRestricted:
+              type: flag
+            SecretWhenSpellBookItemCooldownRestricted:
+              type: flag
+            SecretWhenSpellCooldownRestricted:
+              type: flag
+            SecretWhenUnitAuraIndexRestricted:
+              type: flag
+            SecretWhenUnitAuraInstanceRestricted:
+              type: flag
+            SecretWhenUnitAuraRestricted:
+              type: flag
+            SecretWhenUnitCastingInfoRestricted:
+              type: flag
+            SecretWhenUnitChannelInfoRestricted:
+              type: flag
+            SecretWhenUnitChargedPowerPointsRestricted:
+              type: flag
+            SecretWhenUnitComboPointsRestricted:
+              type: flag
+            SecretWhenUnitComparisonRestricted:
+              type: flag
+            SecretWhenUnitHealthMaxRestricted:
+              type: flag
+            SecretWhenUnitIdentityRestricted:
+              type: flag
+            SecretWhenUnitPowerMaxRestricted:
+              type: flag
+            SecretWhenUnitPowerRestricted:
+              type: flag
+            SecretWhenUnitSpellCastingRestricted:
+              type: flag
+            SecretWhenUnitSpellCastRestricted:
+              type: flag
+            SecretWhenUnitSpellCastsRestricted:
+              type: flag
+            SecretWhenUnpackedUnitAuraInstanceRestricted:
+              type: flag
+            SecureHooksAllowed:
+              type: boolean
             Type:
               required: true
               type:
@@ -169,6 +322,10 @@ type:
               type:
                 sequenceof:
                   record:
+                    ConditionalSecret:
+                      type: flag
+                    ConditionalSecretContents:
+                      type: flag
                     Default:
                       type: any
                     Documentation:
@@ -183,8 +340,14 @@ type:
                     Name:
                       required: true
                       type: string
+                    NeverSecret:
+                      type: flag
+                    NeverSecretContents:
+                      type: flag
                     Nilable:
                       type: boolean
+                    SecretValue:
+                      type: flag
                     Type:
                       required: true
                       type: string
@@ -209,6 +372,9 @@ type:
               type:
                 sequenceof:
                   record:
+                    Documentation:
+                      type:
+                        sequenceof: string
                     Name:
                       required: true
                       type: string
@@ -216,7 +382,7 @@ type:
                       required: true
                       type: string
                     Value:
-                      type: number
+                      type: any
     Type:
       type:
         taggedunion:

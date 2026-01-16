@@ -1,6 +1,5 @@
-SELECT
-  TRUE
+SELECT TRUE
 FROM
   Item
 WHERE
-  ID == ?1;
+  ID = ?1;

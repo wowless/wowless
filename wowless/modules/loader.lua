@@ -7,6 +7,7 @@ return function(
   loadercfg,
   log,
   loglevel,
+  points,
   scripts,
   security,
   sqlitedb,
@@ -227,17 +228,20 @@ return function(
     end
   end
 
+  local parentMatch = '^$[pP][aA][rR][eE][nN][tT]'
+
   local function navigate(obj, key)
-    for _, p in ipairs({ strsplit('.', key) }) do
-      if p == '$parent' or p == '$parentKey' then
+    local orig = obj
+    for p in key:gmatch('([^.]+)') do
+      if p:match(parentMatch) then
         local ud = uiobjects.UserData(obj)
         obj = ud.parent and ud.parent.luarep
       else
-        if not obj[p] then
-          log(1, 'invalid relativeKey %q', key)
-          return nil
-        end
         obj = obj[p]
+      end
+      if not obj or obj == orig then
+        log(1, 'invalid relativeKey %q', key)
+        return nil
       end
     end
     return obj
@@ -245,20 +249,31 @@ return function(
 
   local xmllang = {
     anchor = function(_, anchor, parent)
-      local point = anchor.attr.point
+      local point = anchor.attr.point or 'TOPLEFT'
       local relativeTo
       if anchor.attr.relativeto then
-        relativeTo = api.ParentSub(anchor.attr.relativeto, parent.parent)
+        relativeTo = genv[api.ParentSub(anchor.attr.relativeto, parent.parent)]
+        relativeTo = relativeTo and uiobjects.UserData(relativeTo)
+        if not relativeTo or relativeTo == parent then
+          return
+        end
       elseif anchor.attr.relativekey then
+        if not anchor.attr.relativekey:match(parentMatch) then
+          return
+        end
         relativeTo = navigate(parent and parent.luarep, anchor.attr.relativekey)
+        relativeTo = relativeTo and uiobjects.UserData(relativeTo)
+        if not relativeTo or relativeTo == parent then
+          relativeTo = parent.parent
+        end
       else
-        relativeTo = parent.parent and parent.parent.luarep
+        relativeTo = parent.parent
       end
       local relativePoint = anchor.attr.relativepoint or point
       local offsetX, offsetY = getXY(anchor.kids[#anchor.kids])
-      local x = anchor.attr.x or offsetX
-      local y = anchor.attr.y or offsetY
-      parent:SetPoint(point, relativeTo, relativePoint, x, y)
+      local x = anchor.attr.x or offsetX or 0
+      local y = anchor.attr.y or offsetY or 0
+      points.SetPointInternal(parent, point:upper(), relativeTo, relativePoint:upper(), x, y)
     end,
     attribute = function(_, e, parent)
       -- TODO share code with SetAttribute somehow
@@ -450,7 +465,7 @@ return function(
     end,
     setallpoints = function(_, obj, value)
       if value and not obj:IsObjectType('texturebase') then
-        obj:SetAllPoints()
+        points.SetAllPointsInternal(obj, obj.parent)
       end
     end,
   }
@@ -528,7 +543,7 @@ return function(
           processAttrs(ctx, e, obj, 'late')
           -- Implicit setallpoints hack for textures.
           if obj:IsObjectType('texture') and obj:GetNumPoints() == 0 then
-            obj:SetAllPoints()
+            points.SetAllPointsInternal(obj, obj.parent)
           end
         end,
       }
@@ -924,12 +939,8 @@ return function(
       end
     end
     for _, name in ipairs(blizzardAddons) do
-      if addonData[name].attrs.LoadFirst == '1' then
-        loadAddon(name)
-      end
-    end
-    for _, name in ipairs(blizzardAddons) do
-      if addonData[name].attrs.GuardedAddOn == '1' then
+      local a = addonData[name].attrs
+      if a.LoadFirst == '1' or a.UseSecureEnvironment == '1' then
         loadAddon(name)
       end
     end
