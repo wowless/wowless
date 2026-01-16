@@ -108,8 +108,11 @@ describe('schema', function()
         }
         accept(ty, { other = 'test' })
         accept(ty, { optionalFlag = true, other = 'test' })
-        reject(ty, { optionalFlag = false, other = 'test' },
-               { optionalFlag = 'want flag (boolean true), got boolean (false)' })
+        reject(
+          ty,
+          { optionalFlag = false, other = 'test' },
+          { optionalFlag = 'want flag (boolean true), got boolean (false)' }
+        )
       end)
     end)
     describe('record', function()
