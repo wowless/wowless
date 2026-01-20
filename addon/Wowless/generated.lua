@@ -45,8 +45,8 @@ G.testsuite.generated = function()
     return checkFunc(func, true)
   end
 
-  local function checkNotCFunc(func)
-    if func ~= nil and not cfuncs[func] then
+  local function checkAliasOrLuaFunc(func)
+    if not cfuncs[func] then
       return checkLuaFunc(func)
     end
   end
@@ -93,7 +93,7 @@ G.testsuite.generated = function()
                 elseif name == 'math' and (k == 'huge' or k == 'pi') then
                   assertEquals('number', type(v))
                 else
-                  return checkNotCFunc(v)
+                  return checkAliasOrLuaFunc(v)
                 end
               end
             end
@@ -183,7 +183,7 @@ G.testsuite.generated = function()
     for k, v in pairs(_G) do
       if type(v) == 'function' and not tests[k] then
         tests[k] = function()
-          return checkNotCFunc(v)
+          return checkAliasOrLuaFunc(v)
         end
       end
     end
