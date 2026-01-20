@@ -95,6 +95,8 @@ G.testsuite.generated = function()
                 local aliased = aliased_in_framexml[name .. '.' .. k]
                 if aliased then
                   assertEquals(tget(_G, aliased), v)
+                elseif name == 'math' and (k == 'huge' or k == 'pi') then
+                  assertEquals('number', type(v))
                 else
                   return checkNotCFunc(v)
                 end

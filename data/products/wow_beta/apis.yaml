@@ -36725,8 +36725,6 @@ math.fmod:
   impl: math.fmod
 math.frexp:
   impl: math.frexp
-math.huge:
-  impl: math.huge
 math.ldexp:
   impl: math.ldexp
 math.log:
@@ -36739,8 +36737,6 @@ math.min:
   impl: math.min
 math.modf:
   impl: math.modf
-math.pi:
-  impl: math.pi
 math.pow:
   impl: math.pow
 math.rad:
