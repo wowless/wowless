@@ -901,6 +901,9 @@ add_lua_executable(
   wowlessutil
   wowlessyaml)
 
+# Wowless runs are resource intensive.
+set_property(GLOBAL PROPERTY JOB_POOLS wowless_run=5)
+
 set(outdeps)
 set(outs)
 set(pngs)
@@ -918,12 +921,14 @@ foreach(product ${products})
       wowless run -p ${product} -e5 -a addon/Wowless -a
       ${CMAKE_CURRENT_BINARY_DIR}/products/${product}/WowlessData -o
       ${CMAKE_CURRENT_BINARY_DIR}/${out}
+    JOB_POOL wowless_run
     DEPENDS wowless testaddon.txt ${product}_addon.txt ${product}_data.sqlite3
     WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
   add_custom_command(
     OUTPUT products/${product}/frame0.yaml products/${product}/frame1.yaml
     COMMAND wowless run -p ${product} -e0 -o
             ${CMAKE_CURRENT_BINARY_DIR}/products/${product}/frame0.txt --frame0
+    JOB_POOL wowless_run
     DEPENDS wowless ${product}_data.sqlite3
     WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
   add_custom_command(
