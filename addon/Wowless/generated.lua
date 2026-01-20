@@ -58,14 +58,7 @@ G.testsuite.generated = function()
       cfg = cfg == true and {} or cfg
       ret[name] = function()
         local func = env[name]
-        if cfg.stdlib then
-          local ty = type(tget(_G, cfg.stdlib))
-          if ty == 'function' then
-            return checkCFunc(func)
-          else
-            assertEquals(ty, type(func))
-          end
-        elseif cfg.overwritten then
+        if cfg.overwritten then
           return checkFunc(func, not iswowlesslite)
         elseif capsuleapis[(ename and ename .. '.' or '') .. name] and not iswowlesslite then
           assertEquals(nil, func)

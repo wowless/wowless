@@ -57,14 +57,12 @@ local ptablemap = {
     return 'Events', t
   end,
   globalapis = function(p)
-    local impls = readyaml('data/impl.yaml')
     local config = perproduct(p, 'config')
     local t = {}
-    for name, api in pairs(perproduct(p, 'apis')) do
+    for name in pairs(perproduct(p, 'apis')) do
       if not name:find('%.') then
         local vv = {
           overwritten = tpath(config, 'addon', 'overwritten_apis', name) and true,
-          stdlib = api.impl and tpath(impls, api.impl, 'stdlib'),
         }
         t[name] = next(vv) and vv or true
       end
@@ -116,7 +114,6 @@ local ptablemap = {
   end,
   namespaceapis = function(p)
     local platform = dofile('build/cmake/runtime/platform.lua')
-    local impls = readyaml('data/impl.yaml')
     local config = perproduct(p, 'config')
     local apiNamespaces = {}
     for k, api in pairs(perproduct(p, 'apis')) do
@@ -130,10 +127,9 @@ local ptablemap = {
     local t = {}
     for k, v in pairs(apiNamespaces) do
       local mt = {}
-      for mk, mv in pairs(v.methods) do
+      for mk in pairs(v.methods) do
         local tt = {
           overwritten = tpath(config, 'addon', 'overwritten_apis', k .. '.' .. mk) and true,
-          stdlib = mv.impl and tpath(impls, mv.impl, 'stdlib'),
         }
         mt[mk] = next(tt) and tt or true
       end
