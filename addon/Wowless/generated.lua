@@ -58,9 +58,11 @@ G.testsuite.generated = function()
       cfg = cfg == true and {} or cfg
       ret[name] = function()
         local func = env[name]
-        if cfg.overwritten then
-          return checkFunc(func, not iswowlesslite)
-        elseif capsuleapis[(ename and ename .. '.' or '') .. name] and not iswowlesslite then
+        if iswowlesslite then
+          return checkCFunc(func)
+        elseif cfg.overwritten then
+          return checkLuaFunc(func)
+        elseif capsuleapis[(ename and ename .. '.' or '') .. name] then
           assertEquals(nil, func)
         else
           return checkCFunc(func)
