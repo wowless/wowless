@@ -58,20 +58,11 @@ local ptablemap = {
   end,
   globalapis = function(p)
     local impls = readyaml('data/impl.yaml')
-    local function islua(api)
-      local impl = impls[api.impl]
-      if not impl or not impl.stdlib then
-        return false
-      end
-      local g = assert(tpath(_G, strsplit('.', impl.stdlib)))
-      return type(g) == 'function' and pcall(coroutine.create, g)
-    end
     local config = perproduct(p, 'config')
     local t = {}
     for name, api in pairs(perproduct(p, 'apis')) do
       if not name:find('%.') then
         local vv = {
-          islua = islua(api) or nil,
           overwritten = tpath(config, 'addon', 'overwritten_apis', name) and true,
           stdlib = api.impl and tpath(impls, api.impl, 'stdlib'),
         }
