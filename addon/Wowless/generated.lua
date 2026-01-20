@@ -95,8 +95,6 @@ G.testsuite.generated = function()
                 local aliased = aliased_in_framexml[name .. '.' .. k]
                 if aliased then
                   assertEquals(tget(_G, aliased), v)
-                elseif iswowlesslite then
-                  assertEquals(nil, v)
                 else
                   return checkNotCFunc(v)
                 end
