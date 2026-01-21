@@ -483,30 +483,27 @@ do
     if luaobjects[k] then
       return
     end
-    local methods = {}
     local v = luaobjectdata[k]
+    -- Process parent first if it exists
     if v.inherits then
       pop(v.inherits)
-      for mk in pairs(luaobjects[v.inherits].methods) do
-        methods[mk] = true
-      end
     end
-    for mk in pairs(v.methods) do
+    -- Store only own methods, not inherited ones
+    local methods = {}
+    for mk in pairs(v.methods or {}) do
       methods[mk] = true
     end
     luaobjects[k] = {
       impl = v.impl,
-      methods = methods,
+      inherits = v.inherits,  -- PRESERVE inheritance relationship
+      methods = methods,      -- Only own methods
+      virtual = v.virtual,    -- PRESERVE virtual flag
     }
   end
   for k in pairs(luaobjectdata) do
     pop(k)
   end
-  for k, v in pairs(luaobjectdata) do
-    if v.virtual then
-      luaobjects[k] = nil
-    end
-  end
+  -- DO NOT remove virtual types - loader needs them
 end
 
 local data = {

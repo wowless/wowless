@@ -85,31 +85,43 @@ local ptablemap = {
   luaobjects = function(p)
     local raw = perproduct(p, 'luaobjects')
     local t = {}
-    local function pop(k)
+
+    -- Build complete flattened method sets for testing
+    local function getAllMethods(k)
       if t[k] then
-        return
+        return t[k].methods
       end
       local v = raw[k]
       local methods = {}
+
+      -- Get inherited methods first
       if v.inherits then
-        pop(v.inherits)
-        for mk in pairs(t[v.inherits]) do
+        for mk in pairs(getAllMethods(v.inherits)) do
           methods[mk] = true
         end
       end
+
+      -- Add own methods
       for mk in pairs(v.methods or {}) do
         methods[mk] = true
       end
-      t[k] = methods
+
+      t[k] = {
+        methods = methods,
+        inherits = v.inherits,  -- Preserve inheritance info
+        ownmethods = v.methods or {},  -- Own methods only
+      }
+      return methods
     end
+
+    -- Process all types (including virtual ones for inheritance tracking)
     for k in pairs(raw) do
-      pop(k)
+      getAllMethods(k)
     end
-    for k, v in pairs(raw) do
-      if v.virtual then
-        t[k] = nil
-      end
-    end
+
+    -- Keep virtual types in test data so inherited methods can be tracked
+    -- (they won't have factories, but tests need them for cfuncs tracking)
+
     return 'LuaObjects', t
   end,
   namespaceapis = function(p)
