@@ -4,50 +4,97 @@ local iswowlesslite = _G.__wowless and _G.__wowless.lite
 
 assert(_G.WowlessData, 'missing WowlessData')
 
-local aliased_in_framexml = _G.WowlessData.Config.addon.aliased_in_framexml or {}
 local capsuleconfig = _G.WowlessData.Config.addon.capsule or {}
 local capsuleapis = capsuleconfig.globalapis or {}
 
-local function tget(t, s)
-  local dot = s:find('%.')
-  if dot then
-    local p = s:sub(1, dot - 1)
-    return t[p] and t[p][s:sub(dot + 1)]
-  else
-    return t[s]
+local function newUniqueChecker()
+  local t = {}
+  local names = {}
+  local open = true
+  local function addEntry(n, v, b)
+    assert(open, n)
+    assert(names[n] == nil, n)
+    local tt = t[v]
+    if not tt then
+      tt = {}
+      t[v] = tt
+    end
+    assert(tt[n] == nil, n)
+    tt[n] = b
+    names[n] = tt
   end
+  local function add(n, v)
+    return addEntry(n, v, true)
+  end
+  local function addAlias(n, v)
+    return addEntry(n, v, false)
+  end
+  local function test()
+    assert(open)
+    open = false
+    local tests = {}
+    for _, v in pairs(t) do
+      local ks = {}
+      for vk in pairs(v) do
+        table.insert(ks, ('%q'):format(vk))
+      end
+      table.sort(ks)
+      tests[table.concat(ks, ',')] = function()
+        local nt = 0
+        for _, vv in pairs(v) do
+          nt = nt + (vv and 1 or 0)
+        end
+        if nt == 0 then
+          error('no true name')
+        elseif nt > 1 then
+          error('multiple true names')
+        end
+      end
+    end
+    return tests
+  end
+  return {
+    add = add,
+    addAlias = addAlias,
+    test = test,
+  }
 end
 
 G.testsuite.generated = function()
-  local cfuncs = {}
+  local cfuncs = newUniqueChecker()
 
-  local function checkFunc(func, isLua)
+  local function isLuaFunc(func)
+    return (pcall(coroutine.create, func))
+  end
+
+  local function checkCFunc(name, func)
     assertEquals('function', type(func))
     return {
       getfenv = function()
         assertEquals(_G, getfenv(func))
       end,
       impltype = function()
-        assertEquals(isLua, (pcall(coroutine.create, func)))
+        assertEquals(false, isLuaFunc(func))
+        cfuncs.add(name, func)
       end,
-      unique = not isLua and function()
-        assertEquals(nil, cfuncs[func])
-        cfuncs[func] = true
-      end or nil,
     }
   end
 
-  local function checkCFunc(func)
-    return checkFunc(func, false)
-  end
-
   local function checkLuaFunc(func)
-    return checkFunc(func, true)
+    assertEquals('function', type(func))
+    return {
+      getfenv = function()
+        assertEquals(_G, getfenv(func))
+      end,
+      impltype = function()
+        assertEquals(true, isLuaFunc(func))
+      end,
+    }
   end
 
-  local function checkAliasOrLuaFunc(func)
-    if not cfuncs[func] then
-      return checkLuaFunc(func)
+  local function checkAliasOrLuaFunc(name, func)
+    if not isLuaFunc(func) then
+      cfuncs.addAlias(name, func)
     end
   end
 
@@ -57,15 +104,16 @@ G.testsuite.generated = function()
     for name, cfg in pairs(cfgs) do
       cfg = cfg == true and {} or cfg
       ret[name] = function()
+        local fullname = (ename and ename .. '.' or '') .. name
         local func = env[name]
         if iswowlesslite then
-          return checkCFunc(func)
+          return checkCFunc(fullname, func)
         elseif cfg.overwritten then
           return checkLuaFunc(func)
-        elseif capsuleapis[(ename and ename .. '.' or '') .. name] then
+        elseif capsuleapis[fullname] then
           assertEquals(nil, func)
         else
-          return checkCFunc(func)
+          return checkCFunc(fullname, func)
         end
       end
     end
@@ -87,13 +135,10 @@ G.testsuite.generated = function()
           for k, v in pairs(ns) do
             if not nstests[k] then
               nstests[k] = function()
-                local aliased = aliased_in_framexml[name .. '.' .. k]
-                if aliased then
-                  assertEquals(tget(_G, aliased), v)
-                elseif name == 'math' and (k == 'huge' or k == 'pi') then
+                if name == 'math' and (k == 'huge' or k == 'pi') then
                   assertEquals('number', type(v))
                 else
-                  return checkAliasOrLuaFunc(v)
+                  return checkAliasOrLuaFunc(name .. '.' .. k, v)
                 end
               end
             end
@@ -176,14 +221,14 @@ G.testsuite.generated = function()
         if iswowlesslite then
           assert(_G[k] == nil)
         else
-          return checkCFunc(_G[k])
+          return checkCFunc(k, _G[k])
         end
       end
     end
     for k, v in pairs(_G) do
       if type(v) == 'function' and not tests[k] then
         tests[k] = function()
-          return checkAliasOrLuaFunc(v)
+          return checkAliasOrLuaFunc(k, v)
         end
       end
     end
@@ -473,7 +518,7 @@ G.testsuite.generated = function()
             local mtests = {}
             for mname in pairs(cfg.methods) do
               mtests[mname] = function()
-                return checkCFunc(__index[mname])
+                return checkCFunc(name .. ':' .. mname, __index[mname])
               end
             end
             for k in pairs(__index) do
@@ -506,5 +551,6 @@ G.testsuite.generated = function()
     globals = globals,
     impltests = impltests,
     uiobjects = uiobjects,
+    ['~cfuncs'] = cfuncs.test,
   }
 end

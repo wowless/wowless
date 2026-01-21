@@ -4,16 +4,6 @@ type:
     addon:
       type:
         record:
-          aliased_in_framexml:
-            type:
-              mapof:
-                key:
-                  ref:
-                    negative: true
-                    schema: api
-                value:
-                  ref:
-                    schema: api
           capsule:
             type:
               record:

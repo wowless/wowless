@@ -1,6 +1,4 @@
 addon:
-  aliased_in_framexml:
-    C_LFGInfo.IsPremadeGroupEnabled: C_LFGList.IsPremadeGroupFinderEnabled
   capsule:
     apinamespaces:
       C_AuthChallenge:
