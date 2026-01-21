@@ -68,14 +68,6 @@ local function checkLuaObject(ty, o)
       end
       return t
     end,
-    methodsunique = function()
-      local seen = {}
-      for k in pairs(_G.WowlessData.LuaObjects[ty]) do
-        local fn = o[k]
-        assertEquals(nil, seen[fn], k)
-        seen[fn] = k
-      end
-    end,
     selfeq = function()
       assertEquals(o, o)
     end,
@@ -92,7 +84,7 @@ local function checkLuaObject(ty, o)
   }
 end
 
-local function checkLuaObjectFactory(ty, fn)
+local function checkLuaObjectFactory(ty, fn, cfuncs)
   return {
     fields = function()
       local o = fn()
@@ -111,6 +103,12 @@ local function checkLuaObjectFactory(ty, fn)
     end,
     instance = function()
       return checkLuaObject(ty, fn())
+    end,
+    methodsunique = function()
+      local o = fn()
+      for k in pairs(_G.WowlessData.LuaObjects[ty]) do
+        cfuncs.add(ty .. '/' .. k, o[k])
+      end
     end,
     sharedmethods = function()
       local o1 = fn()
@@ -150,14 +148,15 @@ local factories = {
   end,
 }
 
-G.checkLuaObject = checkLuaObject
-
-G.testsuite.luaobjects = function()
+local function checkLuaObjectFactories(cfuncs)
   local tests = {}
   for k in pairs(_G.WowlessData.LuaObjects) do
     tests[k] = function()
-      return checkLuaObjectFactory(k, assert(factories[k], k))
+      return checkLuaObjectFactory(k, assert(factories[k], k), cfuncs)
     end
   end
   return tests
 end
+
+G.checkLuaObject = checkLuaObject
+G.checkLuaObjectFactories = checkLuaObjectFactories

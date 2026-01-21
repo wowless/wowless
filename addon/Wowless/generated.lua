@@ -12,6 +12,7 @@ local function newUniqueChecker()
   local names = {}
   local open = true
   local function addEntry(n, v, b)
+    assert(type(n) == 'string')
     assert(open, n)
     assert(names[n] == nil, n)
     local tt = t[v]
@@ -341,6 +342,10 @@ G.testsuite.generated = function()
     return tests
   end
 
+  local function luaobjects()
+    return G.checkLuaObjectFactories(cfuncs)
+  end
+
   local function uiobjects()
     local warners = _G.WowlessData.Config.runtime.warners
     local function assertCreateFrameFails(ty)
@@ -550,6 +555,7 @@ G.testsuite.generated = function()
     globalApis = globalApis,
     globals = globals,
     impltests = impltests,
+    luaobjects = luaobjects,
     uiobjects = uiobjects,
     ['~cfuncs'] = cfuncs.test,
   }
