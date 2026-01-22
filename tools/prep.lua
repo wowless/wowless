@@ -479,31 +479,18 @@ end
 local luaobjects = {}
 do
   local luaobjectdata = parseYaml('data/products/' .. product .. '/luaobjects.yaml')
-  local function pop(k)
-    if luaobjects[k] then
-      return
-    end
-    local v = luaobjectdata[k]
-    -- Process parent first if it exists
-    if v.inherits then
-      pop(v.inherits)
-    end
-    -- Store only own methods, not inherited ones
+  for k, v in pairs(luaobjectdata) do
     local methods = {}
     for mk in pairs(v.methods or {}) do
       methods[mk] = true
     end
     luaobjects[k] = {
       impl = v.impl,
-      inherits = v.inherits,  -- PRESERVE inheritance relationship
-      methods = methods,      -- Only own methods
-      virtual = v.virtual,    -- PRESERVE virtual flag
+      inherits = v.inherits,
+      methods = methods,
+      virtual = v.virtual,
     }
   end
-  for k in pairs(luaobjectdata) do
-    pop(k)
-  end
-  -- DO NOT remove virtual types - loader needs them
 end
 
 local data = {

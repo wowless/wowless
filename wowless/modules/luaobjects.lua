@@ -8,8 +8,7 @@ return function(datalua)
   local impltypes = {}
 
   local function LoadTypes(modules)
-    -- Phase 1: Create method implementations for all types (including virtual)
-    local allmethods = {}  -- allmethods[typename][methodname] = wrapped_function
+    local allmethods = {}
 
     local function createMethods(k)
       if allmethods[k] then
@@ -19,15 +18,13 @@ return function(datalua)
       local v = datalua.luaobjects[k]
       local methods = {}
 
-      -- First, get inherited methods (reuse parent's function references)
       if v.inherits then
-        local parentMethods = createMethods(v.inherits)
-        for mk, mfn in pairs(parentMethods) do
-          methods[mk] = mfn  -- SHARE parent's function reference
+        local parentmethods = createMethods(v.inherits)
+        for mk, mfn in pairs(parentmethods) do
+          methods[mk] = mfn
         end
       end
 
-      -- Then, create/override own methods
       local impl = v.impl and modules[v.impl]
       if impl then
         local implmethods = assert(impl.methods, k .. ' impl missing methods')
@@ -47,17 +44,13 @@ return function(datalua)
       return methods
     end
 
-    -- Create methods for all types
     for k in pairs(datalua.luaobjects) do
       createMethods(k)
     end
 
-    -- Phase 2: Create metatables and proxies (only for non-virtual types)
     for k, v in pairs(datalua.luaobjects) do
       if not v.virtual then
         local methods = allmethods[k]
-        local impl = v.impl and modules[v.impl]
-        impltypes[k] = impl
 
         local mt
         mt = {
@@ -82,6 +75,7 @@ return function(datalua)
         local mtp = newproxy(true)
         mixin(getmetatable(mtp), mt)
         mtps[k] = mtp
+        impltypes[k] = v.impl and modules[v.impl]
       end
     end
   end
