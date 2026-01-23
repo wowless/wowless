@@ -210,7 +210,13 @@ G.testsuite.generated = function()
         if v.registerable then
           return G.match(2, true, not v.restricted, pcall(frame.RegisterEvent, frame, k))
         else
-          assertEquals(false, (pcall(frame.RegisterEvent, frame, k)))
+          local err = table.concat({
+            'Frame:RegisterEvent(): ',
+            'Frame:RegisterEvent(): ',
+            'Attempt to register unknown event ',
+            '"' .. k .. '"',
+          })
+          return G.match(2, false, err, pcall(frame.RegisterEvent, frame, k))
         end
       end
     end

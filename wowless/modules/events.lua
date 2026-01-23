@@ -9,9 +9,14 @@ return function(datalua, funcheck, log, loglevel, scripts)
   end
 
   local function RegisterEvent(frame, event)
-    event = event:upper()
-    local reg = assert(regs[event], 'cannot register ' .. event)
-    if reg:has(frame) or secures[event] and _G.THETAINT then
+    local uevent = event:upper()
+    local reg = regs[uevent]
+    if not reg then
+      local fmt = '%s:RegisterEvent(): %s:RegisterEvent(): Attempt to register unknown event %q'
+      local ty = frame:GetObjectType()
+      error(fmt:format(ty, ty, event), 0)
+    end
+    if reg:has(frame) or secures[uevent] and _G.THETAINT then
       return false
     end
     reg:insert(frame)
