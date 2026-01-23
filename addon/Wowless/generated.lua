@@ -207,7 +207,11 @@ G.testsuite.generated = function()
     local frame = CreateFrame('Frame')
     for k, v in pairs(_G.WowlessData.Events) do
       tests[k] = function()
-        assertEquals(v.registerable, (pcall(frame.RegisterEvent, frame, k)))
+        if v.registerable then
+          return G.match(2, true, not v.restricted, pcall(frame.RegisterEvent, frame, k))
+        else
+          assertEquals(false, (pcall(frame.RegisterEvent, frame, k)))
+        end
       end
     end
     return tests

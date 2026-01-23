@@ -22,5 +22,7 @@ type:
                   required: true
                   type:
                     schema: type
+        restricted:
+          type: flag
         stride:
           type: number

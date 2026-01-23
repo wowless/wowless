@@ -2,14 +2,16 @@ local hlist = require('wowless.hlist')
 return function(datalua, funcheck, log, loglevel, scripts)
   local allregs = hlist()
   local regs = {}
-  for k in pairs(datalua.events) do
+  local secures = {}
+  for k, v in pairs(datalua.events) do
     regs[k] = hlist()
+    secures[k] = v.restricted
   end
 
   local function RegisterEvent(frame, event)
     event = event:upper()
     local reg = assert(regs[event], 'cannot register ' .. event)
-    if reg:has(frame) then
+    if reg:has(frame) or secures[event] and _G.THETAINT then
       return false
     end
     reg:insert(frame)

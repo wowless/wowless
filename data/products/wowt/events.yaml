@@ -3809,9 +3809,11 @@ COMBAT_LOG_ENTRIES_CLEARED:
 COMBAT_LOG_EVENT:
   callback: true
   payload:
+  restricted: true
 COMBAT_LOG_EVENT_UNFILTERED:
   callback: true
   payload:
+  restricted: true
 COMBAT_LOG_MESSAGE:
   payload:
   - name: message
@@ -8418,6 +8420,7 @@ TRY_PURCHASE_TO_NODE_PARTIAL_SUCCESS:
     type: number
 TUTORIAL_COMBAT_EVENT:
   payload:
+  restricted: true
 TUTORIAL_HIGHLIGHT_SPELL:
   payload:
   - name: spellID

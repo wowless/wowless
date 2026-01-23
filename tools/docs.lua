@@ -353,6 +353,7 @@ local function rewriteEvents(out)
     out[ev.LiteralName] = {
       callback = ev.CallbackEvent,
       payload = payload,
+      restricted = ev.HasRestrictions or ev.RequireNPERestricted,
       stride = stride(ev.Payload),
     }
   end

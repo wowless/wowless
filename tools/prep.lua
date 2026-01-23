@@ -262,6 +262,7 @@ for k, v in pairs(parseYaml('data/products/' .. product .. '/events.yaml')) do
   events[k] = {
     callback = v.callback,
     payload = v.payload,
+    restricted = v.restricted,
     stride = v.stride,
     stub = 'return ' .. table.concat(t, ','),
   }

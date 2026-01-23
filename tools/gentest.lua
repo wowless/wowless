@@ -41,6 +41,7 @@ local ptablemap = {
         callback = v.callback or false,
         payload = #v.payload,
         registerable = true,
+        restricted = v.restricted,
       }
     end
     for _, product in ipairs(readyaml('data/products.yaml')) do
