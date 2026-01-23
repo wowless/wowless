@@ -64,6 +64,8 @@ type:
               type: flag
             SecretWhenAurasRestricted:
               type: flag
+            SecretWhenEncounterEvent:
+              type: flag
             SecretWhenSpellCastRestricted:
               type: flag
             SecretWhenUnitChargedPowerPointsRestricted:
@@ -247,6 +249,8 @@ type:
             SecretWhenCooldownsRestricted:
               type: flag
             SecretWhenCurveSecret:
+              type: flag
+            SecretWhenEncounterEvent:
               type: flag
             SecretWhenInCombat:
               type: flag

@@ -3497,6 +3497,12 @@ C_BattleNet.SendWhisper:
   outputs:
   - name: success
     type: boolean
+C_BattleNet.SetAFK:
+  inputs:
+  - default: true
+    name: isAFK
+    type: boolean
+  outputs:
 C_BattleNet.SetCustomMessage:
   inputs:
   - name: text
@@ -3504,6 +3510,12 @@ C_BattleNet.SetCustomMessage:
   outputs:
   - name: success
     type: boolean
+C_BattleNet.SetDND:
+  inputs:
+  - default: true
+    name: isDND
+    type: boolean
+  outputs:
 C_BehavioralMessaging.SendNotificationReceipt:
   inputs:
   - name: dbId
@@ -4189,6 +4201,16 @@ C_CatalogShop.ConfirmHousingPurchase:
     type:
       arrayof: number
   outputs:
+C_CatalogShop.FindBestCurrencyProductForNeededAmount:
+  inputs:
+  - name: vcCurrencyCode
+    type: string
+  - name: amountNeeded
+    type: number
+  outputs:
+  - name: vcProductID
+    nilable: true
+    type: number
 C_CatalogShop.GetAvailableCategoryIDs:
   inputs:
   outputs:
@@ -4365,6 +4387,9 @@ C_CatalogShop.OnLegalDisclaimerClicked:
   inputs:
   - name: catalogShopProductID
     type: number
+  outputs:
+C_CatalogShop.OnLegalPersonalizedOptOutClicked:
+  inputs:
   outputs:
 C_CatalogShop.OpenCatalogShopInteractionFromHouse:
   inputs:
@@ -10461,6 +10486,11 @@ C_EncounterTimeline.GetEventCountBySource:
   outputs:
   - name: count
     type: number
+C_EncounterTimeline.GetEventHighlightTime:
+  inputs:
+  outputs:
+  - name: highlightTime
+    type: number
 C_EncounterTimeline.GetEventInfo:
   inputs:
   - name: eventID
@@ -10490,6 +10520,15 @@ C_EncounterTimeline.GetEventTimeElapsed:
   outputs:
   - name: timeElapsed
     type: number
+C_EncounterTimeline.GetEventTimer:
+  inputs:
+  - name: eventID
+    type: number
+  outputs:
+  - name: duration
+    nilable: true
+    type:
+      luaobject: LuaDurationObject
 C_EncounterTimeline.GetEventTimeRemaining:
   inputs:
   - name: eventID
@@ -10508,6 +10547,24 @@ C_EncounterTimeline.GetEventTrack:
   - name: trackSortIndex
     nilable: true
     type: number
+C_EncounterTimeline.GetSortedEventList:
+  inputs:
+  - name: maxEventCount
+    nilable: true
+    type: number
+  - name: maxEventDuration
+    nilable: true
+    type: number
+  - default: true
+    name: excludeTerminalStates
+    type: boolean
+  - default: true
+    name: excludeHiddenEvents
+    type: boolean
+  outputs:
+  - name: events
+    type:
+      arrayof: number
 C_EncounterTimeline.GetTrackInfo:
   inputs:
   - name: track
@@ -10524,6 +10581,29 @@ C_EncounterTimeline.GetTrackList:
     type:
       arrayof:
         structure: C_EncounterTimeline.EncounterTimelineTrackInfo
+C_EncounterTimeline.GetTrackMaxEventDuration:
+  inputs:
+  - name: track
+    type:
+      enum: EncounterTimelineTrack
+  outputs:
+  - name: maxEventDuration
+    type: number
+C_EncounterTimeline.GetTrackType:
+  inputs:
+  - name: track
+    type:
+      enum: EncounterTimelineTrack
+  outputs:
+  - name: trackType
+    type:
+      enum: EncounterTimelineTrackType
+C_EncounterTimeline.GetViewType:
+  inputs:
+  outputs:
+  - name: viewType
+    type:
+      enum: EncounterTimelineViewType
 C_EncounterTimeline.HasActiveEvents:
   inputs:
   outputs:
@@ -10582,6 +10662,12 @@ C_EncounterTimeline.SetEventIconTextures:
     type:
       arrayof:
         uiobject: Texture
+  outputs:
+C_EncounterTimeline.SetViewType:
+  inputs:
+  - name: viewType
+    type:
+      enum: EncounterTimelineViewType
   outputs:
 C_EncounterWarnings.GetEditModeWarningInfo:
   inputs:
@@ -18176,6 +18262,11 @@ C_NeighborhoodInitiative.IsViewingActiveNeighborhood:
   outputs:
   - name: isViewingActiveNeighborhood
     type: boolean
+C_NeighborhoodInitiative.PlayerHasInitiativeAccess:
+  inputs:
+  outputs:
+  - name: success
+    type: boolean
 C_NeighborhoodInitiative.PlayerMeetsRequiredLevel:
   inputs:
   outputs:
@@ -24830,6 +24921,9 @@ C_StringUtil.StripHyperlinks:
   - default: false
     name: maintainAtlases
     type: boolean
+  - default: false
+    name: maintainTextures
+    type: boolean
   outputs:
   - name: stripped
     type: string
@@ -25037,6 +25131,16 @@ C_SystemVisibilityManager.IsSystemVisible:
   outputs:
   - name: visible
     type: boolean
+C_TableUtil.FindIndexedMismatch:
+  inputs:
+  - name: t1
+    type: unknown
+  - name: t2
+    type: unknown
+  outputs:
+  - name: index
+    nilable: true
+    type: number
 C_TalkingHead.GetConversationsDeferred:
 C_TalkingHead.GetCurrentLineAnimationInfo:
 C_TalkingHead.GetCurrentLineInfo:
@@ -30291,9 +30395,9 @@ C_VoiceChat.GetChannel:
   inputs:
   - name: channelID
     type: number
+  mayreturnnothing: true
   outputs:
   - name: channel
-    nilable: true
     type:
       structure: C_VoiceChat.VoiceChatChannel
 C_VoiceChat.GetChannelForChannelType:
@@ -30301,9 +30405,9 @@ C_VoiceChat.GetChannelForChannelType:
   - name: channelType
     type:
       enum: ChatChannelType
+  mayreturnnothing: true
   outputs:
   - name: channel
-    nilable: true
     type:
       structure: C_VoiceChat.VoiceChatChannel
 C_VoiceChat.GetChannelForCommunityStream:
@@ -30312,9 +30416,9 @@ C_VoiceChat.GetChannelForCommunityStream:
     type: string
   - name: streamId
     type: string
+  mayreturnnothing: true
   outputs:
   - name: channel
-    nilable: true
     type:
       structure: C_VoiceChat.VoiceChatChannel
 C_VoiceChat.GetCommunicationMode:

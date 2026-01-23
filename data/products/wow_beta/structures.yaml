@@ -1143,6 +1143,8 @@ C_CampaignInfo.CampaignInfo:
   fields:
     description:
       type: string
+    hideFutureChapters:
+      type: boolean
     isContainerCampaign:
       type: boolean
     isWarCampaign:
@@ -1252,9 +1254,6 @@ C_CatalogShop.CatalogShopProductDisplayInfo:
     otherProductImageAtlasName:
       nilable: true
       type: string
-    otherProductPMTURL:
-      nilable: true
-      type: string
     overrideCardModelSceneID:
       nilable: true
       type: number
@@ -1264,6 +1263,9 @@ C_CatalogShop.CatalogShopProductDisplayInfo:
     overrideWideCardModelSceneID:
       nilable: true
       type: number
+    productPMTURL:
+      nilable: true
+      type: string
     productType:
       nilable: true
       type: string
@@ -1399,6 +1401,8 @@ C_CatalogShop.CatalogShopSectionInfo:
     scrollGridSize:
       nilable: true
       type: number
+    shouldShowRecommendationOptOutDisclaimer:
+      type: boolean
 C_CatalogShop.CatalogShopSpellVisualInfo:
   fields:
     animID:
@@ -6461,6 +6465,10 @@ C_QuestLog.QuestTheme:
   fields:
     background:
       type: string
+    mapPinInfo:
+      nilable: true
+      type:
+        structure: UIMapPinInfo
     poiIcon:
       type: string
     seal:
@@ -12375,6 +12383,8 @@ UIMapPinInfo:
     buttonSelected:
       type:
         structure: UIButtonInfo
+    outerGlow:
+      type: string
     underlay:
       type: string
 UITextureSliceData:

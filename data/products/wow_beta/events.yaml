@@ -763,6 +763,12 @@ BULK_PURCHASE_RESULT_RECEIVED:
     type:
       arrayof:
         structure: C_CatalogShop.BulkPurchaseIndividualProductResult
+  - name: bestTopUpProductID
+    nilable: true
+    type: number
+  - name: totalCost
+    nilable: true
+    type: number
 CALENDAR_ACTION_PENDING:
   payload:
   - name: pending
@@ -4433,6 +4439,16 @@ ENCOUNTER_TIMELINE_LAYOUT_UPDATED:
   payload:
 ENCOUNTER_TIMELINE_STATE_UPDATED:
   payload:
+ENCOUNTER_TIMELINE_VIEW_ACTIVATED:
+  payload:
+  - name: viewType
+    type:
+      enum: EncounterTimelineViewType
+ENCOUNTER_TIMELINE_VIEW_DEACTIVATED:
+  payload:
+  - name: viewType
+    type:
+      enum: EncounterTimelineViewType
 ENCOUNTER_WARNING:
   payload:
   - name: encounterWarningInfo
@@ -5176,6 +5192,9 @@ HOUSING_CLEANUP_MODE_HOVERED_TARGET_CHANGED:
   payload:
   - name: hasHoveredTarget
     type: boolean
+  - name: targetType
+    type:
+      enum: HousingCleanupModeTargetType
 HOUSING_CLEANUP_MODE_TARGET_SELECTED:
   payload:
 HOUSING_CORE_FIXTURE_CHANGED:
@@ -6083,6 +6102,7 @@ MERCHANT_UPDATE:
 MIN_EXPANSION_LEVEL_UPDATED:
   payload:
 MINIMAP_PING:
+  callback: true
   payload:
   - name: unitTarget
     type: unit
@@ -6859,6 +6879,10 @@ PLAYER_MAP_CHANGED:
     type: number
   - name: newMapID
     type: number
+PLAYER_MAX_LEVEL_UPDATE:
+  payload:
+  - name: unitTarget
+    type: unit
 PLAYER_MONEY:
   payload:
 PLAYER_MOUNT_DISPLAY_CHANGED:

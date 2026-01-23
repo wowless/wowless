@@ -686,6 +686,8 @@ typedefs:
       luaobject: UnitHealPredictionCalculator
   UnitToken:
     type: unit
+  UnitTokenRestrictedForAddOns:
+    type: unit
   UnitTokenVariant:
     type: unit
   WeeklyRewardItemDBID:
