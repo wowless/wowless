@@ -109,6 +109,9 @@ Frame/RegisterAllEvents:
 Frame/RegisterEvent:
   moduledelegate:
     name: events
+Frame/RegisterEventCallback:
+  moduledelegate:
+    name: events
 Frame/RegisterUnitEvent:
   moduledelegate:
     name: events

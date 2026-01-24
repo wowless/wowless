@@ -4125,6 +4125,8 @@ Frame:
       - name: registered
         type: boolean
     RegisterEventCallback:
+      impl:
+        uiobjectimpl: Frame/RegisterEventCallback
       inputs:
       - name: eventName
         type: string

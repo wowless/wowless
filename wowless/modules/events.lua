@@ -23,6 +23,21 @@ return function(datalua, funcheck, log, loglevel, scripts)
     return true
   end
 
+  local function RegisterEventCallback(frame, event)
+    local uevent = event:upper()
+    local cfg = datalua.events[uevent]
+    if not cfg or not cfg.callback then
+      local fmt = '%s:RegisterEventCallback(): Attempt to register unknown event %q'
+      local ty = frame:GetObjectType()
+      error(fmt:format(ty, event), 0)
+    end
+    if secures[uevent] and _G.THETAINT then
+      return false
+    end
+    -- TODO actually register the callback
+    return true
+  end
+
   local function UnregisterEvent(frame, event)
     event = event:upper()
     local reg = assert(regs[event], 'cannot unregister ' .. event)
@@ -117,6 +132,7 @@ return function(datalua, funcheck, log, loglevel, scripts)
     IsEventValid = IsEventValid,
     RegisterAllEvents = RegisterAllEvents,
     RegisterEvent = RegisterEvent,
+    RegisterEventCallback = RegisterEventCallback,
     RegisterUnitEvent = RegisterEvent, -- TODO implement properly
     SendEvent = SendEvent,
     UnregisterAllEvents = UnregisterAllEvents,

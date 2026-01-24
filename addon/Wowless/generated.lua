@@ -205,19 +205,36 @@ G.testsuite.generated = function()
   local function events()
     local tests = {}
     local frame = CreateFrame('Frame')
+    local nop = function() end
     for k, v in pairs(_G.WowlessData.Events) do
       tests[k] = function()
-        if v.registerable then
-          return G.match(2, true, not v.restricted, pcall(frame.RegisterEvent, frame, k))
-        else
-          local err = table.concat({
-            'Frame:RegisterEvent(): ',
-            'Frame:RegisterEvent(): ',
-            'Attempt to register unknown event ',
-            '"' .. k .. '"',
-          })
-          return G.match(2, false, err, pcall(frame.RegisterEvent, frame, k))
-        end
+        return {
+          RegisterEvent = function()
+            if v.registerable then
+              return G.match(2, true, not v.restricted, pcall(frame.RegisterEvent, frame, k))
+            else
+              local err = table.concat({
+                'Frame:RegisterEvent(): ',
+                'Frame:RegisterEvent(): ',
+                'Attempt to register unknown event ',
+                '"' .. k .. '"',
+              })
+              return G.match(2, false, err, pcall(frame.RegisterEvent, frame, k))
+            end
+          end,
+          RegisterEventCallback = frame.RegisterEventCallback and function()
+            if v.registerable and v.callback then
+              return G.match(2, true, not v.restricted, pcall(frame.RegisterEventCallback, frame, k, nop))
+            else
+              local err = table.concat({
+                'Frame:RegisterEventCallback(): ',
+                'Attempt to register unknown event ',
+                '"' .. k .. '"',
+              })
+              return G.match(2, false, err, pcall(frame.RegisterEventCallback, frame, k, nop))
+            end
+          end,
+        }
       end
     end
     return tests
