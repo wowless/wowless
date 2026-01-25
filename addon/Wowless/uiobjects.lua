@@ -332,6 +332,14 @@ G.testsuite.uiobjects = function()
           assertEquals(g, mv)
           assertEquals(nil, f.moo)
         end,
+        ['RegisterEventCallback accepts funtainer arg'] = function()
+          local f = retn(1, CreateFrame('Frame'))
+          if not f.RegisterEventCallback then
+            return
+          end
+          local ft = _G.C_FunctionContainers.CreateCallback(function() end)
+          return match(1, true, f:RegisterEventCallback('ENCOUNTER_STATE_CHANGED', ft))
+        end,
         ['support $parent in frame names'] = function()
           local parent = retn(1, CreateFrame('Frame', 'WowlessParentNameTestMoo'))
           local t = {

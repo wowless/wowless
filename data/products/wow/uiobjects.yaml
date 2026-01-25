@@ -4131,7 +4131,8 @@ Frame:
       - name: eventName
         type: string
       - name: cb
-        type: function
+        type:
+          luaobject: LuaFunctionContainer
       outputs:
       - name: registered
         type: boolean
@@ -4159,7 +4160,8 @@ Frame:
       - name: eventName
         type: string
       - name: cb
-        type: function
+        type:
+          luaobject: LuaFunctionContainer
       - name: units
         type: string
       instride: 1

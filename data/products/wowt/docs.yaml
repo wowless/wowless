@@ -512,6 +512,9 @@ typedefs:
     type: number
   FontAlphabet:
     type: string
+  FrameEventCallbackType:
+    type:
+      luaobject: LuaFunctionContainer
   FrameScriptObject:
     type:
       uiobject: UIObject
