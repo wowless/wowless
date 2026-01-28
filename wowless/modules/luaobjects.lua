@@ -8,11 +8,24 @@ return function(datalua)
   local impltypes = {}
 
   local function LoadTypes(modules)
-    for k, v in pairs(datalua.luaobjects) do
-      local impl = v.impl and modules[v.impl]
-      impltypes[k] = impl
+    local allmethods = {}
 
+    local function createMethods(k)
+      if allmethods[k] then
+        return allmethods[k]
+      end
+
+      local v = datalua.luaobjects[k]
       local methods = {}
+
+      if v.inherits then
+        local parentmethods = createMethods(v.inherits)
+        for mk, mfn in pairs(parentmethods) do
+          methods[mk] = mfn
+        end
+      end
+
+      local impl = v.impl and modules[v.impl]
       if impl then
         local implmethods = assert(impl.methods, k .. ' impl missing methods')
         for mk in pairs(v.methods) do
@@ -27,29 +40,43 @@ return function(datalua)
         end
       end
 
-      local mt
-      mt = {
-        __eq = function(u1, u2)
-          return objs[u1].table == objs[u2].table
-        end,
-        __index = function(u, key)
-          return methods[key] or objs[u].table[key]
-        end,
-        __metatable = false,
-        __newindex = function(u, key, value)
-          if methods[key] or mt[key] ~= nil then
-            error('Attempted to assign to read-only key ' .. key)
-          end
-          objs[u].table[key] = value
-        end,
-        __tostring = config.tostring_metamethod and function(u)
-          return k .. ': ' .. tostring(objs[u].table):sub(8)
-        end or nil,
-      }
+      allmethods[k] = methods
+      return methods
+    end
 
-      local mtp = newproxy(true)
-      mixin(getmetatable(mtp), mt)
-      mtps[k] = mtp
+    for k in pairs(datalua.luaobjects) do
+      createMethods(k)
+    end
+
+    for k, v in pairs(datalua.luaobjects) do
+      if not v.virtual then
+        local methods = allmethods[k]
+
+        local mt
+        mt = {
+          __eq = function(u1, u2)
+            return objs[u1].table == objs[u2].table
+          end,
+          __index = function(u, key)
+            return methods[key] or objs[u].table[key]
+          end,
+          __metatable = false,
+          __newindex = function(u, key, value)
+            if methods[key] or mt[key] ~= nil then
+              error('Attempted to assign to read-only key ' .. key)
+            end
+            objs[u].table[key] = value
+          end,
+          __tostring = config.tostring_metamethod and function(u)
+            return k .. ': ' .. tostring(objs[u].table):sub(8)
+          end or nil,
+        }
+
+        local mtp = newproxy(true)
+        mixin(getmetatable(mtp), mt)
+        mtps[k] = mtp
+        impltypes[k] = v.impl and modules[v.impl]
+      end
     end
   end
 

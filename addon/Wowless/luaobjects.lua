@@ -4,6 +4,23 @@ local assertEquals = G.assertEquals
 
 local config = _G.WowlessData.Config.modules and _G.WowlessData.Config.modules.luaobjects or {}
 
+local function getAllMethods(ty)
+  local typedata = _G.WowlessData.LuaObjects[ty]
+  if not typedata then
+    return {}
+  end
+  local methods = {}
+  if typedata.inherits then
+    for k in pairs(getAllMethods(typedata.inherits)) do
+      methods[k] = true
+    end
+  end
+  for k in pairs(typedata.methods or {}) do
+    methods[k] = true
+  end
+  return methods
+end
+
 local metamethods = {
   __eq = true,
   __index = true,
@@ -51,7 +68,7 @@ local function checkLuaObject(ty, o)
     end,
     methods = function()
       local t = {}
-      for k in pairs(_G.WowlessData.LuaObjects[ty]) do
+      for k in pairs(getAllMethods(ty)) do
         t[k] = function()
           return {
             modify = function()
@@ -67,14 +84,6 @@ local function checkLuaObject(ty, o)
         end
       end
       return t
-    end,
-    methodsunique = function()
-      local seen = {}
-      for k in pairs(_G.WowlessData.LuaObjects[ty]) do
-        local fn = o[k]
-        assertEquals(nil, seen[fn], k)
-        seen[fn] = k
-      end
     end,
     selfeq = function()
       assertEquals(o, o)
@@ -92,7 +101,7 @@ local function checkLuaObject(ty, o)
   }
 end
 
-local function checkLuaObjectFactory(ty, fn)
+local function checkLuaObjectFactory(ty, fn, cfuncs, registeredMethods)
   return {
     fields = function()
       local o = fn()
@@ -112,11 +121,27 @@ local function checkLuaObjectFactory(ty, fn)
     instance = function()
       return checkLuaObject(ty, fn())
     end,
+    methodsunique = function()
+      local o = fn()
+      local typedata = _G.WowlessData.LuaObjects[ty]
+      local inherits = typedata.inherits
+      local ownmethods = typedata.methods or {}
+
+      for k in pairs(getAllMethods(ty)) do
+        local methodtype = ownmethods[k] and ty or inherits
+        local methodname = methodtype .. '/' .. k
+
+        if not registeredMethods[methodname] then
+          cfuncs.add(methodname, o[k])
+          registeredMethods[methodname] = true
+        end
+      end
+    end,
     sharedmethods = function()
       local o1 = fn()
       local o2 = fn()
       local t = {}
-      for k in pairs(_G.WowlessData.LuaObjects[ty]) do
+      for k in pairs(getAllMethods(ty)) do
         t[k] = function()
           assertEquals(o1[k], o2[k])
         end
@@ -150,14 +175,20 @@ local factories = {
   end,
 }
 
-G.checkLuaObject = checkLuaObject
-
-G.testsuite.luaobjects = function()
+local function checkLuaObjectFactories(cfuncs)
   local tests = {}
+  local registeredMethods = {}  -- Track which methods have been registered
+
   for k in pairs(_G.WowlessData.LuaObjects) do
-    tests[k] = function()
-      return checkLuaObjectFactory(k, assert(factories[k], k))
+    -- Skip virtual types (they don't have factories)
+    if factories[k] then
+      tests[k] = function()
+        return checkLuaObjectFactory(k, factories[k], cfuncs, registeredMethods)
+      end
     end
   end
   return tests
 end
+
+G.checkLuaObject = checkLuaObject
+G.checkLuaObjectFactories = checkLuaObjectFactories
