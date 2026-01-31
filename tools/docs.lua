@@ -354,7 +354,7 @@ local function rewriteEvents(out)
     end
     local newev = {
       callback = ev.CallbackEvent,
-      noscript = ev.HasRestrictions and ev.Environment == 'SecureOnly' or nil,
+      noscript = ev.CallbackEvent and not ev.SynchronousEvent and not ev.UniqueEvent or nil,
       payload = payload,
       restricted = ev.HasRestrictions or ev.RequireNPERestricted,
       stride = stride(ev.Payload),

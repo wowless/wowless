@@ -67,10 +67,6 @@ lies:
           _change:
             from: string
             to: unit
-  events:
-    TOOLTIP_SHOW_ITEM_COMPARISON:
-      _add:
-        noscript: true
   extra_apis:
     C_BarberShopInternal.SetQAMode:
     C_CinematicList.GetUICinematicList:

@@ -71,13 +71,6 @@ lies:
           _change:
             from: string
             to: unit
-  events:
-    MINIMAP_PING:
-      _add:
-        noscript: true
-    TOOLTIP_SHOW_ITEM_COMPARISON:
-      _add:
-        noscript: true
   extra_apis:
     C_BarberShopInternal.SetQAMode:
     C_CinematicList.GetUICinematicList:
