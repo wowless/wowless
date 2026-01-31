@@ -8115,6 +8115,18 @@ TOOLTIP_DATA_UPDATE:
   - name: dataInstanceID
     nilable: true
     type: number
+TOOLTIP_SHOW_ITEM_COMPARISON:
+  callback: true
+  payload:
+  - name: comparisonItem
+    type: table
+  - name: tooltip
+    type:
+      uiobject: GameTooltip
+  - name: anchorFrame
+    nilable: true
+    type:
+      uiobject: Frame
 TOYS_UPDATED:
   payload:
   - name: itemID
