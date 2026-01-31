@@ -260,6 +260,8 @@ type:
               type: flag
             SecretWhenSpellCooldownRestricted:
               type: flag
+            SecretWhenTotemSlotSecret:
+              type: flag
             SecretWhenUnitAuraIndexRestricted:
               type: flag
             SecretWhenUnitAuraInstanceRestricted:

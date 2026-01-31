@@ -22587,6 +22587,20 @@ C_Secrets.ShouldSpellCooldownBeSecret:
   outputs:
   - name: isCooldownSecret
     type: boolean
+C_Secrets.ShouldTotemSlotBeSecret:
+  inputs:
+  - name: slot
+    type: number
+  outputs:
+  - name: isTotemSecret
+    type: boolean
+C_Secrets.ShouldTotemSpellBeSecret:
+  inputs:
+  - name: spellID
+    type: number
+  outputs:
+  - name: isTotemSecret
+    type: boolean
 C_Secrets.ShouldUnitAuraIndexBeSecret:
   inputs:
   - name: unit
@@ -25230,6 +25244,18 @@ C_TimerunningUI.GetActiveTimerunningSeasonID:
   outputs:
   - name: activeTimerunningSeasonID
     type: number
+C_TooltipComparison.CompareItem:
+  inputs:
+  - name: comparisonItem
+    type: table
+  - name: tooltip
+    type:
+      uiobject: GameTooltip
+  - name: anchorFrame
+    nilable: true
+    type:
+      uiobject: Frame
+  outputs:
 C_TooltipComparison.GetItemComparisonDelta:
   inputs:
   - name: comparisonItem
@@ -37113,6 +37139,19 @@ securecall:
   impl: securecall
 securecallfunction:
   impl: securecallfunction
+securecallmethod:
+  inputs:
+  - name: object
+    type: unknown
+  - name: method
+    type: string
+  - name: arguments
+    type: unknown
+  instride: 1
+  outputs:
+  - name: results
+    type: unknown
+  outstride: 1
 SecureCmdOptionParse:
   impl: SecureCmdOptionParse
   inputs:
