@@ -108,7 +108,6 @@ lies:
     COMBAT_LOG_REFILTER_ENTRIES:
   extra_script_objects:
     FrameAPINamePlate:
-    FrameAPITooltip:
     HousingCatalogSearcherAPI:
     HousingFixturePointFrameAPI:
     HousingLayoutPinFrameAPI:
@@ -364,6 +363,8 @@ script_objects:
     uiobject: TabardModel
   FrameAPITabardModelBase:
     uiobject: TabardModel
+  FrameAPITooltip:
+    uiobject: GameTooltip
   FrameAPIUnitPositionFrame:
     uiobject: UnitPositionFrame
   LuaColorCurveObjectAPI:
@@ -672,6 +673,9 @@ typedefs:
   TimerCallback:
     type:
       luaobject: LuaFunctionContainer
+  Tooltip:
+    type:
+      uiobject: GameTooltip
   TooltipComparisonItem:
     type: table
   uiAddon:
@@ -688,6 +692,8 @@ typedefs:
     type:
       luaobject: UnitHealPredictionCalculator
   UnitToken:
+    type: unit
+  UnitTokenNamePlate:
     type: unit
   UnitTokenRestrictedForAddOns:
     type: unit

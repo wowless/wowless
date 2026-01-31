@@ -769,6 +769,11 @@ BULK_PURCHASE_RESULT_RECEIVED:
   - name: totalCost
     nilable: true
     type: number
+BULK_REFUND_RESULT_RECEIVED:
+  payload:
+  - name: result
+    type:
+      enum: BulkRefundResult
 CALENDAR_ACTION_PENDING:
   payload:
   - name: pending
@@ -2072,42 +2077,6 @@ CHAT_MSG_DND:
   - name: suppressRaidIcons
     type: boolean
 CHAT_MSG_EMOTE:
-  payload:
-  - name: text
-    type: string
-  - name: playerName
-    type: string
-  - name: languageName
-    type: string
-  - name: channelName
-    type: string
-  - name: playerName2
-    type: string
-  - name: specialFlags
-    type: string
-  - name: zoneChannelID
-    type: number
-  - name: channelIndex
-    type: number
-  - name: channelBaseName
-    type: string
-  - name: languageID
-    type: number
-  - name: lineID
-    type: number
-  - name: guid
-    type: string
-  - name: bnSenderID
-    type: number
-  - name: isMobile
-    type: boolean
-  - name: isSubtitle
-    type: boolean
-  - name: hideSenderInLetterbox
-    type: boolean
-  - name: suppressRaidIcons
-    type: boolean
-CHAT_MSG_ENCOUNTER_EVENT:
   payload:
   - name: text
     type: string
@@ -6716,6 +6685,21 @@ PETITION_CLOSED:
   payload:
 PETITION_SHOW:
   payload:
+PHOTO_SHARING_AUTHORIZATION_NEEDED:
+  payload:
+PHOTO_SHARING_AUTHORIZATION_UPDATED:
+  payload:
+PHOTO_SHARING_PHOTO_UPLOAD_STATUS:
+  payload:
+  - name: uploadStatus
+    type:
+      enum: PhotoSharingUploadStatus
+PHOTO_SHARING_SCREENSHOT_READY:
+  payload:
+PHOTO_SHARING_THIRD_PARTY_AUTHORIZATION_NEEDED:
+  payload:
+  - name: authUrl
+    type: string
 PING_SYSTEM_ERROR:
   payload:
   - name: error
@@ -7683,6 +7667,14 @@ SHOW_SUBTITLE:
   - name: sender
     nilable: true
     type: string
+SIMPLE_BROWSER_POPUP:
+  payload:
+  - name: url
+    type: string
+SIMPLE_BROWSER_SOCIAL_CALLBACK_INVOKED:
+  payload:
+  - name: url
+    type: string
 SIMPLE_BROWSER_WEB_ERROR:
   payload:
   - name: errorCode
@@ -8140,6 +8132,18 @@ TOOLTIP_DATA_UPDATE:
   - name: dataInstanceID
     nilable: true
     type: number
+TOOLTIP_SHOW_ITEM_COMPARISON:
+  callback: true
+  payload:
+  - name: comparisonItem
+    type: table
+  - name: tooltip
+    type:
+      uiobject: GameTooltip
+  - name: anchorFrame
+    nilable: true
+    type:
+      uiobject: Frame
 TOYS_UPDATED:
   payload:
   - name: itemID

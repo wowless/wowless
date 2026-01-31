@@ -230,6 +230,8 @@ type:
               type: flag
             SecretForAttackableUnits:
               type: flag
+            SecretInActivePvPMatch:
+              type: flag
             SecretInChatMessagingLockdown:
               type: flag
             SecretNonPlayerUnitOrMinionWhileInCombat:

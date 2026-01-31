@@ -7,6 +7,7 @@ Constants:
   AuctionConstants:
     DEFAULT_AUCTION_PRICE_MULTIPLIER: 1.5
   CAAConstants:
+    CAADebuffSelfAlertDefault: 0
     CAAEnabledDefault: false
     CAAFrequencyDefault: 0
     CAAFrequencyMax: 10
@@ -28,6 +29,12 @@ Constants:
     CAASayCombatEndDefault: true
     CAASayCombatStartDefault: true
     CAASayIfTargetedDefault: 1
+    CAASayYourDebuffsDefault: true
+    CAASayYourDebuffsFormatDefault: 0
+    CAASayYourDebuffsMinDurationDefault: 1.5
+    CAASayYourDebuffsMinDurationMax: 5
+    CAASayYourDebuffsMinDurationMin: 0
+    CAASayYourDebuffsMinDurationStep: 0.5
     CAATargetCastFormatDefault: 0
     CAATargetCastModeDefault: 0
     CAATargetDeathBehaviorDefault: 0
@@ -2341,15 +2348,23 @@ Enum:
     General: 0
     PartyHealth: 7
     PlayerCast: 3
+    PlayerDebuffs: 8
     PlayerHealth: 1
     PlayerResource1: 5
     PlayerResource2: 6
     TargetCast: 4
     TargetHealth: 2
   CombatAudioAlertCategoryMeta:
-    MaxValue: 7
+    MaxValue: 8
     MinValue: 0
-    NumValues: 8
+    NumValues: 9
+  CombatAudioAlertDebuffSelfAlertValues:
+    DispelType: 1
+    Off: 0
+  CombatAudioAlertDebuffSelfAlertValuesMeta:
+    MaxValue: 1
+    MinValue: 0
+    NumValues: 2
   CombatAudioAlertPartyPercentValues:
     Off: 0
     Under100Percent: 1
@@ -2387,6 +2402,13 @@ Enum:
     MaxValue: 4
     MinValue: 0
     NumValues: 5
+  CombatAudioAlertPlayerDebuffFormatValues:
+    Full: 0
+    NoSpellname: 1
+  CombatAudioAlertPlayerDebuffFormatValuesMeta:
+    MaxValue: 1
+    MinValue: 0
+    NumValues: 2
   CombatAudioAlertPlayerHealthFormatValues:
     HealthFull: 0
     HealthNoPercent: 1
@@ -3440,6 +3462,14 @@ Enum:
     MaxValue: 1
     MinValue: 0
     NumValues: 2
+  DamageMeterCombineSessionType:
+    Arena: 2
+    ChallengeMode: 1
+    None: 0
+  DamageMeterCombineSessionTypeMeta:
+    MaxValue: 2
+    MinValue: 0
+    NumValues: 3
   DamageMeterNumbers:
     Compact: 1
     Complete: 2
@@ -3468,13 +3498,14 @@ Enum:
     NumValues: 3
   DamageMeterSpellDetailsDisplayType:
     Deaths: 3
+    EnemyDamageTaken: 4
     SpellAffected: 2
     SpellCasted: 0
     UnitSpecificSpellCasted: 1
   DamageMeterSpellDetailsDisplayTypeMeta:
-    MaxValue: 3
+    MaxValue: 4
     MinValue: 0
-    NumValues: 4
+    NumValues: 5
   DamageMeterStorageType:
     Absorbs: 2
     AvoidableDamageTaken: 6
@@ -3482,12 +3513,13 @@ Enum:
     DamageTaken: 5
     Deaths: 7
     Dispels: 4
+    EnemyDamageTaken: 8
     HealingAndAbsorbs: 1
     Interrupts: 3
   DamageMeterStorageTypeMeta:
-    MaxValue: 7
+    MaxValue: 8
     MinValue: 0
-    NumValues: 8
+    NumValues: 9
   DamageMeterStyle:
     Bordered: 2
     Default: 0
@@ -3505,13 +3537,14 @@ Enum:
     Deaths: 9
     Dispels: 6
     Dps: 1
+    EnemyDamageTaken: 10
     HealingDone: 2
     Hps: 3
     Interrupts: 5
   DamageMeterTypeMeta:
-    MaxValue: 9
+    MaxValue: 10
     MinValue: 0
-    NumValues: 10
+    NumValues: 11
   DamageMeterVisibility:
     Always: 0
     Hidden: 2
@@ -3980,6 +4013,14 @@ Enum:
     MaxValue: 1
     MinValue: 0
     NumValues: 2
+  EncounterEventSoundTrigger:
+    OnTextWarningShown: 0
+    OnTimelineEventFinished: 1
+    OnTimelineEventHighlight: 2
+  EncounterEventSoundTriggerMeta:
+    MaxValue: 2
+    MinValue: 0
+    NumValues: 3
   EncounterEventsTooltipAnchor:
     Cursor: 2
     Default: 1
@@ -4371,6 +4412,7 @@ Enum:
     TimerunnersAdvantage: 8
     TransferableCurrencies: 10
     TransmogCustomSets: 43
+    TransmogCustomSetsMigration: 47
     TransmogOutfits: 41
     TransmogSets: 42
     TransmogSetsTab: 4
@@ -4378,9 +4420,9 @@ Enum:
     TransmogTrialOfStyle: 46
     TransmogWeaponOptions: 45
   FrameTutorialAccountMeta:
-    MaxValue: 46
+    MaxValue: 47
     MinValue: 1
-    NumValues: 46
+    NumValues: 47
   GameMode:
     Plunderstorm: 2
     Standard: 1
@@ -5622,6 +5664,26 @@ Enum:
     MaxValue: 2
     MinValue: 0
     NumValues: 3
+  ImageSharingResult:
+    AccountDataRequestFailure: 6
+    EncryptionFailure: 11
+    EncryptionSecretNotSet: 14
+    FailedToCreateHeader: 10
+    Failure: 0
+    GetAccountDataRequestFailure: 7
+    InvalidOAuthExpiration: 12
+    InvalidRefreshExpiration: 13
+    MissingFieldApiError: 5
+    NotConfigured: 2
+    PlatformApiError: 4
+    RefreshTokenExpired: 9
+    RetrievedExisting: 3
+    SetAccountDataRequestFailure: 8
+    Success: 1
+  ImageSharingResultMeta:
+    MaxValue: 14
+    MinValue: 0
+    NumValues: 15
   InitiativeMilestoneFlags:
     FinalMilestone: 1
   InitiativeMilestoneFlagsMeta:
@@ -7093,11 +7155,10 @@ Enum:
     MinValue: 0
     NumValues: 4
   NeighborhoodInviteResult:
-    AlreadyInNeighborhood: 12
+    AlreadyInNeighborhood: 11
     DbError: 1
     Faction: 5
     GenericFailure: 3
-    Ignored: 11
     InviteLimit: 7
     NotEnoughPlots: 8
     NotFound: 9
@@ -7107,9 +7168,9 @@ Enum:
     Success: 0
     TooManyRequests: 10
   NeighborhoodInviteResultMeta:
-    MaxValue: 12
+    MaxValue: 11
     MinValue: 0
-    NumValues: 13
+    NumValues: 12
   NeighborhoodMapFlags:
     AlliancePurchasable: 1
     CanSystemGenerate: 4
@@ -7588,6 +7649,53 @@ Enum:
     MaxValue: 4
     MinValue: 0
     NumValues: 5
+  PhotoSharingStatus:
+    AADCRestricted: 6
+    Configured: 2
+    Disabled: 0
+    Error: 7
+    Expired: 3
+    FailedToClear: 8
+    NotConfigured: 1
+    ParentalControl: 4
+    TrialOrVeteran: 5
+  PhotoSharingStatusMeta:
+    MaxValue: 8
+    MinValue: 0
+    NumValues: 9
+  PhotoSharingUploadStatus:
+    CreatePageApiCallFailed: 12
+    CreatePageBadRequest: 13
+    CreatePageForbidden: 15
+    CreatePageGenericFailure: 18
+    CreatePageNoBoardIDFound: 19
+    CreatePageNotFound: 16
+    CreatePageTooManyRequests: 17
+    CreatePageUnauthorized: 14
+    CreatePostApiCallFailed: 20
+    CreatePostBadRequest: 21
+    CreatePostForbidden: 23
+    CreatePostGenericFailure: 26
+    CreatePostNoIDFound: 27
+    CreatePostNotFound: 24
+    CreatePostTooManyRequests: 25
+    CreatePostUnauthorized: 22
+    Failed: 0
+    ListPagesApiCallFailed: 3
+    ListPagesBadRequest: 4
+    ListPagesEmptyBoardID: 10
+    ListPagesForbidden: 6
+    ListPagesGenericFailure: 9
+    ListPagesInvalidBookmark: 11
+    ListPagesNotFound: 7
+    ListPagesTooManyRequests: 8
+    ListPagesUnauthorized: 5
+    Locked: 2
+    Success: 1
+  PhotoSharingUploadStatusMeta:
+    MaxValue: 27
+    MinValue: 0
+    NumValues: 28
   PingMode:
     ClickDrag: 1
     KeyDown: 0
@@ -8698,6 +8806,7 @@ Enum:
     NumValues: 3
   SecretAspect:
     Alpha: 128
+    Attributes: 1
     BarValue: 16384
     Cooldown: 32768
     Cursor: 1024
@@ -8724,7 +8833,7 @@ Enum:
   SecretAspectMeta:
     MaxValue: 262144
     MinValue: 1
-    NumValues: 24
+    NumValues: 25
   SelfResurrectOptionType:
     Item: 1
     Spell: 0
@@ -10157,10 +10266,11 @@ Enum:
   UICovenantDisplayInfoFlags:
     DisplayCovenantAsJourney: 1
     UseJourneyRewardTrack: 2
+    UseJourneyUnlockToastText: 3
   UICovenantDisplayInfoFlagsMeta:
-    MaxValue: 2
+    MaxValue: 3
     MinValue: 1
-    NumValues: 2
+    NumValues: 3
   UICursorType:
     ActionBar: 6
     AmmoObsolete: 8
