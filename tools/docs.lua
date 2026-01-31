@@ -131,6 +131,7 @@ for _, t in pairs(docs) do
     for _, event in ipairs(t.Events or {}) do
       local name = (t.Namespace and (t.Namespace .. '.') or '') .. event.Name
       assert(not events[name])
+      event.Environment = t.Environment
       events[name] = not take(extra_events, event.LiteralName) and event or nil
     end
   elseif t.Type == 'ScriptObject' and not take(extra_script_objects, t.Name) then
@@ -353,6 +354,7 @@ local function rewriteEvents(out)
     end
     local newev = {
       callback = ev.CallbackEvent,
+      noscript = ev.HasRestrictions and ev.Environment == 'SecureOnly' or nil,
       payload = payload,
       restricted = ev.HasRestrictions or ev.RequireNPERestricted,
       stride = stride(ev.Payload),

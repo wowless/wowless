@@ -71,6 +71,13 @@ lies:
           _change:
             from: string
             to: unit
+  events:
+    MINIMAP_PING:
+      _add:
+        noscript: true
+    TOOLTIP_SHOW_ITEM_COMPARISON:
+      _add:
+        noscript: true
   extra_apis:
     C_BarberShopInternal.SetQAMode:
     C_CinematicList.GetUICinematicList:
@@ -103,9 +110,7 @@ lies:
     WarbandSceneAnimationStandStateFlags:
     WarbandScenePlacementType:
   extra_events:
-    COMBAT_LOG_APPLY_FILTER_SETTINGS:
     COMBAT_LOG_EVENT_INTERNAL_UNFILTERED:
-    COMBAT_LOG_REFILTER_ENTRIES:
   extra_script_objects:
     FrameAPINamePlate:
     HousingCatalogSearcherAPI:

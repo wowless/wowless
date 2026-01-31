@@ -6,6 +6,8 @@ type:
       record:
         callback:
           type: boolean
+        noscript:
+          type: flag
         payload:
           required: true
           type:

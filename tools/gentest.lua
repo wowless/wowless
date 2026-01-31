@@ -40,7 +40,7 @@ local ptablemap = {
       t[k] = {
         callback = v.callback or false,
         payload = #v.payload,
-        registerable = true,
+        registerable = not v.noscript,
         restricted = v.restricted,
       }
     end

@@ -3804,6 +3804,13 @@ COLOR_OVERRIDE_UPDATED:
       enum: ColorOverride
 COLOR_OVERRIDES_RESET:
   payload:
+COMBAT_LOG_APPLY_FILTER_SETTINGS:
+  callback: true
+  noscript: true
+  payload:
+  - name: filterSettings
+    type: table
+  restricted: true
 COMBAT_LOG_ENTRIES_CLEARED:
   payload:
 COMBAT_LOG_EVENT:
@@ -3831,6 +3838,11 @@ COMBAT_LOG_MESSAGE_LIMIT_CHANGED:
   payload:
   - name: messageLimit
     type: number
+COMBAT_LOG_REFILTER_ENTRIES:
+  callback: true
+  noscript: true
+  payload:
+  restricted: true
 COMBAT_RATING_UPDATE:
   payload:
 COMBAT_TEXT_UPDATE:
@@ -8115,6 +8127,19 @@ TOOLTIP_DATA_UPDATE:
   - name: dataInstanceID
     nilable: true
     type: number
+TOOLTIP_SHOW_ITEM_COMPARISON:
+  callback: true
+  noscript: true
+  payload:
+  - name: comparisonItem
+    type: table
+  - name: tooltip
+    type:
+      uiobject: GameTooltip
+  - name: anchorFrame
+    nilable: true
+    type:
+      uiobject: Frame
 TOYS_UPDATED:
   payload:
   - name: itemID

@@ -223,7 +223,7 @@ G.testsuite.generated = function()
             end
           end,
           RegisterEventCallback = frame.RegisterEventCallback and function()
-            if v.registerable and v.callback then
+            if v.callback then
               return G.match(2, true, not v.restricted, pcall(frame.RegisterEventCallback, frame, k, nop))
             else
               local err = table.concat({

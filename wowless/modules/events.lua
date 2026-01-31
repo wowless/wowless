@@ -2,9 +2,15 @@ local hlist = require('wowless.hlist')
 return function(datalua, funcheck, log, loglevel, scripts)
   local allregs = hlist()
   local regs = {}
+  local cbregs = {}
   local secures = {}
   for k, v in pairs(datalua.events) do
-    regs[k] = hlist()
+    if not v.noscript then
+      regs[k] = hlist()
+    end
+    if v.callback then
+      cbregs[k] = hlist()
+    end
     secures[k] = v.restricted
   end
 
@@ -25,16 +31,16 @@ return function(datalua, funcheck, log, loglevel, scripts)
 
   local function RegisterEventCallback(frame, event)
     local uevent = event:upper()
-    local cfg = datalua.events[uevent]
-    if not cfg or not cfg.callback then
+    local cbreg = cbregs[uevent]
+    if not cbreg then
       local fmt = '%s:RegisterEventCallback(): Attempt to register unknown event %q'
       local ty = frame:GetObjectType()
       error(fmt:format(ty, event), 0)
     end
-    if secures[uevent] and _G.THETAINT then
+    if cbreg:has(frame) or secures[uevent] and _G.THETAINT then
       return false
     end
-    -- TODO actually register the callback
+    cbreg:insert(frame)
     return true
   end
 
@@ -68,8 +74,7 @@ return function(datalua, funcheck, log, loglevel, scripts)
   end
 
   local function IsCallbackEvent(event)
-    local e = datalua.events[event:upper()]
-    return e and e.callback or false
+    return not not cbregs[event:upper()]
   end
 
   local function GetFramesRegisteredForEvent(event)
@@ -107,10 +112,11 @@ return function(datalua, funcheck, log, loglevel, scripts)
     for _, reg in ipairs(GetFramesRegisteredForEvent(event)) do
       scripts.RunScript(reg, 'OnEvent', event, ...)
     end
+    -- TODO invoke callbacks
   end
 
   local function SendEvent(event, ...)
-    if not IsEventValid(event) then
+    if not regs[event] and not cbregs[event] then
       error('internal error: cannot send ' .. event)
     end
     if loglevel >= 1 then
