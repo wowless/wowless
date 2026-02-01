@@ -1,5 +1,5 @@
 local hlist = require('wowless.hlist')
-return function(datalua, funcheck, log, loglevel, scripts)
+return function(datalua, funcheck, log, loglevel, scripts, security)
   local allregs = hlist()
   local regs = {}
   local cbregs = {}
@@ -29,7 +29,7 @@ return function(datalua, funcheck, log, loglevel, scripts)
     return true
   end
 
-  local function RegisterEventCallback(frame, event)
+  local function RegisterEventCallback(frame, event, cb)
     local uevent = event:upper()
     local cbreg = cbregs[uevent]
     if not cbreg then
@@ -40,11 +40,12 @@ return function(datalua, funcheck, log, loglevel, scripts)
     if secures[uevent] and _G.THETAINT then -- TODO check repeat registration
       return false
     end
-    -- TODO actually register the callback
+    cb.firstarg = frame
+    cbreg:insert(cb)
     return true
   end
 
-  local function RegisterEventCallbackGlobal(event)
+  local function RegisterEventCallbackGlobal(event, cb)
     local uevent = event:upper()
     local cbreg = cbregs[uevent]
     if not cbreg then
@@ -55,7 +56,7 @@ return function(datalua, funcheck, log, loglevel, scripts)
     if secures[uevent] and _G.THETAINT then -- TODO check repeat registration
       return false
     end
-    -- TODO actually register the callback
+    cbreg:insert(cb)
     return true
   end
 
@@ -127,7 +128,15 @@ return function(datalua, funcheck, log, loglevel, scripts)
     for _, reg in ipairs(GetFramesRegisteredForEvent(event)) do
       scripts.RunScript(reg, 'OnEvent', event, ...)
     end
-    -- TODO invoke callbacks
+    local cbreg = cbregs[event]
+    if cbreg then
+      for cb in cbreg:entries() do
+        -- TODO unify with funtainer Invoke
+        if not cb.cancelled then
+          security.CallSandbox(cb.callback, cb.firstarg, ...)
+        end
+      end
+    end
   end
 
   local function SendEvent(event, ...)

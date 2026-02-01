@@ -7,6 +7,25 @@ lies:
       outputs:
       - _add:
           nilable: true
+    C_CombatLogSecure.GetCurrentEventInfo:
+      outputs:
+        _change:
+          from:
+          to:
+          - name: timestamp
+            type: number
+          - name: subevent
+            type: string
+          - name: hideCaster
+            type: boolean
+          - name: guid
+            type: string
+          - name: name
+            type: string
+          - name: flags
+            type: number
+          - name: raidFlags
+            type: number
     C_Item.GetItemClassInfo:
       outputs:
       - _add:

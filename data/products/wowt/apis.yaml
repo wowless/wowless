@@ -6775,6 +6775,20 @@ C_CombatLogSecure.GetCurrentEntryInfo:
 C_CombatLogSecure.GetCurrentEventInfo:
   inputs:
   outputs:
+  - name: timestamp
+    type: number
+  - name: subevent
+    type: string
+  - name: hideCaster
+    type: boolean
+  - name: guid
+    type: string
+  - name: name
+    type: string
+  - name: flags
+    type: number
+  - name: raidFlags
+    type: number
   secureonly: true
 C_CombatLogSecure.GetEntryCount:
   inputs:
