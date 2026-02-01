@@ -4,10 +4,13 @@
     "expat",
     "libyaml",
     "openssl",
-    "sdl3",
     "sqlite3",
     "utf8h",
     "zlib",
+    {
+      "default-features": false,
+      "name": "sdl3"
+    },
     {
       "features": [
         "png"
