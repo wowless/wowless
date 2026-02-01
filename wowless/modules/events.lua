@@ -37,10 +37,25 @@ return function(datalua, funcheck, log, loglevel, scripts)
       local ty = frame:GetObjectType()
       error(fmt:format(ty, event), 0)
     end
-    if cbreg:has(frame) or secures[uevent] and _G.THETAINT then
+    if secures[uevent] and _G.THETAINT then -- TODO check repeat registration
       return false
     end
-    cbreg:insert(frame)
+    -- TODO actually register the callback
+    return true
+  end
+
+  local function RegisterEventCallbackGlobal(event)
+    local uevent = event:upper()
+    local cbreg = cbregs[uevent]
+    if not cbreg then
+      local fmt = 'RegisterEventCallback Attempt to register unknown event %q'
+      local taint = _G.THETAINT and '\nLua Taint: ' .. _G.THETAINT or ''
+      error(fmt:format(event) .. taint, 0)
+    end
+    if secures[uevent] and _G.THETAINT then -- TODO check repeat registration
+      return false
+    end
+    -- TODO actually register the callback
     return true
   end
 
@@ -139,6 +154,7 @@ return function(datalua, funcheck, log, loglevel, scripts)
     RegisterAllEvents = RegisterAllEvents,
     RegisterEvent = RegisterEvent,
     RegisterEventCallback = RegisterEventCallback,
+    RegisterEventCallbackGlobal = RegisterEventCallbackGlobal,
     RegisterUnitEvent = RegisterEvent, -- TODO implement properly
     SendEvent = SendEvent,
     UnregisterAllEvents = UnregisterAllEvents,

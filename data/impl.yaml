@@ -519,6 +519,10 @@ rawget:
   stdlib: rawget
 rawset:
   stdlib: rawset
+RegisterEventCallback:
+  moduledelegate:
+    function: RegisterEventCallbackGlobal
+    name: events
 RequestTimePlayed:
   impl:
     modules:

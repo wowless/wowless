@@ -234,6 +234,19 @@ G.testsuite.generated = function()
               return G.match(2, false, err, pcall(frame.RegisterEventCallback, frame, k, nop))
             end
           end,
+          RegisterEventCallbackGlobal = _G.RegisterEventCallback and function()
+            if v.callback then
+              return G.match(2, true, not v.restricted, pcall(_G.RegisterEventCallback, k, nop))
+            else
+              local err = table.concat({
+                'RegisterEventCallback ',
+                'Attempt to register unknown event ',
+                '"' .. k .. '"',
+                '\nLua Taint: ' .. addonName,
+              })
+              return G.match(2, false, err, pcall(_G.RegisterEventCallback, k, nop))
+            end
+          end,
         }
       end
     end

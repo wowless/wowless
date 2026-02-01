@@ -36942,6 +36942,7 @@ RedockChatWindows:
   outputs:
 RefreshLFGList:
 RegisterEventCallback:
+  impl: RegisterEventCallback
   inputs:
   - name: eventName
     type: string
@@ -36949,6 +36950,8 @@ RegisterEventCallback:
     type:
       luaobject: LuaFunctionContainer
   outputs:
+  - name: registered
+    type: boolean
 RegisterStaticConstants:
 RegisterUnitEventCallback:
   inputs:
