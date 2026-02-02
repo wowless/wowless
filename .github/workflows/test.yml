@@ -98,6 +98,6 @@ jobs:
         path: ${{ env.VCPKG_DEFAULT_BINARY_CACHE }}
         key: vcpkg-${{ runner.os }}-${{ github.run_id }}
         restore-keys: vcpkg-${{ runner.os }}
-    - uses: lukka/get-cmake@v4.2.1
+    - uses: lukka/get-cmake@v4.2.3
     - run: cmake --preset default
     - run: cmake --build --preset default --target all test --verbose
