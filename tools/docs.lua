@@ -39,6 +39,18 @@ local function take(t, k, ...)
   end
 end
 
+local function takelieor(v, lies, ...)
+  local lie = take(lies, ...)
+  if not lie then
+    return v
+  end
+  local success, val = pcall(tedit, v, lie)
+  if not success then
+    error(('tedit failure on %s: %s'):format(table.concat({ ... }, '.'), val))
+  end
+  return val
+end
+
 local function assertTaken(s, t)
   if next(t) then
     error(('not all %s were consumed:\n%s'):format(s, pprintYaml(t)), 0)
@@ -91,7 +103,7 @@ do
       end
     end
   end
-  local prefix = 'extracts/' .. product .. '/Interface/AddOns/'
+  local prefix = 'build/cmake/extracts/' .. product .. '/Interface/AddOns/'
   processDocDir(prefix .. 'Blizzard_APIDocumentation')
   processDocDir(prefix .. 'Blizzard_APIDocumentationGenerated')
 end
@@ -99,43 +111,44 @@ end
 local config = parseYaml('data/products/' .. product .. '/docs.yaml')
 local enum = parseYaml('data/products/' .. product .. '/globals.yaml').Enum
 
-for k in pairs(deref(config, 'skip_docfiles') or {}) do
-  local f = k .. '.lua'
-  assert(docs[f], 'missing skip_docfiles ' .. f)
-  docs[f] = nil
-end
-
+local extra_events = deref(config, 'lies', 'extra_events') or {}
+local extra_script_objects = deref(config, 'lies', 'extra_script_objects') or {}
 local tabs, funcs, events, scrobjs = {}, {}, {}, {}
 for _, t in pairs(docs) do
+  for _, tab in ipairs(t.Tables or {}) do
+    local name = (t.Namespace and (t.Namespace .. '.') or '') .. tab.Name
+    assert(not tabs[name])
+    tabs[name] = tab
+  end
   if not t.Type or t.Type == 'System' then
-    for _, tab in ipairs(t.Tables or {}) do
-      local name = (t.Namespace and (t.Namespace .. '.') or '') .. tab.Name
-      assert(not tabs[name])
-      tabs[name] = tab
-    end
     for _, func in ipairs(t.Functions or {}) do
-      local name = (t.Namespace and (t.Namespace .. '.') or '') .. func.Name
+      local ns = func.Namespace or t.Namespace
+      local name = (ns and ns ~= '' and (ns .. '.') or '') .. func.Name
       assert(not funcs[name])
       funcs[name] = func
+      func.Environment = t.Environment
     end
     for _, event in ipairs(t.Events or {}) do
       local name = (t.Namespace and (t.Namespace .. '.') or '') .. event.Name
       assert(not events[name])
-      events[name] = event
+      event.Environment = t.Environment
+      events[name] = not take(extra_events, event.LiteralName) and event or nil
     end
-  elseif t.Type == 'ScriptObject' then
+  elseif t.Type == 'ScriptObject' and not take(extra_script_objects, t.Name) then
     assert(config.script_objects[t.Name], 'missing script object mapping for ' .. t.Name)
     assert(not scrobjs[t.Name])
+    assert(not next(t.Events))
     scrobjs[t.Name] = t
   end
 end
+assertTaken('lies.extra_events', extra_events)
+assertTaken('lies.extra_script_objects', extra_script_objects)
 
 for k in pairs(config.script_objects) do
   assert(scrobjs[k], 'redundant script object mapping ' .. k)
 end
 
 local typedefs = config.typedefs or {}
-local stringenums = parseYaml('data/stringenums.yaml')
 local tys = {}
 for name, tab in pairs(tabs) do
   tys[name] = tab.Type
@@ -155,6 +168,9 @@ for k in pairs(enum) do
     tys[k] = 'Enumeration'
   end
 end
+for k in pairs(parseYaml('data/stringenums.yaml')) do
+  tys[k] = tys[k] or 'stringenum'
+end
 local used_typedefs = {}
 local function t2nty(field, ns)
   local t = field.Type
@@ -163,8 +179,6 @@ local function t2nty(field, ns)
     return { arrayof = t2nty({ Type = field.InnerType }, ns) }
   elseif t == 'table' and field.Mixin then
     error('no struct for mixin ' .. field.Mixin)
-  elseif stringenums[t] then
-    return { stringenum = t }
   elseif typedefs[t] then
     used_typedefs[t] = true
     return typedefs[t].type, typedefs[t].outnil
@@ -176,13 +190,15 @@ local function t2nty(field, ns)
     return 'number'
   elseif ty == 'Enumeration' then
     return { enum = t }
+  elseif ty == 'stringenum' then
+    return { stringenum = t }
   elseif ty == 'Structure' then
     if field.Mixin and field.Mixin ~= structs[n].mixin then
       error(('expected struct %s to have mixin %s'):format(n, field.Mixin))
     end
     return { structure = n }
   elseif ty == 'CallbackType' then
-    return field.Name == 'cbObject' and 'userdata' or 'function'
+    return 'function'
   else
     error(('%s has unexpected type %s'):format(n, ty))
   end
@@ -297,10 +313,7 @@ local function outsig(fn, ns, api)
   return outputs
 end
 
-local function rewriteApis()
-  local y = require('wowapi.yaml')
-  local f = 'data/products/' .. product .. '/apis.yaml'
-  local apis = y.parseFile(f)
+local function rewriteApis(apis)
   local lies = deref(config, 'lies', 'apis') or {}
   local extras = deref(config, 'lies', 'extra_apis') or {}
   for name, fn in pairs(funcs) do
@@ -313,29 +326,21 @@ local function rewriteApis()
       mayreturnnothing = fn.MayReturnNothing,
       outputs = outsig(fn, ns, api),
       outstride = stride(fn.Returns),
+      platform = api and api.platform,
+      secureonly = fn.Environment == 'SecureOnly' or nil,
       stubnothing = api and api.stubnothing,
       stuboutstrides = api and api.stuboutstrides,
     }
-    local lie = take(lies, name)
-    if lie then
-      local success, val = pcall(tedit, newapi, lie)
-      if not success then
-        error(('tedit failure on %s: %s'):format(name, val))
-      end
-      apis[name] = val
-    elseif not take(extras, name) then
-      apis[name] = newapi
+    if not take(extras, name) then
+      apis[name] = takelieor(newapi, lies, name)
     end
   end
   assertTaken('lies', lies)
   assertTaken('extras', extras)
-  writeifchanged(f, y.pprint(apis))
-  return apis
 end
 
-local function rewriteEvents()
-  local filename = ('data/products/%s/events.yaml'):format(product)
-  local out = require('wowapi.yaml').parseFile(filename)
+local function rewriteEvents(out)
+  local lies = deref(config, 'lies', 'events') or {}
   for name, ev in pairs(events) do
     local ns = split(name)
     local payload = {}
@@ -347,18 +352,41 @@ local function rewriteEvents()
         type = t2nty(arg, ns),
       })
     end
-    out[ev.LiteralName] = {
+    local newev = {
+      callback = ev.CallbackEvent,
+      noscript = ev.CallbackEvent and not ev.SynchronousEvent and not ev.UniqueEvent or nil,
       payload = payload,
+      restricted = ev.HasRestrictions or ev.RequireNPERestricted,
       stride = stride(ev.Payload),
     }
+    out[ev.LiteralName] = takelieor(newev, lies, ev.LiteralName)
   end
-  writeifchanged(filename, pprintYaml(out))
-  return out
+  assertTaken('lies', lies)
 end
 
-local function rewriteStructures(outApis, outEvents, outUIObjects)
-  local filename = ('data/products/%s/structures.yaml'):format(product)
-  local structures = require('wowapi.yaml').parseFile(filename)
+local function rewriteGlobals(out)
+  local lies = deref(config, 'lies', 'enums') or {}
+  local extras = deref(config, 'lies', 'extra_enums') or {}
+  for _, tab in pairs(tabs) do
+    if tab.Type == 'Enumeration' and not take(extras, tab.Name) then
+      local t = {}
+      for _, v in ipairs(tab.Fields) do
+        assert(v.Type == tab.Name, v.Name)
+        t[v.Name] = v.EnumValue
+      end
+      out.Enum[tab.Name] = takelieor(t, lies, tab.Name)
+      out.Enum[tab.Name .. 'Meta'] = {
+        MaxValue = tab.MaxValue < 2 ^ 31 and tab.MaxValue or tab.MaxValue - 2 ^ 32,
+        MinValue = tab.MinValue,
+        NumValues = tab.NumValues,
+      }
+    end
+  end
+  assertTaken('lies.enums', lies)
+  assertTaken('lies.extra_enums', extras)
+end
+
+local function rewriteStructures(structures, outApis, outEvents, outUIObjects)
   for name, tab in pairs(tabs) do
     if tab.Type == 'Structure' then
       local ns = split(name)
@@ -409,35 +437,39 @@ local function rewriteStructures(outApis, outEvents, outUIObjects)
       processList(method.outputs)
     end
   end
-  writeifchanged(filename, pprintYaml(out))
+  for k in pairs(structures) do
+    structures[k] = nil
+  end
+  for k, v in pairs(out) do
+    structures[k] = v
+  end
 end
 
-local function rewriteUIObjects()
+local function rewriteUIObjects(uiobjects)
+  local ignores = config.ignore_script_object_methods or {}
   local pscrobjs = {}
   for _, t in pairs(scrobjs) do
-    assert(not next(t.Events))
-    assert(not next(t.Tables))
     local fns = {}
     for _, fn in ipairs(t.Functions) do
       assert(not fns[fn.Name])
-      fns[fn.Name] = fn
+      fns[fn.Name] = not take(ignores, t.Name, fn.Name) and fn or nil
     end
     pscrobjs[t.Name] = fns
   end
+  assertTaken('ignore_script_object_methods', ignores)
   local mapped = {}
   for k, v in pairs(pscrobjs) do
-    local mmk = assert(config.script_objects[k], 'unknown doc type ' .. k)
-    local t = mapped[mmk] or {}
-    for mk, mv in pairs(v) do
-      assert(not t[mk], 'multiple specs for ' .. k .. '.' .. mk)
-      t[mk] = mv
+    local so = assert(config.script_objects[k], 'unknown doc type ' .. k)
+    if so.uiobject then
+      local t = mapped[so.uiobject] or {}
+      for mk, mv in pairs(v) do
+        assert(not t[mk], 'multiple specs for ' .. k .. '.' .. mk)
+        t[mk] = mv
+      end
+      mapped[so.uiobject] = t
     end
-    mapped[mmk] = t
   end
-  local filename = ('data/products/%s/uiobjects.yaml'):format(product)
-  local uiobjects = require('wowapi.yaml').parseFile(filename)
   local lies = deref(config, 'lies', 'uiobjects') or {}
-  local skips = config.skip_uiobject_methods or {}
   local reassigns = config.uiobject_method_reassignments or {}
   local inhm = {}
   local function inhprocess(k)
@@ -476,39 +508,59 @@ local function rewriteUIObjects()
         outstride = stride(mv.Returns),
         stuboutstrides = mm and mm.stuboutstrides,
       }
-      local okay = (function()
-        if inhm[kk][mk] and not mmv.override then
-          return false
-        end
-        if take(skips, kk, mk) then
-          return false
-        end
-        return true
-      end)()
-      if okay then
-        local lie = take(lies, kk, mk)
-        if lie then
-          local success, val = pcall(tedit, mmv, lie)
-          if not success then
-            error(('tedit failure on %s.%s: %s'):format(kk, mk, val))
-          end
-          mmv = val
-        end
-        u.methods[mk] = mmv
+      if not inhm[kk][mk] or mmv.override then
+        u.methods[mk] = takelieor(mmv, lies, kk, mk)
       end
     end
   end
   assertTaken('lies', lies)
-  assertTaken('skips', skips)
   assertTaken('reassigns', reassigns)
-  writeifchanged(filename, pprintYaml(uiobjects))
-  return uiobjects
 end
 
-local outApis = rewriteApis()
-local outEvents = rewriteEvents()
-local outUIObjects = rewriteUIObjects()
-rewriteStructures(outApis, outEvents, outUIObjects)
+local function rewriteLuaObjects(luaobjects)
+  for _, t in pairs(scrobjs) do
+    local so = assert(config.script_objects[t.Name], 'unknown doc type ' .. t.Name)
+    if so.luaobject then
+      local o = assert(luaobjects[so.luaobject], so.luaobject)
+      o.methods = o.methods or {}
+      for _, fn in ipairs(t.Functions) do
+        o.methods[fn.Name] = {}
+      end
+    end
+  end
+end
+
+local rewriteFuncs = {
+  apis = rewriteApis,
+  events = rewriteEvents,
+  globals = rewriteGlobals,
+  luaobjects = rewriteLuaObjects,
+  structures = rewriteStructures,
+  uiobjects = rewriteUIObjects,
+}
+local rewriteDeps = {
+  structures = { 'apis', 'events', 'uiobjects' },
+}
+local tt = require('resty.tsort').new()
+for k in pairs(rewriteFuncs) do
+  tt:add(k)
+end
+for k, v in pairs(rewriteDeps) do
+  for _, vv in ipairs(v) do
+    tt:add(vv, k)
+  end
+end
+
+local datas = {}
+for _, r in ipairs(assert(tt:sort())) do
+  local data = parseYaml(('data/products/%s/%s.yaml'):format(product, r))
+  local rargs = {}
+  for _, vv in ipairs(rewriteDeps[r] or {}) do
+    table.insert(rargs, datas[vv])
+  end
+  rewriteFuncs[r](data, unpack(rargs))
+  datas[r] = data
+end
 
 local unused_typedefs = {}
 for k in pairs(typedefs) do
@@ -517,3 +569,8 @@ for k in pairs(typedefs) do
   end
 end
 assert(not next(unused_typedefs), 'unused typedefs:\n' .. pprintYaml(unused_typedefs))
+
+for k, v in pairs(datas) do
+  local s = pprintYaml(v)
+  writeifchanged(('data/products/%s/%s.yaml'):format(product, k), s == '\n' and '' or s)
+end

@@ -1,10 +1,12 @@
----
 Mists:
   expansion_level: 4
   family: Classic
 Standard:
   expansion_level: 10
   family: Mainline
+TBC:
+  expansion_level: 1
+  family: Classic
 Vanilla:
   expansion_level: 0
   family: Classic

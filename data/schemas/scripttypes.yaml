@@ -1,0 +1,3 @@
+name: scripttypes
+type:
+  setof: string

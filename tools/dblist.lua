@@ -4,33 +4,16 @@ local args = (function()
   return parser:parse()
 end)()
 
-local deps = {}
-
-local function readFile(f)
-  deps[f] = true
-  return (assert(require('pl.file').read(f)))
-end
-
 local function dblist(product)
   local dbset = {
     GlobalStrings = {},
   }
-  local impls = dofile('build/cmake/runtime/impl.lua')
-  local sqlcfgs = dofile('build/cmake/runtime/sql.lua')
-  local productapis = dofile('build/cmake/runtime/products/' .. product .. '/apis.lua')
-  local sqls = {}
-  for _, api in pairs(productapis) do
-    local impl = impls[api.impl]
-    if impl then
-      for _, sql in ipairs(impl.impl and impl.impl.sqls or { impl.directsql }) do
-        sqls[sql] = true
-      end
-    end
-  end
-  for sql in pairs(sqls) do
+  local datalua = dofile('runtime/' .. product .. '.lua')
+  local sqlcfgs = require('wowapi.yaml').parseFile('runtime/sqls.yaml')
+  for sql in pairs(datalua.sqls) do
     -- We are fortunate that sqlite complains about missing tables first.
-    local sqltext = readFile('data/sql/' .. sql .. '.sql')
-    local db = require('lsqlite3').open_memory()
+    local sqltext = sqlcfgs[sql].text
+    local db = require('wowless.sqlite').open_memory()
     local tables = {}
     while not db:prepare(sqltext) do
       local t = db:errmsg():match('^no such table: (%a+)$')
@@ -41,7 +24,7 @@ local function dblist(product)
         break
       end
     end
-    for tab, idx in pairs(sqlcfgs[sql].indexes or {}) do
+    for tab, idx in pairs(sqlcfgs[sql].config.indexes or {}) do
       assert(tables[tab], ('index on %q for unused table %q'):format(sql, tab))
       tables[tab][idx] = true
     end
@@ -65,7 +48,6 @@ local function dblist(product)
 end
 
 local u = require('tools.util')
-local outfn = 'build/products/' .. args.product .. '/dblist.lua'
+local outfn = 'generated/' .. args.product .. '_dblist.lua'
 local out = dblist(args.product)
-u.writedeps(outfn, deps)
-u.writeifchanged(outfn, u.returntable(out))
+require('pl.file').write(outfn, u.returntable(out))

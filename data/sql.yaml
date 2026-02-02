@@ -1,4 +1,3 @@
----
 C_AuctionHouse.GetAuctionItemSubClasses:
   indexes:
     ItemSubClass: ClassID
@@ -44,10 +43,9 @@ C_SpecializationInfo.GetSpecIDs:
   indexes:
     SpecSetMember: SpecSet
   type: cursor
-C_Texture.GetAtlasInfo:
+C_SpecializationInfo.GetTalentInfo:
   indexes:
-    UiTextureAtlasElement: Name COLLATE NOCASE
-    UiTextureAtlasMember: UiTextureAtlasElementID
+    SpellMisc: SpellID
   type: lookup
 C_Texture.GetAtlasInfo_11_1_5:
   indexes:
@@ -90,6 +88,8 @@ GetClassInfo:
   type: lookup
 GetClassInfo_Classic:
   type: lookup
+GetFileIDFromPath:
+  type: lookup
 GetInventorySlotInfo:
   type: lookup
 GetNumClasses:
@@ -108,13 +108,12 @@ GetSpecializationInfoForClassID:
   type: lookup
 GetSpecializationInfoForSpecID:
   type: lookup
-GetTalentInfo_Vanilla:
-  indexes:
-    SpellMisc: SpellID
-  type: lookup
 GetTalentPrereqs:
   type: cursor
-GetTalentTabInfo:
+Texture.SetAtlas:
+  indexes:
+    UiTextureAtlasElement: Name COLLATE NOCASE
+    UiTextureAtlasMember: UiTextureAtlasElementID
   type: lookup
 UnitClass:
   type: lookup

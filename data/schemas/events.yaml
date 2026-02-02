@@ -1,10 +1,13 @@
----
 name: events
 type:
   mapof:
     key: string
     value:
       record:
+        callback:
+          type: flag
+        noscript:
+          type: flag
         payload:
           required: true
           type:
@@ -16,10 +19,12 @@ type:
                   required: true
                   type: string
                 nilable:
-                  type: boolean
+                  type: flag
                 type:
                   required: true
                   type:
                     schema: type
+        restricted:
+          type: flag
         stride:
           type: number

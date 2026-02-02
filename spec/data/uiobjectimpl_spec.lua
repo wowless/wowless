@@ -1,12 +1,14 @@
 describe('uiobjectimpl', function()
   local luas = {}
-  for _, f in ipairs(require('pl.dir').getallfiles('data/uiobjects')) do
+  for _, f in ipairs(require('wowless.util').getfiles('data/uiobjects')) do
     luas[f] = assert(require('pl.file').read(f))
   end
   it('references all the files in data/uiobjects', function()
     local expected = {}
-    for k in pairs(require('build.data.uiobjectimpl')) do
-      expected['data/uiobjects/' .. k .. '.lua'] = true
+    for k, v in pairs(require('build.data.uiobjectimpl')) do
+      if v.luafile then
+        expected['data/uiobjects/' .. k .. '.lua'] = true
+      end
     end
     local actual = {}
     for f in pairs(luas) do

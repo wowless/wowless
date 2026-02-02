@@ -3,7 +3,9 @@ local domains = {
   family = wdata.families,
   gametype = wdata.gametypes,
   impl = wdata.impl,
+  module = wdata.modules,
   schema = wdata.schemas,
+  scripttype = wdata.scripttypes,
   sql = wdata.sql,
   stringenum = wdata.stringenums,
   uiobjectimpl = wdata.uiobjectimpl,
@@ -13,6 +15,7 @@ local productDomains = {
   cvar = wdata.cvars,
   enum = wdata.enums,
   event = wdata.events,
+  luaobject = wdata.luaobjects,
   structure = wdata.structures,
   uiobject = wdata.uiobjects,
   xml = wdata.xml,
@@ -30,6 +33,13 @@ end
 local simple = {
   any = function() end,
   boolean = mksimple('boolean'),
+  flag = function(v)
+    if v ~= true then
+      local vty = type(v)
+      local suffix = vty == 'boolean' and ' (false)' or ''
+      return ('want flag (boolean true), got %s%s'):format(vty, suffix)
+    end
+  end,
   number = mksimple('number'),
   string = mksimple('string'),
   table = mksimple('table'),
@@ -90,8 +100,9 @@ local complex = {
     end
   end,
   ref = function(s)
-    local gdomain = domains[s]
-    local pdomains = productDomains[s]
+    local gdomain = domains[s.schema]
+    local pdomains = productDomains[s.schema]
+    local mustexist = not s.negative
     return function(v, product)
       if type(v) ~= 'string' then
         return 'expected string'
@@ -100,8 +111,8 @@ local complex = {
       if not domain then
         return 'invalid domain'
       end
-      if not domain[v] then
-        return 'unknown domain value'
+      if (domain[v] ~= nil) ~= mustexist then
+        return (mustexist and 'unknown' or 'known') .. ' domain value'
       end
     end
   end,
@@ -139,33 +150,54 @@ local complex = {
       return max ~= #v and 'expected array' or next(errors) and errors or nil
     end
   end,
+  setof = function(s)
+    local element = compile(s)
+    return function(v, product)
+      if type(v) ~= 'table' then
+        return 'expected table'
+      end
+      local errors = {}
+      for vk, vv in pairs(v) do
+        local ek = element(vk, product)
+        local ev = (type(vv) ~= 'table' or next(vv)) and 'bad value' or nil
+        if ek or ev then
+          errors[vk] = { key = ek, value = ev }
+        end
+      end
+      return next(errors) and errors or nil
+    end
+  end,
   taggedunion = function(s)
     local sf = {}
     local tf = {}
+    local ks = {}
     for k, v in pairs(s) do
       if v == 'tag' then
         sf[k] = true
       else
         tf[k] = compile(v)
       end
+      table.insert(ks, k)
     end
+    table.sort(ks)
+    local err = 'expected one of {' .. table.concat(ks, ', ') .. '}'
     return function(v, product)
       if sf[v] then
         return
       end
       if type(v) ~= 'table' then
-        return 'expected table'
+        return err
       end
       local vk, vv = next(v)
       if vk == nil then
-        return 'missing element'
+        return 'missing element, ' .. err
       end
       if next(v, vk) ~= nil then
-        return 'multiple elements'
+        return 'multiple elements, ' .. err
       end
       local tfvk = tf[vk]
       if tfvk == nil then
-        return 'bad key'
+        return 'bad key, ' .. err
       end
       return tfvk(vv, product)
     end

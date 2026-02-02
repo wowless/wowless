@@ -1,10 +1,10 @@
----
 name: function
 type:
   record:
     impl:
       type:
-        ref: impl
+        ref:
+          schema: impl
     inputs:
       type:
         sequenceof:
@@ -14,7 +14,7 @@ type:
             name:
               type: string
             nilable:
-              type: boolean
+              type: flag
             type:
               required: true
               type:
@@ -22,7 +22,7 @@ type:
     instride:
       type: number
     mayreturnnothing:
-      type: boolean
+      type: flag
     outputs:
       type:
         sequenceof:
@@ -32,18 +32,28 @@ type:
             name:
               type: string
             nilable:
-              type: boolean
+              type: flag
             stub:
               type: any
             stubnotnil:
-              type: boolean
+              type: flag
             type:
               required: true
               type:
                 schema: type
     outstride:
       type: number
+    platform:
+      type:
+        taggedunion:
+          linux: tag
+          mac: tag
+          windows: tag
+    secureonly:
+      type: flag
     stubnothing:
-      type: boolean
+      type: flag
     stuboutstrides:
       type: number
+    usage:
+      type: string

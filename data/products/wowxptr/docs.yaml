@@ -1,4 +1,3 @@
----
 lies:
   apis:
     C_AddOns.GetAddOnMetadata:
@@ -9,13 +8,28 @@ lies:
       outputs:
       - _add:
           nilable: true
-    C_PingSecure.GetTargetPingReceiver:
+    CreateSecureDelegate:
+      inputs:
+      - type:
+          _change:
+            from: unknown
+            to: function
+      outputs:
+      - type:
+          _change:
+            from: unknown
+            to: function
+    GetFileIDFromPath:
       outputs:
       - _add:
           nilable: true
     GetSpecializationInfoForClassID:
       _add:
         mayreturnnothing: true
+    ResurrectGetOfferer:
+      outputs:
+      - _add:
+          nilable: true
     UnitFactionGroup:
       _add:
         mayreturnnothing: true
@@ -52,11 +66,44 @@ lies:
             from: string
             to: unit
   extra_apis:
-    C_BattleNet.InstallHighResTextures: {}
-    ShowCloak: {}
-    ShowHelm: {}
-    ShowingCloak: {}
-    ShowingHelm: {}
+    C_BarberShopInternal.SetQAMode:
+    C_CinematicList.GetUICinematicList:
+    C_ConfigurationWarnings.GetConfigurationWarnings:
+    C_ConfigurationWarnings.GetConfigurationWarningSeen:
+    C_ConfigurationWarnings.GetConfigurationWarningString:
+    C_ConfigurationWarnings.SetConfigurationWarningSeen:
+    C_LiveEvent.OnLiveEventBannerClicked:
+    C_LiveEvent.OnLiveEventPopupClicked:
+    C_WorldSafeLocsUIInternal.GetWorldSafeLocs:
+    ShowCloak:
+    ShowHelm:
+    ShowingCloak:
+    ShowingHelm:
+    ToggleAnimKitDisplay:
+    ToggleCollision:
+    ToggleCollisionDisplay:
+    ToggleDebugAIDisplay:
+    ToggleGravity:
+    TogglePlayerBounds:
+    TogglePortals:
+    ToggleTris:
+  extra_enums:
+    ConfigurationWarning:
+    WarbandEventState:
+    WarbandGroupFlags:
+    WarbandPlacementDisplayInfoType:
+    WarbandSceneAnimationEvent:
+    WarbandSceneAnimationSheatheState:
+    WarbandSceneAnimationStandState:
+    WarbandSceneAnimationStandStateFlags:
+    WarbandScenePlacementType:
+  extra_script_objects:
+    HousingCatalogSearcherAPI:
+    HousingFixturePointFrameAPI:
+    HousingLayoutPinFrameAPI:
+    PingPinFrameAPI:
+    SimpleMapSceneAPI:
+    SimpleModelFFXAPI:
   uiobjects:
     Button:
       GetText:
@@ -178,11 +225,6 @@ lies:
         - _add:
             nilable: true
     Region:
-      GetPoint:
-        outputs:
-          2:
-            _add:
-              nilable: true
       SetAllPoints:
         _remove:
           inputs:
@@ -216,7 +258,7 @@ lies:
       HookScript:
         outputs:
           _change:
-            from: {}
+            from:
             to:
             - name: success
               type: boolean
@@ -312,86 +354,125 @@ lies:
         - _add:
             nilable: true
 script_objects:
-  FrameAPIArchaeologyDigSiteFrame: ArchaeologyDigSiteFrame
-  FrameAPIBlob: POIFrame
-  FrameAPICharacterModelBase: PlayerModel
-  FrameAPICinematicModel: CinematicModel
-  FrameAPICooldown: Cooldown
-  FrameAPIDressUpModel: DressUpModel
-  FrameAPIFogOfWarFrame: FogOfWarFrame
-  FrameAPIModelSceneFrame: ModelScene
-  FrameAPIModelSceneFrameActor: Actor
-  FrameAPIModelSceneFrameActorBase: Actor
-  FrameAPIQuestPOI: QuestPOIFrame
-  FrameAPIScenarioPOI: ScenarioPOIFrame
-  FrameAPISimpleCheckout: Checkout
-  FrameAPITabardModel: TabardModel
-  FrameAPITabardModelBase: TabardModel
-  FrameAPIUnitPositionFrame: UnitPositionFrame
-  MinimapFrameAPI: Minimap
-  SimpleAnimAlphaAPI: Alpha
-  SimpleAnimAPI: Animation
-  SimpleAnimatableObjectAPI: Region
-  SimpleAnimFlipBookAPI: FlipBook
-  SimpleAnimGroupAPI: AnimationGroup
-  SimpleAnimPathAPI: Path
-  SimpleAnimRotationAPI: Rotation
-  SimpleAnimScaleAPI: Scale
-  SimpleAnimScaleLineAPI: LineScale
-  SimpleAnimTextureCoordTranslationAPI: TextureCoordTranslation
-  SimpleAnimTranslationAPI: Translation
-  SimpleAnimTranslationLineAPI: LineTranslation
-  SimpleAnimVertexColorAPI: VertexColor
-  SimpleBrowserAPI: Browser
-  SimpleButtonAPI: Button
-  SimpleCheckboxAPI: CheckButton
-  SimpleColorSelectAPI: ColorSelect
-  SimpleControlPointAPI: ControlPoint
-  SimpleEditBoxAPI: EditBox
-  SimpleFontAPI: Font
-  SimpleFontStringAPI: FontString
-  SimpleFrameAPI: Frame
-  SimpleFrameScriptObjectAPI: UIObject
-  SimpleHTMLAPI: SimpleHTML
-  SimpleLineAPI: Line
-  SimpleMaskTextureAPI: MaskTexture
-  SimpleMessageFrameAPI: MessageFrame
-  SimpleModelAPI: Model
-  SimpleMovieAPI: MovieFrame
-  SimpleObjectAPI: ParentedObjectBase
-  SimpleOffScreenFrameAPI: OffScreenFrame
-  SimpleRegionAPI: Region
-  SimpleScriptRegionAPI: Region
-  SimpleScriptRegionResizingAPI: Region
-  SimpleScrollFrameAPI: ScrollFrame
-  SimpleSliderAPI: Slider
-  SimpleStatusBarAPI: StatusBar
-  SimpleTextureAPI: Texture
-  SimpleTextureBaseAPI: TextureBase
-skip_docfiles:
-  ArenaTeamDocumentation: {}
-  BarberShopInternalDocumentation: {}
-  CinematicListDocumentation: {}
-  ConfigurationWarningsDocumentation: {}
-  DebugToggleDocumentation: {}
-  LiveEventDocumentation: {}
-  PingPinFrameAPIDocumentation: {}
-  SimpleMapSceneAPIDocumentation: {}
-  SimpleModelFFXAPIDocumentation: {}
-  WorldSafeLocsUIInternalDocumentation: {}
-skip_uiobject_methods:
-  Region:
-    GetBottom: {}
-    GetHeight: {}
-    GetLeft: {}
-    GetRect: {}
-    GetSize: {}
-    GetWidth: {}
+  FrameAPIArchaeologyDigSiteFrame:
+    uiobject: ArchaeologyDigSiteFrame
+  FrameAPIBlob:
+    uiobject: POIFrame
+  FrameAPICharacterModelBase:
+    uiobject: PlayerModel
+  FrameAPICinematicModel:
+    uiobject: CinematicModel
+  FrameAPICooldown:
+    uiobject: Cooldown
+  FrameAPIDressUpModel:
+    uiobject: DressUpModel
+  FrameAPIFogOfWarFrame:
+    uiobject: FogOfWarFrame
+  FrameAPIModelSceneFrame:
+    uiobject: ModelScene
+  FrameAPIModelSceneFrameActor:
+    uiobject: Actor
+  FrameAPIModelSceneFrameActorBase:
+    uiobject: Actor
+  FrameAPIQuestPOI:
+    uiobject: QuestPOIFrame
+  FrameAPIScenarioPOI:
+    uiobject: ScenarioPOIFrame
+  FrameAPISimpleCheckout:
+    uiobject: Checkout
+  FrameAPITabardModel:
+    uiobject: TabardModel
+  FrameAPITabardModelBase:
+    uiobject: TabardModel
+  FrameAPIUnitPositionFrame:
+    uiobject: UnitPositionFrame
+  MinimapFrameAPI:
+    uiobject: Minimap
+  SimpleAnimAlphaAPI:
+    uiobject: Alpha
+  SimpleAnimAPI:
+    uiobject: Animation
+  SimpleAnimatableObjectAPI:
+    uiobject: Region
+  SimpleAnimFlipBookAPI:
+    uiobject: FlipBook
+  SimpleAnimGroupAPI:
+    uiobject: AnimationGroup
+  SimpleAnimPathAPI:
+    uiobject: Path
+  SimpleAnimRotationAPI:
+    uiobject: Rotation
+  SimpleAnimScaleAPI:
+    uiobject: Scale
+  SimpleAnimScaleLineAPI:
+    uiobject: LineScale
+  SimpleAnimTextureCoordTranslationAPI:
+    uiobject: TextureCoordTranslation
+  SimpleAnimTranslationAPI:
+    uiobject: Translation
+  SimpleAnimTranslationLineAPI:
+    uiobject: LineTranslation
+  SimpleAnimVertexColorAPI:
+    uiobject: VertexColor
+  SimpleBrowserAPI:
+    uiobject: Browser
+  SimpleButtonAPI:
+    uiobject: Button
+  SimpleCheckboxAPI:
+    uiobject: CheckButton
+  SimpleColorSelectAPI:
+    uiobject: ColorSelect
+  SimpleControlPointAPI:
+    uiobject: ControlPoint
+  SimpleEditBoxAPI:
+    uiobject: EditBox
+  SimpleFontAPI:
+    uiobject: Font
+  SimpleFontStringAPI:
+    uiobject: FontString
+  SimpleFrameAPI:
+    uiobject: Frame
+  SimpleFrameScriptObjectAPI:
+    uiobject: UIObject
+  SimpleHTMLAPI:
+    uiobject: SimpleHTML
+  SimpleLineAPI:
+    uiobject: Line
+  SimpleMaskTextureAPI:
+    uiobject: MaskTexture
+  SimpleMessageFrameAPI:
+    uiobject: MessageFrame
+  SimpleModelAPI:
+    uiobject: Model
+  SimpleMovieAPI:
+    uiobject: MovieFrame
+  SimpleObjectAPI:
+    uiobject: ParentedObjectBase
+  SimpleOffScreenFrameAPI:
+    uiobject: OffScreenFrame
+  SimpleRegionAPI:
+    uiobject: Region
+  SimpleScriptRegionAPI:
+    uiobject: Region
+  SimpleScriptRegionResizingAPI:
+    uiobject: Region
+  SimpleScrollFrameAPI:
+    uiobject: ScrollFrame
+  SimpleSliderAPI:
+    uiobject: Slider
+  SimpleStatusBarAPI:
+    uiobject: StatusBar
+  SimpleTextureAPI:
+    uiobject: Texture
+  SimpleTextureBaseAPI:
+    uiobject: TextureBase
 typedefs:
   AnimationDataEnum:
     type: number
   ArtifactTiers:
     type: number
+  AuraFilters:
+    type: string
   AzeriteEmpoweredItemLocation:
     type:
       structure: ItemLocation
@@ -428,12 +509,18 @@ typedefs:
     type:
       structure: ItemLocation
   FileAsset:
-    type: string
+    type: FileAsset
   fileID:
     type: number
   FontAlphabet:
     type: string
   GarrisonFollower:
+    type: string
+  HousingCatalogSearcher:
+    type: string
+  HousingFixturePointFrame:
+    type: string
+  HousingLayoutPinFrame:
     type: string
   HTMLTextType:
     type: string
@@ -455,6 +542,8 @@ typedefs:
     type: function
   luaIndex:
     type: number
+  LuaValueReference:
+    type: unknown
   LuaValueVariant:
     type: table
   ModelAsset:
@@ -482,6 +571,7 @@ typedefs:
   RecruitAcceptanceID:
     type: string
   ScriptRegion:
+    outnil: true
     type:
       uiobject: Region
   SendChatMessageType:
@@ -545,8 +635,14 @@ typedefs:
     type: string
   textureKit:
     type: string
+  TickerCallback:
+    type:
+      luaobject: LuaFunctionContainer
   time_t:
     type: number
+  TimerCallback:
+    type:
+      luaobject: LuaFunctionContainer
   TooltipComparisonItem:
     type: table
   uiAddon:

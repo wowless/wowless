@@ -8,20 +8,17 @@ local product = args.product
 
 local log = args.verbose and print or function() end
 
-local build = dofile('build/cmake/runtime/products/' .. product .. '/build.lua')
+local build = dofile('runtime/products/' .. product .. '/build.lua')
 local fdids = require('runtime.listfile')
 
 local path = require('path')
 path.mkdir('cache')
 
-local fetch = (function()
-  local fetch = require('tactless')(args.product, build.hash)
-  if not fetch then
-    print('unable to open ' .. build.hash)
-    os.exit(1)
-  end
-  return fetch
-end)()
+local fetch = require('tactless')(args.product, build.hash)
+if not fetch then
+  print('unable to open ' .. build.hash)
+  os.exit(1)
+end
 
 local function normalizePath(p)
   -- path.normalize does not normalize x/../y to y.
@@ -113,7 +110,7 @@ local function processTocDir(dir)
   end
 end
 
-for db in pairs(dofile('build/products/' .. product .. '/dblist.lua')) do
+for db in pairs(dofile('runtime/' .. product .. '_dblist.lua')) do
   save(path.join('db2', db .. '.db2'), fetch(fdids[db:lower()]))
 end
 
@@ -126,3 +123,9 @@ for line in processFile('Interface/ui-gen-addon-list.txt'):gmatch('[^\r\n]+') do
   end
 end
 processFile('Interface/AddOns/Blizzard_SharedXML/UI.xsd')
+
+local roothash = {}
+for _, h in ipairs(fetch:rootnamehashes()) do
+  roothash[h] = true
+end
+save('roothash.lua', require('tools.util').returntable(roothash))

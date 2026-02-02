@@ -1,7 +1,8 @@
 describe('structures', function()
   for _, p in ipairs(require('build.data.products')) do
-    local api = require('wowless.api').new(function() end, 0, p, 0)
-    local typechecker = require('wowless.typecheck')(api)
+    local typechecker = require('wowless.modules')({
+      datalua = require('build.products.' .. p .. '.data'),
+    }).typecheck
     local function typecheck(spec, val)
       local value, errmsg = typechecker(spec, val, true)
       assert.Nil(errmsg)
@@ -49,7 +50,10 @@ describe('structures', function()
             end
           end
         else
-          assert(ty.enum or ty.stringenum or ty.uiobject or type(ty) == 'string', 'weird type ' .. tostring(ty))
+          assert(
+            ty.enum or ty.stringenum or ty.uiobject or ty.luaobject or type(ty) == 'string',
+            'weird type ' .. tostring(ty)
+          )
         end
       end
       for k in pairs(refs) do

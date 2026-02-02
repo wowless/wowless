@@ -5,7 +5,7 @@ describe('impl', function()
       expected['data/impl/' .. k .. '.lua'] = v.impl and true or nil
     end
     local actual = {}
-    for _, f in ipairs(require('pl.dir').getfiles('data/impl')) do
+    for _, f in ipairs(require('wowless.util').getfiles('data/impl')) do
       actual[f] = true
     end
     assert.same(expected, actual)

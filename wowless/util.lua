@@ -1,8 +1,10 @@
-local function mixin(t, ...)
-  for _, kv in ipairs({ ... }) do
-    for k, v in pairs(kv) do
-      t[k] = v
-    end
+local mixin = require('wowless.mixin').Mixin
+
+local plgetallfiles = require('pl.dir').getallfiles
+local function getfiles(d)
+  local t = {}
+  for i, v in ipairs(plgetallfiles(d)) do
+    t[i] = v:gsub('\\', '/')
   end
   return t
 end
@@ -84,6 +86,7 @@ local function tset(t, s, v)
 end
 
 return {
+  getfiles = getfiles,
   mixin = mixin,
   readfile = readfile,
   tget = tget,

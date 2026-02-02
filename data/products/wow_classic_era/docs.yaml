@@ -1,4 +1,3 @@
----
 lies:
   apis:
     C_AddOns.GetAddOnMetadata:
@@ -9,38 +8,236 @@ lies:
       outputs:
       - _add:
           nilable: true
-    C_SpecializationInfo.GetNumSpecializationsForClassID:
+    GetFileIDFromPath:
+      outputs:
+      - _add:
+          nilable: true
+    ResurrectGetOfferer:
+      outputs:
+      - _add:
+          nilable: true
+    UnitFactionGroup:
+      _add:
+        mayreturnnothing: true
       inputs:
-      - name:
+      - type:
           _change:
-            from: specID
-            to: classID
+            from: string
+            to: unit
   extra_apis:
-    C_BattleNet.InstallHighResTextures: {}
+    C_AuctionHouse.CalculateCommodityDeposit:
+    C_AuctionHouse.CalculateItemDeposit:
+    C_AuctionHouse.CanCancelAuction:
+    C_AuctionHouse.CancelAuction:
+    C_AuctionHouse.CancelCommoditiesPurchase:
+    C_AuctionHouse.CancelSell:
+    C_AuctionHouse.CloseAuctionHouse:
+    C_AuctionHouse.ConfirmCommoditiesPurchase:
+    C_AuctionHouse.ConfirmPostCommodity:
+    C_AuctionHouse.ConfirmPostItem:
+    C_AuctionHouse.FavoritesAreAvailable:
+    C_AuctionHouse.GetAuctionInfoByID:
+    C_AuctionHouse.GetAuctionItemSubClasses:
+    C_AuctionHouse.GetAvailablePostCount:
+    C_AuctionHouse.GetBidInfo:
+    C_AuctionHouse.GetBids:
+    C_AuctionHouse.GetBidType:
+    C_AuctionHouse.GetBrowseResults:
+    C_AuctionHouse.GetCancelCost:
+    C_AuctionHouse.GetCommoditySearchResultInfo:
+    C_AuctionHouse.GetCommoditySearchResultsQuantity:
+    C_AuctionHouse.GetExtraBrowseInfo:
+    C_AuctionHouse.GetFilterGroups:
+    C_AuctionHouse.GetItemCommodityStatus:
+    C_AuctionHouse.GetItemKeyFromItem:
+    C_AuctionHouse.GetItemKeyInfo:
+    C_AuctionHouse.GetItemKeyRequiredLevel:
+    C_AuctionHouse.GetItemSearchResultInfo:
+    C_AuctionHouse.GetItemSearchResultsQuantity:
+    C_AuctionHouse.GetMaxBidItemBid:
+    C_AuctionHouse.GetMaxBidItemBuyout:
+    C_AuctionHouse.GetMaxCommoditySearchResultPrice:
+    C_AuctionHouse.GetMaxItemSearchResultBid:
+    C_AuctionHouse.GetMaxItemSearchResultBuyout:
+    C_AuctionHouse.GetMaxOwnedAuctionBid:
+    C_AuctionHouse.GetMaxOwnedAuctionBuyout:
+    C_AuctionHouse.GetNumBids:
+    C_AuctionHouse.GetNumBidTypes:
+    C_AuctionHouse.GetNumCommoditySearchResults:
+    C_AuctionHouse.GetNumItemSearchResults:
+    C_AuctionHouse.GetNumOwnedAuctions:
+    C_AuctionHouse.GetNumOwnedAuctionTypes:
+    C_AuctionHouse.GetNumReplicateItems:
+    C_AuctionHouse.GetOwnedAuctionInfo:
+    C_AuctionHouse.GetOwnedAuctions:
+    C_AuctionHouse.GetOwnedAuctionType:
+    C_AuctionHouse.GetQuoteDurationRemaining:
+    C_AuctionHouse.GetReplicateItemBattlePetInfo:
+    C_AuctionHouse.GetReplicateItemInfo:
+    C_AuctionHouse.GetReplicateItemLink:
+    C_AuctionHouse.GetReplicateItemTimeLeft:
+    C_AuctionHouse.GetTimeLeftBandInfo:
+    C_AuctionHouse.HasFavorites:
+    C_AuctionHouse.HasFullBidResults:
+    C_AuctionHouse.HasFullBrowseResults:
+    C_AuctionHouse.HasFullCommoditySearchResults:
+    C_AuctionHouse.HasFullItemSearchResults:
+    C_AuctionHouse.HasFullOwnedAuctionResults:
+    C_AuctionHouse.HasMaxFavorites:
+    C_AuctionHouse.HasSearchResults:
+    C_AuctionHouse.IsFavoriteItem:
+    C_AuctionHouse.IsSellItemValid:
+    C_AuctionHouse.IsThrottledMessageSystemReady:
+    C_AuctionHouse.MakeItemKey:
+    C_AuctionHouse.PlaceBid:
+    C_AuctionHouse.PostCommodity:
+    C_AuctionHouse.PostItem:
+    C_AuctionHouse.QueryBids:
+    C_AuctionHouse.QueryOwnedAuctions:
+    C_AuctionHouse.RefreshCommoditySearchResults:
+    C_AuctionHouse.RefreshItemSearchResults:
+    C_AuctionHouse.ReplicateItems:
+    C_AuctionHouse.RequestMoreBrowseResults:
+    C_AuctionHouse.RequestMoreCommoditySearchResults:
+    C_AuctionHouse.RequestMoreItemSearchResults:
+    C_AuctionHouse.RequestOwnedAuctionBidderInfo:
+    C_AuctionHouse.SearchForFavorites:
+    C_AuctionHouse.SearchForItemKeys:
+    C_AuctionHouse.SendBrowseQuery:
+    C_AuctionHouse.SendSearchQuery:
+    C_AuctionHouse.SendSellSearchQuery:
+    C_AuctionHouse.SetFavoriteItem:
+    C_AuctionHouse.ShouldAutoPopulatePrice:
+    C_AuctionHouse.StartCommoditiesPurchase:
+    C_AuctionHouse.SupportsCopperValues:
+    C_BarberShopInternal.SetQAMode:
+    C_BattleNet.InstallHighResTextures:
+    C_ConfigurationWarnings.GetConfigurationWarnings:
+    C_ConfigurationWarnings.GetConfigurationWarningSeen:
+    C_ConfigurationWarnings.GetConfigurationWarningString:
+    C_ConfigurationWarnings.SetConfigurationWarningSeen:
+    C_EditMode.ConvertLayoutInfoToString:
+    C_EditMode.ConvertStringToLayoutInfo:
+    C_EditMode.GetAccountSettings:
+    C_EditMode.GetLayouts:
+    C_EditMode.IsValidLayoutName:
+    C_EditMode.OnEditModeExit:
+    C_EditMode.OnLayoutAdded:
+    C_EditMode.OnLayoutDeleted:
+    C_EditMode.SaveLayouts:
+    C_EditMode.SetAccountSetting:
+    C_EditMode.SetActiveLayout:
+    ToggleAnimKitDisplay:
+    ToggleCollision:
+    ToggleCollisionDisplay:
+    ToggleDebugAIDisplay:
+    ToggleGravity:
+    TogglePlayerBounds:
+    TogglePortals:
+    ToggleTris:
+  extra_enums:
+    ActionBarOrientation:
+    ActionBarVisibleSetting:
+    AuctionHouseFilterCategory:
+    AuraFrameIconDirection:
+    AuraFrameIconWrap:
+    AuraFrameOrientation:
+    BagsDirection:
+    BagsOrientation:
+    ConfigurationWarning:
+    CooldownViewerBarContent:
+    CooldownViewerIconDirection:
+    CooldownViewerOrientation:
+    CooldownViewerVisibleSetting:
+    EditModeAccountSetting:
+    EditModeActionBarSetting:
+    EditModeActionBarSystemIndices:
+    EditModeArchaeologyBarSetting:
+    EditModeAuraFrameSetting:
+    EditModeAuraFrameSystemIndices:
+    EditModeBagsSetting:
+    EditModeCastBarSetting:
+    EditModeChatFrameSetting:
+    EditModeCooldownViewerSetting:
+    EditModeCooldownViewerSystemIndices:
+    EditModeDurabilityFrameSetting:
+    EditModeLayoutType:
+    EditModeMicroMenuSetting:
+    EditModeMinimapSetting:
+    EditModeObjectiveTrackerSetting:
+    EditModePresetLayouts:
+    EditModeSettingDisplayType:
+    EditModeStatusTrackingBarSetting:
+    EditModeStatusTrackingBarSystemIndices:
+    EditModeSystem:
+    EditModeTimerBarsSetting:
+    EditModeUnitFrameSetting:
+    EditModeUnitFrameSystemIndices:
+    EditModeVehicleSeatIndicatorSetting:
+    ItemCommodityStatus:
+    MicroMenuOrder:
+    MicroMenuOrientation:
+    RaidGroupDisplayType:
+    SortPlayersBy:
+    ViewArenaSize:
+    ViewRaidSize:
+    WarbandEventState:
+    WarbandGroupFlags:
+    WarbandPlacementDisplayInfoType:
+    WarbandSceneAnimationEvent:
+    WarbandSceneAnimationSheatheState:
+    WarbandSceneAnimationStandState:
+    WarbandSceneAnimationStandStateFlags:
+    WarbandScenePlacementType:
+  extra_events:
+    AUCTION_CANCELED:
+    AUCTION_HOUSE_AUCTION_CREATED:
+    AUCTION_HOUSE_AUCTIONS_EXPIRED:
+    AUCTION_HOUSE_BROWSE_FAILURE:
+    AUCTION_HOUSE_BROWSE_RESULTS_ADDED:
+    AUCTION_HOUSE_BROWSE_RESULTS_UPDATED:
+    AUCTION_HOUSE_FAVORITES_UPDATED:
+    AUCTION_HOUSE_ITEM_DELIVERY_DELAY_UPDATE:
+    AUCTION_HOUSE_NEW_BID_RECEIVED:
+    AUCTION_HOUSE_NEW_RESULTS_RECEIVED:
+    AUCTION_HOUSE_PURCHASE_COMPLETED:
+    AUCTION_HOUSE_SHOW_COMMODITY_WON_NOTIFICATION:
+    AUCTION_HOUSE_SHOW_ERROR:
+    AUCTION_HOUSE_THROTTLED_MESSAGE_DROPPED:
+    AUCTION_HOUSE_THROTTLED_MESSAGE_QUEUED:
+    AUCTION_HOUSE_THROTTLED_MESSAGE_RESPONSE_RECEIVED:
+    AUCTION_HOUSE_THROTTLED_MESSAGE_SENT:
+    AUCTION_HOUSE_THROTTLED_SYSTEM_READY:
+    BID_ADDED:
+    BIDS_UPDATED:
+    COMMODITY_PRICE_UNAVAILABLE:
+    COMMODITY_PRICE_UPDATED:
+    COMMODITY_PURCHASE_FAILED:
+    COMMODITY_PURCHASE_SUCCEEDED:
+    COMMODITY_PURCHASED:
+    COMMODITY_SEARCH_RESULTS_ADDED:
+    COMMODITY_SEARCH_RESULTS_RECEIVED:
+    COMMODITY_SEARCH_RESULTS_UPDATED:
+    EDIT_MODE_LAYOUTS_UPDATED:
+    EXTRA_BROWSE_INFO_RECEIVED:
+    ITEM_KEY_ITEM_INFO_RECEIVED:
+    ITEM_PURCHASED:
+    ITEM_SEARCH_RESULTS_ADDED:
+    ITEM_SEARCH_RESULTS_UPDATED:
+    OWNED_AUCTION_BIDDER_INFO_RECEIVED:
+    REPLICATE_ITEM_LIST_UPDATE:
+  extra_script_objects:
+    FrameAPIArchaeologyDigSiteFrame:
+    FrameAPIBlob:
+    FrameAPIQuestPOI:
+    PingPinFrameAPI:
+    SimpleModelFFXAPI:
   uiobjects:
     Button:
       GetText:
         outputs:
         - _add:
             nilable: true
-      RegisterForClicks:
-        inputs:
-        - _change:
-            from:
-              name: unpackedPrimitiveType
-              type: number
-            to:
-              name: button
-              type: string
-      RegisterForMouse:
-        inputs:
-        - _change:
-            from:
-              name: unpackedPrimitiveType
-              type: number
-            to:
-              name: button
-              type: string
       SetFormattedText:
         _add:
           instride: 1
@@ -111,15 +308,6 @@ lies:
             _change:
               from: string
               to: unknown
-      RegisterForDrag:
-        inputs:
-        - _change:
-            from:
-              name: unpackedPrimitiveType
-              type: number
-            to:
-              name: button
-              type: string
       RegisterUnitEvent:
         inputs:
           2:
@@ -165,11 +353,6 @@ lies:
         - _add:
             nilable: true
     Region:
-      GetPoint:
-        outputs:
-          2:
-            _add:
-              nilable: true
       SetAllPoints:
         _remove:
           inputs:
@@ -179,15 +362,6 @@ lies:
           - default: true
             name: doResize
             type: boolean
-      SetPassThroughButtons:
-        inputs:
-        - _change:
-            from:
-              name: unpackedPrimitiveType
-              type: number
-            to:
-              name: button
-              type: string
       SetPoint:
         _remove:
           inputs:
@@ -212,7 +386,7 @@ lies:
       HookScript:
         outputs:
           _change:
-            from: {}
+            from:
             to:
             - name: success
               type: boolean
@@ -308,77 +482,110 @@ lies:
         - _add:
             nilable: true
 script_objects:
-  FrameAPICharacterModelBase: PlayerModel
-  FrameAPICinematicModel: CinematicModel
-  FrameAPICooldown: Cooldown
-  FrameAPIDressUpModel: DressUpModel
-  FrameAPIFogOfWarFrame: FogOfWarFrame
-  FrameAPIModelSceneFrame: ModelScene
-  FrameAPIModelSceneFrameActor: Actor
-  FrameAPIModelSceneFrameActorBase: Actor
-  FrameAPISimpleCheckout: Checkout
-  FrameAPITabardModel: TabardModel
-  FrameAPITabardModelBase: TabardModel
-  FrameAPIUnitPositionFrame: UnitPositionFrame
-  MinimapFrameAPI: Minimap
-  SimpleAnimAlphaAPI: Alpha
-  SimpleAnimAPI: Animation
-  SimpleAnimatableObjectAPI: Region
-  SimpleAnimFlipBookAPI: FlipBook
-  SimpleAnimGroupAPI: AnimationGroup
-  SimpleAnimPathAPI: Path
-  SimpleAnimRotationAPI: Rotation
-  SimpleAnimScaleAPI: Scale
-  SimpleAnimScaleLineAPI: LineScale
-  SimpleAnimTextureCoordTranslationAPI: TextureCoordTranslation
-  SimpleAnimTranslationAPI: Translation
-  SimpleAnimTranslationLineAPI: LineTranslation
-  SimpleAnimVertexColorAPI: VertexColor
-  SimpleBrowserAPI: Browser
-  SimpleButtonAPI: Button
-  SimpleCheckboxAPI: CheckButton
-  SimpleColorSelectAPI: ColorSelect
-  SimpleControlPointAPI: ControlPoint
-  SimpleEditBoxAPI: EditBox
-  SimpleFontAPI: Font
-  SimpleFontStringAPI: FontString
-  SimpleFrameAPI: Frame
-  SimpleFrameScriptObjectAPI: UIObject
-  SimpleHTMLAPI: SimpleHTML
-  SimpleLineAPI: Line
-  SimpleMaskTextureAPI: MaskTexture
-  SimpleMessageFrameAPI: MessageFrame
-  SimpleModelAPI: Model
-  SimpleMovieAPI: MovieFrame
-  SimpleObjectAPI: ParentedObjectBase
-  SimpleOffScreenFrameAPI: OffScreenFrame
-  SimpleRegionAPI: Region
-  SimpleScriptRegionAPI: Region
-  SimpleScriptRegionResizingAPI: Region
-  SimpleScrollFrameAPI: ScrollFrame
-  SimpleSliderAPI: Slider
-  SimpleStatusBarAPI: StatusBar
-  SimpleTextureAPI: Texture
-  SimpleTextureBaseAPI: TextureBase
-skip_docfiles:
-  AuctionHouseDocumentation: {}
-  BarberShopInternalDocumentation: {}
-  ConfigurationWarningsDocumentation: {}
-  DebugToggleDocumentation: {}
-  EditModeManagerDocumentation: {}
-  FrameAPIArchaeologyDigsiteDocumentation: {}
-  FrameAPIBlobDocumentation: {}
-  FrameAPIQuestPOIDocumentation: {}
-  PingPinFrameAPIDocumentation: {}
-  SimpleModelFFXAPIDocumentation: {}
-skip_uiobject_methods:
-  Region:
-    GetBottom: {}
-    GetHeight: {}
-    GetLeft: {}
-    GetRect: {}
-    GetSize: {}
-    GetWidth: {}
+  FrameAPICharacterModelBase:
+    uiobject: PlayerModel
+  FrameAPICinematicModel:
+    uiobject: CinematicModel
+  FrameAPICooldown:
+    uiobject: Cooldown
+  FrameAPIDressUpModel:
+    uiobject: DressUpModel
+  FrameAPIFogOfWarFrame:
+    uiobject: FogOfWarFrame
+  FrameAPIModelSceneFrame:
+    uiobject: ModelScene
+  FrameAPIModelSceneFrameActor:
+    uiobject: Actor
+  FrameAPIModelSceneFrameActorBase:
+    uiobject: Actor
+  FrameAPISimpleCheckout:
+    uiobject: Checkout
+  FrameAPITabardModel:
+    uiobject: TabardModel
+  FrameAPITabardModelBase:
+    uiobject: TabardModel
+  FrameAPIUnitPositionFrame:
+    uiobject: UnitPositionFrame
+  MinimapFrameAPI:
+    uiobject: Minimap
+  SimpleAnimAlphaAPI:
+    uiobject: Alpha
+  SimpleAnimAPI:
+    uiobject: Animation
+  SimpleAnimatableObjectAPI:
+    uiobject: Region
+  SimpleAnimFlipBookAPI:
+    uiobject: FlipBook
+  SimpleAnimGroupAPI:
+    uiobject: AnimationGroup
+  SimpleAnimPathAPI:
+    uiobject: Path
+  SimpleAnimRotationAPI:
+    uiobject: Rotation
+  SimpleAnimScaleAPI:
+    uiobject: Scale
+  SimpleAnimScaleLineAPI:
+    uiobject: LineScale
+  SimpleAnimTextureCoordTranslationAPI:
+    uiobject: TextureCoordTranslation
+  SimpleAnimTranslationAPI:
+    uiobject: Translation
+  SimpleAnimTranslationLineAPI:
+    uiobject: LineTranslation
+  SimpleAnimVertexColorAPI:
+    uiobject: VertexColor
+  SimpleBrowserAPI:
+    uiobject: Browser
+  SimpleButtonAPI:
+    uiobject: Button
+  SimpleCheckboxAPI:
+    uiobject: CheckButton
+  SimpleColorSelectAPI:
+    uiobject: ColorSelect
+  SimpleControlPointAPI:
+    uiobject: ControlPoint
+  SimpleEditBoxAPI:
+    uiobject: EditBox
+  SimpleFontAPI:
+    uiobject: Font
+  SimpleFontStringAPI:
+    uiobject: FontString
+  SimpleFrameAPI:
+    uiobject: Frame
+  SimpleFrameScriptObjectAPI:
+    uiobject: UIObject
+  SimpleHTMLAPI:
+    uiobject: SimpleHTML
+  SimpleLineAPI:
+    uiobject: Line
+  SimpleMaskTextureAPI:
+    uiobject: MaskTexture
+  SimpleMessageFrameAPI:
+    uiobject: MessageFrame
+  SimpleModelAPI:
+    uiobject: Model
+  SimpleMovieAPI:
+    uiobject: MovieFrame
+  SimpleObjectAPI:
+    uiobject: ParentedObjectBase
+  SimpleOffScreenFrameAPI:
+    uiobject: OffScreenFrame
+  SimpleRegionAPI:
+    uiobject: Region
+  SimpleScriptRegionAPI:
+    uiobject: Region
+  SimpleScriptRegionResizingAPI:
+    uiobject: Region
+  SimpleScrollFrameAPI:
+    uiobject: ScrollFrame
+  SimpleSliderAPI:
+    uiobject: Slider
+  SimpleStatusBarAPI:
+    uiobject: StatusBar
+  SimpleTextureAPI:
+    uiobject: Texture
+  SimpleTextureBaseAPI:
+    uiobject: TextureBase
 typedefs:
   AnimationDataEnum:
     type: number
@@ -398,6 +605,8 @@ typedefs:
     type: string
   ChatBubbleFrame:
     type: table
+  ClickButton:
+    type: string
   ClubId:
     type: string
   ClubInvitationId:
@@ -416,7 +625,7 @@ typedefs:
     type:
       structure: ItemLocation
   FileAsset:
-    type: string
+    type: FileAsset
   fileID:
     type: number
   FontAlphabet:
@@ -439,6 +648,10 @@ typedefs:
     type: function
   luaIndex:
     type: number
+  LuaValueReference:
+    type: unknown
+  LuaValueVariant:
+    type: table
   ModelAsset:
     type: string
   ModelSceneFrame:
@@ -447,6 +660,8 @@ typedefs:
   ModelSceneFrameActor:
     type:
       uiobject: Actor
+  MouseButton:
+    type: string
   NamePlateFrame:
     type: table
   normalizedValue:
@@ -459,12 +674,12 @@ typedefs:
     type: number
   RecruitAcceptanceID:
     type: string
-  ScriptObject:
-    type:
-      uiobject: UIObject
   ScriptRegion:
+    outnil: true
     type:
       uiobject: Region
+  SendChatMessageType:
+    type: string
   SimpleAnim:
     type:
       uiobject: Animation
@@ -495,6 +710,9 @@ typedefs:
   SimplePathAnim:
     type:
       uiobject: Path
+  SimpleRegion:
+    type:
+      uiobject: Region
   SimpleTexture:
     outnil: true
     type:
@@ -509,6 +727,8 @@ typedefs:
     type: string
   string:
     type: string
+  stringView:
+    type: string
   TBFFlags:
     type: string
   TextureAsset:
@@ -519,8 +739,14 @@ typedefs:
     type: string
   textureKit:
     type: string
+  TickerCallback:
+    type:
+      luaobject: LuaFunctionContainer
   time_t:
     type: number
+  TimerCallback:
+    type:
+      luaobject: LuaFunctionContainer
   TooltipComparisonItem:
     type: table
   uiAddon:

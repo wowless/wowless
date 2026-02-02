@@ -1,0 +1,24 @@
+{
+  "buildPresets": [
+    {
+      "configurePreset": "default",
+      "name": "default"
+    }
+  ],
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 24
+  },
+  "configurePresets": [
+    {
+      "binaryDir": "${sourceDir}/build/cmake",
+      "cacheVariables": {
+        "CMAKE_C_FLAGS": "-DNDEBUG -ffast-math -O3",
+        "CMAKE_EXPORT_COMPILE_COMMANDS": true
+      },
+      "generator": "Ninja",
+      "name": "default"
+    }
+  ],
+  "version": 3
+}

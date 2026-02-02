@@ -1,0 +1,14 @@
+name: modules
+type:
+  mapof:
+    key: string
+    value:
+      taggedunion:
+        deps:
+          setof:
+            ref:
+              schema: module
+        root:
+          record:
+            default:
+              type: string

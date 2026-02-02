@@ -1,6 +1,6 @@
 repos:
 - repo: https://github.com/pre-commit/pre-commit-hooks
-  rev: v5.0.0
+  rev: v6.0.0
   hooks:
   - id: check-json
   - id: check-yaml
@@ -13,33 +13,37 @@ repos:
   hooks:
   - id: cmake-format
 - repo: https://github.com/editorconfig-checker/editorconfig-checker.python
-  rev: '3.2.1'
+  rev: '3.6.0'
   hooks:
   - id: editorconfig-checker
 - repo: https://github.com/JohnnyMorganz/StyLua
-  rev: v2.1.0
+  rev: v2.3.1
   hooks:
   - id: stylua-github
 - repo: https://github.com/Lucas-C/pre-commit-hooks
-  rev: v1.5.5
+  rev: v1.5.6
   hooks:
   - id: remove-crlf
   - id: forbid-tabs
 - repo: https://github.com/markdownlint/markdownlint
-  rev: v0.12.0
+  rev: v0.15.0
   hooks:
   - id: markdownlint
 - repo: https://github.com/pre-commit/mirrors-clang-format
-  rev: v20.1.6
+  rev: v21.1.8
   hooks:
   - id: clang-format
     types: [c]
 - repo: https://github.com/shellcheck-py/shellcheck-py
-  rev: v0.10.0.1
+  rev: v0.11.0.1
   hooks:
   - id: shellcheck
     args:
     - --shell=bash
+- repo: https://github.com/sqlfluff/sqlfluff
+  rev: 4.0.0
+  hooks:
+  - id: sqlfluff-fix
 - repo: local
   hooks:
   - id: luacheck
@@ -48,19 +52,14 @@ repos:
     language: system
     types: [file]
     files: (\.lua|^.luacheckrc)$
-  - id: addon-chmod
-    name: addon execute bits
-    entry: chmod 755
-    language: system
-    files: ^addon/
-  - id: mkninja
+  - id: cmake-configure
     name: create build system
-    entry: lua tools/mkninja.lua
+    entry: cmake --preset default
     language: system
     pass_filenames: false
   - id: build-yamlfmt
     name: build yamlfmt
-    entry: ninja build/cmake/yamlfmt
+    entry: cmake --build --preset default --target yamlfmt
     language: system
     pass_filenames: false
   - id: yamlfmt
@@ -71,7 +70,7 @@ repos:
     files: ^data/
   - id: test
     name: build and test
-    entry: ninja -v
+    entry: cmake --build --preset default --target all test
     language: system
     pass_filenames: false
 - repo: meta

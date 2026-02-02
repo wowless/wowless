@@ -1,19 +1,19 @@
-local api, baseSql, entriesSqlCursor, edgesSqlCursor, groupsSqlCursor, conditionsSqlCursor = ...
+local datalua, talents, units, baseSql, entriesSqlCursor, edgesSqlCursor, groupsSqlCursor, conditionsSqlCursor = ...
 return function(configID, nodeID)
   -- TODO mix in the state to determine the state dependent fields
 
-  local returnPlayerData = (configID == api.modules.talents.activeConfigID)
-  local returnInspectData = (configID == api.datalua.globals.Constants.TraitConsts.VIEW_TRAIT_CONFIG_ID)
+  local returnPlayerData = (configID == talents.activeConfigID)
+  local returnInspectData = (configID == datalua.globals.Constants.TraitConsts.VIEW_TRAIT_CONFIG_ID)
 
   -- if invalid configID: empty return
   if not returnPlayerData and not returnInspectData then
     return
   end
 
-  local player = api.modules.units.player
-  local specID = (returnPlayerData and player.spec) or (returnInspectData and api.modules.talents.viewLoadoutSpecID)
+  local player = units.player
+  local specID = (returnPlayerData and player.spec) or (returnInspectData and talents.viewLoadoutSpecID)
 
-  if returnInspectData and not api.modules.talents.viewLoadoutDataImported then
+  if returnInspectData and not talents.viewLoadoutDataImported then
     error('C_ClassTalents.ViewLoadout should be called before C_Traits.GetNodeInfo when using VIEW_TRAIT_CONFIG_ID')
   end
 
@@ -56,8 +56,8 @@ return function(configID, nodeID)
     if
       (conditionSpec == specID or 0 == conditionSpec)
       and (
-        conditionType == api.datalua.globals.Enum.TraitConditionType.Visible
-        or conditionType == api.datalua.globals.Enum.TraitConditionType.Granted
+        conditionType == datalua.globals.Enum.TraitConditionType.Visible
+        or conditionType == datalua.globals.Enum.TraitConditionType.Granted
       )
     then
       forceVisible = true
@@ -65,7 +65,7 @@ return function(configID, nodeID)
     if
       conditionSpec ~= specID
       and 0 ~= conditionSpec
-      and conditionType == api.datalua.globals.Enum.TraitConditionType.Visible
+      and conditionType == datalua.globals.Enum.TraitConditionType.Visible
     then
       isVisible = false
     end

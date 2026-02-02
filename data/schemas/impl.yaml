@@ -1,4 +1,3 @@
----
 name: impl
 type:
   mapof:
@@ -6,24 +5,23 @@ type:
     value:
       taggedunion:
         delegate:
-          ref: impl
+          ref:
+            schema: impl
         directsql:
-          ref: sql
+          ref:
+            schema: sql
         impl:
           record:
-            frameworks:
+            modules:
               type:
-                sequenceof:
-                  taggedunion:
-                    api: tag
-                    datalua: tag
-                    env: tag
-                    events: tag
-                    loader: tag
+                setof:
+                  ref:
+                    schema: module
             sqls:
               type:
                 sequenceof:
-                  ref: sql
+                  ref:
+                    schema: sql
         luadelegate:
           record:
             function:
@@ -37,5 +35,7 @@ type:
               type: string
             name:
               required: true
-              type: string
+              type:
+                ref:
+                  schema: module
         stdlib: string

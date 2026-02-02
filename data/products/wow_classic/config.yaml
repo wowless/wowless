@@ -1,55 +1,57 @@
----
 addon:
-  aliased_in_framexml:
-    C_LFGInfo.IsPremadeGroupEnabled: {}
   capsule:
     apinamespaces:
-      C_AuthChallenge: {}
-      C_SecureTransfer: {}
-      C_StoreSecure: {}
-      C_WowTokenSecure: {}
+      C_AuthChallenge:
+      C_SecureTransfer:
+      C_StoreSecure:
+      C_WowTokenSecure:
     enums:
-      BattlepayBannerType: {}
-      BattlepayDisplayFlag: {}
-      BattlepayGroupDisplayType: {}
-      BattlepayProductDecorator: {}
-      BattlepayProductGroupFlag: {}
-      PurchaseEligibility: {}
-      StoreError: {}
-      VasError: {}
-      VasServiceType: {}
+      BattlepayBannerType:
+      BattlepayGroupDisplayType:
+      BattlepayProductDecorator:
+      PurchaseEligibility:
+      StoreError:
+      VasServiceType:
+      VasTransactionPurchaseResult:
     globalapis:
-      C_Macro.SetMacroExecuteLineCallback: {}
-      CreateForbiddenFrame: {}
-      loadstring_untainted: {}
+      C_Macro.SetMacroExecuteLineCallback:
+      CreateForbiddenFrame:
+      loadstring_untainted:
+  enum_values_set_in_framexml:
+    SeasonID:
+      Placeholder:
+  enums_set_in_framexml:
+    QuestPOIQuestTypes:
+    Unitsex:
   ignore_cvar_value:
-    graphicsEnvironmentDetail: {}
-    graphicsGroundClutter: {}
-    graphicsLiquidDetail: {}
-    graphicsParticleDensity: {}
-    graphicsQuality: {}
-    graphicsShadowQuality: {}
-    graphicsSpellDensity: {}
-    graphicsSSAO: {}
-    graphicsTextureResolution: {}
-    mouseSpeed: {}
-    raidGraphicsEnvironmentDetail: {}
-    raidGraphicsGroundClutter: {}
-    raidGraphicsLiquidDetail: {}
-    raidGraphicsParticleDensity: {}
-    RAIDgraphicsQuality: {}
-    raidGraphicsShadowQuality: {}
-    raidGraphicsSpellDensity: {}
-    raidGraphicsSSAO: {}
-    raidGraphicsTextureResolution: {}
-    RenderScale: {}
+    graphicsEnvironmentDetail:
+    graphicsGroundClutter:
+    graphicsLiquidDetail:
+    graphicsParticleDensity:
+    graphicsQuality:
+    graphicsShadowQuality:
+    graphicsSSAO:
+    graphicsTextureResolution:
+    mouseSpeed:
+    raidGraphicsEnvironmentDetail:
+    raidGraphicsGroundClutter:
+    raidGraphicsLiquidDetail:
+    raidGraphicsParticleDensity:
+    RAIDgraphicsQuality:
+    raidGraphicsShadowQuality:
+    raidGraphicsSSAO:
+    raidGraphicsTextureResolution:
+    RenderScale:
   overwritten_apis:
-    C_ChatInfo.RegisterAddonMessagePrefix: {}
-    C_ChatInfo.SendAddonMessage: {}
-    C_ChatInfo.SendAddonMessageLogged: {}
-    C_Traits.GetConditionInfo: {}
-    C_Traits.GetEntryInfo: {}
-    C_Traits.GetTreeInfo: {}
+    C_ChatInfo.RegisterAddonMessagePrefix:
+    C_ChatInfo.SendAddonMessage:
+    C_ChatInfo.SendAddonMessageLogged:
+    C_Traits.GetConditionInfo:
+    C_Traits.GetEntryInfo:
+    C_Traits.GetTreeInfo:
+modules:
+  addons:
+    GetAddOnInfo_noUpdateAvailable: true
 runner:
   skip_events:
     AJ_PVP_RBG_ACTION: missing HonorFrame_SetType
@@ -62,19 +64,19 @@ runner:
     SUBSCRIPTION_CHANGED_KICK_IMMINENT: depends on GlueDialog_Show
     VAS_QUEUE_STATUS_UPDATE: depends on C_StoreGlue
   skip_slashcmds:
-    ACHIEVEMENTUI: {}
-    CASTRANDOM: {}
-    GUILD_INVITE: {}
-    GUILD_UNINVITE: {}
-    LOOT_MASTER: {}
-    RAIDFINDER: {}
-    USERANDOM: {}
+    ACHIEVEMENTUI:
+    CASTRANDOM:
+    GUILD_INVITE:
+    GUILD_UNINVITE:
+    LOOT_MASTER:
+    RAIDFINDER:
+    USERANDOM:
 runtime:
   warners:
-    archaeologydigsiteframe: {}
-    fontstring: {}
-    line: {}
-    questpoiframe: {}
-    scenariopoiframe: {}
-    texture: {}
-    worldframe: {}
+    archaeologydigsiteframe:
+    fontstring:
+    line:
+    questpoiframe:
+    scenariopoiframe:
+    texture:
+    worldframe:

@@ -1,4 +1,3 @@
----
 name: sql
 type:
   mapof:
@@ -11,7 +10,7 @@ type:
               key: string
               value: string
         table:
-          type: boolean
+          type: flag
         type:
           required: true
           type:

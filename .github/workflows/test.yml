@@ -10,27 +10,29 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
       with:
         submodules: true
+    - run: mkdir vcpkg-cache
+    - uses: actions/cache@v5
+      with:
+        path: vcpkg-cache
+        key: vcpkg-devcontainer-${{ github.run_id }}
+        restore-keys: vcpkg-devcontainer
     - uses: docker/login-action@v3
       with:
         registry: ghcr.io
         username: ${{ github.repository_owner }}
         password: ${{ secrets.GITHUB_TOKEN }}
-    - uses: actions/cache@v4
-      with:
-        path: cache
-        key: cache-${{ github.run_id }}
-        restore-keys: cache
     - uses: devcontainers/ci@v0.3
       with:
         env: |
           GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}
+          VCPKG_DEFAULT_BINARY_CACHE=/workspaces/wowless/vcpkg-cache
         imageName: ghcr.io/wowless/wowless-devcontainer
         refFilterForPush: refs/heads/main
         runCmd: pre-commit run -a -v
-    - uses: actions/upload-artifact@v4
+    - uses: actions/upload-artifact@v6
       if: success() || failure()
       with:
         name: test-results
@@ -62,15 +64,15 @@ jobs:
           os: windows-latest
     runs-on: ${{ matrix.config.os }}
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
       with:
         submodules: true
     - run: mkdir ${{ env.VCPKG_DEFAULT_BINARY_CACHE }}
-    - uses: actions/cache@v4
+    - uses: actions/cache@v5
       with:
         path: ${{ env.VCPKG_DEFAULT_BINARY_CACHE }}
         key: vcpkg-${{ runner.os }}-${{ github.run_id }}
         restore-keys: vcpkg-${{ runner.os }}
-    - uses: lukka/get-cmake@v4.0.3
+    - uses: lukka/get-cmake@v4.2.3
     - run: cmake -B build -G "${{ matrix.config.generator }}"
     - run: cmake --build build --verbose

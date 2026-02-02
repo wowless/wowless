@@ -1,10 +1,10 @@
-local api = ...
+local events, time, units = ...
 return function(msg)
-  api.modules.time.AddTimer(0, function()
-    api.SendEvent(
+  time.AddTimer(0, function()
+    events.SendEvent(
       'CHAT_MSG_SYSTEM',
       msg,
-      api.modules.units.player.name,
+      units.player.name,
       '',
       '',
       '',

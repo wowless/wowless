@@ -4,6 +4,7 @@ read_globals = {
   'debug.getstacktaint',
   'debug.gettaintmode',
   'debug.gettime',
+  'debug.iscfunction',
   'debug.newsecurefunction',
   'debug.setnewclosuretaint',
   'debug.setprofilingenabled',
@@ -37,7 +38,12 @@ files['addon/Wowless'] = {
     'debugprofilestop',
     'DevTools_Dump',
     'format',
+    'GetScreenHeight',
+    'GetScreenWidth',
     'RequestTimePlayed',
     'SendSystemMessage',
   },
+}
+exclude_files = {
+  'meta.lua',
 }

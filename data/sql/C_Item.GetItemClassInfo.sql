@@ -1,6 +1,5 @@
-SELECT
-  ClassName_lang
+SELECT ClassName_lang
 FROM
   ItemClass
 WHERE
-  ClassID == ?1;
+  ClassID = ?1;

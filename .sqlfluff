@@ -1,0 +1,10 @@
+[sqlfluff]
+dialect = sqlite
+exclude_rules = capitalisation.identifiers
+templater = placeholder
+
+[sqlfluff:indentation]
+tab_space_size = 2
+
+[sqlfluff:templater:placeholder]
+param_style = question_mark

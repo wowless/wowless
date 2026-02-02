@@ -1,15 +1,16 @@
-local function mapify(t)
-  if t then
-    local tt = {}
-    for _, p in ipairs(t) do
-      tt[p] = true
-    end
-    return tt
-  end
+local deps = {}
+
+local function readfile(f)
+  deps[f] = true
+  return assert((require('pl.file').read(f)))
+end
+
+local function readyaml(f)
+  return require('wowapi.yaml').parse(readfile(f))
 end
 
 local function perproduct(p, f)
-  return assert(dofile(('build/cmake/runtime/products/%s/%s.lua'):format(p, f)))
+  return readyaml(('data/products/%s/%s.yaml'):format(p, f))
 end
 
 local function tpath(t, ...)
@@ -37,14 +38,17 @@ local ptablemap = {
     local t = {}
     for k, v in pairs(perproduct(p, 'events')) do
       t[k] = {
+        callback = v.callback or false,
         payload = #v.payload,
-        registerable = true,
+        registerable = not v.noscript,
+        restricted = v.restricted,
       }
     end
-    for _, product in ipairs(dofile('build/cmake/runtime/products.lua')) do
+    for _, product in ipairs(readyaml('data/products.yaml')) do
       for k in pairs(perproduct(product, 'events')) do
         if not t[k] then
           t[k] = {
+            callback = false,
             payload = -1,
             registerable = false,
           }
@@ -54,23 +58,12 @@ local ptablemap = {
     return 'Events', t
   end,
   globalapis = function(p)
-    local impls = dofile('build/cmake/runtime/impl.lua')
-    local function islua(api)
-      local impl = impls[api.impl]
-      if not impl or not impl.stdlib then
-        return false
-      end
-      local g = assert(tpath(_G, strsplit('.', impl.stdlib)))
-      return type(g) == 'function' and pcall(coroutine.create, g)
-    end
     local config = perproduct(p, 'config')
     local t = {}
-    for name, api in pairs(perproduct(p, 'apis')) do
+    for name in pairs(perproduct(p, 'apis')) do
       if not name:find('%.') then
         local vv = {
-          islua = islua(api) or nil,
           overwritten = tpath(config, 'addon', 'overwritten_apis', name) and true,
-          stdlib = api.impl and tpath(impls, api.impl, 'stdlib'),
         }
         t[name] = next(vv) and vv or true
       end
@@ -81,28 +74,52 @@ local ptablemap = {
     return 'Globals', perproduct(p, 'globals')
   end,
   impltests = function(p)
-    local r = require('pl.file').read
+    local test = readyaml('data/test.yaml')
     local t = {}
-    local deps = {}
     for _, api in pairs(perproduct(p, 'apis')) do
-      if api.impl and not t[api.impl] then
-        local f = 'data/test/' .. api.impl .. '.lua'
-        local content = r(f)
-        if content then
-          t[api.impl] = content
-          deps[f] = true
-        end
+      if test[api.impl] and not t[api.impl] then
+        t[api.impl] = readfile('data/test/' .. api.impl .. '.lua')
       end
     end
-    return 'ImplTests', t, deps
+    return 'ImplTests', t
+  end,
+  luaobjects = function(p)
+    local raw = perproduct(p, 'luaobjects')
+    local t = {}
+    local function pop(k)
+      if t[k] then
+        return
+      end
+      local v = raw[k]
+      local methods = {}
+      if v.inherits then
+        pop(v.inherits)
+        for mk in pairs(t[v.inherits]) do
+          methods[mk] = true
+        end
+      end
+      for mk in pairs(v.methods or {}) do
+        methods[mk] = true
+      end
+      t[k] = methods
+    end
+    for k in pairs(raw) do
+      pop(k)
+    end
+    for k, v in pairs(raw) do
+      if v.virtual then
+        t[k] = nil
+      end
+    end
+    return 'LuaObjects', t
   end,
   namespaceapis = function(p)
-    local impls = dofile('build/cmake/runtime/impl.lua')
+    local platform = dofile('build/cmake/runtime/platform.lua')
     local config = perproduct(p, 'config')
     local apiNamespaces = {}
     for k, api in pairs(perproduct(p, 'apis')) do
       local dot = k:find('%.')
-      if dot then
+      if dot and (not api.platform or api.platform == platform) and not api.secureonly then
         local name = k:sub(1, dot - 1)
         apiNamespaces[name] = apiNamespaces[name] or { methods = {} }
         apiNamespaces[name].methods[k:sub(dot + 1)] = api
@@ -111,10 +128,9 @@ local ptablemap = {
     local t = {}
     for k, v in pairs(apiNamespaces) do
       local mt = {}
-      for mk, mv in pairs(v.methods) do
+      for mk in pairs(v.methods) do
         local tt = {
           overwritten = tpath(config, 'addon', 'overwritten_apis', k .. '.' .. mk) and true,
-          stdlib = mv.impl and tpath(impls, mv.impl, 'stdlib'),
         }
         mt[mk] = next(tt) and tt or true
       end
@@ -124,17 +140,21 @@ local ptablemap = {
   end,
   uiobjectapis = function(p)
     local uiobjects = perproduct(p, 'uiobjects')
-    local inhrev = {}
-    for k, cfg in pairs(uiobjects) do
-      for inh in pairs(cfg.inherits) do
-        inhrev[inh] = inhrev[inh] or {}
-        table.insert(inhrev[inh], k)
-      end
+    local allscripts = readyaml('data/scripttypes.yaml')
+    for _, cfg in pairs(uiobjects) do
       cfg.fieldinitoverrides = cfg.fieldinitoverrides or {}
     end
-    local objTypes = {}
     for k, cfg in pairs(uiobjects) do
-      objTypes[k] = cfg.objectType or k
+      cfg.isa = {}
+      for k2, cfg2 in pairs(uiobjects) do
+        cfg.isa[k2] = false
+        if cfg2.objectType then
+          cfg.isa[cfg2.objectType] = false
+        end
+      end
+      if not cfg.virtual or cfg.objectType then
+        cfg.isa[cfg.objectType or k] = true
+      end
     end
     local function fixup(cfg)
       for inhname in pairs(cfg.inherits) do
@@ -149,21 +169,22 @@ local ptablemap = {
         for n, m in pairs(inh.methods) do
           cfg.methods[n] = cfg.methods[n] or m -- overrides
         end
+        if inh.scripts then
+          cfg.scripts = cfg.scripts or {}
+          for n in pairs(inh.scripts) do
+            cfg.scripts[n] = {}
+          end
+        end
+        for ik, iv in pairs(inh.isa) do
+          if iv then
+            cfg.isa[ik] = true
+          end
+        end
       end
     end
     for _, cfg in pairs(uiobjects) do
       fixup(cfg)
     end
-    local frametypes = {}
-    local function addtype(ty)
-      if not frametypes[ty] then
-        frametypes[ty] = true
-        for _, inh in ipairs(inhrev[ty] or {}) do
-          addtype(inh)
-        end
-      end
-    end
-    addtype('Frame')
     local t = {}
     for k, v in pairs(uiobjects) do
       local ft = {}
@@ -174,6 +195,7 @@ local ptablemap = {
           init = override
         end
         ft[fk] = {
+          dynamicinit = fv.dynamicinit,
           getters = {},
           init = init,
         }
@@ -185,32 +207,35 @@ local ptablemap = {
           table.insert(ft[gv.name].getters, { index = gk, method = mk })
         end
       end
+      for fk, fv in pairs(ft) do
+        if fv.dynamicinit then
+          ft[fk] = nil
+        end
+      end
       -- TODO remove these super duper field hacks
-      ft.bottom = nil
-      ft.height = nil
-      ft.left = nil
       ft.parent = nil
-      ft.pushedTextOffsetX = nil
-      ft.pushedTextOffsetY = nil
-      ft.top = nil
-      ft.right = nil
-      ft.width = nil
-      if k == 'EditBox' then
-        ft.shown.init = false
-      elseif k == 'Font' then
-        ft.name.init = 'WowlessFont1'
-      elseif k == 'Minimap' then
+      if v.singleton then
         ft = {}
+      elseif k == 'EditBox' then
+        ft.shown.init = false
+      end
+      local st = {}
+      if mt.HasScript then
+        for scripttype in pairs(allscripts) do
+          st[scripttype] = not not (v.scripts and v.scripts[scripttype])
+        end
       end
       t[k] = {
         fields = ft,
-        frametype = not not frametypes[k],
+        isa = v.isa,
         methods = mt,
-        objtype = objTypes[k],
+        objtype = v.objectType or k,
+        scripts = st,
+        singleton = v.singleton,
         virtual = v.virtual,
       }
     end
-    for _, product in ipairs(dofile('build/cmake/runtime/products.lua')) do
+    for _, product in ipairs(readyaml('data/products.yaml')) do
       for k in pairs(perproduct(product, 'uiobjects')) do
         if not t[k] then
           t[k] = { unsupported = true }
@@ -223,65 +248,31 @@ local ptablemap = {
 
 local args = (function()
   local parser = require('argparse')()
-  parser:flag('-n --dryrun', 'do not write files')
-  parser:option('-f --file', 'files to generate, default all'):count('*')
-  parser:option('-p --product', 'products to generate, default all'):count('*')
+  parser:argument('product')
+  parser:argument('file')
+  parser:argument('output')
   return parser:parse()
 end)()
-local filemap, alldeps = (function()
-  local t = {}
-  local deps = {}
-  local files = (function()
-    if next(args.file) then
-      return mapify(args.file)
-    else
-      local tt = {}
-      for k in pairs(ptablemap) do
-        tt[k] = true
-      end
-      return tt
+local function doit(k, p)
+  if ptablemap[k] then
+    local nn, tt = ptablemap[k](p)
+    return '_G.WowlessData.' .. nn .. ' = ' .. require('pl.pretty').write(tt) .. '\n'
+  elseif k == 'product' then
+    return ('_G.WowlessData = { product = %q }'):format(p)
+  elseif k == 'toc' then
+    local tt = {}
+    for kk in pairs(ptablemap) do
+      table.insert(tt, kk .. '.lua')
     end
-  end)()
-  for k in pairs(files) do
-    if ptablemap[k] then
-      for _, p in ipairs(next(args.product) and args.product or dofile('build/cmake/runtime/products.lua')) do
-        local nn, tt, dd = ptablemap[k](p)
-        local ss = '_G.WowlessData.' .. nn .. ' = ' .. require('pl.pretty').write(tt) .. '\n'
-        local ff = 'build/products/' .. p .. '/WowlessData/' .. k .. '.lua'
-        t[ff] = ss
-        deps[ff] = dd
-      end
-    elseif k == 'product' then
-      for _, p in ipairs(next(args.product) and args.product or dofile('build/cmake/runtime/products.lua')) do
-        local ss = ('_G.WowlessData = { product = %q }'):format(p)
-        t['build/products/' .. p .. '/WowlessData/' .. k .. '.lua'] = ss
-      end
-    elseif k == 'toc' then
-      local tt = {}
-      for kk in pairs(ptablemap) do
-        table.insert(tt, kk .. '.lua')
-      end
-      table.sort(tt)
-      table.insert(tt, 1, 'product.lua')
-      table.insert(tt, '')
-      local content = table.concat(tt, '\n')
-      for _, p in ipairs(next(args.product) and args.product or dofile('build/cmake/runtime/products.lua')) do
-        t['build/products/' .. p .. '/WowlessData/WowlessData.toc'] = content
-      end
-    else
-      error('invalid file type ' .. k)
-    end
-  end
-  return t, deps
-end)()
-
-if not args.dryrun then
-  local w = require('pl.file').write
-  for k, v in pairs(filemap) do
-    w(k, v)
-    os.execute('chmod a+x ' .. k)
-  end
-  for k, v in pairs(alldeps) do
-    require('tools.util').writedeps(k, v)
+    table.sort(tt)
+    table.insert(tt, 1, 'product.lua')
+    table.insert(tt, 1, '## Interface: ' .. perproduct(p, 'build').tocversion)
+    table.insert(tt, '')
+    return table.concat(tt, '\n')
+  else
+    error('invalid file type ' .. k)
   end
 end
+local content = doit(args.file, args.product)
+require('pl.file').write(args.output, content)
+require('tools.util').writedeps(args.output, deps)

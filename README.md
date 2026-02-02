@@ -26,7 +26,7 @@ From inside the container:
 
 ```sh
 git submodule update --init --depth 1
-lua tools/mkninja.lua
+cmake --preset default
 bin/run.sh wow
 ```
 

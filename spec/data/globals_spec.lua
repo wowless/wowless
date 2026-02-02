@@ -6,13 +6,17 @@ describe('globals', function()
         local enums = globals.Enum
         describe('meta', function()
           for k in pairs(enums) do
-            if k:sub(-4) == 'Meta' then
-              describe(k, function()
+            describe(k, function()
+              if k:sub(-4) == 'Meta' then
                 it('has a corresponding real enum', function()
                   assert(enums[k:sub(1, -5)])
                 end)
-              end)
-            end
+              else
+                it('has a corresponding meta enum', function()
+                  assert(enums[k .. 'Meta'])
+                end)
+              end
+            end)
           end
         end)
       end)

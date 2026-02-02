@@ -1,4 +1,4 @@
-local api, sql = ...
+local units, sql = ...
 return function(tabIndex) -- TODO honor isInspect
-  return sql(api.modules.units.player.class, tabIndex)
+  return sql(units.player.class, tabIndex)
 end

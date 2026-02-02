@@ -7,25 +7,13 @@
       "type": "shell"
     },
     {
-      "command": "ninja out/*/log.txt | cat - && ls -l out/*/log.txt",
+      "command": "cmake --build --preset default --target outs | cat - && ls -l build/cmake/products/*/log.txt",
       "label": "runall",
       "problemMatcher": [],
       "type": "shell"
     },
     {
-      "command": "ninja build/cmake/docs && for p in $(tail +2 data/products.yaml | cut -c3-); do echo $p && build/cmake/docs $p; done",
-      "label": "alldocs",
-      "problemMatcher": [],
-      "type": "shell"
-    },
-    {
-      "command": "ninja build/cmake/bump && build/cmake/bump",
-      "label": "bump",
-      "problemMatcher": [],
-      "type": "shell"
-    },
-    {
-      "command": "ninja | cat -",
+      "command": "cmake --build --preset default --target test",
       "group": {
         "isDefault": true,
         "kind": "test"

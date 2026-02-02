@@ -1,4 +1,4 @@
-local api, sql = ...
+local units, sql = ...
 return function()
-  return sql(api.modules.units.player.class)
+  return sql(units.player.class)
 end

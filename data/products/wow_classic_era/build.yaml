@@ -1,8 +1,7 @@
----
-build: '61582'
-date: Jun 18 2025
+build: '65300'
+date: Jan  7 2026
 gametype: Vanilla
-hash: ae66faee0ac786fdd7d8b4cf90a8d5b9
+hash: e2dc540a98cccb45d764025ab28b703a
 test: false
-tocversion: 11507
-version: 1.15.7
+tocversion: 11508
+version: 1.15.8

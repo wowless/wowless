@@ -1,6 +1,6 @@
 describe('test', function()
   local luas = {}
-  for _, f in ipairs(require('pl.dir').getfiles('data/test')) do
+  for _, f in ipairs(require('wowless.util').getfiles('data/test')) do
     luas[f] = assert(require('pl.file').read(f))
   end
   it('references exactly the files in data/test', function()

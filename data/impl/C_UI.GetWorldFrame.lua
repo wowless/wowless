@@ -1,4 +1,4 @@
 local env = ...
 return function()
-  return env.WorldFrame
+  return env.genv.WorldFrame
 end

@@ -2,11 +2,20 @@
   "dependencies": [
     "curl",
     "expat",
-    "libpng",
     "libyaml",
     "openssl",
     "sqlite3",
     "utf8h",
-    "zlib"
+    "zlib",
+    {
+      "default-features": false,
+      "name": "sdl3"
+    },
+    {
+      "features": [
+        "png"
+      ],
+      "name": "sdl3-image"
+    }
   ]
 }

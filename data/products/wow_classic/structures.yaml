@@ -1,4 +1,3 @@
----
 AddPrivateAuraAnchorArgs:
   fields:
     auraIndex:
@@ -86,7 +85,7 @@ AppearanceSourceInfo:
     visualID:
       type: number
 AuraData:
-  fields: {}
+  fields:
 C_AccountStore.AccountStoreCategoryInfo:
   fields:
     icon:
@@ -245,6 +244,250 @@ C_AreaPoiInfo.AreaPOIInfo:
       nilable: true
       type: number
     tooltipWidgetSet:
+      nilable: true
+      type: number
+C_AuctionHouse.AuctionHouseBrowseQuery:
+  fields:
+    filters:
+      nilable: true
+      type:
+        arrayof:
+          enum: AuctionHouseFilter
+    itemClassFilters:
+      nilable: true
+      type:
+        arrayof:
+          structure: C_AuctionHouse.AuctionHouseItemClassFilter
+    maxLevel:
+      nilable: true
+      type: number
+    minLevel:
+      nilable: true
+      type: number
+    searchString:
+      type: string
+    sorts:
+      type:
+        arrayof:
+          structure: C_AuctionHouse.AuctionHouseSortType
+C_AuctionHouse.AuctionHouseFilterGroup:
+  fields:
+    category:
+      type:
+        enum: AuctionHouseFilterCategory
+    filters:
+      type:
+        arrayof:
+          enum: AuctionHouseFilter
+C_AuctionHouse.AuctionHouseItemClassFilter:
+  fields:
+    classID:
+      type: number
+    inventoryType:
+      nilable: true
+      type:
+        enum: InventoryType
+    subClassID:
+      nilable: true
+      type: number
+C_AuctionHouse.AuctionHouseSortType:
+  fields:
+    reverseSort:
+      type: boolean
+    sortOrder:
+      type:
+        enum: AuctionHouseSortOrder
+C_AuctionHouse.AuctionInfo:
+  fields:
+    bidAmount:
+      nilable: true
+      type: number
+    bidder:
+      nilable: true
+      type: string
+    buyoutAmount:
+      nilable: true
+      type: number
+    itemKey:
+      type:
+        structure: C_AuctionHouse.ItemKey
+    itemLink:
+      nilable: true
+      type: string
+    minBid:
+      nilable: true
+      type: number
+C_AuctionHouse.BidInfo:
+  fields:
+    auctionID:
+      type: number
+    bidAmount:
+      nilable: true
+      type: number
+    bidder:
+      nilable: true
+      type: string
+    buyoutAmount:
+      nilable: true
+      type: number
+    itemKey:
+      type:
+        structure: C_AuctionHouse.ItemKey
+    itemLink:
+      nilable: true
+      type: string
+    minBid:
+      nilable: true
+      type: number
+    timeLeft:
+      type:
+        enum: AuctionHouseTimeLeftBand
+C_AuctionHouse.BrowseResultInfo:
+  fields:
+    appearanceLink:
+      nilable: true
+      type: string
+    containsOwnerItem:
+      type: boolean
+    itemKey:
+      type:
+        structure: C_AuctionHouse.ItemKey
+    minPrice:
+      type: number
+    totalQuantity:
+      type: number
+C_AuctionHouse.CommoditySearchResultInfo:
+  fields:
+    auctionID:
+      type: number
+    containsAccountItem:
+      type: boolean
+    containsOwnerItem:
+      type: boolean
+    itemID:
+      type: number
+    numOwnerItems:
+      type: number
+    owners:
+      type:
+        arrayof: string
+    quantity:
+      type: number
+    timeLeftSeconds:
+      nilable: true
+      type: number
+    totalNumberOfOwners:
+      type: number
+    unitPrice:
+      type: number
+C_AuctionHouse.ItemKey:
+  fields:
+    battlePetSpeciesID:
+      default: 0
+      type: number
+    itemID:
+      type: number
+    itemLevel:
+      default: 0
+      type: number
+    itemSuffix:
+      default: 0
+      type: number
+C_AuctionHouse.ItemKeyInfo:
+  fields:
+    appearanceLink:
+      nilable: true
+      type: string
+    battlePetLink:
+      nilable: true
+      type: string
+    battlePetSpeciesID:
+      type: number
+    iconFileID:
+      type: number
+    isCommodity:
+      type: boolean
+    isEquipment:
+      type: boolean
+    isPet:
+      type: boolean
+    itemID:
+      type: number
+    itemName:
+      type: string
+    quality:
+      type:
+        enum: ItemQuality
+C_AuctionHouse.ItemSearchResultInfo:
+  fields:
+    auctionID:
+      type: number
+    bidAmount:
+      nilable: true
+      type: number
+    bidder:
+      nilable: true
+      type: string
+    buyoutAmount:
+      nilable: true
+      type: number
+    containsAccountItem:
+      type: boolean
+    containsOwnerItem:
+      type: boolean
+    containsSocketedItem:
+      type: boolean
+    itemKey:
+      type:
+        structure: C_AuctionHouse.ItemKey
+    itemLink:
+      nilable: true
+      type: string
+    minBid:
+      nilable: true
+      type: number
+    owners:
+      type:
+        arrayof: string
+    quantity:
+      type: number
+    timeLeft:
+      type:
+        enum: AuctionHouseTimeLeftBand
+    timeLeftSeconds:
+      nilable: true
+      type: number
+    totalNumberOfOwners:
+      type: number
+C_AuctionHouse.OwnedAuctionInfo:
+  fields:
+    auctionID:
+      type: number
+    bidAmount:
+      nilable: true
+      type: number
+    bidder:
+      nilable: true
+      type: string
+    buyoutAmount:
+      nilable: true
+      type: number
+    itemKey:
+      type:
+        structure: C_AuctionHouse.ItemKey
+    itemLink:
+      nilable: true
+      type: string
+    quantity:
+      type: number
+    status:
+      type:
+        enum: AuctionStatus
+    timeLeft:
+      nilable: true
+      type:
+        enum: AuctionHouseTimeLeftBand
+    timeLeftSeconds:
       nilable: true
       type: number
 C_AzeriteEmpoweredItem.AzeriteEmpoweredItemPowerInfo:
@@ -650,6 +893,252 @@ C_Calendar.CalendarRaidInfo:
     time:
       type:
         structure: CalendarTime
+C_CatalogShop.AvailableRaceInfo:
+  fields:
+    displayName:
+      type: string
+    raceID:
+      type: number
+C_CatalogShop.CatalogShopBundleChildInfo:
+  fields:
+    childProductID:
+      type: number
+    displayOrder:
+      type: number
+C_CatalogShop.CatalogShopCategoryInfo:
+  fields:
+    displayName:
+      type: string
+    iconTexture:
+      type: string
+    ID:
+      type: number
+    isDisabled:
+      type: boolean
+    linkTag:
+      type: string
+C_CatalogShop.CatalogShopProductDisplayInfo:
+  fields:
+    creatureDisplayInfoIDs:
+      type:
+        arrayof: number
+    customLoopingSoundEnd:
+      nilable: true
+      type: number
+    customLoopingSoundMiddle:
+      nilable: true
+      type: number
+    customLoopingSoundStart:
+      nilable: true
+      type: number
+    decorFileDataID:
+      nilable: true
+      type: number
+    defaultCardModelSceneID:
+      type: number
+    defaultPreviewModelSceneID:
+      type: number
+    defaultWideCardModelSceneID:
+      type: number
+    gameFlavorID:
+      nilable: true
+      type: number
+    hasUnknownLicense:
+      type: boolean
+    iconFileDataID:
+      nilable: true
+      type: number
+    iconTextureKit:
+      nilable: true
+      type: string
+    itemDescription:
+      nilable: true
+      type: string
+    itemID:
+      type: number
+    itemModifiedAppearanceIDs:
+      type:
+        arrayof: number
+    mainHandItemModifiedAppearanceID:
+      nilable: true
+      type: number
+    offHandItemModifiedAppearanceID:
+      nilable: true
+      type: number
+    otherProductGameTitleBaseTag:
+      nilable: true
+      type: string
+    otherProductGameType:
+      nilable: true
+      type: string
+    otherProductImageAtlasName:
+      nilable: true
+      type: string
+    otherProductPMTURL:
+      nilable: true
+      type: string
+    overrideCardModelSceneID:
+      nilable: true
+      type: number
+    overridePreviewModelSceneID:
+      nilable: true
+      type: number
+    overrideWideCardModelSceneID:
+      nilable: true
+      type: number
+    productType:
+      nilable: true
+      type: string
+    quantity:
+      nilable: true
+      type: number
+    specialActorID_1:
+      nilable: true
+      type: string
+    specialActorID_2:
+      nilable: true
+      type: string
+    specialActorID_3:
+      nilable: true
+      type: string
+    specialActorID_4:
+      nilable: true
+      type: string
+    specialActorID_5:
+      nilable: true
+      type: string
+    spellVisualIDs:
+      type:
+        arrayof: number
+C_CatalogShop.CatalogShopProductInfo:
+  fields:
+    backgroundTexture:
+      type: string
+    bundleChildrenSize:
+      type: number
+    catalogShopProductID:
+      type: number
+    description:
+      type: string
+    discountPercentage:
+      type: number
+    foregroundTexture:
+      nilable: true
+      type: string
+    hasPendingOrders:
+      type: boolean
+    iconTexture:
+      type: string
+    isBundle:
+      type: boolean
+    isFullyOwned:
+      type: boolean
+    isHidden:
+      type: boolean
+    isPurchasePending:
+      type: boolean
+    itemID:
+      type: number
+    itemModifiedAppearanceID:
+      type: number
+    licenseTermDuration:
+      type: number
+    licenseTermType:
+      type: number
+    mountID:
+      type: number
+    mountTypeName:
+      type: string
+    name:
+      type: string
+    numBundleDetailCards:
+      type: number
+    optionalWideCardBackgroundTexture:
+      nilable: true
+      type: string
+    originalPrice:
+      type: string
+    previewIconTexture:
+      nilable: true
+      type: string
+    price:
+      type: string
+    refundable:
+      type: boolean
+    smallCardBGTexture:
+      nilable: true
+      type: string
+    smallCardFGTexture:
+      nilable: true
+      type: string
+    speciesID:
+      type: number
+    subItems:
+      type:
+        arrayof:
+          structure: C_CatalogShop.CatalogShopSubItemInfo
+    subItemsLoaded:
+      type: boolean
+    transmogSetID:
+      type: number
+    type:
+      nilable: true
+      type: string
+    virtualCurrencies:
+      type:
+        arrayof:
+          structure: C_CatalogShop.CatalogShopVirtualCurrency
+    wideCardBGOverrideProductURL:
+      nilable: true
+      type: string
+    wideCardBGTexture:
+      nilable: true
+      type: string
+    wideCardFGTexture:
+      nilable: true
+      type: string
+C_CatalogShop.CatalogShopSectionInfo:
+  fields:
+    cardType:
+      nilable: true
+      type: string
+    displayName:
+      type: string
+    ID:
+      type: number
+    parentCatalogShopCategoryInfoID:
+      nilable: true
+      type: number
+    scrollGridSize:
+      nilable: true
+      type: number
+C_CatalogShop.CatalogShopSpellVisualInfo:
+  fields:
+    animID:
+      nilable: true
+      type: number
+    spellVisualKitID:
+      nilable: true
+      type: number
+C_CatalogShop.CatalogShopSubItemInfo:
+  fields:
+    invType:
+      type: string
+    itemAppearanceID:
+      type: number
+    itemID:
+      type: number
+    name:
+      type: string
+    quality:
+      type:
+        enum: ItemQuality
+C_CatalogShop.CatalogShopVirtualCurrency:
+  fields:
+    amount:
+      type: number
+    currencyCode:
+      type: string
 C_ChallengeMode.ChallengeCompletionInfo:
   fields:
     isAffixRecord:
@@ -1375,10 +1864,15 @@ C_CooldownViewer.CooldownViewerCooldown:
         enum: CooldownSetSpellFlags
     hasAura:
       type: boolean
+    isKnown:
+      type: boolean
     linkedSpellIDs:
       type:
         arrayof: number
     overrideSpellID:
+      nilable: true
+      type: number
+    overrideTooltipSpellID:
       nilable: true
       type: number
     selfAura:
@@ -2064,6 +2558,8 @@ C_GossipInfo.GossipQuestUIInfo:
       type: boolean
     questID:
       type: number
+    questInfoID:
+      type: number
     questLevel:
       type: number
     repeatable:
@@ -2556,6 +3052,9 @@ C_LFGList.LfgSearchResultPlayerInfo:
       type: string
     isLeader:
       type: boolean
+    isLeaver:
+      default: false
+      type: boolean
     level:
       nilable: true
       type: number
@@ -2856,6 +3355,8 @@ C_MythicPlus.MythicPlusDate:
       type: number
     month:
       type: number
+    weekday:
+      type: number
     year:
       type: number
 C_MythicPlus.MythicPlusKeystoneAffix:
@@ -2877,11 +3378,18 @@ C_MythicPlus.MythicPlusRunInfo:
   fields:
     completed:
       type: boolean
+    completionDate:
+      type:
+        structure: C_MythicPlus.MythicPlusDate
+    durationSec:
+      type: number
     level:
       type: number
     mapChallengeModeID:
       type: number
     runScore:
+      type: number
+    season:
       type: number
     thisWeek:
       type: boolean
@@ -3004,7 +3512,7 @@ C_PvP.RandomBGInfo:
     name:
       type: string
 C_PvP.RoleShortageReward:
-  fields: {}
+  fields:
 C_PvP.WorldPVPBattlegroundInfo:
   fields:
     bgID:
@@ -3066,6 +3574,87 @@ C_QuestSession.QuestSessionPlayerDetails:
       type: string
     name:
       type: string
+C_RecentAllies.RecentAllyCharacterData:
+  fields:
+    classID:
+      type: number
+    fullName:
+      type: string
+    guid:
+      type: string
+    level:
+      type: number
+    name:
+      type: string
+    raceID:
+      type: number
+    realmName:
+      type: string
+    sex:
+      type:
+        enum: UnitSex
+C_RecentAllies.RecentAllyData:
+  fields:
+    characterData:
+      type:
+        structure: C_RecentAllies.RecentAllyCharacterData
+    interactionData:
+      type:
+        structure: C_RecentAllies.RecentAllyInteractionData
+    stateData:
+      type:
+        structure: C_RecentAllies.RecentAllyStateData
+C_RecentAllies.RecentAllyInteraction:
+  fields:
+    contextData:
+      type:
+        structure: C_RecentAllies.RecentAllyInteractionContextData
+    description:
+      type: string
+    timestamp:
+      type: number
+    type:
+      type:
+        enum: RolodexType
+C_RecentAllies.RecentAllyInteractionContextData:
+  fields:
+    activityDifficultyID:
+      nilable: true
+      type: number
+    activityDifficultyLevel:
+      nilable: true
+      type: number
+    itemID:
+      nilable: true
+      type: number
+    locationName:
+      nilable: true
+      type: string
+C_RecentAllies.RecentAllyInteractionData:
+  fields:
+    interactions:
+      type:
+        arrayof:
+          structure: C_RecentAllies.RecentAllyInteraction
+    note:
+      nilable: true
+      type: string
+C_RecentAllies.RecentAllyStateData:
+  fields:
+    currentLocation:
+      nilable: true
+      type: string
+    hasFriendRequestPending:
+      type: boolean
+    isAFK:
+      type: boolean
+    isDND:
+      type: boolean
+    isOnline:
+      type: boolean
+    pinExpirationDate:
+      nilable: true
+      type: number
 C_RecruitAFriend.RafAppearanceInfo:
   fields:
     appearanceID:
@@ -3677,6 +4266,15 @@ C_Texture.AtlasInfo:
       type: number
     width:
       type: number
+C_Traits.IncreasedTraitData:
+  fields:
+    itemNameIncreasing:
+      type: string
+    itemQualityIncreasing:
+      type:
+        enum: ItemQuality
+    numPointsIncreased:
+      type: number
 C_Traits.TraitCondInfo:
   fields:
     achievementID:
@@ -3820,6 +4418,8 @@ C_Traits.TraitNodeInfo:
     entryIDsWithCommittedRanks:
       type:
         arrayof: number
+    entryIDToRanksIncreased:
+      type: table
     flags:
       type: number
     groupIDs:
@@ -3846,6 +4446,8 @@ C_Traits.TraitNodeInfo:
     posX:
       type: number
     posY:
+      type: number
+    ranksIncreased:
       type: number
     ranksPurchased:
       type: number
@@ -3941,6 +4543,9 @@ C_Traits.TraitTreeInfo:
     hideSingleRankNumbers:
       type: boolean
     ID:
+      type: number
+    rootNodeID:
+      nilable: true
       type: number
 C_Traits.TreeCurrencyInfo:
   fields:
@@ -4621,8 +5226,14 @@ ExpansionDisplayInfo:
       type:
         arrayof:
           structure: ExpansionDisplayInfoFeature
+    highResBackgroundID:
+      type: number
     logo:
       type: number
+    lowResBackgroundID:
+      type: number
+    textureKit:
+      type: string
 ExpansionDisplayInfoFeature:
   fields:
     icon:
@@ -4631,6 +5242,8 @@ ExpansionDisplayInfoFeature:
       type: string
 FontScriptInfo:
   fields:
+    canBeUserScaled:
+      type: boolean
     color:
       type:
         structure: colorRGBA
@@ -4693,7 +5306,7 @@ ItemLocation:
       type: number
   mixin: ItemLocationMixin
 ItemTransmogInfo:
-  fields: {}
+  fields:
   mixin: ItemTransmogInfoMixin
 LFGRoles:
   fields:
@@ -4743,6 +5356,20 @@ MythicPlusAffixScoreInfo:
       type: boolean
     score:
       type: number
+MythicPlusLeaderboardPlayerResult:
+  fields:
+    playerGUID:
+      type: string
+    specID:
+      type: number
+MythicPlusLeaderboardResult:
+  fields:
+    completionTime:
+      type: number
+    players:
+      type:
+        arrayof:
+          structure: MythicPlusLeaderboardPlayerResult
 MythicPlusRatingLinkInfo:
   fields:
     completedInTime:
@@ -4771,7 +5398,7 @@ PlayerInfoCharacterData:
       type:
         enum: UnitSex
 PlayerLocation:
-  fields: {}
+  fields:
   mixin: PlayerLocationMixin
 PrivateAuraIconInfo:
   fields:
@@ -4844,7 +5471,7 @@ QueueSpecificInfo:
       nilable: true
       type: number
 ReportInfo:
-  fields: {}
+  fields:
   mixin: ReportInfoMixin
 SpellChargeInfo:
   fields:
@@ -4900,7 +5527,7 @@ TransmogLocation:
       type: number
   mixin: TransmogLocationMixin
 TransmogPendingInfo:
-  fields: {}
+  fields:
   mixin: TransmogPendingInfoMixin
 uiBoundsRect:
   fields:

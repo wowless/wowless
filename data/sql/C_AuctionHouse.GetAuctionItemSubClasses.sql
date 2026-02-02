@@ -1,6 +1,5 @@
-SELECT
-  SubClassID
+SELECT SubClassID
 FROM
   ItemSubClass
 WHERE
-  ClassID == ?1
+  ClassID = ?1

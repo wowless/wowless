@@ -1,2 +1,3 @@
 AlignArrayOfStructures: Left
 BasedOnStyle: Google
+PointerAlignment: Right
