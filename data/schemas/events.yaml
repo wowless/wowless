@@ -5,7 +5,7 @@ type:
     value:
       record:
         callback:
-          type: boolean
+          type: flag
         noscript:
           type: flag
         payload:
@@ -19,7 +19,7 @@ type:
                   required: true
                   type: string
                 nilable:
-                  type: boolean
+                  type: flag
                 type:
                   required: true
                   type:

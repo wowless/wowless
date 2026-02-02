@@ -25,7 +25,7 @@ type:
                         late: tag
                         middle: tag
                   required:
-                    type: boolean
+                    type: flag
                   type:
                     required: true
                     type:
@@ -81,4 +81,4 @@ type:
               late: tag
               middle: tag
         virtual:
-          type: boolean
+          type: flag

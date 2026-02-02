@@ -112,7 +112,7 @@ type:
                       required: true
                       type: boolean
                     NilableContents:
-                      type: boolean
+                      type: flag
                     StrideIndex:
                       type: number
                     Type:
@@ -210,7 +210,7 @@ type:
                       required: true
                       type: boolean
                     NilableContents:
-                      type: boolean
+                      type: flag
                     StrideIndex:
                       type: number
                     Type:

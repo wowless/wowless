@@ -14,7 +14,7 @@ type:
             name:
               type: string
             nilable:
-              type: boolean
+              type: flag
             type:
               required: true
               type:
@@ -22,7 +22,7 @@ type:
     instride:
       type: number
     mayreturnnothing:
-      type: boolean
+      type: flag
     outputs:
       type:
         sequenceof:
@@ -32,11 +32,11 @@ type:
             name:
               type: string
             nilable:
-              type: boolean
+              type: flag
             stub:
               type: any
             stubnotnil:
-              type: boolean
+              type: flag
             type:
               required: true
               type:
@@ -50,9 +50,9 @@ type:
           mac: tag
           windows: tag
     secureonly:
-      type: boolean
+      type: flag
     stubnothing:
-      type: boolean
+      type: flag
     stuboutstrides:
       type: number
     usage:
