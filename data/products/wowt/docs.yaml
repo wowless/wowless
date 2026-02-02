@@ -7,6 +7,25 @@ lies:
       outputs:
       - _add:
           nilable: true
+    C_CombatLogSecure.GetCurrentEventInfo:
+      outputs:
+        _change:
+          from:
+          to:
+          - name: timestamp
+            type: number
+          - name: subevent
+            type: string
+          - name: hideCaster
+            type: boolean
+          - name: guid
+            type: string
+          - name: name
+            type: string
+          - name: flags
+            type: number
+          - name: raidFlags
+            type: number
     C_Item.GetItemClassInfo:
       outputs:
       - _add:
@@ -33,6 +52,11 @@ lies:
       inputs:
       - _add:
           nilable: true
+    RegisterEventCallback:
+      outputs:
+        _add:
+        - name: registered
+          type: boolean
     ResurrectGetOfferer:
       outputs:
       - _add:
@@ -99,11 +123,8 @@ lies:
     WarbandSceneAnimationStandStateFlags:
     WarbandScenePlacementType:
   extra_events:
-    COMBAT_LOG_APPLY_FILTER_SETTINGS:
     COMBAT_LOG_EVENT_INTERNAL_UNFILTERED:
-    COMBAT_LOG_REFILTER_ENTRIES:
   extra_script_objects:
-    FrameAPITooltip:
     HousingCatalogSearcherAPI:
     HousingFixturePointFrameAPI:
     HousingLayoutPinFrameAPI:
@@ -359,6 +380,8 @@ script_objects:
     uiobject: TabardModel
   FrameAPITabardModelBase:
     uiobject: TabardModel
+  FrameAPITooltip:
+    uiobject: GameTooltip
   FrameAPIUnitPositionFrame:
     uiobject: UnitPositionFrame
   LuaColorCurveObjectAPI:
@@ -512,6 +535,9 @@ typedefs:
     type: number
   FontAlphabet:
     type: string
+  FrameEventCallbackType:
+    type:
+      luaobject: LuaFunctionContainer
   FrameScriptObject:
     type:
       uiobject: UIObject
@@ -664,6 +690,9 @@ typedefs:
   TimerCallback:
     type:
       luaobject: LuaFunctionContainer
+  Tooltip:
+    type:
+      uiobject: GameTooltip
   TooltipComparisonItem:
     type: table
   uiAddon:

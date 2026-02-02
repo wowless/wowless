@@ -22,7 +22,7 @@ type:
         value:
           record:
             required:
-              type: boolean
+              type: flag
             type:
               required: true
               type:
@@ -30,7 +30,7 @@ type:
     ref:
       record:
         negative:
-          type: boolean
+          type: flag
         schema:
           required: true
           type:

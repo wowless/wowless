@@ -1,9 +1,31 @@
+ignore_script_object_methods:
+  SimpleScriptRegionAPI:
+    IsAnchoringSecret:
 lies:
   apis:
     C_AddOns.GetAddOnMetadata:
       outputs:
       - _add:
           nilable: true
+    C_CombatLogSecure.GetCurrentEventInfo:
+      outputs:
+        _change:
+          from:
+          to:
+          - name: timestamp
+            type: number
+          - name: subevent
+            type: string
+          - name: hideCaster
+            type: boolean
+          - name: guid
+            type: string
+          - name: name
+            type: string
+          - name: flags
+            type: number
+          - name: raidFlags
+            type: number
     C_Item.GetItemClassInfo:
       outputs:
       - _add:
@@ -26,10 +48,29 @@ lies:
     GetSpecializationInfoForClassID:
       _add:
         mayreturnnothing: true
+    issecretvalue:
+      inputs:
+      - _add:
+          nilable: true
+    RegisterEventCallback:
+      outputs:
+        _add:
+        - name: registered
+          type: boolean
     ResurrectGetOfferer:
       outputs:
       - _add:
           nilable: true
+    scrub:
+      _remove:
+        inputs:
+        - name: values
+          type: unknown
+        instride: 1
+        outputs:
+        - name: scrubbed
+          type: unknown
+        outstride: 1
     UnitFactionGroup:
       _add:
         mayreturnnothing: true
@@ -38,22 +79,7 @@ lies:
           _change:
             from: string
             to: unit
-    UnitIsUnit:
-      inputs:
-      - type:
-          _change:
-            from: string
-            to: unit
-      - type:
-          _change:
-            from: string
-            to: unit
     UnitName:
-      inputs:
-      - type:
-          _change:
-            from: string
-            to: unit
       outputs:
       - _add:
           nilable: true
@@ -68,6 +94,7 @@ lies:
   extra_apis:
     C_BarberShopInternal.SetQAMode:
     C_CinematicList.GetUICinematicList:
+    C_CombatLogInternal.GetCurrentEventInfo:
     C_ConfigurationWarnings.GetConfigurationWarnings:
     C_ConfigurationWarnings.GetConfigurationWarningSeen:
     C_ConfigurationWarnings.GetConfigurationWarningString:
@@ -75,10 +102,6 @@ lies:
     C_LiveEvent.OnLiveEventBannerClicked:
     C_LiveEvent.OnLiveEventPopupClicked:
     C_WorldSafeLocsUIInternal.GetWorldSafeLocs:
-    ShowCloak:
-    ShowHelm:
-    ShowingCloak:
-    ShowingHelm:
     ToggleAnimKitDisplay:
     ToggleCollision:
     ToggleCollisionDisplay:
@@ -88,6 +111,8 @@ lies:
     TogglePortals:
     ToggleTris:
   extra_enums:
+    CharCreateAnimTurnType:
+    CharSectionCondition:
     ConfigurationWarning:
     WarbandEventState:
     WarbandGroupFlags:
@@ -97,6 +122,8 @@ lies:
     WarbandSceneAnimationStandState:
     WarbandSceneAnimationStandStateFlags:
     WarbandScenePlacementType:
+  extra_events:
+    COMBAT_LOG_EVENT_INTERNAL_UNFILTERED:
   extra_script_objects:
     HousingCatalogSearcherAPI:
     HousingFixturePointFrameAPI:
@@ -267,39 +294,6 @@ lies:
         outputs:
         - _add:
             nilable: true
-      GetTexCoord:
-        _remove:
-          outstride: 2
-        outputs:
-          1:
-            name:
-              _change:
-                from: x
-                to: ulx
-          2:
-            name:
-              _change:
-                from: y
-                to: uly
-          _add:
-            3:
-              name: llx
-              type: number
-            4:
-              name: lly
-              type: number
-            5:
-              name: urx
-              type: number
-            6:
-              name: ury
-              type: number
-            7:
-              name: lrx
-              type: number
-            8:
-              name: lry
-              type: number
       GetTexture:
         outputs:
         - type:
@@ -354,6 +348,8 @@ lies:
         - _add:
             nilable: true
 script_objects:
+  AbbreviateConfigAPI:
+    luaobject: AbbreviateConfig
   FrameAPIArchaeologyDigSiteFrame:
     uiobject: ArchaeologyDigSiteFrame
   FrameAPIBlob:
@@ -384,8 +380,18 @@ script_objects:
     uiobject: TabardModel
   FrameAPITabardModelBase:
     uiobject: TabardModel
+  FrameAPITooltip:
+    uiobject: GameTooltip
   FrameAPIUnitPositionFrame:
     uiobject: UnitPositionFrame
+  LuaColorCurveObjectAPI:
+    luaobject: LuaColorCurveObject
+  LuaCurveObjectAPI:
+    luaobject: LuaCurveObject
+  LuaCurveObjectBaseAPI:
+    luaobject: LuaCurveObjectBase
+  LuaDurationObjectAPI:
+    luaobject: LuaDurationObject
   MinimapFrameAPI:
     uiobject: Minimap
   SimpleAnimAlphaAPI:
@@ -466,7 +472,12 @@ script_objects:
     uiobject: Texture
   SimpleTextureBaseAPI:
     uiobject: TextureBase
+  UnitHealPredictionCalculatorAPI:
+    luaobject: UnitHealPredictionCalculator
 typedefs:
+  AbbreviateConfig:
+    type:
+      luaobject: AbbreviateConfig
   AnimationDataEnum:
     type: number
   ArtifactTiers:
@@ -499,21 +510,39 @@ typedefs:
     type: string
   ConnectionIptype:
     type: string
+  CooldownFrame:
+    type:
+      uiobject: Cooldown
   CScriptObject:
     outnil: true
     type:
       uiobject: UIObject
   cstring:
     type: string
+  DurationSeconds:
+    type: number
   EmptiableItemLocation:
     type:
       structure: ItemLocation
+  EncounterTimelineEventID:
+    type: number
+  EventCallbackType:
+    type:
+      luaobject: LuaFunctionContainer
   FileAsset:
     type: FileAsset
   fileID:
     type: number
   FontAlphabet:
     type: string
+  FrameEventCallbackType:
+    type:
+      luaobject: LuaFunctionContainer
+  FrameScriptObject:
+    type:
+      uiobject: UIObject
+  FrameTime:
+    type: number
   GarrisonFollower:
     type: string
   HousingCatalogSearcher:
@@ -538,6 +567,19 @@ typedefs:
     type: string
   kstringLfgListSearch:
     type: string
+  LuaColorCurveObject:
+    type:
+      luaobject: LuaColorCurveObject
+  LuaCurveEvaluatedResult:
+    type: table
+  LuaCurveObject:
+    type:
+      luaobject: LuaCurveObject
+  LuaCurveObjectBase:
+    type: table
+  LuaDurationObject:
+    type:
+      luaobject: LuaDurationObject
   luaFunction:
     type: function
   luaIndex:
@@ -582,6 +624,9 @@ typedefs:
   SimpleAnimGroup:
     type:
       uiobject: AnimationGroup
+  SimpleCheckbox:
+    type:
+      uiobject: CheckButton
   SimpleControlPoint:
     type:
       uiobject: ControlPoint
@@ -619,6 +664,8 @@ typedefs:
     type: number
   size:
     type: number
+  SoundHandle:
+    type: string
   SpellIdentifier:
     type: string
   string:
@@ -643,6 +690,9 @@ typedefs:
   TimerCallback:
     type:
       luaobject: LuaFunctionContainer
+  Tooltip:
+    type:
+      uiobject: GameTooltip
   TooltipComparisonItem:
     type: table
   uiAddon:
@@ -651,9 +701,16 @@ typedefs:
     type: number
   UiMapPoint:
     type: table
+  UISoundSubType:
+    type: string
   uiUnit:
     type: number
+  UnitHealPredictionCalculator:
+    type:
+      luaobject: UnitHealPredictionCalculator
   UnitToken:
+    type: unit
+  UnitTokenVariant:
     type: unit
   WeeklyRewardItemDBID:
     type: string
@@ -696,4 +753,5 @@ uiobject_method_reassignments:
     SetScript: ScriptObject
     SetShown: RegionBase
     SetVertexColor: LayeredRegion
+    SetVertexColorFromBoolean: LayeredRegion
     Show: RegionBase

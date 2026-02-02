@@ -131,6 +131,7 @@ for _, t in pairs(docs) do
     for _, event in ipairs(t.Events or {}) do
       local name = (t.Namespace and (t.Namespace .. '.') or '') .. event.Name
       assert(not events[name])
+      event.Environment = t.Environment
       events[name] = not take(extra_events, event.LiteralName) and event or nil
     end
   elseif t.Type == 'ScriptObject' and not take(extra_script_objects, t.Name) then
@@ -339,6 +340,7 @@ local function rewriteApis(apis)
 end
 
 local function rewriteEvents(out)
+  local lies = deref(config, 'lies', 'events') or {}
   for name, ev in pairs(events) do
     local ns = split(name)
     local payload = {}
@@ -350,12 +352,16 @@ local function rewriteEvents(out)
         type = t2nty(arg, ns),
       })
     end
-    out[ev.LiteralName] = {
+    local newev = {
       callback = ev.CallbackEvent,
+      noscript = ev.CallbackEvent and not ev.SynchronousEvent and not ev.UniqueEvent or nil,
       payload = payload,
+      restricted = ev.HasRestrictions or ev.RequireNPERestricted,
       stride = stride(ev.Payload),
     }
+    out[ev.LiteralName] = takelieor(newev, lies, ev.LiteralName)
   end
+  assertTaken('lies', lies)
 end
 
 local function rewriteGlobals(out)

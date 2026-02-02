@@ -42,6 +42,7 @@ events:
     log:
     loglevel:
     scripts:
+    security:
 fontinstance:
   deps:
 funcheck:

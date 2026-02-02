@@ -472,8 +472,6 @@ math.fmod:
   stdlib: math.fmod
 math.frexp:
   stdlib: math.frexp
-math.huge:
-  stdlib: math.huge
 math.ldexp:
   stdlib: math.ldexp
 math.log:
@@ -486,8 +484,6 @@ math.min:
   stdlib: math.min
 math.modf:
   stdlib: math.modf
-math.pi:
-  stdlib: math.pi
 math.pow:
   stdlib: math.pow
 math.rad:
@@ -523,6 +519,10 @@ rawget:
   stdlib: rawget
 rawset:
   stdlib: rawset
+RegisterEventCallback:
+  moduledelegate:
+    function: RegisterEventCallbackGlobal
+    name: events
 RequestTimePlayed:
   impl:
     modules:

@@ -763,6 +763,17 @@ BULK_PURCHASE_RESULT_RECEIVED:
     type:
       arrayof:
         structure: C_CatalogShop.BulkPurchaseIndividualProductResult
+  - name: bestTopUpProductID
+    nilable: true
+    type: number
+  - name: totalCost
+    nilable: true
+    type: number
+BULK_REFUND_RESULT_RECEIVED:
+  payload:
+  - name: result
+    type:
+      enum: BulkRefundResult
 CALENDAR_ACTION_PENDING:
   payload:
   - name: pending
@@ -2066,42 +2077,6 @@ CHAT_MSG_DND:
   - name: suppressRaidIcons
     type: boolean
 CHAT_MSG_EMOTE:
-  payload:
-  - name: text
-    type: string
-  - name: playerName
-    type: string
-  - name: languageName
-    type: string
-  - name: channelName
-    type: string
-  - name: playerName2
-    type: string
-  - name: specialFlags
-    type: string
-  - name: zoneChannelID
-    type: number
-  - name: channelIndex
-    type: number
-  - name: channelBaseName
-    type: string
-  - name: languageID
-    type: number
-  - name: lineID
-    type: number
-  - name: guid
-    type: string
-  - name: bnSenderID
-    type: number
-  - name: isMobile
-    type: boolean
-  - name: isSubtitle
-    type: boolean
-  - name: hideSenderInLetterbox
-    type: boolean
-  - name: suppressRaidIcons
-    type: boolean
-CHAT_MSG_ENCOUNTER_EVENT:
   payload:
   - name: text
     type: string
@@ -3804,14 +3779,23 @@ COLOR_OVERRIDE_UPDATED:
       enum: ColorOverride
 COLOR_OVERRIDES_RESET:
   payload:
+COMBAT_LOG_APPLY_FILTER_SETTINGS:
+  callback: true
+  noscript: true
+  payload:
+  - name: filterSettings
+    type: table
+  restricted: true
 COMBAT_LOG_ENTRIES_CLEARED:
   payload:
 COMBAT_LOG_EVENT:
   callback: true
   payload:
+  restricted: true
 COMBAT_LOG_EVENT_UNFILTERED:
   callback: true
   payload:
+  restricted: true
 COMBAT_LOG_MESSAGE:
   payload:
   - name: message
@@ -3829,6 +3813,11 @@ COMBAT_LOG_MESSAGE_LIMIT_CHANGED:
   payload:
   - name: messageLimit
     type: number
+COMBAT_LOG_REFILTER_ENTRIES:
+  callback: true
+  noscript: true
+  payload:
+  restricted: true
 COMBAT_RATING_UPDATE:
   payload:
 COMBAT_TEXT_UPDATE:
@@ -4433,6 +4422,16 @@ ENCOUNTER_TIMELINE_LAYOUT_UPDATED:
   payload:
 ENCOUNTER_TIMELINE_STATE_UPDATED:
   payload:
+ENCOUNTER_TIMELINE_VIEW_ACTIVATED:
+  payload:
+  - name: viewType
+    type:
+      enum: EncounterTimelineViewType
+ENCOUNTER_TIMELINE_VIEW_DEACTIVATED:
+  payload:
+  - name: viewType
+    type:
+      enum: EncounterTimelineViewType
 ENCOUNTER_WARNING:
   payload:
   - name: encounterWarningInfo
@@ -5176,6 +5175,9 @@ HOUSING_CLEANUP_MODE_HOVERED_TARGET_CHANGED:
   payload:
   - name: hasHoveredTarget
     type: boolean
+  - name: targetType
+    type:
+      enum: HousingCleanupModeTargetType
 HOUSING_CLEANUP_MODE_TARGET_SELECTED:
   payload:
 HOUSING_CORE_FIXTURE_CHANGED:
@@ -6083,6 +6085,8 @@ MERCHANT_UPDATE:
 MIN_EXPANSION_LEVEL_UPDATED:
   payload:
 MINIMAP_PING:
+  callback: true
+  noscript: true
   payload:
   - name: unitTarget
     type: unit
@@ -6090,6 +6094,7 @@ MINIMAP_PING:
     type: number
   - name: x
     type: number
+  restricted: true
 MINIMAP_UPDATE_TRACKING:
   payload:
 MINIMAP_UPDATE_ZOOM:
@@ -6693,6 +6698,21 @@ PETITION_CLOSED:
   payload:
 PETITION_SHOW:
   payload:
+PHOTO_SHARING_AUTHORIZATION_NEEDED:
+  payload:
+PHOTO_SHARING_AUTHORIZATION_UPDATED:
+  payload:
+PHOTO_SHARING_PHOTO_UPLOAD_STATUS:
+  payload:
+  - name: uploadStatus
+    type:
+      enum: PhotoSharingUploadStatus
+PHOTO_SHARING_SCREENSHOT_READY:
+  payload:
+PHOTO_SHARING_THIRD_PARTY_AUTHORIZATION_NEEDED:
+  payload:
+  - name: authUrl
+    type: string
 PING_SYSTEM_ERROR:
   payload:
   - name: error
@@ -6859,6 +6879,10 @@ PLAYER_MAP_CHANGED:
     type: number
   - name: newMapID
     type: number
+PLAYER_MAX_LEVEL_UPDATE:
+  payload:
+  - name: unitTarget
+    type: unit
 PLAYER_MONEY:
   payload:
 PLAYER_MOUNT_DISPLAY_CHANGED:
@@ -7656,6 +7680,14 @@ SHOW_SUBTITLE:
   - name: sender
     nilable: true
     type: string
+SIMPLE_BROWSER_POPUP:
+  payload:
+  - name: url
+    type: string
+SIMPLE_BROWSER_SOCIAL_CALLBACK_INVOKED:
+  payload:
+  - name: url
+    type: string
 SIMPLE_BROWSER_WEB_ERROR:
   payload:
   - name: errorCode
@@ -8113,6 +8145,19 @@ TOOLTIP_DATA_UPDATE:
   - name: dataInstanceID
     nilable: true
     type: number
+TOOLTIP_SHOW_ITEM_COMPARISON:
+  callback: true
+  noscript: true
+  payload:
+  - name: comparisonItem
+    type: table
+  - name: tooltip
+    type:
+      uiobject: GameTooltip
+  - name: anchorFrame
+    nilable: true
+    type:
+      uiobject: Frame
 TOYS_UPDATED:
   payload:
   - name: itemID
@@ -8418,6 +8463,7 @@ TRY_PURCHASE_TO_NODE_PARTIAL_SUCCESS:
     type: number
 TUTORIAL_COMBAT_EVENT:
   payload:
+  restricted: true
 TUTORIAL_HIGHLIGHT_SPELL:
   payload:
   - name: spellID

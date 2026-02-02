@@ -4,16 +4,6 @@ type:
     addon:
       type:
         record:
-          aliased_in_framexml:
-            type:
-              mapof:
-                key:
-                  ref:
-                    negative: true
-                    schema: api
-                value:
-                  ref:
-                    schema: api
           capsule:
             type:
               record:
@@ -64,12 +54,12 @@ type:
             type:
               record:
                 GetAddOnInfo_noUpdateAvailable:
-                  type: boolean
+                  type: flag
           luaobjects:
             type:
               record:
                 tostring_metamethod:
-                  type: boolean
+                  type: flag
     runner:
       type:
         record:
@@ -92,9 +82,9 @@ type:
       type:
         record:
           send_isfromitem:
-            type: boolean
+            type: flag
           send_warntype:
-            type: boolean
+            type: flag
           warners:
             type:
               setof: string

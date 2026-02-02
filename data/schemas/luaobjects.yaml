@@ -17,4 +17,4 @@ type:
           type:
             setof: string
         virtual:
-          type: boolean
+          type: flag

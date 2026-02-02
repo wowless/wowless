@@ -122,6 +122,15 @@ local function run(cfg)
     if datalua.events.COOLDOWN_VIEWER_DATA_LOADED then
       SendEvent('COOLDOWN_VIEWER_DATA_LOADED')
     end
+    if datalua.events.COMBAT_LOG_APPLY_FILTER_SETTINGS then
+      SendEvent('COMBAT_LOG_APPLY_FILTER_SETTINGS', {
+        colors = {
+          unitColoring = {},
+        },
+        filters = {},
+        settings = {},
+      })
+    end
     if cfg.frame0 and cfg.output then
       local render = require('wowless.render')
       local screenWidth, screenHeight = system.GetScreenWidth(), system.GetScreenHeight()

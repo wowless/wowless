@@ -1,18 +1,62 @@
 local hlist = require('wowless.hlist')
-return function(datalua, funcheck, log, loglevel, scripts)
+return function(datalua, funcheck, log, loglevel, scripts, security)
   local allregs = hlist()
   local regs = {}
-  for k in pairs(datalua.events) do
-    regs[k] = hlist()
+  local cbregs = {}
+  local secures = {}
+  for k, v in pairs(datalua.events) do
+    if not v.noscript then
+      regs[k] = hlist()
+    end
+    if v.callback then
+      cbregs[k] = hlist()
+    end
+    secures[k] = v.restricted
   end
 
   local function RegisterEvent(frame, event)
-    event = event:upper()
-    local reg = assert(regs[event], 'cannot register ' .. event)
-    if reg:has(frame) then
+    local uevent = event:upper()
+    local reg = regs[uevent]
+    if not reg then
+      local fmt = '%s:RegisterEvent(): %s:RegisterEvent(): Attempt to register unknown event %q'
+      local ty = frame:GetObjectType()
+      error(fmt:format(ty, ty, event), 0)
+    end
+    if reg:has(frame) or secures[uevent] and _G.THETAINT then
       return false
     end
     reg:insert(frame)
+    return true
+  end
+
+  local function RegisterEventCallback(frame, event, cb)
+    local uevent = event:upper()
+    local cbreg = cbregs[uevent]
+    if not cbreg then
+      local fmt = '%s:RegisterEventCallback(): Attempt to register unknown event %q'
+      local ty = frame:GetObjectType()
+      error(fmt:format(ty, event), 0)
+    end
+    if secures[uevent] and _G.THETAINT then -- TODO check repeat registration
+      return false
+    end
+    cb.firstarg = frame
+    cbreg:insert(cb)
+    return true
+  end
+
+  local function RegisterEventCallbackGlobal(event, cb)
+    local uevent = event:upper()
+    local cbreg = cbregs[uevent]
+    if not cbreg then
+      local fmt = 'RegisterEventCallback Attempt to register unknown event %q'
+      local taint = _G.THETAINT and '\nLua Taint: ' .. _G.THETAINT or ''
+      error(fmt:format(event) .. taint, 0)
+    end
+    if secures[uevent] and _G.THETAINT then -- TODO check repeat registration
+      return false
+    end
+    cbreg:insert(cb)
     return true
   end
 
@@ -46,8 +90,7 @@ return function(datalua, funcheck, log, loglevel, scripts)
   end
 
   local function IsCallbackEvent(event)
-    local e = datalua.events[event:upper()]
-    return e and e.callback or false
+    return not not cbregs[event:upper()]
   end
 
   local function GetFramesRegisteredForEvent(event)
@@ -85,10 +128,19 @@ return function(datalua, funcheck, log, loglevel, scripts)
     for _, reg in ipairs(GetFramesRegisteredForEvent(event)) do
       scripts.RunScript(reg, 'OnEvent', event, ...)
     end
+    local cbreg = cbregs[event]
+    if cbreg then
+      for cb in cbreg:entries() do
+        -- TODO unify with funtainer Invoke
+        if not cb.cancelled then
+          security.CallSandbox(cb.callback, cb.firstarg, ...)
+        end
+      end
+    end
   end
 
   local function SendEvent(event, ...)
-    if not IsEventValid(event) then
+    if not regs[event] and not cbregs[event] then
       error('internal error: cannot send ' .. event)
     end
     if loglevel >= 1 then
@@ -110,6 +162,8 @@ return function(datalua, funcheck, log, loglevel, scripts)
     IsEventValid = IsEventValid,
     RegisterAllEvents = RegisterAllEvents,
     RegisterEvent = RegisterEvent,
+    RegisterEventCallback = RegisterEventCallback,
+    RegisterEventCallbackGlobal = RegisterEventCallbackGlobal,
     RegisterUnitEvent = RegisterEvent, -- TODO implement properly
     SendEvent = SendEvent,
     UnregisterAllEvents = UnregisterAllEvents,

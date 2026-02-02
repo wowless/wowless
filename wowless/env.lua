@@ -25,6 +25,12 @@ local function init(modules, lite)
   Mixin(modules.env.secureenv, deepcopy(secureimpls))
   Mixin(modules.env.secureenv, deepcopy(modules.datalua.globals))
 
+  modules.env.genv._G = modules.env.genv
+  modules.env.genv.math.huge = math.huge
+  modules.env.genv.math.pi = math.pi
+  modules.env.secureenv.math.huge = math.huge
+  modules.env.secureenv.math.pi = math.pi
+
   local wowlessDebug = Mixin({}, debug)
   wowlessDebug.debug = function()
     -- luacheck: ignore 211

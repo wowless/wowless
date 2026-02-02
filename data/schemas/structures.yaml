@@ -14,7 +14,7 @@ type:
                   default:
                     type: any
                   nilable:
-                    type: boolean
+                    type: flag
                   stub:
                     type: any
                   type:

@@ -4128,11 +4128,14 @@ Frame:
       - name: registered
         type: boolean
     RegisterEventCallback:
+      impl:
+        uiobjectimpl: Frame/RegisterEventCallback
       inputs:
       - name: eventName
         type: string
       - name: cb
-        type: function
+        type:
+          luaobject: LuaFunctionContainer
       outputs:
       - name: registered
         type: boolean
@@ -4160,7 +4163,8 @@ Frame:
       - name: eventName
         type: string
       - name: cb
-        type: function
+        type:
+          luaobject: LuaFunctionContainer
       - name: units
         type: string
       instride: 1
@@ -4486,6 +4490,9 @@ GameTooltip:
     AddTexture:
     AppendText:
     ClearLines:
+    ClearPadding:
+      inputs:
+      outputs:
     CopyTooltip:
     FadeOut:
     GetAnchorType:
@@ -4497,10 +4504,22 @@ GameTooltip:
       - name: anchorType
         type: string
     GetCustomLineSpacing:
-    GetMinimumWidth:
-      outputs:
-      - name: minimumWidth
+    GetLeftLine:
+      inputs:
+      - name: line
         type: number
+      outputs:
+      - name: leftFontString
+        nilable: true
+        type:
+          uiobject: FontString
+    GetMinimumWidth:
+      inputs:
+      outputs:
+      - name: width
+        type: number
+      - name: forced
+        type: boolean
     GetOwner:
       impl:
         getter:
@@ -4512,6 +4531,25 @@ GameTooltip:
         type:
           uiobject: Frame
     GetPadding:
+      inputs:
+      outputs:
+      - name: right
+        type: number
+      - name: bottom
+        type: number
+      - name: left
+        type: number
+      - name: top
+        type: number
+    GetRightLine:
+      inputs:
+      - name: line
+        type: number
+      outputs:
+      - name: rightFontString
+        nilable: true
+        type:
+          uiobject: FontString
     IsOwned:
       impl:
         uiobjectimpl: GameTooltip/IsOwned
@@ -4536,6 +4574,13 @@ GameTooltip:
     SetCustomWordWrapMinWidth:
     SetFrameStack:
     SetMinimumWidth:
+      inputs:
+      - name: width
+        type: number
+      - default: false
+        name: force
+        type: boolean
+      outputs:
     SetObjectTooltipPosition:
     SetOwner:
       impl:
@@ -4549,8 +4594,36 @@ GameTooltip:
         type: string
       outputs:
     SetPadding:
+      inputs:
+      - name: right
+        type: number
+      - name: bottom
+        type: number
+      - name: left
+        nilable: true
+        type: number
+      - name: top
+        nilable: true
+        type: number
+      outputs:
     SetShrinkToFitWrapped:
     SetText:
+      inputs:
+      - name: text
+        type: string
+      - name: colorR
+        type: number
+      - name: colorG
+        type: number
+      - name: colorB
+        type: number
+      - name: alpha
+        nilable: true
+        type: number
+      - name: wrap
+        nilable: true
+        type: boolean
+      outputs:
   scripts:
     OnTooltipCleared:
     OnTooltipSetDefaultAnchor:
@@ -5572,6 +5645,11 @@ Model:
       - name: scale
         nilable: true
         type: number
+      outputs:
+    SetUseGBuffer:
+      inputs:
+      - name: useGBuffer
+        type: boolean
       outputs:
     SetViewInsets:
       inputs:

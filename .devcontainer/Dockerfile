@@ -2,7 +2,6 @@ FROM mcr.microsoft.com/vscode/devcontainers/python:3 AS devcontainer
 RUN apt-get update \
     && export DEBIAN_FRONTEND=noninteractive \
     && apt-get -y install --no-install-recommends \
-        autoconf-archive \
         build-essential \
         ca-certificates \
         git \

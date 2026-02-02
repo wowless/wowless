@@ -1143,6 +1143,8 @@ C_CampaignInfo.CampaignInfo:
   fields:
     description:
       type: string
+    hideFutureChapters:
+      type: boolean
     isContainerCampaign:
       type: boolean
     isWarCampaign:
@@ -1252,9 +1254,6 @@ C_CatalogShop.CatalogShopProductDisplayInfo:
     otherProductImageAtlasName:
       nilable: true
       type: string
-    otherProductPMTURL:
-      nilable: true
-      type: string
     overrideCardModelSceneID:
       nilable: true
       type: number
@@ -1264,6 +1263,9 @@ C_CatalogShop.CatalogShopProductDisplayInfo:
     overrideWideCardModelSceneID:
       nilable: true
       type: number
+    productPMTURL:
+      nilable: true
+      type: string
     productType:
       nilable: true
       type: string
@@ -1399,6 +1401,8 @@ C_CatalogShop.CatalogShopSectionInfo:
     scrollGridSize:
       nilable: true
       type: number
+    shouldShowRecommendationOptOutDisclaimer:
+      type: boolean
 C_CatalogShop.CatalogShopSpellVisualInfo:
   fields:
     animID:
@@ -1434,8 +1438,10 @@ C_CatalogShop.RefundableDecorInfo:
   fields:
     decorGUID:
       type: string
-    standaloneDecorProductID:
-      type: number
+    name:
+      type: string
+    price:
+      type: string
     timeRemainingSeconds:
       type: number
 C_ChallengeMode.ChallengeCompletionInfo:
@@ -2629,6 +2635,8 @@ C_DamageMeter.DamageMeterCombatSource:
       type: number
     classFilename:
       type: string
+    classification:
+      type: string
     deathRecapID:
       type: number
     deathTimeSeconds:
@@ -2637,7 +2645,11 @@ C_DamageMeter.DamageMeterCombatSource:
       type: boolean
     name:
       type: string
+    sourceCreatureID:
+      nilable: true
+      type: number
     sourceGUID:
+      nilable: true
       type: string
     specIconID:
       type: number
@@ -2672,6 +2684,8 @@ C_DamageMeter.DamageMeterCombatSpellUnitDetails:
       type: boolean
     isPet:
       type: boolean
+    specIconID:
+      type: number
     unitClassFilename:
       type: string
     unitName:
@@ -2879,6 +2893,9 @@ C_EncounterJournal.EncounterJournalSectionInfo:
       type: number
 C_EncounterTimeline.EncounterTimelineEventInfo:
   fields:
+    color:
+      type:
+        structure: colorRGB
     duration:
       type: number
     iconFileID:
@@ -2960,6 +2977,9 @@ C_EncounterWarnings.EncounterWarningInfo:
       type: string
     casterName:
       type: string
+    color:
+      type:
+        structure: colorRGB
     duration:
       type: number
     iconFileID:
@@ -4007,10 +4027,6 @@ C_HousingCatalog.HousingCatalogEntryInfo:
     itemID:
       nilable: true
       type: number
-    marketInfo:
-      nilable: true
-      type:
-        structure: C_HousingCatalog.HousingMarketInfo
     name:
       type: string
     numPlaced:
@@ -4908,6 +4924,8 @@ C_MajorFactions.MajorFactionData:
     unlockDescription:
       nilable: true
       type: string
+    useJourneyUnlockToast:
+      type: boolean
 C_MajorFactions.MajorFactionRenownInfo:
   fields:
     renownLevel:
@@ -6461,6 +6479,10 @@ C_QuestLog.QuestTheme:
   fields:
     background:
       type: string
+    mapPinInfo:
+      nilable: true
+      type:
+        structure: UIMapPinInfo
     poiIcon:
       type: string
     seal:
@@ -11136,6 +11158,36 @@ DyeColorDisplayInfo:
     swatchColorStart:
       type:
         structure: colorRGB
+EncounterEventInfo:
+  fields:
+    color:
+      nilable: true
+      type:
+        structure: colorRGB
+    enabled:
+      type: boolean
+    encounterEventID:
+      type: number
+    iconFileID:
+      type: number
+    icons:
+      type:
+        enum: EncounterEventIconmask
+    severity:
+      type:
+        enum: EncounterEventSeverity
+    spellID:
+      type: number
+EncounterEventSoundInfo:
+  fields:
+    channel:
+      default: g_defaultSI3UISoundSubTypeForLua
+      type: string
+    file:
+      type: number
+    volume:
+      default: 1
+      type: number
 EncounterTrackingInfo:
   fields:
     difficultyID:
@@ -12375,6 +12427,8 @@ UIMapPinInfo:
     buttonSelected:
       type:
         structure: UIButtonInfo
+    outerGlow:
+      type: string
     underlay:
       type: string
 UITextureSliceData:
