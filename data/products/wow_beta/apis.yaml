@@ -28776,6 +28776,8 @@ C_TransmogOutfitInfo.ClearDisplayedOutfit:
   outputs:
 C_TransmogOutfitInfo.CommitAndApplyAllPending:
   inputs:
+  - name: useAvailableDiscount
+    type: boolean
   outputs:
 C_TransmogOutfitInfo.CommitOutfitInfo:
   inputs:
@@ -29083,6 +29085,11 @@ C_TransmogOutfitInfo.IsSlotWeaponSlot:
       enum: TransmogOutfitSlot
   outputs:
   - name: isWeaponSlot
+    type: boolean
+C_TransmogOutfitInfo.IsUsableDiscountAvailable:
+  inputs:
+  outputs:
+  - name: isAvailable
     type: boolean
 C_TransmogOutfitInfo.IsValidTransmogOutfitName:
   inputs:

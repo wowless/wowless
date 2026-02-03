@@ -7678,6 +7678,7 @@ Enum:
     CreatePostGenericFailure: 26
     CreatePostNoIDFound: 27
     CreatePostNotFound: 24
+    CreatePostThrottled: 28
     CreatePostTooManyRequests: 25
     CreatePostUnauthorized: 22
     Failed: 0
@@ -7693,9 +7694,9 @@ Enum:
     Locked: 2
     Success: 1
   PhotoSharingUploadStatusMeta:
-    MaxValue: 27
+    MaxValue: 28
     MinValue: 0
-    NumValues: 28
+    NumValues: 29
   PingMode:
     ClickDrag: 1
     KeyDown: 0
