@@ -85,6 +85,7 @@ local ptablemap = {
   end,
   luaobjects = function(p)
     local raw = perproduct(p, 'luaobjects')
+    -- For each luaobject type, a mapping of method name to the luaobject type it came from.
     local t = {}
     local function pop(k)
       if t[k] then
@@ -94,12 +95,12 @@ local ptablemap = {
       local methods = {}
       if v.inherits then
         pop(v.inherits)
-        for mk in pairs(t[v.inherits]) do
-          methods[mk] = true
+        for mk, mv in pairs(t[v.inherits]) do
+          methods[mk] = mv
         end
       end
       for mk in pairs(v.methods or {}) do
-        methods[mk] = true
+        methods[mk] = k
       end
       t[k] = methods
     end
@@ -111,7 +112,40 @@ local ptablemap = {
         t[k] = nil
       end
     end
-    return 'LuaObjects', t
+    -- Method partition: name from base type to list of names from all derived types.
+    local mp = {}
+    for k, v in pairs(t) do
+      for vk, vv in pairs(v) do
+        local ck = vv .. '/' .. vk
+        local cv = mp[ck]
+        if not cv then
+          cv = {}
+          mp[ck] = cv
+        end
+        table.insert(cv, k .. '/' .. vk)
+      end
+    end
+    -- Compressed method partition, more easily computable addon-side.
+    local cmp = {}
+    for _, v in pairs(mp) do
+      table.sort(v)
+      local k = table.concat(v, ',')
+      assert(not cmp[k])
+      cmp[k] = true
+    end
+    -- Type to set of method names.
+    local types = {}
+    for k, v in pairs(t) do
+      local m = {}
+      for vk in pairs(v) do
+        m[vk] = true
+      end
+      types[k] = m
+    end
+    return 'LuaObjects', {
+      methodpartition = cmp,
+      types = types,
+    }
   end,
   namespaceapis = function(p)
     local platform = dofile('build/cmake/runtime/platform.lua')

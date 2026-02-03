@@ -481,33 +481,17 @@ end
 local luaobjects = {}
 do
   local luaobjectdata = parseYaml('data/products/' .. product .. '/luaobjects.yaml')
-  local function pop(k)
-    if luaobjects[k] then
-      return
-    end
+  for k, v in pairs(luaobjectdata) do
     local methods = {}
-    local v = luaobjectdata[k]
-    if v.inherits then
-      pop(v.inherits)
-      for mk in pairs(luaobjects[v.inherits].methods) do
-        methods[mk] = true
-      end
-    end
-    for mk in pairs(v.methods) do
+    for mk in pairs(v.methods or {}) do
       methods[mk] = true
     end
     luaobjects[k] = {
       impl = v.impl,
+      inherits = v.inherits,
       methods = methods,
+      virtual = v.virtual,
     }
-  end
-  for k in pairs(luaobjectdata) do
-    pop(k)
-  end
-  for k, v in pairs(luaobjectdata) do
-    if v.virtual then
-      luaobjects[k] = nil
-    end
   end
 end
 

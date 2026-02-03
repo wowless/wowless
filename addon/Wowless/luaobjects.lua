@@ -3,6 +3,7 @@ local _, G = ...
 local assertEquals = G.assertEquals
 
 local config = _G.WowlessData.Config.modules and _G.WowlessData.Config.modules.luaobjects or {}
+local alltypes = _G.WowlessData.LuaObjects.types
 
 local metamethods = {
   __eq = true,
@@ -51,7 +52,7 @@ local function checkLuaObject(ty, o)
     end,
     methods = function()
       local t = {}
-      for k in pairs(_G.WowlessData.LuaObjects[ty]) do
+      for k in pairs(alltypes[ty]) do
         t[k] = function()
           return {
             modify = function()
@@ -70,7 +71,7 @@ local function checkLuaObject(ty, o)
     end,
     methodsunique = function()
       local seen = {}
-      for k in pairs(_G.WowlessData.LuaObjects[ty]) do
+      for k in pairs(alltypes[ty]) do
         local fn = o[k]
         assertEquals(nil, seen[fn], k)
         seen[fn] = k
@@ -116,7 +117,7 @@ local function checkLuaObjectFactory(ty, fn)
       local o1 = fn()
       local o2 = fn()
       local t = {}
-      for k in pairs(_G.WowlessData.LuaObjects[ty]) do
+      for k in pairs(alltypes[ty]) do
         t[k] = function()
           assertEquals(o1[k], o2[k])
         end
@@ -153,11 +154,35 @@ local factories = {
 G.checkLuaObject = checkLuaObject
 
 G.testsuite.luaobjects = function()
-  local tests = {}
-  for k in pairs(_G.WowlessData.LuaObjects) do
-    tests[k] = function()
-      return checkLuaObjectFactory(k, assert(factories[k], k))
-    end
-  end
-  return tests
+  return {
+    methodpartition = function()
+      local methodids = {}
+      for k, v in pairs(alltypes) do
+        local o = factories[k]()
+        for vk in pairs(v) do
+          local t = methodids[o[vk]]
+          if not t then
+            t = {}
+            methodids[o[vk]] = t
+          end
+          table.insert(t, k .. '/' .. vk)
+        end
+      end
+      local actual = {}
+      for _, v in pairs(methodids) do
+        table.sort(v)
+        actual[table.concat(v, ',')] = true
+      end
+      G.assertEqualSets(_G.WowlessData.LuaObjects.methodpartition, actual)
+    end,
+    types = function()
+      local tests = {}
+      for k in pairs(alltypes) do
+        tests[k] = function()
+          return checkLuaObjectFactory(k, assert(factories[k], k))
+        end
+      end
+      return tests
+    end,
+  }
 end
