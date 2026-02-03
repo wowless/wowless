@@ -61,11 +61,15 @@ local function init(modules, lite)
     dump = dump(modules.uiobjects),
     lite = lite,
     platform = modules.platform.platform,
+    printf = function(fmt, ...)
+      io.stdout:write(string.format(fmt, ...))
+    end,
     product = modules.datalua.product,
     quit = function(exitCode)
       modules.log(1, 'Bye!')
       os.exit(exitCode or 1)
     end,
+    traceback = require('wowless.ext').traceback,
   }
 end
 
