@@ -14,32 +14,24 @@ return function(datalua)
       if allmethods[k] then
         return allmethods[k]
       end
-
       local v = datalua.luaobjects[k]
       local methods = {}
-
       if v.inherits then
         local parentmethods = createMethods(v.inherits)
         for mk, mfn in pairs(parentmethods) do
           methods[mk] = mfn
         end
       end
-
-      local impl = v.impl and modules[v.impl]
-      if impl then
-        local implmethods = assert(impl.methods, k .. ' impl missing methods')
-        for mk in pairs(v.methods) do
-          local mfn = assert(implmethods[mk], k .. ':' .. mk .. ' not implemented')
-          methods[mk] = bubblewrap(function(u, ...)
-            return mfn(objs[u], ...)
-          end)
+      for mk, mv in pairs(v.methods) do
+        local args = {}
+        for _, m in ipairs(mv.modules or {}) do
+          table.insert(args, (assert(modules[m], m)))
         end
-      else
-        for mk in pairs(v.methods) do
-          methods[mk] = bubblewrap(function() end)
-        end
+        local mfn = assert(loadstring_untainted(mv.impl))(unpack(args))
+        methods[mk] = bubblewrap(function(u, ...)
+          return mfn(objs[u], ...)
+        end)
       end
-
       allmethods[k] = methods
       return methods
     end
