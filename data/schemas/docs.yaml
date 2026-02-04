@@ -1,6 +1,12 @@
 name: docs
 type:
   record:
+    ignore_script_object_methods:
+      type:
+        mapof:
+          key: string
+          value:
+            setof: string
     lies:
       type:
         record:
@@ -8,43 +14,50 @@ type:
             type:
               mapof:
                 key:
-                  ref: api
+                  ref:
+                    schema: api
                 value: any
           enums:
             type:
               mapof:
                 key:
-                  ref: enum
+                  ref:
+                    schema: enum
+                value: any
+          events:
+            type:
+              mapof:
+                key:
+                  ref:
+                    schema: event
                 value: any
           extra_apis:
             type:
-              mapof:
-                key: string
-                value:
-                  record:
+              setof:
+                ref:
+                  negative: true
+                  schema: api
           extra_enums:
             type:
-              mapof:
-                key: string
-                value:
-                  record:
+              setof:
+                ref:
+                  negative: true
+                  schema: enum
           extra_events:
             type:
-              mapof:
-                key: string
-                value:
-                  record:
+              setof:
+                ref:
+                  negative: true
+                  schema: event
           extra_script_objects:
             type:
-              mapof:
-                key: string
-                value:
-                  record:
+              setof: string
           uiobjects:
             type:
               mapof:
                 key:
-                  ref: uiobject
+                  ref:
+                    schema: uiobject
                 value:
                   mapof:
                     key: string
@@ -54,7 +67,13 @@ type:
         mapof:
           key: string
           value:
-            ref: uiobject
+            taggedunion:
+              luaobject:
+                ref:
+                  schema: luaobject
+              uiobject:
+                ref:
+                  schema: uiobject
     typedefs:
       type:
         mapof:
@@ -62,7 +81,7 @@ type:
           value:
             record:
               outnil:
-                type: boolean
+                type: flag
               type:
                 required: true
                 type:
@@ -71,9 +90,11 @@ type:
       type:
         mapof:
           key:
-            ref: uiobject
+            ref:
+              schema: uiobject
           value:
             mapof:
               key: string
               value:
-                ref: uiobject
+                ref:
+                  schema: uiobject

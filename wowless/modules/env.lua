@@ -2,7 +2,6 @@ local mixin = require('wowless.util').mixin
 return function()
   local genv = {}
   local secureenv = {}
-  genv._G = genv
   return {
     genv = genv,
     getfenv = function(arg)

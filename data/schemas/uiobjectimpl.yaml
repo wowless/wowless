@@ -8,18 +8,18 @@ type:
           record:
             modules:
               type:
-                mapof:
-                  key:
-                    ref: module
-                  value:
-                    record:
+                setof:
+                  ref:
+                    schema: module
             sqls:
               type:
                 sequenceof:
-                  ref: sql
+                  ref:
+                    schema: sql
         moduledelegate:
           record:
             name:
               required: true
               type:
-                ref: module
+                ref:
+                  schema: module

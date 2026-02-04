@@ -1007,6 +1007,7 @@ C_AuctionHouse.GetAuctionInfoByID:
     type:
       structure: C_AuctionHouse.AuctionInfo
 C_AuctionHouse.GetAuctionItemSubClasses:
+  impl: C_AuctionHouse.GetAuctionItemSubClasses
   inputs:
   - name: classID
     type: number
@@ -6826,6 +6827,16 @@ C_FriendList.SortWho:
   - name: sorting
     type: string
   outputs:
+C_FunctionContainers.CreateCallback:
+  impl: C_FunctionContainers.CreateCallback
+  inputs:
+  - name: callback
+    type: function
+  outputs:
+  - name: functionContainer
+    type:
+      luaobject: LuaFunctionContainer
+  usage: C_FunctionContainers.CreateCallback(func)
 C_GamePad.AddSDLMapping:
   inputs:
   - name: platform
@@ -12576,7 +12587,8 @@ C_Timer.After:
   - name: seconds
     type: number
   - name: callback
-    type: function
+    type:
+      luaobject: LuaFunctionContainer
   outputs:
 C_Timer.NewTicker:
   impl: C_Timer.NewTicker
@@ -12584,23 +12596,27 @@ C_Timer.NewTicker:
   - name: seconds
     type: number
   - name: callback
-    type: function
+    type:
+      luaobject: LuaFunctionContainer
   - name: iterations
     nilable: true
     type: number
   outputs:
   - name: cbObject
-    type: userdata
+    type:
+      luaobject: LuaFunctionContainer
 C_Timer.NewTimer:
   impl: C_Timer.NewTimer
   inputs:
   - name: seconds
     type: number
   - name: callback
-    type: function
+    type:
+      luaobject: LuaFunctionContainer
   outputs:
   - name: cbObject
-    type: userdata
+    type:
+      luaobject: LuaFunctionContainer
 C_ToyBox.ForceToyRefilter:
   inputs:
   outputs:
@@ -15822,6 +15838,7 @@ CreateFont:
   - name: font
     type:
       uiobject: Font
+  usage: CreateFont("name")
 CreateFontFamily:
   inputs:
   - name: name
@@ -16713,6 +16730,13 @@ GetBinding:
 GetBindingAction:
 GetBindingByKey:
 GetBindingKey:
+  inputs:
+  - name: command
+    type: string
+  outputs:
+  - name: key
+    type: string
+  outstride: 1
 GetBindingText:
   outputs:
   - type: string
@@ -17379,11 +17403,13 @@ GetFactionInfoByID:
 getfenv:
   impl: getfenv
 GetFileIDFromPath:
+  impl: GetFileIDFromPath
   inputs:
   - name: filePath
     type: string
   outputs:
   - name: fileID
+    nilable: true
     type: number
 GetFileStreamingStatus:
   inputs:
@@ -17426,6 +17452,7 @@ GetFonts:
   inputs:
   outputs:
   - name: fontNames
+    stub:
     type:
       arrayof: string
 GetFontStringMetatable:
@@ -20041,6 +20068,7 @@ GetSpecializationInfoForClassID:
     nilable: true
     type: number
 GetSpecializationInfoForSpecID:
+  impl: GetSpecializationInfoForSpecID
   inputs:
   - name: specID
     type: number
@@ -21813,8 +21841,6 @@ math.fmod:
   impl: math.fmod
 math.frexp:
   impl: math.frexp
-math.huge:
-  impl: math.huge
 math.ldexp:
   impl: math.ldexp
 math.log:
@@ -21827,8 +21853,6 @@ math.min:
   impl: math.min
 math.modf:
   impl: math.modf
-math.pi:
-  impl: math.pi
 math.pow:
   impl: math.pow
 math.rad:

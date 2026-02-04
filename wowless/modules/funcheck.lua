@@ -1,5 +1,6 @@
 return function(log, typechecker)
   local function makeCheckInputs(fname, apicfg)
+    local usage = apicfg.usage
     local ins = apicfg.inputs
     local nins = #apicfg.inputs
     local instride = apicfg.instride or 0
@@ -11,6 +12,8 @@ return function(log, typechecker)
         local v, errmsg, iswarn = typechecker(param, (select(i, ...)))
         if not errmsg then
           args[i] = v
+        elseif usage then
+          error('Usage: ' .. usage, 0)
         else
           local msg = ('arg %d (%q) of %q %s'):format(i, tostring(param.name), fname, errmsg)
           if iswarn then

@@ -15,6 +15,7 @@ local productDomains = {
   cvar = wdata.cvars,
   enum = wdata.enums,
   event = wdata.events,
+  luaobject = wdata.luaobjects,
   structure = wdata.structures,
   uiobject = wdata.uiobjects,
   xml = wdata.xml,
@@ -32,6 +33,13 @@ end
 local simple = {
   any = function() end,
   boolean = mksimple('boolean'),
+  flag = function(v)
+    if v ~= true then
+      local vty = type(v)
+      local suffix = vty == 'boolean' and ' (false)' or ''
+      return ('want flag (boolean true), got %s%s'):format(vty, suffix)
+    end
+  end,
   number = mksimple('number'),
   string = mksimple('string'),
   table = mksimple('table'),
@@ -92,8 +100,9 @@ local complex = {
     end
   end,
   ref = function(s)
-    local gdomain = domains[s]
-    local pdomains = productDomains[s]
+    local gdomain = domains[s.schema]
+    local pdomains = productDomains[s.schema]
+    local mustexist = not s.negative
     return function(v, product)
       if type(v) ~= 'string' then
         return 'expected string'
@@ -102,8 +111,8 @@ local complex = {
       if not domain then
         return 'invalid domain'
       end
-      if not domain[v] then
-        return 'unknown domain value'
+      if (domain[v] ~= nil) ~= mustexist then
+        return (mustexist and 'unknown' or 'known') .. ' domain value'
       end
     end
   end,
@@ -139,6 +148,23 @@ local complex = {
         end
       end
       return max ~= #v and 'expected array' or next(errors) and errors or nil
+    end
+  end,
+  setof = function(s)
+    local element = compile(s)
+    return function(v, product)
+      if type(v) ~= 'table' then
+        return 'expected table'
+      end
+      local errors = {}
+      for vk, vv in pairs(v) do
+        local ek = element(vk, product)
+        local ev = (type(vv) ~= 'table' or next(vv)) and 'bad value' or nil
+        if ek or ev then
+          errors[vk] = { key = ek, value = ev }
+        end
+      end
+      return next(errors) and errors or nil
     end
   end,
   taggedunion = function(s)

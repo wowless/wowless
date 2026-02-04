@@ -587,7 +587,7 @@ G.testsuite.sync = function()
       end
       return {
         mixin = function()
-          local m = _G.ScrollingMessageFrameMixin
+          local m = _G.ScrollingMessageFrameSecureMixin or _G.ScrollingMessageFrameMixin
           return {
             empty = function()
               check1(nil, next(m))
@@ -854,9 +854,15 @@ local asyncTests = {
         local args = { ... }
         done(function()
           assertEquals(1, #args)
-          assertEquals(t, args[1])
-          assert(tostring(t) ~= tostring(args[1]))
+          assertEquals(t, args[1]) -- because of eq metamethod
+          assertEquals(nil, ({ [t] = true })[args[1]]) -- they're still not the same object
           assertEquals('bar', args[1].foo)
+          local cfg = _G.WowlessData.Config.modules and _G.WowlessData.Config.modules.luaobjects or {}
+          if cfg.tostring_metamethod then
+            assertEquals(tostring(t), tostring(args[1]))
+          else
+            assert(tostring(t) ~= tostring(args[1]))
+          end
         end)
       end
       t = G.retn(1, _G.C_Timer.NewTimer(0, cb))

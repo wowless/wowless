@@ -38,14 +38,17 @@ local ptablemap = {
     local t = {}
     for k, v in pairs(perproduct(p, 'events')) do
       t[k] = {
+        callback = v.callback or false,
         payload = #v.payload,
-        registerable = true,
+        registerable = not v.noscript,
+        restricted = v.restricted,
       }
     end
     for _, product in ipairs(readyaml('data/products.yaml')) do
       for k in pairs(perproduct(product, 'events')) do
         if not t[k] then
           t[k] = {
+            callback = false,
             payload = -1,
             registerable = false,
           }
@@ -55,23 +58,12 @@ local ptablemap = {
     return 'Events', t
   end,
   globalapis = function(p)
-    local impls = readyaml('data/impl.yaml')
-    local function islua(api)
-      local impl = impls[api.impl]
-      if not impl or not impl.stdlib then
-        return false
-      end
-      local g = assert(tpath(_G, strsplit('.', impl.stdlib)))
-      return type(g) == 'function' and pcall(coroutine.create, g)
-    end
     local config = perproduct(p, 'config')
     local t = {}
-    for name, api in pairs(perproduct(p, 'apis')) do
+    for name in pairs(perproduct(p, 'apis')) do
       if not name:find('%.') then
         local vv = {
-          islua = islua(api) or nil,
           overwritten = tpath(config, 'addon', 'overwritten_apis', name) and true,
-          stdlib = api.impl and tpath(impls, api.impl, 'stdlib'),
         }
         t[name] = next(vv) and vv or true
       end
@@ -91,14 +83,77 @@ local ptablemap = {
     end
     return 'ImplTests', t
   end,
+  luaobjects = function(p)
+    local raw = perproduct(p, 'luaobjects')
+    -- For each luaobject type, a mapping of method name to the luaobject type it came from.
+    local t = {}
+    local function pop(k)
+      if t[k] then
+        return
+      end
+      local v = raw[k]
+      local methods = {}
+      if v.inherits then
+        pop(v.inherits)
+        for mk, mv in pairs(t[v.inherits]) do
+          methods[mk] = mv
+        end
+      end
+      for mk in pairs(v.methods or {}) do
+        methods[mk] = k
+      end
+      t[k] = methods
+    end
+    for k in pairs(raw) do
+      pop(k)
+    end
+    for k, v in pairs(raw) do
+      if v.virtual then
+        t[k] = nil
+      end
+    end
+    -- Method partition: name from base type to list of names from all derived types.
+    local mp = {}
+    for k, v in pairs(t) do
+      for vk, vv in pairs(v) do
+        local ck = vv .. '/' .. vk
+        local cv = mp[ck]
+        if not cv then
+          cv = {}
+          mp[ck] = cv
+        end
+        table.insert(cv, k .. '/' .. vk)
+      end
+    end
+    -- Compressed method partition, more easily computable addon-side.
+    local cmp = {}
+    for _, v in pairs(mp) do
+      table.sort(v)
+      local k = table.concat(v, ',')
+      assert(not cmp[k])
+      cmp[k] = true
+    end
+    -- Type to set of method names.
+    local types = {}
+    for k, v in pairs(t) do
+      local m = {}
+      for vk in pairs(v) do
+        m[vk] = true
+      end
+      types[k] = m
+    end
+    return 'LuaObjects', {
+      methodpartition = cmp,
+      types = types,
+    }
+  end,
   namespaceapis = function(p)
     local platform = dofile('build/cmake/runtime/platform.lua')
-    local impls = readyaml('data/impl.yaml')
     local config = perproduct(p, 'config')
     local apiNamespaces = {}
     for k, api in pairs(perproduct(p, 'apis')) do
       local dot = k:find('%.')
-      if dot and (not api.platform or api.platform == platform) then
+      if dot and (not api.platform or api.platform == platform) and not api.secureonly then
         local name = k:sub(1, dot - 1)
         apiNamespaces[name] = apiNamespaces[name] or { methods = {} }
         apiNamespaces[name].methods[k:sub(dot + 1)] = api
@@ -107,10 +162,9 @@ local ptablemap = {
     local t = {}
     for k, v in pairs(apiNamespaces) do
       local mt = {}
-      for mk, mv in pairs(v.methods) do
+      for mk in pairs(v.methods) do
         local tt = {
           overwritten = tpath(config, 'addon', 'overwritten_apis', k .. '.' .. mk) and true,
-          stdlib = mv.impl and tpath(impls, mv.impl, 'stdlib'),
         }
         mt[mk] = next(tt) and tt or true
       end
@@ -121,17 +175,20 @@ local ptablemap = {
   uiobjectapis = function(p)
     local uiobjects = perproduct(p, 'uiobjects')
     local allscripts = readyaml('data/scripttypes.yaml')
-    local inhrev = {}
-    for k, cfg in pairs(uiobjects) do
-      for inh in pairs(cfg.inherits) do
-        inhrev[inh] = inhrev[inh] or {}
-        table.insert(inhrev[inh], k)
-      end
+    for _, cfg in pairs(uiobjects) do
       cfg.fieldinitoverrides = cfg.fieldinitoverrides or {}
     end
-    local objTypes = {}
     for k, cfg in pairs(uiobjects) do
-      objTypes[k] = cfg.objectType or k
+      cfg.isa = {}
+      for k2, cfg2 in pairs(uiobjects) do
+        cfg.isa[k2] = false
+        if cfg2.objectType then
+          cfg.isa[cfg2.objectType] = false
+        end
+      end
+      if not cfg.virtual or cfg.objectType then
+        cfg.isa[cfg.objectType or k] = true
+      end
     end
     local function fixup(cfg)
       for inhname in pairs(cfg.inherits) do
@@ -152,21 +209,16 @@ local ptablemap = {
             cfg.scripts[n] = {}
           end
         end
+        for ik, iv in pairs(inh.isa) do
+          if iv then
+            cfg.isa[ik] = true
+          end
+        end
       end
     end
     for _, cfg in pairs(uiobjects) do
       fixup(cfg)
     end
-    local frametypes = {}
-    local function addtype(ty)
-      if not frametypes[ty] then
-        frametypes[ty] = true
-        for _, inh in ipairs(inhrev[ty] or {}) do
-          addtype(inh)
-        end
-      end
-    end
-    addtype('Frame')
     local t = {}
     for k, v in pairs(uiobjects) do
       local ft = {}
@@ -196,12 +248,10 @@ local ptablemap = {
       end
       -- TODO remove these super duper field hacks
       ft.parent = nil
-      if k == 'EditBox' then
-        ft.shown.init = false
-      elseif k == 'Font' then
-        ft.name.init = 'WowlessFont1'
-      elseif k == 'Minimap' then
+      if v.singleton then
         ft = {}
+      elseif k == 'EditBox' then
+        ft.shown.init = false
       end
       local st = {}
       if mt.HasScript then
@@ -211,10 +261,11 @@ local ptablemap = {
       end
       t[k] = {
         fields = ft,
-        frametype = not not frametypes[k],
+        isa = v.isa,
         methods = mt,
-        objtype = objTypes[k],
+        objtype = v.objectType or k,
         scripts = st,
+        singleton = v.singleton,
         virtual = v.virtual,
       }
     end
@@ -249,6 +300,7 @@ local function doit(k, p)
     end
     table.sort(tt)
     table.insert(tt, 1, 'product.lua')
+    table.insert(tt, 1, '## Interface: ' .. perproduct(p, 'build').tocversion)
     table.insert(tt, '')
     return table.concat(tt, '\n')
   else

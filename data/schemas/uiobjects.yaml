@@ -17,11 +17,11 @@ type:
               value:
                 record:
                   dynamicinit:
-                    type: boolean
+                    type: flag
                   init:
                     type: any
                   nilable:
-                    type: boolean
+                    type: flag
                   type:
                     required: true
                     type:
@@ -29,11 +29,9 @@ type:
         inherits:
           required: true
           type:
-            mapof:
-              key:
-                ref: uiobject
-              value:
-                record:
+            setof:
+              ref:
+                schema: uiobject
         methods:
           required: true
           type:
@@ -64,11 +62,12 @@ type:
                               required: true
                               type: string
                             return:
-                              type: boolean
+                              type: flag
                             shown:
                               type: string
                         uiobjectimpl:
-                          ref: uiobjectimpl
+                          ref:
+                            schema: uiobjectimpl
                   inputs:
                     type:
                       sequenceof:
@@ -79,9 +78,9 @@ type:
                             required: true
                             type: string
                           nilable:
-                            type: boolean
+                            type: flag
                           permissive:
-                            type: boolean
+                            type: flag
                           type:
                             required: true
                             type:
@@ -89,9 +88,9 @@ type:
                   instride:
                     type: number
                   manualinputs:
-                    type: boolean
+                    type: flag
                   mayreturnnothing:
-                    type: boolean
+                    type: flag
                   outputs:
                     type:
                       sequenceof:
@@ -100,11 +99,11 @@ type:
                             required: true
                             type: string
                           nilable:
-                            type: boolean
+                            type: flag
                           stub:
                             type: any
                           stubnotnil:
-                            type: boolean
+                            type: flag
                           type:
                             required: true
                             type:
@@ -112,19 +111,17 @@ type:
                   outstride:
                     type: number
                   override:
-                    type: boolean
+                    type: flag
                   stuboutstrides:
                     type: number
         objectType:
           type: string
         scripts:
           type:
-            mapof:
-              key:
-                ref: scripttype
-              value:
-                record:
+            setof:
+              ref:
+                schema: scripttype
         singleton:
-          type: boolean
+          type: flag
         virtual:
-          type: boolean
+          type: flag

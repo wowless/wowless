@@ -31,6 +31,12 @@ describe('structures', function()
           refty(pv.type)
         end
       end
+      for _, v in pairs(require('build.data.products.' .. p .. '.luaobjects')) do
+        for _, m in pairs(v.methods) do
+          reflist(m.inputs)
+          reflist(m.outputs)
+        end
+      end
       for _, v in pairs(require('build.data.products.' .. p .. '.uiobjects')) do
         for _, m in pairs(v.methods) do
           reflist(m.inputs)
@@ -50,7 +56,10 @@ describe('structures', function()
             end
           end
         else
-          assert(ty.enum or ty.stringenum or ty.uiobject or type(ty) == 'string', 'weird type ' .. tostring(ty))
+          assert(
+            ty.enum or ty.stringenum or ty.uiobject or ty.luaobject or type(ty) == 'string',
+            'weird type ' .. tostring(ty)
+          )
         end
       end
       for k in pairs(refs) do

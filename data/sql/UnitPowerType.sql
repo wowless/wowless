@@ -9,5 +9,6 @@ FROM
 INNER JOIN ChrClassesXPowerTypes AS x ON p.PowerTypeEnum = x.PowerType
 WHERE
   x.ClassID = ?1
+ORDER BY powerType
 LIMIT
   1;

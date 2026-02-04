@@ -10,11 +10,11 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v5
+    - uses: actions/checkout@v6
       with:
         submodules: true
     - run: mkdir vcpkg-cache
-    - uses: actions/cache@v4
+    - uses: actions/cache@v5
       with:
         path: vcpkg-cache
         key: vcpkg-devcontainer-${{ github.run_id }}
@@ -32,7 +32,7 @@ jobs:
         imageName: ghcr.io/wowless/wowless-devcontainer
         refFilterForPush: refs/heads/main
         runCmd: pre-commit run -a -v
-    - uses: actions/upload-artifact@v4
+    - uses: actions/upload-artifact@v6
       if: success() || failure()
       with:
         name: test-results
@@ -64,17 +64,15 @@ jobs:
           os: windows-latest
     runs-on: ${{ matrix.config.os }}
     steps:
-    - if:  ${{ matrix.config.os == 'ubuntu-latest' }}
-      run: sudo apt-get install libltdl-dev
-    - uses: actions/checkout@v5
+    - uses: actions/checkout@v6
       with:
         submodules: true
     - run: mkdir ${{ env.VCPKG_DEFAULT_BINARY_CACHE }}
-    - uses: actions/cache@v4
+    - uses: actions/cache@v5
       with:
         path: ${{ env.VCPKG_DEFAULT_BINARY_CACHE }}
         key: vcpkg-${{ runner.os }}-${{ github.run_id }}
         restore-keys: vcpkg-${{ runner.os }}
-    - uses: lukka/get-cmake@v4.1.1
+    - uses: lukka/get-cmake@v4.2.3
     - run: cmake -B build -G "${{ matrix.config.generator }}"
     - run: cmake --build build --verbose

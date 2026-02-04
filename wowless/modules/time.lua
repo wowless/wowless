@@ -1,70 +1,26 @@
-local bubblewrap = require('wowless.bubblewrap')
-
-return function(log, security)
+return function(log, luaobjects, security)
   local stamp = 1234
   local timers = require('minheap'):new()
   timers:push(math.huge, function()
     error('fell off the end of time')
   end)
 
-  local state = setmetatable({}, { __mode = 'k' })
-
-  local index = {
-    Cancel = bubblewrap(function(self)
-      state[self].cancelled = true
-    end),
-    Invoke = bubblewrap(function(self, ...)
-      state[self].callback(...)
-    end),
-    IsCancelled = bubblewrap(function(self)
-      return state[self].cancelled
-    end),
-  }
-
-  local tickerMT
-  tickerMT = {
-    __eq = function(u1, u2)
-      return state[u1].table == state[u2].table
-    end,
-    __index = function(u, k)
-      return index[k] or state[u].table[k]
-    end,
-    __metatable = false,
-    __newindex = function(u, k, v)
-      if index[k] or tickerMT[k] ~= nil then
-        error('Attempted to assign to read-only key ' .. k)
-      end
-      state[u].table[k] = v
-    end,
-  }
-
-  local mtproxy = newproxy(true)
-  require('wowless.util').mixin(getmetatable(mtproxy), tickerMT)
-
   local function addTimer(seconds, callback)
     timers:push(stamp + seconds, callback)
   end
 
-  local function newTicker(seconds, callback, iterations)
-    assert(getfenv(callback) ~= _G, 'wowless bug: framework callback in newTicker')
-    local p = newproxy(mtproxy)
-    state[p] = {
-      callback = callback,
-      cancelled = false,
-      table = {},
-    }
+  local function newTicker(seconds, obj, iterations)
+    assert(seconds >= 0 and seconds < 4294968) -- (2 ^ 32 - 1) / 1000
     local count = 0
     local function cb()
-      if not state[p].cancelled and count < iterations then
-        local np = newproxy(p)
-        state[np] = state[p]
-        security.CallSandbox(callback, np)
+      if not obj.cancelled and count < iterations then
+        security.CallSandbox(obj.callback, luaobjects.CreateProxy(obj))
         count = count + 1
         addTimer(seconds, cb)
       end
     end
     addTimer(seconds, cb)
-    return p
+    return obj
   end
 
   return {

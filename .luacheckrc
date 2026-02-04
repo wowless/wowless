@@ -4,6 +4,7 @@ read_globals = {
   'debug.getstacktaint',
   'debug.gettaintmode',
   'debug.gettime',
+  'debug.iscfunction',
   'debug.newsecurefunction',
   'debug.setnewclosuretaint',
   'debug.setprofilingenabled',

@@ -10,6 +10,7 @@ local function doit(name, f)
   end
   depth = depth - 1
 end
+_G.oldassert = _G.assert
 _G.assert = require('luassert')
 _G.assert:set_parameter('TableFormatLevel', -1)
 _G.describe = doit

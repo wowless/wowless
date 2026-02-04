@@ -25,7 +25,7 @@ type:
                         late: tag
                         middle: tag
                   required:
-                    type: boolean
+                    type: flag
                   type:
                     required: true
                     type:
@@ -34,21 +34,21 @@ type:
                         number: tag
                         string: tag
                         stringenum:
-                          ref: stringenum
+                          ref:
+                            schema: stringenum
                         stringlist: tag
         contents:
           type:
             taggedunion:
               tags:
-                mapof:
-                  key:
-                    ref: xml
-                  value:
-                    record:
+                setof:
+                  ref:
+                    schema: xml
               text: tag
         extends:
           type:
-            ref: xml
+            ref:
+              schema: xml
         impl:
           type:
             taggedunion:
@@ -66,7 +66,8 @@ type:
                   parenttype:
                     required: true
                     type:
-                      ref: uiobject
+                      ref:
+                        schema: uiobject
               loadstring: tag
               scope: string
               script:
@@ -80,4 +81,4 @@ type:
               late: tag
               middle: tag
         virtual:
-          type: boolean
+          type: flag

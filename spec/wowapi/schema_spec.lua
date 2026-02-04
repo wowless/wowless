@@ -80,6 +80,41 @@ describe('schema', function()
         accept('table', {})
       end)
     end)
+    describe('flag', function()
+      it('accepts true', function()
+        accept('flag', true)
+      end)
+      it('rejects false', function()
+        reject('flag', false, 'want flag (boolean true), got boolean (false)')
+      end)
+      it('rejects nil', function()
+        reject('flag', nil, 'want flag (boolean true), got nil')
+      end)
+      it('rejects numbers', function()
+        reject('flag', 42, 'want flag (boolean true), got number')
+      end)
+      it('rejects strings', function()
+        reject('flag', 'true', 'want flag (boolean true), got string')
+      end)
+      it('rejects tables', function()
+        reject('flag', {}, 'want flag (boolean true), got table')
+      end)
+      it('works in optional record fields', function()
+        local ty = {
+          record = {
+            optionalFlag = { type = 'flag' },
+            other = { type = 'string' },
+          },
+        }
+        accept(ty, { other = 'test' })
+        accept(ty, { optionalFlag = true, other = 'test' })
+        reject(
+          ty,
+          { optionalFlag = false, other = 'test' },
+          { optionalFlag = 'want flag (boolean true), got boolean (false)' }
+        )
+      end)
+    end)
     describe('record', function()
       local ty = {
         record = {
@@ -253,6 +288,24 @@ describe('schema', function()
       end)
       it('rejects tables', function()
         reject(ty, {}, 'string literal mismatch')
+      end)
+    end)
+    describe('setof', function()
+      it('accepts empty set', function()
+        accept({ setof = 'string' }, {})
+      end)
+      it('accepts non empty set', function()
+        accept({ setof = 'string' }, { a = {}, b = {} })
+      end)
+      it('rejects wrong keys', function()
+        reject({ setof = 'string' }, { [42] = {} }, { [42] = { key = 'want string, got number' } })
+      end)
+      it('rejects wrong values', function()
+        reject(
+          { setof = 'string' },
+          { a = 42, b = { 99 } },
+          { a = { value = 'bad value' }, b = { value = 'bad value' } }
+        )
       end)
     end)
     describe('taggedunion', function()
