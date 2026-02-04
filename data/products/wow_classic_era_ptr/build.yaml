@@ -1,7 +1,7 @@
-build: '60141'
-date: Apr  3 2025
-gametype: Vanilla
-hash: 93d72b981dcdd119d0c15f7a0d2bcab6
+build: '65295'
+date: Jan  7 2026
+gametype: TBC
+hash: 84eef1812be911ccbc1f850ce55d5d93
 test: false
-tocversion: 11507
-version: 1.15.7
+tocversion: 20505
+version: 2.5.5

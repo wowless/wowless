@@ -96,17 +96,16 @@ local specDefault = (function()
       return valstruct(ty.structure)
     end
     if ty.enum then
-      local e = assert(globals.Enum[ty.enum], 'missing enum ' .. ty.enum)
-      -- Unfortunately we cannot rely on the existence of a Meta enum,
-      -- so we go fishing for the minimum value manually.
-      local x
-      for _, v in pairs(e) do
-        x = (not x or v < x) and v or x
-      end
-      return valstr(x)
+      assert(globals.Enum[ty.enum], 'missing enum ' .. ty.enum)
+      local meta = assert(globals.Enum[ty.enum .. 'Meta'], 'missing meta enum for ' .. ty.enum)
+      local min = assert(meta.MinValue, 'missing MinValue in meta for ' .. ty.enum)
+      return valstr(min)
     end
     if ty.uiobject then
       return ('gencode.CreateUIObject(%q).luarep'):format(ty.uiobject:lower())
+    end
+    if ty.luaobject then
+      return ('gencode.CreateLuaObject(%q).luarep'):format(ty.luaobject)
     end
     error('unexpected type: ' .. require('pl.pretty').write(ty))
   end
@@ -208,6 +207,7 @@ local function mkapi(apicfg)
         outstride = apicfg.outstride,
         sqls = impl.sqls,
         src = impl.src,
+        usage = apicfg.usage,
       }
     end
   elseif apicfg.stubnothing then
@@ -233,6 +233,7 @@ local function mkapi(apicfg)
       inputs = apicfg.inputs,
       instride = apicfg.instride,
       modules = { 'gencode' },
+      secureonly = apicfg.secureonly,
     }
   end
 end
@@ -259,9 +260,62 @@ for k, v in pairs(parseYaml('data/products/' .. product .. '/events.yaml')) do
     table.insert(t, specDefault(f))
   end
   events[k] = {
+    callback = v.callback,
+    noscript = v.noscript,
     payload = v.payload,
+    restricted = v.restricted,
     stride = v.stride,
     stub = 'return ' .. table.concat(t, ','),
+  }
+end
+
+local function stubby(mv)
+  local t = { 'local gencode=...;' }
+  local ins = mv.inputs or {}
+  local nsins = #ins - (mv.instride or 0)
+  for i = 1, #ins do
+    table.insert(t, 'local spec' .. i .. '=' .. plprettywrite(mv.inputs[i], '') .. ';')
+  end
+  table.insert(t, 'return function(_')
+  for i = 1, nsins do
+    table.insert(t, ',arg' .. i)
+  end
+  if mv.instride then
+    table.insert(t, ',...')
+  end
+  table.insert(t, ')')
+  for i = 1, nsins do
+    table.insert(t, 'gencode.Check(spec' .. i .. ',arg' .. i .. ');')
+  end
+  if mv.instride then
+    table.insert(t, 'for i=1,select("#",...),' .. mv.instride .. ' do ')
+    table.insert(t, 'local arg' .. nsins + 1)
+    for i = nsins + 2, #ins do
+      table.insert(t, ',arg' .. i)
+    end
+    table.insert(t, '=select(i,...);')
+    for i = nsins + 1, #ins do
+      table.insert(t, 'gencode.Check(spec' .. i .. ',arg' .. i .. ');')
+    end
+    table.insert(t, 'end ')
+  end
+  table.insert(t, 'return ')
+  local outs = mv.outputs or {}
+  local rets = {}
+  local nonstride = #outs - (mv.outstride or 0)
+  for i = 1, nonstride do
+    table.insert(rets, specDefault(outs[i]))
+  end
+  for _ = 1, mv.stuboutstrides or 1 do
+    for j = nonstride + 1, #outs do
+      table.insert(rets, specDefault(outs[j]))
+    end
+  end
+  table.insert(t, table.concat(rets, ','))
+  table.insert(t, ' end')
+  return {
+    impl = table.concat(t),
+    modules = { 'gencode' },
   }
 end
 
@@ -283,8 +337,11 @@ local function mkuiobjectinit(k)
       if fv.init ~= nil then
         init[fk] = valstr(fv.init)
       elseif fv.type == 'hlist' then
-        init[fk] = 'hlist()'
+        init[fk] = 'gencode.hlist()'
       end
+    end
+    if k == 'EditBox' or k == 'MessageFrame' then -- TODO unhack
+      init.fontObject = 'gencode.CreateUIObject(\'font\')'
     end
     uiobjectinits[k] = init
   end
@@ -333,55 +390,7 @@ local uiobjectimplmakers = {
       modules = { 'gencode' },
     }
   end,
-  none = function(mv)
-    local t = { 'local gencode=...;' }
-    local ins = mv.inputs or {}
-    local nsins = #ins - (mv.instride or 0)
-    for i = 1, #ins do
-      table.insert(t, 'local spec' .. i .. '=' .. plprettywrite(mv.inputs[i], '') .. ';')
-    end
-    table.insert(t, 'return function(_')
-    for i = 1, nsins do
-      table.insert(t, ',arg' .. i)
-    end
-    if mv.instride then
-      table.insert(t, ',...')
-    end
-    table.insert(t, ')')
-    for i = 1, nsins do
-      table.insert(t, 'gencode.Check(spec' .. i .. ',arg' .. i .. ');')
-    end
-    if mv.instride then
-      table.insert(t, 'for i=1,select("#",...),' .. mv.instride .. ' do ')
-      table.insert(t, 'local arg' .. nsins + 1)
-      for i = nsins + 2, #ins do
-        table.insert(t, ',arg' .. i)
-      end
-      table.insert(t, '=select(i,...);')
-      for i = nsins + 1, #ins do
-        table.insert(t, 'gencode.Check(spec' .. i .. ',arg' .. i .. ');')
-      end
-      table.insert(t, 'end ')
-    end
-    table.insert(t, 'return ')
-    local outs = mv.outputs or {}
-    local rets = {}
-    local nonstride = #outs - (mv.outstride or 0)
-    for i = 1, nonstride do
-      table.insert(rets, specDefault(outs[i]))
-    end
-    for _ = 1, mv.stuboutstrides or 1 do
-      for j = nonstride + 1, #outs do
-        table.insert(rets, specDefault(outs[j]))
-      end
-    end
-    table.insert(t, table.concat(rets, ','))
-    table.insert(t, ' end')
-    return {
-      impl = table.concat(t),
-      modules = { 'gencode' },
-    }
-  end,
+  none = stubby,
   setter = function(impl, mv)
     local t = { 'local gencode=...;' }
     for i in ipairs(impl) do
@@ -448,7 +457,7 @@ local uiobjectimplmakers = {
 }
 local uiobjects = {}
 for k, v in pairs(uiobjectdata) do
-  local constructor = { 'local hlist=...;return function()return{' }
+  local constructor = { 'local gencode=...;return function()return{' }
   for fk, fv in sorted(mkuiobjectinit(k)) do
     table.insert(constructor, ('%s=%s,'):format(fk, fv))
   end
@@ -471,6 +480,32 @@ for k, v in pairs(uiobjectdata) do
   }
 end
 
+local luaobjects = {}
+do
+  local luaobjectdata = parseYaml('data/products/' .. product .. '/luaobjects.yaml')
+  for k, v in pairs(luaobjectdata) do
+    local methods = {}
+    if v.impl then
+      for mk in pairs(v.methods or {}) do
+        methods[mk] = {
+          impl = ('return (...).methods[%q]'):format(mk),
+          modules = { v.impl },
+        }
+      end
+    else
+      for mk, mv in pairs(v.methods or {}) do
+        methods[mk] = stubby(mv)
+      end
+    end
+    luaobjects[k] = {
+      impl = v.impl,
+      inherits = v.inherits,
+      methods = methods,
+      virtual = v.virtual,
+    }
+  end
+end
+
 local data = {
   apis = apis,
   build = parseYaml('data/products/' .. product .. '/build.yaml'),
@@ -478,6 +513,7 @@ local data = {
   cvars = cvars,
   events = events,
   globals = globals,
+  luaobjects = luaobjects,
   product = product,
   sqls = sqls,
   structures = structures,

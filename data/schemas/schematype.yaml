@@ -3,6 +3,7 @@ type:
   taggedunion:
     any: tag
     boolean: tag
+    flag: tag
     literal: string
     mapof:
       record:
@@ -21,32 +22,42 @@ type:
         value:
           record:
             required:
-              type: boolean
+              type: flag
             type:
               required: true
               type:
                 schema: schematype
     ref:
-      taggedunion:
-        api: tag
-        cvar: tag
-        enum: tag
-        event: tag
-        family: tag
-        gametype: tag
-        impl: tag
-        module: tag
-        schema: tag
-        scripttype: tag
-        sql: tag
-        stringenum: tag
-        structure: tag
-        uiobject: tag
-        uiobjectimpl: tag
-        xml: tag
+      record:
+        negative:
+          type: flag
+        schema:
+          required: true
+          type:
+            taggedunion:
+              api: tag
+              cvar: tag
+              enum: tag
+              event: tag
+              family: tag
+              gametype: tag
+              impl: tag
+              luaobject: tag
+              module: tag
+              schema: tag
+              scripttype: tag
+              sql: tag
+              stringenum: tag
+              structure: tag
+              uiobject: tag
+              uiobjectimpl: tag
+              xml: tag
     schema:
-      ref: schema
+      ref:
+        schema: schema
     sequenceof:
+      schema: schematype
+    setof:
       schema: schematype
     string: tag
     table: tag

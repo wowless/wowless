@@ -23,6 +23,83 @@ G.testsuite.uiobjects = function()
       }
     end,
 
+    EditBox = function()
+      return {
+        fontobject = function()
+          if _G.__wowless then
+            return
+          end
+          local eb = CreateFrame('EditBox')
+          eb:Hide()
+          local fo = assert(retn(1, eb:GetFontObject()))
+          local eb2 = CreateFrame('EditBox')
+          eb2:Hide()
+          local fo2 = assert(retn(1, eb2:GetFontObject()))
+          assert(fo ~= fo2)
+          check1('Font', fo:GetObjectType())
+          check1(nil, fo:GetFontObject())
+          check3(nil, 0, '', fo:GetFont())
+          check1(fo, eb:GetFontObject())
+          check0(eb:SetFontObject(fo2))
+          check1(fo, eb:GetFontObject())
+          assert(not pcall(eb.SetFontObject, eb, nil))
+        end,
+      }
+    end,
+
+    Font = function()
+      return {
+        loop0 = function()
+          local font = CreateFont('WowlessFontObjectLoop0Test')
+          local err = 'WowlessFontObjectLoop0Test:SetFontObject(): Can\'t create a font object loop'
+          check2(false, err, pcall(font.SetFontObject, font, font))
+        end,
+        loop1 = function()
+          local font1 = CreateFont('WowlessFontObjectLoop1Test1')
+          local font2 = CreateFont('WowlessFontObjectLoop1Test2')
+          check0(font2:SetFontObject(font1))
+          local err = 'WowlessFontObjectLoop1Test1:SetFontObject(): Can\'t create a font object loop'
+          check2(false, err, pcall(font1.SetFontObject, font1, font2))
+        end,
+        name = function()
+          local name = 'WowlessFontObjectNameTest'
+          local font1 = retn(1, CreateFont(name))
+          assertEquals(font1, _G[name])
+          check1(name, font1:GetName())
+          check1(font1, CreateFont(name))
+          _G[name] = nil
+          check1(name, font1:GetName())
+          check1(font1, CreateFont(name))
+        end,
+        noname = function()
+          local usage = 'Usage: CreateFont("name")'
+          check2(false, usage, pcall(CreateFont))
+          check2(false, usage, pcall(CreateFont, nil))
+        end,
+        numbername = function()
+          local n = 1759244889
+          local s = tostring(n)
+          local font = retn(1, CreateFont(n))
+          assertEquals(nil, _G[n])
+          assertEquals(font, _G[s])
+          check1(s, font:GetName())
+          assertEquals(font, retn(1, CreateFont(s)))
+        end,
+        vfs = function()
+          if _G.__wowless then -- TODO support
+            return
+          end
+          local font = CreateFont('WowlessFontObjectVfsTest')
+          local fontname = ('Interface\\AddOns\\%s\\framework.lua'):format(addonName)
+          check1(nil, font:GetFontObject())
+          check3(nil, 0, '', font:GetFont())
+          check0(font:SetFont(fontname, 12, ''))
+          check1(nil, font:GetFontObject())
+          check3(fontname, 12, '', font:GetFont())
+        end,
+      }
+    end,
+
     Frame = function()
       return {
         ['attributes'] = function()
@@ -255,6 +332,14 @@ G.testsuite.uiobjects = function()
           assertEquals(g, mv)
           assertEquals(nil, f.moo)
         end,
+        ['RegisterEventCallback accepts funtainer arg'] = function()
+          local f = retn(1, CreateFrame('Frame'))
+          if not f.RegisterEventCallback then
+            return
+          end
+          local ft = _G.C_FunctionContainers.CreateCallback(function() end)
+          return match(1, true, f:RegisterEventCallback('ENCOUNTER_STATE_CHANGED', ft))
+        end,
         ['support $parent in frame names'] = function()
           local parent = retn(1, CreateFrame('Frame', 'WowlessParentNameTestMoo'))
           local t = {
@@ -397,6 +482,30 @@ G.testsuite.uiobjects = function()
               }
             end,
           }
+        end,
+      }
+    end,
+
+    MessageFrame = function()
+      return {
+        fontobject = function()
+          if _G.__wowless then
+            return
+          end
+          local mf = CreateFrame('MessageFrame')
+          mf:Hide()
+          local fo = assert(retn(1, mf:GetFontObject()))
+          local mf2 = CreateFrame('MessageFrame')
+          mf2:Hide()
+          local fo2 = assert(retn(1, mf2:GetFontObject()))
+          assert(fo ~= fo2)
+          check1('Font', fo:GetObjectType())
+          check1(nil, fo:GetFontObject())
+          check3(nil, 0, '', fo:GetFont())
+          check1(fo, mf:GetFontObject())
+          check0(mf:SetFontObject(fo2))
+          check1(fo, mf:GetFontObject())
+          assert(not pcall(mf.SetFontObject, mf, nil))
         end,
       }
     end,
@@ -722,7 +831,7 @@ G.testsuite.uiobjects = function()
         end,
         rect = function()
           local f = CreateFrame('Frame')
-          local w, h = GetScreenWidth(), GetScreenHeight()
+          local _, _, w, h = _G.WorldFrame:GetRect()
           local states = {
             init = function()
               check1(false, f:IsRectValid())
@@ -1095,6 +1204,14 @@ G.testsuite.uiobjects = function()
           return G.checkStateMachine(states, transitions, 'init')
         end,
       }
+    end,
+    TextureCoordTranslation = function()
+      if _G.__wowless then
+        return
+      end
+      -- Cannot be created via Lua CreateAnimation.
+      local a = retn(1, CreateFrame('Frame'):CreateAnimationGroup():CreateAnimation('TextureCoordTranslation'))
+      return match(1, 'Animation', a:GetObjectType())
     end,
   }
 end

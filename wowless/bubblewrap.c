@@ -9,6 +9,10 @@ static int bubblewrapper(lua_State *L) {
   lua_settaintmode(L, LUA_TAINTDISABLED);
   const char *intaint = lua_getstacktaint(L);
   lua_setstacktaint(L, 0);
+  if (intaint) {
+    lua_pushstring(L, intaint);
+    lua_setfield(L, LUA_ENVIRONINDEX, "THETAINT");
+  }
   lua_pushvalue(L, lua_upvalueindex(1));
   lua_insert(L, 1);
   int err = lua_pcall(L, lua_gettop(L) - 1, LUA_MULTRET, 0);
@@ -16,6 +20,8 @@ static int bubblewrapper(lua_State *L) {
   const char *outtaint = lua_getstacktaint(L);
   lua_setstacktaint(L, intaint);
   lua_settaintmode(L, LUA_TAINTRDRW);
+  lua_pushnil(L);
+  lua_setfield(L, LUA_ENVIRONINDEX, "THETAINT");
   if (outmode != LUA_TAINTDISABLED) {
     return luaL_error(L, "wowless bug: host taint mode %d", outmode);
   }

@@ -2,7 +2,10 @@ local Mixin = require('wowless.util').mixin
 local deepcopy = require('pl.tablex').deepcopy
 
 local function dump(uiobjects)
-  local d = require('pl.pretty').dump
+  local function d(x)
+    io.write(require('pl.pretty').write(x))
+    io.write('\n')
+  end
   return function(...)
     for _, x in ipairs({ ... }) do
       d(x)
@@ -16,11 +19,17 @@ local function dump(uiobjects)
 end
 
 local function init(modules, lite)
-  local impls = modules.apiloader(modules)
+  local impls, secureimpls = modules.apiloader(modules)
   Mixin(modules.env.genv, deepcopy(impls))
   Mixin(modules.env.genv, deepcopy(modules.datalua.globals))
-  Mixin(modules.env.secureenv, deepcopy(impls))
+  Mixin(modules.env.secureenv, deepcopy(secureimpls))
   Mixin(modules.env.secureenv, deepcopy(modules.datalua.globals))
+
+  modules.env.genv._G = modules.env.genv
+  modules.env.genv.math.huge = math.huge
+  modules.env.genv.math.pi = math.pi
+  modules.env.secureenv.math.huge = math.huge
+  modules.env.secureenv.math.pi = math.pi
 
   local wowlessDebug = Mixin({}, debug)
   wowlessDebug.debug = function()
@@ -52,11 +61,15 @@ local function init(modules, lite)
     dump = dump(modules.uiobjects),
     lite = lite,
     platform = modules.platform.platform,
+    printf = function(fmt, ...)
+      io.stdout:write(string.format(fmt, ...))
+    end,
     product = modules.datalua.product,
     quit = function(exitCode)
       modules.log(1, 'Bye!')
       os.exit(exitCode or 1)
     end,
+    traceback = require('wowless.ext').traceback,
   }
 end
 

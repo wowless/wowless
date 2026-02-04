@@ -413,6 +413,7 @@ add_custom_command(
   WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
   DEPFILE generated/sqls.yaml.d
   DEPENDS sqls data/sql.yaml)
+add_custom_target(stamp_sqls DEPENDS stamp/sqls.txt)
 
 lua2c(wowlessutil luapath=p wowless.mixin=c
       wowless.util=${CMAKE_CURRENT_SOURCE_DIR}/wowless/util.lua)
@@ -456,6 +457,8 @@ list(
   wow
   wowt
   wowxptr
+  wow_anniversary
+  wow_beta
   wow_classic
   wow_classic_beta
   wow_classic_era
@@ -479,7 +482,9 @@ foreach(product ${products})
     COMMAND dblist ${product}
     COMMAND ${CMAKE_COMMAND} -E copy_if_different generated/${f} runtime/${f}
     COMMAND ${CMAKE_COMMAND} -E touch stamp/${f}
-    DEPENDS dblist stamp/sqls.txt stamp/${product}.txt)
+    DEPENDS dblist runtime/sqls.yaml runtime/${product}.lua)
+  add_custom_target(stamp_${product}_dblist DEPENDS stamp/${f})
+  add_dependencies(stamp_${product}_dblist datalua_${product}_lua stamp_sqls)
 endforeach()
 
 FetchContent_Declare(
@@ -522,8 +527,10 @@ foreach(product ${products})
     COMMAND ${CMAKE_COMMAND} -E copy_if_different generated/${f} runtime/${f}
     COMMAND ${CMAKE_COMMAND} -E touch stamp/${f}
     DEPFILE generated/${f}.d
-    DEPENDS dbdefs stamp/${product}_dblist.lua
+    DEPENDS dbdefs runtime/${product}_dblist.lua
             runtime/products/${product}/build.lua)
+  add_custom_target(stamp_${product}_dbdefs DEPENDS stamp/${f})
+  add_dependencies(stamp_${product}_dbdefs stamp_${product}_dblist)
 endforeach()
 
 add_lua_executable(
@@ -549,8 +556,9 @@ foreach(product ${products})
             ${CMAKE_CURRENT_BINARY_DIR}/stamp/${product}.txt
     WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
     DEPFILE generated/${product}.lua.d
-    DEPENDS prep stamp/sqls.txt)
+    DEPENDS prep runtime/sqls.yaml)
   add_custom_target(datalua_${product}_lua DEPENDS stamp/${product}.txt)
+  add_dependencies(datalua_${product}_lua stamp_sqls)
   lua2c(datalua_${product}
         build.products.${product}.data=runtime/${product}.lua)
   add_dependencies(datalua_${product} datalua_${product}_lua)
@@ -574,12 +582,12 @@ foreach(product ${products})
   add_custom_command(
     OUTPUT ${product}_schema.sqlite3
     COMMAND sqlite ${product}
-    DEPENDS sqlite stamp/${product}_dbdefs.lua stamp/${product}_dblist.lua)
+    DEPENDS sqlite runtime/${product}_dbdefs.lua runtime/${product}_dblist.lua)
   list(APPEND schemadbs ${product}_schema.sqlite3)
   add_custom_command(
     OUTPUT ${product}_data.sqlite3
     COMMAND sqlite -f ${product}
-    DEPENDS sqlite stamp/${product}_dbdefs.lua stamp/${product}_dblist.lua
+    DEPENDS sqlite runtime/${product}_dbdefs.lua runtime/${product}_dblist.lua
             ${product}_fetch.txt)
 endforeach()
 
@@ -608,6 +616,7 @@ add_lua_executable(
   runtimelistfile
   toolsdb2
   toolstactless
+  toolsutil
   wowlesstoc)
 
 foreach(product ${products})
@@ -616,7 +625,7 @@ foreach(product ${products})
     OUTPUT ${out}
     COMMAND fetch ${product}
     COMMAND ${CMAKE_COMMAND} -E touch ${out}
-    DEPENDS fetch stamp/${product}_dblist.lua
+    DEPENDS fetch runtime/${product}_dblist.lua
             runtime/products/${product}/build.lua)
 endforeach()
 
@@ -650,6 +659,7 @@ foreach(product ${products})
   gentest(globalapis.lua globalapis)
   gentest(globals.lua globals)
   gentest(impltests.lua impltests)
+  gentest(luaobjects.lua luaobjects)
   gentest(namespaceapis.lua namespaceapis)
   gentest(product.lua product)
   gentest(uiobjectapis.lua uiobjectapis)
@@ -702,6 +712,7 @@ foreach(product ${products})
     docs
     events
     globals
+    luaobjects
     structures
     uiobjects
     xml)
@@ -728,6 +739,7 @@ list(
   gametypes
   globals
   impl
+  luaobjects
   modules
   products
   schema
@@ -773,6 +785,7 @@ add_lua_executable(
   penlight
   toolstedit
   toolsutil
+  tsort
   wowapischema
   wowlessyaml)
 foreach(product ${products})
@@ -837,9 +850,12 @@ lua2c(
   wowless.modules.datetime=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/datetime.lua
   wowless.modules.env=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/env.lua
   wowless.modules.events=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/events.lua
+  wowless.modules.fontinstance=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/fontinstance.lua
   wowless.modules.funcheck=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/funcheck.lua
+  wowless.modules.funtainer=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/funtainer.lua
   wowless.modules.gencode=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/gencode.lua
   wowless.modules.loader=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/loader.lua
+  wowless.modules.luaobjects=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/luaobjects.lua
   wowless.modules.macrotext=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/macrotext.lua
   wowless.modules.mainloop=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/mainloop.lua
   wowless.modules.parentkey=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/parentkey.lua
@@ -850,6 +866,7 @@ lua2c(
   wowless.modules.security=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/security.lua
   wowless.modules.sqlitedb=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/sqlitedb.lua
   wowless.modules.sqls=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/sqls.lua
+  wowless.modules.statusbar=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/statusbar.lua
   wowless.modules.system=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/system.lua
   wowless.modules.talents=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/talents.lua
   wowless.modules.templates=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/templates.lua
@@ -884,26 +901,34 @@ add_lua_executable(
   wowlessutil
   wowlessyaml)
 
+# Wowless runs are resource intensive.
+set_property(GLOBAL PROPERTY JOB_POOLS wowless_run=5)
+
+set(outdeps)
 set(outs)
 set(pngs)
 foreach(product ${products})
   set(out products/${product}/log.txt)
   list(APPEND outs ${out})
+  list(APPEND outdeps stamp_${product}_dbdefs stamp_${product}_dblist)
   add_custom_target(
     ${product} DEPENDS wowless testaddon.txt ${product}_addon.txt
                        ${product}_data.sqlite3)
+  add_dependencies(${product} stamp_${product}_dbdefs stamp_${product}_dblist)
   add_custom_command(
     OUTPUT ${out}
     COMMAND
       wowless run -p ${product} -e5 -a addon/Wowless -a
       ${CMAKE_CURRENT_BINARY_DIR}/products/${product}/WowlessData -o
       ${CMAKE_CURRENT_BINARY_DIR}/${out}
+    JOB_POOL wowless_run
     DEPENDS wowless testaddon.txt ${product}_addon.txt ${product}_data.sqlite3
     WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
   add_custom_command(
     OUTPUT products/${product}/frame0.yaml products/${product}/frame1.yaml
     COMMAND wowless run -p ${product} -e0 -o
             ${CMAKE_CURRENT_BINARY_DIR}/products/${product}/frame0.txt --frame0
+    JOB_POOL wowless_run
     DEPENDS wowless ${product}_data.sqlite3
     WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
   add_custom_command(
@@ -920,7 +945,9 @@ foreach(product ${products})
        products/${product}/frame1.png)
 endforeach()
 add_custom_target(outs DEPENDS ${outs})
+add_dependencies(outs ${outdeps})
 add_custom_target(pngs DEPENDS ${pngs})
+add_dependencies(pngs ${outdeps})
 
 add_lua_executable(
   runtests
@@ -953,6 +980,8 @@ add_custom_command(
           addon/Wowless/generated.lua
           addon/Wowless/init.lua
           addon/Wowless/statemachine.lua
+          addon/Wowless/funtainer.lua
+          addon/Wowless/luaobjects.lua
           addon/Wowless/test.lua
           addon/Wowless/test.xml
           addon/Wowless/uiobjects.lua
@@ -1028,3 +1057,6 @@ add_custom_target(
   COMMAND ${GIT_EXECUTABLE} -C vendor/dbdefs checkout master
   COMMAND ${GIT_EXECUTABLE} -C vendor/dbdefs pull
   WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
+
+add_lua_executable(warnings ${CMAKE_CURRENT_SOURCE_DIR}/tools/warnings.lua
+                   wowlessyaml)

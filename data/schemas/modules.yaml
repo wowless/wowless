@@ -5,11 +5,9 @@ type:
     value:
       taggedunion:
         deps:
-          mapof:
-            key:
-              ref: module
-            value:
-              record:
+          setof:
+            ref:
+              schema: module
         root:
           record:
             default:

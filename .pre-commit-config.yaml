@@ -13,24 +13,24 @@ repos:
   hooks:
   - id: cmake-format
 - repo: https://github.com/editorconfig-checker/editorconfig-checker.python
-  rev: '3.4.0'
+  rev: '3.6.0'
   hooks:
   - id: editorconfig-checker
 - repo: https://github.com/JohnnyMorganz/StyLua
-  rev: v2.2.0
+  rev: v2.3.1
   hooks:
   - id: stylua-github
 - repo: https://github.com/Lucas-C/pre-commit-hooks
-  rev: v1.5.5
+  rev: v1.5.6
   hooks:
   - id: remove-crlf
   - id: forbid-tabs
 - repo: https://github.com/markdownlint/markdownlint
-  rev: v0.12.0
+  rev: v0.15.0
   hooks:
   - id: markdownlint
 - repo: https://github.com/pre-commit/mirrors-clang-format
-  rev: v21.1.1
+  rev: v21.1.8
   hooks:
   - id: clang-format
     types: [c]
@@ -41,7 +41,7 @@ repos:
     args:
     - --shell=bash
 - repo: https://github.com/sqlfluff/sqlfluff
-  rev: 3.4.2
+  rev: 4.0.0
   hooks:
   - id: sqlfluff-fix
 - repo: local

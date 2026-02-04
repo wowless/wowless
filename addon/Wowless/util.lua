@@ -14,6 +14,19 @@ local function assertEquals(expected, actual, msg, depth)
   end
 end
 
+local function assertEqualSets(expected, actual)
+  for k in pairs(expected) do
+    if not actual[k] then
+      error(('missing %q'):format(k), 0)
+    end
+  end
+  for k in pairs(actual) do
+    if not expected[k] then
+      error(('extra %q'):format(k), 0)
+    end
+  end
+end
+
 local function assertRecursivelyEqual(expected, actual)
   local ty = type(expected)
   assertEquals(ty, type(actual))
@@ -143,6 +156,7 @@ end
 
 G.addonEnv = G
 G.assertEquals = assertEquals
+G.assertEqualSets = assertEqualSets
 G.assertRecursivelyEqual = assertRecursivelyEqual
 G.check0 = check0
 G.check1 = check1

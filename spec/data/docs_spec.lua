@@ -23,7 +23,6 @@ describe('docs', function()
       local docs = require('build.data.products.' .. p .. '.docs')
       local apis = require('build.data.products.' .. p .. '.apis')
       local enums = require('build.data.products.' .. p .. '.globals').Enum
-      local events = require('build.data.products.' .. p .. '.events')
       local uiobjects = require('build.data.products.' .. p .. '.uiobjects')
       describe('lies', function()
         local lies = docs.lies or {}
@@ -36,38 +35,11 @@ describe('docs', function()
             end)
           end
         end)
-        describe('extra_apis', function()
-          for k in pairs(lies.extra_apis or {}) do
-            describe(k, function()
-              it('must not be a global api', function()
-                assert.Nil(apis[k])
-              end)
-            end)
-          end
-        end)
         describe('enums', function()
           for k, v in pairs(lies.enums or {}) do
             describe(k, function()
               it('applies to the declared enum in reverse', function()
                 tedit(enums[k], revedit(v))
-              end)
-            end)
-          end
-        end)
-        describe('extra_enums', function()
-          for k in pairs(lies.extra_enums or {}) do
-            describe(k, function()
-              it('must not be a declared enum', function()
-                assert.Nil(enums[k])
-              end)
-            end)
-          end
-        end)
-        describe('extra_events', function()
-          for k in pairs(lies.extra_events or {}) do
-            describe(k, function()
-              it('must not be a declared event', function()
-                assert.Nil(events[k])
               end)
             end)
           end

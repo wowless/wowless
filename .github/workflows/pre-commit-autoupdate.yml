@@ -1,0 +1,10 @@
+name: pre-commit autoupdate
+on:
+  schedule:
+  - cron: 0 0 1 * *
+  workflow_dispatch:
+jobs:
+  autoupdate:
+    uses: browniebroke/github-actions/.github/workflows/pre-commit-autoupdate.yml@v1
+    secrets:
+      gh_pat: ${{ secrets.GITHUB_TOKEN }}

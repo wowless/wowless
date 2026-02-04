@@ -32,7 +32,7 @@ local function bfs(edges, from, to)
       end
     end
   until not next(q)
-  error(('failed to find a path from %q to %q'):format(from, to))
+  error(('failed to find a path from %q to %q'):format(from, to), 0)
 end
 
 local function checkStateMachine(states, transitions, init, arg)
@@ -93,39 +93,37 @@ local function checkStateMachine(states, transitions, init, arg)
   for k in pairs(edges) do
     toinit[k] = bfs(edges, k, init)
   end
-  local function checkState(s, n)
+  local function checkState(s)
     local success, msg = pcall(states[s], arg)
     if not success then
-      error(('%s state: %s'):format(n, msg), 0)
+      error(('%s state: %s'):format(s, msg), 0)
     end
   end
-  local function checkTransition(t, n)
+  local function checkTransition(from, to, t)
     local success, msg = pcall(transitions[t].func, arg)
     if not success then
-      error(('%s transition: %s'):format(n, msg), 0)
+      error(('%s transition from %s to %s: %s'):format(t, from, to, msg), 0)
+    end
+    success, msg = pcall(states[to], arg)
+    if not success then
+      error(('%s transition from %s to %s poststate: %s'):format(t, from, to, msg), 0)
     end
   end
-  local function checkPath(p, n)
+  local function checkPath(p)
     for i = 2, #p do
+      local from, to = p[i - 1], p[i]
       -- Just take the first available transition, we don't care what it is.
-      checkTransition(next(edges[p[i - 1]][p[i]]), n)
+      local transition = next(edges[from][to])
+      checkTransition(from, to, transition)
     end
   end
+  checkState(init)
   for from, tos in pairs(edges) do
     for to, ts in pairs(tos) do
       for t in pairs(ts) do
-        local success, msg = pcall(function()
-          checkState(init, 'init')
-          checkPath(frominit[from], 'init -> from')
-          checkState(from, 'from')
-          checkTransition(t, 'from -> to')
-          checkState(to, 'to')
-          checkPath(toinit[to], 'to -> init')
-          checkState(init, 'postinit')
-        end)
-        if not success then
-          error(('failure on %s -> %s transition %s: %s'):format(from, to, t, msg), 0)
-        end
+        checkPath(frominit[from])
+        checkTransition(from, to, t)
+        checkPath(toinit[to])
       end
     end
   end

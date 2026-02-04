@@ -2,11 +2,7 @@ SELECT
   Name,
   Icon,
   _Row,
-  _Column,
-  0 AS rank,
-  1 AS maxRank,
-  0 AS isExceptional,
-  0 AS available
+  _Column
 FROM
   (
     SELECT

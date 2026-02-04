@@ -62,7 +62,11 @@ EditBox/Enable:
 EditBox/Insert:
   luafile:
 FontInstance/GetFontObject:
-  luafile:
+  moduledelegate:
+    name: fontinstance
+FontInstance/SetFontObject:
+  moduledelegate:
+    name: fontinstance
 FontString/SetText:
   luafile:
 ForbiddenMixin/SetForbidden:
@@ -103,6 +107,9 @@ Frame/RegisterAllEvents:
   moduledelegate:
     name: events
 Frame/RegisterEvent:
+  moduledelegate:
+    name: events
+Frame/RegisterEventCallback:
   moduledelegate:
     name: events
 Frame/RegisterUnitEvent:
@@ -277,9 +284,17 @@ Slider/Disable:
 Slider/Enable:
   luafile:
 StatusBar/GetStatusBarColor:
-  luafile:
+  moduledelegate:
+    name: statusbar
+StatusBar/SetMinMaxValues:
+  moduledelegate:
+    name: statusbar
 StatusBar/SetStatusBarColor:
-  luafile:
+  moduledelegate:
+    name: statusbar
+StatusBar/SetValue:
+  moduledelegate:
+    name: statusbar
 Texture/GetTexture:
   luafile:
     modules:
@@ -299,10 +314,8 @@ Texture/SetTexCoord:
 Texture/SetTexture:
   luafile:
 UIObject/GetObjectType:
-  luafile:
-    modules:
-      uiobjecttypes:
+  moduledelegate:
+    name: uiobjecttypes
 UIObject/IsObjectType:
-  luafile:
-    modules:
-      uiobjecttypes:
+  moduledelegate:
+    name: uiobjecttypes

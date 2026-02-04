@@ -698,11 +698,10 @@
     </Frames>
   </Frame>
 
-  <Frame name='WowlessUIObjectTest'>
+  <Frame name='WowlessTextureCoordTranslationFactory' virtual='true'>
     <Animations>
       <AnimationGroup parentKey='AnimationGroup'>
-        <TextureCoordTranslation parentKey='TextureCoordTranslation1' />
-        <TextureCoordTranslation parentKey='TextureCoordTranslation2' />
+        <TextureCoordTranslation parentKey='TextureCoordTranslation' />
       </AnimationGroup>
     </Animations>
   </Frame>

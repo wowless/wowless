@@ -31,6 +31,7 @@ local productschemas = {
   docs = 'docs',
   events = 'events',
   globals = 'globals',
+  luaobjects = 'luaobjects',
   structures = 'structures',
   uiobjects = 'uiobjects',
   xml = 'xml',

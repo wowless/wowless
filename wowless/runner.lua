@@ -65,9 +65,28 @@ local function run(cfg)
   local genv = modules.env.genv
   return withglobaltable(genv, function()
     require('wowless.env').init(modules, not cfg.dir)
+    if cfg.trackenums then
+      for ek, ev in pairs(genv.Enum) do
+        setmetatable(ev, {
+          __newindex = function(t, k, v)
+            log(0, 'TRACKENUMS %s VALUE %s %s', v == nil and 'DELETING' or 'WRITING', ek, k)
+            rawset(t, k, v)
+          end,
+        })
+      end
+      local enums = genv.Enum
+      genv.Enum = setmetatable({}, {
+        __index = enums,
+        __newindex = function(_, k, v)
+          log(0, 'TRACKENUMS %s %s', v == nil and 'DELETING' or 'WRITING', k)
+          enums[k] = v
+        end,
+      })
+    end
     for k, v in pairs(modules.uiobjectloader(modules)) do
       modules.uiobjecttypes.Add(k, v)
     end
+    modules.luaobjects.LoadTypes(modules)
     loader.initAddons()
     if cfg.dir then
       loader.loadFrameXml()
@@ -103,6 +122,15 @@ local function run(cfg)
     if datalua.events.COOLDOWN_VIEWER_DATA_LOADED then
       SendEvent('COOLDOWN_VIEWER_DATA_LOADED')
     end
+    if datalua.events.COMBAT_LOG_APPLY_FILTER_SETTINGS then
+      SendEvent('COMBAT_LOG_APPLY_FILTER_SETTINGS', {
+        colors = {
+          unitColoring = {},
+        },
+        filters = {},
+        settings = {},
+      })
+    end
     if cfg.frame0 and cfg.output then
       local render = require('wowless.render')
       local screenWidth, screenHeight = system.GetScreenWidth(), system.GetScreenHeight()
@@ -122,10 +150,23 @@ local function run(cfg)
 
     local scripts = {
       bindings = function()
+        local skip = runnercfg.skip_bindings or {}
+        if cfg.dir then
+          for name in pairs(skip) do
+            CallSafely(function()
+              assert(loader.bindings[name], 'missing skip_bindings ' .. name)
+            end)
+          end
+        end
         for name, fn in sorted(loader.bindings) do
-          log(2, 'firing binding ' .. name)
-          CallSandbox(fn, 'down')
-          CallSandbox(fn, 'up')
+          if skip[name] then
+            log(2, 'skipping binding %s per config', name)
+            skip[name] = nil
+          else
+            log(2, 'firing binding %s', name)
+            CallSandbox(fn, 'down')
+            CallSandbox(fn, 'up')
+          end
         end
       end,
       clicks = function()

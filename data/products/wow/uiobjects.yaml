@@ -57,6 +57,14 @@ Actor:
     ClearModel:
       inputs:
       outputs:
+    DetachFromMount:
+      inputs:
+      - name: rider
+        type:
+          uiobject: Actor
+      outputs:
+      - name: success
+        type: boolean
     Dress:
       inputs:
       outputs:
@@ -240,6 +248,11 @@ Actor:
       outputs:
       - name: isLoaded
         type: boolean
+    IsPreferringModelCollisionBounds:
+      inputs:
+      outputs:
+      - name: preferringCollisionBounds
+        type: boolean
     IsSlotAllowed:
       inputs:
       - name: inventorySlots
@@ -325,6 +338,17 @@ Actor:
       outputs:
       - name: success
         type: boolean
+    SetGradientMask:
+      inputs:
+      - name: gradientIndex0
+        type: number
+      - name: gradientIndex1
+        type: number
+      - name: gradientIndex2
+        type: number
+      - name: gradientIndex3
+        type: number
+      outputs:
     SetItemTransmogInfo:
       inputs:
       - name: transmogInfo
@@ -396,6 +420,9 @@ Actor:
       - default: false
         name: holdBowString
         type: boolean
+      - name: customRaceID
+        nilable: true
+        type: number
       outputs:
       - name: success
         type: boolean
@@ -446,6 +473,9 @@ Actor:
       - default: true
         name: usePlayerNativeForm
         type: boolean
+      - name: customRaceID
+        nilable: true
+        type: number
       outputs:
       - name: success
         type: boolean
@@ -457,6 +487,11 @@ Actor:
         type: number
       - name: positionZ
         type: number
+      outputs:
+    SetPreferModelCollisionBounds:
+      inputs:
+      - name: preferCollisionBounds
+        type: boolean
       outputs:
     SetRoll:
       impl:
@@ -1875,6 +1910,12 @@ ColorSelect:
     OnColorSelect:
 ControlPoint:
   fields:
+    offsetX:
+      init: 0
+      type: number
+    offsetY:
+      init: 0
+      type: number
     order:
       init: 99
       type: number
@@ -1882,6 +1923,10 @@ ControlPoint:
     ParentedObject:
   methods:
     GetOffset:
+      impl:
+        getter:
+        - name: offsetX
+        - name: offsetY
       inputs:
       outputs:
       - name: offsetX
@@ -1897,6 +1942,10 @@ ControlPoint:
       - name: order
         type: number
     SetOffset:
+      impl:
+        setter:
+        - name: offsetX
+        - name: offsetY
       inputs:
       - name: offsetX
         type: number
@@ -1949,6 +1998,13 @@ Cooldown:
         type: number
       - name: duration
         type: number
+    GetCountdownFontString:
+      inputs:
+      outputs:
+      - name: countdownString
+        nilable: true
+        type:
+          uiobject: FontString
     GetDrawBling:
       inputs:
       outputs:
@@ -1974,6 +2030,11 @@ Cooldown:
       outputs:
       - name: hideNumbers
         type: boolean
+    GetMinimumCountdownDuration:
+      inputs:
+      outputs:
+      - name: milliseconds
+        type: number
     GetReverse:
       inputs:
       outputs:
@@ -2032,6 +2093,25 @@ Cooldown:
       outputs:
     SetCooldownDuration:
       inputs:
+      - name: duration
+        type: number
+      - default: 1
+        name: modRate
+        type: number
+      outputs:
+    SetCooldownFromDurationObject:
+      inputs:
+      - name: duration
+        type:
+          luaobject: LuaDurationObject
+      - default: true
+        name: clearIfZero
+        type: boolean
+      outputs:
+    SetCooldownFromExpirationTime:
+      inputs:
+      - name: expirationTime
+        type: number
       - name: duration
         type: number
       - default: 1
@@ -2114,6 +2194,16 @@ Cooldown:
       inputs:
       - default: false
         name: hideNumbers
+        type: boolean
+      outputs:
+    SetMinimumCountdownDuration:
+      inputs:
+      - name: milliseconds
+        type: number
+      outputs:
+    SetPaused:
+      inputs:
+      - name: paused
         type: boolean
       outputs:
     SetReverse:
@@ -3040,6 +3130,10 @@ Font:
       outputs:
 FontInstance:
   fields:
+    fontObject:
+      nilable: true
+      type:
+        uiobject: Font
     indentedWordWrap:
       init: false
       type: boolean
@@ -3140,6 +3234,8 @@ FontInstance:
         type: number
     SetFont:
     SetFontObject:
+      impl:
+        uiobjectimpl: FontInstance/SetFontObject
       inputs:
       - name: font
         type:
@@ -3313,6 +3409,12 @@ FontString:
       outputs:
       - name: radians
         type: number
+    GetScaleAnimationMode:
+      inputs:
+      outputs:
+      - name: scaleAnimationMode
+        type:
+          enum: FontStringScaleAnimationMode
     GetStringHeight:
       inputs:
       outputs:
@@ -3402,6 +3504,12 @@ FontString:
       inputs:
       - name: radians
         type: number
+      outputs:
+    SetScaleAnimationMode:
+      inputs:
+      - name: scaleAnimationMode
+        type:
+          enum: FontStringScaleAnimationMode
       outputs:
     SetText:
       impl:
@@ -3946,6 +4054,11 @@ Frame:
       outputs:
       - name: locked
         type: boolean
+    IsIgnoringChildrenForBounds:
+      inputs:
+      outputs:
+      - name: ignore
+        type: boolean
     IsKeyboardEnabled:
       inputs:
       outputs:
@@ -4011,6 +4124,18 @@ Frame:
       outputs:
       - name: registered
         type: boolean
+    RegisterEventCallback:
+      impl:
+        uiobjectimpl: Frame/RegisterEventCallback
+      inputs:
+      - name: eventName
+        type: string
+      - name: cb
+        type:
+          luaobject: LuaFunctionContainer
+      outputs:
+      - name: registered
+        type: boolean
     RegisterForDrag:
       inputs:
       - name: buttons
@@ -4025,6 +4150,19 @@ Frame:
         type: string
       - name: units
         nilable: true
+        type: string
+      instride: 1
+      outputs:
+      - name: registered
+        type: boolean
+    RegisterUnitEventCallback:
+      inputs:
+      - name: eventName
+        type: string
+      - name: cb
+        type:
+          luaobject: LuaFunctionContainer
+      - name: units
         type: string
       instride: 1
       outputs:
@@ -4197,6 +4335,11 @@ Frame:
       - name: id
         type: number
       outputs:
+    SetIgnoringChildrenForBounds:
+      inputs:
+      - name: ignore
+        type: boolean
+      outputs:
     SetIsFrameBuffer:
       inputs:
       - name: isFrameBuffer
@@ -4355,10 +4498,22 @@ GameTooltip:
       - name: anchorType
         type: string
     GetCustomLineSpacing:
-    GetMinimumWidth:
-      outputs:
-      - name: minimumWidth
+    GetLeftLine:
+      inputs:
+      - name: line
         type: number
+      outputs:
+      - name: leftFontString
+        nilable: true
+        type:
+          uiobject: FontString
+    GetMinimumWidth:
+      inputs:
+      outputs:
+      - name: width
+        type: number
+      - name: forced
+        type: boolean
     GetOwner:
       impl:
         getter:
@@ -4370,6 +4525,25 @@ GameTooltip:
         type:
           uiobject: Frame
     GetPadding:
+      inputs:
+      outputs:
+      - name: right
+        type: number
+      - name: bottom
+        type: number
+      - name: left
+        type: number
+      - name: top
+        type: number
+    GetRightLine:
+      inputs:
+      - name: line
+        type: number
+      outputs:
+      - name: rightFontString
+        nilable: true
+        type:
+          uiobject: FontString
     IsOwned:
       impl:
         uiobjectimpl: GameTooltip/IsOwned
@@ -4394,6 +4568,13 @@ GameTooltip:
     SetCustomWordWrapMinWidth:
     SetFrameStack:
     SetMinimumWidth:
+      inputs:
+      - name: width
+        type: number
+      - default: false
+        name: force
+        type: boolean
+      outputs:
     SetObjectTooltipPosition:
     SetOwner:
       impl:
@@ -4407,8 +4588,36 @@ GameTooltip:
         type: string
       outputs:
     SetPadding:
+      inputs:
+      - name: right
+        type: number
+      - name: bottom
+        type: number
+      - name: left
+        nilable: true
+        type: number
+      - name: top
+        nilable: true
+        type: number
+      outputs:
     SetShrinkToFitWrapped:
     SetText:
+      inputs:
+      - name: text
+        type: string
+      - name: colorR
+        type: number
+      - name: colorG
+        type: number
+      - name: colorB
+        type: number
+      - name: alpha
+        nilable: true
+        type: number
+      - name: wrap
+        nilable: true
+        type: boolean
+      outputs:
   scripts:
     OnTooltipCleared:
     OnTooltipSetDefaultAnchor:
@@ -4489,6 +4698,17 @@ LayeredRegion:
       - name: a
         nilable: true
         type: number
+      outputs:
+    SetVertexColorFromBoolean:
+      inputs:
+      - name: value
+        type: boolean
+      - name: colorIfTrue
+        type:
+          structure: colorRGBA
+      - name: colorIfFalse
+        type:
+          structure: colorRGBA
       outputs:
   virtual: true
 Line:
@@ -5299,6 +5519,17 @@ Model:
       - name: glow
         type: number
       outputs:
+    SetGradientMask:
+      inputs:
+      - name: grad0
+        type: number
+      - name: grad1
+        type: number
+      - name: grad2
+        type: number
+      - name: grad3
+        type: number
+      outputs:
     SetLight:
       inputs:
       - name: enabled
@@ -5409,6 +5640,11 @@ Model:
         nilable: true
         type: number
       outputs:
+    SetUseGBuffer:
+      inputs:
+      - name: useGBuffer
+        type: boolean
+      outputs:
     SetViewInsets:
       inputs:
       - name: left
@@ -5487,6 +5723,11 @@ ModelScene:
       - name: index
         type: number
       outputs:
+    GetAllowOverlappedModels:
+      inputs:
+      outputs:
+      - name: allowOverlappedModels
+        type: boolean
     GetCameraFarClip:
       impl:
         getter:
@@ -5667,6 +5908,11 @@ ModelScene:
         type: number
       - name: depth
         type: number
+    SetAllowOverlappedModels:
+      inputs:
+      - name: allowOverlappedModels
+        type: boolean
+      outputs:
     SetCameraFarClip:
       impl:
         setter:
@@ -6021,6 +6267,7 @@ ParentedObjectBase:
         name: clearOtherKeys
         type: boolean
       outputs:
+  objectType: Object
   virtual: true
 Path:
   fields:
@@ -6704,6 +6951,11 @@ Region:
       outputs:
       - name: isRestricted
         type: boolean
+    IsAnchoringSecret:
+      inputs:
+      outputs:
+      - name: isAnchoringSecret
+        type: boolean
     IsCollapsed:
       impl:
         uiobjectimpl: Region/IsCollapsed
@@ -6811,6 +7063,17 @@ Region:
         uiobjectimpl: Region/SetAllPoints
       manualinputs: true
       outputs:
+    SetAlphaFromBoolean:
+      inputs:
+      - name: value
+        type: boolean
+      - default: 255
+        name: alphaIfTrue
+        type: number
+      - default: 0
+        name: alphaIfFalse
+        type: number
+      outputs:
     SetCollapsesLayout:
       impl:
         setter:
@@ -6871,6 +7134,13 @@ Region:
         uiobjectimpl: Region/SetPoint
       manualinputs: true
       outputs:
+    SetPointsOffset:
+      inputs:
+      - name: x
+        type: number
+      - name: y
+        type: number
+      outputs:
     SetPropagateMouseClicks:
       inputs:
       - name: propagate
@@ -6907,6 +7177,7 @@ Region:
     StopAnimating:
       inputs:
       outputs:
+  objectType: Region
   virtual: true
 RegionBase:
   fields:
@@ -7318,7 +7589,6 @@ SimpleHTML:
       init: '|H%s|h%s|h'
       type: string
   inherits:
-    FontInstance:
     Frame:
   methods:
     GetContentHeight:
@@ -7337,7 +7607,6 @@ SimpleHTML:
         type: number
       - name: flags
         type: string
-      override: true
     GetFontObject:
       inputs:
       - name: textType
@@ -7347,7 +7616,6 @@ SimpleHTML:
         nilable: true
         type:
           uiobject: Font
-      override: true
     GetHyperlinkFormat:
       impl:
         getter:
@@ -7363,7 +7631,6 @@ SimpleHTML:
       outputs:
       - name: wordWrap
         type: boolean
-      override: true
     GetJustifyH:
       inputs:
       - name: textType
@@ -7372,7 +7639,6 @@ SimpleHTML:
       - name: justifyH
         type:
           stringenum: JustifyHorizontal
-      override: true
     GetJustifyV:
       inputs:
       - name: textType
@@ -7381,7 +7647,6 @@ SimpleHTML:
       - name: justifyV
         type:
           stringenum: JustifyVertical
-      override: true
     GetShadowColor:
       inputs:
       - name: textType
@@ -7395,7 +7660,6 @@ SimpleHTML:
         type: number
       - name: colorA
         type: number
-      override: true
     GetShadowOffset:
       inputs:
       - name: textType
@@ -7405,7 +7669,6 @@ SimpleHTML:
         type: number
       - name: offsetY
         type: number
-      override: true
     GetSpacing:
       inputs:
       - name: textType
@@ -7413,7 +7676,6 @@ SimpleHTML:
       outputs:
       - name: spacing
         type: number
-      override: true
     GetTextColor:
       inputs:
       - name: textType
@@ -7427,7 +7689,6 @@ SimpleHTML:
         type: number
       - name: colorA
         type: number
-      override: true
     GetTextData:
       inputs:
       outputs:
@@ -7446,7 +7707,6 @@ SimpleHTML:
       - name: flags
         type: string
       outputs:
-      override: true
     SetFontObject:
       inputs:
       - name: textType
@@ -7455,7 +7715,6 @@ SimpleHTML:
         type:
           uiobject: Font
       outputs:
-      override: true
     SetHyperlinkFormat:
       impl:
         setter:
@@ -7471,7 +7730,6 @@ SimpleHTML:
       - name: wordWrap
         type: boolean
       outputs:
-      override: true
     SetJustifyH:
       inputs:
       - name: textType
@@ -7480,7 +7738,6 @@ SimpleHTML:
         type:
           stringenum: JustifyHorizontal
       outputs:
-      override: true
     SetJustifyV:
       inputs:
       - name: textType
@@ -7489,7 +7746,6 @@ SimpleHTML:
         type:
           stringenum: JustifyVertical
       outputs:
-      override: true
     SetShadowColor:
       inputs:
       - name: textType
@@ -7504,7 +7760,6 @@ SimpleHTML:
         nilable: true
         type: number
       outputs:
-      override: true
     SetShadowOffset:
       inputs:
       - name: textType
@@ -7514,7 +7769,6 @@ SimpleHTML:
       - name: offsetY
         type: number
       outputs:
-      override: true
     SetSpacing:
       inputs:
       - name: textType
@@ -7522,7 +7776,6 @@ SimpleHTML:
       - name: spacing
         type: number
       outputs:
-      override: true
     SetText:
       inputs:
       - name: text
@@ -7545,7 +7798,6 @@ SimpleHTML:
         nilable: true
         type: number
       outputs:
-      override: true
 Slider:
   fieldinitoverrides:
     mouseClickEnabled: true
@@ -7726,9 +7978,9 @@ Slider:
 StatusBar:
   fields:
     fillStyle:
-      init: STANDARD
+      init: 0
       type:
-        stringenum: StatusBarFillStyle
+        enum: StatusBarFillStyle
     max:
       init: 0
       type: number
@@ -7766,7 +8018,12 @@ StatusBar:
       outputs:
       - name: fillStyle
         type:
-          stringenum: StatusBarFillStyle
+          enum: StatusBarFillStyle
+    GetInterpolatedValue:
+      inputs:
+      outputs:
+      - name: value
+        type: number
     GetMinMaxValues:
       impl:
         getter:
@@ -7834,6 +8091,12 @@ StatusBar:
         nilable: true
         type:
           uiobject: Texture
+    GetTimerDuration:
+      inputs:
+      outputs:
+      - name: duration
+        type:
+          luaobject: LuaDurationObject
     GetValue:
       impl:
         getter:
@@ -7842,6 +8105,11 @@ StatusBar:
       outputs:
       - name: value
         type: number
+    IsInterpolating:
+      inputs:
+      outputs:
+      - name: isInterpolating
+        type: boolean
     IsStatusBarDesaturated:
       inputs:
       outputs:
@@ -7866,18 +8134,20 @@ StatusBar:
       inputs:
       - name: fillStyle
         type:
-          stringenum: StatusBarFillStyle
+          enum: StatusBarFillStyle
       outputs:
     SetMinMaxValues:
       impl:
-        setter:
-        - name: min
-        - name: max
+        uiobjectimpl: StatusBar/SetMinMaxValues
       inputs:
       - name: minValue
         type: number
       - name: maxValue
         type: number
+      - default: 0
+        name: interpolation
+        type:
+          enum: StatusBarInterpolation
       outputs:
     SetOrientation:
       impl:
@@ -7943,13 +8213,33 @@ StatusBar:
       outputs:
       - name: success
         type: boolean
+    SetTimerDuration:
+      inputs:
+      - name: duration
+        type:
+          luaobject: LuaDurationObject
+      - default: 0
+        name: interpolation
+        type:
+          enum: StatusBarInterpolation
+      - default: 0
+        name: direction
+        type:
+          enum: StatusBarTimerDirection
+      outputs:
+    SetToTargetValue:
+      inputs:
+      outputs:
     SetValue:
       impl:
-        setter:
-        - name: value
+        uiobjectimpl: StatusBar/SetValue
       inputs:
       - name: value
         type: number
+      - default: 0
+        name: interpolation
+        type:
+          enum: StatusBarInterpolation
       outputs:
   scripts:
     OnValueChanged:
@@ -8181,21 +8471,21 @@ TextureBase:
         - name: bry
       inputs:
       outputs:
-      - name: ulx
+      - name: ulX
         type: number
-      - name: uly
+      - name: ulY
         type: number
-      - name: llx
+      - name: llX
         type: number
-      - name: lly
+      - name: llY
         type: number
-      - name: urx
+      - name: urX
         type: number
-      - name: ury
+      - name: urY
         type: number
-      - name: lrx
+      - name: lrX
         type: number
-      - name: lry
+      - name: lrY
         type: number
     GetTexelSnappingBias:
       impl:
@@ -8275,6 +8565,9 @@ TextureBase:
       outputs:
       - name: snap
         type: boolean
+    ResetTexCoord:
+      inputs:
+      outputs:
     SetAtlas:
       impl:
         uiobjectimpl: Texture/SetAtlas
@@ -8293,6 +8586,12 @@ TextureBase:
       - name: resetTexCoords
         nilable: true
         type: boolean
+      - name: wrapModeHorizontal
+        nilable: true
+        type: string
+      - name: wrapModeVertical
+        nilable: true
+        type: string
       outputs:
     SetBlendMode:
       impl:
@@ -8383,6 +8682,21 @@ TextureBase:
         name: snap
         type: boolean
       outputs:
+    SetSpriteSheetCell:
+      inputs:
+      - name: cell
+        type: number
+      - name: numRows
+        type: number
+      - name: numColumns
+        type: number
+      - name: cellWidth
+        nilable: true
+        type: number
+      - name: cellHeight
+        nilable: true
+        type: number
+      outputs:
     SetTexCoord:
       impl:
         uiobjectimpl: Texture/SetTexCoord
@@ -8463,18 +8777,34 @@ TextureBase:
         name: tiling
         type: boolean
       outputs:
+  objectType: Texture
   virtual: true
 TextureCoordTranslation:
   fields:
   inherits:
-    Translation:
+    TranslationBase:
   methods:
 Translation:
   fields:
   inherits:
+    TranslationBase:
+  methods:
+TranslationBase:
+  fields:
+    offsetX:
+      init: 0
+      type: number
+    offsetY:
+      init: 0
+      type: number
+  inherits:
     Animation:
   methods:
     GetOffset:
+      impl:
+        getter:
+        - name: offsetX
+        - name: offsetY
       inputs:
       outputs:
       - name: offsetX
@@ -8482,12 +8812,17 @@ Translation:
       - name: offsetY
         type: number
     SetOffset:
+      impl:
+        setter:
+        - name: offsetX
+        - name: offsetY
       inputs:
       - name: offsetX
         type: number
       - name: offsetY
         type: number
       outputs:
+  virtual: true
 UIObject:
   fields:
     forbidden:
@@ -8514,6 +8849,24 @@ UIObject:
       outputs:
       - name: objectType
         type: string
+    HasAnySecretAspect:
+      inputs:
+      outputs:
+      - name: hasSecretAspect
+        type: boolean
+    HasSecretAspect:
+      inputs:
+      - name: aspect
+        type:
+          enum: SecretAspect
+      outputs:
+      - name: hasSecretAspect
+        type: boolean
+    HasSecretValues:
+      inputs:
+      outputs:
+      - name: hasSecretValues
+        type: boolean
     IsForbidden:
       impl:
         getter:
@@ -8531,10 +8884,20 @@ UIObject:
       outputs:
       - name: isType
         type: boolean
+    IsPreventingSecretValues:
+      inputs:
+      outputs:
+      - name: isPreventingSecretValues
+        type: boolean
     SetForbidden:
       impl:
         uiobjectimpl: ForbiddenMixin/SetForbidden
       inputs:
+      outputs:
+    SetPreventSecretValues:
+      inputs:
+      - name: preventSecretValues
+        type: boolean
       outputs:
     SetToDefaults:
       inputs:
