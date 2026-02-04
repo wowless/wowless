@@ -386,7 +386,7 @@ local function rewriteGlobals(out)
   assertTaken('lies.extra_enums', extras)
 end
 
-local function rewriteStructures(structures, outApis, outEvents, outUIObjects)
+local function rewriteStructures(structures, outApis, outEvents, outLuaObjects, outUIObjects)
   for name, tab in pairs(tabs) do
     if tab.Type == 'Structure' then
       local ns = split(name)
@@ -427,6 +427,12 @@ local function rewriteStructures(structures, outApis, outEvents, outUIObjects)
   end
   for _, event in pairs(outEvents) do
     processList(event.payload)
+  end
+  for _, luaobject in pairs(outLuaObjects) do
+    for _, method in pairs(luaobject.methods) do
+      processList(method.inputs)
+      processList(method.outputs)
+    end
   end
   for _, uiobject in pairs(outUIObjects) do
     for _, field in pairs(uiobject.fields) do
@@ -524,7 +530,13 @@ local function rewriteLuaObjects(luaobjects)
       local o = assert(luaobjects[so.luaobject], so.luaobject)
       o.methods = o.methods or {}
       for _, fn in ipairs(t.Functions) do
-        o.methods[fn.Name] = {}
+        o.methods[fn.Name] = {
+          inputs = insig(fn),
+          instride = stride(fn.Arguments),
+          mayreturnnothing = fn.MayReturnNothing,
+          outputs = outsig(fn),
+          outstride = stride(fn.Returns),
+        }
       end
     end
   end
@@ -539,7 +551,7 @@ local rewriteFuncs = {
   uiobjects = rewriteUIObjects,
 }
 local rewriteDeps = {
-  structures = { 'apis', 'events', 'uiobjects' },
+  structures = { 'apis', 'events', 'luaobjects', 'uiobjects' },
 }
 local tt = require('resty.tsort').new()
 for k in pairs(rewriteFuncs) do

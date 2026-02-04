@@ -11725,6 +11725,13 @@ LocaleInfo:
       type: number
     localeName:
       type: string
+LuaColorCurvePoint:
+  fields:
+    x:
+      type: number
+    y:
+      type:
+        structure: colorRGBA
 ModelLight:
   fields:
     ambientColor:
@@ -12462,6 +12469,26 @@ UnitAuraUpdateInfo:
       nilable: true
       type:
         arrayof: number
+UnitHealPredictionValues:
+  fields:
+    health:
+      default: 0
+      type: number
+    healthMax:
+      default: 0
+      type: number
+    totalDamageAbsorbs:
+      default: 0
+      type: number
+    totalHealAbsorbs:
+      default: 0
+      type: number
+    totalIncomingHeals:
+      default: 0
+      type: number
+    totalIncomingHealsFromHealer:
+      default: 0
+      type: number
 UnitPowerBarInfo:
   fields:
     anchorTop:

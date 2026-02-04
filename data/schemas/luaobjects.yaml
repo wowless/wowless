@@ -15,6 +15,43 @@ type:
         methods:
           required: true
           type:
-            setof: string
+            mapof:
+              key: string
+              value:
+                record:
+                  inputs:
+                    type:
+                      sequenceof:
+                        record:
+                          default:
+                            type: any
+                          name:
+                            required: true
+                            type: string
+                          nilable:
+                            type: flag
+                          type:
+                            required: true
+                            type:
+                              schema: type
+                  instride:
+                    type: number
+                  mayreturnnothing:
+                    type: flag
+                  outputs:
+                    type:
+                      sequenceof:
+                        record:
+                          name:
+                            required: true
+                            type: string
+                          nilable:
+                            type: flag
+                          type:
+                            required: true
+                            type:
+                              schema: type
+                  outstride:
+                    type: number
         virtual:
           type: flag

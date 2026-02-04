@@ -31,6 +31,12 @@ describe('structures', function()
           refty(pv.type)
         end
       end
+      for _, v in pairs(require('build.data.products.' .. p .. '.luaobjects')) do
+        for _, m in pairs(v.methods) do
+          reflist(m.inputs)
+          reflist(m.outputs)
+        end
+      end
       for _, v in pairs(require('build.data.products.' .. p .. '.uiobjects')) do
         for _, m in pairs(v.methods) do
           reflist(m.inputs)

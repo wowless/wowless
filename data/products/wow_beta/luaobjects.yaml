@@ -1,64 +1,352 @@
 AbbreviateConfig:
   methods:
     GetAbbreviateNumberData:
+      inputs:
+      outputs:
+      - name: data
+        type:
+          arrayof:
+            structure: NumberAbbreviationBreakpoint
     SetAbbreviateNumberData:
+      inputs:
+      - name: data
+        type:
+          arrayof:
+            structure: NumberAbbreviationBreakpoint
+      outputs:
 LuaColorCurveObject:
   inherits: LuaCurveObjectBase
   methods:
     AddPoint:
+      inputs:
+      - name: x
+        type: number
+      - name: y
+        type:
+          structure: colorRGBA
+      outputs:
     ClearPoints:
+      inputs:
+      outputs:
     Copy:
+      inputs:
+      outputs:
+      - name: curve
+        type:
+          luaobject: LuaColorCurveObject
     Evaluate:
+      inputs:
+      - name: x
+        type: number
+      outputs:
+      - name: y
+        type:
+          structure: colorRGBA
     EvaluateUnpacked:
+      inputs:
+      - name: x
+        type: number
+      outputs:
+      - name: yR
+        type: number
+      - name: yG
+        type: number
+      - name: yB
+        type: number
+      - name: yA
+        type: number
     GetPoint:
+      inputs:
+      - name: index
+        type: number
+      outputs:
+      - name: point
+        nilable: true
+        type:
+          structure: LuaColorCurvePoint
     GetPointCount:
+      inputs:
+      outputs:
+      - name: count
+        type: number
     GetPoints:
+      inputs:
+      outputs:
+      - name: point
+        type:
+          arrayof:
+            structure: LuaColorCurvePoint
     RemovePoint:
+      inputs:
+      - name: index
+        type: number
+      outputs:
     SetPoints:
+      inputs:
+      - name: point
+        type:
+          arrayof:
+            structure: LuaColorCurvePoint
+      outputs:
     SetToDefaults:
+      inputs:
+      outputs:
 LuaCurveObject:
   inherits: LuaCurveObjectBase
   methods:
     AddPoint:
+      inputs:
+      - name: pointX
+        type: number
+      - name: pointY
+        type: number
+      outputs:
     ClearPoints:
+      inputs:
+      outputs:
     Copy:
+      inputs:
+      outputs:
+      - name: curve
+        type:
+          luaobject: LuaCurveObject
     Evaluate:
+      inputs:
+      - name: x
+        type: number
+      outputs:
+      - name: y
+        type: number
     GetPoint:
+      inputs:
+      - name: index
+        type: number
+      outputs:
+      - name: point
+        nilable: true
+        type:
+          structure: vector2
     GetPointCount:
+      inputs:
+      outputs:
+      - name: count
+        type: number
     GetPoints:
+      inputs:
+      outputs:
+      - name: point
+        type:
+          arrayof:
+            structure: vector2
     RemovePoint:
+      inputs:
+      - name: index
+        type: number
+      outputs:
     SetPoints:
+      inputs:
+      - name: point
+        type:
+          arrayof:
+            structure: vector2
+      outputs:
     SetToDefaults:
+      inputs:
+      outputs:
 LuaCurveObjectBase:
   methods:
     GetType:
+      inputs:
+      outputs:
+      - name: curveType
+        type:
+          enum: LuaCurveType
     HasSecretValues:
+      inputs:
+      outputs:
+      - name: hasSecretValues
+        type: boolean
     SetType:
+      inputs:
+      - name: type
+        type:
+          enum: LuaCurveType
+      outputs:
   virtual: true
 LuaDurationObject:
   methods:
     Assign:
+      inputs:
+      - name: other
+        type:
+          luaobject: LuaDurationObject
+      outputs:
     Copy:
+      inputs:
+      outputs:
+      - name: copy
+        type:
+          luaobject: LuaDurationObject
     EvaluateElapsedDuration:
+      inputs:
+      - name: curve
+        type: table
+      - default: 0
+        name: modifier
+        type:
+          enum: DurationTimeModifier
+      outputs:
+      - name: result
+        type: table
     EvaluateElapsedPercent:
+      inputs:
+      - name: curve
+        type: table
+      - default: 0
+        name: modifier
+        type:
+          enum: DurationTimeModifier
+      outputs:
+      - name: result
+        type: table
     EvaluateRemainingDuration:
+      inputs:
+      - name: curve
+        type: table
+      - default: 0
+        name: modifier
+        type:
+          enum: DurationTimeModifier
+      outputs:
+      - name: result
+        type: table
     EvaluateRemainingPercent:
+      inputs:
+      - name: curve
+        type: table
+      - default: 0
+        name: modifier
+        type:
+          enum: DurationTimeModifier
+      outputs:
+      - name: result
+        type: table
     GetClockTime:
+      inputs:
+      outputs:
+      - name: clockTime
+        type: number
     GetElapsedDuration:
+      inputs:
+      - default: 0
+        name: modifier
+        type:
+          enum: DurationTimeModifier
+      outputs:
+      - name: elapsedDuration
+        type: number
     GetElapsedPercent:
+      inputs:
+      - default: 0
+        name: modifier
+        type:
+          enum: DurationTimeModifier
+      outputs:
+      - name: elapsedPercent
+        type: number
     GetEndTime:
+      inputs:
+      - default: 0
+        name: modifier
+        type:
+          enum: DurationTimeModifier
+      outputs:
+      - name: endTime
+        type: number
     GetModRate:
+      inputs:
+      outputs:
+      - name: modRate
+        type: number
     GetRemainingDuration:
+      inputs:
+      - default: 0
+        name: modifier
+        type:
+          enum: DurationTimeModifier
+      outputs:
+      - name: remainingDuration
+        type: number
     GetRemainingPercent:
+      inputs:
+      - default: 0
+        name: modifier
+        type:
+          enum: DurationTimeModifier
+      outputs:
+      - name: remainingPercent
+        type: number
     GetStartTime:
+      inputs:
+      - default: 0
+        name: modifier
+        type:
+          enum: DurationTimeModifier
+      outputs:
+      - name: startTime
+        type: number
     GetTotalDuration:
+      inputs:
+      - default: 0
+        name: modifier
+        type:
+          enum: DurationTimeModifier
+      outputs:
+      - name: totalDuration
+        type: number
     HasSecretValues:
+      inputs:
+      outputs:
+      - name: hasSecretValues
+        type: boolean
     IsZero:
+      inputs:
+      outputs:
+      - name: isZero
+        type: boolean
     Reset:
+      inputs:
+      outputs:
     SetTimeFromEnd:
+      inputs:
+      - name: endTime
+        type: number
+      - name: duration
+        type: number
+      - default: 1
+        name: modRate
+        type: number
+      outputs:
     SetTimeFromStart:
+      inputs:
+      - name: startTime
+        type: number
+      - name: duration
+        type: number
+      - default: 1
+        name: modRate
+        type: number
+      outputs:
     SetTimeSpan:
+      inputs:
+      - name: startTime
+        type: number
+      - name: endTime
+        type: number
+      outputs:
     SetToDefaults:
+      inputs:
+      outputs:
 LuaFunctionContainer:
   impl: funtainer
   methods:
@@ -68,37 +356,197 @@ LuaFunctionContainer:
 UnitHealPredictionCalculator:
   methods:
     EvaluateCurrentHealthPercent:
+      inputs:
+      - name: curve
+        type: table
+      outputs:
+      - name: result
+        type: table
     EvaluateMissingHealthPercent:
+      inputs:
+      - name: curve
+        type: table
+      outputs:
+      - name: result
+        type: table
     GetCurrentHealth:
+      inputs:
+      outputs:
+      - name: currentHealth
+        type: number
     GetCurrentHealthPercent:
+      inputs:
+      outputs:
+      - name: currentHealthPercent
+        type: number
     GetDamageAbsorbClampMode:
+      inputs:
+      outputs:
+      - name: damageAbsorbClampMode
+        type:
+          enum: UnitDamageAbsorbClampMode
     GetDamageAbsorbs:
+      inputs:
+      outputs:
+      - name: amount
+        type: number
+      - name: clamped
+        type: boolean
     GetHealAbsorbClampMode:
+      inputs:
+      outputs:
+      - name: healAbsorbClampMode
+        type:
+          enum: UnitHealAbsorbClampMode
     GetHealAbsorbMode:
+      inputs:
+      outputs:
+      - name: healAbsorbMode
+        type:
+          enum: UnitHealAbsorbMode
     GetHealAbsorbs:
+      inputs:
+      outputs:
+      - name: amount
+        type: number
+      - name: clamped
+        type: boolean
     GetIncomingHealClampMode:
+      inputs:
+      outputs:
+      - name: incomingHealClampMode
+        type:
+          enum: UnitIncomingHealClampMode
     GetIncomingHealOverflowPercent:
+      inputs:
+      outputs:
+      - name: incomingHealOverflowPercent
+        type: number
     GetIncomingHeals:
+      inputs:
+      outputs:
+      - name: amount
+        type: number
+      - name: amountFromHealer
+        type: number
+      - name: amountFromOthers
+        type: number
+      - name: clamped
+        type: boolean
     GetMaximumDamageAbsorbs:
+      inputs:
+      outputs:
+      - name: maximumDamageAbsorbs
+        type: number
     GetMaximumHealAbsorbs:
+      inputs:
+      outputs:
+      - name: maximumHealAbsorbs
+        type: number
     GetMaximumHealth:
+      inputs:
+      outputs:
+      - name: maximumHealth
+        type: number
     GetMaximumHealthMode:
+      inputs:
+      outputs:
+      - name: maximumHealthMode
+        type:
+          enum: UnitMaximumHealthMode
     GetMaximumIncomingHeals:
+      inputs:
+      outputs:
+      - name: maximumIncomingHeals
+        type: number
     GetMissingHealth:
+      inputs:
+      outputs:
+      - name: missingHealth
+        type: number
     GetMissingHealthPercent:
+      inputs:
+      outputs:
+      - name: missingHealthPercent
+        type: number
     GetPredictedValues:
+      inputs:
+      outputs:
+      - name: predictedValues
+        type:
+          structure: UnitHealPredictionValues
     GetTotalDamageAbsorbs:
+      inputs:
+      outputs:
+      - name: totalDamageAbsorbs
+        type: number
     GetTotalHealAbsorbs:
+      inputs:
+      outputs:
+      - name: totalHealAbsorbs
+        type: number
     GetTotalIncomingHeals:
+      inputs:
+      outputs:
+      - name: totalIncomingHeals
+        type: number
     GetTotalIncomingHealsFromHealer:
+      inputs:
+      outputs:
+      - name: totalIncomingHealsFromHealer
+        type: number
     HasSecretValues:
+      inputs:
+      outputs:
+      - name: hasSecretValues
+        type: boolean
     Reset:
+      inputs:
+      outputs:
     ResetPredictedValues:
+      inputs:
+      outputs:
     SetDamageAbsorbClampMode:
+      inputs:
+      - name: damageAbsorbClampMode
+        type:
+          enum: UnitDamageAbsorbClampMode
+      outputs:
     SetHealAbsorbClampMode:
+      inputs:
+      - name: healAbsorbClampMode
+        type:
+          enum: UnitHealAbsorbClampMode
+      outputs:
     SetHealAbsorbMode:
+      inputs:
+      - name: healAbsorbMode
+        type:
+          enum: UnitHealAbsorbMode
+      outputs:
     SetIncomingHealClampMode:
+      inputs:
+      - name: incomingHealClampMode
+        type:
+          enum: UnitIncomingHealClampMode
+      outputs:
     SetIncomingHealOverflowPercent:
+      inputs:
+      - name: incomingHealOverflowPercent
+        type: number
+      outputs:
     SetMaximumHealthMode:
+      inputs:
+      - name: maximumHealthMode
+        type:
+          enum: UnitMaximumHealthMode
+      outputs:
     SetPredictedValues:
+      inputs:
+      - name: predictedValues
+        type:
+          structure: UnitHealPredictionValues
+      outputs:
     SetToDefaults:
+      inputs:
+      outputs:
