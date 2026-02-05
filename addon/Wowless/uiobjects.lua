@@ -830,9 +830,6 @@ G.testsuite.uiobjects = function()
           }
         end,
         rect = function()
-          if _G.__wowless then -- issue #473
-            return
-          end
           local f = CreateFrame('Frame')
           local scale = _G.UIParent and _G.UIParent:GetEffectiveScale() or 1
           local w, h = GetScreenWidth() * scale, GetScreenHeight() * scale

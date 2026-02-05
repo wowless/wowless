@@ -1121,6 +1121,31 @@
     </Frames>
   </Frame>
 
+  <Frame>
+    <Layers>
+      <Layer>
+        <FontString parentKey='default' />
+        <FontString parentKey='x1y0'>
+          <Size x="1" y="0" />
+        </FontString>
+        <FontString parentKey='x0y1'>
+          <Size x="0" y="1" />
+        </FontString>
+        <FontString parentKey='x0y0'>
+          <Size x="0" y="0" />
+        </FontString>
+      </Layer>
+    </Layers>
+    <Scripts>
+      <OnLoad>
+        Wowless.check2(1, 1, self.default:GetSize())
+        Wowless.check2(1, 1, self.x1y0:GetSize())
+        Wowless.check2(1, 1, self.x0y1:GetSize())
+        Wowless.check2(1, 1, self.x0y0:GetSize())
+      </OnLoad>
+    </Scripts>
+  </Frame>
+
   <Script>
     if WowlessOldErrorHandler then
       seterrorhandler(WowlessOldErrorHandler)

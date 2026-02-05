@@ -48,6 +48,7 @@ return function(api, env, log, uiobjects)
 
   local function ClearPoint(r, point)
     r.points[point] = nil
+    r.dirty = true
   end
 
   local function GetNumPoints(r)
@@ -139,6 +140,7 @@ return function(api, env, log, uiobjects)
 
   local function SetPointInternal(r, point, relativeTo, relativePoint, x, y)
     r.points[point] = { relativeTo, relativePoint, x, y }
+    r.dirty = true
   end
 
   local function SetPoint(r, point, ...)
