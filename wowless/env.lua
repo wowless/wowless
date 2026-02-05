@@ -56,9 +56,35 @@ local function init(modules, lite)
     debug.debug()
   end
 
+  local function dumpregion(r)
+    r = assert(modules.uiobjects.UserData(r))
+    local p = {}
+    for k, v in pairs(r.points) do
+      local rt, rp, x, y = unpack(v)
+      p[k] = {
+        relativeTo = rt and rt:GetDebugName(),
+        relativePoint = rp,
+        x = x,
+        y = y,
+      }
+    end
+    io.write(require('pl.pretty').write({
+      bottom = r.bottom,
+      debugname = r:GetDebugName(),
+      height = r.height,
+      left = r.left,
+      points = p,
+      right = r.right,
+      top = r.top,
+      width = r.width,
+    }))
+    io.write('\n')
+  end
+
   modules.env.genv.__wowless = {
     debug = wowlessDebug,
     dump = dump(modules.uiobjects),
+    dumpregion = dumpregion,
     lite = lite,
     platform = modules.platform.platform,
     printf = function(fmt, ...)
