@@ -115,6 +115,14 @@ ADDON_LOADED:
     type: string
   - name: containsBindings
     type: boolean
+ADDON_RESTRICTION_STATE_CHANGED:
+  payload:
+  - name: type
+    type:
+      enum: AddOnRestrictionType
+  - name: state
+    type:
+      enum: AddOnRestrictionState
 ADDONS_UNLOADING:
   payload:
   - name: closingClient
@@ -746,6 +754,26 @@ BOSS_KILL:
     type: number
   - name: encounterName
     type: string
+BULK_PURCHASE_RESULT_RECEIVED:
+  payload:
+  - name: result
+    type:
+      enum: BulkPurchaseResult
+  - name: productResults
+    type:
+      arrayof:
+        structure: C_CatalogShop.BulkPurchaseIndividualProductResult
+  - name: bestTopUpProductID
+    nilable: true
+    type: number
+  - name: totalCost
+    nilable: true
+    type: number
+BULK_REFUND_RESULT_RECEIVED:
+  payload:
+  - name: result
+    type:
+      enum: BulkRefundResult
 CALENDAR_ACTION_PENDING:
   payload:
   - name: pending
@@ -876,6 +904,8 @@ CATALOG_SHOP_PURCHASE_SUCCESS:
     type: number
 CATALOG_SHOP_REBUILD_SCROLL_BOX:
   payload:
+CATALOG_SHOP_REFUNDABLE_DECORS_UPDATED:
+  payload:
 CATALOG_SHOP_REMOVE_PENDING_PRODUCT:
   payload:
   - name: productID
@@ -886,6 +916,16 @@ CATALOG_SHOP_SPECIFIC_PRODUCT_REFRESH:
   payload:
   - name: productID
     type: number
+CATALOG_SHOP_VIRTUAL_CURRENCY_BALANCE_UPDATE:
+  payload:
+  - name: currencyCode
+    type: string
+  - name: balance
+    type: string
+CATALOG_SHOP_VIRTUAL_CURRENCY_BALANCE_UPDATE_FAILURE:
+  payload:
+  - name: currencyCode
+    type: string
 CAUTIONARY_CHANNEL_MESSAGE:
   payload:
   - name: confirmNumber
@@ -3739,10 +3779,45 @@ COLOR_OVERRIDE_UPDATED:
       enum: ColorOverride
 COLOR_OVERRIDES_RESET:
   payload:
+COMBAT_LOG_APPLY_FILTER_SETTINGS:
+  callback: true
+  noscript: true
+  payload:
+  - name: filterSettings
+    type: table
+  restricted: true
+COMBAT_LOG_ENTRIES_CLEARED:
+  payload:
 COMBAT_LOG_EVENT:
+  callback: true
   payload:
+  restricted: true
 COMBAT_LOG_EVENT_UNFILTERED:
+  callback: true
   payload:
+  restricted: true
+COMBAT_LOG_MESSAGE:
+  payload:
+  - name: message
+    type: string
+  - name: colorR
+    type: number
+  - name: colorG
+    type: number
+  - name: colorB
+    type: number
+  - name: order
+    type:
+      enum: CombatLogMessageOrder
+COMBAT_LOG_MESSAGE_LIMIT_CHANGED:
+  payload:
+  - name: messageLimit
+    type: number
+COMBAT_LOG_REFILTER_ENTRIES:
+  callback: true
+  noscript: true
+  payload:
+  restricted: true
 COMBAT_RATING_UPDATE:
   payload:
 COMBAT_TEXT_UPDATE:
@@ -3750,6 +3825,8 @@ COMBAT_TEXT_UPDATE:
   - name: combatTextType
     type: string
 COMBO_TARGET_CHANGED:
+  payload:
+COMMENTATOR_COMBAT_EVENT:
   payload:
 COMMENTATOR_ENTER_WORLD:
   payload:
@@ -4161,6 +4238,17 @@ DAILY_RESET_INSTANCE_WELCOME:
     type: string
   - name: timeLeft
     type: number
+DAMAGE_METER_COMBAT_SESSION_UPDATED:
+  payload:
+  - name: type
+    type:
+      enum: DamageMeterType
+  - name: sessionID
+    type: number
+DAMAGE_METER_CURRENT_SESSION_UPDATED:
+  payload:
+DAMAGE_METER_RESET:
+  payload:
 DEBUG_MENU_TOGGLED:
   payload:
 DECLINE_NEIGHBORHOOD_INVITATION_RESPONSE:
@@ -4300,6 +4388,55 @@ ENCOUNTER_START:
     type: number
   - name: groupSize
     type: number
+ENCOUNTER_STATE_CHANGED:
+  callback: true
+  payload:
+  - name: isInProgress
+    type: boolean
+ENCOUNTER_TIMELINE_EVENT_ADDED:
+  payload:
+  - name: eventInfo
+    type:
+      structure: C_EncounterTimeline.EncounterTimelineEventInfo
+ENCOUNTER_TIMELINE_EVENT_BLOCK_STATE_CHANGED:
+  payload:
+  - name: eventID
+    type: number
+ENCOUNTER_TIMELINE_EVENT_HIGHLIGHT:
+  payload:
+  - name: eventID
+    type: number
+ENCOUNTER_TIMELINE_EVENT_REMOVED:
+  payload:
+  - name: eventID
+    type: number
+ENCOUNTER_TIMELINE_EVENT_STATE_CHANGED:
+  payload:
+  - name: eventID
+    type: number
+ENCOUNTER_TIMELINE_EVENT_TRACK_CHANGED:
+  payload:
+  - name: eventID
+    type: number
+ENCOUNTER_TIMELINE_LAYOUT_UPDATED:
+  payload:
+ENCOUNTER_TIMELINE_STATE_UPDATED:
+  payload:
+ENCOUNTER_TIMELINE_VIEW_ACTIVATED:
+  payload:
+  - name: viewType
+    type:
+      enum: EncounterTimelineViewType
+ENCOUNTER_TIMELINE_VIEW_DEACTIVATED:
+  payload:
+  - name: viewType
+    type:
+      enum: EncounterTimelineViewType
+ENCOUNTER_WARNING:
+  payload:
+  - name: encounterWarningInfo
+    type:
+      structure: C_EncounterWarnings.EncounterWarningInfo
 END_BOUND_TRADEABLE:
   payload:
   - name: reason
@@ -4368,6 +4505,12 @@ EXPERIMENTAL_CVAR_CONFIRMATION_NEEDED:
 EXTRA_BROWSE_INFO_RECEIVED:
   payload:
   - name: itemID
+    type: number
+FACTION_STANDING_CHANGED:
+  payload:
+  - name: factionID
+    type: number
+  - name: updatedStanding
     type: number
 FIRST_FRAME_RENDERED:
   payload:
@@ -4964,6 +5107,10 @@ HOUSE_EXTERIOR_POSITION_FAILURE:
       enum: HousingResult
 HOUSE_EXTERIOR_POSITION_SUCCESS:
   payload:
+HOUSE_EXTERIOR_TYPE_UNLOCKED:
+  payload:
+  - name: fixtureID
+    type: number
 HOUSE_FINDER_NEIGHBORHOOD_DATA_RECIEVED:
   payload:
   - name: neighborhoodPlots
@@ -4977,7 +5124,7 @@ HOUSE_LEVEL_CHANGED:
   - name: newHouseLevelInfo
     nilable: true
     type:
-      structure: C_HousingDecor.HousingLevelInfo
+      structure: HouseLevelInfo
 HOUSE_LEVEL_FAVOR_UPDATED:
   payload:
   - name: houseLevelFavor
@@ -5004,9 +5151,9 @@ HOUSING_BASIC_MODE_PLACEMENT_FLAGS_UPDATED:
   - name: targetType
     type:
       enum: HousingBasicModeTargetType
-  - name: placementInfo
+  - name: activeFlags
     type:
-      structure: C_HousingBasicMode.InvalidPlacementInfo
+      enum: HousingDecorPlacementRestriction
 HOUSING_BASIC_MODE_SELECTED_TARGET_CHANGED:
   payload:
   - name: hasSelectedTarget
@@ -5014,14 +5161,12 @@ HOUSING_BASIC_MODE_SELECTED_TARGET_CHANGED:
   - name: targetType
     type:
       enum: HousingBasicModeTargetType
+  - name: isPreview
+    type: boolean
 HOUSING_CATALOG_CATEGORY_UPDATED:
   payload:
   - name: categoryID
     type: number
-HOUSING_CATALOG_SEARCHER_RELEASED:
-  payload:
-  - name: searcher
-    type: string
 HOUSING_CATALOG_SUBCATEGORY_UPDATED:
   payload:
   - name: subcategoryID
@@ -5030,6 +5175,9 @@ HOUSING_CLEANUP_MODE_HOVERED_TARGET_CHANGED:
   payload:
   - name: hasHoveredTarget
     type: boolean
+  - name: targetType
+    type:
+      enum: HousingCleanupModeTargetType
 HOUSING_CLEANUP_MODE_TARGET_SELECTED:
   payload:
 HOUSING_CORE_FIXTURE_CHANGED:
@@ -5051,6 +5199,11 @@ HOUSING_CUSTOMIZE_MODE_SELECTED_TARGET_CHANGED:
   - name: targetType
     type:
       enum: HousingCustomizeModeTargetType
+HOUSING_DECOR_ADD_TO_PREVIEW_LIST:
+  payload:
+  - name: previewItemData
+    type:
+      structure: C_HousingCatalog.HousingPreviewItemData
 HOUSING_DECOR_CUSTOMIZATION_CHANGED:
   payload:
   - name: decorGUID
@@ -5062,6 +5215,10 @@ HOUSING_DECOR_DYE_FAILURE:
   - name: housingResult
     type:
       enum: HousingResult
+HOUSING_DECOR_FREE_PLACE_STATUS_CHANGED:
+  payload:
+  - name: isFreePlaceEnabled
+    type: boolean
 HOUSING_DECOR_GRID_SNAP_OCCURRED:
   payload:
 HOUSING_DECOR_GRID_SNAP_STATUS_CHANGED:
@@ -5071,10 +5228,6 @@ HOUSING_DECOR_GRID_SNAP_STATUS_CHANGED:
 HOUSING_DECOR_GRID_VISIBILITY_STATUS_CHANGED:
   payload:
   - name: isGridVisible
-    type: boolean
-HOUSING_DECOR_NUDGE_STATUS_CHANGED:
-  payload:
-  - name: isNudgeEnabled
     type: boolean
 HOUSING_DECOR_PLACE_FAILURE:
   payload:
@@ -5089,6 +5242,8 @@ HOUSING_DECOR_PLACE_SUCCESS:
     type:
       enum: HousingCatalogEntrySize
   - name: isNew
+    type: boolean
+  - name: isPreview
     type: boolean
 HOUSING_DECOR_PRECISION_MANIPULATION_EVENT:
   payload:
@@ -5105,6 +5260,16 @@ HOUSING_DECOR_PRECISION_SUBMODE_CHANGED:
     nilable: true
     type:
       enum: HousingPrecisionSubmode
+HOUSING_DECOR_PREVIEW_LIST_REMOVE_FROM_WORLD:
+  payload:
+  - name: decorGUID
+    type: string
+HOUSING_DECOR_PREVIEW_LIST_UPDATED:
+  payload:
+HOUSING_DECOR_PREVIEW_STATE_CHANGED:
+  payload:
+  - name: isPreviewState
+    type: boolean
 HOUSING_DECOR_REMOVED:
   payload:
   - name: decorGUID
@@ -5121,6 +5286,14 @@ HOUSING_EXPERT_MODE_HOVERED_TARGET_CHANGED:
   - name: targetType
     type:
       enum: HousingExpertModeTargetType
+HOUSING_EXPERT_MODE_PLACEMENT_FLAGS_UPDATED:
+  payload:
+  - name: targetType
+    type:
+      enum: HousingExpertModeTargetType
+  - name: activeFlags
+    type:
+      enum: HousingDecorPlacementRestriction
 HOUSING_EXPERT_MODE_SELECTED_TARGET_CHANGED:
   payload:
   - name: hasSelectedTarget
@@ -5146,6 +5319,10 @@ HOUSING_FIXTURE_POINT_SELECTION_CHANGED:
   payload:
   - name: hasSelection
     type: boolean
+HOUSING_FIXTURE_UNLOCKED:
+  payload:
+  - name: fixtureID
+    type: number
 HOUSING_LAYOUT_DOOR_SELECTED:
   payload:
   - name: roomGUID
@@ -5223,6 +5400,8 @@ HOUSING_MARKET_AVAILABILITY_UPDATED:
   payload:
 HOUSING_NUM_DECOR_PLACED_CHANGED:
   payload:
+HOUSING_REFUND_LIST_UPDATED:
+  payload:
 HOUSING_ROOM_COMPONENT_CUSTOMIZATION_CHANGE_FAILED:
   payload:
   - name: roomGUID
@@ -5240,6 +5419,21 @@ HOUSING_ROOM_COMPONENT_CUSTOMIZATION_CHANGED:
     type: number
 HOUSING_SERVICES_AVAILABILITY_UPDATED:
   payload:
+HOUSING_SET_EXTERIOR_HOUSE_SIZE_RESPONSE:
+  payload:
+  - name: result
+    type:
+      enum: HousingResult
+HOUSING_SET_EXTERIOR_HOUSE_TYPE_RESPONSE:
+  payload:
+  - name: result
+    type:
+      enum: HousingResult
+HOUSING_SET_FIXTURE_RESPONSE:
+  payload:
+  - name: result
+    type:
+      enum: HousingResult
 HOUSING_STORAGE_ENTRY_UPDATED:
   payload:
   - name: entryID
@@ -5266,6 +5460,24 @@ INCOMING_SUMMON_CHANGED:
 INITIAL_CLUBS_LOADED:
   payload:
 INITIAL_HOTFIXES_APPLIED:
+  payload:
+INITIATIVE_ACTIVITY_LOG_UPDATED:
+  payload:
+INITIATIVE_COMPLETED:
+  payload:
+  - name: initiativeTitle
+    type: string
+INITIATIVE_TASK_COMPLETED:
+  payload:
+  - name: taskName
+    type: string
+INITIATIVE_TASKS_TRACKED_LIST_CHANGED:
+  payload:
+  - name: initiativeTaskID
+    type: number
+  - name: added
+    type: boolean
+INITIATIVE_TASKS_TRACKED_UPDATED:
   payload:
 INSPECT_ACHIEVEMENT_READY:
   payload:
@@ -5499,14 +5711,6 @@ LEARNED_SPELL_IN_SKILL_LINE:
     type: number
   - name: isGuildPerkSpell
     type: boolean
-LEARNED_SPELL_IN_TAB:
-  payload:
-  - name: spellID
-    type: number
-  - name: skillInfoIndex
-    type: number
-  - name: isGuildPerkSpell
-    type: boolean
 LEAVE_PARTY_CONFIRMATION:
   payload:
   - name: reason
@@ -5514,6 +5718,10 @@ LEAVE_PARTY_CONFIRMATION:
       enum: LeavePartyConfirmReason
 LEAVING_TUTORIAL_AREA:
   payload:
+LEGACY_LOOT_RULES_CHANGED:
+  payload:
+  - name: isLegacyLootModeEnabled
+    type: boolean
 LET_RECENT_ALLIES_SEE_LOCATION_SETTING_UPDATED:
   payload:
 LFG_BOOT_PROPOSAL_UPDATE:
@@ -5877,6 +6085,8 @@ MERCHANT_UPDATE:
 MIN_EXPANSION_LEVEL_UPDATED:
   payload:
 MINIMAP_PING:
+  callback: true
+  noscript: true
   payload:
   - name: unitTarget
     type: unit
@@ -5884,6 +6094,7 @@ MINIMAP_PING:
     type: number
   - name: x
     type: number
+  restricted: true
 MINIMAP_UPDATE_TRACKING:
   payload:
 MINIMAP_UPDATE_ZOOM:
@@ -5950,6 +6161,12 @@ NAME_PLATE_UNIT_ADDED:
   payload:
   - name: unitToken
     type: string
+NAME_PLATE_UNIT_BEHIND_CAMERA_CHANGED:
+  payload:
+  - name: unitTarget
+    type: unit
+  - name: isBehindCamera
+    type: boolean
 NAME_PLATE_UNIT_REMOVED:
   payload:
   - name: unitToken
@@ -5974,6 +6191,8 @@ NEIGHBORHOOD_INFO_UPDATED:
   - name: neighborhoodInfo
     type:
       structure: NeighborhoodInfo
+NEIGHBORHOOD_INITIATIVE_UPDATED:
+  payload:
 NEIGHBORHOOD_INVITE_RESPONSE:
   payload:
   - name: result
@@ -6160,6 +6379,12 @@ PARTY_INVITE_REQUEST:
     type: string
   - name: questSessionActive
     type: boolean
+PARTY_KILL:
+  payload:
+  - name: attackerGUID
+    type: string
+  - name: targetGUID
+    type: string
 PARTY_LEADER_CHANGED:
   payload:
 PARTY_LFG_RESTRICTED:
@@ -6473,6 +6698,21 @@ PETITION_CLOSED:
   payload:
 PETITION_SHOW:
   payload:
+PHOTO_SHARING_AUTHORIZATION_NEEDED:
+  payload:
+PHOTO_SHARING_AUTHORIZATION_UPDATED:
+  payload:
+PHOTO_SHARING_PHOTO_UPLOAD_STATUS:
+  payload:
+  - name: uploadStatus
+    type:
+      enum: PhotoSharingUploadStatus
+PHOTO_SHARING_SCREENSHOT_READY:
+  payload:
+PHOTO_SHARING_THIRD_PARTY_AUTHORIZATION_NEEDED:
+  payload:
+  - name: authUrl
+    type: string
 PING_SYSTEM_ERROR:
   payload:
   - name: error
@@ -6639,6 +6879,10 @@ PLAYER_MAP_CHANGED:
     type: number
   - name: newMapID
     type: number
+PLAYER_MAX_LEVEL_UPDATE:
+  payload:
+  - name: unitTarget
+    type: unit
 PLAYER_MONEY:
   payload:
 PLAYER_MOUNT_DISPLAY_CHANGED:
@@ -6700,6 +6944,8 @@ PLAYER_STOPPED_TURNING:
 PLAYER_TALENT_UPDATE:
   payload:
 PLAYER_TARGET_CHANGED:
+  payload:
+PLAYER_TARGET_DIED:
   payload:
 PLAYER_TOTEM_UPDATE:
   payload:
@@ -7080,6 +7326,10 @@ REMIX_ARTIFACT_UPDATE:
   payload:
 REMIX_END_OF_EVENT:
   payload:
+REMOVE_NEIGHBORHOOD_CHARTER_SIGNATURE:
+  payload:
+  - name: signature
+    type: string
 REPLACE_ENCHANT:
   payload:
   - name: existingStr
@@ -7148,8 +7398,6 @@ RESURRECT_REQUEST:
   payload:
   - name: inviter
     type: string
-RETURNING_PLAYER_PROMPT:
-  payload:
 ROLE_CHANGED_INFORM:
   payload:
   - name: changedName
@@ -7247,9 +7495,13 @@ SEARCH_DB_LOADED:
   payload:
 SECURE_TRANSFER_CANCEL:
   payload:
+SECURE_TRANSFER_CONFIRM_HOUSING_PURCHASE:
+  payload:
 SECURE_TRANSFER_CONFIRM_SEND_MAIL:
   payload:
 SECURE_TRANSFER_CONFIRM_TRADE_ACCEPT:
+  payload:
+SECURE_TRANSFER_HOUSING_CURRENCY_PURCHASE_CONFIRMATION:
   payload:
 SELECTED_LOADOUT_CHANGED:
   payload:
@@ -7265,8 +7517,21 @@ SESSION_TIME_ALERT:
     type: number
 SET_DEBUG_TOOL_VISIBLE:
   payload:
+SET_SEEN_PRODUCTS:
+  payload:
+  - name: productIds
+    type:
+      arrayof: number
 SETTINGS_LOADED:
   payload:
+SETTINGS_PANEL_OPEN:
+  payload:
+  - name: openToCategoryID
+    nilable: true
+    type: number
+  - name: scrollToElementName
+    nilable: true
+    type: string
 SHIPMENT_CRAFTER_CLOSED:
   payload:
 SHIPMENT_CRAFTER_INFO:
@@ -7297,8 +7562,6 @@ SHIPMENT_UPDATE:
     type: boolean
 SHOW_DELVES_COMPANION_CONFIGURATION_UI:
   payload:
-SHOW_DELVES_DISPLAY_UI:
-  payload:
 SHOW_END_OF_MATCH_UI:
   payload:
 SHOW_FACTION_SELECT_UI:
@@ -7307,6 +7570,10 @@ SHOW_HYPERLINK_TOOLTIP:
   payload:
   - name: hyperlink
     type: string
+SHOW_JOURNEYS_UI:
+  payload:
+  - name: factionID
+    type: number
 SHOW_LFG_EXPAND_SEARCH_PROMPT:
   payload:
 SHOW_LOOT_TOAST:
@@ -7357,6 +7624,8 @@ SHOW_NEIGHBORHOOD_OWNERSHIP_TRANSFER_DIALOG:
     type: string
   - name: cosmeticOwnerName
     type: string
+SHOW_NEW_PRODUCT_NOTIFICATION:
+  payload:
 SHOW_PARTY_POSE_UI:
   payload:
   - name: mapID
@@ -7410,6 +7679,14 @@ SHOW_SUBTITLE:
     type: string
   - name: sender
     nilable: true
+    type: string
+SIMPLE_BROWSER_POPUP:
+  payload:
+  - name: url
+    type: string
+SIMPLE_BROWSER_SOCIAL_CALLBACK_INVOKED:
+  payload:
+  - name: url
     type: string
 SIMPLE_BROWSER_WEB_ERROR:
   payload:
@@ -7868,6 +8145,19 @@ TOOLTIP_DATA_UPDATE:
   - name: dataInstanceID
     nilable: true
     type: number
+TOOLTIP_SHOW_ITEM_COMPARISON:
+  callback: true
+  noscript: true
+  payload:
+  - name: comparisonItem
+    type: table
+  - name: tooltip
+    type:
+      uiobject: GameTooltip
+  - name: anchorFrame
+    nilable: true
+    type:
+      uiobject: Frame
 TOYS_UPDATED:
   payload:
   - name: itemID
@@ -8023,6 +8313,8 @@ TRAINER_SHOW:
   payload:
 TRAINER_UPDATE:
   payload:
+TRAINING_GROUNDS_ENABLED_STATUS_UPDATED:
+  payload:
 TRAIT_COND_INFO_CHANGED:
   payload:
   - name: condID
@@ -8111,8 +8403,15 @@ TRANSMOG_COSMETIC_COLLECTION_SOURCE_ADDED:
   payload:
   - name: itemModifiedAppearanceID
     type: number
+TRANSMOG_CUSTOM_SETS_CHANGED:
+  payload:
+TRANSMOG_DISPLAYED_OUTFIT_CHANGED:
+  payload:
 TRANSMOG_OUTFITS_CHANGED:
   payload:
+  - name: newOutfitID
+    nilable: true
+    type: number
 TRANSMOG_SEARCH_UPDATED:
   payload:
   - name: searchType
@@ -8162,6 +8461,9 @@ TRY_PURCHASE_TO_NODE_PARTIAL_SUCCESS:
   payload:
   - name: nodeFinishedOn
     type: number
+TUTORIAL_COMBAT_EVENT:
+  payload:
+  restricted: true
 TUTORIAL_HIGHLIGHT_SPELL:
   payload:
   - name: spellID
@@ -8261,6 +8563,10 @@ UNIT_DEFENSE:
   payload:
   - name: unitTarget
     type: unit
+UNIT_DIED:
+  payload:
+  - name: unitGUID
+    type: string
 UNIT_DISPLAYPOWER:
   payload:
   - name: unitTarget
@@ -8353,6 +8659,12 @@ UNIT_LEVEL:
   payload:
   - name: unitTarget
     type: unit
+UNIT_LOOT:
+  payload:
+  - name: unitGUID
+    type: string
+  - name: hasLoot
+    type: boolean
 UNIT_MANA:
   payload:
   - name: unitTarget
@@ -8445,6 +8757,13 @@ UNIT_RESISTANCES:
   payload:
   - name: unitTarget
     type: unit
+UNIT_SPELL_DIMINISH_CATEGORY_STATE_UPDATED:
+  payload:
+  - name: unitTarget
+    type: unit
+  - name: trackerInfo
+    type:
+      structure: C_SpellDiminish.SpellDiminishTrackerInfo
 UNIT_SPELL_HASTE:
   payload:
   - name: unitTarget
@@ -8457,6 +8776,9 @@ UNIT_SPELLCAST_CHANNEL_START:
     type: string
   - name: spellID
     type: number
+  - name: castBarID
+    nilable: true
+    type: number
 UNIT_SPELLCAST_CHANNEL_STOP:
   payload:
   - name: unitTarget
@@ -8464,6 +8786,11 @@ UNIT_SPELLCAST_CHANNEL_STOP:
   - name: castGUID
     type: string
   - name: spellID
+    type: number
+  - name: interruptedBy
+    type: string
+  - name: castBarID
+    nilable: true
     type: number
 UNIT_SPELLCAST_CHANNEL_UPDATE:
   payload:
@@ -8473,6 +8800,9 @@ UNIT_SPELLCAST_CHANNEL_UPDATE:
     type: string
   - name: spellID
     type: number
+  - name: castBarID
+    nilable: true
+    type: number
 UNIT_SPELLCAST_DELAYED:
   payload:
   - name: unitTarget
@@ -8481,6 +8811,9 @@ UNIT_SPELLCAST_DELAYED:
     type: string
   - name: spellID
     type: number
+  - name: castBarID
+    nilable: true
+    type: number
 UNIT_SPELLCAST_EMPOWER_START:
   payload:
   - name: unitTarget
@@ -8488,6 +8821,9 @@ UNIT_SPELLCAST_EMPOWER_START:
   - name: castGUID
     type: string
   - name: spellID
+    type: number
+  - name: castBarID
+    nilable: true
     type: number
 UNIT_SPELLCAST_EMPOWER_STOP:
   payload:
@@ -8499,6 +8835,11 @@ UNIT_SPELLCAST_EMPOWER_STOP:
     type: number
   - name: complete
     type: boolean
+  - name: interruptedBy
+    type: string
+  - name: castBarID
+    nilable: true
+    type: number
 UNIT_SPELLCAST_EMPOWER_UPDATE:
   payload:
   - name: unitTarget
@@ -8506,6 +8847,9 @@ UNIT_SPELLCAST_EMPOWER_UPDATE:
   - name: castGUID
     type: string
   - name: spellID
+    type: number
+  - name: castBarID
+    nilable: true
     type: number
 UNIT_SPELLCAST_FAILED:
   payload:
@@ -8515,6 +8859,9 @@ UNIT_SPELLCAST_FAILED:
     type: string
   - name: spellID
     type: number
+  - name: castBarID
+    nilable: true
+    type: number
 UNIT_SPELLCAST_FAILED_QUIET:
   payload:
   - name: unitTarget
@@ -8523,6 +8870,9 @@ UNIT_SPELLCAST_FAILED_QUIET:
     type: string
   - name: spellID
     type: number
+  - name: castBarID
+    nilable: true
+    type: number
 UNIT_SPELLCAST_INTERRUPTED:
   payload:
   - name: unitTarget
@@ -8530,6 +8880,11 @@ UNIT_SPELLCAST_INTERRUPTED:
   - name: castGUID
     type: string
   - name: spellID
+    type: number
+  - name: interruptedBy
+    type: string
+  - name: castBarID
+    nilable: true
     type: number
 UNIT_SPELLCAST_INTERRUPTIBLE:
   payload:
@@ -8557,8 +8912,8 @@ UNIT_SPELLCAST_RETICLE_TARGET:
     type: number
 UNIT_SPELLCAST_SENT:
   payload:
-  - name: unit
-    type: string
+  - name: unitTarget
+    type: unit
   - name: target
     type: string
   - name: castGUID
@@ -8573,6 +8928,9 @@ UNIT_SPELLCAST_START:
     type: string
   - name: spellID
     type: number
+  - name: castBarID
+    nilable: true
+    type: number
 UNIT_SPELLCAST_STOP:
   payload:
   - name: unitTarget
@@ -8581,6 +8939,9 @@ UNIT_SPELLCAST_STOP:
     type: string
   - name: spellID
     type: number
+  - name: castBarID
+    nilable: true
+    type: number
 UNIT_SPELLCAST_SUCCEEDED:
   payload:
   - name: unitTarget
@@ -8588,6 +8949,9 @@ UNIT_SPELLCAST_SUCCEEDED:
   - name: castGUID
     type: string
   - name: spellID
+    type: number
+  - name: castBarID
+    nilable: true
     type: number
 UNIT_STATS:
   payload:
@@ -8623,6 +8987,13 @@ UPDATE_BINDINGS:
   payload:
 UPDATE_BONUS_ACTIONBAR:
   payload:
+UPDATE_BULLETIN_BOARD_MEMBER_TYPE:
+  payload:
+  - name: player
+    type: string
+  - name: residentType
+    type:
+      enum: ResidentType
 UPDATE_BULLETIN_BOARD_ROSTER:
   payload:
   - name: neighborhoodInfo
@@ -8792,6 +9163,33 @@ VIEW_HOUSES_LIST_RECIEVED:
     type:
       arrayof:
         structure: HouseInfo
+VIEWED_TRANSMOG_OUTFIT_CHANGED:
+  payload:
+VIEWED_TRANSMOG_OUTFIT_SECONDARY_SLOTS_CHANGED:
+  payload:
+VIEWED_TRANSMOG_OUTFIT_SITUATIONS_CHANGED:
+  payload:
+VIEWED_TRANSMOG_OUTFIT_SLOT_REFRESH:
+  payload:
+VIEWED_TRANSMOG_OUTFIT_SLOT_SAVE_SUCCESS:
+  payload:
+  - name: slot
+    type:
+      enum: TransmogOutfitSlot
+  - name: type
+    type:
+      enum: TransmogType
+  - name: option
+    type:
+      enum: TransmogOutfitSlotOption
+VIEWED_TRANSMOG_OUTFIT_SLOT_WEAPON_OPTION_CHANGED:
+  payload:
+  - name: slot
+    type:
+      enum: TransmogOutfitSlot
+  - name: weaponOption
+    type:
+      enum: TransmogOutfitSlotOption
 VIGNETTE_MINIMAP_UPDATED:
   payload:
   - name: vignetteGUID
@@ -9023,36 +9421,27 @@ VOICE_CHAT_SPEAK_FOR_ME_ACTIVE_STATUS_UPDATED:
   payload:
 VOICE_CHAT_SPEAK_FOR_ME_FEATURE_STATUS_UPDATED:
   payload:
+VOICE_CHAT_TTS_PLAYBACK_BOOKMARK:
+  payload:
+  - name: utteranceID
+    type: number
+  - name: bookmarkName
+    type: string
 VOICE_CHAT_TTS_PLAYBACK_FAILED:
   payload:
+  - name: utteranceID
+    type: number
   - name: status
     type:
       enum: VoiceTtsStatusCode
-  - name: utteranceID
-    type: number
-  - name: destination
-    type:
-      enum: VoiceTtsDestination
 VOICE_CHAT_TTS_PLAYBACK_FINISHED:
   payload:
-  - name: numConsumers
-    type: number
   - name: utteranceID
     type: number
-  - name: destination
-    type:
-      enum: VoiceTtsDestination
 VOICE_CHAT_TTS_PLAYBACK_STARTED:
   payload:
-  - name: numConsumers
-    type: number
   - name: utteranceID
     type: number
-  - name: durationMS
-    type: number
-  - name: destination
-    type:
-      enum: VoiceTtsDestination
 VOICE_CHAT_TTS_SPEAK_TEXT_UPDATE:
   payload:
   - name: status

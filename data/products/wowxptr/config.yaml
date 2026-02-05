@@ -2,10 +2,8 @@ addon:
   capsule:
     apinamespaces:
       C_AuthChallenge:
-      C_PingSecure:
       C_SecureTransfer:
       C_StoreSecure:
-      C_UnitAurasPrivate:
       C_WowTokenSecure:
     enums:
       BattlepayBannerType:
@@ -23,11 +21,16 @@ addon:
       CreateForbiddenFrame:
       CreateSecureDelegate:
       loadstring_untainted:
+      secretunwrap:
   enum_values_set_in_framexml:
     CooldownViewerCategory:
       HiddenAura:
       HiddenSpell:
   enums_set_in_framexml:
+    CDMLayoutMode:
+    CooldownLayoutAction:
+    CooldownLayoutStatus:
+    CooldownLayoutType:
     EditModeChatFrameDisplayOnlySetting:
   hooked_globals:
     SetItemRef:
@@ -68,7 +71,11 @@ addon:
 modules:
   addons:
     GetAddOnInfo_noUpdateAvailable: true
+  luaobjects:
+    tostring_metamethod: true
 runner:
+  skip_bindings:
+    TOGGLECOLLECTIONSWARDROBE: requires better implementation of transmog slots
   skip_events:
     PERKS_PROGRAM_OPEN: needs C_ModelInfo.GetModelSceneInfoByID implemented
     RAF_REWARD_CLAIM_FAILED: numAffordableRewards never set
