@@ -161,22 +161,22 @@ return function(system, visibility)
   local function SetHeight(r, h)
     if h ~= r.height then
       r.dirty = true
-      r.height = h
+      r.height = r:IsObjectType('fontstring') and h == 0 and 1 or h
     end
   end
 
   local function SetSize(r, w, h)
     if w ~= r.width or h ~= r.height then
       r.dirty = true
-      r.width = w
-      r.height = h
+      r.width = r:IsObjectType('fontstring') and w == 0 and 1 or w
+      r.height = r:IsObjectType('fontstring') and h == 0 and 1 or h
     end
   end
 
   local function SetWidth(r, w)
     if w ~= r.width then
       r.dirty = true
-      r.width = w
+      r.width = r:IsObjectType('fontstring') and w == 0 and 1 or w
     end
   end
 

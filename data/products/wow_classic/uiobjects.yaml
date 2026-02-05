@@ -3113,6 +3113,9 @@ FontInstance:
       outputs:
   virtual: true
 FontString:
+  fieldinitoverrides:
+    height: 1
+    width: 1
   fields:
     maxLines:
       init: 0
