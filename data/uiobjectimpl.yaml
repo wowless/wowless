@@ -279,6 +279,7 @@ ScrollFrame/SetScrollChild:
   luafile:
     modules:
       api:
+      points:
 Slider/Disable:
   luafile:
 Slider/Enable:
