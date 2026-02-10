@@ -48,7 +48,6 @@ return function(api, env, log, uiobjects)
 
   local function ClearPoint(r, point)
     r.points[point] = nil
-    r.dirty = true
   end
 
   local function GetNumPoints(r)
