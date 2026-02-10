@@ -611,6 +611,14 @@ G.testsuite.uiobjects = function()
             end,
           }
         end,
+        ClearAllPoints = function()
+          local f = CreateFrame('Frame')
+          check0(f:SetAllPoints())
+          f:GetRect()
+          check1(true, f:IsRectValid())
+          check0(f:ClearAllPoints())
+          check1(false, f:IsRectValid())
+        end,
         ClearPoint = function()
           local f = CreateFrame('Frame')
           check0(f:SetPoint('TOPLEFT'))

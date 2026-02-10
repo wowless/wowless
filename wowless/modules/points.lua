@@ -44,6 +44,7 @@ return function(api, env, log, uiobjects)
 
   local function ClearAllPoints(r)
     table.wipe(r.points)
+    r.dirty = true
   end
 
   local function ClearPoint(r, point)
