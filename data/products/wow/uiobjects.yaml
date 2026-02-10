@@ -3354,6 +3354,9 @@ FontString:
     ClearAlphaGradient:
       inputs:
       outputs:
+    ClearText:
+      inputs:
+      outputs:
     FindCharacterIndexAtCoordinate:
       inputs:
       - name: x
@@ -4490,6 +4493,9 @@ GameTooltip:
     AddTexture:
     AppendText:
     ClearLines:
+    ClearPadding:
+      inputs:
+      outputs:
     CopyTooltip:
     FadeOut:
     GetAnchorType:

@@ -6,13 +6,13 @@ AbbreviateConfig:
       - name: data
         type:
           arrayof:
-            structure: NumberAbbrevData
+            structure: NumberAbbreviationBreakpoint
     SetAbbreviateNumberData:
       inputs:
       - name: data
         type:
           arrayof:
-            structure: NumberAbbrevData
+            structure: NumberAbbreviationBreakpoint
       outputs:
 LuaColorCurveObject:
   inherits: LuaCurveObjectBase
@@ -231,6 +231,11 @@ LuaDurationObject:
       outputs:
       - name: result
         type: table
+    GetClockTime:
+      inputs:
+      outputs:
+      - name: clockTime
+        type: number
     GetElapsedDuration:
       inputs:
       - default: 0
@@ -350,6 +355,30 @@ LuaFunctionContainer:
     IsCancelled:
 UnitHealPredictionCalculator:
   methods:
+    EvaluateCurrentHealthPercent:
+      inputs:
+      - name: curve
+        type: table
+      outputs:
+      - name: result
+        type: table
+    EvaluateMissingHealthPercent:
+      inputs:
+      - name: curve
+        type: table
+      outputs:
+      - name: result
+        type: table
+    GetCurrentHealth:
+      inputs:
+      outputs:
+      - name: currentHealth
+        type: number
+    GetCurrentHealthPercent:
+      inputs:
+      outputs:
+      - name: currentHealthPercent
+        type: number
     GetDamageAbsorbClampMode:
       inputs:
       outputs:
@@ -404,18 +433,77 @@ UnitHealPredictionCalculator:
         type: number
       - name: clamped
         type: boolean
+    GetMaximumDamageAbsorbs:
+      inputs:
+      outputs:
+      - name: maximumDamageAbsorbs
+        type: number
+    GetMaximumHealAbsorbs:
+      inputs:
+      outputs:
+      - name: maximumHealAbsorbs
+        type: number
+    GetMaximumHealth:
+      inputs:
+      outputs:
+      - name: maximumHealth
+        type: number
+    GetMaximumHealthMode:
+      inputs:
+      outputs:
+      - name: maximumHealthMode
+        type:
+          enum: UnitMaximumHealthMode
+    GetMaximumIncomingHeals:
+      inputs:
+      outputs:
+      - name: maximumIncomingHeals
+        type: number
+    GetMissingHealth:
+      inputs:
+      outputs:
+      - name: missingHealth
+        type: number
+    GetMissingHealthPercent:
+      inputs:
+      outputs:
+      - name: missingHealthPercent
+        type: number
     GetPredictedValues:
       inputs:
       outputs:
       - name: predictedValues
         type:
           structure: UnitHealPredictionValues
+    GetTotalDamageAbsorbs:
+      inputs:
+      outputs:
+      - name: totalDamageAbsorbs
+        type: number
+    GetTotalHealAbsorbs:
+      inputs:
+      outputs:
+      - name: totalHealAbsorbs
+        type: number
+    GetTotalIncomingHeals:
+      inputs:
+      outputs:
+      - name: totalIncomingHeals
+        type: number
+    GetTotalIncomingHealsFromHealer:
+      inputs:
+      outputs:
+      - name: totalIncomingHealsFromHealer
+        type: number
     HasSecretValues:
       inputs:
       outputs:
       - name: hasSecretValues
         type: boolean
     Reset:
+      inputs:
+      outputs:
+    ResetPredictedValues:
       inputs:
       outputs:
     SetDamageAbsorbClampMode:
@@ -446,6 +534,12 @@ UnitHealPredictionCalculator:
       inputs:
       - name: incomingHealOverflowPercent
         type: number
+      outputs:
+    SetMaximumHealthMode:
+      inputs:
+      - name: maximumHealthMode
+        type:
+          enum: UnitMaximumHealthMode
       outputs:
     SetPredictedValues:
       inputs:

@@ -30,6 +30,10 @@ lies:
       outputs:
       - _add:
           nilable: true
+    C_NamePlate.GetNamePlateForUnit:
+      outputs:
+      - _add:
+          nilable: true
     CreateSecureDelegate:
       inputs:
       - type:
@@ -137,6 +141,7 @@ lies:
   extra_events:
     COMBAT_LOG_EVENT_INTERNAL_UNFILTERED:
   extra_script_objects:
+    FrameAPINamePlate:
     HousingCatalogSearcherAPI:
     HousingFixturePointFrameAPI:
     HousingLayoutPinFrameAPI:
@@ -721,6 +726,10 @@ typedefs:
     type:
       luaobject: UnitHealPredictionCalculator
   UnitToken:
+    type: unit
+  UnitTokenNamePlate:
+    type: unit
+  UnitTokenRestrictedForAddOns:
     type: unit
   UnitTokenVariant:
     type: unit
