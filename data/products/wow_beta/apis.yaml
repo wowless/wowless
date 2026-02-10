@@ -28559,6 +28559,13 @@ C_TransmogCollection.IsSourceTypeFilterChecked:
   outputs:
   - name: checked
     type: boolean
+C_TransmogCollection.IsSpellItemEnchantmentHiddenVisual:
+  inputs:
+  - name: spellItemEnchantmentID
+    type: number
+  outputs:
+  - name: isHiddenVisual
+    type: boolean
 C_TransmogCollection.IsUsingDefaultFilters:
   inputs:
   outputs:

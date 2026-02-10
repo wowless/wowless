@@ -1584,6 +1584,16 @@ Enum:
     MaxValue: 7
     MinValue: 0
     NumValues: 8
+  BulkPurchaseStatus:
+    Done: 3
+    Failed: 4
+    FetchEntitlements: 2
+    PlacingOrders: 0
+    PurchasesPending: 1
+  BulkPurchaseStatusMeta:
+    MaxValue: 4
+    MinValue: 0
+    NumValues: 5
   BulkRefundResult:
     ResultFailed: 1
     ResultInvalidRequest: 2
@@ -9897,13 +9907,14 @@ Enum:
     NumValues: 1
   TransmogOutfitDisplayType:
     Assigned: 1
+    Disabled: 4
     Equipped: 2
     Hidden: 3
     Unassigned: 0
   TransmogOutfitDisplayTypeMeta:
-    MaxValue: 3
+    MaxValue: 4
     MinValue: 0
-    NumValues: 4
+    NumValues: 5
   TransmogOutfitEntryFlags:
     AutomaticallyAwardedOnLogin: 1
     IsDefaultEquipped: 32

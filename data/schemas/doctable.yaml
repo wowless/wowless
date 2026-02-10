@@ -108,6 +108,8 @@ type:
                     Name:
                       required: true
                       type: string
+                    NeverSecret:
+                      type: flag
                     Nilable:
                       required: true
                       type: boolean
