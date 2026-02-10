@@ -54,6 +54,9 @@ return function(addons, datalua, env, luaobjects, uiobjects, units)
   end
 
   local plainscalartypechecks = {
+    any = function(value)
+      return value
+    end,
     boolean = function(value, isout)
       if isout then
         return value, type(value) ~= 'boolean'

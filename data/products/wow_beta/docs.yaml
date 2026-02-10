@@ -66,15 +66,16 @@ lies:
       - _add:
           nilable: true
     scrub:
-      _remove:
-        inputs:
-        - name: values
-          type: unknown
-        instride: 1
-        outputs:
-        - name: scrubbed
-          type: unknown
-        outstride: 1
+      inputs:
+      - type:
+          _change:
+            from: unknown
+            to: any
+      outputs:
+      - type:
+          _change:
+            from: unknown
+            to: any
     UnitFactionGroup:
       _add:
         mayreturnnothing: true

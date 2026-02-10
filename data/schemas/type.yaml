@@ -1,6 +1,7 @@
 name: type
 type:
   taggedunion:
+    any: tag
     arrayof:
       schema: type
     boolean: tag
