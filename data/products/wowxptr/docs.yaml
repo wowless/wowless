@@ -76,6 +76,17 @@ lies:
           _change:
             from: unknown
             to: any
+    secretwrap:
+      inputs:
+      - type:
+          _change:
+            from: unknown
+            to: any
+      outputs:
+      - type:
+          _change:
+            from: unknown
+            to: any
     UnitFactionGroup:
       _add:
         mayreturnnothing: true
