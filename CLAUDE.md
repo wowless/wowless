@@ -150,20 +150,42 @@ Key patterns:
 - `__tostring` format: `"TypeName: 0x..."` (use `tostring(table):sub(8)`
   for address)
 
-### Test Addon Patterns
+### Test Addon Structure (`addon/Wowless/`)
 
-Test addon files in `addon/Wowless/` use a nested table structure for test
-organization:
+The test addon runs inside the simulated WoW environment. Files load in
+`.toc` order:
 
-- Return tables from test functions for sub-tests
+- `util.lua`: Assertion helpers (`assertEquals`, `check0`–`check7`, `match`,
+  `retn`) stored on the addon table `G`
+- `statemachine.lua`: `checkStateMachine(states, transitions, init)` for
+  exhaustive state machine testing via BFS traversal of all edge combinations
+- `init.lua`: Sets up `G.testsuite = {}` and `_G.assertEquals`
+- `framework.lua`: Test runner iterator; walks nested tables depth-first,
+  collecting sub-tests returned from test functions
+- Per-domain test files (`uiobjects.lua`, `luaobjects.lua`, `test.lua`,
+  etc.): Each adds an entry to `G.testsuite` (e.g.,
+  `G.testsuite.uiobjects = function() ... end`)
+- `test.lua`: Runs all sync tests via `G.tests()` iterator on `OnUpdate`,
+  budgeted per frame. Also defines async tests (timers, events) that use
+  a `done(check)` callback pattern. Results go to `_G.WowlessTestFailures`.
+
+#### Writing tests
+
+- Test functions return a table of named sub-tests (keys = names,
+  values = functions) for hierarchical organization. Sub-tests can
+  themselves return tables for further nesting.
 - Use `assertEquals(expected, actual)` for assertions
+- Use `checkN(e1, ..., eN, ...)` to assert both return count and values
+- Use `match(k, e1..ek, a1..ak)` to return a table of individual value
+  checks (useful as sub-tests)
+- Use `retn(n, ...)` to assert return count and pass values through
 - Check C functions with `assertEquals(false, pcall(coroutine.create, fn))`
+- Use `checkStateMachine` when testing objects with multiple states and
+  transitions (buttons, visibility, rects, event registration)
+- Guard wowless-only or real-client-only tests with
+  `if _G.__wowless then return end`
 - Pre-compute data tables outside test functions when iterating `WowlessData`
-- Test both branches of conditional behavior (e.g., when config flags affect
-  output)
-- Keep test modules focused on type-specific behavior; move generic tests to
-  shared utilities
-- Use short variable names like `cfg` for config objects
+- Keep test modules focused on type-specific behavior
 
 ### Data Format Conventions
 
