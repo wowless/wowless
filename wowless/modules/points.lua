@@ -113,7 +113,11 @@ return function(api, env, log, uiobjects)
 
   local function resolveRelativeTo(r, fn, ...)
     if select('#', ...) == 0 then
-      return r.parent
+      local relativeTo = r.parent
+      if relativeTo then
+        cycleCheck(r, relativeTo, fn)
+      end
+      return relativeTo
     end
     local arg = select(1, ...)
     if arg == nil then

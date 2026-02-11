@@ -607,6 +607,32 @@ G.testsuite.uiobjects = function()
                   check0(i:SetAllPoints(h))
                   check2(false, msg, pcall(f.SetAllPoints, f, i))
                 end,
+                allimplicitparent = function()
+                  local p = CreateFrame('Frame')
+                  local c = CreateFrame('Frame', nil, p)
+                  check0(p:SetAllPoints(c))
+                  local msg = table.concat({
+                    'Action[SetPoint] failed because',
+                    '[Cannot anchor to a region dependent on it]: ',
+                    'attempted from: Frame:SetAllPoints.\n',
+                    'Relative: [' .. rstr(p) .. ']\n',
+                    'Dependent: [' .. rstr(p) .. ']',
+                  })
+                  check2(false, msg, pcall(c.SetAllPoints, c))
+                end,
+                implicitparent = function()
+                  local p = CreateFrame('Frame')
+                  local c = CreateFrame('Frame', nil, p)
+                  check0(p:SetPoint('CENTER', c))
+                  local msg = table.concat({
+                    'Action[SetPoint] failed because',
+                    '[Cannot anchor to a region dependent on it]: ',
+                    'attempted from: Frame:SetPoint.\n',
+                    'Relative: [' .. rstr(p) .. ']\n',
+                    'Dependent: [' .. rstr(p) .. ']',
+                  })
+                  check2(false, msg, pcall(c.SetPoint, c, 'CENTER'))
+                end,
               }
             end,
           }
