@@ -870,6 +870,42 @@ local asyncTests = {
     end,
   },
   {
+    name = 'OnUpdate invocation order',
+    fn = function(done)
+      if _G.__wowless then -- issue #519
+        return done(function() end)
+      end
+      local log = {}
+      local function logit(k)
+        return function()
+          table.insert(log, k)
+        end
+      end
+      _G.C_Timer.After(0, function()
+        local frames = {}
+        for i = 1, 4 do
+          frames[i] = CreateFrame('Frame')
+          frames[i]:SetScript('OnUpdate', logit(i))
+        end
+        _G.C_Timer.After(0, function()
+          frames[2]:SetScript('OnUpdate', nil)
+          frames[2]:SetScript('OnUpdate', logit(2))
+          _G.C_Timer.After(0, function()
+            frames[2]:SetScript('OnUpdate', nil)
+            _G.C_Timer.After(0, function()
+              frames[2]:SetScript('OnUpdate', logit(2))
+              _G.C_Timer.After(0, function()
+                done(function()
+                  assertEquals('4,3,2,1,4,3,2,1,4,3,1,2,4,3,1', table.concat(log, ','))
+                end)
+              end)
+            end)
+          end)
+        end)
+      end)
+    end,
+  },
+  {
     name = 'heartbeat clears region dirty bits',
     fn = function(done)
       local f = CreateFrame('Frame')
