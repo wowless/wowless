@@ -1113,6 +1113,28 @@ G.testsuite.uiobjects = function()
           }
           return G.checkStateMachine(states, transitions, 'init')
         end,
+        transitivelydirty = function()
+          if _G.__wowless then -- issue #517
+            return
+          end
+          local f = CreateFrame('Frame')
+          local g = CreateFrame('Frame', nil, f)
+          local h = CreateFrame('Frame', nil, g)
+          f:SetAllPoints()
+          g:SetAllPoints()
+          h:SetAllPoints()
+          check1(false, h:IsRectValid())
+          h:GetRect()
+          check1(true, h:IsRectValid())
+          f:ClearPoint('TOPLEFT')
+          check1(true, h:IsRectValid())
+          h:GetRect()
+          check1(true, h:IsRectValid())
+          f:SetPoint('CENTER')
+          check1(false, h:IsRectValid())
+          h:GetRect()
+          check1(true, h:IsRectValid())
+        end,
       }
     end,
 
