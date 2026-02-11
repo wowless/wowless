@@ -46,8 +46,14 @@ Products: `wow`, `wowt`, `wowxptr`, `wow_beta`, `wow_classic`,
 cmake --build --preset default --target test
 ```
 
+The test target rebuilds changed sources then runs `build/cmake/runtests`.
+A successful run exits with code 0 and produces no output. Tests are also
+run by the `build and test` pre-commit hook, so they execute automatically
+on every commit.
+
 Tests are in `spec/` directory and use luassert. Test specs are defined in
-CMakeLists.txt around line 985.
+CMakeLists.txt around line 985. The test addon in `addon/Wowless/` contains
+in-game tests that run inside the simulated WoW environment during `runtests`.
 
 ### Linting and Formatting
 
