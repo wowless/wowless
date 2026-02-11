@@ -869,6 +869,23 @@ local asyncTests = {
       t.foo = 'bar'
     end,
   },
+  {
+    name = 'heartbeat clears region dirty bits',
+    fn = function(done)
+      local f = CreateFrame('Frame')
+      f:SetSize(100, 100)
+      f:SetPoint('CENTER')
+      assert(f:GetRect())
+      assertEquals(true, f:IsRectValid())
+      f:SetWidth(200)
+      assertEquals(false, f:IsRectValid())
+      _G.C_Timer.After(0, function()
+        done(function()
+          assertEquals(not _G.__wowless, f:IsRectValid()) -- issue #518
+        end)
+      end)
+    end,
+  },
 }
 
 _G.WowlessTestFailures = {}
