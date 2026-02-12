@@ -44,6 +44,20 @@ return function(system, visibility)
     end
   end
 
+  local function dirty(r)
+    if r.dirty then
+      return true
+    end
+    for _, p in pairs(r.points) do
+      local rt = p[1]
+      if rt and dirty(rt) then
+        r.dirty = true
+        return true
+      end
+    end
+    return false
+  end
+
   local validate
 
   local function validated(p)
@@ -51,7 +65,7 @@ return function(system, visibility)
   end
 
   function validate(r)
-    if r.dirty then
+    if dirty(r) then
       r.dirty = false
       local p = r.points
       local h = r.height ~= 0 and r.height or nil
@@ -155,7 +169,7 @@ return function(system, visibility)
   end
 
   local function IsRectValid(r)
-    return r.valid and not r.dirty
+    return r.valid and not dirty(r)
   end
 
   local function SetHeight(r, h)

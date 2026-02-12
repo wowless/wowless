@@ -986,7 +986,7 @@ local asyncTests = {
       _G.C_Timer.After(0, function()
         done(function()
           assertEquals(false, p:IsVisible())
-          assertEquals(not _G.__wowless, p:IsRectValid()) -- issue #517
+          assertEquals(true, p:IsRectValid())
         end)
       end)
     end,

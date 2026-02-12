@@ -1140,7 +1140,7 @@ G.testsuite.uiobjects = function()
           return G.checkStateMachine(states, transitions, 'init')
         end,
         transitivelydirty = function()
-          if _G.__wowless then -- issue #517
+          if _G.__wowless then -- issue #520
             return
           end
           local f = CreateFrame('Frame')
