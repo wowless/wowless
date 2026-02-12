@@ -917,7 +917,7 @@ local asyncTests = {
       assertEquals(false, f:IsRectValid())
       _G.C_Timer.After(0, function()
         done(function()
-          assertEquals(not _G.__wowless, f:IsRectValid()) -- issue #518
+          assertEquals(true, f:IsRectValid())
         end)
       end)
     end,

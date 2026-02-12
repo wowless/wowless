@@ -11,6 +11,11 @@ return function(api, scripts, time, visibility)
         RunScript(frame, 'OnUpdate', 1)
       end
     end
+    for frame in frames:entries() do
+      if IsVisible(frame) then
+        frame:GetRect() -- force recomputation if dirty
+      end
+    end
   end
 
   return {
