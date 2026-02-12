@@ -4440,6 +4440,11 @@ C_CatalogShop.RefreshVirtualCurrencyBalance:
   - name: currencyCode
     type: string
   outputs:
+C_CatalogShop.ShouldShowHousingWarning:
+  inputs:
+  outputs:
+  - name: shouldShowHousingWarning
+    type: boolean
 C_CatalogShop.StartHousingVCPurchaseConfirmation:
   inputs:
   - name: productID
@@ -12989,6 +12994,11 @@ C_Housing.HouseFinderRequestReservationAndPort:
   - name: plotID
     type: number
   outputs:
+C_Housing.IsHousingMarketCartFullRemoveEnabled:
+  inputs:
+  outputs:
+  - name: isHousingMarketCartFullRemoveEnabled
+    type: boolean
 C_Housing.IsHousingMarketEnabled:
   inputs:
   outputs:
@@ -38501,6 +38511,8 @@ UnitCastingInfo:
     type: number
   - name: castBarID
     nilable: true
+    type: number
+  - name: delayTimeMs
     type: number
 UnitChannelDuration:
   inputs:

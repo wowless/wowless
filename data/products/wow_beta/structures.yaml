@@ -1183,6 +1183,8 @@ C_CatalogShop.CatalogShopBundleChildInfo:
       type: number
     displayOrder:
       type: number
+    quantityInBundle:
+      type: number
 C_CatalogShop.CatalogShopCategoryInfo:
   fields:
     displayName:
@@ -1301,6 +1303,8 @@ C_CatalogShop.CatalogShopProductInfo:
     consumableQuantity:
       nilable: true
       type: number
+    containsHousingItem:
+      type: boolean
     description:
       type: string
     discountPercentage:
@@ -4344,6 +4348,9 @@ C_ItemUpgrade.ItemUpgradeLevelInfo:
       type:
         arrayof:
           structure: C_ItemUpgrade.ItemUpgradeStat
+    moneyCost:
+      nilable: true
+      type: number
     upgradeLevel:
       type: number
 C_ItemUpgrade.ItemUpgradeSeasonalCostType:

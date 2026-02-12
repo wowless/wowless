@@ -8820,6 +8820,7 @@ Enum:
     Attributes: 1
     BarValue: 16384
     Cooldown: 32768
+    CooldownStyle: 524288
     Cursor: 1024
     Desaturation: 4096
     FrameLevel: 256
@@ -8842,9 +8843,9 @@ Enum:
     Toplevel: 4
     VertexColor: 2048
   SecretAspectMeta:
-    MaxValue: 262144
+    MaxValue: 524288
     MinValue: 1
-    NumValues: 25
+    NumValues: 26
   SelfResurrectOptionType:
     Item: 1
     Spell: 0
