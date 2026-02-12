@@ -1139,6 +1139,40 @@ G.testsuite.uiobjects = function()
           }
           return G.checkStateMachine(states, transitions, 'init')
         end,
+        edgefromcenter = function()
+          if _G.__wowless then -- issue #520
+            return
+          end
+          local p = CreateFrame('Frame')
+          p:SetSize(100, 200)
+          p:SetPoint('BOTTOMLEFT')
+          return {
+            centerandbottomright = function()
+              local f = CreateFrame('Frame')
+              f:SetPoint('CENTER', p)
+              f:SetPoint('BOTTOMRIGHT', p)
+              check4(0, 0, 100, 200, f:GetRect())
+            end,
+            centerandtopleft = function()
+              local f = CreateFrame('Frame')
+              f:SetPoint('CENTER', p)
+              f:SetPoint('TOPLEFT', p)
+              check4(0, 0, 100, 200, f:GetRect())
+            end,
+            centerandtopright = function()
+              local f = CreateFrame('Frame')
+              f:SetPoint('CENTER', p)
+              f:SetPoint('TOPRIGHT', p)
+              check4(0, 0, 100, 200, f:GetRect())
+            end,
+            centerandbottomleft = function()
+              local f = CreateFrame('Frame')
+              f:SetPoint('CENTER', p)
+              f:SetPoint('BOTTOMLEFT', p)
+              check4(0, 0, 100, 200, f:GetRect())
+            end,
+          }
+        end,
         transitivelydirty = function()
           if _G.__wowless then -- issue #520
             return
