@@ -965,6 +965,32 @@ local asyncTests = {
       end)
     end,
   },
+  {
+    name = 'heartbeat clears dirty bits on invisible frame anchored to by visible frame',
+    fn = function(done)
+      local p = CreateFrame('Frame')
+      p:SetSize(100, 100)
+      p:SetPoint('CENTER')
+      p:Hide()
+      local f = CreateFrame('Frame')
+      f:SetSize(50, 50)
+      f:SetPoint('CENTER', p)
+      assert(p:GetRect())
+      assertEquals(true, p:IsRectValid())
+      assert(f:GetRect())
+      assertEquals(true, f:IsRectValid())
+      assertEquals(false, p:IsVisible())
+      assertEquals(true, f:IsVisible())
+      p:SetWidth(200)
+      assertEquals(false, p:IsRectValid())
+      _G.C_Timer.After(0, function()
+        done(function()
+          assertEquals(false, p:IsVisible())
+          assertEquals(not _G.__wowless, p:IsRectValid()) -- issue #517
+        end)
+      end)
+    end,
+  },
 }
 
 _G.WowlessTestFailures = {}
