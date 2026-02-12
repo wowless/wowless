@@ -932,8 +932,8 @@ foreach(product ${products})
   add_custom_command(
     OUTPUT ${out}
     COMMAND
-      wowless run -p ${product} -e5 -a addon/Wowless -a
-      ${CMAKE_CURRENT_BINARY_DIR}/products/${product}/WowlessData -o
+      wowless run -p ${product} -e5 -a ${CMAKE_CURRENT_BINARY_DIR}/addon/Wowless
+      -a ${CMAKE_CURRENT_BINARY_DIR}/products/${product}/WowlessData -o
       ${CMAKE_CURRENT_BINARY_DIR}/${out}
     JOB_POOL wowless_run
     DEPENDS wowless testaddon.txt ${product}_addon.txt ${product}_data.sqlite3
@@ -986,21 +986,36 @@ add_lua_executable(
   wowlessutil
   wowlessyaml)
 
+set(d ${CMAKE_CURRENT_BINARY_DIR}/addon/Wowless)
+file(MAKE_DIRECTORY ${d})
+set(testaddon_outs)
+foreach(
+  f
+  evenmoreintrinsic.xml
+  framework.lua
+  funtainer.lua
+  generated.lua
+  init.lua
+  luaobjects.lua
+  statemachine.lua
+  test.lua
+  test.xml
+  uiobjects.lua
+  util.lua
+  Wowless.toc)
+  set(out ${d}/${f})
+  list(APPEND testaddon_outs ${out})
+  add_custom_command(
+    OUTPUT ${out}
+    COMMAND
+      ${CMAKE_COMMAND} -DSRC=${CMAKE_CURRENT_SOURCE_DIR}/addon/Wowless/${f}
+      -DDST_DIR=${d} -P ${CMAKE_CURRENT_BINARY_DIR}/copy_executable.cmake
+    DEPENDS addon/Wowless/${f})
+endforeach()
 add_custom_command(
   OUTPUT testaddon.txt
   COMMAND ${CMAKE_COMMAND} -E touch testaddon.txt
-  DEPENDS addon/Wowless/evenmoreintrinsic.xml
-          addon/Wowless/framework.lua
-          addon/Wowless/generated.lua
-          addon/Wowless/init.lua
-          addon/Wowless/statemachine.lua
-          addon/Wowless/funtainer.lua
-          addon/Wowless/luaobjects.lua
-          addon/Wowless/test.lua
-          addon/Wowless/test.xml
-          addon/Wowless/uiobjects.lua
-          addon/Wowless/util.lua
-          addon/Wowless/Wowless.toc)
+  DEPENDS ${testaddon_outs})
 
 set(specs
     spec/addon/framework_spec.lua
