@@ -922,6 +922,49 @@ local asyncTests = {
       end)
     end,
   },
+  {
+    name = 'heartbeat does not clear dirty bits on hidden frame',
+    fn = function(done)
+      local f = CreateFrame('Frame')
+      f:SetSize(100, 100)
+      f:SetPoint('CENTER')
+      assert(f:GetRect())
+      assertEquals(true, f:IsRectValid())
+      f:Hide()
+      f:SetWidth(200)
+      assertEquals(false, f:IsRectValid())
+      _G.C_Timer.After(0, function()
+        done(function()
+          assertEquals(false, f:IsRectValid())
+        end)
+      end)
+    end,
+  },
+  {
+    name = 'heartbeat does not clear dirty bits on shown but invisible frame',
+    fn = function(done)
+      local p = CreateFrame('Frame')
+      p:SetSize(100, 100)
+      p:SetPoint('CENTER')
+      local f = CreateFrame('Frame', nil, p)
+      f:SetAllPoints()
+      assert(f:GetRect())
+      assertEquals(true, f:IsRectValid())
+      assertEquals(true, f:IsVisible())
+      p:Hide()
+      assertEquals(true, f:IsShown())
+      assertEquals(false, f:IsVisible())
+      f:SetWidth(200)
+      assertEquals(false, f:IsRectValid())
+      _G.C_Timer.After(0, function()
+        done(function()
+          assertEquals(true, f:IsShown())
+          assertEquals(false, f:IsVisible())
+          assertEquals(false, f:IsRectValid())
+        end)
+      end)
+    end,
+  },
 }
 
 _G.WowlessTestFailures = {}
