@@ -95,6 +95,7 @@ macrotext:
 mainloop:
   deps:
     api:
+    region:
     scripts:
     time:
     visibility:
