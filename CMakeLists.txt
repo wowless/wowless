@@ -862,6 +862,7 @@ lua2c(
   wowless.modules.calendar=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/calendar.lua
   wowless.modules.cvars=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/cvars.lua
   wowless.modules.datetime=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/datetime.lua
+  wowless.modules.dirty=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/dirty.lua
   wowless.modules.env=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/env.lua
   wowless.modules.events=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/events.lua
   wowless.modules.fontinstance=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/fontinstance.lua

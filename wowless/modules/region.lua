@@ -1,5 +1,6 @@
-return function(system, visibility)
+return function(dirty, system, visibility)
   local IsVisible = visibility.IsVisible
+  local SetDirty = dirty.SetDirty
 
   local screen = {
     bottom = 0,
@@ -44,20 +45,6 @@ return function(system, visibility)
     end
   end
 
-  local function dirty(r)
-    if r.dirty then
-      return true
-    end
-    for _, p in pairs(r.points) do
-      local rt = p[1]
-      if rt and dirty(rt) then
-        r.dirty = true
-        return true
-      end
-    end
-    return false
-  end
-
   local validate
 
   local function validated(p)
@@ -65,7 +52,7 @@ return function(system, visibility)
   end
 
   function validate(r)
-    if dirty(r) then
+    if r.dirty then
       r.dirty = false
       local p = r.points
       local by = resolvey(validated(p.BOTTOMLEFT) or validated(p.BOTTOM) or validated(p.BOTTOMRIGHT))
@@ -169,28 +156,28 @@ return function(system, visibility)
   end
 
   local function IsRectValid(r)
-    return r.valid and not dirty(r)
+    return r.valid and not r.dirty
   end
 
   local function SetHeight(r, h)
     if h ~= r.height then
-      r.dirty = true
       r.height = r.type == 'fontstring' and h == 0 and 1 or h
+      SetDirty(r)
     end
   end
 
   local function SetSize(r, w, h)
     if w ~= r.width or h ~= r.height then
-      r.dirty = true
       r.width = r.type == 'fontstring' and w == 0 and 1 or w
       r.height = r.type == 'fontstring' and h == 0 and 1 or h
+      SetDirty(r)
     end
   end
 
   local function SetWidth(r, w)
     if w ~= r.width then
-      r.dirty = true
       r.width = r.type == 'fontstring' and w == 0 and 1 or w
+      SetDirty(r)
     end
   end
 

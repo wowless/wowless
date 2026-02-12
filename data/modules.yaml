@@ -33,6 +33,8 @@ datalua:
 datetime:
   deps:
     datalua:
+dirty:
+  deps:
 env:
   deps:
 events:
@@ -109,11 +111,13 @@ platform:
 points:
   deps:
     api:
+    dirty:
     env:
     log:
     uiobjects:
 region:
   deps:
+    dirty:
     system:
     visibility:
 scripts:

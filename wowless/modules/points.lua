@@ -1,6 +1,7 @@
-return function(api, env, log, uiobjects)
+return function(api, dirty, env, log, uiobjects)
   local genv = env.genv
   local ParentSub = api.ParentSub
+  local SetDirty = dirty.SetDirty
   local UserData = uiobjects.UserData
 
   local validPoints = require('runtime.stringenums').FramePoint
@@ -43,11 +44,24 @@ return function(api, env, log, uiobjects)
   })
 
   local function ClearAllPoints(r)
+    for _, p in pairs(r.points) do
+      local rt = p[1]
+      if rt then
+        local n = rt.anchoredBy[r] - 1
+        rt.anchoredBy[r] = n > 0 and n or nil
+      end
+    end
     table.wipe(r.points)
-    r.dirty = true
+    SetDirty(r)
   end
 
   local function ClearPoint(r, point)
+    local old = r.points[point]
+    if old and old[1] then
+      local rt = old[1]
+      local n = rt.anchoredBy[r] - 1
+      rt.anchoredBy[r] = n > 0 and n or nil
+    end
     r.points[point] = nil
   end
 
@@ -143,8 +157,17 @@ return function(api, env, log, uiobjects)
   end
 
   local function SetPointInternal(r, point, relativeTo, relativePoint, x, y)
+    local old = r.points[point]
+    if old and old[1] then
+      local rt = old[1]
+      local n = rt.anchoredBy[r] - 1
+      rt.anchoredBy[r] = n > 0 and n or nil
+    end
     r.points[point] = { relativeTo, relativePoint, x, y }
-    r.dirty = true
+    if relativeTo then
+      relativeTo.anchoredBy[r] = (relativeTo.anchoredBy[r] or 0) + 1
+    end
+    SetDirty(r)
   end
 
   local function SetPoint(r, point, ...)

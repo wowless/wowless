@@ -6254,6 +6254,9 @@ QuestPOIFrame:
         type: number
 Region:
   fields:
+    anchoredBy:
+      init:
+      type: table
     animationGroups:
       init:
       type: table
