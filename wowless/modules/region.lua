@@ -68,14 +68,14 @@ return function(system, visibility)
     if dirty(r) then
       r.dirty = false
       local p = r.points
-      local h = r.height ~= 0 and r.height or nil
-      local w = r.width ~= 0 and r.width or nil
       local by = resolvey(validated(p.BOTTOMLEFT) or validated(p.BOTTOM) or validated(p.BOTTOMRIGHT))
       local lx = resolvex(validated(p.TOPLEFT) or validated(p.LEFT) or validated(p.BOTTOMLEFT))
       local rx = resolvex(validated(p.TOPRIGHT) or validated(p.RIGHT) or validated(p.BOTTOMRIGHT))
       local ty = resolvey(validated(p.TOPLEFT) or validated(p.TOP) or validated(p.TOPRIGHT))
       local mx = resolvex(validated(p.TOP) or validated(p.CENTER) or validated(p.BOTTOM))
       local my = resolvey(validated(p.LEFT) or validated(p.CENTER) or validated(p.RIGHT))
+      local w = (r.width ~= 0 and r.width) or (mx and rx and (rx - mx) * 2) or (mx and lx and (mx - lx) * 2)
+      local h = (r.height ~= 0 and r.height) or (my and ty and (ty - my) * 2) or (my and by and (my - by) * 2)
       local bb = by or (ty and h and ty - h) or (my and h and my - h / 2)
       local ll = lx or (rx and w and rx - w) or (mx and w and mx - w / 2)
       local rr = rx or (lx and w and lx + w) or (mx and w and mx + w / 2)

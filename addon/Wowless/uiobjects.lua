@@ -1140,9 +1140,6 @@ G.testsuite.uiobjects = function()
           return G.checkStateMachine(states, transitions, 'init')
         end,
         edgefromcenter = function()
-          if _G.__wowless then -- issue #520
-            return
-          end
           local p = CreateFrame('Frame')
           p:SetSize(100, 200)
           p:SetPoint('BOTTOMLEFT')
@@ -1174,9 +1171,6 @@ G.testsuite.uiobjects = function()
           }
         end,
         transitivelydirty = function()
-          if _G.__wowless then -- issue #520
-            return
-          end
           local f = CreateFrame('Frame')
           local g = CreateFrame('Frame', nil, f)
           local h = CreateFrame('Frame', nil, g)
