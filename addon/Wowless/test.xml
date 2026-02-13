@@ -487,17 +487,14 @@
   </Actor>
   <Script>
     CreateFrame('ModelScene'):CreateActor(nil, 'WowlessActorTemplate')
-    if not __wowless then -- issue #452
-      local expected = {
-        'OnAnimFinished',
-        'OnLoad',
-        'OnModelCleared',
-        'OnModelLoaded',
-        'OnModelLoading',
-        'OnUpdate',
-      }
-      assertEquals(table.concat(expected, ','), table.concat(WowlessLog, ','))
+    local expected = {}
+    for k, v in pairs(_G.WowlessData.UIObjectApis.Actor.scripts) do
+      if v or _G.__wowless then -- issue #452
+        table.insert(expected, k)
+      end
     end
+    table.sort(expected)
+    assertEquals(table.concat(expected, ','), table.concat(WowlessLog, ','))
   </Script>
 
   <Frame>

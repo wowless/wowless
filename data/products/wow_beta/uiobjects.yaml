@@ -7190,6 +7190,14 @@ Region:
       inputs:
       outputs:
   objectType: Region
+  scripts:
+    OnEnter:
+    OnHide:
+    OnLeave:
+    OnMouseDown:
+    OnMouseUp:
+    OnMouseWheel:
+    OnShow:
   virtual: true
 RegionBase:
   fields:
@@ -7267,14 +7275,6 @@ RegionBase:
         uiobjectimpl: Region/Show
       inputs:
       outputs:
-  scripts:
-    OnEnter:
-    OnHide:
-    OnLeave:
-    OnMouseDown:
-    OnMouseUp:
-    OnMouseWheel:
-    OnShow:
   virtual: true
 Rotation:
   fields:

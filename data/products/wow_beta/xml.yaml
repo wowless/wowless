@@ -973,6 +973,10 @@ OnModelLoaded:
   extends: ScriptType
   impl:
     script:
+OnModelLoading:
+  extends: ScriptType
+  impl:
+    script:
 OnMouseDown:
   extends: ScriptType
   impl:

@@ -565,7 +565,7 @@ G.testsuite.generated = function()
             end
             return mtests
           end,
-          scripts = function()
+          scripts = obj.HasScript and function()
             local stests = {}
             for k, v in pairs(cfg.scripts) do
               stests[k] = function()

@@ -254,10 +254,8 @@ local ptablemap = {
         ft.shown.init = false
       end
       local st = {}
-      if mt.HasScript then
-        for scripttype in pairs(allscripts) do
-          st[scripttype] = not not (v.scripts and v.scripts[scripttype])
-        end
+      for scripttype in pairs(allscripts) do
+        st[scripttype] = not not (v.scripts and v.scripts[scripttype])
       end
       t[k] = {
         fields = ft,
