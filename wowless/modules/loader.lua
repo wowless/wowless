@@ -169,6 +169,10 @@ return function(
   local scriptCache = {}
 
   local function loadScript(script, obj, env, filename, intrinsic)
+    if not scripts.HasScript(obj, script.type) then
+      -- TODO fire warning, issue #521
+      return
+    end
     local fn
     if script.attr['function'] then
       local fnattr = script.attr['function']
@@ -194,38 +198,36 @@ return function(
       scriptCache[env] = scriptCache[env] or {}
       scriptCache[env][script] = fn
     end
-    if obj.scripts then
-      local old = obj.scripts[1][script.type:lower()]
-      if old and fn and script.attr.inherit then
-        local bfn = fn
-        if script.attr.inherit == 'prepend' then
-          fn = function(...)
-            old(...)
-            bfn(...)
-          end
-        elseif script.attr.inherit == 'append' then
-          fn = function(...)
-            bfn(...)
-            old(...)
-          end
-        else
-          error('invalid inherit tag on script')
+    local old = obj.scripts[1][script.type:lower()]
+    if old and fn and script.attr.inherit then
+      local bfn = fn
+      if script.attr.inherit == 'prepend' then
+        fn = function(...)
+          old(...)
+          bfn(...)
         end
-        setfenv(fn, env)
+      elseif script.attr.inherit == 'append' then
+        fn = function(...)
+          bfn(...)
+          old(...)
+        end
+      else
+        error('invalid inherit tag on script')
       end
-      assert(not script.attr.intrinsicorder or intrinsic, 'intrinsicOrder on non-intrinsic')
-      local bindingType = 1
-      if script.attr.intrinsicorder == 'precall' then
-        bindingType = 0
-      elseif script.attr.intrinsicorder == 'postcall' then
-        bindingType = 2
-      elseif script.attr.intrinsicorder then
-        error('invalid intrinsicOrder tag on script')
-      elseif intrinsic then
-        bindingType = 0
-      end
-      scripts.SetScriptWithBindingType(obj, script.type, bindingType, fn)
+      setfenv(fn, env)
     end
+    assert(not script.attr.intrinsicorder or intrinsic, 'intrinsicOrder on non-intrinsic')
+    local bindingType = 1
+    if script.attr.intrinsicorder == 'precall' then
+      bindingType = 0
+    elseif script.attr.intrinsicorder == 'postcall' then
+      bindingType = 2
+    elseif script.attr.intrinsicorder then
+      error('invalid intrinsicOrder tag on script')
+    elseif intrinsic then
+      bindingType = 0
+    end
+    scripts.SetScriptWithBindingType(obj, script.type, bindingType, fn)
   end
 
   local parentMatch = '^$[pP][aA][rR][eE][nN][tT]'

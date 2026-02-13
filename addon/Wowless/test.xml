@@ -489,9 +489,10 @@
     CreateFrame('ModelScene'):CreateActor(nil, 'WowlessActorTemplate')
     local expected = {}
     for k, v in pairs(_G.WowlessData.UIObjectApis.Actor.scripts) do
-      if v or _G.__wowless then -- issue #452
+      if v then
         table.insert(expected, k)
       end
+      -- TODO warn otherwise, issues #452 and #521
     end
     table.sort(expected)
     assertEquals(table.concat(expected, ','), table.concat(WowlessLog, ','))
