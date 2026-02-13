@@ -638,13 +638,6 @@ lua2c(wowlessrender
 add_lua_executable(gentest ${CMAKE_CURRENT_SOURCE_DIR}/tools/gentest.lua
                    argparse penlight toolsutil wowlessyaml)
 
-file(
-  WRITE ${CMAKE_CURRENT_BINARY_DIR}/copy_executable.cmake
-  "file(COPY \"\${SRC}\" DESTINATION \"\${DST_DIR}\" FILE_PERMISSIONS\
- OWNER_READ OWNER_WRITE OWNER_EXECUTE\
- GROUP_READ GROUP_EXECUTE\
- WORLD_READ WORLD_EXECUTE)\n")
-
 foreach(product ${products})
   set(d ${CMAKE_CURRENT_BINARY_DIR}/products/${product}/WowlessData)
   set(staging ${CMAKE_CURRENT_BINARY_DIR}/products/${product}/gentest-staging)
@@ -662,7 +655,7 @@ foreach(product ${products})
     add_custom_command(
       OUTPUT ${out}
       COMMAND ${CMAKE_COMMAND} -DSRC=${staged} -DDST_DIR=${d} -P
-              ${CMAKE_CURRENT_BINARY_DIR}/copy_executable.cmake
+              ${CMAKE_CURRENT_SOURCE_DIR}/cmake/copy_executable.cmake
       DEPENDS ${staged})
   endmacro()
   gentest(WowlessData.toc toc)
@@ -1010,7 +1003,7 @@ foreach(
     OUTPUT ${out}
     COMMAND
       ${CMAKE_COMMAND} -DSRC=${CMAKE_CURRENT_SOURCE_DIR}/addon/Wowless/${f}
-      -DDST_DIR=${d} -P ${CMAKE_CURRENT_BINARY_DIR}/copy_executable.cmake
+      -DDST_DIR=${d} -P ${CMAKE_CURRENT_SOURCE_DIR}/cmake/copy_executable.cmake
     DEPENDS addon/Wowless/${f})
 endforeach()
 set(out ${d}/test.xml)
@@ -1022,7 +1015,7 @@ add_custom_command(
     ${CMAKE_COMMAND} -DSRC=${CMAKE_CURRENT_SOURCE_DIR}/addon/Wowless/test.xml
     -DDST=${staging} -P ${CMAKE_CURRENT_SOURCE_DIR}/cmake/preprocess_line.cmake
   COMMAND ${CMAKE_COMMAND} -DSRC=${staging} -DDST_DIR=${d} -P
-          ${CMAKE_CURRENT_BINARY_DIR}/copy_executable.cmake
+          ${CMAKE_CURRENT_SOURCE_DIR}/cmake/copy_executable.cmake
   DEPENDS addon/Wowless/test.xml cmake/preprocess_line.cmake)
 add_custom_command(
   OUTPUT testaddon.txt
