@@ -1034,17 +1034,9 @@ do
         frame:SetScript('OnUpdate', nil)
         if _G.__wowless then -- issue #521
           _G.WowlessTestFailures.LUA_WARNING = (function()
-            local function check()
-              assertEquals(#G.ExpectedLuaWarnings, #G.ActualLuaWarnings)
-              for i, e in ipairs(G.ExpectedLuaWarnings) do
-                assertEquals(e, G.ActualLuaWarnings[i])
-              end
-            end
-            if not pcall(check) then
-              return {
-                actual = G.ActualLuaWarnings,
-                expected = G.ExpectedLuaWarnings,
-              }
+            local diff = G.arraydiff(G.ExpectedLuaWarnings, G.ActualLuaWarnings)
+            if #diff > 0 then
+              return diff
             end
           end)()
         end

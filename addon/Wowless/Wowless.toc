@@ -6,6 +6,7 @@ util.lua
 init.lua
 framework.lua
 statemachine.lua
+arraydiff.lua
 funtainer.lua
 luaobjects.lua
 test.xml

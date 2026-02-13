@@ -992,6 +992,7 @@ file(MAKE_DIRECTORY ${d})
 set(testaddon_outs)
 foreach(
   f
+  arraydiff.lua
   evenmoreintrinsic.xml
   framework.lua
   funtainer.lua
@@ -1019,6 +1020,7 @@ add_custom_command(
   DEPENDS ${testaddon_outs})
 
 set(specs
+    spec/addon/arraydiff_spec.lua
     spec/addon/framework_spec.lua
     spec/addon/statemachine_spec.lua
     spec/addon/util_spec.lua
