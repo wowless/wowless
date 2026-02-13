@@ -435,7 +435,6 @@
       <OnEvent>end, table.insert(WowlessLog, 'OnEvent')--</OnEvent>
       <OnExternalLink>end, table.insert(WowlessLog, 'OnExternalLink')--</OnExternalLink>
       <OnFinished>end, table.insert(WowlessLog, 'OnFinished')--</OnFinished>
-      <OnFocusGained>end, table.insert(WowlessLog, 'OnFocusGained')--</OnFocusGained>
       <OnGamePadButtonDown>end, table.insert(WowlessLog, 'OnGamePadButtonDown')--</OnGamePadButtonDown>
       <OnGamePadButtonUp>end, table.insert(WowlessLog, 'OnGamePadButtonUp')--</OnGamePadButtonUp>
       <OnHide>end, table.insert(WowlessLog, 'OnHide')--</OnHide>
@@ -452,13 +451,9 @@
       <OnModelLoaded>end, table.insert(WowlessLog, 'OnModelLoaded')--</OnModelLoaded>
       <OnModelLoading>end, table.insert(WowlessLog, 'OnModelLoading')--</OnModelLoading>
       <OnMouseDown>end, table.insert(WowlessLog, 'OnMouseDown')--</OnMouseDown>
-      <OnMouseEnter>end, table.insert(WowlessLog, 'OnMouseEnter')--</OnMouseEnter>
-      <OnMouseLeave>end, table.insert(WowlessLog, 'OnMouseLeave')--</OnMouseLeave>
       <OnMouseUp>end, table.insert(WowlessLog, 'OnMouseUp')--</OnMouseUp>
       <OnMouseWheel>end, table.insert(WowlessLog, 'OnMouseWheel')--</OnMouseWheel>
       <OnMovieFinished>end, table.insert(WowlessLog, 'OnMovieFinished')--</OnMovieFinished>
-      <OnMovieHideSubtitle>end, table.insert(WowlessLog, 'OnMovieHideSubtitle')--</OnMovieHideSubtitle>
-      <OnMovieShowSubtitle>end, table.insert(WowlessLog, 'OnMovieShowSubtitle')--</OnMovieShowSubtitle>
       <OnPlay>end, table.insert(WowlessLog, 'OnPlay')--</OnPlay>
       <OnReceiveDrag>end, table.insert(WowlessLog, 'OnReceiveDrag')--</OnReceiveDrag>
       <OnRequestNewSize>end, table.insert(WowlessLog, 'OnRequestNewSize')--</OnRequestNewSize>
