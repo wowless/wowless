@@ -24,7 +24,6 @@ OnEscapePressed:
 OnEvent:
 OnExternalLink:
 OnFinished:
-OnFocusGained:
 OnGamePadButtonDown:
 OnGamePadButtonUp:
 OnHide:
@@ -41,13 +40,9 @@ OnModelCleared:
 OnModelLoaded:
 OnModelLoading:
 OnMouseDown:
-OnMouseEnter:
-OnMouseLeave:
 OnMouseUp:
 OnMouseWheel:
 OnMovieFinished:
-OnMovieHideSubtitle:
-OnMovieShowSubtitle:
 OnPlay:
 OnReceiveDrag:
 OnRequestNewSize:

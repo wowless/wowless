@@ -910,10 +910,6 @@ OnFinished:
   extends: ScriptType
   impl:
     script:
-OnFocusGained:
-  extends: ScriptType
-  impl:
-    script:
 OnGamePadButtonDown:
   extends: ScriptType
   impl:
@@ -979,14 +975,6 @@ OnMouseDown:
   extends: ScriptType
   impl:
     script:
-OnMouseEnter:
-  extends: ScriptType
-  impl:
-    script:
-OnMouseLeave:
-  extends: ScriptType
-  impl:
-    script:
 OnMouseUp:
   extends: ScriptType
   impl:
@@ -996,14 +984,6 @@ OnMouseWheel:
   impl:
     script:
 OnMovieFinished:
-  extends: ScriptType
-  impl:
-    script:
-OnMovieHideSubtitle:
-  extends: ScriptType
-  impl:
-    script:
-OnMovieShowSubtitle:
   extends: ScriptType
   impl:
     script:
