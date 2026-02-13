@@ -1037,6 +1037,7 @@ set(specs
     spec/data/test_spec.lua
     spec/data/uiobjectimpl_spec.lua
     spec/data/uiobjects_spec.lua
+    spec/data/xml_spec.lua
     spec/data/yaml_spec.lua
     spec/elune_spec.lua
     spec/tools/tedit_spec.lua
