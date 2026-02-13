@@ -386,10 +386,7 @@ G.testsuite.generated = function()
     local function assertCreateFrameFails(ty)
       G.check2(false, 'CreateFrame: Unknown frame type \'' .. ty .. '\'', pcall(CreateFrame, ty))
       if warners[ty:lower()] then
-        table.insert(G.ExpectedLuaWarnings, {
-          warnText = 'Unknown frame type: ' .. ty,
-          warnType = 0,
-        })
+        table.insert(G.ExpectedLuaWarnings, 'Unknown frame type: ' .. ty)
       end
     end
     local factories = {

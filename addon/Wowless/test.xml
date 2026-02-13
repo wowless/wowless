@@ -187,10 +187,7 @@
   <Include file='evenmoreintrinsic.xml' />
   <Script>--[[ TODO requires more sophistication in api re intrinsics
     assertEquals(false, pcall(function() CreateFrame('WowlessEvenMoreIntrinsicType') end))
-    table.insert(_G.Wowless.ExpectedLuaWarnings, {
-      warnText = 'WowlessEvenMoreIntrinsicType',
-      warnType = 0,
-    })]]--
+    table.insert(_G.Wowless.ExpectedLuaWarnings, 'WowlessEvenMoreIntrinsicType')]]--
   </Script>
 
   <Script>

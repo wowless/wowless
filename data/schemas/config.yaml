@@ -83,8 +83,6 @@ type:
         record:
           send_isfromitem:
             type: flag
-          send_warntype:
-            type: flag
           warners:
             type:
               setof: string

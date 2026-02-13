@@ -721,10 +721,7 @@ G.testsuite.sync = function()
         end,
         ['is not a frame type'] = function()
           assertEquals(false, (pcall(CreateFrame, 'WorldFrame')))
-          table.insert(_G.Wowless.ExpectedLuaWarnings, {
-            warnText = 'Unknown frame type: WorldFrame',
-            warnType = 0,
-          })
+          table.insert(_G.Wowless.ExpectedLuaWarnings, 'Unknown frame type: WorldFrame')
         end,
       }
     end,
@@ -1035,14 +1032,12 @@ do
     if not asyncPending then
       if asyncIndex == numAsyncTests then
         frame:SetScript('OnUpdate', nil)
-        if _G.WowlessData.Config.addon.lua_warning_check then
+        if _G.__wowless then -- issue #521
           _G.WowlessTestFailures.LUA_WARNING = (function()
             local function check()
               assertEquals(#G.ExpectedLuaWarnings, #G.ActualLuaWarnings)
               for i, e in ipairs(G.ExpectedLuaWarnings) do
-                local a = G.ActualLuaWarnings[i]
-                assertEquals(e.warnType, a.warnType)
-                assertEquals(e.warnText, a.warnText)
+                assertEquals(e, G.ActualLuaWarnings[i])
               end
             end
             if not pcall(check) then

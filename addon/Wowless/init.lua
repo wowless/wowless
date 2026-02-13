@@ -9,11 +9,8 @@ G.ActualLuaWarnings = {}
 G.ExpectedLuaWarnings = {}
 local frame = CreateFrame('Frame')
 frame:RegisterEvent('LUA_WARNING')
-frame:SetScript('OnEvent', function(_, _, warnType, warnText)
-  table.insert(G.ActualLuaWarnings, {
-    warnText = warnText,
-    warnType = warnType,
-  })
+frame:SetScript('OnEvent', function(_, _, warnText)
+  table.insert(G.ActualLuaWarnings, warnText)
 end)
 G.LuaWarningsFrame = frame
 G.testsuite = {}

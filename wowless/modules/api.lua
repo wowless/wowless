@@ -187,11 +187,7 @@ return function(
     local ltype = string.lower(type)
     if not IsIntrinsicType(ltype) or not InheritsFrom(ltype, 'frame') then
       if datalua.config.runtime.warners[ltype] then
-        if datalua.config.runtime.send_warntype then
-          SendEvent('LUA_WARNING', 0, 'Unknown frame type: ' .. type)
-        else
-          SendEvent('LUA_WARNING', 'Unknown frame type: ' .. type)
-        end
+        SendEvent('LUA_WARNING', 'Unknown frame type: ' .. type)
       end
       error('CreateFrame: Unknown frame type \'' .. type .. '\'', 0)
     end
