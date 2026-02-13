@@ -154,6 +154,19 @@ local function mixin(t, ...)
   return t
 end
 
+local function sorted(t)
+  local ks = {}
+  for k in pairs(t) do
+    table.insert(ks, k)
+  end
+  table.sort(ks)
+  return coroutine.wrap(function()
+    for _, k in ipairs(ks) do
+      coroutine.yield(k, t[k])
+    end
+  end)
+end
+
 G.addonEnv = G
 G.assertEquals = assertEquals
 G.assertEqualSets = assertEqualSets
@@ -170,3 +183,4 @@ G.globalEnv = _G
 G.match = match
 G.mixin = mixin
 G.retn = retn
+G.sorted = sorted

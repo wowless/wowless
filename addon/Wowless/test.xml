@@ -488,13 +488,14 @@
   <Script>
     CreateFrame('ModelScene'):CreateActor(nil, 'WowlessActorTemplate')
     local expected = {}
-    for k, v in pairs(_G.WowlessData.UIObjectApis.Actor.scripts) do
+    for k, v in _G.Wowless.sorted(_G.WowlessData.UIObjectApis.Actor.scripts) do
       if v then
         table.insert(expected, k)
+      else
+        local fmt = 'Frame ModelSceneActor: Unknown script element %s'
+        table.insert(_G.Wowless.ExpectedLuaWarnings, fmt:format(k))
       end
-      -- TODO warn otherwise, issues #452 and #521
     end
-    table.sort(expected)
     assertEquals(table.concat(expected, ','), table.concat(WowlessLog, ','))
   </Script>
 

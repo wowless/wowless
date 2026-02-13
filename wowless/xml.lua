@@ -143,6 +143,7 @@ local function parseRoot(product, root, intrinsics, snapshot)
         attr = resultAttrs,
         kids = {},
         line = line,
+        name = e._name,
         text = #texts > 0 and table.concat(texts, '\n') or nil,
         type = tname,
       }

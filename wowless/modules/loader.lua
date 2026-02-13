@@ -170,7 +170,8 @@ return function(
 
   local function loadScript(script, obj, env, filename, intrinsic)
     if not scripts.HasScript(obj, script.type) then
-      -- TODO fire warning, issue #521
+      local fmt = 'Frame %s: Unknown script element %s'
+      SendEvent('LUA_WARNING', fmt:format(uiobjecttypes.GetObjectType(obj), script.name))
       return
     end
     local fn
