@@ -4908,6 +4908,8 @@ C_MajorFactions.MajorFactionData:
           structure: C_MajorFactions.RenownHighlightInfo
     isUnlocked:
       type: boolean
+    maxLevel:
+      type: number
     name:
       type: string
     playerCompanionID:
@@ -11191,7 +11193,7 @@ EncounterEventSoundInfo:
       default: g_defaultSI3UISoundSubTypeForLua
       type: string
     file:
-      type: number
+      type: FileAsset
     volume:
       default: 1
       type: number

@@ -42,6 +42,7 @@ end
 local specDefault = (function()
   local defaultOutputs = {
     boolean = 'false',
+    FileAsset = '1',
     ['function'] = 'function() end',
     ['nil'] = 'nil',
     number = '1',

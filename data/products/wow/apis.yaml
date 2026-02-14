@@ -10005,6 +10005,15 @@ C_DelvesUI.GetModelSceneForCompanion:
   outputs:
   - name: modelSceneID
     type: number
+C_DelvesUI.GetPlayerCompanionPDEID:
+  inputs:
+  - name: companionID
+    nilable: true
+    type: number
+  mayreturnnothing: true
+  outputs:
+  - name: pdeID
+    type: number
 C_DelvesUI.GetRoleNodeForCompanion:
   inputs:
   - name: companionID
@@ -10023,6 +10032,12 @@ C_DelvesUI.GetRoleSubtreeForCompanion:
     type: number
   outputs:
   - name: subTreeID
+    type: number
+C_DelvesUI.GetTieredEntrancePDEID:
+  inputs:
+  mayreturnnothing: true
+  outputs:
+  - name: pdeID
     type: number
 C_DelvesUI.GetTraitTreeForCompanion:
   inputs:
@@ -10792,6 +10807,11 @@ C_EncounterWarnings.GetEditModeWarningInfo:
   - name: warningInfo
     type:
       structure: C_EncounterWarnings.EncounterWarningInfo
+C_EncounterWarnings.GetPlayCustomSoundsWhenHidden:
+  inputs:
+  outputs:
+  - name: play
+    type: boolean
 C_EncounterWarnings.GetSoundKitForSeverity:
   inputs:
   - name: severity
@@ -10800,6 +10820,11 @@ C_EncounterWarnings.GetSoundKitForSeverity:
   outputs:
   - name: soundKitID
     type: number
+C_EncounterWarnings.GetWarningsShown:
+  inputs:
+  outputs:
+  - name: shown
+    type: boolean
 C_EncounterWarnings.IsFeatureAvailable:
   inputs:
   outputs:
@@ -10819,6 +10844,16 @@ C_EncounterWarnings.PlaySound:
   outputs:
   - name: soundHandle
     type: number
+C_EncounterWarnings.SetPlayCustomSoundsWhenHidden:
+  inputs:
+  - name: play
+    type: boolean
+  outputs:
+C_EncounterWarnings.SetWarningsShown:
+  inputs:
+  - name: shown
+    type: boolean
+  outputs:
 C_EndOfMatchUI.GetEndOfMatchDetails:
   inputs:
   outputs:
