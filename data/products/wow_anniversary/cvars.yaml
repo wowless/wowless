@@ -1003,6 +1003,7 @@ RAIDentityLodDist: '10'
 RAIDentityShadowFadeScale: '25'
 RAIDfarclip: '2112'
 raidFramesDisplayClassColor: '0'
+raidFramesDisplayDebuffs: '0'
 raidFramesDisplayOnlyDispellableDebuffs: '0'
 raidFramesDisplayPowerBars: '0'
 raidFramesHealthText: none
