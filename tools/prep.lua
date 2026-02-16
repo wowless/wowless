@@ -136,6 +136,64 @@ local function ensuresql(k)
   end
 end
 
+local function stubby(mv, skip0)
+  local t = { 'local gencode=...;' }
+  local ins = mv.inputs or {}
+  local nsins = #ins - (mv.instride or 0)
+  for i = 1, #ins do
+    table.insert(t, 'local spec' .. i .. '=' .. plprettywrite(mv.inputs[i], '') .. ';')
+  end
+  table.insert(t, 'return function(')
+  local a = {}
+  if skip0 then
+    table.insert(a, '_')
+  end
+  for i = 1, nsins do
+    table.insert(a, 'arg' .. i)
+  end
+  if mv.instride then
+    table.insert(a, '...')
+  end
+  table.insert(t, table.concat(a, ','))
+  table.insert(t, ')')
+  for i = 1, nsins do
+    table.insert(t, 'gencode.Check(spec' .. i .. ',arg' .. i .. ');')
+  end
+  if mv.instride then
+    table.insert(t, 'for i=1,select("#",...),' .. mv.instride .. ' do ')
+    table.insert(t, 'local arg' .. nsins + 1)
+    for i = nsins + 2, #ins do
+      table.insert(t, ',arg' .. i)
+    end
+    table.insert(t, '=select(i,...);')
+    for i = nsins + 1, #ins do
+      table.insert(t, 'gencode.Check(spec' .. i .. ',arg' .. i .. ');')
+    end
+    table.insert(t, 'end ')
+  end
+  local outs = mv.outputs or {}
+  if #outs > 0 and not mv.stubnothing then
+    table.insert(t, 'return ')
+    local rets = {}
+    local nonstride = #outs - (mv.outstride or 0)
+    for i = 1, nonstride do
+      table.insert(rets, specDefault(outs[i]))
+    end
+    for _ = 1, mv.stuboutstrides or 1 do
+      for j = nonstride + 1, #outs do
+        table.insert(rets, specDefault(outs[j]))
+      end
+    end
+    table.insert(t, table.concat(rets, ','))
+  end
+  table.insert(t, ' end')
+  return {
+    impl = table.concat(t),
+    modules = { 'gencode' },
+    secureonly = mv.secureonly,
+  }
+end
+
 local implimpls = {
   delegate = function(impl)
     return {
@@ -211,31 +269,8 @@ local function mkapi(apicfg)
         usage = apicfg.usage,
       }
     end
-  elseif apicfg.stubnothing then
-    return {
-      impl = 'return function() end',
-      inputs = apicfg.inputs,
-      instride = apicfg.instride,
-    }
   else
-    local outs = apicfg.outputs or {}
-    local rets = {}
-    local nonstride = #outs - (apicfg.outstride or 0)
-    for i = 1, nonstride do
-      table.insert(rets, specDefault(outs[i]))
-    end
-    for _ = 1, apicfg.stuboutstrides or 1 do
-      for j = nonstride + 1, #outs do
-        table.insert(rets, specDefault(outs[j]))
-      end
-    end
-    return {
-      impl = 'local gencode=...;return function()return ' .. table.concat(rets, ',') .. ' end',
-      inputs = apicfg.inputs,
-      instride = apicfg.instride,
-      modules = { 'gencode' },
-      secureonly = apicfg.secureonly,
-    }
+    return stubby(apicfg)
   end
 end
 
@@ -267,56 +302,6 @@ for k, v in pairs(parseYaml('data/products/' .. product .. '/events.yaml')) do
     restricted = v.restricted,
     stride = v.stride,
     stub = 'return ' .. table.concat(t, ','),
-  }
-end
-
-local function stubby(mv)
-  local t = { 'local gencode=...;' }
-  local ins = mv.inputs or {}
-  local nsins = #ins - (mv.instride or 0)
-  for i = 1, #ins do
-    table.insert(t, 'local spec' .. i .. '=' .. plprettywrite(mv.inputs[i], '') .. ';')
-  end
-  table.insert(t, 'return function(_')
-  for i = 1, nsins do
-    table.insert(t, ',arg' .. i)
-  end
-  if mv.instride then
-    table.insert(t, ',...')
-  end
-  table.insert(t, ')')
-  for i = 1, nsins do
-    table.insert(t, 'gencode.Check(spec' .. i .. ',arg' .. i .. ');')
-  end
-  if mv.instride then
-    table.insert(t, 'for i=1,select("#",...),' .. mv.instride .. ' do ')
-    table.insert(t, 'local arg' .. nsins + 1)
-    for i = nsins + 2, #ins do
-      table.insert(t, ',arg' .. i)
-    end
-    table.insert(t, '=select(i,...);')
-    for i = nsins + 1, #ins do
-      table.insert(t, 'gencode.Check(spec' .. i .. ',arg' .. i .. ');')
-    end
-    table.insert(t, 'end ')
-  end
-  table.insert(t, 'return ')
-  local outs = mv.outputs or {}
-  local rets = {}
-  local nonstride = #outs - (mv.outstride or 0)
-  for i = 1, nonstride do
-    table.insert(rets, specDefault(outs[i]))
-  end
-  for _ = 1, mv.stuboutstrides or 1 do
-    for j = nonstride + 1, #outs do
-      table.insert(rets, specDefault(outs[j]))
-    end
-  end
-  table.insert(t, table.concat(rets, ','))
-  table.insert(t, ' end')
-  return {
-    impl = table.concat(t),
-    modules = { 'gencode' },
   }
 end
 
@@ -391,7 +376,9 @@ local uiobjectimplmakers = {
       modules = { 'gencode' },
     }
   end,
-  none = stubby,
+  none = function(mv)
+    return stubby(mv, true)
+  end,
   setter = function(impl, mv)
     local t = { 'local gencode=...;' }
     for i in ipairs(impl) do
@@ -495,7 +482,7 @@ do
       end
     else
       for mk, mv in pairs(v.methods or {}) do
-        methods[mk] = stubby(mv)
+        methods[mk] = stubby(mv, true)
       end
     end
     luaobjects[k] = {
