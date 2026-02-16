@@ -81,7 +81,7 @@ local function init(modules, lite)
     io.write('\n')
   end
 
-  modules.env.genv.__wowless = {
+  local __wowless = {
     debug = wowlessDebug,
     dump = dump(modules.uiobjects),
     dumpregion = dumpregion,
@@ -97,6 +97,8 @@ local function init(modules, lite)
     end,
     traceback = require('wowless.ext').traceback,
   }
+  modules.env.genv.__wowless = __wowless
+  modules.env.secureenv.__wowless = __wowless
 end
 
 return {
