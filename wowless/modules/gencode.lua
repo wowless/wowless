@@ -1,12 +1,17 @@
 local hlist = require('wowless.hlist')
 
-return function(api, env, luaobjects, typecheck, uiobjects)
+return function(api, env, log, luaobjects, typecheck, uiobjects)
   local function Check(spec, v, isout)
-    local vv, errmsg = typecheck(spec, v, isout)
+    local vv, errmsg, iswarn = typecheck(spec, v, isout)
     if errmsg then
       local inout = isout and 'output' or 'input'
       local name = spec.name and (' %q'):format(spec.name) or ''
-      error(('%s%s %s'):format(inout, name, errmsg), 2)
+      local msg = ('%s%s %s'):format(inout, name, errmsg)
+      if iswarn then
+        log(1, 'warning: ' .. msg)
+      else
+        error(msg, 2)
+      end
     end
     return vv
   end

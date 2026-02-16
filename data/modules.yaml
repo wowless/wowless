@@ -59,6 +59,7 @@ gencode:
   deps:
     api:
     env:
+    log:
     luaobjects:
     typecheck:
     uiobjects:
