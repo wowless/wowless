@@ -2,6 +2,7 @@ local bubblewrap = require('wowless.bubblewrap')
 local util = require('wowless.util')
 
 return function(datalua, funcheck, log, sqls)
+  local cstubs = require('build.products.' .. datalua.product .. '.stubs')
   return function(modules)
     log(1, 'loading functions')
 
@@ -40,6 +41,8 @@ return function(datalua, funcheck, log, sqls)
       local v
       if apicfg.stdlib then
         v = assert(util.tget(_G, fn))
+      elseif apicfg.cstub then
+        v = bubblewrap(assert(cstubs[fn], 'missing C stub for ' .. fn))
       else
         v = bubblewrap(mkfn(fn, apicfg))
       end

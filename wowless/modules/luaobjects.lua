@@ -2,6 +2,7 @@ local bubblewrap = require('wowless.bubblewrap')
 local mixin = require('wowless.util').mixin
 
 return function(datalua)
+  local cstubs = require('build.products.' .. datalua.product .. '.stubs')
   local config = datalua.config.modules and datalua.config.modules.luaobjects or {}
   local objs = setmetatable({}, { __mode = 'k' })
   local mtps = {}
@@ -23,14 +24,21 @@ return function(datalua)
         end
       end
       for mk, mv in pairs(v.methods) do
-        local args = {}
-        for _, m in ipairs(mv.modules or {}) do
-          table.insert(args, (assert(modules[m], m)))
+        if mv.cstub then
+          local cfn = assert(cstubs[k .. ':' .. mk], 'missing C stub for ' .. k .. ':' .. mk)
+          methods[mk] = bubblewrap(function(u, ...)
+            return cfn(objs[u], ...)
+          end)
+        else
+          local args = {}
+          for _, m in ipairs(mv.modules or {}) do
+            table.insert(args, (assert(modules[m], m)))
+          end
+          local mfn = assert(loadstring_untainted(mv.impl))(unpack(args))
+          methods[mk] = bubblewrap(function(u, ...)
+            return mfn(objs[u], ...)
+          end)
         end
-        local mfn = assert(loadstring_untainted(mv.impl))(unpack(args))
-        methods[mk] = bubblewrap(function(u, ...)
-          return mfn(objs[u], ...)
-        end)
       end
       allmethods[k] = methods
       return methods
