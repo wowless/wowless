@@ -3,6 +3,7 @@ local bubblewrap = require('wowless.bubblewrap')
 local Mixin = util.mixin
 
 return function(datalua, funcheck, gencode, sqls, uiobjectsmodule, uiobjecttypes)
+  local cstubs = require('build.products.' .. datalua.product .. '.stubs')
   local InheritsFrom = uiobjecttypes.InheritsFrom
   local UserData = uiobjectsmodule.UserData
 
@@ -80,31 +81,36 @@ return function(datalua, funcheck, gencode, sqls, uiobjectsmodule, uiobjecttypes
       local mixin = {}
       for mname, method in pairs(cfg.methods) do
         local fname = name .. ':' .. mname
-        local incheck = method.inputs and funcheck.makeCheckInputs(fname, method)
-        local outcheck = method.outputs and funcheck.makeCheckOutputs(fname, method)
-        local src = method.src or fname
-        local mkfn = setfenv(assert(loadstring_untainted(method.impl, src), fname), _G)
-        local args = {}
-        for _, m in ipairs(method.modules or {}) do
-          table.insert(args, (assert(modules[m], m)))
-        end
-        for _, sql in ipairs(method.sqls or {}) do
-          table.insert(args, (assert(sqls[sql], sql)))
-        end
-        local basefn = wrap(fname, mkfn(unpack(args)))
-        local outfn
-        if not incheck and not outcheck then
-          outfn = basefn
-        elseif not incheck then
-          outfn = function(...)
-            return outcheck(basefn(...))
-          end
+        if method.cstub then
+          local cfn = assert(cstubs[fname], 'missing C stub for ' .. fname)
+          mixin[mname] = wrap(fname, cfn)
         else
-          outfn = function(self, ...)
-            return outcheck(basefn(self, incheck(...)))
+          local incheck = method.inputs and funcheck.makeCheckInputs(fname, method)
+          local outcheck = method.outputs and funcheck.makeCheckOutputs(fname, method)
+          local src = method.src or fname
+          local mkfn = setfenv(assert(loadstring_untainted(method.impl, src), fname), _G)
+          local args = {}
+          for _, m in ipairs(method.modules or {}) do
+            table.insert(args, (assert(modules[m], m)))
           end
+          for _, sql in ipairs(method.sqls or {}) do
+            table.insert(args, (assert(sqls[sql], sql)))
+          end
+          local basefn = wrap(fname, mkfn(unpack(args)))
+          local outfn
+          if not incheck and not outcheck then
+            outfn = basefn
+          elseif not incheck then
+            outfn = function(...)
+              return outcheck(basefn(...))
+            end
+          else
+            outfn = function(self, ...)
+              return outcheck(basefn(self, incheck(...)))
+            end
+          end
+          mixin[mname] = outfn
         end
-        mixin[mname] = outfn
       end
       uiobjects[name] = {
         cfg = cfg,

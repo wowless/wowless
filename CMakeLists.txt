@@ -545,9 +545,11 @@ add_lua_executable(
 foreach(product ${products})
   add_custom_command(
     OUTPUT stamp/${product}.txt
-    BYPRODUCTS runtime/${product}.lua
-    COMMAND prep ${product} --sqls ${CMAKE_CURRENT_BINARY_DIR}/runtime/sqls.yaml
-            --output ${CMAKE_CURRENT_BINARY_DIR}/generated/${product}.lua
+    BYPRODUCTS runtime/${product}.lua generated/${product}_stubs.c
+    COMMAND
+      prep ${product} --sqls ${CMAKE_CURRENT_BINARY_DIR}/runtime/sqls.yaml
+      --output ${CMAKE_CURRENT_BINARY_DIR}/generated/${product}.lua --coutput
+      ${CMAKE_CURRENT_BINARY_DIR}/generated/${product}_stubs.c
     COMMAND
       ${CMAKE_COMMAND} -E copy_if_different
       ${CMAKE_CURRENT_BINARY_DIR}/generated/${product}.lua
@@ -560,7 +562,12 @@ foreach(product ${products})
   add_custom_target(datalua_${product}_lua DEPENDS stamp/${product}.txt)
   add_dependencies(datalua_${product}_lua stamp_sqls)
   lua2c(datalua_${product}
-        build.products.${product}.data=runtime/${product}.lua)
+        build.products.${product}.data=runtime/${product}.lua
+        build.products.${product}.stubs=c)
+  target_sources(
+    datalua_${product}
+    PRIVATE ${CMAKE_CURRENT_BINARY_DIR}/generated/${product}_stubs.c)
+  target_link_libraries(datalua_${product} PRIVATE elune)
   add_dependencies(datalua_${product} datalua_${product}_lua)
   list(APPEND dataluas datalua_${product})
 endforeach()
