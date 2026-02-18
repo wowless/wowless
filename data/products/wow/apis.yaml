@@ -4337,7 +4337,7 @@ C_CatalogShop.GetProductSortOrder:
     type: number
 C_CatalogShop.GetRefundableDecors:
   inputs:
-  - name: productIDOpt
+  - name: productIdFilterOpt
     nilable: true
     type: number
   outputs:
@@ -4345,6 +4345,8 @@ C_CatalogShop.GetRefundableDecors:
     type:
       arrayof:
         structure: C_CatalogShop.RefundableDecorInfo
+  - name: minTimeRemainingSeconds
+    type: number
 C_CatalogShop.GetSectionIDsForCategory:
   inputs:
   - name: categoryID

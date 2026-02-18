@@ -6702,6 +6702,8 @@ PHOTO_SHARING_AUTHORIZATION_NEEDED:
   payload:
 PHOTO_SHARING_AUTHORIZATION_UPDATED:
   payload:
+  - name: showNotification
+    type: boolean
 PHOTO_SHARING_PHOTO_UPLOAD_STATUS:
   payload:
   - name: uploadStatus
