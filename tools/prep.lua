@@ -527,7 +527,13 @@ if args.coutput then
     if next(apicfg.outputs or {}) and not apicfg.stubnothing then
       for _, out in ipairs(apicfg.outputs) do
         local ty = out.type
-        if ty ~= 'string' and ty ~= 'number' and ty ~= 'boolean' and ty ~= 'unit' then
+        if
+          ty ~= 'string'
+          and ty ~= 'number'
+          and ty ~= 'boolean'
+          and ty ~= 'unit'
+          and not (type(ty) == 'table' and ty.enum)
+        then
           return false
         end
       end
@@ -619,13 +625,16 @@ if args.coutput then
           val = 1
         elseif out.type == 'boolean' then
           val = false
+        elseif type(out.type) == 'table' and out.type.enum then
+          local meta = assert(globals.Enum[out.type.enum .. 'Meta'], 'missing meta enum for ' .. out.type.enum)
+          val = assert(meta.MinValue, 'missing MinValue in meta for ' .. out.type.enum)
         else
           val = ''
         end
       end
       if val == nil then
         emit('  lua_pushnil(L);')
-      elseif out.type == 'number' then
+      elseif out.type == 'number' or (type(out.type) == 'table' and out.type.enum) then
         emit('  lua_pushnumber(L, %g);', val)
       elseif out.type == 'boolean' then
         emit('  lua_pushboolean(L, %d);', val and 1 or 0)
