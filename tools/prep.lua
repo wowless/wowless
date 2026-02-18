@@ -592,10 +592,24 @@ if args.coutput then
   for _, entry in ipairs(eligible) do
     local k, v = entry.name, entry.cfg
     emit('static int stub_%s(lua_State *L) {', safename(k))
-    for i, inp in ipairs(v.inputs or {}) do
-      local ty = inp.type
+    local allins = v.inputs or {}
+    local instride = v.instride or 0
+    local nsins = #allins - instride
+    for i = 1, nsins do
+      local inp = allins[i]
       local nilable = inp.nilable or inp.default ~= nil
-      emit('  wowless_stubcheck%s%s(L, %d);', nilable and 'nilable' or '', ty, i)
+      emit('  wowless_stubcheck%s%s(L, %d);', nilable and 'nilable' or '', inp.type, i)
+    end
+    if instride > 0 then
+      emit('  int top = lua_gettop(L);')
+      emit('  for (int i = %d; i <= top; i += %d) {', nsins + 1, instride)
+      for j = 1, instride do
+        local inp = allins[nsins + j]
+        local nilable = inp.nilable or inp.default ~= nil
+        local posspec = j == 1 and 'i' or ('i + ' .. (j - 1))
+        emit('    wowless_stubcheck%s%s(L, %s);', nilable and 'nilable' or '', inp.type, posspec)
+      end
+      emit('  }')
     end
     local allouts = not v.stubnothing and v.outputs or {}
     local outstride = v.outstride or 0
