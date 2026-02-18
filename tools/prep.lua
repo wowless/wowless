@@ -527,14 +527,14 @@ if args.coutput then
     if next(apicfg.outputs or {}) and not apicfg.stubnothing then
       for _, out in ipairs(apicfg.outputs) do
         local ty = out.type
-        if ty ~= 'string' and ty ~= 'number' and ty ~= 'boolean' then
+        if ty ~= 'string' and ty ~= 'number' and ty ~= 'boolean' and ty ~= 'unit' then
           return false
         end
       end
     end
     for _, inp in ipairs(apicfg.inputs or {}) do
       local ty = inp.type
-      if ty ~= 'string' and ty ~= 'number' and ty ~= 'boolean' then
+      if ty ~= 'string' and ty ~= 'number' and ty ~= 'boolean' and ty ~= 'unit' then
         return false
       end
     end
@@ -581,6 +581,12 @@ if args.coutput then
           emit('  wowless_stubchecknilableboolean(L, %d);', i)
         else
           emit('  wowless_stubcheckboolean(L, %d);', i)
+        end
+      elseif ty == 'unit' then
+        if nilable then
+          emit('  wowless_stubchecknilableunit(L, %d);', i)
+        else
+          emit('  wowless_stubcheckunit(L, %d);', i)
         end
       end
     end
