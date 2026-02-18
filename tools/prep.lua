@@ -558,6 +558,37 @@ if args.coutput then
     end
   end
 
+  local coutdefaults = {
+    boolean = function()
+      return false
+    end,
+    enum = function(enumname)
+      local meta = assert(globals.Enum[enumname .. 'Meta'], 'missing meta enum for ' .. enumname)
+      return assert(meta.MinValue, 'missing MinValue in meta for ' .. enumname)
+    end,
+    number = function()
+      return 1
+    end,
+    string = function()
+      return ''
+    end,
+  }
+
+  local coutpushers = {
+    boolean = function(val)
+      emit('  lua_pushboolean(L, %d);', val and 1 or 0)
+    end,
+    enum = function(_, val)
+      emit('  lua_pushnumber(L, %g);', val)
+    end,
+    number = function(val)
+      emit('  lua_pushnumber(L, %g);', val)
+    end,
+    string = function(val)
+      emit('  lua_pushstring(L, %s);', cstring(val))
+    end,
+  }
+
   for _, entry in ipairs(eligible) do
     local k, v = entry.name, entry.cfg
     emit('static int stub_%s(lua_State *L) {', safename(k))
@@ -591,25 +622,12 @@ if args.coutput then
       elseif out.default ~= nil then
         val = out.default
       elseif not out.nilable or out.stubnotnil then
-        if out.type == 'number' then
-          val = 1
-        elseif out.type == 'boolean' then
-          val = false
-        elseif type(out.type) == 'table' and out.type.enum then
-          local meta = assert(globals.Enum[out.type.enum .. 'Meta'], 'missing meta enum for ' .. out.type.enum)
-          val = assert(meta.MinValue, 'missing MinValue in meta for ' .. out.type.enum)
-        else
-          val = ''
-        end
+        val = dispatch(coutdefaults, out.type)
       end
       if val == nil then
         emit('  lua_pushnil(L);')
-      elseif out.type == 'number' or (type(out.type) == 'table' and out.type.enum) then
-        emit('  lua_pushnumber(L, %g);', val)
-      elseif out.type == 'boolean' then
-        emit('  lua_pushboolean(L, %d);', val and 1 or 0)
       else
-        emit('  lua_pushstring(L, %s);', cstring(val))
+        dispatch(coutpushers, out.type, val)
       end
     end
     emit('  return %d;', #outs)
