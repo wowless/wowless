@@ -534,7 +534,7 @@ if args.coutput then
     end
     for _, inp in ipairs(apicfg.inputs or {}) do
       local ty = inp.type
-      if ty ~= 'string' and ty ~= 'number' and ty ~= 'boolean' and ty ~= 'unit' then
+      if ty ~= 'string' and ty ~= 'number' and ty ~= 'boolean' and ty ~= 'unit' and ty ~= 'unknown' then
         return false
       end
     end

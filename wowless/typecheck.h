@@ -65,4 +65,12 @@ static inline void wowless_stubchecknilableunit(lua_State *L, int idx) {
   }
 }
 
+static inline void wowless_stubcheckunknown(lua_State *L, int idx) {
+  if (lua_isnoneornil(L, idx)) {
+    luaL_argerror(L, idx, "value expected");
+  }
+}
+
+static inline void wowless_stubchecknilableunknown(lua_State *L, int idx) {}
+
 #endif /* WOWLESS_TYPECHECK_H */
