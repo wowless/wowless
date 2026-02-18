@@ -264,6 +264,17 @@ When modules export WoW C_ style functions (like `C_FunctionContainers.CreateCal
 - Add a `-- issue #nnn` comment to the line of Lua code most relevant to the
   issue
 
+## Testing After Code Changes
+
+Always run tests after modifying code:
+
+```sh
+cmake --build --preset default --target test
+```
+
+A successful run exits with code 0 and produces no output. If tests fail,
+fix the issues before considering the task complete.
+
 ## Commit Message Style
 
 - Prefix with module name and colon when changes are localized:
