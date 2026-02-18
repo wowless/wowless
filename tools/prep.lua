@@ -564,31 +564,7 @@ if args.coutput then
     for i, inp in ipairs(v.inputs or {}) do
       local ty = inp.type
       local nilable = inp.nilable or inp.default ~= nil
-      if ty == 'number' then
-        if nilable then
-          emit('  wowless_stubchecknilablenumber(L, %d);', i)
-        else
-          emit('  wowless_stubchecknumber(L, %d);', i)
-        end
-      elseif ty == 'string' then
-        if nilable then
-          emit('  wowless_stubchecknilablestring(L, %d);', i)
-        else
-          emit('  wowless_stubcheckstring(L, %d);', i)
-        end
-      elseif ty == 'boolean' then
-        if nilable then
-          emit('  wowless_stubchecknilableboolean(L, %d);', i)
-        else
-          emit('  wowless_stubcheckboolean(L, %d);', i)
-        end
-      elseif ty == 'unit' then
-        if nilable then
-          emit('  wowless_stubchecknilableunit(L, %d);', i)
-        else
-          emit('  wowless_stubcheckunit(L, %d);', i)
-        end
-      end
+      emit('  wowless_stubcheck%s%s(L, %d);', nilable and 'nilable' or '', ty, i)
     end
     local allouts = not v.stubnothing and v.outputs or {}
     local outstride = v.outstride or 0
