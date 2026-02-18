@@ -527,13 +527,7 @@ if args.coutput then
     if next(apicfg.outputs or {}) and not apicfg.stubnothing then
       for _, out in ipairs(apicfg.outputs) do
         local ty = out.type
-        if
-          ty ~= 'string'
-          and ty ~= 'number'
-          and ty ~= 'boolean'
-          and ty ~= 'unit'
-          and not (type(ty) == 'table' and ty.enum)
-        then
+        if ty ~= 'string' and ty ~= 'number' and ty ~= 'boolean' and not (type(ty) == 'table' and ty.enum) then
           return false
         end
       end
