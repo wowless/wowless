@@ -187,6 +187,25 @@ The test addon runs inside the simulated WoW environment. Files load in
 - Pre-compute data tables outside test functions when iterating `WowlessData`
 - Keep test modules focused on type-specific behavior
 
+### C Stubs for API Typechecking
+
+Eligible global API stubs (no `impl`, no outputs, string/number inputs only)
+are generated as native C functions rather than Lua closures. See issue #523
+for the full migration plan.
+
+- `wowless/typecheck.h`: Inline helpers for input checking
+  (`wowless_stubchecknumber`, `wowless_stubchecknilablenumber`,
+  `wowless_stubcheckstring`, `wowless_stubchecknilablestring`)
+- `prep.lua` emits a per-product `generated/${product}_stubs.c` when
+  `--coutput` is passed; eligible APIs are marked `cstub=true` in the data
+- CMakeLists wires the generated C file into `datalua_${product}` via
+  `target_sources` and registers it as a cmodule (`build.products.X.stubs=c`)
+  in the `lua2c()` call
+- `apiloader.lua` loads `build.products.<product>.stubs` and uses the C
+  function directly (no `bubblewrap`) for `cstub`-flagged APIs
+- To add a C-provided module to a `lua2c()` target, use `modulename=c` in
+  the argument list and add the C source with `target_sources`
+
 ### Data Format Conventions
 
 - Use sets (tables with `key = true`) for collections like method names,
@@ -194,6 +213,8 @@ The test addon runs inside the simulated WoW environment. Files load in
 - gentest.lua and prep.lua should produce consistent data formats for the
   same concepts
 - Iterate sets with `pairs()`, not `ipairs()`
+- API input parameters with a `default` field are implicitly nilable (accept
+  nil/missing arguments); use the nilable typecheck variant for them
 
 ### Deferred Type Loading
 
