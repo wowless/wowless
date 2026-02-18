@@ -524,7 +524,7 @@ if args.coutput then
     if apicfg.impl then
       return false
     end
-    if next(apicfg.outputs or {}) then
+    if next(apicfg.outputs or {}) and not apicfg.stubnothing then
       return false
     end
     for _, inp in ipairs(apicfg.inputs or {}) do
