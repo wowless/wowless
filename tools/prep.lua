@@ -521,7 +521,7 @@ if args.coutput then
   end
 
   local function is_eligible(apicfg)
-    if apicfg.impl or apicfg.stuboutstrides then
+    if apicfg.impl then
       return false
     end
     if next(apicfg.outputs or {}) and not apicfg.stubnothing then
@@ -590,7 +590,24 @@ if args.coutput then
         end
       end
     end
-    local outs = not v.stubnothing and v.outputs or {}
+    local allouts = not v.stubnothing and v.outputs or {}
+    local outstride = v.outstride or 0
+    local nonstride = #allouts - outstride
+    local stuboutstrides = v.stuboutstrides
+    local outs
+    if stuboutstrides ~= nil then
+      outs = {}
+      for i = 1, nonstride do
+        table.insert(outs, allouts[i])
+      end
+      for _ = 1, stuboutstrides do
+        for j = nonstride + 1, #allouts do
+          table.insert(outs, allouts[j])
+        end
+      end
+    else
+      outs = allouts
+    end
     for _, out in ipairs(outs) do
       local val
       if out.stub ~= nil then
