@@ -657,7 +657,7 @@ if args.coutput then
   cf:close()
 
   for _, entry in ipairs(eligible) do
-    apis[entry.name].cstub = true
+    apis[entry.name] = { cstub = true, secureonly = entry.cfg.secureonly }
   end
 end
 
