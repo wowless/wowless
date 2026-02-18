@@ -40,4 +40,12 @@ static inline void wowless_stubchecknilablestring(lua_State *L, int idx) {
   }
 }
 
+static inline void wowless_stubcheckboolean(lua_State *L, int idx) {
+  if (lua_isnoneornil(L, idx)) {
+    luaL_typerror(L, idx, lua_typename(L, LUA_TBOOLEAN));
+  }
+}
+
+static inline void wowless_stubchecknilableboolean(lua_State *L, int idx) {}
+
 #endif /* WOWLESS_TYPECHECK_H */

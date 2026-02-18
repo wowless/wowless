@@ -527,14 +527,14 @@ if args.coutput then
     if next(apicfg.outputs or {}) and not apicfg.stubnothing then
       for _, out in ipairs(apicfg.outputs) do
         local ty = out.type
-        if ty ~= 'string' and ty ~= 'number' then
+        if ty ~= 'string' and ty ~= 'number' and ty ~= 'boolean' then
           return false
         end
       end
     end
     for _, inp in ipairs(apicfg.inputs or {}) do
       local ty = inp.type
-      if ty ~= 'string' and ty ~= 'number' then
+      if ty ~= 'string' and ty ~= 'number' and ty ~= 'boolean' then
         return false
       end
     end
@@ -576,6 +576,12 @@ if args.coutput then
         else
           emit('  wowless_stubcheckstring(L, %d);', i)
         end
+      elseif ty == 'boolean' then
+        if nilable then
+          emit('  wowless_stubchecknilableboolean(L, %d);', i)
+        else
+          emit('  wowless_stubcheckboolean(L, %d);', i)
+        end
       end
     end
     local outs = not v.stubnothing and v.outputs or {}
@@ -586,12 +592,20 @@ if args.coutput then
       elseif out.default ~= nil then
         val = out.default
       elseif not out.nilable or out.stubnotnil then
-        val = out.type == 'number' and 1 or ''
+        if out.type == 'number' then
+          val = 1
+        elseif out.type == 'boolean' then
+          val = false
+        else
+          val = ''
+        end
       end
       if val == nil then
         emit('  lua_pushnil(L);')
       elseif out.type == 'number' then
         emit('  lua_pushnumber(L, %g);', val)
+      elseif out.type == 'boolean' then
+        emit('  lua_pushboolean(L, %d);', val and 1 or 0)
       else
         emit('  lua_pushstring(L, %s);', cstring(val))
       end
