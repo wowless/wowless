@@ -3,6 +3,7 @@ local args = (function()
   parser:argument('product', 'product to fetch')
   parser:option('--sqls', 'sqls file')
   parser:option('-o --output', 'output file')
+  parser:option('--coutput', 'C stubs output file')
   return parser:parse()
 end)()
 
@@ -274,8 +275,9 @@ local function mkapi(apicfg)
   end
 end
 
+local rawapis = parseYaml('data/products/' .. product .. '/apis.yaml')
 local apis = {}
-for k, v in pairs(parseYaml('data/products/' .. product .. '/apis.yaml')) do
+for k, v in pairs(rawapis) do
   apis[k] = mkapi(v)
 end
 
@@ -508,6 +510,96 @@ local data = {
   uiobjects = uiobjects,
   xml = parseYaml('data/products/' .. product .. '/xml.yaml'),
 }
+
+if args.coutput then
+  local function safename(s)
+    return s:gsub('[%.:]', '_')
+  end
+
+  local function cstring(s)
+    return '"' .. s:gsub('\\', '\\\\'):gsub('"', '\\"') .. '"'
+  end
+
+  local function is_eligible(apicfg)
+    if apicfg.impl then
+      return false
+    end
+    if next(apicfg.outputs or {}) then
+      return false
+    end
+    for _, inp in ipairs(apicfg.inputs or {}) do
+      local ty = inp.type
+      if ty ~= 'string' and ty ~= 'number' then
+        return false
+      end
+    end
+    return true
+  end
+
+  local lines = {}
+  local function emit(fmt, ...)
+    table.insert(lines, string.format(fmt, ...))
+  end
+
+  emit('#include "lua.h"')
+  emit('#include "lauxlib.h"')
+  emit('#include "wowless/typecheck.h"')
+  emit('')
+
+  local eligible = {}
+  for k, v in sorted(rawapis) do
+    if is_eligible(v) then
+      table.insert(eligible, { name = k, cfg = v })
+    end
+  end
+
+  for _, entry in ipairs(eligible) do
+    local k, v = entry.name, entry.cfg
+    emit('static int stub_%s(lua_State *L) {', safename(k))
+    for i, inp in ipairs(v.inputs or {}) do
+      local ty = inp.type
+      local nilable = inp.nilable or inp.default ~= nil
+      if ty == 'number' then
+        if nilable then
+          emit('  wowless_stubchecknilablenumber(L, %d);', i)
+        else
+          emit('  wowless_stubchecknumber(L, %d);', i)
+        end
+      elseif ty == 'string' then
+        if nilable then
+          emit('  wowless_stubchecknilablestring(L, %d);', i)
+        else
+          emit('  wowless_stubcheckstring(L, %d);', i)
+        end
+      end
+    end
+    emit('  return 0;')
+    emit('}')
+    emit('')
+  end
+
+  emit('static const luaL_Reg stubs[] = {')
+  for _, entry in ipairs(eligible) do
+    emit('  {%s, stub_%s},', cstring(entry.name), safename(entry.name))
+  end
+  emit('  {NULL, NULL}')
+  emit('};')
+  emit('')
+  emit('int luaopen_build_products_%s_stubs(lua_State *L) {', product)
+  emit('  lua_newtable(L);')
+  emit('  luaL_register(L, NULL, stubs);')
+  emit('  return 1;')
+  emit('}')
+
+  local cf = assert(io.open(args.coutput, 'w'))
+  cf:write(table.concat(lines, '\n'))
+  cf:write('\n')
+  cf:close()
+
+  for _, entry in ipairs(eligible) do
+    apis[entry.name].cstub = true
+  end
+end
 
 local outfn = args.output or ('build/products/' .. args.product .. '/data.lua')
 local tu = require('tools.util')
