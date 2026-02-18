@@ -521,11 +521,16 @@ if args.coutput then
   end
 
   local function is_eligible(apicfg)
-    if apicfg.impl then
+    if apicfg.impl or apicfg.stuboutstrides then
       return false
     end
     if next(apicfg.outputs or {}) and not apicfg.stubnothing then
-      return false
+      for _, out in ipairs(apicfg.outputs) do
+        local ty = out.type
+        if ty ~= 'string' and ty ~= 'number' then
+          return false
+        end
+      end
     end
     for _, inp in ipairs(apicfg.inputs or {}) do
       local ty = inp.type
@@ -573,7 +578,25 @@ if args.coutput then
         end
       end
     end
-    emit('  return 0;')
+    local outs = not v.stubnothing and v.outputs or {}
+    for _, out in ipairs(outs) do
+      local val
+      if out.stub ~= nil then
+        val = out.stub
+      elseif out.default ~= nil then
+        val = out.default
+      elseif not out.nilable or out.stubnotnil then
+        val = out.type == 'number' and 1 or ''
+      end
+      if val == nil then
+        emit('  lua_pushnil(L);')
+      elseif out.type == 'number' then
+        emit('  lua_pushnumber(L, %g);', val)
+      else
+        emit('  lua_pushstring(L, %s);', cstring(val))
+      end
+    end
+    emit('  return %d;', #outs)
     emit('}')
     emit('')
   end
