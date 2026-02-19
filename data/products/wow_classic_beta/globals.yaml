@@ -6612,13 +6612,10 @@ Enum:
     NumValues: 8
   VasServiceType:
     AppearanceChange: 2
+    CharacterClone: 10
     CharacterTransfer: 4
     FactionChange: 1
     FactionTransfer: 5
-    GuildFactionChange: 7
-    GuildFactionTransfer: 9
-    GuildNameChange: 6
-    GuildTransfer: 8
     NameChange: 0
     RaceChange: 3
   VasServiceTypeMeta:

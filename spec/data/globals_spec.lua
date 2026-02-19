@@ -12,8 +12,13 @@ describe('globals', function()
                   assert(enums[k:sub(1, -5)])
                 end)
               else
-                it('has a corresponding meta enum', function()
-                  assert(enums[k .. 'Meta'])
+                local meta = assert(enums[k .. 'Meta'])
+                it('NumValues matches', function()
+                  local count = 0
+                  for _ in pairs(enums[k]) do
+                    count = count + 1
+                  end
+                  assert.equal(meta.NumValues, count)
                 end)
               end
             end)

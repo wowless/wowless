@@ -1065,6 +1065,7 @@ Enum:
     RafReward: 512
     ShowFancyToast: 1024
     UseHorizontalLayoutForFullCard: 16
+    UseIconBorderWithOverrideTexture: 2048
     UseSquareIconBorder: 128
   BattlepayDisplayFlagsMeta:
     MaxValue: 2048
