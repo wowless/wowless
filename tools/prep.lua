@@ -528,6 +528,9 @@ if args.coutput then
       local meta = assert(globals.Enum[enumname .. 'Meta'], 'missing meta enum for ' .. enumname)
       return assert(meta.MinValue, 'missing MinValue in meta for ' .. enumname)
     end,
+    ['nil'] = function()
+      return nil
+    end,
     number = function()
       return 1
     end,
