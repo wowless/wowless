@@ -6883,9 +6883,9 @@ Enum:
     NameChange: 0
     RaceChange: 3
   VasServiceTypeMeta:
-    MaxValue: 10
+    MaxValue: 9
     MinValue: 0
-    NumValues: 7
+    NumValues: 10
   VasTransactionPurchaseResult:
     BeginDbErrors: 20010
     BeginProxyErrors: 17

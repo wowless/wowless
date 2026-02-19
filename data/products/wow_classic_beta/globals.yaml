@@ -6570,7 +6570,7 @@ Enum:
     IneligibleMapID: 20076
     IneligibleTargetRealm: 20022
     InvalidDestinationAccount: 6
-    InvalidName: 777777700
+    InvalidName: 20094
     InvalidSourceAccount: 7
     IsNpeRestricted: 20091
     LastCustomizeTooRecent: 20058
@@ -6622,9 +6622,9 @@ Enum:
     NameChange: 0
     RaceChange: 3
   VasServiceTypeMeta:
-    MaxValue: 10
+    MaxValue: 9
     MinValue: 0
-    NumValues: 7
+    NumValues: 10
   VignetteObjectiveType:
     Defeat: 1
     DefeatShowRemainingHealth: 2

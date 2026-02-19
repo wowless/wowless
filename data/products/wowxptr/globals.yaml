@@ -1087,9 +1087,9 @@ Enum:
     UseHorizontalLayoutForFullCard: 16
     UseSquareIconBorder: 128
   BattlepayDisplayFlagsMeta:
-    MaxValue: 2048
+    MaxValue: 1024
     MinValue: 1
-    NumValues: 12
+    NumValues: 11
   BattlepayGroupDisplayType:
     ActiveTimeOnly: 2
     Everyone: 0
@@ -1124,11 +1124,11 @@ Enum:
     MinValue: 0
     NumValues: 4
   BattlepayProductGroupFlags:
-    Deprecated: 16
     DisableOwnedProducts: 4
     EnabledForTrial: 2
     EnabledForVeteran: 8
     HideOwnedProducts: 1
+    None: 0
   BattlepayProductGroupFlagsMeta:
     MaxValue: 8
     MinValue: 0
