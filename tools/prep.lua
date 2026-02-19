@@ -520,20 +520,32 @@ if args.coutput then
     return '"' .. s:gsub('\\', '\\\\'):gsub('"', '\\"') .. '"'
   end
 
+  local coutdefaults = {
+    boolean = function()
+      return false
+    end,
+    enum = function(enumname)
+      local meta = assert(globals.Enum[enumname .. 'Meta'], 'missing meta enum for ' .. enumname)
+      return assert(meta.MinValue, 'missing MinValue in meta for ' .. enumname)
+    end,
+    number = function()
+      return 1
+    end,
+    string = function()
+      return ''
+    end,
+    unknown = function()
+      return nil
+    end,
+  }
+
   local function is_eligible(apicfg)
     if apicfg.impl then
       return false
     end
     if next(apicfg.outputs or {}) and not apicfg.stubnothing then
       for _, out in ipairs(apicfg.outputs) do
-        local ty = out.type
-        if
-          ty ~= 'string'
-          and ty ~= 'number'
-          and ty ~= 'boolean'
-          and ty ~= 'unknown'
-          and not (type(ty) == 'table' and ty.enum)
-        then
+        if not pcall(dispatch, coutdefaults, out.type) then
           return false
         end
       end
@@ -563,25 +575,6 @@ if args.coutput then
       table.insert(eligible, { name = k, cfg = v })
     end
   end
-
-  local coutdefaults = {
-    boolean = function()
-      return false
-    end,
-    enum = function(enumname)
-      local meta = assert(globals.Enum[enumname .. 'Meta'], 'missing meta enum for ' .. enumname)
-      return assert(meta.MinValue, 'missing MinValue in meta for ' .. enumname)
-    end,
-    number = function()
-      return 1
-    end,
-    string = function()
-      return ''
-    end,
-    unknown = function()
-      return nil
-    end,
-  }
 
   local coutpushers = {
     boolean = function(val)
