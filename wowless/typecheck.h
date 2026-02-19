@@ -107,4 +107,18 @@ static inline void wowless_stubcheckunknown(lua_State *L, int idx) {
 
 static inline void wowless_stubchecknilableunknown(lua_State *L, int idx) {}
 
+static inline void wowless_applymixin(lua_State *L, const char *mixin_name) {
+  int tbl = lua_gettop(L);
+  lua_getglobal(L, mixin_name);
+  if (lua_type(L, -1) == LUA_TTABLE) {
+    lua_pushnil(L);
+    while (lua_next(L, tbl + 1)) {
+      lua_pushvalue(L, -2);
+      lua_insert(L, -3);
+      lua_rawset(L, tbl);
+    }
+  }
+  lua_pop(L, 1);
+}
+
 #endif /* WOWLESS_TYPECHECK_H */

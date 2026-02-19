@@ -543,7 +543,6 @@ if args.coutput then
     end,
     structure = function(name)
       local st = assert(structures[name], name)
-      assert(not st.mixin, 'mixin structure not supported in C stubs: ' .. name)
       local result = {}
       for fname, field in pairs(st.fields) do
         local fval
@@ -668,8 +667,21 @@ if args.coutput then
     end,
     number = lua_value_emitters.number,
     string = lua_value_emitters.string,
-    structure = function(_, val)
-      lua_value_emitters.table(val)
+    structure = function(name, val)
+      local st = assert(structures[name], name)
+      local n = 0
+      for _ in pairs(val) do
+        n = n + 1
+      end
+      emit('  lua_createtable(L, 0, %d);', n)
+      for fname, fval in pairs(val) do
+        lua_value_emitters.string(fname)
+        dispatch(coutpushers, st.fields[fname].type, fval)
+        emit('  lua_rawset(L, -3);')
+      end
+      if st.mixin then
+        emit('  wowless_applymixin(L, %s);', cstring(st.mixin))
+      end
     end,
     table = lua_value_emitters.table,
   }
