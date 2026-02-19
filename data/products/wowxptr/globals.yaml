@@ -1125,11 +1125,11 @@ Enum:
     MinValue: 0
     NumValues: 4
   BattlepayProductGroupFlags:
-    Deprecated: 16
     DisableOwnedProducts: 4
     EnabledForTrial: 2
     EnabledForVeteran: 8
     HideOwnedProducts: 1
+    None: 0
   BattlepayProductGroupFlagsMeta:
     MaxValue: 8
     MinValue: 0

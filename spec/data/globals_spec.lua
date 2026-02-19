@@ -20,6 +20,19 @@ describe('globals', function()
                   end
                   assert.equal(meta.NumValues, count)
                 end)
+                -- issue #527
+                local stringValuedEnums = { AccountStateLoadedFlags = true, CreateAllAccountData = true }
+                if not stringValuedEnums[k] then
+                  it('MinValue matches', function()
+                    local min
+                    for _, v in pairs(enums[k]) do
+                      if min == nil or v < min then
+                        min = v
+                      end
+                    end
+                    assert.equal(meta.MinValue, min)
+                  end)
+                end
               end
             end)
           end
