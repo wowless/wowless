@@ -520,13 +520,17 @@ if args.coutput then
     return '"' .. s:gsub('\\', '\\\\'):gsub('"', '\\"') .. '"'
   end
 
-  local coutdefaults = {
+  local coutdefaults
+  coutdefaults = {
+    arrayof = function(inner)
+      return { dispatch(coutdefaults, inner) }
+    end,
     boolean = function()
       return false
     end,
     enum = function(enumname)
       local meta = assert(globals.Enum[enumname .. 'Meta'], 'missing meta enum for ' .. enumname)
-      return assert(meta.MinValue, 'missing MinValue in meta for ' .. enumname)
+      return (assert(meta.MinValue, 'missing MinValue in meta for ' .. enumname))
     end,
     ['nil'] = function()
       return nil
@@ -599,7 +603,15 @@ if args.coutput then
     end
   end
 
-  local coutpushers = {
+  local coutpushers
+  coutpushers = {
+    arrayof = function(inner, val)
+      emit('  lua_createtable(L, %d, 0);', #val)
+      for i, elem in ipairs(val) do
+        dispatch(coutpushers, inner, elem)
+        emit('  lua_rawseti(L, -2, %d);', i)
+      end
+    end,
     boolean = function(val)
       emit('  lua_pushboolean(L, %d);', val and 1 or 0)
     end,
