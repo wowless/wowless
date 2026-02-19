@@ -82,6 +82,23 @@ static inline void wowless_stubchecknilableunit(lua_State *L, int idx) {
   }
 }
 
+static inline void wowless_stubchecktable(lua_State *L, int idx) {
+  if (lua_type(L, idx) != LUA_TTABLE) {
+    luaL_typerror(L, idx, lua_typename(L, LUA_TTABLE));
+  }
+}
+
+static inline void wowless_stubchecknilabletable(lua_State *L, int idx) {
+  switch (lua_type(L, idx)) {
+    case LUA_TTABLE:
+    case LUA_TNIL:
+    case LUA_TNONE:
+      return;
+    default:
+      luaL_typerror(L, idx, lua_typename(L, LUA_TTABLE));
+  }
+}
+
 static inline void wowless_stubcheckunknown(lua_State *L, int idx) {
   if (lua_isnoneornil(L, idx)) {
     luaL_argerror(L, idx, "value expected");
