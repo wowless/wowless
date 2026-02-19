@@ -538,6 +538,9 @@ if args.coutput then
     number = function()
       return 1
     end,
+    oneornil = function()
+      return nil
+    end,
     string = function()
       return ''
     end,
