@@ -32,6 +32,16 @@ describe('globals', function()
                     end
                     assert.equal(meta.MinValue, min)
                   end)
+                  it('MaxValue matches', function()
+                    local max
+                    for _, v in pairs(enums[k]) do
+                      if v >= 0 and (max == nil or v > max) then
+                        max = v
+                      end
+                    end
+                    local expected = max ~= nil and (max < 2 ^ 31 and max or max - 2 ^ 32) or nil
+                    assert.equal(meta.MaxValue, expected)
+                  end)
                 end
               end
             end)
