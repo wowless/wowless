@@ -609,29 +609,30 @@ if args.coutput then
     end
   end
 
-  local function emit_push_value(v)
-    local vtype = type(v)
-    if vtype == 'string' then
-      emit('  lua_pushlstring(L, %s, %d);', cstring(v), #v)
-    elseif vtype == 'number' then
-      emit('  lua_pushnumber(L, %g);', v)
-    elseif vtype == 'boolean' then
+  local lua_value_emitters
+  lua_value_emitters = {
+    boolean = function(v)
       emit('  lua_pushboolean(L, %d);', v and 1 or 0)
-    elseif vtype == 'table' then
+    end,
+    number = function(v)
+      emit('  lua_pushnumber(L, %g);', v)
+    end,
+    string = function(v)
+      emit('  lua_pushlstring(L, %s, %d);', cstring(v), #v)
+    end,
+    table = function(v)
       local n = 0
       for _ in pairs(v) do
         n = n + 1
       end
       emit('  lua_createtable(L, 0, %d);', n)
-      for k, v2 in pairs(v) do
-        emit_push_value(k)
-        emit_push_value(v2)
+      for vk, vv in pairs(v) do
+        dispatch(lua_value_emitters, type(vk), vk)
+        dispatch(lua_value_emitters, type(vv), vv)
         emit('  lua_rawset(L, -3);')
       end
-    else
-      error('unsupported value type for table stub: ' .. vtype)
-    end
-  end
+    end,
+  }
 
   local coutpushers
   coutpushers = {
@@ -642,21 +643,13 @@ if args.coutput then
         emit('  lua_rawseti(L, -2, %d);', i)
       end
     end,
-    boolean = function(val)
-      emit('  lua_pushboolean(L, %d);', val and 1 or 0)
-    end,
+    boolean = lua_value_emitters.boolean,
     enum = function(_, val)
-      emit('  lua_pushnumber(L, %g);', val)
+      lua_value_emitters.number(val)
     end,
-    number = function(val)
-      emit('  lua_pushnumber(L, %g);', val)
-    end,
-    string = function(val)
-      emit('  lua_pushlstring(L, %s, %d);', cstring(val), #val)
-    end,
-    table = function(val)
-      emit_push_value(val)
-    end,
+    number = lua_value_emitters.number,
+    string = lua_value_emitters.string,
+    table = lua_value_emitters.table,
   }
 
   for _, entry in ipairs(eligible) do
