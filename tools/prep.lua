@@ -541,9 +541,6 @@ if args.coutput then
     string = function()
       return ''
     end,
-    table = function()
-      return {}
-    end,
     unknown = function()
       return nil
     end,
@@ -561,9 +558,6 @@ if args.coutput then
     end,
     string = function()
       return 'string'
-    end,
-    table = function()
-      return 'table'
     end,
     unit = function()
       return 'unit'
@@ -629,9 +623,6 @@ if args.coutput then
     end,
     string = function(val)
       emit('  lua_pushlstring(L, %s, %d);', cstring(val), #val)
-    end,
-    table = function()
-      emit('  lua_newtable(L);')
     end,
   }
 
