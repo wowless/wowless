@@ -4,6 +4,23 @@
 #include "lauxlib.h"
 #include "lua.h"
 
+static inline void wowless_stubcheckenum(lua_State *L, int idx) {
+  if (lua_type(L, idx) != LUA_TNUMBER) {
+    luaL_typerror(L, idx, lua_typename(L, LUA_TNUMBER));
+  }
+}
+
+static inline void wowless_stubchecknilableenum(lua_State *L, int idx) {
+  switch (lua_type(L, idx)) {
+    case LUA_TNUMBER:
+    case LUA_TNIL:
+    case LUA_TNONE:
+      return;
+    default:
+      luaL_typerror(L, idx, lua_typename(L, LUA_TNUMBER));
+  }
+}
+
 static inline void wowless_stubchecknumber(lua_State *L, int idx) {
   luaL_checknumber(L, idx);
 }

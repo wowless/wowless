@@ -539,6 +539,27 @@ if args.coutput then
     end,
   }
 
+  local cinputtypes = {
+    boolean = function()
+      return 'boolean'
+    end,
+    enum = function()
+      return 'enum'
+    end,
+    number = function()
+      return 'number'
+    end,
+    string = function()
+      return 'string'
+    end,
+    unit = function()
+      return 'unit'
+    end,
+    unknown = function()
+      return 'unknown'
+    end,
+  }
+
   local function is_eligible(apicfg)
     if apicfg.impl then
       return false
@@ -551,8 +572,7 @@ if args.coutput then
       end
     end
     for _, inp in ipairs(apicfg.inputs or {}) do
-      local ty = inp.type
-      if ty ~= 'string' and ty ~= 'number' and ty ~= 'boolean' and ty ~= 'unit' and ty ~= 'unknown' then
+      if not pcall(dispatch, cinputtypes, inp.type) then
         return false
       end
     end
@@ -595,9 +615,9 @@ if args.coutput then
     local k, v = entry.name, entry.cfg
     emit('static int stub_%s(lua_State *L) {', safename(k))
     for i, inp in ipairs(v.inputs or {}) do
-      local ty = inp.type
       local nilable = inp.nilable or inp.default ~= nil
-      emit('  wowless_stubcheck%s%s(L, %d);', nilable and 'nilable' or '', ty, i)
+      local cty = dispatch(cinputtypes, inp.type)
+      emit('  wowless_stubcheck%s%s(L, %d);', nilable and 'nilable' or '', cty, i)
     end
     local allouts = not v.stubnothing and v.outputs or {}
     local outstride = v.outstride or 0
