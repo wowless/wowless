@@ -610,7 +610,7 @@ if args.coutput then
       emit('  lua_pushnumber(L, %g);', val)
     end,
     string = function(val)
-      emit('  lua_pushstring(L, %s);', cstring(val))
+      emit('  lua_pushlstring(L, %s, %d);', cstring(val), #val)
     end,
   }
 
