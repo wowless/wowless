@@ -541,6 +541,9 @@ if args.coutput then
     string = function()
       return ''
     end,
+    table = function()
+      return {}
+    end,
     unknown = function()
       return nil
     end,
@@ -558,6 +561,9 @@ if args.coutput then
     end,
     string = function()
       return 'string'
+    end,
+    table = function()
+      return 'table'
     end,
     unit = function()
       return 'unit'
@@ -603,6 +609,30 @@ if args.coutput then
     end
   end
 
+  local function emit_push_value(v)
+    local vtype = type(v)
+    if vtype == 'string' then
+      emit('  lua_pushlstring(L, %s, %d);', cstring(v), #v)
+    elseif vtype == 'number' then
+      emit('  lua_pushnumber(L, %g);', v)
+    elseif vtype == 'boolean' then
+      emit('  lua_pushboolean(L, %d);', v and 1 or 0)
+    elseif vtype == 'table' then
+      local n = 0
+      for _ in pairs(v) do
+        n = n + 1
+      end
+      emit('  lua_createtable(L, 0, %d);', n)
+      for k, v2 in pairs(v) do
+        emit_push_value(k)
+        emit_push_value(v2)
+        emit('  lua_rawset(L, -3);')
+      end
+    else
+      error('unsupported value type for table stub: ' .. vtype)
+    end
+  end
+
   local coutpushers
   coutpushers = {
     arrayof = function(inner, val)
@@ -623,6 +653,9 @@ if args.coutput then
     end,
     string = function(val)
       emit('  lua_pushlstring(L, %s, %d);', cstring(val), #val)
+    end,
+    table = function(val)
+      emit_push_value(val)
     end,
   }
 
