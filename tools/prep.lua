@@ -541,6 +541,25 @@ if args.coutput then
     string = function()
       return ''
     end,
+    structure = function(name)
+      local st = assert(structures[name], name)
+      assert(not st.mixin, 'mixin structure not supported in C stubs: ' .. name)
+      local result = {}
+      for fname, field in pairs(st.fields) do
+        local fval
+        if field.stub ~= nil then
+          fval = field.stub
+        elseif field.default ~= nil then
+          fval = field.default
+        elseif not field.nilable or field.stubnotnil then
+          fval = dispatch(coutdefaults, field.type)
+        end
+        if fval ~= nil then
+          result[fname] = fval
+        end
+      end
+      return result
+    end,
     table = function()
       return {}
     end,
@@ -649,6 +668,9 @@ if args.coutput then
     end,
     number = lua_value_emitters.number,
     string = lua_value_emitters.string,
+    structure = function(_, val)
+      lua_value_emitters.table(val)
+    end,
     table = lua_value_emitters.table,
   }
 
