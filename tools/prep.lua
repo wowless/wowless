@@ -583,6 +583,9 @@ if args.coutput then
     string = function()
       return 'string'
     end,
+    structure = function(name)
+      assert(structures[name], name)
+    end,
     table = function()
       return 'table'
     end,
@@ -689,13 +692,127 @@ if args.coutput then
     table = lua_value_emitters.table,
   }
 
+  local cinputemitters
+  -- Helper: calls the right emitter accounting for plain vs tagged types.
+  -- Plain types (e.g. "boolean") call emitter(cexpr, nilable).
+  -- Tagged types (e.g. {enum="X"}) call emitter(innerval, cexpr, nilable).
+  local function emit_input_check(ftype, cexpr, nilable)
+    if type(ftype) == 'string' then
+      cinputemitters[ftype](cexpr, nilable)
+    else
+      local k, v = next(ftype)
+      cinputemitters[k](v, cexpr, nilable)
+    end
+  end
+  cinputemitters = {
+    boolean = function(cexpr, nilable)
+      emit('  wowless_stubcheck%sboolean(L, %s);', nilable and 'nilable' or '', cexpr)
+    end,
+    enum = function(_, cexpr, nilable)
+      emit('  wowless_stubcheck%senum(L, %s);', nilable and 'nilable' or '', cexpr)
+    end,
+    number = function(cexpr, nilable)
+      emit('  wowless_stubcheck%snumber(L, %s);', nilable and 'nilable' or '', cexpr)
+    end,
+    string = function(cexpr, nilable)
+      emit('  wowless_stubcheck%sstring(L, %s);', nilable and 'nilable' or '', cexpr)
+    end,
+    structure = function(name, cexpr, nilable)
+      assert(structures[name], name)
+      emit('  wowless_check%sstruct_%s(L, %s);', nilable and 'nilable' or '', safename(name), cexpr)
+    end,
+    table = function(cexpr, nilable)
+      emit('  wowless_stubcheck%stable(L, %s);', nilable and 'nilable' or '', cexpr)
+    end,
+    unit = function(cexpr, nilable)
+      emit('  wowless_stubcheck%sunit(L, %s);', nilable and 'nilable' or '', cexpr)
+    end,
+    unknown = function(cexpr, nilable)
+      emit('  wowless_stubcheck%sunknown(L, %s);', nilable and 'nilable' or '', cexpr)
+    end,
+  }
+
+  local function is_checkable_field(ftype)
+    if type(ftype) == 'string' then
+      return cinputemitters[ftype] ~= nil
+    else
+      local k, v = next(ftype)
+      return cinputemitters[k] ~= nil and (k ~= 'structure' or structures[v] ~= nil)
+    end
+  end
+
+  local used_structures = {}
+  local function collect_struct(name)
+    if used_structures[name] then
+      return
+    end
+    used_structures[name] = true
+    local st = structures[name]
+    if st then
+      for _, field in pairs(st.fields) do
+        local ftype = field.type
+        if type(ftype) == 'table' and ftype.structure and is_checkable_field(ftype) then
+          collect_struct(ftype.structure)
+        end
+      end
+    end
+  end
+  for _, entry in ipairs(eligible) do
+    for _, inp in ipairs(entry.cfg.inputs or {}) do
+      local ftype = inp.type
+      if type(ftype) == 'table' and ftype.structure then
+        collect_struct(ftype.structure)
+      end
+    end
+  end
+
+  for sname in sorted(used_structures) do
+    emit('static void wowless_checkstruct_%s(lua_State *L, int idx);', safename(sname))
+    emit('static void wowless_checknilablestruct_%s(lua_State *L, int idx);', safename(sname))
+  end
+  if next(used_structures) then
+    emit('')
+  end
+
+  local function emit_struct_helper(sname)
+    local st = assert(structures[sname], sname)
+    local checkable = {}
+    for fname, field in sorted(st.fields) do
+      if is_checkable_field(field.type) then
+        table.insert(checkable, { fname = fname, field = field })
+      end
+    end
+    emit('static void wowless_checkstruct_%s(lua_State *L, int idx) {', safename(sname))
+    emit('  wowless_stubchecktable(L, idx);')
+    for _, ce in ipairs(checkable) do
+      local fname, field = ce.fname, ce.field
+      local field_nilable = field.nilable or field.default ~= nil
+      local ftype = field.type
+      local is_struct = type(ftype) == 'table' and ftype.structure ~= nil
+      emit('  lua_pushlstring(L, %s, %d);', cstring(fname), #fname)
+      emit('  lua_rawget(L, idx);')
+      emit_input_check(ftype, is_struct and 'lua_gettop(L)' or '-1', field_nilable)
+      emit('  lua_pop(L, 1);')
+    end
+    emit('}')
+    emit('')
+    emit('static void wowless_checknilablestruct_%s(lua_State *L, int idx) {', safename(sname))
+    emit('  if (!lua_isnoneornil(L, idx)) {')
+    emit('    wowless_checkstruct_%s(L, idx);', safename(sname))
+    emit('  }')
+    emit('}')
+    emit('')
+  end
+  for sname in sorted(used_structures) do
+    emit_struct_helper(sname)
+  end
+
   for _, entry in ipairs(eligible) do
     local k, v = entry.name, entry.cfg
     emit('static int stub_%s(lua_State *L) {', safename(k))
     for i, inp in ipairs(v.inputs or {}) do
       local nilable = inp.nilable or inp.default ~= nil
-      local cty = dispatch(cinputtypes, inp.type)
-      emit('  wowless_stubcheck%s%s(L, %d);', nilable and 'nilable' or '', cty, i)
+      emit_input_check(inp.type, tostring(i), nilable)
     end
     local allouts = not v.stubnothing and v.outputs or {}
     local outstride = v.outstride or 0
