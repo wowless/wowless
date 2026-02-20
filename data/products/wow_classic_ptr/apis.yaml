@@ -3199,6 +3199,7 @@ C_ChallengeMode.Reset:
   inputs:
   outputs:
 C_CharacterServices.ArePaidCharacterTransfersBetweenBnetAccountsEnabled:
+C_CharacterServices.AssignFCMDistribution:
 C_CharacterServices.AssignNameChangeDistribution:
 C_CharacterServices.AssignPCTDistribution:
 C_CharacterServices.AssignRaceOrFactionChangeDistribution:
@@ -17493,7 +17494,7 @@ GetBlockChance:
 GetBonusBarIndex:
 GetBonusBarOffset:
 GetBuildInfo:
-  impl: GetBuildInfo_1_15_0
+  impl: GetBuildInfo_3_4_2
   inputs:
   outputs:
   - name: version
