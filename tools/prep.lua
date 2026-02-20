@@ -585,6 +585,7 @@ if args.coutput then
     end,
     structure = function(name)
       assert(structures[name], name)
+      return 'struct_' .. safename(name)
     end,
     table = function()
       return 'table'
@@ -718,8 +719,8 @@ if args.coutput then
   end
 
   for sname in sorted(used_structures) do
-    emit('static void wowless_checkstruct_%s(lua_State *L, int idx);', safename(sname))
-    emit('static void wowless_checknilablestruct_%s(lua_State *L, int idx);', safename(sname))
+    emit('static void wowless_stubcheckstruct_%s(lua_State *L, int idx);', safename(sname))
+    emit('static void wowless_stubchecknilablestruct_%s(lua_State *L, int idx);', safename(sname))
   end
   if next(used_structures) then
     emit('')
@@ -733,31 +734,26 @@ if args.coutput then
         table.insert(checkable, { fname = fname, field = field })
       end
     end
-    emit('static void wowless_checkstruct_%s(lua_State *L, int idx) {', safename(sname))
+    emit('static void wowless_stubcheckstruct_%s(lua_State *L, int idx) {', safename(sname))
     emit('  wowless_stubchecktable(L, idx);')
     for _, ce in ipairs(checkable) do
       local fname, field = ce.fname, ce.field
       local field_nilable = field.nilable or field.default ~= nil
       local ftype = field.type
-      local is_struct = type(ftype) == 'table' and ftype.structure ~= nil
       emit('  lua_pushlstring(L, %s, %d);', cstring(fname), #fname)
       emit('  lua_rawget(L, idx);')
-      if is_struct then
-        emit(
-          '  wowless_check%sstruct_%s(L, lua_gettop(L));',
-          field_nilable and 'nilable' or '',
-          safename(ftype.structure)
-        )
-      else
-        emit('  wowless_stubcheck%s%s(L, -1);', field_nilable and 'nilable' or '', dispatch(cinputtypes, ftype))
-      end
+      emit(
+        '  wowless_stubcheck%s%s(L, lua_gettop(L));',
+        field_nilable and 'nilable' or '',
+        dispatch(cinputtypes, ftype)
+      )
       emit('  lua_pop(L, 1);')
     end
     emit('}')
     emit('')
-    emit('static void wowless_checknilablestruct_%s(lua_State *L, int idx) {', safename(sname))
+    emit('static void wowless_stubchecknilablestruct_%s(lua_State *L, int idx) {', safename(sname))
     emit('  if (!lua_isnoneornil(L, idx)) {')
-    emit('    wowless_checkstruct_%s(L, idx);', safename(sname))
+    emit('    wowless_stubcheckstruct_%s(L, idx);', safename(sname))
     emit('  }')
     emit('}')
     emit('')
@@ -771,12 +767,7 @@ if args.coutput then
     emit('static int stub_%s(lua_State *L) {', safename(k))
     for i, inp in ipairs(v.inputs or {}) do
       local nilable = inp.nilable or inp.default ~= nil
-      local ftype = inp.type
-      if type(ftype) == 'table' and ftype.structure then
-        emit('  wowless_check%sstruct_%s(L, %d);', nilable and 'nilable' or '', safename(ftype.structure), i)
-      else
-        emit('  wowless_stubcheck%s%s(L, %d);', nilable and 'nilable' or '', dispatch(cinputtypes, ftype), i)
-      end
+      emit('  wowless_stubcheck%s%s(L, %d);', nilable and 'nilable' or '', dispatch(cinputtypes, inp.type), i)
     end
     local allouts = not v.stubnothing and v.outputs or {}
     local outstride = v.outstride or 0
