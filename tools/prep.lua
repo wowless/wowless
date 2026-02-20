@@ -735,6 +735,7 @@ if args.coutput then
       end
     end
     emit('static void wowless_stubcheckstruct_%s(lua_State *L, int idx) {', safename(sname))
+    emit('  idx = lua_absindex(L, idx);')
     emit('  wowless_stubchecktable(L, idx);')
     for _, ce in ipairs(checkable) do
       local fname, field = ce.fname, ce.field
@@ -742,11 +743,7 @@ if args.coutput then
       local ftype = field.type
       emit('  lua_pushlstring(L, %s, %d);', cstring(fname), #fname)
       emit('  lua_rawget(L, idx);')
-      emit(
-        '  wowless_stubcheck%s%s(L, lua_gettop(L));',
-        field_nilable and 'nilable' or '',
-        dispatch(cinputtypes, ftype)
-      )
+      emit('  wowless_stubcheck%s%s(L, -1);', field_nilable and 'nilable' or '', dispatch(cinputtypes, ftype))
       emit('  lua_pop(L, 1);')
     end
     emit('}')
