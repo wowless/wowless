@@ -23,6 +23,31 @@ G.testsuite.uiobjects = function()
       }
     end,
 
+    AnimationGroup = function()
+      return {
+        noqueuing = function()
+          local a = CreateFrame('Frame'):CreateAnimationGroup():CreateAnimation('Animation')
+          local depth = 0
+          local log = {}
+          a:SetScript('OnPlay', function(self)
+            if depth < 5 then
+              depth = depth + 1
+              table.insert(log, 'a')
+              self:Stop()
+              table.insert(log, 'b')
+            end
+          end)
+          a:SetScript('OnStop', function(self)
+            table.insert(log, 'c')
+            self:Play()
+            table.insert(log, 'd')
+          end)
+          a:Play()
+          check1(('ac'):rep(5) .. ('db'):rep(5), table.concat(log))
+        end,
+      }
+    end,
+
     EditBox = function()
       return {
         fontobject = function()
