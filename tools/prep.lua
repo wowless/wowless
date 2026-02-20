@@ -692,19 +692,7 @@ if args.coutput then
     table = lua_value_emitters.table,
   }
 
-  local cinputemitters
-  -- Helper: calls the right emitter accounting for plain vs tagged types.
-  -- Plain types (e.g. "boolean") call emitter(cexpr, nilable).
-  -- Tagged types (e.g. {enum="X"}) call emitter(innerval, cexpr, nilable).
-  local function emit_input_check(ftype, cexpr, nilable)
-    if type(ftype) == 'string' then
-      cinputemitters[ftype](cexpr, nilable)
-    else
-      local k, v = next(ftype)
-      cinputemitters[k](v, cexpr, nilable)
-    end
-  end
-  cinputemitters = {
+  local cinputemitters = {
     boolean = function(cexpr, nilable)
       emit('  wowless_stubcheck%sboolean(L, %s);', nilable and 'nilable' or '', cexpr)
     end,
@@ -791,7 +779,7 @@ if args.coutput then
       local is_struct = type(ftype) == 'table' and ftype.structure ~= nil
       emit('  lua_pushlstring(L, %s, %d);', cstring(fname), #fname)
       emit('  lua_rawget(L, idx);')
-      emit_input_check(ftype, is_struct and 'lua_gettop(L)' or '-1', field_nilable)
+      dispatch(cinputemitters, ftype, is_struct and 'lua_gettop(L)' or '-1', field_nilable)
       emit('  lua_pop(L, 1);')
     end
     emit('}')
@@ -812,7 +800,7 @@ if args.coutput then
     emit('static int stub_%s(lua_State *L) {', safename(k))
     for i, inp in ipairs(v.inputs or {}) do
       local nilable = inp.nilable or inp.default ~= nil
-      emit_input_check(inp.type, tostring(i), nilable)
+      dispatch(cinputemitters, inp.type, tostring(i), nilable)
     end
     local allouts = not v.stubnothing and v.outputs or {}
     local outstride = v.outstride or 0
