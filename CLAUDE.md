@@ -258,9 +258,10 @@ When modules export WoW C_ style functions (like `C_FunctionContainers.CreateCal
 - `directsql`: Simple SQL query wrapper
 - `luadelegate`: Delegates to a separate Lua module file
 
-## GitHub Issues
+## GitHub Issues and PRs
 
 - Add the `claude` label to any issues you create
+- Add the `claude` label to any PRs you create
 - Add a `-- issue #nnn` comment to the line of Lua code most relevant to the
   issue
 
