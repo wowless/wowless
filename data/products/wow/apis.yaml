@@ -23084,6 +23084,25 @@ C_Secrets.ShouldUnitSpellCastingBeSecret:
   outputs:
   - name: isSpellCastingSecret
     type: boolean
+C_Secrets.ShouldUnitThreatStateBeSecret:
+  inputs:
+  - name: unit
+    type: unit
+  - name: mobUnit
+    nilable: true
+    type: unit
+  outputs:
+  - name: isUnitThreatSecret
+    type: boolean
+C_Secrets.ShouldUnitThreatValuesBeSecret:
+  inputs:
+  - name: unit
+    type: unit
+  - name: mobUnit
+    type: unit
+  outputs:
+  - name: isUnitThreatSecret
+    type: boolean
 C_SecureTransfer.AcceptTrade:
   inputs:
   outputs:

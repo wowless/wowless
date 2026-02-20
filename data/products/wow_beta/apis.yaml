@@ -4337,7 +4337,7 @@ C_CatalogShop.GetProductSortOrder:
     type: number
 C_CatalogShop.GetRefundableDecors:
   inputs:
-  - name: productIDOpt
+  - name: productIdFilterOpt
     nilable: true
     type: number
   outputs:
@@ -4345,6 +4345,8 @@ C_CatalogShop.GetRefundableDecors:
     type:
       arrayof:
         structure: C_CatalogShop.RefundableDecorInfo
+  - name: minTimeRemainingSeconds
+    type: number
 C_CatalogShop.GetSectionIDsForCategory:
   inputs:
   - name: categoryID
@@ -23081,6 +23083,25 @@ C_Secrets.ShouldUnitSpellCastingBeSecret:
     type: unit
   outputs:
   - name: isSpellCastingSecret
+    type: boolean
+C_Secrets.ShouldUnitThreatStateBeSecret:
+  inputs:
+  - name: unit
+    type: unit
+  - name: mobUnit
+    nilable: true
+    type: unit
+  outputs:
+  - name: isUnitThreatSecret
+    type: boolean
+C_Secrets.ShouldUnitThreatValuesBeSecret:
+  inputs:
+  - name: unit
+    type: unit
+  - name: mobUnit
+    type: unit
+  outputs:
+  - name: isUnitThreatSecret
     type: boolean
 C_SecureTransfer.AcceptTrade:
   inputs:

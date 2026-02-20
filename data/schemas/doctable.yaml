@@ -258,6 +258,8 @@ type:
               type: flag
             SecretWhenInCombat:
               type: flag
+            SecretWhenLossOfControlInfoRestricted:
+              type: flag
             SecretWhenSpellAuraRestricted:
               type: flag
             SecretWhenSpellBookItemCooldownRestricted:
@@ -295,6 +297,10 @@ type:
             SecretWhenUnitSpellCastRestricted:
               type: flag
             SecretWhenUnitSpellCastsRestricted:
+              type: flag
+            SecretWhenUnitThreatStateRestricted:
+              type: flag
+            SecretWhenUnitThreatValuesRestricted:
               type: flag
             SecretWhenUnpackedUnitAuraInstanceRestricted:
               type: flag
