@@ -692,43 +692,6 @@ if args.coutput then
     table = lua_value_emitters.table,
   }
 
-  local cinputemitters = {
-    boolean = function(cexpr, nilable)
-      emit('  wowless_stubcheck%sboolean(L, %s);', nilable and 'nilable' or '', cexpr)
-    end,
-    enum = function(_, cexpr, nilable)
-      emit('  wowless_stubcheck%senum(L, %s);', nilable and 'nilable' or '', cexpr)
-    end,
-    number = function(cexpr, nilable)
-      emit('  wowless_stubcheck%snumber(L, %s);', nilable and 'nilable' or '', cexpr)
-    end,
-    string = function(cexpr, nilable)
-      emit('  wowless_stubcheck%sstring(L, %s);', nilable and 'nilable' or '', cexpr)
-    end,
-    structure = function(name, cexpr, nilable)
-      assert(structures[name], name)
-      emit('  wowless_check%sstruct_%s(L, %s);', nilable and 'nilable' or '', safename(name), cexpr)
-    end,
-    table = function(cexpr, nilable)
-      emit('  wowless_stubcheck%stable(L, %s);', nilable and 'nilable' or '', cexpr)
-    end,
-    unit = function(cexpr, nilable)
-      emit('  wowless_stubcheck%sunit(L, %s);', nilable and 'nilable' or '', cexpr)
-    end,
-    unknown = function(cexpr, nilable)
-      emit('  wowless_stubcheck%sunknown(L, %s);', nilable and 'nilable' or '', cexpr)
-    end,
-  }
-
-  local function is_checkable_field(ftype)
-    if type(ftype) == 'string' then
-      return cinputemitters[ftype] ~= nil
-    else
-      local k, v = next(ftype)
-      return cinputemitters[k] ~= nil and (k ~= 'structure' or structures[v] ~= nil)
-    end
-  end
-
   local used_structures = {}
   local function collect_struct(name)
     if used_structures[name] then
@@ -739,7 +702,7 @@ if args.coutput then
     if st then
       for _, field in pairs(st.fields) do
         local ftype = field.type
-        if type(ftype) == 'table' and ftype.structure and is_checkable_field(ftype) then
+        if type(ftype) == 'table' and ftype.structure and pcall(dispatch, cinputtypes, ftype) then
           collect_struct(ftype.structure)
         end
       end
@@ -766,7 +729,7 @@ if args.coutput then
     local st = assert(structures[sname], sname)
     local checkable = {}
     for fname, field in sorted(st.fields) do
-      if is_checkable_field(field.type) then
+      if pcall(dispatch, cinputtypes, field.type) then
         table.insert(checkable, { fname = fname, field = field })
       end
     end
@@ -779,7 +742,15 @@ if args.coutput then
       local is_struct = type(ftype) == 'table' and ftype.structure ~= nil
       emit('  lua_pushlstring(L, %s, %d);', cstring(fname), #fname)
       emit('  lua_rawget(L, idx);')
-      dispatch(cinputemitters, ftype, is_struct and 'lua_gettop(L)' or '-1', field_nilable)
+      if is_struct then
+        emit(
+          '  wowless_check%sstruct_%s(L, lua_gettop(L));',
+          field_nilable and 'nilable' or '',
+          safename(ftype.structure)
+        )
+      else
+        emit('  wowless_stubcheck%s%s(L, -1);', field_nilable and 'nilable' or '', dispatch(cinputtypes, ftype))
+      end
       emit('  lua_pop(L, 1);')
     end
     emit('}')
@@ -800,7 +771,12 @@ if args.coutput then
     emit('static int stub_%s(lua_State *L) {', safename(k))
     for i, inp in ipairs(v.inputs or {}) do
       local nilable = inp.nilable or inp.default ~= nil
-      dispatch(cinputemitters, inp.type, tostring(i), nilable)
+      local ftype = inp.type
+      if type(ftype) == 'table' and ftype.structure then
+        emit('  wowless_check%sstruct_%s(L, %d);', nilable and 'nilable' or '', safename(ftype.structure), i)
+      else
+        emit('  wowless_stubcheck%s%s(L, %d);', nilable and 'nilable' or '', dispatch(cinputtypes, ftype), i)
+      end
     end
     local allouts = not v.stubnothing and v.outputs or {}
     local outstride = v.outstride or 0
