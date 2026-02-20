@@ -726,7 +726,7 @@ if args.coutput then
     emit('')
   end
 
-  local function emit_struct_helper(sname)
+  for sname in sorted(used_structures) do
     local st = assert(structures[sname], sname)
     local checkable = {}
     for fname, field in sorted(st.fields) do
@@ -754,9 +754,6 @@ if args.coutput then
     emit('  }')
     emit('}')
     emit('')
-  end
-  for sname in sorted(used_structures) do
-    emit_struct_helper(sname)
   end
 
   for _, entry in ipairs(eligible) do
