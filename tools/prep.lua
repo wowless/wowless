@@ -570,7 +570,9 @@ if args.coutput then
     end,
   }
 
-  local cinputtypes = {
+  local used_structures = {}
+  local cinputtypes
+  cinputtypes = {
     boolean = function()
       return 'boolean'
     end,
@@ -584,7 +586,11 @@ if args.coutput then
       return 'string'
     end,
     structure = function(name)
-      assert(structures[name], name)
+      local st = assert(structures[name], name)
+      for _, field in pairs(st.fields) do
+        dispatch(cinputtypes, field.type)
+      end
+      used_structures[name] = true
       return 'struct_' .. safename(name)
     end,
     table = function()
@@ -693,31 +699,6 @@ if args.coutput then
     table = lua_value_emitters.table,
   }
 
-  local used_structures = {}
-  local function collect_struct(name)
-    if used_structures[name] then
-      return
-    end
-    used_structures[name] = true
-    local st = structures[name]
-    if st then
-      for _, field in pairs(st.fields) do
-        local ftype = field.type
-        if type(ftype) == 'table' and ftype.structure and pcall(dispatch, cinputtypes, ftype) then
-          collect_struct(ftype.structure)
-        end
-      end
-    end
-  end
-  for _, entry in ipairs(eligible) do
-    for _, inp in ipairs(entry.cfg.inputs or {}) do
-      local ftype = inp.type
-      if type(ftype) == 'table' and ftype.structure then
-        collect_struct(ftype.structure)
-      end
-    end
-  end
-
   for sname in sorted(used_structures) do
     emit('static void wowless_stubcheckstruct_%s(lua_State *L, int idx);', safename(sname))
     emit('static void wowless_stubchecknilablestruct_%s(lua_State *L, int idx);', safename(sname))
@@ -728,17 +709,10 @@ if args.coutput then
 
   for sname in sorted(used_structures) do
     local st = assert(structures[sname], sname)
-    local checkable = {}
-    for fname, field in sorted(st.fields) do
-      if pcall(dispatch, cinputtypes, field.type) then
-        table.insert(checkable, { fname = fname, field = field })
-      end
-    end
     emit('static void wowless_stubcheckstruct_%s(lua_State *L, int idx) {', safename(sname))
     emit('  idx = lua_absindex(L, idx);')
     emit('  wowless_stubchecktable(L, idx);')
-    for _, ce in ipairs(checkable) do
-      local fname, field = ce.fname, ce.field
+    for fname, field in sorted(st.fields) do
       local field_nilable = field.nilable or field.default ~= nil
       local ftype = field.type
       emit('  lua_pushlstring(L, %s, %d);', cstring(fname), #fname)
