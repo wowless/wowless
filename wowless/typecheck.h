@@ -116,6 +116,31 @@ static inline void wowless_stubchecknilabletable(lua_State *L, int idx) {
   }
 }
 
+static inline void wowless_stubcheckluaobject(lua_State *L, int idx,
+                                              const char *key, size_t keylen) {
+  if (lua_type(L, idx) != LUA_TUSERDATA) {
+    luaL_typerror(L, idx, "luaobject");
+  }
+  if (!lua_getmetatable(L, idx)) {
+    luaL_typerror(L, idx, "luaobject");
+  }
+  lua_pushlstring(L, key, keylen);
+  lua_rawget(L, LUA_REGISTRYINDEX);
+  if (!lua_rawequal(L, -1, -2)) {
+    lua_pop(L, 2);
+    luaL_typerror(L, idx, "luaobject");
+  }
+  lua_pop(L, 2);
+}
+
+static inline void wowless_stubchecknilableluaobject(lua_State *L, int idx,
+                                                     const char *key,
+                                                     size_t keylen) {
+  if (!lua_isnoneornil(L, idx)) {
+    wowless_stubcheckluaobject(L, idx, key, keylen);
+  }
+}
+
 static inline void wowless_stubcheckunknown(lua_State *L, int idx) {
   if (lua_isnoneornil(L, idx)) {
     luaL_argerror(L, idx, "value expected");

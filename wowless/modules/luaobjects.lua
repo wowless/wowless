@@ -1,10 +1,9 @@
 local bubblewrap = require('wowless.bubblewrap')
-local mixin = require('wowless.util').mixin
+local luaobject = require('wowless.luaobject')
 
 return function(datalua)
   local config = datalua.config.modules and datalua.config.modules.luaobjects or {}
   local objs = setmetatable({}, { __mode = 'k' })
-  local mtps = {}
   local impltypes = {}
 
   local function LoadTypes(modules)
@@ -64,16 +63,14 @@ return function(datalua)
           end or nil,
         }
 
-        local mtp = newproxy(true)
-        mixin(getmetatable(mtp), mt)
-        mtps[k] = mtp
+        luaobject.register(k, mt)
         impltypes[k] = v.impl and modules[v.impl]
       end
     end
   end
 
   local function make(k)
-    local p = newproxy(assert(mtps[k], k))
+    local p = luaobject.new(k)
     local obj = { type = k, table = {}, luarep = p }
     objs[p] = obj
     return obj
@@ -100,7 +97,7 @@ return function(datalua)
 
   local function CreateProxy(obj)
     assert(obj and obj.luarep, 'not a luaobject')
-    local np = newproxy(mtps[obj.type])
+    local np = luaobject.new(obj.type)
     objs[np] = obj
     return np
   end

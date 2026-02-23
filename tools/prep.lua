@@ -611,6 +611,7 @@ if args.coutput then
 
   local used_structures = {}
   local used_arrayofs = {}
+  local used_luaobjects = {}
   local cinputtypes
   cinputtypes = {
     arrayof = function(inner)
@@ -646,6 +647,10 @@ if args.coutput then
     end,
     uiAddon = function()
       return 'string'
+    end,
+    luaobject = function(name)
+      used_luaobjects[name] = true
+      return 'luaobject_' .. safename(name)
     end,
     unit = function()
       return 'unit'
@@ -764,6 +769,13 @@ if args.coutput then
   if next(used_arrayofs) then
     emit('')
   end
+  for lname in sorted(used_luaobjects) do
+    emit('static void wowless_stubcheckluaobject_%s(lua_State *L, int idx);', safename(lname))
+    emit('static void wowless_stubchecknilableluaobject_%s(lua_State *L, int idx);', safename(lname))
+  end
+  if next(used_luaobjects) then
+    emit('')
+  end
 
   for sname in sorted(used_structures) do
     local st = assert(structures[sname], sname)
@@ -805,6 +817,18 @@ if args.coutput then
     emit('  if (!lua_isnoneornil(L, idx)) {')
     emit('    wowless_stubcheckarrayof_%s(L, idx);', atype)
     emit('  }')
+    emit('}')
+    emit('')
+  end
+
+  for lname in sorted(used_luaobjects) do
+    local regkey = 'wowless.luaobject.' .. lname
+    emit('static void wowless_stubcheckluaobject_%s(lua_State *L, int idx) {', safename(lname))
+    emit('  wowless_stubcheckluaobject(L, idx, %s, %d);', cstring(regkey), #regkey)
+    emit('}')
+    emit('')
+    emit('static void wowless_stubchecknilableluaobject_%s(lua_State *L, int idx) {', safename(lname))
+    emit('  wowless_stubchecknilableluaobject(L, idx, %s, %d);', cstring(regkey), #regkey)
     emit('}')
     emit('')
   end
