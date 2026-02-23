@@ -1,7 +1,10 @@
+local uiobject = require('wowless.uiobject')
+
 return function()
   local uiobjectTypes = {}
 
   local function Add(name, t)
+    uiobject.register(name, t.isa)
     uiobjectTypes[name] = t
   end
 

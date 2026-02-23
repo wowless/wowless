@@ -1,4 +1,5 @@
 local hlist = require('wowless.hlist')
+local uiobject = require('wowless.uiobject')
 
 return function(
   datalua,
@@ -124,7 +125,7 @@ return function(
     end
     local objtype = uiobjecttypes.GetOrThrow(typename)
     log(3, 'creating %s%s', objtype.name, objname and (' named ' .. objname) or '')
-    local objp = newproxy(nil)
+    local objp = uiobject.new(typename)
     local obj = setmetatable({ [0] = objp }, objtype.sandboxMT)
     local ud = objtype.constructor()
     ud.luarep = obj

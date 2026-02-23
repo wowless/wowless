@@ -662,6 +662,7 @@ if args.coutput then
   local used_structures = {}
   local used_arrayofs = {}
   local used_luaobjects = {}
+  local used_uiobjects = {}
   local cinputtypes
   cinputtypes = {
     arrayof = function(inner)
@@ -701,6 +702,10 @@ if args.coutput then
     luaobject = function(name)
       used_luaobjects[name] = true
       return 'luaobject_' .. safename(name)
+    end,
+    uiobject = function(name)
+      used_uiobjects[name] = true
+      return 'uiobject_' .. safename(name)
     end,
     unit = function()
       return 'unit'
@@ -826,6 +831,13 @@ if args.coutput then
   if next(used_luaobjects) then
     emit('')
   end
+  for uname in sorted(used_uiobjects) do
+    emit('static void wowless_stubcheckuiobject_%s(lua_State *L, int idx);', safename(uname))
+    emit('static void wowless_stubchecknilableuiobject_%s(lua_State *L, int idx);', safename(uname))
+  end
+  if next(used_uiobjects) then
+    emit('')
+  end
 
   for sname in sorted(used_structures) do
     local st = assert(structures[sname], sname)
@@ -879,6 +891,18 @@ if args.coutput then
     emit('')
     emit('static void wowless_stubchecknilableluaobject_%s(lua_State *L, int idx) {', safename(lname))
     emit('  wowless_stubchecknilableluaobject(L, idx, %s, %d);', cstring(regkey), #regkey)
+    emit('}')
+    emit('')
+  end
+
+  for uname in sorted(used_uiobjects) do
+    local target = uname:lower()
+    emit('static void wowless_stubcheckuiobject_%s(lua_State *L, int idx) {', safename(uname))
+    emit('  wowless_stubcheckuiobject(L, idx, %s, %d);', cstring(target), #target)
+    emit('}')
+    emit('')
+    emit('static void wowless_stubchecknilableuiobject_%s(lua_State *L, int idx) {', safename(uname))
+    emit('  wowless_stubchecknilableuiobject(L, idx, %s, %d);', cstring(target), #target)
     emit('}')
     emit('')
   end

@@ -141,6 +141,36 @@ static inline void wowless_stubchecknilableluaobject(lua_State *L, int idx,
   }
 }
 
+static inline void wowless_stubcheckuiobject(lua_State *L, int idx,
+                                             const char *target,
+                                             size_t targlen) {
+  if (lua_type(L, idx) != LUA_TTABLE) {
+    luaL_typerror(L, idx, "uiobject");
+  }
+  lua_rawgeti(L, idx, 0);
+  if (lua_type(L, -1) != LUA_TUSERDATA) {
+    luaL_typerror(L, idx, "uiobject");
+  }
+  lua_pushliteral(L, "wowless.uiobject.proxies");
+  lua_rawget(L, LUA_REGISTRYINDEX);
+  lua_pushvalue(L, -2);
+  lua_rawget(L, -2);
+  lua_pushlstring(L, target, targlen);
+  lua_rawget(L, -2);
+  if (!lua_toboolean(L, -1)) {
+    luaL_typerror(L, idx, "uiobject");
+  }
+  lua_pop(L, 4);
+}
+
+static inline void wowless_stubchecknilableuiobject(lua_State *L, int idx,
+                                                    const char *target,
+                                                    size_t targlen) {
+  if (!lua_isnoneornil(L, idx)) {
+    wowless_stubcheckuiobject(L, idx, target, targlen);
+  }
+}
+
 static inline void wowless_stubcheckunknown(lua_State *L, int idx) {
   if (lua_isnoneornil(L, idx)) {
     luaL_argerror(L, idx, "value expected");
