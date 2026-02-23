@@ -571,8 +571,14 @@ if args.coutput then
   }
 
   local used_structures = {}
+  local used_arrayofs = {}
   local cinputtypes
   cinputtypes = {
+    arrayof = function(inner)
+      local inner_type = dispatch(cinputtypes, inner)
+      used_arrayofs[inner_type] = inner
+      return 'arrayof_' .. inner_type
+    end,
     boolean = function()
       return 'boolean'
     end,
@@ -706,6 +712,13 @@ if args.coutput then
   if next(used_structures) then
     emit('')
   end
+  for atype in sorted(used_arrayofs) do
+    emit('static void wowless_stubcheckarrayof_%s(lua_State *L, int idx);', atype)
+    emit('static void wowless_stubchecknilablearrayof_%s(lua_State *L, int idx);', atype)
+  end
+  if next(used_arrayofs) then
+    emit('')
+  end
 
   for sname in sorted(used_structures) do
     local st = assert(structures[sname], sname)
@@ -725,6 +738,27 @@ if args.coutput then
     emit('static void wowless_stubchecknilablestruct_%s(lua_State *L, int idx) {', safename(sname))
     emit('  if (!lua_isnoneornil(L, idx)) {')
     emit('    wowless_stubcheckstruct_%s(L, idx);', safename(sname))
+    emit('  }')
+    emit('}')
+    emit('')
+  end
+
+  for atype, inner in sorted(used_arrayofs) do
+    emit('static void wowless_stubcheckarrayof_%s(lua_State *L, int idx) {', atype)
+    emit('  int i, n;')
+    emit('  idx = lua_absindex(L, idx);')
+    emit('  wowless_stubchecktable(L, idx);')
+    emit('  n = (int)lua_objlen(L, idx);')
+    emit('  for (i = 1; i <= n; i++) {')
+    emit('    lua_rawgeti(L, idx, i);')
+    emit('    wowless_stubcheck%s(L, -1);', dispatch(cinputtypes, inner))
+    emit('    lua_pop(L, 1);')
+    emit('  }')
+    emit('}')
+    emit('')
+    emit('static void wowless_stubchecknilablearrayof_%s(lua_State *L, int idx) {', atype)
+    emit('  if (!lua_isnoneornil(L, idx)) {')
+    emit('    wowless_stubcheckarrayof_%s(L, idx);', atype)
     emit('  }')
     emit('}')
     emit('')
