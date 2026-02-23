@@ -496,6 +496,44 @@ do
   end
 end
 
+local xmlraw = parseYaml('data/products/' .. product .. '/xml.yaml')
+local xmlimpls = (function()
+  local tree = xmlraw
+  local newtree = {}
+  for k, v in pairs(tree) do
+    local attrs = Mixin({}, v.attributes or {})
+    local t = v
+    while t.extends do
+      t = tree[t.extends]
+      Mixin(attrs, t.attributes or {})
+    end
+    local aimpls = {}
+    for n, a in pairs(attrs) do
+      if a.impl then
+        aimpls[n] = {
+          impl = a.impl,
+          name = n,
+          phase = a.phase or 'middle',
+        }
+      end
+    end
+    local tag = v.impl
+    if type(tag) == 'table' and tag.call and tag.call.argument == 'self' then
+      local arg = v.extends
+      while tree[arg].virtual do
+        arg = tree[arg].extends
+      end
+      tag = Mixin({}, tag, { call = Mixin({}, tag.call, { argument = arg:lower() }) })
+    end
+    newtree[k:lower()] = {
+      attrs = aimpls,
+      phase = v.phase or 'middle',
+      tag = tag,
+    }
+  end
+  return newtree
+end)()
+
 local data = {
   apis = apis,
   build = parseYaml('data/products/' .. product .. '/build.yaml'),
@@ -508,7 +546,8 @@ local data = {
   sqls = sqls,
   structures = structures,
   uiobjects = uiobjects,
-  xml = parseYaml('data/products/' .. product .. '/xml.yaml'),
+  xml = xmlraw,
+  xmlimpls = xmlimpls,
 }
 
 if args.coutput then

@@ -33,42 +33,7 @@ return function(
   local bindings = {}
   local securemixins = {}
 
-  local xmlimpls = (function()
-    local tree = datalua.xml
-    local newtree = {}
-    for k, v in pairs(tree) do
-      local attrs = mixin({}, v.attributes or {})
-      local t = v
-      while t.extends do
-        t = tree[t.extends]
-        mixin(attrs, t.attributes or {})
-      end
-      local aimpls = {}
-      for n, a in pairs(attrs) do
-        if a.impl then
-          aimpls[n] = {
-            impl = a.impl,
-            name = n,
-            phase = a.phase or 'middle',
-          }
-        end
-      end
-      local tag = v.impl
-      if type(tag) == 'table' and tag.call and tag.call.argument == 'self' then
-        local arg = v.extends
-        while tree[arg].virtual do
-          arg = tree[arg].extends
-        end
-        tag.call.argument = arg:lower()
-      end
-      newtree[k:lower()] = {
-        attrs = aimpls,
-        phase = v.phase or 'middle',
-        tag = tag,
-      }
-    end
-    return newtree
-  end)()
+  local xmlimpls = datalua.xmlimpls
 
   local function parseTypedValue(ty, value)
     ty = ty and string.lower(ty) or nil
