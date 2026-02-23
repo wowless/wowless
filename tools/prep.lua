@@ -602,6 +602,9 @@ if args.coutput then
     table = function()
       return 'table'
     end,
+    uiAddon = function()
+      return 'string'
+    end,
     unit = function()
       return 'unit'
     end,
