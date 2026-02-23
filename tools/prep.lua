@@ -760,7 +760,7 @@ if args.coutput then
       emit('  lua_pushnumber(L, %g);', v)
     end,
     string = function(v)
-      emit('  lua_pushlstring(L, %s, %d);', cstring(v), #v)
+      emit('  lua_pushliteral(L, %s);', cstring(v))
     end,
     table = function(v)
       local n = 0
@@ -847,7 +847,7 @@ if args.coutput then
     for fname, field in sorted(st.fields) do
       local field_nilable = field.nilable or field.default ~= nil
       local ftype = field.type
-      emit('  lua_pushlstring(L, %s, %d);', cstring(fname), #fname)
+      emit('  lua_pushliteral(L, %s);', cstring(fname))
       emit('  lua_rawget(L, idx);')
       emit('  wowless_stubcheck%s%s(L, -1);', field_nilable and 'nilable' or '', dispatch(cinputtypes, ftype))
       emit('  lua_pop(L, 1);')
