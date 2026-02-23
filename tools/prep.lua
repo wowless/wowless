@@ -570,7 +570,9 @@ if args.coutput then
     end,
   }
 
-  local cinputtypes = {
+  local used_structures = {}
+  local cinputtypes
+  cinputtypes = {
     boolean = function()
       return 'boolean'
     end,
@@ -582,6 +584,14 @@ if args.coutput then
     end,
     string = function()
       return 'string'
+    end,
+    structure = function(name)
+      local st = assert(structures[name], name)
+      for _, field in pairs(st.fields) do
+        dispatch(cinputtypes, field.type)
+      end
+      used_structures[name] = true
+      return 'struct_' .. safename(name)
     end,
     table = function()
       return 'table'
@@ -689,13 +699,43 @@ if args.coutput then
     table = lua_value_emitters.table,
   }
 
+  for sname in sorted(used_structures) do
+    emit('static void wowless_stubcheckstruct_%s(lua_State *L, int idx);', safename(sname))
+    emit('static void wowless_stubchecknilablestruct_%s(lua_State *L, int idx);', safename(sname))
+  end
+  if next(used_structures) then
+    emit('')
+  end
+
+  for sname in sorted(used_structures) do
+    local st = assert(structures[sname], sname)
+    emit('static void wowless_stubcheckstruct_%s(lua_State *L, int idx) {', safename(sname))
+    emit('  idx = lua_absindex(L, idx);')
+    emit('  wowless_stubchecktable(L, idx);')
+    for fname, field in sorted(st.fields) do
+      local field_nilable = field.nilable or field.default ~= nil
+      local ftype = field.type
+      emit('  lua_pushlstring(L, %s, %d);', cstring(fname), #fname)
+      emit('  lua_rawget(L, idx);')
+      emit('  wowless_stubcheck%s%s(L, -1);', field_nilable and 'nilable' or '', dispatch(cinputtypes, ftype))
+      emit('  lua_pop(L, 1);')
+    end
+    emit('}')
+    emit('')
+    emit('static void wowless_stubchecknilablestruct_%s(lua_State *L, int idx) {', safename(sname))
+    emit('  if (!lua_isnoneornil(L, idx)) {')
+    emit('    wowless_stubcheckstruct_%s(L, idx);', safename(sname))
+    emit('  }')
+    emit('}')
+    emit('')
+  end
+
   for _, entry in ipairs(eligible) do
     local k, v = entry.name, entry.cfg
     emit('static int stub_%s(lua_State *L) {', safename(k))
     for i, inp in ipairs(v.inputs or {}) do
       local nilable = inp.nilable or inp.default ~= nil
-      local cty = dispatch(cinputtypes, inp.type)
-      emit('  wowless_stubcheck%s%s(L, %d);', nilable and 'nilable' or '', cty, i)
+      emit('  wowless_stubcheck%s%s(L, %d);', nilable and 'nilable' or '', dispatch(cinputtypes, inp.type), i)
     end
     local allouts = not v.stubnothing and v.outputs or {}
     local outstride = v.outstride or 0
