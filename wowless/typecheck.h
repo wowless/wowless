@@ -65,6 +65,23 @@ static inline void wowless_stubcheckboolean(lua_State *L, int idx) {
 
 static inline void wowless_stubchecknilableboolean(lua_State *L, int idx) {}
 
+static inline void wowless_stubcheckfunction(lua_State *L, int idx) {
+  if (lua_type(L, idx) != LUA_TFUNCTION) {
+    luaL_typerror(L, idx, lua_typename(L, LUA_TFUNCTION));
+  }
+}
+
+static inline void wowless_stubchecknilablefunction(lua_State *L, int idx) {
+  switch (lua_type(L, idx)) {
+    case LUA_TFUNCTION:
+    case LUA_TNIL:
+    case LUA_TNONE:
+      return;
+    default:
+      luaL_typerror(L, idx, lua_typename(L, LUA_TFUNCTION));
+  }
+}
+
 static inline void wowless_stubcheckunit(lua_State *L, int idx) {
   if (lua_type(L, idx) != LUA_TSTRING) {
     luaL_typerror(L, idx, lua_typename(L, LUA_TSTRING));

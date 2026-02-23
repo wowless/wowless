@@ -585,6 +585,9 @@ if args.coutput then
     enum = function()
       return 'enum'
     end,
+    ['function'] = function()
+      return 'function'
+    end,
     number = function()
       return 'number'
     end,
