@@ -38,17 +38,15 @@ return function(datalua, funcheck, log, sqls)
 
     local fns, securefns = cstubs()
     for fn, apicfg in pairs(datalua.apis) do
-      if not apicfg.cstub then
-        local v
-        if apicfg.stdlib then
-          v = assert(util.tget(_G, fn))
-        else
-          v = bubblewrap(mkfn(fn, apicfg))
-        end
-        util.tset(securefns, fn, v)
-        if not apicfg.secureonly then
-          util.tset(fns, fn, v)
-        end
+      local v
+      if apicfg.stdlib then
+        v = assert(util.tget(_G, fn))
+      else
+        v = bubblewrap(mkfn(fn, apicfg))
+      end
+      util.tset(securefns, fn, v)
+      if not apicfg.secureonly then
+        util.tset(fns, fn, v)
       end
     end
     log(1, 'functions loaded')
