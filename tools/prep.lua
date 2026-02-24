@@ -952,16 +952,105 @@ if args.coutput then
     emit('')
   end
 
-  emit('static const luaL_Reg stubs[] = {')
+  local namespaces = {}
+  local ns_entries = {}
+  local global_entries = {}
   for _, entry in ipairs(eligible) do
-    emit('  {%s, stub_%s},', cstring(entry.name), safename(entry.name))
+    local dot = entry.name:find('%.')
+    if dot then
+      local ns = entry.name:sub(1, dot - 1)
+      local shortname = entry.name:sub(dot + 1)
+      if not ns_entries[ns] then
+        table.insert(namespaces, ns)
+        ns_entries[ns] = {}
+      end
+      table.insert(ns_entries[ns], { shortname = shortname, cfg = entry.cfg })
+    else
+      table.insert(global_entries, entry)
+    end
   end
-  emit('  {NULL, NULL}')
+
+  emit('struct wowless_stub_entry {')
+  emit('  const char *name;')
+  emit('  lua_CFunction func;')
+  emit('  int secureonly;')
   emit('};')
   emit('')
-  emit('int luaopen_build_products_%s_stubs(lua_State *L) {', product)
+  emit('struct wowless_ns_entry {')
+  emit('  const char *ns;')
+  emit('  const struct wowless_stub_entry *entries;')
+  emit('  int secureonly;')
+  emit('};')
+  emit('')
+
+  for _, ns in ipairs(namespaces) do
+    emit('static const struct wowless_stub_entry stubs_%s[] = {', safename(ns))
+    for _, e in ipairs(ns_entries[ns]) do
+      emit(
+        '  {%s, stub_%s, %d},',
+        cstring(e.shortname),
+        safename(ns .. '.' .. e.shortname),
+        e.cfg.secureonly and 1 or 0
+      )
+    end
+    emit('  {NULL, NULL, 0}')
+    emit('};')
+    emit('')
+  end
+
+  emit('static const struct wowless_stub_entry global_stubs[] = {')
+  for _, entry in ipairs(global_entries) do
+    emit('  {%s, stub_%s, %d},', cstring(entry.name), safename(entry.name), entry.cfg.secureonly and 1 or 0)
+  end
+  emit('  {NULL, NULL, 0}')
+  emit('};')
+  emit('')
+
+  emit('static const struct wowless_ns_entry ns_stubs[] = {')
+  for _, ns in ipairs(namespaces) do
+    local secureonly = 1
+    for _, e in ipairs(ns_entries[ns]) do
+      if not e.cfg.secureonly then
+        secureonly = 0
+        break
+      end
+    end
+    emit('  {%s, stubs_%s, %d},', cstring(ns), safename(ns), secureonly)
+  end
+  emit('  {NULL, NULL, 0}')
+  emit('};')
+  emit('')
+
+  emit('static void load_entries(lua_State *L, const struct wowless_stub_entry *e) {')
   emit('  lua_newtable(L);')
-  emit('  luaL_register(L, NULL, stubs);')
+  emit('  lua_newtable(L);')
+  emit('  for (; e->name; e++) {')
+  emit('    lua_pushcfunction(L, e->func);')
+  emit('    if (!e->secureonly) {')
+  emit('      lua_pushvalue(L, -1);')
+  emit('      lua_setfield(L, -4, e->name);')
+  emit('    }')
+  emit('    lua_setfield(L, -2, e->name);')
+  emit('  }')
+  emit('}')
+  emit('')
+  emit('static int wowless_load_stubs(lua_State *L) {')
+  emit('  const struct wowless_ns_entry *ns;')
+  emit('  load_entries(L, global_stubs);')
+  emit('  for (ns = ns_stubs; ns->ns; ns++) {')
+  emit('    load_entries(L, ns->entries);')
+  emit('    lua_setfield(L, -3, ns->ns);')
+  emit('    if (!ns->secureonly) {')
+  emit('      lua_setfield(L, -3, ns->ns);')
+  emit('    } else {')
+  emit('      lua_pop(L, 1);')
+  emit('    }')
+  emit('  }')
+  emit('  return 2;')
+  emit('}')
+  emit('')
+  emit('int luaopen_build_products_%s_stubs(lua_State *L) {', product)
+  emit('  lua_pushcfunction(L, wowless_load_stubs);')
   emit('  return 1;')
   emit('}')
 
