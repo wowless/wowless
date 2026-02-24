@@ -741,6 +741,7 @@ if args.coutput then
 
   emit('#include "lua.h"')
   emit('#include "lauxlib.h"')
+  emit('#include "wowless/stubs.h"')
   emit('#include "wowless/typecheck.h"')
   emit('')
 
@@ -952,16 +953,67 @@ if args.coutput then
     emit('')
   end
 
-  emit('static const luaL_Reg stubs[] = {')
+  local ns_entries = {}
+  local global_entries = {}
   for _, entry in ipairs(eligible) do
-    emit('  {%s, stub_%s},', cstring(entry.name), safename(entry.name))
+    local dot = entry.name:find('%.')
+    if dot then
+      local ns = entry.name:sub(1, dot - 1)
+      local shortname = entry.name:sub(dot + 1)
+      if not ns_entries[ns] then
+        ns_entries[ns] = {}
+      end
+      table.insert(ns_entries[ns], { shortname = shortname, cfg = entry.cfg })
+    else
+      table.insert(global_entries, entry)
+    end
   end
-  emit('  {NULL, NULL}')
+
+  for ns in sorted(ns_entries) do
+    emit('static const struct wowless_stub_entry stubs_%s[] = {', safename(ns))
+    for _, e in ipairs(ns_entries[ns]) do
+      emit(
+        '  {%s, stub_%s, %d},',
+        cstring(e.shortname),
+        safename(ns .. '.' .. e.shortname),
+        e.cfg.secureonly and 1 or 0
+      )
+    end
+    emit('  {NULL, NULL, 0}')
+    emit('};')
+    emit('')
+  end
+
+  emit('static const struct wowless_stub_entry global_stubs[] = {')
+  for _, entry in ipairs(global_entries) do
+    emit('  {%s, stub_%s, %d},', cstring(entry.name), safename(entry.name), entry.cfg.secureonly and 1 or 0)
+  end
+  emit('  {NULL, NULL, 0}')
   emit('};')
   emit('')
+
+  emit('static const struct wowless_ns_entry ns_stubs[] = {')
+  for ns in sorted(ns_entries) do
+    local secureonly = 1
+    for _, e in ipairs(ns_entries[ns]) do
+      if not e.cfg.secureonly then
+        secureonly = 0
+        break
+      end
+    end
+    emit('  {%s, stubs_%s, %d},', cstring(ns), safename(ns), secureonly)
+  end
+  emit('  {NULL, NULL, 0}')
+  emit('};')
+  emit('')
+
+  emit('static int stub_loader(lua_State *L) {')
+  emit('  wowless_load_stubs(L, global_stubs, ns_stubs);')
+  emit('  return 2;')
+  emit('}')
+  emit('')
   emit('int luaopen_build_products_%s_stubs(lua_State *L) {', product)
-  emit('  lua_newtable(L);')
-  emit('  luaL_register(L, NULL, stubs);')
+  emit('  lua_pushcfunction(L, stub_loader);')
   emit('  return 1;')
   emit('}')
 
@@ -971,7 +1023,7 @@ if args.coutput then
   cf:close()
 
   for _, entry in ipairs(eligible) do
-    apis[entry.name] = { cstub = true, secureonly = entry.cfg.secureonly }
+    apis[entry.name] = nil
   end
 end
 

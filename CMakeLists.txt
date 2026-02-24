@@ -896,8 +896,9 @@ lua2c(
   wowless.profiler=${CMAKE_CURRENT_SOURCE_DIR}/wowless/profiler.lua
   wowless.runner=${CMAKE_CURRENT_SOURCE_DIR}/wowless/runner.lua
   wowless.xml=${CMAKE_CURRENT_SOURCE_DIR}/wowless/xml.lua)
-target_sources(wowlesslib PRIVATE wowless/bubblewrap.c wowless/ext.c
-                                  wowless/luaobject.c wowless/uiobject.c)
+target_sources(
+  wowlesslib PRIVATE wowless/bubblewrap.c wowless/ext.c wowless/luaobject.c
+                     wowless/stubs.c wowless/uiobject.c)
 
 add_lua_executable(
   wowless
