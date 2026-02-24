@@ -4,7 +4,8 @@
 #define UIOBJECT_ISA_PREFIX "wowless.uiobject.isa."
 #define UIOBJECT_PROXIES_KEY "wowless.uiobject.proxies"
 
-/* uiobject.register(typename, isa_table)
+/*
+ * uiobject.register(typename, isa_table)
  * Stores the isa_table in the registry under "wowless.uiobject.isa.<typename>".
  */
 static int uiobject_register(lua_State *L) {
@@ -18,7 +19,8 @@ static int uiobject_register(lua_State *L) {
   return 0;
 }
 
-/* uiobject.new(typename)
+/*
+ * uiobject.new(typename)
  * Creates a new uiobject proxy userdata (no metatable) and registers
  * it in the weak proxy table with the type's isa table.
  */

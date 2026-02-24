@@ -3,7 +3,8 @@
 
 #define LUAOBJECT_KEY_PREFIX "wowless.luaobject."
 
-/* luaobject.register(typename, metatable)
+/*
+ * luaobject.register(typename, metatable)
  * Registers a luaobject type by storing the metatable in the registry
  * under "wowless.luaobject.<typename>".
  */
@@ -18,7 +19,8 @@ static int luaobject_register(lua_State *L) {
   return 0;
 }
 
-/* luaobject.new(typename)
+/*
+ * luaobject.new(typename)
  * Creates a new luaobject userdata of the registered type.
  */
 static int luaobject_new(lua_State *L) {

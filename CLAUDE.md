@@ -68,6 +68,26 @@ Pre-commit hooks handle linting. Key tools:
 pre-commit run -a  # Run all checks
 ```
 
+### C Code Style
+
+clang-format handles most C formatting. One rule it cannot enforce:
+
+- Multiline block comments must have the opening `/*` on its own line with no
+  text after it:
+
+  ```c
+  /* wrong: text on the opening line
+   * more text
+   */
+
+  /*
+   * correct: /* is alone on its line
+   * more text
+   */
+  ```
+
+  Single-line comments (`/* text */`) are unaffected by this rule.
+
 ## Architecture
 
 ### Core Runtime (`wowless/`)
