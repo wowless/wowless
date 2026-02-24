@@ -4,6 +4,7 @@ local luaobject = require('wowless.luaobject')
 return function(datalua)
   local config = datalua.config.modules and datalua.config.modules.luaobjects or {}
   local objs = setmetatable({}, { __mode = 'k' })
+  luaobject.register_objs(objs)
   local impltypes = {}
 
   local function LoadTypes(modules)
@@ -69,16 +70,9 @@ return function(datalua)
     end
   end
 
-  local function make(k)
-    local p = luaobject.new(k)
-    local obj = { type = k, table = {}, luarep = p }
-    objs[p] = obj
-    return obj
-  end
-
   local function Create(k, ...)
     local impl = impltypes[k]
-    local obj = make(k)
+    local obj = luaobject.make(k)
     if impl and impl.construct then
       impl.construct(obj, ...)
     end
@@ -88,7 +82,7 @@ return function(datalua)
   local function Coerce(k, value)
     local impl = impltypes[k]
     if impl and impl.coerce then
-      local obj = make(k)
+      local obj = luaobject.make(k)
       if impl.coerce(obj, value) then
         return obj
       end

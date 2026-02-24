@@ -3,6 +3,7 @@
 
 #include "lauxlib.h"
 #include "lua.h"
+#include "wowless/luaobject.h"
 
 static inline void wowless_stubcheckenum(lua_State *L, int idx) {
   if (lua_type(L, idx) != LUA_TNUMBER) {
