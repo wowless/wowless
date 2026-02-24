@@ -963,45 +963,35 @@ if args.coutput then
       if not ns_entries[ns] then
         ns_entries[ns] = {}
       end
-      table.insert(ns_entries[ns], { shortname = shortname, cfg = entry.cfg })
+      ns_entries[ns][shortname] = not not entry.cfg.secureonly
     else
-      table.insert(global_entries, entry)
+      global_entries[entry.name] = not not entry.cfg.secureonly
     end
   end
 
-  for ns in sorted(ns_entries) do
-    emit('static const struct wowless_stub_entry stubs_%s[] = {', safename(ns))
-    for _, e in ipairs(ns_entries[ns]) do
-      emit(
-        '  {%s, stub_%s, %d},',
-        cstring(e.shortname),
-        safename(ns .. '.' .. e.shortname),
-        e.cfg.secureonly and 1 or 0
-      )
+  local function emit_stub_entries(array_name, entries, prefix)
+    emit('static const struct wowless_stub_entry %s[] = {', array_name)
+    for name, secureonly in sorted(entries) do
+      emit('  {%s, stub_%s, %d},', cstring(name), safename(prefix .. name), secureonly and 1 or 0)
     end
     emit('  {NULL, NULL, 0}')
     emit('};')
     emit('')
   end
 
-  emit('static const struct wowless_stub_entry global_stubs[] = {')
-  for _, entry in ipairs(global_entries) do
-    emit('  {%s, stub_%s, %d},', cstring(entry.name), safename(entry.name), entry.cfg.secureonly and 1 or 0)
+  for ns in sorted(ns_entries) do
+    emit_stub_entries('stubs_' .. safename(ns), ns_entries[ns], ns .. '.')
   end
-  emit('  {NULL, NULL, 0}')
-  emit('};')
-  emit('')
+
+  emit_stub_entries('global_stubs', global_entries, '')
 
   emit('static const struct wowless_ns_entry ns_stubs[] = {')
   for ns in sorted(ns_entries) do
-    local secureonly = 1
-    for _, e in ipairs(ns_entries[ns]) do
-      if not e.cfg.secureonly then
-        secureonly = 0
-        break
-      end
+    local secureonly = true
+    for _, v in pairs(ns_entries[ns]) do
+      secureonly = secureonly and v
     end
-    emit('  {%s, stubs_%s, %d},', cstring(ns), safename(ns), secureonly)
+    emit('  {%s, stubs_%s, %d},', cstring(ns), safename(ns), secureonly and 1 or 0)
   end
   emit('  {NULL, NULL, 0}')
   emit('};')
