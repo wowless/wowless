@@ -741,6 +741,7 @@ if args.coutput then
 
   emit('#include "lua.h"')
   emit('#include "lauxlib.h"')
+  emit('#include "wowless/stubs.h"')
   emit('#include "wowless/typecheck.h"')
   emit('')
 
@@ -970,19 +971,6 @@ if args.coutput then
     end
   end
 
-  emit('struct wowless_stub_entry {')
-  emit('  const char *name;')
-  emit('  lua_CFunction func;')
-  emit('  int secureonly;')
-  emit('};')
-  emit('')
-  emit('struct wowless_ns_entry {')
-  emit('  const char *ns;')
-  emit('  const struct wowless_stub_entry *entries;')
-  emit('  int secureonly;')
-  emit('};')
-  emit('')
-
   for _, ns in ipairs(namespaces) do
     emit('static const struct wowless_stub_entry stubs_%s[] = {', safename(ns))
     for _, e in ipairs(ns_entries[ns]) do
@@ -1021,36 +1009,13 @@ if args.coutput then
   emit('};')
   emit('')
 
-  emit('static void load_entries(lua_State *L, const struct wowless_stub_entry *e) {')
-  emit('  lua_newtable(L);')
-  emit('  lua_newtable(L);')
-  emit('  for (; e->name; e++) {')
-  emit('    lua_pushcfunction(L, e->func);')
-  emit('    if (!e->secureonly) {')
-  emit('      lua_pushvalue(L, -1);')
-  emit('      lua_setfield(L, -4, e->name);')
-  emit('    }')
-  emit('    lua_setfield(L, -2, e->name);')
-  emit('  }')
-  emit('}')
-  emit('')
-  emit('static int wowless_load_stubs(lua_State *L) {')
-  emit('  const struct wowless_ns_entry *ns;')
-  emit('  load_entries(L, global_stubs);')
-  emit('  for (ns = ns_stubs; ns->ns; ns++) {')
-  emit('    load_entries(L, ns->entries);')
-  emit('    lua_setfield(L, -3, ns->ns);')
-  emit('    if (!ns->secureonly) {')
-  emit('      lua_setfield(L, -3, ns->ns);')
-  emit('    } else {')
-  emit('      lua_pop(L, 1);')
-  emit('    }')
-  emit('  }')
+  emit('static int stub_loader(lua_State *L) {')
+  emit('  wowless_load_stubs(L, global_stubs, ns_stubs);')
   emit('  return 2;')
   emit('}')
   emit('')
   emit('int luaopen_build_products_%s_stubs(lua_State *L) {', product)
-  emit('  lua_pushcfunction(L, wowless_load_stubs);')
+  emit('  lua_pushcfunction(L, stub_loader);')
   emit('  return 1;')
   emit('}')
 
