@@ -953,7 +953,6 @@ if args.coutput then
     emit('')
   end
 
-  local namespaces = {}
   local ns_entries = {}
   local global_entries = {}
   for _, entry in ipairs(eligible) do
@@ -962,7 +961,6 @@ if args.coutput then
       local ns = entry.name:sub(1, dot - 1)
       local shortname = entry.name:sub(dot + 1)
       if not ns_entries[ns] then
-        table.insert(namespaces, ns)
         ns_entries[ns] = {}
       end
       table.insert(ns_entries[ns], { shortname = shortname, cfg = entry.cfg })
@@ -971,7 +969,7 @@ if args.coutput then
     end
   end
 
-  for _, ns in ipairs(namespaces) do
+  for ns in sorted(ns_entries) do
     emit('static const struct wowless_stub_entry stubs_%s[] = {', safename(ns))
     for _, e in ipairs(ns_entries[ns]) do
       emit(
@@ -995,7 +993,7 @@ if args.coutput then
   emit('')
 
   emit('static const struct wowless_ns_entry ns_stubs[] = {')
-  for _, ns in ipairs(namespaces) do
+  for ns in sorted(ns_entries) do
     local secureonly = 1
     for _, e in ipairs(ns_entries[ns]) do
       if not e.cfg.secureonly then
