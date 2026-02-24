@@ -546,10 +546,12 @@ foreach(product ${products})
   add_custom_command(
     OUTPUT stamp/${product}.txt
     BYPRODUCTS runtime/${product}.lua generated/${product}_stubs.c
+               runtime/${product}_xmlhandlers.lua
     COMMAND
       prep ${product} --sqls ${CMAKE_CURRENT_BINARY_DIR}/runtime/sqls.yaml
       --output ${CMAKE_CURRENT_BINARY_DIR}/generated/${product}.lua --coutput
-      ${CMAKE_CURRENT_BINARY_DIR}/generated/${product}_stubs.c
+      ${CMAKE_CURRENT_BINARY_DIR}/generated/${product}_stubs.c --xmloutput
+      ${CMAKE_CURRENT_BINARY_DIR}/runtime/${product}_xmlhandlers.lua
     COMMAND
       ${CMAKE_COMMAND} -E copy_if_different
       ${CMAKE_CURRENT_BINARY_DIR}/generated/${product}.lua
@@ -561,9 +563,10 @@ foreach(product ${products})
     DEPENDS prep runtime/sqls.yaml)
   add_custom_target(datalua_${product}_lua DEPENDS stamp/${product}.txt)
   add_dependencies(datalua_${product}_lua stamp_sqls)
-  lua2c(datalua_${product}
-        build.products.${product}.data=runtime/${product}.lua
-        build.products.${product}.stubs=c)
+  lua2c(
+    datalua_${product} build.products.${product}.data=runtime/${product}.lua
+    build.products.${product}.stubs=c
+    build.products.${product}.xmlhandlers=runtime/${product}_xmlhandlers.lua)
   target_sources(
     datalua_${product}
     PRIVATE ${CMAKE_CURRENT_BINARY_DIR}/generated/${product}_stubs.c)

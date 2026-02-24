@@ -438,45 +438,16 @@ return function(
     end,
   }
 
+  local xmlhandlers = require('build.products.' .. product .. '.xmlhandlers')({ -- issue #532
+    xmlattrlang = xmlattrlang,
+    points = points,
+  })
+
   local function forAddon(addonName, addonEnv, addonRoot, useSecureEnv, skipObjects)
     local loadFile
 
     local function loadXml(filename, xmlstr)
       local dir = path.dirname(filename)
-
-      local function processAttr(ctx, attr, obj, v)
-        if attr.impl == 'internal' then
-          xmlattrlang[attr.name](ctx, obj, v)
-        elseif attr.impl == 'loadfile' then
-          loadFile(path.join(dir, v), nil, path.join(addonRoot, v))
-        elseif attr.impl.scope then
-          return { [attr.impl.scope] = v }
-        elseif attr.impl.method then
-          local fn = obj[attr.impl.method]
-          if not fn then
-            error(('missing method %q on object type %q'):format(attr.impl.method, obj.type))
-          elseif type(v) == 'table' then -- stringlist
-            fn(obj, unpack(v))
-          else
-            fn(obj, v)
-          end
-        elseif attr.impl.field then
-          obj[attr.impl.field] = v
-        else
-          error('invalid attribute impl for ' .. attr.name)
-        end
-      end
-
-      local function processAttrs(ctx, e, obj, phase)
-        local objty = obj.type
-        local attrs = (xmlimpls[objty] or intrinsics[objty]).attrs
-        for k, v in pairs(e.attr) do
-          local attr = attrs[k]
-          if attr and phase == attr.phase then
-            processAttr(ctx, attr, obj, v)
-          end
-        end
-      end
 
       local loadElement
 
@@ -486,32 +457,92 @@ return function(
         end
       end
 
-      local function processKids(ctx, e, obj, phase)
-        ctx = ctx.ignoreVirtual and ctx or mixin({}, ctx, { ignoreVirtual = true })
-        for _, kid in ipairs(e.kids) do
-          if xmlimpls[string.lower(kid.type)].phase == phase then
-            loadElement(ctx, kid, obj)
-          end
-        end
-      end
-
       local phases = {
         EarlyAttrs = function(ctx, e, obj)
-          if ctx.layer and obj.SetDrawLayer then
-            obj:SetDrawLayer(ctx.layer)
+          local h = xmlhandlers[e.type]
+          if h and uiobjecttypes.InheritsFrom(obj.type, e.type) then
+            h.initEarlyAttrs(ctx, e, obj)
+          else
+            if ctx.layer and obj.SetDrawLayer then
+              obj:SetDrawLayer(ctx.layer)
+            end
+            local objty = obj.type
+            local attrs = (xmlimpls[objty] or intrinsics[objty]).attrs
+            for k, v in pairs(e.attr) do
+              local attr = attrs[k]
+              if attr and attr.phase == 'early' then
+                xmlattrlang[attr.name](ctx, obj, v)
+              end
+            end
           end
-          processAttrs(ctx, e, obj, 'early')
         end,
         Attrs = function(ctx, e, obj)
-          processAttrs(ctx, e, obj, 'middle')
-          processKids(ctx, e, obj, 'middle')
+          local h = xmlhandlers[e.type]
+          if h and uiobjecttypes.InheritsFrom(obj.type, e.type) then
+            h.initAttrs(ctx, e, obj, loadElement)
+          else
+            local objty = obj.type
+            local attrs = (xmlimpls[objty] or intrinsics[objty]).attrs
+            for k, v in pairs(e.attr) do
+              local attr = attrs[k]
+              if attr and attr.phase == 'middle' then
+                if attr.impl == 'internal' then
+                  xmlattrlang[attr.name](ctx, obj, v)
+                elseif attr.impl.method then
+                  local fn = obj[attr.impl.method]
+                  if not fn then
+                    error(('missing method %q on object type %q'):format(attr.impl.method, obj.type))
+                  elseif type(v) == 'table' then
+                    fn(obj, unpack(v))
+                  else
+                    fn(obj, v)
+                  end
+                elseif attr.impl.field then
+                  obj[attr.impl.field] = v
+                end
+              end
+            end
+            local kctx = ctx.ignoreVirtual and ctx or mixin({}, ctx, { ignoreVirtual = true })
+            for _, kid in ipairs(e.kids) do
+              if xmlimpls[string.lower(kid.type)].phase == 'middle' then
+                loadElement(kctx, kid, obj)
+              end
+            end
+          end
         end,
         Kids = function(ctx, e, obj)
-          processKids(ctx, e, obj, 'late')
-          processAttrs(ctx, e, obj, 'late')
-          -- Implicit setallpoints hack for textures.
-          if obj:IsObjectType('texture') and obj:GetNumPoints() == 0 then
-            points.SetAllPointsInternal(obj, obj.parent)
+          local h = xmlhandlers[e.type]
+          if h and uiobjecttypes.InheritsFrom(obj.type, e.type) then
+            h.initKids(ctx, e, obj, loadElement)
+          else
+            local kctx = ctx.ignoreVirtual and ctx or mixin({}, ctx, { ignoreVirtual = true })
+            for _, kid in ipairs(e.kids) do
+              if xmlimpls[string.lower(kid.type)].phase == 'late' then
+                loadElement(kctx, kid, obj)
+              end
+            end
+            local objty = obj.type
+            local attrs = (xmlimpls[objty] or intrinsics[objty]).attrs
+            for k, v in pairs(e.attr) do
+              local attr = attrs[k]
+              if attr and attr.phase == 'late' then
+                if attr.impl == 'internal' then
+                  xmlattrlang[attr.name](ctx, obj, v)
+                elseif attr.impl.method then
+                  local fn = obj[attr.impl.method]
+                  if type(v) == 'table' then
+                    fn(obj, unpack(v))
+                  else
+                    fn(obj, v)
+                  end
+                elseif attr.impl.field then
+                  obj[attr.impl.field] = v
+                end
+              end
+            end
+            if obj:IsObjectType('texture') and obj:GetNumPoints() == 0 then
+              points.SetAllPointsInternal(obj, obj.parent)
+            end
           end
         end,
       }
@@ -599,7 +630,11 @@ return function(
             for k, v in pairs(e.attr) do
               local attr = xmlimpls[e.type].attrs[k]
               if attr then
-                mixin(ctxmix, processAttr(ctx, attr, nil, v))
+                if attr.impl == 'loadfile' then
+                  loadFile(path.join(dir, v), nil, path.join(addonRoot, v))
+                elseif type(attr.impl) == 'table' and attr.impl.scope then
+                  ctxmix[attr.impl.scope] = v
+                end
               end
             end
             loadElements(ctxmix, e.kids, parent)

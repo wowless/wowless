@@ -4,6 +4,7 @@ local args = (function()
   parser:option('--sqls', 'sqls file')
   parser:option('-o --output', 'output file')
   parser:option('--coutput', 'C stubs output file')
+  parser:option('--xmloutput', 'xmlhandlers output file')
   return parser:parse()
 end)()
 
@@ -949,6 +950,202 @@ if args.coutput then
   for _, entry in ipairs(eligible) do
     apis[entry.name] = { cstub = true, secureonly = entry.cfg.secureonly }
   end
+end
+
+if args.xmloutput then
+  -- Compute set of UIObject types (lowercase keys)
+  local uiobjtypemap = {} -- lowercase -> original case
+  for k in pairs(uiobjectdata) do
+    uiobjtypemap[k:lower()] = k
+  end
+  uiobjtypemap['worldframe'] = 'worldframe'
+
+  -- Compute which UIObject types inherit from 'texture' (isa['texture'] = true)
+  local isaTextureCache = {}
+  local function isIsaTexture(typename)
+    if isaTextureCache[typename] ~= nil then
+      return isaTextureCache[typename]
+    end
+    isaTextureCache[typename] = false -- mark before recursing to break cycles
+    if typename == 'texture' then
+      isaTextureCache[typename] = true
+      return true
+    end
+    local orig = uiobjtypemap[typename]
+    if orig and uiobjectdata[orig] then
+      for inh in pairs(uiobjectdata[orig].inherits or {}) do
+        if isIsaTexture(inh:lower()) then
+          isaTextureCache[typename] = true
+          return true
+        end
+      end
+    end
+    return false
+  end
+
+  local lines = {}
+  local function emit(s)
+    table.insert(lines, s)
+  end
+
+  -- Helper: generate an attribute dispatch line
+  local function attrLine(tname, attr)
+    local key = string.format('%q', attr.name)
+    local get = 'a[' .. key .. ']'
+    local impl = attr.impl
+    if impl == 'internal' then
+      return string.format('      if %s ~= nil then xmlattrlang[%s](ctx, obj, %s) end', get, key, get)
+    elseif type(impl) == 'table' and impl.method then
+      local flat = xmlflat[tname]
+      local isStringlist = flat and flat.attributes[attr.name] == 'stringlist'
+      if isStringlist then
+        return string.format('      if %s ~= nil then obj:%s(unpack(%s)) end', get, impl.method, get)
+      else
+        return string.format('      if %s ~= nil then obj:%s(%s) end', get, impl.method, get)
+      end
+    elseif type(impl) == 'table' and impl.field then
+      return string.format('      if %s ~= nil then obj[%q] = %s end', get, impl.field, get)
+    else
+      error('unexpected impl type for ' .. tname .. '.' .. attr.name)
+    end
+  end
+
+  emit('-- issue #532')
+  emit('return function(deps)')
+  emit('  local xmlattrlang = deps.xmlattrlang')
+  emit('  local points = deps.points')
+  emit('  local function setIgnoreVirtual(ctx)')
+  emit('    if ctx.ignoreVirtual then return ctx end')
+  emit('    local k = {}')
+  emit('    for a, b in pairs(ctx) do k[a] = b end')
+  emit('    k.ignoreVirtual = true')
+  emit('    return k')
+  emit('  end')
+  emit('  local handlers = {}')
+
+  for tname, timpl in sorted(xmlimpls) do
+    if uiobjtypemap[tname] then
+      -- Collect attrs by phase, sorted for determinism
+      local earlyAttrs, middleAttrs, lateAttrs = {}, {}, {}
+      for aname, aimpl in pairs(timpl.attrs) do
+        local entry = { name = aname, impl = aimpl.impl }
+        if aimpl.phase == 'early' then
+          table.insert(earlyAttrs, entry)
+        elseif aimpl.phase == 'middle' then
+          table.insert(middleAttrs, entry)
+        else -- late
+          table.insert(lateAttrs, entry)
+        end
+      end
+      local function byname(a, b)
+        return a.name < b.name
+      end
+      table.sort(earlyAttrs, byname)
+      table.sort(middleAttrs, byname)
+      table.sort(lateAttrs, byname)
+
+      -- Compute kids sets from xmlflat and xmlimpls.
+      -- A kid type k is valid for parent T if any of k's supertypes is in
+      -- T's children set (matching the same subtype check xml.lua uses).
+      local middleKids, lateKids = {}, {}
+      local flat = xmlflat[tname]
+      if flat and next(flat.children) then
+        for kid, kidimpl in pairs(xmlimpls) do
+          local kidflat = xmlflat[kid]
+          if kidflat then
+            for supertype in pairs(kidflat.supertypes) do
+              if flat.children[supertype] then
+                if kidimpl.phase == 'middle' then
+                  middleKids[kid] = true
+                elseif kidimpl.phase == 'late' then
+                  lateKids[kid] = true
+                end
+                break
+              end
+            end
+          end
+        end
+      end
+
+      local safetname = tname:gsub('[^%w]', '_')
+
+      -- Emit kid set tables
+      if next(middleKids) then
+        emit(string.format('  local middleKids_%s = {', safetname))
+        for kid in sorted(middleKids) do
+          emit(string.format('    [%q] = true,', kid))
+        end
+        emit('  }')
+      end
+      if next(lateKids) then
+        emit(string.format('  local lateKids_%s = {', safetname))
+        for kid in sorted(lateKids) do
+          emit(string.format('    [%q] = true,', kid))
+        end
+        emit('  }')
+      end
+
+      emit(string.format('  handlers[%q] = {', tname))
+
+      -- initEarlyAttrs
+      emit('    initEarlyAttrs = function(ctx, e, obj)')
+      emit('      if ctx.layer and obj.SetDrawLayer then obj:SetDrawLayer(ctx.layer) end')
+      if #earlyAttrs > 0 then
+        emit('      local a = e.attr')
+        for _, attr in ipairs(earlyAttrs) do
+          emit(attrLine(tname, attr))
+        end
+      end
+      emit('    end,')
+
+      -- initAttrs
+      emit('    initAttrs = function(ctx, e, obj, loadElement)')
+      if #middleAttrs > 0 then
+        emit('      local a = e.attr')
+        for _, attr in ipairs(middleAttrs) do
+          emit(attrLine(tname, attr))
+        end
+      end
+      if next(middleKids) then
+        emit('      local kctx = setIgnoreVirtual(ctx)')
+        emit('      for _, kid in ipairs(e.kids) do')
+        emit(string.format('        if middleKids_%s[kid.type] then loadElement(kctx, kid, obj) end', safetname))
+        emit('      end')
+      end
+      emit('    end,')
+
+      -- initKids
+      emit('    initKids = function(ctx, e, obj, loadElement)')
+      if next(lateKids) then
+        emit('      local kctx = setIgnoreVirtual(ctx)')
+        emit('      for _, kid in ipairs(e.kids) do')
+        emit(string.format('        if lateKids_%s[kid.type] then loadElement(kctx, kid, obj) end', safetname))
+        emit('      end')
+      end
+      if #lateAttrs > 0 then
+        emit('      local a = e.attr')
+        for _, attr in ipairs(lateAttrs) do
+          emit(attrLine(tname, attr))
+        end
+      end
+      if isIsaTexture(tname) then
+        emit('      if obj:GetNumPoints() == 0 then')
+        emit('        points.SetAllPointsInternal(obj, obj.parent)')
+        emit('      end')
+      end
+      emit('    end,')
+
+      emit('  }')
+    end
+  end
+
+  emit('  return handlers')
+  emit('end')
+
+  local xf = assert(io.open(args.xmloutput, 'w'))
+  xf:write(table.concat(lines, '\n'))
+  xf:write('\n')
+  xf:close()
 end
 
 local outfn = args.output or ('build/products/' .. args.product .. '/data.lua')
