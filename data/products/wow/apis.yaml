@@ -13295,14 +13295,6 @@ C_HousingBasicMode.StartPlacingPreviewDecor:
     nilable: true
     type: number
   outputs:
-C_HousingCatalog.CanDestroyEntry:
-  inputs:
-  - name: entryID
-    type:
-      structure: HousingCatalogEntryID
-  outputs:
-  - name: canDelete
-    type: boolean
 C_HousingCatalog.CreateCatalogSearcher:
   inputs:
   outputs:
@@ -13418,6 +13410,14 @@ C_HousingCatalog.GetDecorTotalOwnedCount:
   - name: totalOwnedCount
     type: number
   - name: exemptDecorCount
+    type: number
+C_HousingCatalog.GetDestroyableInstanceCount:
+  inputs:
+  - name: entryID
+    type:
+      structure: HousingCatalogEntryID
+  outputs:
+  - name: destroyableInstanceCount
     type: number
 C_HousingCatalog.GetFeaturedBundles:
   inputs:
