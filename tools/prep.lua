@@ -657,6 +657,9 @@ if args.coutput then
     table = function()
       return {}
     end,
+    uiobject = function(name)
+      return name
+    end,
     unknown = function()
       return nil
     end,
@@ -815,6 +818,9 @@ if args.coutput then
       emit('  wowless_stubcreateluaobject(L, %s, %d);', cstring(name), #name)
     end,
     table = lua_value_emitters.table,
+    uiobject = function(name, _)
+      emit('  wowless_stubcreateuiobject(L, %s, %d);', cstring(name), #name)
+    end,
   }
 
   for sname in sorted(used_structures) do

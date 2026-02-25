@@ -27,6 +27,7 @@ calendar:
   deps:
 cgencode:
   deps:
+    api:
     luaobjects:
     uiobjects:
     uiobjecttypes:

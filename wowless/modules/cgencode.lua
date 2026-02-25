@@ -1,6 +1,10 @@
-return function(luaobjects, uiobjects, uiobjecttypes)
+return function(api, luaobjects, uiobjects, uiobjecttypes)
   local function CreateLuaObject(typename)
     return luaobjects.Create(typename).luarep
+  end
+
+  local function CreateUiObject(typename)
+    return api.CreateUIObject(string.lower(typename)).luarep
   end
 
   local function IsLuaObject(ud, typename)
@@ -15,6 +19,7 @@ return function(luaobjects, uiobjects, uiobjecttypes)
 
   return {
     CreateLuaObject = CreateLuaObject,
+    CreateUiObject = CreateUiObject,
     IsLuaObject = IsLuaObject,
     IsUiObject = IsUiObject,
   }
