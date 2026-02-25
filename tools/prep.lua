@@ -270,8 +270,6 @@ local function mkapi(apicfg)
         usage = apicfg.usage,
       }
     end
-  else
-    return stubby(apicfg)
   end
 end
 
@@ -744,15 +742,11 @@ if args.coutput then
     end
     if next(apicfg.outputs or {}) and not apicfg.stubnothing then
       for _, out in ipairs(apicfg.outputs) do
-        if not pcall(dispatch, coutdefaults, out.type) then
-          return false
-        end
+        dispatch(coutdefaults, out.type)
       end
     end
     for _, inp in ipairs(apicfg.inputs or {}) do
-      if not pcall(dispatch, cinputtypes, inp.type) then
-        return false
-      end
+      dispatch(cinputtypes, inp.type)
     end
     return true
   end
@@ -1055,10 +1049,6 @@ if args.coutput then
   cf:write(table.concat(lines, '\n'))
   cf:write('\n')
   cf:close()
-
-  for _, entry in ipairs(eligible) do
-    apis[entry.name] = nil
-  end
 end
 
 local outfn = args.output or ('build/products/' .. args.product .. '/data.lua')
