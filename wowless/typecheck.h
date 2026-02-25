@@ -119,6 +119,7 @@ static inline void wowless_stubchecknilabletable(lua_State *L, int idx) {
 static inline void wowless_stubcheckluaobject(lua_State *L, int idx,
                                               const char *typename,
                                               size_t typenamelen) {
+  idx = lua_absindex(L, idx);
   if (lua_type(L, idx) != LUA_TUSERDATA) {
     luaL_typerror(L, idx, "luaobject");
   }
@@ -143,6 +144,7 @@ static inline void wowless_stubchecknilableluaobject(lua_State *L, int idx,
 static inline void wowless_stubcheckuiobject(lua_State *L, int idx,
                                              const char *typename,
                                              size_t typenamelen) {
+  idx = lua_absindex(L, idx);
   if (lua_type(L, idx) != LUA_TTABLE) {
     luaL_typerror(L, idx, "uiobject");
   }
