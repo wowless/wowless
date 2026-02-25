@@ -616,6 +616,9 @@ if args.coutput then
     boolean = function()
       return false
     end,
+    FileAsset = function()
+      return 1
+    end,
     enum = function(enumname)
       local meta = assert(globals.Enum[enumname .. 'Meta'], 'missing meta enum for ' .. enumname)
       return (assert(meta.MinValue, 'missing MinValue in meta for ' .. enumname))
@@ -680,6 +683,9 @@ if args.coutput then
     end,
     enum = function()
       return 'enum'
+    end,
+    FileAsset = function()
+      return 'string'
     end,
     ['function'] = function()
       return 'function'
@@ -795,6 +801,7 @@ if args.coutput then
     enum = function(_, val)
       lua_value_emitters.number(val)
     end,
+    FileAsset = lua_value_emitters.number,
     number = lua_value_emitters.number,
     string = lua_value_emitters.string,
     structure = function(name, val)
