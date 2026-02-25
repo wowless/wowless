@@ -595,7 +595,6 @@ local data = {
   sqls = sqls,
   structures = structures,
   uiobjects = uiobjects,
-  xml = xmlraw,
   xmlflat = xmlflat,
   xmlimpls = xmlimpls,
 }
