@@ -25,6 +25,10 @@ atlas:
     env:
 calendar:
   deps:
+cgencode:
+  deps:
+    uiobjects:
+    uiobjecttypes:
 cvars:
   deps:
     datalua:

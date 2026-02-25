@@ -6,7 +6,8 @@ static void load_entries(lua_State *L, const struct wowless_stub_entry *e) {
   lua_newtable(L);
   lua_newtable(L);
   for (; e->name; e++) {
-    lua_pushcfunction(L, e->func);
+    lua_pushvalue(L, 1);
+    lua_pushcclosure(L, e->func, 1);
     if (!e->secureonly) {
       lua_pushvalue(L, -1);
       lua_setfield(L, -4, e->name);

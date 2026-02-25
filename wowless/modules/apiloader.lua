@@ -36,7 +36,7 @@ return function(datalua, funcheck, log, sqls)
       end
     end
 
-    local fns, securefns = cstubs()
+    local fns, securefns = cstubs(modules.cgencode)
     for fn, apicfg in pairs(datalua.apis) do
       local v
       if apicfg.stdlib then

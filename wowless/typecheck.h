@@ -142,8 +142,8 @@ static inline void wowless_stubchecknilableluaobject(lua_State *L, int idx,
 }
 
 static inline void wowless_stubcheckuiobject(lua_State *L, int idx,
-                                             const char *target,
-                                             size_t targlen) {
+                                             const char *typename,
+                                             size_t typenamelen) {
   if (lua_type(L, idx) != LUA_TTABLE) {
     luaL_typerror(L, idx, "uiobject");
   }
@@ -151,23 +151,21 @@ static inline void wowless_stubcheckuiobject(lua_State *L, int idx,
   if (lua_type(L, -1) != LUA_TUSERDATA) {
     luaL_typerror(L, idx, "uiobject");
   }
-  lua_pushliteral(L, "wowless.uiobject.proxies");
-  lua_rawget(L, LUA_REGISTRYINDEX);
-  lua_pushvalue(L, -2);
-  lua_rawget(L, -2);
-  lua_pushlstring(L, target, targlen);
-  lua_rawget(L, -2);
+  lua_getfield(L, lua_upvalueindex(1), "IsUiObject");
+  lua_insert(L, -2);
+  lua_pushlstring(L, typename, typenamelen);
+  lua_call(L, 2, 1);
   if (!lua_toboolean(L, -1)) {
     luaL_typerror(L, idx, "uiobject");
   }
-  lua_pop(L, 4);
+  lua_pop(L, 1);
 }
 
 static inline void wowless_stubchecknilableuiobject(lua_State *L, int idx,
-                                                    const char *target,
-                                                    size_t targlen) {
+                                                    const char *typename,
+                                                    size_t typenamelen) {
   if (!lua_isnoneornil(L, idx)) {
-    wowless_stubcheckuiobject(L, idx, target, targlen);
+    wowless_stubcheckuiobject(L, idx, typename, typenamelen);
   }
 }
 

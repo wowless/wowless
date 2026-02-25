@@ -854,11 +854,11 @@ lua2c(
   wowless.ext=c
   wowless.hlist=${CMAKE_CURRENT_SOURCE_DIR}/wowless/hlist.lua
   wowless.luaobject=c
-  wowless.uiobject=c
   wowless.modules=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules.lua
   wowless.modules.addons=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/addons.lua
   wowless.modules.api=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/api.lua
   wowless.modules.apiloader=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/apiloader.lua
+  wowless.modules.cgencode=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/cgencode.lua
   wowless.modules.atlas=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/atlas.lua
   wowless.modules.calendar=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/calendar.lua
   wowless.modules.cvars=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/cvars.lua
@@ -896,9 +896,8 @@ lua2c(
   wowless.profiler=${CMAKE_CURRENT_SOURCE_DIR}/wowless/profiler.lua
   wowless.runner=${CMAKE_CURRENT_SOURCE_DIR}/wowless/runner.lua
   wowless.xml=${CMAKE_CURRENT_SOURCE_DIR}/wowless/xml.lua)
-target_sources(
-  wowlesslib PRIVATE wowless/bubblewrap.c wowless/ext.c wowless/luaobject.c
-                     wowless/stubs.c wowless/uiobject.c)
+target_sources(wowlesslib PRIVATE wowless/bubblewrap.c wowless/ext.c
+                                  wowless/luaobject.c wowless/stubs.c)
 
 add_lua_executable(
   wowless
