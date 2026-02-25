@@ -885,13 +885,12 @@ if args.coutput then
   end
 
   for lname in sorted(used_luaobjects) do
-    local regkey = 'wowless.luaobject.' .. lname
     emit('static void wowless_stubcheckluaobject_%s(lua_State *L, int idx) {', safename(lname))
-    emit('  wowless_stubcheckluaobject(L, idx, %s, %d);', cstring(regkey), #regkey)
+    emit('  wowless_stubcheckluaobject(L, idx, %s, %d);', cstring(lname), #lname)
     emit('}')
     emit('')
     emit('static void wowless_stubchecknilableluaobject_%s(lua_State *L, int idx) {', safename(lname))
-    emit('  wowless_stubchecknilableluaobject(L, idx, %s, %d);', cstring(regkey), #regkey)
+    emit('  wowless_stubchecknilableluaobject(L, idx, %s, %d);', cstring(lname), #lname)
     emit('}')
     emit('')
   end

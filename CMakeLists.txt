@@ -853,7 +853,6 @@ lua2c(
   wowless.env=${CMAKE_CURRENT_SOURCE_DIR}/wowless/env.lua
   wowless.ext=c
   wowless.hlist=${CMAKE_CURRENT_SOURCE_DIR}/wowless/hlist.lua
-  wowless.luaobject=c
   wowless.modules=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules.lua
   wowless.modules.addons=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/addons.lua
   wowless.modules.api=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/api.lua
@@ -897,7 +896,7 @@ lua2c(
   wowless.runner=${CMAKE_CURRENT_SOURCE_DIR}/wowless/runner.lua
   wowless.xml=${CMAKE_CURRENT_SOURCE_DIR}/wowless/xml.lua)
 target_sources(wowlesslib PRIVATE wowless/bubblewrap.c wowless/ext.c
-                                  wowless/luaobject.c wowless/stubs.c)
+                                  wowless/stubs.c)
 
 add_lua_executable(
   wowless
