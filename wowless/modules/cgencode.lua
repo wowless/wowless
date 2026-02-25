@@ -1,4 +1,11 @@
 return function(api, luaobjects, uiobjects, uiobjecttypes)
+  local stringenums = require('runtime.stringenums')
+
+  local function CheckStringEnum(value, enumname)
+    local evalues = stringenums[enumname]
+    return evalues and evalues[value:upper()]
+  end
+
   local function CreateLuaObject(typename)
     return luaobjects.Create(typename).luarep
   end
@@ -18,6 +25,7 @@ return function(api, luaobjects, uiobjects, uiobjecttypes)
   end
 
   return {
+    CheckStringEnum = CheckStringEnum,
     CreateLuaObject = CreateLuaObject,
     CreateUiObject = CreateUiObject,
     IsLuaObject = IsLuaObject,

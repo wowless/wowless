@@ -635,6 +635,13 @@ if args.coutput then
     string = function()
       return ''
     end,
+    stringenum = function(name)
+      local least
+      for k in pairs(stringenums[name]) do
+        least = (least == nil or k < least) and k or least
+      end
+      return least
+    end,
     structure = function(name)
       local st = assert(structures[name], name)
       local result = {}
@@ -670,6 +677,7 @@ if args.coutput then
   local used_structures = {}
   local used_arrayofs = {}
   local used_luaobjects = {}
+  local used_stringenums = {}
   local used_uiobjects = {}
   local cinputtypes
   cinputtypes = {
@@ -695,6 +703,10 @@ if args.coutput then
     end,
     string = function()
       return 'string'
+    end,
+    stringenum = function(name)
+      used_stringenums[name] = true
+      return 'stringenum_' .. safename(name)
     end,
     structure = function(name)
       local st = assert(structures[name], name)
@@ -804,6 +816,7 @@ if args.coutput then
     FileAsset = lua_value_emitters.number,
     number = lua_value_emitters.number,
     string = lua_value_emitters.string,
+    stringenum = lua_value_emitters.string,
     structure = function(name, val)
       local st = assert(structures[name], name)
       local n = 0
@@ -848,6 +861,13 @@ if args.coutput then
     emit('static void wowless_stubchecknilableluaobject_%s(lua_State *L, int idx);', safename(lname))
   end
   if next(used_luaobjects) then
+    emit('')
+  end
+  for sename in sorted(used_stringenums) do
+    emit('static void wowless_stubcheckstringenum_%s(lua_State *L, int idx);', safename(sename))
+    emit('static void wowless_stubchecknilablestringenum_%s(lua_State *L, int idx);', safename(sename))
+  end
+  if next(used_stringenums) then
     emit('')
   end
   for uname in sorted(used_uiobjects) do
@@ -909,6 +929,17 @@ if args.coutput then
     emit('')
     emit('static void wowless_stubchecknilableluaobject_%s(lua_State *L, int idx) {', safename(lname))
     emit('  wowless_stubchecknilableluaobject(L, idx, %s, %d);', cstring(lname), #lname)
+    emit('}')
+    emit('')
+  end
+
+  for sename in sorted(used_stringenums) do
+    emit('static void wowless_stubcheckstringenum_%s(lua_State *L, int idx) {', safename(sename))
+    emit('  wowless_stubcheckstringenum(L, idx, %s, %d);', cstring(sename), #sename)
+    emit('}')
+    emit('')
+    emit('static void wowless_stubchecknilablestringenum_%s(lua_State *L, int idx) {', safename(sename))
+    emit('  wowless_stubchecknilablestringenum(L, idx, %s, %d);', cstring(sename), #sename)
     emit('}')
     emit('')
   end

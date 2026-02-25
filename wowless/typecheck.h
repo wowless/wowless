@@ -176,6 +176,29 @@ static inline void wowless_stubcheckunknown(lua_State *L, int idx) {
 
 static inline void wowless_stubchecknilableunknown(lua_State *L, int idx) {}
 
+static inline void wowless_stubcheckstringenum(lua_State *L, int idx,
+                                               const char *enumname,
+                                               size_t enumnamelen) {
+  idx = lua_absindex(L, idx);
+  luaL_checktype(L, idx, LUA_TSTRING);
+  lua_getfield(L, lua_upvalueindex(1), "CheckStringEnum");
+  lua_pushvalue(L, idx);
+  lua_pushlstring(L, enumname, enumnamelen);
+  lua_call(L, 2, 1);
+  if (!lua_toboolean(L, -1)) {
+    luaL_argerror(L, idx, "invalid string enum value");
+  }
+  lua_pop(L, 1);
+}
+
+static inline void wowless_stubchecknilablestringenum(lua_State *L, int idx,
+                                                      const char *enumname,
+                                                      size_t enumnamelen) {
+  if (!lua_isnoneornil(L, idx)) {
+    wowless_stubcheckstringenum(L, idx, enumname, enumnamelen);
+  }
+}
+
 static inline void wowless_stubcreateluaobject(lua_State *L,
                                                const char *typename,
                                                size_t typenamelen) {
