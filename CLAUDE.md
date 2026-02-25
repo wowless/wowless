@@ -209,22 +209,38 @@ The test addon runs inside the simulated WoW environment. Files load in
 
 ### C Stubs for API Typechecking
 
-Eligible global API stubs (no `impl`, no outputs, string/number inputs only)
-are generated as native C functions rather than Lua closures. See issue #523
-for the full migration plan.
+Eligible global API stubs are generated as native C functions rather than Lua
+closures. An API is eligible if it has no `impl` and all input/output types
+are supported. `is_eligible` in `prep.lua` hard-errors on unsupported types.
 
-- `wowless/typecheck.h`: Inline helpers for input checking
-  (`wowless_stubchecknumber`, `wowless_stubchecknilablenumber`,
-  `wowless_stubcheckstring`, `wowless_stubchecknilablestring`)
+**Supported input types:** `boolean`, `enum`, `FileAsset` (as string),
+`function`, `number`, `string`, `stringenum`, `structure`, `table`,
+`luaobject`, `uiobject`, `unit`, `unknown`, `arrayof`.
+
+**Supported output types:** `boolean`, `enum`, `FileAsset` (returns `1`),
+`function`, `nil`, `number`, `oneornil`, `string`, `stringenum`, `structure`,
+`table`, `unit`, `unknown`, `luaobject`, `uiobject`, `arrayof`.
+
+Key files:
+
+- `wowless/typecheck.h`: Inline helpers for each supported type, both nilable
+  and non-nilable variants (e.g., `wowless_stubchecknumber`,
+  `wowless_stubchecknilablestringenum`). Complex types (luaobject, uiobject,
+  stringenum) call into the `cgencode` upvalue.
+- `wowless/stubs.h`/`stubs.c`: Loading infrastructure; `wowless_load_stubs()`
+  registers C functions as closures with the `cgencode` module as upvalue.
+- `wowless/modules/cgencode.lua`: Runtime helper module passed as upvalue to
+  C stubs. Provides `CheckStringEnum`, `IsLuaObject`, `IsUiObject`,
+  `CreateLuaObject`, `CreateUiObject`.
 - `prep.lua` emits a per-product `generated/${product}_stubs.c` when
-  `--coutput` is passed; eligible APIs are marked `cstub=true` in the data
+  `--coutput` is passed; eligible APIs are marked `cstub=true` in the data.
 - CMakeLists wires the generated C file into `datalua_${product}` via
   `target_sources` and registers it as a cmodule (`build.products.X.stubs=c`)
-  in the `lua2c()` call
+  in the `lua2c()` call.
 - `apiloader.lua` loads `build.products.<product>.stubs` and uses the C
-  function directly (no `bubblewrap`) for `cstub`-flagged APIs
+  function directly (no `bubblewrap`) for `cstub`-flagged APIs.
 - To add a C-provided module to a `lua2c()` target, use `modulename=c` in
-  the argument list and add the C source with `target_sources`
+  the argument list and add the C source with `target_sources`.
 
 ### Data Format Conventions
 
