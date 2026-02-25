@@ -651,6 +651,9 @@ if args.coutput then
       end
       return result
     end,
+    luaobject = function(name)
+      return name
+    end,
     table = function()
       return {}
     end,
@@ -807,6 +810,9 @@ if args.coutput then
       if st.mixin then
         emit('  wowless_applymixin(L, %s);', cstring(st.mixin))
       end
+    end,
+    luaobject = function(name, _)
+      emit('  wowless_stubcreateluaobject(L, %s, %d);', cstring(name), #name)
     end,
     table = lua_value_emitters.table,
   }

@@ -1,4 +1,8 @@
 return function(luaobjects, uiobjects, uiobjecttypes)
+  local function CreateLuaObject(typename)
+    return luaobjects.Create(typename).luarep
+  end
+
   local function IsLuaObject(ud, typename)
     local internal = luaobjects.UserData(ud)
     return internal and internal.type == typename
@@ -10,6 +14,7 @@ return function(luaobjects, uiobjects, uiobjecttypes)
   end
 
   return {
+    CreateLuaObject = CreateLuaObject,
     IsLuaObject = IsLuaObject,
     IsUiObject = IsUiObject,
   }

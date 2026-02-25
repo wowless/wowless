@@ -176,6 +176,14 @@ static inline void wowless_stubcheckunknown(lua_State *L, int idx) {
 
 static inline void wowless_stubchecknilableunknown(lua_State *L, int idx) {}
 
+static inline void wowless_stubcreateluaobject(lua_State *L,
+                                               const char *typename,
+                                               size_t typenamelen) {
+  lua_getfield(L, lua_upvalueindex(1), "CreateLuaObject");
+  lua_pushlstring(L, typename, typenamelen);
+  lua_call(L, 1, 1);
+}
+
 static inline void wowless_applymixin(lua_State *L, const char *mixin_name) {
   int tbl = lua_gettop(L);
   lua_getglobal(L, mixin_name);
