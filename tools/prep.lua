@@ -987,13 +987,9 @@ if args.coutput then
 
   emit('static const struct wowless_ns_entry ns_stubs[] = {')
   for ns in sorted(ns_entries) do
-    local secureonly = true
-    for _, v in pairs(ns_entries[ns]) do
-      secureonly = secureonly and v
-    end
-    emit('  {%s, stubs_%s, %d},', cstring(ns), safename(ns), secureonly and 1 or 0)
+    emit('  {%s, stubs_%s},', cstring(ns), safename(ns))
   end
-  emit('  {NULL, NULL, 0}')
+  emit('  {NULL, NULL}')
   emit('};')
   emit('')
 
