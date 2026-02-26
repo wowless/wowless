@@ -13,10 +13,10 @@ This does not affect wowless framework code. Any globals it
 references from Lua are done via the environment table, which
 remains unchanged from when it was (pre)loaded.
 
-Any later loadstring'd framework code must be setfenv'd to the
-host environment _G, since loadstring'd code is born with an
-environment pointing to the current global table. See the api and
-uiobject loaders for where this happens.
+Framework code should not itself be loaded via loadstring within
+this context, since loadstring'd code is born with an environment
+pointing to the current global table (the sandbox), not the host
+environment.
 ]]
 local function withglobaltable(t, f)
   local oldt = setglobaltable(t)
@@ -63,30 +63,30 @@ local function run(cfg)
   local loader = modules.loader
   local system = modules.system
   local genv = modules.env.genv
-  return withglobaltable(genv, function()
-    require('wowless.env').init(modules, not cfg.dir)
-    if cfg.trackenums then
-      for ek, ev in pairs(genv.Enum) do
-        setmetatable(ev, {
-          __newindex = function(t, k, v)
-            log(0, 'TRACKENUMS %s VALUE %s %s', v == nil and 'DELETING' or 'WRITING', ek, k)
-            rawset(t, k, v)
-          end,
-        })
-      end
-      local enums = genv.Enum
-      genv.Enum = setmetatable({}, {
-        __index = enums,
-        __newindex = function(_, k, v)
-          log(0, 'TRACKENUMS %s %s', v == nil and 'DELETING' or 'WRITING', k)
-          enums[k] = v
+  require('wowless.env').init(modules, not cfg.dir)
+  if cfg.trackenums then
+    for ek, ev in pairs(genv.Enum) do
+      setmetatable(ev, {
+        __newindex = function(t, k, v)
+          log(0, 'TRACKENUMS %s VALUE %s %s', v == nil and 'DELETING' or 'WRITING', ek, k)
+          rawset(t, k, v)
         end,
       })
     end
-    for k, v in pairs(modules.uiobjectloader(modules)) do
-      modules.uiobjecttypes.Add(k, v)
-    end
-    modules.luaobjects.LoadTypes(modules)
+    local enums = genv.Enum
+    genv.Enum = setmetatable({}, {
+      __index = enums,
+      __newindex = function(_, k, v)
+        log(0, 'TRACKENUMS %s %s', v == nil and 'DELETING' or 'WRITING', k)
+        enums[k] = v
+      end,
+    })
+  end
+  for k, v in pairs(modules.uiobjectloader(modules)) do
+    modules.uiobjecttypes.Add(k, v)
+  end
+  modules.luaobjects.LoadTypes(modules)
+  return withglobaltable(genv, function()
     loader.initAddons()
     if cfg.dir then
       loader.loadFrameXml()

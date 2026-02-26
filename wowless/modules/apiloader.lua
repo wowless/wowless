@@ -10,7 +10,7 @@ return function(datalua, funcheck, log, sqls)
       local incheck = apicfg.inputs and funcheck.makeCheckInputs(fname, apicfg)
       local outcheck = apicfg.outputs and funcheck.makeCheckOutputs(fname, apicfg)
       local src = apicfg.src or fname
-      local mkbasefn = setfenv(assert(loadstring_untainted(apicfg.impl, src), fname), _G)
+      local mkbasefn = assert(loadstring_untainted(apicfg.impl, src), fname)
       local args = {}
       for _, m in ipairs(apicfg.modules or {}) do
         table.insert(args, (assert(modules[m], 'unknown module ' .. m)))

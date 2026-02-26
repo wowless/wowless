@@ -83,7 +83,7 @@ return function(datalua, funcheck, gencode, sqls, uiobjectsmodule, uiobjecttypes
         local incheck = method.inputs and funcheck.makeCheckInputs(fname, method)
         local outcheck = method.outputs and funcheck.makeCheckOutputs(fname, method)
         local src = method.src or fname
-        local mkfn = setfenv(assert(loadstring_untainted(method.impl, src), fname), _G)
+        local mkfn = assert(loadstring_untainted(method.impl, src), fname)
         local args = {}
         for _, m in ipairs(method.modules or {}) do
           table.insert(args, (assert(modules[m], m)))
