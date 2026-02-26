@@ -16,10 +16,12 @@ static void load_entries(lua_State *L, const struct wowless_stub_entry *e) {
   }
 }
 
-void wowless_load_stubs(lua_State *L, const struct wowless_stub_entry *global,
-                        const struct wowless_ns_entry *ns) {
-  load_entries(L, global);
-  for (; ns->ns; ns++) {
+int wowless_load_stubs(lua_State *L) {
+  const struct wowless_stubs_spec *spec =
+      lua_touserdata(L, lua_upvalueindex(1));
+  const struct wowless_ns_entry *ns;
+  load_entries(L, spec->global);
+  for (ns = spec->ns; ns->ns; ns++) {
     load_entries(L, ns->entries);
     lua_setfield(L, -3, ns->ns);
     lua_pushnil(L);
@@ -30,4 +32,5 @@ void wowless_load_stubs(lua_State *L, const struct wowless_stub_entry *global,
       lua_pop(L, 1);
     }
   }
+  return 2;
 }

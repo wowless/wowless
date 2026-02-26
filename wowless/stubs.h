@@ -14,7 +14,11 @@ struct wowless_ns_entry {
   const struct wowless_stub_entry *entries;
 };
 
-void wowless_load_stubs(lua_State *L, const struct wowless_stub_entry *global,
-                        const struct wowless_ns_entry *ns);
+struct wowless_stubs_spec {
+  const struct wowless_stub_entry *global;
+  const struct wowless_ns_entry *ns;
+};
+
+int wowless_load_stubs(lua_State *L);
 
 #endif /* WOWLESS_STUBS_H */
