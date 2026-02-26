@@ -198,7 +198,8 @@ end
 local implimpls = {
   delegate = function(impl)
     return {
-      impl = 'return ' .. impl,
+      impl = 'return debug.newcfunction(' .. impl .. ')',
+      nobubblewrap = true,
     }
   end,
   directsql = function(impl)
