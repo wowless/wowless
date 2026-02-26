@@ -957,31 +957,21 @@ if args.coutput then
   for _, entry in ipairs(eligible) do
     local k, v = entry.name, entry.cfg
     emit('static int stub_%s(lua_State *L) {', safename(k))
-    local instride = v.instride or 0
     local allinps = v.inputs or {}
+    local instride = v.instride or 0
     local nsins = #allinps - instride
-    for i = 1, nsins do
-      local inp = allinps[i]
+    local function check(inp, idx)
       local nilable = inp.nilable or inp.default ~= nil
-      emit('  wowless_stubcheck%s%s(L, %d);', nilable and 'nilable' or '', dispatch(cinputtypes, inp.type), i)
+      return ('wowless_stubcheck%s%s(L, %s);'):format(nilable and 'nilable' or '', dispatch(cinputtypes, inp.type), idx)
+    end
+    for i = 1, nsins do
+      emit('  %s', check(allinps[i], i))
     end
     if instride > 0 then
       emit('  int i, n = lua_gettop(L);')
       emit('  for (i = %d; i <= n; i += %d) {', nsins + 1, instride)
       for j = nsins + 1, #allinps do
-        local inp = allinps[j]
-        local nilable = inp.nilable or inp.default ~= nil
-        local offset = j - nsins - 1
-        if offset == 0 then
-          emit('    wowless_stubcheck%s%s(L, i);', nilable and 'nilable' or '', dispatch(cinputtypes, inp.type))
-        else
-          emit(
-            '    wowless_stubcheck%s%s(L, i + %d);',
-            nilable and 'nilable' or '',
-            dispatch(cinputtypes, inp.type),
-            offset
-          )
-        end
+        emit('    %s', check(allinps[j], 'i + ' .. (j - nsins - 1)))
       end
       emit('  }')
     end
