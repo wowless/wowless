@@ -29,6 +29,8 @@ type:
             module:
               required: true
               type: string
+            nobubblewrap:
+              type: flag
         moduledelegate:
           record:
             function:

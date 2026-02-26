@@ -232,6 +232,7 @@ local implimpls = {
     local fmt = 'return require(%q)[%q]'
     return {
       impl = fmt:format(impl.module, impl['function'] or name),
+      nobubblewrap = impl.nobubblewrap,
     }
   end,
   moduledelegate = function(impl, name)

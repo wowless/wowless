@@ -236,6 +236,7 @@ CreateFrame:
 CreateFromMixins:
   luadelegate:
     module: wowless.mixin
+    nobubblewrap: true
 CreateSecureDelegate:
   impl:
 CreateWindow:
@@ -503,6 +504,7 @@ math.tanh:
 Mixin:
   luadelegate:
     module: wowless.mixin
+    nobubblewrap: true
 newproxy:
   stdlib: newproxy
 next:
