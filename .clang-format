@@ -1,3 +1,4 @@
 AlignArrayOfStructures: Left
 BasedOnStyle: Google
+InsertBraces: true
 PointerAlignment: Right
