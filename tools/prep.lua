@@ -239,6 +239,12 @@ local implimpls = {
       modules = { impl.name },
     }
   end,
+  stdlib = function(path)
+    return {
+      impl = 'return ' .. path,
+      nobubblewrap = true,
+    }
+  end,
 }
 local implcfg = parseYaml('data/impl.yaml')
 local impls = {}
@@ -252,24 +258,20 @@ end
 
 local function mkapi(apicfg)
   if apicfg.impl then
-    local ic = assert(implcfg[apicfg.impl], 'missing impl ' .. apicfg.impl)
-    if ic.stdlib then
-      return { stdlib = ic.stdlib }
-    else
-      local impl = ensureimpl(apicfg.impl)
-      return {
-        impl = impl.impl,
-        inputs = apicfg.inputs,
-        instride = apicfg.instride,
-        mayreturnnothing = apicfg.mayreturnnothing,
-        modules = impl.modules,
-        outputs = apicfg.outputs,
-        outstride = apicfg.outstride,
-        sqls = impl.sqls,
-        src = impl.src,
-        usage = apicfg.usage,
-      }
-    end
+    local impl = ensureimpl(apicfg.impl)
+    return {
+      impl = impl.impl,
+      inputs = not impl.nobubblewrap and apicfg.inputs or nil,
+      instride = apicfg.instride,
+      mayreturnnothing = apicfg.mayreturnnothing,
+      modules = impl.modules,
+      nobubblewrap = impl.nobubblewrap,
+      outputs = not impl.nobubblewrap and apicfg.outputs or nil,
+      outstride = apicfg.outstride,
+      sqls = impl.sqls,
+      src = impl.src,
+      usage = apicfg.usage,
+    }
   end
 end
 

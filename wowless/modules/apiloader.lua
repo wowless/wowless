@@ -38,11 +38,9 @@ return function(datalua, funcheck, log, sqls)
 
     local fns, securefns = cstubs(modules.cgencode)
     for fn, apicfg in pairs(datalua.apis) do
-      local v
-      if apicfg.stdlib then
-        v = assert(util.tget(_G, fn))
-      else
-        v = bubblewrap(mkfn(fn, apicfg))
+      local v = mkfn(fn, apicfg)
+      if not apicfg.nobubblewrap then
+        v = bubblewrap(v)
       end
       util.tset(securefns, fn, v)
       if not apicfg.secureonly then
