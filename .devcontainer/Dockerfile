@@ -6,10 +6,9 @@ RUN apt-get update \
         build-essential \
         ca-certificates \
         git \
+        lua-check \
         ninja-build \
         ruby-dev \
-    && pip install git+https://github.com/luarocks/hererocks cmake jinja2 pre-commit \
-    && hererocks -l 5.1 -r 3.8.0 /usr/local \
-    && luarocks install luacheck \
+    && pip install cmake jinja2 pre-commit \
     && git config --system --add safe.directory '*'
 WORKDIR /wowless
