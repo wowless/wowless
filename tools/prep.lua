@@ -1029,33 +1029,25 @@ if args.coutput then
     end
   end
 
-  local function emit_stub_entries(array_name, entries, prefix)
-    emit('static const struct wowless_stub_entry %s[] = {', array_name)
-    for name, secureonly in sorted(entries) do
-      emit('  {%s, stub_%s, %d},', cstring(name), safename(prefix .. name), secureonly and 1 or 0)
-    end
-    emit('  {NULL, NULL, 0}')
-    emit('};')
-    emit('')
-  end
-
-  for ns in sorted(ns_entries) do
-    emit_stub_entries('stubs_' .. safename(ns), ns_entries[ns], ns .. '.')
-  end
-
-  emit_stub_entries('global_stubs', global_entries, '')
-
-  emit('static const struct wowless_ns_entry ns_stubs[] = {')
-  for ns in sorted(ns_entries) do
-    emit('  {%s, stubs_%s},', cstring(ns), safename(ns))
-  end
-  emit('  {NULL, NULL}')
-  emit('};')
-  emit('')
-
   emit('static const struct wowless_stubs_spec stubs_spec = {')
-  emit('  global_stubs,')
-  emit('  ns_stubs,')
+  emit('  (const struct wowless_stub_entry[]){')
+  for name, secureonly in sorted(global_entries) do
+    emit('    {%s, stub_%s, %d},', cstring(name), safename(name), secureonly and 1 or 0)
+  end
+  emit('    {NULL, NULL, 0}')
+  emit('  },')
+  emit('  (const struct wowless_ns_entry[]){')
+
+  for ns in sorted(ns_entries) do
+    emit('    {%s, (const struct wowless_stub_entry[]){', cstring(ns))
+    for name, secureonly in sorted(ns_entries[ns]) do
+      emit('      {%s, stub_%s, %d},', cstring(name), safename(ns .. '.' .. name), secureonly and 1 or 0)
+    end
+    emit('      {NULL, NULL, 0}')
+    emit('    }},')
+  end
+  emit('    {NULL, NULL}')
+  emit('  },')
   emit('};')
   emit('')
   emit('int luaopen_build_products_%s_stubs(lua_State *L) {', product)
