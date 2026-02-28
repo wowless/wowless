@@ -258,8 +258,15 @@ local function ensureimpl(k)
   return impls[k]
 end
 
+local function is_impl_eligible(apicfg)
+  return apicfg.impl and not apicfg.inputs and not apicfg.outputs
+end
+
 local function mkapi(apicfg)
   if apicfg.impl then
+    if is_impl_eligible(apicfg) then
+      return nil
+    end
     local impl = ensureimpl(apicfg.impl)
     return {
       impl = impl.impl,
@@ -773,6 +780,17 @@ if args.coutput then
     end
   end
 
+  local eligible_impls = {}
+  for k, v in sorted(rawapis) do
+    if v and is_impl_eligible(v) then
+      table.insert(eligible_impls, { name = k, cfg = v, impldata = ensureimpl(v.impl) })
+    end
+  end
+
+  local function cimplstring(s)
+    return '"' .. s:gsub('\\', '\\\\'):gsub('"', '\\"'):gsub('\n', '\\n'):gsub('\r', '\\r'):gsub('\t', '\\t') .. '"'
+  end
+
   local lua_value_emitters
   lua_value_emitters = {
     boolean = function(v)
@@ -1023,27 +1041,86 @@ if args.coutput then
       if not ns_entries[ns] then
         ns_entries[ns] = {}
       end
-      ns_entries[ns][shortname] = not not entry.cfg.secureonly
+      ns_entries[ns][shortname] = { sn = safename(entry.name), secureonly = not not entry.cfg.secureonly }
     else
-      global_entries[entry.name] = not not entry.cfg.secureonly
+      global_entries[entry.name] = { sn = safename(entry.name), secureonly = not not entry.cfg.secureonly }
+    end
+  end
+  for _, entry in ipairs(eligible_impls) do
+    local dot = entry.name:find('%.')
+    local e = {
+      sn = safename(entry.name),
+      secureonly = not not entry.cfg.secureonly,
+      impldata = entry.impldata,
+      chunkname = entry.impldata.src or entry.name,
+    }
+    if dot then
+      local ns = entry.name:sub(1, dot - 1)
+      local shortname = entry.name:sub(dot + 1)
+      if not ns_entries[ns] then
+        ns_entries[ns] = {}
+      end
+      ns_entries[ns][shortname] = e
+    else
+      global_entries[entry.name] = e
+    end
+  end
+
+  local function emit_stub_entry(indent, name, entry)
+    if entry.impldata then
+      local impldata = entry.impldata
+      local mods = impldata.modules or {}
+      local sqls_list = impldata.sqls or {}
+      local mods_val, sqls_val
+      if #mods > 0 then
+        local parts = {}
+        for _, m in ipairs(mods) do
+          table.insert(parts, cstring(m))
+        end
+        mods_val = '(const char *const[]){' .. table.concat(parts, ', ') .. ', NULL}'
+      else
+        mods_val = 'NULL'
+      end
+      if #sqls_list > 0 then
+        local parts = {}
+        for _, s in ipairs(sqls_list) do
+          table.insert(parts, cstring(s))
+        end
+        sqls_val = '(const char *const[]){' .. table.concat(parts, ', ') .. ', NULL}'
+      else
+        sqls_val = 'NULL'
+      end
+      emit(
+        '%s{%s, NULL, %d, &(struct wowless_impl_data){%s, %d, %s, %s, %s, %d}},',
+        indent,
+        cstring(name),
+        entry.secureonly and 1 or 0,
+        cimplstring(impldata.impl),
+        #impldata.impl,
+        cstring(entry.chunkname),
+        mods_val,
+        sqls_val,
+        impldata.nobubblewrap and 1 or 0
+      )
+    else
+      emit('%s{%s, stub_%s, %d, NULL},', indent, cstring(name), entry.sn, entry.secureonly and 1 or 0)
     end
   end
 
   emit('static const struct wowless_stubs_spec stubs_spec = {')
   emit('  (const struct wowless_stub_entry[]){')
-  for name, secureonly in sorted(global_entries) do
-    emit('    {%s, stub_%s, %d},', cstring(name), safename(name), secureonly and 1 or 0)
+  for name, entry in sorted(global_entries) do
+    emit_stub_entry('    ', name, entry)
   end
-  emit('    {NULL, NULL, 0}')
+  emit('    {NULL, NULL, 0, NULL}')
   emit('  },')
   emit('  (const struct wowless_ns_entry[]){')
-
   for ns in sorted(ns_entries) do
     emit('    {%s, (const struct wowless_stub_entry[]){', cstring(ns))
-    for name, secureonly in sorted(ns_entries[ns]) do
-      emit('      {%s, stub_%s, %d},', cstring(name), safename(ns .. '.' .. name), secureonly and 1 or 0)
+    for name, entry in sorted(ns_entries[ns]) do
+      emit_stub_entry('      ', name, entry)
     end
-    emit('      {NULL, NULL, 0}')
+    emit('      {NULL, NULL, 0, NULL}')
     emit('    }},')
   end
   emit('    {NULL, NULL}')

@@ -36,7 +36,7 @@ return function(datalua, funcheck, log, sqls)
       end
     end
 
-    local fns, securefns = cstubs(modules.cgencode)
+    local fns, securefns = cstubs(modules)
     for fn, apicfg in pairs(datalua.apis) do
       local v = mkfn(fn, apicfg)
       if not apicfg.nobubblewrap then
