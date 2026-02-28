@@ -1048,7 +1048,12 @@ if args.coutput then
   end
   for _, entry in ipairs(eligible_impls) do
     local dot = entry.name:find('%.')
-    local e = { sn = safename(entry.name), secureonly = not not entry.cfg.secureonly, impldata = entry.impldata }
+    local e = {
+      sn = safename(entry.name),
+      secureonly = not not entry.cfg.secureonly,
+      impldata = entry.impldata,
+      chunkname = entry.impldata.src or entry.name,
+    }
     if dot then
       local ns = entry.name:sub(1, dot - 1)
       local shortname = entry.name:sub(dot + 1)
@@ -1061,62 +1066,42 @@ if args.coutput then
     end
   end
 
-  for _, entry in ipairs(eligible_impls) do
-    local sn = safename(entry.name)
-    emit('static const char impl_%s[] = %s;', sn, cimplstring(entry.impldata.impl))
-  end
-  if #eligible_impls > 0 then
-    emit('')
-  end
-
-  for _, entry in ipairs(eligible_impls) do
-    local mods = entry.impldata.modules or {}
-    if #mods > 0 then
-      local sn = safename(entry.name)
-      local parts = {}
-      for _, m in ipairs(mods) do
-        table.insert(parts, cstring(m))
-      end
-      emit('static const char *const mods_%s[] = {%s, NULL};', sn, table.concat(parts, ', '))
-    end
-    local sqls_list = entry.impldata.sqls or {}
-    if #sqls_list > 0 then
-      local sn = safename(entry.name)
-      local parts = {}
-      for _, s in ipairs(sqls_list) do
-        table.insert(parts, cstring(s))
-      end
-      emit('static const char *const sqls_%s[] = {%s, NULL};', sn, table.concat(parts, ', '))
-    end
-  end
-  if #eligible_impls > 0 then
-    emit('')
-  end
-
-  for _, entry in ipairs(eligible_impls) do
-    local name = entry.name
-    local sn = safename(name)
-    local impldata = entry.impldata
-    local mods = impldata.modules or {}
-    local sqls_list = impldata.sqls or {}
-    emit(
-      'static const struct wowless_impl_data impldata_%s = {impl_%s, sizeof(impl_%s) - 1, %s, %s, %s, %d};',
-      sn,
-      sn,
-      sn,
-      cstring(impldata.src or name),
-      #mods > 0 and 'mods_' .. sn or 'NULL',
-      #sqls_list > 0 and 'sqls_' .. sn or 'NULL',
-      impldata.nobubblewrap and 1 or 0
-    )
-  end
-  if #eligible_impls > 0 then
-    emit('')
-  end
-
   local function emit_stub_entry(indent, name, entry)
     if entry.impldata then
-      emit('%s{%s, NULL, %d, &impldata_%s},', indent, cstring(name), entry.secureonly and 1 or 0, entry.sn)
+      local impldata = entry.impldata
+      local mods = impldata.modules or {}
+      local sqls_list = impldata.sqls or {}
+      local mods_val, sqls_val
+      if #mods > 0 then
+        local parts = {}
+        for _, m in ipairs(mods) do
+          table.insert(parts, cstring(m))
+        end
+        mods_val = '(const char *const[]){' .. table.concat(parts, ', ') .. ', NULL}'
+      else
+        mods_val = 'NULL'
+      end
+      if #sqls_list > 0 then
+        local parts = {}
+        for _, s in ipairs(sqls_list) do
+          table.insert(parts, cstring(s))
+        end
+        sqls_val = '(const char *const[]){' .. table.concat(parts, ', ') .. ', NULL}'
+      else
+        sqls_val = 'NULL'
+      end
+      emit(
+        '%s{%s, NULL, %d, &(struct wowless_impl_data){%s, %d, %s, %s, %s, %d}},',
+        indent,
+        cstring(name),
+        entry.secureonly and 1 or 0,
+        cimplstring(impldata.impl),
+        #impldata.impl,
+        cstring(entry.chunkname),
+        mods_val,
+        sqls_val,
+        impldata.nobubblewrap and 1 or 0
+      )
     else
       emit('%s{%s, stub_%s, %d, NULL},', indent, cstring(name), entry.sn, entry.secureonly and 1 or 0)
     end
