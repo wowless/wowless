@@ -1,3 +1,5 @@
+#include "wowless/bubblewrap.h"
+
 #include "lauxlib.h"
 #include "lualib.h"
 
@@ -31,9 +33,11 @@ static int bubblewrapper(lua_State *L) {
   return err == 0 ? lua_gettop(L) : lua_error(L);
 }
 
+void wowless_bubblewrap(lua_State *L) { lua_pushcclosure(L, bubblewrapper, 1); }
+
 static int bubblewrap(lua_State *L) {
   lua_settop(L, 1);
-  lua_pushcclosure(L, bubblewrapper, 1);
+  wowless_bubblewrap(L);
   return 1;
 }
 

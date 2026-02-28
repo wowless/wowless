@@ -258,8 +258,15 @@ local function ensureimpl(k)
   return impls[k]
 end
 
+local function is_impl_eligible(apicfg)
+  return apicfg.impl and not apicfg.inputs and not apicfg.outputs
+end
+
 local function mkapi(apicfg)
   if apicfg.impl then
+    if is_impl_eligible(apicfg) then
+      return nil
+    end
     local impl = ensureimpl(apicfg.impl)
     return {
       impl = impl.impl,
@@ -773,6 +780,17 @@ if args.coutput then
     end
   end
 
+  local eligible_impls = {}
+  for k, v in sorted(rawapis) do
+    if v and is_impl_eligible(v) then
+      table.insert(eligible_impls, { name = k, cfg = v, impldata = ensureimpl(v.impl) })
+    end
+  end
+
+  local function cimplstring(s)
+    return '"' .. s:gsub('\\', '\\\\'):gsub('"', '\\"'):gsub('\n', '\\n'):gsub('\r', '\\r'):gsub('\t', '\\t') .. '"'
+  end
+
   local lua_value_emitters
   lua_value_emitters = {
     boolean = function(v)
@@ -1023,27 +1041,101 @@ if args.coutput then
       if not ns_entries[ns] then
         ns_entries[ns] = {}
       end
-      ns_entries[ns][shortname] = not not entry.cfg.secureonly
+      ns_entries[ns][shortname] = { sn = safename(entry.name), secureonly = not not entry.cfg.secureonly }
     else
-      global_entries[entry.name] = not not entry.cfg.secureonly
+      global_entries[entry.name] = { sn = safename(entry.name), secureonly = not not entry.cfg.secureonly }
+    end
+  end
+  for _, entry in ipairs(eligible_impls) do
+    local dot = entry.name:find('%.')
+    local e = { sn = safename(entry.name), secureonly = not not entry.cfg.secureonly, impldata = entry.impldata }
+    if dot then
+      local ns = entry.name:sub(1, dot - 1)
+      local shortname = entry.name:sub(dot + 1)
+      if not ns_entries[ns] then
+        ns_entries[ns] = {}
+      end
+      ns_entries[ns][shortname] = e
+    else
+      global_entries[entry.name] = e
+    end
+  end
+
+  for _, entry in ipairs(eligible_impls) do
+    local sn = safename(entry.name)
+    emit('static const char impl_%s[] = %s;', sn, cimplstring(entry.impldata.impl))
+  end
+  if #eligible_impls > 0 then
+    emit('')
+  end
+
+  for _, entry in ipairs(eligible_impls) do
+    local mods = entry.impldata.modules or {}
+    if #mods > 0 then
+      local sn = safename(entry.name)
+      local parts = {}
+      for _, m in ipairs(mods) do
+        table.insert(parts, cstring(m))
+      end
+      emit('static const char *const mods_%s[] = {%s, NULL};', sn, table.concat(parts, ', '))
+    end
+    local sqls_list = entry.impldata.sqls or {}
+    if #sqls_list > 0 then
+      local sn = safename(entry.name)
+      local parts = {}
+      for _, s in ipairs(sqls_list) do
+        table.insert(parts, cstring(s))
+      end
+      emit('static const char *const sqls_%s[] = {%s, NULL};', sn, table.concat(parts, ', '))
+    end
+  end
+  if #eligible_impls > 0 then
+    emit('')
+  end
+
+  for _, entry in ipairs(eligible_impls) do
+    local name = entry.name
+    local sn = safename(name)
+    local impldata = entry.impldata
+    local mods = impldata.modules or {}
+    local sqls_list = impldata.sqls or {}
+    emit(
+      'static const struct wowless_impl_data impldata_%s = {impl_%s, sizeof(impl_%s) - 1, %s, %s, %s, %d};',
+      sn,
+      sn,
+      sn,
+      cstring(impldata.src or name),
+      #mods > 0 and 'mods_' .. sn or 'NULL',
+      #sqls_list > 0 and 'sqls_' .. sn or 'NULL',
+      impldata.nobubblewrap and 1 or 0
+    )
+  end
+  if #eligible_impls > 0 then
+    emit('')
+  end
+
+  local function emit_stub_entry(indent, name, entry)
+    if entry.impldata then
+      emit('%s{%s, NULL, %d, &impldata_%s},', indent, cstring(name), entry.secureonly and 1 or 0, entry.sn)
+    else
+      emit('%s{%s, stub_%s, %d, NULL},', indent, cstring(name), entry.sn, entry.secureonly and 1 or 0)
     end
   end
 
   emit('static const struct wowless_stubs_spec stubs_spec = {')
   emit('  (const struct wowless_stub_entry[]){')
-  for name, secureonly in sorted(global_entries) do
-    emit('    {%s, stub_%s, %d},', cstring(name), safename(name), secureonly and 1 or 0)
+  for name, entry in sorted(global_entries) do
+    emit_stub_entry('    ', name, entry)
   end
-  emit('    {NULL, NULL, 0}')
+  emit('    {NULL, NULL, 0, NULL}')
   emit('  },')
   emit('  (const struct wowless_ns_entry[]){')
-
   for ns in sorted(ns_entries) do
     emit('    {%s, (const struct wowless_stub_entry[]){', cstring(ns))
-    for name, secureonly in sorted(ns_entries[ns]) do
-      emit('      {%s, stub_%s, %d},', cstring(name), safename(ns .. '.' .. name), secureonly and 1 or 0)
+    for name, entry in sorted(ns_entries[ns]) do
+      emit_stub_entry('      ', name, entry)
     end
-    emit('      {NULL, NULL, 0}')
+    emit('      {NULL, NULL, 0, NULL}')
     emit('    }},')
   end
   emit('    {NULL, NULL}')
