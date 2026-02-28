@@ -425,14 +425,7 @@ foreach(product ${products})
   add_dependencies(stamp_${product}_dblist datalua_${product}_lua stamp_sqls)
 endforeach()
 
-include(FetchContent)
-FetchContent_Declare(
-  lpeg
-  URL http://www.inf.puc-rio.br/~roberto/lpeg/lpeg-1.1.0.tar.gz
-  URL_HASH MD5=842a538b403b5639510c9b6fffd2c75b
-  SOURCE_SUBDIR disable_cmakelists_txt
-  TLS_VERIFY OFF)
-FetchContent_MakeAvailable(lpeg)
+set(lpeg_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/vendor/lpeg)
 lua2c(lpeg lpeg=c)
 target_sources(
   lpeg
