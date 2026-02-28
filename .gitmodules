@@ -14,3 +14,55 @@
 	path = vendor/tactless
 	shallow = true
 	url = https://github.com/wowless/tactless
+[submodule "vendor/luaexpat"]
+	path = vendor/luaexpat
+	shallow = true
+	url = https://github.com/lunarmodules/luaexpat.git
+[submodule "vendor/luafilesystem"]
+	path = vendor/luafilesystem
+	shallow = true
+	url = https://github.com/lunarmodules/luafilesystem.git
+[submodule "vendor/say"]
+	path = vendor/say
+	shallow = true
+	url = https://github.com/lunarmodules/say.git
+[submodule "vendor/luassert"]
+	path = vendor/luassert
+	shallow = true
+	url = https://github.com/lunarmodules/luassert.git
+[submodule "vendor/argparse"]
+	path = vendor/argparse
+	shallow = true
+	url = https://github.com/luarocks/argparse
+[submodule "vendor/date"]
+	path = vendor/date
+	shallow = true
+	url = https://github.com/tieske/date.git
+[submodule "vendor/tsort"]
+	path = vendor/tsort
+	shallow = true
+	url = https://github.com/bungle/lua-resty-tsort
+[submodule "vendor/minheap"]
+	path = vendor/minheap
+	shallow = true
+	url = https://github.com/mah0x211/lua-minheap
+[submodule "vendor/luapath"]
+	path = vendor/luapath
+	shallow = true
+	url = https://github.com/moteus/lua-path
+[submodule "vendor/penlight"]
+	path = vendor/penlight
+	shallow = true
+	url = https://github.com/lunarmodules/penlight
+[submodule "vendor/vstruct"]
+	path = vendor/vstruct
+	shallow = true
+	url = https://github.com/toxicfrog/vstruct
+[submodule "vendor/cjson"]
+	path = vendor/cjson
+	shallow = true
+	url = https://github.com/openresty/lua-cjson
+[submodule "vendor/luadbd"]
+	path = vendor/luadbd
+	shallow = true
+	url = https://github.com/lua-wow-tools/luadbd

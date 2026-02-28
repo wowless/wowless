@@ -6,8 +6,6 @@ set(CMAKE_TOOLCHAIN_FILE
 
 project(wowless LANGUAGES C)
 
-include(FetchContent)
-
 set(elune_SOURCE_DIR vendor/elune)
 set(elune_BINARY_DIR ${CMAKE_BINARY_DIR}/_deps/elune-build)
 add_library(
@@ -123,12 +121,7 @@ function(lua2c name)
   target_link_libraries(${name} PRIVATE elune ${preloads})
 endfunction()
 
-FetchContent_Declare(
-  luaexpat
-  GIT_REPOSITORY https://github.com/lunarmodules/luaexpat.git
-  GIT_TAG 1.4.1
-  SOURCE_SUBDIR disable_cmakelists_txt)
-FetchContent_MakeAvailable(luaexpat)
+set(luaexpat_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/vendor/luaexpat)
 lua2c(luaexpat lxp=c)
 target_sources(luaexpat PRIVATE ${luaexpat_SOURCE_DIR}/src/lxplib.c)
 target_link_libraries(luaexpat PRIVATE expat::expat)
@@ -143,29 +136,14 @@ lua2c(wowlesssqlite wowless.sqlite=c)
 target_sources(wowlesssqlite PRIVATE wowless/sqlite.c)
 target_link_libraries(wowlesssqlite PRIVATE unofficial::sqlite3::sqlite3)
 
-FetchContent_Declare(
-  luafilesystem
-  GIT_REPOSITORY https://github.com/lunarmodules/luafilesystem.git
-  GIT_TAG v1_8_0
-  SOURCE_SUBDIR disable_cmakelists_txt)
-FetchContent_MakeAvailable(luafilesystem)
+set(luafilesystem_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/vendor/luafilesystem)
 lua2c(luafilesystem lfs=c)
 target_sources(luafilesystem PRIVATE ${luafilesystem_SOURCE_DIR}/src/lfs.c)
 
-FetchContent_Declare(
-  say
-  GIT_REPOSITORY https://github.com/lunarmodules/say.git
-  GIT_TAG 3e1f783d0aa496eb21d16e85b2235335cb9332df
-  SOURCE_SUBDIR disable_cmakelists_txt)
-FetchContent_MakeAvailable(say)
+set(say_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/vendor/say)
 lua2c(say say=${say_SOURCE_DIR}/src/say/init.lua)
 
-FetchContent_Declare(
-  luassert
-  GIT_REPOSITORY https://github.com/lunarmodules/luassert.git
-  GIT_TAG 8c9385b1a1944a5ce0ef9dbd721ad1987cf85e9d
-  SOURCE_SUBDIR disable_cmakelists_txt)
-FetchContent_MakeAvailable(luassert)
+set(luassert_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/vendor/luassert)
 lua2c(
   luassert
   luassert.compatibility=${luassert_SOURCE_DIR}/src/compatibility.lua
@@ -199,44 +177,19 @@ lua2c(
   luassert.languages.zh=${luassert_SOURCE_DIR}/src/languages/zh.lua
   say=p)
 
-FetchContent_Declare(
-  argparse
-  GIT_REPOSITORY https://github.com/luarocks/argparse
-  GIT_TAG 27967d7b52295ea7885671af734332038c132837
-  SOURCE_SUBDIR disable_cmakelists_txt)
-FetchContent_MakeAvailable(argparse)
+set(argparse_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/vendor/argparse)
 lua2c(argparse argparse=${argparse_SOURCE_DIR}/src/argparse.lua)
 
-FetchContent_Declare(
-  date
-  GIT_REPOSITORY https://github.com/tieske/date.git
-  GIT_TAG e309741edc15bde2c884b0db09d8560848773b50
-  SOURCE_SUBDIR disable_cmakelists_txt)
-FetchContent_MakeAvailable(date)
+set(date_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/vendor/date)
 lua2c(date date=${date_SOURCE_DIR}/src/date.lua)
 
-FetchContent_Declare(
-  tsort
-  GIT_REPOSITORY https://github.com/bungle/lua-resty-tsort
-  GIT_TAG 07754a8af7c51ca5fbcf05dc5f4b1b900f1bf530
-  SOURCE_SUBDIR disable_cmakelists_txt)
-FetchContent_MakeAvailable(tsort)
+set(tsort_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/vendor/tsort)
 lua2c(tsort resty.tsort=${tsort_SOURCE_DIR}/lib/resty/tsort.lua)
 
-FetchContent_Declare(
-  minheap
-  GIT_REPOSITORY https://github.com/mah0x211/lua-minheap
-  GIT_TAG c5fe42b60cf5b3ee7ed6d33eb31be1119dfb1cd6
-  SOURCE_SUBDIR disable_cmakelists_txt)
-FetchContent_MakeAvailable(minheap)
+set(minheap_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/vendor/minheap)
 lua2c(minheap minheap=${minheap_SOURCE_DIR}/minheap.lua)
 
-FetchContent_Declare(
-  luapath
-  GIT_REPOSITORY https://github.com/moteus/lua-path
-  GIT_TAG 5a32c7052e84cdb9dcbcd45648aae3f6927376ac
-  SOURCE_SUBDIR disable_cmakelists_txt)
-FetchContent_MakeAvailable(luapath)
+set(luapath_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/vendor/luapath)
 lua2c(
   luapath
   path=${luapath_SOURCE_DIR}/lua/path.lua
@@ -256,12 +209,7 @@ lua2c(
   path.win32.fs=${luapath_SOURCE_DIR}/lua/path/win32/fs.lua
   path.win32.wcs=${luapath_SOURCE_DIR}/lua/path/win32/wcs.lua)
 
-FetchContent_Declare(
-  penlight
-  GIT_REPOSITORY https://github.com/lunarmodules/penlight
-  GIT_TAG 3bf03267b2571ba3cfa676a10528dd7b9a0db404
-  SOURCE_SUBDIR disable_cmakelists_txt)
-FetchContent_MakeAvailable(penlight)
+set(penlight_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/vendor/penlight)
 lua2c(
   penlight
   luafilesystem=p
@@ -305,12 +253,7 @@ lua2c(
   pl.types=${penlight_SOURCE_DIR}/lua/pl/types.lua
   pl.import_into=${penlight_SOURCE_DIR}/lua/pl/import_into.lua)
 
-FetchContent_Declare(
-  vstruct
-  GIT_REPOSITORY https://github.com/toxicfrog/vstruct
-  GIT_TAG b6889e3b275e9f9532b5dff4917e903b17e22730
-  SOURCE_SUBDIR disable_cmakelists_txt)
-FetchContent_MakeAvailable(vstruct)
+set(vstruct_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/vendor/vstruct)
 lua2c(
   vstruct
   vstruct.api=${vstruct_SOURCE_DIR}/api.lua
@@ -419,12 +362,7 @@ lua2c(wowlessutil luapath=p wowless.mixin=c
       wowless.util=${CMAKE_CURRENT_SOURCE_DIR}/wowless/util.lua)
 target_sources(wowlessutil PRIVATE wowless/mixin.c)
 
-FetchContent_Declare(
-  cjson
-  GIT_REPOSITORY https://github.com/openresty/lua-cjson
-  GIT_TAG 2bfad8f5eeb821357d2ada29506e864ff7ec947e
-  SOURCE_SUBDIR disable_cmakelists_txt)
-FetchContent_MakeAvailable(cjson)
+set(cjson_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/vendor/cjson)
 lua2c(luacjson cjson=c)
 target_sources(
   luacjson PRIVATE ${cjson_SOURCE_DIR}/fpconv.c ${cjson_SOURCE_DIR}/lua_cjson.c
@@ -487,6 +425,7 @@ foreach(product ${products})
   add_dependencies(stamp_${product}_dblist datalua_${product}_lua stamp_sqls)
 endforeach()
 
+include(FetchContent)
 FetchContent_Declare(
   lpeg
   URL http://www.inf.puc-rio.br/~roberto/lpeg/lpeg-1.1.0.tar.gz
@@ -501,12 +440,7 @@ target_sources(
           ${lpeg_SOURCE_DIR}/lpcset.c ${lpeg_SOURCE_DIR}/lpprint.c
           ${lpeg_SOURCE_DIR}/lptree.c ${lpeg_SOURCE_DIR}/lpvm.c)
 
-FetchContent_Declare(
-  luadbd
-  GIT_REPOSITORY https://github.com/lua-wow-tools/luadbd
-  GIT_TAG 600ca1dcc83f9dee7ca165b27d17f7d0355db6e2
-  SOURCE_SUBDIR disable_cmakelists_txt)
-FetchContent_MakeAvailable(luadbd)
+set(luadbd_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/vendor/luadbd)
 lua2c(luadbd luadbd.parser=${luadbd_SOURCE_DIR}/luadbd/parser.lua)
 
 add_lua_executable(
