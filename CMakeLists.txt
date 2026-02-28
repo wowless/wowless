@@ -121,7 +121,7 @@ function(lua2c name)
   target_link_libraries(${name} PRIVATE elune ${preloads})
 endfunction()
 
-set(luaexpat_SOURCE_DIR vendor/luaexpat)
+set(luaexpat_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/vendor/luaexpat)
 lua2c(luaexpat lxp=c)
 target_sources(luaexpat PRIVATE ${luaexpat_SOURCE_DIR}/src/lxplib.c)
 target_link_libraries(luaexpat PRIVATE expat::expat)
@@ -136,14 +136,14 @@ lua2c(wowlesssqlite wowless.sqlite=c)
 target_sources(wowlesssqlite PRIVATE wowless/sqlite.c)
 target_link_libraries(wowlesssqlite PRIVATE unofficial::sqlite3::sqlite3)
 
-set(luafilesystem_SOURCE_DIR vendor/luafilesystem)
+set(luafilesystem_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/vendor/luafilesystem)
 lua2c(luafilesystem lfs=c)
 target_sources(luafilesystem PRIVATE ${luafilesystem_SOURCE_DIR}/src/lfs.c)
 
-set(say_SOURCE_DIR vendor/say)
+set(say_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/vendor/say)
 lua2c(say say=${say_SOURCE_DIR}/src/say/init.lua)
 
-set(luassert_SOURCE_DIR vendor/luassert)
+set(luassert_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/vendor/luassert)
 lua2c(
   luassert
   luassert.compatibility=${luassert_SOURCE_DIR}/src/compatibility.lua
@@ -177,19 +177,19 @@ lua2c(
   luassert.languages.zh=${luassert_SOURCE_DIR}/src/languages/zh.lua
   say=p)
 
-set(argparse_SOURCE_DIR vendor/argparse)
+set(argparse_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/vendor/argparse)
 lua2c(argparse argparse=${argparse_SOURCE_DIR}/src/argparse.lua)
 
-set(date_SOURCE_DIR vendor/date)
+set(date_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/vendor/date)
 lua2c(date date=${date_SOURCE_DIR}/src/date.lua)
 
-set(tsort_SOURCE_DIR vendor/tsort)
+set(tsort_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/vendor/tsort)
 lua2c(tsort resty.tsort=${tsort_SOURCE_DIR}/lib/resty/tsort.lua)
 
-set(minheap_SOURCE_DIR vendor/minheap)
+set(minheap_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/vendor/minheap)
 lua2c(minheap minheap=${minheap_SOURCE_DIR}/minheap.lua)
 
-set(luapath_SOURCE_DIR vendor/luapath)
+set(luapath_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/vendor/luapath)
 lua2c(
   luapath
   path=${luapath_SOURCE_DIR}/lua/path.lua
@@ -209,7 +209,7 @@ lua2c(
   path.win32.fs=${luapath_SOURCE_DIR}/lua/path/win32/fs.lua
   path.win32.wcs=${luapath_SOURCE_DIR}/lua/path/win32/wcs.lua)
 
-set(penlight_SOURCE_DIR vendor/penlight)
+set(penlight_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/vendor/penlight)
 lua2c(
   penlight
   luafilesystem=p
@@ -253,7 +253,7 @@ lua2c(
   pl.types=${penlight_SOURCE_DIR}/lua/pl/types.lua
   pl.import_into=${penlight_SOURCE_DIR}/lua/pl/import_into.lua)
 
-set(vstruct_SOURCE_DIR vendor/vstruct)
+set(vstruct_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/vendor/vstruct)
 lua2c(
   vstruct
   vstruct.api=${vstruct_SOURCE_DIR}/api.lua
@@ -362,7 +362,7 @@ lua2c(wowlessutil luapath=p wowless.mixin=c
       wowless.util=${CMAKE_CURRENT_SOURCE_DIR}/wowless/util.lua)
 target_sources(wowlessutil PRIVATE wowless/mixin.c)
 
-set(cjson_SOURCE_DIR vendor/cjson)
+set(cjson_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/vendor/cjson)
 lua2c(luacjson cjson=c)
 target_sources(
   luacjson PRIVATE ${cjson_SOURCE_DIR}/fpconv.c ${cjson_SOURCE_DIR}/lua_cjson.c
@@ -440,7 +440,7 @@ target_sources(
           ${lpeg_SOURCE_DIR}/lpcset.c ${lpeg_SOURCE_DIR}/lpprint.c
           ${lpeg_SOURCE_DIR}/lptree.c ${lpeg_SOURCE_DIR}/lpvm.c)
 
-set(luadbd_SOURCE_DIR vendor/luadbd)
+set(luadbd_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/vendor/luadbd)
 lua2c(luadbd luadbd.parser=${luadbd_SOURCE_DIR}/luadbd/parser.lua)
 
 add_lua_executable(
