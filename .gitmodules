@@ -62,6 +62,10 @@
 	path = vendor/cjson
 	shallow = true
 	url = https://github.com/openresty/lua-cjson
+[submodule "vendor/lpeg"]
+	path = vendor/lpeg
+	shallow = true
+	url = https://github.com/jaredkrinke/lpeg
 [submodule "vendor/luadbd"]
 	path = vendor/luadbd
 	shallow = true
