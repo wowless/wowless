@@ -263,6 +263,7 @@ lua2c(
   vstruct.ast.List=${vstruct_SOURCE_DIR}/ast/List.lua
   vstruct.ast.Name=${vstruct_SOURCE_DIR}/ast/Name.lua
   vstruct.ast.Node=${vstruct_SOURCE_DIR}/ast/Node.lua
+  vstruct.ast.Number=${vstruct_SOURCE_DIR}/ast/Number.lua
   vstruct.ast.Repeat=${vstruct_SOURCE_DIR}/ast/Repeat.lua
   vstruct.ast.Root=${vstruct_SOURCE_DIR}/ast/Root.lua
   vstruct.ast.Table=${vstruct_SOURCE_DIR}/ast/Table.lua
