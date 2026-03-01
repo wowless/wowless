@@ -852,28 +852,48 @@ set(outdeps)
 set(outs)
 set(pngs)
 foreach(product ${products})
+  add_lua_executable(
+    wowless_${product}
+    ${CMAKE_CURRENT_SOURCE_DIR}/wowless.lua
+    argparse
+    datalua_${product}
+    date
+    luaexpat
+    minheap
+    penlight
+    runtimegametypes
+    runtimeproducts
+    tsort
+    wowlesslib
+    wowlessrender
+    wowlesssqlite
+    wowlesstoc
+    wowlessutil
+    wowlessyaml)
   set(out products/${product}/log.txt)
   list(APPEND outs ${out})
   list(APPEND outdeps stamp_${product}_dbdefs stamp_${product}_dblist)
   add_custom_target(
-    ${product} DEPENDS wowless testaddon.txt ${product}_addon.txt
+    ${product} DEPENDS wowless_${product} testaddon.txt ${product}_addon.txt
                        ${product}_data.sqlite3)
   add_dependencies(${product} stamp_${product}_dbdefs stamp_${product}_dblist)
   add_custom_command(
     OUTPUT ${out}
     COMMAND
-      wowless run -p ${product} -e5 -a ${CMAKE_CURRENT_BINARY_DIR}/addon/Wowless
-      -a ${CMAKE_CURRENT_BINARY_DIR}/products/${product}/WowlessData -o
+      wowless_${product} run -p ${product} -e5 -a
+      ${CMAKE_CURRENT_BINARY_DIR}/addon/Wowless -a
+      ${CMAKE_CURRENT_BINARY_DIR}/products/${product}/WowlessData -o
       ${CMAKE_CURRENT_BINARY_DIR}/${out}
     JOB_POOL wowless_run
-    DEPENDS wowless testaddon.txt ${product}_addon.txt ${product}_data.sqlite3
+    DEPENDS wowless_${product} testaddon.txt ${product}_addon.txt
+            ${product}_data.sqlite3
     WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
   add_custom_command(
     OUTPUT products/${product}/frame0.yaml products/${product}/frame1.yaml
-    COMMAND wowless run -p ${product} -e0 -o
+    COMMAND wowless_${product} run -p ${product} -e0 -o
             ${CMAKE_CURRENT_BINARY_DIR}/products/${product}/frame0.txt --frame0
     JOB_POOL wowless_run
-    DEPENDS wowless ${product}_data.sqlite3
+    DEPENDS wowless_${product} ${product}_data.sqlite3
     WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
   add_custom_command(
     OUTPUT products/${product}/frame0.png
