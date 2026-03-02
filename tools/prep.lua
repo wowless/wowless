@@ -1042,6 +1042,17 @@ if args.coutput then
     emit('')
   end
 
+  for _, entry in ipairs(eligible_impls) do
+    local impldata = entry.impldata
+    if not impldata.nowrap then
+      local fn = impldata.nobubblewrap and 'wowless_impl_stub_nobubblewrap' or 'wowless_impl_stub'
+      emit('static int implstub_%s(lua_State *L) {', safename(entry.name))
+      emit('  return %s(L);', fn)
+      emit('}')
+      emit('')
+    end
+  end
+
   local ns_entries = {}
   local global_entries = {}
   for _, entry in ipairs(eligible) do
@@ -1063,6 +1074,7 @@ if args.coutput then
       secureonly = not not entry.cfg.secureonly,
       impldata = entry.impldata,
       chunkname = entry.impldata.src or entry.name,
+      sn = safename(entry.name),
     }
     if dot then
       local ns = entry.name:sub(1, dot - 1)
@@ -1103,10 +1115,8 @@ if args.coutput then
       local func
       if impldata.nowrap then
         func = 'NULL'
-      elseif impldata.nobubblewrap then
-        func = 'wowless_impl_stub_nobubblewrap'
       else
-        func = 'wowless_impl_stub'
+        func = 'implstub_' .. entry.sn
       end
       emit(
         '%s{%s, %s, %d, &(struct wowless_impl_data){%s, %d, %s, %s, %s}},',
