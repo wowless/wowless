@@ -26,6 +26,8 @@ static void load_entry(lua_State *L, const struct wowless_stub_entry *e) {
     lua_call(L, nargs, 1);
     if (!d->nobubblewrap) {
       wowless_bubblewrap(L);
+    } else if (!lua_iscfunction(L, -1)) {
+      luaL_error(L, "expected C function for nobubblewrap entry %s", e->name);
     }
   } else {
     lua_pushvalue(L, 1);

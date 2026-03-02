@@ -259,7 +259,13 @@ local function ensureimpl(k)
 end
 
 local function is_impl_eligible(apicfg)
-  return apicfg.impl and not apicfg.inputs and not apicfg.outputs
+  if not apicfg.impl then
+    return false
+  end
+  if not apicfg.inputs and not apicfg.outputs then
+    return true
+  end
+  return ensureimpl(apicfg.impl).nobubblewrap
 end
 
 local function mkapi(apicfg)
