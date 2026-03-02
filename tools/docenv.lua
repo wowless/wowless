@@ -33,7 +33,7 @@ local function runDocChunk(product, docs, f, fn)
     Enum = setmetatable({}, nsmt),
   }))
   if not success then
-    error(('error loading %s: %s'):format(f, err), 0) -- issue #551
+    error(('error loading %s: %s'):format(f, err), 0)
   end
 end
 
