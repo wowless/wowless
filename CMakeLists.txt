@@ -1000,6 +1000,7 @@ set(specs
     spec/data/xml_spec.lua
     spec/data/yaml_spec.lua
     spec/elune_spec.lua
+    spec/tools/docs_spec.lua
     spec/tools/tedit_spec.lua
     spec/wowapi/schema_spec.lua
     spec/wowapi/yaml_spec.lua
