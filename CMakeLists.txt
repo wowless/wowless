@@ -718,12 +718,14 @@ lua2c(
   wowapi.schema=${CMAKE_CURRENT_SOURCE_DIR}/wowapi/schema.lua)
 
 lua2c(toolstedit tools.tedit=${CMAKE_CURRENT_SOURCE_DIR}/tools/tedit.lua)
+lua2c(toolsdocenv tools.docenv=${CMAKE_CURRENT_SOURCE_DIR}/tools/docenv.lua wowapischema wowlessyaml)
 
 add_lua_executable(
   docs
   ${CMAKE_CURRENT_SOURCE_DIR}/tools/docs.lua
   argparse
   penlight
+  toolsdocenv
   toolstedit
   toolsutil
   tsort
@@ -925,6 +927,7 @@ add_lua_executable(
   penlight
   runtimegametypes
   runtimeproducts
+  toolsdocenv
   toolstedit
   tsort
   wowapischema
