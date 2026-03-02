@@ -3,8 +3,17 @@
 #include "lauxlib.h"
 #include "wowless/bubblewrap.h"
 
-static int nobubblewrapper(lua_State *L) {
-  lua_pushvalue(L, lua_upvalueindex(1));
+int wowless_impl_stub(lua_State *L) {
+  lua_pushvalue(L, lua_upvalueindex(2));
+  lua_insert(L, 1);
+  const char *intaint = wowless_bubblewrap_cstub_enter(L);
+  int err = lua_pcall(L, lua_gettop(L) - 1, LUA_MULTRET, 0);
+  wowless_bubblewrap_cstub_exit(L, intaint);
+  return err == 0 ? lua_gettop(L) : lua_error(L);
+}
+
+int wowless_impl_stub_nobubblewrap(lua_State *L) {
+  lua_pushvalue(L, lua_upvalueindex(2));
   lua_insert(L, 1);
   lua_call(L, lua_gettop(L) - 1, LUA_MULTRET);
   return lua_gettop(L);
@@ -31,14 +40,10 @@ static void load_entry(lua_State *L, const struct wowless_stub_entry *e) {
       lua_remove(L, sqls_idx);
     }
     lua_call(L, nargs, 1);
-    if (d->nowrap) {
-      if (!lua_iscfunction(L, -1)) {
-        luaL_error(L, "expected C function for nowrap entry %s", e->name);
-      }
-    } else if (d->nobubblewrap) {
-      lua_pushcclosure(L, nobubblewrapper, 1);
-    } else {
-      wowless_bubblewrap(L);
+    if (e->func) {
+      lua_pushvalue(L, 1);
+      lua_insert(L, -2);
+      lua_pushcclosure(L, e->func, 2);
     }
   } else {
     lua_pushvalue(L, 1);

@@ -11,8 +11,6 @@ struct wowless_impl_data {
   const char *chunkname;
   const char *const *modules; /* NULL-terminated array, or NULL */
   const char *const *sqls;    /* NULL-terminated array, or NULL */
-  int nowrap;
-  int nobubblewrap;
 };
 
 struct wowless_stub_entry {
@@ -34,5 +32,7 @@ struct wowless_stubs_spec {
 
 int wowless_load_stubs(lua_State *L);
 void wowless_stub_log_extra_args(lua_State *L, const char *fname);
+int wowless_impl_stub(lua_State *L);
+int wowless_impl_stub_nobubblewrap(lua_State *L);
 
 #endif /* WOWLESS_STUBS_H */

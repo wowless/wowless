@@ -1060,7 +1060,6 @@ if args.coutput then
   for _, entry in ipairs(eligible_impls) do
     local dot = entry.name:find('%.')
     local e = {
-      sn = safename(entry.name),
       secureonly = not not entry.cfg.secureonly,
       impldata = entry.impldata,
       chunkname = entry.impldata.src or entry.name,
@@ -1101,18 +1100,25 @@ if args.coutput then
       else
         sqls_val = 'NULL'
       end
+      local func
+      if impldata.nowrap then
+        func = 'NULL'
+      elseif impldata.nobubblewrap then
+        func = 'wowless_impl_stub_nobubblewrap'
+      else
+        func = 'wowless_impl_stub'
+      end
       emit(
-        '%s{%s, NULL, %d, &(struct wowless_impl_data){%s, %d, %s, %s, %s, %d, %d}},',
+        '%s{%s, %s, %d, &(struct wowless_impl_data){%s, %d, %s, %s, %s}},',
         indent,
         cstring(name),
+        func,
         entry.secureonly and 1 or 0,
         cimplstring(impldata.impl),
         #impldata.impl,
         cstring(entry.chunkname),
         mods_val,
-        sqls_val,
-        impldata.nowrap and 1 or 0,
-        impldata.nobubblewrap and 1 or 0
+        sqls_val
       )
     else
       emit('%s{%s, stub_%s, %d, NULL},', indent, cstring(name), entry.sn, entry.secureonly and 1 or 0)
