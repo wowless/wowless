@@ -11,6 +11,7 @@ struct wowless_impl_data {
   const char *chunkname;
   const char *const *modules; /* NULL-terminated array, or NULL */
   const char *const *sqls;    /* NULL-terminated array, or NULL */
+  int nowrap;
   int nobubblewrap;
 };
 

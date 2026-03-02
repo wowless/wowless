@@ -29,7 +29,7 @@ type:
             module:
               required: true
               type: string
-            nobubblewrap:
+            nowrap:
               type: flag
         moduledelegate:
           record:
@@ -40,4 +40,6 @@ type:
               type:
                 ref:
                   schema: module
+            nobubblewrap:
+              type: flag
         stdlib: string

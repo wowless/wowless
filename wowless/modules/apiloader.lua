@@ -39,7 +39,7 @@ return function(datalua, funcheck, log, sqls)
     local fns, securefns = cstubs(modules)
     for fn, apicfg in pairs(datalua.apis) do
       local v = mkfn(fn, apicfg)
-      if not apicfg.nobubblewrap then
+      if not apicfg.nobubblewrap and not apicfg.nowrap then
         v = bubblewrap(v)
       end
       util.tset(securefns, fn, v)

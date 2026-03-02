@@ -3,6 +3,13 @@
 #include "lauxlib.h"
 #include "wowless/bubblewrap.h"
 
+static int nobubblewrapper(lua_State *L) {
+  lua_pushvalue(L, lua_upvalueindex(1));
+  lua_insert(L, 1);
+  lua_call(L, lua_gettop(L) - 1, LUA_MULTRET);
+  return lua_gettop(L);
+}
+
 static void load_entry(lua_State *L, const struct wowless_stub_entry *e) {
   if (e->impldata) {
     const struct wowless_impl_data *d = e->impldata;
@@ -24,10 +31,14 @@ static void load_entry(lua_State *L, const struct wowless_stub_entry *e) {
       lua_remove(L, sqls_idx);
     }
     lua_call(L, nargs, 1);
-    if (!d->nobubblewrap) {
+    if (d->nowrap) {
+      if (!lua_iscfunction(L, -1)) {
+        luaL_error(L, "expected C function for nowrap entry %s", e->name);
+      }
+    } else if (d->nobubblewrap) {
+      lua_pushcclosure(L, nobubblewrapper, 1);
+    } else {
       wowless_bubblewrap(L);
-    } else if (!lua_iscfunction(L, -1)) {
-      luaL_error(L, "expected C function for nobubblewrap entry %s", e->name);
     }
   } else {
     lua_pushvalue(L, 1);

@@ -25,4 +25,15 @@ describe('impl', function()
     end
     assert.same(expected, actual)
   end)
+  for k, v in pairs(require('build.data.impl')) do
+    describe(k, function()
+      for vk, vv in pairs(v) do
+        describe(vk, function()
+          it('does not have both nowrap and nobubblewrap set', function()
+            assert.falsy(vv.nowrap and vv.nobubblewrap)
+          end)
+        end)
+      end
+    end)
+  end
 end)

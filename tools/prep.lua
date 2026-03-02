@@ -199,7 +199,7 @@ local implimpls = {
   delegate = function(impl)
     return {
       impl = 'return debug.newcfunction(' .. impl .. ')',
-      nobubblewrap = true,
+      nowrap = true,
     }
   end,
   directsql = function(impl)
@@ -232,19 +232,20 @@ local implimpls = {
     local fmt = 'return require(%q)[%q]'
     return {
       impl = fmt:format(impl.module, impl['function'] or name),
-      nobubblewrap = impl.nobubblewrap,
+      nowrap = impl.nowrap,
     }
   end,
   moduledelegate = function(impl, name)
     return {
       impl = ('return (...)[%q]'):format(impl['function'] or name),
       modules = { impl.name },
+      nobubblewrap = impl.nobubblewrap,
     }
   end,
   stdlib = function(path)
     return {
       impl = 'return ' .. path,
-      nobubblewrap = true,
+      nowrap = true,
     }
   end,
 }
@@ -265,7 +266,7 @@ local function is_impl_eligible(apicfg)
   if not apicfg.inputs and not apicfg.outputs then
     return true
   end
-  return ensureimpl(apicfg.impl).nobubblewrap
+  return ensureimpl(apicfg.impl).nowrap
 end
 
 local function mkapi(apicfg)
@@ -276,12 +277,13 @@ local function mkapi(apicfg)
     local impl = ensureimpl(apicfg.impl)
     return {
       impl = impl.impl,
-      inputs = not impl.nobubblewrap and apicfg.inputs or nil,
+      inputs = not impl.nowrap and apicfg.inputs or nil,
       instride = apicfg.instride,
       mayreturnnothing = apicfg.mayreturnnothing,
       modules = impl.modules,
       nobubblewrap = impl.nobubblewrap,
-      outputs = not impl.nobubblewrap and apicfg.outputs or nil,
+      nowrap = impl.nowrap,
+      outputs = not impl.nowrap and apicfg.outputs or nil,
       outstride = apicfg.outstride,
       sqls = impl.sqls,
       src = impl.src,
@@ -1100,7 +1102,7 @@ if args.coutput then
         sqls_val = 'NULL'
       end
       emit(
-        '%s{%s, NULL, %d, &(struct wowless_impl_data){%s, %d, %s, %s, %s, %d}},',
+        '%s{%s, NULL, %d, &(struct wowless_impl_data){%s, %d, %s, %s, %s, %d, %d}},',
         indent,
         cstring(name),
         entry.secureonly and 1 or 0,
@@ -1109,6 +1111,7 @@ if args.coutput then
         cstring(entry.chunkname),
         mods_val,
         sqls_val,
+        impldata.nowrap and 1 or 0,
         impldata.nobubblewrap and 1 or 0
       )
     else
