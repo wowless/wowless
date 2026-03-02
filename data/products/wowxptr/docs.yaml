@@ -729,6 +729,8 @@ typedefs:
     type: unit
   UnitTokenNamePlate:
     type: unit
+  UnitTokenPvPRestrictedForAddOns:
+    type: unit
   UnitTokenRestrictedForAddOns:
     type: unit
   UnitTokenVariant:

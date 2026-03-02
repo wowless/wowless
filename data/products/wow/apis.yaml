@@ -12477,6 +12477,16 @@ C_GuildInfo.GetGuildTabardInfo:
     nilable: true
     type:
       structure: GuildTabardInfo
+C_GuildInfo.GetInfoText:
+  inputs:
+  outputs:
+  - name: infoText
+    type: string
+C_GuildInfo.GetMOTD:
+  inputs:
+  outputs:
+  - name: motd
+    type: string
 C_GuildInfo.GuildControlGetRankFlags:
   inputs:
   - name: rankOrder
@@ -12603,6 +12613,11 @@ C_GuildInfo.SetGuildRankOrder:
     type: string
   - name: rankOrder
     type: number
+  outputs:
+C_GuildInfo.SetInfoText:
+  inputs:
+  - name: infoText
+    type: string
   outputs:
 C_GuildInfo.SetLeader:
   inputs:
@@ -20486,6 +20501,14 @@ C_PvP.GetActiveMatchWinner:
   outputs:
   - name: winner
     type: number
+C_PvP.GetArenaCrowdControlDuration:
+  inputs:
+  - name: playerToken
+    type: unit
+  outputs:
+  - name: duration
+    type:
+      luaobject: LuaDurationObject
 C_PvP.GetArenaCrowdControlInfo:
   inputs:
   - name: playerToken
@@ -32723,8 +32746,6 @@ GetBattlefieldPortExpiration:
   outputs:
   - name: expiration
     type: number
-GetBattlefieldScore:
-GetBattlefieldStatData:
 GetBattlefieldStatus:
   inputs:
   - name: index
@@ -33512,11 +33533,6 @@ GetGuildInfo:
     type: string
   - name: guildRankIndex
     type: number
-GetGuildInfoText:
-  inputs:
-  outputs:
-  - name: text
-    type: string
 GetGuildLogoInfo:
 GetGuildMemberRecipes:
 GetGuildNewsFilters:
@@ -33578,9 +33594,6 @@ GetGuildRosterInfo:
     type: boolean
 GetGuildRosterLargestAchievementPoints:
 GetGuildRosterLastOnline:
-GetGuildRosterMOTD:
-  outputs:
-  - type: string
 GetGuildRosterSelection:
   inputs:
   outputs:
@@ -36213,8 +36226,6 @@ GuildNewsSort:
   - name: unknown
     type: number
   outputs:
-GuildRosterSetOfficerNote:
-GuildRosterSetPublicNote:
 HandleAtlasMemberCommand:
 hasanysecretvalues:
   inputs:
@@ -37329,6 +37340,13 @@ PlayerIsPVPInactive:
   outputs:
   - name: result
     type: boolean
+PlayerIsSpellTarget:
+  inputs:
+  - name: unit
+    type: unit
+  outputs:
+  - name: result
+    type: boolean
 PlayerIsTimerunning:
   inputs:
   outputs:
@@ -37822,7 +37840,6 @@ SetGuildBankTabItemWithdraw:
 SetGuildBankTabPermissions:
 SetGuildBankText:
 SetGuildBankWithdrawGoldLimit:
-SetGuildInfoText:
 SetGuildMemberRank:
 SetGuildNewsFilter:
 SetGuildRosterSelection:
@@ -39386,15 +39403,6 @@ UnitIsSameServer:
   inputs:
   - name: unitName
     type: string
-  outputs:
-  - name: result
-    type: boolean
-UnitIsSpellTarget:
-  inputs:
-  - name: unit
-    type: unit
-  - name: target
-    type: unit
   outputs:
   - name: result
     type: boolean

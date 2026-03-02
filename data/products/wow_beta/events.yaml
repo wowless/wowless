@@ -228,8 +228,6 @@ AREA_SPIRIT_HEALER_OUT_OF_RANGE:
   payload:
 ARENA_COOLDOWNS_UPDATE:
   payload:
-  - name: unitTarget
-    type: unit
 ARENA_CROWD_CONTROL_SPELL_UPDATE:
   payload:
   - name: unitTarget
@@ -8507,6 +8505,10 @@ UNIT_ABSORB_AMOUNT_CHANGED:
   - name: unitTarget
     type: unit
 UNIT_AREA_CHANGED:
+  payload:
+  - name: unitTarget
+    type: unit
+UNIT_ARENA_COOLDOWNS_UPDATE:
   payload:
   - name: unitTarget
     type: unit

@@ -66,6 +66,8 @@ type:
               type: flag
             SecretWhenEncounterEvent:
               type: flag
+            SecretWhenLossOfControlInfoRestricted:
+              type: flag
             SecretWhenSpellCastRestricted:
               type: flag
             SecretWhenUnitChargedPowerPointsRestricted:
@@ -185,6 +187,8 @@ type:
             RequiresValidTimelineEvent:
               type: flag
             RequiresValidUnitAuraInstance:
+              type: flag
+            RestrictedForMacroChatMessages:
               type: flag
             Returns:
               type:

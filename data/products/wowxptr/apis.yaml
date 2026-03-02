@@ -4337,7 +4337,7 @@ C_CatalogShop.GetProductSortOrder:
     type: number
 C_CatalogShop.GetRefundableDecors:
   inputs:
-  - name: productIDOpt
+  - name: productIdFilterOpt
     nilable: true
     type: number
   outputs:
@@ -4345,6 +4345,8 @@ C_CatalogShop.GetRefundableDecors:
     type:
       arrayof:
         structure: C_CatalogShop.RefundableDecorInfo
+  - name: minTimeRemainingSeconds
+    type: number
 C_CatalogShop.GetSectionIDsForCategory:
   inputs:
   - name: categoryID
@@ -4440,6 +4442,11 @@ C_CatalogShop.RefreshVirtualCurrencyBalance:
   - name: currencyCode
     type: string
   outputs:
+C_CatalogShop.ShouldShowHousingWarning:
+  inputs:
+  outputs:
+  - name: shouldShowHousingWarning
+    type: boolean
 C_CatalogShop.StartHousingVCPurchaseConfirmation:
   inputs:
   - name: productID
@@ -10000,6 +10007,15 @@ C_DelvesUI.GetModelSceneForCompanion:
   outputs:
   - name: modelSceneID
     type: number
+C_DelvesUI.GetPlayerCompanionPDEID:
+  inputs:
+  - name: companionID
+    nilable: true
+    type: number
+  mayreturnnothing: true
+  outputs:
+  - name: pdeID
+    type: number
 C_DelvesUI.GetRoleNodeForCompanion:
   inputs:
   - name: companionID
@@ -10018,6 +10034,12 @@ C_DelvesUI.GetRoleSubtreeForCompanion:
     type: number
   outputs:
   - name: subTreeID
+    type: number
+C_DelvesUI.GetTieredEntrancePDEID:
+  inputs:
+  mayreturnnothing: true
+  outputs:
+  - name: pdeID
     type: number
 C_DelvesUI.GetTraitTreeForCompanion:
   inputs:
@@ -10787,6 +10809,11 @@ C_EncounterWarnings.GetEditModeWarningInfo:
   - name: warningInfo
     type:
       structure: C_EncounterWarnings.EncounterWarningInfo
+C_EncounterWarnings.GetPlayCustomSoundsWhenHidden:
+  inputs:
+  outputs:
+  - name: play
+    type: boolean
 C_EncounterWarnings.GetSoundKitForSeverity:
   inputs:
   - name: severity
@@ -10795,6 +10822,11 @@ C_EncounterWarnings.GetSoundKitForSeverity:
   outputs:
   - name: soundKitID
     type: number
+C_EncounterWarnings.GetWarningsShown:
+  inputs:
+  outputs:
+  - name: shown
+    type: boolean
 C_EncounterWarnings.IsFeatureAvailable:
   inputs:
   outputs:
@@ -10814,6 +10846,16 @@ C_EncounterWarnings.PlaySound:
   outputs:
   - name: soundHandle
     type: number
+C_EncounterWarnings.SetPlayCustomSoundsWhenHidden:
+  inputs:
+  - name: play
+    type: boolean
+  outputs:
+C_EncounterWarnings.SetWarningsShown:
+  inputs:
+  - name: shown
+    type: boolean
+  outputs:
 C_EndOfMatchUI.GetEndOfMatchDetails:
   inputs:
   outputs:
@@ -12435,6 +12477,16 @@ C_GuildInfo.GetGuildTabardInfo:
     nilable: true
     type:
       structure: GuildTabardInfo
+C_GuildInfo.GetInfoText:
+  inputs:
+  outputs:
+  - name: infoText
+    type: string
+C_GuildInfo.GetMOTD:
+  inputs:
+  outputs:
+  - name: motd
+    type: string
 C_GuildInfo.GuildControlGetRankFlags:
   inputs:
   - name: rankOrder
@@ -12561,6 +12613,11 @@ C_GuildInfo.SetGuildRankOrder:
     type: string
   - name: rankOrder
     type: number
+  outputs:
+C_GuildInfo.SetInfoText:
+  inputs:
+  - name: infoText
+    type: string
   outputs:
 C_GuildInfo.SetLeader:
   inputs:
@@ -12989,6 +13046,11 @@ C_Housing.HouseFinderRequestReservationAndPort:
   - name: plotID
     type: number
   outputs:
+C_Housing.IsHousingMarketCartFullRemoveEnabled:
+  inputs:
+  outputs:
+  - name: isHousingMarketCartFullRemoveEnabled
+    type: boolean
 C_Housing.IsHousingMarketEnabled:
   inputs:
   outputs:
@@ -13248,14 +13310,6 @@ C_HousingBasicMode.StartPlacingPreviewDecor:
     nilable: true
     type: number
   outputs:
-C_HousingCatalog.CanDestroyEntry:
-  inputs:
-  - name: entryID
-    type:
-      structure: HousingCatalogEntryID
-  outputs:
-  - name: canDelete
-    type: boolean
 C_HousingCatalog.CreateCatalogSearcher:
   inputs:
   outputs:
@@ -13371,6 +13425,14 @@ C_HousingCatalog.GetDecorTotalOwnedCount:
   - name: totalOwnedCount
     type: number
   - name: exemptDecorCount
+    type: number
+C_HousingCatalog.GetDestroyableInstanceCount:
+  inputs:
+  - name: entryID
+    type:
+      structure: HousingCatalogEntryID
+  outputs:
+  - name: destroyableInstanceCount
     type: number
 C_HousingCatalog.GetFeaturedBundles:
   inputs:
@@ -20439,6 +20501,14 @@ C_PvP.GetActiveMatchWinner:
   outputs:
   - name: winner
     type: number
+C_PvP.GetArenaCrowdControlDuration:
+  inputs:
+  - name: playerToken
+    type: unit
+  outputs:
+  - name: duration
+    type:
+      luaobject: LuaDurationObject
 C_PvP.GetArenaCrowdControlInfo:
   inputs:
   - name: playerToken
@@ -23036,6 +23106,25 @@ C_Secrets.ShouldUnitSpellCastingBeSecret:
     type: unit
   outputs:
   - name: isSpellCastingSecret
+    type: boolean
+C_Secrets.ShouldUnitThreatStateBeSecret:
+  inputs:
+  - name: unit
+    type: unit
+  - name: mobUnit
+    nilable: true
+    type: unit
+  outputs:
+  - name: isUnitThreatSecret
+    type: boolean
+C_Secrets.ShouldUnitThreatValuesBeSecret:
+  inputs:
+  - name: unit
+    type: unit
+  - name: mobUnit
+    type: unit
+  outputs:
+  - name: isUnitThreatSecret
     type: boolean
 C_SecureTransfer.AcceptTrade:
   inputs:
@@ -32657,8 +32746,6 @@ GetBattlefieldPortExpiration:
   outputs:
   - name: expiration
     type: number
-GetBattlefieldScore:
-GetBattlefieldStatData:
 GetBattlefieldStatus:
   inputs:
   - name: index
@@ -33446,11 +33533,6 @@ GetGuildInfo:
     type: string
   - name: guildRankIndex
     type: number
-GetGuildInfoText:
-  inputs:
-  outputs:
-  - name: text
-    type: string
 GetGuildLogoInfo:
 GetGuildMemberRecipes:
 GetGuildNewsFilters:
@@ -33512,9 +33594,6 @@ GetGuildRosterInfo:
     type: boolean
 GetGuildRosterLargestAchievementPoints:
 GetGuildRosterLastOnline:
-GetGuildRosterMOTD:
-  outputs:
-  - type: string
 GetGuildRosterSelection:
   inputs:
   outputs:
@@ -36147,8 +36226,6 @@ GuildNewsSort:
   - name: unknown
     type: number
   outputs:
-GuildRosterSetOfficerNote:
-GuildRosterSetPublicNote:
 HandleAtlasMemberCommand:
 hasanysecretvalues:
   inputs:
@@ -37263,6 +37340,13 @@ PlayerIsPVPInactive:
   outputs:
   - name: result
     type: boolean
+PlayerIsSpellTarget:
+  inputs:
+  - name: unit
+    type: unit
+  outputs:
+  - name: result
+    type: boolean
 PlayerIsTimerunning:
   inputs:
   outputs:
@@ -37756,7 +37840,6 @@ SetGuildBankTabItemWithdraw:
 SetGuildBankTabPermissions:
 SetGuildBankText:
 SetGuildBankWithdrawGoldLimit:
-SetGuildInfoText:
 SetGuildMemberRank:
 SetGuildNewsFilter:
 SetGuildRosterSelection:
@@ -38501,6 +38584,8 @@ UnitCastingInfo:
     type: number
   - name: castBarID
     nilable: true
+    type: number
+  - name: delayTimeMs
     type: number
 UnitChannelDuration:
   inputs:
@@ -39318,15 +39403,6 @@ UnitIsSameServer:
   inputs:
   - name: unitName
     type: string
-  outputs:
-  - name: result
-    type: boolean
-UnitIsSpellTarget:
-  inputs:
-  - name: unit
-    type: unit
-  - name: target
-    type: unit
   outputs:
   - name: result
     type: boolean

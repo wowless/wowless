@@ -1183,6 +1183,8 @@ C_CatalogShop.CatalogShopBundleChildInfo:
       type: number
     displayOrder:
       type: number
+    quantityInBundle:
+      type: number
 C_CatalogShop.CatalogShopCategoryInfo:
   fields:
     displayName:
@@ -1301,6 +1303,8 @@ C_CatalogShop.CatalogShopProductInfo:
     consumableQuantity:
       nilable: true
       type: number
+    containsHousingItem:
+      type: boolean
     description:
       type: string
     discountPercentage:
@@ -4002,6 +4006,8 @@ C_HousingCatalog.HousingCatalogEntryInfo:
         arrayof: string
     dataTagsByID:
       type: table
+    destroyableInstanceCount:
+      type: number
     dyeIDs:
       type:
         arrayof: number
@@ -4344,6 +4350,9 @@ C_ItemUpgrade.ItemUpgradeLevelInfo:
       type:
         arrayof:
           structure: C_ItemUpgrade.ItemUpgradeStat
+    moneyCost:
+      nilable: true
+      type: number
     upgradeLevel:
       type: number
 C_ItemUpgrade.ItemUpgradeSeasonalCostType:
@@ -4901,6 +4910,8 @@ C_MajorFactions.MajorFactionData:
           structure: C_MajorFactions.RenownHighlightInfo
     isUnlocked:
       type: boolean
+    maxLevel:
+      type: number
     name:
       type: string
     playerCompanionID:
@@ -11184,7 +11195,7 @@ EncounterEventSoundInfo:
       default: g_defaultSI3UISoundSubTypeForLua
       type: string
     file:
-      type: number
+      type: FileAsset
     volume:
       default: 1
       type: number
