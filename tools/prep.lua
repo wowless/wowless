@@ -263,7 +263,9 @@ local function is_impl_eligible(apicfg)
   if not apicfg.impl then
     return false
   end
-  if not apicfg.inputs and not apicfg.outputs then
+  local has_inputs = apicfg.inputs and #apicfg.inputs > 0
+  local has_outputs = apicfg.outputs and #apicfg.outputs > 0
+  if not has_inputs and not has_outputs then
     return true
   end
   return ensureimpl(apicfg.impl).nowrap
@@ -1046,8 +1048,20 @@ if args.coutput then
     local impldata = entry.impldata
     if not impldata.nowrap then
       local fn = impldata.nobubblewrap and 'wowless_impl_stub_nobubblewrap' or 'wowless_impl_stub'
+      local v = entry.cfg
+      local check_inputs = v.inputs ~= nil and (v.instride or 0) == 0
+      local check_outputs = v.outputs ~= nil and #v.outputs == 0
       emit('static int implstub_%s(lua_State *L) {', safename(entry.name))
-      emit('  return %s(L);', fn)
+      if check_inputs then
+        emit('  wowless_stubcheckextraargs(L, 0, %s);', cstring(entry.name))
+      end
+      if check_outputs then
+        emit('  int ret = %s(L);', fn)
+        emit('  wowless_stubchecknreturns(L, ret, %d, %s);', #v.outputs, cstring(entry.name))
+        emit('  return ret;')
+      else
+        emit('  return %s(L);', fn)
+      end
       emit('}')
       emit('')
     end
