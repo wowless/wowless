@@ -167,6 +167,7 @@ typecheck:
     env:
     luaobjects:
     uiobjects:
+    uiobjecttypes:
     units:
 uiobjectloader:
   deps:

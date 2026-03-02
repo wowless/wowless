@@ -187,6 +187,7 @@ describe('typecheck', function()
     },
     nil, -- luaobjects
     nil, -- uiobjects
+    nil, -- uiobjecttypes
     units, -- units
   }))
   for name, test in pairs(tests) do

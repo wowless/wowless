@@ -1,4 +1,5 @@
-return function(addons, datalua, env, luaobjects, uiobjects, units)
+return function(addons, datalua, env, luaobjects, uiobjects, uiobjecttypes, units)
+  local IsObjectType = uiobjecttypes and uiobjecttypes.IsObjectType -- for tests, sigh
   local enumrev = {}
   for k, v in pairs(datalua.globals.Enum) do
     local t = {}
@@ -37,7 +38,7 @@ return function(addons, datalua, env, luaobjects, uiobjects, units)
   local function resolveobj(ty, value, isout)
     if isout then
       if value and value.luarep then
-        return value.luarep, not value:IsObjectType(ty)
+        return value.luarep, not IsObjectType(value, ty)
       else
         return nil, true
       end
@@ -49,7 +50,7 @@ return function(addons, datalua, env, luaobjects, uiobjects, units)
         return nil, true
       end
       local ud = uiobjects.UserData(value)
-      return ud, not ud or not ud:IsObjectType(ty)
+      return ud, not ud or not IsObjectType(ud, ty)
     end
   end
 
