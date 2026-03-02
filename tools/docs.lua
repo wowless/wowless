@@ -97,7 +97,7 @@ do
             }))
           end
           if not success then
-            print(('error loading %s: %s'):format(f, err))
+            error(('error loading %s: %s'):format(f, err), 0)
           end
         end
       end
