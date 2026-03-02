@@ -46,6 +46,21 @@ static void load_entries(lua_State *L, const struct wowless_stub_entry *e) {
   }
 }
 
+void wowless_stub_log_extra_args(lua_State *L, const char *fname) {
+  lua_Debug ar;
+  const char *src = "?";
+  int line = 0;
+  if (lua_getstack(L, 1, &ar) && lua_getinfo(L, "Sl", &ar)) {
+    src = ar.source + (ar.source[0] == '@' || ar.source[0] == '=');
+    line = ar.currentline;
+  }
+  lua_getfield(L, lua_upvalueindex(1), "log");
+  lua_pushinteger(L, 1);
+  lua_pushfstring(L, "warning: too many arguments passed to %s at %s:%d", fname,
+                  src, line);
+  lua_call(L, 2, 0);
+}
+
 int wowless_load_stubs(lua_State *L) {
   const struct wowless_stubs_spec *spec =
       lua_touserdata(L, lua_upvalueindex(1));

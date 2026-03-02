@@ -1,4 +1,4 @@
-return function(api, luaobjects, uiobjects, uiobjecttypes)
+return function(api, log, luaobjects, uiobjects, uiobjecttypes)
   local stringenums = require('runtime.stringenums')
 
   local function CheckStringEnum(value, enumname)
@@ -30,5 +30,6 @@ return function(api, luaobjects, uiobjects, uiobjecttypes)
     CreateUiObject = CreateUiObject,
     IsLuaObject = IsLuaObject,
     IsUiObject = IsUiObject,
+    log = log,
   }
 end

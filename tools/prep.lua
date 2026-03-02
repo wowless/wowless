@@ -993,6 +993,9 @@ if args.coutput then
       end
       emit('  }')
     end
+    if v.inputs ~= nil and instride == 0 then
+      emit('  wowless_stubcheckextraargs(L, %d, %s);', nsins, cstring(k))
+    end
     local allouts = not v.stubnothing and v.outputs or {}
     local outstride = v.outstride or 0
     local nonstride = #allouts - outstride

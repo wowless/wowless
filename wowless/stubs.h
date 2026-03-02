@@ -32,5 +32,6 @@ struct wowless_stubs_spec {
 };
 
 int wowless_load_stubs(lua_State *L);
+void wowless_stub_log_extra_args(lua_State *L, const char *fname);
 
 #endif /* WOWLESS_STUBS_H */

@@ -217,6 +217,13 @@ static inline void wowless_stubcreateuiobject(lua_State *L,
   lua_call(L, 1, 1);
 }
 
+static inline void wowless_stubcheckextraargs(lua_State *L, int nsins,
+                                              const char *fname) {
+  if (lua_gettop(L) > nsins) {
+    wowless_stub_log_extra_args(L, fname);
+  }
+}
+
 static inline void wowless_applymixin(lua_State *L, const char *mixin_name) {
   int tbl = lua_gettop(L);
   lua_getglobal(L, mixin_name);
