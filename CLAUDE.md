@@ -242,6 +242,24 @@ Key files:
 - To add a C-provided module to a `lua2c()` target, use `modulename=c` in
   the argument list and add the C source with `target_sources`.
 
+### YAML Parser (`wowapi/cyaml.c`)
+
+The project uses a custom C YAML parser with a few nonstandard behaviors to
+be aware of when reading or writing data files:
+
+- **Scalars**: plain `true`/`false` → Lua boolean; numeric strings → Lua
+  number; everything else (including quoted strings) → Lua string.
+- **Null values**: a key with no value (`key:`) does **not** produce Lua `nil`.
+  It hits the parser's default case and produces an empty table `{}`. This is
+  intentional and used as a sentinel to distinguish "field absent" (Lua `nil`
+  from table lookup) from "field present with no value" (empty table `{}`).
+  For example, `data/types.yaml` uses `c_output:` (no value) to mark types
+  that output nil from C stubs, and `default:` (no value) to mark types whose
+  default output is an empty table.
+- **Empty tables**: when round-tripping through `pprint`, an empty Lua table
+  is emitted as a bare empty scalar (zero-length plain scalar), which parses
+  back as an empty table.
+
 ### Data Format Conventions
 
 - Use sets (tables with `key = true`) for collections like method names,
