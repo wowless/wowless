@@ -345,12 +345,13 @@ add_lua_executable(gentypes ${CMAKE_CURRENT_SOURCE_DIR}/tools/gentypes.lua
                    penlight wowlessyaml)
 add_custom_command(
   COMMENT "Generating wowless/typecheck.h"
-  OUTPUT ${CMAKE_CURRENT_SOURCE_DIR}/wowless/typecheck.h
-  COMMAND gentypes
+  OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/include/wowless/typecheck.h
+  COMMAND gentypes ${CMAKE_CURRENT_BINARY_DIR}/include/wowless/typecheck.h
   WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
   DEPENDS gentypes ${CMAKE_CURRENT_SOURCE_DIR}/data/types.yaml)
-add_custom_target(stamp_typecheck_h
-                  DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/wowless/typecheck.h)
+add_custom_target(
+  stamp_typecheck_h
+  DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/include/wowless/typecheck.h)
 
 lua2c(toolsutil tools.util=${CMAKE_CURRENT_SOURCE_DIR}/tools/util.lua)
 
@@ -507,6 +508,8 @@ foreach(product ${products})
   target_sources(
     datalua_${product}
     PRIVATE ${CMAKE_CURRENT_BINARY_DIR}/generated/${product}_stubs.c)
+  target_include_directories(datalua_${product}
+                             PRIVATE ${CMAKE_CURRENT_BINARY_DIR}/include)
   add_dependencies(datalua_${product} datalua_${product}_lua stamp_typecheck_h)
   list(APPEND dataluas datalua_${product})
 endforeach()

@@ -287,6 +287,8 @@ emit('}')
 nl()
 emit('#endif /* WOWLESS_TYPECHECK_H */')
 
-local outpath = 'wowless/typecheck.h'
-assert(require('pl.dir').makepath(require('pl.path').dirname(outpath)))
+local outpath = assert(arg and arg[1], 'usage: gentypes <output-path>')
+local plpath = require('pl.path')
+local dirname = plpath.dirname(outpath)
+assert(dirname == '' or plpath.isdir(dirname) or require('pl.dir').makepath(dirname))
 assert(require('pl.file').write(outpath, table.concat(lines, '\n') .. '\n'))
