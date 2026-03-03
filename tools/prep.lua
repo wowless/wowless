@@ -44,14 +44,13 @@ end
 local specDefault = (function()
   local defaultOutputs = {}
   for name, tdef in pairs(types) do
-    if tdef.lua_default ~= nil then
-      defaultOutputs[name] = valstr(tdef.lua_default)
-    elseif tdef.c_output and tdef.c_output.type == 'nil' then
+    if tdef.default ~= nil then
+      defaultOutputs[name] = valstr(tdef.default)
+    elseif tdef.c_output and not tdef.c_output.type then
       defaultOutputs[name] = 'nil'
     end
   end
   defaultOutputs['function'] = 'function() end'
-  defaultOutputs['table'] = '{}'
   local structureDefaults = {}
   local specDefault
   local function valstruct(name)
@@ -668,21 +667,20 @@ if args.coutput then
     end,
   }
   for name, tdef in pairs(types) do
-    local cout = tdef.c_output
-    if cout and cout.type ~= 'parameterized' then
-      if cout.type == 'nil' then
-        coutdefaults[name] = function()
-          return nil
-        end
-      elseif cout.type == 'table' then
+    if tdef.default ~= nil then
+      local val = tdef.default
+      if type(val) == 'table' then
         coutdefaults[name] = function()
           return {}
         end
       else
-        local val = cout.value
         coutdefaults[name] = function()
           return val
         end
+      end
+    elseif tdef.c_output and not tdef.c_output.type then
+      coutdefaults[name] = function()
+        return nil
       end
     end
   end
