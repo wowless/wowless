@@ -1,8 +1,17 @@
+/* Generated from data/types.yaml by tools/gentypes.lua. */
 #ifndef WOWLESS_TYPECHECK_H
 #define WOWLESS_TYPECHECK_H
 
 #include "lauxlib.h"
 #include "lua.h"
+
+static inline void wowless_stubcheckboolean(lua_State *L, int idx) {
+  if (lua_isnoneornil(L, idx)) {
+    luaL_typerror(L, idx, lua_typename(L, LUA_TBOOLEAN));
+  }
+}
+
+static inline void wowless_stubchecknilableboolean(lua_State *L, int idx) {}
 
 static inline void wowless_stubcheckenum(lua_State *L, int idx) {
   if (lua_type(L, idx) != LUA_TNUMBER) {
@@ -18,6 +27,23 @@ static inline void wowless_stubchecknilableenum(lua_State *L, int idx) {
       return;
     default:
       luaL_typerror(L, idx, lua_typename(L, LUA_TNUMBER));
+  }
+}
+
+static inline void wowless_stubcheckfunction(lua_State *L, int idx) {
+  if (lua_type(L, idx) != LUA_TFUNCTION) {
+    luaL_typerror(L, idx, lua_typename(L, LUA_TFUNCTION));
+  }
+}
+
+static inline void wowless_stubchecknilablefunction(lua_State *L, int idx) {
+  switch (lua_type(L, idx)) {
+    case LUA_TFUNCTION:
+    case LUA_TNIL:
+    case LUA_TNONE:
+      return;
+    default:
+      luaL_typerror(L, idx, lua_typename(L, LUA_TFUNCTION));
   }
 }
 
@@ -57,48 +83,6 @@ static inline void wowless_stubchecknilablestring(lua_State *L, int idx) {
   }
 }
 
-static inline void wowless_stubcheckboolean(lua_State *L, int idx) {
-  if (lua_isnoneornil(L, idx)) {
-    luaL_typerror(L, idx, lua_typename(L, LUA_TBOOLEAN));
-  }
-}
-
-static inline void wowless_stubchecknilableboolean(lua_State *L, int idx) {}
-
-static inline void wowless_stubcheckfunction(lua_State *L, int idx) {
-  if (lua_type(L, idx) != LUA_TFUNCTION) {
-    luaL_typerror(L, idx, lua_typename(L, LUA_TFUNCTION));
-  }
-}
-
-static inline void wowless_stubchecknilablefunction(lua_State *L, int idx) {
-  switch (lua_type(L, idx)) {
-    case LUA_TFUNCTION:
-    case LUA_TNIL:
-    case LUA_TNONE:
-      return;
-    default:
-      luaL_typerror(L, idx, lua_typename(L, LUA_TFUNCTION));
-  }
-}
-
-static inline void wowless_stubcheckunit(lua_State *L, int idx) {
-  if (lua_type(L, idx) != LUA_TSTRING) {
-    luaL_typerror(L, idx, lua_typename(L, LUA_TSTRING));
-  }
-}
-
-static inline void wowless_stubchecknilableunit(lua_State *L, int idx) {
-  switch (lua_type(L, idx)) {
-    case LUA_TNONE:
-    case LUA_TNIL:
-    case LUA_TSTRING:
-      return;
-    default:
-      luaL_typerror(L, idx, lua_typename(L, LUA_TSTRING));
-  }
-}
-
 static inline void wowless_stubchecktable(lua_State *L, int idx) {
   if (lua_type(L, idx) != LUA_TTABLE) {
     luaL_typerror(L, idx, lua_typename(L, LUA_TTABLE));
@@ -115,6 +99,31 @@ static inline void wowless_stubchecknilabletable(lua_State *L, int idx) {
       luaL_typerror(L, idx, lua_typename(L, LUA_TTABLE));
   }
 }
+
+static inline void wowless_stubcheckunit(lua_State *L, int idx) {
+  if (lua_type(L, idx) != LUA_TSTRING) {
+    luaL_typerror(L, idx, lua_typename(L, LUA_TSTRING));
+  }
+}
+
+static inline void wowless_stubchecknilableunit(lua_State *L, int idx) {
+  switch (lua_type(L, idx)) {
+    case LUA_TSTRING:
+    case LUA_TNIL:
+    case LUA_TNONE:
+      return;
+    default:
+      luaL_typerror(L, idx, lua_typename(L, LUA_TSTRING));
+  }
+}
+
+static inline void wowless_stubcheckunknown(lua_State *L, int idx) {
+  if (lua_isnoneornil(L, idx)) {
+    luaL_argerror(L, idx, "value expected");
+  }
+}
+
+static inline void wowless_stubchecknilableunknown(lua_State *L, int idx) {}
 
 static inline void wowless_stubcheckluaobject(lua_State *L, int idx,
                                               const char *typename,
@@ -169,14 +178,6 @@ static inline void wowless_stubchecknilableuiobject(lua_State *L, int idx,
     wowless_stubcheckuiobject(L, idx, typename, typenamelen);
   }
 }
-
-static inline void wowless_stubcheckunknown(lua_State *L, int idx) {
-  if (lua_isnoneornil(L, idx)) {
-    luaL_argerror(L, idx, "value expected");
-  }
-}
-
-static inline void wowless_stubchecknilableunknown(lua_State *L, int idx) {}
 
 static inline void wowless_stubcheckstringenum(lua_State *L, int idx,
                                                const char *enumname,

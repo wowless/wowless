@@ -1,0 +1,147 @@
+any:
+  implicitly_nilable: false
+  lua_kind: passthrough
+arrayof:
+  c_input:
+    kind: per_type
+  c_output:
+    type: parameterized
+  implicitly_nilable: false
+  lua_kind: parameterized
+boolean:
+  c_input:
+    c_error_type: boolean
+    kind: noneornil_error
+  c_nilable:
+    kind: noop
+  c_output:
+    type: boolean
+    value: false
+  implicitly_nilable: false
+  lua_default: false
+  lua_kind: coerce_boolean
+enum:
+  c_input:
+    c_lua_type: number
+    kind: exact
+  c_output:
+    type: parameterized
+  implicitly_nilable: false
+  lua_kind: parameterized
+FileAsset:
+  c_input:
+    c_alias: string
+    kind: alias
+  c_output:
+    type: number
+    value: 1
+  implicitly_nilable: false
+  lua_default: 1
+  lua_kind: fileasset
+function:
+  c_input:
+    c_lua_type: function
+    kind: exact
+  implicitly_nilable: false
+  lua_kind: exact
+gender:
+  implicitly_nilable: true
+  lua_kind: custom
+hlist:
+  implicitly_nilable: false
+luaobject:
+  c_input:
+    kind: upvalue_luaobject
+  c_output:
+    type: parameterized
+  implicitly_nilable: false
+  lua_kind: parameterized
+nil:
+  c_output:
+    type: nil
+  implicitly_nilable: true
+number:
+  c_input:
+    kind: checknumber
+  c_nilable:
+    kind: also_string
+  c_output:
+    type: number
+    value: 1
+  implicitly_nilable: false
+  lua_default: 1
+  lua_kind: coerce_number
+oneornil:
+  c_output:
+    type: nil
+  implicitly_nilable: true
+  lua_kind: custom
+string:
+  c_input:
+    kind: isstring
+  c_output:
+    type: string
+    value: ''
+  implicitly_nilable: false
+  lua_default: ''
+  lua_kind: coerce_string
+stringenum:
+  c_input:
+    kind: upvalue_stringenum
+  c_output:
+    type: parameterized
+  implicitly_nilable: false
+  lua_kind: parameterized
+structure:
+  c_input:
+    kind: per_type
+  c_output:
+    type: parameterized
+  implicitly_nilable: false
+  lua_kind: parameterized
+table:
+  c_input:
+    c_lua_type: table
+    kind: exact
+  c_output:
+    type: table
+  implicitly_nilable: false
+  lua_kind: exact
+TextureAsset:
+  implicitly_nilable: false
+tostring:
+  implicitly_nilable: false
+  lua_kind: custom
+uiAddon:
+  c_input:
+    c_alias: string
+    kind: alias
+  implicitly_nilable: false
+  lua_kind: custom
+uiobject:
+  c_input:
+    kind: upvalue_uiobject
+  c_output:
+    type: parameterized
+  implicitly_nilable: false
+  lua_kind: parameterized
+unit:
+  c_input:
+    c_lua_type: string
+    kind: exact
+  implicitly_nilable: false
+  lua_default: player
+  lua_kind: custom
+unknown:
+  c_input:
+    kind: nonnilvalue_error
+  c_nilable:
+    kind: noop
+  c_output:
+    type: nil
+  implicitly_nilable: false
+  lua_kind: passthrough
+userdata:
+  implicitly_nilable: false
+  lua_kind: exact
+  lua_type: userdata

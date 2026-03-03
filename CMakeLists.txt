@@ -339,6 +339,18 @@ yaml2lua(gametypes)
 yaml2lua(modules)
 yaml2lua(products)
 yaml2lua(stringenums)
+yaml2lua(types)
+
+add_lua_executable(gentypes ${CMAKE_CURRENT_SOURCE_DIR}/tools/gentypes.lua
+                   penlight wowlessyaml)
+add_custom_command(
+  COMMENT "Generating wowless/typecheck.h"
+  OUTPUT ${CMAKE_CURRENT_SOURCE_DIR}/wowless/typecheck.h
+  COMMAND gentypes
+  WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+  DEPENDS gentypes ${CMAKE_CURRENT_SOURCE_DIR}/data/types.yaml)
+add_custom_target(stamp_typecheck_h
+                  DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/wowless/typecheck.h)
 
 lua2c(toolsutil tools.util=${CMAKE_CURRENT_SOURCE_DIR}/tools/util.lua)
 
@@ -495,7 +507,7 @@ foreach(product ${products})
   target_sources(
     datalua_${product}
     PRIVATE ${CMAKE_CURRENT_BINARY_DIR}/generated/${product}_stubs.c)
-  add_dependencies(datalua_${product} datalua_${product}_lua)
+  add_dependencies(datalua_${product} datalua_${product}_lua stamp_typecheck_h)
   list(APPEND dataluas datalua_${product})
 endforeach()
 
@@ -777,6 +789,7 @@ lua2c(
   runtime.modules=runtime/modules.lua
   runtime.platform=runtime/platform.lua
   runtime.stringenums=runtime/stringenums.lua
+  runtime.types=runtime/types.lua
   wowless.bubblewrap=c
   wowless.env=${CMAKE_CURRENT_SOURCE_DIR}/wowless/env.lua
   wowless.ext=c
