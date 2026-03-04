@@ -110,20 +110,22 @@ end
 local used = {}
 local products = require('build.data.products')
 
-for _, name in ipairs(wdata.datafiles.global) do
-  trackType(wdata.schemas[name].type, wdata[name], name, used)
+trackType(wdata.schemas.datafiles.type, wdata.datafiles, 'datafiles', used)
+
+for name, dtype in pairs(wdata.datafiles) do
+  if dtype == 'global' then
+    trackType(wdata.schemas[name].type, wdata[name], name, used)
+  elseif dtype == 'product' then
+    for _, p in ipairs(products) do
+      trackType(wdata.schemas[name].type, wdata[name][p], name, used)
+    end
+  end
 end
 
 -- Schema files themselves are data validated against the 'schema' schema
 local schemaSchemaType = wdata.schemas.schema.type
 for _, s in pairs(wdata.schemas) do
   trackType(schemaSchemaType, s, 'schema', used)
-end
-
-for _, p in ipairs(products) do
-  for _, name in ipairs(wdata.datafiles.product) do
-    trackType(wdata.schemas[name].type, wdata[name][p], name, used)
-  end
 end
 
 describe('schema coverage', function()

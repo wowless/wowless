@@ -49,11 +49,12 @@ local fns = {
   end,
   schemas = loaddir('schemas', 'yaml'),
 }
-for _, name in ipairs(datafiles.global) do
-  fns[name] = global(name)
-end
-for _, name in ipairs(datafiles.product) do
-  fns[name] = perproduct(name)
+for name, dtype in pairs(datafiles) do
+  if dtype == 'global' then
+    fns[name] = global(name)
+  elseif dtype == 'product' then
+    fns[name] = perproduct(name)
+  end
 end
 
 return setmetatable({}, {
