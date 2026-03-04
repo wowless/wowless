@@ -718,7 +718,7 @@ lua2c(
   wowapi.schema=${CMAKE_CURRENT_SOURCE_DIR}/wowapi/schema.lua)
 
 lua2c(toolstedit tools.tedit=${CMAKE_CURRENT_SOURCE_DIR}/tools/tedit.lua)
-lua2c(toolsdocenv tools.docenv=${CMAKE_CURRENT_SOURCE_DIR}/tools/docenv.lua wowapischema wowlessyaml)
+lua2c(toolsdocenv tools.docenv=${CMAKE_CURRENT_SOURCE_DIR}/tools/docenv.lua)
 
 add_lua_executable(
   docs
