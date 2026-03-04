@@ -110,19 +110,7 @@ end
 local used = {}
 local products = require('build.data.products')
 
-local globalFiles = {
-  'families',
-  'gametypes',
-  'impl',
-  'modules',
-  'products',
-  'scripttypes',
-  'sql',
-  'stringenums',
-  'test',
-  'uiobjectimpl',
-}
-for _, name in ipairs(globalFiles) do
+for _, name in ipairs(wdata.datafiles.global) do
   trackType(wdata.schemas[name].type, wdata[name], name, used)
 end
 
@@ -132,21 +120,8 @@ for _, s in pairs(wdata.schemas) do
   trackType(schemaSchemaType, s, 'schema', used)
 end
 
-local productFiles = {
-  'apis',
-  'build',
-  'config',
-  'cvars',
-  'docs',
-  'events',
-  'globals',
-  'luaobjects',
-  'structures',
-  'uiobjects',
-  'xml',
-}
 for _, p in ipairs(products) do
-  for _, name in ipairs(productFiles) do
+  for _, name in ipairs(wdata.datafiles.product) do
     trackType(wdata.schemas[name].type, wdata[name][p], name, used)
   end
 end

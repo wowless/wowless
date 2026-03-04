@@ -36,11 +36,10 @@ local function perproduct(f)
   end
 end
 
+local datafiles = extLoaders.yaml('data/datafiles.yaml')
+
 local fns = {
-  apis = perproduct('apis'),
-  build = perproduct('build'),
-  config = perproduct('config'),
-  cvars = perproduct('cvars'),
+  datafiles = global('datafiles'),
   enums = function()
     local t = {}
     for _, d in ipairs(require('pl.dir').getdirectories('data/products')) do
@@ -48,25 +47,14 @@ local fns = {
     end
     return t
   end,
-  docs = perproduct('docs'),
-  events = perproduct('events'),
-  families = global('families'),
-  gametypes = global('gametypes'),
-  globals = perproduct('globals'),
-  impl = global('impl'),
-  luaobjects = perproduct('luaobjects'),
-  modules = global('modules'),
-  products = global('products'),
   schemas = loaddir('schemas', 'yaml'),
-  scripttypes = global('scripttypes'),
-  sql = global('sql'),
-  stringenums = global('stringenums'),
-  structures = perproduct('structures'),
-  test = global('test'),
-  uiobjectimpl = global('uiobjectimpl'),
-  uiobjects = perproduct('uiobjects'),
-  xml = perproduct('xml'),
 }
+for _, name in ipairs(datafiles.global) do
+  fns[name] = global(name)
+end
+for _, name in ipairs(datafiles.product) do
+  fns[name] = perproduct(name)
+end
 
 return setmetatable({}, {
   __index = function(t, k)

@@ -334,6 +334,7 @@ function(yaml2lua basename)
     DEPENDS yaml2lua ${input})
 endfunction()
 
+yaml2lua(datafiles)
 yaml2lua(families)
 yaml2lua(gametypes)
 yaml2lua(modules)
@@ -673,6 +674,7 @@ list(
   build
   config
   cvars
+  datafiles
   docs
   doctable
   events
@@ -703,6 +705,7 @@ endforeach()
 
 lua2c(
   wowapischema
+  build.data.datafiles=runtime/datafiles.lua
   build.data.families=runtime/families.lua
   build.data.gametypes=runtime/gametypes.lua
   build.data.impl=runtime/impl.lua

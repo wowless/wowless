@@ -1,0 +1,23 @@
+global:
+- families
+- gametypes
+- impl
+- modules
+- products
+- scripttypes
+- sql
+- stringenums
+- test
+- uiobjectimpl
+product:
+- apis
+- build
+- config
+- cvars
+- docs
+- events
+- globals
+- luaobjects
+- structures
+- uiobjects
+- xml

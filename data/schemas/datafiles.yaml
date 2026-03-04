@@ -1,0 +1,11 @@
+name: datafiles
+type:
+  record:
+    global:
+      required: true
+      type:
+        sequenceof: string
+    product:
+      required: true
+      type:
+        sequenceof: string
