@@ -12,3 +12,5 @@ type:
           type:
             ref:
               schema: family
+        uncovered_test_field:
+          type: string
