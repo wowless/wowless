@@ -706,6 +706,7 @@ list(
   structures
   test
   type
+  types
   uiobjectimpl
   uiobjects
   xml)
