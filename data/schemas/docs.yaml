@@ -17,20 +17,6 @@ type:
                   ref:
                     schema: api
                 value: any
-          enums:
-            type:
-              mapof:
-                key:
-                  ref:
-                    schema: enum
-                value: any
-          events:
-            type:
-              mapof:
-                key:
-                  ref:
-                    schema: event
-                value: any
           extra_apis:
             type:
               setof:

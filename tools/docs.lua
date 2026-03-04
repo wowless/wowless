@@ -509,12 +509,11 @@ local function rewriteUIObjects(uiobjects)
         instride = stride(mv.Arguments),
         manualinputs = mm and mm.manualinputs,
         mayreturnnothing = mv.MayReturnNothing,
-        override = mm and mm.override,
         outputs = outsig(mv, nil, mm),
         outstride = stride(mv.Returns),
         stuboutstrides = mm and mm.stuboutstrides,
       }
-      if not inhm[kk][mk] or mmv.override then
+      if not inhm[kk][mk] then
         u.methods[mk] = takelieor(mmv, lies, kk, mk)
       end
     end

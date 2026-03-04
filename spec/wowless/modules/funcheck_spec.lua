@@ -48,7 +48,7 @@ describe('funcheck', function()
           inputs = {
             { name = 'o1', type = 'string' },
             { name = 'o2', type = 'table' },
-            { name = 'o3', type = 'userdata' },
+            { name = 'o3', type = 'unknown' },
             { name = 'o4', type = 'number' },
           },
           instride = 3,
@@ -86,7 +86,7 @@ describe('funcheck', function()
           outputs = {
             { name = 'o1', type = 'string' },
             { name = 'o2', type = 'table' },
-            { name = 'o3', type = 'userdata' },
+            { name = 'o3', type = 'unknown' },
             { name = 'o4', type = 'number' },
           },
           outstride = 3,

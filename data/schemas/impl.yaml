@@ -24,8 +24,6 @@ type:
                     schema: sql
         luadelegate:
           record:
-            function:
-              type: string
             module:
               required: true
               type: string

@@ -116,9 +116,6 @@ return function(addons, datalua, env, luaobjects, uiobjects, uiobjecttypes, unit
     unknown = function(value)
       return value
     end,
-    userdata = function(value)
-      return luatypecheck('userdata', value)
-    end,
   }
 
   local function plainmismatch(typename, value)

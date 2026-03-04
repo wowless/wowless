@@ -38,6 +38,8 @@ end
 
 local fns = {
   apis = perproduct('apis'),
+  build = perproduct('build'),
+  config = perproduct('config'),
   cvars = perproduct('cvars'),
   enums = function()
     local t = {}
@@ -46,9 +48,11 @@ local fns = {
     end
     return t
   end,
+  docs = perproduct('docs'),
   events = perproduct('events'),
   families = global('families'),
   gametypes = global('gametypes'),
+  globals = perproduct('globals'),
   impl = global('impl'),
   luaobjects = perproduct('luaobjects'),
   modules = global('modules'),

@@ -46,9 +46,7 @@ type:
     platform:
       type:
         taggedunion:
-          linux: tag
           mac: tag
-          windows: tag
     secureonly:
       type: flag
     stubnothing:

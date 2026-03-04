@@ -23,7 +23,6 @@ type:
                       taggedunion:
                         early: tag
                         late: tag
-                        middle: tag
                   required:
                     type: flag
                   type:
@@ -79,6 +78,5 @@ type:
           type:
             taggedunion:
               late: tag
-              middle: tag
         virtual:
           type: flag

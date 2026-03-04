@@ -91,11 +91,16 @@ local function trackType(st, value, path, used)
   -- ref and literal are leaves
 end
 
+-- Schemas for external data formats (not our YAML data files) are excluded.
+local externalSchemas = {
+  doctable = true,
+}
+
 local known = {}
 do
   local visited = {}
   for name in pairs(wdata.schemas) do
-    if not visited[name] then
+    if not visited[name] and not externalSchemas[name] then
       visited[name] = true
       collectType(wdata.schemas[name].type, name, known, visited)
     end
