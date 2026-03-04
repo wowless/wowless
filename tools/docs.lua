@@ -7,6 +7,7 @@ end)()
 local lfs = require('lfs')
 local writeifchanged = require('tools.util').writeifchanged
 local tedit = require('tools.tedit')
+local runDocChunk = require('tools.docenv').runDocChunk
 local parseYaml = require('wowapi.yaml').parseFile
 local pprintYaml = require('wowapi.yaml').pprint
 local product = args.product
@@ -59,46 +60,15 @@ end
 
 local docs = {}
 do
-  local mixmt = {
-    __index = function()
-      return function() end
-    end,
-  }
-  local nummt = {
-    __index = function()
-      return 42
-    end,
-  }
-  local nsmt = {
-    __index = function()
-      return setmetatable({}, nummt)
-    end,
-  }
-  local schema = require('wowapi.yaml').parseFile('data/schemas/doctable.yaml').type
   local function processDocDir(docdir)
     if lfs.attributes(docdir) then
       for f in lfs.dir(docdir) do
         if f:sub(-4) == '.lua' then
-          local fn, success, err
-          fn, err = loadfile(docdir .. '/' .. f)
-          if fn then
-            success, err = pcall(setfenv(fn, {
-              APIDocumentation = {
-                AddDocumentationTable = function(_, t)
-                  assert(xpcall(require('wowapi.schema').validate, pprintYaml, product, schema, t))
-                  docs[f] = t
-                end,
-              },
-              Constants = setmetatable({}, nsmt),
-              CreateFromMixins = function()
-                return setmetatable({}, mixmt)
-              end,
-              Enum = setmetatable({}, nsmt),
-            }))
+          local fn, err = loadfile(docdir .. '/' .. f)
+          if not fn then
+            error(('error loading %s: %s'):format(f, err), 0)
           end
-          if not success then
-            print(('error loading %s: %s'):format(f, err))
-          end
+          runDocChunk(product, docs, f, fn)
         end
       end
     end
