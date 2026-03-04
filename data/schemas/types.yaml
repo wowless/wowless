@@ -36,12 +36,6 @@ type:
                   taggedunion:
                     also_string: tag
                     noop: tag
-        c_output:
-          type:
-            record:
-              type:
-                type:
-                  literal: parameterized
         default:
           type: any
         implicitly_nilable:

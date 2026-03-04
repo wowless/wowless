@@ -3,8 +3,6 @@ any:
 arrayof:
   c_input:
     kind: per_type
-  c_output:
-    type: parameterized
   lua_kind: parameterized
 boolean:
   c_input:
@@ -18,8 +16,6 @@ enum:
   c_input:
     c_lua_type: number
     kind: exact
-  c_output:
-    type: parameterized
   lua_kind: parameterized
 FileAsset:
   c_input:
@@ -39,11 +35,8 @@ hlist:
 luaobject:
   c_input:
     kind: upvalue_luaobject
-  c_output:
-    type: parameterized
   lua_kind: parameterized
 nil:
-  c_output:
   implicitly_nilable: true
 number:
   c_input:
@@ -53,7 +46,6 @@ number:
   default: 1
   lua_kind: coerce_number
 oneornil:
-  c_output:
   implicitly_nilable: true
   lua_kind: custom
 string:
@@ -64,14 +56,10 @@ string:
 stringenum:
   c_input:
     kind: upvalue_stringenum
-  c_output:
-    type: parameterized
   lua_kind: parameterized
 structure:
   c_input:
     kind: per_type
-  c_output:
-    type: parameterized
   lua_kind: parameterized
 table:
   c_input:
@@ -90,8 +78,6 @@ uiAddon:
 uiobject:
   c_input:
     kind: upvalue_uiobject
-  c_output:
-    type: parameterized
   lua_kind: parameterized
 unit:
   c_input:
@@ -104,7 +90,6 @@ unknown:
     kind: nonnilvalue_error
   c_nilable:
     kind: noop
-  c_output:
   lua_kind: passthrough
 userdata:
   lua_kind: exact

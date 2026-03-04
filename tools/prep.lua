@@ -44,11 +44,7 @@ end
 local specDefault = (function()
   local defaultOutputs = {}
   for name, tdef in pairs(types) do
-    if tdef.default ~= nil then
-      defaultOutputs[name] = valstr(tdef.default)
-    elseif tdef.c_output and not tdef.c_output.type then
-      defaultOutputs[name] = 'nil'
-    end
+    defaultOutputs[name] = tdef.default == nil and 'nil' or valstr(tdef.default)
   end
   defaultOutputs['function'] = 'function() end'
   local structureDefaults = {}
@@ -667,20 +663,14 @@ if args.coutput then
     end,
   }
   for name, tdef in pairs(types) do
-    if tdef.default ~= nil then
+    if not coutdefaults[name] then
       local val = tdef.default
-      if type(val) == 'table' then
-        coutdefaults[name] = function()
-          return {}
-        end
-      else
-        coutdefaults[name] = function()
-          return val
-        end
-      end
-    elseif tdef.c_output and not tdef.c_output.type then
-      coutdefaults[name] = function()
+      coutdefaults[name] = val == nil and function()
         return nil
+      end or type(val) == 'table' and function()
+        return {}
+      end or function()
+        return val
       end
     end
   end
