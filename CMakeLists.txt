@@ -995,6 +995,7 @@ set(specs
     spec/data/sql_spec.lua
     spec/data/structures_spec.lua
     spec/data/test_spec.lua
+    spec/data/schema_coverage_spec.lua
     spec/data/scripttypes_spec.lua
     spec/data/uiobjectimpl_spec.lua
     spec/data/uiobjects_spec.lua
