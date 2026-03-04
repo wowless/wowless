@@ -1,5 +1,8 @@
+/.beads/
+/.claude/
 /.env
 /.idea/
+/.runtime/
 /.vs/
 /build/cmake/
 /cache
