@@ -1,0 +1,96 @@
+any:
+  lua_kind: passthrough
+arrayof:
+  c_input:
+    kind: per_type
+  lua_kind: parameterized
+boolean:
+  c_input:
+    c_error_type: boolean
+    kind: noneornil_error
+  c_nilable:
+    kind: noop
+  default: false
+  lua_kind: coerce_boolean
+enum:
+  c_input:
+    c_lua_type: number
+    kind: exact
+  lua_kind: parameterized
+FileAsset:
+  c_input:
+    c_alias: string
+    kind: alias
+  default: 1
+  lua_kind: fileasset
+function:
+  c_input:
+    c_lua_type: function
+    kind: exact
+  lua_kind: exact
+gender:
+  implicitly_nilable: true
+  lua_kind: custom
+hlist:
+luaobject:
+  c_input:
+    kind: upvalue_luaobject
+  lua_kind: parameterized
+nil:
+  implicitly_nilable: true
+number:
+  c_input:
+    kind: checknumber
+  c_nilable:
+    kind: also_string
+  default: 1
+  lua_kind: coerce_number
+oneornil:
+  implicitly_nilable: true
+  lua_kind: custom
+string:
+  c_input:
+    kind: isstring
+  default: ''
+  lua_kind: coerce_string
+stringenum:
+  c_input:
+    kind: upvalue_stringenum
+  lua_kind: parameterized
+structure:
+  c_input:
+    kind: per_type
+  lua_kind: parameterized
+table:
+  c_input:
+    c_lua_type: table
+    kind: exact
+  default:
+  lua_kind: exact
+TextureAsset:
+tostring:
+  lua_kind: custom
+uiAddon:
+  c_input:
+    c_alias: string
+    kind: alias
+  lua_kind: custom
+uiobject:
+  c_input:
+    kind: upvalue_uiobject
+  lua_kind: parameterized
+unit:
+  c_input:
+    c_lua_type: string
+    kind: exact
+  default: player
+  lua_kind: custom
+unknown:
+  c_input:
+    kind: nonnilvalue_error
+  c_nilable:
+    kind: noop
+  lua_kind: passthrough
+userdata:
+  lua_kind: exact
+  lua_type: userdata

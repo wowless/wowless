@@ -26,6 +26,7 @@ local sorted = require('pl.tablex').sort
 local globals = parseYaml('data/products/' .. product .. '/globals.yaml')
 local structures = parseYaml('data/products/' .. product .. '/structures.yaml')
 local stringenums = parseYaml('data/stringenums.yaml')
+local types = parseYaml('data/types.yaml')
 
 local function valstr(value)
   local ty = type(value)
@@ -41,18 +42,11 @@ local function valstr(value)
 end
 
 local specDefault = (function()
-  local defaultOutputs = {
-    boolean = 'false',
-    FileAsset = '1',
-    ['function'] = 'function() end',
-    ['nil'] = 'nil',
-    number = '1',
-    oneornil = 'nil',
-    string = '\'\'',
-    table = '{}',
-    unit = '\'player\'',
-    unknown = 'nil',
-  }
+  local defaultOutputs = {}
+  for name, tdef in pairs(types) do
+    defaultOutputs[name] = tdef.default == nil and 'nil' or valstr(tdef.default)
+  end
+  defaultOutputs['function'] = 'function() end'
   local structureDefaults = {}
   local specDefault
   local function valstruct(name)
@@ -632,27 +626,9 @@ if args.coutput then
     arrayof = function(inner)
       return { dispatch(coutdefaults, inner) }
     end,
-    boolean = function()
-      return false
-    end,
-    FileAsset = function()
-      return 1
-    end,
     enum = function(enumname)
       local meta = assert(globals.Enum[enumname .. 'Meta'], 'missing meta enum for ' .. enumname)
       return (assert(meta.MinValue, 'missing MinValue in meta for ' .. enumname))
-    end,
-    ['nil'] = function()
-      return nil
-    end,
-    number = function()
-      return 1
-    end,
-    oneornil = function()
-      return nil
-    end,
-    string = function()
-      return ''
     end,
     stringenum = function(name)
       local least
@@ -682,16 +658,22 @@ if args.coutput then
     luaobject = function(name)
       return name
     end,
-    table = function()
-      return {}
-    end,
     uiobject = function(name)
       return name
     end,
-    unknown = function()
-      return nil
-    end,
   }
+  for name, tdef in pairs(types) do
+    if not coutdefaults[name] then
+      local val = tdef.default
+      coutdefaults[name] = val == nil and function()
+        return nil
+      end or type(val) == 'table' and function()
+        return {}
+      end or function()
+        return val
+      end
+    end
+  end
 
   local used_structures = {}
   local used_arrayofs = {}
@@ -705,24 +687,6 @@ if args.coutput then
       used_arrayofs[inner_type] = inner
       return 'arrayof_' .. inner_type
     end,
-    boolean = function()
-      return 'boolean'
-    end,
-    enum = function()
-      return 'enum'
-    end,
-    FileAsset = function()
-      return 'string'
-    end,
-    ['function'] = function()
-      return 'function'
-    end,
-    number = function()
-      return 'number'
-    end,
-    string = function()
-      return 'string'
-    end,
     stringenum = function(name)
       used_stringenums[name] = true
       return 'stringenum_' .. safename(name)
@@ -735,12 +699,6 @@ if args.coutput then
       used_structures[name] = true
       return 'struct_' .. safename(name)
     end,
-    table = function()
-      return 'table'
-    end,
-    uiAddon = function()
-      return 'string'
-    end,
     luaobject = function(name)
       used_luaobjects[name] = true
       return 'luaobject_' .. safename(name)
@@ -749,13 +707,22 @@ if args.coutput then
       used_uiobjects[name] = true
       return 'uiobject_' .. safename(name)
     end,
-    unit = function()
-      return 'unit'
-    end,
-    unknown = function()
-      return 'unknown'
-    end,
   }
+  for name, tdef in pairs(types) do
+    local inp = tdef.c_input
+    if
+      inp
+      and inp.kind ~= 'per_type'
+      and inp.kind ~= 'upvalue_luaobject'
+      and inp.kind ~= 'upvalue_uiobject'
+      and inp.kind ~= 'upvalue_stringenum'
+    then
+      local result = inp.kind == 'alias' and inp.c_alias or name
+      cinputtypes[name] = function()
+        return result
+      end
+    end
+  end
 
   local function is_eligible(apicfg)
     if apicfg.impl then

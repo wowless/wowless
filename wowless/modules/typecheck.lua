@@ -1,4 +1,5 @@
 return function(addons, datalua, env, luaobjects, uiobjects, uiobjecttypes, units)
+  local typedata = require('runtime.types')
   local IsObjectType = uiobjecttypes and uiobjecttypes.IsObjectType -- for tests, sigh
   local enumrev = {}
   for k, v in pairs(datalua.globals.Enum) do
@@ -54,17 +55,9 @@ return function(addons, datalua, env, luaobjects, uiobjects, uiobjecttypes, unit
     end
   end
 
-  local plainscalartypechecks = {
-    any = function(value)
-      return value
-    end,
-    boolean = function(value, isout)
-      if isout then
-        return value, type(value) ~= 'boolean'
-      else
-        return not not value
-      end
-    end,
+  -- Custom check functions for types whose logic cannot be expressed as a
+  -- simple pattern.  All other scalar types are derived from typedata below.
+  local customchecks = {
     FileAsset = function(value, isout)
       local ty = type(value)
       local notnors = ty ~= 'number' and ty ~= 'string'
@@ -74,31 +67,11 @@ return function(addons, datalua, env, luaobjects, uiobjects, uiobjecttypes, unit
         return tonumber(value) or tostring(value), notnors
       end
     end,
-    ['function'] = function(value)
-      return luatypecheck('function', value)
-    end,
     gender = function(value)
       return tonumber(value) or 0
     end,
-    number = function(value, isout)
-      if isout then
-        return luatypecheck('number', value)
-      else
-        return luatypecheck('number', type(value) == 'string' and tonumber(value) or value)
-      end
-    end,
     oneornil = function(value)
       return value, value ~= 1
-    end,
-    string = function(value, isout)
-      if isout then
-        return luatypecheck('string', value)
-      else
-        return luatypecheck('string', type(value) == 'number' and tostring(value) or value)
-      end
-    end,
-    table = function(value)
-      return luatypecheck('table', value)
     end,
     tostring = function(value)
       local v = type(value) == 'number' and tostring(value) or value
@@ -113,13 +86,52 @@ return function(addons, datalua, env, luaobjects, uiobjects, uiobjecttypes, unit
       end
       return units.GetUnit(value)
     end,
-    unknown = function(value)
-      return value
-    end,
-    userdata = function(value)
-      return luatypecheck('userdata', value)
-    end,
   }
+
+  local plainscalartypechecks = {}
+  for name, tdef in pairs(typedata) do
+    local kind = tdef.lua_kind
+    if kind == 'custom' then
+      plainscalartypechecks[name] = assert(customchecks[name], name)
+    elseif kind == 'passthrough' then
+      plainscalartypechecks[name] = function(value)
+        return value
+      end
+    elseif kind == 'exact' then
+      local luaty = tdef.lua_type or (tdef.c_input and tdef.c_input.c_lua_type)
+      assert(luaty, name)
+      plainscalartypechecks[name] = function(value)
+        return luatypecheck(luaty, value)
+      end
+    elseif kind == 'coerce_boolean' then
+      plainscalartypechecks[name] = function(value, isout)
+        if isout then
+          return value, type(value) ~= 'boolean'
+        else
+          return not not value
+        end
+      end
+    elseif kind == 'coerce_number' then
+      plainscalartypechecks[name] = function(value, isout)
+        if isout then
+          return luatypecheck('number', value)
+        else
+          return luatypecheck('number', type(value) == 'string' and tonumber(value) or value)
+        end
+      end
+    elseif kind == 'coerce_string' then
+      plainscalartypechecks[name] = function(value, isout)
+        if isout then
+          return luatypecheck('string', value)
+        else
+          return luatypecheck('string', type(value) == 'number' and tostring(value) or value)
+        end
+      end
+    elseif kind == 'fileasset' then
+      plainscalartypechecks[name] = customchecks.FileAsset
+    end
+    -- 'parameterized' kinds are handled in dotypecheck, not here
+  end
 
   local function plainmismatch(typename, value)
     return nil, ('is of type %q, but %q was passed'):format(typename, type(value))
@@ -168,11 +180,12 @@ return function(addons, datalua, env, luaobjects, uiobjects, uiobjecttypes, unit
     end
   end
 
-  local nilables = {
-    gender = true,
-    ['nil'] = true,
-    oneornil = true,
-  }
+  local nilables = {}
+  for name, tdef in pairs(typedata) do
+    if tdef.implicitly_nilable then
+      nilables[name] = true
+    end
+  end
 
   local typecheck
 

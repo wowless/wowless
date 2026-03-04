@@ -1,0 +1,56 @@
+name: types
+type:
+  mapof:
+    key: string
+    value:
+      record:
+        c_input:
+          type:
+            record:
+              c_alias:
+                type: string
+              c_error_type:
+                type: string
+              c_lua_type:
+                type: string
+              kind:
+                required: true
+                type:
+                  taggedunion:
+                    alias: tag
+                    checknumber: tag
+                    exact: tag
+                    isstring: tag
+                    noneornil_error: tag
+                    nonnilvalue_error: tag
+                    per_type: tag
+                    upvalue_luaobject: tag
+                    upvalue_stringenum: tag
+                    upvalue_uiobject: tag
+        c_nilable:
+          type:
+            record:
+              kind:
+                required: true
+                type:
+                  taggedunion:
+                    also_string: tag
+                    noop: tag
+        default:
+          type: any
+        implicitly_nilable:
+          type: flag
+        lua_kind:
+          type:
+            taggedunion:
+              coerce_boolean: tag
+              coerce_number: tag
+              coerce_string: tag
+              custom: tag
+              exact: tag
+              fileasset: tag
+              parameterized: tag
+              passthrough: tag
+        lua_type:
+          type:
+            literal: userdata

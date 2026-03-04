@@ -16,6 +16,7 @@ local globalschemas = {
   ['data/sql'] = 'sql',
   ['data/stringenums'] = 'stringenums',
   ['data/test'] = 'test',
+  ['data/types'] = 'types',
   ['data/uiobjectimpl'] = 'uiobjectimpl',
 }
 

@@ -253,9 +253,8 @@ be aware of when reading or writing data files:
   It hits the parser's default case and produces an empty table `{}`. This is
   intentional and used as a sentinel to distinguish "field absent" (Lua `nil`
   from table lookup) from "field present with no value" (empty table `{}`).
-  For example, `data/types.yaml` uses `c_output:` (no value) to mark types
-  that output nil from C stubs, and `default:` (no value) to mark types whose
-  default output is an empty table.
+  For example, `data/types.yaml` uses `default:` (no value) to mark types
+  whose default output is an empty table.
 - **Empty tables**: when round-tripping through `pprint`, an empty Lua table
   is emitted as a bare empty scalar (zero-length plain scalar), which parses
   back as an empty table.
