@@ -19,7 +19,7 @@ jobs:
         path: vcpkg-cache
         key: vcpkg-devcontainer-${{ github.run_id }}
         restore-keys: vcpkg-devcontainer
-    - uses: docker/login-action@v3
+    - uses: docker/login-action@v4
       with:
         registry: ghcr.io
         username: ${{ github.repository_owner }}
