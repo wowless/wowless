@@ -167,7 +167,21 @@ local function sorted(t)
   end)
 end
 
+local function captureWarnings(fn)
+  local before = #G.ActualLuaWarnings
+  fn()
+  local captured = {}
+  for i = before + 1, #G.ActualLuaWarnings do
+    table.insert(captured, G.ActualLuaWarnings[i])
+  end
+  for i = #G.ActualLuaWarnings, before + 1, -1 do
+    table.remove(G.ActualLuaWarnings, i)
+  end
+  return captured
+end
+
 G.addonEnv = G
+G.captureWarnings = captureWarnings
 G.assertEquals = assertEquals
 G.assertEqualSets = assertEqualSets
 G.assertRecursivelyEqual = assertRecursivelyEqual
