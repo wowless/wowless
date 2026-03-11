@@ -319,6 +319,7 @@ Dimension:
   contents:
     tags:
       AbsDimension:
+      RelDimension:
   virtual: true
 DisabledCheckedTexture:
   extends: Texture
@@ -1082,9 +1083,7 @@ Origin:
   attributes:
     point:
       type: string
-  contents:
-    tags:
-      Offset:
+  extends: Dimension
 Path:
   attributes:
     curve:
@@ -1138,6 +1137,12 @@ Rect:
     urx:
       type: number
     ury:
+      type: number
+RelDimension:
+  attributes:
+    x:
+      type: number
+    y:
       type: number
 RelInset:
   attributes:

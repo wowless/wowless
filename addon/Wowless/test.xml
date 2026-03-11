@@ -919,36 +919,8 @@
           </Scripts>
         </Scale>
         <Scale>
-          <Origin x='42' />
-          <Scripts>
-            <OnLoad>Wowless.check3('CENTER', 0, 0, self:GetOrigin())</OnLoad>
-          </Scripts>
-        </Scale>
-        <Scale>
-          <Origin y='42' />
-          <Scripts>
-            <OnLoad>Wowless.check3('CENTER', 0, 0, self:GetOrigin())</OnLoad>
-          </Scripts>
-        </Scale>
-        <Scale>
           <Origin>
-            <Offset />
-          </Origin>
-          <Scripts>
-            <OnLoad>Wowless.check3('CENTER', 0, 0, self:GetOrigin())</OnLoad>
-          </Scripts>
-        </Scale>
-        <Scale>
-          <Origin>
-            <Offset x='42' />
-          </Origin>
-          <Scripts>
-            <OnLoad>Wowless.check3('CENTER', 0, 0, self:GetOrigin())</OnLoad>
-          </Scripts>
-        </Scale>
-        <Scale>
-          <Origin>
-            <Offset x='42' y='99' />
+            <RelDimension x='99' y='42' />
           </Origin>
           <Scripts>
             <OnLoad>Wowless.check3('CENTER', 0, 0, self:GetOrigin())</OnLoad>
@@ -956,10 +928,10 @@
         </Scale>
         <Scale>
           <Origin point='LEFT'>
-            <Offset x='42' y='99' />
+            <RelDimension x='99' y='42' />
           </Origin>
           <Scripts>
-            <OnLoad>Wowless.check3('LEFT', 0, 0, self:GetOrigin())</OnLoad>
+            <OnLoad>Wowless.check3('LEFT', 99, 42, self:GetOrigin())</OnLoad>
           </Scripts>
         </Scale>
       </AnimationGroup>

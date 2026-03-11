@@ -333,7 +333,8 @@ return function(
     end,
     origin = function(_, e, parent)
       if e.attr.point then
-        parent:SetOrigin(e.attr.point, 0, 0)
+        local x, y = getXY(e)
+        parent:SetOrigin(e.attr.point, x or 0, y or 0)
       end
     end,
     pushedtextoffset = function(_, e, parent)
