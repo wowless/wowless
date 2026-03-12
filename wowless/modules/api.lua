@@ -98,7 +98,7 @@ return function(
     local p = parent
     while p do
       if obj == p then
-        io.stderr:write('SetParent loop, crashing\n' .. require('wowless.ext').traceback())
+        io.stderr:write('SetParent loop, crashing\n' .. require('wowless.debug').debugstack())
         os.exit(1)
       end
       p = p.parent

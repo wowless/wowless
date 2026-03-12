@@ -95,7 +95,7 @@ local function init(modules, lite)
       modules.log(1, 'Bye!')
       os.exit(exitCode or 1)
     end,
-    traceback = require('wowless.ext').traceback,
+    debugstack = require('wowless.debug').debugstack,
   }
   modules.env.genv.__wowless = __wowless
   modules.env.secureenv.__wowless = __wowless

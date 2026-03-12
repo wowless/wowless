@@ -1,10 +1,10 @@
-local traceback = require('wowless.ext').traceback
+local debugstack = require('wowless.debug').debugstack
 return function(log, maxErrors)
   local errors = 0
 
   local function ErrorHandler(str)
     errors = errors + 1
-    log(0, 'error: ' .. str .. '\n' .. traceback())
+    log(0, 'error: ' .. str .. '\n' .. debugstack())
     if errors >= maxErrors then
       log(0, 'maxerrors reached, quitting')
       os.exit(0)
