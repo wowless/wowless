@@ -894,6 +894,7 @@ C_AddOnProfiler.CheckForPerformanceMessage:
   - name: msg
     type:
       structure: C_AddOnProfiler.AddOnPerformanceMessage
+  stubnothing: true
 C_AddOnProfiler.GetAddOnMetric:
   inputs:
   - name: name
