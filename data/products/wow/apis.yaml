@@ -16707,16 +16707,19 @@ C_LobbyMatchmakerInfo.RespondToQueuePop:
     type: boolean
   outputs:
 C_Log.LogErrorMessage:
+  impl: C_Log.LogErrorMessage
   inputs:
   - name: message
     type: string
   outputs:
 C_Log.LogMessage:
+  impl: C_Log.LogMessage
   inputs:
   - name: message
     type: string
   outputs:
 C_Log.LogMessageWithPriority:
+  impl: C_Log.LogMessageWithPriority
   inputs:
   - name: priority
     type:
@@ -16725,6 +16728,7 @@ C_Log.LogMessageWithPriority:
     type: string
   outputs:
 C_Log.LogWarningMessage:
+  impl: C_Log.LogWarningMessage
   inputs:
   - name: message
     type: string

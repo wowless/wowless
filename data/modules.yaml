@@ -32,6 +32,10 @@ cgencode:
     luaobjects:
     uiobjects:
     uiobjecttypes:
+clog:
+  deps:
+    datalua:
+    log:
 cvars:
   deps:
     datalua:

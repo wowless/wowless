@@ -116,6 +116,18 @@ C_ItemInteraction.GetItemInteractionInfo:
   impl:
     sqls:
     - C_ItemInteraction.GetItemInteractionInfo
+C_Log.LogErrorMessage:
+  moduledelegate:
+    name: clog
+C_Log.LogMessage:
+  moduledelegate:
+    name: clog
+C_Log.LogMessageWithPriority:
+  moduledelegate:
+    name: clog
+C_Log.LogWarningMessage:
+  moduledelegate:
+    name: clog
 C_Macro.SetMacroExecuteLineCallback:
   moduledelegate:
     function: SetCallback
