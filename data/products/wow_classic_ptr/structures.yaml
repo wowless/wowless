@@ -1031,6 +1031,8 @@ C_CatalogShop.CatalogShopProductInfo:
       type: string
     isBundle:
       type: boolean
+    isDynamicallyDiscounted:
+      type: boolean
     isFullyOwned:
       type: boolean
     isHidden:
@@ -1064,6 +1066,8 @@ C_CatalogShop.CatalogShopProductInfo:
     price:
       type: string
     refundable:
+      type: boolean
+    shouldShowOriginalPrice:
       type: boolean
     smallCardBGTexture:
       nilable: true
