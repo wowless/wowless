@@ -22717,6 +22717,7 @@ PrevView:
   inputs:
   outputs:
 ProcessExceptionClient:
+  impl: ProcessExceptionClient
 PromoteToAssistant:
 PromoteToLeader:
   inputs:

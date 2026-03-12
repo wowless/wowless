@@ -36898,6 +36898,7 @@ PrevView:
   inputs:
   outputs:
 ProcessExceptionClient:
+  impl: ProcessExceptionClient
 ProcessQuestLogRewardFactions:
 PromoteToAssistant:
 PromoteToLeader:

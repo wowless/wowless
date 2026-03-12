@@ -528,6 +528,10 @@ pcall:
   stdlib: pcall
 pcallwithenv:
   stdlib: pcallwithenv
+ProcessExceptionClient:
+  impl:
+    modules:
+      log:
 rawequal:
   stdlib: rawequal
 rawget:
