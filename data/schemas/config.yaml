@@ -50,11 +50,6 @@ type:
     modules:
       type:
         record:
-          addons:
-            type:
-              record:
-                GetAddOnInfo_noUpdateAvailable:
-                  type: flag
           luaobjects:
             type:
               record:

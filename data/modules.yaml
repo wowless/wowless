@@ -1,6 +1,5 @@
 addons:
   deps:
-    datalua:
 api:
   deps:
     datalua:

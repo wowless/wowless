@@ -68,8 +68,6 @@ addon:
     C_Traits.GetEntryInfo:
     C_Traits.GetTreeInfo:
 modules:
-  addons:
-    GetAddOnInfo_noUpdateAvailable: true
   luaobjects:
     tostring_metamethod: true
 runner:
