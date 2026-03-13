@@ -37,8 +37,7 @@ bin/run.sh wow --addondir path/to/YourAddon
 build/cmake/wowless run -p wow [options]
 ```
 
-Products: `wow`, `wowt`, `wowxptr`, `wow_beta`, `wow_classic`,
-`wow_classic_beta`, `wow_classic_era`, `wow_classic_era_ptr`, `wow_classic_ptr`
+Products: see `data/products.yaml`
 
 ### Running Tests
 
