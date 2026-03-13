@@ -1,6 +1,0 @@
-LuaFunctionContainer:
-  impl: funtainer
-  methods:
-    Cancel:
-    Invoke:
-    IsCancelled:
