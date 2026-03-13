@@ -390,20 +390,17 @@ add_custom_target(listfilelua DEPENDS stamp/listfile.txt)
 lua2c(runtimelistfile runtime.listfile=runtime/listfile.lua)
 add_dependencies(runtimelistfile listfilelua)
 
-# TODO derive this from data/products.yaml, or vice versa
-list(
+set_property(
+  DIRECTORY
   APPEND
-  products
-  wow
-  wowt
-  wowxptr
-  wow_anniversary
-  wow_beta
-  wow_classic
-  wow_classic_beta
-  wow_classic_era
-  wow_classic_era_ptr
-  wow_classic_ptr)
+  PROPERTY CMAKE_CONFIGURE_DEPENDS
+           ${CMAKE_CURRENT_SOURCE_DIR}/data/products.yaml)
+file(STRINGS ${CMAKE_CURRENT_SOURCE_DIR}/data/products.yaml products_yaml)
+foreach(line ${products_yaml})
+  if(line MATCHES "^- (.+)$")
+    list(APPEND products ${CMAKE_MATCH_1})
+  endif()
+endforeach()
 
 add_lua_executable(
   dblist
