@@ -18848,6 +18848,7 @@ GetFontInfo:
   outputs:
   - name: info
     nilable: true
+    stubnotnil: true
     type:
       structure: FontScriptInfo
 GetFonts:
