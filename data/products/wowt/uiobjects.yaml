@@ -349,6 +349,18 @@ Actor:
       - name: gradientIndex3
         type: number
       outputs:
+    SetGradientMaskWithDyes:
+      inputs:
+      - name: grad0DyeColorID
+        nilable: true
+        type: number
+      - name: grad1DyeColorID
+        nilable: true
+        type: number
+      - name: grad2DyeColorID
+        nilable: true
+        type: number
+      outputs:
     SetItemTransmogInfo:
       inputs:
       - name: transmogInfo
@@ -509,6 +521,14 @@ Actor:
         name: hidden
         type: boolean
       outputs:
+    SetSheathedCategory:
+      inputs:
+      - name: inventorySlots
+        type: number
+      - name: category
+        type:
+          enum: TransmogOutfitSlotOptionSheatheCategory
+      outputs:
     SetSpellVisualKit:
       inputs:
       - default: 0
@@ -582,6 +602,11 @@ Actor:
       inputs:
       - name: inventorySlots
         type: number
+      outputs:
+    UseUnitSheatheCategory:
+      inputs:
+      - name: useCategory
+        type: boolean
       outputs:
   objectType: ModelSceneActor
   scripts:
@@ -1998,6 +2023,11 @@ Cooldown:
         type: number
       - name: duration
         type: number
+    GetCountdownAbbrevThreshold:
+      inputs:
+      outputs:
+      - name: seconds
+        type: number
     GetCountdownFontString:
       inputs:
       outputs:
@@ -2005,6 +2035,11 @@ Cooldown:
         nilable: true
         type:
           uiobject: FontString
+    GetCountdownMillisecondsThreshold:
+      inputs:
+      outputs:
+      - name: seconds
+        type: number
     GetDrawBling:
       inputs:
       outputs:
@@ -2137,6 +2172,11 @@ Cooldown:
       inputs:
       - name: fontName
         type: string
+      outputs:
+    SetCountdownMillisecondsThreshold:
+      inputs:
+      - name: seconds
+        type: number
       outputs:
     SetDrawBling:
       inputs:
@@ -3354,6 +3394,9 @@ FontString:
     ClearAlphaGradient:
       inputs:
       outputs:
+    ClearText:
+      inputs:
+      outputs:
     FindCharacterIndexAtCoordinate:
       inputs:
       - name: x
@@ -3447,6 +3490,13 @@ FontString:
         type: number
     GetUnboundedStringWidth:
       inputs:
+      outputs:
+      - name: width
+        type: number
+    GetUnboundedStringWidthForText:
+      inputs:
+      - name: text
+        type: string
       outputs:
       - name: width
         type: number
@@ -4035,7 +4085,7 @@ Frame:
         type: boolean
       - name: units
         nilable: true
-        type: string
+        type: unit
       outstride: 1
     IsFrameBuffer:
       inputs:
@@ -4153,7 +4203,7 @@ Frame:
         type: string
       - name: units
         nilable: true
-        type: string
+        type: unit
       instride: 1
       outputs:
       - name: registered
@@ -4166,7 +4216,7 @@ Frame:
         type:
           luaobject: LuaFunctionContainer
       - name: units
-        type: string
+        type: unit
       instride: 1
       outputs:
       - name: registered
@@ -4490,6 +4540,9 @@ GameTooltip:
     AddTexture:
     AppendText:
     ClearLines:
+    ClearPadding:
+      inputs:
+      outputs:
     CopyTooltip:
     FadeOut:
     GetAnchorType:
@@ -8961,7 +9014,7 @@ UnitPositionFrame:
       inputs:
       outputs:
       - name: units
-        type: string
+        type: unit
       outstride: 1
       stuboutstrides: 0
     GetPlayerPingScale:
@@ -9013,7 +9066,7 @@ UnitPositionFrame:
     SetUnitColor:
       inputs:
       - name: unit
-        type: string
+        type: unit
       - name: colorR
         type: number
       - name: colorG

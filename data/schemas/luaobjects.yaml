@@ -28,6 +28,8 @@ type:
                           name:
                             required: true
                             type: string
+                          nilable:
+                            type: flag
                           type:
                             required: true
                             type:

@@ -24,7 +24,7 @@ local filters = {
     return s:lower() == 'game'
   end,
   AllowLoadEnvironment = function(s)
-    assert(s == 'Global', s)
+    assert(s:lower() == 'global', s)
     return true
   end,
   AllowLoadGameType = function(s, gts)
