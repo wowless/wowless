@@ -87,6 +87,23 @@ lies:
           _change:
             from: unknown
             to: any
+    securecallmethod:
+      inputs:
+        1:
+          type:
+            _change:
+              from: unknown
+              to: any
+        3:
+          type:
+            _change:
+              from: unknown
+              to: any
+      outputs:
+      - type:
+          _change:
+            from: unknown
+            to: any
     UnitFactionGroup:
       _add:
         mayreturnnothing: true

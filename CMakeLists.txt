@@ -825,9 +825,11 @@ lua2c(
   wowless.modules.visibility=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/visibility.lua
   wowless.profiler=${CMAKE_CURRENT_SOURCE_DIR}/wowless/profiler.lua
   wowless.runner=${CMAKE_CURRENT_SOURCE_DIR}/wowless/runner.lua
+  wowless.secure=c
   wowless.xml=${CMAKE_CURRENT_SOURCE_DIR}/wowless/xml.lua)
-target_sources(wowlesslib PRIVATE wowless/bubblewrap.c wowless/debug.c
-                                  wowless/ext.c wowless/stubs.c)
+target_sources(
+  wowlesslib PRIVATE wowless/bubblewrap.c wowless/debug.c wowless/ext.c
+                     wowless/secure.c wowless/stubs.c)
 
 add_lua_executable(
   wowless

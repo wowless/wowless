@@ -37655,17 +37655,18 @@ securecall:
 securecallfunction:
   impl: securecallfunction
 securecallmethod:
+  impl: securecallmethod
   inputs:
   - name: object
-    type: unknown
+    type: any
   - name: method
     type: string
   - name: arguments
-    type: unknown
+    type: any
   instride: 1
   outputs:
   - name: results
-    type: unknown
+    type: any
   outstride: 1
 SecureCmdOptionParse:
   impl: SecureCmdOptionParse
