@@ -19,7 +19,7 @@ describe('addon', function()
         assert.True(success, modules)
         assert.True(modules.env.genv.WowlessTestsDone)
         assert.same({}, modules.env.genv.WowlessTestFailures)
-        assert.same(0, modules.security.GetErrorCount())
+        assert.same(0, modules.errors.GetErrorCount())
       end)
     end)
   end

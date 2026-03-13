@@ -47,6 +47,10 @@ dirty:
   deps:
 env:
   deps:
+errors:
+  deps:
+    log:
+    maxErrors:
 events:
   deps:
     datalua:
@@ -139,8 +143,7 @@ scripts:
     uiobjecttypes:
 security:
   deps:
-    log:
-    maxErrors:
+    errors:
 sqlitedb:
   deps:
     datalua:

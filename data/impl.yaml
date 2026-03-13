@@ -531,9 +531,9 @@ pcall:
 pcallwithenv:
   stdlib: pcallwithenv
 ProcessExceptionClient:
-  impl:
-    modules:
-      log:
+  moduledelegate:
+    function: ErrorHandler
+    name: errors
 rawequal:
   stdlib: rawequal
 rawget:
