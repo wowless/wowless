@@ -3,10 +3,6 @@
 #include "luaconf.h"
 #include "lualib.h"
 
-#ifndef ELUNE_VERSION
-#error Must be compiled against Elune headers.
-#endif
-
 /*
  * securecallmethod(obj, method, ...) calls obj:method(...) securely.
  * Stack on entry: obj(1), method(2), args(3..n)
