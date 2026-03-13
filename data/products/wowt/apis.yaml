@@ -21740,6 +21740,7 @@ C_QuestOffer.GetQuestRewardCurrencyInfo:
   outputs:
   - name: questRewardCurrencyInfo
     nilable: true
+    stubnotnil: true
     type:
       structure: QuestRewardCurrencyInfo
 C_QuestSession.CanStart:
