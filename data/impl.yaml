@@ -562,6 +562,10 @@ securecall:
   stdlib: securecall
 securecallfunction:
   stdlib: securecallfunction
+securecallmethod:
+  luadelegate:
+    module: wowless.secure
+    nowrap: true
 SecureCmdOptionParse:
   impl:
 secureexecuterange:
