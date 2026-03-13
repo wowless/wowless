@@ -131,6 +131,7 @@ lies:
     C_LiveEvent.OnLiveEventBannerClicked:
     C_LiveEvent.OnLiveEventPopupClicked:
     C_WorldSafeLocsUIInternal.GetWorldSafeLocs:
+    IsCollisionEnabled:
     ToggleAnimKitDisplay:
     ToggleCollision:
     ToggleCollisionDisplay:
@@ -154,6 +155,7 @@ lies:
   extra_events:
     COMBAT_LOG_EVENT_INTERNAL_UNFILTERED:
   extra_script_objects:
+    FrameAPINamePlate:
     HousingCatalogSearcherAPI:
     HousingFixturePointFrameAPI:
     HousingLayoutPinFrameAPI:
@@ -379,6 +381,8 @@ lies:
 script_objects:
   AbbreviateConfigAPI:
     luaobject: AbbreviateConfig
+  AbbreviatedNumberFormatterAPI:
+    luaobject: AbbreviatedNumberFormatter
   FrameAPIArchaeologyDigSiteFrame:
     uiobject: ArchaeologyDigSiteFrame
   FrameAPIBlob:
@@ -423,6 +427,12 @@ script_objects:
     luaobject: LuaDurationObject
   MinimapFrameAPI:
     uiobject: Minimap
+  NumericFormatterAPI:
+    luaobject: NumericFormatter
+  NumericRuleFormatterAPI:
+    luaobject: NumericRuleFormatter
+  SecondsFormatterAPI:
+    luaobject: SecondsFormatter
   SimpleAnimAlphaAPI:
     uiobject: Alpha
   SimpleAnimAPI:
@@ -507,6 +517,9 @@ typedefs:
   AbbreviateConfig:
     type:
       luaobject: AbbreviateConfig
+  AbbreviatedNumberFormatter:
+    type:
+      luaobject: AbbreviatedNumberFormatter
   AnimationDataEnum:
     type: number
   ArtifactTiers:
@@ -548,7 +561,13 @@ typedefs:
       uiobject: UIObject
   cstring:
     type: string
+  DurationMillisecondsPrimitive:
+    type: number
   DurationSeconds:
+    type: number
+  DurationSecondsDouble:
+    type: number
+  DurationSecondsPrimitive:
     type: number
   EmptiableItemLocation:
     type:
@@ -563,6 +582,8 @@ typedefs:
   fileID:
     type: number
   FontAlphabet:
+    type: string
+  FontAsset:
     type: string
   FrameEventCallbackType:
     type:
@@ -637,6 +658,12 @@ typedefs:
     type: string
   number:
     type: number
+  NumericFormatter:
+    type:
+      luaobject: NumericFormatter
+  NumericRuleFormatter:
+    type:
+      luaobject: NumericRuleFormatter
   QuestObjectiveType:
     type: number
   RecruitAcceptanceID:
@@ -645,6 +672,9 @@ typedefs:
     outnil: true
     type:
       uiobject: Region
+  SecondsFormatter:
+    type:
+      luaobject: SecondsFormatter
   SendChatMessageType:
     type: string
   SimpleAnim:
@@ -739,11 +769,21 @@ typedefs:
       luaobject: UnitHealPredictionCalculator
   UnitToken:
     type: unit
+  UnitTokenNamePlate:
+    type: unit
+  UnitTokenPvPRestrictedForAddOns:
+    type: unit
+  UnitTokenRestrictedForAddOns:
+    type: unit
+  UnitTokenType:
+    type: unit
   UnitTokenVariant:
     type: unit
   WeeklyRewardItemDBID:
     type: string
   WOWGUID:
+    type: string
+  WowLocale:
     type: string
   WOWMONEY:
     type: number

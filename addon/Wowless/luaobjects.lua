@@ -134,6 +134,9 @@ local factories = {
   AbbreviateConfig = function()
     return _G.CreateAbbreviateConfig({})
   end,
+  AbbreviatedNumberFormatter = function()
+    return _G.C_StringUtil.CreateAbbreviatedNumberFormatter()
+  end,
   LuaColorCurveObject = function()
     return _G.C_CurveUtil.CreateColorCurve()
   end,
@@ -145,6 +148,12 @@ local factories = {
   end,
   LuaFunctionContainer = function()
     return _G.C_FunctionContainers.CreateCallback(function() end)
+  end,
+  NumericRuleFormatter = function()
+    return _G.C_StringUtil.CreateNumericRuleFormatter()
+  end,
+  SecondsFormatter = function()
+    return _G.C_StringUtil.CreateSecondsFormatter()
   end,
   UnitHealPredictionCalculator = function()
     return _G.CreateUnitHealPredictionCalculator()

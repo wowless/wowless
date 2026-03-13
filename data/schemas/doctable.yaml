@@ -174,7 +174,11 @@ type:
               type: flag
             RequiresRecentAllies:
               type: flag
+            RequiresRestrictedAbbreviationBreakpoints:
+              type: flag
             RequiresSpellDiminishUI:
+              type: flag
+            RequiresValidAbbreviationBreakpoints:
               type: flag
             RequiresValidActionSlot:
               type: flag
@@ -264,6 +268,8 @@ type:
               type: flag
             SecretWhenLossOfControlInfoRestricted:
               type: flag
+            SecretWhenNumericFormatterSecret:
+              type: flag
             SecretWhenSpellAuraRestricted:
               type: flag
             SecretWhenSpellBookItemCooldownRestricted:
@@ -318,6 +324,27 @@ type:
       type: string
     Namespace:
       type: string
+    Predicates:
+      type:
+        sequenceof:
+          record:
+            Documentation:
+              type:
+                sequenceof: string
+            FailureMode:
+              type:
+                taggedunion:
+                  Error: tag
+                  ReturnNothing: tag
+            Name:
+              required: true
+              type: string
+            Type:
+              required: true
+              type:
+                taggedunion:
+                  Precondition: tag
+                  Secret: tag
     Tables:
       type:
         sequenceof:

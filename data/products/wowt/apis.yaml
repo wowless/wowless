@@ -214,9 +214,7 @@ BNRequestInviteFriend:
 BNSendFriendInvite:
 BNSendFriendInviteByID:
 BNSendVerifiedBattleTagInvite:
-BNSetAFK:
 BNSetBlocked:
-BNSetDND:
 BNSetFriendFavoriteFlag:
 BNSetFriendNote:
 BNSetSelectedBlock:
@@ -2689,6 +2687,50 @@ C_AuthChallenge.DidChallengeSucceed:
 C_AuthChallenge.OnTabPressed:
 C_AuthChallenge.SetFrame:
 C_AuthChallenge.Submit:
+C_AutoComplete.GetAutoCompletePresenceID:
+  inputs:
+  - name: name
+    type: string
+  outputs:
+  - name: presenceID
+    nilable: true
+    type: number
+C_AutoComplete.GetAutoCompleteRealms:
+  inputs:
+  outputs:
+  - name: realms
+    type:
+      arrayof: string
+C_AutoComplete.GetAutoCompleteResults:
+  inputs:
+  - name: name
+    type: string
+  - name: numResults
+    type: number
+  - name: cursorPosition
+    type: number
+  - name: allowFullMatch
+    type: boolean
+  - name: includeFlags
+    type: number
+  - name: excludeFlags
+    type: number
+  outputs:
+  - name: results
+    type:
+      arrayof:
+        structure: C_AutoComplete.AutoCompleteResult
+C_AutoComplete.IsRecognizedName:
+  inputs:
+  - name: name
+    type: string
+  - name: includeFlags
+    type: number
+  - name: excludeFlags
+    type: number
+  outputs:
+  - name: isRecognizedName
+    type: boolean
 C_AzeriteEmpoweredItem.CanSelectPower:
   inputs:
   - name: azeriteEmpoweredItemLocation
@@ -3498,6 +3540,12 @@ C_BattleNet.SendWhisper:
   outputs:
   - name: success
     type: boolean
+C_BattleNet.SetAFK:
+  inputs:
+  - default: true
+    name: isAFK
+    type: boolean
+  outputs:
 C_BattleNet.SetCustomMessage:
   inputs:
   - name: text
@@ -3505,6 +3553,12 @@ C_BattleNet.SetCustomMessage:
   outputs:
   - name: success
     type: boolean
+C_BattleNet.SetDND:
+  inputs:
+  - default: true
+    name: isDND
+    type: boolean
+  outputs:
 C_BehavioralMessaging.SendNotificationReceipt:
   inputs:
   - name: dbId
@@ -4181,6 +4235,12 @@ C_CatalogShop.BulkPurchaseProducts:
   outputs:
   - name: canPurchaseProducts
     type: boolean
+C_CatalogShop.BulkRefundDecors:
+  inputs:
+  - name: decorGUIDs
+    type:
+      arrayof: string
+  outputs:
 C_CatalogShop.CloseCatalogShopInteraction:
   inputs:
   outputs:
@@ -4190,6 +4250,16 @@ C_CatalogShop.ConfirmHousingPurchase:
     type:
       arrayof: number
   outputs:
+C_CatalogShop.FindBestCurrencyProductForNeededAmount:
+  inputs:
+  - name: vcCurrencyCode
+    type: string
+  - name: amountNeeded
+    type: number
+  outputs:
+  - name: vcProductID
+    nilable: true
+    type: number
 C_CatalogShop.GetAvailableCategoryIDs:
   inputs:
   outputs:
@@ -4312,7 +4382,7 @@ C_CatalogShop.GetProductSortOrder:
     type: number
 C_CatalogShop.GetRefundableDecors:
   inputs:
-  - name: productIDOpt
+  - name: productIdFilterOpt
     nilable: true
     type: number
   outputs:
@@ -4320,6 +4390,8 @@ C_CatalogShop.GetRefundableDecors:
     type:
       arrayof:
         structure: C_CatalogShop.RefundableDecorInfo
+  - name: minTimeRemainingSeconds
+    type: number
 C_CatalogShop.GetSectionIDsForCategory:
   inputs:
   - name: categoryID
@@ -4336,6 +4408,13 @@ C_CatalogShop.GetSpellVisualInfoForMount:
   - name: spellVisualInfo
     type:
       structure: C_CatalogShop.CatalogShopSpellVisualInfo
+C_CatalogShop.GetVCProductInfos:
+  inputs:
+  outputs:
+  - name: vcProductInfos
+    type:
+      arrayof:
+        structure: C_CatalogShop.CatalogShopVCProductInfo
 C_CatalogShop.GetVirtualCurrencyBalance:
   inputs:
   - name: currencyCode
@@ -4349,6 +4428,13 @@ C_CatalogShop.HasNewProducts:
   outputs:
   - name: hasNewProducts
     type: boolean
+C_CatalogShop.IsProductIncludedInAnyBundle:
+  inputs:
+  - name: productID
+    type: number
+  outputs:
+  - name: isIncludedInAnyBundle
+    type: boolean
 C_CatalogShop.IsShop2Enabled:
   inputs:
   outputs:
@@ -4359,6 +4445,9 @@ C_CatalogShop.OnLegalDisclaimerClicked:
   inputs:
   - name: catalogShopProductID
     type: number
+  outputs:
+C_CatalogShop.OnLegalPersonalizedOptOutClicked:
+  inputs:
   outputs:
 C_CatalogShop.OpenCatalogShopInteractionFromHouse:
   inputs:
@@ -4405,6 +4494,11 @@ C_CatalogShop.RefreshVirtualCurrencyBalance:
   - name: currencyCode
     type: string
   outputs:
+C_CatalogShop.ShouldShowHousingWarning:
+  inputs:
+  outputs:
+  - name: shouldShowHousingWarning
+    type: boolean
 C_CatalogShop.StartHousingVCPurchaseConfirmation:
   inputs:
   - name: productID
@@ -6592,6 +6686,22 @@ C_ColorUtil.WrapTextInColorCode:
   outputs:
   - name: coloredText
     type: string
+C_CombatAudioAlert.GetCategoryVoice:
+  inputs:
+  - name: category
+    type:
+      enum: CombatAudioAlertCategory
+  outputs:
+  - name: voice
+    type: number
+C_CombatAudioAlert.GetCategoryVolume:
+  inputs:
+  - name: category
+    type:
+      enum: CombatAudioAlertCategory
+  outputs:
+  - name: volume
+    type: number
 C_CombatAudioAlert.GetFormatSetting:
   inputs:
   - name: unit
@@ -6607,11 +6717,6 @@ C_CombatAudioAlert.GetSpeakerSpeed:
   inputs:
   outputs:
   - name: speed
-    type: number
-C_CombatAudioAlert.GetSpeakerVolume:
-  inputs:
-  outputs:
-  - name: volume
     type: number
 C_CombatAudioAlert.GetSpecSetting:
   inputs:
@@ -6634,6 +6739,26 @@ C_CombatAudioAlert.IsEnabled:
   outputs:
   - name: isEnabled
     type: boolean
+C_CombatAudioAlert.SetCategoryVoice:
+  inputs:
+  - name: category
+    type:
+      enum: CombatAudioAlertCategory
+  - name: newVal
+    type: number
+  outputs:
+  - name: success
+    type: boolean
+C_CombatAudioAlert.SetCategoryVolume:
+  inputs:
+  - name: category
+    type:
+      enum: CombatAudioAlertCategory
+  - name: newVal
+    type: number
+  outputs:
+  - name: success
+    type: boolean
 C_CombatAudioAlert.SetFormatSetting:
   inputs:
   - name: unit
@@ -6648,13 +6773,6 @@ C_CombatAudioAlert.SetFormatSetting:
   - name: success
     type: boolean
 C_CombatAudioAlert.SetSpeakerSpeed:
-  inputs:
-  - name: newVal
-    type: number
-  outputs:
-  - name: success
-    type: boolean
-C_CombatAudioAlert.SetSpeakerVolume:
   inputs:
   - name: newVal
     type: number
@@ -6685,6 +6803,9 @@ C_CombatAudioAlert.SpeakText:
   inputs:
   - name: text
     type: string
+  - name: category
+    type:
+      enum: CombatAudioAlertCategory
   - default: true
     name: allowOverlap
     type: boolean
@@ -9637,7 +9758,11 @@ C_DamageMeter.GetCombatSessionSourceFromID:
     type:
       enum: DamageMeterType
   - name: sourceGUID
+    nilable: true
     type: string
+  - name: sourceCreatureID
+    nilable: true
+    type: number
   outputs:
   - name: sessionSource
     type:
@@ -9651,11 +9776,24 @@ C_DamageMeter.GetCombatSessionSourceFromType:
     type:
       enum: DamageMeterType
   - name: sourceGUID
+    nilable: true
     type: string
+  - name: sourceCreatureID
+    nilable: true
+    type: number
   outputs:
   - name: sessionSource
     type:
       structure: C_DamageMeter.DamageMeterCombatSessionSource
+C_DamageMeter.GetSessionDurationSeconds:
+  inputs:
+  - name: sessionType
+    type:
+      enum: DamageMeterSessionType
+  outputs:
+  - name: durationSeconds
+    nilable: true
+    type: number
 C_DamageMeter.IsDamageMeterAvailable:
   inputs:
   outputs:
@@ -9808,6 +9946,14 @@ C_DeathRecap.GetRecapLink:
   outputs:
   - name: link
     type: string
+C_DeathRecap.GetRecapMaxHealth:
+  inputs:
+  - name: recapID
+    nilable: true
+    type: number
+  outputs:
+  - name: maxHealth
+    type: number
 C_DeathRecap.HasRecapEvents:
   inputs:
   - name: recapID
@@ -9824,6 +9970,12 @@ C_Debug.TeleportToMapDebugObject:
 C_Debug.TeleportToMapLocation:
 C_Debug.ToggleDebugCharInfo:
 C_Debug.ToggleWindDebugMenu:
+C_DelvesUI.GetActiveDelveTier:
+  inputs:
+  outputs:
+  - name: tierInfo
+    type:
+      structure: C_DelvesUI.TieredEntranceTierInfo
 C_DelvesUI.GetCompanionInfoForActivePlayer:
   inputs:
   outputs:
@@ -9871,6 +10023,35 @@ C_DelvesUI.GetCurrentDelvesSeasonNumber:
   outputs:
   - name: seasonNumber
     type: number
+C_DelvesUI.GetDelveEntranceBackgroundWidgetSetID:
+  inputs:
+  outputs:
+  - name: backgroundWidgetSetID
+    type: number
+C_DelvesUI.GetDelveEntranceDescriptionString:
+  inputs:
+  outputs:
+  - name: description
+    nilable: true
+    type: string
+C_DelvesUI.GetDelveEntranceHeaderString:
+  inputs:
+  outputs:
+  - name: header
+    nilable: true
+    type: string
+C_DelvesUI.GetDelveEntranceMapID:
+  inputs:
+  outputs:
+  - name: mapID
+    type: number
+C_DelvesUI.GetDelveEntranceTiers:
+  inputs:
+  outputs:
+  - name: levelInfo
+    type:
+      arrayof:
+        structure: C_DelvesUI.TieredEntranceTierInfo
 C_DelvesUI.GetDelvesAffixSpellsForSeason:
   inputs:
   outputs:
@@ -9913,6 +10094,15 @@ C_DelvesUI.GetModelSceneForCompanion:
   outputs:
   - name: modelSceneID
     type: number
+C_DelvesUI.GetPlayerCompanionPDEID:
+  inputs:
+  - name: companionID
+    nilable: true
+    type: number
+  mayreturnnothing: true
+  outputs:
+  - name: pdeID
+    type: number
 C_DelvesUI.GetRoleNodeForCompanion:
   inputs:
   - name: companionID
@@ -9931,6 +10121,22 @@ C_DelvesUI.GetRoleSubtreeForCompanion:
     type: number
   outputs:
   - name: subTreeID
+    type: number
+C_DelvesUI.GetTieredEntranceOptionalAffixTraitTreeID:
+  inputs:
+  outputs:
+  - name: treeID
+    nilable: true
+    type: number
+C_DelvesUI.GetTieredEntrancePDEID:
+  inputs:
+  outputs:
+  - name: pdeID
+    type: number
+C_DelvesUI.GetTieredEntranceType:
+  inputs:
+  outputs:
+  - name: entranceType
     type: number
 C_DelvesUI.GetTraitTreeForCompanion:
   inputs:
@@ -9954,12 +10160,19 @@ C_DelvesUI.GetUnseenCuriosBySlotType:
       arrayof: number
 C_DelvesUI.HasActiveDelve:
   inputs:
-  - name: mapID
-    nilable: true
-    type: number
   outputs:
   - name: result
     type: boolean
+C_DelvesUI.IsDelveEntranceTierEnabled:
+  inputs:
+  - name: tier
+    type: number
+  outputs:
+  - name: isEnabled
+    type: boolean
+  - name: failureReason
+    nilable: true
+    type: string
 C_DelvesUI.IsEligibleForActiveDelveRewards:
   inputs:
   - name: unit
@@ -9976,7 +10189,7 @@ C_DelvesUI.IsTraitTreeForCompanion:
     type: boolean
 C_DelvesUI.RequestPartyEligibilityForDelveTiers:
   inputs:
-  - name: gossipOption
+  - name: mapID
     type: number
   outputs:
 C_DelvesUI.SaveSeenCuriosBySlotType:
@@ -9987,6 +10200,11 @@ C_DelvesUI.SaveSeenCuriosBySlotType:
   - name: ownedCurioNodeIDs
     type:
       arrayof: number
+  outputs:
+C_DelvesUI.SelectDelveEntranceTier:
+  inputs:
+  - name: tier
+    type: number
   outputs:
 C_DurationUtil.CreateDuration:
   inputs:
@@ -10248,6 +10466,80 @@ C_EncodingUtil.SerializeJSON:
   outputs:
   - name: output
     type: string
+C_EncounterEvents.GetEventColor:
+  inputs:
+  - name: encounterEventID
+    type: number
+  outputs:
+  - name: color
+    nilable: true
+    type:
+      structure: colorRGB
+C_EncounterEvents.GetEventInfo:
+  inputs:
+  - name: encounterEventID
+    type: number
+  mayreturnnothing: true
+  outputs:
+  - name: encounterEventInfo
+    type:
+      structure: EncounterEventInfo
+C_EncounterEvents.GetEventList:
+  inputs:
+  outputs:
+  - name: encounterEventIDs
+    type:
+      arrayof: number
+C_EncounterEvents.GetEventSound:
+  inputs:
+  - name: encounterEventID
+    type: number
+  - name: trigger
+    type:
+      enum: EncounterEventSoundTrigger
+  mayreturnnothing: true
+  outputs:
+  - name: sound
+    type:
+      structure: EncounterEventSoundInfo
+C_EncounterEvents.HasEventInfo:
+  inputs:
+  - name: encounterEventID
+    type: number
+  outputs:
+  - name: exists
+    type: boolean
+C_EncounterEvents.PlayEventSound:
+  inputs:
+  - name: encounterEventID
+    type: number
+  - name: trigger
+    type:
+      enum: EncounterEventSoundTrigger
+  outputs:
+  - name: handle
+    type: string
+C_EncounterEvents.SetEventColor:
+  inputs:
+  - name: encounterEventID
+    type: number
+  - name: color
+    nilable: true
+    type:
+      structure: colorRGB
+  outputs:
+C_EncounterEvents.SetEventSound:
+  inputs:
+  - name: encounterEventID
+    type: number
+  - name: trigger
+    type:
+      enum: EncounterEventSoundTrigger
+  - name: sound
+    nilable: true
+    type:
+      structure: EncounterEventSoundInfo
+  outputs:
 C_EncounterJournal.GetDungeonEntrancesForMap:
   inputs:
   - name: uiMapID
@@ -10425,6 +10717,11 @@ C_EncounterTimeline.GetEventCountBySource:
   outputs:
   - name: count
     type: number
+C_EncounterTimeline.GetEventHighlightTime:
+  inputs:
+  outputs:
+  - name: highlightTime
+    type: number
 C_EncounterTimeline.GetEventInfo:
   inputs:
   - name: eventID
@@ -10454,6 +10751,15 @@ C_EncounterTimeline.GetEventTimeElapsed:
   outputs:
   - name: timeElapsed
     type: number
+C_EncounterTimeline.GetEventTimer:
+  inputs:
+  - name: eventID
+    type: number
+  outputs:
+  - name: duration
+    nilable: true
+    type:
+      luaobject: LuaDurationObject
 C_EncounterTimeline.GetEventTimeRemaining:
   inputs:
   - name: eventID
@@ -10472,6 +10778,24 @@ C_EncounterTimeline.GetEventTrack:
   - name: trackSortIndex
     nilable: true
     type: number
+C_EncounterTimeline.GetSortedEventList:
+  inputs:
+  - name: maxEventCount
+    nilable: true
+    type: number
+  - name: maxEventDuration
+    nilable: true
+    type: number
+  - default: true
+    name: excludeTerminalStates
+    type: boolean
+  - default: true
+    name: excludeHiddenEvents
+    type: boolean
+  outputs:
+  - name: events
+    type:
+      arrayof: number
 C_EncounterTimeline.GetTrackInfo:
   inputs:
   - name: track
@@ -10488,6 +10812,29 @@ C_EncounterTimeline.GetTrackList:
     type:
       arrayof:
         structure: C_EncounterTimeline.EncounterTimelineTrackInfo
+C_EncounterTimeline.GetTrackMaxEventDuration:
+  inputs:
+  - name: track
+    type:
+      enum: EncounterTimelineTrack
+  outputs:
+  - name: maxEventDuration
+    type: number
+C_EncounterTimeline.GetTrackType:
+  inputs:
+  - name: track
+    type:
+      enum: EncounterTimelineTrack
+  outputs:
+  - name: trackType
+    type:
+      enum: EncounterTimelineTrackType
+C_EncounterTimeline.GetViewType:
+  inputs:
+  outputs:
+  - name: viewType
+    type:
+      enum: EncounterTimelineViewType
 C_EncounterTimeline.HasActiveEvents:
   inputs:
   outputs:
@@ -10547,6 +10894,21 @@ C_EncounterTimeline.SetEventIconTextures:
       arrayof:
         uiobject: Texture
   outputs:
+C_EncounterTimeline.SetViewType:
+  inputs:
+  - name: viewType
+    type:
+      enum: EncounterTimelineViewType
+  outputs:
+C_EncounterWarnings.GetColorForSeverity:
+  inputs:
+  - name: severity
+    type:
+      enum: EncounterEventSeverity
+  outputs:
+  - name: color
+    type:
+      structure: colorRGB
 C_EncounterWarnings.GetEditModeWarningInfo:
   inputs:
   - name: severity
@@ -10556,6 +10918,11 @@ C_EncounterWarnings.GetEditModeWarningInfo:
   - name: warningInfo
     type:
       structure: C_EncounterWarnings.EncounterWarningInfo
+C_EncounterWarnings.GetPlayCustomSoundsWhenHidden:
+  inputs:
+  outputs:
+  - name: play
+    type: boolean
 C_EncounterWarnings.GetSoundKitForSeverity:
   inputs:
   - name: severity
@@ -10564,6 +10931,11 @@ C_EncounterWarnings.GetSoundKitForSeverity:
   outputs:
   - name: soundKitID
     type: number
+C_EncounterWarnings.GetWarningsShown:
+  inputs:
+  outputs:
+  - name: shown
+    type: boolean
 C_EncounterWarnings.IsFeatureAvailable:
   inputs:
   outputs:
@@ -10583,6 +10955,16 @@ C_EncounterWarnings.PlaySound:
   outputs:
   - name: soundHandle
     type: number
+C_EncounterWarnings.SetPlayCustomSoundsWhenHidden:
+  inputs:
+  - name: play
+    type: boolean
+  outputs:
+C_EncounterWarnings.SetWarningsShown:
+  inputs:
+  - name: shown
+    type: boolean
+  outputs:
 C_EndOfMatchUI.GetEndOfMatchDetails:
   inputs:
   outputs:
@@ -12005,12 +12387,6 @@ C_GossipInfo.ForceGossip:
   outputs:
   - name: forceGossip
     type: boolean
-C_GossipInfo.GetActiveDelveGossip:
-  inputs:
-  outputs:
-  - name: gossip
-    type:
-      structure: C_GossipInfo.GossipOptionUIInfo
 C_GossipInfo.GetActiveQuests:
   inputs:
   outputs:
@@ -12054,11 +12430,6 @@ C_GossipInfo.GetFriendshipReputationRanks:
   - name: rankInfo
     type:
       structure: C_GossipInfo.FriendshipReputationRankInfo
-C_GossipInfo.GetGossipDelveMapID:
-  inputs:
-  outputs:
-  - name: mapID
-    type: number
 C_GossipInfo.GetNumActiveQuests:
   inputs:
   outputs:
@@ -12204,6 +12575,16 @@ C_GuildInfo.GetGuildTabardInfo:
     nilable: true
     type:
       structure: GuildTabardInfo
+C_GuildInfo.GetInfoText:
+  inputs:
+  outputs:
+  - name: infoText
+    type: string
+C_GuildInfo.GetMOTD:
+  inputs:
+  outputs:
+  - name: motd
+    type: string
 C_GuildInfo.GuildControlGetRankFlags:
   inputs:
   - name: rankOrder
@@ -12330,6 +12711,11 @@ C_GuildInfo.SetGuildRankOrder:
     type: string
   - name: rankOrder
     type: number
+  outputs:
+C_GuildInfo.SetInfoText:
+  inputs:
+  - name: infoText
+    type: string
   outputs:
 C_GuildInfo.SetLeader:
   inputs:
@@ -12587,29 +12973,82 @@ C_HouseExterior.HasSelectedFixturePoint:
   outputs:
   - name: anySelectedFixturePoint
     type: boolean
+C_HouseExterior.IsAnyDecorAttachedToCoreFixture:
+  inputs:
+  - name: coreFixtureType
+    type:
+      enum: HousingFixtureType
+  outputs:
+  - name: anyAttachedDecor
+    type: boolean
+C_HouseExterior.IsAnyDecorAttachedToDoor:
+  inputs:
+  outputs:
+  - name: anyAttachedDecor
+    type: boolean
+C_HouseExterior.IsAnyDecorAttachedToHouseExterior:
+  inputs:
+  outputs:
+  - name: anyAttachedDecor
+    type: boolean
+C_HouseExterior.IsAnyDecorAttachedToSelectedFixturePoint:
+  inputs:
+  outputs:
+  - name: anyAttachedDecor
+    type: boolean
+C_HouseExterior.IsExteriorDecorHidden:
+  inputs:
+  outputs:
+  - name: decorHidden
+    type: boolean
 C_HouseExterior.RemoveFixtureFromSelectedPoint:
   inputs:
+  - default: 0
+    name: attachedDecorAction
+    type:
+      enum: HousingFixtureDecorAction
   outputs:
 C_HouseExterior.SelectCoreFixtureOption:
   inputs:
   - name: fixtureID
     type: number
+  - default: 0
+    name: attachedDecorAction
+    type:
+      enum: HousingFixtureDecorAction
   outputs:
 C_HouseExterior.SelectFixtureOption:
   inputs:
   - name: fixtureID
     type: number
+  - default: 0
+    name: attachedDecorAction
+    type:
+      enum: HousingFixtureDecorAction
+  outputs:
+C_HouseExterior.SetExteriorDecorHidden:
+  inputs:
+  - name: decorHidden
+    type: boolean
   outputs:
 C_HouseExterior.SetHouseExteriorSize:
   inputs:
   - name: size
     type:
       enum: HousingFixtureSize
+  - default: 0
+    name: attachedDecorAction
+    type:
+      enum: HousingFixtureDecorAction
   outputs:
 C_HouseExterior.SetHouseExteriorType:
   inputs:
   - name: houseExteriorTypeID
     type: number
+  - default: 0
+    name: attachedDecorAction
+    type:
+      enum: HousingFixtureDecorAction
   outputs:
 C_Housing.AcceptNeighborhoodOwnership:
   inputs:
@@ -12758,6 +13197,11 @@ C_Housing.HouseFinderRequestReservationAndPort:
   - name: plotID
     type: number
   outputs:
+C_Housing.IsHousingMarketCartFullRemoveEnabled:
+  inputs:
+  outputs:
+  - name: isHousingMarketCartFullRemoveEnabled
+    type: boolean
 C_Housing.IsHousingMarketEnabled:
   inputs:
   outputs:
@@ -13005,9 +13449,9 @@ C_HousingBasicMode.SetGridVisible:
   outputs:
 C_HousingBasicMode.StartPlacingNewDecor:
   inputs:
-  - name: catalogEntryID
+  - name: catalogEntryVariantID
     type:
-      structure: HousingCatalogEntryID
+      structure: HousingCatalogEntryVariantID
   outputs:
 C_HousingBasicMode.StartPlacingPreviewDecor:
   inputs:
@@ -13037,9 +13481,9 @@ C_HousingCatalog.DeletePreviewCartDecor:
   outputs:
 C_HousingCatalog.DestroyEntry:
   inputs:
-  - name: entryID
+  - name: entryVariantID
     type:
-      structure: HousingCatalogEntryID
+      structure: HousingCatalogEntryVariantID
   - name: destroyAll
     type: boolean
   outputs:
@@ -13050,6 +13494,16 @@ C_HousingCatalog.GetAllFilterTagGroups:
     type:
       arrayof:
         structure: HousingCatalogFilterTagGroupInfo
+C_HousingCatalog.GetAllVariantInfosForEntry:
+  inputs:
+  - name: entryID
+    type:
+      structure: HousingCatalogEntryID
+  outputs:
+  - name: variantInfos
+    type:
+      arrayof:
+        structure: C_HousingCatalog.HousingCatalogEntryVariantInfo
 C_HousingCatalog.GetBundleInfo:
   inputs:
   - name: bundleCatalogShopProductID
@@ -13088,8 +13542,6 @@ C_HousingCatalog.GetCatalogEntryInfoByItem:
   inputs:
   - name: itemInfo
     type: string
-  - name: tryGetOwnedInfo
-    type: boolean
   outputs:
   - name: info
     nilable: true
@@ -13102,8 +13554,6 @@ C_HousingCatalog.GetCatalogEntryInfoByRecordID:
       enum: HousingCatalogEntryType
   - name: recordID
     type: number
-  - name: tryGetOwnedInfo
-    type: boolean
   outputs:
   - name: info
     nilable: true
@@ -13120,6 +13570,16 @@ C_HousingCatalog.GetCatalogEntryRefundTimeStampByRecordID:
   - name: refundTimeStamp
     nilable: true
     type: number
+C_HousingCatalog.GetCatalogEntryVariantInfo:
+  inputs:
+  - name: entryVariantID
+    type:
+      structure: HousingCatalogEntryVariantID
+  outputs:
+  - name: info
+    nilable: true
+    type:
+      structure: C_HousingCatalog.HousingCatalogEntryVariantInfo
 C_HousingCatalog.GetCatalogSubcategoryInfo:
   inputs:
   - name: subcategoryID
@@ -13141,6 +13601,14 @@ C_HousingCatalog.GetDecorTotalOwnedCount:
     type: number
   - name: exemptDecorCount
     type: number
+C_HousingCatalog.GetDestroyableInstanceCount:
+  inputs:
+  - name: entryVariantID
+    type:
+      structure: HousingCatalogEntryVariantID
+  outputs:
+  - name: destroyableInstanceCount
+    type: number
 C_HousingCatalog.GetFeaturedBundles:
   inputs:
   outputs:
@@ -13148,18 +13616,52 @@ C_HousingCatalog.GetFeaturedBundles:
     type:
       arrayof:
         structure: C_HousingCatalog.HousingBundleInfo
-C_HousingCatalog.GetFeaturedDecor:
+C_HousingCatalog.GetFeaturedSmallProducts:
   inputs:
   outputs:
-  - name: entryInfos
+  - name: infos
     type:
       arrayof:
-        structure: C_HousingCatalog.HousingFeaturedDecorEntry
+        structure: C_HousingCatalog.HousingFeaturedSmallProductInfo
+C_HousingCatalog.GetMarketInfoForDecor:
+  inputs:
+  - name: decorID
+    type: number
+  outputs:
+  - name: marketInfo
+    nilable: true
+    type:
+      structure: C_HousingCatalog.HousingMarketInfo
 C_HousingCatalog.HasFeaturedEntries:
   inputs:
   outputs:
   - name: hasEntries
     type: boolean
+C_HousingCatalog.HousingMarketActionAddToCart:
+  inputs:
+  - name: productID
+    type: number
+  - name: withPreview
+    type: boolean
+  outputs:
+C_HousingCatalog.HousingMarketActionClearCart:
+  inputs:
+  outputs:
+C_HousingCatalog.HousingMarketActionRemoveFromCart:
+  inputs:
+  - name: productID
+    type: number
+  outputs:
+C_HousingCatalog.HousingMarketActionViewBundle:
+  inputs:
+  - name: productID
+    type: number
+  outputs:
+C_HousingCatalog.HousingMarketActionViewInStore:
+  inputs:
+  - name: productID
+    type: number
+  outputs:
 C_HousingCatalog.IsPreviewCartItemShown:
   inputs:
   - name: decorGUID
@@ -13419,6 +13921,14 @@ C_HousingDecor.GetAllPlacedDecor:
       arrayof:
         structure: C_HousingDecor.HousingDecorInstanceListEntry
 C_HousingDecor.GetDecorDebugInfoForGUID:
+C_HousingDecor.GetDecorHyperlink:
+  inputs:
+  - name: decorID
+    type: number
+  mayreturnnothing: true
+  outputs:
+  - name: hyperLink
+    type: string
 C_HousingDecor.GetDecorIcon:
   inputs:
   - name: decorID
@@ -13644,6 +14154,27 @@ C_HousingExpertMode.SetPrecisionSubmode:
     type:
       enum: HousingPrecisionSubmode
   outputs:
+C_HousingInspectMode.EnterInspectMode:
+  inputs:
+  outputs:
+C_HousingInspectMode.ExitInspectMode:
+  inputs:
+  outputs:
+C_HousingInspectMode.GetHoveredDecorGUID:
+  inputs:
+  outputs:
+  - name: decorGUID
+    type: string
+C_HousingInspectMode.IsHoveringDecor:
+  inputs:
+  outputs:
+  - name: isHoveringDecor
+    type: boolean
+C_HousingInspectMode.IsInInspectMode:
+  inputs:
+  outputs:
+  - name: isInInspectMode
+    type: boolean
 C_HousingLayout.AnyRoomsOnFloor:
   inputs:
   - name: floor
@@ -13671,6 +14202,11 @@ C_HousingLayout.GetNumActiveRooms:
   inputs:
   outputs:
   - name: numRooms
+    type: number
+C_HousingLayout.GetNumFloors:
+  inputs:
+  outputs:
+  - name: numFloors
     type: number
 C_HousingLayout.GetRoomPlacementBudget:
   inputs:
@@ -16185,10 +16721,22 @@ C_LFGList.IsPlayerAuthenticatedForLFG:
   outputs:
   - name: isAuthenticated
     type: boolean
+C_LFGList.IsPlayerValidForEndgameFieldEdits:
+  inputs:
+  outputs:
+  - name: isValid
+    type: boolean
 C_LFGList.IsPremadeGroupFinderEnabled:
   inputs:
   outputs:
   - name: enabled
+    type: boolean
+C_LFGList.ListingUsesEndgameEditRestrictions:
+  inputs:
+  - name: activityID
+    type: number
+  outputs:
+  - name: isEndgameListing
     type: boolean
 C_LFGList.RefreshApplicants:
 C_LFGList.RemoveApplicant:
@@ -16220,8 +16768,7 @@ C_LFGList.Search:
     type: number
   - name: languageFilter
     nilable: true
-    type:
-      structure: C_LFGList.WowLocale
+    type: string
   - default: false
     name: searchCrossFactionListings
     type: boolean
@@ -17943,13 +18490,35 @@ C_MythicPlus.RequestRewards:
   inputs:
   outputs:
 C_NamePlate.GetNamePlateForUnit:
-C_NamePlate.GetNamePlates:
+  inputs:
+  - name: unitToken
+    type: unit
+  - default: false
+    name: includeForbidden
+    type: boolean
   outputs:
-  - type: table
+  - name: nameplate
+    type: table
+C_NamePlate.GetNamePlates:
+  inputs:
+  outputs:
+  - name: nameplates
+    type:
+      arrayof: table
 C_NamePlate.GetNamePlateSize:
-C_NamePlate.GetTargetClampingInsets:
+  inputs:
+  outputs:
+  - name: width
+    type: number
+  - name: height
+    type: number
 C_NamePlate.SetNamePlateSize:
-C_NamePlate.SetTargetClampingInsets:
+  inputs:
+  - name: width
+    type: number
+  - name: height
+    type: number
+  outputs:
 C_NamePlateManager.GetNamePlateHitTestInsets:
   inputs:
   - name: type
@@ -18442,6 +19011,12 @@ C_PartyInfo.GetLootMethod:
   - name: masterLooterRaidID
     nilable: true
     type: number
+C_PartyInfo.GetLootMethodStyle:
+  inputs:
+  outputs:
+  - name: methodStyle
+    type:
+      enum: LootMethodStyles
 C_PartyInfo.GetMinItemLevel:
   inputs:
   - name: avgItemLevelCategory
@@ -18503,6 +19078,14 @@ C_PartyInfo.IsDelveInProgress:
   inputs:
   outputs:
   - name: isDelveComplete
+    type: boolean
+C_PartyInfo.IsLootMethodAvailable:
+  inputs:
+  - name: method
+    type:
+      enum: LootMethod
+  outputs:
+  - name: available
     type: boolean
 C_PartyInfo.IsPartyFull:
   inputs:
@@ -19295,6 +19878,61 @@ C_PetJournal.SummonRandomPet:
   inputs:
   - name: onlyFavorites
     type: boolean
+  outputs:
+C_PhotoSharing.BeginAuthorizationFlow:
+  inputs:
+  outputs:
+C_PhotoSharing.ClearAuthorization:
+  inputs:
+  outputs:
+C_PhotoSharing.CompleteAuthorizationFlow:
+  inputs:
+  - name: callbackURL
+    type: string
+  outputs:
+C_PhotoSharing.GetCropRatio:
+  inputs:
+  outputs:
+  - name: cropRatio
+    type: number
+C_PhotoSharing.GetPhotoSharingAuthURL:
+  inputs:
+  outputs:
+  - name: authUrl
+    type: string
+C_PhotoSharing.GetStatus:
+  inputs:
+  outputs:
+  - name: status
+    type:
+      enum: PhotoSharingStatus
+C_PhotoSharing.IsAuthorized:
+  inputs:
+  outputs:
+  - name: authorized
+    type: boolean
+C_PhotoSharing.IsEnabled:
+  inputs:
+  outputs:
+  - name: enabled
+    type: boolean
+C_PhotoSharing.SetScreenshotPreviewTexture:
+  inputs:
+  - name: textureObject
+    type:
+      uiobject: Texture
+  outputs:
+C_PhotoSharing.TakePhoto:
+  inputs:
+  outputs:
+C_PhotoSharing.UploadPhotoToService:
+  inputs:
+  - default: ''
+    name: optionalTitle
+    type: string
+  - default: ''
+    name: optionalDescription
+    type: string
   outputs:
 C_Ping.GetContextualPingTypeForUnit:
   inputs:
@@ -20116,6 +20754,14 @@ C_PvP.GetActiveMatchWinner:
   outputs:
   - name: winner
     type: number
+C_PvP.GetArenaCrowdControlDuration:
+  inputs:
+  - name: playerToken
+    type: unit
+  outputs:
+  - name: duration
+    type:
+      luaobject: LuaDurationObject
 C_PvP.GetArenaCrowdControlInfo:
   inputs:
   - name: playerToken
@@ -20883,6 +21529,7 @@ C_QuestInfoSystem.GetQuestClassification:
 C_QuestInfoSystem.GetQuestLogRewardFavor:
   inputs:
   - name: questID
+    nilable: true
     type: number
   - name: clampFavorToCycleCap
     nilable: true
@@ -22436,6 +23083,13 @@ C_ScenarioInfo.GetCriteriaInfoByStep:
   - name: scenarioCriteriaInfo
     type:
       structure: C_ScenarioInfo.ScenarioCriteriaInfo
+C_ScenarioInfo.GetDisplayInfo:
+  inputs:
+  mayreturnnothing: true
+  outputs:
+  - name: info
+    type:
+      structure: C_ScenarioInfo.ScenarioDisplayInfo
 C_ScenarioInfo.GetJailersTowerTypeString:
   inputs:
   - name: runType
@@ -22462,6 +23116,18 @@ C_ScenarioInfo.GetScenarioStepInfo:
   - name: scenarioStepInfo
     type:
       structure: C_ScenarioInfo.ScenarioStepInfo
+C_ScenarioInfo.GetTieredEntranceActiveSpells:
+  inputs:
+  outputs:
+  - name: spellIDs
+    nilable: true
+    type:
+      arrayof: number
+C_ScenarioInfo.IsTieredEntranceScenario:
+  inputs:
+  outputs:
+  - name: isTieredEntrance
+    type: boolean
 C_ScrappingMachineUI.CloseScrappingMachine:
   inputs:
   outputs:
@@ -22715,6 +23381,25 @@ C_Secrets.ShouldUnitSpellCastingBeSecret:
   outputs:
   - name: isSpellCastingSecret
     type: boolean
+C_Secrets.ShouldUnitThreatStateBeSecret:
+  inputs:
+  - name: unit
+    type: unit
+  - name: mobUnit
+    nilable: true
+    type: unit
+  outputs:
+  - name: isUnitThreatSecret
+    type: boolean
+C_Secrets.ShouldUnitThreatValuesBeSecret:
+  inputs:
+  - name: unit
+    type: unit
+  - name: mobUnit
+    type: unit
+  outputs:
+  - name: isUnitThreatSecret
+    type: boolean
 C_SecureTransfer.AcceptTrade:
   inputs:
   outputs:
@@ -22731,6 +23416,11 @@ C_SecureTransfer.GetHousingPurchaseCost:
   inputs:
   outputs:
   - name: totalCost
+    type: number
+C_SecureTransfer.GetHousingPurchaseQuantity:
+  inputs:
+  outputs:
+  - name: quantity
     type: number
 C_SecureTransfer.GetHousingVCPurchaseProductID:
   inputs:
@@ -24716,6 +25406,24 @@ C_StoreSecure.RequestRealmGuildMasterInfo:
 C_StoreSecure.SetDisconnectOnLogout:
 C_StoreSecure.SetVASProductReady:
 C_StoreSecure.ValidateBnetTransfer:
+C_StringUtil.CreateAbbreviatedNumberFormatter:
+  inputs:
+  outputs:
+  - name: formatter
+    type:
+      luaobject: AbbreviatedNumberFormatter
+C_StringUtil.CreateNumericRuleFormatter:
+  inputs:
+  outputs:
+  - name: formatter
+    type:
+      luaobject: NumericRuleFormatter
+C_StringUtil.CreateSecondsFormatter:
+  inputs:
+  outputs:
+  - name: formatter
+    type:
+      luaobject: SecondsFormatter
 C_StringUtil.EscapeLuaFormatString:
   inputs:
   - name: text
@@ -24744,6 +25452,16 @@ C_StringUtil.FloorToNearestString:
   outputs:
   - name: text
     type: string
+C_StringUtil.GetDefaultAbbreviationBreakpoints:
+  inputs:
+  - name: locale
+    nilable: true
+    type: string
+  outputs:
+  - name: breakpoints
+    type:
+      arrayof:
+        structure: NumberAbbreviationBreakpoint
 C_StringUtil.RemoveContiguousSpaces:
   inputs:
   - name: text
@@ -24776,6 +25494,16 @@ C_StringUtil.StripHyperlinks:
   - default: false
     name: maintainAtlases
     type: boolean
+  - default: false
+    name: maintainTextures
+    type: boolean
+  outputs:
+  - name: stripped
+    type: string
+C_StringUtil.StripTextureMarkupForLooseFiles:
+  inputs:
+  - name: text
+    type: string
   outputs:
   - name: stripped
     type: string
@@ -24976,6 +25704,16 @@ C_SystemVisibilityManager.IsSystemVisible:
   outputs:
   - name: visible
     type: boolean
+C_TableUtil.FindIndexedMismatch:
+  inputs:
+  - name: t1
+    type: unknown
+  - name: t2
+    type: unknown
+  outputs:
+  - name: index
+    nilable: true
+    type: number
 C_TalkingHead.GetConversationsDeferred:
 C_TalkingHead.GetCurrentLineAnimationInfo:
 C_TalkingHead.GetCurrentLineInfo:
@@ -25590,6 +26328,12 @@ C_TooltipInfo.GetItemByID:
   - name: itemID
     type: number
   - name: quality
+    nilable: true
+    type: number
+  - name: itemContext
+    nilable: true
+    type: number
+  - name: treasureContextLevel
     nilable: true
     type: number
   mayreturnnothing: true
@@ -28032,6 +28776,10 @@ C_TransmogCollection.GetIllusionInfo:
       structure: C_TransmogCollection.TransmogIllusionInfo
 C_TransmogCollection.GetIllusions:
   inputs:
+  - name: category
+    nilable: true
+    type:
+      enum: TransmogCollectionType
   outputs:
   - name: illusions
     type:
@@ -28219,6 +28967,13 @@ C_TransmogCollection.IsSourceTypeFilterChecked:
     type: number
   outputs:
   - name: checked
+    type: boolean
+C_TransmogCollection.IsSpellItemEnchantmentHiddenVisual:
+  inputs:
+  - name: spellItemEnchantmentID
+    type: number
+  outputs:
+  - name: isHiddenVisual
     type: boolean
 C_TransmogCollection.IsUsingDefaultFilters:
   inputs:
@@ -28416,6 +29171,13 @@ C_TransmogOutfitInfo.ChangeDisplayedOutfit:
   - name: allowRemoveOutfit
     type: boolean
   outputs:
+C_TransmogOutfitInfo.ChangeToOutfit:
+  inputs:
+  - name: playerFacingOutfitIndex
+    type: number
+  - name: allowRemoveOutfit
+    type: boolean
+  outputs:
 C_TransmogOutfitInfo.ChangeViewedOutfit:
   inputs:
   - name: outfitID
@@ -28435,8 +29197,13 @@ C_TransmogOutfitInfo.ClearDisplayedOutfit:
   - name: toggleLock
     type: boolean
   outputs:
+C_TransmogOutfitInfo.ClearOutfit:
+  inputs:
+  outputs:
 C_TransmogOutfitInfo.CommitAndApplyAllPending:
   inputs:
+  - name: useAvailableDiscount
+    type: boolean
   outputs:
 C_TransmogOutfitInfo.CommitOutfitInfo:
   inputs:
@@ -28468,6 +29235,16 @@ C_TransmogOutfitInfo.GetAllSlotLocationInfo:
       arrayof:
         structure: C_TransmogOutfitInfo.TransmogOutfitSlotInfo
   stubnothing: true
+C_TransmogOutfitInfo.GetAllTransmogOutfitOptionSheatheCategoryInfo:
+  inputs:
+  - name: imaID
+    type: number
+  mayreturnnothing: true
+  outputs:
+  - name: categoryInfo
+    type:
+      arrayof:
+        structure: C_TransmogOutfitInfo.TransmogOutfitOptionSheatheCategoryInfo
 C_TransmogOutfitInfo.GetCollectionInfoForSlotAndOption:
   inputs:
   - name: slot
@@ -28587,6 +29364,8 @@ C_TransmogOutfitInfo.GetPendingTransmogCost:
   mayreturnnothing: true
   outputs:
   - name: cost
+    type: number
+  - name: modifierFlags
     type: number
 C_TransmogOutfitInfo.GetSecondarySlotState:
   inputs:
@@ -28715,6 +29494,11 @@ C_TransmogOutfitInfo.HasPendingOutfitTransmogs:
   outputs:
   - name: hasPending
     type: boolean
+C_TransmogOutfitInfo.InTransmogEvent:
+  inputs:
+  outputs:
+  - name: inTransmogEvent
+    type: boolean
 C_TransmogOutfitInfo.IsEquippedGearOutfitDisplayed:
   inputs:
   outputs:
@@ -28739,6 +29523,11 @@ C_TransmogOutfitInfo.IsSlotWeaponSlot:
       enum: TransmogOutfitSlot
   outputs:
   - name: isWeaponSlot
+    type: boolean
+C_TransmogOutfitInfo.IsUsableDiscountAvailable:
+  inputs:
+  outputs:
+  - name: isAvailable
     type: boolean
 C_TransmogOutfitInfo.IsValidTransmogOutfitName:
   inputs:
@@ -28777,6 +29566,11 @@ C_TransmogOutfitInfo.SetOutfitToCustomSet:
   - name: transmogCustomSetID
     type: number
   outputs:
+C_TransmogOutfitInfo.SetOutfitToOutfit:
+  inputs:
+  - name: outfitID
+    type: number
+  outputs:
 C_TransmogOutfitInfo.SetOutfitToSet:
   inputs:
   - name: transmogSetID
@@ -28798,6 +29592,18 @@ C_TransmogOutfitInfo.SetPendingTransmog:
   - name: displayType
     type:
       enum: TransmogOutfitDisplayType
+  outputs:
+C_TransmogOutfitInfo.SetPendingTransmogSheatheCategory:
+  inputs:
+  - name: slot
+    type:
+      enum: TransmogOutfitSlot
+  - name: option
+    type:
+      enum: TransmogOutfitSlotOption
+  - name: category
+    type:
+      enum: TransmogOutfitSlotOptionSheatheCategory
   outputs:
 C_TransmogOutfitInfo.SetSecondarySlotState:
   inputs:
@@ -28824,6 +29630,11 @@ C_TransmogOutfitInfo.SlotHasSecondary:
       enum: TransmogOutfitSlot
   outputs:
   - name: hasSecondary
+    type: boolean
+C_TransmogOutfitInfo.TransmogEventActive:
+  inputs:
+  outputs:
+  - name: transmogEventActive
     type: boolean
 C_TransmogOutfitInfo.UpdatePendingSituation:
   inputs:
@@ -29038,6 +29849,11 @@ C_TransmogSets.GetVariantSets:
     type:
       arrayof:
         structure: C_TransmogSets.TransmogSetInfo
+C_TransmogSets.HasAvailableSets:
+  inputs:
+  outputs:
+  - name: hasAvailableSets
+    type: boolean
 C_TransmogSets.HasUsableSets:
   inputs:
   outputs:
@@ -30230,9 +31046,9 @@ C_VoiceChat.GetChannel:
   inputs:
   - name: channelID
     type: number
+  mayreturnnothing: true
   outputs:
   - name: channel
-    nilable: true
     type:
       structure: C_VoiceChat.VoiceChatChannel
 C_VoiceChat.GetChannelForChannelType:
@@ -30240,9 +31056,9 @@ C_VoiceChat.GetChannelForChannelType:
   - name: channelType
     type:
       enum: ChatChannelType
+  mayreturnnothing: true
   outputs:
   - name: channel
-    nilable: true
     type:
       structure: C_VoiceChat.VoiceChatChannel
 C_VoiceChat.GetChannelForCommunityStream:
@@ -30251,9 +31067,9 @@ C_VoiceChat.GetChannelForCommunityStream:
     type: string
   - name: streamId
     type: string
+  mayreturnnothing: true
   outputs:
   - name: channel
-    nilable: true
     type:
       structure: C_VoiceChat.VoiceChatChannel
 C_VoiceChat.GetCommunicationMode:
@@ -31627,7 +32443,7 @@ CreateAbbreviateConfig:
   - name: data
     type:
       arrayof:
-        structure: NumberAbbrevData
+        structure: NumberAbbreviationBreakpoint
   outputs:
   - name: config
     type:
@@ -31836,6 +32652,15 @@ DropCursorMoney:
 dropsecretaccess:
   inputs:
   outputs:
+dumpobject:
+  inputs:
+  - name: value
+    nilable: true
+    type: unknown
+  outputs:
+  - name: result
+    nilable: true
+    type: unknown
 DungeonAppearsInRandomLFD:
 EditMacro:
 EJ_ClearSearch:
@@ -32169,16 +32994,6 @@ GetAttackPowerForStat:
   outputs:
   - name: result
     type: number
-GetAutoCompletePresenceID:
-GetAutoCompleteRealms:
-  inputs:
-  - name: tableNames
-    nilable: true
-    type: table
-  outputs:
-  - name: tableNames
-    type: table
-GetAutoCompleteResults:
 GetAutoDeclineGuildInvites:
   inputs:
   outputs:
@@ -32280,8 +33095,6 @@ GetBattlefieldPortExpiration:
   outputs:
   - name: expiration
     type: number
-GetBattlefieldScore:
-GetBattlefieldStatData:
 GetBattlefieldStatus:
   inputs:
   - name: index
@@ -32611,6 +33424,11 @@ GetCurrentBindingSet:
   inputs:
   outputs:
   - type: number
+GetCurrentCinematicSummary:
+  inputs:
+  outputs:
+  - name: summary
+    type: string
 GetCurrentEnvironment:
   impl: GetCurrentEnvironment
 GetCurrentEventID:
@@ -32621,7 +33439,6 @@ GetCurrentEventID:
     type: number
 GetCurrentGlyphNameForSpell:
 GetCurrentGraphicsAPI:
-GetCurrentGraphicsSetting:
 GetCurrentGuildBankTab:
   outputs:
   - type: number
@@ -33071,11 +33888,6 @@ GetGuildInfo:
     type: string
   - name: guildRankIndex
     type: number
-GetGuildInfoText:
-  inputs:
-  outputs:
-  - name: text
-    type: string
 GetGuildLogoInfo:
 GetGuildMemberRecipes:
 GetGuildNewsFilters:
@@ -33137,9 +33949,6 @@ GetGuildRosterInfo:
     type: boolean
 GetGuildRosterLargestAchievementPoints:
 GetGuildRosterLastOnline:
-GetGuildRosterMOTD:
-  outputs:
-  - type: string
 GetGuildRosterSelection:
   inputs:
   outputs:
@@ -34261,6 +35070,11 @@ GetNumTitles:
   inputs:
   outputs:
   - name: result
+    type: number
+GetNumTotemSlots:
+  inputs:
+  outputs:
+  - name: numSlots
     type: number
 GetNumTrainerServices:
   inputs:
@@ -35767,8 +36581,6 @@ GuildNewsSort:
   - name: unknown
     type: number
   outputs:
-GuildRosterSetOfficerNote:
-GuildRosterSetPublicNote:
 HandleAtlasMemberCommand:
 hasanysecretvalues:
   inputs:
@@ -36335,7 +37147,6 @@ IsRangedWeapon:
   outputs:
   - name: result
     type: boolean
-IsRecognizedName:
 IsResting:
   inputs:
   outputs:
@@ -36883,6 +37694,13 @@ PlayerIsPVPInactive:
   outputs:
   - name: result
     type: boolean
+PlayerIsSpellTarget:
+  inputs:
+  - name: unit
+    type: unit
+  outputs:
+  - name: result
+    type: boolean
 PlayerIsTimerunning:
   inputs:
   outputs:
@@ -37301,7 +38119,6 @@ SetConsoleKey:
   - name: keystring
     type: string
   outputs:
-SetCurrentGraphicsSetting:
 SetCurrentGuildBankTab:
 SetCurrentTitle:
   inputs:
@@ -37379,7 +38196,6 @@ SetGuildBankTabItemWithdraw:
 SetGuildBankTabPermissions:
 SetGuildBankText:
 SetGuildBankWithdrawGoldLimit:
-SetGuildInfoText:
 SetGuildMemberRank:
 SetGuildNewsFilter:
 SetGuildRosterSelection:
@@ -38124,6 +38940,8 @@ UnitCastingInfo:
     type: number
   - name: castBarID
     nilable: true
+    type: number
+  - name: delayTimeMs
     type: number
 UnitChannelDuration:
   inputs:
@@ -38941,15 +39759,6 @@ UnitIsSameServer:
   inputs:
   - name: unitName
     type: string
-  outputs:
-  - name: result
-    type: boolean
-UnitIsSpellTarget:
-  inputs:
-  - name: unit
-    type: unit
-  - name: target
-    type: unit
   outputs:
   - name: result
     type: boolean
