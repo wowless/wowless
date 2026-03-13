@@ -26447,6 +26447,9 @@ C_TradeSkillUI.DoesRecraftingRecipeAcceptItem:
 C_TradeSkillUI.DropPendingObliterateItemFromCursor:
 C_TradeSkillUI.GetAllFilterableInventorySlots:
 C_TradeSkillUI.GetAllFilterableInventorySlotsCount:
+  inputs:
+  outputs:
+  - type: number
 C_TradeSkillUI.GetAllProfessionTradeSkillLines:
   inputs:
   outputs:
