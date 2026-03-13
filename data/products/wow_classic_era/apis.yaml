@@ -9990,6 +9990,9 @@ C_PetJournal.GetNumPetSources:
   outputs:
   - type: number
 C_PetJournal.GetNumPetTypes:
+  inputs:
+  outputs:
+  - type: number
 C_PetJournal.GetOwnedBattlePetString:
 C_PetJournal.GetOwnedPetIDs:
   inputs:
