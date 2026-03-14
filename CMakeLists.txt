@@ -343,6 +343,17 @@ yaml2lua(stringenums)
 
 lua2c(toolsutil tools.util=${CMAKE_CURRENT_SOURCE_DIR}/tools/util.lua)
 
+add_lua_executable(genmodules ${CMAKE_CURRENT_SOURCE_DIR}/tools/genmodules.lua
+                   penlight toolsutil tsort wowlessyaml)
+add_custom_command(
+  OUTPUT runtime/modules_factory.lua
+  COMMAND
+    genmodules ${CMAKE_CURRENT_SOURCE_DIR}/data/modules.yaml
+    ${CMAKE_CURRENT_BINARY_DIR}/runtime/modules_factory.lua
+    ${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules
+  DEPFILE runtime/modules_factory.lua.d
+  DEPENDS genmodules ${CMAKE_CURRENT_SOURCE_DIR}/data/modules.yaml)
+
 add_lua_executable(sqls ${CMAKE_CURRENT_SOURCE_DIR}/tools/sqls.lua penlight
                    toolsutil wowlessyaml)
 add_custom_command(
@@ -775,7 +786,6 @@ $<$<PLATFORM_ID:Windows>:windows>\
 lua2c(
   wowlesslib
   luapath=p
-  runtime.modules=runtime/modules.lua
   runtime.platform=runtime/platform.lua
   runtime.stringenums=runtime/stringenums.lua
   wowless.bubblewrap=c
@@ -783,47 +793,7 @@ lua2c(
   wowless.debug=c
   wowless.ext=c
   wowless.hlist=${CMAKE_CURRENT_SOURCE_DIR}/wowless/hlist.lua
-  wowless.modules=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules.lua
-  wowless.modules.addons=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/addons.lua
-  wowless.modules.api=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/api.lua
-  wowless.modules.apiloader=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/apiloader.lua
-  wowless.modules.cgencode=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/cgencode.lua
-  wowless.modules.atlas=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/atlas.lua
-  wowless.modules.calendar=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/calendar.lua
-  wowless.modules.clog=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/clog.lua
-  wowless.modules.cvars=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/cvars.lua
-  wowless.modules.datetime=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/datetime.lua
-  wowless.modules.dirty=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/dirty.lua
-  wowless.modules.env=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/env.lua
-  wowless.modules.errors=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/errors.lua
-  wowless.modules.events=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/events.lua
-  wowless.modules.fontinstance=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/fontinstance.lua
-  wowless.modules.funcheck=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/funcheck.lua
-  wowless.modules.funtainer=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/funtainer.lua
-  wowless.modules.gencode=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/gencode.lua
-  wowless.modules.loader=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/loader.lua
-  wowless.modules.luaobjects=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/luaobjects.lua
-  wowless.modules.macrotext=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/macrotext.lua
-  wowless.modules.mainloop=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/mainloop.lua
-  wowless.modules.parentkey=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/parentkey.lua
-  wowless.modules.platform=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/platform.lua
-  wowless.modules.points=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/points.lua
-  wowless.modules.region=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/region.lua
-  wowless.modules.scripts=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/scripts.lua
-  wowless.modules.security=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/security.lua
-  wowless.modules.sqlitedb=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/sqlitedb.lua
-  wowless.modules.sqls=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/sqls.lua
-  wowless.modules.statusbar=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/statusbar.lua
-  wowless.modules.system=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/system.lua
-  wowless.modules.talents=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/talents.lua
-  wowless.modules.templates=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/templates.lua
-  wowless.modules.time=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/time.lua
-  wowless.modules.typecheck=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/typecheck.lua
-  wowless.modules.uiobjectloader=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/uiobjectloader.lua
-  wowless.modules.uiobjects=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/uiobjects.lua
-  wowless.modules.uiobjecttypes=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/uiobjecttypes.lua
-  wowless.modules.units=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/units.lua
-  wowless.modules.visibility=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/visibility.lua
+  wowless.modules=runtime/modules_factory.lua
   wowless.profiler=${CMAKE_CURRENT_SOURCE_DIR}/wowless/profiler.lua
   wowless.runner=${CMAKE_CURRENT_SOURCE_DIR}/wowless/runner.lua
   wowless.secure=c

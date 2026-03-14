@@ -1,4 +1,4 @@
-local units = require('wowless.modules.units')()
+local units = loadfile('wowless/modules/units.lua')()()
 
 local tests = {
   ['array of numbers type, string value'] = {
@@ -152,7 +152,7 @@ local tests = {
 }
 
 describe('typecheck', function()
-  local typecheck = require('wowless.modules.typecheck')(unpack({
+  local typecheck = loadfile('wowless/modules/typecheck.lua')()(unpack({
     nil, -- addons
     { -- datalua
       globals = {
