@@ -1,5 +1,5 @@
 describe('funcheck', function()
-  local typecheck = loadfile('wowless/modules/typecheck.lua')()(nil, {
+  local typecheck = require('wowless.modules.typecheck')(nil, {
     globals = {
       Enum = {},
     },
@@ -8,7 +8,7 @@ describe('funcheck', function()
   local function log(_, fmt, ...)
     return error(fmt:format(...))
   end
-  local funcheck = loadfile('wowless/modules/funcheck.lua')()(log, typecheck)
+  local funcheck = require('wowless.modules.funcheck')(log, typecheck)
   local function checkret(nexpected, expected, ...)
     assert.same(nexpected, select('#', ...))
     assert.same(expected, { ... })
