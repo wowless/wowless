@@ -858,7 +858,7 @@ return function(
     else
       toc.loaded = true
     end
-    log(1, 'done loading %s', addonName)
+    log(1, 'done loading %s%s', addonName, kindstr)
     SendEvent('ADDON_LOADED', addonName, not not toc.bindings)
     for _, revwith in ipairs(toc.revwiths) do
       log(1, 'processing LoadWith %q -> %q', addonName, revwith)
