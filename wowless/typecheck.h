@@ -217,6 +217,36 @@ static inline void wowless_stubcreateuiobject(lua_State *L,
   lua_call(L, 1, 1);
 }
 
+static inline void wowless_stuboutputstring(lua_State *L, int idx) {
+  if (lua_type(L, idx) != LUA_TSTRING) {
+    luaL_error(L, "output %d: string expected, got %s", idx,
+               luaL_typename(L, idx));
+  }
+}
+
+static inline void wowless_stuboutputnilablestring(lua_State *L, int idx) {
+  int t = lua_type(L, idx);
+  if (t != LUA_TSTRING && t != LUA_TNIL && t != LUA_TNONE) {
+    luaL_error(L, "output %d: string or nil expected, got %s", idx,
+               luaL_typename(L, idx));
+  }
+}
+
+static inline void wowless_stuboutputnumber(lua_State *L, int idx) {
+  if (lua_type(L, idx) != LUA_TNUMBER) {
+    luaL_error(L, "output %d: number expected, got %s", idx,
+               luaL_typename(L, idx));
+  }
+}
+
+static inline void wowless_stuboutputnilablenumber(lua_State *L, int idx) {
+  int t = lua_type(L, idx);
+  if (t != LUA_TNUMBER && t != LUA_TNIL && t != LUA_TNONE) {
+    luaL_error(L, "output %d: number or nil expected, got %s", idx,
+               luaL_typename(L, idx));
+  }
+}
+
 static inline void wowless_stubcheckextraargs(lua_State *L, int nsins,
                                               const char *fname) {
   if (lua_gettop(L) > nsins) {

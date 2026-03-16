@@ -259,6 +259,21 @@ local function ensureimpl(k)
   return impls[k]
 end
 
+local function is_output_eligible(out)
+  local t = out.type
+  if type(t) ~= 'string' then
+    return false
+  end
+  return t == 'nil'
+    or t == 'oneornil'
+    or t == 'unknown'
+    or t == 'string'
+    or t == 'unit'
+    or t == 'number'
+    or t == 'enum'
+    or t == 'FileAsset'
+end
+
 local function is_impl_eligible(apicfg)
   if not apicfg.impl then
     return false
@@ -268,7 +283,19 @@ local function is_impl_eligible(apicfg)
   if not has_inputs and not has_outputs then
     return true
   end
-  return ensureimpl(apicfg.impl).nowrap
+  local impl = ensureimpl(apicfg.impl)
+  if impl.nowrap then
+    return true
+  end
+  if impl.nobubblewrap and (apicfg.outstride or 0) == 0 then
+    for _, out in ipairs(apicfg.outputs or {}) do
+      if not is_output_eligible(out) then
+        return false
+      end
+    end
+    return true
+  end
+  return false
 end
 
 local function mkapi(apicfg)
@@ -693,6 +720,14 @@ if args.coutput then
     end,
   }
 
+  local coutputtypes = {
+    enum = 'number',
+    FileAsset = 'number',
+    number = 'number',
+    string = 'string',
+    unit = 'string',
+  }
+
   local used_structures = {}
   local used_arrayofs = {}
   local used_luaobjects = {}
@@ -1050,7 +1085,7 @@ if args.coutput then
       local fn = impldata.nobubblewrap and 'wowless_impl_stub_nobubblewrap' or 'wowless_impl_stub'
       local v = entry.cfg
       local check_inputs = v.inputs ~= nil and (v.instride or 0) == 0
-      local check_outputs = v.outputs ~= nil and #v.outputs == 0
+      local check_outputs = v.outputs ~= nil and (v.outstride or 0) == 0
       emit('static int implstub_%s(lua_State *L) {', safename(entry.name))
       if check_inputs then
         emit('  wowless_stubcheckextraargs(L, 0, %s);', cstring(entry.name))
@@ -1058,6 +1093,13 @@ if args.coutput then
       if check_outputs then
         emit('  int ret = %s(L);', fn)
         emit('  wowless_stubchecknreturns(L, ret, %d, %s);', #v.outputs, cstring(entry.name))
+        for i, out in ipairs(v.outputs) do
+          local nilable = out.nilable or out.default ~= nil
+          local ct = type(out.type) == 'string' and coutputtypes[out.type]
+          if ct then
+            emit('  wowless_stuboutput%s%s(L, %d);', nilable and 'nilable' or '', ct, i)
+          end
+        end
         emit('  return ret;')
       else
         emit('  return %s(L);', fn)
