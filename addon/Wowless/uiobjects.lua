@@ -100,6 +100,237 @@ G.testsuite.uiobjects = function()
       }
     end,
 
+    FontString = function()
+      return {
+        rectstatemachine = function()
+          if _G.__wowless then -- issue #473
+            return
+          end
+          local fs = CreateFrame('Frame'):CreateFontString()
+          fs:GetParent():SetAllPoints()
+          fs:SetFontObject('GameFontNormal')
+          fs:SetText('foo')
+          local tw, th = fs:GetSize()
+          assert(tw > 1)
+          assert(th > 1)
+          fs:SetText(nil)
+          local function invalidrect(w, h)
+            check0(fs:GetBottom())
+            check0(fs:GetCenter())
+            check0(fs:GetLeft())
+            check0(fs:GetRect())
+            check0(fs:GetRight())
+            check0(fs:GetTop())
+            check1(h, fs:GetHeight())
+            check2(w, h, fs:GetSize())
+            check1(w, fs:GetWidth())
+            check1(false, fs:IsRectValid())
+          end
+          local function validrect(l, b, w, h)
+            check1(b, fs:GetBottom())
+            check2(l + w / 2, b + h / 2, fs:GetCenter())
+            check1(l, fs:GetLeft())
+            check4(l, b, w, h, fs:GetRect())
+            check1(l + w, fs:GetRight())
+            check1(b + h, fs:GetTop())
+            check1(h, fs:GetHeight())
+            check2(w, h, fs:GetSize())
+            check1(w, fs:GetWidth())
+            check1(true, fs:IsRectValid())
+          end
+          local function explicitsize(w, h)
+            check1(h, fs:GetHeight(true))
+            check2(w, h, fs:GetSize(true))
+            check1(w, fs:GetWidth(true))
+          end
+          local states = {
+            ['nosize, nopoint, notext'] = function()
+              invalidrect(1, 1)
+              explicitsize(1, 1)
+              check1(0, fs:GetNumPoints())
+              check1(nil, fs:GetText())
+            end,
+            ['nosize, blpoint, notext'] = function()
+              validrect(0, 0, 1, 1)
+              explicitsize(1, 1)
+              check1(1, fs:GetNumPoints())
+              check1(nil, fs:GetText())
+            end,
+            ['11size, nopoint, notext'] = function()
+              -- Yes, this state is otherwise indistinguishable from nosize.
+              invalidrect(1, 1)
+              explicitsize(1, 1)
+              check1(0, fs:GetNumPoints())
+              check1(nil, fs:GetText())
+            end,
+            ['11size, blpoint, notext'] = function()
+              validrect(0, 0, 1, 1)
+              explicitsize(1, 1)
+              check1(1, fs:GetNumPoints())
+              check1(nil, fs:GetText())
+            end,
+            ['11size, nopoint, text'] = function()
+              invalidrect(1, 1)
+              explicitsize(1, 1)
+              check1(0, fs:GetNumPoints())
+              check1('foo', fs:GetText())
+            end,
+            ['11size, blpoint, text'] = function()
+              validrect(0, 0, 1, 1)
+              explicitsize(1, 1)
+              check1(1, fs:GetNumPoints())
+              check1('foo', fs:GetText())
+            end,
+            ['8040size, nopoint, notext'] = function()
+              invalidrect(80, 40)
+              explicitsize(80, 40)
+              check1(0, fs:GetNumPoints())
+              check1(nil, fs:GetText())
+            end,
+            ['8040size, blpoint, notext'] = function()
+              validrect(0, 0, 80, 40)
+              explicitsize(80, 40)
+              check1(1, fs:GetNumPoints())
+              check1(nil, fs:GetText())
+            end,
+            ['8040size, nopoint, text'] = function()
+              invalidrect(80, 40)
+              explicitsize(80, 40)
+              check1(0, fs:GetNumPoints())
+              check1('foo', fs:GetText())
+            end,
+            ['8040size, blpoint, text'] = function()
+              validrect(0, 0, 80, 40)
+              explicitsize(80, 40)
+              check1(1, fs:GetNumPoints())
+              check1('foo', fs:GetText())
+            end,
+            ['textsize, nopoint, text'] = function()
+              invalidrect(tw, th)
+              explicitsize(tw, th)
+              check1(0, fs:GetNumPoints())
+              check1('foo', fs:GetText())
+            end,
+            ['textsize, blpoint, text'] = function()
+              validrect(0, 0, tw, th)
+              explicitsize(tw, th)
+              check1(1, fs:GetNumPoints())
+              check1('foo', fs:GetText())
+            end,
+          }
+          local transitions = {
+            clearpoint = {
+              edges = {
+                ['nosize, nopoint, notext'] = 'nosize, nopoint, notext',
+                ['nosize, blpoint, notext'] = 'nosize, nopoint, notext',
+                ['11size, nopoint, notext'] = '11size, nopoint, notext',
+                ['11size, blpoint, notext'] = '11size, nopoint, notext',
+                ['11size, nopoint, text'] = '11size, nopoint, text',
+                ['11size, blpoint, text'] = '11size, nopoint, text',
+                ['8040size, nopoint, notext'] = '8040size, nopoint, notext',
+                ['8040size, blpoint, notext'] = '8040size, nopoint, notext',
+                ['8040size, nopoint, text'] = '8040size, nopoint, text',
+                ['8040size, blpoint, text'] = '8040size, nopoint, text',
+                ['textsize, nopoint, text'] = 'textsize, nopoint, text',
+                ['textsize, blpoint, text'] = 'textsize, nopoint, text',
+              },
+              func = function()
+                check0(fs:ClearPoint('BOTTOMLEFT'))
+                local old = fs:GetText()
+                check0(fs:SetText('this is definitely not a string used elsewhere'))
+                check0(fs:SetText(old))
+              end,
+            },
+            setpoint = {
+              edges = {
+                ['nosize, nopoint, notext'] = 'nosize, blpoint, notext',
+                ['nosize, blpoint, notext'] = 'nosize, blpoint, notext',
+                ['11size, nopoint, notext'] = '11size, blpoint, notext',
+                ['11size, blpoint, notext'] = '11size, blpoint, notext',
+                ['11size, nopoint, text'] = '11size, blpoint, text',
+                ['11size, blpoint, text'] = '11size, blpoint, text',
+                ['8040size, nopoint, notext'] = '8040size, blpoint, notext',
+                ['8040size, blpoint, notext'] = '8040size, blpoint, notext',
+                ['8040size, nopoint, text'] = '8040size, blpoint, text',
+                ['8040size, blpoint, text'] = '8040size, blpoint, text',
+                ['textsize, nopoint, text'] = 'textsize, blpoint, text',
+                ['textsize, blpoint, text'] = 'textsize, blpoint, text',
+              },
+              func = function()
+                check0(fs:SetPoint('BOTTOMLEFT'))
+              end,
+            },
+            setsize00 = {
+              edges = {
+                ['nosize, nopoint, notext'] = 'nosize, nopoint, notext',
+                ['11size, nopoint, notext'] = 'nosize, nopoint, notext',
+                ['11size, nopoint, text'] = 'textsize, nopoint, text',
+                ['8040size, nopoint, notext'] = 'nosize, nopoint, notext',
+                ['8040size, nopoint, text'] = 'textsize, nopoint, text',
+                ['textsize, nopoint, text'] = 'textsize, nopoint, text',
+              },
+              func = function()
+                check0(fs:SetSize(0, 0))
+              end,
+            },
+            setsize11 = {
+              edges = {
+                ['nosize, nopoint, notext'] = '11size, nopoint, notext',
+                ['11size, nopoint, notext'] = '11size, nopoint, notext',
+                ['11size, nopoint, text'] = '11size, nopoint, text',
+                ['8040size, nopoint, notext'] = '11size, nopoint, notext',
+                ['8040size, nopoint, text'] = '11size, nopoint, text',
+                ['textsize, nopoint, text'] = '11size, nopoint, text',
+              },
+              func = function()
+                check0(fs:SetSize(1, 1))
+              end,
+            },
+            setsize8040 = {
+              edges = {
+                ['nosize, nopoint, notext'] = '8040size, nopoint, notext',
+                ['11size, nopoint, notext'] = '8040size, nopoint, notext',
+                ['11size, nopoint, text'] = '8040size, nopoint, text',
+                ['8040size, nopoint, notext'] = '8040size, nopoint, notext',
+                ['8040size, nopoint, text'] = '8040size, nopoint, text',
+                ['textsize, nopoint, text'] = '8040size, nopoint, text',
+              },
+              func = function()
+                check0(fs:SetSize(80, 40))
+              end,
+            },
+            settextfoo = {
+              edges = {
+                ['nosize, nopoint, notext'] = 'textsize, nopoint, text',
+                ['11size, nopoint, notext'] = '11size, nopoint, text',
+                ['11size, nopoint, text'] = '11size, nopoint, text',
+                ['8040size, nopoint, notext'] = '8040size, nopoint, text',
+                ['8040size, nopoint, text'] = '8040size, nopoint, text',
+                ['textsize, nopoint, text'] = 'textsize, nopoint, text',
+              },
+              func = function()
+                check0(fs:SetText('foo'))
+              end,
+            },
+            settextnil = {
+              edges = {
+                ['nosize, nopoint, notext'] = 'nosize, nopoint, notext',
+                ['11size, nopoint, notext'] = '11size, nopoint, notext',
+                ['11size, nopoint, text'] = '11size, nopoint, notext',
+                ['8040size, nopoint, notext'] = '8040size, nopoint, notext',
+                ['8040size, nopoint, text'] = '8040size, nopoint, notext',
+                ['textsize, nopoint, text'] = 'nosize, nopoint, notext',
+              },
+              func = function()
+                check0(fs:SetText(nil))
+              end,
+            },
+          }
+          return G.checkStateMachine(states, transitions, 'nosize, nopoint, notext')
+        end,
+      }
+    end,
+
     Frame = function()
       return {
         ['attributes'] = function()
