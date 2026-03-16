@@ -898,6 +898,7 @@ return function(
   end
 
   local function loadFrameXml()
+    log(1, 'initializing framexml')
     for tag, text in sqlitedb:urows('SELECT BaseTag, TagText_lang FROM GlobalStrings') do
       genv[tag] = text
       secureenv[tag] = text
@@ -908,15 +909,18 @@ return function(
         table.insert(blizzardAddons, toc.name:lower())
       end
     end
+    log(1, 'loading loadfirst/secureenv framexml addons')
     for _, name in ipairs(blizzardAddons) do
       local a = addonData[name].attrs
       if a.LoadFirst == '1' or a.UseSecureEnvironment == '1' then
         loadAddon(name)
       end
     end
+    log(1, 'loading remaining framexml addons')
     for _, name in ipairs(blizzardAddons) do
       loadAddon(name)
     end
+    log(1, 'done loading framexml')
   end
 
   local function saveAllVariables()
