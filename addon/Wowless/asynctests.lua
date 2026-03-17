@@ -157,6 +157,24 @@ G.asynctests = {
       end)
     end)
   end,
+  ['securecallfunction error handler throws'] = function(done)
+    if _G.__wowless then
+      return done(function() end)
+    end
+    local before = #G.ActualLuaWarnings
+    local oldhandler = _G.geterrorhandler()
+    _G.seterrorhandler(function()
+      error('handler error')
+    end)
+    _G.securecallfunction(error, 'original error')
+    _G.seterrorhandler(oldhandler)
+    assertEquals(before, #G.ActualLuaWarnings)
+    _G.C_Timer.After(0, function()
+      done(function()
+        assertEquals(before + 1, #G.ActualLuaWarnings)
+      end)
+    end)
+  end,
   ['heartbeat clears region dirty bits'] = function(done)
     local f = CreateFrame('Frame')
     f:SetSize(100, 100)
