@@ -13463,6 +13463,31 @@ C_HousingCatalog.HasFeaturedEntries:
   outputs:
   - name: hasEntries
     type: boolean
+C_HousingCatalog.HousingMarketActionAddToCart:
+  inputs:
+  - name: productID
+    type: number
+  - name: withPreview
+    type: boolean
+  outputs:
+C_HousingCatalog.HousingMarketActionClearCart:
+  inputs:
+  outputs:
+C_HousingCatalog.HousingMarketActionRemoveFromCart:
+  inputs:
+  - name: productID
+    type: number
+  outputs:
+C_HousingCatalog.HousingMarketActionViewBundle:
+  inputs:
+  - name: productID
+    type: number
+  outputs:
+C_HousingCatalog.HousingMarketActionViewInStore:
+  inputs:
+  - name: productID
+    type: number
+  outputs:
 C_HousingCatalog.IsPreviewCartItemShown:
   inputs:
   - name: decorGUID
