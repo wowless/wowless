@@ -16,16 +16,14 @@ end
 
 return {
   ['no args'] = function()
-    local errors, n, r1 = callWithHandler()
-    T.assertEquals(2, n)
-    T.assertEquals(false, r1)
-    T.assertEquals(0, #errors)
+    local errors, n = callWithHandler()
+    T.assertEquals(1, n)
+    T.assertEquals(1, #errors)
   end,
   ['nil arg'] = function()
-    local errors, n, r1 = callWithHandler(nil)
-    T.assertEquals(2, n)
-    T.assertEquals(false, r1)
-    T.assertEquals(0, #errors)
+    local errors, n = callWithHandler(nil)
+    T.assertEquals(1, n)
+    T.assertEquals(1, #errors)
   end,
   ['noop function'] = function()
     local errors, n, r1 = callWithHandler(function() end)
