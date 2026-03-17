@@ -47,6 +47,9 @@ dirty:
   deps:
 env:
   deps:
+errorhandler:
+  deps:
+    events:
 errors:
   deps:
     log:
@@ -112,6 +115,7 @@ macrotext:
 mainloop:
   deps:
     api:
+    errorhandler:
     region:
     scripts:
     time:

@@ -336,7 +336,9 @@ GetCurrentEnvironment:
   moduledelegate:
     name: env
 geterrorhandler:
-  stdlib: geterrorhandler
+  moduledelegate:
+    name: errorhandler
+    nobubblewrap: true
 getfenv:
   moduledelegate:
     name: env
@@ -581,7 +583,9 @@ SendSystemMessage:
       time:
       units:
 seterrorhandler:
-  stdlib: seterrorhandler
+  moduledelegate:
+    name: errorhandler
+    nobubblewrap: true
 setfenv:
   stdlib: setfenv
 setmetatable:
