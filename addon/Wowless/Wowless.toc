@@ -12,4 +12,5 @@ luaobjects.lua
 test.xml
 generated.lua
 uiobjects.lua
+asynctests.lua
 test.lua

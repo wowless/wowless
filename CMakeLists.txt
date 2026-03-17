@@ -948,6 +948,7 @@ set(testaddon_outs)
 foreach(
   f
   arraydiff.lua
+  asynctests.lua
   evenmoreintrinsic.xml
   framework.lua
   funtainer.lua
