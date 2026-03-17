@@ -2,33 +2,33 @@ return function(events)
   local SendEvent = events.SendEvent
   local pendingWarnings = {}
   local currentFn
-  local realSeterrorhandler = seterrorhandler
+  local realseterrorhandler = seterrorhandler
 
   local function geterrorhandler()
     return currentFn
   end
 
   local function seterrorhandler(fn)
-    currentFn = fn
     if type(fn) ~= 'function' then
-      realSeterrorhandler(fn)
+      -- Pass non-functions through to the real seterrorhandler, which will
+      -- reject them with an error, preserving the previous handler.
+      realseterrorhandler(fn)
       return
     end
-    realSeterrorhandler(function(msg)
+    currentFn = fn
+    realseterrorhandler(function(msg)
       local ok, result = pcall(fn, msg)
-      if ok then
-        return result
-      else
-        table.insert(pendingWarnings, result or 'error in error handling')
-        return msg
+      if not ok then
+        table.insert(pendingWarnings, tostring(result))
       end
     end)
   end
 
   local function FlushWarnings()
-    while pendingWarnings[1] do
-      SendEvent('LUA_WARNING', table.remove(pendingWarnings, 1))
+    for _, msg in ipairs(pendingWarnings) do
+      SendEvent('LUA_WARNING', msg)
     end
+    table.wipe(pendingWarnings)
   end
 
   return {
