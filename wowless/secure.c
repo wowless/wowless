@@ -4,6 +4,16 @@
 #include "lualib.h"
 
 /*
+ * securecallfunction(fn, ...) calls fn(...) securely.
+ * Stack on entry: fn(1), args(2..n)
+ */
+static int wowless_secure_securecallfunction(lua_State *L) {
+  luaL_checktype(L, 1, LUA_TFUNCTION);
+  luaL_securecall(L, (lua_gettop(L) - 1), LUA_MULTRET, LUA_ERRORHANDLERINDEX);
+  return lua_gettop(L);
+}
+
+/*
  * securecallmethod(obj, method, ...) calls obj:method(...) securely.
  * Stack on entry: obj(1), method(2), args(3..n)
  */
@@ -16,8 +26,9 @@ static int wowless_secure_securecallmethod(lua_State *L) {
 }
 
 static struct luaL_Reg securelib[] = {
-    {"securecallmethod", wowless_secure_securecallmethod},
-    {NULL,               NULL                           }
+    {"securecallfunction", wowless_secure_securecallfunction},
+    {"securecallmethod",   wowless_secure_securecallmethod  },
+    {NULL,                 NULL                             }
 };
 
 int luaopen_wowless_secure(lua_State *L) {

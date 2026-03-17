@@ -561,7 +561,9 @@ secretwrap:
 securecall:
   stdlib: securecall
 securecallfunction:
-  stdlib: securecallfunction
+  luadelegate:
+    module: wowless.secure
+    nowrap: true
 securecallmethod:
   luadelegate:
     module: wowless.secure

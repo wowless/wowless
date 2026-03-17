@@ -34,6 +34,7 @@ issecurevariable:
 IsTestBuild:
 IsWindowsClient:
 loadstring:
+securecallfunction:
 secureexecuterange:
 string.format:
 SwapToGlobalEnvironment:
