@@ -158,9 +158,6 @@ G.asynctests = {
     end)
   end,
   ['securecallfunction error handler throws'] = function(done)
-    if _G.__wowless then
-      return done(function() end)
-    end
     local before = #G.ActualLuaWarnings
     local oldhandler = _G.geterrorhandler()
     _G.seterrorhandler(function()
@@ -172,6 +169,7 @@ G.asynctests = {
     _G.C_Timer.After(0, function()
       done(function()
         assertEquals(before + 1, #G.ActualLuaWarnings)
+        table.insert(G.ExpectedLuaWarnings, G.ActualLuaWarnings[before + 1])
       end)
     end)
   end,
