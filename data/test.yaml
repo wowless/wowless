@@ -1,42 +1,92 @@
 C_CovenantSanctumUI.GetRenownLevels:
+  C_CovenantSanctumUI.GetRenownLevels:
 C_DateAndTime.AdjustTimeByDays:
+  C_DateAndTime.AdjustTimeByDays:
 C_DateAndTime.AdjustTimeByMinutes:
+  C_DateAndTime.AdjustTimeByMinutes:
 C_DateAndTime.CompareCalendarTime:
+  C_DateAndTime.CompareCalendarTime:
 C_EventUtils.IsCallbackEvent:
+  C_EventUtils.IsCallbackEvent:
 C_EventUtils.IsEventValid:
+  C_EventUtils.IsEventValid:
 C_FunctionContainers.CreateCallback:
+  C_FunctionContainers.CreateCallback:
 C_Timer.NewTimer:
+  C_Timer.NewTimer:
 ClassicExpansionAtLeast:
+  ClassicExpansionAtLeast:
 CreateFrame:
+  CreateFrame:
 CreateWindow:
+  CreateWindow:
 EnumerateFrames:
+  CreateFrame:
+  EnumerateFrames:
 error:
+  error:
 GetAddOnMetadata:
+  GetAddOnMetadata:
 GetBuildInfo_10_1:
+  GetBuildInfo_10_1:
 GetBuildInfo_1_15_0:
+  GetBuildInfo_1_15_0:
 GetBuildInfo_3_4_2:
+  GetBuildInfo_3_4_2:
 GetClassInfo:
+  GetClassInfo:
 GetClassInfo_Classic:
+  GetClassInfo_Classic:
 GetClickFrame:
+  CreateFrame:
+  GetClickFrame:
 GetCurrentEnvironment:
+  GetCurrentEnvironment:
 getfenv:
+  getfenv:
+  setfenv:
 GetFileIDFromPath:
+  GetFileIDFromPath:
 GetGlobalEnvironment:
+  GetGlobalEnvironment:
 hooksecurefunc:
+  hooksecurefunc:
 IsDebugBuild:
+  IsDebugBuild:
 IsGMClient:
+  IsGMClient:
 IsInGlobalEnvironment:
+  IsInGlobalEnvironment:
 IsLinuxClient:
+  IsLinuxClient:
 IsMacClient:
+  IsMacClient:
 IsPublicBuild:
+  IsPublicBuild:
 issecure:
+  issecure:
 issecurevariable:
+  issecurevariable:
 IsTestBuild:
+  IsTestBuild:
 IsWindowsClient:
+  IsWindowsClient:
 loadstring:
+  getfenv:
+  loadstring:
+  setfenv:
 securecallfunction:
+  error:
+  geterrorhandler:
+  securecallfunction:
+  seterrorhandler:
 secureexecuterange:
+  secureexecuterange:
 string.format:
+  string.format:
 SwapToGlobalEnvironment:
+  SwapToGlobalEnvironment:
 table.wipe:
+  table.wipe:
 UnitName:
+  UnitName:

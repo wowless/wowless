@@ -1,11 +1,11 @@
-local T, getfenv = ...
+local T, getfenv, setfenv = ...
 return {
   fnarg = function()
     return {
       set = function()
         local function f() end
         local t = {}
-        T.check1(f, T.env.setfenv(f, t))
+        T.check1(f, setfenv(f, t))
         T.check1(t, getfenv(f))
       end,
       unset = function()
@@ -21,7 +21,7 @@ return {
           return getfenv(1)
         end
         local t = {}
-        T.check1(f, T.env.setfenv(f, t))
+        T.check1(f, setfenv(f, t))
         T.check1(t, f())
       end,
       oneunset = function()

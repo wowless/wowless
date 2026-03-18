@@ -75,17 +75,38 @@ local ptablemap = {
   end,
   impltests = function(p)
     local test = readyaml('data/test.yaml')
-    local t = {}
+    local impl_to_apis = {}
     for name, api in pairs(perproduct(p, 'apis')) do
-      if test[api.impl] then
-        if not t[api.impl] then
-          t[api.impl] = { apis = {}, src = readfile('data/test/' .. api.impl .. '.lua') }
+      if api.impl then
+        if not impl_to_apis[api.impl] then
+          impl_to_apis[api.impl] = {}
         end
-        table.insert(t[api.impl].apis, name)
+        table.insert(impl_to_apis[api.impl], name)
       end
     end
-    for _, data in pairs(t) do
-      table.sort(data.apis)
+    for _, list in pairs(impl_to_apis) do
+      table.sort(list)
+    end
+    local t = {}
+    for test_name, impls_set in pairs(test) do
+      local sorted_impls = {}
+      for impl_name in pairs(impls_set) do
+        table.insert(sorted_impls, impl_name)
+      end
+      table.sort(sorted_impls)
+      local implsets = {}
+      local skip = false
+      for _, impl_name in ipairs(sorted_impls) do
+        local api_list = impl_to_apis[impl_name]
+        if not api_list then
+          skip = true
+          break
+        end
+        table.insert(implsets, api_list)
+      end
+      if not skip then
+        t[test_name] = { implsets = implsets, src = readfile('data/test/' .. test_name .. '.lua') }
+      end
     end
     return 'ImplTests', t
   end,
