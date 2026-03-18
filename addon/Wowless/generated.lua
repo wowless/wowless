@@ -374,15 +374,19 @@ G.testsuite.generated = function()
     }
     for impl, data in pairs(_G.WowlessData.ImplTests) do
       local vv = loadstring(data.src, '@data/test/' .. impl .. '.lua')
-      for combo in G.combinations(data.implsets) do
-        local key = table.concat(combo, ' ')
-        tests[key] = function()
-          local fns = {}
-          for _, api in ipairs(combo) do
-            table.insert(fns, G.tget(_G, api))
+      tests[impl] = function()
+        local subtests = {}
+        for combo in G.combinations(data.implsets) do
+          local key = table.concat(combo, ' ')
+          subtests[key] = function()
+            local fns = {}
+            for _, api in ipairs(combo) do
+              table.insert(fns, G.tget(_G, api))
+            end
+            return vv(arg, unpack(fns))
           end
-          return vv(arg, unpack(fns))
         end
+        return subtests
       end
     end
     return tests
