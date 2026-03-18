@@ -1,4 +1,4 @@
-local T, EnumerateFrames = ...
+local T, CreateFrame, EnumerateFrames = ...
 local function collect()
   local t = {}
   local f = EnumerateFrames()
@@ -9,9 +9,9 @@ local function collect()
   return t
 end
 local c1 = collect()
-local f1 = T.env.CreateFrame('Frame')
+local f1 = CreateFrame('Frame')
 local c2 = collect()
-local f2 = T.env.CreateFrame('Frame')
+local f2 = CreateFrame('Frame')
 local c3 = collect()
 return {
   c2 = function()

@@ -18,8 +18,13 @@ describe('test', function()
     describe(filename, function()
       it('has the right preamble', function()
         local impl = filename:match('([^/]+)%.lua$')
-        local var = impl:match('[^.]+$')
-        local preamble = 'local T, ' .. var .. ' = ...\n'
+        local implfns = require('build.data.test')[impl]
+        local vars = {}
+        for k in pairs(implfns) do
+          table.insert(vars, k:match('[^.]+$'))
+        end
+        table.sort(vars)
+        local preamble = 'local T, ' .. table.concat(vars, ', ') .. ' = ...\n'
         assert.same(preamble, content:sub(1, preamble:len()))
       end)
       it('loads', function()

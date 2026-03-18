@@ -1,4 +1,5 @@
 local deps = {}
+local sorted = require('pl.tablex').sort
 
 local function readfile(f)
   deps[f] = true
@@ -75,17 +76,34 @@ local ptablemap = {
   end,
   impltests = function(p)
     local test = readyaml('data/test.yaml')
-    local t = {}
+    local impl_to_apis = {}
     for name, api in pairs(perproduct(p, 'apis')) do
-      if test[api.impl] then
-        if not t[api.impl] then
-          t[api.impl] = { apis = {}, src = readfile('data/test/' .. api.impl .. '.lua') }
+      if api.impl then
+        if not impl_to_apis[api.impl] then
+          impl_to_apis[api.impl] = {}
         end
-        table.insert(t[api.impl].apis, name)
+        impl_to_apis[api.impl][name] = true
       end
     end
-    for _, data in pairs(t) do
-      table.sort(data.apis)
+    local t = {}
+    for test_name, impls_set in pairs(test) do
+      local implsets = {}
+      local skip = false
+      for impl_name in sorted(impls_set) do
+        local api_set = impl_to_apis[impl_name]
+        if not api_set then
+          skip = true
+          break
+        end
+        local api_list = {}
+        for name in sorted(api_set) do
+          table.insert(api_list, name)
+        end
+        table.insert(implsets, api_list)
+      end
+      if not skip then
+        t[test_name] = { implsets = implsets, src = readfile('data/test/' .. test_name .. '.lua') }
+      end
     end
     return 'ImplTests', t
   end,

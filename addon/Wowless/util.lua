@@ -161,6 +161,23 @@ local function tget(t, key)
   return t
 end
 
+local function combinations(sets)
+  return coroutine.wrap(function()
+    local function run(i, combo)
+      if i > #sets then
+        coroutine.yield({ unpack(combo) })
+        return
+      end
+      for _, v in ipairs(sets[i]) do
+        combo[i] = v
+        run(i + 1, combo)
+      end
+      combo[i] = nil
+    end
+    run(1, {})
+  end)
+end
+
 local function sorted(t)
   local ks = {}
   for k in pairs(t) do
@@ -186,6 +203,7 @@ G.check4 = check4
 G.check5 = check5
 G.check6 = check6
 G.check7 = check7
+G.combinations = combinations
 G.globalEnv = _G
 G.match = match
 G.mixin = mixin

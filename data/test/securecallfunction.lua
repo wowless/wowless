@@ -1,16 +1,16 @@
-local T, securecallfunction = ...
+local T, error, geterrorhandler, securecallfunction, seterrorhandler = ...
 
 local function callWithHandler(...)
-  local oldhandler = T.env.geterrorhandler()
+  local oldhandler = geterrorhandler()
   local errors = {}
-  T.env.seterrorhandler(function(err)
+  seterrorhandler(function(err)
     table.insert(errors, err)
   end)
   local function pack(...)
     return select('#', ...), ...
   end
   local results = { pack(pcall(securecallfunction, ...)) }
-  T.env.seterrorhandler(oldhandler)
+  seterrorhandler(oldhandler)
   return errors, unpack(results)
 end
 
@@ -32,7 +32,7 @@ return {
     T.assertEquals(0, #errors)
   end,
   ['error with message'] = function()
-    local errors, n, r1 = callWithHandler(T.env.error, 'oops')
+    local errors, n, r1 = callWithHandler(error, 'oops')
     T.assertEquals(1, n)
     T.assertEquals(true, r1)
     T.assertEquals(1, #errors)
