@@ -154,6 +154,13 @@ local function mixin(t, ...)
   return t
 end
 
+local function tget(t, key)
+  for seg in key:gmatch('[^.]+') do
+    t = t[seg]
+  end
+  return t
+end
+
 local function sorted(t)
   local ks = {}
   for k in pairs(t) do
@@ -184,3 +191,4 @@ G.match = match
 G.mixin = mixin
 G.retn = retn
 G.sorted = sorted
+G.tget = tget

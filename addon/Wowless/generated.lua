@@ -373,14 +373,10 @@ G.testsuite.generated = function()
       wowless = _G.__wowless,
     }
     for impl, data in pairs(_G.WowlessData.ImplTests) do
+      local vv = loadstring(data.src, '@data/test/' .. impl .. '.lua')
       for _, api in ipairs(data.apis) do
-        local fn = _G
-        for seg in api:gmatch('[^.]+') do
-          fn = fn[seg]
-        end
         tests[api] = function()
-          local vv = loadstring(data.src, '@data/test/' .. impl .. '.lua')
-          return vv(arg, fn)
+          return vv(arg, G.tget(_G, api))
         end
       end
     end
