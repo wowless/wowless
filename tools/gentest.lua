@@ -1,4 +1,5 @@
 local deps = {}
+local sorted = require('pl.tablex').sort
 
 local function readfile(f)
   deps[f] = true
@@ -81,26 +82,22 @@ local ptablemap = {
         if not impl_to_apis[api.impl] then
           impl_to_apis[api.impl] = {}
         end
-        table.insert(impl_to_apis[api.impl], name)
+        impl_to_apis[api.impl][name] = true
       end
-    end
-    for _, list in pairs(impl_to_apis) do
-      table.sort(list)
     end
     local t = {}
     for test_name, impls_set in pairs(test) do
-      local sorted_impls = {}
-      for impl_name in pairs(impls_set) do
-        table.insert(sorted_impls, impl_name)
-      end
-      table.sort(sorted_impls)
       local implsets = {}
       local skip = false
-      for _, impl_name in ipairs(sorted_impls) do
-        local api_list = impl_to_apis[impl_name]
-        if not api_list then
+      for impl_name in sorted(impls_set) do
+        local api_set = impl_to_apis[impl_name]
+        if not api_set then
           skip = true
           break
+        end
+        local api_list = {}
+        for name in sorted(api_set) do
+          table.insert(api_list, name)
         end
         table.insert(implsets, api_list)
       end
