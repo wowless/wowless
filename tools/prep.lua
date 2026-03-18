@@ -259,6 +259,16 @@ local function ensureimpl(k)
   return impls[k]
 end
 
+local simple_input_type_strings = {
+  ['function'] = true,
+  table = true,
+  unknown = true,
+}
+
+local function is_simple_input(inp)
+  return type(inp.type) == 'string' and simple_input_type_strings[inp.type] == true
+end
+
 local function is_impl_eligible(apicfg)
   if not apicfg.impl then
     return false
@@ -267,6 +277,18 @@ local function is_impl_eligible(apicfg)
   local has_outputs = apicfg.outputs and #apicfg.outputs > 0
   if not has_inputs and not has_outputs then
     return true
+  end
+  if not has_outputs and not apicfg.instride and not apicfg.usage then
+    local all_simple = true
+    for _, inp in ipairs(apicfg.inputs or {}) do
+      if not is_simple_input(inp) then
+        all_simple = false
+        break
+      end
+    end
+    if all_simple then
+      return true
+    end
   end
   return ensureimpl(apicfg.impl).nowrap
 end
@@ -793,7 +815,10 @@ if args.coutput then
   local eligible_impls = {}
   for k, v in sorted(rawapis) do
     if v and is_impl_eligible(v) then
-      table.insert(eligible_impls, { name = k, cfg = v, impldata = ensureimpl(v.impl) })
+      local has_inputs = v.inputs and #v.inputs > 0
+      local has_outputs = v.outputs and #v.outputs > 0
+      local simple_inputs = not not (has_inputs and not has_outputs and not v.instride)
+      table.insert(eligible_impls, { name = k, cfg = v, impldata = ensureimpl(v.impl), simple_inputs = simple_inputs })
     end
   end
 
@@ -1051,8 +1076,17 @@ if args.coutput then
       local v = entry.cfg
       local check_inputs = v.inputs ~= nil and (v.instride or 0) == 0
       local check_outputs = v.outputs ~= nil and #v.outputs == 0
+      local simple_inputs = entry.simple_inputs
+      local inputs = v.inputs or {}
+      local nsins = #inputs
       emit('static int implstub_%s(lua_State *L) {', safename(entry.name))
-      if check_inputs then
+      if simple_inputs and nsins > 0 then
+        for i, inp in ipairs(inputs) do
+          local nilable = inp.nilable or inp.default ~= nil
+          emit('  wowless_stubcheck%s%s(L, %d);', nilable and 'nilable' or '', dispatch(cinputtypes, inp.type), i)
+        end
+        emit('  wowless_stubcheckextraargs(L, %d, %s);', nsins, cstring(entry.name))
+      elseif check_inputs then
         emit('  wowless_stubcheckextraargs(L, 0, %s);', cstring(entry.name))
       end
       if check_outputs then
