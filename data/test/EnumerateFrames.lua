@@ -1,10 +1,10 @@
-local T = ...
+local T, EnumerateFrames = ...
 local function collect()
   local t = {}
-  local f = T.env.EnumerateFrames()
+  local f = EnumerateFrames()
   while f ~= nil do
     table.insert(t, f)
-    f = T.env.EnumerateFrames(f)
+    f = EnumerateFrames(f)
   end
   return t
 end

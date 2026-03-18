@@ -1,16 +1,15 @@
-local T = ...
-local f = T.env.C_Timer.NewTimer
+local T, NewTimer = ...
 local function factory(k)
-  return T.retn(1, f(k, function() end))
+  return T.retn(1, NewTimer(k, function() end))
 end
 return {
   factory = function()
     return T.checkFuntainerFactory(function(cb)
-      return f(0, cb)
+      return NewTimer(0, cb)
     end)
   end,
   funtainerarg = function()
-    return T.checkLuaObject('LuaFunctionContainer', T.retn(1, f(0, f(0, function() end))))
+    return T.checkLuaObject('LuaFunctionContainer', T.retn(1, NewTimer(0, NewTimer(0, function() end))))
   end,
   negative = function()
     T.assertEquals(false, pcall(factory, -1))

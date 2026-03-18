@@ -1,4 +1,4 @@
-local T = ...
+local T, securecallfunction = ...
 
 local function callWithHandler(...)
   local oldhandler = T.env.geterrorhandler()
@@ -9,7 +9,7 @@ local function callWithHandler(...)
   local function pack(...)
     return select('#', ...), ...
   end
-  local results = { pack(pcall(T.env.securecallfunction, ...)) }
+  local results = { pack(pcall(securecallfunction, ...)) }
   T.env.seterrorhandler(oldhandler)
   return errors, unpack(results)
 end

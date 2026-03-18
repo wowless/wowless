@@ -1,10 +1,10 @@
-local T = ...
+local T, UnitName = ...
 return {
   noarg = function()
-    T.assertEquals(false, pcall(T.env.UnitName))
+    T.assertEquals(false, pcall(UnitName))
   end,
   player = function()
-    local name, realm = T.retn(2, T.env.UnitName('player'))
+    local name, realm = T.retn(2, UnitName('player'))
     return {
       name = function()
         assert(#name > 0)
@@ -15,6 +15,6 @@ return {
     }
   end,
   unknown = function()
-    return T.match(2, nil, nil, T.env.UnitName('completeandutternonsense'))
+    return T.match(2, nil, nil, UnitName('completeandutternonsense'))
   end,
 }

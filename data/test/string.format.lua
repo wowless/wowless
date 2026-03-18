@@ -1,5 +1,4 @@
-local T = ...
-local format = string.format
+local T, format = ...
 return {
   ['format missing numbers'] = function()
     return T.match(1, '0', format('%d'))

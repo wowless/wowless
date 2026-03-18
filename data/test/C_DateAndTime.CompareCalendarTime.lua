@@ -1,4 +1,4 @@
-local T = ...
+local T, CompareCalendarTime = ...
 local t1 = {
   day = 0,
   hour = 14,
@@ -18,7 +18,7 @@ local t2 = {
   year = 2022,
 }
 local function f(a, b)
-  return T.retn(1, T.env.C_DateAndTime.CompareCalendarTime(a, b))
+  return T.retn(1, CompareCalendarTime(a, b))
 end
 return {
   equal1 = function()

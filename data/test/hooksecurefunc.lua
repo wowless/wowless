@@ -1,4 +1,4 @@
-local T = ...
+local T, hooksecurefunc = ...
 return {
   ['hooks members and returns original'] = function()
     local log = {}
@@ -11,7 +11,7 @@ return {
       return a - 1, b - 1, c - 1
     end
     local t = { member = func }
-    T.check0(T.env.hooksecurefunc(t, 'member', hook))
+    T.check0(hooksecurefunc(t, 'member', hook))
     assert(t.member ~= func)
     assert(t.member ~= hook)
     T.check3(13, 35, 57, t.member(12, 34, 56))
@@ -26,7 +26,7 @@ return {
       hookWasCalled = true
     end
     local env = { moocow = func }
-    T.check0(T.env.hooksecurefunc(env, 'moocow', hook))
+    T.check0(hooksecurefunc(env, 'moocow', hook))
     T.check4(nil, 42, nil, nil, env.moocow())
     assert(hookWasCalled)
   end,

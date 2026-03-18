@@ -1,9 +1,9 @@
-local T = ...
+local T, ClassicExpansionAtLeast = ...
 local function success(val, arg)
-  return T.match(1, val, T.env.ClassicExpansionAtLeast(arg))
+  return T.match(1, val, ClassicExpansionAtLeast(arg))
 end
 local function failure(...)
-  return T.assertEquals(false, (pcall(T.env.ClassicExpansionAtLeast, ...)))
+  return T.assertEquals(false, (pcall(ClassicExpansionAtLeast, ...)))
 end
 return {
   ['-1'] = function()

@@ -1,4 +1,4 @@
-local T = ...
+local T, GetClickFrame = ...
 local name = 'WowlessGetClickFrameTestFrame'
 local frame = T.env.CreateFrame('Frame', name)
-return T.match(1, frame, T.env.GetClickFrame(name))
+return T.match(1, frame, GetClickFrame(name))

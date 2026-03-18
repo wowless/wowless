@@ -76,10 +76,16 @@ local ptablemap = {
   impltests = function(p)
     local test = readyaml('data/test.yaml')
     local t = {}
-    for _, api in pairs(perproduct(p, 'apis')) do
-      if test[api.impl] and not t[api.impl] then
-        t[api.impl] = readfile('data/test/' .. api.impl .. '.lua')
+    for name, api in pairs(perproduct(p, 'apis')) do
+      if test[api.impl] then
+        if not t[api.impl] then
+          t[api.impl] = { apis = {}, src = readfile('data/test/' .. api.impl .. '.lua') }
+        end
+        table.insert(t[api.impl].apis, name)
       end
+    end
+    for _, data in pairs(t) do
+      table.sort(data.apis)
     end
     return 'ImplTests', t
   end,

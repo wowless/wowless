@@ -1,5 +1,5 @@
-local T = ...
-local v = T.retn(1, T.env.IsLinuxClient())
+local T, IsLinuxClient = ...
+local v = T.retn(1, IsLinuxClient())
 if T.wowless then
   T.assertEquals(T.wowless.platform == 'linux', v)
 else

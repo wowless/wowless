@@ -1,4 +1,4 @@
-local T = ...
+local T, AdjustTimeByDays = ...
 local day = T.data.build.gametype ~= 'Standard' and 0 or nil
 local input = {
   day = day,
@@ -51,7 +51,7 @@ local tests = {
 local t = {}
 for offset, expected in pairs(tests) do
   t[tostring(offset)] = function()
-    local actual = T.retn(1, T.env.C_DateAndTime.AdjustTimeByDays(input, offset))
+    local actual = T.retn(1, AdjustTimeByDays(input, offset))
     assert(actual ~= input)
     return T.assertRecursivelyEqual(expected, actual)
   end

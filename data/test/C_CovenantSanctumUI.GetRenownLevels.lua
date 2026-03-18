@@ -1,4 +1,4 @@
-local T = ...
+local T, GetRenownLevels = ...
 local assertEquals = T.assertEquals
 local function numkeys(t)
   local n = 0
@@ -17,16 +17,16 @@ local function check(...)
 end
 local tests = {
   ['nil'] = function()
-    assert(not pcall(T.env.C_CovenantSanctumUI.GetRenownLevels))
+    assert(not pcall(GetRenownLevels))
   end,
   ['5'] = function()
-    local t = check(T.env.C_CovenantSanctumUI.GetRenownLevels(5))
+    local t = check(GetRenownLevels(5))
     assertEquals(nil, next(t))
   end,
 }
 for i = 1, 4 do
   tests[tostring(i)] = function()
-    local t = check(T.env.C_CovenantSanctumUI.GetRenownLevels(i))
+    local t = check(GetRenownLevels(i))
     assertEquals(islite and 0 or 80, #t)
     assertEquals(islite and 0 or 80, numkeys(t))
     local tt = {}
