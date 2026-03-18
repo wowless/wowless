@@ -23085,6 +23085,11 @@ SetErrorCallstackHeight:
   outputs:
 seterrorhandler:
   impl: seterrorhandler
+  inputs:
+  - name: errfunc
+    type: function
+  outputs:
+  usage: seterrorhandler(errfunc)
 SetEuropeanNumbers:
   inputs:
   - name: enabled
