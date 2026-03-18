@@ -3,9 +3,8 @@ return function(events)
   local pendingWarnings = {}
   local currentFn
 
-  -- Set the real handler once; it always delegates to the current handler.
   seterrorhandler(function(msg)
-    if not currentFn or not pcall(currentFn, msg) then
+    if not pcall(currentFn, msg) then
       table.insert(pendingWarnings, msg)
     end
   end)
