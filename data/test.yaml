@@ -25,6 +25,9 @@ EnumerateFrames:
   EnumerateFrames:
 error:
   error:
+errorhandler:
+  geterrorhandler:
+  seterrorhandler:
 GetAddOnMetadata:
   GetAddOnMetadata:
 GetBuildInfo_10_1:
