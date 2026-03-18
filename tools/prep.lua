@@ -863,7 +863,7 @@ if args.coutput then
       local has_inputs = v.inputs and #v.inputs > 0
       local has_outputs = v.outputs and #v.outputs > 0
       local simple_inputs = not not (has_inputs and not v.instride)
-      local simple_outputs = not not (has_outputs and (v.outstride or 0) == 0 and not v.mayreturnnothing)
+      local simple_outputs = not not (has_outputs and (v.outstride or 0) == 0)
       table.insert(eligible_impls, {
         name = k,
         cfg = v,
@@ -1127,7 +1127,7 @@ if args.coutput then
       local fn = impldata.nobubblewrap and 'wowless_impl_stub_nobubblewrap' or 'wowless_impl_stub'
       local v = entry.cfg
       local check_inputs = v.inputs ~= nil and (v.instride or 0) == 0
-      local check_outputs = v.outputs ~= nil and (v.outstride or 0) == 0 and not v.mayreturnnothing
+      local check_outputs = v.outputs ~= nil and (v.outstride or 0) == 0
       local simple_inputs = entry.simple_inputs
       local simple_outputs = entry.simple_outputs
       local inputs = v.inputs or {}
@@ -1145,12 +1145,26 @@ if args.coutput then
       end
       if check_outputs then
         emit('  int ret = %s(L);', fn)
-        emit('  wowless_stubchecknreturns(L, ret, %d, %s);', #outputs, cstring(entry.name))
+        local ind = '  '
+        if v.mayreturnnothing then
+          emit('  if (ret != 0) {')
+          ind = '    '
+        end
+        emit('%swowless_stubchecknreturns(L, ret, %d, %s);', ind, #outputs, cstring(entry.name))
         if simple_outputs then
           for i, out in ipairs(outputs) do
             local nilable = out.nilable
-            emit('  wowless_imploutput%s%s(L, %d);', nilable and 'nilable' or '', dispatch(coutputtypes, out.type), i)
+            emit(
+              '%swowless_imploutput%s%s(L, %d);',
+              ind,
+              nilable and 'nilable' or '',
+              dispatch(coutputtypes, out.type),
+              i
+            )
           end
+        end
+        if v.mayreturnnothing then
+          emit('  }')
         end
         emit('  return ret;')
       else
