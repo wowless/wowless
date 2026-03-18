@@ -271,19 +271,35 @@ local function is_simple_input(inp)
   return type(inp.type) == 'string' and simple_input_type_strings[inp.type] == true
 end
 
+local simple_output_type_strings = {
+  boolean = true,
+  ['function'] = true,
+  ['nil'] = true,
+  number = true,
+  oneornil = true,
+  string = true,
+  table = true,
+  unknown = true,
+}
+
+local function is_simple_output(out)
+  return type(out.type) == 'string' and simple_output_type_strings[out.type] == true
+end
+
 local function is_impl_eligible(apicfg)
   if not apicfg.impl then
     return false
   end
-  local has_inputs = apicfg.inputs and #apicfg.inputs > 0
-  local has_outputs = apicfg.outputs and #apicfg.outputs > 0
-  if not has_inputs and not has_outputs then
-    return true
-  end
-  if not has_outputs and not apicfg.instride and not apicfg.usage then
+  if not apicfg.instride and not apicfg.usage and (apicfg.outstride or 0) == 0 then
     local all_simple = true
     for _, inp in ipairs(apicfg.inputs or {}) do
       if not is_simple_input(inp) then
+        all_simple = false
+        break
+      end
+    end
+    for _, out in ipairs(apicfg.outputs or {}) do
+      if not is_simple_output(out) then
         all_simple = false
         break
       end
@@ -781,6 +797,33 @@ if args.coutput then
     end,
   }
 
+  local coutputtypes = {
+    boolean = function()
+      return 'boolean'
+    end,
+    ['function'] = function()
+      return 'function'
+    end,
+    ['nil'] = function()
+      return 'unknown'
+    end,
+    number = function()
+      return 'number'
+    end,
+    oneornil = function()
+      return 'unknown'
+    end,
+    string = function()
+      return 'string'
+    end,
+    table = function()
+      return 'table'
+    end,
+    unknown = function()
+      return 'unknown'
+    end,
+  }
+
   local function is_eligible(apicfg)
     if apicfg.impl then
       return false
@@ -819,8 +862,15 @@ if args.coutput then
     if v and is_impl_eligible(v) then
       local has_inputs = v.inputs and #v.inputs > 0
       local has_outputs = v.outputs and #v.outputs > 0
-      local simple_inputs = not not (has_inputs and not has_outputs and not v.instride)
-      table.insert(eligible_impls, { name = k, cfg = v, impldata = ensureimpl(v.impl), simple_inputs = simple_inputs })
+      local simple_inputs = not not (has_inputs and not v.instride)
+      local simple_outputs = not not (has_outputs and (v.outstride or 0) == 0 and not v.mayreturnnothing)
+      table.insert(eligible_impls, {
+        name = k,
+        cfg = v,
+        impldata = ensureimpl(v.impl),
+        simple_inputs = simple_inputs,
+        simple_outputs = simple_outputs,
+      })
     end
   end
 
@@ -1077,9 +1127,11 @@ if args.coutput then
       local fn = impldata.nobubblewrap and 'wowless_impl_stub_nobubblewrap' or 'wowless_impl_stub'
       local v = entry.cfg
       local check_inputs = v.inputs ~= nil and (v.instride or 0) == 0
-      local check_outputs = v.outputs ~= nil and #v.outputs == 0
+      local check_outputs = v.outputs ~= nil and (v.outstride or 0) == 0 and not v.mayreturnnothing
       local simple_inputs = entry.simple_inputs
+      local simple_outputs = entry.simple_outputs
       local inputs = v.inputs or {}
+      local outputs = v.outputs or {}
       local nsins = #inputs
       emit('static int implstub_%s(lua_State *L) {', safename(entry.name))
       if simple_inputs and nsins > 0 then
@@ -1093,7 +1145,13 @@ if args.coutput then
       end
       if check_outputs then
         emit('  int ret = %s(L);', fn)
-        emit('  wowless_stubchecknreturns(L, ret, %d, %s);', #v.outputs, cstring(entry.name))
+        emit('  wowless_stubchecknreturns(L, ret, %d, %s);', #outputs, cstring(entry.name))
+        if simple_outputs then
+          for i, out in ipairs(outputs) do
+            local nilable = out.nilable
+            emit('  wowless_imploutput%s%s(L, %d);', nilable and 'nilable' or '', dispatch(coutputtypes, out.type), i)
+          end
+        end
         emit('  return ret;')
       else
         emit('  return %s(L);', fn)

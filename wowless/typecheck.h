@@ -277,6 +277,90 @@ static inline void wowless_implchecknilableunknown(lua_State *L, int idx) {
   wowless_stubchecknilableunknown(L, idx);
 }
 
+static inline void wowless_imploutputboolean(lua_State *L, int idx) {
+  if (lua_type(L, idx) != LUA_TBOOLEAN) {
+    luaL_typerror(L, idx, lua_typename(L, LUA_TBOOLEAN));
+  }
+}
+
+static inline void wowless_imploutputnilableboolean(lua_State *L, int idx) {
+  switch (lua_type(L, idx)) {
+    case LUA_TBOOLEAN:
+    case LUA_TNIL:
+      return;
+    default:
+      luaL_typerror(L, idx, lua_typename(L, LUA_TBOOLEAN));
+  }
+}
+
+static inline void wowless_imploutputnumber(lua_State *L, int idx) {
+  if (lua_type(L, idx) != LUA_TNUMBER) {
+    luaL_typerror(L, idx, lua_typename(L, LUA_TNUMBER));
+  }
+}
+
+static inline void wowless_imploutputnilablenumber(lua_State *L, int idx) {
+  switch (lua_type(L, idx)) {
+    case LUA_TNUMBER:
+    case LUA_TNIL:
+      return;
+    default:
+      luaL_typerror(L, idx, lua_typename(L, LUA_TNUMBER));
+  }
+}
+
+static inline void wowless_imploutputstring(lua_State *L, int idx) {
+  if (lua_type(L, idx) != LUA_TSTRING) {
+    luaL_typerror(L, idx, lua_typename(L, LUA_TSTRING));
+  }
+}
+
+static inline void wowless_imploutputnilablestring(lua_State *L, int idx) {
+  switch (lua_type(L, idx)) {
+    case LUA_TSTRING:
+    case LUA_TNIL:
+      return;
+    default:
+      luaL_typerror(L, idx, lua_typename(L, LUA_TSTRING));
+  }
+}
+
+static inline void wowless_imploutputfunction(lua_State *L, int idx) {
+  if (lua_type(L, idx) != LUA_TFUNCTION) {
+    luaL_typerror(L, idx, lua_typename(L, LUA_TFUNCTION));
+  }
+}
+
+static inline void wowless_imploutputnilablefunction(lua_State *L, int idx) {
+  switch (lua_type(L, idx)) {
+    case LUA_TFUNCTION:
+    case LUA_TNIL:
+      return;
+    default:
+      luaL_typerror(L, idx, lua_typename(L, LUA_TFUNCTION));
+  }
+}
+
+static inline void wowless_imploutputtable(lua_State *L, int idx) {
+  if (lua_type(L, idx) != LUA_TTABLE) {
+    luaL_typerror(L, idx, lua_typename(L, LUA_TTABLE));
+  }
+}
+
+static inline void wowless_imploutputnilabletable(lua_State *L, int idx) {
+  switch (lua_type(L, idx)) {
+    case LUA_TTABLE:
+    case LUA_TNIL:
+      return;
+    default:
+      luaL_typerror(L, idx, lua_typename(L, LUA_TTABLE));
+  }
+}
+
+static inline void wowless_imploutputunknown(lua_State *L, int idx) {}
+
+static inline void wowless_imploutputnilableunknown(lua_State *L, int idx) {}
+
 static inline void wowless_stubcheckextraargs(lua_State *L, int nsins,
                                               const char *fname) {
   if (lua_gettop(L) > nsins) {
