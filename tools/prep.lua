@@ -861,15 +861,12 @@ if args.coutput then
   for k, v in sorted(rawapis) do
     if v and is_impl_eligible(v) then
       local has_inputs = v.inputs and #v.inputs > 0
-      local has_outputs = v.outputs and #v.outputs > 0
       local simple_inputs = not not (has_inputs and not v.instride)
-      local simple_outputs = not not (has_outputs and (v.outstride or 0) == 0)
       table.insert(eligible_impls, {
         name = k,
         cfg = v,
         impldata = ensureimpl(v.impl),
         simple_inputs = simple_inputs,
-        simple_outputs = simple_outputs,
       })
     end
   end
@@ -1129,7 +1126,6 @@ if args.coutput then
       local check_inputs = v.inputs ~= nil and (v.instride or 0) == 0
       local check_outputs = v.outputs ~= nil and (v.outstride or 0) == 0
       local simple_inputs = entry.simple_inputs
-      local simple_outputs = entry.simple_outputs
       local inputs = v.inputs or {}
       local outputs = v.outputs or {}
       local nsins = #inputs
@@ -1151,17 +1147,15 @@ if args.coutput then
           ind = '    '
         end
         emit('%swowless_stubchecknreturns(L, ret, %d, %s);', ind, #outputs, cstring(entry.name))
-        if simple_outputs then
-          for i, out in ipairs(outputs) do
-            local nilable = out.nilable
-            emit(
-              '%swowless_imploutput%s%s(L, %d);',
-              ind,
-              nilable and 'nilable' or '',
-              dispatch(coutputtypes, out.type),
-              i
-            )
-          end
+        for i, out in ipairs(outputs) do
+          local nilable = out.nilable
+          emit(
+            '%swowless_imploutput%s%s(L, %d);',
+            ind,
+            nilable and 'nilable' or '',
+            dispatch(coutputtypes, out.type),
+            i
+          )
         end
         if v.mayreturnnothing then
           emit('  }')
