@@ -243,6 +243,30 @@ static inline void wowless_stubcreateuiobject(lua_State *L,
   lua_call(L, 1, 1);
 }
 
+static inline void wowless_implcheckfunction(lua_State *L, int idx) {
+  wowless_stubcheckfunction(L, idx);
+}
+
+static inline void wowless_implchecknilablefunction(lua_State *L, int idx) {
+  wowless_stubchecknilablefunction(L, idx);
+}
+
+static inline void wowless_implchecktable(lua_State *L, int idx) {
+  wowless_stubchecktable(L, idx);
+}
+
+static inline void wowless_implchecknilabletable(lua_State *L, int idx) {
+  wowless_stubchecknilabletable(L, idx);
+}
+
+static inline void wowless_implcheckunknown(lua_State *L, int idx) {
+  wowless_stubcheckunknown(L, idx);
+}
+
+static inline void wowless_implchecknilableunknown(lua_State *L, int idx) {
+  wowless_stubchecknilableunknown(L, idx);
+}
+
 static inline void wowless_stubcheckextraargs(lua_State *L, int nsins,
                                               const char *fname) {
   if (lua_gettop(L) > nsins) {
