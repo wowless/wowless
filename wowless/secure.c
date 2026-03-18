@@ -4,23 +4,13 @@
 #include "lualib.h"
 
 /*
- * Proxy called by wowless_secure_securecallfunction inside luaL_securecall so
- * that argument errors are routed to the error handler rather than propagating
- * to the caller.  Stack on entry: fn(1), args(2..n)
- */
-static int wowless_securecallfunction_proxy(lua_State *L) {
-  luaL_checktype(L, 1, LUA_TFUNCTION);
-  lua_call(L, lua_gettop(L) - 1, LUA_MULTRET);
-  return lua_gettop(L);
-}
-
-/*
  * securecallfunction(fn, ...) calls fn(...) securely.
  * Stack on entry: fn(1), args(2..n)
  */
 static int wowless_secure_securecallfunction(lua_State *L) {
-  lua_pushcfunction(L, wowless_securecallfunction_proxy);
-  lua_insert(L, 1);
+  if (lua_gettop(L) == 0) {
+    lua_pushnil(L);
+  }
   luaL_securecall(L, lua_gettop(L) - 1, LUA_MULTRET, LUA_ERRORHANDLERINDEX);
   return lua_gettop(L);
 }
