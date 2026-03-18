@@ -262,6 +262,7 @@ end
 local simple_input_type_strings = {
   ['function'] = true,
   number = true,
+  string = true,
   table = true,
   unknown = true,
 }

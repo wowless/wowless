@@ -243,6 +243,16 @@ static inline void wowless_stubcreateuiobject(lua_State *L,
   lua_call(L, 1, 1);
 }
 
+static inline void wowless_implcheckstring(lua_State *L, int idx) {
+  luaL_checkstring(L, idx);
+}
+
+static inline void wowless_implchecknilablestring(lua_State *L, int idx) {
+  if (!lua_isnoneornil(L, idx)) {
+    luaL_checkstring(L, idx);
+  }
+}
+
 static inline void wowless_implcheckfunction(lua_State *L, int idx) {
   wowless_stubcheckfunction(L, idx);
 }
