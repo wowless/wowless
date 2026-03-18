@@ -374,26 +374,16 @@ G.testsuite.generated = function()
     }
     for impl, data in pairs(_G.WowlessData.ImplTests) do
       local vv = loadstring(data.src, '@data/test/' .. impl .. '.lua')
-      local function run(i, combo)
-        if i > #data.implsets then
-          local key = table.concat(combo, ' ')
-          local combo_copy = { unpack(combo) }
-          tests[key] = function()
-            local fns = {}
-            for _, api in ipairs(combo_copy) do
-              table.insert(fns, G.tget(_G, api))
-            end
-            return vv(arg, unpack(fns))
+      for combo in G.combinations(data.implsets) do
+        local key = table.concat(combo, ' ')
+        tests[key] = function()
+          local fns = {}
+          for _, api in ipairs(combo) do
+            table.insert(fns, G.tget(_G, api))
           end
-          return
+          return vv(arg, unpack(fns))
         end
-        for _, api in ipairs(data.implsets[i]) do
-          combo[i] = api
-          run(i + 1, combo)
-        end
-        combo[i] = nil
       end
-      run(1, {})
     end
     return tests
   end
