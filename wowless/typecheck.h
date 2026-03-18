@@ -25,6 +25,32 @@ static inline void wowless_stubchecknumber(lua_State *L, int idx) {
   luaL_checknumber(L, idx);
 }
 
+static inline void wowless_implcoercenumber(lua_State *L, int idx) {
+  lua_Number n = lua_tonumber(L, idx);
+  if (n == 0 && !lua_isnumber(L, idx)) {
+    luaL_typerror(L, idx, lua_typename(L, LUA_TNUMBER));
+  }
+  lua_pushnumber(L, n);
+  lua_replace(L, idx);
+}
+
+static inline void wowless_implchecknumber(lua_State *L, int idx) {
+  if (lua_type(L, idx) != LUA_TNUMBER) {
+    wowless_implcoercenumber(L, idx);
+  }
+}
+
+static inline void wowless_implchecknilablenumber(lua_State *L, int idx) {
+  switch (lua_type(L, idx)) {
+    case LUA_TNUMBER:
+    case LUA_TNIL:
+    case LUA_TNONE:
+      return;
+    default:
+      wowless_implcoercenumber(L, idx);
+  }
+}
+
 static inline void wowless_stubchecknilablenumber(lua_State *L, int idx) {
   switch (lua_type(L, idx)) {
     case LUA_TSTRING:

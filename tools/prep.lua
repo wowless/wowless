@@ -261,6 +261,7 @@ end
 
 local simple_input_type_strings = {
   ['function'] = true,
+  number = true,
   table = true,
   unknown = true,
 }
@@ -1083,7 +1084,9 @@ if args.coutput then
       if simple_inputs and nsins > 0 then
         for i, inp in ipairs(inputs) do
           local nilable = inp.nilable or inp.default ~= nil
-          emit('  wowless_stubcheck%s%s(L, %d);', nilable and 'nilable' or '', dispatch(cinputtypes, inp.type), i)
+          local tname = dispatch(cinputtypes, inp.type)
+          local prefix = tname == 'number' and 'wowless_implcheck' or 'wowless_stubcheck'
+          emit('  %s%s%s(L, %d);', prefix, nilable and 'nilable' or '', tname, i)
         end
         emit('  wowless_stubcheckextraargs(L, %d, %s);', nsins, cstring(entry.name))
       elseif check_inputs then
