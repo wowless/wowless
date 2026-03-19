@@ -122,218 +122,121 @@ describe('typecheck align', function()
     end)
   end
 
-  -- Standard value set covering the main Lua types (nil tested separately above).
-  local values = { false, true, 0, 1, '0', '42', 'foo', {}, print }
-  -- Values without numeric strings: used for enum cases (known mismatch on '0'/'42').
-  local values_no_numstr = { false, true, 0, 1, 'foo', {}, print }
+  -- Type matrix: each row drives all aligned tests for that type.
+  --   name:     suffix used to build cfn keys (e.g. 'boolean' -> 'stubcheckboolean')
+  --   ltype:    Lua type spec value (string for simple types, table for complex)
+  --   sections: set of prefix strings this type appears in
+  --   values:   values to test against nil (nil is always tested separately)
+  --   tparam:   extra C parameter for typed checks (stringenum, luaobject)
+  --   tparam_c: extra C parameter override when it differs from what's in ltype (uiobject)
+  --   skip_nil: set of prefixes for which the non-nilable variant has a known nil mismatch
+  local type_matrix = {
+    {
+      name = 'boolean',
+      ltype = 'boolean',
+      sections = { stubcheck = true, imploutput = true },
+      values = { false, true, 0, 1, '0', '42', 'foo', {}, print },
+    },
+    {
+      name = 'number',
+      ltype = 'number',
+      sections = { stubcheck = true, implcheck = true, imploutput = true },
+      values = { false, true, 0, 1, '0', '42', 'foo', {}, print },
+    },
+    {
+      name = 'string',
+      ltype = 'string',
+      sections = { stubcheck = true, implcheck = true, imploutput = true },
+      values = { false, true, 0, 1, '0', '42', 'foo', {}, print },
+    },
+    {
+      name = 'function',
+      ltype = 'function',
+      sections = { stubcheck = true, implcheck = true, imploutput = true },
+      values = { false, true, 0, 1, '0', '42', 'foo', {}, print },
+    },
+    {
+      name = 'table',
+      ltype = 'table',
+      sections = { stubcheck = true, implcheck = true, imploutput = true },
+      values = { false, true, 0, 1, '0', '42', 'foo', {}, print },
+    },
+    {
+      name = 'unit',
+      ltype = 'unit',
+      sections = { stubcheck = true },
+      values = { false, true, 0, 1, '0', '42', 'foo', {}, print },
+    },
+    {
+      name = 'unknown',
+      ltype = 'unknown',
+      sections = { stubcheck = true, implcheck = true, imploutput = true },
+      values = { false, true, 0, 1, '0', '42', 'foo', {}, print },
+      skip_nil = { imploutput = true }, -- imploutputunknown accepts nil; typecheck.lua rejects it
+    },
+    {
+      name = 'enum',
+      ltype = { enum = 'TestEnum' },
+      sections = { stubcheck = true },
+      values = { false, true, 0, 1, 'foo', {}, print }, -- numeric strings excluded: known mismatch (see below)
+    },
+    {
+      name = 'stringenum',
+      ltype = { stringenum = 'FramePoint' },
+      sections = { stubcheck = true },
+      values = { false, true, 0, 1, 'foo', 'CENTER', 'TOPLEFT', {}, print },
+      tparam = 'FramePoint',
+    },
+    {
+      name = 'luaobject',
+      ltype = { luaobject = 'Funtainer' },
+      sections = { stubcheck = true },
+      values = { false, true, 0, 1, '42', 'foo', {}, print },
+      tparam = 'Funtainer',
+    },
+    {
+      name = 'uiobject',
+      ltype = { uiobject = 'Frame' },
+      sections = { stubcheck = true },
+      values = { false, true, 0, 1, '42', 'foo', {}, print },
+      tparam_c = 'frame', -- C lowercases the typename
+    },
+  }
 
-  local function simple_cfn(fn_key)
-    return function(v)
-      return caccepts(ctc[fn_key], v)
-    end
+  local section_defs = {
+    { label = 'stub input checks', prefix = 'stubcheck', isout = false },
+    { label = 'impl input checks', prefix = 'implcheck', isout = false },
+    { label = 'impl output checks', prefix = 'imploutput', isout = true },
+  }
+
+  for _, sec in ipairs(section_defs) do
+    describe(sec.label, function()
+      for _, td in ipairs(type_matrix) do
+        if td.sections[sec.prefix] then
+          local function make_cfn(nilable)
+            local key = sec.prefix .. (nilable and 'nilable' or '') .. td.name
+            local tparam = td.tparam_c or td.tparam
+            return function(v)
+              return caccepts(ctc[key], v, tparam)
+            end
+          end
+          local function make_lfn(nilable)
+            local spec = { type = td.ltype, nilable = nilable or nil }
+            return function(v)
+              return laccepts(spec, v, sec.isout)
+            end
+          end
+          local skip = td.skip_nil and td.skip_nil[sec.prefix]
+          run_aligned(td.name, make_cfn(false), make_lfn(false), td.values, skip)
+          run_aligned('nilable ' .. td.name, make_cfn(true), make_lfn(true), td.values)
+        end
+      end
+    end)
   end
-
-  local function simple_lfn(spec, isout)
-    return function(v)
-      return laccepts(spec, v, isout)
-    end
-  end
-
-  local function typed_cfn(fn_key, tname)
-    return function(v)
-      return caccepts(ctc[fn_key], v, tname)
-    end
-  end
-
-  describe('stub input checks', function()
-    run_aligned('boolean', simple_cfn('stubcheckboolean'), simple_lfn({ type = 'boolean' }), values)
-    run_aligned(
-      'nilable boolean',
-      simple_cfn('stubchecknilableboolean'),
-      simple_lfn({ type = 'boolean', nilable = true }),
-      values
-    )
-    run_aligned('number', simple_cfn('stubchecknumber'), simple_lfn({ type = 'number' }), values)
-    run_aligned(
-      'nilable number',
-      simple_cfn('stubchecknilablenumber'),
-      simple_lfn({ type = 'number', nilable = true }),
-      values
-    )
-    run_aligned('string', simple_cfn('stubcheckstring'), simple_lfn({ type = 'string' }), values)
-    run_aligned(
-      'nilable string',
-      simple_cfn('stubchecknilablestring'),
-      simple_lfn({ type = 'string', nilable = true }),
-      values
-    )
-    run_aligned('function', simple_cfn('stubcheckfunction'), simple_lfn({ type = 'function' }), values)
-    run_aligned(
-      'nilable function',
-      simple_cfn('stubchecknilablefunction'),
-      simple_lfn({ type = 'function', nilable = true }),
-      values
-    )
-    run_aligned('table', simple_cfn('stubchecktable'), simple_lfn({ type = 'table' }), values)
-    run_aligned(
-      'nilable table',
-      simple_cfn('stubchecknilabletable'),
-      simple_lfn({ type = 'table', nilable = true }),
-      values
-    )
-    run_aligned('unit', simple_cfn('stubcheckunit'), simple_lfn({ type = 'unit' }), values)
-    run_aligned(
-      'nilable unit',
-      simple_cfn('stubchecknilableunit'),
-      simple_lfn({ type = 'unit', nilable = true }),
-      values
-    )
-    run_aligned('unknown', simple_cfn('stubcheckunknown'), simple_lfn({ type = 'unknown' }), values)
-    run_aligned(
-      'nilable unknown',
-      simple_cfn('stubchecknilableunknown'),
-      simple_lfn({ type = 'unknown', nilable = true }),
-      values
-    )
-    -- enum: numeric strings excluded due to known mismatch (see below)
-    run_aligned('enum', simple_cfn('stubcheckenum'), simple_lfn({ type = { enum = 'TestEnum' } }), values_no_numstr)
-    run_aligned(
-      'nilable enum',
-      simple_cfn('stubchecknilableenum'),
-      simple_lfn({ type = { enum = 'TestEnum' }, nilable = true }),
-      values_no_numstr
-    )
-    -- stringenum: valid and invalid values; non-string types rejected by both
-    local se_values = { false, true, 0, 1, 'foo', 'CENTER', 'TOPLEFT', {}, print }
-    run_aligned(
-      'stringenum',
-      typed_cfn('stubcheckstringenum', 'FramePoint'),
-      simple_lfn({ type = { stringenum = 'FramePoint' } }),
-      se_values
-    )
-    run_aligned(
-      'nilable stringenum',
-      typed_cfn('stubchecknilablestringenum', 'FramePoint'),
-      simple_lfn({ type = { stringenum = 'FramePoint' }, nilable = true }),
-      se_values
-    )
-    -- luaobject/uiobject: only non-object values tested here (both reject);
-    -- acceptance of real objects is covered by in-game tests.
-    local obj_values = { false, true, 0, 1, '42', 'foo', {}, print }
-    run_aligned(
-      'luaobject',
-      typed_cfn('stubcheckluaobject', 'Funtainer'),
-      simple_lfn({ type = { luaobject = 'Funtainer' } }),
-      obj_values
-    )
-    run_aligned(
-      'nilable luaobject',
-      typed_cfn('stubchecknilableluaobject', 'Funtainer'),
-      simple_lfn({ type = { luaobject = 'Funtainer' }, nilable = true }),
-      obj_values
-    )
-    -- uiobject typename is lowercased by the C check; pass lowercase here to match
-    run_aligned(
-      'uiobject',
-      typed_cfn('stubcheckuiobject', 'frame'),
-      simple_lfn({ type = { uiobject = 'Frame' } }),
-      obj_values
-    )
-    run_aligned(
-      'nilable uiobject',
-      typed_cfn('stubchecknilableuiobject', 'frame'),
-      simple_lfn({ type = { uiobject = 'Frame' }, nilable = true }),
-      obj_values
-    )
-  end)
-
-  describe('impl input checks', function()
-    run_aligned('number', simple_cfn('implchecknumber'), simple_lfn({ type = 'number' }), values)
-    run_aligned(
-      'nilable number',
-      simple_cfn('implchecknilablenumber'),
-      simple_lfn({ type = 'number', nilable = true }),
-      values
-    )
-    run_aligned('string', simple_cfn('implcheckstring'), simple_lfn({ type = 'string' }), values)
-    run_aligned(
-      'nilable string',
-      simple_cfn('implchecknilablestring'),
-      simple_lfn({ type = 'string', nilable = true }),
-      values
-    )
-    run_aligned('function', simple_cfn('implcheckfunction'), simple_lfn({ type = 'function' }), values)
-    run_aligned(
-      'nilable function',
-      simple_cfn('implchecknilablefunction'),
-      simple_lfn({ type = 'function', nilable = true }),
-      values
-    )
-    run_aligned('table', simple_cfn('implchecktable'), simple_lfn({ type = 'table' }), values)
-    run_aligned(
-      'nilable table',
-      simple_cfn('implchecknilabletable'),
-      simple_lfn({ type = 'table', nilable = true }),
-      values
-    )
-    run_aligned('unknown', simple_cfn('implcheckunknown'), simple_lfn({ type = 'unknown' }), values)
-    run_aligned(
-      'nilable unknown',
-      simple_cfn('implchecknilableunknown'),
-      simple_lfn({ type = 'unknown', nilable = true }),
-      values
-    )
-  end)
-
-  describe('impl output checks', function()
-    run_aligned('boolean', simple_cfn('imploutputboolean'), simple_lfn({ type = 'boolean' }, true), values)
-    run_aligned(
-      'nilable boolean',
-      simple_cfn('imploutputnilableboolean'),
-      simple_lfn({ type = 'boolean', nilable = true }, true),
-      values
-    )
-    run_aligned('number', simple_cfn('imploutputnumber'), simple_lfn({ type = 'number' }, true), values)
-    run_aligned(
-      'nilable number',
-      simple_cfn('imploutputnilablenumber'),
-      simple_lfn({ type = 'number', nilable = true }, true),
-      values
-    )
-    run_aligned('string', simple_cfn('imploutputstring'), simple_lfn({ type = 'string' }, true), values)
-    run_aligned(
-      'nilable string',
-      simple_cfn('imploutputnilablestring'),
-      simple_lfn({ type = 'string', nilable = true }, true),
-      values
-    )
-    run_aligned('function', simple_cfn('imploutputfunction'), simple_lfn({ type = 'function' }, true), values)
-    run_aligned(
-      'nilable function',
-      simple_cfn('imploutputnilablefunction'),
-      simple_lfn({ type = 'function', nilable = true }, true),
-      values
-    )
-    run_aligned('table', simple_cfn('imploutputtable'), simple_lfn({ type = 'table' }, true), values)
-    run_aligned(
-      'nilable table',
-      simple_cfn('imploutputnilabletable'),
-      simple_lfn({ type = 'table', nilable = true }, true),
-      values
-    )
-    run_aligned(
-      'nilable unknown',
-      simple_cfn('imploutputnilableunknown'),
-      simple_lfn({ type = 'unknown', nilable = true }, true),
-      values
-    )
-    -- imploutputunknown (non-nilable): nil excluded due to known mismatch (see below)
-    run_aligned('unknown', simple_cfn('imploutputunknown'), simple_lfn({ type = 'unknown' }, true), values, true)
-  end)
 
   -- Known mismatches between typecheck.h and typecheck.lua.
   -- When a mismatch is fixed, remove the test here and restore the value to the
-  -- run_aligned call above (re-add '0'/'42' to enum, nil to imploutputunknown).
+  -- type_matrix entry (re-add '0'/'42' to enum values, nil to imploutput unknown).
   describe('known mismatches', function()
     it('stubcheckenum rejects numeric strings that typecheck.lua accepts', function()
       -- C stub requires LUA_TNUMBER; typecheck.lua coerces via tonumber().
