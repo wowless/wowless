@@ -7,7 +7,10 @@ local units = require('wowless.modules.units')()
 local mock_cgencode = {
   CheckStringEnum = function(value, enumname)
     local es = stringenums[enumname]
-    return es and es[value:upper()]
+    if not es then
+      error('internal error: unknown string enum: ' .. enumname)
+    end
+    return es[value:upper()]
   end,
   IsLuaObject = function(_ud, _typename)
     return false
@@ -178,7 +181,7 @@ describe('typecheck align', function()
       name = 'enum',
       ltype = { enum = 'TestEnum' },
       sections = { stubcheck = true },
-      values = { false, true, 0, 1, 'foo', {}, print }, -- numeric strings excluded: known mismatch (see below)
+      values = { false, true, 0, 1, '0', '42', 'foo', {}, print },
     },
     {
       name = 'stringenum',
@@ -236,18 +239,8 @@ describe('typecheck align', function()
 
   -- Known mismatches between typecheck.h and typecheck.lua.
   -- When a mismatch is fixed, remove the test here and restore the value to the
-  -- type_matrix entry (re-add '0'/'42' to enum values, nil to imploutput unknown).
+  -- type_matrix entry (nil to imploutput unknown).
   describe('known mismatches', function()
-    it('stubcheckenum rejects numeric strings that typecheck.lua accepts', function()
-      -- C stub requires LUA_TNUMBER; typecheck.lua coerces via tonumber().
-      -- Use '1' (a valid TestEnum value as string) for a clean accept on the Lua side.
-      assert.is_false(caccepts(ctc.stubcheckenum, '1'))
-      assert.is_true(laccepts({ type = { enum = 'TestEnum' } }, '1'))
-    end)
-    it('stubchecknilableenum rejects numeric strings that typecheck.lua accepts', function()
-      assert.is_false(caccepts(ctc.stubchecknilableenum, '1'))
-      assert.is_true(laccepts({ type = { enum = 'TestEnum' }, nilable = true }, '1'))
-    end)
     it('imploutputunknown accepts nil that typecheck.lua rejects', function()
       -- C impl output check is a no-op; typecheck.lua enforces non-nilable
       assert.is_true(caccepts(ctc.imploutputunknown, nil))
