@@ -348,7 +348,11 @@ static inline void wowless_imploutputnilabletable(lua_State *L, int idx) {
   }
 }
 
-static inline void wowless_imploutputunknown(lua_State *L, int idx) {}
+static inline void wowless_imploutputunknown(lua_State *L, int idx) {
+  if (lua_isnil(L, idx)) {
+    luaL_typerror(L, idx, "non-nil");
+  }
+}
 
 static inline void wowless_imploutputnilableunknown(lua_State *L, int idx) {}
 
