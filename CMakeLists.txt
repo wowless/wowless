@@ -791,6 +791,7 @@ lua2c(
   wowless.modules.atlas=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/atlas.lua
   wowless.modules.calendar=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/calendar.lua
   wowless.modules.clog=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/clog.lua
+  wowless.modules.ctypecheck=c
   wowless.modules.cvars=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/cvars.lua
   wowless.modules.datetime=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/datetime.lua
   wowless.modules.dirty=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/dirty.lua
@@ -832,8 +833,13 @@ lua2c(
   wowless.xml=${CMAKE_CURRENT_SOURCE_DIR}/wowless/xml.lua)
 target_sources(
   wowlesslib
-  PRIVATE wowless/bubblewrap.c wowless/debug.c wowless/ext.c
-          wowless/modules/encodingutil.c wowless/secure.c wowless/stubs.c)
+  PRIVATE wowless/bubblewrap.c
+          wowless/debug.c
+          wowless/ext.c
+          wowless/modules/ctypecheck.c
+          wowless/modules/encodingutil.c
+          wowless/secure.c
+          wowless/stubs.c)
 
 add_lua_executable(
   wowless
@@ -1020,6 +1026,7 @@ set(specs
     spec/wowless/bubblewrap_spec.lua
     spec/wowless/hlist_spec.lua
     spec/wowless/modules/funcheck_spec.lua
+    spec/wowless/modules/typecheck_align_spec.lua
     spec/wowless/modules/typecheck_spec.lua
     spec/wowless/sqlite_spec.lua
     spec/wowless/toc_spec.lua
