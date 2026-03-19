@@ -24,10 +24,10 @@ local mock_cgencode = {
 local ctc = require('wowless.modules.ctypecheck')(mock_cgencode)
 
 local typecheck = require('wowless.modules.typecheck')(
-  nil, -- addons
+  { addons = {} }, -- addons
   { -- datalua
     globals = { Enum = { TestEnum = { A = 1, B = 2 } } },
-    structures = {},
+    structures = { TestStruct = { fields = {} } },
     uiobjects = { Frame = true },
   },
   nil, -- env
@@ -66,26 +66,9 @@ end
 describe('typecheck align', function()
   local all_values = { false, true, 0, 1, '0', '42', 'foo', 'TOPLEFT', {}, print }
 
-  -- run_aligned: for each value in all_values (plus nil), assert C and Lua agree.
-  -- cfn(v) -> bool: whether C accepts value v
-  -- lfn(v) -> bool: whether Lua accepts value v
-  local function run_aligned(label, cfn, lfn)
-    describe(label, function()
-      it('nil', function()
-        assert.equal(cfn(nil), lfn(nil))
-      end)
-      for _, v in ipairs(all_values) do
-        it(tostring(v), function()
-          assert.equal(cfn(v), lfn(v))
-        end)
-      end
-    end)
-  end
-
-  -- Type matrix: each row drives all aligned tests for that type.
+  -- Type matrix: each row drives all tests for that type.
   --   name:     suffix used to build cfn keys (e.g. 'boolean' -> 'stubcheckboolean')
-  --   ltype:    Lua type spec value (string for simple types, table for complex)
-  --             omit for types with no own C fn (sections = {})
+  --   ltype:    Lua type spec value passed to typecheck
   --   sections: set of prefix strings where this type has an aligned C function;
   --             types absent from a section assert ctc[prefix..name] is nil,
   --             reminding authors to add aligned tests when a C function is added
@@ -149,15 +132,15 @@ describe('typecheck align', function()
       sections = { stubcheck = true },
       tparam = 'frame', -- C lowercases the typename
     },
-    -- Types with no own C fn (sections = {})
-    { name = 'FileAsset', sections = {} },
-    { name = 'uiAddon', sections = {} },
-    { name = 'any', sections = {} },
-    { name = 'gender', sections = {} },
-    { name = 'oneornil', sections = {} },
-    { name = 'tostring', sections = {} },
-    { name = 'structure', sections = {} },
-    { name = 'arrayof', sections = {} },
+    -- Types with no C function
+    { name = 'FileAsset', ltype = 'FileAsset', sections = {} },
+    { name = 'uiAddon', ltype = 'uiAddon', sections = {} },
+    { name = 'any', ltype = 'any', sections = {} },
+    { name = 'gender', ltype = 'gender', sections = {} },
+    { name = 'oneornil', ltype = 'oneornil', sections = {} },
+    { name = 'tostring', ltype = 'tostring', sections = {} },
+    { name = 'structure', ltype = { structure = 'TestStruct' }, sections = {} },
+    { name = 'arrayof', ltype = { arrayof = 'number' }, sections = {} },
   }
 
   local section_defs = {
@@ -170,22 +153,24 @@ describe('typecheck align', function()
     describe(sec.label, function()
       for _, td in ipairs(type_matrix) do
         if td.sections[sec.prefix] then
-          local function make_cfn(nilable)
+          -- C alignment: compare C acceptance against Lua acceptance.
+          for _, nilable in ipairs({ false, true }) do
             local key = sec.prefix .. (nilable and 'nilable' or '') .. td.name
-            local tparam = td.tparam
-            return function(v)
-              return caccepts(ctc[key], v, tparam)
-            end
-          end
-          local function make_lfn(nilable)
             local spec = { type = td.ltype, nilable = nilable or nil }
-            return function(v)
-              return laccepts(spec, v, sec.isout)
-            end
+            local tparam = td.tparam
+            describe((nilable and 'nilable ' or '') .. td.name, function()
+              it('nil', function()
+                assert.equal(caccepts(ctc[key], nil, tparam), laccepts(spec, nil, sec.isout))
+              end)
+              for _, v in ipairs(all_values) do
+                it(tostring(v), function()
+                  assert.equal(caccepts(ctc[key], v, tparam), laccepts(spec, v, sec.isout))
+                end)
+              end
+            end)
           end
-          run_aligned(td.name, make_cfn(false), make_lfn(false))
-          run_aligned('nilable ' .. td.name, make_cfn(true), make_lfn(true))
         else
+          -- No C function: assert nil and validate Lua doesn't throw.
           local name, prefix = td.name, sec.prefix
           it('not yet implemented: ' .. prefix .. name, function()
             assert.is_nil(ctc[prefix .. name])
@@ -193,6 +178,19 @@ describe('typecheck align', function()
           it('not yet implemented: ' .. prefix .. 'nilable' .. name, function()
             assert.is_nil(ctc[prefix .. 'nilable' .. name])
           end)
+          for _, nilable in ipairs({ false, true }) do
+            local spec = { type = td.ltype, nilable = nilable or nil }
+            describe((nilable and 'nilable ' or '') .. name, function()
+              it('nil', function()
+                typecheck(spec, nil, sec.isout)
+              end)
+              for _, v in ipairs(all_values) do
+                it(tostring(v), function()
+                  typecheck(spec, v, sec.isout)
+                end)
+              end
+            end)
+          end
         end
       end
     end)
