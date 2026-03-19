@@ -129,79 +129,66 @@ describe('typecheck align', function()
   --   name:     suffix used to build cfn keys (e.g. 'boolean' -> 'stubcheckboolean')
   --   ltype:    Lua type spec value (string for simple types, table for complex)
   --   sections: set of prefix strings this type appears in
-  --   values:   values to test against nil (nil is always tested separately)
   --   tparam:   extra C parameter for typed checks (stringenum, luaobject)
   --   tparam_c: extra C parameter override when it differs from what's in ltype (uiobject)
-  --   skip_nil: set of prefixes for which the non-nilable variant has a known nil mismatch
+  local all_values = { false, true, 0, 1, '0', '42', 'foo', 'TOPLEFT', {}, print }
   local type_matrix = {
     {
       name = 'boolean',
       ltype = 'boolean',
       sections = { stubcheck = true, imploutput = true },
-      values = { false, true, 0, 1, '0', '42', 'foo', {}, print },
     },
     {
       name = 'number',
       ltype = 'number',
       sections = { stubcheck = true, implcheck = true, imploutput = true },
-      values = { false, true, 0, 1, '0', '42', 'foo', {}, print },
     },
     {
       name = 'string',
       ltype = 'string',
       sections = { stubcheck = true, implcheck = true, imploutput = true },
-      values = { false, true, 0, 1, '0', '42', 'foo', {}, print },
     },
     {
       name = 'function',
       ltype = 'function',
       sections = { stubcheck = true, implcheck = true, imploutput = true },
-      values = { false, true, 0, 1, '0', '42', 'foo', {}, print },
     },
     {
       name = 'table',
       ltype = 'table',
       sections = { stubcheck = true, implcheck = true, imploutput = true },
-      values = { false, true, 0, 1, '0', '42', 'foo', {}, print },
     },
     {
       name = 'unit',
       ltype = 'unit',
       sections = { stubcheck = true },
-      values = { false, true, 0, 1, '0', '42', 'foo', {}, print },
     },
     {
       name = 'unknown',
       ltype = 'unknown',
       sections = { stubcheck = true, implcheck = true, imploutput = true },
-      values = { false, true, 0, 1, '0', '42', 'foo', {}, print },
-      skip_nil = { imploutput = true }, -- imploutputunknown accepts nil; typecheck.lua rejects it
     },
     {
       name = 'enum',
       ltype = { enum = 'TestEnum' },
       sections = { stubcheck = true },
-      values = { false, true, 0, 1, '0', '42', 'foo', {}, print },
     },
     {
       name = 'stringenum',
       ltype = { stringenum = 'FramePoint' },
       sections = { stubcheck = true },
-      values = { false, true, 0, 1, 'foo', 'CENTER', 'TOPLEFT', {}, print },
       tparam = 'FramePoint',
     },
     {
       name = 'luaobject',
       ltype = { luaobject = 'Funtainer' },
       sections = { stubcheck = true },
-      values = { false, true, 0, 1, '42', 'foo', {}, print },
       tparam = 'Funtainer',
     },
     {
       name = 'uiobject',
       ltype = { uiobject = 'Frame' },
       sections = { stubcheck = true },
-      values = { false, true, 0, 1, '42', 'foo', {}, print },
       tparam_c = 'frame', -- C lowercases the typename
     },
   }
@@ -229,22 +216,10 @@ describe('typecheck align', function()
               return laccepts(spec, v, sec.isout)
             end
           end
-          local skip = td.skip_nil and td.skip_nil[sec.prefix]
-          run_aligned(td.name, make_cfn(false), make_lfn(false), td.values, skip)
-          run_aligned('nilable ' .. td.name, make_cfn(true), make_lfn(true), td.values)
+          run_aligned(td.name, make_cfn(false), make_lfn(false), all_values)
+          run_aligned('nilable ' .. td.name, make_cfn(true), make_lfn(true), all_values)
         end
       end
     end)
   end
-
-  -- Known mismatches between typecheck.h and typecheck.lua.
-  -- When a mismatch is fixed, remove the test here and restore the value to the
-  -- type_matrix entry (nil to imploutput unknown).
-  describe('known mismatches', function()
-    it('imploutputunknown accepts nil that typecheck.lua rejects', function()
-      -- C impl output check is a no-op; typecheck.lua enforces non-nilable
-      assert.is_true(caccepts(ctc.imploutputunknown, nil))
-      assert.is_false(laccepts({ type = 'unknown' }, nil, true))
-    end)
-  end)
 end)
