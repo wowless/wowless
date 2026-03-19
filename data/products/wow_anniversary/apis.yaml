@@ -5727,6 +5727,7 @@ C_EncodingUtil.CompressString:
   - name: output
     type: string
 C_EncodingUtil.DecodeBase64:
+  impl: C_EncodingUtil.DecodeBase64
   inputs:
   - name: source
     type: string
@@ -5775,6 +5776,7 @@ C_EncodingUtil.DeserializeJSON:
     nilable: true
     type: table
 C_EncodingUtil.EncodeBase64:
+  impl: C_EncodingUtil.EncodeBase64
   inputs:
   - name: source
     type: string

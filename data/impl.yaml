@@ -88,6 +88,12 @@ C_DateAndTime.AdjustTimeByMinutes:
 C_DateAndTime.CompareCalendarTime:
   moduledelegate:
     name: datetime
+C_EncodingUtil.DecodeBase64:
+  moduledelegate:
+    name: encodingutil
+C_EncodingUtil.EncodeBase64:
+  moduledelegate:
+    name: encodingutil
 C_EventUtils.IsCallbackEvent:
   moduledelegate:
     function: IsCallbackEvent

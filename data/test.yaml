@@ -6,6 +6,9 @@ C_DateAndTime.AdjustTimeByMinutes:
   C_DateAndTime.AdjustTimeByMinutes:
 C_DateAndTime.CompareCalendarTime:
   C_DateAndTime.CompareCalendarTime:
+C_EncodingUtil.Base64:
+  C_EncodingUtil.DecodeBase64:
+  C_EncodingUtil.EncodeBase64:
 C_EventUtils.IsCallbackEvent:
   C_EventUtils.IsCallbackEvent:
 C_EventUtils.IsEventValid:

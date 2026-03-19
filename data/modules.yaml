@@ -45,6 +45,8 @@ datetime:
     datalua:
 dirty:
   deps:
+encodingutil:
+  deps:
 env:
   deps:
 errorhandler:

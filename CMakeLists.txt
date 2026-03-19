@@ -794,6 +794,7 @@ lua2c(
   wowless.modules.cvars=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/cvars.lua
   wowless.modules.datetime=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/datetime.lua
   wowless.modules.dirty=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/dirty.lua
+  wowless.modules.encodingutil=c
   wowless.modules.env=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/env.lua
   wowless.modules.errorhandler=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/errorhandler.lua
   wowless.modules.errors=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/errors.lua
@@ -830,8 +831,9 @@ lua2c(
   wowless.secure=c
   wowless.xml=${CMAKE_CURRENT_SOURCE_DIR}/wowless/xml.lua)
 target_sources(
-  wowlesslib PRIVATE wowless/bubblewrap.c wowless/debug.c wowless/ext.c
-                     wowless/secure.c wowless/stubs.c)
+  wowlesslib
+  PRIVATE wowless/bubblewrap.c wowless/debug.c wowless/ext.c
+          wowless/modules/encodingutil.c wowless/secure.c wowless/stubs.c)
 
 add_lua_executable(
   wowless
