@@ -128,8 +128,7 @@ describe('typecheck align', function()
   --   name:     suffix used to build cfn keys (e.g. 'boolean' -> 'stubcheckboolean')
   --   ltype:    Lua type spec value (string for simple types, table for complex)
   --   sections: set of prefix strings this type appears in
-  --   tparam:   extra C parameter for typed checks (stringenum, luaobject)
-  --   tparam_c: extra C parameter override when it differs from what's in ltype (uiobject)
+  --   tparam:   extra C parameter for typed checks (stringenum, luaobject, uiobject)
   local type_matrix = {
     {
       name = 'boolean',
@@ -187,7 +186,7 @@ describe('typecheck align', function()
       name = 'uiobject',
       ltype = { uiobject = 'Frame' },
       sections = { stubcheck = true },
-      tparam_c = 'frame', -- C lowercases the typename
+      tparam = 'frame', -- C lowercases the typename
     },
   }
 
@@ -203,7 +202,7 @@ describe('typecheck align', function()
         if td.sections[sec.prefix] then
           local function make_cfn(nilable)
             local key = sec.prefix .. (nilable and 'nilable' or '') .. td.name
-            local tparam = td.tparam_c or td.tparam
+            local tparam = td.tparam
             return function(v)
               return caccepts(ctc[key], v, tparam)
             end
