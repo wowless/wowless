@@ -64,48 +64,6 @@ local function laccepts(spec, value, isout)
 end
 
 describe('typecheck align', function()
-  -- Types that have typecheck.lua handling but no dedicated C function yet.
-  -- If a new C function is added, this assertion will fail, reminding the author
-  -- to add a corresponding aligned test case.
-  describe('not yet implemented in C', function()
-    local not_yet_implemented = {
-      -- FileAsset and uiAddon: mapped to string check in cinputtypes, no own C fn
-      'stubcheckFileAsset',
-      'stubchecknilableFileAsset',
-      'stubcheckuiAddon',
-      'stubchecknilableuiAddon',
-      -- impl checks not yet added for these types
-      'implcheckboolean',
-      'implchecknilableboolean',
-      'implcheckenum',
-      'implchecknilableenum',
-      'implcheckunit',
-      'implchecknilableunit',
-      'implcheckstringenum',
-      'implchecknilablestringenum',
-      'implcheckluaobject',
-      'implchecknilableluaobject',
-      'implcheckuiobject',
-      'implchecknilableuiobject',
-      -- output checks not in coutputtypes
-      'imploutputenum',
-      'imploutputnilableenum',
-      'imploutputunit',
-      'imploutputnilableunit',
-      'imploutputstringenum',
-      'imploutputnilablestringenum',
-      'imploutputluaobject',
-      'imploutputnilableluaobject',
-      'imploutputuiobject',
-      'imploutputnilableuiobject',
-    }
-    for _, k in ipairs(not_yet_implemented) do
-      it(k, function()
-        assert.is_nil(ctc[k])
-      end)
-    end
-  end)
-
   local all_values = { false, true, 0, 1, '0', '42', 'foo', 'TOPLEFT', {}, print }
 
   -- run_aligned: for each value in all_values (plus nil), assert C and Lua agree.
@@ -127,7 +85,10 @@ describe('typecheck align', function()
   -- Type matrix: each row drives all aligned tests for that type.
   --   name:     suffix used to build cfn keys (e.g. 'boolean' -> 'stubcheckboolean')
   --   ltype:    Lua type spec value (string for simple types, table for complex)
-  --   sections: set of prefix strings this type appears in
+  --             omit for types with no own C fn (sections = {})
+  --   sections: set of prefix strings where this type has an aligned C function;
+  --             types absent from a section assert ctc[prefix..name] is nil,
+  --             reminding authors to add aligned tests when a C function is added
   --   tparam:   extra C parameter for typed checks (stringenum, luaobject, uiobject)
   local type_matrix = {
     {
@@ -188,6 +149,9 @@ describe('typecheck align', function()
       sections = { stubcheck = true },
       tparam = 'frame', -- C lowercases the typename
     },
+    -- FileAsset and uiAddon: mapped to string check in cinputtypes, no own C fn
+    { name = 'FileAsset', sections = {} },
+    { name = 'uiAddon', sections = {} },
   }
 
   local section_defs = {
@@ -215,6 +179,14 @@ describe('typecheck align', function()
           end
           run_aligned(td.name, make_cfn(false), make_lfn(false))
           run_aligned('nilable ' .. td.name, make_cfn(true), make_lfn(true))
+        else
+          local name, prefix = td.name, sec.prefix
+          it('not yet implemented: ' .. prefix .. name, function()
+            assert.is_nil(ctc[prefix .. name])
+          end)
+          it('not yet implemented: ' .. prefix .. 'nilable' .. name, function()
+            assert.is_nil(ctc[prefix .. 'nilable' .. name])
+          end)
         end
       end
     end)
