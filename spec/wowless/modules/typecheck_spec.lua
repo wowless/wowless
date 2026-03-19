@@ -139,6 +139,18 @@ local tests = {
     spec = { type = { structure = 'structwithmixinname' } },
     value = { a = 42, b = 'moo' },
   },
+  ['luaobject type, is out, boolean value'] = {
+    isout = true,
+    out = { nil, 'is not of luaobject type Foo' },
+    spec = { type = { luaobject = 'Foo' } },
+    value = true,
+  },
+  ['uiobject type, is out, boolean value'] = {
+    isout = true,
+    out = { nil, 'is of type "Frame", but "nil" was passed' },
+    spec = { type = { uiobject = 'Frame' } },
+    value = true,
+  },
   ['unit type, string value, known unit'] = {
     out = { units.player },
     spec = { type = 'unit' },
@@ -176,7 +188,7 @@ describe('typecheck', function()
           mixin = 'roflmixin',
         },
       },
-      uiobjects = {},
+      uiobjects = { Frame = {} },
     },
     { -- env
       genv = {

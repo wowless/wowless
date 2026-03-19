@@ -37,7 +37,7 @@ return function(addons, datalua, env, luaobjects, uiobjects, uiobjecttypes, unit
 
   local function resolveobj(ty, value, isout)
     if isout then
-      if value and value.luarep then
+      if type(value) == 'table' and value.luarep then
         return value.luarep, not IsObjectType(value, ty)
       else
         return nil, true
@@ -245,7 +245,7 @@ return function(addons, datalua, env, luaobjects, uiobjects, uiobjecttypes, unit
       return value
     elseif spec.type.luaobject then
       if isout then
-        if value and value.type == spec.type.luaobject then
+        if type(value) == 'table' and value.type == spec.type.luaobject then
           return value.luarep
         else
           return nil, 'is not of luaobject type ' .. spec.type.luaobject
