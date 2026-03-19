@@ -3,7 +3,10 @@ return function(api, log, luaobjects, uiobjects, uiobjecttypes)
 
   local function CheckStringEnum(value, enumname)
     local evalues = stringenums[enumname]
-    return evalues and evalues[value:upper()]
+    if not evalues then
+      error('internal error: unknown string enum: ' .. enumname)
+    end
+    return evalues[value:upper()]
   end
 
   local function CreateLuaObject(typename)
