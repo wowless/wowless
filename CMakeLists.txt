@@ -779,7 +779,6 @@ lua2c(
   runtime.platform=runtime/platform.lua
   runtime.stringenums=runtime/stringenums.lua
   wowless.bubblewrap=c
-  wowless.ctypecheck=c
   wowless.env=${CMAKE_CURRENT_SOURCE_DIR}/wowless/env.lua
   wowless.debug=c
   wowless.ext=c
@@ -792,7 +791,7 @@ lua2c(
   wowless.modules.atlas=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/atlas.lua
   wowless.modules.calendar=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/calendar.lua
   wowless.modules.clog=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/clog.lua
-  wowless.modules.ctypecheck=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/ctypecheck.lua
+  wowless.modules.ctypecheck=c
   wowless.modules.cvars=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/cvars.lua
   wowless.modules.datetime=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/datetime.lua
   wowless.modules.dirty=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/dirty.lua
@@ -834,9 +833,9 @@ lua2c(
   wowless.xml=${CMAKE_CURRENT_SOURCE_DIR}/wowless/xml.lua)
 target_sources(
   wowlesslib
-  PRIVATE wowless/bubblewrap.c wowless/ctypecheck.c wowless/debug.c
-          wowless/ext.c wowless/modules/encodingutil.c wowless/secure.c
-          wowless/stubs.c)
+  PRIVATE wowless/bubblewrap.c wowless/debug.c wowless/ext.c
+          wowless/modules/ctypecheck.c wowless/modules/encodingutil.c
+          wowless/secure.c wowless/stubs.c)
 
 add_lua_executable(
   wowless

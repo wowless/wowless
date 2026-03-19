@@ -18,7 +18,7 @@ local mock_cgencode = {
   log = function() end,
 }
 
-local ctc = require('wowless.ctypecheck')(mock_cgencode)
+local ctc = require('wowless.modules.ctypecheck')(mock_cgencode)
 
 local typecheck = require('wowless.modules.typecheck')(
   nil, -- addons

@@ -131,7 +131,7 @@ static int make_module(lua_State *L) {
   return 1;
 }
 
-int luaopen_wowless_ctypecheck(lua_State *L) {
+int luaopen_wowless_modules_ctypecheck(lua_State *L) {
   lua_pushcfunction(L, make_module);
   return 1;
 }
