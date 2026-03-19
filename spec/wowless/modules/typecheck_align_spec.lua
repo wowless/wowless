@@ -106,18 +106,17 @@ describe('typecheck align', function()
     end
   end)
 
-  -- run_aligned: for each value in vset (plus nil unless skip_nil), assert C and Lua agree.
+  local all_values = { false, true, 0, 1, '0', '42', 'foo', 'TOPLEFT', {}, print }
+
+  -- run_aligned: for each value in all_values (plus nil), assert C and Lua agree.
   -- cfn(v) -> bool: whether C accepts value v
   -- lfn(v) -> bool: whether Lua accepts value v
-  -- skip_nil: set true when nil has a known mismatch (documented in known mismatches)
-  local function run_aligned(label, cfn, lfn, vset, skip_nil)
+  local function run_aligned(label, cfn, lfn)
     describe(label, function()
-      if not skip_nil then
-        it('nil', function()
-          assert.equal(cfn(nil), lfn(nil))
-        end)
-      end
-      for _, v in ipairs(vset) do
+      it('nil', function()
+        assert.equal(cfn(nil), lfn(nil))
+      end)
+      for _, v in ipairs(all_values) do
         it(tostring(v), function()
           assert.equal(cfn(v), lfn(v))
         end)
@@ -131,7 +130,6 @@ describe('typecheck align', function()
   --   sections: set of prefix strings this type appears in
   --   tparam:   extra C parameter for typed checks (stringenum, luaobject)
   --   tparam_c: extra C parameter override when it differs from what's in ltype (uiobject)
-  local all_values = { false, true, 0, 1, '0', '42', 'foo', 'TOPLEFT', {}, print }
   local type_matrix = {
     {
       name = 'boolean',
@@ -216,8 +214,8 @@ describe('typecheck align', function()
               return laccepts(spec, v, sec.isout)
             end
           end
-          run_aligned(td.name, make_cfn(false), make_lfn(false), all_values)
-          run_aligned('nilable ' .. td.name, make_cfn(true), make_lfn(true), all_values)
+          run_aligned(td.name, make_cfn(false), make_lfn(false))
+          run_aligned('nilable ' .. td.name, make_cfn(true), make_lfn(true))
         end
       end
     end)
