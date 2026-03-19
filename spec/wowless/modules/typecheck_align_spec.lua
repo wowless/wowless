@@ -149,9 +149,15 @@ describe('typecheck align', function()
       sections = { stubcheck = true },
       tparam = 'frame', -- C lowercases the typename
     },
-    -- FileAsset and uiAddon: mapped to string check in cinputtypes, no own C fn
+    -- Types with no own C fn (sections = {})
     { name = 'FileAsset', sections = {} },
     { name = 'uiAddon', sections = {} },
+    { name = 'any', sections = {} },
+    { name = 'gender', sections = {} },
+    { name = 'oneornil', sections = {} },
+    { name = 'tostring', sections = {} },
+    { name = 'structure', sections = {} },
+    { name = 'arrayof', sections = {} },
   }
 
   local section_defs = {
