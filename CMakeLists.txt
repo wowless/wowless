@@ -833,9 +833,13 @@ lua2c(
   wowless.xml=${CMAKE_CURRENT_SOURCE_DIR}/wowless/xml.lua)
 target_sources(
   wowlesslib
-  PRIVATE wowless/bubblewrap.c wowless/debug.c wowless/ext.c
-          wowless/modules/ctypecheck.c wowless/modules/encodingutil.c
-          wowless/secure.c wowless/stubs.c)
+  PRIVATE wowless/bubblewrap.c
+          wowless/debug.c
+          wowless/ext.c
+          wowless/modules/ctypecheck.c
+          wowless/modules/encodingutil.c
+          wowless/secure.c
+          wowless/stubs.c)
 
 add_lua_executable(
   wowless
