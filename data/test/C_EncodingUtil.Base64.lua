@@ -60,9 +60,6 @@ return {
         return T.match(1, '-_8A', EncodeBase64('\251\255\000', '1'))
       end,
       bad_variant = function()
-        if _G.__wowless then
-          return
-        end -- issue #566
         return T.match(1, false, (pcall(EncodeBase64, 'f', 2)))
       end,
     }

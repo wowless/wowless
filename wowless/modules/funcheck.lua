@@ -18,6 +18,7 @@ return function(log, typechecker)
           local msg = ('arg %d (%q) of %q %s'):format(i, tostring(param.name), fname, errmsg)
           if iswarn then
             log(1, 'warning: ' .. msg)
+            args[i] = v
           else
             error(msg)
           end
@@ -36,6 +37,7 @@ return function(log, typechecker)
               local msg = ('arg %d (%q) of %q %s'):format(i + j, tostring(param.name), fname, errmsg)
               if iswarn then
                 log(1, 'warning: ' .. msg)
+                args[i + j] = v
               else
                 error(msg)
               end

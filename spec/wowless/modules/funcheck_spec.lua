@@ -64,6 +64,37 @@ describe('funcheck', function()
       end)
     end
   end)
+  describe('warn path', function()
+    local warnmsgs
+    local function warnlog(_, fmt, ...)
+      table.insert(warnmsgs, fmt:format(...))
+    end
+    local wtc = require('wowless.modules.typecheck')(nil, {
+      globals = { Enum = { TestEnum = { Foo = 1 } } },
+      uiobjects = {},
+    })
+    local wfc = require('wowless.modules.funcheck')(warnlog, wtc)
+    it('propagates invalid enum value and logs warning', function()
+      warnmsgs = {}
+      local check = wfc.makeCheckInputs('moo', {
+        inputs = { { name = 'e', type = { enum = 'TestEnum' } } },
+      })
+      checkret(1, { 99 }, check(99))
+      assert.same(1, #warnmsgs)
+    end)
+    it('propagates invalid instride enum value and logs warning', function()
+      warnmsgs = {}
+      local check = wfc.makeCheckInputs('moo', {
+        inputs = {
+          { name = 'e1', type = { enum = 'TestEnum' } },
+          { name = 'e2', type = { enum = 'TestEnum' } },
+        },
+        instride = 2,
+      })
+      checkret(2, { 99, 88 }, check(99, 88))
+      assert.same(2, #warnmsgs)
+    end)
+  end)
   describe('makeCheckOutputs', function()
     local tests = {
       ['outstride=1'] = {
