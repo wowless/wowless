@@ -1135,24 +1135,13 @@ if args.coutput then
       end
       if check_outputs then
         emit('  int ret = %s(L);', fn)
-        local ind = '  '
         if v.mayreturnnothing then
-          emit('  if (ret != 0) {')
-          ind = '    '
+          emit('  if (ret == 0) return 0;')
         end
-        emit('%swowless_stubchecknreturns(L, ret, %d, %s);', ind, #outputs, cstring(entry.name))
+        emit('  wowless_stubchecknreturns(L, ret, %d, %s);', #outputs, cstring(entry.name))
         for i, out in ipairs(outputs) do
           local nilable = out.nilable
-          emit(
-            '%swowless_imploutput%s%s(L, %d);',
-            ind,
-            nilable and 'nilable' or '',
-            dispatch(coutputtypes, out.type),
-            i
-          )
-        end
-        if v.mayreturnnothing then
-          emit('  }')
+          emit('  wowless_imploutput%s%s(L, %d);', nilable and 'nilable' or '', dispatch(coutputtypes, out.type), i)
         end
         emit('  return ret;')
       else
