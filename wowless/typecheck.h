@@ -242,6 +242,35 @@ static inline void wowless_stubcreateuiobject(lua_State *L,
   lua_call(L, 1, 1);
 }
 
+static inline void wowless_implcoerceboolean(lua_State *L, int idx) {
+  lua_pushboolean(L, lua_toboolean(L, idx));
+  lua_replace(L, idx);
+}
+
+static inline void wowless_implcheckboolean(lua_State *L, int idx) {
+  switch (lua_type(L, idx)) {
+    case LUA_TBOOLEAN:
+      return;
+    case LUA_TNIL:
+    case LUA_TNONE:
+      luaL_typerror(L, idx, lua_typename(L, LUA_TBOOLEAN));
+      return;
+    default:
+      wowless_implcoerceboolean(L, idx);
+  }
+}
+
+static inline void wowless_implchecknilableboolean(lua_State *L, int idx) {
+  switch (lua_type(L, idx)) {
+    case LUA_TBOOLEAN:
+    case LUA_TNIL:
+    case LUA_TNONE:
+      return;
+    default:
+      wowless_implcoerceboolean(L, idx);
+  }
+}
+
 static inline void wowless_implcheckstring(lua_State *L, int idx) {
   luaL_checkstring(L, idx);
 }

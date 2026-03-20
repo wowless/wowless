@@ -32,6 +32,8 @@ SIMPLE_CHECKER(stubcheckunknown, wowless_stubcheckunknown)
 SIMPLE_CHECKER(stubchecknilableunknown, wowless_stubchecknilableunknown)
 SIMPLE_CHECKER(implchecknumber, wowless_implchecknumber)
 SIMPLE_CHECKER(implchecknilablenumber, wowless_implchecknilablenumber)
+SIMPLE_CHECKER(implcheckboolean, wowless_implcheckboolean)
+SIMPLE_CHECKER(implchecknilableboolean, wowless_implchecknilableboolean)
 SIMPLE_CHECKER(implcheckstring, wowless_implcheckstring)
 SIMPLE_CHECKER(implchecknilablestring, wowless_implchecknilablestring)
 SIMPLE_CHECKER(implcheckfileasset, wowless_implcheckfileasset)
@@ -110,6 +112,8 @@ static int make_module(lua_State *L) {
   SET_SIMPLE(L, stubchecknilableunknown);
   SET_SIMPLE(L, implchecknumber);
   SET_SIMPLE(L, implchecknilablenumber);
+  SET_SIMPLE(L, implcheckboolean);
+  SET_SIMPLE(L, implchecknilableboolean);
   SET_SIMPLE(L, implcheckstring);
   SET_SIMPLE(L, implchecknilablestring);
   SET_SIMPLE(L, implcheckfileasset);

@@ -88,7 +88,7 @@ describe('typecheck align', function()
   local type_matrix = {
     boolean = {
       ltype = 'boolean',
-      sections = { stubcheck = true, imploutput = true },
+      sections = { stubcheck = true, implcheck = true, imploutput = true },
     },
     number = {
       ltype = 'number',
