@@ -146,22 +146,11 @@ lua2c(say say=${say_SOURCE_DIR}/src/say/init.lua)
 set(luassert_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/vendor/luassert)
 lua2c(
   luassert
-  luassert.compatibility=${luassert_SOURCE_DIR}/src/compatibility.lua
-  luassert.state=${luassert_SOURCE_DIR}/src/state.lua
-  luassert.util=${luassert_SOURCE_DIR}/src/util.lua
-  luassert.spy=${luassert_SOURCE_DIR}/src/spy.lua
-  luassert.stub=${luassert_SOURCE_DIR}/src/stub.lua
-  luassert.assert=${luassert_SOURCE_DIR}/src/assert.lua
-  luassert.modifiers=${luassert_SOURCE_DIR}/src/modifiers.lua
-  luassert.assertions=${luassert_SOURCE_DIR}/src/assertions.lua
-  luassert.array=${luassert_SOURCE_DIR}/src/array.lua
-  luassert.namespaces=${luassert_SOURCE_DIR}/src/namespaces.lua
-  luassert.match=${luassert_SOURCE_DIR}/src/match.lua
-  luassert.mock=${luassert_SOURCE_DIR}/src/mock.lua
   luassert=${luassert_SOURCE_DIR}/src/init.lua
-  luassert.matchers=${luassert_SOURCE_DIR}/src/matchers/init.lua
-  luassert.matchers.core=${luassert_SOURCE_DIR}/src/matchers/core.lua
-  luassert.matchers.composite=${luassert_SOURCE_DIR}/src/matchers/composite.lua
+  luassert.array=${luassert_SOURCE_DIR}/src/array.lua
+  luassert.assert=${luassert_SOURCE_DIR}/src/assert.lua
+  luassert.assertions=${luassert_SOURCE_DIR}/src/assertions.lua
+  luassert.compatibility=${luassert_SOURCE_DIR}/src/compatibility.lua
   luassert.formatters=${luassert_SOURCE_DIR}/src/formatters/init.lua
   luassert.formatters.binarystring=${luassert_SOURCE_DIR}/src/formatters/binarystring.lua
   luassert.languages.ar=${luassert_SOURCE_DIR}/src/languages/ar.lua
@@ -175,6 +164,17 @@ lua2c(
   luassert.languages.ru=${luassert_SOURCE_DIR}/src/languages/ru.lua
   luassert.languages.ua=${luassert_SOURCE_DIR}/src/languages/ua.lua
   luassert.languages.zh=${luassert_SOURCE_DIR}/src/languages/zh.lua
+  luassert.match=${luassert_SOURCE_DIR}/src/match.lua
+  luassert.matchers=${luassert_SOURCE_DIR}/src/matchers/init.lua
+  luassert.matchers.composite=${luassert_SOURCE_DIR}/src/matchers/composite.lua
+  luassert.matchers.core=${luassert_SOURCE_DIR}/src/matchers/core.lua
+  luassert.mock=${luassert_SOURCE_DIR}/src/mock.lua
+  luassert.modifiers=${luassert_SOURCE_DIR}/src/modifiers.lua
+  luassert.namespaces=${luassert_SOURCE_DIR}/src/namespaces.lua
+  luassert.spy=${luassert_SOURCE_DIR}/src/spy.lua
+  luassert.state=${luassert_SOURCE_DIR}/src/state.lua
+  luassert.stub=${luassert_SOURCE_DIR}/src/stub.lua
+  luassert.util=${luassert_SOURCE_DIR}/src/util.lua
   say=p)
 
 set(argparse_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/vendor/argparse)
@@ -214,44 +214,44 @@ lua2c(
   penlight
   luafilesystem=p
   pl=${penlight_SOURCE_DIR}/lua/pl/init.lua
-  pl.strict=${penlight_SOURCE_DIR}/lua/pl/strict.lua
-  pl.dir=${penlight_SOURCE_DIR}/lua/pl/dir.lua
-  pl.operator=${penlight_SOURCE_DIR}/lua/pl/operator.lua
-  pl.input=${penlight_SOURCE_DIR}/lua/pl/input.lua
-  pl.config=${penlight_SOURCE_DIR}/lua/pl/config.lua
-  pl.seq=${penlight_SOURCE_DIR}/lua/pl/seq.lua
-  pl.stringio=${penlight_SOURCE_DIR}/lua/pl/stringio.lua
-  pl.text=${penlight_SOURCE_DIR}/lua/pl/text.lua
-  pl.test=${penlight_SOURCE_DIR}/lua/pl/test.lua
-  pl.tablex=${penlight_SOURCE_DIR}/lua/pl/tablex.lua
   pl.app=${penlight_SOURCE_DIR}/lua/pl/app.lua
-  pl.stringx=${penlight_SOURCE_DIR}/lua/pl/stringx.lua
-  pl.lexer=${penlight_SOURCE_DIR}/lua/pl/lexer.lua
-  pl.utils=${penlight_SOURCE_DIR}/lua/pl/utils.lua
-  pl.compat=${penlight_SOURCE_DIR}/lua/pl/compat.lua
-  pl.sip=${penlight_SOURCE_DIR}/lua/pl/sip.lua
-  pl.permute=${penlight_SOURCE_DIR}/lua/pl/permute.lua
-  pl.pretty=${penlight_SOURCE_DIR}/lua/pl/pretty.lua
+  pl.array2d=${penlight_SOURCE_DIR}/lua/pl/array2d.lua
   pl.class=${penlight_SOURCE_DIR}/lua/pl/class.lua
-  pl.List=${penlight_SOURCE_DIR}/lua/pl/List.lua
+  pl.compat=${penlight_SOURCE_DIR}/lua/pl/compat.lua
+  pl.comprehension=${penlight_SOURCE_DIR}/lua/pl/comprehension.lua
+  pl.config=${penlight_SOURCE_DIR}/lua/pl/config.lua
   pl.data=${penlight_SOURCE_DIR}/lua/pl/data.lua
   pl.Date=${penlight_SOURCE_DIR}/lua/pl/Date.lua
-  pl.luabalanced=${penlight_SOURCE_DIR}/lua/pl/luabalanced.lua
-  pl.comprehension=${penlight_SOURCE_DIR}/lua/pl/comprehension.lua
-  pl.path=${penlight_SOURCE_DIR}/lua/pl/path.lua
-  pl.array2d=${penlight_SOURCE_DIR}/lua/pl/array2d.lua
-  pl.func=${penlight_SOURCE_DIR}/lua/pl/func.lua
-  pl.lapp=${penlight_SOURCE_DIR}/lua/pl/lapp.lua
+  pl.dir=${penlight_SOURCE_DIR}/lua/pl/dir.lua
   pl.file=${penlight_SOURCE_DIR}/lua/pl/file.lua
-  pl.template=${penlight_SOURCE_DIR}/lua/pl/template.lua
+  pl.func=${penlight_SOURCE_DIR}/lua/pl/func.lua
+  pl.import_into=${penlight_SOURCE_DIR}/lua/pl/import_into.lua
+  pl.input=${penlight_SOURCE_DIR}/lua/pl/input.lua
+  pl.lapp=${penlight_SOURCE_DIR}/lua/pl/lapp.lua
+  pl.lexer=${penlight_SOURCE_DIR}/lua/pl/lexer.lua
+  pl.List=${penlight_SOURCE_DIR}/lua/pl/List.lua
+  pl.luabalanced=${penlight_SOURCE_DIR}/lua/pl/luabalanced.lua
   pl.Map=${penlight_SOURCE_DIR}/lua/pl/Map.lua
   pl.MultiMap=${penlight_SOURCE_DIR}/lua/pl/MultiMap.lua
+  pl.operator=${penlight_SOURCE_DIR}/lua/pl/operator.lua
   pl.OrderedMap=${penlight_SOURCE_DIR}/lua/pl/OrderedMap.lua
+  pl.path=${penlight_SOURCE_DIR}/lua/pl/path.lua
+  pl.permute=${penlight_SOURCE_DIR}/lua/pl/permute.lua
+  pl.pretty=${penlight_SOURCE_DIR}/lua/pl/pretty.lua
+  pl.seq=${penlight_SOURCE_DIR}/lua/pl/seq.lua
   pl.Set=${penlight_SOURCE_DIR}/lua/pl/Set.lua
-  pl.xml=${penlight_SOURCE_DIR}/lua/pl/xml.lua
-  pl.url=${penlight_SOURCE_DIR}/lua/pl/url.lua
+  pl.sip=${penlight_SOURCE_DIR}/lua/pl/sip.lua
+  pl.strict=${penlight_SOURCE_DIR}/lua/pl/strict.lua
+  pl.stringio=${penlight_SOURCE_DIR}/lua/pl/stringio.lua
+  pl.stringx=${penlight_SOURCE_DIR}/lua/pl/stringx.lua
+  pl.tablex=${penlight_SOURCE_DIR}/lua/pl/tablex.lua
+  pl.template=${penlight_SOURCE_DIR}/lua/pl/template.lua
+  pl.test=${penlight_SOURCE_DIR}/lua/pl/test.lua
+  pl.text=${penlight_SOURCE_DIR}/lua/pl/text.lua
   pl.types=${penlight_SOURCE_DIR}/lua/pl/types.lua
-  pl.import_into=${penlight_SOURCE_DIR}/lua/pl/import_into.lua)
+  pl.url=${penlight_SOURCE_DIR}/lua/pl/url.lua
+  pl.utils=${penlight_SOURCE_DIR}/lua/pl/utils.lua
+  pl.xml=${penlight_SOURCE_DIR}/lua/pl/xml.lua)
 
 set(vstruct_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/vendor/vstruct)
 lua2c(
@@ -779,17 +779,17 @@ lua2c(
   runtime.platform=runtime/platform.lua
   runtime.stringenums=runtime/stringenums.lua
   wowless.bubblewrap=c
-  wowless.env=${CMAKE_CURRENT_SOURCE_DIR}/wowless/env.lua
   wowless.debug=c
+  wowless.env=${CMAKE_CURRENT_SOURCE_DIR}/wowless/env.lua
   wowless.ext=c
   wowless.hlist=${CMAKE_CURRENT_SOURCE_DIR}/wowless/hlist.lua
   wowless.modules=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules.lua
   wowless.modules.addons=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/addons.lua
   wowless.modules.api=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/api.lua
   wowless.modules.apiloader=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/apiloader.lua
-  wowless.modules.cgencode=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/cgencode.lua
   wowless.modules.atlas=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/atlas.lua
   wowless.modules.calendar=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/calendar.lua
+  wowless.modules.cgencode=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/cgencode.lua
   wowless.modules.clog=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/clog.lua
   wowless.modules.ctypecheck=c
   wowless.modules.cvars=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/cvars.lua
@@ -1008,11 +1008,11 @@ set(specs
     spec/data/globals_spec.lua
     spec/data/impl_spec.lua
     spec/data/luaobjects_spec.lua
+    spec/data/schema_coverage_spec.lua
+    spec/data/scripttypes_spec.lua
     spec/data/sql_spec.lua
     spec/data/structures_spec.lua
     spec/data/test_spec.lua
-    spec/data/schema_coverage_spec.lua
-    spec/data/scripttypes_spec.lua
     spec/data/uiobjectimpl_spec.lua
     spec/data/uiobjects_spec.lua
     spec/data/xml_spec.lua
