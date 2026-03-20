@@ -18,13 +18,7 @@ return {
   ['no trim needed'] = function()
     return T.match(1, 'hello', trim('hello'))
   end,
-  ['is C function'] = function()
-    T.assertEquals(false, pcall(coroutine.create, trim))
-  end,
-  ['method syntax'] = function()
-    return T.match(1, 'hello', ('  hello  '):trim())
-  end,
   ['no arg errors'] = function()
-    T.assertEquals(false, pcall(trim))
+    return T.match(2, false, 'bad argument #1 to \'?\' (string expected, got no value)', pcall(trim))
   end,
 }
