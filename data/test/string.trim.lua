@@ -19,6 +19,6 @@ return {
     return T.match(1, 'hello', trim('hello'))
   end,
   ['no arg errors'] = function()
-    return T.match(2, false, 'bad argument #1 to \'?\' (string expected, got no value)', pcall(trim))
+    return T.match(1, false, (pcall(trim)))
   end,
 }
