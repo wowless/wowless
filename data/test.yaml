@@ -90,6 +90,8 @@ secureexecuterange:
   secureexecuterange:
 string.format:
   string.format:
+string.trim:
+  string.trim:
 SwapToGlobalEnvironment:
   SwapToGlobalEnvironment:
 table.wipe:
