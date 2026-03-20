@@ -25,6 +25,7 @@ Constants:
     CAAPlayerHealthPercentDefault: 0
     CAAPlayerResourceFormatDefault: 1
     CAAPlayerResourcePercentDefault: 0
+    CAASamePercentThrottleTime: 10
     CAASampleTextThrottleTime: 1
     CAASayCombatEndDefault: true
     CAASayCombatStartDefault: true
@@ -2552,15 +2553,19 @@ Enum:
   CombatAudioAlertThrottle:
     PlayerCast: 3
     PlayerHealth: 1
+    PlayerHealthSamePercent: 7
     PlayerResource1: 5
+    PlayerResource1SamePercent: 9
     PlayerResource2: 6
+    PlayerResource2SamePercent: 10
     Sample: 0
     TargetCast: 4
     TargetHealth: 2
+    TargetHealthSamePercent: 8
   CombatAudioAlertThrottleMeta:
-    MaxValue: 6
+    MaxValue: 10
     MinValue: 0
-    NumValues: 7
+    NumValues: 11
   CombatAudioAlertType:
     Cast: 1
     Health: 0
@@ -4389,6 +4394,7 @@ Enum:
     FMirroredPositionData: 31
     FNeighborhoodMirrorData: 30
     FNeighborhoodStateData: 38
+    FPathingDynamicLinks: 40
     FPersistableJamServers: 10
     FPhaseShiftData: 16
     FPlayerHouseInfo: 32
@@ -4442,7 +4448,7 @@ Enum:
   FragmentIDMeta:
     MaxValue: 255
     MinValue: 0
-    NumValues: 73
+    NumValues: 74
   FrameTutorialAccount:
     AccountWideReputation: 9
     AssistedCombatRotationActionButton: 22

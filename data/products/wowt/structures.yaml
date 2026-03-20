@@ -367,6 +367,9 @@ C_AreaPoiInfo.AreaPOIInfo:
       type: boolean
     isCurrentEvent:
       type: boolean
+    isLocked:
+      default: false
+      type: boolean
     isPrimaryMapForPOI:
       type: boolean
     isSuppressible:

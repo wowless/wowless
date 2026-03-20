@@ -14478,6 +14478,9 @@ C_HousingNeighborhood.IsPlotOwnedByPlayer:
 C_HousingNeighborhood.OnBulletinBoardClosed:
   inputs:
   outputs:
+C_HousingNeighborhood.OnCornerstoneClosed:
+  inputs:
+  outputs:
 C_HousingNeighborhood.PromoteToManager:
   inputs:
   - name: playerGUID
@@ -18544,14 +18547,6 @@ C_NamePlateManager.IsNamePlateUnitBehindCamera:
   outputs:
   - name: isBehindCamera
     type: boolean
-C_NamePlateManager.SetNamePlateHitTestFrame:
-  inputs:
-  - name: unitToken
-    type: unit
-  - name: hitTestFrame
-    type:
-      uiobject: Frame
-  outputs:
 C_NamePlateManager.SetNamePlateHitTestInsets:
   inputs:
   - name: type
@@ -23437,9 +23432,20 @@ C_SecureTransfer.GetMailInfo:
   - name: mailInfo
     type:
       structure: C_SecureTransfer.MailInfo
+C_SecureTransfer.GetTradePartner:
+  inputs:
+  outputs:
+  - name: name
+    nilable: true
+    type: string
 C_SecureTransfer.SendMail:
   inputs:
   outputs:
+C_SecureTransfer.ShouldShowTradeOfferWarning:
+  inputs:
+  outputs:
+  - name: shouldShow
+    type: boolean
 C_SettingsUtil.NotifySettingsLoaded:
   inputs:
   outputs:
@@ -27090,6 +27096,11 @@ C_TradeInfo.SetTradeMoney:
   - name: amount
     type: number
   outputs:
+C_TradeInfo.ShouldShowTradeOfferWarning:
+  inputs:
+  outputs:
+  - name: shouldShow
+    type: boolean
 C_TradeSkillUI.AnyRecipeCategoriesFiltered:
 C_TradeSkillUI.AreAnyInventorySlotsFiltered:
 C_TradeSkillUI.CancelProfessionRespec:
@@ -36196,6 +36207,8 @@ GetTradePlayerItemInfo:
     type: boolean
   - name: isBound
     type: boolean
+  - name: itemID
+    type: number
 GetTradePlayerItemLink:
   inputs:
   - name: index
@@ -36221,6 +36234,8 @@ GetTradeTargetItemInfo:
   - name: enchantment
     nilable: true
     type: string
+  - name: itemID
+    type: number
 GetTradeTargetItemLink:
   inputs:
   - name: index
@@ -38633,10 +38648,22 @@ table.foreach:
   impl: table.foreach
 table.foreachi:
   impl: table.foreachi
+table.freeze:
+  inputs:
+  - name: table
+    type: unknown
+  outputs:
 table.getn:
   impl: table.getn
 table.insert:
   impl: table.insert
+table.isfrozen:
+  inputs:
+  - name: table
+    type: unknown
+  outputs:
+  - name: frozen
+    type: boolean
 table.maxn:
   impl: table.maxn
 table.remove:

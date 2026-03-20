@@ -150,6 +150,8 @@ type:
               type: flag
             RequiresActiveCommentator:
               type: flag
+            RequiresCanChangeHitTestPoints:
+              type: flag
             RequiresClubsInitialized:
               type: flag
             RequiresCommentator:

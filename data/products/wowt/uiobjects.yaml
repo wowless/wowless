@@ -3461,6 +3461,11 @@ FontString:
       - name: scaleAnimationMode
         type:
           enum: FontStringScaleAnimationMode
+    GetSmoothScaling:
+      inputs:
+      outputs:
+      - name: smoothScaling
+        type: boolean
     GetStringHeight:
       inputs:
       outputs:
@@ -3563,6 +3568,11 @@ FontString:
       - name: scaleAnimationMode
         type:
           enum: FontStringScaleAnimationMode
+      outputs:
+    SetSmoothScaling:
+      inputs:
+      - name: smoothScaling
+        type: boolean
       outputs:
     SetText:
       impl:
