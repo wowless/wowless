@@ -9,6 +9,10 @@
     "zlib",
     {
       "default-features": false,
+      "name": "dbus"
+    },
+    {
+      "default-features": false,
       "name": "sdl3"
     },
     {
