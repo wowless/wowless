@@ -1119,6 +1119,18 @@ if args.coutput then
     emit('')
   end
 
+  local coutputdefaulttypes = {
+    boolean = function(val)
+      return string.format('lua_pushboolean(L, %s)', val and '1' or '0')
+    end,
+    number = function(val)
+      return string.format('lua_pushnumber(L, %g)', val)
+    end,
+    string = function(val)
+      return string.format('lua_pushstring(L, %s)', cstring(val))
+    end,
+  }
+
   for _, entry in ipairs(eligible_impls) do
     local impldata = entry.impldata
     if not impldata.nowrap then
@@ -1145,8 +1157,14 @@ if args.coutput then
         emit('  wowless_stubchecknreturns(L, ret, %d, %s);', #outputs, cstring(entry.name))
         for i, out in ipairs(outputs) do
           local nilable = out.nilable
-          if out.default and out.type == 'number' then
-            emit('  wowless_imploutputdefaultnumber(L, %d, %g);', i, out.default)
+          if out.default ~= nil then
+            local push = dispatch(coutputdefaulttypes, type(out.default), out.default)
+            emit('  if (lua_isnil(L, %d)) {', i)
+            emit('    %s;', push)
+            emit('    lua_replace(L, %d);', i)
+            emit('  } else {')
+            emit('    wowless_imploutput%s(L, %d);', dispatch(coutputtypes, out.type), i)
+            emit('  }')
           else
             emit('  wowless_imploutput%s%s(L, %d);', nilable and 'nilable' or '', dispatch(coutputtypes, out.type), i)
           end
