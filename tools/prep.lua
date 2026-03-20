@@ -265,7 +265,6 @@ local simple_input_type_strings = {
   number = true,
   string = true,
   table = true,
-  unknown = true,
 }
 
 local function is_simple_input(inp)
@@ -281,7 +280,6 @@ local simple_output_type_strings = {
   oneornil = true,
   string = true,
   table = true,
-  unknown = true,
 }
 
 local function is_simple_output(out)

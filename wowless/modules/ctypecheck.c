@@ -48,8 +48,6 @@ SIMPLE_CHECKER(implcheckfunction, wowless_implcheckfunction)
 SIMPLE_CHECKER(implchecknilablefunction, wowless_implchecknilablefunction)
 SIMPLE_CHECKER(implchecktable, wowless_implchecktable)
 SIMPLE_CHECKER(implchecknilabletable, wowless_implchecknilabletable)
-SIMPLE_CHECKER(implcheckunknown, wowless_implcheckunknown)
-SIMPLE_CHECKER(implchecknilableunknown, wowless_implchecknilableunknown)
 SIMPLE_CHECKER(imploutputboolean, wowless_imploutputboolean)
 SIMPLE_CHECKER(imploutputnilableboolean, wowless_imploutputnilableboolean)
 SIMPLE_CHECKER(imploutputnumber, wowless_imploutputnumber)
@@ -62,8 +60,6 @@ SIMPLE_CHECKER(imploutputfunction, wowless_imploutputfunction)
 SIMPLE_CHECKER(imploutputnilablefunction, wowless_imploutputnilablefunction)
 SIMPLE_CHECKER(imploutputtable, wowless_imploutputtable)
 SIMPLE_CHECKER(imploutputnilabletable, wowless_imploutputnilabletable)
-SIMPLE_CHECKER(imploutputunknown, wowless_imploutputunknown)
-SIMPLE_CHECKER(imploutputnilableunknown, wowless_imploutputnilableunknown)
 
 /*
  * Typed check wrappers: cgencode at lua_upvalueindex(1) (matching the
@@ -134,8 +130,6 @@ static int make_module(lua_State *L) {
   SET_SIMPLE(L, implchecknilablefunction);
   SET_SIMPLE(L, implchecktable);
   SET_SIMPLE(L, implchecknilabletable);
-  SET_SIMPLE(L, implcheckunknown);
-  SET_SIMPLE(L, implchecknilableunknown);
   SET_SIMPLE(L, imploutputboolean);
   SET_SIMPLE(L, imploutputnilableboolean);
   SET_SIMPLE(L, imploutputnumber);
@@ -148,8 +142,6 @@ static int make_module(lua_State *L) {
   SET_SIMPLE(L, imploutputnilablefunction);
   SET_SIMPLE(L, imploutputtable);
   SET_SIMPLE(L, imploutputnilabletable);
-  SET_SIMPLE(L, imploutputunknown);
-  SET_SIMPLE(L, imploutputnilableunknown);
   SET_TYPED(L, stubcheckstringenum);
   SET_TYPED(L, stubchecknilablestringenum);
   SET_TYPED(L, stubcheckluaobject);

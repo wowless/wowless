@@ -112,7 +112,7 @@ describe('typecheck align', function()
     },
     unknown = {
       ltype = 'unknown',
-      sections = { stubcheck = true, implcheck = true, imploutput = true },
+      sections = { stubcheck = true }, -- not valid in impl inputs/outputs
     },
     enum = {
       ltype = { enum = 'TestEnum' },

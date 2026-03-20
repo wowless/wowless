@@ -347,14 +347,6 @@ static inline void wowless_implchecknilabletable(lua_State *L, int idx) {
   wowless_stubchecknilabletable(L, idx);
 }
 
-static inline void wowless_implcheckunknown(lua_State *L, int idx) {
-  wowless_stubcheckunknown(L, idx);
-}
-
-static inline void wowless_implchecknilableunknown(lua_State *L, int idx) {
-  wowless_stubchecknilableunknown(L, idx);
-}
-
 static inline void wowless_imploutputboolean(lua_State *L, int idx) {
   if (lua_type(L, idx) != LUA_TBOOLEAN) {
     luaL_typerror(L, idx, lua_typename(L, LUA_TBOOLEAN));
@@ -455,14 +447,6 @@ static inline void wowless_imploutputnilabletable(lua_State *L, int idx) {
       luaL_typerror(L, idx, lua_typename(L, LUA_TTABLE));
   }
 }
-
-static inline void wowless_imploutputunknown(lua_State *L, int idx) {
-  if (lua_isnil(L, idx)) {
-    luaL_typerror(L, idx, "non-nil");
-  }
-}
-
-static inline void wowless_imploutputnilableunknown(lua_State *L, int idx) {}
 
 static inline void wowless_stubcheckextraargs(lua_State *L, int nsins,
                                               const char *fname) {
