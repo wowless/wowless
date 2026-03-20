@@ -370,6 +370,16 @@ static inline void wowless_imploutputnumber(lua_State *L, int idx) {
   }
 }
 
+static inline void wowless_imploutputdefaultnumber(lua_State *L, int idx,
+                                                   lua_Number def) {
+  if (lua_isnil(L, idx)) {
+    lua_pushnumber(L, def);
+    lua_replace(L, idx);
+  } else {
+    wowless_imploutputnumber(L, idx);
+  }
+}
+
 static inline void wowless_imploutputnilablenumber(lua_State *L, int idx) {
   switch (lua_type(L, idx)) {
     case LUA_TNUMBER:

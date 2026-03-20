@@ -260,6 +260,7 @@ local function ensureimpl(k)
 end
 
 local simple_input_type_strings = {
+  boolean = true,
   FileAsset = true,
   ['function'] = true,
   number = true,
@@ -1144,7 +1145,11 @@ if args.coutput then
         emit('  wowless_stubchecknreturns(L, ret, %d, %s);', #outputs, cstring(entry.name))
         for i, out in ipairs(outputs) do
           local nilable = out.nilable
-          emit('  wowless_imploutput%s%s(L, %d);', nilable and 'nilable' or '', dispatch(coutputtypes, out.type), i)
+          if out.default and out.type == 'number' then
+            emit('  wowless_imploutputdefaultnumber(L, %d, %g);', i, out.default)
+          else
+            emit('  wowless_imploutput%s%s(L, %d);', nilable and 'nilable' or '', dispatch(coutputtypes, out.type), i)
+          end
         end
         emit('  return ret;')
       else
