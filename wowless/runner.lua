@@ -178,9 +178,9 @@ local function run(cfg)
         end
       end,
       combat = function()
-        NextFrame()
+        NextFrame(1)
         SendEvent('PLAYER_REGEN_DISABLED')
-        NextFrame()
+        NextFrame(1)
         SendEvent('PLAYER_REGEN_ENABLED')
       end,
       emotes = function()

@@ -11,7 +11,7 @@ return function(api, errorhandler, region, scripts, time, visibility)
     Advance(elapsed)
     for frame in frames:entries() do
       if IsVisible(frame) then
-        RunScript(frame, 'OnUpdate', 1)
+        RunScript(frame, 'OnUpdate', elapsed)
       end
     end
     for frame in frames:entries() do

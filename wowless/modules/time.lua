@@ -26,7 +26,7 @@ return function(log, luaobjects, security)
   return {
     AddTimer = addTimer,
     Advance = function(elapsed)
-      stamp = stamp + (elapsed or 1)
+      stamp = stamp + elapsed
       while timers:peek().pri < stamp do
         local timer = timers:pop()
         log(2, 'running timer %.2f %s', timer.pri, tostring(timer.val))
