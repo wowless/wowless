@@ -64,114 +64,112 @@ local function laccepts(spec, value, isout)
 end
 
 describe('typecheck align', function()
-  local all_values = { false, true, 0, 1, '0', '42', 'foo', 'TOPLEFT', {}, print }
+  local all_values = {
+    ['nil'] = {},
+    ['false'] = { value = false },
+    ['true'] = { value = true },
+    ['0'] = { value = 0 },
+    ['1'] = { value = 1 },
+    ['\'0\''] = { value = '0' },
+    ['\'42\''] = { value = '42' },
+    ['\'foo\''] = { value = 'foo' },
+    ['\'TOPLEFT\''] = { value = 'TOPLEFT' },
+    ['{}'] = { value = {} },
+    ['print'] = { value = print },
+  }
 
-  -- Type matrix: each row drives all tests for that type.
-  --   name:     suffix used to build cfn keys (e.g. 'boolean' -> 'stubcheckboolean')
+  -- Type matrix: each entry drives all tests for that type.
+  --   key:      suffix used to build cfn keys (e.g. 'boolean' -> 'stubcheckboolean')
   --   ltype:    Lua type spec value passed to typecheck
   --   sections: set of prefix strings where this type has an aligned C function;
   --             types absent from a section assert ctc[prefix..name] is nil,
   --             reminding authors to add aligned tests when a C function is added
   --   tparam:   extra C parameter for typed checks (stringenum, luaobject, uiobject)
   local type_matrix = {
-    {
-      name = 'boolean',
+    boolean = {
       ltype = 'boolean',
       sections = { stubcheck = true, imploutput = true },
     },
-    {
-      name = 'number',
+    number = {
       ltype = 'number',
       sections = { stubcheck = true, implcheck = true, imploutput = true },
     },
-    {
-      name = 'string',
+    string = {
       ltype = 'string',
       sections = { stubcheck = true, implcheck = true, imploutput = true },
     },
-    {
-      name = 'function',
+    ['function'] = {
       ltype = 'function',
       sections = { stubcheck = true, implcheck = true, imploutput = true },
     },
-    {
-      name = 'table',
+    table = {
       ltype = 'table',
       sections = { stubcheck = true, implcheck = true, imploutput = true },
     },
-    {
-      name = 'unit',
+    unit = {
       ltype = 'unit',
       sections = { stubcheck = true },
     },
-    {
-      name = 'unknown',
+    unknown = {
       ltype = 'unknown',
       sections = { stubcheck = true, implcheck = true, imploutput = true },
     },
-    {
-      name = 'enum',
+    enum = {
       ltype = { enum = 'TestEnum' },
       sections = { stubcheck = true },
     },
-    {
-      name = 'stringenum',
+    stringenum = {
       ltype = { stringenum = 'FramePoint' },
       sections = { stubcheck = true },
       tparam = 'FramePoint',
     },
-    {
-      name = 'luaobject',
+    luaobject = {
       ltype = { luaobject = 'Funtainer' },
       sections = { stubcheck = true },
       tparam = 'Funtainer',
     },
-    {
-      name = 'uiobject',
+    uiobject = {
       ltype = { uiobject = 'Frame' },
       sections = { stubcheck = true },
       tparam = 'frame', -- C lowercases the typename
     },
     -- Types with no C function
-    { name = 'FileAsset', ltype = 'FileAsset', sections = {} },
-    { name = 'uiAddon', ltype = 'uiAddon', sections = {} },
-    { name = 'any', ltype = 'any', sections = {} },
-    { name = 'gender', ltype = 'gender', sections = {} },
-    { name = 'oneornil', ltype = 'oneornil', sections = {} },
-    { name = 'tostring', ltype = 'tostring', sections = {} },
-    { name = 'structure', ltype = { structure = 'TestStruct' }, sections = {} },
-    { name = 'arrayof', ltype = { arrayof = 'number' }, sections = {} },
+    FileAsset = { ltype = 'FileAsset', sections = {} },
+    uiAddon = { ltype = 'uiAddon', sections = {} },
+    any = { ltype = 'any', sections = {} },
+    gender = { ltype = 'gender', sections = {} },
+    oneornil = { ltype = 'oneornil', sections = {} },
+    tostring = { ltype = 'tostring', sections = {} },
+    structure = { ltype = { structure = 'TestStruct' }, sections = {} },
+    arrayof = { ltype = { arrayof = 'number' }, sections = {} },
   }
 
   local section_defs = {
-    { label = 'stub input checks', prefix = 'stubcheck', isout = false },
-    { label = 'impl input checks', prefix = 'implcheck', isout = false },
-    { label = 'impl output checks', prefix = 'imploutput', isout = true },
+    ['stub input checks'] = { prefix = 'stubcheck', isout = false },
+    ['impl input checks'] = { prefix = 'implcheck', isout = false },
+    ['impl output checks'] = { prefix = 'imploutput', isout = true },
   }
 
-  for _, sec in ipairs(section_defs) do
-    describe(sec.label, function()
-      for _, td in ipairs(type_matrix) do
+  for label, sec in pairs(section_defs) do
+    describe(label, function()
+      for name, td in pairs(type_matrix) do
         if td.sections[sec.prefix] then
           -- C alignment: compare C acceptance against Lua acceptance.
           for _, nilable in ipairs({ false, true }) do
-            local key = sec.prefix .. (nilable and 'nilable' or '') .. td.name
+            local key = sec.prefix .. (nilable and 'nilable' or '') .. name
             local spec = { type = td.ltype, nilable = nilable or nil }
             local tparam = td.tparam
-            describe((nilable and 'nilable ' or '') .. td.name, function()
-              it('nil', function()
-                assert.equal(caccepts(ctc[key], nil, tparam), laccepts(spec, nil, sec.isout))
-              end)
-              for _, v in ipairs(all_values) do
-                it(tostring(v), function()
-                  assert.equal(caccepts(ctc[key], v, tparam), laccepts(spec, v, sec.isout))
+            describe((nilable and 'nilable ' or '') .. name, function()
+              for vname, vt in pairs(all_values) do
+                it(vname, function()
+                  assert.equal(caccepts(ctc[key], vt.value, tparam), laccepts(spec, vt.value, sec.isout))
                 end)
               end
             end)
           end
         else
           -- No C function: assert nil and validate Lua doesn't throw.
-          local name, prefix = td.name, sec.prefix
+          local prefix = sec.prefix
           it('not yet implemented: ' .. prefix .. name, function()
             assert.is_nil(ctc[prefix .. name])
           end)
@@ -181,12 +179,9 @@ describe('typecheck align', function()
           for _, nilable in ipairs({ false, true }) do
             local spec = { type = td.ltype, nilable = nilable or nil }
             describe((nilable and 'nilable ' or '') .. name, function()
-              it('nil', function()
-                typecheck(spec, nil, sec.isout)
-              end)
-              for _, v in ipairs(all_values) do
-                it(tostring(v), function()
-                  typecheck(spec, v, sec.isout)
+              for vname, vt in pairs(all_values) do
+                it(vname, function()
+                  typecheck(spec, vt.value, sec.isout)
                 end)
               end
             end)
