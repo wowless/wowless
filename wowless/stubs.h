@@ -34,5 +34,7 @@ int wowless_load_stubs(lua_State *L);
 void wowless_stub_log_extra_args(lua_State *L, const char *fname);
 int wowless_impl_stub(lua_State *L);
 int wowless_impl_stub_nobubblewrap(lua_State *L);
+int wowless_outputerror(lua_State *L, int idx, const char *extramsg);
+int wowless_outputtyperror(lua_State *L, int idx, const char *tname);
 
 #endif /* WOWLESS_STUBS_H */

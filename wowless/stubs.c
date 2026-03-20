@@ -64,6 +64,25 @@ static void load_entries(lua_State *L, const struct wowless_stub_entry *e) {
   }
 }
 
+int wowless_outputtyperror(lua_State *L, int idx, const char *tname) {
+  return wowless_outputerror(
+      L, idx,
+      lua_pushfstring(L, "%s expected, got %s", tname,
+                      lua_typename(L, lua_type(L, idx))));
+}
+
+int wowless_outputerror(lua_State *L, int idx, const char *extramsg) {
+  lua_Debug ar;
+  const char *fname = "?";
+  if (lua_getstack(L, 0, &ar)) {
+    lua_getinfo(L, "n", &ar);
+    if (ar.name) {
+      fname = ar.name;
+    }
+  }
+  return luaL_error(L, "bad return #%d from '%s' (%s)", idx, fname, extramsg);
+}
+
 void wowless_stub_log_extra_args(lua_State *L, const char *fname) {
   lua_Debug ar;
   const char *src = "?";
