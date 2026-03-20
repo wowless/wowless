@@ -74,6 +74,14 @@ static inline void wowless_stubchecknilablestring(lua_State *L, int idx) {
   }
 }
 
+static inline void wowless_stubcheckfileasset(lua_State *L, int idx) {
+  wowless_stubcheckstring(L, idx);
+}
+
+static inline void wowless_stubchecknilablefileasset(lua_State *L, int idx) {
+  wowless_stubchecknilablestring(L, idx);
+}
+
 static inline void wowless_stubcheckboolean(lua_State *L, int idx) {
   if (lua_isnoneornil(L, idx)) {
     luaL_typerror(L, idx, lua_typename(L, LUA_TBOOLEAN));
@@ -244,6 +252,28 @@ static inline void wowless_implchecknilablestring(lua_State *L, int idx) {
   }
 }
 
+static inline void wowless_implcheckfileasset(lua_State *L, int idx) {
+  switch (lua_type(L, idx)) {
+    case LUA_TSTRING:
+    case LUA_TNUMBER:
+      return;
+    default:
+      luaL_argerror(L, idx, "string or number expected");
+  }
+}
+
+static inline void wowless_implchecknilablefileasset(lua_State *L, int idx) {
+  switch (lua_type(L, idx)) {
+    case LUA_TSTRING:
+    case LUA_TNUMBER:
+    case LUA_TNIL:
+    case LUA_TNONE:
+      return;
+    default:
+      luaL_argerror(L, idx, "string or number expected");
+  }
+}
+
 static inline void wowless_implcheckfunction(lua_State *L, int idx) {
   wowless_stubcheckfunction(L, idx);
 }
@@ -313,6 +343,27 @@ static inline void wowless_imploutputnilablestring(lua_State *L, int idx) {
       return;
     default:
       luaL_typerror(L, idx, lua_typename(L, LUA_TSTRING));
+  }
+}
+
+static inline void wowless_imploutputfileasset(lua_State *L, int idx) {
+  switch (lua_type(L, idx)) {
+    case LUA_TSTRING:
+    case LUA_TNUMBER:
+      return;
+    default:
+      luaL_argerror(L, idx, "string or number expected");
+  }
+}
+
+static inline void wowless_imploutputnilablefileasset(lua_State *L, int idx) {
+  switch (lua_type(L, idx)) {
+    case LUA_TSTRING:
+    case LUA_TNUMBER:
+    case LUA_TNIL:
+      return;
+    default:
+      luaL_argerror(L, idx, "string or number expected");
   }
 }
 

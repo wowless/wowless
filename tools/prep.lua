@@ -260,6 +260,7 @@ local function ensureimpl(k)
 end
 
 local simple_input_type_strings = {
+  FileAsset = true,
   ['function'] = true,
   number = true,
   string = true,
@@ -273,6 +274,7 @@ end
 
 local simple_output_type_strings = {
   boolean = true,
+  FileAsset = true,
   ['function'] = true,
   ['nil'] = true,
   number = true,
@@ -752,7 +754,7 @@ if args.coutput then
       return 'enum'
     end,
     FileAsset = function()
-      return 'string'
+      return 'fileasset'
     end,
     ['function'] = function()
       return 'function'
@@ -800,6 +802,9 @@ if args.coutput then
   local coutputtypes = {
     boolean = function()
       return 'boolean'
+    end,
+    FileAsset = function()
+      return 'fileasset'
     end,
     ['function'] = function()
       return 'function'

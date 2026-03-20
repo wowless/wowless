@@ -18,6 +18,8 @@ SIMPLE_CHECKER(stubcheckboolean, wowless_stubcheckboolean)
 SIMPLE_CHECKER(stubchecknilableboolean, wowless_stubchecknilableboolean)
 SIMPLE_CHECKER(stubcheckstring, wowless_stubcheckstring)
 SIMPLE_CHECKER(stubchecknilablestring, wowless_stubchecknilablestring)
+SIMPLE_CHECKER(stubcheckfileasset, wowless_stubcheckfileasset)
+SIMPLE_CHECKER(stubchecknilablefileasset, wowless_stubchecknilablefileasset)
 SIMPLE_CHECKER(stubcheckfunction, wowless_stubcheckfunction)
 SIMPLE_CHECKER(stubchecknilablefunction, wowless_stubchecknilablefunction)
 SIMPLE_CHECKER(stubchecktable, wowless_stubchecktable)
@@ -32,6 +34,8 @@ SIMPLE_CHECKER(implchecknumber, wowless_implchecknumber)
 SIMPLE_CHECKER(implchecknilablenumber, wowless_implchecknilablenumber)
 SIMPLE_CHECKER(implcheckstring, wowless_implcheckstring)
 SIMPLE_CHECKER(implchecknilablestring, wowless_implchecknilablestring)
+SIMPLE_CHECKER(implcheckfileasset, wowless_implcheckfileasset)
+SIMPLE_CHECKER(implchecknilablefileasset, wowless_implchecknilablefileasset)
 SIMPLE_CHECKER(implcheckfunction, wowless_implcheckfunction)
 SIMPLE_CHECKER(implchecknilablefunction, wowless_implchecknilablefunction)
 SIMPLE_CHECKER(implchecktable, wowless_implchecktable)
@@ -44,6 +48,8 @@ SIMPLE_CHECKER(imploutputnumber, wowless_imploutputnumber)
 SIMPLE_CHECKER(imploutputnilablenumber, wowless_imploutputnilablenumber)
 SIMPLE_CHECKER(imploutputstring, wowless_imploutputstring)
 SIMPLE_CHECKER(imploutputnilablestring, wowless_imploutputnilablestring)
+SIMPLE_CHECKER(imploutputfileasset, wowless_imploutputfileasset)
+SIMPLE_CHECKER(imploutputnilablefileasset, wowless_imploutputnilablefileasset)
 SIMPLE_CHECKER(imploutputfunction, wowless_imploutputfunction)
 SIMPLE_CHECKER(imploutputnilablefunction, wowless_imploutputnilablefunction)
 SIMPLE_CHECKER(imploutputtable, wowless_imploutputtable)
@@ -90,6 +96,8 @@ static int make_module(lua_State *L) {
   SET_SIMPLE(L, stubchecknilableboolean);
   SET_SIMPLE(L, stubcheckstring);
   SET_SIMPLE(L, stubchecknilablestring);
+  SET_SIMPLE(L, stubcheckfileasset);
+  SET_SIMPLE(L, stubchecknilablefileasset);
   SET_SIMPLE(L, stubcheckfunction);
   SET_SIMPLE(L, stubchecknilablefunction);
   SET_SIMPLE(L, stubchecktable);
@@ -104,6 +112,8 @@ static int make_module(lua_State *L) {
   SET_SIMPLE(L, implchecknilablenumber);
   SET_SIMPLE(L, implcheckstring);
   SET_SIMPLE(L, implchecknilablestring);
+  SET_SIMPLE(L, implcheckfileasset);
+  SET_SIMPLE(L, implchecknilablefileasset);
   SET_SIMPLE(L, implcheckfunction);
   SET_SIMPLE(L, implchecknilablefunction);
   SET_SIMPLE(L, implchecktable);
@@ -116,6 +126,8 @@ static int make_module(lua_State *L) {
   SET_SIMPLE(L, imploutputnilablenumber);
   SET_SIMPLE(L, imploutputstring);
   SET_SIMPLE(L, imploutputnilablestring);
+  SET_SIMPLE(L, imploutputfileasset);
+  SET_SIMPLE(L, imploutputnilablefileasset);
   SET_SIMPLE(L, imploutputfunction);
   SET_SIMPLE(L, imploutputnilablefunction);
   SET_SIMPLE(L, imploutputtable);

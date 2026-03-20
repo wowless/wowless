@@ -133,8 +133,11 @@ describe('typecheck align', function()
       sections = { stubcheck = true },
       tparam = 'frame', -- C lowercases the typename
     },
+    fileasset = {
+      ltype = 'FileAsset',
+      sections = { stubcheck = true, implcheck = true, imploutput = true },
+    },
     -- Types with no C function
-    FileAsset = { ltype = 'FileAsset', sections = {} },
     uiAddon = { ltype = 'uiAddon', sections = {} },
     any = { ltype = 'any', sections = {} },
     gender = { ltype = 'gender', sections = {} },
