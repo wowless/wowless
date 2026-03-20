@@ -810,7 +810,7 @@ if args.coutput then
       return 'function'
     end,
     ['nil'] = function()
-      return 'unknown'
+      return 'nil'
     end,
     number = function()
       return 'number'

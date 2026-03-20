@@ -30,6 +30,12 @@ SIMPLE_CHECKER(stubcheckenum, wowless_stubcheckenum)
 SIMPLE_CHECKER(stubchecknilableenum, wowless_stubchecknilableenum)
 SIMPLE_CHECKER(stubcheckunknown, wowless_stubcheckunknown)
 SIMPLE_CHECKER(stubchecknilableunknown, wowless_stubchecknilableunknown)
+SIMPLE_CHECKER(stubchecknil, wowless_stubchecknil)
+SIMPLE_CHECKER(stubchecknilablenil, wowless_stubchecknilablenil)
+SIMPLE_CHECKER(implchecknil, wowless_implchecknil)
+SIMPLE_CHECKER(implchecknilablenil, wowless_implchecknilablenil)
+SIMPLE_CHECKER(imploutputnil, wowless_imploutputnil)
+SIMPLE_CHECKER(imploutputnilablenil, wowless_imploutputnilablenil)
 SIMPLE_CHECKER(implchecknumber, wowless_implchecknumber)
 SIMPLE_CHECKER(implchecknilablenumber, wowless_implchecknilablenumber)
 SIMPLE_CHECKER(implcheckboolean, wowless_implcheckboolean)
@@ -110,6 +116,12 @@ static int make_module(lua_State *L) {
   SET_SIMPLE(L, stubchecknilableenum);
   SET_SIMPLE(L, stubcheckunknown);
   SET_SIMPLE(L, stubchecknilableunknown);
+  SET_SIMPLE(L, stubchecknil);
+  SET_SIMPLE(L, stubchecknilablenil);
+  SET_SIMPLE(L, implchecknil);
+  SET_SIMPLE(L, implchecknilablenil);
+  SET_SIMPLE(L, imploutputnil);
+  SET_SIMPLE(L, imploutputnilablenil);
   SET_SIMPLE(L, implchecknumber);
   SET_SIMPLE(L, implchecknilablenumber);
   SET_SIMPLE(L, implcheckboolean);

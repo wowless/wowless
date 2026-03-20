@@ -203,6 +203,34 @@ static inline void wowless_stubcheckunknown(lua_State *L, int idx) {
 
 static inline void wowless_stubchecknilableunknown(lua_State *L, int idx) {}
 
+static inline void wowless_stubchecknil(lua_State *L, int idx) {
+  if (!lua_isnoneornil(L, idx)) {
+    luaL_typerror(L, idx, "nil");
+  }
+}
+
+static inline void wowless_stubchecknilablenil(lua_State *L, int idx) {
+  wowless_stubchecknil(L, idx);
+}
+
+static inline void wowless_implchecknil(lua_State *L, int idx) {
+  wowless_stubchecknil(L, idx);
+}
+
+static inline void wowless_implchecknilablenil(lua_State *L, int idx) {
+  wowless_stubchecknil(L, idx);
+}
+
+static inline void wowless_imploutputnil(lua_State *L, int idx) {
+  if (!lua_isnil(L, idx)) {
+    luaL_typerror(L, idx, "nil");
+  }
+}
+
+static inline void wowless_imploutputnilablenil(lua_State *L, int idx) {
+  wowless_imploutputnil(L, idx);
+}
+
 static inline void wowless_stubcheckstringenum(lua_State *L, int idx,
                                                const char *enumname,
                                                size_t enumnamelen) {

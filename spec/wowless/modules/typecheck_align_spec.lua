@@ -137,6 +137,10 @@ describe('typecheck align', function()
       ltype = 'FileAsset',
       sections = { stubcheck = true, implcheck = true, imploutput = true },
     },
+    ['nil'] = {
+      ltype = 'nil',
+      sections = { stubcheck = true, implcheck = true, imploutput = true },
+    },
     -- Types with no C function
     uiAddon = { ltype = 'uiAddon', sections = {} },
     any = { ltype = 'any', sections = {} },

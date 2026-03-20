@@ -80,6 +80,9 @@ return function(addons, datalua, env, luaobjects, uiobjects, uiobjecttypes, unit
     gender = function(value)
       return tonumber(value) or 0
     end,
+    ['nil'] = function(value)
+      return value, true
+    end,
     number = function(value, isout)
       if isout then
         return luatypecheck('number', value)
