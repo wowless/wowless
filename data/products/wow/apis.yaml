@@ -35875,6 +35875,8 @@ GetTradePlayerItemInfo:
     type: string
   - name: canLoseTransmog
     type: boolean
+  - name: isBound
+    type: boolean
 GetTradePlayerItemLink:
   inputs:
   - name: index
