@@ -270,6 +270,7 @@ local simple_input_types = {
   number = nop,
   string = nop,
   table = nop,
+  uiAddon = nop,
 }
 
 local simple_output_types = {
@@ -771,7 +772,7 @@ if args.coutput then
       return 'table'
     end,
     uiAddon = function()
-      return 'string'
+      return 'uiaddon'
     end,
     luaobject = function(name)
       used_luaobjects[name] = true

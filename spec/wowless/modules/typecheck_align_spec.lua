@@ -12,6 +12,9 @@ local mock_cgencode = {
     end
     return es[value:upper()]
   end,
+  GetUiAddon = function(_value)
+    return nil -- empty addons
+  end,
   IsLuaObject = function(_ud, _typename)
     return false
   end,
@@ -141,8 +144,8 @@ describe('typecheck align', function()
       ltype = 'nil',
       sections = { stubcheck = true, implcheck = true, imploutput = true },
     },
+    uiaddon = { ltype = 'uiAddon', sections = { stubcheck = true, implcheck = true } },
     -- Types with no C function
-    uiAddon = { ltype = 'uiAddon', sections = {} },
     any = { ltype = 'any', sections = {} },
     gender = { ltype = 'gender', sections = {} },
     oneornil = { ltype = 'oneornil', sections = {} },

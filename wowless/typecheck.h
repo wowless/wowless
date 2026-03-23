@@ -133,6 +133,14 @@ static inline void wowless_stubchecknilableunit(lua_State *L, int idx) {
   }
 }
 
+static inline void wowless_stubcheckuiaddon(lua_State *L, int idx) {
+  wowless_stubcheckstring(L, idx);
+}
+
+static inline void wowless_stubchecknilableuiaddon(lua_State *L, int idx) {
+  wowless_stubchecknilablestring(L, idx);
+}
+
 static inline void wowless_stubchecktable(lua_State *L, int idx) {
   if (lua_type(L, idx) != LUA_TTABLE) {
     luaL_typerror(L, idx, lua_typename(L, LUA_TTABLE));
@@ -315,6 +323,21 @@ static inline void wowless_implcheckstring(lua_State *L, int idx) {
 static inline void wowless_implchecknilablestring(lua_State *L, int idx) {
   if (!lua_isnoneornil(L, idx)) {
     luaL_checkstring(L, idx);
+  }
+}
+
+static inline void wowless_implcheckuiaddon(lua_State *L, int idx) {
+  idx = lua_absindex(L, idx);
+  wowless_stubcheckuiaddon(L, idx);
+  lua_getfield(L, lua_upvalueindex(1), "GetUiAddon");
+  lua_pushvalue(L, idx);
+  lua_call(L, 1, 1);
+  lua_replace(L, idx);
+}
+
+static inline void wowless_implchecknilableuiaddon(lua_State *L, int idx) {
+  if (!lua_isnoneornil(L, idx)) {
+    wowless_implcheckuiaddon(L, idx);
   }
 }
 

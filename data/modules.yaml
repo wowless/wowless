@@ -26,6 +26,7 @@ calendar:
   deps:
 cgencode:
   deps:
+    addons:
     api:
     log:
     luaobjects:

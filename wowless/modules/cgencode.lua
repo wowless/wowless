@@ -1,4 +1,4 @@
-return function(api, log, luaobjects, uiobjects, uiobjecttypes)
+return function(addons, api, log, luaobjects, uiobjects, uiobjecttypes)
   local stringenums = require('runtime.stringenums')
 
   local function CheckStringEnum(value, enumname)
@@ -22,6 +22,10 @@ return function(api, log, luaobjects, uiobjects, uiobjecttypes)
     return internal and internal.type == typename
   end
 
+  local function GetUiAddon(value)
+    return addons.addons[tonumber(value) or tostring(value):lower()]
+  end
+
   local function IsUiObject(ud, typename)
     local internal = uiobjects.userdata[ud]
     return internal and uiobjecttypes.IsObjectType(internal, typename)
@@ -29,6 +33,7 @@ return function(api, log, luaobjects, uiobjects, uiobjecttypes)
 
   return {
     CheckStringEnum = CheckStringEnum,
+    GetUiAddon = GetUiAddon,
     CreateLuaObject = CreateLuaObject,
     CreateUiObject = CreateUiObject,
     IsLuaObject = IsLuaObject,

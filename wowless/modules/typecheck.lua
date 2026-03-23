@@ -108,6 +108,9 @@ return function(addons, datalua, env, luaobjects, uiobjects, uiobjecttypes, unit
       return type(v) == 'string' and v or nil
     end,
     uiAddon = function(value)
+      if type(value) ~= 'string' and type(value) ~= 'number' then
+        return nil, true
+      end
       return addons.addons[tonumber(value) or tostring(value):lower()]
     end,
     unit = function(value)

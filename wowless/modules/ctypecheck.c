@@ -26,6 +26,10 @@ SIMPLE_CHECKER(stubchecktable, wowless_stubchecktable)
 SIMPLE_CHECKER(stubchecknilabletable, wowless_stubchecknilabletable)
 SIMPLE_CHECKER(stubcheckunit, wowless_stubcheckunit)
 SIMPLE_CHECKER(stubchecknilableunit, wowless_stubchecknilableunit)
+SIMPLE_CHECKER(stubcheckuiaddon, wowless_stubcheckuiaddon)
+SIMPLE_CHECKER(stubchecknilableuiaddon, wowless_stubchecknilableuiaddon)
+SIMPLE_CHECKER(implcheckuiaddon, wowless_implcheckuiaddon)
+SIMPLE_CHECKER(implchecknilableuiaddon, wowless_implchecknilableuiaddon)
 SIMPLE_CHECKER(stubcheckenum, wowless_stubcheckenum)
 SIMPLE_CHECKER(stubchecknilableenum, wowless_stubchecknilableenum)
 SIMPLE_CHECKER(stubcheckunknown, wowless_stubcheckunknown)
@@ -108,6 +112,10 @@ static int make_module(lua_State *L) {
   SET_SIMPLE(L, stubchecknilabletable);
   SET_SIMPLE(L, stubcheckunit);
   SET_SIMPLE(L, stubchecknilableunit);
+  SET_SIMPLE(L, stubcheckuiaddon);
+  SET_SIMPLE(L, stubchecknilableuiaddon);
+  SET_TYPED(L, implcheckuiaddon);
+  SET_TYPED(L, implchecknilableuiaddon);
   SET_SIMPLE(L, stubcheckenum);
   SET_SIMPLE(L, stubchecknilableenum);
   SET_SIMPLE(L, stubcheckunknown);
