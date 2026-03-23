@@ -91,9 +91,11 @@ C_DateAndTime.CompareCalendarTime:
 C_EncodingUtil.DecodeBase64:
   moduledelegate:
     name: encodingutil
+    nowrap: true
 C_EncodingUtil.EncodeBase64:
   moduledelegate:
     name: encodingutil
+    nowrap: true
 C_EventUtils.IsCallbackEvent:
   moduledelegate:
     function: IsCallbackEvent

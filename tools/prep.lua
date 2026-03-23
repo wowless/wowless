@@ -242,6 +242,7 @@ local implimpls = {
       impl = ('return (...)[%q]'):format(impl['function'] or name),
       modules = { impl.name },
       nobubblewrap = impl.nobubblewrap,
+      nowrap = impl.nowrap,
     }
   end,
   stdlib = function(path)

@@ -40,4 +40,6 @@ type:
                   schema: module
             nobubblewrap:
               type: flag
+            nowrap:
+              type: flag
         stdlib: string
