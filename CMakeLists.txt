@@ -104,9 +104,14 @@ function(lua2c name)
       string(REPLACE "." "_" pkg ${package})
       set(output lua2c/${pkg}.c)
       set(cmd ${CMAKE_CURRENT_SOURCE_DIR}/tools/file2c.lua)
+      if(IS_ABSOLUTE "${file}")
+        file(RELATIVE_PATH displayfile ${CMAKE_SOURCE_DIR} "${file}")
+      else()
+        set(displayfile "${file}")
+      endif()
       add_custom_command(
         OUTPUT ${output}
-        COMMAND bootstraplua ${cmd} ${package} ${file} ${output}
+        COMMAND bootstraplua ${cmd} ${package} ${file} ${output} ${displayfile}
         DEPENDS ${cmd} ${file})
       list(APPEND deps ${output})
     endif()
@@ -299,10 +304,11 @@ target_include_directories(luamain PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 target_link_libraries(luamain PUBLIC elune)
 
 function(add_lua_executable name main)
+  file(RELATIVE_PATH main_displayfile ${CMAKE_SOURCE_DIR} "${main}")
   add_custom_command(
     OUTPUT ${name}luafile.c
     COMMAND bootstraplua ${CMAKE_CURRENT_SOURCE_DIR}/tools/file2c.lua main
-            ${main} ${name}luafile.c
+            ${main} ${name}luafile.c ${main_displayfile}
     DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/tools/file2c.lua ${main})
   set(luamain ${name}luamain.c)
   add_custom_command(

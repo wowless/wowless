@@ -4,7 +4,7 @@ local function readfile(filename)
   f:close()
   return content
 end
-local package, file, output = arg[1], arg[2], arg[3]
+local package, file, output, displayfile = arg[1], arg[2], arg[3], arg[4]
 local input = readfile(file)
 io.output(output)
 io.write('#include "tools/file2c.h"\n')
@@ -20,5 +20,5 @@ io.write(('const struct module lua2c_%s = {\n'):format(package:gsub('%.', '_')))
 io.write(('  .name = "%s",\n'):format(package))
 io.write('  .code = code,\n')
 io.write(('  .size = %d,\n'):format(input:len()))
-io.write(('  .file = "@%s",\n'):format(file))
+io.write(('  .file = "@%s",\n'):format(displayfile))
 io.write('};\n')
