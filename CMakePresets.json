@@ -3,6 +3,10 @@
     {
       "configurePreset": "default",
       "name": "default"
+    },
+    {
+      "configurePreset": "debug",
+      "name": "debug"
     }
   ],
   "cmakeMinimumRequired": {
@@ -18,6 +22,16 @@
       },
       "generator": "Ninja",
       "name": "default"
+    },
+    {
+      "binaryDir": "${sourceDir}/build-debug",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "CMAKE_C_FLAGS": "-g -O0",
+        "CMAKE_EXPORT_COMPILE_COMMANDS": true
+      },
+      "generator": "Ninja",
+      "name": "debug"
     }
   ],
   "version": 3

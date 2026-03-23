@@ -11,7 +11,6 @@ set(elune_BINARY_DIR ${CMAKE_BINARY_DIR}/_deps/elune-build)
 add_library(
   elune STATIC
   ${elune_SOURCE_DIR}/liblua/lapi.c
-  ${elune_SOURCE_DIR}/liblua/lapi.c
   ${elune_SOURCE_DIR}/liblua/lauxlib.c
   ${elune_SOURCE_DIR}/liblua/lbaselib.c
   ${elune_SOURCE_DIR}/liblua/lbitlib.c
@@ -112,7 +111,7 @@ function(lua2c name)
       add_custom_command(
         OUTPUT ${output}
         COMMAND bootstraplua ${cmd} ${package} ${file} ${output} ${displayfile}
-        DEPENDS ${cmd} ${file})
+        DEPENDS bootstraplua ${cmd} ${file})
       list(APPEND deps ${output})
     endif()
   endforeach()
@@ -120,7 +119,7 @@ function(lua2c name)
     OUTPUT ${name}.c
     COMMAND bootstraplua ${CMAKE_CURRENT_SOURCE_DIR}/tools/lua2c.lua ${name}
             ${ARGN}
-    DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/tools/lua2c.lua ${deps})
+    DEPENDS bootstraplua ${CMAKE_CURRENT_SOURCE_DIR}/tools/lua2c.lua ${deps})
   add_library(${name} STATIC ${name}.c tools/file2c.h tools/lua2c.h ${deps})
   target_include_directories(${name} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
   target_link_libraries(${name} PRIVATE elune ${preloads})
@@ -309,13 +308,13 @@ function(add_lua_executable name main)
     OUTPUT ${name}luafile.c
     COMMAND bootstraplua ${CMAKE_CURRENT_SOURCE_DIR}/tools/file2c.lua main
             ${main} ${name}luafile.c ${main_displayfile}
-    DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/tools/file2c.lua ${main})
+    DEPENDS bootstraplua ${CMAKE_CURRENT_SOURCE_DIR}/tools/file2c.lua ${main})
   set(luamain ${name}luamain.c)
   add_custom_command(
     OUTPUT ${luamain}
     COMMAND bootstraplua ${CMAKE_CURRENT_SOURCE_DIR}/tools/luamain.lua
             ${luamain} ${ARGN}
-    DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/tools/luamain.lua ${main})
+    DEPENDS bootstraplua ${CMAKE_CURRENT_SOURCE_DIR}/tools/luamain.lua ${main})
   add_executable(${name} ${luamain} ${name}luafile.c)
   target_include_directories(${name} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
   target_link_libraries(${name} PRIVATE ${ARGN} luamain)
