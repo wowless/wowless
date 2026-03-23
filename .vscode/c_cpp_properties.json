@@ -1,7 +1,7 @@
 {
   "configurations": [
     {
-      "compileCommands": "${workspaceFolder}/build/cmake/compile_commands.json",
+      "compileCommands": "${workspaceFolder}/build/compile_commands.json",
       "includePath": [
         "${workspaceFolder}/**"
       ],

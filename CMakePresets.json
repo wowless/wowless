@@ -11,7 +11,7 @@
   },
   "configurePresets": [
     {
-      "binaryDir": "${sourceDir}/build/cmake",
+      "binaryDir": "${sourceDir}/build",
       "cacheVariables": {
         "CMAKE_C_FLAGS": "-DNDEBUG -ffast-math -O3",
         "CMAKE_EXPORT_COMPILE_COMMANDS": true

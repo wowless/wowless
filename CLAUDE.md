@@ -22,7 +22,7 @@ cmake --preset default
 cmake --build --preset default
 ```
 
-Build output goes to `build/cmake/`.
+Build output goes to `build/`.
 
 ### Running Wowless
 
@@ -34,7 +34,7 @@ bin/run.sh wow
 bin/run.sh wow --addondir path/to/YourAddon
 
 # Run directly after building
-build/cmake/wowless run -p wow [options]
+build/wowless run -p wow [options]
 ```
 
 Products: see `data/products.yaml`
@@ -45,7 +45,7 @@ Products: see `data/products.yaml`
 cmake --build --preset default --target test
 ```
 
-The test target rebuilds changed sources then runs `build/cmake/runtests`.
+The test target rebuilds changed sources then runs `build/runtests`.
 A successful run exits with code 0 and produces no output. Tests are also
 run by the `build and test` pre-commit hook, so they execute automatically
 on every commit.
@@ -61,7 +61,7 @@ Pre-commit hooks handle linting. Key tools:
 - **luacheck**: Lua linting (config in `.luacheckrc`)
 - **stylua**: Lua formatting (config in `stylua.toml`)
 - **clang-format**: C formatting (config in `.clang-format`)
-- **yamlfmt**: YAML formatting (`build/cmake/yamlfmt`)
+- **yamlfmt**: YAML formatting (`build/yamlfmt`)
 
 ```sh
 pre-commit run -a  # Run all checks

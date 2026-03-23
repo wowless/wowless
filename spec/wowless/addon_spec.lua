@@ -9,8 +9,8 @@ describe('addon', function()
         local success, modules = pcall(function()
           return require('wowless.runner').run({
             otherAddonDirs = {
-              'build/cmake/addon/Wowless/', -- trailing slash to validate fix for #235
-              'build/cmake/products/' .. product .. '/WowlessData',
+              'build/addon/Wowless/', -- trailing slash to validate fix for #235
+              'build/products/' .. product .. '/WowlessData',
             },
             product = product,
           })

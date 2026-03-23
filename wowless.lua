@@ -18,13 +18,13 @@ end)()
 debug.setprofilingenabled(args.profile)
 local addonDirs = #args.addondir > 0 and args.addondir
   or {
-    'build/cmake/addon/Wowless',
-    'build/cmake/products/' .. args.product .. '/WowlessData',
+    'build/addon/Wowless',
+    'build/products/' .. args.product .. '/WowlessData',
   }
 local runner = require('wowless.runner')
 local modules = runner.run({
   allevents = args.allevents,
-  dir = not args.lite and 'build/cmake/extracts/' .. args.product or nil,
+  dir = not args.lite and 'build/extracts/' .. args.product or nil,
   frame0 = args.frame0,
   loglevel = args.loglevel,
   maxErrors = args.maxerrors,

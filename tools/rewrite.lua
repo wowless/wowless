@@ -2,7 +2,7 @@ local writeFile = require('pl.file').write
 local yaml = require('wowapi.yaml')
 
 local function rewriteFile(ty, fn)
-  for _, p in ipairs(dofile('build/cmake/runtime/products.lua')) do
+  for _, p in ipairs(dofile('build/runtime/products.lua')) do
     local filename = 'data/products/' .. p .. '/' .. ty .. '.yaml'
     local before = require('pl.file').read(filename)
     local data = yaml.parse(before)
@@ -62,7 +62,7 @@ end
 
 local function align(ty, fn)
   local t = {}
-  for _, p in ipairs(dofile('build/cmake/runtime/products.lua')) do
+  for _, p in ipairs(dofile('build/runtime/products.lua')) do
     local filename = 'data/products/' .. p .. '/' .. ty .. '.yaml'
     t[p] = {
       before = require('pl.file').read(filename),

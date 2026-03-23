@@ -170,7 +170,7 @@ local ptablemap = {
     }
   end,
   namespaceapis = function(p)
-    local platform = dofile('build/cmake/runtime/platform.lua')
+    local platform = dofile('build/runtime/platform.lua')
     local config = perproduct(p, 'config')
     local apiNamespaces = {}
     for k, api in pairs(perproduct(p, 'apis')) do
