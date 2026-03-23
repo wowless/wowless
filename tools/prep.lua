@@ -114,6 +114,8 @@ local specDefault = (function()
   return specDefault
 end)()
 
+local function nop() end
+
 local function dispatch(t, u, ...)
   if type(u) == 'string' then
     return assert(t[u], u)(...)
@@ -259,33 +261,27 @@ local function ensureimpl(k)
   return impls[k]
 end
 
-local simple_input_type_strings = {
-  boolean = true,
-  FileAsset = true,
-  ['function'] = true,
-  number = true,
-  string = true,
-  table = true,
+local simple_input_types = {
+  boolean = nop,
+  enum = nop,
+  FileAsset = nop,
+  ['function'] = nop,
+  number = nop,
+  string = nop,
+  table = nop,
 }
 
-local function is_simple_input(inp)
-  return type(inp.type) == 'string' and simple_input_type_strings[inp.type] == true
-end
-
-local simple_output_type_strings = {
-  boolean = true,
-  FileAsset = true,
-  ['function'] = true,
-  ['nil'] = true,
-  number = true,
-  oneornil = true,
-  string = true,
-  table = true,
+local simple_output_types = {
+  boolean = nop,
+  enum = nop,
+  FileAsset = nop,
+  ['function'] = nop,
+  ['nil'] = nop,
+  number = nop,
+  oneornil = nop,
+  string = nop,
+  table = nop,
 }
-
-local function is_simple_output(out)
-  return type(out.type) == 'string' and simple_output_type_strings[out.type] == true
-end
 
 local function is_impl_eligible(apicfg)
   if not apicfg.impl then
@@ -294,16 +290,10 @@ local function is_impl_eligible(apicfg)
   if not apicfg.instride and not apicfg.usage and (apicfg.outstride or 0) == 0 then
     local all_simple = true
     for _, inp in ipairs(apicfg.inputs or {}) do
-      if not is_simple_input(inp) then
-        all_simple = false
-        break
-      end
+      all_simple = all_simple and pcall(dispatch, simple_input_types, inp.type)
     end
     for _, out in ipairs(apicfg.outputs or {}) do
-      if not is_simple_output(out) then
-        all_simple = false
-        break
-      end
+      all_simple = all_simple and pcall(dispatch, simple_output_types, out.type)
     end
     if all_simple then
       return true
@@ -801,6 +791,9 @@ if args.coutput then
   local coutputtypes = {
     boolean = function()
       return 'boolean'
+    end,
+    enum = function()
+      return 'enum'
     end,
     FileAsset = function()
       return 'fileasset'

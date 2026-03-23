@@ -28,6 +28,10 @@ static inline void wowless_implchecknumber(lua_State *L, int idx) {
   }
 }
 
+static inline void wowless_implcheckenum(lua_State *L, int idx) {
+  wowless_implchecknumber(L, idx);
+}
+
 static inline void wowless_implchecknilablenumber(lua_State *L, int idx) {
   switch (lua_type(L, idx)) {
     case LUA_TNUMBER:
@@ -37,6 +41,10 @@ static inline void wowless_implchecknilablenumber(lua_State *L, int idx) {
     default:
       wowless_implcoercenumber(L, idx);
   }
+}
+
+static inline void wowless_implchecknilableenum(lua_State *L, int idx) {
+  wowless_implchecknilablenumber(L, idx);
 }
 
 static inline void wowless_stubchecknilablenumber(lua_State *L, int idx) {
@@ -370,6 +378,10 @@ static inline void wowless_imploutputnumber(lua_State *L, int idx) {
   }
 }
 
+static inline void wowless_imploutputenum(lua_State *L, int idx) {
+  wowless_imploutputnumber(L, idx);
+}
+
 static inline void wowless_imploutputnilablenumber(lua_State *L, int idx) {
   switch (lua_type(L, idx)) {
     case LUA_TNUMBER:
@@ -378,6 +390,10 @@ static inline void wowless_imploutputnilablenumber(lua_State *L, int idx) {
     default:
       wowless_outputtyperror(L, idx, lua_typename(L, LUA_TNUMBER));
   }
+}
+
+static inline void wowless_imploutputnilableenum(lua_State *L, int idx) {
+  wowless_imploutputnilablenumber(L, idx);
 }
 
 static inline void wowless_imploutputstring(lua_State *L, int idx) {
