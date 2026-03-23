@@ -16,6 +16,11 @@ local args = (function()
   return parser:parse()
 end)()
 debug.setprofilingenabled(args.profile)
+local addonDirs = #args.addondir > 0 and args.addondir
+  or {
+    'build/cmake/addon/Wowless',
+    'build/cmake/products/' .. args.product .. '/WowlessData',
+  }
 local runner = require('wowless.runner')
 local modules = runner.run({
   allevents = args.allevents,
@@ -23,7 +28,7 @@ local modules = runner.run({
   frame0 = args.frame0,
   loglevel = args.loglevel,
   maxErrors = args.maxerrors,
-  otherAddonDirs = args.addondir,
+  otherAddonDirs = addonDirs,
   output = args.output,
   product = args.product,
   scripts = args.scripts,

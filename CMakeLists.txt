@@ -894,11 +894,8 @@ foreach(product ${products})
   add_dependencies(${product} stamp_${product}_dbdefs stamp_${product}_dblist)
   add_custom_command(
     OUTPUT ${out}
-    COMMAND
-      wowless_${product} run -p ${product} -e5 -a
-      ${CMAKE_CURRENT_BINARY_DIR}/addon/Wowless -a
-      ${CMAKE_CURRENT_BINARY_DIR}/products/${product}/WowlessData -o
-      ${CMAKE_CURRENT_BINARY_DIR}/${out}
+    COMMAND wowless_${product} run -p ${product} -e5 -o
+            ${CMAKE_CURRENT_BINARY_DIR}/${out}
     JOB_POOL wowless_run
     DEPENDS wowless_${product} testaddon.txt ${product}_addon.txt
             ${product}_data.sqlite3
