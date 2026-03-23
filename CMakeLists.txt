@@ -1067,6 +1067,7 @@ add_lua_executable(
   wowlessutil
   wowlessyaml)
 
+find_package(Git REQUIRED)
 add_custom_target(
   bump-dbdefs
   COMMAND ${GIT_EXECUTABLE} -C vendor/dbdefs checkout master
