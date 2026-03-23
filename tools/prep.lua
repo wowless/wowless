@@ -262,7 +262,7 @@ local function ensureimpl(k)
   return impls[k]
 end
 
-local simple_input_types = {
+local impl_input_types = {
   boolean = nop,
   enum = nop,
   FileAsset = nop,
@@ -273,7 +273,7 @@ local simple_input_types = {
   uiAddon = nop,
 }
 
-local simple_output_types = {
+local impl_output_types = {
   boolean = nop,
   enum = nop,
   FileAsset = nop,
@@ -290,14 +290,14 @@ local function is_impl_eligible(apicfg)
     return false
   end
   if not apicfg.instride and not apicfg.usage and (apicfg.outstride or 0) == 0 then
-    local all_simple = true
+    local all_impl = true
     for _, inp in ipairs(apicfg.inputs or {}) do
-      all_simple = all_simple and pcall(dispatch, simple_input_types, inp.type)
+      all_impl = all_impl and pcall(dispatch, impl_input_types, inp.type)
     end
     for _, out in ipairs(apicfg.outputs or {}) do
-      all_simple = all_simple and pcall(dispatch, simple_output_types, out.type)
+      all_impl = all_impl and pcall(dispatch, impl_output_types, out.type)
     end
-    if all_simple then
+    if all_impl then
       return true
     end
   end
