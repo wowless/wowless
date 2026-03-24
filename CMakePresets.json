@@ -1,13 +1,9 @@
 {
   "buildPresets": [
     {
+      "configuration": "Release",
       "configurePreset": "default",
       "name": "default"
-    },
-    {
-      "configurePreset": "default",
-      "configuration": "Debug",
-      "name": "debug"
     }
   ],
   "cmakeMinimumRequired": {
