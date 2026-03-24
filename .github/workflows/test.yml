@@ -105,6 +105,6 @@ jobs:
     - uses: lukka/get-cmake@v4.3.0
     - run: cmake --preset default
     - if: runner.os == 'Windows'
-      run: echo "${{ github.workspace }}/vcpkg/installed/x64-windows/bin" >> $env:GITHUB_PATH
+      run: echo "${{ github.workspace }}/build/vcpkg_installed/x64-windows/bin" >> $env:GITHUB_PATH
       shell: pwsh
     - run: cmake --build --preset default --target all test --verbose
