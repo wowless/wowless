@@ -178,7 +178,15 @@ type:
               type: flag
             RequiresRestrictedAbbreviationBreakpoints:
               type: flag
+            RequiresScriptObjectAlphaAccess:
+              type: flag
+            RequiresScriptObjectDesaturationAccess:
+              type: flag
             RequiresSpellDiminishUI:
+              type: flag
+            RequiresStatusBarDesaturationAccess:
+              type: flag
+            RequiresUnitIdentityAccess:
               type: flag
             RequiresValidAbbreviationBreakpoints:
               type: flag

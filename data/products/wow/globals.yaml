@@ -1985,6 +1985,13 @@ Enum:
     MaxValue: 2
     MinValue: 0
     NumValues: 3
+  ChatMessagingLockdownRestriction:
+    DropIncomingAddonMessages: 1
+    DropOutgoingAddonMessages: 2
+  ChatMessagingLockdownRestrictionMeta:
+    MaxValue: 2
+    MinValue: 1
+    NumValues: 2
   ChatToxityFilterOptOut:
     ExcludeFilterAll: 4294967295
     ExcludeFilterFriend: 1
