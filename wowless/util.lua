@@ -32,7 +32,7 @@ local readfile = (function()
   local function resolve(p)
     local c = cache
     local dd = ''
-    p = p:gsub('^%a:', '') -- strip Windows drive letter
+    p = p:gsub('\\', '/'):gsub('^%a:', '') -- normalize separators and strip Windows drive letter
     for k in p:gmatch('[^/]+') do
       assert(type(c) == 'table', dd .. ' is not a directory')
       dd = dd .. '/' .. k
