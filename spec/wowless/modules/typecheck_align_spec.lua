@@ -15,6 +15,7 @@ local mock_cgencode = {
   GetUiAddon = function(_value)
     return nil -- empty addons
   end,
+  GetUnit = units.GetUnit,
   IsLuaObject = function(_ud, _typename)
     return false
   end,
@@ -111,7 +112,7 @@ describe('typecheck align', function()
     },
     unit = {
       ltype = 'unit',
-      sections = { stubcheck = true },
+      sections = { stubcheck = true, implcheck = true, imploutput = true },
     },
     unknown = {
       ltype = 'unknown',

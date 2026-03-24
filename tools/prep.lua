@@ -271,6 +271,7 @@ local impl_input_types = {
   string = nop,
   table = nop,
   uiAddon = nop,
+  unit = nop,
 }
 
 local impl_output_types = {
@@ -283,6 +284,7 @@ local impl_output_types = {
   oneornil = nop,
   string = nop,
   table = nop,
+  unit = nop,
 }
 
 local function is_impl_eligible(apicfg)
@@ -817,6 +819,9 @@ if args.coutput then
     end,
     table = function()
       return 'table'
+    end,
+    unit = function()
+      return 'unit'
     end,
     unknown = function()
       return 'unknown'

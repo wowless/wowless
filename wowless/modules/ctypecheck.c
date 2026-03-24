@@ -46,6 +46,8 @@ SIMPLE_CHECKER(implcheckboolean, wowless_implcheckboolean)
 SIMPLE_CHECKER(implchecknilableboolean, wowless_implchecknilableboolean)
 SIMPLE_CHECKER(implcheckstring, wowless_implcheckstring)
 SIMPLE_CHECKER(implchecknilablestring, wowless_implchecknilablestring)
+SIMPLE_CHECKER(implcheckunit, wowless_implcheckunit)
+SIMPLE_CHECKER(implchecknilableunit, wowless_implchecknilableunit)
 SIMPLE_CHECKER(implcheckfileasset, wowless_implcheckfileasset)
 SIMPLE_CHECKER(implchecknilablefileasset, wowless_implchecknilablefileasset)
 SIMPLE_CHECKER(implcheckfunction, wowless_implcheckfunction)
@@ -58,6 +60,8 @@ SIMPLE_CHECKER(imploutputnumber, wowless_imploutputnumber)
 SIMPLE_CHECKER(imploutputnilablenumber, wowless_imploutputnilablenumber)
 SIMPLE_CHECKER(imploutputstring, wowless_imploutputstring)
 SIMPLE_CHECKER(imploutputnilablestring, wowless_imploutputnilablestring)
+SIMPLE_CHECKER(imploutputunit, wowless_imploutputunit)
+SIMPLE_CHECKER(imploutputnilableunit, wowless_imploutputnilableunit)
 SIMPLE_CHECKER(imploutputfileasset, wowless_imploutputfileasset)
 SIMPLE_CHECKER(imploutputnilablefileasset, wowless_imploutputnilablefileasset)
 SIMPLE_CHECKER(imploutputfunction, wowless_imploutputfunction)
@@ -132,6 +136,8 @@ static int make_module(lua_State *L) {
   SET_SIMPLE(L, implchecknilableboolean);
   SET_SIMPLE(L, implcheckstring);
   SET_SIMPLE(L, implchecknilablestring);
+  SET_TYPED(L, implcheckunit);
+  SET_TYPED(L, implchecknilableunit);
   SET_SIMPLE(L, implcheckfileasset);
   SET_SIMPLE(L, implchecknilablefileasset);
   SET_SIMPLE(L, implcheckfunction);
@@ -144,6 +150,8 @@ static int make_module(lua_State *L) {
   SET_SIMPLE(L, imploutputnilablenumber);
   SET_SIMPLE(L, imploutputstring);
   SET_SIMPLE(L, imploutputnilablestring);
+  SET_SIMPLE(L, imploutputunit);
+  SET_SIMPLE(L, imploutputnilableunit);
   SET_SIMPLE(L, imploutputfileasset);
   SET_SIMPLE(L, imploutputnilablefileasset);
   SET_SIMPLE(L, imploutputfunction);

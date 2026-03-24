@@ -230,6 +230,21 @@ static inline void wowless_stubchecknilablenil(lua_State *L, int idx) {
   wowless_stubchecknil(L, idx);
 }
 
+static inline void wowless_implcheckunit(lua_State *L, int idx) {
+  idx = lua_absindex(L, idx);
+  wowless_stubcheckunit(L, idx);
+  lua_getfield(L, lua_upvalueindex(1), "GetUnit");
+  lua_pushvalue(L, idx);
+  lua_call(L, 1, 1);
+  lua_replace(L, idx);
+}
+
+static inline void wowless_implchecknilableunit(lua_State *L, int idx) {
+  if (!lua_isnoneornil(L, idx)) {
+    wowless_implcheckunit(L, idx);
+  }
+}
+
 static inline void wowless_implchecknil(lua_State *L, int idx) {
   wowless_stubchecknil(L, idx);
 }
@@ -433,6 +448,14 @@ static inline void wowless_imploutputnilablestring(lua_State *L, int idx) {
     default:
       wowless_outputtyperror(L, idx, lua_typename(L, LUA_TSTRING));
   }
+}
+
+static inline void wowless_imploutputunit(lua_State *L, int idx) {
+  wowless_imploutputstring(L, idx);
+}
+
+static inline void wowless_imploutputnilableunit(lua_State *L, int idx) {
+  wowless_imploutputnilablestring(L, idx);
 }
 
 static inline void wowless_imploutputfileasset(lua_State *L, int idx) {

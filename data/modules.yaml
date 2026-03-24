@@ -32,6 +32,7 @@ cgencode:
     luaobjects:
     uiobjects:
     uiobjecttypes:
+    units:
 clog:
   deps:
     datalua:
