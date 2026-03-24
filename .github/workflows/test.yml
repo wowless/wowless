@@ -44,23 +44,17 @@ jobs:
       fail-fast: false
       matrix:
         config:
-        - name: Linux / Make
-          generator: Unix Makefiles
+        - generator: Unix Makefiles
           os: ubuntu-latest
-        - name: Linux / Ninja
-          generator: Ninja
+        - generator: Ninja
           os: ubuntu-latest
-        - name: MacOS / Make
-          generator: Unix Makefiles
+        - generator: Unix Makefiles
           os: macos-latest
-        - name: MacOS / Ninja
-          generator: Ninja
+        - generator: Ninja
           os: macos-latest
-        - name: Windows / MSBuild
-          generator: Visual Studio 17 2022
+        - generator: Visual Studio 17 2022
           os: windows-latest
-        - name: Windows / Ninja
-          generator: Ninja
+        - generator: Ninja
           os: windows-latest
     runs-on: ${{ matrix.config.os }}
     steps:
