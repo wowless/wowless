@@ -5,7 +5,8 @@
       "name": "default"
     },
     {
-      "configurePreset": "debug",
+      "configurePreset": "default",
+      "configuration": "Debug",
       "name": "debug"
     }
   ],
@@ -17,21 +18,14 @@
     {
       "binaryDir": "${sourceDir}/build",
       "cacheVariables": {
-        "CMAKE_C_FLAGS": "-DNDEBUG -ffast-math -O3",
+        "CMAKE_C_FLAGS_DEBUG": "-g -O0",
+        "CMAKE_C_FLAGS_RELEASE": "-DNDEBUG -ffast-math -O3",
+        "CMAKE_CONFIGURATION_TYPES": "Release;Debug",
+        "CMAKE_DEFAULT_BUILD_TYPE": "Release",
         "CMAKE_EXPORT_COMPILE_COMMANDS": true
       },
-      "generator": "Ninja",
+      "generator": "Ninja Multi-Config",
       "name": "default"
-    },
-    {
-      "binaryDir": "${sourceDir}/build-debug",
-      "cacheVariables": {
-        "CMAKE_BUILD_TYPE": "Debug",
-        "CMAKE_C_FLAGS": "-g -O0",
-        "CMAKE_EXPORT_COMPILE_COMMANDS": true
-      },
-      "generator": "Ninja",
-      "name": "debug"
     }
   ],
   "version": 3

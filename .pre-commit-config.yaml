@@ -64,7 +64,7 @@ repos:
     pass_filenames: false
   - id: yamlfmt
     name: wowless yamlfmt
-    entry: build/yamlfmt
+    entry: build/Release/yamlfmt
     language: system
     types: [yaml]
     files: ^data/
