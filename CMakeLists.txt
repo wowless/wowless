@@ -953,6 +953,14 @@ add_lua_executable(
   wowlesstoc
   wowlessutil
   wowlessyaml)
+if(WIN32)
+  add_custom_command(
+    TARGET runtests
+    POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different $<TARGET_RUNTIME_DLLS:runtests>
+            $<TARGET_FILE_DIR:runtests>
+    COMMAND_EXPAND_LISTS)
+endif()
 
 set(d ${CMAKE_CURRENT_BINARY_DIR}/addon/Wowless)
 file(MAKE_DIRECTORY ${d} ${CMAKE_CURRENT_BINARY_DIR}/staging/addon/Wowless)
