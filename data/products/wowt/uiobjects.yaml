@@ -8963,11 +8963,6 @@ UIObject:
         uiobjectimpl: ForbiddenMixin/SetForbidden
       inputs:
       outputs:
-    SetPreventSecretValues:
-      inputs:
-      - name: preventSecretValues
-        type: boolean
-      outputs:
     SetToDefaults:
       inputs:
       outputs:

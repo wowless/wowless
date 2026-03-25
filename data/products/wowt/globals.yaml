@@ -3942,12 +3942,13 @@ Enum:
     NumValues: 3
   EditModeStatusTrackingBarSetting:
     Height: 0
+    Size: 3
     TextSize: 2
     Width: 1
   EditModeStatusTrackingBarSettingMeta:
-    MaxValue: 2
+    MaxValue: 3
     MinValue: 0
-    NumValues: 3
+    NumValues: 4
   EditModeStatusTrackingBarSystemIndices:
     StatusTrackingBar1: 1
     StatusTrackingBar2: 2
@@ -6759,14 +6760,6 @@ Enum:
     MaxValue: 1
     MinValue: 0
     NumValues: 2
-  LightRadiusIndicatorType:
-    Always: 0
-    Never: 2
-    Overlap: 1
-  LightRadiusIndicatorTypeMeta:
-    MaxValue: 2
-    MinValue: 0
-    NumValues: 3
   LimitedInputType:
     MouseDown: 1
     MouseMove: 0
@@ -9513,11 +9506,12 @@ Enum:
   TieredEntranceType:
     Delve: 1
     Invalid: 0
+    Reserved: 3
     Sites: 2
   TieredEntranceTypeMeta:
-    MaxValue: 2
+    MaxValue: 3
     MinValue: 0
-    NumValues: 3
+    NumValues: 4
   TimeEventFlag:
     GlobalLaunch: 4
     GlueScreenShortcut: 1

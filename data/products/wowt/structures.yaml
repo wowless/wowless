@@ -172,28 +172,6 @@ C_AccountStore.AccountStoreItemInfo:
     transmogSetID:
       nilable: true
       type: number
-C_ActionBar.ActionBarChargeInfo:
-  fields:
-    chargeModRate:
-      type: number
-    cooldownDuration:
-      type: number
-    cooldownStartTime:
-      type: number
-    currentCharges:
-      type: number
-    maxCharges:
-      type: number
-C_ActionBar.ActionBarCooldownInfo:
-  fields:
-    duration:
-      type: number
-    isEnabled:
-      type: boolean
-    modRate:
-      type: number
-    startTime:
-      type: number
 C_ActionBar.ActionUsableState:
   fields:
     noMana:
@@ -1370,7 +1348,13 @@ C_CatalogShop.CatalogShopProductInfo:
       type: string
     originalPrice:
       type: string
+    previewBGOverrideProductURL:
+      nilable: true
+      type: string
     previewIconTexture:
+      nilable: true
+      type: string
+    previewSmallBGOverrideProductURL:
       nilable: true
       type: string
     price:
@@ -12321,6 +12305,8 @@ SpellChargeInfo:
       type: number
     currentCharges:
       type: number
+    isActive:
+      type: boolean
     maxCharges:
       type: number
 SpellCooldownInfo:
@@ -12330,6 +12316,8 @@ SpellCooldownInfo:
       type: number
     duration:
       type: number
+    isActive:
+      type: boolean
     isEnabled:
       type: boolean
     isOnGCD:
@@ -12341,6 +12329,18 @@ SpellCooldownInfo:
       type: number
     timeUntilEndOfStartRecovery:
       nilable: true
+      type: number
+SpellLossOfControlInfo:
+  fields:
+    duration:
+      type: number
+    isActive:
+      type: boolean
+    modRate:
+      type: number
+    shouldReplaceNormalCooldown:
+      type: boolean
+    startTime:
       type: number
 SpellPowerCostInfo:
   fields:

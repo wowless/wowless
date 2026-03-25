@@ -469,7 +469,7 @@ C_ActionBar.GetActionCharges:
   outputs:
   - name: chargeInfo
     type:
-      structure: C_ActionBar.ActionBarChargeInfo
+      structure: SpellChargeInfo
 C_ActionBar.GetActionCooldown:
   inputs:
   - name: actionID
@@ -477,7 +477,7 @@ C_ActionBar.GetActionCooldown:
   outputs:
   - name: cooldownInfo
     type:
-      structure: C_ActionBar.ActionBarCooldownInfo
+      structure: SpellCooldownInfo
 C_ActionBar.GetActionCooldownDuration:
   inputs:
   - name: actionID
@@ -499,15 +499,6 @@ C_ActionBar.GetActionDisplayCount:
   outputs:
   - name: displayCount
     type: string
-C_ActionBar.GetActionLossOfControlCooldown:
-  inputs:
-  - name: actionID
-    type: number
-  outputs:
-  - name: startTime
-    type: number
-  - name: duration
-    type: number
 C_ActionBar.GetActionLossOfControlCooldownDuration:
   inputs:
   - name: actionID
@@ -516,6 +507,14 @@ C_ActionBar.GetActionLossOfControlCooldownDuration:
   - name: duration
     type:
       luaobject: LuaDurationObject
+C_ActionBar.GetActionLossOfControlCooldownInfo:
+  inputs:
+  - name: actionID
+    type: number
+  outputs:
+  - name: lossOfControlInfo
+    type:
+      structure: SpellLossOfControlInfo
 C_ActionBar.GetActionText:
   inputs:
   - name: actionID
@@ -4745,6 +4744,11 @@ C_ChatBubbles.GetAllChatBubbles:
   - name: chatBubbles
     type:
       arrayof: table
+C_ChatInfo.AreOutgoingAddonChatMessagesRestricted:
+  inputs:
+  outputs:
+  - name: isRestricted
+    type: boolean
 C_ChatInfo.CancelEmote:
   inputs:
   outputs:
@@ -17034,6 +17038,17 @@ C_LossOfControl.GetActiveLossOfControlDataCountByUnit:
   outputs:
   - name: count
     type: number
+C_LossOfControl.GetActiveLossOfControlDuration:
+  inputs:
+  - name: unitToken
+    type: unit
+  - name: index
+    type: number
+  outputs:
+  - name: duration
+    nilable: true
+    type:
+      luaobject: LuaDurationObject
 C_MacOptions.AreOSShortcutsDisabled:
   inputs:
   outputs:
@@ -24402,16 +24417,6 @@ C_Spell.GetSpellLink:
   outputs:
   - name: spellLink
     type: string
-C_Spell.GetSpellLossOfControlCooldown:
-  inputs:
-  - name: spellIdentifier
-    type: string
-  mayreturnnothing: true
-  outputs:
-  - name: startTime
-    type: number
-  - name: duration
-    type: number
 C_Spell.GetSpellLossOfControlCooldownDuration:
   inputs:
   - name: spellIdentifier
@@ -24421,6 +24426,15 @@ C_Spell.GetSpellLossOfControlCooldownDuration:
   - name: duration
     type:
       luaobject: LuaDurationObject
+C_Spell.GetSpellLossOfControlCooldownInfo:
+  inputs:
+  - name: spellIdentifier
+    type: string
+  mayreturnnothing: true
+  outputs:
+  - name: lossOfControlInfo
+    type:
+      structure: SpellLossOfControlInfo
 C_Spell.GetSpellMaxCumulativeAuraApplications:
   inputs:
   - name: spellID
@@ -24899,19 +24913,6 @@ C_SpellBook.GetSpellBookItemLink:
   outputs:
   - name: spellLink
     type: string
-C_SpellBook.GetSpellBookItemLossOfControlCooldown:
-  inputs:
-  - name: spellBookItemSlotIndex
-    type: number
-  - name: spellBookItemSpellBank
-    type:
-      enum: SpellBookSpellBank
-  mayreturnnothing: true
-  outputs:
-  - name: startTime
-    type: number
-  - name: duration
-    type: number
 C_SpellBook.GetSpellBookItemLossOfControlCooldownDuration:
   inputs:
   - name: spellBookItemSlotIndex
@@ -24924,6 +24925,18 @@ C_SpellBook.GetSpellBookItemLossOfControlCooldownDuration:
   - name: duration
     type:
       luaobject: LuaDurationObject
+C_SpellBook.GetSpellBookItemLossOfControlCooldownInfo:
+  inputs:
+  - name: spellBookItemSlotIndex
+    type: number
+  - name: spellBookItemSpellBank
+    type:
+      enum: SpellBookSpellBank
+  mayreturnnothing: true
+  outputs:
+  - name: lossOfControlInfo
+    type:
+      structure: SpellLossOfControlInfo
 C_SpellBook.GetSpellBookItemName:
   inputs:
   - name: spellBookItemSlotIndex
@@ -33454,6 +33467,7 @@ GetCurrentEventID:
     type: number
 GetCurrentGlyphNameForSpell:
 GetCurrentGraphicsAPI:
+GetCurrentGraphicsSetting:
 GetCurrentGuildBankTab:
   outputs:
   - type: number
@@ -36159,6 +36173,14 @@ GetTotemCannotDismiss:
   - name: cannotDismiss
     nilable: true
     type: boolean
+GetTotemDuration:
+  inputs:
+  - name: slot
+    type: number
+  outputs:
+  - name: duration
+    type:
+      luaobject: LuaDurationObject
 GetTotemInfo:
   inputs:
   - name: slot
@@ -38140,6 +38162,7 @@ SetConsoleKey:
   - name: keystring
     type: string
   outputs:
+SetCurrentGraphicsSetting:
 SetCurrentGuildBankTab:
 SetCurrentTitle:
   inputs:
