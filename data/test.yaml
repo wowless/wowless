@@ -31,7 +31,9 @@ EnumerateFrames:
 error:
   error:
 errorhandler:
+  error:
   geterrorhandler:
+  securecallfunction:
   seterrorhandler:
 GetAddOnMetadata:
   GetAddOnMetadata:

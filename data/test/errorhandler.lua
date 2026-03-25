@@ -1,4 +1,4 @@
-local T, geterrorhandler, seterrorhandler = ...
+local T, error, geterrorhandler, securecallfunction, seterrorhandler = ...
 
 local tests = {
   ['get returns set function'] = function()
@@ -25,6 +25,23 @@ local tests = {
   end,
   ['set returns nothing'] = function()
     T.check0(seterrorhandler(function() end))
+  end,
+  ['string error delivered to handler'] = function()
+    local received
+    seterrorhandler(function(e)
+      received = e
+    end)
+    securecallfunction(error, 'hello')
+    T.assertEquals('hello', received)
+  end,
+  ['table error delivered to handler'] = function()
+    local received
+    seterrorhandler(function(e)
+      received = e
+    end)
+    local t = { key = 'value' }
+    securecallfunction(error, t)
+    T.assertEquals('UNKNOWN ERROR', received)
   end,
 }
 
