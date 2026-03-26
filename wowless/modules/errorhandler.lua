@@ -1,11 +1,10 @@
-return function(events)
-  local SendEvent = events.SendEvent
-  local pendingWarnings = {}
+return function(eventqueue)
+  local QueueEvent = eventqueue.QueueEvent
   local currentFn
 
   seterrorhandler(function(msg)
     if not pcall(currentFn, msg) then
-      table.insert(pendingWarnings, msg)
+      QueueEvent('LUA_WARNING', msg)
     end
   end)
 
@@ -17,16 +16,8 @@ return function(events)
     currentFn = fn
   end
 
-  local function FlushWarnings()
-    for _, msg in ipairs(pendingWarnings) do
-      SendEvent('LUA_WARNING', msg)
-    end
-    table.wipe(pendingWarnings)
-  end
-
   return {
     geterrorhandler = geterrorhandler,
     seterrorhandler = seterrorhandler,
-    FlushWarnings = FlushWarnings,
   }
 end

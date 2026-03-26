@@ -805,6 +805,7 @@ lua2c(
   wowless.modules.env=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/env.lua
   wowless.modules.errorhandler=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/errorhandler.lua
   wowless.modules.errors=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/errors.lua
+  wowless.modules.eventqueue=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/eventqueue.lua
   wowless.modules.events=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/events.lua
   wowless.modules.fontinstance=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/fontinstance.lua
   wowless.modules.funcheck=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/funcheck.lua

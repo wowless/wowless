@@ -57,11 +57,14 @@ env:
   deps:
 errorhandler:
   deps:
-    events:
+    eventqueue:
 errors:
   deps:
     log:
     maxErrors:
+eventqueue:
+  deps:
+    events:
 events:
   deps:
     datalua:
@@ -123,7 +126,7 @@ macrotext:
 mainloop:
   deps:
     api:
-    errorhandler:
+    eventqueue:
     region:
     scripts:
     time:
