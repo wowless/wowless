@@ -47,6 +47,8 @@ type:
       type:
         taggedunion:
           mac: tag
+    protected:
+      type: flag
     secureonly:
       type: flag
     stubnothing:

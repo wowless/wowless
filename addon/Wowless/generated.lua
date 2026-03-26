@@ -67,9 +67,21 @@ G.testsuite.generated = function()
     return (pcall(coroutine.create, func))
   end
 
-  local function checkCFunc(name, func)
+  local function checkCFunc(name, func, cfg)
     assertEquals('function', type(func))
     return {
+      forbidden = cfg and cfg.protected and function()
+        local args
+        local f = CreateFrame('Frame')
+        f:RegisterEvent('ADDON_ACTION_FORBIDDEN')
+        f:SetScript('OnEvent', function(_, _, ...)
+          args = { ... }
+        end)
+        G.check1(true, pcall(func))
+        G.assertEquals(2, #args)
+        G.assertEquals(addonName, args[1])
+        G.assertEquals('UNKNOWN()', args[2])
+      end,
       getfenv = function()
         assertEquals(_G, getfenv(func))
       end,
@@ -107,13 +119,13 @@ G.testsuite.generated = function()
         local fullname = (ename and ename .. '.' or '') .. name
         local func = env[name]
         if iswowlesslite then
-          return checkCFunc(fullname, func)
+          return checkCFunc(fullname, func, cfg)
         elseif cfg.overwritten then
           return checkLuaFunc(func)
         elseif capsuleapis[fullname] then
           assertEquals(nil, func)
         else
-          return checkCFunc(fullname, func)
+          return checkCFunc(fullname, func, cfg)
         end
       end
     end

@@ -28,6 +28,7 @@ cgencode:
   deps:
     addons:
     api:
+    events:
     log:
     luaobjects:
     uiobjects:

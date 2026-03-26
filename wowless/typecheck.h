@@ -5,6 +5,17 @@
 #include "lua.h"
 #include "wowless/stubs.h"
 
+static inline int wowless_forbidden(lua_State *L) {
+  const char *taint = lua_getstacktaint(L);
+  if (taint) {
+    lua_getfield(L, lua_upvalueindex(1), "FireProtected");
+    lua_pushstring(L, taint);
+    lua_call(L, 1, 0);
+    return 1;
+  }
+  return 0;
+}
+
 static inline void wowless_stubchecknumber(lua_State *L, int idx) {
   luaL_checknumber(L, idx);
 }

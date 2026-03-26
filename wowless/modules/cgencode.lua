@@ -1,4 +1,6 @@
-return function(addons, api, log, luaobjects, uiobjects, uiobjecttypes, units)
+local bubblewrap = require('wowless.bubblewrap')
+
+return function(addons, api, events, log, luaobjects, uiobjects, uiobjecttypes, units)
   local stringenums = require('runtime.stringenums')
 
   local function CheckStringEnum(value, enumname)
@@ -31,8 +33,13 @@ return function(addons, api, log, luaobjects, uiobjects, uiobjecttypes, units)
     return internal and uiobjecttypes.IsObjectType(internal, typename)
   end
 
+  local function FireProtected(taint)
+    events.SendEvent('ADDON_ACTION_FORBIDDEN', taint, 'UNKNOWN()')
+  end
+
   return {
     CheckStringEnum = CheckStringEnum,
+    FireProtected = bubblewrap(FireProtected),
     GetUiAddon = GetUiAddon,
     GetUnit = units.GetUnit,
     CreateLuaObject = CreateLuaObject,

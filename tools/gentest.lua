@@ -59,10 +59,11 @@ local ptablemap = {
   globalapis = function(p)
     local config = perproduct(p, 'config')
     local t = {}
-    for name in pairs(perproduct(p, 'apis')) do
+    for name, api in pairs(perproduct(p, 'apis')) do
       if not name:find('%.') then
         local vv = {
           overwritten = tpath(config, 'addon', 'overwritten_apis', name) and true,
+          protected = api.protected,
         }
         t[name] = next(vv) and vv or true
       end

@@ -85,9 +85,6 @@ loadstring:
   getfenv:
   loadstring:
   setfenv:
-MoveAndSteerStart:
-  CreateFrame:
-  MoveAndSteerStart:
 securecallfunction:
   error:
   geterrorhandler:

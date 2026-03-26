@@ -22542,12 +22542,13 @@ MouseOverrideCinematicDisable:
     type: boolean
   outputs:
 MoveAndSteerStart:
-  impl: MoveAndSteerStart
   inputs:
   outputs:
+  protected: true
 MoveAndSteerStop:
   inputs:
   outputs:
+  protected: true
 MoveBackwardStart:
   inputs:
   outputs:

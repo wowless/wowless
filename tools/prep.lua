@@ -856,7 +856,9 @@ if args.coutput then
 
   local eligible = {}
   for k, v in sorted(rawapis) do
-    if is_eligible(v) then
+    local elig = is_eligible(v)
+    assert(not v.protected or elig, 'protected api must be c-stub eligible: ' .. k)
+    if elig then
       table.insert(eligible, { name = k, cfg = v })
     end
   end
@@ -1060,6 +1062,9 @@ if args.coutput then
   for _, entry in ipairs(eligible) do
     local k, v = entry.name, entry.cfg
     emit('static int stub_%s(lua_State *L) {', safename(k))
+    if v.protected then
+      emit('  if (wowless_forbidden(L)) return 0;')
+    end
     local allinps = v.inputs or {}
     local instride = v.instride or 0
     local nsins = #allinps - instride
