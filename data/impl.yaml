@@ -529,6 +529,10 @@ Mixin:
   luadelegate:
     module: wowless.mixin
     nowrap: true
+MoveAndSteerStart:
+  impl:
+    modules:
+      events:
 newproxy:
   stdlib: newproxy
 next:
