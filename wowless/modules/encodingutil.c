@@ -54,12 +54,20 @@ static const unsigned char dec_urlsafe[256] = {
 };
 /* clang-format on */
 
+static const char encode_usage[] =
+    "Usage: local output = C_EncodingUtil.EncodeBase64(source [, variant])";
+static const char decode_usage[] =
+    "Usage: local output = C_EncodingUtil.DecodeBase64(source [, variant])";
+
 static int encodingutil_EncodeBase64(lua_State *L) {
   size_t srclen;
-  const char *src = luaL_checklstring(L, 1, &srclen);
+  const char *src = lua_tolstring(L, 1, &srclen);
+  if (!src) {
+    return luaL_argerror(L, 1, encode_usage);
+  }
   int variant = (int)luaL_optnumber(L, 2, VARIANT_STANDARD);
   if (variant != VARIANT_STANDARD && variant != VARIANT_URL_SAFE) {
-    return luaL_argerror(L, 2, "invalid variant");
+    return luaL_argerror(L, 2, encode_usage);
   }
   const char *alpha = variant == VARIANT_URL_SAFE ? enc_urlsafe : enc_standard;
   size_t outlen = ((srclen + 2) / 3) * 4;
@@ -95,10 +103,13 @@ static int encodingutil_EncodeBase64(lua_State *L) {
 
 static int encodingutil_DecodeBase64(lua_State *L) {
   size_t srclen;
-  const char *src = luaL_checklstring(L, 1, &srclen);
+  const char *src = lua_tolstring(L, 1, &srclen);
+  if (!src) {
+    return luaL_argerror(L, 1, decode_usage);
+  }
   int variant = (int)luaL_optnumber(L, 2, VARIANT_STANDARD);
   if (variant != VARIANT_STANDARD && variant != VARIANT_URL_SAFE) {
-    return luaL_argerror(L, 2, "invalid variant");
+    return luaL_argerror(L, 2, decode_usage);
   }
   const unsigned char *dec =
       variant == VARIANT_URL_SAFE ? dec_urlsafe : dec_standard;
