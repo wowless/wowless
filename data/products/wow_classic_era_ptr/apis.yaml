@@ -104,6 +104,7 @@ AreRaidMarkersEnabled:
 AscendStop:
   inputs:
   outputs:
+  protected: true
 assert:
   impl: assert
 AssistUnit:
@@ -16728,6 +16729,7 @@ CallCompanion:
 CameraOrSelectOrMoveStart:
   inputs:
   outputs:
+  protected: true
 CameraOrSelectOrMoveStop:
   inputs:
   - name: stickyFlag
@@ -17452,6 +17454,7 @@ DepositGuildBankMoney:
 DescendStop:
   inputs:
   outputs:
+  protected: true
 DestroyTotem:
   inputs:
   - name: slot
@@ -18520,6 +18523,8 @@ GetCurrentEventID:
     type: number
 GetCurrentGraphicsAPI:
 GetCurrentGraphicsSetting:
+  inputs:
+  outputs:
 GetCurrentGuildBankTab:
   outputs:
   - type: number
@@ -22998,6 +23003,7 @@ JoinWorldPVPQueue:
 JumpOrAscendStart:
   inputs:
   outputs:
+  protected: true
 KeyRingButtonIDToInvSlotID:
 Kiosk.GetCharacterTemplateSetIndex:
 Kiosk.GetKioskLoginInfo:
@@ -23146,11 +23152,15 @@ MoveAndSteerStop:
 MoveBackwardStart:
   inputs:
   outputs:
+  protected: true
 MoveBackwardStop:
+  protected: true
 MoveForwardStart:
   inputs:
   outputs:
+  protected: true
 MoveForwardStop:
+  protected: true
 MoveViewDownStart:
 MoveViewDownStop:
 MoveViewInStart:
@@ -23258,15 +23268,19 @@ PickupTalent:
 PitchDownStart:
   inputs:
   outputs:
+  protected: true
 PitchDownStop:
   inputs:
   outputs:
+  protected: true
 PitchUpStart:
   inputs:
   outputs:
+  protected: true
 PitchUpStop:
   inputs:
   outputs:
+  protected: true
 PlaceAction:
 PlaceAuctionBid:
 PlaceRaidMarker:
@@ -23933,6 +23947,7 @@ SignPetition:
 SitStandOrDescendStart:
   inputs:
   outputs:
+  protected: true
 SocketInventoryItem:
 SortArenaTeamRoster:
 SortAuctionApplySort:
@@ -23992,6 +24007,7 @@ StartAuction:
 StartAutoRun:
   inputs:
   outputs:
+  protected: true
 StartDuel:
   inputs:
   - name: unit
@@ -24012,6 +24028,7 @@ StopAttack:
 StopAutoRun:
   inputs:
   outputs:
+  protected: true
 StopCinematic:
   inputs:
   outputs:
@@ -24025,11 +24042,15 @@ StoreSecureReference:
 StrafeLeftStart:
   inputs:
   outputs:
+  protected: true
 StrafeLeftStop:
+  protected: true
 StrafeRightStart:
   inputs:
   outputs:
+  protected: true
 StrafeRightStop:
+  protected: true
 strcmputf8i:
   impl: strcmputf8i
 strconcat:
@@ -24273,10 +24294,12 @@ TimeoutResurrect:
 ToggleAutoRun:
   inputs:
   outputs:
+  protected: true
 TogglePetAutocast:
 ToggleRun:
   inputs:
   outputs:
+  protected: true
 ToggleSelfHighlight:
   inputs:
   outputs:
@@ -24301,17 +24324,23 @@ TurnInGuildCharter:
 TurnLeftStart:
   inputs:
   outputs:
+  protected: true
 TurnLeftStop:
+  protected: true
 TurnOrActionStart:
   inputs:
   outputs:
+  protected: true
 TurnOrActionStop:
   inputs:
   outputs:
+  protected: true
 TurnRightStart:
   inputs:
   outputs:
+  protected: true
 TurnRightStop:
+  protected: true
 type:
   impl: type
 UninviteUnit:
