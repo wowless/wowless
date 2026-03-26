@@ -28,6 +28,11 @@ CreateWindow:
 EnumerateFrames:
   CreateFrame:
   EnumerateFrames:
+environmentmetafield:
+  getfenv:
+  getmetatable:
+  setfenv:
+  setmetatable:
 error:
   error:
 errorhandler:
