@@ -291,7 +291,7 @@ local function is_impl_eligible(apicfg)
   if not apicfg.impl then
     return false
   end
-  if not apicfg.instride and not apicfg.usage and (apicfg.outstride or 0) == 0 then
+  if not apicfg.instride and (apicfg.outstride or 0) == 0 then
     local all_impl = true
     for _, inp in ipairs(apicfg.inputs or {}) do
       all_impl = all_impl and pcall(dispatch, impl_input_types, inp.type)
@@ -960,6 +960,8 @@ if args.coutput then
     emit('')
   end
   for lname in sorted(used_luaobjects) do
+    emit('static int wowless_isluaobject_%s(lua_State *L, int idx);', safename(lname))
+    emit('static int wowless_isnilableluaobject_%s(lua_State *L, int idx);', safename(lname))
     emit('static void wowless_stubcheckluaobject_%s(lua_State *L, int idx);', safename(lname))
     emit('static void wowless_stubchecknilableluaobject_%s(lua_State *L, int idx);', safename(lname))
   end
@@ -967,6 +969,8 @@ if args.coutput then
     emit('')
   end
   for sename in sorted(used_stringenums) do
+    emit('static int wowless_isstringenum_%s(lua_State *L, int idx);', safename(sename))
+    emit('static int wowless_isnilablestringenum_%s(lua_State *L, int idx);', safename(sename))
     emit('static void wowless_stubcheckstringenum_%s(lua_State *L, int idx);', safename(sename))
     emit('static void wowless_stubchecknilablestringenum_%s(lua_State *L, int idx);', safename(sename))
   end
@@ -974,6 +978,8 @@ if args.coutput then
     emit('')
   end
   for uname in sorted(used_uiobjects) do
+    emit('static int wowless_isuiobject_%s(lua_State *L, int idx);', safename(uname))
+    emit('static int wowless_isnilableuiobject_%s(lua_State *L, int idx);', safename(uname))
     emit('static void wowless_stubcheckuiobject_%s(lua_State *L, int idx);', safename(uname))
     emit('static void wowless_stubchecknilableuiobject_%s(lua_State *L, int idx);', safename(uname))
   end
@@ -1026,17 +1032,33 @@ if args.coutput then
   end
 
   for lname in sorted(used_luaobjects) do
+    emit('static int wowless_isluaobject_%s(lua_State *L, int idx) {', safename(lname))
+    emit('  return wowless_isluaobject(L, idx, %s, %d);', cstring(lname), #lname)
+    emit('}')
+    emit('')
+    emit('static int wowless_isnilableluaobject_%s(lua_State *L, int idx) {', safename(lname))
+    emit('  return wowless_isnilableluaobject(L, idx, %s, %d);', cstring(lname), #lname)
+    emit('}')
+    emit('')
     emit('static void wowless_stubcheckluaobject_%s(lua_State *L, int idx) {', safename(lname))
-    emit('  wowless_stubcheckluaobject(L, idx, %s, %d);', cstring(lname), #lname)
+    emit('  if (!wowless_isluaobject_%s(L, idx)) luaL_typerror(L, idx, "luaobject");', safename(lname))
     emit('}')
     emit('')
     emit('static void wowless_stubchecknilableluaobject_%s(lua_State *L, int idx) {', safename(lname))
-    emit('  wowless_stubchecknilableluaobject(L, idx, %s, %d);', cstring(lname), #lname)
+    emit('  if (!wowless_isnilableluaobject_%s(L, idx)) luaL_typerror(L, idx, "luaobject");', safename(lname))
     emit('}')
     emit('')
   end
 
   for sename in sorted(used_stringenums) do
+    emit('static int wowless_isstringenum_%s(lua_State *L, int idx) {', safename(sename))
+    emit('  return wowless_isstringenum(L, idx, %s, %d);', cstring(sename), #sename)
+    emit('}')
+    emit('')
+    emit('static int wowless_isnilablestringenum_%s(lua_State *L, int idx) {', safename(sename))
+    emit('  return wowless_isnilablestringenum(L, idx, %s, %d);', cstring(sename), #sename)
+    emit('}')
+    emit('')
     emit('static void wowless_stubcheckstringenum_%s(lua_State *L, int idx) {', safename(sename))
     emit('  wowless_stubcheckstringenum(L, idx, %s, %d);', cstring(sename), #sename)
     emit('}')
@@ -1049,12 +1071,20 @@ if args.coutput then
 
   for uname in sorted(used_uiobjects) do
     local target = uname:lower()
+    emit('static int wowless_isuiobject_%s(lua_State *L, int idx) {', safename(uname))
+    emit('  return wowless_isuiobject(L, idx, %s, %d);', cstring(target), #target)
+    emit('}')
+    emit('')
+    emit('static int wowless_isnilableuiobject_%s(lua_State *L, int idx) {', safename(uname))
+    emit('  return wowless_isnilableuiobject(L, idx, %s, %d);', cstring(target), #target)
+    emit('}')
+    emit('')
     emit('static void wowless_stubcheckuiobject_%s(lua_State *L, int idx) {', safename(uname))
-    emit('  wowless_stubcheckuiobject(L, idx, %s, %d);', cstring(target), #target)
+    emit('  if (!wowless_isuiobject_%s(L, idx)) luaL_typerror(L, idx, "uiobject");', safename(uname))
     emit('}')
     emit('')
     emit('static void wowless_stubchecknilableuiobject_%s(lua_State *L, int idx) {', safename(uname))
-    emit('  wowless_stubchecknilableuiobject(L, idx, %s, %d);', cstring(target), #target)
+    emit('  if (!wowless_isnilableuiobject_%s(L, idx)) luaL_typerror(L, idx, "uiobject");', safename(uname))
     emit('}')
     emit('')
   end
@@ -1072,8 +1102,18 @@ if args.coutput then
       local nilable = inp.nilable or inp.default ~= nil
       return ('wowless_stubcheck%s%s(L, %s);'):format(nilable and 'nilable' or '', dispatch(cinputtypes, inp.type), idx)
     end
+    local function usagecheck(inp, idx)
+      local nilable = inp.nilable or inp.default ~= nil
+      return ('if (!wowless_is%s%s(L, %s)) return luaL_error(L, "Usage: %s");'):format(
+        nilable and 'nilable' or '',
+        dispatch(cinputtypes, inp.type),
+        idx,
+        v.usage
+      )
+    end
+    local inputcheck = v.usage and usagecheck or check
     for i = 1, nsins do
-      emit('  %s', check(allinps[i], i))
+      emit('  %s', inputcheck(allinps[i], i))
     end
     if instride > 0 then
       emit('  int i, n = lua_gettop(L);')
@@ -1148,9 +1188,22 @@ if args.coutput then
       local nsins = #inputs
       emit('static int implstub_%s(lua_State *L) {', safename(entry.name))
       if check_inputs then
-        for i, inp in ipairs(inputs) do
-          local nilable = inp.nilable or inp.default ~= nil
-          emit('  wowless_implcheck%s%s(L, %d);', nilable and 'nilable' or '', dispatch(cinputtypes, inp.type), i)
+        if v.usage then
+          for i, inp in ipairs(inputs) do
+            local nilable = inp.nilable or inp.default ~= nil
+            emit(
+              '  if (!wowless_is%s%s(L, %d)) return luaL_error(L, "Usage: %s");',
+              nilable and 'nilable' or '',
+              dispatch(cinputtypes, inp.type),
+              i,
+              v.usage
+            )
+          end
+        else
+          for i, inp in ipairs(inputs) do
+            local nilable = inp.nilable or inp.default ~= nil
+            emit('  wowless_implcheck%s%s(L, %d);', nilable and 'nilable' or '', dispatch(cinputtypes, inp.type), i)
+          end
         end
         emit('  wowless_stubcheckextraargs(L, %d, %s);', nsins, cstring(entry.name))
       end
