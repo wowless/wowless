@@ -124,7 +124,7 @@ static inline int wowless_isboolean(lua_State *L, int idx) {
   return !lua_isnoneornil(L, idx);
 }
 
-static inline int wowless_isnilableboolean(lua_State *, int) { return 1; }
+static inline int wowless_isnilableboolean(lua_State *L, int idx) { return 1; }
 
 static inline void wowless_stubcheckboolean(lua_State *L, int idx) {
   if (!wowless_isboolean(L, idx)) {
@@ -132,7 +132,7 @@ static inline void wowless_stubcheckboolean(lua_State *L, int idx) {
   }
 }
 
-static inline void wowless_stubchecknilableboolean(lua_State *, int) {}
+static inline void wowless_stubchecknilableboolean(lua_State *L, int idx) {}
 
 static inline int wowless_isfunction(lua_State *L, int idx) {
   return lua_type(L, idx) == LUA_TFUNCTION;
@@ -299,7 +299,7 @@ static inline int wowless_isunknown(lua_State *L, int idx) {
   return !lua_isnoneornil(L, idx);
 }
 
-static inline int wowless_isnilableunknown(lua_State *, int) { return 1; }
+static inline int wowless_isnilableunknown(lua_State *L, int idx) { return 1; }
 
 static inline void wowless_stubcheckunknown(lua_State *L, int idx) {
   if (!wowless_isunknown(L, idx)) {
@@ -307,7 +307,7 @@ static inline void wowless_stubcheckunknown(lua_State *L, int idx) {
   }
 }
 
-static inline void wowless_stubchecknilableunknown(lua_State *, int) {}
+static inline void wowless_stubchecknilableunknown(lua_State *L, int idx) {}
 
 static inline int wowless_isnil(lua_State *L, int idx) {
   return lua_isnoneornil(L, idx);
