@@ -327,6 +327,7 @@ local function rewriteApis(apis)
       outputs = outsig(fn, ns, api),
       outstride = stride(fn.Returns),
       platform = api and api.platform,
+      protected = api and api.protected,
       secureonly = fn.Environment == 'SecureOnly' or nil,
       stubnothing = api and api.stubnothing,
       stuboutstrides = api and api.stuboutstrides,

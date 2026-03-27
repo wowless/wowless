@@ -33135,6 +33135,7 @@ GetCurrentEventID:
     type: number
 GetCurrentGlyphNameForSpell:
 GetCurrentGraphicsAPI:
+GetCurrentGraphicsSetting:
 GetCurrentGuildBankTab:
   outputs:
   - type: number
@@ -37837,6 +37838,7 @@ SetConsoleKey:
   - name: keystring
     type: string
   outputs:
+SetCurrentGraphicsSetting:
 SetCurrentGuildBankTab:
 SetCurrentTitle:
   inputs:
