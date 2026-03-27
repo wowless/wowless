@@ -1119,7 +1119,7 @@ if args.coutput then
       emit('  int i, n = lua_gettop(L);')
       emit('  for (i = %d; i <= n; i += %d) {', nsins + 1, instride)
       for j = nsins + 1, #allinps do
-        emit('    %s', check(allinps[j], 'i + ' .. (j - nsins - 1)))
+        emit('    %s', inputcheck(allinps[j], 'i + ' .. (j - nsins - 1)))
       end
       emit('  }')
     end
@@ -1188,22 +1188,26 @@ if args.coutput then
       local nsins = #inputs
       emit('static int implstub_%s(lua_State *L) {', safename(entry.name))
       if check_inputs then
-        if v.usage then
-          for i, inp in ipairs(inputs) do
-            local nilable = inp.nilable or inp.default ~= nil
-            emit(
-              '  if (!wowless_is%s%s(L, %d)) return luaL_error(L, "Usage: %s");',
-              nilable and 'nilable' or '',
-              dispatch(cinputtypes, inp.type),
-              i,
-              v.usage
-            )
-          end
-        else
-          for i, inp in ipairs(inputs) do
-            local nilable = inp.nilable or inp.default ~= nil
-            emit('  wowless_implcheck%s%s(L, %d);', nilable and 'nilable' or '', dispatch(cinputtypes, inp.type), i)
-          end
+        local function check(inp, idx)
+          local nilable = inp.nilable or inp.default ~= nil
+          return ('wowless_implcheck%s%s(L, %s);'):format(
+            nilable and 'nilable' or '',
+            dispatch(cinputtypes, inp.type),
+            idx
+          )
+        end
+        local function usagecheck(inp, idx)
+          local nilable = inp.nilable or inp.default ~= nil
+          return ('if (!wowless_is%s%s(L, %s)) return luaL_error(L, "Usage: %s");'):format(
+            nilable and 'nilable' or '',
+            dispatch(cinputtypes, inp.type),
+            idx,
+            v.usage
+          )
+        end
+        local inputcheck = v.usage and usagecheck or check
+        for i, inp in ipairs(inputs) do
+          emit('  %s', inputcheck(inp, i))
         end
         emit('  wowless_stubcheckextraargs(L, %d, %s);', nsins, cstring(entry.name))
       end
