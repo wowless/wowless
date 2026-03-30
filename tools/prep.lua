@@ -659,7 +659,7 @@ if args.coutput then
   end
 
   local function cstring(s)
-    return '"' .. s:gsub('\\', '\\\\'):gsub('"', '\\"') .. '"'
+    return '"' .. s:gsub('\\', '\\\\'):gsub('"', '\\"'):gsub('\n', '\\n'):gsub('\r', '\\r'):gsub('\t', '\\t') .. '"'
   end
 
   local coutdefaults
@@ -866,10 +866,6 @@ if args.coutput then
         impldata = ensureimpl(v.impl),
       })
     end
-  end
-
-  local function cimplstring(s)
-    return '"' .. s:gsub('\\', '\\\\'):gsub('"', '\\"'):gsub('\n', '\\n'):gsub('\r', '\\r'):gsub('\t', '\\t') .. '"'
   end
 
   local lua_value_emitters
@@ -1098,11 +1094,11 @@ if args.coutput then
     end
     local function usagecheck(inp, idx)
       local nilable = inp.nilable or inp.default ~= nil
-      return ('if (!wowless_is%s%s(L, %s)) return luaL_error(L, "Usage: %s");'):format(
+      return ('if (!wowless_is%s%s(L, %s)) return luaL_error(L, %s);'):format(
         nilable and 'nilable' or '',
         dispatch(cinputtypes, inp.type),
         idx,
-        v.usage
+        cstring('Usage: ' .. v.usage)
       )
     end
     local inputcheck = v.usage and usagecheck or check
@@ -1192,11 +1188,11 @@ if args.coutput then
         end
         local function usagecheck(inp, idx)
           local nilable = inp.nilable or inp.default ~= nil
-          return ('if (!wowless_is%s%s(L, %s)) return luaL_error(L, "Usage: %s");'):format(
+          return ('if (!wowless_is%s%s(L, %s)) return luaL_error(L, %s);'):format(
             nilable and 'nilable' or '',
             dispatch(cinputtypes, inp.type),
             idx,
-            v.usage
+            cstring('Usage: ' .. v.usage)
           )
         end
         local inputcheck = v.usage and usagecheck or check
@@ -1305,7 +1301,7 @@ if args.coutput then
         cstring(name),
         func,
         entry.secureonly and 1 or 0,
-        cimplstring(impldata.impl),
+        cstring(impldata.impl),
         #impldata.impl,
         cstring(entry.chunkname),
         mods_val,
