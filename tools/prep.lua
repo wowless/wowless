@@ -730,9 +730,6 @@ if args.coutput then
 
   local used_structures = {}
   local used_arrayofs = {}
-  local used_luaobjects = {}
-  local used_stringenums = {}
-  local used_uiobjects = {}
   local cinputtypes
   cinputtypes = {
     arrayof = function(inner)
@@ -759,7 +756,6 @@ if args.coutput then
       return 'string'
     end,
     stringenum = function(name)
-      used_stringenums[name] = true
       return 'stringenum_' .. safename(name)
     end,
     structure = function(name)
@@ -777,11 +773,9 @@ if args.coutput then
       return 'uiaddon'
     end,
     luaobject = function(name)
-      used_luaobjects[name] = true
       return 'luaobject_' .. safename(name)
     end,
     uiobject = function(name)
-      used_uiobjects[name] = true
       return 'uiobject_' .. safename(name)
     end,
     unit = function()
@@ -959,31 +953,31 @@ if args.coutput then
   if next(used_arrayofs) then
     emit('')
   end
-  for lname in sorted(used_luaobjects) do
+  for lname in sorted(luaobjects) do
     emit('static int wowless_isluaobject_%s(lua_State *L, int idx);', safename(lname))
     emit('static int wowless_isnilableluaobject_%s(lua_State *L, int idx);', safename(lname))
     emit('static void wowless_stubcheckluaobject_%s(lua_State *L, int idx);', safename(lname))
     emit('static void wowless_stubchecknilableluaobject_%s(lua_State *L, int idx);', safename(lname))
   end
-  if next(used_luaobjects) then
+  if next(luaobjects) then
     emit('')
   end
-  for sename in sorted(used_stringenums) do
+  for sename in sorted(stringenums) do
     emit('static int wowless_isstringenum_%s(lua_State *L, int idx);', safename(sename))
     emit('static int wowless_isnilablestringenum_%s(lua_State *L, int idx);', safename(sename))
     emit('static void wowless_stubcheckstringenum_%s(lua_State *L, int idx);', safename(sename))
     emit('static void wowless_stubchecknilablestringenum_%s(lua_State *L, int idx);', safename(sename))
   end
-  if next(used_stringenums) then
+  if next(stringenums) then
     emit('')
   end
-  for uname in sorted(used_uiobjects) do
+  for uname in sorted(uiobjectdata) do
     emit('static int wowless_isuiobject_%s(lua_State *L, int idx);', safename(uname))
     emit('static int wowless_isnilableuiobject_%s(lua_State *L, int idx);', safename(uname))
     emit('static void wowless_stubcheckuiobject_%s(lua_State *L, int idx);', safename(uname))
     emit('static void wowless_stubchecknilableuiobject_%s(lua_State *L, int idx);', safename(uname))
   end
-  if next(used_uiobjects) then
+  if next(uiobjectdata) then
     emit('')
   end
 
@@ -1031,7 +1025,7 @@ if args.coutput then
     emit('')
   end
 
-  for lname in sorted(used_luaobjects) do
+  for lname in sorted(luaobjects) do
     emit('static int wowless_isluaobject_%s(lua_State *L, int idx) {', safename(lname))
     emit('  return wowless_isluaobject(L, idx, %s, %d);', cstring(lname), #lname)
     emit('}')
@@ -1050,7 +1044,7 @@ if args.coutput then
     emit('')
   end
 
-  for sename in sorted(used_stringenums) do
+  for sename in sorted(stringenums) do
     emit('static int wowless_isstringenum_%s(lua_State *L, int idx) {', safename(sename))
     emit('  return wowless_isstringenum(L, idx, %s, %d);', cstring(sename), #sename)
     emit('}')
@@ -1069,7 +1063,7 @@ if args.coutput then
     emit('')
   end
 
-  for uname in sorted(used_uiobjects) do
+  for uname in sorted(uiobjectdata) do
     local target = uname:lower()
     emit('static int wowless_isuiobject_%s(lua_State *L, int idx) {', safename(uname))
     emit('  return wowless_isuiobject(L, idx, %s, %d);', cstring(target), #target)
