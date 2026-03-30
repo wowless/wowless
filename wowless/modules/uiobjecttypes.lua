@@ -43,11 +43,7 @@ return function()
 
   local function IsObjectType(obj, ty)
     ty = string.lower(ty)
-    if ty == 'object' then
-      return obj.type ~= 'font'
-    else
-      return uiobjectTypes[obj.type].isa[ty] or false
-    end
+    return uiobjectTypes[obj.type].isa[ty] or false
   end
 
   return {
