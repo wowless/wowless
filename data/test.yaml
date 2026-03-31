@@ -64,6 +64,8 @@ GetFileIDFromPath:
   GetFileIDFromPath:
 GetGlobalEnvironment:
   GetGlobalEnvironment:
+getmetatable:
+  getmetatable:
 hooksecurefunc:
   hooksecurefunc:
 IsDebugBuild:
