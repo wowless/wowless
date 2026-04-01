@@ -1,6 +1,11 @@
 local env, uiobjects = ...
 return function(name)
-  -- TODO a real implementation of GetClickFrame
   local frame = env.genv[name]
-  return frame and uiobjects.UserData(frame)
+  if frame then
+    local ud = uiobjects.UserData(frame)
+    if ud and ud.name == name then
+      return ud
+    end
+  end
+  return nil
 end
