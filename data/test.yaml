@@ -48,6 +48,10 @@ GetBuildInfo_1_15_0:
   GetBuildInfo_1_15_0:
 GetBuildInfo_3_4_2:
   GetBuildInfo_3_4_2:
+GetButtonMetatable:
+  CreateFrame:
+  GetButtonMetatable:
+  getmetatable:
 GetClassInfo:
   GetClassInfo:
 GetClassInfo_Classic:
@@ -62,6 +66,14 @@ getfenv:
   setfenv:
 GetFileIDFromPath:
   GetFileIDFromPath:
+GetFontStringMetatable:
+  CreateFrame:
+  GetFontStringMetatable:
+  getmetatable:
+GetFrameMetatable:
+  CreateFrame:
+  GetFrameMetatable:
+  getmetatable:
 GetGlobalEnvironment:
   GetGlobalEnvironment:
 getmetatable:
