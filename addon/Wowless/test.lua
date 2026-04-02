@@ -717,6 +717,7 @@ G.testsuite.sync = function()
         ['is a normal frame'] = function()
           if _G.WorldFrame then
             assertEquals('Frame', _G.WorldFrame:GetObjectType())
+            assertEquals(getmetatable(CreateFrame('Frame')), getmetatable(_G.WorldFrame))
           end
         end,
         ['is not a frame type'] = function()
