@@ -1,7 +1,10 @@
 ## Dependencies: WowlessData
 ## Interface: 120000
 ## SavedVariables: WowlessLastTestFailures
+## Notes: these notes should be ignored
 ## Notes: WoW client unit tests
+## Title: this title should be ignored
+## Title: Wowless
 util.lua
 init.lua
 framework.lua
