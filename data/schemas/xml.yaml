@@ -73,6 +73,24 @@ type:
                 record:
                   args:
                     type: string
+              structure:
+                record:
+                  apply:
+                    type:
+                      sequenceof:
+                        record:
+                          field:
+                            type: string
+                          method:
+                            required: true
+                            type: string
+                          unpack:
+                            type: flag
+                  fields:
+                    type:
+                      sequenceof: string
+                  merge_child:
+                    type: flag
               transparent: tag
         phase:
           type:
