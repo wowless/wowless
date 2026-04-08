@@ -7,7 +7,8 @@ describe('wowless.toc', function()
       local family = gt.family
       describe(gametype, function()
         it('handles empty content', function()
-          local attrs, files = parse(gametype, '')
+          local toc = parse(gametype, '')
+          local attrs, files = toc.attrs, toc.files
           assert.same({}, attrs)
           assert.same({}, files)
         end)
@@ -20,9 +21,9 @@ describe('wowless.toc', function()
             ' bbb ',
             'ccc',
           }
-          local attrs, files = parse(gametype, table.concat(lines, '\n'))
-          assert.same({ Key = 'Value' }, attrs)
-          assert.same({ 'aaa', 'bbb', 'ccc' }, files)
+          local toc = parse(gametype, table.concat(lines, '\n'))
+          assert.same({ Key = 'Value' }, toc.attrs)
+          assert.same({ 'aaa', 'bbb', 'ccc' }, toc.files)
         end)
         it('does family substitution', function()
           local lines = {
@@ -31,16 +32,16 @@ describe('wowless.toc', function()
             '',
             'a[Family]b',
           }
-          local attrs, files = parse(gametype, table.concat(lines, '\n'))
-          assert.same({ ['A' .. family .. 'Key'] = 'B' .. family .. 'Value' .. family }, attrs)
-          assert.same({ 'a' .. family .. 'b' }, files)
+          local toc = parse(gametype, table.concat(lines, '\n'))
+          assert.same({ ['A' .. family .. 'Key'] = 'B' .. family .. 'Value' .. family }, toc.attrs)
+          assert.same({ 'a' .. family .. 'b' }, toc.files)
         end)
         it('does AllowLoad filtering', function()
           local lines = {
             'algame [AllowLoad Game]',
             'alglue [AllowLoad Glue]',
           }
-          local _, files = parse(gametype, table.concat(lines, '\n'))
+          local files = parse(gametype, table.concat(lines, '\n')).files
           assert.same({ 'algame' }, files)
         end)
         it('does AllowLoadGameType filtering', function()
@@ -51,7 +52,7 @@ describe('wowless.toc', function()
             'ddd [AllowLoadGameType mists]',
             'eee [AllowLoadGameType tbc]',
           }
-          local _, files = parse(gametype, table.concat(lines, '\n'))
+          local files = parse(gametype, table.concat(lines, '\n')).files
           local expected = {
             Mists = { 'ccc', 'ddd' },
             Standard = { 'aaa' },
@@ -64,7 +65,7 @@ describe('wowless.toc', function()
     end
     it('handles multiple filters', function()
       local line = 'aaa [AllowLoadGameType standard] [AllowLoadEnvironment Global]'
-      local _, files = parse('Standard', line)
+      local files = parse('Standard', line).files
       assert.same({ 'aaa' }, files)
     end)
   end)

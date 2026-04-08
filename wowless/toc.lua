@@ -73,7 +73,7 @@ local function parse(gametype, content)
       end
     end
   end
-  return attrs, files
+  return { attrs = attrs, files = files }
 end
 
 return {

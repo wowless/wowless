@@ -683,11 +683,11 @@ return function(
 
   local function parseToc(tocFile, content)
     local dir = path.dirname(tocFile)
-    local attrs, files = tocutil.parse(gametype, content)
-    for i, f in ipairs(files) do
-      files[i] = path.join(dir, f)
+    local toc = tocutil.parse(gametype, content)
+    for i, f in ipairs(toc.files) do
+      toc.files[i] = path.join(dir, f)
     end
-    return { attrs = attrs, files = files }
+    return toc
   end
 
   local function resolveTocDir(tocDir)
