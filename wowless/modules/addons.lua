@@ -1,5 +1,6 @@
-return function()
+return function(datalua)
   local addons = {}
+  local tocversion = datalua.build.tocversion
   local function GetAddOnInfo(addon)
     if not addon then
       return 'FIXME', nil, nil, false, 'MISSING', 'INSECURE'
@@ -10,6 +11,15 @@ return function()
     end
   end
 
+  local function GetAddOnInterfaceVersion(addon)
+    if not addon then
+      return 0
+    end
+    local v = addon.interface or 0
+    -- The interface number in a TOC is a fixed value that may be too high for non-retail products.
+    return v <= tocversion and v or 0
+  end
+
   local function GetNumAddOns()
     return #addons
   end
@@ -17,6 +27,7 @@ return function()
   return {
     addons = addons,
     GetAddOnInfo = GetAddOnInfo,
+    GetAddOnInterfaceVersion = GetAddOnInterfaceVersion,
     GetNumAddOns = GetNumAddOns,
   }
 end

@@ -1038,6 +1038,7 @@ C_AddOns.GetAddOnInfo:
   - name: security
     type: string
 C_AddOns.GetAddOnInterfaceVersion:
+  impl: GetAddOnInterfaceVersion
   inputs:
   - name: name
     type: uiAddon

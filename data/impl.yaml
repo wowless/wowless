@@ -303,6 +303,9 @@ GetAddOnEnableState:
 GetAddOnInfo:
   moduledelegate:
     name: addons
+GetAddOnInterfaceVersion:
+  moduledelegate:
+    name: addons
 GetAddOnMetadata:
   impl:
 GetAuctionItemSubClasses:

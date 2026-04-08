@@ -40,6 +40,8 @@ errorhandler:
   geterrorhandler:
   securecallfunction:
   seterrorhandler:
+GetAddOnInterfaceVersion:
+  GetAddOnInterfaceVersion:
 GetAddOnMetadata:
   GetAddOnMetadata:
 GetBuildInfo_10_1:
