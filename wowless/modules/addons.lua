@@ -16,7 +16,6 @@ return function(datalua)
       return 0
     end
     local v = addon.interface or 0
-    -- The interface number in a TOC is a fixed value that may be too high for non-retail products.
     return v <= tocversion and v or 0
   end
 
