@@ -52,14 +52,17 @@ local function parse(gametype, content)
   local gts = assert(gttokens[gametype])
   content = content:gsub('%[Game%]', gametype)
   content = content:gsub('%[Family%]', gametypes[gametype].family)
-  local attrs = {}
-  local files = {}
+  local toc = { attrs = {}, files = {} }
   for line in content:gmatch('[^\r\n]+') do
     line = line:match('^%s*(.-)%s*$')
     if line:sub(1, 3) == '## ' then
       local key, value = line:match('([^:]+): (.*)', 4)
       if key then
-        attrs[key] = value
+        if key == 'Interface' then
+          toc.interface = tonumber(value)
+        else
+          toc.attrs[key] = value
+        end
       end
     elseif line ~= '' and line:sub(1, 1) ~= '#' then
       local file, filterstr = line:match('^([^%s]+)(.*)$')
@@ -69,11 +72,11 @@ local function parse(gametype, content)
         allok = allok and ok
       end
       if allok then
-        table.insert(files, file)
+        table.insert(toc.files, file)
       end
     end
   end
-  return { attrs = attrs, files = files }
+  return toc
 end
 
 return {

@@ -25,6 +25,16 @@ describe('wowless.toc', function()
           assert.same({ Key = 'Value' }, toc.attrs)
           assert.same({ 'aaa', 'bbb', 'ccc' }, toc.files)
         end)
+        it('handles Interface field', function()
+          local lines = {
+            '## Interface: 120001',
+            '## Key: Value',
+          }
+          local toc = parse(gametype, table.concat(lines, '\n'))
+          assert.same(120001, toc.interface)
+          assert.same({ Key = 'Value' }, toc.attrs)
+          assert.Nil(toc.attrs.Interface)
+        end)
         it('does family substitution', function()
           local lines = {
             '# [Family] comment blah blah',

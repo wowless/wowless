@@ -5,7 +5,7 @@ local kv = {
 }
 local knil = {
   Dependencies = false,
-  Interface = false,
+  Interface = true,
   SavedVariables = false,
   WowlessNonsense = true,
 }
