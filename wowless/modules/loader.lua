@@ -928,8 +928,8 @@ return function(
     for _, v in pairs(addonData) do
       if v.loaded then
         local t = {}
-        for _, attr in ipairs({ 'SavedVariables', 'SavedVariablesPerCharacter' }) do
-          for var in (v.attrs[attr] or ''):gmatch('[^, ]+') do
+        for _, attr in ipairs({ 'savedvariables', 'savedvariablespercharacter' }) do
+          for _, var in ipairs(v[attr] or {}) do
             local val = genv[var]
             if val ~= nil then
               table.insert(t, var)

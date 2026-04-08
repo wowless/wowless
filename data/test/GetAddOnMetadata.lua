@@ -6,7 +6,7 @@ local kv = {
 local knil = {
   Dependencies = false,
   Interface = true,
-  SavedVariables = false,
+  SavedVariables = true,
   WowlessNonsense = true,
 }
 local tests = {}

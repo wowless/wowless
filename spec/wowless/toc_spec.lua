@@ -25,6 +25,16 @@ describe('wowless.toc', function()
           assert.same({ Key = 'Value' }, toc.attrs)
           assert.same({ 'aaa', 'bbb', 'ccc' }, toc.files)
         end)
+        it('handles SavedVariables field', function()
+          local lines = {
+            '## SavedVariables: Foo, Bar Baz',
+            '## Key: Value',
+          }
+          local toc = parse(gametype, table.concat(lines, '\n'))
+          assert.same({ 'Foo', 'Bar', 'Baz' }, toc.savedvariables)
+          assert.same({ Key = 'Value' }, toc.attrs)
+          assert.Nil(toc.attrs.SavedVariables)
+        end)
         it('handles Interface field', function()
           local lines = {
             '## Interface: 120001',
