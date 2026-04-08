@@ -60,6 +60,12 @@ local function parse(gametype, content)
       if key then
         if key == 'Interface' then
           toc.interface = tonumber(value)
+        elseif key == 'SavedVariables' or key == 'SavedVariablesPerCharacter' then
+          local arr = {}
+          for var in value:gmatch('[^, ]+') do
+            table.insert(arr, var)
+          end
+          toc[key:lower()] = arr
         else
           toc.attrs[key] = value
         end
