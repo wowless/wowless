@@ -88,6 +88,24 @@ local function run(cfg)
   modules.luaobjects.LoadTypes(modules)
   return withglobaltable(genv, function()
     loader.initAddons()
+    if cfg.dotfile then
+      local lines = { 'digraph addons {' }
+      local addonData = loader.addonData
+      for _, addon in ipairs(addonData) do
+        local attrs = addon.signed and ' [style=filled fillcolor=lightblue]' or ''
+        table.insert(lines, string.format('  %q%s;', addon.name, attrs))
+        for _, dep in ipairs(addon.deps) do
+          table.insert(lines, string.format('  %q -> %q;', addon.name, dep))
+        end
+        for _, dep in ipairs(addon.optionaldeps) do
+          table.insert(lines, string.format('  %q -> %q [style=dashed];', addon.name, dep))
+        end
+      end
+      table.insert(lines, '}')
+      local f = assert(io.open(cfg.dotfile, 'w'))
+      f:write(table.concat(lines, '\n') .. '\n')
+      f:close()
+    end
     if cfg.dir then
       loader.loadFrameXml()
     end

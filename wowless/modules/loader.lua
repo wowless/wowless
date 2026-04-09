@@ -935,6 +935,7 @@ return function(
   end
 
   return {
+    addonData = addonData,
     bindings = bindings,
     initAddons = initAddons,
     loadAddon = loadAddon,
