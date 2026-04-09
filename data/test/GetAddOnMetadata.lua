@@ -4,10 +4,10 @@ local kv = {
   Title = 'Wowless',
 }
 local knil = {
-  Dependencies = true,
-  Interface = true,
-  SavedVariables = true,
-  WowlessNonsense = true,
+  'Dependencies',
+  'Interface',
+  'SavedVariables',
+  'WowlessNonsense',
 }
 local tests = {}
 for k, v in pairs(kv) do
@@ -15,14 +15,10 @@ for k, v in pairs(kv) do
     return T.match(1, v, GetAddOnMetadata(T.addonName, k))
   end
 end
-for k, v in pairs(knil) do
+for _, k in ipairs(knil) do
   assert(not tests[k])
   tests[k] = function()
-    if v or not T.wowless then
-      return T.match(1, nil, GetAddOnMetadata(T.addonName, k))
-    else
-      assert(T.retn(1, GetAddOnMetadata(T.addonName, k) ~= nil)) -- issue #581
-    end
+    return T.match(1, nil, GetAddOnMetadata(T.addonName, k))
   end
 end
 return tests
