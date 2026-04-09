@@ -394,6 +394,10 @@ AUCTION_MULTISELL_UPDATE:
     type: number
   - name: totalToCreate
     type: number
+AURA_DATA_PROVIDER_SWITCH:
+  payload:
+  - name: useRealDataProvider
+    type: boolean
 AUTH_CHALLENGE_FINISHED:
   payload:
 AUTOFOLLOW_BEGIN:
@@ -3500,6 +3504,30 @@ CINEMATIC_START:
       enum: CameraModeAspectRatio
 CINEMATIC_STOP:
   payload:
+CLASS_TALENTS_SWITCH_TO_LOADOUT_BY_INDEX:
+  callback: true
+  noscript: true
+  payload:
+  - name: loadoutIndex
+    type: number
+CLASS_TALENTS_SWITCH_TO_LOADOUT_BY_NAME:
+  callback: true
+  noscript: true
+  payload:
+  - name: loadoutName
+    type: string
+CLASS_TALENTS_SWITCH_TO_SPECIALIZATION_BY_INDEX:
+  callback: true
+  noscript: true
+  payload:
+  - name: specIndex
+    type: number
+CLASS_TALENTS_SWITCH_TO_SPECIALIZATION_BY_NAME:
+  callback: true
+  noscript: true
+  payload:
+  - name: specName
+    type: string
 CLASS_TRIAL_TIMER_START:
   payload:
 CLASS_TRIAL_UPGRADE_COMPLETE:
@@ -7075,6 +7103,8 @@ QUEST_ACCEPT_CONFIRM:
     type: string
   - name: questTitle
     type: string
+  - name: questID
+    type: number
 QUEST_ACCEPTED:
   payload:
   - name: questId
@@ -8545,6 +8575,16 @@ UNIT_AURA:
   - name: updateInfo
     type:
       structure: UnitAuraUpdateInfo
+UNIT_AURA_BLOCK_LIST_CLEARED:
+  payload:
+  - name: unitTarget
+    type: unit
+UNIT_AURA_BLOCKED:
+  payload:
+  - name: unitTarget
+    type: unit
+  - name: auraInstanceID
+    type: number
 UNIT_CHEAT_TOGGLE_EVENT:
   payload:
 UNIT_CLASSIFICATION_CHANGED:

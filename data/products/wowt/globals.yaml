@@ -252,6 +252,10 @@ Constants:
     SPELL_ID_DISMISS_PET: 2641
   SpellCooldownConsts:
     GLOBAL_RECOVERY_CATEGORY: 133
+  TalentConsts:
+    NumTalentColumns: 3
+  TalentTierConstants:
+    MAX_TALENT_TIERS: 7
   TieredEntranceConsts:
     TIERED_ENTRANCE_TIER_SCORE_VALUE_MAP_ID: 3
     TIERED_ENTRANCE_TIER_SCORE_VALUE_PLAYER_CONDITION_ID: 6
@@ -688,14 +692,15 @@ Enum:
     NumValues: 3
   AddOnRestrictionType:
     ChallengeMode: 2
+    Chat: 5
     Combat: 0
     Encounter: 1
     Map: 4
     PvPMatch: 3
   AddOnRestrictionTypeMeta:
-    MaxValue: 4
+    MaxValue: 5
     MinValue: 0
-    NumValues: 5
+    NumValues: 6
   AddOnSecurityStatus:
     Banned: 2
     Insecure: 1
@@ -2021,14 +2026,6 @@ Enum:
     MaxValue: 4
     MinValue: 0
     NumValues: 5
-  ChatMessagingLockdownReason:
-    ActiveEncounter: 0
-    ActiveMythicKeystoneOrChallengeMode: 1
-    ActivePvPMatch: 2
-  ChatMessagingLockdownReasonMeta:
-    MaxValue: 2
-    MinValue: 0
-    NumValues: 3
   ChatMessagingLockdownRestriction:
     DropIncomingAddonMessages: 1
     DropOutgoingAddonMessages: 2
@@ -3713,12 +3710,13 @@ Enum:
     ShowTalkingHeadFrame: 14
     ShowTargetAndFocus: 3
     ShowTimerBars: 25
+    ShowTotemActionBar: 33
     ShowVehicleLeaveButton: 15
     ShowVehicleSeatIndicator: 26
   EditModeAccountSettingMeta:
-    MaxValue: 32
+    MaxValue: 33
     MinValue: 0
-    NumValues: 33
+    NumValues: 34
   EditModeActionBarSetting:
     AlwaysShowButtons: 9
     DeprecatedSnapToSide: 7
@@ -3978,13 +3976,14 @@ Enum:
     StatusTrackingBar: 15
     TalkingHeadFrame: 7
     TimerBars: 17
+    TotemActionBar: 24
     UnitFrame: 3
     VehicleLeaveButton: 9
     VehicleSeatIndicator: 18
   EditModeSystemMeta:
-    MaxValue: 23
+    MaxValue: 24
     MinValue: 0
-    NumValues: 24
+    NumValues: 25
   EditModeTimerBarsSetting:
     Size: 0
   EditModeTimerBarsSettingMeta:
@@ -3993,6 +3992,7 @@ Enum:
     NumValues: 1
   EditModeUnitFrameSetting:
     AuraOrganizationType: 18
+    BigDefensiveIconSize: 21
     BuffsOnTop: 2
     CastBarOnSide: 7
     CastBarUnderneath: 1
@@ -4014,9 +4014,9 @@ Enum:
     ViewArenaSize: 17
     ViewRaidSize: 9
   EditModeUnitFrameSettingMeta:
-    MaxValue: 20
+    MaxValue: 21
     MinValue: 0
-    NumValues: 21
+    NumValues: 22
   EditModeUnitFrameSystemIndices:
     Arena: 7
     Boss: 6
@@ -8226,6 +8226,83 @@ Enum:
     MaxValue: 9
     MinValue: 0
     NumValues: 10
+  PurchaseResult:
+    ErrorAuthorizingPayment: 37
+    ErrorBattlepayDisabled: 14
+    ErrorBattlepayTemporarilyUnavailable: 13
+    ErrorBattlepayTimeoutMopAndRisk: 11
+    ErrorBattlepayTimeoutValidatePurchase: 56
+    ErrorBattlepayTimeoutValidationHash: 62
+    ErrorBlockedByParentalControls: 33
+    ErrorBuyingProductNotAllowedInGlueScreen: 27
+    ErrorBuyingProductNotAllowedInWorld: 32
+    ErrorCharacterUpgradeOperationInProgress: 51
+    ErrorClientCheckoutCanceledOrFailed: 63
+    ErrorClientCheckoutTimeout: 60
+    ErrorClientDeclined: 4
+    ErrorClientDeclinedChallenge: 41
+    ErrorClientGone: 9
+    ErrorClientRestricted: 66
+    ErrorClientTimeout: 3
+    ErrorClientTimeoutChallenge: 40
+    ErrorCommerceServerDisabled: 48
+    ErrorCouldNotGetValidationHash: 64
+    ErrorCurrencyInvalidInRegion: 12
+    ErrorDistributionObjectAlreadyAssigned: 20
+    ErrorDistributionObjectExpansionBlocked: 45
+    ErrorDistributionObjectInvalidChoice: 35
+    ErrorDistributionObjectInvalidTarget: 42
+    ErrorDistributionObjectNotFound: 19
+    ErrorDistributionObjectTrialBlocked: 44
+    ErrorDistributionObjectWrongGameAccount: 65
+    ErrorFailedOldPurchaseFlow: 59
+    ErrorFailedToCreatePurchaseRecord: 5
+    ErrorFailedToGetPurchaseID: 6
+    ErrorFailedToSaveClientCheckoutStatus: 58
+    ErrorFailedToSaveMopAndRiskResponse: 8
+    ErrorFailedToSaveMopAndRiskStatus: 7
+    ErrorFailedToSavePlaceOrderStatus: 10
+    ErrorFailedToSaveRedeemTokenStatus: 67
+    ErrorFailedToSaveValidatePurchaseResponse: 55
+    ErrorFailedToSaveValidatePurchaseStatus: 54
+    ErrorFailedToSaveValidationHashStatus: 61
+    ErrorFailedToWriteVasLicenseID: 50
+    ErrorFailedToWriteVasPurchaseID: 49
+    ErrorFixedLicenseProductAlreadyExists: 43
+    ErrorInManualReview: 71
+    ErrorInvalidCreditCardExpiryDate: 36
+    ErrorInvalidDeviceID: 53
+    ErrorInvalidPlatform: 52
+    ErrorInvalidProduct: 16
+    ErrorInvalidPurchaseID: 68
+    ErrorInvalidRegionGroupMask: 17
+    ErrorMopAndRiskAmqpRpcFailed: 22
+    ErrorMopAndRiskNotEnoughBalance: 28
+    ErrorMopAndRiskNoValidPaymentMethods: 25
+    ErrorMopAndRiskRpcErrorFromBattlepay: 23
+    ErrorMopAndRiskUnexpectedResponseFromBattlepay: 24
+    ErrorNoStorePurchaseFlagIsSet: 34
+    ErrorOrderCanceledPriceChange: 26
+    ErrorOrderFailed: 2
+    ErrorOverSpendingLimit: 39
+    ErrorOwnsConsumableToken: 46
+    ErrorPaymentProviderDeniedPayment: 38
+    ErrorPlaceOrderNotEnoughBalance: 29
+    ErrorProductInvalidInRegion: 18
+    ErrorProductNotPurchasable: 57
+    ErrorProgrammerManualFail: 30
+    ErrorRiskDenied: 1
+    ErrorRiskResponseMissingScore: 21
+    ErrorServerRestarted: 15
+    ErrorThrottledByUserServer: 31
+    ErrorTokenRedemptionOrderFailed: 69
+    ErrorTooManyTokens: 47
+    ErrorVasTransactionCreateFailed: 70
+    Ok: 0
+  PurchaseResultMeta:
+    MaxValue: 71
+    MinValue: 0
+    NumValues: 72
   PvPFaction:
     Alliance: 1
     Horde: 0
@@ -8946,12 +9023,13 @@ Enum:
     Shown: 32
     TexCoords: 8192
     Text: 8
+    TooltipTexture: 1048576
     Toplevel: 4
     VertexColor: 2048
   SecretAspectMeta:
-    MaxValue: 524288
+    MaxValue: 1048576
     MinValue: 1
-    NumValues: 26
+    NumValues: 27
   SelfResurrectOptionType:
     Item: 1
     Spell: 0

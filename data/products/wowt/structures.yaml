@@ -10,6 +10,8 @@ AddPrivateAuraAnchorArgs:
       nilable: true
       type:
         structure: PrivateAuraIconInfo
+    isContainer:
+      type: boolean
     parent:
       type:
         uiobject: Frame
@@ -6124,6 +6126,9 @@ C_PvP.PvpBrawlInfo:
       type: string
     shortDescription:
       type: string
+    shouldHideRewardIcon:
+      default: false
+      type: boolean
     timeLeftUntilNextChange:
       nilable: true
       type: number

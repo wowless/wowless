@@ -2035,6 +2035,13 @@ Cooldown:
         nilable: true
         type:
           uiobject: FontString
+    GetCountdownFormatter:
+      inputs:
+      outputs:
+      - name: formatter
+        nilable: true
+        type:
+          luaobject: NumericFormatter
     GetCountdownMillisecondsThreshold:
       inputs:
       outputs:
@@ -2172,6 +2179,13 @@ Cooldown:
       inputs:
       - name: fontName
         type: string
+      outputs:
+    SetCountdownFormatter:
+      inputs:
+      - name: formatter
+        nilable: true
+        type:
+          luaobject: NumericFormatter
       outputs:
     SetCountdownMillisecondsThreshold:
       inputs:
@@ -4677,11 +4691,11 @@ GameTooltip:
         type: number
       - name: colorB
         type: number
-      - name: alpha
-        nilable: true
+      - default: 1
+        name: alpha
         type: number
-      - name: wrap
-        nilable: true
+      - default: false
+        name: wrap
         type: boolean
       outputs:
   scripts:

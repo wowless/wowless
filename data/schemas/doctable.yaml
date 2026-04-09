@@ -156,6 +156,8 @@ type:
               type: flag
             RequiresCommentator:
               type: flag
+            RequiresComparableUnitTokens:
+              type: flag
             RequiresFontStringTextAccess:
               type: flag
             RequiresFriendList:
@@ -230,6 +232,8 @@ type:
                       required: true
                       type: boolean
                     NilableContents:
+                      type: flag
+                    SecretValue:
                       type: flag
                     StrideIndex:
                       type: number
@@ -317,6 +321,8 @@ type:
             SecretWhenUnitSpellCastRestricted:
               type: flag
             SecretWhenUnitSpellCastsRestricted:
+              type: flag
+            SecretWhenUnitStatsRestricted:
               type: flag
             SecretWhenUnitThreatStateRestricted:
               type: flag

@@ -430,7 +430,7 @@ C_ActionBar.FindPetActionButtons:
 C_ActionBar.FindSpellActionButtons:
   inputs:
   - name: spellID
-    type: number
+    type: string
   mayreturnnothing: true
   outputs:
   - name: slots
@@ -483,6 +483,9 @@ C_ActionBar.GetActionCooldownDuration:
   inputs:
   - name: actionID
     type: number
+  - default: false
+    name: ignoreGCD
+    type: boolean
   outputs:
   - name: duration
     type:
@@ -686,7 +689,7 @@ C_ActionBar.HasRangeRequirements:
 C_ActionBar.HasSpellActionButtons:
   inputs:
   - name: spellID
-    type: number
+    type: string
   outputs:
   - name: hasSpellActionButtons
     type: boolean
@@ -809,7 +812,7 @@ C_ActionBar.IsItemAction:
 C_ActionBar.IsOnBarOrSpecialBar:
   inputs:
   - name: spellID
-    type: number
+    type: string
   outputs:
   - name: isOnBarOrSpecialBar
     type: boolean
@@ -876,6 +879,13 @@ C_ActionBar.UnregisterActionUIButton:
     type:
       uiobject: CheckButton
   outputs:
+C_ActionBar.UsesActionText:
+  inputs:
+  - name: actionID
+    type: number
+  outputs:
+  - name: usesActionText
+    type: boolean
 C_AddOnProfiler.AddMeasuredCallEvent:
   inputs:
   - name: name
@@ -4905,10 +4915,6 @@ C_ChatInfo.InChatMessagingLockdown:
   outputs:
   - name: isRestricted
     type: boolean
-  - name: lockdownReason
-    nilable: true
-    type:
-      enum: ChatMessagingLockdownReason
 C_ChatInfo.IsAddonMessagePrefixRegistered:
   inputs:
   - name: prefix
@@ -5339,6 +5345,26 @@ C_ClassTalents.SetUsesSharedActionBars:
   - name: usesShared
     type: boolean
   outputs:
+C_ClassTalents.SwitchToLoadoutByIndex:
+  inputs:
+  - name: loadoutIndex
+    type: number
+  outputs:
+C_ClassTalents.SwitchToLoadoutByName:
+  inputs:
+  - name: loadoutName
+    type: string
+  outputs:
+C_ClassTalents.SwitchToSpecializationByIndex:
+  inputs:
+  - name: specIndex
+    type: number
+  outputs:
+C_ClassTalents.SwitchToSpecializationByName:
+  inputs:
+  - name: specName
+    type: string
+  outputs:
 C_ClassTalents.UpdateLastSelectedSavedConfigID:
   inputs:
   - name: specID
@@ -5367,7 +5393,7 @@ C_ClassTrial.IsClassTrialCharacter:
 C_ClickBindings.CanSpellBeClickBound:
   inputs:
   - name: spellID
-    type: number
+    type: string
   outputs:
   - name: canBeBound
     type: boolean
@@ -6692,6 +6718,13 @@ C_ColorUtil.WrapTextInColorCode:
   outputs:
   - name: coloredText
     type: string
+C_CombatAudioAlert.AddToKnownTargetingList:
+  inputs:
+  - name: unit
+    type: unit
+  outputs:
+  - name: added
+    type: boolean
 C_CombatAudioAlert.GetCategoryVoice:
   inputs:
   - name: category
@@ -6744,6 +6777,13 @@ C_CombatAudioAlert.IsEnabled:
   inputs:
   outputs:
   - name: isEnabled
+    type: boolean
+C_CombatAudioAlert.RemoveFromKnownTargetingList:
+  inputs:
+  - name: unit
+    type: unit
+  outputs:
+  - name: removed
     type: boolean
 C_CombatAudioAlert.SetCategoryVoice:
   inputs:
@@ -7688,6 +7728,39 @@ C_Commentator.ResetSettings:
 C_Commentator.ResetTrackedAuras:
   inputs:
   outputs:
+C_Commentator.SendAddonMessage:
+  inputs:
+  - name: prefix
+    type: string
+  - name: message
+    type: string
+  - name: chatType
+    nilable: true
+    type: string
+  - name: target
+    nilable: true
+    type: string
+  outputs:
+  - name: result
+    type:
+      enum: SendAddonMessageResult
+C_Commentator.SendAddonMessageLogged:
+  inputs:
+  - name: prefix
+    type: string
+  - name: message
+    type: string
+  - name: chatType
+    nilable: true
+    type: string
+  - name: target
+    nilable: true
+    type: string
+  outputs:
+  - name: result
+    nilable: true
+    type:
+      enum: SendAddonMessageResult
 C_Commentator.SetAdditionalCameraWeight:
   inputs:
   - name: teamIndex
@@ -9998,7 +10071,7 @@ C_DelvesUI.GetCreatureDisplayInfoForCompanion:
 C_DelvesUI.GetCurioLink:
   inputs:
   - name: spellID
-    type: number
+    type: string
   - name: rarity
     type:
       enum: CurioRarity
@@ -18110,7 +18183,7 @@ C_MountJournal.GetMountFromItem:
 C_MountJournal.GetMountFromSpell:
   inputs:
   - name: spellID
-    type: number
+    type: string
   outputs:
   - name: mountID
     nilable: true
@@ -18628,6 +18701,11 @@ C_NeighborhoodInitiative.GetActiveNeighborhood:
   outputs:
   - name: neighborhoodGUID
     type: string
+C_NeighborhoodInitiative.GetAvailableHouseXP:
+  inputs:
+  outputs:
+  - name: availabeXP
+    type: number
 C_NeighborhoodInitiative.GetInitiativeActivityLogInfo:
   inputs:
   outputs:
@@ -23213,6 +23291,15 @@ C_SeasonInfo.GetCurrentDisplaySeasonID:
   outputs:
   - name: seasonID
     type: number
+C_Secrets.CanCompareUnitTokens:
+  inputs:
+  - name: unit1
+    type: unit
+  - name: unit2
+    type: unit
+  outputs:
+  - name: isUnitComparisonPermitted
+    type: boolean
 C_Secrets.GetPowerTypeSecrecy:
   inputs:
   - name: powerType
@@ -23396,6 +23483,11 @@ C_Secrets.ShouldUnitSpellCastingBeSecret:
     type: unit
   outputs:
   - name: isSpellCastingSecret
+    type: boolean
+C_Secrets.ShouldUnitStatsBeSecret:
+  inputs:
+  outputs:
+  - name: hasSecretStats
     type: boolean
 C_Secrets.ShouldUnitThreatStateBeSecret:
   inputs:
@@ -24274,7 +24366,7 @@ C_Spell.GetItemModifiedAppearancesApplied:
 C_Spell.GetMawPowerBorderAtlasBySpellID:
   inputs:
   - name: spellID
-    type: number
+    type: string
   mayreturnnothing: true
   outputs:
   - name: rarityBorderAtlas
@@ -24282,7 +24374,7 @@ C_Spell.GetMawPowerBorderAtlasBySpellID:
 C_Spell.GetMawPowerLinkBySpellID:
   inputs:
   - name: spellID
-    type: number
+    type: string
   mayreturnnothing: true
   outputs:
   - name: link
@@ -24358,6 +24450,9 @@ C_Spell.GetSpellCooldownDuration:
   inputs:
   - name: spellIdentifier
     type: string
+  - default: false
+    name: ignoreGCD
+    type: boolean
   mayreturnnothing: true
   outputs:
   - name: duration
@@ -24440,7 +24535,7 @@ C_Spell.GetSpellLossOfControlCooldownInfo:
 C_Spell.GetSpellMaxCumulativeAuraApplications:
   inputs:
   - name: spellID
-    type: number
+    type: string
   outputs:
   - name: cumulativeAura
     type: number
@@ -24863,6 +24958,9 @@ C_SpellBook.GetSpellBookItemCooldownDuration:
   - name: spellBookItemSpellBank
     type:
       enum: SpellBookSpellBank
+  - default: false
+    name: ignoreGCD
+    type: boolean
   mayreturnnothing: true
   outputs:
   - name: duration
@@ -26479,7 +26577,7 @@ C_TooltipInfo.GetMinimapMouseover:
 C_TooltipInfo.GetMountBySpellID:
   inputs:
   - name: spellID
-    type: number
+    type: string
   - name: checkIndoors
     nilable: true
     type: boolean
@@ -26784,7 +26882,7 @@ C_TooltipInfo.GetSpellBookItem:
 C_TooltipInfo.GetSpellByID:
   inputs:
   - name: spellID
-    type: number
+    type: string
   - name: isPet
     nilable: true
     type: boolean
@@ -29365,7 +29463,25 @@ C_TransmogOutfitInfo.GetOutfitInfo:
     type: number
   mayreturnnothing: true
   outputs:
-  - name: outfitsInfo
+  - name: outfitInfo
+    type:
+      structure: C_TransmogOutfitInfo.TransmogOutfitEntryInfo
+C_TransmogOutfitInfo.GetOutfitInfoByName:
+  inputs:
+  - name: name
+    type: string
+  mayreturnnothing: true
+  outputs:
+  - name: outfitInfo
+    type:
+      structure: C_TransmogOutfitInfo.TransmogOutfitEntryInfo
+C_TransmogOutfitInfo.GetOutfitInfoByPlayerFacingIndex:
+  inputs:
+  - name: playerFacingOutfitIndex
+    type: number
+  mayreturnnothing: true
+  outputs:
+  - name: outfitInfo
     type:
       structure: C_TransmogOutfitInfo.TransmogOutfitEntryInfo
 C_TransmogOutfitInfo.GetOutfitsInfo:
@@ -30530,6 +30646,13 @@ C_UIWidgetManager.UnregisterUnitForWidgetUpdates:
     name: isGuid
     type: boolean
   outputs:
+C_UnitAuras.AddBlockedAura:
+  inputs:
+  - name: unit
+    type: unit
+  - name: auraInstanceID
+    type: number
+  outputs:
 C_UnitAuras.AddPrivateAuraAnchor:
   inputs:
   - name: args
@@ -30551,17 +30674,22 @@ C_UnitAuras.AddPrivateAuraAppliedSound:
 C_UnitAuras.AuraIsBigDefensive:
   inputs:
   - name: spellID
-    type: number
+    type: string
   outputs:
   - name: isBigDefensive
     type: boolean
 C_UnitAuras.AuraIsPrivate:
   inputs:
   - name: spellID
-    type: number
+    type: string
   outputs:
   - name: isPrivate
     type: boolean
+C_UnitAuras.ClearBlockedAuras:
+  inputs:
+  - name: unit
+    type: unit
+  outputs:
 C_UnitAuras.DoesAuraHaveExpirationTime:
   inputs:
   - name: auraInstanceUnit
@@ -30594,7 +30722,7 @@ C_UnitAuras.GetAuraBaseDuration:
     type: number
   - name: spellID
     nilable: true
-    type: number
+    type: string
   outputs:
   - name: newDuration
     nilable: true
@@ -30710,7 +30838,7 @@ C_UnitAuras.GetBuffDataByIndex:
 C_UnitAuras.GetCooldownAuraBySpellID:
   inputs:
   - name: spellID
-    type: number
+    type: string
   outputs:
   - name: cooldownSpellID
     nilable: true
@@ -30732,7 +30860,7 @@ C_UnitAuras.GetDebuffDataByIndex:
 C_UnitAuras.GetPlayerAuraBySpellID:
   inputs:
   - name: spellID
-    type: number
+    type: string
   outputs:
   - name: aura
     nilable: true
@@ -30746,7 +30874,7 @@ C_UnitAuras.GetRefreshExtendedDuration:
     type: number
   - name: spellID
     nilable: true
-    type: number
+    type: string
   outputs:
   - name: newDuration
     nilable: true
@@ -30756,7 +30884,7 @@ C_UnitAuras.GetUnitAuraBySpellID:
   - name: unit
     type: unit
   - name: spellID
-    type: number
+    type: string
   outputs:
   - name: aura
     nilable: true
@@ -30826,6 +30954,9 @@ C_UnitAuras.RemovePrivateAuraAppliedSound:
   - name: privateAuraSoundID
     type: number
   outputs:
+C_UnitAuras.ResetAuraDataProvider:
+  inputs:
+  outputs:
 C_UnitAuras.SetPrivateWarningTextAnchor:
   inputs:
   - name: parent
@@ -30835,6 +30966,9 @@ C_UnitAuras.SetPrivateWarningTextAnchor:
     nilable: true
     type:
       structure: AnchorBinding
+  outputs:
+C_UnitAuras.SwitchAuraDataProvider:
+  inputs:
   outputs:
 C_UnitAuras.TriggerPrivateAuraShowDispelType:
   inputs:
@@ -34646,14 +34780,6 @@ GetMasteryEffect:
 GetMaxBattlefieldID:
   outputs:
   - type: number
-GetMaxCombatRatingBonus:
-  inputs:
-  - name: ratingIndex
-    type: number
-  outputs:
-  - name: result
-    nilable: true
-    type: number
 GetMaximumExpansionLevel:
   inputs:
   outputs:
@@ -39369,6 +39495,16 @@ UnitHasLFGRandomCooldown:
     type: unit
   outputs:
   - name: value
+    type: boolean
+UnitHasPowerType:
+  inputs:
+  - name: unitToken
+    type: unit
+  - name: powerType
+    type:
+      enum: PowerType
+  outputs:
+  - name: hasPower
     type: boolean
 UnitHasRelicSlot:
   inputs:
