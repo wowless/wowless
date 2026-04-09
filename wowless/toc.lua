@@ -52,7 +52,7 @@ local function parse(gametype, content)
   local gts = assert(gttokens[gametype])
   content = content:gsub('%[Game%]', gametype)
   content = content:gsub('%[Family%]', gametypes[gametype].family)
-  local toc = { attrs = {}, files = {} }
+  local toc = { attrs = {}, deps = {}, files = {}, optionaldeps = {} }
   for line in content:gmatch('[^\r\n]+') do
     line = line:match('^%s*(.-)%s*$')
     if line:sub(1, 3) == '## ' then
@@ -66,6 +66,14 @@ local function parse(gametype, content)
             table.insert(arr, var)
           end
           toc[key:lower()] = arr
+        elseif key:match('^OptionalDep') then
+          for dep in value:gmatch('[^, ]+') do
+            table.insert(toc.optionaldeps, dep)
+          end
+        elseif key:match('^Dep') or key:match('^RequiredDep') then
+          for dep in value:gmatch('[^, ]+') do
+            table.insert(toc.deps, dep)
+          end
         else
           toc.attrs[key] = value
         end

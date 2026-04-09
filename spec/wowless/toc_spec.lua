@@ -8,9 +8,10 @@ describe('wowless.toc', function()
       describe(gametype, function()
         it('handles empty content', function()
           local toc = parse(gametype, '')
-          local attrs, files = toc.attrs, toc.files
-          assert.same({}, attrs)
-          assert.same({}, files)
+          assert.same({}, toc.attrs)
+          assert.same({}, toc.deps)
+          assert.same({}, toc.files)
+          assert.same({}, toc.optionaldeps)
         end)
         it('does basic parsing', function()
           local lines = {
@@ -34,6 +35,37 @@ describe('wowless.toc', function()
           assert.same({ 'Foo', 'Bar', 'Baz' }, toc.savedvariables)
           assert.same({ Key = 'Value' }, toc.attrs)
           assert.Nil(toc.attrs.SavedVariables)
+        end)
+        local depkeys = { 'Dep', 'Deps', 'Dependencies', 'RequiredDep', 'RequiredDeps', 'RequiredDependencies' }
+        for _, key in ipairs(depkeys) do
+          it('handles ' .. key .. ' field', function()
+            local toc = parse(gametype, '## ' .. key .. ': Foo, Bar Baz')
+            assert.same({ 'Foo', 'Bar', 'Baz' }, toc.deps)
+            assert.Nil(toc.attrs[key])
+          end)
+        end
+        for _, key in ipairs({ 'OptionalDep', 'OptionalDeps', 'OptionalDependencies' }) do
+          it('handles ' .. key .. ' field', function()
+            local toc = parse(gametype, '## ' .. key .. ': Foo, Bar Baz')
+            assert.same({ 'Foo', 'Bar', 'Baz' }, toc.optionaldeps)
+            assert.Nil(toc.attrs[key])
+          end)
+        end
+        it('merges multiple dep fields', function()
+          local lines = {
+            '## RequiredDep: Foo',
+            '## RequiredDeps: Bar',
+          }
+          local toc = parse(gametype, table.concat(lines, '\n'))
+          assert.same({ 'Foo', 'Bar' }, toc.deps)
+        end)
+        it('merges multiple optionaldep fields', function()
+          local lines = {
+            '## OptionalDep: Foo',
+            '## OptionalDeps: Bar',
+          }
+          local toc = parse(gametype, table.concat(lines, '\n'))
+          assert.same({ 'Foo', 'Bar' }, toc.optionaldeps)
         end)
         it('handles Interface field', function()
           local lines = {

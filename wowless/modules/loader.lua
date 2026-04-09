@@ -782,16 +782,6 @@ return function(
     end
   end
 
-  local depAttrs = {
-    'RequiredDep',
-    'RequiredDeps',
-    'Dependencies',
-  }
-  local optionalDepAttrs = {
-    'OptionalDep',
-    'OptionalDeps',
-  }
-
   local function doLoadAddon(addonName, forceSecure)
     local toc = addonData[addonName:lower()]
     if not toc then
@@ -829,16 +819,12 @@ return function(
     end
     local useSecureEnv = forceSecure or toc.attrs.UseSecureEnvironment == '1'
     log(1, 'loading addon dependencies for %s', addonName)
-    for _, attr in ipairs(depAttrs) do
-      for dep in string.gmatch(toc.attrs[attr] or '', '[^, ]+') do
-        doLoadAddon(dep, useSecureEnv)
-      end
+    for _, dep in ipairs(toc.deps) do
+      doLoadAddon(dep, useSecureEnv)
     end
-    for _, attr in ipairs(optionalDepAttrs) do
-      for dep in string.gmatch(toc.attrs[attr] or '', '[^, ]+') do
-        if addonData[dep:lower()] then
-          doLoadAddon(dep, useSecureEnv)
-        end
+    for _, dep in ipairs(toc.optionaldeps) do
+      if addonData[dep:lower()] then
+        doLoadAddon(dep, useSecureEnv)
       end
     end
     local kindstr = forceSecure and ' (secure dependency)' or useSecureEnv and ' (secure)' or ''

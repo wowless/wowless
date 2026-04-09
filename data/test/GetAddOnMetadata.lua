@@ -4,7 +4,7 @@ local kv = {
   Title = 'Wowless',
 }
 local knil = {
-  Dependencies = false,
+  Dependencies = true,
   Interface = true,
   SavedVariables = true,
   WowlessNonsense = true,
