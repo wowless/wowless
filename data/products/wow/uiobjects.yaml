@@ -4038,7 +4038,7 @@ Frame:
         type: boolean
       - name: units
         nilable: true
-        type: string
+        type: unit
       outstride: 1
     IsFrameBuffer:
       inputs:
@@ -4156,7 +4156,7 @@ Frame:
         type: string
       - name: units
         nilable: true
-        type: string
+        type: unit
       instride: 1
       outputs:
       - name: registered
@@ -4169,7 +4169,7 @@ Frame:
         type:
           luaobject: LuaFunctionContainer
       - name: units
-        type: string
+        type: unit
       instride: 1
       outputs:
       - name: registered
@@ -4620,11 +4620,11 @@ GameTooltip:
         type: number
       - name: colorB
         type: number
-      - name: alpha
-        nilable: true
+      - default: 1
+        name: alpha
         type: number
-      - name: wrap
-        nilable: true
+      - default: false
+        name: wrap
         type: boolean
       outputs:
   scripts:
@@ -8962,7 +8962,7 @@ UnitPositionFrame:
       inputs:
       outputs:
       - name: units
-        type: string
+        type: unit
       outstride: 1
       stuboutstrides: 0
     GetPlayerPingScale:
@@ -9014,7 +9014,7 @@ UnitPositionFrame:
     SetUnitColor:
       inputs:
       - name: unit
-        type: string
+        type: unit
       - name: colorR
         type: number
       - name: colorG

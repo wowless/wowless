@@ -147,6 +147,7 @@ lies:
     CharCreateAnimTurnType:
     CharSectionCondition:
     ConfigurationWarning:
+    UnitTokenType:
     WarbandEventState:
     WarbandGroupFlags:
     WarbandPlacementDisplayInfoType:
@@ -749,6 +750,8 @@ typedefs:
   UnitTokenPvPRestrictedForAddOns:
     type: unit
   UnitTokenRestrictedForAddOns:
+    type: unit
+  UnitTokenType:
     type: unit
   UnitTokenVariant:
     type: unit

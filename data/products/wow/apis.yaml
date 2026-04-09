@@ -6636,6 +6636,13 @@ C_ColorUtil.WrapTextInColorCode:
   outputs:
   - name: coloredText
     type: string
+C_CombatAudioAlert.AddToKnownTargetingList:
+  inputs:
+  - name: unit
+    type: unit
+  outputs:
+  - name: added
+    type: boolean
 C_CombatAudioAlert.GetCategoryVoice:
   inputs:
   - name: category
@@ -6688,6 +6695,13 @@ C_CombatAudioAlert.IsEnabled:
   inputs:
   outputs:
   - name: isEnabled
+    type: boolean
+C_CombatAudioAlert.RemoveFromKnownTargetingList:
+  inputs:
+  - name: unit
+    type: unit
+  outputs:
+  - name: removed
     type: boolean
 C_CombatAudioAlert.SetCategoryVoice:
   inputs:
@@ -22971,6 +22985,15 @@ C_SeasonInfo.GetCurrentDisplaySeasonID:
   outputs:
   - name: seasonID
     type: number
+C_Secrets.CanCompareUnitTokens:
+  inputs:
+  - name: unit1
+    type: unit
+  - name: unit2
+    type: unit
+  outputs:
+  - name: isUnitComparisonPermitted
+    type: boolean
 C_Secrets.GetPowerTypeSecrecy:
   inputs:
   - name: powerType

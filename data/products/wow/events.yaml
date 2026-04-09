@@ -4521,11 +4521,11 @@ FORBIDDEN_NAME_PLATE_CREATED:
 FORBIDDEN_NAME_PLATE_UNIT_ADDED:
   payload:
   - name: unitToken
-    type: string
+    type: unit
 FORBIDDEN_NAME_PLATE_UNIT_REMOVED:
   payload:
   - name: unitToken
-    type: string
+    type: unit
 FORCE_REFRESH_HOUSE_FINDER:
   payload:
 FRAME_MANAGER_UPDATE_ALL:
@@ -6158,7 +6158,7 @@ NAME_PLATE_CREATED:
 NAME_PLATE_UNIT_ADDED:
   payload:
   - name: unitToken
-    type: string
+    type: unit
 NAME_PLATE_UNIT_BEHIND_CAMERA_CHANGED:
   payload:
   - name: unitTarget
@@ -6168,7 +6168,7 @@ NAME_PLATE_UNIT_BEHIND_CAMERA_CHANGED:
 NAME_PLATE_UNIT_REMOVED:
   payload:
   - name: unitToken
-    type: string
+    type: unit
 NAVIGATION_DESTINATION_REACHED:
   payload:
   - name: isWaypoint
