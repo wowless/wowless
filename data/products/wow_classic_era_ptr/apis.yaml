@@ -13111,9 +13111,20 @@ C_SecureTransfer.GetMailInfo:
   - name: mailInfo
     type:
       structure: C_SecureTransfer.MailInfo
+C_SecureTransfer.GetTradePartner:
+  inputs:
+  outputs:
+  - name: name
+    nilable: true
+    type: string
 C_SecureTransfer.SendMail:
   inputs:
   outputs:
+C_SecureTransfer.ShouldShowTradeOfferWarning:
+  inputs:
+  outputs:
+  - name: shouldShow
+    type: boolean
 C_SharedCharacterServices.GetLastSeenCharacterUpgradePopup:
 C_SharedCharacterServices.GetLastSeenExpansionTrialPopup:
 C_SharedCharacterServices.GetUpgradeDistributions:
@@ -14049,6 +14060,11 @@ C_TradeInfo.SetTradeMoney:
   - name: amount
     type: number
   outputs:
+C_TradeInfo.ShouldShowTradeOfferWarning:
+  inputs:
+  outputs:
+  - name: shouldShow
+    type: boolean
 C_TradeSkillUI.GetTradeSkillDisplayName:
   inputs:
   - name: skillLineID
@@ -21746,6 +21762,10 @@ GetTradePlayerItemInfo:
     type: string
   - name: canLoseTransmog
     type: boolean
+  - name: isBound
+    type: boolean
+  - name: itemID
+    type: number
 GetTradePlayerItemLink:
   inputs:
   - name: index
@@ -21866,6 +21886,8 @@ GetTradeTargetItemInfo:
   - name: enchantment
     nilable: true
     type: string
+  - name: itemID
+    type: number
 GetTradeTargetItemLink:
   inputs:
   - name: index
