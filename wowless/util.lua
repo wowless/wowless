@@ -25,11 +25,14 @@ local readfile = (function()
       end
     end
   end
+  local path = require('path')
+  local rootdir = path.currentdir():match('^(%a:)') or ''
   local cache = {}
-  dirtab('', cache)
+  dirtab(rootdir, cache)
   local function resolve(p)
     local c = cache
     local dd = ''
+    p = p:gsub('\\', '/'):gsub('^%a:', '') -- normalize separators and strip Windows drive letter
     for k in p:gmatch('[^/]+') do
       assert(type(c) == 'table', dd .. ' is not a directory')
       dd = dd .. '/' .. k
@@ -56,7 +59,6 @@ local readfile = (function()
     end
     return content
   end
-  local path = require('path')
   return function(filename)
     local fullname = path.normalize(path.join(path.currentdir(), filename))
     return getContent(resolve(fullname:lower()))

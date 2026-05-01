@@ -954,7 +954,6 @@ add_lua_executable(
   wowlesstoc
   wowlessutil
   wowlessyaml)
-
 set(d ${CMAKE_CURRENT_BINARY_DIR}/addon/Wowless)
 file(MAKE_DIRECTORY ${d} ${CMAKE_CURRENT_BINARY_DIR}/staging/addon/Wowless)
 set(testaddon_outs)
