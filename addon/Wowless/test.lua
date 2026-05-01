@@ -721,8 +721,11 @@ G.testsuite.sync = function()
           end
         end,
         ['is not a frame type'] = function()
-          assertEquals(false, (pcall(CreateFrame, 'WorldFrame')))
-          table.insert(_G.Wowless.ExpectedLuaWarnings, 'Unknown frame type: WorldFrame')
+          local warnings = G.captureWarnings(function()
+            assertEquals(false, (pcall(CreateFrame, 'WorldFrame')))
+          end)
+          assertEquals(1, #warnings)
+          assertEquals('Unknown frame type: WorldFrame', warnings[1])
         end,
       }
     end,
