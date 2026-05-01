@@ -585,6 +585,11 @@ HighlightTexture:
   phase: late
 HitRectInsets:
   extends: Insets
+  impl:
+    structure:
+      apply:
+        - method: SetHitRectInsets
+          unpack: true
 Include:
   attributes:
     file:
@@ -606,6 +611,14 @@ Insets:
     tags:
       AbsInset:
       RelInset:
+  impl:
+    structure:
+      fields:
+        - left
+        - right
+        - top
+        - bottom
+      merge_child: true
   virtual: true
 KeyValue:
   attributes:
@@ -805,6 +818,15 @@ Offset:
   contents:
     tags:
       AbsDimension:
+  impl:
+    structure:
+      apply:
+        - method: SetShadowOffset
+          unpack: true
+      fields:
+        - x
+        - y
+      merge_child: true
 OnAnimFinished:
   extends: ScriptType
   impl:
@@ -1111,6 +1133,11 @@ PushedFont:
   extends: ButtonFont
 PushedTextOffset:
   extends: Offset
+  impl:
+    structure:
+      apply:
+        - method: SetPushedTextOffset
+          unpack: true
 PushedTexture:
   extends: Texture
   impl:
@@ -1270,6 +1297,17 @@ Size:
   contents:
     tags:
       AbsDimension:
+  impl:
+    structure:
+      apply:
+        - field: x
+          method: SetWidth
+        - field: y
+          method: SetHeight
+      fields:
+        - x
+        - y
+      merge_child: true
 Slider:
   attributes:
     defaultvalue:
@@ -1340,6 +1378,11 @@ TexCoords:
       Rect:
 TextInsets:
   extends: Insets
+  impl:
+    structure:
+      apply:
+        - method: SetTextInsets
+          unpack: true
 Texture:
   attributes:
     alphamode:
@@ -1430,5 +1473,15 @@ ViewInsets:
       type: number
     top:
       type: number
+  impl:
+    structure:
+      apply:
+        - method: SetViewInsets
+          unpack: true
+      fields:
+        - left
+        - right
+        - top
+        - bottom
 WorldFrame:
   extends: Frame

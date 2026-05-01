@@ -73,14 +73,6 @@ return function(
     end
   end
 
-  local function getInsets(e)
-    local kid = e.kids[#e.kids]
-    local function v(k)
-      return e.attr[k] or (kid and kid.attr[k])
-    end
-    return v('left'), v('right'), v('top'), v('bottom')
-  end
-
   local function loadstr(str, filename, line)
     local function doload()
       local pre = line and string.rep('\n', line - 1) or ''
@@ -109,6 +101,41 @@ return function(
     end
     log(1, 'unknown color %q', name) -- issue #303 for why we warn instead of error
     return 0, 0, 0, 1
+  end
+
+  local function buildStructure(e, structDef) -- issue #117
+    local result = {}
+    for _, field in ipairs(structDef.fields) do
+      result[field] = e.attr[field]
+    end
+    if structDef.merge_child then
+      local kid = e.kids[#e.kids]
+      if kid then
+        for _, field in ipairs(structDef.fields) do
+          if result[field] == nil then
+            result[field] = kid.attr[field]
+          end
+        end
+      end
+    end
+    return result
+  end
+
+  local function applyStructure(struct, apply, fields, parent)
+    for _, action in ipairs(apply) do
+      if action.unpack then
+        local args = {}
+        for _, f in ipairs(fields) do
+          args[#args + 1] = struct[f]
+        end
+        parent[action.method](parent, unpack(args))
+      elseif action.field then
+        local val = struct[action.field]
+        if val ~= nil then
+          parent[action.method](parent, val)
+        end
+      end
+    end
   end
 
   local function loadLuaString(filename, str, line, useSecureEnv, closureTaint, ...)
@@ -297,9 +324,6 @@ return function(
     highlightcolor = function(_, e, parent)
       parent:SetHighlightColor(getColor(e))
     end,
-    hitrectinsets = function(_, e, parent)
-      parent:SetHitRectInsets(getInsets(e))
-    end,
     keyvalue = function(_, e, parent)
       local a = e.attr
       parent.luarep[a.key] = parseTypedValue(a.type, a.value)
@@ -327,26 +351,10 @@ return function(
     modifiedclick = function()
       -- TODO support modified clicks
     end,
-    offset = function(ctx, e, parent)
-      assert(ctx.shadow, 'this should only run on shadow for now')
-      parent:SetShadowOffset(getXY(e))
-    end,
     origin = function(_, e, parent)
       if e.attr.point then
         local x, y = getXY(e)
         parent:SetOrigin(e.attr.point, x or 0, y or 0)
-      end
-    end,
-    pushedtextoffset = function(_, e, parent)
-      parent:SetPushedTextOffset(getXY(e))
-    end,
-    size = function(_, e, parent)
-      local x, y = getXY(e)
-      if x then
-        parent:SetWidth(x)
-      end
-      if y then
-        parent:SetHeight(y)
       end
     end,
     swipetexture = function(_, e, parent)
@@ -370,12 +378,6 @@ return function(
         local x = e.attr
         parent:SetTexCoord(x.left or 0, x.right or 1, x.top or 0, x.bottom or 1)
       end
-    end,
-    textinsets = function(_, e, parent)
-      parent:SetTextInsets(getInsets(e))
-    end,
-    viewinsets = function(_, e, parent)
-      parent:SetViewInsets(getInsets(e))
     end,
   }
 
@@ -621,6 +623,9 @@ return function(
               kids = font.kids,
               type = font.type,
             })
+          elseif type(impl) == 'table' and impl.structure then -- issue #117
+            local struct = buildStructure(e, impl.structure)
+            applyStructure(struct, impl.structure.apply, impl.structure.fields, parent)
           elseif fn then
             fn(ctx, e, parent)
           else

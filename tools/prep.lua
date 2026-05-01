@@ -572,6 +572,18 @@ local xmlimpls = (function()
       end
     end
     local tag = v.impl
+    if type(tag) == 'table' and tag.structure and not tag.structure.fields then
+      local t = v
+      while t.extends do
+        t = tree[t.extends]
+        if t.impl and type(t.impl) == 'table' and t.impl.structure and t.impl.structure.fields then
+          tag = {
+            structure = Mixin({}, t.impl.structure, { apply = tag.structure.apply or t.impl.structure.apply }),
+          }
+          break
+        end
+      end
+    end
     if type(tag) == 'table' and tag.call and tag.call.argument == 'self' then
       local arg = v.extends
       while tree[arg].virtual do
