@@ -279,6 +279,7 @@ local impl_output_types = {
   enum = nop,
   FileAsset = nop,
   ['function'] = nop,
+  luaobject = nop,
   ['nil'] = nop,
   number = nop,
   oneornil = nop,
@@ -730,33 +731,45 @@ if args.coutput then
 
   local used_structures = {}
   local used_arrayofs = {}
+  local function simple_cinputtype(suffix)
+    local fn = function(verb, nilable, idx)
+      return string.format('wowless_%s%s%s(L, %s)', verb, nilable and 'nilable' or '', suffix, idx)
+    end
+    return function() return fn end
+  end
+  local function arrayof_type_key(inner)
+    if type(inner) == 'string' then
+      return inner
+    end
+    local k, v = next(inner)
+    return k .. '_' .. safename(v)
+  end
   local cinputtypes
   cinputtypes = {
     arrayof = function(inner)
-      local inner_type = dispatch(cinputtypes, inner)
-      used_arrayofs[inner_type] = inner
-      return 'arrayof_' .. inner_type
+      local inner_fn = dispatch(cinputtypes, inner)
+      local key = arrayof_type_key(inner)
+      used_arrayofs[key] = inner_fn
+      return function(verb, nilable, idx)
+        return string.format('wowless_%s%sarrayof_%s(L, %s)', verb, nilable and 'nilable' or '', key, idx)
+      end
     end,
-    boolean = function()
-      return 'boolean'
+    boolean = simple_cinputtype('boolean'),
+    enum = simple_cinputtype('enum'),
+    FileAsset = simple_cinputtype('fileasset'),
+    ['function'] = simple_cinputtype('function'),
+    luaobject = function(name)
+      return function(verb, nilable, idx)
+        local ns = nilable and 'nilable' or ''
+        return string.format('wowless_%s%sluaobject(L, %s, %s, %d)', verb, ns, idx, cstring(name), #name)
+      end
     end,
-    enum = function()
-      return 'enum'
-    end,
-    FileAsset = function()
-      return 'fileasset'
-    end,
-    ['function'] = function()
-      return 'function'
-    end,
-    number = function()
-      return 'number'
-    end,
-    string = function()
-      return 'string'
-    end,
+    number = simple_cinputtype('number'),
+    string = simple_cinputtype('string'),
     stringenum = function(name)
-      return 'stringenum_' .. safename(name)
+      return function(verb, nilable, idx)
+        return string.format('wowless_%s%sstringenum_%s(L, %s)', verb, nilable and 'nilable' or '', safename(name), idx)
+      end
     end,
     structure = function(name)
       local st = assert(structures[name], name)
@@ -764,62 +777,44 @@ if args.coutput then
         dispatch(cinputtypes, field.type)
       end
       used_structures[name] = true
-      return 'struct_' .. safename(name)
+      return function(verb, nilable, idx)
+        return string.format('wowless_%s%sstruct_%s(L, %s)', verb, nilable and 'nilable' or '', safename(name), idx)
+      end
     end,
-    table = function()
-      return 'table'
-    end,
-    uiAddon = function()
-      return 'uiaddon'
-    end,
-    luaobject = function(name)
-      return 'luaobject_' .. safename(name)
-    end,
+    table = simple_cinputtype('table'),
+    uiAddon = simple_cinputtype('uiaddon'),
     uiobject = function(name)
-      return 'uiobject_' .. safename(name)
+      return function(verb, nilable, idx)
+        return string.format('wowless_%s%suiobject_%s(L, %s)', verb, nilable and 'nilable' or '', safename(name), idx)
+      end
     end,
-    unit = function()
-      return 'unit'
-    end,
-    unknown = function()
-      return 'unknown'
-    end,
+    unit = simple_cinputtype('unit'),
+    unknown = simple_cinputtype('unknown'),
   }
 
+  local function simple_coutputtype(suffix)
+    return function(nilable, idx)
+      return string.format('wowless_imploutput%s%s(L, %d)', nilable and 'nilable' or '', suffix, idx)
+    end
+  end
+
   local coutputtypes = {
-    boolean = function()
-      return 'boolean'
+    boolean = simple_coutputtype('boolean'),
+    enum = simple_coutputtype('enum'),
+    FileAsset = simple_coutputtype('fileasset'),
+    ['function'] = simple_coutputtype('function'),
+    luaobject = function(typename, nilable, idx)
+      local ns = nilable and 'nilable' or ''
+      local tn = cstring(typename)
+      return string.format('wowless_imploutput%sluaobject(L, %d, %s, sizeof(%s)-1)', ns, idx, tn, tn)
     end,
-    enum = function()
-      return 'enum'
-    end,
-    FileAsset = function()
-      return 'fileasset'
-    end,
-    ['function'] = function()
-      return 'function'
-    end,
-    ['nil'] = function()
-      return 'nil'
-    end,
-    number = function()
-      return 'number'
-    end,
-    oneornil = function()
-      return 'unknown'
-    end,
-    string = function()
-      return 'string'
-    end,
-    table = function()
-      return 'table'
-    end,
-    unit = function()
-      return 'unit'
-    end,
-    unknown = function()
-      return 'unknown'
-    end,
+    ['nil'] = simple_coutputtype('nil'),
+    number = simple_coutputtype('number'),
+    oneornil = simple_coutputtype('unknown'),
+    string = simple_coutputtype('string'),
+    table = simple_coutputtype('table'),
+    unit = simple_coutputtype('unit'),
+    unknown = simple_coutputtype('unknown'),
   }
 
   local function is_eligible(apicfg)
@@ -949,15 +944,6 @@ if args.coutput then
   if next(used_arrayofs) then
     emit('')
   end
-  for lname in sorted(luaobjects) do
-    emit('static int wowless_isluaobject_%s(lua_State *L, int idx);', safename(lname))
-    emit('static int wowless_isnilableluaobject_%s(lua_State *L, int idx);', safename(lname))
-    emit('static void wowless_stubcheckluaobject_%s(lua_State *L, int idx);', safename(lname))
-    emit('static void wowless_stubchecknilableluaobject_%s(lua_State *L, int idx);', safename(lname))
-  end
-  if next(luaobjects) then
-    emit('')
-  end
   for sename in sorted(stringenums) do
     emit('static int wowless_isstringenum_%s(lua_State *L, int idx);', safename(sename))
     emit('static int wowless_isnilablestringenum_%s(lua_State *L, int idx);', safename(sename))
@@ -987,7 +973,7 @@ if args.coutput then
       local ftype = field.type
       emit('  lua_pushliteral(L, %s);', cstring(fname))
       emit('  lua_rawget(L, idx);')
-      emit('  wowless_stubcheck%s%s(L, -1);', field_nilable and 'nilable' or '', dispatch(cinputtypes, ftype))
+      emit('  %s;', dispatch(cinputtypes, ftype)('stubcheck', field_nilable, -1))
       emit('  lua_pop(L, 1);')
     end
     emit('}')
@@ -1000,7 +986,7 @@ if args.coutput then
     emit('')
   end
 
-  for atype, inner in sorted(used_arrayofs) do
+  for atype, inner_fn in sorted(used_arrayofs) do
     emit('static void wowless_stubcheckarrayof_%s(lua_State *L, int idx) {', atype)
     emit('  int i, n;')
     emit('  idx = lua_absindex(L, idx);')
@@ -1008,7 +994,7 @@ if args.coutput then
     emit('  n = (int)lua_objlen(L, idx);')
     emit('  for (i = 1; i <= n; i++) {')
     emit('    lua_rawgeti(L, idx, i);')
-    emit('    wowless_stubcheck%s(L, -1);', dispatch(cinputtypes, inner))
+    emit('    %s;', inner_fn('stubcheck', false, -1))
     emit('    lua_pop(L, 1);')
     emit('  }')
     emit('}')
@@ -1017,25 +1003,6 @@ if args.coutput then
     emit('  if (!lua_isnoneornil(L, idx)) {')
     emit('    wowless_stubcheckarrayof_%s(L, idx);', atype)
     emit('  }')
-    emit('}')
-    emit('')
-  end
-
-  for lname in sorted(luaobjects) do
-    emit('static int wowless_isluaobject_%s(lua_State *L, int idx) {', safename(lname))
-    emit('  return wowless_isluaobject(L, idx, %s, %d);', cstring(lname), #lname)
-    emit('}')
-    emit('')
-    emit('static int wowless_isnilableluaobject_%s(lua_State *L, int idx) {', safename(lname))
-    emit('  return wowless_isnilableluaobject(L, idx, %s, %d);', cstring(lname), #lname)
-    emit('}')
-    emit('')
-    emit('static void wowless_stubcheckluaobject_%s(lua_State *L, int idx) {', safename(lname))
-    emit('  if (!wowless_isluaobject_%s(L, idx)) luaL_typerror(L, idx, "luaobject");', safename(lname))
-    emit('}')
-    emit('')
-    emit('static void wowless_stubchecknilableluaobject_%s(lua_State *L, int idx) {', safename(lname))
-    emit('  if (!wowless_isnilableluaobject_%s(L, idx)) luaL_typerror(L, idx, "luaobject");', safename(lname))
     emit('}')
     emit('')
   end
@@ -1090,14 +1057,12 @@ if args.coutput then
     local nsins = #allinps - instride
     local function check(inp, idx)
       local nilable = inp.nilable or inp.default ~= nil
-      return ('wowless_stubcheck%s%s(L, %s);'):format(nilable and 'nilable' or '', dispatch(cinputtypes, inp.type), idx)
+      return dispatch(cinputtypes, inp.type)('stubcheck', nilable, idx) .. ';'
     end
     local function usagecheck(inp, idx)
       local nilable = inp.nilable or inp.default ~= nil
-      return ('if (!wowless_is%s%s(L, %s)) return luaL_error(L, %s);'):format(
-        nilable and 'nilable' or '',
-        dispatch(cinputtypes, inp.type),
-        idx,
+      return ('if (!%s) return luaL_error(L, %s);'):format(
+        dispatch(cinputtypes, inp.type)('is', nilable, idx),
         cstring('Usage: ' .. v.usage)
       )
     end
@@ -1180,18 +1145,12 @@ if args.coutput then
       if check_inputs then
         local function check(inp, idx)
           local nilable = inp.nilable or inp.default ~= nil
-          return ('wowless_implcheck%s%s(L, %s);'):format(
-            nilable and 'nilable' or '',
-            dispatch(cinputtypes, inp.type),
-            idx
-          )
+          return dispatch(cinputtypes, inp.type)('implcheck', nilable, idx) .. ';'
         end
         local function usagecheck(inp, idx)
           local nilable = inp.nilable or inp.default ~= nil
-          return ('if (!wowless_is%s%s(L, %s)) return luaL_error(L, %s);'):format(
-            nilable and 'nilable' or '',
-            dispatch(cinputtypes, inp.type),
-            idx,
+          return ('if (!%s) return luaL_error(L, %s);'):format(
+            dispatch(cinputtypes, inp.type)('is', nilable, idx),
             cstring('Usage: ' .. v.usage)
           )
         end
@@ -1209,16 +1168,17 @@ if args.coutput then
         emit('  wowless_stubchecknreturns(L, ret, %d, %s);', #outputs, cstring(entry.name))
         for i, out in ipairs(outputs) do
           local nilable = out.nilable
+          local otype = out.type
           if out.default ~= nil then
             local push = dispatch(coutputdefaulttypes, type(out.default), out.default)
             emit('  if (lua_isnil(L, %d)) {', i)
             emit('    %s;', push)
             emit('    lua_replace(L, %d);', i)
             emit('  } else {')
-            emit('    wowless_imploutput%s(L, %d);', dispatch(coutputtypes, out.type), i)
+            emit('    %s;', dispatch(coutputtypes, otype, false, i))
             emit('  }')
           else
-            emit('  wowless_imploutput%s%s(L, %d);', nilable and 'nilable' or '', dispatch(coutputtypes, out.type), i)
+            emit('  %s;', dispatch(coutputtypes, otype, nilable, i))
           end
         end
         emit('  return ret;')
