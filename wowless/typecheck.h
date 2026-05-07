@@ -632,6 +632,25 @@ static inline void wowless_imploutputnilabletable(lua_State *L, int idx) {
   }
 }
 
+static inline void wowless_imploutputluaobject(lua_State *L, int idx,
+                                               const char *typename,
+                                               size_t typenamelen) {
+  idx = lua_absindex(L, idx);
+  lua_getfield(L, lua_upvalueindex(1), "ImplOutputLuaObject");
+  lua_pushvalue(L, idx);
+  lua_pushlstring(L, typename, typenamelen);
+  lua_call(L, 2, 1);
+  lua_replace(L, idx);
+}
+
+static inline void wowless_imploutputnilableluaobject(lua_State *L, int idx,
+                                                      const char *typename,
+                                                      size_t typenamelen) {
+  if (!lua_isnoneornil(L, idx)) {
+    wowless_imploutputluaobject(L, idx, typename, typenamelen);
+  }
+}
+
 static inline void wowless_stubcheckextraargs(lua_State *L, int nsins,
                                               const char *fname) {
   if (lua_gettop(L) > nsins) {

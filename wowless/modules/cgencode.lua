@@ -24,6 +24,13 @@ return function(addons, api, events, log, luaobjects, uiobjects, uiobjecttypes, 
     return internal and internal.type == typename
   end
 
+  local function ImplOutputLuaObject(internal, typename)
+    if type(internal) ~= 'table' or internal.type ~= typename then
+      error('impl output type error: expected luaobject ' .. typename)
+    end
+    return internal.luarep
+  end
+
   local function GetUiAddon(value)
     return addons.addons[tonumber(value) or tostring(value):lower()]
   end
@@ -42,6 +49,7 @@ return function(addons, api, events, log, luaobjects, uiobjects, uiobjecttypes, 
     FireProtected = bubblewrap(FireProtected),
     GetUiAddon = GetUiAddon,
     GetUnit = units.GetUnit,
+    ImplOutputLuaObject = ImplOutputLuaObject,
     CreateLuaObject = CreateLuaObject,
     CreateUiObject = CreateUiObject,
     IsLuaObject = IsLuaObject,
