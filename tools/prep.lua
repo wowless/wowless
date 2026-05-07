@@ -735,7 +735,9 @@ if args.coutput then
     local fn = function(verb, nilable, idx)
       return string.format('wowless_%s%s%s(L, %s)', verb, nilable and 'nilable' or '', suffix, idx)
     end
-    return function() return fn end
+    return function()
+      return fn
+    end
   end
   local function arrayof_type_key(inner)
     if type(inner) == 'string' then
