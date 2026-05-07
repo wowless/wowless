@@ -21,6 +21,10 @@ C_Timer.NewTimer:
   C_Timer.NewTimer:
 ClassicExpansionAtLeast:
   ClassicExpansionAtLeast:
+ClassicTalents:
+  GetNumTalents:
+  GetNumTalentTabs:
+  GetTalentPrereqs:
 CreateFrame:
   CreateFrame:
 CreateWindow:
