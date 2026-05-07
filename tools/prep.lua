@@ -285,6 +285,7 @@ local impl_output_types = {
   oneornil = nop,
   string = nop,
   table = nop,
+  uiobject = nop,
   unit = nop,
 }
 
@@ -815,6 +816,11 @@ if args.coutput then
     oneornil = simple_coutputtype('unknown'),
     string = simple_coutputtype('string'),
     table = simple_coutputtype('table'),
+    uiobject = function(typename, nilable, idx)
+      local ns = nilable and 'nilable' or ''
+      local tn = cstring(typename)
+      return string.format('wowless_imploutput%suiobject(L, %d, %s, sizeof(%s)-1)', ns, idx, tn, tn)
+    end,
     unit = simple_coutputtype('unit'),
     unknown = simple_coutputtype('unknown'),
   }
@@ -1159,6 +1165,11 @@ if args.coutput then
         local inputcheck = v.usage and usagecheck or check
         for i, inp in ipairs(inputs) do
           emit('  %s', inputcheck(inp, i))
+        end
+        if v.usage then
+          for i, inp in ipairs(inputs) do
+            emit('  %s', check(inp, i))
+          end
         end
         emit('  wowless_stubcheckextraargs(L, %d, %s);', nsins, cstring(entry.name))
       end
