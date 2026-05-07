@@ -29,6 +29,7 @@ repos:
   rev: v0.15.0
   hooks:
   - id: markdownlint
+    language_version: default
 - repo: https://github.com/pre-commit/mirrors-clang-format
   rev: v21.1.8
   hooks:
