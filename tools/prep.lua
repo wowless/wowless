@@ -293,7 +293,7 @@ local function is_impl_eligible(apicfg)
   if not apicfg.impl then
     return false
   end
-  if not apicfg.instride and (apicfg.outstride or 0) == 0 then
+  if not apicfg.instride then
     local all_impl = true
     for _, inp in ipairs(apicfg.inputs or {}) do
       all_impl = all_impl and pcall(dispatch, impl_input_types, inp.type)
@@ -797,7 +797,7 @@ if args.coutput then
 
   local function simple_coutputtype(suffix)
     return function(nilable, idx)
-      return string.format('wowless_imploutput%s%s(L, %d)', nilable and 'nilable' or '', suffix, idx)
+      return string.format('wowless_imploutput%s%s(L, %s)', nilable and 'nilable' or '', suffix, idx)
     end
   end
 
@@ -811,7 +811,7 @@ if args.coutput then
     luaobject = function(typename, nilable, idx)
       local ns = nilable and 'nilable' or ''
       local tn = cstring(typename)
-      return string.format('wowless_imploutput%sluaobject(L, %d, %s, sizeof(%s)-1)', ns, idx, tn, tn)
+      return string.format('wowless_imploutput%sluaobject(L, %s, %s, sizeof(%s)-1)', ns, idx, tn, tn)
     end,
     ['nil'] = simple_coutputtype('nil'),
     number = simple_coutputtype('number'),
@@ -821,7 +821,7 @@ if args.coutput then
     uiobject = function(typename, nilable, idx)
       local ns = nilable and 'nilable' or ''
       local tn = cstring(typename)
-      return string.format('wowless_imploutput%suiobject(L, %d, %s, sizeof(%s)-1)', ns, idx, tn, tn)
+      return string.format('wowless_imploutput%suiobject(L, %s, %s, sizeof(%s)-1)', ns, idx, tn, tn)
     end,
     unit = simple_coutputtype('unit'),
     unknown = simple_coutputtype('unknown'),
@@ -1147,9 +1147,11 @@ if args.coutput then
       local fn = impldata.nobubblewrap and 'wowless_impl_stub_nobubblewrap' or 'wowless_impl_stub'
       local v = entry.cfg
       local check_inputs = v.inputs ~= nil and (v.instride or 0) == 0
-      local check_outputs = v.outputs ~= nil and (v.outstride or 0) == 0
+      local check_outputs = v.outputs ~= nil
       local inputs = v.inputs or {}
       local outputs = v.outputs or {}
+      local outstride = v.outstride or 0
+      local nfixed = #outputs - outstride
       local nsins = #inputs
       emit('static int implstub_%s(lua_State *L) {', safename(entry.name))
       if check_inputs then
@@ -1180,20 +1182,39 @@ if args.coutput then
         if v.mayreturnnothing then
           emit('  if (ret == 0) return 0;')
         end
-        emit('  wowless_stubchecknreturns(L, ret, %d, %s);', #outputs, cstring(entry.name))
-        for i, out in ipairs(outputs) do
-          local nilable = out.nilable
-          local otype = out.type
-          if out.default ~= nil then
-            local push = dispatch(coutputdefaulttypes, type(out.default), out.default)
-            emit('  if (lua_isnil(L, %d)) {', i)
-            emit('    %s;', push)
-            emit('    lua_replace(L, %d);', i)
-            emit('  } else {')
-            emit('    %s;', dispatch(coutputtypes, otype, false, i))
+        if outstride == 0 then
+          emit('  wowless_stubchecknreturns(L, ret, %d, %s);', #outputs, cstring(entry.name))
+          for i, out in ipairs(outputs) do
+            local nilable = out.nilable
+            local otype = out.type
+            if out.default ~= nil then
+              local push = dispatch(coutputdefaulttypes, type(out.default), out.default)
+              emit('  if (lua_isnil(L, %d)) {', i)
+              emit('    %s;', push)
+              emit('    lua_replace(L, %d);', i)
+              emit('  } else {')
+              emit('    %s;', dispatch(coutputtypes, otype, false, i))
+              emit('  }')
+            else
+              emit('  %s;', dispatch(coutputtypes, otype, nilable, i))
+            end
+          end
+        else
+          if outstride > 1 then
+            emit('  if (ret < %d || (ret - %d) %% %d != 0) {', nfixed, nfixed, outstride)
+            emit('    return luaL_error(L, "wrong number of return values from %%s", %s);', cstring(entry.name))
             emit('  }')
-          else
-            emit('  %s;', dispatch(coutputtypes, otype, nilable, i))
+          end
+          for i = 1, nfixed do
+            emit('  %s;', dispatch(coutputtypes, outputs[i].type, outputs[i].nilable, i))
+          end
+          if outstride > 0 then
+            emit('  for (int i = %d; i < ret; i += %d) {', nfixed, outstride)
+            for j = 1, outstride do
+              local out = outputs[nfixed + j]
+              emit('    %s;', dispatch(coutputtypes, out.type, out.nilable, string.format('i + %d', j)))
+            end
+            emit('  }')
           end
         end
         emit('  return ret;')
