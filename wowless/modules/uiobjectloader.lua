@@ -3,7 +3,7 @@ local bubblewrap = require('wowless.bubblewrap')
 local Mixin = util.mixin
 
 return function(datalua, funcheck, gencode, sqls, uiobjectsmodule, uiobjecttypes)
-  local InheritsFrom = uiobjecttypes.InheritsFrom
+  local IsObjectType = uiobjecttypes.IsObjectType
   local UserData = uiobjectsmodule.UserData
 
   local function flatten(types)
@@ -61,8 +61,8 @@ return function(datalua, funcheck, gencode, sqls, uiobjectsmodule, uiobjecttypes
       local lname = name:lower()
       local function wrap(fname, fn)
         return function(self, ...)
-          if not InheritsFrom(self.type, lname) then
-            error(('invalid self to %s.%s, got %s'):format(name, fname, tostring(self.type)))
+          if not IsObjectType(self, lname) then
+            error(('invalid self to %s.%s, got %s'):format(name, fname, tostring(uiobjectsmodule.GetType(self))))
           end
           return fn(self, ...)
         end

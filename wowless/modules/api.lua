@@ -11,6 +11,7 @@ return function(
   templates,
   uiobjects,
   uiobjecttypes,
+  uiobjmodel,
   visibility
 )
   local frames = hlist()
@@ -124,13 +125,15 @@ return function(
     end
     local objtype = uiobjecttypes.GetOrThrow(typename)
     log(3, 'creating %s%s', objtype.name, objname and (' named ' .. objname) or '')
-    local objp = newproxy(nil)
-    local obj = setmetatable({ [0] = objp }, objtype.sandboxMT)
+    local lp = uiobjmodel.Alloc(objtype.cTypeName or typename)
+    local obj = setmetatable({ [0] = lp }, objtype.sandboxMT)
     local ud = objtype.constructor()
     ud.luarep = obj
     ud.name = objname
-    ud.type = typename
-    userdata[objp] = ud
+    userdata[lp] = ud
+    if objtype.cTypeName then
+      uiobjects.SetDynamicType(ud, typename)
+    end
     setmetatable(ud, objtype.hostMT)
     DoSetParent(ud, parent)
     if InheritsFrom(typename, 'frame') then

@@ -256,18 +256,18 @@ return function(
     end,
     color = function(ctx, e, parent)
       local r, g, b, a = getColor(e)
-      if uiobjecttypes.InheritsFrom(parent.type, 'texturebase') then
+      if uiobjecttypes.IsObjectType(parent, 'texturebase') then
         parent:SetColorTexture(r, g, b, a)
-      elseif uiobjecttypes.InheritsFrom(parent.type, 'fontinstance') then
+      elseif uiobjecttypes.IsObjectType(parent, 'fontinstance') then
         if ctx.shadow then
           parent:SetShadowColor(r, g, b, a)
         else
           parent:SetTextColor(r, g, b, a)
         end
-      elseif uiobjecttypes.InheritsFrom(parent.type, 'statusbar') then
+      elseif uiobjecttypes.IsObjectType(parent, 'statusbar') then
         parent:SetStatusBarColor(r, g, b, a)
       else
-        error('cannot apply color to ' .. parent.type)
+        error('cannot apply color to ' .. uiobjecttypes.GetType(parent))
       end
     end,
     edgetexture = function(_, e, parent)
@@ -455,7 +455,7 @@ return function(
         elseif attr.impl.method then
           local fn = obj[attr.impl.method]
           if not fn then
-            error(('missing method %q on object type %q'):format(attr.impl.method, obj.type))
+            error(('missing method %q on object type %q'):format(attr.impl.method, uiobjecttypes.GetType(obj)))
           elseif type(v) == 'table' then -- stringlist
             fn(obj, unpack(v))
           else
@@ -469,7 +469,7 @@ return function(
       end
 
       local function processAttrs(ctx, e, obj, phase)
-        local objty = obj.type
+        local objty = uiobjecttypes.GetType(obj)
         local attrs = (xmlimpls[objty] or intrinsics[objty]).attrs
         for k, v in pairs(e.attr) do
           local attr = attrs[k]
@@ -555,6 +555,7 @@ return function(
             local base = uiobjecttypes.GetOrThrow(basetype)
             local isa = mixin({ [name] = true }, base.isa)
             uiobjecttypes.Add(name, {
+              cTypeName = base.cTypeName or basetype,
               constructor = base.constructor,
               hostMT = base.hostMT,
               isa = isa,
