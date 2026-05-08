@@ -505,6 +505,17 @@ static inline void wowless_implchecknilablenil(lua_State *L, int idx) {
   wowless_stubchecknil(L, idx);
 }
 
+static inline void wowless_imploutputoneornil(lua_State *L, int idx) {
+  if (!lua_isnil(L, idx) &&
+      !(lua_type(L, idx) == LUA_TNUMBER && lua_tonumber(L, idx) == 1)) {
+    wowless_outputtyperror(L, idx, "1 or nil");
+  }
+}
+
+static inline void wowless_imploutputnilableoneornil(lua_State *L, int idx) {
+  wowless_imploutputoneornil(L, idx);
+}
+
 static inline void wowless_imploutputnil(lua_State *L, int idx) {
   if (!lua_isnil(L, idx)) {
     wowless_outputtyperror(L, idx, "nil");

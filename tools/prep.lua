@@ -813,7 +813,7 @@ if args.coutput then
     end,
     ['nil'] = simple_coutputtype('nil'),
     number = simple_coutputtype('number'),
-    oneornil = simple_coutputtype('unknown'),
+    oneornil = simple_coutputtype('oneornil'),
     string = simple_coutputtype('string'),
     table = simple_coutputtype('table'),
     uiobject = function(typename, nilable, idx)
