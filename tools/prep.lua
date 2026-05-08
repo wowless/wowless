@@ -271,6 +271,7 @@ local impl_input_types = {
   luaobject = nop,
   number = nop,
   string = nop,
+  structure = nop,
   table = nop,
   uiAddon = nop,
   unit = nop,
@@ -784,8 +785,8 @@ if args.coutput then
         dispatch(cinputtypes, field.type)
       end
       used_structures[name] = true
-      return function(verb, nilable, idx)
-        return string.format('wowless_%s%sstruct_%s(L, %s)', verb, nilable and 'nilable' or '', safename(name), idx)
+      return function(_, nilable, idx)
+        return string.format('wowless_stubcheck%sstruct_%s(L, %s)', nilable and 'nilable' or '', safename(name), idx)
       end
     end,
     table = simple_cinputtype('table'),
