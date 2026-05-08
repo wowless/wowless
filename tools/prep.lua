@@ -297,17 +297,15 @@ local function is_impl_eligible(apicfg)
   if not apicfg.impl then
     return false
   end
-  if not apicfg.instride then
-    local all_impl = true
-    for _, inp in ipairs(apicfg.inputs or {}) do
-      all_impl = all_impl and pcall(dispatch, impl_input_types, inp.type)
-    end
-    for _, out in ipairs(apicfg.outputs or {}) do
-      all_impl = all_impl and pcall(dispatch, impl_output_types, out.type)
-    end
-    if all_impl then
-      return true
-    end
+  local all_impl = true
+  for _, inp in ipairs(apicfg.inputs or {}) do
+    all_impl = all_impl and pcall(dispatch, impl_input_types, inp.type)
+  end
+  for _, out in ipairs(apicfg.outputs or {}) do
+    all_impl = all_impl and pcall(dispatch, impl_output_types, out.type)
+  end
+  if all_impl then
+    return true
   end
   return ensureimpl(apicfg.impl).nowrap
 end
@@ -1152,13 +1150,14 @@ if args.coutput then
     if not impldata.nowrap then
       local fn = impldata.nobubblewrap and 'wowless_impl_stub_nobubblewrap' or 'wowless_impl_stub'
       local v = entry.cfg
-      local check_inputs = v.inputs ~= nil and (v.instride or 0) == 0
+      local check_inputs = v.inputs ~= nil
       local check_outputs = v.outputs ~= nil
       local inputs = v.inputs or {}
       local outputs = v.outputs or {}
       local outstride = v.outstride or 0
+      local instride = v.instride or 0
       local nfixed = #outputs - outstride
-      local nsins = #inputs
+      local nsins = #inputs - instride
       emit('static int implstub_%s(lua_State *L) {', safename(entry.name))
       if check_inputs then
         local function check(inp, idx)
@@ -1173,15 +1172,32 @@ if args.coutput then
           )
         end
         local inputcheck = v.usage and usagecheck or check
-        for i, inp in ipairs(inputs) do
-          emit('  %s', inputcheck(inp, i))
+        for i = 1, nsins do
+          emit('  %s', inputcheck(inputs[i], i))
+        end
+        if instride > 0 then
+          emit('  int i, n = lua_gettop(L);')
+          emit('  for (i = %d; i <= n; i += %d) {', nsins + 1, instride)
+          for j = nsins + 1, #inputs do
+            emit('    %s', inputcheck(inputs[j], 'i + ' .. (j - nsins - 1)))
+          end
+          emit('  }')
         end
         if v.usage then
-          for i, inp in ipairs(inputs) do
-            emit('  %s', check(inp, i))
+          for i = 1, nsins do
+            emit('  %s', check(inputs[i], i))
+          end
+          if instride > 0 then
+            emit('  for (i = %d; i <= n; i += %d) {', nsins + 1, instride)
+            for j = nsins + 1, #inputs do
+              emit('    %s', check(inputs[j], 'i + ' .. (j - nsins - 1)))
+            end
+            emit('  }')
           end
         end
-        emit('  wowless_stubcheckextraargs(L, %d, %s);', nsins, cstring(entry.name))
+        if instride == 0 then
+          emit('  wowless_stubcheckextraargs(L, %d, %s);', nsins, cstring(entry.name))
+        end
       end
       if check_outputs then
         emit('  int ret = %s(L);', fn)
