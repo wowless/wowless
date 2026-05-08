@@ -263,6 +263,7 @@ local function ensureimpl(k)
 end
 
 local impl_input_types = {
+  any = nop,
   boolean = nop,
   enum = nop,
   FileAsset = nop,
@@ -275,6 +276,7 @@ local impl_input_types = {
 }
 
 local impl_output_types = {
+  any = nop,
   boolean = nop,
   enum = nop,
   FileAsset = nop,
@@ -749,6 +751,7 @@ if args.coutput then
   end
   local cinputtypes
   cinputtypes = {
+    any = simple_cinputtype('any'),
     arrayof = function(inner)
       local inner_fn = dispatch(cinputtypes, inner)
       local key = arrayof_type_key(inner)
@@ -802,6 +805,7 @@ if args.coutput then
   end
 
   local coutputtypes = {
+    any = simple_coutputtype('any'),
     boolean = simple_coutputtype('boolean'),
     enum = function(_, nilable, idx)
       return (simple_coutputtype('enum'))(nilable, idx)

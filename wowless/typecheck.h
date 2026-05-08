@@ -505,6 +505,16 @@ static inline void wowless_implchecknilablenil(lua_State *L, int idx) {
   wowless_stubchecknil(L, idx);
 }
 
+static inline void wowless_implcheckunknown(lua_State *L, int idx) {
+  wowless_stubcheckunknown(L, idx);
+}
+
+static inline void wowless_implchecknilableunknown(lua_State *L, int idx) {}
+
+static inline void wowless_implcheckany(lua_State *L, int idx) {}
+
+static inline void wowless_implchecknilableany(lua_State *L, int idx) {}
+
 static inline void wowless_imploutputoneornil(lua_State *L, int idx) {
   if (!lua_isnil(L, idx) &&
       !(lua_type(L, idx) == LUA_TNUMBER && lua_tonumber(L, idx) == 1)) {
@@ -680,6 +690,14 @@ static inline void wowless_imploutputnilableuiobject(lua_State *L, int idx,
     wowless_imploutputuiobject(L, idx, typename, typenamelen);
   }
 }
+
+static inline void wowless_imploutputunknown(lua_State *L, int idx) {}
+
+static inline void wowless_imploutputnilableunknown(lua_State *L, int idx) {}
+
+static inline void wowless_imploutputany(lua_State *L, int idx) {}
+
+static inline void wowless_imploutputnilableany(lua_State *L, int idx) {}
 
 static inline void wowless_stubcheckextraargs(lua_State *L, int nsins,
                                               const char *fname) {
