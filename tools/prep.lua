@@ -4,6 +4,7 @@ local args = (function()
   parser:option('--sqls', 'sqls file')
   parser:option('-o --output', 'output file')
   parser:option('--coutput', 'C stubs output file')
+  parser:option('--uiobjmodel', 'C uiobject model output file')
   return parser:parse()
 end)()
 
@@ -730,6 +731,63 @@ if args.coutput then
     end,
   }
 
+  local uiobject_type_ids = {}
+  local uiobject_type_order = {}
+  do
+    local i = 0
+    for uname in sorted(uiobjectdata) do
+      uiobject_type_ids[uname] = i
+      table.insert(uiobject_type_order, uname)
+      i = i + 1
+    end
+    if i > 128 then
+      error('too many uiobject types for current isa bitset width: ' .. i)
+    end
+  end
+  local uiobject_isa = {}
+  do
+    local function compute(uname)
+      if uiobject_isa[uname] then
+        return uiobject_isa[uname]
+      end
+      local set = { [uname] = true }
+      local v = uiobjectdata[uname]
+      for inh in pairs(v.inherits or {}) do
+        local parent_set = compute(inh)
+        for k in pairs(parent_set) do
+          set[k] = true
+        end
+      end
+      uiobject_isa[uname] = set
+      return set
+    end
+    for uname in pairs(uiobjectdata) do
+      compute(uname)
+    end
+  end
+  local function uiobject_isa_word_strs(uname)
+    -- Return two 64-bit hex literals (low, high) so we don't lose
+    -- precision through Lua's double-precision number type.
+    local bits = {}
+    for ancestor in pairs(uiobject_isa[uname]) do
+      bits[assert(uiobject_type_ids[ancestor], ancestor)] = true
+    end
+    local function word(base)
+      local nibbles = {}
+      for i = 15, 0, -1 do
+        local n = 0
+        for j = 0, 3 do
+          if bits[base + i * 4 + j] then
+            n = n + 2 ^ j
+          end
+        end
+        table.insert(nibbles, string.format('%x', n))
+      end
+      return 'UINT64_C(0x' .. table.concat(nibbles) .. ')'
+    end
+    return word(0), word(64)
+  end
+
   local used_structures = {}
   local used_arrayofs = {}
   local function simple_cinputtype(suffix)
@@ -818,8 +876,7 @@ if args.coutput then
     table = simple_coutputtype('table'),
     uiobject = function(typename, nilable, idx)
       local ns = nilable and 'nilable' or ''
-      local tn = cstring(typename)
-      return string.format('wowless_imploutput%suiobject(L, %d, %s, sizeof(%s)-1)', ns, idx, tn, tn)
+      return string.format('wowless_imploutput%suiobject_%s(L, %d)', ns, safename(typename), idx)
     end,
     unit = simple_coutputtype('unit'),
     unknown = simple_coutputtype('unknown'),
@@ -849,6 +906,9 @@ if args.coutput then
   emit('#include "lauxlib.h"')
   emit('#include "wowless/stubs.h"')
   emit('#include "wowless/typecheck.h"')
+  emit('#include "wowless/uiobject.h"')
+  emit('')
+  emit('extern const struct wowless_uiobject_typeinfo wowless_uiobject_typeinfo_%s[];', safename(product))
   emit('')
 
   local eligible = {}
@@ -966,6 +1026,8 @@ if args.coutput then
     emit('static int wowless_isnilableuiobject_%s(lua_State *L, int idx);', safename(uname))
     emit('static void wowless_stubcheckuiobject_%s(lua_State *L, int idx);', safename(uname))
     emit('static void wowless_stubchecknilableuiobject_%s(lua_State *L, int idx);', safename(uname))
+    emit('static void wowless_imploutputuiobject_%s(lua_State *L, int idx);', safename(uname))
+    emit('static void wowless_imploutputnilableuiobject_%s(lua_State *L, int idx);', safename(uname))
   end
   if next(uiobjectdata) then
     emit('')
@@ -1035,21 +1097,50 @@ if args.coutput then
   end
 
   for uname in sorted(uiobjectdata) do
-    local target = uname:lower()
-    emit('static int wowless_isuiobject_%s(lua_State *L, int idx) {', safename(uname))
-    emit('  return wowless_isuiobject(L, idx, %s, %d);', cstring(target), #target)
+    local sn = safename(uname)
+    local id = assert(uiobject_type_ids[uname], uname)
+    emit('static int wowless_isuiobject_%s(lua_State *L, int idx) {', sn)
+    emit('  if (lua_type(L, idx) != LUA_TTABLE) return 0;')
+    emit('  lua_rawgeti(L, idx, 0);')
+    emit('  int t = lua_type(L, -1);')
+    emit('  void *p = (t == LUA_TLIGHTUSERDATA || t == LUA_TUSERDATA) ? lua_touserdata(L, -1) : NULL;')
+    emit('  lua_pop(L, 1);')
+    emit('  const struct wowless_uiobject *u = wowless_uiobject_check_ptr(p);')
+    emit('  return u && wowless_uiobject_isa_id(u, wowless_uiobject_typeinfo_%s, %d);', safename(product), id)
     emit('}')
     emit('')
-    emit('static int wowless_isnilableuiobject_%s(lua_State *L, int idx) {', safename(uname))
-    emit('  return wowless_isnilableuiobject(L, idx, %s, %d);', cstring(target), #target)
+    emit('static int wowless_isnilableuiobject_%s(lua_State *L, int idx) {', sn)
+    emit('  return lua_isnoneornil(L, idx) || wowless_isuiobject_%s(L, idx);', sn)
     emit('}')
     emit('')
-    emit('static void wowless_stubcheckuiobject_%s(lua_State *L, int idx) {', safename(uname))
-    emit('  if (!wowless_isuiobject_%s(L, idx)) luaL_typerror(L, idx, "uiobject");', safename(uname))
+    emit('static void wowless_stubcheckuiobject_%s(lua_State *L, int idx) {', sn)
+    emit('  if (!wowless_isuiobject_%s(L, idx)) luaL_typerror(L, idx, "uiobject");', sn)
     emit('}')
     emit('')
-    emit('static void wowless_stubchecknilableuiobject_%s(lua_State *L, int idx) {', safename(uname))
-    emit('  if (!wowless_isnilableuiobject_%s(L, idx)) luaL_typerror(L, idx, "uiobject");', safename(uname))
+    emit('static void wowless_stubchecknilableuiobject_%s(lua_State *L, int idx) {', sn)
+    emit('  if (!wowless_isnilableuiobject_%s(L, idx)) luaL_typerror(L, idx, "uiobject");', sn)
+    emit('}')
+    emit('')
+    emit('static void wowless_imploutputuiobject_%s(lua_State *L, int idx) {', sn)
+    emit('  idx = lua_absindex(L, idx);')
+    emit('  void *p = NULL;')
+    emit('  if (lua_type(L, idx) == LUA_TTABLE) {')
+    emit('    lua_rawgeti(L, idx, 0);')
+    emit('    int t = lua_type(L, -1);')
+    emit('    if (t == LUA_TLIGHTUSERDATA || t == LUA_TUSERDATA) p = lua_touserdata(L, -1);')
+    emit('    lua_pop(L, 1);')
+    emit('  }')
+    emit('  const struct wowless_uiobject *u = wowless_uiobject_check_ptr(p);')
+    emit('  if (!u || !wowless_uiobject_isa_id(u, wowless_uiobject_typeinfo_%s, %d)) {', safename(product), id)
+    emit('    wowless_outputtyperror(L, idx, "uiobject");')
+    emit('    return;')
+    emit('  }')
+    emit('  lua_getfield(L, idx, "luarep");')
+    emit('  lua_replace(L, idx);')
+    emit('}')
+    emit('')
+    emit('static void wowless_imploutputnilableuiobject_%s(lua_State *L, int idx) {', sn)
+    emit('  if (!lua_isnoneornil(L, idx)) wowless_imploutputuiobject_%s(L, idx);', sn)
     emit('}')
     emit('')
   end
@@ -1315,6 +1406,109 @@ if args.coutput then
   cf:write(table.concat(lines, '\n'))
   cf:write('\n')
   cf:close()
+
+  if args.uiobjmodel then
+    local mlines = {}
+    local function memit(fmt, ...)
+      table.insert(mlines, string.format(fmt, ...))
+    end
+    memit('#include <stdint.h>')
+    memit('#include <string.h>')
+    memit('')
+    memit('#include "lauxlib.h"')
+    memit('#include "lua.h"')
+    memit('#include "wowless/uiobject.h"')
+    memit('')
+    memit('const struct wowless_uiobject_typeinfo wowless_uiobject_typeinfo_%s[] = {', safename(product))
+    for i, uname in ipairs(uiobject_type_order) do
+      local lo, hi = uiobject_isa_word_strs(uname)
+      local display = uiobjectdata[uname].objectType or uname
+      memit('  /* %d */ { %s, %s, { %s, %s } },', i - 1, cstring(uname:lower()), cstring(display), lo, hi)
+    end
+    memit('};')
+    memit('static const size_t wowless_uiobject_type_count_%s = %d;', safename(product), #uiobject_type_order)
+    memit('')
+    memit('static int find_type_id(const char *name) {')
+    memit('  for (size_t i = 0; i < wowless_uiobject_type_count_%s; i++) {', safename(product))
+    memit('    if (strcmp(wowless_uiobject_typeinfo_%s[i].lower_name, name) == 0) {', safename(product))
+    memit('      return (int)i;')
+    memit('    }')
+    memit('  }')
+    memit('  return -1;')
+    memit('}')
+    memit('')
+    memit('static const struct wowless_uiobject *check_ptr_at(lua_State *L, int idx) {')
+    memit('  int t = lua_type(L, idx);')
+    memit('  if (t != LUA_TLIGHTUSERDATA && t != LUA_TUSERDATA) return NULL;')
+    memit('  return wowless_uiobject_check_ptr(lua_touserdata(L, idx));')
+    memit('}')
+    memit('')
+    memit('static int l_alloc(lua_State *L) {')
+    memit('  const char *name = luaL_checkstring(L, 1);')
+    memit('  int id = find_type_id(name);')
+    memit('  if (id < 0) return luaL_error(L, "unknown uiobject type: %%s", name);')
+    memit('  wowless_uiobject_alloc(L, (uint16_t)id);')
+    memit('  return 2;')
+    memit('}')
+    memit('')
+    memit('static int l_get_type_name(lua_State *L) {')
+    memit('  const struct wowless_uiobject *u = check_ptr_at(L, 1);')
+    memit('  if (!u) return luaL_argerror(L, 1, "uiobject userdata expected");')
+    memit('  lua_pushstring(L, wowless_uiobject_typeinfo_%s[u->type_id].lower_name);', safename(product))
+    memit('  return 1;')
+    memit('}')
+    memit('')
+    memit('static int l_get_display_name(lua_State *L) {')
+    memit('  const struct wowless_uiobject *u = check_ptr_at(L, 1);')
+    memit('  if (!u) return luaL_argerror(L, 1, "uiobject userdata expected");')
+    memit('  lua_pushstring(L, wowless_uiobject_typeinfo_%s[u->type_id].display_name);', safename(product))
+    memit('  return 1;')
+    memit('}')
+    memit('')
+    memit('static int l_is_object_type(lua_State *L) {')
+    memit('  const struct wowless_uiobject *u = check_ptr_at(L, 1);')
+    memit('  if (!u) { lua_pushboolean(L, 0); return 1; }')
+    memit('  const char *target = luaL_checkstring(L, 2);')
+    memit('  int id = find_type_id(target);')
+    memit('  if (id < 0) { lua_pushboolean(L, 0); return 1; }')
+    memit(
+      '  lua_pushboolean(L, wowless_uiobject_isa_id(u, wowless_uiobject_typeinfo_%s, (uint16_t)id));',
+      safename(product)
+    )
+    memit('  return 1;')
+    memit('}')
+    memit('')
+    memit('static int l_has_type(lua_State *L) {')
+    memit('  const char *name = luaL_checkstring(L, 1);')
+    memit('  lua_pushboolean(L, find_type_id(name) >= 0);')
+    memit('  return 1;')
+    memit('}')
+    memit('')
+    memit('static int make_module(lua_State *L) {')
+    memit('  lua_createtable(L, 0, 5);')
+    memit('  lua_pushcfunction(L, l_alloc);')
+    memit('  lua_setfield(L, -2, "Alloc");')
+    memit('  lua_pushcfunction(L, l_get_type_name);')
+    memit('  lua_setfield(L, -2, "GetTypeName");')
+    memit('  lua_pushcfunction(L, l_get_display_name);')
+    memit('  lua_setfield(L, -2, "GetDisplayName");')
+    memit('  lua_pushcfunction(L, l_is_object_type);')
+    memit('  lua_setfield(L, -2, "IsObjectType");')
+    memit('  lua_pushcfunction(L, l_has_type);')
+    memit('  lua_setfield(L, -2, "HasType");')
+    memit('  return 1;')
+    memit('}')
+    memit('')
+    memit('int luaopen_build_products_%s_uiobjmodel(lua_State *L) {', product)
+    memit('  lua_pushcfunction(L, make_module);')
+    memit('  return 1;')
+    memit('}')
+
+    local mf = assert(io.open(args.uiobjmodel, 'w'))
+    mf:write(table.concat(mlines, '\n'))
+    mf:write('\n')
+    mf:close()
+  end
 end
 
 local outfn = args.output or ('build/products/' .. args.product .. '/data.lua')
