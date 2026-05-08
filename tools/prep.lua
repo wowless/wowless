@@ -803,7 +803,9 @@ if args.coutput then
 
   local coutputtypes = {
     boolean = simple_coutputtype('boolean'),
-    enum = simple_coutputtype('enum'),
+    enum = function(_, nilable, idx)
+      return (simple_coutputtype('enum'))(nilable, idx)
+    end,
     FileAsset = simple_coutputtype('fileasset'),
     ['function'] = simple_coutputtype('function'),
     luaobject = function(typename, nilable, idx)
