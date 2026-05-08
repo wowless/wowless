@@ -273,6 +273,7 @@ local impl_input_types = {
   table = nop,
   uiAddon = nop,
   unit = nop,
+  unknown = nop,
 }
 
 local impl_output_types = {
@@ -289,6 +290,7 @@ local impl_output_types = {
   table = nop,
   uiobject = nop,
   unit = nop,
+  unknown = nop,
 }
 
 local function is_impl_eligible(apicfg)
