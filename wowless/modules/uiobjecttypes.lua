@@ -1,4 +1,4 @@
-return function()
+return function(uiobjects, uiobjmodel)
   local uiobjectTypes = {}
 
   local function Add(name, t)
@@ -6,7 +6,11 @@ return function()
   end
 
   local function GetObjectType(obj)
-    return uiobjectTypes[obj.type].name
+    local dyn = uiobjects.GetDynamicType(obj)
+    if dyn then
+      return uiobjectTypes[dyn].name
+    end
+    return uiobjmodel.GetDisplayName(obj[0])
   end
 
   local function GetOrThrow(name)
@@ -19,6 +23,10 @@ return function()
 
   local function GetSandboxMetatable(name)
     return GetOrThrow(name).sandboxMT
+  end
+
+  local function GetType(obj)
+    return uiobjects.GetDynamicType(obj) or uiobjmodel.GetTypeName(obj[0])
   end
 
   local function Has(name)
@@ -42,8 +50,12 @@ return function()
   end
 
   local function IsObjectType(obj, ty)
-    ty = string.lower(ty)
-    return uiobjectTypes[obj.type].isa[ty] or false
+    local lty = string.lower(ty)
+    local dyn = uiobjects.GetDynamicType(obj)
+    if dyn then
+      return uiobjectTypes[dyn].isa[lty] or false
+    end
+    return uiobjmodel.IsObjectType(obj[0], lty)
   end
 
   return {
@@ -51,6 +63,7 @@ return function()
     GetObjectType = GetObjectType,
     GetOrThrow = GetOrThrow,
     GetSandboxMetatable = GetSandboxMetatable,
+    GetType = GetType,
     Has = Has,
     HasScript = HasScript,
     InheritsFrom = InheritsFrom,

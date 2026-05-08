@@ -478,10 +478,12 @@ foreach(product ${products})
   add_custom_command(
     OUTPUT stamp/${product}.txt
     BYPRODUCTS runtime/${product}.lua generated/${product}_stubs.c
+               generated/${product}_uiobjmodel.c
     COMMAND
       prep ${product} --sqls ${CMAKE_CURRENT_BINARY_DIR}/runtime/sqls.yaml
       --output ${CMAKE_CURRENT_BINARY_DIR}/generated/${product}.lua --coutput
-      ${CMAKE_CURRENT_BINARY_DIR}/generated/${product}_stubs.c
+      ${CMAKE_CURRENT_BINARY_DIR}/generated/${product}_stubs.c --uiobjmodel
+      ${CMAKE_CURRENT_BINARY_DIR}/generated/${product}_uiobjmodel.c
     COMMAND
       ${CMAKE_COMMAND} -E copy_if_different
       ${CMAKE_CURRENT_BINARY_DIR}/generated/${product}.lua
@@ -493,12 +495,13 @@ foreach(product ${products})
     DEPENDS prep runtime/sqls.yaml)
   add_custom_target(datalua_${product}_lua DEPENDS stamp/${product}.txt)
   add_dependencies(datalua_${product}_lua stamp_sqls)
-  lua2c(datalua_${product}
-        build.products.${product}.data=runtime/${product}.lua
-        build.products.${product}.stubs=c)
+  lua2c(
+    datalua_${product} build.products.${product}.data=runtime/${product}.lua
+    build.products.${product}.stubs=c build.products.${product}.uiobjmodel=c)
   target_sources(
     datalua_${product}
-    PRIVATE ${CMAKE_CURRENT_BINARY_DIR}/generated/${product}_stubs.c)
+    PRIVATE ${CMAKE_CURRENT_BINARY_DIR}/generated/${product}_stubs.c
+            ${CMAKE_CURRENT_BINARY_DIR}/generated/${product}_uiobjmodel.c)
   add_dependencies(datalua_${product} datalua_${product}_lua)
   list(APPEND dataluas datalua_${product})
 endforeach()
@@ -832,6 +835,7 @@ lua2c(
   wowless.modules.uiobjectloader=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/uiobjectloader.lua
   wowless.modules.uiobjects=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/uiobjects.lua
   wowless.modules.uiobjecttypes=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/uiobjecttypes.lua
+  wowless.modules.uiobjmodel=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/uiobjmodel.lua
   wowless.modules.units=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/units.lua
   wowless.modules.visibility=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/visibility.lua
   wowless.profiler=${CMAKE_CURRENT_SOURCE_DIR}/wowless/profiler.lua
@@ -846,7 +850,8 @@ target_sources(
           wowless/modules/ctypecheck.c
           wowless/modules/encodingutil.c
           wowless/secure.c
-          wowless/stubs.c)
+          wowless/stubs.c
+          wowless/uiobject.c)
 
 add_lua_executable(
   wowless

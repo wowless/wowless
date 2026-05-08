@@ -1,6 +1,7 @@
-return function(dirty, system, visibility)
+return function(dirty, system, uiobjects, visibility)
   local IsVisible = visibility.IsVisible
   local SetDirty = dirty.SetDirty
+  local GetType = uiobjects.GetType
 
   local screen = {
     bottom = 0,
@@ -161,22 +162,22 @@ return function(dirty, system, visibility)
 
   local function SetHeight(r, h)
     if h ~= r.height then
-      r.height = r.type == 'fontstring' and h == 0 and 1 or h
+      r.height = GetType(r) == 'fontstring' and h == 0 and 1 or h
       SetDirty(r)
     end
   end
 
   local function SetSize(r, w, h)
     if w ~= r.width or h ~= r.height then
-      r.width = r.type == 'fontstring' and w == 0 and 1 or w
-      r.height = r.type == 'fontstring' and h == 0 and 1 or h
+      r.width = GetType(r) == 'fontstring' and w == 0 and 1 or w
+      r.height = GetType(r) == 'fontstring' and h == 0 and 1 or h
       SetDirty(r)
     end
   end
 
   local function SetWidth(r, w)
     if w ~= r.width then
-      r.width = r.type == 'fontstring' and w == 0 and 1 or w
+      r.width = GetType(r) == 'fontstring' and w == 0 and 1 or w
       SetDirty(r)
     end
   end
