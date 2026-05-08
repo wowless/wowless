@@ -268,6 +268,7 @@ local impl_input_types = {
   enum = nop,
   FileAsset = nop,
   ['function'] = nop,
+  luaobject = nop,
   number = nop,
   string = nop,
   table = nop,

@@ -24,6 +24,18 @@ return function(addons, api, events, log, luaobjects, uiobjects, uiobjecttypes, 
     return internal and internal.type == typename
   end
 
+  local function ImplInputLuaObject(value, typename)
+    local coerced = luaobjects.Coerce(typename, value)
+    if coerced then
+      return coerced
+    end
+    local internal = luaobjects.UserData(value)
+    if internal and internal.type == typename then
+      return internal
+    end
+    error('expected luaobject ' .. typename)
+  end
+
   local function ImplOutputLuaObject(internal, typename)
     if type(internal) ~= 'table' or internal.type ~= typename then
       error('impl output type error: expected luaobject ' .. typename)
@@ -56,6 +68,7 @@ return function(addons, api, events, log, luaobjects, uiobjects, uiobjecttypes, 
     FireProtected = bubblewrap(FireProtected),
     GetUiAddon = GetUiAddon,
     GetUnit = units.GetUnit,
+    ImplInputLuaObject = ImplInputLuaObject,
     ImplOutputLuaObject = ImplOutputLuaObject,
     ImplOutputUiObject = ImplOutputUiObject,
     CreateLuaObject = CreateLuaObject,

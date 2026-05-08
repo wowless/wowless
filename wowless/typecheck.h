@@ -515,6 +515,25 @@ static inline void wowless_implcheckany(lua_State *L, int idx) {}
 
 static inline void wowless_implchecknilableany(lua_State *L, int idx) {}
 
+static inline void wowless_implcheckluaobject(lua_State *L, int idx,
+                                              const char *typename,
+                                              size_t typenamelen) {
+  idx = lua_absindex(L, idx);
+  lua_getfield(L, lua_upvalueindex(1), "ImplInputLuaObject");
+  lua_pushvalue(L, idx);
+  lua_pushlstring(L, typename, typenamelen);
+  lua_call(L, 2, 1);
+  lua_replace(L, idx);
+}
+
+static inline void wowless_implchecknilableluaobject(lua_State *L, int idx,
+                                                     const char *typename,
+                                                     size_t typenamelen) {
+  if (!lua_isnoneornil(L, idx)) {
+    wowless_implcheckluaobject(L, idx, typename, typenamelen);
+  }
+}
+
 static inline void wowless_imploutputoneornil(lua_State *L, int idx) {
   if (!lua_isnil(L, idx) &&
       !(lua_type(L, idx) == LUA_TNUMBER && lua_tonumber(L, idx) == 1)) {
