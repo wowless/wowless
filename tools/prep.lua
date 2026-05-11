@@ -735,7 +735,6 @@ if args.coutput then
     end,
   }
 
-  local used_structures = {}
   local used_arrayofs = {}
   local function simple_cinputtype(suffix)
     local fn = function(verb, nilable, idx)
@@ -782,11 +781,7 @@ if args.coutput then
       end
     end,
     structure = function(name)
-      local st = assert(structures[name], name)
-      for _, field in pairs(st.fields) do
-        dispatch(cinputtypes, field.type)
-      end
-      used_structures[name] = true
+      assert(structures[name], name)
       return function(_, nilable, idx)
         return string.format('wowless_stubcheck%sstruct_%s(L, %s)', nilable and 'nilable' or '', safename(name), idx)
       end
@@ -881,6 +876,12 @@ if args.coutput then
     end
   end
 
+  for _, st in pairs(structures) do
+    for _, field in pairs(st.fields) do
+      pcall(dispatch, cinputtypes, field.type)
+    end
+  end
+
   local lua_value_emitters
   lua_value_emitters = {
     boolean = function(v)
@@ -948,11 +949,11 @@ if args.coutput then
     end,
   }
 
-  for sname in sorted(used_structures) do
+  for sname in sorted(structures) do
     emit('static void wowless_stubcheckstruct_%s(lua_State *L, int idx);', safename(sname))
     emit('static void wowless_stubchecknilablestruct_%s(lua_State *L, int idx);', safename(sname))
   end
-  if next(used_structures) then
+  if next(structures) then
     emit('')
   end
   for atype in sorted(used_arrayofs) do
@@ -981,8 +982,7 @@ if args.coutput then
     emit('')
   end
 
-  for sname in sorted(used_structures) do
-    local st = assert(structures[sname], sname)
+  for sname, st in sorted(structures) do
     emit('static void wowless_stubcheckstruct_%s(lua_State *L, int idx) {', safename(sname))
     emit('  idx = lua_absindex(L, idx);')
     emit('  wowless_stubchecktable(L, idx);')
