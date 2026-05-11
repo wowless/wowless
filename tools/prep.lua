@@ -264,6 +264,7 @@ end
 
 local impl_input_types = {
   any = nop,
+  arrayof = nop,
   boolean = nop,
   enum = nop,
   FileAsset = nop,
@@ -759,7 +760,8 @@ if args.coutput then
       local key = arrayof_type_key(inner)
       used_arrayofs[key] = inner_fn
       return function(verb, nilable, idx)
-        return string.format('wowless_%s%sarrayof_%s(L, %s)', verb, nilable and 'nilable' or '', key, idx)
+        local effective_verb = verb == 'implcheck' and 'stubcheck' or verb
+        return string.format('wowless_%s%sarrayof_%s(L, %s)', effective_verb, nilable and 'nilable' or '', key, idx)
       end
     end,
     boolean = simple_cinputtype('boolean'),
