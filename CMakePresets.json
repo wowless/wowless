@@ -13,6 +13,7 @@
     {
       "binaryDir": "${sourceDir}/build",
       "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release",
         "CMAKE_C_FLAGS": "-DNDEBUG -ffast-math -O3",
         "CMAKE_EXPORT_COMPILE_COMMANDS": true
       },
