@@ -290,6 +290,7 @@ local impl_output_types = {
   number = nop,
   oneornil = nop,
   string = nop,
+  structure = nop,
   table = nop,
   uiobject = nop,
   unit = nop,
@@ -820,6 +821,9 @@ if args.coutput then
     number = simple_coutputtype('number'),
     oneornil = simple_coutputtype('oneornil'),
     string = simple_coutputtype('string'),
+    structure = function(name, nilable, idx)
+      return string.format('wowless_stubcheck%sstruct_%s(L, %s)', nilable and 'nilable' or '', safename(name), idx)
+    end,
     table = simple_coutputtype('table'),
     uiobject = function(typename, nilable, idx)
       local ns = nilable and 'nilable' or ''
