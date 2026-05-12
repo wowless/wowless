@@ -332,7 +332,6 @@ fix the issues before considering the task complete.
 ## Commit Message Style
 
 - Prefix with module name and colon when changes are localized:
-  `luaobjects: description`
-- Keep messages concise (no period at end)
+  `luaobjects: description` (no period at end)
 - Always add a `Co-Authored-By: <model name> <noreply@anthropic.com>` trailer
   using the actual model name (e.g., `Claude Sonnet 4.6`)
