@@ -84,7 +84,7 @@ local function checkLuaObject(ty, o)
       if config.tostring_metamethod then
         assert(tostring(o):match('^' .. ty .. ': 0x[0-9a-f]+$'))
       else
-        assert(tostring(o):match('^userdata: 0x[0-9a-f]+$'))
+        assert(tostring(o):match('^userdata: 0[xX]?%x+$'))
       end
     end,
     type = function()
