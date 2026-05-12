@@ -279,8 +279,12 @@ local impl_input_types = {
   unknown = nop,
 }
 
-local impl_output_types = {
+local impl_output_types
+impl_output_types = {
   any = nop,
+  arrayof = function(inner)
+    dispatch(impl_output_types, inner)
+  end,
   boolean = nop,
   enum = nop,
   FileAsset = nop,
@@ -737,6 +741,7 @@ if args.coutput then
   }
 
   local used_arrayofs = {}
+  local used_output_arrayofs = {}
   local function simple_cinputtype(suffix)
     local fn = function(verb, nilable, idx)
       return string.format('wowless_%s%s%s(L, %s)', verb, nilable and 'nilable' or '', suffix, idx)
@@ -804,8 +809,17 @@ if args.coutput then
     end
   end
 
-  local coutputtypes = {
+  local coutputtypes
+  coutputtypes = {
     any = simple_coutputtype('any'),
+    arrayof = function(inner, nilable, idx)
+      local inner_fn = function(el_nilable, el_idx)
+        return dispatch(coutputtypes, inner, el_nilable, el_idx)
+      end
+      local key = arrayof_type_key(inner)
+      used_output_arrayofs[key] = inner_fn
+      return string.format('wowless_imploutput%sarrayof_%s(L, %s)', nilable and 'nilable' or '', key, idx)
+    end,
     boolean = simple_coutputtype('boolean'),
     enum = function(_, nilable, idx)
       return (simple_coutputtype('enum'))(nilable, idx)
@@ -883,6 +897,16 @@ if args.coutput then
   for _, st in pairs(structures) do
     for _, field in pairs(st.fields) do
       pcall(dispatch, cinputtypes, field.type)
+    end
+  end
+  for _, entry in ipairs(eligible_impls) do
+    if not entry.impldata.nowrap then
+      for _, inp in ipairs(entry.cfg.inputs or {}) do
+        dispatch(cinputtypes, inp.type)
+      end
+      for _, out in ipairs(entry.cfg.outputs or {}) do
+        dispatch(coutputtypes, out.type, false, 0)
+      end
     end
   end
 
@@ -967,6 +991,13 @@ if args.coutput then
   if next(used_arrayofs) then
     emit('')
   end
+  for atype in sorted(used_output_arrayofs) do
+    emit('static void wowless_imploutputarrayof_%s(lua_State *L, int idx);', atype)
+    emit('static void wowless_imploutputnilablearrayof_%s(lua_State *L, int idx);', atype)
+  end
+  if next(used_output_arrayofs) then
+    emit('')
+  end
   for sename in sorted(stringenums) do
     emit('static int wowless_isstringenum_%s(lua_State *L, int idx);', safename(sename))
     emit('static int wowless_isnilablestringenum_%s(lua_State *L, int idx);', safename(sename))
@@ -1024,6 +1055,27 @@ if args.coutput then
     emit('static void wowless_stubchecknilablearrayof_%s(lua_State *L, int idx) {', atype)
     emit('  if (!lua_isnoneornil(L, idx)) {')
     emit('    wowless_stubcheckarrayof_%s(L, idx);', atype)
+    emit('  }')
+    emit('}')
+    emit('')
+  end
+
+  for atype, inner_fn in sorted(used_output_arrayofs) do
+    emit('static void wowless_imploutputarrayof_%s(lua_State *L, int idx) {', atype)
+    emit('  int i, n;')
+    emit('  idx = lua_absindex(L, idx);')
+    emit('  wowless_imploutputtable(L, idx);')
+    emit('  n = (int)lua_objlen(L, idx);')
+    emit('  for (i = 1; i <= n; i++) {')
+    emit('    lua_rawgeti(L, idx, i);')
+    emit('    %s;', inner_fn(false, -1))
+    emit('    lua_pop(L, 1);')
+    emit('  }')
+    emit('}')
+    emit('')
+    emit('static void wowless_imploutputnilablearrayof_%s(lua_State *L, int idx) {', atype)
+    emit('  if (!lua_isnoneornil(L, idx)) {')
+    emit('    wowless_imploutputarrayof_%s(L, idx);', atype)
     emit('  }')
     emit('}')
     emit('')
