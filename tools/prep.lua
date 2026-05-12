@@ -813,12 +813,9 @@ if args.coutput then
   coutputtypes = {
     any = simple_coutputtype('any'),
     arrayof = function(inner, nilable, idx)
-      local inner_fn = function(el_nilable, el_idx)
-        return dispatch(coutputtypes, inner, el_nilable, el_idx)
-      end
       local key = arrayof_type_key(inner)
-      used_output_arrayofs[key] = inner_fn
-      return string.format('wowless_imploutput%sarrayof_%s(L, %s)', nilable and 'nilable' or '', key, idx)
+      used_arrayofs[key] = dispatch(cinputtypes, inner)
+      return string.format('wowless_stubcheck%sarrayof_%s(L, %s)', nilable and 'nilable' or '', key, idx)
     end,
     boolean = simple_coutputtype('boolean'),
     enum = function(_, nilable, idx)
