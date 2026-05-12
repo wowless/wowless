@@ -79,7 +79,7 @@ return function(
     name = ''
     local parent = frame.parent
     while parent do
-      local key = parentkey.GetParentKey(frame) or string.match(tostring(frame), '^table: 0x0*(.*)$'):lower()
+      local key = parentkey.GetParentKey(frame) or tostring(frame):gsub('^%S+ 0x?0*', ''):lower()
       name = key .. (name == '' and '' or ('.' .. name))
       local parentName = parent.name
       if parentName == 'UIParent' then

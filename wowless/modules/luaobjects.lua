@@ -60,7 +60,7 @@ return function(datalua)
             objs[u].table[key] = value
           end,
           __tostring = config.tostring_metamethod and function(u)
-            return k .. ': ' .. tostring(objs[u].table):sub(8)
+            return k .. ': 0x' .. tostring(objs[u].table):gsub('^%S+ 0x?0*', ''):lower()
           end or nil,
         }
 
