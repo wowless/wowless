@@ -338,7 +338,7 @@ target_sources(wowlessyaml PRIVATE wowapi/cyaml.c)
 target_link_libraries(wowlessyaml PRIVATE yaml)
 
 add_lua_executable(yaml2lua ${CMAKE_CURRENT_SOURCE_DIR}/tools/yaml2lua.lua
-                   penlight wowlessyaml)
+                   penlight toolsutil wowlessyaml)
 add_lua_executable(lua2yaml ${CMAKE_CURRENT_SOURCE_DIR}/tools/lua2yaml.lua
                    penlight wowlessyaml)
 
@@ -358,7 +358,10 @@ yaml2lua(modules)
 yaml2lua(products)
 yaml2lua(stringenums)
 
-lua2c(toolsutil tools.util=${CMAKE_CURRENT_SOURCE_DIR}/tools/util.lua)
+lua2c(toolsprettywrite
+      tools.prettywrite=${CMAKE_CURRENT_SOURCE_DIR}/tools/prettywrite.lua)
+lua2c(toolsutil tools.util=${CMAKE_CURRENT_SOURCE_DIR}/tools/util.lua
+      toolsprettywrite=p)
 
 add_lua_executable(sqls ${CMAKE_CURRENT_SOURCE_DIR}/tools/sqls.lua penlight
                    toolsutil wowlessyaml)
@@ -848,7 +851,8 @@ lua2c(
   wowless.profiler=${CMAKE_CURRENT_SOURCE_DIR}/wowless/profiler.lua
   wowless.runner=${CMAKE_CURRENT_SOURCE_DIR}/wowless/runner.lua
   wowless.secure=c
-  wowless.xml=${CMAKE_CURRENT_SOURCE_DIR}/wowless/xml.lua)
+  wowless.xml=${CMAKE_CURRENT_SOURCE_DIR}/wowless/xml.lua
+  toolsprettywrite=p)
 target_sources(
   wowlesslib
   PRIVATE wowless/bubblewrap.c
@@ -955,6 +959,7 @@ add_lua_executable(
   penlight
   runtimegametypes
   runtimeproducts
+  toolsprettywrite
   toolstedit
   tsort
   wowapischema
@@ -1033,6 +1038,7 @@ set(specs
     spec/data/xml_spec.lua
     spec/data/yaml_spec.lua
     spec/elune_spec.lua
+    spec/tools/prettywrite_spec.lua
     spec/tools/tedit_spec.lua
     spec/wowapi/schema_spec.lua
     spec/wowapi/yaml_spec.lua

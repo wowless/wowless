@@ -910,7 +910,7 @@ return function(
   end
 
   local function saveAllVariables()
-    local w = require('pl.pretty').write
+    local w = require('tools.prettywrite')
     for _, v in pairs(addonData) do
       if v.loaded then
         local t = {}
@@ -920,7 +920,7 @@ return function(
             if val ~= nil then
               table.insert(t, var)
               table.insert(t, ' = ')
-              table.insert(t, type(val) == 'table' and w(val, '  ', true) or tostring(val))
+              table.insert(t, type(val) == 'table' and w(val) or tostring(val))
               table.insert(t, '\n')
             end
           end

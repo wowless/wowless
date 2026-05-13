@@ -1,5 +1,7 @@
+local prettywrite = require('tools.prettywrite')
+
 local function returntable(t)
-  return 'return ' .. require('pl.pretty').write(t) .. '\n'
+  return 'return ' .. prettywrite(t) .. '\n'
 end
 
 local function writeifchanged(f, c)

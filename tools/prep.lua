@@ -19,7 +19,7 @@ local function readFile(f)
   deps[f] = true
   return (assert(require('pl.file').read(f)))
 end
-local plprettywrite = require('pl.pretty').write
+local prettywrite = require('tools.prettywrite')
 local Mixin = require('wowless.util').mixin
 local sorted = require('pl.tablex').sort
 
@@ -34,7 +34,7 @@ local function valstr(value)
   elseif ty == 'string' then
     return string.format('%q', value)
   elseif ty == 'table' then
-    return plprettywrite(value, '')
+    return prettywrite(value, true)
   else
     error('unsupported stub value type ' .. ty)
   end
@@ -109,7 +109,7 @@ local specDefault = (function()
     if ty.luaobject then
       return ('gencode.CreateLuaObject(%q).luarep'):format(ty.luaobject)
     end
-    error('unexpected type: ' .. require('pl.pretty').write(ty))
+    error('unexpected type: ' .. prettywrite(ty, true))
   end
   return specDefault
 end)()
@@ -144,7 +144,7 @@ local function stubby(mv, skip0)
   local ins = mv.inputs or {}
   local nsins = #ins - (mv.instride or 0)
   for i = 1, #ins do
-    table.insert(t, 'local spec' .. i .. '=' .. plprettywrite(mv.inputs[i], '') .. ';')
+    table.insert(t, 'local spec' .. i .. '=' .. prettywrite(mv.inputs[i], true) .. ';')
   end
   table.insert(t, 'return function(')
   local a = {}
@@ -432,7 +432,7 @@ local uiobjectimplmakers = {
   getter = function(impl, mv)
     local t = { 'local gencode=...;' }
     for i in ipairs(impl) do
-      table.insert(t, 'local spec' .. i .. '=' .. plprettywrite(mv.outputs[i], '') .. ';')
+      table.insert(t, 'local spec' .. i .. '=' .. prettywrite(mv.outputs[i], true) .. ';')
     end
     table.insert(t, 'return function(self)return ')
     for i, f in ipairs(impl) do
@@ -450,7 +450,7 @@ local uiobjectimplmakers = {
   setter = function(impl, mv)
     local t = { 'local gencode=...;' }
     for i in ipairs(impl) do
-      table.insert(t, 'local spec' .. i .. '=' .. plprettywrite(mv.inputs[i], '') .. ';')
+      table.insert(t, 'local spec' .. i .. '=' .. prettywrite(mv.inputs[i], true) .. ';')
     end
     table.insert(t, 'return function(self')
     for _, f in ipairs(impl) do
