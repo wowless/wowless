@@ -72,5 +72,4 @@ jobs:
     - uses: lukka/get-cmake@v4.3.2
     - run: cmake --preset default -G "${{ matrix.config.generator }}"
     - run: cmake --build --preset default --verbose
-    - if: ${{ matrix.config.generator == 'Ninja' }}
-      run: cmake --build --preset default --target test --verbose
+    - run: cmake --build --preset default --target test --verbose
