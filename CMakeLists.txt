@@ -4,7 +4,10 @@ set(CMAKE_TOOLCHAIN_FILE
     ${CMAKE_CURRENT_SOURCE_DIR}/vcpkg/scripts/buildsystems/vcpkg.cmake
     CACHE STRING "Vcpkg toolchain file")
 
-project(wowless LANGUAGES C)
+project(wowless LANGUAGES C CXX)
+
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 include(CheckCCompilerFlag)
 check_c_compiler_flag(-ffast-math HAVE_FFAST_MATH)
@@ -490,11 +493,11 @@ add_lua_executable(
 foreach(product ${products})
   add_custom_command(
     OUTPUT stamp/${product}.txt
-    BYPRODUCTS runtime/${product}.lua generated/${product}_stubs.c
+    BYPRODUCTS runtime/${product}.lua generated/${product}_stubs.cpp
     COMMAND
       prep ${product} --sqls ${CMAKE_CURRENT_BINARY_DIR}/runtime/sqls.yaml
       --output ${CMAKE_CURRENT_BINARY_DIR}/generated/${product}.lua --coutput
-      ${CMAKE_CURRENT_BINARY_DIR}/generated/${product}_stubs.c
+      ${CMAKE_CURRENT_BINARY_DIR}/generated/${product}_stubs.cpp
     COMMAND
       ${CMAKE_COMMAND} -E copy_if_different
       ${CMAKE_CURRENT_BINARY_DIR}/generated/${product}.lua
@@ -511,7 +514,7 @@ foreach(product ${products})
         build.products.${product}.stubs=c)
   target_sources(
     datalua_${product}
-    PRIVATE ${CMAKE_CURRENT_BINARY_DIR}/generated/${product}_stubs.c)
+    PRIVATE ${CMAKE_CURRENT_BINARY_DIR}/generated/${product}_stubs.cpp)
   add_dependencies(datalua_${product} datalua_${product}_lua)
   list(APPEND dataluas datalua_${product})
 endforeach()
@@ -870,7 +873,7 @@ target_sources(
           wowless/modules/ctypecheck.c
           wowless/modules/encodingutil.c
           wowless/secure.c
-          wowless/stubs.c)
+          wowless/stubs.cpp)
 
 add_lua_executable(
   wowless
