@@ -6,6 +6,8 @@ set(CMAKE_TOOLCHAIN_FILE
 
 project(wowless LANGUAGES C)
 
+include(cmake/fast_math.cmake)
+
 set(elune_SOURCE_DIR vendor/elune)
 set(elune_BINARY_DIR ${CMAKE_BINARY_DIR}/_deps/elune-build)
 add_library(
