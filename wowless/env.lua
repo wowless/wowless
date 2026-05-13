@@ -3,7 +3,7 @@ local deepcopy = require('pl.tablex').deepcopy
 
 local function dump(uiobjects)
   local function d(x)
-    io.write(require('pl.pretty').write(x))
+    io.write(require('tools.prettywrite')(x))
     io.write('\n')
   end
   return function(...)
@@ -68,7 +68,7 @@ local function init(modules, lite)
         y = y,
       }
     end
-    io.write(require('pl.pretty').write({
+    io.write(require('tools.prettywrite')({
       bottom = r.bottom,
       debugname = r:GetDebugName(),
       height = r.height,

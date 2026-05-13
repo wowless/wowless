@@ -311,7 +311,7 @@ end)()
 local function doit(k, p)
   if ptablemap[k] then
     local nn, tt = ptablemap[k](p)
-    return '_G.WowlessData.' .. nn .. ' = ' .. require('pl.pretty').write(tt) .. '\n'
+    return '_G.WowlessData.' .. nn .. ' = ' .. require('tools.prettywrite')(tt) .. '\n'
   elseif k == 'product' then
     return ('_G.WowlessData = { product = %q }'):format(p)
   elseif k == 'toc' then
