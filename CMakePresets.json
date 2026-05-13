@@ -14,7 +14,8 @@
       "binaryDir": "${sourceDir}/build",
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Release",
-        "CMAKE_EXPORT_COMPILE_COMMANDS": true
+        "CMAKE_EXPORT_COMPILE_COMMANDS": true,
+        "VCPKG_APPLOCAL_DEPS": true
       },
       "generator": "Ninja",
       "name": "default"
