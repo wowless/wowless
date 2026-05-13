@@ -465,6 +465,11 @@ add_lua_executable(
   toolsutil)
 
 foreach(product ${products})
+  if(CMAKE_GENERATOR MATCHES "Ninja")
+    set(dblist_dep runtime/${product}_dblist.lua)
+  else()
+    set(dblist_dep stamp/${product}_dblist.lua)
+  endif()
   set(f ${product}_dbdefs.lua)
   add_custom_command(
     OUTPUT stamp/${f}
@@ -473,8 +478,7 @@ foreach(product ${products})
     COMMAND ${CMAKE_COMMAND} -E copy_if_different generated/${f} runtime/${f}
     COMMAND ${CMAKE_COMMAND} -E touch stamp/${f}
     DEPFILE generated/${f}.d
-    DEPENDS dbdefs stamp/${product}_dblist.lua
-            runtime/products/${product}/build.lua)
+    DEPENDS dbdefs ${dblist_dep} runtime/products/${product}/build.lua)
   add_custom_target(stamp_${product}_dbdefs DEPENDS stamp/${f})
   add_dependencies(stamp_${product}_dbdefs stamp_${product}_dblist)
 endforeach()
@@ -531,16 +535,22 @@ add_lua_executable(
   wowlesssqlite)
 
 foreach(product ${products})
+  if(CMAKE_GENERATOR MATCHES "Ninja")
+    set(dblist_dep runtime/${product}_dblist.lua)
+    set(dbdefs_dep runtime/${product}_dbdefs.lua)
+  else()
+    set(dblist_dep stamp/${product}_dblist.lua)
+    set(dbdefs_dep stamp/${product}_dbdefs.lua)
+  endif()
   add_custom_command(
     OUTPUT ${product}_schema.sqlite3
     COMMAND sqlite ${product}
-    DEPENDS sqlite stamp/${product}_dbdefs.lua stamp/${product}_dblist.lua)
+    DEPENDS sqlite ${dbdefs_dep} ${dblist_dep})
   list(APPEND schemadbs ${product}_schema.sqlite3)
   add_custom_command(
     OUTPUT ${product}_data.sqlite3
     COMMAND sqlite -f ${product}
-    DEPENDS sqlite stamp/${product}_dbdefs.lua stamp/${product}_dblist.lua
-            ${product}_fetch.txt)
+    DEPENDS sqlite ${dbdefs_dep} ${dblist_dep} ${product}_fetch.txt)
 endforeach()
 
 find_package(CURL REQUIRED)
@@ -572,13 +582,17 @@ add_lua_executable(
   wowlesstoc)
 
 foreach(product ${products})
+  if(CMAKE_GENERATOR MATCHES "Ninja")
+    set(dblist_dep runtime/${product}_dblist.lua)
+  else()
+    set(dblist_dep stamp/${product}_dblist.lua)
+  endif()
   set(out ${product}_fetch.txt)
   add_custom_command(
     OUTPUT ${out}
     COMMAND fetch ${product}
     COMMAND ${CMAKE_COMMAND} -E touch ${out}
-    DEPENDS fetch stamp/${product}_dblist.lua
-            runtime/products/${product}/build.lua)
+    DEPENDS fetch ${dblist_dep} runtime/products/${product}/build.lua)
 endforeach()
 
 lua2c(wowlessblp vstruct=p

@@ -73,3 +73,8 @@ jobs:
     - run: cmake --preset default -G "${{ matrix.config.generator }}"
     - run: cmake --build --preset default --config Release --verbose
     - run: cmake --build --preset default --config Release --target test --verbose
+    - uses: actions/upload-artifact@v7
+      if: success() || failure()
+      with:
+        name: test-results-${{ matrix.config.os }}-${{ matrix.config.generator }}
+        path: build/test.out
