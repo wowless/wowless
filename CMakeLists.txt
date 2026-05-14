@@ -15,6 +15,15 @@ if(HAVE_FFAST_MATH)
   add_compile_options(-ffast-math)
 endif()
 
+include(CheckCXXCompilerFlag)
+check_cxx_compiler_flag(-fno-exceptions HAVE_FNO_EXCEPTIONS)
+check_cxx_compiler_flag(/EH- HAVE_EH_MINUS)
+if(HAVE_FNO_EXCEPTIONS)
+  add_compile_options($<$<COMPILE_LANGUAGE:CXX>:-fno-exceptions>)
+elseif(HAVE_EH_MINUS)
+  add_compile_options($<$<COMPILE_LANGUAGE:CXX>:/EH->)
+endif()
+
 set(elune_SOURCE_DIR vendor/elune)
 set(elune_BINARY_DIR ${CMAKE_BINARY_DIR}/_deps/elune-build)
 add_library(
