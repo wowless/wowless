@@ -980,7 +980,6 @@ add_lua_executable(
   penlight
   runtimegametypes
   runtimeproducts
-  toolsprettywrite
   toolstedit
   tsort
   wowapischema
