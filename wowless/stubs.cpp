@@ -101,13 +101,12 @@ void wowless_stub_log_extra_args(lua_State *L, const char *fname) {
 }
 
 int wowless_load_stubs(lua_State *L) {
-  const struct wowless_stubs_spec *spec =
-      (const struct wowless_stubs_spec *)lua_touserdata(L, lua_upvalueindex(1));
-  const struct wowless_ns_entry *ns;
+  const auto *spec =
+      static_cast<const wowless_stubs_spec *>(lua_touserdata(L, lua_upvalueindex(1)));
   lua_getfield(L, 1, "cgencode");
   lua_insert(L, 1);
   load_entries(L, spec->global);
-  for (ns = spec->ns; ns->ns; ns++) {
+  for (const wowless_ns_entry *ns = spec->ns; ns->ns; ns++) {
     load_entries(L, ns->entries);
     lua_setfield(L, -3, ns->ns);
     lua_pushnil(L);
