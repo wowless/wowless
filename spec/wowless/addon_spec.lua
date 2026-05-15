@@ -6,7 +6,7 @@ describe('addon', function()
         -- Restore it around runner runs.
         local tmpassert = _G.assert
         _G.assert = _G.oldassert
-        local success, modules = pcall(function()
+        local success, result = pcall(function()
           return require('wowless.runner').run({
             otherAddonDirs = {
               'build/addon/Wowless/', -- trailing slash to validate fix for #235
@@ -16,10 +16,10 @@ describe('addon', function()
           })
         end)
         _G.assert = tmpassert
-        assert.True(success, modules)
-        assert.True(modules.env.genv.WowlessTestsDone)
-        assert.same({}, modules.env.genv.WowlessTestFailures)
-        assert.same(0, modules.errors.GetErrorCount())
+        assert.True(success, result)
+        assert.True(result.done)
+        assert.same({}, result.failures)
+        assert.same(0, result.errorCount)
       end)
     end)
   end

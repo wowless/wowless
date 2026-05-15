@@ -88,13 +88,14 @@ static int wowless_ext_newstate(lua_State *L) {
     return luaL_error(L, "newstate load error: %s", err ? err : "(unknown)");
   }
   lua_insert(L2, -2); /* move chunk before arg */
-  if (lua_pcall(L2, 1, 0, 0) != 0) {
+  if (lua_pcall(L2, 1, 1, 0) != 0) {
     const char *err = lua_tostring(L2, -1);
     lua_close(L2);
     return luaL_error(L, "%s", err ? err : "(unknown error in newstate)");
   }
+  copy_prim_value(L, L2, -1);
   lua_close(L2);
-  return 0;
+  return 1;
 }
 
 static struct luaL_Reg extlib[] = {
