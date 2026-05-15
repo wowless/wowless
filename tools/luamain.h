@@ -12,4 +12,6 @@ struct luamain {
 
 extern const struct luamain luamain;
 
+void luamain_setup_preloads(lua_State *L);
+
 #endif
