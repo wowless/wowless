@@ -883,6 +883,7 @@ target_sources(
           wowless/modules/encodingutil.c
           wowless/secure.c
           wowless/stubs.cpp)
+target_include_directories(wowlesslib PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 
 add_lua_executable(
   wowless
