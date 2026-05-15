@@ -879,7 +879,7 @@ target_sources(
   PRIVATE wowless/bubblewrap.c
           wowless/debug.c
           wowless/ext.c
-          wowless/modules/ctypecheck.c
+          wowless/modules/ctypecheck.cpp
           wowless/modules/encodingutil.c
           wowless/secure.c
           wowless/stubs.cpp)

@@ -1,15 +1,13 @@
 #ifndef WOWLESS_TYPECHECK_H
 #define WOWLESS_TYPECHECK_H
 
-#ifdef __cplusplus
 extern "C" {
-#endif
 #include "lauxlib.h"
 #include "lua.h"
 #include "wowless/stubs.h"
-#ifdef __cplusplus
 }
-#endif
+
+#include <string_view>
 
 static inline int wowless_forbidden(lua_State *L) {
   const char *taint = lua_getstacktaint(L);
@@ -22,11 +20,11 @@ static inline int wowless_forbidden(lua_State *L) {
   return 0;
 }
 
-static inline int wowless_isnumber(lua_State *L, int idx) {
+static inline bool wowless_isnumber(lua_State *L, int idx) {
   return lua_isnumber(L, idx);
 }
 
-static inline int wowless_isnilablenumber(lua_State *L, int idx) {
+static inline bool wowless_isnilablenumber(lua_State *L, int idx) {
   return lua_isnoneornil(L, idx) || lua_isnumber(L, idx);
 }
 
@@ -90,11 +88,11 @@ static inline void wowless_stubchecknilableenum(lua_State *L, int idx) {
   wowless_stubchecknilablenumber(L, idx);
 }
 
-static inline int wowless_isstring(lua_State *L, int idx) {
+static inline bool wowless_isstring(lua_State *L, int idx) {
   return lua_isstring(L, idx);
 }
 
-static inline int wowless_isnilablestring(lua_State *L, int idx) {
+static inline bool wowless_isnilablestring(lua_State *L, int idx) {
   return lua_isnoneornil(L, idx) || lua_isstring(L, idx);
 }
 
@@ -110,11 +108,11 @@ static inline void wowless_stubchecknilablestring(lua_State *L, int idx) {
   }
 }
 
-static inline int wowless_isfileasset(lua_State *L, int idx) {
+static inline bool wowless_isfileasset(lua_State *L, int idx) {
   return wowless_isstring(L, idx);
 }
 
-static inline int wowless_isnilablefileasset(lua_State *L, int idx) {
+static inline bool wowless_isnilablefileasset(lua_State *L, int idx) {
   return wowless_isnilablestring(L, idx);
 }
 
@@ -126,11 +124,13 @@ static inline void wowless_stubchecknilablefileasset(lua_State *L, int idx) {
   wowless_stubchecknilablestring(L, idx);
 }
 
-static inline int wowless_isboolean(lua_State *L, int idx) {
+static inline bool wowless_isboolean(lua_State *L, int idx) {
   return !lua_isnoneornil(L, idx);
 }
 
-static inline int wowless_isnilableboolean(lua_State *L, int idx) { return 1; }
+static inline bool wowless_isnilableboolean(lua_State *L, int idx) {
+  return true;
+}
 
 static inline void wowless_stubcheckboolean(lua_State *L, int idx) {
   if (!wowless_isboolean(L, idx)) {
@@ -140,11 +140,11 @@ static inline void wowless_stubcheckboolean(lua_State *L, int idx) {
 
 static inline void wowless_stubchecknilableboolean(lua_State *L, int idx) {}
 
-static inline int wowless_isfunction(lua_State *L, int idx) {
+static inline bool wowless_isfunction(lua_State *L, int idx) {
   return lua_type(L, idx) == LUA_TFUNCTION;
 }
 
-static inline int wowless_isnilablefunction(lua_State *L, int idx) {
+static inline bool wowless_isnilablefunction(lua_State *L, int idx) {
   int t = lua_type(L, idx);
   return t == LUA_TFUNCTION || t == LUA_TNIL || t == LUA_TNONE;
 }
@@ -161,11 +161,11 @@ static inline void wowless_stubchecknilablefunction(lua_State *L, int idx) {
   }
 }
 
-static inline int wowless_isunit(lua_State *L, int idx) {
+static inline bool wowless_isunit(lua_State *L, int idx) {
   return lua_type(L, idx) == LUA_TSTRING;
 }
 
-static inline int wowless_isnilableunit(lua_State *L, int idx) {
+static inline bool wowless_isnilableunit(lua_State *L, int idx) {
   int t = lua_type(L, idx);
   return t == LUA_TSTRING || t == LUA_TNIL || t == LUA_TNONE;
 }
@@ -182,11 +182,11 @@ static inline void wowless_stubchecknilableunit(lua_State *L, int idx) {
   }
 }
 
-static inline int wowless_isuiaddon(lua_State *L, int idx) {
+static inline bool wowless_isuiaddon(lua_State *L, int idx) {
   return wowless_isstring(L, idx);
 }
 
-static inline int wowless_isnilableuiaddon(lua_State *L, int idx) {
+static inline bool wowless_isnilableuiaddon(lua_State *L, int idx) {
   return wowless_isnilablestring(L, idx);
 }
 
@@ -198,11 +198,11 @@ static inline void wowless_stubchecknilableuiaddon(lua_State *L, int idx) {
   wowless_stubchecknilablestring(L, idx);
 }
 
-static inline int wowless_istable(lua_State *L, int idx) {
+static inline bool wowless_istable(lua_State *L, int idx) {
   return lua_type(L, idx) == LUA_TTABLE;
 }
 
-static inline int wowless_isnilabletable(lua_State *L, int idx) {
+static inline bool wowless_isnilabletable(lua_State *L, int idx) {
   int t = lua_type(L, idx);
   return t == LUA_TTABLE || t == LUA_TNIL || t == LUA_TNONE;
 }
@@ -219,92 +219,86 @@ static inline void wowless_stubchecknilabletable(lua_State *L, int idx) {
   }
 }
 
-static inline int wowless_isluaobject(lua_State *L, int idx, const char *tname,
-                                      size_t typenamelen) {
+static inline bool wowless_isluaobject(lua_State *L, int idx,
+                                       std::string_view tname) {
   idx = lua_absindex(L, idx);
   if (lua_type(L, idx) != LUA_TUSERDATA) {
-    return 0;
+    return false;
   }
   lua_getfield(L, lua_upvalueindex(1), "IsLuaObject");
   lua_pushvalue(L, idx);
-  lua_pushlstring(L, tname, typenamelen);
+  lua_pushlstring(L, tname.data(), tname.size());
   lua_call(L, 2, 1);
   int result = lua_toboolean(L, -1);
   lua_pop(L, 1);
   return result;
 }
 
-static inline int wowless_isnilableluaobject(lua_State *L, int idx,
-                                             const char *tname,
-                                             size_t typenamelen) {
-  return lua_isnoneornil(L, idx) ||
-         wowless_isluaobject(L, idx, tname, typenamelen);
+static inline bool wowless_isnilableluaobject(lua_State *L, int idx,
+                                              std::string_view tname) {
+  return lua_isnoneornil(L, idx) || wowless_isluaobject(L, idx, tname);
 }
 
 static inline void wowless_stubcheckluaobject(lua_State *L, int idx,
-                                              const char *tname,
-                                              size_t typenamelen) {
-  if (!wowless_isluaobject(L, idx, tname, typenamelen)) {
+                                              std::string_view tname) {
+  if (!wowless_isluaobject(L, idx, tname)) {
     luaL_typerror(L, idx, "luaobject");
   }
 }
 
 static inline void wowless_stubchecknilableluaobject(lua_State *L, int idx,
-                                                     const char *tname,
-                                                     size_t typenamelen) {
-  if (!wowless_isnilableluaobject(L, idx, tname, typenamelen)) {
+                                                     std::string_view tname) {
+  if (!wowless_isnilableluaobject(L, idx, tname)) {
     luaL_typerror(L, idx, "luaobject");
   }
 }
 
-static inline int wowless_isuiobject(lua_State *L, int idx, const char *tname,
-                                     size_t typenamelen) {
+static inline bool wowless_isuiobject(lua_State *L, int idx,
+                                      std::string_view tname) {
   idx = lua_absindex(L, idx);
   if (lua_type(L, idx) != LUA_TTABLE) {
-    return 0;
+    return false;
   }
   lua_rawgeti(L, idx, 0);
   if (lua_type(L, -1) != LUA_TUSERDATA) {
     lua_pop(L, 1);
-    return 0;
+    return false;
   }
   lua_getfield(L, lua_upvalueindex(1), "IsUiObject");
   lua_insert(L, -2);
-  lua_pushlstring(L, tname, typenamelen);
+  lua_pushlstring(L, tname.data(), tname.size());
   lua_call(L, 2, 1);
   int result = lua_toboolean(L, -1);
   lua_pop(L, 1);
   return result;
 }
 
-static inline int wowless_isnilableuiobject(lua_State *L, int idx,
-                                            const char *tname,
-                                            size_t typenamelen) {
-  return lua_isnoneornil(L, idx) ||
-         wowless_isuiobject(L, idx, tname, typenamelen);
+static inline bool wowless_isnilableuiobject(lua_State *L, int idx,
+                                             std::string_view tname) {
+  return lua_isnoneornil(L, idx) || wowless_isuiobject(L, idx, tname);
 }
 
 static inline void wowless_stubcheckuiobject(lua_State *L, int idx,
-                                             const char *tname,
-                                             size_t typenamelen) {
-  if (!wowless_isuiobject(L, idx, tname, typenamelen)) {
+                                             std::string_view tname) {
+  if (!wowless_isuiobject(L, idx, tname)) {
     luaL_typerror(L, idx, "uiobject");
   }
 }
 
 static inline void wowless_stubchecknilableuiobject(lua_State *L, int idx,
-                                                    const char *tname,
-                                                    size_t typenamelen) {
-  if (!wowless_isnilableuiobject(L, idx, tname, typenamelen)) {
+                                                    std::string_view tname) {
+  if (!wowless_isnilableuiobject(L, idx, tname)) {
     luaL_typerror(L, idx, "uiobject");
   }
 }
 
-static inline int wowless_isunknown(lua_State *L, int idx) {
+static inline bool wowless_isunknown(lua_State *L, int idx) {
   return !lua_isnoneornil(L, idx);
 }
 
-static inline int wowless_isnilableunknown(lua_State *L, int idx) { return 1; }
+static inline bool wowless_isnilableunknown(lua_State *L, int idx) {
+  return true;
+}
 
 static inline void wowless_stubcheckunknown(lua_State *L, int idx) {
   if (!wowless_isunknown(L, idx)) {
@@ -314,11 +308,11 @@ static inline void wowless_stubcheckunknown(lua_State *L, int idx) {
 
 static inline void wowless_stubchecknilableunknown(lua_State *L, int idx) {}
 
-static inline int wowless_isnil(lua_State *L, int idx) {
+static inline bool wowless_isnil(lua_State *L, int idx) {
   return lua_isnoneornil(L, idx);
 }
 
-static inline int wowless_isnilablenil(lua_State *L, int idx) {
+static inline bool wowless_isnilablenil(lua_State *L, int idx) {
   return wowless_isnil(L, idx);
 }
 
@@ -332,33 +326,29 @@ static inline void wowless_stubchecknilablenil(lua_State *L, int idx) {
   wowless_stubchecknil(L, idx);
 }
 
-static inline int wowless_isstringenum(lua_State *L, int idx,
-                                       const char *enumname,
-                                       size_t enumnamelen) {
+static inline bool wowless_isstringenum(lua_State *L, int idx,
+                                        std::string_view enumname) {
   idx = lua_absindex(L, idx);
   if (lua_type(L, idx) != LUA_TSTRING) {
-    return 0;
+    return false;
   }
   lua_getfield(L, lua_upvalueindex(1), "CheckStringEnum");
   lua_pushvalue(L, idx);
-  lua_pushlstring(L, enumname, enumnamelen);
+  lua_pushlstring(L, enumname.data(), enumname.size());
   lua_call(L, 2, 1);
   int result = lua_toboolean(L, -1);
   lua_pop(L, 1);
   return result;
 }
 
-static inline int wowless_isnilablestringenum(lua_State *L, int idx,
-                                              const char *enumname,
-                                              size_t enumnamelen) {
-  return lua_isnoneornil(L, idx) ||
-         wowless_isstringenum(L, idx, enumname, enumnamelen);
+static inline bool wowless_isnilablestringenum(lua_State *L, int idx,
+                                               std::string_view enumname) {
+  return lua_isnoneornil(L, idx) || wowless_isstringenum(L, idx, enumname);
 }
 
 static inline void wowless_stubcheckstringenum(lua_State *L, int idx,
-                                               const char *enumname,
-                                               size_t enumnamelen) {
-  if (!wowless_isstringenum(L, idx, enumname, enumnamelen)) {
+                                               std::string_view enumname) {
+  if (!wowless_isstringenum(L, idx, enumname)) {
     if (lua_type(L, idx) != LUA_TSTRING) {
       luaL_checktype(L, idx, LUA_TSTRING);
     } else {
@@ -367,10 +357,9 @@ static inline void wowless_stubcheckstringenum(lua_State *L, int idx,
   }
 }
 
-static inline void wowless_stubchecknilablestringenum(lua_State *L, int idx,
-                                                      const char *enumname,
-                                                      size_t enumnamelen) {
-  if (!wowless_isnilablestringenum(L, idx, enumname, enumnamelen)) {
+static inline void wowless_stubchecknilablestringenum(
+    lua_State *L, int idx, std::string_view enumname) {
+  if (!wowless_isnilablestringenum(L, idx, enumname)) {
     if (lua_type(L, idx) != LUA_TSTRING) {
       luaL_checktype(L, idx, LUA_TSTRING);
     } else {
@@ -379,17 +368,17 @@ static inline void wowless_stubchecknilablestringenum(lua_State *L, int idx,
   }
 }
 
-static inline void wowless_stubcreateluaobject(lua_State *L, const char *tname,
-                                               size_t typenamelen) {
+static inline void wowless_stubcreateluaobject(lua_State *L,
+                                               std::string_view tname) {
   lua_getfield(L, lua_upvalueindex(1), "CreateLuaObject");
-  lua_pushlstring(L, tname, typenamelen);
+  lua_pushlstring(L, tname.data(), tname.size());
   lua_call(L, 1, 1);
 }
 
-static inline void wowless_stubcreateuiobject(lua_State *L, const char *tname,
-                                              size_t typenamelen) {
+static inline void wowless_stubcreateuiobject(lua_State *L,
+                                              std::string_view tname) {
   lua_getfield(L, lua_upvalueindex(1), "CreateUiObject");
-  lua_pushlstring(L, tname, typenamelen);
+  lua_pushlstring(L, tname.data(), tname.size());
   lua_call(L, 1, 1);
 }
 
@@ -519,21 +508,19 @@ static inline void wowless_implcheckany(lua_State *L, int idx) {}
 static inline void wowless_implchecknilableany(lua_State *L, int idx) {}
 
 static inline void wowless_implcheckluaobject(lua_State *L, int idx,
-                                              const char *tname,
-                                              size_t typenamelen) {
+                                              std::string_view tname) {
   idx = lua_absindex(L, idx);
   lua_getfield(L, lua_upvalueindex(1), "ImplInputLuaObject");
   lua_pushvalue(L, idx);
-  lua_pushlstring(L, tname, typenamelen);
+  lua_pushlstring(L, tname.data(), tname.size());
   lua_call(L, 2, 1);
   lua_replace(L, idx);
 }
 
 static inline void wowless_implchecknilableluaobject(lua_State *L, int idx,
-                                                     const char *tname,
-                                                     size_t typenamelen) {
+                                                     std::string_view tname) {
   if (!lua_isnoneornil(L, idx)) {
-    wowless_implcheckluaobject(L, idx, tname, typenamelen);
+    wowless_implcheckluaobject(L, idx, tname);
   }
 }
 
@@ -676,40 +663,36 @@ static inline void wowless_imploutputnilabletable(lua_State *L, int idx) {
 }
 
 static inline void wowless_imploutputluaobject(lua_State *L, int idx,
-                                               const char *tname,
-                                               size_t typenamelen) {
+                                               std::string_view tname) {
   idx = lua_absindex(L, idx);
   lua_getfield(L, lua_upvalueindex(1), "ImplOutputLuaObject");
   lua_pushvalue(L, idx);
-  lua_pushlstring(L, tname, typenamelen);
+  lua_pushlstring(L, tname.data(), tname.size());
   lua_call(L, 2, 1);
   lua_replace(L, idx);
 }
 
 static inline void wowless_imploutputnilableluaobject(lua_State *L, int idx,
-                                                      const char *tname,
-                                                      size_t typenamelen) {
+                                                      std::string_view tname) {
   if (!lua_isnoneornil(L, idx)) {
-    wowless_imploutputluaobject(L, idx, tname, typenamelen);
+    wowless_imploutputluaobject(L, idx, tname);
   }
 }
 
 static inline void wowless_imploutputuiobject(lua_State *L, int idx,
-                                              const char *tname,
-                                              size_t typenamelen) {
+                                              std::string_view tname) {
   idx = lua_absindex(L, idx);
   lua_getfield(L, lua_upvalueindex(1), "ImplOutputUiObject");
   lua_pushvalue(L, idx);
-  lua_pushlstring(L, tname, typenamelen);
+  lua_pushlstring(L, tname.data(), tname.size());
   lua_call(L, 2, 1);
   lua_replace(L, idx);
 }
 
 static inline void wowless_imploutputnilableuiobject(lua_State *L, int idx,
-                                                     const char *tname,
-                                                     size_t typenamelen) {
+                                                     std::string_view tname) {
   if (!lua_isnoneornil(L, idx)) {
-    wowless_imploutputuiobject(L, idx, tname, typenamelen);
+    wowless_imploutputuiobject(L, idx, tname);
   }
 }
 
@@ -750,12 +733,11 @@ static inline void wowless_applymixin(lua_State *L, const char *mixin_name) {
   lua_pop(L, 1);
 }
 
-#ifdef __cplusplus
 template <void Check(lua_State *, int)>
 static void wowless_stubcheckarrayof(lua_State *L, int idx) {
   idx = lua_absindex(L, idx);
   wowless_stubchecktable(L, idx);
-  int n = (int)lua_objlen(L, idx);
+  int n = static_cast<int>(lua_objlen(L, idx));
   for (int i = 1; i <= n; i++) {
     lua_rawgeti(L, idx, i);
     Check(L, -1);
@@ -769,6 +751,5 @@ static void wowless_stubchecknilablearrayof(lua_State *L, int idx) {
     wowless_stubcheckarrayof<Check>(L, idx);
   }
 }
-#endif
 
 #endif /* WOWLESS_TYPECHECK_H */

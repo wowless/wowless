@@ -772,7 +772,7 @@ if args.coutput then
     luaobject = function(name)
       return function(verb, nilable, idx)
         local ns = nilable and 'nilable' or ''
-        return string.format('wowless_%s%sluaobject(L, %s, %s, %d)', verb, ns, idx, cstring(name), #name)
+        return string.format('wowless_%s%sluaobject(L, %s, %s)', verb, ns, idx, cstring(name))
       end
     end,
     number = simple_cinputtype('number'),
@@ -821,8 +821,7 @@ if args.coutput then
     ['function'] = simple_coutputtype('function'),
     luaobject = function(typename, nilable, idx)
       local ns = nilable and 'nilable' or ''
-      local tn = cstring(typename)
-      return string.format('wowless_imploutput%sluaobject(L, %s, %s, sizeof(%s)-1)', ns, idx, tn, tn)
+      return string.format('wowless_imploutput%sluaobject(L, %s, %s)', ns, idx, cstring(typename))
     end,
     ['nil'] = simple_coutputtype('nil'),
     number = simple_coutputtype('number'),
@@ -834,8 +833,7 @@ if args.coutput then
     table = simple_coutputtype('table'),
     uiobject = function(typename, nilable, idx)
       local ns = nilable and 'nilable' or ''
-      local tn = cstring(typename)
-      return string.format('wowless_imploutput%suiobject(L, %s, %s, sizeof(%s)-1)', ns, idx, tn, tn)
+      return string.format('wowless_imploutput%suiobject(L, %s, %s)', ns, idx, cstring(typename))
     end,
     unit = simple_coutputtype('unit'),
     unknown = simple_coutputtype('unknown'),
@@ -959,11 +957,11 @@ if args.coutput then
       end
     end,
     luaobject = function(name, _)
-      emit('  wowless_stubcreateluaobject(L, %s, %d);', cstring(name), #name)
+      emit('  wowless_stubcreateluaobject(L, %s);', cstring(name))
     end,
     table = lua_value_emitters.table,
     uiobject = function(name, _)
-      emit('  wowless_stubcreateuiobject(L, %s, %d);', cstring(name), #name)
+      emit('  wowless_stubcreateuiobject(L, %s);', cstring(name))
     end,
   }
 
@@ -975,8 +973,8 @@ if args.coutput then
     emit('')
   end
   for sename in sorted(stringenums) do
-    emit('static int wowless_isstringenum_%s(lua_State *L, int idx);', safename(sename))
-    emit('static int wowless_isnilablestringenum_%s(lua_State *L, int idx);', safename(sename))
+    emit('static bool wowless_isstringenum_%s(lua_State *L, int idx);', safename(sename))
+    emit('static bool wowless_isnilablestringenum_%s(lua_State *L, int idx);', safename(sename))
     emit('static void wowless_stubcheckstringenum_%s(lua_State *L, int idx);', safename(sename))
     emit('static void wowless_stubchecknilablestringenum_%s(lua_State *L, int idx);', safename(sename))
   end
@@ -984,8 +982,8 @@ if args.coutput then
     emit('')
   end
   for uname in sorted(uiobjectdata) do
-    emit('static int wowless_isuiobject_%s(lua_State *L, int idx);', safename(uname))
-    emit('static int wowless_isnilableuiobject_%s(lua_State *L, int idx);', safename(uname))
+    emit('static bool wowless_isuiobject_%s(lua_State *L, int idx);', safename(uname))
+    emit('static bool wowless_isnilableuiobject_%s(lua_State *L, int idx);', safename(uname))
     emit('static void wowless_stubcheckuiobject_%s(lua_State *L, int idx);', safename(uname))
     emit('static void wowless_stubchecknilableuiobject_%s(lua_State *L, int idx);', safename(uname))
   end
@@ -1016,32 +1014,32 @@ if args.coutput then
   end
 
   for sename in sorted(stringenums) do
-    emit('static int wowless_isstringenum_%s(lua_State *L, int idx) {', safename(sename))
-    emit('  return wowless_isstringenum(L, idx, %s, %d);', cstring(sename), #sename)
+    emit('static bool wowless_isstringenum_%s(lua_State *L, int idx) {', safename(sename))
+    emit('  return wowless_isstringenum(L, idx, %s);', cstring(sename))
     emit('}')
     emit('')
-    emit('static int wowless_isnilablestringenum_%s(lua_State *L, int idx) {', safename(sename))
-    emit('  return wowless_isnilablestringenum(L, idx, %s, %d);', cstring(sename), #sename)
+    emit('static bool wowless_isnilablestringenum_%s(lua_State *L, int idx) {', safename(sename))
+    emit('  return wowless_isnilablestringenum(L, idx, %s);', cstring(sename))
     emit('}')
     emit('')
     emit('static void wowless_stubcheckstringenum_%s(lua_State *L, int idx) {', safename(sename))
-    emit('  wowless_stubcheckstringenum(L, idx, %s, %d);', cstring(sename), #sename)
+    emit('  wowless_stubcheckstringenum(L, idx, %s);', cstring(sename))
     emit('}')
     emit('')
     emit('static void wowless_stubchecknilablestringenum_%s(lua_State *L, int idx) {', safename(sename))
-    emit('  wowless_stubchecknilablestringenum(L, idx, %s, %d);', cstring(sename), #sename)
+    emit('  wowless_stubchecknilablestringenum(L, idx, %s);', cstring(sename))
     emit('}')
     emit('')
   end
 
   for uname in sorted(uiobjectdata) do
     local target = uname:lower()
-    emit('static int wowless_isuiobject_%s(lua_State *L, int idx) {', safename(uname))
-    emit('  return wowless_isuiobject(L, idx, %s, %d);', cstring(target), #target)
+    emit('static bool wowless_isuiobject_%s(lua_State *L, int idx) {', safename(uname))
+    emit('  return wowless_isuiobject(L, idx, %s);', cstring(target))
     emit('}')
     emit('')
-    emit('static int wowless_isnilableuiobject_%s(lua_State *L, int idx) {', safename(uname))
-    emit('  return wowless_isnilableuiobject(L, idx, %s, %d);', cstring(target), #target)
+    emit('static bool wowless_isnilableuiobject_%s(lua_State *L, int idx) {', safename(uname))
+    emit('  return wowless_isnilableuiobject(L, idx, %s);', cstring(target))
     emit('}')
     emit('')
     emit('static void wowless_stubcheckuiobject_%s(lua_State *L, int idx) {', safename(uname))
@@ -1287,23 +1285,23 @@ if args.coutput then
         for _, m in ipairs(mods) do
           table.insert(parts, cstring(m))
         end
-        emit('static const char *const implmods_%s[] = {%s, NULL};', sn, table.concat(parts, ', '))
+        emit('static const char *const implmods_%s[] = {%s, nullptr};', sn, table.concat(parts, ', '))
       end
       if #sqls_list > 0 then
         local parts = {}
         for _, s in ipairs(sqls_list) do
           table.insert(parts, cstring(s))
         end
-        emit('static const char *const implsqls_%s[] = {%s, NULL};', sn, table.concat(parts, ', '))
+        emit('static const char *const implsqls_%s[] = {%s, nullptr};', sn, table.concat(parts, ', '))
       end
       emit(
-        'static const struct wowless_impl_data impldata_%s = {%s, %d, %s, %s, %s};',
+        'static const wowless_impl_data impldata_%s = {%s, %d, %s, %s, %s};',
         sn,
         cstring(impldata.impl),
         #impldata.impl,
         cstring(entry.chunkname),
-        #mods > 0 and ('implmods_' .. sn) or 'NULL',
-        #sqls_list > 0 and ('implsqls_' .. sn) or 'NULL'
+        #mods > 0 and ('implmods_' .. sn) or 'nullptr',
+        #sqls_list > 0 and ('implsqls_' .. sn) or 'nullptr'
       )
     end
   end
@@ -1311,10 +1309,10 @@ if args.coutput then
   local function emit_stub_entry(indent, name, entry)
     if entry.impldata then
       local impldata = entry.impldata
-      local func = impldata.nowrap and 'NULL' or ('implstub_' .. entry.sn)
+      local func = impldata.nowrap and 'nullptr' or ('implstub_' .. entry.sn)
       emit('%s{%s, %s, %d, &impldata_%s},', indent, cstring(name), func, entry.secureonly and 1 or 0, entry.sn)
     else
-      emit('%s{%s, stub_%s, %d, NULL},', indent, cstring(name), entry.sn, entry.secureonly and 1 or 0)
+      emit('%s{%s, stub_%s, %d, nullptr},', indent, cstring(name), entry.sn, entry.secureonly and 1 or 0)
     end
   end
 
@@ -1330,39 +1328,39 @@ if args.coutput then
     emit('')
   end
 
-  emit('static const struct wowless_stub_entry stubs_global[] = {')
+  emit('static const wowless_stub_entry stubs_global[] = {')
   for name, entry in sorted(global_entries) do
     emit_stub_entry('  ', name, entry)
   end
-  emit('  {NULL, NULL, 0, NULL}')
+  emit('  {nullptr, nullptr, 0, nullptr}')
   emit('};')
   emit('')
 
   for ns in sorted(ns_entries) do
-    emit('static const struct wowless_stub_entry stubs_ns_%s[] = {', safename(ns))
+    emit('static const wowless_stub_entry stubs_ns_%s[] = {', safename(ns))
     for name, entry in sorted(ns_entries[ns]) do
       emit_stub_entry('  ', name, entry)
     end
-    emit('  {NULL, NULL, 0, NULL}')
+    emit('  {nullptr, nullptr, 0, nullptr}')
     emit('};')
     emit('')
   end
 
-  emit('static const struct wowless_ns_entry stubs_ns[] = {')
+  emit('static const wowless_ns_entry stubs_ns[] = {')
   for ns in sorted(ns_entries) do
     emit('  {%s, stubs_ns_%s},', cstring(ns), safename(ns))
   end
-  emit('  {NULL, NULL}')
+  emit('  {nullptr, nullptr}')
   emit('};')
   emit('')
 
-  emit('static const struct wowless_stubs_spec stubs_spec = {')
+  emit('static const wowless_stubs_spec stubs_spec = {')
   emit('  stubs_global,')
   emit('  stubs_ns,')
   emit('};')
   emit('')
   emit('extern "C" int luaopen_build_products_%s_stubs(lua_State *L) {', product)
-  emit('  lua_pushlightuserdata(L, (void *)&stubs_spec);')
+  emit('  lua_pushlightuserdata(L, static_cast<void *>(const_cast<wowless_stubs_spec *>(&stubs_spec)));')
   emit('  lua_pushcclosure(L, wowless_load_stubs, 1);')
   emit('  return 1;')
   emit('}')
