@@ -54,13 +54,15 @@ int main(int argc, char **argv) {
     lua_settop(L, 4);
   }
   lua_settop(L, 0);
-  lua_getglobal(L, "package");
-  lua_getfield(L, -1, "loaders");
-  lua_createtable(L, 1, 0);
-  lua_rawgeti(L, -2, 1);
-  lua_rawseti(L, -2, -1);
-  lua_setfield(L, -1, "loaders");
-  lua_pop(L, 2);
+  lua_getglobal(L, "package");    /* package */
+  lua_getfield(L, -1, "loaders"); /* package, loaders */
+  lua_rawgeti(L, -1, 1);          /* package, loaders, loaders[1] */
+  lua_remove(L, -2);              /* package, loaders[1] */
+  lua_newtable(L);                /* package, loaders[1], new_loaders */
+  lua_insert(L, -2);              /* package, new_loaders, loaders[1] */
+  lua_rawseti(L, -2, 1);          /* package, new_loaders */
+  lua_setfield(L, -2, "loaders"); /* package */
+  lua_pop(L, 1);
   lua_newtable(L);
   for (int i = 0; i < argc; ++i) {
     lua_pushstring(L, argv[i]);
