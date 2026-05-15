@@ -16,14 +16,12 @@ local args = (function()
   run:flag('--trackenums', 'track enums')
   return parser:parse()
 end)()
-debug.setprofilingenabled(args.profile)
 local addonDirs = #args.addondir > 0 and args.addondir
   or {
     'build/addon/Wowless',
     'build/products/' .. args.product .. '/WowlessData',
   }
-local runner = require('wowless.runner')
-local modules = runner.run({
+require('wowless.runner').run({
   allevents = args.allevents,
   dir = not args.lite and 'build/extracts/' .. args.product or nil,
   dotfile = args.dotfile,
@@ -33,13 +31,7 @@ local modules = runner.run({
   otherAddonDirs = addonDirs,
   output = args.output,
   product = args.product,
+  profile = args.profile,
   scripts = args.scripts,
   trackenums = args.trackenums,
 })
-if args.profile then
-  require('wowless.profiler').write({
-    modules = modules,
-    product = args.product,
-    runner = runner,
-  })
-end
