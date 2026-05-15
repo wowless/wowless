@@ -56,7 +56,7 @@ static void copy_prim_table(lua_State *dst, lua_State *src, int srcidx) {
     int keytype = lua_type(src, -2);
     if (keytype == LUA_TSTRING || keytype == LUA_TNUMBER) {
       copy_prim_value(dst, src, lua_gettop(src) - 1); /* copy key */
-      copy_prim_value(dst, src, lua_gettop(src));     /* copy value (original -1) */
+      copy_prim_value(dst, src, lua_gettop(src)); /* copy value (original -1) */
       if (lua_isnil(dst, -1)) {
         lua_pop(dst, 2); /* skip nil values */
       } else {
@@ -68,14 +68,14 @@ static void copy_prim_table(lua_State *dst, lua_State *src, int srcidx) {
 }
 
 static void setup_preloads(lua_State *L) {
-  lua_newtable(L);             /* [1] work stack of preload* to process */
+  lua_newtable(L); /* [1] work stack of preload* to process */
   for (size_t i = 1; i <= luamain.npreloads; ++i) {
     const struct preload *p = luamain.preloads[luamain.npreloads - i];
     lua_pushlightuserdata(L, (void *)p);
     lua_rawseti(L, 1, (int)i);
   }
-  lua_newtable(L);             /* [2] seen set */
-  lua_getglobal(L, "package"); /* [3] */
+  lua_newtable(L);               /* [2] seen set */
+  lua_getglobal(L, "package");   /* [3] */
   lua_getfield(L, 3, "preload"); /* [4] package.preload */
   for (size_t nstack = luamain.npreloads; nstack > 0;) {
     lua_rawgeti(L, 1, (int)nstack--);
@@ -104,14 +104,14 @@ static void setup_preloads(lua_State *L) {
   }
   lua_settop(L, 0);
   /* Restrict package.loaders to only the preload loader. */
-  lua_getglobal(L, "package");      /* package */
-  lua_getfield(L, -1, "loaders");   /* package, loaders */
-  lua_rawgeti(L, -1, 1);            /* package, loaders, loaders[1] */
-  lua_remove(L, -2);                /* package, loaders[1] */
-  lua_newtable(L);                  /* package, loaders[1], new_loaders */
-  lua_insert(L, -2);                /* package, new_loaders, loaders[1] */
-  lua_rawseti(L, -2, 1);            /* package, new_loaders (new_loaders[1]=loaders[1]) */
-  lua_setfield(L, -2, "loaders");   /* package (package.loaders=new_loaders) */
+  lua_getglobal(L, "package");    /* package */
+  lua_getfield(L, -1, "loaders"); /* package, loaders */
+  lua_rawgeti(L, -1, 1);          /* package, loaders, loaders[1] */
+  lua_remove(L, -2);              /* package, loaders[1] */
+  lua_newtable(L);                /* package, loaders[1], new_loaders */
+  lua_insert(L, -2);              /* package, new_loaders, loaders[1] */
+  lua_rawseti(L, -2, 1); /* package, new_loaders (new_loaders[1]=loaders[1]) */
+  lua_setfield(L, -2, "loaders"); /* package (package.loaders=new_loaders) */
   lua_pop(L, 1);
 }
 

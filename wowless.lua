@@ -21,7 +21,8 @@ local addonDirs = #args.addondir > 0 and args.addondir
     'build/addon/Wowless',
     'build/products/' .. args.product .. '/WowlessData',
   }
-require('wowless.ext').newstate([[
+require('wowless.ext').newstate(
+  [[
   local cfg = ...
   if cfg.profile then
     debug.setprofilingenabled(true)
@@ -35,17 +36,19 @@ require('wowless.ext').newstate([[
       runner = runner,
     })
   end
-]], {
-  allevents = args.allevents,
-  dir = not args.lite and 'build/extracts/' .. args.product or nil,
-  dotfile = args.dotfile,
-  frame0 = args.frame0,
-  loglevel = args.loglevel,
-  maxErrors = args.maxerrors,
-  otherAddonDirs = addonDirs,
-  output = args.output,
-  product = args.product,
-  profile = args.profile,
-  scripts = args.scripts,
-  trackenums = args.trackenums,
-})
+]],
+  {
+    allevents = args.allevents,
+    dir = not args.lite and 'build/extracts/' .. args.product or nil,
+    dotfile = args.dotfile,
+    frame0 = args.frame0,
+    loglevel = args.loglevel,
+    maxErrors = args.maxerrors,
+    otherAddonDirs = addonDirs,
+    output = args.output,
+    product = args.product,
+    profile = args.profile,
+    scripts = args.scripts,
+    trackenums = args.trackenums,
+  }
+)
