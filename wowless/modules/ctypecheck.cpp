@@ -1,6 +1,3 @@
-#include "lauxlib.h"
-#include "lua.h"
-#include "wowless/stubs.h"
 #include "wowless/typecheck.h"
 
 /*
@@ -75,12 +72,12 @@ SIMPLE_CHECKER(imploutputnilabletable, wowless_imploutputnilabletable)
  * This works directly because wowless_stubcheck* already reads upvalue 1 as
  * cgencode.
  */
-#define TYPED_CHECKER(name, call)                      \
-  static int ctypecheck_##name(lua_State *L) {         \
-    size_t len;                                        \
-    const char *tname = luaL_checklstring(L, 2, &len); \
-    call(L, 1, tname, len);                            \
-    return 0;                                          \
+#define TYPED_CHECKER(name, call)                                    \
+  static int ctypecheck_##name(lua_State *L) {                       \
+    size_t len;                                                      \
+    const char *tname = luaL_checklstring(L, 2, &len);               \
+    call(L, 1, std::string_view{tname, len});                        \
+    return 0;                                                        \
   }
 
 TYPED_CHECKER(stubcheckstringenum, wowless_stubcheckstringenum)
@@ -167,7 +164,7 @@ static int make_module(lua_State *L) {
   return 1;
 }
 
-int luaopen_wowless_modules_ctypecheck(lua_State *L) {
+extern "C" int luaopen_wowless_modules_ctypecheck(lua_State *L) {
   lua_pushcfunction(L, make_module);
   return 1;
 }
