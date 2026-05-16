@@ -12,4 +12,6 @@ struct luamain {
 
 extern const struct luamain luamain;
 
+int luamain_newstate(lua_CFunction f, void *ud, lua_State *errtarget);
+
 #endif
