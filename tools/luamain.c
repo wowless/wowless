@@ -12,22 +12,16 @@ static int errhandler(lua_State *L) {
   return 1;
 }
 
-int main(int argc, char **argv) {
-  lua_State *L = luaL_newstate();
-  if (L == NULL) {
-    return EXIT_FAILURE;
-  }
-  luaL_openlibsx(L, LUALIB_STANDARD);
-  luaL_openlibsx(L, LUALIB_ELUNE);
-  lua_newtable(L); /* stack of preloads to process */
+void luamain_setup_preloads(lua_State *L) {
+  lua_newtable(L); /* [1] stack of preloads to process */
   for (size_t i = 1; i <= luamain.npreloads; ++i) {
     const struct preload *preload = luamain.preloads[luamain.npreloads - i];
     lua_pushlightuserdata(L, (void *)preload);
     lua_rawseti(L, 1, i);
   }
-  lua_newtable(L); /* set of processed preloads */
-  lua_getglobal(L, "package");
-  lua_getfield(L, 3, "preload");
+  lua_newtable(L);               /* [2] set of processed preloads */
+  lua_getglobal(L, "package");   /* [3] */
+  lua_getfield(L, 3, "preload"); /* [4] package.preload */
   for (size_t nstack = luamain.npreloads; nstack > 0;) {
     lua_rawgeti(L, 1, nstack--);
     const struct preload *preload = lua_touserdata(L, -1);
@@ -63,6 +57,16 @@ int main(int argc, char **argv) {
   lua_rawseti(L, -2, 1);          /* package, new_loaders */
   lua_setfield(L, -2, "loaders"); /* package */
   lua_pop(L, 1);
+}
+
+int main(int argc, char **argv) {
+  lua_State *L = luaL_newstate();
+  if (L == NULL) {
+    return EXIT_FAILURE;
+  }
+  luaL_openlibsx(L, LUALIB_STANDARD);
+  luaL_openlibsx(L, LUALIB_ELUNE);
+  luamain_setup_preloads(L);
   lua_newtable(L);
   for (int i = 0; i < argc; ++i) {
     lua_pushstring(L, argv[i]);

@@ -1,6 +1,7 @@
 #ifndef __LUAMAIN_H__
 #define __LUAMAIN_H__
 
+#include "lua.h"
 #include "tools/file2c.h"
 #include "tools/lua2c.h"
 
@@ -11,5 +12,7 @@ struct luamain {
 };
 
 extern const struct luamain luamain;
+
+void luamain_setup_preloads(lua_State *L);
 
 #endif
