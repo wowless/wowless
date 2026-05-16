@@ -296,12 +296,20 @@ local function simulate(cfg)
   end
   assert(issecure(), 'wowless bug: framework is tainted')
 
-  return modules,
-    {
-      done = genv.WowlessTestsDone,
-      failures = genv.WowlessTestFailures,
-      errorCount = modules.errors.GetErrorCount(),
-    }
+  local result = {
+    done = genv.WowlessTestsDone,
+    failures = genv.WowlessTestFailures,
+    errorCount = modules.errors.GetErrorCount(),
+  }
+  if cfg.profile then
+    local runner = require('wowless.runner')
+    require('wowless.profiler').write({
+      modules = modules,
+      product = cfg.product,
+      runner = runner,
+    })
+  end
+  return result
 end
 
 local function run(cfg)
@@ -311,16 +319,7 @@ local function run(cfg)
     if cfg.profile then
       debug.setprofilingenabled(true)
     end
-    local runner = require('wowless.runner')
-    local modules, result = runner.simulate(cfg)
-    if cfg.profile then
-      require('wowless.profiler').write({
-        modules = modules,
-        product = cfg.product,
-        runner = runner,
-      })
-    end
-    return result
+    return require('wowless.runner').simulate(cfg)
   ]],
     cfg
   )
