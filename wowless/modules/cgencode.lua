@@ -55,7 +55,7 @@ return function(addons, api, events, log, luaobjects, uiobjects, uiobjecttypes, 
   end
 
   local function IsUiObject(ud, typename)
-    local internal = uiobjects.userdata[ud]
+    local internal = uiobjects.UserData(ud)
     return internal and uiobjecttypes.IsObjectType(internal, typename)
   end
 
