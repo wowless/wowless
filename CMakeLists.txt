@@ -879,6 +879,7 @@ target_sources(
   PRIVATE wowless/bubblewrap.c
           wowless/debug.c
           wowless/ext.c
+          wowless/primtable.c
           wowless/modules/ctypecheck.cpp
           wowless/modules/encodingutil.c
           wowless/secure.c
@@ -1069,6 +1070,7 @@ set(specs
     spec/wowless/modules/funcheck_spec.lua
     spec/wowless/modules/typecheck_align_spec.lua
     spec/wowless/modules/typecheck_spec.lua
+    spec/wowless/primtable_spec.lua
     spec/wowless/sqlite_spec.lua
     spec/wowless/toc_spec.lua
     spec/wowless/util_spec.lua)
