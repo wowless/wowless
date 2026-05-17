@@ -3,6 +3,9 @@ local sorted = require('pl.tablex').sort
 require('lfs')
 
 local function simulate(cfg)
+  if cfg.profile then
+    debug.setprofilingenabled(true)
+  end
   assert(cfg, 'missing configuration')
   assert(cfg.product, 'missing product')
   local loglevel = cfg.loglevel or 0
@@ -296,34 +299,23 @@ local function simulate(cfg)
   end
   assert(issecure(), 'wowless bug: framework is tainted')
 
-  return modules,
-    {
-      done = genv.WowlessTestsDone,
-      failures = genv.WowlessTestFailures,
-      errorCount = modules.errors.GetErrorCount(),
-    }
+  local result = {
+    done = genv.WowlessTestsDone,
+    failures = genv.WowlessTestFailures,
+    errorCount = modules.errors.GetErrorCount(),
+  }
+  if cfg.profile then
+    require('wowless.profiler').write({
+      modules = modules,
+      product = cfg.product,
+      runner = require('wowless.runner'),
+    })
+  end
+  return result
 end
 
 local function run(cfg)
-  return require('wowless.ext').newstate(
-    [[
-    local cfg = ...
-    if cfg.profile then
-      debug.setprofilingenabled(true)
-    end
-    local runner = require('wowless.runner')
-    local modules, result = runner.simulate(cfg)
-    if cfg.profile then
-      require('wowless.profiler').write({
-        modules = modules,
-        product = cfg.product,
-        runner = runner,
-      })
-    end
-    return result
-  ]],
-    cfg
-  )
+  return require('wowless.ext').newstate([[return require('wowless.runner').simulate(...)]], cfg)
 end
 
 return {
