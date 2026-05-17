@@ -881,6 +881,7 @@ target_sources(
           wowless/ext.c
           wowless/modules/ctypecheck.cpp
           wowless/modules/encodingutil.c
+          wowless/primtable.c
           wowless/secure.c
           wowless/stubs.cpp)
 
@@ -1079,7 +1080,17 @@ add_custom_command(
   DEPENDS runtests addons.txt ${schemadbs} ${specs} spec/wowless/temp.blp
           testaddon.txt
   WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
-add_custom_target(test DEPENDS test.out)
+add_executable(primtable_test tests/primtable_test.c wowless/primtable.c)
+target_include_directories(primtable_test PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
+target_link_libraries(primtable_test PRIVATE elune)
+set_target_properties(primtable_test PROPERTIES C_STANDARD 11)
+add_custom_command(
+  COMMENT "Running primtable_test"
+  OUTPUT primtable_test.out
+  COMMAND primtable_test
+  COMMAND ${CMAKE_COMMAND} -E touch primtable_test.out
+  DEPENDS primtable_test)
+add_custom_target(test DEPENDS test.out primtable_test.out)
 
 add_lua_executable(yamlfmt ${CMAKE_CURRENT_SOURCE_DIR}/tools/yamlfmt.lua
                    penlight wowlessyaml)
