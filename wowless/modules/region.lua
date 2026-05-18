@@ -1,3 +1,5 @@
+local uiobject = require('wowless.uiobject')
+
 return function(dirty, system, visibility)
   local IsVisible = visibility.IsVisible
   local SetDirty = dirty.SetDirty
@@ -161,22 +163,23 @@ return function(dirty, system, visibility)
 
   local function SetHeight(r, h)
     if h ~= r.height then
-      r.height = r.type == 'fontstring' and h == 0 and 1 or h
+      r.height = uiobject.type(r.luarep[0]) == 'fontstring' and h == 0 and 1 or h
       SetDirty(r)
     end
   end
 
   local function SetSize(r, w, h)
     if w ~= r.width or h ~= r.height then
-      r.width = r.type == 'fontstring' and w == 0 and 1 or w
-      r.height = r.type == 'fontstring' and h == 0 and 1 or h
+      local isfontstring = uiobject.type(r.luarep[0]) == 'fontstring'
+      r.width = isfontstring and w == 0 and 1 or w
+      r.height = isfontstring and h == 0 and 1 or h
       SetDirty(r)
     end
   end
 
   local function SetWidth(r, w)
     if w ~= r.width then
-      r.width = r.type == 'fontstring' and w == 0 and 1 or w
+      r.width = uiobject.type(r.luarep[0]) == 'fontstring' and w == 0 and 1 or w
       SetDirty(r)
     end
   end

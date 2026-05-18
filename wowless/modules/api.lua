@@ -133,12 +133,11 @@ return function(
     local objtype = uiobjecttypes.GetOrThrow(typename)
     log(3, 'creating %s%s', objtype.name, objname and (' named ' .. objname) or '')
     local regid = nextid()
-    local objp = uiobject.new(regid)
+    local objp = uiobject.new(regid, typename)
     local obj = setmetatable({ [0] = objp }, objtype.sandboxMT)
     local ud = objtype.constructor()
     ud.luarep = obj
     ud.name = objname
-    ud.type = typename
     userdata[regid] = ud
     setmetatable(ud, objtype.hostMT)
     DoSetParent(ud, parent)
