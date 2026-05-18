@@ -264,8 +264,9 @@ static inline bool wowless_isuiobject(lua_State *L, int idx,
     lua_pop(L, 1);
     return false;
   }
+  lua_pop(L, 1);
   lua_getfield(L, lua_upvalueindex(1), "IsUiObject");
-  lua_insert(L, -2);
+  lua_pushvalue(L, idx);
   lua_pushlstring(L, tname.data(), tname.size());
   lua_call(L, 2, 1);
   int result = lua_toboolean(L, -1);

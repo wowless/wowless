@@ -872,6 +872,7 @@ lua2c(
   wowless.profiler=${CMAKE_CURRENT_SOURCE_DIR}/wowless/profiler.lua
   wowless.runner=${CMAKE_CURRENT_SOURCE_DIR}/wowless/runner.lua
   wowless.secure=c
+  wowless.uiobject=c
   wowless.xml=${CMAKE_CURRENT_SOURCE_DIR}/wowless/xml.lua
   toolsprettywrite=p)
 target_sources(
@@ -882,7 +883,8 @@ target_sources(
           wowless/modules/ctypecheck.cpp
           wowless/modules/encodingutil.c
           wowless/secure.c
-          wowless/stubs.cpp)
+          wowless/stubs.cpp
+          wowless/uiobject.c)
 
 add_lua_executable(
   wowless

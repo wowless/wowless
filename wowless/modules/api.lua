@@ -1,4 +1,5 @@
 local hlist = require('wowless.hlist')
+local uiobject = require('wowless.uiobject')
 
 return function(
   datalua,
@@ -17,6 +18,13 @@ return function(
   local genv = env.genv
   local secureenv = env.secureenv
   local userdata = uiobjects.userdata
+  local nextid = (function()
+    local n = 0
+    return function()
+      n = n + 1
+      return n
+    end
+  end)()
 
   local InheritsFrom = uiobjecttypes.InheritsFrom
   local IsIntrinsicType = uiobjecttypes.IsIntrinsicType
@@ -124,13 +132,14 @@ return function(
     end
     local objtype = uiobjecttypes.GetOrThrow(typename)
     log(3, 'creating %s%s', objtype.name, objname and (' named ' .. objname) or '')
-    local objp = newproxy(nil)
+    local regid = nextid()
+    local objp = uiobject.new(regid)
     local obj = setmetatable({ [0] = objp }, objtype.sandboxMT)
     local ud = objtype.constructor()
     ud.luarep = obj
     ud.name = objname
     ud.type = typename
-    userdata[objp] = ud
+    userdata[regid] = ud
     setmetatable(ud, objtype.hostMT)
     DoSetParent(ud, parent)
     if InheritsFrom(typename, 'frame') then
