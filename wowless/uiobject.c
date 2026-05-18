@@ -23,11 +23,17 @@ static int wowless_uiobject_new(lua_State *L) {
 }
 
 static int wowless_uiobject_id(lua_State *L) {
-  if (lua_type(L, 1) != LUA_TUSERDATA) goto fail;
-  if (lua_objlen(L, 1) != sizeof(struct wowless_uiobject_data)) goto fail;
+  if (lua_type(L, 1) != LUA_TUSERDATA) {
+    goto fail;
+  }
+  if (lua_objlen(L, 1) != sizeof(struct wowless_uiobject_data)) {
+    goto fail;
+  }
   {
     struct wowless_uiobject_data *ud = lua_touserdata(L, 1);
-    if (ud->marker != &wowless_uiobject_marker) goto fail;
+    if (ud->marker != &wowless_uiobject_marker) {
+      goto fail;
+    }
     lua_pushinteger(L, ud->id);
     return 1;
   }
