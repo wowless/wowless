@@ -5,6 +5,7 @@ extern "C" {
 #include "lauxlib.h"
 #include "lua.h"
 #include "wowless/stubs.h"
+#include "wowless/uiobject.h"
 }
 
 #include <string_view>
@@ -253,42 +254,37 @@ static inline void wowless_stubchecknilableluaobject(lua_State *L, int idx,
   }
 }
 
-static inline bool wowless_isuiobject(lua_State *L, int idx,
-                                      std::string_view tname) {
+static inline bool wowless_isuiobject(lua_State *L, int idx, int type_bit) {
   idx = lua_absindex(L, idx);
-  if (lua_type(L, idx) != LUA_TTABLE) {
+  if (lua_type(L, idx) != LUA_TTABLE)
     return false;
-  }
   lua_rawgeti(L, idx, 0);
-  if (lua_type(L, -1) != LUA_TUSERDATA) {
-    lua_pop(L, 1);
-    return false;
+  bool result = false;
+  if (lua_type(L, -1) == LUA_TUSERDATA &&
+      lua_objlen(L, -1) == sizeof(struct wowless_uiobject_data)) {
+    const struct wowless_uiobject_data *ud = (const struct wowless_uiobject_data *)lua_touserdata(L, -1);
+    if (ud->marker == &wowless_uiobject_marker)
+      result = (ud->isa_mask >> type_bit) & 1;
   }
-  lua_pop(L, 1);
-  lua_getfield(L, lua_upvalueindex(1), "IsUiObject");
-  lua_pushvalue(L, idx);
-  lua_pushlstring(L, tname.data(), tname.size());
-  lua_call(L, 2, 1);
-  int result = lua_toboolean(L, -1);
   lua_pop(L, 1);
   return result;
 }
 
 static inline bool wowless_isnilableuiobject(lua_State *L, int idx,
-                                             std::string_view tname) {
-  return lua_isnoneornil(L, idx) || wowless_isuiobject(L, idx, tname);
+                                             int type_bit) {
+  return lua_isnoneornil(L, idx) || wowless_isuiobject(L, idx, type_bit);
 }
 
 static inline void wowless_stubcheckuiobject(lua_State *L, int idx,
-                                             std::string_view tname) {
-  if (!wowless_isuiobject(L, idx, tname)) {
+                                             int type_bit) {
+  if (!wowless_isuiobject(L, idx, type_bit)) {
     luaL_typerror(L, idx, "uiobject");
   }
 }
 
 static inline void wowless_stubchecknilableuiobject(lua_State *L, int idx,
-                                                    std::string_view tname) {
-  if (!wowless_isnilableuiobject(L, idx, tname)) {
+                                                    int type_bit) {
+  if (!wowless_isnilableuiobject(L, idx, type_bit)) {
     luaL_typerror(L, idx, "uiobject");
   }
 }

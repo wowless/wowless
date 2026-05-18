@@ -1,3 +1,5 @@
+local uiobject = require('wowless.uiobject')
+
 return function(
   addons,
   api,
@@ -554,6 +556,7 @@ return function(
             local basetype = string.lower(e.type)
             local base = uiobjecttypes.GetOrThrow(basetype)
             uiobjecttypes.Add(name, {
+              c_type = uiobject.type_new(-1, base.c_type),
               constructor = base.constructor,
               hostMT = base.hostMT,
               isa = base.isa,

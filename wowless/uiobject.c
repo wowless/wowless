@@ -1,24 +1,50 @@
+#include <stdlib.h>
+
 #include "lauxlib.h"
 #include "lua.h"
+#include "wowless/uiobject.h"
 
 /*
- * Stored at the start of every uiobject token userdata.
- * Its address acts as an in-memory marker so we can identify our userdata
- * without needing a metatable (keeping getmetatable(token) == nil).
+ * Address acts as an in-memory type marker for wowless uiobject token userdatas.
  */
-static const char wowless_uiobject_marker;
+const char wowless_uiobject_marker = 0;
 
-struct wowless_uiobject_data {
-  const void *marker;
-  int id;
-};
+/*
+ * type_new(bit_index, parent1, parent2, ...) -> lightuserdata
+ * Allocates a wowless_uitype whose isa_mask is the OR of all parent masks plus
+ * (1 << bit_index). Pass bit_index = -1 for types with no own bit (XML-only
+ * types never directly checked in stubs).
+ */
+static int wowless_uitype_new(lua_State *L) {
+  int bit = luaL_checkinteger(L, 1);
+  struct wowless_uitype *t = malloc(sizeof(struct wowless_uitype));
+  t->isa_mask = 0;
+  if (bit >= 0)
+    t->isa_mask = UINT64_C(1) << bit;
+  for (int i = 2; i <= lua_gettop(L); i++) {
+    if (!lua_isnil(L, i)) {
+      const struct wowless_uitype *parent = lua_touserdata(L, i);
+      if (parent)
+        t->isa_mask |= parent->isa_mask;
+    }
+  }
+  lua_pushlightuserdata(L, t);
+  return 1;
+}
 
+/*
+ * new(id, type_lightuserdata) -> userdata
+ * Creates a uiobject token userdata. Copies isa_mask from the type descriptor
+ * so the check in wowless_isuiobject needs no indirection.
+ */
 static int wowless_uiobject_new(lua_State *L) {
   int id = luaL_checkinteger(L, 1);
+  const struct wowless_uitype *type = lua_touserdata(L, 2);
   struct wowless_uiobject_data *ud =
       lua_newuserdata(L, sizeof(struct wowless_uiobject_data));
   ud->marker = &wowless_uiobject_marker;
   ud->id = id;
+  ud->isa_mask = type ? type->isa_mask : 0;
   return 1;
 }
 
@@ -35,9 +61,10 @@ static int wowless_uiobject_id(lua_State *L) {
 }
 
 static const struct luaL_Reg lib[] = {
-    {"id",  wowless_uiobject_id },
-    {"new", wowless_uiobject_new},
-    {NULL,  NULL                }
+    {"id",       wowless_uiobject_id  },
+    {"new",      wowless_uiobject_new },
+    {"type_new", wowless_uitype_new   },
+    {NULL,       NULL                 }
 };
 
 int luaopen_wowless_uiobject(lua_State *L) {

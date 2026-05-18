@@ -374,6 +374,13 @@ for k, v in pairs(parseYaml('data/products/' .. product .. '/events.yaml')) do
 end
 
 local uiobjectdata = parseYaml('data/products/' .. product .. '/uiobjects.yaml')
+local uitype_bits = {}
+do
+  local names = {}
+  for k in pairs(uiobjectdata) do names[#names + 1] = k end
+  table.sort(names)
+  for i, name in ipairs(names) do uitype_bits[name] = i - 1 end
+end
 local uiobjectimpl = parseYaml('data/uiobjectimpl.yaml')
 local uiobjectinits = {}
 local function mkuiobjectinit(k)
@@ -533,6 +540,7 @@ for k, v in pairs(uiobjectdata) do
     objectType = v.objectType,
     scripts = scripts,
     singleton = v.singleton,
+    uitype_bit = uitype_bits[k],
   }
 end
 
@@ -1035,11 +1043,11 @@ if args.coutput then
   for uname in sorted(uiobjectdata) do
     local target = uname:lower()
     emit('static bool wowless_isuiobject_%s(lua_State *L, int idx) {', safename(uname))
-    emit('  return wowless_isuiobject(L, idx, %s);', cstring(target))
+    emit('  return wowless_isuiobject(L, idx, %d);', uitype_bits[uname])
     emit('}')
     emit('')
     emit('static bool wowless_isnilableuiobject_%s(lua_State *L, int idx) {', safename(uname))
-    emit('  return wowless_isnilableuiobject(L, idx, %s);', cstring(target))
+    emit('  return wowless_isnilableuiobject(L, idx, %d);', uitype_bits[uname])
     emit('}')
     emit('')
     emit('static void wowless_stubcheckuiobject_%s(lua_State *L, int idx) {', safename(uname))

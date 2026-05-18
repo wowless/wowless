@@ -19,9 +19,6 @@ local mock_cgencode = {
   IsLuaObject = function(_ud, _typename)
     return false
   end,
-  IsUiObject = function(_ud, _typename)
-    return false
-  end,
   log = function() end,
 }
 
@@ -135,7 +132,7 @@ describe('typecheck align', function()
     uiobject = {
       ltype = { uiobject = 'Frame' },
       sections = { stubcheck = true },
-      tparam = 'frame', -- C lowercases the typename
+      tparam = 0, -- type_bit integer (no registered types in test, always false)
     },
     fileasset = {
       ltype = 'FileAsset',
