@@ -61,8 +61,8 @@ return function(datalua, funcheck, gencode, sqls, uiobjectsmodule, uiobjecttypes
       local lname = name:lower()
       local function wrap(fname, fn)
         return function(self, ...)
-          if not InheritsFrom(self.type, lname) then
-            error(('invalid self to %s.%s, got %s'):format(name, fname, tostring(self.type)))
+          if not InheritsFrom(uiobjecttypes.GetType(self), lname) then
+            error(('invalid self to %s.%s, got %s'):format(name, fname, uiobjecttypes.GetType(self)))
           end
           return fn(self, ...)
         end

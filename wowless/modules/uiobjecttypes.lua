@@ -1,3 +1,5 @@
+local uiobject = require('wowless.uiobject')
+
 return function()
   local uiobjectTypes = {}
 
@@ -5,8 +7,12 @@ return function()
     uiobjectTypes[name] = t
   end
 
+  local function GetType(obj)
+    return uiobject.type(obj.luarep[0])
+  end
+
   local function GetObjectType(obj)
-    return uiobjectTypes[obj.type].name
+    return uiobjectTypes[GetType(obj)].name
   end
 
   local function GetOrThrow(name)
@@ -43,7 +49,7 @@ return function()
 
   local function IsObjectType(obj, ty)
     ty = string.lower(ty)
-    return uiobjectTypes[obj.type].isa[ty] or false
+    return uiobjectTypes[GetType(obj)].isa[ty] or false
   end
 
   return {
@@ -51,6 +57,7 @@ return function()
     GetObjectType = GetObjectType,
     GetOrThrow = GetOrThrow,
     GetSandboxMetatable = GetSandboxMetatable,
+    GetType = GetType,
     Has = Has,
     HasScript = HasScript,
     InheritsFrom = InheritsFrom,
