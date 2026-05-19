@@ -1424,16 +1424,27 @@ if args.coutput then
   emit('  stubs_ns,')
   emit('};')
   emit('')
-  emit('extern "C" int luaopen_build_products_%s_stubs(lua_State *L) {', product)
   if next(uiobjectdata) then
-    emit('  lua_getfield(L, LUA_REGISTRYINDEX, "_LOADED");')
-    emit('  lua_getfield(L, -1, "wowless.uiobject");')
+    emit('static int load_stubs(lua_State *L) {')
+    emit('  lua_getfield(L, 1, "uiobjects");')
     emit('  lua_pushcfunction(L, wowless_uiobject_new);')
     emit('  lua_setfield(L, -2, "new");')
-    emit('  lua_pop(L, 2);')
+    emit('  lua_pop(L, 1);')
+    emit('  lua_pushvalue(L, lua_upvalueindex(1));')
+    emit('  lua_pushcclosure(L, wowless_load_stubs, 1);')
+    emit('  lua_insert(L, 1);')
+    emit('  lua_call(L, lua_gettop(L) - 1, LUA_MULTRET);')
+    emit('  return lua_gettop(L);')
+    emit('}')
+    emit('')
   end
+  emit('extern "C" int luaopen_build_products_%s_stubs(lua_State *L) {', product)
   emit('  lua_pushlightuserdata(L, static_cast<void *>(const_cast<wowless_stubs_spec *>(&stubs_spec)));')
-  emit('  lua_pushcclosure(L, wowless_load_stubs, 1);')
+  if next(uiobjectdata) then
+    emit('  lua_pushcclosure(L, load_stubs, 1);')
+  else
+    emit('  lua_pushcclosure(L, wowless_load_stubs, 1);')
+  end
   emit('  return 1;')
   emit('}')
 
