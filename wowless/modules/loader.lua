@@ -554,7 +554,6 @@ return function(
             local basetype = string.lower(e.type)
             local base = uiobjecttypes.GetOrThrow(basetype)
             uiobjecttypes.Add(name, {
-              ctype = base.ctype,
               constructor = base.constructor,
               hostMT = base.hostMT,
               isa = base.isa,

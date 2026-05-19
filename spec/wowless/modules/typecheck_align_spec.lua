@@ -1,10 +1,5 @@
-local uiobject = require('wowless.uiobject')
 local stringenums = require('runtime.stringenums')
 local units = require('wowless.modules.units')()
-
--- A Frame proxy with bit 0 in its isa_mask, matching tparam = 0 below.
-local frame_ud = {}
-local frame_obj = { [0] = uiobject.new(1, uiobject.type_new(0)) }
 
 -- mock_cgencode mirrors the real cgencode's behavior using the same runtime data,
 -- so the C stub checks (which receive cgencode as upvalue) and the Lua typecheck
@@ -22,6 +17,9 @@ local mock_cgencode = {
   end,
   GetUnit = units.GetUnit,
   IsLuaObject = function(_ud, _typename)
+    return false
+  end,
+  IsUiObject = function(_ud, _typename)
     return false
   end,
   log = function() end,
@@ -45,14 +43,14 @@ local typecheck = require('wowless.modules.typecheck')(
       return nil
     end,
   },
-  { -- mock uiobjects: accept frame_obj
-    UserData = function(obj)
-      return obj == frame_obj and frame_ud or nil
+  { -- mock uiobjects: always reject
+    UserData = function()
+      return nil
     end,
   },
-  { -- mock uiobjecttypes: accept frame_ud as Frame
-    IsObjectType = function(ud, ty)
-      return ud == frame_ud and ty:lower() == 'frame'
+  { -- mock uiobjecttypes
+    IsObjectType = function()
+      return false
     end,
   },
   units
@@ -82,7 +80,6 @@ describe('typecheck align', function()
     ['\'TOPLEFT\''] = { value = 'TOPLEFT' },
     ['{}'] = { value = {} },
     ['print'] = { value = print },
-    ['frame'] = { value = frame_obj },
   }
 
   -- Type matrix: each entry drives all tests for that type.
@@ -138,7 +135,7 @@ describe('typecheck align', function()
     uiobject = {
       ltype = { uiobject = 'Frame' },
       sections = { stubcheck = true },
-      tparam = 0, -- type_bit integer; frame_obj in all_values has bit 0 set
+      tparam = 0, -- type_bit integer
     },
     fileasset = {
       ltype = 'FileAsset',

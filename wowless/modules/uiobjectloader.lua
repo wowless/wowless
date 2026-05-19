@@ -1,4 +1,3 @@
-local uiobject = require('wowless.uiobject')
 local util = require('wowless.util')
 local bubblewrap = require('wowless.bubblewrap')
 local Mixin = util.mixin
@@ -18,16 +17,14 @@ return function(datalua, funcheck, gencode, sqls, uiobjectsmodule, uiobjecttypes
         local metaindex = {}
         for inh in pairs(ty.inherits) do
           flattenOne(inh)
-          local inh_result = result[string.lower(inh)]
-          Mixin(isa, inh_result.isa)
-          Mixin(scripts, inh_result.scripts)
-          for mk, mv in pairs(inh_result.metaindex) do
+          Mixin(isa, result[string.lower(inh)].isa)
+          Mixin(scripts, result[string.lower(inh)].scripts)
+          for mk, mv in pairs(result[string.lower(inh)].metaindex) do
             metaindex[mk] = mv
           end
         end
         Mixin(metaindex, ty.mixin) -- do this last in case of overrides
         result[lk] = {
-          ctype = uiobject.type_new(table.unpack(ty.cfg.uitype_ancestors or {})),
           constructor = ty.constructor,
           isa = isa,
           metaindex = metaindex,
@@ -48,7 +45,6 @@ return function(datalua, funcheck, gencode, sqls, uiobjectsmodule, uiobjecttypes
         end)
       end
       t[k] = {
-        ctype = v.ctype,
         constructor = v.constructor,
         hostMT = { __index = v.metaindex },
         isa = v.isa,

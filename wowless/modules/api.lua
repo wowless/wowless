@@ -133,7 +133,7 @@ return function(
     local objtype = uiobjecttypes.GetOrThrow(typename)
     log(3, 'creating %s%s', objtype.name, objname and (' named ' .. objname) or '')
     local regid = nextid()
-    local objp = uiobject.new(regid, objtype.ctype)
+    local objp = uiobject.new(regid, objtype.name:lower())
     local obj = setmetatable({ [0] = objp }, objtype.sandboxMT)
     local ud = objtype.constructor()
     ud.luarep = obj

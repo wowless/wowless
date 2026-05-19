@@ -555,11 +555,6 @@ for k, v in pairs(uiobjectdata) do
   for sk in pairs(v.scripts or {}) do
     scripts[sk:lower()] = true
   end
-  local anclist = {}
-  for b in pairs(uitype_ancestors[k]) do
-    anclist[#anclist + 1] = b
-  end
-  table.sort(anclist)
   uiobjects[k] = {
     constructor = table.concat(constructor),
     inherits = v.inherits,
@@ -567,8 +562,6 @@ for k, v in pairs(uiobjectdata) do
     objectType = v.objectType,
     scripts = scripts,
     singleton = v.singleton,
-    uitype_ancestors = anclist,
-    uitype_bit = uitype_bits[k],
   }
 end
 
@@ -1087,6 +1080,27 @@ if args.coutput then
     emit('')
   end
 
+  for uname in sorted(uiobjectdata) do
+    local bits = uitype_ancestors[uname]
+    local terms = {}
+    for b in pairs(bits) do
+      terms[#terms + 1] = b
+    end
+    table.sort(terms)
+    if #terms > 0 then
+      local parts = {}
+      for _, b in ipairs(terms) do
+        parts[#parts + 1] = 'UINT64_C(1) << ' .. b
+      end
+      emit('static struct wowless_uitype uitype_%s = {%s};', safename(uname), table.concat(parts, ' | '))
+    else
+      emit('static struct wowless_uitype uitype_%s = {0};', safename(uname))
+    end
+  end
+  if next(uiobjectdata) then
+    emit('')
+  end
+
   for _, entry in ipairs(eligible) do
     local k, v = entry.name, entry.cfg
     emit('static int stub_%s(lua_State *L) {', safename(k))
@@ -1395,6 +1409,14 @@ if args.coutput then
   emit('};')
   emit('')
   emit('extern "C" int luaopen_build_products_%s_stubs(lua_State *L) {', product)
+  emit('  lua_pushliteral(L, "wowless_uitypes");')
+  emit('  lua_newtable(L);')
+  for uname in sorted(uiobjectdata) do
+    emit('  lua_pushliteral(L, %s);', cstring(uname:lower()))
+    emit('  lua_pushlightuserdata(L, &uitype_%s);', safename(uname))
+    emit('  lua_rawset(L, -3);')
+  end
+  emit('  lua_rawset(L, LUA_REGISTRYINDEX);')
   emit('  lua_pushlightuserdata(L, static_cast<void *>(const_cast<wowless_stubs_spec *>(&stubs_spec)));')
   emit('  lua_pushcclosure(L, wowless_load_stubs, 1);')
   emit('  return 1;')
