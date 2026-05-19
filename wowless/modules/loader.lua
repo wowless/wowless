@@ -553,11 +553,10 @@ return function(
             log(3, 'creating intrinsic %s', e.attr.name)
             local basetype = string.lower(e.type)
             local base = uiobjecttypes.GetOrThrow(basetype)
-            local isa = base.isa
             uiobjecttypes.Add(name, {
               constructor = base.constructor,
               hostMT = base.hostMT,
-              isa = isa,
+              isa = base.isa,
               name = base.name,
               sandboxMT = base.sandboxMT,
               scripts = base.scripts,
