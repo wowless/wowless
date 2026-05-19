@@ -20,11 +20,14 @@ struct wowless_uiobject_data {
 
 static inline int wowless_uiobject_getid(lua_State *L, int idx) {
   if (lua_type(L, idx) != LUA_TUSERDATA ||
-      lua_objlen(L, idx) != sizeof(struct wowless_uiobject_data))
+      lua_objlen(L, idx) != sizeof(struct wowless_uiobject_data)) {
     return 0;
-  struct wowless_uiobject_data *ud = (struct wowless_uiobject_data *)lua_touserdata(L, idx);
-  if (ud->marker != &wowless_uiobject_marker)
+  }
+  struct wowless_uiobject_data *ud =
+      (struct wowless_uiobject_data *)lua_touserdata(L, idx);
+  if (ud->marker != &wowless_uiobject_marker) {
     return 0;
+  }
   return ud->id;
 }
 

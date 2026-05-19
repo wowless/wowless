@@ -1,11 +1,13 @@
+#include "wowless/uiobject.h"
+
 #include <stdlib.h>
 
 #include "lauxlib.h"
 #include "lua.h"
-#include "wowless/uiobject.h"
 
 /*
- * Address acts as an in-memory type marker for wowless uiobject token userdatas.
+ * Address acts as an in-memory type marker for wowless uiobject token
+ * userdatas.
  */
 const char wowless_uiobject_marker = 0;
 
@@ -19,13 +21,15 @@ static int wowless_uitype_new(lua_State *L) {
   int bit = luaL_checkinteger(L, 1);
   struct wowless_uitype *t = malloc(sizeof(struct wowless_uitype));
   t->isa_mask = 0;
-  if (bit >= 0)
+  if (bit >= 0) {
     t->isa_mask = UINT64_C(1) << bit;
+  }
   for (int i = 2; i <= lua_gettop(L); i++) {
     if (!lua_isnil(L, i)) {
       const struct wowless_uitype *parent = lua_touserdata(L, i);
-      if (parent)
+      if (parent) {
         t->isa_mask |= parent->isa_mask;
+      }
     }
   }
   lua_pushlightuserdata(L, t);
@@ -61,10 +65,10 @@ static int wowless_uiobject_id(lua_State *L) {
 }
 
 static const struct luaL_Reg lib[] = {
-    {"id",       wowless_uiobject_id  },
-    {"new",      wowless_uiobject_new },
-    {"type_new", wowless_uitype_new   },
-    {NULL,       NULL                 }
+    {"id",       wowless_uiobject_id },
+    {"new",      wowless_uiobject_new},
+    {"type_new", wowless_uitype_new  },
+    {NULL,       NULL                }
 };
 
 int luaopen_wowless_uiobject(lua_State *L) {

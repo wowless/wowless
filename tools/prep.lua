@@ -377,9 +377,13 @@ local uiobjectdata = parseYaml('data/products/' .. product .. '/uiobjects.yaml')
 local uitype_bits = {}
 do
   local names = {}
-  for k in pairs(uiobjectdata) do names[#names + 1] = k end
+  for k in pairs(uiobjectdata) do
+    names[#names + 1] = k
+  end
   table.sort(names)
-  for i, name in ipairs(names) do uitype_bits[name] = i - 1 end
+  for i, name in ipairs(names) do
+    uitype_bits[name] = i - 1
+  end
 end
 local uiobjectimpl = parseYaml('data/uiobjectimpl.yaml')
 local uiobjectinits = {}

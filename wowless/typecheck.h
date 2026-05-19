@@ -256,15 +256,18 @@ static inline void wowless_stubchecknilableluaobject(lua_State *L, int idx,
 
 static inline bool wowless_isuiobject(lua_State *L, int idx, int type_bit) {
   idx = lua_absindex(L, idx);
-  if (lua_type(L, idx) != LUA_TTABLE)
+  if (lua_type(L, idx) != LUA_TTABLE) {
     return false;
+  }
   lua_rawgeti(L, idx, 0);
   bool result = false;
   if (lua_type(L, -1) == LUA_TUSERDATA &&
       lua_objlen(L, -1) == sizeof(struct wowless_uiobject_data)) {
-    const struct wowless_uiobject_data *ud = (const struct wowless_uiobject_data *)lua_touserdata(L, -1);
-    if (ud->marker == &wowless_uiobject_marker)
+    const struct wowless_uiobject_data *ud =
+        (const struct wowless_uiobject_data *)lua_touserdata(L, -1);
+    if (ud->marker == &wowless_uiobject_marker) {
       result = (ud->isa_mask >> type_bit) & 1;
+    }
   }
   lua_pop(L, 1);
   return result;
