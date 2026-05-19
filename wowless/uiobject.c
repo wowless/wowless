@@ -9,22 +9,19 @@
  */
 const char wowless_uiobject_marker = 0;
 
+struct wowless_uitype *wowless_uitypes_by_bit[64];
+
 /*
- * new(id, typename) -> userdata
- * Creates a uiobject token userdata. Looks up typename in the wowless_uitypes
- * registry table (populated by the product stubs module) and copies its
- * isa_mask into the userdata so wowless_isuiobject checks need no indirection.
+ * new(id, bit) -> userdata
+ * Creates a uiobject token userdata. Indexes wowless_uitypes_by_bit with the
+ * type's bit index (set by the product stubs module) and copies its isa_mask
+ * into the userdata so wowless_isuiobject checks need no indirection.
  */
 static int wowless_uiobject_new(lua_State *L) {
   int id = luaL_checkinteger(L, 1);
-  size_t len;
-  const char *name = luaL_checklstring(L, 2, &len);
-  lua_pushliteral(L, "wowless_uitypes");
-  lua_rawget(L, LUA_REGISTRYINDEX);
-  lua_pushlstring(L, name, len);
-  lua_rawget(L, -2);
-  const struct wowless_uitype *type = lua_touserdata(L, -1);
-  lua_pop(L, 2);
+  int bit = luaL_checkinteger(L, 2);
+  const struct wowless_uitype *type =
+      (bit >= 0 && bit < 64) ? wowless_uitypes_by_bit[bit] : NULL;
   struct wowless_uiobject_data *ud =
       lua_newuserdata(L, sizeof(struct wowless_uiobject_data));
   ud->marker = &wowless_uiobject_marker;

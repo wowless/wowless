@@ -562,6 +562,7 @@ for k, v in pairs(uiobjectdata) do
     objectType = v.objectType,
     scripts = scripts,
     singleton = v.singleton,
+    uitype_bit = uitype_bits[k],
   }
 end
 
@@ -1409,14 +1410,9 @@ if args.coutput then
   emit('};')
   emit('')
   emit('extern "C" int luaopen_build_products_%s_stubs(lua_State *L) {', product)
-  emit('  lua_pushliteral(L, "wowless_uitypes");')
-  emit('  lua_newtable(L);')
   for uname in sorted(uiobjectdata) do
-    emit('  lua_pushliteral(L, %s);', cstring(uname:lower()))
-    emit('  lua_pushlightuserdata(L, &uitype_%s);', safename(uname))
-    emit('  lua_rawset(L, -3);')
+    emit('  wowless_uitypes_by_bit[%d] = &uitype_%s;', uitype_bits[uname], safename(uname))
   end
-  emit('  lua_rawset(L, LUA_REGISTRYINDEX);')
   emit('  lua_pushlightuserdata(L, static_cast<void *>(const_cast<wowless_stubs_spec *>(&stubs_spec)));')
   emit('  lua_pushcclosure(L, wowless_load_stubs, 1);')
   emit('  return 1;')
