@@ -172,7 +172,7 @@
     assertEquals(true, obj ~= nil)
     assertEquals('Frame', obj:GetObjectType())
     assertEquals(true, obj:IsObjectType('Frame'))
-    assertEquals(__wowless ~= nil, obj:IsObjectType('WowlessIntrinsicType')) -- TODO fix wowless
+    assertEquals(false, obj:IsObjectType('WowlessIntrinsicType'))
   </Script>
   <WowlessIntrinsicType>
     <Scripts>
