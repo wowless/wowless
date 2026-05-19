@@ -12,24 +12,17 @@
 const char wowless_uiobject_marker = 0;
 
 /*
- * type_new(bit_index, parent1, parent2, ...) -> lightuserdata
- * Allocates a wowless_uitype whose isa_mask is the OR of all parent masks plus
- * (1 << bit_index). Pass bit_index = -1 for types with no own bit (XML-only
- * types never directly checked in stubs).
+ * type_new(bit1, bit2, ...) -> lightuserdata
+ * Allocates a wowless_uitype whose isa_mask is the OR of (1 << bitN) for each
+ * argument. Precomputed by prep to include all transitive ancestor bits.
  */
 static int wowless_uitype_new(lua_State *L) {
-  int bit = luaL_checkinteger(L, 1);
   struct wowless_uitype *t = malloc(sizeof(struct wowless_uitype));
   t->isa_mask = 0;
-  if (bit >= 0) {
-    t->isa_mask = UINT64_C(1) << bit;
-  }
-  for (int i = 2; i <= lua_gettop(L); i++) {
-    if (!lua_isnil(L, i)) {
-      const struct wowless_uitype *parent = lua_touserdata(L, i);
-      if (parent) {
-        t->isa_mask |= parent->isa_mask;
-      }
+  for (int i = 1; i <= lua_gettop(L); i++) {
+    int bit = (int)luaL_checkinteger(L, i);
+    if (bit >= 0) {
+      t->isa_mask |= UINT64_C(1) << bit;
     }
   }
   lua_pushlightuserdata(L, t);

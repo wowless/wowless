@@ -16,7 +16,6 @@ return function(datalua, funcheck, gencode, sqls, uiobjectsmodule, uiobjecttypes
         local isa = { [lk] = true }
         local scripts = Mixin({}, ty.scripts or {})
         local metaindex = {}
-        local parent_ctypes = {}
         for inh in pairs(ty.inherits) do
           flattenOne(inh)
           local inh_result = result[string.lower(inh)]
@@ -25,11 +24,10 @@ return function(datalua, funcheck, gencode, sqls, uiobjectsmodule, uiobjecttypes
           for mk, mv in pairs(inh_result.metaindex) do
             metaindex[mk] = mv
           end
-          parent_ctypes[#parent_ctypes + 1] = inh_result.ctype
         end
         Mixin(metaindex, ty.mixin) -- do this last in case of overrides
         result[lk] = {
-          ctype = uiobject.type_new(ty.cfg.uitype_bit or -1, table.unpack(parent_ctypes)),
+          ctype = uiobject.type_new(table.unpack(ty.cfg.uitype_ancestors or {})),
           constructor = ty.constructor,
           isa = isa,
           metaindex = metaindex,

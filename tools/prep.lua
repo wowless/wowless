@@ -376,14 +376,32 @@ end
 local uiobjectdata = parseYaml('data/products/' .. product .. '/uiobjects.yaml')
 local uitype_bits = {}
 do
-  local names = {}
-  for k in pairs(uiobjectdata) do
-    names[#names + 1] = k
+  local i = 0
+  for name in sorted(uiobjectdata) do
+    uitype_bits[name] = i
+    i = i + 1
   end
-  table.sort(names)
-  for i, name in ipairs(names) do
-    uitype_bits[name] = i - 1
+end
+local uitype_ancestors = {}
+local function computeAncestors(k)
+  if uitype_ancestors[k] then
+    return uitype_ancestors[k]
   end
+  local ancestors = {}
+  local bit = uitype_bits[k]
+  if bit then
+    ancestors[bit] = true
+  end
+  for inh in pairs(uiobjectdata[k].inherits) do
+    for b in pairs(computeAncestors(inh)) do
+      ancestors[b] = true
+    end
+  end
+  uitype_ancestors[k] = ancestors
+  return ancestors
+end
+for k in pairs(uiobjectdata) do
+  computeAncestors(k)
 end
 local uiobjectimpl = parseYaml('data/uiobjectimpl.yaml')
 local uiobjectinits = {}
@@ -537,6 +555,11 @@ for k, v in pairs(uiobjectdata) do
   for sk in pairs(v.scripts or {}) do
     scripts[sk:lower()] = true
   end
+  local anclist = {}
+  for b in pairs(uitype_ancestors[k]) do
+    anclist[#anclist + 1] = b
+  end
+  table.sort(anclist)
   uiobjects[k] = {
     constructor = table.concat(constructor),
     inherits = v.inherits,
@@ -544,6 +567,7 @@ for k, v in pairs(uiobjectdata) do
     objectType = v.objectType,
     scripts = scripts,
     singleton = v.singleton,
+    uitype_ancestors = anclist,
     uitype_bit = uitype_bits[k],
   }
 end
@@ -1045,7 +1069,6 @@ if args.coutput then
   end
 
   for uname in sorted(uiobjectdata) do
-    local target = uname:lower()
     emit('static bool wowless_isuiobject_%s(lua_State *L, int idx) {', safename(uname))
     emit('  return wowless_isuiobject(L, idx, %d);', uitype_bits[uname])
     emit('}')
