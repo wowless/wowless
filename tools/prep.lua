@@ -1081,24 +1081,39 @@ if args.coutput then
     emit('')
   end
 
-  for uname in sorted(uiobjectdata) do
-    local bits = uitype_ancestors[uname]
-    local terms = {}
-    for b in pairs(bits) do
-      terms[#terms + 1] = b
-    end
-    table.sort(terms)
-    if #terms > 0 then
-      local parts = {}
-      for _, b in ipairs(terms) do
-        parts[#parts + 1] = 'UINT64_C(1) << ' .. b
-      end
-      emit('static struct wowless_uitype uitype_%s = {%s};', safename(uname), table.concat(parts, ' | '))
-    else
-      emit('static struct wowless_uitype uitype_%s = {0};', safename(uname))
-    end
-  end
   if next(uiobjectdata) then
+    emit('static const struct wowless_uitype wowless_uitypes_by_bit[] = {')
+    for uname in sorted(uiobjectdata) do
+      local bits = uitype_ancestors[uname]
+      local terms = {}
+      for b in pairs(bits) do
+        terms[#terms + 1] = b
+      end
+      table.sort(terms)
+      if #terms > 0 then
+        local parts = {}
+        for _, b in ipairs(terms) do
+          parts[#parts + 1] = 'UINT64_C(1) << ' .. b
+        end
+        emit('  {%s}, /* %s */', table.concat(parts, ' | '), uname)
+      else
+        emit('  {0}, /* %s */', uname)
+      end
+    end
+    emit('};')
+    emit('')
+    emit('static int wowless_uiobject_new(lua_State *L) {')
+    emit('  int id = luaL_checkinteger(L, 1);')
+    emit('  int bit = luaL_checkinteger(L, 2);')
+    emit('  size_t n = sizeof(wowless_uitypes_by_bit) / sizeof(*wowless_uitypes_by_bit);')
+    emit('  const struct wowless_uitype *type = (size_t)bit < n ? &wowless_uitypes_by_bit[bit] : NULL;')
+    emit('  struct wowless_uiobject_data *ud =')
+    emit('      (struct wowless_uiobject_data *)lua_newuserdata(L, sizeof(struct wowless_uiobject_data));')
+    emit('  ud->marker = &wowless_uiobject_marker;')
+    emit('  ud->id = id;')
+    emit('  ud->isa_mask = type ? type->isa_mask : 0;')
+    emit('  return 1;')
+    emit('}')
     emit('')
   end
 
@@ -1410,8 +1425,12 @@ if args.coutput then
   emit('};')
   emit('')
   emit('extern "C" int luaopen_build_products_%s_stubs(lua_State *L) {', product)
-  for uname in sorted(uiobjectdata) do
-    emit('  wowless_uitypes_by_bit[%d] = &uitype_%s;', uitype_bits[uname], safename(uname))
+  if next(uiobjectdata) then
+    emit('  lua_getfield(L, LUA_REGISTRYINDEX, "_LOADED");')
+    emit('  lua_getfield(L, -1, "wowless.uiobject");')
+    emit('  lua_pushcfunction(L, wowless_uiobject_new);')
+    emit('  lua_setfield(L, -2, "new");')
+    emit('  lua_pop(L, 2);')
   end
   emit('  lua_pushlightuserdata(L, static_cast<void *>(const_cast<wowless_stubs_spec *>(&stubs_spec)));')
   emit('  lua_pushcclosure(L, wowless_load_stubs, 1);')

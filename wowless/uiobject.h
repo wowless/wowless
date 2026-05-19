@@ -12,8 +12,6 @@ struct wowless_uitype {
   uint64_t isa_mask;
 };
 
-extern struct wowless_uitype *wowless_uitypes_by_bit[64];
-
 struct wowless_uiobject_data {
   const void *marker;
   int id;
