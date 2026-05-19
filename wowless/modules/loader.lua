@@ -1,4 +1,3 @@
-
 return function(
   addons,
   api,
