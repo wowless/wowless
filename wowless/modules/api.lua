@@ -139,7 +139,7 @@ return function(
     ud.luarep = obj
     ud.name = objname
     ud.type = typename
-    userdata[objp] = ud
+    userdata[regid] = ud
     setmetatable(ud, objtype.hostMT)
     DoSetParent(ud, parent)
     if InheritsFrom(typename, 'frame') then
