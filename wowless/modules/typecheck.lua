@@ -103,10 +103,6 @@ return function(addons, datalua, env, luaobjects, uiobjects, uiobjecttypes, unit
     table = function(value)
       return luatypecheck('table', value)
     end,
-    tostring = function(value)
-      local v = type(value) == 'number' and tostring(value) or value
-      return type(v) == 'string' and v or nil
-    end,
     uiAddon = function(value)
       if type(value) ~= 'string' and type(value) ~= 'number' then
         return nil, true

@@ -527,22 +527,24 @@ static inline void wowless_implchecknilableluaobject(lua_State *L, int idx,
 static inline void wowless_implcheckuiobject(lua_State *L, int idx,
                                              int type_bit) {
   idx = lua_absindex(L, idx);
-  lua_rawgeti(L, idx, 0);
-  if (lua_type(L, -1) == LUA_TUSERDATA &&
-      lua_objlen(L, -1) == sizeof(struct wowless_uiobject_data)) {
-    const struct wowless_uiobject_data *ud =
-        (const struct wowless_uiobject_data *)lua_touserdata(L, -1);
-    if (ud->marker == &wowless_uiobject_marker &&
-        ((ud->uitype->isa_mask >> type_bit) & 1)) {
-      int id = ud->id;
-      /* cgencode[1] is uiobjects.userdata (integer-keyed by ud->id); both
-       * lookups hit the array part directly — keep uiobjects.userdata at
-       * index 1 in cgencode's return table. */
-      lua_rawgeti(L, lua_upvalueindex(1), 1);
-      lua_rawgeti(L, -1, id);
-      lua_replace(L, idx);
-      lua_pop(L, 2);
-      return;
+  if (lua_type(L, idx) == LUA_TTABLE) {
+    lua_rawgeti(L, idx, 0);
+    if (lua_type(L, -1) == LUA_TUSERDATA &&
+        lua_objlen(L, -1) == sizeof(struct wowless_uiobject_data)) {
+      const struct wowless_uiobject_data *ud =
+          (const struct wowless_uiobject_data *)lua_touserdata(L, -1);
+      if (ud->marker == &wowless_uiobject_marker &&
+          ((ud->uitype->isa_mask >> type_bit) & 1)) {
+        int id = ud->id;
+        /* cgencode[1] is uiobjects.userdata (integer-keyed by ud->id); both
+         * lookups hit the array part directly — keep uiobjects.userdata at
+         * index 1 in cgencode's return table. */
+        lua_rawgeti(L, lua_upvalueindex(1), 1);
+        lua_rawgeti(L, -1, id);
+        lua_replace(L, idx);
+        lua_pop(L, 2);
+        return;
+      }
     }
   }
   luaL_typerror(L, idx, "uiobject");
