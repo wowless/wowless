@@ -266,7 +266,7 @@ static inline bool wowless_isuiobject(lua_State *L, int idx, int type_bit) {
     const struct wowless_uiobject_data *ud =
         (const struct wowless_uiobject_data *)lua_touserdata(L, -1);
     if (ud->marker == &wowless_uiobject_marker) {
-      result = (ud->isa_mask >> type_bit) & 1;
+      result = (ud->uitype->isa_mask >> type_bit) & 1;
     }
   }
   lua_pop(L, 1);

@@ -1106,7 +1106,7 @@ if args.coutput then
   emit('      (struct wowless_uiobject_data *)lua_newuserdata(L, sizeof(struct wowless_uiobject_data));')
   emit('  ud->marker = &wowless_uiobject_marker;')
   emit('  ud->id = id;')
-  emit('  ud->isa_mask = wowless_uitypes_by_bit[bit].isa_mask;')
+  emit('  ud->uitype = &wowless_uitypes_by_bit[bit];')
   emit('  return 1;')
   emit('}')
   emit('')

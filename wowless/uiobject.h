@@ -15,7 +15,7 @@ struct wowless_uitype {
 struct wowless_uiobject_data {
   const void *marker;
   int id;
-  uint64_t isa_mask;
+  const struct wowless_uitype *uitype;
 };
 
 static inline int wowless_uiobject_getid(lua_State *L, int idx) {
