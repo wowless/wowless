@@ -1,6 +1,6 @@
 local bubblewrap = require('wowless.bubblewrap')
 
-return function(addons, api, events, log, luaobjects, uiobjects, uiobjecttypes, units)
+return function(addons, api, events, log, luaobjects, uiobjects, units)
   local stringenums = require('runtime.stringenums')
 
   local function CheckStringEnum(value, enumname)
@@ -43,13 +43,6 @@ return function(addons, api, events, log, luaobjects, uiobjects, uiobjecttypes, 
     return internal.luarep
   end
 
-  local function ImplOutputUiObject(internal, typename)
-    if type(internal) ~= 'table' or not uiobjecttypes.IsObjectType(internal, typename) then
-      error('impl output type error: expected uiobject ' .. typename)
-    end
-    return internal.luarep
-  end
-
   local function GetUiAddon(value)
     return addons.addons[tonumber(value) or tostring(value):lower()]
   end
@@ -68,7 +61,6 @@ return function(addons, api, events, log, luaobjects, uiobjects, uiobjecttypes, 
     GetUnit = units.GetUnit,
     ImplInputLuaObject = ImplInputLuaObject,
     ImplOutputLuaObject = ImplOutputLuaObject,
-    ImplOutputUiObject = ImplOutputUiObject,
     CreateLuaObject = CreateLuaObject,
     CreateUiObject = CreateUiObject,
     IsLuaObject = IsLuaObject,

@@ -713,19 +713,31 @@ static inline void wowless_imploutputnilableluaobject(lua_State *L, int idx,
 }
 
 static inline void wowless_imploutputuiobject(lua_State *L, int idx,
-                                              std::string_view tname) {
+                                              int type_bit) {
   idx = lua_absindex(L, idx);
-  lua_getfield(L, lua_upvalueindex(1), "ImplOutputUiObject");
-  lua_pushvalue(L, idx);
-  lua_pushlstring(L, tname.data(), tname.size());
-  lua_call(L, 2, 1);
-  lua_replace(L, idx);
+  if (lua_type(L, idx) == LUA_TTABLE) {
+    lua_rawgeti(L, idx, 1);
+    if (lua_type(L, -1) == LUA_TUSERDATA &&
+        lua_objlen(L, -1) == sizeof(struct wowless_uiobject_data)) {
+      const struct wowless_uiobject_data *ud =
+          (const struct wowless_uiobject_data *)lua_touserdata(L, -1);
+      if (ud->marker == &wowless_uiobject_marker &&
+          ((ud->uitype->isa_mask >> type_bit) & 1)) {
+        lua_pop(L, 1);
+        lua_getfield(L, idx, "luarep");
+        lua_replace(L, idx);
+        return;
+      }
+    }
+    lua_pop(L, 1);
+  }
+  wowless_outputtyperror(L, idx, "uiobject");
 }
 
 static inline void wowless_imploutputnilableuiobject(lua_State *L, int idx,
-                                                     std::string_view tname) {
+                                                     int type_bit) {
   if (!lua_isnoneornil(L, idx)) {
-    wowless_imploutputuiobject(L, idx, tname);
+    wowless_imploutputuiobject(L, idx, type_bit);
   }
 }
 
