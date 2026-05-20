@@ -1,6 +1,6 @@
 local bubblewrap = require('wowless.bubblewrap')
 
-return function(addons, api, events, log, luaobjects, uiobjecttypes, units)
+return function(addons, api, events, log, luaobjects, uiobjects, uiobjecttypes, units)
   local stringenums = require('runtime.stringenums')
 
   local function CheckStringEnum(value, enumname)
@@ -58,7 +58,10 @@ return function(addons, api, events, log, luaobjects, uiobjecttypes, units)
     events.SendEvent('ADDON_ACTION_FORBIDDEN', taint, 'UNKNOWN()')
   end
 
+  -- Index 1 is accessed from C via lua_rawgeti for a hot-path array-part lookup
+  -- (no hashing). Keep uiobjects.userdata first; string keys below can shift freely.
   return {
+    uiobjects.userdata,
     CheckStringEnum = CheckStringEnum,
     FireProtected = bubblewrap(FireProtected),
     GetUiAddon = GetUiAddon,

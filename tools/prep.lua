@@ -275,6 +275,7 @@ local impl_input_types = {
   structure = nop,
   table = nop,
   uiAddon = nop,
+  uiobject = nop,
   unit = nop,
   unknown = nop,
 }
@@ -1016,6 +1017,8 @@ if args.coutput then
     emit('static bool wowless_isnilableuiobject_%s(lua_State *L, int idx);', safename(uname))
     emit('static void wowless_stubcheckuiobject_%s(lua_State *L, int idx);', safename(uname))
     emit('static void wowless_stubchecknilableuiobject_%s(lua_State *L, int idx);', safename(uname))
+    emit('static void wowless_implcheckuiobject_%s(lua_State *L, int idx);', safename(uname))
+    emit('static void wowless_implchecknilableuiobject_%s(lua_State *L, int idx);', safename(uname))
   end
   emit('')
 
@@ -1075,6 +1078,14 @@ if args.coutput then
     emit('')
     emit('static void wowless_stubchecknilableuiobject_%s(lua_State *L, int idx) {', safename(uname))
     emit('  if (!wowless_isnilableuiobject_%s(L, idx)) luaL_typerror(L, idx, "uiobject");', safename(uname))
+    emit('}')
+    emit('')
+    emit('static void wowless_implcheckuiobject_%s(lua_State *L, int idx) {', safename(uname))
+    emit('  wowless_implcheckuiobject(L, idx, %d);', uitype_bits[uname])
+    emit('}')
+    emit('')
+    emit('static void wowless_implchecknilableuiobject_%s(lua_State *L, int idx) {', safename(uname))
+    emit('  wowless_implchecknilableuiobject(L, idx, %d);', uitype_bits[uname])
     emit('}')
     emit('')
   end
