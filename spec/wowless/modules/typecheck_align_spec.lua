@@ -135,7 +135,7 @@ describe('typecheck align', function()
     uiobject = {
       ltype = { uiobject = 'Frame' },
       sections = { stubcheck = true },
-      tparam = 'frame', -- C lowercases the typename
+      tparam = 0, -- type_bit integer
     },
     fileasset = {
       ltype = 'FileAsset',

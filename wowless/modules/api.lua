@@ -1,5 +1,4 @@
 local hlist = require('wowless.hlist')
-local uiobject = require('wowless.uiobject')
 
 return function(
   datalua,
@@ -14,6 +13,7 @@ return function(
   uiobjecttypes,
   visibility
 )
+  local new = require('build.products.' .. datalua.product .. '.stubs').new
   local frames = hlist()
   local genv = env.genv
   local secureenv = env.secureenv
@@ -133,7 +133,7 @@ return function(
     local objtype = uiobjecttypes.GetOrThrow(typename)
     log(3, 'creating %s%s', objtype.name, objname and (' named ' .. objname) or '')
     local regid = nextid()
-    local objp = uiobject.new(regid)
+    local objp = new(regid, objtype.ctype)
     local obj = setmetatable({ [0] = objp }, objtype.sandboxMT)
     local ud = objtype.constructor()
     ud.luarep = obj

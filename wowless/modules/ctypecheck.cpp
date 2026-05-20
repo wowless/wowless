@@ -84,8 +84,16 @@ TYPED_CHECKER(stubcheckstringenum, wowless_stubcheckstringenum)
 TYPED_CHECKER(stubchecknilablestringenum, wowless_stubchecknilablestringenum)
 TYPED_CHECKER(stubcheckluaobject, wowless_stubcheckluaobject)
 TYPED_CHECKER(stubchecknilableluaobject, wowless_stubchecknilableluaobject)
-TYPED_CHECKER(stubcheckuiobject, wowless_stubcheckuiobject)
-TYPED_CHECKER(stubchecknilableuiobject, wowless_stubchecknilableuiobject)
+/* uiobject checks take an integer type_bit, not a string typename. */
+static int ctypecheck_stubcheckuiobject(lua_State *L) {
+  wowless_stubcheckuiobject(L, 1, (int)luaL_checkinteger(L, 2));
+  return 0;
+}
+
+static int ctypecheck_stubchecknilableuiobject(lua_State *L) {
+  wowless_stubchecknilableuiobject(L, 1, (int)luaL_checkinteger(L, 2));
+  return 0;
+}
 
 #define SET_SIMPLE(L, name)                \
   lua_pushcfunction(L, ctypecheck_##name); \

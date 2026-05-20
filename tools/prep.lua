@@ -374,6 +374,35 @@ for k, v in pairs(parseYaml('data/products/' .. product .. '/events.yaml')) do
 end
 
 local uiobjectdata = parseYaml('data/products/' .. product .. '/uiobjects.yaml')
+local uitype_bits = {}
+do
+  local i = 0
+  for name in sorted(uiobjectdata) do
+    uitype_bits[name] = i
+    i = i + 1
+  end
+end
+local uitype_ancestors = {}
+local function computeAncestors(k)
+  if uitype_ancestors[k] then
+    return uitype_ancestors[k]
+  end
+  local ancestors = {}
+  local bit = uitype_bits[k]
+  if bit then
+    ancestors[bit] = true
+  end
+  for inh in pairs(uiobjectdata[k].inherits) do
+    for b in pairs(computeAncestors(inh)) do
+      ancestors[b] = true
+    end
+  end
+  uitype_ancestors[k] = ancestors
+  return ancestors
+end
+for k in pairs(uiobjectdata) do
+  computeAncestors(k)
+end
 local uiobjectimpl = parseYaml('data/uiobjectimpl.yaml')
 local uiobjectinits = {}
 local function mkuiobjectinit(k)
@@ -533,6 +562,7 @@ for k, v in pairs(uiobjectdata) do
     objectType = v.objectType,
     scripts = scripts,
     singleton = v.singleton,
+    uitype_bit = uitype_bits[k],
   }
 end
 
@@ -987,9 +1017,7 @@ if args.coutput then
     emit('static void wowless_stubcheckuiobject_%s(lua_State *L, int idx);', safename(uname))
     emit('static void wowless_stubchecknilableuiobject_%s(lua_State *L, int idx);', safename(uname))
   end
-  if next(uiobjectdata) then
-    emit('')
-  end
+  emit('')
 
   for sname, st in sorted(structures) do
     emit('static void wowless_stubcheckstruct_%s(lua_State *L, int idx) {', safename(sname))
@@ -1033,13 +1061,12 @@ if args.coutput then
   end
 
   for uname in sorted(uiobjectdata) do
-    local target = uname:lower()
     emit('static bool wowless_isuiobject_%s(lua_State *L, int idx) {', safename(uname))
-    emit('  return wowless_isuiobject(L, idx, %s);', cstring(target))
+    emit('  return wowless_isuiobject(L, idx, %d);', uitype_bits[uname])
     emit('}')
     emit('')
     emit('static bool wowless_isnilableuiobject_%s(lua_State *L, int idx) {', safename(uname))
-    emit('  return wowless_isnilableuiobject(L, idx, %s);', cstring(target))
+    emit('  return wowless_isnilableuiobject(L, idx, %d);', uitype_bits[uname])
     emit('}')
     emit('')
     emit('static void wowless_stubcheckuiobject_%s(lua_State *L, int idx) {', safename(uname))
@@ -1051,6 +1078,38 @@ if args.coutput then
     emit('}')
     emit('')
   end
+
+  emit('static const struct wowless_uitype wowless_uitypes_by_bit[] = {')
+  for uname in sorted(uiobjectdata) do
+    local bits = uitype_ancestors[uname]
+    local terms = {}
+    for b in pairs(bits) do
+      terms[#terms + 1] = b
+    end
+    table.sort(terms)
+    if #terms > 0 then
+      local parts = {}
+      for _, b in ipairs(terms) do
+        parts[#parts + 1] = 'UINT64_C(1) << ' .. b
+      end
+      emit('  {%s}, /* %s */', table.concat(parts, ' | '), uname)
+    else
+      emit('  {0}, /* %s */', uname)
+    end
+  end
+  emit('};')
+  emit('')
+  emit('static int wowless_uiobject_new(lua_State *L) {')
+  emit('  int id = luaL_checkinteger(L, 1);')
+  emit('  int bit = luaL_checkinteger(L, 2);')
+  emit('  struct wowless_uiobject_data *ud =')
+  emit('      (struct wowless_uiobject_data *)lua_newuserdata(L, sizeof(struct wowless_uiobject_data));')
+  emit('  ud->marker = &wowless_uiobject_marker;')
+  emit('  ud->id = id;')
+  emit('  ud->uitype = &wowless_uitypes_by_bit[bit];')
+  emit('  return 1;')
+  emit('}')
+  emit('')
 
   for _, entry in ipairs(eligible) do
     local k, v = entry.name, entry.cfg
@@ -1360,8 +1419,12 @@ if args.coutput then
   emit('};')
   emit('')
   emit('extern "C" int luaopen_build_products_%s_stubs(lua_State *L) {', product)
+  emit('  lua_newtable(L);')
   emit('  lua_pushlightuserdata(L, static_cast<void *>(const_cast<wowless_stubs_spec *>(&stubs_spec)));')
   emit('  lua_pushcclosure(L, wowless_load_stubs, 1);')
+  emit('  lua_setfield(L, -2, "load");')
+  emit('  lua_pushcfunction(L, wowless_uiobject_new);')
+  emit('  lua_setfield(L, -2, "new");')
   emit('  return 1;')
   emit('}')
 

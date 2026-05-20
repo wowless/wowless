@@ -2,7 +2,7 @@ local bubblewrap = require('wowless.bubblewrap')
 local util = require('wowless.util')
 
 return function(datalua, funcheck, log, sqls)
-  local cstubs = require('build.products.' .. datalua.product .. '.stubs')
+  local stubs = require('build.products.' .. datalua.product .. '.stubs')
   return function(modules)
     log(1, 'loading functions')
 
@@ -36,7 +36,7 @@ return function(datalua, funcheck, log, sqls)
       end
     end
 
-    local fns, securefns = cstubs(modules)
+    local fns, securefns = stubs.load(modules)
     for fn, apicfg in pairs(datalua.apis) do
       local v = mkfn(fn, apicfg)
       if not apicfg.nobubblewrap and not apicfg.nowrap then

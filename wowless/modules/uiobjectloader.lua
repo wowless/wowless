@@ -26,6 +26,7 @@ return function(datalua, funcheck, gencode, sqls, uiobjectsmodule, uiobjecttypes
         Mixin(metaindex, ty.mixin) -- do this last in case of overrides
         result[lk] = {
           constructor = ty.constructor,
+          ctype = ty.cfg.uitype_bit,
           isa = isa,
           metaindex = metaindex,
           name = ty.cfg.objectType or k,
@@ -46,6 +47,7 @@ return function(datalua, funcheck, gencode, sqls, uiobjectsmodule, uiobjecttypes
       end
       t[k] = {
         constructor = v.constructor,
+        ctype = v.ctype,
         hostMT = { __index = v.metaindex },
         isa = v.isa,
         name = v.name,
