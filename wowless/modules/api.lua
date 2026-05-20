@@ -136,6 +136,7 @@ return function(
     local objp = new(regid, objtype.ctype)
     local obj = setmetatable({ [0] = objp }, objtype.sandboxMT)
     local ud = objtype.constructor()
+    ud[0] = objp
     ud.luarep = obj
     ud.name = objname
     ud.type = typename

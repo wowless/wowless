@@ -319,7 +319,8 @@ local function run(cfg)
     for _, obj in pairs(modules.uiobjects.userdata) do
       assert(UserData(obj.luarep) == obj)
       for k, v in pairs(obj) do
-        assert(type(v) ~= 'table' or (k ~= 'luarep') == not UserData(v), k)
+        local ud = type(v) == 'table' and UserData(v)
+        assert(not ud or (k == 'luarep') == (ud ~= v), k)
       end
     end
     assert(issecure(), 'wowless bug: framework is tainted')
