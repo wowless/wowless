@@ -864,7 +864,7 @@ if args.coutput then
     table = simple_coutputtype('table'),
     uiobject = function(typename, nilable, idx)
       local ns = nilable and 'nilable' or ''
-      return string.format('wowless_imploutput%suiobject(L, %s, %s)', ns, idx, cstring(typename))
+      return string.format('wowless_imploutput%suiobject(L, %s, %d)', ns, idx, assert(uitype_bits[typename], typename))
     end,
     unit = simple_coutputtype('unit'),
     unknown = simple_coutputtype('unknown'),

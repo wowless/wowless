@@ -33,7 +33,6 @@ cgencode:
     log:
     luaobjects:
     uiobjects:
-    uiobjecttypes:
     units:
 clog:
   deps:
