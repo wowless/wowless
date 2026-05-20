@@ -89,6 +89,28 @@ static inline void wowless_stubchecknilableenum(lua_State *L, int idx) {
   wowless_stubchecknilablenumber(L, idx);
 }
 
+static inline bool wowless_isgender(lua_State *L, int idx) {
+  return wowless_isnilablenumber(L, idx);
+}
+
+static inline void wowless_implcheckgender(lua_State *L, int idx) {
+  switch (lua_type(L, idx)) {
+    case LUA_TNIL:
+    case LUA_TNONE:
+      lua_pushnumber(L, 0);
+      lua_replace(L, idx);
+      return;
+    case LUA_TNUMBER:
+      return;
+    default:
+      wowless_implcoercenumber(L, idx);
+  }
+}
+
+static inline void wowless_stubcheckgender(lua_State *L, int idx) {
+  wowless_stubchecknilablenumber(L, idx);
+}
+
 static inline bool wowless_isstring(lua_State *L, int idx) {
   return lua_isstring(L, idx);
 }

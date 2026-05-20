@@ -269,6 +269,7 @@ local impl_input_types = {
   enum = nop,
   FileAsset = nop,
   ['function'] = nop,
+  gender = nop,
   luaobject = nop,
   number = nop,
   string = nop,
@@ -800,6 +801,7 @@ if args.coutput then
     enum = simple_cinputtype('enum'),
     FileAsset = simple_cinputtype('fileasset'),
     ['function'] = simple_cinputtype('function'),
+    gender = simple_cinputtype('gender'),
     luaobject = function(name)
       return function(verb, nilable, idx)
         local ns = nilable and 'nilable' or ''
