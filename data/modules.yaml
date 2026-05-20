@@ -14,12 +14,6 @@ api:
     uiobjects:
     uiobjecttypes:
     visibility:
-apiloader:
-  deps:
-    datalua:
-    funcheck:
-    log:
-    sqls:
 atlas:
   deps:
     env:

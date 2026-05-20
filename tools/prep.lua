@@ -320,34 +320,7 @@ local function is_impl_eligible(apicfg)
   return ensureimpl(apicfg.impl).nowrap
 end
 
-local function mkapi(apicfg)
-  if apicfg.impl then
-    if is_impl_eligible(apicfg) then
-      return nil
-    end
-    local impl = ensureimpl(apicfg.impl)
-    return {
-      impl = impl.impl,
-      inputs = not impl.nowrap and apicfg.inputs or nil,
-      instride = apicfg.instride,
-      mayreturnnothing = apicfg.mayreturnnothing,
-      modules = impl.modules,
-      nobubblewrap = impl.nobubblewrap,
-      nowrap = impl.nowrap,
-      outputs = not impl.nowrap and apicfg.outputs or nil,
-      outstride = apicfg.outstride,
-      sqls = impl.sqls,
-      src = impl.src,
-      usage = apicfg.usage,
-    }
-  end
-end
-
 local rawapis = parseYaml('data/products/' .. product .. '/apis.yaml')
-local apis = {}
-for k, v in pairs(rawapis) do
-  apis[k] = mkapi(v)
-end
 
 local cvars = {}
 for k, v in pairs(parseYaml('data/products/' .. product .. '/cvars.yaml')) do
@@ -682,7 +655,6 @@ local xmlflat = (function()
 end)()
 
 local data = {
-  apis = apis,
   build = parseYaml('data/products/' .. product .. '/build.yaml'),
   config = parseYaml('data/products/' .. product .. '/config.yaml'),
   cvars = cvars,

@@ -19,7 +19,10 @@ local function dump(uiobjects)
 end
 
 local function init(modules, lite)
-  local impls, secureimpls = modules.apiloader(modules)
+  modules.log(1, 'loading functions')
+  local stubs = require('build.products.' .. modules.datalua.product .. '.stubs')
+  local impls, secureimpls = stubs.load(modules)
+  modules.log(1, 'functions loaded')
   Mixin(modules.env.genv, deepcopy(impls))
   Mixin(modules.env.genv, deepcopy(modules.datalua.globals))
   Mixin(modules.env.secureenv, deepcopy(secureimpls))
