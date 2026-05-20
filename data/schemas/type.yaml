@@ -27,7 +27,6 @@ type:
         schema: structure
     table: tag
     TextureAsset: tag
-    tostring: tag
     uiAddon: tag
     uiobject:
       ref:

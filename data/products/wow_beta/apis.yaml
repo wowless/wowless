@@ -32136,7 +32136,7 @@ CreateForbiddenFrame:
     type: string
   - name: name
     nilable: true
-    type: tostring
+    type: any
   - name: parent
     nilable: true
     type:
@@ -32158,7 +32158,7 @@ CreateFrame:
     type: string
   - name: name
     nilable: true
-    type: tostring
+    type: any
   - name: parent
     nilable: true
     type:

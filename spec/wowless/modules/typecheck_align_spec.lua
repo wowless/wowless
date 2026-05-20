@@ -150,7 +150,6 @@ describe('typecheck align', function()
     any = { ltype = 'any', sections = {} },
     gender = { ltype = 'gender', sections = {} },
     oneornil = { ltype = 'oneornil', sections = {} },
-    tostring = { ltype = 'tostring', sections = {} },
     structure = { ltype = { structure = 'TestStruct' }, sections = {} },
     arrayof = { ltype = { arrayof = 'number' }, sections = {} },
   }
