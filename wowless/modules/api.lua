@@ -4,6 +4,7 @@ return function(
   datalua,
   env,
   events,
+  intrinsics,
   log,
   loglevel,
   parentkey,
@@ -26,7 +27,7 @@ return function(
     end
   end)()
 
-  local GetIntrinsic = uiobjecttypes.GetIntrinsic
+  local GetIntrinsic = intrinsics.Get
   local Has = uiobjecttypes.Has
   local InheritsFrom = uiobjecttypes.InheritsFrom
   local IsVisible = visibility.IsVisible

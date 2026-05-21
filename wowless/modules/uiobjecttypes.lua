@@ -1,17 +1,8 @@
 return function()
   local uiobjectTypes = {}
-  local intrinsicTypeMap = {}
 
   local function Add(name, t)
     uiobjectTypes[name] = t
-  end
-
-  local function AddIntrinsic(name, basetype, template)
-    intrinsicTypeMap[name] = { basetype = basetype, template = template }
-  end
-
-  local function GetIntrinsic(name)
-    return intrinsicTypeMap[name]
   end
 
   local function GetObjectType(obj)
@@ -53,8 +44,6 @@ return function()
 
   return {
     Add = Add,
-    AddIntrinsic = AddIntrinsic,
-    GetIntrinsic = GetIntrinsic,
     GetObjectType = GetObjectType,
     GetOrThrow = GetOrThrow,
     GetSandboxMetatable = GetSandboxMetatable,
