@@ -37,10 +37,6 @@ return function()
     return t.isa[b]
   end
 
-  local function IsIntrinsicType(t)
-    return uiobjectTypes[string.lower(t)] ~= nil
-  end
-
   local function IsObjectType(obj, ty)
     ty = string.lower(ty)
     return uiobjectTypes[obj.type].isa[ty] or false
@@ -54,7 +50,6 @@ return function()
     Has = Has,
     HasScript = HasScript,
     InheritsFrom = InheritsFrom,
-    IsIntrinsicType = IsIntrinsicType,
     IsObjectType = IsObjectType,
   }
 end

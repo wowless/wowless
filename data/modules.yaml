@@ -6,6 +6,7 @@ api:
     datalua:
     env:
     events:
+    intrinsics:
     log:
     loglevel:
     parentkey:
@@ -85,6 +86,9 @@ gencode:
     luaobjects:
     typecheck:
     uiobjects:
+intrinsics:
+  deps:
+    log:
 loader:
   deps:
     addons:
@@ -92,6 +96,7 @@ loader:
     datalua:
     env:
     events:
+    intrinsics:
     loadercfg:
     log:
     loglevel:
