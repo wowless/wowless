@@ -5,6 +5,7 @@ return function(
   datalua,
   envmodule,
   events,
+  intrinsics,
   loadercfg,
   log,
   loglevel,
@@ -592,7 +593,7 @@ return function(
 
       function loadElement(ctx, e, parent)
         local ltype = string.lower(e.type)
-        local intrinsicEntry = uiobjecttypes.GetIntrinsic(ltype)
+        local intrinsicEntry = intrinsics.Get(ltype)
         -- uiobject types and intrinsic types share the same xml element namespace.
         if uiobjecttypes.Has(ltype) or intrinsicEntry or e.type == 'worldframe' then
           ctx = not e.attr.intrinsic and ctx or mixin({}, ctx, { intrinsic = true })
@@ -610,13 +611,9 @@ return function(
             assert(virtual ~= false, 'intrinsics cannot be explicitly non-virtual: ' .. e.type)
             assert(e.attr.name, 'cannot create anonymous intrinsic')
             local name = string.lower(e.attr.name)
-            if uiobjecttypes.GetIntrinsic(name) then
-              log(1, 'overwriting intrinsic %s', e.attr.name)
-            end
-            log(3, 'creating intrinsic %s', e.attr.name)
             local basetype = intrinsicEntry and intrinsicEntry.basetype or ltype
             uiobjecttypes.GetOrThrow(basetype) -- validate basetype exists
-            uiobjecttypes.AddIntrinsic(name, basetype, template)
+            intrinsics.Add(name, basetype, template)
           else
             if (ltype == 'font' and e.attr.name) or (virtual and not ctx.ignoreVirtual) then
               assert(e.attr.name, 'cannot create anonymous template')

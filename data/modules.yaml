@@ -7,6 +7,7 @@ api:
     datalua:
     env:
     events:
+    intrinsics:
     log:
     loglevel:
     parentkey:
@@ -81,6 +82,9 @@ funtainer:
 gencode:
   deps:
     api:
+intrinsics:
+  deps:
+    log:
 loader:
   deps:
     addons:
@@ -89,6 +93,7 @@ loader:
     datalua:
     env:
     events:
+    intrinsics:
     loadercfg:
     log:
     loglevel:
