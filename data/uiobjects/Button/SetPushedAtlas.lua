@@ -5,5 +5,5 @@ return function(self, atlas)
     t = self:CreateTexture()
     self:SetPushedTexture(t)
   end
-  uiobjects.UserData(t):SetAtlas(atlas)
+  (uiobjects.UserData(t) or t):SetAtlas(atlas)
 end

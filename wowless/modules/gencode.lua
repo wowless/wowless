@@ -18,11 +18,11 @@ return function(api, env, log, luaobjects, typecheck, uiobjects)
 
   local function ToTexture(parent, tex, obj)
     if type(tex) == 'string' or type(tex) == 'number' then
-      local t = obj or uiobjects.UserData(parent:CreateTexture())
+      local t = obj or parent:CreateTexture()
       t:SetTexture(tex)
       return t
     else
-      return tex and uiobjects.UserData(tex)
+      return tex and (uiobjects.UserData(tex) or tex)
     end
   end
 

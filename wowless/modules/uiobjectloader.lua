@@ -39,16 +39,31 @@ return function(datalua, funcheck, gencode, sqls, uiobjectsmodule, uiobjecttypes
     end
     local t = {}
     for k, v in pairs(result) do
+      local hostIndex = {}
       local sandboxIndex = {}
-      for n, f in pairs(v.metaindex) do
+      for n, m in pairs(v.metaindex) do
+        local fn, incheck, outcheck = m.fn, m.incheck, m.outcheck
+        hostIndex[n] = fn
+        local sandboxfn
+        if not incheck and not outcheck then
+          sandboxfn = fn
+        elseif not incheck then
+          sandboxfn = function(...)
+            return outcheck(fn(...))
+          end
+        else
+          sandboxfn = function(self, ...)
+            return outcheck(fn(self, incheck(...)))
+          end
+        end
         sandboxIndex[n] = bubblewrap(function(obj, ...)
-          return f(UserData(obj), ...)
+          return sandboxfn(UserData(obj), ...)
         end)
       end
       t[k] = {
         constructor = v.constructor,
         ctype = v.ctype,
-        hostMT = { __index = v.metaindex },
+        hostMT = { __index = hostIndex }, -- issue #657
         isa = v.isa,
         name = v.name,
         sandboxMT = { __index = sandboxIndex },
@@ -94,19 +109,7 @@ return function(datalua, funcheck, gencode, sqls, uiobjectsmodule, uiobjecttypes
           table.insert(args, (assert(sqls[sql], sql)))
         end
         local basefn = wrap(fname, mkfn(unpack(args)))
-        local outfn
-        if not incheck and not outcheck then
-          outfn = basefn
-        elseif not incheck then
-          outfn = function(...)
-            return outcheck(basefn(...))
-          end
-        else
-          outfn = function(self, ...)
-            return outcheck(basefn(self, incheck(...)))
-          end
-        end
-        mixin[mname] = outfn
+        mixin[mname] = { fn = basefn, incheck = incheck, outcheck = outcheck }
       end
       uiobjects[name] = {
         cfg = cfg,
