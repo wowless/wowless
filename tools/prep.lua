@@ -477,7 +477,7 @@ local uiobjectimplmakers = {
       modules = { 'gencode' },
     }
   end,
-  settexture = function(impl)
+  settexture = function(impl, mv)
     local t = { 'local gencode=...;return function(self,tex)' }
     table.insert(t, 'local t=gencode.ToTexture(self,tex,self.')
     table.insert(t, impl.field)
@@ -497,6 +497,7 @@ local uiobjectimplmakers = {
     table.insert(t, 'end')
     return {
       impl = table.concat(t),
+      inputs = mv.inputs,
       modules = { 'gencode' },
     }
   end,

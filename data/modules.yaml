@@ -84,7 +84,6 @@ gencode:
     log:
     luaobjects:
     typecheck:
-    uiobjects:
 loader:
   deps:
     addons:

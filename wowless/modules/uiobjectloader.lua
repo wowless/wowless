@@ -51,6 +51,10 @@ return function(datalua, funcheck, gencode, sqls, uiobjectsmodule, uiobjecttypes
           sandboxfn = function(...)
             return outcheck(fn(...))
           end
+        elseif not outcheck then
+          sandboxfn = function(self, ...)
+            return fn(self, incheck(...))
+          end
         else
           sandboxfn = function(self, ...)
             return outcheck(fn(self, incheck(...)))

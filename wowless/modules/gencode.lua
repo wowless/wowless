@@ -1,6 +1,6 @@
 local hlist = require('wowless.hlist')
 
-return function(api, env, log, luaobjects, typecheck, uiobjects)
+return function(api, env, log, luaobjects, typecheck)
   local function Check(spec, v, isout)
     local vv, errmsg, iswarn = typecheck(spec, v, isout)
     if errmsg then
@@ -21,10 +21,7 @@ return function(api, env, log, luaobjects, typecheck, uiobjects)
       local t = obj or parent:CreateTexture()
       t:SetTexture(tex)
       return t
-    elseif tex then
-      if tex[0] then
-        return uiobjects.UserData(tex)
-      end
+    else
       return tex
     end
   end

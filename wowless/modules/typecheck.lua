@@ -103,6 +103,20 @@ return function(addons, datalua, env, luaobjects, uiobjects, uiobjecttypes, unit
     table = function(value)
       return luatypecheck('table', value)
     end,
+    TextureAsset = function(value, isout)
+      if isout then
+        return nil, true
+      end
+      local ty = type(value)
+      if ty == 'string' or ty == 'number' then
+        return value
+      end
+      if ty == 'table' then
+        local ud = uiobjects.UserData(value)
+        return ud, not ud
+      end
+      return nil, true
+    end,
     uiAddon = function(value)
       if type(value) ~= 'string' and type(value) ~= 'number' then
         return nil, true
