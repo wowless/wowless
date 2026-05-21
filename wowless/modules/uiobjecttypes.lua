@@ -1,8 +1,17 @@
 return function()
   local uiobjectTypes = {}
+  local intrinsicTypeMap = {}
 
   local function Add(name, t)
     uiobjectTypes[name] = t
+  end
+
+  local function AddIntrinsic(name, basetype, template)
+    intrinsicTypeMap[name] = { basetype = basetype, template = template }
+  end
+
+  local function GetIntrinsic(name)
+    return intrinsicTypeMap[name]
   end
 
   local function GetObjectType(obj)
@@ -37,10 +46,6 @@ return function()
     return t.isa[b]
   end
 
-  local function IsIntrinsicType(t)
-    return uiobjectTypes[string.lower(t)] ~= nil
-  end
-
   local function IsObjectType(obj, ty)
     ty = string.lower(ty)
     return uiobjectTypes[obj.type].isa[ty] or false
@@ -48,13 +53,14 @@ return function()
 
   return {
     Add = Add,
+    AddIntrinsic = AddIntrinsic,
+    GetIntrinsic = GetIntrinsic,
     GetObjectType = GetObjectType,
     GetOrThrow = GetOrThrow,
     GetSandboxMetatable = GetSandboxMetatable,
     Has = Has,
     HasScript = HasScript,
     InheritsFrom = InheritsFrom,
-    IsIntrinsicType = IsIntrinsicType,
     IsObjectType = IsObjectType,
   }
 end
