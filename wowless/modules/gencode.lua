@@ -21,8 +21,11 @@ return function(api, env, log, luaobjects, typecheck, uiobjects)
       local t = obj or parent:CreateTexture()
       t:SetTexture(tex)
       return t
-    else
-      return tex and uiobjects.UserData(tex)
+    elseif tex then
+      if tex[0] then
+        return uiobjects.UserData(tex)
+      end
+      return tex
     end
   end
 
