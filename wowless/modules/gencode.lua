@@ -22,7 +22,7 @@ return function(api, env, log, luaobjects, typecheck, uiobjects)
       t:SetTexture(tex)
       return t
     else
-      return tex and (uiobjects.UserData(tex) or tex)
+      return tex and uiobjects.UserData(tex)
     end
   end
 

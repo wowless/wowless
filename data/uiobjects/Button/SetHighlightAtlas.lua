@@ -1,9 +1,6 @@
-local uiobjects = ...
 return function(self, atlas)
-  local t = self:GetHighlightTexture()
-  if not t then
-    t = self:CreateTexture()
-    self:SetHighlightTexture(t)
+  if not self.highlightTexture then
+    self:SetHighlightTexture(self:CreateTexture().luarep)
   end
-  (uiobjects.UserData(t) or t):SetAtlas(atlas)
+  self.highlightTexture:SetAtlas(atlas)
 end

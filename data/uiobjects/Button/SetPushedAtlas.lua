@@ -1,9 +1,6 @@
-local uiobjects = ...
 return function(self, atlas)
-  local t = self:GetPushedTexture()
-  if not t then
-    t = self:CreateTexture()
-    self:SetPushedTexture(t)
+  if not self.pushedTexture then
+    self:SetPushedTexture(self:CreateTexture().luarep)
   end
-  (uiobjects.UserData(t) or t):SetAtlas(atlas)
+  self.pushedTexture:SetAtlas(atlas)
 end
