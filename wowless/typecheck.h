@@ -9,6 +9,14 @@ extern "C" {
 #include "wowless/uiobject.h"
 }
 
+#include <string.h>
+#ifdef _MSC_VER
+#define wowless_strcasecmp _stricmp
+#else
+#include <strings.h>
+#define wowless_strcasecmp strcasecmp
+#endif
+
 #include <string_view>
 
 static inline int wowless_forbidden(lua_State *L) {
@@ -354,29 +362,42 @@ static inline void wowless_stubchecknilablenil(lua_State *L, int idx) {
   wowless_stubchecknil(L, idx);
 }
 
+static inline bool wowless_stringenum_check(const char *s,
+                                            const char *const *values, int n) {
+  int lo = 0, hi = n - 1;
+  while (lo <= hi) {
+    int mid = (lo + hi) / 2;
+    int cmp = wowless_strcasecmp(s, values[mid]);
+    if (cmp == 0) {
+      return true;
+    }
+    if (cmp < 0) {
+      hi = mid - 1;
+    } else {
+      lo = mid + 1;
+    }
+  }
+  return false;
+}
+
 static inline bool wowless_isstringenum(lua_State *L, int idx,
-                                        std::string_view enumname) {
-  idx = lua_absindex(L, idx);
+                                        const char *const *values, int n) {
   if (lua_type(L, idx) != LUA_TSTRING) {
     return false;
   }
-  lua_getfield(L, lua_upvalueindex(1), "CheckStringEnum");
-  lua_pushvalue(L, idx);
-  lua_pushlstring(L, enumname.data(), enumname.size());
-  lua_call(L, 2, 1);
-  int result = lua_toboolean(L, -1);
-  lua_pop(L, 1);
-  return result;
+  return wowless_stringenum_check(lua_tostring(L, idx), values, n);
 }
 
 static inline bool wowless_isnilablestringenum(lua_State *L, int idx,
-                                               std::string_view enumname) {
-  return lua_isnoneornil(L, idx) || wowless_isstringenum(L, idx, enumname);
+                                               const char *const *values,
+                                               int n) {
+  return lua_isnoneornil(L, idx) || wowless_isstringenum(L, idx, values, n);
 }
 
 static inline void wowless_stubcheckstringenum(lua_State *L, int idx,
-                                               std::string_view enumname) {
-  if (!wowless_isstringenum(L, idx, enumname)) {
+                                               const char *const *values,
+                                               int n) {
+  if (!wowless_isstringenum(L, idx, values, n)) {
     if (lua_type(L, idx) != LUA_TSTRING) {
       luaL_checktype(L, idx, LUA_TSTRING);
     } else {
@@ -385,14 +406,80 @@ static inline void wowless_stubcheckstringenum(lua_State *L, int idx,
   }
 }
 
-static inline void wowless_stubchecknilablestringenum(
-    lua_State *L, int idx, std::string_view enumname) {
-  if (!wowless_isnilablestringenum(L, idx, enumname)) {
+static inline void wowless_stubchecknilablestringenum(lua_State *L, int idx,
+                                                      const char *const *values,
+                                                      int n) {
+  if (!wowless_isnilablestringenum(L, idx, values, n)) {
     if (lua_type(L, idx) != LUA_TSTRING) {
       luaL_checktype(L, idx, LUA_TSTRING);
     } else {
       luaL_argerror(L, idx, "invalid string enum value");
     }
+  }
+}
+
+static inline void wowless_implcheckstringenum(lua_State *L, int idx,
+                                               const char *const *values,
+                                               int n) {
+  if (lua_type(L, idx) != LUA_TSTRING) {
+    luaL_typerror(L, idx, lua_typename(L, LUA_TSTRING));
+    return;
+  }
+  const char *s = lua_tostring(L, idx);
+  int lo = 0, hi = n - 1;
+  while (lo <= hi) {
+    int mid = (lo + hi) / 2;
+    int cmp = wowless_strcasecmp(s, values[mid]);
+    if (cmp == 0) {
+      lua_pushstring(L, values[mid]);
+      lua_replace(L, idx);
+      return;
+    }
+    if (cmp < 0) {
+      hi = mid - 1;
+    } else {
+      lo = mid + 1;
+    }
+  }
+  luaL_argerror(L, idx, "invalid string enum value");
+}
+
+static inline void wowless_implchecknilablestringenum(lua_State *L, int idx,
+                                                      const char *const *values,
+                                                      int n) {
+  if (!lua_isnoneornil(L, idx)) {
+    wowless_implcheckstringenum(L, idx, values, n);
+  }
+}
+
+static inline void wowless_imploutputstringenum(lua_State *L, int idx,
+                                                const char *const *values,
+                                                int n) {
+  if (lua_type(L, idx) != LUA_TSTRING) {
+    luaL_typerror(L, idx, lua_typename(L, LUA_TSTRING));
+    return;
+  }
+  const char *s = lua_tostring(L, idx);
+  int lo = 0, hi = n - 1;
+  while (lo <= hi) {
+    int mid = (lo + hi) / 2;
+    int cmp = strcmp(s, values[mid]);
+    if (cmp == 0) {
+      return;
+    }
+    if (cmp < 0) {
+      hi = mid - 1;
+    } else {
+      lo = mid + 1;
+    }
+  }
+  luaL_argerror(L, idx, "invalid string enum value");
+}
+
+static inline void wowless_imploutputnilablestringenum(
+    lua_State *L, int idx, const char *const *values, int n) {
+  if (!lua_isnoneornil(L, idx)) {
+    wowless_imploutputstringenum(L, idx, values, n);
   }
 }
 

@@ -1,16 +1,6 @@
 local bubblewrap = require('wowless.bubblewrap')
 
 return function(addons, api, events, log, luaobjects, uiobjects, units)
-  local stringenums = require('runtime.stringenums')
-
-  local function CheckStringEnum(value, enumname)
-    local evalues = stringenums[enumname]
-    if not evalues then
-      error('internal error: unknown string enum: ' .. enumname)
-    end
-    return evalues[value:upper()]
-  end
-
   local function CreateLuaObject(typename)
     return luaobjects.CreateProxy(typename, luaobjects.Create(typename))
   end
@@ -31,7 +21,6 @@ return function(addons, api, events, log, luaobjects, uiobjects, units)
   -- lookups (no hashing). Keep uiobjects.userdata at 1.
   return {
     uiobjects.userdata,
-    CheckStringEnum = CheckStringEnum,
     FireProtected = bubblewrap(FireProtected),
     GetUiAddon = GetUiAddon,
     GetUnit = units.GetUnit,
