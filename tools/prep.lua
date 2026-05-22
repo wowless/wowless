@@ -140,43 +140,44 @@ local function ensuresql(k)
 end
 
 local function stubby(mv, skip0)
-  local t = { 'local gencode=...;' }
   local ins = mv.inputs or {}
   local nsins = #ins - (mv.instride or 0)
+  -- sandbox impl: original code with gencode.Check input validation and specDefault outputs
+  local sb = { 'local gencode=...;' }
   for i = 1, #ins do
-    table.insert(t, 'local spec' .. i .. '=' .. prettywrite(mv.inputs[i], true) .. ';')
+    table.insert(sb, 'local spec' .. i .. '=' .. prettywrite(mv.inputs[i], true) .. ';')
   end
-  table.insert(t, 'return function(')
-  local a = {}
+  table.insert(sb, 'return function(')
+  local sba = {}
   if skip0 then
-    table.insert(a, '_')
+    table.insert(sba, '_')
   end
   for i = 1, nsins do
-    table.insert(a, 'arg' .. i)
+    table.insert(sba, 'arg' .. i)
   end
   if mv.instride then
-    table.insert(a, '...')
+    table.insert(sba, '...')
   end
-  table.insert(t, table.concat(a, ','))
-  table.insert(t, ')')
+  table.insert(sb, table.concat(sba, ','))
+  table.insert(sb, ')')
   for i = 1, nsins do
-    table.insert(t, 'gencode.Check(spec' .. i .. ',arg' .. i .. ');')
+    table.insert(sb, 'gencode.Check(spec' .. i .. ',arg' .. i .. ');')
   end
   if mv.instride then
-    table.insert(t, 'for i=1,select("#",...),' .. mv.instride .. ' do ')
-    table.insert(t, 'local arg' .. nsins + 1)
+    table.insert(sb, 'for i=1,select("#",...),' .. mv.instride .. ' do ')
+    table.insert(sb, 'local arg' .. nsins + 1)
     for i = nsins + 2, #ins do
-      table.insert(t, ',arg' .. i)
+      table.insert(sb, ',arg' .. i)
     end
-    table.insert(t, '=select(i,...);')
+    table.insert(sb, '=select(i,...);')
     for i = nsins + 1, #ins do
-      table.insert(t, 'gencode.Check(spec' .. i .. ',arg' .. i .. ');')
+      table.insert(sb, 'gencode.Check(spec' .. i .. ',arg' .. i .. ');')
     end
-    table.insert(t, 'end ')
+    table.insert(sb, 'end ')
   end
   local outs = mv.outputs or {}
   if #outs > 0 and not mv.stubnothing then
-    table.insert(t, 'return ')
+    table.insert(sb, 'return ')
     local rets = {}
     local nonstride = #outs - (mv.outstride or 0)
     for i = 1, nonstride do
@@ -187,12 +188,16 @@ local function stubby(mv, skip0)
         table.insert(rets, specDefault(outs[j]))
       end
     end
-    table.insert(t, table.concat(rets, ','))
+    table.insert(sb, table.concat(rets, ','))
   end
-  table.insert(t, ' end')
+  table.insert(sb, ' end')
+  -- host impl: simple no-op
+  local impl = 'return function(' .. (skip0 and '_' or '') .. ',...) end'
   return {
-    impl = table.concat(t),
-    modules = { 'gencode' },
+    impl = impl,
+    modules = {},
+    sandboximpl = table.concat(sb),
+    sandboxmodules = { 'gencode' },
     secureonly = mv.secureonly,
   }
 end
@@ -434,50 +439,83 @@ local uiobjectimplimplmakers = {
 }
 local uiobjectimplmakers = {
   getter = function(impl, mv)
-    local t = { 'local gencode=...;' }
+    -- sandbox impl: original code with gencode.Check converting internal uds to luarep
+    local sb = { 'local gencode=...;' }
     for i in ipairs(impl) do
-      table.insert(t, 'local spec' .. i .. '=' .. prettywrite(mv.outputs[i], true) .. ';')
+      table.insert(sb, 'local spec' .. i .. '=' .. prettywrite(mv.outputs[i], true) .. ';')
     end
-    table.insert(t, 'return function(self)return ')
+    table.insert(sb, 'return function(self)return ')
     for i, f in ipairs(impl) do
-      table.insert(t, (i == 1 and '' or ',') .. 'gencode.Check(spec' .. i .. ',self.' .. f.name .. ',true)')
+      table.insert(sb, (i == 1 and '' or ',') .. 'gencode.Check(spec' .. i .. ',self.' .. f.name .. ',true)')
     end
-    table.insert(t, 'end')
+    table.insert(sb, 'end')
+    -- host impl: simple direct field access
+    local t = { 'return function(self)return ' }
+    for i, f in ipairs(impl) do
+      table.insert(t, (i == 1 and '' or ',') .. 'self.' .. f.name)
+    end
+    table.insert(t, ' end')
     return {
       impl = table.concat(t),
-      modules = { 'gencode' },
+      modules = {},
+      sandboximpl = table.concat(sb),
+      sandboxmodules = { 'gencode' },
     }
   end,
   none = function(mv)
     return stubby(mv, true)
   end,
   setter = function(impl, mv)
-    local t = { 'local gencode=...;' }
+    -- sandbox impl: original code with gencode.Check converting sandbox reps to internal uds
+    local sb = { 'local gencode=...;' }
     for i in ipairs(impl) do
-      table.insert(t, 'local spec' .. i .. '=' .. prettywrite(mv.inputs[i], true) .. ';')
+      table.insert(sb, 'local spec' .. i .. '=' .. prettywrite(mv.inputs[i], true) .. ';')
     end
-    table.insert(t, 'return function(self')
+    table.insert(sb, 'return function(self')
+    for _, f in ipairs(impl) do
+      table.insert(sb, ',')
+      table.insert(sb, f.name)
+    end
+    table.insert(sb, ')')
+    for i, f in ipairs(impl) do
+      table.insert(sb, 'self.')
+      table.insert(sb, f.name)
+      table.insert(sb, '=gencode.Check(spec')
+      table.insert(sb, tostring(i))
+      table.insert(sb, ',')
+      table.insert(sb, f.name)
+      table.insert(sb, ');')
+    end
+    table.insert(sb, 'end')
+    -- host impl: direct field assignment, applying defaults for optional args
+    local t = { 'return function(self' }
     for _, f in ipairs(impl) do
       table.insert(t, ',')
       table.insert(t, f.name)
     end
     table.insert(t, ')')
     for i, f in ipairs(impl) do
+      local spec = mv.inputs[i]
       table.insert(t, 'self.')
       table.insert(t, f.name)
-      table.insert(t, '=gencode.Check(spec')
-      table.insert(t, tostring(i))
-      table.insert(t, ',')
-      table.insert(t, f.name)
-      table.insert(t, ');')
+      table.insert(t, '=')
+      if spec and spec.default ~= nil then
+        table.insert(t, f.name .. '~=nil and ' .. f.name .. ' or ' .. valstr(spec.default))
+      else
+        table.insert(t, f.name)
+      end
+      table.insert(t, ';')
     end
     table.insert(t, 'end')
     return {
       impl = table.concat(t),
-      modules = { 'gencode' },
+      modules = {},
+      sandboximpl = table.concat(sb),
+      sandboxmodules = { 'gencode' },
     }
   end,
-  settexture = function(impl, mv)
+  settexture = function(impl)
+    -- host impl: uses gencode.ToTexture which handles internal uds directly
     local t = { 'local gencode=...;return function(self,tex)' }
     table.insert(t, 'local t=gencode.ToTexture(self,tex,self.')
     table.insert(t, impl.field)
@@ -495,10 +533,32 @@ local uiobjectimplmakers = {
       table.insert(t, 'return true;')
     end
     table.insert(t, 'end')
+    -- sandbox impl: handles sandbox texture reps via uiobjects.UserData
+    local sb = { 'local gencode,uiobjects=...;return function(self,tex)local t;' }
+    table.insert(sb, 'if type(tex)=="string" or type(tex)=="number" then ')
+    table.insert(sb, 't=self.')
+    table.insert(sb, impl.field)
+    table.insert(sb, ' or self:CreateTexture();t:SetTexture(tex);')
+    table.insert(sb, 'elseif tex~=nil then t=uiobjects.UserData(tex);end ')
+    table.insert(sb, 'if t then gencode.SetParent(t,self);if t:GetNumPoints()==0 then t:SetAllPoints()end t:SetShown(')
+    table.insert(sb, impl.shown or 'true')
+    table.insert(sb, ');')
+    if impl.extra then
+      table.insert(sb, impl.extra)
+      table.insert(sb, ';')
+    end
+    table.insert(sb, 'end self.')
+    table.insert(sb, impl.field)
+    table.insert(sb, '=t;')
+    if impl['return'] then
+      table.insert(sb, 'return true;')
+    end
+    table.insert(sb, 'end')
     return {
       impl = table.concat(t),
-      inputs = mv.inputs,
       modules = { 'gencode' },
+      sandboximpl = table.concat(sb),
+      sandboxmodules = { 'gencode', 'uiobjects' },
     }
   end,
   uiobjectimpl = function(impl, mv)
