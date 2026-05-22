@@ -202,10 +202,10 @@ return function(
     local orig = obj
     for p in key:gmatch('([^.]+)') do
       if p:match(parentMatch) then
-        local ud = uiobjects.UserData(obj)
-        obj = ud.parent and ud.parent.luarep
+        obj = obj.parent
       else
-        obj = obj[p]
+        local v = obj.luarep[p]
+        obj = v and uiobjects.UserData(v)
       end
       if not obj or obj == orig then
         log(1, 'invalid relativeKey %q', key)
@@ -229,8 +229,7 @@ return function(
         if not anchor.attr.relativekey:match(parentMatch) then
           return
         end
-        relativeTo = navigate(parent and parent.luarep, anchor.attr.relativekey)
-        relativeTo = relativeTo and uiobjects.UserData(relativeTo)
+        relativeTo = navigate(parent, anchor.attr.relativekey)
         if not relativeTo or relativeTo == parent then
           relativeTo = parent.parent
         end
@@ -305,9 +304,9 @@ return function(
       parent.luarep[a.key] = parseTypedValue(a.type, a.value)
     end,
     maskedtexture = function(_, e, parent)
-      local t = navigate(parent.parent and parent.parent.luarep, e.attr.childkey)
+      local t = navigate(parent.parent, e.attr.childkey)
       if t then
-        uiobjects.UserData(t):AddMaskTexture(parent)
+        t:AddMaskTexture(parent)
       else
         log(1, 'cannot find maskedtexture childkey %s', e.attr.childkey)
       end
