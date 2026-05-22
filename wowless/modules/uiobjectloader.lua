@@ -14,22 +14,27 @@ return function(datalua, funcheck, gencode, sqls, uiobjectsmodule, uiobjecttypes
         local ty = types[k]
         local isa = { [lk] = true }
         local scripts = Mixin({}, ty.scripts or {})
-        local metaindex = {}
+        local hostindex = {}
+        local sandboxindex = {}
         for inh in pairs(ty.inherits) do
           flattenOne(inh)
-          Mixin(isa, result[string.lower(inh)].isa)
-          Mixin(scripts, result[string.lower(inh)].scripts)
-          for mk, mv in pairs(result[string.lower(inh)].metaindex) do
-            metaindex[mk] = mv
-          end
+          local r = result[string.lower(inh)]
+          Mixin(isa, r.isa)
+          Mixin(scripts, r.scripts)
+          Mixin(hostindex, r.hostindex)
+          Mixin(sandboxindex, r.sandboxindex)
         end
-        Mixin(metaindex, ty.mixin) -- do this last in case of overrides
+        for n, m in pairs(ty.mixin) do -- do this last in case of overrides
+          hostindex[n] = m.hostfn
+          sandboxindex[n] = m.sandboxDispatch
+        end
         result[lk] = {
           constructor = ty.constructor,
           ctype = ty.cfg.uitype_bit,
+          hostindex = hostindex,
           isa = isa,
-          metaindex = metaindex,
           name = ty.cfg.objectType or k,
+          sandboxindex = sandboxindex,
           scripts = scripts,
         }
       end
@@ -39,45 +44,17 @@ return function(datalua, funcheck, gencode, sqls, uiobjectsmodule, uiobjecttypes
     end
     local t = {}
     for k, v in pairs(result) do
-      local hostIndex = {}
-      local sandboxIndex = {}
-      for n, m in pairs(v.metaindex) do
-        local fn, incheck, outcheck = m.fn, m.incheck, m.outcheck
-        hostIndex[n] = fn
-        if m.sandboxfn then
-          local sf = m.sandboxfn
-          sandboxIndex[n] = bubblewrap(function(obj, ...)
-            return sf(UserData(obj), ...)
-          end)
-        else
-          local sandboxfn
-          if not incheck and not outcheck then
-            sandboxfn = fn
-          elseif not incheck then
-            sandboxfn = function(...)
-              return outcheck(fn(...))
-            end
-          elseif not outcheck then
-            sandboxfn = function(self, ...)
-              return fn(self, incheck(...))
-            end
-          else
-            sandboxfn = function(self, ...)
-              return outcheck(fn(self, incheck(...)))
-            end
-          end
-          sandboxIndex[n] = bubblewrap(function(obj, ...)
-            return sandboxfn(UserData(obj), ...)
-          end)
-        end
+      local sandboxMTindex = {}
+      for n, fn in pairs(v.sandboxindex) do
+        sandboxMTindex[n] = bubblewrap(fn)
       end
       t[k] = {
         constructor = v.constructor,
         ctype = v.ctype,
-        hostMT = { __index = hostIndex }, -- issue #657
+        hostMT = { __index = v.hostindex }, -- issue #657
         isa = v.isa,
         name = v.name,
-        sandboxMT = { __index = sandboxIndex },
+        sandboxMT = { __index = sandboxMTindex },
         scripts = v.scripts,
       }
     end
@@ -119,17 +96,40 @@ return function(datalua, funcheck, gencode, sqls, uiobjectsmodule, uiobjecttypes
         for _, sql in ipairs(method.sqls or {}) do
           table.insert(args, (assert(sqls[sql], sql)))
         end
-        local basefn = wrap(fname, mkfn(unpack(args)))
-        local sandboxbasefn = nil
+        local hostfn = wrap(fname, mkfn(unpack(args)))
+        local sandboxDispatch
         if method.sandboximpl then
           local sbmkfn = assert(loadstring_untainted(method.sandboximpl, src), fname)
           local sbargs = {}
           for _, sm in ipairs(method.sandboxmodules or {}) do
             table.insert(sbargs, (assert(modules[sm], sm)))
           end
-          sandboxbasefn = wrap(fname, sbmkfn(unpack(sbargs)))
+          local sbfn = wrap(fname, sbmkfn(unpack(sbargs)))
+          sandboxDispatch = function(obj, ...)
+            return sbfn(UserData(obj), ...)
+          end
+        else
+          local sandboxfn
+          if not incheck and not outcheck then
+            sandboxfn = hostfn
+          elseif not incheck then
+            sandboxfn = function(...)
+              return outcheck(hostfn(...))
+            end
+          elseif not outcheck then
+            sandboxfn = function(self, ...)
+              return hostfn(self, incheck(...))
+            end
+          else
+            sandboxfn = function(self, ...)
+              return outcheck(hostfn(self, incheck(...)))
+            end
+          end
+          sandboxDispatch = function(obj, ...)
+            return sandboxfn(UserData(obj), ...)
+          end
         end
-        mixin[mname] = { fn = basefn, incheck = incheck, outcheck = outcheck, sandboxfn = sandboxbasefn }
+        mixin[mname] = { hostfn = hostfn, sandboxDispatch = sandboxDispatch }
       end
       uiobjects[name] = {
         cfg = cfg,
