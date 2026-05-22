@@ -42,15 +42,14 @@ return function(datalua, funcheck, gencode, sqls, uiobjectsmodule, uiobjecttypes
       local hostIndex = {}
       local sandboxIndex = {}
       for n, m in pairs(v.metaindex) do
-        hostIndex[n] = m.fn
-        local sandboxDispatchFn
-        if m.fn ~= m.sandboxfn then
+        local fn, incheck, outcheck = m.fn, m.incheck, m.outcheck
+        hostIndex[n] = fn
+        if m.sandboxfn then
           local sf = m.sandboxfn
-          sandboxDispatchFn = function(obj, ...)
+          sandboxIndex[n] = bubblewrap(function(obj, ...)
             return sf(UserData(obj), ...)
-          end
+          end)
         else
-          local fn, incheck, outcheck = m.fn, m.incheck, m.outcheck
           local sandboxfn
           if not incheck and not outcheck then
             sandboxfn = fn
@@ -67,11 +66,10 @@ return function(datalua, funcheck, gencode, sqls, uiobjectsmodule, uiobjecttypes
               return outcheck(fn(self, incheck(...)))
             end
           end
-          sandboxDispatchFn = function(obj, ...)
+          sandboxIndex[n] = bubblewrap(function(obj, ...)
             return sandboxfn(UserData(obj), ...)
-          end
+          end)
         end
-        sandboxIndex[n] = bubblewrap(sandboxDispatchFn)
       end
       t[k] = {
         constructor = v.constructor,
@@ -121,17 +119,17 @@ return function(datalua, funcheck, gencode, sqls, uiobjectsmodule, uiobjecttypes
         for _, sql in ipairs(method.sqls or {}) do
           table.insert(args, (assert(sqls[sql], sql)))
         end
-        local sandboxbasefn = wrap(fname, mkfn(unpack(args)))
-        local basefn = sandboxbasefn
-        if method.hostimpl then
-          local hmkfn = assert(loadstring_untainted(method.hostimpl, src), fname)
-          local hargs = {}
-          for _, hm in ipairs(method.hostmodules or {}) do
-            table.insert(hargs, (assert(modules[hm], hm)))
+        local basefn = wrap(fname, mkfn(unpack(args)))
+        local sandboxbasefn = nil
+        if method.sandboximpl then
+          local sbmkfn = assert(loadstring_untainted(method.sandboximpl, src), fname)
+          local sbargs = {}
+          for _, sm in ipairs(method.sandboxmodules or {}) do
+            table.insert(sbargs, (assert(modules[sm], sm)))
           end
-          basefn = wrap(fname, hmkfn(unpack(hargs)))
+          sandboxbasefn = wrap(fname, sbmkfn(unpack(sbargs)))
         end
-        mixin[mname] = { fn = basefn, sandboxfn = sandboxbasefn, incheck = incheck, outcheck = outcheck }
+        mixin[mname] = { fn = basefn, incheck = incheck, outcheck = outcheck, sandboxfn = sandboxbasefn }
       end
       uiobjects[name] = {
         cfg = cfg,
