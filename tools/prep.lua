@@ -191,13 +191,10 @@ local function stubby(mv, skip0)
     table.insert(sb, table.concat(rets, ','))
   end
   table.insert(sb, ' end')
-  -- host impl: simple no-op
-  local impl = 'return function(' .. (skip0 and '_' or '') .. ',...) end'
   return {
-    impl = impl,
-    modules = {},
-    sandboximpl = table.concat(sb),
-    sandboxmodules = { 'gencode' },
+    hostimpl = 'return function(...) end',
+    impl = table.concat(sb),
+    modules = { 'gencode' },
     secureonly = mv.secureonly,
   }
 end
@@ -456,10 +453,9 @@ local uiobjectimplmakers = {
     end
     table.insert(t, ' end')
     return {
-      impl = table.concat(t),
-      modules = {},
-      sandboximpl = table.concat(sb),
-      sandboxmodules = { 'gencode' },
+      hostimpl = table.concat(t),
+      impl = table.concat(sb),
+      modules = { 'gencode' },
     }
   end,
   none = function(mv)
@@ -508,10 +504,9 @@ local uiobjectimplmakers = {
     end
     table.insert(t, 'end')
     return {
-      impl = table.concat(t),
-      modules = {},
-      sandboximpl = table.concat(sb),
-      sandboxmodules = { 'gencode' },
+      hostimpl = table.concat(t),
+      impl = table.concat(sb),
+      modules = { 'gencode' },
     }
   end,
   settexture = function(impl)
@@ -555,10 +550,10 @@ local uiobjectimplmakers = {
     end
     table.insert(sb, 'end')
     return {
-      impl = table.concat(t),
-      modules = { 'gencode' },
-      sandboximpl = table.concat(sb),
-      sandboxmodules = { 'gencode', 'uiobjects' },
+      hostimpl = table.concat(t),
+      hostmodules = { 'gencode' },
+      impl = table.concat(sb),
+      modules = { 'gencode', 'uiobjects' },
     }
   end,
   uiobjectimpl = function(impl, mv)
