@@ -438,13 +438,14 @@ local uiobjectimplimplmakers = {
   end,
 }
 local uiobjectimplmakers = {
-  getter = function(impl, mv)
+  getter = function(impl, mv, k)
     -- sandbox impl: original code with gencode.Check converting internal uds to luarep
     local sb = { 'local gencode=...;' }
+    table.insert(sb, string.format('local selfspec={name="self",type={uiobject=%q}};', k))
     for i in ipairs(impl) do
       table.insert(sb, 'local spec' .. i .. '=' .. prettywrite(mv.outputs[i], true) .. ';')
     end
-    table.insert(sb, 'return function(obj)local self=gencode.UserData(obj);return ')
+    table.insert(sb, 'return function(obj)local self=gencode.Check(selfspec,obj);return ')
     for i, f in ipairs(impl) do
       table.insert(sb, (i == 1 and '' or ',') .. 'gencode.Check(spec' .. i .. ',self.' .. f.name .. ',true)')
     end
@@ -465,9 +466,10 @@ local uiobjectimplmakers = {
   none = function(mv)
     return stubby(mv, true)
   end,
-  setter = function(impl, mv)
+  setter = function(impl, mv, k)
     -- sandbox impl: original code with gencode.Check converting sandbox reps to internal uds
     local sb = { 'local gencode=...;' }
+    table.insert(sb, string.format('local selfspec={name="self",type={uiobject=%q}};', k))
     for i in ipairs(impl) do
       table.insert(sb, 'local spec' .. i .. '=' .. prettywrite(mv.inputs[i], true) .. ';')
     end
@@ -476,7 +478,7 @@ local uiobjectimplmakers = {
       table.insert(sb, ',')
       table.insert(sb, f.name)
     end
-    table.insert(sb, ')local self=gencode.UserData(obj);')
+    table.insert(sb, ')local self=gencode.Check(selfspec,obj);')
     for i, f in ipairs(impl) do
       table.insert(sb, 'self.')
       table.insert(sb, f.name)
@@ -514,7 +516,7 @@ local uiobjectimplmakers = {
       sandboxmodules = { 'gencode' },
     }
   end,
-  settexture = function(impl)
+  settexture = function(impl, _, k)
     -- host impl: uses gencode.ToTexture which handles internal uds directly
     local t = { 'local gencode=...;return function(self,tex)' }
     table.insert(t, 'local t=gencode.ToTexture(self,tex,self.')
@@ -533,13 +535,15 @@ local uiobjectimplmakers = {
       table.insert(t, 'return true;')
     end
     table.insert(t, 'end')
-    -- sandbox impl: handles sandbox texture reps via uiobjects.UserData
-    local sb = { 'local gencode=...;return function(obj,tex)local self=gencode.UserData(obj);local t;' }
+    -- sandbox impl: coerces and checks self via gencode.Check, tex via uiobjects.UserData
+    local sb = { 'local gencode,uiobjects=...;' }
+    table.insert(sb, string.format('local selfspec={name="self",type={uiobject=%q}};', k))
+    table.insert(sb, 'return function(obj,tex)local self=gencode.Check(selfspec,obj);local t;')
     table.insert(sb, 'if type(tex)=="string" or type(tex)=="number" then ')
     table.insert(sb, 't=self.')
     table.insert(sb, impl.field)
     table.insert(sb, ' or self:CreateTexture();t:SetTexture(tex);')
-    table.insert(sb, 'elseif tex~=nil then t=gencode.UserData(tex);end ')
+    table.insert(sb, 'elseif tex~=nil then t=uiobjects.UserData(tex);end ')
     table.insert(sb, 'if t then gencode.SetParent(t,self);if t:GetNumPoints()==0 then t:SetAllPoints()end t:SetShown(')
     table.insert(sb, impl.shown or 'true')
     table.insert(sb, ');')
@@ -558,7 +562,7 @@ local uiobjectimplmakers = {
       impl = table.concat(t),
       modules = { 'gencode' },
       sandboximpl = table.concat(sb),
-      sandboxmodules = { 'gencode' },
+      sandboxmodules = { 'gencode', 'uiobjects' },
     }
   end,
   uiobjectimpl = function(impl, mv)
@@ -585,7 +589,7 @@ for k, v in pairs(uiobjectdata) do
   table.insert(constructor, '}end')
   local methods = {}
   for mk, mv in pairs(v.methods) do
-    methods[mk] = dispatch(uiobjectimplmakers, mv.impl or 'none', mv)
+    methods[mk] = dispatch(uiobjectimplmakers, mv.impl or 'none', mv, k)
   end
   local scripts = {}
   for sk in pairs(v.scripts or {}) do
