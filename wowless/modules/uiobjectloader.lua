@@ -24,10 +24,8 @@ return function(datalua, funcheck, gencode, sqls, uiobjectsmodule, uiobjecttypes
           Mixin(hostindex, r.hostindex)
           Mixin(sandboxindex, r.sandboxindex)
         end
-        for n, m in pairs(ty.mixin) do -- do this last in case of overrides
-          hostindex[n] = m.hostfn
-          sandboxindex[n] = m.sandboxDispatch
-        end
+        Mixin(hostindex, ty.hostindex) -- do this last in case of overrides
+        Mixin(sandboxindex, ty.sandboxindex)
         result[lk] = {
           constructor = ty.constructor,
           ctype = ty.cfg.uitype_bit,
@@ -82,7 +80,8 @@ return function(datalua, funcheck, gencode, sqls, uiobjectsmodule, uiobjecttypes
           return orig()
         end
       end
-      local mixin = {}
+      local hostindex = {}
+      local sandboxindex = {}
       for mname, method in pairs(cfg.methods) do
         local fname = name .. ':' .. mname
         local incheck = method.inputs and funcheck.makeCheckInputs(fname, method)
@@ -129,13 +128,15 @@ return function(datalua, funcheck, gencode, sqls, uiobjectsmodule, uiobjecttypes
             return sandboxfn(UserData(obj), ...)
           end
         end
-        mixin[mname] = { hostfn = hostfn, sandboxDispatch = sandboxDispatch }
+        hostindex[mname] = hostfn
+        sandboxindex[mname] = sandboxDispatch
       end
       uiobjects[name] = {
         cfg = cfg,
         constructor = constructor,
+        hostindex = hostindex,
         inherits = cfg.inherits,
-        mixin = mixin,
+        sandboxindex = sandboxindex,
         scripts = cfg.scripts,
       }
     end
