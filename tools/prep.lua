@@ -444,7 +444,7 @@ local uiobjectimplmakers = {
     for i in ipairs(impl) do
       table.insert(sb, 'local spec' .. i .. '=' .. prettywrite(mv.outputs[i], true) .. ';')
     end
-    table.insert(sb, 'return function(self)return ')
+    table.insert(sb, 'return function(obj)local self=gencode.UserData(obj);return ')
     for i, f in ipairs(impl) do
       table.insert(sb, (i == 1 and '' or ',') .. 'gencode.Check(spec' .. i .. ',self.' .. f.name .. ',true)')
     end
@@ -471,12 +471,12 @@ local uiobjectimplmakers = {
     for i in ipairs(impl) do
       table.insert(sb, 'local spec' .. i .. '=' .. prettywrite(mv.inputs[i], true) .. ';')
     end
-    table.insert(sb, 'return function(self')
+    table.insert(sb, 'return function(obj')
     for _, f in ipairs(impl) do
       table.insert(sb, ',')
       table.insert(sb, f.name)
     end
-    table.insert(sb, ')')
+    table.insert(sb, ')local self=gencode.UserData(obj);')
     for i, f in ipairs(impl) do
       table.insert(sb, 'self.')
       table.insert(sb, f.name)
@@ -534,12 +534,12 @@ local uiobjectimplmakers = {
     end
     table.insert(t, 'end')
     -- sandbox impl: handles sandbox texture reps via uiobjects.UserData
-    local sb = { 'local gencode,uiobjects=...;return function(self,tex)local t;' }
+    local sb = { 'local gencode=...;return function(obj,tex)local self=gencode.UserData(obj);local t;' }
     table.insert(sb, 'if type(tex)=="string" or type(tex)=="number" then ')
     table.insert(sb, 't=self.')
     table.insert(sb, impl.field)
     table.insert(sb, ' or self:CreateTexture();t:SetTexture(tex);')
-    table.insert(sb, 'elseif tex~=nil then t=uiobjects.UserData(tex);end ')
+    table.insert(sb, 'elseif tex~=nil then t=gencode.UserData(tex);end ')
     table.insert(sb, 'if t then gencode.SetParent(t,self);if t:GetNumPoints()==0 then t:SetAllPoints()end t:SetShown(')
     table.insert(sb, impl.shown or 'true')
     table.insert(sb, ');')
@@ -558,7 +558,7 @@ local uiobjectimplmakers = {
       impl = table.concat(t),
       modules = { 'gencode' },
       sandboximpl = table.concat(sb),
-      sandboxmodules = { 'gencode', 'uiobjects' },
+      sandboxmodules = { 'gencode' },
     }
   end,
   uiobjectimpl = function(impl, mv)

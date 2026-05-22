@@ -103,10 +103,7 @@ return function(datalua, funcheck, gencode, sqls, uiobjectsmodule, uiobjecttypes
           for _, sm in ipairs(method.sandboxmodules or {}) do
             table.insert(sbargs, (assert(modules[sm], sm)))
           end
-          local sbfn = wrap(fname, sbmkfn(unpack(sbargs)))
-          sandboxDispatch = function(obj, ...)
-            return sbfn(UserData(obj), ...)
-          end
+          sandboxDispatch = sbmkfn(unpack(sbargs))
         else
           local sandboxfn
           if not incheck and not outcheck then
