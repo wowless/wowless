@@ -1,9 +1,6 @@
-local uiobjects = ...
 return function(self, atlas)
-  local t = self:GetDisabledTexture()
-  if not t then
-    t = self:CreateTexture()
-    self:SetDisabledTexture(t)
+  if not self.disabledTexture then
+    self:SetDisabledTexture(self:CreateTexture())
   end
-  uiobjects.UserData(t):SetAtlas(atlas)
+  self.disabledTexture:SetAtlas(atlas)
 end

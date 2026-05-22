@@ -1,9 +1,6 @@
-local uiobjects = ...
 return function(self, atlas)
-  local t = self:GetNormalTexture()
-  if not t then
-    t = self:CreateTexture()
-    self:SetNormalTexture(t)
+  if not self.normalTexture then
+    self:SetNormalTexture(self:CreateTexture())
   end
-  uiobjects.UserData(t):SetAtlas(atlas)
+  self.normalTexture:SetAtlas(atlas)
 end

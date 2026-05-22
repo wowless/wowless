@@ -307,7 +307,7 @@ return function(
     maskedtexture = function(_, e, parent)
       local t = navigate(parent.parent and parent.parent.luarep, e.attr.childkey)
       if t then
-        uiobjects.UserData(t):AddMaskTexture(parent.luarep)
+        uiobjects.UserData(t):AddMaskTexture(parent)
       else
         log(1, 'cannot find maskedtexture childkey %s', e.attr.childkey)
       end
@@ -594,7 +594,7 @@ return function(
             local obj = loadElement(ctx, elt, parent)
             -- TODO find if this if needs to be broader to everything here including kids
             if parent:IsObjectType(impl.call.parenttype) then
-              parent[impl.call.parentmethod](parent, obj.luarep)
+              parent[impl.call.parentmethod](parent, obj)
             end
           elseif impl == 'transparent' or impl == 'loadstring' then
             local ctxmix = mixin({}, ctx)
