@@ -8,6 +8,7 @@ return function(datalua)
   local impltypes = {}
 
   local function LoadTypes(modules)
+    local funcheck = modules.funcheck
     local allmethods = {}
 
     local function createMethods(k)
@@ -15,25 +16,51 @@ return function(datalua)
         return allmethods[k]
       end
       local v = datalua.luaobjects[k]
-      local methods = {}
+      local sandboxindex = {}
       if v.inherits then
-        local parentmethods = createMethods(v.inherits)
-        for mk, mfn in pairs(parentmethods) do
-          methods[mk] = mfn
-        end
+        mixin(sandboxindex, createMethods(v.inherits))
       end
       for mk, mv in pairs(v.methods) do
+        local fname = k .. ':' .. mk
         local args = {}
         for _, m in ipairs(mv.modules or {}) do
           table.insert(args, (assert(modules[m], m)))
         end
         local mfn = assert(loadstring_untainted(mv.impl))(unpack(args))
-        methods[mk] = bubblewrap(function(u, ...)
-          return mfn(objs[u], ...)
-        end)
+        local sandboxDispatch
+        if mv.sandboximpl then
+          local sbargs = {}
+          for _, sm in ipairs(mv.sandboxmodules or {}) do
+            table.insert(sbargs, (assert(modules[sm], sm)))
+          end
+          sandboxDispatch = assert(loadstring_untainted(mv.sandboximpl, fname))(unpack(sbargs))
+        else
+          local incheck = mv.inputs and funcheck.makeCheckInputs(fname, mv)
+          local outcheck = mv.outputs and funcheck.makeCheckOutputs(fname, mv)
+          local sandboxfn
+          if not incheck and not outcheck then
+            sandboxfn = mfn
+          elseif not incheck then
+            sandboxfn = function(...)
+              return outcheck(mfn(...))
+            end
+          elseif not outcheck then
+            sandboxfn = function(self, ...)
+              return mfn(self, incheck(...))
+            end
+          else
+            sandboxfn = function(self, ...)
+              return outcheck(mfn(self, incheck(...)))
+            end
+          end
+          sandboxDispatch = function(obj, ...)
+            return sandboxfn(objs[obj], ...)
+          end
+        end
+        sandboxindex[mk] = bubblewrap(sandboxDispatch)
       end
-      allmethods[k] = methods
-      return methods
+      allmethods[k] = sandboxindex
+      return sandboxindex
     end
 
     for k in pairs(datalua.luaobjects) do
@@ -42,19 +69,19 @@ return function(datalua)
 
     for k, v in pairs(datalua.luaobjects) do
       if not v.virtual then
-        local methods = allmethods[k]
+        local sandboxmethods = allmethods[k]
 
-        local mt
-        mt = {
+        local sandboxmt
+        sandboxmt = {
           __eq = function(u1, u2)
             return objs[u1].table == objs[u2].table
           end,
           __index = function(u, key)
-            return methods[key] or objs[u].table[key]
+            return sandboxmethods[key] or objs[u].table[key]
           end,
           __metatable = false,
           __newindex = function(u, key, value)
-            if methods[key] or mt[key] ~= nil then
+            if sandboxmethods[key] or sandboxmt[key] ~= nil then
               error('Attempted to assign to read-only key ' .. key)
             end
             objs[u].table[key] = value
@@ -65,7 +92,7 @@ return function(datalua)
         }
 
         local mtp = newproxy(true)
-        mixin(getmetatable(mtp), mt)
+        mixin(getmetatable(mtp), sandboxmt)
         mtps[k] = mtp
         impltypes[k] = v.impl and modules[v.impl]
       end
