@@ -15,12 +15,9 @@ return function(datalua)
         return allmethods[k]
       end
       local v = datalua.luaobjects[k]
-      local hostindex = {}
       local sandboxindex = {}
       if v.inherits then
-        local parent = createMethods(v.inherits)
-        mixin(hostindex, parent.hostindex)
-        mixin(sandboxindex, parent.sandboxindex)
+        mixin(sandboxindex, createMethods(v.inherits))
       end
       for mk, mv in pairs(v.methods) do
         local args = {}
@@ -28,13 +25,12 @@ return function(datalua)
           table.insert(args, (assert(modules[m], m)))
         end
         local mfn = assert(loadstring_untainted(mv.impl))(unpack(args))
-        hostindex[mk] = mfn
         sandboxindex[mk] = bubblewrap(function(u, ...)
           return mfn(objs[u], ...)
         end)
       end
-      allmethods[k] = { hostindex = hostindex, sandboxindex = sandboxindex }
-      return allmethods[k]
+      allmethods[k] = sandboxindex
+      return sandboxindex
     end
 
     for k in pairs(datalua.luaobjects) do
@@ -43,8 +39,7 @@ return function(datalua)
 
     for k, v in pairs(datalua.luaobjects) do
       if not v.virtual then
-        local m = allmethods[k]
-        local sandboxmethods = m.sandboxindex
+        local sandboxmethods = allmethods[k]
 
         local sandboxmt
         sandboxmt = {
