@@ -4,7 +4,6 @@ local mixin = require('wowless.util').mixin
 return function(datalua)
   local config = datalua.config.modules and datalua.config.modules.luaobjects or {}
   local mtps = {}
-  local hostmts = {}
   local objs = setmetatable({}, { __mode = 'k' })
   local impltypes = {}
 
@@ -70,11 +69,6 @@ return function(datalua)
         local mtp = newproxy(true)
         mixin(getmetatable(mtp), sandboxmt)
         mtps[k] = mtp
-        hostmts[k] = {
-          __index = function(t, key)
-            return m.hostindex[key] or t.table[key]
-          end,
-        }
         impltypes[k] = v.impl and modules[v.impl]
       end
     end
@@ -82,7 +76,7 @@ return function(datalua)
 
   local function make(k)
     local p = newproxy(assert(mtps[k], k))
-    local obj = setmetatable({ type = k, table = {}, luarep = p }, assert(hostmts[k], k))
+    local obj = { type = k, table = {}, luarep = p }
     objs[p] = obj
     return obj
   end
