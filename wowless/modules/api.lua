@@ -1,6 +1,7 @@
 local hlist = require('wowless.hlist')
 
 return function(
+  cstubs,
   datalua,
   env,
   events,
@@ -13,7 +14,7 @@ return function(
   uiobjecttypes,
   visibility
 )
-  local new = require('build.products.' .. datalua.product .. '.stubs').new
+  local new = cstubs.new
   local frames = hlist()
   local genv = env.genv
   local secureenv = env.secureenv

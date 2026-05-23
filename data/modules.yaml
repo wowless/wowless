@@ -3,6 +3,7 @@ addons:
     datalua:
 api:
   deps:
+    cstubs:
     datalua:
     env:
     events:
@@ -32,6 +33,9 @@ clog:
   deps:
     datalua:
     log:
+cstubs:
+  deps:
+    datalua:
 ctypecheck:
   deps:
     cgencode:

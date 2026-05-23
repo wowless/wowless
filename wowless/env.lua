@@ -20,8 +20,7 @@ end
 
 local function init(modules, lite)
   modules.log(1, 'loading functions')
-  local stubs = require('build.products.' .. modules.datalua.product .. '.stubs')
-  local impls, secureimpls = stubs.load(modules)
+  local impls, secureimpls = modules.cstubs.load(modules)
   modules.log(1, 'functions loaded')
   Mixin(modules.env.genv, deepcopy(impls))
   Mixin(modules.env.genv, deepcopy(modules.datalua.globals))
