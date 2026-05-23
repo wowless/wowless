@@ -8,6 +8,7 @@ return function(datalua)
   local impltypes = {}
 
   local function LoadTypes(modules)
+    local funcheck = modules.funcheck
     local allmethods = {}
 
     local function createMethods(k)
@@ -20,14 +21,43 @@ return function(datalua)
         mixin(sandboxindex, createMethods(v.inherits))
       end
       for mk, mv in pairs(v.methods) do
+        local fname = k .. ':' .. mk
         local args = {}
         for _, m in ipairs(mv.modules or {}) do
           table.insert(args, (assert(modules[m], m)))
         end
         local mfn = assert(loadstring_untainted(mv.impl))(unpack(args))
-        sandboxindex[mk] = bubblewrap(function(u, ...)
-          return mfn(objs[u], ...)
-        end)
+        local sandboxDispatch
+        if mv.sandboximpl then
+          local sbargs = {}
+          for _, sm in ipairs(mv.sandboxmodules or {}) do
+            table.insert(sbargs, (assert(modules[sm], sm)))
+          end
+          sandboxDispatch = assert(loadstring_untainted(mv.sandboximpl, fname))(unpack(sbargs))
+        else
+          local incheck = mv.inputs and funcheck.makeCheckInputs(fname, mv)
+          local outcheck = mv.outputs and funcheck.makeCheckOutputs(fname, mv)
+          local sandboxfn
+          if not incheck and not outcheck then
+            sandboxfn = mfn
+          elseif not incheck then
+            sandboxfn = function(...)
+              return outcheck(mfn(...))
+            end
+          elseif not outcheck then
+            sandboxfn = function(self, ...)
+              return mfn(self, incheck(...))
+            end
+          else
+            sandboxfn = function(self, ...)
+              return outcheck(mfn(self, incheck(...)))
+            end
+          end
+          sandboxDispatch = function(obj, ...)
+            return sandboxfn(objs[obj], ...)
+          end
+        end
+        sandboxindex[mk] = bubblewrap(sandboxDispatch)
       end
       allmethods[k] = sandboxindex
       return sandboxindex
