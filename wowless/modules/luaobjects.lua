@@ -4,6 +4,7 @@ local mixin = require('wowless.util').mixin
 return function(datalua)
   local config = datalua.config.modules and datalua.config.modules.luaobjects or {}
   local mtps = {}
+  local hostmts = {}
   local objs = setmetatable({}, { __mode = 'k' })
   local impltypes = {}
 
@@ -15,11 +16,15 @@ return function(datalua)
         return allmethods[k]
       end
       local v = datalua.luaobjects[k]
-      local methods = {}
+      local hostindex = {}
+      local sandboxindex = {}
       if v.inherits then
-        local parentmethods = createMethods(v.inherits)
-        for mk, mfn in pairs(parentmethods) do
-          methods[mk] = mfn
+        local parent = createMethods(v.inherits)
+        for mk, mfn in pairs(parent.hostindex) do
+          hostindex[mk] = mfn
+        end
+        for mk, fn in pairs(parent.sandboxindex) do
+          sandboxindex[mk] = fn
         end
       end
       for mk, mv in pairs(v.methods) do
@@ -28,12 +33,13 @@ return function(datalua)
           table.insert(args, (assert(modules[m], m)))
         end
         local mfn = assert(loadstring_untainted(mv.impl))(unpack(args))
-        methods[mk] = bubblewrap(function(u, ...)
+        hostindex[mk] = mfn
+        sandboxindex[mk] = bubblewrap(function(u, ...)
           return mfn(objs[u], ...)
         end)
       end
-      allmethods[k] = methods
-      return methods
+      allmethods[k] = { hostindex = hostindex, sandboxindex = sandboxindex }
+      return allmethods[k]
     end
 
     for k in pairs(datalua.luaobjects) do
@@ -42,19 +48,20 @@ return function(datalua)
 
     for k, v in pairs(datalua.luaobjects) do
       if not v.virtual then
-        local methods = allmethods[k]
+        local m = allmethods[k]
+        local sandboxmethods = m.sandboxindex
 
-        local mt
-        mt = {
+        local sandboxmt
+        sandboxmt = {
           __eq = function(u1, u2)
             return objs[u1].table == objs[u2].table
           end,
           __index = function(u, key)
-            return methods[key] or objs[u].table[key]
+            return sandboxmethods[key] or objs[u].table[key]
           end,
           __metatable = false,
           __newindex = function(u, key, value)
-            if methods[key] or mt[key] ~= nil then
+            if sandboxmethods[key] or sandboxmt[key] ~= nil then
               error('Attempted to assign to read-only key ' .. key)
             end
             objs[u].table[key] = value
@@ -65,8 +72,13 @@ return function(datalua)
         }
 
         local mtp = newproxy(true)
-        mixin(getmetatable(mtp), mt)
+        mixin(getmetatable(mtp), sandboxmt)
         mtps[k] = mtp
+        hostmts[k] = {
+          __index = function(t, key)
+            return m.hostindex[key] or t.table[key]
+          end,
+        }
         impltypes[k] = v.impl and modules[v.impl]
       end
     end
@@ -74,7 +86,7 @@ return function(datalua)
 
   local function make(k)
     local p = newproxy(assert(mtps[k], k))
-    local obj = { type = k, table = {}, luarep = p }
+    local obj = setmetatable({ type = k, table = {}, luarep = p }, assert(hostmts[k], k))
     objs[p] = obj
     return obj
   end
