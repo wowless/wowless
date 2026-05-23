@@ -20,12 +20,8 @@ return function(datalua)
       local sandboxindex = {}
       if v.inherits then
         local parent = createMethods(v.inherits)
-        for mk, mfn in pairs(parent.hostindex) do
-          hostindex[mk] = mfn
-        end
-        for mk, fn in pairs(parent.sandboxindex) do
-          sandboxindex[mk] = fn
-        end
+        mixin(hostindex, parent.hostindex)
+        mixin(sandboxindex, parent.sandboxindex)
       end
       for mk, mv in pairs(v.methods) do
         local args = {}
