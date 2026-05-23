@@ -30,7 +30,14 @@ struct wowless_stubs_spec {
   const struct wowless_ns_entry *ns;
 };
 
+struct wowless_luaobject_type_entry {
+  const char *type_name;
+  int type_id;
+  const struct wowless_stub_entry *methods;
+};
+
 int wowless_load_stubs(lua_State *L);
+int wowless_load_luaobject_stubs(lua_State *L);
 void wowless_stub_log_extra_args(lua_State *L, const char *fname);
 int wowless_impl_stub(lua_State *L);
 int wowless_impl_stub_nobubblewrap(lua_State *L);

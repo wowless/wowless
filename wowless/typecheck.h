@@ -4,6 +4,7 @@
 extern "C" {
 #include "lauxlib.h"
 #include "lua.h"
+#include "wowless/luaobject.h"
 #include "wowless/stubs.h"
 #include "wowless/uiobject.h"
 }
@@ -242,36 +243,21 @@ static inline void wowless_stubchecknilabletable(lua_State *L, int idx) {
   }
 }
 
-static inline bool wowless_isluaobject(lua_State *L, int idx,
-                                       std::string_view tname) {
-  idx = lua_absindex(L, idx);
-  if (lua_type(L, idx) != LUA_TUSERDATA) {
-    return false;
-  }
-  lua_getfield(L, lua_upvalueindex(1), "IsLuaObject");
-  lua_pushvalue(L, idx);
-  lua_pushlstring(L, tname.data(), tname.size());
-  lua_call(L, 2, 1);
-  int result = lua_toboolean(L, -1);
-  lua_pop(L, 1);
-  return result;
-}
-
 static inline bool wowless_isnilableluaobject(lua_State *L, int idx,
-                                              std::string_view tname) {
-  return lua_isnoneornil(L, idx) || wowless_isluaobject(L, idx, tname);
+                                              int typeid_val) {
+  return lua_isnoneornil(L, idx) || wowless_isluaobject(L, idx, typeid_val);
 }
 
 static inline void wowless_stubcheckluaobject(lua_State *L, int idx,
-                                              std::string_view tname) {
-  if (!wowless_isluaobject(L, idx, tname)) {
+                                              int typeid_val) {
+  if (!wowless_isluaobject(L, idx, typeid_val)) {
     luaL_typerror(L, idx, "luaobject");
   }
 }
 
 static inline void wowless_stubchecknilableluaobject(lua_State *L, int idx,
-                                                     std::string_view tname) {
-  if (!wowless_isnilableluaobject(L, idx, tname)) {
+                                                     int typeid_val) {
+  if (!wowless_isnilableluaobject(L, idx, typeid_val)) {
     luaL_typerror(L, idx, "luaobject");
   }
 }
@@ -530,19 +516,31 @@ static inline void wowless_implcheckany(lua_State *L, int idx) {}
 static inline void wowless_implchecknilableany(lua_State *L, int idx) {}
 
 static inline void wowless_implcheckluaobject(lua_State *L, int idx,
-                                              std::string_view tname) {
+                                              int typeid_val,
+                                              const char *tname) {
   idx = lua_absindex(L, idx);
-  lua_getfield(L, lua_upvalueindex(1), "ImplInputLuaObject");
+  if (wowless_isluaobject(L, idx, typeid_val)) {
+    lua_getfenv(L, idx);
+    lua_replace(L, idx);
+    return;
+  }
+  lua_getfield(L, lua_upvalueindex(1), "Coerce");
+  lua_pushstring(L, tname);
   lua_pushvalue(L, idx);
-  lua_pushlstring(L, tname.data(), tname.size());
   lua_call(L, 2, 1);
-  lua_replace(L, idx);
+  if (!lua_isnil(L, -1)) {
+    lua_replace(L, idx);
+    return;
+  }
+  lua_pop(L, 1);
+  luaL_typerror(L, idx, tname);
 }
 
 static inline void wowless_implchecknilableluaobject(lua_State *L, int idx,
-                                                     std::string_view tname) {
+                                                     int typeid_val,
+                                                     const char *tname) {
   if (!lua_isnoneornil(L, idx)) {
-    wowless_implcheckluaobject(L, idx, tname);
+    wowless_implcheckluaobject(L, idx, typeid_val, tname);
   }
 }
 
@@ -718,19 +716,23 @@ static inline void wowless_imploutputnilabletable(lua_State *L, int idx) {
 }
 
 static inline void wowless_imploutputluaobject(lua_State *L, int idx,
-                                               std::string_view tname) {
+                                               int typeid_val) {
   idx = lua_absindex(L, idx);
-  lua_getfield(L, lua_upvalueindex(1), "ImplOutputLuaObject");
-  lua_pushvalue(L, idx);
-  lua_pushlstring(L, tname.data(), tname.size());
-  lua_call(L, 2, 1);
-  lua_replace(L, idx);
+  if (lua_type(L, idx) == LUA_TTABLE) {
+    lua_getfield(L, idx, "luarep");
+    if (wowless_isluaobject(L, -1, typeid_val)) {
+      lua_replace(L, idx);
+      return;
+    }
+    lua_pop(L, 1);
+  }
+  wowless_outputtyperror(L, idx, "luaobject");
 }
 
 static inline void wowless_imploutputnilableluaobject(lua_State *L, int idx,
-                                                      std::string_view tname) {
+                                                      int typeid_val) {
   if (!lua_isnoneornil(L, idx)) {
-    wowless_imploutputluaobject(L, idx, tname);
+    wowless_imploutputluaobject(L, idx, typeid_val);
   }
 }
 

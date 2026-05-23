@@ -607,8 +607,8 @@ for k, v in pairs(uiobjectdata) do
 end
 
 local luaobjects = {}
+local luaobjectdata = parseYaml('data/products/' .. product .. '/luaobjects.yaml')
 do
-  local luaobjectdata = parseYaml('data/products/' .. product .. '/luaobjects.yaml')
   for k, v in pairs(luaobjectdata) do
     local methods = {}
     if v.impl then
@@ -842,7 +842,7 @@ if args.coutput then
     luaobject = function(name)
       return function(verb, nilable, idx)
         local ns = nilable and 'nilable' or ''
-        return string.format('wowless_%s%sluaobject(L, %s, %s)', verb, ns, idx, cstring(name))
+        return string.format('wowless_%s%sluaobject_%s(L, %s)', verb, ns, safename(name), idx)
       end
     end,
     number = simple_cinputtype('number'),
@@ -891,7 +891,7 @@ if args.coutput then
     ['function'] = simple_coutputtype('function'),
     luaobject = function(typename, nilable, idx)
       local ns = nilable and 'nilable' or ''
-      return string.format('wowless_imploutput%sluaobject(L, %s, %s)', ns, idx, cstring(typename))
+      return string.format('wowless_imploutput%sluaobject_%s(L, %s)', ns, safename(typename), idx)
     end,
     ['nil'] = simple_coutputtype('nil'),
     number = simple_coutputtype('number'),
@@ -950,6 +950,45 @@ if args.coutput then
         impldata = ensureimpl(v.impl),
       })
     end
+  end
+
+  -- Assign integer typeids to all luaobject types (sorted for determinism)
+  local luaobject_typeids = {}
+  do
+    local i = 0
+    for loname in sorted(luaobjectdata) do
+      luaobject_typeids[loname] = i
+      i = i + 1
+    end
+  end
+
+  -- Flatten luaobject methods per type (resolve inheritance), tracking source type.
+  local luaobject_flat = {} -- [loname][mname] = method_config
+  local luaobject_source = {} -- [loname][mname] = source_typename
+  local function lo_flatten(k)
+    if luaobject_flat[k] then
+      return luaobject_flat[k]
+    end
+    local v = luaobjectdata[k]
+    local flat = {}
+    local src = {}
+    if v.inherits then
+      lo_flatten(v.inherits)
+      for mk, me in pairs(luaobject_flat[v.inherits]) do
+        flat[mk] = me
+        src[mk] = luaobject_source[v.inherits][mk]
+      end
+    end
+    for mk, mv in pairs(v.methods or {}) do
+      flat[mk] = mv
+      src[mk] = k
+    end
+    luaobject_flat[k] = flat
+    luaobject_source[k] = src
+    return flat
+  end
+  for loname in pairs(luaobjectdata) do
+    lo_flatten(loname)
   end
 
   for _, st in pairs(structures) do
@@ -1060,6 +1099,17 @@ if args.coutput then
     emit('static void wowless_implchecknilableuiobject_%s(lua_State *L, int idx);', safename(uname))
   end
   emit('')
+  for loname in sorted(luaobjectdata) do
+    emit('static bool wowless_isluaobject_%s(lua_State *L, int idx);', safename(loname))
+    emit('static bool wowless_isnilableluaobject_%s(lua_State *L, int idx);', safename(loname))
+    emit('static void wowless_stubcheckluaobject_%s(lua_State *L, int idx);', safename(loname))
+    emit('static void wowless_stubchecknilableluaobject_%s(lua_State *L, int idx);', safename(loname))
+    emit('static void wowless_implcheckluaobject_%s(lua_State *L, int idx);', safename(loname))
+    emit('static void wowless_implchecknilableluaobject_%s(lua_State *L, int idx);', safename(loname))
+    emit('static void wowless_imploutputluaobject_%s(lua_State *L, int idx);', safename(loname))
+    emit('static void wowless_imploutputnilableluaobject_%s(lua_State *L, int idx);', safename(loname))
+  end
+  emit('')
 
   for sname, st in sorted(structures) do
     emit('static void wowless_stubcheckstruct_%s(lua_State *L, int idx) {', safename(sname))
@@ -1129,6 +1179,42 @@ if args.coutput then
     emit('')
   end
 
+  for loname in sorted(luaobjectdata) do
+    local tid = luaobject_typeids[loname]
+    emit('static bool wowless_isluaobject_%s(lua_State *L, int idx) {', safename(loname))
+    emit('  return wowless_isluaobject(L, idx, %d);', tid)
+    emit('}')
+    emit('')
+    emit('static bool wowless_isnilableluaobject_%s(lua_State *L, int idx) {', safename(loname))
+    emit('  return wowless_isnilableluaobject(L, idx, %d);', tid)
+    emit('}')
+    emit('')
+    emit('static void wowless_stubcheckluaobject_%s(lua_State *L, int idx) {', safename(loname))
+    emit('  wowless_stubcheckluaobject(L, idx, %d);', tid)
+    emit('}')
+    emit('')
+    emit('static void wowless_stubchecknilableluaobject_%s(lua_State *L, int idx) {', safename(loname))
+    emit('  wowless_stubchecknilableluaobject(L, idx, %d);', tid)
+    emit('}')
+    emit('')
+    emit('static void wowless_implcheckluaobject_%s(lua_State *L, int idx) {', safename(loname))
+    emit('  wowless_implcheckluaobject(L, idx, %d, %s);', tid, cstring(loname))
+    emit('}')
+    emit('')
+    emit('static void wowless_implchecknilableluaobject_%s(lua_State *L, int idx) {', safename(loname))
+    emit('  wowless_implchecknilableluaobject(L, idx, %d, %s);', tid, cstring(loname))
+    emit('}')
+    emit('')
+    emit('static void wowless_imploutputluaobject_%s(lua_State *L, int idx) {', safename(loname))
+    emit('  wowless_imploutputluaobject(L, idx, %d);', tid)
+    emit('}')
+    emit('')
+    emit('static void wowless_imploutputnilableluaobject_%s(lua_State *L, int idx) {', safename(loname))
+    emit('  wowless_imploutputnilableluaobject(L, idx, %d);', tid)
+    emit('}')
+    emit('')
+  end
+
   emit('static const struct wowless_uitype wowless_uitypes_by_bit[] = {')
   for uname in sorted(uiobjectdata) do
     local bits = uitype_ancestors[uname]
@@ -1160,6 +1246,62 @@ if args.coutput then
   emit('  return 1;')
   emit('}')
   emit('')
+
+  -- Luaobject method C stubs, generated per SOURCE TYPE (not per concrete type).
+  -- Virtual type stubs skip the self-check since virtual types can't be instantiated;
+  -- their stubs are shared across all concrete subtypes that inherit the method.
+  for loname in sorted(luaobjectdata) do
+    local lodata = luaobjectdata[loname]
+    if not lodata.impl then
+      for mname, mv in sorted(lodata.methods or {}) do
+        local inputs = mv.inputs or {}
+        local outputs = mv.outputs or {}
+        emit('static int stub_lomethod_%s_%s(lua_State *L) {', safename(loname), safename(mname))
+        if not lodata.virtual then
+          emit('  wowless_stubcheckluaobject_%s(L, 1);', safename(loname))
+        end
+        for i, inp in ipairs(inputs) do
+          local nilable = inp.nilable or inp.default ~= nil
+          emit('  %s', dispatch(cinputtypes, inp.type)('stubcheck', nilable, i + 1) .. ';')
+        end
+        if mv.inputs ~= nil then
+          emit('  wowless_stubcheckextraargs(L, %d, %s);', #inputs + 1, cstring(loname .. ':' .. mname))
+        end
+        for _, out in ipairs(outputs) do
+          local val
+          if out.stub ~= nil then
+            val = out.stub
+          elseif out.default ~= nil then
+            val = out.default
+          elseif not out.nilable or out.stubnotnil then
+            val = dispatch(coutdefaults, out.type)
+          end
+          if val == nil then
+            emit('  lua_pushnil(L);')
+          else
+            dispatch(coutpushers, out.type, val)
+          end
+        end
+        emit('  return %d;', #outputs)
+        emit('}')
+        emit('')
+      end
+    end
+  end
+
+  -- Luaobject method C implstubs (impl types like LuaFunctionContainer)
+  for loname in sorted(luaobjectdata) do
+    local lodata = luaobjectdata[loname]
+    if not lodata.virtual and lodata.impl then
+      for mname in sorted(lodata.methods or {}) do
+        emit('static int implstub_lomethod_%s_%s(lua_State *L) {', safename(loname), safename(mname))
+        emit('  wowless_implcheckluaobject_%s(L, 1);', safename(loname))
+        emit('  return wowless_impl_stub(L);') -- TODO: check inputs and outputs -- issue #667
+        emit('}')
+        emit('')
+      end
+    end
+  end
 
   for _, entry in ipairs(eligible) do
     local k, v = entry.name, entry.cfg
@@ -1468,6 +1610,57 @@ if args.coutput then
   emit('  stubs_ns,')
   emit('};')
   emit('')
+  -- Luaobject method impldata statics for impl types
+  for loname in sorted(luaobjectdata) do
+    local lodata = luaobjectdata[loname]
+    if not lodata.virtual and lodata.impl then
+      for mname in sorted(lodata.methods or {}) do
+        local sn = string.format('lomethod_%s_%s', safename(loname), safename(mname))
+        local impl_src = string.format('return (...).methods[%q]', mname)
+        emit('static const char *const implmods_%s[] = {%s, nullptr};', sn, cstring(lodata.impl))
+        emit(
+          'static const wowless_impl_data impldata_%s = {%s, %d, %s, implmods_%s, nullptr};',
+          sn,
+          cstring(impl_src),
+          #impl_src,
+          cstring(loname .. ':' .. mname),
+          sn
+        )
+      end
+    end
+  end
+  emit('')
+
+  -- Per-type luaobject method entry arrays; only direct (non-inherited) methods are
+  -- listed per type. Inherited methods are picked up via luaobjects.lua inheritance.
+  -- Virtual types are also included so their stubs can be shared across subtypes.
+  for loname in sorted(luaobjectdata) do
+    local lodata = luaobjectdata[loname]
+    emit('static const wowless_stub_entry lo_methods_%s[] = {', safename(loname))
+    if not lodata.virtual and lodata.impl then
+      for mname in sorted(lodata.methods or {}) do
+        local sn = string.format('lomethod_%s_%s', safename(loname), safename(mname))
+        emit('  {%s, implstub_%s, 0, &impldata_%s},', cstring(mname), sn, sn)
+      end
+    else
+      for mname in sorted(lodata.methods or {}) do
+        local sn = string.format('lomethod_%s_%s', safename(loname), safename(mname))
+        emit('  {%s, stub_%s, 0, nullptr},', cstring(mname), sn)
+      end
+    end
+    emit('  {nullptr, nullptr, 0, nullptr}')
+    emit('};')
+    emit('')
+  end
+
+  -- Luaobject type registry (all types including virtual, for method stub sharing)
+  emit('static const wowless_luaobject_type_entry lo_types[] = {')
+  for loname in sorted(luaobjectdata) do
+    emit('  {%s, %d, lo_methods_%s},', cstring(loname), luaobject_typeids[loname], safename(loname))
+  end
+  emit('  {nullptr, 0, nullptr}')
+  emit('};')
+  emit('')
   emit('extern "C" int luaopen_build_products_%s_stubs(lua_State *L) {', product)
   emit('  lua_newtable(L);')
   emit('  lua_pushlightuserdata(L, static_cast<void *>(const_cast<wowless_stubs_spec *>(&stubs_spec)));')
@@ -1475,6 +1668,9 @@ if args.coutput then
   emit('  lua_setfield(L, -2, "load");')
   emit('  lua_pushcfunction(L, wowless_uiobject_new);')
   emit('  lua_setfield(L, -2, "new");')
+  emit('  lua_pushlightuserdata(L, static_cast<void *>(const_cast<wowless_luaobject_type_entry *>(lo_types)));')
+  emit('  lua_pushcclosure(L, wowless_load_luaobject_stubs, 1);')
+  emit('  lua_setfield(L, -2, "loadluaobjects");')
   emit('  return 1;')
   emit('}')
 
