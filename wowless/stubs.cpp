@@ -100,6 +100,27 @@ void wowless_stub_log_extra_args(lua_State *L, const char *fname) {
   lua_call(L, 2, 0);
 }
 
+int wowless_load_luaobject_stubs(lua_State *L) {
+  const auto *spec = static_cast<const wowless_luaobject_type_entry *>(
+      lua_touserdata(L, lua_upvalueindex(1)));
+  lua_getfield(L, 1, "cgencode");
+  lua_insert(L, 1);
+  /* Stack: [cgencode, modules] */
+  lua_newtable(L);
+  /* Stack: [cgencode, modules, result] */
+  for (const wowless_luaobject_type_entry *t = spec; t->type_name; t++) {
+    lua_newtable(L);
+    lua_pushinteger(L, t->type_id);
+    lua_setfield(L, -2, "typeid");
+    load_entries(L, t->methods);
+    /* Stack: [cgencode, modules, result, type_info, sandbox_methods, host_methods] */
+    lua_pop(L, 1); /* discard host_methods */
+    lua_setfield(L, -2, "methods");
+    lua_setfield(L, -2, t->type_name);
+  }
+  return 1;
+}
+
 int wowless_load_stubs(lua_State *L) {
   const auto *spec =
       static_cast<const wowless_stubs_spec *>(lua_touserdata(L, lua_upvalueindex(1)));

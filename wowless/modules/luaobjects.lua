@@ -1,15 +1,17 @@
-local bubblewrap = require('wowless.bubblewrap')
-local mixin = require('wowless.util').mixin
+local luaobject = require('wowless.luaobject')
 
-return function(datalua)
+return function(cstubs, datalua)
   local config = datalua.config.modules and datalua.config.modules.luaobjects or {}
-  local mtps = {}
-  local objs = setmetatable({}, { __mode = 'k' })
+  local typeids = {}
+  local metatables = {}
   local impltypes = {}
 
   local function LoadTypes(modules)
-    local allmethods = {}
+    local type_stubs = cstubs.loadluaobjects(modules)
 
+    -- Build methods tables with inheritance so that inherited methods share the
+    -- same Lua function object across types (type_stubs has all types including virtual).
+    local allmethods = {}
     local function createMethods(k)
       if allmethods[k] then
         return allmethods[k]
@@ -17,66 +19,61 @@ return function(datalua)
       local v = datalua.luaobjects[k]
       local methods = {}
       if v.inherits then
-        local parentmethods = createMethods(v.inherits)
-        for mk, mfn in pairs(parentmethods) do
+        for mk, mfn in pairs(createMethods(v.inherits)) do
           methods[mk] = mfn
         end
       end
-      for mk, mv in pairs(v.methods) do
-        local args = {}
-        for _, m in ipairs(mv.modules or {}) do
-          table.insert(args, (assert(modules[m], m)))
+      local ts = type_stubs[k]
+      if ts then
+        for mk, mfn in pairs(ts.methods) do
+          methods[mk] = mfn
         end
-        local mfn = assert(loadstring_untainted(mv.impl))(unpack(args))
-        methods[mk] = bubblewrap(function(u, ...)
-          return mfn(objs[u], ...)
-        end)
       end
       allmethods[k] = methods
       return methods
     end
 
-    for k in pairs(datalua.luaobjects) do
-      createMethods(k)
-    end
-
-    for k, v in pairs(datalua.luaobjects) do
+    for k, ts in pairs(type_stubs) do
+      typeids[k] = ts.typeid
+      local v = datalua.luaobjects[k]
       if not v.virtual then
-        local methods = allmethods[k]
-
+        local methods = createMethods(k)
         local mt
         mt = {
           __eq = function(u1, u2)
-            return objs[u1].table == objs[u2].table
+            return luaobject.getenv(u1) == luaobject.getenv(u2)
           end,
           __index = function(u, key)
-            return methods[key] or objs[u].table[key]
+            return methods[key] or luaobject.getenv(u)[key]
           end,
           __metatable = false,
           __newindex = function(u, key, value)
             if methods[key] or mt[key] ~= nil then
               error('Attempted to assign to read-only key ' .. key)
             end
-            objs[u].table[key] = value
+            luaobject.getenv(u)[key] = value
           end,
           __tostring = config.tostring_metamethod and function(u)
-            return k .. ': 0x' .. tostring(objs[u].table):gsub('^%S+ 0x?0*', ''):lower()
+            return k .. ': 0x' .. tostring(luaobject.getenv(u)):gsub('^%S+ 0x?0*', ''):lower()
           end or nil,
         }
+        metatables[k] = mt
+      end
+    end
 
-        local mtp = newproxy(true)
-        mixin(getmetatable(mtp), mt)
-        mtps[k] = mtp
-        impltypes[k] = v.impl and modules[v.impl]
+    for k, v in pairs(datalua.luaobjects) do
+      if v.impl and not v.virtual then
+        impltypes[k] = modules[v.impl]
       end
     end
   end
 
   local function make(k)
-    local p = newproxy(assert(mtps[k], k))
-    local obj = { type = k, table = {}, luarep = p }
-    objs[p] = obj
-    return obj
+    local typeid = assert(typeids[k], k)
+    local env = { type = k }
+    local p = luaobject.new(typeid, metatables[k], env)
+    env.luarep = p
+    return env
   end
 
   local function Create(k, ...)
@@ -100,13 +97,14 @@ return function(datalua)
 
   local function CreateProxy(obj)
     assert(obj and obj.luarep, 'not a luaobject')
-    local np = newproxy(mtps[obj.type])
-    objs[np] = obj
+    local typename = obj.type
+    local typeid = assert(typeids[typename], typename)
+    local np = luaobject.new(typeid, metatables[typename], obj)
     return np
   end
 
   local function UserData(p)
-    return objs[p]
+    return luaobject.getenv(p)
   end
 
   return {

@@ -870,6 +870,7 @@ lua2c(
   wowless.modules.visibility=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/visibility.lua
   wowless.profiler=${CMAKE_CURRENT_SOURCE_DIR}/wowless/profiler.lua
   wowless.runner=${CMAKE_CURRENT_SOURCE_DIR}/wowless/runner.lua
+  wowless.luaobject=c
   wowless.secure=c
   wowless.uiobject=c
   wowless.xml=${CMAKE_CURRENT_SOURCE_DIR}/wowless/xml.lua
@@ -879,6 +880,7 @@ target_sources(
   PRIVATE wowless/bubblewrap.c
           wowless/debug.c
           wowless/ext.c
+          wowless/luaobject.c
           wowless/modules/encodingutil.c
           wowless/secure.c
           wowless/stubs.cpp

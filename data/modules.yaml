@@ -113,6 +113,7 @@ loglevel:
     default: '0'
 luaobjects:
   deps:
+    cstubs:
     datalua:
 macrotext:
   deps:
