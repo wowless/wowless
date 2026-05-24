@@ -14,7 +14,7 @@ return function(log, luaobjects, security)
     local count = 0
     local function cb()
       if not obj.cancelled and count < iterations then
-        security.CallSandbox(obj.callback, luaobjects.CreateProxy(obj))
+        security.CallSandbox(obj.callback, luaobjects.CreateProxy('LuaFunctionContainer', obj))
         count = count + 1
         addTimer(seconds, cb)
       end

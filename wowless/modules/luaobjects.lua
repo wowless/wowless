@@ -95,9 +95,8 @@ return function(cstubs, datalua)
     end
   end
 
-  local function CreateProxy(obj)
+  local function CreateProxy(typename, obj)
     assert(obj and obj.luarep, 'not a luaobject')
-    local typename = obj.type
     local typeid = assert(typeids[typename], typename)
     local np = luaobject.new(typeid, metatables[typename], obj)
     return np
