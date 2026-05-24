@@ -261,7 +261,7 @@ return function(addons, datalua, env, luaobjects, uiobjects, uiobjecttypes, unit
       return value
     elseif spec.type.luaobject then
       if isout then
-        if type(value) == 'table' and value.type == spec.type.luaobject then
+        if luaobjects.IsType(spec.type.luaobject, value) then
           return value.luarep
         else
           return nil, 'is not of luaobject type ' .. spec.type.luaobject
@@ -272,7 +272,7 @@ return function(addons, datalua, env, luaobjects, uiobjects, uiobjecttypes, unit
           return coerced
         end
         local obj = luaobjects.UserData(value)
-        if not obj or obj.type ~= spec.type.luaobject then
+        if not luaobjects.IsType(spec.type.luaobject, obj) then
           return nil, 'is not of luaobject type ' .. spec.type.luaobject
         end
         return obj

@@ -18,6 +18,15 @@ static int wowless_luaobject_getenv(lua_State *L) {
   return 0;
 }
 
+static int wowless_luaobject_gettypeid(lua_State *L) {
+  const struct wowless_luaobject_data *ud = wowless_toluaobject(L, 1);
+  if (ud) {
+    lua_pushinteger(L, ud->type_id);
+    return 1;
+  }
+  return 0;
+}
+
 static int wowless_luaobject_new(lua_State *L) {
   int type_id = luaL_checkinteger(L, 1);
   luaL_checktype(L, 2, LUA_TTABLE);
@@ -35,9 +44,10 @@ static int wowless_luaobject_new(lua_State *L) {
 }
 
 static const struct luaL_Reg lib[] = {
-    {"getenv", wowless_luaobject_getenv},
-    {"new",    wowless_luaobject_new   },
-    {NULL,     NULL                    }
+    {"getenv",    wowless_luaobject_getenv   },
+    {"gettypeid", wowless_luaobject_gettypeid},
+    {"new",       wowless_luaobject_new      },
+    {NULL,        NULL                       }
 };
 
 int luaopen_wowless_luaobject(lua_State *L) {

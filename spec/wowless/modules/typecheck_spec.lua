@@ -197,7 +197,13 @@ describe('typecheck', function()
         },
       },
     },
-    nil, -- luaobjects
+    { -- luaobjects
+      Coerce = function() end,
+      IsType = function()
+        return false
+      end,
+      UserData = function() end,
+    },
     nil, -- uiobjects
     nil, -- uiobjecttypes
     units, -- units
