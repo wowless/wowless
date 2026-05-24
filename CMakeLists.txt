@@ -832,7 +832,6 @@ lua2c(
   wowless.modules.cgencode=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/cgencode.lua
   wowless.modules.clog=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/clog.lua
   wowless.modules.cstubs=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/cstubs.lua
-  wowless.modules.ctypecheck=c
   wowless.modules.cvars=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/cvars.lua
   wowless.modules.datetime=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/datetime.lua
   wowless.modules.dirty=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/dirty.lua
@@ -880,7 +879,6 @@ target_sources(
   PRIVATE wowless/bubblewrap.c
           wowless/debug.c
           wowless/ext.c
-          wowless/modules/ctypecheck.cpp
           wowless/modules/encodingutil.c
           wowless/secure.c
           wowless/stubs.cpp
@@ -1069,7 +1067,6 @@ set(specs
     spec/wowless/bubblewrap_spec.lua
     spec/wowless/hlist_spec.lua
     spec/wowless/modules/funcheck_spec.lua
-    spec/wowless/modules/typecheck_align_spec.lua
     spec/wowless/modules/typecheck_spec.lua
     spec/wowless/sqlite_spec.lua
     spec/wowless/toc_spec.lua

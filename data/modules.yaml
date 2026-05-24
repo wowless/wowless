@@ -36,9 +36,6 @@ clog:
 cstubs:
   deps:
     datalua:
-ctypecheck:
-  deps:
-    cgencode:
 cvars:
   deps:
     datalua:
