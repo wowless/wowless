@@ -9,7 +9,7 @@ describe('apis', function()
         describe(name, function()
           it('is not stubbed if provided by elune', function()
             if _G[name] then
-              assert.Truthy(api.impl)
+              assert.Truthy(api.impl or api.cfunc)
             end
           end)
           it('has outputs if it has inputs', function()

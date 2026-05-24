@@ -680,8 +680,6 @@ tonumber:
   stdlib: tonumber
 tostring:
   stdlib: tostring
-type:
-  stdlib: type
 UnitClass:
   impl:
     sqls:

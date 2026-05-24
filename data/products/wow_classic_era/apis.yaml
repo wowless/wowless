@@ -22584,7 +22584,14 @@ TurnRightStart:
 TurnRightStop:
   protected: true
 type:
-  impl: type
+  cfunc: wowless_type
+  inputs:
+  - name: value
+    nilable: true
+    type: unknown
+  outputs:
+  - name: typename
+    type: string
 UninviteUnit:
 UnitAffectingCombat:
   inputs:

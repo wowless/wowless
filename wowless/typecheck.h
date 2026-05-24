@@ -819,4 +819,10 @@ static void wowless_stubchecknilablearrayof(lua_State *L, int idx) {
   }
 }
 
+static int wowless_type(lua_State *L) {
+  luaL_checkany(L, 1);
+  lua_pushstring(L, lua_typename(L, lua_type(L, 1)));
+  return 1;
+}
+
 #endif /* WOWLESS_TYPECHECK_H */

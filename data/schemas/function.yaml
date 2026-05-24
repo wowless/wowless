@@ -1,6 +1,8 @@
 name: function
 type:
   record:
+    cfunc:
+      type: string
     impl:
       type:
         ref:

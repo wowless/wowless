@@ -1163,75 +1163,77 @@ if args.coutput then
 
   for _, entry in ipairs(eligible) do
     local k, v = entry.name, entry.cfg
-    emit('static int stub_%s(lua_State *L) {', safename(k))
-    if v.protected then
-      emit('  if (wowless_forbidden(L)) return 0;')
-    end
-    local allinps = v.inputs or {}
-    local instride = v.instride or 0
-    local nsins = #allinps - instride
-    local function check(inp, idx)
-      local nilable = inp.nilable or inp.default ~= nil
-      return dispatch(cinputtypes, inp.type)('stubcheck', nilable, idx) .. ';'
-    end
-    local function usagecheck(inp, idx)
-      local nilable = inp.nilable or inp.default ~= nil
-      return ('if (!%s) return luaL_error(L, %s);'):format(
-        dispatch(cinputtypes, inp.type)('is', nilable, idx),
-        cstring('Usage: ' .. v.usage)
-      )
-    end
-    local inputcheck = v.usage and usagecheck or check
-    for i = 1, nsins do
-      emit('  %s', inputcheck(allinps[i], i))
-    end
-    if instride > 0 then
-      emit('  int i, n = lua_gettop(L);')
-      emit('  for (i = %d; i <= n; i += %d) {', nsins + 1, instride)
-      for j = nsins + 1, #allinps do
-        emit('    %s', inputcheck(allinps[j], 'i + ' .. (j - nsins - 1)))
+    if not v.cfunc then
+      emit('static int stub_%s(lua_State *L) {', safename(k))
+      if v.protected then
+        emit('  if (wowless_forbidden(L)) return 0;')
       end
-      emit('  }')
-    end
-    if v.inputs ~= nil and instride == 0 then
-      emit('  wowless_stubcheckextraargs(L, %d, %s);', nsins, cstring(k))
-    end
-    local allouts = not v.stubnothing and v.outputs or {}
-    local outstride = v.outstride or 0
-    local nonstride = #allouts - outstride
-    local stuboutstrides = v.stuboutstrides
-    local outs
-    if stuboutstrides ~= nil then
-      outs = {}
-      for i = 1, nonstride do
-        table.insert(outs, allouts[i])
+      local allinps = v.inputs or {}
+      local instride = v.instride or 0
+      local nsins = #allinps - instride
+      local function check(inp, idx)
+        local nilable = inp.nilable or inp.default ~= nil
+        return dispatch(cinputtypes, inp.type)('stubcheck', nilable, idx) .. ';'
       end
-      for _ = 1, stuboutstrides do
-        for j = nonstride + 1, #allouts do
-          table.insert(outs, allouts[j])
+      local function usagecheck(inp, idx)
+        local nilable = inp.nilable or inp.default ~= nil
+        return ('if (!%s) return luaL_error(L, %s);'):format(
+          dispatch(cinputtypes, inp.type)('is', nilable, idx),
+          cstring('Usage: ' .. v.usage)
+        )
+      end
+      local inputcheck = v.usage and usagecheck or check
+      for i = 1, nsins do
+        emit('  %s', inputcheck(allinps[i], i))
+      end
+      if instride > 0 then
+        emit('  int i, n = lua_gettop(L);')
+        emit('  for (i = %d; i <= n; i += %d) {', nsins + 1, instride)
+        for j = nsins + 1, #allinps do
+          emit('    %s', inputcheck(allinps[j], 'i + ' .. (j - nsins - 1)))
+        end
+        emit('  }')
+      end
+      if v.inputs ~= nil and instride == 0 then
+        emit('  wowless_stubcheckextraargs(L, %d, %s);', nsins, cstring(k))
+      end
+      local allouts = not v.stubnothing and v.outputs or {}
+      local outstride = v.outstride or 0
+      local nonstride = #allouts - outstride
+      local stuboutstrides = v.stuboutstrides
+      local outs
+      if stuboutstrides ~= nil then
+        outs = {}
+        for i = 1, nonstride do
+          table.insert(outs, allouts[i])
+        end
+        for _ = 1, stuboutstrides do
+          for j = nonstride + 1, #allouts do
+            table.insert(outs, allouts[j])
+          end
+        end
+      else
+        outs = allouts
+      end
+      for _, out in ipairs(outs) do
+        local val
+        if out.stub ~= nil then
+          val = out.stub
+        elseif out.default ~= nil then
+          val = out.default
+        elseif not out.nilable or out.stubnotnil then
+          val = dispatch(coutdefaults, out.type)
+        end
+        if val == nil then
+          emit('  lua_pushnil(L);')
+        else
+          dispatch(coutpushers, out.type, val)
         end
       end
-    else
-      outs = allouts
+      emit('  return %d;', #outs)
+      emit('}')
+      emit('')
     end
-    for _, out in ipairs(outs) do
-      local val
-      if out.stub ~= nil then
-        val = out.stub
-      elseif out.default ~= nil then
-        val = out.default
-      elseif not out.nilable or out.stubnotnil then
-        val = dispatch(coutdefaults, out.type)
-      end
-      if val == nil then
-        emit('  lua_pushnil(L);')
-      else
-        dispatch(coutpushers, out.type, val)
-      end
-    end
-    emit('  return %d;', #outs)
-    emit('}')
-    emit('')
   end
 
   local coutputdefaulttypes = {
@@ -1359,9 +1361,11 @@ if args.coutput then
       if not ns_entries[ns] then
         ns_entries[ns] = {}
       end
-      ns_entries[ns][shortname] = { sn = safename(entry.name), secureonly = not not entry.cfg.secureonly }
+      ns_entries[ns][shortname] =
+        { cfunc = entry.cfg.cfunc, sn = safename(entry.name), secureonly = not not entry.cfg.secureonly }
     else
-      global_entries[entry.name] = { sn = safename(entry.name), secureonly = not not entry.cfg.secureonly }
+      global_entries[entry.name] =
+        { cfunc = entry.cfg.cfunc, sn = safename(entry.name), secureonly = not not entry.cfg.secureonly }
     end
   end
   for _, entry in ipairs(eligible_impls) do
@@ -1420,6 +1424,8 @@ if args.coutput then
       local impldata = entry.impldata
       local func = impldata.nowrap and 'nullptr' or ('implstub_' .. entry.sn)
       emit('%s{%s, %s, %d, &impldata_%s},', indent, cstring(name), func, entry.secureonly and 1 or 0, entry.sn)
+    elseif entry.cfunc then
+      emit('%s{%s, %s, %d, nullptr},', indent, cstring(name), entry.cfunc, entry.secureonly and 1 or 0)
     else
       emit('%s{%s, stub_%s, %d, nullptr},', indent, cstring(name), entry.sn, entry.secureonly and 1 or 0)
     end
