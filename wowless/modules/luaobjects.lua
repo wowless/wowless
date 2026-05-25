@@ -44,14 +44,14 @@ return function(cstubs, datalua)
             return luaobject.getenv(u1) == luaobject.getenv(u2)
           end,
           __index = function(u, key)
-            return methods[key] or luaobject.getenv(u)[key]
+            return methods[key] or luaobject.getenv(u).table[key]
           end,
           __metatable = false,
           __newindex = function(u, key, value)
             if methods[key] or mt[key] ~= nil then
               error('Attempted to assign to read-only key ' .. key)
             end
-            luaobject.getenv(u)[key] = value
+            luaobject.getenv(u).table[key] = value
           end,
           __tostring = config.tostring_metamethod and function(u)
             return k .. ': 0x' .. tostring(luaobject.getenv(u)):gsub('^%S+ 0x?0*', ''):lower()
@@ -70,7 +70,7 @@ return function(cstubs, datalua)
 
   local function Create(k, ...)
     local impl = impltypes[k]
-    local obj = { assert(typeids[k], k) }
+    local obj = { assert(typeids[k], k), table = {} }
     if impl and impl.construct then
       impl.construct(obj, ...)
     end
@@ -80,7 +80,7 @@ return function(cstubs, datalua)
   local function Coerce(k, value)
     local impl = impltypes[k]
     if impl and impl.coerce then
-      local obj = { assert(typeids[k], k) }
+      local obj = { assert(typeids[k], k), table = {} }
       if impl.coerce(obj, value) then
         return obj
       end
