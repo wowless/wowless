@@ -139,69 +139,6 @@ local function ensuresql(k)
   end
 end
 
-local function stubby(mv, skip0)
-  local ins = mv.inputs or {}
-  local nsins = #ins - (mv.instride or 0)
-  -- sandbox impl: original code with gencode.Check input validation and specDefault outputs
-  local sb = { 'local gencode=...;' }
-  for i = 1, #ins do
-    table.insert(sb, 'local spec' .. i .. '=' .. prettywrite(mv.inputs[i], true) .. ';')
-  end
-  table.insert(sb, 'return function(')
-  local sba = {}
-  if skip0 then
-    table.insert(sba, '_')
-  end
-  for i = 1, nsins do
-    table.insert(sba, 'arg' .. i)
-  end
-  if mv.instride then
-    table.insert(sba, '...')
-  end
-  table.insert(sb, table.concat(sba, ','))
-  table.insert(sb, ')')
-  for i = 1, nsins do
-    table.insert(sb, 'gencode.Check(spec' .. i .. ',arg' .. i .. ');')
-  end
-  if mv.instride then
-    table.insert(sb, 'for i=1,select("#",...),' .. mv.instride .. ' do ')
-    table.insert(sb, 'local arg' .. nsins + 1)
-    for i = nsins + 2, #ins do
-      table.insert(sb, ',arg' .. i)
-    end
-    table.insert(sb, '=select(i,...);')
-    for i = nsins + 1, #ins do
-      table.insert(sb, 'gencode.Check(spec' .. i .. ',arg' .. i .. ');')
-    end
-    table.insert(sb, 'end ')
-  end
-  local outs = mv.outputs or {}
-  if #outs > 0 and not mv.stubnothing then
-    table.insert(sb, 'return ')
-    local rets = {}
-    local nonstride = #outs - (mv.outstride or 0)
-    for i = 1, nonstride do
-      table.insert(rets, specDefault(outs[i]))
-    end
-    for _ = 1, mv.stuboutstrides or 1 do
-      for j = nonstride + 1, #outs do
-        table.insert(rets, specDefault(outs[j]))
-      end
-    end
-    table.insert(sb, table.concat(rets, ','))
-  end
-  table.insert(sb, ' end')
-  -- host impl: simple no-op
-  local impl = 'return function(' .. (skip0 and '_' or '') .. ',...) end'
-  return {
-    impl = impl,
-    modules = {},
-    sandboximpl = table.concat(sb),
-    sandboxmodules = { 'gencode' },
-    secureonly = mv.secureonly,
-  }
-end
-
 local implimpls = {
   delegate = function(impl)
     return {
@@ -463,8 +400,64 @@ local uiobjectimplmakers = {
       sandboxmodules = { 'gencode' },
     }
   end,
-  none = function(mv)
-    return stubby(mv, true)
+  none = function(mv, k)
+    local ins = mv.inputs or {}
+    local nsins = #ins - (mv.instride or 0)
+    -- sandbox impl: original code with gencode.Check input validation and specDefault outputs
+    local sb = { 'local gencode=...;' }
+    table.insert(sb, string.format('local selfspec={name="self",type={uiobject=%q}};', k))
+    for i = 1, #ins do
+      table.insert(sb, 'local spec' .. i .. '=' .. prettywrite(mv.inputs[i], true) .. ';')
+    end
+    table.insert(sb, 'return function(')
+    local sba = { 'obj' }
+    for i = 1, nsins do
+      table.insert(sba, 'arg' .. i)
+    end
+    if mv.instride then
+      table.insert(sba, '...')
+    end
+    table.insert(sb, table.concat(sba, ','))
+    table.insert(sb, ')')
+    table.insert(sb, 'gencode.Check(selfspec,obj);')
+    for i = 1, nsins do
+      table.insert(sb, 'gencode.Check(spec' .. i .. ',arg' .. i .. ');')
+    end
+    if mv.instride then
+      table.insert(sb, 'for i=1,select("#",...),' .. mv.instride .. ' do ')
+      table.insert(sb, 'local arg' .. nsins + 1)
+      for i = nsins + 2, #ins do
+        table.insert(sb, ',arg' .. i)
+      end
+      table.insert(sb, '=select(i,...);')
+      for i = nsins + 1, #ins do
+        table.insert(sb, 'gencode.Check(spec' .. i .. ',arg' .. i .. ');')
+      end
+      table.insert(sb, 'end ')
+    end
+    local outs = mv.outputs or {}
+    if #outs > 0 and not mv.stubnothing then
+      table.insert(sb, 'return ')
+      local rets = {}
+      local nonstride = #outs - (mv.outstride or 0)
+      for i = 1, nonstride do
+        table.insert(rets, specDefault(outs[i]))
+      end
+      for _ = 1, mv.stuboutstrides or 1 do
+        for j = nonstride + 1, #outs do
+          table.insert(rets, specDefault(outs[j]))
+        end
+      end
+      table.insert(sb, table.concat(rets, ','))
+    end
+    table.insert(sb, ' end')
+    return {
+      impl = 'return function(_,...) end',
+      modules = {},
+      sandboximpl = table.concat(sb),
+      sandboxmodules = { 'gencode' },
+      secureonly = mv.secureonly,
+    }
   end,
   setter = function(impl, mv, k)
     -- sandbox impl: original code with gencode.Check converting sandbox reps to internal uds
