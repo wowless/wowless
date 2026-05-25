@@ -68,16 +68,9 @@ return function(cstubs, datalua)
     end
   end
 
-  local function make(k)
-    local typeid = assert(typeids[k], k)
-    local env = { typeid }
-    luaobject.new(typeid, metatables[k], env)
-    return env
-  end
-
   local function Create(k, ...)
     local impl = impltypes[k]
-    local obj = make(k)
+    local obj = { assert(typeids[k], k) }
     if impl and impl.construct then
       impl.construct(obj, ...)
     end
@@ -87,7 +80,7 @@ return function(cstubs, datalua)
   local function Coerce(k, value)
     local impl = impltypes[k]
     if impl and impl.coerce then
-      local obj = make(k)
+      local obj = { assert(typeids[k], k) }
       if impl.coerce(obj, value) then
         return obj
       end
