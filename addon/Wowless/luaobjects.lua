@@ -77,9 +77,6 @@ local function checkLuaObject(ty, o)
         seen[fn] = k
       end
     end,
-    field_luarep = function()
-      assertEquals(_G.__wowless and o or nil, o.luarep)
-    end,
     field_type = function()
       assertEquals(nil, o.type)
     end,

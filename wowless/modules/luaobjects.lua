@@ -70,9 +70,8 @@ return function(cstubs, datalua)
 
   local function make(k)
     local typeid = assert(typeids[k], k)
-    local env = {}
-    local p = luaobject.new(typeid, metatables[k], env)
-    env.luarep = p
+    local env = { typeid }
+    luaobject.new(typeid, metatables[k], env)
     return env
   end
 
@@ -96,14 +95,14 @@ return function(cstubs, datalua)
   end
 
   local function CreateProxy(typename, obj)
-    assert(obj and obj.luarep, 'not a luaobject')
+    assert(type(obj) == 'table', 'not a luaobject env')
     local typeid = assert(typeids[typename], typename)
     local np = luaobject.new(typeid, metatables[typename], obj)
     return np
   end
 
   local function IsType(typename, obj)
-    return type(obj) == 'table' and luaobject.gettypeid(obj.luarep) == typeids[typename]
+    return type(obj) == 'table' and obj[1] == typeids[typename]
   end
 
   local function UserData(p)

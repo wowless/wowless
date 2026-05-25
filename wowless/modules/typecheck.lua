@@ -262,7 +262,7 @@ return function(addons, datalua, env, luaobjects, uiobjects, uiobjecttypes, unit
     elseif spec.type.luaobject then
       if isout then
         if luaobjects.IsType(spec.type.luaobject, value) then
-          return value.luarep
+          return luaobjects.CreateProxy(spec.type.luaobject, value)
         else
           return nil, 'is not of luaobject type ' .. spec.type.luaobject
         end
