@@ -81,7 +81,7 @@ local function checkLuaObject(ty, o)
       assertEquals(_G.__wowless and o or nil, o.luarep)
     end,
     field_type = function()
-      assertEquals(_G.__wowless and ty or nil, o.type)
+      assertEquals(nil, o.type)
     end,
     selfeq = function()
       assertEquals(o, o)

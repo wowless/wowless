@@ -70,7 +70,7 @@ return function(cstubs, datalua)
 
   local function make(k)
     local typeid = assert(typeids[k], k)
-    local env = { type = k }
+    local env = {}
     local p = luaobject.new(typeid, metatables[k], env)
     env.luarep = p
     return env
