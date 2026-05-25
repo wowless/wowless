@@ -26,9 +26,13 @@ return function(api, env, log, luaobjects, typecheck)
     end
   end
 
+  local function CreateLuaObject(typename)
+    return luaobjects.CreateProxy(typename, luaobjects.Create(typename))
+  end
+
   return {
     Check = Check,
-    CreateLuaObject = luaobjects.Create,
+    CreateLuaObject = CreateLuaObject,
     CreateUIObject = api.CreateUIObject,
     hlist = hlist,
     Mixin = env.mixin,

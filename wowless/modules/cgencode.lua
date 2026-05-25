@@ -12,7 +12,7 @@ return function(addons, api, events, log, luaobjects, uiobjects, units)
   end
 
   local function CreateLuaObject(typename)
-    return luaobjects.Create(typename).luarep
+    return luaobjects.CreateProxy(typename, luaobjects.Create(typename))
   end
 
   local function CreateUiObject(typename)
@@ -37,6 +37,7 @@ return function(addons, api, events, log, luaobjects, uiobjects, units)
     GetUnit = units.GetUnit,
     Coerce = luaobjects.Coerce,
     CreateLuaObject = CreateLuaObject,
+    CreateProxy = luaobjects.CreateProxy,
     CreateUiObject = CreateUiObject,
     log = log,
   }

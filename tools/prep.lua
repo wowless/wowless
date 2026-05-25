@@ -107,7 +107,7 @@ local specDefault = (function()
       return ('gencode.CreateUIObject(%q).luarep'):format(ty.uiobject:lower())
     end
     if ty.luaobject then
-      return ('gencode.CreateLuaObject(%q).luarep'):format(ty.luaobject)
+      return ('gencode.CreateLuaObject(%q)'):format(ty.luaobject)
     end
     error('unexpected type: ' .. prettywrite(ty, true))
   end
@@ -1206,11 +1206,11 @@ if args.coutput then
     emit('}')
     emit('')
     emit('static void wowless_imploutputluaobject_%s(lua_State *L, int idx) {', safename(loname))
-    emit('  wowless_imploutputluaobject(L, idx, %d);', tid)
+    emit('  wowless_imploutputluaobject(L, idx, %d, %s);', tid, cstring(loname))
     emit('}')
     emit('')
     emit('static void wowless_imploutputnilableluaobject_%s(lua_State *L, int idx) {', safename(loname))
-    emit('  wowless_imploutputnilableluaobject(L, idx, %d);', tid)
+    emit('  wowless_imploutputnilableluaobject(L, idx, %d, %s);', tid, cstring(loname))
     emit('}')
     emit('')
   end
