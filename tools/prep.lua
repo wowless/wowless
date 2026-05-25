@@ -610,23 +610,9 @@ local luaobjects = {}
 local luaobjectdata = parseYaml('data/products/' .. product .. '/luaobjects.yaml')
 do
   for k, v in pairs(luaobjectdata) do
-    local methods = {}
-    if v.impl then
-      for mk in pairs(v.methods or {}) do
-        methods[mk] = {
-          impl = ('return (...).methods[%q]'):format(mk),
-          modules = { v.impl },
-        }
-      end
-    else
-      for mk, mv in pairs(v.methods or {}) do
-        methods[mk] = stubby(mv, true)
-      end
-    end
     luaobjects[k] = {
       impl = v.impl,
       inherits = v.inherits,
-      methods = methods,
       virtual = v.virtual,
     }
   end
