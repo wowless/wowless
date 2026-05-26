@@ -95,7 +95,7 @@ return function(datalua, funcheck, gencode, sqls, uiobjectsmodule, uiobjecttypes
         for _, sql in ipairs(method.sqls or {}) do
           table.insert(args, (assert(sqls[sql], sql)))
         end
-        local hostfn = wrap(fname, mkfn(unpack(args)))
+        local rawfn = mkfn(unpack(args))
         local sandboxDispatch
         if method.sandboximpl then
           local sbmkfn = assert(loadstring_untainted(method.sandboximpl, src), fname)
@@ -105,27 +105,28 @@ return function(datalua, funcheck, gencode, sqls, uiobjectsmodule, uiobjecttypes
           end
           sandboxDispatch = sbmkfn(unpack(sbargs))
         else
+          local wrappedfn = wrap(fname, rawfn)
           local sandboxfn
           if not incheck and not outcheck then
-            sandboxfn = hostfn
+            sandboxfn = wrappedfn
           elseif not incheck then
             sandboxfn = function(...)
-              return outcheck(hostfn(...))
+              return outcheck(wrappedfn(...))
             end
           elseif not outcheck then
             sandboxfn = function(self, ...)
-              return hostfn(self, incheck(...))
+              return wrappedfn(self, incheck(...))
             end
           else
             sandboxfn = function(self, ...)
-              return outcheck(hostfn(self, incheck(...)))
+              return outcheck(wrappedfn(self, incheck(...)))
             end
           end
           sandboxDispatch = function(obj, ...)
             return sandboxfn(UserData(obj), ...)
           end
         end
-        hostindex[mname] = hostfn
+        hostindex[mname] = rawfn
         sandboxindex[mname] = sandboxDispatch
       end
       uiobjects[name] = {
