@@ -187,6 +187,8 @@ typecheck:
     units:
 uiobjectloader:
   deps:
+    cgencode:
+    cstubs:
     datalua:
     funcheck:
     gencode:

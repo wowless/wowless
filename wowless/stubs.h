@@ -36,8 +36,14 @@ struct wowless_luaobject_type_entry {
   const struct wowless_stub_entry *methods;
 };
 
+struct wowless_uiobject_method_entry {
+  const char *key;
+  lua_CFunction func;
+};
+
 int wowless_load_stubs(lua_State *L);
 int wowless_load_luaobject_stubs(lua_State *L);
+int wowless_load_uiobject_method_stubs(lua_State *L);
 void wowless_stub_log_extra_args(lua_State *L, const char *fname);
 int wowless_impl_stub(lua_State *L);
 int wowless_impl_stub_nobubblewrap(lua_State *L);
