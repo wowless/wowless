@@ -375,29 +375,24 @@ local uiobjectimplimplmakers = {
   end,
 }
 local uiobjectimplmakers = {
-  getter = function(impl, mv, k)
-    -- sandbox impl: original code with gencode.Check converting internal uds to luarep
-    local sb = { 'local gencode=...;' }
-    table.insert(sb, string.format('local selfspec={name="self",type={uiobject=%q}};', k))
-    for i in ipairs(impl) do
-      table.insert(sb, 'local spec' .. i .. '=' .. prettywrite(mv.outputs[i], true) .. ';')
-    end
-    table.insert(sb, 'return function(obj)local self=gencode.Check(selfspec,obj);return ')
-    for i, f in ipairs(impl) do
-      table.insert(sb, (i == 1 and '' or ',') .. 'gencode.Check(spec' .. i .. ',self.' .. f.name .. ',true)')
-    end
-    table.insert(sb, 'end')
-    -- host impl: simple direct field access
+  none = function(mv)
+    return {
+      cstub = true,
+      impl = 'return function(_,...) end',
+      modules = {},
+      secureonly = mv.secureonly,
+    }
+  end,
+  getter = function(impl)
     local t = { 'return function(self)return ' }
     for i, f in ipairs(impl) do
       table.insert(t, (i == 1 and '' or ',') .. 'self.' .. f.name)
     end
     table.insert(t, ' end')
     return {
+      cstub = true,
       impl = table.concat(t),
       modules = {},
-      sandboximpl = table.concat(sb),
-      sandboxmodules = { 'gencode' },
     }
   end,
   setter = function(impl, mv, k)
@@ -514,6 +509,7 @@ local uiobjectimplmakers = {
     }
   end,
 }
+local eligible_uimethods = {}
 local uiobjects = {}
 for k, v in pairs(uiobjectdata) do
   local constructor = { 'local gencode=...;return function()return{' }
@@ -523,8 +519,10 @@ for k, v in pairs(uiobjectdata) do
   table.insert(constructor, '}end')
   local methods = {}
   for mk, mv in pairs(v.methods) do
-    if mv.impl then
-      methods[mk] = dispatch(uiobjectimplmakers, mv.impl, mv, k)
+    local d = dispatch(uiobjectimplmakers, mv.impl or 'none', mv, k)
+    methods[mk] = d
+    if args.coutput and d.cstub then
+      eligible_uimethods[k .. ':' .. mk] = { k = k, mk = mk, mv = mv }
     end
   end
   local scripts = {}
@@ -876,41 +874,6 @@ if args.coutput then
         cfg = v,
         impldata = ensureimpl(v.impl),
       })
-    end
-  end
-
-  -- Collect eligible UIObject method C stubs and update their sandboximpl to delegate
-  local eligible_uimethods = {}
-  do
-    local function is_uimethod_cstub_eligible(mv)
-      return pcall(function()
-        for _, inp in ipairs(mv.inputs or {}) do
-          dispatch(cinputtypes, inp.type)
-        end
-        if not mv.stubnothing then
-          for _, out in ipairs(mv.outputs or {}) do
-            dispatch(coutdefaults, out.type)
-          end
-        end
-      end)
-    end
-    for typename in sorted(uiobjectdata) do
-      for mname, mv_raw in sorted(uiobjectdata[typename].methods or {}) do
-        if not mv_raw.impl then
-          assert(
-            is_uimethod_cstub_eligible(mv_raw),
-            typename .. ':' .. mname .. ' has no impl and is not C-stub eligible'
-          )
-          local key = typename .. ':' .. mname
-          table.insert(eligible_uimethods, { typename = typename, mname = mname, mv = mv_raw, key = key })
-          uiobjects[typename].methods[mname] = {
-            cstub = true,
-            impl = 'return function(_,...) end',
-            modules = {},
-            secureonly = mv_raw.secureonly,
-          }
-        end
-      end
     end
   end
 
@@ -1324,14 +1287,30 @@ if args.coutput then
   end
 
   -- UIObject method C stubs
-  for _, entry in ipairs(eligible_uimethods) do
-    local typename, mname, mv = entry.typename, entry.mname, entry.mv
-    emit('static int stub_uimethod_%s_%s(lua_State *L) {', safename(typename), safename(mname))
+  for key, entry in sorted(eligible_uimethods) do
+    local k, mk, mv = entry.k, entry.mk, entry.mv
+    emit('static int stub_uimethod_%s_%s(lua_State *L) {', safename(k), safename(mk))
     if mv.secureonly then
       emit('  if (wowless_forbidden(L)) return 0;')
     end
-    emit('  wowless_stubcheckuiobject_%s(L, 1);', safename(typename))
-    emit_stub_body(entry.key, mv, 1, stub_inputcheck)
+    if mv.impl and mv.impl.getter then
+      emit('  wowless_implcheckuiobject_%s(L, 1);', safename(k))
+      emit('  wowless_stubcheckextraargs(L, 1, %s);', cstring(key))
+      for i, f in ipairs(mv.impl.getter) do
+        emit('  lua_getfield(L, 1, %s);', cstring(f.name))
+        local out = mv.outputs[i]
+        if out and type(out.type) == 'table' and out.type.uiobject then
+          emit('  if (!lua_isnil(L, -1)) {')
+          emit('    lua_getfield(L, -1, "luarep");')
+          emit('    lua_replace(L, -2);')
+          emit('  }')
+        end
+      end
+      emit('  return %d;', #mv.impl.getter)
+    else
+      emit('  wowless_stubcheckuiobject_%s(L, 1);', safename(k))
+      emit_stub_body(key, mv, 1, stub_inputcheck)
+    end
     emit('}')
     emit('')
   end
@@ -1646,8 +1625,8 @@ if args.coutput then
   emit('')
   -- UIObject method entry array
   emit('static const struct wowless_uiobject_method_entry uiobject_method_entries[] = {')
-  for _, entry in ipairs(eligible_uimethods) do
-    emit('  {%s, stub_uimethod_%s_%s},', cstring(entry.key), safename(entry.typename), safename(entry.mname))
+  for key, entry in sorted(eligible_uimethods) do
+    emit('  {%s, stub_uimethod_%s_%s},', cstring(key), safename(entry.k), safename(entry.mk))
   end
   emit('  {nullptr, nullptr}')
   emit('};')
