@@ -132,6 +132,26 @@ static inline void wowless_stubchecknilablestring(lua_State *L, int idx) {
   }
 }
 
+static inline bool wowless_istextureasset(lua_State *L, int idx) {
+  return lua_isstring(L, idx) || lua_istable(L, idx);
+}
+
+static inline bool wowless_isnilabletextureasset(lua_State *L, int idx) {
+  return lua_isnoneornil(L, idx) || wowless_istextureasset(L, idx);
+}
+
+static inline void wowless_stubchecktextureasset(lua_State *L, int idx) {
+  if (!wowless_istextureasset(L, idx)) {
+    luaL_typerror(L, idx, "TextureAsset");
+  }
+}
+
+static inline void wowless_stubchecknilabletextureasset(lua_State *L, int idx) {
+  if (!wowless_isnilabletextureasset(L, idx)) {
+    luaL_typerror(L, idx, "TextureAsset");
+  }
+}
+
 static inline bool wowless_isfileasset(lua_State *L, int idx) {
   return wowless_isstring(L, idx);
 }
