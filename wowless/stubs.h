@@ -5,41 +5,41 @@
 
 #include "lua.h"
 
-struct wowless_impl_data {
+typedef struct wowless_impl_data {
   const char *impl;
   size_t impl_len;
   const char *chunkname;
   const char *const *modules; /* NULL-terminated array, or NULL */
   const char *const *sqls;    /* NULL-terminated array, or NULL */
-};
+} wowless_impl_data;
 
-struct wowless_stub_entry {
+typedef struct wowless_stub_entry {
   const char *name;
   lua_CFunction func;
   int secureonly;
-  const struct wowless_impl_data *impldata; /* NULL for C stub entries */
-};
+  const wowless_impl_data *impldata; /* NULL for C stub entries */
+} wowless_stub_entry;
 
-struct wowless_ns_entry {
+typedef struct wowless_ns_entry {
   const char *ns;
-  const struct wowless_stub_entry *entries;
-};
+  const wowless_stub_entry *entries;
+} wowless_ns_entry;
 
-struct wowless_stubs_spec {
-  const struct wowless_stub_entry *global;
-  const struct wowless_ns_entry *ns;
-};
+typedef struct wowless_stubs_spec {
+  const wowless_stub_entry *global;
+  const wowless_ns_entry *ns;
+} wowless_stubs_spec;
 
-struct wowless_luaobject_type_entry {
+typedef struct wowless_luaobject_type_entry {
   const char *type_name;
   int type_id;
-  const struct wowless_stub_entry *methods;
-};
+  const wowless_stub_entry *methods;
+} wowless_luaobject_type_entry;
 
-struct wowless_uiobject_method_entry {
+typedef struct wowless_uiobject_method_entry {
   const char *key;
   lua_CFunction func;
-};
+} wowless_uiobject_method_entry;
 
 int wowless_load_stubs(lua_State *L);
 int wowless_load_luaobject_stubs(lua_State *L);
