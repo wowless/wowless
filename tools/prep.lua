@@ -1111,6 +1111,18 @@ if args.coutput then
     emit('static void wowless_implcheckuiobject_%s(lua_State *L, int idx);', safename(uname))
     emit('static void wowless_implchecknilableuiobject_%s(lua_State *L, int idx);', safename(uname))
   end
+  emit('static bool wowless_istextureasset(lua_State *L, int idx) {')
+  emit('  return lua_isstring(L, idx) || wowless_isuiobject_TextureBase(L, idx);')
+  emit('}')
+  emit('static bool wowless_isnilabletextureasset(lua_State *L, int idx) {')
+  emit('  return lua_isnoneornil(L, idx) || wowless_istextureasset(L, idx);')
+  emit('}')
+  emit('static void wowless_stubchecktextureasset(lua_State *L, int idx) {')
+  emit('  if (!wowless_istextureasset(L, idx)) luaL_typerror(L, idx, "TextureAsset");')
+  emit('}')
+  emit('static void wowless_stubchecknilabletextureasset(lua_State *L, int idx) {')
+  emit('  if (!wowless_isnilabletextureasset(L, idx)) luaL_typerror(L, idx, "TextureAsset");')
+  emit('}')
   emit('')
   for loname in sorted(luaobjectdata) do
     emit('static bool wowless_isluaobject_%s(lua_State *L, int idx);', safename(loname))
