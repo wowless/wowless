@@ -400,65 +400,6 @@ local uiobjectimplmakers = {
       sandboxmodules = { 'gencode' },
     }
   end,
-  none = function(mv, k)
-    local ins = mv.inputs or {}
-    local nsins = #ins - (mv.instride or 0)
-    -- sandbox impl: original code with gencode.Check input validation and specDefault outputs
-    local sb = { 'local gencode=...;' }
-    table.insert(sb, string.format('local selfspec={name="self",type={uiobject=%q}};', k))
-    for i = 1, #ins do
-      table.insert(sb, 'local spec' .. i .. '=' .. prettywrite(mv.inputs[i], true) .. ';')
-    end
-    table.insert(sb, 'return function(')
-    local sba = { 'obj' }
-    for i = 1, nsins do
-      table.insert(sba, 'arg' .. i)
-    end
-    if mv.instride then
-      table.insert(sba, '...')
-    end
-    table.insert(sb, table.concat(sba, ','))
-    table.insert(sb, ')')
-    table.insert(sb, 'gencode.Check(selfspec,obj);')
-    for i = 1, nsins do
-      table.insert(sb, 'gencode.Check(spec' .. i .. ',arg' .. i .. ');')
-    end
-    if mv.instride then
-      table.insert(sb, 'for i=1,select("#",...),' .. mv.instride .. ' do ')
-      table.insert(sb, 'local arg' .. nsins + 1)
-      for i = nsins + 2, #ins do
-        table.insert(sb, ',arg' .. i)
-      end
-      table.insert(sb, '=select(i,...);')
-      for i = nsins + 1, #ins do
-        table.insert(sb, 'gencode.Check(spec' .. i .. ',arg' .. i .. ');')
-      end
-      table.insert(sb, 'end ')
-    end
-    local outs = mv.outputs or {}
-    if #outs > 0 and not mv.stubnothing then
-      table.insert(sb, 'return ')
-      local rets = {}
-      local nonstride = #outs - (mv.outstride or 0)
-      for i = 1, nonstride do
-        table.insert(rets, specDefault(outs[i]))
-      end
-      for _ = 1, mv.stuboutstrides or 1 do
-        for j = nonstride + 1, #outs do
-          table.insert(rets, specDefault(outs[j]))
-        end
-      end
-      table.insert(sb, table.concat(rets, ','))
-    end
-    table.insert(sb, ' end')
-    return {
-      impl = 'return function(_,...) end',
-      modules = {},
-      sandboximpl = table.concat(sb),
-      sandboxmodules = { 'gencode' },
-      secureonly = mv.secureonly,
-    }
-  end,
   setter = function(impl, mv, k)
     -- sandbox impl: original code with gencode.Check converting sandbox reps to internal uds
     local sb = { 'local gencode=...;' }
@@ -582,7 +523,9 @@ for k, v in pairs(uiobjectdata) do
   table.insert(constructor, '}end')
   local methods = {}
   for mk, mv in pairs(v.methods) do
-    methods[mk] = dispatch(uiobjectimplmakers, mv.impl or 'none', mv, k)
+    if mv.impl then
+      methods[mk] = dispatch(uiobjectimplmakers, mv.impl, mv, k)
+    end
   end
   local scripts = {}
   for sk in pairs(v.scripts or {}) do
@@ -953,13 +896,19 @@ if args.coutput then
     end
     for typename in sorted(uiobjectdata) do
       for mname, mv_raw in sorted(uiobjectdata[typename].methods or {}) do
-        if not mv_raw.impl and is_uimethod_cstub_eligible(mv_raw) then
+        if not mv_raw.impl then
+          assert(
+            is_uimethod_cstub_eligible(mv_raw),
+            typename .. ':' .. mname .. ' has no impl and is not C-stub eligible'
+          )
           local key = typename .. ':' .. mname
           table.insert(eligible_uimethods, { typename = typename, mname = mname, mv = mv_raw, key = key })
-          local entry = uiobjects[typename].methods[mname]
-          entry.cstub = true
-          entry.sandboximpl = nil
-          entry.sandboxmodules = nil
+          uiobjects[typename].methods[mname] = {
+            cstub = true,
+            impl = 'return function(_,...) end',
+            modules = {},
+            secureonly = mv_raw.secureonly,
+          }
         end
       end
     end
