@@ -4,6 +4,7 @@
 extern "C" {
 #include "lauxlib.h"
 #include "lua.h"
+#include "wowless/bubblewrap.h"
 #include "wowless/luaobject.h"
 #include "wowless/stubs.h"
 #include "wowless/uiobject.h"
