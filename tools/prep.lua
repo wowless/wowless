@@ -783,6 +783,9 @@ if args.coutput then
     uiobject = function(name)
       return name
     end,
+    unit = function()
+      return 'player'
+    end,
     unknown = function()
       return nil
     end,
@@ -935,9 +938,6 @@ if args.coutput then
   local eligible_uimethods = {}
   do
     local function is_uimethod_cstub_eligible(mv)
-      if mv.instride or mv.outstride then
-        return false
-      end
       return pcall(function()
         for _, inp in ipairs(mv.inputs or {}) do
           dispatch(cinputtypes, inp.type)
@@ -1314,89 +1314,34 @@ if args.coutput then
     end
   end
 
-  -- UIObject method C stubs
-  for _, entry in ipairs(eligible_uimethods) do
-    local typename, mname, mv = entry.typename, entry.mname, entry.mv
-    local inputs = mv.inputs or {}
-    local outputs = not mv.stubnothing and mv.outputs or {}
-    emit('static int stub_uimethod_%s_%s(lua_State *L) {', safename(typename), safename(mname))
-    if mv.secureonly then
-      emit('  if (wowless_forbidden(L)) return 0;')
-    end
-    emit('  wowless_stubcheckuiobject_%s(L, 1);', safename(typename))
-    for i, inp in ipairs(inputs) do
-      local nilable = inp.nilable or inp.default ~= nil
-      emit('  %s;', dispatch(cinputtypes, inp.type)('stubcheck', nilable, i + 1))
-    end
-    if mv.inputs ~= nil then
-      emit('  wowless_stubcheckextraargs(L, %d, %s);', #inputs + 1, cstring(entry.key))
-    end
-    for _, out in ipairs(outputs) do
-      local val
-      if out.stub ~= nil then
-        val = out.stub
-      elseif out.default ~= nil then
-        val = out.default
-      elseif not out.nilable or out.stubnotnil then
-        val = dispatch(coutdefaults, out.type)
-      end
-      if val == nil then
-        emit('  lua_pushnil(L);')
-      else
-        dispatch(coutpushers, out.type, val)
-      end
-    end
-    emit('  return %d;', #outputs)
-    emit('}')
-    emit('')
-  end
-
-  for _, entry in ipairs(eligible) do
-    local k, v = entry.name, entry.cfg
-    emit('static int stub_%s(lua_State *L) {', safename(k))
-    if v.protected then
-      emit('  if (wowless_forbidden(L)) return 0;')
-    end
-    local allinps = v.inputs or {}
-    local instride = v.instride or 0
+  local function emit_stub_body(key, cfg, arg_offset, inputcheck)
+    local allinps = cfg.inputs or {}
+    local instride = cfg.instride or 0
     local nsins = #allinps - instride
-    local function check(inp, idx)
-      local nilable = inp.nilable or inp.default ~= nil
-      return dispatch(cinputtypes, inp.type)('stubcheck', nilable, idx) .. ';'
-    end
-    local function usagecheck(inp, idx)
-      local nilable = inp.nilable or inp.default ~= nil
-      return ('if (!%s) return luaL_error(L, %s);'):format(
-        dispatch(cinputtypes, inp.type)('is', nilable, idx),
-        cstring('Usage: ' .. v.usage)
-      )
-    end
-    local inputcheck = v.usage and usagecheck or check
     for i = 1, nsins do
-      emit('  %s', inputcheck(allinps[i], i))
+      emit('  %s', inputcheck(allinps[i], i + arg_offset))
     end
     if instride > 0 then
       emit('  int i, n = lua_gettop(L);')
-      emit('  for (i = %d; i <= n; i += %d) {', nsins + 1, instride)
+      emit('  for (i = %d; i <= n; i += %d) {', nsins + 1 + arg_offset, instride)
       for j = nsins + 1, #allinps do
         emit('    %s', inputcheck(allinps[j], 'i + ' .. (j - nsins - 1)))
       end
       emit('  }')
     end
-    if v.inputs ~= nil and instride == 0 then
-      emit('  wowless_stubcheckextraargs(L, %d, %s);', nsins, cstring(k))
+    if cfg.inputs ~= nil and instride == 0 then
+      emit('  wowless_stubcheckextraargs(L, %d, %s);', nsins + arg_offset, cstring(key))
     end
-    local allouts = not v.stubnothing and v.outputs or {}
-    local outstride = v.outstride or 0
+    local allouts = not cfg.stubnothing and cfg.outputs or {}
+    local outstride = cfg.outstride or 0
     local nonstride = #allouts - outstride
-    local stuboutstrides = v.stuboutstrides
     local outs
-    if stuboutstrides ~= nil then
+    if cfg.stuboutstrides ~= nil then
       outs = {}
       for i = 1, nonstride do
         table.insert(outs, allouts[i])
       end
-      for _ = 1, stuboutstrides do
+      for _ = 1, cfg.stuboutstrides do
         for j = nonstride + 1, #allouts do
           table.insert(outs, allouts[j])
         end
@@ -1420,6 +1365,45 @@ if args.coutput then
       end
     end
     emit('  return %d;', #outs)
+  end
+
+  local function stub_inputcheck(inp, idx)
+    local nilable = inp.nilable or inp.default ~= nil
+    return dispatch(cinputtypes, inp.type)('stubcheck', nilable, idx) .. ';'
+  end
+
+  -- UIObject method C stubs
+  for _, entry in ipairs(eligible_uimethods) do
+    local typename, mname, mv = entry.typename, entry.mname, entry.mv
+    emit('static int stub_uimethod_%s_%s(lua_State *L) {', safename(typename), safename(mname))
+    if mv.secureonly then
+      emit('  if (wowless_forbidden(L)) return 0;')
+    end
+    emit('  wowless_stubcheckuiobject_%s(L, 1);', safename(typename))
+    emit_stub_body(entry.key, mv, 1, stub_inputcheck)
+    emit('}')
+    emit('')
+  end
+
+  for _, entry in ipairs(eligible) do
+    local k, v = entry.name, entry.cfg
+    emit('static int stub_%s(lua_State *L) {', safename(k))
+    if v.protected then
+      emit('  if (wowless_forbidden(L)) return 0;')
+    end
+    local inputcheck
+    if v.usage then
+      inputcheck = function(inp, idx)
+        local nilable = inp.nilable or inp.default ~= nil
+        return ('if (!%s) return luaL_error(L, %s);'):format(
+          dispatch(cinputtypes, inp.type)('is', nilable, idx),
+          cstring('Usage: ' .. v.usage)
+        )
+      end
+    else
+      inputcheck = stub_inputcheck
+    end
+    emit_stub_body(k, v, 0, inputcheck)
     emit('}')
     emit('')
   end
