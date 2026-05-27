@@ -236,8 +236,9 @@ Key files:
 - CMakeLists wires the generated C file into `datalua_${product}` via
   `target_sources` and registers it as a cmodule (`build.products.X.stubs=c`)
   in the `lua2c()` call.
-- `apiloader.lua` loads `build.products.<product>.stubs` and uses the C
-  function directly (no `bubblewrap`) for `cstub`-flagged APIs.
+- `wowless/modules/cstubs.lua` requires `build.products.<product>.stubs`
+  (the generated C module). `env.lua` calls `modules.cstubs.load(modules)`
+  to populate the global environment with all API stubs.
 - To add a C-provided module to a `lua2c()` target, use `modulename=c` in
   the argument list and add the C source with `target_sources`.
 
