@@ -821,6 +821,7 @@ if args.coutput then
     FileAsset = simple_cinputtype('fileasset'),
     ['function'] = simple_cinputtype('function'),
     gender = simple_cinputtype('gender'),
+    ['nil'] = simple_cinputtype('nil'),
     luaobject = function(name)
       return function(verb, nilable, idx)
         local ns = nilable and 'nilable' or ''
