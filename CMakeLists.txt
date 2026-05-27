@@ -4,24 +4,12 @@ set(CMAKE_TOOLCHAIN_FILE
     ${CMAKE_CURRENT_SOURCE_DIR}/vcpkg/scripts/buildsystems/vcpkg.cmake
     CACHE STRING "Vcpkg toolchain file")
 
-project(wowless LANGUAGES C CXX)
-
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
+project(wowless LANGUAGES C)
 
 include(CheckCCompilerFlag)
 check_c_compiler_flag(-ffast-math HAVE_FFAST_MATH)
 if(HAVE_FFAST_MATH)
   add_compile_options(-ffast-math)
-endif()
-
-include(CheckCXXCompilerFlag)
-check_cxx_compiler_flag(-fno-exceptions HAVE_FNO_EXCEPTIONS)
-check_cxx_compiler_flag(/EH- HAVE_EH_MINUS)
-if(HAVE_FNO_EXCEPTIONS)
-  add_compile_options($<$<COMPILE_LANGUAGE:CXX>:-fno-exceptions>)
-elseif(HAVE_EH_MINUS)
-  add_compile_options($<$<COMPILE_LANGUAGE:CXX>:/EH->)
 endif()
 
 set(elune_SOURCE_DIR vendor/elune)
@@ -502,11 +490,11 @@ add_lua_executable(
 foreach(product ${products})
   add_custom_command(
     OUTPUT stamp/${product}.txt
-    BYPRODUCTS runtime/${product}.lua generated/${product}_stubs.cpp
+    BYPRODUCTS runtime/${product}.lua generated/${product}_stubs.c
     COMMAND
       prep ${product} --sqls ${CMAKE_CURRENT_BINARY_DIR}/runtime/sqls.yaml
       --output ${CMAKE_CURRENT_BINARY_DIR}/generated/${product}.lua --coutput
-      ${CMAKE_CURRENT_BINARY_DIR}/generated/${product}_stubs.cpp
+      ${CMAKE_CURRENT_BINARY_DIR}/generated/${product}_stubs.c
     COMMAND
       ${CMAKE_COMMAND} -E copy_if_different
       ${CMAKE_CURRENT_BINARY_DIR}/generated/${product}.lua
@@ -523,7 +511,7 @@ foreach(product ${products})
         build.products.${product}.stubs=c)
   target_sources(
     datalua_${product}
-    PRIVATE ${CMAKE_CURRENT_BINARY_DIR}/generated/${product}_stubs.cpp)
+    PRIVATE ${CMAKE_CURRENT_BINARY_DIR}/generated/${product}_stubs.c)
   add_dependencies(datalua_${product} datalua_${product}_lua)
   list(APPEND dataluas datalua_${product})
 endforeach()
@@ -883,7 +871,7 @@ target_sources(
           wowless/luaobject.c
           wowless/modules/encodingutil.c
           wowless/secure.c
-          wowless/stubs.cpp
+          wowless/stubs.c
           wowless/uiobject.c)
 
 add_lua_executable(

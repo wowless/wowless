@@ -1,9 +1,7 @@
-extern "C" {
 #include "wowless/stubs.h"
 
 #include "lauxlib.h"
 #include "wowless/bubblewrap.h"
-}
 
 int wowless_impl_stub(lua_State *L) {
   lua_pushvalue(L, lua_upvalueindex(2));
@@ -101,8 +99,8 @@ void wowless_stub_log_extra_args(lua_State *L, const char *fname) {
 }
 
 int wowless_load_luaobject_stubs(lua_State *L) {
-  const auto *spec = static_cast<const wowless_luaobject_type_entry *>(
-      lua_touserdata(L, lua_upvalueindex(1)));
+  const wowless_luaobject_type_entry *spec =
+      lua_touserdata(L, lua_upvalueindex(1));
   lua_getfield(L, 1, "cgencode");
   lua_insert(L, 1);
   /* Stack: [cgencode, modules] */
@@ -113,7 +111,8 @@ int wowless_load_luaobject_stubs(lua_State *L) {
     lua_pushinteger(L, t->type_id);
     lua_setfield(L, -2, "typeid");
     load_entries(L, t->methods);
-    /* Stack: [cgencode, modules, result, type_info, sandbox_methods, host_methods] */
+    /* Stack: [cgencode, modules, result, type_info, sandbox_methods,
+     * host_methods] */
     lua_pop(L, 1); /* discard host_methods */
     lua_setfield(L, -2, "methods");
     lua_setfield(L, -2, t->type_name);
@@ -122,19 +121,19 @@ int wowless_load_luaobject_stubs(lua_State *L) {
 }
 
 static int make_uiobject_method_stub(lua_State *L) {
-  auto fn = reinterpret_cast<lua_CFunction>(lua_touserdata(L, lua_upvalueindex(1)));
+  lua_CFunction fn = (lua_CFunction)lua_touserdata(L, lua_upvalueindex(1));
   lua_pushvalue(L, lua_upvalueindex(2)); /* cgencode */
   lua_pushcclosure(L, fn, 1);
   return 1;
 }
 
 int wowless_load_uiobject_method_stubs(lua_State *L) {
-  const auto *spec = static_cast<const wowless_uiobject_method_entry *>(
-      lua_touserdata(L, lua_upvalueindex(1)));
+  const wowless_uiobject_method_entry *spec =
+      lua_touserdata(L, lua_upvalueindex(1));
   /* arg 1 is cgencode directly */
   lua_newtable(L);
-  for (const auto *e = spec; e->key; e++) {
-    lua_pushlightuserdata(L, reinterpret_cast<void *>(e->func));
+  for (const wowless_uiobject_method_entry *e = spec; e->key; e++) {
+    lua_pushlightuserdata(L, (void *)e->func);
     lua_pushvalue(L, 1); /* cgencode */
     lua_pushcclosure(L, make_uiobject_method_stub, 2);
     lua_setfield(L, -2, e->key);
@@ -143,8 +142,7 @@ int wowless_load_uiobject_method_stubs(lua_State *L) {
 }
 
 int wowless_load_stubs(lua_State *L) {
-  const auto *spec =
-      static_cast<const wowless_stubs_spec *>(lua_touserdata(L, lua_upvalueindex(1)));
+  const wowless_stubs_spec *spec = lua_touserdata(L, lua_upvalueindex(1));
   lua_getfield(L, 1, "cgencode");
   lua_insert(L, 1);
   load_entries(L, spec->global);
