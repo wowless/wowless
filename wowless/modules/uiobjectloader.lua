@@ -2,7 +2,8 @@ local util = require('wowless.util')
 local bubblewrap = require('wowless.bubblewrap')
 local Mixin = util.mixin
 
-return function(datalua, funcheck, gencode, sqls, uiobjectsmodule, uiobjecttypes)
+return function(cgencode, cstubs, datalua, funcheck, gencode, sqls, uiobjectsmodule, uiobjecttypes)
+  local uiobjectmethodstubs = cstubs.loaduiobjectmethods(cgencode)
   local InheritsFrom = uiobjecttypes.InheritsFrom
   local UserData = uiobjectsmodule.UserData
 
@@ -97,7 +98,9 @@ return function(datalua, funcheck, gencode, sqls, uiobjectsmodule, uiobjecttypes
         end
         local rawfn = mkfn(unpack(args))
         local sandboxDispatch
-        if method.sandboximpl then
+        if method.cstub then
+          sandboxDispatch = uiobjectmethodstubs[fname]
+        elseif method.sandboximpl then
           local sbmkfn = assert(loadstring_untainted(method.sandboximpl, src), fname)
           local sbargs = {}
           for _, sm in ipairs(method.sandboxmodules or {}) do

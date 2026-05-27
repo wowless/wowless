@@ -121,6 +121,19 @@ int wowless_load_luaobject_stubs(lua_State *L) {
   return 1;
 }
 
+int wowless_load_uiobject_method_stubs(lua_State *L) {
+  const auto *spec = static_cast<const wowless_uiobject_method_entry *>(
+      lua_touserdata(L, lua_upvalueindex(1)));
+  /* arg 1 is cgencode directly */
+  lua_newtable(L);
+  for (const auto *e = spec; e->key; e++) {
+    lua_pushvalue(L, 1); /* cgencode */
+    lua_pushcclosure(L, e->func, 1);
+    lua_setfield(L, -2, e->key);
+  }
+  return 1;
+}
+
 int wowless_load_stubs(lua_State *L) {
   const auto *spec =
       static_cast<const wowless_stubs_spec *>(lua_touserdata(L, lua_upvalueindex(1)));

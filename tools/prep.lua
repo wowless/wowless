@@ -931,6 +931,38 @@ if args.coutput then
     end
   end
 
+  -- Collect eligible UIObject method C stubs and update their sandboximpl to delegate
+  local eligible_uimethods = {}
+  do
+    local function is_uimethod_cstub_eligible(mv)
+      if mv.instride or mv.outstride then
+        return false
+      end
+      return pcall(function()
+        for _, inp in ipairs(mv.inputs or {}) do
+          dispatch(cinputtypes, inp.type)
+        end
+        if not mv.stubnothing then
+          for _, out in ipairs(mv.outputs or {}) do
+            dispatch(coutdefaults, out.type)
+          end
+        end
+      end)
+    end
+    for typename in sorted(uiobjectdata) do
+      for mname, mv_raw in sorted(uiobjectdata[typename].methods or {}) do
+        if not mv_raw.impl and is_uimethod_cstub_eligible(mv_raw) then
+          local key = typename .. ':' .. mname
+          table.insert(eligible_uimethods, { typename = typename, mname = mname, mv = mv_raw, key = key })
+          local entry = uiobjects[typename].methods[mname]
+          entry.cstub = true
+          entry.sandboximpl = nil
+          entry.sandboxmodules = nil
+        end
+      end
+    end
+  end
+
   -- Assign integer typeids to all luaobject types (sorted for determinism)
   local luaobject_typeids = {}
   do
@@ -1280,6 +1312,43 @@ if args.coutput then
         emit('')
       end
     end
+  end
+
+  -- UIObject method C stubs
+  for _, entry in ipairs(eligible_uimethods) do
+    local typename, mname, mv = entry.typename, entry.mname, entry.mv
+    local inputs = mv.inputs or {}
+    local outputs = not mv.stubnothing and mv.outputs or {}
+    emit('static int stub_uimethod_%s_%s(lua_State *L) {', safename(typename), safename(mname))
+    if mv.secureonly then
+      emit('  if (wowless_forbidden(L)) return 0;')
+    end
+    emit('  wowless_stubcheckuiobject_%s(L, 1);', safename(typename))
+    for i, inp in ipairs(inputs) do
+      local nilable = inp.nilable or inp.default ~= nil
+      emit('  %s;', dispatch(cinputtypes, inp.type)('stubcheck', nilable, i + 1))
+    end
+    if mv.inputs ~= nil then
+      emit('  wowless_stubcheckextraargs(L, %d, %s);', #inputs + 1, cstring(entry.key))
+    end
+    for _, out in ipairs(outputs) do
+      local val
+      if out.stub ~= nil then
+        val = out.stub
+      elseif out.default ~= nil then
+        val = out.default
+      elseif not out.nilable or out.stubnotnil then
+        val = dispatch(coutdefaults, out.type)
+      end
+      if val == nil then
+        emit('  lua_pushnil(L);')
+      else
+        dispatch(coutpushers, out.type, val)
+      end
+    end
+    emit('  return %d;', #outputs)
+    emit('}')
+    emit('')
   end
 
   for _, entry in ipairs(eligible) do
@@ -1640,6 +1709,14 @@ if args.coutput then
   emit('  {nullptr, 0, nullptr}')
   emit('};')
   emit('')
+  -- UIObject method entry array
+  emit('static const struct wowless_uiobject_method_entry uiobject_method_entries[] = {')
+  for _, entry in ipairs(eligible_uimethods) do
+    emit('  {%s, stub_uimethod_%s_%s},', cstring(entry.key), safename(entry.typename), safename(entry.mname))
+  end
+  emit('  {nullptr, nullptr}')
+  emit('};')
+  emit('')
   emit('extern "C" int luaopen_build_products_%s_stubs(lua_State *L) {', product)
   emit('  lua_newtable(L);')
   emit('  lua_pushlightuserdata(L, static_cast<void *>(const_cast<wowless_stubs_spec *>(&stubs_spec)));')
@@ -1650,6 +1727,9 @@ if args.coutput then
   emit('  lua_pushlightuserdata(L, static_cast<void *>(const_cast<wowless_luaobject_type_entry *>(lo_types)));')
   emit('  lua_pushcclosure(L, wowless_load_luaobject_stubs, 1);')
   emit('  lua_setfield(L, -2, "loadluaobjects");')
+  emit('  lua_pushlightuserdata(L, (void *)uiobject_method_entries);')
+  emit('  lua_pushcclosure(L, wowless_load_uiobject_method_stubs, 1);')
+  emit('  lua_setfield(L, -2, "loaduiobjectmethods");')
   emit('  return 1;')
   emit('}')
 
