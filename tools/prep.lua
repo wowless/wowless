@@ -819,6 +819,7 @@ if args.coutput then
     boolean = simple_cinputtype('boolean'),
     enum = simple_cinputtype('enum'),
     FileAsset = simple_cinputtype('fileasset'),
+    TextureAsset = simple_cinputtype('textureasset'),
     ['function'] = simple_cinputtype('function'),
     gender = simple_cinputtype('gender'),
     ['nil'] = simple_cinputtype('nil'),
