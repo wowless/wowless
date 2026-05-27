@@ -44,8 +44,8 @@ return function(cgencode, cstubs, datalua, funcheck, gencode, sqls, uiobjectsmod
     local t = {}
     for k, v in pairs(result) do
       local sandboxMTindex = {}
-      for n, fn in pairs(v.sandboxindex) do
-        sandboxMTindex[n] = bubblewrap(fn)
+      for n, factory in pairs(v.sandboxindex) do
+        sandboxMTindex[n] = factory()
       end
       t[k] = {
         constructor = v.constructor,
@@ -97,16 +97,19 @@ return function(cgencode, cstubs, datalua, funcheck, gencode, sqls, uiobjectsmod
           table.insert(args, (assert(sqls[sql], sql)))
         end
         local rawfn = mkfn(unpack(args))
-        local sandboxDispatch
+        local sandboxFactory
         if method.cstub then
-          sandboxDispatch = uiobjectmethodstubs[fname]
+          sandboxFactory = uiobjectmethodstubs[fname]
         elseif method.sandboximpl then
           local sbmkfn = assert(loadstring_untainted(method.sandboximpl, src), fname)
           local sbargs = {}
           for _, sm in ipairs(method.sandboxmodules or {}) do
             table.insert(sbargs, (assert(modules[sm], sm)))
           end
-          sandboxDispatch = sbmkfn(unpack(sbargs))
+          local sandboxDispatch = sbmkfn(unpack(sbargs))
+          sandboxFactory = function()
+            return bubblewrap(sandboxDispatch)
+          end
         else
           local wrappedfn = wrap(fname, rawfn)
           local sandboxfn
@@ -125,12 +128,15 @@ return function(cgencode, cstubs, datalua, funcheck, gencode, sqls, uiobjectsmod
               return outcheck(wrappedfn(self, incheck(...)))
             end
           end
-          sandboxDispatch = function(obj, ...)
+          local sandboxDispatch = function(obj, ...)
             return sandboxfn(UserData(obj), ...)
+          end
+          sandboxFactory = function()
+            return bubblewrap(sandboxDispatch)
           end
         end
         hostindex[mname] = rawfn
-        sandboxindex[mname] = sandboxDispatch
+        sandboxindex[mname] = sandboxFactory
       end
       uiobjects[name] = {
         cfg = cfg,
