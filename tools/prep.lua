@@ -396,29 +396,7 @@ local uiobjectimplmakers = {
       modules = {},
     }
   end,
-  setter = function(impl, mv, k)
-    -- sandbox impl: original code with gencode.Check converting sandbox reps to internal uds
-    local sb = { 'local gencode=...;' }
-    table.insert(sb, string.format('local selfspec={name="self",type={uiobject=%q}};', k))
-    for i in ipairs(impl) do
-      table.insert(sb, 'local spec' .. i .. '=' .. prettywrite(mv.inputs[i], true) .. ';')
-    end
-    table.insert(sb, 'return function(obj')
-    for _, f in ipairs(impl) do
-      table.insert(sb, ',')
-      table.insert(sb, f.name)
-    end
-    table.insert(sb, ')local self=gencode.Check(selfspec,obj);')
-    for i, f in ipairs(impl) do
-      table.insert(sb, 'self.')
-      table.insert(sb, f.name)
-      table.insert(sb, '=gencode.Check(spec')
-      table.insert(sb, tostring(i))
-      table.insert(sb, ',')
-      table.insert(sb, f.name)
-      table.insert(sb, ');')
-    end
-    table.insert(sb, 'end')
+  setter = function(impl, mv)
     -- host impl: direct field assignment, applying defaults for optional args
     local t = { 'return function(self' }
     for _, f in ipairs(impl) do
@@ -440,10 +418,9 @@ local uiobjectimplmakers = {
     end
     table.insert(t, 'end')
     return {
+      cstub = true,
       impl = table.concat(t),
       modules = {},
-      sandboximpl = table.concat(sb),
-      sandboxmodules = { 'gencode' },
     }
   end,
   settexture = function(impl, _, k)
@@ -1324,6 +1301,43 @@ if args.coutput then
         end
       end
       emit('  return %d;', #mv.impl.getter)
+    elseif mv.impl and mv.impl.setter then
+      local impl_fields = mv.impl.setter
+      local inputs = mv.inputs or {}
+      emit('  wowless_implcheckuiobject_%s(L, 1);', safename(k))
+      for i, inp in ipairs(inputs) do
+        local nilable = inp.nilable or inp.default ~= nil
+        -- Font objects can be passed as global name strings (typecheck.lua special case)
+        if type(inp.type) == 'table' and inp.type.uiobject == 'Font' then
+          emit('  if (lua_type(L, %d) == LUA_TSTRING) {', i + 1)
+          emit('    lua_getglobal(L, lua_tostring(L, %d));', i + 1)
+          emit('    lua_replace(L, %d);', i + 1)
+          emit('  }')
+        end
+        emit('  %s;', dispatch(cinputtypes, inp.type)('implcheck', nilable, i + 1))
+      end
+      emit('  wowless_stubcheckextraargs(L, %d, %s);', #impl_fields + 1, cstring(key))
+      for i, f in ipairs(impl_fields) do
+        local spec = inputs[i]
+        if spec and spec.default ~= nil then
+          emit('  if (lua_isnoneornil(L, %d)) {', i + 1)
+          if type(spec.default) == 'boolean' then
+            emit('    lua_pushboolean(L, %d);', spec.default and 1 or 0)
+          elseif type(spec.default) == 'number' then
+            emit('    lua_pushnumber(L, %g);', spec.default)
+          else
+            error('unsupported setter default type: ' .. type(spec.default))
+          end
+          emit('  } else {')
+          emit('    lua_pushvalue(L, %d);', i + 1)
+          emit('  }')
+        else
+          emit('  lua_pushvalue(L, %d);', i + 1)
+        end
+        emit('  lua_setvaluetaint(L, -1, NULL);')
+        emit('  lua_setfield(L, 1, %s);', cstring(f.name))
+      end
+      emit('  return 0;')
     else
       emit('  wowless_stubcheckuiobject_%s(L, 1);', safename(k))
       emit_stub_body(key, mv, 1, stub_inputcheck)
