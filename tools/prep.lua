@@ -1310,7 +1310,6 @@ if args.coutput then
         emit('  %s;', dispatch(cinputtypes, inp.type)('stubcheck', nilable, i + 1))
       end
       emit('  wowless_stubcheckextraargs(L, %d, %s);', #impl_fields + 1, cstring(key))
-      emit('  const char *intaint = wowless_bubblewrap_cstub_enter(L);')
       emit('  wowless_implcheckuiobject_%s(L, 1);', safename(k))
       for i, f in ipairs(impl_fields) do
         local spec = inputs[i]
@@ -1332,9 +1331,9 @@ if args.coutput then
         else
           emit('  lua_pushvalue(L, %d);', i + 1)
         end
+        emit('  lua_setvaluetaint(L, -1, NULL);')
         emit('  lua_setfield(L, 1, %s);', cstring(f.name))
       end
-      emit('  wowless_bubblewrap_cstub_exit(L, intaint);')
       emit('  return 0;')
     else
       emit('  wowless_stubcheckuiobject_%s(L, 1);', safename(k))
