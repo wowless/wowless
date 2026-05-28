@@ -7,8 +7,6 @@ local args = (function()
   return parser:parse()
 end)()
 
-local product = args.product
-
 local deps = {} -- accumulated during runtime
 
 local function parseYaml(f)
@@ -23,6 +21,7 @@ local prettywrite = require('tools.prettywrite')
 local Mixin = require('wowless.util').mixin
 local sorted = require('pl.tablex').sort
 
+local product = args.product
 local globals = parseYaml('data/products/' .. product .. '/globals.yaml')
 local structures = parseYaml('data/products/' .. product .. '/structures.yaml')
 local stringenums = parseYaml('data/stringenums.yaml')
@@ -215,6 +214,7 @@ local impl_input_types = {
   luaobject = nop,
   number = nop,
   string = nop,
+  stringenum = nop,
   structure = nop,
   table = nop,
   uiAddon = nop,
@@ -238,6 +238,7 @@ impl_output_types = {
   number = nop,
   oneornil = nop,
   string = nop,
+  stringenum = nop,
   structure = nop,
   table = nop,
   uiobject = nop,
@@ -773,8 +774,19 @@ if args.coutput then
     number = simple_cinputtype('number'),
     string = simple_cinputtype('string'),
     stringenum = function(name)
+      local n = 0
+      for _ in pairs(stringenums[name]) do
+        n = n + 1
+      end
       return function(verb, nilable, idx)
-        return string.format('wowless_%s%sstringenum_%s(L, %s)', verb, nilable and 'nilable' or '', safename(name), idx)
+        return string.format(
+          'wowless_%s%sstringenum(L, %s, wowless_stringenum_%s_values, %d)',
+          verb,
+          nilable and 'nilable' or '',
+          idx,
+          safename(name),
+          n
+        )
       end
     end,
     structure = function(name)
@@ -822,6 +834,20 @@ if args.coutput then
     number = simple_coutputtype('number'),
     oneornil = simple_coutputtype('oneornil'),
     string = simple_coutputtype('string'),
+    stringenum = function(name, nilable, idx)
+      local n = 0
+      for _ in pairs(stringenums[name]) do
+        n = n + 1
+      end
+      local ns = nilable and 'nilable' or ''
+      return string.format(
+        'wowless_imploutput%sstringenum(L, %s, wowless_stringenum_%s_values, %d)',
+        ns,
+        idx,
+        safename(name),
+        n
+      )
+    end,
     structure = function(name, nilable, idx)
       return string.format('wowless_stubcheck%sstruct_%s(L, %s)', nilable and 'nilable' or '', safename(name), idx)
     end,
@@ -1006,11 +1032,21 @@ if args.coutput then
   if next(structures) then
     emit('')
   end
-  for sename in sorted(stringenums) do
-    emit('static bool wowless_isstringenum_%s(lua_State *L, int idx);', safename(sename))
-    emit('static bool wowless_isnilablestringenum_%s(lua_State *L, int idx);', safename(sename))
-    emit('static void wowless_stubcheckstringenum_%s(lua_State *L, int idx);', safename(sename))
-    emit('static void wowless_stubchecknilablestringenum_%s(lua_State *L, int idx);', safename(sename))
+  for sename, sevalues in sorted(stringenums) do
+    local values = {}
+    for k in pairs(sevalues) do
+      values[#values + 1] = k
+    end
+    table.sort(values)
+    local entries = {}
+    for _, v in ipairs(values) do
+      entries[#entries + 1] = cstring(v)
+    end
+    emit(
+      'static const char * const wowless_stringenum_%s_values[] = {%s};',
+      safename(sename),
+      table.concat(entries, ', ')
+    )
   end
   if next(stringenums) then
     emit('')
@@ -1054,25 +1090,6 @@ if args.coutput then
     emit('  if (!lua_isnoneornil(L, idx)) {')
     emit('    wowless_stubcheckstruct_%s(L, idx);', safename(sname))
     emit('  }')
-    emit('}')
-    emit('')
-  end
-
-  for sename in sorted(stringenums) do
-    emit('static bool wowless_isstringenum_%s(lua_State *L, int idx) {', safename(sename))
-    emit('  return wowless_isstringenum(L, idx, %s);', cstring(sename))
-    emit('}')
-    emit('')
-    emit('static bool wowless_isnilablestringenum_%s(lua_State *L, int idx) {', safename(sename))
-    emit('  return wowless_isnilablestringenum(L, idx, %s);', cstring(sename))
-    emit('}')
-    emit('')
-    emit('static void wowless_stubcheckstringenum_%s(lua_State *L, int idx) {', safename(sename))
-    emit('  wowless_stubcheckstringenum(L, idx, %s);', cstring(sename))
-    emit('}')
-    emit('')
-    emit('static void wowless_stubchecknilablestringenum_%s(lua_State *L, int idx) {', safename(sename))
-    emit('  wowless_stubchecknilablestringenum(L, idx, %s);', cstring(sename))
     emit('}')
     emit('')
   end
