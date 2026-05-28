@@ -423,8 +423,7 @@ local uiobjectimplmakers = {
       modules = {},
     }
   end,
-  settexture = function(impl, _, k)
-    -- host impl: uses gencode.ToTexture which handles internal uds directly
+  settexture = function(impl, mv)
     local t = { 'local gencode=...;return function(self,tex)' }
     table.insert(t, 'local t=gencode.ToTexture(self,tex,self.')
     table.insert(t, impl.field)
@@ -442,34 +441,11 @@ local uiobjectimplmakers = {
       table.insert(t, 'return true;')
     end
     table.insert(t, 'end')
-    -- sandbox impl: coerces and checks self via gencode.Check, tex via uiobjects.UserData
-    local sb = { 'local gencode,uiobjects=...;' }
-    table.insert(sb, string.format('local selfspec={name="self",type={uiobject=%q}};', k))
-    table.insert(sb, 'return function(obj,tex)local self=gencode.Check(selfspec,obj);local t;')
-    table.insert(sb, 'if type(tex)=="string" or type(tex)=="number" then ')
-    table.insert(sb, 't=self.')
-    table.insert(sb, impl.field)
-    table.insert(sb, ' or self:CreateTexture();t:SetTexture(tex);')
-    table.insert(sb, 'elseif tex~=nil then t=uiobjects.UserData(tex);end ')
-    table.insert(sb, 'if t then gencode.SetParent(t,self);if t:GetNumPoints()==0 then t:SetAllPoints()end t:SetShown(')
-    table.insert(sb, impl.shown or 'true')
-    table.insert(sb, ');')
-    if impl.extra then
-      table.insert(sb, impl.extra)
-      table.insert(sb, ';')
-    end
-    table.insert(sb, 'end self.')
-    table.insert(sb, impl.field)
-    table.insert(sb, '=t;')
-    if impl['return'] then
-      table.insert(sb, 'return true;')
-    end
-    table.insert(sb, 'end')
     return {
       impl = table.concat(t),
+      inputs = mv.inputs,
       modules = { 'gencode' },
-      sandboximpl = table.concat(sb),
-      sandboxmodules = { 'gencode', 'uiobjects' },
+      outputs = mv.outputs,
     }
   end,
   uiobjectimpl = function(impl, mv)
