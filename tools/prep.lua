@@ -756,10 +756,9 @@ if args.coutput then
         n = n + 1
       end
       return function(verb, nilable, idx)
-        local effective_verb = verb == 'implcheck' and 'stubcheck' or verb
         return string.format(
           'wowless_%s%sstringenum(L, %s, wowless_stringenum_%s_values, %d)',
-          effective_verb,
+          verb,
           nilable and 'nilable' or '',
           idx,
           safename(name),
