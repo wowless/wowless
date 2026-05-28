@@ -756,9 +756,10 @@ if args.coutput then
         n = n + 1
       end
       return function(verb, nilable, idx)
+        local effective_verb = verb == 'implcheck' and 'stubcheck' or verb
         return string.format(
           'wowless_%s%sstringenum(L, %s, wowless_stringenum_%s_values, %d)',
-          verb,
+          effective_verb,
           nilable and 'nilable' or '',
           idx,
           safename(name),
@@ -1304,18 +1305,14 @@ if args.coutput then
     elseif mv.impl and mv.impl.setter then
       local impl_fields = mv.impl.setter
       local inputs = mv.inputs or {}
-      emit('  wowless_stubcheckuiobject_%s(L, 1);', safename(k))
+      emit('  wowless_implcheckuiobject_%s(L, 1);', safename(k))
       for i, inp in ipairs(inputs) do
         local nilable = inp.nilable or inp.default ~= nil
-        emit('  %s;', dispatch(cinputtypes, inp.type)('stubcheck', nilable, i + 1))
+        emit('  %s;', dispatch(cinputtypes, inp.type)('implcheck', nilable, i + 1))
       end
       emit('  wowless_stubcheckextraargs(L, %d, %s);', #impl_fields + 1, cstring(key))
-      emit('  wowless_implcheckuiobject_%s(L, 1);', safename(k))
       for i, f in ipairs(impl_fields) do
         local spec = inputs[i]
-        if spec and type(spec.type) == 'table' and spec.type.uiobject then
-          emit('  wowless_implcheckuiobject_%s(L, %d);', safename(spec.type.uiobject), i + 1)
-        end
         if spec and spec.default ~= nil then
           emit('  if (lua_isnoneornil(L, %d)) {', i + 1)
           if type(spec.default) == 'boolean' then
