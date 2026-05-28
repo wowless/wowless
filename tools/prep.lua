@@ -1307,6 +1307,13 @@ if args.coutput then
       emit('  wowless_implcheckuiobject_%s(L, 1);', safename(k))
       for i, inp in ipairs(inputs) do
         local nilable = inp.nilable or inp.default ~= nil
+        -- Font objects can be passed as global name strings (typecheck.lua special case)
+        if type(inp.type) == 'table' and inp.type.uiobject == 'Font' then
+          emit('  if (lua_type(L, %d) == LUA_TSTRING) {', i + 1)
+          emit('    lua_getglobal(L, lua_tostring(L, %d));', i + 1)
+          emit('    lua_replace(L, %d);', i + 1)
+          emit('  }')
+        end
         emit('  %s;', dispatch(cinputtypes, inp.type)('implcheck', nilable, i + 1))
       end
       emit('  wowless_stubcheckextraargs(L, %d, %s);', #impl_fields + 1, cstring(key))
