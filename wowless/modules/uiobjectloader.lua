@@ -100,16 +100,6 @@ return function(cgencode, cstubs, datalua, funcheck, gencode, sqls, uiobjectsmod
         local sandboxFactory
         if method.cstub then
           sandboxFactory = uiobjectmethodstubs[fname]
-        elseif method.sandboximpl then
-          local sbmkfn = assert(loadstring_untainted(method.sandboximpl, src), fname)
-          local sbargs = {}
-          for _, sm in ipairs(method.sandboxmodules or {}) do
-            table.insert(sbargs, (assert(modules[sm], sm)))
-          end
-          local sandboxDispatch = sbmkfn(unpack(sbargs))
-          sandboxFactory = function()
-            return bubblewrap(sandboxDispatch)
-          end
         else
           local wrappedfn = wrap(fname, rawfn)
           local sandboxfn
