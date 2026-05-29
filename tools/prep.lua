@@ -1262,6 +1262,113 @@ local function stub_inputcheck(inp, idx)
   return dispatch(cinputtypes, inp.type)('stubcheck', nilable, idx) .. ';'
 end
 
+local coutputdefaulttypes = {
+  boolean = function(val)
+    return string.format('lua_pushboolean(L, %s)', val and '1' or '0')
+  end,
+  number = function(val)
+    return string.format('lua_pushnumber(L, %g)', val)
+  end,
+  string = function(val)
+    return string.format('lua_pushstring(L, %s)', cstring(val))
+  end,
+}
+
+local function emit_implstub_body(name, v, fn)
+  local check_inputs = v.inputs ~= nil
+  local check_outputs = v.outputs ~= nil
+  local inputs = v.inputs or {}
+  local outputs = v.outputs or {}
+  local outstride = v.outstride or 0
+  local instride = v.instride or 0
+  local nfixed = #outputs - outstride
+  local nsins = #inputs - instride
+  if check_inputs then
+    local function check(inp, idx)
+      local nilable = inp.nilable or inp.default ~= nil
+      return dispatch(cinputtypes, inp.type)('implcheck', nilable, idx) .. ';'
+    end
+    local function usagecheck(inp, idx)
+      local nilable = inp.nilable or inp.default ~= nil
+      return ('if (!%s) return luaL_error(L, %s);'):format(
+        dispatch(cinputtypes, inp.type)('is', nilable, idx),
+        cstring('Usage: ' .. v.usage)
+      )
+    end
+    local inputcheck = v.usage and usagecheck or check
+    for i = 1, nsins do
+      emit('  %s', inputcheck(inputs[i], i))
+    end
+    if instride > 0 then
+      emit('  int i, n = lua_gettop(L);')
+      emit('  for (i = %d; i <= n; i += %d) {', nsins + 1, instride)
+      for j = nsins + 1, #inputs do
+        emit('    %s', inputcheck(inputs[j], 'i + ' .. (j - nsins - 1)))
+      end
+      emit('  }')
+    end
+    if v.usage then
+      for i = 1, nsins do
+        emit('  %s', check(inputs[i], i))
+      end
+      if instride > 0 then
+        emit('  for (i = %d; i <= n; i += %d) {', nsins + 1, instride)
+        for j = nsins + 1, #inputs do
+          emit('    %s', check(inputs[j], 'i + ' .. (j - nsins - 1)))
+        end
+        emit('  }')
+      end
+    end
+    if instride == 0 then
+      emit('  wowless_stubcheckextraargs(L, %d, %s);', nsins, cstring(name))
+    end
+  end
+  if check_outputs then
+    emit('  int ret = %s(L);', fn)
+    if v.mayreturnnothing then
+      emit('  if (ret == 0) return 0;')
+    end
+    if outstride == 0 then
+      emit('  wowless_stubchecknreturns(L, ret, %d, %s);', #outputs, cstring(name))
+      for i, out in ipairs(outputs) do
+        local nilable = out.nilable
+        local otype = out.type
+        if out.default ~= nil then
+          local push = dispatch(coutputdefaulttypes, type(out.default), out.default)
+          emit('  if (lua_isnil(L, %d)) {', i)
+          emit('    %s;', push)
+          emit('    lua_replace(L, %d);', i)
+          emit('  } else {')
+          emit('    %s;', dispatch(coutputtypes, otype, false, i))
+          emit('  }')
+        else
+          emit('  %s;', dispatch(coutputtypes, otype, nilable, i))
+        end
+      end
+    else
+      if outstride > 1 then
+        emit('  if (ret < %d || (ret - %d) %% %d != 0) {', nfixed, nfixed, outstride)
+        emit('    return luaL_error(L, "wrong number of return values from %%s", %s);', cstring(name))
+        emit('  }')
+      end
+      for i = 1, nfixed do
+        emit('  %s;', dispatch(coutputtypes, outputs[i].type, outputs[i].nilable, i))
+      end
+      if outstride > 0 then
+        emit('  for (int i = %d; i < ret; i += %d) {', nfixed, outstride)
+        for j = 1, outstride do
+          local out = outputs[nfixed + j]
+          emit('    %s;', dispatch(coutputtypes, out.type, out.nilable, string.format('i + %d', j)))
+        end
+        emit('  }')
+      end
+    end
+    emit('  return ret;')
+  else
+    emit('  return %s(L);', fn)
+  end
+end
+
 -- UIObject method C stubs
 for key, entry in sorted(eligible_uimethods) do
   local k, mk, mv = entry.k, entry.mk, entry.mv
@@ -1352,116 +1459,12 @@ for _, entry in ipairs(eligible) do
   emit('')
 end
 
-local coutputdefaulttypes = {
-  boolean = function(val)
-    return string.format('lua_pushboolean(L, %s)', val and '1' or '0')
-  end,
-  number = function(val)
-    return string.format('lua_pushnumber(L, %g)', val)
-  end,
-  string = function(val)
-    return string.format('lua_pushstring(L, %s)', cstring(val))
-  end,
-}
-
 for _, entry in ipairs(eligible_impls) do
   local impldata = entry.impldata
   if not impldata.nowrap then
     local fn = impldata.nobubblewrap and 'wowless_impl_stub_nobubblewrap' or 'wowless_impl_stub'
-    local v = entry.cfg
-    local check_inputs = v.inputs ~= nil
-    local check_outputs = v.outputs ~= nil
-    local inputs = v.inputs or {}
-    local outputs = v.outputs or {}
-    local outstride = v.outstride or 0
-    local instride = v.instride or 0
-    local nfixed = #outputs - outstride
-    local nsins = #inputs - instride
     emit('static int implstub_%s(lua_State *L) {', safename(entry.name))
-    if check_inputs then
-      local function check(inp, idx)
-        local nilable = inp.nilable or inp.default ~= nil
-        return dispatch(cinputtypes, inp.type)('implcheck', nilable, idx) .. ';'
-      end
-      local function usagecheck(inp, idx)
-        local nilable = inp.nilable or inp.default ~= nil
-        return ('if (!%s) return luaL_error(L, %s);'):format(
-          dispatch(cinputtypes, inp.type)('is', nilable, idx),
-          cstring('Usage: ' .. v.usage)
-        )
-      end
-      local inputcheck = v.usage and usagecheck or check
-      for i = 1, nsins do
-        emit('  %s', inputcheck(inputs[i], i))
-      end
-      if instride > 0 then
-        emit('  int i, n = lua_gettop(L);')
-        emit('  for (i = %d; i <= n; i += %d) {', nsins + 1, instride)
-        for j = nsins + 1, #inputs do
-          emit('    %s', inputcheck(inputs[j], 'i + ' .. (j - nsins - 1)))
-        end
-        emit('  }')
-      end
-      if v.usage then
-        for i = 1, nsins do
-          emit('  %s', check(inputs[i], i))
-        end
-        if instride > 0 then
-          emit('  for (i = %d; i <= n; i += %d) {', nsins + 1, instride)
-          for j = nsins + 1, #inputs do
-            emit('    %s', check(inputs[j], 'i + ' .. (j - nsins - 1)))
-          end
-          emit('  }')
-        end
-      end
-      if instride == 0 then
-        emit('  wowless_stubcheckextraargs(L, %d, %s);', nsins, cstring(entry.name))
-      end
-    end
-    if check_outputs then
-      emit('  int ret = %s(L);', fn)
-      if v.mayreturnnothing then
-        emit('  if (ret == 0) return 0;')
-      end
-      if outstride == 0 then
-        emit('  wowless_stubchecknreturns(L, ret, %d, %s);', #outputs, cstring(entry.name))
-        for i, out in ipairs(outputs) do
-          local nilable = out.nilable
-          local otype = out.type
-          if out.default ~= nil then
-            local push = dispatch(coutputdefaulttypes, type(out.default), out.default)
-            emit('  if (lua_isnil(L, %d)) {', i)
-            emit('    %s;', push)
-            emit('    lua_replace(L, %d);', i)
-            emit('  } else {')
-            emit('    %s;', dispatch(coutputtypes, otype, false, i))
-            emit('  }')
-          else
-            emit('  %s;', dispatch(coutputtypes, otype, nilable, i))
-          end
-        end
-      else
-        if outstride > 1 then
-          emit('  if (ret < %d || (ret - %d) %% %d != 0) {', nfixed, nfixed, outstride)
-          emit('    return luaL_error(L, "wrong number of return values from %%s", %s);', cstring(entry.name))
-          emit('  }')
-        end
-        for i = 1, nfixed do
-          emit('  %s;', dispatch(coutputtypes, outputs[i].type, outputs[i].nilable, i))
-        end
-        if outstride > 0 then
-          emit('  for (int i = %d; i < ret; i += %d) {', nfixed, outstride)
-          for j = 1, outstride do
-            local out = outputs[nfixed + j]
-            emit('    %s;', dispatch(coutputtypes, out.type, out.nilable, string.format('i + %d', j)))
-          end
-          emit('  }')
-        end
-      end
-      emit('  return ret;')
-    else
-      emit('  return %s(L);', fn)
-    end
+    emit_implstub_body(entry.name, entry.cfg, fn)
     emit('}')
     emit('')
   end
