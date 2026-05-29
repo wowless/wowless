@@ -423,7 +423,7 @@ local uiobjectimplmakers = {
       modules = {},
     }
   end,
-  settexture = function(impl, mv)
+  settexture = function(impl)
     local t = { 'local gencode=...;return function(self,tex)' }
     table.insert(t, 'local t=gencode.ToTexture(self,tex,self.')
     table.insert(t, impl.field)
@@ -443,24 +443,11 @@ local uiobjectimplmakers = {
     table.insert(t, 'end')
     return {
       impl = table.concat(t),
-      inputs = mv.inputs,
       modules = { 'gencode' },
-      outputs = mv.outputs,
     }
   end,
-  uiobjectimpl = function(impl, mv)
-    local implimpl = dispatch(uiobjectimplimplmakers, uiobjectimpl[impl], impl)
-    return {
-      impl = implimpl.impl,
-      inputs = mv.inputs,
-      instride = mv.instride,
-      mayreturnnothing = mv.mayreturnnothing,
-      modules = implimpl.modules,
-      outputs = mv.outputs,
-      outstride = mv.outstride,
-      sqls = implimpl.sqls,
-      src = implimpl.src,
-    }
+  uiobjectimpl = function(impl)
+    return dispatch(uiobjectimplimplmakers, uiobjectimpl[impl], impl)
   end,
 }
 local eligible_uimethods = {}
@@ -474,7 +461,14 @@ for k, v in pairs(uiobjectdata) do
   local methods = {}
   for mk, mv in pairs(v.methods) do
     local d = dispatch(uiobjectimplmakers, mv.impl or 'none', mv, k)
-    methods[mk] = d
+    methods[mk] = d.cstub and d
+      or Mixin({}, d, {
+        inputs = mv.inputs,
+        instride = mv.instride,
+        mayreturnnothing = mv.mayreturnnothing,
+        outputs = mv.outputs,
+        outstride = mv.outstride,
+      })
     if args.coutput and d.cstub then
       eligible_uimethods[k .. ':' .. mk] = { k = k, mk = mk, mv = mv }
     end
