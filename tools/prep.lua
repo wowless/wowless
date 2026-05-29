@@ -1065,11 +1065,23 @@ if args.coutput then
     emit('}')
     emit('')
     emit('static void wowless_implcheckuiobject_%s(lua_State *L, int idx) {', safename(uname))
+    if uname == 'Font' then
+      emit('  if (lua_type(L, idx) == LUA_TSTRING) {')
+      emit('    lua_getglobal(L, lua_tostring(L, idx));')
+      emit('    lua_replace(L, idx);')
+      emit('  }')
+    end
     emit('  wowless_implcheckuiobject(L, idx, %d);', uitype_bits[uname])
     emit('}')
     emit('')
     emit('static void wowless_implchecknilableuiobject_%s(lua_State *L, int idx) {', safename(uname))
-    emit('  wowless_implchecknilableuiobject(L, idx, %d);', uitype_bits[uname])
+    if uname == 'Font' then
+      emit('  if (!lua_isnoneornil(L, idx)) {')
+      emit('    wowless_implcheckuiobject_%s(L, idx);', safename(uname))
+      emit('  }')
+    else
+      emit('  wowless_implchecknilableuiobject(L, idx, %d);', uitype_bits[uname])
+    end
     emit('}')
     emit('')
   end
@@ -1283,13 +1295,6 @@ if args.coutput then
       emit('  wowless_implcheckuiobject_%s(L, 1);', safename(k))
       for i, inp in ipairs(inputs) do
         local nilable = inp.nilable or inp.default ~= nil
-        -- Font objects can be passed as global name strings (typecheck.lua special case)
-        if type(inp.type) == 'table' and inp.type.uiobject == 'Font' then
-          emit('  if (lua_type(L, %d) == LUA_TSTRING) {', i + 1)
-          emit('    lua_getglobal(L, lua_tostring(L, %d));', i + 1)
-          emit('    lua_replace(L, %d);', i + 1)
-          emit('  }')
-        end
         emit('  %s;', dispatch(cinputtypes, inp.type)('implcheck', nilable, i + 1))
       end
       emit('  wowless_stubcheckextraargs(L, %d, %s);', #impl_fields + 1, cstring(key))
