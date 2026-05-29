@@ -461,16 +461,17 @@ for k, v in pairs(uiobjectdata) do
   local methods = {}
   for mk, mv in pairs(v.methods) do
     local d = dispatch(uiobjectimplmakers, mv.impl or 'none', mv, k)
-    methods[mk] = d.cstub and d
-      or Mixin({}, d, {
+    if d.cstub then
+      methods[mk] = d
+      eligible_uimethods[k .. ':' .. mk] = { k = k, mk = mk, mv = mv }
+    else
+      methods[mk] = Mixin({}, d, {
         inputs = mv.inputs,
         instride = mv.instride,
         mayreturnnothing = mv.mayreturnnothing,
         outputs = mv.outputs,
         outstride = mv.outstride,
       })
-    if d.cstub then
-      eligible_uimethods[k .. ':' .. mk] = { k = k, mk = mk, mv = mv }
     end
   end
   local scripts = {}
