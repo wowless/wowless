@@ -128,15 +128,52 @@ static int make_uiobject_method_stub(lua_State *L) {
   return 1;
 }
 
+static int make_uiobject_impl_stub(lua_State *L) {
+  /* upvalues: 1=cgencode, 2=luafn, 3=fn ptr */
+  auto fn = reinterpret_cast<lua_CFunction>(lua_touserdata(L, lua_upvalueindex(3)));
+  lua_pushvalue(L, lua_upvalueindex(1)); /* cgencode */
+  lua_pushvalue(L, lua_upvalueindex(2)); /* luafn */
+  lua_pushcclosure(L, fn, 2);
+  return 1;
+}
+
 int wowless_load_uiobject_method_stubs(lua_State *L) {
   const auto *spec = static_cast<const wowless_uiobject_method_entry *>(
       lua_touserdata(L, lua_upvalueindex(1)));
-  /* arg 1 is cgencode directly */
+  /* arg 1 is modules; cgencode is extracted for use as upvalue */
+  lua_getfield(L, 1, "cgencode");
+  /* Stack: [modules, cgencode] */
   lua_newtable(L);
   for (const auto *e = spec; e->key; e++) {
-    lua_pushlightuserdata(L, reinterpret_cast<void *>(e->func));
-    lua_pushvalue(L, 1); /* cgencode */
-    lua_pushcclosure(L, make_uiobject_method_stub, 2);
+    if (e->impldata) {
+      const struct wowless_impl_data *d = e->impldata;
+      if (luaL_loadbuffer(L, d->impl, d->impl_len, d->chunkname) != 0) {
+        lua_error(L);
+      }
+      int nargs = 0;
+      if (d->modules) {
+        for (const char *const *m = d->modules; *m; m++, nargs++) {
+          lua_getfield(L, 1, *m);
+        }
+      }
+      if (d->sqls) {
+        lua_getfield(L, 1, "sqls");
+        int sqls_idx = lua_gettop(L);
+        for (const char *const *s = d->sqls; *s; s++, nargs++) {
+          lua_getfield(L, sqls_idx, *s);
+        }
+        lua_remove(L, sqls_idx);
+      }
+      lua_call(L, nargs, 1); /* luafn on top */
+      lua_pushvalue(L, 2);   /* cgencode */
+      lua_insert(L, -2);     /* cgencode, luafn */
+      lua_pushlightuserdata(L, reinterpret_cast<void *>(e->func));
+      lua_pushcclosure(L, make_uiobject_impl_stub, 3);
+    } else {
+      lua_pushlightuserdata(L, reinterpret_cast<void *>(e->func));
+      lua_pushvalue(L, 2); /* cgencode */
+      lua_pushcclosure(L, make_uiobject_method_stub, 2);
+    }
     lua_setfield(L, -2, e->key);
   }
   return 1;

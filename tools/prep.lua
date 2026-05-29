@@ -463,7 +463,8 @@ for k, v in pairs(uiobjectdata) do
     local d = dispatch(uiobjectimplmakers, mv.impl or 'none', mv, k)
     if d.cstub then
       methods[mk] = d
-      eligible_uimethods[k .. ':' .. mk] = { k = k, mk = mk, mv = mv }
+      local uiimplkey = type(mv.impl) == 'table' and mv.impl.uiobjectimpl
+      eligible_uimethods[k .. ':' .. mk] = { k = k, mk = mk, mv = mv, impl = uiimplkey or nil }
     else
       methods[mk] = Mixin({}, d, {
         inputs = mv.inputs,
@@ -1372,68 +1373,88 @@ end
 -- UIObject method C stubs
 for key, entry in sorted(eligible_uimethods) do
   local k, mk, mv = entry.k, entry.mk, entry.mv
-  emit('static int stub_uimethod_%s_%s(lua_State *L) {', safename(k), safename(mk))
-  if mv.secureonly then
-    emit('  if (wowless_forbidden(L)) return 0;')
-  end
-  if mv.impl and mv.impl.getter then
-    emit('  wowless_implcheckuiobject_%s(L, 1);', safename(k))
-    emit('  wowless_stubcheckextraargs(L, 1, %s);', cstring(key))
-    for i, f in ipairs(mv.impl.getter) do
-      emit('  lua_getfield(L, 1, %s);', cstring(f.name))
-      local out = mv.outputs[i]
-      if out and type(out.type) == 'table' and out.type.uiobject then
-        emit('  if (!lua_isnil(L, -1)) {')
-        emit('    lua_getfield(L, -1, "luarep");')
-        emit('    lua_replace(L, -2);')
-        emit('  }')
-      end
+  if entry.impl then
+    local uiimplkey = entry.impl
+    local implimpl = dispatch(uiobjectimplimplmakers, uiobjectimpl[uiimplkey], uiimplkey)
+    local fn = implimpl.nobubblewrap and 'wowless_impl_stub_nobubblewrap' or 'wowless_impl_stub'
+    local inputs = { { type = { uiobject = k } } }
+    for _, inp in ipairs(mv.inputs or {}) do
+      table.insert(inputs, inp)
     end
-    emit('  return %d;', #mv.impl.getter)
-  elseif mv.impl and mv.impl.setter then
-    local impl_fields = mv.impl.setter
-    local inputs = mv.inputs or {}
-    emit('  wowless_implcheckuiobject_%s(L, 1);', safename(k))
-    for i, inp in ipairs(inputs) do
-      local nilable = inp.nilable or inp.default ~= nil
-      emit('  %s;', dispatch(cinputtypes, inp.type)('implcheck', nilable, i + 1))
-    end
-    emit('  wowless_stubcheckextraargs(L, %d, %s);', #impl_fields + 1, cstring(key))
-    for i, f in ipairs(impl_fields) do
-      local spec = inputs[i]
-      if spec and spec.default ~= nil then
-        emit('  if (lua_isnoneornil(L, %d)) {', i + 1)
-        if type(spec.default) == 'boolean' then
-          emit('    lua_pushboolean(L, %d);', spec.default and 1 or 0)
-        elseif type(spec.default) == 'number' then
-          emit('    lua_pushnumber(L, %g);', spec.default)
-        else
-          error('unsupported setter default type: ' .. type(spec.default))
-        end
-        emit('  } else {')
-        emit('    lua_pushvalue(L, %d);', i + 1)
-        emit('  }')
-      else
-        emit('  lua_pushvalue(L, %d);', i + 1)
-      end
-      emit('  lua_setvaluetaint(L, -1, NULL);')
-      emit('  lua_setfield(L, 1, %s);', cstring(f.name))
-    end
-    emit('  return 0;')
+    emit('static int implstub_uiimpl_%s_%s(lua_State *L) {', safename(k), safename(mk))
+    emit_implstub_body(key, {
+      inputs = inputs,
+      instride = mv.instride,
+      mayreturnnothing = mv.mayreturnnothing,
+      outputs = mv.outputs,
+      outstride = mv.outstride,
+    }, fn)
+    emit('}')
+    emit('')
   else
-    if mv.inputs ~= nil then
-      local inputs_with_self = { { type = { uiobject = k } } }
-      for _, inp in ipairs(mv.inputs) do
-        table.insert(inputs_with_self, inp)
-      end
-      emit_stub_body(key, Mixin({}, mv, { inputs = inputs_with_self }), stub_inputcheck)
-    else
-      emit('  wowless_stubcheckuiobject_%s(L, 1);', safename(k))
-      emit_stub_body(key, mv, stub_inputcheck)
+    emit('static int stub_uimethod_%s_%s(lua_State *L) {', safename(k), safename(mk))
+    if mv.secureonly then
+      emit('  if (wowless_forbidden(L)) return 0;')
     end
-  end
-  emit('}')
-  emit('')
+    if mv.impl and mv.impl.getter then
+      emit('  wowless_implcheckuiobject_%s(L, 1);', safename(k))
+      emit('  wowless_stubcheckextraargs(L, 1, %s);', cstring(key))
+      for i, f in ipairs(mv.impl.getter) do
+        emit('  lua_getfield(L, 1, %s);', cstring(f.name))
+        local out = mv.outputs[i]
+        if out and type(out.type) == 'table' and out.type.uiobject then
+          emit('  if (!lua_isnil(L, -1)) {')
+          emit('    lua_getfield(L, -1, "luarep");')
+          emit('    lua_replace(L, -2);')
+          emit('  }')
+        end
+      end
+      emit('  return %d;', #mv.impl.getter)
+    elseif mv.impl and mv.impl.setter then
+      local impl_fields = mv.impl.setter
+      local inputs = mv.inputs or {}
+      emit('  wowless_implcheckuiobject_%s(L, 1);', safename(k))
+      for i, inp in ipairs(inputs) do
+        local nilable = inp.nilable or inp.default ~= nil
+        emit('  %s;', dispatch(cinputtypes, inp.type)('implcheck', nilable, i + 1))
+      end
+      emit('  wowless_stubcheckextraargs(L, %d, %s);', #impl_fields + 1, cstring(key))
+      for i, f in ipairs(impl_fields) do
+        local spec = inputs[i]
+        if spec and spec.default ~= nil then
+          emit('  if (lua_isnoneornil(L, %d)) {', i + 1)
+          if type(spec.default) == 'boolean' then
+            emit('    lua_pushboolean(L, %d);', spec.default and 1 or 0)
+          elseif type(spec.default) == 'number' then
+            emit('    lua_pushnumber(L, %g);', spec.default)
+          else
+            error('unsupported setter default type: ' .. type(spec.default))
+          end
+          emit('  } else {')
+          emit('    lua_pushvalue(L, %d);', i + 1)
+          emit('  }')
+        else
+          emit('  lua_pushvalue(L, %d);', i + 1)
+        end
+        emit('  lua_setvaluetaint(L, -1, NULL);')
+        emit('  lua_setfield(L, 1, %s);', cstring(f.name))
+      end
+      emit('  return 0;')
+    else
+      if mv.inputs ~= nil then
+        local inputs_with_self = { { type = { uiobject = k } } }
+        for _, inp in ipairs(mv.inputs) do
+          table.insert(inputs_with_self, inp)
+        end
+        emit_stub_body(key, Mixin({}, mv, { inputs = inputs_with_self }), stub_inputcheck)
+      else
+        emit('  wowless_stubcheckuiobject_%s(L, 1);', safename(k))
+        emit_stub_body(key, mv, stub_inputcheck)
+      end
+    end
+    emit('}')
+    emit('')
+  end -- entry.impl else
 end
 
 for _, entry in ipairs(eligible) do
@@ -1640,12 +1661,32 @@ end
 emit('  {nullptr, 0, nullptr}')
 emit('};')
 emit('')
+-- UIObject impl method impldata statics
+local any_uiimpl = false
+for key, entry in sorted(eligible_uimethods) do
+  if entry.impl then
+    local k, mk, uiimplkey = entry.k, entry.mk, entry.impl
+    local implimpl = dispatch(uiobjectimplimplmakers, uiobjectimpl[uiimplkey], uiimplkey)
+    local sn = 'uiimpl_' .. safename(k) .. '_' .. safename(mk)
+    emit_stub_entry_statics(sn, { impldata = implimpl, chunkname = implimpl.src or key })
+    any_uiimpl = true
+  end
+end
+if any_uiimpl then
+  emit('')
+end
 -- UIObject method entry array
 emit('static const struct wowless_uiobject_method_entry uiobject_method_entries[] = {')
 for key, entry in sorted(eligible_uimethods) do
-  emit('  {%s, stub_uimethod_%s_%s},', cstring(key), safename(entry.k), safename(entry.mk))
+  local k, mk = entry.k, entry.mk
+  if entry.impl then
+    local sn = 'uiimpl_' .. safename(k) .. '_' .. safename(mk)
+    emit('  {%s, implstub_uiimpl_%s_%s, &impldata_%s},', cstring(key), safename(k), safename(mk), sn)
+  else
+    emit('  {%s, stub_uimethod_%s_%s, nullptr},', cstring(key), safename(k), safename(mk))
+  end
 end
-emit('  {nullptr, nullptr}')
+emit('  {nullptr, nullptr, nullptr}')
 emit('};')
 emit('')
 emit('extern "C" int luaopen_build_products_%s_stubs(lua_State *L) {', product)
