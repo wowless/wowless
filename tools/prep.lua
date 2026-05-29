@@ -1204,23 +1204,23 @@ for loname in sorted(luaobjectdata) do
   end
 end
 
-local function emit_stub_body(key, cfg, arg_offset, inputcheck)
+local function emit_stub_body(key, cfg, inputcheck)
   local allinps = cfg.inputs or {}
   local instride = cfg.instride or 0
   local nsins = #allinps - instride
   for i = 1, nsins do
-    emit('  %s', inputcheck(allinps[i], i + arg_offset))
+    emit('  %s', inputcheck(allinps[i], i))
   end
   if instride > 0 then
     emit('  int i, n = lua_gettop(L);')
-    emit('  for (i = %d; i <= n; i += %d) {', nsins + 1 + arg_offset, instride)
+    emit('  for (i = %d; i <= n; i += %d) {', nsins + 1, instride)
     for j = nsins + 1, #allinps do
       emit('    %s', inputcheck(allinps[j], 'i + ' .. (j - nsins - 1)))
     end
     emit('  }')
   end
   if cfg.inputs ~= nil and instride == 0 then
-    emit('  wowless_stubcheckextraargs(L, %d, %s);', nsins + arg_offset, cstring(key))
+    emit('  wowless_stubcheckextraargs(L, %d, %s);', nsins, cstring(key))
   end
   local allouts = not cfg.stubnothing and cfg.outputs or {}
   local outstride = cfg.outstride or 0
@@ -1314,8 +1314,16 @@ for key, entry in sorted(eligible_uimethods) do
     end
     emit('  return 0;')
   else
-    emit('  wowless_stubcheckuiobject_%s(L, 1);', safename(k))
-    emit_stub_body(key, mv, 1, stub_inputcheck)
+    if mv.inputs ~= nil then
+      local inputs_with_self = { { type = { uiobject = k } } }
+      for _, inp in ipairs(mv.inputs) do
+        table.insert(inputs_with_self, inp)
+      end
+      emit_stub_body(key, Mixin({}, mv, { inputs = inputs_with_self }), stub_inputcheck)
+    else
+      emit('  wowless_stubcheckuiobject_%s(L, 1);', safename(k))
+      emit_stub_body(key, mv, stub_inputcheck)
+    end
   end
   emit('}')
   emit('')
@@ -1339,7 +1347,7 @@ for _, entry in ipairs(eligible) do
   else
     inputcheck = stub_inputcheck
   end
-  emit_stub_body(k, v, 0, inputcheck)
+  emit_stub_body(k, v, inputcheck)
   emit('}')
   emit('')
 end
