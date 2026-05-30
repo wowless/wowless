@@ -934,54 +934,44 @@ lua_value_emitters = {
 local coutpushers
 coutpushers = {
   arrayof = function(inner, val)
-    emit('  lua_createtable(L, %d, 0);', #val)
+    local t = { string.format('  lua_createtable(L, %d, 0);', #val) }
     for i, elem in ipairs(val) do
-      dispatch(coutpushers, inner, elem)
-      emit('  lua_rawseti(L, -2, %d);', i)
+      table.insert(t, dispatch(coutpushers, inner, elem))
+      table.insert(t, string.format('  lua_rawseti(L, -2, %d);', i))
     end
+    return table.concat(t, '\n')
   end,
-  boolean = function(v)
-    emit('%s', lua_value_emitters.boolean(v))
-  end,
+  boolean = lua_value_emitters.boolean,
   enum = function(_, val)
-    emit('%s', lua_value_emitters.number(val))
+    return lua_value_emitters.number(val)
   end,
-  FileAsset = function(v)
-    emit('%s', lua_value_emitters.number(v))
-  end,
-  number = function(v)
-    emit('%s', lua_value_emitters.number(v))
-  end,
-  string = function(v)
-    emit('%s', lua_value_emitters.string(v))
-  end,
-  stringenum = function(v)
-    emit('%s', lua_value_emitters.string(v))
-  end,
+  FileAsset = lua_value_emitters.number,
+  number = lua_value_emitters.number,
+  string = lua_value_emitters.string,
+  stringenum = lua_value_emitters.string,
   structure = function(name, val)
     local st = assert(structures[name], name)
     local n = 0
     for _ in pairs(val) do
       n = n + 1
     end
-    emit('  lua_createtable(L, 0, %d);', n)
+    local t = { string.format('  lua_createtable(L, 0, %d);', n) }
     for fname, fval in pairs(val) do
-      emit('%s', lua_value_emitters.string(fname))
-      dispatch(coutpushers, st.fields[fname].type, fval)
-      emit('  lua_rawset(L, -3);')
+      table.insert(t, lua_value_emitters.string(fname))
+      table.insert(t, dispatch(coutpushers, st.fields[fname].type, fval))
+      table.insert(t, '  lua_rawset(L, -3);')
     end
     if st.mixin then
-      emit('  wowless_applymixin(L, %s);', cstring(st.mixin))
+      table.insert(t, string.format('  wowless_applymixin(L, %s);', cstring(st.mixin)))
     end
+    return table.concat(t, '\n')
   end,
   luaobject = function(name, _)
-    emit('  wowless_stubcreateluaobject(L, %s);', cstring(name))
+    return string.format('  wowless_stubcreateluaobject(L, %s);', cstring(name))
   end,
-  table = function(v)
-    emit('%s', lua_value_emitters.table(v))
-  end,
+  table = lua_value_emitters.table,
   uiobject = function(name, _)
-    emit('  wowless_stubcreateuiobject(L, %s);', cstring(name))
+    return string.format('  wowless_stubcreateuiobject(L, %s);', cstring(name))
   end,
 }
 
@@ -1193,7 +1183,7 @@ for loname in sorted(luaobjectdata) do
         if val == nil then
           emit('  lua_pushnil(L);')
         else
-          dispatch(coutpushers, out.type, val)
+          emit('%s', dispatch(coutpushers, out.type, val))
         end
       end
       emit('  return %d;', #outputs)
@@ -1264,7 +1254,7 @@ local function emit_stub_body(key, cfg, inputcheck)
     if val == nil then
       emit('  lua_pushnil(L);')
     else
-      dispatch(coutpushers, out.type, val)
+      emit('%s', dispatch(coutpushers, out.type, val))
     end
   end
   emit('  return %d;', #outs)
