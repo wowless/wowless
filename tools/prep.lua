@@ -908,25 +908,26 @@ end
 local lua_value_emitters
 lua_value_emitters = {
   boolean = function(v)
-    emit('  lua_pushboolean(L, %d);', v and 1 or 0)
+    return string.format('  lua_pushboolean(L, %d);', v and 1 or 0)
   end,
   number = function(v)
-    emit('  lua_pushnumber(L, %g);', v)
+    return string.format('  lua_pushnumber(L, %g);', v)
   end,
   string = function(v)
-    emit('  lua_pushliteral(L, %s);', cstring(v))
+    return string.format('  lua_pushliteral(L, %s);', cstring(v))
   end,
   table = function(v)
     local n = 0
     for _ in pairs(v) do
       n = n + 1
     end
-    emit('  lua_createtable(L, 0, %d);', n)
+    local t = { string.format('  lua_createtable(L, 0, %d);', n) }
     for vk, vv in pairs(v) do
-      dispatch(lua_value_emitters, type(vk), vk)
-      dispatch(lua_value_emitters, type(vv), vv)
-      emit('  lua_rawset(L, -3);')
+      table.insert(t, dispatch(lua_value_emitters, type(vk), vk))
+      table.insert(t, dispatch(lua_value_emitters, type(vv), vv))
+      table.insert(t, '  lua_rawset(L, -3);')
     end
+    return table.concat(t, '\n')
   end,
 }
 
@@ -939,14 +940,24 @@ coutpushers = {
       emit('  lua_rawseti(L, -2, %d);', i)
     end
   end,
-  boolean = lua_value_emitters.boolean,
-  enum = function(_, val)
-    lua_value_emitters.number(val)
+  boolean = function(v)
+    emit('%s', lua_value_emitters.boolean(v))
   end,
-  FileAsset = lua_value_emitters.number,
-  number = lua_value_emitters.number,
-  string = lua_value_emitters.string,
-  stringenum = lua_value_emitters.string,
+  enum = function(_, val)
+    emit('%s', lua_value_emitters.number(val))
+  end,
+  FileAsset = function(v)
+    emit('%s', lua_value_emitters.number(v))
+  end,
+  number = function(v)
+    emit('%s', lua_value_emitters.number(v))
+  end,
+  string = function(v)
+    emit('%s', lua_value_emitters.string(v))
+  end,
+  stringenum = function(v)
+    emit('%s', lua_value_emitters.string(v))
+  end,
   structure = function(name, val)
     local st = assert(structures[name], name)
     local n = 0
@@ -955,7 +966,7 @@ coutpushers = {
     end
     emit('  lua_createtable(L, 0, %d);', n)
     for fname, fval in pairs(val) do
-      lua_value_emitters.string(fname)
+      emit('%s', lua_value_emitters.string(fname))
       dispatch(coutpushers, st.fields[fname].type, fval)
       emit('  lua_rawset(L, -3);')
     end
@@ -966,7 +977,9 @@ coutpushers = {
   luaobject = function(name, _)
     emit('  wowless_stubcreateluaobject(L, %s);', cstring(name))
   end,
-  table = lua_value_emitters.table,
+  table = function(v)
+    emit('%s', lua_value_emitters.table(v))
+  end,
   uiobject = function(name, _)
     emit('  wowless_stubcreateuiobject(L, %s);', cstring(name))
   end,
