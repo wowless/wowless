@@ -823,8 +823,11 @@ local function is_eligible(apicfg)
 end
 
 local lines = {}
+local function ins(t, fmt, ...)
+  table.insert(t, string.format(fmt, ...))
+end
 local function emit(fmt, ...)
-  table.insert(lines, string.format(fmt, ...))
+  ins(lines, fmt, ...)
 end
 
 emit('#include "wowless/typecheck.h"')
@@ -921,11 +924,12 @@ lua_value_emitters = {
     for _ in pairs(v) do
       n = n + 1
     end
-    local t = { string.format('  lua_createtable(L, 0, %d);', n) }
+    local t = {}
+    ins(t, '  lua_createtable(L, 0, %d);', n)
     for vk, vv in pairs(v) do
-      table.insert(t, dispatch(lua_value_emitters, type(vk), vk))
-      table.insert(t, dispatch(lua_value_emitters, type(vv), vv))
-      table.insert(t, '  lua_rawset(L, -3);')
+      ins(t, dispatch(lua_value_emitters, type(vk), vk))
+      ins(t, dispatch(lua_value_emitters, type(vv), vv))
+      ins(t, '  lua_rawset(L, -3);')
     end
     return table.concat(t, '\n')
   end,
@@ -934,10 +938,11 @@ lua_value_emitters = {
 local coutpushers
 coutpushers = {
   arrayof = function(inner, val)
-    local t = { string.format('  lua_createtable(L, %d, 0);', #val) }
+    local t = {}
+    ins(t, '  lua_createtable(L, %d, 0);', #val)
     for i, elem in ipairs(val) do
-      table.insert(t, dispatch(coutpushers, inner, elem))
-      table.insert(t, string.format('  lua_rawseti(L, -2, %d);', i))
+      ins(t, dispatch(coutpushers, inner, elem))
+      ins(t, '  lua_rawseti(L, -2, %d);', i)
     end
     return table.concat(t, '\n')
   end,
@@ -955,14 +960,15 @@ coutpushers = {
     for _ in pairs(val) do
       n = n + 1
     end
-    local t = { string.format('  lua_createtable(L, 0, %d);', n) }
+    local t = {}
+    ins(t, '  lua_createtable(L, 0, %d);', n)
     for fname, fval in pairs(val) do
-      table.insert(t, lua_value_emitters.string(fname))
-      table.insert(t, dispatch(coutpushers, st.fields[fname].type, fval))
-      table.insert(t, '  lua_rawset(L, -3);')
+      ins(t, lua_value_emitters.string(fname))
+      ins(t, dispatch(coutpushers, st.fields[fname].type, fval))
+      ins(t, '  lua_rawset(L, -3);')
     end
     if st.mixin then
-      table.insert(t, string.format('  wowless_applymixin(L, %s);', cstring(st.mixin)))
+      ins(t, '  wowless_applymixin(L, %s);', cstring(st.mixin))
     end
     return table.concat(t, '\n')
   end,
