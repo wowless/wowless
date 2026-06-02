@@ -84,6 +84,8 @@ GetGlobalEnvironment:
   GetGlobalEnvironment:
 getmetatable:
   getmetatable:
+GetSpecializationInfoByID:
+  GetSpecializationInfoByID:
 hooksecurefunc:
   hooksecurefunc:
 IsDebugBuild:
