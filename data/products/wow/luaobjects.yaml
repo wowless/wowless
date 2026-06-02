@@ -14,6 +14,41 @@ AbbreviateConfig:
           arrayof:
             structure: NumberAbbreviationBreakpoint
       outputs:
+AbbreviatedNumberFormatter:
+  inherits: NumericFormatter
+  methods:
+    AddBreakpoint:
+      inputs:
+      - name: breakpoint
+        type:
+          structure: NumberAbbreviationBreakpoint
+      outputs:
+    ClearBreakpoints:
+      inputs:
+      outputs:
+    Copy:
+      inputs:
+      outputs:
+      - name: copy
+        type:
+          luaobject: AbbreviatedNumberFormatter
+    GetBreakpoints:
+      inputs:
+      outputs:
+      - name: breakpoints
+        type:
+          arrayof:
+            structure: NumberAbbreviationBreakpoint
+    ResetBreakpoints:
+      inputs:
+      outputs:
+    SetBreakpoints:
+      inputs:
+      - name: breakpoints
+        type:
+          arrayof:
+            structure: NumberAbbreviationBreakpoint
+      outputs:
 LuaColorCurveObject:
   inherits: LuaCurveObjectBase
   methods:
@@ -231,6 +266,53 @@ LuaDurationObject:
       outputs:
       - name: result
         type: table
+    EvaluateTotalDuration:
+      inputs:
+      - name: curve
+        type: table
+      - default: 0
+        name: modifier
+        type:
+          enum: DurationTimeModifier
+      outputs:
+      - name: result
+        type: table
+    FormatElapsedDuration:
+      inputs:
+      - name: formatter
+        type:
+          luaobject: NumericFormatter
+      - default: 0
+        name: modifier
+        type:
+          enum: DurationTimeModifier
+      outputs:
+      - name: formatted
+        type: string
+    FormatRemainingDuration:
+      inputs:
+      - name: formatter
+        type:
+          luaobject: NumericFormatter
+      - default: 0
+        name: modifier
+        type:
+          enum: DurationTimeModifier
+      outputs:
+      - name: formatted
+        type: string
+    FormatTotalDuration:
+      inputs:
+      - name: formatter
+        type:
+          luaobject: NumericFormatter
+      - default: 0
+        name: modifier
+        type:
+          enum: DurationTimeModifier
+      outputs:
+      - name: formatted
+        type: string
     GetClockTime:
       inputs:
       outputs:
@@ -353,6 +435,255 @@ LuaFunctionContainer:
     Cancel:
     Invoke:
     IsCancelled:
+NumericFormatter:
+  methods:
+    FormatNumber:
+      inputs:
+      - name: number
+        type: number
+      outputs:
+      - name: formatted
+        type: string
+  virtual: true
+NumericRuleFormatter:
+  inherits: NumericFormatter
+  methods:
+    AddBreakpoint:
+      inputs:
+      - name: breakpoint
+        type:
+          structure: NumericRuleFormatBreakpoint
+      outputs:
+    ClearBreakpoints:
+      inputs:
+      outputs:
+    Copy:
+      inputs:
+      outputs:
+      - name: copy
+        type:
+          luaobject: NumericRuleFormatter
+    GetBreakpoints:
+      inputs:
+      outputs:
+      - name: breakpoints
+        type:
+          arrayof:
+            structure: NumericRuleFormatBreakpoint
+    SetBreakpoints:
+      inputs:
+      - name: breakpoints
+        type:
+          arrayof:
+            structure: NumericRuleFormatBreakpoint
+      outputs:
+SecondsFormatter:
+  inherits: NumericFormatter
+  methods:
+    CanApproximate:
+      inputs:
+      - name: seconds
+        type: number
+      outputs:
+      - name: canApproximate
+        type: boolean
+    CanRoundUpIntervals:
+      inputs:
+      outputs:
+      - name: canRound
+        type: boolean
+    CanRoundUpLastUnit:
+      inputs:
+      outputs:
+      - name: canRound
+        type: boolean
+    EvaluateDesiredUnitCount:
+      inputs:
+      - name: seconds
+        type: number
+      outputs:
+      - name: count
+        type: number
+    EvaluateMaxInterval:
+      inputs:
+      - name: seconds
+        type: number
+      outputs:
+      - name: interval
+        type:
+          enum: SecondsFormatterInterval
+    EvaluateMinInterval:
+      inputs:
+      - name: seconds
+        type: number
+      outputs:
+      - name: interval
+        type:
+          enum: SecondsFormatterInterval
+    Format:
+      inputs:
+      - name: seconds
+        type: number
+      - name: abbreviation
+        nilable: true
+        type:
+          enum: SecondsFormatterAbbrevation
+      outputs:
+      - name: formattedSeconds
+        type: string
+    FormatZero:
+      inputs:
+      - name: abbreviation
+        nilable: true
+        type:
+          enum: SecondsFormatterAbbrevation
+      outputs:
+      - name: formattedSeconds
+        type: string
+    GetApproximationSeconds:
+      inputs:
+      outputs:
+      - name: approximationSeconds
+        type: number
+    GetConvertToLower:
+      inputs:
+      outputs:
+      - name: convert
+        type: boolean
+    GetDefaultAbbreviation:
+      inputs:
+      outputs:
+      - name: abbreviation
+        nilable: true
+        type:
+          enum: SecondsFormatterAbbrevation
+    GetDesiredUnitCount:
+      inputs:
+      outputs:
+      - name: count
+        nilable: true
+        type: number
+    GetDesiredUnitCountCurve:
+      inputs:
+      outputs:
+      - name: curve
+        nilable: true
+        type:
+          luaobject: LuaCurveObject
+    GetMaxInterval:
+      inputs:
+      outputs:
+      - name: interval
+        nilable: true
+        type:
+          enum: SecondsFormatterInterval
+    GetMaxIntervalCurve:
+      inputs:
+      outputs:
+      - name: curve
+        nilable: true
+        type:
+          luaobject: LuaCurveObject
+    GetMillisecondsThreshold:
+      inputs:
+      outputs:
+      - name: threshold
+        type: number
+    GetMinInterval:
+      inputs:
+      outputs:
+      - name: interval
+        nilable: true
+        type:
+          enum: SecondsFormatterInterval
+    GetMinIntervalCurve:
+      inputs:
+      outputs:
+      - name: curve
+        nilable: true
+        type:
+          luaobject: LuaCurveObject
+    GetStripIntervalWhitespace:
+      inputs:
+      outputs:
+      - name: strip
+        type:
+          enum: SecondsFormatterIntervalWhitespace
+    Reset:
+      inputs:
+      outputs:
+    SetApproximationSeconds:
+      inputs:
+      - name: seconds
+        type: number
+      outputs:
+    SetCanRoundUpIntervals:
+      inputs:
+      - name: canRound
+        type: boolean
+      outputs:
+    SetCanRoundUpLastUnit:
+      inputs:
+      - name: canRound
+        type: boolean
+      outputs:
+    SetConvertToLower:
+      inputs:
+      - name: convert
+        type: boolean
+      outputs:
+    SetDefaultAbbreviation:
+      inputs:
+      - name: abbreviation
+        type:
+          enum: SecondsFormatterAbbrevation
+      outputs:
+    SetDesiredUnitCount:
+      inputs:
+      - name: count
+        type: number
+      outputs:
+    SetDesiredUnitCountCurve:
+      inputs:
+      - name: curve
+        type:
+          luaobject: LuaCurveObject
+      outputs:
+    SetMaxInterval:
+      inputs:
+      - name: interval
+        type:
+          enum: SecondsFormatterInterval
+      outputs:
+    SetMaxIntervalCurve:
+      inputs:
+      - name: curve
+        type:
+          luaobject: LuaCurveObject
+      outputs:
+    SetMillisecondsThreshold:
+      inputs:
+      - name: threshold
+        type: number
+      outputs:
+    SetMinInterval:
+      inputs:
+      - name: interval
+        type:
+          enum: SecondsFormatterInterval
+      outputs:
+    SetMinIntervalCurve:
+      inputs:
+      - name: curve
+        type:
+          luaobject: LuaCurveObject
+      outputs:
+    SetStripIntervalWhitespace:
+      inputs:
+      - name: strip
+        type:
+          enum: SecondsFormatterIntervalWhitespace
+      outputs:
 UnitHealPredictionCalculator:
   methods:
     EvaluateCurrentHealthPercent:
