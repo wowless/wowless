@@ -158,6 +158,8 @@ type:
               type: flag
             RequiresComparableUnitTokens:
               type: flag
+            RequiresDeclassifiedUnitIdentity:
+              type: flag
             RequiresFontStringTextAccess:
               type: flag
             RequiresFriendList:

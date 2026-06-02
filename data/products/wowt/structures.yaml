@@ -2032,6 +2032,18 @@ C_Commentator.CommentatorHistory:
       type:
         arrayof:
           structure: C_Commentator.CommentatorTeamDirectoryEntry
+C_Commentator.CommentatorMatchDataState:
+  fields:
+    receivedPlayerInfo:
+      type: boolean
+    requestedCooldownInfo:
+      type: boolean
+    requestedPlayerCooldowns:
+      type:
+        arrayof:
+          structure: C_Commentator.TeamPlayerRequestedCooldownInfo
+    setInstancePlayers:
+      type: boolean
 C_Commentator.CommentatorOverrideNameEntry:
   fields:
     newName:
@@ -2106,6 +2118,14 @@ C_Commentator.NameOverrideEntry:
       type: string
     overrideName:
       type: string
+C_Commentator.TeamPlayerRequestedCooldownInfo:
+  fields:
+    cooldownsRequested:
+      type: number
+    playerIndex:
+      type: number
+    teamIndex:
+      type: number
 C_ConsoleScriptCollection.ConsoleScriptCollectionData:
   fields:
     ID:

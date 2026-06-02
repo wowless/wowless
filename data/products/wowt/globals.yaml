@@ -3529,12 +3529,13 @@ Enum:
     NumValues: 2
   DamageMeterCombineSessionType:
     Arena: 2
+    ArenaMultiRound: 3
     ChallengeMode: 1
     None: 0
   DamageMeterCombineSessionTypeMeta:
-    MaxValue: 2
+    MaxValue: 3
     MinValue: 0
-    NumValues: 3
+    NumValues: 4
   DamageMeterNumbers:
     Compact: 1
     Complete: 2
@@ -9773,6 +9774,15 @@ Enum:
     MaxValue: 4
     MinValue: 0
     NumValues: 5
+  TrackedSpellsResult:
+    MismatchedCooldownInfo: 3
+    NoCooldownInfo: 2
+    PlayerNotFound: 1
+    Success: 0
+  TrackedSpellsResultMeta:
+    MaxValue: 3
+    MinValue: 0
+    NumValues: 4
   TradeskillOrderDuration:
     Long: 3
     Medium: 2

@@ -7188,6 +7188,12 @@ C_Commentator.GetCommentatorHistory:
   - name: history
     type:
       structure: C_Commentator.CommentatorHistory
+C_Commentator.GetCommentatorMatchDataState:
+  inputs:
+  outputs:
+  - name: state
+    type:
+      structure: C_Commentator.CommentatorMatchDataState
 C_Commentator.GetCurrentMapID:
   inputs:
   outputs:
@@ -7589,6 +7595,9 @@ C_Commentator.GetTrackedSpells:
     nilable: true
     type:
       arrayof: number
+  - name: result
+    type:
+      enum: TrackedSpellsResult
 C_Commentator.GetTrackedSpellsByUnit:
   inputs:
   - name: unitToken
@@ -7601,6 +7610,9 @@ C_Commentator.GetTrackedSpellsByUnit:
     nilable: true
     type:
       arrayof: number
+  - name: result
+    type:
+      enum: TrackedSpellsResult
 C_Commentator.GetUnitData:
   inputs:
   - name: unitToken
@@ -14385,6 +14397,11 @@ C_HousingLayout.IsDraggingRoom:
   - name: isDragging
     type: boolean
   - name: isAccessibleDrag
+    type: boolean
+C_HousingLayout.IsDraggingStairwell:
+  inputs:
+  outputs:
+  - name: isDraggingStairwell
     type: boolean
 C_HousingLayout.MoveDraggedRoom:
   inputs:
@@ -23217,6 +23234,18 @@ C_ScenarioInfo.GetTieredEntranceActiveSpells:
     nilable: true
     type:
       arrayof: number
+C_ScenarioInfo.GetUnitCriteriaProgressValues:
+  inputs:
+  - name: unit
+    type: unit
+  mayreturnnothing: true
+  outputs:
+  - name: actualValue
+    type: number
+  - name: percentValue
+    type: number
+  - name: percentValueString
+    type: string
 C_ScenarioInfo.IsTieredEntranceScenario:
   inputs:
   outputs:
