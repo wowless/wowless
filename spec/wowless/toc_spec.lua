@@ -59,6 +59,15 @@ describe('wowless.toc', function()
           local toc = parse(gametype, table.concat(lines, '\n'))
           assert.same({ 'Foo', 'Bar' }, toc.deps)
         end)
+        it('handles filters on dep fields', function()
+          local lines = {
+            '## Dep: Foo',
+            '## Dep: Bar [AllowLoad glue]',
+            '## Dep: Baz [AllowLoad game]',
+          }
+          local toc = parse(gametype, table.concat(lines, '\n'))
+          assert.same({ 'Foo', 'Baz' }, toc.deps)
+        end)
         it('merges multiple optionaldep fields', function()
           local lines = {
             '## OptionalDep: Foo',

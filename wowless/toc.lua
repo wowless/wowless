@@ -54,8 +54,12 @@ local function parse(gametype, content)
   content = content:gsub('%[Family%]', gametypes[gametype].family)
   local toc = { attrs = {}, deps = {}, files = {}, optionaldeps = {} }
   for line in content:gmatch('[^\r\n]+') do
-    line = line:match('^%s*(.-)%s*$')
-    if line:sub(1, 3) == '## ' then
+    local allok = true
+    line = line:match('^%s*(.-)%s*$'):gsub('%[(.-):?%s+(.-)%]', function(filter, fdata)
+      allok = allok and assert(filters[filter], filter)(fdata, gts)
+      return ''
+    end)
+    if allok and line:sub(1, 3) == '## ' then
       local key, value = line:match('([^:]+): (.*)', 4)
       if key then
         if key == 'Interface' then
@@ -78,16 +82,8 @@ local function parse(gametype, content)
           toc.attrs[key] = value
         end
       end
-    elseif line ~= '' and line:sub(1, 1) ~= '#' then
-      local file, filterstr = line:match('^([^%s]+)(.*)$')
-      local allok = true
-      for filter, fdata in filterstr:gmatch('%[(.-):?%s+(.-)%]') do
-        local ok = assert(filters[filter], filter)(fdata, gts)
-        allok = allok and ok
-      end
-      if allok then
-        table.insert(toc.files, file)
-      end
+    elseif allok and line ~= '' and line:sub(1, 1) ~= '#' then
+      table.insert(toc.files, line:match('^([^%s]+)'))
     end
   end
   return toc
