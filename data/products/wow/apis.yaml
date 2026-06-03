@@ -39584,7 +39584,8 @@ UnitHealthPercent:
     type: boolean
   - name: curve
     nilable: true
-    type: table
+    type:
+      luaobject: LuaCurveObjectBase
   outputs:
   - name: result
     type: table
@@ -40291,7 +40292,8 @@ UnitPowerPercent:
     type: boolean
   - name: curve
     nilable: true
-    type: table
+    type:
+      luaobject: LuaCurveObjectBase
   outputs:
   - name: result
     type: table

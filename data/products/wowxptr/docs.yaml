@@ -648,7 +648,8 @@ typedefs:
     type:
       luaobject: LuaCurveObject
   LuaCurveObjectBase:
-    type: table
+    type:
+      luaobject: LuaCurveObjectBase
   LuaDurationClock:
     type:
       luaobject: LuaDurationClock

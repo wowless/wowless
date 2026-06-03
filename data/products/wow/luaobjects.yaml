@@ -225,7 +225,8 @@ LuaDurationObject:
     EvaluateElapsedDuration:
       inputs:
       - name: curve
-        type: table
+        type:
+          luaobject: LuaCurveObjectBase
       - default: 0
         name: modifier
         type:
@@ -236,7 +237,8 @@ LuaDurationObject:
     EvaluateElapsedPercent:
       inputs:
       - name: curve
-        type: table
+        type:
+          luaobject: LuaCurveObjectBase
       - default: 0
         name: modifier
         type:
@@ -247,7 +249,8 @@ LuaDurationObject:
     EvaluateRemainingDuration:
       inputs:
       - name: curve
-        type: table
+        type:
+          luaobject: LuaCurveObjectBase
       - default: 0
         name: modifier
         type:
@@ -258,7 +261,8 @@ LuaDurationObject:
     EvaluateRemainingPercent:
       inputs:
       - name: curve
-        type: table
+        type:
+          luaobject: LuaCurveObjectBase
       - default: 0
         name: modifier
         type:
@@ -269,7 +273,8 @@ LuaDurationObject:
     EvaluateTotalDuration:
       inputs:
       - name: curve
-        type: table
+        type:
+          luaobject: LuaCurveObjectBase
       - default: 0
         name: modifier
         type:
@@ -689,14 +694,16 @@ UnitHealPredictionCalculator:
     EvaluateCurrentHealthPercent:
       inputs:
       - name: curve
-        type: table
+        type:
+          luaobject: LuaCurveObjectBase
       outputs:
       - name: result
         type: table
     EvaluateMissingHealthPercent:
       inputs:
       - name: curve
-        type: table
+        type:
+          luaobject: LuaCurveObjectBase
       outputs:
       - name: result
         type: table
