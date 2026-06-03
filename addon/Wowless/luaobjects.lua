@@ -84,10 +84,11 @@ local function checkLuaObject(ty, o)
       assertEquals(o, o)
     end,
     tostring = function()
+      local s = tostring(o)
       if config.tostring_metamethod then
-        assert(tostring(o):match('^' .. ty .. ': 0x[0-9a-f]+$'))
+        assert(s:match('^' .. ty .. ': 0x[0-9a-f]+$'), s)
       else
-        assert(tostring(o):match('^userdata: 0[xX]?%x+$'))
+        assert(s:match('^userdata: 0[xX]?%x+$'), s)
       end
     end,
     type = function()
@@ -140,11 +141,17 @@ local factories = {
   AbbreviatedNumberFormatter = function()
     return _G.C_StringUtil.CreateAbbreviatedNumberFormatter()
   end,
+  DurationTextBinding = function()
+    return _G.C_DurationUtil.CreateDurationTextBinding()
+  end,
   LuaColorCurveObject = function()
     return _G.C_CurveUtil.CreateColorCurve()
   end,
   LuaCurveObject = function()
     return _G.C_CurveUtil.CreateCurve()
+  end,
+  LuaDurationManualClock = function()
+    return _G.C_DurationUtil.CreateManualClock()
   end,
   LuaDurationObject = function()
     return _G.C_DurationUtil.CreateDuration()

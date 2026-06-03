@@ -32,6 +32,7 @@ addon:
     CooldownLayoutStatus:
     CooldownLayoutType:
     EditModeChatFrameDisplayOnlySetting:
+    HousingCatalogEntrySubtype:
   hooked_globals:
     SetItemRef:
     UpdateUIParentPosition:
@@ -65,6 +66,17 @@ addon:
     raidGraphicsViewDistance:
     RenderScale:
   overwritten_apis:
+    C_HousingBasicMode.StartPlacingNewDecor:
+    C_HousingCatalog.CanDestroyEntry:
+    C_HousingCatalog.CreateCatalogSearcher:
+    C_HousingCatalog.DestroyEntry:
+    C_HousingCatalog.GetCatalogCategoryInfo:
+    C_HousingCatalog.GetCatalogEntryInfo:
+    C_HousingCatalog.GetCatalogEntryInfoByItem:
+    C_HousingCatalog.GetCatalogEntryInfoByRecordID:
+    C_HousingCatalog.GetCatalogSubcategoryInfo:
+    C_HousingCatalog.SearchCatalogCategories:
+    C_HousingCatalog.SearchCatalogSubcategories:
     C_Traits.GetConditionInfo:
     C_Traits.GetEntryInfo:
     C_Traits.GetTreeInfo:

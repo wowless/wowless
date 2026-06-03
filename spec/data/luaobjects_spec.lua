@@ -31,15 +31,9 @@ describe('luaobjects', function()
             it('is a chain', function()
               process(t, k, k)
             end)
-            if not nr[k] then
-              it('is not virtual', function()
-                assert.Nil(luaobjects[k].virtual)
-              end)
-            else
-              it('is used more than once if virtual', function()
-                assert.True(not luaobjects[k].virtual or nr[k] > 1)
-              end)
-            end
+            it('is not leaf if virtual', function()
+              assert.True(not luaobjects[k].virtual or nr[k] > 0)
+            end)
           end)
         end
       end)

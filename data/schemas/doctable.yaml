@@ -141,6 +141,8 @@ type:
               type: flag
             MayReturnNothing:
               type: flag
+            MouseFocusValidForLimitedInput:
+              type: flag
             Name:
               required: true
               type: string
@@ -197,6 +199,10 @@ type:
             RequiresValidActionSlot:
               type: flag
             RequiresValidAndPublicCVar:
+              type: flag
+            RequiresValidFontAsset:
+              type: flag
+            RequiresValidFontHeight:
               type: flag
             RequiresValidInviteTarget:
               type: flag
@@ -354,6 +360,7 @@ type:
                 taggedunion:
                   Error: tag
                   ReturnNothing: tag
+                  ReturnWithError: tag
             Name:
               required: true
               type: string

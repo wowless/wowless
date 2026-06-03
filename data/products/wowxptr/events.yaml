@@ -163,6 +163,8 @@ AJ_PVP_SKIRMISH_ACTION:
   payload:
 AJ_PVP_SPECIAL_BG_ACTION:
   payload:
+AJ_PVP_TRAINING_GROUNDS_ACTION:
+  payload:
 AJ_QUEST_LOG_OPEN:
   payload:
   - name: questID
@@ -392,6 +394,10 @@ AUCTION_MULTISELL_UPDATE:
     type: number
   - name: totalToCreate
     type: number
+AURA_DATA_PROVIDER_SWITCH:
+  payload:
+  - name: useRealDataProvider
+    type: boolean
 AUTH_CHALLENGE_FINISHED:
   payload:
 AUTOFOLLOW_BEGIN:
@@ -891,10 +897,6 @@ CATALOG_SHOP_FETCH_SUCCESS:
 CATALOG_SHOP_OPEN_SIMPLE_CHECKOUT:
   payload:
   - name: checkoutID
-    type: number
-CATALOG_SHOP_PMT_IMAGE_DOWNLOADED:
-  payload:
-  - name: catalogProductID
     type: number
 CATALOG_SHOP_PURCHASE_SUCCESS:
   payload:
@@ -3502,6 +3504,30 @@ CINEMATIC_START:
       enum: CameraModeAspectRatio
 CINEMATIC_STOP:
   payload:
+CLASS_TALENTS_SWITCH_TO_LOADOUT_BY_INDEX:
+  callback: true
+  noscript: true
+  payload:
+  - name: loadoutIndex
+    type: number
+CLASS_TALENTS_SWITCH_TO_LOADOUT_BY_NAME:
+  callback: true
+  noscript: true
+  payload:
+  - name: loadoutName
+    type: string
+CLASS_TALENTS_SWITCH_TO_SPECIALIZATION_BY_INDEX:
+  callback: true
+  noscript: true
+  payload:
+  - name: specIndex
+    type: number
+CLASS_TALENTS_SWITCH_TO_SPECIALIZATION_BY_NAME:
+  callback: true
+  noscript: true
+  payload:
+  - name: specName
+    type: string
 CLASS_TRIAL_TIMER_START:
   payload:
 CLASS_TRIAL_UPGRADE_COMPLETE:
@@ -3636,13 +3662,13 @@ CLUB_MEMBER_ADDED:
   - name: clubId
     type: string
   - name: memberId
-    type: number
+    type: string
 CLUB_MEMBER_PRESENCE_UPDATED:
   payload:
   - name: clubId
     type: string
   - name: memberId
-    type: number
+    type: string
   - name: presence
     type:
       enum: ClubMemberPresence
@@ -3651,13 +3677,13 @@ CLUB_MEMBER_REMOVED:
   - name: clubId
     type: string
   - name: memberId
-    type: number
+    type: string
 CLUB_MEMBER_ROLE_UPDATED:
   payload:
   - name: clubId
     type: string
   - name: memberId
-    type: number
+    type: string
   - name: roleId
     type: number
 CLUB_MEMBER_UPDATED:
@@ -3665,7 +3691,7 @@ CLUB_MEMBER_UPDATED:
   - name: clubId
     type: string
   - name: memberId
-    type: number
+    type: string
 CLUB_MEMBERS_UPDATED:
   payload:
   - name: clubId
@@ -4362,6 +4388,10 @@ ENCOUNTER_END:
     type: number
   - name: success
     type: number
+  - name: encounterUnitStatus
+    type:
+      arrayof:
+        structure: C_EncounterInfo.EncounterUnitStatus
 ENCOUNTER_LOOT_RECEIVED:
   payload:
   - name: encounterID
@@ -4397,6 +4427,10 @@ ENCOUNTER_TIMELINE_EVENT_ADDED:
     type:
       structure: C_EncounterTimeline.EncounterTimelineEventInfo
 ENCOUNTER_TIMELINE_EVENT_BLOCK_STATE_CHANGED:
+  payload:
+  - name: eventID
+    type: number
+ENCOUNTER_TIMELINE_EVENT_COLOR_CHANGED:
   payload:
   - name: eventID
     type: number
@@ -4521,11 +4555,11 @@ FORBIDDEN_NAME_PLATE_CREATED:
 FORBIDDEN_NAME_PLATE_UNIT_ADDED:
   payload:
   - name: unitToken
-    type: string
+    type: unit
 FORBIDDEN_NAME_PLATE_UNIT_REMOVED:
   payload:
   - name: unitToken
-    type: string
+    type: unit
 FORCE_REFRESH_HOUSE_FINDER:
   payload:
 FRAME_MANAGER_UPDATE_ALL:
@@ -5098,6 +5132,10 @@ HOUSE_EDITOR_MODE_CHANGED:
   - name: currentEditMode
     type:
       enum: HouseEditorMode
+HOUSE_EXTERIOR_DECOR_HIDDEN_CHANGED:
+  payload:
+  - name: isDecorHidden
+    type: boolean
 HOUSE_EXTERIOR_POSITION_FAILURE:
   payload:
   - name: housingResult
@@ -5321,6 +5359,10 @@ HOUSING_FIXTURE_UNLOCKED:
   payload:
   - name: fixtureID
     type: number
+HOUSING_INSPECT_MODE_DECOR_HOVERED_CHANGED:
+  payload:
+HOUSING_INSPECT_MODE_STATE_UPDATED:
+  payload:
 HOUSING_LAYOUT_DOOR_SELECTED:
   payload:
   - name: roomGUID
@@ -5434,9 +5476,9 @@ HOUSING_SET_FIXTURE_RESPONSE:
       enum: HousingResult
 HOUSING_STORAGE_ENTRY_UPDATED:
   payload:
-  - name: entryID
+  - name: entryVariantID
     type:
-      structure: HousingCatalogEntryID
+      structure: HousingCatalogEntryVariantID
 HOUSING_STORAGE_UPDATED:
   payload:
 IGNORELIST_UPDATE:
@@ -6092,7 +6134,6 @@ MINIMAP_PING:
     type: number
   - name: x
     type: number
-  restricted: true
 MINIMAP_UPDATE_TRACKING:
   payload:
 MINIMAP_UPDATE_ZOOM:
@@ -6158,7 +6199,7 @@ NAME_PLATE_CREATED:
 NAME_PLATE_UNIT_ADDED:
   payload:
   - name: unitToken
-    type: string
+    type: unit
 NAME_PLATE_UNIT_BEHIND_CAMERA_CHANGED:
   payload:
   - name: unitTarget
@@ -6168,7 +6209,7 @@ NAME_PLATE_UNIT_BEHIND_CAMERA_CHANGED:
 NAME_PLATE_UNIT_REMOVED:
   payload:
   - name: unitToken
-    type: string
+    type: unit
 NAVIGATION_DESTINATION_REACHED:
   payload:
   - name: isWaypoint
@@ -7069,6 +7110,8 @@ QUEST_ACCEPT_CONFIRM:
     type: string
   - name: questTitle
     type: string
+  - name: questID
+    type: number
 QUEST_ACCEPTED:
   payload:
   - name: questId
@@ -7847,6 +7890,12 @@ SPELL_CONFIRMATION_PROMPT:
     type: number
   - name: currentDifficulty
     type: number
+  - name: displayItemID
+    type: number
+  - name: itemContext
+    type: number
+  - name: treasureContextLevel
+    type: number
 SPELL_CONFIRMATION_TIMEOUT:
   payload:
   - name: spellID
@@ -8303,6 +8352,8 @@ TRADE_TARGET_ITEM_CHANGED:
     type: number
 TRADE_UPDATE:
   payload:
+TRADE_UPDATE_WARNINGS:
+  payload:
 TRAINER_CLOSED:
   payload:
 TRAINER_DESCRIPTION_UPDATE:
@@ -8531,6 +8582,16 @@ UNIT_AURA:
   - name: updateInfo
     type:
       structure: UnitAuraUpdateInfo
+UNIT_AURA_BLOCK_LIST_CLEARED:
+  payload:
+  - name: unitTarget
+    type: unit
+UNIT_AURA_BLOCKED:
+  payload:
+  - name: unitTarget
+    type: unit
+  - name: auraInstanceID
+    type: number
 UNIT_CHEAT_TOGGLE_EVENT:
   payload:
 UNIT_CLASSIFICATION_CHANGED:
@@ -9115,6 +9176,14 @@ UPDATE_WEB_TICKET:
   - name: caseDescription
     nilable: true
     type: string
+URL_TEXTURE_REQUEST_RESULT:
+  payload:
+  - name: texture
+    type:
+      uiobject: Texture
+  - name: result
+    type:
+      enum: UrlTextureResult
 USE_BIND_CONFIRM:
   payload:
 USE_COMBINED_BAGS_CHANGED:

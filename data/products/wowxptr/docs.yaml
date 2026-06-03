@@ -124,6 +124,10 @@ lies:
           _change:
             from: string
             to: unit
+  events:
+    MINIMAP_PING:
+      _remove:
+        restricted: true
   extra_apis:
     C_BarberShopInternal.SetQAMode:
     C_CinematicList.GetUICinematicList:
@@ -135,6 +139,7 @@ lies:
     C_LiveEvent.OnLiveEventBannerClicked:
     C_LiveEvent.OnLiveEventPopupClicked:
     C_WorldSafeLocsUIInternal.GetWorldSafeLocs:
+    IsCollisionEnabled:
     ToggleAnimKitDisplay:
     ToggleCollision:
     ToggleCollisionDisplay:
@@ -147,6 +152,7 @@ lies:
     CharCreateAnimTurnType:
     CharSectionCondition:
     ConfigurationWarning:
+    UnitTokenType:
     WarbandEventState:
     WarbandGroupFlags:
     WarbandPlacementDisplayInfoType:
@@ -384,6 +390,10 @@ lies:
 script_objects:
   AbbreviateConfigAPI:
     luaobject: AbbreviateConfig
+  AbbreviatedNumberFormatterAPI:
+    luaobject: AbbreviatedNumberFormatter
+  DurationTextBindingObjectAPI:
+    luaobject: DurationTextBinding
   FrameAPIArchaeologyDigSiteFrame:
     uiobject: ArchaeologyDigSiteFrame
   FrameAPIBlob:
@@ -424,10 +434,20 @@ script_objects:
     luaobject: LuaCurveObject
   LuaCurveObjectBaseAPI:
     luaobject: LuaCurveObjectBase
+  LuaDurationClockObjectAPI:
+    luaobject: LuaDurationClock
+  LuaDurationManualClockAPI:
+    luaobject: LuaDurationManualClock
   LuaDurationObjectAPI:
     luaobject: LuaDurationObject
   MinimapFrameAPI:
     uiobject: Minimap
+  NumericFormatterAPI:
+    luaobject: NumericFormatter
+  NumericRuleFormatterAPI:
+    luaobject: NumericRuleFormatter
+  SecondsFormatterAPI:
+    luaobject: SecondsFormatter
   SimpleAnimAlphaAPI:
     uiobject: Alpha
   SimpleAnimAPI:
@@ -512,6 +532,9 @@ typedefs:
   AbbreviateConfig:
     type:
       luaobject: AbbreviateConfig
+  AbbreviatedNumberFormatter:
+    type:
+      luaobject: AbbreviatedNumberFormatter
   AnimationDataEnum:
     type: number
   ArtifactTiers:
@@ -540,9 +563,13 @@ typedefs:
     type: string
   ClubInvitationId:
     type: string
+  ClubMemberOpaqueId:
+    type: string
   ClubStreamId:
     type: string
   ConnectionIptype:
+    type: string
+  ConnectionProtocol:
     type: string
   CooldownFrame:
     type:
@@ -553,8 +580,17 @@ typedefs:
       uiobject: UIObject
   cstring:
     type: string
+  DurationMillisecondsPrimitive:
+    type: number
   DurationSeconds:
     type: number
+  DurationSecondsDouble:
+    type: number
+  DurationSecondsPrimitive:
+    type: number
+  DurationTextBinding:
+    type:
+      luaobject: DurationTextBinding
   EmptiableItemLocation:
     type:
       structure: ItemLocation
@@ -568,6 +604,8 @@ typedefs:
   fileID:
     type: number
   FontAlphabet:
+    type: string
+  FontAsset:
     type: string
   FrameEventCallbackType:
     type:
@@ -611,6 +649,12 @@ typedefs:
       luaobject: LuaCurveObject
   LuaCurveObjectBase:
     type: table
+  LuaDurationClock:
+    type:
+      luaobject: LuaDurationClock
+  LuaDurationManualClock:
+    type:
+      luaobject: LuaDurationManualClock
   LuaDurationObject:
     type:
       luaobject: LuaDurationObject
@@ -642,6 +686,12 @@ typedefs:
     type: string
   number:
     type: number
+  NumericFormatter:
+    type:
+      luaobject: NumericFormatter
+  NumericRuleFormatter:
+    type:
+      luaobject: NumericRuleFormatter
   QuestObjectiveType:
     type: number
   RecruitAcceptanceID:
@@ -650,6 +700,9 @@ typedefs:
     outnil: true
     type:
       uiobject: Region
+  SecondsFormatter:
+    type:
+      luaobject: SecondsFormatter
   SendChatMessageType:
     type: string
   SimpleAnim:
@@ -750,11 +803,15 @@ typedefs:
     type: unit
   UnitTokenRestrictedForAddOns:
     type: unit
+  UnitTokenType:
+    type: unit
   UnitTokenVariant:
     type: unit
   WeeklyRewardItemDBID:
     type: string
   WOWGUID:
+    type: string
+  WowLocale:
     type: string
   WOWMONEY:
     type: number

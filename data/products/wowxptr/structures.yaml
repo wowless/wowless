@@ -10,6 +10,8 @@ AddPrivateAuraAnchorArgs:
       nilable: true
       type:
         structure: PrivateAuraIconInfo
+    isContainer:
+      type: boolean
     parent:
       type:
         uiobject: Frame
@@ -171,28 +173,6 @@ C_AccountStore.AccountStoreItemInfo:
         enum: AccountStoreItemStatus
     transmogSetID:
       nilable: true
-      type: number
-C_ActionBar.ActionBarChargeInfo:
-  fields:
-    chargeModRate:
-      type: number
-    cooldownDuration:
-      type: number
-    cooldownStartTime:
-      type: number
-    currentCharges:
-      type: number
-    maxCharges:
-      type: number
-C_ActionBar.ActionBarCooldownInfo:
-  fields:
-    duration:
-      type: number
-    isEnabled:
-      type: boolean
-    modRate:
-      type: number
-    startTime:
       type: number
 C_ActionBar.ActionUsableState:
   fields:
@@ -367,7 +347,12 @@ C_AreaPoiInfo.AreaPOIInfo:
       type: boolean
     isCurrentEvent:
       type: boolean
+    isLocked:
+      default: false
+      type: boolean
     isPrimaryMapForPOI:
+      type: boolean
+    isSuppressible:
       type: boolean
     linkedUiMapID:
       nilable: true
@@ -685,6 +670,15 @@ C_AuctionHouse.OwnedAuctionInfo:
     timeLeftSeconds:
       nilable: true
       type: number
+C_AutoComplete.AutoCompleteResult:
+  fields:
+    bnetID:
+      type: number
+    name:
+      type: string
+    priority:
+      type:
+        enum: AutoCompletePriority
 C_AzeriteEmpoweredItem.AzeriteEmpoweredItemPowerInfo:
   fields:
     azeritePowerID:
@@ -1201,6 +1195,9 @@ C_CatalogShop.CatalogShopCategoryInfo:
       type: boolean
 C_CatalogShop.CatalogShopProductDisplayInfo:
   fields:
+    additionalProductPMTURLs:
+      type:
+        arrayof: string
     creatureDisplayInfoIDs:
       type:
         arrayof: number
@@ -1227,6 +1224,9 @@ C_CatalogShop.CatalogShopProductDisplayInfo:
       type: number
     hasUnknownLicense:
       type: boolean
+    houseTextureAtlas:
+      nilable: true
+      type: string
     iconFileDataID:
       nilable: true
       type: number
@@ -1300,11 +1300,12 @@ C_CatalogShop.CatalogShopProductInfo:
       type: number
     catalogShopProductID:
       type: number
-    consumableQuantity:
-      nilable: true
-      type: number
     containsHousingItem:
       type: boolean
+    decorQuantity:
+      nilable: true
+      type:
+        structure: C_CatalogShop.DecorQuantity
     description:
       type: string
     discountPercentage:
@@ -1323,6 +1324,8 @@ C_CatalogShop.CatalogShopProductInfo:
     isFullyOwned:
       type: boolean
     isHidden:
+      type: boolean
+    isMystery:
       type: boolean
     isPurchasePending:
       type: boolean
@@ -1349,7 +1352,13 @@ C_CatalogShop.CatalogShopProductInfo:
       type: string
     originalPrice:
       type: string
+    previewBGOverrideProductURL:
+      nilable: true
+      type: string
     previewIconTexture:
+      nilable: true
+      type: string
+    previewSmallBGOverrideProductURL:
       nilable: true
       type: string
     price:
@@ -1438,6 +1447,12 @@ C_CatalogShop.CatalogShopVirtualCurrency:
       type: number
     currencyCode:
       type: string
+C_CatalogShop.DecorQuantity:
+  fields:
+    placedQuantity:
+      type: number
+    storedQuantity:
+      type: number
 C_CatalogShop.RefundableDecorInfo:
   fields:
     decorGUID:
@@ -1591,7 +1606,7 @@ C_Club.ClubInfo:
 C_Club.ClubInvitationCandidateInfo:
   fields:
     memberId:
-      type: number
+      type: string
     name:
       type: string
     priority:
@@ -1661,7 +1676,7 @@ C_Club.ClubMemberInfo:
       nilable: true
       type: number
     memberId:
-      type: number
+      type: string
     memberNote:
       nilable: true
       type: string
@@ -2019,6 +2034,18 @@ C_Commentator.CommentatorHistory:
       type:
         arrayof:
           structure: C_Commentator.CommentatorTeamDirectoryEntry
+C_Commentator.CommentatorMatchDataState:
+  fields:
+    receivedPlayerInfo:
+      type: boolean
+    requestedCooldownInfo:
+      type: boolean
+    requestedPlayerCooldowns:
+      type:
+        arrayof:
+          structure: C_Commentator.TeamPlayerRequestedCooldownInfo
+    setInstancePlayers:
+      type: boolean
 C_Commentator.CommentatorOverrideNameEntry:
   fields:
     newName:
@@ -2093,6 +2120,14 @@ C_Commentator.NameOverrideEntry:
       type: string
     overrideName:
       type: string
+C_Commentator.TeamPlayerRequestedCooldownInfo:
+  fields:
+    cooldownsRequested:
+      type: number
+    playerIndex:
+      type: number
+    teamIndex:
+      type: number
 C_ConsoleScriptCollection.ConsoleScriptCollectionData:
   fields:
     ID:
@@ -2645,6 +2680,9 @@ C_DamageMeter.DamageMeterCombatSource:
       type: number
     deathTimeSeconds:
       type: number
+    factionGroup:
+      nilable: true
+      type: string
     isLocalPlayer:
       type: boolean
     name:
@@ -2652,6 +2690,9 @@ C_DamageMeter.DamageMeterCombatSource:
     sourceCreatureID:
       nilable: true
       type: number
+    sourceDisplayType:
+      type:
+        enum: DamageMeterSourceDisplayType
     sourceGUID:
       nilable: true
       type: string
@@ -2726,6 +2767,37 @@ C_DeathInfo.SelfResurrectOption:
       type: number
 C_DeathRecap.DeathRecapEventInfo:
   fields:
+C_DelvesUI.TieredEntranceRewardInfo:
+  fields:
+    context:
+      type:
+        enum: ItemCreationContext
+    id:
+      type: number
+    quantity:
+      type: number
+    rewardType:
+      type:
+        enum: TieredEntranceRewardType
+C_DelvesUI.TieredEntranceTierInfo:
+  fields:
+    lockedReason:
+      nilable: true
+      type: string
+    modifierUIWidgetSetID:
+      type: number
+    rewards:
+      type:
+        arrayof:
+          structure: C_DelvesUI.TieredEntranceRewardInfo
+    suggestedILvl:
+      type: number
+    tier:
+      type: number
+    tierDescription:
+      type: string
+    unlocked:
+      type: boolean
 C_EditMode.EditModeAnchorInfo:
   fields:
     offsetX:
@@ -2796,6 +2868,14 @@ C_EncodingUtil.JSONSerializationOptions:
     ignoreSerializationErrors:
       default: false
       type: boolean
+C_EncounterInfo.EncounterUnitStatus:
+  fields:
+    creatureID:
+      type: number
+    creatureName:
+      type: string
+    remainingHealthPercent:
+      type: number
 C_EncounterJournal.DungeonEntranceMapInfo:
   fields:
     areaPoiID:
@@ -2897,9 +2977,6 @@ C_EncounterJournal.EncounterJournalSectionInfo:
       type: number
 C_EncounterTimeline.EncounterTimelineEventInfo:
   fields:
-    color:
-      type:
-        structure: colorRGB
     duration:
       type: number
     iconFileID:
@@ -2983,7 +3060,7 @@ C_EncounterWarnings.EncounterWarningInfo:
       type: string
     color:
       type:
-        structure: colorRGB
+        structure: colorRGBA
     duration:
       type: number
     iconFileID:
@@ -3967,6 +4044,9 @@ C_HousingCatalog.HousingBundleInfo:
       type:
         arrayof:
           structure: C_HousingCatalog.HousingBundleDecorEntryInfo
+    nonDecorProducts:
+      type:
+        arrayof: number
     originalPrice:
       nilable: true
       type: number
@@ -3976,7 +4056,7 @@ C_HousingCatalog.HousingBundleInfo:
       type: number
 C_HousingCatalog.HousingCatalogCategoryInfo:
   fields:
-    anyOwnedEntries:
+    anyStoredEntries:
       type: boolean
     icon:
       nilable: true
@@ -4001,19 +4081,13 @@ C_HousingCatalog.HousingCatalogEntryInfo:
     categoryIDs:
       type:
         arrayof: number
-    customizations:
-      type:
-        arrayof: string
     dataTagsByID:
       type: table
     destroyableInstanceCount:
       type: number
-    dyeIDs:
+    entryType:
       type:
-        arrayof: number
-    entryID:
-      type:
-        structure: HousingCatalogEntryID
+        enum: HousingCatalogEntryType
     firstAcquisitionBonus:
       type: number
     iconAtlas:
@@ -4035,20 +4109,16 @@ C_HousingCatalog.HousingCatalogEntryInfo:
       type: number
     name:
       type: string
-    numPlaced:
-      type: number
     placementCost:
       type: number
     quality:
       nilable: true
       type:
         enum: ItemQuality
-    quantity:
+    recordID:
       type: number
     remainingRedeemable:
       type: number
-    showQuantity:
-      type: boolean
     size:
       type:
         enum: HousingCatalogEntrySize
@@ -4057,12 +4127,27 @@ C_HousingCatalog.HousingCatalogEntryInfo:
     subcategoryIDs:
       type:
         arrayof: number
+    totalNumPlaced:
+      type: number
+    totalNumStored:
+      type: number
     uiModelSceneID:
       nilable: true
       type: number
+C_HousingCatalog.HousingCatalogEntryVariantInfo:
+  fields:
+    dyeSlots:
+      type:
+        arrayof:
+          structure: HousingDecorDyeSlot
+    entryVariantID:
+      type:
+        structure: HousingCatalogEntryVariantID
+    numStored:
+      type: number
 C_HousingCatalog.HousingCatalogSubcategoryInfo:
   fields:
-    anyOwnedEntries:
+    anyStoredEntries:
       type: boolean
     icon:
       nilable: true
@@ -4085,14 +4170,22 @@ C_HousingCatalog.HousingCategorySearchInfo:
     includeFeaturedCategory:
       default: false
       type: boolean
-    withOwnedEntriesOnly:
+    withStoredEntriesOnly:
       default: false
       type: boolean
-C_HousingCatalog.HousingFeaturedDecorEntry:
+C_HousingCatalog.HousingFeaturedSmallProductInfo:
   fields:
-    entryID:
+    canPreview:
+      type: boolean
+    entryVariantID:
+      nilable: true
       type:
-        structure: HousingCatalogEntryID
+        structure: HousingCatalogEntryVariantID
+    originalPrice:
+      nilable: true
+      type: number
+    price:
+      type: number
     productID:
       type: number
 C_HousingCatalog.HousingMarketInfo:
@@ -4743,41 +4836,6 @@ C_LFGList.PvpRatingInfo:
       type: number
     tier:
       type: number
-C_LFGList.WowLocale:
-  fields:
-    deDE:
-      default: false
-      type: boolean
-    enUS:
-      default: false
-      type: boolean
-    esES:
-      default: false
-      type: boolean
-    esMX:
-      default: false
-      type: boolean
-    frFR:
-      default: false
-      type: boolean
-    itIT:
-      default: false
-      type: boolean
-    koKR:
-      default: false
-      type: boolean
-    ptBR:
-      default: false
-      type: boolean
-    ruRU:
-      default: false
-      type: boolean
-    zhCN:
-      default: false
-      type: boolean
-    zhTW:
-      default: false
-      type: boolean
 C_LootHistory.EncounterLootDropInfo:
   fields:
     allPassed:
@@ -4966,6 +5024,9 @@ C_MajorFactions.MajorFactionRenownRewardInfo:
       nilable: true
       type: number
     isAccountUnlock:
+      type: boolean
+    isCollected:
+      nilable: true
       type: boolean
     itemID:
       nilable: true
@@ -5270,7 +5331,7 @@ C_MythicPlus.MapSeasonBestInfo:
         arrayof: number
     completionDate:
       type:
-        structure: C_MythicPlus.MythicPlusDate
+        structure: CalendarTime
     dungeonScore:
       type: number
     durationSec:
@@ -5281,20 +5342,6 @@ C_MythicPlus.MapSeasonBestInfo:
       type:
         arrayof:
           structure: C_MythicPlus.MythicPlusMember
-C_MythicPlus.MythicPlusDate:
-  fields:
-    day:
-      type: number
-    hour:
-      type: number
-    minute:
-      type: number
-    month:
-      type: number
-    weekday:
-      type: number
-    year:
-      type: number
 C_MythicPlus.MythicPlusKeystoneAffix:
   fields:
     id:
@@ -5316,7 +5363,7 @@ C_MythicPlus.MythicPlusRunInfo:
       type: boolean
     completionDate:
       type:
-        structure: C_MythicPlus.MythicPlusDate
+        structure: CalendarTime
     durationSec:
       type: number
     level:
@@ -5795,6 +5842,8 @@ C_PlayerChoice.PlayerChoiceInfo:
       type: string
     requiresSelection:
       type: boolean
+    showChoicesAsGrid:
+      type: boolean
     showChoicesAsList:
       type: boolean
     soundKitID:
@@ -6095,6 +6144,9 @@ C_PvP.PvpBrawlInfo:
       type: string
     shortDescription:
       type: string
+    shouldHideRewardIcon:
+      default: false
+      type: boolean
     timeLeftUntilNextChange:
       nilable: true
       type: number
@@ -6588,7 +6640,7 @@ C_RecentAllies.RecentAllyStateData:
     currentLocation:
       nilable: true
       type: string
-    hasFriendRequestPending:
+    friendRequestSentThisSession:
       type: boolean
     isAFK:
       type: boolean
@@ -6894,6 +6946,21 @@ C_ScenarioInfo.ScenarioCriteriaInfo:
       type: string
     totalQuantity:
       default: 0
+      type: number
+C_ScenarioInfo.ScenarioDisplayInfo:
+  fields:
+    themeColor:
+      type:
+        structure: colorRGB
+C_ScenarioInfo.ScenarioIconInfo:
+  fields:
+    atlas:
+      type: string
+    description:
+      type: string
+    x:
+      type: number
+    y:
       type: number
 C_ScenarioInfo.ScenarioInformation:
   fields:
@@ -7975,6 +8042,8 @@ C_TransmogCollection.TransmogAppearanceSourceInfoData:
         enum: TransmogCollectionType
     icon:
       type: number
+    ignoreModelAttachmentChecksForIllusion:
+      type: boolean
     isCollected:
       type: boolean
     itemAppearanceID:
@@ -8039,6 +8108,8 @@ C_TransmogOutfitInfo.TransmogOutfitEntryInfo:
       type: string
     outfitID:
       type: number
+    playerFacingOutfitIndex:
+      type: number
     situationCategories:
       type:
         arrayof: string
@@ -8050,6 +8121,13 @@ C_TransmogOutfitInfo.TransmogOutfitLinkedSlotInfo:
     secondarySlotInfo:
       type:
         structure: C_TransmogOutfitInfo.TransmogOutfitSlotInfo
+C_TransmogOutfitInfo.TransmogOutfitOptionSheatheCategoryInfo:
+  fields:
+    categoryName:
+      type: string
+    sheatheCategory:
+      type:
+        enum: TransmogOutfitSlotOptionSheatheCategory
 C_TransmogOutfitInfo.TransmogOutfitSlotGroup:
   fields:
     appearanceSlotInfo:
@@ -8156,6 +8234,9 @@ C_TransmogOutfitInfo.ViewedTransmogOutfitSlotInfo:
       type: boolean
     isTransmogrified:
       type: boolean
+    sheatheCategory:
+      type:
+        enum: TransmogOutfitSlotOptionSheatheCategory
     texture:
       nilable: true
       type: number
@@ -11142,6 +11223,14 @@ DelveAssistActionData:
     receivedSpellID:
       nilable: true
       type: number
+DurationTextBindingFormatComponent:
+  fields:
+    formatter:
+      type:
+        luaobject: NumericFormatter
+    property:
+      type:
+        enum: DurationTextBindingProperty
 DyeColorCategoryDisplayInfo:
   fields:
     ID:
@@ -11171,10 +11260,6 @@ DyeColorDisplayInfo:
         structure: colorRGB
 EncounterEventInfo:
   fields:
-    color:
-      nilable: true
-      type:
-        structure: colorRGB
     enabled:
       type: boolean
     encounterEventID:
@@ -11477,11 +11562,13 @@ HouseExteriorTypeOption:
   fields:
     houseExteriorTypeID:
       type: number
+    isInvalid:
+      type: boolean
     isLocked:
       type: boolean
-    lockReasonString:
-      type: string
     name:
+      type: string
+    reasonString:
       type: string
 HouseExteriorTypeOptionsInfo:
   fields:
@@ -11583,15 +11670,19 @@ HouseOwnerCharacterInfo:
       type: string
 HousingCatalogEntryID:
   fields:
-    entrySubtype:
-      type:
-        enum: HousingCatalogEntrySubtype
     entryType:
       type:
         enum: HousingCatalogEntryType
     recordID:
       type: number
-    subtypeIdentifier:
+HousingCatalogEntryVariantID:
+  fields:
+    entryType:
+      type:
+        enum: HousingCatalogEntryType
+    recordID:
+      type: number
+    variantIdentifier:
       type: number
 HousingCatalogFilterTagGroupInfo:
   fields:
@@ -11636,6 +11727,9 @@ HousingDecorDyeSlot:
     dyeColorID:
       nilable: true
       type: number
+    dyeColorName:
+      nilable: true
+      type: string
     ID:
       type: number
     orderIndex:
@@ -11675,11 +11769,13 @@ HousingFixtureOption:
       type: number
     fixtureID:
       type: number
+    isInvalid:
+      type: boolean
     isLocked:
       type: boolean
-    lockReasonString:
-      type: string
     name:
+      type: string
+    reasonString:
       type: string
     typeID:
       type: number
@@ -11930,6 +12026,45 @@ NumberAbbrevOptions:
     locale:
       nilable: true
       type: string
+NumericRuleFormatBreakpoint:
+  fields:
+    components:
+      nilable: true
+      type:
+        arrayof:
+          structure: NumericRuleFormatComponent
+    format:
+      type: string
+    max:
+      nilable: true
+      type: number
+    min:
+      nilable: true
+      type: number
+    rounding:
+      default: 0
+      type:
+        enum: NumericRuleFormatRounding
+    step:
+      nilable: true
+      type: number
+    threshold:
+      type: number
+NumericRuleFormatComponent:
+  fields:
+    div:
+      nilable: true
+      type: number
+    mod:
+      nilable: true
+      type: number
+    rounding:
+      default: 0
+      type:
+        enum: NumericRuleFormatRounding
+    step:
+      nilable: true
+      type: number
 PingCooldownInfo:
   fields:
     endTimeMs:
@@ -12211,6 +12346,8 @@ SpellChargeInfo:
       type: number
     currentCharges:
       type: number
+    isActive:
+      type: boolean
     maxCharges:
       type: number
 SpellCooldownInfo:
@@ -12220,6 +12357,8 @@ SpellCooldownInfo:
       type: number
     duration:
       type: number
+    isActive:
+      type: boolean
     isEnabled:
       type: boolean
     isOnGCD:
@@ -12231,6 +12370,18 @@ SpellCooldownInfo:
       type: number
     timeUntilEndOfStartRecovery:
       nilable: true
+      type: number
+SpellLossOfControlInfo:
+  fields:
+    duration:
+      type: number
+    isActive:
+      type: boolean
+    modRate:
+      type: number
+    shouldReplaceNormalCooldown:
+      type: boolean
+    startTime:
       type: number
 SpellPowerCostInfo:
   fields:

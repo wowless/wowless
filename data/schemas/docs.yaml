@@ -17,6 +17,13 @@ type:
                   ref:
                     schema: api
                 value: any
+          events:
+            type:
+              mapof:
+                key:
+                  ref:
+                    schema: event
+                value: any
           extra_apis:
             type:
               setof:
