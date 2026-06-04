@@ -1652,6 +1652,41 @@ end
 emit('  {nullptr, nullptr}')
 emit('};')
 emit('')
+for k, e in sorted(events) do
+  local payload = e.payload
+  local stride = e.stride or 0
+  local nfixed = #payload - stride
+  emit('static int eventcheck_%s(lua_State *L) {', safename(k))
+  emit('  int n = lua_gettop(L);')
+  if stride > 1 then
+    emit('  if (n < %d || (n - %d) %% %d != 0) {', nfixed, nfixed, stride)
+    emit(
+      '    return luaL_error(L, "wrong number of return values to %%q: want stride %d, got %%d", %s, n);',
+      stride,
+      cstring(k)
+    )
+    emit('  }')
+  elseif stride == 0 then
+    emit('  wowless_stubchecknreturns(L, n, %d, %s);', nfixed, cstring(k))
+  end
+  for i = 1, nfixed do
+    local out = payload[i]
+    local nilable = out.nilable
+    emit('  %s;', dispatch(coutputtypes, out.type, nilable, i))
+  end
+  if stride > 0 then
+    emit('  for (int i = %d; i < n; i += %d) {', nfixed, stride)
+    for j = 1, stride do
+      local out = payload[nfixed + j]
+      local nilable = out.nilable
+      emit('    %s;', dispatch(coutputtypes, out.type, nilable, string.format('i + %d', j)))
+    end
+    emit('  }')
+  end
+  emit('  return n;')
+  emit('}')
+  emit('')
+end
 emit('extern "C" int luaopen_build_products_%s_stubs(lua_State *L) {', product)
 emit('  lua_newtable(L);')
 emit('  lua_pushlightuserdata(L, static_cast<void *>(const_cast<wowless_stubs_spec *>(&stubs_spec)));')
@@ -1665,6 +1700,12 @@ emit('  lua_setfield(L, -2, "loadluaobjects");')
 emit('  lua_pushlightuserdata(L, (void *)uiobject_method_entries);')
 emit('  lua_pushcclosure(L, wowless_load_uiobject_method_stubs, 1);')
 emit('  lua_setfield(L, -2, "loaduiobjectmethods");')
+emit('  lua_newtable(L);')
+for k in sorted(events) do
+  emit('  lua_pushcfunction(L, eventcheck_%s);', safename(k))
+  emit('  lua_setfield(L, -2, %s);', cstring(k))
+end
+emit('  lua_setfield(L, -2, "eventchecks");')
 emit('  return 1;')
 emit('}')
 
