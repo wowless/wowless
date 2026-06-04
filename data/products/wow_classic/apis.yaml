@@ -58,6 +58,7 @@ AddChatWindowMessages:
   outputs:
 addframetext:
 AddPreviewTalentPoints:
+  unsupported: true
 AddQuestWatch:
   inputs:
   - name: questIndex
@@ -23840,14 +23841,7 @@ GetGroupMemberCounts:
       TANK: 1
     type: table
 GetGroupPreviewTalentPointsSpent:
-  inputs:
-  - name: isPet
-    type: boolean
-  - name: talentGroup
-    type: number
-  outputs:
-  - name: talentPoints
-    type: number
+  unsupported: true
 GetGuildAchievementMemberInfo:
 GetGuildAchievementMembers:
 GetGuildAchievementNumMembers:
@@ -24701,6 +24695,7 @@ GetMacroItem:
 GetMacroItemIcons:
 GetMacroSpell:
 GetMajorTalentTreeBonuses:
+  unsupported: true
 GetManaRegen:
   inputs:
   outputs:
@@ -24843,6 +24838,7 @@ GetMinimumExpansionLevel:
   - name: expansionLevel
     type: number
 GetMinorTalentTreeBonuses:
+  unsupported: true
 GetMinRenderScale:
   inputs:
   outputs:
@@ -24953,6 +24949,7 @@ GetNextPendingInviteConfirmation:
     nilable: true
     type: number
 GetNextPetTalentLevel:
+  unsupported: true
 GetNextStableSlotCost:
 GetNextTalentLevel:
 GetNormalizedRealmName:
@@ -25260,33 +25257,13 @@ GetNumSubgroupMembers:
   outputs:
   - type: number
 GetNumTalentGroups:
-  inputs:
-  - nilable: true
-    type: boolean
-  - nilable: true
-    type: boolean
-  outputs:
-  - type: number
+  unsupported: true
 GetNumTalentPoints:
-  inputs:
-  outputs:
-  - name: numTalentPoints
-    type: number
+  unsupported: true
 GetNumTalents:
-  inputs:
-  - name: tabIndex
-    type: number
-  outputs:
-  - name: numTalents
-    type: number
+  unsupported: true
 GetNumTalentTabs:
-  inputs:
-  - name: isInspect
-    nilable: true
-    type: boolean
-  outputs:
-  - name: numTalentTabs
-    type: number
+  unsupported: true
 GetNumTitles:
   inputs:
   outputs:
@@ -25501,7 +25478,9 @@ GetPowerRegenForPowerType:
     type: number
 GetPrevCompleatedTutorial:
 GetPreviewPrimaryTalentTree:
+  unsupported: true
 GetPreviewTalentPointsSpent:
+  unsupported: true
 GetPreviousAchievement:
 GetPreviousArenaSeason:
 GetPreviousArenaSeasonUsesTeams:
@@ -26534,13 +26513,16 @@ GetTabardCreationCost:
 GetTabardInfo:
 GetTalentClearInfo:
 GetTalentGroupRole:
+  unsupported: true
 GetTalentInfoByID:
 GetTalentLink:
 GetTalentPrereqs:
   unsupported: true
 GetTalentTierInfo:
 GetTalentTreeEarlySpells:
+  unsupported: true
 GetTalentTreeRoles:
+  unsupported: true
 GetTargetTradeMoney:
   inputs:
   outputs:
@@ -27085,19 +27067,7 @@ GetUnitTotalModifiedMaxHealthPercent:
   - name: result
     type: number
 GetUnspentTalentPoints:
-  inputs:
-  - default: false
-    name: isInspected
-    type: boolean
-  - default: false
-    name: isPet
-    type: boolean
-  - default: 1
-    name: talentGroup
-    type: number
-  outputs:
-  - name: talentPoints
-    type: number
+  unsupported: true
 GetVehicleUIIndicator:
   inputs:
   - name: vehicleIndicatorID
@@ -27986,7 +27956,9 @@ LaunchURL:
     type: string
   outputs:
 LearnPreviewTalents:
+  unsupported: true
 LearnTalent:
+  unsupported: true
 LearnTalents:
 LeaveBattlefield:
 LeaveChannelByLocalID:
@@ -28486,10 +28458,12 @@ ResetCursor:
   inputs:
   outputs:
 ResetGroupPreviewTalentPoints:
+  unsupported: true
 ResetInstances:
   inputs:
   outputs:
 ResetPreviewTalentPoints:
+  unsupported: true
 ResetTutorials:
 ResetView:
   inputs:
@@ -28894,7 +28868,9 @@ SetPortraitTextureFromCreatureDisplayID:
   outputs:
 SetPortraitToTexture:
 SetPreviewPrimaryTalentTree:
+  unsupported: true
 SetPrimaryTalentTree:
+  unsupported: true
 SetPVPRoles:
 SetRaidDifficultyID:
   inputs:
