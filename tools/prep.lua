@@ -113,8 +113,6 @@ local specDefault = (function()
   return specDefault
 end)()
 
-local function nop() end
-
 local function dispatch(t, u, ...)
   if type(u) == 'string' then
     return assert(t[u], u)(...)
@@ -201,66 +199,6 @@ local function ensureimpl(k)
     impls[k] = dispatch(implimpls, cfg, k)
   end
   return impls[k]
-end
-
-local impl_input_types = {
-  any = nop,
-  arrayof = nop,
-  boolean = nop,
-  enum = nop,
-  FileAsset = nop,
-  ['function'] = nop,
-  gender = nop,
-  luaobject = nop,
-  number = nop,
-  string = nop,
-  stringenum = nop,
-  structure = nop,
-  table = nop,
-  uiAddon = nop,
-  uiobject = nop,
-  unit = nop,
-  unknown = nop,
-}
-
-local impl_output_types
-impl_output_types = {
-  any = nop,
-  arrayof = function(inner)
-    dispatch(impl_output_types, inner)
-  end,
-  boolean = nop,
-  enum = nop,
-  FileAsset = nop,
-  ['function'] = nop,
-  luaobject = nop,
-  ['nil'] = nop,
-  number = nop,
-  oneornil = nop,
-  string = nop,
-  stringenum = nop,
-  structure = nop,
-  table = nop,
-  uiobject = nop,
-  unit = nop,
-  unknown = nop,
-}
-
-local function is_impl_eligible(apicfg)
-  if not apicfg.impl then
-    return false
-  end
-  local all_impl = true
-  for _, inp in ipairs(apicfg.inputs or {}) do
-    all_impl = all_impl and pcall(dispatch, impl_input_types, inp.type)
-  end
-  for _, out in ipairs(apicfg.outputs or {}) do
-    all_impl = all_impl and pcall(dispatch, impl_output_types, out.type)
-  end
-  if all_impl then
-    return true
-  end
-  return ensureimpl(apicfg.impl).nowrap
 end
 
 local rawapis = parseYaml('data/products/' .. product .. '/apis.yaml')
@@ -841,7 +779,7 @@ end
 
 local eligible_impls = {}
 for k, v in sorted(rawapis) do
-  if v and is_impl_eligible(v) then
+  if v.impl then
     table.insert(eligible_impls, {
       name = k,
       cfg = v,
