@@ -16,13 +16,13 @@ addon:
     globalapis:
       C_Macro.SetMacroExecuteLineCallback:
       CreateForbiddenFrame:
+      CreateSecureDelegate:
       loadstring_untainted:
-  enum_values_set_in_framexml:
-    SeasonID:
-      Placeholder:
+      secretunwrap:
   enums_set_in_framexml:
+    EditModeChatFrameDisplayOnlySetting:
+    HousingCatalogEntrySubtype:
     QuestPOIQuestTypes:
-    Unitsex:
   hooked_globals:
     FauxScrollFrame_Update:
     SetItemRef:
@@ -46,19 +46,34 @@ addon:
     raidGraphicsTextureResolution:
     RenderScale:
   overwritten_apis:
-    C_ChatInfo.RegisterAddonMessagePrefix:
-    C_ChatInfo.SendAddonMessage:
-    C_ChatInfo.SendAddonMessageLogged:
+    C_HousingBasicMode.StartPlacingNewDecor:
+    C_HousingCatalog.CreateCatalogSearcher:
+    C_HousingCatalog.DestroyEntry:
+    C_HousingCatalog.GetCatalogCategoryInfo:
+    C_HousingCatalog.GetCatalogEntryInfo:
+    C_HousingCatalog.GetCatalogEntryInfoByItem:
+    C_HousingCatalog.GetCatalogEntryInfoByRecordID:
+    C_HousingCatalog.GetCatalogSubcategoryInfo:
+    C_HousingCatalog.SearchCatalogCategories:
+    C_HousingCatalog.SearchCatalogSubcategories:
     C_Traits.GetConditionInfo:
     C_Traits.GetEntryInfo:
     C_Traits.GetTreeInfo:
+modules:
+  luaobjects:
+    tostring_metamethod: true
 runner:
+  skip_bindings:
+    TOGGLECOLLECTIONSWARDROBE: requires better implementation of transmog slots
   skip_events:
     AJ_PVP_RBG_ACTION: missing HonorFrame_SetType
     AJ_PVP_SKIRMISH_ACTION: missing HonorFrame_SetType
+    BARBER_SHOP_OPEN: breaks PTR_IssueReporter
     CRAFT_SHOW: CraftFrame_SetupDropdown has an error (self)
     DUEL_OUTOFBOUNDS: error in StaticPopup infrastructure
     LFG_PROPOSAL_SHOW: TODO figure out if there's an ordering issue here
+    SECURE_TRANSFER_CONFIRM_HOUSING_PURCHASE: missing APIs
+    SECURE_TRANSFER_HOUSING_CURRENCY_PURCHASE_CONFIRMATION: missing APIs
     SHOW_LFG_EXPAND_SEARCH_PROMPT: missing text
     SUBSCRIPTION_CHANGED_KICK_IMMINENT: depends on GlueDialog_Show
     VAS_QUEUE_STATUS_UPDATE: depends on C_StoreGlue
