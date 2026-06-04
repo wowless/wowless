@@ -1442,19 +1442,23 @@ for _, entry in ipairs(eligible) do
   if v.protected then
     emit('  if (wowless_forbidden(L)) return 0;')
   end
-  local inputcheck
-  if v.usage then
-    inputcheck = function(inp, idx)
-      local nilable = inp.nilable or inp.default ~= nil
-      return ('if (!%s) return luaL_error(L, %s);'):format(
-        dispatch(cinputtypes, inp.type)('is', nilable, idx),
-        cstring('Usage: ' .. v.usage)
-      )
-    end
+  if v.unsupported then
+    emit('  return luaL_error(L, "Script_%s: API unsupported in this version of World of Warcraft.");', k)
   else
-    inputcheck = stub_inputcheck
+    local inputcheck
+    if v.usage then
+      inputcheck = function(inp, idx)
+        local nilable = inp.nilable or inp.default ~= nil
+        return ('if (!%s) return luaL_error(L, %s);'):format(
+          dispatch(cinputtypes, inp.type)('is', nilable, idx),
+          cstring('Usage: ' .. v.usage)
+        )
+      end
+    else
+      inputcheck = stub_inputcheck
+    end
+    emit_stub_body(k, v, inputcheck)
   end
-  emit_stub_body(k, v, inputcheck)
   emit('}')
   emit('')
 end

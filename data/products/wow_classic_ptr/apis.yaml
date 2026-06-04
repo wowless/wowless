@@ -26537,21 +26537,7 @@ GetTalentGroupRole:
 GetTalentInfoByID:
 GetTalentLink:
 GetTalentPrereqs:
-  inputs:
-  - name: tabIndex
-    type: number
-  - name: talentIndex
-    type: number
-  outputs:
-  - name: tier
-    type: number
-  - name: column
-    type: number
-  - name: isLearnable
-    type: oneornil
-  - name: isPreviewLearnable
-    type: oneornil
-  outstride: 4
+  unsupported: true
 GetTalentTierInfo:
 GetTalentTreeEarlySpells:
 GetTalentTreeRoles:

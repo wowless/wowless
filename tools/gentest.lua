@@ -64,6 +64,7 @@ local ptablemap = {
         local vv = {
           overwritten = tpath(config, 'addon', 'overwritten_apis', name) and true,
           protected = api.protected,
+          unsupported = api.unsupported,
         }
         t[name] = next(vv) and vv or true
       end

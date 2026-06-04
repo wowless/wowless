@@ -55,5 +55,7 @@ type:
       type: flag
     stuboutstrides:
       type: number
+    unsupported:
+      type: flag
     usage:
       type: string

@@ -89,6 +89,10 @@ G.testsuite.generated = function()
         assertEquals(false, isLuaFunc(func))
         cfuncs.add(name, func)
       end,
+      unsupported = cfg and cfg.unsupported and function()
+        local msg = 'Script_%s: API unsupported in this version of World of Warcraft.'
+        return G.match(2, false, msg:format(name), pcall(func))
+      end,
     }
   end
 

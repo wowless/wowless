@@ -15,6 +15,12 @@ describe('apis', function()
           it('has outputs if it has inputs', function()
             assert.Truthy(not api.inputs or api.outputs)
           end)
+          it('has no other fields if unsupported', function()
+            if api.unsupported then
+              assert.same('unsupported', (next(api)))
+              assert.Nil((next(api, 'unsupported')))
+            end
+          end)
           describe('inputs', function()
             for k, input in ipairs(api.inputs or {}) do
               describe(k, function()
