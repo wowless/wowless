@@ -233,12 +233,11 @@ local uiobjectimplimplmakers = {
   end,
 }
 local uiobjectimplmakers = {
-  none = function(mv)
+  none = function()
     return {
       cstub = true,
       impl = 'return function() end',
       modules = {},
-      secureonly = mv.secureonly,
     }
   end,
   getter = function(impl)
@@ -1236,9 +1235,6 @@ local uiobjectcimplmakers = {
 for key, entry in sorted(eligible_uimethods) do
   local k, mk, mv = entry.k, entry.mk, entry.mv
   emit('static int stub_uimethod_%s_%s(lua_State *L) {', safename(k), safename(mk))
-  if mv.secureonly then
-    emit('  if (wowless_forbidden(L)) return 0;')
-  end
   dispatch(uiobjectcimplmakers, mv.impl or 'none', mv, k, key)
   emit('}')
   emit('')
@@ -1277,9 +1273,9 @@ for k, v in pairs(parseYaml('data/products/' .. product .. '/apis.yaml')) do
     emit('')
   end
   local e = {
-    secureonly = not not v.secureonly,
     impldata = impl,
     chunkname = impl and impl.src or k,
+    secureonly = v.secureonly,
     sn = safename(k),
   }
   local dot = k:find('%.')
