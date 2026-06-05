@@ -1546,6 +1546,13 @@ for k, e in sorted(eventcfg) do
   emit('}')
   emit('')
 end
+emit('static const luaL_Reg eventcheck_reg[] = {')
+for k in sorted(eventcfg) do
+  emit('  {%s, eventcheck_%s},', cstring(k), safename(k))
+end
+emit('  {nullptr, nullptr}')
+emit('};')
+emit('')
 emit('extern "C" int luaopen_build_products_%s_stubs(lua_State *L) {', product)
 emit('  lua_newtable(L);')
 emit('  lua_pushlightuserdata(L, static_cast<void *>(const_cast<wowless_stubs_spec *>(&stubs_spec)));')
@@ -1559,12 +1566,9 @@ emit('  lua_setfield(L, -2, "loadluaobjects");')
 emit('  lua_pushlightuserdata(L, (void *)uiobject_method_entries);')
 emit('  lua_pushcclosure(L, wowless_load_uiobject_method_stubs, 1);')
 emit('  lua_setfield(L, -2, "loaduiobjectmethods");')
-emit('  lua_newtable(L);')
-for k in sorted(eventcfg) do
-  emit('  lua_pushcfunction(L, eventcheck_%s);', safename(k))
-  emit('  lua_setfield(L, -2, %s);', cstring(k))
-end
-emit('  lua_setfield(L, -2, "eventchecks");')
+emit('  lua_pushlightuserdata(L, (void *)eventcheck_reg);')
+emit('  lua_pushcclosure(L, wowless_load_eventcheck_stubs, 1);')
+emit('  lua_setfield(L, -2, "loadevents");')
 emit('  return 1;')
 emit('}')
 

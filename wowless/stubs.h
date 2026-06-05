@@ -44,6 +44,7 @@ struct wowless_uiobject_method_entry {
 int wowless_load_stubs(lua_State *L);
 int wowless_load_luaobject_stubs(lua_State *L);
 int wowless_load_uiobject_method_stubs(lua_State *L);
+int wowless_load_eventcheck_stubs(lua_State *L);
 void wowless_stub_log_extra_args(lua_State *L, const char *fname);
 int wowless_impl_stub(lua_State *L);
 int wowless_impl_stub_nobubblewrap(lua_State *L);

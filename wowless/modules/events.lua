@@ -112,7 +112,11 @@ return function(cstubs, datalua, log, loglevel, scripts, security)
     return unpack(GetFramesRegisteredForEvent(event))
   end
 
-  local echecks = cstubs.eventchecks
+  local echecks
+
+  local function LoadEvents(modules)
+    echecks = cstubs.loadevents(modules)
+  end
 
   local function DoSendEvent(event, ...)
     for _, reg in ipairs(GetFramesRegisteredForEvent(event)) do
@@ -155,6 +159,7 @@ return function(cstubs, datalua, log, loglevel, scripts, security)
     RegisterEventCallback = RegisterEventCallback,
     RegisterEventCallbackGlobal = RegisterEventCallbackGlobal,
     RegisterUnitEvent = RegisterEvent, -- TODO implement properly
+    LoadEvents = LoadEvents,
     SendEvent = SendEvent,
     UnregisterAllEvents = UnregisterAllEvents,
     UnregisterEvent = UnregisterEvent,

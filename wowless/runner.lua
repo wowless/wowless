@@ -86,6 +86,7 @@ local function run(cfg)
     modules.uiobjecttypes.Add(k, v)
   end
   modules.luaobjects.LoadTypes(modules)
+  modules.events.LoadEvents(modules)
   return withglobaltable(genv, function()
     loader.initAddons()
     if cfg.dotfile then

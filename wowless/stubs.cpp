@@ -142,6 +142,20 @@ int wowless_load_uiobject_method_stubs(lua_State *L) {
   return 1;
 }
 
+int wowless_load_eventcheck_stubs(lua_State *L) {
+  const auto *reg =
+      static_cast<const luaL_Reg *>(lua_touserdata(L, lua_upvalueindex(1)));
+  /* arg 1 is modules; extract cgencode from it */
+  lua_getfield(L, 1, "cgencode");
+  lua_newtable(L);
+  for (const luaL_Reg *r = reg; r->name; r++) {
+    lua_pushvalue(L, 2);
+    lua_pushcclosure(L, r->func, 1);
+    lua_setfield(L, -2, r->name);
+  }
+  return 1;
+}
+
 int wowless_load_stubs(lua_State *L) {
   const auto *spec =
       static_cast<const wowless_stubs_spec *>(lua_touserdata(L, lua_upvalueindex(1)));
