@@ -236,7 +236,7 @@ local uiobjectimplmakers = {
   none = function(mv)
     return {
       cstub = true,
-      impl = 'return function(_,...) end',
+      impl = 'return function() end',
       modules = {},
       secureonly = mv.secureonly,
     }
