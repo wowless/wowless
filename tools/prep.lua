@@ -672,20 +672,6 @@ end
 emit('#include "wowless/typecheck.h"')
 emit('')
 
-local eligible = {}
-local eligible_impls = {}
-for k, v in pairs(parseYaml('data/products/' .. product .. '/apis.yaml')) do
-  if v.impl then
-    table.insert(eligible_impls, {
-      name = k,
-      cfg = v,
-      impldata = ensureimpl(v.impl),
-    })
-  else
-    table.insert(eligible, { name = k, cfg = v })
-  end
-end
-
 -- Assign integer typeids to all luaobject types (sorted for determinism)
 local luaobject_typeids = {}
 do
@@ -1256,76 +1242,54 @@ for key, entry in sorted(eligible_uimethods) do
   emit('')
 end
 
-for _, entry in ipairs(eligible) do
-  local k, v = entry.name, entry.cfg
-  emit('static int stub_%s(lua_State *L) {', safename(k))
-  if v.protected then
-    emit('  if (wowless_forbidden(L)) return 0;')
-  end
-  if v.unsupported then
-    emit('  return luaL_error(L, "Script_%s: API unsupported in this version of World of Warcraft.");', k)
-  else
-    local inputcheck
-    if v.usage then
-      inputcheck = function(inp, idx)
-        local nilable = inp.nilable or inp.default ~= nil
-        return ('if (!%s) return luaL_error(L, %s);'):format(
-          dispatch(cinputtypes, inp.type)('is', nilable, idx),
-          cstring('Usage: ' .. v.usage)
-        )
-      end
-    else
-      inputcheck = stub_inputcheck
+local ns_entries = {}
+local global_entries = {}
+for k, v in pairs(parseYaml('data/products/' .. product .. '/apis.yaml')) do
+  local impl = v.impl and ensureimpl(v.impl)
+  if not impl or not impl.nowrap then
+    emit('static int api_%s(lua_State *L) {', safename(k))
+    if v.protected then
+      emit('  if (wowless_forbidden(L)) return 0;')
     end
-    emit_stub_body(k, v, inputcheck)
-  end
-  emit('}')
-  emit('')
-end
-
-for _, entry in ipairs(eligible_impls) do
-  local impldata = entry.impldata
-  if not impldata.nowrap then
-    local fn = impldata.nobubblewrap and 'wowless_impl_stub_nobubblewrap' or 'wowless_impl_stub'
-    emit('static int implstub_%s(lua_State *L) {', safename(entry.name))
-    emit_implstub_body(entry.name, entry.cfg, fn)
+    if v.unsupported then
+      emit('  return luaL_error(L, "Script_%s: API unsupported in this version of World of Warcraft.");', k)
+    elseif not v.impl then
+      local inputcheck
+      if v.usage then
+        inputcheck = function(inp, idx)
+          local nilable = inp.nilable or inp.default ~= nil
+          return ('if (!%s) return luaL_error(L, %s);'):format(
+            dispatch(cinputtypes, inp.type)('is', nilable, idx),
+            cstring('Usage: ' .. v.usage)
+          )
+        end
+      else
+        inputcheck = stub_inputcheck
+      end
+      emit_stub_body(k, v, inputcheck)
+    else
+      local fn = impl.nobubblewrap and 'wowless_impl_stub_nobubblewrap' or 'wowless_impl_stub'
+      emit_implstub_body(k, v, fn)
+    end
     emit('}')
     emit('')
   end
-end
-
-local ns_entries = {}
-local global_entries = {}
-for _, entry in ipairs(eligible) do
-  local dot = entry.name:find('%.')
-  if dot then
-    local ns = entry.name:sub(1, dot - 1)
-    local shortname = entry.name:sub(dot + 1)
-    if not ns_entries[ns] then
-      ns_entries[ns] = {}
-    end
-    ns_entries[ns][shortname] = { sn = safename(entry.name), secureonly = not not entry.cfg.secureonly }
-  else
-    global_entries[entry.name] = { sn = safename(entry.name), secureonly = not not entry.cfg.secureonly }
-  end
-end
-for _, entry in ipairs(eligible_impls) do
-  local dot = entry.name:find('%.')
   local e = {
-    secureonly = not not entry.cfg.secureonly,
-    impldata = entry.impldata,
-    chunkname = entry.impldata.src or entry.name,
-    sn = safename(entry.name),
+    secureonly = not not v.secureonly,
+    impldata = impl,
+    chunkname = impl and impl.src or k,
+    sn = safename(k),
   }
+  local dot = k:find('%.')
   if dot then
-    local ns = entry.name:sub(1, dot - 1)
-    local shortname = entry.name:sub(dot + 1)
+    local ns = k:sub(1, dot - 1)
+    local shortname = k:sub(dot + 1)
     if not ns_entries[ns] then
       ns_entries[ns] = {}
     end
     ns_entries[ns][shortname] = e
   else
-    global_entries[entry.name] = e
+    global_entries[k] = e
   end
 end
 
@@ -1363,10 +1327,10 @@ end
 local function emit_stub_entry(indent, name, entry)
   if entry.impldata then
     local impldata = entry.impldata
-    local func = impldata.nowrap and 'nullptr' or ('implstub_' .. entry.sn)
+    local func = impldata.nowrap and 'nullptr' or ('api_' .. entry.sn)
     emit('%s{%s, %s, %d, &impldata_%s},', indent, cstring(name), func, entry.secureonly and 1 or 0, entry.sn)
   else
-    emit('%s{%s, stub_%s, %d, nullptr},', indent, cstring(name), entry.sn, entry.secureonly and 1 or 0)
+    emit('%s{%s, api_%s, %d, nullptr},', indent, cstring(name), entry.sn, entry.secureonly and 1 or 0)
   end
 end
 
