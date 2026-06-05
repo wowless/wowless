@@ -145,7 +145,7 @@ for k, v in pairs(eventcfg) do
   events[k] = {
     callback = v.callback,
     noscript = v.noscript,
-    nullary = not next(v.payload),
+    nullary = not next(v.payload) or nil,
     restricted = v.restricted,
   }
 end
