@@ -39,80 +39,6 @@ local function valstr(value)
   end
 end
 
-local specDefault = (function()
-  local defaultOutputs = {
-    boolean = 'false',
-    FileAsset = '1',
-    ['function'] = 'function() end',
-    ['nil'] = 'nil',
-    number = '1',
-    oneornil = 'nil',
-    string = '\'\'',
-    table = '{}',
-    unit = '\'player\'',
-    unknown = 'nil',
-  }
-  local structureDefaults = {}
-  local specDefault
-  local function valstruct(name)
-    if not structureDefaults[name] then
-      local st = assert(structures[name], name)
-      local t = {}
-      for fname, field in sorted(st.fields) do
-        local v = specDefault(field)
-        if v ~= 'nil' then
-          table.insert(t, ('[%q]=%s'):format(fname, v))
-        end
-      end
-      local str = '{' .. table.concat(t, ',') .. '}'
-      structureDefaults[name] = st.mixin and ('gencode.Mixin(%s,%q)'):format(str, st.mixin) or str
-    end
-    return structureDefaults[name]
-  end
-  function specDefault(spec)
-    if spec.stub ~= nil then
-      return valstr(spec.stub)
-    end
-    if spec.default ~= nil then
-      return valstr(spec.default)
-    end
-    if spec.nilable and not spec.stubnotnil then
-      return 'nil'
-    end
-    local ty = assert(spec.type, 'spec missing a type')
-    if defaultOutputs[ty] then
-      return defaultOutputs[ty]
-    end
-    if ty.stringenum then
-      local least
-      for k in pairs(stringenums[ty.stringenum]) do
-        least = (least == nil or k < least) and k or least
-      end
-      return ('%q'):format(least)
-    end
-    if ty.arrayof then
-      return '{' .. specDefault({ type = ty.arrayof }) .. '}'
-    end
-    if ty.structure then
-      return valstruct(ty.structure)
-    end
-    if ty.enum then
-      assert(globals.Enum[ty.enum], 'missing enum ' .. ty.enum)
-      local meta = assert(globals.Enum[ty.enum .. 'Meta'], 'missing meta enum for ' .. ty.enum)
-      local min = assert(meta.MinValue, 'missing MinValue in meta for ' .. ty.enum)
-      return valstr(min)
-    end
-    if ty.uiobject then
-      return ('gencode.CreateUIObject(%q).luarep'):format(ty.uiobject:lower())
-    end
-    if ty.luaobject then
-      return ('gencode.CreateLuaObject(%q)'):format(ty.luaobject)
-    end
-    error('unexpected type: ' .. prettywrite(ty, true))
-  end
-  return specDefault
-end)()
-
 local function dispatch(t, u, ...)
   if type(u) == 'string' then
     return assert(t[u], u)(...)
@@ -215,17 +141,12 @@ end
 
 local events = {}
 for k, v in pairs(parseYaml('data/products/' .. product .. '/events.yaml')) do
-  local t = {}
-  for _, f in ipairs(v.payload) do
-    table.insert(t, specDefault(f))
-  end
   events[k] = {
     callback = v.callback,
     noscript = v.noscript,
     payload = v.payload,
     restricted = v.restricted,
     stride = v.stride,
-    stub = 'return ' .. table.concat(t, ','),
   }
 end
 
@@ -530,7 +451,18 @@ local data = {
   build = parseYaml('data/products/' .. product .. '/build.yaml'),
   config = parseYaml('data/products/' .. product .. '/config.yaml'),
   cvars = cvars,
-  events = events,
+  events = (function()
+    local t = {}
+    for k, e in pairs(events) do
+      t[k] = {
+        callback = e.callback,
+        noscript = e.noscript,
+        nullary = not next(e.payload),
+        restricted = e.restricted,
+      }
+    end
+    return t
+  end)(),
   globals = globals,
   luaobjects = luaobjects,
   product = product,
