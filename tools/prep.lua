@@ -725,22 +725,6 @@ for loname in pairs(luaobjectdata) do
   lo_flatten(loname)
 end
 
-for _, st in pairs(structures) do
-  for _, field in pairs(st.fields) do
-    pcall(dispatch, cinputtypes, field.type)
-  end
-end
-for _, entry in ipairs(eligible_impls) do
-  if not entry.impldata.nowrap then
-    for _, inp in ipairs(entry.cfg.inputs or {}) do
-      dispatch(cinputtypes, inp.type)
-    end
-    for _, out in ipairs(entry.cfg.outputs or {}) do
-      dispatch(coutputtypes, out.type, false, 0)
-    end
-  end
-end
-
 local lua_value_emitters
 lua_value_emitters = {
   boolean = function(v)
