@@ -139,14 +139,14 @@ for k, v in pairs(parseYaml('data/products/' .. product .. '/cvars.yaml')) do
   }
 end
 
+local eventcfg = parseYaml('data/products/' .. product .. '/events.yaml')
 local events = {}
-for k, v in pairs(parseYaml('data/products/' .. product .. '/events.yaml')) do
+for k, v in pairs(eventcfg) do
   events[k] = {
     callback = v.callback,
     noscript = v.noscript,
-    payload = v.payload,
+    nullary = not next(v.payload),
     restricted = v.restricted,
-    stride = v.stride,
   }
 end
 
@@ -451,18 +451,7 @@ local data = {
   build = parseYaml('data/products/' .. product .. '/build.yaml'),
   config = parseYaml('data/products/' .. product .. '/config.yaml'),
   cvars = cvars,
-  events = (function()
-    local t = {}
-    for k, e in pairs(events) do
-      t[k] = {
-        callback = e.callback,
-        noscript = e.noscript,
-        nullary = not next(e.payload),
-        restricted = e.restricted,
-      }
-    end
-    return t
-  end)(),
+  events = events,
   globals = globals,
   luaobjects = luaobjects,
   product = product,
@@ -1522,7 +1511,7 @@ end
 emit('  {nullptr, nullptr}')
 emit('};')
 emit('')
-for k, e in sorted(events) do
+for k, e in sorted(eventcfg) do
   local payload = e.payload
   local stride = e.stride or 0
   local nfixed = #payload - stride
@@ -1571,7 +1560,7 @@ emit('  lua_pushlightuserdata(L, (void *)uiobject_method_entries);')
 emit('  lua_pushcclosure(L, wowless_load_uiobject_method_stubs, 1);')
 emit('  lua_setfield(L, -2, "loaduiobjectmethods");')
 emit('  lua_newtable(L);')
-for k in sorted(events) do
+for k in sorted(eventcfg) do
   emit('  lua_pushcfunction(L, eventcheck_%s);', safename(k))
   emit('  lua_setfield(L, -2, %s);', cstring(k))
 end
