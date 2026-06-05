@@ -887,7 +887,7 @@ static inline void wowless_stubcheckextraargs(lua_State *L, int nsins,
 static inline void wowless_stubchecknreturns(lua_State *L, int nret,
                                              int nexpected, const char *fname) {
   if (nret != nexpected) {
-    luaL_error(L, "wrong number of return values to %q: want %d, got %d", fname,
+    luaL_error(L, "wrong number of return values to %s: want %d, got %d", fname,
                nexpected, nret);
   }
 }
