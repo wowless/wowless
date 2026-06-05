@@ -8,7 +8,6 @@ local args = (function()
   run:option('-e --maxerrors', 'quit once this number of errors occur'):convert(tonumber)
   run:option('-s --scripts', 'scripts to execute')
   run:option('-o --output', 'output file')
-  run:flag('--allevents', 'send all nullary events')
   run:option('-d --dotfile', 'write addon dependency graph in graphviz dot format')
   run:flag('--frame0', 'write frame0 debug')
   run:flag('--lite', 'do not load framexml')
@@ -24,7 +23,6 @@ local addonDirs = #args.addondir > 0 and args.addondir
   }
 local runner = require('wowless.runner')
 local modules = runner.run({
-  allevents = args.allevents,
   dir = not args.lite and 'build/extracts/' .. args.product or nil,
   dotfile = args.dotfile,
   frame0 = args.frame0,
