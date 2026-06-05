@@ -127,8 +127,6 @@ local function ensureimpl(k)
   return impls[k]
 end
 
-local rawapis = parseYaml('data/products/' .. product .. '/apis.yaml')
-
 local cvars = {}
 for k, v in pairs(parseYaml('data/products/' .. product .. '/cvars.yaml')) do
   local lk = k:lower()
@@ -666,21 +664,6 @@ coutputtypes = {
   unknown = simple_coutputtype('unknown'),
 }
 
-local function is_eligible(apicfg)
-  if apicfg.impl then
-    return false
-  end
-  if next(apicfg.outputs or {}) and not apicfg.stubnothing then
-    for _, out in ipairs(apicfg.outputs) do
-      dispatch(coutdefaults, out.type)
-    end
-  end
-  for _, inp in ipairs(apicfg.inputs or {}) do
-    dispatch(cinputtypes, inp.type)
-  end
-  return true
-end
-
 local lines = {}
 local function emit(fmt, ...)
   table.insert(lines, string.format(fmt, ...))
@@ -690,22 +673,16 @@ emit('#include "wowless/typecheck.h"')
 emit('')
 
 local eligible = {}
-for k, v in sorted(rawapis) do
-  local elig = is_eligible(v)
-  assert(not v.protected or elig, 'protected api must be c-stub eligible: ' .. k)
-  if elig then
-    table.insert(eligible, { name = k, cfg = v })
-  end
-end
-
 local eligible_impls = {}
-for k, v in sorted(rawapis) do
+for k, v in pairs(parseYaml('data/products/' .. product .. '/apis.yaml')) do
   if v.impl then
     table.insert(eligible_impls, {
       name = k,
       cfg = v,
       impldata = ensureimpl(v.impl),
     })
+  else
+    table.insert(eligible, { name = k, cfg = v })
   end
 end
 
