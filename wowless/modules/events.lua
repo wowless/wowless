@@ -1,5 +1,5 @@
 local hlist = require('wowless.hlist')
-return function(datalua, funcheck, log, loglevel, scripts, security)
+return function(cstubs, datalua, log, loglevel, scripts, security)
   local allregs = hlist()
   local regs = {}
   local cbregs = {}
@@ -112,17 +112,7 @@ return function(datalua, funcheck, log, loglevel, scripts, security)
     return unpack(GetFramesRegisteredForEvent(event))
   end
 
-  local echecks = setmetatable({}, {
-    __index = function(t, k)
-      local e = datalua.events[k]
-      local v = funcheck.makeCheckOutputs(k, {
-        outputs = e.payload,
-        outstride = e.stride,
-      })
-      t[k] = v
-      return v
-    end,
-  })
+  local echecks = cstubs.eventchecks
 
   local function DoSendEvent(event, ...)
     for _, reg in ipairs(GetFramesRegisteredForEvent(event)) do
