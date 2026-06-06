@@ -253,7 +253,6 @@ local uiobjectimplmakers = {
     }
   end,
   setter = function(impl, mv)
-    -- host impl: direct field assignment, applying defaults for optional args
     local t = { 'return function(self' }
     for _, f in ipairs(impl) do
       table.insert(t, ',')
@@ -318,8 +317,8 @@ for k, v in pairs(uiobjectdata) do
   for mk, mv in pairs(v.methods) do
     local d = dispatch(uiobjectimplmakers, mv.impl or 'none', mv, k)
     if d.cstub then
-      methods[mk] = d
-      eligible_uimethods[k .. ':' .. mk] = { k = k, mk = mk, mv = mv }
+      methods[mk] = { cstub = true }
+      eligible_uimethods[k .. ':' .. mk] = { impl = d.impl, k = k, mk = mk, mv = mv }
     else
       methods[mk] = Mixin({}, d, {
         inputs = mv.inputs,
@@ -1426,12 +1425,25 @@ end
 emit('  {nullptr, 0, nullptr}')
 emit('};')
 emit('')
+-- UIObject host impl data statics
+for key, entry in sorted(eligible_uimethods) do
+  local sn = safename(entry.k) .. '_' .. safename(entry.mk)
+  emit(
+    'static const wowless_impl_data host_impldata_%s = {%s, %d, %s, nullptr, nullptr};',
+    sn,
+    cstring(entry.impl),
+    #entry.impl,
+    cstring(key)
+  )
+end
+emit('')
 -- UIObject method entry array
 emit('static const struct wowless_uiobject_method_entry uiobject_method_entries[] = {')
 for key, entry in sorted(eligible_uimethods) do
-  emit('  {%s, stub_uimethod_%s_%s},', cstring(key), safename(entry.k), safename(entry.mk))
+  local sn = safename(entry.k) .. '_' .. safename(entry.mk)
+  emit('  {%s, stub_uimethod_%s_%s, &host_impldata_%s},', cstring(key), safename(entry.k), safename(entry.mk), sn)
 end
-emit('  {nullptr, nullptr}')
+emit('  {nullptr, nullptr, nullptr}')
 emit('};')
 emit('')
 for k, e in sorted(eventcfg) do

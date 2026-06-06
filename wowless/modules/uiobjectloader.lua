@@ -3,7 +3,7 @@ local bubblewrap = require('wowless.bubblewrap')
 local Mixin = util.mixin
 
 return function(cgencode, cstubs, datalua, funcheck, gencode, sqls, uiobjectsmodule, uiobjecttypes)
-  local uiobjectmethodstubs = cstubs.loaduiobjectmethods(cgencode)
+  local uiobjectmethodstubs, uiobjecthostimpls = cstubs.loaduiobjectmethods(cgencode)
   local InheritsFrom = uiobjecttypes.InheritsFrom
   local UserData = uiobjectsmodule.UserData
 
@@ -87,20 +87,22 @@ return function(cgencode, cstubs, datalua, funcheck, gencode, sqls, uiobjectsmod
         local fname = name .. ':' .. mname
         local incheck = method.inputs and funcheck.makeCheckInputs(fname, method)
         local outcheck = method.outputs and funcheck.makeCheckOutputs(fname, method)
-        local src = method.src or fname
-        local mkfn = assert(loadstring_untainted(method.impl, src), fname)
-        local args = {}
-        for _, m in ipairs(method.modules or {}) do
-          table.insert(args, (assert(modules[m], m)))
-        end
-        for _, sql in ipairs(method.sqls or {}) do
-          table.insert(args, (assert(sqls[sql], sql)))
-        end
-        local rawfn = mkfn(unpack(args))
+        local rawfn
         local sandboxFactory
         if method.cstub then
           sandboxFactory = uiobjectmethodstubs[fname]
+          rawfn = uiobjecthostimpls[fname]
         else
+          local src = method.src or fname
+          local mkfn = assert(loadstring_untainted(method.impl, src), fname)
+          local args = {}
+          for _, m in ipairs(method.modules or {}) do
+            table.insert(args, (assert(modules[m], m)))
+          end
+          for _, sql in ipairs(method.sqls or {}) do
+            table.insert(args, (assert(sqls[sql], sql)))
+          end
+          rawfn = mkfn(unpack(args))
           local wrappedfn = wrap(fname, rawfn)
           local sandboxfn
           if not incheck and not outcheck then
