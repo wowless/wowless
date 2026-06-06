@@ -132,14 +132,21 @@ int wowless_load_uiobject_method_stubs(lua_State *L) {
   const auto *spec = static_cast<const wowless_uiobject_method_entry *>(
       lua_touserdata(L, lua_upvalueindex(1)));
   /* arg 1 is cgencode directly */
-  lua_newtable(L);
+  lua_newtable(L); /* sandbox factories */
+  lua_newtable(L); /* host Lua functions */
   for (const auto *e = spec; e->key; e++) {
     lua_pushlightuserdata(L, reinterpret_cast<void *>(e->func));
     lua_pushvalue(L, 1); /* cgencode */
     lua_pushcclosure(L, make_uiobject_method_stub, 2);
-    lua_setfield(L, -2, e->key);
+    lua_setfield(L, -3, e->key); /* into sandbox table */
+    const struct wowless_impl_data *d = e->host;
+    if (luaL_loadbuffer(L, d->impl, d->impl_len, d->chunkname) != 0) {
+      lua_error(L);
+    }
+    lua_call(L, 0, 1);
+    lua_setfield(L, -2, e->key); /* into host table */
   }
-  return 1;
+  return 2;
 }
 
 int wowless_load_eventcheck_stubs(lua_State *L) {
