@@ -85,13 +85,11 @@ return function(cgencode, cstubs, datalua, funcheck, gencode, sqls, uiobjectsmod
       local sandboxindex = {}
       for mname, method in pairs(cfg.methods) do
         local fname = name .. ':' .. mname
-        local incheck = method.inputs and funcheck.makeCheckInputs(fname, method)
-        local outcheck = method.outputs and funcheck.makeCheckOutputs(fname, method)
-        local rawfn
+        local hostfn
         local sandboxFactory
         if method.cstub then
+          hostfn = uiobjecthostimpls[fname]
           sandboxFactory = uiobjectmethodstubs[fname]
-          rawfn = uiobjecthostimpls[fname]
         else
           local src = method.src or fname
           local mkfn = assert(loadstring_untainted(method.impl, src), fname)
@@ -102,9 +100,11 @@ return function(cgencode, cstubs, datalua, funcheck, gencode, sqls, uiobjectsmod
           for _, sql in ipairs(method.sqls or {}) do
             table.insert(args, (assert(sqls[sql], sql)))
           end
-          rawfn = mkfn(unpack(args))
-          local wrappedfn = wrap(fname, rawfn)
+          hostfn = mkfn(unpack(args))
+          local wrappedfn = wrap(fname, hostfn)
           local sandboxfn
+          local incheck = method.inputs and funcheck.makeCheckInputs(fname, method)
+          local outcheck = method.outputs and funcheck.makeCheckOutputs(fname, method)
           if not incheck and not outcheck then
             sandboxfn = wrappedfn
           elseif not incheck then
@@ -127,7 +127,7 @@ return function(cgencode, cstubs, datalua, funcheck, gencode, sqls, uiobjectsmod
             return bubblewrap(sandboxDispatch)
           end
         end
-        hostindex[mname] = rawfn
+        hostindex[mname] = hostfn
         sandboxindex[mname] = sandboxFactory
       end
       uiobjects[name] = {
