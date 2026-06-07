@@ -1,11 +1,7 @@
 local util = require('wowless.util')
-local bubblewrap = require('wowless.bubblewrap')
 local Mixin = util.mixin
 
-return function(cstubs, datalua, funcheck, gencode, sqls, uiobjectsmodule, uiobjecttypes)
-  local InheritsFrom = uiobjecttypes.InheritsFrom
-  local UserData = uiobjectsmodule.UserData
-
+return function(cstubs, datalua, gencode)
   local function flatten(types)
     local result = {}
     local function flattenOne(k)
@@ -62,15 +58,6 @@ return function(cstubs, datalua, funcheck, gencode, sqls, uiobjectsmodule, uiobj
     local uiobjectmethodstubs, uiobjecthostimpls = cstubs.loaduiobjectmethods(modules)
     local uiobjects = {}
     for name, cfg in pairs(datalua.uiobjects) do
-      local lname = name:lower()
-      local function wrap(fname, fn)
-        return function(self, ...)
-          if not InheritsFrom(self.type, lname) then
-            error(('invalid self to %s.%s, got %s'):format(name, fname, tostring(self.type)))
-          end
-          return fn(self, ...)
-        end
-      end
       local constructor = assert(loadstring_untainted(cfg.constructor, name))(gencode)
       if cfg.singleton then
         local orig = constructor
@@ -83,52 +70,10 @@ return function(cstubs, datalua, funcheck, gencode, sqls, uiobjectsmodule, uiobj
       end
       local hostindex = {}
       local sandboxindex = {}
-      for mname, method in pairs(cfg.methods) do
+      for mname, _ in pairs(cfg.methods) do
         local fname = name .. ':' .. mname
-        local hostfn
-        local sandboxFactory
-        if method.cstub then
-          hostfn = uiobjecthostimpls[fname]
-          sandboxFactory = uiobjectmethodstubs[fname]
-        else
-          local src = method.src or fname
-          local mkfn = assert(loadstring_untainted(method.impl, src), fname)
-          local args = {}
-          for _, m in ipairs(method.modules or {}) do
-            table.insert(args, (assert(modules[m], m)))
-          end
-          for _, sql in ipairs(method.sqls or {}) do
-            table.insert(args, (assert(sqls[sql], sql)))
-          end
-          hostfn = mkfn(unpack(args))
-          local wrappedfn = wrap(fname, hostfn)
-          local sandboxfn
-          local incheck = method.inputs and funcheck.makeCheckInputs(fname, method)
-          local outcheck = method.outputs and funcheck.makeCheckOutputs(fname, method)
-          if not incheck and not outcheck then
-            sandboxfn = wrappedfn
-          elseif not incheck then
-            sandboxfn = function(...)
-              return outcheck(wrappedfn(...))
-            end
-          elseif not outcheck then
-            sandboxfn = function(self, ...)
-              return wrappedfn(self, incheck(...))
-            end
-          else
-            sandboxfn = function(self, ...)
-              return outcheck(wrappedfn(self, incheck(...)))
-            end
-          end
-          local sandboxDispatch = function(obj, ...)
-            return sandboxfn(UserData(obj), ...)
-          end
-          sandboxFactory = function()
-            return bubblewrap(sandboxDispatch)
-          end
-        end
-        hostindex[mname] = hostfn
-        sandboxindex[mname] = sandboxFactory
+        hostindex[mname] = uiobjecthostimpls[fname]
+        sandboxindex[mname] = uiobjectmethodstubs[fname]
       end
       uiobjects[name] = {
         cfg = cfg,

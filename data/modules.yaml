@@ -189,11 +189,7 @@ uiobjectloader:
   deps:
     cstubs:
     datalua:
-    funcheck:
     gencode:
-    sqls:
-    uiobjects:
-    uiobjecttypes:
 uiobjects:
   deps:
 uiobjecttypes:
