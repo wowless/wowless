@@ -131,6 +131,15 @@ static int make_uiobject_method_stub(lua_State *L) {
   return 1;
 }
 
+static int make_uiobject_impl_stub(lua_State *L) {
+  /* upvalues: 1=cgencode, 2=luafn, 3=fn ptr */
+  auto fn = reinterpret_cast<lua_CFunction>(lua_touserdata(L, lua_upvalueindex(3)));
+  lua_pushvalue(L, lua_upvalueindex(1)); /* cgencode */
+  lua_pushvalue(L, lua_upvalueindex(2)); /* luafn */
+  lua_pushcclosure(L, fn, 2);
+  return 1;
+}
+
 int wowless_load_uiobject_method_stubs(lua_State *L) {
   const auto *spec = static_cast<const wowless_uiobject_method_entry *>(
       lua_touserdata(L, lua_upvalueindex(1)));
@@ -141,12 +150,21 @@ int wowless_load_uiobject_method_stubs(lua_State *L) {
   lua_newtable(L); /* sandbox factories */
   lua_newtable(L); /* host Lua functions */
   for (const auto *e = spec; e->key; e++) {
-    lua_pushlightuserdata(L, reinterpret_cast<void *>(e->func));
-    lua_pushvalue(L, 1); /* cgencode */
-    lua_pushcclosure(L, make_uiobject_method_stub, 2);
-    lua_setfield(L, -3, e->key); /* into sandbox table */
     load_impl_data(L, e->host);
-    lua_setfield(L, -2, e->key); /* into host table */
+    if (e->sandbox_delegates_to_host) {
+      lua_pushvalue(L, -1);        /* dup luafn for host table */
+      lua_setfield(L, -3, e->key); /* into host table */
+      lua_pushvalue(L, 1);         /* cgencode */
+      lua_insert(L, -2);           /* cgencode, luafn */
+      lua_pushlightuserdata(L, reinterpret_cast<void *>(e->func));
+      lua_pushcclosure(L, make_uiobject_impl_stub, 3);
+    } else {
+      lua_setfield(L, -2, e->key); /* into host table */
+      lua_pushlightuserdata(L, reinterpret_cast<void *>(e->func));
+      lua_pushvalue(L, 1); /* cgencode */
+      lua_pushcclosure(L, make_uiobject_method_stub, 2);
+    }
+    lua_setfield(L, -3, e->key); /* into sandbox table */
   }
   return 2;
 }
