@@ -1068,7 +1068,26 @@ local function emit_stub_body(key, cfg, inputcheck)
   emit('  return %d;', #outs)
 end
 
+local function cpermissive(inp, idx)
+  local is_check = dispatch(cinputtypes, inp.type)('is', false, idx)
+  local t = type(inp.default)
+  local push
+  if t == 'boolean' then
+    push = ('lua_pushboolean(L, %s)'):format(inp.default and '1' or '0')
+  elseif t == 'number' then
+    push = ('lua_pushnumber(L, %g)'):format(inp.default)
+  elseif t == 'string' then
+    push = ('lua_pushstring(L, %s)'):format(cstring(inp.default))
+  else
+    error('unsupported permissive default type: ' .. t)
+  end
+  return ('if (!lua_isnoneornil(L, %d) && !%s) { %s; lua_replace(L, %d); }'):format(idx, is_check, push, idx)
+end
+
 local function stub_inputcheck(inp, idx)
+  if inp.permissive then
+    return cpermissive(inp, idx)
+  end
   local nilable = inp.nilable or inp.default ~= nil
   return dispatch(cinputtypes, inp.type)('stubcheck', nilable, idx) .. ';'
 end
@@ -1096,6 +1115,9 @@ local function emit_implstub_body(name, v, fn)
   local nsins = #inputs - instride
   if check_inputs then
     local function check(inp, idx)
+      if inp.permissive then
+        return cpermissive(inp, idx)
+      end
       local nilable = inp.nilable or inp.default ~= nil
       return dispatch(cinputtypes, inp.type)('implcheck', nilable, idx) .. ';'
     end

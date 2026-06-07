@@ -454,7 +454,8 @@ lies:
             type:
               _change:
                 from: string
-                to: unknown
+                to:
+                  stringenum: WrapMode
           3:
             _add:
               default: CLAMP
@@ -463,7 +464,8 @@ lies:
             type:
               _change:
                 from: string
-                to: unknown
+                to:
+                  stringenum: WrapMode
           4:
             _add:
               default: LINEAR
