@@ -77,10 +77,6 @@ funtainer:
 gencode:
   deps:
     api:
-    env:
-    log:
-    luaobjects:
-    typecheck:
 loader:
   deps:
     addons:
