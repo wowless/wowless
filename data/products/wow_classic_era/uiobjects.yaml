@@ -8041,14 +8041,10 @@ TextureBase:
         type: string
       - default: CLAMP
         name: wrapModeHorizontal
-        permissive: true
-        type:
-          stringenum: WrapMode
+        type: unknown
       - default: CLAMP
         name: wrapModeVertical
-        permissive: true
-        type:
-          stringenum: WrapMode
+        type: unknown
       - default: LINEAR
         name: filterMode
         type:
