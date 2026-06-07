@@ -219,6 +219,7 @@ local uiobjectimplimplmakers = {
     end
     local src = 'data/uiobjects/' .. k .. '.lua'
     return {
+      cstub = true,
       impl = readFile(src),
       modules = modules,
       sqls = impl.sqls,
@@ -227,6 +228,7 @@ local uiobjectimplimplmakers = {
   end,
   moduledelegate = function(impl, k)
     return {
+      cstub = true,
       impl = ('return (...)[%q]'):format(k:sub(k:find('/') + 1)),
       modules = { impl.name },
     }
@@ -318,7 +320,12 @@ for k, v in pairs(uiobjectdata) do
     local d = dispatch(uiobjectimplmakers, mv.impl or 'none', mv, k)
     if d.cstub then
       methods[mk] = { cstub = true }
-      eligible_uimethods[k .. ':' .. mk] = { impl = d.impl, k = k, mk = mk, mv = mv }
+      eligible_uimethods[k .. ':' .. mk] = {
+        k = k,
+        mk = mk,
+        mv = mv,
+        implimpl = type(mv.impl) == 'table' and mv.impl.uiobjectimpl and d or nil,
+      }
     else
       methods[mk] = Mixin({}, d, {
         inputs = mv.inputs,
@@ -1233,10 +1240,32 @@ local uiobjectcimplmakers = {
 }
 for key, entry in sorted(eligible_uimethods) do
   local k, mk, mv = entry.k, entry.mk, entry.mv
-  emit('static int stub_uimethod_%s_%s(lua_State *L) {', safename(k), safename(mk))
-  dispatch(uiobjectcimplmakers, mv.impl or 'none', mv, k, key)
-  emit('}')
-  emit('')
+  if entry.implimpl then
+    local implimpl = entry.implimpl
+    local fn = implimpl.nobubblewrap and 'wowless_impl_stub_nobubblewrap' or 'wowless_impl_stub'
+    local inputs = { { type = { uiobject = k } } }
+    for _, inp in ipairs(mv.inputs or {}) do
+      table.insert(inputs, inp)
+    end
+    emit('static int implstub_uiimpl_%s_%s(lua_State *L) {', safename(k), safename(mk))
+    emit_implstub_body(key, {
+      inputs = inputs,
+      instride = mv.instride,
+      mayreturnnothing = mv.mayreturnnothing,
+      outputs = mv.outputs,
+      outstride = mv.outstride,
+    }, fn)
+    emit('}')
+    emit('')
+  else
+    emit('static int stub_uimethod_%s_%s(lua_State *L) {', safename(k), safename(mk))
+    if mv.secureonly then
+      emit('  if (wowless_forbidden(L)) return 0;')
+    end
+    dispatch(uiobjectcimplmakers, mv.impl or 'none', mv, k, key)
+    emit('}')
+    emit('')
+  end
 end
 
 local ns_entries = {}
@@ -1427,23 +1456,41 @@ emit('};')
 emit('')
 -- UIObject host impl data statics
 for key, entry in sorted(eligible_uimethods) do
-  local sn = safename(entry.k) .. '_' .. safename(entry.mk)
-  emit(
-    'static const wowless_impl_data host_impldata_%s = {%s, %d, %s, nullptr, nullptr};',
-    sn,
-    cstring(entry.impl),
-    #entry.impl,
-    cstring(key)
-  )
+  if not entry.implimpl then
+    local sn = safename(entry.k) .. '_' .. safename(entry.mk)
+    local d = dispatch(uiobjectimplmakers, entry.mv.impl or 'none', entry.mv, entry.k)
+    emit(
+      'static const wowless_impl_data host_impldata_%s = {%s, %d, %s, nullptr, nullptr};',
+      sn,
+      cstring(d.impl),
+      #d.impl,
+      cstring(key)
+    )
+  end
+end
+-- UIObject impl method impldata statics
+for key, entry in sorted(eligible_uimethods) do
+  if entry.implimpl then
+    local k, mk = entry.k, entry.mk
+    local implimpl = entry.implimpl
+    local sn = 'uiimpl_' .. safename(k) .. '_' .. safename(mk)
+    emit_stub_entry_statics(sn, { impldata = implimpl, chunkname = implimpl.src or key })
+  end
 end
 emit('')
 -- UIObject method entry array
 emit('static const struct wowless_uiobject_method_entry uiobject_method_entries[] = {')
 for key, entry in sorted(eligible_uimethods) do
-  local sn = safename(entry.k) .. '_' .. safename(entry.mk)
-  emit('  {%s, stub_uimethod_%s_%s, &host_impldata_%s},', cstring(key), safename(entry.k), safename(entry.mk), sn)
+  local k, mk = entry.k, entry.mk
+  if entry.implimpl then
+    local sn = 'uiimpl_' .. safename(k) .. '_' .. safename(mk)
+    emit('  {%s, implstub_uiimpl_%s_%s, &impldata_%s, 1},', cstring(key), safename(k), safename(mk), sn)
+  else
+    local sn = safename(k) .. '_' .. safename(mk)
+    emit('  {%s, stub_uimethod_%s_%s, &host_impldata_%s, 0},', cstring(key), safename(k), safename(mk), sn)
+  end
 end
-emit('  {nullptr, nullptr, nullptr}')
+emit('  {nullptr, nullptr, nullptr, 0}')
 emit('};')
 emit('')
 for k, e in sorted(eventcfg) do

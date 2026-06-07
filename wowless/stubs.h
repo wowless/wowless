@@ -39,8 +39,9 @@ struct wowless_luaobject_type_entry {
 struct wowless_uiobject_method_entry {
   const char *key;
   lua_CFunction func;
-  const struct wowless_impl_data
-      *host; /* NULL-terminated host impl, loaded as Lua function */
+  const struct wowless_impl_data *host; /* host impl, loaded as Lua function */
+  int sandbox_delegates_to_host; /* non-zero when sandbox stub calls through to
+                                    host impl */
 };
 
 int wowless_load_stubs(lua_State *L);
