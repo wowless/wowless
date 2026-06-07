@@ -70,10 +70,6 @@ events:
     security:
 fontinstance:
   deps:
-funcheck:
-  deps:
-    log:
-    typecheck:
 funtainer:
   deps:
     luaobjects:

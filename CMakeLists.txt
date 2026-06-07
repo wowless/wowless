@@ -842,7 +842,6 @@ lua2c(
   wowless.modules.eventqueue=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/eventqueue.lua
   wowless.modules.events=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/events.lua
   wowless.modules.fontinstance=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/fontinstance.lua
-  wowless.modules.funcheck=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/funcheck.lua
   wowless.modules.funtainer=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/funtainer.lua
   wowless.modules.gencode=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/gencode.lua
   wowless.modules.loader=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/loader.lua
@@ -1068,7 +1067,6 @@ set(specs
     spec/wowless/blp_spec.lua
     spec/wowless/bubblewrap_spec.lua
     spec/wowless/hlist_spec.lua
-    spec/wowless/modules/funcheck_spec.lua
     spec/wowless/modules/typecheck_spec.lua
     spec/wowless/sqlite_spec.lua
     spec/wowless/toc_spec.lua
