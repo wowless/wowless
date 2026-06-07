@@ -219,7 +219,6 @@ local uiobjectimplimplmakers = {
     end
     local src = 'data/uiobjects/' .. k .. '.lua'
     return {
-      cstub = true,
       impl = readFile(src),
       modules = modules,
       sqls = impl.sqls,
@@ -228,7 +227,6 @@ local uiobjectimplimplmakers = {
   end,
   moduledelegate = function(impl, k)
     return {
-      cstub = true,
       impl = ('return (...)[%q]'):format(k:sub(k:find('/') + 1)),
       modules = { impl.name },
     }
@@ -237,7 +235,6 @@ local uiobjectimplimplmakers = {
 local uiobjectimplmakers = {
   none = function()
     return {
-      cstub = true,
       impl = 'return function() end',
       modules = {},
     }
@@ -249,7 +246,6 @@ local uiobjectimplmakers = {
     end
     table.insert(t, ' end')
     return {
-      cstub = true,
       impl = table.concat(t),
       modules = {},
     }
@@ -275,7 +271,6 @@ local uiobjectimplmakers = {
     end
     table.insert(t, 'end')
     return {
-      cstub = true,
       impl = table.concat(t),
       modules = {},
     }
@@ -299,7 +294,6 @@ local uiobjectimplmakers = {
     end
     table.insert(t, 'end')
     return {
-      cstub = true,
       impl = table.concat(t),
       modules = { 'gencode' },
     }
@@ -318,24 +312,14 @@ for k, v in pairs(uiobjectdata) do
   table.insert(constructor, '}end')
   local methods = {}
   for mk, mv in pairs(v.methods) do
+    methods[mk] = true
     local d = dispatch(uiobjectimplmakers, mv.impl or 'none', mv, k)
-    if d.cstub then
-      methods[mk] = { cstub = true }
-      eligible_uimethods[k .. ':' .. mk] = {
-        k = k,
-        mk = mk,
-        mv = mv,
-        implimpl = type(mv.impl) == 'table' and (mv.impl.uiobjectimpl or mv.impl.settexture) and d or nil,
-      }
-    else
-      methods[mk] = Mixin({}, d, {
-        inputs = mv.inputs,
-        instride = mv.instride,
-        mayreturnnothing = mv.mayreturnnothing,
-        outputs = mv.outputs,
-        outstride = mv.outstride,
-      })
-    end
+    eligible_uimethods[k .. ':' .. mk] = {
+      k = k,
+      mk = mk,
+      mv = mv,
+      implimpl = type(mv.impl) == 'table' and (mv.impl.uiobjectimpl or mv.impl.settexture) and d or nil,
+    }
   end
   local scripts = {}
   for sk in pairs(v.scripts or {}) do
