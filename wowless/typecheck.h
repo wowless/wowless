@@ -149,6 +149,42 @@ static inline void wowless_stubchecknilabletextureasset(lua_State *L, int idx) {
   }
 }
 
+static inline void wowless_implchecktextureasset(lua_State *L, int idx) {
+  idx = lua_absindex(L, idx);
+  switch (lua_type(L, idx)) {
+    case LUA_TSTRING:
+    case LUA_TNUMBER:
+      return;
+    case LUA_TTABLE: {
+      lua_rawgeti(L, idx, 0);
+      if (lua_type(L, -1) == LUA_TUSERDATA &&
+          lua_objlen(L, -1) == sizeof(struct wowless_uiobject_data)) {
+        const struct wowless_uiobject_data *ud =
+            (const struct wowless_uiobject_data *)lua_touserdata(L, -1);
+        if (ud->marker == &wowless_uiobject_marker) {
+          int id = ud->id;
+          lua_rawgeti(L, lua_upvalueindex(1), 1);
+          lua_rawgeti(L, -1, id);
+          lua_replace(L, idx);
+          lua_pop(L, 2);
+          return;
+        }
+      }
+      lua_pop(L, 1);
+      luaL_typerror(L, idx, "TextureAsset");
+      break;
+    }
+    default:
+      luaL_typerror(L, idx, "TextureAsset");
+  }
+}
+
+static inline void wowless_implchecknilabletextureasset(lua_State *L, int idx) {
+  if (!lua_isnoneornil(L, idx)) {
+    wowless_implchecktextureasset(L, idx);
+  }
+}
+
 static inline bool wowless_isfileasset(lua_State *L, int idx) {
   return wowless_isstring(L, idx);
 }

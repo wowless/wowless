@@ -299,6 +299,7 @@ local uiobjectimplmakers = {
     end
     table.insert(t, 'end')
     return {
+      cstub = true,
       impl = table.concat(t),
       modules = { 'gencode' },
     }
@@ -324,7 +325,7 @@ for k, v in pairs(uiobjectdata) do
         k = k,
         mk = mk,
         mv = mv,
-        implimpl = type(mv.impl) == 'table' and mv.impl.uiobjectimpl and d or nil,
+        implimpl = type(mv.impl) == 'table' and (mv.impl.uiobjectimpl or mv.impl.settexture) and d or nil,
       }
     else
       methods[mk] = Mixin({}, d, {
