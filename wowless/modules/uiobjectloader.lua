@@ -2,8 +2,7 @@ local util = require('wowless.util')
 local bubblewrap = require('wowless.bubblewrap')
 local Mixin = util.mixin
 
-return function(cgencode, cstubs, datalua, funcheck, gencode, sqls, uiobjectsmodule, uiobjecttypes)
-  local uiobjectmethodstubs, uiobjecthostimpls = cstubs.loaduiobjectmethods(cgencode)
+return function(cstubs, datalua, funcheck, gencode, sqls, uiobjectsmodule, uiobjecttypes)
   local InheritsFrom = uiobjecttypes.InheritsFrom
   local UserData = uiobjectsmodule.UserData
 
@@ -60,6 +59,7 @@ return function(cgencode, cstubs, datalua, funcheck, gencode, sqls, uiobjectsmod
     return t
   end
   return function(modules)
+    local uiobjectmethodstubs, uiobjecthostimpls = cstubs.loaduiobjectmethods(modules)
     local uiobjects = {}
     for name, cfg in pairs(datalua.uiobjects) do
       local lname = name:lower()

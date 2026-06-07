@@ -21,27 +21,30 @@ int wowless_impl_stub_nobubblewrap(lua_State *L) {
   return lua_gettop(L);
 }
 
+static void load_impl_data(lua_State *L, const struct wowless_impl_data *d) {
+  if (luaL_loadbuffer(L, d->impl, d->impl_len, d->chunkname) != 0) {
+    lua_error(L);
+  }
+  int nargs = 0;
+  if (d->modules) {
+    for (const char *const *m = d->modules; *m; m++, nargs++) {
+      lua_getfield(L, 2, *m);
+    }
+  }
+  if (d->sqls) {
+    lua_getfield(L, 2, "sqls");
+    int sqls_idx = lua_gettop(L);
+    for (const char *const *s = d->sqls; *s; s++, nargs++) {
+      lua_getfield(L, sqls_idx, *s);
+    }
+    lua_remove(L, sqls_idx);
+  }
+  lua_call(L, nargs, 1);
+}
+
 static void load_entry(lua_State *L, const struct wowless_stub_entry *e) {
   if (e->impldata) {
-    const struct wowless_impl_data *d = e->impldata;
-    if (luaL_loadbuffer(L, d->impl, d->impl_len, d->chunkname) != 0) {
-      lua_error(L);
-    }
-    int nargs = 0;
-    if (d->modules) {
-      for (const char *const *m = d->modules; *m; m++, nargs++) {
-        lua_getfield(L, 2, *m);
-      }
-    }
-    if (d->sqls) {
-      lua_getfield(L, 2, "sqls");
-      int sqls_idx = lua_gettop(L);
-      for (const char *const *s = d->sqls; *s; s++, nargs++) {
-        lua_getfield(L, sqls_idx, *s);
-      }
-      lua_remove(L, sqls_idx);
-    }
-    lua_call(L, nargs, 1);
+    load_impl_data(L, e->impldata);
     if (e->func) {
       lua_pushvalue(L, 1);
       lua_insert(L, -2);
@@ -131,7 +134,10 @@ static int make_uiobject_method_stub(lua_State *L) {
 int wowless_load_uiobject_method_stubs(lua_State *L) {
   const auto *spec = static_cast<const wowless_uiobject_method_entry *>(
       lua_touserdata(L, lua_upvalueindex(1)));
-  /* arg 1 is cgencode directly */
+  /* arg 1 is modules */
+  lua_getfield(L, 1, "cgencode");
+  lua_insert(L, 1);
+  /* Stack: [cgencode=1, modules=2] */
   lua_newtable(L); /* sandbox factories */
   lua_newtable(L); /* host Lua functions */
   for (const auto *e = spec; e->key; e++) {
@@ -139,11 +145,7 @@ int wowless_load_uiobject_method_stubs(lua_State *L) {
     lua_pushvalue(L, 1); /* cgencode */
     lua_pushcclosure(L, make_uiobject_method_stub, 2);
     lua_setfield(L, -3, e->key); /* into sandbox table */
-    const struct wowless_impl_data *d = e->host;
-    if (luaL_loadbuffer(L, d->impl, d->impl_len, d->chunkname) != 0) {
-      lua_error(L);
-    }
-    lua_call(L, 0, 1);
+    load_impl_data(L, e->host);
     lua_setfield(L, -2, e->key); /* into host table */
   }
   return 2;
