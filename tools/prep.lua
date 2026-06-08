@@ -4,8 +4,8 @@ local args = (function()
   parser:option('--sqls', 'sqls file')
   parser:option('-o --output', 'output file')
   parser:option('--coutput', 'C stubs output file'):count('1')
-  parser:option('--structs-h', 'structures header output file'):count('1')
-  parser:option('--structs-c', 'structures C output file'):count('1')
+  parser:option('--structures-h', 'structures header output file'):count('1')
+  parser:option('--structures-c', 'structures C output file'):count('1')
   return parser:parse()
 end)()
 
@@ -564,7 +564,7 @@ cinputtypes = {
   luaobject = function(name)
     return function(verb, nilable, idx)
       local ns = nilable and 'nilable' or ''
-      return string.format('wowless_%s%sluaobject_%s(L, %s)', verb, ns, safename(name), idx)
+      return string.format('wowless_%s%sluaobject_%s_%s(L, %s)', verb, ns, safename(product), safename(name), idx)
     end
   end,
   number = simple_cinputtype('number'),
@@ -576,10 +576,11 @@ cinputtypes = {
     end
     return function(verb, nilable, idx)
       return string.format(
-        'wowless_%s%sstringenum(L, %s, wowless_stringenum_%s_values, %d)',
+        'wowless_%s%sstringenum(L, %s, wowless_stringenum_%s_%s_values, %d)',
         verb,
         nilable and 'nilable' or '',
         idx,
+        safename(product),
         safename(name),
         n
       )
@@ -588,14 +589,27 @@ cinputtypes = {
   structure = function(name)
     assert(structures[name], name)
     return function(_, nilable, idx)
-      return string.format('wowless_stubcheck%sstruct_%s(L, %s)', nilable and 'nilable' or '', safename(name), idx)
+      return string.format(
+        'wowless_stubcheck%sstruct_%s_%s(L, %s)',
+        nilable and 'nilable' or '',
+        safename(product),
+        safename(name),
+        idx
+      )
     end
   end,
   table = simple_cinputtype('table'),
   uiAddon = simple_cinputtype('uiaddon'),
   uiobject = function(name)
     return function(verb, nilable, idx)
-      return string.format('wowless_%s%suiobject_%s(L, %s)', verb, nilable and 'nilable' or '', safename(name), idx)
+      return string.format(
+        'wowless_%s%suiobject_%s_%s(L, %s)',
+        verb,
+        nilable and 'nilable' or '',
+        safename(product),
+        safename(name),
+        idx
+      )
     end
   end,
   unit = simple_cinputtype('unit'),
@@ -624,7 +638,7 @@ coutputtypes = {
   ['function'] = simple_coutputtype('function'),
   luaobject = function(typename, nilable, idx)
     local ns = nilable and 'nilable' or ''
-    return string.format('wowless_imploutput%sluaobject_%s(L, %s)', ns, safename(typename), idx)
+    return string.format('wowless_imploutput%sluaobject_%s_%s(L, %s)', ns, safename(product), safename(typename), idx)
   end,
   ['nil'] = simple_coutputtype('nil'),
   number = simple_coutputtype('number'),
@@ -637,15 +651,22 @@ coutputtypes = {
     end
     local ns = nilable and 'nilable' or ''
     return string.format(
-      'wowless_imploutput%sstringenum(L, %s, wowless_stringenum_%s_values, %d)',
+      'wowless_imploutput%sstringenum(L, %s, wowless_stringenum_%s_%s_values, %d)',
       ns,
       idx,
+      safename(product),
       safename(name),
       n
     )
   end,
   structure = function(name, nilable, idx)
-    return string.format('wowless_stubcheck%sstruct_%s(L, %s)', nilable and 'nilable' or '', safename(name), idx)
+    return string.format(
+      'wowless_stubcheck%sstruct_%s_%s(L, %s)',
+      nilable and 'nilable' or '',
+      safename(product),
+      safename(name),
+      idx
+    )
   end,
   table = simple_coutputtype('table'),
   uiobject = function(typename, nilable, idx)
@@ -661,15 +682,19 @@ local function emit(fmt, ...)
   table.insert(lines, string.format(fmt, ...))
 end
 
-local struct_h_lines = {}
+local structure_h_lines = {}
 local function hemit(fmt, ...)
-  table.insert(struct_h_lines, string.format(fmt, ...))
+  table.insert(structure_h_lines, string.format(fmt, ...))
 end
 
-local struct_c_lines = {}
+local structure_c_lines = {}
 local function cemit(fmt, ...)
-  table.insert(struct_c_lines, string.format(fmt, ...))
+  table.insert(structure_c_lines, string.format(fmt, ...))
 end
+
+cemit('#include "%s_structures.h"', product)
+cemit('#include "wowless/typecheck.h"')
+cemit('')
 
 emit('#include "wowless/typecheck.h"')
 emit('')
@@ -780,25 +805,53 @@ coutpushers = {
   end,
 }
 
-local structs_guard = 'WOWLESS_' .. product:upper():gsub('[^%u%d]', '_') .. '_STRUCTS_H'
-hemit('#ifndef %s', structs_guard)
-hemit('#define %s', structs_guard)
+local structures_guard = 'WOWLESS_' .. product:upper():gsub('[^%u%d]', '_') .. '_STRUCTURES_H'
+hemit('#ifndef %s', structures_guard)
+hemit('#define %s', structures_guard)
 hemit('')
 hemit('#include "lua.h"')
 hemit('')
+for sename in sorted(stringenums) do
+  hemit('extern const char * const wowless_stringenum_%s_%s_values[];', safename(product), safename(sename))
+end
+if next(stringenums) then
+  hemit('')
+end
+for uname in sorted(uiobjectdata) do
+  hemit('bool wowless_isuiobject_%s_%s(lua_State *L, int idx);', safename(product), safename(uname))
+  hemit('bool wowless_isnilableuiobject_%s_%s(lua_State *L, int idx);', safename(product), safename(uname))
+  hemit('void wowless_stubcheckuiobject_%s_%s(lua_State *L, int idx);', safename(product), safename(uname))
+  hemit('void wowless_stubchecknilableuiobject_%s_%s(lua_State *L, int idx);', safename(product), safename(uname))
+  hemit('void wowless_implcheckuiobject_%s_%s(lua_State *L, int idx);', safename(product), safename(uname))
+  hemit('void wowless_implchecknilableuiobject_%s_%s(lua_State *L, int idx);', safename(product), safename(uname))
+end
+if next(uiobjectdata) then
+  hemit('')
+end
+for loname in sorted(luaobjectdata) do
+  hemit('bool wowless_isluaobject_%s_%s(lua_State *L, int idx);', safename(product), safename(loname))
+  hemit('bool wowless_isnilableluaobject_%s_%s(lua_State *L, int idx);', safename(product), safename(loname))
+  hemit('void wowless_stubcheckluaobject_%s_%s(lua_State *L, int idx);', safename(product), safename(loname))
+  hemit('void wowless_stubchecknilableluaobject_%s_%s(lua_State *L, int idx);', safename(product), safename(loname))
+  hemit('void wowless_implcheckluaobject_%s_%s(lua_State *L, int idx);', safename(product), safename(loname))
+  hemit('void wowless_implchecknilableluaobject_%s_%s(lua_State *L, int idx);', safename(product), safename(loname))
+  hemit('void wowless_imploutputluaobject_%s_%s(lua_State *L, int idx);', safename(product), safename(loname))
+  hemit('void wowless_imploutputnilableluaobject_%s_%s(lua_State *L, int idx);', safename(product), safename(loname))
+end
+if next(luaobjectdata) then
+  hemit('')
+end
 for sname in sorted(structures) do
-  hemit('static void wowless_stubcheckstruct_%s(lua_State *L, int idx);', safename(sname))
-  hemit('static void wowless_stubchecknilablestruct_%s(lua_State *L, int idx);', safename(sname))
+  hemit('void wowless_stubcheckstruct_%s_%s(lua_State *L, int idx);', safename(product), safename(sname))
+  hemit('void wowless_stubchecknilablestruct_%s_%s(lua_State *L, int idx);', safename(product), safename(sname))
 end
 if next(structures) then
   hemit('')
 end
-hemit('#endif /* %s */', structs_guard)
+hemit('#endif /* %s */', structures_guard)
 
-if next(structures) then
-  emit('#include "%s_structs.h"', product)
-  emit('')
-end
+emit('#include "%s_structures.h"', product)
+emit('')
 for sename, sevalues in sorted(stringenums) do
   local values = {}
   for k in pairs(sevalues) do
@@ -810,7 +863,8 @@ for sename, sevalues in sorted(stringenums) do
     entries[#entries + 1] = cstring(v)
   end
   emit(
-    'static const char * const wowless_stringenum_%s_values[] = {%s};',
+    'const char * const wowless_stringenum_%s_%s_values[] = {%s};',
+    safename(product),
     safename(sename),
     table.concat(entries, ', ')
   )
@@ -818,33 +872,8 @@ end
 if next(stringenums) then
   emit('')
 end
-for uname in sorted(uiobjectdata) do
-  emit('static bool wowless_isuiobject_%s(lua_State *L, int idx);', safename(uname))
-  emit('static bool wowless_isnilableuiobject_%s(lua_State *L, int idx);', safename(uname))
-  emit('static void wowless_stubcheckuiobject_%s(lua_State *L, int idx);', safename(uname))
-  emit('static void wowless_stubchecknilableuiobject_%s(lua_State *L, int idx);', safename(uname))
-  emit('static void wowless_implcheckuiobject_%s(lua_State *L, int idx);', safename(uname))
-  emit('static void wowless_implchecknilableuiobject_%s(lua_State *L, int idx);', safename(uname))
-end
-emit('')
-for loname in sorted(luaobjectdata) do
-  emit('static bool wowless_isluaobject_%s(lua_State *L, int idx);', safename(loname))
-  emit('static bool wowless_isnilableluaobject_%s(lua_State *L, int idx);', safename(loname))
-  emit('static void wowless_stubcheckluaobject_%s(lua_State *L, int idx);', safename(loname))
-  emit('static void wowless_stubchecknilableluaobject_%s(lua_State *L, int idx);', safename(loname))
-  emit('static void wowless_implcheckluaobject_%s(lua_State *L, int idx);', safename(loname))
-  emit('static void wowless_implchecknilableluaobject_%s(lua_State *L, int idx);', safename(loname))
-  emit('static void wowless_imploutputluaobject_%s(lua_State *L, int idx);', safename(loname))
-  emit('static void wowless_imploutputnilableluaobject_%s(lua_State *L, int idx);', safename(loname))
-end
-emit('')
-if next(structures) then
-  emit('#include "%s_structs.cpp"', product)
-  emit('')
-end
-
 for sname, st in sorted(structures) do
-  cemit('static void wowless_stubcheckstruct_%s(lua_State *L, int idx) {', safename(sname))
+  cemit('void wowless_stubcheckstruct_%s_%s(lua_State *L, int idx) {', safename(product), safename(sname))
   cemit('  idx = lua_absindex(L, idx);')
   cemit('  wowless_stubchecktable(L, idx);')
   for fname, field in sorted(st.fields) do
@@ -857,32 +886,40 @@ for sname, st in sorted(structures) do
   end
   cemit('}')
   cemit('')
-  cemit('static void wowless_stubchecknilablestruct_%s(lua_State *L, int idx) {', safename(sname))
+  cemit('void wowless_stubchecknilablestruct_%s_%s(lua_State *L, int idx) {', safename(product), safename(sname))
   cemit('  if (!lua_isnoneornil(L, idx)) {')
-  cemit('    wowless_stubcheckstruct_%s(L, idx);', safename(sname))
+  cemit('    wowless_stubcheckstruct_%s_%s(L, idx);', safename(product), safename(sname))
   cemit('  }')
   cemit('}')
   cemit('')
 end
 
 for uname in sorted(uiobjectdata) do
-  emit('static bool wowless_isuiobject_%s(lua_State *L, int idx) {', safename(uname))
+  emit('bool wowless_isuiobject_%s_%s(lua_State *L, int idx) {', safename(product), safename(uname))
   emit('  return wowless_isuiobject(L, idx, %d);', uitype_bits[uname])
   emit('}')
   emit('')
-  emit('static bool wowless_isnilableuiobject_%s(lua_State *L, int idx) {', safename(uname))
+  emit('bool wowless_isnilableuiobject_%s_%s(lua_State *L, int idx) {', safename(product), safename(uname))
   emit('  return wowless_isnilableuiobject(L, idx, %d);', uitype_bits[uname])
   emit('}')
   emit('')
-  emit('static void wowless_stubcheckuiobject_%s(lua_State *L, int idx) {', safename(uname))
-  emit('  if (!wowless_isuiobject_%s(L, idx)) luaL_typerror(L, idx, "uiobject");', safename(uname))
+  emit('void wowless_stubcheckuiobject_%s_%s(lua_State *L, int idx) {', safename(product), safename(uname))
+  emit(
+    '  if (!wowless_isuiobject_%s_%s(L, idx)) luaL_typerror(L, idx, "uiobject");',
+    safename(product),
+    safename(uname)
+  )
   emit('}')
   emit('')
-  emit('static void wowless_stubchecknilableuiobject_%s(lua_State *L, int idx) {', safename(uname))
-  emit('  if (!wowless_isnilableuiobject_%s(L, idx)) luaL_typerror(L, idx, "uiobject");', safename(uname))
+  emit('void wowless_stubchecknilableuiobject_%s_%s(lua_State *L, int idx) {', safename(product), safename(uname))
+  emit(
+    '  if (!wowless_isnilableuiobject_%s_%s(L, idx)) luaL_typerror(L, idx, "uiobject");',
+    safename(product),
+    safename(uname)
+  )
   emit('}')
   emit('')
-  emit('static void wowless_implcheckuiobject_%s(lua_State *L, int idx) {', safename(uname))
+  emit('void wowless_implcheckuiobject_%s_%s(lua_State *L, int idx) {', safename(product), safename(uname))
   if uname == 'Font' then
     emit('  if (lua_type(L, idx) == LUA_TSTRING) {')
     emit('    lua_getglobal(L, lua_tostring(L, idx));')
@@ -892,10 +929,10 @@ for uname in sorted(uiobjectdata) do
   emit('  wowless_implcheckuiobject(L, idx, %d);', uitype_bits[uname])
   emit('}')
   emit('')
-  emit('static void wowless_implchecknilableuiobject_%s(lua_State *L, int idx) {', safename(uname))
+  emit('void wowless_implchecknilableuiobject_%s_%s(lua_State *L, int idx) {', safename(product), safename(uname))
   if uname == 'Font' then
     emit('  if (!lua_isnoneornil(L, idx)) {')
-    emit('    wowless_implcheckuiobject_%s(L, idx);', safename(uname))
+    emit('    wowless_implcheckuiobject_%s_%s(L, idx);', safename(product), safename(uname))
     emit('  }')
   else
     emit('  wowless_implchecknilableuiobject(L, idx, %d);', uitype_bits[uname])
@@ -906,35 +943,35 @@ end
 
 for loname in sorted(luaobjectdata) do
   local tid = luaobject_typeids[loname]
-  emit('static bool wowless_isluaobject_%s(lua_State *L, int idx) {', safename(loname))
+  emit('bool wowless_isluaobject_%s_%s(lua_State *L, int idx) {', safename(product), safename(loname))
   emit('  return wowless_isluaobject(L, idx, %d);', tid)
   emit('}')
   emit('')
-  emit('static bool wowless_isnilableluaobject_%s(lua_State *L, int idx) {', safename(loname))
+  emit('bool wowless_isnilableluaobject_%s_%s(lua_State *L, int idx) {', safename(product), safename(loname))
   emit('  return wowless_isnilableluaobject(L, idx, %d);', tid)
   emit('}')
   emit('')
-  emit('static void wowless_stubcheckluaobject_%s(lua_State *L, int idx) {', safename(loname))
+  emit('void wowless_stubcheckluaobject_%s_%s(lua_State *L, int idx) {', safename(product), safename(loname))
   emit('  wowless_stubcheckluaobject(L, idx, %d);', tid)
   emit('}')
   emit('')
-  emit('static void wowless_stubchecknilableluaobject_%s(lua_State *L, int idx) {', safename(loname))
+  emit('void wowless_stubchecknilableluaobject_%s_%s(lua_State *L, int idx) {', safename(product), safename(loname))
   emit('  wowless_stubchecknilableluaobject(L, idx, %d);', tid)
   emit('}')
   emit('')
-  emit('static void wowless_implcheckluaobject_%s(lua_State *L, int idx) {', safename(loname))
+  emit('void wowless_implcheckluaobject_%s_%s(lua_State *L, int idx) {', safename(product), safename(loname))
   emit('  wowless_implcheckluaobject(L, idx, %d, %s);', tid, cstring(loname))
   emit('}')
   emit('')
-  emit('static void wowless_implchecknilableluaobject_%s(lua_State *L, int idx) {', safename(loname))
+  emit('void wowless_implchecknilableluaobject_%s_%s(lua_State *L, int idx) {', safename(product), safename(loname))
   emit('  wowless_implchecknilableluaobject(L, idx, %d, %s);', tid, cstring(loname))
   emit('}')
   emit('')
-  emit('static void wowless_imploutputluaobject_%s(lua_State *L, int idx) {', safename(loname))
+  emit('void wowless_imploutputluaobject_%s_%s(lua_State *L, int idx) {', safename(product), safename(loname))
   emit('  wowless_imploutputluaobject(L, idx, %d, %s);', tid, cstring(loname))
   emit('}')
   emit('')
-  emit('static void wowless_imploutputnilableluaobject_%s(lua_State *L, int idx) {', safename(loname))
+  emit('void wowless_imploutputnilableluaobject_%s_%s(lua_State *L, int idx) {', safename(product), safename(loname))
   emit('  wowless_imploutputnilableluaobject(L, idx, %d, %s);', tid, cstring(loname))
   emit('}')
   emit('')
@@ -983,7 +1020,7 @@ for loname in sorted(luaobjectdata) do
       local outputs = mv.outputs or {}
       emit('static int stub_lomethod_%s_%s(lua_State *L) {', safename(loname), safename(mname))
       if not lodata.virtual then
-        emit('  wowless_stubcheckluaobject_%s(L, 1);', safename(loname))
+        emit('  wowless_stubcheckluaobject_%s_%s(L, 1);', safename(product), safename(loname))
       end
       for i, inp in ipairs(inputs) do
         local nilable = inp.nilable or inp.default ~= nil
@@ -1020,7 +1057,7 @@ for loname in sorted(luaobjectdata) do
   if not lodata.virtual and lodata.impl then
     for mname in sorted(lodata.methods or {}) do
       emit('static int implstub_lomethod_%s_%s(lua_State *L) {', safename(loname), safename(mname))
-      emit('  wowless_implcheckluaobject_%s(L, 1);', safename(loname))
+      emit('  wowless_implcheckluaobject_%s_%s(L, 1);', safename(product), safename(loname))
       emit('  return wowless_impl_stub(L);') -- TODO: check inputs and outputs -- issue #667
       emit('}')
       emit('')
@@ -1237,7 +1274,7 @@ end
 -- UIObject method C stubs
 local uiobjectcimplmakers = {
   getter = function(impl, mv, k, key)
-    emit('  wowless_implcheckuiobject_%s(L, 1);', safename(k))
+    emit('  wowless_implcheckuiobject_%s_%s(L, 1);', safename(product), safename(k))
     emit('  wowless_stubcheckextraargs(L, 1, %s);', cstring(key))
     for i, f in ipairs(impl) do
       emit('  lua_getfield(L, 1, %s);', cstring(f.name))
@@ -1258,12 +1295,12 @@ local uiobjectcimplmakers = {
       end
       emit_stub_body(key, Mixin({}, mv, { inputs = inputs_with_self }), stub_inputcheck)
     else
-      emit('  wowless_stubcheckuiobject_%s(L, 1);', safename(k))
+      emit('  wowless_stubcheckuiobject_%s_%s(L, 1);', safename(product), safename(k))
       emit_stub_body(key, mv, stub_inputcheck)
     end
   end,
   setter = function(impl, mv, k, key)
-    emit('  wowless_implcheckuiobject_%s(L, 1);', safename(k))
+    emit('  wowless_implcheckuiobject_%s_%s(L, 1);', safename(product), safename(k))
     for i, inp in ipairs(mv.inputs) do
       local nilable = inp.nilable or inp.default ~= nil
       emit('  %s;', dispatch(cinputtypes, inp.type)('implcheck', nilable, i + 1))
@@ -1614,13 +1651,13 @@ cf:write(table.concat(lines, '\n'))
 cf:write('\n')
 cf:close()
 
-local sh = assert(io.open(args.structs_h, 'w'))
-sh:write(table.concat(struct_h_lines, '\n'))
+local sh = assert(io.open(args.structures_h, 'w'))
+sh:write(table.concat(structure_h_lines, '\n'))
 sh:write('\n')
 sh:close()
 
-local sc = assert(io.open(args.structs_c, 'w'))
-sc:write(table.concat(struct_c_lines, '\n'))
+local sc = assert(io.open(args.structures_c, 'w'))
+sc:write(table.concat(structure_c_lines, '\n'))
 sc:write('\n')
 sc:close()
 
