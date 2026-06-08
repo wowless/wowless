@@ -24,6 +24,10 @@ elseif(HAVE_EH_MINUS)
   add_compile_options($<$<COMPILE_LANGUAGE:CXX>:/EH->)
 endif()
 
+set(CMAKE_C_VISIBILITY_PRESET hidden)
+set(CMAKE_CXX_VISIBILITY_PRESET hidden)
+set(CMAKE_VISIBILITY_INLINES_HIDDEN ON)
+
 set(elune_SOURCE_DIR vendor/elune)
 set(elune_BINARY_DIR ${CMAKE_BINARY_DIR}/_deps/elune-build)
 add_library(
