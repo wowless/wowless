@@ -4,6 +4,8 @@ local args = (function()
   parser:option('--sqls', 'sqls file')
   parser:option('-o --output', 'output file')
   parser:option('--coutput', 'C stubs output file'):count('1')
+  parser:option('--structs-h', 'structures header output file'):count('1')
+  parser:option('--structs-c', 'structures C output file'):count('1')
   return parser:parse()
 end)()
 
@@ -659,6 +661,16 @@ local function emit(fmt, ...)
   table.insert(lines, string.format(fmt, ...))
 end
 
+local struct_h_lines = {}
+local function hemit(fmt, ...)
+  table.insert(struct_h_lines, string.format(fmt, ...))
+end
+
+local struct_c_lines = {}
+local function cemit(fmt, ...)
+  table.insert(struct_c_lines, string.format(fmt, ...))
+end
+
 emit('#include "wowless/typecheck.h"')
 emit('')
 
@@ -768,11 +780,23 @@ coutpushers = {
   end,
 }
 
+local structs_guard = 'WOWLESS_' .. product:upper():gsub('[^%u%d]', '_') .. '_STRUCTS_H'
+hemit('#ifndef %s', structs_guard)
+hemit('#define %s', structs_guard)
+hemit('')
+hemit('#include "lua.h"')
+hemit('')
 for sname in sorted(structures) do
-  emit('static void wowless_stubcheckstruct_%s(lua_State *L, int idx);', safename(sname))
-  emit('static void wowless_stubchecknilablestruct_%s(lua_State *L, int idx);', safename(sname))
+  hemit('static void wowless_stubcheckstruct_%s(lua_State *L, int idx);', safename(sname))
+  hemit('static void wowless_stubchecknilablestruct_%s(lua_State *L, int idx);', safename(sname))
 end
 if next(structures) then
+  hemit('')
+end
+hemit('#endif /* %s */', structs_guard)
+
+if next(structures) then
+  emit('#include "%s_structs.h"', product)
   emit('')
 end
 for sename, sevalues in sorted(stringenums) do
@@ -814,27 +838,31 @@ for loname in sorted(luaobjectdata) do
   emit('static void wowless_imploutputnilableluaobject_%s(lua_State *L, int idx);', safename(loname))
 end
 emit('')
+if next(structures) then
+  emit('#include "%s_structs.cpp"', product)
+  emit('')
+end
 
 for sname, st in sorted(structures) do
-  emit('static void wowless_stubcheckstruct_%s(lua_State *L, int idx) {', safename(sname))
-  emit('  idx = lua_absindex(L, idx);')
-  emit('  wowless_stubchecktable(L, idx);')
+  cemit('static void wowless_stubcheckstruct_%s(lua_State *L, int idx) {', safename(sname))
+  cemit('  idx = lua_absindex(L, idx);')
+  cemit('  wowless_stubchecktable(L, idx);')
   for fname, field in sorted(st.fields) do
     local field_nilable = field.nilable or field.default ~= nil
     local ftype = field.type
-    emit('  lua_pushliteral(L, %s);', cstring(fname))
-    emit('  lua_rawget(L, idx);')
-    emit('  %s;', dispatch(cinputtypes, ftype)('stubcheck', field_nilable, -1))
-    emit('  lua_pop(L, 1);')
+    cemit('  lua_pushliteral(L, %s);', cstring(fname))
+    cemit('  lua_rawget(L, idx);')
+    cemit('  %s;', dispatch(cinputtypes, ftype)('stubcheck', field_nilable, -1))
+    cemit('  lua_pop(L, 1);')
   end
-  emit('}')
-  emit('')
-  emit('static void wowless_stubchecknilablestruct_%s(lua_State *L, int idx) {', safename(sname))
-  emit('  if (!lua_isnoneornil(L, idx)) {')
-  emit('    wowless_stubcheckstruct_%s(L, idx);', safename(sname))
-  emit('  }')
-  emit('}')
-  emit('')
+  cemit('}')
+  cemit('')
+  cemit('static void wowless_stubchecknilablestruct_%s(lua_State *L, int idx) {', safename(sname))
+  cemit('  if (!lua_isnoneornil(L, idx)) {')
+  cemit('    wowless_stubcheckstruct_%s(L, idx);', safename(sname))
+  cemit('  }')
+  cemit('}')
+  cemit('')
 end
 
 for uname in sorted(uiobjectdata) do
@@ -1585,6 +1613,16 @@ local cf = assert(io.open(args.coutput, 'w'))
 cf:write(table.concat(lines, '\n'))
 cf:write('\n')
 cf:close()
+
+local sh = assert(io.open(args.structs_h, 'w'))
+sh:write(table.concat(struct_h_lines, '\n'))
+sh:write('\n')
+sh:close()
+
+local sc = assert(io.open(args.structs_c, 'w'))
+sc:write(table.concat(struct_c_lines, '\n'))
+sc:write('\n')
+sc:close()
 
 local outfn = args.output or ('build/products/' .. args.product .. '/data.lua')
 local tu = require('tools.util')

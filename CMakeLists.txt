@@ -507,10 +507,13 @@ foreach(product ${products})
   add_custom_command(
     OUTPUT stamp/${product}.txt
     BYPRODUCTS runtime/${product}.lua generated/${product}_stubs.cpp
+               generated/${product}_structs.h generated/${product}_structs.cpp
     COMMAND
       prep ${product} --sqls ${CMAKE_CURRENT_BINARY_DIR}/runtime/sqls.yaml
       --output ${CMAKE_CURRENT_BINARY_DIR}/generated/${product}.lua --coutput
-      ${CMAKE_CURRENT_BINARY_DIR}/generated/${product}_stubs.cpp
+      ${CMAKE_CURRENT_BINARY_DIR}/generated/${product}_stubs.cpp --structs-h
+      ${CMAKE_CURRENT_BINARY_DIR}/generated/${product}_structs.h --structs-c
+      ${CMAKE_CURRENT_BINARY_DIR}/generated/${product}_structs.cpp
     COMMAND
       ${CMAKE_COMMAND} -E copy_if_different
       ${CMAKE_CURRENT_BINARY_DIR}/generated/${product}.lua
@@ -528,6 +531,8 @@ foreach(product ${products})
   target_sources(
     datalua_${product}
     PRIVATE ${CMAKE_CURRENT_BINARY_DIR}/generated/${product}_stubs.cpp)
+  target_include_directories(datalua_${product}
+                             PRIVATE ${CMAKE_CURRENT_BINARY_DIR}/generated)
   add_dependencies(datalua_${product} datalua_${product}_lua)
   list(APPEND dataluas datalua_${product})
 endforeach()
