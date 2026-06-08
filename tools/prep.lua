@@ -1137,7 +1137,7 @@ local function emit_implstub_body(name, v, fn)
         emit('  }')
       end
     end
-    if instride == 0 then
+    if instride == 0 and not v.manualinputs then
       emit('  wowless_stubcheckextraargs(L, %d, %s);', nsins, cstring(name))
     end
   end
@@ -1258,6 +1258,7 @@ for key, entry in sorted(eligible_uimethods) do
     emit_implstub_body(key, {
       inputs = inputs,
       instride = mv.instride,
+      manualinputs = mv.manualinputs,
       mayreturnnothing = mv.mayreturnnothing,
       outputs = mv.outputs,
       outstride = mv.outstride,
