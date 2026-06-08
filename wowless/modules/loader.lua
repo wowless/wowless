@@ -509,6 +509,11 @@ return function(
         Kids = function(ctx, e, obj)
           processKids(ctx, e, obj, 'late')
           processAttrs(ctx, e, obj, 'late')
+          -- Implicit setpoint hack for fontstrings.
+          if obj:IsObjectType('fontstring') and obj:GetNumPoints() == 0 then
+            -- Conveniently the JustifyHorizontal names match FramePoint.
+            points.SetPointInternal(obj, obj.justifyh, obj.parent, obj.justifyh, 0, 0)
+          end
           -- Implicit setallpoints hack for textures.
           if obj:IsObjectType('texture') and obj:GetNumPoints() == 0 then
             points.SetAllPointsInternal(obj, obj.parent)

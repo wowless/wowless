@@ -1109,6 +1109,29 @@
     </Scripts>
   </Frame>
 
+  <Frame>
+    <Layers>
+      <Layer>
+        <FontString parentKey='hNone' />
+        <FontString parentKey='hLeft' justifyH='LEFT' />
+        <FontString parentKey='hCenter' justifyH='CENTER' />
+        <FontString parentKey='hRight' justifyH='RIGHT' />
+      </Layer>
+    </Layers>
+    <Scripts>
+      <OnLoad>
+        Wowless.check1(1, self.hNone:GetNumPoints())
+        Wowless.check5('CENTER', self, 'CENTER', 0, 0, self.hNone:GetPoint(1))
+        Wowless.check1(1, self.hLeft:GetNumPoints())
+        Wowless.check5('LEFT', self, 'LEFT', 0, 0, self.hLeft:GetPoint(1))
+        Wowless.check1(1, self.hCenter:GetNumPoints())
+        Wowless.check5('CENTER', self, 'CENTER', 0, 0, self.hCenter:GetPoint(1))
+        Wowless.check1(1, self.hRight:GetNumPoints())
+        Wowless.check5('RIGHT', self, 'RIGHT', 0, 0, self.hRight:GetPoint(1))
+      </OnLoad>
+    </Scripts>
+  </Frame>
+
   <Script>
     if WowlessOldErrorHandler then
       seterrorhandler(WowlessOldErrorHandler)
