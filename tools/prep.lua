@@ -1141,6 +1141,25 @@ local function emit_implstub_body(name, v, fn)
       emit('  wowless_stubcheckextraargs(L, %d, %s);', nsins, cstring(name))
     end
   end
+  for i = 1, nsins do
+    local inp = inputs[i]
+    if inp.default ~= nil then
+      emit('  if (lua_isnoneornil(L, %d)) {', i)
+      emit('    if (lua_gettop(L) < %d) lua_settop(L, %d);', i, i)
+      local t = type(inp.default)
+      if t == 'boolean' then
+        emit('    lua_pushboolean(L, %d);', inp.default and 1 or 0)
+      elseif t == 'number' then
+        emit('    lua_pushnumber(L, %g);', inp.default)
+      elseif t == 'string' then
+        emit('    lua_pushstring(L, %s);', cstring(inp.default))
+      else
+        error('unsupported implstub input default type: ' .. t)
+      end
+      emit('    lua_replace(L, %d);', i)
+      emit('  }')
+    end
+  end
   if check_outputs then
     emit('  int ret = %s(L);', fn)
     if v.mayreturnnothing then
