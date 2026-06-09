@@ -1371,13 +1371,15 @@ local function emit_stub_entry_statics(sn, entry)
 end
 
 local function emit_stub_entry(indent, name, entry)
-  if entry.impldata then
-    local impldata = entry.impldata
-    local func = impldata.nowrap and 'nullptr' or ('api_' .. entry.sn)
-    emit('%s{%s, %s, %d, &impldata_%s},', indent, cstring(name), func, entry.secureonly and 1 or 0, entry.sn)
-  else
-    emit('%s{%s, api_%s, %d, nullptr},', indent, cstring(name), entry.sn, entry.secureonly and 1 or 0)
-  end
+  local d = entry.impldata
+  emit(
+    '%s{%s, %s, %d, %s},',
+    indent,
+    cstring(name),
+    d and d.nowrap and 'nullptr' or ('api_' .. entry.sn),
+    entry.secureonly and 1 or 0,
+    d and ('&impldata_' .. entry.sn) or 'nullptr'
+  )
 end
 
 for _, entry in sorted(global_entries) do
