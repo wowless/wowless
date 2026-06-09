@@ -43,6 +43,7 @@ OnMouseDown:
 OnMouseUp:
 OnMouseWheel:
 OnMovieFinished:
+OnPause:
 OnPlay:
 OnReceiveDrag:
 OnRequestNewSize:

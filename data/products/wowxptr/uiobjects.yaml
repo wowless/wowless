@@ -864,6 +864,7 @@ Animation:
       outputs:
   scripts:
     OnFinished:
+    OnPause:
     OnPlay:
     OnStop:
     OnUpdate:
@@ -1033,6 +1034,7 @@ AnimationGroup:
   scripts:
     OnFinished:
     OnLoop:
+    OnPause:
     OnPlay:
     OnStop:
     OnUpdate:

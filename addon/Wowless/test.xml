@@ -454,6 +454,7 @@
       <OnMouseUp>end, table.insert(WowlessLog, 'OnMouseUp')--</OnMouseUp>
       <OnMouseWheel>end, table.insert(WowlessLog, 'OnMouseWheel')--</OnMouseWheel>
       <OnMovieFinished>end, table.insert(WowlessLog, 'OnMovieFinished')--</OnMovieFinished>
+      <OnPause>end, table.insert(WowlessLog, 'OnPause')--</OnPause>
       <OnPlay>end, table.insert(WowlessLog, 'OnPlay')--</OnPlay>
       <OnReceiveDrag>end, table.insert(WowlessLog, 'OnReceiveDrag')--</OnReceiveDrag>
       <OnRequestNewSize>end, table.insert(WowlessLog, 'OnRequestNewSize')--</OnRequestNewSize>

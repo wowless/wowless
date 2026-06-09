@@ -988,6 +988,10 @@ OnMovieFinished:
   extends: ScriptType
   impl:
     script:
+OnPause:
+  extends: ScriptType
+  impl:
+    script:
 OnPlay:
   extends: ScriptType
   impl:
