@@ -219,6 +219,7 @@ local uiobjectimplimplmakers = {
     end
     local src = 'data/uiobjects/' .. k .. '.lua'
     return {
+      delegate = true,
       impl = readFile(src),
       modules = modules,
       sqls = impl.sqls,
@@ -227,6 +228,7 @@ local uiobjectimplimplmakers = {
   end,
   moduledelegate = function(impl, k)
     return {
+      delegate = true,
       impl = ('return (...)[%q]'):format(k:sub(k:find('/') + 1)),
       modules = { impl.name },
     }
@@ -294,6 +296,7 @@ local uiobjectimplmakers = {
     end
     table.insert(t, 'end')
     return {
+      delegate = true,
       impl = table.concat(t),
       modules = { 'gencode' },
     }
@@ -313,12 +316,11 @@ for k, v in pairs(uiobjectdata) do
   local methods = {}
   for mk, mv in pairs(v.methods) do
     methods[mk] = true
-    local d = dispatch(uiobjectimplmakers, mv.impl or 'none', mv, k)
     eligible_uimethods[k .. ':' .. mk] = {
       k = k,
       mk = mk,
       mv = mv,
-      implimpl = type(mv.impl) == 'table' and (mv.impl.uiobjectimpl or mv.impl.settexture) and d or nil,
+      implimpl = dispatch(uiobjectimplmakers, mv.impl or 'none', mv, k),
     }
   end
   local scripts = {}
@@ -1266,7 +1268,7 @@ local uiobjectcimplmakers = {
 }
 for key, entry in sorted(eligible_uimethods) do
   local k, mk, mv = entry.k, entry.mk, entry.mv
-  if entry.implimpl then
+  if entry.implimpl.delegate then
     local implimpl = entry.implimpl
     local fn = implimpl.nobubblewrap and 'wowless_impl_stub_nobubblewrap' or 'wowless_impl_stub'
     local inputs = { { type = { uiobject = k } } }
@@ -1483,9 +1485,9 @@ emit('};')
 emit('')
 -- UIObject host impl data statics
 for key, entry in sorted(eligible_uimethods) do
-  if not entry.implimpl then
+  if not entry.implimpl.delegate then
     local sn = safename(entry.k) .. '_' .. safename(entry.mk)
-    local d = dispatch(uiobjectimplmakers, entry.mv.impl or 'none', entry.mv, entry.k)
+    local d = entry.implimpl
     emit(
       'static const wowless_impl_data host_impldata_%s = {%s, %d, %s, nullptr, nullptr};',
       sn,
@@ -1497,7 +1499,7 @@ for key, entry in sorted(eligible_uimethods) do
 end
 -- UIObject impl method impldata statics
 for key, entry in sorted(eligible_uimethods) do
-  if entry.implimpl then
+  if entry.implimpl.delegate then
     local k, mk = entry.k, entry.mk
     local implimpl = entry.implimpl
     local sn = 'uiimpl_' .. safename(k) .. '_' .. safename(mk)
@@ -1509,7 +1511,7 @@ emit('')
 emit('static const struct wowless_uiobject_method_entry uiobject_method_entries[] = {')
 for key, entry in sorted(eligible_uimethods) do
   local k, mk = entry.k, entry.mk
-  if entry.implimpl then
+  if entry.implimpl.delegate then
     local sn = 'uiimpl_' .. safename(k) .. '_' .. safename(mk)
     emit('  {%s, implstub_uiimpl_%s_%s, &impldata_%s, 1},', cstring(key), safename(k), safename(mk), sn)
   else
