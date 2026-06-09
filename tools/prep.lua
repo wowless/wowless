@@ -77,12 +77,9 @@ local implimpls = {
     }
   end,
   impl = function(impl, name)
-    local modules
-    if impl.modules then
-      modules = {}
-      for m in sorted(impl.modules) do
-        table.insert(modules, m)
-      end
+    local modules = {}
+    for m in sorted(impl.modules or {}) do
+      table.insert(modules, m)
     end
     for _, sql in ipairs(impl.sqls or {}) do
       ensuresql(sql)
@@ -207,12 +204,9 @@ local function mkuiobjectinit(k)
 end
 local uiobjectimplimplmakers = {
   luafile = function(impl, k)
-    local modules
-    if impl.modules then
-      modules = {}
-      for m in sorted(impl.modules) do
-        table.insert(modules, m)
-      end
+    local modules = {}
+    for m in sorted(impl.modules or {}) do
+      table.insert(modules, m)
     end
     for _, sql in ipairs(impl.sqls or {}) do
       ensuresql(sql)
