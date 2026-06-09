@@ -1268,6 +1268,10 @@ local uiobjectcimplmakers = {
 }
 for key, entry in sorted(eligible_uimethods) do
   local k, mk, mv = entry.k, entry.mk, entry.mv
+  emit('static int uiobject_method_%s_%s(lua_State *L) {', safename(k), safename(mk))
+  if mv.secureonly then
+    emit('  if (wowless_forbidden(L)) return 0;')
+  end
   if entry.implimpl.delegate then
     local implimpl = entry.implimpl
     local fn = implimpl.nobubblewrap and 'wowless_impl_stub_nobubblewrap' or 'wowless_impl_stub'
@@ -1275,7 +1279,6 @@ for key, entry in sorted(eligible_uimethods) do
     for _, inp in ipairs(mv.inputs or {}) do
       table.insert(inputs, inp)
     end
-    emit('static int implstub_uiimpl_%s_%s(lua_State *L) {', safename(k), safename(mk))
     emit_implstub_body(key, {
       inputs = inputs,
       instride = mv.instride,
@@ -1284,17 +1287,11 @@ for key, entry in sorted(eligible_uimethods) do
       outputs = mv.outputs,
       outstride = mv.outstride,
     }, fn)
-    emit('}')
-    emit('')
   else
-    emit('static int stub_uimethod_%s_%s(lua_State *L) {', safename(k), safename(mk))
-    if mv.secureonly then
-      emit('  if (wowless_forbidden(L)) return 0;')
-    end
     dispatch(uiobjectcimplmakers, mv.impl or 'none', mv, k, key)
-    emit('}')
-    emit('')
   end
+  emit('}')
+  emit('')
 end
 
 local ns_entries = {}
@@ -1513,10 +1510,10 @@ for key, entry in sorted(eligible_uimethods) do
   local k, mk = entry.k, entry.mk
   if entry.implimpl.delegate then
     local sn = 'uiimpl_' .. safename(k) .. '_' .. safename(mk)
-    emit('  {%s, implstub_uiimpl_%s_%s, &impldata_%s, 1},', cstring(key), safename(k), safename(mk), sn)
+    emit('  {%s, uiobject_method_%s_%s, &impldata_%s, 1},', cstring(key), safename(k), safename(mk), sn)
   else
     local sn = safename(k) .. '_' .. safename(mk)
-    emit('  {%s, stub_uimethod_%s_%s, &host_impldata_%s, 0},', cstring(key), safename(k), safename(mk), sn)
+    emit('  {%s, uiobject_method_%s_%s, &host_impldata_%s, 0},', cstring(key), safename(k), safename(mk), sn)
   end
 end
 emit('  {nullptr, nullptr, nullptr, 0}')
