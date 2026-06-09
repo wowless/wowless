@@ -1474,30 +1474,15 @@ end
 emit('  {nullptr, 0, nullptr}')
 emit('};')
 emit('')
--- UIObject host impl data statics
+
 for key, entry in sorted(eligible_uimethods) do
-  if not entry.implimpl.delegate then
-    local sn = safename(entry.k) .. '_' .. safename(entry.mk)
-    local d = entry.implimpl
-    emit(
-      'static const wowless_impl_data impldata_uiobject_method_%s = {%s, %d, %s, nullptr, nullptr};',
-      sn,
-      cstring(d.impl),
-      #d.impl,
-      cstring(key)
-    )
-  end
-end
--- UIObject impl method impldata statics
-for key, entry in sorted(eligible_uimethods) do
-  if entry.implimpl.delegate then
-    local k, mk = entry.k, entry.mk
-    local implimpl = entry.implimpl
-    local sn = 'uiobject_method_' .. safename(k) .. '_' .. safename(mk)
-    emit_stub_entry_statics(sn, { impldata = implimpl, chunkname = implimpl.src or key })
-  end
+  local k, mk = entry.k, entry.mk
+  local implimpl = entry.implimpl
+  local sn = 'uiobject_method_' .. safename(k) .. '_' .. safename(mk)
+  emit_stub_entry_statics(sn, { impldata = implimpl, chunkname = implimpl.src or key })
 end
 emit('')
+
 -- UIObject method entry array
 emit('static const struct wowless_uiobject_method_entry uiobject_method_entries[] = {')
 for key, entry in sorted(eligible_uimethods) do
