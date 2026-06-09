@@ -1480,7 +1480,7 @@ for key, entry in sorted(eligible_uimethods) do
     local sn = safename(entry.k) .. '_' .. safename(entry.mk)
     local d = entry.implimpl
     emit(
-      'static const wowless_impl_data host_impldata_%s = {%s, %d, %s, nullptr, nullptr};',
+      'static const wowless_impl_data impldata_uiobject_method_%s = {%s, %d, %s, nullptr, nullptr};',
       sn,
       cstring(d.impl),
       #d.impl,
@@ -1493,7 +1493,7 @@ for key, entry in sorted(eligible_uimethods) do
   if entry.implimpl.delegate then
     local k, mk = entry.k, entry.mk
     local implimpl = entry.implimpl
-    local sn = 'uiimpl_' .. safename(k) .. '_' .. safename(mk)
+    local sn = 'uiobject_method_' .. safename(k) .. '_' .. safename(mk)
     emit_stub_entry_statics(sn, { impldata = implimpl, chunkname = implimpl.src or key })
   end
 end
@@ -1502,13 +1502,8 @@ emit('')
 emit('static const struct wowless_uiobject_method_entry uiobject_method_entries[] = {')
 for key, entry in sorted(eligible_uimethods) do
   local k, mk = entry.k, entry.mk
-  if entry.implimpl.delegate then
-    local sn = 'uiimpl_' .. safename(k) .. '_' .. safename(mk)
-    emit('  {%s, uiobject_method_%s_%s, &impldata_%s, 1},', cstring(key), safename(k), safename(mk), sn)
-  else
-    local sn = safename(k) .. '_' .. safename(mk)
-    emit('  {%s, uiobject_method_%s_%s, &host_impldata_%s, 0},', cstring(key), safename(k), safename(mk), sn)
-  end
+  local sn = 'uiobject_method_' .. safename(k) .. '_' .. safename(mk)
+  emit('  {%s, %s, &impldata_%s, %d},', cstring(key), sn, sn, entry.implimpl.delegate and 1 or 0)
 end
 emit('  {nullptr, nullptr, nullptr, 0}')
 emit('};')
