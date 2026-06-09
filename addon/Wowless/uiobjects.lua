@@ -217,6 +217,12 @@ G.testsuite.uiobjects = function()
           check1(true, f:IsVisible())
           check1(0, f:GetWidth())
         end,
+        ['identity'] = function()
+          local a = CreateFrame('Frame')
+          local b = CreateFrame('Frame')
+          a.SetParent({ [0] = a[0] }, { [0] = b[0] })
+          check1(b, a:GetParent())
+        end,
         ['kid order'] = function()
           return {
             ['three'] = function()
