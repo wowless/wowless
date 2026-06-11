@@ -940,6 +940,24 @@ emit('  return 1;')
 emit('}')
 emit('')
 
+local function emit_stub_outputs(outs)
+  for _, out in ipairs(outs) do
+    local val
+    if out.stub ~= nil then
+      val = out.stub
+    elseif out.default ~= nil then
+      val = out.default
+    elseif not out.nilable or out.stubnotnil then
+      val = dispatch(coutdefaults, out.type)
+    end
+    if val == nil then
+      emit('  lua_pushnil(L);')
+    else
+      dispatch(coutpushers, out.type, val)
+    end
+  end
+end
+
 -- Luaobject method C stubs, generated per SOURCE TYPE (not per concrete type).
 -- Virtual type stubs skip the self-check since virtual types can't be instantiated;
 -- their stubs are shared across all concrete subtypes that inherit the method.
@@ -960,21 +978,7 @@ for loname in sorted(luaobjectdata) do
       if mv.inputs ~= nil then
         emit('  wowless_stubcheckextraargs(L, %d, %s);', #inputs + 1, cstring(loname .. ':' .. mname))
       end
-      for _, out in ipairs(outputs) do
-        local val
-        if out.stub ~= nil then
-          val = out.stub
-        elseif out.default ~= nil then
-          val = out.default
-        elseif not out.nilable or out.stubnotnil then
-          val = dispatch(coutdefaults, out.type)
-        end
-        if val == nil then
-          emit('  lua_pushnil(L);')
-        else
-          dispatch(coutpushers, out.type, val)
-        end
-      end
+      emit_stub_outputs(outputs)
       emit('  return %d;', #outputs)
       emit('}')
       emit('')
@@ -1031,46 +1035,8 @@ local function emit_stub_body(key, cfg, inputcheck)
   else
     outs = allouts
   end
-  for _, out in ipairs(outs) do
-    local val
-    if out.stub ~= nil then
-      val = out.stub
-    elseif out.default ~= nil then
-      val = out.default
-    elseif not out.nilable or out.stubnotnil then
-      val = dispatch(coutdefaults, out.type)
-    end
-    if val == nil then
-      emit('  lua_pushnil(L);')
-    else
-      dispatch(coutpushers, out.type, val)
-    end
-  end
+  emit_stub_outputs(outs)
   emit('  return %d;', #outs)
-end
-
-local function cpermissive(inp, idx)
-  local is_check = dispatch(cinputtypes, inp.type)('is', false, idx)
-  local t = type(inp.default)
-  local push
-  if t == 'boolean' then
-    push = ('lua_pushboolean(L, %s)'):format(inp.default and '1' or '0')
-  elseif t == 'number' then
-    push = ('lua_pushnumber(L, %g)'):format(inp.default)
-  elseif t == 'string' then
-    push = ('lua_pushstring(L, %s)'):format(cstring(inp.default))
-  else
-    error('unsupported permissive default type: ' .. t)
-  end
-  return ('if (!lua_isnoneornil(L, %d) && !%s) { %s; lua_replace(L, %d); }'):format(idx, is_check, push, idx)
-end
-
-local function stub_inputcheck(inp, idx)
-  if inp.permissive then
-    return cpermissive(inp, idx)
-  end
-  local nilable = inp.nilable or inp.default ~= nil
-  return dispatch(cinputtypes, inp.type)('stubcheck', nilable, idx) .. ';'
 end
 
 local coutputdefaulttypes = {
@@ -1084,6 +1050,20 @@ local coutputdefaulttypes = {
     return string.format('lua_pushstring(L, %s)', cstring(val))
   end,
 }
+
+local function cpermissive(inp, idx)
+  local is_check = dispatch(cinputtypes, inp.type)('is', false, idx)
+  local push = dispatch(coutputdefaulttypes, type(inp.default), inp.default)
+  return ('if (!lua_isnoneornil(L, %d) && !%s) { %s; lua_replace(L, %d); }'):format(idx, is_check, push, idx)
+end
+
+local function stub_inputcheck(inp, idx)
+  if inp.permissive then
+    return cpermissive(inp, idx)
+  end
+  local nilable = inp.nilable or inp.default ~= nil
+  return dispatch(cinputtypes, inp.type)('stubcheck', nilable, idx) .. ';'
+end
 
 local function emit_implstub_body(name, v, fn)
   local check_inputs = v.inputs ~= nil
@@ -1142,16 +1122,7 @@ local function emit_implstub_body(name, v, fn)
     if inp.default ~= nil then
       emit('  if (lua_isnoneornil(L, %d)) {', i)
       emit('    if (lua_gettop(L) < %d) lua_settop(L, %d);', i, i)
-      local t = type(inp.default)
-      if t == 'boolean' then
-        emit('    lua_pushboolean(L, %d);', inp.default and 1 or 0)
-      elseif t == 'number' then
-        emit('    lua_pushnumber(L, %g);', inp.default)
-      elseif t == 'string' then
-        emit('    lua_pushstring(L, %s);', cstring(inp.default))
-      else
-        error('unsupported implstub input default type: ' .. t)
-      end
+      emit('    %s;', dispatch(coutputdefaulttypes, type(inp.default), inp.default))
       emit('    lua_replace(L, %d);', i)
       emit('  }')
     end
