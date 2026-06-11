@@ -1,19 +1,21 @@
 #include "CascLib.h"
 
+extern "C" {
 #include "lauxlib.h"
 #include "lua.h"
+}
 
 static const char *storage_str = "wowless.casclib.storage";
 
 static int storage_gc(lua_State *L) {
-  HANDLE *ph = luaL_checkudata(L, 1, storage_str);
+  HANDLE *ph = (HANDLE *)luaL_checkudata(L, 1, storage_str);
   CascCloseStorage(*ph);
   return 0;
 }
 
 static int casc_open_storage(lua_State *L) {
   const char *path = luaL_checkstring(L, 1);
-  HANDLE *h = lua_newuserdata(L, sizeof(HANDLE));
+  HANDLE *h = (HANDLE *)lua_newuserdata(L, sizeof(HANDLE));
   luaL_getmetatable(L, storage_str);
   lua_setmetatable(L, -2);
   if (!CascOpenStorage(path, CASC_LOCALE_ENUS, h)) {
@@ -22,7 +24,7 @@ static int casc_open_storage(lua_State *L) {
   return 1;
 }
 
-int luaopen_tools_casclib(lua_State *L) {
+extern "C" int luaopen_tools_casclib(lua_State *L) {
   if (luaL_newmetatable(L, storage_str)) {
     lua_pushcfunction(L, storage_gc);
     lua_setfield(L, -2, "__gc");
