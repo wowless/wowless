@@ -576,6 +576,17 @@ lua2c(toolstactless tactless=c)
 target_sources(toolstactless PRIVATE tools/tactless.c)
 target_link_libraries(toolstactless PRIVATE tactless)
 
+find_package(CascLib CONFIG REQUIRED)
+lua2c(toolscasclib tools.casclib=c)
+target_sources(toolscasclib
+               PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/tools/casclib.cpp)
+if(TARGET CascLib::casc_static)
+  target_link_libraries(toolscasclib PRIVATE CascLib::casc_static)
+else()
+  target_link_libraries(toolscasclib PRIVATE CascLib::casc)
+endif()
+add_lua_executable(casc ${CMAKE_CURRENT_SOURCE_DIR}/tools/casc.lua toolscasclib)
+
 lua2c(wowlesstoc wowless.toc=${CMAKE_CURRENT_SOURCE_DIR}/wowless/toc.lua)
 
 add_lua_executable(
