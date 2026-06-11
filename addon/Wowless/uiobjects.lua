@@ -1323,8 +1323,17 @@ G.testsuite.uiobjects = function()
         return
       end
       -- Cannot be created via Lua CreateAnimation.
-      local a = retn(1, CreateFrame('Frame'):CreateAnimationGroup():CreateAnimation('TextureCoordTranslation'))
-      return match(1, 'Animation', a:GetObjectType())
+      local ag = retn(1, CreateFrame('Frame'):CreateAnimationGroup())
+      local tct = retn(1, ag:CreateAnimation('TextureCoordTranslation'))
+      return {
+        metatable = function()
+          local a = retn(1, ag:CreateAnimation('Animation'))
+          assertEquals(getmetatable(a), getmetatable(tct))
+        end,
+        objecttype = function()
+          return match(1, 'Animation', tct:GetObjectType())
+        end,
+      }
     end,
   }
 end
