@@ -37,12 +37,13 @@ static int tactcall(lua_State *L) {
 static int tactrootnamehashes(lua_State *L) {
   tactless **u = luaL_checkudata(L, 1, "tactless");
   const struct tactless_root *r = tactless_get_root(*u);
-  lua_createtable(L, r->num_names, 0);
+  lua_createtable(L, 0, r->num_names);
   for (int i = 0; i < r->num_names; ++i) {
     char hex[17];
     tactless_namehash_to_hex(r->names[i].name, hex);
     lua_pushlstring(L, hex, 16);
-    lua_rawseti(L, -2, i + 1);
+    lua_pushnumber(L, r->names[i].fdid);
+    lua_settable(L, -3);
   }
   return 1;
 }

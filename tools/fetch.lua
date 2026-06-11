@@ -124,8 +124,4 @@ for line in processFile('Interface/ui-gen-addon-list.txt'):gmatch('[^\r\n]+') do
 end
 processFile('Interface/AddOns/Blizzard_SharedXML/UI.xsd')
 
-local roothash = {}
-for _, h in ipairs(fetch:rootnamehashes()) do
-  roothash[h] = true
-end
-save('roothash.lua', require('tools.util').returntable(roothash))
+save('roothash.lua', require('tools.util').returntable(fetch:rootnamehashes()))
