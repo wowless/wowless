@@ -1258,6 +1258,65 @@ G.testsuite.uiobjects = function()
 
     Texture = function()
       return {
+        AtlasAndTextureState = function()
+          if _G.__wowless then
+            return
+          end
+          local t = CreateFrame('Frame'):CreateTexture()
+          local states = {
+            init = function()
+              check1(nil, t:GetAtlas())
+              check1(nil, t:GetTexture())
+            end,
+            atlas = function()
+              check1('QuestDaily', t:GetAtlas())
+              check1(1121272, t:GetTexture())
+            end,
+            justtex = function()
+              check1(nil, t:GetAtlas())
+              check1(1121272, t:GetTexture())
+            end,
+          }
+          local transitions = {
+            setatlas = {
+              to = 'atlas',
+              func = function()
+                check1(true, t:SetAtlas('questdaily'))
+              end,
+            },
+            setatlasnil = {
+              to = 'init',
+              func = function()
+                check0(t:SetAtlas(nil))
+              end,
+            },
+            settexture = {
+              to = 'justtex',
+              func = function()
+                check1(true, t:SetTexture('Interface/Minimap/ObjectIconsAtlas'))
+              end,
+            },
+            settexturenil = {
+              to = 'init',
+              func = function()
+                check1(true, t:SetTexture(nil))
+              end,
+            },
+          }
+          return G.checkStateMachine(states, transitions, 'init')
+        end,
+        SetAtlas = function()
+          if _G.__wowless then
+            return
+          end
+          local t = CreateFrame('Frame'):CreateTexture()
+          return {
+            nothing = function()
+              local msg = 'Texture:SetAtlas(): Usage: ("atlasName"[, useAtlasSize, filterMode, resetTexCoords])'
+              return match(2, false, msg, pcall(t.SetAtlas, t))
+            end,
+          }
+        end,
         SetColorTexture = function()
           local colortex = _G.WowlessData.Build.test and 'FileData ID 0' or nil
           local t = CreateFrame('Frame'):CreateTexture()
