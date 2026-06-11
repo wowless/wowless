@@ -16,7 +16,7 @@ return function(self, arg1, arg2, ...)
       arg2,
     }
     for _, k in ipairs(keys) do
-      if attrs[k] then
+      if attrs[k] ~= nil then
         return attrs[k]
       end
     end

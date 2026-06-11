@@ -113,6 +113,7 @@ G.testsuite.uiobjects = function()
             a = 'va',
             aa = 'vaa',
             aaa = 'vaaa',
+            b = false,
           }
           local f = CreateFrame('Frame')
           for k, v in pairs(attrs) do
@@ -143,6 +144,8 @@ G.testsuite.uiobjects = function()
             aa = happy('vaa', 'aa'),
             aaa = happy('vaaa', 'aaa'),
             allnil = errcase(nil, nil, nil),
+            b = happy(false, 'b'),
+            bx = happy(false, '', 'b', nil),
             extranil = happy('va', 'a', nil),
             justnil = errcase(nil),
             justpost = errcase(nil, nil, 'a'),
