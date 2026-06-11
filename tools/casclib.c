@@ -6,14 +6,16 @@
 static const char *storage_str = "wowless.casclib.storage";
 
 static int storage_gc(lua_State *L) {
-  HANDLE storage = luaL_checkudata(L, 1, storage_str);
-  CascCloseStorage(storage);
+  HANDLE *ph = luaL_checkudata(L, 1, storage_str);
+  CascCloseStorage(*ph);
   return 0;
 }
 
 static int casc_open_storage(lua_State *L) {
   const char *path = luaL_checkstring(L, 1);
   HANDLE *h = lua_newuserdata(L, sizeof(HANDLE));
+  luaL_getmetatable(L, storage_str);
+  lua_setmetatable(L, -2);
   if (!CascOpenStorage(path, CASC_LOCALE_ENUS, h)) {
     luaL_error(L, "casc error %d", GetCascError());
   }
