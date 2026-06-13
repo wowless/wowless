@@ -576,6 +576,19 @@ lua2c(toolstactless tactless=c)
 target_sources(toolstactless PRIVATE tools/tactless.c)
 target_link_libraries(toolstactless PRIVATE tactless)
 
+lua2c(toolstactfullhttp tools.tactfull_http=c)
+target_sources(toolstactfullhttp PRIVATE tools/tactfull_http.c)
+
+add_lua_executable(
+  tactfull-server ${CMAKE_CURRENT_SOURCE_DIR}/tools/tactfull_server.lua
+  toolstactfullhttp toolstactless)
+
+lua2c(toolstactfull
+      tools.tactfull=${CMAKE_CURRENT_SOURCE_DIR}/tools/tactfull.lua
+      tools.tactfull_curl=c)
+target_sources(toolstactfull PRIVATE tools/tactfull_curl.c)
+target_link_libraries(toolstactfull PRIVATE CURL::libcurl)
+
 find_package(CascLib CONFIG REQUIRED)
 lua2c(toolscasclib tools.casclib=c)
 target_sources(toolscasclib
