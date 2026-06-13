@@ -577,7 +577,8 @@ target_sources(toolstactless PRIVATE tools/tactless.c)
 target_link_libraries(toolstactless PRIVATE tactless)
 
 find_path(MHD_INCLUDE_DIR NAMES microhttpd.h REQUIRED)
-find_library(MHD_LIBRARY NAMES microhttpd libmicrohttpd microhttpd-10 REQUIRED)
+find_library(MHD_LIBRARY NAMES microhttpd libmicrohttpd libmicrohttpd-dll
+                               microhttpd-10 REQUIRED)
 add_executable(tactfull-server tools/tactfull_server.c)
 target_include_directories(tactfull-server PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}
                                                    ${MHD_INCLUDE_DIR})
