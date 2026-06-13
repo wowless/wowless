@@ -576,12 +576,9 @@ lua2c(toolstactless tactless=c)
 target_sources(toolstactless PRIVATE tools/tactless.c)
 target_link_libraries(toolstactless PRIVATE tactless)
 
-lua2c(toolstactfullhttp tools.tactfull_http=c)
-target_sources(toolstactfullhttp PRIVATE tools/tactfull_http.c)
-
-add_lua_executable(
-  tactfull-server ${CMAKE_CURRENT_SOURCE_DIR}/tools/tactfull_server.lua
-  toolstactfullhttp toolstactless)
+add_executable(tactfull-server tools/tactfull_server.c)
+target_include_directories(tactfull-server PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
+target_link_libraries(tactfull-server PRIVATE tactless)
 
 lua2c(toolstactfull
       tools.tactfull=${CMAKE_CURRENT_SOURCE_DIR}/tools/tactfull.lua
