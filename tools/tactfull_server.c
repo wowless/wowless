@@ -256,12 +256,12 @@ int main(void) {
   for (;;) {
     sleep_s(1);
     time_t now = time(NULL);
+    if (now - last_request >= EXPIRY_S) {
+      break;
+    }
     if (now - last_sweep >= 60) {
       last_sweep = now;
       pool_sweep(now);
-      if (now - last_request >= EXPIRY_S) {
-        break;
-      }
     }
   }
 
