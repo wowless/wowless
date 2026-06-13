@@ -12,7 +12,6 @@
  *
  * The server maintains a pool of open tactless handles keyed by
  * product/hash.  Each entry expires after EXPIRY_S seconds of idle.
- * The server itself exits after EXPIRY_S seconds without a real request.
  */
 
 #ifdef _WIN32
@@ -46,7 +45,6 @@ struct pool_entry {
 };
 
 static struct pool_entry pool[MAX_POOL];
-static volatile time_t last_request;
 
 static tactless *pool_get(const char *product, const char *hash) {
   char key[KEY_MAX];
@@ -202,7 +200,6 @@ static enum MHD_Result handler(void *cls, struct MHD_Connection *connection,
                                                  MHD_RESPMEM_PERSISTENT);
       status = MHD_HTTP_NOT_FOUND;
     } else {
-      last_request = time(NULL);
       size_t size = 0;
       void *data = is_fdid ? (void *)tactless_get_fdid(t, atoi(key), &size)
                            : (void *)tactless_get_name(t, key, &size);
@@ -250,15 +247,11 @@ int main(void) {
   fprintf(pf, "%u\n", (unsigned)port);
   fclose(pf);
 
-  last_request = time(NULL);
-  time_t last_sweep = last_request;
+  time_t last_sweep = time(NULL);
 
   for (;;) {
     sleep_s(1);
     time_t now = time(NULL);
-    if (now - last_request >= EXPIRY_S) {
-      break;
-    }
     if (now - last_sweep >= 60) {
       last_sweep = now;
       pool_sweep(now);
