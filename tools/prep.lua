@@ -697,30 +697,36 @@ for loname in pairs(luaobjectdata) do
   lo_flatten(loname)
 end
 
-local lua_value_emitters
-lua_value_emitters = {
-  boolean = function(v)
-    emit('  lua_pushboolean(L, %d);', v and 1 or 0)
-  end,
-  number = function(v)
-    emit('  lua_pushnumber(L, %g);', v)
-  end,
-  string = function(v)
-    emit('  lua_pushliteral(L, %s);', cstring(v))
-  end,
-  table = function(v)
+local function push_scalar(val)
+  local t = type(val)
+  if t == 'boolean' then
+    return string.format('lua_pushboolean(L, %d)', val and 1 or 0)
+  elseif t == 'number' then
+    return string.format('lua_pushnumber(L, %g)', val)
+  elseif t == 'string' then
+    return string.format('lua_pushliteral(L, %s)', cstring(val))
+  else
+    error('unsupported push type: ' .. t)
+  end
+end
+
+local emit_expr
+emit_expr = function(val)
+  if type(val) == 'table' then
     local n = 0
-    for _ in pairs(v) do
+    for _ in pairs(val) do
       n = n + 1
     end
     emit('  lua_createtable(L, 0, %d);', n)
-    for vk, vv in pairs(v) do
-      dispatch(lua_value_emitters, type(vk), vk)
-      dispatch(lua_value_emitters, type(vv), vv)
+    for vk, vv in pairs(val) do
+      emit_expr(vk)
+      emit_expr(vv)
       emit('  lua_rawset(L, -3);')
     end
-  end,
-}
+  else
+    emit('  %s;', push_scalar(val))
+  end
+end
 
 local coutpushers
 coutpushers = {
@@ -731,14 +737,14 @@ coutpushers = {
       emit('  lua_rawseti(L, -2, %d);', i)
     end
   end,
-  boolean = lua_value_emitters.boolean,
+  boolean = emit_expr,
   enum = function(_, val)
-    lua_value_emitters.number(val)
+    emit_expr(val)
   end,
-  FileAsset = lua_value_emitters.number,
-  number = lua_value_emitters.number,
-  string = lua_value_emitters.string,
-  stringenum = lua_value_emitters.string,
+  FileAsset = emit_expr,
+  number = emit_expr,
+  string = emit_expr,
+  stringenum = emit_expr,
   structure = function(name, val)
     local st = assert(structures[name], name)
     local n = 0
@@ -747,7 +753,7 @@ coutpushers = {
     end
     emit('  lua_createtable(L, 0, %d);', n)
     for fname, fval in pairs(val) do
-      lua_value_emitters.string(fname)
+      emit_expr(fname)
       dispatch(coutpushers, st.fields[fname].type, fval)
       emit('  lua_rawset(L, -3);')
     end
@@ -758,7 +764,7 @@ coutpushers = {
   luaobject = function(name, _)
     emit('  wowless_stubcreateluaobject(L, %s);', cstring(name))
   end,
-  table = lua_value_emitters.table,
+  table = emit_expr,
   uiobject = function(name, _)
     emit('  wowless_stubcreateuiobject(L, %s);', cstring(name))
   end,
@@ -1039,22 +1045,14 @@ local function emit_stub_body(key, cfg, inputcheck)
   emit('  return %d;', #outs)
 end
 
-local coutputdefaulttypes = {
-  boolean = function(val)
-    return string.format('lua_pushboolean(L, %s)', val and '1' or '0')
-  end,
-  number = function(val)
-    return string.format('lua_pushnumber(L, %g)', val)
-  end,
-  string = function(val)
-    return string.format('lua_pushstring(L, %s)', cstring(val))
-  end,
-}
-
 local function cpermissive(inp, idx)
   local is_check = dispatch(cinputtypes, inp.type)('is', false, idx)
-  local push = dispatch(coutputdefaulttypes, type(inp.default), inp.default)
-  return ('if (!lua_isnoneornil(L, %d) && !%s) { %s; lua_replace(L, %d); }'):format(idx, is_check, push, idx)
+  return ('if (!lua_isnoneornil(L, %d) && !%s) { %s; lua_replace(L, %d); }'):format(
+    idx,
+    is_check,
+    push_scalar(inp.default),
+    idx
+  )
 end
 
 local function stub_inputcheck(inp, idx)
@@ -1122,7 +1120,7 @@ local function emit_implstub_body(name, v, fn)
     if inp.default ~= nil then
       emit('  if (lua_isnoneornil(L, %d)) {', i)
       emit('    if (lua_gettop(L) < %d) lua_settop(L, %d);', i, i)
-      emit('    %s;', dispatch(coutputdefaulttypes, type(inp.default), inp.default))
+      emit('    %s;', push_scalar(inp.default))
       emit('    lua_replace(L, %d);', i)
       emit('  }')
     end
@@ -1138,9 +1136,8 @@ local function emit_implstub_body(name, v, fn)
         local nilable = out.nilable
         local otype = out.type
         if out.default ~= nil then
-          local push = dispatch(coutputdefaulttypes, type(out.default), out.default)
           emit('  if (lua_isnil(L, %d)) {', i)
-          emit('    %s;', push)
+          emit('    %s;', push_scalar(out.default))
           emit('    lua_replace(L, %d);', i)
           emit('  } else {')
           emit('    %s;', dispatch(coutputtypes, otype, false, i))
@@ -1212,13 +1209,7 @@ local uiobjectcimplmakers = {
       local spec = mv.inputs[i]
       if spec.default ~= nil then
         emit('  if (lua_isnoneornil(L, %d)) {', i + 1)
-        if type(spec.default) == 'boolean' then
-          emit('    lua_pushboolean(L, %d);', spec.default and 1 or 0)
-        elseif type(spec.default) == 'number' then
-          emit('    lua_pushnumber(L, %g);', spec.default)
-        else
-          error('unsupported setter default type: ' .. type(spec.default))
-        end
+        emit('    %s;', push_scalar(spec.default))
         emit('  } else {')
         emit('    lua_pushvalue(L, %d);', i + 1)
         emit('  }')
