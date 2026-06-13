@@ -247,15 +247,9 @@ int main(void) {
   fprintf(pf, "%u\n", (unsigned)port);
   fclose(pf);
 
-  time_t last_sweep = time(NULL);
-
   for (;;) {
-    sleep_s(1);
-    time_t now = time(NULL);
-    if (now - last_sweep >= 60) {
-      last_sweep = now;
-      pool_sweep(now);
-    }
+    sleep_s(60);
+    pool_sweep(time(NULL));
   }
 
   MHD_stop_daemon(daemon);
