@@ -578,7 +578,8 @@ target_link_libraries(toolstactless PRIVATE tactless)
 
 add_executable(tactfull-server tools/tactfull_server.c)
 target_include_directories(tactfull-server PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
-target_link_libraries(tactfull-server PRIVATE tactless)
+target_link_libraries(tactfull-server PRIVATE tactless
+                                              $<$<PLATFORM_ID:Windows>:ws2_32>)
 
 lua2c(toolstactfull
       tools.tactfull=${CMAKE_CURRENT_SOURCE_DIR}/tools/tactfull.lua

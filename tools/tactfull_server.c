@@ -1,29 +1,50 @@
 /*
- * tactfull-server: HTTP/1.1 tactless proxy over a unix domain socket.
+ * tactfull-server: HTTP/1.1 tactless proxy over TCP localhost.
  *
  * API:
  *   GET /health                          -> 200 OK (liveness; does not reset
  * idle timer) GET /{product}/{hash}/name/{path}    -> 200 + bytes | 404 GET
  * /{product}/{hash}/fdid/{n}       -> 200 + bytes | 404
  *
+ * On startup the server writes its port to tactfull.port.
+ * On exit it removes tactfull.port.
+ *
  * The server maintains a pool of open tactless handles keyed by
  * product/hash.  Each entry expires after EXPIRY_S seconds of idle.
  * The server itself exits after EXPIRY_S seconds without a real request.
  */
 
-#include <errno.h>
+#ifdef _WIN32
+#include <winsock2.h>
+#include <ws2tcpip.h>
+typedef SOCKET sock_t;
+typedef WSAPOLLFD poll_fd_t;
+#define SOCK_INVALID INVALID_SOCKET
+#define sock_close(s) closesocket(s)
+#define sock_poll(fds, n, ms) WSAPoll((fds), (n), (ms))
+#define strncasecmp _strnicmp
+#pragma comment(lib, "ws2_32.lib")
+#else
+#include <netinet/in.h>
 #include <poll.h>
+#include <sys/socket.h>
+#include <unistd.h>
+typedef int sock_t;
+typedef struct pollfd poll_fd_t;
+#define SOCK_INVALID (-1)
+#define sock_close(s) close(s)
+#define sock_poll(fds, n, ms) poll((fds), (n), (ms))
+#endif
+
+#include <errno.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <sys/socket.h>
-#include <sys/un.h>
 #include <time.h>
-#include <unistd.h>
 
 #include "tactless.h"
 
-#define SOCKET_PATH "tactfull.sock"
+#define PORT_FILE "tactfull.port"
 #define MAX_CONNS 64
 #define MAX_POOL 64
 #define RBUF_SIZE 65536
@@ -100,9 +121,10 @@ static void pool_sweep(time_t now) {
 
 /* ---------- HTTP helpers ----------------------------------------------- */
 
-static int send_all(int fd, const char *data, size_t len) {
+static int send_all(sock_t fd, const char *data, size_t len) {
   while (len > 0) {
-    ssize_t n = send(fd, data, len, 0);
+    int chunk = (len > 65536) ? 65536 : (int)len;
+    int n = send(fd, data, chunk, 0);
     if (n <= 0) {
       return -1;
     }
@@ -151,7 +173,7 @@ static int has_connection_close(const char *buf, int hend) {
   return 0;
 }
 
-static void send_response(int fd, const unsigned char *body, size_t blen,
+static void send_response(sock_t fd, const unsigned char *body, size_t blen,
                           int close_after) {
   char hdr[256];
   const char *conn = close_after ? "close" : "keep-alive";
@@ -162,11 +184,10 @@ static void send_response(int fd, const unsigned char *body, size_t blen,
                     "%s\r\n\r\n",
                     blen, conn);
   } else {
-    hlen =
-        snprintf(hdr, sizeof(hdr),
-                 "HTTP/1.1 404 Not Found\r\nContent-Length: 0\r\nConnection: "
-                 "%s\r\n\r\n",
-                 conn);
+    hlen = snprintf(hdr, sizeof(hdr),
+                    "HTTP/1.1 404 Not Found\r\nContent-Length: 0\r\nConnection:"
+                    " %s\r\n\r\n",
+                    conn);
   }
   send_all(fd, hdr, hlen);
   if (body && blen > 0) {
@@ -176,11 +197,6 @@ static void send_response(int fd, const unsigned char *body, size_t blen,
 
 /* ---------- request dispatch ------------------------------------------ */
 
-/*
- * Parse /{product}/{hash}/name/{filepath}
- *    or /{product}/{hash}/fdid/{n}
- * Returns 1 on success, 0 on bad path.
- */
 static int parse_casc_path(const char *path, int plen, char *product,
                            char *hash, int *is_fdid, char *key) {
   if (plen < 1 || path[0] != '/') {
@@ -235,8 +251,7 @@ static int parse_casc_path(const char *path, int plen, char *product,
   return 1;
 }
 
-static void dispatch(int fd, const char *path, int plen, int close_after) {
-  /* /health: respond 200 but don't reset last_request */
+static void dispatch(sock_t fd, const char *path, int plen, int close_after) {
   if (plen == 7 && memcmp(path, "/health", 7) == 0) {
     send_response(fd, (const unsigned char *)"", 0, close_after);
     return;
@@ -261,12 +276,8 @@ static void dispatch(int fd, const char *path, int plen, int close_after) {
   last_request = time(NULL);
 
   size_t size = 0;
-  unsigned char *data;
-  if (is_fdid) {
-    data = tactless_get_fdid(t, atoi(key), &size);
-  } else {
-    data = tactless_get_name(t, key, &size);
-  }
+  unsigned char *data = is_fdid ? tactless_get_fdid(t, atoi(key), &size)
+                                : tactless_get_name(t, key, &size);
 
   send_response(fd, data, size, close_after);
   free(data);
@@ -275,15 +286,15 @@ static void dispatch(int fd, const char *path, int plen, int close_after) {
 /* ---------- connection state ------------------------------------------ */
 
 struct conn {
-  int fd;
+  sock_t fd;
   char buf[RBUF_SIZE];
   int len;
   time_t last_active;
 };
 
 static void conn_close(struct conn *c) {
-  close(c->fd);
-  c->fd = -1;
+  sock_close(c->fd);
+  c->fd = SOCK_INVALID;
   c->len = 0;
 }
 
@@ -293,7 +304,7 @@ static void conn_process(struct conn *c) {
     conn_close(c);
     return;
   }
-  ssize_t n = recv(c->fd, c->buf + c->len, space, 0);
+  int n = recv(c->fd, c->buf + c->len, space, 0);
   if (n <= 0) {
     conn_close(c);
     return;
@@ -301,7 +312,7 @@ static void conn_process(struct conn *c) {
   c->len += n;
   c->last_active = time(NULL);
 
-  while (c->fd >= 0) {
+  while (c->fd != SOCK_INVALID) {
     int hend = find_headers_end(c->buf, c->len);
     if (hend < 0) {
       break;
@@ -334,35 +345,90 @@ static void conn_process(struct conn *c) {
   }
 }
 
+/* ---------- startup: check if a server already runs at saved port ------ */
+
+static int port_alive(int port) {
+  sock_t s = socket(AF_INET, SOCK_STREAM, 0);
+  if (s == SOCK_INVALID) {
+    return 0;
+  }
+  struct sockaddr_in addr;
+  memset(&addr, 0, sizeof(addr));
+  addr.sin_family = AF_INET;
+  addr.sin_port = htons((unsigned short)port);
+  addr.sin_addr.s_addr = htonl(INADDR_LOOPBACK);
+  int alive = 0;
+  if (connect(s, (struct sockaddr *)&addr, sizeof(addr)) == 0) {
+    const char *req = "GET /health HTTP/1.0\r\n\r\n";
+    send(s, req, (int)strlen(req), 0);
+    char resp[16];
+    int n = recv(s, resp, (int)sizeof(resp), 0);
+    alive = (n >= 12 && memcmp(resp, "HTTP/1.1 200", 12) == 0);
+  }
+  sock_close(s);
+  return alive;
+}
+
 /* ---------- main ------------------------------------------------------- */
 
 int main(void) {
-  int listen_fd = socket(AF_UNIX, SOCK_STREAM, 0);
-  if (listen_fd < 0) {
+#ifdef _WIN32
+  WSADATA wsa;
+  if (WSAStartup(MAKEWORD(2, 2), &wsa) != 0) {
+    return 1;
+  }
+#endif
+
+  /* If a server is already running at the saved port, exit cleanly. */
+  FILE *pf = fopen(PORT_FILE, "r");
+  if (pf) {
+    int saved_port = 0;
+    fscanf(pf, "%d", &saved_port);
+    fclose(pf);
+    if (saved_port > 0 && port_alive(saved_port)) {
+#ifdef _WIN32
+      WSACleanup();
+#endif
+      return 0;
+    }
+  }
+
+  sock_t listen_fd = socket(AF_INET, SOCK_STREAM, 0);
+  if (listen_fd == SOCK_INVALID) {
     perror("socket");
     return 1;
   }
 
-  unlink(SOCKET_PATH);
-
-  struct sockaddr_un addr;
+  struct sockaddr_in addr;
   memset(&addr, 0, sizeof(addr));
-  addr.sun_family = AF_UNIX;
-  strncpy(addr.sun_path, SOCKET_PATH, sizeof(addr.sun_path) - 1);
+  addr.sin_family = AF_INET;
+  addr.sin_port = 0; /* OS picks a free port */
+  addr.sin_addr.s_addr = htonl(INADDR_LOOPBACK);
 
   if (bind(listen_fd, (struct sockaddr *)&addr, sizeof(addr)) < 0) {
-    if (errno == EADDRINUSE) {
-      close(listen_fd);
-      return 0; /* another server won the race */
-    }
     perror("bind");
-    close(listen_fd);
+    sock_close(listen_fd);
     return 1;
   }
 
+  /* Retrieve the OS-assigned port and write it to the port file. */
+  socklen_t addrlen = sizeof(addr);
+  getsockname(listen_fd, (struct sockaddr *)&addr, &addrlen);
+  int port = ntohs(addr.sin_port);
+
+  pf = fopen(PORT_FILE, "w");
+  if (!pf) {
+    perror("fopen tactfull.port");
+    sock_close(listen_fd);
+    return 1;
+  }
+  fprintf(pf, "%d\n", port);
+  fclose(pf);
+
   if (listen(listen_fd, 16) < 0) {
     perror("listen");
-    close(listen_fd);
+    sock_close(listen_fd);
+    remove(PORT_FILE);
     return 1;
   }
 
@@ -370,35 +436,39 @@ int main(void) {
 
   struct conn conns[MAX_CONNS];
   for (int i = 0; i < MAX_CONNS; i++) {
-    conns[i].fd = -1;
+    conns[i].fd = SOCK_INVALID;
   }
 
   time_t last_sweep = time(NULL);
 
   for (;;) {
-    struct pollfd fds[1 + MAX_CONNS];
+    poll_fd_t fds[1 + MAX_CONNS];
     int cidx[1 + MAX_CONNS];
     int nfds = 0;
 
-    fds[nfds] = (struct pollfd){.fd = listen_fd, .events = POLLIN};
+    fds[nfds].fd = listen_fd;
+    fds[nfds].events = POLLIN;
+    fds[nfds].revents = 0;
     cidx[nfds] = -1;
     nfds++;
 
     time_t now = time(NULL);
     for (int i = 0; i < MAX_CONNS; i++) {
-      if (conns[i].fd < 0) {
+      if (conns[i].fd == SOCK_INVALID) {
         continue;
       }
       if (now - conns[i].last_active > KEEPALIVE_TIMEOUT_S) {
         conn_close(&conns[i]);
         continue;
       }
-      fds[nfds] = (struct pollfd){.fd = conns[i].fd, .events = POLLIN};
+      fds[nfds].fd = conns[i].fd;
+      fds[nfds].events = POLLIN;
+      fds[nfds].revents = 0;
       cidx[nfds] = i;
       nfds++;
     }
 
-    poll(fds, nfds, POLL_MS);
+    sock_poll(fds, nfds, POLL_MS);
     now = time(NULL);
 
     if (now - last_sweep >= 60) {
@@ -415,20 +485,22 @@ int main(void) {
       }
 
       if (cidx[fi] < 0) {
-        int fd = accept(listen_fd, NULL, NULL);
-        if (fd < 0) {
+        sock_t fd = accept(listen_fd, NULL, NULL);
+        if (fd == SOCK_INVALID) {
           continue;
         }
         int placed = 0;
         for (int i = 0; i < MAX_CONNS; i++) {
-          if (conns[i].fd < 0) {
-            conns[i] = (struct conn){.fd = fd, .len = 0, .last_active = now};
+          if (conns[i].fd == SOCK_INVALID) {
+            conns[i].fd = fd;
+            conns[i].len = 0;
+            conns[i].last_active = now;
             placed = 1;
             break;
           }
         }
         if (!placed) {
-          close(fd);
+          sock_close(fd);
         }
       } else {
         conn_process(&conns[cidx[fi]]);
@@ -437,12 +509,12 @@ int main(void) {
   }
 
   for (int i = 0; i < MAX_CONNS; i++) {
-    if (conns[i].fd >= 0) {
+    if (conns[i].fd != SOCK_INVALID) {
       conn_close(&conns[i]);
     }
   }
-  close(listen_fd);
-  unlink(SOCKET_PATH);
+  sock_close(listen_fd);
+  remove(PORT_FILE);
 
   for (int i = 0; i < MAX_POOL; i++) {
     if (pool[i].handle) {
@@ -450,5 +522,8 @@ int main(void) {
     }
   }
 
+#ifdef _WIN32
+  WSACleanup();
+#endif
   return 0;
 }

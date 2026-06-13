@@ -1,15 +1,20 @@
 /*
- * libcurl HTTP client over a unix socket.
+ * libcurl HTTP client for tactfull.
  * Exports a table with:
- *   get(socket_path, url) -> string|nil
- *   health(socket_path) -> bool
+ *   get(url) -> string|nil
+ *   health(url) -> bool
  *   sleep_ms(ms)
  */
 
 #include <curl/curl.h>
 #include <stdlib.h>
 #include <string.h>
+
+#ifdef _WIN32
+#include <windows.h>
+#else
 #include <time.h>
+#endif
 
 #include "lauxlib.h"
 #include "lua.h"
@@ -35,8 +40,8 @@ static size_t write_cb(char *ptr, size_t size, size_t nmemb, void *ud) {
   return n;
 }
 
-static int do_get(lua_State *L, const char *socket_path, const char *url,
-                  long timeout_ms, int discard_body) {
+static int do_get(lua_State *L, const char *url, long timeout_ms,
+                  int discard_body) {
   CURL *c = curl_easy_init();
   if (!c) {
     return luaL_error(L, "curl_easy_init failed");
@@ -44,7 +49,6 @@ static int do_get(lua_State *L, const char *socket_path, const char *url,
 
   struct buf b = {NULL, 0, 0};
 
-  curl_easy_setopt(c, CURLOPT_UNIX_SOCKET_PATH, socket_path);
   curl_easy_setopt(c, CURLOPT_URL, url);
   curl_easy_setopt(c, CURLOPT_TIMEOUT_MS, timeout_ms);
   if (discard_body) {
@@ -78,20 +82,21 @@ static int do_get(lua_State *L, const char *socket_path, const char *url,
 }
 
 static int tactfull_get(lua_State *L) {
-  const char *socket_path = luaL_checkstring(L, 1);
-  const char *url = luaL_checkstring(L, 2);
-  return do_get(L, socket_path, url, 30000L, 0);
+  return do_get(L, luaL_checkstring(L, 1), 30000L, 0);
 }
 
 static int tactfull_health(lua_State *L) {
-  const char *socket_path = luaL_checkstring(L, 1);
-  return do_get(L, socket_path, "http://localhost/health", 500L, 1);
+  return do_get(L, luaL_checkstring(L, 1), 500L, 1);
 }
 
 static int tactfull_sleep_ms(lua_State *L) {
   long ms = luaL_checkinteger(L, 1);
+#ifdef _WIN32
+  Sleep((DWORD)ms);
+#else
   struct timespec ts = {ms / 1000, (ms % 1000) * 1000000L};
   nanosleep(&ts, NULL);
+#endif
   return 0;
 }
 
