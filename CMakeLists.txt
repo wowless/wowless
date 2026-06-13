@@ -576,6 +576,20 @@ lua2c(toolstactless tactless=c)
 target_sources(toolstactless PRIVATE tools/tactless.c)
 target_link_libraries(toolstactless PRIVATE tactless)
 
+find_path(MHD_INCLUDE_DIR NAMES microhttpd.h REQUIRED)
+find_library(MHD_LIBRARY NAMES microhttpd libmicrohttpd libmicrohttpd-dll
+                               microhttpd-10 REQUIRED)
+add_executable(tactfull-server tools/tactfull_server.c)
+target_include_directories(tactfull-server PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}
+                                                   ${MHD_INCLUDE_DIR})
+target_link_libraries(tactfull-server PRIVATE tactless ${MHD_LIBRARY})
+
+lua2c(toolstactfull
+      tools.tactfull=${CMAKE_CURRENT_SOURCE_DIR}/tools/tactfull.lua
+      tools.tactfull_curl=c)
+target_sources(toolstactfull PRIVATE tools/tactfull_curl.c)
+target_link_libraries(toolstactfull PRIVATE CURL::libcurl)
+
 find_package(CascLib CONFIG REQUIRED)
 lua2c(toolscasclib tools.casclib=c)
 target_sources(toolscasclib
