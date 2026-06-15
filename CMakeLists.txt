@@ -895,6 +895,7 @@ lua2c(
   wowless.modules.uiobjects=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/uiobjects.lua
   wowless.modules.uiobjecttypes=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/uiobjecttypes.lua
   wowless.modules.units=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/units.lua
+  wowless.modules.vfs=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/vfs.lua
   wowless.modules.visibility=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/visibility.lua
   wowless.profiler=${CMAKE_CURRENT_SOURCE_DIR}/wowless/profiler.lua
   wowless.runner=${CMAKE_CURRENT_SOURCE_DIR}/wowless/runner.lua
@@ -951,6 +952,7 @@ foreach(product ${products})
     penlight
     runtimegametypes
     runtimeproducts
+    toolstactfull
     tsort
     wowlesslib
     wowlessrender

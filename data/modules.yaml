@@ -94,6 +94,7 @@ loader:
     templates:
     uiobjects:
     uiobjecttypes:
+    vfs:
 loadercfg:
   root:
     default: '{}'
@@ -188,6 +189,10 @@ uiobjecttypes:
   deps:
 units:
   deps:
+vfs:
+  deps:
+    datalua:
+    loadercfg:
 visibility:
   deps:
     scripts:
