@@ -168,19 +168,19 @@ static enum MHD_Result handler(void *cls, struct MHD_Connection *connection,
   (void)upload_data_size;
   (void)req_cls;
 
+  if (strcmp(url, "/health") == 0) {
+    struct MHD_Response *r =
+        MHD_create_response_from_buffer(0, (void *)"", MHD_RESPMEM_PERSISTENT);
+    enum MHD_Result ret = MHD_queue_response(connection, MHD_HTTP_OK, r);
+    MHD_destroy_response(r);
+    return ret;
+  }
+
   if (strcmp(method, "GET") != 0) {
     struct MHD_Response *r =
         MHD_create_response_from_buffer(0, (void *)"", MHD_RESPMEM_PERSISTENT);
     enum MHD_Result ret =
         MHD_queue_response(connection, MHD_HTTP_METHOD_NOT_ALLOWED, r);
-    MHD_destroy_response(r);
-    return ret;
-  }
-
-  if (strcmp(url, "/health") == 0) {
-    struct MHD_Response *r =
-        MHD_create_response_from_buffer(0, (void *)"", MHD_RESPMEM_PERSISTENT);
-    enum MHD_Result ret = MHD_queue_response(connection, MHD_HTTP_OK, r);
     MHD_destroy_response(r);
     return ret;
   }
