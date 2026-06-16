@@ -285,6 +285,9 @@ local function run(cfg)
         end
       end,
       update = function()
+        for _ = 1, 10 do
+          NextFrame(0.1)
+        end
         for i = 1, 12 do
           NextFrame(math.pow(2, i))
         end
