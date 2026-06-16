@@ -6208,6 +6208,10 @@ PRODUCT_CHOICE_UPDATE:
   payload:
 PRODUCT_DISTRIBUTIONS_UPDATED:
   payload:
+PROVING_GROUNDS_SCORE_UPDATE:
+  payload:
+  - name: points
+    type: number
 PURCHASE_PLOT_RESULT:
   payload:
   - name: result
