@@ -52,7 +52,7 @@ jobs:
           os: macos-latest
         - generator: Ninja
           os: macos-latest
-        - generator: Visual Studio 17 2022
+        - generator: Visual Studio 18 2026
           os: windows-latest
         - generator: Ninja
           os: windows-latest
