@@ -24,7 +24,6 @@ return function(log, luaobjects, security)
   end
 
   return {
-    AddTimer = addTimer,
     Advance = function(elapsed)
       stamp = stamp + elapsed
       while timers:peek().pri < stamp do

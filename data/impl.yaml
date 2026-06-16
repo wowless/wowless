@@ -559,8 +559,7 @@ RegisterEventCallback:
 RequestTimePlayed:
   impl:
     modules:
-      events:
-      time:
+      eventqueue:
 RunMacroText:
   moduledelegate:
     name: macrotext
@@ -589,8 +588,7 @@ select:
 SendSystemMessage:
   impl:
     modules:
-      events:
-      time:
+      eventqueue:
       units:
 seterrorhandler:
   moduledelegate:
