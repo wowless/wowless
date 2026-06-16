@@ -124,6 +124,17 @@ G.asynctests = {
     t = G.retn(1, _G.C_Timer.NewTimer(0, cb))
     t.foo = 'bar'
   end,
+  ['C_Timer state not shared'] = function(done)
+    local count = 5
+    local cb = _G.C_FunctionContainers.CreateCallback(function()
+      count = count - 1
+      if count == 0 then
+        done(function() end)
+      end
+    end)
+    local obj1 = _G.C_Timer.NewTicker(0.05, cb, 3)
+    _G.C_Timer.NewTicker(0.08, obj1, 2)
+  end,
   ['OnUpdate invocation order'] = function(done)
     if _G.__wowless then -- issue #519
       return done(function() end)

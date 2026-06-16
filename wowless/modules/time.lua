@@ -5,29 +5,32 @@ return function(log, luaobjects, security)
     error('fell off the end of time')
   end)
 
-  local function addTimer(seconds, callback)
-    timers:push(stamp + seconds, callback)
+  local function addTimer(seconds, timer)
+    timers:push(stamp + seconds, timer)
   end
 
-  local function newTicker(seconds, obj, iterations)
+  local function newTicker(seconds, callback, iterations)
     assert(seconds >= 0 and seconds < 4294968) -- (2 ^ 32 - 1) / 1000
-    obj.seconds = seconds
-    obj.count = 0
-    obj.iterations = iterations
-    addTimer(seconds, obj)
-    return obj
+    addTimer(seconds, {
+      callback = callback,
+      count = 0,
+      iterations = iterations,
+      seconds = seconds,
+    })
+    return callback
   end
 
   local function Advance(elapsed)
     stamp = stamp + elapsed
     while timers:peek().pri < stamp do
       local timer = timers:pop()
-      local obj = timer.val
+      local rec = timer.val
+      local obj = rec.callback
       log(2, 'running timer %.2f %s', timer.pri, tostring(obj))
-      if not obj.cancelled and obj.count < obj.iterations then
+      if not obj.cancelled and rec.count < rec.iterations then
         security.CallSandbox(obj.callback, luaobjects.CreateProxy('LuaFunctionContainer', obj))
-        obj.count = obj.count + 1
-        addTimer(obj.seconds, obj)
+        rec.count = rec.count + 1
+        addTimer(rec.seconds, rec)
       end
     end
   end
