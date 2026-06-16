@@ -11,28 +11,29 @@ return function(log, luaobjects, security)
 
   local function newTicker(seconds, obj, iterations)
     assert(seconds >= 0 and seconds < 4294968) -- (2 ^ 32 - 1) / 1000
-    local count = 0
-    local function cb()
-      if not obj.cancelled and count < iterations then
-        security.CallSandbox(obj.callback, luaobjects.CreateProxy('LuaFunctionContainer', obj))
-        count = count + 1
-        addTimer(seconds, cb)
-      end
-    end
-    addTimer(seconds, cb)
+    obj.seconds = seconds
+    obj.count = 0
+    obj.iterations = iterations
+    addTimer(seconds, obj)
     return obj
   end
 
-  return {
-    Advance = function(elapsed)
-      stamp = stamp + elapsed
-      while timers:peek().pri < stamp do
-        local timer = timers:pop()
-        log(2, 'running timer %.2f %s', timer.pri, tostring(timer.val))
-        assert(getfenv(timer.val) == _G, 'wowless bug: sandbox callback in time.Advance')
-        security.CallSafely(timer.val)
+  local function Advance(elapsed)
+    stamp = stamp + elapsed
+    while timers:peek().pri < stamp do
+      local timer = timers:pop()
+      local obj = timer.val
+      log(2, 'running timer %.2f %s', timer.pri, tostring(obj))
+      if not obj.cancelled and obj.count < obj.iterations then
+        security.CallSandbox(obj.callback, luaobjects.CreateProxy('LuaFunctionContainer', obj))
+        obj.count = obj.count + 1
+        addTimer(obj.seconds, obj)
       end
-    end,
+    end
+  end
+
+  return {
+    Advance = Advance,
     ['C_Timer.After'] = function(seconds, callback)
       newTicker(seconds, callback, 1)
     end,
