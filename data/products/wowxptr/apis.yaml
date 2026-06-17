@@ -21756,6 +21756,14 @@ C_QuestInfoSystem.GetQuestClassification:
   - name: classification
     type:
       enum: QuestClassification
+C_QuestInfoSystem.GetQuestHasShortExpirationWarning:
+  inputs:
+  - name: questID
+    nilable: true
+    type: number
+  outputs:
+  - name: hasShortExpirationWarning
+    type: boolean
 C_QuestInfoSystem.GetQuestLogRewardFavor:
   inputs:
   - name: questID
