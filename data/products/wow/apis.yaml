@@ -205,7 +205,6 @@ BNGetNumFriends:
     type: number
 BNGetSelectedBlock:
 BNGetSelectedFriend:
-BNInviteFriend:
 BNIsBlocked:
 BNIsFriend:
 BNIsSelf:
@@ -3530,6 +3529,11 @@ C_BattleNet.GetGameAccountInfoByID:
 C_BattleNet.InstallHighResTextures:
   inputs:
   outputs:
+C_BattleNet.InviteFriend:
+  inputs:
+  - name: gameAccountID
+    type: number
+  outputs:
 C_BattleNet.SendGameData:
   inputs:
   - name: gameAccountID
@@ -5432,23 +5436,11 @@ C_ClickBindings.GetProfileInfo:
     type:
       arrayof:
         structure: ClickBindingInfo
-C_ClickBindings.GetStringFromModifiers:
-  inputs:
-  - name: modifiers
-    type: number
-  outputs:
-  - name: modifierString
-    type: string
 C_ClickBindings.GetTutorialShown:
   inputs:
   outputs:
   - name: tutorialShown
     type: boolean
-C_ClickBindings.MakeModifiers:
-  inputs:
-  outputs:
-  - name: modifiers
-    type: number
 C_ClickBindings.ResetCurrentProfile:
   inputs:
   outputs:
@@ -5493,7 +5485,7 @@ C_Club.AssignMemberRole:
   - name: clubId
     type: string
   - name: memberId
-    type: number
+    type: string
   - name: roleId
     type:
       enum: ClubRoleIdentifier
@@ -5696,7 +5688,7 @@ C_Club.GetAssignableRoles:
   - name: clubId
     type: string
   - name: memberId
-    type: number
+    type: string
   outputs:
   - name: assignableRoles
     type:
@@ -5745,7 +5737,7 @@ C_Club.GetClubMembers:
   outputs:
   - name: members
     type:
-      arrayof: number
+      arrayof: string
 C_Club.GetClubPrivileges:
   inputs:
   - name: clubId
@@ -5858,7 +5850,7 @@ C_Club.GetMemberInfo:
   - name: clubId
     type: string
   - name: memberId
-    type: number
+    type: string
   outputs:
   - name: info
     nilable: true
@@ -6021,7 +6013,7 @@ C_Club.KickMember:
   - name: clubId
     type: string
   - name: memberId
-    type: number
+    type: string
   outputs:
 C_Club.LeaveClub:
   inputs:
@@ -6069,14 +6061,14 @@ C_Club.RevokeInvitation:
   - name: clubId
     type: string
   - name: memberId
-    type: number
+    type: string
   outputs:
 C_Club.SendBattleTagFriendRequest:
   inputs:
   - name: guildClubId
     type: string
   - name: memberId
-    type: number
+    type: string
   outputs:
 C_Club.SendCharacterInvitation:
   inputs:
@@ -6090,7 +6082,7 @@ C_Club.SendInvitation:
   - name: clubId
     type: string
   - name: memberId
-    type: number
+    type: string
   outputs:
 C_Club.SendMessage:
   inputs:
@@ -6124,7 +6116,7 @@ C_Club.SetClubMemberNote:
   - name: clubId
     type: string
   - name: memberId
-    type: number
+    type: string
   - name: note
     type: string
   outputs:
@@ -6993,9 +6985,9 @@ C_CombatLogSecure.ShouldShowCurrentEntry:
   secureonly: true
 C_CombatText.GetActiveUnit:
   inputs:
+  mayreturnnothing: true
   outputs:
   - name: unitTarget
-    nilable: true
     type: string
 C_CombatText.GetCurrentEventInfo:
   inputs:
@@ -8105,6 +8097,11 @@ C_ConsoleScriptCollection.GetScriptData:
   - name: data
     type:
       structure: C_ConsoleScriptCollection.ConsoleScriptData
+C_Container.CalculateTotalNumberOfFreeBagSlots:
+  inputs:
+  outputs:
+  - name: totalFreeSlots
+    type: number
 C_Container.ContainerIDToInventoryID:
   inputs:
   - name: containerID
@@ -10143,6 +10140,12 @@ C_DelvesUI.GetDelveEntranceTiers:
     type:
       arrayof:
         structure: C_DelvesUI.TieredEntranceTierInfo
+C_DelvesUI.GetDelveEntranceTitleString:
+  inputs:
+  outputs:
+  - name: title
+    nilable: true
+    type: string
 C_DelvesUI.GetDelvesAffixSpellsForSeason:
   inputs:
   outputs:
@@ -10228,7 +10231,8 @@ C_DelvesUI.GetTieredEntranceType:
   inputs:
   outputs:
   - name: entranceType
-    type: number
+    type:
+      enum: TieredEntranceType
 C_DelvesUI.GetTraitTreeForCompanion:
   inputs:
   - name: companionID
@@ -10249,6 +10253,12 @@ C_DelvesUI.GetUnseenCuriosBySlotType:
   - name: unseenCurioNodeIDs
     type:
       arrayof: number
+C_DelvesUI.GetWorldTierDifficultyForActivePlayer:
+  inputs:
+  outputs:
+  - name: difficulty
+    type:
+      enum: WorldTierDifficulty
 C_DelvesUI.HasActiveDelve:
   inputs:
   outputs:
@@ -10303,11 +10313,18 @@ C_DurationUtil.CreateDuration:
   - name: duration
     type:
       luaobject: LuaDurationObject
-C_DurationUtil.GetCurrentTime:
+C_DurationUtil.CreateDurationTextBinding:
   inputs:
   outputs:
-  - name: currentTime
-    type: number
+  - name: binding
+    type:
+      luaobject: DurationTextBinding
+C_DurationUtil.CreateManualClock:
+  inputs:
+  outputs:
+  - name: clock
+    type:
+      luaobject: LuaDurationManualClock
 C_DyeColor.GetAllDyeColorCategories:
   inputs:
   outputs:
@@ -10563,11 +10580,14 @@ C_EncounterEvents.GetEventColor:
   inputs:
   - name: encounterEventID
     type: number
+  - name: trigger
+    type:
+      enum: EncounterEventColorTrigger
   outputs:
   - name: color
     nilable: true
     type:
-      structure: colorRGB
+      structure: colorRGBA
 C_EncounterEvents.GetEventInfo:
   inputs:
   - name: encounterEventID
@@ -10616,10 +10636,13 @@ C_EncounterEvents.SetEventColor:
   inputs:
   - name: encounterEventID
     type: number
+  - name: trigger
+    type:
+      enum: EncounterEventColorTrigger
   - name: color
     nilable: true
     type:
-      structure: colorRGB
+      structure: colorRGBA
   outputs:
 C_EncounterEvents.SetEventSound:
   inputs:
@@ -10802,6 +10825,18 @@ C_EncounterTimeline.GetCurrentTime:
   outputs:
   - name: currentTime
     type: number
+C_EncounterTimeline.GetEventColor:
+  inputs:
+  - name: eventID
+    type: number
+  - name: overrideTrigger
+    nilable: true
+    type:
+      enum: EncounterEventColorTrigger
+  outputs:
+  - name: color
+    type:
+      structure: colorRGBA
 C_EncounterTimeline.GetEventCountBySource:
   inputs:
   - name: source
@@ -11001,7 +11036,7 @@ C_EncounterWarnings.GetColorForSeverity:
   outputs:
   - name: color
     type:
-      structure: colorRGB
+      structure: colorRGBA
 C_EncounterWarnings.GetEditModeWarningInfo:
   inputs:
   - name: severity
@@ -13554,6 +13589,14 @@ C_HousingBasicMode.StartPlacingPreviewDecor:
     nilable: true
     type: number
   outputs:
+C_HousingCatalog.CanDestroyEntry:
+  inputs:
+  - name: entryID
+    type:
+      structure: HousingCatalogEntryID
+  outputs:
+  - name: canDelete
+    type: boolean
 C_HousingCatalog.CreateCatalogSearcher:
   inputs:
   outputs:
@@ -13603,6 +13646,16 @@ C_HousingCatalog.GetCartSizeLimit:
   outputs:
   - name: cartSizeLimit
     type: number
+C_HousingCatalog.GetCatalogCategoryAndSubcategoryNames:
+  inputs:
+  - name: subcategoryID
+    type: number
+  mayreturnnothing: true
+  outputs:
+  - name: categoryName
+    type: string
+  - name: subcategoryName
+    type: string
 C_HousingCatalog.GetCatalogCategoryInfo:
   inputs:
   - name: categoryID
@@ -13966,6 +14019,18 @@ C_HousingCustomizeMode.RoomComponentSupportsVariant:
   outputs:
   - name: variantSupported
     type: boolean
+C_HousingCustomizeMode.RoomConnectionSupportsDoorType:
+  inputs:
+  - name: roomGUID
+    type: string
+  - name: componentID
+    type: number
+  - name: newDoortype
+    type:
+      enum: HousingRoomComponentDoorType
+  outputs:
+  - name: doorTypeSupported
+    type: boolean
 C_HousingCustomizeMode.SetRoomComponentCeilingType:
   inputs:
   - name: roomGUID
@@ -14270,6 +14335,13 @@ C_HousingLayout.AnyRoomsOnFloor:
 C_HousingLayout.CancelActiveLayoutEditing:
   inputs:
   outputs:
+C_HousingLayout.CanSetViewedFloor:
+  inputs:
+  - name: floor
+    type: number
+  outputs:
+  - name: canSet
+    type: boolean
 C_HousingLayout.ConfirmStairChoice:
   inputs:
   - name: choice
@@ -14389,11 +14461,6 @@ C_HousingLayout.IsDraggingRoom:
   - name: isDragging
     type: boolean
   - name: isAccessibleDrag
-    type: boolean
-C_HousingLayout.IsDraggingStairwell:
-  inputs:
-  outputs:
-  - name: isDraggingStairwell
     type: boolean
 C_HousingLayout.MoveDraggedRoom:
   inputs:
@@ -17768,6 +17835,13 @@ C_MerchantFrame.GetItemInfo:
   - name: info
     type:
       structure: C_MerchantFrame.MerchantItemInfo
+C_MerchantFrame.GetMerchantCurrencies:
+  inputs:
+  mayreturnnothing: true
+  outputs:
+  - name: currencies
+    type:
+      arrayof: number
 C_MerchantFrame.GetNumJunkItems:
   inputs:
   outputs:
@@ -17821,20 +17895,6 @@ C_Minimap.GetNumTrackingTypes:
   inputs:
   outputs:
   - name: numTrackingTypes
-    type: number
-C_Minimap.GetObjectIconTextureCoords:
-  inputs:
-  - name: index
-    nilable: true
-    type: number
-  outputs:
-  - name: textureCoordsX
-    type: number
-  - name: textureCoordsY
-    type: number
-  - name: textureCoordsZ
-    type: number
-  - name: textureCoordsW
     type: number
 C_Minimap.GetPOITextureCoords:
   inputs:
@@ -18558,7 +18618,7 @@ C_MythicPlus.GetWeeklyBestForMap:
     type: number
   - name: completionDate
     type:
-      structure: C_MythicPlus.MythicPlusDate
+      structure: CalendarTime
   - name: affixIDs
     type:
       arrayof: number
@@ -18987,6 +19047,11 @@ C_PartyInfo.ConfirmLeaveParty:
     nilable: true
     type: number
   outputs:
+C_PartyInfo.ConfirmReadyCheck:
+  inputs:
+  - name: isReady
+    type: boolean
+  outputs:
 C_PartyInfo.ConfirmRequestInviteFromUnit:
   inputs:
   - name: targetName
@@ -19010,6 +19075,14 @@ C_PartyInfo.ConvertToRaid:
 C_PartyInfo.DelveTeleportOut:
   inputs:
   outputs:
+C_PartyInfo.DemoteAssistant:
+  inputs:
+  - name: name
+    type: string
+  - name: exactNameMatch
+    nilable: true
+    type: boolean
+  outputs:
 C_PartyInfo.DoCountdown:
   inputs:
   - name: seconds
@@ -19017,6 +19090,9 @@ C_PartyInfo.DoCountdown:
   outputs:
   - name: success
     type: boolean
+C_PartyInfo.DoReadyCheck:
+  inputs:
+  outputs:
 C_PartyInfo.GetActiveCategories:
   inputs:
   mayreturnnothing: true
@@ -19182,6 +19258,16 @@ C_PartyInfo.IsDelveInProgress:
   outputs:
   - name: isDelveComplete
     type: boolean
+C_PartyInfo.IsGUIDInGroup:
+  inputs:
+  - name: guid
+    type: string
+  - name: category
+    nilable: true
+    type: number
+  outputs:
+  - name: isInGroup
+    type: boolean
 C_PartyInfo.IsLootMethodAvailable:
   inputs:
   - name: method
@@ -19214,6 +19300,22 @@ C_PartyInfo.LeaveParty:
     nilable: true
     type: number
   outputs:
+C_PartyInfo.PromoteToAssistant:
+  inputs:
+  - name: name
+    type: string
+  - name: exactNameMatch
+    nilable: true
+    type: boolean
+  outputs:
+C_PartyInfo.PromoteToLeader:
+  inputs:
+  - name: name
+    type: string
+  - name: exactNameMatch
+    nilable: true
+    type: boolean
+  outputs:
 C_PartyInfo.RequestInviteFromUnit:
   inputs:
   - name: targetName
@@ -19228,6 +19330,13 @@ C_PartyInfo.RequestInviteFromUnit:
     nilable: true
     type: boolean
   outputs:
+C_PartyInfo.SetEveryoneIsAssistant:
+  inputs:
+  - name: isAssistant
+    type: boolean
+  outputs:
+  - name: updated
+    type: boolean
 C_PartyInfo.SetInstanceAbandonVoteResponse:
   inputs:
   - name: response
@@ -19252,6 +19361,17 @@ C_PartyInfo.SetRestrictPings:
   outputs:
 C_PartyInfo.StartInstanceAbandonVote:
   inputs:
+  outputs:
+C_PartyInfo.UninviteUnit:
+  inputs:
+  - name: name
+    type: string
+  - name: reason
+    nilable: true
+    type: string
+  - name: exactNameMatch
+    nilable: true
+    type: boolean
   outputs:
 C_PartyPose.ExtraAction:
   inputs:
@@ -20411,6 +20531,13 @@ C_PlayerInfo.IsDisplayRaceNative:
   inputs:
   outputs:
   - name: isDisplayRaceNative
+    type: boolean
+C_PlayerInfo.IsExpansionLandingPageUnlockedForPlayer:
+  inputs:
+  - name: expansionID
+    type: number
+  outputs:
+  - name: isUnlocked
     type: boolean
 C_PlayerInfo.IsMirrorImage:
   inputs:
@@ -21629,6 +21756,14 @@ C_QuestInfoSystem.GetQuestClassification:
   - name: classification
     type:
       enum: QuestClassification
+C_QuestInfoSystem.GetQuestHasShortExpirationWarning:
+  inputs:
+  - name: questID
+    nilable: true
+    type: number
+  outputs:
+  - name: hasShortExpirationWarning
+    type: boolean
 C_QuestInfoSystem.GetQuestLogRewardFavor:
   inputs:
   - name: questID
@@ -23160,7 +23295,6 @@ C_Scenario.GetInfo:
     stub: 0
     type: number
 C_Scenario.GetProvingGroundsInfo:
-C_Scenario.GetScenarioIconInfo:
 C_Scenario.GetStepInfo:
 C_Scenario.GetSupersededObjectives:
 C_Scenario.IsInScenario:
@@ -23202,6 +23336,16 @@ C_ScenarioInfo.GetJailersTowerTypeString:
   - name: typeString
     nilable: true
     type: string
+C_ScenarioInfo.GetScenarioIconInfo:
+  inputs:
+  - name: uiMapID
+    type: number
+  mayreturnnothing: true
+  outputs:
+  - name: scenarioInfos
+    type:
+      arrayof:
+        structure: C_ScenarioInfo.ScenarioIconInfo
 C_ScenarioInfo.GetScenarioInfo:
   inputs:
   mayreturnnothing: true
@@ -24384,14 +24528,6 @@ C_Spell.GetItemModifiedAppearancesApplied:
   - name: itemModifiedAppearanceIDs
     type:
       arrayof: number
-C_Spell.GetMawPowerBorderAtlasBySpellID:
-  inputs:
-  - name: spellID
-    type: string
-  mayreturnnothing: true
-  outputs:
-  - name: rarityBorderAtlas
-    type: string
 C_Spell.GetMawPowerLinkBySpellID:
   inputs:
   - name: spellID
@@ -24399,6 +24535,16 @@ C_Spell.GetMawPowerLinkBySpellID:
   mayreturnnothing: true
   outputs:
   - name: link
+    type: string
+C_Spell.GetMawPowerRarityInfoBySpellID:
+  inputs:
+  - name: spellID
+    type: string
+  mayreturnnothing: true
+  outputs:
+  - name: rarityID
+    type: number
+  - name: rarityBorderAtlas
     type: string
 C_Spell.GetOverrideSpell:
   inputs:
@@ -25568,6 +25714,13 @@ C_StringUtil.CreateSecondsFormatter:
   - name: formatter
     type:
       luaobject: SecondsFormatter
+C_StringUtil.EscapeDecimalNonPrintables:
+  inputs:
+  - name: text
+    type: string
+  outputs:
+  - name: escapedText
+    type: string
 C_StringUtil.EscapeLuaFormatString:
   inputs:
   - name: text
@@ -30313,6 +30466,28 @@ C_UIColor.GetColors:
     type:
       arrayof:
         structure: C_UIColor.DBColorExport
+C_UIFileAsset.GetFileID:
+  inputs:
+  - name: asset
+    type: FileAsset
+  outputs:
+  - name: assetFileID
+    nilable: true
+    type: number
+C_UIFileAsset.IsKnownFile:
+  inputs:
+  - name: asset
+    type: FileAsset
+  outputs:
+  - name: isValid
+    type: boolean
+C_UIFileAsset.IsLooseFile:
+  inputs:
+  - name: asset
+    type: FileAsset
+  outputs:
+  - name: isLooseFile
+    type: boolean
 C_UIWidgetManager.GetAllWidgetsBySetID:
   inputs:
   - name: setID
@@ -32535,7 +32710,6 @@ ConfirmAcceptQuest:
 ConfirmBNRequestInviteFriend:
 ConfirmLootRoll:
 ConfirmLootSlot:
-ConfirmReadyCheck:
 ConfirmTalentWipe:
   inputs:
   outputs:
@@ -32806,7 +32980,6 @@ DeleteInboxItem:
 DeleteMacro:
   outputs:
 DeleteRaidProfile:
-DemoteAssistant:
 DepositGuildBankMoney:
 DescendStop:
   inputs:
@@ -32832,7 +33005,6 @@ DoesCurrentLocaleSellExpansionLevels:
     type: boolean
 DoesTemplateExist:
 DoMasterLootRoll:
-DoReadyCheck:
 DropCursorMoney:
   inputs:
   outputs:
@@ -33267,6 +33439,13 @@ GetBackgroundLoadingStatus:
   outputs:
   - name: result
     type: number
+GetBaseDifficultyID:
+  inputs:
+  - name: difficultyID
+    type: number
+  outputs:
+  - name: baseDifficultyID
+    type: number
 GetBattlefieldArenaFaction:
   inputs:
   outputs:
@@ -33360,6 +33539,14 @@ GetBuildInfo:
     type: string
   - name: buildInfo
     type: string
+GetBuildOption:
+  inputs:
+  - name: name
+    type: string
+  outputs:
+  - name: isSet
+    nilable: true
+    type: boolean
 GetButtonMetatable:
   impl: GetButtonMetatable
   inputs:
@@ -33627,6 +33814,8 @@ GetCurrentEventID:
 GetCurrentGlyphNameForSpell:
 GetCurrentGraphicsAPI:
 GetCurrentGraphicsSetting:
+  inputs:
+  outputs:
 GetCurrentGuildBankTab:
   outputs:
   - type: number
@@ -33757,6 +33946,13 @@ GetErrorCallstackHeight:
     type: number
 geterrorhandler:
   impl: geterrorhandler
+GetEventCPUUsage:
+  inputs:
+  outputs:
+  - name: call_time
+    type: number
+  - name: call_count
+    type: number
 GetEventTime:
   inputs:
   - name: eventProfileIndex
@@ -33910,6 +34106,13 @@ GetFramerate:
     type: number
 GetFramesRegisteredForEvent:
   impl: GetFramesRegisteredForEvent
+GetFunctionCPUUsage:
+  inputs:
+  outputs:
+  - name: call_time
+    type: number
+  - name: call_count
+    type: number
 GetGameMessageInfo:
   inputs:
   - name: gameErrorIndex
@@ -34271,6 +34474,9 @@ GetInstanceInfo:
   - name: lfgDungeonID
     nilable: true
     type: number
+  - default: false
+    name: hasWorldTier
+    type: boolean
 GetInstanceLockTimeRemaining:
   inputs:
   outputs:
@@ -34843,9 +35049,6 @@ GetMeleeHaste:
   outputs:
   - name: result
     type: number
-GetMerchantCurrencies:
-  inputs:
-  outputs:
 GetMerchantFilter:
   inputs:
   outputs:
@@ -35464,6 +35667,12 @@ GetProgressText:
   - name: progressText
     type: string
 GetPromotionRank:
+GetProtocolTypes:
+  inputs:
+  outputs:
+  - name: protocolTypes
+    type: string
+  outstride: 1
 GetPVPDesired:
   inputs:
   outputs:
@@ -35975,6 +36184,11 @@ GetScreenWidth:
   outputs:
   - name: width
     type: number
+GetScriptCPUUsage:
+  inputs:
+  outputs:
+  - name: result
+    type: number
 GetSecondsUntilParentalControlsKick:
   inputs:
   outputs:
@@ -36189,6 +36403,13 @@ GetSpellPenetration:
 GetSpellsForCharacterUpgradeTier:
 GetStatistic:
 GetStatisticsCategoryList:
+GetStringFromModifiers:
+  inputs:
+  - name: modifiers
+    type: number
+  outputs:
+  - name: modifierString
+    type: string
 GetSturdiness:
   inputs:
   outputs:
@@ -37051,7 +37272,6 @@ IsGMClient:
     type: boolean
 IsGraphicsCVarValueSupported:
 IsGraphicsSettingValueSupported:
-IsGUIDInGroup:
 IsGuildLeader:
   inputs:
   outputs:
@@ -37626,6 +37846,11 @@ Logout:
 LootMoneyNotify:
 LootSlot:
 LootSlotHasItem:
+MakeModifiers:
+  inputs:
+  outputs:
+  - name: modifiers
+    type: number
 mapvalues:
   inputs:
   - name: func
@@ -37932,12 +38157,6 @@ PrevView:
 ProcessExceptionClient:
   impl: ProcessExceptionClient
 ProcessQuestLogRewardFactions:
-PromoteToAssistant:
-PromoteToLeader:
-  inputs:
-  - name: unit
-    type: unit
-  outputs:
 PutItemInBackpack:
 PutItemInBag:
 QueryGuildBankLog:
@@ -38396,7 +38615,6 @@ SetEuropeanNumbers:
   - name: enabled
     type: boolean
   outputs:
-SetEveryoneIsAssistant:
 setfenv:
   impl: setfenv
 SetFocusedAchievement:
@@ -39032,7 +39250,6 @@ TurnRightStop:
   protected: true
 type:
   impl: type
-UninviteUnit:
 UnitAffectingCombat:
   inputs:
   - name: unit

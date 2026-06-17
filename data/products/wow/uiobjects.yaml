@@ -5117,32 +5117,7 @@ Minimap:
       - name: asset
         type: TextureAsset
       outputs:
-    SetBlipTexture:
-      inputs:
-      - name: asset
-        type: TextureAsset
-      outputs:
-    SetCorpsePOIArrowTexture:
-      inputs:
-      - name: asset
-        type: TextureAsset
-      outputs:
-    SetIconTexture:
-      inputs:
-      - name: asset
-        type: TextureAsset
-      outputs:
     SetMaskTexture:
-      inputs:
-      - name: asset
-        type: TextureAsset
-      outputs:
-    SetPlayerTexture:
-      inputs:
-      - name: asset
-        type: TextureAsset
-      outputs:
-    SetPOIArrowTexture:
       inputs:
       - name: asset
         type: TextureAsset
@@ -5178,11 +5153,6 @@ Minimap:
         type: number
       outputs:
     SetQuestBlobRingTexture:
-      inputs:
-      - name: asset
-        type: TextureAsset
-      outputs:
-    SetStaticPOIArrowTexture:
       inputs:
       - name: asset
         type: TextureAsset
