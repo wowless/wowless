@@ -9,35 +9,11 @@ return function(cstubs, datalua)
   local function LoadTypes(modules)
     local type_stubs = cstubs.loadluaobjects(modules)
 
-    -- Build methods tables with inheritance so that inherited methods share the
-    -- same Lua function object across types (type_stubs has all types including virtual).
-    local allmethods = {}
-    local function createMethods(k)
-      if allmethods[k] then
-        return allmethods[k]
-      end
-      local v = datalua.luaobjects[k]
-      local methods = {}
-      if v.inherits then
-        for mk, mfn in pairs(createMethods(v.inherits)) do
-          methods[mk] = mfn
-        end
-      end
-      local ts = type_stubs[k]
-      if ts then
-        for mk, mfn in pairs(ts.methods) do
-          methods[mk] = mfn
-        end
-      end
-      allmethods[k] = methods
-      return methods
-    end
-
     for k, ts in pairs(type_stubs) do
       typeids[k] = ts.typeid
       local v = datalua.luaobjects[k]
       if not v.virtual then
-        local methods = createMethods(k)
+        local methods = ts.methods
         local mt
         mt = {
           __eq = function(u1, u2)

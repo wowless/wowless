@@ -103,24 +103,46 @@ void wowless_stub_log_extra_args(lua_State *L, const char *fname) {
   lua_call(L, 2, 0);
 }
 
+/*
+ * Variant of load_entries that deduplicates closures via a func-ptr-keyed table
+ * so that inherited methods share the same Lua function object across types.
+ */
+static void load_entries_dedup(lua_State *L, const struct wowless_stub_entry *e,
+                               int dedup_idx) {
+  lua_newtable(L); /* sandbox */
+  for (; e->name; e++) {
+    lua_pushlightuserdata(L, reinterpret_cast<void *>(e->func));
+    lua_rawget(L, dedup_idx);
+    if (lua_isnil(L, -1)) {
+      lua_pop(L, 1);
+      load_entry(L, e);
+      lua_pushlightuserdata(L, reinterpret_cast<void *>(e->func));
+      lua_pushvalue(L, -2); /* dup closure */
+      lua_rawset(L, dedup_idx);
+    }
+    lua_setfield(L, -2, e->name); /* into sandbox */
+  }
+}
+
 int wowless_load_luaobject_stubs(lua_State *L) {
   const auto *spec = static_cast<const wowless_luaobject_type_entry *>(
       lua_touserdata(L, lua_upvalueindex(1)));
   lua_getfield(L, 1, "cgencode");
   lua_insert(L, 1);
-  /* Stack: [cgencode, modules] */
-  lua_newtable(L);
-  /* Stack: [cgencode, modules, result] */
+  /* Stack: [cgencode=1, modules=2] */
+  lua_newtable(L); /* dedup: ptr -> closure */
+  lua_newtable(L); /* result */
+  /* Stack: [cgencode=1, modules=2, dedup=3, result=4] */
   for (const wowless_luaobject_type_entry *t = spec; t->type_name; t++) {
     lua_newtable(L);
     lua_pushinteger(L, t->type_id);
     lua_setfield(L, -2, "typeid");
-    load_entries(L, t->methods);
-    /* Stack: [cgencode, modules, result, type_info, sandbox_methods, host_methods] */
-    lua_pop(L, 1); /* discard host_methods */
+    load_entries_dedup(L, t->methods, 3);
+    /* Stack: [..., type_info, sandbox_methods] */
     lua_setfield(L, -2, "methods");
-    lua_setfield(L, -2, t->type_name);
+    lua_setfield(L, 4, t->type_name);
   }
+  lua_remove(L, 3); /* remove dedup table */
   return 1;
 }
 
