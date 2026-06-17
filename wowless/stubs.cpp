@@ -132,9 +132,6 @@ int wowless_load_luaobject_stubs(lua_State *L) {
   lua_getfield(L, 1, "cgencode");
   lua_insert(L, 1);
   /* Stack: [cgencode=1, modules=2, luaobject=3, bool=4] */
-  lua_getfield(L, 3, "makemt");
-  lua_pushboolean(L, tostring_enabled ? 1 : 0);
-  lua_call(L, 1, 0);
   lua_getfield(L, 3, "register_mt");
   /* Stack: [cgencode=1, modules=2, luaobject=3, bool=4, register_mt=5] */
   lua_newtable(L); /* dedup=6 */
