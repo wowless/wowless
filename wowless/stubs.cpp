@@ -139,8 +139,8 @@ int wowless_load_luaobject_stubs(lua_State *L) {
   lua_newtable(L); /* result=7 */
   for (const wowless_luaobject_type_entry *t = spec; t->type_name; t++) {
     load_entries_dedup(L, t->methods, 6); /* pushes methods=8 */
-    wowless_luaobject_register_mt(L, 5, t->type_id, 8,
-                                  tostring_enabled ? t->type_name : nullptr);
+    wowless_luaobject_make_mt(L, 8, tostring_enabled ? t->type_name : nullptr);
+    lua_rawseti(L, 5, t->type_id);
     lua_pop(L, 1); /* pop methods=8 */
     lua_newtable(L);
     lua_pushinteger(L, t->type_id);

@@ -78,8 +78,8 @@ static int luaobject_tostring(lua_State *L) {
   return 1;
 }
 
-void wowless_luaobject_register_mt(lua_State *L, int mt_idx, int type_id,
-                                   int methods_idx, const char *typename_str) {
+void wowless_luaobject_make_mt(lua_State *L, int methods_idx,
+                               const char *typename_str) {
   lua_newtable(L); /* metatable */
   lua_pushcfunction(L, luaobject_eq);
   lua_setfield(L, -2, "__eq");
@@ -96,7 +96,6 @@ void wowless_luaobject_register_mt(lua_State *L, int mt_idx, int type_id,
     lua_pushcclosure(L, luaobject_tostring, 1);
     lua_setfield(L, -2, "__tostring");
   }
-  lua_rawseti(L, mt_idx, type_id);
 }
 
 /* upvalue 1: metatables (type_id -> metatable) */
