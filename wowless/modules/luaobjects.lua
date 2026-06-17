@@ -36,12 +36,6 @@ return function(cstubs, datalua)
     end
   end
 
-  local function CreateProxy(obj)
-    assert(type(obj) == 'table', 'not a luaobject env')
-    local typeid = assert(obj[1], 'not a luaobject env')
-    return luaobject.new(typeid, obj)
-  end
-
   local function IsType(typename, obj)
     return type(obj) == 'table' and obj[1] == typeids[typename]
   end
@@ -53,7 +47,7 @@ return function(cstubs, datalua)
   return {
     Coerce = Coerce,
     Create = Create,
-    CreateProxy = CreateProxy,
+    CreateProxy = luaobject.createproxy,
     IsType = IsType,
     LoadTypes = LoadTypes,
     UserData = UserData,

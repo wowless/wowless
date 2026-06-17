@@ -103,9 +103,11 @@ void wowless_luaobject_make_mt(lua_State *L, int methods_idx,
 }
 
 /* upvalue 1: metatables (type_id -> metatable) */
-static int wowless_luaobject_new(lua_State *L) {
-  int type_id = luaL_checkinteger(L, 1);
-  luaL_checktype(L, 2, LUA_TTABLE); /* env */
+static int luaobject_createproxy(lua_State *L) {
+  luaL_checktype(L, 1, LUA_TTABLE);
+  lua_rawgeti(L, 1, 1);
+  int type_id = luaL_checkinteger(L, -1);
+  lua_pop(L, 1);
   struct wowless_luaobject_data *ud =
       (struct wowless_luaobject_data *)lua_newuserdata(
           L, sizeof(struct wowless_luaobject_data));
@@ -113,7 +115,7 @@ static int wowless_luaobject_new(lua_State *L) {
   ud->type_id = type_id;
   lua_rawgeti(L, lua_upvalueindex(1), type_id);
   lua_setmetatable(L, -2);
-  lua_pushvalue(L, 2);
+  lua_pushvalue(L, 1);
   lua_setfenv(L, -2);
   return 1;
 }
@@ -122,13 +124,10 @@ int luaopen_wowless_luaobject(lua_State *L) {
   lua_newtable(L); /* module */
   lua_pushcfunction(L, wowless_luaobject_getenv);
   lua_setfield(L, -2, "getenv");
-
-  lua_newtable(L); /* metatables: type_id -> metatable */
+  lua_newtable(L); /* metatables: type_id -> metatable, populated by stubs */
   lua_pushvalue(L, -1);
   lua_setfield(L, -3, "metatables");
-
-  lua_pushcclosure(L, wowless_luaobject_new, 1);
-  lua_setfield(L, -2, "new");
-
+  lua_pushcclosure(L, luaobject_createproxy, 1);
+  lua_setfield(L, -2, "createproxy");
   return 1;
 }
