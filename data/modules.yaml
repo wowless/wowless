@@ -168,15 +168,6 @@ time:
     log:
     luaobjects:
     security:
-typecheck:
-  deps:
-    addons:
-    datalua:
-    env:
-    luaobjects:
-    uiobjects:
-    uiobjecttypes:
-    units:
 uiobjectloader:
   deps:
     cstubs:

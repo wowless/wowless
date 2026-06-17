@@ -879,7 +879,6 @@ lua2c(
   wowless.modules.talents=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/talents.lua
   wowless.modules.templates=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/templates.lua
   wowless.modules.time=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/time.lua
-  wowless.modules.typecheck=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/typecheck.lua
   wowless.modules.uiobjectloader=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/uiobjectloader.lua
   wowless.modules.uiobjects=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/uiobjects.lua
   wowless.modules.uiobjecttypes=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/uiobjecttypes.lua
@@ -1085,7 +1084,6 @@ set(specs
     spec/wowless/blp_spec.lua
     spec/wowless/bubblewrap_spec.lua
     spec/wowless/hlist_spec.lua
-    spec/wowless/modules/typecheck_spec.lua
     spec/wowless/sqlite_spec.lua
     spec/wowless/toc_spec.lua
     spec/wowless/util_spec.lua)

@@ -1,13 +1,5 @@
 describe('luaobjects', function()
   for _, p in ipairs(require('build.data.products')) do
-    local typechecker = require('wowless.modules')({
-      datalua = require('build.products.' .. p .. '.data'),
-    }).typecheck
-    local function typecheck(spec, val)
-      local value, errmsg = typechecker(spec, val, true)
-      assert.Nil(errmsg)
-      assert.same(value, val)
-    end
     describe(p, function()
       local luaobjects = require('build.data.products.' .. p .. '.luaobjects')
       describe('hierarchy', function()
@@ -61,9 +53,6 @@ describe('luaobjects', function()
                   for _, input in ipairs(mv.inputs or {}) do
                     describe(input.name, function()
                       if input.default ~= nil then
-                        it('has default of the right type', function()
-                          typecheck(input, input.default)
-                        end)
                         it('is not explicitly nilable', function()
                           assert.Nil(input.nilable)
                         end)

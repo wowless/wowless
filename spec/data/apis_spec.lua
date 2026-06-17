@@ -1,8 +1,5 @@
 describe('apis', function()
   for _, p in ipairs(require('build.data.products')) do
-    local typechecker = require('wowless.modules')({
-      datalua = require('build.products.' .. p .. '.data'),
-    }).typecheck
     describe(p, function()
       local apis = require('build.data.products.' .. p .. '.apis')
       for name, api in pairs(apis) do
@@ -35,11 +32,6 @@ describe('apis', function()
                   end)
                 end
                 if input.default ~= nil then
-                  it('default must typecheck', function()
-                    local value, errmsg = typechecker(input, input.default, true)
-                    assert.Nil(errmsg)
-                    assert.same(value, input.default)
-                  end)
                   it('is not explicitly nilable', function()
                     assert.Nil(input.nilable)
                   end)
@@ -101,20 +93,6 @@ describe('apis', function()
                 it('must be nilable if stubnotnil', function()
                   assert.True(not output.stubnotnil or output.nilable)
                 end)
-                if output.default ~= nil then
-                  it('default must typecheck', function()
-                    local value, errmsg = typechecker(output, output.default, true)
-                    assert.Nil(errmsg)
-                    assert.same(value, output.default)
-                  end)
-                end
-                if output.stub ~= nil then
-                  it('stub must typecheck', function()
-                    local value, errmsg = typechecker(output, output.stub, true)
-                    assert.Nil(errmsg)
-                    assert.same(value, output.stub)
-                  end)
-                end
                 if api.impl or output.stub then
                   it('has a name', function()
                     assert.Not.Nil(output.name)

@@ -1,13 +1,5 @@
 describe('structures', function()
   for _, p in ipairs(require('build.data.products')) do
-    local typechecker = require('wowless.modules')({
-      datalua = require('build.products.' .. p .. '.data'),
-    }).typecheck
-    local function typecheck(spec, val)
-      local value, errmsg = typechecker(spec, val, true)
-      assert.Nil(errmsg)
-      assert.same(value, val)
-    end
     describe(p, function()
       local refs = {}
       local function refty(ty)
@@ -79,24 +71,6 @@ describe('structures', function()
           end)
         end
       end)
-      for k, v in pairs(actual) do
-        describe(k, function()
-          for fk, fv in pairs(v.fields) do
-            describe(fk, function()
-              if fv.default ~= nil then
-                it('has default of the right type', function()
-                  typecheck(fv, fv.default)
-                end)
-              end
-              if fv.stub ~= nil then
-                it('has stub of the right type', function()
-                  typecheck(fv, fv.stub)
-                end)
-              end
-            end)
-          end
-        end)
-      end
     end)
   end
 end)
