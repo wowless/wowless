@@ -127,22 +127,36 @@ static void load_entries_dedup(lua_State *L, const struct wowless_stub_entry *e,
 int wowless_load_luaobject_stubs(lua_State *L) {
   const auto *spec = static_cast<const wowless_luaobject_type_entry *>(
       lua_touserdata(L, lua_upvalueindex(1)));
+  /* arg 1: modules, arg 2: luaobject module, arg 3: tostring_enabled */
+  bool tostring_enabled = lua_toboolean(L, 3);
   lua_getfield(L, 1, "cgencode");
   lua_insert(L, 1);
-  /* Stack: [cgencode=1, modules=2] */
-  lua_newtable(L); /* dedup: ptr -> closure */
-  lua_newtable(L); /* result */
-  /* Stack: [cgencode=1, modules=2, dedup=3, result=4] */
+  /* Stack: [cgencode=1, modules=2, luaobject=3, bool=4] */
+  lua_getfield(L, 3, "makemt");
+  lua_pushboolean(L, tostring_enabled ? 1 : 0);
+  lua_call(L, 1, 0);
+  lua_getfield(L, 3, "register_mt");
+  /* Stack: [cgencode=1, modules=2, luaobject=3, bool=4, register_mt=5] */
+  lua_newtable(L); /* dedup=6 */
+  lua_newtable(L); /* result=7 */
   for (const wowless_luaobject_type_entry *t = spec; t->type_name; t++) {
+    load_entries_dedup(L, t->methods, 6); /* pushes methods=8 */
+    lua_pushvalue(L, 5);                 /* register_mt */
+    lua_pushinteger(L, t->type_id);
+    lua_pushvalue(L, 8); /* methods */
+    if (tostring_enabled) {
+      lua_pushstring(L, t->type_name);
+    } else {
+      lua_pushnil(L);
+    }
+    lua_call(L, 3, 0);
+    lua_pop(L, 1); /* pop methods=8 */
     lua_newtable(L);
     lua_pushinteger(L, t->type_id);
     lua_setfield(L, -2, "typeid");
-    load_entries_dedup(L, t->methods, 3);
-    /* Stack: [..., type_info, sandbox_methods] */
-    lua_setfield(L, -2, "methods");
-    lua_setfield(L, 4, t->type_name);
+    lua_setfield(L, 7, t->type_name);
   }
-  lua_remove(L, 3); /* remove dedup table */
+  lua_remove(L, 6); /* remove dedup */
   return 1;
 }
 
