@@ -528,6 +528,9 @@ foreach(product ${products})
   target_sources(
     datalua_${product}
     PRIVATE ${CMAKE_CURRENT_BINARY_DIR}/generated/${product}_stubs.cpp)
+  if(MSVC)
+    target_compile_options(datalua_${product} PRIVATE /Gy-)
+  endif()
   add_dependencies(datalua_${product} datalua_${product}_lua)
   list(APPEND dataluas datalua_${product})
 endforeach()

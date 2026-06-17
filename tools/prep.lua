@@ -1408,20 +1408,19 @@ for loname in sorted(luaobjectdata) do
 end
 emit('')
 
--- Per-type luaobject method entry arrays; only direct (non-inherited) methods are
--- listed per type. Inherited methods are picked up via luaobjects.lua inheritance.
--- Virtual types are also included so their stubs can be shared across subtypes.
+-- Per-type luaobject method entry arrays; all (including inherited) methods are
+-- pre-flattened at prep time via luaobject_flat, referencing the source type's stub.
+-- wowless_load_luaobject_stubs deduplicates closures by C function pointer so that
+-- inherited methods remain the same Lua function object across sibling types.
 for loname in sorted(luaobjectdata) do
-  local lodata = luaobjectdata[loname]
   emit('static const wowless_stub_entry lo_methods_%s[] = {', safename(loname))
-  if not lodata.virtual and lodata.impl then
-    for mname in sorted(lodata.methods or {}) do
-      local sn = string.format('lomethod_%s_%s', safename(loname), safename(mname))
+  for mname in sorted(luaobject_flat[loname] or {}) do
+    local source = luaobject_source[loname][mname]
+    local source_data = luaobjectdata[source]
+    local sn = string.format('lomethod_%s_%s', safename(source), safename(mname))
+    if not source_data.virtual and source_data.impl then
       emit('  {%s, implstub_%s, 0, &impldata_%s},', cstring(mname), sn, sn)
-    end
-  else
-    for mname in sorted(lodata.methods or {}) do
-      local sn = string.format('lomethod_%s_%s', safename(loname), safename(mname))
+    else
       emit('  {%s, stub_%s, 0, nullptr},', cstring(mname), sn)
     end
   end
@@ -1430,7 +1429,7 @@ for loname in sorted(luaobjectdata) do
   emit('')
 end
 
--- Luaobject type registry (all types including virtual, for method stub sharing)
+-- Luaobject type registry (all types including virtual).
 emit('static const wowless_luaobject_type_entry lo_types[] = {')
 for loname in sorted(luaobjectdata) do
   emit('  {%s, %d, lo_methods_%s},', cstring(loname), luaobject_typeids[loname], safename(loname))
