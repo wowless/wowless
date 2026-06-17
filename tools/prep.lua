@@ -905,11 +905,11 @@ for loname in sorted(luaobjectdata) do
   emit('}')
   emit('')
   emit('static void wowless_imploutputluaobject_%s(lua_State *L, int idx) {', safename(loname))
-  emit('  wowless_imploutputluaobject(L, idx, %d, %s);', tid, cstring(loname))
+  emit('  wowless_imploutputluaobject(L, idx, %d);', tid)
   emit('}')
   emit('')
   emit('static void wowless_imploutputnilableluaobject_%s(lua_State *L, int idx) {', safename(loname))
-  emit('  wowless_imploutputnilableluaobject(L, idx, %d, %s);', tid, cstring(loname))
+  emit('  wowless_imploutputnilableluaobject(L, idx, %d);', tid)
   emit('}')
   emit('')
 end

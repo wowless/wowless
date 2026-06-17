@@ -848,8 +848,7 @@ static inline void wowless_imploutputnilabletable(lua_State *L, int idx) {
 }
 
 static inline void wowless_imploutputluaobject(lua_State *L, int idx,
-                                               int typeid_val,
-                                               std::string_view tname) {
+                                               int typeid_val) {
   idx = lua_absindex(L, idx);
   if (lua_type(L, idx) == LUA_TTABLE) {
     lua_rawgeti(L, idx, 1);
@@ -858,9 +857,8 @@ static inline void wowless_imploutputluaobject(lua_State *L, int idx,
     lua_pop(L, 1);
     if (ok) {
       lua_getfield(L, lua_upvalueindex(1), "CreateProxy");
-      lua_pushlstring(L, tname.data(), tname.size());
       lua_pushvalue(L, idx);
-      lua_call(L, 2, 1);
+      lua_call(L, 1, 1);
       lua_replace(L, idx);
       return;
     }
@@ -869,10 +867,9 @@ static inline void wowless_imploutputluaobject(lua_State *L, int idx,
 }
 
 static inline void wowless_imploutputnilableluaobject(lua_State *L, int idx,
-                                                      int typeid_val,
-                                                      std::string_view tname) {
+                                                      int typeid_val) {
   if (!lua_isnoneornil(L, idx)) {
-    wowless_imploutputluaobject(L, idx, typeid_val, tname);
+    wowless_imploutputluaobject(L, idx, typeid_val);
   }
 }
 

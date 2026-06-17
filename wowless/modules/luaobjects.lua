@@ -68,9 +68,9 @@ return function(cstubs, datalua)
     end
   end
 
-  local function CreateProxy(typename, obj)
+  local function CreateProxy(obj)
     assert(type(obj) == 'table', 'not a luaobject env')
-    local typeid = assert(typeids[typename], typename)
+    local typeid = assert(obj[1], 'not a luaobject env')
     local np = luaobject.new(typeid, shared_mt, obj)
     return np
   end

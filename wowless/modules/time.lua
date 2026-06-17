@@ -28,7 +28,7 @@ return function(log, luaobjects, security)
       local obj = rec.callback
       log(2, 'running timer %.2f %s', timer.pri, tostring(obj))
       if not obj.cancelled and rec.count < rec.iterations then
-        security.CallSandbox(obj.callback, luaobjects.CreateProxy('LuaFunctionContainer', obj))
+        security.CallSandbox(obj.callback, luaobjects.CreateProxy(obj))
         rec.count = rec.count + 1
         addTimer(rec.seconds, rec)
       end
