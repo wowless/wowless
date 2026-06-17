@@ -3,45 +3,13 @@ local luaobject = require('wowless.luaobject')
 return function(cstubs, datalua)
   local config = datalua.config.modules and datalua.config.modules.luaobjects or {}
   local typeids = {}
-  local methods_by_typeid = {}
-  local typename_by_typeid = {}
   local impltypes = {}
 
-  local shared_mt
-  shared_mt = {
-    __eq = function(u1, u2)
-      return luaobject.getenv(u1) == luaobject.getenv(u2)
-    end,
-    __index = function(u, key)
-      local methods = methods_by_typeid[luaobject.gettypeid(u)]
-      return methods[key] or luaobject.getenv(u).table[key]
-    end,
-    __metatable = false,
-    __newindex = function(u, key, value)
-      local methods = methods_by_typeid[luaobject.gettypeid(u)]
-      if methods[key] or shared_mt[key] ~= nil then
-        error('Attempted to assign to read-only key ' .. key)
-      end
-      luaobject.getenv(u).table[key] = value
-    end,
-    __tostring = config.tostring_metamethod and function(u)
-      local k = typename_by_typeid[luaobject.gettypeid(u)]
-      return k .. ': 0x' .. tostring(luaobject.getenv(u)):gsub('^%S+ 0x?0*', ''):lower()
-    end or nil,
-  }
-
   local function LoadTypes(modules)
-    local type_stubs = cstubs.loadluaobjects(modules)
-
+    local type_stubs = cstubs.loadluaobjects(modules, luaobject, config.tostring_metamethod)
     for k, ts in pairs(type_stubs) do
       typeids[k] = ts.typeid
-      local v = datalua.luaobjects[k]
-      if not v.virtual then
-        methods_by_typeid[ts.typeid] = ts.methods
-        typename_by_typeid[ts.typeid] = k
-      end
     end
-
     for k, v in pairs(datalua.luaobjects) do
       if v.impl and not v.virtual then
         impltypes[k] = modules[v.impl]
@@ -71,8 +39,7 @@ return function(cstubs, datalua)
   local function CreateProxy(obj)
     assert(type(obj) == 'table', 'not a luaobject env')
     local typeid = assert(obj[1], 'not a luaobject env')
-    local np = luaobject.new(typeid, shared_mt, obj)
-    return np
+    return luaobject.new(typeid, obj)
   end
 
   local function IsType(typename, obj)

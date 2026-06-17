@@ -29,4 +29,7 @@ static inline bool wowless_isluaobject(lua_State *L, int idx, int type_id) {
   return ud && ud->type_id == type_id;
 }
 
+void wowless_luaobject_make_mt(lua_State *L, int methods_idx,
+                               const char *typename_str);
+
 #endif /* WOWLESS_LUAOBJECT_H */
