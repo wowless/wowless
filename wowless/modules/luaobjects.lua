@@ -3,8 +3,32 @@ local luaobject = require('wowless.luaobject')
 return function(cstubs, datalua)
   local config = datalua.config.modules and datalua.config.modules.luaobjects or {}
   local typeids = {}
-  local metatables = {}
+  local methods_by_typeid = {}
+  local typename_by_typeid = {}
   local impltypes = {}
+
+  local shared_mt
+  shared_mt = {
+    __eq = function(u1, u2)
+      return luaobject.getenv(u1) == luaobject.getenv(u2)
+    end,
+    __index = function(u, key)
+      local methods = methods_by_typeid[luaobject.gettypeid(u)]
+      return methods[key] or luaobject.getenv(u).table[key]
+    end,
+    __metatable = false,
+    __newindex = function(u, key, value)
+      local methods = methods_by_typeid[luaobject.gettypeid(u)]
+      if methods[key] or shared_mt[key] ~= nil then
+        error('Attempted to assign to read-only key ' .. key)
+      end
+      luaobject.getenv(u).table[key] = value
+    end,
+    __tostring = config.tostring_metamethod and function(u)
+      local k = typename_by_typeid[luaobject.gettypeid(u)]
+      return k .. ': 0x' .. tostring(luaobject.getenv(u)):gsub('^%S+ 0x?0*', ''):lower()
+    end or nil,
+  }
 
   local function LoadTypes(modules)
     local type_stubs = cstubs.loadluaobjects(modules)
@@ -13,27 +37,8 @@ return function(cstubs, datalua)
       typeids[k] = ts.typeid
       local v = datalua.luaobjects[k]
       if not v.virtual then
-        local methods = ts.methods
-        local mt
-        mt = {
-          __eq = function(u1, u2)
-            return luaobject.getenv(u1) == luaobject.getenv(u2)
-          end,
-          __index = function(u, key)
-            return methods[key] or luaobject.getenv(u).table[key]
-          end,
-          __metatable = false,
-          __newindex = function(u, key, value)
-            if methods[key] or mt[key] ~= nil then
-              error('Attempted to assign to read-only key ' .. key)
-            end
-            luaobject.getenv(u).table[key] = value
-          end,
-          __tostring = config.tostring_metamethod and function(u)
-            return k .. ': 0x' .. tostring(luaobject.getenv(u)):gsub('^%S+ 0x?0*', ''):lower()
-          end or nil,
-        }
-        metatables[k] = mt
+        methods_by_typeid[ts.typeid] = ts.methods
+        typename_by_typeid[ts.typeid] = k
       end
     end
 
@@ -66,7 +71,7 @@ return function(cstubs, datalua)
   local function CreateProxy(typename, obj)
     assert(type(obj) == 'table', 'not a luaobject env')
     local typeid = assert(typeids[typename], typename)
-    local np = luaobject.new(typeid, metatables[typename], obj)
+    local np = luaobject.new(typeid, shared_mt, obj)
     return np
   end
 
