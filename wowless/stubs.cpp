@@ -3,6 +3,7 @@ extern "C" {
 
 #include "lauxlib.h"
 #include "wowless/bubblewrap.h"
+#include "wowless/luaobject.h"
 }
 
 int wowless_impl_stub(lua_State *L) {
@@ -132,21 +133,14 @@ int wowless_load_luaobject_stubs(lua_State *L) {
   lua_getfield(L, 1, "cgencode");
   lua_insert(L, 1);
   /* Stack: [cgencode=1, modules=2, luaobject=3, bool=4] */
-  lua_getfield(L, 3, "register_mt");
-  /* Stack: [cgencode=1, modules=2, luaobject=3, bool=4, register_mt=5] */
+  lua_getfield(L, 3, "metatables");
+  /* Stack: [cgencode=1, modules=2, luaobject=3, bool=4, metatables=5] */
   lua_newtable(L); /* dedup=6 */
   lua_newtable(L); /* result=7 */
   for (const wowless_luaobject_type_entry *t = spec; t->type_name; t++) {
     load_entries_dedup(L, t->methods, 6); /* pushes methods=8 */
-    lua_pushvalue(L, 5);                 /* register_mt */
-    lua_pushinteger(L, t->type_id);
-    lua_pushvalue(L, 8); /* methods */
-    if (tostring_enabled) {
-      lua_pushstring(L, t->type_name);
-    } else {
-      lua_pushnil(L);
-    }
-    lua_call(L, 3, 0);
+    wowless_luaobject_register_mt(L, 5, t->type_id, 8,
+                                  tostring_enabled ? t->type_name : nullptr);
     lua_pop(L, 1); /* pop methods=8 */
     lua_newtable(L);
     lua_pushinteger(L, t->type_id);

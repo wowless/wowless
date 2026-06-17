@@ -78,31 +78,28 @@ static int luaobject_tostring(lua_State *L) {
   return 1;
 }
 
-/* upvalue 1: cache (type_id -> metatable) */
-static int luaobject_register_mt(lua_State *L) {
-  int type_id = luaL_checkinteger(L, 1);
-  luaL_checktype(L, 2, LUA_TTABLE); /* methods */
-  lua_newtable(L);                  /* metatable */
+void wowless_luaobject_register_mt(lua_State *L, int mt_idx, int type_id,
+                                   int methods_idx, const char *typename_str) {
+  lua_newtable(L); /* metatable */
   lua_pushcfunction(L, luaobject_eq);
   lua_setfield(L, -2, "__eq");
-  lua_pushvalue(L, 2);
+  lua_pushvalue(L, methods_idx);
   lua_pushcclosure(L, luaobject_index, 1);
   lua_setfield(L, -2, "__index");
   lua_pushboolean(L, 0);
   lua_setfield(L, -2, "__metatable");
-  lua_pushvalue(L, 2);
+  lua_pushvalue(L, methods_idx);
   lua_pushcclosure(L, luaobject_newindex, 1);
   lua_setfield(L, -2, "__newindex");
-  if (lua_type(L, 3) == LUA_TSTRING) {
-    lua_pushvalue(L, 3);
+  if (typename_str) {
+    lua_pushstring(L, typename_str);
     lua_pushcclosure(L, luaobject_tostring, 1);
     lua_setfield(L, -2, "__tostring");
   }
-  lua_rawseti(L, lua_upvalueindex(1), type_id);
-  return 0;
+  lua_rawseti(L, mt_idx, type_id);
 }
 
-/* upvalue 1: cache (type_id -> metatable) */
+/* upvalue 1: metatables (type_id -> metatable) */
 static int wowless_luaobject_new(lua_State *L) {
   int type_id = luaL_checkinteger(L, 1);
   luaL_checktype(L, 2, LUA_TTABLE); /* env */
@@ -123,16 +120,12 @@ int luaopen_wowless_luaobject(lua_State *L) {
   lua_pushcfunction(L, wowless_luaobject_getenv);
   lua_setfield(L, -2, "getenv");
 
-  lua_newtable(L); /* cache: type_id -> metatable */
-
+  lua_newtable(L); /* metatables: type_id -> metatable */
   lua_pushvalue(L, -1);
-  lua_pushcclosure(L, luaobject_register_mt, 1);
-  lua_setfield(L, -3, "register_mt");
+  lua_setfield(L, -3, "metatables");
 
-  lua_pushvalue(L, -1);
   lua_pushcclosure(L, wowless_luaobject_new, 1);
-  lua_setfield(L, -3, "new");
+  lua_setfield(L, -2, "new");
 
-  lua_pop(L, 1); /* pop cache */
   return 1;
 }
