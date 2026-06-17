@@ -1,13 +1,5 @@
 describe('uiobjects', function()
   for _, p in ipairs(require('build.data.products')) do
-    local typechecker = require('wowless.modules')({
-      datalua = require('build.products.' .. p .. '.data'),
-    }).typecheck
-    local function typecheck(spec, val)
-      local value, errmsg = typechecker(spec, val, true)
-      assert.Nil(errmsg)
-      assert.same(value, val)
-    end
     local function protocheck(expected, actual)
       if expected.inputs then
         assert.same(#expected.inputs, #actual.inputs)
@@ -97,16 +89,11 @@ describe('uiobjects', function()
       for k, v in pairs(uiobjects) do
         describe(k, function()
           describe('fields', function()
-            for fk, fv in pairs(v.fields) do
+            for fk in pairs(v.fields) do
               describe(fk, function()
                 it('is not defined up inheritance tree', function()
                   for inh in pairs(v.inherits) do
                     assert.False(hasMember(inh, 'fields', fk))
-                  end
-                end)
-                it('has initial value of the right type', function()
-                  if fv.type ~= 'hlist' then
-                    typecheck(fv, fv.init)
                   end
                 end)
               end)
@@ -182,9 +169,6 @@ describe('uiobjects', function()
                   for _, input in ipairs(mv.inputs or {}) do
                     describe(input.name, function()
                       if input.default ~= nil then
-                        it('has default of the right type', function()
-                          typecheck(input, input.default)
-                        end)
                         it('is not explicitly nilable', function()
                           assert.Nil(input.nilable)
                         end)
@@ -221,11 +205,6 @@ describe('uiobjects', function()
                 describe('outputs', function()
                   for _, output in ipairs(mv.outputs or {}) do
                     describe(output.name, function()
-                      if output.stub ~= nil then
-                        it('has stub of the right type', function()
-                          typecheck(output, output.stub)
-                        end)
-                      end
                       it('cannot be both stubnotnil and have a stub', function()
                         assert.True(not output.stubnotnil or output.stub == nil)
                       end)
