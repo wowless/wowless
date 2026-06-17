@@ -1,5 +1,7 @@
 #include "wowless/luaobject.h"
 
+#include <stdint.h>
+#include <stdio.h>
 #include <string.h>
 
 #include "lauxlib.h"
@@ -73,8 +75,10 @@ static int luaobject_newindex(lua_State *L) {
 /* upvalue 1: typename string */
 static int luaobject_tostring(lua_State *L) {
   lua_getfenv(L, 1);
-  lua_pushfstring(L, "%s: %p", lua_tostring(L, lua_upvalueindex(1)),
-                  lua_topointer(L, -1));
+  char buf[64];
+  snprintf(buf, sizeof(buf), "%s: 0x%llx", lua_tostring(L, lua_upvalueindex(1)),
+           (unsigned long long)(uintptr_t)lua_topointer(L, -1));
+  lua_pushstring(L, buf);
   return 1;
 }
 
