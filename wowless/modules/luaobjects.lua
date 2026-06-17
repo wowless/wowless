@@ -36,20 +36,10 @@ return function(cstubs, datalua)
     end
   end
 
-  local function IsType(typename, obj)
-    return type(obj) == 'table' and obj[1] == typeids[typename]
-  end
-
-  local function UserData(p)
-    return luaobject.getenv(p)
-  end
-
   return {
     Coerce = Coerce,
     Create = Create,
     CreateProxy = luaobject.createproxy,
-    IsType = IsType,
     LoadTypes = LoadTypes,
-    UserData = UserData,
   }
 end

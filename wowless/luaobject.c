@@ -13,15 +13,6 @@
  */
 const char wowless_luaobject_marker = 0;
 
-static int wowless_luaobject_getenv(lua_State *L) {
-  const struct wowless_luaobject_data *ud = wowless_toluaobject(L, 1);
-  if (ud) {
-    lua_getfenv(L, 1);
-    return 1;
-  }
-  return 0;
-}
-
 static int luaobject_eq(lua_State *L) {
   lua_getfenv(L, 1);
   lua_getfenv(L, 2);
@@ -122,8 +113,6 @@ static int luaobject_createproxy(lua_State *L) {
 
 int luaopen_wowless_luaobject(lua_State *L) {
   lua_newtable(L); /* module */
-  lua_pushcfunction(L, wowless_luaobject_getenv);
-  lua_setfield(L, -2, "getenv");
   lua_newtable(L); /* metatables: type_id -> metatable, populated by stubs */
   lua_pushvalue(L, -1);
   lua_setfield(L, -3, "metatables");
