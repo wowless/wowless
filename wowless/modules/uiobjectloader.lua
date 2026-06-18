@@ -68,19 +68,12 @@ return function(cstubs, datalua, gencode)
           return orig()
         end
       end
-      local hostindex = {}
-      local sandboxindex = {}
-      for mname, _ in pairs(cfg.methods) do
-        local fname = name .. ':' .. mname
-        hostindex[mname] = uiobjecthostimpls[fname]
-        sandboxindex[mname] = uiobjectmethodstubs[fname]
-      end
       uiobjects[name] = {
         cfg = cfg,
         constructor = constructor,
-        hostindex = hostindex,
+        hostindex = assert(uiobjecthostimpls[name]),
         inherits = cfg.inherits,
-        sandboxindex = sandboxindex,
+        sandboxindex = assert(uiobjectmethodstubs[name]),
         scripts = cfg.scripts,
       }
     end

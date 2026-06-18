@@ -307,9 +307,7 @@ for k, v in pairs(uiobjectdata) do
     table.insert(constructor, ('%s=%s,'):format(fk, fv))
   end
   table.insert(constructor, '}end')
-  local methods = {}
   for mk, mv in pairs(v.methods) do
-    methods[mk] = true
     eligible_uimethods[k .. ':' .. mk] = {
       k = k,
       mk = mk,
@@ -324,7 +322,6 @@ for k, v in pairs(uiobjectdata) do
   uiobjects[k] = {
     constructor = table.concat(constructor),
     inherits = v.inherits,
-    methods = methods,
     objectType = v.objectType,
     scripts = scripts,
     singleton = v.singleton,
@@ -1446,14 +1443,30 @@ for key, entry in sorted(eligible_uimethods) do
 end
 emit('')
 
--- UIObject method entry array
-emit('static const struct wowless_uiobject_method_entry uiobject_method_entries[] = {')
-for key, entry in sorted(eligible_uimethods) do
-  local k, mk = entry.k, entry.mk
-  local sn = 'uiobject_method_' .. safename(k) .. '_' .. safename(mk)
-  emit('  {%s, %s, &impldata_%s, %d},', cstring(key), sn, sn, entry.implimpl.delegate and 1 or 0)
+-- Per-type UIObject method arrays and type array
+local uimethod_by_type = {}
+for _, entry in sorted(eligible_uimethods) do
+  local k = entry.k
+  if not uimethod_by_type[k] then
+    uimethod_by_type[k] = {}
+  end
+  table.insert(uimethod_by_type[k], entry)
 end
-emit('  {nullptr, nullptr, nullptr, 0}')
+for k in sorted(uiobjects) do
+  emit('static const struct wowless_uiobject_method_entry uiobject_methods_%s[] = {', safename(k))
+  for _, entry in ipairs(uimethod_by_type[k] or {}) do
+    local mk = entry.mk
+    local sn = 'uiobject_method_' .. safename(k) .. '_' .. safename(mk)
+    emit('  {%s, %s, &impldata_%s, %d},', cstring(mk), sn, sn, entry.implimpl.delegate and 1 or 0)
+  end
+  emit('  {nullptr, nullptr, nullptr, 0}')
+  emit('};')
+end
+emit('static const struct wowless_uiobject_type_entry uiobject_type_entries[] = {')
+for k in sorted(uiobjects) do
+  emit('  {%s, uiobject_methods_%s},', cstring(k), safename(k))
+end
+emit('  {nullptr, nullptr}')
 emit('};')
 emit('')
 for k, e in sorted(eventcfg) do
@@ -1508,7 +1521,7 @@ emit('  lua_setfield(L, -2, "new");')
 emit('  lua_pushlightuserdata(L, static_cast<void *>(const_cast<wowless_luaobject_type_entry *>(lo_types)));')
 emit('  lua_pushcclosure(L, wowless_load_luaobject_stubs, 1);')
 emit('  lua_setfield(L, -2, "loadluaobjects");')
-emit('  lua_pushlightuserdata(L, (void *)uiobject_method_entries);')
+emit('  lua_pushlightuserdata(L, (void *)uiobject_type_entries);')
 emit('  lua_pushcclosure(L, wowless_load_uiobject_method_stubs, 1);')
 emit('  lua_setfield(L, -2, "loaduiobjectmethods");')
 emit('  lua_pushlightuserdata(L, (void *)eventcheck_reg);')

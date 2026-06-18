@@ -168,30 +168,36 @@ static int make_uiobject_impl_stub(lua_State *L) {
 }
 
 int wowless_load_uiobject_method_stubs(lua_State *L) {
-  const auto *spec = static_cast<const wowless_uiobject_method_entry *>(
+  const auto *spec = static_cast<const wowless_uiobject_type_entry *>(
       lua_touserdata(L, lua_upvalueindex(1)));
   /* arg 1 is modules */
   lua_getfield(L, 1, "cgencode");
   lua_insert(L, 1);
   /* Stack: [cgencode=1, modules=2] */
-  lua_newtable(L); /* sandbox factories */
-  lua_newtable(L); /* host Lua functions */
-  for (const auto *e = spec; e->key; e++) {
-    load_impl_data(L, e->host);
-    if (e->sandbox_delegates_to_host) {
-      lua_pushvalue(L, -1);        /* dup luafn for host table */
-      lua_setfield(L, -3, e->key); /* into host table */
-      lua_pushvalue(L, 1);         /* cgencode */
-      lua_insert(L, -2);           /* cgencode, luafn */
-      lua_pushlightuserdata(L, reinterpret_cast<void *>(e->func));
-      lua_pushcclosure(L, make_uiobject_impl_stub, 3);
-    } else {
-      lua_setfield(L, -2, e->key); /* into host table */
-      lua_pushlightuserdata(L, reinterpret_cast<void *>(e->func));
-      lua_pushvalue(L, 1); /* cgencode */
-      lua_pushcclosure(L, make_uiobject_method_stub, 2);
+  lua_newtable(L); /* sandbox result: [type][method] = factory */
+  lua_newtable(L); /* host result: [type][method] = fn */
+  for (const auto *t = spec; t->type; t++) {
+    lua_newtable(L); /* sandbox subtable at 5 */
+    lua_newtable(L); /* host subtable at 6 */
+    for (const auto *e = t->methods; e->method; e++) {
+      load_impl_data(L, e->host);
+      if (e->sandbox_delegates_to_host) {
+        lua_pushvalue(L, -1); /* dup luafn for host */
+        lua_setfield(L, 6, e->method);
+        lua_pushvalue(L, 1); /* cgencode */
+        lua_insert(L, -2);   /* cgencode, luafn */
+        lua_pushlightuserdata(L, reinterpret_cast<void *>(e->func));
+        lua_pushcclosure(L, make_uiobject_impl_stub, 3);
+      } else {
+        lua_setfield(L, 6, e->method);
+        lua_pushlightuserdata(L, reinterpret_cast<void *>(e->func));
+        lua_pushvalue(L, 1); /* cgencode */
+        lua_pushcclosure(L, make_uiobject_method_stub, 2);
+      }
+      lua_setfield(L, 5, e->method);
     }
-    lua_setfield(L, -3, e->key); /* into sandbox table */
+    lua_setfield(L, 4, t->type); /* host[type] = host subtable */
+    lua_setfield(L, 3, t->type); /* sandbox[type] = sandbox subtable */
   }
   return 2;
 }
