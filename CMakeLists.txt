@@ -24,14 +24,16 @@ elseif(HAVE_EH_MINUS)
   add_compile_options($<$<COMPILE_LANGUAGE:CXX>:/EH->)
 endif()
 
-set(CMAKE_C_VISIBILITY_PRESET hidden)
-set(CMAKE_CXX_VISIBILITY_PRESET hidden)
-set(CMAKE_VISIBILITY_INLINES_HIDDEN ON)
+if(NOT BUILD_SHARED_LIBS)
+  set(CMAKE_C_VISIBILITY_PRESET hidden)
+  set(CMAKE_CXX_VISIBILITY_PRESET hidden)
+  set(CMAKE_VISIBILITY_INLINES_HIDDEN ON)
+endif()
 
 set(elune_SOURCE_DIR vendor/elune)
 set(elune_BINARY_DIR ${CMAKE_BINARY_DIR}/_deps/elune-build)
 add_library(
-  elune STATIC
+  elune
   ${elune_SOURCE_DIR}/liblua/lapi.c
   ${elune_SOURCE_DIR}/liblua/lapi.c
   ${elune_SOURCE_DIR}/liblua/lauxlib.c
@@ -143,7 +145,7 @@ function(lua2c name)
     COMMAND bootstraplua ${CMAKE_CURRENT_SOURCE_DIR}/tools/lua2c.lua ${name}
             ${ARGN}
     DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/tools/lua2c.lua ${deps})
-  add_library(${name} STATIC ${name}.c tools/file2c.h tools/lua2c.h ${deps})
+  add_library(${name} ${name}.c tools/file2c.h tools/lua2c.h ${deps})
   target_include_directories(${name} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
   target_link_libraries(${name} PRIVATE elune ${preloads})
 endfunction()
@@ -320,8 +322,8 @@ lua2c(
   vstruct.io.z=${vstruct_SOURCE_DIR}/io/z.lua
   vstruct.lexer=${vstruct_SOURCE_DIR}/lexer.lua)
 
-add_library(luamain STATIC tools/luamain.c tools/luamain.h tools/lua2c.h
-                           tools/file2c.h)
+add_library(luamain tools/luamain.c tools/luamain.h tools/lua2c.h
+                    tools/file2c.h)
 target_include_directories(luamain PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 target_link_libraries(luamain PUBLIC elune)
 
@@ -570,8 +572,7 @@ endforeach()
 find_package(CURL REQUIRED)
 find_package(OpenSSL REQUIRED)
 
-add_library(tactless STATIC vendor/tactless/tactless.c
-                            vendor/tactless/tactless.h)
+add_library(tactless vendor/tactless/tactless.c vendor/tactless/tactless.h)
 target_include_directories(tactless PUBLIC vendor/tactless)
 target_link_libraries(tactless PRIVATE OpenSSL::Crypto CURL::libcurl ZLIB::ZLIB)
 
