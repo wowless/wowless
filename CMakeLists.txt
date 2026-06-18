@@ -872,7 +872,7 @@ lua2c(
   wowless.modules.points=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/points.lua
   wowless.modules.region=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/region.lua
   wowless.modules.scripts=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/scripts.lua
-  wowless.modules.security=c
+  wowless.modules.security=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/security.lua
   wowless.modules.sqlitedb=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/sqlitedb.lua
   wowless.modules.sqls=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/sqls.lua
   wowless.modules.statusbar=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/statusbar.lua
@@ -899,7 +899,6 @@ target_sources(
           wowless/ext.c
           wowless/luaobject.c
           wowless/modules/encodingutil.c
-          wowless/modules/security.c
           wowless/secure.c
           wowless/stubs.cpp
           wowless/uiobject.c)
