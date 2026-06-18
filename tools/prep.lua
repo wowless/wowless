@@ -1060,10 +1060,16 @@ local function stub_inputcheck(inp, idx)
   return dispatch(cinputtypes, inp.type)('stubcheck', nilable, idx) .. ';'
 end
 
-local function emit_implstub_body(name, v, fn)
-  local check_inputs = v.inputs ~= nil
+local function emit_implstub_body(name, v, fn, extra_first_input)
+  local check_inputs = v.inputs ~= nil or extra_first_input ~= nil
   local check_outputs = v.outputs ~= nil
   local inputs = v.inputs or {}
+  if extra_first_input ~= nil then
+    inputs = { extra_first_input }
+    for _, inp in ipairs(v.inputs or {}) do
+      table.insert(inputs, inp)
+    end
+  end
   local outputs = v.outputs or {}
   local outstride = v.outstride or 0
   local instride = v.instride or 0
@@ -1228,18 +1234,7 @@ for key, entry in sorted(eligible_uimethods) do
   if entry.implimpl.delegate then
     local implimpl = entry.implimpl
     local fn = implimpl.nobubblewrap and 'wowless_impl_stub_nobubblewrap' or 'wowless_impl_stub'
-    local inputs = { { type = { uiobject = k } } }
-    for _, inp in ipairs(mv.inputs or {}) do
-      table.insert(inputs, inp)
-    end
-    emit_implstub_body(key, {
-      inputs = inputs,
-      instride = mv.instride,
-      manualinputs = mv.manualinputs,
-      mayreturnnothing = mv.mayreturnnothing,
-      outputs = mv.outputs,
-      outstride = mv.outstride,
-    }, fn)
+    emit_implstub_body(key, mv, fn, { type = { uiobject = k } })
   else
     dispatch(uiobjectcimplmakers, mv.impl or 'none', mv, k, key)
   end
