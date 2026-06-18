@@ -299,7 +299,15 @@ local uiobjectimplmakers = {
     return dispatch(uiobjectimplimplmakers, uiobjectimpl[impl], impl)
   end,
 }
-local eligible_uimethods = {}
+local uimethodimpls = {}
+for k, v in pairs(uiobjectdata) do
+  local t = {}
+  for mk, mv in pairs(v.methods) do
+    t[mk] = { mv = mv, implimpl = dispatch(uiobjectimplmakers, mv.impl or 'none', mv, k) }
+  end
+  uimethodimpls[k] = t
+end
+
 local uiobjects = {}
 for k, v in pairs(uiobjectdata) do
   local constructor = { 'local gencode=...;return function()return{' }
@@ -307,14 +315,6 @@ for k, v in pairs(uiobjectdata) do
     table.insert(constructor, ('%s=%s,'):format(fk, fv))
   end
   table.insert(constructor, '}end')
-  for mk, mv in pairs(v.methods) do
-    eligible_uimethods[k .. ':' .. mk] = {
-      k = k,
-      mk = mk,
-      mv = mv,
-      implimpl = dispatch(uiobjectimplmakers, mv.impl or 'none', mv, k),
-    }
-  end
   local scripts = {}
   for sk in pairs(v.scripts or {}) do
     scripts[sk:lower()] = true
@@ -1225,21 +1225,23 @@ local uiobjectcimplmakers = {
     emit('  return 0;')
   end,
 }
-for key, entry in sorted(eligible_uimethods) do
-  local k, mk, mv = entry.k, entry.mk, entry.mv
-  emit('static int uiobject_method_%s_%s(lua_State *L) {', safename(k), safename(mk))
-  if mv.secureonly then
-    emit('  if (wowless_forbidden(L)) return 0;')
+for k, t in sorted(uimethodimpls) do
+  for mk, e in sorted(t) do
+    local key = k .. ':' .. mk
+    local mv, implimpl = e.mv, e.implimpl
+    emit('static int uiobject_method_%s_%s(lua_State *L) {', safename(k), safename(mk))
+    if mv.secureonly then
+      emit('  if (wowless_forbidden(L)) return 0;')
+    end
+    if implimpl.delegate then
+      local fn = implimpl.nobubblewrap and 'wowless_impl_stub_nobubblewrap' or 'wowless_impl_stub'
+      emit_implstub_body(key, mv, fn, { type = { uiobject = k } })
+    else
+      dispatch(uiobjectcimplmakers, mv.impl or 'none', mv, k, key)
+    end
+    emit('}')
+    emit('')
   end
-  if entry.implimpl.delegate then
-    local implimpl = entry.implimpl
-    local fn = implimpl.nobubblewrap and 'wowless_impl_stub_nobubblewrap' or 'wowless_impl_stub'
-    emit_implstub_body(key, mv, fn, { type = { uiobject = k } })
-  else
-    dispatch(uiobjectcimplmakers, mv.impl or 'none', mv, k, key)
-  end
-  emit('}')
-  emit('')
 end
 
 local ns_entries = {}
@@ -1430,35 +1432,27 @@ emit('  {nullptr, 0, nullptr}')
 emit('};')
 emit('')
 
-for key, entry in sorted(eligible_uimethods) do
-  local k, mk = entry.k, entry.mk
-  local implimpl = entry.implimpl
-  local sn = 'uiobject_method_' .. safename(k) .. '_' .. safename(mk)
-  emit_stub_entry_statics(sn, { impldata = implimpl, chunkname = implimpl.src or key })
+for k, t in sorted(uimethodimpls) do
+  for mk, e in sorted(t) do
+    local key = k .. ':' .. mk
+    local sn = 'uiobject_method_' .. safename(k) .. '_' .. safename(mk)
+    emit_stub_entry_statics(sn, { impldata = e.implimpl, chunkname = e.implimpl.src or key })
+  end
 end
 emit('')
 
 -- Per-type UIObject method arrays and type array
-local uimethod_by_type = {}
-for _, entry in sorted(eligible_uimethods) do
-  local k = entry.k
-  if not uimethod_by_type[k] then
-    uimethod_by_type[k] = {}
-  end
-  table.insert(uimethod_by_type[k], entry)
-end
-for k in sorted(uiobjects) do
+for k, t in sorted(uimethodimpls) do
   emit('static const struct wowless_uiobject_method_entry uiobject_methods_%s[] = {', safename(k))
-  for _, entry in ipairs(uimethod_by_type[k] or {}) do
-    local mk = entry.mk
+  for mk, e in sorted(t) do
     local sn = 'uiobject_method_' .. safename(k) .. '_' .. safename(mk)
-    emit('  {%s, %s, &impldata_%s, %d},', cstring(mk), sn, sn, entry.implimpl.delegate and 1 or 0)
+    emit('  {%s, %s, &impldata_%s, %d},', cstring(mk), sn, sn, e.implimpl.delegate and 1 or 0)
   end
   emit('  {nullptr, nullptr, nullptr, 0}')
   emit('};')
 end
 emit('static const struct wowless_uiobject_type_entry uiobject_type_entries[] = {')
-for k in sorted(uiobjects) do
+for k in sorted(uiobjectdata) do
   emit('  {%s, uiobject_methods_%s},', cstring(k), safename(k))
 end
 emit('  {nullptr, nullptr}')
