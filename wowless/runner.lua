@@ -134,9 +134,6 @@ local function run(cfg)
     SendEvent('PLAYER_ENTERING_WORLD', true, false)
     SendEvent('TRIAL_STATUS_UPDATE')
     SendEvent('DISPLAY_SIZE_CHANGED')
-    if genv.UIParent then -- Super duper hack to unblock 10.0 UIPanel code.
-      UserData(genv.UIParent):SetSize(system.GetScreenWidth(), system.GetScreenHeight())
-    end
     SendEvent('SPELLS_CHANGED')
     if datalua.events.COOLDOWN_VIEWER_DATA_LOADED then
       SendEvent('COOLDOWN_VIEWER_DATA_LOADED')
