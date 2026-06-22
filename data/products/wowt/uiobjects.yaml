@@ -9257,7 +9257,8 @@ UnitPositionFrame:
 VectorGraphics:
   fields:
   inherits:
-    TextureBase:
+    LayeredRegion:
+    ScriptObject:
   methods:
     ClearSVG:
       inputs:
