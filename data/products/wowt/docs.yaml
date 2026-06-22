@@ -152,6 +152,7 @@ lies:
     CharCreateAnimTurnType:
     CharSectionCondition:
     ConfigurationWarning:
+    RestrictionType:
     UnitTokenType:
     WarbandEventState:
     WarbandGroupFlags:

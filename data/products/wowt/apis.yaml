@@ -14473,6 +14473,12 @@ C_HousingDecor.GetMaxPetPlacementBudget:
   - name: maxBudget
     nilable: true
     type: number
+C_HousingDecor.GetMaxPlacementBudget:
+  inputs:
+  outputs:
+  - name: maxBudget
+    nilable: true
+    type: number
 C_HousingDecor.GetNumDecorPlaced:
   inputs:
   outputs:
@@ -14492,6 +14498,12 @@ C_HousingDecor.GetSelectedDecorInfo:
     type:
       structure: HousingDecorInstanceInfo
 C_HousingDecor.GetSpentPetPlacementBudget:
+  inputs:
+  outputs:
+  - name: totalCost
+    nilable: true
+    type: number
+C_HousingDecor.GetSpentPlacementBudget:
   inputs:
   outputs:
   - name: totalCost
@@ -14727,6 +14739,12 @@ C_HousingLayout.GetNumFloors:
   outputs:
   - name: numFloors
     type: number
+C_HousingLayout.GetRoomPlacementBudget:
+  inputs:
+  outputs:
+  - name: placementBudget
+    nilable: true
+    type: number
 C_HousingLayout.GetRoomPlayerIsIn:
   inputs:
   mayreturnnothing: true
@@ -14757,6 +14775,12 @@ C_HousingLayout.GetSelectedStairwellRoomCount:
   inputs:
   outputs:
   - name: stairwellRoomCount
+    type: number
+C_HousingLayout.GetSpentPlacementBudget:
+  inputs:
+  outputs:
+  - name: spentPlacementBudget
+    nilable: true
     type: number
 C_HousingLayout.GetViewedFloor:
   inputs:
