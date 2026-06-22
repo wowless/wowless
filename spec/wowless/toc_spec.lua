@@ -127,7 +127,7 @@ describe('wowless.toc', function()
     it('handles multiple filters', function()
       local line = 'aaa [AllowLoadGameType standard] [AllowLoadEnvironment Global]'
       local files = parse('Standard', line).files
-      assert.same({ { name = 'aaa' } }, files)
+      assert.same({ { AllowLoadEnvironment = 'global', name = 'aaa' } }, files)
     end)
   end)
   describe('suffixes', function()
