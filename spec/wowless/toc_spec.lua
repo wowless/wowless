@@ -24,7 +24,7 @@ describe('wowless.toc', function()
           }
           local toc = parse(gametype, table.concat(lines, '\n'))
           assert.same({ Key = 'Value' }, toc.attrs)
-          assert.same({ 'aaa', 'bbb', 'ccc' }, toc.files)
+          assert.same({ { name = 'aaa' }, { name = 'bbb' }, { name = 'ccc' } }, toc.files)
         end)
         it('handles SavedVariables field', function()
           local lines = {
@@ -95,7 +95,7 @@ describe('wowless.toc', function()
           }
           local toc = parse(gametype, table.concat(lines, '\n'))
           assert.same({ ['A' .. family .. 'Key'] = 'B' .. family .. 'Value' .. family }, toc.attrs)
-          assert.same({ 'a' .. family .. 'b' }, toc.files)
+          assert.same({ { name = 'a' .. family .. 'b' } }, toc.files)
         end)
         it('does AllowLoad filtering', function()
           local lines = {
@@ -103,7 +103,7 @@ describe('wowless.toc', function()
             'alglue [AllowLoad Glue]',
           }
           local files = parse(gametype, table.concat(lines, '\n')).files
-          assert.same({ 'algame' }, files)
+          assert.same({ { name = 'algame' } }, files)
         end)
         it('does AllowLoadGameType filtering', function()
           local lines = {
@@ -115,10 +115,10 @@ describe('wowless.toc', function()
           }
           local files = parse(gametype, table.concat(lines, '\n')).files
           local expected = {
-            Mists = { 'ccc', 'ddd' },
-            Standard = { 'aaa' },
-            TBC = { 'ccc', 'eee' },
-            Vanilla = { 'bbb', 'ccc' },
+            Mists = { { name = 'ccc' }, { name = 'ddd' } },
+            Standard = { { name = 'aaa' } },
+            TBC = { { name = 'ccc' }, { name = 'eee' } },
+            Vanilla = { { name = 'bbb' }, { name = 'ccc' } },
           }
           assert.same(assert(expected[gametype]), files)
         end)
@@ -127,7 +127,7 @@ describe('wowless.toc', function()
     it('handles multiple filters', function()
       local line = 'aaa [AllowLoadGameType standard] [AllowLoadEnvironment Global]'
       local files = parse('Standard', line).files
-      assert.same({ 'aaa' }, files)
+      assert.same({ { AllowLoadEnvironment = 'global', name = 'aaa' } }, files)
     end)
   end)
   describe('suffixes', function()

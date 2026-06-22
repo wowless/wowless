@@ -94,7 +94,7 @@ local function processTocDir(dir)
     save(tocName, tocContent)
     local files = tocutil.parse(build.gametype, tocContent).files
     for _, file in ipairs(files) do
-      processFile(joinRelative(tocName, file), dir)
+      processFile(joinRelative(tocName, file.name), dir)
     end
   end
   local bindingsName, bindingsContent

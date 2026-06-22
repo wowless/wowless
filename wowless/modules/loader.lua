@@ -689,7 +689,7 @@ return function(
     local dir = path.dirname(tocFile)
     local toc = tocutil.parse(gametype, content)
     for i, f in ipairs(toc.files) do
-      toc.files[i] = path.join(dir, f)
+      toc.files[i].name = path.join(dir, f.name)
     end
     return toc
   end
@@ -836,7 +836,14 @@ return function(
     local addonEnv = toc.attrs.SuppressLocalTableRef ~= '1' and {} or nil
     local loadFile = forAddon(addonName, addonEnv, toc.dir, useSecureEnv, forceSecure)
     for _, file in ipairs(toc.files) do
-      loadFile(file)
+      if useSecureEnv and file.AllowLoadEnvironment == 'global' then
+        log(1, 'skipping %s because LoadEnvironment="secure" and AllowLoadEnvironment="global"', file.name)
+      elseif not useSecureEnv and file.LoadIntoEnvironment == 'secure' then
+        log(1, 'loading insecure %s in secureenv', file.name)
+        forAddon(addonName, addonEnv, toc.dir, true)(file.name)
+      else
+        loadFile(file.name)
+      end
     end
     if toc.bindings then
       loadFile(toc.bindings)

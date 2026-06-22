@@ -25,7 +25,7 @@ local filters = {
   end,
   AllowLoadEnvironment = function(s)
     assert(s:lower() == 'global', s)
-    return true
+    return true, s:lower()
   end,
   AllowLoadGameType = function(s, gts)
     for gt in s:gmatch('[^, ]+') do
@@ -44,7 +44,7 @@ local filters = {
   end,
   LoadIntoEnvironment = function(s)
     assert(s == 'secure', s)
-    return true
+    return true, s
   end,
 }
 
@@ -55,8 +55,11 @@ local function parse(gametype, content)
   local toc = { attrs = {}, deps = {}, files = {}, optionaldeps = {} }
   for line in content:gmatch('[^\r\n]+') do
     local allok = true
+    local tags = {}
     line = line:match('^%s*(.-)%s*$'):gsub('%[(.-):?%s+(.-)%]', function(filter, fdata)
-      allok = allok and assert(filters[filter], filter)(fdata, gts)
+      local ok, tag = assert(filters[filter], filter)(fdata, gts)
+      allok = allok and ok
+      tags[filter] = tag
       return ''
     end)
     if allok and line:sub(1, 3) == '## ' then
@@ -83,7 +86,8 @@ local function parse(gametype, content)
         end
       end
     elseif allok and line ~= '' and line:sub(1, 1) ~= '#' then
-      table.insert(toc.files, line:match('^([^%s]+)'))
+      tags.name = line:match('^([^%s]+)')
+      table.insert(toc.files, tags)
     end
   end
   return toc
