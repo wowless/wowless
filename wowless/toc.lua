@@ -44,7 +44,7 @@ local filters = {
   end,
   LoadIntoEnvironment = function(s)
     assert(s == 'secure', s)
-    return true
+    return true, s
   end,
 }
 

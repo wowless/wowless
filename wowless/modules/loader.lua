@@ -836,10 +836,13 @@ return function(
     local addonEnv = toc.attrs.SuppressLocalTableRef ~= '1' and {} or nil
     local loadFile = forAddon(addonName, addonEnv, toc.dir, useSecureEnv, forceSecure)
     for _, file in ipairs(toc.files) do
-      if not (useSecureEnv and file.AllowLoadEnvironment == 'global') then
-        loadFile(file.name)
-      else
+      if useSecureEnv and file.AllowLoadEnvironment == 'global' then
         log(1, 'skipping %s because LoadEnvironment="secure" and AllowLoadEnvironment="global"', file.name)
+      elseif not useSecureEnv and file.LoadIntoEnvironment == 'secure' then
+        log(1, 'loading insecure %s in secureenv', file.name)
+        forAddon(addonName, addonEnv, toc.dir, true)(file.name)
+      else
+        loadFile(file.name)
       end
     end
     if toc.bindings then
