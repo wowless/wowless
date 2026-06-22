@@ -43,7 +43,7 @@ local filters = {
     return true
   end,
   LoadIntoEnvironment = function(s)
-    assert(s == 'secure', s)
+    assert(s == 'global' or s == 'secure', s)
     return true, s
   end,
 }
