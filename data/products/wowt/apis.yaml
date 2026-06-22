@@ -13554,11 +13554,6 @@ C_Housing.IsInsideOwnedPlot:
   outputs:
   - name: isInside
     type: boolean
-C_Housing.IsInsideOwnHouse:
-  inputs:
-  outputs:
-  - name: isInsideOwnHouse
-    type: boolean
 C_Housing.IsInsidePlot:
   inputs:
   outputs:
@@ -35130,16 +35125,6 @@ GetInventoryItemLink:
 GetInventoryItemQuality:
 GetInventoryItemsForSlot:
 GetInventoryItemTexture:
-GetInventorySlotInfo:
-  impl: GetInventorySlotInfo
-  inputs:
-  - name: slotName
-    type: string
-  outputs:
-  - name: slotId
-    type: number
-  - name: texture
-    type: number
 GetInviteConfirmationInfo:
 GetItemLevelColor:
 GetJailersTowerLevel:
