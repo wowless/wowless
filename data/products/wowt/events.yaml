@@ -588,10 +588,6 @@ BATTLEPET_FORCE_NAME_DECLENSION:
     type: string
   - name: battlePetGUID
     type: string
-BATTLETAG_INVITE_SHOW:
-  payload:
-  - name: name
-    type: string
 BEHAVIORAL_NOTIFICATION:
   payload:
   - name: notificationType
