@@ -76,6 +76,8 @@ type:
     runtime:
       type:
         record:
+          discord:
+            type: flag
           send_isfromitem:
             type: flag
           warners:

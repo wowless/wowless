@@ -391,6 +391,13 @@ Enum:
     MaxValue: 13
     MinValue: 0
     NumValues: 14
+  AccountGetListRequestType:
+    Battlepets: 1
+    None: 0
+  AccountGetListRequestTypeMeta:
+    MaxValue: 1
+    MinValue: 0
+    NumValues: 2
   AccountSequenceCacheType:
     HouseDecor: 2
     Invalid: 0
@@ -1089,6 +1096,29 @@ Enum:
     MaxValue: 1
     MinValue: 0
     NumValues: 2
+  BattleNetFriendLevel:
+    BattleTag: 1
+    RealID: 2
+    Title: 3
+  BattleNetFriendLevelMeta:
+    MaxValue: 3
+    MinValue: 1
+    NumValues: 3
+  BattleNetFriendTag:
+    DamagerRole: 7
+    Delves: 4
+    Dungeons: 3
+    HealerRole: 8
+    Professions: 0
+    PvP: 1
+    Questing: 5
+    Raiding: 2
+    Roleplaying: 6
+    TankRole: 9
+  BattleNetFriendTagMeta:
+    MaxValue: 9
+    MinValue: 0
+    NumValues: 10
   BattlepayBannerType:
     Discount: 1
     Featured: 2
@@ -2120,14 +2150,15 @@ Enum:
     MinValue: 0
     NumValues: 3
   ClubStreamType:
+    Discord: 3
     General: 0
     Guild: 1
     Officer: 2
-    Other: 3
+    Other: 4
   ClubStreamTypeMeta:
-    MaxValue: 3
+    MaxValue: 4
     MinValue: 0
-    NumValues: 4
+    NumValues: 5
   ClubType:
     BattleNet: 0
     Character: 1
@@ -2407,12 +2438,13 @@ Enum:
     NumValues: 2
   CompanionConfigSlotTypes:
     Combat: 2
+    Flavor: 3
     Role: 0
     Utility: 1
   CompanionConfigSlotTypesMeta:
-    MaxValue: 2
+    MaxValue: 3
     MinValue: 0
-    NumValues: 3
+    NumValues: 4
   CompanionRoleType:
     Dps: 0
     Heal: 1
@@ -2618,14 +2650,19 @@ Enum:
     MinValue: 0
     NumValues: 3
   CooldownViewerCategory:
+    EquipSlotEssential: 7
+    EquipSlotTracked: 8
     Essential: 0
+    GroupBuff: 4
+    SpecAgnosticEssential: 5
+    SpecAgnosticTracked: 6
     TrackedBar: 3
     TrackedBuff: 2
     Utility: 1
   CooldownViewerCategoryMeta:
-    MaxValue: 3
+    MaxValue: 8
     MinValue: 0
-    NumValues: 4
+    NumValues: 9
   CooldownViewerIconDirection:
     Left: 0
     Right: 1
@@ -2640,6 +2677,105 @@ Enum:
     MaxValue: 1
     MinValue: 0
     NumValues: 2
+  CooldownViewerSound:
+    AnimalsCat: 1
+    AnimalsChicken: 2
+    AnimalsCow: 3
+    AnimalsGnoll: 4
+    AnimalsGoat: 5
+    AnimalsLion: 6
+    AnimalsPanther: 7
+    AnimalsRattlesnake: 8
+    AnimalsSheep: 9
+    AnimalsWolf: 10
+    DevicesAirHorn: 12
+    DevicesBikeHorn: 13
+    DevicesBoatHorn: 11
+    DevicesCashRegister: 14
+    DevicesJackpotBell: 15
+    DevicesJackpotCoins: 16
+    DevicesJackpotFail: 17
+    DevicesRotaryPhoneDial: 18
+    DevicesRotaryPhoneRing: 19
+    DevicesStovePipe: 20
+    DevicesTrashcanLid: 21
+    ImpactsAnvilStrike: 22
+    ImpactsBubbleSmash: 23
+    ImpactsLowThud: 24
+    ImpactsMetalClanks: 25
+    ImpactsMetalRattle: 26
+    ImpactsMetalScrape: 27
+    ImpactsMetalWarble: 28
+    ImpactsPopClick: 29
+    ImpactsStrangeClang: 30
+    ImpactsSwordScrape: 31
+    InstrumentsBellRing: 32
+    InstrumentsBellTrill: 33
+    InstrumentsBrass: 34
+    InstrumentsChimeAscending: 35
+    InstrumentsGuitarChug: 36
+    InstrumentsGuitarPinch: 37
+    InstrumentsPitchPipeDistressed: 38
+    InstrumentsPitchPipeNote: 39
+    InstrumentsSynthBig: 40
+    InstrumentsSynthBuzz: 41
+    InstrumentsSynthHigh: 42
+    InstrumentsWarhorn: 43
+    ShortBellStrike: 68
+    ShortBellTree: 69
+    ShortBigPot: 70
+    ShortBlades: 71
+    ShortCoffeeMug: 72
+    ShortCowBell: 73
+    ShortFingerSnap: 74
+    ShortGuitar: 75
+    ShortKalimba: 76
+    ShortMetalBladeDrop: 77
+    ShortMetalBladeOnRod: 78
+    ShortMetalImpact: 79
+    ShortMiniWoodXylophone: 80
+    ShortPaperCup: 81
+    ShortSheetMetal: 82
+    ShortStovePipe: 83
+    ShortStovePipeBlade: 84
+    ShortSwordShing: 85
+    ShortSynthBleep: 86
+    ShortSynthBlurp: 87
+    ShortSynthError: 88
+    ShortSynthHigh: 89
+    ShortTriangle: 90
+    ShortWaterDrop: 91
+    ShortWineBottle: 92
+    ShortWoodXylophone: 93
+    TextToSpeech: 0
+    War2AbstractWhoosh: 44
+    War2Choir: 45
+    War2Construction: 46
+    War2MagicChimes: 47
+    War2PigSqueal: 48
+    War2Saws: 49
+    War2Seal: 50
+    War2Slow: 51
+    War2Smith: 52
+    War2SynthStinger: 53
+    War2TrumpetRally: 54
+    War2ZippyMagic: 55
+    War3Bell: 56
+    War3CrunchyBell: 57
+    War3DrumSplash: 58
+    War3Error: 59
+    War3Fanfare: 60
+    War3GateOpen: 61
+    War3Gold: 62
+    War3MagicShimmer: 63
+    War3Ringout: 64
+    War3Rooster: 65
+    War3ShimmerBell: 66
+    War3WolfHowl: 67
+  CooldownViewerSoundMeta:
+    MaxValue: 93
+    MinValue: 0
+    NumValues: 94
   CooldownViewerVisibleSetting:
     Always: 0
     Hidden: 2
@@ -3441,6 +3577,27 @@ Enum:
     MaxValue: 32
     MinValue: 0
     NumValues: 7
+  DiscordAccountType:
+    Normal: 0
+    Provisional: 1
+  DiscordAccountTypeMeta:
+    MaxValue: 1
+    MinValue: 0
+    NumValues: 2
+  DiscordDisplayNameType:
+    Default: 0
+    GlobalName: 2
+    LastOnline: 1
+  DiscordDisplayNameTypeMeta:
+    MaxValue: 2
+    MinValue: 0
+    NumValues: 3
+  DiscordGuildSettings:
+    SeparateStream: 1
+  DiscordGuildSettingsMeta:
+    MaxValue: 1
+    MinValue: 1
+    NumValues: 1
   DurationTextBindingProperty:
     ElapsedDuration: 2
     ElapsedPercent: 3
@@ -3487,18 +3644,19 @@ Enum:
     ShowPetFrame: 24
     ShowPossessActionBar: 6
     ShowRaidFrames: 13
+    ShowRaidWarning: 33
     ShowStanceBar: 4
     ShowStatusTrackingBar2: 20
     ShowTalkingHeadFrame: 14
     ShowTargetAndFocus: 3
     ShowTimerBars: 25
-    ShowTotemActionBar: 33
+    ShowTotemActionBar: 34
     ShowVehicleLeaveButton: 15
     ShowVehicleSeatIndicator: 26
   EditModeAccountSettingMeta:
-    MaxValue: 33
+    MaxValue: 34
     MinValue: 0
-    NumValues: 34
+    NumValues: 35
   EditModeActionBarSetting:
     AlwaysShowButtons: 9
     DeprecatedSnapToSide: 7
@@ -3684,12 +3842,13 @@ Enum:
     NumValues: 4
   EditModeMinimapSetting:
     HeaderUnderneath: 0
+    IconScale: 3
     RotateMinimap: 1
     Size: 2
   EditModeMinimapSettingMeta:
-    MaxValue: 2
+    MaxValue: 3
     MinValue: 0
-    NumValues: 3
+    NumValues: 4
   EditModeObjectiveTrackerSetting:
     Height: 0
     Opacity: 1
@@ -3725,6 +3884,12 @@ Enum:
     MaxValue: 1
     MinValue: 0
     NumValues: 2
+  EditModeRaidWarningSetting:
+    None: 0
+  EditModeRaidWarningSettingMeta:
+    MaxValue: 0
+    MinValue: 0
+    NumValues: 1
   EditModeSettingDisplayType:
     Checkbox: 1
     Dropdown: 0
@@ -3768,17 +3933,18 @@ Enum:
     Minimap: 2
     ObjectiveTracker: 12
     PersonalResourceDisplay: 21
+    RaidWarning: 24
     StatusTrackingBar: 15
     TalkingHeadFrame: 7
     TimerBars: 17
-    TotemActionBar: 24
+    TotemActionBar: 25
     UnitFrame: 3
     VehicleLeaveButton: 9
     VehicleSeatIndicator: 18
   EditModeSystemMeta:
-    MaxValue: 24
+    MaxValue: 25
     MinValue: 0
-    NumValues: 25
+    NumValues: 26
   EditModeTimerBarsSetting:
     Size: 0
   EditModeTimerBarsSettingMeta:
@@ -3788,15 +3954,16 @@ Enum:
   EditModeUnitFrameSetting:
     AuraOrganizationType: 18
     BigDefensiveIconSize: 21
+    BuffIconSize: 22
     BuffsOnTop: 2
     CastBarOnSide: 7
     CastBarUnderneath: 1
+    DebuffIconSize: 19
     DisplayBorder: 12
     FrameHeight: 11
     FrameSize: 16
     FrameWidth: 10
     HidePortrait: 0
-    IconSize: 19
     Opacity: 20
     RaidGroupDisplayType: 13
     RowSize: 15
@@ -3809,9 +3976,9 @@ Enum:
     ViewArenaSize: 17
     ViewRaidSize: 9
   EditModeUnitFrameSettingMeta:
-    MaxValue: 21
+    MaxValue: 22
     MinValue: 0
-    NumValues: 22
+    NumValues: 23
   EditModeUnitFrameSystemIndices:
     Arena: 7
     Boss: 6
@@ -4166,6 +4333,13 @@ Enum:
     MaxValue: 1
     MinValue: 0
     NumValues: 2
+  ForbiddenAspect:
+    ScriptBindings: 2
+    SetToDefaults: 1
+  ForbiddenAspectMeta:
+    MaxValue: 2
+    MinValue: 1
+    NumValues: 2
   FragmentID:
     Actor: 15
     CgObject: 2
@@ -4186,6 +4360,7 @@ Enum:
     FHousingStorageMirrorData: 33
     FJamHousingCornerstone: 27
     FLootObjectList: 12
+    FMapObject: 43
     FMeshObjectData: 19
     FMirroredPositionData: 31
     FNeighborhoodMirrorData: 30
@@ -4202,6 +4377,7 @@ Enum:
     FUnitAIGroupLink: 39
     FUnitAreaTriggerLink: 14
     FVendor: 17
+    FWorldStateListenerData: 42
     HeartbeatData: 4
     JamDispatcher: 3
     MirroredObjectC: 18
@@ -4245,7 +4421,7 @@ Enum:
   FragmentIDMeta:
     MaxValue: 255
     MinValue: 0
-    NumValues: 75
+    NumValues: 77
   FrameTutorialAccount:
     AccountWideReputation: 9
     AssistedCombatRotationActionButton: 22
@@ -4273,6 +4449,7 @@ Enum:
     HousingMarketTab: 34
     HousingModesUnlocked: 38
     HousingNewPip: 31
+    HousingPetBeds: 50
     HousingTeleportButton: 35
     HudRevampBagChanges: 1
     LFGList: 6
@@ -4297,9 +4474,9 @@ Enum:
     TransmogTrialOfStyle: 46
     TransmogWeaponOptions: 45
   FrameTutorialAccountMeta:
-    MaxValue: 49
+    MaxValue: 50
     MinValue: 1
-    NumValues: 49
+    NumValues: 50
   GameMode:
     Plunderstorm: 2
     Standard: 1
@@ -4853,6 +5030,12 @@ Enum:
     MaxValue: 42
     MinValue: 0
     NumValues: 43
+  GroupBuffItemFlags:
+    HideByDefault: 1
+  GroupBuffItemFlagsMeta:
+    MaxValue: 1
+    MinValue: 1
+    NumValues: 1
   GuildErrorType:
     AlreadyInGuild: 2
     BadItem: 29
@@ -4970,10 +5153,11 @@ Enum:
     Owner: 1
     PartySync: 16
     Random: 32
+    Relinquished: 128
   HouseFinderSuggestionReasonMeta:
-    MaxValue: 64
+    MaxValue: 128
     MinValue: 0
-    NumValues: 8
+    NumValues: 9
   HouseLevelRewardType:
     Object: 1
     Value: 0
@@ -5032,6 +5216,48 @@ Enum:
     MaxValue: 2
     MinValue: 0
     NumValues: 3
+  HousingBlueprintContentType:
+    Decor: 3
+    Dye: 4
+    Fixture: 5
+    HouseType: 1
+    None: 0
+    Other: 6
+    Room: 2
+  HousingBlueprintContentTypeMeta:
+    MaxValue: 6
+    MinValue: 0
+    NumValues: 7
+  HousingBlueprintFlag:
+    AutomaticBackup: 1
+    None: 0
+  HousingBlueprintFlagMeta:
+    MaxValue: 1
+    MinValue: 0
+    NumValues: 2
+  HousingBlueprintType:
+    Exterior: 4
+    House: 1
+    Interior: 3
+    None: 0
+    Room: 2
+  HousingBlueprintTypeMeta:
+    MaxValue: 4
+    MinValue: 0
+    NumValues: 5
+  HousingBlueprintUnmetRequirementFlags:
+    HouseSizeLocked: 128
+    HouseTypeLocked: 64
+    InsufficientBudget: 1
+    MismatchedExteriorFaction: 32
+    MissingDecor: 8
+    MissingDye: 16
+    MissingFixture: 4
+    MissingRoom: 2
+  HousingBlueprintUnmetRequirementFlagsMeta:
+    MaxValue: 128
+    MinValue: 1
+    NumValues: 8
   HousingCatalogEntryModelScenePresets:
     DecorCeiling: 1338
     DecorDefault: 1317
@@ -5226,6 +5452,14 @@ Enum:
     MaxValue: 16
     MinValue: 0
     NumValues: 9
+  HousingHouseScope:
+    Exterior: 2
+    Interior: 1
+    None: 0
+  HousingHouseScopeMeta:
+    MaxValue: 2
+    MinValue: 0
+    NumValues: 3
   HousingIncrementType:
     Back: 8
     Down: 32
@@ -5290,6 +5524,13 @@ Enum:
     MaxValue: 1
     MinValue: 0
     NumValues: 2
+  HousingPetBehaviorType:
+    Stationary: 0
+    Wander: 1
+  HousingPetBehaviorTypeMeta:
+    MaxValue: 1
+    MinValue: 0
+    NumValues: 2
   HousingPlotOwnerType:
     Friend: 2
     None: 0
@@ -5309,101 +5550,115 @@ Enum:
     NumValues: 3
   HousingResult:
     ActionLockedByCombat: 1
-    BoundsFailureChildren: 2
-    BoundsFailurePlot: 3
-    BoundsFailureRoom: 4
-    BoundToStartingArea: 5
-    CannotAfford: 6
-    CharterComplete: 7
-    CollisionInvalid: 8
-    DbError: 9
-    DecorCannotBeRedeemed: 10
-    DecorItemNotDestroyable: 11
-    DecorNotFound: 12
-    DecorNotFoundInStorage: 13
-    DuplicateCharterSignature: 14
-    FilterRejected: 15
-    FixtureCantDeleteDoor: 16
-    FixtureHookEmpty: 17
-    FixtureHookOccupied: 18
-    FixtureHouseTypeMismatch: 19
-    FixtureNotFound: 20
-    FixtureSizeMismatch: 21
-    FixtureTypeMismatch: 22
-    GenericFailure: 23
-    GuildMoreAccountsNeeded: 24
-    GuildMoreActivePlayersNeeded: 25
-    GuildNotLoaded: 26
-    HookNotChildOfFixture: 35
-    HouseEditLockFailed: 27
-    HouseExteriorAlreadyThatSize: 28
-    HouseExteriorAlreadyThatType: 29
-    HouseExteriorRootNotFound: 30
-    HouseExteriorSizeNotAvailable: 34
-    HouseExteriorTypeNeighborhoodMismatch: 31
-    HouseExteriorTypeNotFound: 32
-    HouseExteriorTypeSizeMismatch: 33
-    HouseNotFound: 36
-    IncorrectFaction: 37
-    InvalidDecorItem: 38
-    InvalidDistance: 39
-    InvalidGuild: 40
-    InvalidHouse: 41
-    InvalidInstance: 42
-    InvalidInteraction: 43
-    InvalidLightOverlap: 44
-    InvalidMap: 45
-    InvalidNeighborhoodName: 46
-    InvalidRoomLayout: 47
-    LockedByOtherPlayer: 48
-    LockOperationFailed: 49
-    MaxDecorReached: 50
-    MaxPreviewDecorReached: 51
-    MissingCoreFixture: 52
-    MissingDye: 53
-    MissingExpansionAccess: 54
-    MissingFactionMap: 55
-    MissingPrivateNeighborhoodInvite: 56
-    MoreHouseSlotsNeeded: 57
-    MoreSignaturesNeeded: 58
-    NeighborhoodNotFound: 59
-    NoNeighborhoodOwnershipRequests: 60
-    NotInDecorEditMode: 61
-    NotInFixtureEditMode: 62
-    NotInLayoutEditMode: 63
-    NotInsideHouse: 64
-    NotOnOwnedPlot: 65
-    OperationAborted: 66
-    OwnerNotInGuild: 67
-    PermissionDenied: 68
-    PlacementTargetInvalid: 69
-    PlayerNotFound: 70
-    PlayerNotInInstance: 71
-    PlotNotFound: 72
-    PlotNotVacant: 73
-    PlotReservationCooldown: 74
-    PlotReserved: 75
-    RoomNotFound: 76
-    RoomUpdateFailed: 77
-    RpcFailure: 78
-    ServiceNotAvailable: 79
-    StaticDataNotFound: 80
+    BlueprintCodeInvalid: 2
+    BlueprintGenericExportError: 3
+    BlueprintGenericImportError: 4
+    BlueprintLocationInvalid: 5
+    BlueprintNameInvalid: 6
+    BlueprintNotFound: 7
+    BlueprintRequirementsUnmet: 9
+    BlueprintStorageLimit: 10
+    BlueprintTypeInvalid: 8
+    BlueprintVersionInvalid: 11
+    BoundsFailureChildren: 12
+    BoundsFailurePlot: 13
+    BoundsFailureRoom: 14
+    BoundToStartingArea: 15
+    CannotAfford: 16
+    CharterComplete: 17
+    CollisionInvalid: 18
+    DbError: 19
+    DecorCannotBeRedeemed: 20
+    DecorItemNotDestroyable: 21
+    DecorNotFound: 22
+    DecorNotFoundInStorage: 23
+    DuplicateCharterSignature: 24
+    FilterRejected: 25
+    FixtureCantDeleteDoor: 26
+    FixtureHookEmpty: 27
+    FixtureHookOccupied: 28
+    FixtureHouseTypeMismatch: 29
+    FixtureNotFound: 30
+    FixtureSizeMismatch: 31
+    FixtureTypeMismatch: 32
+    GenericFailure: 33
+    GuildMoreAccountsNeeded: 34
+    GuildMoreActivePlayersNeeded: 35
+    GuildNotLoaded: 36
+    HookNotChildOfFixture: 45
+    HouseEditLockFailed: 37
+    HouseExteriorAlreadyThatSize: 38
+    HouseExteriorAlreadyThatType: 39
+    HouseExteriorRootNotFound: 40
+    HouseExteriorSizeNotAvailable: 44
+    HouseExteriorTypeNeighborhoodMismatch: 41
+    HouseExteriorTypeNotFound: 42
+    HouseExteriorTypeSizeMismatch: 43
+    HouseNotFound: 46
+    IncorrectFaction: 47
+    InsufficientRoomBudget: 60
+    InvalidDecorItem: 48
+    InvalidDistance: 49
+    InvalidExteriorDocument: 50
+    InvalidGuild: 51
+    InvalidHouse: 52
+    InvalidInstance: 53
+    InvalidInteraction: 54
+    InvalidInteriorDocument: 55
+    InvalidLightOverlap: 56
+    InvalidMap: 57
+    InvalidNeighborhoodName: 58
+    InvalidRoomLayout: 59
+    LockedByOtherPlayer: 61
+    LockOperationFailed: 62
+    MaxDecorReached: 63
+    MaxPreviewDecorReached: 64
+    MissingCoreFixture: 65
+    MissingDye: 66
+    MissingExpansionAccess: 67
+    MissingFactionMap: 68
+    MissingPrivateNeighborhoodInvite: 69
+    MoreHouseSlotsNeeded: 70
+    MoreSignaturesNeeded: 71
+    NeighborhoodNotFound: 72
+    NoNeighborhoodOwnershipRequests: 73
+    NotInDecorEditMode: 74
+    NotInFixtureEditMode: 75
+    NotInLayoutEditMode: 76
+    NotInsideHouse: 77
+    NotOnOwnedPlot: 78
+    OperationAborted: 79
+    OwnerNotInGuild: 80
+    PermissionDenied: 81
+    PlacementTargetInvalid: 82
+    PlayerNotFound: 83
+    PlayerNotInInstance: 84
+    PlotNotFound: 85
+    PlotNotVacant: 86
+    PlotReservationCooldown: 87
+    PlotReserved: 88
+    RoomNotFound: 89
+    RoomPlacementOutOfBounds: 90
+    RoomUpdateFailed: 91
+    RpcFailure: 92
+    ServiceNotAvailable: 93
+    StaticDataNotFound: 94
     Success: 0
-    TimeoutLimit: 81
-    TimerunningNotAllowed: 82
-    TokenRequired: 83
-    TooManyRequests: 84
-    TransactionFailure: 85
-    UncollectedExteriorFixture: 86
-    UncollectedHouseType: 87
-    UncollectedRoom: 88
-    UncollectedRoomMaterial: 89
-    UncollectedRoomTheme: 90
-    UnlockOperationFailed: 91
+    TimeoutLimit: 95
+    TimerunningNotAllowed: 96
+    TokenRequired: 97
+    TooManyRequests: 98
+    TransactionFailure: 99
+    UncollectedExteriorFixture: 100
+    UncollectedHouseType: 101
+    UncollectedRoom: 102
+    UncollectedRoomMaterial: 103
+    UncollectedRoomTheme: 104
+    UnlockOperationFailed: 105
   HousingResultMeta:
-    MaxValue: 91
+    MaxValue: 105
     MinValue: 0
-    NumValues: 92
+    NumValues: 106
   HousingRoomComponentCeilingType:
     Flat: 0
     Vaulted: 1
@@ -5760,6 +6015,12 @@ Enum:
     MaxValue: 12
     MinValue: 0
     NumValues: 13
+  ItemConversionFlags:
+    UseInputItemStats: 1
+  ItemConversionFlagsMeta:
+    MaxValue: 1
+    MinValue: 1
+    NumValues: 1
   ItemCreationContext:
     BlackMarket: 15
     ChallengeMode_1: 16
@@ -6950,14 +7211,15 @@ Enum:
   NamePlateStyle:
     Block: 2
     CastFocus: 4
+    Classic: 6
     HealthFocus: 3
     Legacy: 5
     Modern: 0
     Thin: 1
   NamePlateStyleMeta:
-    MaxValue: 5
+    MaxValue: 6
     MinValue: 0
-    NumValues: 6
+    NumValues: 7
   NamePlateThreatDisplay:
     Flash: 2
     HealthBarColor: 3
@@ -7153,6 +7415,16 @@ Enum:
     MaxValue: 2
     MinValue: 0
     NumValues: 3
+  OnUpdateMode:
+    Disabled: 0
+    RunAlways: 4
+    RunOnce: 3
+    RunWhenVisible: 1
+    RunWhenVisibleOnce: 2
+  OnUpdateModeMeta:
+    MaxValue: 4
+    MinValue: 0
+    NumValues: 5
   PartyPlaylistEntry:
     DuoGameMode: 1
     SoloGameMode: 0
@@ -7425,15 +7697,27 @@ Enum:
     FailedDisabledBySettings: 4
     FailedGeneric: 1
     FailedOutOfPingArea: 5
+    FailedSilent: 8
     FailedSpamming: 2
     FailedSquelched: 6
     FailedUnspecified: 7
     Success: 0
   PingResultMeta:
-    MaxValue: 7
+    MaxValue: 8
     MinValue: 0
-    NumValues: 8
+    NumValues: 9
+  PingSetTargetState:
+    Failed: 1
+    FailedSilent: 2
+    Ok: 0
+  PingSetTargetStateMeta:
+    MaxValue: 2
+    MinValue: 0
+    NumValues: 3
   PingSubjectType:
+    ActionOnCooldown: 7
+    ActionReady: 6
+    ActionUnavailable: 8
     AlertNotThreat: 5
     AlertThreat: 4
     Assist: 2
@@ -7441,9 +7725,25 @@ Enum:
     OnMyWay: 3
     Warning: 1
   PingSubjectTypeMeta:
-    MaxValue: 5
+    MaxValue: 8
     MinValue: 0
-    NumValues: 6
+    NumValues: 9
+  PingTargetOption:
+    All: 0
+    Environment: 1
+    Units: 2
+  PingTargetOptionMeta:
+    MaxValue: 2
+    MinValue: 0
+    NumValues: 3
+  PingTargetType:
+    Action: 2
+    Point: 1
+    Unit: 0
+  PingTargetTypeMeta:
+    MaxValue: 2
+    MinValue: 0
+    NumValues: 3
   PingTextureType:
     Center: 0
     Expand: 1
@@ -8257,6 +8557,22 @@ Enum:
     MaxValue: 2
     MinValue: 0
     NumValues: 3
+  RecruitAFriendFailure:
+    InsufExpanLvl: 7
+    MapIncomingTransferNotAllowed: 9
+    NoTarget: 3
+    NotInClassic: 10
+    NotInParty: 4
+    NotLinked: 1
+    NotNow: 2
+    Offline: 8
+    Success: 0
+    SummonCooldown: 6
+    SummonLevelMax: 5
+  RecruitAFriendFailureMeta:
+    MaxValue: 10
+    MinValue: 0
+    NumValues: 11
   RecruitAFriendRewardsVersion:
     InvalidVersion: 0
     UnusedVersionOne: 1
@@ -8425,6 +8741,16 @@ Enum:
     MaxValue: 2
     MinValue: 0
     NumValues: 3
+  RestrictionType:
+    AccountExpansion: 2
+    Achievement: 3
+    Entitlement: 4
+    Invalid: 0
+    ServerExpansion: 1
+  RestrictionTypeMeta:
+    MaxValue: 4
+    MinValue: 0
+    NumValues: 5
   RestrictPingsTo:
     Assist: 2
     Lead: 1
@@ -8532,6 +8858,14 @@ Enum:
     MaxValue: 2
     MinValue: 0
     NumValues: 3
+  ScriptBindingType:
+    Extrinsic: 1
+    Postcall: 2
+    Precall: 0
+  ScriptBindingTypeMeta:
+    MaxValue: 2
+    MinValue: 0
+    NumValues: 3
   ScriptedAnimationBehavior:
     None: 0
     SourceCollideWithTarget: 4
@@ -8561,6 +8895,20 @@ Enum:
     MaxValue: 6
     MinValue: 0
     NumValues: 7
+  ScriptObjectMetatable:
+    Forbidden: 1
+    Public: 0
+  ScriptObjectMetatableMeta:
+    MaxValue: 1
+    MinValue: 0
+    NumValues: 2
+  ScriptObjectPartition:
+    Forbidden: 1
+    Public: 0
+  ScriptObjectPartitionMeta:
+    MaxValue: 1
+    MinValue: 0
+    NumValues: 2
   ScrubStringFlags:
     AllowBarCodes: 2
     None: 0
@@ -8633,6 +8981,7 @@ Enum:
     ObjectSecurity: 1
     ObjectType: 1
     Padding: 262144
+    RadialProgress: 8388608
     Rotation: 65536
     Scale: 64
     ScrollOffset: 4194304
@@ -8645,9 +8994,9 @@ Enum:
     Toplevel: 4
     VertexColor: 2048
   SecretAspectMeta:
-    MaxValue: 4194304
+    MaxValue: 8388608
     MinValue: 1
-    NumValues: 29
+    NumValues: 30
   SelfResurrectOptionType:
     Item: 1
     Spell: 0
@@ -8774,6 +9123,35 @@ Enum:
     MinValue: 1
     NumValues: 6
   SlotRegionMeta:
+    MaxValue: 5
+    MinValue: 0
+    NumValues: 6
+  SocialSystemType:
+    Friends: 0
+    QuickJoin: 1
+    RaidList: 2
+    RecentAllies: 4
+    RecruitAFriend: 3
+  SocialSystemTypeMeta:
+    MaxValue: 4
+    MinValue: 0
+    NumValues: 5
+  SocialUIBlockType:
+    BattleNetInviteBlock: 2
+    Ignore: 1
+    None: 0
+  SocialUIBlockTypeMeta:
+    MaxValue: 2
+    MinValue: 0
+    NumValues: 3
+  SocialUIPresenceType:
+    AppearOffline: 5
+    Away: 3
+    Busy: 4
+    Offline: 2
+    Online: 1
+    Unknown: 0
+  SocialUIPresenceTypeMeta:
     MaxValue: 5
     MinValue: 0
     NumValues: 6
@@ -9028,6 +9406,13 @@ Enum:
     MaxValue: 3
     MinValue: 0
     NumValues: 4
+  StatusBarRenderMode:
+    Linear: 0
+    Radial: 1
+  StatusBarRenderModeMeta:
+    MaxValue: 1
+    MinValue: 0
+    NumValues: 2
   StatusBarTimerDirection:
     ElapsedTime: 0
     RemainingTime: 1
@@ -9199,15 +9584,22 @@ Enum:
     MaxValue: 1
     MinValue: 0
     NumValues: 2
+  TieredEntranceTierFlag:
+    IsLFG: 1
+  TieredEntranceTierFlagMeta:
+    MaxValue: 1
+    MinValue: 1
+    NumValues: 1
   TieredEntranceType:
     Delve: 1
     Invalid: 0
+    Lairs: 4
     Sites: 2
     WorldTier: 3
   TieredEntranceTypeMeta:
-    MaxValue: 3
+    MaxValue: 4
     MinValue: 0
-    NumValues: 4
+    NumValues: 5
   TimeEventFlag:
     GlobalLaunch: 4
     GlueScreenShortcut: 1
@@ -9267,6 +9659,9 @@ Enum:
     ItemName: 22
     ItemQuality: 35
     ItemSpellTriggerLearn: 38
+    ItemSpellTriggerOnEquip: 45
+    ItemSpellTriggerOnProc: 46
+    ItemSpellTriggerOnUse: 44
     ItemUpgradeLevel: 32
     LearnableSpell: 6
     LearnTransmogIllusion: 40
@@ -9295,9 +9690,9 @@ Enum:
     UnitThreat: 7
     UsageRequirement: 43
   TooltipDataLineTypeMeta:
-    MaxValue: 43
+    MaxValue: 46
     MinValue: 0
-    NumValues: 44
+    NumValues: 47
   TooltipDataType:
     Achievement: 12
     AzeriteEssence: 8
@@ -10831,6 +11226,21 @@ Enum:
     MaxValue: 4
     MinValue: 0
     NumValues: 5
+  VisualAlertType:
+    Flash: 6
+    FlashBlue: 10
+    FlashCyan: 7
+    FlashGreen: 9
+    FlashRed: 8
+    MarchingAnts: 1
+    MarchingAntsBlue: 5
+    MarchingAntsCyan: 2
+    MarchingAntsGreen: 4
+    MarchingAntsRed: 3
+  VisualAlertTypeMeta:
+    MaxValue: 10
+    MinValue: 1
+    NumValues: 10
   Vocalerrorsounds:
     Abilitycooling: 50
     Alreadyingroup: 20

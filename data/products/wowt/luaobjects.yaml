@@ -61,6 +61,9 @@ DurationTextBinding:
       outputs:
       - name: canUpdateText
         type: boolean
+    ClearTextColorCurve:
+      inputs:
+      outputs:
     Disable:
       inputs:
       outputs:
@@ -92,6 +95,23 @@ DurationTextBinding:
       outputs:
       - name: text
         type: string
+    GetFormattedTextColor:
+      inputs:
+      mayreturnnothing: true
+      outputs:
+      - name: color
+        type:
+          structure: colorRGBA
+    GetTextColorCurve:
+      inputs:
+      mayreturnnothing: true
+      outputs:
+      - name: curve
+        type:
+          luaobject: LuaColorCurveObject
+      - name: property
+        type:
+          enum: DurationTextBindingProperty
     GetTimeModifier:
       inputs:
       outputs:
@@ -147,6 +167,15 @@ DurationTextBinding:
       - name: formatter
         type:
           luaobject: NumericFormatter
+      outputs:
+    SetTextColorCurve:
+      inputs:
+      - name: curve
+        type:
+          luaobject: LuaColorCurveObject
+      - name: property
+        type:
+          enum: DurationTextBindingProperty
       outputs:
     SetTextFormat:
       inputs:

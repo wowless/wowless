@@ -588,6 +588,7 @@ select:
 SendSystemMessage:
   impl:
     modules:
+      datalua:
       eventqueue:
       units:
 seterrorhandler:
