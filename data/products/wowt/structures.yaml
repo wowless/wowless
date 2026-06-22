@@ -1325,6 +1325,8 @@ C_CatalogShop.CatalogShopProductInfo:
       type: boolean
     isHidden:
       type: boolean
+    isMystery:
+      type: boolean
     isPurchasePending:
       type: boolean
     isVCProduct:
@@ -1604,7 +1606,7 @@ C_Club.ClubInfo:
 C_Club.ClubInvitationCandidateInfo:
   fields:
     memberId:
-      type: number
+      type: string
     name:
       type: string
     priority:
@@ -1674,7 +1676,7 @@ C_Club.ClubMemberInfo:
       nilable: true
       type: number
     memberId:
-      type: number
+      type: string
     memberNote:
       nilable: true
       type: string
@@ -2678,6 +2680,9 @@ C_DamageMeter.DamageMeterCombatSource:
       type: number
     deathTimeSeconds:
       type: number
+    factionGroup:
+      nilable: true
+      type: string
     isLocalPlayer:
       type: boolean
     name:
@@ -2863,6 +2868,14 @@ C_EncodingUtil.JSONSerializationOptions:
     ignoreSerializationErrors:
       default: false
       type: boolean
+C_EncounterInfo.EncounterUnitStatus:
+  fields:
+    creatureID:
+      type: number
+    creatureName:
+      type: string
+    remainingHealthPercent:
+      type: number
 C_EncounterJournal.DungeonEntranceMapInfo:
   fields:
     areaPoiID:
@@ -2964,9 +2977,6 @@ C_EncounterJournal.EncounterJournalSectionInfo:
       type: number
 C_EncounterTimeline.EncounterTimelineEventInfo:
   fields:
-    color:
-      type:
-        structure: colorRGB
     duration:
       type: number
     iconFileID:
@@ -3050,7 +3060,7 @@ C_EncounterWarnings.EncounterWarningInfo:
       type: string
     color:
       type:
-        structure: colorRGB
+        structure: colorRGBA
     duration:
       type: number
     iconFileID:
@@ -5321,7 +5331,7 @@ C_MythicPlus.MapSeasonBestInfo:
         arrayof: number
     completionDate:
       type:
-        structure: C_MythicPlus.MythicPlusDate
+        structure: CalendarTime
     dungeonScore:
       type: number
     durationSec:
@@ -5332,20 +5342,6 @@ C_MythicPlus.MapSeasonBestInfo:
       type:
         arrayof:
           structure: C_MythicPlus.MythicPlusMember
-C_MythicPlus.MythicPlusDate:
-  fields:
-    day:
-      type: number
-    hour:
-      type: number
-    minute:
-      type: number
-    month:
-      type: number
-    weekday:
-      type: number
-    year:
-      type: number
 C_MythicPlus.MythicPlusKeystoneAffix:
   fields:
     id:
@@ -5367,7 +5363,7 @@ C_MythicPlus.MythicPlusRunInfo:
       type: boolean
     completionDate:
       type:
-        structure: C_MythicPlus.MythicPlusDate
+        structure: CalendarTime
     durationSec:
       type: number
     level:
@@ -5845,6 +5841,8 @@ C_PlayerChoice.PlayerChoiceInfo:
     questionText:
       type: string
     requiresSelection:
+      type: boolean
+    showChoicesAsGrid:
       type: boolean
     showChoicesAsList:
       type: boolean
@@ -6954,6 +6952,16 @@ C_ScenarioInfo.ScenarioDisplayInfo:
     themeColor:
       type:
         structure: colorRGB
+C_ScenarioInfo.ScenarioIconInfo:
+  fields:
+    atlas:
+      type: string
+    description:
+      type: string
+    x:
+      type: number
+    y:
+      type: number
 C_ScenarioInfo.ScenarioInformation:
   fields:
     area:
@@ -11215,6 +11223,14 @@ DelveAssistActionData:
     receivedSpellID:
       nilable: true
       type: number
+DurationTextBindingFormatComponent:
+  fields:
+    formatter:
+      type:
+        luaobject: NumericFormatter
+    property:
+      type:
+        enum: DurationTextBindingProperty
 DyeColorCategoryDisplayInfo:
   fields:
     ID:
@@ -11244,10 +11260,6 @@ DyeColorDisplayInfo:
         structure: colorRGB
 EncounterEventInfo:
   fields:
-    color:
-      nilable: true
-      type:
-        structure: colorRGB
     enabled:
       type: boolean
     encounterEventID:
@@ -11550,11 +11562,13 @@ HouseExteriorTypeOption:
   fields:
     houseExteriorTypeID:
       type: number
+    isInvalid:
+      type: boolean
     isLocked:
       type: boolean
-    lockReasonString:
-      type: string
     name:
+      type: string
+    reasonString:
       type: string
 HouseExteriorTypeOptionsInfo:
   fields:
@@ -11755,11 +11769,13 @@ HousingFixtureOption:
       type: number
     fixtureID:
       type: number
+    isInvalid:
+      type: boolean
     isLocked:
       type: boolean
-    lockReasonString:
-      type: string
     name:
+      type: string
+    reasonString:
       type: string
     typeID:
       type: number
