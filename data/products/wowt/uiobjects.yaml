@@ -3805,6 +3805,12 @@ Frame:
         nilable: true
         type:
           uiobject: Texture
+    CreateVectorGraphics:
+      inputs:
+      outputs:
+      - name: vectorGraphics
+        type:
+          uiobject: VectorGraphics
     DesaturateHierarchy:
       inputs:
       - name: desaturation
@@ -6695,6 +6701,11 @@ QuestPOIFrame:
       - name: numObjectives
         nilable: true
         type: number
+RadialProgress:
+  fields:
+  inherits:
+    Animation:
+  methods:
 Region:
   fields:
     anchoredBy:
@@ -9109,6 +9120,11 @@ UnitPositionFrame:
     StopPlayerPing:
       inputs:
       outputs:
+VectorGraphics:
+  fields:
+  inherits:
+    TextureBase:
+  methods:
 VertexColor:
   fields:
   inherits:

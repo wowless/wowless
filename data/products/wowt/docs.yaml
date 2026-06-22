@@ -450,6 +450,8 @@ script_objects:
     uiobject: AnimationGroup
   SimpleAnimPathAPI:
     uiobject: Path
+  SimpleAnimRadialProgressAPI:
+    uiobject: RadialProgress
   SimpleAnimRotationAPI:
     uiobject: Rotation
   SimpleAnimScaleAPI:
@@ -516,6 +518,8 @@ script_objects:
     uiobject: Texture
   SimpleTextureBaseAPI:
     uiobject: TextureBase
+  SimpleVectorGraphicsAPI:
+    uiobject: VectorGraphics
   UnitHealPredictionCalculatorAPI:
     luaobject: UnitHealPredictionCalculator
 typedefs:
