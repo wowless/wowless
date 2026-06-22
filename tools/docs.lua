@@ -377,7 +377,7 @@ local function rewriteGlobals(out)
       end
       out.Enum[tab.Name] = takelieor(t, lies, tab.Name)
       out.Enum[tab.Name .. 'Meta'] = {
-        MaxValue = tab.MaxValue < 2 ^ 31 and tab.MaxValue or tab.MaxValue - 2 ^ 32,
+        MaxValue = (product == 'wowt' or tab.MaxValue < 2 ^ 31) and tab.MaxValue or tab.MaxValue - 2 ^ 32,
         MinValue = tab.MinValue,
         NumValues = tab.NumValues,
       }
