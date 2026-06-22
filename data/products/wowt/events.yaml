@@ -6482,6 +6482,7 @@ MINIMAP_PING:
     type: number
   - name: x
     type: number
+  restricted: true
 MINIMAP_UPDATE_TRACKING:
   payload:
 MINIMAP_UPDATE_ZOOM:
