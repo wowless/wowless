@@ -124,6 +124,10 @@ lies:
           _change:
             from: string
             to: unit
+  events:
+    MINIMAP_PING:
+      _remove:
+        restricted: true
   extra_apis:
     C_BarberShopInternal.SetQAMode:
     C_CinematicList.GetUICinematicList:
@@ -388,6 +392,8 @@ script_objects:
     luaobject: AbbreviateConfig
   AbbreviatedNumberFormatterAPI:
     luaobject: AbbreviatedNumberFormatter
+  DurationTextBindingObjectAPI:
+    luaobject: DurationTextBinding
   FrameAPIArchaeologyDigSiteFrame:
     uiobject: ArchaeologyDigSiteFrame
   FrameAPIBlob:
@@ -428,6 +434,10 @@ script_objects:
     luaobject: LuaCurveObject
   LuaCurveObjectBaseAPI:
     luaobject: LuaCurveObjectBase
+  LuaDurationClockObjectAPI:
+    luaobject: LuaDurationClock
+  LuaDurationManualClockAPI:
+    luaobject: LuaDurationManualClock
   LuaDurationObjectAPI:
     luaobject: LuaDurationObject
   MinimapFrameAPI:
@@ -553,9 +563,13 @@ typedefs:
     type: string
   ClubInvitationId:
     type: string
+  ClubMemberOpaqueId:
+    type: string
   ClubStreamId:
     type: string
   ConnectionIptype:
+    type: string
+  ConnectionProtocol:
     type: string
   CooldownFrame:
     type:
@@ -574,6 +588,9 @@ typedefs:
     type: number
   DurationSecondsPrimitive:
     type: number
+  DurationTextBinding:
+    type:
+      luaobject: DurationTextBinding
   EmptiableItemLocation:
     type:
       structure: ItemLocation
@@ -633,6 +650,12 @@ typedefs:
   LuaCurveObjectBase:
     type:
       luaobject: LuaCurveObjectBase
+  LuaDurationClock:
+    type:
+      luaobject: LuaDurationClock
+  LuaDurationManualClock:
+    type:
+      luaobject: LuaDurationManualClock
   LuaDurationObject:
     type:
       luaobject: LuaDurationObject
