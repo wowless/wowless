@@ -83,7 +83,7 @@ local function parse(gametype, content)
         end
       end
     elseif allok and line ~= '' and line:sub(1, 1) ~= '#' then
-      table.insert(toc.files, line:match('^([^%s]+)'))
+      table.insert(toc.files, { name = line:match('^([^%s]+)') })
     end
   end
   return toc
