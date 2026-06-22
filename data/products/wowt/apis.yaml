@@ -10535,23 +10535,6 @@ C_DyeColor.GetDyeColorCategoryInfo:
     nilable: true
     type:
       structure: DyeColorCategoryDisplayInfo
-C_DyeColor.GetDyeColorForItem:
-  inputs:
-  - name: itemLinkOrID
-    type: string
-  outputs:
-  - name: dyeColorID
-    nilable: true
-    type: number
-C_DyeColor.GetDyeColorForItemLocation:
-  inputs:
-  - name: itemLocation
-    type:
-      structure: ItemLocation
-  outputs:
-  - name: dyeColorID
-    nilable: true
-    type: number
 C_DyeColor.GetDyeColorInfo:
   inputs:
   - name: dyeColorID
@@ -14490,12 +14473,6 @@ C_HousingDecor.GetMaxPetPlacementBudget:
   - name: maxBudget
     nilable: true
     type: number
-C_HousingDecor.GetMaxPlacementBudget:
-  inputs:
-  outputs:
-  - name: maxBudget
-    nilable: true
-    type: number
 C_HousingDecor.GetNumDecorPlaced:
   inputs:
   outputs:
@@ -14515,12 +14492,6 @@ C_HousingDecor.GetSelectedDecorInfo:
     type:
       structure: HousingDecorInstanceInfo
 C_HousingDecor.GetSpentPetPlacementBudget:
-  inputs:
-  outputs:
-  - name: totalCost
-    nilable: true
-    type: number
-C_HousingDecor.GetSpentPlacementBudget:
   inputs:
   outputs:
   - name: totalCost
@@ -14756,12 +14727,6 @@ C_HousingLayout.GetNumFloors:
   outputs:
   - name: numFloors
     type: number
-C_HousingLayout.GetRoomPlacementBudget:
-  inputs:
-  outputs:
-  - name: placementBudget
-    nilable: true
-    type: number
 C_HousingLayout.GetRoomPlayerIsIn:
   inputs:
   mayreturnnothing: true
@@ -14792,12 +14757,6 @@ C_HousingLayout.GetSelectedStairwellRoomCount:
   inputs:
   outputs:
   - name: stairwellRoomCount
-    type: number
-C_HousingLayout.GetSpentPlacementBudget:
-  inputs:
-  outputs:
-  - name: spentPlacementBudget
-    nilable: true
     type: number
 C_HousingLayout.GetViewedFloor:
   inputs:
@@ -20624,15 +20583,6 @@ C_PhotoSharing.UploadPhotoToService:
     name: optionalDescription
     type: string
   outputs:
-C_Ping.GetContextualPingTypeForUnit:
-  inputs:
-  - name: targetUnit
-    nilable: true
-    type: string
-  outputs:
-  - name: type
-    type:
-      enum: PingSubjectType
 C_Ping.GetCooldownInfo:
   inputs:
   outputs:
@@ -23430,11 +23380,6 @@ C_RecruitAFriend.GetSummonFriendCooldown:
   - name: durationSeconds
     type: number
   - name: enableCooldownTimer
-    type: boolean
-C_RecruitAFriend.IsEnabled:
-  inputs:
-  outputs:
-  - name: enabled
     type: boolean
 C_RecruitAFriend.IsRecruitAFriendLinked:
   inputs:
@@ -31803,11 +31748,6 @@ C_UnitAuras.SetPrivateWarningTextAnchor:
   outputs:
 C_UnitAuras.SwitchAuraDataProvider:
   inputs:
-  outputs:
-C_UnitAuras.TriggerPrivateAuraShowDispelType:
-  inputs:
-  - name: show
-    type: boolean
   outputs:
 C_UnitAuras.WantsAlteredForm:
   inputs:
