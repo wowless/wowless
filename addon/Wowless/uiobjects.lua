@@ -342,10 +342,18 @@ G.testsuite.uiobjects = function()
             end,
           })
           g:SetParentKey('moo')
-          assertEquals(f, mt)
-          assertEquals('moo', mk)
-          assertEquals(g, mv)
-          assertEquals(nil, f.moo)
+          local cfg = _G.WowlessData.Config.modules and _G.WowlessData.Config.modules.parentkey or {}
+          if cfg.rawset then
+            assertEquals(nil, mt)
+            assertEquals(nil, mk)
+            assertEquals(nil, mv)
+            assertEquals(g, f.moo)
+          else
+            assertEquals(f, mt)
+            assertEquals('moo', mk)
+            assertEquals(g, mv)
+            assertEquals(nil, f.moo)
+          end
         end,
         ['RegisterEventCallback accepts funtainer arg'] = function()
           local f = retn(1, CreateFrame('Frame'))

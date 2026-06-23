@@ -55,6 +55,11 @@ type:
               record:
                 tostring_metamethod:
                   type: flag
+          parentkey:
+            type:
+              record:
+                rawset:
+                  type: flag
     runner:
       type:
         record:

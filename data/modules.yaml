@@ -123,6 +123,7 @@ maxErrors:
     default: '0'
 parentkey:
   deps:
+    datalua:
 platform:
   deps:
 points:

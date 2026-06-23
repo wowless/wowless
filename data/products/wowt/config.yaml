@@ -88,6 +88,8 @@ addon:
 modules:
   luaobjects:
     tostring_metamethod: true
+  parentkey:
+    rawset: true
 runner:
   skip_bindings:
     TOGGLECOLLECTIONSWARDROBE: requires better implementation of transmog slots
