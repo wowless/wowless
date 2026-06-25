@@ -652,6 +652,8 @@ SwapToGlobalEnvironment:
     name: env
 table.concat:
   stdlib: table.concat
+table.count:
+  impl:
 table.foreach:
   stdlib: table.foreach
 table.foreachi:

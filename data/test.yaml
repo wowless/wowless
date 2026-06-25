@@ -125,6 +125,8 @@ string.trim:
   string.trim:
 SwapToGlobalEnvironment:
   SwapToGlobalEnvironment:
+table.count:
+  table.count:
 table.wipe:
   table.wipe:
 UnitName:
