@@ -604,6 +604,40 @@ Alpha:
       - name: normalizedAlpha
         type: number
       outputs:
+AnimatableObject:
+  fields:
+    animationGroups:
+      init:
+      type: table
+  inherits:
+  methods:
+    CreateAnimationGroup:
+      impl:
+        uiobjectimpl: Region/CreateAnimationGroup
+      inputs:
+      - name: name
+        nilable: true
+        type: string
+      - name: templateName
+        nilable: true
+        type: string
+      outputs:
+      - name: group
+        type:
+          uiobject: AnimationGroup
+    GetAnimationGroups:
+      impl:
+        uiobjectimpl: Region/GetAnimationGroups
+      inputs:
+      outputs:
+      - name: groups
+        type:
+          uiobject: AnimationGroup
+      outstride: 1
+    StopAnimating:
+      inputs:
+      outputs:
+  virtual: true
 Animation:
   fields:
     endDelay:
@@ -3318,6 +3352,7 @@ FontString:
       init: 1
       type: number
   inherits:
+    AnimatableObject:
     FontInstance:
     LayeredRegion:
     ScriptObject:
@@ -3638,6 +3673,7 @@ Frame:
       init: false
       type: boolean
   inherits:
+    AnimatableObject:
     Region:
     ScriptObject:
   methods:
@@ -6470,9 +6506,6 @@ Region:
     anchoredBy:
       init:
       type: table
-    animationGroups:
-      init:
-      type: table
     bottom:
       nilable: true
       type: number
@@ -6574,20 +6607,6 @@ Region:
       outputs:
       - name: collapsesLayout
         type: boolean
-    CreateAnimationGroup:
-      impl:
-        uiobjectimpl: Region/CreateAnimationGroup
-      inputs:
-      - name: name
-        nilable: true
-        type: string
-      - name: templateName
-        nilable: true
-        type: string
-      outputs:
-      - name: group
-        type:
-          uiobject: AnimationGroup
     EnableMouse:
       impl:
         uiobjectimpl: MouseMixin/EnableMouse
@@ -6611,15 +6630,6 @@ Region:
         name: enable
         type: boolean
       outputs:
-    GetAnimationGroups:
-      impl:
-        uiobjectimpl: Region/GetAnimationGroups
-      inputs:
-      outputs:
-      - name: groups
-        type:
-          uiobject: AnimationGroup
-      outstride: 1
     GetBottom:
       impl:
         uiobjectimpl: Region/GetBottom
@@ -7029,9 +7039,6 @@ Region:
       outputs:
       - name: shouldPassThrough
         type: boolean
-    StopAnimating:
-      inputs:
-      outputs:
   objectType: Region
   scripts:
     OnEnter:
@@ -8244,6 +8251,7 @@ TextureBase:
       init: false
       type: boolean
   inherits:
+    AnimatableObject:
     LayeredRegion:
     ScriptObject:
   methods:
