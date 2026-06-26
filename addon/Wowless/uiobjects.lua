@@ -1305,18 +1305,6 @@ G.testsuite.uiobjects = function()
           }
           return G.checkStateMachine(states, transitions, 'init')
         end,
-        SetAtlas = function()
-          if _G.__wowless then
-            return
-          end
-          local t = CreateFrame('Frame'):CreateTexture()
-          return {
-            nothing = function()
-              local msg = 'Texture:SetAtlas(): Usage: ("atlasName"[, useAtlasSize, filterMode, resetTexCoords])'
-              return match(2, false, msg, pcall(t.SetAtlas, t))
-            end,
-          }
-        end,
         SetColorTexture = function()
           local colortex = _G.WowlessData.Build.test and 'FileData ID 0' or nil
           local t = CreateFrame('Frame'):CreateTexture()
