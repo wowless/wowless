@@ -838,6 +838,8 @@ typedefs:
     type: unit
   UnitTokenRestrictedForAddOns:
     type: unit
+  UnitTokenType:
+    type: unit
   UnitTokenVariant:
     type: unit
   WOWGUID:
