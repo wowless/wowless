@@ -51,6 +51,12 @@ lies:
           _change:
             from: string
             to: unit
+    UnitName:
+      outputs:
+      - _add:
+          nilable: true
+      - _add:
+          nilable: true
   events:
     COMBAT_LOG_APPLY_FILTER_SETTINGS:
       _remove:
@@ -656,6 +662,9 @@ typedefs:
       structure: ItemLocation
   EncounterTimelineEventID:
     type: number
+  EventCallbackType:
+    type:
+      luaobject: LuaFunctionContainer
   FileAsset:
     type: FileAsset
   fileID:
@@ -664,6 +673,9 @@ typedefs:
     type: string
   FontAsset:
     type: string
+  FrameEventCallbackType:
+    type:
+      luaobject: LuaFunctionContainer
   FrameScriptObject:
     type:
       uiobject: UIObject

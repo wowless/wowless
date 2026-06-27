@@ -27293,7 +27293,8 @@ RegisterEventCallback:
   - name: eventName
     type: string
   - name: callback
-    type: function
+    type:
+      luaobject: LuaFunctionContainer
   outputs:
   - name: registered
     type: boolean
@@ -27303,7 +27304,8 @@ RegisterUnitEventCallback:
   - name: eventName
     type: string
   - name: callback
-    type: function
+    type:
+      luaobject: LuaFunctionContainer
   - name: unit
     type: unit
   outputs:
@@ -29284,8 +29286,10 @@ UnitName:
     type: unit
   outputs:
   - name: unitName
+    nilable: true
     type: string
   - name: unitServer
+    nilable: true
     type: string
 UnitNameplateShowsWidgetsOnly:
   inputs:
@@ -29857,14 +29861,16 @@ UnregisterEventCallback:
   - name: eventName
     type: string
   - name: callback
-    type: function
+    type:
+      luaobject: LuaFunctionContainer
   outputs:
 UnregisterUnitEventCallback:
   inputs:
   - name: eventName
     type: string
   - name: callback
-    type: function
+    type:
+      luaobject: LuaFunctionContainer
   - name: unit
     type: unit
   outputs:
