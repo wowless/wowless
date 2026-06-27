@@ -21,6 +21,7 @@ addon:
       secretunwrap:
   enums_set_in_framexml:
     EditModeChatFrameDisplayOnlySetting:
+    HousingCatalogEntrySubtype:
   hooked_globals:
     FauxScrollFrame_Update:
     SetItemRef:

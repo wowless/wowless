@@ -27,6 +27,17 @@ lies:
       outputs:
       - _add:
           nilable: true
+    scrub:
+      inputs:
+      - type:
+          _change:
+            from: unknown
+            to: any
+      outputs:
+      - type:
+          _change:
+            from: unknown
+            to: any
     UnitFactionGroup:
       _add:
         mayreturnnothing: true

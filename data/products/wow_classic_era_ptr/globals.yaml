@@ -4859,11 +4859,6 @@ Enum:
     MaxValue: 69
     MinValue: 0
     NumValues: 6
-  HousingCatalogEntrySubtype:
-    Invalid: 0
-    OwnedModifiedStack: 2
-    OwnedUnmodifiedStack: 3
-    Unowned: 1
   HousingCatalogEntryType:
     Decor: 1
     Invalid: 0
