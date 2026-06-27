@@ -23,6 +23,11 @@ lies:
       outputs:
       - _add:
           nilable: true
+    RegisterEventCallback:
+      outputs:
+        _add:
+        - name: registered
+          type: boolean
     ResurrectGetOfferer:
       outputs:
       - _add:

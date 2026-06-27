@@ -27295,6 +27295,8 @@ RegisterEventCallback:
   - name: callback
     type: function
   outputs:
+  - name: registered
+    type: boolean
 RegisterStaticConstants:
 RegisterUnitEventCallback:
   inputs:
