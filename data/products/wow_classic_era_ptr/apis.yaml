@@ -27288,6 +27288,7 @@ RedockChatWindows:
   outputs:
 RefreshLFGList:
 RegisterEventCallback:
+  impl: RegisterEventCallback
   inputs:
   - name: eventName
     type: string
