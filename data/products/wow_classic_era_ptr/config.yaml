@@ -45,7 +45,6 @@ addon:
     RenderScale:
   overwritten_apis:
     C_HousingBasicMode.StartPlacingNewDecor:
-    C_HousingCatalog.CanDestroyEntry:
     C_HousingCatalog.CreateCatalogSearcher:
     C_HousingCatalog.DestroyEntry:
     C_HousingCatalog.GetCatalogCategoryInfo:

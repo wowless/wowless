@@ -4125,13 +4125,11 @@ FORBIDDEN_NAME_PLATE_CREATED:
 FORBIDDEN_NAME_PLATE_UNIT_ADDED:
   payload:
   - name: unitToken
-    type:
-      enum: UnitTokenType
+    type: unit
 FORBIDDEN_NAME_PLATE_UNIT_REMOVED:
   payload:
   - name: unitToken
-    type:
-      enum: UnitTokenType
+    type: unit
 FORCE_REFRESH_HOUSE_FINDER:
   payload:
 FORGE_MASTER_CLOSED:
@@ -5365,8 +5363,7 @@ NAME_PLATE_CREATED:
 NAME_PLATE_UNIT_ADDED:
   payload:
   - name: unitToken
-    type:
-      enum: UnitTokenType
+    type: unit
 NAME_PLATE_UNIT_BEHIND_CAMERA_CHANGED:
   payload:
   - name: unitTarget
@@ -5376,8 +5373,7 @@ NAME_PLATE_UNIT_BEHIND_CAMERA_CHANGED:
 NAME_PLATE_UNIT_REMOVED:
   payload:
   - name: unitToken
-    type:
-      enum: UnitTokenType
+    type: unit
 NEIGHBORHOOD_GUILD_SIZE_VALIDATED:
   payload:
   - name: approved

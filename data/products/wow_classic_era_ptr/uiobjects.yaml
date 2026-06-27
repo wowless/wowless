@@ -4051,8 +4051,7 @@ Frame:
         type: boolean
       - name: units
         nilable: true
-        type:
-          enum: UnitTokenType
+        type: unit
       outstride: 1
     IsFrameBuffer:
       inputs:
@@ -4172,8 +4171,7 @@ Frame:
         type: string
       - name: units
         nilable: true
-        type:
-          enum: UnitTokenType
+        type: unit
       instride: 1
       outputs:
       - name: registered
@@ -4185,8 +4183,7 @@ Frame:
       - name: cb
         type: function
       - name: units
-        type:
-          enum: UnitTokenType
+        type: unit
       instride: 1
       outputs:
       - name: registered
@@ -8793,8 +8790,7 @@ UnitPositionFrame:
       inputs:
       outputs:
       - name: units
-        type:
-          enum: UnitTokenType
+        type: unit
       outstride: 1
       stuboutstrides: 0
     GetPlayerPingScale:
@@ -8846,8 +8842,7 @@ UnitPositionFrame:
     SetUnitColor:
       inputs:
       - name: unit
-        type:
-          enum: UnitTokenType
+        type: unit
       - name: colorR
         type: number
       - name: colorG
