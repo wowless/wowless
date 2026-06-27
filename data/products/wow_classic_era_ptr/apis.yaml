@@ -19806,6 +19806,39 @@ C_UnitAuras.WantsAlteredForm:
   outputs:
   - name: wantsAlteredForm
     type: boolean
+C_UnitAurasPrivate.AddPrivateAuraUpdateCallback:
+  secureonly: true
+C_UnitAurasPrivate.AnchorPrivateAura:
+  secureonly: true
+C_UnitAurasPrivate.GetAllPrivateAuras:
+  inputs:
+  outputs:
+  - name: auras
+    type:
+      arrayof:
+        structure: AuraData
+  secureonly: true
+C_UnitAurasPrivate.GetAuraDataByAuraInstanceIDPrivate:
+  secureonly: true
+C_UnitAurasPrivate.GetPrivateAuraAnchors:
+  inputs:
+  outputs:
+  - name: existingAnchors
+    stub:
+    type:
+      arrayof:
+        structure: PrivateAuraAnchor
+  secureonly: true
+C_UnitAurasPrivate.SetPrivateAuraAnchorAddedCallback:
+  secureonly: true
+C_UnitAurasPrivate.SetPrivateAuraAnchorRemovedCallback:
+  secureonly: true
+C_UnitAurasPrivate.SetPrivateRaidBossMessageCallback:
+  secureonly: true
+C_UnitAurasPrivate.SetPrivateWarningTextFrame:
+  secureonly: true
+C_UnitAurasPrivate.SetShowDispelTypeCallback:
+  secureonly: true
 C_UserFeedback.SubmitBug:
   inputs:
   - name: bugInfo
@@ -26637,6 +26670,7 @@ issecrettable:
 issecretvalue:
   inputs:
   - name: value
+    nilable: true
     type: unknown
   outputs:
   - name: isSecret
@@ -27440,13 +27474,14 @@ secretunwrap:
     type: unknown
   outstride: 1
 secretwrap:
+  impl: secretwrap
   inputs:
   - name: values
-    type: unknown
+    type: any
   instride: 1
   outputs:
   - name: wrapped
-    type: unknown
+    type: any
   outstride: 1
 securecall:
   impl: securecall
@@ -28445,6 +28480,7 @@ UnitChannelInfo:
   - name: isEmpowered
     type: boolean
   - name: numEmpowerStages
+    stub: 0
     type: number
   - name: castBarID
     nilable: true
