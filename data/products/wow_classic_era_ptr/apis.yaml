@@ -20964,34 +20964,6 @@ CollapseTrainerSkillLine:
 CollapseWarGameHeader:
 collectgarbage:
   impl: collectgarbage
-CombatLog_Object_IsA:
-CombatLogAddFilter:
-CombatLogClearEntries:
-CombatLogGetCurrentEntry:
-CombatLogGetCurrentEventInfo:
-  inputs:
-  outputs:
-  - name: timestamp
-    type: number
-  - name: subevent
-    type: string
-  - name: hideCaster
-    type: boolean
-  - name: guid
-    type: string
-  - name: name
-    type: string
-  - name: flags
-    type: number
-  - name: raidFlags
-    type: number
-CombatLogGetNumEntries:
-  outputs:
-  - type: number
-CombatLogGetRetentionTime:
-CombatLogResetFilter:
-CombatLogSetRetentionTime:
-CombatTextSetActiveUnit:
 CompleteLFGReadyCheck:
 CompleteLFGRoleCheck:
 CompleteQuest:
@@ -21239,11 +21211,6 @@ CursorHasSpell:
     type: boolean
 date:
   impl: date
-DeathRecap_GetEvents:
-DeathRecap_HasEvents:
-  inputs:
-  outputs:
-  - type: boolean
 debuglocals:
   impl: debuglocals
 debugprofilestart:
@@ -22328,7 +22295,6 @@ GetCurrentCinematicSummary:
   outputs:
   - name: summary
     type: string
-GetCurrentCombatTextEventInfo:
 GetCurrentEnvironment:
   impl: GetCurrentEnvironment
 GetCurrentEventID:
@@ -22396,7 +22362,6 @@ GetCursorPosition:
 GetDailyQuestsCompleted:
   outputs:
   - type: number
-GetDeathRecapLink:
 GetDefaultLanguage:
   inputs:
   outputs:
@@ -22886,11 +22851,6 @@ GetGuildInfo:
     type: string
   - name: guildRankIndex
     type: number
-GetGuildInfoText:
-  inputs:
-  outputs:
-  - name: text
-    type: string
 GetGuildLogoInfo:
 GetGuildMemberRecipes:
 GetGuildNewsFilters:
@@ -22952,9 +22912,6 @@ GetGuildRosterInfo:
     type: boolean
 GetGuildRosterLargestAchievementPoints:
 GetGuildRosterLastOnline:
-GetGuildRosterMOTD:
-  outputs:
-  - type: string
 GetGuildRosterSelection:
   inputs:
   outputs:
@@ -27210,7 +27167,6 @@ PlayerIsTimerunning:
   - name: playerIsTimerunning
     type: boolean
 PlayMusic:
-PlaySound:
 PlaySoundFile:
 PortGraveyard:
   inputs:
@@ -27692,7 +27648,6 @@ SetGuildBankTabItemWithdraw:
 SetGuildBankTabPermissions:
 SetGuildBankText:
 SetGuildBankWithdrawGoldLimit:
-SetGuildInfoText:
 SetGuildMemberRank:
 SetGuildNewsFilter:
 SetGuildRosterSelection:
@@ -28086,8 +28041,6 @@ strsplit:
   impl: strsplit
 strsplittable:
   impl: strsplittable
-strtrim:
-  impl: strtrim
 Stuck:
   inputs:
   outputs:
