@@ -20445,6 +20445,14 @@ C_PetJournal.GetPetLoadOutInfo:
   - name: locked
     type: boolean
 C_PetJournal.GetPetModelSceneInfoBySpeciesID:
+  inputs:
+  - name: speciesID
+    type: number
+  outputs:
+  - name: cardModelSceneID
+    type: number
+  - name: loadoutModelSceneID
+    type: number
 C_PetJournal.GetPetSortParameter:
 C_PetJournal.GetPetStats:
 C_PetJournal.GetPetSummonInfo:
