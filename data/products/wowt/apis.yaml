@@ -31799,6 +31799,7 @@ C_UnitAurasPrivate.GetPrivateAuraAnchors:
   inputs:
   outputs:
   - name: existingAnchors
+    stub:
     type:
       arrayof:
         structure: PrivateAuraAnchor

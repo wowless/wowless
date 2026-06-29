@@ -108,6 +108,10 @@ local function run(cfg)
       f:close()
     end
     if cfg.dir then
+      if cfg.product == 'wowt' then
+        local uiparent = modules.api.CreateFrame('Frame', 'UIParent')
+        modules.points.SetAllPointsInternal(uiparent)
+      end
       loader.loadFrameXml()
     end
     for _, d in ipairs(otherAddonDirs) do
