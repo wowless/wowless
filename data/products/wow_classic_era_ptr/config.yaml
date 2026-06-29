@@ -69,6 +69,8 @@ runner:
     DUEL_OUTOFBOUNDS: error in StaticPopup infrastructure
     LFG_PROPOSAL_SHOW: TODO figure out if there's an ordering issue here
     PARTY_INVITE_CANCEL: LFGInvitePopup does not exist
+    SECURE_TRANSFER_CONFIRM_HOUSING_PURCHASE: missing APIs
+    SECURE_TRANSFER_HOUSING_CURRENCY_PURCHASE_CONFIRMATION: missing APIs
     SUBSCRIPTION_CHANGED_KICK_IMMINENT: depends on GlueDialog_Show
     VAS_QUEUE_STATUS_UPDATE: depends on C_StoreGlue
   skip_slashcmds:
