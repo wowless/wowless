@@ -725,6 +725,27 @@ return function(
 
   local addonData = addons.addons
 
+  local gttokens = {
+    [family:lower()] = true,
+    [gametype:lower()] = true,
+  }
+
+  local function isLoadable(toc)
+    local a = datalua.cvars.agentuid.value
+    if toc.attrs.OnlyBetaAndPTR == '1' and a ~= 'wow_ptr' and a ~= 'wow_beta' then
+      return false
+    end
+    if not toc.attrs.AllowLoadGameType then
+      return true
+    end
+    for gt in string.gmatch(toc.attrs.AllowLoadGameType, '[^, ]+') do
+      if gttokens[gt] then
+        return true
+      end
+    end
+    return false
+  end
+
   local function initAddons()
     local lfs = require('lfs')
     local function maybeAdd(dir, signed)
@@ -732,7 +753,7 @@ return function(
       local key = name:lower()
       if not addonData[key] then
         local addon = resolveTocDir(dir)
-        if addon then
+        if addon and isLoadable(addon) then
           addon.name = name
           addon.signed = signed
           addon.dir = dir
@@ -786,34 +807,10 @@ return function(
     end
   end
 
-  local gttokens = {
-    [family:lower()] = true,
-    [gametype:lower()] = true,
-  }
-
-  local function isLoadable(toc)
-    local a = datalua.cvars.agentuid.value
-    if toc.attrs.OnlyBetaAndPTR == '1' and a ~= 'wow_ptr' and a ~= 'wow_beta' then
-      return false
-    end
-    if not toc.attrs.AllowLoadGameType then
-      return true
-    end
-    for gt in string.gmatch(toc.attrs.AllowLoadGameType, '[^, ]+') do
-      if gttokens[gt] then
-        return true
-      end
-    end
-    return false
-  end
-
   local function doLoadAddon(addonName, forceSecure)
     local toc = addonData[addonName:lower()]
     if not toc then
       error('unknown addon ' .. addonName)
-    end
-    if not isLoadable(toc) then
-      error('unloadable addon ' .. addonName)
     end
     addonName = toc.name
     if toc.attrs.AllowLoad and toc.attrs.AllowLoad:lower() == 'glue' then
