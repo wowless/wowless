@@ -5711,6 +5711,9 @@ HOUSING_LAYOUT_FLOORPLAN_SELECTION_CHANGED:
     type: boolean
   - name: roomID
     type: number
+  - name: blueprintShareCode
+    nilable: true
+    type: string
 HOUSING_LAYOUT_NUM_FLOORS_CHANGED:
   payload:
   - name: prevNumFloors

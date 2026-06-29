@@ -9048,10 +9048,25 @@ UIObject:
   methods:
     AddForbiddenAspects:
       inputs:
-      - name: aspect
+      - name: aspects
         type:
           enum: ForbiddenAspect
       outputs:
+    GetForbiddenAspects:
+      inputs:
+      outputs:
+      - name: aspects
+        type:
+          enum: ForbiddenAspect
+    GetInheritableForbiddenAspects:
+      inputs:
+      - name: inheritance
+        type:
+          enum: ForbiddenAspectInheritance
+      outputs:
+      - name: aspects
+        type:
+          enum: ForbiddenAspect
     GetName:
       impl:
         getter:
@@ -9074,18 +9089,13 @@ UIObject:
       outputs:
       - name: objectType
         type: string
-    HasAnyForbiddenAspect:
+    HasAnyForbiddenAspects:
       inputs:
-      - name: aspect
+      - name: aspects
         type:
           enum: ForbiddenAspect
       outputs:
       - name: hasAnyForbiddenAspect
-        type: boolean
-    HasAnyForbiddenAspects:
-      inputs:
-      outputs:
-      - name: hasAnyForbiddenAspects
         type: boolean
     HasAnySecretAspect:
       inputs:

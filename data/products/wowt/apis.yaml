@@ -13878,6 +13878,11 @@ C_HousingBlueprint.RequestBlueprintContentsForContext:
     nilable: true
     type: string
   outputs:
+C_HousingBlueprint.StartImportRoomBlueprint:
+  inputs:
+  - name: shareCode
+    type: string
+  outputs:
 C_HousingCatalog.CanDestroyEntry:
   inputs:
   - name: entryID
@@ -14734,6 +14739,14 @@ C_HousingLayout.GetRoomPlayerIsIn:
   outputs:
   - name: roomGUID
     type: string
+C_HousingLayout.GetSelectedBlueprintFloorplan:
+  inputs:
+  mayreturnnothing: true
+  outputs:
+  - name: roomID
+    type: number
+  - name: shareCode
+    type: string
 C_HousingLayout.GetSelectedDoor:
   inputs:
   mayreturnnothing: true
@@ -14779,6 +14792,11 @@ C_HousingLayout.HasRoomPlacementBudget:
   inputs:
   outputs:
   - name: hasBudget
+    type: boolean
+C_HousingLayout.HasSelectedBlueprintFloorplan:
+  inputs:
+  outputs:
+  - name: hasSelectedBlueprintFloorplan
     type: boolean
 C_HousingLayout.HasSelectedDoor:
   inputs:
@@ -19141,6 +19159,18 @@ C_Navigation.GetNearestPartyMemberToken:
   inputs:
   outputs:
   - name: unitToken
+    type: string
+C_Navigation.GetNextWaypointForMap:
+  inputs:
+  - name: uiMapID
+    type: number
+  mayreturnnothing: true
+  outputs:
+  - name: x
+    type: number
+  - name: y
+    type: number
+  - name: waypointDescription
     type: string
 C_Navigation.GetTargetState:
   inputs:
@@ -26437,18 +26467,6 @@ C_SuperTrack.GetHighestPrioritySuperTrackingType:
     nilable: true
     type:
       enum: SuperTrackingType
-C_SuperTrack.GetNextWaypointForMap:
-  inputs:
-  - name: uiMapID
-    type: number
-  mayreturnnothing: true
-  outputs:
-  - name: x
-    type: number
-  - name: y
-    type: number
-  - name: waypointDescription
-    type: string
 C_SuperTrack.GetSuperTrackedContent:
   inputs:
   mayreturnnothing: true

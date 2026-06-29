@@ -5935,13 +5935,12 @@ C_PlayerChoice.PlayerChoiceInfo:
           structure: C_PlayerChoice.PlayerChoiceOptionInfo
     pendingChoiceText:
       type: string
+    playerChoiceLayout:
+      type:
+        enum: PlayerChoiceLayout
     questionText:
       type: string
     requiresSelection:
-      type: boolean
-    showChoicesAsGrid:
-      type: boolean
-    showChoicesAsList:
       type: boolean
     soundKitID:
       nilable: true

@@ -124,6 +124,10 @@ type:
                     Type:
                       required: true
                       type: string
+            CheckAllowInheritForbiddenLayoutAspects:
+              type: flag
+            CheckAllowInheritForbiddenParentAspects:
+              type: flag
             ChecksForbiddenAspects:
               type:
                 sequenceof:

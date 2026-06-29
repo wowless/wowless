@@ -3654,6 +3654,7 @@ Enum:
     ShowGrid: 0
     ShowHudTooltip: 19
     ShowLootFrame: 18
+    ShowLossOfControl: 35
     ShowPartyFrames: 12
     ShowPersonalResourceDisplay: 29
     ShowPetActionBar: 5
@@ -3670,9 +3671,9 @@ Enum:
     ShowVehicleLeaveButton: 15
     ShowVehicleSeatIndicator: 26
   EditModeAccountSettingMeta:
-    MaxValue: 34
+    MaxValue: 35
     MinValue: 0
-    NumValues: 35
+    NumValues: 36
   EditModeActionBarSetting:
     AlwaysShowButtons: 9
     DeprecatedSnapToSide: 7
@@ -3847,6 +3848,12 @@ Enum:
     MaxValue: 3
     MinValue: 0
     NumValues: 4
+  EditModeLossOfControlSetting:
+    Size: 0
+  EditModeLossOfControlSettingMeta:
+    MaxValue: 0
+    MinValue: 0
+    NumValues: 1
   EditModeMicroMenuSetting:
     EyeSize: 3
     Order: 1
@@ -3945,6 +3952,7 @@ Enum:
     ExtraAbilities: 5
     HudTooltip: 11
     LootFrame: 10
+    LossOfControl: 26
     MicroMenu: 13
     Minimap: 2
     ObjectiveTracker: 12
@@ -3958,9 +3966,9 @@ Enum:
     VehicleLeaveButton: 9
     VehicleSeatIndicator: 18
   EditModeSystemMeta:
-    MaxValue: 25
+    MaxValue: 26
     MinValue: 0
-    NumValues: 26
+    NumValues: 27
   EditModeTimerBarsSetting:
     Size: 0
   EditModeTimerBarsSettingMeta:
@@ -4350,12 +4358,26 @@ Enum:
     MinValue: 0
     NumValues: 2
   ForbiddenAspect:
+    AlwaysPropagateInput: 32
+    EventRegistrations: 16
+    QueryFocus: 128
     ScriptBindings: 2
+    ScriptedInput: 64
     SetToDefaults: 1
-  ForbiddenAspectMeta:
-    MaxValue: 2
-    MinValue: 1
+    Shown: 256
+    UntrustedLayoutScriptExecution: 8
+    UntrustedScriptExecution: 4
+  ForbiddenAspectInheritance:
+    Layout: 1
+    Parent: 0
+  ForbiddenAspectInheritanceMeta:
+    MaxValue: 1
+    MinValue: 0
     NumValues: 2
+  ForbiddenAspectMeta:
+    MaxValue: 256
+    MinValue: 1
+    NumValues: 9
   FragmentID:
     Actor: 15
     CgObject: 2
@@ -5579,108 +5601,109 @@ Enum:
     BlueprintNameInvalid: 6
     BlueprintNotFound: 7
     BlueprintRequirementsUnmet: 9
-    BlueprintStorageLimit: 10
+    BlueprintRoomPlacementRequired: 10
+    BlueprintStorageLimit: 11
     BlueprintTypeInvalid: 8
-    BlueprintVersionInvalid: 11
-    BoundsFailureChildren: 12
-    BoundsFailurePlot: 13
-    BoundsFailureRoom: 14
-    BoundToStartingArea: 15
-    CannotAfford: 16
-    CharterComplete: 17
-    CollisionInvalid: 18
-    DbError: 19
-    DecorCannotBeRedeemed: 20
-    DecorItemNotDestroyable: 21
-    DecorNotFound: 22
-    DecorNotFoundInStorage: 23
-    DuplicateCharterSignature: 24
-    FilterRejected: 25
-    FixtureCantDeleteDoor: 26
-    FixtureHookEmpty: 27
-    FixtureHookOccupied: 28
-    FixtureHouseTypeMismatch: 29
-    FixtureNotFound: 30
-    FixtureSizeMismatch: 31
-    FixtureTypeMismatch: 32
-    GenericFailure: 33
-    GuildMoreAccountsNeeded: 34
-    GuildMoreActivePlayersNeeded: 35
-    GuildNotLoaded: 36
-    HookNotChildOfFixture: 45
-    HouseEditLockFailed: 37
-    HouseExteriorAlreadyThatSize: 38
-    HouseExteriorAlreadyThatType: 39
-    HouseExteriorRootNotFound: 40
-    HouseExteriorSizeNotAvailable: 44
-    HouseExteriorTypeNeighborhoodMismatch: 41
-    HouseExteriorTypeNotFound: 42
-    HouseExteriorTypeSizeMismatch: 43
-    HouseNotFound: 46
-    IncorrectFaction: 47
-    InsufficientRoomBudget: 60
-    InvalidDecorItem: 48
-    InvalidDistance: 49
-    InvalidExteriorDocument: 50
-    InvalidGuild: 51
-    InvalidHouse: 52
-    InvalidInstance: 53
-    InvalidInteraction: 54
-    InvalidInteriorDocument: 55
-    InvalidLightOverlap: 56
-    InvalidMap: 57
-    InvalidNeighborhoodName: 58
-    InvalidRoomLayout: 59
-    LockedByOtherPlayer: 61
-    LockOperationFailed: 62
-    MaxDecorReached: 63
-    MaxPreviewDecorReached: 64
-    MissingCoreFixture: 65
-    MissingDye: 66
-    MissingExpansionAccess: 67
-    MissingFactionMap: 68
-    MissingPrivateNeighborhoodInvite: 69
-    MoreHouseSlotsNeeded: 70
-    MoreSignaturesNeeded: 71
-    NeighborhoodNotFound: 72
-    NoNeighborhoodOwnershipRequests: 73
-    NotInDecorEditMode: 74
-    NotInFixtureEditMode: 75
-    NotInLayoutEditMode: 76
-    NotInsideHouse: 77
-    NotOnOwnedPlot: 78
-    OperationAborted: 79
-    OwnerNotInGuild: 80
-    PermissionDenied: 81
-    PlacementTargetInvalid: 82
-    PlayerNotFound: 83
-    PlayerNotInInstance: 84
-    PlotNotFound: 85
-    PlotNotVacant: 86
-    PlotReservationCooldown: 87
-    PlotReserved: 88
-    RoomNotFound: 89
-    RoomPlacementOutOfBounds: 90
-    RoomUpdateFailed: 91
-    RpcFailure: 92
-    ServiceNotAvailable: 93
-    StaticDataNotFound: 94
+    BlueprintVersionInvalid: 12
+    BoundsFailureChildren: 13
+    BoundsFailurePlot: 14
+    BoundsFailureRoom: 15
+    BoundToStartingArea: 16
+    CannotAfford: 17
+    CharterComplete: 18
+    CollisionInvalid: 19
+    DbError: 20
+    DecorCannotBeRedeemed: 21
+    DecorItemNotDestroyable: 22
+    DecorNotFound: 23
+    DecorNotFoundInStorage: 24
+    DuplicateCharterSignature: 25
+    FilterRejected: 26
+    FixtureCantDeleteDoor: 27
+    FixtureHookEmpty: 28
+    FixtureHookOccupied: 29
+    FixtureHouseTypeMismatch: 30
+    FixtureNotFound: 31
+    FixtureSizeMismatch: 32
+    FixtureTypeMismatch: 33
+    GenericFailure: 34
+    GuildMoreAccountsNeeded: 35
+    GuildMoreActivePlayersNeeded: 36
+    GuildNotLoaded: 37
+    HookNotChildOfFixture: 46
+    HouseEditLockFailed: 38
+    HouseExteriorAlreadyThatSize: 39
+    HouseExteriorAlreadyThatType: 40
+    HouseExteriorRootNotFound: 41
+    HouseExteriorSizeNotAvailable: 45
+    HouseExteriorTypeNeighborhoodMismatch: 42
+    HouseExteriorTypeNotFound: 43
+    HouseExteriorTypeSizeMismatch: 44
+    HouseNotFound: 47
+    IncorrectFaction: 48
+    InsufficientRoomBudget: 61
+    InvalidDecorItem: 49
+    InvalidDistance: 50
+    InvalidExteriorDocument: 51
+    InvalidGuild: 52
+    InvalidHouse: 53
+    InvalidInstance: 54
+    InvalidInteraction: 55
+    InvalidInteriorDocument: 56
+    InvalidLightOverlap: 57
+    InvalidMap: 58
+    InvalidNeighborhoodName: 59
+    InvalidRoomLayout: 60
+    LockedByOtherPlayer: 62
+    LockOperationFailed: 63
+    MaxDecorReached: 64
+    MaxPreviewDecorReached: 65
+    MissingCoreFixture: 66
+    MissingDye: 67
+    MissingExpansionAccess: 68
+    MissingFactionMap: 69
+    MissingPrivateNeighborhoodInvite: 70
+    MoreHouseSlotsNeeded: 71
+    MoreSignaturesNeeded: 72
+    NeighborhoodNotFound: 73
+    NoNeighborhoodOwnershipRequests: 74
+    NotInDecorEditMode: 75
+    NotInFixtureEditMode: 76
+    NotInLayoutEditMode: 77
+    NotInsideHouse: 78
+    NotOnOwnedPlot: 79
+    OperationAborted: 80
+    OwnerNotInGuild: 81
+    PermissionDenied: 82
+    PlacementTargetInvalid: 83
+    PlayerNotFound: 84
+    PlayerNotInInstance: 85
+    PlotNotFound: 86
+    PlotNotVacant: 87
+    PlotReservationCooldown: 88
+    PlotReserved: 89
+    RoomNotFound: 90
+    RoomPlacementOutOfBounds: 91
+    RoomUpdateFailed: 92
+    RpcFailure: 93
+    ServiceNotAvailable: 94
+    StaticDataNotFound: 95
     Success: 0
-    TimeoutLimit: 95
-    TimerunningNotAllowed: 96
-    TokenRequired: 97
-    TooManyRequests: 98
-    TransactionFailure: 99
-    UncollectedExteriorFixture: 100
-    UncollectedHouseType: 101
-    UncollectedRoom: 102
-    UncollectedRoomMaterial: 103
-    UncollectedRoomTheme: 104
-    UnlockOperationFailed: 105
+    TimeoutLimit: 96
+    TimerunningNotAllowed: 97
+    TokenRequired: 98
+    TooManyRequests: 99
+    TransactionFailure: 100
+    UncollectedExteriorFixture: 101
+    UncollectedHouseType: 102
+    UncollectedRoom: 103
+    UncollectedRoomMaterial: 104
+    UncollectedRoomTheme: 105
+    UnlockOperationFailed: 106
   HousingResultMeta:
-    MaxValue: 105
+    MaxValue: 106
     MinValue: 0
-    NumValues: 106
+    NumValues: 107
   HousingRoomComponentCeilingType:
     Flat: 0
     Vaulted: 1
@@ -7788,6 +7811,29 @@ Enum:
     MaxValue: 1
     MinValue: 1
     NumValues: 1
+  PlayerChoiceFlags:
+    DoNotRefresh: 8
+    HideAnswerArt: 128
+    HideWarboardHeader: 2
+    InfiniteRange: 1
+    KeepOpenAfterChoice: 4
+    RequiresSelection: 32
+    ShowChoicesAsColumns: 256
+    ShowChoicesAsGrid: 64
+    ShowChoicesAsList: 16
+  PlayerChoiceFlagsMeta:
+    MaxValue: 256
+    MinValue: 1
+    NumValues: 9
+  PlayerChoiceLayout:
+    Columns: 3
+    Default: 0
+    Grid: 1
+    List: 2
+  PlayerChoiceLayoutMeta:
+    MaxValue: 3
+    MinValue: 0
+    NumValues: 4
   PlayerChoiceRarity:
     Common: 0
     Epic: 3
@@ -7797,6 +7843,21 @@ Enum:
     MaxValue: 3
     MinValue: 0
     NumValues: 4
+  PlayerChoiceResponseFlags:
+    CheckmarkOnlyButton: 64
+    ConsolidateWidgets: 32
+    HideButton: 128
+    InvertCondition: 8
+    None: 0
+    ShowAnswerDisabled: 1
+    ShowAnswerDisabledWhenConditionFails: 16
+    ShowAnswerSelected: 256
+    ShowArtDesaturated: 2
+    ShowOptionDisabled: 4
+  PlayerChoiceResponseFlagsMeta:
+    MaxValue: 256
+    MinValue: 0
+    NumValues: 10
   PlayerClubRequestStatus:
     Approved: 4
     AutoApproved: 2
