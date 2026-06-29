@@ -4659,10 +4659,13 @@ GameTooltip:
       - name: text
         type: string
       - name: colorR
+        nilable: true
         type: number
       - name: colorG
+        nilable: true
         type: number
       - name: colorB
+        nilable: true
         type: number
       - default: 1
         name: alpha
