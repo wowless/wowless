@@ -22,16 +22,23 @@ local function init(modules, lite)
   modules.log(1, 'loading functions')
   local impls, secureimpls = modules.cstubs.load(modules)
   modules.log(1, 'functions loaded')
-  Mixin(modules.env.genv, deepcopy(impls))
-  Mixin(modules.env.genv, deepcopy(modules.datalua.globals))
-  Mixin(modules.env.secureenv, deepcopy(secureimpls))
-  Mixin(modules.env.secureenv, deepcopy(modules.datalua.globals))
+  local genv = modules.env.genv
+  local secureenv = modules.env.secureenv
+  Mixin(genv, deepcopy(impls))
+  Mixin(genv, deepcopy(modules.datalua.globals))
+  Mixin(secureenv, deepcopy(secureimpls))
+  Mixin(secureenv, deepcopy(modules.datalua.globals))
 
-  modules.env.genv._G = modules.env.genv
-  modules.env.genv.math.huge = math.huge
-  modules.env.genv.math.pi = math.pi
-  modules.env.secureenv.math.huge = math.huge
-  modules.env.secureenv.math.pi = math.pi
+  for tag, text in modules.sqlitedb:urows('SELECT BaseTag, TagText_lang FROM GlobalStrings') do
+    genv[tag] = text
+    secureenv[tag] = text
+  end
+
+  genv._G = modules.env.genv
+  genv.math.huge = math.huge
+  genv.math.pi = math.pi
+  secureenv.math.huge = math.huge
+  secureenv.math.pi = math.pi
 
   local wowlessDebug = Mixin({}, debug)
   wowlessDebug.debug = function()
@@ -99,8 +106,8 @@ local function init(modules, lite)
     end,
     debugstack = require('wowless.debug').debugstack,
   }
-  modules.env.genv.__wowless = __wowless
-  modules.env.secureenv.__wowless = __wowless
+  genv.__wowless = __wowless
+  secureenv.__wowless = __wowless
 end
 
 return {

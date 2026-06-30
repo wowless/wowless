@@ -90,7 +90,6 @@ loader:
     points:
     scripts:
     security:
-    sqlitedb:
     templates:
     uiobjects:
     uiobjecttypes:
