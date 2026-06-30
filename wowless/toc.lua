@@ -8,6 +8,18 @@ for k, v in pairs(gametypes) do
   }
 end
 
+local allgttokens = {
+  wrath = true,
+  cata = true,
+  plunderstorm = true,
+  wowhack = true,
+}
+for _, v in pairs(gttokens) do
+  for k in pairs(v) do
+    allgttokens[k] = true
+  end
+end
+
 local suffixes = {}
 for k, v in pairs(gametypes) do
   suffixes[k] = {
@@ -29,13 +41,18 @@ local filters = {
   end,
   AllowLoadGameType = function(s, gts)
     for gt in s:gmatch('[^, ]+') do
+      assert(allgttokens[gt], gt)
       if gts[gt] then
         return true
       end
     end
   end,
+  Bootstrap = function()
+    return true, true
+  end,
   ExcludeLoadGameType = function(s, gts)
     for gt in s:gmatch('[^, ]+') do
+      assert(allgttokens[gt], gt)
       if gts[gt] then
         return
       end
@@ -56,7 +73,7 @@ local function parse(gametype, content)
   for line in content:gmatch('[^\r\n]+') do
     local allok = true
     local tags = {}
-    line = line:match('^%s*(.-)%s*$'):gsub('%[(.-):?%s+(.-)%]', function(filter, fdata)
+    line = line:match('^%s*(.-)%s*$'):gsub('%[([^:%]%s]*):?%s*([^%]]-)%]', function(filter, fdata)
       local ok, tag = assert(filters[filter], filter)(fdata, gts)
       allok = allok and ok
       tags[filter] = tag

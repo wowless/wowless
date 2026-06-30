@@ -112,12 +112,14 @@ describe('wowless.toc', function()
             'ccc [AllowLoadGameType classic]',
             'ddd [AllowLoadGameType mists]',
             'eee [AllowLoadGameType tbc]',
+            'fff [AllowLoadGameType mists, tbc]',
+            'ggg [AllowLoadGameType mists,tbc]',
           }
           local files = parse(gametype, table.concat(lines, '\n')).files
           local expected = {
-            Mists = { { name = 'ccc' }, { name = 'ddd' } },
+            Mists = { { name = 'ccc' }, { name = 'ddd' }, { name = 'fff' }, { name = 'ggg' } },
             Standard = { { name = 'aaa' } },
-            TBC = { { name = 'ccc' }, { name = 'eee' } },
+            TBC = { { name = 'ccc' }, { name = 'eee' }, { name = 'fff' }, { name = 'ggg' } },
             Vanilla = { { name = 'bbb' }, { name = 'ccc' } },
           }
           assert.same(assert(expected[gametype]), files)
@@ -125,9 +127,9 @@ describe('wowless.toc', function()
       end)
     end
     it('handles multiple filters', function()
-      local line = 'aaa [AllowLoadGameType standard] [AllowLoadEnvironment Global]'
+      local line = 'aaa [AllowLoadGameType standard] [AllowLoadEnvironment Global] [Bootstrap]'
       local files = parse('Standard', line).files
-      assert.same({ { AllowLoadEnvironment = 'global', name = 'aaa' } }, files)
+      assert.same({ { AllowLoadEnvironment = 'global', Bootstrap = true, name = 'aaa' } }, files)
     end)
   end)
   describe('suffixes', function()
