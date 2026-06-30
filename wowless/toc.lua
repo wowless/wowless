@@ -40,7 +40,7 @@ local filters = {
     return true, s:lower()
   end,
   AllowLoadGameType = function(s, gts)
-    for gt in s:gmatch('[^, ]+') do
+    for gt in s:lower():gmatch('[^, ]+') do
       assert(allgttokens[gt], gt)
       if gts[gt] then
         return true
@@ -51,7 +51,7 @@ local filters = {
     return true, true
   end,
   ExcludeLoadGameType = function(s, gts)
-    for gt in s:gmatch('[^, ]+') do
+    for gt in s:lower():gmatch('[^, ]+') do
       assert(allgttokens[gt], gt)
       if gts[gt] then
         return
