@@ -896,7 +896,7 @@ return function(
   local function loadAddons()
     log(1, 'loading loadfirst/secureenv framexml addons')
     for _, toc in ipairs(addonData) do
-      if toc.signed and toc.attrs.LoadFirst == '1' or toc.attrs.UseSecureEnvironment == '1' then
+      if toc.signed and (toc.attrs.LoadFirst == '1' or toc.attrs.UseSecureEnvironment == '1') then
         loadAddon(toc.name)
       end
     end
