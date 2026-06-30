@@ -10,7 +10,6 @@ return function(
   points,
   scripts,
   security,
-  sqlitedb,
   templates,
   uiobjects,
   uiobjecttypes
@@ -896,10 +895,6 @@ return function(
 
   local function loadFrameXml()
     log(1, 'initializing framexml')
-    for tag, text in sqlitedb:urows('SELECT BaseTag, TagText_lang FROM GlobalStrings') do
-      genv[tag] = text
-      secureenv[tag] = text
-    end
     local blizzardAddons = {}
     for _, toc in ipairs(addonData) do
       if toc.signed and toc.attrs.LoadOnDemand ~= '1' then
