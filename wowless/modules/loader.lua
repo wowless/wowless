@@ -893,26 +893,26 @@ return function(
     end
   end
 
-  local function loadFrameXml()
-    log(1, 'initializing framexml')
-    local blizzardAddons = {}
-    for _, toc in ipairs(addonData) do
-      if toc.signed and toc.attrs.LoadOnDemand ~= '1' then
-        table.insert(blizzardAddons, toc.name:lower())
-      end
-    end
+  local function loadAddons()
     log(1, 'loading loadfirst/secureenv framexml addons')
-    for _, name in ipairs(blizzardAddons) do
-      local a = addonData[name].attrs
-      if a.LoadFirst == '1' or a.UseSecureEnvironment == '1' then
-        loadAddon(name)
+    for _, toc in ipairs(addonData) do
+      if toc.signed and toc.attrs.LoadFirst == '1' or toc.attrs.UseSecureEnvironment == '1' then
+        loadAddon(toc.name)
       end
     end
     log(1, 'loading remaining framexml addons')
-    for _, name in ipairs(blizzardAddons) do
-      loadAddon(name)
+    for _, toc in ipairs(addonData) do
+      if not toc.loaded and toc.signed and toc.attrs.LoadOnDemand ~= '1' then
+        loadAddon(toc.name)
+      end
     end
-    log(1, 'done loading framexml')
+    log(1, 'loading non-framexml addons')
+    for _, toc in ipairs(addonData) do
+      if not toc.loaded and toc.attrs.LoadOnDemand ~= '1' then
+        loadAddon(toc.name)
+      end
+    end
+    log(1, 'done loading addons')
   end
 
   local function saveAllVariables()
@@ -945,7 +945,7 @@ return function(
     bindings = bindings,
     initAddons = initAddons,
     loadAddon = loadAddon,
-    loadFrameXml = loadFrameXml,
+    loadAddons = loadAddons,
     saveAllVariables = saveAllVariables,
   }
 end

@@ -87,22 +87,13 @@ local function run(cfg)
   end
   modules.luaobjects.LoadTypes(modules)
   modules.events.LoadEvents(modules)
+  if cfg.product == 'wowt' then
+    local uiparent = modules.api.CreateFrame('Frame', 'UIParent')
+    modules.points.SetAllPointsInternal(uiparent)
+  end
   return withglobaltable(genv, function()
     loader.initAddons()
-    if cfg.dir then
-      if cfg.product == 'wowt' then
-        local uiparent = modules.api.CreateFrame('Frame', 'UIParent')
-        modules.points.SetAllPointsInternal(uiparent)
-      end
-      loader.loadFrameXml()
-    end
-    for _, d in ipairs(otherAddonDirs) do
-      local addon = path.basename(d)
-      local success, reason = loader.loadAddon(addon)
-      if not success then
-        log(1, 'failed to load %s: %s', addon, reason)
-      end
-    end
+    loader.loadAddons()
 
     local CallSafely = modules.security.CallSafely
     local CallSandbox = modules.security.CallSandbox
