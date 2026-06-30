@@ -897,19 +897,19 @@ return function(
     log(1, 'loading loadfirst/secureenv framexml addons')
     for _, toc in ipairs(addonData) do
       if toc.signed and (toc.attrs.LoadFirst == '1' or toc.attrs.UseSecureEnvironment == '1') then
-        loadAddon(toc.name)
+        doLoadAddon(toc.name)
       end
     end
     log(1, 'loading remaining framexml addons')
     for _, toc in ipairs(addonData) do
       if not toc.loaded and toc.signed and toc.attrs.LoadOnDemand ~= '1' then
-        loadAddon(toc.name)
+        doLoadAddon(toc.name)
       end
     end
     log(1, 'loading non-framexml addons')
     for _, toc in ipairs(addonData) do
       if not toc.loaded and toc.attrs.LoadOnDemand ~= '1' then
-        loadAddon(toc.name)
+        doLoadAddon(toc.name)
       end
     end
     log(1, 'done loading addons')
