@@ -758,6 +758,9 @@ return function(
           addon.dir = dir
           addon.revwiths = {}
           addon.bindings = resolveBindingsXml(dir)
+          addon.onlysecure = signed and addon.attrs.UseSecureEnvironment == '1'
+          addon.loadfirst = signed and (addon.onlysecure or addon.attrs.LoadFirst == '1')
+          addon.loadondemand = addon.attrs.LoadOnDemand == '1'
           addonData[key] = addon
           table.insert(addonData, addon)
         end
@@ -841,7 +844,7 @@ return function(
       end
       toc.loadattempted = true
     end
-    local useSecureEnv = forceSecure or toc.attrs.UseSecureEnvironment == '1'
+    local useSecureEnv = forceSecure or toc.onlysecure
     log(1, 'loading addon dependencies for %s', addonName)
     for _, dep in ipairs(toc.deps) do
       doLoadAddon(dep, useSecureEnv)
@@ -896,19 +899,19 @@ return function(
   local function loadAddons()
     log(1, 'loading loadfirst/secureenv framexml addons')
     for _, toc in ipairs(addonData) do
-      if toc.signed and (toc.attrs.LoadFirst == '1' or toc.attrs.UseSecureEnvironment == '1') then
+      if toc.loadfirst then
         doLoadAddon(toc.name)
       end
     end
     log(1, 'loading remaining framexml addons')
     for _, toc in ipairs(addonData) do
-      if not toc.loaded and toc.signed and toc.attrs.LoadOnDemand ~= '1' then
+      if not toc.loaded and toc.signed and not toc.loadondemand then
         doLoadAddon(toc.name)
       end
     end
     log(1, 'loading non-framexml addons')
     for _, toc in ipairs(addonData) do
-      if not toc.loaded and toc.attrs.LoadOnDemand ~= '1' then
+      if not toc.loaded and not toc.loadondemand then
         doLoadAddon(toc.name)
       end
     end
