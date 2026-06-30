@@ -54,6 +54,7 @@ local function run(cfg)
     loadercfg = {
       otherAddonDirs = otherAddonDirs,
       rootDir = cfg.dir,
+      vfs = cfg.vfs,
     },
     log = log,
     loglevel = cfg.loglevel or 0,

@@ -17,6 +17,7 @@
         "png"
       ],
       "name": "sdl3-image"
-    }
+    },
+    "libmicrohttpd"
   ]
 }

@@ -12,7 +12,8 @@ return function(
   security,
   templates,
   uiobjects,
-  uiobjecttypes
+  uiobjecttypes,
+  vfs
 )
   local genv = envmodule.genv
   local secureenv = envmodule.secureenv
@@ -28,7 +29,7 @@ return function(
   local util = require('wowless.util')
   local mixin = util.mixin
   local intrinsics = {}
-  local readFile = util.readfile
+  local readFile = vfs.readFile
   local bindings = {}
   local securemixins = {}
 

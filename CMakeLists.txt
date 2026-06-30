@@ -580,6 +580,20 @@ lua2c(toolstactless tactless=c)
 target_sources(toolstactless PRIVATE tools/tactless.c)
 target_link_libraries(toolstactless PRIVATE tactless)
 
+find_path(MHD_INCLUDE_DIR NAMES microhttpd.h REQUIRED)
+find_library(MHD_LIBRARY NAMES microhttpd libmicrohttpd libmicrohttpd-dll
+                               microhttpd-10 REQUIRED)
+add_executable(tactfull-server tools/tactfull_server.c)
+target_include_directories(tactfull-server PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}
+                                                   ${MHD_INCLUDE_DIR})
+target_link_libraries(tactfull-server PRIVATE tactless ${MHD_LIBRARY})
+
+lua2c(toolstactfull
+      tools.tactfull=${CMAKE_CURRENT_SOURCE_DIR}/tools/tactfull.lua
+      tools.tactfull_curl=c)
+target_sources(toolstactfull PRIVATE tools/tactfull_curl.c)
+target_link_libraries(toolstactfull PRIVATE CURL::libcurl)
+
 find_package(CascLib CONFIG REQUIRED)
 lua2c(toolscasclib tools.casclib=c)
 target_sources(toolscasclib
@@ -884,6 +898,7 @@ lua2c(
   wowless.modules.uiobjects=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/uiobjects.lua
   wowless.modules.uiobjecttypes=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/uiobjecttypes.lua
   wowless.modules.units=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/units.lua
+  wowless.modules.vfs=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/vfs.lua
   wowless.modules.visibility=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/visibility.lua
   wowless.profiler=${CMAKE_CURRENT_SOURCE_DIR}/wowless/profiler.lua
   wowless.runner=${CMAKE_CURRENT_SOURCE_DIR}/wowless/runner.lua
@@ -941,6 +956,7 @@ foreach(product ${products})
     penlight
     runtimegametypes
     runtimeproducts
+    toolstactfull
     tsort
     wowlesslib
     wowlessrender

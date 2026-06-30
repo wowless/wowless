@@ -10,6 +10,7 @@ local args = (function()
   run:option('-o --output', 'output file')
   run:flag('--frame0', 'write frame0 debug')
   run:flag('--lite', 'do not load framexml')
+  run:flag('--proxy', 'load rootdir files via tactfull proxy instead of filesystem')
   run:flag('--profile', 'dump profile')
   run:flag('--trackenums', 'track enums')
   return parser:parse()
@@ -31,6 +32,7 @@ local modules = runner.run({
   product = args.product,
   scripts = args.scripts,
   trackenums = args.trackenums,
+  vfs = args.proxy and 'proxy' or nil,
 })
 if args.profile then
   require('wowless.profiler').write({
