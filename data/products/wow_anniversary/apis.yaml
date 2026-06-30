@@ -24165,9 +24165,10 @@ SwitchAchievementSearchTab:
 table.concat:
   impl: table.concat
 table.count:
+  impl: table.count
   inputs:
   - name: table
-    type: unknown
+    type: any
   mayreturnnothing: true
   outputs:
   - name: numTableNodes

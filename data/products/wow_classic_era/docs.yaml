@@ -16,6 +16,12 @@ lies:
       outputs:
       - _add:
           nilable: true
+    table.count:
+      inputs:
+      - type:
+          _change:
+            from: unknown
+            to: any
     UnitFactionGroup:
       _add:
         mayreturnnothing: true
