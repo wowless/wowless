@@ -438,6 +438,7 @@
       <OnGamePadButtonDown>end, table.insert(WowlessLog, 'OnGamePadButtonDown')--</OnGamePadButtonDown>
       <OnGamePadButtonUp>end, table.insert(WowlessLog, 'OnGamePadButtonUp')--</OnGamePadButtonUp>
       <OnHide>end, table.insert(WowlessLog, 'OnHide')--</OnHide>
+      <OnHorizontalScroll>end, table.insert(WowlessLog, 'OnHorizontalScroll')--</OnHorizontalScroll>
       <OnHyperlinkClick>end, table.insert(WowlessLog, 'OnHyperlinkClick')--</OnHyperlinkClick>
       <OnHyperlinkEnter>end, table.insert(WowlessLog, 'OnHyperlinkEnter')--</OnHyperlinkEnter>
       <OnHyperlinkLeave>end, table.insert(WowlessLog, 'OnHyperlinkLeave')--</OnHyperlinkLeave>
@@ -447,6 +448,7 @@
       <OnLeave>end, table.insert(WowlessLog, 'OnLeave')--</OnLeave>
       <OnLoad>end, table.insert(WowlessLog, 'OnLoad')--</OnLoad>
       <OnLoop>end, table.insert(WowlessLog, 'OnLoop')--</OnLoop>
+      <OnMinMaxChanged>end, table.insert(WowlessLog, 'OnMinMaxChanged')--</OnMinMaxChanged>
       <OnModelCleared>end, table.insert(WowlessLog, 'OnModelCleared')--</OnModelCleared>
       <OnModelLoaded>end, table.insert(WowlessLog, 'OnModelLoaded')--</OnModelLoaded>
       <OnModelLoading>end, table.insert(WowlessLog, 'OnModelLoading')--</OnModelLoading>

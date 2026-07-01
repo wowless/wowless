@@ -925,6 +925,10 @@ OnHide:
   extends: ScriptType
   impl:
     script:
+OnHorizontalScroll:
+  extends: ScriptType
+  impl:
+    script:
 OnHyperlinkClick:
   extends: ScriptType
   impl:
@@ -959,6 +963,10 @@ OnLoad:
   impl:
     script:
 OnLoop:
+  extends: ScriptType
+  impl:
+    script:
+OnMinMaxChanged:
   extends: ScriptType
   impl:
     script:
