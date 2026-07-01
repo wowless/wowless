@@ -7356,6 +7356,7 @@ Slider:
         type: number
       outputs:
   scripts:
+    OnMinMaxChanged:
     OnValueChanged:
 StatusBar:
   fields:
@@ -7583,6 +7584,7 @@ StatusBar:
         type: number
       outputs:
   scripts:
+    OnMinMaxChanged:
     OnValueChanged:
 TabardModel:
   fields:

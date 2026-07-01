@@ -7956,6 +7956,7 @@ Slider:
         type: number
       outputs:
   scripts:
+    OnMinMaxChanged:
     OnValueChanged:
 StatusBar:
   fields:
@@ -8224,6 +8225,7 @@ StatusBar:
           enum: StatusBarInterpolation
       outputs:
   scripts:
+    OnMinMaxChanged:
     OnValueChanged:
 TabardModel:
   fields:

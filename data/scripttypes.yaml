@@ -37,6 +37,7 @@ OnKeyUp:
 OnLeave:
 OnLoad:
 OnLoop:
+OnMinMaxChanged:
 OnModelCleared:
 OnModelLoaded:
 OnModelLoading:

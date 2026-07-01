@@ -966,6 +966,10 @@ OnLoop:
   extends: ScriptType
   impl:
     script:
+OnMinMaxChanged:
+  extends: ScriptType
+  impl:
+    script:
 OnModelCleared:
   extends: ScriptType
   impl:
