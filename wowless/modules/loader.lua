@@ -322,6 +322,10 @@ return function(
         parent:SetMinResize(getXY(e.kids[#e.kids]))
       end
     end,
+    mixin = function(_, e, parent)
+      assert(e.attr.source == 'secure', e.attr.source)
+      mixin(parent.luarep, secureenv[e.attr.key])
+    end,
     modifiedclick = function()
       -- TODO support modified clicks
     end,

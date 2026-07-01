@@ -688,6 +688,7 @@ LayoutFrame:
       Anchors:
       Color:
       KeyValues:
+      Mixins:
       Scripts:
       Size:
   virtual: true
@@ -765,6 +766,18 @@ Minimap:
   extends: Frame
 MinResize:
   extends: Dimension
+Mixin:
+  attributes:
+    key:
+      required: true
+      type: string
+    source:
+      type: string
+Mixins:
+  contents:
+    tags:
+      Mixin:
+  impl: transparent
 Model:
   extends: Frame
 ModelScene:
