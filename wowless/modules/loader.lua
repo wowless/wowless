@@ -322,9 +322,26 @@ return function(
         parent:SetMinResize(getXY(e.kids[#e.kids]))
       end
     end,
-    mixin = function(_, e, parent)
+    mixin = function(ctx, e, parent)
+      assert(ctx.useForbiddenObjectTable)
       assert(e.attr.source == 'secure', e.attr.source)
-      mixin(parent.luarep, secureenv[e.attr.key])
+      local f = parent.forbiddenrep
+      if not f then
+        f = setmetatable({ [0] = parent.luarep[0] }, getmetatable(parent.luarep))
+        parent.forbiddenrep = f
+      end
+      local m = assert(secureenv[e.attr.key], e.attr.key)
+      if not e.attr.securedelegates then
+        mixin(f, m)
+      else
+        assert(e.attr.targetpartition == 'public', e.attr.targetpartition)
+        assert(e.attr.inboundpartition == 'forbidden', e.attr.inboundpartition)
+        for k, v in pairs(m) do
+          parent.luarep[k] = debug.newsecurefunction(function(_, ...)
+            return v(f, ...)
+          end)
+        end
+      end
     end,
     modifiedclick = function()
       -- TODO support modified clicks

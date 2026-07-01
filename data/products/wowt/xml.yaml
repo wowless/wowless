@@ -768,10 +768,16 @@ MinResize:
   extends: Dimension
 Mixin:
   attributes:
+    inboundpartition:
+      type: string
     key:
       required: true
       type: string
+    securedelegates:
+      type: boolean
     source:
+      type: string
+    targetpartition:
       type: string
 Mixins:
   contents:
@@ -1219,6 +1225,10 @@ ScopedModifier:
     scriptsusegivenenv:
       impl:
         scope: useAddonEnv
+      type: boolean
+    useforbiddenobjecttable:
+      impl:
+        scope: useForbiddenObjectTable
       type: boolean
   contents:
     tags:
