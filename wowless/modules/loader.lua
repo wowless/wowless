@@ -729,15 +729,15 @@ return function(
     [gametype:lower()] = true,
   }
 
-  local function isLoadable(toc)
+  local function isLoadable(addon)
     local a = datalua.cvars.agentuid.value
-    if toc.attrs.OnlyBetaAndPTR == '1' and a ~= 'wow_ptr' and a ~= 'wow_beta' then
+    if addon.attrs.OnlyBetaAndPTR == '1' and a ~= 'wow_ptr' and a ~= 'wow_beta' then
       return false
     end
-    if not toc.attrs.AllowLoadGameType then
+    if not addon.attrs.AllowLoadGameType then
       return true
     end
-    for gt in string.gmatch(toc.attrs.AllowLoadGameType, '[^, ]+') do
+    for gt in string.gmatch(addon.attrs.AllowLoadGameType, '[^, ]+') do
       if gttokens[gt] then
         return true
       end
@@ -810,77 +810,77 @@ return function(
   end
 
   local function doLoadAddon(addonName, forceSecure)
-    local toc = addonData[addonName:lower()]
-    if not toc then
+    local addon = addonData[addonName:lower()]
+    if not addon then
       error('unknown addon ' .. addonName)
     end
-    addonName = toc.name
-    if toc.attrs.AllowLoad and toc.attrs.AllowLoad:lower() == 'glue' then
+    addonName = addon.name
+    if addon.attrs.AllowLoad and addon.attrs.AllowLoad:lower() == 'glue' then
       log(1, 'skipping glue-only addon %s', addonName)
       return
     end
     if forceSecure then
-      if not toc.loaded then
+      if not addon.loaded then
         log(1, 'UseSecureEnvironment dep addon %s not yet loaded insecurely, loading', addonName)
         doLoadAddon(addonName, false)
       end
-      if toc.secdeploaded then
+      if addon.secdeploaded then
         log(1, 'UseSecureEnvironment dep addon %s is already loaded, skipping', addonName)
         return
       end
-      if toc.secdeploadattempted then
+      if addon.secdeploadattempted then
         log(1, 'UseSecureEnvironment dep addon %s has a load pending already, skipping', addonName)
         return
       end
-      toc.secdeploadattempted = true
+      addon.secdeploadattempted = true
     else
-      if toc.loaded then
+      if addon.loaded then
         log(1, 'addon %s is already loaded, skipping', addonName)
         return
       end
-      if toc.loadattempted then
+      if addon.loadattempted then
         log(1, 'addon %s has a load pending already, skipping', addonName)
         return
       end
-      toc.loadattempted = true
+      addon.loadattempted = true
     end
-    local useSecureEnv = forceSecure or toc.onlysecure
+    local useSecureEnv = forceSecure or addon.onlysecure
     log(1, 'loading addon dependencies for %s', addonName)
-    for _, dep in ipairs(toc.deps) do
+    for _, dep in ipairs(addon.deps) do
       doLoadAddon(dep, useSecureEnv)
     end
-    for _, dep in ipairs(toc.optionaldeps) do
+    for _, dep in ipairs(addon.optionaldeps) do
       if addonData[dep:lower()] then
         doLoadAddon(dep, useSecureEnv)
       end
     end
     local kindstr = forceSecure and ' (secure dependency)' or useSecureEnv and ' (secure)' or ''
     log(1, 'loading addon files for %s%s', addonName, kindstr)
-    local addonEnv = toc.attrs.SuppressLocalTableRef ~= '1' and {} or nil
-    local loadFile = forAddon(addonName, addonEnv, toc.dir, useSecureEnv, forceSecure)
-    for _, file in ipairs(toc.files) do
+    local addonEnv = addon.attrs.SuppressLocalTableRef ~= '1' and {} or nil
+    local loadFile = forAddon(addonName, addonEnv, addon.dir, useSecureEnv, forceSecure)
+    for _, file in ipairs(addon.files) do
       if useSecureEnv and file.AllowLoadEnvironment == 'global' then
         log(1, 'skipping %s because LoadEnvironment="secure" and AllowLoadEnvironment="global"', file.name)
       elseif not useSecureEnv and file.LoadIntoEnvironment == 'secure' then
         log(1, 'loading insecure %s in secureenv', file.name)
-        forAddon(addonName, addonEnv, toc.dir, true)(file.name)
+        forAddon(addonName, addonEnv, addon.dir, true)(file.name)
       else
         loadFile(file.name)
       end
     end
-    if toc.bindings then
-      loadFile(toc.bindings)
+    if addon.bindings then
+      loadFile(addon.bindings)
       SendEvent('UPDATE_BINDINGS')
     end
-    loadFile(('out/%s/SavedVariables/%s.lua'):format(product, addonName), toc.signed and 'SavedVariables' or nil)
+    loadFile(('out/%s/SavedVariables/%s.lua'):format(product, addonName), addon.signed and 'SavedVariables' or nil)
     if forceSecure then
-      toc.secdeploaded = true
+      addon.secdeploaded = true
     else
-      toc.loaded = true
+      addon.loaded = true
     end
     log(1, 'done loading %s%s', addonName, kindstr)
-    SendEvent('ADDON_LOADED', addonName, not not toc.bindings)
-    for _, revwith in ipairs(toc.revwiths) do
+    SendEvent('ADDON_LOADED', addonName, not not addon.bindings)
+    for _, revwith in ipairs(addon.revwiths) do
       log(1, 'processing LoadWith %q -> %q', addonName, revwith)
       doLoadAddon(revwith)
     end
@@ -898,21 +898,21 @@ return function(
 
   local function loadAddons()
     log(1, 'loading loadfirst/secureenv framexml addons')
-    for _, toc in ipairs(addonData) do
-      if toc.loadfirst then
-        doLoadAddon(toc.name)
+    for _, addon in ipairs(addonData) do
+      if addon.loadfirst then
+        doLoadAddon(addon.name)
       end
     end
     log(1, 'loading remaining framexml addons')
-    for _, toc in ipairs(addonData) do
-      if not toc.loaded and toc.signed and not toc.loadondemand then
-        doLoadAddon(toc.name)
+    for _, addon in ipairs(addonData) do
+      if not addon.loaded and addon.signed and not addon.loadondemand then
+        doLoadAddon(addon.name)
       end
     end
     log(1, 'loading non-framexml addons')
-    for _, toc in ipairs(addonData) do
-      if not toc.loaded and not toc.loadondemand then
-        doLoadAddon(toc.name)
+    for _, addon in ipairs(addonData) do
+      if not addon.loaded and not addon.loadondemand then
+        doLoadAddon(addon.name)
       end
     end
     log(1, 'done loading addons')
