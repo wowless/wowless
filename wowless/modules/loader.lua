@@ -148,6 +148,13 @@ return function(
     elseif script.attr.method then
       local mattr = script.attr.method
       fn = obj.luarep[mattr]
+      if not fn and obj.forbiddenrep and obj.forbiddenrep[mattr] then
+        local ffn = obj.forbiddenrep[mattr]
+        fn = function(_, ...)
+          return ffn(obj.forbiddenrep, ...)
+        end
+        setfenv(fn, env)
+      end
       if not fn then
         log(2, 'unknown script method %q on %q', mattr, obj:GetDebugName())
       end
