@@ -6,7 +6,7 @@ return function(datalua)
       return 'FIXME', nil, nil, false, 'MISSING', 'INSECURE'
     else
       local name = addon.name
-      local secure = addon.name:sub(1, 9) == 'Blizzard_' and 'SECURE' or 'INSECURE'
+      local secure = addon.signed and 'SECURE' or 'INSECURE'
       return name, addon.attrs.Title or '', addon.attrs.Notes or '', true, '', secure
     end
   end
