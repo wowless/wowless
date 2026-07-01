@@ -148,6 +148,13 @@ return function(
     elseif script.attr.method then
       local mattr = script.attr.method
       fn = obj.luarep[mattr]
+      if not fn and obj.forbiddenrep[mattr] then
+        local ffn = obj.forbiddenrep[mattr]
+        fn = function(_, ...)
+          return ffn(obj.forbiddenrep, ...)
+        end
+        setfenv(fn, env)
+      end
       if not fn then
         log(2, 'unknown script method %q on %q', mattr, obj:GetDebugName())
       end
@@ -298,9 +305,10 @@ return function(
     hitrectinsets = function(_, e, parent)
       parent:SetHitRectInsets(getInsets(e))
     end,
-    keyvalue = function(_, e, parent)
+    keyvalue = function(ctx, e, parent)
+      local obj = ctx.useForbiddenObjectTable and parent.forbiddenrep or parent.luarep
       local a = e.attr
-      parent.luarep[a.key] = parseTypedValue(a.type, a.value)
+      obj[a.key] = parseTypedValue(a.type, a.value)
     end,
     maskedtexture = function(_, e, parent)
       local t = navigate(parent.parent, e.attr.childkey)
@@ -320,6 +328,23 @@ return function(
       -- TODO fix for dragonflight
       if parent.SetMinResize then
         parent:SetMinResize(getXY(e.kids[#e.kids]))
+      end
+    end,
+    mixin = function(ctx, e, parent)
+      assert(ctx.useForbiddenObjectTable)
+      assert(e.attr.source == 'secure', e.attr.source)
+      local f = parent.forbiddenrep
+      local m = assert(secureenv[e.attr.key], e.attr.key)
+      if not e.attr.securedelegates then
+        mixin(f, m)
+      else
+        assert(e.attr.targetpartition == 'public', e.attr.targetpartition)
+        assert(e.attr.inboundpartition == 'forbidden', e.attr.inboundpartition)
+        for k, v in pairs(m) do
+          parent.luarep[k] = debug.newsecurefunction(function(_, ...)
+            return v(f, ...)
+          end)
+        end
       end
     end,
     modifiedclick = function()
@@ -861,6 +886,9 @@ return function(
     for _, file in ipairs(addon.files) do
       if useSecureEnv and file.AllowLoadEnvironment == 'global' then
         log(1, 'skipping %s because LoadEnvironment="secure" and AllowLoadEnvironment="global"', file.name)
+      elseif useSecureEnv and file.LoadIntoEnvironment == 'global' then
+        log(1, 'loading secure %s in global env', file.name)
+        forAddon(addonName, addonEnv, addon.dir, false)(file.name)
       elseif not useSecureEnv and file.LoadIntoEnvironment == 'secure' then
         log(1, 'loading insecure %s in secureenv', file.name)
         forAddon(addonName, addonEnv, addon.dir, true)(file.name)

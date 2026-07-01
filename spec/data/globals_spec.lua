@@ -13,16 +13,16 @@ describe('globals', function()
                 end)
               else
                 local meta = assert(enums[k .. 'Meta'])
-                it('NumValues matches', function()
-                  local count = 0
-                  for _ in pairs(enums[k]) do
-                    count = count + 1
-                  end
-                  assert.equal(meta.NumValues, count)
-                end)
                 -- issue #527
                 local stringValuedEnums = { AccountStateLoadedFlags = true, CreateAllAccountData = true }
                 if not stringValuedEnums[k] then
+                  it('NumValues matches', function()
+                    local count = 0
+                    for _ in pairs(enums[k]) do
+                      count = count + 1
+                    end
+                    assert.equal(count, meta.NumValues)
+                  end)
                   it('MinValue matches', function()
                     local min
                     for _, v in pairs(enums[k]) do
@@ -30,7 +30,7 @@ describe('globals', function()
                         min = v
                       end
                     end
-                    assert.equal(meta.MinValue, min)
+                    assert.equal(min, meta.MinValue)
                   end)
                   it('MaxValue matches', function()
                     local max
@@ -39,8 +39,8 @@ describe('globals', function()
                         max = v
                       end
                     end
-                    local expected = max ~= nil and (max < 2 ^ 31 and max or max - 2 ^ 32) or nil
-                    assert.equal(meta.MaxValue, expected)
+                    local expected = max ~= nil and ((p == 'wowt' or max < 2 ^ 31) and max or max - 2 ^ 32) or nil
+                    assert.equal(expected, meta.MaxValue)
                   end)
                 end
               end

@@ -60,7 +60,7 @@ local ptablemap = {
     local config = perproduct(p, 'config')
     local t = {}
     for name, api in pairs(perproduct(p, 'apis')) do
-      if not name:find('%.') then
+      if not name:find('%.') and not api.secureonly then
         local vv = {
           overwritten = tpath(config, 'addon', 'overwritten_apis', name) and true,
           protected = api.protected,

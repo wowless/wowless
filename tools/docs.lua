@@ -126,12 +126,12 @@ for _, t in pairs(docs) do
       local name = (ns and ns ~= '' and (ns .. '.') or '') .. func.Name
       assert(not funcs[name])
       funcs[name] = func
-      func.Environment = t.Environment
+      func.Environment = func.Environment or t.Environment
     end
     for _, event in ipairs(t.Events or {}) do
       local name = (t.Namespace and (t.Namespace .. '.') or '') .. event.Name
       assert(not events[name])
-      event.Environment = t.Environment
+      event.Environment = event.Environment or t.Environment
       events[name] = not take(extra_events, event.LiteralName) and event or nil
     end
   elseif t.Type == 'ScriptObject' and not take(extra_script_objects, t.Name) then
@@ -377,7 +377,7 @@ local function rewriteGlobals(out)
       end
       out.Enum[tab.Name] = takelieor(t, lies, tab.Name)
       out.Enum[tab.Name .. 'Meta'] = {
-        MaxValue = tab.MaxValue < 2 ^ 31 and tab.MaxValue or tab.MaxValue - 2 ^ 32,
+        MaxValue = (product == 'wowt' or tab.MaxValue < 2 ^ 31) and tab.MaxValue or tab.MaxValue - 2 ^ 32,
         MinValue = tab.MinValue,
         NumValues = tab.NumValues,
       }

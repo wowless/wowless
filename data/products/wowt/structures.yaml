@@ -11,13 +11,22 @@ AddPrivateAuraAnchorArgs:
       type:
         structure: PrivateAuraIconInfo
     isContainer:
+      default: false
       type: boolean
     parent:
       type:
         uiobject: Frame
-    showCountdownFrame:
+    showCooldownEdge:
+      default: false
+      type: boolean
+    showCooldownFrame:
+      default: false
       type: boolean
     showCountdownNumbers:
+      default: false
+      type: boolean
+    showDispelIcon:
+      default: false
       type: boolean
     unitToken:
       type: string
@@ -786,6 +795,14 @@ C_BattleNet.BNetAccountInfo:
       type: string
     customMessageTime:
       type: number
+    friendLevel:
+      nilable: true
+      type:
+        enum: BattleNetFriendLevel
+    friendTags:
+      type:
+        arrayof:
+          enum: BattleNetFriendTag
     gameAccountInfo:
       type:
         structure: C_BattleNet.BNetGameAccountInfo
@@ -806,6 +823,18 @@ C_BattleNet.BNetAccountInfo:
     rafLinkType:
       type:
         enum: RafLinkType
+C_BattleNet.BNetFriendInviteInfo:
+  fields:
+    accountName:
+      type: string
+    creationTimestamp:
+      type: number
+    friendLevel:
+      nilable: true
+      type:
+        enum: BattleNetFriendLevel
+    inviteID:
+      type: number
 C_BattleNet.BNetGameAccountInfo:
   fields:
     areaName:
@@ -817,6 +846,9 @@ C_BattleNet.BNetGameAccountInfo:
       nilable: true
       type: number
     characterName:
+      nilable: true
+      type: string
+    classFilename:
       nilable: true
       type: string
     classID:
@@ -833,6 +865,8 @@ C_BattleNet.BNetGameAccountInfo:
     gameAccountID:
       type: number
     hasFocus:
+      type: boolean
+    isAppearOffline:
       type: boolean
     isGameAFK:
       type: boolean
@@ -1325,6 +1359,8 @@ C_CatalogShop.CatalogShopProductInfo:
       type: boolean
     isHidden:
       type: boolean
+    isMystery:
+      type: boolean
     isPurchasePending:
       type: boolean
     isVCProduct:
@@ -1604,7 +1640,7 @@ C_Club.ClubInfo:
 C_Club.ClubInvitationCandidateInfo:
   fields:
     memberId:
-      type: number
+      type: string
     name:
       type: string
     priority:
@@ -1640,6 +1676,10 @@ C_Club.ClubMemberInfo:
       nilable: true
       type:
         enum: ClubType
+    discordInfo:
+      nilable: true
+      type:
+        structure: DiscordChatInfo
     faction:
       nilable: true
       type:
@@ -1674,7 +1714,7 @@ C_Club.ClubMemberInfo:
       nilable: true
       type: number
     memberId:
-      type: number
+      type: string
     memberNote:
       nilable: true
       type: string
@@ -2260,10 +2300,15 @@ C_CooldownViewer.CooldownViewerCooldown:
       type: boolean
     cooldownID:
       type: number
+    equipSlot:
+      nilable: true
+      type: number
     flags:
       type:
         enum: CooldownSetSpellFlags
     hasAura:
+      type: boolean
+    isInvisible:
       type: boolean
     isKnown:
       type: boolean
@@ -2278,6 +2323,23 @@ C_CooldownViewer.CooldownViewerCooldown:
       type: number
     selfAura:
       type: boolean
+    spellCategoryID:
+      nilable: true
+      type: number
+    spellID:
+      nilable: true
+      type: number
+C_CooldownViewer.GroupBuffItem:
+  fields:
+    flags:
+      type:
+        enum: GroupBuffItemFlags
+    iconID:
+      type: number
+    isKnown:
+      type: boolean
+    name:
+      type: string
     spellID:
       type: number
 C_CovenantPreview.CovenantAbilityInfo:
@@ -2678,6 +2740,9 @@ C_DamageMeter.DamageMeterCombatSource:
       type: number
     deathTimeSeconds:
       type: number
+    factionGroup:
+      nilable: true
+      type: string
     isLocalPlayer:
       type: boolean
     name:
@@ -2776,10 +2841,16 @@ C_DelvesUI.TieredEntranceRewardInfo:
         enum: TieredEntranceRewardType
 C_DelvesUI.TieredEntranceTierInfo:
   fields:
+    difficultyID:
+      type: number
+    isLFG:
+      type: boolean
     lockedReason:
       nilable: true
       type: string
     modifierUIWidgetSetID:
+      type: number
+    overrideTooltipSpellID:
       type: number
     rewards:
       type:
@@ -2863,6 +2934,14 @@ C_EncodingUtil.JSONSerializationOptions:
     ignoreSerializationErrors:
       default: false
       type: boolean
+C_EncounterInfo.EncounterUnitStatus:
+  fields:
+    creatureID:
+      type: number
+    creatureName:
+      type: string
+    remainingHealthPercent:
+      type: number
 C_EncounterJournal.DungeonEntranceMapInfo:
   fields:
     areaPoiID:
@@ -2964,9 +3043,6 @@ C_EncounterJournal.EncounterJournalSectionInfo:
       type: number
 C_EncounterTimeline.EncounterTimelineEventInfo:
   fields:
-    color:
-      type:
-        structure: colorRGB
     duration:
       type: number
     iconFileID:
@@ -3050,7 +3126,7 @@ C_EncounterWarnings.EncounterWarningInfo:
       type: string
     color:
       type:
-        structure: colorRGB
+        structure: colorRGBA
     duration:
       type: number
     iconFileID:
@@ -4636,6 +4712,8 @@ C_LFGList.LfgEntryData:
         arrayof: number
     autoAccept:
       type: boolean
+    censored:
+      type: boolean
     comment:
       type: string
     duration:
@@ -4716,6 +4794,8 @@ C_LFGList.LfgSearchResultData:
     age:
       type: number
     autoAccept:
+      type: boolean
+    censored:
       type: boolean
     comment:
       type: string
@@ -5321,7 +5401,7 @@ C_MythicPlus.MapSeasonBestInfo:
         arrayof: number
     completionDate:
       type:
-        structure: C_MythicPlus.MythicPlusDate
+        structure: CalendarTime
     dungeonScore:
       type: number
     durationSec:
@@ -5332,20 +5412,6 @@ C_MythicPlus.MapSeasonBestInfo:
       type:
         arrayof:
           structure: C_MythicPlus.MythicPlusMember
-C_MythicPlus.MythicPlusDate:
-  fields:
-    day:
-      type: number
-    hour:
-      type: number
-    minute:
-      type: number
-    month:
-      type: number
-    weekday:
-      type: number
-    year:
-      type: number
 C_MythicPlus.MythicPlusKeystoneAffix:
   fields:
     id:
@@ -5367,7 +5433,7 @@ C_MythicPlus.MythicPlusRunInfo:
       type: boolean
     completionDate:
       type:
-        structure: C_MythicPlus.MythicPlusDate
+        structure: CalendarTime
     durationSec:
       type: number
     level:
@@ -5785,9 +5851,14 @@ C_PetJournal.PetAbilityLevelInfo:
       type: number
 C_PetJournal.PetJournalPetInfo:
   fields:
+    canAttachToDecor:
+      type: boolean
     canBattle:
       type: boolean
     creatureID:
+      type: number
+    creatureModelScale:
+      nilable: true
       type: number
     customName:
       nilable: true
@@ -5795,14 +5866,18 @@ C_PetJournal.PetJournalPetInfo:
     description:
       type: string
     displayID:
+      nilable: true
       type: number
     icon:
       type: number
     isFavorite:
+      nilable: true
       type: boolean
     isWild:
+      nilable: true
       type: boolean
     maxXP:
+      nilable: true
       type: number
     name:
       nilable: true
@@ -5810,6 +5885,7 @@ C_PetJournal.PetJournalPetInfo:
     obtainable:
       type: boolean
     petLevel:
+      nilable: true
       type: number
     petType:
       type: number
@@ -5822,7 +5898,26 @@ C_PetJournal.PetJournalPetInfo:
     unique:
       type: boolean
     xp:
+      nilable: true
       type: number
+C_Ping.PingTypeInfo:
+  fields:
+    orderIndex:
+      type: number
+    type:
+      type:
+        enum: PingSubjectType
+    uiTextureKitID:
+      type: string
+C_PingSecure.SendPingResult:
+  fields:
+    result:
+      type:
+        enum: PingResult
+    type:
+      nilable: true
+      type:
+        enum: PingSubjectType
 C_PlayerChoice.PlayerChoiceInfo:
   fields:
     choiceID:
@@ -5830,6 +5925,8 @@ C_PlayerChoice.PlayerChoiceInfo:
     closeUISoundKitID:
       nilable: true
       type: number
+    hideAnswerArt:
+      type: boolean
     hideWarboardHeader:
       type: boolean
     keepOpenAfterChoice:
@@ -5842,11 +5939,12 @@ C_PlayerChoice.PlayerChoiceInfo:
           structure: C_PlayerChoice.PlayerChoiceOptionInfo
     pendingChoiceText:
       type: string
+    playerChoiceLayout:
+      type:
+        enum: PlayerChoiceLayout
     questionText:
       type: string
     requiresSelection:
-      type: boolean
-    showChoicesAsList:
       type: boolean
     soundKitID:
       nilable: true
@@ -6954,6 +7052,16 @@ C_ScenarioInfo.ScenarioDisplayInfo:
     themeColor:
       type:
         structure: colorRGB
+C_ScenarioInfo.ScenarioIconInfo:
+  fields:
+    atlas:
+      type: string
+    description:
+      type: string
+    x:
+      type: number
+    y:
+      type: number
 C_ScenarioInfo.ScenarioInformation:
   fields:
     area:
@@ -7271,6 +7379,25 @@ C_Soulbinds.SoulbindTree:
       type:
         arrayof:
           structure: C_Soulbinds.SoulbindNode
+C_Sound.PlaySoundParams:
+  fields:
+    forceNoDuplicates:
+      default: false
+      type: boolean
+    overridePriority:
+      nilable: true
+      type: number
+    runFinishCallback:
+      default: false
+      type: boolean
+    soundKitID:
+      type: number
+    uiSoundSubType:
+      default: g_defaultSI3UISoundSubTypeForLua
+      type: string
+    volumeOverride:
+      nilable: true
+      type: number
 C_SpecializationInfo.PvpTalentInfo:
   fields:
     available:
@@ -11215,6 +11342,46 @@ DelveAssistActionData:
     receivedSpellID:
       nilable: true
       type: number
+DiscordChatInfo:
+  fields:
+    forwardedMessage:
+      type: string
+    fromDiscord:
+      type: boolean
+    globalName:
+      type: string
+    hasAttachment:
+      type: boolean
+    hasEmbed:
+      type: boolean
+    hasEmoji:
+      type: boolean
+    hasForwardedMessage:
+      type: boolean
+    hasPoll:
+      type: boolean
+    hasSticker:
+      type: boolean
+    lastOnlineGUID:
+      type: string
+    lastOnlineName:
+      type: string
+    type:
+      default: 0
+      type:
+        enum: DiscordDisplayNameType
+    userID:
+      type: string
+    username:
+      type: string
+DurationTextBindingFormatComponent:
+  fields:
+    formatter:
+      type:
+        luaobject: NumericFormatter
+    property:
+      type:
+        enum: DurationTextBindingProperty
 DyeColorCategoryDisplayInfo:
   fields:
     ID:
@@ -11244,10 +11411,6 @@ DyeColorDisplayInfo:
         structure: colorRGB
 EncounterEventInfo:
   fields:
-    color:
-      nilable: true
-      type:
-        structure: colorRGB
     enabled:
       type: boolean
     encounterEventID:
@@ -11513,6 +11676,13 @@ GatheringOperationInfo:
       type: number
     spellID:
       type: number
+GroupBuffVisualAlertInfo:
+  fields:
+    spellID:
+      type: number
+    visualValue:
+      type:
+        enum: VisualAlertType
 GuildTabardInfo:
   fields:
     backgroundColor:
@@ -11550,11 +11720,13 @@ HouseExteriorTypeOption:
   fields:
     houseExteriorTypeID:
       type: number
+    isInvalid:
+      type: boolean
     isLocked:
       type: boolean
-    lockReasonString:
-      type: string
     name:
+      type: string
+    reasonString:
       type: string
 HouseExteriorTypeOptionsInfo:
   fields:
@@ -11654,6 +11826,88 @@ HouseOwnerCharacterInfo:
         enum: HouseOwnerError
     playerGUID:
       type: string
+HousingBlueprintCollection:
+  fields:
+    groups:
+      type:
+        arrayof:
+          structure: HousingBlueprintGroup
+HousingBlueprintContentEntry:
+  fields:
+    contentType:
+      type:
+        enum: HousingBlueprintContentType
+    invalid:
+      default: false
+      type: boolean
+    name:
+      type: string
+    numMissing:
+      default: 0
+      type: number
+    recordID:
+      type: number
+    tooltip:
+      nilable: true
+      type: string
+    total:
+      default: 0
+      type: number
+HousingBlueprintContentGroup:
+  fields:
+    contentType:
+      type:
+        enum: HousingBlueprintContentType
+    entries:
+      type:
+        arrayof:
+          structure: HousingBlueprintContentEntry
+HousingBlueprintContentInfo:
+  fields:
+    blockingRequirementFlags:
+      type:
+        enum: HousingBlueprintUnmetRequirementFlags
+    contentGroups:
+      type:
+        arrayof:
+          structure: HousingBlueprintContentGroup
+    exteriorDecorBudgetCost:
+      type: number
+    interiorDecorBudgetCost:
+      type: number
+    roomBudgetCost:
+      type: number
+    shareCode:
+      type: string
+    targetHouseGUID:
+      nilable: true
+      type: string
+    unmetRequirementFlags:
+      type:
+        enum: HousingBlueprintUnmetRequirementFlags
+HousingBlueprintGroup:
+  fields:
+    entries:
+      type:
+        arrayof:
+          structure: HousingBlueprintInfo
+    name:
+      type: string
+HousingBlueprintInfo:
+  fields:
+    blueprintID:
+      type: number
+    blueprintType:
+      type:
+        enum: HousingBlueprintType
+    creationTime:
+      type: number
+    isAutoSave:
+      type: boolean
+    name:
+      type: string
+    shareCode:
+      type: string
 HousingCatalogEntryID:
   fields:
     entryType:
@@ -11722,6 +11976,8 @@ HousingDecorDyeSlot:
       type: number
 HousingDecorInstanceInfo:
   fields:
+    canAttachPet:
+      type: boolean
     canBeCustomized:
       type: boolean
     canBeRemoved:
@@ -11755,11 +12011,13 @@ HousingFixtureOption:
       type: number
     fixtureID:
       type: number
+    isInvalid:
+      type: boolean
     isLocked:
       type: boolean
-    lockReasonString:
-      type: string
     name:
+      type: string
+    reasonString:
       type: string
     typeID:
       type: number
@@ -12055,15 +12313,21 @@ PingCooldownInfo:
       type: number
     startTimeMs:
       type: number
-PingTypeInfo:
+PingMacroInfo:
   fields:
-    orderIndex:
+    itemID:
+      nilable: true
       type: number
+    spellID:
+      nilable: true
+      type: number
+    targetToken:
+      nilable: true
+      type: string
     type:
+      nilable: true
       type:
         enum: PingSubjectType
-    uiTextureKitID:
-      type: string
 PlayerInfoCharacterData:
   fields:
     alternateFormRaceData:
@@ -12301,6 +12565,19 @@ RuneforgePower:
     state:
       type:
         enum: RuneforgePowerState
+SecureCopyOptions:
+  fields:
+    maxTraversalDepth:
+      default: 100
+      type: number
+    wrapUntrustedFunctions:
+      default: true
+      type: boolean
+SecureDelegateOptions:
+  fields:
+    wrapUntrustedFunctions:
+      default: true
+      type: boolean
 SpecializationCurrencyInfo:
   fields:
     currencyName:

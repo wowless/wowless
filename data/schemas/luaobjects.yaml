@@ -34,6 +34,8 @@ type:
                             required: true
                             type:
                               schema: type
+                  mayreturnnothing:
+                    type: flag
                   outputs:
                     type:
                       sequenceof:

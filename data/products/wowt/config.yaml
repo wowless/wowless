@@ -24,13 +24,14 @@ addon:
       secretunwrap:
   enum_values_set_in_framexml:
     CooldownViewerCategory:
-      HiddenAura:
-      HiddenSpell:
+      HiddenActive:
+      HiddenPassive:
   enums_set_in_framexml:
     CDMLayoutMode:
     CooldownLayoutAction:
     CooldownLayoutStatus:
     CooldownLayoutType:
+    CooldownViewerSoundCategory:
     EditModeChatFrameDisplayOnlySetting:
     HousingCatalogEntrySubtype:
   hooked_globals:
@@ -77,12 +78,18 @@ addon:
     C_HousingCatalog.GetCatalogSubcategoryInfo:
     C_HousingCatalog.SearchCatalogCategories:
     C_HousingCatalog.SearchCatalogSubcategories:
+    C_HousingDecor.GetMaxPlacementBudget:
+    C_HousingDecor.GetSpentPlacementBudget:
+    C_HousingLayout.GetRoomPlacementBudget:
+    C_HousingLayout.GetSpentPlacementBudget:
     C_Traits.GetConditionInfo:
     C_Traits.GetEntryInfo:
     C_Traits.GetTreeInfo:
 modules:
   luaobjects:
     tostring_metamethod: true
+  parentkey:
+    rawset: true
 runner:
   skip_bindings:
     TOGGLECOLLECTIONSWARDROBE: requires better implementation of transmog slots
@@ -102,6 +109,7 @@ runner:
     PTRFEEDBACK:
     USERANDOM:
 runtime:
+  discord: true
   send_isfromitem: true
   warners:
     fontstring:
