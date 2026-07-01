@@ -104,6 +104,12 @@ lies:
           _change:
             from: unknown
             to: any
+    table.create:
+      outputs:
+      - type:
+          _change:
+            from: unknown
+            to: table
     UnitFactionGroup:
       _add:
         mayreturnnothing: true
