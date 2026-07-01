@@ -3448,6 +3448,11 @@ C_BattleNet.AreFriendTagsEnabled:
   outputs:
   - name: areFriendTagsEnabled
     type: boolean
+C_BattleNet.AreTitleFriendCustomNamesEnabled:
+  inputs:
+  outputs:
+  - name: areTitleFriendCustomNamesEnabled
+    type: boolean
 C_BattleNet.AreTitleFriendsEnabled:
   inputs:
   outputs:
@@ -3484,6 +3489,14 @@ C_BattleNet.GetAccountInfoByID:
     nilable: true
     type:
       structure: C_BattleNet.BNetAccountInfo
+C_BattleNet.GetCustomTitleFriendName:
+  inputs:
+  - name: id
+    type: number
+  mayreturnnothing: true
+  outputs:
+  - name: customName
+    type: string
 C_BattleNet.GetFriendAccountInfo:
   inputs:
   - name: friendIndex
@@ -3589,6 +3602,12 @@ C_BattleNet.SetAFK:
     name: isAFK
     type: boolean
   outputs:
+C_BattleNet.SetAppearOffline:
+  inputs:
+  - default: true
+    name: isAppearOffline
+    type: boolean
+  outputs:
 C_BattleNet.SetCustomMessage:
   inputs:
   - name: text
@@ -3596,6 +3615,13 @@ C_BattleNet.SetCustomMessage:
   outputs:
   - name: success
     type: boolean
+C_BattleNet.SetCustomTitleFriendName:
+  inputs:
+  - name: id
+    type: number
+  - name: customName
+    type: string
+  outputs:
 C_BattleNet.SetDND:
   inputs:
   - default: true
@@ -10414,6 +10440,8 @@ C_Discord.GetNumDiscordChannels:
   outputs:
   - name: count
     type: number
+  - name: valid
+    type: boolean
 C_Discord.GetNumDiscordServers:
   inputs:
   outputs:
@@ -10830,6 +10858,13 @@ C_EncounterEvents.SetEventSound:
     type:
       structure: EncounterEventSoundInfo
   outputs:
+C_EncounterJournal.GetBaseDifficultyID:
+  inputs:
+  - name: difficultyID
+    type: number
+  outputs:
+  - name: baseDifficultyID
+    type: number
 C_EncounterJournal.GetDungeonEntrancesForMap:
   inputs:
   - name: uiMapID
@@ -10917,6 +10952,13 @@ C_EncounterJournal.GetSlotFilter:
 C_EncounterJournal.InitalizeSelectedTier:
   inputs:
   outputs:
+C_EncounterJournal.InstanceHasDifficultyID:
+  inputs:
+  - name: difficultyID
+    type: number
+  outputs:
+  - name: hasDifficultyID
+    type: boolean
 C_EncounterJournal.InstanceHasLoot:
   inputs:
   - name: instanceID
@@ -11721,6 +11763,11 @@ C_FriendList.IsIgnoredByGuid:
     type: string
   outputs:
   - name: isIgnored
+    type: boolean
+C_FriendList.IsLegacyFriendSystemEnabled:
+  inputs:
+  outputs:
+  - name: isLegacyFriendSystemEnabled
     type: boolean
 C_FriendList.IsOnIgnoredList:
   inputs:
@@ -13196,6 +13243,12 @@ C_HouseEditor.GetHouseEditorModeAvailability:
   - name: result
     type:
       enum: HousingResult
+C_HouseEditor.GetHouseEditorPlayerType:
+  inputs:
+  outputs:
+  - name: playerType
+    type:
+      enum: HouseEditorPlayerType
 C_HouseEditor.IsHouseEditorActive:
   inputs:
   outputs:
@@ -13833,21 +13886,29 @@ C_HousingBlueprint.GetBlueprintTypeForCode:
   - name: type
     type:
       enum: HousingBlueprintType
+C_HousingBlueprint.GetExportAvailability:
+  inputs:
+  outputs:
+  - name: availability
+    type:
+      enum: HousingResult
+C_HousingBlueprint.GetFeatureAvailability:
+  inputs:
+  outputs:
+  - name: blueprintsAvailability
+    type:
+      enum: HousingResult
+C_HousingBlueprint.GetImportAvailability:
+  inputs:
+  outputs:
+  - name: availability
+    type:
+      enum: HousingResult
 C_HousingBlueprint.ImportBlueprint:
   inputs:
   - name: shareCode
     type: string
   outputs:
-C_HousingBlueprint.IsExportAvailable:
-  inputs:
-  outputs:
-  - name: exportAvailable
-    type: boolean
-C_HousingBlueprint.IsImportAvailable:
-  inputs:
-  outputs:
-  - name: importAvailable
-    type: boolean
 C_HousingBlueprint.IsShareCodeValid:
   inputs:
   - name: shareCode
@@ -14396,6 +14457,15 @@ C_HousingDecor.GetBothMaxPlacementBudgets:
     nilable: true
     type: number
   - name: maxExteriorBudget
+    nilable: true
+    type: number
+C_HousingDecor.GetBothSpentPlacementBudgets:
+  inputs:
+  outputs:
+  - name: spentInteriorBudget
+    nilable: true
+    type: number
+  - name: spentExteriorBudget
     nilable: true
     type: number
 C_HousingDecor.GetDecorAssignedPetName:
@@ -20739,6 +20809,15 @@ C_PingSecure.SendPing:
 C_PingSecure.SendPlayerItemPing:
   inputs:
   - name: itemID
+    type: number
+  outputs:
+  - name: result
+    type:
+      structure: C_PingSecure.SendPingResult
+  secureonly: true
+C_PingSecure.SendPlayerSpellCategoryPing:
+  inputs:
+  - name: spellCategoryID
     type: number
   outputs:
   - name: result
@@ -39370,7 +39449,7 @@ SetSendMailShowing:
     type: boolean
   outputs:
 SetSpellbookPetAction:
-SetTableSecurityOption:
+settablesecurity:
   inputs:
   - name: table
     type: table

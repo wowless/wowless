@@ -866,6 +866,8 @@ C_BattleNet.BNetGameAccountInfo:
       type: number
     hasFocus:
       type: boolean
+    isAppearOffline:
+      type: boolean
     isGameAFK:
       type: boolean
     isGameBusy:
@@ -2839,6 +2841,8 @@ C_DelvesUI.TieredEntranceRewardInfo:
         enum: TieredEntranceRewardType
 C_DelvesUI.TieredEntranceTierInfo:
   fields:
+    difficultyID:
+      type: number
     isLFG:
       type: boolean
     lockedReason:
@@ -11367,6 +11371,8 @@ DiscordChatInfo:
       type:
         enum: DiscordDisplayNameType
     userID:
+      type: string
+    username:
       type: string
 DurationTextBindingFormatComponent:
   fields:

@@ -49,6 +49,8 @@ type:
                     Nilable:
                       required: true
                       type: boolean
+                    SecretValue:
+                      type: flag
                     StrideIndex:
                       type: number
                     Type:
@@ -216,6 +218,8 @@ type:
             RequiresStatusBarDesaturationAccess:
               type: flag
             RequiresSupportedScript:
+              type: flag
+            RequiresUnitAuraAccess:
               type: flag
             RequiresUnitIdentityAccess:
               type: flag

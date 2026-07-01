@@ -560,6 +560,8 @@ BARBER_SHOP_RESULT:
     type: boolean
 BATTLE_NET_FRIEND_TAG_ENABLED_STATUS_UPDATED:
   payload:
+BATTLE_NET_TITLE_FRIEND_CUSTOM_NAME_ENABLED_STATUS_UPDATED:
+  payload:
 BATTLE_PET_CURSOR_CLEAR:
   payload:
 BATTLEFIELD_AUTO_QUEUE:
@@ -5499,11 +5501,15 @@ HOUSING_BLUEPRINT_CONTENTS_RECEIVED:
       structure: HousingBlueprintContentInfo
 HOUSING_BLUEPRINT_DELETE_FAILURE:
   payload:
+  - name: blueprintID
+    type: number
   - name: result
     type:
       enum: HousingResult
 HOUSING_BLUEPRINT_DELETE_SUCCESS:
   payload:
+  - name: blueprintID
+    type: number
 HOUSING_BLUEPRINT_EXPORT_FAILURE:
   payload:
   - name: result
@@ -5518,14 +5524,24 @@ HOUSING_BLUEPRINT_IMPORT_FAILURE:
   - name: result
     type:
       enum: HousingResult
+HOUSING_BLUEPRINT_IMPORT_STARTED:
+  payload:
 HOUSING_BLUEPRINT_IMPORT_SUCCESS:
   payload:
 HOUSING_BLUEPRINT_RENAME_FAILURE:
   payload:
+  - name: blueprintID
+    type: number
   - name: result
     type:
       enum: HousingResult
 HOUSING_BLUEPRINT_RENAME_SUCCESS:
+  payload:
+  - name: blueprintID
+    type: number
+  - name: name
+    type: string
+HOUSING_BLUEPRINTS_AVAILABILITY_CHANGED:
   payload:
 HOUSING_CATALOG_CATEGORY_UPDATED:
   payload:
@@ -6098,6 +6114,8 @@ LEAVE_PARTY_CONFIRMATION:
     type:
       enum: LeavePartyConfirmReason
 LEAVING_TUTORIAL_AREA:
+  payload:
+LEGACY_FRIEND_SYSTEM_STATUS_UPDATED:
   payload:
 LEGACY_LOOT_RULES_CHANGED:
   payload:

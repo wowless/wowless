@@ -35,6 +35,7 @@ return function(msg)
       lastOnlineName = '',
       type = 0,
       userID = '',
+      username = '',
     })
   end
   eventqueue.QueueEvent(unpack(args))
