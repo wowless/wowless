@@ -861,6 +861,9 @@ return function(
     for _, file in ipairs(addon.files) do
       if useSecureEnv and file.AllowLoadEnvironment == 'global' then
         log(1, 'skipping %s because LoadEnvironment="secure" and AllowLoadEnvironment="global"', file.name)
+      elseif useSecureEnv and file.LoadIntoEnvironment == 'global' then
+        log(1, 'loading secure %s in global env', file.name)
+        forAddon(addonName, addonEnv, addon.dir, false)(file.name)
       elseif not useSecureEnv and file.LoadIntoEnvironment == 'secure' then
         log(1, 'loading insecure %s in secureenv', file.name)
         forAddon(addonName, addonEnv, addon.dir, true)(file.name)
