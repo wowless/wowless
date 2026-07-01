@@ -148,7 +148,7 @@ return function(
     elseif script.attr.method then
       local mattr = script.attr.method
       fn = obj.luarep[mattr]
-      if not fn and obj.forbiddenrep and obj.forbiddenrep[mattr] then
+      if not fn and obj.forbiddenrep[mattr] then
         local ffn = obj.forbiddenrep[mattr]
         fn = function(_, ...)
           return ffn(obj.forbiddenrep, ...)
@@ -333,10 +333,6 @@ return function(
       assert(ctx.useForbiddenObjectTable)
       assert(e.attr.source == 'secure', e.attr.source)
       local f = parent.forbiddenrep
-      if not f then
-        f = setmetatable({ [0] = parent.luarep[0] }, getmetatable(parent.luarep))
-        parent.forbiddenrep = f
-      end
       local m = assert(secureenv[e.attr.key], e.attr.key)
       if not e.attr.securedelegates then
         mixin(f, m)
