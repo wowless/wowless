@@ -27,6 +27,7 @@ OnFinished:
 OnGamePadButtonDown:
 OnGamePadButtonUp:
 OnHide:
+OnHorizontalScroll:
 OnHyperlinkClick:
 OnHyperlinkEnter:
 OnHyperlinkLeave:

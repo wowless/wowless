@@ -7560,6 +7560,7 @@ ScrollFrame:
       inputs:
       outputs:
   scripts:
+    OnHorizontalScroll:
     OnScrollRangeChanged:
     OnVerticalScroll:
 SimpleHTML:

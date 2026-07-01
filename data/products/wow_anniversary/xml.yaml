@@ -923,6 +923,10 @@ OnHide:
   extends: ScriptType
   impl:
     script:
+OnHorizontalScroll:
+  extends: ScriptType
+  impl:
+    script:
 OnHyperlinkClick:
   extends: ScriptType
   impl:
