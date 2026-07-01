@@ -305,9 +305,10 @@ return function(
     hitrectinsets = function(_, e, parent)
       parent:SetHitRectInsets(getInsets(e))
     end,
-    keyvalue = function(_, e, parent)
+    keyvalue = function(ctx, e, parent)
+      local obj = ctx.useForbiddenObjectTable and parent.forbiddenrep or parent.luarep
       local a = e.attr
-      parent.luarep[a.key] = parseTypedValue(a.type, a.value)
+      obj[a.key] = parseTypedValue(a.type, a.value)
     end,
     maskedtexture = function(_, e, parent)
       local t = navigate(parent.parent, e.attr.childkey)
