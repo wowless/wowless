@@ -496,11 +496,14 @@ foreach(product ${products})
   add_dependencies(stamp_${product}_dbdefs stamp_${product}_dblist)
 endforeach()
 
+lua2c(toolsenum tools.enum=${CMAKE_CURRENT_SOURCE_DIR}/tools/enum.lua)
+
 add_lua_executable(
   prep
   ${CMAKE_CURRENT_SOURCE_DIR}/tools/prep.lua
   argparse
   penlight
+  toolsenum
   toolsutil
   wowlessutil
   wowlessyaml)
@@ -627,8 +630,14 @@ lua2c(wowlessblp vstruct=p
 lua2c(wowlessrender
       wowless.render=${CMAKE_CURRENT_SOURCE_DIR}/wowless/render.lua)
 
-add_lua_executable(gentest ${CMAKE_CURRENT_SOURCE_DIR}/tools/gentest.lua
-                   argparse penlight toolsutil wowlessyaml)
+add_lua_executable(
+  gentest
+  ${CMAKE_CURRENT_SOURCE_DIR}/tools/gentest.lua
+  argparse
+  penlight
+  toolsenum
+  toolsutil
+  wowlessyaml)
 
 foreach(product ${products})
   set(d ${CMAKE_CURRENT_BINARY_DIR}/products/${product}/WowlessData)
@@ -1000,6 +1009,7 @@ add_lua_executable(
   penlight
   runtimegametypes
   runtimeproducts
+  toolsenum
   toolstedit
   tsort
   wowapischema
@@ -1065,7 +1075,6 @@ set(specs
     spec/data/events_spec.lua
     spec/data/families_spec.lua
     spec/data/gametypes_spec.lua
-    spec/data/globals_spec.lua
     spec/data/impl_spec.lua
     spec/data/luaobjects_spec.lua
     spec/data/schema_coverage_spec.lua
@@ -1078,6 +1087,7 @@ set(specs
     spec/data/xml_spec.lua
     spec/data/yaml_spec.lua
     spec/elune_spec.lua
+    spec/tools/enum_spec.lua
     spec/tools/prettywrite_spec.lua
     spec/tools/tedit_spec.lua
     spec/wowapi/schema_spec.lua

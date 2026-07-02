@@ -1,4 +1,5 @@
 local deps = {}
+local computeEnumMeta = require('tools.enum').computeMeta
 local sorted = require('pl.tablex').sort
 
 local function readfile(f)
@@ -72,7 +73,15 @@ local ptablemap = {
     return 'GlobalApis', t
   end,
   globals = function(p)
-    return 'Globals', perproduct(p, 'globals')
+    local t = perproduct(p, 'globals')
+    local names = {}
+    for name in pairs(t.Enum) do
+      table.insert(names, name)
+    end
+    for _, name in ipairs(names) do
+      t.Enum[name .. 'Meta'] = computeEnumMeta(name, t.Enum[name])
+    end
+    return 'Globals', t
   end,
   impltests = function(p)
     local test = readyaml('data/test.yaml')
