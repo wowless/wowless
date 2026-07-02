@@ -63,6 +63,8 @@ local function run(cfg)
   local loader = modules.loader
   local system = modules.system
   local genv = modules.env.genv
+  local datalua = modules.datalua
+  local runnercfg = datalua.config.runner or {}
   require('wowless.env').init(modules, not cfg.dir)
   if cfg.trackenums then
     for ek, ev in pairs(genv.Enum) do
@@ -87,7 +89,7 @@ local function run(cfg)
   end
   modules.luaobjects.LoadTypes(modules)
   modules.events.LoadEvents(modules)
-  if cfg.product == 'wowt' then
+  if runnercfg.implicitgodframes then
     local uiparent = modules.api.CreateFrame('Frame', 'UIParent')
     modules.points.SetAllPointsInternal(uiparent)
   end
@@ -100,9 +102,6 @@ local function run(cfg)
     local NextFrame = modules.mainloop.NextFrame
     local SendEvent = modules.events.SendEvent
     local UserData = modules.uiobjects.UserData
-
-    local datalua = require('build.products.' .. cfg.product .. '.data')
-    local runnercfg = datalua.config.runner or {}
 
     system.LogIn()
     SendEvent('PLAYER_LOGIN')

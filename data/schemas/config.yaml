@@ -63,6 +63,8 @@ type:
     runner:
       type:
         record:
+          implicitgodframes:
+            type: flag
           skip_bindings:
             type:
               mapof:

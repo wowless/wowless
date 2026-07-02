@@ -91,6 +91,7 @@ modules:
   parentkey:
     rawset: true
 runner:
+  implicitgodframes: true
   skip_bindings:
     TOGGLECOLLECTIONSWARDROBE: requires better implementation of transmog slots
   skip_events:
