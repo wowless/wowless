@@ -24,22 +24,22 @@ describe('globals', function()
                     assert.equal(count, meta.NumValues)
                   end)
                   it('MinValue matches', function()
-                    local min
-                    for _, v in pairs(enums[k]) do
-                      if min == nil or v < min then
+                    local ek, min = next(enums[k])
+                    for _, v in next, enums[k], ek do
+                      if v < min then
                         min = v
                       end
                     end
                     assert.equal(min, meta.MinValue)
                   end)
                   it('MaxValue matches', function()
-                    local max
-                    for _, v in pairs(enums[k]) do
-                      if v >= 0 and (max == nil or v > max) then
+                    local ek, max = next(enums[k])
+                    for _, v in next, enums[k], ek do
+                      if v > max then
                         max = v
                       end
                     end
-                    local expected = max ~= nil and ((p == 'wowt' or max < 2 ^ 31) and max or max - 2 ^ 32) or nil
+                    local expected = (p == 'wowt' or max < 2 ^ 31) and max or max - 2 ^ 32
                     assert.equal(expected, meta.MaxValue)
                   end)
                 end
