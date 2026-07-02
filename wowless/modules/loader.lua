@@ -132,7 +132,31 @@ return function(
 
   local scriptCache = {}
 
-  local function loadScript(script, obj, env, filename, intrinsic)
+  local function precacheScriptText(script, obj, env, filename)
+    if not scripts.HasScript(obj, script.type) then
+      return
+    end
+    if script.attr['function'] or script.attr.method then
+      return
+    end
+    scriptCache[env] = scriptCache[env] or {}
+    if scriptCache[env][script] ~= nil then
+      return
+    end
+    local fn
+    if script.text then
+      local args = xmlimpls[string.lower(script.type)].tag.script.args or 'self, ...'
+      local fnstr = 'return function(' .. args .. ') ' .. script.text .. ' end'
+      local outfn = loadstr(fnstr, filename, script.line)
+      local success, ret = security.CallSandbox(outfn)
+      assert(success)
+      fn = setfenv(ret, env)
+    end
+    -- false, not nil, distinguishes "precached, no function" from "never precached".
+    scriptCache[env][script] = fn or false
+  end
+
+  local function bindScript(script, obj, env, intrinsic)
     if not scripts.HasScript(obj, script.type) then
       local fmt = 'Frame %s: Unknown script element %s'
       SendEvent('LUA_WARNING', fmt:format(uiobjecttypes.GetObjectType(obj), script.name))
@@ -158,17 +182,10 @@ return function(
       if not fn then
         log(2, 'unknown script method %q on %q', mattr, obj:GetDebugName())
       end
-    elseif scriptCache[env] and scriptCache[env][script] then
-      fn = scriptCache[env][script]
-    elseif script.text then
-      local args = xmlimpls[string.lower(script.type)].tag.script.args or 'self, ...'
-      local fnstr = 'return function(' .. args .. ') ' .. script.text .. ' end'
-      local outfn = loadstr(fnstr, filename, script.line)
-      local success, ret = security.CallSandbox(outfn)
-      assert(success)
-      fn = setfenv(ret, env)
-      scriptCache[env] = scriptCache[env] or {}
-      scriptCache[env][script] = fn
+    else
+      local cached = scriptCache[env] and scriptCache[env][script]
+      assert(cached ~= nil, 'wowless bug: script text not precached')
+      fn = cached or nil
     end
     local old = obj.scripts[1][script.type:lower()]
     if old and fn and script.attr.inherit then
@@ -530,6 +547,18 @@ return function(
           processAttrs(ctx, e, obj, 'middle')
           processKids(ctx, e, obj, 'middle')
         end,
+        -- Runs after every template in the inherits= chain has finished Attrs, so
+        -- method= resolves against fully-composed fields.
+        ScriptBindings = function(ctx, e, obj)
+          local env = ctx.useAddonEnv and addonEnv or ctx.useSecureEnv and secureenv or genv
+          for _, kid in ipairs(e.kids) do
+            if string.lower(kid.type) == 'scripts' then
+              for _, script in ipairs(kid.kids) do
+                bindScript(script, obj, env, ctx.intrinsic)
+              end
+            end
+          end
+        end,
         Kids = function(ctx, e, obj)
           processKids(ctx, e, obj, 'late')
           processAttrs(ctx, e, obj, 'late')
@@ -564,6 +593,7 @@ return function(
             inherits = e.attr.inherits,
             initEarlyAttrs = mkInitPhase(ctx, 'EarlyAttrs', e),
             initAttrs = mkInitPhase(ctx, 'Attrs', e),
+            initScriptBindings = mkInitPhase(ctx, 'ScriptBindings', e),
             initKids = mkInitPhase(ctx, 'Kids', e),
             name = e.attr.name,
             type = e.type,
@@ -613,7 +643,7 @@ return function(
           local fn = xmllang[e.type]
           if type(impl) == 'table' and impl.script then
             local env = ctx.useAddonEnv and addonEnv or ctx.useSecureEnv and secureenv or genv
-            loadScript(e, parent, env, filename, ctx.intrinsic)
+            precacheScriptText(e, parent, env, filename)
           elseif type(impl) == 'table' and impl.scope then
             loadElements(mixin({}, ctx, { [impl.scope] = true }), e.kids, parent)
           elseif type(impl) == 'table' and impl.call then

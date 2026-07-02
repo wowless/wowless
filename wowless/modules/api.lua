@@ -180,6 +180,9 @@ return function(
       template.initAttrs(ud)
     end
     for _, template in ipairs(tmpls) do
+      template.initScriptBindings(ud)
+    end
+    for _, template in ipairs(tmpls) do
       template.initKids(ud)
     end
     if id then

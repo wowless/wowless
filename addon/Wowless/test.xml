@@ -190,6 +190,37 @@
     table.insert(_G.Wowless.ExpectedLuaWarnings, 'WowlessEvenMoreIntrinsicType')]]--
   </Script>
 
+  <!-- https://github.com/wowless/wowless/issues/714: a method= script bound in a
+       base virtual template should see a KeyValue override applied by a more-derived
+       template later in the same inherits= chain, not the value captured when the
+       base template's own Scripts element was processed. -->
+  <Script>
+    WowlessStaleMethodResult = nil
+    function WowlessStaleMethodBase(self)
+      WowlessStaleMethodResult = 'base'
+    end
+    function WowlessStaleMethodOverride(self)
+      WowlessStaleMethodResult = 'override'
+    end
+  </Script>
+  <Frame name='WowlessStaleMethodTemplateA' virtual='true'>
+    <KeyValues>
+      <KeyValue key='Foo' value='WowlessStaleMethodBase' type='global' />
+    </KeyValues>
+    <Scripts>
+      <OnLoad method='Foo' />
+    </Scripts>
+  </Frame>
+  <Frame name='WowlessStaleMethodTemplateB' virtual='true' inherits='WowlessStaleMethodTemplateA'>
+    <KeyValues>
+      <KeyValue key='Foo' value='WowlessStaleMethodOverride' type='global' />
+    </KeyValues>
+  </Frame>
+  <Frame inherits='WowlessStaleMethodTemplateB' />
+  <Script>
+    assertEquals('override', WowlessStaleMethodResult)
+  </Script>
+
   <Script>
     assertEquals(nil, coroutine.running())
   </Script>
