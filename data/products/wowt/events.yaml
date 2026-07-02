@@ -558,6 +558,10 @@ BARBER_SHOP_RESULT:
   payload:
   - name: success
     type: boolean
+BATTLE_NET_FRIEND_TAG_ENABLED_STATUS_UPDATED:
+  payload:
+BATTLE_NET_TITLE_FRIEND_CUSTOM_NAME_ENABLED_STATUS_UPDATED:
+  payload:
 BATTLE_PET_CURSOR_CLEAR:
   payload:
 BATTLEFIELD_AUTO_QUEUE:
@@ -585,10 +589,6 @@ BATTLEPET_FORCE_NAME_DECLENSION:
   - name: name
     type: string
   - name: battlePetGUID
-    type: string
-BATTLETAG_INVITE_SHOW:
-  payload:
-  - name: name
     type: string
 BEHAVIORAL_NOTIFICATION:
   payload:
@@ -1082,6 +1082,9 @@ CHAT_COMBAT_MSG_ARENA_POINTS_GAIN:
     type: boolean
   - name: suppressRaidIcons
     type: boolean
+  - name: discordInfo
+    type:
+      structure: DiscordChatInfo
 CHAT_DISABLED_CHANGE_FAILED:
   payload:
   - name: disabled
@@ -1132,6 +1135,9 @@ CHAT_MSG_ACHIEVEMENT:
     type: boolean
   - name: suppressRaidIcons
     type: boolean
+  - name: discordInfo
+    type:
+      structure: DiscordChatInfo
 CHAT_MSG_ADDON:
   payload:
   - name: prefix
@@ -1208,6 +1214,9 @@ CHAT_MSG_AFK:
     type: boolean
   - name: suppressRaidIcons
     type: boolean
+  - name: discordInfo
+    type:
+      structure: DiscordChatInfo
 CHAT_MSG_BG_SYSTEM_ALLIANCE:
   payload:
   - name: text
@@ -1244,6 +1253,9 @@ CHAT_MSG_BG_SYSTEM_ALLIANCE:
     type: boolean
   - name: suppressRaidIcons
     type: boolean
+  - name: discordInfo
+    type:
+      structure: DiscordChatInfo
 CHAT_MSG_BG_SYSTEM_HORDE:
   payload:
   - name: text
@@ -1280,6 +1292,9 @@ CHAT_MSG_BG_SYSTEM_HORDE:
     type: boolean
   - name: suppressRaidIcons
     type: boolean
+  - name: discordInfo
+    type:
+      structure: DiscordChatInfo
 CHAT_MSG_BG_SYSTEM_NEUTRAL:
   payload:
   - name: text
@@ -1316,6 +1331,9 @@ CHAT_MSG_BG_SYSTEM_NEUTRAL:
     type: boolean
   - name: suppressRaidIcons
     type: boolean
+  - name: discordInfo
+    type:
+      structure: DiscordChatInfo
 CHAT_MSG_BN:
   payload:
   - name: text
@@ -1352,6 +1370,9 @@ CHAT_MSG_BN:
     type: boolean
   - name: suppressRaidIcons
     type: boolean
+  - name: discordInfo
+    type:
+      structure: DiscordChatInfo
 CHAT_MSG_BN_INLINE_TOAST_ALERT:
   payload:
   - name: text
@@ -1388,6 +1409,9 @@ CHAT_MSG_BN_INLINE_TOAST_ALERT:
     type: boolean
   - name: suppressRaidIcons
     type: boolean
+  - name: discordInfo
+    type:
+      structure: DiscordChatInfo
 CHAT_MSG_BN_INLINE_TOAST_BROADCAST:
   payload:
   - name: text
@@ -1424,6 +1448,9 @@ CHAT_MSG_BN_INLINE_TOAST_BROADCAST:
     type: boolean
   - name: suppressRaidIcons
     type: boolean
+  - name: discordInfo
+    type:
+      structure: DiscordChatInfo
 CHAT_MSG_BN_INLINE_TOAST_BROADCAST_INFORM:
   payload:
   - name: text
@@ -1460,6 +1487,9 @@ CHAT_MSG_BN_INLINE_TOAST_BROADCAST_INFORM:
     type: boolean
   - name: suppressRaidIcons
     type: boolean
+  - name: discordInfo
+    type:
+      structure: DiscordChatInfo
 CHAT_MSG_BN_INLINE_TOAST_CONVERSATION:
   payload:
   - name: text
@@ -1496,6 +1526,9 @@ CHAT_MSG_BN_INLINE_TOAST_CONVERSATION:
     type: boolean
   - name: suppressRaidIcons
     type: boolean
+  - name: discordInfo
+    type:
+      structure: DiscordChatInfo
 CHAT_MSG_BN_WHISPER:
   payload:
   - name: text
@@ -1532,6 +1565,9 @@ CHAT_MSG_BN_WHISPER:
     type: boolean
   - name: suppressRaidIcons
     type: boolean
+  - name: discordInfo
+    type:
+      structure: DiscordChatInfo
 CHAT_MSG_BN_WHISPER_INFORM:
   payload:
   - name: text
@@ -1568,6 +1604,9 @@ CHAT_MSG_BN_WHISPER_INFORM:
     type: boolean
   - name: suppressRaidIcons
     type: boolean
+  - name: discordInfo
+    type:
+      structure: DiscordChatInfo
 CHAT_MSG_BN_WHISPER_PLAYER_OFFLINE:
   payload:
   - name: text
@@ -1604,6 +1643,9 @@ CHAT_MSG_BN_WHISPER_PLAYER_OFFLINE:
     type: boolean
   - name: suppressRaidIcons
     type: boolean
+  - name: discordInfo
+    type:
+      structure: DiscordChatInfo
 CHAT_MSG_CHANNEL:
   payload:
   - name: text
@@ -1640,6 +1682,9 @@ CHAT_MSG_CHANNEL:
     type: boolean
   - name: suppressRaidIcons
     type: boolean
+  - name: discordInfo
+    type:
+      structure: DiscordChatInfo
 CHAT_MSG_CHANNEL_JOIN:
   payload:
   - name: text
@@ -1676,6 +1721,9 @@ CHAT_MSG_CHANNEL_JOIN:
     type: boolean
   - name: suppressRaidIcons
     type: boolean
+  - name: discordInfo
+    type:
+      structure: DiscordChatInfo
 CHAT_MSG_CHANNEL_LEAVE:
   payload:
   - name: text
@@ -1712,6 +1760,9 @@ CHAT_MSG_CHANNEL_LEAVE:
     type: boolean
   - name: suppressRaidIcons
     type: boolean
+  - name: discordInfo
+    type:
+      structure: DiscordChatInfo
 CHAT_MSG_CHANNEL_LEAVE_PREVENTED:
   payload:
   - name: channelName
@@ -1752,6 +1803,9 @@ CHAT_MSG_CHANNEL_LIST:
     type: boolean
   - name: suppressRaidIcons
     type: boolean
+  - name: discordInfo
+    type:
+      structure: DiscordChatInfo
 CHAT_MSG_CHANNEL_NOTICE:
   payload:
   - name: text
@@ -1788,6 +1842,9 @@ CHAT_MSG_CHANNEL_NOTICE:
     type: boolean
   - name: suppressRaidIcons
     type: boolean
+  - name: discordInfo
+    type:
+      structure: DiscordChatInfo
 CHAT_MSG_CHANNEL_NOTICE_USER:
   payload:
   - name: text
@@ -1824,6 +1881,9 @@ CHAT_MSG_CHANNEL_NOTICE_USER:
     type: boolean
   - name: suppressRaidIcons
     type: boolean
+  - name: discordInfo
+    type:
+      structure: DiscordChatInfo
 CHAT_MSG_COMBAT_FACTION_CHANGE:
   payload:
   - name: text
@@ -1860,6 +1920,9 @@ CHAT_MSG_COMBAT_FACTION_CHANGE:
     type: boolean
   - name: suppressRaidIcons
     type: boolean
+  - name: discordInfo
+    type:
+      structure: DiscordChatInfo
 CHAT_MSG_COMBAT_HONOR_GAIN:
   payload:
   - name: text
@@ -1896,6 +1959,9 @@ CHAT_MSG_COMBAT_HONOR_GAIN:
     type: boolean
   - name: suppressRaidIcons
     type: boolean
+  - name: discordInfo
+    type:
+      structure: DiscordChatInfo
 CHAT_MSG_COMBAT_MISC_INFO:
   payload:
   - name: text
@@ -1932,6 +1998,9 @@ CHAT_MSG_COMBAT_MISC_INFO:
     type: boolean
   - name: suppressRaidIcons
     type: boolean
+  - name: discordInfo
+    type:
+      structure: DiscordChatInfo
 CHAT_MSG_COMBAT_XP_GAIN:
   payload:
   - name: text
@@ -1968,6 +2037,9 @@ CHAT_MSG_COMBAT_XP_GAIN:
     type: boolean
   - name: suppressRaidIcons
     type: boolean
+  - name: discordInfo
+    type:
+      structure: DiscordChatInfo
 CHAT_MSG_COMMUNITIES_CHANNEL:
   payload:
   - name: text
@@ -2004,6 +2076,9 @@ CHAT_MSG_COMMUNITIES_CHANNEL:
     type: boolean
   - name: suppressRaidIcons
     type: boolean
+  - name: discordInfo
+    type:
+      structure: DiscordChatInfo
 CHAT_MSG_CURRENCY:
   payload:
   - name: text
@@ -2040,6 +2115,9 @@ CHAT_MSG_CURRENCY:
     type: boolean
   - name: suppressRaidIcons
     type: boolean
+  - name: discordInfo
+    type:
+      structure: DiscordChatInfo
 CHAT_MSG_DND:
   payload:
   - name: text
@@ -2076,6 +2154,9 @@ CHAT_MSG_DND:
     type: boolean
   - name: suppressRaidIcons
     type: boolean
+  - name: discordInfo
+    type:
+      structure: DiscordChatInfo
 CHAT_MSG_EMOTE:
   payload:
   - name: text
@@ -2112,6 +2193,9 @@ CHAT_MSG_EMOTE:
     type: boolean
   - name: suppressRaidIcons
     type: boolean
+  - name: discordInfo
+    type:
+      structure: DiscordChatInfo
 CHAT_MSG_FILTERED:
   payload:
   - name: text
@@ -2148,6 +2232,9 @@ CHAT_MSG_FILTERED:
     type: boolean
   - name: suppressRaidIcons
     type: boolean
+  - name: discordInfo
+    type:
+      structure: DiscordChatInfo
 CHAT_MSG_GUILD:
   payload:
   - name: text
@@ -2184,6 +2271,9 @@ CHAT_MSG_GUILD:
     type: boolean
   - name: suppressRaidIcons
     type: boolean
+  - name: discordInfo
+    type:
+      structure: DiscordChatInfo
 CHAT_MSG_GUILD_ACHIEVEMENT:
   payload:
   - name: text
@@ -2220,6 +2310,48 @@ CHAT_MSG_GUILD_ACHIEVEMENT:
     type: boolean
   - name: suppressRaidIcons
     type: boolean
+  - name: discordInfo
+    type:
+      structure: DiscordChatInfo
+CHAT_MSG_GUILD_DISCORD:
+  payload:
+  - name: text
+    type: string
+  - name: playerName
+    type: string
+  - name: languageName
+    type: string
+  - name: channelName
+    type: string
+  - name: playerName2
+    type: string
+  - name: specialFlags
+    type: string
+  - name: zoneChannelID
+    type: number
+  - name: channelIndex
+    type: number
+  - name: channelBaseName
+    type: string
+  - name: languageID
+    type: number
+  - name: lineID
+    type: number
+  - name: guid
+    type: string
+  - name: bnSenderID
+    type: number
+  - name: isMobile
+    type: boolean
+  - name: isSubtitle
+    type: boolean
+  - name: hideSenderInLetterbox
+    type: boolean
+  - name: suppressRaidIcons
+    type: boolean
+  - name: discordInfo
+    type:
+      structure: DiscordChatInfo
 CHAT_MSG_GUILD_ITEM_LOOTED:
   payload:
   - name: text
@@ -2256,6 +2388,9 @@ CHAT_MSG_GUILD_ITEM_LOOTED:
     type: boolean
   - name: suppressRaidIcons
     type: boolean
+  - name: discordInfo
+    type:
+      structure: DiscordChatInfo
 CHAT_MSG_IGNORED:
   payload:
   - name: text
@@ -2292,6 +2427,9 @@ CHAT_MSG_IGNORED:
     type: boolean
   - name: suppressRaidIcons
     type: boolean
+  - name: discordInfo
+    type:
+      structure: DiscordChatInfo
 CHAT_MSG_INSTANCE_CHAT:
   payload:
   - name: text
@@ -2328,6 +2466,9 @@ CHAT_MSG_INSTANCE_CHAT:
     type: boolean
   - name: suppressRaidIcons
     type: boolean
+  - name: discordInfo
+    type:
+      structure: DiscordChatInfo
 CHAT_MSG_INSTANCE_CHAT_LEADER:
   payload:
   - name: text
@@ -2364,6 +2505,9 @@ CHAT_MSG_INSTANCE_CHAT_LEADER:
     type: boolean
   - name: suppressRaidIcons
     type: boolean
+  - name: discordInfo
+    type:
+      structure: DiscordChatInfo
 CHAT_MSG_LOOT:
   payload:
   - name: text
@@ -2400,6 +2544,9 @@ CHAT_MSG_LOOT:
     type: boolean
   - name: suppressRaidIcons
     type: boolean
+  - name: discordInfo
+    type:
+      structure: DiscordChatInfo
 CHAT_MSG_MONEY:
   payload:
   - name: text
@@ -2436,6 +2583,9 @@ CHAT_MSG_MONEY:
     type: boolean
   - name: suppressRaidIcons
     type: boolean
+  - name: discordInfo
+    type:
+      structure: DiscordChatInfo
 CHAT_MSG_MONSTER_EMOTE:
   payload:
   - name: text
@@ -2472,6 +2622,9 @@ CHAT_MSG_MONSTER_EMOTE:
     type: boolean
   - name: suppressRaidIcons
     type: boolean
+  - name: discordInfo
+    type:
+      structure: DiscordChatInfo
 CHAT_MSG_MONSTER_PARTY:
   payload:
   - name: text
@@ -2508,6 +2661,9 @@ CHAT_MSG_MONSTER_PARTY:
     type: boolean
   - name: suppressRaidIcons
     type: boolean
+  - name: discordInfo
+    type:
+      structure: DiscordChatInfo
 CHAT_MSG_MONSTER_SAY:
   payload:
   - name: text
@@ -2544,6 +2700,9 @@ CHAT_MSG_MONSTER_SAY:
     type: boolean
   - name: suppressRaidIcons
     type: boolean
+  - name: discordInfo
+    type:
+      structure: DiscordChatInfo
 CHAT_MSG_MONSTER_WHISPER:
   payload:
   - name: text
@@ -2580,6 +2739,9 @@ CHAT_MSG_MONSTER_WHISPER:
     type: boolean
   - name: suppressRaidIcons
     type: boolean
+  - name: discordInfo
+    type:
+      structure: DiscordChatInfo
 CHAT_MSG_MONSTER_YELL:
   payload:
   - name: text
@@ -2616,6 +2778,9 @@ CHAT_MSG_MONSTER_YELL:
     type: boolean
   - name: suppressRaidIcons
     type: boolean
+  - name: discordInfo
+    type:
+      structure: DiscordChatInfo
 CHAT_MSG_OFFICER:
   payload:
   - name: text
@@ -2652,6 +2817,9 @@ CHAT_MSG_OFFICER:
     type: boolean
   - name: suppressRaidIcons
     type: boolean
+  - name: discordInfo
+    type:
+      structure: DiscordChatInfo
 CHAT_MSG_OPENING:
   payload:
   - name: text
@@ -2688,6 +2856,9 @@ CHAT_MSG_OPENING:
     type: boolean
   - name: suppressRaidIcons
     type: boolean
+  - name: discordInfo
+    type:
+      structure: DiscordChatInfo
 CHAT_MSG_PARTY:
   payload:
   - name: text
@@ -2724,6 +2895,9 @@ CHAT_MSG_PARTY:
     type: boolean
   - name: suppressRaidIcons
     type: boolean
+  - name: discordInfo
+    type:
+      structure: DiscordChatInfo
 CHAT_MSG_PARTY_LEADER:
   payload:
   - name: text
@@ -2760,6 +2934,9 @@ CHAT_MSG_PARTY_LEADER:
     type: boolean
   - name: suppressRaidIcons
     type: boolean
+  - name: discordInfo
+    type:
+      structure: DiscordChatInfo
 CHAT_MSG_PET_BATTLE_COMBAT_LOG:
   payload:
   - name: text
@@ -2796,6 +2973,9 @@ CHAT_MSG_PET_BATTLE_COMBAT_LOG:
     type: boolean
   - name: suppressRaidIcons
     type: boolean
+  - name: discordInfo
+    type:
+      structure: DiscordChatInfo
 CHAT_MSG_PET_BATTLE_INFO:
   payload:
   - name: text
@@ -2832,6 +3012,9 @@ CHAT_MSG_PET_BATTLE_INFO:
     type: boolean
   - name: suppressRaidIcons
     type: boolean
+  - name: discordInfo
+    type:
+      structure: DiscordChatInfo
 CHAT_MSG_PET_INFO:
   payload:
   - name: text
@@ -2868,6 +3051,9 @@ CHAT_MSG_PET_INFO:
     type: boolean
   - name: suppressRaidIcons
     type: boolean
+  - name: discordInfo
+    type:
+      structure: DiscordChatInfo
 CHAT_MSG_PING:
   payload:
   - name: text
@@ -2904,6 +3090,9 @@ CHAT_MSG_PING:
     type: boolean
   - name: suppressRaidIcons
     type: boolean
+  - name: discordInfo
+    type:
+      structure: DiscordChatInfo
 CHAT_MSG_RAID:
   payload:
   - name: text
@@ -2940,6 +3129,9 @@ CHAT_MSG_RAID:
     type: boolean
   - name: suppressRaidIcons
     type: boolean
+  - name: discordInfo
+    type:
+      structure: DiscordChatInfo
 CHAT_MSG_RAID_BOSS_EMOTE:
   payload:
   - name: text
@@ -2976,6 +3168,9 @@ CHAT_MSG_RAID_BOSS_EMOTE:
     type: boolean
   - name: suppressRaidIcons
     type: boolean
+  - name: discordInfo
+    type:
+      structure: DiscordChatInfo
 CHAT_MSG_RAID_BOSS_WHISPER:
   payload:
   - name: text
@@ -3012,6 +3207,9 @@ CHAT_MSG_RAID_BOSS_WHISPER:
     type: boolean
   - name: suppressRaidIcons
     type: boolean
+  - name: discordInfo
+    type:
+      structure: DiscordChatInfo
 CHAT_MSG_RAID_LEADER:
   payload:
   - name: text
@@ -3048,6 +3246,9 @@ CHAT_MSG_RAID_LEADER:
     type: boolean
   - name: suppressRaidIcons
     type: boolean
+  - name: discordInfo
+    type:
+      structure: DiscordChatInfo
 CHAT_MSG_RAID_WARNING:
   payload:
   - name: text
@@ -3084,6 +3285,9 @@ CHAT_MSG_RAID_WARNING:
     type: boolean
   - name: suppressRaidIcons
     type: boolean
+  - name: discordInfo
+    type:
+      structure: DiscordChatInfo
 CHAT_MSG_RESTRICTED:
   payload:
   - name: text
@@ -3120,6 +3324,9 @@ CHAT_MSG_RESTRICTED:
     type: boolean
   - name: suppressRaidIcons
     type: boolean
+  - name: discordInfo
+    type:
+      structure: DiscordChatInfo
 CHAT_MSG_SAY:
   payload:
   - name: text
@@ -3156,6 +3363,9 @@ CHAT_MSG_SAY:
     type: boolean
   - name: suppressRaidIcons
     type: boolean
+  - name: discordInfo
+    type:
+      structure: DiscordChatInfo
 CHAT_MSG_SKILL:
   payload:
   - name: text
@@ -3192,6 +3402,9 @@ CHAT_MSG_SKILL:
     type: boolean
   - name: suppressRaidIcons
     type: boolean
+  - name: discordInfo
+    type:
+      structure: DiscordChatInfo
 CHAT_MSG_SYSTEM:
   payload:
   - name: text
@@ -3228,6 +3441,9 @@ CHAT_MSG_SYSTEM:
     type: boolean
   - name: suppressRaidIcons
     type: boolean
+  - name: discordInfo
+    type:
+      structure: DiscordChatInfo
 CHAT_MSG_TARGETICONS:
   payload:
   - name: text
@@ -3264,6 +3480,9 @@ CHAT_MSG_TARGETICONS:
     type: boolean
   - name: suppressRaidIcons
     type: boolean
+  - name: discordInfo
+    type:
+      structure: DiscordChatInfo
 CHAT_MSG_TEXT_EMOTE:
   payload:
   - name: text
@@ -3300,6 +3519,9 @@ CHAT_MSG_TEXT_EMOTE:
     type: boolean
   - name: suppressRaidIcons
     type: boolean
+  - name: discordInfo
+    type:
+      structure: DiscordChatInfo
 CHAT_MSG_TRADESKILLS:
   payload:
   - name: text
@@ -3336,6 +3558,9 @@ CHAT_MSG_TRADESKILLS:
     type: boolean
   - name: suppressRaidIcons
     type: boolean
+  - name: discordInfo
+    type:
+      structure: DiscordChatInfo
 CHAT_MSG_VOICE_TEXT:
   payload:
   - name: text
@@ -3372,6 +3597,9 @@ CHAT_MSG_VOICE_TEXT:
     type: boolean
   - name: suppressRaidIcons
     type: boolean
+  - name: discordInfo
+    type:
+      structure: DiscordChatInfo
 CHAT_MSG_WHISPER:
   payload:
   - name: text
@@ -3408,6 +3636,9 @@ CHAT_MSG_WHISPER:
     type: boolean
   - name: suppressRaidIcons
     type: boolean
+  - name: discordInfo
+    type:
+      structure: DiscordChatInfo
 CHAT_MSG_WHISPER_INFORM:
   payload:
   - name: text
@@ -3444,6 +3675,9 @@ CHAT_MSG_WHISPER_INFORM:
     type: boolean
   - name: suppressRaidIcons
     type: boolean
+  - name: discordInfo
+    type:
+      structure: DiscordChatInfo
 CHAT_MSG_YELL:
   payload:
   - name: text
@@ -3480,6 +3714,9 @@ CHAT_MSG_YELL:
     type: boolean
   - name: suppressRaidIcons
     type: boolean
+  - name: discordInfo
+    type:
+      structure: DiscordChatInfo
 CHAT_REGIONAL_SEND_FAILED:
   payload:
 CHAT_REGIONAL_STATUS_CHANGED:
@@ -3662,13 +3899,13 @@ CLUB_MEMBER_ADDED:
   - name: clubId
     type: string
   - name: memberId
-    type: number
+    type: string
 CLUB_MEMBER_PRESENCE_UPDATED:
   payload:
   - name: clubId
     type: string
   - name: memberId
-    type: number
+    type: string
   - name: presence
     type:
       enum: ClubMemberPresence
@@ -3677,13 +3914,13 @@ CLUB_MEMBER_REMOVED:
   - name: clubId
     type: string
   - name: memberId
-    type: number
+    type: string
 CLUB_MEMBER_ROLE_UPDATED:
   payload:
   - name: clubId
     type: string
   - name: memberId
-    type: number
+    type: string
   - name: roleId
     type: number
 CLUB_MEMBER_UPDATED:
@@ -3691,7 +3928,7 @@ CLUB_MEMBER_UPDATED:
   - name: clubId
     type: string
   - name: memberId
-    type: number
+    type: string
 CLUB_MEMBERS_UPDATED:
   payload:
   - name: clubId
@@ -3924,6 +4161,13 @@ CONFIG_COMMIT_FAILED:
   payload:
   - name: configID
     type: number
+CONFIRM_BATTLE_NET_FRIEND_INVITE_SHOW:
+  payload:
+  - name: name
+    type: string
+  - name: friendLevel
+    type:
+      enum: BattleNetFriendLevel
 CONFIRM_BEFORE_USE:
   payload:
 CONFIRM_BINDER:
@@ -4304,6 +4548,20 @@ DISABLE_TAXI_BENCHMARK:
   payload:
 DISABLE_XP_GAIN:
   payload:
+DISCORD_GUILD_ACHIEVEMENT:
+  payload:
+  - name: achievementID
+    type: number
+DISCORD_GUILD_LOBBY_UPDATE:
+  payload:
+DISCORD_GUILD_SETTINGS_UPDATE:
+  payload:
+DISCORD_LINK_UPDATE:
+  payload:
+DISCORD_SERVER_LIST_UPDATE:
+  payload:
+DISCORD_STATUS_UPDATE:
+  payload:
 DISPLAY_EVENT_TOAST_LINK:
   payload:
   - name: link
@@ -4388,6 +4646,10 @@ ENCOUNTER_END:
     type: number
   - name: success
     type: number
+  - name: encounterUnitStatus
+    type:
+      arrayof:
+        structure: C_EncounterInfo.EncounterUnitStatus
 ENCOUNTER_LOOT_RECEIVED:
   payload:
   - name: encounterID
@@ -4423,6 +4685,10 @@ ENCOUNTER_TIMELINE_EVENT_ADDED:
     type:
       structure: C_EncounterTimeline.EncounterTimelineEventInfo
 ENCOUNTER_TIMELINE_EVENT_BLOCK_STATE_CHANGED:
+  payload:
+  - name: eventID
+    type: number
+ENCOUNTER_TIMELINE_EVENT_COLOR_CHANGED:
   payload:
   - name: eventID
     type: number
@@ -4931,6 +5197,12 @@ GOSSIP_SHOW:
   - name: uiTextureKit
     nilable: true
     type: string
+GROUP_BUFF_VISUAL_ALERTS_CHANGED:
+  payload:
+  - name: visualAlerts
+    type:
+      arrayof:
+        structure: GroupBuffVisualAlertInfo
 GROUP_FORMED:
   payload:
   - name: category
@@ -4997,6 +5269,8 @@ GUILD_PARTY_STATE_UPDATED:
   - name: inGuildParty
     type: boolean
 GUILD_RANKS_UPDATE:
+  payload:
+GUILD_RANKS_UPDATE_ACTIVE_PLAYER:
   payload:
 GUILD_RECIPE_KNOWN_BY_MEMBERS:
   payload:
@@ -5094,6 +5368,11 @@ HEIRLOOMS_UPDATED:
   - name: hideUntilLearned
     nilable: true
     type: boolean
+HIDDEN_GROUP_BUFFS_CHANGED:
+  payload:
+  - name: spellIDs
+    type:
+      arrayof: number
 HIDE_HYPERLINK_TOOLTIP:
   payload:
 HIDE_SUBTITLE:
@@ -5167,6 +5446,13 @@ HOUSE_RESERVATION_RESPONSE_RECIEVED:
   - name: result
     type:
       enum: HousingResult
+HOUSE_RESET_COMPLETED:
+  payload:
+HOUSE_RESET_FAILED:
+  payload:
+  - name: result
+    type:
+      enum: HousingResult
 HOUSING_BASIC_MODE_HOVERED_TARGET_CHANGED:
   payload:
   - name: hasHoveredTarget
@@ -5191,6 +5477,72 @@ HOUSING_BASIC_MODE_SELECTED_TARGET_CHANGED:
       enum: HousingBasicModeTargetType
   - name: isPreview
     type: boolean
+HOUSING_BLUEPRINT_COLLECTION_FAILURE:
+  payload:
+  - name: result
+    type:
+      enum: HousingResult
+HOUSING_BLUEPRINT_COLLECTION_RECEIVED:
+  payload:
+  - name: collection
+    type:
+      structure: HousingBlueprintCollection
+HOUSING_BLUEPRINT_CONTENTS_FAILURE:
+  payload:
+  - name: blueprintShareCode
+    type: string
+  - name: result
+    type:
+      enum: HousingResult
+HOUSING_BLUEPRINT_CONTENTS_RECEIVED:
+  payload:
+  - name: contentInfo
+    type:
+      structure: HousingBlueprintContentInfo
+HOUSING_BLUEPRINT_DELETE_FAILURE:
+  payload:
+  - name: blueprintID
+    type: number
+  - name: result
+    type:
+      enum: HousingResult
+HOUSING_BLUEPRINT_DELETE_SUCCESS:
+  payload:
+  - name: blueprintID
+    type: number
+HOUSING_BLUEPRINT_EXPORT_FAILURE:
+  payload:
+  - name: result
+    type:
+      enum: HousingResult
+HOUSING_BLUEPRINT_EXPORT_SUCCESS:
+  payload:
+  - name: blueprintShareCode
+    type: string
+HOUSING_BLUEPRINT_IMPORT_FAILURE:
+  payload:
+  - name: result
+    type:
+      enum: HousingResult
+HOUSING_BLUEPRINT_IMPORT_STARTED:
+  payload:
+HOUSING_BLUEPRINT_IMPORT_SUCCESS:
+  payload:
+HOUSING_BLUEPRINT_RENAME_FAILURE:
+  payload:
+  - name: blueprintID
+    type: number
+  - name: result
+    type:
+      enum: HousingResult
+HOUSING_BLUEPRINT_RENAME_SUCCESS:
+  payload:
+  - name: blueprintID
+    type: number
+  - name: name
+    type: string
+HOUSING_BLUEPRINTS_AVAILABILITY_CHANGED:
+  payload:
 HOUSING_CATALOG_CATEGORY_UPDATED:
   payload:
   - name: categoryID
@@ -5375,6 +5727,9 @@ HOUSING_LAYOUT_FLOORPLAN_SELECTION_CHANGED:
     type: boolean
   - name: roomID
     type: number
+  - name: blueprintShareCode
+    nilable: true
+    type: string
 HOUSING_LAYOUT_NUM_FLOORS_CHANGED:
   payload:
   - name: prevNumFloors
@@ -5430,6 +5785,10 @@ HOUSING_LAYOUT_VIEWED_FLOOR_CHANGED:
     type: number
 HOUSING_MARKET_AVAILABILITY_UPDATED:
   payload:
+HOUSING_NEW_DECOR_PLACE_COMPLETE:
+  payload:
+  - name: decorGUID
+    type: string
 HOUSING_NUM_DECOR_PLACED_CHANGED:
   payload:
 HOUSING_REFUND_LIST_UPDATED:
@@ -5473,6 +5832,12 @@ HOUSING_STORAGE_ENTRY_UPDATED:
       structure: HousingCatalogEntryVariantID
 HOUSING_STORAGE_UPDATED:
   payload:
+IGNORE_NEIGHBORHOOD_RESPONSE:
+  payload:
+  - name: success
+    type: boolean
+  - name: neighborhoodGuid
+    type: string
 IGNORELIST_UPDATE:
   payload:
 IGR_BILLING_NAG_DIALOG:
@@ -5750,6 +6115,8 @@ LEAVE_PARTY_CONFIRMATION:
       enum: LeavePartyConfirmReason
 LEAVING_TUTORIAL_AREA:
   payload:
+LEGACY_FRIEND_SYSTEM_STATUS_UPDATED:
+  payload:
 LEGACY_LOOT_RULES_CHANGED:
   payload:
   - name: isLegacyLootModeEnabled
@@ -5807,6 +6174,10 @@ LFG_LIST_APPLICATION_STATUS_UPDATED:
     type: string
 LFG_LIST_AVAILABILITY_UPDATE:
   payload:
+LFG_LIST_CENSORED_ACTIVE_ENTRY_UPDATE:
+  payload:
+  - name: isCensored
+    type: boolean
 LFG_LIST_ENTRY_CREATION_FAILED:
   payload:
 LFG_LIST_ENTRY_EXPIRED_TIMEOUT:
@@ -5819,6 +6190,8 @@ LFG_LIST_JOINED_GROUP:
     type: number
   - name: groupName
     type: string
+LFG_LIST_REVEALED_CENSORED_ACTIVE_ENTRY:
+  payload:
 LFG_LIST_SEARCH_FAILED:
   payload:
   - name: reason
@@ -7751,6 +8124,12 @@ SOCIAL_QUEUE_UPDATE:
   - name: numAddedItems
     nilable: true
     type: number
+SOCIAL_UI_FRIENDS_LIST_SYSTEM_STATUS_UPDATED:
+  payload:
+SOCIAL_UI_SOCIAL_QUEUE_SYSTEM_STATUS_UPDATED:
+  payload:
+SOCIAL_UI_SYSTEM_STATUS_UPDATED:
+  payload:
 SOCKET_INFO_ACCEPT:
   payload:
 SOCKET_INFO_BIND_CONFIRM:
@@ -7968,6 +8347,9 @@ SPELL_UPDATE_COOLDOWN:
     nilable: true
     type: number
   - name: startRecoveryCategory
+    nilable: true
+    type: number
+  - name: itemID
     nilable: true
     type: number
 SPELL_UPDATE_ICON:
@@ -8767,6 +9149,18 @@ UNIT_PHASE:
   payload:
   - name: unitTarget
     type: unit
+UNIT_PING_PIN_ADDED:
+  payload:
+  - name: guid
+    type: string
+  - name: uiTextureKit
+    type: string
+  restricted: true
+UNIT_PING_PIN_REMOVED:
+  payload:
+  - name: guid
+    type: string
+  restricted: true
 UNIT_PORTRAIT_UPDATE:
   payload:
   - name: unitTarget
@@ -9169,6 +9563,14 @@ UPDATE_WEB_TICKET:
   - name: caseDescription
     nilable: true
     type: string
+URL_TEXTURE_REQUEST_RESULT:
+  payload:
+  - name: texture
+    type:
+      uiobject: Texture
+  - name: result
+    type:
+      enum: UrlTextureResult
 USE_BIND_CONFIRM:
   payload:
 USE_COMBINED_BAGS_CHANGED:

@@ -139,6 +139,7 @@ return function(
     local ud = objtype.constructor()
     ud[1] = objp
     ud.luarep = obj
+    ud.forbiddenrep = setmetatable({ [0] = objp }, objtype.sandboxMT)
     ud.name = objname
     ud.type = typename
     userdata[regid] = ud

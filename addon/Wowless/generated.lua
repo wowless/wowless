@@ -462,6 +462,9 @@ G.testsuite.generated = function()
       Path = function()
         return CreateFrame('Frame'):CreateAnimationGroup():CreateAnimation('Path')
       end,
+      RadialProgress = function()
+        return CreateFrame('Frame'):CreateAnimationGroup():CreateAnimation('RadialProgress')
+      end,
       Rotation = function()
         return CreateFrame('Frame'):CreateAnimationGroup():CreateAnimation('Rotation')
       end,
@@ -477,6 +480,9 @@ G.testsuite.generated = function()
       end,
       Translation = function()
         return CreateFrame('Frame'):CreateAnimationGroup():CreateAnimation('Translation')
+      end,
+      VectorGraphics = function()
+        return CreateFrame('Frame'):CreateVectorGraphics()
       end,
       VertexColor = function()
         return CreateFrame('Frame'):CreateAnimationGroup():CreateAnimation('VertexColor')

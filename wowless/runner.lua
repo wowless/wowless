@@ -87,6 +87,10 @@ local function run(cfg)
   end
   modules.luaobjects.LoadTypes(modules)
   modules.events.LoadEvents(modules)
+  if cfg.product == 'wowt' then
+    local uiparent = modules.api.CreateFrame('Frame', 'UIParent')
+    modules.points.SetAllPointsInternal(uiparent)
+  end
   return withglobaltable(genv, function()
     loader.initAddons()
     loader.loadAddons()
@@ -290,7 +294,7 @@ local function run(cfg)
     for _, obj in pairs(modules.uiobjects.userdata) do
       assert(UserData(obj.luarep) == obj)
       for k, v in pairs(obj) do
-        assert(type(v) ~= 'table' or (k ~= 'luarep') == not UserData(v), k)
+        assert(type(v) ~= 'table' or (k ~= 'luarep' and k ~= 'forbiddenrep') == not UserData(v), k)
       end
     end
     assert(issecure(), 'wowless bug: framework is tainted')

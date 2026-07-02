@@ -49,6 +49,166 @@ AbbreviatedNumberFormatter:
           arrayof:
             structure: NumberAbbreviationBreakpoint
       outputs:
+DurationTextBinding:
+  methods:
+    CanFormatText:
+      inputs:
+      outputs:
+      - name: canFormatText
+        type: boolean
+    CanUpdateFontString:
+      inputs:
+      outputs:
+      - name: canUpdateText
+        type: boolean
+    ClearTextColorCurve:
+      inputs:
+      outputs:
+    Disable:
+      inputs:
+      outputs:
+    Enable:
+      inputs:
+      outputs:
+    GetDuration:
+      inputs:
+      outputs:
+      - name: duration
+        nilable: true
+        type:
+          luaobject: LuaDurationObject
+    GetExpiredText:
+      inputs:
+      outputs:
+      - name: text
+        nilable: true
+        type: string
+    GetFontString:
+      inputs:
+      outputs:
+      - name: fontString
+        nilable: true
+        type:
+          uiobject: FontString
+    GetFormattedText:
+      inputs:
+      outputs:
+      - name: text
+        type: string
+    GetFormattedTextColor:
+      inputs:
+      mayreturnnothing: true
+      outputs:
+      - name: color
+        type:
+          structure: colorRGBA
+    GetTextColorCurve:
+      inputs:
+      mayreturnnothing: true
+      outputs:
+      - name: curve
+        type:
+          luaobject: LuaColorCurveObject
+      - name: property
+        type:
+          enum: DurationTextBindingProperty
+    GetTimeModifier:
+      inputs:
+      outputs:
+      - name: modifier
+        type:
+          enum: DurationTimeModifier
+    GetUpdateInterval:
+      inputs:
+      outputs:
+      - name: updateInterval
+        type: number
+    GetZeroDurationText:
+      inputs:
+      outputs:
+      - name: text
+        nilable: true
+        type: string
+    HasSecretValues:
+      inputs:
+      outputs:
+      - name: hasSecretValues
+        type: boolean
+    IsEnabled:
+      inputs:
+      outputs:
+      - name: enabled
+        type: boolean
+    SetDuration:
+      inputs:
+      - name: duration
+        type:
+          luaobject: LuaDurationObject
+      outputs:
+    SetEnabled:
+      inputs:
+      - name: enabled
+        type: boolean
+      outputs:
+    SetExpiredText:
+      inputs:
+      - name: text
+        nilable: true
+        type: string
+      outputs:
+    SetFontString:
+      inputs:
+      - name: fontString
+        type:
+          uiobject: FontString
+      outputs:
+    SetFormatter:
+      inputs:
+      - name: formatter
+        type:
+          luaobject: NumericFormatter
+      outputs:
+    SetTextColorCurve:
+      inputs:
+      - name: curve
+        type:
+          luaobject: LuaColorCurveObject
+      - name: property
+        type:
+          enum: DurationTextBindingProperty
+      outputs:
+    SetTextFormat:
+      inputs:
+      - name: format
+        type: string
+      - name: components
+        type:
+          arrayof:
+            structure: DurationTextBindingFormatComponent
+      outputs:
+    SetTimeModifier:
+      inputs:
+      - name: modifier
+        type:
+          enum: DurationTimeModifier
+      outputs:
+    SetToDefaults:
+      inputs:
+      outputs:
+    SetUpdateInterval:
+      inputs:
+      - name: updateInterval
+        type: number
+      outputs:
+    SetZeroDurationText:
+      inputs:
+      - name: text
+        nilable: true
+        type: string
+      outputs:
+    UpdateFontString:
+      inputs:
+      outputs:
 LuaColorCurveObject:
   inherits: LuaCurveObjectBase
   methods:
@@ -208,6 +368,35 @@ LuaCurveObjectBase:
           enum: LuaCurveType
       outputs:
   virtual: true
+LuaDurationClock:
+  methods:
+    GetTime:
+      inputs:
+      outputs:
+      - name: time
+        type: number
+  virtual: true
+LuaDurationManualClock:
+  inherits: LuaDurationClock
+  methods:
+    AdvanceTime:
+      inputs:
+      - name: delta
+        type: number
+      outputs:
+    ResetTime:
+      inputs:
+      outputs:
+    RewindTime:
+      inputs:
+      - name: delta
+        type: number
+      outputs:
+    SetTime:
+      inputs:
+      - name: time
+        type: number
+      outputs:
 LuaDurationObject:
   methods:
     Assign:
@@ -318,6 +507,13 @@ LuaDurationObject:
       outputs:
       - name: formatted
         type: string
+    GetClock:
+      inputs:
+      outputs:
+      - name: clock
+        nilable: true
+        type:
+          luaobject: LuaDurationClock
     GetClockTime:
       inputs:
       outputs:
@@ -391,10 +587,37 @@ LuaDurationObject:
       outputs:
       - name: totalDuration
         type: number
+    HasExpired:
+      inputs:
+      - default: 0
+        name: modifier
+        type:
+          enum: DurationTimeModifier
+      outputs:
+      - name: hasExpired
+        type: boolean
     HasSecretValues:
       inputs:
       outputs:
       - name: hasSecretValues
+        type: boolean
+    HasStarted:
+      inputs:
+      - default: 0
+        name: modifier
+        type:
+          enum: DurationTimeModifier
+      outputs:
+      - name: hasStarted
+        type: boolean
+    IsActive:
+      inputs:
+      - default: 0
+        name: modifier
+        type:
+          enum: DurationTimeModifier
+      outputs:
+      - name: isActive
         type: boolean
     IsZero:
       inputs:
@@ -403,6 +626,13 @@ LuaDurationObject:
         type: boolean
     Reset:
       inputs:
+      outputs:
+    SetClock:
+      inputs:
+      - name: clock
+        nilable: true
+        type:
+          luaobject: LuaDurationClock
       outputs:
     SetTimeFromEnd:
       inputs:
@@ -532,7 +762,7 @@ SecondsFormatter:
       - name: abbreviation
         nilable: true
         type:
-          enum: SecondsFormatterAbbrevation
+          enum: SecondsFormatterAbbreviation
       outputs:
       - name: formattedSeconds
         type: string
@@ -541,7 +771,7 @@ SecondsFormatter:
       - name: abbreviation
         nilable: true
         type:
-          enum: SecondsFormatterAbbrevation
+          enum: SecondsFormatterAbbreviation
       outputs:
       - name: formattedSeconds
         type: string
@@ -561,7 +791,7 @@ SecondsFormatter:
       - name: abbreviation
         nilable: true
         type:
-          enum: SecondsFormatterAbbrevation
+          enum: SecondsFormatterAbbreviation
     GetDesiredUnitCount:
       inputs:
       outputs:
@@ -641,7 +871,7 @@ SecondsFormatter:
       inputs:
       - name: abbreviation
         type:
-          enum: SecondsFormatterAbbrevation
+          enum: SecondsFormatterAbbreviation
       outputs:
     SetDesiredUnitCount:
       inputs:

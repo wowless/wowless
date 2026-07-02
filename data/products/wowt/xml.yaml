@@ -688,6 +688,7 @@ LayoutFrame:
       Anchors:
       Color:
       KeyValues:
+      Mixins:
       Scripts:
       Size:
   virtual: true
@@ -765,6 +766,24 @@ Minimap:
   extends: Frame
 MinResize:
   extends: Dimension
+Mixin:
+  attributes:
+    inboundpartition:
+      type: string
+    key:
+      required: true
+      type: string
+    securedelegates:
+      type: boolean
+    source:
+      type: string
+    targetpartition:
+      type: string
+Mixins:
+  contents:
+    tags:
+      Mixin:
+  impl: transparent
 Model:
   extends: Frame
 ModelScene:
@@ -1206,6 +1225,10 @@ ScopedModifier:
     scriptsusegivenenv:
       impl:
         scope: useAddonEnv
+      type: boolean
+    useforbiddenobjecttable:
+      impl:
+        scope: useForbiddenObjectTable
       type: boolean
   contents:
     tags:

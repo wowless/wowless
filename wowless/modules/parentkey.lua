@@ -1,4 +1,6 @@
-return function()
+return function(datalua)
+  local cfg = datalua.config.modules and datalua.config.modules.parentkey or {}
+
   local function ClearParentKey(obj)
     for k, v in pairs(obj.parent.luarep) do
       if obj.luarep == v then
@@ -20,7 +22,11 @@ return function()
     if clear then
       ClearParentKey(obj)
     end
-    obj.parent.luarep[key] = obj.luarep
+    if cfg.rawset then
+      rawset(obj.parent.luarep, key, obj.luarep)
+    else
+      obj.parent.luarep[key] = obj.luarep
+    end
   end
 
   return {

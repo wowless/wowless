@@ -49,6 +49,8 @@ type:
                     Nilable:
                       required: true
                       type: boolean
+                    SecretValue:
+                      type: flag
                     StrideIndex:
                       type: number
                     Type:
@@ -112,6 +114,8 @@ type:
                       type: string
                     NeverSecret:
                       type: flag
+                    NeverSecretContents:
+                      type: flag
                     Nilable:
                       required: true
                       type: boolean
@@ -122,11 +126,30 @@ type:
                     Type:
                       required: true
                       type: string
+            CheckAllowInheritForbiddenLayoutAspects:
+              type: flag
+            CheckAllowInheritForbiddenParentAspects:
+              type: flag
+            ChecksForbiddenAspects:
+              type:
+                sequenceof:
+                  record:
+                    Argument:
+                      required: true
+                      type:
+                        taggedunion:
+                          self: tag
+                    Aspect:
+                      type: number
             ConstSecretAccessor:
               type: flag
             Documentation:
               type:
                 sequenceof: string
+            Environment:
+              type:
+                taggedunion:
+                  SecureOnly: tag
             HasRestrictions:
               type: flag
             IsIndexInRange:
@@ -151,6 +174,8 @@ type:
             RequireNPERestricted:
               type: flag
             RequiresActiveCommentator:
+              type: flag
+            RequiresAssignableScript:
               type: flag
             RequiresCanChangeHitTestPoints:
               type: flag
@@ -191,6 +216,10 @@ type:
             RequiresSpellDiminishUI:
               type: flag
             RequiresStatusBarDesaturationAccess:
+              type: flag
+            RequiresSupportedScript:
+              type: flag
+            RequiresUnitAuraAccess:
               type: flag
             RequiresUnitIdentityAccess:
               type: flag
@@ -348,6 +377,10 @@ type:
       type: string
     Namespace:
       type: string
+    ObjectType:
+      type:
+        taggedunion:
+          Userdata: tag
     Predicates:
       type:
         sequenceof:
