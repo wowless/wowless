@@ -110,6 +110,7 @@ runner:
     USERANDOM:
 runtime:
   discord: true
+  enummetafix: true
   send_isfromitem: true
   warners:
     fontstring:

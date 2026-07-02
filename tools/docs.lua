@@ -368,6 +368,7 @@ end
 local function rewriteGlobals(out)
   local lies = deref(config, 'lies', 'enums') or {}
   local extras = deref(config, 'lies', 'extra_enums') or {}
+  local metafix = parseYaml('data/products/' .. product .. '/config.yaml').runtime.enummetafix
   for _, tab in pairs(tabs) do
     if tab.Type == 'Enumeration' and not take(extras, tab.Name) then
       local t = {}
@@ -377,7 +378,7 @@ local function rewriteGlobals(out)
       end
       out.Enum[tab.Name] = takelieor(t, lies, tab.Name)
       out.Enum[tab.Name .. 'Meta'] = {
-        MaxValue = (product == 'wowt' or tab.MaxValue < 2 ^ 31) and tab.MaxValue or tab.MaxValue - 2 ^ 32,
+        MaxValue = (metafix or tab.MaxValue < 2 ^ 31) and tab.MaxValue or tab.MaxValue - 2 ^ 32,
         MinValue = tab.MinValue,
         NumValues = tab.NumValues,
       }

@@ -83,6 +83,8 @@ type:
         record:
           discord:
             type: flag
+          enummetafix:
+            type: flag
           send_isfromitem:
             type: flag
           warners:

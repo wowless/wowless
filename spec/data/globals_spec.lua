@@ -2,6 +2,7 @@ describe('globals', function()
   for _, p in ipairs(require('build.data.products')) do
     describe(p, function()
       local globals = require('build.data.products.' .. p .. '.globals')
+      local config = require('build.data.products.' .. p .. '.config')
       describe('enums', function()
         local enums = globals.Enum
         describe('meta', function()
@@ -39,8 +40,8 @@ describe('globals', function()
                         max = v
                       end
                     end
-                    local expected = (p == 'wowt' or max < 2 ^ 31) and max or max - 2 ^ 32
-                    assert.equal(expected, meta.MaxValue)
+                    max = (config.runtime.enummetafix or max < 2 ^ 31) and max or max - 2 ^ 32
+                    assert.equal(max, meta.MaxValue)
                   end)
                 end
               end
