@@ -10,8 +10,9 @@ Discord at <https://discord.gg/rTwWcfJXuz>.
 Development is currently only supported via Docker.
 
 Using VSCode:
-Use `Clone Repository in Container Volume...`, select this repository to clone,
-and then watch as VSCode builds a container and installs all necessary dependencies.
+Use `Clone Repository in Container Volume...`, select this repository to
+clone, and then watch as VSCode builds a container and installs all necessary
+dependencies.
 
 Using Docker Compose:
 

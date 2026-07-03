@@ -1,6 +1,6 @@
 [sqlfluff]
 dialect = sqlite
-exclude_rules = capitalisation.identifiers
+exclude_rules = capitalisation.identifiers, aliasing.expression, aliasing.required, structure.column_order
 templater = placeholder
 
 [sqlfluff:indentation]

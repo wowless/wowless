@@ -95,7 +95,8 @@ clang-format handles most C formatting. One rule it cannot enforce:
 - `runner.lua`: Orchestrates WoW environment simulation (login, events, scripts)
 - `modules.lua`: Dependency injection system loading modules from
   `wowless/modules/`
-- `modules/`: Individual modules (api, events, loader, security, uiobjects, etc.)
+- `modules/`: Individual modules (api, events, loader, security, uiobjects,
+  etc.)
 
 ### Module System
 
@@ -165,7 +166,8 @@ Key patterns:
 - `bubblewrap()` wraps Lua functions to appear as C functions (fails
   `coroutine.create`)
 - Methods should be readonly (error on assignment via `__newindex`)
-- Custom fields stored in per-instance tables accessed via `__index`/`__newindex`
+- Custom fields stored in per-instance tables accessed via
+  `__index`/`__newindex`
 - `__tostring` format: `"TypeName: 0x..."` (use `tostring(table):sub(8)`
   for address)
 
@@ -285,7 +287,8 @@ UIObjects and luaobjects use a deferred loading pattern:
 
 ### Module Delegate Pattern for C_ APIs
 
-When modules export WoW C_ style functions (like `C_FunctionContainers.CreateCallback`):
+When modules export WoW C_ style functions (like
+`C_FunctionContainers.CreateCallback`):
 
 - Define the function locally with the second part as the name (e.g.,
   `CreateCallback`)
