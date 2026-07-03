@@ -19853,6 +19853,8 @@ C_UnitAurasPrivate.GetPrivateAuraAnchors:
       arrayof:
         structure: PrivateAuraAnchor
   secureonly: true
+C_UnitAurasPrivate.RemovePrivateAuraUpdateCallback:
+  secureonly: true
 C_UnitAurasPrivate.SetPrivateAuraAnchorAddedCallback:
   secureonly: true
 C_UnitAurasPrivate.SetPrivateAuraAnchorRemovedCallback:
