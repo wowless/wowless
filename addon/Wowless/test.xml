@@ -221,6 +221,25 @@
     assertEquals('override', WowlessStaleMethodResult)
   </Script>
 
+  <Frame>
+    <Scripts>
+      <OnShow>end--</OnShow>
+    </Scripts>
+    <Frames>
+      <Frame>
+        <Scripts>
+          <OnLoad>
+            assertEquals(true, self:GetParent():GetScript('OnShow') ~= nil)
+            assertEquals(true, self:GetParent():GetScript('OnHide') ~= nil)
+          </OnLoad>
+        </Scripts>
+      </Frame>
+    </Frames>
+    <Scripts>
+      <OnHide>end--</OnHide>
+    </Scripts>
+  </Frame>
+
   <Script>
     assertEquals(nil, coroutine.running())
   </Script>
