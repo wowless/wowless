@@ -31,10 +31,22 @@ describe('enum', function()
       values = { A = '0x0000000000200000' },
       meta = { MaxValue = -2147483648, MinValue = 0, NumValues = 1 },
     },
+    ['does not wrap values at or above 2^31 when metafix is set'] = {
+      name = 'SomeEnum',
+      values = { A = 0, B = 2 ^ 31 },
+      metafix = true,
+      meta = { MaxValue = 2 ^ 31, MinValue = 0, NumValues = 2 },
+    },
+    ['AccountStateLoadedFlags uses lexicographic values when metafix is set'] = {
+      name = 'AccountStateLoadedFlags',
+      values = { A = '0x0000000000200000', B = '0x0000000000000001' },
+      metafix = true,
+      meta = { MaxValue = '0x0000000000200000', MinValue = '0x0000000000000001', NumValues = 2 },
+    },
   }
   for k, v in pairs(tests) do
     it(k, function()
-      assert.same(v.meta, computeMeta(v.name, v.values))
+      assert.same(v.meta, computeMeta(v.name, v.values, v.metafix))
     end)
   end
 end)

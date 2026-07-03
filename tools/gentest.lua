@@ -74,12 +74,13 @@ local ptablemap = {
   end,
   globals = function(p)
     local t = perproduct(p, 'globals')
+    local metafix = perproduct(p, 'config').runtime.enummetafix
     local names = {}
     for name in pairs(t.Enum) do
       table.insert(names, name)
     end
     for _, name in ipairs(names) do
-      t.Enum[name .. 'Meta'] = computeEnumMeta(name, t.Enum[name])
+      t.Enum[name .. 'Meta'] = computeEnumMeta(name, t.Enum[name], metafix)
     end
     return 'Globals', t
   end,

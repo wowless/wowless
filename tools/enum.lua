@@ -7,16 +7,36 @@ local sentinels = {
   CreateAllAccountData = { MaxValue = -2147483648, MinValue = 0 },
 }
 
-local function computeMeta(name, values)
+local function computeMeta(name, values, metafix)
   local count = 0
-  for _ in pairs(values) do
+  local stringly = false
+  for _, v in pairs(values) do
     count = count + 1
+    if type(v) == 'string' then
+      stringly = true
+    end
   end
-  local sentinel = sentinels[name]
-  if sentinel then
+  if stringly then
+    if not metafix then
+      local sentinel = assert(sentinels[name], name)
+      return {
+        MaxValue = sentinel.MaxValue,
+        MinValue = sentinel.MinValue,
+        NumValues = count,
+      }
+    end
+    local min, max
+    for _, v in pairs(values) do
+      if min == nil or v < min then
+        min = v
+      end
+      if max == nil or v > max then
+        max = v
+      end
+    end
     return {
-      MaxValue = sentinel.MaxValue,
-      MinValue = sentinel.MinValue,
+      MaxValue = max,
+      MinValue = min,
       NumValues = count,
     }
   end
@@ -30,7 +50,7 @@ local function computeMeta(name, values)
     end
   end
   return {
-    MaxValue = max ~= nil and (max < 2 ^ 31 and max or max - 2 ^ 32) or nil,
+    MaxValue = max ~= nil and ((metafix or max < 2 ^ 31) and max or max - 2 ^ 32) or nil,
     MinValue = min,
     NumValues = count,
   }
