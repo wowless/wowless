@@ -41,7 +41,7 @@ describe('enum', function()
       name = 'AccountStateLoadedFlags',
       values = { A = '0x0000000000200000', B = '0x0000000000000001' },
       metafix = true,
-      meta = { MaxValue = '0x0000000000200000', MinValue = '0x0000000000000001', NumValues = 2 },
+      meta = { MaxValue = '0x0000000000200000', MinValue = '0x0000000000000001', NumValues = '0x0000000000000002' },
     },
   }
   for k, v in pairs(tests) do

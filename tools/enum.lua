@@ -37,7 +37,7 @@ local function computeMeta(name, values, metafix)
     return {
       MaxValue = max,
       MinValue = min,
-      NumValues = count,
+      NumValues = ('0x%016x'):format(count),
     }
   end
   local min, max
