@@ -34,7 +34,7 @@ do
     table.insert(names, name)
   end
   for _, name in ipairs(names) do
-    globals.Enum[name .. 'Meta'] = computeEnumMeta(name, globals.Enum[name], metafix)
+    globals.Enum[name .. 'Meta'] = computeEnumMeta(globals.Enum[name], metafix)
   end
 end
 

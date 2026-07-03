@@ -16,10 +16,10 @@ describe('enum', function()
       values = { A = 0, B = 2 ^ 31 },
       meta = { MaxValue = -(2 ^ 31), MinValue = 0, NumValues = 2 },
     },
-    ['ignores already-negative values for MaxValue'] = {
+    ['honors negative values for MaxValue'] = {
       name = 'SomeEnum',
       values = { A = -5, B = -1 },
-      meta = { MaxValue = nil, MinValue = -5, NumValues = 2 },
+      meta = { MaxValue = -1, MinValue = -5, NumValues = 2 },
     },
     ['AccountStateLoadedFlags uses fixed sentinels'] = {
       name = 'AccountStateLoadedFlags',
@@ -46,7 +46,7 @@ describe('enum', function()
   }
   for k, v in pairs(tests) do
     it(k, function()
-      assert.same(v.meta, computeMeta(v.name, v.values, v.metafix))
+      assert.same(v.meta, computeMeta(v.values, v.metafix))
     end)
   end
 end)

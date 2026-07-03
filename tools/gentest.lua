@@ -80,7 +80,7 @@ local ptablemap = {
       table.insert(names, name)
     end
     for _, name in ipairs(names) do
-      t.Enum[name .. 'Meta'] = computeEnumMeta(name, t.Enum[name], metafix)
+      t.Enum[name .. 'Meta'] = computeEnumMeta(t.Enum[name], metafix)
     end
     return 'Globals', t
   end,
