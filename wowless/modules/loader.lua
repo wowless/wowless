@@ -789,6 +789,9 @@ return function(
     if addon.attrs.OnlyBetaAndPTR == '1' and a ~= 'wow_ptr' and a ~= 'wow_beta' then
       return false
     end
+    if addon.attrs.AllowLoad and addon.attrs.AllowLoad:lower() == 'glue' then
+      return false
+    end
     if not addon.attrs.AllowLoadGameType then
       return true
     end
@@ -870,10 +873,6 @@ return function(
       error('unknown addon ' .. addonName)
     end
     addonName = addon.name
-    if addon.attrs.AllowLoad and addon.attrs.AllowLoad:lower() == 'glue' then
-      log(1, 'skipping glue-only addon %s', addonName)
-      return
-    end
     if forceSecure then
       if not addon.loaded then
         log(1, 'UseSecureEnvironment dep addon %s not yet loaded insecurely, loading', addonName)
