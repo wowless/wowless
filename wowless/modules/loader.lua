@@ -810,7 +810,7 @@ return function(
       local key = name:lower()
       if not addonData[key] then
         local addon = resolveTocDir(dir)
-        if addon and isLoadable(addon) then
+        if addon then
           addon.name = name
           addon.signed = signed
           addon.dir = dir
@@ -819,6 +819,7 @@ return function(
           addon.onlysecure = signed and addon.attrs.UseSecureEnvironment == '1'
           addon.loadfirst = signed and (addon.onlysecure or addon.attrs.LoadFirst == '1')
           addon.loadondemand = addon.attrs.LoadOnDemand == '1'
+          addon.loadable = isLoadable(addon)
           addonData[key] = addon
           table.insert(addonData, addon)
         end
@@ -855,6 +856,33 @@ return function(
       local dir = path.dirname(d)
       maybeAddAll(dir == '' and '.' or dir)
     end
+    local allrevdeps = {}
+    for _, addon in ipairs(addonData) do
+      allrevdeps[addon] = {}
+    end
+    local q = {}
+    for _, addon in ipairs(addonData) do
+      for _, depname in ipairs(addon.deps) do
+        local dep = addonData[depname:lower()]
+        if not dep then
+          addon.loadable = false
+        else
+          allrevdeps[dep][addon] = true
+        end
+      end
+      if not addon.loadable then
+        table.insert(q, addon)
+      end
+    end
+    while #q > 0 do
+      local bad = table.remove(q)
+      for revdep in pairs(allrevdeps[bad]) do
+        if revdep.loadable then
+          revdep.loadable = false
+          table.insert(q, revdep)
+        end
+      end
+    end
     for _, addon in ipairs(addonData) do
       for name in string.gmatch(addon.attrs.LoadWith or '', '[^, ]+') do
         local dep = addonData[name:lower()]
@@ -873,6 +901,10 @@ return function(
       error('unknown addon ' .. addonName)
     end
     addonName = addon.name
+    if not addon.loadable then
+      log(1, 'cannot load unloadable addon %q', addonName)
+      return
+    end
     if forceSecure then
       if not addon.loaded then
         log(1, 'UseSecureEnvironment dep addon %s not yet loaded insecurely, loading', addonName)
