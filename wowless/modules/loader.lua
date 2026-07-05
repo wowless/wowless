@@ -895,12 +895,8 @@ return function(
     end
   end
 
-  local function doLoadAddon(addonName, forceSecure)
-    local addon = addonData[addonName:lower()]
-    if not addon then
-      error('unknown addon ' .. addonName)
-    end
-    addonName = addon.name
+  local function doLoadAddon(addon, forceSecure)
+    local addonName = addon.name
     if not addon.loadable then
       log(1, 'cannot load unloadable addon %q', addonName)
       return
@@ -908,7 +904,7 @@ return function(
     if forceSecure then
       if not addon.loaded then
         log(1, 'UseSecureEnvironment dep addon %s not yet loaded insecurely, loading', addonName)
-        doLoadAddon(addonName, false)
+        doLoadAddon(addon, false)
       end
       if addon.secdeploaded then
         log(1, 'UseSecureEnvironment dep addon %s is already loaded, skipping', addonName)
@@ -933,11 +929,12 @@ return function(
     local useSecureEnv = forceSecure or addon.onlysecure
     log(1, 'loading addon dependencies for %s', addonName)
     for _, dep in ipairs(addon.deps) do
-      doLoadAddon(dep, useSecureEnv)
+      doLoadAddon(assert(addonData[dep:lower()], dep), useSecureEnv)
     end
     for _, dep in ipairs(addon.optionaldeps) do
-      if addonData[dep:lower()] then
-        doLoadAddon(dep, useSecureEnv)
+      local adep = addonData[dep:lower()]
+      if adep then
+        doLoadAddon(adep, useSecureEnv)
       end
     end
     local kindstr = forceSecure and ' (secure dependency)' or useSecureEnv and ' (secure)' or ''
@@ -970,18 +967,23 @@ return function(
     log(1, 'done loading %s%s', addonName, kindstr)
     SendEvent('ADDON_LOADED', addonName, not not addon.bindings)
     for _, revwith in ipairs(addon.revwiths) do
-      log(1, 'processing LoadWith %q -> %q', addonName, revwith)
-      doLoadAddon(revwith)
+      local a = addonData[revwith:lower()]
+      if a then
+        log(1, 'processing LoadWith %q -> %q', addonName, revwith)
+        doLoadAddon(a)
+      end
     end
   end
 
   local function loadAddon(addonName)
-    local success, msg = pcall(doLoadAddon, addonName)
-    if success then
-      return true, nil
-    else
-      log(1, 'loading %s failed: %s', addonName, tostring(msg))
+    local addon = addonData[addonName:lower()]
+    if not addon then
+      return false, 'MISSING'
+    elseif not addon.loadable then
       return false, 'LOAD_FAILED'
+    else
+      doLoadAddon(addon)
+      return true, nil
     end
   end
 
@@ -989,19 +991,19 @@ return function(
     log(1, 'loading loadfirst/secureenv framexml addons')
     for _, addon in ipairs(addonData) do
       if addon.loadfirst then
-        doLoadAddon(addon.name)
+        doLoadAddon(addon)
       end
     end
     log(1, 'loading remaining framexml addons')
     for _, addon in ipairs(addonData) do
       if not addon.loaded and addon.signed and not addon.loadondemand then
-        doLoadAddon(addon.name)
+        doLoadAddon(addon)
       end
     end
     log(1, 'loading non-framexml addons')
     for _, addon in ipairs(addonData) do
       if not addon.loaded and not addon.loadondemand then
-        doLoadAddon(addon.name)
+        doLoadAddon(addon)
       end
     end
     log(1, 'done loading addons')
