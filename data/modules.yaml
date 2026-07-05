@@ -1,6 +1,12 @@
 addons:
   deps:
     datalua:
+    env:
+    events:
+    loader:
+    loadercfg:
+    log:
+    sqlitedb:
 api:
   deps:
     cstubs:
@@ -79,18 +85,15 @@ gencode:
     api:
 loader:
   deps:
-    addons:
     api:
     datalua:
     env:
     events:
-    loadercfg:
     log:
     loglevel:
     points:
     scripts:
     security:
-    sqlitedb:
     templates:
     uiobjects:
     uiobjecttypes:

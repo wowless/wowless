@@ -469,7 +469,7 @@ IsWindowsClient:
 LoadAddOn:
   impl:
     modules:
-      loader:
+      addons:
 loadstring:
   stdlib: loadstring
 loadstring_untainted:

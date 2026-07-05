@@ -59,6 +59,7 @@ local function run(cfg)
     loglevel = cfg.loglevel or 0,
     maxErrors = cfg.maxErrors or math.huge,
   })
+  local addons = modules.addons
   local api = modules.api
   local loader = modules.loader
   local system = modules.system
@@ -88,10 +89,10 @@ local function run(cfg)
   modules.luaobjects.LoadTypes(modules)
   modules.events.LoadEvents(modules)
   return withglobaltable(genv, function()
-    loader.initAddons()
+    addons.initAddons()
     if cfg.dotfile then
       local lines = { 'digraph addons {' }
-      local addonData = loader.addonData
+      local addonData = addons.addons
       for _, addon in ipairs(addonData) do
         local attrs = addon.signed and ' [style=filled fillcolor=lightblue]' or ''
         table.insert(lines, string.format('  %q%s;', addon.name, attrs))
@@ -108,11 +109,11 @@ local function run(cfg)
       f:close()
     end
     if cfg.dir then
-      loader.loadFrameXml()
+      addons.loadFrameXml()
     end
     for _, d in ipairs(otherAddonDirs) do
       local addon = path.basename(d)
-      local success, reason = loader.loadAddon(addon)
+      local success, reason = addons.loadAddon(addon)
       if not success then
         log(1, 'failed to load %s: %s', addon, reason)
       end
@@ -314,7 +315,7 @@ local function run(cfg)
     end
 
     SendEvent('PLAYER_LOGOUT')
-    loader.saveAllVariables()
+    addons.saveAllVariables()
 
     -- Last ditch invariant check.
     for _, obj in pairs(modules.uiobjects.userdata) do

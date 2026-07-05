@@ -1,7 +1,7 @@
-local loader = ...
+local addons = ...
 return function(addon)
   if not addon then
     error('unknown addon')
   end
-  return loader.loadAddon(addon and addon.name)
+  return addons.loadAddon(addon and addon.name)
 end
