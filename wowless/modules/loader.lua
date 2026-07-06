@@ -479,7 +479,7 @@ return function(
     end,
   }
 
-  local function forAddon(addonName, addonEnv, addonRoot, useSecureEnv, skipObjects)
+  local function forAddon(addonName, addonEnv, addonRoot, useSecureEnv)
     local loadFile
 
     local function loadXml(filename, xmlstr)
@@ -599,9 +599,7 @@ return function(
             type = e.type,
           }
           local virtual = e.attr.virtual
-          if ctx.skipObjects then
-            return
-          elseif e.attr.intrinsic then
+          if e.attr.intrinsic then
             assert(virtual ~= false, 'intrinsics cannot be explicitly non-virtual: ' .. e.type)
             assert(e.attr.name, 'cannot create anonymous intrinsic')
             local name = string.lower(e.attr.name)
@@ -698,7 +696,6 @@ return function(
           addonEnv = addonEnv,
           ignoreVirtual = false,
           intrinsic = false,
-          skipObjects = skipObjects,
           useAddonEnv = false,
           useSecureEnv = useSecureEnv,
         }
@@ -964,7 +961,9 @@ return function(
     local addonEnv = addon.attrs.SuppressLocalTableRef ~= '1' and {} or nil
     local loadFile = forAddon(addonName, addonEnv, addon.dir, useSecureEnv, forceSecure)
     for _, file in ipairs(addon.files) do
-      if useSecureEnv and file.AllowLoadEnvironment == 'global' then
+      if forceSecure and file.name:lower():sub(-4) == '.xml' then
+        log(1, 'skipping insecure xml %s during forceSecure', file.name)
+      elseif useSecureEnv and file.AllowLoadEnvironment == 'global' then
         log(1, 'skipping %s because LoadEnvironment="secure" and AllowLoadEnvironment="global"', file.name)
       elseif useSecureEnv and file.LoadIntoEnvironment == 'global' then
         log(1, 'loading secure %s in global env', file.name)
