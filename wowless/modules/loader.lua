@@ -959,7 +959,7 @@ return function(
     local kindstr = forceSecure and ' (secure dependency)' or useSecureEnv and ' (secure)' or ''
     log(1, 'loading addon files for %s%s', addonName, kindstr)
     local addonEnv = addon.attrs.SuppressLocalTableRef ~= '1' and {} or nil
-    local loadFile = forAddon(addonName, addonEnv, addon.dir, useSecureEnv, forceSecure)
+    local loadFile = forAddon(addonName, addonEnv, addon.dir, useSecureEnv)
     for _, file in ipairs(addon.files) do
       if forceSecure and file.name:lower():sub(-4) == '.xml' then
         log(1, 'skipping insecure xml %s during forceSecure', file.name)
