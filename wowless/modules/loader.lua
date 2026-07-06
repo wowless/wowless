@@ -817,6 +817,7 @@ return function(
           addon.loadfirst = signed and (addon.onlysecure or addon.attrs.LoadFirst == '1')
           addon.loadondemand = addon.attrs.LoadOnDemand == '1'
           addon.loadable = isLoadable(addon)
+          addon.env = addon.attrs.SuppressLocalTableRef ~= '1' and {} or nil
           addonData[key] = addon
           table.insert(addonData, addon)
         end
@@ -958,8 +959,7 @@ return function(
     end
     local kindstr = forceSecure and ' (secure dependency)' or useSecureEnv and ' (secure)' or ''
     log(1, 'loading addon files for %s%s', addonName, kindstr)
-    local addonEnv = addon.attrs.SuppressLocalTableRef ~= '1' and {} or nil
-    local loadFile = forAddon(addonName, addonEnv, addon.dir, useSecureEnv)
+    local loadFile = forAddon(addonName, addon.env, addon.dir, useSecureEnv)
     for _, file in ipairs(addon.files) do
       if forceSecure and file.name:lower():sub(-4) == '.xml' then
         log(1, 'skipping insecure xml %s during forceSecure', file.name)
@@ -967,10 +967,10 @@ return function(
         log(1, 'skipping %s because LoadEnvironment="secure" and AllowLoadEnvironment="global"', file.name)
       elseif useSecureEnv and file.LoadIntoEnvironment == 'global' then
         log(1, 'loading secure %s in global env', file.name)
-        forAddon(addonName, addonEnv, addon.dir, false)(file.name)
+        forAddon(addonName, addon.env, addon.dir, false)(file.name)
       elseif not useSecureEnv and file.LoadIntoEnvironment == 'secure' then
         log(1, 'loading insecure %s in secureenv', file.name)
-        forAddon(addonName, addonEnv, addon.dir, true)(file.name)
+        forAddon(addonName, addon.env, addon.dir, true)(file.name)
       else
         loadFile(file.name)
       end
@@ -991,6 +991,45 @@ return function(
       log(1, 'processing LoadWith %q -> %q', addonName, revwith.name)
       doLoadAddon(revwith)
     end
+  end
+
+  local function doBootstrap(addon)
+    local function dolog(...)
+      log(1, 'bootstrap %s: %s', addon.name, string.format(...))
+    end
+    if not addon.loadondemand then
+      dolog('skipping, not loadondemand')
+      return
+    elseif addon.loaded then
+      dolog('skipping, already loaded')
+      return
+    elseif addon.bootstrapped then
+      dolog('skipping, already bootstrapped')
+      return
+    elseif addon.bootstrapping then
+      dolog('skipping, already bootstrapping')
+      return
+    end
+    assert(not addon.onlysecure, addon.name)
+    addon.bootstrapping = true
+    dolog('bootstrapping')
+    for _, dep in ipairs(addon.deps) do
+      dolog('bootstrapping required dependency %s', dep.name)
+      doBootstrap(dep)
+    end
+    for _, dep in ipairs(addon.optionaldeps) do
+      dolog('bootstrapping optional dependency %s', dep.name)
+      doBootstrap(dep)
+    end
+    local loadFile = forAddon(addon.name, addon.env, addon.dir)
+    for _, file in ipairs(addon.files) do
+      if file.Bootstrap then
+        dolog('loading bootstrap file %s', file.name)
+        loadFile(file.name)
+      end
+    end
+    addon.bootstrapped = true
+    dolog('bootstrapped')
   end
 
   local function loadAddon(addonName)
@@ -1015,14 +1054,14 @@ return function(
     end
     log(1, 'loading remaining framexml addons')
     for _, addon in ipairs(loadables) do
-      if not addon.loaded and addon.signed and not addon.loadfirst and not addon.loadondemand then
-        doLoadAddon(addon)
+      if not addon.loaded and addon.signed then
+        (addon.loadondemand and doBootstrap or doLoadAddon)(addon)
       end
     end
     log(1, 'loading non-framexml addons')
     for _, addon in ipairs(loadables) do
-      if not addon.loaded and not addon.signed and not addon.loadondemand then
-        doLoadAddon(addon)
+      if not addon.loaded and not addon.signed then
+        (addon.loadondemand and doBootstrap or doLoadAddon)(addon)
       end
     end
     log(1, 'done loading addons')
