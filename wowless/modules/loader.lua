@@ -965,6 +965,8 @@ return function(
         log(1, 'skipping insecure xml %s during forceSecure', file.name)
       elseif useSecureEnv and file.AllowLoadEnvironment == 'global' then
         log(1, 'skipping %s because LoadEnvironment="secure" and AllowLoadEnvironment="global"', file.name)
+      elseif addon.bootstrapped and file.Bootstrap then
+        log(1, 'skipping %s because it was bootstrapped', file.name)
       elseif useSecureEnv and file.LoadIntoEnvironment == 'global' then
         log(1, 'loading secure %s in global env', file.name)
         forAddon(addonName, addon.env, addon.dir, false)(file.name)
