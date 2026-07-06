@@ -884,12 +884,29 @@ return function(
       end
     end
     for _, addon in ipairs(addonData) do
-      for name in string.gmatch(addon.attrs.LoadWith or '', '[^, ]+') do
-        local dep = addonData[name:lower()]
-        if not dep then
-          log(1, 'skipping unknown addon %q in LoadWith of %q', name, addon.name)
-        else
-          table.insert(dep.revwiths, addon.name)
+      if addon.loadable then
+        local deps = {}
+        for _, depname in ipairs(addon.deps) do
+          table.insert(deps, (assert(addonData[depname:lower()], depname)))
+        end
+        addon.deps = deps
+        local optionaldeps = {}
+        for _, depname in ipairs(addon.optionaldeps) do
+          local dep = addonData[depname:lower()]
+          if not dep then
+            log(1, 'skipping unknown addon %q in optional deps of %q', depname, addon.name)
+          else
+            table.insert(optionaldeps, dep)
+          end
+        end
+        addon.optionaldeps = optionaldeps
+        for name in string.gmatch(addon.attrs.LoadWith or '', '[^, ]+') do
+          local dep = addonData[name:lower()]
+          if not dep then
+            log(1, 'skipping unknown addon %q in LoadWith of %q', name, addon.name)
+          else
+            table.insert(dep.revwiths, addon)
+          end
         end
       end
     end
@@ -929,13 +946,10 @@ return function(
     local useSecureEnv = forceSecure or addon.onlysecure
     log(1, 'loading addon dependencies for %s', addonName)
     for _, dep in ipairs(addon.deps) do
-      doLoadAddon(assert(addonData[dep:lower()], dep), useSecureEnv)
+      doLoadAddon(dep, useSecureEnv)
     end
     for _, dep in ipairs(addon.optionaldeps) do
-      local adep = addonData[dep:lower()]
-      if adep then
-        doLoadAddon(adep, useSecureEnv)
-      end
+      doLoadAddon(dep, useSecureEnv)
     end
     local kindstr = forceSecure and ' (secure dependency)' or useSecureEnv and ' (secure)' or ''
     log(1, 'loading addon files for %s%s', addonName, kindstr)
@@ -967,11 +981,8 @@ return function(
     log(1, 'done loading %s%s', addonName, kindstr)
     SendEvent('ADDON_LOADED', addonName, not not addon.bindings)
     for _, revwith in ipairs(addon.revwiths) do
-      local a = addonData[revwith:lower()]
-      if a then
-        log(1, 'processing LoadWith %q -> %q', addonName, revwith)
-        doLoadAddon(a)
-      end
+      log(1, 'processing LoadWith %q -> %q', addonName, revwith.name)
+      doLoadAddon(revwith)
     end
   end
 
