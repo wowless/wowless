@@ -1023,7 +1023,8 @@ return function(
       dolog('bootstrapping optional dependency %s', dep.name)
       doBootstrap(dep)
     end
-    local loadFile = forAddon(addon.name, addon.env, addon.dir)
+    local env = addon.attrs.SuppressLocalTableRef ~= '1' and {} or nil
+    local loadFile = forAddon(addon.name, env, addon.dir)
     for _, file in ipairs(addon.files) do
       if file.Bootstrap then
         dolog('loading bootstrap file %s', file.name)
