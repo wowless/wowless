@@ -895,6 +895,8 @@ return function(
           local dep = addonData[depname:lower()]
           if not dep then
             log(1, 'skipping unknown addon %q in optional deps of %q', depname, addon.name)
+          elseif not dep.loadable then
+            log(1, 'skipping unloadable addon %q in optional deps of %q', depname, addon.name)
           else
             table.insert(optionaldeps, dep)
           end
@@ -904,6 +906,8 @@ return function(
           local dep = addonData[name:lower()]
           if not dep then
             log(1, 'skipping unknown addon %q in LoadWith of %q', name, addon.name)
+          elseif not dep.loadable then
+            log(1, 'skipping unloadable addon %q in LoadWith of %q', name, addon.name)
           else
             table.insert(dep.revwiths, addon)
           end
@@ -914,10 +918,7 @@ return function(
 
   local function doLoadAddon(addon, forceSecure)
     local addonName = addon.name
-    if not addon.loadable then
-      log(1, 'cannot load unloadable addon %q', addonName)
-      return
-    end
+    assert(addon.loadable, addonName)
     if forceSecure then
       if not addon.loaded then
         log(1, 'UseSecureEnvironment dep addon %s not yet loaded insecurely, loading', addonName)
@@ -1002,19 +1003,31 @@ return function(
     log(1, 'loading loadfirst/secureenv framexml addons')
     for _, addon in ipairs(addonData) do
       if addon.loadfirst then
-        doLoadAddon(addon)
+        if not addon.loadable then
+          log(1, 'skipping unloadable loadfirst addon %q', addon.name)
+        else
+          doLoadAddon(addon)
+        end
       end
     end
     log(1, 'loading remaining framexml addons')
     for _, addon in ipairs(addonData) do
-      if not addon.loaded and addon.signed and not addon.loadondemand then
-        doLoadAddon(addon)
+      if not addon.loaded and addon.signed and not addon.loadfirst and not addon.loadondemand then
+        if not addon.loadable then
+          log(1, 'skipping unloadable framexml addon %q', addon.name)
+        else
+          doLoadAddon(addon)
+        end
       end
     end
     log(1, 'loading non-framexml addons')
     for _, addon in ipairs(addonData) do
-      if not addon.loaded and not addon.loadondemand then
-        doLoadAddon(addon)
+      if not addon.loaded and not addon.signed and not addon.loadondemand then
+        if not addon.loadable then
+          log(1, 'skipping unloadable addon %q', addon.name)
+        else
+          doLoadAddon(addon)
+        end
       end
     end
     log(1, 'done loading addons')
