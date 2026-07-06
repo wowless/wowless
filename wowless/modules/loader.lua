@@ -883,37 +883,44 @@ return function(
         end
       end
     end
+    local loadables = {}
     for _, addon in ipairs(addonData) do
-      if addon.loadable then
-        local deps = {}
-        for _, depname in ipairs(addon.deps) do
-          table.insert(deps, (assert(addonData[depname:lower()], depname)))
+      if not addon.loadable then
+        log(1, 'addon %q is not loadable', addon.name)
+      else
+        table.insert(loadables, addon)
+      end
+    end
+    for _, addon in ipairs(loadables) do
+      local deps = {}
+      for _, depname in ipairs(addon.deps) do
+        table.insert(deps, (assert(addonData[depname:lower()], depname)))
+      end
+      addon.deps = deps
+      local optionaldeps = {}
+      for _, depname in ipairs(addon.optionaldeps) do
+        local dep = addonData[depname:lower()]
+        if not dep then
+          log(1, 'skipping unknown addon %q in optional deps of %q', depname, addon.name)
+        elseif not dep.loadable then
+          log(1, 'skipping unloadable addon %q in optional deps of %q', depname, addon.name)
+        else
+          table.insert(optionaldeps, dep)
         end
-        addon.deps = deps
-        local optionaldeps = {}
-        for _, depname in ipairs(addon.optionaldeps) do
-          local dep = addonData[depname:lower()]
-          if not dep then
-            log(1, 'skipping unknown addon %q in optional deps of %q', depname, addon.name)
-          elseif not dep.loadable then
-            log(1, 'skipping unloadable addon %q in optional deps of %q', depname, addon.name)
-          else
-            table.insert(optionaldeps, dep)
-          end
-        end
-        addon.optionaldeps = optionaldeps
-        for name in string.gmatch(addon.attrs.LoadWith or '', '[^, ]+') do
-          local dep = addonData[name:lower()]
-          if not dep then
-            log(1, 'skipping unknown addon %q in LoadWith of %q', name, addon.name)
-          elseif not dep.loadable then
-            log(1, 'skipping unloadable addon %q in LoadWith of %q', name, addon.name)
-          else
-            table.insert(dep.revwiths, addon)
-          end
+      end
+      addon.optionaldeps = optionaldeps
+      for name in string.gmatch(addon.attrs.LoadWith or '', '[^, ]+') do
+        local dep = addonData[name:lower()]
+        if not dep then
+          log(1, 'skipping unknown addon %q in LoadWith of %q', name, addon.name)
+        elseif not dep.loadable then
+          log(1, 'skipping unloadable addon %q in LoadWith of %q', name, addon.name)
+        else
+          table.insert(dep.revwiths, addon)
         end
       end
     end
+    return loadables
   end
 
   local function doLoadAddon(addon, forceSecure)
@@ -1000,34 +1007,23 @@ return function(
   end
 
   local function loadAddons()
+    local loadables = initAddons()
     log(1, 'loading loadfirst/secureenv framexml addons')
-    for _, addon in ipairs(addonData) do
+    for _, addon in ipairs(loadables) do
       if addon.loadfirst then
-        if not addon.loadable then
-          log(1, 'skipping unloadable loadfirst addon %q', addon.name)
-        else
-          doLoadAddon(addon)
-        end
+        doLoadAddon(addon)
       end
     end
     log(1, 'loading remaining framexml addons')
-    for _, addon in ipairs(addonData) do
+    for _, addon in ipairs(loadables) do
       if not addon.loaded and addon.signed and not addon.loadfirst and not addon.loadondemand then
-        if not addon.loadable then
-          log(1, 'skipping unloadable framexml addon %q', addon.name)
-        else
-          doLoadAddon(addon)
-        end
+        doLoadAddon(addon)
       end
     end
     log(1, 'loading non-framexml addons')
-    for _, addon in ipairs(addonData) do
+    for _, addon in ipairs(loadables) do
       if not addon.loaded and not addon.signed and not addon.loadondemand then
-        if not addon.loadable then
-          log(1, 'skipping unloadable addon %q', addon.name)
-        else
-          doLoadAddon(addon)
-        end
+        doLoadAddon(addon)
       end
     end
     log(1, 'done loading addons')
@@ -1060,7 +1056,6 @@ return function(
 
   return {
     bindings = bindings,
-    initAddons = initAddons,
     loadAddon = loadAddon,
     loadAddons = loadAddons,
     saveAllVariables = saveAllVariables,

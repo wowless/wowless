@@ -94,7 +94,6 @@ local function run(cfg)
     modules.points.SetAllPointsInternal(uiparent)
   end
   return withglobaltable(genv, function()
-    loader.initAddons()
     loader.loadAddons()
 
     local CallSafely = modules.security.CallSafely
