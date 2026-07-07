@@ -493,10 +493,8 @@ return function(
         elseif attr.impl.scope then
           return { [attr.impl.scope] = v }
         elseif attr.impl.method then
-          local fn = obj[attr.impl.method]
-          if not fn then
-            error(('missing method %q on object type %q'):format(attr.impl.method, obj.type))
-          elseif type(v) == 'table' then -- stringlist
+          local fn = assert(obj[attr.impl.method], attr.impl.method)
+          if type(v) == 'table' then -- stringlist
             fn(obj, unpack(v))
           else
             fn(obj, v)
