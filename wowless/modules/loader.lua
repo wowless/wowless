@@ -34,6 +34,16 @@ return function(
 
   local xmlimpls = datalua.xmlimpls
 
+  for _, impls in pairs(xmlimpls) do
+    if impls.genattrs then
+      local fns = {}
+      for phase, src in pairs(impls.genattrs) do
+        fns[phase] = assert(loadstring_untainted(src, '@gen:xmlattrs:' .. phase))()
+      end
+      impls.genattrfns = fns
+    end
+  end
+
   local function parseTypedValue(ty, value)
     ty = ty and string.lower(ty) or nil
     if ty == 'number' then
@@ -510,7 +520,12 @@ return function(
 
       local function processAttrs(ctx, e, obj, phase)
         local objty = obj.type
-        local attrs = (xmlimpls[objty] or intrinsics[objty]).attrs
+        local impls = xmlimpls[objty] or intrinsics[objty]
+        local gen = impls.genattrfns and impls.genattrfns[phase]
+        if gen then
+          gen(obj, e)
+        end
+        local attrs = impls.attrs
         for k, v in pairs(e.attr) do
           local attr = attrs[k]
           if attr and phase == attr.phase then

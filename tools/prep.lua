@@ -353,6 +353,47 @@ do
   end
 end
 
+-- Attributes whose impl is `method` or `field` are pure "apply this value to the
+-- object" operations with no effect on parsing/context, so for uiobject-instantiating
+-- tags they're compiled to a per-tag-per-phase Lua function instead of being
+-- interpreted generically (via processAttr/processAttrs) at runtime.
+local function genAttrApplier(attrs)
+  local byphase = {}
+  for n, a in pairs(attrs) do
+    if type(a.impl) == 'table' and (a.impl.method or a.impl.field) then
+      local phase = a.phase or 'middle'
+      byphase[phase] = byphase[phase] or {}
+      byphase[phase][n] = a
+    end
+  end
+  if not next(byphase) then
+    return nil
+  end
+  local result = {}
+  for phase, phaseattrs in pairs(byphase) do
+    local t = { 'return function(obj,e)' }
+    for n, a in sorted(phaseattrs) do
+      table.insert(t, ('local v=e.attr[%q]if v~=nil then '):format(n))
+      if a.impl.method then
+        local methodliteral = string.format('%q', a.impl.method)
+        local call = a.type == 'stringlist' and 'fn(obj,unpack(v))' or 'fn(obj,v)'
+        table.insert(t, 'local fn=obj[' .. methodliteral .. ']')
+        table.insert(
+          t,
+          'if not fn then error(("missing method %q on object type %q"):format(' .. methodliteral .. ',obj.type)) end '
+        )
+        table.insert(t, call)
+      else
+        table.insert(t, ('obj[%q]=v'):format(a.impl.field))
+      end
+      table.insert(t, ' end ')
+    end
+    table.insert(t, 'end')
+    result[phase] = table.concat(t)
+  end
+  return result
+end
+
 local xmlraw = parseYaml('data/products/' .. product .. '/xml.yaml')
 local xmlimpls = (function()
   local tree = xmlraw
@@ -364,14 +405,18 @@ local xmlimpls = (function()
       t = tree[t.extends]
       Mixin(attrs, t.attributes or {})
     end
+    local isUiobject = uiobjectdata[k] ~= nil
     local aimpls = {}
     for n, a in pairs(attrs) do
       if a.impl then
-        aimpls[n] = {
-          impl = a.impl,
-          name = n,
-          phase = a.phase or 'middle',
-        }
+        local isGenerated = isUiobject and type(a.impl) == 'table' and (a.impl.method or a.impl.field)
+        if not isGenerated then
+          aimpls[n] = {
+            impl = a.impl,
+            name = n,
+            phase = a.phase or 'middle',
+          }
+        end
       end
     end
     local tag = v.impl
@@ -384,6 +429,7 @@ local xmlimpls = (function()
     end
     newtree[k:lower()] = {
       attrs = aimpls,
+      genattrs = isUiobject and genAttrApplier(attrs) or nil,
       phase = v.phase or 'middle',
       tag = tag,
     }
