@@ -3,7 +3,6 @@
 local expectedScriptcaseFailures = {
   ['OP_GETGLOBAL: Read from insecure function environment'] = true,
   ['getfenv: Read tainted environment'] = true,
-  ['seterrorhandler: replaces \'*\' source with object names'] = true,
 }
 
 describe('addon', function()

@@ -40,8 +40,11 @@ environmentmetafield:
 error:
   error:
 errorhandler:
+  CreateFrame:
   error:
   geterrorhandler:
+  loadstring:
+  securecall:
   securecallfunction:
   seterrorhandler:
 GetAddOnInterfaceVersion:
