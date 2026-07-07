@@ -52,7 +52,9 @@ env:
   deps:
 errorhandler:
   deps:
+    api:
     eventqueue:
+    uiobjects:
 errors:
   deps:
     log:
