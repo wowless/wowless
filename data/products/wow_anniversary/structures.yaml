@@ -10,6 +10,8 @@ AddPrivateAuraAnchorArgs:
       nilable: true
       type:
         structure: PrivateAuraIconInfo
+    isContainer:
+      type: boolean
     parent:
       type:
         uiobject: Frame
@@ -231,7 +233,12 @@ C_AreaPoiInfo.AreaPOIInfo:
       type: boolean
     isCurrentEvent:
       type: boolean
+    isLocked:
+      default: false
+      type: boolean
     isPrimaryMapForPOI:
+      type: boolean
+    isSuppressible:
       type: boolean
     linkedUiMapID:
       nilable: true
@@ -249,6 +256,15 @@ C_AreaPoiInfo.AreaPOIInfo:
     tooltipWidgetSet:
       nilable: true
       type: number
+C_AutoComplete.AutoCompleteResult:
+  fields:
+    bnetID:
+      type: number
+    name:
+      type: string
+    priority:
+      type:
+        enum: AutoCompletePriority
 C_AzeriteEmpoweredItem.AzeriteEmpoweredItemPowerInfo:
   fields:
     azeritePowerID:
@@ -661,11 +677,27 @@ C_CatalogShop.AvailableRaceInfo:
       type: string
     raceID:
       type: number
+C_CatalogShop.BulkPurchaseIndividualProductResult:
+  fields:
+    entitlementId:
+      type: string
+    externalTransactionId:
+      type: string
+    parentProductId:
+      nilable: true
+      type: number
+    recordId:
+      type: number
+    status:
+      type:
+        enum: SimpleOrderStatus
 C_CatalogShop.CatalogShopBundleChildInfo:
   fields:
     childProductID:
       type: number
     displayOrder:
+      type: number
+    quantityInBundle:
       type: number
 C_CatalogShop.CatalogShopCategoryInfo:
   fields:
@@ -679,8 +711,13 @@ C_CatalogShop.CatalogShopCategoryInfo:
       type: boolean
     linkTag:
       type: string
+    showPersistentRefundButton:
+      type: boolean
 C_CatalogShop.CatalogShopProductDisplayInfo:
   fields:
+    additionalProductPMTURLs:
+      type:
+        arrayof: string
     creatureDisplayInfoIDs:
       type:
         arrayof: number
@@ -707,6 +744,9 @@ C_CatalogShop.CatalogShopProductDisplayInfo:
       type: number
     hasUnknownLicense:
       type: boolean
+    houseTextureAtlas:
+      nilable: true
+      type: string
     iconFileDataID:
       nilable: true
       type: number
@@ -736,9 +776,6 @@ C_CatalogShop.CatalogShopProductDisplayInfo:
     otherProductImageAtlasName:
       nilable: true
       type: string
-    otherProductPMTURL:
-      nilable: true
-      type: string
     overrideCardModelSceneID:
       nilable: true
       type: number
@@ -748,6 +785,9 @@ C_CatalogShop.CatalogShopProductDisplayInfo:
     overrideWideCardModelSceneID:
       nilable: true
       type: number
+    productPMTURL:
+      nilable: true
+      type: string
     productType:
       nilable: true
       type: string
@@ -780,6 +820,12 @@ C_CatalogShop.CatalogShopProductInfo:
       type: number
     catalogShopProductID:
       type: number
+    containsHousingItem:
+      type: boolean
+    decorQuantity:
+      nilable: true
+      type:
+        structure: C_CatalogShop.DecorQuantity
     description:
       type: string
     discountPercentage:
@@ -799,7 +845,11 @@ C_CatalogShop.CatalogShopProductInfo:
       type: boolean
     isHidden:
       type: boolean
+    isMystery:
+      type: boolean
     isPurchasePending:
+      type: boolean
+    isVCProduct:
       type: boolean
     itemID:
       type: number
@@ -822,7 +872,13 @@ C_CatalogShop.CatalogShopProductInfo:
       type: string
     originalPrice:
       type: string
+    previewBGOverrideProductURL:
+      nilable: true
+      type: string
     previewIconTexture:
+      nilable: true
+      type: string
+    previewSmallBGOverrideProductURL:
       nilable: true
       type: string
     price:
@@ -878,6 +934,8 @@ C_CatalogShop.CatalogShopSectionInfo:
     scrollGridSize:
       nilable: true
       type: number
+    shouldShowRecommendationOptOutDisclaimer:
+      type: boolean
 C_CatalogShop.CatalogShopSpellVisualInfo:
   fields:
     animID:
@@ -899,12 +957,32 @@ C_CatalogShop.CatalogShopSubItemInfo:
     quality:
       type:
         enum: ItemQuality
+C_CatalogShop.CatalogShopVCProductInfo:
+  fields:
+    vcProductID:
+      type: number
 C_CatalogShop.CatalogShopVirtualCurrency:
   fields:
     amount:
       type: number
     currencyCode:
       type: string
+C_CatalogShop.DecorQuantity:
+  fields:
+    placedQuantity:
+      type: number
+    storedQuantity:
+      type: number
+C_CatalogShop.RefundableDecorInfo:
+  fields:
+    decorGUID:
+      type: string
+    name:
+      type: string
+    price:
+      type: string
+    timeRemainingSeconds:
+      type: number
 C_ChallengeMode.ChallengeCompletionInfo:
   fields:
     isAffixRecord:
@@ -1038,7 +1116,7 @@ C_Club.ClubInfo:
 C_Club.ClubInvitationCandidateInfo:
   fields:
     memberId:
-      type: number
+      type: string
     name:
       type: string
     priority:
@@ -1108,7 +1186,7 @@ C_Club.ClubMemberInfo:
       nilable: true
       type: number
     memberId:
-      type: number
+      type: string
     memberNote:
       nilable: true
       type: string
@@ -1623,8 +1701,13 @@ C_Container.ItemQuestInfo:
       type: number
 C_CooldownViewer.CooldownViewerCooldown:
   fields:
+    category:
+      type:
+        enum: CooldownViewerCategory
     charges:
       type: boolean
+    cooldownID:
+      type: number
     flags:
       type:
         enum: CooldownSetSpellFlags
@@ -1750,6 +1833,109 @@ C_CurrencyInfo.CurrencyInfo:
       type: number
     useTotalEarnedForMaxQty:
       type: boolean
+C_DamageMeter.DamageMeterAvailableCombatSession:
+  fields:
+    durationSeconds:
+      nilable: true
+      type: number
+    name:
+      type: string
+    sessionID:
+      type: number
+C_DamageMeter.DamageMeterCombatSession:
+  fields:
+    combatSources:
+      type:
+        arrayof:
+          structure: C_DamageMeter.DamageMeterCombatSource
+    durationSeconds:
+      nilable: true
+      type: number
+    maxAmount:
+      default: 0
+      type: number
+    totalAmount:
+      default: 0
+      type: number
+C_DamageMeter.DamageMeterCombatSessionSource:
+  fields:
+    combatSpells:
+      type:
+        arrayof:
+          structure: C_DamageMeter.DamageMeterCombatSpell
+    maxAmount:
+      default: 0
+      type: number
+    totalAmount:
+      default: 0
+      type: number
+C_DamageMeter.DamageMeterCombatSource:
+  fields:
+    amountPerSecond:
+      type: number
+    classFilename:
+      type: string
+    classification:
+      type: string
+    deathRecapID:
+      type: number
+    deathTimeSeconds:
+      type: number
+    factionGroup:
+      nilable: true
+      type: string
+    isLocalPlayer:
+      type: boolean
+    name:
+      type: string
+    sourceCreatureID:
+      nilable: true
+      type: number
+    sourceDisplayType:
+      type:
+        enum: DamageMeterSourceDisplayType
+    sourceGUID:
+      nilable: true
+      type: string
+    specIconID:
+      type: number
+    totalAmount:
+      type: number
+C_DamageMeter.DamageMeterCombatSpell:
+  fields:
+    amountPerSecond:
+      type: number
+    combatSpellDetails:
+      type:
+        structure: C_DamageMeter.DamageMeterCombatSpellUnitDetails
+    creatureName:
+      type: string
+    isAvoidable:
+      type: boolean
+    isDeadly:
+      type: boolean
+    overkillAmount:
+      type: number
+    spellID:
+      type: number
+    totalAmount:
+      type: number
+C_DamageMeter.DamageMeterCombatSpellUnitDetails:
+  fields:
+    amount:
+      type: number
+    classification:
+      type: string
+    isMob:
+      type: boolean
+    isPet:
+      type: boolean
+    specIconID:
+      type: number
+    unitClassFilename:
+      type: string
+    unitName:
+      type: string
 C_DeathInfo.GraveyardMapInfo:
   fields:
     areaPoiID:
@@ -1780,6 +1966,8 @@ C_DeathInfo.SelfResurrectOption:
         enum: SelfResurrectOptionType
     priority:
       type: number
+C_DeathRecap.DeathRecapEventInfo:
+  fields:
 C_EditMode.EditModeAnchorInfo:
   fields:
     offsetX:
@@ -1850,6 +2038,14 @@ C_EncodingUtil.JSONSerializationOptions:
     ignoreSerializationErrors:
       default: false
       type: boolean
+C_EncounterInfo.EncounterUnitStatus:
+  fields:
+    creatureID:
+      type: number
+    creatureName:
+      type: string
+    remainingHealthPercent:
+      type: number
 C_EncounterJournal.DungeonEntranceMapInfo:
   fields:
     areaPoiID:
@@ -1948,6 +2144,115 @@ C_EncounterJournal.EncounterJournalSectionInfo:
     title:
       type: string
     uiModelSceneID:
+      type: number
+C_EncounterTimeline.EncounterTimelineEventInfo:
+  fields:
+    duration:
+      type: number
+    iconFileID:
+      type: number
+    icons:
+      type:
+        enum: EncounterEventIconmask
+    id:
+      type: number
+    isApproximate:
+      type: boolean
+    maxQueueDuration:
+      type: number
+    severity:
+      type:
+        enum: EncounterEventSeverity
+    source:
+      type:
+        enum: EncounterTimelineEventSource
+    spellID:
+      type: number
+    spellName:
+      type: string
+C_EncounterTimeline.EncounterTimelineScriptEventRequest:
+  fields:
+    duration:
+      type: number
+    iconFileID:
+      type: number
+    icons:
+      nilable: true
+      type:
+        enum: EncounterEventIconmask
+    maxQueueDuration:
+      default: 0
+      type: number
+    overrideName:
+      default: ''
+      type: string
+    paused:
+      default: false
+      type: boolean
+    severity:
+      default: 1
+      type:
+        enum: EncounterEventSeverity
+    spellID:
+      type: number
+C_EncounterTimeline.EncounterTimelineTrackInfo:
+  fields:
+    id:
+      type:
+        enum: EncounterTimelineTrack
+    maximumDuration:
+      nilable: true
+      type: number
+    maximumEventCount:
+      nilable: true
+      type: number
+    minimumDuration:
+      nilable: true
+      type: number
+    minimumEventGapDuration:
+      nilable: true
+      type: number
+    minimumEventIntroDuration:
+      nilable: true
+      type: number
+    sortDirection:
+      nilable: true
+      type:
+        enum: EncounterTimelineEventSortDirection
+    type:
+      type:
+        enum: EncounterTimelineTrackType
+C_EncounterWarnings.EncounterWarningInfo:
+  fields:
+    casterGUID:
+      type: string
+    casterName:
+      type: string
+    color:
+      type:
+        structure: colorRGBA
+    duration:
+      type: number
+    iconFileID:
+      type: number
+    isDeadly:
+      type: boolean
+    severity:
+      type:
+        enum: EncounterEventSeverity
+    shouldPlaySound:
+      type: boolean
+    shouldShowChatMessage:
+      type: boolean
+    shouldShowWarning:
+      type: boolean
+    targetGUID:
+      type: string
+    targetName:
+      type: string
+    text:
+      type: string
+    tooltipSpellID:
       type: number
 C_EndOfMatchUI.MatchDetail:
   fields:
@@ -2447,18 +2752,6 @@ C_GuildInfo.GuildRenameStatus:
     result:
       type:
         enum: GuildErrorType
-C_HousingBasicMode.InvalidPlacementInfo:
-  fields:
-    anyRestrictions:
-      type: boolean
-    invalidCollision:
-      type: boolean
-    invalidTarget:
-      type: boolean
-    notInRoom:
-      type: boolean
-    tooFar:
-      type: boolean
 C_HousingCatalog.HousingBundleDecorEntryInfo:
   fields:
     decorID:
@@ -2467,17 +2760,26 @@ C_HousingCatalog.HousingBundleDecorEntryInfo:
       type: number
 C_HousingCatalog.HousingBundleInfo:
   fields:
+    canPreview:
+      default: true
+      type: boolean
     decorEntries:
       type:
         arrayof:
           structure: C_HousingCatalog.HousingBundleDecorEntryInfo
+    nonDecorProducts:
+      type:
+        arrayof: number
+    originalPrice:
+      nilable: true
+      type: number
     price:
       type: number
     productID:
       type: number
 C_HousingCatalog.HousingCatalogCategoryInfo:
   fields:
-    anyOwnedEntries:
+    anyStoredEntries:
       type: boolean
     icon:
       nilable: true
@@ -2502,14 +2804,13 @@ C_HousingCatalog.HousingCatalogEntryInfo:
     categoryIDs:
       type:
         arrayof: number
-    customizations:
-      type:
-        arrayof: string
     dataTagsByID:
       type: table
-    entryID:
+    destroyableInstanceCount:
+      type: number
+    entryType:
       type:
-        structure: HousingCatalogEntryID
+        enum: HousingCatalogEntryType
     firstAcquisitionBonus:
       type: number
     iconAtlas:
@@ -2524,28 +2825,23 @@ C_HousingCatalog.HousingCatalogEntryInfo:
       type: boolean
     isPrefab:
       type: boolean
-    marketInfo:
+    isUniqueTrophy:
+      type: boolean
+    itemID:
       nilable: true
-      type:
-        structure: C_HousingCatalog.HousingMarketInfo
+      type: number
     name:
       type: string
-    numPlaced:
-      type: number
-    numStored:
-      type: number
     placementCost:
       type: number
     quality:
       nilable: true
       type:
         enum: ItemQuality
-    quantity:
+    recordID:
       type: number
     remainingRedeemable:
       type: number
-    showQuantity:
-      type: boolean
     size:
       type:
         enum: HousingCatalogEntrySize
@@ -2554,12 +2850,27 @@ C_HousingCatalog.HousingCatalogEntryInfo:
     subcategoryIDs:
       type:
         arrayof: number
+    totalNumPlaced:
+      type: number
+    totalNumStored:
+      type: number
     uiModelSceneID:
       nilable: true
       type: number
+C_HousingCatalog.HousingCatalogEntryVariantInfo:
+  fields:
+    dyeSlots:
+      type:
+        arrayof:
+          structure: HousingDecorDyeSlot
+    entryVariantID:
+      type:
+        structure: HousingCatalogEntryVariantID
+    numStored:
+      type: number
 C_HousingCatalog.HousingCatalogSubcategoryInfo:
   fields:
-    anyOwnedEntries:
+    anyStoredEntries:
       type: boolean
     icon:
       nilable: true
@@ -2582,14 +2893,22 @@ C_HousingCatalog.HousingCategorySearchInfo:
     includeFeaturedCategory:
       default: false
       type: boolean
-    withOwnedEntriesOnly:
+    withStoredEntriesOnly:
       default: false
       type: boolean
-C_HousingCatalog.HousingFeaturedDecorEntry:
+C_HousingCatalog.HousingFeaturedSmallProductInfo:
   fields:
-    entryID:
+    canPreview:
+      type: boolean
+    entryVariantID:
+      nilable: true
       type:
-        structure: HousingCatalogEntryID
+        structure: HousingCatalogEntryVariantID
+    originalPrice:
+      nilable: true
+      type: number
+    price:
+      type: number
     productID:
       type: number
 C_HousingCatalog.HousingMarketInfo:
@@ -2600,6 +2919,34 @@ C_HousingCatalog.HousingMarketInfo:
     price:
       type: number
     productID:
+      type: number
+C_HousingCatalog.HousingPreviewItemData:
+  fields:
+    bundleCatalogShopProductID:
+      nilable: true
+      type: number
+    decorGUID:
+      nilable: true
+      type: string
+    decorID:
+      type: number
+    icon:
+      type: number
+    id:
+      type: number
+    isBundleChild:
+      type: boolean
+    isBundleParent:
+      type: boolean
+    name:
+      type: string
+    price:
+      type: number
+    productID:
+      nilable: true
+      type: number
+    salePrice:
+      nilable: true
       type: number
 C_HousingCustomizeMode.HousingRoomComponentInstanceInfo:
   fields:
@@ -2648,18 +2995,6 @@ C_HousingDecor.HousingDecorInstanceListEntry:
       type: string
     name:
       type: string
-C_HousingDecor.HousingLevelInfo:
-  fields:
-    exteriorDecorPlacementBudget:
-      type: number
-    exteriorFixtureBudget:
-      type: number
-    interiorDecorPlacementBudget:
-      type: number
-    level:
-      type: number
-    roomPlacementBudget:
-      type: number
 C_ItemUpgrade.ItemUpgradeCostDiscountInfo:
   fields:
     discountHighWatermark:
@@ -2742,6 +3077,9 @@ C_ItemUpgrade.ItemUpgradeLevelInfo:
       type:
         arrayof:
           structure: C_ItemUpgrade.ItemUpgradeStat
+    moneyCost:
+      nilable: true
+      type: number
     upgradeLevel:
       type: number
 C_ItemUpgrade.ItemUpgradeSeasonalCostType:
@@ -2797,6 +3135,18 @@ C_LFGList.AdvancedFilterOptions:
       default: false
       type: boolean
     difficultyNormal:
+      default: false
+      type: boolean
+    generalPlaystyle1:
+      default: false
+      type: boolean
+    generalPlaystyle2:
+      default: false
+      type: boolean
+    generalPlaystyle3:
+      default: false
+      type: boolean
+    generalPlaystyle4:
       default: false
       type: boolean
     hasHealer:
@@ -2934,6 +3284,10 @@ C_LFGList.LfgEntryData:
       type: string
     duration:
       type: number
+    generalPlaystyle:
+      nilable: true
+      type:
+        enum: LFGEntryGeneralPlaystyle
     isCrossFactionListing:
       type: boolean
     name:
@@ -2966,6 +3320,10 @@ C_LFGList.LfgListingCreateData:
     activityIDs:
       type:
         arrayof: number
+    generalPlaystyle:
+      default: 0
+      type:
+        enum: LFGEntryGeneralPlaystyle
     isAutoAccept:
       default: false
       type: boolean
@@ -3016,6 +3374,10 @@ C_LFGList.LfgSearchResultData:
     crossFactionListing:
       nilable: true
       type: boolean
+    generalPlaystyle:
+      nilable: true
+      type:
+        enum: LFGEntryGeneralPlaystyle
     hasSelf:
       type: boolean
     isDelisted:
@@ -3116,41 +3478,6 @@ C_LFGList.PvpRatingInfo:
       type: number
     tier:
       type: number
-C_LFGList.WowLocale:
-  fields:
-    deDE:
-      default: false
-      type: boolean
-    enUS:
-      default: false
-      type: boolean
-    esES:
-      default: false
-      type: boolean
-    esMX:
-      default: false
-      type: boolean
-    frFR:
-      default: false
-      type: boolean
-    itIT:
-      default: false
-      type: boolean
-    koKR:
-      default: false
-      type: boolean
-    ptBR:
-      default: false
-      type: boolean
-    ruRU:
-      default: false
-      type: boolean
-    zhCN:
-      default: false
-      type: boolean
-    zhTW:
-      default: false
-      type: boolean
 C_LossOfControl.LossOfControlData:
   fields:
     auraInstanceID:
@@ -3373,7 +3700,7 @@ C_MythicPlus.MapSeasonBestInfo:
         arrayof: number
     completionDate:
       type:
-        structure: C_MythicPlus.MythicPlusDate
+        structure: CalendarTime
     dungeonScore:
       type: number
     durationSec:
@@ -3384,20 +3711,6 @@ C_MythicPlus.MapSeasonBestInfo:
       type:
         arrayof:
           structure: C_MythicPlus.MythicPlusMember
-C_MythicPlus.MythicPlusDate:
-  fields:
-    day:
-      type: number
-    hour:
-      type: number
-    minute:
-      type: number
-    month:
-      type: number
-    weekday:
-      type: number
-    year:
-      type: number
 C_MythicPlus.MythicPlusKeystoneAffix:
   fields:
     id:
@@ -3419,7 +3732,7 @@ C_MythicPlus.MythicPlusRunInfo:
       type: boolean
     completionDate:
       type:
-        structure: C_MythicPlus.MythicPlusDate
+        structure: CalendarTime
     durationSec:
       type: number
     level:
@@ -3440,6 +3753,126 @@ C_MythicPlus.SeasonTimeInfo:
       type: number
     medal:
       type: number
+C_NeighborhoodInitiative.InitiativeActivityLogEntry:
+  fields:
+    amount:
+      type: number
+    completionTime:
+      type: number
+    playerName:
+      type: string
+    taskID:
+      type: number
+    taskName:
+      type: string
+C_NeighborhoodInitiative.InitiativeActivityLogInfo:
+  fields:
+    isLoaded:
+      type: boolean
+    neighborhoodGUID:
+      type: string
+    nextUpdateTime:
+      type: number
+    taskActivity:
+      type:
+        arrayof:
+          structure: C_NeighborhoodInitiative.InitiativeActivityLogEntry
+C_NeighborhoodInitiative.InitiativeMilestoneInfo:
+  fields:
+    milestoneOrderIndex:
+      type: number
+    requiredContributionAmount:
+      type: number
+    rewards:
+      type:
+        arrayof:
+          structure: C_NeighborhoodInitiative.InitiativeMilestoneRewardInfo
+C_NeighborhoodInitiative.InitiativeMilestoneRewardInfo:
+  fields:
+    decorID:
+      type: number
+    decorQuantity:
+      type: number
+    description:
+      type: string
+    favor:
+      type: number
+    money:
+      type: number
+    rewardQuestID:
+      type: number
+    title:
+      type: string
+C_NeighborhoodInitiative.InitiativeTaskInfo:
+  fields:
+    completed:
+      type: boolean
+    criteriaList:
+      type:
+        arrayof:
+          structure: CriteriaRequiredValue
+    description:
+      type: string
+    ID:
+      type: number
+    inProgress:
+      type: boolean
+    progressContributionAmount:
+      type: number
+    requirementsList:
+      type:
+        arrayof:
+          structure: CriteriaRequirement
+    rewardQuestID:
+      type: number
+    sortOrder:
+      type: number
+    supersedes:
+      type: number
+    taskName:
+      type: string
+    taskType:
+      type:
+        enum: NeighborhoodInitiativeTaskType
+    timesCompleted:
+      type: number
+    tracked:
+      type: boolean
+C_NeighborhoodInitiative.InitiativeTasksTracked:
+  fields:
+    trackedIDs:
+      type:
+        arrayof: number
+C_NeighborhoodInitiative.NeighborhoodInitiativeInfo:
+  fields:
+    currentCycleID:
+      type: number
+    currentProgress:
+      type: number
+    description:
+      type: string
+    duration:
+      type: number
+    initiativeID:
+      type: number
+    isLoaded:
+      type: boolean
+    milestones:
+      type:
+        arrayof:
+          structure: C_NeighborhoodInitiative.InitiativeMilestoneInfo
+    neighborhoodGUID:
+      type: string
+    playerTotalContribution:
+      type: number
+    progressRequired:
+      type: number
+    tasks:
+      type:
+        arrayof:
+          structure: C_NeighborhoodInitiative.InitiativeTaskInfo
+    title:
+      type: string
 C_PaperDollInfo.InspectRatedBGData:
   fields:
     played:
@@ -3683,7 +4116,7 @@ C_RecentAllies.RecentAllyStateData:
     currentLocation:
       nilable: true
       type: string
-    hasFriendRequestPending:
+    friendRequestSentThisSession:
       type: boolean
     isAFK:
       type: boolean
@@ -4006,6 +4439,21 @@ C_ScenarioInfo.ScenarioCriteriaInfo:
     totalQuantity:
       default: 0
       type: number
+C_ScenarioInfo.ScenarioDisplayInfo:
+  fields:
+    themeColor:
+      type:
+        structure: colorRGB
+C_ScenarioInfo.ScenarioIconInfo:
+  fields:
+    atlas:
+      type: string
+    description:
+      type: string
+    x:
+      type: number
+    y:
+      type: number
 C_ScenarioInfo.ScenarioInformation:
   fields:
     area:
@@ -4235,6 +4683,29 @@ C_Spell.SpellInfo:
     originalIconID:
       type: number
     spellID:
+      type: number
+C_SpellDiminish.SpellDiminishCategoryInfo:
+  fields:
+    category:
+      type:
+        enum: SpellDiminishCategory
+    icon:
+      nilable: true
+      type: number
+    name:
+      type: string
+C_SpellDiminish.SpellDiminishTrackerInfo:
+  fields:
+    category:
+      type:
+        enum: SpellDiminishCategory
+    duration:
+      type: number
+    isImmune:
+      type: boolean
+    showCountdown:
+      type: boolean
+    startTime:
       type: number
 C_TaxiMap.MapTaxiNodeInfo:
   fields:
@@ -4496,6 +4967,8 @@ C_Traits.TraitNodeInfo:
     subTreeID:
       nilable: true
       type: number
+    totalMaxRanks:
+      type: number
     type:
       type:
         enum: TraitNodeType
@@ -4586,6 +5059,11 @@ C_Traits.TraitTreeInfo:
     rootNodeID:
       nilable: true
       type: number
+    titleText:
+      nilable: true
+      type: string
+    uiTextureKit:
+      type: string
 C_Traits.TreeCurrencyInfo:
   fields:
     maxQuantity:
@@ -4597,12 +5075,26 @@ C_Traits.TreeCurrencyInfo:
       type: number
     traitCurrencyID:
       type: number
-C_Transmog.TransmogApplyWarningInfo:
+C_Transmog.TransmogSlotVisualInfo:
   fields:
-    itemLink:
-      type: string
-    text:
-      type: string
+    appliedSourceID:
+      type: number
+    appliedVisualID:
+      type: number
+    baseSourceID:
+      type: number
+    baseVisualID:
+      type: number
+    hasUndo:
+      type: boolean
+    isHideVisual:
+      type: boolean
+    itemSubclass:
+      type: number
+    pendingSourceID:
+      type: number
+    pendingVisualID:
+      type: number
 C_TransmogCollection.TransmogAppearanceInfoBySourceData:
   fields:
     appearanceHasAnyNonLevelRequirements:
@@ -4645,6 +5137,30 @@ C_TransmogCollection.TransmogAppearanceJournalEncounterInfo:
     tiers:
       type:
         arrayof: string
+C_TransmogCollection.TransmogAppearanceSourceInfoData:
+  fields:
+    canHaveIllusion:
+      type: boolean
+    category:
+      type:
+        enum: TransmogCollectionType
+    icon:
+      type: number
+    ignoreModelAttachmentChecksForIllusion:
+      type: boolean
+    isCollected:
+      type: boolean
+    itemAppearanceID:
+      type: number
+    itemLink:
+      type: string
+    itemSubclass:
+      type: number
+    sourceType:
+      nilable: true
+      type: number
+    transmoglink:
+      type: string
 C_TransmogCollection.TransmogCategoryAppearanceInfo:
   fields:
     alwaysShowItem:
@@ -4670,6 +5186,171 @@ C_TransmogCollection.TransmogCategoryAppearanceInfo:
       type: number
     visualID:
       type: number
+C_TransmogCollection.TransmogIllusionInfo:
+  fields:
+    icon:
+      type: number
+    isCollected:
+      type: boolean
+    isHideVisual:
+      type: boolean
+    isUsable:
+      type: boolean
+    sourceID:
+      type: number
+    visualID:
+      type: number
+C_TransmogOutfitInfo.TransmogOutfitEntryInfo:
+  fields:
+    icon:
+      type: number
+    isDisabled:
+      type: boolean
+    isEventOutfit:
+      type: boolean
+    name:
+      type: string
+    outfitID:
+      type: number
+    playerFacingOutfitIndex:
+      type: number
+    situationCategories:
+      type:
+        arrayof: string
+C_TransmogOutfitInfo.TransmogOutfitLinkedSlotInfo:
+  fields:
+    primarySlotInfo:
+      type:
+        structure: C_TransmogOutfitInfo.TransmogOutfitSlotInfo
+    secondarySlotInfo:
+      type:
+        structure: C_TransmogOutfitInfo.TransmogOutfitSlotInfo
+C_TransmogOutfitInfo.TransmogOutfitOptionSheatheCategoryInfo:
+  fields:
+    categoryName:
+      type: string
+    sheatheCategory:
+      type:
+        enum: TransmogOutfitSlotOptionSheatheCategory
+C_TransmogOutfitInfo.TransmogOutfitSlotGroup:
+  fields:
+    appearanceSlotInfo:
+      type:
+        arrayof:
+          structure: C_TransmogOutfitInfo.TransmogOutfitSlotInfo
+    illusionSlotInfo:
+      type:
+        arrayof:
+          structure: C_TransmogOutfitInfo.TransmogOutfitSlotInfo
+    position:
+      type:
+        enum: TransmogOutfitSlotPosition
+C_TransmogOutfitInfo.TransmogOutfitSlotInfo:
+  fields:
+    collectionType:
+      type:
+        enum: TransmogCollectionType
+    isSecondary:
+      type: boolean
+    slot:
+      type:
+        enum: TransmogOutfitSlot
+    slotName:
+      type: string
+    type:
+      type:
+        enum: TransmogType
+C_TransmogOutfitInfo.TransmogOutfitWeaponCollectionInfo:
+  fields:
+    canHaveIllusions:
+      type: boolean
+    isWeapon:
+      type: boolean
+    name:
+      type: string
+C_TransmogOutfitInfo.TransmogOutfitWeaponOptionInfo:
+  fields:
+    enabled:
+      type: boolean
+    name:
+      type: string
+    weaponOption:
+      type:
+        enum: TransmogOutfitSlotOption
+C_TransmogOutfitInfo.TransmogSituationCategory:
+  fields:
+    description:
+      type: string
+    groupData:
+      type:
+        arrayof:
+          structure: C_TransmogOutfitInfo.TransmogSituationGroup
+    isRadioButton:
+      type: boolean
+    name:
+      type: string
+    triggerID:
+      type: number
+C_TransmogOutfitInfo.TransmogSituationGroup:
+  fields:
+    groupID:
+      type: number
+    optionData:
+      type:
+        arrayof:
+          structure: C_TransmogOutfitInfo.TransmogSituationOptionData
+    secondaryID:
+      type: number
+C_TransmogOutfitInfo.TransmogSituationOption:
+  fields:
+    equipmentSetID:
+      type: number
+    loadoutID:
+      type: number
+    situationID:
+      type: number
+    specID:
+      type: number
+C_TransmogOutfitInfo.TransmogSituationOptionData:
+  fields:
+    name:
+      type: string
+    option:
+      type:
+        structure: C_TransmogOutfitInfo.TransmogSituationOption
+    value:
+      type: boolean
+C_TransmogOutfitInfo.ViewedTransmogOutfitSlotInfo:
+  fields:
+    canTransmogrify:
+      type: boolean
+    displayType:
+      type:
+        enum: TransmogOutfitDisplayType
+    error:
+      type:
+        enum: TransmogOutfitSlotError
+    errorText:
+      type: string
+    hasPending:
+      type: boolean
+    isPendingCollected:
+      type: boolean
+    isTransmogrified:
+      type: boolean
+    sheatheCategory:
+      type:
+        enum: TransmogOutfitSlotOptionSheatheCategory
+    texture:
+      nilable: true
+      type: number
+    transmogID:
+      type: number
+    warning:
+      type:
+        enum: TransmogOutfitSlotWarning
+    warningText:
+      type: string
 C_TransmogSets.TransmogSetInfo:
   fields:
     baseSetID:
@@ -4685,6 +5366,8 @@ C_TransmogSets.TransmogSetInfo:
     expansionID:
       type: number
     favorite:
+      type: boolean
+    grantAsPrecedingVariant:
       type: boolean
     hiddenUntilCollected:
       type: boolean
@@ -4724,74 +5407,441 @@ C_UIWidgetManager.BulletTextListWidgetVisualizationInfo:
     enabledState:
       type:
         enum: WidgetEnabledState
+    frameTextureKit:
+      type: string
+    hasTimer:
+      type: boolean
+    inAnimType:
+      type:
+        enum: WidgetAnimationType
+    layoutDirection:
+      type:
+        enum: UIWidgetLayoutDirection
     lines:
       type:
         arrayof: string
+    modelSceneLayer:
+      type:
+        enum: UIWidgetModelSceneLayer
     orderIndex:
+      type: number
+    outAnimType:
+      type:
+        enum: WidgetAnimationType
+    scriptedAnimationEffectID:
       type: number
     shownState:
       type:
         enum: WidgetShownState
+    textureKit:
+      type: string
+    widgetScale:
+      type:
+        enum: UIWidgetScale
+    widgetSizeSetting:
+      type: number
+    widgetTag:
+      type: string
+C_UIWidgetManager.ButtonHeaderWidgetVisualizationInfo:
+  fields:
+    buttons:
+      type:
+        arrayof:
+          structure: C_UIWidgetManager.UIWidgetSpellButtonInfo
+    frameTextureKit:
+      type: string
+    hasTimer:
+      type: boolean
+    headerText:
+      type: string
+    inAnimType:
+      type:
+        enum: WidgetAnimationType
+    layoutDirection:
+      type:
+        enum: UIWidgetLayoutDirection
+    modelSceneLayer:
+      type:
+        enum: UIWidgetModelSceneLayer
+    orderIndex:
+      type: number
+    outAnimType:
+      type:
+        enum: WidgetAnimationType
+    scriptedAnimationEffectID:
+      type: number
+    shownState:
+      type:
+        enum: WidgetShownState
+    textureKit:
+      type: string
+    tooltip:
+      type: string
+    tooltipLoc:
+      type:
+        enum: UIWidgetTooltipLocation
+    widgetScale:
+      type:
+        enum: UIWidgetScale
+    widgetSizeSetting:
+      type: number
     widgetTag:
       type: string
 C_UIWidgetManager.CaptureBarWidgetVisualizationInfo:
   fields:
-    barPercent:
+    barMaxValue:
       type: number
-    neutralPercent:
+    barMinValue:
+      type: number
+    barValue:
+      type: number
+    fillDirectionType:
+      type:
+        enum: CaptureBarWidgetFillDirectionType
+    frameTextureKit:
+      type: string
+    glowAnimType:
+      type:
+        enum: WidgetGlowAnimType
+    hasTimer:
+      type: boolean
+    inAnimType:
+      type:
+        enum: WidgetAnimationType
+    layoutDirection:
+      type:
+        enum: UIWidgetLayoutDirection
+    modelSceneLayer:
+      type:
+        enum: UIWidgetModelSceneLayer
+    neutralZoneCenter:
+      type: number
+    neutralZoneSize:
       type: number
     orderIndex:
+      type: number
+    outAnimType:
+      type:
+        enum: WidgetAnimationType
+    scriptedAnimationEffectID:
       type: number
     shownState:
       type:
         enum: WidgetShownState
-    textureKitID:
+    textureKit:
+      type: string
+    tooltip:
+      type: string
+    tooltipLoc:
+      type:
+        enum: UIWidgetTooltipLocation
+    widgetScale:
+      type:
+        enum: UIWidgetScale
+    widgetSizeSetting:
+      type: number
+    widgetTag:
+      type: string
+C_UIWidgetManager.CaptureZoneVisualizationInfo:
+  fields:
+    dangerFlashType:
+      type:
+        enum: ZoneControlDangerFlashType
+    frameTextureKit:
+      type: string
+    hasTimer:
+      type: boolean
+    inAnimType:
+      type:
+        enum: WidgetAnimationType
+    layoutDirection:
+      type:
+        enum: UIWidgetLayoutDirection
+    leadingEdgeType:
+      type:
+        enum: ZoneControlLeadingEdgeType
+    mode:
+      type:
+        enum: ZoneControlMode
+    modelSceneLayer:
+      type:
+        enum: UIWidgetModelSceneLayer
+    orderIndex:
+      type: number
+    outAnimType:
+      type:
+        enum: WidgetAnimationType
+    scriptedAnimationEffectID:
+      type: number
+    shownState:
+      type:
+        enum: WidgetShownState
+    textureKit:
+      type: string
+    tooltipLoc:
+      type:
+        enum: UIWidgetTooltipLocation
+    widgetScale:
+      type:
+        enum: UIWidgetScale
+    widgetSizeSetting:
+      type: number
+    widgetTag:
+      type: string
+    zoneInfo:
+      type:
+        structure: C_UIWidgetManager.ZoneEntry
+C_UIWidgetManager.DiscreteProgressStepsVisualizationInfo:
+  fields:
+    frameTextureKit:
+      type: string
+    hasTimer:
+      type: boolean
+    inAnimType:
+      type:
+        enum: WidgetAnimationType
+    layoutDirection:
+      type:
+        enum: UIWidgetLayoutDirection
+    modelSceneLayer:
+      type:
+        enum: UIWidgetModelSceneLayer
+    numSteps:
+      type: number
+    orderIndex:
+      type: number
+    outAnimType:
+      type:
+        enum: WidgetAnimationType
+    progressMax:
+      type: number
+    progressMin:
+      type: number
+    progressVal:
+      type: number
+    scriptedAnimationEffectID:
+      type: number
+    shownState:
+      type:
+        enum: WidgetShownState
+    textureKit:
+      type: string
+    tooltip:
+      type: string
+    tooltipLoc:
+      type:
+        enum: UIWidgetTooltipLocation
+    widgetScale:
+      type:
+        enum: UIWidgetScale
+    widgetSizeSetting:
       type: number
     widgetTag:
       type: string
 C_UIWidgetManager.DoubleIconAndTextWidgetVisualizationInfo:
   fields:
+    frameTextureKit:
+      type: string
+    hasTimer:
+      type: boolean
+    inAnimType:
+      type:
+        enum: WidgetAnimationType
     label:
       type: string
+    layoutDirection:
+      type:
+        enum: UIWidgetLayoutDirection
     leftText:
       type: string
     leftTooltip:
       type: string
+    modelSceneLayer:
+      type:
+        enum: UIWidgetModelSceneLayer
     orderIndex:
       type: number
+    outAnimType:
+      type:
+        enum: WidgetAnimationType
     rightText:
       type: string
     rightTooltip:
       type: string
+    scriptedAnimationEffectID:
+      type: number
     shownState:
       type:
         enum: WidgetShownState
-    textureKitID:
+    textureKit:
+      type: string
+    tooltipLoc:
+      type:
+        enum: UIWidgetTooltipLocation
+    widgetScale:
+      type:
+        enum: UIWidgetScale
+    widgetSizeSetting:
+      type: number
+    widgetTag:
+      type: string
+C_UIWidgetManager.DoubleStateIconRowVisualizationInfo:
+  fields:
+    frameTextureKit:
+      type: string
+    hasTimer:
+      type: boolean
+    inAnimType:
+      type:
+        enum: WidgetAnimationType
+    layoutDirection:
+      type:
+        enum: UIWidgetLayoutDirection
+    leftIcons:
+      type:
+        arrayof:
+          structure: C_UIWidgetManager.UIWidgetStateIconInfo
+    modelSceneLayer:
+      type:
+        enum: UIWidgetModelSceneLayer
+    orderIndex:
+      type: number
+    outAnimType:
+      type:
+        enum: WidgetAnimationType
+    rightIcons:
+      type:
+        arrayof:
+          structure: C_UIWidgetManager.UIWidgetStateIconInfo
+    scriptedAnimationEffectID:
+      type: number
+    shownState:
+      type:
+        enum: WidgetShownState
+    textureKit:
+      type: string
+    tooltipLoc:
+      type:
+        enum: UIWidgetTooltipLocation
+    widgetScale:
+      type:
+        enum: UIWidgetScale
+    widgetSizeSetting:
       type: number
     widgetTag:
       type: string
 C_UIWidgetManager.DoubleStatusBarWidgetVisualizationInfo:
   fields:
+    barValueTextType:
+      type:
+        enum: StatusBarValueTextType
+    fillMotionType:
+      type:
+        enum: UIWidgetMotionType
+    frameTextureKit:
+      type: string
+    hasTimer:
+      type: boolean
+    inAnimType:
+      type:
+        enum: WidgetAnimationType
+    layoutDirection:
+      type:
+        enum: UIWidgetLayoutDirection
     leftBarMax:
       type: number
     leftBarMin:
       type: number
+    leftBarTooltip:
+      type: string
+    leftBarTooltipLoc:
+      type:
+        enum: UIWidgetTooltipLocation
     leftBarValue:
       type: number
+    modelSceneLayer:
+      type:
+        enum: UIWidgetModelSceneLayer
     orderIndex:
       type: number
+    outAnimType:
+      type:
+        enum: WidgetAnimationType
     rightBarMax:
       type: number
     rightBarMin:
       type: number
+    rightBarTooltip:
+      type: string
+    rightBarTooltipLoc:
+      type:
+        enum: UIWidgetTooltipLocation
     rightBarValue:
+      type: number
+    scriptedAnimationEffectID:
       type: number
     shownState:
       type:
         enum: WidgetShownState
     text:
       type: string
-    textureKitID:
+    textureKit:
+      type: string
+    widgetScale:
+      type:
+        enum: UIWidgetScale
+    widgetSizeSetting:
+      type: number
+    widgetTag:
+      type: string
+C_UIWidgetManager.FillUpFramesWidgetVisualizationInfo:
+  fields:
+    fillMax:
+      type: number
+    fillMin:
+      type: number
+    fillValue:
+      type: number
+    frameTextureKit:
+      type: string
+    hasTimer:
+      type: boolean
+    inAnimType:
+      type:
+        enum: WidgetAnimationType
+    layoutDirection:
+      type:
+        enum: UIWidgetLayoutDirection
+    modelSceneLayer:
+      type:
+        enum: UIWidgetModelSceneLayer
+    numFullFrames:
+      type: number
+    numTotalFrames:
+      type: number
+    orderIndex:
+      type: number
+    outAnimType:
+      type:
+        enum: WidgetAnimationType
+    pulseFillingFrame:
+      type: boolean
+    scriptedAnimationEffectID:
+      type: number
+    shownState:
+      type:
+        enum: WidgetShownState
+    textureKit:
+      type: string
+    tooltip:
+      type: string
+    tooltipLoc:
+      type:
+        enum: UIWidgetTooltipLocation
+    widgetScale:
+      type:
+        enum: UIWidgetScale
+    widgetSizeSetting:
       type: number
     widgetTag:
       type: string
@@ -4801,20 +5851,64 @@ C_UIWidgetManager.HorizontalCurrenciesWidgetVisualizationInfo:
       type:
         arrayof:
           structure: C_UIWidgetManager.UIWidgetCurrencyInfo
+    frameTextureKit:
+      type: string
+    hasTimer:
+      type: boolean
+    inAnimType:
+      type:
+        enum: WidgetAnimationType
+    layoutDirection:
+      type:
+        enum: UIWidgetLayoutDirection
+    modelSceneLayer:
+      type:
+        enum: UIWidgetModelSceneLayer
     orderIndex:
+      type: number
+    outAnimType:
+      type:
+        enum: WidgetAnimationType
+    scriptedAnimationEffectID:
       type: number
     shownState:
       type:
         enum: WidgetShownState
+    textureKit:
+      type: string
+    tooltipLoc:
+      type:
+        enum: UIWidgetTooltipLocation
+    widgetScale:
+      type:
+        enum: UIWidgetScale
+    widgetSizeSetting:
+      type: number
     widgetTag:
       type: string
 C_UIWidgetManager.IconAndTextWidgetVisualizationInfo:
   fields:
     dynamicTooltip:
       type: string
+    frameTextureKit:
+      type: string
     hasTimer:
       type: boolean
+    inAnimType:
+      type:
+        enum: WidgetAnimationType
+    layoutDirection:
+      type:
+        enum: UIWidgetLayoutDirection
+    modelSceneLayer:
+      type:
+        enum: UIWidgetModelSceneLayer
     orderIndex:
+      type: number
+    outAnimType:
+      type:
+        enum: WidgetAnimationType
+    scriptedAnimationEffectID:
       type: number
     shiftTextType:
       type:
@@ -4824,24 +5918,53 @@ C_UIWidgetManager.IconAndTextWidgetVisualizationInfo:
         enum: IconAndTextWidgetState
     text:
       type: string
-    textureKitID:
-      type: number
+    textureKit:
+      type: string
     tooltip:
       type: string
+    tooltipLoc:
+      type:
+        enum: UIWidgetTooltipLocation
+    widgetScale:
+      type:
+        enum: UIWidgetScale
     widgetSizeSetting:
       type: number
     widgetTag:
       type: string
 C_UIWidgetManager.IconTextAndBackgroundWidgetVisualizationInfo:
   fields:
+    frameTextureKit:
+      type: string
+    hasTimer:
+      type: boolean
+    inAnimType:
+      type:
+        enum: WidgetAnimationType
+    layoutDirection:
+      type:
+        enum: UIWidgetLayoutDirection
+    modelSceneLayer:
+      type:
+        enum: UIWidgetModelSceneLayer
     orderIndex:
+      type: number
+    outAnimType:
+      type:
+        enum: WidgetAnimationType
+    scriptedAnimationEffectID:
       type: number
     shownState:
       type:
         enum: WidgetShownState
-    textureKitID:
-      type: number
-    value:
+    text:
+      type: string
+    textureKit:
+      type: string
+    widgetScale:
+      type:
+        enum: UIWidgetScale
+    widgetSizeSetting:
       type: number
     widgetTag:
       type: string
@@ -4862,14 +5985,159 @@ C_UIWidgetManager.IconTextAndCurrenciesWidgetVisualizationInfo:
     enabledState:
       type:
         enum: WidgetEnabledState
+    frameTextureKit:
+      type: string
+    hasTimer:
+      type: boolean
+    inAnimType:
+      type:
+        enum: WidgetAnimationType
+    layoutDirection:
+      type:
+        enum: UIWidgetLayoutDirection
+    modelSceneLayer:
+      type:
+        enum: UIWidgetModelSceneLayer
     orderIndex:
+      type: number
+    outAnimType:
+      type:
+        enum: WidgetAnimationType
+    scriptedAnimationEffectID:
       type: number
     shownState:
       type:
         enum: WidgetShownState
     text:
       type: string
-    textureKitID:
+    textureKit:
+      type: string
+    tooltipLoc:
+      type:
+        enum: UIWidgetTooltipLocation
+    widgetScale:
+      type:
+        enum: UIWidgetScale
+    widgetSizeSetting:
+      type: number
+    widgetTag:
+      type: string
+C_UIWidgetManager.ItemDisplayVisualizationInfo:
+  fields:
+    frameTextureKit:
+      type: string
+    hasTimer:
+      type: boolean
+    inAnimType:
+      type:
+        enum: WidgetAnimationType
+    itemInfo:
+      type:
+        structure: C_UIWidgetManager.UIWidgetItemInfo
+    layoutDirection:
+      type:
+        enum: UIWidgetLayoutDirection
+    modelSceneLayer:
+      type:
+        enum: UIWidgetModelSceneLayer
+    orderIndex:
+      type: number
+    outAnimType:
+      type:
+        enum: WidgetAnimationType
+    scriptedAnimationEffectID:
+      type: number
+    shownState:
+      type:
+        enum: WidgetShownState
+    textureKit:
+      type: string
+    tooltipLoc:
+      type:
+        enum: UIWidgetTooltipLocation
+    widgetScale:
+      type:
+        enum: UIWidgetScale
+    widgetSizeSetting:
+      type: number
+    widgetTag:
+      type: string
+C_UIWidgetManager.MapPinAnimationWidgetVisualizationInfo:
+  fields:
+    animType:
+      type:
+        enum: MapPinAnimationType
+    frameTextureKit:
+      type: string
+    hasTimer:
+      type: boolean
+    inAnimType:
+      type:
+        enum: WidgetAnimationType
+    layoutDirection:
+      type:
+        enum: UIWidgetLayoutDirection
+    modelSceneLayer:
+      type:
+        enum: UIWidgetModelSceneLayer
+    orderIndex:
+      type: number
+    outAnimType:
+      type:
+        enum: WidgetAnimationType
+    scriptedAnimationEffectID:
+      type: number
+    shownState:
+      type:
+        enum: WidgetShownState
+    textureKit:
+      type: string
+    widgetScale:
+      type:
+        enum: UIWidgetScale
+    widgetSizeSetting:
+      type: number
+    widgetTag:
+      type: string
+C_UIWidgetManager.PreyHuntProgressWidgetVisualizationInfo:
+  fields:
+    frameTextureKit:
+      type: string
+    hasTimer:
+      type: boolean
+    inAnimType:
+      type:
+        enum: WidgetAnimationType
+    layoutDirection:
+      type:
+        enum: UIWidgetLayoutDirection
+    modelSceneLayer:
+      type:
+        enum: UIWidgetModelSceneLayer
+    orderIndex:
+      type: number
+    outAnimType:
+      type:
+        enum: WidgetAnimationType
+    progressState:
+      type:
+        enum: PreyHuntProgressState
+    scriptedAnimationEffectID:
+      type: number
+    shownState:
+      type:
+        enum: WidgetShownState
+    textureKit:
+      type: string
+    tooltip:
+      type: string
+    tooltipLoc:
+      type:
+        enum: UIWidgetTooltipLocation
+    widgetScale:
+      type:
+        enum: UIWidgetScale
+    widgetSizeSetting:
       type: number
     widgetTag:
       type: string
@@ -4879,28 +6147,255 @@ C_UIWidgetManager.ScenarioHeaderCurrenciesAndBackgroundWidgetVisualizationInfo:
       type:
         arrayof:
           structure: C_UIWidgetManager.UIWidgetCurrencyInfo
-    frameTextureKitID:
-      type: number
+    frameTextureKit:
+      type: string
+    hasTimer:
+      type: boolean
+    headerText:
+      type: string
+    inAnimType:
+      type:
+        enum: WidgetAnimationType
+    layoutDirection:
+      type:
+        enum: UIWidgetLayoutDirection
+    modelSceneLayer:
+      type:
+        enum: UIWidgetModelSceneLayer
     orderIndex:
+      type: number
+    outAnimType:
+      type:
+        enum: WidgetAnimationType
+    scriptedAnimationEffectID:
       type: number
     shownState:
       type:
         enum: WidgetShownState
+    textureKit:
+      type: string
+    widgetScale:
+      type:
+        enum: UIWidgetScale
+    widgetSizeSetting:
+      type: number
+    widgetTag:
+      type: string
+C_UIWidgetManager.ScenarioHeaderDelvesWidgetVisualizationInfo:
+  fields:
+    currencies:
+      type:
+        arrayof:
+          structure: C_UIWidgetManager.UIWidgetCurrencyInfo
+    frameTextureKit:
+      type: string
+    hasTimer:
+      type: boolean
+    headerText:
+      type: string
+    inAnimType:
+      type:
+        enum: WidgetAnimationType
+    layoutDirection:
+      type:
+        enum: UIWidgetLayoutDirection
+    modelSceneLayer:
+      type:
+        enum: UIWidgetModelSceneLayer
+    orderIndex:
+      type: number
+    outAnimType:
+      type:
+        enum: WidgetAnimationType
+    rewardInfo:
+      type:
+        structure: C_UIWidgetManager.UIWidgetRewardInfo
+    scriptedAnimationEffectID:
+      type: number
+    shownState:
+      type:
+        enum: WidgetShownState
+    spells:
+      type:
+        arrayof:
+          structure: C_UIWidgetManager.UIWidgetSpellInfo
+    textureKit:
+      type: string
+    tierText:
+      type: string
+    tierTooltipSpellID:
+      nilable: true
+      type: number
+    tooltip:
+      type: string
+    tooltipLoc:
+      type:
+        enum: UIWidgetTooltipLocation
+    widgetScale:
+      type:
+        enum: UIWidgetScale
+    widgetSizeSetting:
+      type: number
+    widgetTag:
+      type: string
+C_UIWidgetManager.ScenarioHeaderTimerWidgetVisualizationInfo:
+  fields:
+    frameTextureKit:
+      type: string
+    hasTimer:
+      type: boolean
+    headerText:
+      type: string
+    inAnimType:
+      type:
+        enum: WidgetAnimationType
+    layoutDirection:
+      type:
+        enum: UIWidgetLayoutDirection
+    modelSceneLayer:
+      type:
+        enum: UIWidgetModelSceneLayer
+    orderIndex:
+      type: number
+    outAnimType:
+      type:
+        enum: WidgetAnimationType
+    scriptedAnimationEffectID:
+      type: number
+    shownState:
+      type:
+        enum: WidgetShownState
+    textureKit:
+      type: string
+    timerMax:
+      type: number
+    timerMin:
+      type: number
+    timerTooltip:
+      type: string
+    timerValue:
+      type: number
+    widgetScale:
+      type:
+        enum: UIWidgetScale
+    widgetSizeSetting:
+      type: number
+    widgetTag:
+      type: string
+C_UIWidgetManager.SpacerVisualizationInfo:
+  fields:
+    frameTextureKit:
+      type: string
+    hasTimer:
+      type: boolean
+    inAnimType:
+      type:
+        enum: WidgetAnimationType
+    layoutDirection:
+      type:
+        enum: UIWidgetLayoutDirection
+    modelSceneLayer:
+      type:
+        enum: UIWidgetModelSceneLayer
+    orderIndex:
+      type: number
+    outAnimType:
+      type:
+        enum: WidgetAnimationType
+    scriptedAnimationEffectID:
+      type: number
+    shownState:
+      type:
+        enum: WidgetShownState
+    textureKit:
+      type: string
+    widgetHeight:
+      type: number
+    widgetScale:
+      type:
+        enum: UIWidgetScale
+    widgetSizeSetting:
+      type: number
+    widgetTag:
+      type: string
+    widgetWidth:
+      type: number
+C_UIWidgetManager.SpellDisplayVisualizationInfo:
+  fields:
+    frameTextureKit:
+      type: string
+    hasTimer:
+      type: boolean
+    inAnimType:
+      type:
+        enum: WidgetAnimationType
+    layoutDirection:
+      type:
+        enum: UIWidgetLayoutDirection
+    modelSceneLayer:
+      type:
+        enum: UIWidgetModelSceneLayer
+    orderIndex:
+      type: number
+    outAnimType:
+      type:
+        enum: WidgetAnimationType
+    scriptedAnimationEffectID:
+      type: number
+    spellInfo:
+      type:
+        structure: C_UIWidgetManager.UIWidgetSpellInfo
+    textureKit:
+      type: string
+    tooltipLoc:
+      type:
+        enum: UIWidgetTooltipLocation
+    widgetScale:
+      type:
+        enum: UIWidgetScale
+    widgetSizeSetting:
+      type: number
     widgetTag:
       type: string
 C_UIWidgetManager.StackedResourceTrackerWidgetVisualizationInfo:
   fields:
-    frameTextureKitID:
-      type: number
+    frameTextureKit:
+      type: string
+    hasTimer:
+      type: boolean
+    inAnimType:
+      type:
+        enum: WidgetAnimationType
+    layoutDirection:
+      type:
+        enum: UIWidgetLayoutDirection
+    modelSceneLayer:
+      type:
+        enum: UIWidgetModelSceneLayer
     orderIndex:
       type: number
+    outAnimType:
+      type:
+        enum: WidgetAnimationType
     resources:
       type:
         arrayof:
           structure: C_UIWidgetManager.UIWidgetCurrencyInfo
+    scriptedAnimationEffectID:
+      type: number
     shownState:
       type:
         enum: WidgetShownState
+    textureKit:
+      type: string
+    tooltipLoc:
+      type:
+        enum: UIWidgetTooltipLocation
+    widgetScale:
+      type:
+        enum: UIWidgetScale
+    widgetSizeSetting:
+      type: number
     widgetTag:
       type: string
 C_UIWidgetManager.StatusBarWidgetVisualizationInfo:
@@ -4909,70 +6404,539 @@ C_UIWidgetManager.StatusBarWidgetVisualizationInfo:
       type: number
     barMin:
       type: number
+    barTextEnabledState:
+      type:
+        enum: WidgetEnabledState
+    barTextFontType:
+      type:
+        enum: UIWidgetFontType
+    barTextSizeType:
+      type:
+        enum: UIWidgetTextSizeType
     barValue:
       type: number
-    barValueInSeconds:
-      type: number
-    barWidth:
-      type: number
-    fillTextureKitID:
-      type: number
-    frameTextureKitID:
-      type: number
+    barValueTextType:
+      type:
+        enum: StatusBarValueTextType
+    colorTint:
+      type:
+        enum: StatusBarColorTintValue
+    fillMaxOpacity:
+      type:
+        enum: WidgetOpacityType
+    fillMinOpacity:
+      type:
+        enum: WidgetOpacityType
+    fillMotionType:
+      type:
+        enum: UIWidgetMotionType
+    frameTextureKit:
+      type: string
+    glowAnimType:
+      type:
+        enum: WidgetGlowAnimType
+    hasTimer:
+      type: boolean
+    inAnimType:
+      type:
+        enum: WidgetAnimationType
+    layoutDirection:
+      type:
+        enum: UIWidgetLayoutDirection
+    modelSceneLayer:
+      type:
+        enum: UIWidgetModelSceneLayer
     orderIndex:
+      type: number
+    outAnimType:
+      type:
+        enum: WidgetAnimationType
+    overrideBarText:
+      type: string
+    overrideBarTextShownType:
+      type:
+        enum: StatusBarOverrideBarTextShownType
+    partitionValues:
+      type:
+        arrayof: number
+    scriptedAnimationEffectID:
+      type: number
+    showGlowState:
+      type:
+        enum: WidgetShowGlowState
+    shownState:
+      type:
+        enum: WidgetShownState
+    text:
+      type: string
+    textEnabledState:
+      type:
+        enum: WidgetEnabledState
+    textFontType:
+      type:
+        enum: UIWidgetFontType
+    textSizeType:
+      type:
+        enum: UIWidgetTextSizeType
+    textureKit:
+      type: string
+    tooltip:
+      type: string
+    tooltipLoc:
+      type:
+        enum: UIWidgetTooltipLocation
+    widgetScale:
+      type:
+        enum: UIWidgetScale
+    widgetSizeSetting:
+      type: number
+    widgetTag:
+      type: string
+C_UIWidgetManager.TextColumnRowEntryInfo:
+  fields:
+    columnWidth:
+      type: number
+    enabledState:
+      type:
+        enum: WidgetEnabledState
+    hAlign:
+      type:
+        enum: WidgetTextHorizontalAlignmentType
+    text:
+      type: string
+C_UIWidgetManager.TextColumnRowVisualizationInfo:
+  fields:
+    bottomPadding:
+      type: number
+    entries:
+      type:
+        arrayof:
+          structure: C_UIWidgetManager.TextColumnRowEntryInfo
+    fontType:
+      type:
+        enum: UIWidgetFontType
+    frameTextureKit:
+      type: string
+    hasTimer:
+      type: boolean
+    inAnimType:
+      type:
+        enum: WidgetAnimationType
+    layoutDirection:
+      type:
+        enum: UIWidgetLayoutDirection
+    modelSceneLayer:
+      type:
+        enum: UIWidgetModelSceneLayer
+    orderIndex:
+      type: number
+    outAnimType:
+      type:
+        enum: WidgetAnimationType
+    scriptedAnimationEffectID:
+      type: number
+    shownState:
+      type:
+        enum: WidgetShownState
+    textSizeType:
+      type:
+        enum: UIWidgetTextSizeType
+    textureKit:
+      type: string
+    tooltip:
+      type: string
+    tooltipLoc:
+      type:
+        enum: UIWidgetTooltipLocation
+    widgetScale:
+      type:
+        enum: UIWidgetScale
+    widgetSizeSetting:
+      type: number
+    widgetTag:
+      type: string
+C_UIWidgetManager.TextureAndTextEntryInfo:
+  fields:
+    text:
+      type: string
+    tooltip:
+      type: string
+C_UIWidgetManager.TextureAndTextRowVisualizationInfo:
+  fields:
+    entries:
+      type:
+        arrayof:
+          structure: C_UIWidgetManager.TextureAndTextEntryInfo
+    fixedWidth:
+      nilable: true
+      type: number
+    frameTextureKit:
+      type: string
+    groupAlignment:
+      type:
+        enum: UIWidgetHorizontalDirection
+    hasTimer:
+      type: boolean
+    inAnimType:
+      type:
+        enum: WidgetAnimationType
+    layoutDirection:
+      type:
+        enum: UIWidgetLayoutDirection
+    modelSceneLayer:
+      type:
+        enum: UIWidgetModelSceneLayer
+    orderIndex:
+      type: number
+    outAnimType:
+      type:
+        enum: WidgetAnimationType
+    scriptedAnimationEffectID:
+      type: number
+    shownState:
+      type:
+        enum: WidgetShownState
+    textSizeType:
+      type:
+        enum: UIWidgetTextureAndTextSizeType
+    textureKit:
+      type: string
+    tooltipLoc:
+      type:
+        enum: UIWidgetTooltipLocation
+    widgetScale:
+      type:
+        enum: UIWidgetScale
+    widgetSizeSetting:
+      type: number
+    widgetTag:
+      type: string
+C_UIWidgetManager.TextureAndTextVisualizationInfo:
+  fields:
+    frameTextureKit:
+      type: string
+    hasTimer:
+      type: boolean
+    inAnimType:
+      type:
+        enum: WidgetAnimationType
+    layoutDirection:
+      type:
+        enum: UIWidgetLayoutDirection
+    modelSceneLayer:
+      type:
+        enum: UIWidgetModelSceneLayer
+    orderIndex:
+      type: number
+    outAnimType:
+      type:
+        enum: WidgetAnimationType
+    scriptedAnimationEffectID:
       type: number
     shownState:
       type:
         enum: WidgetShownState
     text:
       type: string
+    textFormatType:
+      type:
+        enum: UIWidgetTextFormatType
+    textSizeType:
+      type:
+        enum: UIWidgetTextureAndTextSizeType
+    textureKit:
+      type: string
+    tooltip:
+      type: string
+    tooltipLoc:
+      type:
+        enum: UIWidgetTooltipLocation
+    updateAnimType:
+      type:
+        enum: UIWidgetUpdateAnimType
+    widgetScale:
+      type:
+        enum: UIWidgetScale
+    widgetSizeSetting:
+      type: number
     widgetTag:
       type: string
-C_UIWidgetManager.TextureWithStateVisualizationInfo:
+C_UIWidgetManager.TextureWithAnimationVisualizationInfo:
   fields:
-    backgroundTextureKitID:
-      type: number
-    name:
+    frameTextureKit:
       type: string
+    hasTimer:
+      type: boolean
+    inAnimType:
+      type:
+        enum: WidgetAnimationType
+    layoutDirection:
+      type:
+        enum: UIWidgetLayoutDirection
+    modelSceneLayer:
+      type:
+        enum: UIWidgetModelSceneLayer
     orderIndex:
       type: number
-    portraitTextureKitID:
+    outAnimType:
+      type:
+        enum: WidgetAnimationType
+    scriptedAnimationEffectID:
       type: number
     shownState:
       type:
         enum: WidgetShownState
+    textureKit:
+      type: string
+    tooltip:
+      type: string
+    tooltipLoc:
+      type:
+        enum: UIWidgetTooltipLocation
+    widgetScale:
+      type:
+        enum: UIWidgetScale
+    widgetSizeSetting:
+      type: number
     widgetTag:
       type: string
 C_UIWidgetManager.TextWithStateWidgetVisualizationInfo:
   fields:
+    bottomPadding:
+      type: number
     enabledState:
       type:
         enum: WidgetEnabledState
+    fontType:
+      type:
+        enum: UIWidgetFontType
+    frameTextureKit:
+      type: string
+    hAlign:
+      type:
+        enum: WidgetTextHorizontalAlignmentType
+    hasTimer:
+      type: boolean
+    inAnimType:
+      type:
+        enum: WidgetAnimationType
+    layoutDirection:
+      type:
+        enum: UIWidgetLayoutDirection
+    modelSceneLayer:
+      type:
+        enum: UIWidgetModelSceneLayer
     orderIndex:
+      type: number
+    outAnimType:
+      type:
+        enum: WidgetAnimationType
+    scriptedAnimationEffectID:
       type: number
     shownState:
       type:
         enum: WidgetShownState
     text:
       type: string
+    textSizeType:
+      type:
+        enum: UIWidgetTextSizeType
+    textureKit:
+      type: string
+    tooltip:
+      type: string
+    tooltipLoc:
+      type:
+        enum: UIWidgetTooltipLocation
+    widgetScale:
+      type:
+        enum: UIWidgetScale
+    widgetSizeSetting:
+      type: number
+    widgetTag:
+      type: string
+C_UIWidgetManager.TextWithSubtextWidgetVisualizationInfo:
+  fields:
+    enabledState:
+      type:
+        enum: WidgetEnabledState
+    fontType:
+      type:
+        enum: UIWidgetFontType
+    frameTextureKit:
+      type: string
+    hAlign:
+      type:
+        enum: WidgetTextHorizontalAlignmentType
+    hasTimer:
+      type: boolean
+    inAnimType:
+      type:
+        enum: WidgetAnimationType
+    layoutDirection:
+      type:
+        enum: UIWidgetLayoutDirection
+    modelSceneLayer:
+      type:
+        enum: UIWidgetModelSceneLayer
+    orderIndex:
+      type: number
+    outAnimType:
+      type:
+        enum: WidgetAnimationType
+    scriptedAnimationEffectID:
+      type: number
+    shownState:
+      type:
+        enum: WidgetShownState
+    spacing:
+      type: number
+    subText:
+      type: string
+    subTextEnabledState:
+      type:
+        enum: WidgetEnabledState
+    subTextFontType:
+      type:
+        enum: UIWidgetFontType
+    subTextHAlign:
+      type:
+        enum: WidgetTextHorizontalAlignmentType
+    subTextSizeType:
+      type:
+        enum: UIWidgetTextSizeType
+    text:
+      type: string
+    textSizeType:
+      type:
+        enum: UIWidgetTextSizeType
+    textureKit:
+      type: string
+    tooltip:
+      type: string
+    tooltipLoc:
+      type:
+        enum: UIWidgetTooltipLocation
+    widgetScale:
+      type:
+        enum: UIWidgetScale
+    widgetSizeSetting:
+      type: number
     widgetTag:
       type: string
     widgetWidth:
       type: number
+C_UIWidgetManager.TugOfWarWidgetVisualizationInfo:
+  fields:
+    currentValue:
+      type: number
+    frameTextureKit:
+      type: string
+    glowAnimType:
+      type:
+        enum: WidgetGlowAnimType
+    hasTimer:
+      type: boolean
+    inAnimType:
+      type:
+        enum: WidgetAnimationType
+    layoutDirection:
+      type:
+        enum: UIWidgetLayoutDirection
+    leftIconInfo:
+      type:
+        structure: C_UIWidgetManager.UIWidgetIconInfo
+    markerArrowShownState:
+      type:
+        enum: TugOfWarMarkerArrowShownState
+    maxValue:
+      type: number
+    minValue:
+      type: number
+    modelSceneLayer:
+      type:
+        enum: UIWidgetModelSceneLayer
+    neutralFillStyle:
+      type:
+        enum: TugOfWarStyleValue
+    neutralZoneCenter:
+      type: number
+    neutralZoneSize:
+      type: number
+    orderIndex:
+      type: number
+    outAnimType:
+      type:
+        enum: WidgetAnimationType
+    rightIconInfo:
+      type:
+        structure: C_UIWidgetManager.UIWidgetIconInfo
+    scriptedAnimationEffectID:
+      type: number
+    shownState:
+      type:
+        enum: WidgetShownState
+    textureKit:
+      type: string
+    tooltip:
+      type: string
+    tooltipLoc:
+      type:
+        enum: UIWidgetTooltipLocation
+    widgetScale:
+      type:
+        enum: UIWidgetScale
+    widgetSizeSetting:
+      type: number
+    widgetTag:
+      type: string
 C_UIWidgetManager.UIWidgetCurrencyInfo:
   fields:
     iconFileID:
       type: number
+    iconSizeType:
+      type:
+        enum: WidgetIconSizeType
     isCurrencyMaxed:
       type: boolean
     leadingText:
       type: string
     text:
       type: string
+    textEnabledState:
+      type:
+        enum: WidgetEnabledState
+    textFontType:
+      type:
+        enum: UIWidgetFontType
+    textSizeType:
+      type:
+        enum: UIWidgetTextSizeType
     tooltip:
       type: string
+    updateAnimType:
+      type:
+        enum: UIWidgetUpdateAnimType
+C_UIWidgetManager.UIWidgetIconInfo:
+  fields:
+    sizeType:
+      type:
+        enum: WidgetIconSizeType
+    sourceID:
+      type: number
+    sourceType:
+      type:
+        enum: WidgetIconSourceType
+    tooltip:
+      type: string
+    tooltipLoc:
+      type:
+        enum: UIWidgetTooltipLocation
 C_UIWidgetManager.UIWidgetInfo:
   fields:
+    unitToken:
+      nilable: true
+      type: string
     widgetID:
       type: number
     widgetSetID:
@@ -4980,6 +6944,274 @@ C_UIWidgetManager.UIWidgetInfo:
     widgetType:
       type:
         enum: UIWidgetVisualizationType
+C_UIWidgetManager.UIWidgetItemInfo:
+  fields:
+    iconSizeType:
+      type:
+        enum: WidgetIconSizeType
+    infoText:
+      nilable: true
+      type: string
+    infoTextEnabledState:
+      type:
+        enum: WidgetEnabledState
+    infoTextFontType:
+      type:
+        enum: UIWidgetFontType
+    infoTextSizeType:
+      type:
+        enum: UIWidgetTextSizeType
+    itemID:
+      type: number
+    itemNameCustomColor:
+      type:
+        enum: WidgetEnabledState
+    itemNameCustomColorOverrideState:
+      type:
+        enum: UIWidgetOverrideState
+    itemNameTextFontType:
+      type:
+        enum: UIWidgetFontType
+    itemNameTextSizeType:
+      type:
+        enum: UIWidgetTextSizeType
+    overrideItemName:
+      nilable: true
+      type: string
+    overrideTooltip:
+      nilable: true
+      type: string
+    showAsEarned:
+      type: boolean
+    stackCount:
+      nilable: true
+      type: number
+    textDisplayStyle:
+      type:
+        enum: ItemDisplayTextDisplayStyle
+    tooltipEnabled:
+      type: boolean
+C_UIWidgetManager.UIWidgetRewardInfo:
+  fields:
+    earnedTooltip:
+      type: string
+    shownState:
+      type:
+        enum: UIWidgetRewardShownState
+    unearnedTooltip:
+      type: string
+C_UIWidgetManager.UIWidgetSetInfo:
+  fields:
+    layoutDirection:
+      type:
+        enum: UIWidgetSetLayoutDirection
+    verticalPadding:
+      type: number
+C_UIWidgetManager.UIWidgetSpellButtonInfo:
+  fields:
+    cooldownType:
+      type:
+        enum: UIWidgetSpellButtonCooldownType
+    enabledState:
+      type:
+        enum: UIWidgetButtonEnabledState
+    icon:
+      type:
+        enum: UIWidgetButtonIconType
+    spellID:
+      type: number
+    tooltip:
+      type: string
+C_UIWidgetManager.UIWidgetSpellInfo:
+  fields:
+    borderColor:
+      type:
+        enum: SpellDisplayBorderColor
+    enabledState:
+      type:
+        enum: WidgetEnabledState
+    hAlignType:
+      type:
+        enum: WidgetTextHorizontalAlignmentType
+    iconDisplayType:
+      type:
+        enum: SpellDisplayIconDisplayType
+    iconSizeType:
+      type:
+        enum: WidgetIconSizeType
+    showAsEarned:
+      type: boolean
+    showGlowState:
+      type:
+        enum: WidgetShowGlowState
+    shownState:
+      type:
+        enum: WidgetShownState
+    spellID:
+      type: number
+    stackDisplay:
+      type: number
+    text:
+      type: string
+    textFontType:
+      type:
+        enum: UIWidgetFontType
+    textShownState:
+      type:
+        enum: SpellDisplayTextShownStateType
+    textSizeType:
+      type:
+        enum: UIWidgetTextSizeType
+    tint:
+      type:
+        enum: SpellDisplayTint
+    tooltip:
+      type: string
+C_UIWidgetManager.UIWidgetStateIconInfo:
+  fields:
+    iconState:
+      type:
+        enum: IconState
+    state1Tooltip:
+      type: string
+    state2Tooltip:
+      type: string
+C_UIWidgetManager.UnitPowerBarWidgetVisualizationInfo:
+  fields:
+    barMax:
+      type: number
+    barMin:
+      type: number
+    barValue:
+      type: number
+    barValueTextType:
+      type:
+        enum: StatusBarValueTextType
+    fillMotionType:
+      type:
+        enum: UIWidgetMotionType
+    flashBlendModeType:
+      type:
+        enum: UIWidgetBlendModeType
+    flashMomentType:
+      type:
+        enum: WidgetUnitPowerBarFlashMomentType
+    frameTextureKit:
+      type: string
+    hasTimer:
+      type: boolean
+    inAnimType:
+      type:
+        enum: WidgetAnimationType
+    layoutDirection:
+      type:
+        enum: UIWidgetLayoutDirection
+    modelSceneLayer:
+      type:
+        enum: UIWidgetModelSceneLayer
+    orderIndex:
+      type: number
+    outAnimType:
+      type:
+        enum: WidgetAnimationType
+    overrideBarText:
+      type: string
+    overrideBarTextShownType:
+      type:
+        enum: StatusBarOverrideBarTextShownType
+    scriptedAnimationEffectID:
+      type: number
+    shownState:
+      type:
+        enum: WidgetShownState
+    sparkBlendModeType:
+      type:
+        enum: UIWidgetBlendModeType
+    textureKit:
+      type: string
+    tooltip:
+      type: string
+    tooltipLoc:
+      type:
+        enum: UIWidgetTooltipLocation
+    widgetScale:
+      type:
+        enum: UIWidgetScale
+    widgetSizeSetting:
+      type: number
+    widgetTag:
+      type: string
+C_UIWidgetManager.ZoneControlVisualizationInfo:
+  fields:
+    dangerFlashType:
+      type:
+        enum: ZoneControlDangerFlashType
+    frameTextureKit:
+      type: string
+    hasTimer:
+      type: boolean
+    inAnimType:
+      type:
+        enum: WidgetAnimationType
+    layoutDirection:
+      type:
+        enum: UIWidgetLayoutDirection
+    leadingEdgeType:
+      type:
+        enum: ZoneControlLeadingEdgeType
+    mode:
+      type:
+        enum: ZoneControlMode
+    modelSceneLayer:
+      type:
+        enum: UIWidgetModelSceneLayer
+    orderIndex:
+      type: number
+    outAnimType:
+      type:
+        enum: WidgetAnimationType
+    scriptedAnimationEffectID:
+      type: number
+    shownState:
+      type:
+        enum: WidgetShownState
+    textureKit:
+      type: string
+    tooltipLoc:
+      type:
+        enum: UIWidgetTooltipLocation
+    widgetScale:
+      type:
+        enum: UIWidgetScale
+    widgetSizeSetting:
+      type: number
+    widgetTag:
+      type: string
+    zoneEntries:
+      type:
+        arrayof:
+          structure: C_UIWidgetManager.ZoneEntry
+C_UIWidgetManager.ZoneEntry:
+  fields:
+    activeState:
+      type:
+        enum: ZoneControlActiveState
+    capturePoint:
+      type: number
+    current:
+      type: number
+    fillType:
+      type:
+        enum: ZoneControlFillType
+    max:
+      type: number
+    min:
+      type: number
+    state:
+      type:
+        enum: ZoneControlState
+    tooltip:
+      type: string
 C_VideoOptions.GxAdapterInfoDetails:
   fields:
     isExternal:
@@ -5247,6 +7479,32 @@ ConsoleCommandInfo:
       type: string
     scriptParameters:
       type: string
+CraftingQualityInfo:
+  fields:
+    barBackground:
+      type: string
+    barBackgroundCap:
+      type: string
+    barFill:
+      type: string
+    barHighlight:
+      type: string
+    icon:
+      type: string
+    iconAppear:
+      type: string
+    iconChat:
+      type: string
+    iconDissolve:
+      type: string
+    iconInventory:
+      type: string
+    iconMixed:
+      type: string
+    iconSmall:
+      type: string
+    quality:
+      type: number
 CreateFontFamilyMemberInfo:
   fields:
     alphabet:
@@ -5257,6 +7515,26 @@ CreateFontFamilyMemberInfo:
       type: string
     height:
       type: number
+CriteriaRequiredValue:
+  fields:
+    criteriaID:
+      type: number
+    requiredValue:
+      type: number
+CriteriaRequirement:
+  fields:
+    completed:
+      type: boolean
+    requirementText:
+      type: string
+DurationTextBindingFormatComponent:
+  fields:
+    formatter:
+      type:
+        luaobject: NumericFormatter
+    property:
+      type:
+        enum: DurationTextBindingProperty
 DyeColorCategoryDisplayInfo:
   fields:
     ID:
@@ -5284,6 +7562,32 @@ DyeColorDisplayInfo:
     swatchColorStart:
       type:
         structure: colorRGB
+EncounterEventInfo:
+  fields:
+    enabled:
+      type: boolean
+    encounterEventID:
+      type: number
+    iconFileID:
+      type: number
+    icons:
+      type:
+        enum: EncounterEventIconmask
+    severity:
+      type:
+        enum: EncounterEventSeverity
+    spellID:
+      type: number
+EncounterEventSoundInfo:
+  fields:
+    channel:
+      default: g_defaultSI3UISoundSubTypeForLua
+      type: string
+    file:
+      type: FileAsset
+    volume:
+      default: 1
+      type: number
 ExpansionDisplayInfo:
   fields:
     banner:
@@ -5292,6 +7596,15 @@ ExpansionDisplayInfo:
       type:
         arrayof:
           structure: ExpansionDisplayInfoFeature
+    glueAmbianceSoundKit:
+      nilable: true
+      type: number
+    glueCreditsSoundKit:
+      nilable: true
+      type: number
+    glueMusicSoundKit:
+      nilable: true
+      type: number
     highResBackgroundID:
       type: number
     logo:
@@ -5350,6 +7663,44 @@ GuildTabardInfo:
       type: string
     emblemStyle:
       type: number
+HouseExteriorSizeOption:
+  fields:
+    isLocked:
+      type: boolean
+    name:
+      type: string
+    size:
+      type:
+        enum: HousingFixtureSize
+HouseExteriorSizeOptionsInfo:
+  fields:
+    options:
+      type:
+        arrayof:
+          structure: HouseExteriorSizeOption
+    selectedSize:
+      type:
+        enum: HousingFixtureSize
+HouseExteriorTypeOption:
+  fields:
+    houseExteriorTypeID:
+      type: number
+    isInvalid:
+      type: boolean
+    isLocked:
+      type: boolean
+    name:
+      type: string
+    reasonString:
+      type: string
+HouseExteriorTypeOptionsInfo:
+  fields:
+    options:
+      type:
+        arrayof:
+          structure: HouseExteriorTypeOption
+    selectedExteriorType:
+      type: number
 HouseInfo:
   fields:
     houseGUID:
@@ -5386,6 +7737,18 @@ HouseLevelFavor:
       nilable: true
       type: string
     houseLevel:
+      type: number
+HouseLevelInfo:
+  fields:
+    exteriorDecorPlacementBudget:
+      type: number
+    exteriorFixtureBudget:
+      type: number
+    interiorDecorPlacementBudget:
+      type: number
+    level:
+      type: number
+    roomPlacementBudget:
       type: number
 HouseLevelReward:
   fields:
@@ -5430,15 +7793,19 @@ HouseOwnerCharacterInfo:
       type: string
 HousingCatalogEntryID:
   fields:
-    entrySubtype:
-      type:
-        enum: HousingCatalogEntrySubtype
     entryType:
       type:
         enum: HousingCatalogEntryType
     recordID:
       type: number
-    subtypeIdentifier:
+HousingCatalogEntryVariantID:
+  fields:
+    entryType:
+      type:
+        enum: HousingCatalogEntryType
+    recordID:
+      type: number
+    variantIdentifier:
       type: number
 HousingCatalogFilterTagGroupInfo:
   fields:
@@ -5483,6 +7850,9 @@ HousingDecorDyeSlot:
     dyeColorID:
       nilable: true
       type: number
+    dyeColorName:
+      nilable: true
+      type: string
     ID:
       type: number
     orderIndex:
@@ -5509,6 +7879,8 @@ HousingDecorInstanceInfo:
       type: boolean
     isLocked:
       type: boolean
+    isRefundable:
+      type: boolean
     name:
       type: string
     size:
@@ -5520,11 +7892,13 @@ HousingFixtureOption:
       type: number
     fixtureID:
       type: number
+    isInvalid:
+      type: boolean
     isLocked:
       type: boolean
-    lockReasonString:
-      type: string
     name:
+      type: string
+    reasonString:
       type: string
     typeID:
       type: number
@@ -5581,6 +7955,13 @@ LocaleInfo:
       type: number
     localeName:
       type: string
+LuaColorCurvePoint:
+  fields:
+    x:
+      type: number
+    y:
+      type:
+        structure: colorRGBA
 ModelLight:
   fields:
     ambientColor:
@@ -5710,6 +8091,72 @@ NeighborhoodRosterMemberUpdateInfo:
     residentType:
       type:
         enum: ResidentType
+NumberAbbreviationBreakpoint:
+  fields:
+    abbreviation:
+      type: string
+    abbreviationIsGlobal:
+      default: true
+      type: boolean
+    breakpoint:
+      type: number
+    fractionDivisor:
+      type: number
+    significandDivisor:
+      type: number
+NumberAbbrevOptions:
+  fields:
+    breakpointData:
+      nilable: true
+      type:
+        arrayof:
+          structure: NumberAbbreviationBreakpoint
+    config:
+      nilable: true
+      type:
+        luaobject: AbbreviateConfig
+    locale:
+      nilable: true
+      type: string
+NumericRuleFormatBreakpoint:
+  fields:
+    components:
+      nilable: true
+      type:
+        arrayof:
+          structure: NumericRuleFormatComponent
+    format:
+      type: string
+    max:
+      nilable: true
+      type: number
+    min:
+      nilable: true
+      type: number
+    rounding:
+      default: 0
+      type:
+        enum: NumericRuleFormatRounding
+    step:
+      nilable: true
+      type: number
+    threshold:
+      type: number
+NumericRuleFormatComponent:
+  fields:
+    div:
+      nilable: true
+      type: number
+    mod:
+      nilable: true
+      type: number
+    rounding:
+      default: 0
+      type:
+        enum: NumericRuleFormatRounding
+    step:
+      nilable: true
+      type: number
 PlayerInfoCharacterData:
   fields:
     alternateFormRaceData:
@@ -5728,8 +8175,17 @@ PlayerInfoCharacterData:
 PlayerLocation:
   fields:
   mixin: PlayerLocationMixin
+PrivateAuraAnchor:
+  fields:
+    anchorID:
+      type: number
+    unitToken:
+      type: string
 PrivateAuraIconInfo:
   fields:
+    borderScale:
+      nilable: true
+      type: number
     iconAnchor:
       type:
         structure: AnchorBinding
@@ -5811,6 +8267,8 @@ SpellChargeInfo:
       type: number
     currentCharges:
       type: number
+    isActive:
+      type: boolean
     maxCharges:
       type: number
 SpellCooldownInfo:
@@ -5820,10 +8278,30 @@ SpellCooldownInfo:
       type: number
     duration:
       type: number
+    isActive:
+      type: boolean
     isEnabled:
+      type: boolean
+    isOnGCD:
+      nilable: true
       type: boolean
     modRate:
       type: number
+    startTime:
+      type: number
+    timeUntilEndOfStartRecovery:
+      nilable: true
+      type: number
+SpellLossOfControlInfo:
+  fields:
+    duration:
+      type: number
+    isActive:
+      type: boolean
+    modRate:
+      type: number
+    shouldReplaceNormalCooldown:
+      type: boolean
     startTime:
       type: number
 SpellPowerCostInfo:
@@ -5848,9 +8326,6 @@ SpellPowerCostInfo:
 TransmogLocation:
   fields:
   mixin: TransmogLocationMixin
-TransmogPendingInfo:
-  fields:
-  mixin: TransmogPendingInfoMixin
 uiBoundsRect:
   fields:
     bottom:
@@ -5892,6 +8367,26 @@ UnitAuraUpdateInfo:
       nilable: true
       type:
         arrayof: number
+UnitHealPredictionValues:
+  fields:
+    health:
+      default: 0
+      type: number
+    healthMax:
+      default: 0
+      type: number
+    totalDamageAbsorbs:
+      default: 0
+      type: number
+    totalHealAbsorbs:
+      default: 0
+      type: number
+    totalIncomingHeals:
+      default: 0
+      type: number
+    totalIncomingHealsFromHealer:
+      default: 0
+      type: number
 UnitPowerBarInfo:
   fields:
     anchorTop:
