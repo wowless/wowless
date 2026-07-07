@@ -2,10 +2,62 @@ describe('xml', function()
   local scripttypes = require('build.data.scripttypes')
   for _, p in ipairs(require('build.data.products')) do
     describe(p, function()
-      for name, elem in pairs(require('build.data.products.' .. p .. '.xml')) do
+      local xml = require('build.data.products.' .. p .. '.xml')
+      local uiobjects = require('build.data.products.' .. p .. '.uiobjects')
+      local methods = {}
+      local fields = {}
+      local function flatten(k)
+        if not methods[k] then
+          local m, f = {}, {}
+          for inh in pairs(uiobjects[k].inherits) do
+            flatten(inh)
+            for mk in pairs(methods[inh]) do
+              m[mk] = true
+            end
+            for fk in pairs(fields[inh]) do
+              f[fk] = true
+            end
+          end
+          for mk in pairs(uiobjects[k].methods) do
+            m[mk] = true
+          end
+          for fk in pairs(uiobjects[k].fields) do
+            f[fk] = true
+          end
+          methods[k] = m
+          fields[k] = f
+        end
+      end
+      for k in pairs(uiobjects) do
+        flatten(k)
+      end
+      for name, elem in pairs(xml) do
         if elem.extends == 'ScriptType' then
           it(name .. ' is in scripttypes', function()
             assert.Not.Nil(scripttypes[name])
+          end)
+        end
+        -- Non-virtual xml tags that instantiate a uiobject type must only carry
+        -- method/field attribute impls resolvable on that type, so attribute
+        -- application never needs a does-this-method-exist check at runtime.
+        if uiobjects[name] and not elem.virtual then
+          it(name .. ' attribute impls resolve', function()
+            local attrs = {}
+            local e = elem
+            while e do
+              for an, a in pairs(e.attributes or {}) do
+                attrs[an] = attrs[an] or a
+              end
+              e = e.extends and xml[e.extends] or nil
+            end
+            for an, a in pairs(attrs) do
+              local impl = type(a.impl) == 'table' and a.impl or nil
+              if impl and impl.method then
+                assert(methods[name][impl.method], ('%s.%s: no method %s'):format(name, an, impl.method))
+              elseif impl and impl.field then
+                assert(fields[name][impl.field], ('%s.%s: no field %s'):format(name, an, impl.field))
+              end
+            end
           end)
         end
       end

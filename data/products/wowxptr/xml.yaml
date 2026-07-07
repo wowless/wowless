@@ -101,18 +101,35 @@ Animation:
       Scripts:
 AnimationGroup:
   attributes:
+    inherits:
+      type: stringlist
     looping:
       impl:
         method: SetLooping
+      type: string
+    mixin:
+      impl: internal
+      phase: early
+      type: stringlist
+    name:
+      type: string
+    parentarray:
+      impl: internal
+      type: string
+    parentkey:
+      impl: internal
       type: string
     settofinalalpha:
       impl:
         method: SetToFinalAlpha
       type: boolean
+    virtual:
+      type: boolean
   contents:
     tags:
       Animation:
-  extends: LayoutFrame
+      KeyValues:
+      Scripts:
 Animations:
   contents:
     tags:
@@ -1210,6 +1227,7 @@ ScopedModifier:
   contents:
     tags:
       Actor:
+      AnimationGroup:
       LayoutFrame:
       Script:
   impl: transparent
@@ -1419,6 +1437,7 @@ Ui:
   contents:
     tags:
       Actor:
+      AnimationGroup:
       Font:
       FontFamily:
       Include:
