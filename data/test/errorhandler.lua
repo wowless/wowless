@@ -57,7 +57,7 @@ local tests = {
       received
     )
   end,
-  ['star source not replaced for unnamed object'] = function()
+  ['star source replaced with type name for unnamed object'] = function()
     local frame = CreateFrame('Frame')
     local received
     seterrorhandler(function(e)
@@ -66,7 +66,7 @@ local tests = {
     local chunk = 'local _ = ...; WowlessEHTestGlobal2 = WowlessEHTestGlobal2 + 1'
     securecall(loadstring(chunk, '*:OnBanana'), frame)
     T.assertEquals(
-      [[[string "*:OnBanana"]:1: attempt to perform arithmetic on global 'WowlessEHTestGlobal2' (a nil value)]],
+      [[[string "Frame:OnBanana"]:1: attempt to perform arithmetic on global 'WowlessEHTestGlobal2' (a nil value)]],
       received
     )
   end,
