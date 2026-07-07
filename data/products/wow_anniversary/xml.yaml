@@ -457,7 +457,7 @@ FontString:
     tags:
       FontHeight:
       Shadow:
-  extends: LayoutFrame
+  extends: ScalableRegion
 FontStringHeader1:
   extends: FontString
 FontStringHeader2:
@@ -549,7 +549,7 @@ Frame:
       HitRectInsets:
       Layers:
       ResizeBounds:
-  extends: LayoutFrame
+  extends: ScalableRegion
 Frames:
   contents:
     tags:
@@ -645,20 +645,8 @@ Layers:
   phase: late
 LayoutFrame:
   attributes:
-    alpha:
-      impl:
-        method: SetAlpha
-      type: number
     hidden:
       impl: internal
-      type: boolean
-    ignoreparentalpha:
-      impl:
-        method: SetIgnoreParentAlpha
-      type: boolean
-    ignoreparentscale:
-      impl:
-        method: SetIgnoreParentScale
       type: boolean
     inherits:
       type: stringlist
@@ -674,10 +662,6 @@ LayoutFrame:
     parentkey:
       impl: internal
       type: string
-    scale:
-      impl:
-        method: SetScale
-      type: number
     setallpoints:
       impl: internal
       type: boolean
@@ -699,7 +683,7 @@ Line:
       type: string
     thickness:
       type: number
-  extends: LayoutFrame
+  extends: ScalableRegion
 LineScale:
   attributes:
     fromscalex:
@@ -1177,6 +1161,26 @@ Rotation:
     degrees:
       type: number
   extends: Animation
+ScalableRegion:
+  attributes:
+    alpha:
+      impl:
+        method: SetAlpha
+      type: number
+    ignoreparentalpha:
+      impl:
+        method: SetIgnoreParentAlpha
+      type: boolean
+    ignoreparentscale:
+      impl:
+        method: SetIgnoreParentScale
+      type: boolean
+    scale:
+      impl:
+        method: SetScale
+      type: number
+  extends: LayoutFrame
+  virtual: true
 Scale:
   attributes:
     fromscalex:
@@ -1376,8 +1380,6 @@ Texture:
         method: SetHorizTile
       type: boolean
     nonblocking:
-      impl:
-        method: SetNonBlocking
       type: boolean
     snaptopixelgrid:
       impl:
@@ -1398,7 +1400,7 @@ Texture:
       Animations:
       Gradient:
       TexCoords:
-  extends: LayoutFrame
+  extends: ScalableRegion
 TextureCoordTranslation:
   extends: Animation
 ThumbTexture:
