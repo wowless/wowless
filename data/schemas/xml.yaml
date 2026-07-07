@@ -79,8 +79,6 @@ type:
                     type:
                       sequenceof:
                         record:
-                          field:
-                            type: string
                           method:
                             required: true
                             type: string
@@ -89,8 +87,6 @@ type:
                   fields:
                     type:
                       sequenceof: string
-                  merge_child:
-                    type: flag
               transparent: tag
         phase:
           type:
