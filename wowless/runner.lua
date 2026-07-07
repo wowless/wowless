@@ -44,16 +44,22 @@ local function run(cfg)
     end
   end
   local path = require('path')
-  local otherAddonDirs = {}
-  for _, d in ipairs(cfg.otherAddonDirs or {}) do
-    local dd = path.basename(d) == '' and path.dirname(d) or d
-    table.insert(otherAddonDirs, dd)
+  local function normalizeAddonDirs(dirs)
+    local result = {}
+    for _, d in ipairs(dirs or {}) do
+      local dd = path.basename(d) == '' and path.dirname(d) or d
+      table.insert(result, dd)
+    end
+    return result
   end
+  local otherAddonDirs = normalizeAddonDirs(cfg.otherAddonDirs)
+  local signedAddonDirs = normalizeAddonDirs(cfg.signedAddonDirs)
   local modules = require('wowless.modules')({
     datalua = require('build.products.' .. cfg.product .. '.data'),
     loadercfg = {
       otherAddonDirs = otherAddonDirs,
       rootDir = cfg.dir,
+      signedAddonDirs = signedAddonDirs,
     },
     log = log,
     loglevel = cfg.loglevel or 0,

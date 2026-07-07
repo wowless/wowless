@@ -22,6 +22,7 @@ return function(
   local product = datalua.product
   assert(product, 'loader requires a product')
   local otherAddonDirs = loadercfg.otherAddonDirs or {}
+  local signedAddonDirs = loadercfg.signedAddonDirs or {}
 
   local path = require('path')
   local parseXml = require('wowless.xml').newParser(product)
@@ -847,6 +848,9 @@ return function(
           maybeAdd(path.join(rootDir, path.dirname(filepath)), true)
         end
       end
+    end
+    for _, d in ipairs(signedAddonDirs) do
+      maybeAdd(d, true)
     end
     for _, d in ipairs(otherAddonDirs) do
       local dir = path.dirname(d)

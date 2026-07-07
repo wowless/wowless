@@ -11,6 +11,7 @@ read_globals = {
   'debug.setstacktaint',
   'debug.settaintmode',
   'forceinsecure',
+  'geterrorhandler',
   'hooksecurefunc',
   'issecure',
   'issecurevariable',
