@@ -1,10 +1,3 @@
--- These represent real gaps between wowless's taint semantics and elune's;
--- follow-up work should shrink this set, not grow it.
-local expectedScriptcaseFailures = {
-  ['OP_GETGLOBAL: Read from insecure function environment'] = true,
-  ['getfenv: Read tainted environment'] = true,
-}
-
 describe('addon', function()
   for _, product in ipairs(require('build.data.products')) do
     describe(product, function()
@@ -41,11 +34,7 @@ describe('addon', function()
         end)
         _G.assert = tmpassert
         assert.True(success, modules)
-        local actualFailures = {}
-        for name in pairs(modules.env.genv.EluneScriptcaseFailures) do
-          actualFailures[name] = true
-        end
-        assert.same(expectedScriptcaseFailures, actualFailures)
+        assert.same({}, modules.env.genv.EluneScriptcaseFailures)
       end)
     end)
   end
