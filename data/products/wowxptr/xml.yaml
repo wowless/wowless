@@ -101,18 +101,35 @@ Animation:
       Scripts:
 AnimationGroup:
   attributes:
+    inherits:
+      type: stringlist
     looping:
       impl:
         method: SetLooping
+      type: string
+    mixin:
+      impl: internal
+      phase: early
+      type: stringlist
+    name:
+      type: string
+    parentarray:
+      impl: internal
+      type: string
+    parentkey:
+      impl: internal
       type: string
     settofinalalpha:
       impl:
         method: SetToFinalAlpha
       type: boolean
+    virtual:
+      type: boolean
   contents:
     tags:
       Animation:
-  extends: LayoutFrame
+      KeyValues:
+      Scripts:
 Animations:
   contents:
     tags:
@@ -457,7 +474,7 @@ FontString:
     tags:
       FontHeight:
       Shadow:
-  extends: ScalableRegion
+  extends: LayoutFrame
 FontStringHeader1:
   extends: FontString
 FontStringHeader2:
@@ -549,7 +566,7 @@ Frame:
       HitRectInsets:
       Layers:
       ResizeBounds:
-  extends: ScalableRegion
+  extends: LayoutFrame
 Frames:
   contents:
     tags:
@@ -645,8 +662,20 @@ Layers:
   phase: late
 LayoutFrame:
   attributes:
+    alpha:
+      impl:
+        method: SetAlpha
+      type: number
     hidden:
       impl: internal
+      type: boolean
+    ignoreparentalpha:
+      impl:
+        method: SetIgnoreParentAlpha
+      type: boolean
+    ignoreparentscale:
+      impl:
+        method: SetIgnoreParentScale
       type: boolean
     inherits:
       type: stringlist
@@ -662,6 +691,10 @@ LayoutFrame:
     parentkey:
       impl: internal
       type: string
+    scale:
+      impl:
+        method: SetScale
+      type: number
     setallpoints:
       impl: internal
       type: boolean
@@ -683,7 +716,7 @@ Line:
       type: string
     thickness:
       type: number
-  extends: ScalableRegion
+  extends: LayoutFrame
 LineScale:
   attributes:
     fromscalex:
@@ -1161,26 +1194,6 @@ Rotation:
     degrees:
       type: number
   extends: Animation
-ScalableRegion:
-  attributes:
-    alpha:
-      impl:
-        method: SetAlpha
-      type: number
-    ignoreparentalpha:
-      impl:
-        method: SetIgnoreParentAlpha
-      type: boolean
-    ignoreparentscale:
-      impl:
-        method: SetIgnoreParentScale
-      type: boolean
-    scale:
-      impl:
-        method: SetScale
-      type: number
-  extends: LayoutFrame
-  virtual: true
 Scale:
   attributes:
     fromscalex:
@@ -1214,6 +1227,7 @@ ScopedModifier:
   contents:
     tags:
       Actor:
+      AnimationGroup:
       LayoutFrame:
       Script:
   impl: transparent
@@ -1402,7 +1416,7 @@ Texture:
       Animations:
       Gradient:
       TexCoords:
-  extends: ScalableRegion
+  extends: LayoutFrame
 TextureCoordTranslation:
   extends: Animation
 ThumbTexture:
@@ -1423,6 +1437,7 @@ Ui:
   contents:
     tags:
       Actor:
+      AnimationGroup:
       Font:
       FontFamily:
       Include:
