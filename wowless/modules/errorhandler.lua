@@ -1,4 +1,4 @@
-return function(api, eventqueue, uiobjects)
+return function(eventqueue, uiobjects)
   local QueueEvent = eventqueue.QueueEvent
   local UserData = uiobjects.UserData
   local currentFn
@@ -9,10 +9,12 @@ return function(api, eventqueue, uiobjects)
   -- frame's userdata has a __name metamethod. Wowless's uiobject userdata is
   -- exposed directly to the sandbox and must stay bare (no metatable), so we
   -- replicate the substitution here instead, using wowless's own uiobject
-  -- registry to resolve the name. Level 4 (relative to this function) is
-  -- empirically the function that errored: 1 is this function, 2 is the
-  -- dispatcher below, 3 is an elune-internal C frame that invokes the
-  -- dispatcher on behalf of f_errorhandler, and 4 is the erroring function.
+  -- registry to resolve the name field (as GetClickFrame does; no
+  -- substitution if the object has no name). Level 4 (relative to this
+  -- function) is empirically the function that errored: 1 is this function,
+  -- 2 is the dispatcher below, 3 is an elune-internal C frame that invokes
+  -- the dispatcher on behalf of f_errorhandler, and 4 is the erroring
+  -- function.
   local function SubstituteObjectName(msg)
     local s, e = string.find(msg, '*:', 1, true)
     if not s then
@@ -27,7 +29,7 @@ return function(api, eventqueue, uiobjects)
       return msg
     end
     local ud = UserData(frame)
-    local name = ud and api.GetDebugName(ud)
+    local name = ud and ud.name
     if not name then
       return msg
     end

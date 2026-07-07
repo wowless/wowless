@@ -1,4 +1,4 @@
-local T, error, geterrorhandler, securecallfunction, seterrorhandler = ...
+local T, CreateFrame, error, geterrorhandler, loadstring, securecall, securecallfunction, seterrorhandler = ...
 
 local tests = {
   ['get returns set function'] = function()
@@ -42,6 +42,33 @@ local tests = {
     local t = { key = 'value' }
     securecallfunction(error, t)
     T.assertEquals('UNKNOWN ERROR', received)
+  end,
+  ['star source replaced with named object name'] = function()
+    local frame = CreateFrame('Frame', 'WowlessEHTestFrame')
+    local received
+    seterrorhandler(function(e)
+      received = e
+    end)
+    local chunk = 'local _ = ...; WowlessEHTestGlobal1 = WowlessEHTestGlobal1 + 1'
+    securecall(loadstring(chunk, '*:OnBanana'), frame)
+    T.assertEquals(
+      [[[string "WowlessEHTestFrame:OnBanana"]:1: attempt to perform arithmetic on global ]]
+        .. [['WowlessEHTestGlobal1' (a nil value)]],
+      received
+    )
+  end,
+  ['star source not replaced for unnamed object'] = function()
+    local frame = CreateFrame('Frame')
+    local received
+    seterrorhandler(function(e)
+      received = e
+    end)
+    local chunk = 'local _ = ...; WowlessEHTestGlobal2 = WowlessEHTestGlobal2 + 1'
+    securecall(loadstring(chunk, '*:OnBanana'), frame)
+    T.assertEquals(
+      [[[string "*:OnBanana"]:1: attempt to perform arithmetic on global 'WowlessEHTestGlobal2' (a nil value)]],
+      received
+    )
   end,
 }
 
