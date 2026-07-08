@@ -68,7 +68,6 @@ type:
                       ref:
                         schema: uiobject
               loadstring: tag
-              scope: string
               script:
                 record:
                   args:

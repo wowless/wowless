@@ -1,0 +1,3 @@
+## Interface: 120000
+case.lua
+luatest_scriptcases.lua

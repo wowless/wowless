@@ -21,6 +21,21 @@ describe('addon', function()
         assert.same({}, modules.env.genv.WowlessTestFailures)
         assert.same(0, modules.errors.GetErrorCount())
       end)
+      it('runs elune scriptcases', function()
+        local tmpassert = _G.assert
+        _G.assert = _G.oldassert
+        local success, modules = pcall(function()
+          return require('wowless.runner').run({
+            signedAddonDirs = {
+              'build/eluneaddon/EluneTest/',
+            },
+            product = product,
+          })
+        end)
+        _G.assert = tmpassert
+        assert.True(success, modules)
+        assert.same({}, modules.env.genv.EluneScriptcaseFailures)
+      end)
     end)
   end
 end)

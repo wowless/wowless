@@ -352,6 +352,7 @@ geterrorhandler:
 getfenv:
   moduledelegate:
     name: env
+    nobubblewrap: true
 GetFileIDFromPath:
   impl:
     sqls:

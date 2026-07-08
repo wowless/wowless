@@ -22,6 +22,7 @@ return function(
   local product = datalua.product
   assert(product, 'loader requires a product')
   local otherAddonDirs = loadercfg.otherAddonDirs or {}
+  local signedAddonDirs = loadercfg.signedAddonDirs or {}
 
   local path = require('path')
   local parseXml = require('wowless.xml').newParser(product)
@@ -286,16 +287,12 @@ return function(
     blingtexture = function(_, e, parent)
       parent:SetBlingTexture(e.attr.file or '', getColor(e))
     end,
-    color = function(ctx, e, parent)
+    color = function(_, e, parent)
       local r, g, b, a = getColor(e)
       if uiobjecttypes.InheritsFrom(parent.type, 'texturebase') then
         parent:SetColorTexture(r, g, b, a)
       elseif uiobjecttypes.InheritsFrom(parent.type, 'fontinstance') then
-        if ctx.shadow then
-          parent:SetShadowColor(r, g, b, a)
-        else
-          parent:SetTextColor(r, g, b, a)
-        end
+        parent:SetTextColor(r, g, b, a)
       elseif uiobjecttypes.InheritsFrom(parent.type, 'statusbar') then
         parent:SetStatusBarColor(r, g, b, a)
       else
@@ -377,10 +374,6 @@ return function(
     modifiedclick = function()
       -- TODO support modified clicks
     end,
-    offset = function(ctx, e, parent)
-      assert(ctx.shadow, 'this should only run on shadow for now')
-      parent:SetShadowOffset(getXY(e))
-    end,
     origin = function(_, e, parent)
       if e.attr.point then
         local x, y = getXY(e)
@@ -389,6 +382,22 @@ return function(
     end,
     pushedtextoffset = function(_, e, parent)
       parent:SetPushedTextOffset(getXY(e))
+    end,
+    shadow = function(_, e, parent)
+      local color, offset
+      for _, kid in ipairs(e.kids) do
+        if kid.type == 'color' then
+          color = kid
+        elseif kid.type == 'offset' then
+          offset = kid
+        end
+      end
+      if color then
+        parent:SetShadowColor(getColor(color))
+      end
+      if offset then
+        parent:SetShadowOffset(getXY(offset))
+      end
     end,
     size = function(_, e, parent)
       local x, y = getXY(e)
@@ -503,10 +512,8 @@ return function(
         elseif attr.impl.scope then
           return { [attr.impl.scope] = v }
         elseif attr.impl.method then
-          local fn = obj[attr.impl.method]
-          if not fn then
-            error(('missing method %q on object type %q'):format(attr.impl.method, obj.type))
-          elseif type(v) == 'table' then -- stringlist
+          local fn = assert(obj[attr.impl.method], attr.impl.method)
+          if type(v) == 'table' then -- stringlist
             fn(obj, unpack(v))
           else
             fn(obj, v)
@@ -657,8 +664,6 @@ return function(
           if type(impl) == 'table' and impl.script then
             local env = ctx.useAddonEnv and addonEnv or ctx.useSecureEnv and secureenv or genv
             precacheScriptText(e, parent, env, filename)
-          elseif type(impl) == 'table' and impl.scope then
-            loadElements(mixin({}, ctx, { [impl.scope] = true }), e.kids, parent)
           elseif type(impl) == 'table' and impl.call then
             local elt = impl.call.argument == 'lastkid' and e.kids[#e.kids]
               or mixin({}, e, { type = impl.call.argument })
@@ -864,6 +869,9 @@ return function(
           maybeAdd(path.join(rootDir, path.dirname(filepath)), true)
         end
       end
+    end
+    for _, d in ipairs(signedAddonDirs) do
+      maybeAdd(d, true)
     end
     for _, d in ipairs(otherAddonDirs) do
       local dir = path.dirname(d)

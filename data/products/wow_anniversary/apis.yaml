@@ -1,5 +1,27 @@
 AbandonQuest:
 AbandonSkill:
+AbbreviateLargeNumbers:
+  inputs:
+  - name: number
+    type: number
+  - name: options
+    nilable: true
+    type:
+      structure: NumberAbbrevOptions
+  outputs:
+  - name: result
+    type: string
+AbbreviateNumbers:
+  inputs:
+  - name: number
+    type: number
+  - name: options
+    nilable: true
+    type:
+      structure: NumberAbbrevOptions
+  outputs:
+  - name: result
+    type: string
 AcceptAreaSpiritHeal:
   inputs:
   outputs:
@@ -25,7 +47,6 @@ AcceptResurrect:
 AcceptSpellConfirmationPrompt:
 AcceptTrade:
 AcknowledgeSurvey:
-ActionHasRange:
 AddAutoQuestPopUp:
 AddChatWindowChannel:
 AddChatWindowMessages:
@@ -41,6 +62,11 @@ AddQuestWatch:
   inputs:
   - name: questIndex
     type: number
+  outputs:
+AddSourceLocationExclude:
+  inputs:
+  - name: fileName
+    type: string
   outputs:
 AddTrackedAchievement:
 Ambiguate:
@@ -100,7 +126,6 @@ ArenaTeamUninviteByName:
   - name: target
     type: string
   outputs:
-AreRaidMarkersEnabled:
 AscendStop:
   inputs:
   outputs:
@@ -267,7 +292,6 @@ BNGetNumFriends:
     type: number
 BNGetSelectedBlock:
 BNGetSelectedFriend:
-BNInviteFriend:
 BNIsBlocked:
 BNIsFriend:
 BNIsSelf:
@@ -276,13 +300,8 @@ BNRequestFOFInfo:
 BNRequestInviteFriend:
 BNSendFriendInvite:
 BNSendFriendInviteByID:
-BNSendGameData:
 BNSendVerifiedBattleTagInvite:
-BNSendWhisper:
-BNSetAFK:
 BNSetBlocked:
-BNSetCustomMessage:
-BNSetDND:
 BNSetFriendFavoriteFlag:
 BNSetFriendNote:
 BNSetSelectedBlock:
@@ -486,18 +505,149 @@ C_ActionBar.FindPetActionButtons:
 C_ActionBar.FindSpellActionButtons:
   inputs:
   - name: spellID
-    type: number
+    type: string
   mayreturnnothing: true
   outputs:
   - name: slots
     type:
       arrayof: number
+C_ActionBar.GetActionAutocast:
+  inputs:
+  - name: actionID
+    type: number
+  outputs:
+  - name: autocastAllowed
+    type: boolean
+  - name: autocastEnabled
+    type: boolean
+C_ActionBar.GetActionBarPage:
+  inputs:
+  outputs:
+  - name: currentPage
+    type: number
+C_ActionBar.GetActionChargeDuration:
+  inputs:
+  - name: actionID
+    type: number
+  outputs:
+  - name: duration
+    type:
+      luaobject: LuaDurationObject
+C_ActionBar.GetActionCharges:
+  inputs:
+  - name: actionID
+    type: number
+  outputs:
+  - name: chargeInfo
+    type:
+      structure: SpellChargeInfo
+C_ActionBar.GetActionCooldown:
+  inputs:
+  - name: actionID
+    type: number
+  outputs:
+  - name: cooldownInfo
+    type:
+      structure: SpellCooldownInfo
+C_ActionBar.GetActionCooldownDuration:
+  inputs:
+  - name: actionID
+    type: number
+  - default: false
+    name: ignoreGCD
+    type: boolean
+  outputs:
+  - name: duration
+    type:
+      luaobject: LuaDurationObject
+C_ActionBar.GetActionDisplayCount:
+  inputs:
+  - name: actionID
+    type: number
+  - default: 9999
+    name: maxDisplayCount
+    type: number
+  - default: '*'
+    name: replacementString
+    type: string
+  outputs:
+  - name: displayCount
+    type: string
+C_ActionBar.GetActionLossOfControlCooldownDuration:
+  inputs:
+  - name: actionID
+    type: number
+  outputs:
+  - name: duration
+    type:
+      luaobject: LuaDurationObject
+C_ActionBar.GetActionLossOfControlCooldownInfo:
+  inputs:
+  - name: actionID
+    type: number
+  outputs:
+  - name: lossOfControlInfo
+    type:
+      structure: SpellLossOfControlInfo
+C_ActionBar.GetActionText:
+  inputs:
+  - name: actionID
+    type: number
+  mayreturnnothing: true
+  outputs:
+  - name: text
+    type: string
+C_ActionBar.GetActionTexture:
+  inputs:
+  - name: actionID
+    type: number
+  outputs:
+  - name: textureFileID
+    type: number
+C_ActionBar.GetActionUseCount:
+  inputs:
+  - name: actionID
+    type: number
+  outputs:
+  - name: count
+    type: number
+C_ActionBar.GetBonusBarIndex:
+  inputs:
+  outputs:
+  - name: bonusBarIndex
+    type: number
+C_ActionBar.GetBonusBarOffset:
+  inputs:
+  outputs:
+  - name: bonusBarOffset
+    type: number
+C_ActionBar.GetExtraBarIndex:
+  inputs:
+  outputs:
+  - name: extraBarIndex
+    type: number
 C_ActionBar.GetItemActionOnEquipSpellID:
   inputs:
   - name: actionID
     type: number
   outputs:
   - name: onEquipSpellID
+    nilable: true
+    type: number
+C_ActionBar.GetMultiCastBarIndex:
+  inputs:
+  outputs:
+  - name: multiCastBarIndex
+    type: number
+C_ActionBar.GetOverrideBarIndex:
+  inputs:
+  outputs:
+  - name: overrideBarIndex
+    type: number
+C_ActionBar.GetOverrideBarSkin:
+  inputs:
+  outputs:
+  - name: textureFileID
     nilable: true
     type: number
 C_ActionBar.GetPetActionPetBarIndices:
@@ -524,10 +674,42 @@ C_ActionBar.GetSpell:
   outputs:
   - name: spellID
     type: number
+C_ActionBar.GetTempShapeshiftBarIndex:
+  inputs:
+  outputs:
+  - name: tempShapeshiftBarIndex
+    type: number
+C_ActionBar.GetVehicleBarIndex:
+  inputs:
+  outputs:
+  - name: vehicleBarIndex
+    type: number
+C_ActionBar.HasAction:
+  inputs:
+  - name: actionID
+    type: number
+  outputs:
+  - name: hasAction
+    type: boolean
 C_ActionBar.HasAssistedCombatActionButtons:
   inputs:
   outputs:
   - name: hasButtons
+    type: boolean
+C_ActionBar.HasBonusActionBar:
+  inputs:
+  outputs:
+  - name: hasBonusActionBar
+    type: boolean
+C_ActionBar.HasExtraActionBar:
+  inputs:
+  outputs:
+  - name: hasExtraActionBar
+    type: boolean
+C_ActionBar.HasOverrideActionBar:
+  inputs:
+  outputs:
+  - name: hasOverrideActionBar
     type: boolean
 C_ActionBar.HasPetActionButtons:
   inputs:
@@ -543,12 +725,40 @@ C_ActionBar.HasPetActionPetBarIndices:
   outputs:
   - name: hasPetActionPetBarIndices
     type: boolean
+C_ActionBar.HasRangeRequirements:
+  inputs:
+  - name: actionID
+    type: number
+  outputs:
+  - name: hasRangeRequirements
+    type: boolean
 C_ActionBar.HasSpellActionButtons:
   inputs:
   - name: spellID
-    type: number
+    type: string
   outputs:
   - name: hasSpellActionButtons
+    type: boolean
+C_ActionBar.HasTempShapeshiftActionBar:
+  inputs:
+  outputs:
+  - name: hasTempShapeshiftActionBar
+    type: boolean
+C_ActionBar.HasVehicleActionBar:
+  inputs:
+  outputs:
+  - name: hasVehicleActionBar
+    type: boolean
+C_ActionBar.IsActionInRange:
+  inputs:
+  - name: actionID
+    type: number
+  - name: target
+    nilable: true
+    type: unit
+  outputs:
+  - name: isInRange
+    nilable: true
     type: boolean
 C_ActionBar.IsAssistedCombatAction:
   inputs:
@@ -557,6 +767,13 @@ C_ActionBar.IsAssistedCombatAction:
   outputs:
   - name: isAssistedCombatAction
     type: boolean
+C_ActionBar.IsAttackAction:
+  inputs:
+  - name: actionID
+    type: number
+  outputs:
+  - name: isAttackAction
+    type: boolean
 C_ActionBar.IsAutoCastPetAction:
   inputs:
   - name: slotID
@@ -564,12 +781,47 @@ C_ActionBar.IsAutoCastPetAction:
   outputs:
   - name: isAutoCastPetAction
     type: boolean
+C_ActionBar.IsAutoRepeatAction:
+  inputs:
+  - name: actionID
+    type: number
+  outputs:
+  - name: isAutoRepeatAction
+    type: boolean
+C_ActionBar.IsConsumableAction:
+  inputs:
+  - name: actionID
+    type: number
+  outputs:
+  - name: isConsumableAction
+    type: boolean
+C_ActionBar.IsCurrentAction:
+  inputs:
+  - name: actionID
+    type: number
+  outputs:
+  - name: isCurrentAction
+    type: boolean
 C_ActionBar.IsEnabledAutoCastPetAction:
   inputs:
   - name: slotID
     type: number
   outputs:
   - name: isEnabledAutoCastPetAction
+    type: boolean
+C_ActionBar.IsEquippedAction:
+  inputs:
+  - name: actionID
+    type: number
+  outputs:
+  - name: isEquippedAction
+    type: boolean
+C_ActionBar.IsEquippedGearOutfitAction:
+  inputs:
+  - name: slotID
+    type: number
+  outputs:
+  - name: isEquippedGearOutfitAction
     type: boolean
 C_ActionBar.IsHarmfulAction:
   inputs:
@@ -589,13 +841,57 @@ C_ActionBar.IsHelpfulAction:
   outputs:
   - name: isHelpful
     type: boolean
+C_ActionBar.IsItemAction:
+  inputs:
+  - name: actionID
+    type: number
+  outputs:
+  - name: isItemAction
+    type: boolean
 C_ActionBar.IsOnBarOrSpecialBar:
   inputs:
   - name: spellID
-    type: number
+    type: string
   outputs:
   - name: isOnBarOrSpecialBar
     type: boolean
+C_ActionBar.IsPossessBarVisible:
+  inputs:
+  outputs:
+  - name: isPossessBarVisible
+    type: boolean
+C_ActionBar.IsStackableAction:
+  inputs:
+  - name: actionID
+    type: number
+  outputs:
+  - name: isStackableAction
+    type: boolean
+C_ActionBar.IsUsableAction:
+  inputs:
+  - name: actionID
+    type: number
+  outputs:
+  - name: isUsable
+    type: boolean
+  - name: isLackingResources
+    type: boolean
+C_ActionBar.RegisterActionUIButton:
+  inputs:
+  - name: checkboxFrame
+    type:
+      uiobject: CheckButton
+  - name: actionID
+    type: number
+  - name: cooldownFrame
+    type:
+      uiobject: Cooldown
+  outputs:
+C_ActionBar.SetActionBarPage:
+  inputs:
+  - name: pageIndex
+    type: number
+  outputs:
 C_ActionBar.ShouldOverrideBarShowHealthBar:
   inputs:
   outputs:
@@ -611,6 +907,19 @@ C_ActionBar.ToggleAutoCastPetAction:
   - name: slotID
     type: number
   outputs:
+C_ActionBar.UnregisterActionUIButton:
+  inputs:
+  - name: checkboxFrame
+    type:
+      uiobject: CheckButton
+  outputs:
+C_ActionBar.UsesActionText:
+  inputs:
+  - name: actionID
+    type: number
+  outputs:
+  - name: usesActionText
+    type: boolean
 C_AddOnProfiler.AddMeasuredCallEvent:
   inputs:
   - name: name
@@ -985,6 +1294,50 @@ C_AuthChallenge.DidChallengeSucceed:
 C_AuthChallenge.OnTabPressed:
 C_AuthChallenge.SetFrame:
 C_AuthChallenge.Submit:
+C_AutoComplete.GetAutoCompletePresenceID:
+  inputs:
+  - name: name
+    type: string
+  outputs:
+  - name: presenceID
+    nilable: true
+    type: number
+C_AutoComplete.GetAutoCompleteRealms:
+  inputs:
+  outputs:
+  - name: realms
+    type:
+      arrayof: string
+C_AutoComplete.GetAutoCompleteResults:
+  inputs:
+  - name: name
+    type: string
+  - name: numResults
+    type: number
+  - name: cursorPosition
+    type: number
+  - name: allowFullMatch
+    type: boolean
+  - name: includeFlags
+    type: number
+  - name: excludeFlags
+    type: number
+  outputs:
+  - name: results
+    type:
+      arrayof:
+        structure: C_AutoComplete.AutoCompleteResult
+C_AutoComplete.IsRecognizedName:
+  inputs:
+  - name: name
+    type: string
+  - name: includeFlags
+    type: number
+  - name: excludeFlags
+    type: number
+  outputs:
+  - name: isRecognizedName
+    type: boolean
 C_AzeriteEmpoweredItem.CanSelectPower:
   inputs:
   - name: azeriteEmpoweredItemLocation
@@ -1624,6 +1977,51 @@ C_BattleNet.GetGameAccountInfoByID:
 C_BattleNet.InstallHighResTextures:
   inputs:
   outputs:
+C_BattleNet.InviteFriend:
+  inputs:
+  - name: gameAccountID
+    type: number
+  outputs:
+C_BattleNet.SendGameData:
+  inputs:
+  - name: gameAccountID
+    type: number
+  - name: prefix
+    type: string
+  - name: data
+    type: string
+  outputs:
+  - name: result
+    type:
+      enum: SendAddonMessageResult
+C_BattleNet.SendWhisper:
+  inputs:
+  - name: bnetAccountID
+    type: number
+  - name: text
+    type: string
+  outputs:
+  - name: success
+    type: boolean
+C_BattleNet.SetAFK:
+  inputs:
+  - default: true
+    name: isAFK
+    type: boolean
+  outputs:
+C_BattleNet.SetCustomMessage:
+  inputs:
+  - name: text
+    type: string
+  outputs:
+  - name: success
+    type: boolean
+C_BattleNet.SetDND:
+  inputs:
+  - default: true
+    name: isDND
+    type: boolean
+  outputs:
 C_BehavioralMessaging.SendNotificationReceipt:
   inputs:
   - name: dbId
@@ -2196,9 +2594,39 @@ C_Calendar.SetNextClubId:
 C_Calendar.UpdateEvent:
   inputs:
   outputs:
+C_CatalogShop.BulkPurchaseProducts:
+  inputs:
+  - name: productIDs
+    type:
+      arrayof: number
+  outputs:
+  - name: canPurchaseProducts
+    type: boolean
+C_CatalogShop.BulkRefundDecors:
+  inputs:
+  - name: decorGUIDs
+    type:
+      arrayof: string
+  outputs:
 C_CatalogShop.CloseCatalogShopInteraction:
   inputs:
   outputs:
+C_CatalogShop.ConfirmHousingPurchase:
+  inputs:
+  - name: productIDs
+    type:
+      arrayof: number
+  outputs:
+C_CatalogShop.FindBestCurrencyProductForNeededAmount:
+  inputs:
+  - name: vcCurrencyCode
+    type: string
+  - name: amountNeeded
+    type: number
+  outputs:
+  - name: vcProductID
+    nilable: true
+    type: number
 C_CatalogShop.GetAvailableCategoryIDs:
   inputs:
   outputs:
@@ -2248,6 +2676,21 @@ C_CatalogShop.GetFailureInfo:
   - name: errorResultRaw
     nilable: true
     type: number
+C_CatalogShop.GetFirstCategoryByProductID:
+  inputs:
+  - name: productID
+    type: number
+  outputs:
+  - name: categoryInfo
+    nilable: true
+    type:
+      structure: C_CatalogShop.CatalogShopCategoryInfo
+C_CatalogShop.GetNewProducts:
+  inputs:
+  outputs:
+  - name: newProducts
+    type:
+      arrayof: number
 C_CatalogShop.GetProductAvailabilityTimeRemainingSecs:
   inputs:
   - name: catalogShopProductID
@@ -2265,6 +2708,14 @@ C_CatalogShop.GetProductIDsForBundle:
     type:
       arrayof:
         structure: C_CatalogShop.CatalogShopBundleChildInfo
+C_CatalogShop.GetProductIDsForCategory:
+  inputs:
+  - name: categoryID
+    type: number
+  outputs:
+  - name: productIDs
+    type:
+      arrayof: number
 C_CatalogShop.GetProductIDsForCategorySection:
   inputs:
   - name: categoryID
@@ -2296,6 +2747,18 @@ C_CatalogShop.GetProductSortOrder:
   - name: sortOrder
     nilable: true
     type: number
+C_CatalogShop.GetRefundableDecors:
+  inputs:
+  - name: productIdFilterOpt
+    nilable: true
+    type: number
+  outputs:
+  - name: refundableDecorInfos
+    type:
+      arrayof:
+        structure: C_CatalogShop.RefundableDecorInfo
+  - name: minTimeRemainingSeconds
+    type: number
 C_CatalogShop.GetSectionIDsForCategory:
   inputs:
   - name: categoryID
@@ -2312,6 +2775,33 @@ C_CatalogShop.GetSpellVisualInfoForMount:
   - name: spellVisualInfo
     type:
       structure: C_CatalogShop.CatalogShopSpellVisualInfo
+C_CatalogShop.GetVCProductInfos:
+  inputs:
+  outputs:
+  - name: vcProductInfos
+    type:
+      arrayof:
+        structure: C_CatalogShop.CatalogShopVCProductInfo
+C_CatalogShop.GetVirtualCurrencyBalance:
+  inputs:
+  - name: currencyCode
+    type: string
+  outputs:
+  - name: balance
+    nilable: true
+    type: string
+C_CatalogShop.HasNewProducts:
+  inputs:
+  outputs:
+  - name: hasNewProducts
+    type: boolean
+C_CatalogShop.IsProductIncludedInAnyBundle:
+  inputs:
+  - name: productID
+    type: number
+  outputs:
+  - name: isIncludedInAnyBundle
+    type: boolean
 C_CatalogShop.IsShop2Enabled:
   inputs:
   outputs:
@@ -2323,11 +2813,16 @@ C_CatalogShop.OnLegalDisclaimerClicked:
   - name: catalogShopProductID
     type: number
   outputs:
-C_CatalogShop.OpenCatalogShopInteraction:
+C_CatalogShop.OnLegalPersonalizedOptOutClicked:
   inputs:
-  - default: false
-    name: shouldAllowMovement
-    type: boolean
+  outputs:
+C_CatalogShop.OpenCatalogShopInteractionFromHouse:
+  inputs:
+  outputs:
+  - name: shoppingSessionUUIDStr
+    type: string
+C_CatalogShop.OpenCatalogShopInteractionFromShop:
+  inputs:
   outputs:
   - name: shoppingSessionUUIDStr
     type: string
@@ -2358,6 +2853,24 @@ C_CatalogShop.PurchaseProduct:
   outputs:
   - name: canPurchase
     type: boolean
+C_CatalogShop.RefreshRefundableDecors:
+  inputs:
+  outputs:
+C_CatalogShop.RefreshVirtualCurrencyBalance:
+  inputs:
+  - name: currencyCode
+    type: string
+  outputs:
+C_CatalogShop.ShouldShowHousingWarning:
+  inputs:
+  outputs:
+  - name: shouldShowHousingWarning
+    type: boolean
+C_CatalogShop.StartHousingVCPurchaseConfirmation:
+  inputs:
+  - name: productID
+    type: number
+  outputs:
 C_ChallengeMode.GetActiveChallengeMapID:
   inputs:
   outputs:
@@ -2563,6 +3076,14 @@ C_ChatBubbles.GetAllChatBubbles:
   - name: chatBubbles
     type:
       arrayof: table
+C_ChatInfo.AreOutgoingAddonChatMessagesRestricted:
+  inputs:
+  outputs:
+  - name: isRestricted
+    type: boolean
+C_ChatInfo.CancelEmote:
+  inputs:
+  outputs:
 C_ChatInfo.CanReportPlayer:
   inputs:
   - name: playerLocation
@@ -2661,6 +3182,11 @@ C_ChatInfo.GetRegisteredAddonMessagePrefixes:
   - name: registeredPrefixes
     type:
       arrayof: string
+C_ChatInfo.InChatMessagingLockdown:
+  inputs:
+  outputs:
+  - name: isRestricted
+    type: boolean
 C_ChatInfo.IsAddonMessagePrefixRegistered:
   inputs:
   - name: prefix
@@ -2716,6 +3242,19 @@ C_ChatInfo.IsValidCombatFilterName:
     type: string
   outputs:
   - name: isApproved
+    type: boolean
+C_ChatInfo.PerformEmote:
+  inputs:
+  - name: emoteName
+    type: string
+  - name: targetName
+    nilable: true
+    type: string
+  - default: false
+    name: suppressMoveError
+    type: boolean
+  outputs:
+  - name: success
     type: boolean
 C_ChatInfo.RegisterAddonMessagePrefix:
   inputs:
@@ -2845,7 +3384,7 @@ C_Club.AssignMemberRole:
   - name: clubId
     type: string
   - name: memberId
-    type: number
+    type: string
   - name: roleId
     type:
       enum: ClubRoleIdentifier
@@ -3048,7 +3587,7 @@ C_Club.GetAssignableRoles:
   - name: clubId
     type: string
   - name: memberId
-    type: number
+    type: string
   outputs:
   - name: assignableRoles
     type:
@@ -3097,7 +3636,7 @@ C_Club.GetClubMembers:
   outputs:
   - name: members
     type:
-      arrayof: number
+      arrayof: string
 C_Club.GetClubPrivileges:
   inputs:
   - name: clubId
@@ -3210,7 +3749,7 @@ C_Club.GetMemberInfo:
   - name: clubId
     type: string
   - name: memberId
-    type: number
+    type: string
   outputs:
   - name: info
     nilable: true
@@ -3373,7 +3912,7 @@ C_Club.KickMember:
   - name: clubId
     type: string
   - name: memberId
-    type: number
+    type: string
   outputs:
 C_Club.LeaveClub:
   inputs:
@@ -3421,14 +3960,14 @@ C_Club.RevokeInvitation:
   - name: clubId
     type: string
   - name: memberId
-    type: number
+    type: string
   outputs:
 C_Club.SendBattleTagFriendRequest:
   inputs:
   - name: guildClubId
     type: string
   - name: memberId
-    type: number
+    type: string
   outputs:
 C_Club.SendCharacterInvitation:
   inputs:
@@ -3442,7 +3981,7 @@ C_Club.SendInvitation:
   - name: clubId
     type: string
   - name: memberId
-    type: number
+    type: string
   outputs:
 C_Club.SendMessage:
   inputs:
@@ -3476,7 +4015,7 @@ C_Club.SetClubMemberNote:
   - name: clubId
     type: string
   - name: memberId
-    type: number
+    type: string
   - name: note
     type: string
   outputs:
@@ -3937,6 +4476,413 @@ C_ClubFinder.ShouldShowClubFinder:
   outputs:
   - name: shouldShow
     type: boolean
+C_ColorUtil.ConvertHSLToHSV:
+  inputs:
+  - name: hslH
+    type: number
+  - name: hslS
+    type: number
+  - name: hslL
+    type: number
+  outputs:
+  - name: hsvH
+    type: number
+  - name: hsvS
+    type: number
+  - name: hsvV
+    type: number
+C_ColorUtil.ConvertHSVToHSL:
+  inputs:
+  - name: hsvH
+    type: number
+  - name: hsvS
+    type: number
+  - name: hsvV
+    type: number
+  outputs:
+  - name: hslH
+    type: number
+  - name: hslS
+    type: number
+  - name: hslL
+    type: number
+C_ColorUtil.ConvertHSVToRGB:
+  inputs:
+  - name: hsvH
+    type: number
+  - name: hsvS
+    type: number
+  - name: hsvV
+    type: number
+  outputs:
+  - name: rgbR
+    type: number
+  - name: rgbG
+    type: number
+  - name: rgbB
+    type: number
+C_ColorUtil.ConvertRGBToHSV:
+  inputs:
+  - name: rgbR
+    type: number
+  - name: rgbG
+    type: number
+  - name: rgbB
+    type: number
+  outputs:
+  - name: hsvH
+    type: number
+  - name: hsvS
+    type: number
+  - name: hsvV
+    type: number
+C_ColorUtil.GenerateTextColorCode:
+  inputs:
+  - name: color
+    type:
+      structure: colorRGB
+  outputs:
+  - name: textColorCode
+    type: string
+C_ColorUtil.WrapTextInColor:
+  inputs:
+  - name: text
+    type: string
+  - name: color
+    type:
+      structure: colorRGB
+  outputs:
+  - name: coloredText
+    type: string
+C_ColorUtil.WrapTextInColorCode:
+  inputs:
+  - name: text
+    type: string
+  - name: textColorCode
+    type: string
+  outputs:
+  - name: coloredText
+    type: string
+C_CombatAudioAlert.AddToKnownTargetingList:
+  inputs:
+  - name: unit
+    type: unit
+  outputs:
+  - name: added
+    type: boolean
+C_CombatAudioAlert.GetCategoryVoice:
+  inputs:
+  - name: category
+    type:
+      enum: CombatAudioAlertCategory
+  outputs:
+  - name: voice
+    type: number
+C_CombatAudioAlert.GetCategoryVolume:
+  inputs:
+  - name: category
+    type:
+      enum: CombatAudioAlertCategory
+  outputs:
+  - name: volume
+    type: number
+C_CombatAudioAlert.GetFormatSetting:
+  inputs:
+  - name: unit
+    type:
+      enum: CombatAudioAlertUnit
+  - name: alertType
+    type:
+      enum: CombatAudioAlertType
+  outputs:
+  - name: formatVal
+    type: number
+C_CombatAudioAlert.GetSpeakerSpeed:
+  inputs:
+  outputs:
+  - name: speed
+    type: number
+C_CombatAudioAlert.GetSpecSetting:
+  inputs:
+  - name: setting
+    type:
+      enum: CombatAudioAlertSpecSetting
+  outputs:
+  - name: value
+    type: number
+C_CombatAudioAlert.GetThrottle:
+  inputs:
+  - name: throttleType
+    type:
+      enum: CombatAudioAlertThrottle
+  outputs:
+  - name: throttle
+    type: number
+C_CombatAudioAlert.IsEnabled:
+  inputs:
+  outputs:
+  - name: isEnabled
+    type: boolean
+C_CombatAudioAlert.RemoveFromKnownTargetingList:
+  inputs:
+  - name: unit
+    type: unit
+  outputs:
+  - name: removed
+    type: boolean
+C_CombatAudioAlert.SetCategoryVoice:
+  inputs:
+  - name: category
+    type:
+      enum: CombatAudioAlertCategory
+  - name: newVal
+    type: number
+  outputs:
+  - name: success
+    type: boolean
+C_CombatAudioAlert.SetCategoryVolume:
+  inputs:
+  - name: category
+    type:
+      enum: CombatAudioAlertCategory
+  - name: newVal
+    type: number
+  outputs:
+  - name: success
+    type: boolean
+C_CombatAudioAlert.SetFormatSetting:
+  inputs:
+  - name: unit
+    type:
+      enum: CombatAudioAlertUnit
+  - name: alertType
+    type:
+      enum: CombatAudioAlertType
+  - name: newVal
+    type: number
+  outputs:
+  - name: success
+    type: boolean
+C_CombatAudioAlert.SetSpeakerSpeed:
+  inputs:
+  - name: newVal
+    type: number
+  outputs:
+  - name: success
+    type: boolean
+C_CombatAudioAlert.SetSpecSetting:
+  inputs:
+  - name: setting
+    type:
+      enum: CombatAudioAlertSpecSetting
+  - name: newVal
+    type: number
+  outputs:
+  - name: success
+    type: boolean
+C_CombatAudioAlert.SetThrottle:
+  inputs:
+  - name: throttleType
+    type:
+      enum: CombatAudioAlertThrottle
+  - name: newVal
+    type: number
+  outputs:
+  - name: success
+    type: boolean
+C_CombatAudioAlert.SpeakText:
+  inputs:
+  - name: text
+    type: string
+  - name: category
+    type:
+      enum: CombatAudioAlertCategory
+  - default: true
+    name: allowOverlap
+    type: boolean
+  outputs:
+C_CombatLog.AddEventFilter:
+  inputs:
+  outputs:
+C_CombatLog.AreFilteredEventsEnabled:
+  inputs:
+  outputs:
+  - name: enabled
+    type: boolean
+C_CombatLog.ClearEntries:
+  inputs:
+  outputs:
+C_CombatLog.ClearEventFilters:
+  inputs:
+  outputs:
+C_CombatLog.DoesObjectMatchFilter:
+  inputs:
+  - name: mask
+    type:
+      enum: CombatLogObject
+  - name: flags
+    type:
+      enum: CombatLogObject
+  outputs:
+  - name: matches
+    type: boolean
+C_CombatLog.GetCurrentEntryInfo:
+  inputs:
+  outputs:
+C_CombatLog.GetCurrentEventInfo:
+  inputs:
+  outputs:
+  - name: timestamp
+    type: number
+  - name: subevent
+    type: string
+  - name: hideCaster
+    type: boolean
+  - name: guid
+    type: string
+  - name: name
+    type: string
+  - name: flags
+    type: number
+  - name: raidFlags
+    type: number
+C_CombatLog.GetEntryCount:
+  inputs:
+  - default: false
+    name: ignoreFilter
+    type: boolean
+  outputs:
+  - name: count
+    type: number
+C_CombatLog.GetEntryRetentionTime:
+  inputs:
+  outputs:
+  - name: retentionTime
+    type: number
+C_CombatLog.GetMessageLimit:
+  inputs:
+  outputs:
+  - name: messageLimit
+    type: number
+C_CombatLog.IsCombatLogRestricted:
+  inputs:
+  outputs:
+  - name: restricted
+    type: boolean
+C_CombatLog.SeekToNewestEntry:
+  inputs:
+  - default: false
+    name: ignoreFilter
+    type: boolean
+  outputs:
+  - name: isValidEntry
+    type: boolean
+C_CombatLog.SeekToPreviousEntry:
+  inputs:
+  - default: false
+    name: ignoreFilter
+    type: boolean
+  outputs:
+  - name: isValidEntry
+    type: boolean
+C_CombatLog.SetEntryRetentionTime:
+  inputs:
+  - name: retentionTime
+    type: number
+  outputs:
+C_CombatLog.SetFilteredEventsEnabled:
+  inputs:
+  - name: enabled
+    type: boolean
+  outputs:
+C_CombatLog.SetMessageLimit:
+  inputs:
+  - name: messageLimit
+    type: number
+  outputs:
+C_CombatLog.ShouldShowCurrentEntry:
+  inputs:
+  outputs:
+  - name: shouldShow
+    type: boolean
+C_CombatLogSecure.AddEventFilter:
+  inputs:
+  outputs:
+  secureonly: true
+C_CombatLogSecure.ClearEventFilters:
+  inputs:
+  outputs:
+  secureonly: true
+C_CombatLogSecure.CreateCombatLogMessage:
+  inputs:
+  - name: message
+    type: string
+  - name: colorR
+    type: number
+  - name: colorG
+    type: number
+  - name: colorB
+    type: number
+  - name: order
+    type:
+      enum: CombatLogMessageOrder
+  outputs:
+  secureonly: true
+C_CombatLogSecure.GetCurrentEntryInfo:
+  inputs:
+  outputs:
+  secureonly: true
+C_CombatLogSecure.GetCurrentEventInfo:
+  inputs:
+  outputs:
+  secureonly: true
+C_CombatLogSecure.GetEntryCount:
+  inputs:
+  - default: false
+    name: ignoreFilter
+    type: boolean
+  outputs:
+  - name: count
+    type: number
+  secureonly: true
+C_CombatLogSecure.SeekToNewestEntry:
+  inputs:
+  - default: false
+    name: ignoreFilter
+    type: boolean
+  outputs:
+  - name: isValidEntry
+    type: boolean
+  secureonly: true
+C_CombatLogSecure.SeekToPreviousEntry:
+  inputs:
+  - default: false
+    name: ignoreFilter
+    type: boolean
+  outputs:
+  - name: isValidEntry
+    type: boolean
+  secureonly: true
+C_CombatLogSecure.ShouldShowCurrentEntry:
+  inputs:
+  outputs:
+  - name: shouldShow
+    type: boolean
+  secureonly: true
+C_CombatText.GetActiveUnit:
+  inputs:
+  mayreturnnothing: true
+  outputs:
+  - name: unitTarget
+    type: string
+C_CombatText.GetCurrentEventInfo:
+  inputs:
+  outputs:
+C_CombatText.SetActiveUnit:
+  inputs:
+  - name: unitToken
+    type: unit
+  outputs:
 C_Commentator.AddPlayerOverrideName:
   inputs:
   - name: playerName
@@ -4111,6 +5057,9 @@ C_Commentator.GetCameraPosition:
     type: number
   - name: zPos
     type: number
+C_Commentator.GetCombatEventInfo:
+  inputs:
+  outputs:
 C_Commentator.GetCommentatorHistory:
   inputs:
   outputs:
@@ -4928,6 +5877,11 @@ C_ConsoleScriptCollection.GetScriptData:
   - name: data
     type:
       structure: C_ConsoleScriptCollection.ConsoleScriptData
+C_Container.CalculateTotalNumberOfFreeBagSlots:
+  inputs:
+  outputs:
+  - name: totalFreeSlots
+    type: number
 C_Container.ContainerIDToInventoryID:
   inputs:
   - name: containerID
@@ -5279,6 +6233,15 @@ C_CooldownViewer.GetLayoutData:
   outputs:
   - name: data
     type: string
+C_CooldownViewer.GetValidAlertTypes:
+  inputs:
+  - name: cooldownID
+    type: number
+  outputs:
+  - name: validAlertTypes
+    type:
+      arrayof:
+        enum: CooldownViewerAlertEventType
 C_CooldownViewer.IsCooldownViewerAvailable:
   inputs:
   outputs:
@@ -5316,6 +6279,14 @@ C_CreatureInfo.GetCreatureFamilyInfo:
     nilable: true
     type:
       structure: C_CreatureInfo.CreatureFamilyInfo
+C_CreatureInfo.GetCreatureID:
+  inputs:
+  - name: creatureGUID
+    type: string
+  outputs:
+  - name: creatureID
+    nilable: true
+    type: number
 C_CreatureInfo.GetCreatureTypeIDs:
   inputs:
   outputs:
@@ -5440,6 +6411,52 @@ C_Cursor.GetCursorItem:
   - name: item
     type:
       structure: ItemLocation
+C_CurveUtil.CreateColorCurve:
+  inputs:
+  outputs:
+  - name: curve
+    type:
+      luaobject: LuaColorCurveObject
+C_CurveUtil.CreateCurve:
+  inputs:
+  outputs:
+  - name: curve
+    type:
+      luaobject: LuaCurveObject
+C_CurveUtil.EvaluateColorFromBoolean:
+  inputs:
+  - name: boolean
+    type: boolean
+  - name: valueIfTrue
+    type:
+      structure: colorRGBA
+  - name: valueIfFalse
+    type:
+      structure: colorRGBA
+  outputs:
+  - name: value
+    type:
+      structure: colorRGBA
+C_CurveUtil.EvaluateColorValueFromBoolean:
+  inputs:
+  - name: boolean
+    type: boolean
+  - name: valueIfTrue
+    type: number
+  - name: valueIfFalse
+    type: number
+  outputs:
+  - name: value
+    type: number
+C_CurveUtil.EvaluateGameCurve:
+  inputs:
+  - name: curveID
+    type: number
+  - name: x
+    type: number
+  outputs:
+  - name: y
+    type: number
 C_CVar.GetCVar:
   impl: C_CVar.GetCVar
   inputs:
@@ -5536,6 +6553,90 @@ C_CVar.SetCVarBitfield:
   outputs:
   - name: success
     type: boolean
+C_DamageMeter.GetAvailableCombatSessions:
+  inputs:
+  outputs:
+  - name: availableSessions
+    type:
+      arrayof:
+        structure: C_DamageMeter.DamageMeterAvailableCombatSession
+C_DamageMeter.GetCombatSessionFromID:
+  inputs:
+  - name: sessionID
+    type: number
+  - name: type
+    type:
+      enum: DamageMeterType
+  outputs:
+  - name: session
+    type:
+      structure: C_DamageMeter.DamageMeterCombatSession
+C_DamageMeter.GetCombatSessionFromType:
+  inputs:
+  - name: sessionType
+    type:
+      enum: DamageMeterSessionType
+  - name: type
+    type:
+      enum: DamageMeterType
+  outputs:
+  - name: session
+    type:
+      structure: C_DamageMeter.DamageMeterCombatSession
+C_DamageMeter.GetCombatSessionSourceFromID:
+  inputs:
+  - name: sessionID
+    type: number
+  - name: type
+    type:
+      enum: DamageMeterType
+  - name: sourceGUID
+    nilable: true
+    type: string
+  - name: sourceCreatureID
+    nilable: true
+    type: number
+  outputs:
+  - name: sessionSource
+    type:
+      structure: C_DamageMeter.DamageMeterCombatSessionSource
+C_DamageMeter.GetCombatSessionSourceFromType:
+  inputs:
+  - name: sessionType
+    type:
+      enum: DamageMeterSessionType
+  - name: type
+    type:
+      enum: DamageMeterType
+  - name: sourceGUID
+    nilable: true
+    type: string
+  - name: sourceCreatureID
+    nilable: true
+    type: number
+  outputs:
+  - name: sessionSource
+    type:
+      structure: C_DamageMeter.DamageMeterCombatSessionSource
+C_DamageMeter.GetSessionDurationSeconds:
+  inputs:
+  - name: sessionType
+    type:
+      enum: DamageMeterSessionType
+  outputs:
+  - name: durationSeconds
+    nilable: true
+    type: number
+C_DamageMeter.IsDamageMeterAvailable:
+  inputs:
+  outputs:
+  - name: isAvailable
+    type: boolean
+  - name: failureReason
+    type: string
+C_DamageMeter.ResetAllCombatSessions:
+  inputs:
+  outputs:
 C_DateAndTime.AdjustTimeByDays:
   impl: C_DateAndTime.AdjustTimeByDays
   inputs:
@@ -5644,6 +6745,58 @@ C_DeathInfo.UseSelfResurrectOption:
   - name: id
     type: number
   outputs:
+C_DeathRecap.GetRecapEvents:
+  inputs:
+  - name: recapID
+    nilable: true
+    type: number
+  outputs:
+  - name: events
+    type:
+      arrayof:
+        structure: C_DeathRecap.DeathRecapEventInfo
+C_DeathRecap.GetRecapLink:
+  inputs:
+  - name: recapID
+    nilable: true
+    type: number
+  outputs:
+  - name: link
+    type: string
+C_DeathRecap.GetRecapMaxHealth:
+  inputs:
+  - name: recapID
+    nilable: true
+    type: number
+  outputs:
+  - name: maxHealth
+    type: number
+C_DeathRecap.HasRecapEvents:
+  inputs:
+  - name: recapID
+    nilable: true
+    type: number
+  outputs:
+  - name: hasEvents
+    type: boolean
+C_DurationUtil.CreateDuration:
+  inputs:
+  outputs:
+  - name: duration
+    type:
+      luaobject: LuaDurationObject
+C_DurationUtil.CreateDurationTextBinding:
+  inputs:
+  outputs:
+  - name: binding
+    type:
+      luaobject: DurationTextBinding
+C_DurationUtil.CreateManualClock:
+  inputs:
+  outputs:
+  - name: clock
+    type:
+      luaobject: LuaDurationManualClock
 C_DyeColor.GetAllDyeColorCategories:
   inputs:
   outputs:
@@ -5822,6 +6975,86 @@ C_EncodingUtil.SerializeJSON:
   outputs:
   - name: output
     type: string
+C_EncounterEvents.GetEventColor:
+  inputs:
+  - name: encounterEventID
+    type: number
+  - name: trigger
+    type:
+      enum: EncounterEventColorTrigger
+  outputs:
+  - name: color
+    nilable: true
+    type:
+      structure: colorRGBA
+C_EncounterEvents.GetEventInfo:
+  inputs:
+  - name: encounterEventID
+    type: number
+  mayreturnnothing: true
+  outputs:
+  - name: encounterEventInfo
+    type:
+      structure: EncounterEventInfo
+C_EncounterEvents.GetEventList:
+  inputs:
+  outputs:
+  - name: encounterEventIDs
+    type:
+      arrayof: number
+C_EncounterEvents.GetEventSound:
+  inputs:
+  - name: encounterEventID
+    type: number
+  - name: trigger
+    type:
+      enum: EncounterEventSoundTrigger
+  mayreturnnothing: true
+  outputs:
+  - name: sound
+    type:
+      structure: EncounterEventSoundInfo
+C_EncounterEvents.HasEventInfo:
+  inputs:
+  - name: encounterEventID
+    type: number
+  outputs:
+  - name: exists
+    type: boolean
+C_EncounterEvents.PlayEventSound:
+  inputs:
+  - name: encounterEventID
+    type: number
+  - name: trigger
+    type:
+      enum: EncounterEventSoundTrigger
+  outputs:
+  - name: handle
+    type: string
+C_EncounterEvents.SetEventColor:
+  inputs:
+  - name: encounterEventID
+    type: number
+  - name: trigger
+    type:
+      enum: EncounterEventColorTrigger
+  - name: color
+    nilable: true
+    type:
+      structure: colorRGBA
+  outputs:
+C_EncounterEvents.SetEventSound:
+  inputs:
+  - name: encounterEventID
+    type: number
+  - name: trigger
+    type:
+      enum: EncounterEventSoundTrigger
+  - name: sound
+    nilable: true
+    type:
+      structure: EncounterEventSoundInfo
+  outputs:
 C_EncounterJournal.GetDungeonEntrancesForMap:
   inputs:
   - name: uiMapID
@@ -5934,6 +7167,308 @@ C_EncounterJournal.SetTab:
   inputs:
   - name: tabIdx
     type: number
+  outputs:
+C_EncounterTimeline.AddEditModeEvents:
+  inputs:
+  outputs:
+  - name: loopTimerDuration
+    type: number
+C_EncounterTimeline.AddScriptEvent:
+  inputs:
+  - name: eventInfo
+    type:
+      structure: C_EncounterTimeline.EncounterTimelineScriptEventRequest
+  outputs:
+  - name: eventID
+    type: number
+C_EncounterTimeline.CancelAllScriptEvents:
+  inputs:
+  outputs:
+C_EncounterTimeline.CancelEditModeEvents:
+  inputs:
+  outputs:
+C_EncounterTimeline.CancelScriptEvent:
+  inputs:
+  - name: eventID
+    type: number
+  outputs:
+C_EncounterTimeline.FinishScriptEvent:
+  inputs:
+  - name: eventID
+    type: number
+  outputs:
+C_EncounterTimeline.GetCurrentTime:
+  inputs:
+  outputs:
+  - name: currentTime
+    type: number
+C_EncounterTimeline.GetEventColor:
+  inputs:
+  - name: eventID
+    type: number
+  - name: overrideTrigger
+    nilable: true
+    type:
+      enum: EncounterEventColorTrigger
+  outputs:
+  - name: color
+    type:
+      structure: colorRGBA
+C_EncounterTimeline.GetEventCountBySource:
+  inputs:
+  - name: source
+    type:
+      enum: EncounterTimelineEventSource
+  outputs:
+  - name: count
+    type: number
+C_EncounterTimeline.GetEventHighlightTime:
+  inputs:
+  outputs:
+  - name: highlightTime
+    type: number
+C_EncounterTimeline.GetEventInfo:
+  inputs:
+  - name: eventID
+    type: number
+  outputs:
+  - name: info
+    type:
+      structure: C_EncounterTimeline.EncounterTimelineEventInfo
+C_EncounterTimeline.GetEventList:
+  inputs:
+  outputs:
+  - name: events
+    type:
+      arrayof: number
+C_EncounterTimeline.GetEventState:
+  inputs:
+  - name: eventID
+    type: number
+  outputs:
+  - name: state
+    type:
+      enum: EncounterTimelineEventState
+C_EncounterTimeline.GetEventTimeElapsed:
+  inputs:
+  - name: eventID
+    type: number
+  outputs:
+  - name: timeElapsed
+    type: number
+C_EncounterTimeline.GetEventTimer:
+  inputs:
+  - name: eventID
+    type: number
+  outputs:
+  - name: duration
+    nilable: true
+    type:
+      luaobject: LuaDurationObject
+C_EncounterTimeline.GetEventTimeRemaining:
+  inputs:
+  - name: eventID
+    type: number
+  outputs:
+  - name: timeRemaining
+    type: number
+C_EncounterTimeline.GetEventTrack:
+  inputs:
+  - name: eventID
+    type: number
+  outputs:
+  - name: track
+    type:
+      enum: EncounterTimelineTrack
+  - name: trackSortIndex
+    nilable: true
+    type: number
+C_EncounterTimeline.GetSortedEventList:
+  inputs:
+  - name: maxEventCount
+    nilable: true
+    type: number
+  - name: maxEventDuration
+    nilable: true
+    type: number
+  - default: true
+    name: excludeTerminalStates
+    type: boolean
+  - default: true
+    name: excludeHiddenEvents
+    type: boolean
+  outputs:
+  - name: events
+    type:
+      arrayof: number
+C_EncounterTimeline.GetTrackInfo:
+  inputs:
+  - name: track
+    type:
+      enum: EncounterTimelineTrack
+  outputs:
+  - name: trackInfo
+    type:
+      structure: C_EncounterTimeline.EncounterTimelineTrackInfo
+C_EncounterTimeline.GetTrackList:
+  inputs:
+  outputs:
+  - name: tracks
+    type:
+      arrayof:
+        structure: C_EncounterTimeline.EncounterTimelineTrackInfo
+C_EncounterTimeline.GetTrackMaxEventDuration:
+  inputs:
+  - name: track
+    type:
+      enum: EncounterTimelineTrack
+  outputs:
+  - name: maxEventDuration
+    type: number
+C_EncounterTimeline.GetTrackType:
+  inputs:
+  - name: track
+    type:
+      enum: EncounterTimelineTrack
+  outputs:
+  - name: trackType
+    type:
+      enum: EncounterTimelineTrackType
+C_EncounterTimeline.GetViewType:
+  inputs:
+  outputs:
+  - name: viewType
+    type:
+      enum: EncounterTimelineViewType
+C_EncounterTimeline.HasActiveEvents:
+  inputs:
+  outputs:
+  - name: hasActiveEvents
+    type: boolean
+C_EncounterTimeline.HasAnyEvents:
+  inputs:
+  outputs:
+  - name: hasAnyEvents
+    type: boolean
+C_EncounterTimeline.HasPausedEvents:
+  inputs:
+  outputs:
+  - name: hasPausedEvents
+    type: boolean
+C_EncounterTimeline.HasVisibleEvents:
+  inputs:
+  outputs:
+  - name: hasVisibleEvents
+    type: boolean
+C_EncounterTimeline.IsEventBlocked:
+  inputs:
+  - name: eventID
+    type: number
+  outputs:
+  - name: blocked
+    type: boolean
+C_EncounterTimeline.IsFeatureAvailable:
+  inputs:
+  outputs:
+  - name: isAvailable
+    type: boolean
+C_EncounterTimeline.IsFeatureEnabled:
+  inputs:
+  outputs:
+  - name: isAvailableAndEnabled
+    type: boolean
+C_EncounterTimeline.PauseScriptEvent:
+  inputs:
+  - name: eventID
+    type: number
+  outputs:
+C_EncounterTimeline.ResumeScriptEvent:
+  inputs:
+  - name: eventID
+    type: number
+  outputs:
+C_EncounterTimeline.SetEventIconTextures:
+  inputs:
+  - name: eventID
+    type: number
+  - name: includeIcons
+    type:
+      enum: EncounterEventIconmask
+  - name: textures
+    type:
+      arrayof:
+        uiobject: Texture
+  outputs:
+C_EncounterTimeline.SetViewType:
+  inputs:
+  - name: viewType
+    type:
+      enum: EncounterTimelineViewType
+  outputs:
+C_EncounterWarnings.GetColorForSeverity:
+  inputs:
+  - name: severity
+    type:
+      enum: EncounterEventSeverity
+  outputs:
+  - name: color
+    type:
+      structure: colorRGBA
+C_EncounterWarnings.GetEditModeWarningInfo:
+  inputs:
+  - name: severity
+    type:
+      enum: EncounterEventSeverity
+  outputs:
+  - name: warningInfo
+    type:
+      structure: C_EncounterWarnings.EncounterWarningInfo
+C_EncounterWarnings.GetPlayCustomSoundsWhenHidden:
+  inputs:
+  outputs:
+  - name: play
+    type: boolean
+C_EncounterWarnings.GetSoundKitForSeverity:
+  inputs:
+  - name: severity
+    type:
+      enum: EncounterEventSeverity
+  outputs:
+  - name: soundKitID
+    type: number
+C_EncounterWarnings.GetWarningsShown:
+  inputs:
+  outputs:
+  - name: shown
+    type: boolean
+C_EncounterWarnings.IsFeatureAvailable:
+  inputs:
+  outputs:
+  - name: isAvailable
+    type: boolean
+C_EncounterWarnings.IsFeatureEnabled:
+  inputs:
+  outputs:
+  - name: isAvailableAndEnabled
+    type: boolean
+C_EncounterWarnings.PlaySound:
+  inputs:
+  - name: severity
+    type:
+      enum: EncounterEventSeverity
+  mayreturnnothing: true
+  outputs:
+  - name: soundHandle
+    type: number
+C_EncounterWarnings.SetPlayCustomSoundsWhenHidden:
+  inputs:
+  - name: play
+    type: boolean
+  outputs:
+C_EncounterWarnings.SetWarningsShown:
+  inputs:
+  - name: shown
+    type: boolean
   outputs:
 C_EndOfMatchUI.GetEndOfMatchDetails:
   inputs:
@@ -6312,6 +7847,13 @@ C_EventToastManager.GetNextToastToDisplay:
 C_EventToastManager.RemoveCurrentToast:
   inputs:
   outputs:
+C_EventUtils.IsCallbackEvent:
+  inputs:
+  - name: eventName
+    type: string
+  outputs:
+  - name: isCallbackEvent
+    type: boolean
 C_EventUtils.IsEventValid:
   impl: C_EventUtils.IsEventValid
   inputs:
@@ -6320,9 +7862,6 @@ C_EventUtils.IsEventValid:
   outputs:
   - name: valid
     type: boolean
-C_EventUtils.NotifySettingsLoaded:
-  inputs:
-  outputs:
 C_ExternalEventURL.HasURL:
   inputs:
   outputs:
@@ -6822,6 +8361,11 @@ C_GameRules.IsMultiActionBarVisibilityForced:
   outputs:
   - name: valid
     type: boolean
+C_GameRules.IsPersonalResourceDisplayEnabled:
+  inputs:
+  outputs:
+  - name: isPersonalResourceDisplayEnabled
+    type: boolean
 C_GameRules.IsPlunderstorm:
   inputs:
   outputs:
@@ -7041,6 +8585,16 @@ C_GuildInfo.GetGuildTabardInfo:
     nilable: true
     type:
       structure: GuildTabardInfo
+C_GuildInfo.GetInfoText:
+  inputs:
+  outputs:
+  - name: infoText
+    type: string
+C_GuildInfo.GetMOTD:
+  inputs:
+  outputs:
+  - name: motd
+    type: string
 C_GuildInfo.GuildControlGetRankFlags:
   inputs:
   - name: rankOrder
@@ -7168,6 +8722,11 @@ C_GuildInfo.SetGuildRankOrder:
   - name: rankOrder
     type: number
   outputs:
+C_GuildInfo.SetInfoText:
+  inputs:
+  - name: infoText
+    type: string
+  outputs:
 C_GuildInfo.SetLeader:
   inputs:
   - name: name
@@ -7269,12 +8828,32 @@ C_HouseExterior.GetCurrentHouseExteriorSize:
     nilable: true
     type:
       enum: HousingFixtureSize
-C_HouseExterior.GetCurrentHouseExteriorTypeName:
+C_HouseExterior.GetCurrentHouseExteriorType:
   inputs:
   outputs:
+  - name: houseExteriorTypeID
+    nilable: true
+    type: number
   - name: houseExteriorTypeName
     nilable: true
     type: string
+C_HouseExterior.GetFixtureDebugInfoForGUID:
+C_HouseExterior.GetHouseExteriorSizeOptions:
+  inputs:
+  outputs:
+  - name: options
+    nilable: true
+    type:
+      structure: HouseExteriorSizeOptionsInfo
+C_HouseExterior.GetHouseExteriorTypeOptions:
+  inputs:
+  outputs:
+  - name: options
+    nilable: true
+    type:
+      structure: HouseExteriorTypeOptionsInfo
+C_HouseExterior.GetHoveredFixtureDebugInfo:
+C_HouseExterior.GetSelectedFixtureDebugInfo:
 C_HouseExterior.GetSelectedFixturePointInfo:
   inputs:
   outputs:
@@ -7292,18 +8871,82 @@ C_HouseExterior.HasSelectedFixturePoint:
   outputs:
   - name: anySelectedFixturePoint
     type: boolean
+C_HouseExterior.IsAnyDecorAttachedToCoreFixture:
+  inputs:
+  - name: coreFixtureType
+    type:
+      enum: HousingFixtureType
+  outputs:
+  - name: anyAttachedDecor
+    type: boolean
+C_HouseExterior.IsAnyDecorAttachedToDoor:
+  inputs:
+  outputs:
+  - name: anyAttachedDecor
+    type: boolean
+C_HouseExterior.IsAnyDecorAttachedToHouseExterior:
+  inputs:
+  outputs:
+  - name: anyAttachedDecor
+    type: boolean
+C_HouseExterior.IsAnyDecorAttachedToSelectedFixturePoint:
+  inputs:
+  outputs:
+  - name: anyAttachedDecor
+    type: boolean
+C_HouseExterior.IsExteriorDecorHidden:
+  inputs:
+  outputs:
+  - name: decorHidden
+    type: boolean
 C_HouseExterior.RemoveFixtureFromSelectedPoint:
   inputs:
+  - default: 0
+    name: attachedDecorAction
+    type:
+      enum: HousingFixtureDecorAction
   outputs:
 C_HouseExterior.SelectCoreFixtureOption:
   inputs:
   - name: fixtureID
     type: number
+  - default: 0
+    name: attachedDecorAction
+    type:
+      enum: HousingFixtureDecorAction
   outputs:
 C_HouseExterior.SelectFixtureOption:
   inputs:
   - name: fixtureID
     type: number
+  - default: 0
+    name: attachedDecorAction
+    type:
+      enum: HousingFixtureDecorAction
+  outputs:
+C_HouseExterior.SetExteriorDecorHidden:
+  inputs:
+  - name: decorHidden
+    type: boolean
+  outputs:
+C_HouseExterior.SetHouseExteriorSize:
+  inputs:
+  - name: size
+    type:
+      enum: HousingFixtureSize
+  - default: 0
+    name: attachedDecorAction
+    type:
+      enum: HousingFixtureDecorAction
+  outputs:
+C_HouseExterior.SetHouseExteriorType:
+  inputs:
+  - name: houseExteriorTypeID
+    type: number
+  - default: 0
+    name: attachedDecorAction
+    type:
+      enum: HousingFixtureDecorAction
   outputs:
 C_Housing.AcceptNeighborhoodOwnership:
   inputs:
@@ -7452,10 +9095,20 @@ C_Housing.HouseFinderRequestReservationAndPort:
   - name: plotID
     type: number
   outputs:
+C_Housing.IsHousingMarketCartFullRemoveEnabled:
+  inputs:
+  outputs:
+  - name: isHousingMarketCartFullRemoveEnabled
+    type: boolean
 C_Housing.IsHousingMarketEnabled:
   inputs:
   outputs:
   - name: isHousingMarketEnabled
+    type: boolean
+C_Housing.IsHousingMarketShopEnabled:
+  inputs:
+  outputs:
+  - name: isHousingMarketShopEnabled
     type: boolean
 C_Housing.IsHousingServiceEnabled:
   inputs:
@@ -7502,6 +9155,11 @@ C_Housing.OnCreateCharterNeighborhoodClosed:
 C_Housing.OnCreateGuildNeighborhoodClosed:
   inputs:
   outputs:
+C_Housing.OnHouseFinderClickPlot:
+  inputs:
+  - name: plotID
+    type: number
+  outputs:
 C_Housing.OnRequestSignatureClicked:
   inputs:
   outputs:
@@ -7521,6 +9179,8 @@ C_Housing.RequestCurrentHouseInfo:
 C_Housing.RequestHouseFinderNeighborhoodData:
   inputs:
   - name: neighborhoodGuid
+    type: string
+  - name: neighborhoodName
     type: string
   outputs:
 C_Housing.RequestPlayerCharacterList:
@@ -7622,6 +9282,11 @@ C_HousingBasicMode.IsDecorSelected:
   outputs:
   - name: hasSelectedDecor
     type: boolean
+C_HousingBasicMode.IsFreePlaceEnabled:
+  inputs:
+  outputs:
+  - name: freePlaceEnabled
+    type: boolean
 C_HousingBasicMode.IsGridSnapEnabled:
   inputs:
   outputs:
@@ -7647,11 +9312,6 @@ C_HousingBasicMode.IsHoveringDecor:
   outputs:
   - name: isHoveringDecor
     type: boolean
-C_HousingBasicMode.IsNudgeEnabled:
-  inputs:
-  outputs:
-  - name: nudgeEnabled
-    type: boolean
 C_HousingBasicMode.IsPlacingNewDecor:
   inputs:
   outputs:
@@ -7670,6 +9330,11 @@ C_HousingBasicMode.RotateHouseExterior:
   - name: rotDegrees
     type: number
   outputs:
+C_HousingBasicMode.SetFreePlaceEnabled:
+  inputs:
+  - name: freePlaceEnabled
+    type: boolean
+  outputs:
 C_HousingBasicMode.SetGridSnapEnabled:
   inputs:
   - name: isGridSnapEnabled
@@ -7680,35 +9345,35 @@ C_HousingBasicMode.SetGridVisible:
   - name: gridVisible
     type: boolean
   outputs:
-C_HousingBasicMode.SetNudgeEnabled:
-  inputs:
-  - name: nudgeEnabled
-    type: boolean
-  outputs:
 C_HousingBasicMode.StartPlacingNewDecor:
   inputs:
-  - name: catalogEntryID
+  - name: catalogEntryVariantID
     type:
-      structure: HousingCatalogEntryID
+      structure: HousingCatalogEntryVariantID
   outputs:
-C_HousingCatalog.CanDestroyEntry:
+C_HousingBasicMode.StartPlacingPreviewDecor:
   inputs:
-  - name: entryID
-    type:
-      structure: HousingCatalogEntryID
+  - name: decorRecordID
+    type: number
+  - name: bundleCatalogShopProductID
+    nilable: true
+    type: number
   outputs:
-  - name: canDelete
-    type: boolean
 C_HousingCatalog.CreateCatalogSearcher:
   inputs:
   outputs:
   - name: searcher
     type: string
+C_HousingCatalog.DeletePreviewCartDecor:
+  inputs:
+  - name: decorGUID
+    type: string
+  outputs:
 C_HousingCatalog.DestroyEntry:
   inputs:
-  - name: entryID
+  - name: entryVariantID
     type:
-      structure: HousingCatalogEntryID
+      structure: HousingCatalogEntryVariantID
   - name: destroyAll
     type: boolean
   outputs:
@@ -7719,6 +9384,40 @@ C_HousingCatalog.GetAllFilterTagGroups:
     type:
       arrayof:
         structure: HousingCatalogFilterTagGroupInfo
+C_HousingCatalog.GetAllVariantInfosForEntry:
+  inputs:
+  - name: entryID
+    type:
+      structure: HousingCatalogEntryID
+  outputs:
+  - name: variantInfos
+    type:
+      arrayof:
+        structure: C_HousingCatalog.HousingCatalogEntryVariantInfo
+C_HousingCatalog.GetBundleInfo:
+  inputs:
+  - name: bundleCatalogShopProductID
+    type: number
+  outputs:
+  - name: bundleInfo
+    nilable: true
+    type:
+      structure: C_HousingCatalog.HousingBundleInfo
+C_HousingCatalog.GetCartSizeLimit:
+  inputs:
+  outputs:
+  - name: cartSizeLimit
+    type: number
+C_HousingCatalog.GetCatalogCategoryAndSubcategoryNames:
+  inputs:
+  - name: subcategoryID
+    type: number
+  mayreturnnothing: true
+  outputs:
+  - name: categoryName
+    type: string
+  - name: subcategoryName
+    type: string
 C_HousingCatalog.GetCatalogCategoryInfo:
   inputs:
   - name: categoryID
@@ -7743,8 +9442,6 @@ C_HousingCatalog.GetCatalogEntryInfoByItem:
   inputs:
   - name: itemInfo
     type: string
-  - name: tryGetOwnedInfo
-    type: boolean
   outputs:
   - name: info
     nilable: true
@@ -7757,13 +9454,32 @@ C_HousingCatalog.GetCatalogEntryInfoByRecordID:
       enum: HousingCatalogEntryType
   - name: recordID
     type: number
-  - name: tryGetOwnedInfo
-    type: boolean
   outputs:
   - name: info
     nilable: true
     type:
       structure: C_HousingCatalog.HousingCatalogEntryInfo
+C_HousingCatalog.GetCatalogEntryRefundTimeStampByRecordID:
+  inputs:
+  - name: entryType
+    type:
+      enum: HousingCatalogEntryType
+  - name: recordID
+    type: number
+  outputs:
+  - name: refundTimeStamp
+    nilable: true
+    type: number
+C_HousingCatalog.GetCatalogEntryVariantInfo:
+  inputs:
+  - name: entryVariantID
+    type:
+      structure: HousingCatalogEntryVariantID
+  outputs:
+  - name: info
+    nilable: true
+    type:
+      structure: C_HousingCatalog.HousingCatalogEntryVariantInfo
 C_HousingCatalog.GetCatalogSubcategoryInfo:
   inputs:
   - name: subcategoryID
@@ -7785,6 +9501,14 @@ C_HousingCatalog.GetDecorTotalOwnedCount:
     type: number
   - name: exemptDecorCount
     type: number
+C_HousingCatalog.GetDestroyableInstanceCount:
+  inputs:
+  - name: entryVariantID
+    type:
+      structure: HousingCatalogEntryVariantID
+  outputs:
+  - name: destroyableInstanceCount
+    type: number
 C_HousingCatalog.GetFeaturedBundles:
   inputs:
   outputs:
@@ -7792,14 +9516,72 @@ C_HousingCatalog.GetFeaturedBundles:
     type:
       arrayof:
         structure: C_HousingCatalog.HousingBundleInfo
-C_HousingCatalog.GetFeaturedDecor:
+C_HousingCatalog.GetFeaturedSmallProducts:
   inputs:
   outputs:
-  - name: entryInfos
+  - name: infos
     type:
       arrayof:
-        structure: C_HousingCatalog.HousingFeaturedDecorEntry
+        structure: C_HousingCatalog.HousingFeaturedSmallProductInfo
+C_HousingCatalog.GetMarketInfoForDecor:
+  inputs:
+  - name: decorID
+    type: number
+  outputs:
+  - name: marketInfo
+    nilable: true
+    type:
+      structure: C_HousingCatalog.HousingMarketInfo
+C_HousingCatalog.HasFeaturedEntries:
+  inputs:
+  outputs:
+  - name: hasEntries
+    type: boolean
+C_HousingCatalog.HousingMarketActionAddToCart:
+  inputs:
+  - name: productID
+    type: number
+  - name: withPreview
+    type: boolean
+  outputs:
+C_HousingCatalog.HousingMarketActionClearCart:
+  inputs:
+  outputs:
+C_HousingCatalog.HousingMarketActionRemoveFromCart:
+  inputs:
+  - name: productID
+    type: number
+  outputs:
+C_HousingCatalog.HousingMarketActionViewBundle:
+  inputs:
+  - name: productID
+    type: number
+  outputs:
+C_HousingCatalog.HousingMarketActionViewInStore:
+  inputs:
+  - name: productID
+    type: number
+  outputs:
+C_HousingCatalog.IsPreviewCartItemShown:
+  inputs:
+  - name: decorGUID
+    type: string
+  outputs:
+  - name: isShown
+    type: boolean
+C_HousingCatalog.PromotePreviewDecor:
+  inputs:
+  - name: decorID
+    type: number
+  - name: previewDecorGUID
+    type: string
+  outputs:
+  - name: success
+    type: boolean
 C_HousingCatalog.RequestHousingMarketInfoRefresh:
+  inputs:
+  outputs:
+C_HousingCatalog.RequestHousingMarketRefundInfo:
   inputs:
   outputs:
 C_HousingCatalog.SearchCatalogCategories:
@@ -7820,6 +9602,13 @@ C_HousingCatalog.SearchCatalogSubcategories:
   - name: subcategoryIDs
     type:
       arrayof: number
+C_HousingCatalog.SetPreviewCartItemShown:
+  inputs:
+  - name: decorGUID
+    type: string
+  - name: shown
+    type: boolean
+  outputs:
 C_HousingCleanupMode.GetHoveredDecorInfo:
   inputs:
   outputs:
@@ -7963,6 +9752,11 @@ C_HousingCustomizeMode.IsDecorSelected:
   outputs:
   - name: hasSelectedDecor
     type: boolean
+C_HousingCustomizeMode.IsHouseExteriorDoorHovered:
+  inputs:
+  outputs:
+  - name: isHouseExteriorDoorHovered
+    type: boolean
 C_HousingCustomizeMode.IsHoveringDecor:
   inputs:
   outputs:
@@ -7986,6 +9780,18 @@ C_HousingCustomizeMode.RoomComponentSupportsVariant:
     type: number
   outputs:
   - name: variantSupported
+    type: boolean
+C_HousingCustomizeMode.RoomConnectionSupportsDoorType:
+  inputs:
+  - name: roomGUID
+    type: string
+  - name: componentID
+    type: number
+  - name: newDoortype
+    type:
+      enum: HousingRoomComponentDoorType
+  outputs:
+  - name: doorTypeSupported
     type: boolean
 C_HousingCustomizeMode.SetRoomComponentCeilingType:
   inputs:
@@ -8013,6 +9819,12 @@ C_HousingDecor.CancelActiveEditing:
 C_HousingDecor.CommitDecorMovement:
   inputs:
   outputs:
+C_HousingDecor.EnterPreviewState:
+  inputs:
+  outputs:
+C_HousingDecor.ExitPreviewState:
+  inputs:
+  outputs:
 C_HousingDecor.GetAllPlacedDecor:
   inputs:
   outputs:
@@ -8021,6 +9833,14 @@ C_HousingDecor.GetAllPlacedDecor:
       arrayof:
         structure: C_HousingDecor.HousingDecorInstanceListEntry
 C_HousingDecor.GetDecorDebugInfoForGUID:
+C_HousingDecor.GetDecorHyperlink:
+  inputs:
+  - name: decorID
+    type: number
+  mayreturnnothing: true
+  outputs:
+  - name: hyperLink
+    type: string
 C_HousingDecor.GetDecorIcon:
   inputs:
   - name: decorID
@@ -8054,11 +9874,6 @@ C_HousingDecor.GetHoveredDecorInfo:
     nilable: true
     type:
       structure: HousingDecorInstanceInfo
-C_HousingDecor.GetMaxDecorPlaced:
-  inputs:
-  outputs:
-  - name: numPlaced
-    type: number
 C_HousingDecor.GetMaxPlacementBudget:
   inputs:
   outputs:
@@ -8068,6 +9883,11 @@ C_HousingDecor.GetNumDecorPlaced:
   inputs:
   outputs:
   - name: numPlaced
+    type: number
+C_HousingDecor.GetNumPreviewDecor:
+  inputs:
+  outputs:
+  - name: numDecor
     type: number
 C_HousingDecor.GetSelectedDecorDebugInfo:
 C_HousingDecor.GetSelectedDecorInfo:
@@ -8111,6 +9931,19 @@ C_HousingDecor.IsHoveringDecor:
   inputs:
   outputs:
   - name: isHoveringDecor
+    type: boolean
+C_HousingDecor.IsModeDisabledForPreviewState:
+  inputs:
+  - name: mode
+    type:
+      enum: HouseEditorMode
+  outputs:
+  - name: isModeDisabled
+    type: boolean
+C_HousingDecor.IsPreviewState:
+  inputs:
+  outputs:
+  - name: isPreviewState
     type: boolean
 C_HousingDecor.RemovePlacedDecorEntry:
   inputs:
@@ -8233,6 +10066,27 @@ C_HousingExpertMode.SetPrecisionSubmode:
     type:
       enum: HousingPrecisionSubmode
   outputs:
+C_HousingInspectMode.EnterInspectMode:
+  inputs:
+  outputs:
+C_HousingInspectMode.ExitInspectMode:
+  inputs:
+  outputs:
+C_HousingInspectMode.GetHoveredDecorGUID:
+  inputs:
+  outputs:
+  - name: decorGUID
+    type: string
+C_HousingInspectMode.IsHoveringDecor:
+  inputs:
+  outputs:
+  - name: isHoveringDecor
+    type: boolean
+C_HousingInspectMode.IsInInspectMode:
+  inputs:
+  outputs:
+  - name: isInInspectMode
+    type: boolean
 C_HousingLayout.AnyRoomsOnFloor:
   inputs:
   - name: floor
@@ -8243,6 +10097,13 @@ C_HousingLayout.AnyRoomsOnFloor:
 C_HousingLayout.CancelActiveLayoutEditing:
   inputs:
   outputs:
+C_HousingLayout.CanSetViewedFloor:
+  inputs:
+  - name: floor
+    type: number
+  outputs:
+  - name: canSet
+    type: boolean
 C_HousingLayout.ConfirmStairChoice:
   inputs:
   - name: choice
@@ -8260,6 +10121,11 @@ C_HousingLayout.GetNumActiveRooms:
   inputs:
   outputs:
   - name: numRooms
+    type: number
+C_HousingLayout.GetNumFloors:
+  inputs:
+  outputs:
+  - name: numFloors
     type: number
 C_HousingLayout.GetRoomPlacementBudget:
   inputs:
@@ -8529,6 +10395,9 @@ C_HousingNeighborhood.IsPlotOwnedByPlayer:
 C_HousingNeighborhood.OnBulletinBoardClosed:
   inputs:
   outputs:
+C_HousingNeighborhood.OnCornerstoneClosed:
+  inputs:
+  outputs:
 C_HousingNeighborhood.PromoteToManager:
   inputs:
   - name: playerGUID
@@ -8579,6 +10448,26 @@ C_IncomingSummon.IncomingSummonStatus:
   - name: status
     type:
       enum: SummonStatus
+C_InstanceEncounter.IsEncounterInProgress:
+  inputs:
+  outputs:
+  - name: isInProgress
+    type: boolean
+C_InstanceEncounter.IsEncounterLimitingResurrections:
+  inputs:
+  outputs:
+  - name: isLimitingResurrections
+    type: boolean
+C_InstanceEncounter.IsEncounterSuppressingRelease:
+  inputs:
+  outputs:
+  - name: isSuppressingRelease
+    type: boolean
+C_InstanceEncounter.ShouldShowTimelineForEncounter:
+  inputs:
+  outputs:
+  - name: shouldShow
+    type: boolean
 C_InterfaceFileManifest.GetInterfaceArtFiles:
   inputs:
   mayreturnnothing: true
@@ -8609,7 +10498,8 @@ C_Item.CanItemTransmogAppearance:
   - name: canTransmog
     type: boolean
   - name: errorCode
-    type: number
+    type:
+      enum: TransmogOutfitSlotError
 C_Item.ConfirmBindOnUse:
   inputs:
   outputs:
@@ -8881,6 +10771,8 @@ C_Item.GetItemInfo:
     type: number
   - name: isCraftingReagent
     type: boolean
+  - name: itemDescription
+    type: string
 C_Item.GetItemInfoInstant:
   inputs:
   - name: itemInfo
@@ -9665,6 +11557,10 @@ C_LFGList.DoesEntryTitleMatchPrebuiltTitle:
     nilable: true
     type:
       enum: LFGEntryPlaystyle
+  - name: generalPlaystyle
+    nilable: true
+    type:
+      enum: LFGEntryGeneralPlaystyle
   outputs:
   - name: matches
     type: boolean
@@ -9858,6 +11754,9 @@ C_LFGList.GetPlaystyleString:
   - name: playstyle
     type:
       enum: LFGEntryPlaystyle
+  - name: generalPlaystyle
+    type:
+      enum: LFGEntryGeneralPlaystyle
   - name: activityInfo
     type:
       structure: C_LFGList.GroupFinderActivityInfo
@@ -9938,10 +11837,22 @@ C_LFGList.IsPlayerAuthenticatedForLFG:
   outputs:
   - name: isAuthenticated
     type: boolean
+C_LFGList.IsPlayerValidForEndgameFieldEdits:
+  inputs:
+  outputs:
+  - name: isValid
+    type: boolean
 C_LFGList.IsPremadeGroupFinderEnabled:
   inputs:
   outputs:
   - name: enabled
+    type: boolean
+C_LFGList.ListingUsesEndgameEditRestrictions:
+  inputs:
+  - name: activityID
+    type: number
+  outputs:
+  - name: isEndgameListing
     type: boolean
 C_LFGList.RefreshApplicants:
 C_LFGList.RemoveApplicant:
@@ -9967,8 +11878,7 @@ C_LFGList.Search:
     type: number
   - name: languageFilter
     nilable: true
-    type:
-      structure: C_LFGList.WowLocale
+    type: string
   - default: false
     name: searchCrossFactionListings
     type: boolean
@@ -9992,6 +11902,10 @@ C_LFGList.SetEntryTitle:
     nilable: true
     type:
       enum: LFGEntryPlaystyle
+  - name: generalPlaystyle
+    nilable: true
+    type:
+      enum: LFGEntryGeneralPlaystyle
   outputs:
 C_LFGList.SetSearchToActivity:
   inputs:
@@ -10051,6 +11965,14 @@ C_LFGListRoles.SetRoles:
     type: boolean
   outputs:
   - name: success
+    type: boolean
+C_LimitedInput.LimitedInputAllowed:
+  inputs:
+  - name: type
+    type:
+      enum: LimitedInputType
+  outputs:
+  - name: allowed
     type: boolean
 C_LobbyMatchmakerInfo.IsInQueue:
   inputs:
@@ -10146,6 +12068,17 @@ C_LossOfControl.GetActiveLossOfControlDataCountByUnit:
   outputs:
   - name: count
     type: number
+C_LossOfControl.GetActiveLossOfControlDuration:
+  inputs:
+  - name: unitToken
+    type: unit
+  - name: index
+    type: number
+  outputs:
+  - name: duration
+    nilable: true
+    type:
+      luaobject: LuaDurationObject
 C_MacOptions.AreOSShortcutsDisabled:
   inputs:
   outputs:
@@ -10558,20 +12491,6 @@ C_Minimap.GetNumTrackingTypes:
   outputs:
   - name: numTrackingTypes
     type: number
-C_Minimap.GetObjectIconTextureCoords:
-  inputs:
-  - name: index
-    nilable: true
-    type: number
-  outputs:
-  - name: textureCoordsX
-    type: number
-  - name: textureCoordsY
-    type: number
-  - name: textureCoordsZ
-    type: number
-  - name: textureCoordsW
-    type: number
 C_Minimap.GetPOITextureCoords:
   inputs:
   - name: index
@@ -10817,7 +12736,7 @@ C_MountJournal.GetMountFromItem:
 C_MountJournal.GetMountFromSpell:
   inputs:
   - name: spellID
-    type: number
+    type: string
   outputs:
   - name: mountID
     nilable: true
@@ -11179,7 +13098,7 @@ C_MythicPlus.GetWeeklyBestForMap:
     type: number
   - name: completionDate
     type:
-      structure: C_MythicPlus.MythicPlusDate
+      structure: CalendarTime
   - name: affixIDs
     type:
       arrayof: number
@@ -11214,33 +13133,182 @@ C_MythicPlus.RequestMapInfo:
 C_MythicPlus.RequestRewards:
   inputs:
   outputs:
-C_NamePlate.GetNamePlateEnemyClickThrough:
-C_NamePlate.GetNamePlateEnemyPreferredClickInsets:
-C_NamePlate.GetNamePlateEnemySize:
 C_NamePlate.GetNamePlateForUnit:
-C_NamePlate.GetNamePlateFriendlyClickThrough:
-C_NamePlate.GetNamePlateFriendlyPreferredClickInsets:
-C_NamePlate.GetNamePlateFriendlySize:
+  inputs:
+  - name: unitToken
+    type: unit
+  - default: false
+    name: includeForbidden
+    type: boolean
+  outputs:
+  - name: nameplate
+    nilable: true
+    type: table
 C_NamePlate.GetNamePlates:
+  inputs:
   outputs:
-  - type: table
-C_NamePlate.GetNamePlateSelfClickThrough:
-C_NamePlate.GetNamePlateSelfPreferredClickInsets:
-C_NamePlate.GetNamePlateSelfSize:
-C_NamePlate.GetNumNamePlateMotionTypes:
+  - name: nameplates
+    stub:
+    type:
+      arrayof: table
+C_NamePlate.GetNamePlateSize:
+  inputs:
   outputs:
-  - type: number
-C_NamePlate.GetTargetClampingInsets:
-C_NamePlate.SetNamePlateEnemyClickThrough:
-C_NamePlate.SetNamePlateEnemyPreferredClickInsets:
-C_NamePlate.SetNamePlateEnemySize:
-C_NamePlate.SetNamePlateFriendlyClickThrough:
-C_NamePlate.SetNamePlateFriendlyPreferredClickInsets:
-C_NamePlate.SetNamePlateFriendlySize:
-C_NamePlate.SetNamePlateSelfClickThrough:
-C_NamePlate.SetNamePlateSelfPreferredClickInsets:
-C_NamePlate.SetNamePlateSelfSize:
-C_NamePlate.SetTargetClampingInsets:
+  - name: width
+    type: number
+  - name: height
+    type: number
+C_NamePlate.SetNamePlateSize:
+  inputs:
+  - name: width
+    type: number
+  - name: height
+    type: number
+  outputs:
+C_NamePlateManager.GetNamePlateHitTestInsets:
+  inputs:
+  - name: type
+    type:
+      enum: NamePlateType
+  outputs:
+  - name: left
+    type: number
+  - name: right
+    type: number
+  - name: top
+    type: number
+  - name: bottom
+    type: number
+C_NamePlateManager.IsNamePlateUnitBehindCamera:
+  inputs:
+  - name: unitToken
+    type: unit
+  outputs:
+  - name: isBehindCamera
+    type: boolean
+C_NamePlateManager.SetNamePlateHitTestInsets:
+  inputs:
+  - name: type
+    type:
+      enum: NamePlateType
+  - name: left
+    type: number
+  - name: right
+    type: number
+  - name: top
+    type: number
+  - name: bottom
+    type: number
+  outputs:
+C_NamePlateManager.SetNamePlateSimplified:
+  inputs:
+  - name: unitToken
+    type: unit
+  - name: isSimplified
+    type: boolean
+  outputs:
+C_NeighborhoodInitiative.AddTrackedInitiativeTask:
+  inputs:
+  - name: initiativeTaskID
+    type: number
+  outputs:
+C_NeighborhoodInitiative.GetActiveNeighborhood:
+  inputs:
+  outputs:
+  - name: neighborhoodGUID
+    type: string
+C_NeighborhoodInitiative.GetAvailableHouseXP:
+  inputs:
+  outputs:
+  - name: availabeXP
+    type: number
+C_NeighborhoodInitiative.GetInitiativeActivityLogInfo:
+  inputs:
+  outputs:
+  - name: info
+    nilable: true
+    type:
+      structure: C_NeighborhoodInitiative.InitiativeActivityLogInfo
+C_NeighborhoodInitiative.GetInitiativeTaskChatLink:
+  inputs:
+  - name: initiativeTaskID
+    type: number
+  outputs:
+  - name: link
+    type: string
+C_NeighborhoodInitiative.GetInitiativeTaskInfo:
+  inputs:
+  - name: initiativeTaskID
+    type: number
+  outputs:
+  - name: info
+    nilable: true
+    type:
+      structure: C_NeighborhoodInitiative.InitiativeTaskInfo
+C_NeighborhoodInitiative.GetNeighborhoodInitiativeInfo:
+  inputs:
+  outputs:
+  - name: info
+    nilable: true
+    type:
+      structure: C_NeighborhoodInitiative.NeighborhoodInitiativeInfo
+C_NeighborhoodInitiative.GetRequiredLevel:
+  inputs:
+  outputs:
+  - name: reqLevel
+    type: number
+C_NeighborhoodInitiative.GetTrackedInitiativeTasks:
+  inputs:
+  outputs:
+  - name: trackedInitiativeTasks
+    type:
+      structure: C_NeighborhoodInitiative.InitiativeTasksTracked
+C_NeighborhoodInitiative.IsInitiativeEnabled:
+  inputs:
+  outputs:
+  - name: enabled
+    type: boolean
+C_NeighborhoodInitiative.IsPlayerInNeighborhoodGroup:
+  inputs:
+  outputs:
+  - name: inValidGroup
+    type: boolean
+C_NeighborhoodInitiative.IsViewingActiveNeighborhood:
+  inputs:
+  outputs:
+  - name: isViewingActiveNeighborhood
+    type: boolean
+C_NeighborhoodInitiative.PlayerHasInitiativeAccess:
+  inputs:
+  outputs:
+  - name: success
+    type: boolean
+C_NeighborhoodInitiative.PlayerMeetsRequiredLevel:
+  inputs:
+  outputs:
+  - name: success
+    type: boolean
+C_NeighborhoodInitiative.RemoveTrackedInitiativeTask:
+  inputs:
+  - name: initiativeTaskID
+    type: number
+  outputs:
+C_NeighborhoodInitiative.RequestInitiativeActivityLog:
+  inputs:
+  outputs:
+C_NeighborhoodInitiative.RequestNeighborhoodInitiativeInfo:
+  inputs:
+  outputs:
+C_NeighborhoodInitiative.SetActiveNeighborhood:
+  inputs:
+  - name: neighborhoodGUID
+    type: string
+  outputs:
+C_NeighborhoodInitiative.SetViewingNeighborhood:
+  inputs:
+  - name: neighborhoodGUID
+    type: string
+  outputs:
 C_NewItems.ClearAll:
   inputs:
   outputs:
@@ -11342,6 +13410,19 @@ C_PartyInfo.ConfirmLeaveParty:
     nilable: true
     type: number
   outputs:
+C_PartyInfo.ConfirmReadyCheck:
+  inputs:
+  - name: isReady
+    type: boolean
+  outputs:
+C_PartyInfo.DemoteAssistant:
+  inputs:
+  - name: name
+    type: string
+  - name: exactNameMatch
+    nilable: true
+    type: boolean
+  outputs:
 C_PartyInfo.DoCountdown:
   inputs:
   - name: seconds
@@ -11349,6 +13430,9 @@ C_PartyInfo.DoCountdown:
   outputs:
   - name: success
     type: boolean
+C_PartyInfo.DoReadyCheck:
+  inputs:
+  outputs:
 C_PartyInfo.GetActiveCategories:
   inputs:
   mayreturnnothing: true
@@ -11385,6 +13469,12 @@ C_PartyInfo.GetLootMethod:
   - name: masterLooterRaidID
     nilable: true
     type: number
+C_PartyInfo.GetLootMethodStyle:
+  inputs:
+  outputs:
+  - name: methodStyle
+    type:
+      enum: LootMethodStyles
 C_PartyInfo.GetMinLevel:
   inputs:
   - name: category
@@ -11406,6 +13496,24 @@ C_PartyInfo.IsCrossFactionParty:
   outputs:
   - name: isCrossFactionParty
     type: boolean
+C_PartyInfo.IsGUIDInGroup:
+  inputs:
+  - name: guid
+    type: string
+  - name: category
+    nilable: true
+    type: number
+  outputs:
+  - name: isInGroup
+    type: boolean
+C_PartyInfo.IsLootMethodAvailable:
+  inputs:
+  - name: method
+    type:
+      enum: LootMethod
+  outputs:
+  - name: available
+    type: boolean
 C_PartyInfo.IsPartyFull:
   inputs:
   - name: category
@@ -11419,6 +13527,29 @@ C_PartyInfo.IsPartyWalkIn:
   outputs:
   - name: isPartyWalkIn
     type: boolean
+C_PartyInfo.PromoteToAssistant:
+  inputs:
+  - name: name
+    type: string
+  - name: exactNameMatch
+    nilable: true
+    type: boolean
+  outputs:
+C_PartyInfo.PromoteToLeader:
+  inputs:
+  - name: name
+    type: string
+  - name: exactNameMatch
+    nilable: true
+    type: boolean
+  outputs:
+C_PartyInfo.SetEveryoneIsAssistant:
+  inputs:
+  - name: isAssistant
+    type: boolean
+  outputs:
+  - name: updated
+    type: boolean
 C_PartyInfo.SetLootMethod:
   inputs:
   - name: method
@@ -11430,6 +13561,17 @@ C_PartyInfo.SetLootMethod:
   outputs:
   - name: success
     type: boolean
+C_PartyInfo.UninviteUnit:
+  inputs:
+  - name: name
+    type: string
+  - name: reason
+    nilable: true
+    type: string
+  - name: exactNameMatch
+    nilable: true
+    type: boolean
+  outputs:
 C_PetBattles.AcceptPVPDuel:
 C_PetBattles.AcceptQueuedPVPMatch:
 C_PetBattles.CanAcceptQueuedPVPMatch:
@@ -11813,6 +13955,61 @@ C_PetJournal.SpellTargetBattlePet:
   outputs:
 C_PetJournal.SummonPetByGUID:
 C_PetJournal.SummonRandomPet:
+C_PhotoSharing.BeginAuthorizationFlow:
+  inputs:
+  outputs:
+C_PhotoSharing.ClearAuthorization:
+  inputs:
+  outputs:
+C_PhotoSharing.CompleteAuthorizationFlow:
+  inputs:
+  - name: callbackURL
+    type: string
+  outputs:
+C_PhotoSharing.GetCropRatio:
+  inputs:
+  outputs:
+  - name: cropRatio
+    type: number
+C_PhotoSharing.GetPhotoSharingAuthURL:
+  inputs:
+  outputs:
+  - name: authUrl
+    type: string
+C_PhotoSharing.GetStatus:
+  inputs:
+  outputs:
+  - name: status
+    type:
+      enum: PhotoSharingStatus
+C_PhotoSharing.IsAuthorized:
+  inputs:
+  outputs:
+  - name: authorized
+    type: boolean
+C_PhotoSharing.IsEnabled:
+  inputs:
+  outputs:
+  - name: enabled
+    type: boolean
+C_PhotoSharing.SetScreenshotPreviewTexture:
+  inputs:
+  - name: textureObject
+    type:
+      uiobject: Texture
+  outputs:
+C_PhotoSharing.TakePhoto:
+  inputs:
+  outputs:
+C_PhotoSharing.UploadPhotoToService:
+  inputs:
+  - default: ''
+    name: optionalTitle
+    type: string
+  - default: ''
+    name: optionalDescription
+    type: string
+  outputs:
 C_Ping.IsPingSystemEnabled:
   inputs:
   outputs:
@@ -11933,6 +14130,11 @@ C_PlayerInfo.IsMirrorImage:
   outputs:
   - name: isMirrorImage
     type: boolean
+C_PlayerInfo.IsPlayerInRPE:
+  inputs:
+  outputs:
+  - name: isInRPE
+    type: boolean
 C_PlayerInfo.IsPlayerNPERestricted:
   inputs:
   outputs:
@@ -12015,11 +14217,24 @@ C_ProductChoice.GetNumSuppressed:
   - type: number
 C_ProductChoice.GetProducts:
 C_ProductChoice.MakeSelection:
+C_PvP.CanSurrenderArena:
+  inputs:
+  outputs:
+  - name: CanSurrenderArena
+    type: boolean
 C_PvP.ClearLocklistMap:
   inputs:
   - name: mapID
     type: number
   outputs:
+C_PvP.GetArenaCrowdControlDuration:
+  inputs:
+  - name: playerToken
+    type: unit
+  outputs:
+  - name: duration
+    type:
+      luaobject: LuaDurationObject
 C_PvP.GetArenaCrowdControlInfo:
   inputs:
   - name: playerToken
@@ -12248,6 +14463,16 @@ C_PvP.GetZonePVPInfo:
   - name: factionName
     nilable: true
     type: string
+C_PvP.IsBrawlSoloRBG:
+  inputs:
+  outputs:
+  - name: isBrawlSoloRBG
+    type: boolean
+C_PvP.IsBrawlSoloShuffle:
+  inputs:
+  outputs:
+  - name: isBrawlSoloShuffle
+    type: boolean
 C_PvP.IsInBrawl:
   inputs:
   outputs:
@@ -12263,10 +14488,35 @@ C_PvP.IsRatedMap:
   outputs:
   - name: isRatedMap
     type: boolean
+C_PvP.IsRatedSoloRBG:
+  inputs:
+  outputs:
+  - name: isRatedSoloRBG
+    type: boolean
+C_PvP.IsRatedSoloShuffle:
+  inputs:
+  outputs:
+  - name: isRatedSoloShuffle
+    type: boolean
+C_PvP.IsSoloRBG:
+  inputs:
+  outputs:
+  - name: isSoloRBG
+    type: boolean
+C_PvP.IsSoloShuffle:
+  inputs:
+  outputs:
+  - name: isSoloShuffle
+    type: boolean
 C_PvP.IsSubZonePVPPOI:
   inputs:
   outputs:
   - name: result
+    type: boolean
+C_PvP.IsWarModeDesired:
+  inputs:
+  outputs:
+  - name: warModeDesired
     type: boolean
 C_PvP.JoinBattlefield:
   inputs:
@@ -12401,6 +14651,14 @@ C_QuestChoice.SendQuestChoiceResponse:
   - name: responseID
     type: number
   outputs:
+C_QuestInfoSystem.GetQuestHasShortExpirationWarning:
+  inputs:
+  - name: questID
+    nilable: true
+    type: number
+  outputs:
+  - name: hasShortExpirationWarning
+    type: boolean
 C_QuestInfoSystem.GetQuestRewardSpellInfo:
   inputs:
   - name: questID
@@ -12996,6 +15254,8 @@ C_Reputation.GetFactionParagonInfo:
     type: boolean
   - name: tooLowLevelForParagon
     type: boolean
+  - name: paragonStorageLevel
+    type: number
 C_Reputation.GetGuildFactionData:
   inputs:
   outputs:
@@ -13022,7 +15282,14 @@ C_Reputation.IsFactionParagon:
   - name: factionID
     type: number
   outputs:
-  - name: hasParagon
+  - name: factionIsParagon
+    type: boolean
+C_Reputation.IsFactionParagonForCurrentPlayer:
+  inputs:
+  - name: factionID
+    type: number
+  outputs:
+  - name: currentPlayerHasParagon
     type: boolean
 C_Reputation.IsMajorFaction:
   inputs:
@@ -13045,6 +15312,34 @@ C_ResearchInfo.GetDigSitesForMap:
     type:
       arrayof:
         structure: C_ResearchInfo.DigSiteMapInfo
+C_RestrictedActions.CheckAllowProtectedFunctions:
+  inputs:
+  - name: object
+    type:
+      uiobject: UIObject
+  - default: false
+    name: silent
+    type: boolean
+  outputs:
+  - name: protectedFunctionsAllowed
+    type: boolean
+C_RestrictedActions.GetAddOnRestrictionState:
+  inputs:
+  - name: type
+    type:
+      enum: AddOnRestrictionType
+  outputs:
+  - name: state
+    type:
+      enum: AddOnRestrictionState
+C_RestrictedActions.IsAddOnRestrictionActive:
+  inputs:
+  - name: type
+    type:
+      enum: AddOnRestrictionType
+  outputs:
+  - name: active
+    type: boolean
 C_ScenarioInfo.GetCriteriaInfo:
   inputs:
   - name: criteriaIndex
@@ -13065,6 +15360,13 @@ C_ScenarioInfo.GetCriteriaInfoByStep:
   - name: scenarioCriteriaInfo
     type:
       structure: C_ScenarioInfo.ScenarioCriteriaInfo
+C_ScenarioInfo.GetDisplayInfo:
+  inputs:
+  mayreturnnothing: true
+  outputs:
+  - name: info
+    type:
+      structure: C_ScenarioInfo.ScenarioDisplayInfo
 C_ScenarioInfo.GetJailersTowerTypeString:
   inputs:
   - name: runType
@@ -13074,6 +15376,16 @@ C_ScenarioInfo.GetJailersTowerTypeString:
   - name: typeString
     nilable: true
     type: string
+C_ScenarioInfo.GetScenarioIconInfo:
+  inputs:
+  - name: uiMapID
+    type: number
+  mayreturnnothing: true
+  outputs:
+  - name: scenarioInfos
+    type:
+      arrayof:
+        structure: C_ScenarioInfo.ScenarioIconInfo
 C_ScenarioInfo.GetScenarioInfo:
   inputs:
   mayreturnnothing: true
@@ -13091,6 +15403,30 @@ C_ScenarioInfo.GetScenarioStepInfo:
   - name: scenarioStepInfo
     type:
       structure: C_ScenarioInfo.ScenarioStepInfo
+C_ScenarioInfo.GetTieredEntranceActiveSpells:
+  inputs:
+  outputs:
+  - name: spellIDs
+    nilable: true
+    type:
+      arrayof: number
+C_ScenarioInfo.GetUnitCriteriaProgressValues:
+  inputs:
+  - name: unit
+    type: unit
+  mayreturnnothing: true
+  outputs:
+  - name: actualValue
+    type: number
+  - name: percentValue
+    type: number
+  - name: percentValueString
+    type: string
+C_ScenarioInfo.IsTieredEntranceScenario:
+  inputs:
+  outputs:
+  - name: isTieredEntrance
+    type: boolean
 C_ScriptedAnimations.GetAllScriptedAnimationEffects:
   impl: C_ScriptedAnimations.GetAllScriptedAnimationEffects
   inputs:
@@ -13110,7 +15446,217 @@ C_Seasons.HasActiveSeason:
   outputs:
   - name: value
     type: boolean
+C_Secrets.CanCompareUnitTokens:
+  inputs:
+  - name: unit1
+    type: unit
+  - name: unit2
+    type: unit
+  outputs:
+  - name: isUnitComparisonPermitted
+    type: boolean
+C_Secrets.GetPowerTypeSecrecy:
+  inputs:
+  - name: powerType
+    type:
+      enum: PowerType
+  outputs:
+  - name: secrecy
+    type:
+      enum: SecrecyLevel
+C_Secrets.GetSpellAuraSecrecy:
+  inputs:
+  - name: spellIdentifier
+    type: string
+  outputs:
+  - name: secrecy
+    type:
+      enum: SecrecyLevel
+C_Secrets.GetSpellCastSecrecy:
+  inputs:
+  - name: spellIdentifier
+    type: string
+  outputs:
+  - name: secrecy
+    type:
+      enum: SecrecyLevel
+C_Secrets.GetSpellCooldownSecrecy:
+  inputs:
+  - name: spellIdentifier
+    type: string
+  outputs:
+  - name: secrecy
+    type:
+      enum: SecrecyLevel
+C_Secrets.HasSecretRestrictions:
+  inputs:
+  outputs:
+  - name: hasSecretRestrictions
+    type: boolean
+C_Secrets.ShouldActionCooldownBeSecret:
+  inputs:
+  - name: actionID
+    type: number
+  outputs:
+  - name: isCooldownSecret
+    type: boolean
+C_Secrets.ShouldAurasBeSecret:
+  inputs:
+  outputs:
+  - name: hasSecretAuras
+    type: boolean
+C_Secrets.ShouldCooldownsBeSecret:
+  inputs:
+  outputs:
+  - name: hasSecretCooldowns
+    type: boolean
+C_Secrets.ShouldSpellAuraBeSecret:
+  inputs:
+  - name: spellIdentifier
+    type: string
+  outputs:
+  - name: isAuraSecret
+    type: boolean
+C_Secrets.ShouldSpellCooldownBeSecret:
+  inputs:
+  - name: spellIdentifier
+    type: string
+  outputs:
+  - name: isCooldownSecret
+    type: boolean
+C_Secrets.ShouldTotemSlotBeSecret:
+  inputs:
+  - name: slot
+    type: number
+  outputs:
+  - name: isTotemSecret
+    type: boolean
+C_Secrets.ShouldTotemSpellBeSecret:
+  inputs:
+  - name: spellID
+    type: number
+  outputs:
+  - name: isTotemSecret
+    type: boolean
+C_Secrets.ShouldUnitAuraIndexBeSecret:
+  inputs:
+  - name: unit
+    type: unit
+  - name: index
+    type: number
+  - name: filter
+    nilable: true
+    type: string
+  outputs:
+  - name: isAuraSecret
+    type: boolean
+C_Secrets.ShouldUnitAuraInstanceBeSecret:
+  inputs:
+  - name: unit
+    type: unit
+  - name: auraInstanceID
+    type: number
+  outputs:
+  - name: isAuraSecret
+    type: boolean
+C_Secrets.ShouldUnitAuraSlotBeSecret:
+  inputs:
+  - name: unit
+    type: unit
+  - name: slot
+    type: number
+  outputs:
+  - name: isAuraSecret
+    type: boolean
+C_Secrets.ShouldUnitComparisonBeSecret:
+  inputs:
+  - name: unit1
+    type: unit
+  - name: unit2
+    type: unit
+  outputs:
+  - name: isUnitComparisonSecret
+    type: boolean
+C_Secrets.ShouldUnitHealthMaxBeSecret:
+  inputs:
+  - name: unit
+    type: unit
+  outputs:
+  - name: isUnitHealthMaxSecret
+    type: boolean
+C_Secrets.ShouldUnitIdentityBeSecret:
+  inputs:
+  - name: unit
+    type: unit
+  outputs:
+  - name: isUnitIdentitySecret
+    type: boolean
+C_Secrets.ShouldUnitPowerBeSecret:
+  inputs:
+  - name: unit
+    type: unit
+  - name: powerType
+    nilable: true
+    type:
+      enum: PowerType
+  outputs:
+  - name: isUnitPowerSecret
+    type: boolean
+C_Secrets.ShouldUnitPowerMaxBeSecret:
+  inputs:
+  - name: unit
+    type: unit
+  - name: powerType
+    nilable: true
+    type:
+      enum: PowerType
+  outputs:
+  - name: isUnitPowerMaxSecret
+    type: boolean
+C_Secrets.ShouldUnitSpellCastBeSecret:
+  inputs:
+  - name: unit
+    type: unit
+  - name: spellIdentifier
+    type: string
+  outputs:
+  - name: isSpellCastSecret
+    type: boolean
+C_Secrets.ShouldUnitSpellCastingBeSecret:
+  inputs:
+  - name: unit
+    type: unit
+  outputs:
+  - name: isSpellCastingSecret
+    type: boolean
+C_Secrets.ShouldUnitStatsBeSecret:
+  inputs:
+  outputs:
+  - name: hasSecretStats
+    type: boolean
+C_Secrets.ShouldUnitThreatStateBeSecret:
+  inputs:
+  - name: unit
+    type: unit
+  - name: mobUnit
+    nilable: true
+    type: unit
+  outputs:
+  - name: isUnitThreatSecret
+    type: boolean
+C_Secrets.ShouldUnitThreatValuesBeSecret:
+  inputs:
+  - name: unit
+    type: unit
+  - name: mobUnit
+    type: unit
+  outputs:
+  - name: isUnitThreatSecret
+    type: boolean
 C_SecureTransfer.AcceptTrade:
+  inputs:
+  outputs:
+C_SecureTransfer.Cancel:
   inputs:
   outputs:
 C_SecureTransfer.GetMailInfo:
@@ -13133,6 +15679,18 @@ C_SecureTransfer.ShouldShowTradeOfferWarning:
   outputs:
   - name: shouldShow
     type: boolean
+C_SettingsUtil.NotifySettingsLoaded:
+  inputs:
+  outputs:
+C_SettingsUtil.OpenSettingsPanel:
+  inputs:
+  - name: openToCategoryID
+    nilable: true
+    type: number
+  - name: scrollToElementName
+    nilable: true
+    type: string
+  outputs:
 C_SharedCharacterServices.GetLastSeenCharacterUpgradePopup:
 C_SharedCharacterServices.GetLastSeenExpansionTrialPopup:
 C_SharedCharacterServices.GetUpgradeDistributions:
@@ -13207,6 +15765,28 @@ C_Sound.PlayItemSound:
     type:
       structure: ItemLocation
   outputs:
+C_Sound.PlaySound:
+  inputs:
+  - name: soundKitID
+    type: number
+  - default: g_defaultSI3UISoundSubTypeForLua
+    name: uiSoundSubType
+    type: string
+  - default: false
+    name: forceNoDuplicates
+    type: boolean
+  - default: false
+    name: runFinishCallback
+    type: boolean
+  - name: overridePriority
+    nilable: true
+    type: number
+  mayreturnnothing: true
+  outputs:
+  - name: success
+    type: boolean
+  - name: soundHandle
+    type: string
 C_Sound.PlayVocalErrorSound:
   inputs:
   - name: vocalErrorSoundID
@@ -13279,6 +15859,9 @@ C_SpecializationInfo.GetSpecializationInfo:
     nilable: true
     type: number
   - name: groupIndex
+    nilable: true
+    type: number
+  - name: classID
     nilable: true
     type: number
   outputs:
@@ -13382,6 +15965,15 @@ C_Spell.GetSpellCastCount:
   outputs:
   - name: castCount
     type: number
+C_Spell.GetSpellChargeDuration:
+  inputs:
+  - name: spellIdentifier
+    type: string
+  mayreturnnothing: true
+  outputs:
+  - name: duration
+    type:
+      luaobject: LuaDurationObject
 C_Spell.GetSpellCharges:
   inputs:
   - name: spellIdentifier
@@ -13400,6 +15992,18 @@ C_Spell.GetSpellCooldown:
   - name: spellCooldownInfo
     type:
       structure: SpellCooldownInfo
+C_Spell.GetSpellCooldownDuration:
+  inputs:
+  - name: spellIdentifier
+    type: string
+  - default: false
+    name: ignoreGCD
+    type: boolean
+  mayreturnnothing: true
+  outputs:
+  - name: duration
+    type:
+      luaobject: LuaDurationObject
 C_Spell.GetSpellDescription:
   inputs:
   - name: spellIdentifier
@@ -13407,6 +16011,19 @@ C_Spell.GetSpellDescription:
   mayreturnnothing: true
   outputs:
   - name: description
+    type: string
+C_Spell.GetSpellDisplayCount:
+  inputs:
+  - name: spellIdentifier
+    type: string
+  - default: 9999
+    name: maxDisplayCount
+    type: number
+  - default: '*'
+    name: replacementString
+    type: string
+  outputs:
+  - name: displayCount
     type: string
 C_Spell.GetSpellIDForSpellIdentifier:
   inputs:
@@ -13443,6 +16060,31 @@ C_Spell.GetSpellLink:
   outputs:
   - name: spellLink
     type: string
+C_Spell.GetSpellLossOfControlCooldownDuration:
+  inputs:
+  - name: spellIdentifier
+    type: string
+  mayreturnnothing: true
+  outputs:
+  - name: duration
+    type:
+      luaobject: LuaDurationObject
+C_Spell.GetSpellLossOfControlCooldownInfo:
+  inputs:
+  - name: spellIdentifier
+    type: string
+  mayreturnnothing: true
+  outputs:
+  - name: lossOfControlInfo
+    type:
+      structure: SpellLossOfControlInfo
+C_Spell.GetSpellMaxCumulativeAuraApplications:
+  inputs:
+  - name: spellID
+    type: string
+  outputs:
+  - name: cumulativeAura
+    type: number
 C_Spell.GetSpellName:
   inputs:
   - name: spellIdentifier
@@ -13492,6 +16134,21 @@ C_Spell.GetSpellTexture:
     type: number
   - name: originalIconID
     type: number
+C_Spell.GetVisibilityInfo:
+  inputs:
+  - name: spellID
+    type: number
+  - name: visibilityType
+    type:
+      enum: SpellAuraVisibilityType
+  mayreturnnothing: true
+  outputs:
+  - name: hasCustom
+    type: boolean
+  - name: alwaysShowMine
+    type: boolean
+  - name: showForMySpec
+    type: boolean
 C_Spell.IsAutoAttackSpell:
   inputs:
   - name: spellIdentifier
@@ -13506,12 +16163,26 @@ C_Spell.IsAutoRepeatSpell:
   outputs:
   - name: isAutoRepeat
     type: boolean
+C_Spell.IsConsumableSpell:
+  inputs:
+  - name: spellIdentifier
+    type: string
+  outputs:
+  - name: consumable
+    type: boolean
 C_Spell.IsCurrentSpell:
   inputs:
   - name: spellIdentifier
     type: string
   outputs:
   - name: isCurrentSpell
+    type: boolean
+C_Spell.IsExternalDefensive:
+  inputs:
+  - name: spellID
+    type: number
+  outputs:
+  - name: isExternalDefensive
     type: boolean
 C_Spell.IsPressHoldReleaseSpell:
   inputs:
@@ -13520,12 +16191,33 @@ C_Spell.IsPressHoldReleaseSpell:
   outputs:
   - name: isPressHoldRelease
     type: boolean
+C_Spell.IsPriorityAura:
+  inputs:
+  - name: spellID
+    type: number
+  outputs:
+  - name: isHighPriority
+    type: boolean
 C_Spell.IsRangedAutoAttackSpell:
   inputs:
   - name: spellIdentifier
     type: string
   outputs:
   - name: isRangedAutoAttack
+    type: boolean
+C_Spell.IsSelfBuff:
+  inputs:
+  - name: spellID
+    type: number
+  outputs:
+  - name: hasSelfEffectsOnly
+    type: boolean
+C_Spell.IsSpellCrowdControl:
+  inputs:
+  - name: spellIdentifier
+    type: string
+  outputs:
+  - name: isCrowdControl
     type: boolean
 C_Spell.IsSpellDataCached:
   inputs:
@@ -13547,6 +16239,13 @@ C_Spell.IsSpellHelpful:
     type: string
   outputs:
   - name: isHelpful
+    type: boolean
+C_Spell.IsSpellImportant:
+  inputs:
+  - name: spellIdentifier
+    type: string
+  outputs:
+  - name: isImportant
     type: boolean
 C_Spell.IsSpellInRange:
   inputs:
@@ -13592,13 +16291,6 @@ C_Spell.SpellHasRange:
   outputs:
   - name: hasRange
     type: boolean
-C_Spell.SpellIsPriorityAura:
-  inputs:
-  - name: spellID
-    type: number
-  outputs:
-  - name: isPriorityAura
-    type: boolean
 C_Spell.TargetSpellIsEnchanting:
   inputs:
   outputs:
@@ -13621,6 +16313,29 @@ C_SpellActivationOverlay.IsSpellOverlayed:
   outputs:
   - name: isSpellOverlayed
     type: boolean
+C_SpellBook.FindBaseSpellByID:
+  inputs:
+  - name: spellID
+    type: number
+  outputs:
+  - name: baseSpellID
+    nilable: true
+    type: number
+C_SpellBook.FindFlyoutSlotBySpellID:
+  inputs:
+  - name: spellID
+    type: number
+  outputs:
+  - name: flyoutSlot
+    type: number
+C_SpellBook.FindSpellOverrideByID:
+  inputs:
+  - name: spellID
+    type: number
+  outputs:
+  - name: overrideSpellID
+    nilable: true
+    type: number
 C_SpellBook.HasPetSpells:
   inputs:
   mayreturnnothing: true
@@ -13668,6 +16383,43 @@ C_SpellBook.IsSpellKnownOrInSpellBook:
   outputs:
   - name: isKnownOrInSpellBook
     type: boolean
+C_SpellDiminish.GetAllSpellDiminishCategories:
+  inputs:
+  - name: ruleset
+    nilable: true
+    type:
+      enum: SpellDiminishRuleset
+  outputs:
+  - name: categories
+    type:
+      arrayof:
+        structure: C_SpellDiminish.SpellDiminishCategoryInfo
+C_SpellDiminish.GetSpellDiminishCategoryInfo:
+  inputs:
+  - name: category
+    type:
+      enum: SpellDiminishCategory
+  outputs:
+  - name: categoryInfo
+    nilable: true
+    type:
+      structure: C_SpellDiminish.SpellDiminishCategoryInfo
+C_SpellDiminish.IsSystemSupported:
+  inputs:
+  outputs:
+  - name: isSystemSupported
+    type: boolean
+C_SpellDiminish.ShouldTrackSpellDiminishCategory:
+  inputs:
+  - name: category
+    type:
+      enum: SpellDiminishCategory
+  - name: ruleset
+    type:
+      enum: SpellDiminishRuleset
+  outputs:
+  - name: isTracked
+    type: boolean
 C_StableInfo.GetNumActivePets:
   inputs:
   outputs:
@@ -13697,11 +16449,6 @@ C_StorePublic.HasPurchaseableProducts:
   inputs:
   outputs:
   - name: hasPurchaseableProducts
-    type: boolean
-C_StorePublic.IsDisabledByParentalControls:
-  inputs:
-  outputs:
-  - name: disabled
     type: boolean
 C_StorePublic.IsEnabled:
   inputs:
@@ -13755,6 +16502,134 @@ C_StoreSecure.RequestPriceInfo:
 C_StoreSecure.SetDisconnectOnLogout:
 C_StoreSecure.SetVASProductReady:
 C_StoreSecure.ValidateBnetTransfer:
+C_StringUtil.CreateAbbreviatedNumberFormatter:
+  inputs:
+  outputs:
+  - name: formatter
+    type:
+      luaobject: AbbreviatedNumberFormatter
+C_StringUtil.CreateNumericRuleFormatter:
+  inputs:
+  outputs:
+  - name: formatter
+    type:
+      luaobject: NumericRuleFormatter
+C_StringUtil.CreateSecondsFormatter:
+  inputs:
+  outputs:
+  - name: formatter
+    type:
+      luaobject: SecondsFormatter
+C_StringUtil.EscapeDecimalNonPrintables:
+  inputs:
+  - name: text
+    type: string
+  outputs:
+  - name: escapedText
+    type: string
+C_StringUtil.EscapeLuaFormatString:
+  inputs:
+  - name: text
+    type: string
+  outputs:
+  - name: escapedText
+    type: string
+C_StringUtil.EscapeLuaPatterns:
+  inputs:
+  - name: text
+    type: string
+  outputs:
+  - name: escapedText
+    type: string
+C_StringUtil.EscapeQuotedCodes:
+  inputs:
+  - name: text
+    type: string
+  outputs:
+  - name: escaped
+    type: string
+C_StringUtil.FloorToNearestString:
+  inputs:
+  - name: number
+    type: number
+  outputs:
+  - name: text
+    type: string
+C_StringUtil.GetDefaultAbbreviationBreakpoints:
+  inputs:
+  - name: locale
+    nilable: true
+    type: string
+  outputs:
+  - name: breakpoints
+    type:
+      arrayof:
+        structure: NumberAbbreviationBreakpoint
+C_StringUtil.RemoveContiguousSpaces:
+  inputs:
+  - name: text
+    type: string
+  - name: maxAllowedSpaces
+    type: number
+  outputs:
+  - name: trimmedText
+    type: string
+C_StringUtil.RoundToNearestString:
+  inputs:
+  - name: number
+    type: number
+  outputs:
+  - name: text
+    type: string
+C_StringUtil.StripHyperlinks:
+  inputs:
+  - name: text
+    type: string
+  - default: false
+    name: maintainColor
+    type: boolean
+  - default: false
+    name: maintainBrackets
+    type: boolean
+  - default: false
+    name: stripNewlines
+    type: boolean
+  - default: false
+    name: maintainAtlases
+    type: boolean
+  - default: false
+    name: maintainTextures
+    type: boolean
+  outputs:
+  - name: stripped
+    type: string
+C_StringUtil.StripTextureMarkupForLooseFiles:
+  inputs:
+  - name: text
+    type: string
+  outputs:
+  - name: stripped
+    type: string
+C_StringUtil.TruncateWhenZero:
+  inputs:
+  - name: number
+    type: number
+  outputs:
+  - name: text
+    type: string
+C_StringUtil.WrapString:
+  inputs:
+  - name: infix
+    type: string
+  - name: prefix
+    nilable: true
+    type: string
+  - name: suffix
+    nilable: true
+    type: string
+  outputs:
+  - name: text
+    type: string
 C_SummonInfo.CancelSummon:
   inputs:
   outputs:
@@ -13804,6 +16679,16 @@ C_SystemVisibilityManager.IsSystemVisible:
   outputs:
   - name: visible
     type: boolean
+C_TableUtil.FindIndexedMismatch:
+  inputs:
+  - name: t1
+    type: unknown
+  - name: t2
+    type: unknown
+  outputs:
+  - name: index
+    nilable: true
+    type: number
 C_TaskQuest.DoesMapShowTaskQuestObjectives:
   inputs:
   - name: uiMapID
@@ -14073,6 +16958,15 @@ C_TradeInfo.ShouldShowTradeOfferWarning:
   outputs:
   - name: shouldShow
     type: boolean
+C_TradeSkillUI.GetItemReagentQualityInfo:
+  inputs:
+  - name: itemID
+    type: number
+  outputs:
+  - name: info
+    nilable: true
+    type:
+      structure: CraftingQualityInfo
 C_TradeSkillUI.GetTradeSkillDisplayName:
   inputs:
   - name: skillLineID
@@ -14542,14 +17436,6 @@ C_Traits.TryRefundToNode:
   outputs:
   - name: success
     type: boolean
-C_Transmog.ApplyAllPending:
-  inputs:
-  - default: false
-    name: currentSpecOnly
-    type: boolean
-  outputs:
-  - name: requestSent
-    type: boolean
 C_Transmog.CanHaveSecondaryAppearanceForSlotID:
   inputs:
   - name: slotID
@@ -14557,45 +17443,6 @@ C_Transmog.CanHaveSecondaryAppearanceForSlotID:
   outputs:
   - name: canHaveSecondaryAppearance
     type: boolean
-C_Transmog.CanTransmogItem:
-  inputs:
-  - name: itemInfo
-    type: string
-  outputs:
-  - name: canBeTransmogged
-    type: boolean
-  - name: selfFailureReason
-    nilable: true
-    type: string
-  - name: canTransmogOthers
-    type: boolean
-  - name: othersFailureReason
-    nilable: true
-    type: string
-C_Transmog.CanTransmogItemWithItem:
-  inputs:
-  - name: targetItemInfo
-    type: string
-  - name: sourceItemInfo
-    type: string
-  outputs:
-  - name: canTransmog
-    type: boolean
-  - name: failureReason
-    nilable: true
-    type: string
-C_Transmog.ClearAllPending:
-  inputs:
-  outputs:
-C_Transmog.ClearPending:
-  inputs:
-  - name: transmogLocation
-    type:
-      structure: TransmogLocation
-  outputs:
-C_Transmog.Close:
-  inputs:
-  outputs:
 C_Transmog.ExtractTransmogIDList:
   inputs:
   - name: input
@@ -14604,28 +17451,6 @@ C_Transmog.ExtractTransmogIDList:
   - name: transmogIDList
     type:
       arrayof: number
-C_Transmog.GetApplyCost:
-  inputs:
-  outputs:
-  - name: cost
-    nilable: true
-    type: number
-C_Transmog.GetApplyWarnings:
-  inputs:
-  outputs:
-  - name: warnings
-    type:
-      arrayof:
-        structure: C_Transmog.TransmogApplyWarningInfo
-C_Transmog.GetBaseCategory:
-  inputs:
-  - name: transmogID
-    type: number
-  mayreturnnothing: true
-  outputs:
-  - name: categoryID
-    type:
-      enum: TransmogCollectionType
 C_Transmog.GetItemIDForSource:
   inputs:
   - name: itemModifiedAppearanceID
@@ -14634,25 +17459,6 @@ C_Transmog.GetItemIDForSource:
   - name: itemID
     nilable: true
     type: number
-C_Transmog.GetPending:
-  inputs:
-  - name: transmogLocation
-    type:
-      structure: TransmogLocation
-  mayreturnnothing: true
-  outputs:
-  - name: pendingInfo
-    type:
-      structure: TransmogPendingInfo
-C_Transmog.GetSlotEffectiveCategory:
-  inputs:
-  - name: transmogLocation
-    type:
-      structure: TransmogLocation
-  outputs:
-  - name: categoryID
-    type:
-      enum: TransmogCollectionType
 C_Transmog.GetSlotForInventoryType:
   inputs:
   - name: inventoryType
@@ -14661,41 +17467,6 @@ C_Transmog.GetSlotForInventoryType:
   outputs:
   - name: slot
     type: number
-C_Transmog.GetSlotInfo:
-  inputs:
-  - name: transmogLocation
-    type:
-      structure: TransmogLocation
-  mayreturnnothing: true
-  outputs:
-  - name: isTransmogrified
-    type: boolean
-  - name: hasPending
-    type: boolean
-  - name: isPendingCollected
-    type: boolean
-  - name: canTransmogrify
-    type: boolean
-  - name: cannotTransmogrifyReason
-    type: number
-  - name: hasUndo
-    type: boolean
-  - name: isHideVisual
-    type: boolean
-  - name: texture
-    nilable: true
-    type: number
-C_Transmog.GetSlotUseError:
-  inputs:
-  - name: transmogLocation
-    type:
-      structure: TransmogLocation
-  mayreturnnothing: true
-  outputs:
-  - name: errorCode
-    type: number
-  - name: errorString
-    type: string
 C_Transmog.GetSlotVisualInfo:
   inputs:
   - name: transmogLocation
@@ -14703,56 +17474,14 @@ C_Transmog.GetSlotVisualInfo:
       structure: TransmogLocation
   mayreturnnothing: true
   outputs:
-  - name: baseSourceID
-    type: number
-  - name: baseVisualID
-    type: number
-  - name: appliedSourceID
-    type: number
-  - name: appliedVisualID
-    type: number
-  - name: pendingSourceID
-    type: number
-  - name: pendingVisualID
-    type: number
-  - name: hasUndo
-    type: boolean
-  - name: isHideVisual
-    type: boolean
-  - name: itemSubclass
-    type: number
+  - name: slotVisualInfo
+    type:
+      structure: C_Transmog.TransmogSlotVisualInfo
 C_Transmog.IsAtTransmogNPC:
   inputs:
   outputs:
   - name: isAtNPC
     type: boolean
-C_Transmog.IsSlotBeingCollapsed:
-  inputs:
-  - name: transmogLocation
-    type:
-      structure: TransmogLocation
-  outputs:
-  - name: isBeingCollapsed
-    type: boolean
-C_Transmog.IsTransmogEnabled:
-  inputs:
-  outputs:
-  - name: isTransmogEnabled
-    type: boolean
-C_Transmog.LoadOutfit:
-  inputs:
-  - name: outfitID
-    type: number
-  outputs:
-C_Transmog.SetPending:
-  inputs:
-  - name: transmogLocation
-    type:
-      structure: TransmogLocation
-  - name: pendingInfo
-    type:
-      structure: TransmogPendingInfo
-  outputs:
 C_TransmogCollection.AccountCanCollectSource:
   inputs:
   - name: sourceID
@@ -14772,6 +17501,13 @@ C_TransmogCollection.AreAllSourceTypeFiltersChecked:
   outputs:
   - name: areAllSourceTypeFiltersChecked
     type: boolean
+C_TransmogCollection.CanAppearanceHaveIllusion:
+  inputs:
+  - name: appearanceID
+    type: number
+  outputs:
+  - name: canHaveIllusion
+    type: boolean
 C_TransmogCollection.ClearNewAppearance:
   inputs:
   - name: visualID
@@ -14785,9 +17521,9 @@ C_TransmogCollection.ClearSearch:
   outputs:
   - name: completed
     type: boolean
-C_TransmogCollection.DeleteOutfit:
+C_TransmogCollection.DeleteCustomSet:
   inputs:
-  - name: outfitID
+  - name: customSetID
     type: number
   outputs:
 C_TransmogCollection.EndSearch:
@@ -14801,6 +17537,16 @@ C_TransmogCollection.GetAllAppearanceSources:
   - name: itemModifiedAppearanceIDs
     type:
       arrayof: number
+C_TransmogCollection.GetAllFactionsShown:
+  inputs:
+  outputs:
+  - name: shown
+    type: boolean
+C_TransmogCollection.GetAllRacesShown:
+  inputs:
+  outputs:
+  - name: shown
+    type: boolean
 C_TransmogCollection.GetAppearanceCameraID:
   inputs:
   - name: itemAppearanceID
@@ -14848,26 +17594,9 @@ C_TransmogCollection.GetAppearanceSourceInfo:
     type: number
   mayreturnnothing: true
   outputs:
-  - name: category
+  - name: info
     type:
-      enum: TransmogCollectionType
-  - name: itemAppearanceID
-    type: number
-  - name: canHaveIllusion
-    type: boolean
-  - name: icon
-    type: number
-  - name: isCollected
-    type: boolean
-  - name: itemLink
-    type: string
-  - name: transmoglink
-    type: string
-  - name: sourceType
-    nilable: true
-    type: number
-  - name: itemSubClass
-    type: number
+      structure: C_TransmogCollection.TransmogAppearanceSourceInfoData
 C_TransmogCollection.GetAppearanceSources:
   inputs:
   - name: appearanceID
@@ -14886,6 +17615,16 @@ C_TransmogCollection.GetAppearanceSources:
     type:
       arrayof:
         structure: AppearanceSourceInfo
+C_TransmogCollection.GetArtifactAppearanceStrings:
+  inputs:
+  - name: appearanceID
+    type: number
+  mayreturnnothing: true
+  outputs:
+  - name: name
+    type: string
+  - name: hyperlink
+    type: string
 C_TransmogCollection.GetCategoryAppearances:
   inputs:
   - name: category
@@ -14950,11 +17689,115 @@ C_TransmogCollection.GetCategoryTotal:
   outputs:
   - name: total
     type: number
+C_TransmogCollection.GetClassFilter:
+  inputs:
+  outputs:
+  - name: classID
+    type: number
 C_TransmogCollection.GetCollectedShown:
   inputs:
   outputs:
   - name: shown
     type: boolean
+C_TransmogCollection.GetCustomSetHyperlinkFromItemTransmogInfoList:
+  inputs:
+  - name: itemTransmogInfoList
+    type:
+      arrayof:
+        structure: ItemTransmogInfo
+  mayreturnnothing: true
+  outputs:
+  - name: hyperlink
+    type: string
+C_TransmogCollection.GetCustomSetInfo:
+  inputs:
+  - name: customSetID
+    type: number
+  mayreturnnothing: true
+  outputs:
+  - name: name
+    type: string
+  - name: icon
+    type: number
+C_TransmogCollection.GetCustomSetItemTransmogInfoList:
+  inputs:
+  - name: customSetID
+    type: number
+  mayreturnnothing: true
+  outputs:
+  - name: list
+    type:
+      arrayof:
+        structure: ItemTransmogInfo
+C_TransmogCollection.GetCustomSets:
+  inputs:
+  outputs:
+  - name: customSetID
+    type:
+      arrayof: number
+C_TransmogCollection.GetFallbackWeaponAppearance:
+  inputs:
+  outputs:
+  - name: appearanceID
+    nilable: true
+    type: number
+C_TransmogCollection.GetFilteredCategoryCollectedCount:
+  inputs:
+  - name: category
+    type:
+      enum: TransmogCollectionType
+  outputs:
+  - name: count
+    type: number
+C_TransmogCollection.GetFilteredCategoryTotal:
+  inputs:
+  - name: category
+    type:
+      enum: TransmogCollectionType
+  outputs:
+  - name: total
+    type: number
+C_TransmogCollection.GetIllusionInfo:
+  inputs:
+  - name: illusionID
+    type: number
+  mayreturnnothing: true
+  outputs:
+  - name: info
+    type:
+      structure: C_TransmogCollection.TransmogIllusionInfo
+C_TransmogCollection.GetIllusions:
+  inputs:
+  - name: category
+    nilable: true
+    type:
+      enum: TransmogCollectionType
+  outputs:
+  - name: illusions
+    type:
+      arrayof:
+        structure: C_TransmogCollection.TransmogIllusionInfo
+C_TransmogCollection.GetIllusionStrings:
+  inputs:
+  - name: illusionID
+    type: number
+  mayreturnnothing: true
+  outputs:
+  - name: name
+    type: string
+  - name: hyperlink
+    type: string
+  - name: sourceText
+    nilable: true
+    type: string
+C_TransmogCollection.GetInspectItemTransmogInfoList:
+  inputs:
+  mayreturnnothing: true
+  outputs:
+  - name: list
+    type:
+      arrayof:
+        structure: ItemTransmogInfo
 C_TransmogCollection.GetIsAppearanceFavorite:
   inputs:
   - name: itemAppearanceID
@@ -14972,7 +17815,7 @@ C_TransmogCollection.GetItemInfo:
     type: number
   - name: itemModifiedAppearanceID
     type: number
-C_TransmogCollection.GetItemTransmogInfoListFromOutfitHyperlink:
+C_TransmogCollection.GetItemTransmogInfoListFromCustomSetHyperlink:
   inputs:
   - name: hyperlink
     type: string
@@ -14992,42 +17835,16 @@ C_TransmogCollection.GetLatestAppearance:
     stub: 1
     type:
       enum: TransmogCollectionType
-C_TransmogCollection.GetNumMaxOutfits:
+C_TransmogCollection.GetNumMaxCustomSets:
   inputs:
   outputs:
-  - name: maxOutfits
+  - name: maxCustomSets
     type: number
 C_TransmogCollection.GetNumTransmogSources:
   inputs:
   outputs:
   - name: count
     type: number
-C_TransmogCollection.GetOutfitInfo:
-  inputs:
-  - name: outfitID
-    type: number
-  mayreturnnothing: true
-  outputs:
-  - name: name
-    type: string
-  - name: icon
-    type: number
-C_TransmogCollection.GetOutfitItemTransmogInfoList:
-  inputs:
-  - name: outfitID
-    type: number
-  mayreturnnothing: true
-  outputs:
-  - name: list
-    type:
-      arrayof:
-        structure: ItemTransmogInfo
-C_TransmogCollection.GetOutfits:
-  inputs:
-  outputs:
-  - name: outfitID
-    type:
-      arrayof: number
 C_TransmogCollection.GetPairedArtifactAppearance:
   inputs:
   - name: itemModifiedAppearanceID
@@ -15074,6 +17891,26 @@ C_TransmogCollection.GetUncollectedShown:
   outputs:
   - name: shown
     type: boolean
+C_TransmogCollection.GetValidAppearanceSourcesForClass:
+  inputs:
+  - name: appearanceID
+    type: number
+  - name: classID
+    type: number
+  - name: categoryType
+    nilable: true
+    type:
+      enum: TransmogCollectionType
+  - name: transmogLocation
+    nilable: true
+    type:
+      structure: TransmogLocation
+  mayreturnnothing: true
+  outputs:
+  - name: sources
+    type:
+      arrayof:
+        structure: AppearanceSourceInfo
 C_TransmogCollection.HasFavorites:
   inputs:
   outputs:
@@ -15123,21 +17960,43 @@ C_TransmogCollection.IsSourceTypeFilterChecked:
   outputs:
   - name: checked
     type: boolean
+C_TransmogCollection.IsSpellItemEnchantmentHiddenVisual:
+  inputs:
+  - name: spellItemEnchantmentID
+    type: number
+  outputs:
+  - name: isHiddenVisual
+    type: boolean
 C_TransmogCollection.IsUsingDefaultFilters:
   inputs:
   outputs:
   - name: isUsingDefaultFilters
     type: boolean
-C_TransmogCollection.ModifyOutfit:
+C_TransmogCollection.IsValidCustomSetName:
   inputs:
-  - name: outfitID
+  - name: name
+    type: string
+  outputs:
+  - name: isApproved
+    type: boolean
+C_TransmogCollection.IsValidTransmogSource:
+  inputs:
+  - name: source
+    type:
+      enum: TransmogSource
+  outputs:
+  - name: valid
+    type: boolean
+C_TransmogCollection.ModifyCustomSet:
+  inputs:
+  - name: customSetID
     type: number
   - name: itemTransmogInfoList
     type:
       arrayof:
         structure: ItemTransmogInfo
   outputs:
-C_TransmogCollection.NewOutfit:
+C_TransmogCollection.NewCustomSet:
   inputs:
   - name: name
     type: string
@@ -15148,7 +18007,7 @@ C_TransmogCollection.NewOutfit:
       arrayof:
         structure: ItemTransmogInfo
   outputs:
-  - name: outfitID
+  - name: customSetID
     nilable: true
     type: number
 C_TransmogCollection.PlayerCanCollectSource:
@@ -15170,6 +18029,13 @@ C_TransmogCollection.PlayerHasTransmog:
   outputs:
   - name: hasTransmog
     type: boolean
+C_TransmogCollection.PlayerHasTransmogByItemInfo:
+  inputs:
+  - name: itemInfo
+    type: string
+  outputs:
+  - name: hasTransmog
+    type: boolean
 C_TransmogCollection.PlayerHasTransmogItemModifiedAppearance:
   inputs:
   - name: itemModifiedAppearanceID
@@ -15184,9 +18050,9 @@ C_TransmogCollection.PlayerKnowsSource:
   outputs:
   - name: isKnown
     type: boolean
-C_TransmogCollection.RenameOutfit:
+C_TransmogCollection.RenameCustomSet:
   inputs:
-  - name: outfitID
+  - name: customSetID
     type: number
   - name: name
     type: string
@@ -15212,10 +18078,25 @@ C_TransmogCollection.SetAllCollectionTypeFilters:
   - name: checked
     type: boolean
   outputs:
+C_TransmogCollection.SetAllFactionsShown:
+  inputs:
+  - name: shown
+    type: boolean
+  outputs:
+C_TransmogCollection.SetAllRacesShown:
+  inputs:
+  - name: shown
+    type: boolean
+  outputs:
 C_TransmogCollection.SetAllSourceTypeFilters:
   inputs:
   - name: checked
     type: boolean
+  outputs:
+C_TransmogCollection.SetClassFilter:
+  inputs:
+  - name: classID
+    type: number
   outputs:
 C_TransmogCollection.SetCollectedShown:
   inputs:
@@ -15263,6 +18144,516 @@ C_TransmogCollection.SetUncollectedShown:
 C_TransmogCollection.UpdateUsableAppearances:
   inputs:
   outputs:
+C_TransmogOutfitInfo.AddNewOutfit:
+  inputs:
+  - name: name
+    type: string
+  - name: icon
+    type: number
+  outputs:
+C_TransmogOutfitInfo.ChangeDisplayedOutfit:
+  inputs:
+  - name: outfitID
+    type: number
+  - name: trigger
+    type:
+      enum: TransmogSituationTrigger
+  - name: toggleLock
+    type: boolean
+  - name: allowRemoveOutfit
+    type: boolean
+  outputs:
+C_TransmogOutfitInfo.ChangeToOutfit:
+  inputs:
+  - name: playerFacingOutfitIndex
+    type: number
+  - name: allowRemoveOutfit
+    type: boolean
+  outputs:
+C_TransmogOutfitInfo.ChangeViewedOutfit:
+  inputs:
+  - name: outfitID
+    type: number
+  outputs:
+C_TransmogOutfitInfo.ClearAllPendingSituations:
+  inputs:
+  outputs:
+C_TransmogOutfitInfo.ClearAllPendingTransmogs:
+  inputs:
+  outputs:
+C_TransmogOutfitInfo.ClearDisplayedOutfit:
+  inputs:
+  - name: trigger
+    type:
+      enum: TransmogSituationTrigger
+  - name: toggleLock
+    type: boolean
+  outputs:
+C_TransmogOutfitInfo.ClearOutfit:
+  inputs:
+  outputs:
+C_TransmogOutfitInfo.CommitAndApplyAllPending:
+  inputs:
+  - name: useAvailableDiscount
+    type: boolean
+  outputs:
+C_TransmogOutfitInfo.CommitOutfitInfo:
+  inputs:
+  - name: outfitID
+    type: number
+  - name: name
+    type: string
+  - name: icon
+    type: number
+  outputs:
+C_TransmogOutfitInfo.CommitPendingSituations:
+  inputs:
+  outputs:
+C_TransmogOutfitInfo.GetActiveOutfitID:
+  inputs:
+  outputs:
+  - name: outfitID
+    type: number
+C_TransmogOutfitInfo.GetAllSlotLocationInfo:
+  inputs:
+  mayreturnnothing: true
+  outputs:
+  - name: appearanceSlotInfo
+    type:
+      arrayof:
+        structure: C_TransmogOutfitInfo.TransmogOutfitSlotInfo
+  - name: illusionSlotInfo
+    type:
+      arrayof:
+        structure: C_TransmogOutfitInfo.TransmogOutfitSlotInfo
+C_TransmogOutfitInfo.GetAllTransmogOutfitOptionSheatheCategoryInfo:
+  inputs:
+  - name: imaID
+    type: number
+  mayreturnnothing: true
+  outputs:
+  - name: categoryInfo
+    type:
+      arrayof:
+        structure: C_TransmogOutfitInfo.TransmogOutfitOptionSheatheCategoryInfo
+C_TransmogOutfitInfo.GetCollectionInfoForSlotAndOption:
+  inputs:
+  - name: slot
+    type:
+      enum: TransmogOutfitSlot
+  - name: weaponOption
+    type:
+      enum: TransmogOutfitSlotOption
+  - name: collectionType
+    type:
+      enum: TransmogCollectionType
+  mayreturnnothing: true
+  outputs:
+  - name: collectionInfo
+    type:
+      structure: C_TransmogOutfitInfo.TransmogOutfitWeaponCollectionInfo
+C_TransmogOutfitInfo.GetCurrentlyViewedOutfitID:
+  inputs:
+  outputs:
+  - name: outfitID
+    type: number
+C_TransmogOutfitInfo.GetEquippedSlotOptionFromTransmogSlot:
+  inputs:
+  - name: slot
+    type:
+      enum: TransmogOutfitSlot
+  mayreturnnothing: true
+  outputs:
+  - name: weaponOption
+    type:
+      enum: TransmogOutfitSlotOption
+C_TransmogOutfitInfo.GetIllusionDefaultIMAIDForCollectionType:
+  inputs:
+  - name: collectionType
+    type:
+      enum: TransmogCollectionType
+  mayreturnnothing: true
+  outputs:
+  - name: imaID
+    type: number
+C_TransmogOutfitInfo.GetItemModifiedAppearanceEffectiveCategory:
+  inputs:
+  - name: imaID
+    type: number
+  outputs:
+  - name: categoryID
+    type:
+      enum: TransmogCollectionType
+C_TransmogOutfitInfo.GetLinkedSlotInfo:
+  inputs:
+  - name: slot
+    type:
+      enum: TransmogOutfitSlot
+  mayreturnnothing: true
+  outputs:
+  - name: linkedSlotInfo
+    type:
+      structure: C_TransmogOutfitInfo.TransmogOutfitLinkedSlotInfo
+C_TransmogOutfitInfo.GetMaxNumberOfTotalOutfitsForSource:
+  inputs:
+  - name: source
+    type:
+      enum: TransmogOutfitEntrySource
+  outputs:
+  - name: maxOutfitCount
+    type: number
+C_TransmogOutfitInfo.GetMaxNumberOfUsableOutfits:
+  inputs:
+  outputs:
+  - name: maxOutfitCount
+    type: number
+C_TransmogOutfitInfo.GetNextOutfitCost:
+  inputs:
+  outputs:
+  - name: outfitCost
+    type: number
+C_TransmogOutfitInfo.GetNumberOfOutfitsUnlockedForSource:
+  inputs:
+  - name: source
+    type:
+      enum: TransmogOutfitEntrySource
+  outputs:
+  - name: unlockedOutfitCount
+    type: number
+C_TransmogOutfitInfo.GetOutfitInfo:
+  inputs:
+  - name: outfitID
+    type: number
+  mayreturnnothing: true
+  outputs:
+  - name: outfitInfo
+    type:
+      structure: C_TransmogOutfitInfo.TransmogOutfitEntryInfo
+C_TransmogOutfitInfo.GetOutfitInfoByName:
+  inputs:
+  - name: name
+    type: string
+  mayreturnnothing: true
+  outputs:
+  - name: outfitInfo
+    type:
+      structure: C_TransmogOutfitInfo.TransmogOutfitEntryInfo
+C_TransmogOutfitInfo.GetOutfitInfoByPlayerFacingIndex:
+  inputs:
+  - name: playerFacingOutfitIndex
+    type: number
+  mayreturnnothing: true
+  outputs:
+  - name: outfitInfo
+    type:
+      structure: C_TransmogOutfitInfo.TransmogOutfitEntryInfo
+C_TransmogOutfitInfo.GetOutfitsInfo:
+  inputs:
+  mayreturnnothing: true
+  outputs:
+  - name: outfitsInfo
+    type:
+      arrayof:
+        structure: C_TransmogOutfitInfo.TransmogOutfitEntryInfo
+C_TransmogOutfitInfo.GetOutfitSituation:
+  inputs:
+  - name: option
+    type:
+      structure: C_TransmogOutfitInfo.TransmogSituationOption
+  outputs:
+  - name: value
+    type: boolean
+C_TransmogOutfitInfo.GetOutfitSituationsEnabled:
+  inputs:
+  outputs:
+  - name: enabled
+    type: boolean
+C_TransmogOutfitInfo.GetPendingTransmogCost:
+  inputs:
+  mayreturnnothing: true
+  outputs:
+  - name: cost
+    type: number
+  - name: modifierFlags
+    type: number
+C_TransmogOutfitInfo.GetSecondarySlotState:
+  inputs:
+  - name: slot
+    type:
+      enum: TransmogOutfitSlot
+  outputs:
+  - name: state
+    type: boolean
+C_TransmogOutfitInfo.GetSetSourcesForSlot:
+  inputs:
+  - name: transmogSetID
+    type: number
+  - name: slot
+    type:
+      enum: TransmogOutfitSlot
+  mayreturnnothing: true
+  outputs:
+  - name: sources
+    type:
+      arrayof:
+        structure: AppearanceSourceInfo
+C_TransmogOutfitInfo.GetSlotGroupInfo:
+  inputs:
+  mayreturnnothing: true
+  outputs:
+  - name: slotGroups
+    type:
+      arrayof:
+        structure: C_TransmogOutfitInfo.TransmogOutfitSlotGroup
+C_TransmogOutfitInfo.GetSourceIDsForSlot:
+  inputs:
+  - name: transmogSetID
+    type: number
+  - name: slot
+    type:
+      enum: TransmogOutfitSlot
+  mayreturnnothing: true
+  outputs:
+  - name: sources
+    type:
+      arrayof: number
+C_TransmogOutfitInfo.GetTransmogOutfitSlotForInventoryType:
+  inputs:
+  - name: inventoryType
+    type: number
+  mayreturnnothing: true
+  outputs:
+  - name: slot
+    type:
+      enum: TransmogOutfitSlot
+C_TransmogOutfitInfo.GetTransmogOutfitSlotFromInventorySlot:
+  inputs:
+  - name: inventorySlot
+    type: number
+  mayreturnnothing: true
+  outputs:
+  - name: slot
+    type:
+      enum: TransmogOutfitSlot
+C_TransmogOutfitInfo.GetUISituationCategoriesAndOptions:
+  inputs:
+  mayreturnnothing: true
+  outputs:
+  - name: categoryData
+    type:
+      arrayof:
+        structure: C_TransmogOutfitInfo.TransmogSituationCategory
+C_TransmogOutfitInfo.GetUnassignedAtlasForSlot:
+  inputs:
+  - name: slot
+    type:
+      enum: TransmogOutfitSlot
+  mayreturnnothing: true
+  outputs:
+  - name: atlas
+    type: string
+C_TransmogOutfitInfo.GetUnassignedDisplayAtlasForSlot:
+  inputs:
+  - name: slot
+    type:
+      enum: TransmogOutfitSlot
+  mayreturnnothing: true
+  outputs:
+  - name: atlas
+    type: string
+C_TransmogOutfitInfo.GetViewedOutfitSlotInfo:
+  inputs:
+  - name: slot
+    type:
+      enum: TransmogOutfitSlot
+  - name: type
+    type:
+      enum: TransmogType
+  - name: option
+    type:
+      enum: TransmogOutfitSlotOption
+  mayreturnnothing: true
+  outputs:
+  - name: slotInfo
+    type:
+      structure: C_TransmogOutfitInfo.ViewedTransmogOutfitSlotInfo
+C_TransmogOutfitInfo.GetWeaponOptionsForSlot:
+  inputs:
+  - name: slot
+    type:
+      enum: TransmogOutfitSlot
+  mayreturnnothing: true
+  outputs:
+  - name: weaponOptions
+    type:
+      arrayof:
+        structure: C_TransmogOutfitInfo.TransmogOutfitWeaponOptionInfo
+  - name: artifactOptions
+    nilable: true
+    type:
+      arrayof:
+        structure: C_TransmogOutfitInfo.TransmogOutfitWeaponOptionInfo
+C_TransmogOutfitInfo.HasPendingOutfitSituations:
+  inputs:
+  outputs:
+  - name: hasPending
+    type: boolean
+C_TransmogOutfitInfo.HasPendingOutfitTransmogs:
+  inputs:
+  outputs:
+  - name: hasPending
+    type: boolean
+C_TransmogOutfitInfo.InTransmogEvent:
+  inputs:
+  outputs:
+  - name: inTransmogEvent
+    type: boolean
+C_TransmogOutfitInfo.IsEquippedGearOutfitDisplayed:
+  inputs:
+  outputs:
+  - name: isDisplayed
+    type: boolean
+C_TransmogOutfitInfo.IsEquippedGearOutfitLocked:
+  inputs:
+  outputs:
+  - name: isLocked
+    type: boolean
+C_TransmogOutfitInfo.IsLockedOutfit:
+  inputs:
+  - name: outfitID
+    type: number
+  outputs:
+  - name: isLocked
+    type: boolean
+C_TransmogOutfitInfo.IsSlotWeaponSlot:
+  inputs:
+  - name: slot
+    type:
+      enum: TransmogOutfitSlot
+  outputs:
+  - name: isWeaponSlot
+    type: boolean
+C_TransmogOutfitInfo.IsUsableDiscountAvailable:
+  inputs:
+  outputs:
+  - name: isAvailable
+    type: boolean
+C_TransmogOutfitInfo.IsValidTransmogOutfitName:
+  inputs:
+  - name: name
+    type: string
+  outputs:
+  - name: isApproved
+    type: boolean
+C_TransmogOutfitInfo.PickupOutfit:
+  inputs:
+  - name: outfitID
+    type: number
+  outputs:
+C_TransmogOutfitInfo.ResetOutfitSituations:
+  inputs:
+  outputs:
+C_TransmogOutfitInfo.RevertPendingTransmog:
+  inputs:
+  - name: slot
+    type:
+      enum: TransmogOutfitSlot
+  - name: type
+    type:
+      enum: TransmogType
+  - name: option
+    type:
+      enum: TransmogOutfitSlotOption
+  outputs:
+C_TransmogOutfitInfo.SetOutfitSituationsEnabled:
+  inputs:
+  - name: enabled
+    type: boolean
+  outputs:
+C_TransmogOutfitInfo.SetOutfitToCustomSet:
+  inputs:
+  - name: transmogCustomSetID
+    type: number
+  outputs:
+C_TransmogOutfitInfo.SetOutfitToOutfit:
+  inputs:
+  - name: outfitID
+    type: number
+  outputs:
+C_TransmogOutfitInfo.SetOutfitToSet:
+  inputs:
+  - name: transmogSetID
+    type: number
+  outputs:
+C_TransmogOutfitInfo.SetPendingTransmog:
+  inputs:
+  - name: slot
+    type:
+      enum: TransmogOutfitSlot
+  - name: type
+    type:
+      enum: TransmogType
+  - name: option
+    type:
+      enum: TransmogOutfitSlotOption
+  - name: transmogID
+    type: number
+  - name: displayType
+    type:
+      enum: TransmogOutfitDisplayType
+  outputs:
+C_TransmogOutfitInfo.SetPendingTransmogSheatheCategory:
+  inputs:
+  - name: slot
+    type:
+      enum: TransmogOutfitSlot
+  - name: option
+    type:
+      enum: TransmogOutfitSlotOption
+  - name: category
+    type:
+      enum: TransmogOutfitSlotOptionSheatheCategory
+  outputs:
+C_TransmogOutfitInfo.SetSecondarySlotState:
+  inputs:
+  - name: slot
+    type:
+      enum: TransmogOutfitSlot
+  - name: state
+    type: boolean
+  mayreturnnothing: true
+  outputs:
+C_TransmogOutfitInfo.SetViewedWeaponOptionForSlot:
+  inputs:
+  - name: slot
+    type:
+      enum: TransmogOutfitSlot
+  - name: weaponOption
+    type:
+      enum: TransmogOutfitSlotOption
+  outputs:
+C_TransmogOutfitInfo.SlotHasSecondary:
+  inputs:
+  - name: slot
+    type:
+      enum: TransmogOutfitSlot
+  outputs:
+  - name: hasSecondary
+    type: boolean
+C_TransmogOutfitInfo.TransmogEventActive:
+  inputs:
+  outputs:
+  - name: transmogEventActive
+    type: boolean
+C_TransmogOutfitInfo.UpdatePendingSituation:
+  inputs:
+  - name: option
+    type:
+      structure: C_TransmogOutfitInfo.TransmogSituationOption
+  - name: value
+    type: boolean
+  mayreturnnothing: true
+  outputs:
 C_TransmogSets.ClearLatestSource:
   inputs:
   outputs:
@@ -15294,6 +18685,13 @@ C_TransmogSets.GetAllSourceIDs:
   - name: sources
     type:
       arrayof: number
+C_TransmogSets.GetAvailableSets:
+  inputs:
+  outputs:
+  - name: sets
+    type:
+      arrayof:
+        structure: C_TransmogSets.TransmogSetInfo
 C_TransmogSets.GetBaseSetID:
   inputs:
   - name: transmogSetID
@@ -15392,6 +18790,14 @@ C_TransmogSets.GetSetsContainingSourceID:
   - name: setIDs
     type:
       arrayof: number
+C_TransmogSets.GetSetsFilter:
+  inputs:
+  - name: index
+    type: number
+  mayreturnnothing: true
+  outputs:
+  - name: isChecked
+    type: boolean
 C_TransmogSets.GetSourceIDsForSlot:
   inputs:
   - name: transmogSetID
@@ -15452,6 +18858,11 @@ C_TransmogSets.GetVariantSets:
     type:
       arrayof:
         structure: C_TransmogSets.TransmogSetInfo
+C_TransmogSets.HasAvailableSets:
+  inputs:
+  outputs:
+  - name: hasAvailableSets
+    type: boolean
 C_TransmogSets.HasUsableSets:
   inputs:
   outputs:
@@ -15483,6 +18894,11 @@ C_TransmogSets.IsUsingDefaultBaseSetsFilters:
   outputs:
   - name: isUsingDefaultBaseSetsFilters
     type: boolean
+C_TransmogSets.IsUsingDefaultSetsFilters:
+  inputs:
+  outputs:
+  - name: isUsingDefaultSetsFilters
+    type: boolean
 C_TransmogSets.SetBaseSetsFilter:
   inputs:
   - name: index
@@ -15491,6 +18907,9 @@ C_TransmogSets.SetBaseSetsFilter:
     type: boolean
   outputs:
 C_TransmogSets.SetDefaultBaseSetsFilters:
+  inputs:
+  outputs:
+C_TransmogSets.SetDefaultSetsFilters:
   inputs:
   outputs:
 C_TransmogSets.SetHasNewSources:
@@ -15514,6 +18933,13 @@ C_TransmogSets.SetIsFavorite:
   - name: transmogSetID
     type: number
   - name: isFavorite
+    type: boolean
+  outputs:
+C_TransmogSets.SetSetsFilter:
+  inputs:
+  - name: index
+    type: number
+  - name: isChecked
     type: boolean
   outputs:
 C_TransmogSets.SetTransmogSetsClassFilter:
@@ -15693,6 +19119,28 @@ C_UIColor.GetColors:
     type:
       arrayof:
         structure: C_UIColor.DBColorExport
+C_UIFileAsset.GetFileID:
+  inputs:
+  - name: asset
+    type: FileAsset
+  outputs:
+  - name: assetFileID
+    nilable: true
+    type: number
+C_UIFileAsset.IsKnownFile:
+  inputs:
+  - name: asset
+    type: FileAsset
+  outputs:
+  - name: isValid
+    type: boolean
+C_UIFileAsset.IsLooseFile:
+  inputs:
+  - name: asset
+    type: FileAsset
+  outputs:
+  - name: isLooseFile
+    type: boolean
 C_UIWidgetManager.GetAllWidgetsBySetID:
   inputs:
   - name: setID
@@ -15716,6 +19164,15 @@ C_UIWidgetManager.GetBulletTextListWidgetVisualizationInfo:
     nilable: true
     type:
       structure: C_UIWidgetManager.BulletTextListWidgetVisualizationInfo
+C_UIWidgetManager.GetButtonHeaderWidgetVisualizationInfo:
+  inputs:
+  - name: widgetID
+    type: number
+  outputs:
+  - name: widgetInfo
+    nilable: true
+    type:
+      structure: C_UIWidgetManager.ButtonHeaderWidgetVisualizationInfo
 C_UIWidgetManager.GetCaptureBarWidgetVisualizationInfo:
   inputs:
   - name: widgetID
@@ -15725,6 +19182,24 @@ C_UIWidgetManager.GetCaptureBarWidgetVisualizationInfo:
     nilable: true
     type:
       structure: C_UIWidgetManager.CaptureBarWidgetVisualizationInfo
+C_UIWidgetManager.GetCaptureZoneVisualizationInfo:
+  inputs:
+  - name: widgetID
+    type: number
+  outputs:
+  - name: widgetInfo
+    nilable: true
+    type:
+      structure: C_UIWidgetManager.CaptureZoneVisualizationInfo
+C_UIWidgetManager.GetDiscreteProgressStepsVisualizationInfo:
+  inputs:
+  - name: widgetID
+    type: number
+  outputs:
+  - name: widgetInfo
+    nilable: true
+    type:
+      structure: C_UIWidgetManager.DiscreteProgressStepsVisualizationInfo
 C_UIWidgetManager.GetDoubleIconAndTextWidgetVisualizationInfo:
   inputs:
   - name: widgetID
@@ -15734,6 +19209,15 @@ C_UIWidgetManager.GetDoubleIconAndTextWidgetVisualizationInfo:
     nilable: true
     type:
       structure: C_UIWidgetManager.DoubleIconAndTextWidgetVisualizationInfo
+C_UIWidgetManager.GetDoubleStateIconRowVisualizationInfo:
+  inputs:
+  - name: widgetID
+    type: number
+  outputs:
+  - name: widgetInfo
+    nilable: true
+    type:
+      structure: C_UIWidgetManager.DoubleStateIconRowVisualizationInfo
 C_UIWidgetManager.GetDoubleStatusBarWidgetVisualizationInfo:
   inputs:
   - name: widgetID
@@ -15743,6 +19227,15 @@ C_UIWidgetManager.GetDoubleStatusBarWidgetVisualizationInfo:
     nilable: true
     type:
       structure: C_UIWidgetManager.DoubleStatusBarWidgetVisualizationInfo
+C_UIWidgetManager.GetFillUpFramesWidgetVisualizationInfo:
+  inputs:
+  - name: widgetID
+    type: number
+  outputs:
+  - name: widgetInfo
+    nilable: true
+    type:
+      structure: C_UIWidgetManager.FillUpFramesWidgetVisualizationInfo
 C_UIWidgetManager.GetHorizontalCurrenciesWidgetVisualizationInfo:
   inputs:
   - name: widgetID
@@ -15779,6 +19272,43 @@ C_UIWidgetManager.GetIconTextAndCurrenciesWidgetVisualizationInfo:
     nilable: true
     type:
       structure: C_UIWidgetManager.IconTextAndCurrenciesWidgetVisualizationInfo
+C_UIWidgetManager.GetItemDisplayVisualizationInfo:
+  inputs:
+  - name: widgetID
+    type: number
+  outputs:
+  - name: widgetInfo
+    nilable: true
+    type:
+      structure: C_UIWidgetManager.ItemDisplayVisualizationInfo
+C_UIWidgetManager.GetMapPinAnimationWidgetVisualizationInfo:
+  inputs:
+  - name: widgetID
+    type: number
+  outputs:
+  - name: widgetInfo
+    nilable: true
+    type:
+      structure: C_UIWidgetManager.MapPinAnimationWidgetVisualizationInfo
+C_UIWidgetManager.GetObjectiveTrackerWidgetSetID:
+  inputs:
+  outputs:
+  - name: setID
+    type: number
+C_UIWidgetManager.GetPowerBarWidgetSetID:
+  inputs:
+  outputs:
+  - name: setID
+    type: number
+C_UIWidgetManager.GetPreyHuntProgressWidgetVisualizationInfo:
+  inputs:
+  - name: widgetID
+    type: number
+  outputs:
+  - name: widgetInfo
+    nilable: true
+    type:
+      structure: C_UIWidgetManager.PreyHuntProgressWidgetVisualizationInfo
 C_UIWidgetManager.GetScenarioHeaderCurrenciesAndBackgroundWidgetVisualizationInfo:
   inputs:
   - name: widgetID
@@ -15788,6 +19318,42 @@ C_UIWidgetManager.GetScenarioHeaderCurrenciesAndBackgroundWidgetVisualizationInf
     nilable: true
     type:
       structure: C_UIWidgetManager.ScenarioHeaderCurrenciesAndBackgroundWidgetVisualizationInfo
+C_UIWidgetManager.GetScenarioHeaderDelvesWidgetVisualizationInfo:
+  inputs:
+  - name: widgetID
+    type: number
+  outputs:
+  - name: widgetInfo
+    nilable: true
+    type:
+      structure: C_UIWidgetManager.ScenarioHeaderDelvesWidgetVisualizationInfo
+C_UIWidgetManager.GetScenarioHeaderTimerWidgetVisualizationInfo:
+  inputs:
+  - name: widgetID
+    type: number
+  outputs:
+  - name: widgetInfo
+    nilable: true
+    type:
+      structure: C_UIWidgetManager.ScenarioHeaderTimerWidgetVisualizationInfo
+C_UIWidgetManager.GetSpacerVisualizationInfo:
+  inputs:
+  - name: widgetID
+    type: number
+  outputs:
+  - name: widgetInfo
+    nilable: true
+    type:
+      structure: C_UIWidgetManager.SpacerVisualizationInfo
+C_UIWidgetManager.GetSpellDisplayVisualizationInfo:
+  inputs:
+  - name: widgetID
+    type: number
+  outputs:
+  - name: widgetInfo
+    nilable: true
+    type:
+      structure: C_UIWidgetManager.SpellDisplayVisualizationInfo
 C_UIWidgetManager.GetStackedResourceTrackerWidgetVisualizationInfo:
   inputs:
   - name: widgetID
@@ -15806,7 +19372,7 @@ C_UIWidgetManager.GetStatusBarWidgetVisualizationInfo:
     nilable: true
     type:
       structure: C_UIWidgetManager.StatusBarWidgetVisualizationInfo
-C_UIWidgetManager.GetTextureWithStateVisualizationInfo:
+C_UIWidgetManager.GetTextColumnRowVisualizationInfo:
   inputs:
   - name: widgetID
     type: number
@@ -15814,7 +19380,34 @@ C_UIWidgetManager.GetTextureWithStateVisualizationInfo:
   - name: widgetInfo
     nilable: true
     type:
-      structure: C_UIWidgetManager.TextureWithStateVisualizationInfo
+      structure: C_UIWidgetManager.TextColumnRowVisualizationInfo
+C_UIWidgetManager.GetTextureAndTextRowVisualizationInfo:
+  inputs:
+  - name: widgetID
+    type: number
+  outputs:
+  - name: widgetInfo
+    nilable: true
+    type:
+      structure: C_UIWidgetManager.TextureAndTextRowVisualizationInfo
+C_UIWidgetManager.GetTextureAndTextVisualizationInfo:
+  inputs:
+  - name: widgetID
+    type: number
+  outputs:
+  - name: widgetInfo
+    nilable: true
+    type:
+      structure: C_UIWidgetManager.TextureAndTextVisualizationInfo
+C_UIWidgetManager.GetTextureWithAnimationVisualizationInfo:
+  inputs:
+  - name: widgetID
+    type: number
+  outputs:
+  - name: widgetInfo
+    nilable: true
+    type:
+      structure: C_UIWidgetManager.TextureWithAnimationVisualizationInfo
 C_UIWidgetManager.GetTextWithStateWidgetVisualizationInfo:
   inputs:
   - name: widgetID
@@ -15824,11 +19417,91 @@ C_UIWidgetManager.GetTextWithStateWidgetVisualizationInfo:
     nilable: true
     type:
       structure: C_UIWidgetManager.TextWithStateWidgetVisualizationInfo
+C_UIWidgetManager.GetTextWithSubtextWidgetVisualizationInfo:
+  inputs:
+  - name: widgetID
+    type: number
+  outputs:
+  - name: widgetInfo
+    nilable: true
+    type:
+      structure: C_UIWidgetManager.TextWithSubtextWidgetVisualizationInfo
 C_UIWidgetManager.GetTopCenterWidgetSetID:
   inputs:
   outputs:
   - name: setID
     type: number
+C_UIWidgetManager.GetTugOfWarWidgetVisualizationInfo:
+  inputs:
+  - name: widgetID
+    type: number
+  outputs:
+  - name: widgetInfo
+    nilable: true
+    type:
+      structure: C_UIWidgetManager.TugOfWarWidgetVisualizationInfo
+C_UIWidgetManager.GetUnitPowerBarWidgetVisualizationInfo:
+  inputs:
+  - name: widgetID
+    type: number
+  outputs:
+  - name: widgetInfo
+    nilable: true
+    type:
+      structure: C_UIWidgetManager.UnitPowerBarWidgetVisualizationInfo
+C_UIWidgetManager.GetWidgetSetInfo:
+  inputs:
+  - name: widgetSetID
+    type: number
+  mayreturnnothing: true
+  outputs:
+  - name: widgetSetInfo
+    type:
+      structure: C_UIWidgetManager.UIWidgetSetInfo
+C_UIWidgetManager.GetZoneControlVisualizationInfo:
+  inputs:
+  - name: widgetID
+    type: number
+  outputs:
+  - name: widgetInfo
+    nilable: true
+    type:
+      structure: C_UIWidgetManager.ZoneControlVisualizationInfo
+C_UIWidgetManager.RegisterUnitForWidgetUpdates:
+  inputs:
+  - name: unitToken
+    type: string
+  - default: false
+    name: isGuid
+    type: boolean
+  outputs:
+C_UIWidgetManager.SetProcessingUnit:
+  inputs:
+  - name: unit
+    nilable: true
+    type: unit
+  outputs:
+C_UIWidgetManager.SetProcessingUnitGuid:
+  inputs:
+  - name: unit
+    nilable: true
+    type: string
+  outputs:
+C_UIWidgetManager.UnregisterUnitForWidgetUpdates:
+  inputs:
+  - name: unitToken
+    type: string
+  - default: false
+    name: isGuid
+    type: boolean
+  outputs:
+C_UnitAuras.AddBlockedAura:
+  inputs:
+  - name: unit
+    type: unit
+  - name: auraInstanceID
+    type: number
+  outputs:
 C_UnitAuras.AddPrivateAuraAnchor:
   inputs:
   - name: args
@@ -15847,13 +19520,62 @@ C_UnitAuras.AddPrivateAuraAppliedSound:
   - name: privateAuraSoundID
     nilable: true
     type: number
+C_UnitAuras.AuraIsBigDefensive:
+  inputs:
+  - name: spellID
+    type: string
+  outputs:
+  - name: isBigDefensive
+    type: boolean
 C_UnitAuras.AuraIsPrivate:
   inputs:
   - name: spellID
-    type: number
+    type: string
   outputs:
   - name: isPrivate
     type: boolean
+C_UnitAuras.ClearBlockedAuras:
+  inputs:
+  - name: unit
+    type: unit
+  outputs:
+C_UnitAuras.DoesAuraHaveExpirationTime:
+  inputs:
+  - name: auraInstanceUnit
+    type: unit
+  - name: auraInstanceID
+    type: number
+  outputs:
+  - name: hasExpirationTime
+    type: boolean
+C_UnitAuras.GetAuraApplicationDisplayCount:
+  inputs:
+  - name: auraInstanceUnit
+    type: unit
+  - name: auraInstanceID
+    type: number
+  - default: 2
+    name: minDisplayCount
+    type: number
+  - name: maxDisplayCount
+    nilable: true
+    type: number
+  outputs:
+  - name: count
+    type: string
+C_UnitAuras.GetAuraBaseDuration:
+  inputs:
+  - name: auraInstanceUnit
+    type: unit
+  - name: auraInstanceID
+    type: number
+  - name: spellID
+    nilable: true
+    type: string
+  outputs:
+  - name: newDuration
+    nilable: true
+    type: number
 C_UnitAuras.GetAuraDataByAuraInstanceID:
   inputs:
   - name: unit
@@ -15904,6 +19626,29 @@ C_UnitAuras.GetAuraDataBySpellName:
     nilable: true
     type:
       structure: AuraData
+C_UnitAuras.GetAuraDispelTypeColor:
+  inputs:
+  - name: auraInstanceUnit
+    type: unit
+  - name: auraInstanceID
+    type: number
+  - name: curve
+    type:
+      luaobject: LuaColorCurveObject
+  outputs:
+  - name: dispelTypeColor
+    type:
+      structure: colorRGBA
+C_UnitAuras.GetAuraDuration:
+  inputs:
+  - name: auraInstanceUnit
+    type: unit
+  - name: auraInstanceID
+    type: number
+  outputs:
+  - name: duration
+    type:
+      luaobject: LuaDurationObject
 C_UnitAuras.GetAuraSlots:
   inputs:
   - name: unit
@@ -15941,7 +19686,7 @@ C_UnitAuras.GetBuffDataByIndex:
 C_UnitAuras.GetCooldownAuraBySpellID:
   inputs:
   - name: spellID
-    type: number
+    type: string
   outputs:
   - name: cooldownSpellID
     nilable: true
@@ -15963,23 +19708,57 @@ C_UnitAuras.GetDebuffDataByIndex:
 C_UnitAuras.GetPlayerAuraBySpellID:
   inputs:
   - name: spellID
-    type: number
+    type: string
   outputs:
   - name: aura
     nilable: true
     type:
       structure: AuraData
+C_UnitAuras.GetRefreshExtendedDuration:
+  inputs:
+  - name: auraInstanceUnit
+    type: unit
+  - name: auraInstanceID
+    type: number
+  - name: spellID
+    nilable: true
+    type: string
+  outputs:
+  - name: newDuration
+    nilable: true
+    type: number
 C_UnitAuras.GetUnitAuraBySpellID:
   inputs:
   - name: unit
     type: unit
   - name: spellID
-    type: number
+    type: string
   outputs:
   - name: aura
     nilable: true
     type:
       structure: AuraData
+C_UnitAuras.GetUnitAuraInstanceIDs:
+  inputs:
+  - name: unit
+    type: unit
+  - name: filter
+    type: string
+  - name: maxCount
+    nilable: true
+    type: number
+  - default: 0
+    name: sortRule
+    type:
+      enum: UnitAuraSortRule
+  - default: 0
+    name: sortDirection
+    type:
+      enum: UnitAuraSortDirection
+  outputs:
+  - name: auraInstanceIDs
+    type:
+      arrayof: number
 C_UnitAuras.GetUnitAuras:
   inputs:
   - name: unit
@@ -15989,7 +19768,14 @@ C_UnitAuras.GetUnitAuras:
   - name: maxCount
     nilable: true
     type: number
-  mayreturnnothing: true
+  - default: 0
+    name: sortRule
+    type:
+      enum: UnitAuraSortRule
+  - default: 0
+    name: sortDirection
+    type:
+      enum: UnitAuraSortDirection
   outputs:
   - name: auras
     type:
@@ -16016,6 +19802,9 @@ C_UnitAuras.RemovePrivateAuraAppliedSound:
   - name: privateAuraSoundID
     type: number
   outputs:
+C_UnitAuras.ResetAuraDataProvider:
+  inputs:
+  outputs:
 C_UnitAuras.SetPrivateWarningTextAnchor:
   inputs:
   - name: parent
@@ -16026,6 +19815,14 @@ C_UnitAuras.SetPrivateWarningTextAnchor:
     type:
       structure: AnchorBinding
   outputs:
+C_UnitAuras.SwitchAuraDataProvider:
+  inputs:
+  outputs:
+C_UnitAuras.TriggerPrivateAuraShowDispelType:
+  inputs:
+  - name: show
+    type: boolean
+  outputs:
 C_UnitAuras.WantsAlteredForm:
   inputs:
   - name: unit
@@ -16033,6 +19830,41 @@ C_UnitAuras.WantsAlteredForm:
   outputs:
   - name: wantsAlteredForm
     type: boolean
+C_UnitAurasPrivate.AddPrivateAuraUpdateCallback:
+  secureonly: true
+C_UnitAurasPrivate.AnchorPrivateAura:
+  secureonly: true
+C_UnitAurasPrivate.GetAllPrivateAuras:
+  inputs:
+  outputs:
+  - name: auras
+    type:
+      arrayof:
+        structure: AuraData
+  secureonly: true
+C_UnitAurasPrivate.GetAuraDataByAuraInstanceIDPrivate:
+  secureonly: true
+C_UnitAurasPrivate.GetPrivateAuraAnchors:
+  inputs:
+  outputs:
+  - name: existingAnchors
+    stub:
+    type:
+      arrayof:
+        structure: PrivateAuraAnchor
+  secureonly: true
+C_UnitAurasPrivate.RemovePrivateAuraUpdateCallback:
+  secureonly: true
+C_UnitAurasPrivate.SetPrivateAuraAnchorAddedCallback:
+  secureonly: true
+C_UnitAurasPrivate.SetPrivateAuraAnchorRemovedCallback:
+  secureonly: true
+C_UnitAurasPrivate.SetPrivateRaidBossMessageCallback:
+  secureonly: true
+C_UnitAurasPrivate.SetPrivateWarningTextFrame:
+  secureonly: true
+C_UnitAurasPrivate.SetShowDispelTypeCallback:
+  secureonly: true
 C_UserFeedback.SubmitBug:
   inputs:
   - name: bugInfo
@@ -16173,9 +20005,9 @@ C_VoiceChat.GetChannel:
   inputs:
   - name: channelID
     type: number
+  mayreturnnothing: true
   outputs:
   - name: channel
-    nilable: true
     type:
       structure: C_VoiceChat.VoiceChatChannel
 C_VoiceChat.GetChannelForChannelType:
@@ -16183,9 +20015,9 @@ C_VoiceChat.GetChannelForChannelType:
   - name: channelType
     type:
       enum: ChatChannelType
+  mayreturnnothing: true
   outputs:
   - name: channel
-    nilable: true
     type:
       structure: C_VoiceChat.VoiceChatChannel
 C_VoiceChat.GetChannelForCommunityStream:
@@ -16194,9 +20026,9 @@ C_VoiceChat.GetChannelForCommunityStream:
     type: string
   - name: streamId
     type: string
+  mayreturnnothing: true
   outputs:
   - name: channel
-    nilable: true
     type:
       structure: C_VoiceChat.VoiceChatChannel
 C_VoiceChat.GetCommunicationMode:
@@ -16588,13 +20420,13 @@ C_VoiceChat.SpeakText:
     type: number
   - name: text
     type: string
-  - name: destination
-    type:
-      enum: VoiceTtsDestination
   - name: rate
     type: number
   - name: volume
     type: number
+  - default: false
+    name: overlap
+    type: boolean
   outputs:
 C_VoiceChat.StopSpeakingText:
   inputs:
@@ -16774,6 +20606,33 @@ CameraZoomOut:
     type: number
   outputs:
 CanAbandonQuest:
+canaccessallvalues:
+  inputs:
+  - name: values
+    type: unknown
+  instride: 1
+  outputs:
+  - name: canAccessAllValues
+    type: boolean
+canaccesssecrets:
+  inputs:
+  outputs:
+  - name: canAccessSecrets
+    type: boolean
+canaccesstable:
+  inputs:
+  - name: table
+    type: unknown
+  outputs:
+  - name: canAccessTable
+    type: boolean
+canaccessvalue:
+  inputs:
+  - name: value
+    type: unknown
+  outputs:
+  - name: canAccessValue
+    type: boolean
 CanAffordMerchantItem:
   inputs:
   - name: index
@@ -16783,6 +20642,12 @@ CanAffordMerchantItem:
     type: boolean
 CanAutoSetGamePadCursorControl:
 CanBeRaidTarget:
+  inputs:
+  - name: target
+    type: unit
+  outputs:
+  - name: result
+    type: boolean
 CanCancelAuction:
 CanCancelScene:
 CancelAreaSpiritHeal:
@@ -16790,7 +20655,6 @@ CancelAreaSpiritHeal:
   outputs:
 CancelAuction:
 CancelDuel:
-CancelEmote:
 CancelItemTempEnchantment:
 CancelLogout:
   inputs:
@@ -16956,7 +20820,6 @@ CaseAccentInsensitiveParse:
   outputs:
   - name: result
     type: string
-CastingInfo:
 CastPetAction:
 CastShapeshiftForm:
 CastSpell:
@@ -16970,10 +20833,8 @@ CastSpellByName:
 CenterCamera:
   inputs:
   outputs:
-ChangeActionBarPage:
 ChangeChatColor:
 ChannelBan:
-ChannelInfo:
 ChannelInvite:
 ChannelKick:
 ChannelModerator:
@@ -17062,6 +20923,10 @@ ClearPartyAssignment:
     type: unit
   outputs:
 ClearRaidMarker:
+  inputs:
+  - name: raidMarkerIndex
+    type: number
+  outputs:
 ClearSendMail:
 ClearTarget:
   inputs:
@@ -17158,36 +21023,6 @@ CollapseTrainerSkillLine:
 CollapseWarGameHeader:
 collectgarbage:
   impl: collectgarbage
-CombatLog_Object_IsA:
-CombatLogAddFilter:
-CombatLogAdvanceEntry:
-CombatLogClearEntries:
-CombatLogGetCurrentEntry:
-CombatLogGetCurrentEventInfo:
-  inputs:
-  outputs:
-  - name: timestamp
-    type: number
-  - name: subevent
-    type: string
-  - name: hideCaster
-    type: boolean
-  - name: guid
-    type: string
-  - name: name
-    type: string
-  - name: flags
-    type: number
-  - name: raidFlags
-    type: number
-CombatLogGetNumEntries:
-  outputs:
-  - type: number
-CombatLogGetRetentionTime:
-CombatLogResetFilter:
-CombatLogSetCurrentEntry:
-CombatLogSetRetentionTime:
-CombatTextSetActiveUnit:
 CompleteLFGReadyCheck:
 CompleteLFGRoleCheck:
 CompleteQuest:
@@ -17204,7 +21039,6 @@ ConfirmLootSlot:
 ConfirmPetUnlearn:
   inputs:
   outputs:
-ConfirmReadyCheck:
 ConfirmTalentWipe:
   inputs:
   outputs:
@@ -17292,6 +21126,16 @@ CraftIsEnchanting:
   outputs:
   - type: boolean
 CraftOnlyShowMakeable:
+CreateAbbreviateConfig:
+  inputs:
+  - name: data
+    type:
+      arrayof:
+        structure: NumberAbbreviationBreakpoint
+  outputs:
+  - name: config
+    type:
+      luaobject: AbbreviateConfig
 CreateFont:
   impl: CreateFont
   inputs:
@@ -17378,6 +21222,12 @@ CreateSecureDelegate:
   outputs:
   - name: secureDelegateFunction
     type: function
+CreateUnitHealPredictionCalculator:
+  inputs:
+  outputs:
+  - name: healPredictionCalculator
+    type:
+      luaobject: UnitHealPredictionCalculator
 CreateWindow:
   impl: CreateWindow
   inputs:
@@ -17420,11 +21270,6 @@ CursorHasSpell:
     type: boolean
 date:
   impl: date
-DeathRecap_GetEvents:
-DeathRecap_HasEvents:
-  inputs:
-  outputs:
-  - type: boolean
 debuglocals:
   impl: debuglocals
 debugprofilestart:
@@ -17474,7 +21319,6 @@ DeleteInboxItem:
 DeleteMacro:
   outputs:
 DeleteRaidProfile:
-DemoteAssistant:
 DepositGuildBankMoney:
 DescendStop:
   inputs:
@@ -17495,20 +21339,6 @@ Dismount:
   outputs:
 DisplayChannelOwner:
 DoCraft:
-DoEmote:
-  impl: DoEmote
-  inputs:
-  - name: token
-    type: string
-  - name: unit
-    nilable: true
-    type: unit
-  - name: hold
-    nilable: true
-    type: boolean
-  outputs:
-  - name: restricted
-    type: boolean
 DoesCurrentLocaleSellExpansionLevels:
   inputs:
   outputs:
@@ -17521,11 +21351,22 @@ DoesSpellExist:
   outputs:
   - type: boolean
 DoesTemplateExist:
-DoReadyCheck:
 DoTradeSkill:
 DropCursorMoney:
   inputs:
   outputs:
+dropsecretaccess:
+  inputs:
+  outputs:
+dumpobject:
+  inputs:
+  - name: value
+    nilable: true
+    type: unknown
+  outputs:
+  - name: result
+    nilable: true
+    type: unknown
 DungeonAppearsInRandomLFD:
 EditMacro:
 EJ_ClearSearch:
@@ -17646,7 +21487,6 @@ FillLocalizedClassList:
   outputs:
   - name: classTable
     type: table
-FindBaseSpellByID:
 FindSpellBookSlotBySpellID:
   inputs:
   - name: spellID
@@ -17654,7 +21494,6 @@ FindSpellBookSlotBySpellID:
   outputs:
   - name: slot
     type: number
-FindSpellOverrideByID:
 FlagTutorial:
 FlashClientIcon:
   inputs:
@@ -17775,11 +21614,6 @@ GetAchievementNumRewards:
 GetAchievementReward:
 GetAchievementSearchProgress:
 GetAchievementSearchSize:
-GetActionAutocast:
-GetActionBarPage:
-  inputs:
-  outputs:
-  - type: number
 GetActionBarToggles:
   inputs:
   outputs:
@@ -17791,32 +21625,7 @@ GetActionBarToggles:
     type: boolean
   - name: sideRight2State
     type: boolean
-GetActionCharges:
-GetActionCooldown:
-  inputs:
-  - name: action
-    type: number
-  outputs:
-  - name: start
-    type: number
-  - name: duration
-    type: number
-  - name: enable
-    type: number
-  - name: modRate
-    type: number
-GetActionCount:
-  outputs:
-  - type: number
 GetActionInfo:
-GetActionLossOfControlCooldown:
-  inputs:
-  - type: number
-  outputs:
-  - type: number
-  - type: number
-GetActionText:
-GetActionTexture:
 GetActiveLevel:
 GetActiveLootRollIDs:
   outputs:
@@ -17986,16 +21795,6 @@ GetAuctionSort:
     type: string
   - name: reversed
     type: boolean
-GetAutoCompletePresenceID:
-GetAutoCompleteRealms:
-  inputs:
-  - name: tableNames
-    nilable: true
-    type: table
-  outputs:
-  - name: tableNames
-    type: table
-GetAutoCompleteResults:
 GetAutoDeclineGuildInvites:
   inputs:
   outputs:
@@ -18071,6 +21870,13 @@ GetBankSlotCost:
     type: number
   outputs:
   - name: cost
+    type: number
+GetBaseDifficultyID:
+  inputs:
+  - name: difficultyID
+    type: number
+  outputs:
+  - name: baseDifficultyID
     type: number
 GetBattlefieldArenaFaction:
   inputs:
@@ -18190,8 +21996,6 @@ GetBlockChance:
   outputs:
   - name: result
     type: number
-GetBonusBarIndex:
-GetBonusBarOffset:
 GetBuildInfo:
   impl: GetBuildInfo_3_4_2
   inputs:
@@ -18210,6 +22014,14 @@ GetBuildInfo:
     type: string
   - name: tocversionagain
     type: number
+GetBuildOption:
+  inputs:
+  - name: name
+    type: string
+  outputs:
+  - name: isSet
+    nilable: true
+    type: boolean
 GetButtonMetatable:
   impl: GetButtonMetatable
   inputs:
@@ -18537,7 +22349,11 @@ GetCurrentBindingSet:
   inputs:
   outputs:
   - type: number
-GetCurrentCombatTextEventInfo:
+GetCurrentCinematicSummary:
+  inputs:
+  outputs:
+  - name: summary
+    type: string
 GetCurrentEnvironment:
   impl: GetCurrentEnvironment
 GetCurrentEventID:
@@ -18566,10 +22382,6 @@ GetCurrentRegionName:
   outputs:
   - name: regionName
     type: string
-GetCurrentResolution:
-  inputs:
-  outputs:
-  - type: number
 GetCurrentScaledResolution:
   inputs:
   outputs:
@@ -18606,12 +22418,9 @@ GetCursorPosition:
     type: number
   - name: posY
     type: number
-GetCVarSettingValidity:
 GetDailyQuestsCompleted:
   outputs:
   - type: number
-GetDeathRecapLink:
-GetDefaultGraphicsQuality:
 GetDefaultLanguage:
   inputs:
   outputs:
@@ -18624,9 +22433,6 @@ GetDefaultLanguage:
 GetDefaultScale:
   outputs:
   - type: number
-GetDefaultVideoOption:
-GetDefaultVideoOptions:
-GetDefaultVideoQualityOption:
 GetDemotionRank:
 GetDifficultyInfo:
   inputs:
@@ -18690,6 +22496,13 @@ GetErrorCallstackHeight:
     type: number
 geterrorhandler:
   impl: geterrorhandler
+GetEventCPUUsage:
+  inputs:
+  outputs:
+  - name: call_time
+    type: number
+  - name: call_count
+    type: number
 GetEventTime:
   inputs:
   - name: eventProfileIndex
@@ -18755,11 +22568,6 @@ GetExpertisePercent:
   - name: offhandExpertisePercent
     type: number
   - name: rangedExpertisePercent
-    type: number
-GetExtraBarIndex:
-  inputs:
-  outputs:
-  - name: value
     type: number
 GetFactionInfo:
   inputs:
@@ -18922,6 +22730,13 @@ GetFramerate:
     type: number
 GetFramesRegisteredForEvent:
   impl: GetFramesRegisteredForEvent
+GetFunctionCPUUsage:
+  inputs:
+  outputs:
+  - name: call_time
+    type: number
+  - name: call_count
+    type: number
 GetGameMessageInfo:
   inputs:
   - name: gameErrorIndex
@@ -18954,14 +22769,7 @@ GetGraphicsAPIs:
     stub: opengl
     type: string
   outstride: 1
-GetGraphicsCVarOffsetForCVar:
-GetGraphicsCVarOffsetForUI:
-  inputs:
-  - type: number
-  outputs:
-  - type: number
 GetGraphicsCVarValueForQualityLevel:
-GetGraphicsDropdownIndexByMasterIndex:
 GetGreetingText:
   inputs:
   outputs:
@@ -19102,11 +22910,6 @@ GetGuildInfo:
     type: string
   - name: guildRankIndex
     type: number
-GetGuildInfoText:
-  inputs:
-  outputs:
-  - name: text
-    type: string
 GetGuildLogoInfo:
 GetGuildMemberRecipes:
 GetGuildNewsFilters:
@@ -19168,9 +22971,6 @@ GetGuildRosterInfo:
     type: boolean
 GetGuildRosterLargestAchievementPoints:
 GetGuildRosterLastOnline:
-GetGuildRosterMOTD:
-  outputs:
-  - type: string
 GetGuildRosterSelection:
   inputs:
   outputs:
@@ -19351,6 +23151,9 @@ GetInstanceInfo:
   - name: lfgDungeonID
     nilable: true
     type: number
+  - default: false
+    name: hasWorldTier
+    type: boolean
 GetInstanceLockTimeRemaining:
   inputs:
   outputs:
@@ -20061,9 +23864,6 @@ GetMovieDownloadProgress:
     type: number
   - name: total
     type: number
-GetMultiCastBarIndex:
-  outputs:
-  - type: number
 GetMultiCastTotemSpells:
 GetNativeRealmID:
   inputs:
@@ -20416,6 +24216,11 @@ GetNumTitles:
   outputs:
   - name: result
     type: number
+GetNumTotemSlots:
+  inputs:
+  outputs:
+  - name: numSlots
+    type: number
 GetNumTrackedAchievements:
 GetNumTradeSkills:
   inputs:
@@ -20442,11 +24247,6 @@ GetOverrideAPBySpellPower:
   outputs:
   - name: result
     type: number
-GetOverrideBarIndex:
-  inputs:
-  outputs:
-  - type: number
-GetOverrideBarSkin:
 GetOverrideSpellPowerByAP:
   inputs:
   outputs:
@@ -20580,15 +24380,24 @@ GetPlayerFacing:
     type: number
 GetPlayerInfoByGUID:
   inputs:
-  - type: string
+  - name: guid
+    type: string
+  mayreturnnothing: true
   outputs:
-  - type: string
-  - type: string
-  - type: string
-  - type: string
-  - type: number
-  - type: string
-  - type: string
+  - name: localizedClass
+    type: string
+  - name: englishClass
+    type: string
+  - name: localizedRace
+    type: string
+  - name: englishRace
+    type: string
+  - name: sex
+    type: number
+  - name: name
+    type: string
+  - name: realmName
+    type: string
 GetPlayerTradeMoney:
   outputs:
   - type: number
@@ -20641,6 +24450,12 @@ GetProgressText:
   - name: progressText
     type: string
 GetPromotionRank:
+GetProtocolTypes:
+  inputs:
+  outputs:
+  - name: protocolTypes
+    type: string
+  outstride: 1
 GetPVPDesired:
   inputs:
   outputs:
@@ -21022,6 +24837,13 @@ GetRaidRosterInfo:
   - name: combatRole
     type: string
 GetRaidTargetIndex:
+  inputs:
+  - name: target
+    type: unit
+  outputs:
+  - name: result
+    nilable: true
+    type: number
 GetRandomDungeonBestChoice:
   inputs:
   outputs:
@@ -21234,18 +25056,16 @@ GetScreenHeight:
   outputs:
   - name: height
     type: number
-GetScreenResolutions:
-  inputs:
-  outputs:
-  - name: resolutions
-    stub: 1024x768
-    type: string
-  outstride: 1
 GetScreenWidth:
   impl: GetScreenWidth
   inputs:
   outputs:
   - name: width
+    type: number
+GetScriptCPUUsage:
+  inputs:
+  outputs:
+  - name: result
     type: number
 GetSecondsUntilParentalControlsKick:
   inputs:
@@ -21434,6 +25254,12 @@ GetSpecializationRoleByID:
 GetSpecializationRoleEnum:
 GetSpecializationRoleEnumByID:
 GetSpecializationSpells:
+GetSpecializationSystem:
+  inputs:
+  outputs:
+  - name: system
+    type:
+      enum: SpecializationSystem
 GetSpecsForSpell:
 GetSpellAutocast:
   inputs:
@@ -21604,6 +25430,13 @@ GetStablePetInfo:
     type: string
 GetStatistic:
 GetStatisticsCategoryList:
+GetStringFromModifiers:
+  inputs:
+  - name: modifiers
+    type: number
+  outputs:
+  - name: modifierString
+    type: string
 GetSubZoneText:
   inputs:
   outputs:
@@ -21650,7 +25483,6 @@ GetTaxiBenchmarkMode:
   - name: result
     type: boolean
 GetTaxiMapID:
-GetTempShapeshiftBarIndex:
 GetText:
   inputs:
   - name: token
@@ -21689,7 +25521,7 @@ GetTime:
 GetTimePreciseSec:
   inputs:
   outputs:
-  - name: seconds
+  - name: time
     type: number
 GetTitleName:
   inputs:
@@ -21705,7 +25537,6 @@ GetTitleText:
   outputs:
   - name: titleText
     type: string
-GetToolTipInfo:
 GetTotalAchievementPoints:
   inputs:
   outputs:
@@ -21719,6 +25550,14 @@ GetTotemCannotDismiss:
   - name: cannotDismiss
     nilable: true
     type: boolean
+GetTotemDuration:
+  inputs:
+  - name: slot
+    type: number
+  outputs:
+  - name: duration
+    type:
+      luaobject: LuaDurationObject
 GetTotemInfo:
   inputs:
   - name: slot
@@ -22005,6 +25844,29 @@ GetUICameraInfo:
   - name: useModelCenter
     type: boolean
 GetUITextureKitInfo:
+GetUnitEmpowerHoldAtMaxTime:
+  inputs:
+  - name: unit
+    type: unit
+  outputs:
+  - name: holdAtMaxTime
+    type: number
+GetUnitEmpowerMinHoldTime:
+  inputs:
+  - name: unit
+    type: unit
+  outputs:
+  - name: minHoldTime
+    type: number
+GetUnitEmpowerStageDuration:
+  inputs:
+  - name: unit
+    type: unit
+  - name: index
+    type: number
+  outputs:
+  - name: duration
+    type: number
 GetUnitHealthModifier:
   inputs:
   - name: unit
@@ -22153,10 +26015,6 @@ GetUnspentTalentPoints:
   outputs:
   - name: talentPoints
     type: number
-GetVehicleBarIndex:
-  inputs:
-  outputs:
-  - type: number
 GetVehicleUIIndicator:
   inputs:
   - name: vehicleIndicatorID
@@ -22182,7 +26040,6 @@ GetVehicleUIIndicatorSeat:
   - name: yPos
     type: number
 GetVideoCaps:
-GetVideoOptions:
 GetWarGameQueueStatus:
 GetWarGameTypeInfo:
 GetWeaponEnchantInfo:
@@ -22256,21 +26113,20 @@ GuildNewsSort:
   - name: unknown
     type: number
   outputs:
-GuildRosterSetOfficerNote:
-GuildRosterSetPublicNote:
 HandleAtlasMemberCommand:
-HasAction:
-HasBonusActionBar:
+hasanysecretvalues:
+  inputs:
+  - name: values
+    type: unknown
+  instride: 1
+  outputs:
+  - name: isAnyValueSecret
+    type: boolean
 HasCompletedAnyAchievement:
 HasDualWieldPenalty:
   inputs:
   outputs:
   - name: result
-    type: boolean
-HasExtraActionBar:
-  inputs:
-  outputs:
-  - name: value
     type: boolean
 HasFilledPetition:
   inputs:
@@ -22318,7 +26174,6 @@ HasNoReleaseAura:
     type: number
   - name: hasUntilCancelledDuration
     type: boolean
-HasOverrideActionBar:
 HasPetSpells:
 HasPetUI:
 HasSendMailItem:
@@ -22328,8 +26183,6 @@ HasSendMailItem:
   outputs:
   - name: value
     type: boolean
-HasTempShapeshiftActionBar:
-HasVehicleActionBar:
 HasWandEquipped:
 HaveQuestData:
   inputs:
@@ -22403,7 +26256,6 @@ IsAccountSecured:
   - name: result
     type: boolean
 IsAchievementEligible:
-IsActionInRange:
 IsActiveBattlefieldArena:
 IsActiveQuestLegendary:
 IsActiveQuestTrivial:
@@ -22423,22 +26275,8 @@ IsArenaSeasonActive:
 IsArenaSkirmish:
 IsArenaTeamCaptain:
 IsAtStableMaster:
-IsAttackAction:
-  inputs:
-  - name: action
-    type: number
-  outputs:
-  - name: value
-    type: boolean
 IsAttackSpell:
 IsAuctionSortReversed:
-IsAutoRepeatAction:
-  inputs:
-  - name: action
-    type: number
-  outputs:
-  - name: value
-    type: boolean
 IsAutoRepeatSpell:
   outputs:
   - name: value
@@ -22467,7 +26305,6 @@ IsCharacterNewlyBoosted:
 IsChatAFK:
 IsChatChannelRaid:
 IsChatDND:
-IsConsumableAction:
 IsConsumableSpell:
   inputs:
   - name: spellName
@@ -22487,13 +26324,6 @@ IsCpuBound:
   - name: isCpuBound
     nilable: true
     type: boolean
-IsCurrentAction:
-  inputs:
-  - name: action
-    type: number
-  outputs:
-  - name: value
-    type: boolean
 IsCurrentQuestFailed:
 IsCurrentSpell:
   outputs:
@@ -22512,17 +26342,6 @@ IsDualWielding:
   outputs:
   - name: result
     type: boolean
-IsEncounterInProgress:
-  inputs:
-  outputs:
-  - name: value
-    type: boolean
-IsEncounterLimitingResurrections:
-  inputs:
-  outputs:
-  - type: boolean
-IsEncounterSuppressingRelease:
-IsEquippedAction:
 IsEuropeanNumbers:
   inputs:
   outputs:
@@ -22568,7 +26387,6 @@ IsGMClient:
     type: boolean
 IsGraphicsCVarValueSupported:
 IsGraphicsSettingValueSupported:
-IsGUIDInGroup:
 IsGuildLeader:
   inputs:
   outputs:
@@ -22613,7 +26431,6 @@ IsInRaid:
 IsInScenarioGroup:
 IsInventoryItemLocked:
 IsInventoryItemProfessionBag:
-IsItemAction:
 IsItemPreferredArmorType:
   inputs:
   - name: itemLocation
@@ -22756,6 +26573,7 @@ IsOutOfBounds:
   - name: result
     type: boolean
 IsPartyLFG:
+IsPartyWorldPVP:
 IsPassiveSpell:
   outputs:
   - name: isPassive
@@ -22787,7 +26605,6 @@ IsPlayerMoving:
   - name: result
     type: boolean
 IsPlayerNeutral:
-IsPossessBarVisible:
 IsPublicBuild:
   impl: IsPublicBuild
   inputs:
@@ -22822,13 +26639,23 @@ IsQuestItemHidden:
 IsQuestLogSpecialItemInRange:
 IsQuestWatched:
 IsRaidMarkerActive:
+  inputs:
+  - name: index
+    type: number
+  outputs:
+  - name: result
+    type: boolean
+IsRaidMarkerSystemEnabled:
+  inputs:
+  outputs:
+  - name: enabled
+    type: boolean
 IsRangedWeapon:
   inputs:
   outputs:
   - name: result
     type: boolean
 IsRatedBattleground:
-IsRecognizedName:
 IsResting:
   inputs:
   outputs:
@@ -22859,6 +26686,21 @@ IsRightShiftKeyDown:
   outputs:
   - name: down
     type: boolean
+issecrettable:
+  inputs:
+  - name: table
+    type: unknown
+  outputs:
+  - name: isSecretOrContentsSecret
+    type: boolean
+issecretvalue:
+  inputs:
+  - name: value
+    nilable: true
+    type: unknown
+  outputs:
+  - name: isSecret
+    type: boolean
 issecure:
   impl: issecure
 issecurevalue:
@@ -22874,7 +26716,6 @@ IsShiftKeyDown:
 IsSpellClassOrSpec:
 IsSpellHidden:
 IsSpellInRange:
-IsStackableAction:
 IsStealthed:
   inputs:
   outputs:
@@ -22943,7 +26784,6 @@ IsUnitModelReadyForUI:
     type: boolean
 IsUnitOnQuest:
 IsUnitOnQuestByQuestID:
-IsUsableAction:
 IsUsableSpell:
 IsUsingFixedTimeStep:
   inputs:
@@ -23099,6 +26939,22 @@ Logout:
 LootMoneyNotify:
 LootSlot:
 LootSlotHasItem:
+MakeModifiers:
+  inputs:
+  outputs:
+  - name: modifiers
+    type: number
+mapvalues:
+  inputs:
+  - name: func
+    type: unknown
+  - name: values
+    type: unknown
+  instride: 1
+  outputs:
+  - name: mapped
+    type: unknown
+  outstride: 1
 math.abs:
   impl: math.abs
 math.acos:
@@ -23315,6 +27171,13 @@ PitchUpStop:
 PlaceAction:
 PlaceAuctionBid:
 PlaceRaidMarker:
+  inputs:
+  - name: index
+    type: number
+  - name: token
+    nilable: true
+    type: string
+  outputs:
 PlayerCanTeleport:
   inputs:
   outputs:
@@ -23351,13 +27214,19 @@ PlayerIsPVPInactive:
   - type: unit
   outputs:
   - type: boolean
+PlayerIsSpellTarget:
+  inputs:
+  - name: unit
+    type: unit
+  outputs:
+  - name: result
+    type: boolean
 PlayerIsTimerunning:
   inputs:
   outputs:
   - name: playerIsTimerunning
     type: boolean
 PlayMusic:
-PlaySound:
 PlaySoundFile:
 PortGraveyard:
   inputs:
@@ -23373,12 +27242,6 @@ PrevView:
   outputs:
 ProcessExceptionClient:
   impl: ProcessExceptionClient
-PromoteToAssistant:
-PromoteToLeader:
-  inputs:
-  - name: unit
-    type: unit
-  outputs:
 PurchaseSlot:
 PutItemInBackpack:
 PutItemInBag:
@@ -23440,12 +27303,36 @@ RedockChatWindows:
   inputs:
   outputs:
 RefreshLFGList:
+RegisterEventCallback:
+  impl: RegisterEventCallback
+  inputs:
+  - name: eventName
+    type: string
+  - name: callback
+    type:
+      luaobject: LuaFunctionContainer
+  outputs:
+  - name: registered
+    type: boolean
 RegisterStaticConstants:
+RegisterUnitEventCallback:
+  inputs:
+  - name: eventName
+    type: string
+  - name: callback
+    type:
+      luaobject: LuaFunctionContainer
+  - name: unit
+    type: unit
+  outputs:
 RejectProposal:
 RemoveAutoQuestPopUp:
 RemoveChatWindowChannel:
 RemoveChatWindowMessages:
 RemoveQuestWatch:
+RemoveRaidTargets:
+  inputs:
+  outputs:
 RemoveTalent:
 RemoveTrackedAchievement:
 RenamePetition:
@@ -23578,6 +27465,23 @@ Screenshot:
   outputs:
 scrub:
   impl: scrub
+  inputs:
+  - name: values
+    type: any
+  instride: 1
+  outputs:
+  - name: scrubbed
+    type: any
+  outstride: 1
+scrubsecretvalues:
+  inputs:
+  - name: values
+    type: unknown
+  instride: 1
+  outputs:
+  - name: scrubbed
+    type: unknown
+  outstride: 1
 SearchLFGGetEncounterResults:
 SearchLFGGetJoinedID:
 SearchLFGGetNumResults:
@@ -23586,10 +27490,43 @@ SearchLFGGetResults:
 SearchLFGJoin:
 SearchLFGLeave:
 SearchLFGSort:
+secretunwrap:
+  inputs:
+  - name: values
+    type: unknown
+  instride: 1
+  outputs:
+  - name: unwrapped
+    type: unknown
+  outstride: 1
+secretwrap:
+  impl: secretwrap
+  inputs:
+  - name: values
+    type: any
+  instride: 1
+  outputs:
+  - name: wrapped
+    type: any
+  outstride: 1
 securecall:
   impl: securecall
 securecallfunction:
   impl: securecallfunction
+securecallmethod:
+  impl: securecallmethod
+  inputs:
+  - name: object
+    type: any
+  - name: method
+    type: string
+  - name: arguments
+    type: any
+  instride: 1
+  outputs:
+  - name: results
+    type: any
+  outstride: 1
 SecureCmdOptionParse:
   impl: SecureCmdOptionParse
   inputs:
@@ -23639,7 +27576,6 @@ SetAbandonQuest:
 SetAchievementComparisonUnit:
 SetAchievementSearchString:
 SetActionBarToggles:
-SetActionUIButton:
 SetAllowDangerousScripts:
   inputs:
   - default: false
@@ -23733,7 +27669,13 @@ SetCursorByMode:
   outputs:
   - name: result
     type: boolean
-SetDefaultVideoOptions:
+SetCursorPosition:
+  inputs:
+  - name: xPosition
+    type: number
+  - name: yPosition
+    type: number
+  outputs:
 SetDungeonDifficultyID:
   inputs:
   - name: difficultyID
@@ -23757,7 +27699,6 @@ SetEuropeanNumbers:
   - name: enabled
     type: boolean
   outputs:
-SetEveryoneIsAssistant:
 SetFactionActive:
 SetFactionInactive:
 setfenv:
@@ -23769,7 +27710,6 @@ SetGuildBankTabItemWithdraw:
 SetGuildBankTabPermissions:
 SetGuildBankText:
 SetGuildBankWithdrawGoldLimit:
-SetGuildInfoText:
 SetGuildMemberRank:
 SetGuildNewsFilter:
 SetGuildRosterSelection:
@@ -23870,12 +27810,12 @@ SetRaidProfileSavedPosition:
 SetRaidSubgroup:
 SetRaidTarget:
   inputs:
-  - type: string
-  - type: number
+  - name: target
+    type: unit
+  - name: userIndex
+    type: number
   outputs:
-SetRaidTargetProtected:
 SetSavedInstanceExtend:
-SetScreenResolution:
 setsecurehookforbidden:
 SetSelectedAuctionItem:
 SetSelectedDisplayChannel:
@@ -23893,6 +27833,14 @@ SetSendMailShowing:
 SetSpecialization:
 SetSpellbookPetAction:
 SetSuperTrackedQuestID:
+SetTableSecurityOption:
+  inputs:
+  - name: table
+    type: table
+  - name: option
+    type:
+      enum: TableSecurityOption
+  outputs:
 SetTaxiBenchmarkMode:
   inputs:
   - default: false
@@ -23975,6 +27923,26 @@ ShowQuestComplete:
 ShowQuestOffer:
 ShowRepairCursor:
 SignPetition:
+SimulateMouseClick:
+  inputs:
+  - name: button
+    type: string
+  outputs:
+SimulateMouseDown:
+  inputs:
+  - name: button
+    type: string
+  outputs:
+SimulateMouseUp:
+  inputs:
+  - name: button
+    type: string
+  outputs:
+SimulateMouseWheel:
+  inputs:
+  - name: delta
+    type: number
+  outputs:
 SitStandOrDescendStart:
   inputs:
   outputs:
@@ -24008,10 +27976,7 @@ SpellCancelQueuedSpell:
 SpellCanTargetItem:
 SpellCanTargetItemID:
 SpellCanTargetUnit:
-SpellGetVisibilityInfo:
 SpellHasRange:
-SpellIsAlwaysShown:
-SpellIsSelfBuff:
 SpellIsTargeting:
 SpellStopCasting:
   inputs:
@@ -24090,6 +28055,7 @@ string.byte:
   impl: string.byte
 string.char:
   impl: string.char
+string.concat:
 string.find:
   impl: string.find
 string.format:
@@ -24118,27 +28084,17 @@ string.sub:
   impl: string.sub
 string.trim:
   impl: string.trim
+  inputs:
+  - name: str
+    type: string
+  - default: ' \r\n\t'
+    name: characters
+    type: string
+  outputs:
+  - name: trimmed
+    type: string
 string.upper:
   impl: string.upper
-StripHyperlinks:
-  inputs:
-  - name: text
-    type: string
-  - default: false
-    name: maintainColor
-    type: boolean
-  - default: false
-    name: maintainBrackets
-    type: boolean
-  - default: false
-    name: stripNewlines
-    type: boolean
-  - default: false
-    name: maintainAtlases
-    type: boolean
-  outputs:
-  - name: stripped
-    type: string
 strjoin:
   impl: strjoin
 strlenutf8:
@@ -24147,8 +28103,6 @@ strsplit:
   impl: strsplit
 strsplittable:
   impl: strsplittable
-strtrim:
-  impl: strtrim
 Stuck:
   inputs:
   outputs:
@@ -24191,10 +28145,22 @@ table.foreach:
   impl: table.foreach
 table.foreachi:
   impl: table.foreachi
+table.freeze:
+  inputs:
+  - name: table
+    type: unknown
+  outputs:
 table.getn:
   impl: table.getn
 table.insert:
   impl: table.insert
+table.isfrozen:
+  inputs:
+  - name: table
+    type: unknown
+  outputs:
+  - name: frozen
+    type: boolean
 table.maxn:
   impl: table.maxn
 table.remove:
@@ -24375,7 +28341,6 @@ TurnRightStop:
   protected: true
 type:
   impl: type
-UninviteUnit:
 UnitAffectingCombat:
   inputs:
   - type: string
@@ -24412,31 +28377,78 @@ UnitAttackSpeed:
   - type: number
   - type: number
 UnitBattlePetLevel:
+  inputs:
+  - name: unit
+    type: unit
+  outputs:
+  - name: result
+    nilable: true
+    type: number
 UnitBattlePetSpeciesID:
+  inputs:
+  - name: unit
+    type: unit
+  outputs:
+  - name: result
+    nilable: true
+    type: number
 UnitBattlePetType:
+  inputs:
+  - name: unit
+    type: unit
+  outputs:
+  - name: result
+    nilable: true
+    type: number
 UnitCanAssist:
   inputs:
-  - type: string
-  - type: string
+  - name: unit
+    type: unit
+  - name: target
+    type: unit
   outputs:
-  - type: oneornil
+  - name: result
+    type: boolean
 UnitCanAttack:
   inputs:
-  - type: string
-  - type: string
+  - name: unit
+    type: unit
+  - name: target
+    type: unit
   outputs:
-  - type: oneornil
+  - name: result
+    type: boolean
 UnitCanCooperate:
   inputs:
-  - type: string
-  - type: string
+  - name: unit
+    type: unit
+  - name: target
+    type: unit
   outputs:
-  - type: oneornil
-UnitCastingInfo:
+  - name: result
+    type: boolean
+UnitCanPetBattle:
+  inputs:
+  - name: unit
+    type: unit
+  - name: target
+    type: unit
+  outputs:
+  - name: result
+    type: boolean
+UnitCastingDuration:
   inputs:
   - name: unit
     type: unit
   mayreturnnothing: true
+  outputs:
+  - name: duration
+    type:
+      luaobject: LuaDurationObject
+UnitCastingInfo:
+  inputs:
+  - name: unit
+    type: unit
   outputs:
   - name: name
     type: string
@@ -24453,14 +28465,28 @@ UnitCastingInfo:
   - name: castID
     type: string
   - name: notInterruptible
+    nilable: true
     type: boolean
   - name: castingSpellID
     type: number
-UnitChannelInfo:
+  - name: castBarID
+    nilable: true
+    type: number
+  - name: delayTimeMs
+    type: number
+UnitChannelDuration:
   inputs:
   - name: unit
     type: unit
   mayreturnnothing: true
+  outputs:
+  - name: duration
+    type:
+      luaobject: LuaDurationObject
+UnitChannelInfo:
+  inputs:
+  - name: unit
+    type: unit
   outputs:
   - name: name
     type: string
@@ -24475,12 +28501,17 @@ UnitChannelInfo:
   - name: isTradeskill
     type: boolean
   - name: notInterruptible
+    nilable: true
     type: boolean
   - name: spellID
     type: number
   - name: isEmpowered
     type: boolean
   - name: numEmpowerStages
+    stub: 0
+    type: number
+  - name: castBarID
+    nilable: true
     type: number
 UnitCharacterPoints:
   inputs:
@@ -24511,6 +28542,18 @@ UnitClassBase:
     type: string
   - name: classID
     type: number
+UnitClassFromGUID:
+  inputs:
+  - name: unitGUID
+    type: string
+  mayreturnnothing: true
+  outputs:
+  - name: className
+    type: string
+  - name: classFilename
+    type: string
+  - name: classID
+    type: number
 UnitClassification:
   inputs:
   - name: unit
@@ -24535,6 +28578,14 @@ UnitCreatureFamily:
   - name: name
     type: string
   - name: id
+    type: number
+UnitCreatureID:
+  inputs:
+  - name: unit
+    type: unit
+  outputs:
+  - name: creatureID
+    nilable: true
     type: number
 UnitCreatureType:
   inputs:
@@ -24591,6 +28642,40 @@ UnitEffectiveLevel:
   outputs:
   - name: result
     type: number
+UnitEmpoweredChannelDuration:
+  inputs:
+  - name: unit
+    type: unit
+  - default: true
+    name: includeHoldAtMaxTime
+    type: boolean
+  mayreturnnothing: true
+  outputs:
+  - name: duration
+    type:
+      luaobject: LuaDurationObject
+UnitEmpoweredStageDurations:
+  inputs:
+  - name: unit
+    type: unit
+  mayreturnnothing: true
+  outputs:
+  - name: duration
+    type:
+      arrayof:
+        luaobject: LuaDurationObject
+UnitEmpoweredStagePercentages:
+  inputs:
+  - name: unit
+    type: unit
+  - default: true
+    name: includeHoldAtMaxTime
+    type: boolean
+  mayreturnnothing: true
+  outputs:
+  - name: percentages
+    type:
+      arrayof: number
 UnitExists:
   impl: UnitExists
   inputs:
@@ -24616,10 +28701,13 @@ UnitFactionGroup:
     type: string
 UnitFullName:
   inputs:
-  - type: string
+  - name: unit
+    type: unit
   outputs:
-  - type: string
-  - type: string
+  - name: unitName
+    type: string
+  - name: unitServer
+    type: string
 UnitGetAvailableRoles:
   inputs:
   - name: unit
@@ -24632,13 +28720,28 @@ UnitGetAvailableRoles:
     type: boolean
   - name: dps
     type: boolean
+UnitGetDetailedHealPrediction:
+  inputs:
+  - name: unit
+    type: unit
+  - name: healerUnit
+    nilable: true
+    type: unit
+  - name: healPredictionCalculator
+    type:
+      luaobject: UnitHealPredictionCalculator
+  outputs:
 UnitGetIncomingHeals:
   inputs:
-  - type: string
-  - nilable: true
-    type: string
+  - name: unit
+    type: unit
+  - name: healerGUID
+    nilable: true
+    type: unit
   outputs:
-  - type: number
+  - name: result
+    nilable: true
+    type: number
 UnitGetTotalAbsorbs:
   inputs:
   - name: unit
@@ -24657,7 +28760,7 @@ UnitGroupRolesAssigned:
   inputs:
   - name: unit
     nilable: true
-    type: string
+    type: unit
   outputs:
   - name: result
     stub: DAMAGER
@@ -24676,7 +28779,7 @@ UnitGUID:
   - name: unit
     type: unit
   outputs:
-  - name: guid
+  - name: result
     nilable: true
     type: string
 UnitHasIncomingResurrection:
@@ -24697,6 +28800,16 @@ UnitHasLFGRandomCooldown:
     type: unit
   outputs:
   - name: value
+    type: boolean
+UnitHasPowerType:
+  inputs:
+  - name: unitToken
+    type: unit
+  - name: powerType
+    type:
+      enum: PowerType
+  outputs:
+  - name: hasPower
     type: boolean
 UnitHasRelicSlot:
   inputs:
@@ -24722,14 +28835,45 @@ UnitHasVehicleUI:
     type: boolean
 UnitHealth:
   inputs:
-  - type: string
+  - name: unit
+    type: unit
+  - default: true
+    name: usePredicted
+    type: boolean
   outputs:
-  - type: number
+  - name: result
+    type: number
 UnitHealthMax:
   inputs:
-  - type: string
+  - name: unit
+    type: unit
   outputs:
-  - type: number
+  - name: result
+    type: number
+UnitHealthMissing:
+  inputs:
+  - name: unit
+    type: unit
+  - default: true
+    name: usePredicted
+    type: boolean
+  outputs:
+  - name: result
+    type: number
+UnitHealthPercent:
+  inputs:
+  - name: unit
+    type: unit
+  - default: true
+    name: usePredicted
+    type: boolean
+  - name: curve
+    nilable: true
+    type:
+      luaobject: LuaCurveObjectBase
+  outputs:
+  - name: result
+    type: table
 UnitHPPerStamina:
   inputs:
   - name: unit
@@ -24773,8 +28917,11 @@ UnitInParty:
   - name: unit
     nilable: true
     type: unit
+  - name: partyIndex
+    nilable: true
+    type: number
   outputs:
-  - name: inParty
+  - name: result
     type: boolean
 UnitInPartyIsAI:
   inputs:
@@ -24787,10 +28934,16 @@ UnitInPartyIsAI:
 UnitInPhase:
 UnitInRaid:
   inputs:
-  - nilable: true
-    type: string
+  - name: unit
+    nilable: true
+    type: unit
+  - name: partyIndex
+    nilable: true
+    type: number
   outputs:
-  - type: boolean
+  - name: result
+    nilable: true
+    type: number
 UnitInRange:
   inputs:
   - name: unit
@@ -24838,18 +28991,33 @@ UnitInVehicleHidesPetFrame:
     type: boolean
 UnitIsAFK:
   inputs:
-  - type: string
+  - name: unit
+    type: unit
   outputs:
-  - type: oneornil
+  - name: result
+    type: boolean
 UnitIsBattlePet:
+  inputs:
+  - name: unit
+    type: unit
+  outputs:
+  - name: result
+    nilable: true
+    type: boolean
 UnitIsBattlePetCompanion:
+  inputs:
+  - name: unit
+    type: unit
+  outputs:
+  - name: result
+    type: boolean
 UnitIsCharmed:
   inputs:
   - name: unit
     nilable: true
     type: unit
   outputs:
-  - name: value
+  - name: result
     type: boolean
 UnitIsCivilian:
 UnitIsConnected:
@@ -24889,17 +29057,17 @@ UnitIsDND:
   - name: unit
     type: unit
   outputs:
-  - name: isDND
-    type: oneornil
+  - name: result
+    type: boolean
 UnitIsEnemy:
   inputs:
   - name: unit
     type: unit
-  - name: otherUnit
+  - name: target
     type: unit
   outputs:
-  - name: isEnemy
-    type: oneornil
+  - name: result
+    type: boolean
 UnitIsFeignDeath:
   inputs:
   - type: string
@@ -24907,10 +29075,13 @@ UnitIsFeignDeath:
   - type: oneornil
 UnitIsFriend:
   inputs:
-  - type: string
-  - type: string
+  - name: unit
+    type: unit
+  - name: target
+    type: unit
   outputs:
-  - type: oneornil
+  - name: result
+    type: boolean
 UnitIsGameObject:
   inputs:
   - name: unit
@@ -24941,6 +29112,17 @@ UnitIsGroupLeader:
   outputs:
   - name: isLeader
     type: boolean
+UnitIsHumanPlayer:
+  inputs:
+  - name: unit
+    nilable: true
+    type: unit
+  - name: partyIndex
+    nilable: true
+    type: number
+  outputs:
+  - name: result
+    type: boolean
 UnitIsInMyGuild:
   inputs:
   - name: unit
@@ -24956,13 +29138,37 @@ UnitIsInteractable:
   outputs:
   - name: result
     type: boolean
+UnitIsMinion:
+  inputs:
+  - name: unit
+    type: unit
+  outputs:
+  - name: result
+    type: boolean
+UnitIsNPCAsPlayer:
+  inputs:
+  - name: unit
+    nilable: true
+    type: unit
+  outputs:
+  - name: result
+    type: boolean
 UnitIsOtherPlayersBattlePet:
+  inputs:
+  - name: unit
+    nilable: true
+    type: unit
+  outputs:
+  - name: result
+    type: boolean
 UnitIsOtherPlayersPet:
   inputs:
-  - nilable: true
-    type: string
+  - name: unit
+    nilable: true
+    type: unit
   outputs:
-  - type: boolean
+  - name: result
+    type: boolean
 UnitIsOwnerOrControllerOfUnit:
   inputs:
   - name: controllingUnit
@@ -24978,25 +29184,34 @@ UnitIsPlayer:
   - name: unit
     nilable: true
     type: unit
+  - name: partyIndex
+    nilable: true
+    type: number
   outputs:
   - name: result
     type: boolean
 UnitIsPossessed:
   inputs:
-  - nilable: true
-    type: string
+  - name: unit
+    nilable: true
+    type: unit
   outputs:
-  - type: boolean
+  - name: result
+    type: boolean
 UnitIsPVP:
   inputs:
-  - type: unit
+  - name: unit
+    type: unit
   outputs:
-  - type: boolean
+  - name: result
+    type: boolean
 UnitIsPVPFreeForAll:
   inputs:
-  - type: unit
+  - name: unit
+    type: unit
   outputs:
-  - type: boolean
+  - name: result
+    type: boolean
 UnitIsPVPSanctuary:
   inputs:
   - name: unit
@@ -25044,20 +29259,28 @@ UnitIsUnconscious:
 UnitIsUnit:
   impl: UnitIsUnit
   inputs:
-  - name: unitName1
+  - name: unit1
     type: unit
-  - name: unitName2
+  - name: unit2
     type: unit
   outputs:
   - name: result
     type: boolean
 UnitIsVisible:
   inputs:
-  - nilable: true
-    type: string
+  - name: unit
+    nilable: true
+    type: unit
   outputs:
-  - type: boolean
+  - name: result
+    type: boolean
 UnitIsWildBattlePet:
+  inputs:
+  - name: unit
+    type: unit
+  outputs:
+  - name: result
+    type: boolean
 UnitLeadsAnyGroup:
   inputs:
   - name: unit
@@ -25079,17 +29302,28 @@ UnitName:
   - name: unit
     type: unit
   outputs:
-  - name: name
+  - name: unitName
     nilable: true
     type: string
-  - name: realm
+  - name: unitServer
     nilable: true
     type: string
+UnitNameplateShowsWidgetsOnly:
+  inputs:
+  - name: unit
+    type: unit
+  outputs:
+  - name: nameplateShowsWidgetsOnly
+    type: boolean
 UnitNameUnmodified:
   inputs:
-  - type: string
+  - name: unit
+    type: unit
   outputs:
-  - type: string
+  - name: unitName
+    type: string
+  - name: unitServer
+    type: string
 UnitNumPowerBarTimers:
   inputs:
   - name: unit
@@ -25109,6 +29343,28 @@ UnitOwnerGUID:
   outputs:
   - name: ownerGUID
     type: string
+UnitPartialPower:
+  inputs:
+  - name: unitToken
+    type: unit
+  - name: powerType
+    nilable: true
+    type:
+      enum: PowerType
+  - default: false
+    name: unmodified
+    type: boolean
+  outputs:
+  - name: partialPower
+    type: number
+UnitPercentHealthFromGUID:
+  inputs:
+  - name: unitGUID
+    type: string
+  outputs:
+  - name: percentHealth
+    nilable: true
+    type: number
 UnitPhaseReason:
   inputs:
   - name: unit
@@ -25120,25 +29376,33 @@ UnitPhaseReason:
       enum: PhaseReason
 UnitPlayerControlled:
   inputs:
-  - nilable: true
-    type: string
+  - name: unit
+    nilable: true
+    type: unit
   outputs:
-  - type: boolean
+  - name: result
+    type: boolean
 UnitPlayerOrPetInParty:
   inputs:
   - name: unit
     nilable: true
     type: unit
+  - name: partyIndex
+    nilable: true
+    type: number
   outputs:
-  - name: value
+  - name: result
     type: boolean
 UnitPlayerOrPetInRaid:
   inputs:
   - name: unit
     nilable: true
     type: unit
+  - name: partyIndex
+    nilable: true
+    type: number
   outputs:
-  - name: value
+  - name: result
     type: boolean
 UnitPosition:
   inputs:
@@ -25214,26 +29478,58 @@ UnitPowerMax:
   outputs:
   - name: maxPower
     type: number
+UnitPowerMissing:
+  inputs:
+  - name: unitToken
+    type: unit
+  - name: powerType
+    nilable: true
+    type:
+      enum: PowerType
+  - default: false
+    name: unmodified
+    type: boolean
+  outputs:
+  - name: result
+    type: number
+UnitPowerPercent:
+  inputs:
+  - name: unitToken
+    type: unit
+  - name: powerType
+    nilable: true
+    type:
+      enum: PowerType
+  - default: false
+    name: unmodified
+    type: boolean
+  - name: curve
+    nilable: true
+    type:
+      luaobject: LuaCurveObjectBase
+  outputs:
+  - name: result
+    type: table
 UnitPowerType:
   impl: UnitPowerType
   inputs:
   - name: unit
     type: unit
+  - default: 0
+    name: index
+    type: number
   mayreturnnothing: true
   outputs:
   - name: powerType
-    type: number
-  - name: powerToken
-    nilable: true
+    type:
+      enum: PowerType
+  - name: powerTypeToken
     type: string
-  - name: altR
-    nilable: true
+  - name: rgbX
     type: number
-  - name: altG
-    nilable: true
+  - name: rgbY
     type: number
-  - name: altB
-    nilable: true
+  - name: rgbZ
     type: number
 UnitPvpClassification:
   inputs:
@@ -25246,9 +29542,11 @@ UnitPvpClassification:
       enum: PvPUnitClassification
 UnitPVPName:
   inputs:
-  - type: string
+  - name: unit
+    type: unit
   outputs:
-  - type: string
+  - name: result
+    type: string
 UnitPVPRank:
   inputs:
   - type: string
@@ -25302,15 +29600,22 @@ UnitRangedDamage:
     type: number
 UnitReaction:
   inputs:
-  - type: string
-  - type: string
+  - name: unit
+    type: unit
+  - name: target
+    type: unit
   outputs:
-  - type: number
+  - name: result
+    nilable: true
+    type: number
 UnitRealmRelationship:
   inputs:
-  - type: string
+  - name: unit
+    type: unit
   outputs:
-  - type: number
+  - name: realmRelationship
+    nilable: true
+    type: number
 UnitResistance:
   inputs:
   - name: unit
@@ -25372,7 +29677,23 @@ UnitSex:
   - name: sex
     nilable: true
     type: number
+UnitSexBase:
+  inputs:
+  - name: unit
+    type: unit
+  outputs:
+  - name: sex
+    nilable: true
+    type:
+      enum: UnitSex
 UnitShouldDisplayName:
+  inputs:
+  - name: unit
+    type: unit
+  outputs:
+  - name: result
+    type: boolean
+UnitShouldDisplaySpellTargetName:
   inputs:
   - name: unit
     type: unit
@@ -25386,6 +29707,20 @@ UnitSpellHaste:
   outputs:
   - name: result
     type: number
+UnitSpellTargetClass:
+  inputs:
+  - name: unit
+    type: unit
+  outputs:
+  - name: classFilename
+    type: string
+UnitSpellTargetName:
+  inputs:
+  - name: unit
+    type: unit
+  outputs:
+  - name: targetName
+    type: string
 UnitStagger:
 UnitStat:
   inputs:
@@ -25411,6 +29746,16 @@ UnitTargetsVehicleInRaidUI:
   outputs:
   - name: result
     type: boolean
+UnitThreatLeadSituation:
+  inputs:
+  - name: unit
+    type: unit
+  - name: mobGUID
+    type: unit
+  outputs:
+  - name: result
+    nilable: true
+    type: number
 UnitThreatPercentageOfLead:
   inputs:
   - name: unit
@@ -25506,6 +29851,14 @@ UnitVehicleSkin:
   - name: result
     type: number
 UnitVehicleSkinType:
+UnitWidgetSet:
+  inputs:
+  - name: unit
+    type: unit
+  mayreturnnothing: true
+  outputs:
+  - name: uiWidgetSet
+    type: number
 UnitXP:
   inputs:
   - type: string
@@ -25520,6 +29873,24 @@ UnlearnSpecialization:
 UnmuteSoundFile:
 unpack:
   impl: unpack
+UnregisterEventCallback:
+  inputs:
+  - name: eventName
+    type: string
+  - name: callback
+    type:
+      luaobject: LuaFunctionContainer
+  outputs:
+UnregisterUnitEventCallback:
+  inputs:
+  - name: eventName
+    type: string
+  - name: callback
+    type:
+      luaobject: LuaFunctionContainer
+  - name: unit
+    type: unit
+  outputs:
 UpdateAddOnCPUUsage:
   inputs:
   outputs:

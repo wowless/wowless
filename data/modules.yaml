@@ -53,6 +53,8 @@ env:
 errorhandler:
   deps:
     eventqueue:
+    uiobjects:
+    uiobjecttypes:
 errors:
   deps:
     log:

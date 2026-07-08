@@ -1021,6 +1021,10 @@ add_lua_executable(
   wowlessutil
   wowlessyaml)
 
+add_lua_executable(
+  generatexmltest ${CMAKE_CURRENT_SOURCE_DIR}/tools/generatexmltest.lua
+  argparse penlight toolsutil wowlessyaml)
+
 set(d ${CMAKE_CURRENT_BINARY_DIR}/addon/Wowless)
 file(MAKE_DIRECTORY ${d} ${CMAKE_CURRENT_BINARY_DIR}/staging/addon/Wowless)
 set(testaddon_outs)
@@ -1059,10 +1063,53 @@ add_custom_command(
   COMMAND ${CMAKE_COMMAND} -DSRC=${staging} -DDST_DIR=${d} -P
           ${CMAKE_CURRENT_SOURCE_DIR}/cmake/copy_executable.cmake
   DEPENDS addon/Wowless/test.xml cmake/preprocess_line.cmake)
+set(out ${d}/generatedxml.xml)
+set(staged ${CMAKE_CURRENT_BINARY_DIR}/staging/addon/Wowless/generatedxml.xml)
+list(APPEND testaddon_outs ${out})
+add_custom_command(
+  OUTPUT ${staged}
+  COMMAND generatexmltest ${staged}
+  WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+  DEPFILE ${staged}.d
+  DEPENDS generatexmltest)
+add_custom_command(
+  OUTPUT ${out}
+  COMMAND ${CMAKE_COMMAND} -DSRC=${staged} -DDST_DIR=${d} -P
+          ${CMAKE_CURRENT_SOURCE_DIR}/cmake/copy_executable.cmake
+  DEPENDS ${staged})
 add_custom_command(
   OUTPUT testaddon.txt
   COMMAND ${CMAKE_COMMAND} -E touch testaddon.txt
   DEPENDS ${testaddon_outs})
+
+# Built outside of addon/ so it isn't swept up by other tests' otherAddonDirs
+# parent-directory addon discovery (see wowless/modules/loader.lua).
+set(d ${CMAKE_CURRENT_BINARY_DIR}/eluneaddon/EluneTest)
+file(MAKE_DIRECTORY ${d})
+set(eluneaddon_outs)
+foreach(f case.lua EluneTest.toc)
+  set(out ${d}/${f})
+  list(APPEND eluneaddon_outs ${out})
+  add_custom_command(
+    OUTPUT ${out}
+    COMMAND
+      ${CMAKE_COMMAND} -DSRC=${CMAKE_CURRENT_SOURCE_DIR}/addon/EluneTest/${f}
+      -DDST_DIR=${d} -P ${CMAKE_CURRENT_SOURCE_DIR}/cmake/copy_executable.cmake
+    DEPENDS addon/EluneTest/${f})
+endforeach()
+set(out ${d}/luatest_scriptcases.lua)
+list(APPEND eluneaddon_outs ${out})
+add_custom_command(
+  OUTPUT ${out}
+  COMMAND
+    ${CMAKE_COMMAND}
+    -DSRC=${CMAKE_CURRENT_SOURCE_DIR}/vendor/elune/tests/luatest_scriptcases.lua
+    -DDST_DIR=${d} -P ${CMAKE_CURRENT_SOURCE_DIR}/cmake/copy_executable.cmake
+  DEPENDS vendor/elune/tests/luatest_scriptcases.lua)
+add_custom_command(
+  OUTPUT eluneaddon.txt
+  COMMAND ${CMAKE_COMMAND} -E touch eluneaddon.txt
+  DEPENDS ${eluneaddon_outs})
 
 set(specs
     spec/addon/arraydiff_spec.lua
@@ -1103,8 +1150,13 @@ add_custom_command(
   COMMENT "Running tests"
   OUTPUT test.out
   COMMAND runtests -o ${CMAKE_CURRENT_BINARY_DIR}/test.out ${specs}
-  DEPENDS runtests addons.txt ${schemadbs} ${specs} spec/wowless/temp.blp
+  DEPENDS runtests
+          addons.txt
+          ${schemadbs}
+          ${specs}
+          spec/wowless/temp.blp
           testaddon.txt
+          eluneaddon.txt
   WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
 add_custom_target(test DEPENDS test.out)
 
