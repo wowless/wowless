@@ -33,6 +33,7 @@ cgencode:
     units:
 chunks:
   deps:
+    security:
 clog:
   deps:
     datalua:
