@@ -512,14 +512,20 @@ foreach(product ${products})
   add_custom_command(
     OUTPUT stamp/${product}.txt
     BYPRODUCTS runtime/${product}.lua generated/${product}_stubs.cpp
+               runtime/${product}_xmlcode.lua
     COMMAND
       prep ${product} --sqls ${CMAKE_CURRENT_BINARY_DIR}/runtime/sqls.yaml
       --output ${CMAKE_CURRENT_BINARY_DIR}/generated/${product}.lua --coutput
-      ${CMAKE_CURRENT_BINARY_DIR}/generated/${product}_stubs.cpp
+      ${CMAKE_CURRENT_BINARY_DIR}/generated/${product}_stubs.cpp --xmlcode
+      ${CMAKE_CURRENT_BINARY_DIR}/generated/${product}_xmlcode.lua
     COMMAND
       ${CMAKE_COMMAND} -E copy_if_different
       ${CMAKE_CURRENT_BINARY_DIR}/generated/${product}.lua
       ${CMAKE_CURRENT_BINARY_DIR}/runtime/${product}.lua
+    COMMAND
+      ${CMAKE_COMMAND} -E copy_if_different
+      ${CMAKE_CURRENT_BINARY_DIR}/generated/${product}_xmlcode.lua
+      ${CMAKE_CURRENT_BINARY_DIR}/runtime/${product}_xmlcode.lua
     COMMAND ${CMAKE_COMMAND} -E touch
             ${CMAKE_CURRENT_BINARY_DIR}/stamp/${product}.txt
     WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
@@ -527,9 +533,10 @@ foreach(product ${products})
     DEPENDS prep runtime/sqls.yaml)
   add_custom_target(datalua_${product}_lua DEPENDS stamp/${product}.txt)
   add_dependencies(datalua_${product}_lua stamp_sqls)
-  lua2c(datalua_${product}
-        build.products.${product}.data=runtime/${product}.lua
-        build.products.${product}.stubs=c)
+  lua2c(
+    datalua_${product} build.products.${product}.data=runtime/${product}.lua
+    build.products.${product}.stubs=c
+    build.products.${product}.xmlcode=runtime/${product}_xmlcode.lua)
   target_sources(
     datalua_${product}
     PRIVATE ${CMAKE_CURRENT_BINARY_DIR}/generated/${product}_stubs.cpp)
@@ -855,9 +862,11 @@ lua2c(
   wowless.modules=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules.lua
   wowless.modules.addons=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/addons.lua
   wowless.modules.api=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/api.lua
+  wowless.modules.bindings=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/bindings.lua
   wowless.modules.atlas=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/atlas.lua
   wowless.modules.calendar=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/calendar.lua
   wowless.modules.cgencode=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/cgencode.lua
+  wowless.modules.chunks=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/chunks.lua
   wowless.modules.clog=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/clog.lua
   wowless.modules.cstubs=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/cstubs.lua
   wowless.modules.cvars=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/cvars.lua
@@ -894,6 +903,7 @@ lua2c(
   wowless.modules.uiobjecttypes=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/uiobjecttypes.lua
   wowless.modules.units=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/units.lua
   wowless.modules.visibility=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/visibility.lua
+  wowless.modules.xmlcode=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/xmlcode.lua
   wowless.profiler=${CMAKE_CURRENT_SOURCE_DIR}/wowless/profiler.lua
   wowless.runner=${CMAKE_CURRENT_SOURCE_DIR}/wowless/runner.lua
   wowless.luaobject=c

@@ -1,6 +1,7 @@
 return function(
   addons,
   api,
+  chunks,
   datalua,
   envmodule,
   events,
@@ -12,7 +13,8 @@ return function(
   security,
   templates,
   uiobjects,
-  uiobjecttypes
+  uiobjecttypes,
+  xmlcode
 )
   local genv = envmodule.genv
   local secureenv = envmodule.secureenv
@@ -30,7 +32,6 @@ return function(
   local mixin = util.mixin
   local intrinsics = {}
   local readFile = util.readfile
-  local bindings = {}
   local securemixins = {}
 
   local xmlimpls = datalua.xmlimpls
@@ -81,23 +82,6 @@ return function(
     return v('left'), v('right'), v('top'), v('bottom')
   end
 
-  local function loadstr(str, filename, line)
-    local function doload()
-      local pre = line and string.rep('\n', line - 1) or ''
-      return loadstring_untainted(pre .. str, '@' .. path.normalize(filename):gsub('/', '\\'))
-    end
-    if filename:find('Wowless') then
-      debug.setstacktaint('Wowless')
-      debug.settaintmode('rw')
-      local fn = doload()
-      debug.settaintmode('disabled')
-      debug.setstacktaint(nil)
-      return assert(fn)
-    else
-      return assert(doload())
-    end
-  end
-
   local function getColor(e)
     local name = e.attr.name or e.attr.color
     if not name then
@@ -113,7 +97,7 @@ return function(
 
   local function loadLuaString(filename, str, line, useSecureEnv, closureTaint, ...)
     local before = genv.ScrollingMessageFrameMixin
-    local fn = loadstr(str, filename, line)
+    local fn = chunks.LoadChunk(str, filename, line)
     if useSecureEnv then
       setfenv(fn, secureenv)
     end
@@ -148,7 +132,7 @@ return function(
     if script.text then
       local args = xmlimpls[string.lower(script.type)].tag.script.args or 'self, ...'
       local fnstr = 'return function(' .. args .. ') ' .. script.text .. ' end'
-      local outfn = loadstr(fnstr, filename, script.line)
+      local outfn = chunks.LoadChunk(fnstr, filename, script.line)
       local success, ret = security.CallSandbox(outfn)
       assert(success)
       fn = setfenv(ret, env)
@@ -360,9 +344,6 @@ return function(
           end)
         end
       end
-    end,
-    modifiedclick = function()
-      -- TODO support modified clicks
     end,
     origin = function(_, e, parent)
       if e.attr.point then
@@ -644,6 +625,10 @@ return function(
             end
           end
         else
+          local gfn = xmlcode[e.type]
+          if gfn then
+            return gfn(ctx, e, parent)
+          end
           local impl = xmlimpls[e.type] and xmlimpls[e.type].tag or nil
           local fn = xmllang[e.type]
           if type(impl) == 'table' and impl.script then
@@ -669,12 +654,6 @@ return function(
             if impl == 'loadstring' and e.text then
               loadLuaString(filename, e.text, e.line, ctx.useSecureEnv)
             end
-          elseif e.type == 'binding' then -- TODO do this another way
-            -- TODO interpret all binding attributes
-            if not e.attr.debug then -- TODO support debug bindings
-              local bfn = 'return function(keystate) ' .. e.text .. ' end'
-              bindings[e.attr.name] = loadstr(bfn, filename, e.line)()
-            end
           elseif e.type == 'fontfamily' then -- TODO do this another way
             local font = e.kids[1].kids[1]
             loadElement(ctx, {
@@ -699,6 +678,7 @@ return function(
         end
         local ctx = {
           addonEnv = addonEnv,
+          filename = filename,
           ignoreVirtual = false,
           intrinsic = false,
           useAddonEnv = false,
@@ -1104,7 +1084,6 @@ return function(
   end
 
   return {
-    bindings = bindings,
     loadAddon = loadAddon,
     loadAddons = loadAddons,
     saveAllVariables = saveAllVariables,
