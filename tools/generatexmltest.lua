@@ -19,44 +19,6 @@ local sorted = require('pl.tablex').sort
 local scripttypes = readyaml('data/scripttypes.yaml')
 local justifyh = readyaml('data/stringenums.yaml').JustifyHorizontal
 
-local function actorScripts()
-  local t = {}
-  for name in sorted(scripttypes) do
-    table.insert(t, {
-      tag = name,
-      text = ([[end, table.insert(WowlessLog, '%s')--]]):format(name),
-    })
-  end
-  return t
-end
-
-local function justifyFontString(justify)
-  local point = justify or 'CENTER'
-  local node = {
-    tag = 'FontString',
-    {
-      tag = 'Scripts',
-      {
-        tag = 'OnLoad',
-        text = ([[
-          Wowless.check1(1, self:GetNumPoints())
-          Wowless.check5('%s', self:GetParent(), '%s', 0, 0, self:GetPoint(1))
-        ]]):format(point, point),
-      },
-    },
-  }
-  node.justifyH = justify
-  return node
-end
-
-local function justifyFontStrings()
-  local t = {}
-  for name in sorted(justifyh) do
-    table.insert(t, justifyFontString(name))
-  end
-  return t
-end
-
 local content = {
   tag = 'Ui',
   {
@@ -67,10 +29,16 @@ local content = {
     tag = 'Actor',
     name = 'WowlessActorTemplate',
     virtual = true,
-    {
-      tag = 'Scripts',
-      unpack(actorScripts()),
-    },
+    (function()
+      local scripts = { tag = 'Scripts' }
+      for name in sorted(scripttypes) do
+        table.insert(scripts, {
+          tag = name,
+          text = ([[end, table.insert(WowlessLog, '%s')--]]):format(name),
+        })
+      end
+      return scripts
+    end)(),
   },
   {
     tag = 'Script',
@@ -90,14 +58,31 @@ local content = {
   },
   {
     tag = 'Frame',
-    {
-      tag = 'Layers',
-      {
-        tag = 'Layer',
-        justifyFontString(nil),
-        unpack(justifyFontStrings()),
-      },
-    },
+    (function()
+      local function fontString(justify)
+        local point = justify or 'CENTER'
+        local node = {
+          tag = 'FontString',
+          {
+            tag = 'Scripts',
+            {
+              tag = 'OnLoad',
+              text = ([[
+                Wowless.check1(1, self:GetNumPoints())
+                Wowless.check5('%s', self:GetParent(), '%s', 0, 0, self:GetPoint(1))
+              ]]):format(point, point),
+            },
+          },
+        }
+        node.justifyH = justify
+        return node
+      end
+      local layer = { tag = 'Layer', fontString(nil) }
+      for name in sorted(justifyh) do
+        table.insert(layer, fontString(name))
+      end
+      return { tag = 'Layers', layer }
+    end)(),
   },
 }
 
