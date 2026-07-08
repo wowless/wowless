@@ -58,31 +58,34 @@ local content = {
   },
   {
     tag = 'Frame',
-    (function()
-      local function fontString(justify)
-        local point = justify or 'CENTER'
-        local node = {
-          tag = 'FontString',
-          {
-            tag = 'Scripts',
+    {
+      tag = 'Layers',
+      (function()
+        local function fontString(justify)
+          local point = justify or 'CENTER'
+          local node = {
+            tag = 'FontString',
             {
-              tag = 'OnLoad',
-              text = ([[
-                Wowless.check1(1, self:GetNumPoints())
-                Wowless.check5('%s', self:GetParent(), '%s', 0, 0, self:GetPoint(1))
-              ]]):format(point, point),
+              tag = 'Scripts',
+              {
+                tag = 'OnLoad',
+                text = ([[
+                  Wowless.check1(1, self:GetNumPoints())
+                  Wowless.check5('%s', self:GetParent(), '%s', 0, 0, self:GetPoint(1))
+                ]]):format(point, point),
+              },
             },
-          },
-        }
-        node.justifyH = justify
-        return node
-      end
-      local layer = { tag = 'Layer', fontString(nil) }
-      for name in sorted(justifyh) do
-        table.insert(layer, fontString(name))
-      end
-      return { tag = 'Layers', layer }
-    end)(),
+          }
+          node.justifyH = justify
+          return node
+        end
+        local layer = { tag = 'Layer', fontString(nil) }
+        for name in sorted(justifyh) do
+          table.insert(layer, fontString(name))
+        end
+        return layer
+      end)(),
+    },
   },
 }
 
