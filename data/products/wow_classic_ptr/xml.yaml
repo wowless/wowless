@@ -1281,8 +1281,6 @@ Shadow:
     tags:
       Color:
       Offset:
-  impl:
-    scope: shadow
 SimpleHTML:
   contents:
     tags:
