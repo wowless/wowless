@@ -61,10 +61,10 @@ local content = {
     {
       tag = 'Layers',
       (function()
-        local function fontString(point)
+        local function fontString(justify, point)
           return {
             tag = 'FontString',
-            justifyH = point,
+            justifyH = justify,
             {
               tag = 'Scripts',
               {
@@ -72,14 +72,14 @@ local content = {
                 text = ([[
                   Wowless.check1(1, self:GetNumPoints())
                   Wowless.check5('%s', self:GetParent(), '%s', 0, 0, self:GetPoint(1))
-                ]]):format(point or 'CENTER', point or 'CENTER'),
+                ]]):format(point, point),
               },
             },
           }
         end
-        local layer = { tag = 'Layer', fontString(nil) }
+        local layer = { tag = 'Layer', fontString(nil, 'CENTER') }
         for name in sorted(stringenums.JustifyHorizontal) do
-          table.insert(layer, fontString(name))
+          table.insert(layer, fontString(name, name))
         end
         return layer
       end)(),
