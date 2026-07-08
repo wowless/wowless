@@ -17,7 +17,7 @@ end)()
 
 local sorted = require('pl.tablex').sort
 local scripttypes = readyaml('data/scripttypes.yaml')
-local justifyh = readyaml('data/stringenums.yaml').JustifyHorizontal
+local stringenums = readyaml('data/stringenums.yaml')
 
 local content = {
   tag = 'Ui',
@@ -61,10 +61,10 @@ local content = {
     {
       tag = 'Layers',
       (function()
-        local function fontString(justify)
-          local point = justify or 'CENTER'
-          local node = {
+        local function fontString(point)
+          return {
             tag = 'FontString',
+            justifyH = point,
             {
               tag = 'Scripts',
               {
@@ -72,15 +72,13 @@ local content = {
                 text = ([[
                   Wowless.check1(1, self:GetNumPoints())
                   Wowless.check5('%s', self:GetParent(), '%s', 0, 0, self:GetPoint(1))
-                ]]):format(point, point),
+                ]]):format(point or 'CENTER', point or 'CENTER'),
               },
             },
           }
-          node.justifyH = justify
-          return node
         end
         local layer = { tag = 'Layer', fontString(nil) }
-        for name in sorted(justifyh) do
+        for name in sorted(stringenums.JustifyHorizontal) do
           table.insert(layer, fontString(name))
         end
         return layer
