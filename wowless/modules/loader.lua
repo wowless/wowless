@@ -1,6 +1,7 @@
 return function(
   addons,
   api,
+  bindingsmodule,
   datalua,
   envmodule,
   events,
@@ -30,7 +31,7 @@ return function(
   local mixin = util.mixin
   local intrinsics = {}
   local readFile = util.readfile
-  local bindings = {}
+  local bindings = bindingsmodule.bindings
   local securemixins = {}
 
   local xmlimpls = datalua.xmlimpls
@@ -1104,7 +1105,6 @@ return function(
   end
 
   return {
-    bindings = bindings,
     loadAddon = loadAddon,
     loadAddons = loadAddons,
     saveAllVariables = saveAllVariables,

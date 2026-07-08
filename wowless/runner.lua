@@ -148,14 +148,15 @@ local function run(cfg)
     local scripts = {
       bindings = function()
         local skip = runnercfg.skip_bindings or {}
+        local bindings = modules.bindings.bindings
         if cfg.dir then
           for name in pairs(skip) do
             CallSafely(function()
-              assert(loader.bindings[name], 'missing skip_bindings ' .. name)
+              assert(bindings[name], 'missing skip_bindings ' .. name)
             end)
           end
         end
-        for name, fn in sorted(loader.bindings) do
+        for name, fn in sorted(bindings) do
           if skip[name] then
             log(2, 'skipping binding %s per config', name)
             skip[name] = nil
