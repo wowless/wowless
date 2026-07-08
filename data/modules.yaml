@@ -18,6 +18,8 @@ api:
 atlas:
   deps:
     env:
+bindings:
+  deps:
 calendar:
   deps:
 cgencode:
@@ -83,6 +85,7 @@ loader:
   deps:
     addons:
     api:
+    bindings:
     datalua:
     env:
     events:

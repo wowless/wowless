@@ -856,6 +856,7 @@ lua2c(
   wowless.modules.addons=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/addons.lua
   wowless.modules.api=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/api.lua
   wowless.modules.atlas=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/atlas.lua
+  wowless.modules.bindings=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/bindings.lua
   wowless.modules.calendar=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/calendar.lua
   wowless.modules.cgencode=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/cgencode.lua
   wowless.modules.clog=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/clog.lua
