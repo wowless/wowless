@@ -18,6 +18,8 @@ api:
 atlas:
   deps:
     env:
+bindings:
+  deps:
 calendar:
   deps:
 cgencode:
@@ -29,6 +31,8 @@ cgencode:
     luaobjects:
     uiobjects:
     units:
+chunks:
+  deps:
 clog:
   deps:
     datalua:
@@ -83,6 +87,7 @@ loader:
   deps:
     addons:
     api:
+    chunks:
     datalua:
     env:
     events:
@@ -95,6 +100,7 @@ loader:
     templates:
     uiobjects:
     uiobjecttypes:
+    xmlcode:
 loadercfg:
   root:
     default: '{}'
@@ -184,3 +190,8 @@ units:
 visibility:
   deps:
     scripts:
+xmlcode:
+  deps:
+    bindings:
+    chunks:
+    datalua:

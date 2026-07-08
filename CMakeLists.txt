@@ -862,9 +862,11 @@ lua2c(
   wowless.modules=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules.lua
   wowless.modules.addons=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/addons.lua
   wowless.modules.api=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/api.lua
+  wowless.modules.bindings=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/bindings.lua
   wowless.modules.atlas=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/atlas.lua
   wowless.modules.calendar=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/calendar.lua
   wowless.modules.cgencode=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/cgencode.lua
+  wowless.modules.chunks=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/chunks.lua
   wowless.modules.clog=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/clog.lua
   wowless.modules.cstubs=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/cstubs.lua
   wowless.modules.cvars=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/cvars.lua
@@ -901,6 +903,7 @@ lua2c(
   wowless.modules.uiobjecttypes=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/uiobjecttypes.lua
   wowless.modules.units=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/units.lua
   wowless.modules.visibility=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/visibility.lua
+  wowless.modules.xmlcode=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/xmlcode.lua
   wowless.profiler=${CMAKE_CURRENT_SOURCE_DIR}/wowless/profiler.lua
   wowless.runner=${CMAKE_CURRENT_SOURCE_DIR}/wowless/runner.lua
   wowless.luaobject=c

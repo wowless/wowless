@@ -441,19 +441,17 @@ local xmlflat = (function()
   return newtree
 end)()
 
--- Generated XML element handlers: a self-contained module (nothing passed in;
--- ambient require and elune globals only) of named functions calling each
--- other directly, with static kid dispatch (the schema's child sets are
--- closed). Only root-reachable entry points are exported as handlers, for
--- loadElement's string-keyed boundary; module state (the bindings registry)
--- is exported alongside. Currently covers the Bindings family only.
+-- Generated XML element handlers, instantiated as the xmlcode module: named
+-- functions calling each other directly, with static kid dispatch (the
+-- schema's child sets are closed). Dependencies arrive as capability APIs
+-- (AddBinding, LoadChunk) via the module system; only root-reachable entry
+-- points are exported, for loadElement's string-keyed boundary. Currently
+-- covers the Bindings family only.
 local xmlcodeimpls = {
   binding = {
     [[if not e.attr.debug then]],
-    [[  local pre = e.line and string.rep('\n', e.line - 1) or '']],
-    [[  local bfn = pre .. 'return function(keystate) ' .. e.text .. ' end']],
-    [[  local chunkname = '@' .. path.normalize(ctx.filename):gsub('/', '\\')]],
-    [[  bindings[e.attr.name] = assert(loadstring_untainted(bfn, chunkname))()]],
+    [[  local chunk = 'return function(keystate) ' .. e.text .. ' end']],
+    [[  AddBinding(e.attr.name, LoadChunk(chunk, ctx.filename, e.line)())]],
     [[end]],
   },
   modifiedclick = {},
@@ -486,18 +484,18 @@ local xmlcode = (function()
     local fname = names[k]
     if type(v.impl) == 'table' and v.impl.generated then
       local body = assert(xmlcodeimpls[v.impl.generated], v.impl.generated)
-      table.insert(defs, ('function %s(ctx, e, parent)'):format(fname))
+      table.insert(defs, ('function %s(ctx, e)'):format(fname))
       for _, line in ipairs(body) do
         table.insert(defs, '  ' .. line)
       end
       table.insert(defs, 'end')
     elseif v.impl == 'transparent' then
-      table.insert(defs, ('function %s(ctx, e, parent)'):format(fname))
+      table.insert(defs, ('function %s(ctx, e)'):format(fname))
       table.insert(defs, '  for _, kid in ipairs(e.kids) do')
       local word = 'if'
       for kid in sorted(v.contents.tags) do
         table.insert(defs, ('    %s kid.type == %q then'):format(word, kid:lower()))
-        table.insert(defs, ('      %s(ctx, kid, parent)'):format(names[kid]))
+        table.insert(defs, ('      %s(ctx, kid)'):format(names[kid]))
         word = 'elseif'
       end
       table.insert(defs, '    else')
@@ -510,21 +508,18 @@ local xmlcode = (function()
     end
   end
   local out = {
-    [[local path = require('path')]],
-    [[local bindings = {}]],
-    'local ' .. table.concat(decls, ', '),
+    'return function(AddBinding, LoadChunk)',
+    '  local ' .. table.concat(decls, ', '),
   }
   for _, line in ipairs(defs) do
-    table.insert(out, line)
+    table.insert(out, '  ' .. line)
   end
-  table.insert(out, 'return {')
-  table.insert(out, '  bindings = bindings,')
-  table.insert(out, '  handlers = {')
+  table.insert(out, '  return {')
   for _, root in ipairs(roots) do
     table.insert(out, ('    %s = %s,'):format(root:lower(), names[root]))
   end
-  table.insert(out, '  },')
-  table.insert(out, '}')
+  table.insert(out, '  }')
+  table.insert(out, 'end')
   return table.concat(out, '\n') .. '\n'
 end)()
 
