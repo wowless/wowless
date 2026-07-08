@@ -1021,6 +1021,10 @@ add_lua_executable(
   wowlessutil
   wowlessyaml)
 
+add_lua_executable(
+  generatexmltest ${CMAKE_CURRENT_SOURCE_DIR}/tools/generatexmltest.lua
+  argparse penlight toolsutil wowlessyaml)
+
 set(d ${CMAKE_CURRENT_BINARY_DIR}/addon/Wowless)
 file(MAKE_DIRECTORY ${d} ${CMAKE_CURRENT_BINARY_DIR}/staging/addon/Wowless)
 set(testaddon_outs)
@@ -1059,6 +1063,20 @@ add_custom_command(
   COMMAND ${CMAKE_COMMAND} -DSRC=${staging} -DDST_DIR=${d} -P
           ${CMAKE_CURRENT_SOURCE_DIR}/cmake/copy_executable.cmake
   DEPENDS addon/Wowless/test.xml cmake/preprocess_line.cmake)
+set(out ${d}/generatedxml.xml)
+set(staged ${CMAKE_CURRENT_BINARY_DIR}/staging/addon/Wowless/generatedxml.xml)
+list(APPEND testaddon_outs ${out})
+add_custom_command(
+  OUTPUT ${staged}
+  COMMAND generatexmltest ${staged}
+  WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+  DEPFILE ${staged}.d
+  DEPENDS generatexmltest)
+add_custom_command(
+  OUTPUT ${out}
+  COMMAND ${CMAKE_COMMAND} -DSRC=${staged} -DDST_DIR=${d} -P
+          ${CMAKE_CURRENT_SOURCE_DIR}/cmake/copy_executable.cmake
+  DEPENDS ${staged})
 add_custom_command(
   OUTPUT testaddon.txt
   COMMAND ${CMAKE_COMMAND} -E touch testaddon.txt
