@@ -2,6 +2,7 @@ return function(
   addons,
   api,
   bindingsmodule,
+  chunks,
   datalua,
   envmodule,
   events,
@@ -82,23 +83,6 @@ return function(
     return v('left'), v('right'), v('top'), v('bottom')
   end
 
-  local function loadstr(str, filename, line)
-    local function doload()
-      local pre = line and string.rep('\n', line - 1) or ''
-      return loadstring_untainted(pre .. str, '@' .. path.normalize(filename):gsub('/', '\\'))
-    end
-    if filename:find('Wowless') then
-      debug.setstacktaint('Wowless')
-      debug.settaintmode('rw')
-      local fn = doload()
-      debug.settaintmode('disabled')
-      debug.setstacktaint(nil)
-      return assert(fn)
-    else
-      return assert(doload())
-    end
-  end
-
   local function getColor(e)
     local name = e.attr.name or e.attr.color
     if not name then
@@ -114,7 +98,7 @@ return function(
 
   local function loadLuaString(filename, str, line, useSecureEnv, closureTaint, ...)
     local before = genv.ScrollingMessageFrameMixin
-    local fn = loadstr(str, filename, line)
+    local fn = chunks.LoadChunk(str, filename, line)
     if useSecureEnv then
       setfenv(fn, secureenv)
     end
@@ -149,7 +133,7 @@ return function(
     if script.text then
       local args = xmlimpls[string.lower(script.type)].tag.script.args or 'self, ...'
       local fnstr = 'return function(' .. args .. ') ' .. script.text .. ' end'
-      local outfn = loadstr(fnstr, filename, script.line)
+      local outfn = chunks.LoadChunk(fnstr, filename, script.line)
       local success, ret = security.CallSandbox(outfn)
       assert(success)
       fn = setfenv(ret, env)
@@ -674,7 +658,7 @@ return function(
             -- TODO interpret all binding attributes
             if not e.attr.debug then -- TODO support debug bindings
               local bfn = 'return function(keystate) ' .. e.text .. ' end'
-              bindings[e.attr.name] = loadstr(bfn, filename, e.line)()
+              bindings[e.attr.name] = chunks.LoadChunk(bfn, filename, e.line)()
             end
           elseif e.type == 'fontfamily' then -- TODO do this another way
             local font = e.kids[1].kids[1]
