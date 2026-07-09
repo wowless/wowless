@@ -96,9 +96,13 @@ return function(
     return 0, 0, 0, 1
   end
 
+  local function chunkTaint(filename)
+    return filename:find('Wowless') and 'Wowless' or nil
+  end
+
   local function loadLuaString(filename, str, line, useSecureEnv, closureTaint, ...)
     local before = genv.ScrollingMessageFrameMixin
-    local fn = chunks.LoadChunk(str, filename, line)
+    local fn = chunks.LoadChunk(str, filename, line, chunkTaint(filename))
     if useSecureEnv then
       setfenv(fn, secureenv)
     end
@@ -133,7 +137,7 @@ return function(
     if script.text then
       local args = xmlimpls[string.lower(script.type)].tag.script.args or 'self, ...'
       local fnstr = 'return function(' .. args .. ') ' .. script.text .. ' end'
-      local outfn = chunks.LoadChunk(fnstr, filename, script.line)
+      local outfn = chunks.LoadChunk(fnstr, filename, script.line, chunkTaint(filename))
       local success, ret = security.CallSandbox(outfn)
       assert(success)
       fn = setfenv(ret, env)
@@ -658,7 +662,7 @@ return function(
             -- TODO interpret all binding attributes
             if not e.attr.debug then -- TODO support debug bindings
               local bfn = 'return function(keystate) ' .. e.text .. ' end'
-              bindings[e.attr.name] = chunks.LoadChunk(bfn, filename, e.line)()
+              bindings[e.attr.name] = chunks.LoadChunk(bfn, filename, e.line, chunkTaint(filename))()
             end
           elseif e.type == 'fontfamily' then -- TODO do this another way
             local font = e.kids[1].kids[1]
