@@ -121,6 +121,7 @@ Constants:
     ECHOES_OF_NYALOTHA_CURRENCY_ID: 1803
     HONOR_CURRENCY_ID: 1792
     HONOR_PER_CURRENCY: 10
+    IMMEDIATE_CURRENCY_WALLET_ITEM_ID: 276637
     MAX_CURRENCY_QUANTITY: 100000000
     PLAYER_CURRENCY_CLIENT_FLAGS: 12
     PVP_CURRENCY_CONQUEST_ALLIANCE_INV_ICON: 463448
@@ -2297,75 +2298,6 @@ Enum:
     DroppedFromDeath: 2
     FromAccountServer: 4
     None: 0
-  CurrencySource:
-    AccountCopy: 42
-    AccountHwmUpdate: 61
-    AccountServerConversion: 63
-    AccountTransfer: 65
-    AddConduitToCollection: 46
-    Arena: 17
-    AuctionDeposit: 51
-    AzeriteRespec: 34
-    Barbershop: 47
-    BonusRoll: 33
-    CatalystBalancing: 57
-    CatalystCraft: 58
-    Cheat: 4
-    ConvertItemsToCurrencyAndReputation: 62
-    ConvertItemsToCurrencyValue: 48
-    ConvertOldItem: 0
-    ConvertOldPvPCurrency: 1
-    CraftingOrder: 56
-    CurrencyWalletClaim: 29
-    DailyQuestReward: 38
-    DailyQuestWarModeReward: 39
-    DailyReset: 45
-    ExceededMaxQty: 18
-    FactionConversion: 37
-    GarrisonBuilding: 23
-    GarrisonBuildingRefund: 26
-    GarrisonFollowerActivation: 25
-    GarrisonMissionReward: 27
-    GarrisonResourceOverTime: 28
-    GarrisonTalent: 30
-    GarrisonTalentTreeReset: 44
-    GarrisonWorldQuestBonus: 31
-    GuildBankWithdrawal: 21
-    InitiativeReward: 67
-    ItemDeletion: 14
-    ItemRefund: 2
-    LFGReward: 11
-    Loot: 9
-    PhBuffer_53: 53
-    PhBuffer_54: 54
-    PlayerTrait: 52
-    PlayerTraitRefund: 60
-    ProfessionInitialAward: 59
-    Pushloot: 22
-    PvPCompletionBonus: 19
-    PvPDrop: 24
-    PvPHonorReward: 32
-    PvPKillCredit: 6
-    PvPMetaCredit: 7
-    PvPScriptedAward: 8
-    PvPTeamContribution: 49
-    QuestReward: 3
-    RandomBattleground: 16
-    RatedBattleground: 15
-    RenownRepGain: 55
-    RenownRepGainInitialVisibility: 66
-    Script: 20
-    Spell: 13
-    SpellSkipLinkedCurrency: 64
-    Trade: 12
-    Transmogrify: 50
-    UpdatingVersion: 10
-    Vendor: 5
-    WeeklyQuestReward: 40
-    WeeklyQuestWarModeReward: 41
-    WeeklyRewardChest: 43
-    WorldQuestReward: 35
-    WorldQuestRewardIgnoreCapsDeprecated: 36
   CurrencyTokenCategoryFlags:
     FlagPlayerItemAssignment: 2
     FlagSortLast: 1
@@ -3110,7 +3042,6 @@ Enum:
     ScriptBindings: 2
     ScriptedInput: 64
     SetToDefaults: 1
-    Shown: 256
     UntrustedLayoutScriptExecution: 8
     UntrustedScriptExecution: 4
   ForbiddenAspectInheritance:
@@ -3835,6 +3766,10 @@ Enum:
     MissingDye: 16
     MissingFixture: 4
     MissingRoom: 2
+  HousingBudgetType:
+    DecorPlacement: 1
+    PetDecor: 2
+    RoomPlacement: 0
   HousingCatalogEntryModelScenePresets:
     DecorCeiling: 1338
     DecorDefault: 1317
@@ -4075,51 +4010,52 @@ Enum:
     InvalidRoomLayout: 61
     LockedByOtherPlayer: 63
     LockOperationFailed: 64
+    MaxPetDecorReached: 66
     MaxPlacedDecorReached: 65
-    MaxPreviewDecorReached: 66
-    MaxStorageDecorReached: 67
-    MissingCoreFixture: 68
-    MissingDye: 69
-    MissingExpansionAccess: 70
-    MissingFactionMap: 71
-    MissingPrivateNeighborhoodInvite: 72
-    MoreHouseSlotsNeeded: 73
-    MoreSignaturesNeeded: 74
-    NeighborhoodNotFound: 75
-    NoNeighborhoodOwnershipRequests: 76
-    NotInDecorEditMode: 77
-    NotInFixtureEditMode: 78
-    NotInLayoutEditMode: 79
-    NotInsideHouse: 80
-    NotOnOwnedPlot: 81
-    OperationAborted: 82
-    OwnerNotInGuild: 83
-    PermissionDenied: 84
-    PlacementTargetInvalid: 85
-    PlayerNotFound: 86
-    PlayerNotInInstance: 87
-    PlotNotFound: 88
-    PlotNotVacant: 89
-    PlotReservationCooldown: 90
-    PlotReserved: 91
-    RoomNotFound: 92
-    RoomPlacementOutOfBounds: 93
-    RoomUpdateFailed: 94
-    RpcFailure: 95
-    ServiceNotAvailable: 96
-    StaticDataNotFound: 97
+    MaxPreviewDecorReached: 67
+    MaxStorageDecorReached: 68
+    MissingCoreFixture: 69
+    MissingDye: 70
+    MissingExpansionAccess: 71
+    MissingFactionMap: 72
+    MissingPrivateNeighborhoodInvite: 73
+    MoreHouseSlotsNeeded: 74
+    MoreSignaturesNeeded: 75
+    NeighborhoodNotFound: 76
+    NoNeighborhoodOwnershipRequests: 77
+    NotInDecorEditMode: 78
+    NotInFixtureEditMode: 79
+    NotInLayoutEditMode: 80
+    NotInsideHouse: 81
+    NotOnOwnedPlot: 82
+    OperationAborted: 83
+    OwnerNotInGuild: 84
+    PermissionDenied: 85
+    PlacementTargetInvalid: 86
+    PlayerNotFound: 87
+    PlayerNotInInstance: 88
+    PlotNotFound: 89
+    PlotNotVacant: 90
+    PlotReservationCooldown: 91
+    PlotReserved: 92
+    RoomNotFound: 93
+    RoomPlacementOutOfBounds: 94
+    RoomUpdateFailed: 95
+    RpcFailure: 96
+    ServiceNotAvailable: 97
+    StaticDataNotFound: 98
     Success: 0
-    TimeoutLimit: 98
-    TimerunningNotAllowed: 99
-    TokenRequired: 100
-    TooManyRequests: 101
-    TransactionFailure: 102
-    UncollectedExteriorFixture: 103
-    UncollectedHouseType: 104
-    UncollectedRoom: 105
-    UncollectedRoomMaterial: 106
-    UncollectedRoomTheme: 107
-    UnlockOperationFailed: 108
+    TimeoutLimit: 99
+    TimerunningNotAllowed: 100
+    TokenRequired: 101
+    TooManyRequests: 102
+    TransactionFailure: 103
+    UncollectedExteriorFixture: 104
+    UncollectedHouseType: 105
+    UncollectedRoom: 106
+    UncollectedRoomMaterial: 107
+    UncollectedRoomTheme: 108
+    UnlockOperationFailed: 109
   HousingRoomComponentCeilingType:
     Flat: 0
     Vaulted: 1
@@ -6315,6 +6251,9 @@ Enum:
   RetroactiveDecorRewardFlags:
     AllCriteriaRequired: 1
     None: 0
+  RolodexContactMigrationResult:
+    ContactAdded: 0
+    ContactUpdated: 1
   RolodexContextLevelType:
     DelveTier: 3
     Difficulty: 1
@@ -6334,6 +6273,7 @@ Enum:
     GuildOrderFilledByYou: 10
     KillLfrBoss: 14
     KillRaidBoss: 13
+    LegacyFriend: 21
     None: 0
     PartyMember: 1
     PersonalOrderFilledByOther: 7

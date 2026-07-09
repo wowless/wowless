@@ -9095,6 +9095,7 @@ UIObject:
     HasAnyForbiddenAspects:
       inputs:
       - name: aspects
+        nilable: true
         type:
           enum: ForbiddenAspect
       outputs:

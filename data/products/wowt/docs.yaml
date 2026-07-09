@@ -673,6 +673,8 @@ typedefs:
     type: function
   luaIndex:
     type: number
+  LuaInventorySlot:
+    type: number
   LuaValueReference:
     type: unknown
   LuaValueVariant:

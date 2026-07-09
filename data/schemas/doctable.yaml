@@ -94,6 +94,16 @@ type:
       type:
         sequenceof:
           record:
+            AddsForbiddenAspects:
+              type:
+                sequenceof:
+                  record:
+                    Argument:
+                      required: true
+                      type:
+                        literal: self
+                    Aspect:
+                      type: number
             Arguments:
               type:
                 sequenceof:
@@ -137,8 +147,7 @@ type:
                     Argument:
                       required: true
                       type:
-                        taggedunion:
-                          self: tag
+                        literal: self
                     Aspect:
                       type: number
             ConstSecretAccessor:
@@ -257,6 +266,8 @@ type:
                       type:
                         sequenceof: string
                     InnerType:
+                      type: string
+                    KeyType:
                       type: string
                     Mixin:
                       type: string

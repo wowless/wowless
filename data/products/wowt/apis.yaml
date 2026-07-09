@@ -3468,6 +3468,11 @@ C_BattleNet.BNCheckTitleFriendInviteToUnit:
   - name: unit
     type: unit
   outputs:
+C_BattleNet.CanToggleHighResTexturesWithoutClientReload:
+  inputs:
+  outputs:
+  - name: canToggle
+    type: boolean
 C_BattleNet.GetAccountInfoByGUID:
   inputs:
   - name: guid
@@ -5517,6 +5522,15 @@ C_ClickBindings.SetProfileByInfo:
 C_ClickBindings.SetTutorialShown:
   inputs:
   outputs:
+C_ClientScene.IsSceneTypeActive:
+  inputs:
+  - name: desiredSceneType
+    nilable: true
+    type:
+      enum: ClientSceneType
+  outputs:
+  - name: isPlaying
+    type: boolean
 C_Club.AcceptInvitation:
   inputs:
   - name: clubId
@@ -6154,6 +6168,13 @@ C_Club.SendMessage:
   - name: streamId
     type: string
   - name: message
+    type: string
+  outputs:
+C_Club.SendTitleFriendRequest:
+  inputs:
+  - name: guildClubId
+    type: string
+  - name: memberId
     type: string
   outputs:
 C_Club.SetAutoAdvanceStreamViewMarker:
@@ -10358,6 +10379,11 @@ C_DelvesUI.HasActiveDelve:
   outputs:
   - name: result
     type: boolean
+C_DelvesUI.HasActiveLair:
+  inputs:
+  outputs:
+  - name: result
+    type: boolean
 C_DelvesUI.IsDelveEntranceTierEnabled:
   inputs:
   - name: tier
@@ -14443,6 +14469,17 @@ C_HousingDecor.EnterPreviewState:
 C_HousingDecor.ExitPreviewState:
   inputs:
   outputs:
+C_HousingDecor.GetAllMaxPlacementBudgets:
+  inputs:
+  outputs:
+  - name: interiorMaxBudgets
+    nilable: true
+    type:
+      arrayof: number
+  - name: exteriorMaxBudgets
+    nilable: true
+    type:
+      arrayof: number
 C_HousingDecor.GetAllPlacedDecor:
   inputs:
   outputs:
@@ -14450,24 +14487,17 @@ C_HousingDecor.GetAllPlacedDecor:
     type:
       arrayof:
         structure: C_HousingDecor.HousingDecorInstanceListEntry
-C_HousingDecor.GetBothMaxPlacementBudgets:
+C_HousingDecor.GetAllSpentPlacementBudgets:
   inputs:
   outputs:
-  - name: maxInteriorBudget
+  - name: interiorSpentBudgets
     nilable: true
-    type: number
-  - name: maxExteriorBudget
+    type:
+      arrayof: number
+  - name: exteriorSpentBudgets
     nilable: true
-    type: number
-C_HousingDecor.GetBothSpentPlacementBudgets:
-  inputs:
-  outputs:
-  - name: spentInteriorBudget
-    nilable: true
-    type: number
-  - name: spentExteriorBudget
-    nilable: true
-    type: number
+    type:
+      arrayof: number
 C_HousingDecor.GetDecorAssignedPetName:
   inputs:
   - name: decorGUID
@@ -19501,6 +19531,15 @@ C_PaperDollInfo.GetStaggerPercentage:
   - name: staggerAgainstTarget
     nilable: true
     type: number
+C_PaperDollInfo.GetTemporaryEnchantmentInfo:
+  inputs:
+  - name: slot
+    type: number
+  mayreturnnothing: true
+  outputs:
+  - name: enchantInfo
+    type:
+      structure: C_PaperDollInfo.TemporaryItemEnchantInfo
 C_PaperDollInfo.IsInventorySlotEnabled:
   inputs:
   - name: slotName
@@ -25306,6 +25345,17 @@ C_Spell.GetSpellDescription:
   outputs:
   - name: description
     type: string
+C_Spell.GetSpellDescriptionForItemLocation:
+  inputs:
+  - name: spellIdentifier
+    type: string
+  - name: itemLocation
+    type:
+      structure: ItemLocation
+  mayreturnnothing: true
+  outputs:
+  - name: description
+    type: string
 C_Spell.GetSpellDisplayCount:
   inputs:
   - name: spellIdentifier
@@ -30130,6 +30180,14 @@ C_TransmogOutfitInfo.AddNewOutfit:
   - name: icon
     type: number
   outputs:
+C_TransmogOutfitInfo.CanPlayerTransmogSlot:
+  inputs:
+  - name: slot
+    type:
+      enum: TransmogOutfitSlot
+  outputs:
+  - name: valid
+    type: boolean
 C_TransmogOutfitInfo.ChangeDisplayedOutfit:
   inputs:
   - name: outfitID
@@ -31511,6 +31569,15 @@ C_UIWidgetManager.UnregisterUnitForWidgetUpdates:
     name: isGuid
     type: boolean
   outputs:
+C_UnitAuras.AddAuraAppliedSound:
+  inputs:
+  - name: sound
+    type:
+      structure: UnitAuraAppliedSoundInfo
+  outputs:
+  - name: auraAppliedSoundID
+    nilable: true
+    type: number
 C_UnitAuras.AddBlockedAura:
   inputs:
   - name: unit
@@ -31527,15 +31594,6 @@ C_UnitAuras.AddPrivateAuraAnchor:
   - name: anchorID
     nilable: true
     type: number
-C_UnitAuras.AddPrivateAuraAppliedSound:
-  inputs:
-  - name: sound
-    type:
-      structure: UnitPrivateAuraAppliedSoundInfo
-  outputs:
-  - name: privateAuraSoundID
-    nilable: true
-    type: number
 C_UnitAuras.AuraIsBigDefensive:
   inputs:
   - name: spellID
@@ -31550,6 +31608,13 @@ C_UnitAuras.AuraIsPrivate:
   outputs:
   - name: isPrivate
     type: boolean
+C_UnitAuras.CancelAuraByInstanceID:
+  inputs:
+  - name: unit
+    type: unit
+  - name: auraInstanceID
+    type: number
+  outputs:
 C_UnitAuras.ClearBlockedAuras:
   inputs:
   - name: unit
@@ -31822,14 +31887,14 @@ C_UnitAuras.IsAuraFilteredOutByInstanceID:
   outputs:
   - name: isFiltered
     type: boolean
+C_UnitAuras.RemoveAuraAppliedSound:
+  inputs:
+  - name: auraAppliedSoundID
+    type: number
+  outputs:
 C_UnitAuras.RemovePrivateAuraAnchor:
   inputs:
   - name: anchorID
-    type: number
-  outputs:
-C_UnitAuras.RemovePrivateAuraAppliedSound:
-  inputs:
-  - name: privateAuraSoundID
     type: number
   outputs:
 C_UnitAuras.ResetAuraDataProvider:
@@ -39152,6 +39217,7 @@ SecureCmdOptionParse:
 securecopy:
   inputs:
   - name: value
+    nilable: true
     type: unknown
   - name: options
     nilable: true

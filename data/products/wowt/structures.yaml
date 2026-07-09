@@ -5586,6 +5586,16 @@ C_PaperDollInfo.InspectRatedBGData:
       type: number
     won:
       type: number
+C_PaperDollInfo.TemporaryItemEnchantInfo:
+  fields:
+    chargesRemaining:
+      type: number
+    enchantID:
+      type: number
+    hasExpirationTime:
+      type: boolean
+    remainingTimeMs:
+      type: number
 C_PartyPose.PartyPoseInfo:
   fields:
     defeatModelSceneID:
@@ -6743,6 +6753,8 @@ C_RecentAllies.RecentAllyStateData:
     friendRequestSentThisSession:
       type: boolean
     isAFK:
+      type: boolean
+    isConvertedLegacyFriend:
       type: boolean
     isDND:
       type: boolean
@@ -11826,6 +11838,20 @@ HouseOwnerCharacterInfo:
         enum: HouseOwnerError
     playerGUID:
       type: string
+HousingBlueprintBudgetInfo:
+  fields:
+    exteriorDecorBudgetCurrent:
+      type: number
+    exteriorDecorBudgetMax:
+      type: number
+    interiorDecorBudgetCurrent:
+      type: number
+    interiorDecorBudgetMax:
+      type: number
+    roomBudgetCurrent:
+      type: number
+    roomBudgetMax:
+      type: number
 HousingBlueprintCollection:
   fields:
     groups:
@@ -11879,6 +11905,10 @@ HousingBlueprintContentInfo:
       type: number
     shareCode:
       type: string
+    targetHouseBudgetInfo:
+      nilable: true
+      type:
+        structure: HousingBlueprintBudgetInfo
     targetHouseGUID:
       nilable: true
       type: string
@@ -12570,6 +12600,9 @@ SecureCopyOptions:
     maxTraversalDepth:
       default: 100
       type: number
+    permitScriptObjects:
+      default: false
+      type: boolean
     wrapUntrustedFunctions:
       default: true
       type: boolean
@@ -12874,6 +12907,21 @@ UITextureSliceData:
     sliceMode:
       type:
         enum: UITextureSliceMode
+UnitAuraAppliedSoundInfo:
+  fields:
+    outputChannel:
+      nilable: true
+      type: string
+    soundFileID:
+      nilable: true
+      type: number
+    soundFileName:
+      nilable: true
+      type: string
+    spellID:
+      type: number
+    unitToken:
+      type: string
 UnitAuraUpdateInfo:
   fields:
     addedAuras:
@@ -12948,21 +12996,6 @@ UnitPowerBarInfo:
       type: boolean
     startInset:
       type: number
-UnitPrivateAuraAppliedSoundInfo:
-  fields:
-    outputChannel:
-      nilable: true
-      type: string
-    soundFileID:
-      nilable: true
-      type: number
-    soundFileName:
-      nilable: true
-      type: string
-    spellID:
-      type: number
-    unitToken:
-      type: string
 vector2:
   fields:
     x:
