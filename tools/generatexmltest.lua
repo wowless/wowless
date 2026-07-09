@@ -19,6 +19,10 @@ local sorted = require('pl.tablex').sort
 local scripttypes = readyaml('data/scripttypes.yaml')
 local stringenums = readyaml('data/stringenums.yaml')
 
+local function hack(s)
+  return 'end,(function()' .. s .. ' end)()--'
+end
+
 local content = {
   tag = 'Ui',
   {
@@ -34,7 +38,7 @@ local content = {
       for name in sorted(scripttypes) do
         table.insert(scripts, {
           tag = name,
-          text = ([[end, table.insert(WowlessLog, '%s')--]]):format(name),
+          text = hack(('table.insert(WowlessLog, %q)'):format(name)),
         })
       end
       return scripts
