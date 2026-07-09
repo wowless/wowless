@@ -176,6 +176,8 @@ Binding:
     runonup:
       type: boolean
   contents: text
+  impl:
+    generated: binding
 Bindings:
   contents:
     tags:
@@ -814,6 +816,8 @@ ModifiedClick:
       type: string
     default:
       type: string
+  impl:
+    generated: modifiedclick
 MovieFrame:
   extends: Frame
 NormalFont:
