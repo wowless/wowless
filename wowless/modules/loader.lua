@@ -96,13 +96,15 @@ return function(
     return 0, 0, 0, 1
   end
 
-  local function chunkTaint(filename)
-    return filename:find('Wowless') and 'Wowless' or nil
-  end
-
   local function loadLuaString(filename, str, line, useSecureEnv, closureTaint, ...)
     local before = genv.ScrollingMessageFrameMixin
-    chunks.LoadChunk(str, filename, line, chunkTaint(filename), useSecureEnv and secureenv or nil, closureTaint, ...)
+    local fn = chunks.LoadChunk(str, filename, line)
+    if useSecureEnv then
+      setfenv(fn, secureenv)
+    end
+    debug.setnewclosuretaint(closureTaint)
+    security.CallSandbox(fn, ...)
+    debug.setnewclosuretaint(nil)
     -- Super hacky hack to hook ScrollingMessageFrameMixin.AddMessage
     local after = genv.ScrollingMessageFrameMixin
     if after and not before then
@@ -131,7 +133,8 @@ return function(
     if script.text then
       local args = xmlimpls[string.lower(script.type)].tag.script.args or 'self, ...'
       local fnstr = 'return function(' .. args .. ') ' .. script.text .. ' end'
-      local success, ret = chunks.LoadChunk(fnstr, filename, script.line, chunkTaint(filename))
+      local outfn = chunks.LoadChunk(fnstr, filename, script.line)
+      local success, ret = security.CallSandbox(outfn)
       assert(success)
       fn = setfenv(ret, env)
     end
@@ -655,9 +658,7 @@ return function(
             -- TODO interpret all binding attributes
             if not e.attr.debug then -- TODO support debug bindings
               local bfn = 'return function(keystate) ' .. e.text .. ' end'
-              local success, handler = chunks.LoadChunk(bfn, filename, e.line, chunkTaint(filename))
-              assert(success)
-              bindings[e.attr.name] = handler
+              bindings[e.attr.name] = chunks.LoadChunk(bfn, filename, e.line)()
             end
           elseif e.type == 'fontfamily' then -- TODO do this another way
             local font = e.kids[1].kids[1]

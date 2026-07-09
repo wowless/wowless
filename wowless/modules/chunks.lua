@@ -1,20 +1,21 @@
 local path = require('path')
 
-return function(security)
-  local function LoadChunk(str, filename, line, taint, env, closureTaint, ...)
-    local pre = line and string.rep('\n', line - 1) or ''
-    debug.setstacktaint(taint)
-    debug.settaintmode('rw')
-    local fn = assert(loadstring_untainted(pre .. str, '@' .. path.normalize(filename):gsub('/', '\\')))
-    debug.settaintmode('disabled')
-    debug.setstacktaint(nil)
-    if env then
-      setfenv(fn, env)
+return function()
+  local function LoadChunk(str, filename, line)
+    local function doload()
+      local pre = line and string.rep('\n', line - 1) or ''
+      return loadstring_untainted(pre .. str, '@' .. path.normalize(filename):gsub('/', '\\'))
     end
-    debug.setnewclosuretaint(closureTaint)
-    local results = { security.CallSandbox(fn, ...) }
-    debug.setnewclosuretaint(nil)
-    return unpack(results)
+    if filename:find('Wowless') then
+      debug.setstacktaint('Wowless')
+      debug.settaintmode('rw')
+      local fn = doload()
+      debug.settaintmode('disabled')
+      debug.setstacktaint(nil)
+      return assert(fn)
+    else
+      return assert(doload())
+    end
   end
   return {
     LoadChunk = LoadChunk,
