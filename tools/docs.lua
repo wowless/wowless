@@ -108,6 +108,34 @@ do
   processDocDir(prefix .. 'Blizzard_APIDocumentationGenerated')
 end
 
+local xsdenums = {}
+do
+  local content = require('pl.file').read('build/extracts/' .. product .. '/Interface/AddOns/Blizzard_SharedXML/UI.xsd')
+  if content then
+    local name, values
+    local parser = require('lxp').new({
+      StartElement = function(_, tag, attrs)
+        if tag:match('simpleType$') and attrs.name then
+          name = attrs.name
+          values = {}
+        elseif tag:match('enumeration$') and values and attrs.value then
+          table.insert(values, attrs.value)
+        end
+      end,
+      EndElement = function(_, tag)
+        if tag:match('simpleType$') and name then
+          if #values > 0 then
+            xsdenums[name] = values
+          end
+          name = nil
+        end
+      end,
+    })
+    parser:parse(content)
+    parser:close()
+  end
+end
+
 local config = parseYaml('data/products/' .. product .. '/docs.yaml')
 local enum = parseYaml('data/products/' .. product .. '/globals.yaml').Enum
 
@@ -537,11 +565,23 @@ local function rewriteLuaObjects(luaobjects)
   end
 end
 
+local function rewriteStringenums(stringenums)
+  for xsdname, name in pairs(config.stringenums or {}) do
+    local values = assert(xsdenums[xsdname], 'unknown xsd simpleType ' .. xsdname)
+    local t = {}
+    for _, v in ipairs(values) do
+      t[v] = {}
+    end
+    stringenums[name] = t
+  end
+end
+
 local rewriteFuncs = {
   apis = rewriteApis,
   events = rewriteEvents,
   globals = rewriteGlobals,
   luaobjects = rewriteLuaObjects,
+  stringenums = rewriteStringenums,
   structures = rewriteStructures,
   uiobjects = rewriteUIObjects,
 }

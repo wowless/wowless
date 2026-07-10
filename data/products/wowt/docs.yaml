@@ -534,6 +534,19 @@ script_objects:
     uiobject: VectorGraphics
   UnitHealPredictionCalculatorAPI:
     luaobject: UnitHealPredictionCalculator
+stringenums:
+  ALPHAMODE: BlendMode
+  ANIMCURVETYPE: CurveType
+  ANIMLOOPTYPE: LoopType
+  ANIMSMOOTHTYPE: SmoothingType
+  DRAWLAYER: DrawLayer
+  FRAMEPOINT: FramePoint
+  FRAMESTRATA: FrameStrata
+  INSERTMODE: InsertMode
+  JUSTIFYHTYPE: JustifyHorizontal
+  JUSTIFYVTYPE: JustifyVertical
+  ORIENTATION: Orientation
+  WRAPMODE: WrapMode
 typedefs:
   AbbreviateConfig:
     type:

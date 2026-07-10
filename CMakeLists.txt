@@ -792,6 +792,7 @@ add_lua_executable(
   docs
   ${CMAKE_CURRENT_SOURCE_DIR}/tools/docs.lua
   argparse
+  luaexpat
   penlight
   toolstedit
   toolsutil
