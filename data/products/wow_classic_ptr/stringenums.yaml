@@ -1,0 +1,80 @@
+BlendMode:
+  ADD:
+  ALPHAKEY:
+  BLEND:
+  DISABLE:
+  MOD:
+CurveType:
+  NONE:
+  SMOOTH:
+DrawLayer:
+  ARTWORK:
+  BACKGROUND:
+  BORDER:
+  HIGHLIGHT:
+  OVERLAY:
+FilterMode:
+  LINEAR:
+  NEAREST:
+  TRILINEAR:
+FramePoint:
+  BOTTOM:
+  BOTTOMLEFT:
+  BOTTOMRIGHT:
+  CENTER:
+  LEFT:
+  RIGHT:
+  TOP:
+  TOPLEFT:
+  TOPRIGHT:
+FrameStrata:
+  BACKGROUND:
+  BLIZZARD:
+  DIALOG:
+  FULLSCREEN:
+  FULLSCREEN_DIALOG:
+  HIGH:
+  LOW:
+  MEDIUM:
+  PARENT:
+  TOOLTIP:
+InsertMode:
+  BOTTOM:
+  TOP:
+JustifyHorizontal:
+  CENTER:
+  LEFT:
+  RIGHT:
+JustifyVertical:
+  BOTTOM:
+  MIDDLE:
+  TOP:
+LoopType:
+  BOUNCE:
+  NONE:
+  REPEAT:
+Orientation:
+  HORIZONTAL:
+  VERTICAL:
+SimpleButtonStateToken:
+  DISABLED:
+  NORMAL:
+  PUSHED:
+SmoothingType:
+  IN:
+  IN_OUT:
+  NONE:
+  OUT:
+  OUT_IN:
+StatusBarFillStyle:
+  CENTER:
+  REVERSE:
+  STANDARD:
+  STANDARD_NO_RANGE_FILL:
+WrapMode:
+  CLAMP:
+  CLAMPTOBLACK:
+  CLAMPTOBLACKADDITIVE:
+  CLAMPTOWHITE:
+  MIRROR:
+  REPEAT:

@@ -8,7 +8,7 @@ local lang = setmetatable({}, {
   end,
 })
 
-local attributeTypes = {
+local baseAttributeTypes = {
   boolean = function(s)
     local x = string.lower(s)
     if x == 'true' then
@@ -33,11 +33,19 @@ local attributeTypes = {
     return result
   end,
 }
-for k, v in pairs(require('runtime.stringenums')) do
-  attributeTypes[k] = function(s)
-    return v[s] and s or nil
-  end
-end
+
+local attributeTypes = setmetatable({}, {
+  __index = function(t, k)
+    local at = mixin({}, baseAttributeTypes)
+    for sk, sv in pairs(require('build.products.' .. k .. '.data').stringenums) do
+      at[sk] = function(s)
+        return sv[s] and s or nil
+      end
+    end
+    t[k] = at
+    return at
+  end,
+})
 
 local function parseRoot(product, root, intrinsics, snapshot)
   local warnings = {}
@@ -70,7 +78,7 @@ local function parseRoot(product, root, intrinsics, snapshot)
         table.insert(warnings, 'attribute ' .. k .. ' is not supported by ' .. tname)
       else
         local v = e._attr[k]
-        local vv = attributeTypes[attr](v)
+        local vv = attributeTypes[product][attr](v)
         if vv == nil then
           table.insert(warnings, 'attribute ' .. k .. ' has invalid value ' .. v)
         else

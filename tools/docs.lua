@@ -168,7 +168,7 @@ for k in pairs(enum) do
     tys[k] = 'Enumeration'
   end
 end
-for k in pairs(parseYaml('data/stringenums.yaml')) do
+for k in pairs(parseYaml('data/products/' .. product .. '/stringenums.yaml')) do
   tys[k] = tys[k] or 'stringenum'
 end
 local used_typedefs = {}
