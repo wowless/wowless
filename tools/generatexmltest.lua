@@ -23,6 +23,13 @@ local function hack(s)
   return 'end,(function()' .. s .. ' end)()--'
 end
 
+local function luaLiteral(v)
+  if type(v) == 'string' then
+    return ('%q'):format(v)
+  end
+  return tostring(v)
+end
+
 local content = {
   tag = 'Ui',
   {
@@ -89,6 +96,41 @@ local content = {
       end)(),
     },
   },
+  (function()
+    -- KeyValue/attribute type coercion cases, one row per key: the raw XML
+    -- value/type attrs and the value they should coerce to (see
+    -- parseTypedValue in wowless/modules/loader.lua). The 'global' type is
+    -- covered elsewhere.
+    local kvCases = {
+      { key = 'knilstr', value = 'str', expected = 'str' },
+      { key = 'knilnum', value = '42', expected = '42' },
+      { key = 'knilbool', value = 'true', expected = 'true' },
+      { key = 'kstrstr', value = 'str', type = 'string', expected = 'str' },
+      { key = 'kstrnum', value = '42', type = 'string', expected = '42' },
+      { key = 'kstrbool', value = 'true', type = 'string', expected = 'true' },
+      { key = 'knumstr', value = 'str', type = 'number', expected = 0 },
+      { key = 'knumnum', value = '42', type = 'number', expected = 42 },
+      { key = 'knumbool', value = 'true', type = 'number', expected = 0 },
+      { key = 'kjunkstr', value = 'str', type = 'wat', expected = 'str' },
+      { key = 'kjunknum', value = '42', type = 'wat', expected = '42' },
+      { key = 'kjunkbool', value = 'true', type = 'wat', expected = 'true' },
+      { key = 'kboolstr', value = 'str', type = 'boolean', expected = false },
+      { key = 'kboolnum', value = '42', type = 'boolean', expected = true },
+      { key = 'kboolbool', value = 'true', type = 'boolean', expected = true },
+      { key = 'kboolzero', value = '0', type = 'boolean', expected = false },
+    }
+    local keyvalues = { tag = 'KeyValues' }
+    local lines = {}
+    for _, c in ipairs(kvCases) do
+      table.insert(keyvalues, { tag = 'KeyValue', key = c.key, value = c.value, type = c.type })
+      table.insert(lines, ('assertEquals(%s, self.%s)'):format(luaLiteral(c.expected), c.key))
+    end
+    return {
+      tag = 'Frame',
+      keyvalues,
+      { tag = 'Scripts', { tag = 'OnLoad', text = table.concat(lines, '\n') } },
+    }
+  end)(),
 }
 
 local renderXml
