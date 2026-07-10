@@ -369,7 +369,6 @@ yaml2lua(families)
 yaml2lua(gametypes)
 yaml2lua(modules)
 yaml2lua(products)
-yaml2lua(stringenums)
 
 lua2c(toolsprettywrite
       tools.prettywrite=${CMAKE_CURRENT_SOURCE_DIR}/tools/prettywrite.lua)
@@ -722,6 +721,7 @@ foreach(product ${products})
     events
     globals
     luaobjects
+    stringenums
     structures
     uiobjects
     xml)
@@ -779,7 +779,6 @@ lua2c(
   build.data.products=runtime/products.lua
   build.data.scripttypes=runtime/scripttypes.lua
   build.data.sql=runtime/sql.lua
-  build.data.stringenums=runtime/stringenums.lua
   build.data.test=runtime/test.lua
   build.data.uiobjectimpl=runtime/uiobjectimpl.lua
   ${yamlluas}
@@ -846,7 +845,6 @@ lua2c(
   luapath=p
   runtime.modules=runtime/modules.lua
   runtime.platform=runtime/platform.lua
-  runtime.stringenums=runtime/stringenums.lua
   wowless.bubblewrap=c
   wowless.debug=c
   wowless.env=${CMAKE_CURRENT_SOURCE_DIR}/wowless/env.lua

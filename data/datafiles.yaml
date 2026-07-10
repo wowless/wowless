@@ -13,7 +13,7 @@ modules: global
 products: global
 scripttypes: global
 sql: global
-stringenums: global
+stringenums: product
 structures: product
 test: global
 uiobjectimpl: global

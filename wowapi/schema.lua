@@ -7,7 +7,6 @@ local domains = {
   schema = wdata.schemas,
   scripttype = wdata.scripttypes,
   sql = wdata.sql,
-  stringenum = wdata.stringenums,
   uiobjectimpl = wdata.uiobjectimpl,
 }
 local productDomains = {
@@ -16,6 +15,7 @@ local productDomains = {
   enum = wdata.enums,
   event = wdata.events,
   luaobject = wdata.luaobjects,
+  stringenum = wdata.stringenums,
   structure = wdata.structures,
   uiobject = wdata.uiobjects,
   xml = wdata.xml,

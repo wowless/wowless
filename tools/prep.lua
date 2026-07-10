@@ -25,7 +25,7 @@ local sorted = require('pl.tablex').sort
 local product = args.product
 local globals = parseYaml('data/products/' .. product .. '/globals.yaml')
 local structures = parseYaml('data/products/' .. product .. '/structures.yaml')
-local stringenums = parseYaml('data/stringenums.yaml')
+local stringenums = parseYaml('data/products/' .. product .. '/stringenums.yaml')
 
 do
   local metafix = parseYaml('data/products/' .. product .. '/config.yaml').runtime.enummetafix
@@ -449,6 +449,7 @@ local data = {
   luaobjects = luaobjects,
   product = product,
   sqls = sqls,
+  stringenums = stringenums,
   structures = structures,
   uiobjects = uiobjects,
   xmlflat = xmlflat,

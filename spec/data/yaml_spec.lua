@@ -14,7 +14,6 @@ local globalschemas = {
   ['data/modules'] = 'modules',
   ['data/products'] = 'products',
   ['data/sql'] = 'sql',
-  ['data/stringenums'] = 'stringenums',
   ['data/test'] = 'test',
   ['data/uiobjectimpl'] = 'uiobjectimpl',
 }
@@ -32,6 +31,7 @@ local productschemas = {
   events = 'events',
   globals = 'globals',
   luaobjects = 'luaobjects',
+  stringenums = 'stringenums',
   structures = 'structures',
   uiobjects = 'uiobjects',
   xml = 'xml',

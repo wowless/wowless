@@ -1,10 +1,10 @@
-return function(api, dirty, env, log, uiobjects)
+return function(api, datalua, dirty, env, log, uiobjects)
   local genv = env.genv
   local ParentSub = api.ParentSub
   local SetDirty = dirty.SetDirty
   local UserData = uiobjects.UserData
 
-  local validPoints = require('runtime.stringenums').FramePoint
+  local validPoints = datalua.stringenums.FramePoint
   local pointsInOrder = {
     'TOPLEFT',
     'TOP',

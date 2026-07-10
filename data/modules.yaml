@@ -133,6 +133,7 @@ platform:
 points:
   deps:
     api:
+    datalua:
     dirty:
     env:
     log:
