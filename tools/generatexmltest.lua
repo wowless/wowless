@@ -17,7 +17,7 @@ end)()
 
 local sorted = require('pl.tablex').sort
 local scripttypes = readyaml('data/scripttypes.yaml')
-local stringenums = readyaml('data/stringenums.yaml')
+local stringenums = readyaml('data/products/wow/stringenums.yaml')
 
 local function hack(s)
   return 'end,(function()' .. s .. ' end)()--'
