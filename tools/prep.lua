@@ -4,6 +4,7 @@ local args = (function()
   parser:option('--sqls', 'sqls file')
   parser:option('-o --output', 'output file')
   parser:option('--coutput', 'C stubs output file'):count('1')
+  parser:option('--xmlcode', 'generated xml code output file'):count('1')
   return parser:parse()
 end)()
 
@@ -438,6 +439,88 @@ local xmlflat = (function()
     }
   end
   return newtree
+end)()
+
+-- Generated XML element handlers, instantiated as the xmlcode module: named
+-- functions calling each other directly, with static kid dispatch (the
+-- schema's child sets are closed). Dependencies arrive as capability APIs
+-- (AddBinding, LoadChunk) via the module system; only root-reachable entry
+-- points are exported, for loadElement's string-keyed boundary. Currently
+-- covers the Bindings family only.
+local xmlcodeimpls = {
+  binding = {
+    [[if not e.attr.debug then]],
+    [[  local chunk = 'return function(keystate) ' .. e.text .. ' end']],
+    [[  bindings[e.attr.name] = LoadChunk(chunk, ctx.filename, e.line)()]],
+    [[end]],
+  },
+  modifiedclick = {},
+}
+local xmlcode = (function()
+  local tree = xmlraw
+  local family = {}
+  local function visit(k)
+    if not family[k] then
+      family[k] = true
+      local v = assert(tree[k], k)
+      if type(v.contents) == 'table' then
+        for kid in pairs(v.contents.tags) do
+          visit(kid)
+        end
+      end
+    end
+  end
+  local roots = { 'Bindings' }
+  for _, root in ipairs(roots) do
+    visit(root)
+  end
+  local names, decls, defs = {}, {}, {}
+  for k in sorted(family) do
+    names[k] = 'gen_' .. k:lower()
+    table.insert(decls, names[k])
+  end
+  for k in sorted(family) do
+    local v = tree[k]
+    local fname = names[k]
+    if type(v.impl) == 'table' and v.impl.generated then
+      local body = assert(xmlcodeimpls[v.impl.generated], v.impl.generated)
+      table.insert(defs, ('function %s(ctx, e)'):format(fname))
+      for _, line in ipairs(body) do
+        table.insert(defs, '  ' .. line)
+      end
+      table.insert(defs, 'end')
+    elseif v.impl == 'transparent' then
+      table.insert(defs, ('function %s(ctx, e)'):format(fname))
+      table.insert(defs, '  for _, kid in ipairs(e.kids) do')
+      local word = 'if'
+      for kid in sorted(v.contents.tags) do
+        table.insert(defs, ('    %s kid.type == %q then'):format(word, kid:lower()))
+        table.insert(defs, ('      %s(ctx, kid)'):format(names[kid]))
+        word = 'elseif'
+      end
+      table.insert(defs, '    else')
+      table.insert(defs, ('      error(\'wowless bug: unexpected kid \' .. kid.type .. \' in ' .. k:lower() .. '\')'))
+      table.insert(defs, '    end')
+      table.insert(defs, '  end')
+      table.insert(defs, 'end')
+    else
+      error('cannot generate xml handler for ' .. k)
+    end
+  end
+  local out = {
+    'return function(bindings, LoadChunk)',
+    '  local ' .. table.concat(decls, ', '),
+  }
+  for _, line in ipairs(defs) do
+    table.insert(out, '  ' .. line)
+  end
+  table.insert(out, '  return {')
+  for _, root in ipairs(roots) do
+    table.insert(out, ('    %s = %s,'):format(root:lower(), names[root]))
+  end
+  table.insert(out, '  }')
+  table.insert(out, 'end')
+  return table.concat(out, '\n') .. '\n'
 end)()
 
 local data = {
@@ -1536,6 +1619,8 @@ local cf = assert(io.open(args.coutput, 'w'))
 cf:write(table.concat(lines, '\n'))
 cf:write('\n')
 cf:close()
+
+assert(require('pl.file').write(args.xmlcode, xmlcode))
 
 local outfn = args.output or ('build/products/' .. args.product .. '/data.lua')
 local tu = require('tools.util')

@@ -1,7 +1,6 @@
 return function(
   addons,
   api,
-  bindingsmodule,
   datalua,
   envmodule,
   events,
@@ -13,7 +12,8 @@ return function(
   security,
   templates,
   uiobjects,
-  uiobjecttypes
+  uiobjecttypes,
+  xmlcode
 )
   local genv = envmodule.genv
   local secureenv = envmodule.secureenv
@@ -31,7 +31,6 @@ return function(
   local mixin = util.mixin
   local intrinsics = {}
   local readFile = util.readfile
-  local bindings = bindingsmodule.bindings
   local securemixins = {}
 
   local xmlimpls = datalua.xmlimpls
@@ -362,9 +361,6 @@ return function(
         end
       end
     end,
-    modifiedclick = function()
-      -- TODO support modified clicks
-    end,
     origin = function(_, e, parent)
       if e.attr.point then
         local x, y = getXY(e)
@@ -645,6 +641,10 @@ return function(
             end
           end
         else
+          local gfn = xmlcode[e.type]
+          if gfn then
+            return gfn(ctx, e)
+          end
           local impl = xmlimpls[e.type] and xmlimpls[e.type].tag or nil
           local fn = xmllang[e.type]
           if type(impl) == 'table' and impl.script then
@@ -670,12 +670,6 @@ return function(
             if impl == 'loadstring' and e.text then
               loadLuaString(filename, e.text, e.line, ctx.useSecureEnv)
             end
-          elseif e.type == 'binding' then -- TODO do this another way
-            -- TODO interpret all binding attributes
-            if not e.attr.debug then -- TODO support debug bindings
-              local bfn = 'return function(keystate) ' .. e.text .. ' end'
-              bindings[e.attr.name] = loadstr(bfn, filename, e.line)()
-            end
           elseif e.type == 'fontfamily' then -- TODO do this another way
             local font = e.kids[1].kids[1]
             loadElement(ctx, {
@@ -700,6 +694,7 @@ return function(
         end
         local ctx = {
           addonEnv = addonEnv,
+          filename = filename,
           ignoreVirtual = false,
           intrinsic = false,
           useAddonEnv = false,

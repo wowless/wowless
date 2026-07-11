@@ -67,6 +67,7 @@ type:
                     type:
                       ref:
                         schema: uiobject
+              generated: string
               loadstring: tag
               script:
                 record:

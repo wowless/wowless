@@ -85,7 +85,6 @@ loader:
   deps:
     addons:
     api:
-    bindings:
     datalua:
     env:
     events:
@@ -98,6 +97,7 @@ loader:
     templates:
     uiobjects:
     uiobjecttypes:
+    xmlcode:
 loadercfg:
   root:
     default: '{}'
@@ -188,3 +188,7 @@ units:
 visibility:
   deps:
     scripts:
+xmlcode:
+  deps:
+    bindings:
+    datalua:
