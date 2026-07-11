@@ -67,6 +67,13 @@ type:
               uiobject:
                 ref:
                   schema: uiobject
+    stringenums:
+      type:
+        mapof:
+          key: string
+          value:
+            ref:
+              schema: stringenum
     typedefs:
       type:
         mapof:
