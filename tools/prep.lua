@@ -353,6 +353,67 @@ do
   end
 end
 
+-- Flattened method/field name sets per uiobject type, for validating that
+-- xml attribute impls resolve (same invariant spec/data/xml_spec.lua checks).
+local uiobjectflat = {}
+local function flattenUiobject(k)
+  local t = uiobjectflat[k]
+  if not t then
+    t = { fields = {}, methods = {} }
+    for inh in pairs(uiobjectdata[k].inherits) do
+      local it = flattenUiobject(inh)
+      Mixin(t.fields, it.fields)
+      Mixin(t.methods, it.methods)
+    end
+    Mixin(t.fields, uiobjectdata[k].fields)
+    Mixin(t.methods, uiobjectdata[k].methods)
+    uiobjectflat[k] = t
+  end
+  return t
+end
+
+-- Attributes whose impl is `method` or `field` are pure "apply this value to the
+-- object" operations with no effect on parsing/context, so for instantiable
+-- uiobject tags they're compiled to a per-tag-per-phase Lua function instead of
+-- being interpreted generically (via processAttr/processAttrs) at runtime. The
+-- references are validated here, so the generated code needs no guards.
+local function genAttrApplier(k, attrs)
+  local flat = flattenUiobject(k)
+  local byphase = {}
+  for n, a in pairs(attrs) do
+    if type(a.impl) == 'table' and (a.impl.method or a.impl.field) then
+      if a.impl.method then
+        assert(flat.methods[a.impl.method], ('%s.%s: no method %s'):format(k, n, a.impl.method))
+      else
+        assert(flat.fields[a.impl.field], ('%s.%s: no field %s'):format(k, n, a.impl.field))
+      end
+      local phase = a.phase or 'middle'
+      byphase[phase] = byphase[phase] or {}
+      byphase[phase][n] = a
+    end
+  end
+  if not next(byphase) then
+    return nil
+  end
+  local result = {}
+  for phase, phaseattrs in pairs(byphase) do
+    local t = { 'return function(obj,e)' }
+    for n, a in sorted(phaseattrs) do
+      table.insert(t, ('local v=e.attr[%q]if v~=nil then '):format(n))
+      if a.impl.method then
+        local args = a.type == 'stringlist' and 'obj,unpack(v)' or 'obj,v'
+        table.insert(t, ('obj[%q](%s)'):format(a.impl.method, args))
+      else
+        table.insert(t, ('obj[%q]=v'):format(a.impl.field))
+      end
+      table.insert(t, ' end ')
+    end
+    table.insert(t, 'end')
+    result[phase] = table.concat(t)
+  end
+  return result
+end
+
 local xmlraw = parseYaml('data/products/' .. product .. '/xml.yaml')
 local xmlimpls = (function()
   local tree = xmlraw
@@ -364,14 +425,21 @@ local xmlimpls = (function()
       t = tree[t.extends]
       Mixin(attrs, t.attributes or {})
     end
+    -- Virtual tags (e.g. POIFrame) can't be instantiated, so their appliers
+    -- would be unreachable and their attr impls may reference methods the
+    -- (equally uninstantiable) type lacks.
+    local isGeneratable = uiobjectdata[k] ~= nil and not v.virtual
     local aimpls = {}
     for n, a in pairs(attrs) do
       if a.impl then
-        aimpls[n] = {
-          impl = a.impl,
-          name = n,
-          phase = a.phase or 'middle',
-        }
+        local isGenerated = isGeneratable and type(a.impl) == 'table' and (a.impl.method or a.impl.field)
+        if not isGenerated then
+          aimpls[n] = {
+            impl = a.impl,
+            name = n,
+            phase = a.phase or 'middle',
+          }
+        end
       end
     end
     local tag = v.impl
@@ -384,6 +452,7 @@ local xmlimpls = (function()
     end
     newtree[k:lower()] = {
       attrs = aimpls,
+      genattrs = isGeneratable and genAttrApplier(k, attrs) or nil,
       phase = v.phase or 'middle',
       tag = tag,
     }
