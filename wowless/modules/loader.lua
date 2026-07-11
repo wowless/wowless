@@ -2,6 +2,7 @@ return function(
   addons,
   api,
   bindingsmodule,
+  chunks,
   datalua,
   envmodule,
   events,
@@ -82,23 +83,6 @@ return function(
     return v('left'), v('right'), v('top'), v('bottom')
   end
 
-  local function loadstr(str, filename, line)
-    local function doload()
-      local pre = line and string.rep('\n', line - 1) or ''
-      return loadstring_untainted(pre .. str, '@' .. path.normalize(filename):gsub('/', '\\'))
-    end
-    if filename:find('Wowless') then
-      debug.setstacktaint('Wowless')
-      debug.settaintmode('rw')
-      local fn = doload()
-      debug.settaintmode('disabled')
-      debug.setstacktaint(nil)
-      return assert(fn)
-    else
-      return assert(doload())
-    end
-  end
-
   local function getColor(e)
     local name = e.attr.name or e.attr.color
     if not name then
@@ -112,9 +96,13 @@ return function(
     return 0, 0, 0, 1
   end
 
-  local function loadLuaString(filename, str, line, useSecureEnv, closureTaint, ...)
+  local function addonTaint(addonName)
+    return addonName == 'Wowless' and addonName or nil
+  end
+
+  local function loadLuaString(filename, str, line, useSecureEnv, closureTaint, addonName, ...)
     local before = genv.ScrollingMessageFrameMixin
-    local fn = loadstr(str, filename, line)
+    local fn = chunks.LoadChunk(str, filename, line, addonTaint(addonName))
     if useSecureEnv then
       setfenv(fn, secureenv)
     end
@@ -134,7 +122,7 @@ return function(
 
   local scriptCache = {}
 
-  local function precacheScriptText(script, obj, env, filename)
+  local function precacheScriptText(script, obj, env, filename, addonName)
     if not scripts.HasScript(obj, script.type) then
       return
     end
@@ -149,7 +137,7 @@ return function(
     if script.text then
       local args = xmlimpls[string.lower(script.type)].tag.script.args or 'self, ...'
       local fnstr = 'return function(' .. args .. ') ' .. script.text .. ' end'
-      local outfn = loadstr(fnstr, filename, script.line)
+      local outfn = chunks.LoadChunk(fnstr, filename, script.line, addonTaint(addonName))
       local success, ret = security.CallSandbox(outfn)
       assert(success)
       fn = setfenv(ret, env)
@@ -649,7 +637,7 @@ return function(
           local fn = xmllang[e.type]
           if type(impl) == 'table' and impl.script then
             local env = ctx.useAddonEnv and addonEnv or ctx.useSecureEnv and secureenv or genv
-            precacheScriptText(e, parent, env, filename)
+            precacheScriptText(e, parent, env, filename, addonName)
           elseif type(impl) == 'table' and impl.call then
             local elt = impl.call.argument == 'lastkid' and e.kids[#e.kids]
               or mixin({}, e, { type = impl.call.argument })
@@ -668,13 +656,13 @@ return function(
             end
             loadElements(ctxmix, e.kids, parent)
             if impl == 'loadstring' and e.text then
-              loadLuaString(filename, e.text, e.line, ctx.useSecureEnv)
+              loadLuaString(filename, e.text, e.line, ctx.useSecureEnv, nil, addonName)
             end
           elseif e.type == 'binding' then -- TODO do this another way
             -- TODO interpret all binding attributes
             if not e.attr.debug then -- TODO support debug bindings
               local bfn = 'return function(keystate) ' .. e.text .. ' end'
-              bindings[e.attr.name] = loadstr(bfn, filename, e.line)()
+              bindings[e.attr.name] = chunks.LoadChunk(bfn, filename, e.line, addonTaint(addonName))()
             end
           elseif e.type == 'fontfamily' then -- TODO do this another way
             local font = e.kids[1].kids[1]
@@ -726,7 +714,9 @@ return function(
           success, content = pcall(readFile, secondaryFileName)
         end
         if success then
-          loadFn(filename, content, nil, useSecureEnv, closureTaint, addonName, addonEnv)
+          -- addonName appears twice: once as loadLuaString's taint arg, once as
+          -- the chunk's own first vararg (matching real addon file execution).
+          loadFn(filename, content, nil, useSecureEnv, closureTaint, addonName, addonName, addonEnv)
         else
           log(1, 'skipping missing file %s', filename)
         end
