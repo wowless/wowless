@@ -86,10 +86,25 @@ G.testsuite.uiobjects = function()
           assertEquals(font, retn(1, CreateFont(s)))
         end,
         setfontobjectbyname = function()
-          local font1 = CreateFont('WowlessSetFontObjectByNameTest1')
-          local font2 = CreateFont('WowlessSetFontObjectByNameTest2')
-          check0(font2:SetFontObject(font1:GetName()))
-          check1(font1, font2:GetFontObject())
+          local prefix = 'WowlessSetFontObjectByNameTest'
+          local font1 = CreateFont(prefix .. 'Font1')
+          local font2 = CreateFont(prefix .. 'Font2')
+          return {
+            boolean = function()
+              return match(2, false, '', pcall(font2.SetFontObject, font2, true))
+            end,
+            frame = function()
+              local frame = CreateFrame('Frame', prefix .. 'Frame')
+              return match(2, false, '', pcall(font2.SetFontObject, font2, frame:GetName()))
+            end,
+            unknown = function()
+              return match(2, false, '', pcall(font2.SetFontObject, font2, prefix .. 'Nonsense'))
+            end,
+            works = function()
+              check0(font2:SetFontObject(font1:GetName()))
+              return match(1, font1, font2:GetFontObject())
+            end,
+          }
         end,
         vfs = function()
           if _G.__wowless then -- TODO support
