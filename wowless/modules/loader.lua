@@ -112,6 +112,26 @@ return function(
     return 0, 0, 0, 1
   end
 
+  local function buildStructure(e, structDef) -- issue #117
+    local result = {}
+    for _, field in ipairs(structDef.fields) do
+      result[field] = e.attr[field]
+    end
+    return result
+  end
+
+  local function applyStructure(struct, apply, fields, parent)
+    for _, action in ipairs(apply) do
+      if action.unpack then
+        local args = {}
+        for _, f in ipairs(fields) do
+          args[#args + 1] = struct[f]
+        end
+        parent[action.method](parent, unpack(args))
+      end
+    end
+  end
+
   local function loadLuaString(filename, str, line, useSecureEnv, closureTaint, ...)
     local before = genv.ScrollingMessageFrameMixin
     local fn = loadstr(str, filename, line)
@@ -424,9 +444,6 @@ return function(
     textinsets = function(_, e, parent)
       parent:SetTextInsets(getInsets(e))
     end,
-    viewinsets = function(_, e, parent)
-      parent:SetViewInsets(getInsets(e))
-    end,
   }
 
   local xmlattrlang = {
@@ -683,6 +700,9 @@ return function(
               kids = font.kids,
               type = font.type,
             })
+          elseif type(impl) == 'table' and impl.structure then -- issue #117
+            local struct = buildStructure(e, impl.structure)
+            applyStructure(struct, impl.structure.apply, impl.structure.fields, parent)
           elseif fn then
             fn(ctx, e, parent)
           else

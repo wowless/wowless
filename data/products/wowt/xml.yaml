@@ -1482,5 +1482,15 @@ ViewInsets:
       type: number
     top:
       type: number
+  impl:
+    structure:
+      apply:
+      - method: SetViewInsets
+        unpack: true
+      fields:
+      - left
+      - right
+      - top
+      - bottom
 WorldFrame:
   extends: Frame

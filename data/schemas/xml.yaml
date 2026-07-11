@@ -72,6 +72,20 @@ type:
                 record:
                   args:
                     type: string
+              structure:
+                record:
+                  apply:
+                    type:
+                      sequenceof:
+                        record:
+                          method:
+                            required: true
+                            type: string
+                          unpack:
+                            type: flag
+                  fields:
+                    type:
+                      sequenceof: string
               transparent: tag
         phase:
           type:
