@@ -92,6 +92,10 @@ local content = {
         for name in sorted(stringenums.JustifyHorizontal) do
           table.insert(layer, fontString(name, name))
         end
+        -- Stringenum attribute values are matched case-insensitively and
+        -- coerced to their canonical casing; unconfirmed against real
+        -- clients beyond the fillStyle case that prompted this.
+        table.insert(layer, fontString('center', 'CENTER'))
         return layer
       end)(),
     },
