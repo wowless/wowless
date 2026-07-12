@@ -91,6 +91,7 @@ local content = {
         local layer = { tag = 'Layer', fontString(nil, 'CENTER') }
         for name in sorted(stringenums.JustifyHorizontal) do
           table.insert(layer, fontString(name, name))
+          table.insert(layer, fontString(name:lower(), name))
         end
         return layer
       end)(),
