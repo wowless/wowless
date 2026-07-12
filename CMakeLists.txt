@@ -893,12 +893,12 @@ lua2c(
   wowless.modules.uiobjecttypes=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/uiobjecttypes.lua
   wowless.modules.units=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/units.lua
   wowless.modules.visibility=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/visibility.lua
+  wowless.modules.xml=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/xml.lua
   wowless.profiler=${CMAKE_CURRENT_SOURCE_DIR}/wowless/profiler.lua
   wowless.runner=${CMAKE_CURRENT_SOURCE_DIR}/wowless/runner.lua
   wowless.luaobject=c
   wowless.secure=c
   wowless.uiobject=c
-  wowless.xml=${CMAKE_CURRENT_SOURCE_DIR}/wowless/xml.lua
   toolsprettywrite=p)
 target_sources(
   wowlesslib

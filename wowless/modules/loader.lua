@@ -13,7 +13,8 @@ return function(
   security,
   templates,
   uiobjects,
-  uiobjecttypes
+  uiobjecttypes,
+  xml
 )
   local genv = envmodule.genv
   local secureenv = envmodule.secureenv
@@ -26,7 +27,7 @@ return function(
   local signedAddonDirs = loadercfg.signedAddonDirs or {}
 
   local path = require('path')
-  local parseXml = require('wowless.xml').newParser(product)
+  local parseXml = xml
   local util = require('wowless.util')
   local mixin = util.mixin
   local intrinsics = {}

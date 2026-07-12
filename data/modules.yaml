@@ -98,6 +98,7 @@ loader:
     templates:
     uiobjects:
     uiobjecttypes:
+    xml:
 loadercfg:
   root:
     default: '{}'
@@ -188,3 +189,6 @@ units:
 visibility:
   deps:
     scripts:
+xml:
+  deps:
+    datalua:
