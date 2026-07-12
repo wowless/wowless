@@ -1,30 +1,14 @@
 local mixin = require('wowless.util').mixin
 
-local baseAttributeTypes = {
-  boolean = function(s)
-    local x = string.lower(s)
-    if x == 'true' then
-      return true
-    elseif x == 'false' then
-      return false
-    else
-      return nil
-    end
-  end,
-  number = function(s)
-    return tonumber(s)
-  end,
-  string = function(s)
-    return s
-  end,
-  stringlist = function(s)
-    local result = {}
-    for part in string.gmatch(s, '[^, ]+') do
-      table.insert(result, part)
-    end
-    return result
-  end,
-}
+local function dispatch(t, u, ...)
+  if type(u) == 'string' then
+    return assert(t[u], u)(...)
+  else
+    local uk, uv = next(u)
+    assert(next(u, uk) == nil, uk)
+    return assert(t[uk], uk)(uv, ...)
+  end
+end
 
 -- Simulates xml2lua dom output via luaexpat.
 local function xml2dom(xmlstr)
@@ -58,12 +42,36 @@ end
 
 return function(datalua)
   local lang = datalua.xmlflat
-  local attributeTypes = mixin({}, baseAttributeTypes)
-  for sk, sv in pairs(datalua.stringenums) do
-    attributeTypes[sk] = function(s)
-      return sv[s] and s or nil
-    end
-  end
+  local stringenums = datalua.stringenums
+  local attributeTypes = {
+    boolean = function(s)
+      local x = string.lower(s)
+      if x == 'true' then
+        return true
+      elseif x == 'false' then
+        return false
+      else
+        return nil
+      end
+    end,
+    number = function(s)
+      return tonumber(s)
+    end,
+    string = function(s)
+      return s
+    end,
+    stringenum = function(name, s)
+      local set = stringenums[name]
+      return set[s] and s or nil
+    end,
+    stringlist = function(s)
+      local result = {}
+      for part in string.gmatch(s, '[^, ]+') do
+        table.insert(result, part)
+      end
+      return result
+    end,
+  }
 
   local function parseRoot(root, intrinsics, snapshot)
     local warnings = {}
@@ -96,7 +104,7 @@ return function(datalua)
           table.insert(warnings, 'attribute ' .. k .. ' is not supported by ' .. tname)
         else
           local v = e._attr[k]
-          local vv = attributeTypes[attr](v)
+          local vv = dispatch(attributeTypes, attr, v)
           if vv == nil then
             table.insert(warnings, 'attribute ' .. k .. ' has invalid value ' .. v)
           else

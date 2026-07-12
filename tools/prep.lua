@@ -397,7 +397,7 @@ local xmlflat = (function()
   for k, v in pairs(tree) do
     local attrs = {}
     for ak, av in pairs(v.attributes or {}) do
-      attrs[ak] = av.type.stringenum or av.type
+      attrs[ak] = av.type
     end
     local kids = {}
     local text = false
@@ -417,7 +417,7 @@ local xmlflat = (function()
       t = tree[t.extends]
       for ak, av in pairs(t.attributes or {}) do
         assert(not attrs[ak], ak .. ' is already an attribute of ' .. k)
-        attrs[ak] = av.type.stringenum or av.type
+        attrs[ak] = av.type
       end
       if t.contents == 'text' then
         text = true
