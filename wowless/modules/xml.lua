@@ -10,32 +10,6 @@ local function dispatch(t, u, ...)
   end
 end
 
-local baseAttributeTypes = {
-  boolean = function(s)
-    local x = string.lower(s)
-    if x == 'true' then
-      return true
-    elseif x == 'false' then
-      return false
-    else
-      return nil
-    end
-  end,
-  number = function(s)
-    return tonumber(s)
-  end,
-  string = function(s)
-    return s
-  end,
-  stringlist = function(s)
-    local result = {}
-    for part in string.gmatch(s, '[^, ]+') do
-      table.insert(result, part)
-    end
-    return result
-  end,
-}
-
 -- Simulates xml2lua dom output via luaexpat.
 local function xml2dom(xmlstr)
   local stack = { { _children = {} } }
@@ -69,11 +43,35 @@ end
 return function(datalua)
   local lang = datalua.xmlflat
   local stringenums = datalua.stringenums
-  local attributeTypes = mixin({}, baseAttributeTypes)
-  attributeTypes.stringenum = function(name, s)
-    local set = stringenums[name]
-    return set[s] and s or nil
-  end
+  local attributeTypes = {
+    boolean = function(s)
+      local x = string.lower(s)
+      if x == 'true' then
+        return true
+      elseif x == 'false' then
+        return false
+      else
+        return nil
+      end
+    end,
+    number = function(s)
+      return tonumber(s)
+    end,
+    string = function(s)
+      return s
+    end,
+    stringenum = function(name, s)
+      local set = stringenums[name]
+      return set[s] and s or nil
+    end,
+    stringlist = function(s)
+      local result = {}
+      for part in string.gmatch(s, '[^, ]+') do
+        table.insert(result, part)
+      end
+      return result
+    end,
+  }
 
   local function parseRoot(root, intrinsics, snapshot)
     local warnings = {}
