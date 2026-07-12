@@ -43,6 +43,20 @@ describe('stringenums', function()
           assert.True(used[k])
         end)
       end
+      for k, v in pairs(actual) do
+        describe(k, function()
+          it('nonempty', function()
+            assert.True(next(v) ~= nil)
+          end)
+          describe('uppercase', function()
+            for value in pairs(v) do
+              it(value, function()
+                assert.same(value:upper(), value)
+              end)
+            end
+          end)
+        end)
+      end
     end)
   end
 end)
