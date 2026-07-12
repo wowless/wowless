@@ -42,6 +42,7 @@ end
 
 return function(datalua)
   local lang = datalua.xmlflat
+  local enums = datalua.globals.Enum
   local stringenums = datalua.stringenums
   local attributeTypes = {
     boolean = function(s)
@@ -52,6 +53,14 @@ return function(datalua)
         return false
       else
         return nil
+      end
+    end,
+    enum = function(name, s)
+      local upper = s:upper()
+      for k, v in pairs(enums[name]) do
+        if k:upper() == upper then
+          return v
+        end
       end
     end,
     number = function(s)

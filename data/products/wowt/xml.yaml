@@ -1359,6 +1359,11 @@ StatusBar:
       type: number
     drawlayer:
       type: string
+    fillstyle:
+      impl:
+        method: SetFillStyle
+      type:
+        enum: StatusBarFillStyle
     maxvalue:
       type: number
     minvalue:

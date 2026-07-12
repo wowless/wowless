@@ -18,6 +18,8 @@ end)()
 local sorted = require('pl.tablex').sort
 local scripttypes = readyaml('data/scripttypes.yaml')
 local stringenums = readyaml('data/products/wow/stringenums.yaml')
+local enumFillStyle = readyaml('data/products/wow/globals.yaml').Enum.StatusBarFillStyle
+local stringenumFillStyle = readyaml('data/products/wow_classic_era/stringenums.yaml').StatusBarFillStyle
 
 local function hack(s)
   return 'end,(function()' .. s .. ' end)()--'
@@ -131,6 +133,51 @@ local content = {
       keyvalues,
       { tag = 'Scripts', { tag = 'OnLoad', text = table.concat(lines, '\n') } },
     }
+  end)(),
+  (function()
+    -- fillStyle is a global Enum in every product except wow_classic_era,
+    -- where it's still a stringenum; both accept their values
+    -- case-insensitively and fall back to the field's default on a miss.
+    local function eraExpected(v)
+      local upper = v:upper()
+      return stringenumFillStyle[upper] and upper or 'STANDARD'
+    end
+    local function nonEraExpected(v)
+      local upper = v:upper()
+      for k, n in pairs(enumFillStyle) do
+        if k:upper() == upper then
+          return n
+        end
+      end
+      return enumFillStyle.Standard
+    end
+    local function fillStyleBar(value)
+      return {
+        tag = 'StatusBar',
+        fillStyle = value,
+        {
+          tag = 'Scripts',
+          {
+            tag = 'OnLoad',
+            text = ([[
+              if not _G.__wowless then
+                return
+              end
+              local isEra = _G.__wowless.product == 'wow_classic_era'
+              assertEquals(isEra and %s or %s, self:GetFillStyle())
+            ]]):format(luaLiteral(eraExpected(value)), luaLiteral(nonEraExpected(value))),
+          },
+        },
+      }
+    end
+    local frame = { tag = 'Frame' }
+    for pascal in sorted(enumFillStyle) do
+      local screaming = pascal:gsub('%u', '_%0'):upper():gsub('^_', '')
+      table.insert(frame, fillStyleBar(pascal))
+      table.insert(frame, fillStyleBar(screaming))
+    end
+    table.insert(frame, fillStyleBar('center'))
+    return frame
   end)(),
 }
 
