@@ -172,9 +172,9 @@ templates:
     log:
 time:
   deps:
+    funtainer:
     log:
     luaobjects:
-    security:
 uiobjectloader:
   deps:
     cstubs:

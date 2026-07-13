@@ -1,9 +1,12 @@
-return function(log, luaobjects, security)
+return function(funtainer, log, luaobjects)
   local stamp = 1234
   local timers = require('minheap'):new()
   timers:push(math.huge, function()
     error('fell off the end of time')
   end)
+
+  local IsCancelled = funtainer.methods.IsCancelled
+  local Invoke = funtainer.methods.Invoke
 
   local function addTimer(seconds, timer)
     timers:push(stamp + seconds, timer)
@@ -27,8 +30,8 @@ return function(log, luaobjects, security)
       local rec = timer.val
       local obj = rec.callback
       log(2, 'running timer %.2f %s', timer.pri, tostring(obj))
-      if not obj.cancelled and rec.count < rec.iterations then
-        security.CallSandbox(obj.callback, luaobjects.CreateProxy(obj))
+      if not IsCancelled(obj) and rec.count < rec.iterations then
+        Invoke(obj, luaobjects.CreateProxy(obj))
         rec.count = rec.count + 1
         addTimer(rec.seconds, rec)
       end
