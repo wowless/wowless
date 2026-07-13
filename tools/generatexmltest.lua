@@ -132,6 +132,71 @@ local content = {
       { tag = 'Scripts', { tag = 'OnLoad', text = table.concat(lines, '\n') } },
     }
   end)(),
+  (function()
+    -- fillStyle is a global Enum in some products and a stringenum in
+    -- others. Accumulate every value seen for either representation across
+    -- all products, then test each one against whichever representation
+    -- the currently running product actually has (Enum.StatusBarFillStyle
+    -- is a real global either way, present or absent, so this needs no
+    -- wowless-specific data and works unmodified on a real client too).
+    local candidates, enumMatch, stringenumMatch = {}, {}, {}
+    local enumDefault, stringenumDefault
+    for _, product in ipairs(readyaml('data/products.yaml')) do
+      local fsEnum = readyaml('data/products/' .. product .. '/globals.yaml').Enum.StatusBarFillStyle
+      for k, n in pairs(fsEnum or {}) do
+        candidates[k] = true
+        enumMatch[k:upper()] = n
+      end
+      local fsStringenum = readyaml('data/products/' .. product .. '/stringenums.yaml').StatusBarFillStyle
+      for k in pairs(fsStringenum or {}) do
+        candidates[k] = true
+        stringenumMatch[k:upper()] = k
+      end
+      local field = readyaml('data/products/' .. product .. '/uiobjects.yaml').StatusBar.fields.fillStyle
+      if field.type.enum then
+        assert(enumDefault == nil or enumDefault == field.init, product)
+        enumDefault = field.init
+      else
+        assert(stringenumDefault == nil or stringenumDefault == field.init, product)
+        stringenumDefault = field.init
+      end
+    end
+    local function fillStyleBar(value)
+      local upper = value:upper()
+      local enumResult = enumMatch[upper]
+      if enumResult == nil then
+        enumResult = enumDefault
+      end
+      local stringenumResult = stringenumMatch[upper]
+      if stringenumResult == nil then
+        stringenumResult = stringenumDefault
+      end
+      return {
+        tag = 'StatusBar',
+        fillStyle = value,
+        {
+          tag = 'Scripts',
+          {
+            tag = 'OnLoad',
+            text = ([[
+              local expected
+              if Enum.StatusBarFillStyle then
+                expected = %s
+              else
+                expected = %s
+              end
+              assertEquals(expected, self:GetFillStyle())
+            ]]):format(luaLiteral(enumResult), luaLiteral(stringenumResult)),
+          },
+        },
+      }
+    end
+    local frames = { tag = 'Frames' }
+    for value in sorted(candidates) do
+      table.insert(frames, fillStyleBar(value))
+    end
+    return { tag = 'Frame', frames }
+  end)(),
 }
 
 local renderXml

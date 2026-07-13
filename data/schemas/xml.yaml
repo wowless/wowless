@@ -30,6 +30,9 @@ type:
                     type:
                       taggedunion:
                         boolean: tag
+                        enum:
+                          ref:
+                            schema: enum
                         number: tag
                         string: tag
                         stringenum:
