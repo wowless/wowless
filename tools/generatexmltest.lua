@@ -18,8 +18,6 @@ end)()
 local sorted = require('pl.tablex').sort
 local scripttypes = readyaml('data/scripttypes.yaml')
 local stringenums = readyaml('data/products/wow/stringenums.yaml')
-local enumFillStyle = readyaml('data/products/wow/globals.yaml').Enum.StatusBarFillStyle
-local stringenumFillStyle = readyaml('data/products/wow_classic_era/stringenums.yaml').StatusBarFillStyle
 
 local function hack(s)
   return 'end,(function()' .. s .. ' end)()--'
@@ -138,6 +136,8 @@ local content = {
     -- fillStyle is a global Enum in every product except wow_classic_era,
     -- where it's still a stringenum; both accept their values
     -- case-insensitively and fall back to the field's default on a miss.
+    local enumFillStyle = readyaml('data/products/wow/globals.yaml').Enum.StatusBarFillStyle
+    local stringenumFillStyle = readyaml('data/products/wow_classic_era/stringenums.yaml').StatusBarFillStyle
     local function eraExpected(v)
       local upper = v:upper()
       return stringenumFillStyle[upper] and upper or 'STANDARD'
@@ -170,14 +170,14 @@ local content = {
         },
       }
     end
-    local frame = { tag = 'Frame' }
+    local frames = { tag = 'Frames' }
     for pascal in sorted(enumFillStyle) do
       local screaming = pascal:gsub('%u', '_%0'):upper():gsub('^_', '')
-      table.insert(frame, fillStyleBar(pascal))
-      table.insert(frame, fillStyleBar(screaming))
+      table.insert(frames, fillStyleBar(pascal))
+      table.insert(frames, fillStyleBar(screaming))
     end
-    table.insert(frame, fillStyleBar('center'))
-    return frame
+    table.insert(frames, fillStyleBar('center'))
+    return { tag = 'Frame', frames }
   end)(),
 }
 
