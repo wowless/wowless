@@ -4,6 +4,7 @@ return function(cstubs, datalua)
   local config = datalua.config.modules and datalua.config.modules.luaobjects or {}
   local typeids = {}
   local impltypes = {}
+  local host_mts = {}
 
   local function LoadTypes(modules)
     local type_stubs = cstubs.loadluaobjects(modules, luaobject, config.tostring_metamethod)
@@ -12,7 +13,11 @@ return function(cstubs, datalua)
     end
     for k, v in pairs(datalua.luaobjects) do
       if v.impl and not v.virtual then
-        impltypes[k] = modules[v.impl]
+        local impl = modules[v.impl]
+        impltypes[k] = impl
+        if impl.methods then
+          host_mts[k] = { __index = impl.methods }
+        end
       end
     end
   end
@@ -20,6 +25,7 @@ return function(cstubs, datalua)
   local function Create(k, ...)
     local impl = impltypes[k]
     local obj = { assert(typeids[k], k), table = {} }
+    setmetatable(obj, host_mts[k])
     if impl and impl.construct then
       impl.construct(obj, ...)
     end
@@ -30,6 +36,7 @@ return function(cstubs, datalua)
     local impl = impltypes[k]
     if impl and impl.coerce then
       local obj = { assert(typeids[k], k), table = {} }
+      setmetatable(obj, host_mts[k])
       if impl.coerce(obj, value) then
         return obj
       end
