@@ -31,6 +31,17 @@ describe('xml', function()
       for k in pairs(uiobjects) do
         flatten(k)
       end
+      local usedscripts = {}
+      for _, obj in pairs(uiobjects) do
+        for name in pairs(obj.scripts or {}) do
+          usedscripts[name] = true
+        end
+      end
+      for name in pairs(usedscripts) do
+        it(name .. ' is a ScriptType in xml', function()
+          assert.equals('ScriptType', xml[name] and xml[name].extends)
+        end)
+      end
       for name, elem in pairs(xml) do
         describe(name, function()
           if elem.extends == 'ScriptType' then
