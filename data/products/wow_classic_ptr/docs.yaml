@@ -482,7 +482,7 @@ script_objects:
   SimpleAnimAPI:
     uiobject: Animation
   SimpleAnimatableObjectAPI:
-    uiobject: Region
+    uiobject: AnimatableObject
   SimpleAnimFlipBookAPI:
     uiobject: FlipBook
   SimpleAnimGroupAPI:
