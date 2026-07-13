@@ -35,11 +35,11 @@ Alpha:
   attributes:
     fromalpha:
       impl:
-        method: SetFromAlpha
+        field: fromAlpha
       type: number
     toalpha:
       impl:
-        method: SetToAlpha
+        field: toAlpha
       type: number
   extends: Animation
 Anchor:
@@ -85,7 +85,7 @@ Animation:
       type: string
     smoothing:
       impl:
-        method: SetSmoothing
+        field: smoothing
       type: string
     startdelay:
       impl:
@@ -105,7 +105,7 @@ AnimationGroup:
       type: stringlist
     looping:
       impl:
-        method: SetLooping
+        field: looping
       type: string
     mixin:
       impl: internal
@@ -193,7 +193,7 @@ Button:
   attributes:
     motionscriptswhiledisabled:
       impl:
-        method: SetMotionScriptsWhileDisabled
+        field: motionScriptsWhileDisabled
       type: boolean
     registerforclicks:
       impl:
@@ -412,12 +412,12 @@ Font:
       type: stringlist
     justifyh:
       impl:
-        method: SetJustifyH
+        field: justifyh
       type:
         stringenum: JustifyHorizontal
     justifyv:
       impl:
-        method: SetJustifyV
+        field: justifyv
       type:
         stringenum: JustifyVertical
     monochrome:
@@ -452,12 +452,12 @@ FontString:
       type: string
     justifyh:
       impl:
-        method: SetJustifyH
+        field: justifyh
       type:
         stringenum: JustifyHorizontal
     justifyv:
       impl:
-        method: SetJustifyV
+        field: justifyv
       type:
         stringenum: JustifyVertical
     maxlines:
@@ -485,7 +485,7 @@ Frame:
   attributes:
     clampedtoscreen:
       impl:
-        method: SetClampedToScreen
+        field: isClampedToScreen
       type: boolean
     clipchildren:
       impl:
@@ -509,7 +509,7 @@ Frame:
       type: boolean
     enablemousewheel:
       impl:
-        method: EnableMouseWheel
+        field: mouseWheelEnabled
       type: boolean
     flattenrenderlayers:
       type: boolean
@@ -519,21 +519,21 @@ Frame:
       type: number
     framestrata:
       impl:
-        method: SetFrameStrata
+        field: frameStrata
       type: string
     hyperlinksenabled:
       impl:
-        method: SetHyperlinksEnabled
+        field: hyperlinksEnabled
       type: boolean
     id:
       impl:
-        method: SetID
+        field: id
       type: number
     intrinsic:
       type: boolean
     movable:
       impl:
-        method: SetMovable
+        field: movable
       type: boolean
     parent:
       impl: internal
@@ -547,14 +547,14 @@ Frame:
       type: boolean
     resizable:
       impl:
-        method: SetResizable
+        field: resizable
       type: boolean
     securemixin:
       impl: internal
       type: stringlist
     toplevel:
       impl:
-        method: SetToplevel
+        field: toplevel
       type: boolean
     useparentlevel:
       type: boolean
@@ -671,11 +671,11 @@ LayoutFrame:
       type: boolean
     ignoreparentalpha:
       impl:
-        method: SetIgnoreParentAlpha
+        field: isIgnoringParentAlpha
       type: boolean
     ignoreparentscale:
       impl:
-        method: SetIgnoreParentScale
+        field: isIgnoringParentScale
       type: boolean
     inherits:
       type: stringlist
@@ -1314,15 +1314,15 @@ Slider:
       type: boolean
     orientation:
       impl:
-        method: SetOrientation
+        field: orientation
       type: string
     stepsperpage:
       impl:
-        method: SetStepsPerPage
+        field: stepsPerPage
       type: number
     valuestep:
       impl:
-        method: SetValueStep
+        field: valueStep
       type: number
   contents:
     tags:
@@ -1342,7 +1342,7 @@ StatusBar:
       type: number
     reversefill:
       impl:
-        method: SetReverseFill
+        field: reverseFill
       type: boolean
   contents:
     tags:
@@ -1372,7 +1372,7 @@ Texture:
   attributes:
     alphamode:
       impl:
-        method: SetBlendMode
+        field: blendMode
       type:
         stringenum: BlendMode
     atlas:
@@ -1389,7 +1389,7 @@ Texture:
       type: string
     horiztile:
       impl:
-        method: SetHorizTile
+        field: horizTile
       type: boolean
     nonblocking:
       type: boolean
@@ -1399,13 +1399,13 @@ Texture:
       type: boolean
     texelsnappingbias:
       impl:
-        method: SetTexelSnappingBias
+        field: texelSnappingBias
       type: number
     useatlassize:
       type: boolean
     verttile:
       impl:
-        method: SetVertTile
+        field: vertTile
       type: boolean
   contents:
     tags:
