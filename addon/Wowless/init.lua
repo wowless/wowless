@@ -2,8 +2,8 @@ local _, G = ...
 _G.Wowless = G
 _G.assertEquals = G.assertEquals
 
-if _G.UIParent then
-  _G.UIParent:UnregisterEvent('LUA_WARNING')
+if _G.ScriptErrorsFrame then
+  _G.ScriptErrorsFrame:UnregisterEvent('LUA_WARNING')
 end
 G.ActualLuaWarnings = {}
 G.ExpectedLuaWarnings = {}

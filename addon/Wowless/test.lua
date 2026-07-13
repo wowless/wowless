@@ -791,8 +791,8 @@ do
           local dump = _G.__wowless and _G.__wowless.dump or DevTools_Dump
           dump(_G.WowlessTestFailures)
         end
-        if _G.UIParent then
-          _G.UIParent:RegisterEvent('LUA_WARNING')
+        if _G.ScriptErrorsFrame then
+          _G.ScriptErrorsFrame:RegisterEvent('LUA_WARNING')
         end
         G.LuaWarningsFrame:UnregisterAllEvents()
       else
