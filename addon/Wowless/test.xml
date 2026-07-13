@@ -472,6 +472,17 @@
     </Scripts>
   </Frame>
 
+  <FontString name='WowlessCreateFontStringTemplate' virtual='true' justifyH='RIGHT' />
+  <Frame>
+    <Scripts>
+      <OnLoad>
+        local fs = self:CreateFontString(nil, 'OVERLAY', 'WowlessCreateFontStringTemplate')
+        assertEquals('RIGHT', fs:GetJustifyH())
+        assertEquals('OVERLAY', fs:GetDrawLayer())
+      </OnLoad>
+    </Scripts>
+  </Frame>
+
   <Script>
     WowlessLog = {}
     WowlessHide = function()
