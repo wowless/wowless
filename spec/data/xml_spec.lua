@@ -32,50 +32,56 @@ describe('xml', function()
         flatten(k)
       end
       for name, elem in pairs(xml) do
-        if elem.extends == 'ScriptType' then
-          it(name .. ' is in scripttypes', function()
-            assert.Not.Nil(scripttypes[name])
-          end)
-        end
-        -- Non-virtual xml tags that instantiate a uiobject type must only carry
-        -- method/field attribute impls resolvable on that type, so attribute
-        -- application never needs a does-this-method-exist check at runtime.
-        if uiobjects[name] and not elem.virtual then
-          local attrs = {}
-          local e = elem
-          while e do
-            for an, a in pairs(e.attributes or {}) do
-              attrs[an] = attrs[an] or a
-            end
-            e = e.extends and xml[e.extends] or nil
+        describe(name, function()
+          if elem.extends == 'ScriptType' then
+            it('is in scripttypes', function()
+              assert.Not.Nil(scripttypes[name])
+            end)
           end
-          it(name .. ' attribute impls resolve', function()
-            for an, a in pairs(attrs) do
-              local impl = type(a.impl) == 'table' and a.impl or nil
-              if impl and impl.method then
-                assert(methods[name][impl.method], ('%s.%s: no method %s'):format(name, an, impl.method))
-              elseif impl and impl.field then
-                assert(fields[name][impl.field], ('%s.%s: no field %s'):format(name, an, impl.field))
+          -- Non-virtual xml tags that instantiate a uiobject type must only carry
+          -- method/field attribute impls resolvable on that type, so attribute
+          -- application never needs a does-this-method-exist check at runtime.
+          if uiobjects[name] and not elem.virtual then
+            local attrs = {}
+            local e = elem
+            while e do
+              for an, a in pairs(e.attributes or {}) do
+                attrs[an] = attrs[an] or a
               end
+              e = e.extends and xml[e.extends] or nil
             end
-          end)
-          -- A method whose entire implementation is a generated trivial setter
-          -- (self.field = value, no side effects) should be declared with a
-          -- field impl instead, so attribute application skips the method
-          -- call/lookup entirely.
-          it(name .. ' method attribute impls are not trivial setters', function()
-            for an, a in pairs(attrs) do
-              local impl = type(a.impl) == 'table' and a.impl or nil
-              if impl and impl.method then
-                local mimpl = methods[name][impl.method]
-                assert(
-                  not (type(mimpl) == 'table' and mimpl.setter),
-                  ('%s.%s: method %s is a trivial setter, use a field impl instead'):format(name, an, impl.method)
-                )
+            describe('attribute impls resolve', function()
+              for an, a in pairs(attrs) do
+                it(an, function()
+                  local impl = type(a.impl) == 'table' and a.impl or nil
+                  if impl and impl.method then
+                    assert(methods[name][impl.method], ('%s.%s: no method %s'):format(name, an, impl.method))
+                  elseif impl and impl.field then
+                    assert(fields[name][impl.field], ('%s.%s: no field %s'):format(name, an, impl.field))
+                  end
+                end)
               end
-            end
-          end)
-        end
+            end)
+            -- A method whose entire implementation is a generated trivial setter
+            -- (self.field = value, no side effects) should be declared with a
+            -- field impl instead, so attribute application skips the method
+            -- call/lookup entirely.
+            describe('method attribute impls are not trivial setters', function()
+              for an, a in pairs(attrs) do
+                it(an, function()
+                  local impl = type(a.impl) == 'table' and a.impl or nil
+                  if impl and impl.method then
+                    local mimpl = methods[name][impl.method]
+                    assert(
+                      not (type(mimpl) == 'table' and mimpl.setter),
+                      ('%s.%s: method %s is a trivial setter, use a field impl instead'):format(name, an, impl.method)
+                    )
+                  end
+                end)
+              end
+            end)
+          end
+        end)
       end
     end)
   end
