@@ -69,16 +69,10 @@ Animation:
     childkey:
       type: string
     duration:
-      impl:
-        method: SetDuration
       type: number
     enddelay:
-      impl:
-        method: SetEndDelay
       type: number
     order:
-      impl:
-        method: SetOrder
       type: number
     parentkey:
       impl: internal
@@ -88,12 +82,8 @@ Animation:
         field: smoothing
       type: string
     startdelay:
-      impl:
-        method: SetStartDelay
       type: number
     target:
-      impl:
-        method: SetTargetName
       type: string
   contents:
     tags:
@@ -120,8 +110,6 @@ AnimationGroup:
       impl: internal
       type: string
     settofinalalpha:
-      impl:
-        method: SetToFinalAlpha
       type: boolean
     virtual:
       type: boolean
@@ -315,16 +303,10 @@ ControlPoints:
 Cooldown:
   attributes:
     drawedge:
-      impl:
-        method: SetDrawEdge
       type: boolean
     hidecountdownnumbers:
-      impl:
-        method: SetHideCountdownNumbers
       type: boolean
     reverse:
-      impl:
-        method: SetReverse
       type: boolean
   contents:
     tags:
@@ -488,16 +470,12 @@ Frame:
         field: isClampedToScreen
       type: boolean
     clipchildren:
-      impl:
-        method: SetClipsChildren
       type: boolean
     debugid:
       type: number
     dontsaveposition:
       type: boolean
     enablekeyboard:
-      impl:
-        method: EnableKeyboard
       type: boolean
     enablemouse:
       impl:
@@ -1301,16 +1279,12 @@ Size:
 Slider:
   attributes:
     defaultvalue:
-      impl:
-        method: SetValue
       type: number
     maxvalue:
       type: number
     minvalue:
       type: number
     obeystepondrag:
-      impl:
-        method: SetObeyStepOnDrag
       type: boolean
     orientation:
       impl:
@@ -1331,8 +1305,6 @@ Slider:
 StatusBar:
   attributes:
     defaultvalue:
-      impl:
-        method: SetValue
       type: number
     drawlayer:
       type: string
@@ -1380,8 +1352,6 @@ Texture:
         method: SetAtlas
       type: string
     desaturated:
-      impl:
-        method: SetDesaturated
       type: boolean
     file:
       impl:
@@ -1394,8 +1364,6 @@ Texture:
     nonblocking:
       type: boolean
     snaptopixelgrid:
-      impl:
-        method: SetSnapToPixelGrid
       type: boolean
     texelsnappingbias:
       impl:
