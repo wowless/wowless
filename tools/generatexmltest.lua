@@ -133,25 +133,27 @@ local content = {
     }
   end)(),
   (function()
-    -- fillStyle is a global Enum in every product except wow_classic_era,
-    -- where it's still a stringenum; both accept their values
-    -- case-insensitively and fall back to the field's default on a miss.
-    local enumFillStyle = readyaml('data/products/wow/globals.yaml').Enum.StatusBarFillStyle
-    local stringenumFillStyle = readyaml('data/products/wow_classic_era/stringenums.yaml').StatusBarFillStyle
-    local function eraExpected(v)
-      local upper = v:upper()
-      return stringenumFillStyle[upper] and upper or 'STANDARD'
-    end
-    local function nonEraExpected(v)
-      local upper = v:upper()
-      for k, n in pairs(enumFillStyle) do
-        if k:upper() == upper then
-          return n
-        end
+    -- fillStyle is a global Enum in some products and a stringenum in
+    -- others. Accumulate every value seen for either representation across
+    -- all products, then test each one against whichever representation
+    -- the currently running product actually has (Enum.StatusBarFillStyle
+    -- is a real global either way, present or absent, so this needs no
+    -- wowless-specific data and works unmodified on a real client too).
+    local candidates, enumMatch, stringenumMatch = {}, {}, {}
+    for _, product in ipairs(readyaml('data/products.yaml')) do
+      local fsEnum = readyaml('data/products/' .. product .. '/globals.yaml').Enum.StatusBarFillStyle
+      for k, n in pairs(fsEnum or {}) do
+        candidates[k] = true
+        enumMatch[k:upper()] = n
       end
-      return enumFillStyle.Standard
+      local fsStringenum = readyaml('data/products/' .. product .. '/stringenums.yaml').StatusBarFillStyle
+      for k in pairs(fsStringenum or {}) do
+        candidates[k] = true
+        stringenumMatch[k:upper()] = k
+      end
     end
     local function fillStyleBar(value)
+      local upper = value:upper()
       return {
         tag = 'StatusBar',
         fillStyle = value,
@@ -160,23 +162,34 @@ local content = {
           {
             tag = 'OnLoad',
             text = ([[
-              if not _G.__wowless then
-                return
+              local expected
+              if Enum.StatusBarFillStyle then
+                expected = %s
+              else
+                expected = %s
               end
-              local isEra = _G.__wowless.product == 'wow_classic_era'
-              assertEquals(isEra and %s or %s, self:GetFillStyle())
-            ]]):format(luaLiteral(eraExpected(value)), luaLiteral(nonEraExpected(value))),
+              if expected == nil then
+                expected = _G.WowlessFillStyleDefault
+              end
+              assertEquals(expected, self:GetFillStyle())
+            ]]):format(luaLiteral(enumMatch[upper]), luaLiteral(stringenumMatch[upper])),
           },
         },
       }
     end
-    local frames = { tag = 'Frames' }
-    for pascal in sorted(enumFillStyle) do
-      local screaming = pascal:gsub('%u', '_%0'):upper():gsub('^_', '')
-      table.insert(frames, fillStyleBar(pascal))
-      table.insert(frames, fillStyleBar(screaming))
+    local frames = {
+      tag = 'Frames',
+      {
+        tag = 'StatusBar',
+        {
+          tag = 'Scripts',
+          { tag = 'OnLoad', text = '_G.WowlessFillStyleDefault = self:GetFillStyle()' },
+        },
+      },
+    }
+    for value in sorted(candidates) do
+      table.insert(frames, fillStyleBar(value))
     end
-    table.insert(frames, fillStyleBar('center'))
     return { tag = 'Frame', frames }
   end)(),
 }
