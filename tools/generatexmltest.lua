@@ -140,6 +140,7 @@ local content = {
     -- is a real global either way, present or absent, so this needs no
     -- wowless-specific data and works unmodified on a real client too).
     local candidates, enumMatch, stringenumMatch = {}, {}, {}
+    local enumDefault, stringenumDefault
     for _, product in ipairs(readyaml('data/products.yaml')) do
       local fsEnum = readyaml('data/products/' .. product .. '/globals.yaml').Enum.StatusBarFillStyle
       for k, n in pairs(fsEnum or {}) do
@@ -151,9 +152,25 @@ local content = {
         candidates[k] = true
         stringenumMatch[k:upper()] = k
       end
+      local field = readyaml('data/products/' .. product .. '/uiobjects.yaml').StatusBar.fields.fillStyle
+      if field.type.enum then
+        assert(enumDefault == nil or enumDefault == field.init, product)
+        enumDefault = field.init
+      else
+        assert(stringenumDefault == nil or stringenumDefault == field.init, product)
+        stringenumDefault = field.init
+      end
     end
     local function fillStyleBar(value)
       local upper = value:upper()
+      local enumResult = enumMatch[upper]
+      if enumResult == nil then
+        enumResult = enumDefault
+      end
+      local stringenumResult = stringenumMatch[upper]
+      if stringenumResult == nil then
+        stringenumResult = stringenumDefault
+      end
       return {
         tag = 'StatusBar',
         fillStyle = value,
@@ -168,25 +185,13 @@ local content = {
               else
                 expected = %s
               end
-              if expected == nil then
-                expected = _G.WowlessFillStyleDefault
-              end
               assertEquals(expected, self:GetFillStyle())
-            ]]):format(luaLiteral(enumMatch[upper]), luaLiteral(stringenumMatch[upper])),
+            ]]):format(luaLiteral(enumResult), luaLiteral(stringenumResult)),
           },
         },
       }
     end
-    local frames = {
-      tag = 'Frames',
-      {
-        tag = 'StatusBar',
-        {
-          tag = 'Scripts',
-          { tag = 'OnLoad', text = '_G.WowlessFillStyleDefault = self:GetFillStyle()' },
-        },
-      },
-    }
+    local frames = { tag = 'Frames' }
     for value in sorted(candidates) do
       table.insert(frames, fillStyleBar(value))
     end
