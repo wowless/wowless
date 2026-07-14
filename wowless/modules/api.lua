@@ -160,7 +160,7 @@ return function(
     for _, template in ipairs(tmpls) do
       template.initEarlyAttrs(ud)
     end
-    if layer or sublevel then
+    if (layer or sublevel) and ud.SetDrawLayer then
       ud:SetDrawLayer(layer or ud.layer, sublevel or ud.sublevel)
     end
     if objname then
