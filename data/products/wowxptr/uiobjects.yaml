@@ -5980,7 +5980,7 @@ ModelScene:
       init: 10000000
       type: number
     lightType:
-      nilable: true
+      init: 0
       type:
         enum: ModelLightType
   inherits:
