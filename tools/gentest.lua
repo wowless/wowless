@@ -26,6 +26,281 @@ local function tpath(t, ...)
   return t
 end
 
+local function renderXml(x)
+  local function doRenderXml(y, n, t)
+    local attrs = {}
+    for k in pairs(y) do
+      if type(k) == 'string' and k ~= 'tag' then
+        table.insert(attrs, k)
+      end
+    end
+    table.sort(attrs)
+    local tt = { (' '):rep(n), '<', y.tag }
+    for _, k in ipairs(attrs) do
+      table.insert(tt, (' %s=\'%s\''):format(k, tostring(y[k])))
+    end
+    if #y == 0 then
+      table.insert(tt, ' />')
+      table.insert(t, table.concat(tt))
+    else
+      table.insert(tt, '>')
+      table.insert(t, table.concat(tt))
+      for _, v in ipairs(y) do
+        doRenderXml(v, n + 2, t)
+      end
+      table.insert(t, table.concat({ (' '):rep(n), '</', y.tag, '>' }))
+    end
+  end
+  local t = {}
+  doRenderXml(x, 0, t)
+  return table.concat(t, '\n')
+end
+
+-- Which XML tags are reachable, recursively, as descendants of <Frame>?
+-- Mirrors the supertypes/children containment logic wowless/modules/xml.lua
+-- itself uses at runtime (built in tools/prep.lua's xmlflat).
+local function framesReachable(p)
+  local xml = perproduct(p, 'xml')
+  local function supertypesOf(tag)
+    local st = { [tag:lower()] = true }
+    local t = xml[tag]
+    while t.extends do
+      st[t.extends:lower()] = true
+      t = xml[t.extends]
+    end
+    return st
+  end
+  local function childrenOf(tag)
+    local kids = {}
+    local t = xml[tag]
+    while true do
+      if t.contents and t.contents ~= 'text' then
+        for kid in pairs(t.contents.tags) do
+          kids[kid:lower()] = true
+        end
+      end
+      if not t.extends then
+        break
+      end
+      t = xml[t.extends]
+    end
+    return kids
+  end
+  local supertypes, children = {}, {}
+  for tag in pairs(xml) do
+    supertypes[tag] = supertypesOf(tag)
+    children[tag] = childrenOf(tag)
+  end
+  local reachable = { Frame = true }
+  local frontier = { 'Frame' }
+  while #frontier > 0 do
+    local from = table.remove(frontier)
+    local allowed = children[from]
+    for tag in pairs(xml) do
+      if not reachable[tag] then
+        for st in pairs(supertypes[tag]) do
+          if allowed[st] then
+            reachable[tag] = true
+            table.insert(frontier, tag)
+            break
+          end
+        end
+      end
+    end
+  end
+  return reachable
+end
+
+-- Per-type field/method data (fields, their init defaults, and which
+-- methods getter/set them), flattened across the inherits chain. Shared by
+-- the uiobjectapis ptablemap entry and discoverCases below.
+local function computeUiobjectApis(p)
+  local uiobjects = perproduct(p, 'uiobjects')
+  local allscripts = readyaml('data/scripttypes.yaml')
+  for _, cfg in pairs(uiobjects) do
+    cfg.fieldinitoverrides = cfg.fieldinitoverrides or {}
+  end
+  for k, cfg in pairs(uiobjects) do
+    cfg.isa = {}
+    for k2, cfg2 in pairs(uiobjects) do
+      cfg.isa[k2] = false
+      if cfg2.objectType then
+        cfg.isa[cfg2.objectType] = false
+      end
+    end
+    if not cfg.virtual or cfg.objectType then
+      cfg.isa[cfg.objectType or k] = true
+    end
+  end
+  local function fixup(cfg)
+    for inhname in pairs(cfg.inherits) do
+      local inh = uiobjects[inhname]
+      fixup(inh)
+      for n, f in pairs(inh.fieldinitoverrides) do
+        cfg.fieldinitoverrides[n] = f
+      end
+      for n, f in pairs(inh.fields) do
+        cfg.fields[n] = f
+      end
+      for n, m in pairs(inh.methods) do
+        cfg.methods[n] = cfg.methods[n] or m -- overrides
+      end
+      if inh.scripts then
+        cfg.scripts = cfg.scripts or {}
+        for n in pairs(inh.scripts) do
+          cfg.scripts[n] = {}
+        end
+      end
+      for ik, iv in pairs(inh.isa) do
+        if iv then
+          cfg.isa[ik] = true
+        end
+      end
+    end
+  end
+  for _, cfg in pairs(uiobjects) do
+    fixup(cfg)
+  end
+  local t = {}
+  for k, v in pairs(uiobjects) do
+    local ft = {}
+    for fk, fv in pairs(v.fields) do
+      local init = fv.init
+      local override = v.fieldinitoverrides[fk]
+      if override ~= nil then
+        init = override
+      end
+      ft[fk] = {
+        dynamicinit = fv.dynamicinit,
+        getters = {},
+        init = init,
+      }
+    end
+    local mt = {}
+    for mk, mv in pairs(v.methods) do
+      mt[mk] = true
+      for gk, gv in ipairs(mv.impl and mv.impl.getter or {}) do
+        table.insert(ft[gv.name].getters, { index = gk, method = mk })
+      end
+    end
+    for fk, fv in pairs(ft) do
+      if fv.dynamicinit then
+        ft[fk] = nil
+      end
+    end
+    -- TODO remove these super duper field hacks
+    ft.parent = nil
+    if v.singleton then
+      ft = {}
+    elseif k == 'EditBox' then
+      ft.shown.init = false
+    end
+    local st = {}
+    for scripttype in pairs(allscripts) do
+      st[scripttype] = not not (v.scripts and v.scripts[scripttype])
+    end
+    t[k] = {
+      fields = ft,
+      isa = v.isa,
+      methods = mt,
+      objtype = v.objectType or k,
+      scripts = st,
+      singleton = v.singleton,
+      virtual = v.virtual,
+    }
+  end
+  for _, product in ipairs(readyaml('data/products.yaml')) do
+    for k in pairs(perproduct(product, 'uiobjects')) do
+      if not t[k] then
+        t[k] = { unsupported = true }
+      end
+    end
+  end
+  return t
+end
+
+-- Every (tag, attribute) pair typed stringenum:/enum:, for tags reachable
+-- from Frame (see framesReachable) -- these are eligible for per-product
+-- XML-attribute-value template tests. An eligible attribute's impl is
+-- required to be field-based (data/schemas/xml.yaml's attribute impl
+-- taggedunion also allows method/internal/loadfile/scope, but every
+-- stringenum-/enum-typed attribute reachable from Frame today uses
+-- `impl.field` directly) -- resolve the field's default and real getter
+-- method via computeUiobjectApis's already-computed, inherits-flattened
+-- field/getter data, rather than re-deriving either from string transforms.
+local function discoverCases(p)
+  local reachable = framesReachable(p)
+  local uiobjectApis = computeUiobjectApis(p)
+  local cases = {}
+  for tag, tdef in pairs(perproduct(p, 'xml')) do
+    if reachable[tag] then
+      for attrKey, attrDef in pairs(tdef.attributes or {}) do
+        local ty = attrDef.type
+        if ty.stringenum or ty.enum then
+          local fieldName = assert(attrDef.impl.field, 'unsupported attribute impl for ' .. tag .. '.' .. attrKey)
+          local fv = uiobjectApis[tag].fields[fieldName]
+          table.insert(cases, {
+            getter = fv.getters[1].method,
+            id = tag:lower() .. '_' .. attrKey,
+            init = fv.init,
+            xmlAttrKey = attrKey,
+            xmlTag = tag,
+          })
+        end
+      end
+    end
+  end
+  return cases
+end
+
+local function attrMembers(p, case)
+  local ty = perproduct(p, 'xml')[case.xmlTag].attributes[case.xmlAttrKey].type
+  if ty.stringenum then
+    local members = {}
+    for name in pairs(perproduct(p, 'stringenums')[ty.stringenum]) do
+      members[name] = name
+    end
+    return members
+  elseif ty.enum then
+    return perproduct(p, 'globals').Enum[ty.enum] or {}
+  end
+  error('unsupported template-case attribute type for ' .. case.id)
+end
+
+-- Native candidates from this product's own data (plus a lowercase variant
+-- per stringenum member, to check case-insensitive attribute parsing),
+-- then a negative pass unioning in other products' foreign values: values
+-- valid elsewhere but not native to this product, expecting this
+-- product's own field default (mirrors the events ptablemap entry below).
+-- Also always includes a guaranteed-nonsense negative case, so this
+-- coverage doesn't depend on products having diverged.
+local function computeCandidates(p, case)
+  local candidates = {}
+  local native = {}
+  for name, expected in pairs(attrMembers(p, case)) do
+    native[name:upper()] = true
+    table.insert(candidates, { expected = expected, suffix = name:lower(), value = name })
+    if type(expected) == 'string' then
+      table.insert(candidates, { expected = expected, suffix = name:lower() .. '_lower', value = name:lower() })
+    end
+  end
+  local seenForeign = {}
+  for _, product in ipairs(readyaml('data/products.yaml')) do
+    if product ~= p then
+      for name in pairs(attrMembers(product, case)) do
+        local upper = name:upper()
+        if not native[upper] and not seenForeign[upper] then
+          seenForeign[upper] = true
+          table.insert(candidates, { expected = case.init, suffix = name:lower(), value = name })
+        end
+      end
+    end
+  end
+  assert(not native.NONSENSE, 'nonsense is apparently not nonsense for ' .. case.id)
+  table.insert(candidates, { expected = case.init, suffix = 'nonsense', value = 'nonsense' })
+  return candidates
+end
+
 local ptablemap = {
   build = function(p)
     return 'Build', perproduct(p, 'build')
@@ -206,109 +481,18 @@ local ptablemap = {
     end
     return 'NamespaceApis', t
   end,
-  uiobjectapis = function(p)
-    local uiobjects = perproduct(p, 'uiobjects')
-    local allscripts = readyaml('data/scripttypes.yaml')
-    for _, cfg in pairs(uiobjects) do
-      cfg.fieldinitoverrides = cfg.fieldinitoverrides or {}
-    end
-    for k, cfg in pairs(uiobjects) do
-      cfg.isa = {}
-      for k2, cfg2 in pairs(uiobjects) do
-        cfg.isa[k2] = false
-        if cfg2.objectType then
-          cfg.isa[cfg2.objectType] = false
-        end
-      end
-      if not cfg.virtual or cfg.objectType then
-        cfg.isa[cfg.objectType or k] = true
-      end
-    end
-    local function fixup(cfg)
-      for inhname in pairs(cfg.inherits) do
-        local inh = uiobjects[inhname]
-        fixup(inh)
-        for n, f in pairs(inh.fieldinitoverrides) do
-          cfg.fieldinitoverrides[n] = f
-        end
-        for n, f in pairs(inh.fields) do
-          cfg.fields[n] = f
-        end
-        for n, m in pairs(inh.methods) do
-          cfg.methods[n] = cfg.methods[n] or m -- overrides
-        end
-        if inh.scripts then
-          cfg.scripts = cfg.scripts or {}
-          for n in pairs(inh.scripts) do
-            cfg.scripts[n] = {}
-          end
-        end
-        for ik, iv in pairs(inh.isa) do
-          if iv then
-            cfg.isa[ik] = true
-          end
-        end
-      end
-    end
-    for _, cfg in pairs(uiobjects) do
-      fixup(cfg)
-    end
+  templates = function(p)
     local t = {}
-    for k, v in pairs(uiobjects) do
-      local ft = {}
-      for fk, fv in pairs(v.fields) do
-        local init = fv.init
-        local override = v.fieldinitoverrides[fk]
-        if override ~= nil then
-          init = override
-        end
-        ft[fk] = {
-          dynamicinit = fv.dynamicinit,
-          getters = {},
-          init = init,
-        }
-      end
-      local mt = {}
-      for mk, mv in pairs(v.methods) do
-        mt[mk] = true
-        for gk, gv in ipairs(mv.impl and mv.impl.getter or {}) do
-          table.insert(ft[gv.name].getters, { index = gk, method = mk })
-        end
-      end
-      for fk, fv in pairs(ft) do
-        if fv.dynamicinit then
-          ft[fk] = nil
-        end
-      end
-      -- TODO remove these super duper field hacks
-      ft.parent = nil
-      if v.singleton then
-        ft = {}
-      elseif k == 'EditBox' then
-        ft.shown.init = false
-      end
-      local st = {}
-      for scripttype in pairs(allscripts) do
-        st[scripttype] = not not (v.scripts and v.scripts[scripttype])
-      end
-      t[k] = {
-        fields = ft,
-        isa = v.isa,
-        methods = mt,
-        objtype = v.objectType or k,
-        scripts = st,
-        singleton = v.singleton,
-        virtual = v.virtual,
-      }
-    end
-    for _, product in ipairs(readyaml('data/products.yaml')) do
-      for k in pairs(perproduct(product, 'uiobjects')) do
-        if not t[k] then
-          t[k] = { unsupported = true }
-        end
+    for _, case in ipairs(discoverCases(p)) do
+      for _, c in ipairs(computeCandidates(p, case)) do
+        local key = case.id .. '_' .. c.suffix
+        t[key] = { expected = c.expected, getter = case.getter, objectPath = { key } }
       end
     end
-    return 'UIObjectApis', t
+    return 'Templates', t
+  end,
+  uiobjectapis = function(p)
+    return 'UIObjectApis', computeUiobjectApis(p)
   end,
 }
 
@@ -325,11 +509,27 @@ local function doit(k, p)
     return '_G.WowlessData.' .. nn .. ' = ' .. require('tools.prettywrite')(tt) .. '\n'
   elseif k == 'product' then
     return ('_G.WowlessData = { product = %q }'):format(p)
+  elseif k == 'templatexml' then
+    local layer = { tag = 'Layer' }
+    for _, case in ipairs(discoverCases(p)) do
+      for _, c in ipairs(computeCandidates(p, case)) do
+        table.insert(layer, {
+          [case.xmlAttrKey] = c.value,
+          parentKey = case.id .. '_' .. c.suffix,
+          tag = case.xmlTag,
+        })
+      end
+    end
+    return renderXml({
+      { name = 'WowlessGeneratedXmlTests', tag = 'Frame', { tag = 'Layers', layer } },
+      tag = 'Ui',
+    })
   elseif k == 'toc' then
     local tt = {}
     for kk in pairs(ptablemap) do
       table.insert(tt, kk .. '.lua')
     end
+    table.insert(tt, 'templates.xml')
     table.sort(tt)
     table.insert(tt, 1, 'product.lua')
     table.insert(tt, 1, '## Interface: ' .. perproduct(p, 'build').tocversion)
