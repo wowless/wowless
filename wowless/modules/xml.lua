@@ -43,6 +43,7 @@ end
 return function(datalua)
   local lang = datalua.xmlflat
   local stringenums = datalua.stringenums
+  local enums = datalua.globals.Enum
   local attributeTypes = {
     boolean = function(s)
       local x = string.lower(s)
@@ -53,6 +54,10 @@ return function(datalua)
       else
         return nil
       end
+    end,
+    enum = function(name, s)
+      local set = enums[name]
+      return set[s]
     end,
     number = function(s)
       return tonumber(s)
