@@ -103,7 +103,113 @@ local function framesReachable(p)
   return reachable
 end
 
-local ptablemap
+-- Per-type field/method data (fields, their init defaults, and which
+-- methods getter/set them), flattened across the inherits chain. Shared by
+-- the uiobjectapis ptablemap entry and discoverCases below.
+local function computeUiobjectApis(p)
+  local uiobjects = perproduct(p, 'uiobjects')
+  local allscripts = readyaml('data/scripttypes.yaml')
+  for _, cfg in pairs(uiobjects) do
+    cfg.fieldinitoverrides = cfg.fieldinitoverrides or {}
+  end
+  for k, cfg in pairs(uiobjects) do
+    cfg.isa = {}
+    for k2, cfg2 in pairs(uiobjects) do
+      cfg.isa[k2] = false
+      if cfg2.objectType then
+        cfg.isa[cfg2.objectType] = false
+      end
+    end
+    if not cfg.virtual or cfg.objectType then
+      cfg.isa[cfg.objectType or k] = true
+    end
+  end
+  local function fixup(cfg)
+    for inhname in pairs(cfg.inherits) do
+      local inh = uiobjects[inhname]
+      fixup(inh)
+      for n, f in pairs(inh.fieldinitoverrides) do
+        cfg.fieldinitoverrides[n] = f
+      end
+      for n, f in pairs(inh.fields) do
+        cfg.fields[n] = f
+      end
+      for n, m in pairs(inh.methods) do
+        cfg.methods[n] = cfg.methods[n] or m -- overrides
+      end
+      if inh.scripts then
+        cfg.scripts = cfg.scripts or {}
+        for n in pairs(inh.scripts) do
+          cfg.scripts[n] = {}
+        end
+      end
+      for ik, iv in pairs(inh.isa) do
+        if iv then
+          cfg.isa[ik] = true
+        end
+      end
+    end
+  end
+  for _, cfg in pairs(uiobjects) do
+    fixup(cfg)
+  end
+  local t = {}
+  for k, v in pairs(uiobjects) do
+    local ft = {}
+    for fk, fv in pairs(v.fields) do
+      local init = fv.init
+      local override = v.fieldinitoverrides[fk]
+      if override ~= nil then
+        init = override
+      end
+      ft[fk] = {
+        dynamicinit = fv.dynamicinit,
+        getters = {},
+        init = init,
+      }
+    end
+    local mt = {}
+    for mk, mv in pairs(v.methods) do
+      mt[mk] = true
+      for gk, gv in ipairs(mv.impl and mv.impl.getter or {}) do
+        table.insert(ft[gv.name].getters, { index = gk, method = mk })
+      end
+    end
+    for fk, fv in pairs(ft) do
+      if fv.dynamicinit then
+        ft[fk] = nil
+      end
+    end
+    -- TODO remove these super duper field hacks
+    ft.parent = nil
+    if v.singleton then
+      ft = {}
+    elseif k == 'EditBox' then
+      ft.shown.init = false
+    end
+    local st = {}
+    for scripttype in pairs(allscripts) do
+      st[scripttype] = not not (v.scripts and v.scripts[scripttype])
+    end
+    t[k] = {
+      fields = ft,
+      isa = v.isa,
+      methods = mt,
+      objtype = v.objectType or k,
+      scripts = st,
+      singleton = v.singleton,
+      virtual = v.virtual,
+    }
+  end
+  for _, product in ipairs(readyaml('data/products.yaml')) do
+    for k in pairs(perproduct(product, 'uiobjects')) do
+      if not t[k] then
+        t[k] = { unsupported = true }
+      end
+    end
+  end
+  return t
+end
 
 -- Every (tag, attribute) pair typed stringenum:/enum:, for tags reachable
 -- from Frame (see framesReachable) -- these are eligible for per-product
@@ -112,12 +218,11 @@ local ptablemap
 -- taggedunion also allows method/internal/loadfile/scope, but every
 -- stringenum-/enum-typed attribute reachable from Frame today uses
 -- `impl.field` directly) -- resolve the field's default and real getter
--- method via the existing uiobjectapis entry's already-computed,
--- inherits-flattened field/getter data, rather than re-deriving either
--- from string transforms.
+-- method via computeUiobjectApis's already-computed, inherits-flattened
+-- field/getter data, rather than re-deriving either from string transforms.
 local function discoverCases(p)
   local reachable = framesReachable(p)
-  local _, uiobjectApis = ptablemap.uiobjectapis(p)
+  local uiobjectApis = computeUiobjectApis(p)
   local cases = {}
   for tag, tdef in pairs(perproduct(p, 'xml')) do
     if reachable[tag] then
@@ -184,7 +289,7 @@ local function computeCandidates(p, case)
   return candidates
 end
 
-ptablemap = {
+local ptablemap = {
   build = function(p)
     return 'Build', perproduct(p, 'build')
   end,
@@ -375,108 +480,7 @@ ptablemap = {
     return 'Templates', t
   end,
   uiobjectapis = function(p)
-    local uiobjects = perproduct(p, 'uiobjects')
-    local allscripts = readyaml('data/scripttypes.yaml')
-    for _, cfg in pairs(uiobjects) do
-      cfg.fieldinitoverrides = cfg.fieldinitoverrides or {}
-    end
-    for k, cfg in pairs(uiobjects) do
-      cfg.isa = {}
-      for k2, cfg2 in pairs(uiobjects) do
-        cfg.isa[k2] = false
-        if cfg2.objectType then
-          cfg.isa[cfg2.objectType] = false
-        end
-      end
-      if not cfg.virtual or cfg.objectType then
-        cfg.isa[cfg.objectType or k] = true
-      end
-    end
-    local function fixup(cfg)
-      for inhname in pairs(cfg.inherits) do
-        local inh = uiobjects[inhname]
-        fixup(inh)
-        for n, f in pairs(inh.fieldinitoverrides) do
-          cfg.fieldinitoverrides[n] = f
-        end
-        for n, f in pairs(inh.fields) do
-          cfg.fields[n] = f
-        end
-        for n, m in pairs(inh.methods) do
-          cfg.methods[n] = cfg.methods[n] or m -- overrides
-        end
-        if inh.scripts then
-          cfg.scripts = cfg.scripts or {}
-          for n in pairs(inh.scripts) do
-            cfg.scripts[n] = {}
-          end
-        end
-        for ik, iv in pairs(inh.isa) do
-          if iv then
-            cfg.isa[ik] = true
-          end
-        end
-      end
-    end
-    for _, cfg in pairs(uiobjects) do
-      fixup(cfg)
-    end
-    local t = {}
-    for k, v in pairs(uiobjects) do
-      local ft = {}
-      for fk, fv in pairs(v.fields) do
-        local init = fv.init
-        local override = v.fieldinitoverrides[fk]
-        if override ~= nil then
-          init = override
-        end
-        ft[fk] = {
-          dynamicinit = fv.dynamicinit,
-          getters = {},
-          init = init,
-        }
-      end
-      local mt = {}
-      for mk, mv in pairs(v.methods) do
-        mt[mk] = true
-        for gk, gv in ipairs(mv.impl and mv.impl.getter or {}) do
-          table.insert(ft[gv.name].getters, { index = gk, method = mk })
-        end
-      end
-      for fk, fv in pairs(ft) do
-        if fv.dynamicinit then
-          ft[fk] = nil
-        end
-      end
-      -- TODO remove these super duper field hacks
-      ft.parent = nil
-      if v.singleton then
-        ft = {}
-      elseif k == 'EditBox' then
-        ft.shown.init = false
-      end
-      local st = {}
-      for scripttype in pairs(allscripts) do
-        st[scripttype] = not not (v.scripts and v.scripts[scripttype])
-      end
-      t[k] = {
-        fields = ft,
-        isa = v.isa,
-        methods = mt,
-        objtype = v.objectType or k,
-        scripts = st,
-        singleton = v.singleton,
-        virtual = v.virtual,
-      }
-    end
-    for _, product in ipairs(readyaml('data/products.yaml')) do
-      for k in pairs(perproduct(product, 'uiobjects')) do
-        if not t[k] then
-          t[k] = { unsupported = true }
-        end
-      end
-    end
-    return 'UIObjectApis', t
+    return 'UIObjectApis', computeUiobjectApis(p)
   end,
 }
 
