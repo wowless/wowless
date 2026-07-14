@@ -65,7 +65,6 @@ Frame/CreateFontString:
   luafile:
     modules:
       api:
-      templates:
 Frame/CreateLine:
   luafile:
     modules:
@@ -78,7 +77,6 @@ Frame/CreateTexture:
   luafile:
     modules:
       api:
-      templates:
 Frame/GetAttribute:
   luafile:
 Frame/GetChildren:

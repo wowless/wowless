@@ -547,9 +547,6 @@ return function(
 
       local phases = {
         EarlyAttrs = function(ctx, e, obj)
-          if ctx.layer and obj.SetDrawLayer then
-            obj:SetDrawLayer(ctx.layer)
-          end
           processAttrs(ctx, e, obj, 'early')
         end,
         Attrs = function(ctx, e, obj)
@@ -642,7 +639,7 @@ return function(
               end
               local ety = e.type == 'worldframe' and 'frame' or e.type
               local env = ctx.useAddonEnv and addonEnv or ctx.useSecureEnv and secureenv or genv
-              return api.CreateUIObject(ety, name, parent, env, { template })
+              return api.CreateUIObject(ety, name, parent, env, { template }, nil, ctx.layer, ctx.sublevel)
             end
           end
         else
