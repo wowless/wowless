@@ -446,6 +446,11 @@ FontString:
       type: number
     nonspacewrap:
       type: boolean
+    scaleanimationmode:
+      impl:
+        field: scaleAnimationMode
+      type:
+        enum: FontStringScaleAnimationMode
     spacing:
       type: number
     text:

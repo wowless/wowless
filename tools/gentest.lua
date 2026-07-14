@@ -254,7 +254,12 @@ local function discoverCases(p)
 end
 
 local function attrMembers(p, case)
-  local ty = perproduct(p, 'xml')[case.xmlTag].attributes[case.xmlAttrKey].type
+  local tdef = perproduct(p, 'xml')[case.xmlTag]
+  local attrDef = tdef and tdef.attributes[case.xmlAttrKey]
+  if not attrDef then
+    return {}
+  end
+  local ty = attrDef.type
   if ty.stringenum then
     local members = {}
     for name in pairs(perproduct(p, 'stringenums')[ty.stringenum]) do
