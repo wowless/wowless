@@ -613,6 +613,20 @@ G.testsuite.generated = function()
     return tests
   end
 
+  local function templates()
+    local tests = {}
+    for name, cfg in pairs(_G.WowlessData.Templates) do
+      tests[name] = function()
+        local obj = _G.WowlessGeneratedXmlTests
+        for _, key in ipairs(cfg.objectPath) do
+          obj = obj[key]
+        end
+        assertEquals(cfg.expected, obj[cfg.getter](obj))
+      end
+    end
+    return tests
+  end
+
   return {
     apiNamespaces = apiNamespaces,
     cvars = cvars,
@@ -620,6 +634,7 @@ G.testsuite.generated = function()
     globalApis = globalApis,
     globals = globals,
     impltests = impltests,
+    templates = templates,
     uiobjects = uiobjects,
     ['~cfuncs'] = cfuncs.test,
   }
