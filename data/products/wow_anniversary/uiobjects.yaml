@@ -3507,6 +3507,10 @@ FontString:
     rotation:
       init: 0
       type: number
+    scaleAnimationMode:
+      init: 0
+      type:
+        enum: FontStringScaleAnimationMode
     smoothScaling:
       init: false
       type: boolean
@@ -3609,6 +3613,9 @@ FontString:
       - name: radians
         type: number
     GetScaleAnimationMode:
+      impl:
+        getter:
+        - name: scaleAnimationMode
       inputs:
       outputs:
       - name: scaleAnimationMode
@@ -3720,6 +3727,9 @@ FontString:
         type: number
       outputs:
     SetScaleAnimationMode:
+      impl:
+        setter:
+        - name: scaleAnimationMode
       inputs:
       - name: scaleAnimationMode
         type:
@@ -5888,6 +5898,10 @@ ModelScene:
     fogNear:
       init: 10000000
       type: number
+    lightType:
+      init: 0
+      type:
+        enum: ModelLightType
   inherits:
     Frame:
   methods:
@@ -6051,6 +6065,9 @@ ModelScene:
       - name: positionZ
         type: number
     GetLightType:
+      impl:
+        getter:
+        - name: lightType
       inputs:
       outputs:
       - name: lightType
@@ -6245,6 +6262,9 @@ ModelScene:
         type: number
       outputs:
     SetLightType:
+      impl:
+        setter:
+        - name: lightType
       inputs:
       - name: lightType
         type:

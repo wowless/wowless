@@ -5424,6 +5424,10 @@ ModelScene:
     fogNear:
       init: 10000000
       type: number
+    lightType:
+      init: 0
+      type:
+        enum: ModelLightType
   inherits:
     Frame:
   methods:
@@ -5587,6 +5591,9 @@ ModelScene:
       - name: positionZ
         type: number
     GetLightType:
+      impl:
+        getter:
+        - name: lightType
       inputs:
       outputs:
       - name: lightType
@@ -5781,6 +5788,9 @@ ModelScene:
         type: number
       outputs:
     SetLightType:
+      impl:
+        setter:
+        - name: lightType
       inputs:
       - name: lightType
         type:
