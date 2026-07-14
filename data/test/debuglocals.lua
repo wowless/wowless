@@ -3,7 +3,10 @@ local T, debuglocals = ...
 -- debuglocals() has no machine-readable format: it produces a plain-text
 -- dump ("name = value\n" per entry) intended for a human reading an error
 -- handler's output, with locals listed first and upvalues appended after
--- them with no separator between the two groups. Only one level of table
+-- them with no separator between the two groups. The real retail client has
+-- been observed to omit the spaces around '=' (e.g. 'argOne="one"'), unlike
+-- wowless's own debuglocals() output, so the parser below tolerates both
+-- forms. Only one level of table
 -- recursion is ever present (elune's aux_dumpvalue caps it there, matching
 -- the real client), so a nested table's own contents always render as an
 -- immediately-closed empty block. Table values below are therefore left as
@@ -46,7 +49,7 @@ local function parse(dump)
   local entries = {}
   local i = 1
   while i <= #lines do
-    local name, rest = lines[i]:match('^(.-) = (.*)$')
+    local name, rest = lines[i]:match('^(.-)%s*=%s*(.*)$')
     if not name then
       error(('unparseable debuglocals line %d: %q'):format(i, lines[i]))
     end
@@ -97,6 +100,12 @@ return {
       end,
       ['empty string'] = function()
         assertEntries({ { name = 's', kind = 'string', value = '' } }, parse('s = ""\n'))
+      end,
+      ['no spaces around equals'] = function()
+        assertEntries({
+          { name = 'argOne', kind = 'string', value = 'one' },
+          { name = 'argTwo', kind = 'nil' },
+        }, parse('argOne="one"\nargTwo=nil\n'))
       end,
       ['negative and decimal numbers'] = function()
         assertEntries({
