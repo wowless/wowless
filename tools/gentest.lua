@@ -27,25 +27,33 @@ local function tpath(t, ...)
 end
 
 local function renderXml(x)
-  local attrs = {}
-  for k in pairs(x) do
-    if type(k) == 'string' and k ~= 'tag' then
-      table.insert(attrs, k)
+  local function doRenderXml(y, n, t)
+    local attrs = {}
+    for k in pairs(y) do
+      if type(k) == 'string' and k ~= 'tag' then
+        table.insert(attrs, k)
+      end
+    end
+    table.sort(attrs)
+    local tt = { (' '):rep(n), '<', y.tag }
+    for _, k in ipairs(attrs) do
+      table.insert(tt, (' %s=\'%s\''):format(k, tostring(y[k])))
+    end
+    if #y == 0 then
+      table.insert(tt, ' />')
+      table.insert(t, table.concat(tt))
+    else
+      table.insert(tt, '>')
+      table.insert(t, table.concat(tt))
+      for _, v in ipairs(y) do
+        doRenderXml(v, n + 2, t)
+      end
+      table.insert(t, table.concat({ (' '):rep(n), '</', y.tag, '>' }))
     end
   end
-  table.sort(attrs)
-  local astr = {}
-  for _, k in ipairs(attrs) do
-    table.insert(astr, (' %s=\'%s\''):format(k, tostring(x[k])))
-  end
-  local kids = {}
-  for _, v in ipairs(x) do
-    table.insert(kids, renderXml(v))
-  end
-  if #kids == 0 then
-    return ('<%s%s />'):format(x.tag, table.concat(astr))
-  end
-  return ('<%s%s>%s</%s>'):format(x.tag, table.concat(astr), table.concat(kids), x.tag)
+  local t = {}
+  doRenderXml(x, 0, t)
+  return table.concat(t, '\n')
 end
 
 -- Which XML tags are reachable, recursively, as descendants of <Frame>?
