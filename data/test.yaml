@@ -29,6 +29,8 @@ CreateFrame:
   CreateFrame:
 CreateWindow:
   CreateWindow:
+debuglocals:
+  debuglocals:
 EnumerateFrames:
   CreateFrame:
   EnumerateFrames:
