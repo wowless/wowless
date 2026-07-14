@@ -272,6 +272,8 @@ end
 -- then a negative pass unioning in other products' foreign values: values
 -- valid elsewhere but not native to this product, expecting this
 -- product's own field default (mirrors the events ptablemap entry below).
+-- Also always includes a guaranteed-nonsense negative case, so this
+-- coverage doesn't depend on products having diverged.
 local function computeCandidates(p, case)
   local candidates = {}
   local native = {}
@@ -294,6 +296,8 @@ local function computeCandidates(p, case)
       end
     end
   end
+  assert(not native.NONSENSE, 'nonsense is apparently not nonsense for ' .. case.id)
+  table.insert(candidates, { expected = case.init, suffix = 'nonsense', value = 'nonsense' })
   return candidates
 end
 
