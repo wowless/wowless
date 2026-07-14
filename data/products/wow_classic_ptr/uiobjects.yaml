@@ -2002,25 +2002,25 @@ Cooldown:
       init: 0
       type: number
     drawBling:
-      init: false
+      init: true
       type: boolean
     drawEdge:
-      init: false
+      init: true
       type: boolean
     drawSwipe:
-      init: false
+      init: true
       type: boolean
     durationMillis:
       init: 0
       type: number
     edgeScale:
-      init: 0
+      init: 1.4142135381699
       type: number
     hideCountdownNumbers:
       init: false
       type: boolean
     minimumCountdownDuration:
-      init: 0
+      init: 2000
       type: number
     reverse:
       init: false
@@ -2427,7 +2427,7 @@ Cooldown:
 DressUpModel:
   fields:
     autoDress:
-      init: false
+      init: true
       type: boolean
     obeyHideInTransmogFlag:
       init: false
@@ -2650,9 +2650,6 @@ EditBox:
     maxLetters:
       init: 0
       type: number
-    number:
-      nilable: true
-      type: number
     visibleTextByteLimit:
       init: 0
       type: number
@@ -2755,9 +2752,6 @@ EditBox:
       - name: maxLetters
         type: number
     GetNumber:
-      impl:
-        getter:
-        - name: number
       inputs:
       outputs:
       - name: number
@@ -3008,9 +3002,6 @@ EditBox:
         type: boolean
       outputs:
     SetNumber:
-      impl:
-        setter:
-        - name: number
       inputs:
       - name: number
         type: number
@@ -3193,15 +3184,6 @@ FlipBook:
       outputs:
 FogOfWarFrame:
   fields:
-    fogOfWarBackgroundAtlas:
-      init: ''
-      type: string
-    fogOfWarMaskAtlas:
-      init: ''
-      type: string
-    fogOfWarMaskTexture:
-      nilable: true
-      type: FileAsset
     maskScalar:
       init: 1
       type: number
@@ -3212,9 +3194,6 @@ FogOfWarFrame:
     Frame:
   methods:
     GetFogOfWarBackgroundAtlas:
-      impl:
-        getter:
-        - name: fogOfWarBackgroundAtlas
       inputs:
       outputs:
       - name: atlas
@@ -3226,17 +3205,11 @@ FogOfWarFrame:
         nilable: true
         type: FileAsset
     GetFogOfWarMaskAtlas:
-      impl:
-        getter:
-        - name: fogOfWarMaskAtlas
       inputs:
       outputs:
       - name: atlas
         type: string
     GetFogOfWarMaskTexture:
-      impl:
-        getter:
-        - name: fogOfWarMaskTexture
       inputs:
       outputs:
       - name: asset
@@ -3259,9 +3232,6 @@ FogOfWarFrame:
       - name: uiMapID
         type: number
     SetFogOfWarBackgroundAtlas:
-      impl:
-        setter:
-        - name: fogOfWarBackgroundAtlas
       inputs:
       - name: atlas
         type: string
@@ -3276,17 +3246,11 @@ FogOfWarFrame:
         type: boolean
       outputs:
     SetFogOfWarMaskAtlas:
-      impl:
-        setter:
-        - name: fogOfWarMaskAtlas
       inputs:
       - name: atlas
         type: string
       outputs:
     SetFogOfWarMaskTexture:
-      impl:
-        setter:
-        - name: fogOfWarMaskTexture
       inputs:
       - name: asset
         type: FileAsset
@@ -5165,7 +5129,7 @@ MessageFrame:
       init: 1
       type: number
     fading:
-      init: false
+      init: true
       type: boolean
     insertMode:
       init: BOTTOM
@@ -6572,7 +6536,7 @@ Path:
 PlayerModel:
   fields:
     doBlend:
-      init: false
+      init: true
       type: boolean
     keepModelOnHide:
       init: false
