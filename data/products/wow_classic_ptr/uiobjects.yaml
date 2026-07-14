@@ -1996,7 +1996,7 @@ ControlPoint:
 Cooldown:
   fields:
     countdownAbbrevThreshold:
-      init: 0
+      init: 120
       type: number
     countdownMillisecondsThreshold:
       init: 0
