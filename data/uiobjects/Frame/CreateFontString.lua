@@ -1,12 +1,4 @@
-local api, templates = ...
+local api = ...
 return function(self, name, layer, inherits)
-  local tmpls = {}
-  for templateName in string.gmatch(inherits or '', '[^, ]+') do
-    table.insert(tmpls, templates.GetTemplateOrThrow(templateName))
-  end
-  local fs = api.CreateUIObject('fontstring', type(name) == 'string' and name or nil, self, nil, tmpls)
-  if layer then
-    fs:SetDrawLayer(layer)
-  end
-  return fs
+  return api.CreateChildUIObject('fontstring', self, type(name) == 'string' and name or nil, inherits, layer)
 end

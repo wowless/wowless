@@ -1,4 +1,4 @@
 local api = ...
-return function(self)
-  return api.CreateUIObject('line', nil, self)
+return function(self, name, layer, inherits, sublevel)
+  return api.CreateChildUIObject('line', self, name, inherits, layer, sublevel)
 end

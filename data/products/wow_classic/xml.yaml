@@ -625,6 +625,8 @@ Layer:
       required: true
       type: string
     texturesublevel:
+      impl:
+        scope: sublevel
       type: number
   contents:
     tags:

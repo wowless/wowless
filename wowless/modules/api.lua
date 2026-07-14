@@ -124,7 +124,7 @@ return function(
     end
   end
 
-  local function CreateUIObject(typename, objnamearg, parent, addonEnv, tmplsarg, id)
+  local function CreateUIObject(typename, objnamearg, parent, addonEnv, tmplsarg, id, layer, sublevel)
     local objname
     if type(objnamearg) == 'string' then
       objname = ParentSub(objnamearg, parent)
@@ -159,6 +159,9 @@ return function(
     end
     for _, template in ipairs(tmpls) do
       template.initEarlyAttrs(ud)
+    end
+    if layer or sublevel then
+      ud:SetDrawLayer(layer or ud.layer, sublevel or ud.sublevel)
     end
     if objname then
       if type(objnamearg) == 'string' then
@@ -213,7 +216,16 @@ return function(
     return CreateUIObject(ltype, name, parent, nil, tmpls, id)
   end
 
+  local function CreateChildUIObject(typename, self, name, inherits, layer, sublevel)
+    local tmpls = {}
+    for templateName in string.gmatch(inherits or '', '[^, ]+') do
+      table.insert(tmpls, templates.GetTemplateOrThrow(templateName))
+    end
+    return CreateUIObject(typename, name, self, nil, tmpls, nil, layer, sublevel)
+  end
+
   return {
+    CreateChildUIObject = CreateChildUIObject,
     CreateForbiddenFrame = CreateFrame, -- TODO implement properly
     CreateFrame = CreateFrame,
     CreateUIObject = CreateUIObject,
