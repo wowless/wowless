@@ -17,6 +17,7 @@ end)()
 
 local sorted = require('pl.tablex').sort
 local scripttypes = readyaml('data/scripttypes.yaml')
+local stringenums = readyaml('data/products/wow/stringenums.yaml')
 
 local function hack(s)
   return 'end,(function()' .. s .. ' end)()--'
@@ -65,6 +66,36 @@ local content = {
       end
       assertEquals(table.concat(expected, ','), table.concat(WowlessLog, ','))
     ]],
+  },
+  {
+    tag = 'Frame',
+    {
+      tag = 'Layers',
+      (function()
+        local function fontString(justify, point)
+          return {
+            tag = 'FontString',
+            justifyH = justify,
+            {
+              tag = 'Scripts',
+              {
+                tag = 'OnLoad',
+                text = ([[
+                  Wowless.check1(1, self:GetNumPoints())
+                  Wowless.check5('%s', self:GetParent(), '%s', 0, 0, self:GetPoint(1))
+                ]]):format(point, point),
+              },
+            },
+          }
+        end
+        local layer = { tag = 'Layer', fontString(nil, 'CENTER') }
+        for name in sorted(stringenums.JustifyHorizontal) do
+          table.insert(layer, fontString(name, name))
+          table.insert(layer, fontString(name:lower(), name))
+        end
+        return layer
+      end)(),
+    },
   },
   (function()
     -- KeyValue/attribute type coercion cases, one row per key: the raw XML
