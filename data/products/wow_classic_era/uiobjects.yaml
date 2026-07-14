@@ -7,6 +7,9 @@ Actor:
     desaturation:
       init: 0
       type: number
+    particleOverrideScale:
+      nilable: true
+      type: number
     pitch:
       init: 0
       type: number
@@ -85,6 +88,9 @@ Actor:
       - name: guid
         type: string
     GetParticleOverrideScale:
+      impl:
+        getter:
+        - name: particleOverrideScale
       inputs:
       outputs:
       - name: scale
@@ -237,6 +243,9 @@ Actor:
       - name: success
         type: boolean
     SetParticleOverrideScale:
+      impl:
+        setter:
+        - name: particleOverrideScale
       inputs:
       - name: scale
         nilable: true
@@ -427,10 +436,16 @@ Animation:
     endDelay:
       init: 0
       type: number
+    order:
+      init: 0
+      type: number
     smoothing:
       init: NONE
       type:
         stringenum: SmoothingType
+    smoothProgress:
+      init: 0
+      type: number
     startDelay:
       init: 0
       type: number
@@ -457,6 +472,9 @@ Animation:
       - name: delaySec
         type: number
     GetOrder:
+      impl:
+        getter:
+        - name: order
       inputs:
       outputs:
       - name: order
@@ -485,6 +503,9 @@ Animation:
         type:
           stringenum: SmoothingType
     GetSmoothProgress:
+      impl:
+        getter:
+        - name: smoothProgress
       inputs:
       outputs:
       - name: progress
@@ -564,6 +585,9 @@ Animation:
         type: boolean
       outputs:
     SetOrder:
+      impl:
+        setter:
+        - name: order
       inputs:
       - name: newOrder
         type: number
@@ -583,6 +607,9 @@ Animation:
           stringenum: SmoothingType
       outputs:
     SetSmoothProgress:
+      impl:
+        setter:
+        - name: smoothProgress
       inputs:
       - name: durationSec
         type: number
@@ -1746,15 +1773,39 @@ ControlPoint:
       outputs:
 Cooldown:
   fields:
+    drawBling:
+      init: false
+      type: boolean
+    drawEdge:
+      init: false
+      type: boolean
+    drawSwipe:
+      init: false
+      type: boolean
     durationMillis:
       init: 0
       type: number
+    edgeScale:
+      init: 0
+      type: number
+    hideCountdownNumbers:
+      init: false
+      type: boolean
+    minimumCountdownDuration:
+      init: 0
+      type: number
+    reverse:
+      init: false
+      type: boolean
     rotation:
       init: 0
       type: number
     startTimeMillis:
       init: 0
       type: number
+    useAuraDisplayTime:
+      init: false
+      type: boolean
   inherits:
     Frame:
   methods:
@@ -1783,36 +1834,57 @@ Cooldown:
       - name: duration
         type: number
     GetDrawBling:
+      impl:
+        getter:
+        - name: drawBling
       inputs:
       outputs:
       - name: drawBling
         type: boolean
     GetDrawEdge:
+      impl:
+        getter:
+        - name: drawEdge
       inputs:
       outputs:
       - name: drawEdge
         type: boolean
     GetDrawSwipe:
+      impl:
+        getter:
+        - name: drawSwipe
       inputs:
       outputs:
       - name: drawSwipe
         type: boolean
     GetEdgeScale:
+      impl:
+        getter:
+        - name: edgeScale
       inputs:
       outputs:
       - name: edgeScale
         type: number
     GetHideCountdownNumbers:
+      impl:
+        getter:
+        - name: hideCountdownNumbers
       inputs:
       outputs:
       - name: hideNumbers
         type: boolean
     GetMinimumCountdownDuration:
+      impl:
+        getter:
+        - name: minimumCountdownDuration
       inputs:
       outputs:
       - name: milliseconds
         type: number
     GetReverse:
+      impl:
+        getter:
+        - name: reverse
       inputs:
       outputs:
       - name: reverse
@@ -1826,6 +1898,9 @@ Cooldown:
       - name: rotationRadians
         type: number
     GetUseAuraDisplayTime:
+      impl:
+        getter:
+        - name: useAuraDisplayTime
       inputs:
       outputs:
       - name: useAuraDisplayTime
@@ -1897,18 +1972,27 @@ Cooldown:
         type: string
       outputs:
     SetDrawBling:
+      impl:
+        setter:
+        - name: drawBling
       inputs:
       - default: false
         name: drawBling
         type: boolean
       outputs:
     SetDrawEdge:
+      impl:
+        setter:
+        - name: drawEdge
       inputs:
       - default: false
         name: drawEdge
         type: boolean
       outputs:
     SetDrawSwipe:
+      impl:
+        setter:
+        - name: drawSwipe
       inputs:
       - default: false
         name: drawSwipe
@@ -1927,6 +2011,9 @@ Cooldown:
         type: number
       outputs:
     SetEdgeScale:
+      impl:
+        setter:
+        - name: edgeScale
       inputs:
       - name: scale
         type: number
@@ -1949,17 +2036,26 @@ Cooldown:
         type: number
       outputs:
     SetHideCountdownNumbers:
+      impl:
+        setter:
+        - name: hideCountdownNumbers
       inputs:
       - default: false
         name: hideNumbers
         type: boolean
       outputs:
     SetMinimumCountdownDuration:
+      impl:
+        setter:
+        - name: minimumCountdownDuration
       inputs:
       - name: milliseconds
         type: number
       outputs:
     SetReverse:
+      impl:
+        setter:
+        - name: reverse
       inputs:
       - default: false
         name: reverse
@@ -2012,6 +2108,9 @@ Cooldown:
           structure: vector2
       outputs:
     SetUseAuraDisplayTime:
+      impl:
+        setter:
+        - name: useAuraDisplayTime
       inputs:
       - default: false
         name: useAuraDisplayTime
@@ -2027,6 +2126,18 @@ Cooldown:
     OnCooldownDone:
 DressUpModel:
   fields:
+    autoDress:
+      init: false
+      type: boolean
+    obeyHideInTransmogFlag:
+      init: false
+      type: boolean
+    useTransmogChoices:
+      init: false
+      type: boolean
+    useTransmogSkin:
+      init: false
+      type: boolean
   inherits:
     PlayerModel:
   methods:
@@ -2034,6 +2145,9 @@ DressUpModel:
       inputs:
       outputs:
     GetAutoDress:
+      impl:
+        getter:
+        - name: autoDress
       inputs:
       outputs:
       - name: enabled
@@ -2062,6 +2176,9 @@ DressUpModel:
           arrayof:
             structure: ItemTransmogInfo
     GetObeyHideInTransmogFlag:
+      impl:
+        getter:
+        - name: obeyHideInTransmogFlag
       inputs:
       outputs:
       - name: enabled
@@ -2079,11 +2196,17 @@ DressUpModel:
       - name: spellItemEnchantID
         type: number
     GetUseTransmogChoices:
+      impl:
+        getter:
+        - name: useTransmogChoices
       inputs:
       outputs:
       - name: enabled
         type: boolean
     GetUseTransmogSkin:
+      impl:
+        getter:
+        - name: useTransmogSkin
       inputs:
       outputs:
       - name: enabled
@@ -2108,12 +2231,18 @@ DressUpModel:
       - name: visible
         type: boolean
     SetAutoDress:
+      impl:
+        setter:
+        - name: autoDress
       inputs:
       - default: false
         name: enabled
         type: boolean
       outputs:
     SetObeyHideInTransmogFlag:
+      impl:
+        setter:
+        - name: obeyHideInTransmogFlag
       inputs:
       - default: false
         name: enabled
@@ -2126,12 +2255,18 @@ DressUpModel:
         type: boolean
       outputs:
     SetUseTransmogChoices:
+      impl:
+        setter:
+        - name: useTransmogChoices
       inputs:
       - default: false
         name: enabled
         type: boolean
       outputs:
     SetUseTransmogSkin:
+      impl:
+        setter:
+        - name: useTransmogSkin
       inputs:
       - default: false
         name: enabled
@@ -2164,6 +2299,9 @@ EditBox:
     mouseClickEnabled: true
     mouseMotionEnabled: true
   fields:
+    altArrowKeyMode:
+      init: false
+      type: boolean
     blinkSpeed:
       init: 0.5
       type: number
@@ -2197,6 +2335,9 @@ EditBox:
     maxLetters:
       init: 0
       type: number
+    number:
+      nilable: true
+      type: number
     visibleTextByteLimit:
       init: 0
       type: number
@@ -2229,6 +2370,9 @@ EditBox:
       inputs:
       outputs:
     GetAltArrowKeyMode:
+      impl:
+        getter:
+        - name: altArrowKeyMode
       inputs:
       outputs:
       - name: altMode
@@ -2296,6 +2440,9 @@ EditBox:
       - name: maxLetters
         type: number
     GetNumber:
+      impl:
+        getter:
+        - name: number
       inputs:
       outputs:
       - name: number
@@ -2446,6 +2593,9 @@ EditBox:
         type: boolean
       outputs:
     SetAltArrowKeyMode:
+      impl:
+        setter:
+        - name: altArrowKeyMode
       inputs:
       - default: false
         name: altMode
@@ -2543,6 +2693,9 @@ EditBox:
         type: boolean
       outputs:
     SetNumber:
+      impl:
+        setter:
+        - name: number
       inputs:
       - name: number
         type: number
@@ -2725,6 +2878,15 @@ FlipBook:
       outputs:
 FogOfWarFrame:
   fields:
+    fogOfWarBackgroundAtlas:
+      init: ''
+      type: string
+    fogOfWarMaskAtlas:
+      init: ''
+      type: string
+    fogOfWarMaskTexture:
+      nilable: true
+      type: FileAsset
     maskScalar:
       init: 1
       type: number
@@ -2735,6 +2897,9 @@ FogOfWarFrame:
     Frame:
   methods:
     GetFogOfWarBackgroundAtlas:
+      impl:
+        getter:
+        - name: fogOfWarBackgroundAtlas
       inputs:
       outputs:
       - name: atlas
@@ -2746,11 +2911,17 @@ FogOfWarFrame:
         nilable: true
         type: FileAsset
     GetFogOfWarMaskAtlas:
+      impl:
+        getter:
+        - name: fogOfWarMaskAtlas
       inputs:
       outputs:
       - name: atlas
         type: string
     GetFogOfWarMaskTexture:
+      impl:
+        getter:
+        - name: fogOfWarMaskTexture
       inputs:
       outputs:
       - name: asset
@@ -2773,6 +2944,9 @@ FogOfWarFrame:
       - name: uiMapID
         type: number
     SetFogOfWarBackgroundAtlas:
+      impl:
+        setter:
+        - name: fogOfWarBackgroundAtlas
       inputs:
       - name: atlas
         type: string
@@ -2787,11 +2961,17 @@ FogOfWarFrame:
         type: boolean
       outputs:
     SetFogOfWarMaskAtlas:
+      impl:
+        setter:
+        - name: fogOfWarMaskAtlas
       inputs:
       - name: atlas
         type: string
       outputs:
     SetFogOfWarMaskTexture:
+      impl:
+        setter:
+        - name: fogOfWarMaskTexture
       inputs:
       - name: asset
         type: FileAsset
@@ -4526,6 +4706,9 @@ MessageFrame:
     fadePower:
       init: 1
       type: number
+    fading:
+      init: false
+      type: boolean
     insertMode:
       init: BOTTOM
       type:
@@ -4576,6 +4759,9 @@ MessageFrame:
       - name: fadePower
         type: number
     GetFading:
+      impl:
+        getter:
+        - name: fading
       inputs:
       outputs:
       - name: isFading
@@ -4635,6 +4821,9 @@ MessageFrame:
         type: number
       outputs:
     SetFading:
+      impl:
+        setter:
+        - name: fading
       inputs:
       - name: fading
         type: boolean
@@ -5253,6 +5442,9 @@ Model:
     OnModelLoaded:
 ModelScene:
   fields:
+    allowOverlappedModels:
+      init: false
+      type: boolean
     cameraFarClip:
       init: 100
       type: number
@@ -5294,6 +5486,9 @@ ModelScene:
         type: number
       outputs:
     GetAllowOverlappedModels:
+      impl:
+        getter:
+        - name: allowOverlappedModels
       inputs:
       outputs:
       - name: allowOverlappedModels
@@ -5479,6 +5674,9 @@ ModelScene:
       - name: depth
         type: number
     SetAllowOverlappedModels:
+      impl:
+        setter:
+        - name: allowOverlappedModels
       inputs:
       - name: allowOverlappedModels
         type: boolean
@@ -5899,6 +6097,9 @@ Path:
       outputs:
 PlayerModel:
   fields:
+    doBlend:
+      init: false
+      type: boolean
     keepModelOnHide:
       init: false
       type: boolean
@@ -5933,6 +6134,9 @@ PlayerModel:
       - name: displayID
         type: number
     GetDoBlend:
+      impl:
+        getter:
+        - name: doBlend
       inputs:
       outputs:
       - name: doBlend
@@ -5999,6 +6203,9 @@ PlayerModel:
         type: number
       outputs:
     SetDoBlend:
+      impl:
+        setter:
+        - name: doBlend
       inputs:
       - default: false
         name: doBlend
@@ -7201,6 +7408,9 @@ Slider:
     min:
       init: 0
       type: number
+    obeyStepOnDrag:
+      init: false
+      type: boolean
     orientation:
       init: VERTICAL
       type:
@@ -7243,6 +7453,9 @@ Slider:
       - name: maxValue
         type: number
     GetObeyStepOnDrag:
+      impl:
+        getter:
+        - name: obeyStepOnDrag
       inputs:
       outputs:
       - name: isObeyStepOnDrag
@@ -7317,6 +7530,9 @@ Slider:
         type: number
       outputs:
     SetObeyStepOnDrag:
+      impl:
+        setter:
+        - name: obeyStepOnDrag
       inputs:
       - name: obeyStepOnDrag
         type: boolean
