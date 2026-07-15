@@ -56,10 +56,25 @@ local function renderXml(x)
   return table.concat(t, '\n')
 end
 
--- Which XML tags are reachable, recursively, as descendants of <Frame>?
--- Mirrors the supertypes/children containment logic wowless/modules/xml.lua
--- itself uses at runtime (built in tools/prep.lua's xmlflat).
-local function framesReachable(p)
+-- The shortest chain of tags from <Frame> down to each tag reachable, as a
+-- descendant, from it -- e.g. chains.Slider = { 'Frame', 'Frames', 'Slider'
+-- }, chains.Animation = { 'Frame', 'Animations', 'AnimationGroup',
+-- 'Animation' }. Mirrors the supertypes/children containment logic
+-- wowless/modules/xml.lua itself uses at runtime (built in tools/prep.lua's
+-- xmlflat) to determine which tags may legally nest inside which. Used by
+-- discoverCases below both for reachability (chains[tag] ~= nil) and to
+-- derive exactly how to place a case's tag in the synthetic test frame
+-- (see identityHops/objectPath/templateElement), instead of hand-picking a
+-- wrapper per xml tag.
+--
+-- A tag can genuinely have more than one equally-short path from Frame --
+-- the real UI.xsd often makes an element legal under several parents at
+-- once (see issue #781), so this doesn't error on that by itself. Instead
+-- it also returns `ambiguous`, the set of tags reached via more than one
+-- distinct parent at their shortest depth; discoverCases below only errors
+-- if a tag it actually needs a chain for is (transitively) affected,
+-- rather than requiring the whole schema to be unambiguous.
+local function frameChains(p)
   local xml = perproduct(p, 'xml')
   local function supertypesOf(tag)
     local st = { [tag:lower()] = true }
@@ -95,24 +110,78 @@ local function framesReachable(p)
     supertypes[tag] = supertypesOf(tag)
     children[tag] = childrenOf(tag)
   end
-  local reachable = { Frame = true }
+  -- chains.Frame starts as the trivial zero-hop "this is the synthetic
+  -- test frame itself" entry, needed to bootstrap its direct children
+  -- (Frames/Layers/Animations/...). But Frame is also a legitimate xml tag
+  -- in its own right (e.g. a Frame.framestrata case needs a *fresh* child
+  -- Frame instance, not the shared root re-carrying every candidate's
+  -- value at once) -- so `visited`, not `chains`, gates rediscovery, and
+  -- once Frame is found again for real (via Frames, same as any other
+  -- Frame-family tag), its chains entry is overwritten with that real,
+  -- reachable-as-a-child chain rather than staying at the trivial one.
+  local chains = { Frame = { 'Frame' } }
+  local visited = {}
+  local ambiguous = {}
   local frontier = { 'Frame' }
   while #frontier > 0 do
-    local from = table.remove(frontier)
-    local allowed = children[from]
-    for tag in pairs(xml) do
-      if not reachable[tag] then
-        for st in pairs(supertypes[tag]) do
-          if allowed[st] then
-            reachable[tag] = true
-            table.insert(frontier, tag)
-            break
+    -- Collect every candidate parent per newly-reachable tag from this
+    -- whole layer before resolving any of them, so resolution doesn't
+    -- depend on frontier iteration order (a tag seeing two non-Layer
+    -- candidates before Layer itself must still resolve to Layer, not
+    -- latch an early conflict).
+    local candidates = {}
+    for _, from in ipairs(frontier) do
+      local allowed = children[from]
+      for tag in pairs(xml) do
+        if not visited[tag] then
+          for st in pairs(supertypes[tag]) do
+            if allowed[st] then
+              candidates[tag] = candidates[tag] or {}
+              candidates[tag][from] = true
+              break
+            end
           end
         end
       end
     end
+    local parentOf = {}
+    for tag, froms in pairs(candidates) do
+      if froms.Layer then
+        -- <Layer> is the generic, impl:transparent container built for
+        -- LayeredRegion tags (Texture/FontString/...): whenever it's one
+        -- of the tied candidates, it's always a legal, no-extra-
+        -- object-identity placement, so prefer it over erroring -- e.g.
+        -- FontString is otherwise also tied between EditBox/MessageFrame/
+        -- SimpleHTML, each of which would need its own synthetic
+        -- instance for no benefit.
+        parentOf[tag] = 'Layer'
+      else
+        local only, count = nil, 0
+        for from in pairs(froms) do
+          only, count = from, count + 1
+        end
+        if count == 1 then
+          parentOf[tag] = only
+        else
+          ambiguous[tag] = true
+          parentOf[tag] = only
+        end
+      end
+    end
+    local nextFrontier = {}
+    for tag, from in pairs(parentOf) do
+      local chain = {}
+      for i, t in ipairs(chains[from]) do
+        chain[i] = t
+      end
+      table.insert(chain, tag)
+      chains[tag] = chain
+      visited[tag] = true
+      table.insert(nextFrontier, tag)
+    end
+    frontier = nextFrontier
   end
-  return reachable
+  return chains, ambiguous
 end
 
 -- Per-type field/method data (fields, their init defaults, and which
@@ -223,48 +292,81 @@ local function computeUiobjectApis(p)
   return t
 end
 
--- How a case's xml tag attaches to the synthetic root Frame built by the
--- 'templatexml' doit branch below, which determines both the wrapper
--- element it's nested in and how many objectPath hops are needed to reach
--- it back from the root (see ptablemap.templates and 'templatexml').
--- LayeredRegions (Texture/FontString/...) and Frames (Button/Slider/...)
--- attach directly to their owning frame even through the Layers/Layer and
--- Frames grouping tags, since those are `impl: transparent` -- so is
--- Animations, so an AnimationGroup also attaches directly to the frame.
--- Animation-typed children (Alpha/Animation/...) are only ever real
--- children of an AnimationGroup, never of a frame directly, so they need
--- an extra hop through a synthetic single-use AnimationGroup wrapper.
--- (LayeredRegion itself is `virtual: true` with no `objectType`, so it
--- never self-marks true in the isa table computeUiobjectApis builds --
--- isa.Region is used instead, which both Frame- and LayeredRegion-rooted
--- types inherit, with the isa.Frame check above it disambiguating.)
-local function classifyKind(uiobjectApis, tag)
-  local isa = uiobjectApis[tag].isa
-  if isa.Frame then
-    return 'frame'
-  elseif isa.Region then
-    return 'layerregion'
-  elseif tag == 'AnimationGroup' then
-    return 'animationgroup'
-  elseif isa.Animation then
-    return 'animationchild'
+-- Which positions (2..#chain, i.e. excluding the root Frame itself) in a
+-- frameChains chain create a real, separately-addressable uiobject -- the
+-- ones that need a parentKey in the generated XML and a hop in objectPath.
+-- Pure grouping tags in the chain (Layers/Layer/Frames/Animations/...) have
+-- no uiobjects.yaml entry: they splice their contents into the enclosing
+-- real object at runtime rather than creating one of their own, so they're
+-- skipped here.
+local function identityHops(uiobjectApis, chain)
+  local hops = {}
+  for i = 2, #chain do
+    if uiobjectApis[chain[i]] then
+      table.insert(hops, i)
+    end
   end
-  error('cannot classify xml tag ' .. tag .. ' for template test placement')
+  return hops
+end
+
+-- The parentKey for the n-th (1-indexed) of a case's `total` identity
+-- hops. The last hop is always the case's own test object and keeps the
+-- plain candidate key; any earlier identity hop (so far, only an
+-- AnimationGroup on the way to an Animation) is scaffolding required to
+-- legally nest the test object at all, and needs a per-candidate-unique
+-- key of its own so candidates don't collide by sharing one AnimationGroup
+-- (and, with it, its field defaults) -- the exact suffix scheme doesn't
+-- matter beyond that, since it's never read back, only used to link a
+-- wrapper element to its child in the same generated file.
+local function hopKey(key, n, total)
+  return n == total and key or (key .. '_' .. n)
 end
 
 -- objectPath hops from the root Frame to a case's generated test object,
--- keyed the same way in both ptablemap.templates and the 'templatexml'
--- doit branch below (see classifyKind for why 'animationchild' needs the
--- extra hop through its synthetic single-use AnimationGroup wrapper).
-local function objectPath(case, key)
-  if case.kind == 'animationchild' then
-    return { key .. '_group', key }
+-- keyed the same way ptablemap.templates and 'templatexml' below build the
+-- corresponding parentKey chain in the actual XML (see identityHops).
+local function objectPath(uiobjectApis, case, key)
+  local hops = identityHops(uiobjectApis, case.chain)
+  local path = {}
+  for n in ipairs(hops) do
+    table.insert(path, hopKey(key, n, #hops))
   end
-  return { key }
+  return path
+end
+
+-- Nests a candidate's XML element inside its case's full chain of wrapper
+-- tags (see frameChains), from the child directly under the root Frame
+-- down to the leaf that carries the tested attribute -- assigning
+-- parentKey to each identity hop along the way (see identityHops/hopKey,
+-- kept in sync with objectPath above) and the candidate's attribute value
+-- to the leaf.
+local function templateElement(uiobjectApis, case, key, value)
+  local chain = case.chain
+  local hops = identityHops(uiobjectApis, chain)
+  local hopIndex = {}
+  for n, i in ipairs(hops) do
+    hopIndex[i] = n
+  end
+  local total = #hops
+  local element
+  for i = #chain, 2, -1 do
+    local e = { tag = chain[i] }
+    if hopIndex[i] then
+      e.parentKey = hopKey(key, hopIndex[i], total)
+    end
+    if i == #chain then
+      e[case.xmlAttrKey] = value
+    end
+    if element then
+      table.insert(e, element)
+    end
+    element = e
+  end
+  return element
 end
 
 -- Every (tag, attribute) pair typed stringenum:/enum:, for tags reachable
--- from Frame (see framesReachable) -- these are eligible for per-product
+-- from Frame (see frameChains) -- these are eligible for per-product
 -- XML-attribute-value template tests. An eligible attribute's impl is
 -- required to be field-based (data/schemas/xml.yaml's attribute impl
 -- taggedunion also allows method/internal/loadfile/scope, but every
@@ -272,22 +374,31 @@ end
 -- `impl.field` directly) -- resolve the field's default and real getter
 -- method via computeUiobjectApis's already-computed, inherits-flattened
 -- field/getter data, rather than re-deriving either from string transforms.
+--
+-- frameChains doesn't guarantee every tag has one unambiguous chain (see
+-- its comment, and issue #781) -- only assert that here, lazily, for a
+-- chain a case actually needs, rather than requiring the whole schema to
+-- be unambiguous up front.
 local function discoverCases(p)
-  local reachable = framesReachable(p)
+  local chains, ambiguous = frameChains(p)
   local uiobjectApis = computeUiobjectApis(p)
   local cases = {}
   for tag, tdef in pairs(perproduct(p, 'xml')) do
-    if reachable[tag] then
+    if chains[tag] then
       for attrKey, attrDef in pairs(tdef.attributes or {}) do
         local ty = attrDef.type
         if ty.stringenum or ty.enum then
           local fieldName = assert(attrDef.impl.field, 'unsupported attribute impl for ' .. tag .. '.' .. attrKey)
           local fv = uiobjectApis[tag].fields[fieldName]
+          local chain = chains[tag]
+          for _, t in ipairs(chain) do
+            assert(not ambiguous[t], ('%s.%s: no unambiguous chain to %s (see #781)'):format(tag, attrKey, t))
+          end
           table.insert(cases, {
+            chain = chain,
             getter = fv.getters[1].method,
             id = tag:lower() .. '_' .. attrKey,
             init = fv.init,
-            kind = classifyKind(uiobjectApis, tag),
             xmlAttrKey = attrKey,
             xmlTag = tag,
           })
@@ -532,11 +643,12 @@ local ptablemap = {
     return 'NamespaceApis', t
   end,
   templates = function(p)
+    local uiobjectApis = computeUiobjectApis(p)
     local t = {}
     for _, case in ipairs(discoverCases(p)) do
       for _, c in ipairs(computeCandidates(p, case)) do
         local key = case.id .. '_' .. c.suffix
-        t[key] = { expected = c.expected, getter = case.getter, objectPath = objectPath(case, key) }
+        t[key] = { expected = c.expected, getter = case.getter, objectPath = objectPath(uiobjectApis, case, key) }
       end
     end
     return 'Templates', t
@@ -560,36 +672,15 @@ local function doit(k, p)
   elseif k == 'product' then
     return ('_G.WowlessData = { product = %q }'):format(p)
   elseif k == 'templatexml' then
-    local layer = { tag = 'Layer' }
-    local frames = { tag = 'Frames' }
-    local animations = { tag = 'Animations' }
+    local uiobjectApis = computeUiobjectApis(p)
+    local root = { name = 'WowlessGeneratedXmlTests', tag = 'Frame' }
     for _, case in ipairs(discoverCases(p)) do
       for _, c in ipairs(computeCandidates(p, case)) do
         local key = case.id .. '_' .. c.suffix
-        local element = {
-          [case.xmlAttrKey] = c.value,
-          parentKey = key,
-          tag = case.xmlTag,
-        }
-        if case.kind == 'layerregion' then
-          table.insert(layer, element)
-        elseif case.kind == 'frame' then
-          table.insert(frames, element)
-        elseif case.kind == 'animationgroup' then
-          table.insert(animations, element)
-        else
-          table.insert(animations, {
-            parentKey = key .. '_group',
-            tag = 'AnimationGroup',
-            element,
-          })
-        end
+        table.insert(root, templateElement(uiobjectApis, case, key, c.value))
       end
     end
-    return renderXml({
-      { name = 'WowlessGeneratedXmlTests', tag = 'Frame', { tag = 'Layers', layer }, frames, animations },
-      tag = 'Ui',
-    })
+    return renderXml({ root, tag = 'Ui' })
   elseif k == 'toc' then
     local tt = {}
     for kk in pairs(ptablemap) do
