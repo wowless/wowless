@@ -219,15 +219,57 @@ local function computeUiobjectApis(p)
   return t
 end
 
--- Every (tag, attribute) pair typed stringenum:/enum:, for tags reachable
--- from Frame (see framesReachable) -- these are eligible for per-product
--- XML-attribute-value template tests. An eligible attribute's impl is
--- required to be field-based (data/schemas/xml.yaml's attribute impl
--- taggedunion also allows method/internal/loadfile/scope, but every
--- stringenum-/enum-typed attribute reachable from Frame today uses
--- `impl.field` directly) -- resolve the field's default and real getter
--- method via computeUiobjectApis's already-computed, inherits-flattened
--- field/getter data, rather than re-deriving either from string transforms.
+-- How a case's xml tag attaches to the synthetic root Frame built by the
+-- 'templatexml' doit branch below, which determines both the wrapper
+-- element it's nested in and how many objectPath hops are needed to reach
+-- it back from the root (see ptablemap.templates and 'templatexml').
+-- LayeredRegions (Texture/FontString/...) and Frames (Button/Slider/...)
+-- attach directly to their owning frame even through the Layers/Layer and
+-- Frames grouping tags, since those are `impl: transparent` -- so is
+-- Animations, so an AnimationGroup also attaches directly to the frame.
+-- Animation-typed children (Alpha/Animation/...) are only ever real
+-- children of an AnimationGroup, never of a frame directly, so they need
+-- an extra hop through a synthetic single-use AnimationGroup wrapper.
+-- (LayeredRegion itself is `virtual: true` with no `objectType`, so it
+-- never self-marks true in the isa table computeUiobjectApis builds --
+-- isa.Region is used instead, which both Frame- and LayeredRegion-rooted
+-- types inherit, with the isa.Frame check above it disambiguating.)
+local function classifyKind(uiobjectApis, tag)
+  local isa = uiobjectApis[tag].isa
+  if isa.Frame then
+    return 'frame'
+  elseif isa.Region then
+    return 'layerregion'
+  elseif tag == 'AnimationGroup' then
+    return 'animationgroup'
+  elseif isa.Animation then
+    return 'animationchild'
+  end
+  error('cannot classify xml tag ' .. tag .. ' for template test placement')
+end
+
+-- objectPath hops from the root Frame to a case's generated test object,
+-- keyed the same way in both ptablemap.templates and the 'templatexml'
+-- doit branch below (see classifyKind for why 'animationchild' needs the
+-- extra hop through its synthetic single-use AnimationGroup wrapper).
+local function objectPath(case, key)
+  if case.kind == 'animationchild' then
+    return { key .. '_group', key }
+  end
+  return { key }
+end
+
+-- Every field-implemented (tag, attribute) pair, for tags reachable from
+-- Frame (see framesReachable) -- these are eligible for per-product
+-- XML-attribute-value template tests. Non-field impls (method/internal/
+-- loadfile/scope) are out of scope: there's no single field to read back
+-- and assert on. Resolve the field's default and real getter method via
+-- computeUiobjectApis's already-computed, inherits-flattened field/getter
+-- data, rather than re-deriving either from string transforms. A field
+-- with no declarative single-value getter (e.g. Frame.protected's
+-- explicitlyProtected, only readable via the hand-implemented IsProtected,
+-- which also returns inherited protection as a second value) can't be
+-- round-tripped through this generic getter-call harness, so it's skipped.
 local function discoverCases(p)
   local reachable = framesReachable(p)
   local uiobjectApis = computeUiobjectApis(p)
@@ -235,17 +277,21 @@ local function discoverCases(p)
   for tag, tdef in pairs(perproduct(p, 'xml')) do
     if reachable[tag] then
       for attrKey, attrDef in pairs(tdef.attributes or {}) do
-        local ty = attrDef.type
-        if ty.stringenum or ty.enum then
-          local fieldName = assert(attrDef.impl.field, 'unsupported attribute impl for ' .. tag .. '.' .. attrKey)
-          local fv = uiobjectApis[tag].fields[fieldName]
-          table.insert(cases, {
-            getter = fv.getters[1].method,
-            id = tag:lower() .. '_' .. attrKey,
-            init = fv.init,
-            xmlAttrKey = attrKey,
-            xmlTag = tag,
-          })
+        local impl = attrDef.impl
+        if type(impl) == 'table' and impl.field then
+          local fv = uiobjectApis[tag].fields[impl.field]
+          local getter = fv.getters[1]
+          if getter then
+            table.insert(cases, {
+              attrType = attrDef.type,
+              getter = getter.method,
+              id = tag:lower() .. '_' .. attrKey,
+              init = fv.init,
+              kind = classifyKind(uiobjectApis, tag),
+              xmlAttrKey = attrKey,
+              xmlTag = tag,
+            })
+          end
         end
       end
     end
@@ -279,7 +325,7 @@ end
 -- product's own field default (mirrors the events ptablemap entry below).
 -- Also always includes a guaranteed-nonsense negative case, so this
 -- coverage doesn't depend on products having diverged.
-local function computeCandidates(p, case)
+local function computeEnumlikeCandidates(p, case)
   local candidates = {}
   local native = {}
   for name, expected in pairs(attrMembers(p, case)) do
@@ -304,6 +350,36 @@ local function computeCandidates(p, case)
   assert(not native.NONSENSE, 'nonsense is apparently not nonsense for ' .. case.id)
   table.insert(candidates, { expected = case.init, suffix = 'nonsense', value = 'nonsense' })
   return candidates
+end
+
+-- Boolean/number/string attributes have no product-specific member set, so
+-- (unlike stringenum:/enum:) their candidates are fixed literals mirroring
+-- the coercion rules in wowless/modules/xml.lua's attributeTypes: boolean
+-- and number parsing can fail (falling back to the field's default), while
+-- string coercion is the identity function and always succeeds.
+local function computeCandidates(p, case)
+  local ty = case.attrType
+  if type(ty) == 'table' then
+    return computeEnumlikeCandidates(p, case)
+  elseif ty == 'boolean' then
+    return {
+      { expected = true, suffix = 'true', value = 'true' },
+      { expected = true, suffix = 'true_mixedcase', value = 'True' },
+      { expected = false, suffix = 'false', value = 'false' },
+      { expected = case.init, suffix = 'nonsense', value = 'nonsense' },
+    }
+  elseif ty == 'number' then
+    return {
+      { expected = 42, suffix = '42', value = '42' },
+      { expected = -3.5, suffix = 'neg3_5', value = '-3.5' },
+      { expected = case.init, suffix = 'nonsense', value = 'nonsense' },
+    }
+  elseif ty == 'string' then
+    return {
+      { expected = 'somevalue', suffix = 'somevalue', value = 'somevalue' },
+    }
+  end
+  error('unsupported template-case attribute type for ' .. case.id)
 end
 
 local ptablemap = {
@@ -491,7 +567,7 @@ local ptablemap = {
     for _, case in ipairs(discoverCases(p)) do
       for _, c in ipairs(computeCandidates(p, case)) do
         local key = case.id .. '_' .. c.suffix
-        t[key] = { expected = c.expected, getter = case.getter, objectPath = { key } }
+        t[key] = { expected = c.expected, getter = case.getter, objectPath = objectPath(case, key) }
       end
     end
     return 'Templates', t
@@ -516,17 +592,33 @@ local function doit(k, p)
     return ('_G.WowlessData = { product = %q }'):format(p)
   elseif k == 'templatexml' then
     local layer = { tag = 'Layer' }
+    local frames = { tag = 'Frames' }
+    local animations = { tag = 'Animations' }
     for _, case in ipairs(discoverCases(p)) do
       for _, c in ipairs(computeCandidates(p, case)) do
-        table.insert(layer, {
+        local key = case.id .. '_' .. c.suffix
+        local element = {
           [case.xmlAttrKey] = c.value,
-          parentKey = case.id .. '_' .. c.suffix,
+          parentKey = key,
           tag = case.xmlTag,
-        })
+        }
+        if case.kind == 'layerregion' then
+          table.insert(layer, element)
+        elseif case.kind == 'frame' then
+          table.insert(frames, element)
+        elseif case.kind == 'animationgroup' then
+          table.insert(animations, element)
+        else
+          table.insert(animations, {
+            parentKey = key .. '_group',
+            tag = 'AnimationGroup',
+            element,
+          })
+        end
       end
     end
     return renderXml({
-      { name = 'WowlessGeneratedXmlTests', tag = 'Frame', { tag = 'Layers', layer } },
+      { name = 'WowlessGeneratedXmlTests', tag = 'Frame', { tag = 'Layers', layer }, frames, animations },
       tag = 'Ui',
     })
   elseif k == 'toc' then
