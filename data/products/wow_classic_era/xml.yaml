@@ -80,8 +80,7 @@ Animation:
     smoothing:
       impl:
         field: smoothing
-      type:
-        stringenum: SmoothingType
+      type: string
     startdelay:
       type: number
     target:
@@ -515,8 +514,7 @@ Frame:
     framestrata:
       impl:
         field: frameStrata
-      type:
-        stringenum: FrameStrata
+      type: string
     hyperlinksenabled:
       impl:
         field: hyperlinksEnabled
