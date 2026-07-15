@@ -80,7 +80,8 @@ Animation:
     smoothing:
       impl:
         field: smoothing
-      type: string
+      type:
+        stringenum: SmoothingType
     startdelay:
       type: number
     target:
@@ -96,7 +97,8 @@ AnimationGroup:
     looping:
       impl:
         field: looping
-      type: string
+      type:
+        stringenum: LoopType
     mixin:
       impl: internal
       phase: early
@@ -518,7 +520,8 @@ Frame:
     framestrata:
       impl:
         field: frameStrata
-      type: string
+      type:
+        stringenum: FrameStrata
     hyperlinksenabled:
       impl:
         field: hyperlinksEnabled
@@ -1315,7 +1318,8 @@ Slider:
     orientation:
       impl:
         field: orientation
-      type: string
+      type:
+        stringenum: Orientation
     stepsperpage:
       impl:
         field: stepsPerPage
