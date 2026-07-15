@@ -84,8 +84,15 @@ describe('xml', function()
               for an, a in pairs(attrs) do
                 it(an, function()
                   local impl = type(a.impl) == 'table' and a.impl or nil
-                  if impl and impl.field and not typeMismatchExceptions[an] then
-                    assert.same(fields[name][impl.field], a.type)
+                  if impl and impl.field then
+                    if typeMismatchExceptions[an] then
+                      -- Tripwire: once #782/#783 land a real fix, the type will
+                      -- start matching and this fails, forcing the exception
+                      -- (and this comment) to be removed instead of going stale.
+                      assert.Not.same(fields[name][impl.field], a.type)
+                    else
+                      assert.same(fields[name][impl.field], a.type)
+                    end
                   end
                 end)
               end
