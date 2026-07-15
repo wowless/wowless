@@ -3577,6 +3577,15 @@ C_BattleNet.IsBattleNetFriendsListSupported:
   outputs:
   - name: isBattleNetFriendsListSupported
     type: boolean
+C_BattleNet.SearchFriends:
+  inputs:
+  - name: searchInfo
+    type:
+      structure: C_BattleNet.AuroraFriendsSearchInfo
+  outputs:
+  - name: friendsData
+    type:
+      arrayof: number
 C_BattleNet.SendGameData:
   inputs:
   - name: gameAccountID
@@ -3589,6 +3598,11 @@ C_BattleNet.SendGameData:
   - name: result
     type:
       enum: SendAddonMessageResult
+C_BattleNet.SendTitleFriendInviteByName:
+  inputs:
+  - name: name
+    type: string
+  outputs:
 C_BattleNet.SendVerifiedBattleNetFriendInvite:
   inputs:
   outputs:
@@ -14817,15 +14831,20 @@ C_HousingLayout.GetBaseRoomFloor:
   outputs:
   - name: floor
     type: number
+C_HousingLayout.GetHighestOccupiedFloorIndex:
+  inputs:
+  outputs:
+  - name: highestFloorIndex
+    type: number
+C_HousingLayout.GetLowestOccupiedFloorIndex:
+  inputs:
+  outputs:
+  - name: lowestFloorIndex
+    type: number
 C_HousingLayout.GetNumActiveRooms:
   inputs:
   outputs:
   - name: numRooms
-    type: number
-C_HousingLayout.GetNumFloors:
-  inputs:
-  outputs:
-  - name: numFloors
     type: number
 C_HousingLayout.GetRoomPlacementBudget:
   inputs:
@@ -19326,6 +19345,15 @@ C_NeighborhoodInitiative.GetInitiativeTaskInfo:
     nilable: true
     type:
       structure: C_NeighborhoodInitiative.InitiativeTaskInfo
+C_NeighborhoodInitiative.GetInitiativeTaskRewardScaling:
+  inputs:
+  - name: taskID
+    type: number
+  - name: numItems
+    type: number
+  outputs:
+  - name: scaledAmount
+    type: number
 C_NeighborhoodInitiative.GetNeighborhoodInitiativeInfo:
   inputs:
   outputs:
@@ -22333,7 +22361,10 @@ C_PvP.JoinBrawl:
     name: isSpecialBrawl
     type: boolean
   outputs:
-C_PvP.JoinRandomTrainingGround:
+C_PvP.JoinRandomTrainingGroundArena:
+  inputs:
+  outputs:
+C_PvP.JoinRandomTrainingGroundBattleground:
   inputs:
   outputs:
 C_PvP.JoinRatedBGBlitz:
@@ -23455,6 +23486,16 @@ C_RecentAllies.IsSystemSupported:
   outputs:
   - name: isRecentAllySystemSupported
     type: boolean
+C_RecentAllies.SearchRecentAllies:
+  inputs:
+  - name: searchInfo
+    type:
+      structure: C_RecentAllies.RecentAlliesSearchInfo
+  outputs:
+  - name: recentAlliesData
+    type:
+      arrayof:
+        structure: C_RecentAllies.RecentAllyData
 C_RecentAllies.SetRecentAllyNote:
   inputs:
   - name: characterGUID
@@ -25240,6 +25281,18 @@ C_Spell.GetItemModifiedAppearancesApplied:
   - name: itemModifiedAppearanceIDs
     type:
       arrayof: number
+C_Spell.GetLastCategoryCooldownSource:
+  inputs:
+  - name: spellCategory
+    type: number
+  mayreturnnothing: true
+  outputs:
+  - name: spellID
+    nilable: true
+    type: number
+  - name: itemID
+    nilable: true
+    type: number
 C_Spell.GetMawPowerLinkBySpellID:
   inputs:
   - name: spellID

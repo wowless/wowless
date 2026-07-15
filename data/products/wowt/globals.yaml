@@ -214,6 +214,8 @@ Constants:
     GROUP_FINDER_MAX_ACTIVITY_CAPACITY: 16
   LootConsts:
     MasterLootQualityThreshold: 5
+  LossOfControlConsts:
+    LOSS_OF_CONTROL_ACTIVE_INDEX: 1
   MacroConsts:
     MAX_ACCOUNT_MACROS: 120
     MAX_CHARACTER_MACROS: 30
@@ -3037,6 +3039,7 @@ Enum:
     Vertex: 1
   ForbiddenAspect:
     AlwaysPropagateInput: 32
+    ChangeAnimationTarget: 256
     EventRegistrations: 16
     QueryFocus: 128
     ScriptBindings: 2
@@ -3044,9 +3047,6 @@ Enum:
     SetToDefaults: 1
     UntrustedLayoutScriptExecution: 8
     UntrustedScriptExecution: 4
-  ForbiddenAspectInheritance:
-    Layout: 1
-    Parent: 0
   FragmentID:
     Actor: 15
     CgObject: 2
@@ -4967,6 +4967,8 @@ Enum:
     Lteq: 4
     None: 0
     Notequal: 2
+  LoginTicketLicenses:
+    GmLicense: 11486
   LogPriority:
     Debug: 30
     Error: 2
@@ -6113,6 +6115,13 @@ Enum:
     GmCancel: 4
     Invalid: 6
     Reject: 3
+  RecentAlliesFriendTag:
+    Delves: 4
+    Dungeons: 3
+    Professions: 0
+    PvP: 1
+    Questing: 5
+    Raiding: 2
   RecentAllyPinResult:
     ServerError: 1
     Success: 0
@@ -6338,12 +6347,17 @@ Enum:
     CurveRight: 4
     HalfwayBetween: 6
     Straight: 2
+  ScriptObjectAccessRestriction:
+    DenyTaintedAccessWhenAurasAreSecret: 1
   ScriptObjectMetatable:
     Forbidden: 1
     Public: 0
   ScriptObjectPartition:
     Forbidden: 1
     Public: 0
+  ScriptObjectPropagationPath:
+    Hierarchy: 0
+    Layout: 1
   ScrubStringFlags:
     AllowBarCodes: 2
     None: 0

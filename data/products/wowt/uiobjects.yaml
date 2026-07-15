@@ -9276,12 +9276,24 @@ UIObject:
       type: string
   inherits:
   methods:
+    AddAccessRestrictions:
+      inputs:
+      - name: restrictions
+        type:
+          enum: ScriptObjectAccessRestriction
+      outputs:
     AddForbiddenAspects:
       inputs:
       - name: aspects
         type:
           enum: ForbiddenAspect
       outputs:
+    GetAccessRestrictions:
+      inputs:
+      outputs:
+      - name: restrictions
+        type:
+          enum: ScriptObjectAccessRestriction
     GetForbiddenAspects:
       inputs:
       outputs:
@@ -9290,9 +9302,9 @@ UIObject:
           enum: ForbiddenAspect
     GetInheritableForbiddenAspects:
       inputs:
-      - name: inheritance
+      - name: path
         type:
-          enum: ForbiddenAspectInheritance
+          enum: ScriptObjectPropagationPath
       outputs:
       - name: aspects
         type:
@@ -9319,6 +9331,15 @@ UIObject:
       outputs:
       - name: objectType
         type: string
+    HasAnyAccessRestrictions:
+      inputs:
+      - name: restrictions
+        nilable: true
+        type:
+          enum: ScriptObjectAccessRestriction
+      outputs:
+      - name: hasAnyAccessRestriction
+        type: boolean
     HasAnyForbiddenAspects:
       inputs:
       - name: aspects

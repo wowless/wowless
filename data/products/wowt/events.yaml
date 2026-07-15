@@ -5732,11 +5732,11 @@ HOUSING_LAYOUT_FLOORPLAN_SELECTION_CHANGED:
   - name: blueprintShareCode
     nilable: true
     type: string
-HOUSING_LAYOUT_NUM_FLOORS_CHANGED:
+HOUSING_LAYOUT_OCCUPIED_FLOOR_RANGE_CHANGED:
   payload:
-  - name: prevNumFloors
+  - name: lowestFloor
     type: number
-  - name: numFloors
+  - name: highestFloor
     type: number
 HOUSING_LAYOUT_PIN_FRAME_ADDED:
   payload:
@@ -5765,11 +5765,7 @@ HOUSING_LAYOUT_ROOM_MOVED:
   payload:
 HOUSING_LAYOUT_ROOM_RECEIVED:
   payload:
-  - name: prevNumFloors
-    type: number
-  - name: currNumFloors
-    type: number
-  - name: isUpstairs
+  - name: playAddedSound
     type: boolean
 HOUSING_LAYOUT_ROOM_REMOVED:
   payload:

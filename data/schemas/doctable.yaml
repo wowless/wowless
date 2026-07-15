@@ -451,6 +451,8 @@ type:
                       type: number
                     InnerType:
                       type: string
+                    KeyType:
+                      type: string
                     Mixin:
                       type: string
                     Name:

@@ -781,6 +781,26 @@ C_Bank.PurchasableBankTabData:
       type: string
     tabCost:
       type: number
+C_BattleNet.AuroraFriendsSearchInfo:
+  fields:
+    isAFK:
+      type: boolean
+    isAvailableForQueue:
+      type: boolean
+    isDND:
+      type: boolean
+    isInQueue:
+      type: boolean
+    isOffline:
+      type: boolean
+    isOnline:
+      type: boolean
+    searchText:
+      type: string
+    tags:
+      type:
+        arrayof:
+          enum: BattleNetFriendTag
 C_BattleNet.BNetAccountInfo:
   fields:
     accountName:
@@ -6680,6 +6700,22 @@ C_QuestSession.QuestSessionPlayerDetails:
       type: string
     name:
       type: string
+C_RecentAllies.RecentAlliesSearchInfo:
+  fields:
+    interests:
+      type:
+        arrayof:
+          enum: RecentAlliesFriendTag
+    isAFK:
+      type: boolean
+    isDND:
+      type: boolean
+    isOffline:
+      type: boolean
+    isOnline:
+      type: boolean
+    searchText:
+      type: string
 C_RecentAllies.RecentAllyCharacterData:
   fields:
     classID:
@@ -11164,6 +11200,8 @@ CraftingQualityInfo:
       type: string
     iconMixed:
       type: string
+    iconQuestObjective:
+      type: string
     iconSmall:
       type: string
     quality:
@@ -11838,20 +11876,29 @@ HouseOwnerCharacterInfo:
         enum: HouseOwnerError
     playerGUID:
       type: string
+HousingBlueprintBudgetEntry:
+  fields:
+    budgetType:
+      type:
+        enum: HousingBudgetType
+    cost:
+      type: number
+    current:
+      nilable: true
+      type: number
+    max:
+      nilable: true
+      type: number
 HousingBlueprintBudgetInfo:
   fields:
-    exteriorDecorBudgetCurrent:
-      type: number
-    exteriorDecorBudgetMax:
-      type: number
-    interiorDecorBudgetCurrent:
-      type: number
-    interiorDecorBudgetMax:
-      type: number
-    roomBudgetCurrent:
-      type: number
-    roomBudgetMax:
-      type: number
+    exteriorBudgets:
+      type:
+        arrayof:
+          structure: HousingBlueprintBudgetEntry
+    interiorBudgets:
+      type:
+        arrayof:
+          structure: HousingBlueprintBudgetEntry
 HousingBlueprintCollection:
   fields:
     groups:
@@ -11893,22 +11940,15 @@ HousingBlueprintContentInfo:
     blockingRequirementFlags:
       type:
         enum: HousingBlueprintUnmetRequirementFlags
+    budgetInfo:
+      type:
+        structure: HousingBlueprintBudgetInfo
     contentGroups:
       type:
         arrayof:
           structure: HousingBlueprintContentGroup
-    exteriorDecorBudgetCost:
-      type: number
-    interiorDecorBudgetCost:
-      type: number
-    roomBudgetCost:
-      type: number
     shareCode:
       type: string
-    targetHouseBudgetInfo:
-      nilable: true
-      type:
-        structure: HousingBlueprintBudgetInfo
     targetHouseGUID:
       nilable: true
       type: string
