@@ -66,6 +66,7 @@ SmoothingType:
   NONE:
   OUT:
   OUT_IN:
+    alias: IN_OUT
 WrapMode:
   CLAMP:
   CLAMPTOBLACK:

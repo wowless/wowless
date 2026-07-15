@@ -587,6 +587,17 @@ cinputtypes = {
       n = n + 1
     end
     return function(verb, nilable, idx)
+      if verb == 'implcheck' then
+        return string.format(
+          'wowless_%s%sstringenum(L, %s, wowless_stringenum_%s_values, wowless_stringenum_%s_canonical, %d)',
+          verb,
+          nilable and 'nilable' or '',
+          idx,
+          safename(name),
+          safename(name),
+          n
+        )
+      end
       return string.format(
         'wowless_%s%sstringenum(L, %s, wowless_stringenum_%s_values, %d)',
         verb,
@@ -801,14 +812,24 @@ for sename, sevalues in sorted(stringenums) do
     values[#values + 1] = k
   end
   table.sort(values)
-  local entries = {}
+  local entries, canonical = {}, {}
   for _, v in ipairs(values) do
     entries[#entries + 1] = cstring(v)
+    local alias = sevalues[v].alias
+    if alias then
+      assert(sevalues[alias], 'alias target ' .. alias .. ' is not a member of ' .. sename)
+    end
+    canonical[#canonical + 1] = cstring(alias or v)
   end
   emit(
     'static const char * const wowless_stringenum_%s_values[] = {%s};',
     safename(sename),
     table.concat(entries, ', ')
+  )
+  emit(
+    'static const char * const wowless_stringenum_%s_canonical[] = {%s};',
+    safename(sename),
+    table.concat(canonical, ', ')
   )
 end
 if next(stringenums) then

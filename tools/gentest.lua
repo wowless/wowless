@@ -302,8 +302,8 @@ local function attrMembers(p, case)
   local ty = attrDef.type
   if ty.stringenum then
     local members = {}
-    for name in pairs(perproduct(p, 'stringenums')[ty.stringenum]) do
-      members[name] = name
+    for name, v in pairs(perproduct(p, 'stringenums')[ty.stringenum]) do
+      members[name] = v.alias or name
     end
     return members
   elseif ty.enum then

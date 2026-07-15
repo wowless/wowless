@@ -445,6 +445,7 @@ static inline void wowless_stubchecknilablestringenum(lua_State *L, int idx,
 
 static inline void wowless_implcheckstringenum(lua_State *L, int idx,
                                                const char *const *values,
+                                               const char *const *canonical,
                                                int n) {
   if (lua_type(L, idx) != LUA_TSTRING) {
     luaL_typerror(L, idx, lua_typename(L, LUA_TSTRING));
@@ -456,7 +457,7 @@ static inline void wowless_implcheckstringenum(lua_State *L, int idx,
     int mid = (lo + hi) / 2;
     int cmp = wowless_strcasecmp(s, values[mid]);
     if (cmp == 0) {
-      lua_pushstring(L, values[mid]);
+      lua_pushstring(L, canonical[mid]);
       lua_replace(L, idx);
       return;
     }
@@ -469,11 +470,11 @@ static inline void wowless_implcheckstringenum(lua_State *L, int idx,
   luaL_argerror(L, idx, "invalid string enum value");
 }
 
-static inline void wowless_implchecknilablestringenum(lua_State *L, int idx,
-                                                      const char *const *values,
-                                                      int n) {
+static inline void wowless_implchecknilablestringenum(
+    lua_State *L, int idx, const char *const *values,
+    const char *const *canonical, int n) {
   if (!lua_isnoneornil(L, idx)) {
-    wowless_implcheckstringenum(L, idx, values, n);
+    wowless_implcheckstringenum(L, idx, values, canonical, n);
   }
 }
 
