@@ -56,132 +56,17 @@ local function renderXml(x)
   return table.concat(t, '\n')
 end
 
--- The shortest chain of tags from <Frame> down to each tag reachable, as a
--- descendant, from it -- e.g. chains.Slider = { 'Frame', 'Frames', 'Slider'
--- }, chains.Animation = { 'Frame', 'Animations', 'AnimationGroup',
--- 'Animation' }. Mirrors the supertypes/children containment logic
--- wowless/modules/xml.lua itself uses at runtime (built in tools/prep.lua's
--- xmlflat) to determine which tags may legally nest inside which. Used by
--- discoverCases below both for reachability (chains[tag] ~= nil) and to
--- derive exactly how to place a case's tag in the synthetic test frame
--- (see identityHops/objectPath/templateElement), instead of hand-picking a
--- wrapper per xml tag.
---
--- A tag can genuinely have more than one equally-short path from Frame --
--- the real UI.xsd often makes an element legal under several parents at
--- once (see issue #781), so this doesn't error on that by itself. Instead
--- it also returns `ambiguous`, the set of tags reached via more than one
--- distinct parent at their shortest depth; discoverCases below only errors
--- if a tag it actually needs a chain for is (transitively) affected,
--- rather than requiring the whole schema to be unambiguous.
+local xmlcontainment = require('tools.xmlcontainment')
+
+-- <Layer> is the generic, impl:transparent container built for
+-- LayeredRegion tags (Texture/FontString/...): whenever it's one of a
+-- tag's tied shortest-path candidates, it's always a legal, no-extra-
+-- object-identity placement, so it's passed as frameChains's preferred
+-- tie-break -- e.g. FontString is otherwise also tied between
+-- EditBox/MessageFrame/SimpleHTML, each of which would need its own
+-- synthetic instance for no benefit.
 local function frameChains(p)
-  local xml = perproduct(p, 'xml')
-  local function supertypesOf(tag)
-    local st = { [tag:lower()] = true }
-    local t = xml[tag]
-    local climbing = not t.sealed
-    while t.extends do
-      if climbing then
-        st[t.extends:lower()] = true
-      end
-      t = xml[t.extends]
-      climbing = climbing and not t.sealed
-    end
-    return st
-  end
-  local function childrenOf(tag)
-    local kids = {}
-    local t = xml[tag]
-    while true do
-      if t.contents and t.contents ~= 'text' then
-        for kid in pairs(t.contents.tags) do
-          kids[kid:lower()] = true
-        end
-      end
-      if not t.extends then
-        break
-      end
-      t = xml[t.extends]
-    end
-    return kids
-  end
-  local supertypes, children = {}, {}
-  for tag in pairs(xml) do
-    supertypes[tag] = supertypesOf(tag)
-    children[tag] = childrenOf(tag)
-  end
-  -- chains.Frame starts as the trivial zero-hop "this is the synthetic
-  -- test frame itself" entry, needed to bootstrap its direct children
-  -- (Frames/Layers/Animations/...). But Frame is also a legitimate xml tag
-  -- in its own right (e.g. a Frame.framestrata case needs a *fresh* child
-  -- Frame instance, not the shared root re-carrying every candidate's
-  -- value at once) -- so `visited`, not `chains`, gates rediscovery, and
-  -- once Frame is found again for real (via Frames, same as any other
-  -- Frame-family tag), its chains entry is overwritten with that real,
-  -- reachable-as-a-child chain rather than staying at the trivial one.
-  local chains = { Frame = { 'Frame' } }
-  local visited = {}
-  local ambiguous = {}
-  local frontier = { 'Frame' }
-  while #frontier > 0 do
-    -- Collect every candidate parent per newly-reachable tag from this
-    -- whole layer before resolving any of them, so resolution doesn't
-    -- depend on frontier iteration order (a tag seeing two non-Layer
-    -- candidates before Layer itself must still resolve to Layer, not
-    -- latch an early conflict).
-    local candidates = {}
-    for _, from in ipairs(frontier) do
-      local allowed = children[from]
-      for tag in pairs(xml) do
-        if not visited[tag] then
-          for st in pairs(supertypes[tag]) do
-            if allowed[st] then
-              candidates[tag] = candidates[tag] or {}
-              candidates[tag][from] = true
-              break
-            end
-          end
-        end
-      end
-    end
-    local parentOf = {}
-    for tag, froms in pairs(candidates) do
-      if froms.Layer then
-        -- <Layer> is the generic, impl:transparent container built for
-        -- LayeredRegion tags (Texture/FontString/...): whenever it's one
-        -- of the tied candidates, it's always a legal, no-extra-
-        -- object-identity placement, so prefer it over erroring -- e.g.
-        -- FontString is otherwise also tied between EditBox/MessageFrame/
-        -- SimpleHTML, each of which would need its own synthetic
-        -- instance for no benefit.
-        parentOf[tag] = 'Layer'
-      else
-        local only, count = nil, 0
-        for from in pairs(froms) do
-          only, count = from, count + 1
-        end
-        if count == 1 then
-          parentOf[tag] = only
-        else
-          ambiguous[tag] = true
-          parentOf[tag] = only
-        end
-      end
-    end
-    local nextFrontier = {}
-    for tag, from in pairs(parentOf) do
-      local chain = {}
-      for i, t in ipairs(chains[from]) do
-        chain[i] = t
-      end
-      table.insert(chain, tag)
-      chains[tag] = chain
-      visited[tag] = true
-      table.insert(nextFrontier, tag)
-    end
-    frontier = nextFrontier
-  end
-  return chains, ambiguous
+  return xmlcontainment.frameChains(perproduct(p, 'xml'), 'Frame', 'Layer')
 end
 
 -- Per-type field/method data (fields, their init defaults, and which
@@ -290,79 +175,6 @@ local function computeUiobjectApis(p)
     end
   end
   return t
-end
-
--- Which positions (2..#chain, i.e. excluding the root Frame itself) in a
--- frameChains chain create a real, separately-addressable uiobject -- the
--- ones that need a parentKey in the generated XML and a hop in objectPath.
--- Pure grouping tags in the chain (Layers/Layer/Frames/Animations/...) have
--- no uiobjects.yaml entry: they splice their contents into the enclosing
--- real object at runtime rather than creating one of their own, so they're
--- skipped here.
-local function identityHops(uiobjectApis, chain)
-  local hops = {}
-  for i = 2, #chain do
-    if uiobjectApis[chain[i]] then
-      table.insert(hops, i)
-    end
-  end
-  return hops
-end
-
--- The parentKey for the n-th (1-indexed) of a case's `total` identity
--- hops. The last hop is always the case's own test object and keeps the
--- plain candidate key; any earlier identity hop (so far, only an
--- AnimationGroup on the way to an Animation) is scaffolding required to
--- legally nest the test object at all, and needs a per-candidate-unique
--- key of its own so candidates don't collide by sharing one AnimationGroup
--- (and, with it, its field defaults) -- the exact suffix scheme doesn't
--- matter beyond that, since it's never read back, only used to link a
--- wrapper element to its child in the same generated file.
-local function hopKey(key, n, total)
-  return n == total and key or (key .. '_' .. n)
-end
-
--- objectPath hops from the root Frame to a case's generated test object,
--- keyed the same way ptablemap.templates and 'templatexml' below build the
--- corresponding parentKey chain in the actual XML (see identityHops).
-local function objectPath(uiobjectApis, case, key)
-  local hops = identityHops(uiobjectApis, case.chain)
-  local path = {}
-  for n in ipairs(hops) do
-    table.insert(path, hopKey(key, n, #hops))
-  end
-  return path
-end
-
--- Nests a candidate's XML element inside its case's full chain of wrapper
--- tags (see frameChains), from the child directly under the root Frame
--- down to the leaf that carries the tested attribute -- assigning
--- parentKey to each identity hop along the way (see identityHops/hopKey,
--- kept in sync with objectPath above) and the candidate's attribute value
--- to the leaf.
-local function templateElement(uiobjectApis, case, key, value)
-  local chain = case.chain
-  local hops = identityHops(uiobjectApis, chain)
-  local hopIndex = {}
-  for n, i in ipairs(hops) do
-    hopIndex[i] = n
-  end
-  local total = #hops
-  local element
-  for i = #chain, 2, -1 do
-    local e = { tag = chain[i] }
-    if hopIndex[i] then
-      e.parentKey = hopKey(key, hopIndex[i], total)
-    end
-    if i == #chain then
-      e[case.xmlAttrKey] = value
-    end
-    if element then
-      table.insert(e, element)
-    end
-    element = e
-  end
-  return element
 end
 
 -- Every (tag, attribute) pair typed stringenum:/enum:, for tags reachable
@@ -648,7 +460,11 @@ local ptablemap = {
     for _, case in ipairs(discoverCases(p)) do
       for _, c in ipairs(computeCandidates(p, case)) do
         local key = case.id .. '_' .. c.suffix
-        t[key] = { expected = c.expected, getter = case.getter, objectPath = objectPath(uiobjectApis, case, key) }
+        t[key] = {
+          expected = c.expected,
+          getter = case.getter,
+          objectPath = xmlcontainment.objectPath(uiobjectApis, case.chain, key),
+        }
       end
     end
     return 'Templates', t
@@ -677,7 +493,7 @@ local function doit(k, p)
     for _, case in ipairs(discoverCases(p)) do
       for _, c in ipairs(computeCandidates(p, case)) do
         local key = case.id .. '_' .. c.suffix
-        table.insert(root, templateElement(uiobjectApis, case, key, c.value))
+        table.insert(root, xmlcontainment.templateElement(uiobjectApis, case.chain, case.xmlAttrKey, key, c.value))
       end
     end
     return renderXml({ root, tag = 'Ui' })
