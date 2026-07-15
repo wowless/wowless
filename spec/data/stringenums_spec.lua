@@ -55,6 +55,15 @@ describe('stringenums', function()
               end)
             end
           end)
+          describe('alias', function()
+            for value, def in pairs(v) do
+              if def.alias then
+                it(value, function()
+                  assert.True(v[def.alias] ~= nil)
+                end)
+              end
+            end
+          end)
         end)
       end
     end)

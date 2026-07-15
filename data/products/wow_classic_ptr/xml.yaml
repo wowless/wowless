@@ -80,7 +80,8 @@ Animation:
     smoothing:
       impl:
         field: smoothing
-      type: string
+      type:
+        stringenum: SmoothingType
     startdelay:
       type: number
     target:

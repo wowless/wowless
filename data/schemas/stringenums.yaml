@@ -3,4 +3,9 @@ type:
   mapof:
     key: string
     value:
-      setof: string
+      mapof:
+        key: string
+        value:
+          record:
+            alias:
+              type: string

@@ -68,7 +68,8 @@ return function(datalua)
     stringenum = function(name, s)
       local set = stringenums[name]
       local upper = s:upper()
-      return set[upper] and upper or nil
+      local entry = set[upper]
+      return entry and (entry.alias or upper) or nil
     end,
     stringlist = function(s)
       local result = {}
