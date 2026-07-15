@@ -410,11 +410,18 @@ local xmlflat = (function()
         kids[key] = true
       end
     end
+    -- supertypes stops climbing at a sealed tag: extends is type inheritance,
+    -- not substitution-group membership, and some tags share a type with a
+    -- generic tag while only being legal in a narrower spot -- issue #778
     local supertypes = { [k:lower()] = true }
+    local climbing = not v.sealed
     local t = v
     while t.extends do
-      supertypes[t.extends:lower()] = true
+      if climbing then
+        supertypes[t.extends:lower()] = true
+      end
       t = tree[t.extends]
+      climbing = climbing and not t.sealed
       for ak, av in pairs(t.attributes or {}) do
         assert(not attrs[ak], ak .. ' is already an attribute of ' .. k)
         attrs[ak] = av.type
@@ -429,6 +436,7 @@ local xmlflat = (function()
         end
       end
     end
+    assert(not v.sealed or v.extends, k .. ' is sealed but has no extends')
     assert(not text or #kids == 0, 'both text and kids on ' .. k)
     newtree[k:lower()] = {
       attributes = attrs,

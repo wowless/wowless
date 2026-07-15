@@ -64,9 +64,13 @@ local function framesReachable(p)
   local function supertypesOf(tag)
     local st = { [tag:lower()] = true }
     local t = xml[tag]
+    local climbing = not t.sealed
     while t.extends do
-      st[t.extends:lower()] = true
+      if climbing then
+        st[t.extends:lower()] = true
+      end
       t = xml[t.extends]
+      climbing = climbing and not t.sealed
     end
     return st
   end
