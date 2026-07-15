@@ -56,63 +56,17 @@ local function renderXml(x)
   return table.concat(t, '\n')
 end
 
--- Which XML tags are reachable, recursively, as descendants of <Frame>?
--- Mirrors the supertypes/children containment logic wowless/modules/xml.lua
--- itself uses at runtime (built in tools/prep.lua's xmlflat).
-local function framesReachable(p)
-  local xml = perproduct(p, 'xml')
-  local function supertypesOf(tag)
-    local st = { [tag:lower()] = true }
-    local t = xml[tag]
-    local climbing = not t.sealed
-    while t.extends do
-      if climbing then
-        st[t.extends:lower()] = true
-      end
-      t = xml[t.extends]
-      climbing = climbing and not t.sealed
-    end
-    return st
-  end
-  local function childrenOf(tag)
-    local kids = {}
-    local t = xml[tag]
-    while true do
-      if t.contents and t.contents ~= 'text' then
-        for kid in pairs(t.contents.tags) do
-          kids[kid:lower()] = true
-        end
-      end
-      if not t.extends then
-        break
-      end
-      t = xml[t.extends]
-    end
-    return kids
-  end
-  local supertypes, children = {}, {}
-  for tag in pairs(xml) do
-    supertypes[tag] = supertypesOf(tag)
-    children[tag] = childrenOf(tag)
-  end
-  local reachable = { Frame = true }
-  local frontier = { 'Frame' }
-  while #frontier > 0 do
-    local from = table.remove(frontier)
-    local allowed = children[from]
-    for tag in pairs(xml) do
-      if not reachable[tag] then
-        for st in pairs(supertypes[tag]) do
-          if allowed[st] then
-            reachable[tag] = true
-            table.insert(frontier, tag)
-            break
-          end
-        end
-      end
-    end
-  end
-  return reachable
+local xmlcontainment = require('tools.xmlcontainment')
+
+-- <Layer> is the generic, impl:transparent container built for
+-- LayeredRegion tags (Texture/FontString/...): whenever it's one of a
+-- tag's tied shortest-path candidates, it's always a legal, no-extra-
+-- object-identity placement, so it's passed as frameChains's preferred
+-- tie-break -- e.g. FontString is otherwise also tied between
+-- EditBox/MessageFrame/SimpleHTML, each of which would need its own
+-- synthetic instance for no benefit.
+local function frameChains(p)
+  return xmlcontainment.chains(perproduct(p, 'xml'), 'Frame', 'Layer')
 end
 
 -- Per-type field/method data (fields, their init defaults, and which
@@ -223,8 +177,80 @@ local function computeUiobjectApis(p)
   return t
 end
 
+-- Which positions (2..#chain, i.e. excluding the root Frame itself) in a
+-- frameChains chain create a real, separately-addressable uiobject -- the
+-- ones that need a parentKey in the generated XML and a hop in objectPath.
+-- Pure grouping tags in the chain (Layers/Layer/Frames/Animations/...) have
+-- no uiobjects.yaml entry: they splice their contents into the enclosing
+-- real object at runtime rather than creating one of their own, so they're
+-- skipped here.
+local function identityHops(uiobjectApis, chain)
+  local hops = {}
+  for i = 2, #chain do
+    if uiobjectApis[chain[i]] then
+      table.insert(hops, i)
+    end
+  end
+  return hops
+end
+
+-- The parentKey for the n-th (1-indexed) of a case's `total` identity
+-- hops. The last hop is always the case's own test object and keeps the
+-- plain candidate key; any earlier identity hop (so far, only an
+-- AnimationGroup on the way to an Animation) is scaffolding required to
+-- legally nest the test object at all, and needs a per-candidate-unique
+-- key of its own so candidates don't collide by sharing one AnimationGroup
+-- (and, with it, its field defaults) -- the exact suffix scheme doesn't
+-- matter beyond that, since it's never read back, only used to link a
+-- wrapper element to its child in the same generated file.
+local function hopKey(key, n, total)
+  return n == total and key or (key .. '_' .. n)
+end
+
+-- objectPath hops from the root Frame to a case's generated test object,
+-- keyed the same way ptablemap.templates and 'templatexml' below build the
+-- corresponding parentKey chain in the actual XML (see identityHops).
+local function objectPath(uiobjectApis, chain, key)
+  local hops = identityHops(uiobjectApis, chain)
+  local path = {}
+  for n in ipairs(hops) do
+    table.insert(path, hopKey(key, n, #hops))
+  end
+  return path
+end
+
+-- Nests a candidate's XML element inside its case's full chain of wrapper
+-- tags (see frameChains), from the child directly under the root Frame
+-- down to the leaf that carries the tested attribute -- assigning
+-- parentKey to each identity hop along the way (see identityHops/hopKey,
+-- kept in sync with objectPath above) and the candidate's attribute value
+-- to the leaf.
+local function templateElement(uiobjectApis, chain, attrKey, key, value)
+  local hops = identityHops(uiobjectApis, chain)
+  local hopIndex = {}
+  for n, i in ipairs(hops) do
+    hopIndex[i] = n
+  end
+  local total = #hops
+  local element
+  for i = #chain, 2, -1 do
+    local e = { tag = chain[i] }
+    if hopIndex[i] then
+      e.parentKey = hopKey(key, hopIndex[i], total)
+    end
+    if i == #chain then
+      e[attrKey] = value
+    end
+    if element then
+      table.insert(e, element)
+    end
+    element = e
+  end
+  return element
+end
+
 -- Every (tag, attribute) pair typed stringenum:/enum:, for tags reachable
--- from Frame (see framesReachable) -- these are eligible for per-product
+-- from Frame (see frameChains) -- these are eligible for per-product
 -- XML-attribute-value template tests. An eligible attribute's impl is
 -- required to be field-based (data/schemas/xml.yaml's attribute impl
 -- taggedunion also allows method/internal/loadfile/scope, but every
@@ -232,18 +258,28 @@ end
 -- `impl.field` directly) -- resolve the field's default and real getter
 -- method via computeUiobjectApis's already-computed, inherits-flattened
 -- field/getter data, rather than re-deriving either from string transforms.
+--
+-- frameChains doesn't guarantee every tag has one unambiguous chain (see
+-- its comment, and issue #781) -- only assert that here, lazily, for a
+-- chain a case actually needs, rather than requiring the whole schema to
+-- be unambiguous up front.
 local function discoverCases(p)
-  local reachable = framesReachable(p)
+  local chains, ambiguous = frameChains(p)
   local uiobjectApis = computeUiobjectApis(p)
   local cases = {}
   for tag, tdef in pairs(perproduct(p, 'xml')) do
-    if reachable[tag] then
+    if chains[tag] then
       for attrKey, attrDef in pairs(tdef.attributes or {}) do
         local ty = attrDef.type
         if ty.stringenum or ty.enum then
           local fieldName = assert(attrDef.impl.field, 'unsupported attribute impl for ' .. tag .. '.' .. attrKey)
           local fv = uiobjectApis[tag].fields[fieldName]
+          local chain = chains[tag]
+          for _, t in ipairs(chain) do
+            assert(not ambiguous[t], ('%s.%s: no unambiguous chain to %s (see #781)'):format(tag, attrKey, t))
+          end
           table.insert(cases, {
+            chain = chain,
             getter = fv.getters[1].method,
             id = tag:lower() .. '_' .. attrKey,
             init = fv.init,
@@ -491,11 +527,16 @@ local ptablemap = {
     return 'NamespaceApis', t
   end,
   templates = function(p)
+    local uiobjectApis = computeUiobjectApis(p)
     local t = {}
     for _, case in ipairs(discoverCases(p)) do
       for _, c in ipairs(computeCandidates(p, case)) do
         local key = case.id .. '_' .. c.suffix
-        t[key] = { expected = c.expected, getter = case.getter, objectPath = { key } }
+        t[key] = {
+          expected = c.expected,
+          getter = case.getter,
+          objectPath = objectPath(uiobjectApis, case.chain, key),
+        }
       end
     end
     return 'Templates', t
@@ -519,20 +560,15 @@ local function doit(k, p)
   elseif k == 'product' then
     return ('_G.WowlessData = { product = %q }'):format(p)
   elseif k == 'templatexml' then
-    local layer = { tag = 'Layer' }
+    local uiobjectApis = computeUiobjectApis(p)
+    local root = { name = 'WowlessGeneratedXmlTests', tag = 'Frame' }
     for _, case in ipairs(discoverCases(p)) do
       for _, c in ipairs(computeCandidates(p, case)) do
-        table.insert(layer, {
-          [case.xmlAttrKey] = c.value,
-          parentKey = case.id .. '_' .. c.suffix,
-          tag = case.xmlTag,
-        })
+        local key = case.id .. '_' .. c.suffix
+        table.insert(root, templateElement(uiobjectApis, case.chain, case.xmlAttrKey, key, c.value))
       end
     end
-    return renderXml({
-      { name = 'WowlessGeneratedXmlTests', tag = 'Frame', { tag = 'Layers', layer } },
-      tag = 'Ui',
-    })
+    return renderXml({ root, tag = 'Ui' })
   elseif k == 'toc' then
     local tt = {}
     for kk in pairs(ptablemap) do

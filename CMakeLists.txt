@@ -496,6 +496,8 @@ foreach(product ${products})
 endforeach()
 
 lua2c(toolsenum tools.enum=${CMAKE_CURRENT_SOURCE_DIR}/tools/enum.lua)
+lua2c(toolsxmlcontainment
+      tools.xmlcontainment=${CMAKE_CURRENT_SOURCE_DIR}/tools/xmlcontainment.lua)
 
 add_lua_executable(
   prep
@@ -636,6 +638,7 @@ add_lua_executable(
   penlight
   toolsenum
   toolsutil
+  toolsxmlcontainment
   wowlessyaml)
 
 foreach(product ${products})
@@ -1012,6 +1015,7 @@ add_lua_executable(
   runtimeproducts
   toolsenum
   toolstedit
+  toolsxmlcontainment
   tsort
   wowapischema
   wowlessblp
@@ -1139,6 +1143,7 @@ set(specs
     spec/tools/enum_spec.lua
     spec/tools/prettywrite_spec.lua
     spec/tools/tedit_spec.lua
+    spec/tools/xmlcontainment_spec.lua
     spec/wowapi/schema_spec.lua
     spec/wowapi/yaml_spec.lua
     spec/wowless/addon_spec.lua

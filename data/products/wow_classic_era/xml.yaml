@@ -96,7 +96,8 @@ AnimationGroup:
     looping:
       impl:
         field: looping
-      type: string
+      type:
+        stringenum: LoopType
     mixin:
       impl: internal
       phase: early
@@ -1310,7 +1311,8 @@ Slider:
     orientation:
       impl:
         field: orientation
-      type: string
+      type:
+        stringenum: Orientation
     stepsperpage:
       impl:
         field: stepsPerPage
