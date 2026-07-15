@@ -145,6 +145,7 @@ BarTexture:
       argument: self
       parentmethod: SetStatusBarTexture
       parenttype: StatusBar
+  sealed: true
 Binding:
   attributes:
     category:
@@ -172,6 +173,7 @@ Bindings:
   impl: transparent
 BlingTexture:
   extends: Texture
+  sealed: true
 Browser:
   attributes:
     imefont:
@@ -207,6 +209,7 @@ ButtonFont:
     style:
       type: string
   extends: Font
+  sealed: true
   virtual: true
 ButtonText:
   extends: FontString
@@ -216,6 +219,7 @@ ButtonText:
       parentmethod: SetFontString
       parenttype: Button
   phase: late
+  sealed: true
 CheckButton:
   attributes:
     checked:
@@ -234,6 +238,7 @@ CheckedTexture:
       argument: self
       parentmethod: SetCheckedTexture
       parenttype: CheckButton
+  sealed: true
 Checkout:
   attributes:
     imefont:
@@ -268,6 +273,7 @@ ColorValueTexture:
       argument: self
       parentmethod: SetColorValueTexture
       parenttype: ColorSelect
+  sealed: true
 ColorValueThumbTexture:
   extends: Texture
   impl:
@@ -275,6 +281,7 @@ ColorValueThumbTexture:
       argument: self
       parentmethod: SetColorValueThumbTexture
       parenttype: ColorSelect
+  sealed: true
 ColorWheelTexture:
   extends: Texture
   impl:
@@ -282,6 +289,7 @@ ColorWheelTexture:
       argument: self
       parentmethod: SetColorWheelTexture
       parenttype: ColorSelect
+  sealed: true
 ColorWheelThumbTexture:
   extends: Texture
   impl:
@@ -289,6 +297,7 @@ ColorWheelThumbTexture:
       argument: self
       parentmethod: SetColorWheelThumbTexture
       parenttype: ColorSelect
+  sealed: true
 ControlPoint:
   attributes:
     offsetx:
@@ -327,6 +336,7 @@ DisabledCheckedTexture:
       argument: self
       parentmethod: SetDisabledCheckedTexture
       parenttype: CheckButton
+  sealed: true
 DisabledFont:
   extends: ButtonFont
   impl:
@@ -341,6 +351,7 @@ DisabledTexture:
       argument: self
       parentmethod: SetDisabledTexture
       parenttype: Button
+  sealed: true
 DressUpModel:
   attributes:
     modelscale:
@@ -348,6 +359,7 @@ DressUpModel:
   extends: Frame
 EdgeTexture:
   extends: Texture
+  sealed: true
 EditBox:
   attributes:
     autofocus:
@@ -459,10 +471,13 @@ FontString:
   extends: LayoutFrame
 FontStringHeader1:
   extends: FontString
+  sealed: true
 FontStringHeader2:
   extends: FontString
+  sealed: true
 FontStringHeader3:
   extends: FontString
+  sealed: true
 Frame:
   attributes:
     clampedtoscreen:
@@ -578,6 +593,7 @@ HighlightTexture:
       parentmethod: SetHighlightTexture
       parenttype: Button
   phase: late
+  sealed: true
 HitRectInsets:
   extends: Insets
 Include:
@@ -791,6 +807,7 @@ NormalTexture:
       argument: self
       parentmethod: SetNormalTexture
       parenttype: Button
+  sealed: true
 OffScreenFrame:
   extends: Frame
 Offset:
@@ -1120,6 +1137,7 @@ PushedFont:
   extends: ButtonFont
 PushedTextOffset:
   extends: Offset
+  sealed: true
 PushedTexture:
   extends: Texture
   impl:
@@ -1127,6 +1145,7 @@ PushedTexture:
       argument: self
       parentmethod: SetPushedTexture
       parenttype: Button
+  sealed: true
 QuestPOIFrame:
   extends: POIFrame
 Rect:
@@ -1325,6 +1344,7 @@ StatusBar:
   extends: Frame
 SwipeTexture:
   extends: Texture
+  sealed: true
 TabardModel:
   extends: Frame
 TexCoords:
@@ -1392,6 +1412,7 @@ ThumbTexture:
       argument: self
       parentmethod: SetThumbTexture
       parenttype: Slider
+  sealed: true
 Translation:
   attributes:
     offsetx:

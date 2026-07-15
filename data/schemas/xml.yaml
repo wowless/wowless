@@ -80,5 +80,7 @@ type:
           type:
             taggedunion:
               late: tag
+        sealed:
+          type: flag
         virtual:
           type: flag
