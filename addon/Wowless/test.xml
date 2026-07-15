@@ -159,6 +159,20 @@
     assertEquals('LOW,MEDIUM,HIGH,DIALOG', table.concat(WowlessLog, ','))
   </Script>
 
+  <!-- issue #782: frameStrata="PARENT"/"BLIZZARD" set via XML attribute, the
+    exact path the bug was found through, must resolve the same way the
+    SetFrameStrata() method does. -->
+  <Frame name='WowlessFrameStrataParent' frameStrata='HIGH'>
+    <Frames>
+      <Frame name='WowlessFrameStrataChild' frameStrata='PARENT' />
+    </Frames>
+  </Frame>
+  <Frame name='WowlessFrameStrataBlizzard' frameStrata='BLIZZARD' />
+  <Script>
+    assertEquals('HIGH', WowlessFrameStrataChild:GetFrameStrata())
+    assertEquals('MEDIUM', WowlessFrameStrataBlizzard:GetFrameStrata())
+  </Script>
+
   <Button name='WowlessTemplate' registerForClicks='AnyUp,AnyDown' virtual='true'>
     <Scripts>
       <OnLoad>end, assertEquals('Frame', WowlessFrame:GetObjectType())--</OnLoad>

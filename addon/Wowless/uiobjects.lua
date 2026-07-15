@@ -363,6 +363,37 @@ G.testsuite.uiobjects = function()
           local ft = _G.C_FunctionContainers.CreateCallback(function() end)
           return match(1, true, f:RegisterEventCallback('ENCOUNTER_STATE_CHANGED', ft))
         end,
+        ['strata'] = function()
+          local parent = CreateFrame('Frame')
+          parent:SetFrameStrata('HIGH')
+          local child = CreateFrame('Frame', nil, parent)
+          child:SetFrameStrata('PARENT')
+          assertEquals('HIGH', child:GetFrameStrata())
+          parent:SetFrameStrata('LOW')
+          -- issue #782: PARENT's real-client resolution (one-time snapshot vs.
+          -- live tracking of the parent's strata) is unconfirmed; this encodes
+          -- our current best guess (a one-time snapshot taken when PARENT is
+          -- set). If this fails on a real client, that's the answer: switch to
+          -- live tracking instead.
+          assertEquals('HIGH', child:GetFrameStrata())
+
+          local f = CreateFrame('Frame')
+          f:SetFrameStrata('DIALOG')
+          f:SetFrameStrata('BLIZZARD')
+          assertEquals('DIALOG', f:GetFrameStrata())
+
+          if _G.__wowless then
+            -- issue #782: BLIZZARD only takes effect on forbidden frames, which
+            -- addon Lua can't create/verify against a real client (calling
+            -- SetForbidden from insecure code there isn't safe to probe) --
+            -- confined to checking wowless's own model is internally consistent.
+            local forbidden = CreateFrame('Frame')
+            forbidden:SetForbidden()
+            forbidden:SetFrameStrata('DIALOG')
+            forbidden:SetFrameStrata('BLIZZARD')
+            assertEquals('BLIZZARD', forbidden:GetFrameStrata())
+          end
+        end,
         ['support $parent in frame names'] = function()
           local parent = retn(1, CreateFrame('Frame', 'WowlessParentNameTestMoo'))
           local t = {

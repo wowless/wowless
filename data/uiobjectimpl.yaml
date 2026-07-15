@@ -112,6 +112,8 @@ Frame/SetAttributeNoHandler:
   luafile:
 Frame/SetFrameLevel:
   luafile:
+Frame/SetFrameStrata:
+  luafile:
 Frame/SetResizeBounds:
   luafile:
 Frame/UnregisterAllEvents:
