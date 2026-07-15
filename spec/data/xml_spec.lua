@@ -14,15 +14,15 @@ describe('xml', function()
             for mk, mv in pairs(methods[inh]) do
               m[mk] = mv
             end
-            for fk in pairs(fields[inh]) do
-              f[fk] = true
+            for fk, fv in pairs(fields[inh]) do
+              f[fk] = fv
             end
           end
           for mk, mv in pairs(uiobjects[k].methods) do
             m[mk] = mv.impl or true
           end
-          for fk in pairs(uiobjects[k].fields) do
-            f[fk] = true
+          for fk, fv in pairs(uiobjects[k].fields) do
+            f[fk] = fv.type
           end
           methods[k] = m
           fields[k] = f
@@ -69,6 +69,23 @@ describe('xml', function()
                     assert(methods[name][impl.method], ('%s.%s: no method %s'):format(name, an, impl.method))
                   elseif impl and impl.field then
                     assert(fields[name][impl.field], ('%s.%s: no field %s'):format(name, an, impl.field))
+                  end
+                end)
+              end
+            end)
+            -- A field-impl attribute writes straight into the uiobject field with
+            -- no coercion, so the attribute's declared type must exactly match the
+            -- field's declared type. Frame.framestrata and Animation.smoothing are
+            -- known exceptions (issues #782, #783): real-client behavior for both
+            -- (dynamic PARENT inheritance; OUT_IN normalizing to IN_OUT) can't be
+            -- modeled by a plain stringenum field yet.
+            local typeMismatchExceptions = { framestrata = true, smoothing = true }
+            describe('field attribute impls match field types', function()
+              for an, a in pairs(attrs) do
+                it(an, function()
+                  local impl = type(a.impl) == 'table' and a.impl or nil
+                  if impl and impl.field and not typeMismatchExceptions[an] then
+                    assert.same(fields[name][impl.field], a.type)
                   end
                 end)
               end
