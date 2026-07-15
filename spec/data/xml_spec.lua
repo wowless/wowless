@@ -75,20 +75,19 @@ describe('xml', function()
             end)
             -- A field-impl attribute writes straight into the uiobject field with
             -- no coercion, so the attribute's declared type must exactly match the
-            -- field's declared type. Frame.framestrata and Animation.smoothing are
-            -- known exceptions (issues #782, #783): real-client behavior for both
-            -- (dynamic PARENT inheritance; OUT_IN normalizing to IN_OUT) can't be
+            -- field's declared type. Frame.framestrata is a known exception (issue
+            -- #782): real-client behavior (dynamic PARENT inheritance) can't be
             -- modeled by a plain stringenum field yet.
-            local typeMismatchExceptions = { framestrata = true, smoothing = true }
+            local typeMismatchExceptions = { framestrata = true }
             describe('field attribute impls match field types', function()
               for an, a in pairs(attrs) do
                 it(an, function()
                   local impl = type(a.impl) == 'table' and a.impl or nil
                   if impl and impl.field then
                     if typeMismatchExceptions[an] then
-                      -- Tripwire: once #782/#783 land a real fix, the type will
-                      -- start matching and this fails, forcing the exception
-                      -- (and this comment) to be removed instead of going stale.
+                      -- Tripwire: once #782 lands a real fix, the type will start
+                      -- matching and this fails, forcing the exception (and this
+                      -- comment) to be removed instead of going stale.
                       assert.Not.same(fields[name][impl.field], a.type)
                     else
                       assert.same(fields[name][impl.field], a.type)
