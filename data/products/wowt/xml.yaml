@@ -517,8 +517,7 @@ Frame:
         method: SetFrameLevel
       type: number
     framestrata:
-      impl:
-        method: SetFrameStrata
+      impl: internal
       type: string
     hyperlinksenabled:
       impl:

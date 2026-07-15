@@ -160,8 +160,11 @@
   </Script>
 
   <!-- issue #782: frameStrata="PARENT"/"BLIZZARD" set via XML attribute, the
-    exact path the bug was found through, must resolve the same way the
-    SetFrameStrata() method does. -->
+    exact path the bug was found through. PARENT resolves to the parent's
+    strata here, confirmed against a real client, unlike the
+    SetFrameStrata() method, which doesn't resolve PARENT at all (see
+    uiobjects.lua's 'strata' test). BLIZZARD no-ops here too, same as the
+    method. -->
   <Frame name='WowlessFrameStrataParent' frameStrata='HIGH'>
     <Frames>
       <Frame name='WowlessFrameStrataChild' frameStrata='PARENT' />
@@ -171,6 +174,13 @@
   <Script>
     assertEquals('HIGH', WowlessFrameStrataChild:GetFrameStrata())
     assertEquals('MEDIUM', WowlessFrameStrataBlizzard:GetFrameStrata())
+    WowlessFrameStrataParent:SetFrameStrata('LOW')
+    -- issue #782: whether PARENT is a one-time snapshot or live-tracks the
+    -- parent's strata is unconfirmed; this is a probe for our current best
+    -- guess (a one-time snapshot taken when the XML attribute is applied).
+    -- If this fails on a real client, that's the answer: switch to live
+    -- tracking instead.
+    assertEquals('HIGH', WowlessFrameStrataChild:GetFrameStrata())
   </Script>
 
   <Button name='WowlessTemplate' registerForClicks='AnyUp,AnyDown' virtual='true'>

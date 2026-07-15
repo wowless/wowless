@@ -364,20 +364,14 @@ G.testsuite.uiobjects = function()
           return match(1, true, f:RegisterEventCallback('ENCOUNTER_STATE_CHANGED', ft))
         end,
         ['strata'] = function()
-          local parent = CreateFrame('Frame')
-          parent:SetFrameStrata('HIGH')
-          local child = CreateFrame('Frame', nil, parent)
-          child:SetFrameStrata('PARENT')
-          assertEquals('HIGH', child:GetFrameStrata())
-          parent:SetFrameStrata('LOW')
-          -- issue #782: PARENT's real-client resolution (one-time snapshot vs.
-          -- live tracking of the parent's strata) is unconfirmed; this encodes
-          -- our current best guess (a one-time snapshot taken when PARENT is
-          -- set). If this fails on a real client, that's the answer: switch to
-          -- live tracking instead.
-          assertEquals('HIGH', child:GetFrameStrata())
-
+          -- issue #782: confirmed against a real client -- SetFrameStrata
+          -- doesn't resolve PARENT at all (see test.xml for the XML
+          -- attribute, which does).
           local f = CreateFrame('Frame')
+          f:SetFrameStrata('PARENT')
+          assertEquals('PARENT', f:GetFrameStrata())
+
+          f = CreateFrame('Frame')
           f:SetFrameStrata('DIALOG')
           f:SetFrameStrata('BLIZZARD')
           assertEquals('DIALOG', f:GetFrameStrata())
