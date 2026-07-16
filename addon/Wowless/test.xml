@@ -159,11 +159,21 @@
     assertEquals('LOW,MEDIUM,HIGH,DIALOG', table.concat(WowlessLog, ','))
   </Script>
 
-  <!-- issue #782: frameStrata="BLIZZARD" set via XML attribute, the exact
-    path the bug was found through, no-ops the same as the SetFrameStrata()
-    method does, confirmed against a real client. -->
+  <!-- issue #782: frameStrata="PARENT"/"BLIZZARD" set via XML attribute, the
+    exact path the bug was found through. Both behave the same as they do via
+    the SetFrameStrata() method, confirmed against a real client: PARENT
+    isn't a real stratum, it just inherits the parent's current strata, same
+    as any other invalid value; BLIZZARD no-ops. -->
+  <Frame name='WowlessFrameStrataParent' frameStrata='HIGH'>
+    <Frames>
+      <Frame name='WowlessFrameStrataChild' frameStrata='PARENT' />
+    </Frames>
+  </Frame>
   <Frame name='WowlessFrameStrataBlizzard' frameStrata='BLIZZARD' />
   <Script>
+    assertEquals('HIGH', WowlessFrameStrataChild:GetFrameStrata())
+    WowlessFrameStrataParent:SetFrameStrata('LOW')
+    assertEquals('LOW', WowlessFrameStrataChild:GetFrameStrata())
     assertEquals('MEDIUM', WowlessFrameStrataBlizzard:GetFrameStrata())
   </Script>
 
