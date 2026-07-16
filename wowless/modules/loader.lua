@@ -431,16 +431,6 @@ return function(
   }
 
   local xmlattrlang = {
-    -- issue #782: PARENT resolves to the parent's current strata (a
-    -- one-time snapshot, not live-tracked); this is XML-only, unlike
-    -- BLIZZARD, which SetFrameStrata itself already models.
-    framestrata = function(_, obj, value)
-      if value:upper() == 'PARENT' then
-        obj.frameStrata = obj.parent and obj.parent:GetFrameStrata() or 'MEDIUM'
-      else
-        obj:SetFrameStrata(value)
-      end
-    end,
     hidden = function(_, obj, value)
       obj.shown = not value
     end,

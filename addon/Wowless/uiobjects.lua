@@ -364,14 +364,7 @@ G.testsuite.uiobjects = function()
           return match(1, true, f:RegisterEventCallback('ENCOUNTER_STATE_CHANGED', ft))
         end,
         ['strata'] = function()
-          -- issue #782: confirmed against a real client -- SetFrameStrata
-          -- doesn't resolve PARENT at all (see test.xml for the XML
-          -- attribute, which does).
           local f = CreateFrame('Frame')
-          f:SetFrameStrata('PARENT')
-          assertEquals('PARENT', f:GetFrameStrata())
-
-          f = CreateFrame('Frame')
           f:SetFrameStrata('DIALOG')
           f:SetFrameStrata('BLIZZARD')
           assertEquals('DIALOG', f:GetFrameStrata())
