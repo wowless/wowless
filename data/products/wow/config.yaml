@@ -22,6 +22,8 @@ addon:
       CreateSecureDelegate:
       loadstring_untainted:
       secretunwrap:
+  cvar_platforms:
+    MacDisableOsShortcuts: mac
   enum_values_set_in_framexml:
     CooldownViewerCategory:
       HiddenAura:

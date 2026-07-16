@@ -19,6 +19,8 @@ addon:
       CreateSecureDelegate:
       loadstring_untainted:
       secretunwrap:
+  cvar_platforms:
+    MacDisableOsShortcuts: mac
   enums_set_in_framexml:
     EditModeChatFrameDisplayOnlySetting:
     HousingCatalogEntrySubtype:
