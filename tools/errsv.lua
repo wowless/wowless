@@ -108,7 +108,16 @@ end
 if data.generated.cvars then
   local cvarsfile = 'data/products/' .. product .. '/cvars.yaml'
   local cvars = yaml.parseFile(cvarsfile)
-  applyPatterns(cvars, data.generated.cvars)
+  for k, v in pairs(data.generated.cvars) do
+    local match, value = getPatternValue(v)
+    if match then
+      if value == nil then
+        cvars[k] = nil
+      else
+        cvars[k] = { value = value }
+      end
+    end
+  end
   write(cvarsfile, yaml.pprint(cvars))
 end
 
