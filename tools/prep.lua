@@ -142,7 +142,7 @@ for k, v in pairs(parseYaml('data/products/' .. product .. '/cvars.yaml')) do
   assert(not cvars[lk], lk)
   cvars[lk] = {
     name = k,
-    value = v,
+    value = v.value,
   }
 end
 
