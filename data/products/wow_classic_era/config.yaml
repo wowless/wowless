@@ -17,6 +17,8 @@ addon:
       C_Macro.SetMacroExecuteLineCallback:
       CreateForbiddenFrame:
       loadstring_untainted:
+  cvar_platforms:
+    MacDisableOsShortcuts: mac
   enum_values_set_in_framexml:
     SeasonID:
       Placeholder:

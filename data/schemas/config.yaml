@@ -20,6 +20,15 @@ type:
                     setof:
                       ref:
                         schema: api
+          cvar_platforms:
+            type:
+              mapof:
+                key:
+                  ref:
+                    schema: cvar
+                value:
+                  taggedunion:
+                    mac: tag
           enum_values_set_in_framexml:
             type:
               mapof:
