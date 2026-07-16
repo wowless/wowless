@@ -1,7 +1,8 @@
-return function(api, datalua, dirty, env, log, uiobjects)
+return function(api, datalua, dirty, env, log, platform, uiobjects)
   local genv = env.genv
   local ParentSub = api.ParentSub
   local SetDirty = dirty.SetDirty
+  local IsWindowsClient = platform.IsWindowsClient
   local UserData = uiobjects.UserData
 
   local validPoints = datalua.stringenums.FramePoint
@@ -94,7 +95,8 @@ return function(api, datalua, dirty, env, log, uiobjects)
   end
 
   local function rstr(r)
-    return tostring(r):gsub('^.*0x(.*)$', '%1')
+    local hex = tostring(r):gsub('^.*0x(.*)$', '%1')
+    return IsWindowsClient() and hex:sub(-8) or hex
   end
 
   local function cycleCheck(r, relativeTo, fn)

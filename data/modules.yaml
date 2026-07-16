@@ -138,6 +138,7 @@ points:
     dirty:
     env:
     log:
+    platform:
     uiobjects:
 region:
   deps:
