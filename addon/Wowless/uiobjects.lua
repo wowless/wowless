@@ -539,7 +539,8 @@ G.testsuite.uiobjects = function()
           return {
             dag = function()
               local function rstr(r)
-                return tostring(r):gsub('^.*0x(.*)$', '%1')
+                local hex = tostring(r):gsub('^.*0x(.*)$', '%1')
+                return _G.IsWindowsClient() and hex:sub(-8) or hex
               end
               return {
                 ['0'] = function()
