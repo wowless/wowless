@@ -254,6 +254,28 @@ G.testsuite.uiobjects = function()
               check1(2, f:GetNumChildren())
               check2(g, h, f:GetChildren())
             end,
+            ['children and regions'] = function()
+              -- If frames and regions share one underlying ordered list,
+              -- removing b (not the list's last entry) swaps in whatever is
+              -- currently last -- here region y -- moving y ahead of x even
+              -- though no region was touched. Separate lists per type would
+              -- leave region order untouched by a frame-child removal.
+              local f = CreateFrame('Frame')
+              local a = CreateFrame('Frame', nil, f)
+              local b = CreateFrame('Frame', nil, f)
+              local x = f:CreateTexture()
+              local c = CreateFrame('Frame', nil, f)
+              local y = f:CreateTexture()
+              check1(3, f:GetNumChildren())
+              check3(a, b, c, f:GetChildren())
+              check1(2, f:GetNumRegions())
+              check2(x, y, f:GetRegions())
+              b:SetParent(nil)
+              check1(2, f:GetNumChildren())
+              check2(a, c, f:GetChildren())
+              check1(2, f:GetNumRegions())
+              check2(y, x, f:GetRegions())
+            end,
           }
         end,
         ['level'] = function()
