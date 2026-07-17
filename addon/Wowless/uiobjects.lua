@@ -623,17 +623,30 @@ G.testsuite.uiobjects = function()
           -- order defaults to the same value (99) for every control point,
           -- and a real client only kept the last one created when all three
           -- shared it -- control points look to be keyed by order, not a
-          -- plain append list. Pass distinct order values to sidestep that
-          -- here.
+          -- plain append list. Distinct order values didn't produce
+          -- creation order either, so labels below include each point's
+          -- order value for diagnosis, and objects are mapped to those
+          -- labels so a failure is readable instead of showing raw
+          -- userdata pointers.
           local p = CreateFrame('Frame'):CreateAnimationGroup():CreateAnimation('Path')
           local a = p:CreateControlPoint(nil, nil, 1)
           local b = p:CreateControlPoint(nil, nil, 2)
           local c = p:CreateControlPoint(nil, nil, 3)
-          check3(a, b, c, p:GetControlPoints())
+          local names = { [a] = 'a:1', [b] = 'b:2', [c] = 'c:3' }
+          local function named(...)
+            local n = select('#', ...)
+            local t = {}
+            for i = 1, n do
+              local v = select(i, ...)
+              t[i] = names[v] or tostring(v)
+            end
+            return unpack(t, 1, n)
+          end
+          check3('a:1', 'b:2', 'c:3', named(p:GetControlPoints()))
           b:SetParent(nil)
-          check2(a, c, p:GetControlPoints())
+          check2('a:1', 'c:3', named(p:GetControlPoints()))
           b:SetParent(p)
-          check3(a, c, b, p:GetControlPoints())
+          check3('a:1', 'c:3', 'b:2', named(p:GetControlPoints()))
         end,
       }
     end,
