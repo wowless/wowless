@@ -27,9 +27,11 @@ G.testsuite.uiobjects = function()
       return {
         ['animation order'] = function()
           -- Animations cannot be unparented (confirmed against a real
-          -- client: Animation:SetParent(nil) errors), so only creation
-          -- order is testable here -- no swap-remove reordering to
-          -- exercise from addon code.
+          -- client: Animation:SetParent(nil) errors), so nil is not a way
+          -- to exercise swap-remove reordering here. Reparenting to a
+          -- different frame's animation group and back works though, and
+          -- demonstrates the same reordering: b moves to the end of g's
+          -- list on return, having been swapped out and appended.
           local g = CreateFrame('Frame'):CreateAnimationGroup()
           local a = g:CreateAnimation()
           local b = g:CreateAnimation()
@@ -37,6 +39,13 @@ G.testsuite.uiobjects = function()
           check3(a, b, c, g:GetAnimations())
           assert(not pcall(b.SetParent, b, nil))
           check3(a, b, c, g:GetAnimations())
+          local h = CreateFrame('Frame'):CreateAnimationGroup()
+          b:SetParent(h)
+          check2(a, c, g:GetAnimations())
+          check1(b, h:GetAnimations())
+          b:SetParent(g)
+          check3(a, c, b, g:GetAnimations())
+          check0(h:GetAnimations())
         end,
       }
     end,
