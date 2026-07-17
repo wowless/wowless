@@ -49,7 +49,9 @@ return function(
     if obj.parent == parent then
       return
     end
-    local field = IsObjectType(obj, 'layeredregion') and 'regions' or 'children'
+    local field = IsObjectType(obj, 'layeredregion') and 'regions'
+      or IsObjectType(obj, 'animationgroup') and 'animationGroups'
+      or 'children'
     if obj.parent then
       local up = obj.parent
       up[field]:remove(obj)

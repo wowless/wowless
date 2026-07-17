@@ -616,8 +616,7 @@ Alpha:
 AnimatableObject:
   fields:
     animationGroups:
-      init:
-      type: table
+      type: hlist
   inherits:
   methods:
     CreateAnimationGroup:

@@ -254,11 +254,14 @@ G.testsuite.uiobjects = function()
               check1(2, f:GetNumChildren())
               check2(g, h, f:GetChildren())
             end,
-            ['children and regions'] = function()
-              -- Frames and regions live in separate ordered lists (confirmed
-              -- against the real client), each with independent swap-remove
-              -- reordering on reinsertion (see the 'three' case above).
-              -- Churning one list must never perturb the other's order.
+            ['children, regions, and animation groups'] = function()
+              -- Frame children, regions, and animation groups each live in
+              -- their own ordered list. Children and regions each have
+              -- independent swap-remove reordering on reinsertion (see the
+              -- 'three' case above); animation groups have no public
+              -- SetParent, so their list can only ever grow and its order
+              -- is just creation order. Churning one list must never
+              -- perturb the other two.
               -- Objects are mapped to their local names below so a failure
               -- reports readable labels instead of raw userdata pointers.
               local f = CreateFrame('Frame')
@@ -268,7 +271,20 @@ G.testsuite.uiobjects = function()
               local x = f:CreateTexture()
               local y = f:CreateTexture()
               local z = f:CreateTexture()
-              local names = { [a] = 'a', [b] = 'b', [c] = 'c', [x] = 'x', [y] = 'y', [z] = 'z' }
+              local p = f:CreateAnimationGroup()
+              local q = f:CreateAnimationGroup()
+              local r = f:CreateAnimationGroup()
+              local names = {
+                [a] = 'a',
+                [b] = 'b',
+                [c] = 'c',
+                [x] = 'x',
+                [y] = 'y',
+                [z] = 'z',
+                [p] = 'p',
+                [q] = 'q',
+                [r] = 'r',
+              }
               local function named(...)
                 local n = select('#', ...)
                 local t = {}
@@ -282,14 +298,17 @@ G.testsuite.uiobjects = function()
               check3('a', 'b', 'c', named(f:GetChildren()))
               check1(3, f:GetNumRegions())
               check3('x', 'y', 'z', named(f:GetRegions()))
+              check3('p', 'q', 'r', named(f:GetAnimationGroups()))
               b:SetParent(nil)
               b:SetParent(f)
               check3('a', 'c', 'b', named(f:GetChildren()))
               check3('x', 'y', 'z', named(f:GetRegions()))
+              check3('p', 'q', 'r', named(f:GetAnimationGroups()))
               y:SetParent(nil)
               y:SetParent(f)
-              check3('x', 'z', 'y', named(f:GetRegions()))
               check3('a', 'c', 'b', named(f:GetChildren()))
+              check3('x', 'z', 'y', named(f:GetRegions()))
+              check3('p', 'q', 'r', named(f:GetAnimationGroups()))
             end,
           }
         end,
