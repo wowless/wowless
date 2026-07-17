@@ -27,6 +27,7 @@ return function(
     end
   end)()
 
+  local GetObjectType = uiobjecttypes.GetObjectType
   local InheritsFrom = uiobjecttypes.InheritsFrom
   local IsIntrinsicType = uiobjecttypes.IsIntrinsicType
   local IsObjectType = uiobjecttypes.IsObjectType
@@ -110,6 +111,9 @@ return function(
   end
 
   local function SetParent(obj, parent)
+    if parent == nil and IsObjectType(obj, 'animation') then
+      error(('%s:SetParent(): Cannot set a \'nil\' parent'):format(GetObjectType(obj)), 0)
+    end
     local p = parent
     while p do
       if obj == p then

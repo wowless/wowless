@@ -26,15 +26,17 @@ G.testsuite.uiobjects = function()
     AnimationGroup = function()
       return {
         ['animation order'] = function()
+          -- Animations cannot be unparented (confirmed against a real
+          -- client: Animation:SetParent(nil) errors), so only creation
+          -- order is testable here -- no swap-remove reordering to
+          -- exercise from addon code.
           local g = CreateFrame('Frame'):CreateAnimationGroup()
           local a = g:CreateAnimation()
           local b = g:CreateAnimation()
           local c = g:CreateAnimation()
           check3(a, b, c, g:GetAnimations())
-          b:SetParent(nil)
-          check2(a, c, g:GetAnimations())
-          b:SetParent(g)
-          check3(a, c, b, g:GetAnimations())
+          assert(not pcall(b.SetParent, b, nil))
+          check3(a, b, c, g:GetAnimations())
         end,
       }
     end,
@@ -608,10 +610,15 @@ G.testsuite.uiobjects = function()
     Path = function()
       return {
         ['control point order'] = function()
+          -- order defaults to the same value (99) for every control point,
+          -- and a real client only kept the last one created when all three
+          -- shared it -- control points look to be keyed by order, not a
+          -- plain append list. Pass distinct order values to sidestep that
+          -- here.
           local p = CreateFrame('Frame'):CreateAnimationGroup():CreateAnimation('Path')
-          local a = p:CreateControlPoint()
-          local b = p:CreateControlPoint()
-          local c = p:CreateControlPoint()
+          local a = p:CreateControlPoint(nil, nil, 1)
+          local b = p:CreateControlPoint(nil, nil, 2)
+          local c = p:CreateControlPoint(nil, nil, 3)
           check3(a, b, c, p:GetControlPoints())
           b:SetParent(nil)
           check2(a, c, p:GetControlPoints())
