@@ -12,9 +12,11 @@ return function(scripts)
   end
 
   local function DoUpdateVisible(obj, script)
-    for kid in obj.regions:entries() do
-      if kid.shown then
-        DoUpdateVisible(kid, script)
+    if obj.regions then
+      for kid in obj.regions:entries() do
+        if kid.shown then
+          DoUpdateVisible(kid, script)
+        end
       end
     end
     for kid in obj.children:entries() do

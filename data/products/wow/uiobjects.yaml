@@ -3906,6 +3906,8 @@ Frame:
     propagateKeyboardInput:
       init: false
       type: boolean
+    regions:
+      type: hlist
     resizable:
       init: false
       type: boolean
@@ -6517,8 +6519,6 @@ ParentedObjectBase:
       nilable: true
       type:
         uiobject: UIObject
-    regions:
-      type: hlist
   inherits:
     UIObject:
   methods:
