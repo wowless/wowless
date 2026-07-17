@@ -54,6 +54,7 @@ return function(
       or IsObjectType(obj, 'animationgroup') and 'animationGroups'
       or IsObjectType(obj, 'controlpoint') and 'controlPoints'
       or IsObjectType(obj, 'animation') and 'animations'
+      or IsObjectType(obj, 'actor') and 'actors'
       or 'children'
     if obj.parent then
       local up = obj.parent
