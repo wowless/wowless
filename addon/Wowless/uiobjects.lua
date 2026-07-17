@@ -260,21 +260,33 @@ G.testsuite.uiobjects = function()
               -- currently last -- here region y -- moving y ahead of x even
               -- though no region was touched. Separate lists per type would
               -- leave region order untouched by a frame-child removal.
+              -- Objects are mapped to their local names below so a failure
+              -- reports readable labels instead of raw userdata pointers.
               local f = CreateFrame('Frame')
               local a = CreateFrame('Frame', nil, f)
               local b = CreateFrame('Frame', nil, f)
               local x = f:CreateTexture()
               local c = CreateFrame('Frame', nil, f)
               local y = f:CreateTexture()
+              local names = { [a] = 'a', [b] = 'b', [c] = 'c', [x] = 'x', [y] = 'y' }
+              local function named(...)
+                local n = select('#', ...)
+                local t = {}
+                for i = 1, n do
+                  local v = select(i, ...)
+                  t[i] = names[v] or tostring(v)
+                end
+                return unpack(t, 1, n)
+              end
               check1(3, f:GetNumChildren())
-              check3(a, b, c, f:GetChildren())
+              check3('a', 'b', 'c', named(f:GetChildren()))
               check1(2, f:GetNumRegions())
-              check2(x, y, f:GetRegions())
+              check2('x', 'y', named(f:GetRegions()))
               b:SetParent(nil)
               check1(2, f:GetNumChildren())
-              check2(a, c, f:GetChildren())
+              check2('a', 'c', named(f:GetChildren()))
               check1(2, f:GetNumRegions())
-              check2(y, x, f:GetRegions())
+              check2('y', 'x', named(f:GetRegions()))
             end,
           }
         end,
