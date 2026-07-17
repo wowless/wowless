@@ -1,9 +1,7 @@
 return function(self)
   local ret = {}
-  for kid in self.children:entries() do
-    if kid:IsObjectType('animation') then
-      table.insert(ret, kid)
-    end
+  for kid in self.animations:entries() do
+    table.insert(ret, kid)
   end
   return unpack(ret)
 end

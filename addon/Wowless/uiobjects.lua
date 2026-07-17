@@ -23,6 +23,22 @@ G.testsuite.uiobjects = function()
       }
     end,
 
+    AnimationGroup = function()
+      return {
+        ['animation order'] = function()
+          local g = CreateFrame('Frame'):CreateAnimationGroup()
+          local a = g:CreateAnimation()
+          local b = g:CreateAnimation()
+          local c = g:CreateAnimation()
+          check3(a, b, c, g:GetAnimations())
+          b:SetParent(nil)
+          check2(a, c, g:GetAnimations())
+          b:SetParent(g)
+          check3(a, c, b, g:GetAnimations())
+        end,
+      }
+    end,
+
     EditBox = function()
       return {
         fontobject = function()
@@ -585,6 +601,22 @@ G.testsuite.uiobjects = function()
           check0(mf:SetFontObject(fo2))
           check1(fo, mf:GetFontObject())
           assert(not pcall(mf.SetFontObject, mf, nil))
+        end,
+      }
+    end,
+
+    Path = function()
+      return {
+        ['control point order'] = function()
+          local p = CreateFrame('Frame'):CreateAnimationGroup():CreateAnimation('Path')
+          local a = p:CreateControlPoint()
+          local b = p:CreateControlPoint()
+          local c = p:CreateControlPoint()
+          check3(a, b, c, p:GetControlPoints())
+          b:SetParent(nil)
+          check2(a, c, p:GetControlPoints())
+          b:SetParent(p)
+          check3(a, c, b, p:GetControlPoints())
         end,
       }
     end,

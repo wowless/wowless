@@ -659,6 +659,8 @@ Animation:
     OnUpdate:
 AnimationGroup:
   fields:
+    animations:
+      type: hlist
     animationSpeedMultiplier:
       init: 1
       type: number
@@ -6014,6 +6016,8 @@ ParentedObjectBase:
   virtual: true
 Path:
   fields:
+    controlPoints:
+      type: hlist
     curveType:
       init: NONE
       type:

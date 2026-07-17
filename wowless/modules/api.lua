@@ -51,6 +51,8 @@ return function(
     end
     local field = IsObjectType(obj, 'layeredregion') and 'regions'
       or IsObjectType(obj, 'animationgroup') and 'animationGroups'
+      or IsObjectType(obj, 'controlpoint') and 'controlPoints'
+      or IsObjectType(obj, 'animation') and 'animations'
       or 'children'
     if obj.parent then
       local up = obj.parent
