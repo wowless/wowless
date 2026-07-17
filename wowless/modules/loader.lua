@@ -639,7 +639,14 @@ return function(
               end
               local ety = e.type == 'worldframe' and 'frame' or e.type
               local env = ctx.useAddonEnv and addonEnv or ctx.useSecureEnv and secureenv or genv
-              return api.CreateUIObject(ety, name, parent, env, { template }, nil, ctx.layer, ctx.sublevel)
+              local obj = api.CreateUIObject(ety, name, parent, env, { template }, nil, ctx.layer, ctx.sublevel)
+              if e.type == 'worldframe' then
+                -- issue #782: WORLD isn't settable through SetFrameStrata;
+                -- WorldFrame gets it directly, confirmed against a real
+                -- client.
+                obj.frameStrata = 'WORLD'
+              end
+              return obj
             end
           end
         else

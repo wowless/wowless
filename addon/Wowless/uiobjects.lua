@@ -402,6 +402,17 @@ G.testsuite.uiobjects = function()
               child:SetFrameStrata('NONSENSE')
               assertEquals('DIALOG', child:GetFrameStrata())
             end,
+            -- issue #782: WORLD is a real frameStrata value, but only
+            -- WorldFrame has it (see test.lua); every other frame ignores
+            -- it, same as any other invalid value, confirmed against a
+            -- real client.
+            ['WORLD is ignored on a normal frame'] = function()
+              local parent = CreateFrame('Frame')
+              parent:SetFrameStrata('DIALOG')
+              local child = CreateFrame('Frame', nil, parent)
+              child:SetFrameStrata('WORLD')
+              assertEquals('DIALOG', child:GetFrameStrata())
+            end,
             ['BLIZZARD'] = function()
               local f = CreateFrame('Frame')
               f:SetFrameStrata('DIALOG')

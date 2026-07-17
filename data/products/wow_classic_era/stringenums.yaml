@@ -37,6 +37,7 @@ FrameStrata:
   LOW:
   MEDIUM:
   TOOLTIP:
+  WORLD:
 InsertMode:
   BOTTOM:
   TOP:

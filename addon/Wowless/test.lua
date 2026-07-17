@@ -720,6 +720,14 @@ G.testsuite.sync = function()
             assertEquals(getmetatable(CreateFrame('Frame')), getmetatable(_G.WorldFrame))
           end
         end,
+        -- issue #782: WORLD is a real frameStrata value, but only WorldFrame
+        -- has it; it's ignored (falls back to inheritance) for every other
+        -- frame, confirmed against a real client.
+        ['has strata WORLD'] = function()
+          if _G.WorldFrame then
+            assertEquals('WORLD', _G.WorldFrame:GetFrameStrata())
+          end
+        end,
       }
     end,
   }

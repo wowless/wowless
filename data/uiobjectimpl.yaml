@@ -114,6 +114,8 @@ Frame/SetFrameLevel:
   luafile:
 Frame/SetFrameStrata:
   luafile:
+    modules:
+      datalua:
 Frame/SetResizeBounds:
   luafile:
 Frame/UnregisterAllEvents:
