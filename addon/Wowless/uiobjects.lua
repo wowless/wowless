@@ -23,6 +23,24 @@ G.testsuite.uiobjects = function()
       }
     end,
 
+    AnimationGroup = function()
+      return {
+        ['animation order'] = function()
+          -- Animations cannot be unparented (confirmed against a real
+          -- client: Animation:SetParent(nil) errors), so only creation
+          -- order is testable here -- no swap-remove reordering to
+          -- exercise from addon code.
+          local g = CreateFrame('Frame'):CreateAnimationGroup()
+          local a = g:CreateAnimation()
+          local b = g:CreateAnimation()
+          local c = g:CreateAnimation()
+          check3(a, b, c, g:GetAnimations())
+          assert(not pcall(b.SetParent, b, nil))
+          check3(a, b, c, g:GetAnimations())
+        end,
+      }
+    end,
+
     EditBox = function()
       return {
         fontobject = function()
