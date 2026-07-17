@@ -2628,6 +2628,11 @@ C_BattleNet.BNCheckBattleTagInviteToRecentAlly:
   - name: recentAllyGUID
     type: string
   outputs:
+C_BattleNet.CanToggleHighResTexturesWithoutClientReload:
+  inputs:
+  outputs:
+  - name: canToggle
+    type: boolean
 C_BattleNet.GetAccountInfoByGUID:
   inputs:
   - name: guid
