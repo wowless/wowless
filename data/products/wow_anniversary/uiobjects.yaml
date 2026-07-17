@@ -5883,6 +5883,8 @@ Model:
     OnModelLoaded:
 ModelScene:
   fields:
+    actors:
+      type: hlist
     allowOverlappedModels:
       init: false
       type: boolean
