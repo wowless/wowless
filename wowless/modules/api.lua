@@ -29,6 +29,7 @@ return function(
 
   local InheritsFrom = uiobjecttypes.InheritsFrom
   local IsIntrinsicType = uiobjecttypes.IsIntrinsicType
+  local IsObjectType = uiobjecttypes.IsObjectType
   local IsVisible = visibility.IsVisible
   local RunScript = scripts.RunScript
   local SendEvent = events.SendEvent
@@ -48,9 +49,12 @@ return function(
     if obj.parent == parent then
       return
     end
+    local field = IsObjectType(obj, 'layeredregion') and 'regions'
+      or IsObjectType(obj, 'animationgroup') and 'animationGroups'
+      or 'children'
     if obj.parent then
       local up = obj.parent
-      up.children:remove(obj)
+      up[field]:remove(obj)
       for _, f in ipairs(parentFieldsToClear) do
         if up[f] == obj then
           up[f] = nil
@@ -59,7 +63,7 @@ return function(
     end
     obj.parent = parent
     if parent then
-      parent.children:insert(obj)
+      parent[field]:insert(obj)
     end
     if parent and parent.frameLevel and obj.frameLevel and not obj.hasFixedFrameLevel then
       obj:SetFrameLevel(parent.frameLevel + 1)

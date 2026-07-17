@@ -580,6 +580,34 @@ G.testsuite.sync = function()
       }, '\n')
       assertEquals(expected, table.concat(log, '\n'))
     end,
+    ['OnShow order between frame children and regions, recursively'] = function()
+      -- Distinguishes three hypotheses for the OnShow firing order:
+      -- creation order (r1, k, m, r2, p); "each node's own regions fire
+      -- before its own children, recursively" (r1, k, r2, m, p); and "all
+      -- regions anywhere in the subtree fire before any frame descendant"
+      -- (r1, r2, k, m, p). k has no region of its own, so its position
+      -- relative to m's region r2 is what separates the per-node-recursive
+      -- rule from the whole-subtree-grouped one.
+      local p = CreateFrame('Frame')
+      local r1 = p:CreateTexture()
+      local k = CreateFrame('Frame', nil, p)
+      local m = CreateFrame('Frame', nil, p)
+      local r2 = m:CreateTexture()
+      local log = {}
+      local function h(name)
+        return function()
+          table.insert(log, name)
+        end
+      end
+      p:SetScript('OnShow', h('p'))
+      r1:SetScript('OnShow', h('r1'))
+      k:SetScript('OnShow', h('k'))
+      m:SetScript('OnShow', h('m'))
+      r2:SetScript('OnShow', h('r2'))
+      p:Hide()
+      p:Show()
+      assertEquals('r1,k,r2,m,p', table.concat(log, ','))
+    end,
 
     ScrollingMessageFrame = function()
       if _G.__wowless and _G.__wowless.lite then

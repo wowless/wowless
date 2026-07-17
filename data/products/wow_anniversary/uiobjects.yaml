@@ -616,8 +616,7 @@ Alpha:
 AnimatableObject:
   fields:
     animationGroups:
-      init:
-      type: table
+      type: hlist
   inherits:
   methods:
     CreateAnimationGroup:
@@ -6437,6 +6436,8 @@ ParentedObjectBase:
       nilable: true
       type:
         uiobject: UIObject
+    regions:
+      type: hlist
   inherits:
     UIObject:
   methods:
