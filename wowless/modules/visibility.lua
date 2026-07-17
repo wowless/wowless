@@ -17,6 +17,11 @@ return function(scripts)
         DoUpdateVisible(kid, script)
       end
     end
+    for kid in obj.regions:entries() do
+      if kid.shown then
+        DoUpdateVisible(kid, script)
+      end
+    end
     RunScript(obj, script)
   end
 

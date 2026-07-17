@@ -1,9 +1,7 @@
 local function kidregions(r)
   return coroutine.wrap(function()
-    for kid in r.children:entries() do
-      if kid:IsObjectType('layeredregion') then
-        coroutine.yield(kid)
-      end
+    for kid in r.regions:entries() do
+      coroutine.yield(kid)
     end
   end)
 end

@@ -255,20 +255,20 @@ G.testsuite.uiobjects = function()
               check2(g, h, f:GetChildren())
             end,
             ['children and regions'] = function()
-              -- If frames and regions share one underlying ordered list,
-              -- removing b (not the list's last entry) swaps in whatever is
-              -- currently last -- here region y -- moving y ahead of x even
-              -- though no region was touched. Separate lists per type would
-              -- leave region order untouched by a frame-child removal.
+              -- Frames and regions live in separate ordered lists (confirmed
+              -- against the real client), each with independent swap-remove
+              -- reordering on reinsertion (see the 'three' case above).
+              -- Churning one list must never perturb the other's order.
               -- Objects are mapped to their local names below so a failure
               -- reports readable labels instead of raw userdata pointers.
               local f = CreateFrame('Frame')
               local a = CreateFrame('Frame', nil, f)
               local b = CreateFrame('Frame', nil, f)
-              local x = f:CreateTexture()
               local c = CreateFrame('Frame', nil, f)
+              local x = f:CreateTexture()
               local y = f:CreateTexture()
-              local names = { [a] = 'a', [b] = 'b', [c] = 'c', [x] = 'x', [y] = 'y' }
+              local z = f:CreateTexture()
+              local names = { [a] = 'a', [b] = 'b', [c] = 'c', [x] = 'x', [y] = 'y', [z] = 'z' }
               local function named(...)
                 local n = select('#', ...)
                 local t = {}
@@ -280,13 +280,16 @@ G.testsuite.uiobjects = function()
               end
               check1(3, f:GetNumChildren())
               check3('a', 'b', 'c', named(f:GetChildren()))
-              check1(2, f:GetNumRegions())
-              check2('x', 'y', named(f:GetRegions()))
+              check1(3, f:GetNumRegions())
+              check3('x', 'y', 'z', named(f:GetRegions()))
               b:SetParent(nil)
-              check1(2, f:GetNumChildren())
-              check2('a', 'c', named(f:GetChildren()))
-              check1(2, f:GetNumRegions())
-              check2('y', 'x', named(f:GetRegions()))
+              b:SetParent(f)
+              check3('a', 'c', 'b', named(f:GetChildren()))
+              check3('x', 'y', 'z', named(f:GetRegions()))
+              y:SetParent(nil)
+              y:SetParent(f)
+              check3('x', 'z', 'y', named(f:GetRegions()))
+              check3('a', 'c', 'b', named(f:GetChildren()))
             end,
           }
         end,

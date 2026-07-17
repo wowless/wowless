@@ -6576,6 +6576,8 @@ ParentedObjectBase:
       nilable: true
       type:
         uiobject: UIObject
+    regions:
+      type: hlist
   inherits:
     UIObject:
   methods:

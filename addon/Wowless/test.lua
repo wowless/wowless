@@ -580,6 +580,31 @@ G.testsuite.sync = function()
       }, '\n')
       assertEquals(expected, table.concat(log, '\n'))
     end,
+    ['OnShow order between frame children and regions, recursively'] = function()
+      -- r1 is created before k and r2, so a result matching creation order
+      -- (r1, k, r2, p) would rule this test's hypothesis out. Nesting r2
+      -- under k, rather than directly under p, distinguishes "each node's
+      -- own children fire before its own regions, recursively" (r2 then k
+      -- then r1 then p) from "all frame descendants fire before any region
+      -- descendants" (which would put k before r1 and r2).
+      local p = CreateFrame('Frame')
+      local r1 = p:CreateTexture()
+      local k = CreateFrame('Frame', nil, p)
+      local r2 = k:CreateTexture()
+      local log = {}
+      local function h(name)
+        return function()
+          table.insert(log, name)
+        end
+      end
+      p:SetScript('OnShow', h('p'))
+      r1:SetScript('OnShow', h('r1'))
+      k:SetScript('OnShow', h('k'))
+      r2:SetScript('OnShow', h('r2'))
+      p:Hide()
+      p:Show()
+      assertEquals('r2\nk\nr1\np', table.concat(log, '\n'))
+    end,
 
     ScrollingMessageFrame = function()
       if _G.__wowless and _G.__wowless.lite then
