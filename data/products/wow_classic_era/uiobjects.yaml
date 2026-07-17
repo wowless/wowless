@@ -659,6 +659,8 @@ Animation:
     OnUpdate:
 AnimationGroup:
   fields:
+    animations:
+      type: hlist
     animationSpeedMultiplier:
       init: 1
       type: number
