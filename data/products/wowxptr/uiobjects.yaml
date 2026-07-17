@@ -4577,12 +4577,10 @@ Frame:
       outputs:
     SetFrameStrata:
       impl:
-        setter:
-        - name: frameStrata
+        uiobjectimpl: Frame/SetFrameStrata
       inputs:
       - name: strata
-        type:
-          stringenum: FrameStrata
+        type: string
       outputs:
     SetHighlightLocked:
       inputs:

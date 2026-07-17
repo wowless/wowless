@@ -64,6 +64,9 @@ return function(
     if parent and parent.frameLevel and obj.frameLevel and not obj.hasFixedFrameLevel then
       obj:SetFrameLevel(parent.frameLevel + 1)
     end
+    if parent and parent.frameStrata and obj.frameStrata and not obj.hasFixedFrameStrata then
+      obj:SetFrameStrata(parent.frameStrata)
+    end
   end
 
   local parentMatch = '^$[pP][aA][rR][eE][nN][tT]'

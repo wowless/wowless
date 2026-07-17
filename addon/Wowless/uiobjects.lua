@@ -363,6 +363,95 @@ G.testsuite.uiobjects = function()
           local ft = _G.C_FunctionContainers.CreateCallback(function() end)
           return match(1, true, f:RegisterEventCallback('ENCOUNTER_STATE_CHANGED', ft))
         end,
+        ['strata'] = function()
+          local t = {
+            ['root has no parent to inherit from'] = function()
+              assertEquals('MEDIUM', (CreateFrame('Frame')):GetFrameStrata())
+            end,
+            ['a new child inherits its parent at creation'] = function()
+              local parent = CreateFrame('Frame')
+              parent:SetFrameStrata('HIGH')
+              local child = CreateFrame('Frame', nil, parent)
+              assertEquals('HIGH', child:GetFrameStrata())
+            end,
+            ['setting a parent cascades to children lacking a fixed strata'] = function()
+              local parent = CreateFrame('Frame')
+              local child = CreateFrame('Frame', nil, parent)
+              assertEquals('MEDIUM', child:GetFrameStrata())
+              parent:SetFrameStrata('HIGH')
+              assertEquals('HIGH', child:GetFrameStrata())
+              parent:SetFrameStrata('LOW')
+              assertEquals('LOW', child:GetFrameStrata())
+              child:SetFixedFrameStrata(true)
+              parent:SetFrameStrata('DIALOG')
+              assertEquals('LOW', child:GetFrameStrata())
+            end,
+            -- issue #782: "PARENT" isn't a real stratum -- confirmed against a
+            -- real client, it behaves the same as any other nonsense value:
+            -- it resolves to whatever the parent's current strata is, same as
+            -- if frameStrata had never been explicitly set at all.
+            ['an invalid value inherits from the parent, same as PARENT'] = function()
+              local parent = CreateFrame('Frame')
+              parent:SetFrameStrata('DIALOG')
+              local child = CreateFrame('Frame', nil, parent)
+              child:SetFrameStrata('HIGH')
+              assertEquals('HIGH', child:GetFrameStrata())
+              child:SetFrameStrata('PARENT')
+              assertEquals('DIALOG', child:GetFrameStrata())
+              child:SetFrameStrata('HIGH')
+              child:SetFrameStrata('NONSENSE')
+              assertEquals('DIALOG', child:GetFrameStrata())
+            end,
+            -- issue #782: WORLD is a real frameStrata value, but only
+            -- WorldFrame has it (see test.lua); every other frame ignores
+            -- it, same as any other invalid value, confirmed against a
+            -- real client.
+            ['WORLD is ignored on a normal frame'] = function()
+              local parent = CreateFrame('Frame')
+              parent:SetFrameStrata('DIALOG')
+              local child = CreateFrame('Frame', nil, parent)
+              child:SetFrameStrata('WORLD')
+              assertEquals('DIALOG', child:GetFrameStrata())
+            end,
+            ['BLIZZARD'] = function()
+              local f = CreateFrame('Frame')
+              f:SetFrameStrata('DIALOG')
+              f:SetFrameStrata('BLIZZARD')
+              assertEquals('DIALOG', f:GetFrameStrata())
+
+              if _G.__wowless then
+                -- BLIZZARD only takes effect on forbidden frames, which addon
+                -- Lua can't create/verify against a real client (calling
+                -- SetForbidden from insecure code there isn't safe to probe) --
+                -- confined to checking wowless's own model is internally
+                -- consistent.
+                local forbidden = CreateFrame('Frame')
+                forbidden:SetForbidden()
+                forbidden:SetFrameStrata('DIALOG')
+                forbidden:SetFrameStrata('BLIZZARD')
+                assertEquals('BLIZZARD', forbidden:GetFrameStrata())
+              end
+            end,
+          }
+          for _, s in ipairs({
+            'BACKGROUND',
+            'DIALOG',
+            'FULLSCREEN',
+            'FULLSCREEN_DIALOG',
+            'HIGH',
+            'LOW',
+            'MEDIUM',
+            'TOOLTIP',
+          }) do
+            t[s] = function()
+              local parent = CreateFrame('Frame')
+              parent:SetFrameStrata(s)
+              local child = CreateFrame('Frame', nil, parent)
+              assertEquals(s, child:GetFrameStrata())
+            end
+          end
+          return t
+        end,
         ['support $parent in frame names'] = function()
           local parent = retn(1, CreateFrame('Frame', 'WowlessParentNameTestMoo'))
           local t = {

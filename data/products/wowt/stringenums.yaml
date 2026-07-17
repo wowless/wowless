@@ -36,8 +36,8 @@ FrameStrata:
   HIGH:
   LOW:
   MEDIUM:
-  PARENT:
   TOOLTIP:
+  WORLD:
 InsertMode:
   BOTTOM:
   TOP:

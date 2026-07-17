@@ -518,7 +518,7 @@ Frame:
       type: number
     framestrata:
       impl:
-        field: frameStrata
+        method: SetFrameStrata
       type: string
     hyperlinksenabled:
       impl:
