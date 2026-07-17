@@ -617,6 +617,27 @@ G.testsuite.uiobjects = function()
       }
     end,
 
+    Path = function()
+      return {
+        ['control point order'] = function()
+          -- order defaults to the same value (99) for every control point,
+          -- and a real client only kept the last one created when all three
+          -- shared it -- control points look to be keyed by order, not a
+          -- plain append list. Pass distinct order values to sidestep that
+          -- here.
+          local p = CreateFrame('Frame'):CreateAnimationGroup():CreateAnimation('Path')
+          local a = p:CreateControlPoint(nil, nil, 1)
+          local b = p:CreateControlPoint(nil, nil, 2)
+          local c = p:CreateControlPoint(nil, nil, 3)
+          check3(a, b, c, p:GetControlPoints())
+          b:SetParent(nil)
+          check2(a, c, p:GetControlPoints())
+          b:SetParent(p)
+          check3(a, c, b, p:GetControlPoints())
+        end,
+      }
+    end,
+
     Region = function()
       return {
         points = function()

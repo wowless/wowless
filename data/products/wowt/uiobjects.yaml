@@ -6629,6 +6629,8 @@ ParentedObjectBase:
   virtual: true
 Path:
   fields:
+    controlPoints:
+      type: hlist
     curveType:
       init: NONE
       type:
