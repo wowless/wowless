@@ -11,24 +11,29 @@ return function(scripts)
     return true
   end
 
-  local function DoUpdateVisible(obj, script)
-    if obj.regions then
-      for kid in obj.regions:entries() do
-        if kid.shown then
-          DoUpdateVisible(kid, script)
-        end
+  -- Regions can't have their own children or regions, so their scripts
+  -- fire directly rather than recursing; only frames reach this function.
+  local function DoUpdateVisible(frame, script)
+    for kid in frame.regions:entries() do
+      if kid.shown then
+        RunScript(kid, script)
       end
     end
-    for kid in obj.children:entries() do
+    for kid in frame.children:entries() do
       if kid.shown then
         DoUpdateVisible(kid, script)
       end
     end
-    RunScript(obj, script)
+    RunScript(frame, script)
   end
 
   local function UpdateVisible(obj, visible)
-    DoUpdateVisible(obj, visible and 'OnShow' or 'OnHide')
+    local script = visible and 'OnShow' or 'OnHide'
+    if obj.children then
+      DoUpdateVisible(obj, script)
+    else
+      RunScript(obj, script)
+    end
   end
 
   local function SetShown(obj, shown)
