@@ -48,16 +48,29 @@ return function(
     'statusBarTexture',
   }
 
+  -- Types can be registered on the fly (addon-defined intrinsics), so this
+  -- can't be precomputed for every type up front; cache each type's field
+  -- the first time it's actually used instead.
+  local childFieldByType = {}
+  local function ChildField(typename)
+    local field = childFieldByType[typename]
+    if not field then
+      field = InheritsFrom(typename, 'layeredregion') and 'regions'
+        or InheritsFrom(typename, 'animationgroup') and 'animationGroups'
+        or InheritsFrom(typename, 'controlpoint') and 'controlPoints'
+        or InheritsFrom(typename, 'animation') and 'animations'
+        or InheritsFrom(typename, 'actor') and 'actors'
+        or 'children'
+      childFieldByType[typename] = field
+    end
+    return field
+  end
+
   local function DoSetParent(obj, parent)
     if obj.parent == parent then
       return
     end
-    local field = IsObjectType(obj, 'layeredregion') and 'regions'
-      or IsObjectType(obj, 'animationgroup') and 'animationGroups'
-      or IsObjectType(obj, 'controlpoint') and 'controlPoints'
-      or IsObjectType(obj, 'animation') and 'animations'
-      or IsObjectType(obj, 'actor') and 'actors'
-      or 'children'
+    local field = ChildField(obj.type)
     if obj.parent then
       local up = obj.parent
       up[field]:remove(obj)
