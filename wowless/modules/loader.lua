@@ -639,7 +639,8 @@ return function(
               end
               local ety = e.type == 'worldframe' and 'frame' or e.type
               local env = ctx.useAddonEnv and addonEnv or ctx.useSecureEnv and secureenv or genv
-              return api.CreateUIObject(ety, name, parent, env, { template }, nil, ctx.layer, ctx.sublevel)
+              local objParent = uiobjecttypes.InheritsFrom(ety, 'parentedobjectbase') and parent or nil
+              return api.CreateUIObject(ety, name, objParent, env, { template }, nil, ctx.layer, ctx.sublevel)
             end
           end
         else
