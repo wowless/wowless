@@ -3421,6 +3421,8 @@ Frame:
     attributes:
       init:
       type: table
+    children:
+      type: hlist
     dontSavePosition:
       init: false
       type: boolean
@@ -5962,8 +5964,6 @@ ParentedObject:
   virtual: true
 ParentedObjectBase:
   fields:
-    children:
-      type: hlist
     parent:
       nilable: true
       type:

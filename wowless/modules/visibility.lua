@@ -19,9 +19,11 @@ return function(scripts)
         end
       end
     end
-    for kid in obj.children:entries() do
-      if kid.shown then
-        DoUpdateVisible(kid, script)
+    if obj.children then
+      for kid in obj.children:entries() do
+        if kid.shown then
+          DoUpdateVisible(kid, script)
+        end
       end
     end
     RunScript(obj, script)
