@@ -69,7 +69,7 @@ jobs:
         path: ${{ env.VCPKG_DEFAULT_BINARY_CACHE }}
         key: vcpkg-${{ runner.os }}-${{ github.run_id }}
         restore-keys: vcpkg-${{ runner.os }}
-    - uses: lukka/get-cmake@v4.3.3
+    - uses: lukka/get-cmake@v4.4.0
     - run: cmake --preset default -G "${{ matrix.config.generator }}"
     - run: cmake --build --preset default --config Release --verbose
     - run: cmake --build --preset default --config Release --target test --verbose
