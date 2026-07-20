@@ -48,29 +48,31 @@ return function(
     'statusBarTexture',
   }
 
-  -- Types can be registered on the fly (addon-defined intrinsics), so this
-  -- can't be precomputed for every type up front; cache each type's field
-  -- the first time it's actually used instead.
-  local childFieldByType = {}
-  local function ChildField(typename)
-    local field = childFieldByType[typename]
-    if not field then
-      field = InheritsFrom(typename, 'layeredregion') and 'regions'
-        or InheritsFrom(typename, 'animationgroup') and 'animationGroups'
-        or InheritsFrom(typename, 'controlpoint') and 'controlPoints'
-        or InheritsFrom(typename, 'animation') and 'animations'
-        or InheritsFrom(typename, 'actor') and 'actors'
-        or 'children'
-      childFieldByType[typename] = field
+  -- The set of uiobject types is fixed once loaded (intrinsics resolve to a
+  -- real base type rather than registering new ones), so this only needs
+  -- computing once; delayed until first use since types aren't all
+  -- registered yet while this module is still being constructed.
+  local childFieldByType
+  local function ChildFieldByType()
+    if not childFieldByType then
+      childFieldByType = {}
+      for _, name in ipairs(uiobjecttypes.Names()) do
+        childFieldByType[name] = InheritsFrom(name, 'layeredregion') and 'regions'
+          or InheritsFrom(name, 'animationgroup') and 'animationGroups'
+          or InheritsFrom(name, 'controlpoint') and 'controlPoints'
+          or InheritsFrom(name, 'animation') and 'animations'
+          or InheritsFrom(name, 'actor') and 'actors'
+          or 'children'
+      end
     end
-    return field
+    return childFieldByType
   end
 
   local function DoSetParent(obj, parent)
     if obj.parent == parent then
       return
     end
-    local field = ChildField(obj.type)
+    local field = ChildFieldByType()[obj.type]
     if obj.parent then
       local up = obj.parent
       up[field]:remove(obj)

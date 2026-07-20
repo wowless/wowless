@@ -42,6 +42,14 @@ return function()
     return uiobjectTypes[obj.type].isa[ty] or false
   end
 
+  local function Names()
+    local names = {}
+    for name in pairs(uiobjectTypes) do
+      table.insert(names, name)
+    end
+    return names
+  end
+
   return {
     Add = Add,
     GetObjectType = GetObjectType,
@@ -51,5 +59,6 @@ return function()
     HasScript = HasScript,
     InheritsFrom = InheritsFrom,
     IsObjectType = IsObjectType,
+    Names = Names,
   }
 end
