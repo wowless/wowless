@@ -5,6 +5,7 @@ return function(
   datalua,
   envmodule,
   events,
+  intrinsics,
   loadercfg,
   log,
   loglevel,
@@ -30,7 +31,6 @@ return function(
   local parseXml = xml
   local util = require('wowless.util')
   local mixin = util.mixin
-  local intrinsics = {}
   local readFile = util.readfile
   local bindings = bindingsmodule.bindings
   local securemixins = {}
@@ -519,7 +519,7 @@ return function(
 
       local function processAttrs(ctx, e, obj, phase)
         local objty = obj.type
-        local attrs = (xmlimpls[objty] or intrinsics[objty]).attrs
+        local attrs = xmlimpls[objty].attrs
         for k, v in pairs(e.attr) do
           local attr = attrs[k]
           if attr and phase == attr.phase then
@@ -592,8 +592,10 @@ return function(
       end
 
       function loadElement(ctx, e, parent)
-        -- This assumes that uiobject types and xml types are the same "space" of strings.
-        if uiobjecttypes.IsIntrinsicType(e.type) or e.type == 'worldframe' then
+        local ltype = string.lower(e.type)
+        local intrinsicEntry = intrinsics.Get(ltype)
+        -- uiobject types and intrinsic types share the same xml element namespace.
+        if uiobjecttypes.Has(ltype) or intrinsicEntry or e.type == 'worldframe' then
           ctx = not e.attr.intrinsic and ctx or mixin({}, ctx, { intrinsic = true })
           local template = {
             inherits = e.attr.inherits,
@@ -609,25 +611,10 @@ return function(
             assert(virtual ~= false, 'intrinsics cannot be explicitly non-virtual: ' .. e.type)
             assert(e.attr.name, 'cannot create anonymous intrinsic')
             local name = string.lower(e.attr.name)
-            if uiobjecttypes.Has(name) then
-              log(1, 'overwriting intrinsic %s', e.attr.name)
-            end
-            log(3, 'creating intrinsic %s', e.attr.name)
-            local basetype = string.lower(e.type)
-            local base = uiobjecttypes.GetOrThrow(basetype)
-            uiobjecttypes.Add(name, {
-              constructor = base.constructor,
-              ctype = base.ctype,
-              hostMT = base.hostMT,
-              isa = base.isa,
-              name = base.name,
-              sandboxMT = base.sandboxMT,
-              scripts = base.scripts,
-              template = template,
-            })
-            intrinsics[name] = xmlimpls[basetype]
+            local basetype = intrinsicEntry and intrinsicEntry.basetype or ltype
+            uiobjecttypes.GetOrThrow(basetype) -- validate basetype exists
+            intrinsics.Add(name, basetype, template)
           else
-            local ltype = string.lower(e.type)
             if (ltype == 'font' and e.attr.name) or (virtual and not ctx.ignoreVirtual) then
               assert(e.attr.name, 'cannot create anonymous template')
               templates.SetTemplate(e.attr.name, template)
@@ -637,10 +624,12 @@ return function(
               if virtual and ctx.ignoreVirtual then
                 log(1, 'ignoring virtual on %s', tostring(name))
               end
-              local ety = e.type == 'worldframe' and 'frame' or e.type
+              local basetype = intrinsicEntry and intrinsicEntry.basetype
+                or (e.type == 'worldframe' and 'frame' or ltype)
               local env = ctx.useAddonEnv and addonEnv or ctx.useSecureEnv and secureenv or genv
-              local objParent = uiobjecttypes.InheritsFrom(ety, 'parentedobjectbase') and parent or nil
-              return api.CreateUIObject(ety, name, objParent, env, { template }, nil, ctx.layer, ctx.sublevel)
+              local tmpls = intrinsicEntry and { intrinsicEntry.template, template } or { template }
+              local objParent = uiobjecttypes.InheritsFrom(basetype, 'parentedobjectbase') and parent or nil
+              return api.CreateUIObject(basetype, name, objParent, env, tmpls, nil, ctx.layer, ctx.sublevel)
             end
           end
         else

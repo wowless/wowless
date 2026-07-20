@@ -5,6 +5,7 @@ return function(
   datalua,
   env,
   events,
+  intrinsics,
   log,
   loglevel,
   parentkey,
@@ -27,9 +28,10 @@ return function(
     end
   end)()
 
+  local GetIntrinsic = intrinsics.Get
   local GetObjectType = uiobjecttypes.GetObjectType
+  local HasType = uiobjecttypes.Has
   local InheritsFrom = uiobjecttypes.InheritsFrom
-  local IsIntrinsicType = uiobjecttypes.IsIntrinsicType
   local IsObjectType = uiobjecttypes.IsObjectType
   local IsVisible = visibility.IsVisible
   local RunScript = scripts.RunScript
@@ -214,17 +216,22 @@ return function(
 
   local function CreateFrame(type, name, parent, templateNames, id)
     local ltype = string.lower(type)
-    if not IsIntrinsicType(ltype) or not InheritsFrom(ltype, 'frame') then
+    local intrinsicEntry = GetIntrinsic(ltype)
+    local basetype = intrinsicEntry and intrinsicEntry.basetype or ltype
+    if not HasType(basetype) or not InheritsFrom(basetype, 'frame') then
       if datalua.config.runtime.warners[ltype] then
         SendEvent('LUA_WARNING', 'Unknown frame type: ' .. type)
       end
       error('CreateFrame: Unknown frame type \'' .. type .. '\'', 0)
     end
     local tmpls = {}
+    if intrinsicEntry then
+      table.insert(tmpls, intrinsicEntry.template)
+    end
     for templateName in string.gmatch(templateNames or '', '[^, ]+') do
       table.insert(tmpls, templates.GetTemplateOrThrow(templateName))
     end
-    return CreateUIObject(ltype, name, parent, nil, tmpls, id)
+    return CreateUIObject(basetype, name, parent, nil, tmpls, id)
   end
 
   local function CreateChildUIObject(typename, self, name, inherits, layer, sublevel)
