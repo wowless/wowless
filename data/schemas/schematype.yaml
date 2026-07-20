@@ -4,6 +4,19 @@ type:
     any: tag
     boolean: tag
     flag: tag
+    hierarchy:
+      record:
+        of:
+          required: true
+          type:
+            schema: schematype
+        parent:
+          required: true
+          type: string
+        unique:
+          required: true
+          type:
+            setof: string
     literal: string
     mapof:
       record:
