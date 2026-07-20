@@ -5,6 +5,10 @@ return function()
     uiobjectTypes[name] = t
   end
 
+  local function GetChildField(name)
+    return uiobjectTypes[name].childField
+  end
+
   local function GetObjectType(obj)
     return uiobjectTypes[obj.type].name
   end
@@ -42,16 +46,9 @@ return function()
     return uiobjectTypes[obj.type].isa[ty] or false
   end
 
-  local function Names()
-    local names = {}
-    for name in pairs(uiobjectTypes) do
-      table.insert(names, name)
-    end
-    return names
-  end
-
   return {
     Add = Add,
+    GetChildField = GetChildField,
     GetObjectType = GetObjectType,
     GetOrThrow = GetOrThrow,
     GetSandboxMetatable = GetSandboxMetatable,
@@ -59,6 +56,5 @@ return function()
     HasScript = HasScript,
     InheritsFrom = InheritsFrom,
     IsObjectType = IsObjectType,
-    Names = Names,
   }
 end

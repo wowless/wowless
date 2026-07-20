@@ -1,6 +1,15 @@
 local util = require('wowless.util')
 local Mixin = util.mixin
 
+local function childField(isa)
+  return isa.layeredregion and 'regions'
+    or isa.animationgroup and 'animationGroups'
+    or isa.controlpoint and 'controlPoints'
+    or isa.animation and 'animations'
+    or isa.actor and 'actors'
+    or 'children'
+end
+
 return function(cstubs, datalua, gencode)
   local function flatten(types)
     local result = {}
@@ -43,6 +52,7 @@ return function(cstubs, datalua, gencode)
         sandboxMTindex[n] = factory()
       end
       t[k] = {
+        childField = childField(v.isa),
         constructor = v.constructor,
         ctype = v.ctype,
         hostMT = { __index = v.hostindex }, -- issue #657

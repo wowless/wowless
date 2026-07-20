@@ -28,6 +28,7 @@ return function(
     end
   end)()
 
+  local GetChildField = uiobjecttypes.GetChildField
   local GetIntrinsic = intrinsics.Get
   local GetObjectType = uiobjecttypes.GetObjectType
   local HasType = uiobjecttypes.Has
@@ -48,31 +49,11 @@ return function(
     'statusBarTexture',
   }
 
-  -- The set of uiobject types is fixed once loaded (intrinsics resolve to a
-  -- real base type rather than registering new ones), so this only needs
-  -- computing once; delayed until first use since types aren't all
-  -- registered yet while this module is still being constructed.
-  local childFieldByType
-  local function ChildFieldByType()
-    if not childFieldByType then
-      childFieldByType = {}
-      for _, name in ipairs(uiobjecttypes.Names()) do
-        childFieldByType[name] = InheritsFrom(name, 'layeredregion') and 'regions'
-          or InheritsFrom(name, 'animationgroup') and 'animationGroups'
-          or InheritsFrom(name, 'controlpoint') and 'controlPoints'
-          or InheritsFrom(name, 'animation') and 'animations'
-          or InheritsFrom(name, 'actor') and 'actors'
-          or 'children'
-      end
-    end
-    return childFieldByType
-  end
-
   local function DoSetParent(obj, parent)
     if obj.parent == parent then
       return
     end
-    local field = ChildFieldByType()[obj.type]
+    local field = GetChildField(obj.type)
     if obj.parent then
       local up = obj.parent
       up[field]:remove(obj)
