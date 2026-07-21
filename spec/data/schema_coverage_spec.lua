@@ -17,6 +17,8 @@ local function collectType(st, path, known, visited)
         collectType(mval, path .. '.' .. mname, known, visited)
       end
     end
+  elseif k == 'hierarchy' then
+    collectType({ mapof = { key = 'string', value = { record = v.fields } } }, path, known, visited)
   elseif k == 'mapof' then
     collectType(v.key, path .. '.__key', known, visited)
     collectType(v.value, path .. '.__val', known, visited)
@@ -63,6 +65,8 @@ local function trackType(st, value, path, used)
         end
       end
     end
+  elseif k == 'hierarchy' then
+    trackType({ mapof = { key = 'string', value = { record = v.fields } } }, value, path, used)
   elseif k == 'mapof' then
     if type(value) == 'table' then
       for mk, mv in pairs(value) do

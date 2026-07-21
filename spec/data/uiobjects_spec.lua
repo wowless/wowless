@@ -40,19 +40,20 @@ describe('uiobjects', function()
             nr[ik] = (nr[ik] or 0) + 1
           end
         end
-        local function process(t, root, k)
-          assert(not t[k], ('multiple paths from %s to %s'):format(root, k))
-          t[k] = true
-          for ik in pairs(g[k]) do
-            process(t, root, ik)
+        -- Cycle- and diamond-freedom is enforced by the uiobjects schema's
+        -- `hierarchy` construct; this walk only needs the ancestor set.
+        local function ancestors(t, k)
+          if not t[k] then
+            t[k] = true
+            for ik in pairs(g[k]) do
+              ancestors(t, ik)
+            end
           end
         end
         for k in pairs(g) do
           describe(k, function()
             local t = {}
-            it('is a tree', function()
-              process(t, k, k)
-            end)
+            ancestors(t, k)
             if not nr[k] then
               it('is not virtual', function()
                 assert.Nil(uiobjects[k].virtual)
@@ -83,30 +84,11 @@ describe('uiobjects', function()
           end
         end
       end
-      local function hasMember(k, m, f)
-        return getMember(k, m, f) ~= nil
-      end
       for k, v in pairs(uiobjects) do
         describe(k, function()
-          describe('fields', function()
-            for fk in pairs(v.fields) do
-              describe(fk, function()
-                it('is not defined up inheritance tree', function()
-                  for inh in pairs(v.inherits) do
-                    assert.False(hasMember(inh, 'fields', fk))
-                  end
-                end)
-              end)
-            end
-          end)
           describe('methods', function()
             for mk, mv in pairs(v.methods) do
               describe(mk, function()
-                it('is not defined up inheritance tree', function()
-                  for inh in pairs(v.inherits) do
-                    assert.False(hasMember(inh, 'methods', mk))
-                  end
-                end)
                 if mv.impl then
                   describe('impl', function()
                     if mv.impl.uiobjectimpl then

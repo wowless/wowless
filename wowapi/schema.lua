@@ -50,6 +50,77 @@ local compile
 local schemas = {}
 
 local complex = {
+  hierarchy = function(s)
+    local of = compile({ mapof = { key = 'string', value = { record = s.fields } } })
+    local parentfield = s.parent
+    local function parentsof(node)
+      if type(node) ~= 'table' then
+        return {}
+      end
+      local p = node[parentfield]
+      if p == nil then
+        return {}
+      elseif type(p) == 'string' then
+        return { p }
+      end
+      local ps = {}
+      for pk in pairs(p) do
+        ps[#ps + 1] = pk
+      end
+      return ps
+    end
+    return function(v, product)
+      local baseerrors = of(v, product)
+      if type(v) ~= 'table' then
+        return baseerrors
+      end
+      local errors = baseerrors or {}
+      local function shapeerror(root, k, seen)
+        if seen[k] then
+          return ('multiple paths from %s to %s'):format(root, k)
+        end
+        seen[k] = true
+        for _, p in ipairs(parentsof(v[k])) do
+          local e = shapeerror(root, p, seen)
+          if e then
+            return e
+          end
+        end
+      end
+      local function ancestorsof(k, seen)
+        for _, p in ipairs(parentsof(v[k])) do
+          if not seen[p] then
+            seen[p] = true
+            ancestorsof(p, seen)
+          end
+        end
+        return seen
+      end
+      for k, node in pairs(v) do
+        local e = shapeerror(k, k, {})
+        if e then
+          errors[k] = e
+        else
+          local anc = ancestorsof(k, {})
+          for f in pairs(s.unique) do
+            local mine = node[f]
+            if type(mine) == 'table' then
+              for ik in pairs(mine) do
+                for a in pairs(anc) do
+                  local an = v[a]
+                  if an and type(an[f]) == 'table' and an[f][ik] ~= nil then
+                    errors[k] = errors[k] or {}
+                    errors[k][f] = ('%s already defined by ancestor %s'):format(ik, a)
+                  end
+                end
+              end
+            end
+          end
+        end
+      end
+      return next(errors) and errors or nil
+    end
+  end,
   literal = function(s)
     return function(v)
       if v ~= s then

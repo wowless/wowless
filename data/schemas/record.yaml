@@ -1,0 +1,12 @@
+name: record
+type:
+  mapof:
+    key: string
+    value:
+      record:
+        required:
+          type: flag
+        type:
+          required: true
+          type:
+            schema: schematype
