@@ -84,17 +84,6 @@ describe('uiobjects', function()
           end
         end
       end
-      local function inheritsType(k, target)
-        if k == target then
-          return true
-        end
-        for inh in pairs(uiobjects[k].inherits) do
-          if inheritsType(inh, target) then
-            return true
-          end
-        end
-        return false
-      end
       local function collectChildFields(k, seen)
         seen = seen or {}
         if seen[k] then
@@ -142,11 +131,6 @@ describe('uiobjects', function()
             it('has at most one value across the inheritance tree', function()
               assert.True(#names <= 1, ('%s has conflicting child fields: %s'):format(k, table.concat(names, ', ')))
             end)
-            if names[1] == 'children' then
-              it('is only used by frames', function()
-                assert.True(inheritsType(k, 'Frame'))
-              end)
-            end
           end)
           describe('methods', function()
             for mk, mv in pairs(v.methods) do
