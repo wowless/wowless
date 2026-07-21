@@ -5,6 +5,10 @@ return function()
     uiobjectTypes[name] = t
   end
 
+  local function GetChildField(name)
+    return uiobjectTypes[name].childField
+  end
+
   local function GetObjectType(obj)
     return uiobjectTypes[obj.type].name
   end
@@ -44,6 +48,7 @@ return function()
 
   return {
     Add = Add,
+    GetChildField = GetChildField,
     GetObjectType = GetObjectType,
     GetOrThrow = GetOrThrow,
     GetSandboxMetatable = GetSandboxMetatable,

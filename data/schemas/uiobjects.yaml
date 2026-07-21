@@ -2,6 +2,8 @@ name: uiobjects
 type:
   hierarchy:
     fields:
+      childField:
+        type: string
       fieldinitoverrides:
         type:
           mapof:

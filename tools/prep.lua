@@ -332,6 +332,7 @@ for k, v in pairs(uiobjectdata) do
     scripts[sk:lower()] = true
   end
   uiobjects[k] = {
+    childField = v.childField,
     constructor = table.concat(constructor),
     inherits = v.inherits,
     objectType = v.objectType,
