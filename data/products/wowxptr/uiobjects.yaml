@@ -1,4 +1,5 @@
 Actor:
+  childField: actors
   fields:
     animationBlendOperation:
       init: 1
@@ -702,6 +703,7 @@ AnimatableObject:
       outputs:
   virtual: true
 Animation:
+  childField: animations
   fields:
     endDelay:
       init: 0
@@ -929,6 +931,7 @@ Animation:
     OnStop:
     OnUpdate:
 AnimationGroup:
+  childField: animationGroups
   fields:
     animations:
       type: hlist
@@ -1998,6 +2001,7 @@ ColorSelect:
   scripts:
     OnColorSelect:
 ControlPoint:
+  childField: controlPoints
   fields:
     offsetX:
       init: 0
@@ -3840,6 +3844,7 @@ FontString:
         type: boolean
       outputs:
 Frame:
+  childField: children
   fields:
     attributes:
       init:
@@ -4927,6 +4932,7 @@ GameTooltip:
     OnTooltipSetDefaultAnchor:
     OnTooltipSetFrameStack:
 LayeredRegion:
+  childField: regions
   fields:
     layer:
       init: ARTWORK

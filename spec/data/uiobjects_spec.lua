@@ -84,8 +84,54 @@ describe('uiobjects', function()
           end
         end
       end
+      local function collectChildFields(k, seen)
+        seen = seen or {}
+        if seen[k] then
+          return {}
+        end
+        seen[k] = true
+        local result = {}
+        if uiobjects[k].childField then
+          result[uiobjects[k].childField] = true
+        end
+        for inh in pairs(uiobjects[k].inherits) do
+          for cf in pairs(collectChildFields(inh, seen)) do
+            result[cf] = true
+          end
+        end
+        return result
+      end
+      describe('childField values', function()
+        local allValues = {}
+        for k in pairs(uiobjects) do
+          for cf in pairs(collectChildFields(k)) do
+            allValues[cf] = true
+          end
+        end
+        for cf in pairs(allValues) do
+          it(cf .. ' is a real hlist field on some uiobject', function()
+            local found = false
+            for _, tv in pairs(uiobjects) do
+              local f = tv.fields[cf]
+              if f and f.type == 'hlist' then
+                found = true
+              end
+            end
+            assert.True(found)
+          end)
+        end
+      end)
       for k, v in pairs(uiobjects) do
         describe(k, function()
+          describe('childField', function()
+            local names = {}
+            for cf in pairs(collectChildFields(k)) do
+              table.insert(names, cf)
+            end
+            it('has at most one value across the inheritance tree', function()
+              assert.True(#names <= 1, ('%s has conflicting child fields: %s'):format(k, table.concat(names, ', ')))
+            end)
+          end)
           describe('methods', function()
             for mk, mv in pairs(v.methods) do
               describe(mk, function()

@@ -28,6 +28,7 @@ return function(
     end
   end)()
 
+  local GetChildField = uiobjecttypes.GetChildField
   local GetIntrinsic = intrinsics.Get
   local GetObjectType = uiobjecttypes.GetObjectType
   local HasType = uiobjecttypes.Has
@@ -52,12 +53,7 @@ return function(
     if obj.parent == parent then
       return
     end
-    local field = IsObjectType(obj, 'layeredregion') and 'regions'
-      or IsObjectType(obj, 'animationgroup') and 'animationGroups'
-      or IsObjectType(obj, 'controlpoint') and 'controlPoints'
-      or IsObjectType(obj, 'animation') and 'animations'
-      or IsObjectType(obj, 'actor') and 'actors'
-      or 'children'
+    local field = GetChildField(obj.type)
     if obj.parent then
       local up = obj.parent
       up[field]:remove(obj)

@@ -12,6 +12,7 @@ return function(cstubs, datalua, gencode)
         local scripts = Mixin({}, ty.scripts or {})
         local hostindex = {}
         local sandboxindex = {}
+        local childField = ty.cfg.childField
         for inh in pairs(ty.inherits) do
           flattenOne(inh)
           local r = result[string.lower(inh)]
@@ -19,10 +20,12 @@ return function(cstubs, datalua, gencode)
           Mixin(scripts, r.scripts)
           Mixin(hostindex, r.hostindex)
           Mixin(sandboxindex, r.sandboxindex)
+          childField = childField or r.childField
         end
         Mixin(hostindex, ty.hostindex) -- do this last in case of overrides
         Mixin(sandboxindex, ty.sandboxindex)
         result[lk] = {
+          childField = childField,
           constructor = ty.constructor,
           ctype = ty.cfg.uitype_bit,
           hostindex = hostindex,
@@ -43,6 +46,7 @@ return function(cstubs, datalua, gencode)
         sandboxMTindex[n] = factory()
       end
       t[k] = {
+        childField = v.childField,
         constructor = v.constructor,
         ctype = v.ctype,
         hostMT = { __index = v.hostindex }, -- issue #657
