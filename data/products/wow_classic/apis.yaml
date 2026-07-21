@@ -19526,6 +19526,11 @@ C_TransmogOutfitInfo.IsSlotWeaponSlot:
   outputs:
   - name: isWeaponSlot
     type: boolean
+C_TransmogOutfitInfo.IsTransmogEnabled:
+  inputs:
+  outputs:
+  - name: enabled
+    type: boolean
 C_TransmogOutfitInfo.IsUsableDiscountAvailable:
   inputs:
   outputs:
