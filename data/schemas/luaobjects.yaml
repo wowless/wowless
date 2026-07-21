@@ -1,55 +1,54 @@
 name: luaobjects
 type:
   hierarchy:
+    fields:
+      impl:
+        type:
+          ref:
+            schema: module
+      inherits:
+        type:
+          ref:
+            schema: luaobject
+      methods:
+        required: true
+        type:
+          mapof:
+            key: string
+            value:
+              record:
+                inputs:
+                  type:
+                    sequenceof:
+                      record:
+                        default:
+                          type: any
+                        name:
+                          required: true
+                          type: string
+                        nilable:
+                          type: flag
+                        type:
+                          required: true
+                          type:
+                            schema: type
+                mayreturnnothing:
+                  type: flag
+                outputs:
+                  type:
+                    sequenceof:
+                      record:
+                        name:
+                          required: true
+                          type: string
+                        nilable:
+                          type: flag
+                        type:
+                          required: true
+                          type:
+                            schema: type
+      virtual:
+        type: flag
     parent: inherits
     unique:
       methods:
-    value:
-      record:
-        impl:
-          type:
-            ref:
-              schema: module
-        inherits:
-          type:
-            ref:
-              schema: luaobject
-        methods:
-          required: true
-          type:
-            mapof:
-              key: string
-              value:
-                record:
-                  inputs:
-                    type:
-                      sequenceof:
-                        record:
-                          default:
-                            type: any
-                          name:
-                            required: true
-                            type: string
-                          nilable:
-                            type: flag
-                          type:
-                            required: true
-                            type:
-                              schema: type
-                  mayreturnnothing:
-                    type: flag
-                  outputs:
-                    type:
-                      sequenceof:
-                        record:
-                          name:
-                            required: true
-                            type: string
-                          nilable:
-                            type: flag
-                          type:
-                            required: true
-                            type:
-                              schema: type
-        virtual:
-          type: flag

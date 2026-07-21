@@ -757,6 +757,7 @@ list(
   luaobjects
   modules
   products
+  record
   schema
   schematype
   scripttypes
