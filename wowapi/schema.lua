@@ -51,7 +51,7 @@ local schemas = {}
 
 local complex = {
   hierarchy = function(s)
-    local of = compile(s.of)
+    local of = compile({ mapof = { key = 'string', value = s.value } })
     local parentfield = s.parent
     local function parentsof(node)
       if type(node) ~= 'table' then

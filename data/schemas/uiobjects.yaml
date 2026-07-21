@@ -1,131 +1,128 @@
 name: uiobjects
 type:
   hierarchy:
-    of:
-      mapof:
-        key: string
-        value:
-          record:
-            fieldinitoverrides:
-              type:
-                mapof:
-                  key: string
-                  value: any
-            fields:
-              required: true
-              type:
-                mapof:
-                  key: string
-                  value:
-                    record:
-                      dynamicinit:
-                        type: flag
-                      init:
-                        type: any
-                      nilable:
-                        type: flag
-                      type:
-                        required: true
-                        type:
-                          schema: type
-            inherits:
-              required: true
-              type:
-                setof:
-                  ref:
-                    schema: uiobject
-            methods:
-              required: true
-              type:
-                mapof:
-                  key: string
-                  value:
-                    record:
-                      impl:
-                        type:
-                          taggedunion:
-                            getter:
-                              sequenceof:
-                                record:
-                                  name:
-                                    required: true
-                                    type: string
-                            setter:
-                              sequenceof:
-                                record:
-                                  name:
-                                    required: true
-                                    type: string
-                            settexture:
-                              record:
-                                extra:
-                                  type: string
-                                field:
-                                  required: true
-                                  type: string
-                                return:
-                                  type: flag
-                                shown:
-                                  type: string
-                            uiobjectimpl:
-                              ref:
-                                schema: uiobjectimpl
-                      inputs:
-                        type:
-                          sequenceof:
-                            record:
-                              default:
-                                type: any
-                              name:
-                                required: true
-                                type: string
-                              nilable:
-                                type: flag
-                              permissive:
-                                type: flag
-                              type:
-                                required: true
-                                type:
-                                  schema: type
-                      instride:
-                        type: number
-                      manualinputs:
-                        type: flag
-                      mayreturnnothing:
-                        type: flag
-                      outputs:
-                        type:
-                          sequenceof:
-                            record:
-                              name:
-                                required: true
-                                type: string
-                              nilable:
-                                type: flag
-                              stub:
-                                type: any
-                              stubnotnil:
-                                type: flag
-                              type:
-                                required: true
-                                type:
-                                  schema: type
-                      outstride:
-                        type: number
-                      stuboutstrides:
-                        type: number
-            objectType:
-              type: string
-            scripts:
-              type:
-                setof:
-                  ref:
-                    schema: scripttype
-            singleton:
-              type: flag
-            virtual:
-              type: flag
     parent: inherits
     unique:
       fields:
       methods:
+    value:
+      record:
+        fieldinitoverrides:
+          type:
+            mapof:
+              key: string
+              value: any
+        fields:
+          required: true
+          type:
+            mapof:
+              key: string
+              value:
+                record:
+                  dynamicinit:
+                    type: flag
+                  init:
+                    type: any
+                  nilable:
+                    type: flag
+                  type:
+                    required: true
+                    type:
+                      schema: type
+        inherits:
+          required: true
+          type:
+            setof:
+              ref:
+                schema: uiobject
+        methods:
+          required: true
+          type:
+            mapof:
+              key: string
+              value:
+                record:
+                  impl:
+                    type:
+                      taggedunion:
+                        getter:
+                          sequenceof:
+                            record:
+                              name:
+                                required: true
+                                type: string
+                        setter:
+                          sequenceof:
+                            record:
+                              name:
+                                required: true
+                                type: string
+                        settexture:
+                          record:
+                            extra:
+                              type: string
+                            field:
+                              required: true
+                              type: string
+                            return:
+                              type: flag
+                            shown:
+                              type: string
+                        uiobjectimpl:
+                          ref:
+                            schema: uiobjectimpl
+                  inputs:
+                    type:
+                      sequenceof:
+                        record:
+                          default:
+                            type: any
+                          name:
+                            required: true
+                            type: string
+                          nilable:
+                            type: flag
+                          permissive:
+                            type: flag
+                          type:
+                            required: true
+                            type:
+                              schema: type
+                  instride:
+                    type: number
+                  manualinputs:
+                    type: flag
+                  mayreturnnothing:
+                    type: flag
+                  outputs:
+                    type:
+                      sequenceof:
+                        record:
+                          name:
+                            required: true
+                            type: string
+                          nilable:
+                            type: flag
+                          stub:
+                            type: any
+                          stubnotnil:
+                            type: flag
+                          type:
+                            required: true
+                            type:
+                              schema: type
+                  outstride:
+                    type: number
+                  stuboutstrides:
+                    type: number
+        objectType:
+          type: string
+        scripts:
+          type:
+            setof:
+              ref:
+                schema: scripttype
+        singleton:
+          type: flag
+        virtual:
+          type: flag

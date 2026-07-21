@@ -6,10 +6,6 @@ type:
     flag: tag
     hierarchy:
       record:
-        of:
-          required: true
-          type:
-            schema: schematype
         parent:
           required: true
           type: string
@@ -17,6 +13,10 @@ type:
           required: true
           type:
             setof: string
+        value:
+          required: true
+          type:
+            schema: schematype
     literal: string
     mapof:
       record:
