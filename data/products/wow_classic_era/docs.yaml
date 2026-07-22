@@ -355,6 +355,18 @@ lies:
               _change:
                 from: string
                 to: unknown
+    GameTooltip:
+      SetText:
+        inputs:
+          2:
+            _add:
+              nilable: true
+          3:
+            _add:
+              nilable: true
+          4:
+            _add:
+              nilable: true
     LayeredRegion:
       GetVertexColor:
         _remove:
