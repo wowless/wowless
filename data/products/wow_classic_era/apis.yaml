@@ -25682,6 +25682,10 @@ GetTradePlayerItemInfo:
     type: string
   - name: canLoseTransmog
     type: boolean
+  - name: isBound
+    type: boolean
+  - name: itemID
+    type: number
 GetTradePlayerItemLink:
   inputs:
   - name: index
@@ -25802,6 +25806,8 @@ GetTradeTargetItemInfo:
   - name: enchantment
     nilable: true
     type: string
+  - name: itemID
+    type: number
 GetTradeTargetItemLink:
   inputs:
   - name: index
