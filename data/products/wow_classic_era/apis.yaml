@@ -27323,7 +27323,8 @@ RegisterEventCallback:
   - name: eventName
     type: string
   - name: callback
-    type: function
+    type:
+      luaobject: LuaFunctionContainer
   outputs:
 RegisterStaticConstants:
 RegisterUnitEventCallback:
@@ -27331,7 +27332,8 @@ RegisterUnitEventCallback:
   - name: eventName
     type: string
   - name: callback
-    type: function
+    type:
+      luaobject: LuaFunctionContainer
   - name: unit
     type: unit
   outputs:
@@ -29883,14 +29885,16 @@ UnregisterEventCallback:
   - name: eventName
     type: string
   - name: callback
-    type: function
+    type:
+      luaobject: LuaFunctionContainer
   outputs:
 UnregisterUnitEventCallback:
   inputs:
   - name: eventName
     type: string
   - name: callback
-    type: function
+    type:
+      luaobject: LuaFunctionContainer
   - name: unit
     type: unit
   outputs:

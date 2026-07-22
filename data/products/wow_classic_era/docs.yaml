@@ -625,6 +625,9 @@ typedefs:
       structure: ItemLocation
   EncounterTimelineEventID:
     type: number
+  EventCallbackType:
+    type:
+      luaobject: LuaFunctionContainer
   FileAsset:
     type: FileAsset
   fileID:
@@ -633,6 +636,9 @@ typedefs:
     type: string
   FontAsset:
     type: string
+  FrameEventCallbackType:
+    type:
+      luaobject: LuaFunctionContainer
   FrameScriptObject:
     type:
       uiobject: UIObject
