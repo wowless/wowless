@@ -156,6 +156,7 @@ lies:
     AuraFrameOrientation:
     BagsDirection:
     BagsOrientation:
+    CharSectionCondition:
     ConfigurationWarning:
     CooldownViewerBarContent:
     CooldownViewerIconDirection:
@@ -191,6 +192,7 @@ lies:
     MicroMenuOrientation:
     RaidGroupDisplayType:
     SortPlayersBy:
+    UnitTokenType:
     ViewArenaSize:
     ViewRaidSize:
     WarbandEventState:

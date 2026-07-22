@@ -3260,6 +3260,13 @@ C_ChatInfo.PerformEmote:
   - name: success
     type: boolean
 C_ChatInfo.RegisterAddonMessagePrefix:
+  inputs:
+  - name: prefix
+    type: string
+  outputs:
+  - name: result
+    type:
+      enum: RegisterAddonMessagePrefixResult
 C_ChatInfo.ReplaceIconAndGroupExpressions:
   inputs:
   - name: input
@@ -3277,7 +3284,38 @@ C_ChatInfo.ReportServerLag:
   inputs:
   outputs:
 C_ChatInfo.SendAddonMessage:
+  inputs:
+  - name: prefix
+    type: string
+  - name: message
+    type: string
+  - name: chatType
+    nilable: true
+    type: string
+  - name: target
+    nilable: true
+    type: string
+  outputs:
+  - name: result
+    type:
+      enum: SendAddonMessageResult
 C_ChatInfo.SendAddonMessageLogged:
+  inputs:
+  - name: prefix
+    type: string
+  - name: message
+    type: string
+  - name: chatType
+    nilable: true
+    type: string
+  - name: target
+    nilable: true
+    type: string
+  outputs:
+  - name: result
+    nilable: true
+    type:
+      enum: SendAddonMessageResult
 C_ChatInfo.SendCautionaryChatMessage:
   inputs:
   - name: confirmNumber
@@ -9293,6 +9331,12 @@ C_HousingBasicMode.SetGridVisible:
   - name: gridVisible
     type: boolean
   outputs:
+C_HousingBasicMode.StartPlacingNewDecor:
+  inputs:
+  - name: catalogEntryVariantID
+    type:
+      structure: HousingCatalogEntryVariantID
+  outputs:
 C_HousingBasicMode.StartPlacingPreviewDecor:
   inputs:
   - name: decorRecordID
@@ -9301,10 +9345,23 @@ C_HousingBasicMode.StartPlacingPreviewDecor:
     nilable: true
     type: number
   outputs:
+C_HousingCatalog.CreateCatalogSearcher:
+  inputs:
+  outputs:
+  - name: searcher
+    type: string
 C_HousingCatalog.DeletePreviewCartDecor:
   inputs:
   - name: decorGUID
     type: string
+  outputs:
+C_HousingCatalog.DestroyEntry:
+  inputs:
+  - name: entryVariantID
+    type:
+      structure: HousingCatalogEntryVariantID
+  - name: destroyAll
+    type: boolean
   outputs:
 C_HousingCatalog.GetAllFilterTagGroups:
   inputs:
@@ -9347,6 +9404,46 @@ C_HousingCatalog.GetCatalogCategoryAndSubcategoryNames:
     type: string
   - name: subcategoryName
     type: string
+C_HousingCatalog.GetCatalogCategoryInfo:
+  inputs:
+  - name: categoryID
+    type: number
+  outputs:
+  - name: info
+    nilable: true
+    type:
+      structure: C_HousingCatalog.HousingCatalogCategoryInfo
+C_HousingCatalog.GetCatalogEntryInfo:
+  inputs:
+  - name: entryID
+    type:
+      structure: HousingCatalogEntryID
+  outputs:
+  - name: info
+    nilable: true
+    type:
+      structure: C_HousingCatalog.HousingCatalogEntryInfo
+C_HousingCatalog.GetCatalogEntryInfoByItem:
+  inputs:
+  - name: itemInfo
+    type: string
+  outputs:
+  - name: info
+    nilable: true
+    type:
+      structure: C_HousingCatalog.HousingCatalogEntryInfo
+C_HousingCatalog.GetCatalogEntryInfoByRecordID:
+  inputs:
+  - name: entryType
+    type:
+      enum: HousingCatalogEntryType
+  - name: recordID
+    type: number
+  outputs:
+  - name: info
+    nilable: true
+    type:
+      structure: C_HousingCatalog.HousingCatalogEntryInfo
 C_HousingCatalog.GetCatalogEntryRefundTimeStampByRecordID:
   inputs:
   - name: entryType
@@ -9368,6 +9465,15 @@ C_HousingCatalog.GetCatalogEntryVariantInfo:
     nilable: true
     type:
       structure: C_HousingCatalog.HousingCatalogEntryVariantInfo
+C_HousingCatalog.GetCatalogSubcategoryInfo:
+  inputs:
+  - name: subcategoryID
+    type: number
+  outputs:
+  - name: info
+    nilable: true
+    type:
+      structure: C_HousingCatalog.HousingCatalogSubcategoryInfo
 C_HousingCatalog.GetDecorMaxOwnedCount:
   inputs:
   outputs:
@@ -9463,6 +9569,24 @@ C_HousingCatalog.RequestHousingMarketInfoRefresh:
 C_HousingCatalog.RequestHousingMarketRefundInfo:
   inputs:
   outputs:
+C_HousingCatalog.SearchCatalogCategories:
+  inputs:
+  - name: searchParams
+    type:
+      structure: C_HousingCatalog.HousingCategorySearchInfo
+  outputs:
+  - name: categoryIDs
+    type:
+      arrayof: number
+C_HousingCatalog.SearchCatalogSubcategories:
+  inputs:
+  - name: searchParams
+    type:
+      structure: C_HousingCatalog.HousingCategorySearchInfo
+  outputs:
+  - name: subcategoryIDs
+    type:
+      arrayof: number
 C_HousingCatalog.SetPreviewCartItemShown:
   inputs:
   - name: decorGUID

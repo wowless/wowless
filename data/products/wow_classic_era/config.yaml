@@ -37,9 +37,16 @@ addon:
     raidGraphicsTextureResolution:
     RenderScale:
   overwritten_apis:
-    C_ChatInfo.RegisterAddonMessagePrefix:
-    C_ChatInfo.SendAddonMessage:
-    C_ChatInfo.SendAddonMessageLogged:
+    C_HousingBasicMode.StartPlacingNewDecor:
+    C_HousingCatalog.CreateCatalogSearcher:
+    C_HousingCatalog.DestroyEntry:
+    C_HousingCatalog.GetCatalogCategoryInfo:
+    C_HousingCatalog.GetCatalogEntryInfo:
+    C_HousingCatalog.GetCatalogEntryInfoByItem:
+    C_HousingCatalog.GetCatalogEntryInfoByRecordID:
+    C_HousingCatalog.GetCatalogSubcategoryInfo:
+    C_HousingCatalog.SearchCatalogCategories:
+    C_HousingCatalog.SearchCatalogSubcategories:
     C_Traits.GetConditionInfo:
     C_Traits.GetEntryInfo:
     C_Traits.GetTreeInfo:

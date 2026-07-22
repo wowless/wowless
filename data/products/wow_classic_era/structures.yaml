@@ -5015,12 +5015,6 @@ C_Traits.TreeCurrencyInfo:
       type: number
     traitCurrencyID:
       type: number
-C_Transmog.TransmogApplyWarningInfo:
-  fields:
-    itemLink:
-      type: string
-    text:
-      type: string
 C_Transmog.TransmogSlotVisualInfo:
   fields:
     appliedSourceID:
@@ -6646,21 +6640,6 @@ C_UIWidgetManager.TextureWithAnimationVisualizationInfo:
       type: number
     widgetTag:
       type: string
-C_UIWidgetManager.TextureWithStateVisualizationInfo:
-  fields:
-    backgroundTextureKitID:
-      type: number
-    name:
-      type: string
-    orderIndex:
-      type: number
-    portraitTextureKitID:
-      type: number
-    shownState:
-      type:
-        enum: WidgetShownState
-    widgetTag:
-      type: string
 C_UIWidgetManager.TextWithStateWidgetVisualizationInfo:
   fields:
     bottomPadding:
@@ -8281,9 +8260,6 @@ SpellPowerCostInfo:
 TransmogLocation:
   fields:
   mixin: TransmogLocationMixin
-TransmogPendingInfo:
-  fields:
-  mixin: TransmogPendingInfoMixin
 uiBoundsRect:
   fields:
     bottom:

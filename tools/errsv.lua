@@ -172,6 +172,14 @@ end
 do
   local fn = 'data/products/' .. product .. '/apis.yaml'
   local apis = yaml.parseFile(fn)
+  local cf = 'data/products/' .. product .. '/config.yaml'
+  local config
+  local configDirty = false
+  local function overwrittenApis()
+    config = config or yaml.parseFile(cf)
+    configDirty = true
+    return config.addon.overwritten_apis
+  end
   for ns, nt in pairs(data.generated.apiNamespaces or {}) do
     if type(nt) == 'string' then
       if nt:match(': want "nil", got "table"$') then
@@ -199,9 +207,9 @@ do
           assert(next(mv) == 'impltype')
           assert(next(mv, 'impltype') == nil)
           if mv.impltype:match(': want true, got false$') then
-            apis[funcname] = {}
+            overwrittenApis()[funcname] = nil
           elseif mv.impltype:match(': want false, got true$') then
-            apis[funcname] = nil
+            overwrittenApis()[funcname] = {}
           else
             error('unexpected error on ' .. funcname)
           end
@@ -214,6 +222,9 @@ do
     end
   end
   write(fn, yaml.pprint(apis))
+  if configDirty then
+    write(cf, yaml.pprint(config))
+  end
 end
 
 do
@@ -234,6 +245,14 @@ end
 do
   local fn = 'data/products/' .. product .. '/apis.yaml'
   local apis = yaml.parseFile(fn)
+  local cf = 'data/products/' .. product .. '/config.yaml'
+  local config
+  local configDirty = false
+  local function overwrittenApis()
+    config = config or yaml.parseFile(cf)
+    configDirty = true
+    return config.addon.overwritten_apis
+  end
   for k, v in pairs(data.generated.globalApis or {}) do
     if type(v) == 'string' then
       assert(v:match(': want "function", got "nil"$'))
@@ -242,9 +261,9 @@ do
       assert(next(v) == 'impltype', ('%q: expected impltype, got %q'):format(k, next(v)))
       assert(next(v, 'impltype') == nil)
       if v.impltype:match(': want true, got false$') then
-        apis[k] = {}
+        overwrittenApis()[k] = nil
       elseif v.impltype:match(': want false, got true$') then
-        apis[k] = nil
+        overwrittenApis()[k] = {}
       else
         error(k)
       end
@@ -253,6 +272,9 @@ do
     end
   end
   write(fn, yaml.pprint(apis))
+  if configDirty then
+    write(cf, yaml.pprint(config))
+  end
 end
 
 for k, v in pairs(data.generated.uiobjects or {}) do
