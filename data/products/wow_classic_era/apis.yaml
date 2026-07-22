@@ -21288,12 +21288,13 @@ CreateFromMixins:
 CreateMacro:
 CreateNewRaidProfile:
 CreateSecureDelegate:
+  impl: CreateSecureDelegate
   inputs:
   - name: luaFunction
-    type: unknown
+    type: function
   outputs:
   - name: secureDelegateFunction
-    type: unknown
+    type: function
 CreateUnitHealPredictionCalculator:
   inputs:
   outputs:

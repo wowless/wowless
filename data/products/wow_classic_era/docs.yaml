@@ -31,6 +31,17 @@ lies:
       outputs:
       - _add:
           nilable: true
+    CreateSecureDelegate:
+      inputs:
+      - type:
+          _change:
+            from: unknown
+            to: function
+      outputs:
+      - type:
+          _change:
+            from: unknown
+            to: function
     GetFileIDFromPath:
       outputs:
       - _add:
