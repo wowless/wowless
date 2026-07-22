@@ -1,3 +1,7 @@
+AbbreviateConfig:
+  methods:
+LuaCurveObjectBase:
+  methods:
 LuaFunctionContainer:
   impl: funtainer
   methods:

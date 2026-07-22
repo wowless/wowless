@@ -494,6 +494,8 @@ lies:
         - _add:
             nilable: true
 script_objects:
+  AbbreviateConfigAPI:
+    luaobject: AbbreviateConfig
   FrameAPICharacterModelBase:
     uiobject: PlayerModel
   FrameAPICinematicModel:
@@ -518,6 +520,8 @@ script_objects:
     uiobject: TabardModel
   FrameAPIUnitPositionFrame:
     uiobject: UnitPositionFrame
+  LuaCurveObjectBaseAPI:
+    luaobject: LuaCurveObjectBase
   MinimapFrameAPI:
     uiobject: Minimap
   SimpleAnimAlphaAPI:
