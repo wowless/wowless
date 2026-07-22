@@ -277,7 +277,28 @@ if data.generated['~cfuncs'] then
       assert(#names == 1, k)
       apis[names[1]] = {}
     elseif v:match(': multiple true names$') then
-      print('multiple true names: ' .. table.concat(names, ', '))
+      local namespaced, aliases = {}, {}
+      for _, name in ipairs(names) do
+        if name:find('%.') then
+          table.insert(namespaced, name)
+        else
+          table.insert(aliases, name)
+        end
+      end
+      local nsapi = #namespaced == 1 and apis[namespaced[1]]
+      local hasStub = false
+      for _, o in ipairs(nsapi and nsapi.outputs or {}) do
+        if o.stub ~= nil then
+          hasStub = true
+        end
+      end
+      if #namespaced == 1 and #aliases == #names - 1 and nsapi and not nsapi.impl and not hasStub then
+        for _, name in ipairs(aliases) do
+          apis[name] = nil
+        end
+      else
+        print('multiple true names: ' .. table.concat(names, ', '))
+      end
     else
       error('unexpected cfuncs error: ' .. v)
     end
