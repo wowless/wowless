@@ -95,6 +95,9 @@ end)()
 local function applyPatterns(tx, ty)
   for k, v in pairs(ty) do
     if type(v) == 'table' then
+      if tx[k] == nil then
+        tx[k] = {}
+      end
       applyPatterns(tx[k], v)
     else
       local match, value = getPatternValue(v)
@@ -132,7 +135,23 @@ if data.generated.globals then
   else
     local gf = 'data/products/' .. product .. '/globals.yaml'
     local g = yaml.parseFile(gf)
+    if gv.Enum then
+      for k in pairs(gv.Enum) do
+        local base = k:match('^(.+)Meta$')
+        if base and ((g.Enum or {})[base] or gv.Enum[base]) then
+          gv.Enum[k] = nil
+        end
+      end
+    end
     applyPatterns(g, gv)
+    if gv.Enum then
+      for k in pairs(gv.Enum) do
+        local ev = g.Enum[k]
+        if type(ev) == 'table' and next(ev) == nil then
+          ev.Placeholder = 1
+        end
+      end
+    end
     write(gf, yaml.pprint(g))
   end
 end

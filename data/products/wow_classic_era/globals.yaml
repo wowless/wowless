@@ -1,19 +1,79 @@
 Constants:
   AccountStoreConsts:
+    KegLegRenownCurrencyID: 2814
     PlunderstormPlunderCurrencyID: 3139
     PlunderstormStoreFrontID: 1
+    WowhackStoreFrontID: 3
   AuctionConstants:
     DEFAULT_AUCTION_PRICE_MULTIPLIER: 1.5
+  CAAConstants:
+    CAADebuffSelfAlertDefault: 0
+    CAAFrequencyDefault: 0
+    CAAFrequencyMax: 10
+    CAAFrequencyMin: -10
+    CAAInterruptCastDefault: 0
+    CAAInterruptCastSuccessDefault: 0
+    CAAMinCastTimeDefault: 1.5
+    CAAMinCastTimeMax: 5
+    CAAMinCastTimeMin: 0
+    CAAMinCastTimeStep: 0.5
+    CAAPartyHealthPercentDefault: 0
+    CAAPlayerCastFormatDefault: 4
+    CAAPlayerCastModeDefault: 0
+    CAAPlayerHealthFormatDefault: 1
+    CAAPlayerHealthPercentDefault: 0
+    CAAPlayerResourceFormatDefault: 1
+    CAAPlayerResourcePercentDefault: 0
+    CAASamePercentThrottleTime: 10
+    CAASampleTextThrottleTime: 1
+    CAASayIfTargetedDefault: 1
+    CAASayYourDebuffsFormatDefault: 0
+    CAASayYourDebuffsMinDurationDefault: 1.5
+    CAASayYourDebuffsMinDurationMax: 5
+    CAASayYourDebuffsMinDurationMin: 0
+    CAASayYourDebuffsMinDurationStep: 0.5
+    CAATargetCastFormatDefault: 0
+    CAATargetCastModeDefault: 0
+    CAATargetDeathBehaviorDefault: 0
+    CAATargetHealthFormatDefault: 3
+    CAATargetHealthPercentDefault: 2
+    CAAThrottleDefault: 0
+    CAAThrottleMax: 5
+    CAAThrottleMin: 0
+    CAAThrottleStep: 0.5
+    CAAVoiceDefault: 0
   CalendarGetEventTypeConstants:
     DEFAULT_CALENDAR_GET_EVENT_TYPE: 0
+  CatalogShopVirtualCurrencyConstants:
   CharCustomizationConstants:
     CHAR_CUSTOMIZE_CUSTOM_DISPLAY_OPTION_FIRST: 5
     CHAR_CUSTOMIZE_CUSTOM_DISPLAY_OPTION_LAST: 8
     NAME_RESERVATION_DAYS: 30
     NUM_CUSTOM_DISPLAY: 4
+  ChatFrameConstants:
+    MaxCharacterNameBytes: 305
+    MaxChatChannels: 20
+    MaxChatWindows: 10
+  CombatLogMessageLimits:
+    CombatLogDefaultMessageLimit: 300
+    CombatLogMaximumMessageLimit: 1000
+  CombatLogObjectMasks:
+    COMBATLOG_OBJECT_AFFILIATION_MASK: 15
+    COMBATLOG_OBJECT_CONTROL_MASK: 768
+    COMBATLOG_OBJECT_REACTION_MASK: 240
+    COMBATLOG_OBJECT_SPECIAL_MASK: -65536
+    COMBATLOG_OBJECT_TYPE_MASK: 64512
+  CombatLogObjectTargetMasks:
+    COMBATLOG_OBJECT_RAID_MASK: -1
+    COMBATLOG_OBJECT_RAID_TARGET_MASK: 255
   ContentTrackingConsts:
     MaxTrackedAchievements: 10
     MaxTrackedCollectableSources: 15
+  CooldownFrameDefaults:
+    COOLDOWN_DEFAULT_BLING_DURATION_MS: 1000
+    COOLDOWN_DEFAULT_COUNTDOWN_ABBREV_THRESHOLD_MS: 120000
+    COOLDOWN_DEFAULT_COUNTDOWN_MILLISECOND_THRESHOLD_MS: 0
+    COOLDOWN_DEFAULT_COUNTDOWN_MINIMUM_DURATION_MS: 2000
   CooldownViewerUIConstants:
     COOLDOWN_VIEWER_CATEGORY_SET_SIZE: 16
     COOLDOWN_VIEWER_LINKED_SPELLS_SIZE: 4
@@ -39,6 +99,7 @@ Constants:
     CURRENCY_ID_RENOWN_VENTHYR: 1830
     CURRENCY_ID_RESERVOIR_ANIMA: 1813
     CURRENCY_ID_WILLING_SOUL: 1810
+    CURRENCY_WALLET_TYPE_WOWMONEY: 0
     DRAGON_ISLES_SUPPLIES_CURRENCY_ID: 2003
     ECHOES_OF_NYALOTHA_CURRENCY_ID: 1803
     HONOR_CURRENCY_ID: 1792
@@ -56,14 +117,39 @@ Constants:
     DELVES_COMPANION_TOOLTIP_WIDGET_SET_ID: 1331
     DELVES_MIN_PLAYER_LEVEL_CONTENT_TUNING_ID: 2677
     DELVES_NORMAL_KEY_CURRENCY_ID: 3028
+  EditModeConsts:
+    EditModeDefaultGridSpacing: 100
+    EditModeMaxGridSpacing: 300
+    EditModeMaxLayoutsPerType: 5
+    EditModeMinGridSpacing: 20
+  EditModeLayoutConsts:
+    EditModeDefaultLayout: 1
   EncodingLimits:
     EncodingDecompressSizeLimit: 104857600
     EncodingStackSizeLimit: 100
+  EncounterTimelineEventConstants:
+    ENCOUNTER_TIMELINE_INVALID_EVENT: 0
+    ENCOUNTER_TIMELINE_RESERVED_EVENT_COUNT: 40
+  EncounterTimelineIconMasks:
+    EncounterTimelineAllIcons: 1023
+    EncounterTimelineDamageAlertIcons: 512
+    EncounterTimelineDeadlyIcons: 1
+    EncounterTimelineDispelIcons: 124
+    EncounterTimelineEnrageIcons: 2
+    EncounterTimelineHealerAlertIcons: 256
+    EncounterTimelineNoIcons: 0
+    EncounterTimelineOtherIcons: 127
+    EncounterTimelineRoleIcons: 896
+    EncounterTimelineTankAlertIcons: 128
   EventScheduler:
     SCHEDULED_EVENT_FUTURE_LIMIT: 12
     SCHEDULED_EVENT_PAST_LIMIT_SECONDS: 3600
     SCHEDULED_EVENT_REMINDER_DEAD_SECONDS: 10
     SCHEDULED_EVENT_REMINDER_WARNING_SECONDS: 300
+  HousingCatalogConsts:
+    HOUSING_CATALOG_ALL_CATEGORY_ID: 18
+    HOUSING_CATALOG_DECOR_MODELSCENEID_DEFAULT: 1317
+    HOUSING_CATALOG_FEATURED_CATEGORY_ID: 17
   InventoryConstants:
     NumBagSlots: 4
     NumBankBagSlots: 6
@@ -73,7 +159,15 @@ Constants:
     ITEM_WEAPON_SUBCLASS_EXOTIC2H: 12
     ITEM_WEAPON_SUBCLASS_SPEAR: 17
   ITEM_WEAPON_SUBCLASSConstants:
+    ITEM_WEAPON_SUBCLASS_IS2HWEAPON_MASK: 1049954
+    ITEM_WEAPON_SUBCLASS_ISMAINHANDWEAPON_NONRANGED_MASK: 1091571
+    ITEM_WEAPON_SUBCLASS_ISRANGEDWEAPON_MASK: 851980
+    ITEM_WEAPON_SUBCLASS_ISTWOHANDEDRANGEDWEAPON_MASK: 262156
+    ITEM_WEAPON_SUBCLASS_MASK: 2097151
     ITEM_WEAPON_SUBCLASS_NONE: -1
+    ITEM_WEAPON_SUBCLASS_USES2HANDS_MASK: 1312110
+  ITEM_WEAPON_SUBCLASSConstants_PreMists:
+    ITEM_WEAPON_SUBCLASS_ISTITANSGRIPWEAPON_MASK: 290
   ItemConsts:
     CURRENT_ARTIFACT_POWERS_VERSION: 1
     CURRENT_ITEM_SAVE_VERSION: 2
@@ -93,28 +187,20 @@ Constants:
     GROUP_FINDER_MAX_ACTIVITY_CAPACITY: 16
   LootConsts:
     MasterLootQualityThreshold: 5
+  LossOfControlConsts:
+    LOSS_OF_CONTROL_ACTIVE_INDEX: 1
   MoneyFormattingConstants:
     GOLD_REWARD_THRESHOLD_TO_HIDE_COPPER: 10
   MountDynamicFlightConsts:
     TRAIT_SYSTEM_ID: 1
     TREE_ID: 672
+  PartyCountdownConstants:
+    MaxCountdownSeconds: 3600
   PetConsts:
     MAX_SUMMONABLE_PETS: 25
     PETNUMBER_INVALIDPET: 0
     PETNUMBER_INVALIDSLOT: -1
     PETNUMBER_PENDINGPET: -1
-  PetConsts_PostCata:
-    DEATHKNIGHT_PET_CREATURE_ID: 26125
-    EXTRA_PET_STABLE_SLOT: 1
-    MAX_NUM_PET_SLOTS: 3
-    MAX_STABLE_SLOTS: 200
-    MAX_SUMMONABLE_HUNTER_PETS: 1
-    NUM_PET_SLOTS_DEATHKNIGHT: 25
-    NUM_PET_SLOTS_HUNTER: 3
-    NUM_PET_SLOTS_MAGE: 1
-    NUM_PET_SLOTS_THAT_NEED_LEARNED_SPELL: 5
-    NUM_PET_SLOTS_WARLOCK: 25
-    STABLED_PETS_FIRST_SLOT_INDEX: -1
   PetConsts_PreWrath:
     DEATHKNIGHT_PET_CREATURE_ID: 0
     EXTRA_PET_STABLE_SLOT: -1
@@ -126,22 +212,12 @@ Constants:
     NUM_PET_SLOTS_MAGE: 1
     NUM_PET_SLOTS_THAT_NEED_LEARNED_SPELL: 1
     NUM_PET_SLOTS_WARLOCK: 25
-    STABLED_PETS_FIRST_SLOT_INDEX: 1
-  PetConsts_Wrath:
-    DEATHKNIGHT_PET_CREATURE_ID: 26125
-    EXTRA_PET_STABLE_SLOT: -1
-    MAX_NUM_PET_SLOTS: 25
-    MAX_STABLE_SLOTS: 4
-    MAX_SUMMONABLE_HUNTER_PETS: 1
-    NUM_PET_SLOTS_DEATHKNIGHT: 25
-    NUM_PET_SLOTS_HUNTER: 3
-    NUM_PET_SLOTS_MAGE: 1
-    NUM_PET_SLOTS_THAT_NEED_LEARNED_SPELL: 1
-    NUM_PET_SLOTS_WARLOCK: 25
+    PET_MAX_LEVEL_DIFFERENCE: 70
     STABLED_PETS_FIRST_SLOT_INDEX: 1
   ProfessionConsts:
     CLASSIC_PROFESSION_PARENT_TIER_INDEX: 4
     CRAFTING_ORDER_CLAIM_DURATION: 1800
+    CRAFTING_ORDER_CURRENCY_WALLET_ITEM_ID: 262724
     CRAFTING_ORDER_ITEM_RETENTION: 30
     MAX_CRAFTING_REAGENT_SLOTS: 12
     NUM_PRIMARY_PROFESSIONS: 2
@@ -161,6 +237,15 @@ Constants:
     SPELL_ID_DISMISS_PET: 2641
   SpellCooldownConsts:
     GLOBAL_RECOVERY_CATEGORY: 133
+  TalentConsts:
+    NumTalentColumns: 4
+  TalentTierConstants:
+    MAX_TALENT_TIERS: 7
+  TieredEntranceConsts:
+    TIERED_ENTRANCE_INFO_WORLD_TIER_DIFFICULTY_CHARACTER_ELEMENT_ID: 522
+    TIERED_ENTRANCE_TIER_SCORE_VALUE_MAP_ID: 3
+    TIERED_ENTRANCE_TIER_SCORE_VALUE_PLAYER_CONDITION_ID: 6
+    TIERED_ENTRANCE_TIER_SCORE_VALUE_TIER_LEVEL: 1
   TimerunningConsts:
     TIMERUNNING_ITEM_CTR: 2905
     TIMERUNNING_LEGION_ARTIFACT_CTR: 4579
@@ -177,6 +262,38 @@ Constants:
     MainHandTransmogIsIndividualWeapon: -1
     MainHandTransmogIsPairedWeapon: 0
     NoTransmogID: 0
+  TransmogOutfitDataConsts:
+    EQUIP_TRANSMOG_OUTFIT_MANUAL_SPELL_ID: 1247613
+    TRANSMOG_OUTFIT_SLOT_NONE: -1
+  TTSConstants:
+    TTSRateDefault: 0
+    TTSRateMax: 10
+    TTSRateMin: -10
+    TTSVolumeDefault: 100
+    TTSVolumeMax: 100
+    TTSVolumeMin: 0
+  UICharacterClasses:
+    DeathKnight: 6
+    DemonHunter: 12
+    Druid: 11
+    Evoker: 13
+    Hunter: 3
+    Mage: 8
+    Monk: 10
+    Paladin: 2
+    Priest: 5
+    Rogue: 4
+    Shaman: 7
+    Warlock: 9
+    Warrior: 1
+  UnitEventConstants:
+    MAX_UNIT_TOKENS_IN_EVENT: 4
+  UnitPowerSpellIDs:
+    COLLAPSING_STAR_PASSIVE_SPELL_ID: 1221167
+    COLLAPSING_STAR_SPELL_ID: 1221150
+    DARK_HEART_SPELL_ID: 1225789
+    SILENCE_THE_WHISPERS_SPELL_ID: 1227702
+    VOID_METAMORPHOSIS_SPELL_ID: 1217607
   WeeklyRewardsConsts:
     ABORT_ITEM_RETENTION_DAYS: 15
     WEEKLY_REWARD_ITEM_RETENTION_DAYS: 15
@@ -250,61 +367,67 @@ Enum:
     None: 0
     TokenEligCheckComplete: 8
   AccountStateLoadedFlags:
-    AccountStateAccountCurrenciesLoaded: '0x0000000000200000'
-    AccountStateAccountFactionsLoaded: '0x0000000200000000'
-    AccountStateAccountItemsLoaded: '0x0000000400000000'
-    AccountStateAccountMappingLoaded: '0x0000008000000000'
-    AccountStateAccountNotificationsLoaded: '0x0000000008000000'
-    AccountStateAccountWowlabsLoaded: '0x0000000020000000'
-    AccountStateAchievementsLoaded: '0x0000000000000001'
-    AccountStateArchivedPurchasesLoaded: '0x0000000000000200'
-    AccountStateAuctionableTokensLoaded: '0x0000000000002000'
-    AccountStateBanktabSettingsLoaded: '0x0000004000000000'
-    AccountStateBattleNetAccountLoaded: '0x0000000000100000'
-    AccountStateBitVectorsLoaded: '0x0000000100000000'
-    AccountStateBpayAddLicenseObjectsLoaded: '0x0000000000000800'
-    AccountStateBpayDistributionObjectsLoaded: '0x0000000000000100'
-    AccountStateBpayProductitemObjectsLoaded: '0x0000000000020000'
-    AccountStateCharacterItemsLoaded: '0x0000010000000000'
-    AccountStateCharactersLoaded: '0x0000000000000040'
-    AccountStateCombinedQuestLogLoaded: '0x0000000800000000'
-    AccountStateConsumableTokensLoaded: '0x0000000000004000'
-    AccountStateCriteriaLoaded: '0x0000000000000002'
-    AccountStateCurrencyCapsLoaded: '0x0000000000000010'
-    AccountStateCurrencyTransferLogLoaded: '0x0000020000000000'
-    AccountStateDataElementsLoaded: '0x0000001000000000'
-    AccountStateDynamicCriteriaLoaded: '0x0000000001000000'
-    AccountStateEventRecordsLoaded: '0x0000200000000000'
-    AccountStateFutureFeature01DataLoaded: '0x0000080000000000'
-    AccountStateItemCollectionsLoaded: '0x0000000000001000'
-    AccountStateLgVendorPurchaseLoaded: '0x0000040000000000'
-    AccountStateMountsLoaded: '0x0000000000000004'
-    AccountStatePerksHeldItemLoaded: '0x0000000040000000'
-    AccountStatePerksPastRewardsLoaded: '0x0000000000008000'
-    AccountStatePerksPendingPurchaseLoaded: '0x0000000010000000'
-    AccountStatePerksPendingRewardsLoaded: '0x0000000080000000'
-    AccountStatePetjournalInitialized: '0x0000000000000008'
-    AccountStatePurchasesLoaded: '0x0000000000000080'
-    AccountStateQuestCriteriaLoaded: '0x0000000000080000'
-    AccountStateQuestLogLoaded: '0x0000000000000020'
-    AccountStateRafActivityLoaded: '0x0000000002000000'
-    AccountStateRafBalanceLoaded: '0x0000000000400000'
-    AccountStateRafRewardsLoaded: '0x0000000000800000'
-    AccountStateRevokedRafRewardsLoaded: '0x0000000004000000'
-    AccountStateSettingsLoaded: '0x0000000000000400'
-    AccountStateTrialBoostHistoryLoaded: '0x0000000000040000'
-    AccountStateVasTransactionsLoaded: '0x0000000000010000'
-    AccountStateWarbandScenesLoaded: '0x0000100000000000'
-    AccountStateWarbandsLoaded: '0x0000002000000000'
-    None: '0x0000000000000000'
+    AccountCurrenciesLoaded: '0x0000000000200000'
+    AccountFactionsLoaded: '0x0000000200000000'
+    AccountItemsLoaded: '0x0000000400000000'
+    AccountMappingLoaded: '0x0000008000000000'
+    AccountNotificationsLoaded: '0x0000000008000000'
+    AccountWowlabsLoaded: '0x0000000020000000'
+    AchievementsLoaded: '0x0000000000000001'
+    ArchivedPurchasesLoaded: '0x0000000000000200'
+    AuctionableTokensLoaded: '0x0000000000002000'
+    BanktabSettingsLoaded: '0x0000004000000000'
+    BattleNetAccountLoaded: '0x0000000000100000'
+    BitVectorsLoaded: '0x0000000100000000'
+    BpayAddLicenseObjectsLoaded: '0x0000000000000800'
+    BpayDistributionObjectsLoaded: '0x0000000000000100'
+    BpayProductitemObjectsLoaded: '0x0000000000020000'
+    CharacterItemsLoaded: '0x0000010000000000'
+    CharactersLoaded: '0x0000000000000040'
+    CombinedQuestLogLoaded: '0x0000000800000000'
+    ConsumableTokensLoaded: '0x0000000000004000'
+    CriteriaLoaded: '0x0000000000000002'
+    CurrencyCapsLoaded: '0x0000000000000010'
+    CurrencyTransferLogLoaded: '0x0000020000000000'
+    DataElementsLoaded: '0x0000001000000000'
+    DynamicCriteriaLoaded: '0x0000000001000000'
+    EventRecordsLoaded: '0x0000200000000000'
+    HousingDataLoaded: '0x0000080000000000'
+    ItemCollectionsLoaded: '0x0000000000001000'
+    LgVendorPurchaseLoaded: '0x0000040000000000'
+    LoadedNone: '0x0000000000000000'
+    MountsLoaded: '0x0000000000000004'
+    PerksHeldItemLoaded: '0x0000000040000000'
+    PerksPastRewardsLoaded: '0x0000000000008000'
+    PerksPendingPurchaseLoaded: '0x0000000010000000'
+    PerksPendingRewardsLoaded: '0x0000000080000000'
+    PetjournalInitialized: '0x0000000000000008'
+    PurchasesLoaded: '0x0000000000000080'
+    QuestCriteriaLoaded: '0x0000000000080000'
+    QuestLogLoaded: '0x0000000000000020'
+    RafActivityLoaded: '0x0000000002000000'
+    RafBalanceLoaded: '0x0000000000400000'
+    RafRewardsLoaded: '0x0000000000800000'
+    RevokedRafRewardsLoaded: '0x0000000004000000'
+    SettingsLoaded: '0x0000000000000400'
+    TransmogOutfitsLoaded: '0x0000400000000000'
+    TrialBoostHistoryLoaded: '0x0000000000040000'
+    VasTransactionsLoaded: '0x0000000000010000'
+    WarbandScenesLoaded: '0x0000100000000000'
+    WarbandsLoaded: '0x0000002000000000'
   AccountStoreCategoryType:
     Creature: 1
     Icon: 4
     Mount: 3
     TransmogSet: 2
+  AccountStoreFrontFlag:
+    Enabled: 1
+    PurchaseEnabled: 2
+    RefundEnabled: 4
   AccountStoreItemFlag:
     DisplayAsNew: 4
     DisplayDefaultArmor: 1
+    DisplayOnly: 8
     NotInGameReward: 2
   AccountStoreItemMode:
     Hidden: 2
@@ -341,6 +464,7 @@ Enum:
     ItemUnknown: 5
     NotSupported: 10
     OwnedButRefundTimeExpired: 9
+    ProxyError: 12
     Success: 0
     TransactionInProgress: 3
     Unavailable: 11
@@ -419,6 +543,14 @@ Enum:
     VasTransaction: 20
     WarbandGroups: 55
     WarbandSceneCollection: 62
+  ActionBarOrientation:
+    Horizontal: 0
+    Vertical: 1
+  ActionBarVisibleSetting:
+    Always: 0
+    Hidden: 3
+    InCombat: 1
+    OutOfCombat: 2
   AddOnEnableState:
     All: 2
     None: 0
@@ -467,14 +599,6 @@ Enum:
     Tutorial: 3
     WidgetContainerNoBorder: 4
     WorldLootObject: 2
-  AssertDomain:
-    Art: 1
-    Design: 2
-    Engineering: 4
-    LiveOperations: 64
-    Performance: 32
-    Sound: 8
-    Tools: 16
   AssistActionType:
     CapturedBuff: 6
     GraveMarker: 2
@@ -554,6 +678,19 @@ Enum:
   AuctionStatus:
     Active: 0
     Sold: 1
+  AuraFrameIconDirection:
+    Down: 0
+    Left: 0
+    Right: 1
+    Up: 1
+  AuraFrameIconWrap:
+    Down: 0
+    Left: 0
+    Right: 1
+    Up: 1
+  AuraFrameOrientation:
+    Horizontal: 0
+    Vertical: 1
   AuraFrameVisibleSetting:
     Always: 0
     Hidden: 2
@@ -645,6 +782,11 @@ Enum:
     Keyring: -2
     ReagentBag: 5
     Reagentbank: -3
+  BagsDirection:
+    Down: 1
+    Left: 0
+    Right: 1
+    Up: 0
   BagSlotFlags:
     ClassConsumables: 4
     ClassEquipment: 2
@@ -656,6 +798,9 @@ Enum:
     ExcludeJunkSell: 64
     ExpansionCurrent: 256
     ExpansionLegacy: 512
+  BagsOrientation:
+    Horizontal: 0
+    Vertical: 1
   BalanceType:
     Eclipse: 0
     None: -1
@@ -719,44 +864,6 @@ Enum:
     New: 2
   BattlepayShopEntryFlags:
     None: 0
-  BattlePetAbilityFlag:
-    DisplayAsHostileDebuff: 1
-    HideStrongWeakHints: 2
-    Passive: 4
-    ServerOnlyAura: 8
-    ShowCast: 16
-    StartOnCooldown: 32
-  BattlePetAbilitySlot:
-    A: 0
-    B: 1
-    C: 2
-  BattlePetAbilityTargets:
-    Caster: 9
-    EnemyBackPet_1: 5
-    EnemyBackPet_2: 6
-    EnemyFrontPet: 0
-    EnemyPad: 3
-    FriendlyBackPet_1: 7
-    FriendlyBackPet_2: 8
-    FriendlyFrontPet: 1
-    FriendlyPad: 4
-    Owner: 10
-    ProcTarget: 12
-    Specific: 11
-    Weather: 2
-  BattlePetAbilityTurnFlag:
-    CanProcFromProc: 1
-    TriggerByAuraCaster: 32
-    TriggerByEnemy: 8
-    TriggerByFriend: 4
-    TriggerBySelf: 2
-    TriggerByWeather: 16
-  BattlePetAbilityTurnType:
-    Normal: 0
-    TriggeredEffect: 1
-  BattlePetAbilityType:
-    Ability: 0
-    Aura: 1
   BattlePetAction:
     Ability: 1
     None: 0
@@ -770,71 +877,10 @@ Enum:
     Poor: 0
     Rare: 3
     Uncommon: 2
-  BattlepetDbFlags:
-    Ability0Selection: 16
-    Ability1Selection: 32
-    Ability2Selection: 64
-    AcquiredViaLicense: 512
-    Converted: 2
-    DisplayOverridden: 256
-    FanfareNeeded: 128
-    Favorite: 1
-    LockedForConvert: 8
-    LockMask: 12
-    None: 0
-    Revoked: 4
-    TradingPost: 1024
-  BattlepetDeletedReason:
-    AccountStore: 7
-    CageError: 4
-    DelJournal: 5
-    Gm: 3
-    PlayerCaged: 2
-    PlayerReleased: 1
-    TradingPost: 6
-    Unknown: 0
-  BattlePetEffectFlags:
-    EnableAbilityPicker: 1
-    LuaNeedsAllPets: 2
-  BattlePetEffectParamType:
-    Ability: 1
-    Int: 0
-  BattlePetEvent:
-    OnAbility: 9
-    OnAuraApplied: 0
-    OnAuraRemoved: 5
-    OnDamageDealt: 2
-    OnDamageTaken: 1
-    OnHealDealt: 4
-    OnHealTaken: 3
-    OnRoundEnd: 7
-    OnRoundStart: 6
-    OnSwapIn: 10
-    OnSwapOut: 11
-    OnTurn: 8
-    PostAuraTicks: 12
-  BattlePetNpcEmote:
-    BattleLose: 3
-    BattleStart: 1
-    BattleUnused: 0
-    BattleWin: 2
-    PetAbility: 7
-    PetDie: 6
-    PetKill: 5
-    PetSwap: 4
-  BattlePetNpcTeamFlag:
-    MatchPlayerHighPetLevel: 1
-    NoPlayerXP: 2
   BattlePetOwner:
     Ally: 1
     Enemy: 2
     Weather: 0
-  BattlepetSlotLockCheat:
-    Cheat_0_Locked: -1
-    Cheat_1_Locked: -2
-    Cheat_2_Locked: -3
-    CheatOff: 0
-    UnlockAll: 1
   BattlePetSources:
     Achievement: 5
     Discovery: 10
@@ -848,60 +894,6 @@ Enum:
     Vendor: 2
     WildPet: 4
     WorldEvent: 6
-  BattlePetSpeciesFlags:
-    AddsAllowedWithBoss: 8192
-    AllianceOnly: 512
-    Boss: 1024
-    CantBattle: 128
-    Capturable: 8
-    HideFromJournal: 32
-    HideUntilLearned: 16384
-    HordeOnly: 256
-    LegacyAccountUnique: 64
-    MatchPlayerHighPetLevel: 32768
-    NoLicenseRequired: 4096
-    NoRename: 1
-    NotAcccountwide: 4
-    NotTradable: 16
-    NoWildPetAddsAllowed: 65536
-    RandomDisplay: 2048
-    WellKnown: 2
-  BattlePetStateFlag:
-    Client: 8
-    DynamicScaling: 128
-    MaxHealthBonus: 16
-    None: 0
-    Power: 256
-    QualityDoesNotEffect: 64
-    ServerOnly: 2048
-    SpeedBonus: 4
-    SpeedMult: 512
-    Stamina: 32
-    SwapInLock: 1024
-    SwapOutLock: 1
-    TurnLock: 2
-  BattlePetTypes:
-    Aquatic: 8
-    Beast: 7
-    Critter: 4
-    Dragonkin: 1
-    Elemental: 6
-    Flying: 2
-    Humanoid: 0
-    Magic: 5
-    Mechanical: 9
-    Undead: 3
-  BattlePetVisualFlag:
-    Test1: 1
-    Test2: 2
-    Test3: 4
-  BattlePetVisualRange:
-    BehindMelee: 4
-    BehindRanged: 5
-    InPlace: 2
-    Melee: 0
-    PointBlank: 3
-    Ranged: 1
   BindingContext:
     HousingEditor: 1
     HousingEditorBasicAndExpertDecorMode: 7
@@ -1271,11 +1263,6 @@ Enum:
     Hair: 2
     HairColor: 3
     Skin: 0
-  CharSectionCondition:
-    AlliedRace: 0
-    ConditionalAppeareance: 2
-    HeritageArmor: 1
-    RaceClassCombo: 3
   ChatChannelRuleset:
     ChromieTimeBuringCrusade: 4
     ChromieTimeCataclysm: 3
@@ -1797,11 +1784,25 @@ Enum:
   CooldownViewerAlertType:
     Sound: 1
     Visual: 2
+  CooldownViewerBarContent:
+    IconAndName: 0
+    IconOnly: 1
+    NameOnly: 2
   CooldownViewerCategory:
     Essential: 0
     TrackedBar: 3
     TrackedBuff: 2
     Utility: 1
+  CooldownViewerIconDirection:
+    Left: 0
+    Right: 1
+  CooldownViewerOrientation:
+    Horizontal: 0
+    Vertical: 1
+  CooldownViewerVisibleSetting:
+    Always: 0
+    Hidden: 2
+    InCombat: 1
   CornerstonePurchaseMode:
     Basic: 0
     Import: 1
@@ -1933,53 +1934,54 @@ Enum:
     Finishing: 2
     Modifying: 0
   CreateAllAccountData:
-    CreateAllAccountCurrenciesDone: '0x0000000000200000'
-    CreateAllAccountDynamicCriteriaDone: '0x0000000001000000'
-    CreateAllAccountFactionsDone: '0x0000000200000000'
-    CreateAllAccountItemsDone: '0x0000000400000000'
-    CreateAllAccountMappingDone: '0x0000008000000000'
-    CreateAllAccountNotificationsDone: '0x0000000008000000'
-    CreateAllAchievementsDone: '0x0000000000000001'
-    CreateAllArchivedPurchasesDone: '0x0000000000000200'
-    CreateAllAuctionableTokensDone: '0x0000000000002000'
-    CreateAllBanktabSettingsDone: '0x0000004000000000'
-    CreateAllBattlepetsDone: '0x0000000000000008'
-    CreateAllBitVectorsDone: '0x0000000100000000'
-    CreateAllBpayAddLicenseObjectsDone: '0x0000000000000800'
-    CreateAllBpayDistributionObjectsDone: '0x0000000000000100'
-    CreateAllBpayProductitemObjectsDone: '0x0000000000020000'
-    CreateAllCharacterItemsDone: '0x0000010000000000'
-    CreateAllCharactersDone: '0x0000000000000040'
-    CreateAllCombinedQuestLogEntriesDone: '0x0000000800000000'
-    CreateAllConsumableTokensDone: '0x0000000000004000'
-    CreateAllCriteriaDone: '0x0000000000000002'
-    CreateAllCurrencycapsDone: '0x0000000000000010'
-    CreateAllCurrencyTransferLogDone: '0x0000020000000000'
-    CreateAllDataElementsDone: '0x0000001000000000'
-    CreateAllEventRecordsDone: '0x0000200000000000'
-    CreateAllFutureFeature01DataDone: '0x0000080000000000'
-    CreateAllItemCollectionItemsDone: '0x0000000000001000'
-    CreateAllLgVendorPurchaseDone: '0x0000040000000000'
-    CreateAllMountsDone: '0x0000000000000004'
-    CreateAllNone: '0x0000000000000000'
-    CreateAllPerkHeldItemsDone: '0x0000000040000000'
-    CreateAllPerkPastRewardsDone: '0x0000000000008000'
-    CreateAllPerkPendingPurchasesDone: '0x0000000010000000'
-    CreateAllPerkPendingRewardsDone: '0x0000000080000000'
-    CreateAllPurchasesDone: '0x0000000000000080'
-    CreateAllQuestCriteriaDone: '0x0000000000080000'
-    CreateAllQuestLogDone: '0x0000000000000020'
-    CreateAllRafActivitiesDone: '0x0000000002000000'
-    CreateAllRafBalanceDone: '0x0000000000400000'
-    CreateAllRafRewardsDone: '0x0000000000800000'
-    CreateAllRevokedRafRewardsDone: '0x0000000004000000'
-    CreateAllSettingsDone: '0x0000000000000400'
-    CreateAllTrialBoostHistoryDone: '0x0000000000040000'
-    CreateAllVasTransactionsDone: '0x0000000000010000'
-    CreateAllWarbandGroupsDone: '0x0000002000000000'
-    CreateAllWarbandScenesLoadedDone: '0x0000100000000000'
-    CreateAllWowlabsDataDone: '0x0000000020000000'
-    CreateObject: '0x0000000000100000'
+    AccountCurrenciesDone: '0x0000000000200000'
+    AccountDynamicCriteriaDone: '0x0000000001000000'
+    AccountFactionsDone: '0x0000000200000000'
+    AccountItemsDone: '0x0000000400000000'
+    AccountMappingDone: '0x0000008000000000'
+    AccountNotificationsDone: '0x0000000008000000'
+    AccountStateHousingData: '0x0000080000000000'
+    AchievementsDone: '0x0000000000000001'
+    ArchivedPurchasesDone: '0x0000000000000200'
+    AuctionableTokensDone: '0x0000000000002000'
+    BanktabSettingsDone: '0x0000004000000000'
+    BattlepetsDone: '0x0000000000000008'
+    BitVectorsDone: '0x0000000100000000'
+    BpayAddLicenseObjectsDone: '0x0000000000000800'
+    BpayDistributionObjectsDone: '0x0000000000000100'
+    BpayProductitemObjectsDone: '0x0000000000020000'
+    CharacterItemsDone: '0x0000010000000000'
+    CharactersDone: '0x0000000000000040'
+    CombinedQuestLogEntriesDone: '0x0000000800000000'
+    ConsumableTokensDone: '0x0000000000004000'
+    CriteriaDone: '0x0000000000000002'
+    CurrencycapsDone: '0x0000000000000010'
+    CurrencyTransferLogDone: '0x0000020000000000'
+    DataElementsDone: '0x0000001000000000'
+    EventRecordsDone: '0x0000200000000000'
+    ItemCollectionItemsDone: '0x0000000000001000'
+    LgVendorPurchaseDone: '0x0000040000000000'
+    MountsDone: '0x0000000000000004'
+    None: '0x0000000000000000'
+    Object: '0x0000000000100000'
+    PerkHeldItemsDone: '0x0000000040000000'
+    PerkPastRewardsDone: '0x0000000000008000'
+    PerkPendingPurchasesDone: '0x0000000010000000'
+    PerkPendingRewardsDone: '0x0000000080000000'
+    PurchasesDone: '0x0000000000000080'
+    QuestCriteriaDone: '0x0000000000080000'
+    QuestLogDone: '0x0000000000000020'
+    RafActivitiesDone: '0x0000000002000000'
+    RafBalanceDone: '0x0000000000400000'
+    RafRewardsDone: '0x0000000000800000'
+    RevokedRafRewardsDone: '0x0000000004000000'
+    SettingsDone: '0x0000000000000400'
+    TransmogOutfitsLoadedDone: '0x0000400000000000'
+    TrialBoostHistoryDone: '0x0000000000040000'
+    VasTransactionsDone: '0x0000000000010000'
+    WarbandGroupsDone: '0x0000002000000000'
+    WarbandScenesLoadedDone: '0x0000100000000000'
+    WowlabsDataDone: '0x0000000020000000'
   CreateNeighborhoodErrorType:
     None: 0
     OversizedGuild: 3
@@ -2325,6 +2327,24 @@ Enum:
     Hidden: 2
     InCombat: 1
     InGroup: 3
+  DeveloperLogAssertDomain:
+    Art: 1
+    Design: 2
+    Engineering: 4
+    LiveOperations: 64
+    Performance: 32
+    Sound: 8
+    Tools: 16
+  DeveloperLogErrorDomain:
+    Assert: 0
+    AssertData: 1
+    Frame: 2
+    TestSuite: 3
+  DeveloperLogTrafficType:
+    ClientToServer: 1
+    GameEvent: 2
+    LuaToClient: 3
+    ServerToClient: 0
   DisableAccountProfilesFlags:
     DecorsCollections: 32
     Document: 1
@@ -2344,6 +2364,117 @@ Enum:
   DurationTimeModifier:
     BaseTime: 1
     RealTime: 0
+  EditModeAccountSetting:
+    DeprecatedShowDebuffFrame: 11
+    EnableAdvancedOptions: 23
+    EnableSnap: 22
+    GridSpacing: 1
+    SettingsExpanded: 2
+    ShowArchaeologyBar: 27
+    ShowArenaFrames: 17
+    ShowBossFrames: 16
+    ShowBuffsAndDebuffs: 10
+    ShowCastBar: 7
+    ShowCooldownViewer: 28
+    ShowDamageMeter: 31
+    ShowDurabilityFrame: 21
+    ShowEncounterBar: 8
+    ShowEncounterEvents: 30
+    ShowExternalDefensives: 32
+    ShowExtraAbilities: 9
+    ShowGrid: 0
+    ShowHudTooltip: 19
+    ShowLootFrame: 18
+    ShowPartyFrames: 12
+    ShowPersonalResourceDisplay: 29
+    ShowPetActionBar: 5
+    ShowPetFrame: 24
+    ShowPossessActionBar: 6
+    ShowRaidFrames: 13
+    ShowStanceBar: 4
+    ShowStatusTrackingBar2: 20
+    ShowTalkingHeadFrame: 14
+    ShowTargetAndFocus: 3
+    ShowTimerBars: 25
+    ShowTotemActionBar: 33
+    ShowVehicleLeaveButton: 15
+    ShowVehicleSeatIndicator: 26
+  EditModeActionBarSetting:
+    AlwaysShowButtons: 9
+    DeprecatedSnapToSide: 7
+    HideBarArt: 6
+    HideBarScrolling: 8
+    IconPadding: 4
+    IconSize: 3
+    NumIcons: 2
+    NumRows: 1
+    Orientation: 0
+    VisibleSetting: 5
+  EditModeActionBarSystemIndices:
+    Bar2: 2
+    Bar3: 3
+    ExtraBar1: 6
+    ExtraBar2: 7
+    ExtraBar3: 8
+    MainBar: 1
+    PetActionBar: 12
+    PossessActionBar: 13
+    RightBar1: 4
+    RightBar2: 5
+    StanceBar: 11
+  EditModeArchaeologyBarSetting:
+    Size: 0
+  EditModeAuraFrameSetting:
+    DeprecatedShowFull: 7
+    IconDirection: 2
+    IconLimitBuffFrame: 3
+    IconLimitDebuffFrame: 4
+    IconPadding: 6
+    IconSize: 5
+    IconWrap: 1
+    Opacity: 9
+    Orientation: 0
+    ShowDispelType: 10
+    VisibleSetting: 8
+  EditModeAuraFrameSystemIndices:
+    BuffFrame: 1
+    DebuffFrame: 2
+    ExternalDefensivesFrame: 3
+  EditModeBagsSetting:
+    BagSlotPadding: 3
+    Direction: 1
+    Orientation: 0
+    Size: 2
+  EditModeCastBarSetting:
+    BarSize: 0
+    LockToPlayerFrame: 1
+    ShowCastTime: 2
+  EditModeChatFrameDisplayOnlySetting:
+    Height: 5
+    Width: 4
+  EditModeChatFrameSetting:
+    HeightHundreds: 2
+    HeightTensAndOnes: 3
+    WidthHundreds: 0
+    WidthTensAndOnes: 1
+  EditModeCooldownViewerSetting:
+    BarContent: 7
+    BarWidthScale: 11
+    HideWhenInactive: 8
+    IconDirection: 2
+    IconLimit: 1
+    IconPadding: 4
+    IconSize: 3
+    Opacity: 5
+    Orientation: 0
+    ShowTimer: 9
+    ShowTooltips: 10
+    VisibleSetting: 6
+  EditModeCooldownViewerSystemIndices:
+    BuffBar: 4
+    BuffIcon: 3
+    Essential: 1
+    Utility: 2
   EditModeDamageMeterSetting:
     BackgroundTransparency: 12
     BarHeight: 10
@@ -2358,6 +2489,8 @@ Enum:
     TextSize: 11
     Transparency: 6
     Visibility: 0
+  EditModeDurabilityFrameSetting:
+    Size: 0
   EditModeEncounterEventsSetting:
     BackgroundTransparency: 5
     BarWidth: 12
@@ -2378,6 +2511,24 @@ Enum:
     MediumWarnings: 3
     NormalWarnings: 4
     Timeline: 1
+  EditModeLayoutType:
+    Account: 1
+    Character: 2
+    Override: 3
+    Preset: 0
+  EditModeMicroMenuSetting:
+    EyeSize: 3
+    Order: 1
+    Orientation: 0
+    Size: 2
+  EditModeMinimapSetting:
+    HeaderUnderneath: 0
+    RotateMinimap: 1
+    Size: 2
+  EditModeObjectiveTrackerSetting:
+    Height: 0
+    Opacity: 1
+    TextSize: 2
   EditModePersonalResourceDisplaySetting:
     BarWidth: 12
     DeprecatedOnlyShowInCombat: 1
@@ -2394,6 +2545,83 @@ Enum:
     ShowClassColor: 11
     Size: 9
     VisibleSetting: 8
+  EditModePresetLayouts:
+    Classic: 1
+    Modern: 0
+  EditModeSettingDisplayType:
+    Checkbox: 1
+    Dropdown: 0
+    Slider: 2
+  EditModeStatusTrackingBarSetting:
+    Height: 0
+    Size: 3
+    TextSize: 2
+    Width: 1
+  EditModeStatusTrackingBarSystemIndices:
+    StatusTrackingBar1: 1
+    StatusTrackingBar2: 2
+  EditModeSystem:
+    ActionBar: 0
+    ArchaeologyBar: 19
+    AuraFrame: 6
+    Bags: 14
+    CastBar: 1
+    ChatFrame: 8
+    CooldownViewer: 20
+    DamageMeter: 23
+    DurabilityFrame: 16
+    EncounterBar: 4
+    EncounterEvents: 22
+    ExtraAbilities: 5
+    HudTooltip: 11
+    LootFrame: 10
+    MicroMenu: 13
+    Minimap: 2
+    ObjectiveTracker: 12
+    PersonalResourceDisplay: 21
+    StatusTrackingBar: 15
+    TalkingHeadFrame: 7
+    TimerBars: 17
+    TotemActionBar: 24
+    UnitFrame: 3
+    VehicleLeaveButton: 9
+    VehicleSeatIndicator: 18
+  EditModeTimerBarsSetting:
+    Size: 0
+  EditModeUnitFrameSetting:
+    AuraOrganizationType: 18
+    BigDefensiveIconSize: 21
+    BuffsOnTop: 2
+    CastBarOnSide: 7
+    CastBarUnderneath: 1
+    DisplayBorder: 12
+    FrameHeight: 11
+    FrameSize: 16
+    FrameWidth: 10
+    HidePortrait: 0
+    IconSize: 19
+    Opacity: 20
+    RaidGroupDisplayType: 13
+    RowSize: 15
+    ShowCastTime: 8
+    ShowPartyFrameBackground: 5
+    SortPlayersBy: 14
+    UseHorizontalGroups: 6
+    UseLargerFrame: 3
+    UseRaidStylePartyFrames: 4
+    ViewArenaSize: 17
+    ViewRaidSize: 9
+  EditModeUnitFrameSystemIndices:
+    Arena: 7
+    Boss: 6
+    Focus: 3
+    Party: 4
+    Pet: 8
+    Player: 1
+    Raid: 5
+    Target: 2
+  EditModeVehicleSeatIndicatorSetting:
+    Size: 0
   EncounterEventCastState:
     Casting: 1
     Expired: 3
@@ -2486,10 +2714,6 @@ Enum:
     Fire: 5
     Lava: 3
     Slime: 4
-  ErrorDomain:
-    Assert: 0
-    AssertData: 1
-    Frame: 2
   EventRealmQueues:
     None: 0
     PlunderstormDuo: 2
@@ -2725,9 +2949,9 @@ Enum:
     TransmogTrialOfStyle: 46
     TransmogWeaponOptions: 45
   GameMode:
-    Length: 3
     Plunderstorm: 2
     Standard: 1
+    WoWHack: 3
   GamePadPowerLevel:
     Critical: 0
     High: 3
@@ -2738,9 +2962,13 @@ Enum:
   GameRule:
     AchievementsPanelDisabled: 40
     ActionbarIconIntroDisabled: 60
+    ActionButtonTypeOverlayStrategy: 165
+    ActionCombatTargetLockEnabled: 87
     AfterDeathSpectatingUI: 49
     AllPlayersAreFastMovers: 53
     AlwaysAllowAlliedRaces: 59
+    AutoAttacksDisabled: 103
+    BagSpaceOverride: 172
     BagsUIDisabled: 64
     BlockWhileSheathedAllowed: 88
     CharacterCreateUseFixedBackgroundModel: 55
@@ -2755,23 +2983,43 @@ Enum:
     CompactRaidFrameManagerDisabled: 81
     CustomActionbarOverlayHeightOffset: 33
     DeleteItemConfirmationDisabled: 62
+    DisableCampsites: 114
     DisableHonorDecay: 23
     DisablePct: 9
+    DisableQuickJoin: 162
+    DisableRaidGroups: 163
+    DisableRealmSelection: 113
+    DisableVas: 119
+    DoesNotCountTowardAccountCharacterMax: 142
     EditModeDisabled: 82
+    EjDungeonsDisabled: 149
+    EjItemSetsDisabled: 151
+    EjJourneysDisabled: 156
+    EjRaidsDisabled: 150
+    EjSuggestedContentDisabled: 148
     EncounterJournalDisabled: 42
     EtaRealmLaunchTime: 5
+    ExperienceBarDisabled: 159
     FastAreaTriggerTick: 52
     FinderPanelDisabled: 43
     ForceAlteredFormsOn: 56
     ForcedChatLanguage: 34
+    ForcedMultiActionBarSetting: 133
     ForcedPartyFrameScale: 32
     FrontEndChat: 50
     FullCharacterCreateDisabled: 84
     GameMode: 13
+    GdapiCharacterProfileDisabled: 153
     GroupFinderCapabilities: 98
     GuildsDisabled: 46
     HardcoreRuleset: 10
     HelpPanelDisabled: 45
+    HideAllMultiActionBars: 135
+    HideFaction: 116
+    HideTransmogZeroCost: 161
+    HideUnavailableTransmogSlots: 160
+    HousingDashboardDisabled: 102
+    HousingEnabled: 154
     IgnoreChrclassDisabledFlag: 54
     IngameCalendarDisabled: 75
     IngameFriendsListDisabled: 79
@@ -2785,6 +3033,7 @@ Enum:
     MailGameRule: 132
     MapPlunderstormCircle: 48
     MaxAccountCharReservationsPerContentset: 4
+    MaxCharactersPerContentSet: 139
     MaxCharReservationsPerRealm: 3
     MaximizeWorldMapDisabled: 67
     MaxLootDropLevel: 25
@@ -2792,22 +3041,32 @@ Enum:
     MaxUnitNameDistance: 27
     MerchantFilterDisabled: 101
     MicrobarScale: 26
+    MinimapDisabled: 146
+    MinUndeleteLevelRequired: 140
+    NameplateCastBarDisabled: 107
     NoDebuffLimit: 1
-    NoMultiboxing: 15
     NonPlayerNameplateScale: 31
+    ObjectiveTrackerDisabled: 104
     PerksProgramActivityTrackingDisabled: 66
+    PersonalResourceDisplayDisabled: 129
     PetBattlesDisabled: 65
+    PlayerCastBarDisabled: 105
+    PlayerFrameDisabled: 131
     PlayerNameplateAlternateHealthColor: 58
     PlayerNameplateDifficultyIcon: 57
     PlunderstormAreaSelection: 94
     PremadeGroupFinderStyle: 93
+    PvPInitialRatingOverride: 190
     QuestLogMicrobuttonDisabled: 47
     QuestLogPanelDisabled: 71
     QuestLogSuperTrackingDisabled: 72
     RaceAlteredFormsDisabled: 78
+    RecommendLeastPopulatedRealm: 169
     ReleaseSpiritGhostDisabled: 61
+    RepairArmorDisabled: 147
     ReplaceAbsentGmSeconds: 11
     ReplaceGmRankLastOnlineSeconds: 12
+    RestrictedAchievementCategoryID: 155
     Runecarving: 17
     SelfFoundAllowed: 22
     SpellbookPanelDisabled: 38
@@ -2817,18 +3076,24 @@ Enum:
     TalentRespecCostMin: 18
     TalentRespecCostStep: 20
     TalentsPanelDisabled: 39
+    TargetCastBarDisabled: 106
     TargetFrameBuffsDisabled: 85
+    TargetFrameDisabled: 130
+    TimerunningAllowed: 137
     TransmogEnabled: 109
     TrivialGroupXPPercent: 7
     TutorialFrameDisabled: 73
     UnflaggedPlayersCanAttackPvPFlaggedPlayers: 173
     UnitFramePvPContextualDisabled: 86
     UniversalNameplateOcclusion: 51
+    UseGameTableVariation: 164
     UserAddonsDisabled: 29
     UserScriptsDisabled: 30
+    UseSimpleCharacterSelectList: 115
     VanillaAccountMailInstant: 91
     VanillaNpcKnockback: 16
     VanillaRageGenerationModifier: 21
+    WorldMapDisabled: 145
     WorldMapFrameStrata: 100
     WorldMapHelpPlateDisabled: 70
     WorldMapLegendDisabled: 99
@@ -3247,6 +3512,11 @@ Enum:
     None: 0
     Small: 66
     Tiny: 65
+  HousingCatalogEntrySubtype:
+    Invalid: 0
+    OwnedModifiedStack: 2
+    OwnedUnmodifiedStack: 3
+    Unowned: 1
   HousingCatalogEntryType:
     Decor: 1
     Invalid: 0
@@ -3263,6 +3533,24 @@ Enum:
     ExteriorHouse: 3
     None: 0
     RoomComponent: 2
+  HousingDecorActionFlags:
+    Add: 1
+    ClickTarget: 16
+    DragMove: 4
+    HoverTarget: 32
+    IncludeTargetChildren: 512
+    MaintainLastTarget: 256
+    None: 0
+    PrecisionMove: 8
+    PreviewDecor: 2048
+    Remove: 2
+    TargetHouseExterior: 128
+    TargetRoomComponents: 64
+    UsePlacedDecorList: 1024
+  HousingDecorModelType:
+    M2: 1
+    None: 0
+    WMO: 2
   HousingDecorPlacementRestriction:
     ChildOutsideBounds: 8
     InvalidCollision: 32
@@ -3278,6 +3566,12 @@ Enum:
     NightElf: 4
     None: 0
     Rugged: 2
+  HousingDecorType:
+    Ceiling: 3
+    Floor: 1
+    Flooring: 4
+    None: 0
+    Wall: 2
   HousingExpertModeTargetType:
     Decor: 1
     House: 2
@@ -3287,6 +3581,19 @@ Enum:
     None: 0
     NotInExpertMode: 1
     NoWMOScale: 3
+  HousingFavorUpdateSource:
+    DecorCollection: 1
+    DeferredRewards: 2
+    InitiativeChest: 6
+    InitiativeTask: 5
+    NewHouseDecorFavor: 4
+    Quest: 7
+    RetroactiveDecor: 3
+    Unknown: 0
+  HousingFavorUpdateType:
+    Add: 0
+    InitiativeAdd: 1
+    Set: 2
   HousingFixtureDecorAction:
     Detach: 1
     Store: 0
@@ -3495,6 +3802,19 @@ Enum:
     HasStairs: 2
     None: 0
     UnlockedByDefault: 4
+  HousingTeleportReason:
+    Booted: 3
+    Cheat: 1
+    ExitingHouse: 9
+    Friend: 6
+    GuildMember: 7
+    Homestone: 4
+    None: 0
+    PartyMember: 8
+    Portal: 10
+    Tutorial: 11
+    UnspecifiedSpellcast: 2
+    Visit: 5
   HousingThemeFlags:
     None: 0
     ShowInStyleSelector: 2
@@ -3816,7 +4136,8 @@ Enum:
     TemplateCharacter_3: 99
     TemplateCharacter_4: 100
     Timerunning: 105
-    Timewalker: 22
+    TimewalkerLevelUp: 22
+    TimewalkerMaxLevel: 186
     Torghast: 79
     TournamentRealm_1: 57
     TournamentRealm_2: 162
@@ -3971,6 +4292,7 @@ Enum:
     KeystonePowerLevel: 18
     LegionArtifactKnowledgeObsolete: 23
     PvPRating: 26
+    RedirectedBaseStats: 64
     Reforge: 58
     SoulbindConduitRank: 37
     TimewalkerLevel: 9
@@ -4364,6 +4686,12 @@ Enum:
     Kills: 1
     Placement: 0
     PlunderAcquired: 2
+  MicroMenuOrder:
+    Default: 0
+    Reverse: 1
+  MicroMenuOrientation:
+    Horizontal: 0
+    Vertical: 1
   MinimapTrackingFilter:
     AccountBanker: 4194304
     AccountCompletedQuests: 2097152
@@ -4659,92 +4987,6 @@ Enum:
     InvalidTarget: 2
     NoPath: 4
     Success: 0
-  PetbattleAuraStateFlags:
-    Canceled: 2
-    CountdownFirstRound: 8
-    Infinite: 1
-    InitDisabled: 4
-    JustApplied: 16
-    None: 0
-    RemoveEventHandled: 32
-  PetbattleCheatFlags:
-    AutoPlay: 1
-    None: 0
-  PetbattleEffectFlags:
-    Absorb: 256
-    AuraReapply: 8192
-    Blocked: 8
-    Crit: 4
-    Dodge: 16
-    Heal: 32
-    Immune: 512
-    InvalidTarget: 1
-    Miss: 2
-    None: 0
-    Reflect: 128
-    Strong: 1024
-    SuccessChain: 4096
-    Unkillable: 64
-    Weak: 2048
-  PetbattleEffectType:
-    AbilityChange: 11
-    AuraApply: 1
-    AuraCancel: 2
-    AuraChange: 3
-    AuraProcessingBegin: 13
-    AuraProcessingEnd: 14
-    NpcEmote: 12
-    OverrideAbility: 16
-    PetSwap: 4
-    ReplacePet: 15
-    SetHealth: 0
-    SetMaxHealth: 7
-    SetPower: 9
-    SetSpeed: 8
-    SetState: 6
-    StatusChange: 5
-    TriggerAbility: 10
-    WorldStateUpdate: 17
-  PetbattleEnviros:
-    Pad0: 0
-    Pad1: 1
-    Weather: 2
-  PetbattleInputMoveMsgDebugFlag:
-    DontValidate: 1
-    EnemyCast: 2
-    None: 0
-  PetbattleMoveType:
-    Ability: 1
-    FinalRoundOk: 4
-    Pass: 5
-    Quit: 0
-    Swap: 2
-    Trap: 3
-  PetbattlePboid:
-    EnvPad_0: 6
-    EnvPad_1: 7
-    EnvWeather: 8
-    P0Pet_0: 0
-    P0Pet_1: 1
-    P0Pet_2: 2
-    P1Pet_0: 3
-    P1Pet_1: 4
-    P1Pet_2: 5
-  PetbattlePetStatus:
-    FlagNone: 0
-    FlagTrapped: 1
-    Stunned: 2
-    SwapInLocked: 8
-    SwapOutLocked: 4
-  PetbattlePlayer:
-    Player_0: 0
-    Player_1: 1
-  PetbattlePlayerInputFlags:
-    AbilityLocked: 2
-    None: 0
-    SwapLocked: 4
-    TurnInProgress: 1
-    WaitingForPet: 8
   PetBattleQueueStatus:
     AlreadyQueued: 3
     InBattle: 20
@@ -4768,49 +5010,10 @@ Enum:
     Shutdown: 17
     Suspended: 18
     Unsuspended: 19
-  PetbattleResult:
-    FailDeclined: 12
-    FailDisconnect: 22
-    FailInBattle: 13
-    FailInvalidLoadout: 14
-    FailInvalidLoadoutAllDead: 15
-    FailInvalidLoadoutNoneSlotted: 16
-    FailLogout: 21
-    FailNoJournalLock: 17
-    FailNotATrainer: 11
-    FailNotHere: 1
-    FailNotHereObstructed: 4
-    FailNotHereOnTransport: 2
-    FailNotHereUnevenGround: 3
-    FailNotWhileDead: 6
-    FailNotWhileFlying: 7
-    FailNotWhileInCombat: 5
-    FailOpponentNotAvailable: 20
-    FailRestrictedAccount: 19
-    FailTargetInvalid: 8
-    FailTargetNotCapturable: 10
-    FailTargetOutOfRange: 9
-    FailUnknown: 0
-    FailWildPetTapped: 18
-    Success: 23
   PetbattleSlot:
     Slot_0: 0
     Slot_1: 1
     Slot_2: 2
-  PetbattleSlotAbility:
-    Ability_0: 0
-    Ability_1: 1
-    Ability_2: 2
-  PetbattleSlotResult:
-    CantBattle: 5
-    Dead: 7
-    NoPet: 8
-    NoSpeciesRec: 4
-    NoTracker: 3
-    Revoked: 6
-    SlotEmpty: 2
-    SlotLocked: 1
-    Success: 0
   PetbattleState:
     Created: 0
     CreatedFailed: 4
@@ -4819,21 +5022,6 @@ Enum:
     RoundInProgress: 2
     WaitingForFrontPets: 3
     WaitingPreBattle: 1
-  PetbattleTrapstatus:
-    CanTrap: 1
-    CantTrapNewbie: 2
-    CantTrapNoRoomInJournal: 5
-    CantTrapPetDead: 3
-    CantTrapPetHealth: 4
-    CantTrapPetNotCapturable: 6
-    CantTrapTrainerBattle: 7
-    CantTrapTwice: 8
-    Invalid: 0
-  PetbattleType:
-    Lfpb: 2
-    Npc: 3
-    PvE: 0
-    PvP: 1
   PetJournalError:
     InvalidFaction: 3
     JournalIsLocked: 2
@@ -5465,6 +5653,11 @@ Enum:
     Disabled: 0
     DispellableByMe: 1
     DisplayAll: 2
+  RaidGroupDisplayType:
+    CombineGroupsHorizontal: 3
+    CombineGroupsVertical: 2
+    SeparateGroupsHorizontal: 1
+    SeparateGroupsVertical: 0
   RcoCloseReason:
     Cancel: 2
     CrafterFulfill: 5
@@ -5577,6 +5770,11 @@ Enum:
     PvPGroupMember: 15
     PvPScoreboard: 14
     RecentAlly: 17
+  ReservationFlags:
+    Canceled: 2
+    None: 0
+    Plotless: 4
+    Relinquish: 1
   ResidentType:
     Manager: 1
     Owner: 2
@@ -5588,11 +5786,6 @@ Enum:
     TankHealer: 3
   RetroactiveDecorRewardFlags:
     AllCriteriaRequired: 1
-    None: 0
-  RolodexContextIDType:
-    AreaID: 2
-    ItemID: 1
-    MapID: 3
     None: 0
   RolodexContextLevelType:
     DelveTier: 3
@@ -5751,6 +5944,14 @@ Enum:
     TooManyReports: 2
   SharedStringFlag:
     InternalOnly: 1
+  ShutdownSessionReason:
+    AccountLoginCommand: 4
+    Error: 6
+    ForceLogoutCommand: 2
+    LuaScript: 5
+    RealmSelectCommand: 3
+    RestartSessionCommand: 1
+    SessionEnded: 0
   Siflag:
     Affectedbyaltitude: 16
     Affectedbysanity: 2048
@@ -5806,6 +6007,10 @@ Enum:
     Gamepad: 1
     Kbm: 2
     None: 0
+  SortPlayersBy:
+    Alphabetical: 2
+    Group: 1
+    Role: 0
   SoundBusFlag:
     Disablepositionallpf: 1
   SpecializationSystem:
@@ -6855,369 +7060,6 @@ Enum:
     Male: 0
     Neutral: 4
     None: 2
-  UnitTokenType:
-    AnyEnemy: 15
-    AnyFriend: 16
-    AnyInteract: 13
-    AnyLeftInteract: 14
-    AnyTarget: 12
-    Arena1: 262
-    Arena2: 263
-    Arena3: 264
-    Arena4: 265
-    Arena5: 266
-    ArenaPet1: 267
-    ArenaPet2: 268
-    ArenaPet3: 269
-    ArenaPet4: 270
-    ArenaPet5: 271
-    Boss1: 257
-    Boss2: 258
-    Boss3: 259
-    Boss4: 260
-    Boss5: 261
-    Commentator1: 332
-    Commentator10: 341
-    Commentator11: 342
-    Commentator12: 343
-    Commentator13: 344
-    Commentator14: 345
-    Commentator15: 346
-    Commentator16: 347
-    Commentator17: 348
-    Commentator18: 349
-    Commentator19: 350
-    Commentator2: 333
-    Commentator20: 351
-    Commentator21: 352
-    Commentator22: 353
-    Commentator23: 354
-    Commentator24: 355
-    Commentator25: 356
-    Commentator26: 357
-    Commentator27: 358
-    Commentator28: 359
-    Commentator29: 360
-    Commentator3: 334
-    Commentator30: 361
-    Commentator4: 335
-    Commentator5: 336
-    Commentator6: 337
-    Commentator7: 338
-    Commentator8: 339
-    Commentator9: 340
-    Focus: 10
-    FocusTarget: 11
-    Mouseover: 4
-    NamePlate1: 107
-    NamePlate10: 116
-    NamePlate100: 206
-    NamePlate101: 207
-    NamePlate102: 208
-    NamePlate103: 209
-    NamePlate104: 210
-    NamePlate105: 211
-    NamePlate106: 212
-    NamePlate107: 213
-    NamePlate108: 214
-    NamePlate109: 215
-    NamePlate11: 117
-    NamePlate110: 216
-    NamePlate111: 217
-    NamePlate112: 218
-    NamePlate113: 219
-    NamePlate114: 220
-    NamePlate115: 221
-    NamePlate116: 222
-    NamePlate117: 223
-    NamePlate118: 224
-    NamePlate119: 225
-    NamePlate12: 118
-    NamePlate120: 226
-    NamePlate121: 227
-    NamePlate122: 228
-    NamePlate123: 229
-    NamePlate124: 230
-    NamePlate125: 231
-    NamePlate126: 232
-    NamePlate127: 233
-    NamePlate128: 234
-    NamePlate129: 235
-    NamePlate13: 119
-    NamePlate130: 236
-    NamePlate131: 237
-    NamePlate132: 238
-    NamePlate133: 239
-    NamePlate134: 240
-    NamePlate135: 241
-    NamePlate136: 242
-    NamePlate137: 243
-    NamePlate138: 244
-    NamePlate139: 245
-    NamePlate14: 120
-    NamePlate140: 246
-    NamePlate141: 247
-    NamePlate142: 248
-    NamePlate143: 249
-    NamePlate144: 250
-    NamePlate145: 251
-    NamePlate146: 252
-    NamePlate147: 253
-    NamePlate148: 254
-    NamePlate149: 255
-    NamePlate15: 121
-    NamePlate150: 256
-    NamePlate16: 122
-    NamePlate17: 123
-    NamePlate18: 124
-    NamePlate19: 125
-    NamePlate2: 108
-    NamePlate20: 126
-    NamePlate21: 127
-    NamePlate22: 128
-    NamePlate23: 129
-    NamePlate24: 130
-    NamePlate25: 131
-    NamePlate26: 132
-    NamePlate27: 133
-    NamePlate28: 134
-    NamePlate29: 135
-    NamePlate3: 109
-    NamePlate30: 136
-    NamePlate31: 137
-    NamePlate32: 138
-    NamePlate33: 139
-    NamePlate34: 140
-    NamePlate35: 141
-    NamePlate36: 142
-    NamePlate37: 143
-    NamePlate38: 144
-    NamePlate39: 145
-    NamePlate4: 110
-    NamePlate40: 146
-    NamePlate41: 147
-    NamePlate42: 148
-    NamePlate43: 149
-    NamePlate44: 150
-    NamePlate45: 151
-    NamePlate46: 152
-    NamePlate47: 153
-    NamePlate48: 154
-    NamePlate49: 155
-    NamePlate5: 111
-    NamePlate50: 156
-    NamePlate51: 157
-    NamePlate52: 158
-    NamePlate53: 159
-    NamePlate54: 160
-    NamePlate55: 161
-    NamePlate56: 162
-    NamePlate57: 163
-    NamePlate58: 164
-    NamePlate59: 165
-    NamePlate6: 112
-    NamePlate60: 166
-    NamePlate61: 167
-    NamePlate62: 168
-    NamePlate63: 169
-    NamePlate64: 170
-    NamePlate65: 171
-    NamePlate66: 172
-    NamePlate67: 173
-    NamePlate68: 174
-    NamePlate69: 175
-    NamePlate7: 113
-    NamePlate70: 176
-    NamePlate71: 177
-    NamePlate72: 178
-    NamePlate73: 179
-    NamePlate74: 180
-    NamePlate75: 181
-    NamePlate76: 182
-    NamePlate77: 183
-    NamePlate78: 184
-    NamePlate79: 185
-    NamePlate8: 114
-    NamePlate80: 186
-    NamePlate81: 187
-    NamePlate82: 188
-    NamePlate83: 189
-    NamePlate84: 190
-    NamePlate85: 191
-    NamePlate86: 192
-    NamePlate87: 193
-    NamePlate88: 194
-    NamePlate89: 195
-    NamePlate9: 115
-    NamePlate90: 196
-    NamePlate91: 197
-    NamePlate92: 198
-    NamePlate93: 199
-    NamePlate94: 200
-    NamePlate95: 201
-    NamePlate96: 202
-    NamePlate97: 203
-    NamePlate98: 204
-    NamePlate99: 205
-    None: 0
-    Npc: 17
-    Party1: 99
-    Party2: 100
-    Party3: 101
-    Party4: 102
-    PartyPet1: 103
-    PartyPet2: 104
-    PartyPet3: 105
-    PartyPet4: 106
-    Pet: 2
-    Player: 1
-    QuestNpc: 18
-    Raid1: 19
-    Raid10: 28
-    Raid11: 29
-    Raid12: 30
-    Raid13: 31
-    Raid14: 32
-    Raid15: 33
-    Raid16: 34
-    Raid17: 35
-    Raid18: 36
-    Raid19: 37
-    Raid2: 20
-    Raid20: 38
-    Raid21: 39
-    Raid22: 40
-    Raid23: 41
-    Raid24: 42
-    Raid25: 43
-    Raid26: 44
-    Raid27: 45
-    Raid28: 46
-    Raid29: 47
-    Raid3: 21
-    Raid30: 48
-    Raid31: 49
-    Raid32: 50
-    Raid33: 51
-    Raid34: 52
-    Raid35: 53
-    Raid36: 54
-    Raid37: 55
-    Raid38: 56
-    Raid39: 57
-    Raid4: 22
-    Raid40: 58
-    Raid5: 23
-    Raid6: 24
-    Raid7: 25
-    Raid8: 26
-    Raid9: 27
-    RaidPet1: 59
-    RaidPet10: 68
-    RaidPet11: 69
-    RaidPet12: 70
-    RaidPet13: 71
-    RaidPet14: 72
-    RaidPet15: 73
-    RaidPet16: 74
-    RaidPet17: 75
-    RaidPet18: 76
-    RaidPet19: 77
-    RaidPet2: 60
-    RaidPet20: 78
-    RaidPet21: 79
-    RaidPet22: 80
-    RaidPet23: 81
-    RaidPet24: 82
-    RaidPet25: 83
-    RaidPet26: 84
-    RaidPet27: 85
-    RaidPet28: 86
-    RaidPet29: 87
-    RaidPet3: 61
-    RaidPet30: 88
-    RaidPet31: 89
-    RaidPet32: 90
-    RaidPet33: 91
-    RaidPet34: 92
-    RaidPet35: 93
-    RaidPet36: 94
-    RaidPet37: 95
-    RaidPet38: 96
-    RaidPet39: 97
-    RaidPet4: 62
-    RaidPet40: 98
-    RaidPet5: 63
-    RaidPet6: 64
-    RaidPet7: 65
-    RaidPet8: 66
-    RaidPet9: 67
-    SoftEnemy: 7
-    SoftFriend: 8
-    SoftInteract: 9
-    SpectatedA1: 272
-    SpectatedA10: 281
-    SpectatedA11: 282
-    SpectatedA12: 283
-    SpectatedA13: 284
-    SpectatedA14: 285
-    SpectatedA15: 286
-    SpectatedA2: 273
-    SpectatedA3: 274
-    SpectatedA4: 275
-    SpectatedA5: 276
-    SpectatedA6: 277
-    SpectatedA7: 278
-    SpectatedA8: 279
-    SpectatedA9: 280
-    SpectatedB1: 287
-    SpectatedB10: 296
-    SpectatedB11: 297
-    SpectatedB12: 298
-    SpectatedB13: 299
-    SpectatedB14: 300
-    SpectatedB15: 301
-    SpectatedB2: 288
-    SpectatedB3: 289
-    SpectatedB4: 290
-    SpectatedB5: 291
-    SpectatedB6: 292
-    SpectatedB7: 293
-    SpectatedB8: 294
-    SpectatedB9: 295
-    SpectatedPetA1: 302
-    SpectatedPetA10: 311
-    SpectatedPetA11: 312
-    SpectatedPetA12: 313
-    SpectatedPetA13: 314
-    SpectatedPetA14: 315
-    SpectatedPetA15: 316
-    SpectatedPetA2: 303
-    SpectatedPetA3: 304
-    SpectatedPetA4: 305
-    SpectatedPetA5: 306
-    SpectatedPetA6: 307
-    SpectatedPetA7: 308
-    SpectatedPetA8: 309
-    SpectatedPetA9: 310
-    SpectatedPetB1: 317
-    SpectatedPetB10: 326
-    SpectatedPetB11: 327
-    SpectatedPetB12: 328
-    SpectatedPetB13: 329
-    SpectatedPetB14: 330
-    SpectatedPetB15: 331
-    SpectatedPetB2: 318
-    SpectatedPetB3: 319
-    SpectatedPetB4: 320
-    SpectatedPetB5: 321
-    SpectatedPetB6: 322
-    SpectatedPetB7: 323
-    SpectatedPetB8: 324
-    SpectatedPetB9: 325
-    Target: 5
-    TargetTarget: 6
-    Vehicle: 3
   UrlTextureResult:
     Found: 1
     NotAllowed: 4
@@ -7405,6 +7247,13 @@ Enum:
     ProxyWeeklyRewardNotFound: 48
     UnknownError: 10
     VasPurchaseDisabled: 1
+  ViewArenaSize:
+    Three: 1
+    Two: 0
+  ViewRaidSize:
+    Forty: 2
+    Ten: 0
+    TwentyFive: 1
   VignetteObjectiveType:
     Defeat: 1
     DefeatShowRemainingHealth: 2
@@ -7510,14 +7359,6 @@ Enum:
     TooManyRequests: 2
     UnableToLaunchProxy: 14
     UnsupportedChatChannelType: 19
-  VoiceTtsDestination:
-    LocalPlayback: 1
-    QueuedLocalPlayback: 4
-    QueuedRemoteTransmission: 3
-    QueuedRemoteTransmissionWithLocalPlayback: 5
-    RemoteTransmission: 0
-    RemoteTransmissionWithLocalPlayback: 2
-    ScreenReader: 6
   VoiceTtsStatusCode:
     DestinationQueueFull: 8
     EngineAllocationFailed: 2
@@ -7692,13 +7533,13 @@ LE_AURORA_STATE_SELECT_ACCOUNT: 7
 LE_AURORA_STATE_WAITING_FOR_NETWORK: 2
 LE_AUTH_AUTHENTICATOR: 2
 LE_AUTH_NONE: 1
-LE_AUTOCOMPLETE_PRIORITY_ACCOUNT_CHARACTER: 6
-LE_AUTOCOMPLETE_PRIORITY_ACCOUNT_CHARACTER_SAME_REALM: 7
-LE_AUTOCOMPLETE_PRIORITY_FRIEND: 5
-LE_AUTOCOMPLETE_PRIORITY_GUILD: 4
-LE_AUTOCOMPLETE_PRIORITY_IN_GROUP: 3
-LE_AUTOCOMPLETE_PRIORITY_INTERACTED: 2
-LE_AUTOCOMPLETE_PRIORITY_OTHER: 1
+LE_AUTOCOMPLETE_PRIORITY_ACCOUNT_CHARACTER: 5
+LE_AUTOCOMPLETE_PRIORITY_ACCOUNT_CHARACTER_SAME_REALM: 6
+LE_AUTOCOMPLETE_PRIORITY_FRIEND: 4
+LE_AUTOCOMPLETE_PRIORITY_GUILD: 3
+LE_AUTOCOMPLETE_PRIORITY_IN_GROUP: 2
+LE_AUTOCOMPLETE_PRIORITY_INTERACTED: 1
+LE_AUTOCOMPLETE_PRIORITY_OTHER: 0
 LE_BAG_FILTER_FLAG_CONSUMABLES: 3
 LE_BAG_FILTER_FLAG_EQUIPMENT: 2
 LE_BAG_FILTER_FLAG_IGNORE_CLEANUP: 1
@@ -7742,7 +7583,7 @@ LE_EXPANSION_CLASSIC: 0
 LE_EXPANSION_DRAGONFLIGHT: 9
 LE_EXPANSION_LEGION: 6
 LE_EXPANSION_LEVEL_CURRENT: 0
-LE_EXPANSION_LEVEL_PREVIOUS: -1
+LE_EXPANSION_LEVEL_PREVIOUS: 0
 LE_EXPANSION_MISTS_OF_PANDARIA: 4
 LE_EXPANSION_SHADOWLANDS: 8
 LE_EXPANSION_WAR_WITHIN: 10
@@ -7766,9 +7607,6 @@ LE_FOLLOWER_MISSION_COMPLETE_STATE_ALIVE: 1
 LE_FOLLOWER_MISSION_COMPLETE_STATE_DEAD: 2
 LE_FOLLOWER_MISSION_COMPLETE_STATE_OUT_OF_DURABILITY: 4
 LE_FOLLOWER_MISSION_COMPLETE_STATE_SAVED: 3
-LE_FRAME_TUTORIAL_ACCCOUNT_CLUB_FINDER_NEW_FEATURE: 2
-LE_FRAME_TUTORIAL_ACCCOUNT_RAF_INTRO: 1
-LE_FRAME_TUTORIAL_ACCOUNT_CLUB_FINDER_NEW_COMMUNITY_JOINED: 3
 LE_FRAME_TUTORIAL_ARTIFACT_APPEARANCE_TAB: 24
 LE_FRAME_TUTORIAL_ARTIFACT_KNOWLEDGE: 31
 LE_FRAME_TUTORIAL_ARTIFACT_KNOWLEDGE_LEVEL_LIMIT: 21
@@ -7831,7 +7669,7 @@ LE_GAME_ERR_2HANDED_EQUIPPED: 37
 LE_GAME_ERR_2HSKILLNOTFOUND: 200
 LE_GAME_ERR_ABILITY_COOLDOWN: 56
 LE_GAME_ERR_ACCOUNT_SILENCED: 662
-LE_GAME_ERR_AFFECTING_COMBAT: 1053
+LE_GAME_ERR_AFFECTING_COMBAT: 1055
 LE_GAME_ERR_ALREADY_IN_ARENA_TEAM: 614
 LE_GAME_ERR_ALREADY_IN_ARENA_TEAM_S: 615
 LE_GAME_ERR_ALREADY_IN_GROUP_S: 81
@@ -7841,7 +7679,7 @@ LE_GAME_ERR_ALREADY_INVITED_TO_ARENA_TEAM_S: 617
 LE_GAME_ERR_ALREADY_INVITED_TO_GUILD_S: 108
 LE_GAME_ERR_ALREADY_PICKPOCKETED: 694
 LE_GAME_ERR_ALREADY_TRADING: 241
-LE_GAME_ERR_ALREADY_USING_LFG_LIST: 1040
+LE_GAME_ERR_ALREADY_USING_LFG_LIST: 1042
 LE_GAME_ERR_AMMO_ONLY: 20
 LE_GAME_ERR_APPROACHING_NO_PLAY_TIME: 584
 LE_GAME_ERR_APPROACHING_NO_PLAY_TIME_2: 585
@@ -7867,7 +7705,7 @@ LE_GAME_ERR_ARENA_TEAM_NAME_EXISTS_S: 619
 LE_GAME_ERR_ARENA_TEAM_NAME_INVALID: 618
 LE_GAME_ERR_ARENA_TEAM_NOT_ALLIED: 625
 LE_GAME_ERR_ARENA_TEAM_NOT_FOUND: 637
-LE_GAME_ERR_ARENA_TEAM_PARTY_SIZE: 870
+LE_GAME_ERR_ARENA_TEAM_PARTY_SIZE: 871
 LE_GAME_ERR_ARENA_TEAM_PERMISSIONS: 621
 LE_GAME_ERR_ARENA_TEAM_PLAYER_NOT_FOUND_S: 624
 LE_GAME_ERR_ARENA_TEAM_PLAYER_NOT_IN_TEAM: 622
@@ -7880,14 +7718,14 @@ LE_GAME_ERR_ARENA_TEAM_TOO_MANY_CREATE: 639
 LE_GAME_ERR_ARENA_TEAM_TOO_MANY_MEMBERS_S: 635
 LE_GAME_ERR_ARENA_TEAM_YOU_JOIN_S: 627
 LE_GAME_ERR_ARENA_TEAMS_LOCKED: 638
-LE_GAME_ERR_ARTIFACT_RELIC_DOES_NOT_MATCH_ARTIFACT: 1050
+LE_GAME_ERR_ARTIFACT_RELIC_DOES_NOT_MATCH_ARTIFACT: 1052
 LE_GAME_ERR_ATTACK_CHANNEL: 212
 LE_GAME_ERR_ATTACK_CHARMED: 209
 LE_GAME_ERR_ATTACK_CONFUSED: 208
 LE_GAME_ERR_ATTACK_DEAD: 210
 LE_GAME_ERR_ATTACK_FLEEING: 207
 LE_GAME_ERR_ATTACK_MOUNTED: 206
-LE_GAME_ERR_ATTACK_NO_ACTIONS: 872
+LE_GAME_ERR_ATTACK_NO_ACTIONS: 873
 LE_GAME_ERR_ATTACK_PACIFIED: 205
 LE_GAME_ERR_ATTACK_PREVENTED_BY_MECHANIC_S: 211
 LE_GAME_ERR_ATTACK_PVP_TARGET_WHILE_UNFLAGGED: 203
@@ -7900,7 +7738,7 @@ LE_GAME_ERR_AUCTION_BID_PLACED: 484
 LE_GAME_ERR_AUCTION_BOUND_ITEM: 460
 LE_GAME_ERR_AUCTION_CONJURED_ITEM: 461
 LE_GAME_ERR_AUCTION_DATABASE_ERROR: 467
-LE_GAME_ERR_AUCTION_ENOUGH_ITEMS: 875
+LE_GAME_ERR_AUCTION_ENOUGH_ITEMS: 876
 LE_GAME_ERR_AUCTION_EQUIPPED_BAG: 466
 LE_GAME_ERR_AUCTION_EXPIRED_S: 482
 LE_GAME_ERR_AUCTION_HIGHER_BID: 470
@@ -7932,65 +7770,65 @@ LE_GAME_ERR_BANKSLOT_FAILED_TOO_MANY: 305
 LE_GAME_ERR_BANKSLOT_INSUFFICIENT_FUNDS: 306
 LE_GAME_ERR_BANKSLOT_NOTBANKER: 307
 LE_GAME_ERR_BATTLEDGROUND_QUEUED_FOR_RATED: 572
-LE_GAME_ERR_BATTLEFIELD_TEAM_PARTY_SIZE: 909
+LE_GAME_ERR_BATTLEFIELD_TEAM_PARTY_SIZE: 910
 LE_GAME_ERR_BATTLEGROUND_ALREADY_IN: 773
 LE_GAME_ERR_BATTLEGROUND_CANNOT_QUEUE_FOR_RATED: 571
 LE_GAME_ERR_BATTLEGROUND_DUPE_QUEUE: 804
 LE_GAME_ERR_BATTLEGROUND_INFO_THROTTLED: 772
 LE_GAME_ERR_BATTLEGROUND_INVITATION_DECLINED: 801
 LE_GAME_ERR_BATTLEGROUND_INVITATION_DECLINED_BY: 802
-LE_GAME_ERR_BATTLEGROUND_JOIN_DISQUALIFIED: 1078
-LE_GAME_ERR_BATTLEGROUND_JOIN_DISQUALIFIED_NO_NAME: 1079
+LE_GAME_ERR_BATTLEGROUND_JOIN_DISQUALIFIED: 1080
+LE_GAME_ERR_BATTLEGROUND_JOIN_DISQUALIFIED_NO_NAME: 1081
 LE_GAME_ERR_BATTLEGROUND_JOIN_FAILED: 798
 LE_GAME_ERR_BATTLEGROUND_JOIN_LEVELUP: 780
 LE_GAME_ERR_BATTLEGROUND_JOIN_MERCENARY: 783
 LE_GAME_ERR_BATTLEGROUND_JOIN_MUST_COMPLETE_QUEST: 805
 LE_GAME_ERR_BATTLEGROUND_JOIN_NO_VALID_SPEC_FOR_ROLE: 799
 LE_GAME_ERR_BATTLEGROUND_JOIN_RANGE_INDEX: 795
-LE_GAME_ERR_BATTLEGROUND_JOIN_REQUIRES_LEVEL: 1077
+LE_GAME_ERR_BATTLEGROUND_JOIN_REQUIRES_LEVEL: 1079
 LE_GAME_ERR_BATTLEGROUND_JOIN_RESPEC: 800
 LE_GAME_ERR_BATTLEGROUND_JOIN_TIMED_OUT: 803
 LE_GAME_ERR_BATTLEGROUND_JOIN_TOO_MANY_DAMAGE: 786
 LE_GAME_ERR_BATTLEGROUND_JOIN_TOO_MANY_HEALERS: 784
 LE_GAME_ERR_BATTLEGROUND_JOIN_TOO_MANY_TANKS: 785
 LE_GAME_ERR_BATTLEGROUND_JOIN_XP_GAIN: 782
-LE_GAME_ERR_BATTLEGROUND_NOT_ENABLED: 1080
+LE_GAME_ERR_BATTLEGROUND_NOT_ENABLED: 1082
 LE_GAME_ERR_BATTLEGROUND_NOT_IN_BATTLEGROUND: 574
 LE_GAME_ERR_BATTLEGROUND_NOT_IN_TEAM: 644
-LE_GAME_ERR_BATTLEGROUND_PLAYERS_FROM_DIFFERENT_REALMS: 860
+LE_GAME_ERR_BATTLEGROUND_PLAYERS_FROM_DIFFERENT_REALMS: 861
 LE_GAME_ERR_BATTLEGROUND_TEAM_LEFT_QUEUE: 573
 LE_GAME_ERR_BATTLEGROUND_TOO_MANY_QUEUES: 570
 LE_GAME_ERR_BATTLETAG_FRIEND_ADDED_S: 311
-LE_GAME_ERR_BATTLETAG_FRIEND_NOT_ALLOWED: 1019
-LE_GAME_ERR_BATTLETAG_FRIEND_NOT_FOUND: 1017
-LE_GAME_ERR_BATTLETAG_FRIEND_NOT_VALID: 1018
+LE_GAME_ERR_BATTLETAG_FRIEND_NOT_ALLOWED: 1021
+LE_GAME_ERR_BATTLETAG_FRIEND_NOT_FOUND: 1019
+LE_GAME_ERR_BATTLETAG_FRIEND_NOT_VALID: 1020
 LE_GAME_ERR_BATTLETAG_FRIEND_REMOVED_S: 317
-LE_GAME_ERR_BATTLETAG_FRIEND_SUCCESS: 1021
-LE_GAME_ERR_BATTLETAG_FRIEND_THROTTLED: 1020
-LE_GAME_ERR_BG_DEVELOPER_ONLY: 882
+LE_GAME_ERR_BATTLETAG_FRIEND_SUCCESS: 1023
+LE_GAME_ERR_BATTLETAG_FRIEND_THROTTLED: 1022
+LE_GAME_ERR_BG_DEVELOPER_ONLY: 883
 LE_GAME_ERR_BG_PLAYER_JOINED_SS: 576
 LE_GAME_ERR_BG_PLAYER_LEFT_S: 577
-LE_GAME_ERR_BN_BROADCAST_THROTTLE: 881
-LE_GAME_ERR_BN_FRIEND_ALREADY: 877
-LE_GAME_ERR_BN_FRIEND_BLOCKED: 878
-LE_GAME_ERR_BN_FRIEND_LIST_FULL: 879
-LE_GAME_ERR_BN_FRIEND_REQUEST_SENT: 880
-LE_GAME_ERR_BN_FRIEND_SELF: 876
-LE_GAME_ERR_BONUS_ROLL_EMPTY: 1013
-LE_GAME_ERR_BUG_SUBMITTED_SUCCESSFULLY: 959
+LE_GAME_ERR_BN_BROADCAST_THROTTLE: 882
+LE_GAME_ERR_BN_FRIEND_ALREADY: 878
+LE_GAME_ERR_BN_FRIEND_BLOCKED: 879
+LE_GAME_ERR_BN_FRIEND_LIST_FULL: 880
+LE_GAME_ERR_BN_FRIEND_REQUEST_SENT: 881
+LE_GAME_ERR_BN_FRIEND_SELF: 877
+LE_GAME_ERR_BONUS_ROLL_EMPTY: 1015
+LE_GAME_ERR_BUG_SUBMITTED_SUCCESSFULLY: 961
 LE_GAME_ERR_BUTTON_LOCKED: 270
 LE_GAME_ERR_CALENDAR_EVENT_ALERT_S: 740
-LE_GAME_ERR_CANNOT_ABANDON_LAST_PET: 1067
+LE_GAME_ERR_CANNOT_ABANDON_LAST_PET: 1069
 LE_GAME_ERR_CANNOTCREATEDIRECTORY: 301
 LE_GAME_ERR_CANNOTCREATEFILE: 302
 LE_GAME_ERR_CANT_BE_DISENCHANTED: 457
-LE_GAME_ERR_CANT_BE_OBLITERATED: 1048
-LE_GAME_ERR_CANT_BE_SCRAPPED: 1049
-LE_GAME_ERR_CANT_BUY_QUANTITY: 905
-LE_GAME_ERR_CANT_CAGE_PET_YET: 1024
-LE_GAME_ERR_CANT_DO_THAT_CHALLENGE_MODE_ACTIVE: 1065
-LE_GAME_ERR_CANT_DO_THAT_IN_A_GROUP: 915
-LE_GAME_ERR_CANT_DO_THAT_RIGHT_NOW: 1052
+LE_GAME_ERR_CANT_BE_OBLITERATED: 1050
+LE_GAME_ERR_CANT_BE_SCRAPPED: 1051
+LE_GAME_ERR_CANT_BUY_QUANTITY: 906
+LE_GAME_ERR_CANT_CAGE_PET_YET: 1026
+LE_GAME_ERR_CANT_DO_THAT_CHALLENGE_MODE_ACTIVE: 1067
+LE_GAME_ERR_CANT_DO_THAT_IN_A_GROUP: 916
+LE_GAME_ERR_CANT_DO_THAT_RIGHT_NOW: 1054
 LE_GAME_ERR_CANT_EQUIP_EVER: 7
 LE_GAME_ERR_CANT_EQUIP_LEVEL_I: 5
 LE_GAME_ERR_CANT_EQUIP_NEED_TALENT: 13
@@ -7998,8 +7836,8 @@ LE_GAME_ERR_CANT_EQUIP_RANK: 8
 LE_GAME_ERR_CANT_EQUIP_RATING: 9
 LE_GAME_ERR_CANT_EQUIP_REPUTATION: 10
 LE_GAME_ERR_CANT_EQUIP_SKILL: 6
-LE_GAME_ERR_CANT_HAVE_MORE_PETS: 985
-LE_GAME_ERR_CANT_HAVE_MORE_PETS_OF_THAT_TYPE: 984
+LE_GAME_ERR_CANT_HAVE_MORE_PETS: 987
+LE_GAME_ERR_CANT_HAVE_MORE_PETS_OF_THAT_TYPE: 986
 LE_GAME_ERR_CANT_INTERACT_SHAPESHIFTED: 441
 LE_GAME_ERR_CANT_SPEAK_LANGAGE: 642
 LE_GAME_ERR_CANT_STACK: 25
@@ -8009,22 +7847,32 @@ LE_GAME_ERR_CANT_USE_DISARMED: 458
 LE_GAME_ERR_CANT_USE_ITEM: 195
 LE_GAME_ERR_CANT_USE_ITEM_IN_ARENA: 196
 LE_GAME_ERR_CANT_USE_ITEM_IN_RATED_BATTLEGROUND: 197
-LE_GAME_ERR_CANT_USE_PROFANITY: 1133
+LE_GAME_ERR_CANT_USE_PROFANITY: 1135
 LE_GAME_ERR_CANT_WRAP_BAGS: 339
 LE_GAME_ERR_CANT_WRAP_BOUND: 337
 LE_GAME_ERR_CANT_WRAP_EQUIPPED: 335
 LE_GAME_ERR_CANT_WRAP_STACKABLE: 334
 LE_GAME_ERR_CANT_WRAP_UNIQUE: 338
 LE_GAME_ERR_CANT_WRAP_WRAPPED: 336
-LE_GAME_ERR_CHALLENGE_MODE_ALREADY_COMPLETE: 1072
-LE_GAME_ERR_CHALLENGE_MODE_DISABLED: 961
-LE_GAME_ERR_CHALLENGE_MODE_ENABLED: 960
-LE_GAME_ERR_CHALLENGE_MODE_FULL: 1014
-LE_GAME_ERR_CHALLENGE_MODE_IN_PROGRESS: 1015
-LE_GAME_ERR_CHALLENGE_MODE_INCORRECT_KEYSTONE: 1016
-LE_GAME_ERR_CHALLENGE_MODE_PERIOD_RESET_SS: 1064
-LE_GAME_ERR_CHALLENGE_MODE_RESET_COOLDOWN_S: 953
-LE_GAME_ERR_CHALLENGE_MODE_RESET_KEYSTONE: 954
+LE_GAME_ERR_CHALLENGE_MODE_ALREADY_COMPLETE: 1074
+LE_GAME_ERR_CHALLENGE_MODE_DISABLED: 963
+LE_GAME_ERR_CHALLENGE_MODE_ENABLED: 962
+LE_GAME_ERR_CHALLENGE_MODE_FULL: 1016
+LE_GAME_ERR_CHALLENGE_MODE_IN_PROGRESS: 1017
+LE_GAME_ERR_CHALLENGE_MODE_INCORRECT_KEYSTONE: 1018
+LE_GAME_ERR_CHALLENGE_MODE_PERIOD_RESET_SS: 1066
+LE_GAME_ERR_CHALLENGE_MODE_RESET_COOLDOWN_S: 955
+LE_GAME_ERR_CHALLENGE_MODE_RESET_KEYSTONE: 956
+LE_GAME_ERR_CHARTER_NEIGHBORHOOD_OWNERSHIP_TRANSFER_SUCCESS: 1173
+LE_GAME_ERR_CHARTER_NEIGHBORHOOD_RENAME: 1167
+LE_GAME_ERR_CHARTER_NEIGHBORHOOD_RENAME_NOTIFICATION_SS: 1174
+LE_GAME_ERR_CHARTER_SIGNATURE_RECEIVED: 1153
+LE_GAME_ERR_CHARTER_SIGNATURE_REMOVED: 1168
+LE_GAME_ERR_CHARTER_SIGNATURE_REQUEST_FAILED_DUPLICATE_SIGNATURE: 1155
+LE_GAME_ERR_CHARTER_SIGNATURE_REQUEST_FAILED_GENERIC: 1156
+LE_GAME_ERR_CHARTER_SIGNATURE_REQUEST_FAILED_MISSING_EXPANSION: 1154
+LE_GAME_ERR_CHARTER_SIGNATURE_REQUEST_SENT: 1152
+LE_GAME_ERR_CHARTER_SYSTEM_REQUEST_FAILED_GENERIC: 1157
 LE_GAME_ERR_CHAT_PLAYER_AMBIGUOUS_S: 598
 LE_GAME_ERR_CHAT_PLAYER_NOT_FOUND_S: 290
 LE_GAME_ERR_CHAT_RAID_RESTRICTED_TRIAL: 809
@@ -8032,27 +7880,27 @@ LE_GAME_ERR_CHAT_RESTRICTED_TRIAL: 587
 LE_GAME_ERR_CHAT_THROTTLED: 588
 LE_GAME_ERR_CHAT_WHILE_DEAD: 289
 LE_GAME_ERR_CHEST_IN_USE: 266
-LE_GAME_ERR_CLAIMED_CHALLENGE_MODE_REWARD: 1063
-LE_GAME_ERR_CLAIMED_CHALLENGE_MODE_REWARD_OLD: 1070
-LE_GAME_ERR_CLAIMED_PVP_REWARD: 1092
+LE_GAME_ERR_CLAIMED_CHALLENGE_MODE_REWARD: 1065
+LE_GAME_ERR_CLAIMED_CHALLENGE_MODE_REWARD_OLD: 1072
+LE_GAME_ERR_CLAIMED_PVP_REWARD: 1094
 LE_GAME_ERR_CLICK_ON_ITEM_TO_FEED: 525
 LE_GAME_ERR_CLIENT_LOCKED_OUT: 160
 LE_GAME_ERR_CLIENT_ON_TRANSPORT: 161
-LE_GAME_ERR_CLUB_FINDER_ERROR_APPLY_CLUB: 1119
-LE_GAME_ERR_CLUB_FINDER_ERROR_CANCEL_APPLICATION: 1121
-LE_GAME_ERR_CLUB_FINDER_ERROR_POST_CLUB: 1118
-LE_GAME_ERR_CLUB_FINDER_ERROR_RESPOND_APPLICANT: 1120
-LE_GAME_ERR_CLUB_FINDER_ERROR_TYPE_ACCEPT_APPLICATION: 1122
-LE_GAME_ERR_CLUB_FINDER_ERROR_TYPE_APPLICANT_LIST: 1125
-LE_GAME_ERR_CLUB_FINDER_ERROR_TYPE_APPLICANT_LIST_NO_PERM: 1126
-LE_GAME_ERR_CLUB_FINDER_ERROR_TYPE_FINDER_NOT_AVAILABLE: 1127
-LE_GAME_ERR_CLUB_FINDER_ERROR_TYPE_FLAGGED_DESCRIPTION_CHANGE: 1132
-LE_GAME_ERR_CLUB_FINDER_ERROR_TYPE_FLAGGED_RENAME: 1131
-LE_GAME_ERR_CLUB_FINDER_ERROR_TYPE_GET_POSTING_IDS: 1128
-LE_GAME_ERR_CLUB_FINDER_ERROR_TYPE_JOIN_APPLICATION: 1129
-LE_GAME_ERR_CLUB_FINDER_ERROR_TYPE_NO_INVITE_PERMISSIONS: 1123
-LE_GAME_ERR_CLUB_FINDER_ERROR_TYPE_NO_POSTING_PERMISSIONS: 1124
-LE_GAME_ERR_CLUB_FINDER_ERROR_TYPE_REALM_NOT_ELIGIBLE: 1130
+LE_GAME_ERR_CLUB_FINDER_ERROR_APPLY_CLUB: 1121
+LE_GAME_ERR_CLUB_FINDER_ERROR_CANCEL_APPLICATION: 1123
+LE_GAME_ERR_CLUB_FINDER_ERROR_POST_CLUB: 1120
+LE_GAME_ERR_CLUB_FINDER_ERROR_RESPOND_APPLICANT: 1122
+LE_GAME_ERR_CLUB_FINDER_ERROR_TYPE_ACCEPT_APPLICATION: 1124
+LE_GAME_ERR_CLUB_FINDER_ERROR_TYPE_APPLICANT_LIST: 1127
+LE_GAME_ERR_CLUB_FINDER_ERROR_TYPE_APPLICANT_LIST_NO_PERM: 1128
+LE_GAME_ERR_CLUB_FINDER_ERROR_TYPE_FINDER_NOT_AVAILABLE: 1129
+LE_GAME_ERR_CLUB_FINDER_ERROR_TYPE_FLAGGED_DESCRIPTION_CHANGE: 1134
+LE_GAME_ERR_CLUB_FINDER_ERROR_TYPE_FLAGGED_RENAME: 1133
+LE_GAME_ERR_CLUB_FINDER_ERROR_TYPE_GET_POSTING_IDS: 1130
+LE_GAME_ERR_CLUB_FINDER_ERROR_TYPE_JOIN_APPLICATION: 1131
+LE_GAME_ERR_CLUB_FINDER_ERROR_TYPE_NO_INVITE_PERMISSIONS: 1125
+LE_GAME_ERR_CLUB_FINDER_ERROR_TYPE_NO_POSTING_PERMISSIONS: 1126
+LE_GAME_ERR_CLUB_FINDER_ERROR_TYPE_REALM_NOT_ELIGIBLE: 1132
 LE_GAME_ERR_CLUB_FINDER_SEARCHING_TOO_FAST: 514
 LE_GAME_ERR_COMBAT_DAMAGE_SSI: 193
 LE_GAME_ERR_COMMAND_NEEDS_TARGET: 387
@@ -8062,23 +7910,23 @@ LE_GAME_ERR_COMSAT_DISCONNECT: 680
 LE_GAME_ERR_COMSAT_RECONNECT_ATTEMPT: 681
 LE_GAME_ERR_CORPSE_IS_NOT_IN_INSTANCE: 505
 LE_GAME_ERR_CROSS_REALM_RAID_INVITE: 83
-LE_GAME_ERR_CURRENCY_NOT_TRADABLE: 884
-LE_GAME_ERR_CURRENCY_SPELL_SLOT_MISMATCH: 883
+LE_GAME_ERR_CURRENCY_NOT_TRADABLE: 885
+LE_GAME_ERR_CURRENCY_SPELL_SLOT_MISMATCH: 884
 LE_GAME_ERR_DEATHBIND_SUCCESS_S: 394
 LE_GAME_ERR_DEATHBINDALREADYBOUND: 393
 LE_GAME_ERR_DECLINE_GROUP_REQUEST_S: 93
 LE_GAME_ERR_DECLINE_GROUP_S: 92
 LE_GAME_ERR_DESTROY_NONEMPTY_BAG: 16
-LE_GAME_ERR_DIFFICULTY_CHANGE_ALREADY_STARTED: 867
-LE_GAME_ERR_DIFFICULTY_CHANGE_COMBAT: 865
-LE_GAME_ERR_DIFFICULTY_CHANGE_COMBAT_COOLDOWN_S: 862
-LE_GAME_ERR_DIFFICULTY_CHANGE_COOLDOWN_S: 861
-LE_GAME_ERR_DIFFICULTY_CHANGE_ENCOUNTER: 864
-LE_GAME_ERR_DIFFICULTY_CHANGE_HEROIC_INSTANCE_ALREADY_RUNNING: 869
-LE_GAME_ERR_DIFFICULTY_CHANGE_OTHER_HEROIC_S: 868
-LE_GAME_ERR_DIFFICULTY_CHANGE_PLAYER_BUSY: 866
-LE_GAME_ERR_DIFFICULTY_CHANGE_WORLDSTATE: 863
-LE_GAME_ERR_DIFFICULTY_DISABLED_IN_LFG: 942
+LE_GAME_ERR_DIFFICULTY_CHANGE_ALREADY_STARTED: 868
+LE_GAME_ERR_DIFFICULTY_CHANGE_COMBAT: 866
+LE_GAME_ERR_DIFFICULTY_CHANGE_COMBAT_COOLDOWN_S: 863
+LE_GAME_ERR_DIFFICULTY_CHANGE_COOLDOWN_S: 862
+LE_GAME_ERR_DIFFICULTY_CHANGE_ENCOUNTER: 865
+LE_GAME_ERR_DIFFICULTY_CHANGE_HEROIC_INSTANCE_ALREADY_RUNNING: 870
+LE_GAME_ERR_DIFFICULTY_CHANGE_OTHER_HEROIC_S: 869
+LE_GAME_ERR_DIFFICULTY_CHANGE_PLAYER_BUSY: 867
+LE_GAME_ERR_DIFFICULTY_CHANGE_WORLDSTATE: 864
+LE_GAME_ERR_DIFFICULTY_DISABLED_IN_LFG: 944
 LE_GAME_ERR_DISMOUNT_NOPET: 253
 LE_GAME_ERR_DISMOUNT_NOTMOUNTED: 254
 LE_GAME_ERR_DISMOUNT_NOTYOURPET: 255
@@ -8091,19 +7939,20 @@ LE_GAME_ERR_DUNGEON_DIFFICULTY_CHANGED_S: 595
 LE_GAME_ERR_DUNGEON_DIFFICULTY_FAILED: 594
 LE_GAME_ERR_EMBLEMERROR_NOTABARDGEOSET: 385
 LE_GAME_ERR_EQUIP_TRADE_ITEM: 560
-LE_GAME_ERR_EQUIPMENT_MANAGER_BAGS_FULL: 1055
-LE_GAME_ERR_EQUIPMENT_MANAGER_COMBAT_SWAP_S: 1054
-LE_GAME_ERR_EQUIPMENT_MANAGER_MISSING_ITEM_S: 1056
+LE_GAME_ERR_EQUIPMENT_MANAGER_BAGS_FULL: 1057
+LE_GAME_ERR_EQUIPMENT_MANAGER_COMBAT_SWAP_S: 1056
+LE_GAME_ERR_EQUIPMENT_MANAGER_MISSING_ITEM_S: 1058
 LE_GAME_ERR_EXHAUSTION_EXHAUSTED: 439
 LE_GAME_ERR_EXHAUSTION_NORMAL: 437
 LE_GAME_ERR_EXHAUSTION_RESTED: 436
 LE_GAME_ERR_EXHAUSTION_TIRED: 438
 LE_GAME_ERR_EXHAUSTION_WELLRESTED: 435
-LE_GAME_ERR_FEATURE_RESTRICTED_TRIAL: 1047
+LE_GAME_ERR_FEATURE_RESTRICTED_TRIAL: 1049
 LE_GAME_ERR_FEIGN_DEATH_RESISTED: 541
 LE_GAME_ERR_FILTERING_YOU_S: 603
 LE_GAME_ERR_FISH_ESCAPED: 402
 LE_GAME_ERR_FISH_NOT_HOOKED: 401
+LE_GAME_ERR_FOLLOWER_DUNGEON_INVALID_TRANSFER_REQUEST: 1144
 LE_GAME_ERR_FOOD_COOLDOWN: 54
 LE_GAME_ERR_FRIEND_ADDED_S: 310
 LE_GAME_ERR_FRIEND_ALREADY_S: 319
@@ -8117,19 +7966,19 @@ LE_GAME_ERR_FRIEND_ONLINE_SS: 312
 LE_GAME_ERR_FRIEND_REMOVED_S: 316
 LE_GAME_ERR_FRIEND_SELF: 320
 LE_GAME_ERR_FRIEND_WRONG_FACTION: 315
-LE_GAME_ERR_GARRISON_BUILDING_EXISTS: 1032
-LE_GAME_ERR_GARRISON_COMPLETE_MISSION_WRONG_FOLLOWER_TYPE: 1039
-LE_GAME_ERR_GARRISON_INVALID_BUILDINGID: 1034
-LE_GAME_ERR_GARRISON_INVALID_PLOT: 1033
-LE_GAME_ERR_GARRISON_INVALID_PLOT_BUILDING: 1035
-LE_GAME_ERR_GARRISON_NOT_ENOUGH_CURRENCY: 1037
-LE_GAME_ERR_GARRISON_NOT_ENOUGH_GOLD: 1038
-LE_GAME_ERR_GARRISON_REQUIRES_BLUEPRINT: 1036
+LE_GAME_ERR_GARRISON_BUILDING_EXISTS: 1034
+LE_GAME_ERR_GARRISON_COMPLETE_MISSION_WRONG_FOLLOWER_TYPE: 1041
+LE_GAME_ERR_GARRISON_INVALID_BUILDINGID: 1036
+LE_GAME_ERR_GARRISON_INVALID_PLOT: 1035
+LE_GAME_ERR_GARRISON_INVALID_PLOT_BUILDING: 1037
+LE_GAME_ERR_GARRISON_NOT_ENOUGH_CURRENCY: 1039
+LE_GAME_ERR_GARRISON_NOT_ENOUGH_GOLD: 1040
+LE_GAME_ERR_GARRISON_REQUIRES_BLUEPRINT: 1038
 LE_GAME_ERR_GENERIC_NO_TARGET: 229
 LE_GAME_ERR_GENERIC_NO_VALID_TARGETS: 739
 LE_GAME_ERR_GENERIC_STUNNED: 512
 LE_GAME_ERR_GENERIC_THROTTLE: 513
-LE_GAME_ERR_GLYPH_TARGET_NOT_AVAILABLE: 1073
+LE_GAME_ERR_GLYPH_TARGET_NOT_AVAILABLE: 1075
 LE_GAME_ERR_GLYPH_WIPE_ERROR: 539
 LE_GAME_ERR_GMRESPONSE_DB_ERROR: 794
 LE_GAME_ERR_GROUP_ACTION_THROTTLED: 693
@@ -8147,7 +7996,7 @@ LE_GAME_ERR_GUILD_BANK_CONJURED_ITEM: 149
 LE_GAME_ERR_GUILD_BANK_EQUIPPED_ITEM: 150
 LE_GAME_ERR_GUILD_BANK_FULL: 154
 LE_GAME_ERR_GUILD_BANK_QUEST_ITEM: 152
-LE_GAME_ERR_GUILD_BANK_VOUCHER_FAILED: 901
+LE_GAME_ERR_GUILD_BANK_VOUCHER_FAILED: 902
 LE_GAME_ERR_GUILD_BANK_WRAPPED_ITEM: 153
 LE_GAME_ERR_GUILD_BANK_WRONG_TAB: 155
 LE_GAME_ERR_GUILD_CANT_DEMOTE_S: 133
@@ -8168,12 +8017,16 @@ LE_GAME_ERR_GUILD_JOIN_S: 115
 LE_GAME_ERR_GUILD_LEADER_CHANGED_SS: 137
 LE_GAME_ERR_GUILD_LEADER_IS_S: 136
 LE_GAME_ERR_GUILD_LEADER_LEAVE: 140
-LE_GAME_ERR_GUILD_LEADER_REPLACED: 916
+LE_GAME_ERR_GUILD_LEADER_REPLACED: 917
 LE_GAME_ERR_GUILD_LEADER_S: 127
 LE_GAME_ERR_GUILD_LEADER_SELF: 128
 LE_GAME_ERR_GUILD_LEAVE_S: 122
 LE_GAME_ERR_GUILD_NAME_EXISTS_S: 145
 LE_GAME_ERR_GUILD_NAME_INVALID: 418
+LE_GAME_ERR_GUILD_NEIGHBORHOOD_BUILT_HOUSE_S: 1163
+LE_GAME_ERR_GUILD_NEIGHBORHOOD_NEW_SUBDIVISION: 1165
+LE_GAME_ERR_GUILD_NEIGHBORHOOD_RENAME_S: 1166
+LE_GAME_ERR_GUILD_NEIGHBORHOOD_SOLD_HOUSE_S: 1164
 LE_GAME_ERR_GUILD_NEW_LEADER_WRONG_REALM: 156
 LE_GAME_ERR_GUILD_NOT_ALLIED: 139
 LE_GAME_ERR_GUILD_NOT_ENOUGH_MONEY: 147
@@ -8191,9 +8044,9 @@ LE_GAME_ERR_GUILD_RANKS_LOCKED: 141
 LE_GAME_ERR_GUILD_REMOVE_SELF: 124
 LE_GAME_ERR_GUILD_REMOVE_SS: 123
 LE_GAME_ERR_GUILD_TOO_MUCH_MONEY: 148
-LE_GAME_ERR_GUILD_TRIAL_ACCOUNT_TRIAL: 912
-LE_GAME_ERR_GUILD_TRIAL_ACCOUNT_VETERAN: 913
-LE_GAME_ERR_GUILD_UNDELETABLE_DUE_TO_LEVEL: 914
+LE_GAME_ERR_GUILD_TRIAL_ACCOUNT_TRIAL: 913
+LE_GAME_ERR_GUILD_TRIAL_ACCOUNT_VETERAN: 914
+LE_GAME_ERR_GUILD_UNDELETABLE_DUE_TO_LEVEL: 915
 LE_GAME_ERR_GUILD_WITHDRAW_LIMIT: 146
 LE_GAME_ERR_GUILDEMBLEM_INVALID_TABARD_COLORS: 380
 LE_GAME_ERR_GUILDEMBLEM_INVALIDVENDOR: 384
@@ -8202,7 +8055,18 @@ LE_GAME_ERR_GUILDEMBLEM_NOTENOUGHMONEY: 383
 LE_GAME_ERR_GUILDEMBLEM_NOTGUILDMASTER: 382
 LE_GAME_ERR_GUILDEMBLEM_SAME: 559
 LE_GAME_ERR_GUILDEMBLEM_SUCCESS: 379
-LE_GAME_ERR_HAS_RESTRICTION: 1009
+LE_GAME_ERR_HAS_RESTRICTION: 1011
+LE_GAME_ERR_HOUSE_MOVED: 1151
+LE_GAME_ERR_HOUSING_ACTION_NOENTRY: 1162
+LE_GAME_ERR_HOUSING_ACTION_UNAVAILABLE: 1158
+LE_GAME_ERR_HOUSING_EXTERIOR_FAILSAFE_RESET: 1159
+LE_GAME_ERR_HOUSING_RESULT_COSMETIC_OWNER_NOT_IN_GUILD: 1169
+LE_GAME_ERR_HOUSING_RESULT_MISSING_EXPANSION_ACCESS: 1160
+LE_GAME_ERR_HOUSING_RESULT_MISSING_PRIVATE_NEIGHBORHOOD_INVITE: 1172
+LE_GAME_ERR_HOUSING_RESULT_NEIGHBORHOOD_NOT_FOUND: 1147
+LE_GAME_ERR_HOUSING_RESULT_PERMISSION_DENIED: 1161
+LE_GAME_ERR_HOUSING_RESULT_PLOT_NOT_VACANT: 1170
+LE_GAME_ERR_HOUSING_RESULT_PLOT_RESERVED: 1171
 LE_GAME_ERR_IGNORE_ADDED_S: 326
 LE_GAME_ERR_IGNORE_ALREADY_S: 325
 LE_GAME_ERR_IGNORE_AMBIGUOUS: 328
@@ -8213,8 +8077,8 @@ LE_GAME_ERR_IGNORE_REMOVED_S: 327
 LE_GAME_ERR_IGNORE_SELF: 323
 LE_GAME_ERR_IGNORING_YOU_S: 400
 LE_GAME_ERR_IN_BATTLEGROUND_RESPEC: 806
-LE_GAME_ERR_IN_NON_RANDOM_BG: 874
-LE_GAME_ERR_IN_RANDOM_BG: 873
+LE_GAME_ERR_IN_NON_RANDOM_BG: 875
+LE_GAME_ERR_IN_RANDOM_BG: 874
 LE_GAME_ERR_INFORM_SUGGEST_INVITE_S: 75
 LE_GAME_ERR_INFORM_SUGGEST_INVITE_SS: 76
 LE_GAME_ERR_INITIATE_TRADE_S: 230
@@ -8223,7 +8087,7 @@ LE_GAME_ERR_INSTANCE_GROUP_ADDED_S: 523
 LE_GAME_ERR_INSTANCE_GROUP_JOINED_WITH_PARTY: 519
 LE_GAME_ERR_INSTANCE_GROUP_JOINED_WITH_RAID: 520
 LE_GAME_ERR_INSTANCE_GROUP_REMOVED_S: 524
-LE_GAME_ERR_INSUFF_TRACKED_CURRENCY_IS: 910
+LE_GAME_ERR_INSUFF_TRACKED_CURRENCY_IS: 911
 LE_GAME_ERR_INTERNAL_BAG_ERROR: 15
 LE_GAME_ERR_INTERNAL_ERROR: 2
 LE_GAME_ERR_INV_FULL: 3
@@ -8238,7 +8102,7 @@ LE_GAME_ERR_INVALID_PETNAME: 700
 LE_GAME_ERR_INVALID_PROMOTION_CODE: 575
 LE_GAME_ERR_INVALID_QUEST_TARGET: 399
 LE_GAME_ERR_INVALID_RAID_TARGET: 590
-LE_GAME_ERR_INVALID_TELEPORT_LOCATION: 858
+LE_GAME_ERR_INVALID_TELEPORT_LOCATION: 859
 LE_GAME_ERR_INVITE_IN_COMBAT: 737
 LE_GAME_ERR_INVITE_NO_PARTY_SERVER: 745
 LE_GAME_ERR_INVITE_PARTY_BUSY: 746
@@ -8253,10 +8117,11 @@ LE_GAME_ERR_INVITED_TO_ARENA_TEAM: 616
 LE_GAME_ERR_INVITED_TO_GROUP_SS: 79
 LE_GAME_ERR_INVITED_TO_GUILD: 109
 LE_GAME_ERR_INVITED_TO_GUILD_SSS: 106
+LE_GAME_ERR_INVITED_TO_NEIGHBORHOOD: 1148
 LE_GAME_ERR_ITEM_CANT_BE_DESTROYED: 427
 LE_GAME_ERR_ITEM_COOLDOWN: 52
 LE_GAME_ERR_ITEM_INVENTORY_FULL_SATCHEL: 732
-LE_GAME_ERR_ITEM_IS_BATTLE_PAY_LOCKED: 906
+LE_GAME_ERR_ITEM_IS_BATTLE_PAY_LOCKED: 907
 LE_GAME_ERR_ITEM_LOCKED: 36
 LE_GAME_ERR_ITEM_MAX_COUNT: 23
 LE_GAME_ERR_ITEM_MAX_COUNT_EQUIPPED_SOCKETED: 658
@@ -8267,9 +8132,9 @@ LE_GAME_ERR_ITEM_MAX_LIMIT_CATEGORY_SOCKETED_EXCEEDED_IS: 729
 LE_GAME_ERR_ITEM_NOT_FOUND: 28
 LE_GAME_ERR_ITEM_UNIQUE_EQUIPPABLE: 605
 LE_GAME_ERR_ITEM_UNIQUE_EQUIPPABLE_SOCKETED: 659
-LE_GAME_ERR_ITEM_UPGRADE_ITEM_TOO_LOW_LEVEL: 1010
-LE_GAME_ERR_ITEM_UPGRADE_NO_MORE_UPGRADES: 1012
-LE_GAME_ERR_ITEM_UPGRADE_NO_PATH: 1011
+LE_GAME_ERR_ITEM_UPGRADE_ITEM_TOO_LOW_LEVEL: 1012
+LE_GAME_ERR_ITEM_UPGRADE_NO_MORE_UPGRADES: 1014
+LE_GAME_ERR_ITEM_UPGRADE_NO_PATH: 1013
 LE_GAME_ERR_JOIN_LFG_OBJECT_FAILED: 768
 LE_GAME_ERR_JOIN_SINGLE_SCENARIO_S: 569
 LE_GAME_ERR_JOINED_GROUP_S: 94
@@ -8286,29 +8151,31 @@ LE_GAME_ERR_LEARN_TRANSMOG_S: 70
 LE_GAME_ERR_LEFT_GROUP_S: 89
 LE_GAME_ERR_LEFT_GROUP_YOU: 90
 LE_GAME_ERR_LEGACY_RAID_DIFFICULTY_CHANGED_S: 789
-LE_GAME_ERR_LFG_CANT_USE_BATTLEGROUND: 853
-LE_GAME_ERR_LFG_CANT_USE_DUNGEONS: 854
+LE_GAME_ERR_LFG_CANT_USE_BATTLEGROUND: 854
+LE_GAME_ERR_LFG_CANT_USE_DUNGEONS: 855
 LE_GAME_ERR_LFG_DEAD: 828
 LE_GAME_ERR_LFG_DESERTER_PARTY: 827
 LE_GAME_ERR_LFG_DESERTER_PLAYER: 826
-LE_GAME_ERR_LFG_FARM_LIMIT: 856
+LE_GAME_ERR_LFG_FARM_LIMIT: 857
 LE_GAME_ERR_LFG_GET_INFO_TIMEOUT: 824
 LE_GAME_ERR_LFG_GROUP_FULL: 815
 LE_GAME_ERR_LFG_INVALID_SLOT: 825
-LE_GAME_ERR_LFG_JOINED_BATTLEFIELD_QUEUE: 847
-LE_GAME_ERR_LFG_JOINED_FLEX_QUEUE: 843
-LE_GAME_ERR_LFG_JOINED_LIST: 848
-LE_GAME_ERR_LFG_JOINED_QUEUE: 842
-LE_GAME_ERR_LFG_JOINED_RF_QUEUE: 844
-LE_GAME_ERR_LFG_JOINED_SCENARIO_QUEUE: 845
-LE_GAME_ERR_LFG_JOINED_WORLD_PVP_QUEUE: 846
+LE_GAME_ERR_LFG_JOINED_BATTLEFIELD_QUEUE: 848
+LE_GAME_ERR_LFG_JOINED_FLEX_QUEUE: 844
+LE_GAME_ERR_LFG_JOINED_LIST: 849
+LE_GAME_ERR_LFG_JOINED_QUEUE: 843
+LE_GAME_ERR_LFG_JOINED_RF_QUEUE: 845
+LE_GAME_ERR_LFG_JOINED_SCENARIO_QUEUE: 846
+LE_GAME_ERR_LFG_JOINED_TRAINING_GROUNDS_QUEUE: 1178
+LE_GAME_ERR_LFG_JOINED_WORLD_PVP_QUEUE: 847
 LE_GAME_ERR_LFG_LEADER_IS_LFM_S: 606
-LE_GAME_ERR_LFG_LEFT_LIST: 850
-LE_GAME_ERR_LFG_LEFT_QUEUE: 849
+LE_GAME_ERR_LFG_LEFT_LIST: 851
+LE_GAME_ERR_LFG_LEFT_QUEUE: 850
+LE_GAME_ERR_LFG_LOREWALKING: 842
 LE_GAME_ERR_LFG_MEMBERS_NOT_PRESENT: 823
 LE_GAME_ERR_LFG_MISMATCHED_SLOTS: 820
 LE_GAME_ERR_LFG_MISMATCHED_SLOTS_LOCAL_XREALM: 821
-LE_GAME_ERR_LFG_NO_CROSS_FACTION_PARTIES: 857
+LE_GAME_ERR_LFG_NO_CROSS_FACTION_PARTIES: 858
 LE_GAME_ERR_LFG_NO_LFG_OBJECT: 816
 LE_GAME_ERR_LFG_NO_ROLES_SELECTED: 837
 LE_GAME_ERR_LFG_NO_SLOTS_PARTY: 818
@@ -8324,15 +8191,15 @@ LE_GAME_ERR_LFG_PROPOSAL_DECLINED_SELF: 834
 LE_GAME_ERR_LFG_PROPOSAL_FAILED: 833
 LE_GAME_ERR_LFG_RANDOM_COOLDOWN_PARTY: 830
 LE_GAME_ERR_LFG_RANDOM_COOLDOWN_PLAYER: 829
-LE_GAME_ERR_LFG_READY_CHECK_ABORTED: 852
+LE_GAME_ERR_LFG_READY_CHECK_ABORTED: 853
 LE_GAME_ERR_LFG_READY_CHECK_FAILED: 813
 LE_GAME_ERR_LFG_READY_CHECK_FAILED_TIMEOUT: 814
 LE_GAME_ERR_LFG_READY_CHECK_INITIATED: 839
-LE_GAME_ERR_LFG_REASON_TOO_MANY_LFG: 855
+LE_GAME_ERR_LFG_REASON_TOO_MANY_LFG: 856
 LE_GAME_ERR_LFG_REMOVED_FACTION_CHANGE: 771
 LE_GAME_ERR_LFG_REMOVED_LEVELUP: 769
 LE_GAME_ERR_LFG_REMOVED_XP_TOGGLE: 770
-LE_GAME_ERR_LFG_ROLE_CHECK_ABORTED: 851
+LE_GAME_ERR_LFG_ROLE_CHECK_ABORTED: 852
 LE_GAME_ERR_LFG_ROLE_CHECK_FAILED: 810
 LE_GAME_ERR_LFG_ROLE_CHECK_FAILED_NOT_VIABLE: 812
 LE_GAME_ERR_LFG_ROLE_CHECK_FAILED_TIMEOUT: 811
@@ -8371,9 +8238,9 @@ LE_GAME_ERR_MAIL_LIMITED_DURATION_ITEM: 807
 LE_GAME_ERR_MAIL_QUEST_ITEM: 443
 LE_GAME_ERR_MAIL_REACHED_CAP: 589
 LE_GAME_ERR_MAIL_RECEPIENT_CANT_RECEIVE_MAIL: 453
-LE_GAME_ERR_MAIL_RECEPIENT_IS_SELF_FOUND_CANNOT_RECEIVE_MAIL: 1137
+LE_GAME_ERR_MAIL_RECEPIENT_IS_SELF_FOUND_CANNOT_RECEIVE_MAIL: 1139
 LE_GAME_ERR_MAIL_SENT: 454
-LE_GAME_ERR_MAIL_TARGET_CANNOT_RECEIVE_MAIL: 1140
+LE_GAME_ERR_MAIL_TARGET_CANNOT_RECEIVE_MAIL: 1142
 LE_GAME_ERR_MAIL_TARGET_NOT_FOUND: 448
 LE_GAME_ERR_MAIL_TO_SELF: 447
 LE_GAME_ERR_MAIL_TOO_MANY_ATTACHMENTS: 684
@@ -8408,13 +8275,13 @@ LE_GAME_ERR_MOUNT_OTHER: 247
 LE_GAME_ERR_MOUNT_RACECANTMOUNT: 249
 LE_GAME_ERR_MOUNT_SHAPESHIFTED: 250
 LE_GAME_ERR_MOUNT_TOOFARAWAY: 243
-LE_GAME_ERR_MOVIE_RECORDING_WARNING_COMPRESSING: 1061
-LE_GAME_ERR_MOVIE_RECORDING_WARNING_DISK_FULL: 1058
-LE_GAME_ERR_MOVIE_RECORDING_WARNING_NO_MOVIE: 1059
-LE_GAME_ERR_MOVIE_RECORDING_WARNING_PERF: 1057
-LE_GAME_ERR_MOVIE_RECORDING_WARNING_REQUIREMENTS: 1060
+LE_GAME_ERR_MOVIE_RECORDING_WARNING_COMPRESSING: 1063
+LE_GAME_ERR_MOVIE_RECORDING_WARNING_DISK_FULL: 1060
+LE_GAME_ERR_MOVIE_RECORDING_WARNING_NO_MOVIE: 1061
+LE_GAME_ERR_MOVIE_RECORDING_WARNING_PERF: 1059
+LE_GAME_ERR_MOVIE_RECORDING_WARNING_REQUIREMENTS: 1062
 LE_GAME_ERR_MULTI_CAST_ACTION_TOTEM_S: 779
-LE_GAME_ERR_MUST_EQUIP_ARTIFACT: 1051
+LE_GAME_ERR_MUST_EQUIP_ARTIFACT: 1053
 LE_GAME_ERR_MUST_EQUIP_ITEM: 198
 LE_GAME_ERR_MUST_REPAIR_DURABILITY: 516
 LE_GAME_ERR_NAME_CONSECUTIVE_SPACES: 705
@@ -8430,24 +8297,27 @@ LE_GAME_ERR_NAME_RUSSIAN_SILENT_CHARACTER_AT_BEGINNING_OR_END: 707
 LE_GAME_ERR_NAME_THREE_CONSECUTIVE: 703
 LE_GAME_ERR_NAME_TOO_LONG: 698
 LE_GAME_ERR_NAME_TOO_SHORT: 697
+LE_GAME_ERR_NEIGHBORHOOD_OWNER_TRANSFERRED_S: 1149
 LE_GAME_ERR_NEW_GUIDE_S: 87
 LE_GAME_ERR_NEW_GUIDE_YOU: 88
 LE_GAME_ERR_NEW_LEADER_S: 85
 LE_GAME_ERR_NEW_LEADER_YOU: 86
 LE_GAME_ERR_NEW_LOOT_MASTER_S: 285
+LE_GAME_ERR_NEW_PARTY_NEIGHBORHOOD_RESERVATION: 1150
 LE_GAME_ERR_NEWTAXIPATH: 291
 LE_GAME_ERR_NO_ARENA_CHARTER: 641
 LE_GAME_ERR_NO_ATTACK_TARGET: 201
 LE_GAME_ERR_NO_BANK_HERE: 35
 LE_GAME_ERR_NO_BANK_SLOT: 34
-LE_GAME_ERR_NO_CHALLENGE_MODE_REWARD: 1062
-LE_GAME_ERR_NO_DOMINATIONSHARD_OVERWRITE: 1134
+LE_GAME_ERR_NO_CHALLENGE_MODE_REWARD: 1064
+LE_GAME_ERR_NO_DOMINATIONSHARD_OVERWRITE: 1136
 LE_GAME_ERR_NO_GUILD_CHARTER: 157
 LE_GAME_ERR_NO_ITEMS_WHILE_SHAPESHIFTED: 440
 LE_GAME_ERR_NO_LOOT: 171
-LE_GAME_ERR_NO_LOOT_IN_CHALLENGE_MODE: 1025
+LE_GAME_ERR_NO_LOOT_IN_CHALLENGE_MODE: 1027
+LE_GAME_ERR_NO_OWNED_HOUSE_IN_THIS_NEIGHBORHOOD_MAP: 1146
 LE_GAME_ERR_NO_PET: 292
-LE_GAME_ERR_NO_PVP_REWARD: 1091
+LE_GAME_ERR_NO_PVP_REWARD: 1093
 LE_GAME_ERR_NO_REPLY_TARGET: 228
 LE_GAME_ERR_NO_SLOT_AVAILABLE: 21
 LE_GAME_ERR_NOAMMO_S: 388
@@ -8456,7 +8326,7 @@ LE_GAME_ERR_NOT_A_BAG: 31
 LE_GAME_ERR_NOT_BARBER_SITTING: 665
 LE_GAME_ERR_NOT_DURING_ARENA_MATCH: 677
 LE_GAME_ERR_NOT_ENOUGH_ARENA_POINTS: 647
-LE_GAME_ERR_NOT_ENOUGH_CURRENCY: 1045
+LE_GAME_ERR_NOT_ENOUGH_CURRENCY: 1047
 LE_GAME_ERR_NOT_ENOUGH_HONOR_POINTS: 646
 LE_GAME_ERR_NOT_ENOUGH_MONEY: 43
 LE_GAME_ERR_NOT_ENOUGH_PURCHASED_GAME_TIME: 580
@@ -8468,7 +8338,7 @@ LE_GAME_ERR_NOT_IN_GROUP: 97
 LE_GAME_ERR_NOT_IN_INSTANCE_GROUP: 100
 LE_GAME_ERR_NOT_IN_RAID: 529
 LE_GAME_ERR_NOT_LEADER: 102
-LE_GAME_ERR_NOT_ON_TOURNAMENT_REALM: 911
+LE_GAME_ERR_NOT_ON_TOURNAMENT_REALM: 912
 LE_GAME_ERR_NOT_OWNER: 32
 LE_GAME_ERR_NOT_SAME_ACCOUNT: 723
 LE_GAME_ERR_NOT_WHILE_DISARMED: 535
@@ -8514,9 +8384,9 @@ LE_GAME_ERR_OUT_OF_RUNES: 346
 LE_GAME_ERR_OUT_OF_RUNIC_POWER: 347
 LE_GAME_ERR_OUT_OF_SHADOW_ORBS: 369
 LE_GAME_ERR_OUT_OF_SOUL_SHARDS: 348
-LE_GAME_ERR_PARENTAL_CONTROLS_CHAT_MUTED: 949
-LE_GAME_ERR_PARTY_ALREADY_IN_BATTLEGROUND_QUEUE: 907
-LE_GAME_ERR_PARTY_CONFIRMING_BATTLEGROUND_QUEUE: 908
+LE_GAME_ERR_PARENTAL_CONTROLS_CHAT_MUTED: 951
+LE_GAME_ERR_PARTY_ALREADY_IN_BATTLEGROUND_QUEUE: 908
+LE_GAME_ERR_PARTY_CONFIRMING_BATTLEGROUND_QUEUE: 909
 LE_GAME_ERR_PARTY_CONVERTED_TO_RAID: 792
 LE_GAME_ERR_PARTY_LFG_BOOT_COOLDOWN_S: 752
 LE_GAME_ERR_PARTY_LFG_BOOT_DISALLOWED_BY_MAP: 759
@@ -8539,7 +8409,7 @@ LE_GAME_ERR_PARTY_ROLE_NOT_AVAILABLE: 767
 LE_GAME_ERR_PARTY_TARGET_AMBIGUOUS: 749
 LE_GAME_ERR_PASSIVE_ABILITY: 199
 LE_GAME_ERR_PET_BROKEN: 536
-LE_GAME_ERR_PET_JOURNAL_ALREADY_IN_LOADOUT: 955
+LE_GAME_ERR_PET_JOURNAL_ALREADY_IN_LOADOUT: 957
 LE_GAME_ERR_PET_LEARN_ABILITY_S: 742
 LE_GAME_ERR_PET_LEARN_SPELL_S: 741
 LE_GAME_ERR_PET_NOT_RENAMEABLE: 294
@@ -8553,51 +8423,51 @@ LE_GAME_ERR_PET_SPELL_OUT_OF_RANGE: 422
 LE_GAME_ERR_PET_SPELL_ROOTED: 420
 LE_GAME_ERR_PET_SPELL_TARGETS_DEAD: 424
 LE_GAME_ERR_PET_SPELL_UNLEARNED_S: 743
-LE_GAME_ERR_PET_TOO_HIGH_LEVEL_TO_UNCAGE: 1022
-LE_GAME_ERR_PETBATTLE_ALL_PETS_DEAD: 977
-LE_GAME_ERR_PETBATTLE_CREATE_FAILED: 962
-LE_GAME_ERR_PETBATTLE_DECLINED: 974
-LE_GAME_ERR_PETBATTLE_GAME_ROUNDS_LIMIT_WARNING: 1008
-LE_GAME_ERR_PETBATTLE_GAME_TIME_LIMIT_WARNING: 1007
-LE_GAME_ERR_PETBATTLE_IN_BATTLE: 975
-LE_GAME_ERR_PETBATTLE_INTERNAL: 1023
-LE_GAME_ERR_PETBATTLE_INVALID_LOADOUT: 976
-LE_GAME_ERR_PETBATTLE_NO_ACCOUNT_LOCK: 979
-LE_GAME_ERR_PETBATTLE_NO_PETS_IN_SLOTS: 978
-LE_GAME_ERR_PETBATTLE_NOT_A_TRAINER: 973
-LE_GAME_ERR_PETBATTLE_NOT_HERE: 963
-LE_GAME_ERR_PETBATTLE_NOT_HERE_OBSTRUCTED: 966
-LE_GAME_ERR_PETBATTLE_NOT_HERE_ON_TRANSPORT: 964
-LE_GAME_ERR_PETBATTLE_NOT_HERE_UNEVEN_GROUND: 965
-LE_GAME_ERR_PETBATTLE_NOT_WHILE_DEAD: 968
-LE_GAME_ERR_PETBATTLE_NOT_WHILE_FLYING: 969
-LE_GAME_ERR_PETBATTLE_NOT_WHILE_IN_COMBAT: 967
-LE_GAME_ERR_PETBATTLE_NOT_WHILE_IN_MATCHED_BATTLE: 983
-LE_GAME_ERR_PETBATTLE_OPPONENT_NOT_AVAILABLE: 982
-LE_GAME_ERR_PETBATTLE_QUEUE_ALREADY_QUEUED: 989
-LE_GAME_ERR_PETBATTLE_QUEUE_JOIN_FAILED: 990
-LE_GAME_ERR_PETBATTLE_QUEUE_JOURNAL_LOCK: 991
-LE_GAME_ERR_PETBATTLE_QUEUE_NOT_WHILE_NEUTRAL: 1006
-LE_GAME_ERR_PETBATTLE_QUEUE_OPPONENT_DECLINED: 995
-LE_GAME_ERR_PETBATTLE_QUEUE_PROPOSAL_DECLINED: 993
-LE_GAME_ERR_PETBATTLE_QUEUE_PROPOSAL_TIMEOUT: 994
-LE_GAME_ERR_PETBATTLE_QUEUE_QUEUED: 988
-LE_GAME_ERR_PETBATTLE_QUEUE_REMOVED: 992
-LE_GAME_ERR_PETBATTLE_QUEUE_REQUEUED_INTERNAL: 996
-LE_GAME_ERR_PETBATTLE_QUEUE_REQUEUED_REMOVED: 997
-LE_GAME_ERR_PETBATTLE_QUEUE_SLOT_CANT_BATTLE: 1002
-LE_GAME_ERR_PETBATTLE_QUEUE_SLOT_DEAD: 1004
-LE_GAME_ERR_PETBATTLE_QUEUE_SLOT_EMPTY: 999
-LE_GAME_ERR_PETBATTLE_QUEUE_SLOT_LOCKED: 998
-LE_GAME_ERR_PETBATTLE_QUEUE_SLOT_NO_PET: 1005
-LE_GAME_ERR_PETBATTLE_QUEUE_SLOT_NO_SPECIES: 1001
-LE_GAME_ERR_PETBATTLE_QUEUE_SLOT_NO_TRACKER: 1000
-LE_GAME_ERR_PETBATTLE_QUEUE_SLOT_REVOKED: 1003
-LE_GAME_ERR_PETBATTLE_RESTRICTED_ACCOUNT: 981
-LE_GAME_ERR_PETBATTLE_TARGET_INVALID: 970
-LE_GAME_ERR_PETBATTLE_TARGET_NOT_CAPTURABLE: 972
-LE_GAME_ERR_PETBATTLE_TARGET_OUT_OF_RANGE: 971
-LE_GAME_ERR_PETBATTLE_WILD_PET_TAPPED: 980
+LE_GAME_ERR_PET_TOO_HIGH_LEVEL_TO_UNCAGE: 1024
+LE_GAME_ERR_PETBATTLE_ALL_PETS_DEAD: 979
+LE_GAME_ERR_PETBATTLE_CREATE_FAILED: 964
+LE_GAME_ERR_PETBATTLE_DECLINED: 976
+LE_GAME_ERR_PETBATTLE_GAME_ROUNDS_LIMIT_WARNING: 1010
+LE_GAME_ERR_PETBATTLE_GAME_TIME_LIMIT_WARNING: 1009
+LE_GAME_ERR_PETBATTLE_IN_BATTLE: 977
+LE_GAME_ERR_PETBATTLE_INTERNAL: 1025
+LE_GAME_ERR_PETBATTLE_INVALID_LOADOUT: 978
+LE_GAME_ERR_PETBATTLE_NO_ACCOUNT_LOCK: 981
+LE_GAME_ERR_PETBATTLE_NO_PETS_IN_SLOTS: 980
+LE_GAME_ERR_PETBATTLE_NOT_A_TRAINER: 975
+LE_GAME_ERR_PETBATTLE_NOT_HERE: 965
+LE_GAME_ERR_PETBATTLE_NOT_HERE_OBSTRUCTED: 968
+LE_GAME_ERR_PETBATTLE_NOT_HERE_ON_TRANSPORT: 966
+LE_GAME_ERR_PETBATTLE_NOT_HERE_UNEVEN_GROUND: 967
+LE_GAME_ERR_PETBATTLE_NOT_WHILE_DEAD: 970
+LE_GAME_ERR_PETBATTLE_NOT_WHILE_FLYING: 971
+LE_GAME_ERR_PETBATTLE_NOT_WHILE_IN_COMBAT: 969
+LE_GAME_ERR_PETBATTLE_NOT_WHILE_IN_MATCHED_BATTLE: 985
+LE_GAME_ERR_PETBATTLE_OPPONENT_NOT_AVAILABLE: 984
+LE_GAME_ERR_PETBATTLE_QUEUE_ALREADY_QUEUED: 991
+LE_GAME_ERR_PETBATTLE_QUEUE_JOIN_FAILED: 992
+LE_GAME_ERR_PETBATTLE_QUEUE_JOURNAL_LOCK: 993
+LE_GAME_ERR_PETBATTLE_QUEUE_NOT_WHILE_NEUTRAL: 1008
+LE_GAME_ERR_PETBATTLE_QUEUE_OPPONENT_DECLINED: 997
+LE_GAME_ERR_PETBATTLE_QUEUE_PROPOSAL_DECLINED: 995
+LE_GAME_ERR_PETBATTLE_QUEUE_PROPOSAL_TIMEOUT: 996
+LE_GAME_ERR_PETBATTLE_QUEUE_QUEUED: 990
+LE_GAME_ERR_PETBATTLE_QUEUE_REMOVED: 994
+LE_GAME_ERR_PETBATTLE_QUEUE_REQUEUED_INTERNAL: 998
+LE_GAME_ERR_PETBATTLE_QUEUE_REQUEUED_REMOVED: 999
+LE_GAME_ERR_PETBATTLE_QUEUE_SLOT_CANT_BATTLE: 1004
+LE_GAME_ERR_PETBATTLE_QUEUE_SLOT_DEAD: 1006
+LE_GAME_ERR_PETBATTLE_QUEUE_SLOT_EMPTY: 1001
+LE_GAME_ERR_PETBATTLE_QUEUE_SLOT_LOCKED: 1000
+LE_GAME_ERR_PETBATTLE_QUEUE_SLOT_NO_PET: 1007
+LE_GAME_ERR_PETBATTLE_QUEUE_SLOT_NO_SPECIES: 1003
+LE_GAME_ERR_PETBATTLE_QUEUE_SLOT_NO_TRACKER: 1002
+LE_GAME_ERR_PETBATTLE_QUEUE_SLOT_REVOKED: 1005
+LE_GAME_ERR_PETBATTLE_RESTRICTED_ACCOUNT: 983
+LE_GAME_ERR_PETBATTLE_TARGET_INVALID: 972
+LE_GAME_ERR_PETBATTLE_TARGET_NOT_CAPTURABLE: 974
+LE_GAME_ERR_PETBATTLE_TARGET_OUT_OF_RANGE: 973
+LE_GAME_ERR_PETBATTLE_WILD_PET_TAPPED: 982
 LE_GAME_ERR_PETITION_ALREADY_SIGNED: 408
 LE_GAME_ERR_PETITION_ALREADY_SIGNED_BY_S: 416
 LE_GAME_ERR_PETITION_ALREADY_SIGNED_OTHER: 410
@@ -8618,9 +8488,9 @@ LE_GAME_ERR_PLAYER_DEAD: 159
 LE_GAME_ERR_PLAYER_DIED_S: 103
 LE_GAME_ERR_PLAYER_DIFFICULTY_CHANGED_S: 793
 LE_GAME_ERR_PLAYER_IS_NEUTRAL: 304
-LE_GAME_ERR_PLAYER_IS_SELF_FOUND_CANNOT_SEND_MAIL: 1138
-LE_GAME_ERR_PLAYER_IS_SELF_FOUND_CANNOT_TRADE: 1136
-LE_GAME_ERR_PLAYER_IS_SELF_FOUND_CANNOT_USE_AUCTION_HOUSE: 1139
+LE_GAME_ERR_PLAYER_IS_SELF_FOUND_CANNOT_SEND_MAIL: 1140
+LE_GAME_ERR_PLAYER_IS_SELF_FOUND_CANNOT_TRADE: 1138
+LE_GAME_ERR_PLAYER_IS_SELF_FOUND_CANNOT_USE_AUCTION_HOUSE: 1141
 LE_GAME_ERR_PLAYER_SILENCED: 678
 LE_GAME_ERR_PLAYER_SILENCED_ECHO: 689
 LE_GAME_ERR_PLAYER_UNSILENCED: 679
@@ -8633,12 +8503,13 @@ LE_GAME_ERR_PROFICIENCY_NEEDED: 11
 LE_GAME_ERR_PURCHASE_LEVEL_TOO_LOW: 735
 LE_GAME_ERR_PVP_KILL_DISHONORABLE: 507
 LE_GAME_ERR_PVP_KILL_HONORABLE: 506
-LE_GAME_ERR_PVP_MAP_NOT_FOUND: 986
-LE_GAME_ERR_PVP_MAP_NOT_SET: 987
+LE_GAME_ERR_PVP_MAP_NOT_FOUND: 988
+LE_GAME_ERR_PVP_MAP_NOT_SET: 989
 LE_GAME_ERR_PVP_TOGGLE_OFF: 562
 LE_GAME_ERR_PVP_TOGGLE_ON: 561
-LE_GAME_ERR_PVP_WARMODE_TOGGLE_OFF: 1075
-LE_GAME_ERR_PVP_WARMODE_TOGGLE_ON: 1074
+LE_GAME_ERR_PVP_TRAINING_GROUNDS_DISABLED: 1176
+LE_GAME_ERR_PVP_WARMODE_TOGGLE_OFF: 1077
+LE_GAME_ERR_PVP_WARMODE_TOGGLE_ON: 1076
 LE_GAME_ERR_QUEST_ACCEPTED_S: 172
 LE_GAME_ERR_QUEST_ADD_FOUND_SII: 298
 LE_GAME_ERR_QUEST_ADD_ITEM_SII: 299
@@ -8656,10 +8527,10 @@ LE_GAME_ERR_QUEST_FAILED_MAX_COUNT_S: 176
 LE_GAME_ERR_QUEST_FAILED_MISSING_ITEMS: 178
 LE_GAME_ERR_QUEST_FAILED_NOT_ENOUGH_MONEY: 180
 LE_GAME_ERR_QUEST_FAILED_S: 174
-LE_GAME_ERR_QUEST_FAILED_SPELL: 886
+LE_GAME_ERR_QUEST_FAILED_SPELL: 887
 LE_GAME_ERR_QUEST_FAILED_TOO_MANY_DAILY_QUESTS_I: 657
 LE_GAME_ERR_QUEST_FAILED_WRONG_RACE: 179
-LE_GAME_ERR_QUEST_FORCE_REMOVED_S: 871
+LE_GAME_ERR_QUEST_FORCE_REMOVED_S: 872
 LE_GAME_ERR_QUEST_HAS_IN_PROGRESS: 188
 LE_GAME_ERR_QUEST_LOG_FULL: 192
 LE_GAME_ERR_QUEST_MUST_CHOOSE: 191
@@ -8667,7 +8538,7 @@ LE_GAME_ERR_QUEST_NEED_PREREQS: 183
 LE_GAME_ERR_QUEST_NEED_PREREQS_CUSTOM: 184
 LE_GAME_ERR_QUEST_OBJECTIVE_COMPLETE_S: 295
 LE_GAME_ERR_QUEST_ONLY_ONE_TIMED: 182
-LE_GAME_ERR_QUEST_PET_BATTLE_VICTORIES_PVP_II: 1026
+LE_GAME_ERR_QUEST_PET_BATTLE_VICTORIES_PVP_II: 1028
 LE_GAME_ERR_QUEST_PUSH_ACCEPTED_S: 488
 LE_GAME_ERR_QUEST_PUSH_ALREADY_DONE_S: 495
 LE_GAME_ERR_QUEST_PUSH_BUSY_S: 491
@@ -8685,7 +8556,7 @@ LE_GAME_ERR_QUEST_PUSH_TIMER_EXPIRED_S: 497
 LE_GAME_ERR_QUEST_PUSH_TOO_FAR_S: 490
 LE_GAME_ERR_QUEST_REWARD_EXP_I: 189
 LE_GAME_ERR_QUEST_REWARD_MONEY_S: 190
-LE_GAME_ERR_QUEST_TURN_IN_FAIL_REASON: 1069
+LE_GAME_ERR_QUEST_TURN_IN_FAIL_REASON: 1071
 LE_GAME_ERR_QUEST_UNKNOWN_COMPLETE: 296
 LE_GAME_ERR_RAID_CONVERTED_TO_PARTY: 791
 LE_GAME_ERR_RAID_DIFFICULTY_CHANGED_S: 788
@@ -8702,14 +8573,14 @@ LE_GAME_ERR_RAID_MEMBER_ADDED_S: 521
 LE_GAME_ERR_RAID_MEMBER_REMOVED_S: 522
 LE_GAME_ERR_RAID_YOU_JOINED: 517
 LE_GAME_ERR_RAID_YOU_LEFT: 518
-LE_GAME_ERR_RANK_REQUIRES_AUTHENTICATOR: 900
+LE_GAME_ERR_RANK_REQUIRES_AUTHENTICATOR: 901
 LE_GAME_ERR_READY_CHECK_IN_PROGRESS: 592
 LE_GAME_ERR_READY_CHECK_THROTTLED: 593
 LE_GAME_ERR_REALM_NOT_FOUND: 442
 LE_GAME_ERR_RECEIVE_ITEM_S: 44
-LE_GAME_ERR_RECENT_ALLY_PIN_SERVER_ERROR: 1142
-LE_GAME_ERR_RECRUIT_A_FRIEND_ACCOUNT_LIMIT: 1028
-LE_GAME_ERR_RECRUIT_A_FRIEND_FAILED: 1029
+LE_GAME_ERR_RECENT_ALLY_PIN_SERVER_ERROR: 1175
+LE_GAME_ERR_RECRUIT_A_FRIEND_ACCOUNT_LIMIT: 1030
+LE_GAME_ERR_RECRUIT_A_FRIEND_FAILED: 1031
 LE_GAME_ERR_REFER_A_FRIEND_DIFFERENT_FACTION: 713
 LE_GAME_ERR_REFER_A_FRIEND_GRANT_LEVEL_MAX_I: 715
 LE_GAME_ERR_REFER_A_FRIEND_INSUF_EXPAN_LVL: 719
@@ -8724,32 +8595,33 @@ LE_GAME_ERR_REFER_A_FRIEND_SUMMON_LEVEL_MAX_I: 716
 LE_GAME_ERR_REFER_A_FRIEND_SUMMON_OFFLINE_S: 718
 LE_GAME_ERR_REFER_A_FRIEND_TARGET_TOO_HIGH: 710
 LE_GAME_ERR_REFER_A_FRIEND_TOO_FAR: 712
-LE_GAME_ERR_REFORGE_ALREADY_HAS_DST_STAT: 897
-LE_GAME_ERR_REFORGE_INSUFFICIENT_SRC_STAT: 896
-LE_GAME_ERR_REFORGE_ITEM_TOO_LOW_LEVEL: 898
-LE_GAME_ERR_REFORGE_SRC_STAT_NOT_FOUND: 895
-LE_GAME_ERR_REFUND_RESULT_EXCEED_MAX_CURRENCY: 904
+LE_GAME_ERR_REFORGE_ALREADY_HAS_DST_STAT: 898
+LE_GAME_ERR_REFORGE_INSUFFICIENT_SRC_STAT: 897
+LE_GAME_ERR_REFORGE_ITEM_TOO_LOW_LEVEL: 899
+LE_GAME_ERR_REFORGE_SRC_STAT_NOT_FOUND: 896
+LE_GAME_ERR_REFUND_RESULT_EXCEED_MAX_CURRENCY: 905
+LE_GAME_ERR_REMIX_INVALID_TRANSFER_REQUEST: 1143
 LE_GAME_ERR_REMOVE_FROM_PVP_QUEUE_FACTION_CHANGE: 797
 LE_GAME_ERR_REMOVE_FROM_PVP_QUEUE_XP_GAIN: 781
-LE_GAME_ERR_REPORT_SUBMISSION_FAILED: 957
-LE_GAME_ERR_REPORT_SUBMITTED_SUCCESSFULLY: 956
+LE_GAME_ERR_REPORT_SUBMISSION_FAILED: 959
+LE_GAME_ERR_REPORT_SUBMITTED_SUCCESSFULLY: 958
 LE_GAME_ERR_REQUEST_JOIN_PLAYER_S: 77
 LE_GAME_ERR_REQUESTED_INVITE_TO_GROUP_SS: 82
-LE_GAME_ERR_REQUIRES_ACHIEVEMENT_I: 903
-LE_GAME_ERR_REQUIRES_EXPANSION_S: 885
+LE_GAME_ERR_REQUIRES_ACHIEVEMENT_I: 904
+LE_GAME_ERR_REQUIRES_EXPANSION_S: 886
 LE_GAME_ERR_RESTRICTED_ACCOUNT: 578
-LE_GAME_ERR_RESTRICTED_ACCOUNT_LFG_LIST_TRIAL: 1041
+LE_GAME_ERR_RESTRICTED_ACCOUNT_LFG_LIST_TRIAL: 1043
 LE_GAME_ERR_RESTRICTED_ACCOUNT_TRIAL: 579
 LE_GAME_ERR_REVOKE_TRANSMOG_S: 72
-LE_GAME_ERR_ROLE_CHECK_ALREADY_IN_PROGRESS: 1027
+LE_GAME_ERR_ROLE_CHECK_ALREADY_IN_PROGRESS: 1029
 LE_GAME_ERR_SCALING_STAT_ITEM_LEVEL_EXCEEDED: 733
 LE_GAME_ERR_SCALING_STAT_ITEM_LEVEL_TOO_LOW: 734
 LE_GAME_ERR_SET_LOOT_FREEFORALL: 279
 LE_GAME_ERR_SET_LOOT_GROUP: 282
 LE_GAME_ERR_SET_LOOT_MASTER: 281
-LE_GAME_ERR_SET_LOOT_METHOD_FAILED_COMBAT: 1031
+LE_GAME_ERR_SET_LOOT_METHOD_FAILED_COMBAT: 1033
 LE_GAME_ERR_SET_LOOT_NBG: 283
-LE_GAME_ERR_SET_LOOT_PERSONAL: 1030
+LE_GAME_ERR_SET_LOOT_PERSONAL: 1032
 LE_GAME_ERR_SET_LOOT_ROUNDROBIN: 280
 LE_GAME_ERR_SET_LOOT_THRESHOLD_S: 284
 LE_GAME_ERR_SHAPESHIFT_FORM_CANNOT_EQUIP: 731
@@ -8757,42 +8629,43 @@ LE_GAME_ERR_SKILL_GAINED_S: 60
 LE_GAME_ERR_SKILL_UP_SI: 61
 LE_GAME_ERR_SLOT_EMPTY: 27
 LE_GAME_ERR_SOCKETING_COGWHEEL_GEM_ONLY_IN_COGWHEELSLOT: 653
-LE_GAME_ERR_SOCKETING_CYPHER_GEM_ONLY_IN_CYPHERSLOT: 1103
-LE_GAME_ERR_SOCKETING_DOMINATION_SHARD_ONLY_IN_DOMINATIONSLOT: 1101
-LE_GAME_ERR_SOCKETING_FIBER_GEM_ONLY_IN_FIBERSLOT: 1117
-LE_GAME_ERR_SOCKETING_FRAGRANCE_GEM_ONLY_IN_FRAGRANCESLOT: 1109
-LE_GAME_ERR_SOCKETING_GENERIC_FAILURE: 1093
+LE_GAME_ERR_SOCKETING_CYPHER_GEM_ONLY_IN_CYPHERSLOT: 1105
+LE_GAME_ERR_SOCKETING_DOMINATION_SHARD_ONLY_IN_DOMINATIONSLOT: 1103
+LE_GAME_ERR_SOCKETING_FIBER_GEM_ONLY_IN_FIBERSLOT: 1119
+LE_GAME_ERR_SOCKETING_FRAGRANCE_GEM_ONLY_IN_FRAGRANCESLOT: 1111
+LE_GAME_ERR_SOCKETING_GENERIC_FAILURE: 1095
 LE_GAME_ERR_SOCKETING_HYDRAULIC_GEM_ONLY_IN_HYDRAULICSLOT: 651
 LE_GAME_ERR_SOCKETING_ITEM_TOO_LOW_LEVEL: 654
 LE_GAME_ERR_SOCKETING_META_GEM_ONLY_IN_METASLOT: 649
-LE_GAME_ERR_SOCKETING_PRIMORDIAL_GEM_ONLY_IN_PRIMORDIALSLOT: 1107
-LE_GAME_ERR_SOCKETING_PUNCHCARDBLUE_GEM_ONLY_IN_PUNCHCARDBLUESLOT: 1099
-LE_GAME_ERR_SOCKETING_PUNCHCARDRED_GEM_ONLY_IN_PUNCHCARDREDSLOT: 1095
-LE_GAME_ERR_SOCKETING_PUNCHCARDYELLOW_GEM_ONLY_IN_PUNCHCARDYELLOWSLOT: 1097
+LE_GAME_ERR_SOCKETING_PRIMORDIAL_GEM_ONLY_IN_PRIMORDIALSLOT: 1109
+LE_GAME_ERR_SOCKETING_PUNCHCARDBLUE_GEM_ONLY_IN_PUNCHCARDBLUESLOT: 1101
+LE_GAME_ERR_SOCKETING_PUNCHCARDRED_GEM_ONLY_IN_PUNCHCARDREDSLOT: 1097
+LE_GAME_ERR_SOCKETING_PUNCHCARDYELLOW_GEM_ONLY_IN_PUNCHCARDYELLOWSLOT: 1099
 LE_GAME_ERR_SOCKETING_REQUIRES_COGWHEEL_GEM: 652
-LE_GAME_ERR_SOCKETING_REQUIRES_CYPHER_GEM: 1102
-LE_GAME_ERR_SOCKETING_REQUIRES_DOMINATION_SHARD: 1100
-LE_GAME_ERR_SOCKETING_REQUIRES_FIBER_GEM: 1116
-LE_GAME_ERR_SOCKETING_REQUIRES_FRAGRANCE_GEM: 1108
+LE_GAME_ERR_SOCKETING_REQUIRES_CYPHER_GEM: 1104
+LE_GAME_ERR_SOCKETING_REQUIRES_DOMINATION_SHARD: 1102
+LE_GAME_ERR_SOCKETING_REQUIRES_FIBER_GEM: 1118
+LE_GAME_ERR_SOCKETING_REQUIRES_FRAGRANCE_GEM: 1110
 LE_GAME_ERR_SOCKETING_REQUIRES_HYDRAULIC_GEM: 650
 LE_GAME_ERR_SOCKETING_REQUIRES_META_GEM: 648
-LE_GAME_ERR_SOCKETING_REQUIRES_PRIMORDIAL_GEM: 1106
-LE_GAME_ERR_SOCKETING_REQUIRES_PUNCHCARDBLUE_GEM: 1098
-LE_GAME_ERR_SOCKETING_REQUIRES_PUNCHCARDRED_GEM: 1094
-LE_GAME_ERR_SOCKETING_REQUIRES_PUNCHCARDYELLOW_GEM: 1096
-LE_GAME_ERR_SOCKETING_REQUIRES_SINGING_SEA_GEM: 1112
-LE_GAME_ERR_SOCKETING_REQUIRES_SINGING_THUNDER_GEM: 1110
-LE_GAME_ERR_SOCKETING_REQUIRES_SINGING_WIND_GEM: 1114
-LE_GAME_ERR_SOCKETING_REQUIRES_TINKER_GEM: 1104
-LE_GAME_ERR_SOCKETING_SINGINGSEA_GEM_ONLY_IN_SINGINGSEASLOT: 1113
-LE_GAME_ERR_SOCKETING_SINGINGTHUNDER_GEM_ONLY_IN_SINGINGTHUNDERSLOT: 1111
-LE_GAME_ERR_SOCKETING_SINGINGWIND_GEM_ONLY_IN_SINGINGWINDSLOT: 1115
-LE_GAME_ERR_SOCKETING_TINKER_GEM_ONLY_IN_TINKERSLOT: 1105
+LE_GAME_ERR_SOCKETING_REQUIRES_PRIMORDIAL_GEM: 1108
+LE_GAME_ERR_SOCKETING_REQUIRES_PUNCHCARDBLUE_GEM: 1100
+LE_GAME_ERR_SOCKETING_REQUIRES_PUNCHCARDRED_GEM: 1096
+LE_GAME_ERR_SOCKETING_REQUIRES_PUNCHCARDYELLOW_GEM: 1098
+LE_GAME_ERR_SOCKETING_REQUIRES_SINGING_SEA_GEM: 1114
+LE_GAME_ERR_SOCKETING_REQUIRES_SINGING_THUNDER_GEM: 1112
+LE_GAME_ERR_SOCKETING_REQUIRES_SINGING_WIND_GEM: 1116
+LE_GAME_ERR_SOCKETING_REQUIRES_TINKER_GEM: 1106
+LE_GAME_ERR_SOCKETING_SINGINGSEA_GEM_ONLY_IN_SINGINGSEASLOT: 1115
+LE_GAME_ERR_SOCKETING_SINGINGTHUNDER_GEM_ONLY_IN_SINGINGTHUNDERSLOT: 1113
+LE_GAME_ERR_SOCKETING_SINGINGWIND_GEM_ONLY_IN_SINGINGWINDSLOT: 1117
+LE_GAME_ERR_SOCKETING_TINKER_GEM_ONLY_IN_TINKERSLOT: 1107
 LE_GAME_ERR_SOLO_JOIN_BATTLEGROUND_S: 568
-LE_GAME_ERR_SOR_INVALID_COMMENT: 952
-LE_GAME_ERR_SOR_INVALID_EMAIL: 951
-LE_GAME_ERR_SOR_START_EXPERIENCE_INCOMPLETE: 950
-LE_GAME_ERR_SPEC_IS_DISABLED: 1046
+LE_GAME_ERR_SOLO_JOIN_TRAINING_GROUND: 1177
+LE_GAME_ERR_SOR_INVALID_COMMENT: 954
+LE_GAME_ERR_SOR_INVALID_EMAIL: 953
+LE_GAME_ERR_SOR_START_EXPERIENCE_INCOMPLETE: 952
+LE_GAME_ERR_SPEC_IS_DISABLED: 1048
 LE_GAME_ERR_SPEC_WIPE_ERROR: 538
 LE_GAME_ERR_SPECIFY_MASTER_LOOTER: 286
 LE_GAME_ERR_SPELL_ALREADY_KNOWN_S: 57
@@ -8804,7 +8677,7 @@ LE_GAME_ERR_SPELL_FAILED_ANOTHER_IN_PROGRESS: 263
 LE_GAME_ERR_SPELL_FAILED_EQUIPPED_ITEM: 260
 LE_GAME_ERR_SPELL_FAILED_EQUIPPED_ITEM_CLASS_S: 261
 LE_GAME_ERR_SPELL_FAILED_EQUIPPED_SPECIFIC_ITEM: 332
-LE_GAME_ERR_SPELL_FAILED_LEVEL_REQUIREMENT: 1076
+LE_GAME_ERR_SPELL_FAILED_LEVEL_REQUIREMENT: 1078
 LE_GAME_ERR_SPELL_FAILED_NOTUNSHEATHED: 403
 LE_GAME_ERR_SPELL_FAILED_REAGENTS: 257
 LE_GAME_ERR_SPELL_FAILED_REAGENTS_GENERIC: 258
@@ -8814,24 +8687,24 @@ LE_GAME_ERR_SPELL_FAILED_TOTEMS: 256
 LE_GAME_ERR_SPELL_OUT_OF_RANGE: 386
 LE_GAME_ERR_SPELL_UNLEARNED_S: 419
 LE_GAME_ERR_SPLIT_FAILED: 30
-LE_GAME_ERR_START_RESTRICTED_CHALLENGE_MODE: 1141
+LE_GAME_ERR_START_RESTRICTED_CHALLENGE_MODE: 1145
 LE_GAME_ERR_SUGGEST_INVITE_PLAYER_S: 74
-LE_GAME_ERR_SUGGESTION_SUBMITTED_SUCCESSFULLY: 958
+LE_GAME_ERR_SUGGESTION_SUBMITTED_SUCCESSFULLY: 960
 LE_GAME_ERR_SYSTEM: 1
 LE_GAME_ERR_SYSTEM_DISABLED: 656
-LE_GAME_ERR_TALENT_FAILED_CANT_REMOVE_TALENT: 890
-LE_GAME_ERR_TALENT_FAILED_IN_COMBAT: 892
-LE_GAME_ERR_TALENT_FAILED_IN_MYTHIC_PLUS: 894
-LE_GAME_ERR_TALENT_FAILED_IN_PVP_MATCH: 893
-LE_GAME_ERR_TALENT_FAILED_NO_PRIMARY_TREE_SELECTED: 889
-LE_GAME_ERR_TALENT_FAILED_NOT_ENOUGH_TALENTS_IN_PRIMARY_TREE: 888
-LE_GAME_ERR_TALENT_FAILED_REST_AREA: 1066
-LE_GAME_ERR_TALENT_FAILED_UNKNOWN: 891
-LE_GAME_ERR_TALENT_FAILED_UNSPENT_TALENT_POINTS: 887
-LE_GAME_ERR_TALENT_GRANTED_BY_AURA: 1071
+LE_GAME_ERR_TALENT_FAILED_CANT_REMOVE_TALENT: 891
+LE_GAME_ERR_TALENT_FAILED_IN_COMBAT: 893
+LE_GAME_ERR_TALENT_FAILED_IN_MYTHIC_PLUS: 895
+LE_GAME_ERR_TALENT_FAILED_IN_PVP_MATCH: 894
+LE_GAME_ERR_TALENT_FAILED_NO_PRIMARY_TREE_SELECTED: 890
+LE_GAME_ERR_TALENT_FAILED_NOT_ENOUGH_TALENTS_IN_PRIMARY_TREE: 889
+LE_GAME_ERR_TALENT_FAILED_REST_AREA: 1068
+LE_GAME_ERR_TALENT_FAILED_UNKNOWN: 892
+LE_GAME_ERR_TALENT_FAILED_UNSPENT_TALENT_POINTS: 888
+LE_GAME_ERR_TALENT_GRANTED_BY_AURA: 1073
 LE_GAME_ERR_TALENT_WIPE_ERROR: 537
 LE_GAME_ERR_TAME_FAILED: 288
-LE_GAME_ERR_TARGET_IS_SELF_FOUND_CANNOT_TRADE: 1135
+LE_GAME_ERR_TARGET_IS_SELF_FOUND_CANNOT_TRADE: 1137
 LE_GAME_ERR_TARGET_LOGGING_OUT: 531
 LE_GAME_ERR_TARGET_NOT_IN_GROUP_S: 98
 LE_GAME_ERR_TARGET_NOT_IN_INSTANCE_S: 99
@@ -8851,22 +8724,22 @@ LE_GAME_ERR_TAXIPLAYERSHAPESHIFTED: 222
 LE_GAME_ERR_TAXISAMENODE: 213
 LE_GAME_ERR_TAXITOOFARAWAY: 217
 LE_GAME_ERR_TAXIUNSPECIFIEDSERVERERROR: 215
-LE_GAME_ERR_TEST_CVAR_SET_SSS: 1068
+LE_GAME_ERR_TEST_CVAR_SET_SSS: 1070
 LE_GAME_ERR_TICKET_ALREADY_EXISTS: 428
 LE_GAME_ERR_TICKET_CREATE_ERROR: 429
 LE_GAME_ERR_TICKET_DB_ERROR: 431
 LE_GAME_ERR_TICKET_NO_TEXT: 432
 LE_GAME_ERR_TICKET_TEXT_TOO_LONG: 433
 LE_GAME_ERR_TICKET_UPDATE_ERROR: 430
-LE_GAME_ERR_TOO_FAR_TO_INTERACT: 859
+LE_GAME_ERR_TOO_FAR_TO_INTERACT: 860
 LE_GAME_ERR_TOO_FEW_TO_SPLIT: 29
 LE_GAME_ERR_TOO_MANY_CHAT_CHANNELS: 526
 LE_GAME_ERR_TOO_MANY_SOCKETS: 726
 LE_GAME_ERR_TOO_MANY_SPECIAL_BAGS: 18
 LE_GAME_ERR_TOO_MUCH_GOLD: 661
 LE_GAME_ERR_TOOBUSYTOFOLLOW: 389
-LE_GAME_ERR_TOY_ALREADY_KNOWN: 1043
-LE_GAME_ERR_TOY_USE_LIMIT_REACHED: 1042
+LE_GAME_ERR_TOY_ALREADY_KNOWN: 1045
+LE_GAME_ERR_TOY_USE_LIMIT_REACHED: 1044
 LE_GAME_ERR_TRADE_BAG: 50
 LE_GAME_ERR_TRADE_BAG_FULL: 237
 LE_GAME_ERR_TRADE_BLOCKED_S: 232
@@ -8887,17 +8760,18 @@ LE_GAME_ERR_TRADE_TARGET_MAX_LIMIT_CATEGORY_COUNT_EXCEEDED_IS: 728
 LE_GAME_ERR_TRADE_TEMP_ENCHANT_BOUND: 48
 LE_GAME_ERR_TRADE_TOO_FAR: 234
 LE_GAME_ERR_TRADE_WRONG_REALM: 596
-LE_GAME_ERR_TRANSMOG_SET_ALREADY_KNOWN: 1044
-LE_GAME_ERR_TRANSMOGRIFY_CANT_EQUIP: 917
-LE_GAME_ERR_TRANSMOGRIFY_INVALID_DESTINATION: 921
-LE_GAME_ERR_TRANSMOGRIFY_INVALID_ITEM_TYPE: 918
-LE_GAME_ERR_TRANSMOGRIFY_INVALID_SOURCE: 920
-LE_GAME_ERR_TRANSMOGRIFY_LEGENDARY: 923
-LE_GAME_ERR_TRANSMOGRIFY_MISMATCH: 922
-LE_GAME_ERR_TRANSMOGRIFY_NOT_EQUIPPED: 926
-LE_GAME_ERR_TRANSMOGRIFY_NOT_SOULBOUND: 919
-LE_GAME_ERR_TRANSMOGRIFY_SAME_APPEARANCE: 925
-LE_GAME_ERR_TRANSMOGRIFY_SAME_ITEM: 924
+LE_GAME_ERR_TRANSMOG_INVALID_ACTION_TRIAL_OF_STYLE: 928
+LE_GAME_ERR_TRANSMOG_SET_ALREADY_KNOWN: 1046
+LE_GAME_ERR_TRANSMOGRIFY_CANT_EQUIP: 918
+LE_GAME_ERR_TRANSMOGRIFY_INVALID_DESTINATION: 922
+LE_GAME_ERR_TRANSMOGRIFY_INVALID_ITEM_TYPE: 919
+LE_GAME_ERR_TRANSMOGRIFY_INVALID_SOURCE: 921
+LE_GAME_ERR_TRANSMOGRIFY_LEGENDARY: 924
+LE_GAME_ERR_TRANSMOGRIFY_MISMATCH: 923
+LE_GAME_ERR_TRANSMOGRIFY_NOT_EQUIPPED: 927
+LE_GAME_ERR_TRANSMOGRIFY_NOT_SOULBOUND: 920
+LE_GAME_ERR_TRANSMOGRIFY_SAME_APPEARANCE: 926
+LE_GAME_ERR_TRANSMOGRIFY_SAME_ITEM: 925
 LE_GAME_ERR_UNHEALTHY_TIME: 586
 LE_GAME_ERR_UNINVITE_YOU: 95
 LE_GAME_ERR_UNIT_NOT_FOUND: 374
@@ -8921,17 +8795,17 @@ LE_GAME_ERR_VENDOR_MISSING_TURNINS: 643
 LE_GAME_ERR_VENDOR_NOT_INTERESTED: 38
 LE_GAME_ERR_VENDOR_SOLD_OUT: 40
 LE_GAME_ERR_VENDOR_TOO_FAR: 41
-LE_GAME_ERR_VOICE_CHAT_CHANNEL_ALREADY_EXISTS: 1085
-LE_GAME_ERR_VOICE_CHAT_CHANNEL_NAME_TOO_LONG: 1084
-LE_GAME_ERR_VOICE_CHAT_CHANNEL_NAME_TOO_SHORT: 1083
-LE_GAME_ERR_VOICE_CHAT_DISABLED: 1090
-LE_GAME_ERR_VOICE_CHAT_GENERIC_UNABLE_TO_CONNECT: 1081
-LE_GAME_ERR_VOICE_CHAT_PARENTAL_DISABLE_ALL: 1089
+LE_GAME_ERR_VOICE_CHAT_CHANNEL_ALREADY_EXISTS: 1087
+LE_GAME_ERR_VOICE_CHAT_CHANNEL_NAME_TOO_LONG: 1086
+LE_GAME_ERR_VOICE_CHAT_CHANNEL_NAME_TOO_SHORT: 1085
+LE_GAME_ERR_VOICE_CHAT_DISABLED: 1092
+LE_GAME_ERR_VOICE_CHAT_GENERIC_UNABLE_TO_CONNECT: 1083
+LE_GAME_ERR_VOICE_CHAT_PARENTAL_DISABLE_ALL: 1091
 LE_GAME_ERR_VOICE_CHAT_PARENTAL_DISABLE_MIC: 687
-LE_GAME_ERR_VOICE_CHAT_PLAYER_SILENCED: 1088
-LE_GAME_ERR_VOICE_CHAT_SERVICE_LOST: 1082
-LE_GAME_ERR_VOICE_CHAT_TARGET_NOT_FOUND: 1086
-LE_GAME_ERR_VOICE_CHAT_TOO_MANY_REQUESTS: 1087
+LE_GAME_ERR_VOICE_CHAT_PLAYER_SILENCED: 1090
+LE_GAME_ERR_VOICE_CHAT_SERVICE_LOST: 1084
+LE_GAME_ERR_VOICE_CHAT_TARGET_NOT_FOUND: 1088
+LE_GAME_ERR_VOICE_CHAT_TOO_MANY_REQUESTS: 1089
 LE_GAME_ERR_VOICE_IGNORE_ADDED_S: 672
 LE_GAME_ERR_VOICE_IGNORE_ALREADY_S: 671
 LE_GAME_ERR_VOICE_IGNORE_AMBIGUOUS: 674
@@ -8940,29 +8814,29 @@ LE_GAME_ERR_VOICE_IGNORE_FULL: 668
 LE_GAME_ERR_VOICE_IGNORE_NOT_FOUND: 670
 LE_GAME_ERR_VOICE_IGNORE_REMOVED_S: 673
 LE_GAME_ERR_VOICE_IGNORE_SELF: 669
-LE_GAME_ERR_VOID_DEPOSIT_FULL: 927
-LE_GAME_ERR_VOID_STORAGE_BAG: 937
-LE_GAME_ERR_VOID_STORAGE_CHARGES: 933
-LE_GAME_ERR_VOID_STORAGE_CONJURED: 935
-LE_GAME_ERR_VOID_STORAGE_DURATION: 946
-LE_GAME_ERR_VOID_STORAGE_HOLIDAY: 945
-LE_GAME_ERR_VOID_STORAGE_INVALID_ITEM: 948
-LE_GAME_ERR_VOID_STORAGE_LOAD_FAILED: 947
-LE_GAME_ERR_VOID_STORAGE_LOOT: 944
-LE_GAME_ERR_VOID_STORAGE_MAIL: 936
-LE_GAME_ERR_VOID_STORAGE_QUEST: 934
-LE_GAME_ERR_VOID_STORAGE_REPAIR: 932
-LE_GAME_ERR_VOID_STORAGE_STACKABLE: 930
-LE_GAME_ERR_VOID_STORAGE_UNBOUND: 931
-LE_GAME_ERR_VOID_STORAGE_UNIQUE: 943
-LE_GAME_ERR_VOID_STORAGE_WRAPPED: 929
-LE_GAME_ERR_VOID_TRANSFER_INTERNAL_ERROR: 940
-LE_GAME_ERR_VOID_TRANSFER_INV_FULL: 939
-LE_GAME_ERR_VOID_TRANSFER_ITEM_INVALID: 941
-LE_GAME_ERR_VOID_TRANSFER_STORAGE_FULL: 938
-LE_GAME_ERR_VOID_WITHDRAW_FULL: 928
-LE_GAME_ERR_WARGAME_REQUEST_FAILURE: 899
-LE_GAME_ERR_WARGAME_REQUEST_SENT: 902
+LE_GAME_ERR_VOID_DEPOSIT_FULL: 929
+LE_GAME_ERR_VOID_STORAGE_BAG: 939
+LE_GAME_ERR_VOID_STORAGE_CHARGES: 935
+LE_GAME_ERR_VOID_STORAGE_CONJURED: 937
+LE_GAME_ERR_VOID_STORAGE_DURATION: 948
+LE_GAME_ERR_VOID_STORAGE_HOLIDAY: 947
+LE_GAME_ERR_VOID_STORAGE_INVALID_ITEM: 950
+LE_GAME_ERR_VOID_STORAGE_LOAD_FAILED: 949
+LE_GAME_ERR_VOID_STORAGE_LOOT: 946
+LE_GAME_ERR_VOID_STORAGE_MAIL: 938
+LE_GAME_ERR_VOID_STORAGE_QUEST: 936
+LE_GAME_ERR_VOID_STORAGE_REPAIR: 934
+LE_GAME_ERR_VOID_STORAGE_STACKABLE: 932
+LE_GAME_ERR_VOID_STORAGE_UNBOUND: 933
+LE_GAME_ERR_VOID_STORAGE_UNIQUE: 945
+LE_GAME_ERR_VOID_STORAGE_WRAPPED: 931
+LE_GAME_ERR_VOID_TRANSFER_INTERNAL_ERROR: 942
+LE_GAME_ERR_VOID_TRANSFER_INV_FULL: 941
+LE_GAME_ERR_VOID_TRANSFER_ITEM_INVALID: 943
+LE_GAME_ERR_VOID_TRANSFER_STORAGE_FULL: 940
+LE_GAME_ERR_VOID_WITHDRAW_FULL: 930
+LE_GAME_ERR_WARGAME_REQUEST_FAILURE: 900
+LE_GAME_ERR_WARGAME_REQUEST_SENT: 903
 LE_GAME_ERR_WRONG_BAG_TYPE: 22
 LE_GAME_ERR_WRONG_BAG_TYPE_SUBCLASS: 333
 LE_GAME_ERR_WRONG_SLOT: 12
@@ -8974,37 +8848,9 @@ LE_INVITE_CONFIRMATION_RELATION_CLUB: 3
 LE_INVITE_CONFIRMATION_RELATION_FRIEND: 1
 LE_INVITE_CONFIRMATION_RELATION_GUILD: 2
 LE_INVITE_CONFIRMATION_RELATION_NONE: 0
+LE_INVITE_CONFIRMATION_RELATION_RECENT_ALLIES: 4
 LE_INVITE_CONFIRMATION_REQUEST: 1
 LE_INVITE_CONFIRMATION_SUGGEST: 2
-LE_ITEM_ARMOR_CLOTH: 1
-LE_ITEM_ARMOR_COSMETIC: 5
-LE_ITEM_ARMOR_GENERIC: 0
-LE_ITEM_ARMOR_IDOL: 8
-LE_ITEM_ARMOR_LEATHER: 2
-LE_ITEM_ARMOR_LIBRAM: 7
-LE_ITEM_ARMOR_MAIL: 3
-LE_ITEM_ARMOR_PLATE: 4
-LE_ITEM_ARMOR_RELIC: 11
-LE_ITEM_ARMOR_SHIELD: 6
-LE_ITEM_ARMOR_SIGIL: 10
-LE_ITEM_ARMOR_TOTEM: 9
-LE_ITEM_CLASS_ARMOR: 4
-LE_ITEM_CLASS_BATTLEPET: 17
-LE_ITEM_CLASS_CONSUMABLE: 0
-LE_ITEM_CLASS_CONTAINER: 1
-LE_ITEM_CLASS_GEM: 3
-LE_ITEM_CLASS_GLYPH: 16
-LE_ITEM_CLASS_ITEM_ENHANCEMENT: 8
-LE_ITEM_CLASS_KEY: 13
-LE_ITEM_CLASS_MISCELLANEOUS: 15
-LE_ITEM_CLASS_PROJECTILE: 6
-LE_ITEM_CLASS_QUESTITEM: 12
-LE_ITEM_CLASS_QUIVER: 11
-LE_ITEM_CLASS_REAGENT: 5
-LE_ITEM_CLASS_RECIPE: 9
-LE_ITEM_CLASS_TRADEGOODS: 7
-LE_ITEM_CLASS_WEAPON: 2
-LE_ITEM_CLASS_WOW_TOKEN: 18
 LE_ITEM_FILTER_TYPE_ARTIFACT_RELIC: 36
 LE_ITEM_FILTER_TYPE_CHEST: 5
 LE_ITEM_FILTER_TYPE_CLOAK: 16
@@ -9020,13 +8866,6 @@ LE_ITEM_FILTER_TYPE_SHOULDER: 3
 LE_ITEM_FILTER_TYPE_TRINKET: 12
 LE_ITEM_FILTER_TYPE_WAIST: 6
 LE_ITEM_FILTER_TYPE_WRIST: 9
-LE_ITEM_MISCELLANEOUS_COMPANION_PET: 2
-LE_ITEM_MISCELLANEOUS_HOLIDAY: 3
-LE_ITEM_MISCELLANEOUS_JUNK: 0
-LE_ITEM_MISCELLANEOUS_MOUNT: 5
-LE_ITEM_MISCELLANEOUS_MOUNT_EQUIPMENT: 6
-LE_ITEM_MISCELLANEOUS_OTHER: 4
-LE_ITEM_MISCELLANEOUS_REAGENT: 1
 LE_ITEM_QUALITY_ARTIFACT: 6
 LE_ITEM_QUALITY_COMMON: 1
 LE_ITEM_QUALITY_EPIC: 4
@@ -9036,39 +8875,6 @@ LE_ITEM_QUALITY_POOR: 0
 LE_ITEM_QUALITY_RARE: 3
 LE_ITEM_QUALITY_UNCOMMON: 2
 LE_ITEM_QUALITY_WOW_TOKEN: 8
-LE_ITEM_RECIPE_ALCHEMY: 6
-LE_ITEM_RECIPE_BLACKSMITHING: 4
-LE_ITEM_RECIPE_BOOK: 0
-LE_ITEM_RECIPE_COOKING: 5
-LE_ITEM_RECIPE_ENCHANTING: 8
-LE_ITEM_RECIPE_ENGINEERING: 3
-LE_ITEM_RECIPE_FIRST_AID: 7
-LE_ITEM_RECIPE_FISHING: 9
-LE_ITEM_RECIPE_INSCRIPTION: 11
-LE_ITEM_RECIPE_JEWELCRAFTING: 10
-LE_ITEM_RECIPE_LEATHERWORKING: 1
-LE_ITEM_RECIPE_TAILORING: 2
-LE_ITEM_WEAPON_AXE1H: 0
-LE_ITEM_WEAPON_AXE2H: 1
-LE_ITEM_WEAPON_BEARCLAW: 11
-LE_ITEM_WEAPON_BOWS: 2
-LE_ITEM_WEAPON_CATCLAW: 12
-LE_ITEM_WEAPON_CROSSBOW: 18
-LE_ITEM_WEAPON_DAGGER: 15
-LE_ITEM_WEAPON_FISHINGPOLE: 20
-LE_ITEM_WEAPON_GENERIC: 14
-LE_ITEM_WEAPON_GUNS: 3
-LE_ITEM_WEAPON_MACE1H: 4
-LE_ITEM_WEAPON_MACE2H: 5
-LE_ITEM_WEAPON_OBSOLETE3: 17
-LE_ITEM_WEAPON_POLEARM: 6
-LE_ITEM_WEAPON_STAFF: 10
-LE_ITEM_WEAPON_SWORD1H: 7
-LE_ITEM_WEAPON_SWORD2H: 8
-LE_ITEM_WEAPON_THROWN: 16
-LE_ITEM_WEAPON_UNARMED: 13
-LE_ITEM_WEAPON_WAND: 19
-LE_ITEM_WEAPON_WARGLAIVE: 9
 LE_LFG_CATEGORY_BATTLEFIELD: 7
 LE_LFG_CATEGORY_FLEXRAID: 5
 LE_LFG_CATEGORY_LFD: 1
@@ -9124,6 +8930,8 @@ LE_PET_BATTLE_STATE_WAITING_FOR_FRONT_PETS: 4
 LE_PET_BATTLE_STATE_WAITING_PRE_BATTLE: 2
 LE_PET_JOURNAL_FILTER_COLLECTED: 1
 LE_PET_JOURNAL_FILTER_NOT_COLLECTED: 2
+LE_PET_JOURNAL_FILTER_TYPE_BATTLE_PETS: 3
+LE_PET_JOURNAL_FILTER_TYPE_NON_COMBAT_PETS: 4
 LE_QUEST_FACTION_ALLIANCE: 1
 LE_QUEST_FACTION_HORDE: 2
 LE_QUEST_FREQUENCY_DAILY: 2
@@ -9205,7 +9013,6 @@ LE_WOW_CONNECTION_STATE_NONE: 1
 NUM_LE_ACTIONBAR_VISUAL_STATES: 2
 NUM_LE_AURORA_STATES: 9
 NUM_LE_AUTHS: 2
-NUM_LE_AUTOCOMPLETE_PRIORITYS: 7
 NUM_LE_BAG_FILTER_FLAGS: 5
 NUM_LE_BATTLE_PET_ACTIONS: 5
 NUM_LE_BATTLE_PET_OWNERS: 3
@@ -9213,13 +9020,12 @@ NUM_LE_CHARACTER_UNDELETE_RESULTS: 8
 NUM_LE_CHARACTER_UPGRADE_RESULTS: 13
 NUM_LE_CINEMATIC_PAN_TYPES: 6
 NUM_LE_DEMON_HUNTER_CREATION_DISABLED_REASONS: 3
-NUM_LE_EXPANSION_LEVELS: 0
+NUM_LE_EXPANSION_LEVELS: 1
 NUM_LE_FOLLOWER_ABILITY_CAST_RESULTS: 14
 NUM_LE_FOLLOWER_MISSION_COMPLETE_STATES: 4
-NUM_LE_FRAME_TUTORIAL_ACCCOUNTS: 3
 NUM_LE_FRAME_TUTORIALS: 58
 NUM_LE_GM_WEB_TICKET_STATUSS: 4
-NUM_LE_INVITE_CONFIRMATION_RELATIONS: 4
+NUM_LE_INVITE_CONFIRMATION_RELATIONS: 5
 NUM_LE_INVITE_REQUEST_TYPES: 3
 NUM_LE_ITEM_FILTER_TYPES: 37
 NUM_LE_ITEM_QUALITYS: 9
@@ -9231,7 +9037,7 @@ NUM_LE_MODEL_BLEND_OPERATIONS: 2
 NUM_LE_MOUNT_JOURNAL_FILTERS: 3
 NUM_LE_PARTY_CATEGORYS: 2
 NUM_LE_PET_BATTLE_STATES: 7
-NUM_LE_PET_JOURNAL_FILTERS: 2
+NUM_LE_PET_JOURNAL_FILTERS: 4
 NUM_LE_PET_SORT_PARAMETERS: 4
 NUM_LE_QUEST_FACTIONS: 2
 NUM_LE_QUEST_FREQUENCYS: 3
