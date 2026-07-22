@@ -13201,11 +13201,13 @@ C_NamePlate.GetNamePlateForUnit:
     type: boolean
   outputs:
   - name: nameplate
+    nilable: true
     type: table
 C_NamePlate.GetNamePlates:
   inputs:
   outputs:
   - name: nameplates
+    stub:
     type:
       arrayof: table
 C_NamePlate.GetNamePlateSize:
