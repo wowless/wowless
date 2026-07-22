@@ -29312,8 +29312,10 @@ UnitName:
     type: unit
   outputs:
   - name: unitName
+    nilable: true
     type: string
   - name: unitServer
+    nilable: true
     type: string
 UnitNameplateShowsWidgetsOnly:
   inputs:
