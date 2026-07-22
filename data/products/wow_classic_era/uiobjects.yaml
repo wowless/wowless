@@ -4241,8 +4241,7 @@ Frame:
         type: boolean
       - name: units
         nilable: true
-        type:
-          enum: UnitTokenType
+        type: unit
       outstride: 1
     IsFrameBuffer:
       inputs:
@@ -4338,6 +4337,8 @@ Frame:
       - name: registered
         type: boolean
     RegisterEventCallback:
+      impl:
+        uiobjectimpl: Frame/RegisterEventCallback
       inputs:
       - name: eventName
         type: string
@@ -4360,8 +4361,7 @@ Frame:
         type: string
       - name: units
         nilable: true
-        type:
-          enum: UnitTokenType
+        type: unit
       instride: 1
       outputs:
       - name: registered
@@ -4373,8 +4373,7 @@ Frame:
       - name: cb
         type: function
       - name: units
-        type:
-          enum: UnitTokenType
+        type: unit
       instride: 1
       outputs:
       - name: registered
@@ -4388,17 +4387,6 @@ Frame:
         type: number
       - default: 0.5
         name: y
-        type: number
-      outputs:
-    SetAlphaFromBoolean:
-      inputs:
-      - name: value
-        type: boolean
-      - default: 255
-        name: alphaIfTrue
-        type: number
-      - default: 0
-        name: alphaIfFalse
         type: number
       outputs:
     SetAlphaGradient:
@@ -9005,8 +8993,7 @@ UnitPositionFrame:
       inputs:
       outputs:
       - name: units
-        type:
-          enum: UnitTokenType
+        type: unit
       outstride: 1
       stuboutstrides: 0
     GetPlayerPingScale:
@@ -9058,8 +9045,7 @@ UnitPositionFrame:
     SetUnitColor:
       inputs:
       - name: unit
-        type:
-          enum: UnitTokenType
+        type: unit
       - name: colorR
         type: number
       - name: colorG

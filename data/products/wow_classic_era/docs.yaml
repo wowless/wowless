@@ -123,7 +123,6 @@ lies:
     C_AuctionHouse.StartCommoditiesPurchase:
     C_AuctionHouse.SupportsCopperValues:
     C_BarberShopInternal.SetQAMode:
-    C_BattleNet.InstallHighResTextures:
     C_CombatLogInternal.GetCurrentEventInfo:
     C_ConfigurationWarnings.GetConfigurationWarnings:
     C_ConfigurationWarnings.GetConfigurationWarningSeen:
@@ -150,53 +149,11 @@ lies:
     TogglePortals:
     ToggleTris:
   extra_enums:
-    ActionBarOrientation:
-    ActionBarVisibleSetting:
     AuctionHouseFilterCategory:
-    AuraFrameIconDirection:
-    AuraFrameIconWrap:
-    AuraFrameOrientation:
-    BagsDirection:
-    BagsOrientation:
     CharSectionCondition:
     ConfigurationWarning:
-    CooldownViewerBarContent:
-    CooldownViewerIconDirection:
-    CooldownViewerOrientation:
-    CooldownViewerVisibleSetting:
-    EditModeAccountSetting:
-    EditModeActionBarSetting:
-    EditModeActionBarSystemIndices:
-    EditModeArchaeologyBarSetting:
-    EditModeAuraFrameSetting:
-    EditModeAuraFrameSystemIndices:
-    EditModeBagsSetting:
-    EditModeCastBarSetting:
-    EditModeChatFrameSetting:
-    EditModeCooldownViewerSetting:
-    EditModeCooldownViewerSystemIndices:
-    EditModeDurabilityFrameSetting:
-    EditModeLayoutType:
-    EditModeMicroMenuSetting:
-    EditModeMinimapSetting:
-    EditModeObjectiveTrackerSetting:
-    EditModePresetLayouts:
-    EditModeSettingDisplayType:
-    EditModeStatusTrackingBarSetting:
-    EditModeStatusTrackingBarSystemIndices:
-    EditModeSystem:
-    EditModeTimerBarsSetting:
-    EditModeUnitFrameSetting:
-    EditModeUnitFrameSystemIndices:
-    EditModeVehicleSeatIndicatorSetting:
     ItemCommodityStatus:
-    MicroMenuOrder:
-    MicroMenuOrientation:
-    RaidGroupDisplayType:
-    SortPlayersBy:
     UnitTokenType:
-    ViewArenaSize:
-    ViewRaidSize:
     WarbandEventState:
     WarbandGroupFlags:
     WarbandPlacementDisplayInfoType:
@@ -865,6 +822,8 @@ typedefs:
   UnitTokenPvPRestrictedForAddOns:
     type: unit
   UnitTokenRestrictedForAddOns:
+    type: unit
+  UnitTokenType:
     type: unit
   UnitTokenVariant:
     type: unit
