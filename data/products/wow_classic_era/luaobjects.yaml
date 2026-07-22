@@ -15,6 +15,7 @@ AbbreviateConfig:
             structure: NumberAbbreviationBreakpoint
       outputs:
 AbbreviatedNumberFormatter:
+  inherits: NumericFormatter
   methods:
     AddBreakpoint:
       inputs:
@@ -180,6 +181,7 @@ DurationTextBinding:
       inputs:
       outputs:
 LuaColorCurveObject:
+  inherits: LuaCurveObjectBase
   methods:
     AddPoint:
       inputs:
@@ -256,6 +258,7 @@ LuaColorCurveObject:
       inputs:
       outputs:
 LuaCurveObject:
+  inherits: LuaCurveObjectBase
   methods:
     AddPoint:
       inputs:
@@ -345,6 +348,7 @@ LuaDurationClock:
         type: number
   virtual: true
 LuaDurationManualClock:
+  inherits: LuaDurationClock
   methods:
     AdvanceTime:
       inputs:
@@ -648,6 +652,7 @@ NumericFormatter:
         type: string
   virtual: true
 NumericRuleFormatter:
+  inherits: NumericFormatter
   methods:
     AddBreakpoint:
       inputs:
@@ -679,6 +684,7 @@ NumericRuleFormatter:
             structure: NumericRuleFormatBreakpoint
       outputs:
 SecondsFormatter:
+  inherits: NumericFormatter
   methods:
     CanApproximate:
       inputs:
