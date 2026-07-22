@@ -8031,7 +8031,7 @@ Slider:
 StatusBar:
   fields:
     fillStyle:
-      init: STANDARD
+      init: 0
       type:
         stringenum: StatusBarFillStyle
     max:
