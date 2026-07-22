@@ -8175,6 +8175,12 @@ PlayerInfoCharacterData:
 PlayerLocation:
   fields:
   mixin: PlayerLocationMixin
+PrivateAuraAnchor:
+  fields:
+    anchorID:
+      type: number
+    unitToken:
+      type: string
 PrivateAuraIconInfo:
   fields:
     borderScale:
