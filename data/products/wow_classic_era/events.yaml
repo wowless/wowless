@@ -3636,9 +3636,6 @@ COMBAT_LOG_ENTRIES_CLEARED:
 COMBAT_LOG_EVENT:
   callback: true
   payload:
-COMBAT_LOG_EVENT_INTERNAL_UNFILTERED:
-  callback: true
-  payload:
 COMBAT_LOG_EVENT_UNFILTERED:
   callback: true
   payload:
