@@ -19,6 +19,15 @@ local getPatternValue = (function()
   local function mustnumber(x)
     return assert(tonumber(x))
   end
+  local function boolOrString(x)
+    if x == 'true' then
+      return true
+    elseif x == 'false' then
+      return false
+    else
+      return x
+    end
+  end
   local patterns = {
     {
       pattern = ': cvar name mismatch: want ',
@@ -68,6 +77,10 @@ local getPatternValue = (function()
       pattern = ': missing key ".+" with value table: [0-9a-fA-Fx]+$',
       value = constant({}),
     },
+    {
+      pattern = ': missing key ".+" with value (%a[%w_]*)$',
+      value = boolOrString,
+    },
   }
 
   local function forwardValue(a1, ...)
@@ -88,13 +101,16 @@ local getPatternValue = (function()
         return true, value
       end
     end
-    print(('warning: no pattern matched %q'):format(v))
+    error(('no pattern matched %q'):format(v), 0)
   end
 end)()
 
 local function applyPatterns(tx, ty)
   for k, v in pairs(ty) do
     if type(v) == 'table' then
+      if tx[k] == nil then
+        tx[k] = {}
+      end
       applyPatterns(tx[k], v)
     else
       local match, value = getPatternValue(v)
@@ -113,15 +129,57 @@ if data.generated.cvars then
 end
 
 if data.generated.globals then
-  local gf = 'data/products/' .. product .. '/globals.yaml'
-  local g = yaml.parseFile(gf)
-  applyPatterns(g, data.generated.globals or {})
-  write(gf, yaml.pprint(g))
+  local gv = data.generated.globals
+  local enumkey, enumtable, enumvalue
+  if type(gv) == 'string' then
+    enumkey = gv:match('^enums_set_in_framexml (.+) was not set$')
+    enumtable, enumvalue = gv:match('^enum_values_set_in_framexml (.+)%.(.+) was not set$')
+  end
+  if enumkey then
+    local cf = 'data/products/' .. product .. '/config.yaml'
+    local config = yaml.parseFile(cf)
+    config.addon.enums_set_in_framexml[enumkey] = nil
+    write(cf, yaml.pprint(config))
+  elseif enumtable then
+    local cf = 'data/products/' .. product .. '/config.yaml'
+    local config = yaml.parseFile(cf)
+    config.addon.enum_values_set_in_framexml[enumtable][enumvalue] = nil
+    write(cf, yaml.pprint(config))
+  else
+    local gf = 'data/products/' .. product .. '/globals.yaml'
+    local g = yaml.parseFile(gf)
+    if gv.Enum then
+      for k in pairs(gv.Enum) do
+        local base = k:match('^(.+)Meta$')
+        if base and ((g.Enum or {})[base] or gv.Enum[base]) then
+          gv.Enum[k] = nil
+        end
+      end
+    end
+    applyPatterns(g, gv)
+    if gv.Enum then
+      for k in pairs(gv.Enum) do
+        local ev = g.Enum[k]
+        if type(ev) == 'table' and next(ev) == nil then
+          ev.Placeholder = 1
+        end
+      end
+    end
+    write(gf, yaml.pprint(g))
+  end
 end
 
 do
   local fn = 'data/products/' .. product .. '/apis.yaml'
   local apis = yaml.parseFile(fn)
+  local cf = 'data/products/' .. product .. '/config.yaml'
+  local config
+  local configDirty = false
+  local function overwrittenApis()
+    config = config or yaml.parseFile(cf)
+    configDirty = true
+    return config.addon.overwritten_apis
+  end
   for ns, nt in pairs(data.generated.apiNamespaces or {}) do
     if type(nt) == 'string' then
       if nt:match(': want "nil", got "table"$') then
@@ -149,9 +207,12 @@ do
           assert(next(mv) == 'impltype')
           assert(next(mv, 'impltype') == nil)
           if mv.impltype:match(': want true, got false$') then
-            apis[funcname] = {}
+            overwrittenApis()[funcname] = nil
           elseif mv.impltype:match(': want false, got true$') then
-            apis[funcname] = nil
+            -- A Lua function here could mean a real C API shadowed by a Lua wrapper
+            -- (belongs in overwritten_apis) or just a Lua-implemented stub with no C
+            -- API underneath (does not). We can't tell which from here.
+            print('lua function: ' .. funcname)
           else
             error('unexpected error on ' .. funcname)
           end
@@ -164,26 +225,22 @@ do
     end
   end
   write(fn, yaml.pprint(apis))
-end
-
-do
-  local fn = 'data/products/' .. product .. '/events.yaml'
-  local evs = yaml.parseFile(fn)
-  for k, v in pairs(data.generated.events or {}) do
-    if v:match(': want true, got false$') then
-      evs[k] = nil
-    elseif v:match(': want false, got true$') then
-      evs[k] = { payload = {} }
-    else
-      error('unexpected pattern for ' .. k)
-    end
+  if configDirty then
+    write(cf, yaml.pprint(config))
   end
-  write(fn, yaml.pprint(evs))
 end
 
 do
   local fn = 'data/products/' .. product .. '/apis.yaml'
   local apis = yaml.parseFile(fn)
+  local cf = 'data/products/' .. product .. '/config.yaml'
+  local config
+  local configDirty = false
+  local function overwrittenApis()
+    config = config or yaml.parseFile(cf)
+    configDirty = true
+    return config.addon.overwritten_apis
+  end
   for k, v in pairs(data.generated.globalApis or {}) do
     if type(v) == 'string' then
       assert(v:match(': want "function", got "nil"$'))
@@ -192,7 +249,7 @@ do
       assert(next(v) == 'impltype', ('%q: expected impltype, got %q'):format(k, next(v)))
       assert(next(v, 'impltype') == nil)
       if v.impltype:match(': want true, got false$') then
-        apis[k] = {}
+        overwrittenApis()[k] = nil
       elseif v.impltype:match(': want false, got true$') then
         apis[k] = nil
       else
@@ -203,18 +260,89 @@ do
     end
   end
   write(fn, yaml.pprint(apis))
+  if configDirty then
+    write(cf, yaml.pprint(config))
+  end
 end
 
-for k, v in pairs(data.generated.uiobjects or {}) do
-  if v.methods then
-    for mk, mv in pairs(v.methods) do
-      if mv:match(': missing$') or mv:match(': product disabled: want "nil", got "function"') then
-        print('add ' .. k .. '.' .. mk)
-      elseif mv:match(': want "function", got "nil"$') then
-        print('delete ' .. k .. '.' .. mk)
+if data.generated['~cfuncs'] then
+  local fn = 'data/products/' .. product .. '/apis.yaml'
+  local apis = yaml.parseFile(fn)
+  for k, v in pairs(data.generated['~cfuncs']) do
+    local names = {}
+    for name in k:gmatch('"([^"]*)"') do
+      table.insert(names, name)
+    end
+    if v:match(': no true name$') then
+      assert(#names == 1, k)
+      apis[names[1]] = {}
+    elseif v:match(': multiple true names$') then
+      local namespaced, aliases = {}, {}
+      for _, name in ipairs(names) do
+        if name:find('%.') then
+          table.insert(namespaced, name)
+        else
+          table.insert(aliases, name)
+        end
+      end
+      local nsapi = #namespaced == 1 and apis[namespaced[1]]
+      local hasStub = false
+      for _, o in ipairs(nsapi and nsapi.outputs or {}) do
+        if o.stub ~= nil then
+          hasStub = true
+        end
+      end
+      if #namespaced == 1 and #aliases == #names - 1 and nsapi and not nsapi.impl and not hasStub then
+        for _, name in ipairs(aliases) do
+          apis[name] = nil
+        end
       else
-        error('weird error for ' .. k .. '.' .. mk)
+        print('multiple true names: ' .. table.concat(names, ', '))
+      end
+    else
+      error('unexpected cfuncs error: ' .. v)
+    end
+  end
+  write(fn, yaml.pprint(apis))
+end
+
+if data.luaobjects and data.luaobjects.types then
+  local fn = 'data/products/' .. product .. '/luaobjects.yaml'
+  local luaobjects = yaml.parseFile(fn)
+  for k, v in pairs(data.luaobjects.types) do
+    if type(v) == 'string' then
+      local suffix = ': ' .. k
+      assert(v:sub(-#suffix) == suffix, k)
+      assert(not luaobjects[k].virtual, k)
+      luaobjects[k].virtual = true
+    end
+  end
+  write(fn, yaml.pprint(luaobjects))
+end
+
+do
+  local fn = 'data/products/' .. product .. '/uiobjects.yaml'
+  local uiobjects
+  local dirty = false
+  for k, v in pairs(data.generated.uiobjects or {}) do
+    if v.methods then
+      for mk, mv in pairs(v.methods) do
+        if k == 'GameTooltip' and mv:match(': missing$') then
+          uiobjects = uiobjects or yaml.parseFile(fn)
+          assert(uiobjects[k].methods[mk] == nil, mk)
+          uiobjects[k].methods[mk] = {}
+          dirty = true
+        elseif mv:match(': missing$') or mv:match(': product disabled: want "nil", got "function"') then
+          print('add ' .. k .. '.' .. mk)
+        elseif mv:match(': want "function", got "nil"$') then
+          print('delete ' .. k .. '.' .. mk)
+        else
+          error('weird error for ' .. k .. '.' .. mk)
+        end
       end
     end
+  end
+  if dirty then
+    write(fn, yaml.pprint(uiobjects))
   end
 end

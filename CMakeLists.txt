@@ -818,6 +818,9 @@ add_custom_target(
   DEPENDS ${products}
   WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
 
+add_lua_executable(autodocs ${CMAKE_CURRENT_SOURCE_DIR}/tools/autodocs.lua
+                   argparse penlight runtimeproducts wowlessyaml)
+
 add_lua_executable(errsv ${CMAKE_CURRENT_SOURCE_DIR}/tools/errsv.lua penlight
                    wowlessyaml)
 

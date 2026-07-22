@@ -636,7 +636,7 @@ string.split:
 string.sub:
   stdlib: string.sub
 string.trim:
-  delegate: strtrim
+  stdlib: strtrim
 string.upper:
   stdlib: string.upper
 strjoin:
@@ -647,8 +647,6 @@ strsplit:
   stdlib: strsplit
 strsplittable:
   stdlib: strsplittable
-strtrim:
-  stdlib: strtrim
 SwapToGlobalEnvironment:
   moduledelegate:
     name: env
