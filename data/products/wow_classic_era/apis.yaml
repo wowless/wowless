@@ -27476,11 +27476,11 @@ scrub:
   impl: scrub
   inputs:
   - name: values
-    type: unknown
+    type: any
   instride: 1
   outputs:
   - name: scrubbed
-    type: unknown
+    type: any
   outstride: 1
 scrubsecretvalues:
   inputs:
