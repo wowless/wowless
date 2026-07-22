@@ -19,6 +19,15 @@ local getPatternValue = (function()
   local function mustnumber(x)
     return assert(tonumber(x))
   end
+  local function boolOrString(x)
+    if x == 'true' then
+      return true
+    elseif x == 'false' then
+      return false
+    else
+      return x
+    end
+  end
   local patterns = {
     {
       pattern = ': cvar name mismatch: want ',
@@ -68,6 +77,10 @@ local getPatternValue = (function()
       pattern = ': missing key ".+" with value table: [0-9a-fA-Fx]+$',
       value = constant({}),
     },
+    {
+      pattern = ': missing key ".+" with value (%a[%w_]*)$',
+      value = boolOrString,
+    },
   }
 
   local function forwardValue(a1, ...)
@@ -88,7 +101,7 @@ local getPatternValue = (function()
         return true, value
       end
     end
-    print(('warning: no pattern matched %q'):format(v))
+    error(('no pattern matched %q'):format(v), 0)
   end
 end)()
 

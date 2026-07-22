@@ -8,6 +8,7 @@ Constants:
     DEFAULT_AUCTION_PRICE_MULTIPLIER: 1.5
   CAAConstants:
     CAADebuffSelfAlertDefault: 0
+    CAAEnabledDefault: false
     CAAFrequencyDefault: 0
     CAAFrequencyMax: 10
     CAAFrequencyMin: -10
@@ -26,7 +27,10 @@ Constants:
     CAAPlayerResourcePercentDefault: 0
     CAASamePercentThrottleTime: 10
     CAASampleTextThrottleTime: 1
+    CAASayCombatEndDefault: true
+    CAASayCombatStartDefault: true
     CAASayIfTargetedDefault: 1
+    CAASayYourDebuffsDefault: true
     CAASayYourDebuffsFormatDefault: 0
     CAASayYourDebuffsMinDurationDefault: 1.5
     CAASayYourDebuffsMinDurationMax: 5
@@ -37,6 +41,7 @@ Constants:
     CAATargetDeathBehaviorDefault: 0
     CAATargetHealthFormatDefault: 3
     CAATargetHealthPercentDefault: 2
+    CAATargetNameDefault: true
     CAAThrottleDefault: 0
     CAAThrottleMax: 5
     CAAThrottleMin: 0
@@ -45,6 +50,8 @@ Constants:
   CalendarGetEventTypeConstants:
     DEFAULT_CALENDAR_GET_EVENT_TYPE: 0
   CatalogShopVirtualCurrencyConstants:
+    HEARTHSTEEL_VC_CURRENCY_CODE: XVV
+    TRADERS_TENDER_VC_CURRENCY_CODE: XWP
   CharCustomizationConstants:
     CHAR_CUSTOMIZE_CUSTOM_DISPLAY_OPTION_FIRST: 5
     CHAR_CUSTOMIZE_CUSTOM_DISPLAY_OPTION_LAST: 8
@@ -74,6 +81,7 @@ Constants:
     COOLDOWN_DEFAULT_COUNTDOWN_ABBREV_THRESHOLD_MS: 120000
     COOLDOWN_DEFAULT_COUNTDOWN_MILLISECOND_THRESHOLD_MS: 0
     COOLDOWN_DEFAULT_COUNTDOWN_MINIMUM_DURATION_MS: 2000
+    COOLDOWN_DEFAULT_USE_AURA_DISPLAY_TIME: false
   CooldownViewerUIConstants:
     COOLDOWN_VIEWER_CATEGORY_SET_SIZE: 16
     COOLDOWN_VIEWER_LINKED_SPELLS_SIZE: 4
