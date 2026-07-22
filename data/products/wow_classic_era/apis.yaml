@@ -26711,6 +26711,7 @@ issecrettable:
 issecretvalue:
   inputs:
   - name: value
+    nilable: true
     type: unknown
   outputs:
   - name: isSecret
@@ -27514,13 +27515,14 @@ secretunwrap:
     type: unknown
   outstride: 1
 secretwrap:
+  impl: secretwrap
   inputs:
   - name: values
-    type: unknown
+    type: any
   instride: 1
   outputs:
   - name: wrapped
-    type: unknown
+    type: any
   outstride: 1
 securecall:
   impl: securecall
