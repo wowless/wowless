@@ -7017,6 +7017,11 @@ Scale:
       - name: scaleY
         type: number
       outputs:
+ScenarioPOIFrame:
+  fields:
+  inherits:
+    UIObject: true
+  methods:
 ScriptObject:
   fields:
   inherits:

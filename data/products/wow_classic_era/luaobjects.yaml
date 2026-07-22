@@ -1,6 +1,20 @@
 AbbreviateConfig:
   methods:
+AbbreviatedNumberFormatter:
+  methods:
+DurationTextBinding:
+  methods:
+LuaColorCurveObject:
+  methods:
+LuaCurveObject:
+  methods:
 LuaCurveObjectBase:
+  methods:
+LuaDurationClock:
+  methods:
+LuaDurationManualClock:
+  methods:
+LuaDurationObject:
   methods:
 LuaFunctionContainer:
   impl: funtainer
@@ -8,3 +22,11 @@ LuaFunctionContainer:
     Cancel:
     Invoke:
     IsCancelled:
+NumericFormatter:
+  methods:
+NumericRuleFormatter:
+  methods:
+SecondsFormatter:
+  methods:
+UnitHealPredictionCalculator:
+  methods:

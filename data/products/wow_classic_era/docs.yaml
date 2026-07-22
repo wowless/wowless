@@ -241,7 +241,11 @@ lies:
   extra_script_objects:
     FrameAPIArchaeologyDigSiteFrame:
     FrameAPIBlob:
+    FrameAPINamePlate:
     FrameAPIQuestPOI:
+    HousingCatalogSearcherAPI:
+    HousingFixturePointFrameAPI:
+    HousingLayoutPinFrameAPI:
     PingPinFrameAPI:
     SimpleModelFFXAPI:
   uiobjects:
@@ -496,6 +500,10 @@ lies:
 script_objects:
   AbbreviateConfigAPI:
     luaobject: AbbreviateConfig
+  AbbreviatedNumberFormatterAPI:
+    luaobject: AbbreviatedNumberFormatter
+  DurationTextBindingObjectAPI:
+    luaobject: DurationTextBinding
   FrameAPICharacterModelBase:
     uiobject: PlayerModel
   FrameAPICinematicModel:
@@ -512,18 +520,38 @@ script_objects:
     uiobject: Actor
   FrameAPIModelSceneFrameActorBase:
     uiobject: Actor
+  FrameAPIScenarioPOI:
+    uiobject: ScenarioPOIFrame
   FrameAPISimpleCheckout:
     uiobject: Checkout
   FrameAPITabardModel:
     uiobject: TabardModel
   FrameAPITabardModelBase:
     uiobject: TabardModel
+  FrameAPITooltip:
+    uiobject: GameTooltip
   FrameAPIUnitPositionFrame:
     uiobject: UnitPositionFrame
+  LuaColorCurveObjectAPI:
+    luaobject: LuaColorCurveObject
+  LuaCurveObjectAPI:
+    luaobject: LuaCurveObject
   LuaCurveObjectBaseAPI:
     luaobject: LuaCurveObjectBase
+  LuaDurationClockObjectAPI:
+    luaobject: LuaDurationClock
+  LuaDurationManualClockAPI:
+    luaobject: LuaDurationManualClock
+  LuaDurationObjectAPI:
+    luaobject: LuaDurationObject
   MinimapFrameAPI:
     uiobject: Minimap
+  NumericFormatterAPI:
+    luaobject: NumericFormatter
+  NumericRuleFormatterAPI:
+    luaobject: NumericRuleFormatter
+  SecondsFormatterAPI:
+    luaobject: SecondsFormatter
   SimpleAnimAlphaAPI:
     uiobject: Alpha
   SimpleAnimAPI:
@@ -602,6 +630,8 @@ script_objects:
     uiobject: Texture
   SimpleTextureBaseAPI:
     uiobject: TextureBase
+  UnitHealPredictionCalculatorAPI:
+    luaobject: UnitHealPredictionCalculator
 typedefs:
   AnimationDataEnum:
     type: number

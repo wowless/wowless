@@ -33,8 +33,17 @@ local function fixMissingScriptObject(product, source, name)
     print(('missing script object mapping for %s, but no --source product was given'):format(name))
     return false
   end
-  local mapping = yaml.parse(file.read(docsfile(source))).script_objects[name]
+  local sourcedata = yaml.parse(file.read(docsfile(source)))
+  local mapping = sourcedata.script_objects[name]
   if not mapping then
+    if sourcedata.lies.extra_script_objects[name] then
+      local targetfile = docsfile(product)
+      local target = yaml.parse(file.read(targetfile))
+      target.lies.extra_script_objects[name] = {}
+      file.write(targetfile, yaml.pprint(target))
+      print(('copied lies.extra_script_objects.%s from %s to %s'):format(name, source, product))
+      return true
+    end
     print(('%s has no script_objects mapping for %s either'):format(source, name))
     return false
   end
@@ -42,7 +51,9 @@ local function fixMissingScriptObject(product, source, name)
   local domainf = domainfile(product, domain)
   local domaindata = yaml.parse(file.read(domainf))
   if not domaindata[typename] then
-    domaindata[typename] = { methods = {} }
+    domaindata[typename] = domain == 'uiobject'
+        and { inherits = { UIObject = true }, fields = {}, methods = {} }
+      or { methods = {} }
     file.write(domainf, yaml.pprint(domaindata))
     print(('added empty %s %s to %s'):format(domain, typename, product))
   end
