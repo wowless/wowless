@@ -47,7 +47,6 @@ AcceptResurrect:
 AcceptSpellConfirmationPrompt:
 AcceptTrade:
 AcknowledgeSurvey:
-ActionHasRange:
 AddAutoQuestPopUp:
 AddChatWindowChannel:
 AddChatWindowMessages:
@@ -293,7 +292,6 @@ BNGetNumFriends:
     type: number
 BNGetSelectedBlock:
 BNGetSelectedFriend:
-BNInviteFriend:
 BNIsBlocked:
 BNIsFriend:
 BNIsSelf:
@@ -302,13 +300,8 @@ BNRequestFOFInfo:
 BNRequestInviteFriend:
 BNSendFriendInvite:
 BNSendFriendInviteByID:
-BNSendGameData:
 BNSendVerifiedBattleTagInvite:
-BNSendWhisper:
-BNSetAFK:
 BNSetBlocked:
-BNSetCustomMessage:
-BNSetDND:
 BNSetFriendFavoriteFlag:
 BNSetFriendNote:
 BNSetSelectedBlock:
@@ -20599,7 +20592,6 @@ CancelAreaSpiritHeal:
   outputs:
 CancelAuction:
 CancelDuel:
-CancelEmote:
 CancelItemTempEnchantment:
 CancelLogout:
   inputs:
@@ -20747,11 +20739,6 @@ CanSwitchVehicleSeat:
   outputs:
   - name: result
     type: boolean
-CanUpgradeExpansion:
-  inputs:
-  outputs:
-  - name: canUpgradeExpansion
-    type: boolean
 CanUpgradeToCurrentExpansion:
   inputs:
   outputs:
@@ -20770,7 +20757,6 @@ CaseAccentInsensitiveParse:
   outputs:
   - name: result
     type: string
-CastingInfo:
 CastPetAction:
 CastShapeshiftForm:
 CastSpell:
@@ -20784,10 +20770,8 @@ CastSpellByName:
 CenterCamera:
   inputs:
   outputs:
-ChangeActionBarPage:
 ChangeChatColor:
 ChannelBan:
-ChannelInfo:
 ChannelInvite:
 ChannelKick:
 ChannelModerator:
@@ -20978,7 +20962,6 @@ collectgarbage:
   impl: collectgarbage
 CombatLog_Object_IsA:
 CombatLogAddFilter:
-CombatLogAdvanceEntry:
 CombatLogClearEntries:
 CombatLogGetCurrentEntry:
 CombatLogGetCurrentEventInfo:
@@ -21003,7 +20986,6 @@ CombatLogGetNumEntries:
   - type: number
 CombatLogGetRetentionTime:
 CombatLogResetFilter:
-CombatLogSetCurrentEntry:
 CombatLogSetRetentionTime:
 CombatTextSetActiveUnit:
 CompleteLFGReadyCheck:
@@ -21022,7 +21004,6 @@ ConfirmLootSlot:
 ConfirmPetUnlearn:
   inputs:
   outputs:
-ConfirmReadyCheck:
 ConfirmTalentWipe:
   inputs:
   outputs:
@@ -21307,7 +21288,6 @@ DeleteInboxItem:
 DeleteMacro:
   outputs:
 DeleteRaidProfile:
-DemoteAssistant:
 DepositGuildBankMoney:
 DescendStop:
   inputs:
@@ -21328,20 +21308,6 @@ Dismount:
   outputs:
 DisplayChannelOwner:
 DoCraft:
-DoEmote:
-  impl: DoEmote
-  inputs:
-  - name: token
-    type: string
-  - name: unit
-    nilable: true
-    type: unit
-  - name: hold
-    nilable: true
-    type: boolean
-  outputs:
-  - name: restricted
-    type: boolean
 DoesCurrentLocaleSellExpansionLevels:
   inputs:
   outputs:
@@ -21354,7 +21320,6 @@ DoesSpellExist:
   outputs:
   - type: boolean
 DoesTemplateExist:
-DoReadyCheck:
 DoTradeSkill:
 DropCursorMoney:
   inputs:
@@ -21491,7 +21456,6 @@ FillLocalizedClassList:
   outputs:
   - name: classTable
     type: table
-FindBaseSpellByID:
 FindSpellBookSlotBySpellID:
   inputs:
   - name: spellID
@@ -21499,7 +21463,6 @@ FindSpellBookSlotBySpellID:
   outputs:
   - name: slot
     type: number
-FindSpellOverrideByID:
 FlagTutorial:
 FlashClientIcon:
   inputs:
@@ -21620,11 +21583,6 @@ GetAchievementNumRewards:
 GetAchievementReward:
 GetAchievementSearchProgress:
 GetAchievementSearchSize:
-GetActionAutocast:
-GetActionBarPage:
-  inputs:
-  outputs:
-  - type: number
 GetActionBarToggles:
   inputs:
   outputs:
@@ -21636,32 +21594,7 @@ GetActionBarToggles:
     type: boolean
   - name: sideRight2State
     type: boolean
-GetActionCharges:
-GetActionCooldown:
-  inputs:
-  - name: action
-    type: number
-  outputs:
-  - name: start
-    type: number
-  - name: duration
-    type: number
-  - name: enable
-    type: number
-  - name: modRate
-    type: number
-GetActionCount:
-  outputs:
-  - type: number
 GetActionInfo:
-GetActionLossOfControlCooldown:
-  inputs:
-  - type: number
-  outputs:
-  - type: number
-  - type: number
-GetActionText:
-GetActionTexture:
 GetActiveLevel:
 GetActiveLootRollIDs:
   outputs:
@@ -21831,16 +21764,6 @@ GetAuctionSort:
     type: string
   - name: reversed
     type: boolean
-GetAutoCompletePresenceID:
-GetAutoCompleteRealms:
-  inputs:
-  - name: tableNames
-    nilable: true
-    type: table
-  outputs:
-  - name: tableNames
-    type: table
-GetAutoCompleteResults:
 GetAutoDeclineGuildInvites:
   inputs:
   outputs:
@@ -22042,8 +21965,6 @@ GetBlockChance:
   outputs:
   - name: result
     type: number
-GetBonusBarIndex:
-GetBonusBarOffset:
 GetBuildInfo:
   impl: GetBuildInfo_1_15_0
   inputs:
@@ -22431,10 +22352,6 @@ GetCurrentRegionName:
   outputs:
   - name: regionName
     type: string
-GetCurrentResolution:
-  inputs:
-  outputs:
-  - type: number
 GetCurrentScaledResolution:
   inputs:
   outputs:
@@ -22471,12 +22388,10 @@ GetCursorPosition:
     type: number
   - name: posY
     type: number
-GetCVarSettingValidity:
 GetDailyQuestsCompleted:
   outputs:
   - type: number
 GetDeathRecapLink:
-GetDefaultGraphicsQuality:
 GetDefaultLanguage:
   inputs:
   outputs:
@@ -22489,9 +22404,6 @@ GetDefaultLanguage:
 GetDefaultScale:
   outputs:
   - type: number
-GetDefaultVideoOption:
-GetDefaultVideoOptions:
-GetDefaultVideoQualityOption:
 GetDemotionRank:
 GetDifficultyInfo:
   inputs:
@@ -22627,11 +22539,6 @@ GetExpertisePercent:
   - name: offhandExpertisePercent
     type: number
   - name: rangedExpertisePercent
-    type: number
-GetExtraBarIndex:
-  inputs:
-  outputs:
-  - name: value
     type: number
 GetFactionInfo:
   inputs:
@@ -22833,14 +22740,7 @@ GetGraphicsAPIs:
     stub: opengl
     type: string
   outstride: 1
-GetGraphicsCVarOffsetForCVar:
-GetGraphicsCVarOffsetForUI:
-  inputs:
-  - type: number
-  outputs:
-  - type: number
 GetGraphicsCVarValueForQualityLevel:
-GetGraphicsDropdownIndexByMasterIndex:
 GetGreetingText:
   inputs:
   outputs:
@@ -23943,9 +23843,6 @@ GetMovieDownloadProgress:
     type: number
   - name: total
     type: number
-GetMultiCastBarIndex:
-  outputs:
-  - type: number
 GetMultiCastTotemSpells:
 GetNativeRealmID:
   inputs:
@@ -24329,11 +24226,6 @@ GetOverrideAPBySpellPower:
   outputs:
   - name: result
     type: number
-GetOverrideBarIndex:
-  inputs:
-  outputs:
-  - type: number
-GetOverrideBarSkin:
 GetOverrideSpellPowerByAP:
   inputs:
   outputs:
@@ -25143,13 +25035,6 @@ GetScreenHeight:
   outputs:
   - name: height
     type: number
-GetScreenResolutions:
-  inputs:
-  outputs:
-  - name: resolutions
-    stub: 1024x768
-    type: string
-  outstride: 1
 GetScreenWidth:
   impl: GetScreenWidth
   inputs:
@@ -25577,7 +25462,6 @@ GetTaxiBenchmarkMode:
   - name: result
     type: boolean
 GetTaxiMapID:
-GetTempShapeshiftBarIndex:
 GetText:
   inputs:
   - name: token
@@ -25632,7 +25516,6 @@ GetTitleText:
   outputs:
   - name: titleText
     type: string
-GetToolTipInfo:
 GetTotalAchievementPoints:
   inputs:
   outputs:
@@ -26105,10 +25988,6 @@ GetUnspentTalentPoints:
   outputs:
   - name: talentPoints
     type: number
-GetVehicleBarIndex:
-  inputs:
-  outputs:
-  - type: number
 GetVehicleUIIndicator:
   inputs:
   - name: vehicleIndicatorID
@@ -26134,18 +26013,8 @@ GetVehicleUIIndicatorSeat:
   - name: yPos
     type: number
 GetVideoCaps:
-GetVideoOptions:
 GetWarGameQueueStatus:
 GetWarGameTypeInfo:
-GetWatchedFactionInfo:
-  inputs:
-  outputs:
-  - type: string
-  - type: number
-  - type: number
-  - type: number
-  - type: number
-  - type: number
 GetWeaponEnchantInfo:
 GetWebTicket:
 GetWorldElapsedTime:
@@ -26217,10 +26086,7 @@ GuildNewsSort:
   - name: unknown
     type: number
   outputs:
-GuildRosterSetOfficerNote:
-GuildRosterSetPublicNote:
 HandleAtlasMemberCommand:
-HasAction:
 hasanysecretvalues:
   inputs:
   - name: values
@@ -26229,17 +26095,11 @@ hasanysecretvalues:
   outputs:
   - name: isAnyValueSecret
     type: boolean
-HasBonusActionBar:
 HasCompletedAnyAchievement:
 HasDualWieldPenalty:
   inputs:
   outputs:
   - name: result
-    type: boolean
-HasExtraActionBar:
-  inputs:
-  outputs:
-  - name: value
     type: boolean
 HasFilledPetition:
   inputs:
@@ -26287,7 +26147,6 @@ HasNoReleaseAura:
     type: number
   - name: hasUntilCancelledDuration
     type: boolean
-HasOverrideActionBar:
 HasPetSpells:
 HasPetUI:
 HasSendMailItem:
@@ -26297,8 +26156,6 @@ HasSendMailItem:
   outputs:
   - name: value
     type: boolean
-HasTempShapeshiftActionBar:
-HasVehicleActionBar:
 HasWandEquipped:
 HaveQuestData:
   inputs:
@@ -26372,7 +26229,6 @@ IsAccountSecured:
   - name: result
     type: boolean
 IsAchievementEligible:
-IsActionInRange:
 IsActiveBattlefieldArena:
 IsActiveQuestLegendary:
 IsActiveQuestTrivial:
@@ -26392,22 +26248,8 @@ IsArenaSeasonActive:
 IsArenaSkirmish:
 IsArenaTeamCaptain:
 IsAtStableMaster:
-IsAttackAction:
-  inputs:
-  - name: action
-    type: number
-  outputs:
-  - name: value
-    type: boolean
 IsAttackSpell:
 IsAuctionSortReversed:
-IsAutoRepeatAction:
-  inputs:
-  - name: action
-    type: number
-  outputs:
-  - name: value
-    type: boolean
 IsAutoRepeatSpell:
   outputs:
   - name: value
@@ -26436,13 +26278,6 @@ IsCharacterNewlyBoosted:
 IsChatAFK:
 IsChatChannelRaid:
 IsChatDND:
-IsCollisionEnabled:
-  inputs:
-  outputs:
-  - name: result
-    type: boolean
-IsCompetitiveModeEnabled:
-IsConsumableAction:
 IsConsumableSpell:
   inputs:
   - name: spellName
@@ -26462,13 +26297,6 @@ IsCpuBound:
   - name: isCpuBound
     nilable: true
     type: boolean
-IsCurrentAction:
-  inputs:
-  - name: action
-    type: number
-  outputs:
-  - name: value
-    type: boolean
 IsCurrentQuestFailed:
 IsCurrentSpell:
   outputs:
@@ -26487,17 +26315,6 @@ IsDualWielding:
   outputs:
   - name: result
     type: boolean
-IsEncounterInProgress:
-  inputs:
-  outputs:
-  - name: value
-    type: boolean
-IsEncounterLimitingResurrections:
-  inputs:
-  outputs:
-  - type: boolean
-IsEncounterSuppressingRelease:
-IsEquippedAction:
 IsEuropeanNumbers:
   inputs:
   outputs:
@@ -26543,7 +26360,6 @@ IsGMClient:
     type: boolean
 IsGraphicsCVarValueSupported:
 IsGraphicsSettingValueSupported:
-IsGUIDInGroup:
 IsGuildLeader:
   inputs:
   outputs:
@@ -26588,7 +26404,6 @@ IsInRaid:
 IsInScenarioGroup:
 IsInventoryItemLocked:
 IsInventoryItemProfessionBag:
-IsItemAction:
 IsItemPreferredArmorType:
   inputs:
   - name: itemLocation
@@ -26762,7 +26577,6 @@ IsPlayerMoving:
   - name: result
     type: boolean
 IsPlayerNeutral:
-IsPossessBarVisible:
 IsPublicBuild:
   impl: IsPublicBuild
   inputs:
@@ -26814,7 +26628,6 @@ IsRangedWeapon:
   - name: result
     type: boolean
 IsRatedBattleground:
-IsRecognizedName:
 IsResting:
   inputs:
   outputs:
@@ -26874,7 +26687,6 @@ IsShiftKeyDown:
 IsSpellClassOrSpec:
 IsSpellHidden:
 IsSpellInRange:
-IsStackableAction:
 IsStealthed:
   inputs:
   outputs:
@@ -26943,7 +26755,6 @@ IsUnitModelReadyForUI:
     type: boolean
 IsUnitOnQuest:
 IsUnitOnQuestByQuestID:
-IsUsableAction:
 IsUsableSpell:
 IsUsingFixedTimeStep:
   inputs:
@@ -27399,12 +27210,6 @@ PrevView:
   outputs:
 ProcessExceptionClient:
   impl: ProcessExceptionClient
-PromoteToAssistant:
-PromoteToLeader:
-  inputs:
-  - name: unit
-    type: unit
-  outputs:
 PurchaseSlot:
 PutItemInBackpack:
 PutItemInBag:
@@ -27732,7 +27537,6 @@ SetAbandonQuest:
 SetAchievementComparisonUnit:
 SetAchievementSearchString:
 SetActionBarToggles:
-SetActionUIButton:
 SetAllowDangerousScripts:
   inputs:
   - default: false
@@ -27833,7 +27637,6 @@ SetCursorPosition:
   - name: yPosition
     type: number
   outputs:
-SetDefaultVideoOptions:
 SetDungeonDifficultyID:
   inputs:
   - name: difficultyID
@@ -27857,7 +27660,6 @@ SetEuropeanNumbers:
   - name: enabled
     type: boolean
   outputs:
-SetEveryoneIsAssistant:
 SetFactionActive:
 SetFactionInactive:
 setfenv:
@@ -27975,9 +27777,7 @@ SetRaidTarget:
   - name: userIndex
     type: number
   outputs:
-SetRaidTargetProtected:
 SetSavedInstanceExtend:
-SetScreenResolution:
 setsecurehookforbidden:
 SetSelectedAuctionItem:
 SetSelectedDisplayChannel:
@@ -28138,10 +27938,7 @@ SpellCancelQueuedSpell:
 SpellCanTargetItem:
 SpellCanTargetItemID:
 SpellCanTargetUnit:
-SpellGetVisibilityInfo:
 SpellHasRange:
-SpellIsAlwaysShown:
-SpellIsSelfBuff:
 SpellIsTargeting:
 SpellStopCasting:
   inputs:
@@ -28259,25 +28056,6 @@ string.trim:
     type: string
 string.upper:
   impl: string.upper
-StripHyperlinks:
-  inputs:
-  - name: text
-    type: string
-  - default: false
-    name: maintainColor
-    type: boolean
-  - default: false
-    name: maintainBrackets
-    type: boolean
-  - default: false
-    name: stripNewlines
-    type: boolean
-  - default: false
-    name: maintainAtlases
-    type: boolean
-  outputs:
-  - name: stripped
-    type: string
 strjoin:
   impl: strjoin
 strlenutf8:
@@ -28526,7 +28304,6 @@ TurnRightStop:
   protected: true
 type:
   impl: type
-UninviteUnit:
 UnitAffectingCombat:
   inputs:
   - type: string
@@ -28562,7 +28339,6 @@ UnitAttackSpeed:
   outputs:
   - type: number
   - type: number
-UnitAura:
 UnitBattlePetLevel:
   inputs:
   - name: unit
@@ -28587,7 +28363,6 @@ UnitBattlePetType:
   - name: result
     nilable: true
     type: number
-UnitBuff:
 UnitCanAssist:
   inputs:
   - name: unit
@@ -28794,7 +28569,6 @@ UnitDamage:
   - type: number
   - type: number
   - type: number
-UnitDebuff:
 UnitDefense:
 UnitDetailedThreatSituation:
   inputs:

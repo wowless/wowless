@@ -209,7 +209,10 @@ do
           if mv.impltype:match(': want true, got false$') then
             overwrittenApis()[funcname] = nil
           elseif mv.impltype:match(': want false, got true$') then
-            overwrittenApis()[funcname] = {}
+            -- A Lua function here could mean a real C API shadowed by a Lua wrapper
+            -- (belongs in overwritten_apis) or just a Lua-implemented stub with no C
+            -- API underneath (does not). We can't tell which from here.
+            print('lua function: ' .. funcname)
           else
             error('unexpected error on ' .. funcname)
           end
@@ -248,7 +251,7 @@ do
       if v.impltype:match(': want true, got false$') then
         overwrittenApis()[k] = nil
       elseif v.impltype:match(': want false, got true$') then
-        overwrittenApis()[k] = {}
+        apis[k] = nil
       else
         error(k)
       end

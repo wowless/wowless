@@ -140,6 +140,7 @@ lies:
     C_EditMode.SaveLayouts:
     C_EditMode.SetAccountSetting:
     C_EditMode.SetActiveLayout:
+    IsCollisionEnabled:
     ToggleAnimKitDisplay:
     ToggleCollision:
     ToggleCollisionDisplay:
