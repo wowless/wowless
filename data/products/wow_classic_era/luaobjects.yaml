@@ -335,6 +335,7 @@ LuaCurveObjectBase:
         type:
           enum: LuaCurveType
       outputs:
+  virtual: true
 LuaDurationClock:
   methods:
     GetTime:
@@ -342,6 +343,7 @@ LuaDurationClock:
       outputs:
       - name: time
         type: number
+  virtual: true
 LuaDurationManualClock:
   methods:
     AdvanceTime:
@@ -644,6 +646,7 @@ NumericFormatter:
       outputs:
       - name: formatted
         type: string
+  virtual: true
 NumericRuleFormatter:
   methods:
     AddBreakpoint:

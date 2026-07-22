@@ -306,6 +306,20 @@ if data.generated['~cfuncs'] then
   write(fn, yaml.pprint(apis))
 end
 
+if data.luaobjects and data.luaobjects.types then
+  local fn = 'data/products/' .. product .. '/luaobjects.yaml'
+  local luaobjects = yaml.parseFile(fn)
+  for k, v in pairs(data.luaobjects.types) do
+    if type(v) == 'string' then
+      local suffix = ': ' .. k
+      assert(v:sub(-#suffix) == suffix, k)
+      assert(not luaobjects[k].virtual, k)
+      luaobjects[k].virtual = true
+    end
+  end
+  write(fn, yaml.pprint(luaobjects))
+end
+
 for k, v in pairs(data.generated.uiobjects or {}) do
   if v.methods then
     for mk, mv in pairs(v.methods) do
