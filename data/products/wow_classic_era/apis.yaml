@@ -28034,8 +28034,6 @@ strsplit:
   impl: strsplit
 strsplittable:
   impl: strsplittable
-strtrim:
-  impl: strtrim
 Stuck:
   inputs:
   outputs:
