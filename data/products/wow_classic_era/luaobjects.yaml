@@ -1,21 +1,634 @@
 AbbreviateConfig:
   methods:
+    GetAbbreviateNumberData:
+      inputs:
+      outputs:
+      - name: data
+        type:
+          arrayof:
+            structure: NumberAbbreviationBreakpoint
+    SetAbbreviateNumberData:
+      inputs:
+      - name: data
+        type:
+          arrayof:
+            structure: NumberAbbreviationBreakpoint
+      outputs:
 AbbreviatedNumberFormatter:
   methods:
+    AddBreakpoint:
+      inputs:
+      - name: breakpoint
+        type:
+          structure: NumberAbbreviationBreakpoint
+      outputs:
+    ClearBreakpoints:
+      inputs:
+      outputs:
+    Copy:
+      inputs:
+      outputs:
+      - name: copy
+        type:
+          luaobject: AbbreviatedNumberFormatter
+    GetBreakpoints:
+      inputs:
+      outputs:
+      - name: breakpoints
+        type:
+          arrayof:
+            structure: NumberAbbreviationBreakpoint
+    ResetBreakpoints:
+      inputs:
+      outputs:
+    SetBreakpoints:
+      inputs:
+      - name: breakpoints
+        type:
+          arrayof:
+            structure: NumberAbbreviationBreakpoint
+      outputs:
 DurationTextBinding:
   methods:
+    CanFormatText:
+      inputs:
+      outputs:
+      - name: canFormatText
+        type: boolean
+    CanUpdateFontString:
+      inputs:
+      outputs:
+      - name: canUpdateText
+        type: boolean
+    Disable:
+      inputs:
+      outputs:
+    Enable:
+      inputs:
+      outputs:
+    GetDuration:
+      inputs:
+      outputs:
+      - name: duration
+        nilable: true
+        type:
+          luaobject: LuaDurationObject
+    GetExpiredText:
+      inputs:
+      outputs:
+      - name: text
+        nilable: true
+        type: string
+    GetFontString:
+      inputs:
+      outputs:
+      - name: fontString
+        nilable: true
+        type:
+          uiobject: FontString
+    GetFormattedText:
+      inputs:
+      outputs:
+      - name: text
+        type: string
+    GetTimeModifier:
+      inputs:
+      outputs:
+      - name: modifier
+        type:
+          enum: DurationTimeModifier
+    GetUpdateInterval:
+      inputs:
+      outputs:
+      - name: updateInterval
+        type: number
+    GetZeroDurationText:
+      inputs:
+      outputs:
+      - name: text
+        nilable: true
+        type: string
+    HasSecretValues:
+      inputs:
+      outputs:
+      - name: hasSecretValues
+        type: boolean
+    IsEnabled:
+      inputs:
+      outputs:
+      - name: enabled
+        type: boolean
+    SetDuration:
+      inputs:
+      - name: duration
+        type:
+          luaobject: LuaDurationObject
+      outputs:
+    SetEnabled:
+      inputs:
+      - name: enabled
+        type: boolean
+      outputs:
+    SetExpiredText:
+      inputs:
+      - name: text
+        nilable: true
+        type: string
+      outputs:
+    SetFontString:
+      inputs:
+      - name: fontString
+        type:
+          uiobject: FontString
+      outputs:
+    SetFormatter:
+      inputs:
+      - name: formatter
+        type:
+          luaobject: NumericFormatter
+      outputs:
+    SetTextFormat:
+      inputs:
+      - name: format
+        type: string
+      - name: components
+        type:
+          arrayof:
+            structure: DurationTextBindingFormatComponent
+      outputs:
+    SetTimeModifier:
+      inputs:
+      - name: modifier
+        type:
+          enum: DurationTimeModifier
+      outputs:
+    SetToDefaults:
+      inputs:
+      outputs:
+    SetUpdateInterval:
+      inputs:
+      - name: updateInterval
+        type: number
+      outputs:
+    SetZeroDurationText:
+      inputs:
+      - name: text
+        nilable: true
+        type: string
+      outputs:
+    UpdateFontString:
+      inputs:
+      outputs:
 LuaColorCurveObject:
   methods:
+    AddPoint:
+      inputs:
+      - name: x
+        type: number
+      - name: y
+        type:
+          structure: colorRGBA
+      outputs:
+    ClearPoints:
+      inputs:
+      outputs:
+    Copy:
+      inputs:
+      outputs:
+      - name: curve
+        type:
+          luaobject: LuaColorCurveObject
+    Evaluate:
+      inputs:
+      - name: x
+        type: number
+      outputs:
+      - name: y
+        type:
+          structure: colorRGBA
+    EvaluateUnpacked:
+      inputs:
+      - name: x
+        type: number
+      outputs:
+      - name: yR
+        type: number
+      - name: yG
+        type: number
+      - name: yB
+        type: number
+      - name: yA
+        type: number
+    GetPoint:
+      inputs:
+      - name: index
+        type: number
+      outputs:
+      - name: point
+        nilable: true
+        type:
+          structure: LuaColorCurvePoint
+    GetPointCount:
+      inputs:
+      outputs:
+      - name: count
+        type: number
+    GetPoints:
+      inputs:
+      outputs:
+      - name: point
+        type:
+          arrayof:
+            structure: LuaColorCurvePoint
+    RemovePoint:
+      inputs:
+      - name: index
+        type: number
+      outputs:
+    SetPoints:
+      inputs:
+      - name: point
+        type:
+          arrayof:
+            structure: LuaColorCurvePoint
+      outputs:
+    SetToDefaults:
+      inputs:
+      outputs:
 LuaCurveObject:
   methods:
+    AddPoint:
+      inputs:
+      - name: pointX
+        type: number
+      - name: pointY
+        type: number
+      outputs:
+    ClearPoints:
+      inputs:
+      outputs:
+    Copy:
+      inputs:
+      outputs:
+      - name: curve
+        type:
+          luaobject: LuaCurveObject
+    Evaluate:
+      inputs:
+      - name: x
+        type: number
+      outputs:
+      - name: y
+        type: number
+    GetPoint:
+      inputs:
+      - name: index
+        type: number
+      outputs:
+      - name: point
+        nilable: true
+        type:
+          structure: vector2
+    GetPointCount:
+      inputs:
+      outputs:
+      - name: count
+        type: number
+    GetPoints:
+      inputs:
+      outputs:
+      - name: point
+        type:
+          arrayof:
+            structure: vector2
+    RemovePoint:
+      inputs:
+      - name: index
+        type: number
+      outputs:
+    SetPoints:
+      inputs:
+      - name: point
+        type:
+          arrayof:
+            structure: vector2
+      outputs:
+    SetToDefaults:
+      inputs:
+      outputs:
 LuaCurveObjectBase:
   methods:
+    GetType:
+      inputs:
+      outputs:
+      - name: curveType
+        type:
+          enum: LuaCurveType
+    HasSecretValues:
+      inputs:
+      outputs:
+      - name: hasSecretValues
+        type: boolean
+    SetType:
+      inputs:
+      - name: type
+        type:
+          enum: LuaCurveType
+      outputs:
 LuaDurationClock:
   methods:
+    GetTime:
+      inputs:
+      outputs:
+      - name: time
+        type: number
 LuaDurationManualClock:
   methods:
+    AdvanceTime:
+      inputs:
+      - name: delta
+        type: number
+      outputs:
+    ResetTime:
+      inputs:
+      outputs:
+    RewindTime:
+      inputs:
+      - name: delta
+        type: number
+      outputs:
+    SetTime:
+      inputs:
+      - name: time
+        type: number
+      outputs:
 LuaDurationObject:
   methods:
+    Assign:
+      inputs:
+      - name: other
+        type:
+          luaobject: LuaDurationObject
+      outputs:
+    Copy:
+      inputs:
+      outputs:
+      - name: copy
+        type:
+          luaobject: LuaDurationObject
+    EvaluateElapsedDuration:
+      inputs:
+      - name: curve
+        type:
+          luaobject: LuaCurveObjectBase
+      - default: 0
+        name: modifier
+        type:
+          enum: DurationTimeModifier
+      outputs:
+      - name: result
+        type: table
+    EvaluateElapsedPercent:
+      inputs:
+      - name: curve
+        type:
+          luaobject: LuaCurveObjectBase
+      - default: 0
+        name: modifier
+        type:
+          enum: DurationTimeModifier
+      outputs:
+      - name: result
+        type: table
+    EvaluateRemainingDuration:
+      inputs:
+      - name: curve
+        type:
+          luaobject: LuaCurveObjectBase
+      - default: 0
+        name: modifier
+        type:
+          enum: DurationTimeModifier
+      outputs:
+      - name: result
+        type: table
+    EvaluateRemainingPercent:
+      inputs:
+      - name: curve
+        type:
+          luaobject: LuaCurveObjectBase
+      - default: 0
+        name: modifier
+        type:
+          enum: DurationTimeModifier
+      outputs:
+      - name: result
+        type: table
+    EvaluateTotalDuration:
+      inputs:
+      - name: curve
+        type:
+          luaobject: LuaCurveObjectBase
+      - default: 0
+        name: modifier
+        type:
+          enum: DurationTimeModifier
+      outputs:
+      - name: result
+        type: table
+    FormatElapsedDuration:
+      inputs:
+      - name: formatter
+        type:
+          luaobject: NumericFormatter
+      - default: 0
+        name: modifier
+        type:
+          enum: DurationTimeModifier
+      outputs:
+      - name: formatted
+        type: string
+    FormatRemainingDuration:
+      inputs:
+      - name: formatter
+        type:
+          luaobject: NumericFormatter
+      - default: 0
+        name: modifier
+        type:
+          enum: DurationTimeModifier
+      outputs:
+      - name: formatted
+        type: string
+    FormatTotalDuration:
+      inputs:
+      - name: formatter
+        type:
+          luaobject: NumericFormatter
+      - default: 0
+        name: modifier
+        type:
+          enum: DurationTimeModifier
+      outputs:
+      - name: formatted
+        type: string
+    GetClock:
+      inputs:
+      outputs:
+      - name: clock
+        nilable: true
+        type:
+          luaobject: LuaDurationClock
+    GetClockTime:
+      inputs:
+      outputs:
+      - name: clockTime
+        type: number
+    GetElapsedDuration:
+      inputs:
+      - default: 0
+        name: modifier
+        type:
+          enum: DurationTimeModifier
+      outputs:
+      - name: elapsedDuration
+        type: number
+    GetElapsedPercent:
+      inputs:
+      - default: 0
+        name: modifier
+        type:
+          enum: DurationTimeModifier
+      outputs:
+      - name: elapsedPercent
+        type: number
+    GetEndTime:
+      inputs:
+      - default: 0
+        name: modifier
+        type:
+          enum: DurationTimeModifier
+      outputs:
+      - name: endTime
+        type: number
+    GetModRate:
+      inputs:
+      outputs:
+      - name: modRate
+        type: number
+    GetRemainingDuration:
+      inputs:
+      - default: 0
+        name: modifier
+        type:
+          enum: DurationTimeModifier
+      outputs:
+      - name: remainingDuration
+        type: number
+    GetRemainingPercent:
+      inputs:
+      - default: 0
+        name: modifier
+        type:
+          enum: DurationTimeModifier
+      outputs:
+      - name: remainingPercent
+        type: number
+    GetStartTime:
+      inputs:
+      - default: 0
+        name: modifier
+        type:
+          enum: DurationTimeModifier
+      outputs:
+      - name: startTime
+        type: number
+    GetTotalDuration:
+      inputs:
+      - default: 0
+        name: modifier
+        type:
+          enum: DurationTimeModifier
+      outputs:
+      - name: totalDuration
+        type: number
+    HasExpired:
+      inputs:
+      - default: 0
+        name: modifier
+        type:
+          enum: DurationTimeModifier
+      outputs:
+      - name: hasExpired
+        type: boolean
+    HasSecretValues:
+      inputs:
+      outputs:
+      - name: hasSecretValues
+        type: boolean
+    HasStarted:
+      inputs:
+      - default: 0
+        name: modifier
+        type:
+          enum: DurationTimeModifier
+      outputs:
+      - name: hasStarted
+        type: boolean
+    IsActive:
+      inputs:
+      - default: 0
+        name: modifier
+        type:
+          enum: DurationTimeModifier
+      outputs:
+      - name: isActive
+        type: boolean
+    IsZero:
+      inputs:
+      outputs:
+      - name: isZero
+        type: boolean
+    Reset:
+      inputs:
+      outputs:
+    SetClock:
+      inputs:
+      - name: clock
+        nilable: true
+        type:
+          luaobject: LuaDurationClock
+      outputs:
+    SetTimeFromEnd:
+      inputs:
+      - name: endTime
+        type: number
+      - name: duration
+        type: number
+      - default: 1
+        name: modRate
+        type: number
+      outputs:
+    SetTimeFromStart:
+      inputs:
+      - name: startTime
+        type: number
+      - name: duration
+        type: number
+      - default: 1
+        name: modRate
+        type: number
+      outputs:
+    SetTimeSpan:
+      inputs:
+      - name: startTime
+        type: number
+      - name: endTime
+        type: number
+      outputs:
+    SetToDefaults:
+      inputs:
+      outputs:
 LuaFunctionContainer:
   impl: funtainer
   methods:
@@ -24,9 +637,446 @@ LuaFunctionContainer:
     IsCancelled:
 NumericFormatter:
   methods:
+    FormatNumber:
+      inputs:
+      - name: number
+        type: number
+      outputs:
+      - name: formatted
+        type: string
 NumericRuleFormatter:
   methods:
+    AddBreakpoint:
+      inputs:
+      - name: breakpoint
+        type:
+          structure: NumericRuleFormatBreakpoint
+      outputs:
+    ClearBreakpoints:
+      inputs:
+      outputs:
+    Copy:
+      inputs:
+      outputs:
+      - name: copy
+        type:
+          luaobject: NumericRuleFormatter
+    GetBreakpoints:
+      inputs:
+      outputs:
+      - name: breakpoints
+        type:
+          arrayof:
+            structure: NumericRuleFormatBreakpoint
+    SetBreakpoints:
+      inputs:
+      - name: breakpoints
+        type:
+          arrayof:
+            structure: NumericRuleFormatBreakpoint
+      outputs:
 SecondsFormatter:
   methods:
+    CanApproximate:
+      inputs:
+      - name: seconds
+        type: number
+      outputs:
+      - name: canApproximate
+        type: boolean
+    CanRoundUpIntervals:
+      inputs:
+      outputs:
+      - name: canRound
+        type: boolean
+    CanRoundUpLastUnit:
+      inputs:
+      outputs:
+      - name: canRound
+        type: boolean
+    EvaluateDesiredUnitCount:
+      inputs:
+      - name: seconds
+        type: number
+      outputs:
+      - name: count
+        type: number
+    EvaluateMaxInterval:
+      inputs:
+      - name: seconds
+        type: number
+      outputs:
+      - name: interval
+        type:
+          enum: SecondsFormatterInterval
+    EvaluateMinInterval:
+      inputs:
+      - name: seconds
+        type: number
+      outputs:
+      - name: interval
+        type:
+          enum: SecondsFormatterInterval
+    Format:
+      inputs:
+      - name: seconds
+        type: number
+      - name: abbreviation
+        nilable: true
+        type:
+          enum: SecondsFormatterAbbreviation
+      outputs:
+      - name: formattedSeconds
+        type: string
+    FormatZero:
+      inputs:
+      - name: abbreviation
+        nilable: true
+        type:
+          enum: SecondsFormatterAbbreviation
+      outputs:
+      - name: formattedSeconds
+        type: string
+    GetApproximationSeconds:
+      inputs:
+      outputs:
+      - name: approximationSeconds
+        type: number
+    GetConvertToLower:
+      inputs:
+      outputs:
+      - name: convert
+        type: boolean
+    GetDefaultAbbreviation:
+      inputs:
+      outputs:
+      - name: abbreviation
+        nilable: true
+        type:
+          enum: SecondsFormatterAbbreviation
+    GetDesiredUnitCount:
+      inputs:
+      outputs:
+      - name: count
+        nilable: true
+        type: number
+    GetDesiredUnitCountCurve:
+      inputs:
+      outputs:
+      - name: curve
+        nilable: true
+        type:
+          luaobject: LuaCurveObject
+    GetMaxInterval:
+      inputs:
+      outputs:
+      - name: interval
+        nilable: true
+        type:
+          enum: SecondsFormatterInterval
+    GetMaxIntervalCurve:
+      inputs:
+      outputs:
+      - name: curve
+        nilable: true
+        type:
+          luaobject: LuaCurveObject
+    GetMillisecondsThreshold:
+      inputs:
+      outputs:
+      - name: threshold
+        type: number
+    GetMinInterval:
+      inputs:
+      outputs:
+      - name: interval
+        nilable: true
+        type:
+          enum: SecondsFormatterInterval
+    GetMinIntervalCurve:
+      inputs:
+      outputs:
+      - name: curve
+        nilable: true
+        type:
+          luaobject: LuaCurveObject
+    GetStripIntervalWhitespace:
+      inputs:
+      outputs:
+      - name: strip
+        type:
+          enum: SecondsFormatterIntervalWhitespace
+    Reset:
+      inputs:
+      outputs:
+    SetApproximationSeconds:
+      inputs:
+      - name: seconds
+        type: number
+      outputs:
+    SetCanRoundUpIntervals:
+      inputs:
+      - name: canRound
+        type: boolean
+      outputs:
+    SetCanRoundUpLastUnit:
+      inputs:
+      - name: canRound
+        type: boolean
+      outputs:
+    SetConvertToLower:
+      inputs:
+      - name: convert
+        type: boolean
+      outputs:
+    SetDefaultAbbreviation:
+      inputs:
+      - name: abbreviation
+        type:
+          enum: SecondsFormatterAbbreviation
+      outputs:
+    SetDesiredUnitCount:
+      inputs:
+      - name: count
+        type: number
+      outputs:
+    SetDesiredUnitCountCurve:
+      inputs:
+      - name: curve
+        type:
+          luaobject: LuaCurveObject
+      outputs:
+    SetMaxInterval:
+      inputs:
+      - name: interval
+        type:
+          enum: SecondsFormatterInterval
+      outputs:
+    SetMaxIntervalCurve:
+      inputs:
+      - name: curve
+        type:
+          luaobject: LuaCurveObject
+      outputs:
+    SetMillisecondsThreshold:
+      inputs:
+      - name: threshold
+        type: number
+      outputs:
+    SetMinInterval:
+      inputs:
+      - name: interval
+        type:
+          enum: SecondsFormatterInterval
+      outputs:
+    SetMinIntervalCurve:
+      inputs:
+      - name: curve
+        type:
+          luaobject: LuaCurveObject
+      outputs:
+    SetStripIntervalWhitespace:
+      inputs:
+      - name: strip
+        type:
+          enum: SecondsFormatterIntervalWhitespace
+      outputs:
 UnitHealPredictionCalculator:
   methods:
+    EvaluateCurrentHealthPercent:
+      inputs:
+      - name: curve
+        type:
+          luaobject: LuaCurveObjectBase
+      outputs:
+      - name: result
+        type: table
+    EvaluateMissingHealthPercent:
+      inputs:
+      - name: curve
+        type:
+          luaobject: LuaCurveObjectBase
+      outputs:
+      - name: result
+        type: table
+    GetCurrentHealth:
+      inputs:
+      outputs:
+      - name: currentHealth
+        type: number
+    GetCurrentHealthPercent:
+      inputs:
+      outputs:
+      - name: currentHealthPercent
+        type: number
+    GetDamageAbsorbClampMode:
+      inputs:
+      outputs:
+      - name: damageAbsorbClampMode
+        type:
+          enum: UnitDamageAbsorbClampMode
+    GetDamageAbsorbs:
+      inputs:
+      outputs:
+      - name: amount
+        type: number
+      - name: clamped
+        type: boolean
+    GetHealAbsorbClampMode:
+      inputs:
+      outputs:
+      - name: healAbsorbClampMode
+        type:
+          enum: UnitHealAbsorbClampMode
+    GetHealAbsorbMode:
+      inputs:
+      outputs:
+      - name: healAbsorbMode
+        type:
+          enum: UnitHealAbsorbMode
+    GetHealAbsorbs:
+      inputs:
+      outputs:
+      - name: amount
+        type: number
+      - name: clamped
+        type: boolean
+    GetIncomingHealClampMode:
+      inputs:
+      outputs:
+      - name: incomingHealClampMode
+        type:
+          enum: UnitIncomingHealClampMode
+    GetIncomingHealOverflowPercent:
+      inputs:
+      outputs:
+      - name: incomingHealOverflowPercent
+        type: number
+    GetIncomingHeals:
+      inputs:
+      outputs:
+      - name: amount
+        type: number
+      - name: amountFromHealer
+        type: number
+      - name: amountFromOthers
+        type: number
+      - name: clamped
+        type: boolean
+    GetMaximumDamageAbsorbs:
+      inputs:
+      outputs:
+      - name: maximumDamageAbsorbs
+        type: number
+    GetMaximumHealAbsorbs:
+      inputs:
+      outputs:
+      - name: maximumHealAbsorbs
+        type: number
+    GetMaximumHealth:
+      inputs:
+      outputs:
+      - name: maximumHealth
+        type: number
+    GetMaximumHealthMode:
+      inputs:
+      outputs:
+      - name: maximumHealthMode
+        type:
+          enum: UnitMaximumHealthMode
+    GetMaximumIncomingHeals:
+      inputs:
+      outputs:
+      - name: maximumIncomingHeals
+        type: number
+    GetMissingHealth:
+      inputs:
+      outputs:
+      - name: missingHealth
+        type: number
+    GetMissingHealthPercent:
+      inputs:
+      outputs:
+      - name: missingHealthPercent
+        type: number
+    GetPredictedValues:
+      inputs:
+      outputs:
+      - name: predictedValues
+        type:
+          structure: UnitHealPredictionValues
+    GetTotalDamageAbsorbs:
+      inputs:
+      outputs:
+      - name: totalDamageAbsorbs
+        type: number
+    GetTotalHealAbsorbs:
+      inputs:
+      outputs:
+      - name: totalHealAbsorbs
+        type: number
+    GetTotalIncomingHeals:
+      inputs:
+      outputs:
+      - name: totalIncomingHeals
+        type: number
+    GetTotalIncomingHealsFromHealer:
+      inputs:
+      outputs:
+      - name: totalIncomingHealsFromHealer
+        type: number
+    HasSecretValues:
+      inputs:
+      outputs:
+      - name: hasSecretValues
+        type: boolean
+    Reset:
+      inputs:
+      outputs:
+    ResetPredictedValues:
+      inputs:
+      outputs:
+    SetDamageAbsorbClampMode:
+      inputs:
+      - name: damageAbsorbClampMode
+        type:
+          enum: UnitDamageAbsorbClampMode
+      outputs:
+    SetHealAbsorbClampMode:
+      inputs:
+      - name: healAbsorbClampMode
+        type:
+          enum: UnitHealAbsorbClampMode
+      outputs:
+    SetHealAbsorbMode:
+      inputs:
+      - name: healAbsorbMode
+        type:
+          enum: UnitHealAbsorbMode
+      outputs:
+    SetIncomingHealClampMode:
+      inputs:
+      - name: incomingHealClampMode
+        type:
+          enum: UnitIncomingHealClampMode
+      outputs:
+    SetIncomingHealOverflowPercent:
+      inputs:
+      - name: incomingHealOverflowPercent
+        type: number
+      outputs:
+    SetMaximumHealthMode:
+      inputs:
+      - name: maximumHealthMode
+        type:
+          enum: UnitMaximumHealthMode
+      outputs:
+    SetPredictedValues:
+      inputs:
+      - name: predictedValues
+        type:
+          structure: UnitHealPredictionValues
+      outputs:
+    SetToDefaults:
+      inputs:
+      outputs:

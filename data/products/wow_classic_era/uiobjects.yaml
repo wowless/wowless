@@ -25,8 +25,45 @@ Actor:
     RegionBase:
     ScriptObjectBase:
   methods:
+    AttachToMount:
+      inputs:
+      - name: rider
+        type:
+          uiobject: Actor
+      - name: animation
+        type: number
+      - name: spellKitVisualID
+        nilable: true
+        type: number
+      outputs:
+      - name: success
+        type: boolean
+    CalculateMountScale:
+      inputs:
+      - name: rider
+        type:
+          uiobject: Actor
+      outputs:
+      - name: scale
+        type: number
     ClearModel:
       inputs:
+      outputs:
+    DetachFromMount:
+      inputs:
+      - name: rider
+        type:
+          uiobject: Actor
+      outputs:
+      - name: success
+        type: boolean
+    Dress:
+      inputs:
+      outputs:
+    DressPlayerSlot:
+      inputs:
+      - name: invSlot
+        type: number
       outputs:
     GetActiveBoundingBox:
       inputs:
@@ -56,6 +93,11 @@ Actor:
       outputs:
       - name: variation
         type: number
+    GetAutoDress:
+      inputs:
+      outputs:
+      - name: autoDress
+        type: boolean
     GetDesaturation:
       impl:
         getter:
@@ -64,6 +106,23 @@ Actor:
       outputs:
       - name: strength
         type: number
+    GetItemTransmogInfo:
+      inputs:
+      - name: inventorySlots
+        type: number
+      mayreturnnothing: true
+      outputs:
+      - name: itemTransmogInfo
+        nilable: true
+        type:
+          structure: ItemTransmogInfo
+    GetItemTransmogInfoList:
+      inputs:
+      outputs:
+      - name: infoList
+        type:
+          arrayof:
+            structure: ItemTransmogInfo
     GetMaxBoundingBox:
       inputs:
       outputs:
@@ -88,6 +147,11 @@ Actor:
       outputs:
       - name: guid
         type: string
+    GetObeyHideInTransmogFlag:
+      inputs:
+      outputs:
+      - name: obey
+        type: boolean
     GetParticleOverrideScale:
       impl:
         getter:
@@ -97,6 +161,13 @@ Actor:
       - name: scale
         nilable: true
         type: number
+    GetPaused:
+      inputs:
+      outputs:
+      - name: paused
+        type: boolean
+      - name: globalPaused
+        type: boolean
     GetPitch:
       impl:
         getter:
@@ -122,11 +193,26 @@ Actor:
       outputs:
       - name: roll
         type: number
+    GetSheathed:
+      inputs:
+      outputs:
+      - name: sheathed
+        type: boolean
     GetSpellVisualKit:
       inputs:
       outputs:
       - name: spellVisualKitID
         type: number
+    GetUseTransmogChoices:
+      inputs:
+      outputs:
+      - name: use
+        type: boolean
+    GetUseTransmogSkin:
+      inputs:
+      outputs:
+      - name: use
+        type: boolean
     GetYaw:
       impl:
         getter:
@@ -135,10 +221,34 @@ Actor:
       outputs:
       - name: yaw
         type: number
+    IsGeoReady:
+      inputs:
+      outputs:
+      - name: isReady
+        type: boolean
     IsLoaded:
       inputs:
       outputs:
       - name: isLoaded
+        type: boolean
+    IsPreferringModelCollisionBounds:
+      inputs:
+      outputs:
+      - name: preferringCollisionBounds
+        type: boolean
+    IsSlotAllowed:
+      inputs:
+      - name: inventorySlots
+        type: number
+      outputs:
+      - name: allowed
+        type: boolean
+    IsSlotVisible:
+      inputs:
+      - name: inventorySlots
+        type: number
+      outputs:
+      - name: visible
         type: boolean
     IsUsingCenterForOrigin:
       inputs:
@@ -156,6 +266,9 @@ Actor:
       - default: false
         name: isLooping
         type: boolean
+      outputs:
+    ResetNextHandSlot:
+      inputs:
       outputs:
     SetAnimation:
       inputs:
@@ -180,6 +293,11 @@ Actor:
         type:
           enum: ModelBlendOperation
       outputs:
+    SetAutoDress:
+      inputs:
+      - name: autoDress
+        type: boolean
+      outputs:
     SetDesaturation:
       impl:
         setter:
@@ -188,6 +306,44 @@ Actor:
       - name: strength
         type: number
       outputs:
+    SetGradientMask:
+      inputs:
+      - name: gradientIndex0
+        type: number
+      - name: gradientIndex1
+        type: number
+      - name: gradientIndex2
+        type: number
+      - name: gradientIndex3
+        type: number
+      outputs:
+    SetGradientMaskWithDyes:
+      inputs:
+      - name: grad0DyeColorID
+        nilable: true
+        type: number
+      - name: grad1DyeColorID
+        nilable: true
+        type: number
+      - name: grad2DyeColorID
+        nilable: true
+        type: number
+      outputs:
+    SetItemTransmogInfo:
+      inputs:
+      - name: transmogInfo
+        type:
+          structure: ItemTransmogInfo
+      - name: inventorySlots
+        nilable: true
+        type: number
+      - default: false
+        name: ignoreChildItems
+        type: boolean
+      outputs:
+      - name: result
+        type:
+          enum: ItemTryOnReason
     SetModelByCreatureDisplayID:
       inputs:
       - name: creatureDisplayID
@@ -243,6 +399,11 @@ Actor:
       outputs:
       - name: success
         type: boolean
+    SetObeyHideInTransmogFlag:
+      inputs:
+      - name: obey
+        type: boolean
+      outputs:
     SetParticleOverrideScale:
       impl:
         setter:
@@ -251,6 +412,14 @@ Actor:
       - name: scale
         nilable: true
         type: number
+      outputs:
+    SetPaused:
+      inputs:
+      - name: paused
+        type: boolean
+      - default: true
+        name: affectsGlobalPause
+        type: boolean
       outputs:
     SetPitch:
       impl:
@@ -292,6 +461,11 @@ Actor:
       - name: positionZ
         type: number
       outputs:
+    SetPreferModelCollisionBounds:
+      inputs:
+      - name: preferCollisionBounds
+        type: boolean
+      outputs:
     SetRoll:
       impl:
         setter:
@@ -299,6 +473,22 @@ Actor:
       inputs:
       - name: roll
         type: number
+      outputs:
+    SetSheathed:
+      inputs:
+      - name: sheathed
+        type: boolean
+      - default: false
+        name: hidden
+        type: boolean
+      outputs:
+    SetSheathedCategory:
+      inputs:
+      - name: inventorySlots
+        type: number
+      - name: category
+        type:
+          enum: TransmogOutfitSlotOptionSheatheCategory
       outputs:
     SetSpellVisualKit:
       inputs:
@@ -319,6 +509,16 @@ Actor:
         type: boolean
       - default: false
         name: z
+        type: boolean
+      outputs:
+    SetUseTransmogChoices:
+      inputs:
+      - name: use
+        type: boolean
+      outputs:
+    SetUseTransmogSkin:
+      inputs:
+      - name: use
         type: boolean
       outputs:
     SetYaw:
@@ -347,6 +547,22 @@ Actor:
         nilable: true
         type:
           enum: ItemTryOnReason
+    Undress:
+      inputs:
+      - default: true
+        name: includeWeapons
+        type: boolean
+      outputs:
+    UndressSlot:
+      inputs:
+      - name: inventorySlots
+        type: number
+      outputs:
+    UseUnitSheatheCategory:
+      inputs:
+      - name: useCategory
+        type: boolean
+      outputs:
   objectType: ModelSceneActor
   scripts:
     OnAnimFinished:
@@ -1838,6 +2054,30 @@ Cooldown:
         type: number
       - name: duration
         type: number
+    GetCountdownAbbrevThreshold:
+      inputs:
+      outputs:
+      - name: seconds
+        type: number
+    GetCountdownFontString:
+      inputs:
+      outputs:
+      - name: countdownString
+        nilable: true
+        type:
+          uiobject: FontString
+    GetCountdownFormatter:
+      inputs:
+      outputs:
+      - name: formatter
+        nilable: true
+        type:
+          luaobject: NumericFormatter
+    GetCountdownMillisecondsThreshold:
+      inputs:
+      outputs:
+      - name: seconds
+        type: number
     GetDrawBling:
       impl:
         getter:
@@ -1956,6 +2196,25 @@ Cooldown:
         name: modRate
         type: number
       outputs:
+    SetCooldownFromDurationObject:
+      inputs:
+      - name: duration
+        type:
+          luaobject: LuaDurationObject
+      - default: true
+        name: clearIfZero
+        type: boolean
+      outputs:
+    SetCooldownFromExpirationTime:
+      inputs:
+      - name: expirationTime
+        type: number
+      - name: duration
+        type: number
+      - default: 1
+        name: modRate
+        type: number
+      outputs:
     SetCooldownUNIX:
       inputs:
       - name: start
@@ -1975,6 +2234,18 @@ Cooldown:
       inputs:
       - name: fontName
         type: string
+      outputs:
+    SetCountdownFormatter:
+      inputs:
+      - name: formatter
+        nilable: true
+        type:
+          luaobject: NumericFormatter
+      outputs:
+    SetCountdownMillisecondsThreshold:
+      inputs:
+      - name: seconds
+        type: number
       outputs:
     SetDrawBling:
       impl:
@@ -2056,6 +2327,11 @@ Cooldown:
       inputs:
       - name: milliseconds
         type: number
+      outputs:
+    SetPaused:
+      inputs:
+      - name: paused
+        type: boolean
       outputs:
     SetReverse:
       impl:
@@ -2244,6 +2520,21 @@ DressUpModel:
         name: enabled
         type: boolean
       outputs:
+    SetItemTransmogInfo:
+      inputs:
+      - name: itemTransmogInfo
+        type:
+          structure: ItemTransmogInfo
+      - name: inventorySlot
+        nilable: true
+        type: number
+      - default: false
+        name: ignoreChildItems
+        type: boolean
+      outputs:
+      - name: result
+        type:
+          enum: ItemTryOnReason
     SetObeyHideInTransmogFlag:
       impl:
         setter:
@@ -3240,6 +3531,9 @@ FontString:
     ClearAlphaGradient:
       inputs:
       outputs:
+    ClearText:
+      inputs:
+      outputs:
     FindCharacterIndexAtCoordinate:
       inputs:
       - name: x
@@ -3298,6 +3592,17 @@ FontString:
       outputs:
       - name: radians
         type: number
+    GetScaleAnimationMode:
+      inputs:
+      outputs:
+      - name: scaleAnimationMode
+        type:
+          enum: FontStringScaleAnimationMode
+    GetSmoothScaling:
+      inputs:
+      outputs:
+      - name: smoothScaling
+        type: boolean
     GetStringHeight:
       inputs:
       outputs:
@@ -3327,6 +3632,13 @@ FontString:
         type: number
     GetUnboundedStringWidth:
       inputs:
+      outputs:
+      - name: width
+        type: number
+    GetUnboundedStringWidthForText:
+      inputs:
+      - name: text
+        type: string
       outputs:
       - name: width
         type: number
@@ -3387,6 +3699,17 @@ FontString:
       inputs:
       - name: radians
         type: number
+      outputs:
+    SetScaleAnimationMode:
+      inputs:
+      - name: scaleAnimationMode
+        type:
+          enum: FontStringScaleAnimationMode
+      outputs:
+    SetSmoothScaling:
+      inputs:
+      - name: smoothScaling
+        type: boolean
       outputs:
     SetText:
       impl:
@@ -3918,7 +4241,8 @@ Frame:
         type: boolean
       - name: units
         nilable: true
-        type: string
+        type:
+          enum: UnitTokenType
       outstride: 1
     IsFrameBuffer:
       inputs:
@@ -3939,6 +4263,11 @@ Frame:
       inputs:
       outputs:
       - name: locked
+        type: boolean
+    IsIgnoringChildrenForBounds:
+      inputs:
+      outputs:
+      - name: ignore
         type: boolean
     IsKeyboardEnabled:
       inputs:
@@ -4008,6 +4337,15 @@ Frame:
       outputs:
       - name: registered
         type: boolean
+    RegisterEventCallback:
+      inputs:
+      - name: eventName
+        type: string
+      - name: cb
+        type: function
+      outputs:
+      - name: registered
+        type: boolean
     RegisterForDrag:
       inputs:
       - name: buttons
@@ -4022,7 +4360,21 @@ Frame:
         type: string
       - name: units
         nilable: true
+        type:
+          enum: UnitTokenType
+      instride: 1
+      outputs:
+      - name: registered
+        type: boolean
+    RegisterUnitEventCallback:
+      inputs:
+      - name: eventName
         type: string
+      - name: cb
+        type: function
+      - name: units
+        type:
+          enum: UnitTokenType
       instride: 1
       outputs:
       - name: registered
@@ -4036,6 +4388,17 @@ Frame:
         type: number
       - default: 0.5
         name: y
+        type: number
+      outputs:
+    SetAlphaFromBoolean:
+      inputs:
+      - name: value
+        type: boolean
+      - default: 255
+        name: alphaIfTrue
+        type: number
+      - default: 0
+        name: alphaIfFalse
         type: number
       outputs:
     SetAlphaGradient:
@@ -4193,6 +4556,11 @@ Frame:
       inputs:
       - name: id
         type: number
+      outputs:
+    SetIgnoringChildrenForBounds:
+      inputs:
+      - name: ignore
+        type: boolean
       outputs:
     SetIsFrameBuffer:
       inputs:
@@ -4356,10 +4724,22 @@ GameTooltip:
       - name: anchorType
         type: string
     GetItem:
-    GetMinimumWidth:
-      outputs:
-      - name: minimumWidth
+    GetLeftLine:
+      inputs:
+      - name: line
         type: number
+      outputs:
+      - name: leftFontString
+        nilable: true
+        type:
+          uiobject: FontString
+    GetMinimumWidth:
+      inputs:
+      outputs:
+      - name: width
+        type: number
+      - name: forced
+        type: boolean
     GetOwner:
       impl:
         getter:
@@ -4371,6 +4751,15 @@ GameTooltip:
         type:
           uiobject: Frame
     GetPadding:
+    GetRightLine:
+      inputs:
+      - name: line
+        type: number
+      outputs:
+      - name: rightFontString
+        nilable: true
+        type:
+          uiobject: FontString
     GetSpell:
     GetUnit:
     IsEquippedItem:
@@ -4430,6 +4819,13 @@ GameTooltip:
     SetMerchantCostItem:
     SetMerchantItem:
     SetMinimumWidth:
+      inputs:
+      - name: width
+        type: number
+      - default: false
+        name: force
+        type: boolean
+      outputs:
     SetOwner:
       impl:
         uiobjectimpl: GameTooltip/SetOwner
@@ -4458,6 +4854,22 @@ GameTooltip:
     SetSpellByID:
     SetTalent:
     SetText:
+      inputs:
+      - name: text
+        type: string
+      - name: colorR
+        type: number
+      - name: colorG
+        type: number
+      - name: colorB
+        type: number
+      - default: 1
+        name: alpha
+        type: number
+      - default: false
+        name: wrap
+        type: boolean
+      outputs:
     SetTotem:
     SetToyByItemID:
     SetTrackingSpell:
@@ -5269,6 +5681,17 @@ Model:
       - name: glow
         type: number
       outputs:
+    SetGradientMask:
+      inputs:
+      - name: grad0
+        type: number
+      - name: grad1
+        type: number
+      - name: grad2
+        type: number
+      - name: grad3
+        type: number
+      outputs:
     SetLight:
       inputs:
       - name: enabled
@@ -5378,6 +5801,11 @@ Model:
       - name: scale
         nilable: true
         type: number
+      outputs:
+    SetUseGBuffer:
+      inputs:
+      - name: useGBuffer
+        type: boolean
       outputs:
     SetViewInsets:
       inputs:
@@ -6573,6 +7001,11 @@ Region:
       outputs:
       - name: isRestricted
         type: boolean
+    IsAnchoringSecret:
+      inputs:
+      outputs:
+      - name: isSecret
+        type: boolean
     IsCollapsed:
       impl:
         uiobjectimpl: Region/IsCollapsed
@@ -6680,6 +7113,17 @@ Region:
         uiobjectimpl: Region/SetAllPoints
       manualinputs: true
       outputs:
+    SetAlphaFromBoolean:
+      inputs:
+      - name: value
+        type: boolean
+      - default: 255
+        name: alphaIfTrue
+        type: number
+      - default: 0
+        name: alphaIfFalse
+        type: number
+      outputs:
     SetCollapsesLayout:
       impl:
         setter:
@@ -6765,6 +7209,17 @@ Region:
         type: number
       - name: y
         type: number
+      outputs:
+    SetVertexColorFromBoolean:
+      inputs:
+      - name: value
+        type: boolean
+      - name: colorIfTrue
+        type:
+          structure: colorRGBA
+      - name: colorIfFalse
+        type:
+          structure: colorRGBA
       outputs:
     SetWidth:
       impl:
@@ -7022,6 +7477,21 @@ ScenarioPOIFrame:
   inherits:
     UIObject: true
   methods:
+    GetScenarioTooltipText:
+      inputs:
+      outputs:
+      - name: tooltipText
+        nilable: true
+        type: string
+    UpdateMouseOverTooltip:
+      inputs:
+      - name: x
+        type: number
+      - name: y
+        type: number
+      outputs:
+      - name: hasTooltip
+        type: boolean
 ScriptObject:
   fields:
   inherits:
@@ -7616,7 +8086,12 @@ StatusBar:
       outputs:
       - name: fillStyle
         type:
-          stringenum: StatusBarFillStyle
+          enum: StatusBarFillStyle
+    GetInterpolatedValue:
+      inputs:
+      outputs:
+      - name: value
+        type: number
     GetMinMaxValues:
       impl:
         getter:
@@ -7684,6 +8159,12 @@ StatusBar:
         nilable: true
         type:
           uiobject: Texture
+    GetTimerDuration:
+      inputs:
+      outputs:
+      - name: duration
+        type:
+          luaobject: LuaDurationObject
     GetValue:
       impl:
         getter:
@@ -7692,6 +8173,11 @@ StatusBar:
       outputs:
       - name: value
         type: number
+    IsInterpolating:
+      inputs:
+      outputs:
+      - name: isInterpolating
+        type: boolean
     IsStatusBarDesaturated:
       inputs:
       outputs:
@@ -7716,7 +8202,7 @@ StatusBar:
       inputs:
       - name: fillStyle
         type:
-          stringenum: StatusBarFillStyle
+          enum: StatusBarFillStyle
       outputs:
     SetMinMaxValues:
       impl:
@@ -7726,6 +8212,10 @@ StatusBar:
         type: number
       - name: maxValue
         type: number
+      - default: 0
+        name: interpolation
+        type:
+          enum: StatusBarInterpolation
       outputs:
     SetOrientation:
       impl:
@@ -7791,12 +8281,33 @@ StatusBar:
       outputs:
       - name: success
         type: boolean
+    SetTimerDuration:
+      inputs:
+      - name: duration
+        type:
+          luaobject: LuaDurationObject
+      - default: 0
+        name: interpolation
+        type:
+          enum: StatusBarInterpolation
+      - default: 0
+        name: direction
+        type:
+          enum: StatusBarTimerDirection
+      outputs:
+    SetToTargetValue:
+      inputs:
+      outputs:
     SetValue:
       impl:
         uiobjectimpl: StatusBar/SetValue
       inputs:
       - name: value
         type: number
+      - default: 0
+        name: interpolation
+        type:
+          enum: StatusBarInterpolation
       outputs:
   scripts:
     OnMinMaxChanged:
@@ -8030,21 +8541,21 @@ TextureBase:
         - name: bry
       inputs:
       outputs:
-      - name: ulx
+      - name: ulX
         type: number
-      - name: uly
+      - name: ulY
         type: number
-      - name: llx
+      - name: llX
         type: number
-      - name: lly
+      - name: llY
         type: number
-      - name: urx
+      - name: urX
         type: number
-      - name: ury
+      - name: urY
         type: number
-      - name: lrx
+      - name: lrX
         type: number
-      - name: lry
+      - name: lrY
         type: number
     GetTexelSnappingBias:
       impl:
@@ -8124,6 +8635,9 @@ TextureBase:
       outputs:
       - name: snap
         type: boolean
+    ResetTexCoord:
+      inputs:
+      outputs:
     SetAtlas:
       impl:
         uiobjectimpl: Texture/SetAtlas
@@ -8142,6 +8656,12 @@ TextureBase:
       - name: resetTexCoords
         nilable: true
         type: boolean
+      - name: wrapModeHorizontal
+        nilable: true
+        type: string
+      - name: wrapModeVertical
+        nilable: true
+        type: string
       outputs:
     SetBlendMode:
       impl:
@@ -8231,6 +8751,21 @@ TextureBase:
       - default: false
         name: snap
         type: boolean
+      outputs:
+    SetSpriteSheetCell:
+      inputs:
+      - name: cell
+        type: number
+      - name: numRows
+        type: number
+      - name: numColumns
+        type: number
+      - name: cellWidth
+        nilable: true
+        type: number
+      - name: cellHeight
+        nilable: true
+        type: number
       outputs:
     SetTexCoord:
       impl:
@@ -8384,6 +8919,24 @@ UIObject:
       outputs:
       - name: objectType
         type: string
+    HasAnySecretAspect:
+      inputs:
+      outputs:
+      - name: hasSecretAspect
+        type: boolean
+    HasSecretAspect:
+      inputs:
+      - name: aspect
+        type:
+          enum: SecretAspect
+      outputs:
+      - name: hasSecretAspect
+        type: boolean
+    HasSecretValues:
+      inputs:
+      outputs:
+      - name: hasSecretValues
+        type: boolean
     IsForbidden:
       impl:
         getter:
@@ -8400,6 +8953,11 @@ UIObject:
         type: string
       outputs:
       - name: isType
+        type: boolean
+    IsPreventingSecretValues:
+      inputs:
+      outputs:
+      - name: isPreventingSecretValues
         type: boolean
     SetForbidden:
       impl:
@@ -8462,7 +9020,8 @@ UnitPositionFrame:
       inputs:
       outputs:
       - name: units
-        type: string
+        type:
+          enum: UnitTokenType
       outstride: 1
       stuboutstrides: 0
     GetPlayerPingScale:
@@ -8514,7 +9073,8 @@ UnitPositionFrame:
     SetUnitColor:
       inputs:
       - name: unit
-        type: string
+        type:
+          enum: UnitTokenType
       - name: colorR
         type: number
       - name: colorG
