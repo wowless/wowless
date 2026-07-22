@@ -65,10 +65,32 @@ local function fixMissingScriptObject(product, source, name)
   return true
 end
 
+local function fixMissingTypedef(product, source, name)
+  if not source then
+    print(('wtf %s, but no --source product was given'):format(name))
+    return false
+  end
+  local typedef = yaml.parse(file.read(docsfile(source))).typedefs[name]
+  if not typedef then
+    print(('%s has no typedefs entry for %s either'):format(source, name))
+    return false
+  end
+  local targetfile = docsfile(product)
+  local target = yaml.parse(file.read(targetfile))
+  target.typedefs[name] = typedef
+  file.write(targetfile, yaml.pprint(target))
+  print(('copied typedefs.%s from %s to %s'):format(name, source, product))
+  return true
+end
+
 local patterns = {
   {
     pattern = 'missing script object mapping for (%S+)',
     fix = fixMissingScriptObject,
+  },
+  {
+    pattern = 'wtf (%S+)',
+    fix = fixMissingTypedef,
   },
 }
 

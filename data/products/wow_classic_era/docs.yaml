@@ -633,6 +633,9 @@ script_objects:
   UnitHealPredictionCalculatorAPI:
     luaobject: UnitHealPredictionCalculator
 typedefs:
+  AbbreviatedNumberFormatter:
+    type:
+      luaobject: AbbreviatedNumberFormatter
   AnimationDataEnum:
     type: number
   AzeriteEmpoweredItemLocation:
@@ -657,6 +660,8 @@ typedefs:
     type: string
   ClubInvitationId:
     type: string
+  ClubMemberOpaqueId:
+    type: string
   ClubStreamId:
     type: string
   ConnectionIptype:
@@ -667,14 +672,24 @@ typedefs:
       uiobject: UIObject
   cstring:
     type: string
+  DurationSeconds:
+    type: number
+  DurationSecondsDouble:
+    type: number
   EmptiableItemLocation:
     type:
       structure: ItemLocation
+  EncounterTimelineEventID:
+    type: number
   FileAsset:
     type: FileAsset
   fileID:
     type: number
   FontAlphabet:
+    type: string
+  FrameTime:
+    type: number
+  HousingFixturePointFrame:
     type: string
   HTMLTextType:
     type: string
@@ -690,6 +705,23 @@ typedefs:
     type: string
   kstringLfgListSearch:
     type: string
+  LuaColorCurveObject:
+    type:
+      luaobject: LuaColorCurveObject
+  LuaCurveEvaluatedResult:
+    type: table
+  LuaCurveObject:
+    type:
+      luaobject: LuaCurveObject
+  LuaCurveObjectBase:
+    type:
+      luaobject: LuaCurveObjectBase
+  LuaDurationClock:
+    type:
+      luaobject: LuaDurationClock
+  LuaDurationObject:
+    type:
+      luaobject: LuaDurationObject
   luaFunction:
     type: function
   luaIndex:
@@ -716,6 +748,12 @@ typedefs:
     type: string
   number:
     type: number
+  NumericFormatter:
+    type:
+      luaobject: NumericFormatter
+  NumericRuleFormatter:
+    type:
+      luaobject: NumericRuleFormatter
   QuestObjectiveType:
     type: number
   RecruitAcceptanceID:
@@ -802,6 +840,8 @@ typedefs:
   uiUnit:
     type: number
   UnitToken:
+    type: unit
+  UnitTokenVariant:
     type: unit
   WOWGUID:
     type: string
