@@ -17,10 +17,6 @@ addon:
       C_Macro.SetMacroExecuteLineCallback:
       CreateForbiddenFrame:
       loadstring_untainted:
-  enum_values_set_in_framexml:
-    SeasonID:
-      Placeholder:
-  enums_set_in_framexml:
   ignore_cvar_value:
     graphicsEnvironmentDetail:
     graphicsGroundClutter:
