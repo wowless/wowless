@@ -8021,7 +8021,7 @@ StatusBar:
     fillStyle:
       init: 0
       type:
-        stringenum: StatusBarFillStyle
+        enum: StatusBarFillStyle
     max:
       init: 0
       type: number
