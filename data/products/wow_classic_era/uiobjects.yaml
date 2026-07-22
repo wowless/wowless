@@ -4826,6 +4826,7 @@ GameTooltip:
         name: force
         type: boolean
       outputs:
+    SetOutfit:
     SetOwner:
       impl:
         uiobjectimpl: GameTooltip/SetOwner
@@ -4877,10 +4878,14 @@ GameTooltip:
     SetTradeSkillItem:
     SetTradeTargetItem:
     SetTrainerService:
+    SetTransmogrifyItem:
     SetUnit:
     SetUnitAura:
+    SetUnitAuraByAuraInstanceID:
     SetUnitBuff:
+    SetUnitBuffByAuraInstanceID:
     SetUnitDebuff:
+    SetUnitDebuffByAuraInstanceID:
     SetUpgradeItem:
   scripts:
     OnTooltipAddMoney:

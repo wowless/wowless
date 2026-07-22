@@ -320,16 +320,29 @@ if data.luaobjects and data.luaobjects.types then
   write(fn, yaml.pprint(luaobjects))
 end
 
-for k, v in pairs(data.generated.uiobjects or {}) do
-  if v.methods then
-    for mk, mv in pairs(v.methods) do
-      if mv:match(': missing$') or mv:match(': product disabled: want "nil", got "function"') then
-        print('add ' .. k .. '.' .. mk)
-      elseif mv:match(': want "function", got "nil"$') then
-        print('delete ' .. k .. '.' .. mk)
-      else
-        error('weird error for ' .. k .. '.' .. mk)
+do
+  local fn = 'data/products/' .. product .. '/uiobjects.yaml'
+  local uiobjects
+  local dirty = false
+  for k, v in pairs(data.generated.uiobjects or {}) do
+    if v.methods then
+      for mk, mv in pairs(v.methods) do
+        if k == 'GameTooltip' and mv:match(': missing$') then
+          uiobjects = uiobjects or yaml.parseFile(fn)
+          assert(uiobjects[k].methods[mk] == nil, mk)
+          uiobjects[k].methods[mk] = {}
+          dirty = true
+        elseif mv:match(': missing$') or mv:match(': product disabled: want "nil", got "function"') then
+          print('add ' .. k .. '.' .. mk)
+        elseif mv:match(': want "function", got "nil"$') then
+          print('delete ' .. k .. '.' .. mk)
+        else
+          error('weird error for ' .. k .. '.' .. mk)
+        end
       end
     end
+  end
+  if dirty then
+    write(fn, yaml.pprint(uiobjects))
   end
 end
