@@ -760,10 +760,6 @@ CATALOG_SHOP_OPEN_SIMPLE_CHECKOUT:
   payload:
   - name: checkoutID
     type: number
-CATALOG_SHOP_PMT_IMAGE_DOWNLOADED:
-  payload:
-  - name: catalogProductID
-    type: number
 CATALOG_SHOP_PURCHASE_SUCCESS:
   payload:
   - name: productID
@@ -3937,6 +3933,13 @@ ECLIPSE_DIRECTION_CHANGE:
   payload:
   - name: direction
     type: string
+EDIT_MODE_LAYOUTS_UPDATED:
+  payload:
+  - name: layoutInfo
+    type:
+      structure: C_EditMode.EditModeLayouts
+  - name: reconcileLayouts
+    type: boolean
 EJ_DIFFICULTY_UPDATE:
   payload:
   - name: difficultyID
@@ -4964,14 +4967,6 @@ LEARNED_SPELL_IN_SKILL_LINE:
   - name: spellID
     type: number
   - name: skillLineIndex
-    type: number
-  - name: isGuildPerkSpell
-    type: boolean
-LEARNED_SPELL_IN_TAB:
-  payload:
-  - name: spellID
-    type: number
-  - name: skillInfoIndex
     type: number
   - name: isGuildPerkSpell
     type: boolean
