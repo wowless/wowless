@@ -4968,6 +4968,17 @@ LayeredRegion:
         nilable: true
         type: number
       outputs:
+    SetVertexColorFromBoolean:
+      inputs:
+      - name: value
+        type: boolean
+      - name: colorIfTrue
+        type:
+          structure: colorRGBA
+      - name: colorIfFalse
+        type:
+          structure: colorRGBA
+      outputs:
   virtual: true
 Line:
   fields:
@@ -7209,17 +7220,6 @@ Region:
         type: number
       - name: y
         type: number
-      outputs:
-    SetVertexColorFromBoolean:
-      inputs:
-      - name: value
-        type: boolean
-      - name: colorIfTrue
-        type:
-          structure: colorRGBA
-      - name: colorIfFalse
-        type:
-          structure: colorRGBA
       outputs:
     SetWidth:
       impl:

@@ -910,4 +910,5 @@ uiobject_method_reassignments:
     SetScript: ScriptObject
     SetShown: RegionBase
     SetVertexColor: LayeredRegion
+    SetVertexColorFromBoolean: LayeredRegion
     Show: RegionBase
