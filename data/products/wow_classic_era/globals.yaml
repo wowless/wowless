@@ -2457,9 +2457,6 @@ Enum:
     BarSize: 0
     LockToPlayerFrame: 1
     ShowCastTime: 2
-  EditModeChatFrameDisplayOnlySetting:
-    Height: 5
-    Width: 4
   EditModeChatFrameSetting:
     HeightHundreds: 2
     HeightTensAndOnes: 3
@@ -3520,11 +3517,6 @@ Enum:
     None: 0
     Small: 66
     Tiny: 65
-  HousingCatalogEntrySubtype:
-    Invalid: 0
-    OwnedModifiedStack: 2
-    OwnedUnmodifiedStack: 3
-    Unowned: 1
   HousingCatalogEntryType:
     Decor: 1
     Invalid: 0

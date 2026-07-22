@@ -19,6 +19,9 @@ addon:
       CreateSecureDelegate:
       loadstring_untainted:
       secretunwrap:
+  enums_set_in_framexml:
+    EditModeChatFrameDisplayOnlySetting:
+    HousingCatalogEntrySubtype:
   ignore_cvar_value:
     graphicsEnvironmentDetail:
     graphicsGroundClutter:
