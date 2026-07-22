@@ -633,11 +633,16 @@ script_objects:
   UnitHealPredictionCalculatorAPI:
     luaobject: UnitHealPredictionCalculator
 typedefs:
+  AbbreviateConfig:
+    type:
+      luaobject: AbbreviateConfig
   AbbreviatedNumberFormatter:
     type:
       luaobject: AbbreviatedNumberFormatter
   AnimationDataEnum:
     type: number
+  AuraFilters:
+    type: string
   AzeriteEmpoweredItemLocation:
     type:
       structure: ItemLocation
@@ -666,6 +671,11 @@ typedefs:
     type: string
   ConnectionIptype:
     type: string
+  ConnectionProtocol:
+    type: string
+  CooldownFrame:
+    type:
+      uiobject: Cooldown
   CScriptObject:
     outnil: true
     type:
@@ -676,6 +686,9 @@ typedefs:
     type: number
   DurationSecondsDouble:
     type: number
+  DurationTextBinding:
+    type:
+      luaobject: DurationTextBinding
   EmptiableItemLocation:
     type:
       structure: ItemLocation
@@ -687,14 +700,23 @@ typedefs:
     type: number
   FontAlphabet:
     type: string
+  FrameScriptObject:
+    type:
+      uiobject: UIObject
   FrameTime:
     type: number
+  HousingCatalogSearcher:
+    type: string
   HousingFixturePointFrame:
+    type: string
+  HousingLayoutPinFrame:
     type: string
   HTMLTextType:
     type: string
   IDOrLink:
     type: string
+  InventorySlots:
+    type: number
   ItemInfo:
     type: string
   kstringClubMessage:
@@ -719,6 +741,9 @@ typedefs:
   LuaDurationClock:
     type:
       luaobject: LuaDurationClock
+  LuaDurationManualClock:
+    type:
+      luaobject: LuaDurationManualClock
   LuaDurationObject:
     type:
       luaobject: LuaDurationObject
@@ -739,6 +764,8 @@ typedefs:
     type:
       uiobject: Actor
   MouseButton:
+    type: string
+  mouseButton:
     type: string
   NamePlateFrame:
     type: table
@@ -762,6 +789,9 @@ typedefs:
     outnil: true
     type:
       uiobject: Region
+  SecondsFormatter:
+    type:
+      luaobject: SecondsFormatter
   SendChatMessageType:
     type: string
   SimpleAnim:
@@ -770,6 +800,9 @@ typedefs:
   SimpleAnimGroup:
     type:
       uiobject: AnimationGroup
+  SimpleCheckbox:
+    type:
+      uiobject: CheckButton
   SimpleControlPoint:
     type:
       uiobject: ControlPoint
@@ -807,6 +840,8 @@ typedefs:
     type: number
   size:
     type: number
+  SoundHandle:
+    type: string
   SpellIdentifier:
     type: string
   string:
@@ -831,19 +866,35 @@ typedefs:
   TimerCallback:
     type:
       luaobject: LuaFunctionContainer
+  Tooltip:
+    type:
+      uiobject: GameTooltip
   TooltipComparisonItem:
     type: table
   uiAddon:
     type: uiAddon
   uiFontHeight:
     type: number
+  UISoundSubType:
+    type: string
   uiUnit:
     type: number
+  UnitHealPredictionCalculator:
+    type:
+      luaobject: UnitHealPredictionCalculator
   UnitToken:
+    type: unit
+  UnitTokenNamePlate:
+    type: unit
+  UnitTokenPvPRestrictedForAddOns:
+    type: unit
+  UnitTokenRestrictedForAddOns:
     type: unit
   UnitTokenVariant:
     type: unit
   WOWGUID:
+    type: string
+  WowLocale:
     type: string
   WOWMONEY:
     type: number

@@ -2531,6 +2531,18 @@ Enum:
     DurationUseMinutes: 32
     IsRegionwide: 1
     NotAvailableClientSide: 16
+  HouseSettingFlags:
+    HouseAccessAnyone: 1
+    HouseAccessFriends: 8
+    HouseAccessGuild: 4
+    HouseAccessNeighbors: 2
+    HouseAccessParty: 16
+    None: 0
+    PlotAccessAnyone: 32
+    PlotAccessFriends: 256
+    PlotAccessGuild: 128
+    PlotAccessNeighbors: 64
+    PlotAccessParty: 512
   IconAndTextShiftTextType:
     None: 0
     ShiftText: 1
@@ -2544,6 +2556,12 @@ Enum:
     Keyboard: 1
     Mouse: 2
     None: 0
+  InvalidPlotScreenshotReason:
+    Facing: 2
+    NoActivePlayer: 4
+    None: 0
+    NoNeighborhoodFound: 3
+    OutOfBounds: 1
   InventoryType:
     Index2HweaponType: 17
     IndexAmmoType: 24
@@ -3936,6 +3954,17 @@ Enum:
     Ok: 0
     Owned: 2
     PartiallyOwned: 1
+  PurchaseHouseDisabledReason:
+    CharterLockout: 7
+    GuildLockout: 6
+    MaxHouses: 8
+    NoExpansion: 4
+    NoGameTimeRemaining: 9
+    None: 0
+    NotInvited: 3
+    Reserved: 5
+    WrongFaction: 1
+    WrongGuild: 2
   PvPFaction:
     Alliance: 1
     Horde: 0
@@ -4190,6 +4219,10 @@ Enum:
     PvPGroupMember: 15
     PvPScoreboard: 14
     RecentAlly: 17
+  ResidentType:
+    Manager: 1
+    Owner: 2
+    Resident: 0
   RestrictPingsTo:
     Assist: 2
     Lead: 1
