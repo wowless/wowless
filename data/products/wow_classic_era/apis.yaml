@@ -1974,6 +1974,7 @@ C_BattleNet.GetGameAccountInfoByID:
     nilable: true
     type:
       structure: C_BattleNet.BNetGameAccountInfo
+C_BattleNet.InstallHighResTextures:
 C_BattleNet.InviteFriend:
   inputs:
   - name: gameAccountID
@@ -3036,6 +3037,7 @@ C_ChallengeMode.Reset:
   inputs:
   outputs:
 C_CharacterServices.ArePaidCharacterTransfersBetweenBnetAccountsEnabled:
+C_CharacterServices.AssignFCMDistribution:
 C_CharacterServices.AssignNameChangeDistribution:
 C_CharacterServices.AssignPCTDistribution:
 C_CharacterServices.AssignRaceOrFactionChangeDistribution:
@@ -8819,6 +8821,7 @@ C_HouseExterior.GetCurrentHouseExteriorType:
   - name: houseExteriorTypeName
     nilable: true
     type: string
+C_HouseExterior.GetFixtureDebugInfoForGUID:
 C_HouseExterior.GetHouseExteriorSizeOptions:
   inputs:
   outputs:
@@ -8833,6 +8836,8 @@ C_HouseExterior.GetHouseExteriorTypeOptions:
     nilable: true
     type:
       structure: HouseExteriorTypeOptionsInfo
+C_HouseExterior.GetHoveredFixtureDebugInfo:
+C_HouseExterior.GetSelectedFixtureDebugInfo:
 C_HouseExterior.GetSelectedFixturePointInfo:
   inputs:
   outputs:
@@ -9406,6 +9411,7 @@ C_HousingCatalog.GetCatalogCategoryInfo:
     nilable: true
     type:
       structure: C_HousingCatalog.HousingCatalogCategoryInfo
+C_HousingCatalog.GetCatalogEntryDebugInfoForID:
 C_HousingCatalog.GetCatalogEntryInfo:
   inputs:
   - name: entryID
@@ -9810,6 +9816,7 @@ C_HousingDecor.GetAllPlacedDecor:
     type:
       arrayof:
         structure: C_HousingDecor.HousingDecorInstanceListEntry
+C_HousingDecor.GetDecorDebugInfoForGUID:
 C_HousingDecor.GetDecorHyperlink:
   inputs:
   - name: decorID
@@ -9843,6 +9850,7 @@ C_HousingDecor.GetDecorName:
   outputs:
   - name: name
     type: string
+C_HousingDecor.GetHoveredDecorDebugInfo:
 C_HousingDecor.GetHoveredDecorInfo:
   inputs:
   outputs:
@@ -9865,6 +9873,7 @@ C_HousingDecor.GetNumPreviewDecor:
   outputs:
   - name: numDecor
     type: number
+C_HousingDecor.GetSelectedDecorDebugInfo:
 C_HousingDecor.GetSelectedDecorInfo:
   inputs:
   outputs:
@@ -26546,6 +26555,7 @@ IsOutOfBounds:
   - name: result
     type: boolean
 IsPartyLFG:
+IsPartyWorldPVP:
 IsPassiveSpell:
   outputs:
   - name: isPassive
@@ -26848,10 +26858,14 @@ JumpOrAscendStart:
   protected: true
 KeyRingButtonIDToInvSlotID:
 Kiosk.GetCharacterTemplateSetIndex:
+Kiosk.GetKioskLoginInfo:
+Kiosk.IsCompetitiveModeEnabled:
 Kiosk.IsEnabled:
   inputs:
   outputs:
   - type: boolean
+Kiosk.IsExpired:
+Kiosk.IsInLobby:
 Kiosk.ShutdownSession:
 Kiosk.StartSession:
 LaunchURL:
@@ -28017,6 +28031,7 @@ string.byte:
   impl: string.byte
 string.char:
   impl: string.char
+string.concat:
 string.find:
   impl: string.find
 string.format:
@@ -29856,6 +29871,7 @@ UpdateAddOnMemoryUsage:
   inputs:
   outputs:
 UpdateInventoryAlertStatus:
+UpdateUIParentPosition:
 UpdateWarGamesList:
 UpdateWindow:
   inputs:

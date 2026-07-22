@@ -265,6 +265,26 @@ do
   end
 end
 
+if data.generated['~cfuncs'] then
+  local fn = 'data/products/' .. product .. '/apis.yaml'
+  local apis = yaml.parseFile(fn)
+  for k, v in pairs(data.generated['~cfuncs']) do
+    local names = {}
+    for name in k:gmatch('"([^"]*)"') do
+      table.insert(names, name)
+    end
+    if v:match(': no true name$') then
+      assert(#names == 1, k)
+      apis[names[1]] = {}
+    elseif v:match(': multiple true names$') then
+      print('multiple true names: ' .. table.concat(names, ', '))
+    else
+      error('unexpected cfuncs error: ' .. v)
+    end
+  end
+  write(fn, yaml.pprint(apis))
+end
+
 for k, v in pairs(data.generated.uiobjects or {}) do
   if v.methods then
     for mk, mv in pairs(v.methods) do
