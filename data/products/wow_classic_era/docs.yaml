@@ -124,6 +124,7 @@ lies:
     C_AuctionHouse.SupportsCopperValues:
     C_BarberShopInternal.SetQAMode:
     C_BattleNet.InstallHighResTextures:
+    C_CombatLogInternal.GetCurrentEventInfo:
     C_ConfigurationWarnings.GetConfigurationWarnings:
     C_ConfigurationWarnings.GetConfigurationWarningSeen:
     C_ConfigurationWarnings.GetConfigurationWarningString:
