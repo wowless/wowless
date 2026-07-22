@@ -51,8 +51,7 @@ local function fixMissingScriptObject(product, source, name)
   local domainf = domainfile(product, domain)
   local domaindata = yaml.parse(file.read(domainf))
   if not domaindata[typename] then
-    domaindata[typename] = domain == 'uiobject'
-        and { inherits = { UIObject = true }, fields = {}, methods = {} }
+    domaindata[typename] = domain == 'uiobject' and { inherits = { UIObject = true }, fields = {}, methods = {} }
       or { methods = {} }
     file.write(domainf, yaml.pprint(domaindata))
     print(('added empty %s %s to %s'):format(domain, typename, product))
