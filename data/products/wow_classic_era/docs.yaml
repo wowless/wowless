@@ -58,6 +58,22 @@ lies:
           nilable: true
       - _add:
           nilable: true
+  events:
+    COMBAT_LOG_APPLY_FILTER_SETTINGS:
+      _remove:
+        restricted: true
+    COMBAT_LOG_EVENT:
+      _remove:
+        restricted: true
+    COMBAT_LOG_EVENT_UNFILTERED:
+      _remove:
+        restricted: true
+    COMBAT_LOG_REFILTER_ENTRIES:
+      _remove:
+        restricted: true
+    MINIMAP_PING:
+      _remove:
+        restricted: true
   extra_apis:
     C_AuctionHouse.CalculateCommodityDeposit:
     C_AuctionHouse.CalculateItemDeposit:

@@ -3631,20 +3631,17 @@ COMBAT_LOG_APPLY_FILTER_SETTINGS:
   payload:
   - name: filterSettings
     type: table
-  restricted: true
 COMBAT_LOG_ENTRIES_CLEARED:
   payload:
 COMBAT_LOG_EVENT:
   callback: true
   payload:
-  restricted: true
 COMBAT_LOG_EVENT_INTERNAL_UNFILTERED:
   callback: true
   payload:
 COMBAT_LOG_EVENT_UNFILTERED:
   callback: true
   payload:
-  restricted: true
 COMBAT_LOG_MESSAGE:
   payload:
   - name: message
@@ -3666,7 +3663,6 @@ COMBAT_LOG_REFILTER_ENTRIES:
   callback: true
   noscript: true
   payload:
-  restricted: true
 COMBAT_RATING_UPDATE:
   payload:
 COMBAT_TEXT_UPDATE:
@@ -5314,7 +5310,6 @@ MINIMAP_PING:
     type: number
   - name: x
     type: number
-  restricted: true
 MINIMAP_UPDATE_TRACKING:
   payload:
 MINIMAP_UPDATE_ZOOM:
