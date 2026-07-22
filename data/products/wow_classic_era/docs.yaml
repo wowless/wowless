@@ -247,6 +247,7 @@ lies:
     FrameAPIBlob:
     FrameAPINamePlate:
     FrameAPIQuestPOI:
+    FrameAPIScenarioPOI:
     HousingCatalogSearcherAPI:
     HousingFixturePointFrameAPI:
     HousingLayoutPinFrameAPI:
@@ -491,8 +492,6 @@ script_objects:
     uiobject: Actor
   FrameAPIModelSceneFrameActorBase:
     uiobject: Actor
-  FrameAPIScenarioPOI:
-    uiobject: ScenarioPOIFrame
   FrameAPISimpleCheckout:
     uiobject: Checkout
   FrameAPITabardModel:
