@@ -2820,11 +2820,6 @@ C_CatalogShop.OnLegalDisclaimerClicked:
 C_CatalogShop.OnLegalPersonalizedOptOutClicked:
   inputs:
   outputs:
-C_CatalogShop.OpenCatalogShopInteraction:
-  inputs:
-  outputs:
-  - name: shoppingSessionUUIDStr
-    type: string
 C_CatalogShop.OpenCatalogShopInteractionFromHouse:
   inputs:
   outputs:
@@ -3265,13 +3260,6 @@ C_ChatInfo.PerformEmote:
   - name: success
     type: boolean
 C_ChatInfo.RegisterAddonMessagePrefix:
-  inputs:
-  - name: prefix
-    type: string
-  outputs:
-  - name: result
-    type:
-      enum: RegisterAddonMessagePrefixResult
 C_ChatInfo.ReplaceIconAndGroupExpressions:
   inputs:
   - name: input
@@ -3289,38 +3277,7 @@ C_ChatInfo.ReportServerLag:
   inputs:
   outputs:
 C_ChatInfo.SendAddonMessage:
-  inputs:
-  - name: prefix
-    type: string
-  - name: message
-    type: string
-  - name: chatType
-    nilable: true
-    type: string
-  - name: target
-    nilable: true
-    type: string
-  outputs:
-  - name: result
-    type:
-      enum: SendAddonMessageResult
 C_ChatInfo.SendAddonMessageLogged:
-  inputs:
-  - name: prefix
-    type: string
-  - name: message
-    type: string
-  - name: chatType
-    nilable: true
-    type: string
-  - name: target
-    nilable: true
-    type: string
-  outputs:
-  - name: result
-    nilable: true
-    type:
-      enum: SendAddonMessageResult
 C_ChatInfo.SendCautionaryChatMessage:
   inputs:
   - name: confirmNumber
@@ -4799,9 +4756,6 @@ C_CombatLog.ShouldShowCurrentEntry:
   outputs:
   - name: shouldShow
     type: boolean
-C_CombatLogInternal.GetCurrentEventInfo:
-  inputs:
-  outputs:
 C_CombatLogSecure.AddEventFilter:
   inputs:
   outputs:
@@ -7859,9 +7813,6 @@ C_EventUtils.IsEventValid:
   outputs:
   - name: valid
     type: boolean
-C_EventUtils.NotifySettingsLoaded:
-  inputs:
-  outputs:
 C_ExternalEventURL.HasURL:
   inputs:
   outputs:
@@ -9342,12 +9293,6 @@ C_HousingBasicMode.SetGridVisible:
   - name: gridVisible
     type: boolean
   outputs:
-C_HousingBasicMode.StartPlacingNewDecor:
-  inputs:
-  - name: catalogEntryVariantID
-    type:
-      structure: HousingCatalogEntryVariantID
-  outputs:
 C_HousingBasicMode.StartPlacingPreviewDecor:
   inputs:
   - name: decorRecordID
@@ -9356,23 +9301,10 @@ C_HousingBasicMode.StartPlacingPreviewDecor:
     nilable: true
     type: number
   outputs:
-C_HousingCatalog.CreateCatalogSearcher:
-  inputs:
-  outputs:
-  - name: searcher
-    type: string
 C_HousingCatalog.DeletePreviewCartDecor:
   inputs:
   - name: decorGUID
     type: string
-  outputs:
-C_HousingCatalog.DestroyEntry:
-  inputs:
-  - name: entryVariantID
-    type:
-      structure: HousingCatalogEntryVariantID
-  - name: destroyAll
-    type: boolean
   outputs:
 C_HousingCatalog.GetAllFilterTagGroups:
   inputs:
@@ -9415,46 +9347,6 @@ C_HousingCatalog.GetCatalogCategoryAndSubcategoryNames:
     type: string
   - name: subcategoryName
     type: string
-C_HousingCatalog.GetCatalogCategoryInfo:
-  inputs:
-  - name: categoryID
-    type: number
-  outputs:
-  - name: info
-    nilable: true
-    type:
-      structure: C_HousingCatalog.HousingCatalogCategoryInfo
-C_HousingCatalog.GetCatalogEntryInfo:
-  inputs:
-  - name: entryID
-    type:
-      structure: HousingCatalogEntryID
-  outputs:
-  - name: info
-    nilable: true
-    type:
-      structure: C_HousingCatalog.HousingCatalogEntryInfo
-C_HousingCatalog.GetCatalogEntryInfoByItem:
-  inputs:
-  - name: itemInfo
-    type: string
-  outputs:
-  - name: info
-    nilable: true
-    type:
-      structure: C_HousingCatalog.HousingCatalogEntryInfo
-C_HousingCatalog.GetCatalogEntryInfoByRecordID:
-  inputs:
-  - name: entryType
-    type:
-      enum: HousingCatalogEntryType
-  - name: recordID
-    type: number
-  outputs:
-  - name: info
-    nilable: true
-    type:
-      structure: C_HousingCatalog.HousingCatalogEntryInfo
 C_HousingCatalog.GetCatalogEntryRefundTimeStampByRecordID:
   inputs:
   - name: entryType
@@ -9476,15 +9368,6 @@ C_HousingCatalog.GetCatalogEntryVariantInfo:
     nilable: true
     type:
       structure: C_HousingCatalog.HousingCatalogEntryVariantInfo
-C_HousingCatalog.GetCatalogSubcategoryInfo:
-  inputs:
-  - name: subcategoryID
-    type: number
-  outputs:
-  - name: info
-    nilable: true
-    type:
-      structure: C_HousingCatalog.HousingCatalogSubcategoryInfo
 C_HousingCatalog.GetDecorMaxOwnedCount:
   inputs:
   outputs:
@@ -9580,24 +9463,6 @@ C_HousingCatalog.RequestHousingMarketInfoRefresh:
 C_HousingCatalog.RequestHousingMarketRefundInfo:
   inputs:
   outputs:
-C_HousingCatalog.SearchCatalogCategories:
-  inputs:
-  - name: searchParams
-    type:
-      structure: C_HousingCatalog.HousingCategorySearchInfo
-  outputs:
-  - name: categoryIDs
-    type:
-      arrayof: number
-C_HousingCatalog.SearchCatalogSubcategories:
-  inputs:
-  - name: searchParams
-    type:
-      structure: C_HousingCatalog.HousingCategorySearchInfo
-  outputs:
-  - name: subcategoryIDs
-    type:
-      arrayof: number
 C_HousingCatalog.SetPreviewCartItemShown:
   inputs:
   - name: decorGUID
@@ -12483,20 +12348,6 @@ C_Minimap.GetNumTrackingTypes:
   outputs:
   - name: numTrackingTypes
     type: number
-C_Minimap.GetObjectIconTextureCoords:
-  inputs:
-  - name: index
-    nilable: true
-    type: number
-  outputs:
-  - name: textureCoordsX
-    type: number
-  - name: textureCoordsY
-    type: number
-  - name: textureCoordsZ
-    type: number
-  - name: textureCoordsW
-    type: number
 C_Minimap.GetPOITextureCoords:
   inputs:
   - name: index
@@ -13139,9 +12990,6 @@ C_MythicPlus.RequestMapInfo:
 C_MythicPlus.RequestRewards:
   inputs:
   outputs:
-C_NamePlate.GetNamePlateEnemyClickThrough:
-C_NamePlate.GetNamePlateEnemyPreferredClickInsets:
-C_NamePlate.GetNamePlateEnemySize:
 C_NamePlate.GetNamePlateForUnit:
   inputs:
   - name: unitToken
@@ -13152,18 +13000,12 @@ C_NamePlate.GetNamePlateForUnit:
   outputs:
   - name: nameplate
     type: table
-C_NamePlate.GetNamePlateFriendlyClickThrough:
-C_NamePlate.GetNamePlateFriendlyPreferredClickInsets:
-C_NamePlate.GetNamePlateFriendlySize:
 C_NamePlate.GetNamePlates:
   inputs:
   outputs:
   - name: nameplates
     type:
       arrayof: table
-C_NamePlate.GetNamePlateSelfClickThrough:
-C_NamePlate.GetNamePlateSelfPreferredClickInsets:
-C_NamePlate.GetNamePlateSelfSize:
 C_NamePlate.GetNamePlateSize:
   inputs:
   outputs:
@@ -13171,19 +13013,6 @@ C_NamePlate.GetNamePlateSize:
     type: number
   - name: height
     type: number
-C_NamePlate.GetNumNamePlateMotionTypes:
-  outputs:
-  - type: number
-C_NamePlate.GetTargetClampingInsets:
-C_NamePlate.SetNamePlateEnemyClickThrough:
-C_NamePlate.SetNamePlateEnemyPreferredClickInsets:
-C_NamePlate.SetNamePlateEnemySize:
-C_NamePlate.SetNamePlateFriendlyClickThrough:
-C_NamePlate.SetNamePlateFriendlyPreferredClickInsets:
-C_NamePlate.SetNamePlateFriendlySize:
-C_NamePlate.SetNamePlateSelfClickThrough:
-C_NamePlate.SetNamePlateSelfPreferredClickInsets:
-C_NamePlate.SetNamePlateSelfSize:
 C_NamePlate.SetNamePlateSize:
   inputs:
   - name: width
@@ -13191,7 +13020,6 @@ C_NamePlate.SetNamePlateSize:
   - name: height
     type: number
   outputs:
-C_NamePlate.SetTargetClampingInsets:
 C_NamePlateManager.GetNamePlateHitTestInsets:
   inputs:
   - name: type
@@ -16477,11 +16305,6 @@ C_StorePublic.HasPurchaseableProducts:
   outputs:
   - name: hasPurchaseableProducts
     type: boolean
-C_StorePublic.IsDisabledByParentalControls:
-  inputs:
-  outputs:
-  - name: disabled
-    type: boolean
 C_StorePublic.IsEnabled:
   inputs:
   outputs:
@@ -17468,14 +17291,6 @@ C_Traits.TryRefundToNode:
   outputs:
   - name: success
     type: boolean
-C_Transmog.ApplyAllPending:
-  inputs:
-  - default: false
-    name: currentSpecOnly
-    type: boolean
-  outputs:
-  - name: requestSent
-    type: boolean
 C_Transmog.CanHaveSecondaryAppearanceForSlotID:
   inputs:
   - name: slotID
@@ -17483,45 +17298,6 @@ C_Transmog.CanHaveSecondaryAppearanceForSlotID:
   outputs:
   - name: canHaveSecondaryAppearance
     type: boolean
-C_Transmog.CanTransmogItem:
-  inputs:
-  - name: itemInfo
-    type: string
-  outputs:
-  - name: canBeTransmogged
-    type: boolean
-  - name: selfFailureReason
-    nilable: true
-    type: string
-  - name: canTransmogOthers
-    type: boolean
-  - name: othersFailureReason
-    nilable: true
-    type: string
-C_Transmog.CanTransmogItemWithItem:
-  inputs:
-  - name: targetItemInfo
-    type: string
-  - name: sourceItemInfo
-    type: string
-  outputs:
-  - name: canTransmog
-    type: boolean
-  - name: failureReason
-    nilable: true
-    type: string
-C_Transmog.ClearAllPending:
-  inputs:
-  outputs:
-C_Transmog.ClearPending:
-  inputs:
-  - name: transmogLocation
-    type:
-      structure: TransmogLocation
-  outputs:
-C_Transmog.Close:
-  inputs:
-  outputs:
 C_Transmog.ExtractTransmogIDList:
   inputs:
   - name: input
@@ -17530,28 +17306,6 @@ C_Transmog.ExtractTransmogIDList:
   - name: transmogIDList
     type:
       arrayof: number
-C_Transmog.GetApplyCost:
-  inputs:
-  outputs:
-  - name: cost
-    nilable: true
-    type: number
-C_Transmog.GetApplyWarnings:
-  inputs:
-  outputs:
-  - name: warnings
-    type:
-      arrayof:
-        structure: C_Transmog.TransmogApplyWarningInfo
-C_Transmog.GetBaseCategory:
-  inputs:
-  - name: transmogID
-    type: number
-  mayreturnnothing: true
-  outputs:
-  - name: categoryID
-    type:
-      enum: TransmogCollectionType
 C_Transmog.GetItemIDForSource:
   inputs:
   - name: itemModifiedAppearanceID
@@ -17560,25 +17314,6 @@ C_Transmog.GetItemIDForSource:
   - name: itemID
     nilable: true
     type: number
-C_Transmog.GetPending:
-  inputs:
-  - name: transmogLocation
-    type:
-      structure: TransmogLocation
-  mayreturnnothing: true
-  outputs:
-  - name: pendingInfo
-    type:
-      structure: TransmogPendingInfo
-C_Transmog.GetSlotEffectiveCategory:
-  inputs:
-  - name: transmogLocation
-    type:
-      structure: TransmogLocation
-  outputs:
-  - name: categoryID
-    type:
-      enum: TransmogCollectionType
 C_Transmog.GetSlotForInventoryType:
   inputs:
   - name: inventoryType
@@ -17587,41 +17322,6 @@ C_Transmog.GetSlotForInventoryType:
   outputs:
   - name: slot
     type: number
-C_Transmog.GetSlotInfo:
-  inputs:
-  - name: transmogLocation
-    type:
-      structure: TransmogLocation
-  mayreturnnothing: true
-  outputs:
-  - name: isTransmogrified
-    type: boolean
-  - name: hasPending
-    type: boolean
-  - name: isPendingCollected
-    type: boolean
-  - name: canTransmogrify
-    type: boolean
-  - name: cannotTransmogrifyReason
-    type: number
-  - name: hasUndo
-    type: boolean
-  - name: isHideVisual
-    type: boolean
-  - name: texture
-    nilable: true
-    type: number
-C_Transmog.GetSlotUseError:
-  inputs:
-  - name: transmogLocation
-    type:
-      structure: TransmogLocation
-  mayreturnnothing: true
-  outputs:
-  - name: errorCode
-    type: number
-  - name: errorString
-    type: string
 C_Transmog.GetSlotVisualInfo:
   inputs:
   - name: transmogLocation
@@ -17637,33 +17337,6 @@ C_Transmog.IsAtTransmogNPC:
   outputs:
   - name: isAtNPC
     type: boolean
-C_Transmog.IsSlotBeingCollapsed:
-  inputs:
-  - name: transmogLocation
-    type:
-      structure: TransmogLocation
-  outputs:
-  - name: isBeingCollapsed
-    type: boolean
-C_Transmog.IsTransmogEnabled:
-  inputs:
-  outputs:
-  - name: isTransmogEnabled
-    type: boolean
-C_Transmog.LoadOutfit:
-  inputs:
-  - name: outfitID
-    type: number
-  outputs:
-C_Transmog.SetPending:
-  inputs:
-  - name: transmogLocation
-    type:
-      structure: TransmogLocation
-  - name: pendingInfo
-    type:
-      structure: TransmogPendingInfo
-  outputs:
 C_TransmogCollection.AccountCanCollectSource:
   inputs:
   - name: sourceID
@@ -17706,11 +17379,6 @@ C_TransmogCollection.ClearSearch:
 C_TransmogCollection.DeleteCustomSet:
   inputs:
   - name: customSetID
-    type: number
-  outputs:
-C_TransmogCollection.DeleteOutfit:
-  inputs:
-  - name: outfitID
     type: number
   outputs:
 C_TransmogCollection.EndSearch:
@@ -18012,16 +17680,6 @@ C_TransmogCollection.GetItemTransmogInfoListFromCustomSetHyperlink:
     type:
       arrayof:
         structure: ItemTransmogInfo
-C_TransmogCollection.GetItemTransmogInfoListFromOutfitHyperlink:
-  inputs:
-  - name: hyperlink
-    type: string
-  mayreturnnothing: true
-  outputs:
-  - name: list
-    type:
-      arrayof:
-        structure: ItemTransmogInfo
 C_TransmogCollection.GetLatestAppearance:
   inputs:
   mayreturnnothing: true
@@ -18037,42 +17695,11 @@ C_TransmogCollection.GetNumMaxCustomSets:
   outputs:
   - name: maxCustomSets
     type: number
-C_TransmogCollection.GetNumMaxOutfits:
-  inputs:
-  outputs:
-  - name: maxOutfits
-    type: number
 C_TransmogCollection.GetNumTransmogSources:
   inputs:
   outputs:
   - name: count
     type: number
-C_TransmogCollection.GetOutfitInfo:
-  inputs:
-  - name: outfitID
-    type: number
-  mayreturnnothing: true
-  outputs:
-  - name: name
-    type: string
-  - name: icon
-    type: number
-C_TransmogCollection.GetOutfitItemTransmogInfoList:
-  inputs:
-  - name: outfitID
-    type: number
-  mayreturnnothing: true
-  outputs:
-  - name: list
-    type:
-      arrayof:
-        structure: ItemTransmogInfo
-C_TransmogCollection.GetOutfits:
-  inputs:
-  outputs:
-  - name: outfitID
-    type:
-      arrayof: number
 C_TransmogCollection.GetPairedArtifactAppearance:
   inputs:
   - name: itemModifiedAppearanceID
@@ -18224,15 +17851,6 @@ C_TransmogCollection.ModifyCustomSet:
       arrayof:
         structure: ItemTransmogInfo
   outputs:
-C_TransmogCollection.ModifyOutfit:
-  inputs:
-  - name: outfitID
-    type: number
-  - name: itemTransmogInfoList
-    type:
-      arrayof:
-        structure: ItemTransmogInfo
-  outputs:
 C_TransmogCollection.NewCustomSet:
   inputs:
   - name: name
@@ -18245,20 +17863,6 @@ C_TransmogCollection.NewCustomSet:
         structure: ItemTransmogInfo
   outputs:
   - name: customSetID
-    nilable: true
-    type: number
-C_TransmogCollection.NewOutfit:
-  inputs:
-  - name: name
-    type: string
-  - name: icon
-    type: number
-  - name: itemTransmogInfoList
-    type:
-      arrayof:
-        structure: ItemTransmogInfo
-  outputs:
-  - name: outfitID
     nilable: true
     type: number
 C_TransmogCollection.PlayerCanCollectSource:
@@ -18304,13 +17908,6 @@ C_TransmogCollection.PlayerKnowsSource:
 C_TransmogCollection.RenameCustomSet:
   inputs:
   - name: customSetID
-    type: number
-  - name: name
-    type: string
-  outputs:
-C_TransmogCollection.RenameOutfit:
-  inputs:
-  - name: outfitID
     type: number
   - name: name
     type: string
@@ -19666,15 +19263,6 @@ C_UIWidgetManager.GetTextureWithAnimationVisualizationInfo:
     nilable: true
     type:
       structure: C_UIWidgetManager.TextureWithAnimationVisualizationInfo
-C_UIWidgetManager.GetTextureWithStateVisualizationInfo:
-  inputs:
-  - name: widgetID
-    type: number
-  outputs:
-  - name: widgetInfo
-    nilable: true
-    type:
-      structure: C_UIWidgetManager.TextureWithStateVisualizationInfo
 C_UIWidgetManager.GetTextWithStateWidgetVisualizationInfo:
   inputs:
   - name: widgetID

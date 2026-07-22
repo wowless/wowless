@@ -21,7 +21,6 @@ addon:
     SeasonID:
       Placeholder:
   enums_set_in_framexml:
-    Unitsex:
   ignore_cvar_value:
     graphicsEnvironmentDetail:
     graphicsGroundClutter:

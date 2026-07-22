@@ -113,10 +113,28 @@ if data.generated.cvars then
 end
 
 if data.generated.globals then
-  local gf = 'data/products/' .. product .. '/globals.yaml'
-  local g = yaml.parseFile(gf)
-  applyPatterns(g, data.generated.globals or {})
-  write(gf, yaml.pprint(g))
+  local gv = data.generated.globals
+  local enumkey, enumtable, enumvalue
+  if type(gv) == 'string' then
+    enumkey = gv:match('^enums_set_in_framexml (.+) was not set$')
+    enumtable, enumvalue = gv:match('^enum_values_set_in_framexml (.+)%.(.+) was not set$')
+  end
+  if enumkey then
+    local cf = 'data/products/' .. product .. '/config.yaml'
+    local config = yaml.parseFile(cf)
+    config.addon.enums_set_in_framexml[enumkey] = nil
+    write(cf, yaml.pprint(config))
+  elseif enumtable then
+    local cf = 'data/products/' .. product .. '/config.yaml'
+    local config = yaml.parseFile(cf)
+    config.addon.enum_values_set_in_framexml[enumtable][enumvalue] = nil
+    write(cf, yaml.pprint(config))
+  else
+    local gf = 'data/products/' .. product .. '/globals.yaml'
+    local g = yaml.parseFile(gf)
+    applyPatterns(g, gv)
+    write(gf, yaml.pprint(g))
+  end
 end
 
 do
