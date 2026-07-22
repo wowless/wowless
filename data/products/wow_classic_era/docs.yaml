@@ -128,17 +128,6 @@ lies:
     C_ConfigurationWarnings.GetConfigurationWarningSeen:
     C_ConfigurationWarnings.GetConfigurationWarningString:
     C_ConfigurationWarnings.SetConfigurationWarningSeen:
-    C_EditMode.ConvertLayoutInfoToString:
-    C_EditMode.ConvertStringToLayoutInfo:
-    C_EditMode.GetAccountSettings:
-    C_EditMode.GetLayouts:
-    C_EditMode.IsValidLayoutName:
-    C_EditMode.OnEditModeExit:
-    C_EditMode.OnLayoutAdded:
-    C_EditMode.OnLayoutDeleted:
-    C_EditMode.SaveLayouts:
-    C_EditMode.SetAccountSetting:
-    C_EditMode.SetActiveLayout:
     IsCollisionEnabled:
     ToggleAnimKitDisplay:
     ToggleCollision:

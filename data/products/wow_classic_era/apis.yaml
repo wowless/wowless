@@ -1975,6 +1975,8 @@ C_BattleNet.GetGameAccountInfoByID:
     type:
       structure: C_BattleNet.BNetGameAccountInfo
 C_BattleNet.InstallHighResTextures:
+  inputs:
+  outputs:
 C_BattleNet.InviteFriend:
   inputs:
   - name: gameAccountID
@@ -6849,6 +6851,79 @@ C_DyeColor.IsDyeColorOwned:
   outputs:
   - name: isOwned
     type: boolean
+C_EditMode.ConvertLayoutInfoToString:
+  inputs:
+  - name: layoutInfo
+    type:
+      structure: C_EditMode.EditModeLayoutInfo
+  outputs:
+  - name: layoutInfoAsString
+    type: string
+C_EditMode.ConvertStringToLayoutInfo:
+  inputs:
+  - name: layoutInfoAsString
+    type: string
+  mayreturnnothing: true
+  outputs:
+  - name: layoutInfo
+    type:
+      structure: C_EditMode.EditModeLayoutInfo
+C_EditMode.GetAccountSettings:
+  inputs:
+  outputs:
+  - name: accountSettings
+    type:
+      arrayof:
+        structure: C_EditMode.EditModeSettingInfo
+C_EditMode.GetLayouts:
+  inputs:
+  outputs:
+  - name: layoutInfo
+    type:
+      structure: C_EditMode.EditModeLayouts
+C_EditMode.IsValidLayoutName:
+  inputs:
+  - name: name
+    type: string
+  outputs:
+  - name: isApproved
+    type: boolean
+C_EditMode.OnEditModeExit:
+  inputs:
+  outputs:
+C_EditMode.OnLayoutAdded:
+  inputs:
+  - name: addedLayoutIndex
+    type: number
+  - name: activateNewLayout
+    type: boolean
+  - name: isLayoutImported
+    type: boolean
+  outputs:
+C_EditMode.OnLayoutDeleted:
+  inputs:
+  - name: deletedLayoutIndex
+    type: number
+  outputs:
+C_EditMode.SaveLayouts:
+  inputs:
+  - name: saveInfo
+    type:
+      structure: C_EditMode.EditModeLayouts
+  outputs:
+C_EditMode.SetAccountSetting:
+  inputs:
+  - name: setting
+    type:
+      enum: EditModeAccountSetting
+  - name: value
+    type: number
+  outputs:
+C_EditMode.SetActiveLayout:
+  inputs:
+  - name: activeLayout
+    type: number
+  outputs:
 C_EncodingUtil.CompressString:
   inputs:
   - name: source

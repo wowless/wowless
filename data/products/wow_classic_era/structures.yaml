@@ -1968,6 +1968,66 @@ C_DeathInfo.SelfResurrectOption:
       type: number
 C_DeathRecap.DeathRecapEventInfo:
   fields:
+C_EditMode.EditModeAnchorInfo:
+  fields:
+    offsetX:
+      type: number
+    offsetY:
+      type: number
+    point:
+      type:
+        stringenum: FramePoint
+    relativePoint:
+      type:
+        stringenum: FramePoint
+    relativeTo:
+      type: string
+C_EditMode.EditModeLayoutInfo:
+  fields:
+    layoutName:
+      type: string
+    layoutType:
+      type:
+        enum: EditModeLayoutType
+    systems:
+      type:
+        arrayof:
+          structure: C_EditMode.EditModeSystemInfo
+C_EditMode.EditModeLayouts:
+  fields:
+    activeLayout:
+      type: number
+    layouts:
+      type:
+        arrayof:
+          structure: C_EditMode.EditModeLayoutInfo
+C_EditMode.EditModeSettingInfo:
+  fields:
+    setting:
+      type: number
+    value:
+      type: number
+C_EditMode.EditModeSystemInfo:
+  fields:
+    anchorInfo:
+      type:
+        structure: C_EditMode.EditModeAnchorInfo
+    anchorInfo2:
+      nilable: true
+      type:
+        structure: C_EditMode.EditModeAnchorInfo
+    isInDefaultPosition:
+      type: boolean
+    settings:
+      type:
+        arrayof:
+          structure: C_EditMode.EditModeSettingInfo
+    system:
+      type:
+        enum: EditModeSystem
+    systemIndex:
+      nilable: true
+      type: number
 C_EncodingUtil.CBORSerializationOptions:
   fields:
     ignoreSerializationErrors:
