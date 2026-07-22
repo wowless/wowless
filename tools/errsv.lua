@@ -228,21 +228,6 @@ do
 end
 
 do
-  local fn = 'data/products/' .. product .. '/events.yaml'
-  local evs = yaml.parseFile(fn)
-  for k, v in pairs(data.generated.events or {}) do
-    if v:match(': want true, got false$') then
-      evs[k] = nil
-    elseif v:match(': want false, got true$') then
-      evs[k] = { payload = {} }
-    else
-      error('unexpected pattern for ' .. k)
-    end
-  end
-  write(fn, yaml.pprint(evs))
-end
-
-do
   local fn = 'data/products/' .. product .. '/apis.yaml'
   local apis = yaml.parseFile(fn)
   local cf = 'data/products/' .. product .. '/config.yaml'
