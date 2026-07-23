@@ -29,6 +29,13 @@ C_Calendar.SetAbsMonth:
 C_Calendar.SetMonth:
   moduledelegate:
     name: calendar
+C_ChatInfo.PerformEmote:
+  impl:
+    modules:
+      events:
+      log:
+    sqls:
+    - C_ChatInfo.PerformEmote
 C_ChatInfo.ReplaceIconAndGroupExpressions:
   impl:
 C_ClassTalents.GetActiveConfigID:
@@ -275,13 +282,6 @@ debugstack:
     nowrap: true
 difftime:
   stdlib: difftime
-DoEmote:
-  impl:
-    modules:
-      events:
-      log:
-    sqls:
-    - DoEmote
 EnumerateFrames:
   impl:
     modules:
