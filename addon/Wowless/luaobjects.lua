@@ -82,7 +82,20 @@ local function checkLuaObject(ty, o)
       for k in pairs(allmethodnames) do
         if not alltypes[ty][k] then
           t[k] = function()
-            assertEquals(nil, o[k])
+            return {
+              index = function()
+                assertEquals(nil, o[k])
+              end,
+              newindex = function()
+                local v = {}
+                local success = pcall(function()
+                  o[k] = v
+                end)
+                assertEquals(true, success, k)
+                assertEquals(v, o[k])
+                o[k] = nil
+              end,
+            }
           end
         end
       end
