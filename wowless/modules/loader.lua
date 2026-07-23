@@ -635,7 +635,14 @@ return function(
               local env = ctx.useAddonEnv and addonEnv or ctx.useSecureEnv and secureenv or genv
               local tmpls = intrinsicEntry and { intrinsicEntry.template, template } or { template }
               local objParent = uiobjecttypes.InheritsFrom(basetype, 'parentedobjectbase') and parent or nil
-              return api.CreateUIObject(basetype, name, objParent, env, tmpls, nil, ctx.layer, ctx.sublevel)
+              local obj = api.CreateUIObject(basetype, name, objParent, env, tmpls, nil, ctx.layer, ctx.sublevel)
+              if ltype == 'worldframe' then
+                -- WORLD is a real frameStrata value, but only WorldFrame has it,
+                -- confirmed against a real client; it isn't reachable through
+                -- SetFrameStrata.
+                obj.frameStrata = 'WORLD'
+              end
+              return obj
             end
           end
         else
