@@ -748,6 +748,11 @@ G.testsuite.sync = function()
             assertEquals(getmetatable(CreateFrame('Frame')), getmetatable(_G.WorldFrame))
           end
         end,
+        ['has strata WORLD'] = function()
+          if _G.WorldFrame then
+            assertEquals('WORLD', _G.WorldFrame:GetFrameStrata())
+          end
+        end,
       }
     end,
   }
