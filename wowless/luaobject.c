@@ -86,11 +86,9 @@ void wowless_luaobject_make_mt(lua_State *L, int methods_idx,
   lua_pushvalue(L, methods_idx);
   lua_pushcclosure(L, luaobject_newindex, 1);
   lua_setfield(L, -2, "__newindex");
-  if (typename_str) {
-    lua_pushstring(L, typename_str);
-    lua_pushcclosure(L, luaobject_tostring, 1);
-    lua_setfield(L, -2, "__tostring");
-  }
+  lua_pushstring(L, typename_str);
+  lua_pushcclosure(L, luaobject_tostring, 1);
+  lua_setfield(L, -2, "__tostring");
 }
 
 /* upvalue 1: metatables (type_id -> metatable) */

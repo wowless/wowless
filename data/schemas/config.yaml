@@ -50,11 +50,6 @@ type:
     modules:
       type:
         record:
-          luaobjects:
-            type:
-              record:
-                tostring_metamethod:
-                  type: flag
           parentkey:
             type:
               record:
