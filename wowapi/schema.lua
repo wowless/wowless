@@ -15,24 +15,9 @@ for name in pairs(wdata.datafiles) do
 end
 
 local extradomains = {
-  schemas = {
-    kind = 'global',
-    get = function()
-      return wdata.schemas
-    end,
-  },
-  enums = {
-    kind = 'product',
-    get = function()
-      return wdata.enums
-    end,
-  },
-  domains = {
-    kind = 'global',
-    get = function()
-      return domainnames
-    end,
-  },
+  schemas = { kind = 'global', domain = wdata.schemas },
+  enums = { kind = 'product', domain = wdata.enums },
+  domains = { kind = 'global', domain = domainnames },
 }
 for name in pairs(extradomains) do
   domainnames[name] = true
@@ -41,12 +26,11 @@ end
 local function resolvedomain(name)
   local extra = extradomains[name]
   if extra then
-    return extra.kind, extra.get
+    return extra.kind, extra.domain
   end
-  if wdata.datafiles[name] then
-    return wdata.datafiles[name], function()
-      return wdata[name]
-    end
+  local dtype = wdata.datafiles[name]
+  if dtype then
+    return dtype, wdata[name]
   end
 end
 
@@ -200,17 +184,17 @@ local complex = {
     end
   end,
   ref = function(s)
-    local kind, getdomain = resolvedomain(s.schema)
+    local kind, domain = resolvedomain(s.schema)
     local mustexist = not s.negative
     return function(v, product)
       if type(v) ~= 'string' then
         return 'expected string'
       end
-      local domain = kind == 'global' and getdomain() or kind == 'product' and getdomain()[product]
-      if not domain then
+      local d = kind == 'global' and domain or kind == 'product' and domain[product]
+      if not d then
         return 'invalid domain'
       end
-      if (domain[v] ~= nil) ~= mustexist then
+      if (d[v] ~= nil) ~= mustexist then
         return (mustexist and 'unknown' or 'known') .. ' domain value'
       end
     end
