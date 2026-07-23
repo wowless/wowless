@@ -448,30 +448,6 @@ local xmlflat = (function()
   return newtree
 end)()
 
-local data = {
-  build = parseYaml('data/products/' .. product .. '/build.yaml'),
-  config = parseYaml('data/products/' .. product .. '/config.yaml'),
-  cvars = cvars,
-  events = events,
-  globals = globals,
-  luaobjects = luaobjects,
-  product = product,
-  sqls = sqls,
-  stringenums = stringenums,
-  structures = structures,
-  uiobjects = uiobjects,
-  xmlflat = xmlflat,
-  xmlimpls = xmlimpls,
-}
-
-local function safename(s)
-  return s:gsub('[%.:]', '_')
-end
-
-local function cstring(s)
-  return '"' .. s:gsub('\\', '\\\\'):gsub('"', '\\"'):gsub('\n', '\\n'):gsub('\r', '\\r'):gsub('\t', '\\t') .. '"'
-end
-
 local coutdefaults
 coutdefaults = {
   arrayof = function(inner)
@@ -486,6 +462,9 @@ coutdefaults = {
   enum = function(enumname)
     local meta = assert(globals.Enum[enumname .. 'Meta'], 'missing meta enum for ' .. enumname)
     return (assert(meta.MinValue, 'missing MinValue in meta for ' .. enumname))
+  end,
+  ['function'] = function()
+    return nil
   end,
   ['nil'] = function()
     return nil
@@ -540,6 +519,36 @@ coutdefaults = {
     return nil
   end,
 }
+
+local structdefaults = {}
+for name in pairs(structures) do
+  structdefaults[name] = coutdefaults.structure(name)
+end
+
+local data = {
+  build = parseYaml('data/products/' .. product .. '/build.yaml'),
+  config = parseYaml('data/products/' .. product .. '/config.yaml'),
+  cvars = cvars,
+  events = events,
+  globals = globals,
+  luaobjects = luaobjects,
+  product = product,
+  sqls = sqls,
+  stringenums = stringenums,
+  structdefaults = structdefaults,
+  structures = structures,
+  uiobjects = uiobjects,
+  xmlflat = xmlflat,
+  xmlimpls = xmlimpls,
+}
+
+local function safename(s)
+  return s:gsub('[%.:]', '_')
+end
+
+local function cstring(s)
+  return '"' .. s:gsub('\\', '\\\\'):gsub('"', '\\"'):gsub('\n', '\\n'):gsub('\r', '\\r'):gsub('\t', '\\t') .. '"'
+end
 
 local function simple_cinputtype(suffix)
   local fn = function(verb, nilable, idx)

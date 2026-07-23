@@ -1,4 +1,5 @@
 local datalua, events, log, sql = ...
+local deepcopy = require('pl.tablex').deepcopy
 return function(token, user, hold)
   local text = sql(token)
   if text then
@@ -22,25 +23,7 @@ return function(token, user, hold)
       false,
     }
     if datalua.config.runtime.discord then
-      table.insert(args, {
-        forwardedMessage = '',
-        fromDiscord = false,
-        globalName = '',
-        hasAttachment = false,
-        hasEmbed = false,
-        hasEmoji = false,
-        hasForwardedMessage = false,
-        hasPoll = false,
-        hasSticker = false,
-        lastOnlineGUID = '',
-        lastOnlineName = '',
-        type = 0,
-        userID = '',
-        username = '',
-      })
-    end
-    if datalua.product == 'wowt' then
-      args[#args].hasError = false
+      table.insert(args, deepcopy(datalua.structdefaults.DiscordChatInfo))
     end
     events.SendEvent('CHAT_MSG_TEXT_EMOTE', unpack(args))
   else

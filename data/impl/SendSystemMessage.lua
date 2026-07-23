@@ -1,4 +1,5 @@
 local datalua, eventqueue, units = ...
+local deepcopy = require('pl.tablex').deepcopy
 return function(msg)
   local args = {
     'CHAT_MSG_SYSTEM',
@@ -21,25 +22,7 @@ return function(msg)
     false,
   }
   if datalua.config.runtime.discord then
-    table.insert(args, {
-      forwardedMessage = '',
-      fromDiscord = false,
-      globalName = '',
-      hasAttachment = false,
-      hasEmbed = false,
-      hasEmoji = false,
-      hasForwardedMessage = false,
-      hasPoll = false,
-      hasSticker = false,
-      lastOnlineGUID = '',
-      lastOnlineName = '',
-      type = 0,
-      userID = '',
-      username = '',
-    })
-  end
-  if datalua.product == 'wowt' then
-    args[#args].hasError = false
+    table.insert(args, deepcopy(datalua.structdefaults.DiscordChatInfo))
   end
   eventqueue.QueueEvent(unpack(args))
 end
