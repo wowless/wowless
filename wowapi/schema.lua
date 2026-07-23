@@ -181,12 +181,17 @@ local complex = {
       kind, domain = wdata.datafiles[s.schema], wdata[s.schema]
     end
     local mustexist = not s.negative
+    if not domain then
+      return function(v)
+        if type(v) ~= 'string' then
+          return 'expected string'
+        end
+        return 'invalid domain'
+      end
+    end
     return function(v, product)
       if type(v) ~= 'string' then
         return 'expected string'
-      end
-      if not domain then
-        return 'invalid domain'
       end
       local d = kind == 'global' and domain or domain[product]
       if not d then
