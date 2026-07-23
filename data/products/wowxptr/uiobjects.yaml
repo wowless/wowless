@@ -5020,6 +5020,7 @@ LayeredRegion:
         type:
           structure: colorRGBA
       outputs:
+  objectType: SimpleRegion
   virtual: true
 Line:
   fields:
