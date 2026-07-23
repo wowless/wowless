@@ -16,6 +16,10 @@ return {
     return T.match(1, nil, getmetatable(42))
   end,
   string = function()
+    if T.wowless and T.wowless.lite then -- issue #569: real client behavior comes from
+      -- RestrictedExecution.lua, which isn't loaded outside full product runs
+      return
+    end
     return T.match(1, T.env.string, getmetatable(''))
   end,
 }

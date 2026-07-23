@@ -473,6 +473,9 @@ G.testsuite.sync = function()
           assertEquals(nil, getmetatable(42))
         end,
         string = function()
+          if _G.__wowless and _G.__wowless.lite then -- issue #569: needs RestrictedExecution.lua
+            return
+          end
           assertEquals(string, getmetatable(''))
         end,
         thread = function()

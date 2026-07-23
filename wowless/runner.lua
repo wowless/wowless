@@ -23,7 +23,6 @@ local function withglobaltable(t, f)
   local oldt = setglobaltable(t)
   debug.setmetatable('', {
     __index = t.string,
-    __metatable = t.string,
   })
   local success, ret = pcall(f)
   debug.setmetatable('', oldsmt)
