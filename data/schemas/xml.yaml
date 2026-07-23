@@ -74,6 +74,9 @@ type:
                 args:
                   type: string
             transparent: tag
+            uiobject:
+              ref:
+                schema: uiobject
       phase:
         type:
           taggedunion:

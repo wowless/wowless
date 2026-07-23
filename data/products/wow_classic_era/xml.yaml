@@ -31,6 +31,8 @@ Actor:
   contents:
     tags:
       Scripts:
+  impl:
+    uiobject: Actor
 Alpha:
   attributes:
     fromalpha:
@@ -42,6 +44,8 @@ Alpha:
         field: toAlpha
       type: number
   extends: Animation
+  impl:
+    uiobject: Alpha
 Anchor:
   attributes:
     point:
@@ -89,6 +93,8 @@ Animation:
     tags:
       KeyValues:
       Scripts:
+  impl:
+    uiobject: Animation
 AnimationGroup:
   attributes:
     inherits:
@@ -119,6 +125,8 @@ AnimationGroup:
       Animation:
       KeyValues:
       Scripts:
+  impl:
+    uiobject: AnimationGroup
 Animations:
   contents:
     tags:
@@ -180,6 +188,8 @@ Browser:
     imefont:
       type: string
   extends: Frame
+  impl:
+    uiobject: Browser
 Button:
   attributes:
     motionscriptswhiledisabled:
@@ -205,6 +215,8 @@ Button:
       PushedTextOffset:
       PushedTexture:
   extends: Frame
+  impl:
+    uiobject: Button
 ButtonFont:
   attributes:
     style:
@@ -232,6 +244,8 @@ CheckButton:
       CheckedTexture:
       DisabledCheckedTexture:
   extends: Button
+  impl:
+    uiobject: CheckButton
 CheckedTexture:
   extends: Texture
   impl:
@@ -245,8 +259,12 @@ Checkout:
     imefont:
       type: string
   extends: Frame
+  impl:
+    uiobject: Checkout
 CinematicModel:
   extends: Frame
+  impl:
+    uiobject: CinematicModel
 Color:
   attributes:
     a:
@@ -267,6 +285,8 @@ ColorSelect:
       ColorWheelTexture:
       ColorWheelThumbTexture:
   extends: Frame
+  impl:
+    uiobject: ColorSelect
 ColorValueTexture:
   extends: Texture
   impl:
@@ -305,6 +325,8 @@ ControlPoint:
       type: number
     offsety:
       type: number
+  impl:
+    uiobject: ControlPoint
 ControlPoints:
   contents:
     tags:
@@ -324,6 +346,8 @@ Cooldown:
       EdgeTexture:
       SwipeTexture:
   extends: Frame
+  impl:
+    uiobject: Cooldown
 Dimension:
   contents:
     tags:
@@ -358,6 +382,8 @@ DressUpModel:
     modelscale:
       type: number
   extends: Frame
+  impl:
+    uiobject: DressUpModel
 EdgeTexture:
   extends: Texture
   sealed: true
@@ -389,10 +415,16 @@ EditBox:
       HighlightColor:
       TextInsets:
   extends: Frame
+  impl:
+    uiobject: EditBox
 FlipBook:
   extends: Animation
+  impl:
+    uiobject: FlipBook
 FogOfWarFrame:
   extends: Frame
+  impl:
+    uiobject: FogOfWarFrame
 Font:
   attributes:
     filter:
@@ -429,6 +461,8 @@ Font:
     tags:
       Color:
       Shadow:
+  impl:
+    uiobject: Font
 FontFamily:
   attributes:
     name:
@@ -470,6 +504,8 @@ FontString:
       FontHeight:
       Shadow:
   extends: LayoutFrame
+  impl:
+    uiobject: FontString
 FontStringHeader1:
   extends: FontString
   sealed: true
@@ -561,6 +597,8 @@ Frame:
       Layers:
       ResizeBounds:
   extends: LayoutFrame
+  impl:
+    uiobject: Frame
 Frames:
   contents:
     tags:
@@ -569,6 +607,8 @@ Frames:
   phase: late
 GameTooltip:
   extends: Frame
+  impl:
+    uiobject: GameTooltip
 Gradient:
   attributes:
     orientation:
@@ -714,6 +754,8 @@ Line:
     thickness:
       type: number
   extends: LayoutFrame
+  impl:
+    uiobject: Line
 LineScale:
   attributes:
     fromscalex:
@@ -728,6 +770,8 @@ LineScale:
     tags:
       Origin:
   extends: Animation
+  impl:
+    uiobject: LineScale
 MaskedTexture:
   attributes:
     childkey:
@@ -747,6 +791,8 @@ MaskTexture:
     tags:
       MaskedTextures:
   extends: Texture
+  impl:
+    uiobject: MaskTexture
 MaxColor:
   extends: Color
 MaxResize:
@@ -773,19 +819,27 @@ MessageFrame:
     tags:
       FontString:
   extends: Frame
+  impl:
+    uiobject: MessageFrame
 MinColor:
   extends: Color
 Minimap:
   extends: Frame
+  impl:
+    uiobject: Minimap
 MinResize:
   extends: Dimension
 Model:
   extends: Frame
+  impl:
+    uiobject: Model
 ModelScene:
   contents:
     tags:
       ViewInsets:
   extends: Frame
+  impl:
+    uiobject: ModelScene
 ModifiedClick:
   attributes:
     action:
@@ -794,6 +848,8 @@ ModifiedClick:
       type: string
 MovieFrame:
   extends: Frame
+  impl:
+    uiobject: MovieFrame
 NormalFont:
   extends: ButtonFont
   impl:
@@ -811,6 +867,8 @@ NormalTexture:
   sealed: true
 OffScreenFrame:
   extends: Frame
+  impl:
+    uiobject: OffScreenFrame
 Offset:
   attributes:
     x:
@@ -1119,8 +1177,12 @@ Path:
     tags:
       ControlPoints:
   extends: Animation
+  impl:
+    uiobject: Path
 PlayerModel:
   extends: Frame
+  impl:
+    uiobject: PlayerModel
 POIFrame:
   extends: Frame
   virtual: true
@@ -1194,6 +1256,8 @@ Rotation:
     degrees:
       type: number
   extends: Animation
+  impl:
+    uiobject: Rotation
 Scale:
   attributes:
     fromscalex:
@@ -1212,6 +1276,8 @@ Scale:
     tags:
       Origin:
   extends: Animation
+  impl:
+    uiobject: Scale
 ScenarioPOIFrame:
   extends: POIFrame
 ScopedModifier:
@@ -1271,6 +1337,8 @@ ScrollFrame:
     tags:
       ScrollChild:
   extends: Frame
+  impl:
+    uiobject: ScrollFrame
 Shadow:
   attributes:
     x:
@@ -1289,6 +1357,8 @@ SimpleHTML:
       FontStringHeader2:
       FontStringHeader3:
   extends: Frame
+  impl:
+    uiobject: SimpleHTML
 Size:
   attributes:
     x:
@@ -1325,6 +1395,8 @@ Slider:
     tags:
       ThumbTexture:
   extends: Frame
+  impl:
+    uiobject: Slider
 StatusBar:
   attributes:
     defaultvalue:
@@ -1344,11 +1416,15 @@ StatusBar:
       BarColor:
       BarTexture:
   extends: Frame
+  impl:
+    uiobject: StatusBar
 SwipeTexture:
   extends: Texture
   sealed: true
 TabardModel:
   extends: Frame
+  impl:
+    uiobject: TabardModel
 TexCoords:
   attributes:
     bottom:
@@ -1405,8 +1481,12 @@ Texture:
       Gradient:
       TexCoords:
   extends: LayoutFrame
+  impl:
+    uiobject: Texture
 TextureCoordTranslation:
   extends: Animation
+  impl:
+    uiobject: TextureCoordTranslation
 ThumbTexture:
   extends: Texture
   impl:
@@ -1422,6 +1502,8 @@ Translation:
     offsety:
       type: number
   extends: Animation
+  impl:
+    uiobject: Translation
 Ui:
   contents:
     tags:
@@ -1436,6 +1518,8 @@ Ui:
   impl: transparent
 UnitPositionFrame:
   extends: Frame
+  impl:
+    uiobject: UnitPositionFrame
 Value:
   contents:
     tags:
@@ -1452,3 +1536,5 @@ ViewInsets:
       type: number
 WorldFrame:
   extends: Frame
+  impl:
+    uiobject: Frame
