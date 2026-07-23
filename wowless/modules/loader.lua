@@ -530,6 +530,11 @@ return function(
 
       local loadElement
 
+      local function implUiobjectType(e)
+        local entry = xmlimpls[e.type] and xmlimpls[e.type].tag
+        return type(entry) == 'table' and entry.uiobject and string.lower(entry.uiobject) or nil
+      end
+
       local function loadElements(ctx, t, parent)
         for _, v in ipairs(t) do
           loadElement(ctx, v, parent)
@@ -594,8 +599,10 @@ return function(
       function loadElement(ctx, e, parent)
         local ltype = string.lower(e.type)
         local intrinsicEntry = intrinsics.Get(ltype)
-        -- uiobject types and intrinsic types share the same xml element namespace.
-        if uiobjecttypes.Has(ltype) or intrinsicEntry or e.type == 'worldframe' then
+        local implBasetype = implUiobjectType(e)
+        -- e.type dispatches to either a declared uiobject-creating tag (impl.uiobject
+        -- in xml.yaml) or a previously-registered intrinsic (same name namespace).
+        if implBasetype or intrinsicEntry then
           ctx = not e.attr.intrinsic and ctx or mixin({}, ctx, { intrinsic = true })
           local template = {
             inherits = e.attr.inherits,
@@ -611,7 +618,7 @@ return function(
             assert(virtual ~= false, 'intrinsics cannot be explicitly non-virtual: ' .. e.type)
             assert(e.attr.name, 'cannot create anonymous intrinsic')
             local name = string.lower(e.attr.name)
-            local basetype = intrinsicEntry and intrinsicEntry.basetype or ltype
+            local basetype = intrinsicEntry and intrinsicEntry.basetype or implBasetype
             uiobjecttypes.GetOrThrow(basetype) -- validate basetype exists
             intrinsics.Add(name, basetype, template)
           else
@@ -624,8 +631,7 @@ return function(
               if virtual and ctx.ignoreVirtual then
                 log(1, 'ignoring virtual on %s', tostring(name))
               end
-              local basetype = intrinsicEntry and intrinsicEntry.basetype
-                or (e.type == 'worldframe' and 'frame' or ltype)
+              local basetype = intrinsicEntry and intrinsicEntry.basetype or implBasetype
               local env = ctx.useAddonEnv and addonEnv or ctx.useSecureEnv and secureenv or genv
               local tmpls = intrinsicEntry and { intrinsicEntry.template, template } or { template }
               local objParent = uiobjecttypes.InheritsFrom(basetype, 'parentedobjectbase') and parent or nil
