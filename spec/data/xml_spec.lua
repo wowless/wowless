@@ -57,7 +57,7 @@ describe('xml', function()
             local e = elem
             while e do
               for an, a in pairs(e.attributes or {}) do
-                attrs[an] = attrs[an] or a
+                attrs[an] = a
               end
               e = e.extends and xml[e.extends] or nil
             end
