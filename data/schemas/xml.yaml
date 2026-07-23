@@ -30,12 +30,12 @@ type:
                       boolean: tag
                       enum:
                         ref:
-                          schema: enum
+                          schema: enums
                       number: tag
                       string: tag
                       stringenum:
                         ref:
-                          schema: stringenum
+                          schema: stringenums
                       stringlist: tag
       contents:
         type:
@@ -67,7 +67,7 @@ type:
                   required: true
                   type:
                     ref:
-                      schema: uiobject
+                      schema: uiobjects
             loadstring: tag
             script:
               record:
@@ -76,7 +76,7 @@ type:
             transparent: tag
             uiobject:
               ref:
-                schema: uiobject
+                schema: uiobjects
       phase:
         type:
           taggedunion:

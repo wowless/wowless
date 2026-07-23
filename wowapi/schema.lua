@@ -1,25 +1,54 @@
 local wdata = require('wowapi.data')
-local domains = {
-  family = wdata.families,
-  gametype = wdata.gametypes,
-  impl = wdata.impl,
-  module = wdata.modules,
-  schema = wdata.schemas,
-  scripttype = wdata.scripttypes,
-  sql = wdata.sql,
-  uiobjectimpl = wdata.uiobjectimpl,
+
+-- Domain names used by the 'ref' schematype match data/datafiles.yaml keys,
+-- so global-vs-product is looked up there. A few domains aren't declared in
+-- datafiles.yaml because they aren't simple per-file loads (see
+-- wowapi/data.lua):
+--  - 'schemas' is assembled from the data/schemas directory
+--  - 'enums' is extracted from each product's globals.yaml
+--  - 'domains' is the set of valid domain names itself, letting
+--    schematype.yaml check that a schema's ref.schema field names a real
+--    domain without separately enumerating them
+local domainnames = {}
+for name in pairs(wdata.datafiles) do
+  domainnames[name] = true
+end
+
+local extradomains = {
+  schemas = {
+    kind = 'global',
+    get = function()
+      return wdata.schemas
+    end,
+  },
+  enums = {
+    kind = 'product',
+    get = function()
+      return wdata.enums
+    end,
+  },
+  domains = {
+    kind = 'global',
+    get = function()
+      return domainnames
+    end,
+  },
 }
-local productDomains = {
-  api = wdata.apis,
-  cvar = wdata.cvars,
-  enum = wdata.enums,
-  event = wdata.events,
-  luaobject = wdata.luaobjects,
-  stringenum = wdata.stringenums,
-  structure = wdata.structures,
-  uiobject = wdata.uiobjects,
-  xml = wdata.xml,
-}
+for name in pairs(extradomains) do
+  domainnames[name] = true
+end
+
+local function resolvedomain(name)
+  local extra = extradomains[name]
+  if extra then
+    return extra.kind, extra.get
+  end
+  if wdata.datafiles[name] then
+    return wdata.datafiles[name], function()
+      return wdata[name]
+    end
+  end
+end
 
 local function mksimple(ty)
   return function(v)
@@ -171,8 +200,9 @@ local complex = {
     end
   end,
   ref = function(s)
-    local gdomain = domains[s.schema]
-    local pdomains = productDomains[s.schema]
+    local kind, getdomain = resolvedomain(s.schema)
+    local gdomain = kind == 'global' and getdomain()
+    local pdomains = kind == 'product' and getdomain()
     local mustexist = not s.negative
     return function(v, product)
       if type(v) ~= 'string' then

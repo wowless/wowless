@@ -11,4 +11,4 @@ type:
           required: true
           type:
             ref:
-              schema: family
+              schema: families

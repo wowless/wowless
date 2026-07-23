@@ -14,18 +14,18 @@ type:
                   type:
                     setof:
                       ref:
-                        schema: enum
+                        schema: enums
                 globalapis:
                   type:
                     setof:
                       ref:
-                        schema: api
+                        schema: apis
           enum_values_set_in_framexml:
             type:
               mapof:
                 key:
                   ref:
-                    schema: enum
+                    schema: enums
                 value:
                   setof: string
           enums_set_in_framexml:
@@ -33,7 +33,7 @@ type:
               setof:
                 ref:
                   negative: true
-                  schema: enum
+                  schema: enums
           hooked_globals:
             type:
               setof: string
@@ -41,12 +41,12 @@ type:
             type:
               setof:
                 ref:
-                  schema: cvar
+                  schema: cvars
           overwritten_apis:
             type:
               setof:
                 ref:
-                  schema: api
+                  schema: apis
     modules:
       type:
         record:
@@ -70,7 +70,7 @@ type:
               mapof:
                 key:
                   ref:
-                    schema: event
+                    schema: events
                 value: string
           skip_slashcmds:
             type:

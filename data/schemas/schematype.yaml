@@ -38,27 +38,11 @@ type:
         schema:
           required: true
           type:
-            taggedunion:
-              api: tag
-              cvar: tag
-              enum: tag
-              event: tag
-              family: tag
-              gametype: tag
-              impl: tag
-              luaobject: tag
-              module: tag
-              schema: tag
-              scripttype: tag
-              sql: tag
-              stringenum: tag
-              structure: tag
-              uiobject: tag
-              uiobjectimpl: tag
-              xml: tag
+            ref:
+              schema: domains
     schema:
       ref:
-        schema: schema
+        schema: schemas
     sequenceof:
       schema: schematype
     setof:

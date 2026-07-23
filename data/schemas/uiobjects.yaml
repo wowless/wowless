@@ -31,7 +31,7 @@ type:
         type:
           setof:
             ref:
-              schema: uiobject
+              schema: uiobjects
       methods:
         required: true
         type:
@@ -118,7 +118,7 @@ type:
         type:
           setof:
             ref:
-              schema: scripttype
+              schema: scripttypes
       singleton:
         type: flag
       virtual:

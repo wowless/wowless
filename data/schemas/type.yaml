@@ -7,29 +7,29 @@ type:
     boolean: tag
     enum:
       ref:
-        schema: enum
+        schema: enums
     FileAsset: tag
     function: tag
     gender: tag
     hlist: tag
     luaobject:
       ref:
-        schema: luaobject
+        schema: luaobjects
     nil: tag
     number: tag
     oneornil: tag
     string: tag
     stringenum:
       ref:
-        schema: stringenum
+        schema: stringenums
     structure:
       ref:
-        schema: structure
+        schema: structures
     table: tag
     TextureAsset: tag
     uiAddon: tag
     uiobject:
       ref:
-        schema: uiobject
+        schema: uiobjects
     unit: tag
     unknown: tag
