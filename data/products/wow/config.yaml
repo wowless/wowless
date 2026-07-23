@@ -79,9 +79,6 @@ addon:
     C_Traits.GetConditionInfo:
     C_Traits.GetEntryInfo:
     C_Traits.GetTreeInfo:
-modules:
-  luaobjects:
-    tostring_metamethod: true
 runner:
   skip_bindings:
     TOGGLECOLLECTIONSWARDROBE: requires better implementation of transmog slots

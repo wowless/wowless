@@ -1,12 +1,11 @@
 local luaobject = require('wowless.luaobject')
 
 return function(cstubs, datalua)
-  local config = datalua.config.modules and datalua.config.modules.luaobjects or {}
   local typeids = {}
   local impltypes = {}
 
   local function LoadTypes(modules)
-    local type_stubs = cstubs.loadluaobjects(modules, luaobject, config.tostring_metamethod)
+    local type_stubs = cstubs.loadluaobjects(modules, luaobject)
     for k, ts in pairs(type_stubs) do
       typeids[k] = ts.typeid
     end
