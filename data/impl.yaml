@@ -32,6 +32,7 @@ C_Calendar.SetMonth:
 C_ChatInfo.PerformEmote:
   impl:
     modules:
+      datalua:
       events:
       log:
     sqls:
