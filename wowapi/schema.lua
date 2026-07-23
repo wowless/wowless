@@ -23,17 +23,6 @@ for name in pairs(extradomains) do
   domainnames[name] = true
 end
 
-local function resolvedomain(name)
-  local extra = extradomains[name]
-  if extra then
-    return extra.kind, extra.domain
-  end
-  local dtype = wdata.datafiles[name]
-  if dtype then
-    return dtype, wdata[name]
-  end
-end
-
 local function mksimple(ty)
   return function(v)
     local vty = type(v)
@@ -184,13 +173,22 @@ local complex = {
     end
   end,
   ref = function(s)
-    local kind, domain = resolvedomain(s.schema)
+    local extra = extradomains[s.schema]
+    local kind, domain
+    if extra then
+      kind, domain = extra.kind, extra.domain
+    elseif wdata.datafiles[s.schema] then
+      kind, domain = wdata.datafiles[s.schema], wdata[s.schema]
+    end
     local mustexist = not s.negative
     return function(v, product)
       if type(v) ~= 'string' then
         return 'expected string'
       end
-      local d = kind == 'global' and domain or kind == 'product' and domain[product]
+      if not domain then
+        return 'invalid domain'
+      end
+      local d = kind == 'global' and domain or domain[product]
       if not d then
         return 'invalid domain'
       end
