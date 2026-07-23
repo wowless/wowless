@@ -458,6 +458,29 @@ G.testsuite.sync = function()
       }
     end,
 
+    metatables = function()
+      return {
+        boolean = function()
+          assertEquals(nil, getmetatable(true))
+        end,
+        ['function'] = function()
+          assertEquals(nil, getmetatable(true))
+        end,
+        ['nil'] = function()
+          assertEquals(nil, getmetatable(true))
+        end,
+        number = function()
+          assertEquals(nil, getmetatable(42))
+        end,
+        string = function()
+          assertEquals(string, getmetatable(''))
+        end,
+        thread = function()
+          assertEquals(nil, getmetatable(coroutine.create(function() end)))
+        end,
+      }
+    end,
+
     StatusBar = function()
       local sb = CreateFrame('StatusBar')
       local nilparent = CreateFrame('Frame')

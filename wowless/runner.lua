@@ -19,8 +19,14 @@ pointing to the current global table (the sandbox), not the host
 environment.
 ]]
 local function withglobaltable(t, f)
+  local oldsmt = getmetatable('')
   local oldt = setglobaltable(t)
+  debug.setmetatable('', {
+    __index = t.string,
+    __metatable = t.string,
+  })
   local success, ret = pcall(f)
+  debug.setmetatable('', oldsmt)
   setglobaltable(oldt)
   assert(success, ret)
   return ret
