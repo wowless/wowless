@@ -38,5 +38,8 @@ return function(msg)
       username = '',
     })
   end
+  if datalua.product == 'wowt' then
+    args[#args].hasError = false
+  end
   eventqueue.QueueEvent(unpack(args))
 end

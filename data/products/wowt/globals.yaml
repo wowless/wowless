@@ -2406,6 +2406,9 @@ Enum:
   CursorStyle:
     Crosshair: 1
     Mouse: 0
+  CustomAuraButtonBorderStyle:
+    Atlas: 0
+    Color: 1
   CustomBindingType:
     VoicePushToTalk: 0
   Damageclass:
@@ -3040,8 +3043,10 @@ Enum:
   ForbiddenAspect:
     AlwaysPropagateInput: 32
     ChangeAnimationTarget: 256
+    ChangeParent: 1024
     EventRegistrations: 16
     QueryFocus: 128
+    RemoveSecretAspects: 512
     ScriptBindings: 2
     ScriptedInput: 64
     SetToDefaults: 1
@@ -3949,113 +3954,114 @@ Enum:
     AccountBanned: 1
     ActionLockedByCombat: 2
     BlueprintCodeInvalid: 3
-    BlueprintGenericExportError: 4
-    BlueprintGenericImportError: 5
-    BlueprintLocationInvalid: 6
-    BlueprintNameInvalid: 7
-    BlueprintNotFound: 8
-    BlueprintRequirementsUnmet: 10
-    BlueprintRoomPlacementRequired: 11
-    BlueprintStorageLimit: 12
-    BlueprintTypeInvalid: 9
-    BlueprintVersionInvalid: 13
-    BoundsFailureChildren: 14
-    BoundsFailurePlot: 15
-    BoundsFailureRoom: 16
-    BoundToStartingArea: 17
-    CannotAfford: 18
-    CharterComplete: 19
-    CollisionInvalid: 20
-    DbError: 21
-    DecorCannotBeRedeemed: 22
-    DecorItemNotDestroyable: 23
-    DecorNotFound: 24
-    DecorNotFoundInStorage: 25
-    DuplicateCharterSignature: 26
-    FilterRejected: 27
-    FixtureCantDeleteDoor: 28
-    FixtureHookEmpty: 29
-    FixtureHookOccupied: 30
-    FixtureHouseTypeMismatch: 31
-    FixtureNotFound: 32
-    FixtureSizeMismatch: 33
-    FixtureTypeMismatch: 34
-    GenericFailure: 35
-    GuildMoreAccountsNeeded: 36
-    GuildMoreActivePlayersNeeded: 37
-    GuildNotLoaded: 38
-    HookNotChildOfFixture: 47
-    HouseEditLockFailed: 39
-    HouseExteriorAlreadyThatSize: 40
-    HouseExteriorAlreadyThatType: 41
-    HouseExteriorRootNotFound: 42
-    HouseExteriorSizeNotAvailable: 46
-    HouseExteriorTypeNeighborhoodMismatch: 43
-    HouseExteriorTypeNotFound: 44
-    HouseExteriorTypeSizeMismatch: 45
-    HouseNotFound: 48
-    IncorrectFaction: 49
-    InsufficientRoomBudget: 62
-    InvalidDecorItem: 50
-    InvalidDistance: 51
-    InvalidExteriorDocument: 52
-    InvalidGuild: 53
-    InvalidHouse: 54
-    InvalidInstance: 55
-    InvalidInteraction: 56
-    InvalidInteriorDocument: 57
-    InvalidLightOverlap: 58
-    InvalidMap: 59
-    InvalidNeighborhoodName: 60
-    InvalidRoomLayout: 61
-    LockedByOtherPlayer: 63
-    LockOperationFailed: 64
-    MaxPetDecorReached: 66
-    MaxPlacedDecorReached: 65
-    MaxPreviewDecorReached: 67
-    MaxStorageDecorReached: 68
-    MissingCoreFixture: 69
-    MissingDye: 70
-    MissingExpansionAccess: 71
-    MissingFactionMap: 72
-    MissingPrivateNeighborhoodInvite: 73
-    MoreHouseSlotsNeeded: 74
-    MoreSignaturesNeeded: 75
-    NeighborhoodNotFound: 76
-    NoNeighborhoodOwnershipRequests: 77
-    NotInDecorEditMode: 78
-    NotInFixtureEditMode: 79
-    NotInLayoutEditMode: 80
-    NotInsideHouse: 81
-    NotOnOwnedPlot: 82
-    OperationAborted: 83
-    OwnerNotInGuild: 84
-    PermissionDenied: 85
-    PlacementTargetInvalid: 86
-    PlayerNotFound: 87
-    PlayerNotInInstance: 88
-    PlotNotFound: 89
-    PlotNotVacant: 90
-    PlotReservationCooldown: 91
-    PlotReserved: 92
-    RoomNotFound: 93
-    RoomPlacementOutOfBounds: 94
-    RoomUpdateFailed: 95
-    RpcFailure: 96
-    ServiceNotAvailable: 97
-    StaticDataNotFound: 98
+    BlueprintDyeFailed: 4
+    BlueprintGenericExportError: 5
+    BlueprintGenericImportError: 6
+    BlueprintLocationInvalid: 7
+    BlueprintNameInvalid: 8
+    BlueprintNotFound: 9
+    BlueprintRequirementsUnmet: 11
+    BlueprintRoomPlacementRequired: 12
+    BlueprintStorageLimit: 13
+    BlueprintTypeInvalid: 10
+    BlueprintVersionInvalid: 14
+    BoundsFailureChildren: 15
+    BoundsFailurePlot: 16
+    BoundsFailureRoom: 17
+    BoundToStartingArea: 18
+    CannotAfford: 19
+    CharterComplete: 20
+    CollisionInvalid: 21
+    DbError: 22
+    DecorCannotBeRedeemed: 23
+    DecorItemNotDestroyable: 24
+    DecorNotFound: 25
+    DecorNotFoundInStorage: 26
+    DuplicateCharterSignature: 27
+    FilterRejected: 28
+    FixtureCantDeleteDoor: 29
+    FixtureHookEmpty: 30
+    FixtureHookOccupied: 31
+    FixtureHouseTypeMismatch: 32
+    FixtureNotFound: 33
+    FixtureSizeMismatch: 34
+    FixtureTypeMismatch: 35
+    GenericFailure: 36
+    GuildMoreAccountsNeeded: 37
+    GuildMoreActivePlayersNeeded: 38
+    GuildNotLoaded: 39
+    HookNotChildOfFixture: 48
+    HouseEditLockFailed: 40
+    HouseExteriorAlreadyThatSize: 41
+    HouseExteriorAlreadyThatType: 42
+    HouseExteriorRootNotFound: 43
+    HouseExteriorSizeNotAvailable: 47
+    HouseExteriorTypeNeighborhoodMismatch: 44
+    HouseExteriorTypeNotFound: 45
+    HouseExteriorTypeSizeMismatch: 46
+    HouseNotFound: 49
+    IncorrectFaction: 50
+    InsufficientRoomBudget: 63
+    InvalidDecorItem: 51
+    InvalidDistance: 52
+    InvalidExteriorDocument: 53
+    InvalidGuild: 54
+    InvalidHouse: 55
+    InvalidInstance: 56
+    InvalidInteraction: 57
+    InvalidInteriorDocument: 58
+    InvalidLightOverlap: 59
+    InvalidMap: 60
+    InvalidNeighborhoodName: 61
+    InvalidRoomLayout: 62
+    LockedByOtherPlayer: 64
+    LockOperationFailed: 65
+    MaxPetDecorReached: 67
+    MaxPlacedDecorReached: 66
+    MaxPreviewDecorReached: 68
+    MaxStorageDecorReached: 69
+    MissingCoreFixture: 70
+    MissingDye: 71
+    MissingExpansionAccess: 72
+    MissingFactionMap: 73
+    MissingPrivateNeighborhoodInvite: 74
+    MoreHouseSlotsNeeded: 75
+    MoreSignaturesNeeded: 76
+    NeighborhoodNotFound: 77
+    NoNeighborhoodOwnershipRequests: 78
+    NotInDecorEditMode: 79
+    NotInFixtureEditMode: 80
+    NotInLayoutEditMode: 81
+    NotInsideHouse: 82
+    NotOnOwnedPlot: 83
+    OperationAborted: 84
+    OwnerNotInGuild: 85
+    PermissionDenied: 86
+    PlacementTargetInvalid: 87
+    PlayerNotFound: 88
+    PlayerNotInInstance: 89
+    PlotNotFound: 90
+    PlotNotVacant: 91
+    PlotReservationCooldown: 92
+    PlotReserved: 93
+    RoomNotFound: 94
+    RoomPlacementOutOfBounds: 95
+    RoomUpdateFailed: 96
+    RpcFailure: 97
+    ServiceNotAvailable: 98
+    StaticDataNotFound: 99
     Success: 0
-    TimeoutLimit: 99
-    TimerunningNotAllowed: 100
-    TokenRequired: 101
-    TooManyRequests: 102
-    TransactionFailure: 103
-    UncollectedExteriorFixture: 104
-    UncollectedHouseType: 105
-    UncollectedRoom: 106
-    UncollectedRoomMaterial: 107
-    UncollectedRoomTheme: 108
-    UnlockOperationFailed: 109
+    TimeoutLimit: 100
+    TimerunningNotAllowed: 101
+    TokenRequired: 102
+    TooManyRequests: 103
+    TransactionFailure: 104
+    UncollectedExteriorFixture: 105
+    UncollectedHouseType: 106
+    UncollectedRoom: 107
+    UncollectedRoomMaterial: 108
+    UncollectedRoomTheme: 109
+    UnlockOperationFailed: 110
   HousingRoomComponentCeilingType:
     Flat: 0
     Vaulted: 1
@@ -4304,6 +4310,11 @@ Enum:
     UseInputItemStats: 1
   ItemCreationContext:
     BlackMarket: 15
+    BonusRoll_1: 187
+    BonusRoll_2: 188
+    BonusRoll_3: 189
+    BonusRoll_4: 190
+    BonusRoll_5: 191
     ChallengeMode_1: 16
     ChallengeMode_2: 33
     ChallengeMode_3: 34
@@ -5494,6 +5505,7 @@ Enum:
     FailedSilent: 2
     Ok: 0
   PingSubjectType:
+    ActionNotReady: 9
     ActionOnCooldown: 7
     ActionReady: 6
     ActionUnavailable: 8
@@ -6733,6 +6745,7 @@ Enum:
     Mail: 4
     Quarantine: 24
     Reagentbank: 22
+    Reserved: 40
   SubscriptionInterstitialResponseType:
     Clicked: 0
     Closed: 1
@@ -6858,9 +6871,11 @@ Enum:
     ToySource: 29
     ToyText: 25
     TradeTimeRemaining: 36
+    UnitLevel: 47
     UnitName: 2
     UnitOwner: 16
     UnitThreat: 7
+    UnitType: 48
     UsageRequirement: 43
   TooltipDataType:
     Achievement: 12
@@ -7397,7 +7412,6 @@ Enum:
     Modern: 0
   UIActionType:
     DefaultAction: 0
-    Reserved1: 2
     UpdateMapSystem: 1
   UICovenantDisplayInfoFlags:
     DisplayCovenantAsJourney: 1
@@ -7644,6 +7658,10 @@ Enum:
     Name: 5
     NameOnly: 6
     Unsorted: 0
+  UnitAuraSoundTrigger:
+    Added: 0
+    ApplicationsIncreased: 1
+    Removed: 2
   UnitDamageAbsorbClampMode:
     MaximumHealth: 2
     MissingHealth: 0

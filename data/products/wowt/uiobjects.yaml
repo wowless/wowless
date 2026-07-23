@@ -3758,6 +3758,11 @@ FontString:
       outputs:
       - name: isWithinText
         type: boolean
+    SetDesaturateEmbeddedTextures:
+      inputs:
+      - name: desaturate
+        type: boolean
+      outputs:
     SetFixedColor:
       inputs:
       - name: fixedColor
@@ -4422,6 +4427,11 @@ Frame:
       outputs:
       - name: resizable
         type: boolean
+    IsRolesetFiltered:
+      inputs:
+      outputs:
+      - name: isRolesetFiltered
+        type: boolean
     IsToplevel:
       impl:
         getter:
@@ -4842,6 +4852,14 @@ GameTooltip:
     AddAtlas:
     AddDoubleLine:
     AddFontStrings:
+      inputs:
+      - name: leftFontString
+        type:
+          uiobject: FontString
+      - name: rightFontString
+        type:
+          uiobject: FontString
+      outputs:
     AddLine:
     AddTexture:
     AppendText:
@@ -9301,6 +9319,17 @@ UIObject:
         type:
           enum: ForbiddenAspect
       outputs:
+    AddSecretAspect:
+      inputs:
+      - name: aspect
+        type:
+          enum: SecretAspect
+      outputs:
+    CanBeAccessedInContext:
+      inputs:
+      outputs:
+      - name: canAccess
+        type: boolean
     GetAccessRestrictions:
       inputs:
       outputs:
@@ -9344,6 +9373,11 @@ UIObject:
       outputs:
       - name: objectType
         type: string
+    HasAccessConstraints:
+      inputs:
+      outputs:
+      - name: hasAccessConstraints
+        type: boolean
     HasAnyAccessRestrictions:
       inputs:
       - name: restrictions

@@ -2683,6 +2683,16 @@ C_AuctionHouse.SupportsCopperValues:
   outputs:
   - name: supportsCopperValues
     type: boolean
+C_AuraContainerUtil.ProcessCustomAuraButtonBorderOptions:
+  inputs:
+  - name: options
+    nilable: true
+    type:
+      structure: C_AuraContainerUtil.CustomAuraButtonBorderOptions
+  outputs:
+  - name: result
+    type:
+      structure: C_AuraContainerUtil.CustomAuraButtonBorderOptions
 C_AuthChallenge.Cancel:
 C_AuthChallenge.DidChallengeSucceed:
 C_AuthChallenge.OnTabPressed:
@@ -18332,6 +18342,8 @@ C_Map.SetUserWaypoint:
   - name: point
     type: table
   outputs:
+  - name: wasSet
+    type: boolean
 C_MapExplorationInfo.GetExploredAreaIDsAtPosition:
   inputs:
   - name: uiMapID
@@ -19445,6 +19457,11 @@ C_PaperDollInfo.CanAutoEquipCursorItem:
   outputs:
   - name: canAutoEquip
     type: boolean
+C_PaperDollInfo.CancelTemporaryEnchantment:
+  inputs:
+  - name: slot
+    type: number
+  outputs:
 C_PaperDollInfo.CanCursorCanGoInSlot:
   inputs:
   - name: slotIndex
@@ -24002,6 +24019,18 @@ C_Roleset.ApplyRolesetFilters:
     type:
       arrayof: string
   outputs:
+C_Roleset.GetActiveAllowedRolesets:
+  inputs:
+  outputs:
+  - name: allowedRolesets
+    type:
+      arrayof: string
+C_Roleset.GetActiveBlockedRolesets:
+  inputs:
+  outputs:
+  - name: blockedRolesets
+    type:
+      arrayof: string
 C_Scenario.GetBonusStepRewardQuestID:
 C_Scenario.GetBonusSteps:
 C_Scenario.GetInfo:
@@ -30625,6 +30654,11 @@ C_TransmogOutfitInfo.IsSlotWeaponSlot:
   outputs:
   - name: isWeaponSlot
     type: boolean
+C_TransmogOutfitInfo.IsTransmogEnabled:
+  inputs:
+  outputs:
+  - name: enabled
+    type: boolean
 C_TransmogOutfitInfo.IsUsableDiscountAvailable:
   inputs:
   outputs:
@@ -31623,13 +31657,16 @@ C_UIWidgetManager.UnregisterUnitForWidgetUpdates:
     name: isGuid
     type: boolean
   outputs:
-C_UnitAuras.AddAuraAppliedSound:
+C_UnitAuras.AddAuraSound:
   inputs:
+  - name: trigger
+    type:
+      enum: UnitAuraSoundTrigger
   - name: sound
     type:
-      structure: UnitAuraAppliedSoundInfo
+      structure: UnitAuraSoundInfo
   outputs:
-  - name: auraAppliedSoundID
+  - name: auraSoundID
     nilable: true
     type: number
 C_UnitAuras.AddBlockedAura:
@@ -31941,9 +31978,9 @@ C_UnitAuras.IsAuraFilteredOutByInstanceID:
   outputs:
   - name: isFiltered
     type: boolean
-C_UnitAuras.RemoveAuraAppliedSound:
+C_UnitAuras.RemoveAuraSound:
   inputs:
-  - name: auraAppliedSoundID
+  - name: auraSoundID
     type: number
   outputs:
 C_UnitAuras.RemovePrivateAuraAnchor:
@@ -33155,7 +33192,6 @@ CancelAreaSpiritHeal:
   inputs:
   outputs:
 CancelDuel:
-CancelItemTempEnchantment:
 CancelLogout:
   inputs:
   outputs:
@@ -37755,7 +37791,6 @@ GetVersatilityBonus:
 GetVideoCaps:
 GetWarGameQueueStatus:
 GetWarGameTypeInfo:
-GetWeaponEnchantInfo:
 GetWebTicket:
 GetWorldElapsedTime:
 GetWorldElapsedTimers:

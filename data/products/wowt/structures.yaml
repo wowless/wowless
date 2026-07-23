@@ -679,6 +679,33 @@ C_AuctionHouse.OwnedAuctionInfo:
     timeLeftSeconds:
       nilable: true
       type: number
+C_AuraContainerUtil.CustomAuraButtonBorderOptions:
+  fields:
+    customDispelColorCurve:
+      nilable: true
+      type:
+        luaobject: LuaColorCurveObject
+    customDispelColorMap:
+      nilable: true
+      type:
+        arrayof:
+          structure: colorRGB
+    showIcon:
+      default: true
+      type: boolean
+    showWhenHarmful:
+      default: true
+      type: boolean
+    showWhenHelpful:
+      default: false
+      type: boolean
+    showWithoutDispelType:
+      default: false
+      type: boolean
+    style:
+      default: 0
+      type:
+        enum: CustomAuraButtonBorderStyle
 C_AutoComplete.AutoCompleteResult:
   fields:
     bnetID:
@@ -11406,6 +11433,8 @@ DiscordChatInfo:
       type: boolean
     hasEmoji:
       type: boolean
+    hasError:
+      type: boolean
     hasForwardedMessage:
       type: boolean
     hasPoll:
@@ -12947,7 +12976,7 @@ UITextureSliceData:
     sliceMode:
       type:
         enum: UITextureSliceMode
-UnitAuraAppliedSoundInfo:
+UnitAuraSoundInfo:
   fields:
     outputChannel:
       nilable: true

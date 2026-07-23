@@ -39,6 +39,9 @@ return function(token, user, hold)
         username = '',
       })
     end
+    if datalua.product == 'wowt' then
+      args[#args].hasError = false
+    end
     events.SendEvent('CHAT_MSG_TEXT_EMOTE', unpack(args))
   else
     log(1, 'DoEmote(%s) called', token, tostring(user), tostring(hold))

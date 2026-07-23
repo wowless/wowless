@@ -100,8 +100,7 @@ type:
                   record:
                     Argument:
                       required: true
-                      type:
-                        literal: self
+                      type: string
                     Aspect:
                       type: number
             Arguments:
@@ -136,6 +135,8 @@ type:
                     Type:
                       required: true
                       type: string
+            CheckAllowChangeParent:
+              type: flag
             CheckAllowInheritForbiddenLayoutAspects:
               type: flag
             CheckAllowInheritForbiddenParentAspects:
@@ -146,8 +147,7 @@ type:
                   record:
                     Argument:
                       required: true
-                      type:
-                        literal: self
+                      type: string
                     Aspect:
                       type: number
             ConstSecretAccessor:
