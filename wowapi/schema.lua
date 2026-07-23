@@ -201,14 +201,12 @@ local complex = {
   end,
   ref = function(s)
     local kind, getdomain = resolvedomain(s.schema)
-    local gdomain = kind == 'global' and getdomain()
-    local pdomains = kind == 'product' and getdomain()
     local mustexist = not s.negative
     return function(v, product)
       if type(v) ~= 'string' then
         return 'expected string'
       end
-      local domain = gdomain or pdomains and pdomains[product]
+      local domain = kind == 'global' and getdomain() or kind == 'product' and getdomain()[product]
       if not domain then
         return 'invalid domain'
       end
