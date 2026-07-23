@@ -3,6 +3,7 @@ local _, G = ...
 local assertEquals = G.assertEquals
 
 local alltypes = _G.WowlessData.LuaObjects.types
+local allmethodnames = _G.WowlessData.LuaObjects.allmethodnames
 
 local metamethods = {
   __eq = true,
@@ -75,6 +76,17 @@ local function checkLuaObject(ty, o)
         assertEquals(nil, seen[fn], k)
         seen[fn] = k
       end
+    end,
+    unknownmethods = function()
+      local t = {}
+      for k in pairs(allmethodnames) do
+        if not alltypes[ty][k] then
+          t[k] = function()
+            assertEquals(nil, o[k])
+          end
+        end
+      end
+      return t
     end,
     field_type = function()
       assertEquals(nil, o.type)

@@ -496,10 +496,24 @@ local ptablemap = {
       end
       types[k] = m
     end
-    return 'LuaObjects', {
-      methodpartition = cmp,
-      types = types,
-    }
+    -- Universe of method names across all luaobject types in all products, so
+    -- the addon can negative-test that a type lacks methods it doesn't own,
+    -- even ones it can't otherwise learn about from this product alone
+    -- (mirrors the events ptablemap entry above).
+    local allmethodnames = {}
+    for _, product in ipairs(readyaml('data/products.yaml')) do
+      for _, v in pairs(perproduct(product, 'luaobjects')) do
+        for mk in pairs(v.methods or {}) do
+          allmethodnames[mk] = true
+        end
+      end
+    end
+    return 'LuaObjects',
+      {
+        allmethodnames = allmethodnames,
+        methodpartition = cmp,
+        types = types,
+      }
   end,
   namespaceapis = function(p)
     local platform = dofile('build/runtime/platform.lua')
