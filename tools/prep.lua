@@ -424,7 +424,6 @@ local xmlflat = (function()
       t = tree[t.extends]
       climbing = climbing and not t.sealed
       for ak, av in pairs(t.attributes or {}) do
-        assert(not attrs[ak], ak .. ' is already an attribute of ' .. k)
         attrs[ak] = av.type
       end
       if t.contents == 'text' then
