@@ -1,25 +1,27 @@
 local wdata = require('wowapi.data')
-local domains = {
-  family = wdata.families,
-  gametype = wdata.gametypes,
-  impl = wdata.impl,
-  module = wdata.modules,
-  schema = wdata.schemas,
-  scripttype = wdata.scripttypes,
-  sql = wdata.sql,
-  uiobjectimpl = wdata.uiobjectimpl,
+
+-- Domain names used by the 'ref' schematype match data/datafiles.yaml keys,
+-- so global-vs-product is looked up there. A few domains aren't declared in
+-- datafiles.yaml because they aren't simple per-file loads (see
+-- wowapi/data.lua):
+--  - 'schemas' is assembled from the data/schemas directory
+--  - 'enums' is extracted from each product's globals.yaml
+--  - 'domains' is the set of valid domain names itself, letting
+--    schematype.yaml check that a schema's ref.schema field names a real
+--    domain without separately enumerating them
+local domainnames = {}
+for name in pairs(wdata.datafiles) do
+  domainnames[name] = true
+end
+
+local extradomains = {
+  schemas = { kind = 'global', domain = wdata.schemas },
+  enums = { kind = 'product', domain = wdata.enums },
+  domains = { kind = 'global', domain = domainnames },
 }
-local productDomains = {
-  api = wdata.apis,
-  cvar = wdata.cvars,
-  enum = wdata.enums,
-  event = wdata.events,
-  luaobject = wdata.luaobjects,
-  stringenum = wdata.stringenums,
-  structure = wdata.structures,
-  uiobject = wdata.uiobjects,
-  xml = wdata.xml,
-}
+for name in pairs(extradomains) do
+  domainnames[name] = true
+end
 
 local function mksimple(ty)
   return function(v)
@@ -171,18 +173,26 @@ local complex = {
     end
   end,
   ref = function(s)
-    local gdomain = domains[s.schema]
-    local pdomains = productDomains[s.schema]
+    local extra = extradomains[s.schema]
+    local kind, domain
+    if extra then
+      kind, domain = extra.kind, extra.domain
+    elseif wdata.datafiles[s.schema] then
+      kind, domain = wdata.datafiles[s.schema], wdata[s.schema]
+    end
+    if not domain then
+      error('bad domain: ' .. s.schema)
+    end
     local mustexist = not s.negative
     return function(v, product)
       if type(v) ~= 'string' then
         return 'expected string'
       end
-      local domain = gdomain or pdomains and pdomains[product]
-      if not domain then
+      local d = kind == 'global' and domain or domain[product]
+      if not d then
         return 'invalid domain'
       end
-      if (domain[v] ~= nil) ~= mustexist then
+      if (d[v] ~= nil) ~= mustexist then
         return (mustexist and 'unknown' or 'known') .. ' domain value'
       end
     end

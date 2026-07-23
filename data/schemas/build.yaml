@@ -11,7 +11,7 @@ type:
       required: true
       type:
         ref:
-          schema: gametype
+          schema: gametypes
     hash:
       required: true
       type: string

@@ -5,11 +5,11 @@ type:
       impl:
         type:
           ref:
-            schema: module
+            schema: modules
       inherits:
         type:
           ref:
-            schema: luaobject
+            schema: luaobjects
       methods:
         required: true
         type:

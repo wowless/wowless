@@ -7,7 +7,7 @@ type:
         deps:
           setof:
             ref:
-              schema: module
+              schema: modules
         root:
           record:
             default:

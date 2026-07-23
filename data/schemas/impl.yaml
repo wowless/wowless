@@ -16,7 +16,7 @@ type:
               type:
                 setof:
                   ref:
-                    schema: module
+                    schema: modules
             sqls:
               type:
                 sequenceof:
@@ -37,7 +37,7 @@ type:
               required: true
               type:
                 ref:
-                  schema: module
+                  schema: modules
             nobubblewrap:
               type: flag
             nowrap:

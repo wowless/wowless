@@ -15,33 +15,33 @@ type:
               mapof:
                 key:
                   ref:
-                    schema: api
+                    schema: apis
                 value: any
           events:
             type:
               mapof:
                 key:
                   ref:
-                    schema: event
+                    schema: events
                 value: any
           extra_apis:
             type:
               setof:
                 ref:
                   negative: true
-                  schema: api
+                  schema: apis
           extra_enums:
             type:
               setof:
                 ref:
                   negative: true
-                  schema: enum
+                  schema: enums
           extra_events:
             type:
               setof:
                 ref:
                   negative: true
-                  schema: event
+                  schema: events
           extra_script_objects:
             type:
               setof: string
@@ -50,7 +50,7 @@ type:
               mapof:
                 key:
                   ref:
-                    schema: uiobject
+                    schema: uiobjects
                 value:
                   mapof:
                     key: string
@@ -63,10 +63,10 @@ type:
             taggedunion:
               luaobject:
                 ref:
-                  schema: luaobject
+                  schema: luaobjects
               uiobject:
                 ref:
-                  schema: uiobject
+                  schema: uiobjects
     typedefs:
       type:
         mapof:
@@ -84,10 +84,10 @@ type:
         mapof:
           key:
             ref:
-              schema: uiobject
+              schema: uiobjects
           value:
             mapof:
               key: string
               value:
                 ref:
-                  schema: uiobject
+                  schema: uiobjects
