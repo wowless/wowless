@@ -180,15 +180,10 @@ local complex = {
     elseif wdata.datafiles[s.schema] then
       kind, domain = wdata.datafiles[s.schema], wdata[s.schema]
     end
-    local mustexist = not s.negative
     if not domain then
-      return function(v)
-        if type(v) ~= 'string' then
-          return 'expected string'
-        end
-        return 'invalid domain'
-      end
+      error('bad domain: ' .. s.schema)
     end
+    local mustexist = not s.negative
     return function(v, product)
       if type(v) ~= 'string' then
         return 'expected string'
