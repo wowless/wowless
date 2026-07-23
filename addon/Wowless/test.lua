@@ -741,17 +741,16 @@ G.testsuite.sync = function()
     end,
 
     WorldFrame = function()
+      if not _G.WorldFrame then
+        return
+      end
       return {
         ['is a normal frame'] = function()
-          if _G.WorldFrame then
-            assertEquals('Frame', _G.WorldFrame:GetObjectType())
-            assertEquals(getmetatable(CreateFrame('Frame')), getmetatable(_G.WorldFrame))
-          end
+          assertEquals('Frame', _G.WorldFrame:GetObjectType())
+          assertEquals(getmetatable(CreateFrame('Frame')), getmetatable(_G.WorldFrame))
         end,
         ['has strata WORLD'] = function()
-          if _G.WorldFrame then
-            assertEquals('WORLD', _G.WorldFrame:GetFrameStrata())
-          end
+          assertEquals('WORLD', _G.WorldFrame:GetFrameStrata())
         end,
       }
     end,
