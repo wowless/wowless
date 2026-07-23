@@ -2,6 +2,8 @@ C_AuctionHouse.GetAuctionItemSubClasses:
   indexes:
     ItemSubClass: ClassID
   type: cursor
+C_ChatInfo.PerformEmote:
+  type: lookup
 C_ClassTalents.GetTraitTreeForSpec:
   type: lookup
 C_Covenants.GetCovenantData:
@@ -80,8 +82,6 @@ C_Traits.GetTreeNodes:
   type: cursor
 C_UIColor.GetColors:
   type: cursor
-DoEmote:
-  type: lookup
 FillLocalizedClassList:
   type: cursor
 GetClassInfo:

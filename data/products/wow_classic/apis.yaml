@@ -3972,6 +3972,7 @@ C_ChatInfo.IsValidCombatFilterName:
   - name: isApproved
     type: boolean
 C_ChatInfo.PerformEmote:
+  impl: C_ChatInfo.PerformEmote
   inputs:
   - name: emoteName
     type: string
