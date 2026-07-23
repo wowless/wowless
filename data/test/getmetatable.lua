@@ -16,9 +16,6 @@ return {
     return T.match(1, nil, getmetatable(42))
   end,
   string = function()
-    if T.wowless then -- issue #569
-      return
-    end
     return T.match(1, T.env.string, getmetatable(''))
   end,
 }

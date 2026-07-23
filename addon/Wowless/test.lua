@@ -464,10 +464,10 @@ G.testsuite.sync = function()
           assertEquals(nil, getmetatable(true))
         end,
         ['function'] = function()
-          assertEquals(nil, getmetatable(true))
+          assertEquals(nil, getmetatable(function() end))
         end,
         ['nil'] = function()
-          assertEquals(nil, getmetatable(true))
+          assertEquals(nil, getmetatable(nil))
         end,
         number = function()
           assertEquals(nil, getmetatable(42))
