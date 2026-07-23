@@ -84,3 +84,4 @@ type:
         type: flag
     parent: extends
     unique:
+      attributes:
