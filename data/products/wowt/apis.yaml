@@ -2683,16 +2683,92 @@ C_AuctionHouse.SupportsCopperValues:
   outputs:
   - name: supportsCopperValues
     type: boolean
-C_AuraContainerUtil.ProcessCustomAuraButtonBorderOptions:
+C_AuraContainerUtil.ProcessAuraTooltipBackdropOptions:
+  inputs:
+  - name: options
+    type:
+      structure: C_AuraContainerUtil.AuraContainerTooltipBackdropOptions
+  outputs:
+  - name: result
+    type:
+      structure: C_AuraContainerUtil.AuraContainerTooltipBackdropOptions
+C_AuraContainerUtil.ProcessAuraTooltipNineSliceOptions:
+  inputs:
+  - name: options
+    type:
+      structure: C_AuraContainerUtil.AuraContainerTooltipNineSliceOptions
+  outputs:
+  - name: result
+    type:
+      structure: C_AuraContainerUtil.AuraContainerTooltipNineSliceOptions
+C_AuraContainerUtil.ProcessAuraTooltipTextureSliceOptions:
+  inputs:
+  - name: options
+    type:
+      structure: C_AuraContainerUtil.AuraContainerTooltipTextureSliceOptions
+  outputs:
+  - name: result
+    type:
+      structure: C_AuraContainerUtil.AuraContainerTooltipTextureSliceOptions
+C_AuraContainerUtil.ProcessCustomAuraButtonApplicationBarOptions:
+  inputs:
+  - name: options
+    type:
+      structure: C_AuraContainerUtil.CustomAuraButtonApplicationBarOptions
+  outputs:
+  - name: result
+    type:
+      structure: C_AuraContainerUtil.CustomAuraButtonApplicationBarOptions
+C_AuraContainerUtil.ProcessCustomAuraButtonApplicationCountOptions:
   inputs:
   - name: options
     nilable: true
     type:
-      structure: C_AuraContainerUtil.CustomAuraButtonBorderOptions
+      structure: C_AuraContainerUtil.CustomAuraButtonApplicationCountOptions
   outputs:
   - name: result
     type:
-      structure: C_AuraContainerUtil.CustomAuraButtonBorderOptions
+      structure: C_AuraContainerUtil.CustomAuraButtonApplicationCountOptions
+C_AuraContainerUtil.ProcessCustomAuraButtonDispelTypeTextOptions:
+  inputs:
+  - name: options
+    nilable: true
+    type:
+      structure: C_AuraContainerUtil.CustomAuraButtonDispelTypeTextOptions
+  outputs:
+  - name: result
+    type:
+      structure: C_AuraContainerUtil.CustomAuraButtonDispelTypeTextOptions
+C_AuraContainerUtil.ProcessCustomAuraButtonDispelTypeTextureOptions:
+  inputs:
+  - name: options
+    nilable: true
+    type:
+      structure: C_AuraContainerUtil.CustomAuraButtonDispelTypeTextureOptions
+  outputs:
+  - name: result
+    type:
+      structure: C_AuraContainerUtil.CustomAuraButtonDispelTypeTextureOptions
+C_AuraContainerUtil.ProcessCustomAuraButtonDurationBarOptions:
+  inputs:
+  - name: options
+    nilable: true
+    type:
+      structure: C_AuraContainerUtil.CustomAuraButtonDurationBarOptions
+  outputs:
+  - name: result
+    type:
+      structure: C_AuraContainerUtil.CustomAuraButtonDurationBarOptions
+C_AuraContainerUtil.ProcessCustomAuraButtonDurationTextOptions:
+  inputs:
+  - name: options
+    nilable: true
+    type:
+      structure: C_AuraContainerUtil.CustomAuraButtonDurationTextOptions
+  outputs:
+  - name: result
+    type:
+      structure: C_AuraContainerUtil.CustomAuraButtonDurationTextOptions
 C_AuthChallenge.Cancel:
 C_AuthChallenge.DidChallengeSucceed:
 C_AuthChallenge.OnTabPressed:
@@ -13893,6 +13969,14 @@ C_HousingBasicMode.StartPlacingPreviewDecor:
     nilable: true
     type: number
   outputs:
+C_HousingBlueprint.CanExportTypeFromCurrentLocation:
+  inputs:
+  - name: type
+    type:
+      enum: HousingBlueprintType
+  outputs:
+  - name: locationValid
+    type: boolean
 C_HousingBlueprint.CanImportTypeFromCurrentLocation:
   inputs:
   - name: type
@@ -25054,6 +25138,13 @@ C_SpecializationInfo.GetInspectSelectedPvpTalent:
   - name: selectedTalentID
     nilable: true
     type: number
+C_SpecializationInfo.GetInspectSpecialization:
+  inputs:
+  - name: unit
+    type: unit
+  outputs:
+  - name: specializationID
+    type: number
 C_SpecializationInfo.GetNumSpecializationsForClassID:
   impl: GetNumSpecializationsForClassID
   inputs:
@@ -35303,7 +35394,6 @@ GetInspectHonorData:
     type: number
   - name: lifetimeRank
     type: number
-GetInspectSpecialization:
 GetInspectTalent:
 GetInstanceBootTimeRemaining:
   inputs:
@@ -41437,7 +41527,7 @@ UnitQuestTrivialLevelRangeScaling:
 UnitRace:
   impl: UnitRace
   inputs:
-  - name: name
+  - name: unit
     type: unit
   mayreturnnothing: true
   outputs:

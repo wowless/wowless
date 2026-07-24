@@ -130,12 +130,6 @@ lies:
           nilable: true
       - _add:
           nilable: true
-    UnitRace:
-      inputs:
-      - type:
-          _change:
-            from: string
-            to: unit
   extra_apis:
     C_BarberShopInternal.SetQAMode:
     C_CinematicList.GetUICinematicList:

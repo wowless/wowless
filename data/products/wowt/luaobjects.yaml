@@ -51,6 +51,12 @@ AbbreviatedNumberFormatter:
       outputs:
 DurationTextBinding:
   methods:
+    Assign:
+      inputs:
+      - name: other
+        type:
+          luaobject: DurationTextBinding
+      outputs:
     CanFormatText:
       inputs:
       outputs:
@@ -64,6 +70,12 @@ DurationTextBinding:
     ClearTextColorCurve:
       inputs:
       outputs:
+    Copy:
+      inputs:
+      outputs:
+      - name: copy
+        type:
+          luaobject: DurationTextBinding
     Disable:
       inputs:
       outputs:
@@ -179,7 +191,7 @@ DurationTextBinding:
       outputs:
     SetTextFormat:
       inputs:
-      - name: format
+      - name: formatString
         type: string
       - name: components
         type:

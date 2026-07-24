@@ -4525,6 +4525,9 @@ Frame:
       - name: roleset
         type: string
       outputs:
+    ResizeToBoundsRect:
+      inputs:
+      outputs:
     RotateTextures:
       inputs:
       - name: radians

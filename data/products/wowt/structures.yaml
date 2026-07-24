@@ -679,8 +679,165 @@ C_AuctionHouse.OwnedAuctionInfo:
     timeLeftSeconds:
       nilable: true
       type: number
-C_AuraContainerUtil.CustomAuraButtonBorderOptions:
+C_AuraContainerUtil.AuraContainerTooltipAnchorOffsets:
   fields:
+    bottom:
+      default: 0
+      type: number
+    left:
+      default: 0
+      type: number
+    right:
+      default: 0
+      type: number
+    top:
+      default: 0
+      type: number
+C_AuraContainerUtil.AuraContainerTooltipBackdropInfo:
+  fields:
+    bgFile:
+      nilable: true
+      type: string
+    edgeFile:
+      nilable: true
+      type: string
+    edgeSize:
+      nilable: true
+      type: number
+    insets:
+      nilable: true
+      type:
+        structure: C_AuraContainerUtil.AuraContainerTooltipBackdropInsets
+    tile:
+      nilable: true
+      type: boolean
+    tileEdge:
+      nilable: true
+      type: boolean
+    tileSize:
+      nilable: true
+      type: number
+C_AuraContainerUtil.AuraContainerTooltipBackdropInsets:
+  fields:
+    bottom:
+      default: 0
+      type: number
+    left:
+      default: 0
+      type: number
+    right:
+      default: 0
+      type: number
+    top:
+      default: 0
+      type: number
+C_AuraContainerUtil.AuraContainerTooltipBackdropOptions:
+  fields:
+    anchorOffsets:
+      nilable: true
+      type:
+        structure: C_AuraContainerUtil.AuraContainerTooltipAnchorOffsets
+    backdropInfo:
+      type:
+        structure: C_AuraContainerUtil.AuraContainerTooltipBackdropInfo
+    borderColor:
+      nilable: true
+      type:
+        structure: colorRGBA
+    centerColor:
+      nilable: true
+      type:
+        structure: colorRGBA
+C_AuraContainerUtil.AuraContainerTooltipNineSliceOptions:
+  fields:
+    anchorOffsets:
+      nilable: true
+      type:
+        structure: C_AuraContainerUtil.AuraContainerTooltipAnchorOffsets
+    borderColor:
+      nilable: true
+      type:
+        structure: colorRGBA
+    centerColor:
+      nilable: true
+      type:
+        structure: colorRGBA
+    layoutName:
+      type: string
+C_AuraContainerUtil.AuraContainerTooltipTextureSliceOptions:
+  fields:
+    anchorOffsets:
+      nilable: true
+      type:
+        structure: C_AuraContainerUtil.AuraContainerTooltipAnchorOffsets
+    asset:
+      type: string
+    color:
+      nilable: true
+      type:
+        structure: colorRGBA
+    drawLayer:
+      nilable: true
+      type:
+        stringenum: DrawLayer
+    drawLayerSublevel:
+      default: 0
+      type: number
+    sliceMargins:
+      nilable: true
+      type:
+        structure: UITextureSliceMargins
+    sliceMode:
+      nilable: true
+      type:
+        enum: UITextureSliceMode
+C_AuraContainerUtil.CustomAuraButtonApplicationBarOptions:
+  fields:
+    interpolation:
+      nilable: true
+      type:
+        enum: StatusBarInterpolation
+    maxApplications:
+      type: number
+C_AuraContainerUtil.CustomAuraButtonApplicationCountOptions:
+  fields:
+    formatter:
+      nilable: true
+      type:
+        luaobject: NumericFormatter
+C_AuraContainerUtil.CustomAuraButtonDispelTypeTextOptions:
+  fields:
+    customDispelTextMap:
+      nilable: true
+      type:
+        arrayof: string
+    showWhenHarmful:
+      default: true
+      type: boolean
+    showWhenHelpful:
+      default: false
+      type: boolean
+    showWithoutDispelType:
+      default: false
+      type: boolean
+C_AuraContainerUtil.CustomAuraButtonDispelTypeTextureAsset:
+  fields:
+    asset:
+      type: string
+    texCoords:
+      nilable: true
+      type:
+        structure: C_AuraContainerUtil.CustomAuraButtonDispelTypeTextureTexCoords
+    useAtlasSize:
+      default: false
+      type: boolean
+C_AuraContainerUtil.CustomAuraButtonDispelTypeTextureOptions:
+  fields:
+    customDispelAssetMap:
+      nilable: true
+      type:
+        arrayof:
+          structure: C_AuraContainerUtil.CustomAuraButtonDispelTypeTextureAsset
     customDispelColorCurve:
       nilable: true
       type:
@@ -690,9 +847,6 @@ C_AuraContainerUtil.CustomAuraButtonBorderOptions:
       type:
         arrayof:
           structure: colorRGB
-    showIcon:
-      default: true
-      type: boolean
     showWhenHarmful:
       default: true
       type: boolean
@@ -703,9 +857,51 @@ C_AuraContainerUtil.CustomAuraButtonBorderOptions:
       default: false
       type: boolean
     style:
-      default: 0
+      default: 1
       type:
-        enum: CustomAuraButtonBorderStyle
+        enum: CustomAuraButtonDispelTypeTextureStyle
+C_AuraContainerUtil.CustomAuraButtonDispelTypeTextureTexCoords:
+  fields:
+    bottom:
+      default: 1
+      type: number
+    left:
+      default: 0
+      type: number
+    right:
+      default: 1
+      type: number
+    top:
+      default: 0
+      type: number
+C_AuraContainerUtil.CustomAuraButtonDurationBarOptions:
+  fields:
+    direction:
+      nilable: true
+      type:
+        enum: StatusBarTimerDirection
+    interpolation:
+      nilable: true
+      type:
+        enum: StatusBarInterpolation
+C_AuraContainerUtil.CustomAuraButtonDurationTextOptions:
+  fields:
+    binding:
+      nilable: true
+      type:
+        luaobject: DurationTextBinding
+    textColor:
+      nilable: true
+      type:
+        structure: DurationTextBindingColorOptions
+    textFormat:
+      nilable: true
+      type:
+        structure: DurationTextBindingFormatOptions
+    textFormatter:
+      nilable: true
+      type:
+        luaobject: NumericFormatter
 C_AutoComplete.AutoCompleteResult:
   fields:
     bnetID:
@@ -2340,6 +2536,9 @@ C_ContributionCollector.ContributionMapInfo:
         structure: vector2
 C_CooldownViewer.CooldownViewerCooldown:
   fields:
+    buffSlot:
+      nilable: true
+      type: number
     category:
       type:
         enum: CooldownViewerCategory
@@ -2890,8 +3089,6 @@ C_DelvesUI.TieredEntranceTierInfo:
   fields:
     difficultyID:
       type: number
-    isLFG:
-      type: boolean
     lockedReason:
       nilable: true
       type: string
@@ -2899,6 +3096,8 @@ C_DelvesUI.TieredEntranceTierInfo:
       type: number
     overrideTooltipSpellID:
       type: number
+    queueAsLFG:
+      type: boolean
     rewards:
       type:
         arrayof:
@@ -11453,6 +11652,14 @@ DiscordChatInfo:
       type: string
     username:
       type: string
+DurationTextBindingColorOptions:
+  fields:
+    curve:
+      type:
+        luaobject: LuaColorCurveObject
+    property:
+      type:
+        enum: DurationTextBindingProperty
 DurationTextBindingFormatComponent:
   fields:
     formatter:
@@ -11461,6 +11668,14 @@ DurationTextBindingFormatComponent:
     property:
       type:
         enum: DurationTextBindingProperty
+DurationTextBindingFormatOptions:
+  fields:
+    components:
+      type:
+        arrayof:
+          structure: DurationTextBindingFormatComponent
+    formatString:
+      type: string
 DyeColorCategoryDisplayInfo:
   fields:
     ID:
@@ -12976,6 +13191,16 @@ UITextureSliceData:
     sliceMode:
       type:
         enum: UITextureSliceMode
+UITextureSliceMargins:
+  fields:
+    bottom:
+      type: number
+    left:
+      type: number
+    right:
+      type: number
+    top:
+      type: number
 UnitAuraSoundInfo:
   fields:
     outputChannel:

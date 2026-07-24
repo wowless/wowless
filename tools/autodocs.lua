@@ -95,7 +95,126 @@ local function fixMissingTypedef(product, source, name)
   return false
 end
 
+-- A lies.apis patch that no longer applies means the doc it was patching
+-- around has itself changed upstream; drop the stale patch.
+local function fixStaleApiLie(product, _, name)
+  local targetfile = docsfile(product)
+  local target = yaml.parse(file.read(targetfile))
+  local lie = target.lies and target.lies.apis and target.lies.apis[name]
+  if not lie then
+    print(('no lies.apis entry for %s to remove'):format(name))
+    return false
+  end
+  target.lies.apis[name] = nil
+  file.write(targetfile, yaml.pprint(target))
+  print(('removed stale lies.apis.%s from %s'):format(name, product))
+  return true
+end
+
+local doctableSchemaFile = 'data/schemas/doctable.yaml'
+
+-- Recursively hunts a wowapi.schema validation error tree (as produced by
+-- wowapi/schema.lua's record validator and pretty-printed by docs.lua) for a
+-- leaf error message. Returns the dotted path of record field names leading
+-- to (but excluding) the offending field, the field name, and the message.
+local function findSchemaError(t, ancestors)
+  for k, v in pairs(t) do
+    if type(v) == 'string' then
+      if type(k) == 'string' then
+        return { ancestors = ancestors, field = k, msg = v }
+      end
+    else
+      local nextAncestors = ancestors
+      if type(k) == 'string' then
+        nextAncestors = {}
+        for _, a in ipairs(ancestors) do
+          table.insert(nextAncestors, a)
+        end
+        table.insert(nextAncestors, k)
+      end
+      local found = findSchemaError(v, nextAncestors)
+      if found then
+        return found
+      end
+    end
+  end
+end
+
+local function recordOf(node)
+  if type(node) ~= 'table' then
+    return nil
+  elseif node.record then
+    return node.record
+  elseif type(node.sequenceof) == 'table' and node.sequenceof.record then
+    return node.sequenceof.record
+  end
+end
+
+-- Walks a doctable.yaml schema down to the record that findSchemaError's
+-- ancestors point at.
+local function descendSchema(schema, ancestors)
+  local node = schema.type
+  for _, a in ipairs(ancestors) do
+    local rec = recordOf(node)
+    local entry = rec and rec[a]
+    if not entry then
+      return nil
+    end
+    node = entry.type
+  end
+  return recordOf(node)
+end
+
+local function fixDoctableSchema(_, _, block)
+  local ok, errs = pcall(yaml.parse, block)
+  if not ok or type(errs) ~= 'table' then
+    print('could not parse doctable schema validation error')
+    return false
+  end
+  local found = findSchemaError(errs, {})
+  if not found then
+    print('doctable schema validation error had no recognizable leaf error')
+    return false
+  end
+  local path = table.concat(found.ancestors, '.')
+  local schema = yaml.parse(file.read(doctableSchemaFile))
+  local rec = descendSchema(schema, found.ancestors)
+  if not rec then
+    print(('could not locate doctable schema record for %s'):format(path))
+    return false
+  end
+  if found.msg == 'unknown field' then
+    if rec[found.field] then
+      print(('doctable schema already has an entry for %s.%s'):format(path, found.field))
+      return false
+    end
+    -- Almost every field in this schema is a presence-only boolean flag; if
+    -- that guess is wrong, the next build attempt reports a different error
+    -- (e.g. "want flag, got string") instead of silently accepting bad data.
+    rec[found.field] = { type = 'flag' }
+    file.write(doctableSchemaFile, yaml.pprint(schema))
+    print(('added %s.%s (flag) to doctable schema'):format(path, found.field))
+    return true
+  elseif found.msg == 'string literal mismatch' then
+    local entry = rec[found.field]
+    if not (entry and type(entry.type) == 'table' and entry.type.literal ~= nil) then
+      print(('doctable schema field %s.%s is not a literal type; cannot relax'):format(path, found.field))
+      return false
+    end
+    entry.type = 'string'
+    file.write(doctableSchemaFile, yaml.pprint(schema))
+    print(('relaxed %s.%s from a literal to a string in the doctable schema'):format(path, found.field))
+    return true
+  end
+  print(('unrecognized doctable schema error for %s.%s: %s'):format(path, found.field, found.msg))
+  return false
+end
+
 local patterns = {
+  {
+    pattern = 'tools/docs%.lua:88: (.-)\n\n',
+    fix = fixDoctableSchema,
+  },
   {
     pattern = 'missing script object mapping for (%S+)',
     fix = fixMissingScriptObject,
@@ -103,6 +222,10 @@ local patterns = {
   {
     pattern = 'wtf (%S+)',
     fix = fixMissingTypedef,
+  },
+  {
+    pattern = 'tedit failure on ([^:]+):',
+    fix = fixStaleApiLie,
   },
 }
 

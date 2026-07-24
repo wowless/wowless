@@ -360,6 +360,8 @@ type:
               type: flag
             SecretWhenUnitIdentityRestricted:
               type: flag
+            SecretWhenUnitNameIdentityRestricted:
+              type: flag
             SecretWhenUnitPowerMaxRestricted:
               type: flag
             SecretWhenUnitPowerRestricted:
