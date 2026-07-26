@@ -9012,7 +9012,7 @@ TextureBase:
       outputs:
   objectType: Texture
   virtual: true
-TextureCoordTranslation:
+TextureCoord:
   fields:
   inherits:
     TranslationBase:

@@ -1491,7 +1491,7 @@ Texture:
 TextureCoordTranslation:
   extends: Animation
   impl:
-    uiobject: TextureCoordTranslation
+    uiobject: TextureCoord
 ThumbTexture:
   extends: Texture
   impl:
