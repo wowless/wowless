@@ -125,12 +125,16 @@ if data.generated.cvars then
   local cvarsfile = 'data/products/' .. product .. '/cvars.yaml'
   local cvars = yaml.parseFile(cvarsfile)
   for k, v in pairs(data.generated.cvars) do
-    local match, value = getPatternValue(v)
-    if match then
-      if value == nil then
-        cvars[k] = nil
-      else
-        cvars[k] = { default = value }
+    if v:match(': missing cvar with default nil$') then
+      cvars[k] = {}
+    else
+      local match, value = getPatternValue(v)
+      if match then
+        if value == nil then
+          cvars[k] = nil
+        else
+          cvars[k] = { default = value }
+        end
       end
     end
   end

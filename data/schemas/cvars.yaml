@@ -5,5 +5,4 @@ type:
     value:
       record:
         default:
-          required: true
           type: string

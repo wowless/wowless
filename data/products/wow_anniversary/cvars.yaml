@@ -1222,6 +1222,13 @@ enableSourceLocationLookup:
   default: '1'
 enableWowMouse:
   default: '0'
+encounterTimelineEnabled:
+encounterTimelineHideForOtherRoles:
+encounterTimelineHideLongCountdowns:
+encounterTimelineHideQueuedCountdowns:
+encounterTimelineHighlightDuration:
+encounterTimelineIconographyEnabled:
+encounterTimelineIconographyHiddenMask:
 encounterTimelineShowSequenceCount:
   default: '0'
 encounterWarningsDefaultMessageDuration:
@@ -1300,8 +1307,10 @@ flashErrorMessageRepeats:
   default: '1'
 flightAngleLookAhead:
   default: '0'
+floatingCombatTextAuraFade:
 floatingCombatTextAuraFade_v2:
   default: '0'
+floatingCombatTextAuras:
 floatingCombatTextAuras_v2:
   default: '0'
 floatingCombatTextCombatDamage_v2:
@@ -1320,20 +1329,26 @@ floatingCombatTextCombatHealingAbsorbTarget_v2:
   default: '1'
 floatingCombatTextCombatLogPeriodicSpells_v2:
   default: '1'
+floatingCombatTextCombatState:
 floatingCombatTextCombatState_v2:
   default: '0'
+floatingCombatTextComboPoints:
 floatingCombatTextComboPoints_v2:
   default: '0'
+floatingCombatTextDamageReduction:
 floatingCombatTextDamageReduction_v2:
   default: '0'
+floatingCombatTextDodgeParryMiss:
 floatingCombatTextDodgeParryMiss_v2:
   default: '0'
+floatingCombatTextEnergyGains:
 floatingCombatTextEnergyGains_v2:
   default: '0'
 floatingCombatTextFloatMode_v2:
   default: '1'
 floatingCombatTextFriendlyHealers_v2:
   default: '0'
+floatingCombatTextHonorGains:
 floatingCombatTextHonorGains_v2:
   default: '0'
 floatingCombatTextLowManaHealth_v2:
@@ -1346,6 +1361,7 @@ floatingCombatTextPetSpellDamage_v2:
   default: '1'
 floatingCombatTextReactives_v2:
   default: '1'
+floatingCombatTextRepChanges:
 floatingCombatTextRepChanges_v2:
   default: '0'
 FootstepSounds:
@@ -1776,6 +1792,7 @@ maxFPSBk:
   default: '30'
 maxFPSLoading:
   default: '10'
+maxLightCount:
 maxLightDist:
   default: '2048'
 MaxObservedPetBattles:
@@ -2496,8 +2513,10 @@ SoftTargetWorldtextSize:
   default: '32.000000'
 sortDiskReads:
   default: '0'
+Sound_AllyPlayerHighpassDSPCutoff:
 Sound_AlternateListener:
   default: '1'
+Sound_AmbienceHighpassDSPCutoff:
 Sound_AmbienceVolume:
   default: '0.6'
 Sound_DialogVolume:
@@ -2542,6 +2561,7 @@ Sound_EnableSoundWhenGameIsInBG:
   default: '1'
 Sound_EncounterWarningsVolume:
   default: '1.000000'
+Sound_EnemyPlayerHighpassDSPCutoff:
 Sound_GameplaySFX:
   default: '1.000000'
 Sound_ListenerAtCharacter:
@@ -2554,6 +2574,7 @@ Sound_MaxCacheSizeInBytes:
   default: '134217728'
 Sound_MusicVolume:
   default: '0.4'
+Sound_NPCHighpassDSPCutoff:
 Sound_NumChannels:
   default: '64'
 Sound_OutputDriverIndex:
@@ -2960,10 +2981,12 @@ volumeFogDisableShadows:
   default: '0'
 volumeFogUse16BitTexture:
   default: '1'
+vrsParticles:
 vrsValar:
   default: '0'
 vrsValarGPUMode:
   default: '0'
+vrsWorldGeo:
 vsync:
   default: '1'
 WalkableSurfacesValidationLog:

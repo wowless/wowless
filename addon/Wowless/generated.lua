@@ -179,21 +179,15 @@ G.testsuite.generated = function()
       end
       return tt
     end
-    local expectedCVars = lowify((function()
-      local t = {}
-      for k, v in pairs(_G.WowlessData.CVars) do
-        t[k] = v.default
-      end
-      return t
-    end)())
+    local expectedCVars = lowify(_G.WowlessData.CVars)
     local actualCVars = lowify((function()
       -- Do this early to avoid issues with deferred cvar creation.
       local t = {}
       for _, command in ipairs(_G.ConsoleGetAllCommands()) do
         local name = command.command
-        if name:sub(1, 6) ~= 'CACHE-' then
+        if command.commandType == 0 and name:sub(1, 6) ~= 'CACHE-' then
           assertEquals(nil, t[name])
-          t[name] = _G.C_CVar.GetCVarDefault(name)
+          t[name] = { default = _G.C_CVar.GetCVarDefault(name) }
         end
       end
       return t
@@ -206,7 +200,7 @@ G.testsuite.generated = function()
         assert(actual, ('extra cvar %q'):format(k))
         assertEquals(v.name, actual.name, 'cvar name mismatch')
         if not toskipin[actual.name] then
-          assertEquals(v.value, actual.value, 'cvar value mismatch')
+          assertEquals(v.default, actual.default, 'cvar value mismatch')
         end
       end
     end
@@ -217,7 +211,8 @@ G.testsuite.generated = function()
     for k, v in pairs(actualCVars) do
       if not tests[v.name] and not toskipout[k] then
         tests[v.name] = function()
-          error(('missing cvar with default %q'):format(v.value))
+          local s = v.default == nil and 'nil' or ('%q'):format(v.default)
+          error('missing cvar with default ' .. s)
         end
       end
     end

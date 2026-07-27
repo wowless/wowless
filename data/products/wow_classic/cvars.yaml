@@ -72,6 +72,7 @@ AllowSoftwareRenderer:
   default: '0'
 alwaysCompareItems:
   default: '1'
+alwaysShowActionBars:
 alwaysShowBlizzardGroupsTab:
   default: '0'
 alwaysShowRuneIcons:
@@ -950,6 +951,7 @@ chatStyle:
   default: classic
 checkAddonVersion:
   default: '1'
+clampTargetNameplateToScreen:
 ClientCastDebug:
   default: '0'
 ClientMessageEventLog:
@@ -1226,6 +1228,13 @@ enableSourceLocationLookup:
   default: '1'
 enableWowMouse:
   default: '0'
+encounterTimelineEnabled:
+encounterTimelineHideForOtherRoles:
+encounterTimelineHideLongCountdowns:
+encounterTimelineHideQueuedCountdowns:
+encounterTimelineHighlightDuration:
+encounterTimelineIconographyEnabled:
+encounterTimelineIconographyHiddenMask:
 encounterTimelineShowSequenceCount:
   default: '0'
 encounterWarningsDefaultMessageDuration:
@@ -1262,6 +1271,7 @@ ExclusiveWindowMode:
   default: '0'
 expandBagBar:
   default: '1'
+expandUpgradePanel:
 externalDefensivesEnabled:
   default: '0'
 farclip:
@@ -1304,8 +1314,10 @@ flashErrorMessageRepeats:
   default: '1'
 flightAngleLookAhead:
   default: '0'
+floatingCombatTextAuraFade:
 floatingCombatTextAuraFade_v2:
   default: '0'
+floatingCombatTextAuras:
 floatingCombatTextAuras_v2:
   default: '0'
 floatingCombatTextCombatDamage_v2:
@@ -1324,20 +1336,26 @@ floatingCombatTextCombatHealingAbsorbTarget_v2:
   default: '1'
 floatingCombatTextCombatLogPeriodicSpells_v2:
   default: '1'
+floatingCombatTextCombatState:
 floatingCombatTextCombatState_v2:
   default: '0'
+floatingCombatTextComboPoints:
 floatingCombatTextComboPoints_v2:
   default: '0'
+floatingCombatTextDamageReduction:
 floatingCombatTextDamageReduction_v2:
   default: '0'
+floatingCombatTextDodgeParryMiss:
 floatingCombatTextDodgeParryMiss_v2:
   default: '0'
+floatingCombatTextEnergyGains:
 floatingCombatTextEnergyGains_v2:
   default: '0'
 floatingCombatTextFloatMode_v2:
   default: '1'
 floatingCombatTextFriendlyHealers_v2:
   default: '0'
+floatingCombatTextHonorGains:
 floatingCombatTextHonorGains_v2:
   default: '0'
 floatingCombatTextLowManaHealth_v2:
@@ -1474,6 +1492,7 @@ graphicsQuality:
   default: '3'
 graphicsShadowQuality:
   default: '1'
+graphicsSpellDensity:
 graphicsSSAO:
   default: '1'
 graphicsSunshafts:
@@ -1580,6 +1599,7 @@ hardcoreDeathChatType:
   default: '0'
 hardTrackedQuests:
   default: ''
+hardTrackedWorldQuests:
 HardwareCursor:
   default: '1'
 hasDeclinedHighResTextures:
@@ -1780,6 +1800,7 @@ maxFPSBk:
   default: '30'
 maxFPSLoading:
   default: '10'
+maxLightCount:
 maxLightDist:
   default: '2048'
 MaxObservedPetBattles:
@@ -1858,8 +1879,11 @@ nameplateFriendlyPlayerAuraDisplay:
   default: "\x02"
 nameplateGameObjectMaxDistance:
   default: '30.000000'
+NamePlateHorizontalScale:
 nameplateInfoDisplay:
   default: "\x02"
+nameplateLargerScale:
+nameplateLargeTopInset:
 nameplateMaxAlpha:
   default: '1.000000'
 nameplateMaxAlphaDistance:
@@ -1878,20 +1902,24 @@ nameplateMinScale:
   default: '1.000000'
 nameplateMinScaleDistance:
   default: '10.000000'
+nameplateMotionSpeed:
 nameplateNotSelectedAlpha:
   default: '0.500000'
 nameplateOccludedAlphaMult:
   default: '1.000000'
 nameplateOtherAtBase:
   default: '0'
+nameplateOtherTopInset:
 nameplateOverlapH:
   default: '0.800000'
 nameplateOverlapV:
   default: '1.100000'
+NameplatePersonalHideDelaySeconds:
 nameplatePlayerMaxDistance:
   default: '60.000000'
 nameplatePlayRemovalAnimation:
   default: '0'
+nameplateRemovalAnimation:
 nameplateSelectedAlpha:
   default: '1.000000'
 nameplateSelectedScale:
@@ -1920,6 +1948,8 @@ nameplateShowEnemyTotems:
   default: '0'
 nameplateShowFriendlyClassColor:
   default: '0'
+nameplateShowFriendlyGuardians:
+nameplateShowFriendlyMinions:
 nameplateShowFriendlyNpcs:
   default: '0'
 nameplateShowFriendlyPlayerGuardians:
@@ -1932,6 +1962,7 @@ nameplateShowFriendlyPlayers:
   default: '0'
 nameplateShowFriendlyPlayerTotems:
   default: '0'
+nameplateShowFriendlyTotems:
 nameplateShowOffscreen:
   default: '0'
 nameplateShowOnlyNameForFriendlyPlayerUnits:
@@ -1956,6 +1987,7 @@ nameplateThreatDisplay:
   default: "\x02"
 nameplateUseClassColorForFriendlyPlayerUnitNames:
   default: '0'
+NamePlateVerticalScale:
 nearclip:
   default: '0.2'
 newMythicPlusSeason:
@@ -2140,6 +2172,7 @@ RAIDgraphicsQuality:
   default: '3'
 raidGraphicsShadowQuality:
   default: '1'
+raidGraphicsSpellDensity:
 raidGraphicsSSAO:
   default: '1'
 raidGraphicsSunshafts:
@@ -2338,6 +2371,7 @@ showBuilderFeedback:
   default: '1'
 showCastableBuffs:
   default: '0'
+ShowClassColorInNameplate:
 showCustomSetDetails:
   default: '1'
 showDelveEntrancesOnMap:
@@ -2504,8 +2538,10 @@ SoftTargetWorldtextSize:
   default: '32.000000'
 sortDiskReads:
   default: '0'
+Sound_AllyPlayerHighpassDSPCutoff:
 Sound_AlternateListener:
   default: '1'
+Sound_AmbienceHighpassDSPCutoff:
 Sound_AmbienceVolume:
   default: '0.6'
 Sound_DialogVolume:
@@ -2552,6 +2588,7 @@ Sound_EnableSoundWhenGameIsInBG:
   default: '1'
 Sound_EncounterWarningsVolume:
   default: '1.000000'
+Sound_EnemyPlayerHighpassDSPCutoff:
 Sound_GameplaySFX:
   default: '1.000000'
 Sound_ListenerAtCharacter:
@@ -2564,6 +2601,7 @@ Sound_MaxCacheSizeInBytes:
   default: '134217728'
 Sound_MusicVolume:
   default: '0.4'
+Sound_NPCHighpassDSPCutoff:
 Sound_NumChannels:
   default: '64'
 Sound_OutputDriverIndex:
@@ -2822,6 +2860,7 @@ trackedAchievements:
   default: ''
 trackedQuests:
   default: ''
+trackedWorldQuests:
 trackerFilter:
   default: '7'
 trackerSorting:
@@ -2972,10 +3011,12 @@ volumeFogDisableShadows:
   default: '0'
 volumeFogUse16BitTexture:
   default: '1'
+vrsParticles:
 vrsValar:
   default: '0'
 vrsValarGPUMode:
   default: '0'
+vrsWorldGeo:
 vsync:
   default: '1'
 WalkableSurfacesValidationLog:

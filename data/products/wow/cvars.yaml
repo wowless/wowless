@@ -10,6 +10,7 @@ ActionCombatCameraEnable:
   default: '0'
 actionedAdventureJournalEntries:
   default: ''
+activeCUFProfile:
 addFriendInfoShown:
   default: '0'
 addonChallengeModeRestrictionsForced:
@@ -50,6 +51,7 @@ advFlyPitchControlCameraChase:
   default: '20.000000'
 advFlyPitchControlGroundDebounce:
   default: '0'
+advJournalLastOpened:
 agentUID:
   default: ''
 AIBrain:
@@ -1386,6 +1388,7 @@ flightAngleLookAhead:
   default: '0'
 floatingCombatTextAuraFade_v2:
   default: '0'
+floatingCombatTextAuras:
 floatingCombatTextAuras_v2:
   default: '0'
 floatingCombatTextCombatDamage_v2:
@@ -1404,20 +1407,26 @@ floatingCombatTextCombatHealingAbsorbTarget_v2:
   default: '1'
 floatingCombatTextCombatLogPeriodicSpells_v2:
   default: '1'
+floatingCombatTextCombatState:
 floatingCombatTextCombatState_v2:
   default: '0'
+floatingCombatTextComboPoints:
 floatingCombatTextComboPoints_v2:
   default: '0'
+floatingCombatTextDamageReduction:
 floatingCombatTextDamageReduction_v2:
   default: '0'
+floatingCombatTextDodgeParryMiss:
 floatingCombatTextDodgeParryMiss_v2:
   default: '0'
+floatingCombatTextEnergyGains:
 floatingCombatTextEnergyGains_v2:
   default: '0'
 floatingCombatTextFloatMode_v2:
   default: '1'
 floatingCombatTextFriendlyHealers_v2:
   default: '0'
+floatingCombatTextHonorGains:
 floatingCombatTextHonorGains_v2:
   default: '0'
 floatingCombatTextLowManaHealth_v2:
@@ -1430,6 +1439,7 @@ floatingCombatTextPetSpellDamage_v2:
   default: '1'
 floatingCombatTextReactives_v2:
   default: '1'
+floatingCombatTextRepChanges:
 floatingCombatTextRepChanges_v2:
   default: '0'
 FootstepSounds:
@@ -1464,6 +1474,7 @@ fstack_showRaisedFrameLevels:
   default: '0'
 fstack_showregions:
   default: '1'
+fullSizeFocusFrame:
 GameDataVisualizer:
   default: '0'
 GamePadAnalogMovement:
@@ -1586,6 +1597,7 @@ guildRewardsCategory:
   default: '0'
 guildRewardsUsable:
   default: '0'
+guildRosterView:
 guildShowOffline:
   default: '1'
 GxAdapter:
@@ -1614,6 +1626,7 @@ GxDebugBreakLevel:
   default: '1'
 GxDebugLevel:
   default: '0'
+GxDebugOmitAssertAllCheck:
 GxFullscreenResolution:
   default: auto
 GxMaxFrameLatency:
@@ -1774,6 +1787,7 @@ lastGarrisonMissionTutorial:
   default: '0'
 lastLaunchedExternalEventURL:
   default: ''
+lastLockedDelvesCompanionAbilities:
 lastLockedTieredEntranceCompanionAbilities:
   default: ''
 lastRenownForCovenant1:
@@ -1804,6 +1818,10 @@ lastTransmogCustomSetIDSpec4:
   default: ''
 lastTransmogOutfitIDNoSpec:
   default: ''
+lastTransmogOutfitIDSpec1:
+lastTransmogOutfitIDSpec2:
+lastTransmogOutfitIDSpec3:
+lastVoidStorageTutorial:
 latestSplashScreen:
   default: '0'
 latestTransmogSetSource:
@@ -1878,6 +1896,7 @@ majorFactionRenownMap:
   default: ''
 mapFade:
   default: '1'
+mapQuestDifficulty:
 MaxCharacterComponentLoadStartsPerFrame:
   default: '4'
 maxFPS:
@@ -1888,6 +1907,7 @@ maxFPSLoading:
   default: '10'
 maxLevelSpecsUsed:
   default: '0'
+maxLightCount:
 maxLightDist:
   default: '2048'
 MaxObservedPetBattles:
@@ -1902,6 +1922,7 @@ minimapPortalMax:
   default: '99'
 minimapShapeshiftTracking:
   default: ''
+minimapTrackedInfov2:
 minimapTrackedInfov4:
   default: '3103471'
 minimapTrackingClosestOnly:
@@ -1956,6 +1977,7 @@ nameplateAuraScale:
   default: '1.000000'
 nameplateCastBarDisplay:
   default: "\x02["
+NamePlateClassificationScale:
 nameplateDebuffPadding:
   default: '0'
 nameplateEnemyNpcAuraDisplay:
@@ -1966,8 +1988,11 @@ nameplateFriendlyPlayerAuraDisplay:
   default: "\x02C"
 nameplateGameObjectMaxDistance:
   default: '30.000000'
+NamePlateHorizontalScale:
 nameplateInfoDisplay:
   default: "\x02D"
+nameplateLargerScale:
+nameplateLargeTopInset:
 nameplateMaxAlpha:
   default: '1.000000'
 nameplateMaxAlphaDistance:
@@ -1986,14 +2011,17 @@ nameplateMinScale:
   default: '0.800000'
 nameplateMinScaleDistance:
   default: '10.000000'
+nameplateMotionSpeed:
 nameplateOccludedAlphaMult:
   default: '0.400000'
 nameplateOtherAtBase:
   default: '0'
+nameplateOtherTopInset:
 nameplateOverlapH:
   default: '0.800000'
 nameplateOverlapV:
   default: '1.100000'
+NameplatePersonalHideDelaySeconds:
 nameplatePlayerMaxDistance:
   default: '60.000000'
 nameplateSelectedAlpha:
@@ -2058,6 +2086,7 @@ nameplateThreatDisplay:
   default: "\x02"
 nameplateUseClassColorForFriendlyPlayerUnitNames:
   default: '0'
+NamePlateVerticalScale:
 nearclip:
   default: '0.2'
 newDelvesSeason:
@@ -2464,6 +2493,9 @@ seenAlliedRaceUnlocks:
   default: '0'
 seenAsiaCharacterUpgradePopup:
   default: '0'
+seenCharacterSelectAddGroupHelpTip:
+seenCharacterSelectNavBarCampsHelpTip:
+seenCharacterSelectWarbandHelpTip:
 seenCharacterUpgradePopup:
   default: '6'
 seenConfigurationWarnings:
@@ -2520,6 +2552,7 @@ showBuilderFeedback:
   default: '1'
 showCastableBuffs:
   default: '0'
+ShowClassColorInNameplate:
 showCreateCharacterRealmConfirmDialog:
   default: '1'
 showCustomSetDetails:
@@ -2544,6 +2577,7 @@ showNPETutorials:
   default: '1'
 showOutfitDetails:
   default: '1'
+showPartyBackground:
 showPartyPets:
   default: '0'
 showPhotosensitivityWarning:
@@ -2694,8 +2728,10 @@ soulbindsLandingPageTutorial:
   default: ''
 soulbindsViewedTutorial:
   default: ''
+Sound_AllyPlayerHighpassDSPCutoff:
 Sound_AlternateListener:
   default: '1'
+Sound_AmbienceHighpassDSPCutoff:
 Sound_AmbienceVolume:
   default: '0.6'
 Sound_DialogVolume:
@@ -2742,6 +2778,7 @@ Sound_EnableSoundWhenGameIsInBG:
   default: '1'
 Sound_EncounterWarningsVolume:
   default: '1.000000'
+Sound_EnemyPlayerHighpassDSPCutoff:
 Sound_GameplaySFX:
   default: '1.000000'
 Sound_ListenerAtCharacter:
@@ -2754,6 +2791,7 @@ Sound_MaxCacheSizeInBytes:
   default: '134217728'
 Sound_MusicVolume:
   default: '0.4'
+Sound_NPCHighpassDSPCutoff:
 Sound_NumChannels:
   default: '64'
 Sound_OutputDriverIndex:
@@ -2812,6 +2850,8 @@ spellVisualDensityFilterSetting:
   default: '4'
 SpellVisuals:
   default: '0'
+splashScreenNormal:
+splashScreenSeason:
 SplineOpt:
   default: '1'
 SSAO:
@@ -2852,6 +2892,7 @@ synchronizeConfig:
   default: '1'
 taintLog:
   default: '0'
+talentFrameShown:
 talentPointsSpent:
   default: '0'
 TargetAutoEnemy:
@@ -3086,6 +3127,7 @@ useBLEEP:
   default: '0'
 useCommentatorSelectionCircles:
   default: '1'
+useCompactPartyFrames:
 useHighResTextures:
   default: '1'
 useIPv6:
@@ -3152,10 +3194,12 @@ volumeFogLevel:
   default: '2'
 volumeFogUse16BitTexture:
   default: '1'
+vrsParticles:
 vrsValar:
   default: '0'
 vrsValarGPUMode:
   default: '0'
+vrsWorldGeo:
 vsync:
   default: '1'
 WalkableSurfacesValidationLog:
@@ -3172,6 +3216,7 @@ wardrobeShowUncollected:
   default: '1'
 wardrobeSourceFilters:
   default: '0'
+watchFrameBaseAlpha:
 waterDetail:
   default: '0'
 weatherDensity:
