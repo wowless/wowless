@@ -1457,7 +1457,8 @@ G.testsuite.uiobjects = function()
         end,
       }
     end,
-    TextureCoord = function()
+    TextureCoordTranslation = function()
+      -- The XML name doesn't work from Lua.
       local ag = retn(1, CreateFrame('Frame'):CreateAnimationGroup())
       local tct = retn(1, ag:CreateAnimation('TextureCoordTranslation'))
       return {
