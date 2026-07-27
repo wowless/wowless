@@ -9262,6 +9262,7 @@ TextureCoord:
   inherits:
     TranslationBase:
   methods:
+  objectType: TextureCoordTranslation
 Translation:
   fields:
   inherits:
