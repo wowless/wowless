@@ -10946,6 +10946,7 @@ ConsoleCommandInfo:
       type:
         enum: ConsoleCommandType
     help:
+      nilable: true
       type: string
     scriptContents:
       type: string

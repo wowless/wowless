@@ -28,10 +28,17 @@ local getPatternValue = (function()
       return x
     end
   end
+  local function unquote(x)
+    return assert(loadstring('return ' .. x))()
+  end
   local patterns = {
     {
       pattern = ': cvar name mismatch: want ',
       value = constant(nil),
+    },
+    {
+      pattern = ': want nil, got (-?%d+)$',
+      value = mustnumber,
     },
     {
       pattern = ': want %-?%d+, got (-?%d+)$',
@@ -46,12 +53,12 @@ local getPatternValue = (function()
       value = constant(nil),
     },
     {
-      pattern = ': want ".*", got "(.*)"$',
-      value = tostring,
+      pattern = ': want ".*", got (".*")$',
+      value = unquote,
     },
     {
-      pattern = ': want nil, got "(.*)"$',
-      value = tostring,
+      pattern = ': want nil, got (".*")$',
+      value = unquote,
     },
     {
       pattern = ': missing, has value (-?%d+)$',
@@ -62,7 +69,7 @@ local getPatternValue = (function()
       value = constant(nil),
     },
     {
-      pattern = ': missing cvar with default "(.*)"$',
+      pattern = ': missing cvar with default (".*")$',
       value = tostring,
     },
     {
@@ -127,6 +134,12 @@ if data.generated.cvars then
   for k, v in pairs(data.generated.cvars) do
     if v:match(': missing cvar with default nil$') then
       cvars[k] = {}
+    elseif v:match(': cvar category mismatch') then
+      local _, value = assert(getPatternValue(v))
+      cvars[k].category = value
+    elseif v:match(': cvar help mismatch') then
+      local _, value = assert(getPatternValue(v))
+      cvars[k].help = value
     else
       local match, value = getPatternValue(v)
       if match then

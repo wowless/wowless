@@ -442,9 +442,11 @@ local function rewriteStructures(structures, outApis, outEvents, outLuaObjects, 
   for k in pairs(structures) do
     structures[k] = nil
   end
+  local lies = deref(config, 'lies', 'structures') or {}
   for k, v in pairs(out) do
-    structures[k] = v
+    structures[k] = takelieor(v, lies, k)
   end
+  assertTaken('lies.structures', lies)
 end
 
 local function rewriteUIObjects(uiobjects)

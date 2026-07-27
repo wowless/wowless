@@ -172,10 +172,8 @@ G.testsuite.generated = function()
       for k, v in pairs(t) do
         local lk = k:lower()
         assertEquals(nil, tt[lk])
-        tt[lk] = {
-          name = k,
-          value = v,
-        }
+        tt[lk] = v
+        tt[lk].name = k
       end
       return tt
     end
@@ -186,8 +184,14 @@ G.testsuite.generated = function()
       for _, command in ipairs(_G.ConsoleGetAllCommands()) do
         local name = command.command
         if command.commandType == 0 and name:sub(1, 6) ~= 'CACHE-' then
-          assertEquals(nil, t[name])
-          t[name] = { default = _G.C_CVar.GetCVarDefault(name) }
+          assertEquals('', command.scriptContents, name)
+          assertEquals('', command.scriptParameters, name)
+          assertEquals(nil, t[name], name)
+          t[name] = {
+            category = command.category,
+            default = _G.C_CVar.GetCVarDefault(name),
+            help = command.help,
+          }
         end
       end
       return t
@@ -199,8 +203,10 @@ G.testsuite.generated = function()
         local actual = actualCVars[k]
         assert(actual, ('extra cvar %q'):format(k))
         assertEquals(v.name, actual.name, 'cvar name mismatch')
+        assertEquals(v.category, actual.category, 'cvar category mismatch')
+        assertEquals(v.help, actual.help, 'cvar help mismatch')
         if not toskipin[actual.name] then
-          assertEquals(v.default, actual.default, 'cvar value mismatch')
+          assertEquals(v.default, actual.default, 'cvar default mismatch')
         end
       end
     end

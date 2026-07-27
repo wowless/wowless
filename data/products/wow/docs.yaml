@@ -183,6 +183,12 @@ lies:
     PingPinFrameAPI:
     SimpleMapSceneAPI:
     SimpleModelFFXAPI:
+  structures:
+    ConsoleCommandInfo:
+      fields:
+        help:
+          _add:
+            nilable: true
   uiobjects:
     Button:
       GetText:

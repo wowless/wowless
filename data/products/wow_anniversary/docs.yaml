@@ -314,6 +314,12 @@ lies:
     HousingLayoutPinFrameAPI:
     PingPinFrameAPI:
     SimpleModelFFXAPI:
+  structures:
+    ConsoleCommandInfo:
+      fields:
+        help:
+          _add:
+            nilable: true
   uiobjects:
     Button:
       GetText:

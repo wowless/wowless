@@ -45,6 +45,13 @@ type:
           extra_script_objects:
             type:
               setof: string
+          structures:
+            type:
+              mapof:
+                key:
+                  ref:
+                    schema: structures
+                value: any
           uiobjects:
             type:
               mapof:

@@ -1,3290 +1,6519 @@
 accessibilityScreenNarrationEnabled:
+  category: 4
   default: '1'
+  help: Enables screen narration for accessibility
 accessibilityScreenNarrationSpeechRate:
+  category: 4
   default: '0'
+  help: Speed at which voice narration speaks
 accessibilityScreenNarrationSpeechVolume:
+  category: 4
   default: '100'
+  help: Volume at which voice narration speaks
 accessibilityScreenNarrationVoice:
+  category: 4
   default: '1'
+  help: Voice option used with screen narration
 accountNeedsTurnStrafeDialog:
+  category: 4
   default: '1'
+  help: Whether the account needs to show dialog that turn and strafe keybinds have
+    changed
 acknowledgedArrowCallouts:
+  category: 4
   default: '0'
+  help: Bit field of Looking for guild player settings
 ActionButtonUseKeyDown:
+  category: 4
   default: '1'
+  help: Activate the action button on a keydown
 ActionButtonUseKeyHeldSpell:
+  category: 4
   default: '0'
+  help: Activate the press and hold cast option on a keydown
 ActionCombatCameraEnable:
+  category: 5
   default: '0'
+  help: 'enable/disable action combat camera. (default: disabled)'
 actionedAdventureJournalEntries:
+  category: 4
   default: ''
+  help: Which adventure journal entries flagged with ADVENTURE_JOURNAL_HIDE_AFTER_ACTION
+    the user acted upon
+activeCUFProfile:
+  category: 5
+  help: ''
 addFriendInfoShown:
+  category: 4
   default: '0'
+  help: The info for Add Friend has been shown
 addonChallengeModeRestrictionsForced:
+  category: 4
   default: '0'
+  help: If set, APIs guarded by challenge mode and mythic plus status will be restricted,
+    or may return secrets.
 addonChatRestrictionsForced:
+  category: 4
   default: '0'
+  help: If set, APIs guarded by in lockdown will be restricted, or may return secrets.
 addonCombatRestrictionsForced:
+  category: 4
   default: '0'
+  help: If set, APIs guarded in combat will be restricted, or may return secrets.
 addonEncounterRestrictionsForced:
+  category: 4
   default: '0'
+  help: If set, APIs guarded in active encounters will be restricted, or may return
+    secrets.
 addonLoadDebugging:
+  category: 0
   default: '0'
+  help: '0: Disable addon load logging (Default), 1: Enable addon load logging to
+    AddOnLoad.log.'
 addonMapRestrictionsForced:
+  category: 4
   default: '0'
+  help: If set, APIs guarded by current map type will be restricted, or may return
+    secrets.
 addonPerformanceMsgError:
+  category: 4
   default: '0.000000'
+  help: Threshold for when a performance error is shown for a specific AddOn as a
+    percentage of application performance.
 addonPerformanceMsgOverall:
+  category: 4
   default: '0.000000'
+  help: Threshold for when an performance error is shown for all AddOns overall as
+    a percentage of application performance.
 addonPerformanceMsgWarning:
+  category: 4
   default: '0.000000'
+  help: Threshold for when a performance warning is shown for a specific AddOn as
+    a percentage of application performance.
 addonPvPMatchRestrictionsForced:
+  category: 4
   default: '0'
+  help: If set, APIs guarded by PvP match state will be restricted, or may return
+    secrets.
 advancedCombatLogging:
+  category: 4
   default: '0'
+  help: Whether we want advanced combat log data sent from the server
 AdvFlyingDynamicFOVEnabled:
+  category: 4
   default: '1'
+  help: Enables adjustment of camera field of view based on gliding speed
 advFlyKeyboardMaxPitchFactor:
+  category: 4
   default: '5.000000'
+  help: Modifies the maximum pitch rate when using advFlyKeyboard.
 advFlyKeyboardMaxTurnFactor:
+  category: 4
   default: '8.000000'
+  help: Modifies the maximum turn rate when using advFlyKeyboard.
 advFlyKeyboardMinPitchFactor:
+  category: 4
   default: '2.500000'
+  help: Modifies the minimum pitch rate when using advFlyKeyboard.
 advFlyKeyboardMinTurnFactor:
+  category: 4
   default: '5.000000'
+  help: Modifies the minimum turn rate when using advFlyKeyboard.
 advFlyPitchControl:
+  category: 4
   default: '3'
+  help: Modifies forward/backwards inputs to control pitch when Dragonriding.
 advFlyPitchControlCameraChase:
+  category: 4
   default: '20.000000'
+  help: Modifies the speed at which camera pitch follows player pitch while dragonriding
+    with forward/backward pitch control.
 advFlyPitchControlGroundDebounce:
+  category: 4
   default: '0'
+  help: If enabled, will debounce forwards/backwards inputs used to control pitch
+    when transitioning between dragonriding and grounded.
+advJournalLastOpened:
+  category: 5
+  help: ''
 agentUID:
+  category: 4
   default: wow_ptr
+  help: The UID provided by Battle.net to be passed to Agent
 AIBrain:
+  category: 5
   default: '0'
 AIController:
+  category: 5
   default: '0'
 AIControllerEventLog:
+  category: 5
   default: '0'
 AIEventLog:
+  category: 5
   default: '0'
 allowCompareWithToggle:
+  category: 4
   default: '1'
 allowDevPublicKey:
+  category: 6
   default: '0'
+  help: Enable to allow the use of the Dev key instead of the one sourced from static.
 AllowMacHideAppBinding:
+  category: 5
   default: '1'
+  help: Allows <cmd+h> to hide the game
 AllowMacHideOthersBinding:
+  category: 5
   default: '1'
+  help: Allows <cmd+opt+h> to hide other applications
 AllowMacQuitBinding:
+  category: 5
   default: '1'
+  help: Allows <cmd+opt+q> to quit the game
 AllowSoftwareRenderer:
+  category: 1
   default: '0'
+  help: Allows WoW to run without a GPU. Performance will be very bad
 AllowSpectateMode:
+  category: 4
   default: '1'
+  help: Enables spectate/commentator camera to be used.
 alwaysCompareItems:
+  category: 4
   default: '1'
+  help: Always show item comparison tooltips
 alwaysShowRuneIcons:
+  category: 10
   default: '0'
+  help: Show the rune icons on equipment at all times, as opposed to only when the
+    rune UI is open.
 animFrameSkipLOD:
+  category: 1
   default: '0'
+  help: animations will skip frames at distance
 arachnophobiaMode:
+  category: 4
   default: '0'
+  help: Swaps out spider creatures for other variants
 AreaTriggerEventLog:
+  category: 5
   default: '0'
 AreaTriggers:
+  category: 5
   default: '0'
 assaoAdaptiveQualityLimit:
+  category: 1
   default: '.45'
+  help: ASSAO Adaptive Quality Limit [0.0, 1.0] (only for Quality Level 3)
 assaoBlurPassCount:
+  category: 1
   default: '2'
+  help: ASSAO Blur Pass Count [  0,   6] Number of edge-sensitive smart blur passes
+    to apply. Quality 0 is an exception with only one 'dumb' blur pass used.
 assaoDetailShadowStrength:
+  category: 1
   default: '0'
+  help: 'ASSAO Detail Shadow Strength [0.0, 5.0] Used for high-res detail AO using
+    neighboring depth pixels: adds a lot of detail but also reduces temporal stability
+    (adds aliasing).'
 assaoFadeOutFrom:
+  category: 1
   default: '50.0'
+  help: ASSAO Fade Out From [0.0,  ~ ] Distance to start start fading out the effect.
 assaoFadeOutTo:
+  category: 1
   default: '300.0'
+  help: ASSAO Fade Out To [0.0,  ~ ] Distance at which the effect is faded out.
 assaoHorizonAngleThresh:
+  category: 1
   default: '0.4'
+  help: ASSAO Horizon Angle Thresh [0.0, 0.2] Limits self-shadowing
 assaoNormals:
+  category: 1
   default: '1'
+  help: Use Normals for ASSAO
 assaoRadius:
+  category: 1
   default: '1.85'
+  help: ASSAO Radius [0.01,  100,000] World (view) space size of the occlusion sphere
 assaoShadowClamp:
+  category: 1
   default: '.98'
+  help: ASSAO Shadow Clamp [0.0, 1.0]
 assaoShadowMult:
+  category: 1
   default: '1.1'
+  help: ASSAO Shadow Multiplier [0.0, 5.0] Effect strength linear multiplier
 assaoShadowPower:
+  category: 1
   default: '1.34'
+  help: ASSAO Shadow Power [0.5, 5.0] Effect strength pow modifier
 assaoSharpness:
+  category: 1
   default: '.98'
+  help: 'ASSAO Sharpness [0.0, 1.0] (How much to bleed over edges; 1: not at all,
+    0.5: half-half; 0.0: completely ignore edges)'
 assaoTemporalSSAngleOffset:
+  category: 1
   default: '0.0'
+  help: ASSAO Temporal Super Sampling Angle Offset [0.0,  PI] Used to rotate sampling
+    kernel; If using temporal AA / supersampling, suggested to rotate by ( (frame%3)/3.0*PI
+    ) or similar. Kernel is already symmetrical, which is why we use PI and not 2*PI.
 assaoTemporalSSRadiusOffset:
+  category: 1
   default: '1.0'
+  help: ASSAO Temporal Super Sampling Radius Offset [0.0, 2.0] Used to scale sampling
+    kernel; If using temporal AA / supersampling, suggested to scale by ( 1.0f + (((frame%3)-1.0)/3.0)*0.1
+    ) or similar.
 assistAttack:
+  category: 4
   default: '0'
+  help: Whether to start attacking after an assist
 assistedCombatHighlight:
+  category: 4
   default: '0'
+  help: If enabled, a highlight will be displayed on the next spell that should be
+    cast in combat
 assistedCombatHighlightRPE:
+  category: 4
   default: '0'
+  help: Will be true if Assisted Highlight was automatically enabled by RPE. Will
+    reset when leaving RPE.
 assistedCombatIconUpdateRate:
+  category: 4
   default: '0.100000'
+  help: How often (in seconds) to update the icon on the action bar, 0 for every frame,
+    max 1 second
 assistedCombatReduceHighlights:
+  category: 4
   default: '1'
+  help: Reduces spell alert animations when Single-Button Assistant is on an action
+    bar
 AsyncAssistActions:
+  category: 5
   default: '0'
 asyncHandlerTimeout:
+  category: 1
   default: '100'
+  help: 'Engine option: Async read main thread timeout'
 asyncThreadSleep:
+  category: 1
   default: '0'
+  help: 'Engine option: Async read thread sleep'
 auctionHouseDurationDropdown:
+  category: 4
   default: '2'
+  help: The previously selected duration index in the auction house duration dropdown
 audioLocale:
+  category: 4
   default: ''
+  help: Set the game locale for audio content
 AuraDebugger:
+  category: 5
   default: '0'
 AuraEventLog:
+  category: 5
   default: '0'
 autoAcceptQuickJoinRequests:
+  category: 4
   default: '0'
+  help: Whether or not to auto-accept players who are trying to join your party through
+    quick join
 autoClearAFK:
+  category: 4
   default: '1'
+  help: Automatically clear AFK when moving or chatting
 autoCompleteResortNamesOnRecency:
+  category: 4
   default: '1'
+  help: Shows people you recently spoke with higher up on the AutoComplete list.
 autoCompleteUseContext:
+  category: 4
   default: '1'
+  help: The system will, for example, only show people in your guild when you are
+    typing /gpromote. Names will also never be removed.
 autoCompleteWhenEditingFromCenter:
+  category: 4
   default: '1'
+  help: If you edit a name by inserting characters into the center, a smarter auto-complete
+    will occur.
 autoDismount:
+  category: 4
   default: '1'
+  help: Automatically dismount when needed
 autoDismountFlying:
+  category: 4
   default: '0'
+  help: If enabled, your character will automatically dismount before casting while
+    flying
 autoFilledMultiCastSlots:
+  category: 4
   default: '0'
+  help: Bitfield that saves whether multi-cast slots have been automatically filled.
 autoInteract:
+  category: 4
   default: '0'
+  help: Toggles auto-move to interact target
 autojoinBGVoice:
+  category: 7
   default: '0'
+  help: Automatically join the voice session in battleground chat
 autojoinPartyVoice:
+  category: 7
   default: '0'
+  help: Automatically join the voice session in party/raid chat
 autoLootDefault:
+  category: 4
   default: '0'
+  help: Automatically loot items when the loot window opens
 autoLootRate:
+  category: 4
   default: '150'
+  help: Rate in milliseconds to tick auto loot
 AutoPushSpellToActionBar:
+  category: 4
   default: '1'
+  help: 'Determines if spells are automatically pushed to the Action Bar. 0: No, 1:
+    Yes (default).'
 autoQuestPopUps:
+  category: 4
   default: ''
+  help: Saves current pop-ups for quests that are automatically acquired or completed.
 autoQuestProgress:
+  category: 4
   default: '1'
+  help: Whether to automatically watch all quests when they are updated
 autoQuestWatch:
+  category: 4
   default: '1'
+  help: Whether to automatically watch all quests when you obtain them
 autoSelfCast:
+  category: 4
   default: '1'
+  help: Whether spells should automatically be cast on you if you don't have a valid
+    target
 autoStand:
+  category: 4
   default: '1'
+  help: Automatically stand when needed
 autoUnshift:
+  category: 4
   default: '1'
+  help: Automatically leave shapeshift form when needed
 bankAutoDepositReagents:
+  category: 4
   default: '1'
+  help: Stores whether to include reagents when auto depositing items into your bank
 bankConfirmTabCleanUp:
+  category: 4
   default: '1'
+  help: Stores whether to show a confirmation dialog when you click the button to
+    auto clean up your bank tabs
 BeckonTriggerEventlog:
+  category: 5
   default: '0'
 BehaviorTree:
+  category: 5
   default: '0'
 blockChannelInvites:
+  category: 4
   default: '0'
+  help: Whether to automatically block chat channel invites
 blockTrades:
+  category: 4
   default: '0'
+  help: Whether to automatically block trade requests
 bodyQuota:
+  category: 1
   default: '100'
+  help: Maximum number of componented bodies seen at once
 breakUpLargeNumbers:
+  category: 4
   default: '1'
+  help: Toggles using commas in large numbers
 Brightness:
+  category: 1
   default: '50.000000'
+  help: 'Brightness adjustment. Range: [0 - 100]'
 buffDurations:
+  category: 4
   default: '1'
+  help: Whether to show buff durations
 CAADebuffSelfAlert:
+  category: 4
   default: '0'
+  help: Announce when a dispellable debuff is applied to the player using a special
+    format (0=off)
 CAAEnabled:
+  category: 4
   default: '0'
+  help: Enable or disable combat audio alerts
 CAAInterruptCast:
+  category: 4
   default: '0'
+  help: Announce when the target starts casting something interruptible
 CAAInterruptCastSuccess:
+  category: 4
   default: '0'
+  help: Announce when the target's cast is interrupted
 CAAPartyHealthFrequency:
+  category: 4
   default: '0'
+  help: Relative frequency at which party health combat audio alerts are read (-10
+    to 10). -10 halves the frequency and 10 doubles it
 CAAPartyHealthPercent:
+  category: 4
   default: '0'
+  help: Announce party member indices to indicate current health when it's below X
+    percent. Frequency of announcements are affected by remaining health and CAAPartyHealthFrequencySpeed
 CAAPartyHealthVoice:
+  category: 4
   default: '0'
+  help: Voice to use for party health combat audio alerts
 CAAPartyHealthVolume:
+  category: 4
   default: '100'
+  help: Volume of party health combat audio alerts (0 to 100)
 CAAPlayerCastFormat:
+  category: 4
   default: '4'
+  help: Format string to use when reading the player's casts
 CAAPlayerCastMinTime:
+  category: 4
   default: '1.500000'
+  help: The player's casts will only be read out if they have a cast time >= this
 CAAPlayerCastMode:
+  category: 4
   default: '0'
+  help: When the player's casts should be announced (0=off, 1=cast start, 2=cast end)
 CAAPlayerCastThrottle:
+  category: 4
   default: '0.000000'
+  help: The player's casts will only be read every X seconds at most
 CAAPlayerCastVoice:
+  category: 4
   default: '0'
+  help: Voice to use for player cast combat audio alerts
 CAAPlayerCastVolume:
+  category: 4
   default: '100'
+  help: Volume of player cast combat audio alerts (0 to 100)
 CAAPlayerHealthFormat:
+  category: 4
   default: '1'
+  help: Format string to use when reading the player's health
 CAAPlayerHealthPercent:
+  category: 4
   default: '0'
+  help: Announce player health every X percent
 CAAPlayerHealthThrottle:
+  category: 4
   default: '0.000000'
+  help: The player's health will only be read every X seconds at most
 CAAPlayerHealthVoice:
+  category: 4
   default: '0'
+  help: Voice to use for player health combat audio alerts
 CAAPlayerHealthVolume:
+  category: 4
   default: '100'
+  help: Volume of player health combat audio alerts (0 to 100)
 CAAResource1Formats:
+  category: 4
   default: ''
+  help: Stores the format string to use (for each spec) when announcing the player's
+    first resource
 CAAResource1Percents:
+  category: 4
   default: ''
+  help: 'Stores the percentage band sizes to use (for each spec) when announcing the
+    player''s first resource '
 CAAResource1Throttle:
+  category: 4
   default: '0.000000'
+  help: Updates to the player's first resource will only be read every X seconds at
+    most
 CAAResource1Voice:
+  category: 4
   default: ''
+  help: Stores the voice to use (for each spec) when announcing the player's first
+    resource
 CAAResource1Volume:
+  category: 4
   default: ''
+  help: Stores the volume to use (for each spec) when announcing the player's first
+    resource (0 to 100)
 CAAResource2Formats:
+  category: 4
   default: ''
+  help: Stores the format string to use (for each spec) when announcing the player's
+    second resource
 CAAResource2Percents:
+  category: 4
   default: ''
+  help: Stores the percentage band sizes to use (for each spec) when announcing the
+    player's second resource
 CAAResource2Throttle:
+  category: 4
   default: '0.000000'
+  help: Updates to the player's second resource will only be read every X seconds
+    at most
 CAAResource2Voice:
+  category: 4
   default: ''
+  help: Stores the voice to use (for each spec) when announcing the player's second
+    resource
 CAAResource2Volume:
+  category: 4
   default: ''
+  help: Stores the volume to use (for each spec) when announcing the player's second
+    resource (0 to 100)
 CAASayCombatEnd:
+  category: 4
   default: '1'
+  help: Announce when combat ends
 CAASayCombatStart:
+  category: 4
   default: '1'
+  help: Announce when combat starts
 CAASayIfTargeted:
+  category: 4
   default: ''
+  help: Stores the 'say if targeted' settings for each spec
 CAASayTargetName:
+  category: 4
   default: '1'
+  help: Say the target's name when a new target is selected
 CAASayYourDebuffs:
+  category: 4
   default: '1'
+  help: Announce when a debuff is applied to the player
 CAASayYourDebuffsFormat:
+  category: 4
   default: '0'
+  help: Format string to use when announcing debuffs applied to the player
 CAASayYourDebuffsMinDuration:
+  category: 4
   default: '1.500000'
+  help: Minimum duration of debuffs to be announced (0 means all debuffs)
 CAASayYourDebuffsVoice:
+  category: 4
   default: '0'
+  help: Voice to use for player debuff combat audio alerts
 CAASayYourDebuffsVolume:
+  category: 4
   default: '100'
+  help: Volume of player debuff combat audio alerts (0 to 100)
 CAASpeed:
+  category: 4
   default: '0'
+  help: Speed at which combat audio alerts are read (-10 to 10)
 CAATargetCastFormat:
+  category: 4
   default: '0'
+  help: Format string to use when reading the target's casts
 CAATargetCastMinTime:
+  category: 4
   default: '1.500000'
+  help: The target's casts will only be read out if they have a cast time >= this
 CAATargetCastMode:
+  category: 4
   default: '0'
+  help: When the target's casts should be announced (0=off, 1=cast start, 2=cast end)
 CAATargetCastThrottle:
+  category: 4
   default: '0.000000'
+  help: The target's casts will only be read every X seconds at most
 CAATargetCastVoice:
+  category: 4
   default: '0'
+  help: Voice to use for target cast combat audio alerts
 CAATargetCastVolume:
+  category: 4
   default: '100'
+  help: Volume of target cast combat audio alerts (0 to 100)
 CAATargetDeathBehavior:
+  category: 4
   default: '0'
+  help: Behavior of announcement when target dies (0=default, 1=target dead)
 CAATargetHealthFormat:
+  category: 4
   default: '3'
+  help: Format string to use when reading the target's health
 CAATargetHealthPercent:
+  category: 4
   default: '2'
+  help: Announce target health every X percent
 CAATargetHealthThrottle:
+  category: 4
   default: '0.000000'
+  help: The target's health will only be read every X seconds at most
 CAATargetHealthVoice:
+  category: 4
   default: '0'
+  help: Voice to use for target health combat audio alerts
 CAATargetHealthVolume:
+  category: 4
   default: '100'
+  help: Volume of target health combat audio alerts (0 to 100)
 CAAVoice:
+  category: 4
   default: '0'
+  help: Primary voice to use for combat audio alerts
 CAAVolume:
+  category: 4
   default: '100'
+  help: Volume of combat audio alerts (0 to 100)
 cacaoBilateralSimilarityDistanceSigma:
+  category: 1
   default: '0.01'
+  help: CACAO Sigma squared value for use in bilateral upsampler giving similarity
+    weighting for neighbouring pixels. Should be greater than 0.0.
 calendarShowBattlegrounds:
+  category: 4
   default: '1'
+  help: Whether Battleground holidays should appear in the calendar
 calendarShowDarkmoon:
+  category: 4
   default: '1'
+  help: Whether Darkmoon Faire holidays should appear in the calendar
 calendarShowHolidays:
+  category: 4
   default: '1'
+  help: Whether holidays should appear in the calendar
 calendarShowLockouts:
+  category: 4
   default: '1'
+  help: Whether raid lockouts should appear in the calendar
 calendarShowResets:
+  category: 4
   default: '0'
+  help: Whether raid resets should appear in the calendar
 calendarShowWeeklyHolidays:
+  category: 4
   default: '1'
+  help: Whether weekly holidays should appear in the calendar
 cameraBobbing:
+  category: 4
   default: '0'
 cameraBobbingSmoothSpeed:
+  category: 4
   default: '0.800000'
 cameraCustomViewSmoothing:
+  category: 4
   default: '0'
 cameraDistanceMaxZoomFactor:
+  category: 4
   default: '1.900000'
 cameraDistanceRateMult:
+  category: 4
   default: '1.000000'
 cameraDive:
+  category: 4
   default: '1'
 CameraFollowGamepadAdjustDelay:
+  category: 4
   default: '1.000000'
+  help: Delay before follow resuming after manually adjusting the camera with Gamepad
+    input
 CameraFollowGamepadAdjustEaseIn:
+  category: 4
   default: '1.000000'
+  help: Ease-in time for follow resuming after manually adjusting the camera with
+    Gamepad input
 CameraFollowOnStick:
+  category: 4
   default: '0'
+  help: Enable camera to follow target as though being pushed/pulled along on a stick
 CameraFollowPitchDeadZone:
+  category: 4
   default: '5.000000'
+  help: Controls pitch follow deadzone size
 CameraFollowPitchSpeed:
+  category: 4
   default: '1.000000'
+  help: Controls speed of pitch following
 CameraFollowPitchStrength:
+  category: 4
   default: '0.700000'
+  help: Controls strength of pitch following
 CameraFollowSnapCharacterAngle:
+  category: 4
   default: '45.000000'
+  help: Angle beyond which character will snap to camera's facing when moving
 CameraFollowTargetCombat:
+  category: 4
   default: '1'
+  help: Camera follow the locked target only during combat.
 CameraFollowYawSpeed:
+  category: 4
   default: '1.000000'
+  help: Controls speed of yaw following
 cameraFov:
+  category: 1
   default: '90.000000'
+  help: Default camera field of view
 cameraFoVSmoothSpeed:
+  category: 4
   default: '0.500000'
 cameraGroundSmoothSpeed:
+  category: 4
   default: '7.500000'
 cameraHeightIgnoreStandState:
+  category: 4
   default: '0'
 cameraIndirectOffset:
+  category: 4
   default: '6.000000'
 cameraIndirectVisibility:
+  category: 4
   default: '1'
 CameraKeepCharacterCentered:
+  category: 4
   default: '1'
+  help: Motion sickness control to keep character's head at center of screen to act
+    as motion reference point. Can override other cvar settings.
 cameraPitchMoveSpeed:
+  category: 4
   default: '90.000000'
 cameraPitchSmoothMax:
+  category: 4
   default: '23.000000'
 cameraPitchSmoothMin:
+  category: 4
   default: '0.000000'
 cameraPitchSmoothSpeed:
+  category: 4
   default: '45.000000'
 cameraPivot:
+  category: 4
   default: '1'
 cameraPivotDXMax:
+  category: 4
   default: '0.050000'
 cameraPivotDYMin:
+  category: 4
   default: '0.000000'
 CameraReduceUnexpectedMovement:
+  category: 4
   default: '0'
+  help: Motion sickness control to reduce camera movement without player input. Can
+    override other cvar settings.
 cameraSavedDistance:
+  category: 4
   default: '5.550000'
 cameraSavedPetBattleDistance:
+  category: 4
   default: '10.000000'
 cameraSavedPitch:
+  category: 4
   default: '10.000000'
 cameraSavedVehicleDistance:
+  category: 4
   default: '-1.000000'
 cameraSmooth:
+  category: 4
   default: '1'
 cameraSmoothAlwaysFearDelay:
+  category: 4
   default: '0.000000'
 cameraSmoothAlwaysFearFactor:
+  category: 4
   default: '1.000000'
 cameraSmoothAlwaysIdleDelay:
+  category: 4
   default: '0.000000'
 cameraSmoothAlwaysIdleFactor:
+  category: 4
   default: '1.000000'
 cameraSmoothAlwaysMoveDelay:
+  category: 4
   default: '0.000000'
 cameraSmoothAlwaysMoveFactor:
+  category: 4
   default: '1.000000'
 cameraSmoothAlwaysStopDelay:
+  category: 4
   default: '0.000000'
 cameraSmoothAlwaysStopFactor:
+  category: 4
   default: '1.000000'
 cameraSmoothAlwaysStrafeDelay:
+  category: 4
   default: '0.000000'
 cameraSmoothAlwaysStrafeFactor:
+  category: 4
   default: '1.000000'
 cameraSmoothAlwaysTrackDelay:
+  category: 4
   default: '0.000000'
 cameraSmoothAlwaysTrackFactor:
+  category: 4
   default: '1.000000'
 cameraSmoothAlwaysTurnDelay:
+  category: 4
   default: '0.000000'
 cameraSmoothAlwaysTurnFactor:
+  category: 4
   default: '1.000000'
 cameraSmoothNeverFearDelay:
+  category: 4
   default: '0.000000'
 cameraSmoothNeverFearFactor:
+  category: 4
   default: '0.000000'
 cameraSmoothNeverIdleDelay:
+  category: 4
   default: '0.000000'
 cameraSmoothNeverIdleFactor:
+  category: 4
   default: '0.000000'
 cameraSmoothNeverMoveDelay:
+  category: 4
   default: '0.000000'
 cameraSmoothNeverMoveFactor:
+  category: 4
   default: '0.000000'
 cameraSmoothNeverStopDelay:
+  category: 4
   default: '0.000000'
 cameraSmoothNeverStopFactor:
+  category: 4
   default: '0.000000'
 cameraSmoothNeverStrafeDelay:
+  category: 4
   default: '0.000000'
 cameraSmoothNeverStrafeFactor:
+  category: 4
   default: '0.000000'
 cameraSmoothNeverTrackDelay:
+  category: 4
   default: '0.000000'
 cameraSmoothNeverTrackFactor:
+  category: 4
   default: '0.000000'
 cameraSmoothNeverTurnDelay:
+  category: 4
   default: '0.000000'
 cameraSmoothNeverTurnFactor:
+  category: 4
   default: '0.000000'
 cameraSmoothPitch:
+  category: 4
   default: '1'
 cameraSmoothSmarterFearDelay:
+  category: 4
   default: '0.400000'
 cameraSmoothSmarterFearFactor:
+  category: 4
   default: '10.000000'
 cameraSmoothSmarterIdleDelay:
+  category: 4
   default: '0.000000'
 cameraSmoothSmarterIdleFactor:
+  category: 4
   default: '0.000000'
 cameraSmoothSmarterMoveDelay:
+  category: 4
   default: '0.000000'
 cameraSmoothSmarterMoveFactor:
+  category: 4
   default: '1.000000'
 cameraSmoothSmarterStopDelay:
+  category: 4
   default: '0.000000'
 cameraSmoothSmarterStopFactor:
+  category: 4
   default: '0.000000'
 cameraSmoothSmarterStrafeDelay:
+  category: 4
   default: '0.000000'
 cameraSmoothSmarterStrafeFactor:
+  category: 4
   default: '1.000000'
 cameraSmoothSmarterTrackDelay:
+  category: 4
   default: '0.400000'
 cameraSmoothSmarterTrackFactor:
+  category: 4
   default: '10.000000'
 cameraSmoothSmarterTurnDelay:
+  category: 4
   default: '0.000000'
 cameraSmoothSmarterTurnFactor:
+  category: 4
   default: '1.000000'
 cameraSmoothSmartFearDelay:
+  category: 4
   default: '0.400000'
 cameraSmoothSmartFearFactor:
+  category: 4
   default: '10.000000'
 cameraSmoothSmartIdleDelay:
+  category: 4
   default: '0.000000'
 cameraSmoothSmartIdleFactor:
+  category: 4
   default: '0.000000'
 cameraSmoothSmartMoveDelay:
+  category: 4
   default: '0.000000'
 cameraSmoothSmartMoveFactor:
+  category: 4
   default: '1.000000'
 cameraSmoothSmartStopDelay:
+  category: 4
   default: '0.000000'
 cameraSmoothSmartStopFactor:
+  category: 4
   default: '0.000000'
 cameraSmoothSmartStrafeDelay:
+  category: 4
   default: '0.000000'
 cameraSmoothSmartStrafeFactor:
+  category: 4
   default: '1.000000'
 cameraSmoothSmartTrackDelay:
+  category: 4
   default: '0.400000'
 cameraSmoothSmartTrackFactor:
+  category: 4
   default: '10.000000'
 cameraSmoothSmartTurnDelay:
+  category: 4
   default: '0.000000'
 cameraSmoothSmartTurnFactor:
+  category: 4
   default: '1.000000'
 cameraSmoothSplineFearDelay:
+  category: 4
   default: '0.000000'
 cameraSmoothSplineFearFactor:
+  category: 4
   default: '4.000000'
 cameraSmoothSplineIdleDelay:
+  category: 4
   default: '0.000000'
 cameraSmoothSplineIdleFactor:
+  category: 4
   default: '4.000000'
 cameraSmoothSplineMoveDelay:
+  category: 4
   default: '0.000000'
 cameraSmoothSplineMoveFactor:
+  category: 4
   default: '1.000000'
 cameraSmoothSplineStopDelay:
+  category: 4
   default: '0.000000'
 cameraSmoothSplineStopFactor:
+  category: 4
   default: '4.000000'
 cameraSmoothSplineStrafeDelay:
+  category: 4
   default: '0.000000'
 cameraSmoothSplineStrafeFactor:
+  category: 4
   default: '1.000000'
 cameraSmoothSplineTrackDelay:
+  category: 4
   default: '0.000000'
 cameraSmoothSplineTrackFactor:
+  category: 4
   default: '4.000000'
 cameraSmoothSplineTurnDelay:
+  category: 4
   default: '0.000000'
 cameraSmoothSplineTurnFactor:
+  category: 4
   default: '1.000000'
 cameraSmoothStyle:
+  category: 4
   default: '4'
 cameraSmoothTimeMax:
+  category: 4
   default: '2.000000'
 cameraSmoothTimeMin:
+  category: 4
   default: '0.100000'
 cameraSmoothTrackingStyle:
+  category: 4
   default: '4'
 cameraSmoothViewDataAlwaysDistanceDelay:
+  category: 4
   default: '0.000000'
 cameraSmoothViewDataAlwaysDistanceFactor:
+  category: 4
   default: '0.000000'
 cameraSmoothViewDataAlwaysPitchDelay:
+  category: 4
   default: '0.000000'
 cameraSmoothViewDataAlwaysPitchFactor:
+  category: 4
   default: '1.000000'
 cameraSmoothViewDataAlwaysYawDelay:
+  category: 4
   default: '0.000000'
 cameraSmoothViewDataAlwaysYawFactor:
+  category: 4
   default: '1.000000'
 cameraSmoothViewDataNeverDistanceDelay:
+  category: 4
   default: '0.000000'
 cameraSmoothViewDataNeverDistanceFactor:
+  category: 4
   default: '0.000000'
 cameraSmoothViewDataNeverPitchDelay:
+  category: 4
   default: '0.000000'
 cameraSmoothViewDataNeverPitchFactor:
+  category: 4
   default: '0.000000'
 cameraSmoothViewDataNeverYawDelay:
+  category: 4
   default: '0.000000'
 cameraSmoothViewDataNeverYawFactor:
+  category: 4
   default: '0.000000'
 cameraSmoothViewDataSmartDistanceDelay:
+  category: 4
   default: '0.000000'
 cameraSmoothViewDataSmartDistanceFactor:
+  category: 4
   default: '0.000000'
 cameraSmoothViewDataSmarterDistanceDelay:
+  category: 4
   default: '0.000000'
 cameraSmoothViewDataSmarterDistanceFactor:
+  category: 4
   default: '0.000000'
 cameraSmoothViewDataSmarterPitchDelay:
+  category: 4
   default: '0.000000'
 cameraSmoothViewDataSmarterPitchFactor:
+  category: 4
   default: '1.000000'
 cameraSmoothViewDataSmarterYawDelay:
+  category: 4
   default: '0.000000'
 cameraSmoothViewDataSmarterYawFactor:
+  category: 4
   default: '1.000000'
 cameraSmoothViewDataSmartPitchDelay:
+  category: 4
   default: '0.000000'
 cameraSmoothViewDataSmartPitchFactor:
+  category: 4
   default: '0.000000'
 cameraSmoothViewDataSmartYawDelay:
+  category: 4
   default: '0.000000'
 cameraSmoothViewDataSmartYawFactor:
+  category: 4
   default: '1.000000'
 cameraSmoothViewDataSplineDistanceDelay:
+  category: 4
   default: '0.000000'
 cameraSmoothViewDataSplineDistanceFactor:
+  category: 4
   default: '0.000000'
 cameraSmoothViewDataSplinePitchDelay:
+  category: 4
   default: '0.000000'
 cameraSmoothViewDataSplinePitchFactor:
+  category: 4
   default: '1.000000'
 cameraSmoothViewDataSplineYawDelay:
+  category: 4
   default: '0.000000'
 cameraSmoothViewDataSplineYawFactor:
+  category: 4
   default: '1.000000'
 cameraSmoothYaw:
+  category: 4
   default: '1'
 cameraSubmergePitch:
+  category: 4
   default: '18.000000'
 cameraSurfacePitch:
+  category: 4
   default: '0.000000'
 cameraTargetSmoothSpeed:
+  category: 4
   default: '90.000000'
 cameraTerrainTilt:
+  category: 4
   default: '0'
 cameraTerrainTiltAlwaysFallAbsorb:
+  category: 4
   default: '1.000000'
 cameraTerrainTiltAlwaysFallDelay:
+  category: 4
   default: '0.000000'
 cameraTerrainTiltAlwaysFallFactor:
+  category: 4
   default: '0.750000'
 cameraTerrainTiltAlwaysFearAbsorb:
+  category: 4
   default: '1.000000'
 cameraTerrainTiltAlwaysFearDelay:
+  category: 4
   default: '0.000000'
 cameraTerrainTiltAlwaysFearFactor:
+  category: 4
   default: '1.000000'
 cameraTerrainTiltAlwaysIdleAbsorb:
+  category: 4
   default: '1.000000'
 cameraTerrainTiltAlwaysIdleDelay:
+  category: 4
   default: '0.000000'
 cameraTerrainTiltAlwaysIdleFactor:
+  category: 4
   default: '1.000000'
 cameraTerrainTiltAlwaysJumpAbsorb:
+  category: 4
   default: '0.000000'
 cameraTerrainTiltAlwaysJumpDelay:
+  category: 4
   default: '0.000000'
 cameraTerrainTiltAlwaysJumpFactor:
+  category: 4
   default: '-1.000000'
 cameraTerrainTiltAlwaysMoveAbsorb:
+  category: 4
   default: '1.000000'
 cameraTerrainTiltAlwaysMoveDelay:
+  category: 4
   default: '0.000000'
 cameraTerrainTiltAlwaysMoveFactor:
+  category: 4
   default: '1.000000'
 cameraTerrainTiltAlwaysStrafeAbsorb:
+  category: 4
   default: '1.000000'
 cameraTerrainTiltAlwaysStrafeDelay:
+  category: 4
   default: '0.000000'
 cameraTerrainTiltAlwaysStrafeFactor:
+  category: 4
   default: '1.000000'
 cameraTerrainTiltAlwaysSwimAbsorb:
+  category: 4
   default: '0.000000'
 cameraTerrainTiltAlwaysSwimDelay:
+  category: 4
   default: '0.000000'
 cameraTerrainTiltAlwaysSwimFactor:
+  category: 4
   default: '1.000000'
 cameraTerrainTiltAlwaysTaxiAbsorb:
+  category: 4
   default: '0.000000'
 cameraTerrainTiltAlwaysTaxiDelay:
+  category: 4
   default: '0.000000'
 cameraTerrainTiltAlwaysTaxiFactor:
+  category: 4
   default: '1.000000'
 cameraTerrainTiltAlwaysTrackAbsorb:
+  category: 4
   default: '1.000000'
 cameraTerrainTiltAlwaysTrackDelay:
+  category: 4
   default: '0.000000'
 cameraTerrainTiltAlwaysTrackFactor:
+  category: 4
   default: '1.000000'
 cameraTerrainTiltAlwaysTurnAbsorb:
+  category: 4
   default: '1.000000'
 cameraTerrainTiltAlwaysTurnDelay:
+  category: 4
   default: '0.000000'
 cameraTerrainTiltAlwaysTurnFactor:
+  category: 4
   default: '1.000000'
 cameraTerrainTiltNeverFallAbsorb:
+  category: 4
   default: '0.000000'
 cameraTerrainTiltNeverFallDelay:
+  category: 4
   default: '0.000000'
 cameraTerrainTiltNeverFallFactor:
+  category: 4
   default: '-1.000000'
 cameraTerrainTiltNeverFearAbsorb:
+  category: 4
   default: '0.000000'
 cameraTerrainTiltNeverFearDelay:
+  category: 4
   default: '0.000000'
 cameraTerrainTiltNeverFearFactor:
+  category: 4
   default: '-1.000000'
 cameraTerrainTiltNeverIdleAbsorb:
+  category: 4
   default: '0.000000'
 cameraTerrainTiltNeverIdleDelay:
+  category: 4
   default: '0.000000'
 cameraTerrainTiltNeverIdleFactor:
+  category: 4
   default: '-1.000000'
 cameraTerrainTiltNeverJumpAbsorb:
+  category: 4
   default: '0.000000'
 cameraTerrainTiltNeverJumpDelay:
+  category: 4
   default: '0.000000'
 cameraTerrainTiltNeverJumpFactor:
+  category: 4
   default: '-1.000000'
 cameraTerrainTiltNeverMoveAbsorb:
+  category: 4
   default: '0.000000'
 cameraTerrainTiltNeverMoveDelay:
+  category: 4
   default: '0.000000'
 cameraTerrainTiltNeverMoveFactor:
+  category: 4
   default: '-1.000000'
 cameraTerrainTiltNeverStrafeAbsorb:
+  category: 4
   default: '0.000000'
 cameraTerrainTiltNeverStrafeDelay:
+  category: 4
   default: '0.000000'
 cameraTerrainTiltNeverStrafeFactor:
+  category: 4
   default: '-1.000000'
 cameraTerrainTiltNeverSwimAbsorb:
+  category: 4
   default: '0.000000'
 cameraTerrainTiltNeverSwimDelay:
+  category: 4
   default: '0.000000'
 cameraTerrainTiltNeverSwimFactor:
+  category: 4
   default: '-1.000000'
 cameraTerrainTiltNeverTaxiAbsorb:
+  category: 4
   default: '0.000000'
 cameraTerrainTiltNeverTaxiDelay:
+  category: 4
   default: '0.000000'
 cameraTerrainTiltNeverTaxiFactor:
+  category: 4
   default: '-1.000000'
 cameraTerrainTiltNeverTrackAbsorb:
+  category: 4
   default: '0.000000'
 cameraTerrainTiltNeverTrackDelay:
+  category: 4
   default: '0.000000'
 cameraTerrainTiltNeverTrackFactor:
+  category: 4
   default: '-1.000000'
 cameraTerrainTiltNeverTurnAbsorb:
+  category: 4
   default: '0.000000'
 cameraTerrainTiltNeverTurnDelay:
+  category: 4
   default: '0.000000'
 cameraTerrainTiltNeverTurnFactor:
+  category: 4
   default: '-1.000000'
 cameraTerrainTiltSmarterFallAbsorb:
+  category: 4
   default: '1.000000'
 cameraTerrainTiltSmarterFallDelay:
+  category: 4
   default: '0.000000'
 cameraTerrainTiltSmarterFallFactor:
+  category: 4
   default: '0.750000'
 cameraTerrainTiltSmarterFearAbsorb:
+  category: 4
   default: '1.000000'
 cameraTerrainTiltSmarterFearDelay:
+  category: 4
   default: '0.000000'
 cameraTerrainTiltSmarterFearFactor:
+  category: 4
   default: '1.000000'
 cameraTerrainTiltSmarterIdleAbsorb:
+  category: 4
   default: '0.000000'
 cameraTerrainTiltSmarterIdleDelay:
+  category: 4
   default: '0.000000'
 cameraTerrainTiltSmarterIdleFactor:
+  category: 4
   default: '-1.000000'
 cameraTerrainTiltSmarterJumpAbsorb:
+  category: 4
   default: '0.000000'
 cameraTerrainTiltSmarterJumpDelay:
+  category: 4
   default: '0.000000'
 cameraTerrainTiltSmarterJumpFactor:
+  category: 4
   default: '-1.000000'
 cameraTerrainTiltSmarterMoveAbsorb:
+  category: 4
   default: '1.000000'
 cameraTerrainTiltSmarterMoveDelay:
+  category: 4
   default: '0.000000'
 cameraTerrainTiltSmarterMoveFactor:
+  category: 4
   default: '1.000000'
 cameraTerrainTiltSmarterStrafeAbsorb:
+  category: 4
   default: '1.000000'
 cameraTerrainTiltSmarterStrafeDelay:
+  category: 4
   default: '0.000000'
 cameraTerrainTiltSmarterStrafeFactor:
+  category: 4
   default: '1.000000'
 cameraTerrainTiltSmarterSwimAbsorb:
+  category: 4
   default: '0.000000'
 cameraTerrainTiltSmarterSwimDelay:
+  category: 4
   default: '0.000000'
 cameraTerrainTiltSmarterSwimFactor:
+  category: 4
   default: '1.000000'
 cameraTerrainTiltSmarterTaxiAbsorb:
+  category: 4
   default: '0.000000'
 cameraTerrainTiltSmarterTaxiDelay:
+  category: 4
   default: '0.000000'
 cameraTerrainTiltSmarterTaxiFactor:
+  category: 4
   default: '1.000000'
 cameraTerrainTiltSmarterTrackAbsorb:
+  category: 4
   default: '1.000000'
 cameraTerrainTiltSmarterTrackDelay:
+  category: 4
   default: '0.000000'
 cameraTerrainTiltSmarterTrackFactor:
+  category: 4
   default: '1.000000'
 cameraTerrainTiltSmarterTurnAbsorb:
+  category: 4
   default: '1.000000'
 cameraTerrainTiltSmarterTurnDelay:
+  category: 4
   default: '0.000000'
 cameraTerrainTiltSmarterTurnFactor:
+  category: 4
   default: '1.000000'
 cameraTerrainTiltSmartFallAbsorb:
+  category: 4
   default: '1.000000'
 cameraTerrainTiltSmartFallDelay:
+  category: 4
   default: '0.000000'
 cameraTerrainTiltSmartFallFactor:
+  category: 4
   default: '0.750000'
 cameraTerrainTiltSmartFearAbsorb:
+  category: 4
   default: '1.000000'
 cameraTerrainTiltSmartFearDelay:
+  category: 4
   default: '0.000000'
 cameraTerrainTiltSmartFearFactor:
+  category: 4
   default: '1.000000'
 cameraTerrainTiltSmartIdleAbsorb:
+  category: 4
   default: '0.000000'
 cameraTerrainTiltSmartIdleDelay:
+  category: 4
   default: '0.000000'
 cameraTerrainTiltSmartIdleFactor:
+  category: 4
   default: '-1.000000'
 cameraTerrainTiltSmartJumpAbsorb:
+  category: 4
   default: '0.000000'
 cameraTerrainTiltSmartJumpDelay:
+  category: 4
   default: '0.000000'
 cameraTerrainTiltSmartJumpFactor:
+  category: 4
   default: '-1.000000'
 cameraTerrainTiltSmartMoveAbsorb:
+  category: 4
   default: '1.000000'
 cameraTerrainTiltSmartMoveDelay:
+  category: 4
   default: '0.000000'
 cameraTerrainTiltSmartMoveFactor:
+  category: 4
   default: '1.000000'
 cameraTerrainTiltSmartStrafeAbsorb:
+  category: 4
   default: '1.000000'
 cameraTerrainTiltSmartStrafeDelay:
+  category: 4
   default: '0.000000'
 cameraTerrainTiltSmartStrafeFactor:
+  category: 4
   default: '1.000000'
 cameraTerrainTiltSmartSwimAbsorb:
+  category: 4
   default: '0.000000'
 cameraTerrainTiltSmartSwimDelay:
+  category: 4
   default: '0.000000'
 cameraTerrainTiltSmartSwimFactor:
+  category: 4
   default: '1.000000'
 cameraTerrainTiltSmartTaxiAbsorb:
+  category: 4
   default: '0.000000'
 cameraTerrainTiltSmartTaxiDelay:
+  category: 4
   default: '0.000000'
 cameraTerrainTiltSmartTaxiFactor:
+  category: 4
   default: '1.000000'
 cameraTerrainTiltSmartTrackAbsorb:
+  category: 4
   default: '1.000000'
 cameraTerrainTiltSmartTrackDelay:
+  category: 4
   default: '0.000000'
 cameraTerrainTiltSmartTrackFactor:
+  category: 4
   default: '1.000000'
 cameraTerrainTiltSmartTurnAbsorb:
+  category: 4
   default: '1.000000'
 cameraTerrainTiltSmartTurnDelay:
+  category: 4
   default: '0.000000'
 cameraTerrainTiltSmartTurnFactor:
+  category: 4
   default: '1.000000'
 cameraTerrainTiltSplineFallAbsorb:
+  category: 4
   default: '1.000000'
 cameraTerrainTiltSplineFallDelay:
+  category: 4
   default: '0.000000'
 cameraTerrainTiltSplineFallFactor:
+  category: 4
   default: '0.750000'
 cameraTerrainTiltSplineFearAbsorb:
+  category: 4
   default: '1.000000'
 cameraTerrainTiltSplineFearDelay:
+  category: 4
   default: '0.000000'
 cameraTerrainTiltSplineFearFactor:
+  category: 4
   default: '1.000000'
 cameraTerrainTiltSplineIdleAbsorb:
+  category: 4
   default: '0.000000'
 cameraTerrainTiltSplineIdleDelay:
+  category: 4
   default: '0.000000'
 cameraTerrainTiltSplineIdleFactor:
+  category: 4
   default: '-1.000000'
 cameraTerrainTiltSplineJumpAbsorb:
+  category: 4
   default: '0.000000'
 cameraTerrainTiltSplineJumpDelay:
+  category: 4
   default: '0.000000'
 cameraTerrainTiltSplineJumpFactor:
+  category: 4
   default: '-1.000000'
 cameraTerrainTiltSplineMoveAbsorb:
+  category: 4
   default: '1.000000'
 cameraTerrainTiltSplineMoveDelay:
+  category: 4
   default: '0.000000'
 cameraTerrainTiltSplineMoveFactor:
+  category: 4
   default: '1.000000'
 cameraTerrainTiltSplineStrafeAbsorb:
+  category: 4
   default: '1.000000'
 cameraTerrainTiltSplineStrafeDelay:
+  category: 4
   default: '0.000000'
 cameraTerrainTiltSplineStrafeFactor:
+  category: 4
   default: '1.000000'
 cameraTerrainTiltSplineSwimAbsorb:
+  category: 4
   default: '0.000000'
 cameraTerrainTiltSplineSwimDelay:
+  category: 4
   default: '0.000000'
 cameraTerrainTiltSplineSwimFactor:
+  category: 4
   default: '1.000000'
 cameraTerrainTiltSplineTaxiAbsorb:
+  category: 4
   default: '0.000000'
 cameraTerrainTiltSplineTaxiDelay:
+  category: 4
   default: '0.000000'
 cameraTerrainTiltSplineTaxiFactor:
+  category: 4
   default: '1.000000'
 cameraTerrainTiltSplineTrackAbsorb:
+  category: 4
   default: '1.000000'
 cameraTerrainTiltSplineTrackDelay:
+  category: 4
   default: '0.000000'
 cameraTerrainTiltSplineTrackFactor:
+  category: 4
   default: '1.000000'
 cameraTerrainTiltSplineTurnAbsorb:
+  category: 4
   default: '1.000000'
 cameraTerrainTiltSplineTurnDelay:
+  category: 4
   default: '0.000000'
 cameraTerrainTiltSplineTurnFactor:
+  category: 4
   default: '1.000000'
 cameraTerrainTiltTimeMax:
+  category: 4
   default: '10.000000'
 cameraTerrainTiltTimeMin:
+  category: 4
   default: '3.000000'
 cameraView:
+  category: 4
   default: '2'
 cameraViewBlendStyle:
+  category: 4
   default: '1'
 cameraWaterCollision:
+  category: 4
   default: '0'
 cameraYawMoveSpeed:
+  category: 4
   default: '180.000000'
 cameraYawSmoothMax:
+  category: 4
   default: '0.000000'
 cameraYawSmoothMin:
+  category: 4
   default: '0.000000'
 cameraYawSmoothSpeed:
+  category: 4
   default: '180.000000'
 cameraZoomSpeed:
+  category: 4
   default: '20.000000'
 cameraZSmooth:
+  category: 4
   default: '1'
+  help: Smooths camera vertical movement. 1 = only while moving, 2 = also while standing
+    still
 casContainerSizeLimit:
+  category: 5
   default: '0'
+  help: Approximate limit in GB for the amount of game data to keep on disk at a time
 characterNeedsTurnStrafeDialog:
+  category: 4
   default: '1'
+  help: Whether the character needs to show dialog that turn and strafe keybinds have
+    changed
 characterSocialRestrictionSettingsApplied:
+  category: 4
   default: '0'
+  help: Have the character stored settings been set to their required values for AADC
+    restrictions.
 ChatAmbienceVolume:
+  category: 7
   default: '0.3'
+  help: Ambience Volume (0.0 to 1.0)
 chatBubbles:
+  category: 4
   default: '1'
+  help: Whether to show in-game chat bubbles
 chatBubblesParty:
+  category: 4
   default: '1'
+  help: Whether to show in-game chat bubbles for party chat
 chatBubblesRaid:
+  category: 4
   default: '0'
+  help: Whether to show in-game chat bubbles for raid chat
 chatClassColorOverride:
+  category: 4
   default: '0'
+  help: Whether or not class names are colored in chat. 0 = always color by class
+    name (where applicable), 1 = never color by class name, 2 = respect the legacy
+    per-channel class color settings
 chatMouseScroll:
+  category: 4
   default: '1'
+  help: Whether the user can use the mouse wheel to scroll through chat
 ChatMusicVolume:
+  category: 7
   default: '0.3'
+  help: Music volume (0.0 to 1.0)
 ChatSoundVolume:
+  category: 7
   default: '0.4'
+  help: Sound volume (0.0 to 1.0)
 chatStyle:
+  category: 4
   default: im
+  help: 'The style of Edit Boxes for the ChatFrame. Valid values: "classic", "im"'
 checkAddonVersion:
+  category: 4
   default: '1'
+  help: Check interface addon version number
 ClientCastDebug:
+  category: 0
   default: '0'
+  help: debug client cast allocation
 ClientCastLimitDebug:
+  category: 0
   default: '100'
+  help: Limits the maximum allowed initiated casts in progress.
 ClientMessageEventLog:
+  category: 5
   default: '0'
 ClientSettings_AFTERMATH_BY_API_MASK:
+  category: 5
   default: ''
+  help: ''
 ClientSettings_AFTERMATH_BY_GPU_CATEGORY:
+  category: 5
   default: ''
+  help: ''
 ClientSettings_ASYNC_COMPUTE_BY_API_MASK:
+  category: 5
   default: ''
+  help: ''
 ClientSettings_ASYNC_COMPUTE_BY_GPU_CATEGORY:
+  category: 5
   default: ''
+  help: ''
 ClientSettings_ClusteredShading:
+  category: 5
   default: ''
+  help: ''
 ClientSettings_CMAA2:
+  category: 5
   default: ''
+  help: ''
 ClientSettings_CMD_LIST_MT_BY_API_MASK:
+  category: 5
   default: ''
+  help: ''
 ClientSettings_CMD_LIST_MT_BY_GPU_CATEGORY:
+  category: 5
   default: ''
+  help: ''
 ClientSettings_COPY_QUEUE_BY_API_MASK:
+  category: 5
   default: ''
+  help: ''
 ClientSettings_COPY_QUEUE_BY_GPU_CATEGORY:
+  category: 5
   default: ''
+  help: ''
 ClientSettings_CTexAsyncCreate:
+  category: 5
   default: ''
+  help: ''
 ClientSettings_FSR:
+  category: 5
   default: ''
+  help: ''
 ClientSettings_HIGH_MEM_FEATURES_BY_API_MASK:
+  category: 5
   default: ''
+  help: ''
 ClientSettings_HIGH_MEM_FEATURES_BY_GPU_CATEGORY:
+  category: 5
   default: ''
+  help: ''
 ClientSettings_LowLatency:
+  category: 5
   default: ''
+  help: ''
 ClientSettings_LowVramActions:
+  category: 5
   default: ''
+  help: ''
 ClientSettings_MemoryAllocationTraces:
+  category: 5
   default: ''
+  help: ''
 ClientSettings_MSAA:
+  category: 5
   default: ''
+  help: ''
 ClientSettings_NeedsGxRestart:
+  category: 5
   default: ''
+  help: ''
 ClientSettings_OPT_FEATURES_BY_API_MASK:
+  category: 5
   default: ''
+  help: ''
 ClientSettings_OPT_FEATURES_BY_GPU_CATEGORY:
+  category: 5
   default: ''
+  help: ''
 ClientSettings_RAY_TRACING_BY_API_MASK:
+  category: 5
   default: ''
+  help: ''
 ClientSettings_RAY_TRACING_BY_GPU_CATEGORY:
+  category: 5
   default: ''
+  help: ''
 ClientSettings_RTShadows:
+  category: 5
   default: ''
+  help: ''
 ClientSettings_SHADER_MT_BY_API_MASK:
+  category: 5
   default: ''
+  help: ''
 ClientSettings_SHADER_MT_BY_GPU_CATEGORY:
+  category: 5
   default: ''
+  help: ''
 ClientSettings_SM6_BY_API_MASK:
+  category: 5
   default: ''
+  help: ''
 ClientSettings_SM6_BY_GPU_CATEGORY:
+  category: 5
   default: ''
+  help: ''
 ClientSettings_SpellClutter:
+  category: 5
   default: ''
+  help: ''
 ClientSettings_VolumeFog:
+  category: 5
   default: ''
+  help: ''
 ClientSettings_WORK_OPTIMS_BY_API_MASK:
+  category: 5
   default: ''
+  help: ''
 ClientSettings_WORK_OPTIMS_BY_GPU_CATEGORY:
+  category: 5
   default: ''
+  help: ''
 ClipCursor:
+  category: 5
   default: '0'
+  help: Lock the cursor to the game window
 cloakFixEnabled:
+  category: 5
   default: '1'
 closedExtraAbiltyTutorials:
+  category: 4
   default: ''
+  help: Bitfield for which extra ability tutorials have been acknowledged by the user
 closedInfoFrames:
+  category: 4
   default: ''
+  help: Bitfield for which help frames have been acknowledged by the user
 closedInfoFramesAccountWide:
+  category: 4
   default: ''
+  help: Bitfield for which help frames have been acknowledged by the user (account-wide)
 closedRemixArtifactTutorialFrames:
+  category: 4
   default: '0'
+  help: Tutorial bitfield for which Remix Artifacts have been shown so far
 clubFinderCacheExpiry:
+  category: 4
   default: '1000'
+  help: Value in (MS) for time to expire the cache.
 clubFinderCachePendingExpiry:
+  category: 4
   default: '5000'
+  help: Value in (MS) for time to expire the cache.
 clubFinderPlayerLanguageSettings:
+  category: 4
   default: '0'
+  help: Bit field of Looking for club/guild player language settings
 clubFinderPlayerSettings:
+  category: 4
   default: '1'
+  help: Bit field of Looking for guild player settings
 clusteredShading:
+  category: 5
   default: '1'
+  help: ''
 CMAA2ExtraSharpness:
+  category: 1
   default: '0'
+  help: Set to 1 to preserve even more text and shape clarity at the expense of less
+    AA
 CMAA2HalfFloat:
+  category: 1
   default: '1'
+  help: '0: 32-bit Float. 1: 16-bit Float.'
 CMAA2Quality:
+  category: 1
   default: '3'
+  help: CMAA2 Quality Level. 0 - LOW, 1 - MEDIUM, 2 - HIGH, 3 - ULTRA
 collapsedCurrencyCategoryDefaults:
+  category: 4
   default: '0'
+  help: Stores the IDs of currency categories that should be collapsed by default
+    in the Token UI
 collapsedReputationHeaderDefaults:
+  category: 4
   default: ''
+  help: Stores the IDs of headers that should be collapsed by default in the Reputation
+    Panel
 collapseExpandBuffs:
+  category: 4
   default: '1'
+  help: Enables a button to collapse and hide long duration buffs.
 Collision:
+  category: 5
   default: '0'
 colorblindMode:
+  category: 4
   default: '0'
+  help: Enables colorblind accessibility features in the game
 colorblindSimulator:
+  category: 1
   default: '0'
+  help: Type of color blindness
 colorblindWeaknessFactor:
+  category: 1
   default: '0.5'
+  help: Amount of sensitivity. e.g. Protanope (red-weakness) 0.0 = not colorblind,
+    1.0 = full weakness(Protanopia), 0.5 = mid weakness(Protanomaly)
 colorChatNamesByClass:
+  category: 4
   default: '0'
+  help: If enabled, the name of a player speaking in chat will be colored according
+    to his class.
 combatLogRetentionTime:
+  category: 4
   default: '300'
+  help: The maximum duration in seconds to retain combat log entries
 combatLogUniqueFilename:
+  category: 4
   default: '1'
+  help: Write combat log file with a timestamped name per client launch
 combatWarningsEnabled:
+  category: 4
   default: '1'
+  help: If set, enables combat warning UI functionality such as the boss timeline
+    or warnings displays
 combinedBags:
+  category: 4
   default: '0'
+  help: Use combined bag frame for all bags
 comboPointLocation:
+  category: 4
   default: '2'
+  help: Location of combo points in UI. 1=target, 2=self
 commentatorLossOfControlIconUnitFrame:
+  category: 4
   default: '1'
+  help: '0: Off, 1: On.'
 commentatorLossOfControlTextNameplate:
+  category: 4
   default: '0'
+  help: '0: Off, 1: On.'
 commentatorLossOfControlTextUnitFrame:
+  category: 4
   default: '0'
+  help: '0: Off, 1: On.'
 communitiesShowOffline:
+  category: 4
   default: '1'
+  help: Show offline community members in the communities frame roster
 componentCompress:
+  category: 1
   default: '1'
+  help: Character component texture compression
 componentEmissive:
+  category: 1
   default: '1'
+  help: Character component unlit/emissive
 componentSpecular:
+  category: 1
   default: '1'
+  help: Character component specular highlights
 componentTexCacheSize:
+  category: 1
   default: '32'
+  help: Character component texture cache size (in MB)
 componentTexLoadLimit:
+  category: 1
   default: '16'
+  help: Character component texture loading limit per frame
 componentTextureLevel:
+  category: 5
   default: '0'
+  help: ''
 componentThread:
+  category: 1
   default: '1'
+  help: Multi thread character component processing
 ConsoleKey:
+  category: 2
   default: '`'
+  help: Set key that opens the console
 consoleShowDebugMessages:
+  category: 0
   default: '0'
+  help: Controls if log messages with Debug priority are displayed to console.
 consoleShowSpamMessages:
+  category: 0
   default: '0'
+  help: Controls if log messages with Spam priority are displayed to console.
 contentTrackingFilter:
+  category: 4
   default: '1'
+  help: If enabled, tracked items will display on the world map.
 ContentTuning:
+  category: 5
   default: '0'
 Contrast:
+  category: 1
   default: '50.000000'
+  help: 'Contrast adjustment. Range: [0 - 100]'
 cooldownViewerEnabled:
+  category: 4
   default: '0'
+  help: If true, show the cooldown viewer UI.
 cooldownViewerShowUnlearned:
+  category: 4
   default: '1'
+  help: In the cooldown viewer settings UI, determines whether or not to show unlearned
+    cooldowns
 countdownForCooldowns:
+  category: 4
   default: '0'
+  help: Whether to use number countdown instead of radial swipe for action button
+    cooldowns or not.
 covenantMissionTutorial:
+  category: 4
   default: '0'
+  help: Stores information about which covenant mission/adventures tutorials the player
+    has seen
 craftingOrdersOnlyPreferredArmorCollectable:
+  category: 4
   default: '0'
+  help: Determines if crafting orders can treat armor that doesn't match the players
+    best/preferred armor type as collectable
 currencyCategoriesCollapsed:
+  category: 4
   default: '0'
+  help: Internal CVar for tracking collapsed currency categories.
 currentGameMode:
+  category: 4
   default: '-1'
+  help: The record ID of the current realm's GameMode. -1 means none, which may happen
+    before connecting to a realm. 0 means the executable's standard game mode.
 CursorCenteredYPos:
+  category: 5
   default: '0.6'
+  help: 0-1 vertical position of centered cursor/targeting (0 at bottom)
 CursorFreelookCentering:
+  category: 5
   default: '0'
+  help: Center the cursor when using Mouse freelook
 CursorFreelookStartDelta:
+  category: 5
   default: '0.001'
+  help: Fraction of the screen the cursor must move to start freelook after mouse
+    button goes down
 cursorSizePreferred:
+  category: 1
   default: '-1'
+  help: 'Size of cursor: -1=determine based on system/monitor dpi, 0=32x32, 1=48x48,
+    2=64x64, 3=96x96, 4=128x128'
 CursorStickyCentering:
+  category: 5
   default: '0'
+  help: Make the centered position stick after freelook; Don't restore previous cursor
+    position
 CustomDesignEventLog:
+  category: 5
   default: '0'
 CustomWindowEventLog:
+  category: 5
   default: '0'
 daltonize:
+  category: 1
   default: '1'
+  help: Attempt to correct for color blindness (set colorblindSimulator to type of
+    colorblindness)
 DamageCalculator:
+  category: 5
   default: '0'
 damageMeterEnabled:
+  category: 4
   default: '0'
+  help: If true, show the damage meter UI.
 damageMeterResetOnNewInstance:
+  category: 4
   default: '0'
+  help: If true, reset the damage meter any time the player enters a new instance.
 dangerousShipyardMissionWarningAlreadyShown:
+  category: 4
   default: '0'
+  help: Boolean indicating whether the shipyard's dangerous mission warning has been
+    shown
+debugLog0:
+  category: 5
+  help: ''
+debugLog1:
+  category: 5
+  help: ''
 DebugTorsoTwist:
+  category: 0
   default: '0'
+  help: 'Debug visualization for Torso Twist: 1 = Player, 2 = Target, 3 = All'
 DeprecatedWarningThrottle:
+  category: 5
   default: '0'
+  help: Time since last warning. A value of "1" will disable this message
 DepthBasedOpacity:
+  category: 5
   default: '1'
+  help: ''
 deselectOnClick:
+  category: 4
   default: '0'
+  help: Clear the target when clicking on terrain
 developerLog:
+  category: 0
   default: '0'
+  help: 'Enables Developer Log - 0: Disabled (default), 1: Enabled.'
 developerLogFilterDebug:
+  category: 0
   default: '0'
+  help: 'Show Debug messages in Developer Log - 0: Disabled (default), 1: Enabled.'
 developerLogFilterError:
+  category: 0
   default: '1'
+  help: 'Show Error messages in Developer Log - 0: Disabled, 1: Enabled (default).'
 developerLogFilterFatal:
+  category: 0
   default: '1'
+  help: 'Show Fatal messages in Developer Log - 0: Disabled, 1: Enabled (default).'
 developerLogFilterNormal:
+  category: 0
   default: '1'
+  help: 'Show Normal messages in Developer Log - 0: Disabled, 1: Enabled (default).'
 developerLogFilterSpam:
+  category: 0
   default: '0'
+  help: 'Show Spam messages in Developer Log - 0: Disabled (default), 1: Enabled.'
 developerLogFilterWarning:
+  category: 0
   default: '1'
+  help: 'Show Warning messages in Developer Log - 0: Disabled, 1: Enabled (default).'
 developerLogWriteToFile:
+  category: 0
   default: '1'
+  help: 'Enables Developer Log Write to File - 0: Disabled, 1: Enabled (default).'
 digSites:
+  category: 4
   default: '1'
+  help: If enabled, the archaeological dig site system will be used.
 DisableAdvancedFlyingFullScreenEffects:
+  category: 4
   default: '0'
+  help: Disable the advanced flying full screen effects
 DisableAdvancedFlyingVelocityVFX:
+  category: 4
   default: '0'
+  help: Disable the advanced flying velocity VFX
 disableAELooting:
+  category: 4
   default: '0'
+  help: Disable AoE Looting
 disableAutoRealmSelect:
+  category: 5
   default: '0'
+  help: Disable automatically selecting a realm on login
 disableServerNagle:
+  category: 6
   default: '1'
+  help: Disable server-side nagle algorithm
 disableSuggestedLevelActivityFilter:
+  category: 4
   default: '0'
+  help: Whether to disable filtering the activity list by the user's level.
 disableUILoadErrorDialog:
+  category: 0
   default: '0'
+  help: Disables showing an os dialog on critical UI error startup
 disableUserAddonsByDefault:
+  category: 4
   default: '0'
+  help: Setting this will result in newly installed addons to be disabled by default
 discordClientEnabled:
+  category: 0
   default: '1'
+  help: Enable the discord client integration
 discordDisplayName:
+  category: 4
   default: '0'
+  help: The name to show for text from you in-game from Discord
 displaySpellActivationOverlays:
+  category: 4
   default: '1'
+  help: Whether to display Spell Activation Overlays (a.k.a. Spell Alerts)
 displayWorldPVPObjectives:
+  category: 4
   default: '1'
+  help: Whether to show world PvP objectives
 dnMTUpdate:
+  category: 1
   default: '1'
+  help: Update Daynight in parralel.
 doNotFlashLowHealthWarning:
+  category: 4
   default: '0'
+  help: Do not flash your screen red when you are low on health.
 doNotShowTWFraudWarning:
+  category: 4
   default: '0'
+  help: If set, the TW Fraud Warning dialog will not show on startup
 dontShowEquipmentSetsOnItems:
+  category: 4
   default: '0'
+  help: Don't show which equipment sets an item is associated with
 doodadLodScale:
+  category: 5
   default: '100'
+  help: ''
 dragonRidingRacesFilter:
+  category: 4
   default: '0'
+  help: If enabled, dragonriding races will display on the world map at zone level.
 dragonRidingRacesFilterWQ:
+  category: 4
   default: '1'
+  help: If enabled, dragonriding races WQ will display on the world map at zone level.
 DriveDynamicFOVEnabled:
+  category: 4
   default: '1'
+  help: Enables adjustment of camera field of view based on driving speed
 DriverVersionCheck:
+  category: 1
   default: '1'
+  help: Set 0 to disable driver version based workarounds
 DriveSwapReverseTurnDirection:
+  category: 4
   default: '0'
+  help: Boolean indicating if we should swap turn directions when driving in reverse.
+    By default, Drive uses the opposite turn direction when moving backwards.
 dynamicLod:
+  category: 1
   default: '1'
+  help: Dynamic level of detail adjustment
 DynamicRenderScale:
+  category: 1
   default: '0'
+  help: 'Lowers render scale if GPU bound to hit Target FPS. Note this feature is
+    in BETA. Known issues: May cause hitching. May behave poorly with vsync on.'
 DynamicRenderScaleMin:
+  category: 1
   default: '0.333333'
+  help: Lowest render scale DynamicRenderScale can use
 EJDungeonDifficulty:
+  category: 4
   default: '0'
+  help: Stores the last dungeon difficulty viewed in the encounter journal
 EJLootClass:
+  category: 4
   default: '-1'
+  help: Stores the last class that loot was filtered by in the encounter journal
 EJLootSpec:
+  category: 4
   default: '0'
+  help: Stores the last spec that loot was filtered by in the encounter journal
 EJRaidDifficulty:
+  category: 4
   default: '0'
+  help: Stores the last raid difficulty viewed in the encounter journal
 EJSelectedTier:
+  category: 4
   default: '0'
+  help: Stores the last manually selected journal tier in the encounter journal
 EmitterCombatRange:
+  category: 4
   default: '900.000000'
+  help: Range to stop shoulder/weapon emissions during combat
 emphasizeMySpellEffects:
+  category: 4
   default: '1'
+  help: Whether other player's spell impacts are toned down or not.
 EmpowerMinHoldStagePercent:
+  category: 4
   default: '1.000000'
+  help: Sets a percentage of the first empower stage [0.0,1.0]. Before this point,
+    the spell will be auto-held. After it, releases will be accepted.
 empowerTapControls:
+  category: 4
   default: '0'
+  help: By default, Empower spells use a press-hold-release control scheme. Set this
+    CVar to use a tap-tap scheme instead.
 EmpowerTapControlsReleaseThreshold:
+  category: 4
   default: '300'
+  help: Sets the time in milliseconds after which release/re-hold requests will be
+    registered for press-and-tap empowers. Begins when the cast is sent from the client.
 enableAssetTracking:
+  category: 4
   default: '1'
+  help: Whether to track which assets are least recently used
 enableBGDL:
+  category: 6
   default: '1'
+  help: Background Download (on async net thread) Enabled
 EnableBlinkApplicationIcon:
+  category: 4
   default: '1'
+  help: Allows the client to blink the application icon in the taskbar in Windows,
+    or bounce the application icon in the dock on macOS
 enableConnectToPhotoSharing:
+  category: 4
   default: '0'
+  help: Enables the photo sharing connection feature.
 enableFloatingCombatText:
+  category: 4
   default: '0'
+  help: Whether to show floating combat text for the player
 enableMouseoverCast:
+  category: 4
   default: '0'
+  help: Whether mouseover casting is enabled (optionally with a modifier key).
 enableMouseSpeed:
+  category: 4
   default: '0'
+  help: Enables setting a custom mouse sensitivity to override the setting from the
+    operating system.
 enableMovePad:
+  category: 4
   default: '0'
+  help: Enables the MovePad accessibility feature in the game
 enableMultiActionBars:
+  category: 4
   default: '0'
+  help: Bits for which additional action bars to show
 enablePetBattleFloatingCombatText_v2:
+  category: 4
   default: '1'
+  help: Whether to show floating combat text for pet battles
 enablePings:
+  category: 4
   default: '1'
+  help: Enables ping system.
 enablePVPNotifyAFK:
+  category: 4
   default: '1'
+  help: The ability to shutdown the AFK notification system
 enableQuestCacheLogging:
+  category: 4
   default: '1'
+  help: Enable logging for requests for the QuestCache
 enableRuneSpentAnim:
+  category: 5
   default: '1'
+  help: Adjust the time the rune fades after it flashes when you spend it
 enableSourceLocationLookup:
+  category: 0
   default: '1'
+  help: Allows addon file name lookup for debugging help
 enableWowMouse:
+  category: 5
   default: '0'
+  help: Enable Steelseries World of Warcraft Mouse
 encounterTimelineEnabled:
+  category: 4
   default: '1'
+  help: If true, enable the encounter timeline UI.
 encounterTimelineHideForOtherRoles:
+  category: 4
   default: '0'
+  help: If true, hide encounter timeline events that are relevant for roles other
+    than the player's own group role assignment. Events with no assigned role will
+    always be shown.
 encounterTimelineHideLongCountdowns:
+  category: 4
   default: '0'
+  help: If true, hide all long countdowns from the timeline.
 encounterTimelineHideQueuedCountdowns:
+  category: 4
   default: '0'
+  help: If true, hide all queued countdowns from the timeline.
 encounterTimelineHighlightDuration:
+  category: 4
   default: '5000'
+  help: Milliseconds at which events will be signaled to trigger a highlight glow
+    animation.
 encounterTimelineIconographyEnabled:
+  category: 4
   default: '1'
+  help: If true, enable the display of spell support iconography such as role and
+    effect type indicators.
 encounterTimelineIconographyHiddenMask:
+  category: 4
   default: "\x01"
+  help: Bitmask of support iconography to be disabled for timeline events.
 encounterTimelineShowSequenceCount:
+  category: 4
   default: '0'
+  help: If true, display the spell sequence count in encounter timeline spell names
 encounterWarningsDefaultMessageDuration:
+  category: 4
   default: '3500'
+  help: Default duration (in milliseconds) applied to encounter warning text messages
 encounterWarningsEnabled:
+  category: 4
   default: '1'
+  help: If true, enable the display of encounter warning messages
 encounterWarningsHideIfNotTargetingPlayer:
+  category: 4
   default: '0'
+  help: If true, hide messages that aren't actively targeting the player. Messages
+    that have no explicit target will always be shown
 encounterWarningsLevel:
+  category: 4
   default: '0'
+  help: Minimum level of encounter warning severities to be shown
 endeavorInitiativesLastPointsMap:
+  category: 4
   default: ''
+  help: Last seen number of endeavor points in the progress bar per initiative ID
 engineSurvey:
+  category: 4
   default: '0'
+  help: Engine Survey Index
 engineSurveyPatch:
+  category: 4
   default: '0'
+  help: Engine Survey Patch
 entityLodDist:
+  category: 5
   default: '10'
+  help: ''
 entityLodOffset:
+  category: 1
   default: '10'
+  help: Entity level of detail offset
 entityShadowFadeScale:
+  category: 5
   default: '50'
+  help: ''
 equipmentManager:
+  category: 4
   default: '1'
+  help: Enables the equipment management UI
 ErrorFilter:
+  category: 0
   default: all
 ErrorLevelMax:
+  category: 0
   default: '3'
 ErrorLevelMin:
+  category: 0
   default: '2'
 Errors:
+  category: 0
   default: '0'
 eventReminders:
+  category: 4
   default: ''
+  help: Internal cvar for saving event reminders
 eventSchedulerLastUpdate:
+  category: 4
   default: '0'
+  help: Stores the last time the event scheduler UI was update, for anim purposes
 excludedCensorSources:
+  category: 4
   default: '1'
+  help: Inappropriate message source exemptions. 0 = Exempt nobody, 1 = Exempt Friends,
+    3 = Exempt Friends and Guildmates, 255 = Exempt All
 ExclusiveWindowMode:
+  category: 5
   default: '0'
+  help: Accessibility option for preventing the game window from losing focus
 expandBagBar:
+  category: 4
   default: '1'
+  help: Expand the main menu bar that shows the bags so you can see all equipped bags
+    instead of just the backpack and reagent bag
 expandUpgradePanel:
+  category: 4
   default: '1'
+  help: Controls whether the upgrade panel is expanded or collapsed.
 expandWarbandCharacterList:
+  category: 4
   default: '1'
+  help: Stores if the warband character list is expanded or collapsed.
 externalDefensivesEnabled:
+  category: 4
   default: '0'
+  help: If true, show the external defensives buff tracker UI.
 farclip:
+  category: 5
   default: '1000'
+  help: ''
 ffxAntiAliasingMode:
+  category: 1
   default: '4'
+  help: Anti Aliasing Mode
 ffxDeath:
+  category: 1
   default: '1'
+  help: full screen death desat effect
 ffxGlow:
+  category: 1
   default: '1'
+  help: full screen glow effect
 ffxLingeringVenari:
+  category: 1
   default: '1'
+  help: full screen Lingering Cloak of Ven'ari effect
 ffxNether:
+  category: 1
   default: '1'
+  help: full screen nether effect
 ffxVenari:
+  category: 1
   default: '1'
+  help: full screen Cloak of Ven'ari effect
 findYourselfAnywhere:
+  category: 4
   default: '0'
+  help: Always Highlight your character
 findYourselfAnywhereOnlyInCombat:
+  category: 4
   default: '0'
+  help: Highlight your character only when in combat
 findYourselfInBG:
+  category: 4
   default: '1'
+  help: Always Highlight your character in Battlegrounds
 findYourselfInBGOnlyInCombat:
+  category: 4
   default: '0'
+  help: Highlight your character in Battlegrounds only when in combat
 findYourselfInRaid:
+  category: 4
   default: '1'
+  help: Always Highlight your character in Raids
 findYourselfInRaidOnlyInCombat:
+  category: 4
   default: '1'
+  help: Highlight your character in Raids only when in combat
 findYourselfMode:
+  category: 4
   default: '0'
+  help: Highlight your character. 0 = circle, 1 = circle & outline, 2 = outline
 findYourselfModeCircle:
+  category: 4
   default: '0'
+  help: Highlight your character with a circle.
 findYourselfModeIcon:
+  category: 4
   default: '0'
+  help: Highlight your character with an icon.
 findYourselfModeOutline:
+  category: 4
   default: '0'
+  help: Highlight your character with an outline.
 flaggedTutorials:
+  category: 4
   default: ''
+  help: Internal cvar for saving completed tutorials in order
 flashErrorMessageRepeats:
+  category: 4
   default: '1'
+  help: Flashes the center screen red error text if the same message is fired.
 flightAngleLookAhead:
+  category: 4
   default: '0'
+  help: Enables more dynamic attitude adjustments while flying
 floatingCombatTextAuraFade_v2:
+  category: 4
   default: '0'
+floatingCombatTextAuras:
+  category: 5
+  help: ''
 floatingCombatTextAuras_v2:
+  category: 4
   default: '0'
 floatingCombatTextCombatDamage_v2:
+  category: 4
   default: '1'
+  help: Display damage numbers over hostile creatures when damaged
 floatingCombatTextCombatDamageAllAutos_v2:
+  category: 4
   default: '1'
+  help: Show all auto-attack numbers, rather than hiding non-event numbers
 floatingCombatTextCombatDamageDirectionalOffset_v2:
+  category: 4
   default: '1.000000'
+  help: Amount to offset directional damage numbers when they start
 floatingCombatTextCombatDamageDirectionalScale_v2:
+  category: 4
   default: '1.000000'
+  help: Directional damage numbers movement scale (0 = no directional numbers)
 floatingCombatTextCombatHealing_v2:
+  category: 4
   default: '1'
+  help: Display amount of healing you did to the target
 floatingCombatTextCombatHealingAbsorbSelf_v2:
+  category: 4
   default: '1'
+  help: Display amount of shield added to yourself.
 floatingCombatTextCombatHealingAbsorbTarget_v2:
+  category: 4
   default: '1'
+  help: Display amount of shield added to the target.
 floatingCombatTextCombatLogPeriodicSpells_v2:
+  category: 4
   default: '1'
+  help: Display damage caused by periodic effects
+floatingCombatTextCombatState:
+  category: 5
+  help: ''
 floatingCombatTextCombatState_v2:
+  category: 4
   default: '0'
+floatingCombatTextComboPoints:
+  category: 5
+  help: ''
 floatingCombatTextComboPoints_v2:
+  category: 4
   default: '0'
+floatingCombatTextDamageReduction:
+  category: 5
+  help: ''
 floatingCombatTextDamageReduction_v2:
+  category: 4
   default: '0'
+floatingCombatTextDodgeParryMiss:
+  category: 5
+  help: ''
 floatingCombatTextDodgeParryMiss_v2:
+  category: 4
   default: '0'
+floatingCombatTextEnergyGains:
+  category: 5
+  help: ''
 floatingCombatTextEnergyGains_v2:
+  category: 4
   default: '0'
 floatingCombatTextFloatMode_v2:
+  category: 4
   default: '1'
+  help: The combat text float mode for the player
 floatingCombatTextFriendlyHealers_v2:
+  category: 4
   default: '0'
+floatingCombatTextHonorGains:
+  category: 5
+  help: ''
 floatingCombatTextHonorGains_v2:
+  category: 4
   default: '0'
 floatingCombatTextLowManaHealth_v2:
+  category: 4
   default: '1'
 floatingCombatTextPeriodicEnergyGains_v2:
+  category: 4
   default: '0'
 floatingCombatTextPetMeleeDamage_v2:
+  category: 4
   default: '1'
+  help: Display pet melee damage in the world
 floatingCombatTextPetSpellDamage_v2:
+  category: 4
   default: '1'
+  help: Display pet spell damage in the world
 floatingCombatTextReactives_v2:
+  category: 4
   default: '1'
+floatingCombatTextRepChanges:
+  category: 5
+  help: ''
 floatingCombatTextRepChanges_v2:
+  category: 4
   default: '0'
 FootstepSounds:
+  category: 7
   default: '1'
+  help: play footstep sounds
 forceClusteredShading:
+  category: 1
   default: '0'
+  help: Force clustered forward lighting for all transparent objects
 forceEnglishNames:
+  category: 5
   default: '0'
 ForceGenerateSlug:
+  category: 0
   default: '0'
+  help: Generate .slug files for all loaded fonts before they are actually used rather
+    than deferred load.
 forceLODCheck:
+  category: 1
   default: '0'
+  help: If enabled, we will skip checking DBC for LOD count and every m2 will scan
+    the folder for skin profiles
 ForceResolutionDefaultToMaxSize:
+  category: 5
   default: '0'
+  help: Force default resolution to the maximum supported size rather than the auto-detected
+    size
 FrameBufferCacheForceNoHeaps:
+  category: 1
   default: '0'
+  help: Disable use of texture heaps and force the fallback path
 frameScriptFunctionInheritanceWarningMode:
+  category: 0
   default: '0'
+  help: Displays Lua errors about script handlers that are using inheritance improperly
+    (might add more modes in the future, 0 is off, 1 is on)
 friendInvitesCollapsed:
+  category: 4
   default: '0'
+  help: Whether friend invites are hidden in the friends list
 fstack_enabled:
+  category: 0
   default: '0'
+  help: '0: Hide Framestack Tooltip (Default), 1: Show Framestack Tooltip.'
 fstack_preferParentKeys:
+  category: 0
   default: '0'
+  help: '0: Prefer Global Names, 1: Prefer ParentKeys (Default).'
 fstack_showanchors:
+  category: 0
   default: '1'
+  help: '0: Hide Anchors, 1: Show Anchors (Default).'
 fstack_showhidden:
+  category: 0
   default: '0'
+  help: '0: Hide Hidden (Default), 1: Show Hidden.'
 fstack_showhighlight:
+  category: 0
   default: '1'
+  help: '0: Hide Highlight, 1: Show Highlight (Default).'
 fstack_showRaisedFrameLevels:
+  category: 0
   default: '0'
+  help: '0: Show normal frame levels (default), 1: Show raised frame levels instead'
 fstack_showregions:
+  category: 0
   default: '1'
+  help: '0: Hide Regions, 1: Show Regions (Default).'
+fullSizeFocusFrame:
+  category: 5
+  help: ''
 GameDataVisualizer:
+  category: 5
   default: '0'
 GamePadAnalogMovement:
+  category: 5
   default: '1'
+  help: Enable analog movement in any direction, rather than just the 8 cardinal directions
 GamePadCameraLookMaxPitch:
+  category: 5
   default: '0'
+  help: Max pitch 'Look' stick can adjust camera angle
 GamePadCameraLookMaxYaw:
+  category: 5
   default: '0'
+  help: Max yaw 'Look' stick can adjust camera angle
 GamePadCameraPitchSpeed:
+  category: 5
   default: '1'
+  help: Pitch speed of GamePad camera moving up/down
 GamePadCameraYawSpeed:
+  category: 5
   default: '1'
+  help: Yaw speed of GamePad camera turning left/right
 GamePadCursorAutoDisableJump:
+  category: 5
   default: '1'
+  help: GamePad cursor control will auto-disable when you jump
 GamePadCursorAutoDisableSticks:
+  category: 5
   default: '2'
+  help: GamePad cursor control will auto-disable on stick input (0=none, 1=movement,
+    2=movement+cursor)
 GamePadCursorAutoEnable:
+  category: 5
   default: '1'
+  help: Auto enable GamePad cursor control when opening UIs that may need it
 GamePadCursorCenteredEmulation:
+  category: 5
   default: '1'
+  help: When cursor is centered for GamePad movement, also emulate mouse clicks
 GamePadCursorCentering:
+  category: 5
   default: '0'
+  help: When using GamePad, center the cursor
 GamePadCursorForTargeting:
+  category: 5
   default: '1'
+  help: Enable GamePad controlled cursor for spell targeting (1=enable, 2=start-at-target)
 GamePadCursorLeftClick:
+  category: 5
   default: PADRTRIGGER
+  help: GamePad button that should emulate mouse Left Click while controlling the
+    mouse cursor
 GamePadCursorOnLogin:
+  category: 5
   default: '1'
+  help: Enable GamePad cursor control on login and character screens
 GamePadCursorPushCamera:
+  category: 5
   default: '1'
+  help: Rate for GamePad controlled cursor to push/turn camera when at edge of window
 GamePadCursorRightClick:
+  category: 5
   default: PADRSHOULDER
+  help: GamePad button that should emulate mouse Right Click while controlling the
+    mouse cursor
 GamePadCursorSpeedAccel:
+  category: 5
   default: '2'
+  help: Acceleration of GamePad cursor per second as it continues to move
 GamePadCursorSpeedMax:
+  category: 5
   default: '1'
+  help: Top speed of GamePad cursor movement
 GamePadCursorSpeedStart:
+  category: 5
   default: '0.1'
+  help: Speed of GamePad cursor when it starts moving
 GamePadEmulateAlt:
+  category: 5
   default: none
+  help: GamePad button that should emulate the Alt key
 GamePadEmulateCtrl:
+  category: 5
   default: PADLSHOULDER
+  help: GamePad button that should emulate the Ctrl key
 GamePadEmulateShift:
+  category: 5
   default: PADLTRIGGER
+  help: GamePad button that should emulate the Shift key
 GamePadEmulateTapWindowMs:
+  category: 5
   default: '350'
+  help: GamePad buttons emulating Ctrl/Alt/Shift will be 'tapped' if released withing
+    this time in MS
 GamePadEnable:
+  category: 5
   default: '0'
+  help: Whether GamePad input should be enabled
 GamePadFaceMovementMaxAngle:
+  category: 5
   default: '0'
+  help: Max movement to camera angle to face movement direction instead of camera
+    direction. 0 = always, 180 = never (115 allows using strafe with quick turn around)
 GamePadFaceMovementMaxAngleCombat:
+  category: 5
   default: '180'
+  help: Max movement to camera angle to face movement direction instead of camera
+    direction, in combat. 0 = always, 180 = never (115 allows using strafe with quick
+    turn around)
 GamePadFactionColor:
+  category: 5
   default: '1'
+  help: Enable setting GamePad's led color to match current faction
 GamePadOverlapMouseMs:
+  category: 5
   default: '2000'
+  help: Duration after gamepad+mouse input to switch to just one or the other.
 GamePadRunThreshold:
+  category: 5
   default: '0.5'
+  help: 0-1 Amount of stick movement before character transitions from walk to run
 GamePadSingleActiveID:
+  category: 5
   default: '0'
+  help: ID of single GamePad device to use. 0 = Use all devices' combined input
 GamePadStickAxisButtons:
+  category: 5
   default: '0'
+  help: Enables virtual buttons for the GamePad stick cardinal directions
 GamePadTankTurnSpeed:
+  category: 5
   default: '0'
+  help: If non-zero, character turns like a tank from GamePad movement
 GamePadTouchCursorEnable:
+  category: 5
   default: '1'
+  help: Enable cursor control with GamePad's touch pad
 GamePadTurnWithCamera:
+  category: 5
   default: '1'
+  help: Turn character to match when camera facing is changed (1=in-combat, 2=always)
 GamePadVibrationStrength:
+  category: 5
   default: '1'
+  help: GamePad vibration effect strength
 GameplayContext:
+  category: 5
   default: '0'
 gameTip:
+  category: 5
   default: '0'
+  help: ''
 Gamma:
+  category: 1
   default: '1.000000'
+  help: 'Gamma correction. Range: [0.3 - 2.8]'
 garrisonCompleteTalent:
+  category: 4
   default: '0'
+  help: ''
 garrisonCompleteTalentType:
+  category: 4
   default: '0'
+  help: ''
 graphicsComputeEffects:
+  category: 5
   default: '1'
+  help: ''
 graphicsDepthEffects:
+  category: 5
   default: '1'
+  help: ''
 graphicsEnvironmentDetail:
+  category: 5
   default: '3'
+  help: ''
 graphicsGroundClutter:
+  category: 5
   default: '3'
+  help: ''
 graphicsLiquidDetail:
+  category: 5
   default: '1'
+  help: ''
 graphicsOutlineMode:
+  category: 5
   default: '0'
+  help: ''
 graphicsParticleDensity:
+  category: 5
   default: '2'
+  help: ''
 graphicsProjectedTextures:
+  category: 5
   default: '1'
+  help: ''
 graphicsQuality:
+  category: 5
   default: '3'
+  help: ''
 graphicsShadowQuality:
+  category: 5
   default: '1'
+  help: ''
 graphicsSpellDensity:
+  category: 5
   default: '3'
+  help: ''
 graphicsSSAO:
+  category: 5
   default: '1'
+  help: ''
 graphicsTextureResolution:
+  category: 5
   default: '1'
+  help: ''
 graphicsViewDistance:
+  category: 5
   default: '3'
+  help: ''
 groundEffectDensity:
+  category: 1
   default: '16'
+  help: Ground effect density
 groundEffectDist:
+  category: 5
   default: '70'
+  help: ''
 groundEffectFade:
+  category: 1
   default: '70'
+  help: Ground effect fade
 guildMemberNotify:
+  category: 4
   default: '1'
+  help: Whether to notify when guild members come online or go offline
 guildNewsFilter:
+  category: 4
   default: '0'
+  help: Stores the guild news filters
 guildRewardsCategory:
+  category: 4
   default: '0'
+  help: Show category of guild rewards
 guildRewardsUsable:
+  category: 4
   default: '0'
+  help: Show usable guild rewards only
+guildRosterView:
+  category: 5
+  help: ''
 guildShowOffline:
+  category: 4
   default: '1'
+  help: Show offline guild members in the guild UI
 GxAdapter:
+  category: 1
   default: ''
+  help: Set which GPU to use. See GxListGPUs for valid names (empty string to let
+    client choose)
 GxAFRDevicesCount:
+  category: 1
   default: '0'
+  help: Force to set number of AFR devices
 GxAllowCachelessShaderMode:
+  category: 5
   default: '0'
+  help: CPU memory saving mode, if supported by backend. When enabled, shaders are
+    fetched from disk as needed instead of being kept resident. This mode may slightly
+    increase the time objects take to appear the first time they are encountered.
+    Computers without solid state drives may want to disable this feature
 GxApi:
+  category: 5
   default: auto
+  help: graphics api
 GxCompatAllowSM6:
+  category: 5
   default: '1'
+  help: When disabled, DX12 will use Shader Model 5 shaders instead of Shader Model
+    6
 GxCompatAsyncComputeQueue:
+  category: 5
   default: '1'
+  help: Allows some compute work to run on a different GPU work queue
 GxCompatAsyncShaderCompilation:
+  category: 5
   default: '1'
+  help: Allows async resource shader loading. Disabling this may cause hitching
 GxCompatCommandListMultiThreading:
+  category: 5
   default: '1'
+  help: Allow multi-threaded rendering. Disabling this will significantly reduce framerate
 GxCompatCopyQueue:
+  category: 5
   default: '1'
+  help: Allows GPU upload work to run on a different GPU work queue
 GxCompatOptionalGpuFeatures:
+  category: 5
   default: '1'
+  help: When disabled, makes the engine act as if the GPU only supports the minimum
+    supported feature set
 GxCompatWorkSubmitOptimizations:
+  category: 5
   default: '1'
+  help: Allows GPU work submission on a secondary thread while the rest of the CPU
+    threads continue on to the next frame
 GxDebugBreakLevel:
+  category: 5
   default: '1'
+  help: ''
 GxDebugLevel:
+  category: 5
   default: '0'
+  help: ''
+GxDebugOmitAssertAllCheck:
+  category: 5
+  help: ''
 GxFullscreenResolution:
+  category: 5
   default: auto
+  help: resolution
 GxMaxFrameLatency:
+  category: 5
   default: '3'
+  help: maximum number of frames ahead of GPU the CPU can be
 gxMaximize:
+  category: 5
   default: '1'
+  help: ''
 GxMonitor:
+  category: 5
   default: '0'
+  help: Monitor index. 0 means use the primary monitor
 gxMTAlphaM2:
+  category: 1
   default: '1'
+  help: Render transparent M2 pass in parallel.
 gxMTAlphaPass:
+  category: 1
   default: '1'
+  help: Render Alpha Pass in parallel.
 gxMTBeginDraw:
+  category: 1
   default: '1'
+  help: Do BeginDraw multithreaded.
 gxMTDecals:
+  category: 1
   default: '0'
+  help: Sort and Render decal passes in parallel. Note enabling this currently will
+    cause visual artifacts in some cases.
 gxMTDisable:
+  category: 1
   default: '0'
+  help: Disable all render multithreading
 gxMTLightShafts:
+  category: 1
   default: '1'
+  help: Render light-shaft passes in parallel
 gxMTMisc:
+  category: 1
   default: '1'
+  help: Render miscelleous passes in parallel
 gxMTOpaqueM2:
+  category: 1
   default: '1'
+  help: Render opaque model pass in parallel.
 gxMTOpaqueM2NoReflect:
+  category: 1
   default: '1'
+  help: Render opaque model no reflection pass in parallel.
 gxMTOpaqueWMO:
+  category: 1
   default: '1'
+  help: Render opaque WMO in parallel.
 gxMTOutlines:
+  category: 1
   default: '1'
+  help: Render outline passes in parallel
 gxMTPrepass:
+  category: 1
   default: '1'
+  help: Render prepass in parallel.
 gxMTRefraction:
+  category: 1
   default: '1'
+  help: Render refraction pass in parallel
 gxMTShadow:
+  category: 1
   default: '1'
+  help: Render shadow bands in parallel.
 gxMTTerrain:
+  category: 1
   default: '1'
+  help: Render terrain in parallel.
 gxMTTriggerOnBeginDrawComplete:
+  category: 1
   default: '1'
+  help: Use Begin Draw Complete Trigger Mechanism
 gxMTVolFog:
+  category: 1
   default: '1'
+  help: Render volumetric fog in parallel
 GxNewResolution:
+  category: 5
   default: '0x0'
+  help: resolution to be set
 GxPrismEnabled:
+  category: 1
   default: '1'
+  help: '0: Prism backends Disabled. 1: Default Prism backends Enabled. 2: Experimental
+    Prism backends Enabled.'
 GxSlowShaderWarnThreshold:
+  category: 5
   default: '30000'
+  help: Max time (in milliseconds) the shader compile can take before warning via
+    a popup message
 GxWindowedResolution:
+  category: 5
   default: auto
+  help: ''
 hardcoreDeathAlertType:
+  category: 4
   default: '0'
 hardcoreDeathChatType:
+  category: 4
   default: '0'
 hardTrackedQuests:
+  category: 4
   default: ''
+  help: Internal cvar for saving user manually tracked quests in order
 hardTrackedWorldQuests:
+  category: 4
   default: ''
+  help: Internal cvar for saving user manually tracked world quests
 HardwareCursor:
+  category: 1
   default: '1'
+  help: If disabled, draws a software cursor (can be used to have cursor appear in
+    screenshots)
 HealHandler:
+  category: 5
   default: '0'
 heirloomCollectedFilters:
+  category: 4
   default: '0'
+  help: Bitfield for which collected filters are applied in the heirloom journal
 heirloomSourceFilters:
+  category: 4
   default: '0'
+  help: Bitfield for which source filters are applied in the heirloom journal
 hideFastLoginLoadingScreen:
+  category: 5
   default: '0'
+  help: ''
 hideRewardedEvents:
+  category: 4
   default: '0'
+  help: Stores whether to hide events whose rewards have been claimed
 highestUnlockedTieredEntranceTier:
+  category: 4
   default: ''
+  help: Serialized mapping using a PDE ID. Stores the highest unlocked difficulty
+    tier. Used to notify the player when they have higher difficulty tiers available.
 horizonClip:
+  category: 5
   default: '1600'
+  help: ''
 horizonStart:
+  category: 5
   default: '800'
+  help: ''
 HotfixEventLog:
+  category: 5
   default: '0'
 hotReloadModels:
+  category: 1
   default: '1'
+  help: Allow an active model to be reloaded when a new version is detected in the
+    bin folder.  If this is disabled, the model data will only be refreshed after
+    all game objects using the model are deleted
 houseExterior_Hide_Decor:
+  category: 4
   default: '1'
+  help: Whether or not to hide all decor on the plot while in Exterior Customization
 housingDecorFreePlaceEnabled:
+  category: 4
   default: '0'
+  help: Whether or not free placement in decor edit modes is enabled
 housingDecorGridSnapEnabled:
+  category: 4
   default: '0'
+  help: Whether or not snap-to-grid in decor edit modes is enabled
 housingDecorGridVisible:
+  category: 4
   default: '1'
+  help: Whether or not the grid in decor edit modes is visible
 housingDecorLightRadiusIndicatorsEnabled:
+  category: 4
   default: '1'
+  help: Whether or not the light radius indicators in decor edit modes are visible
 housingExpertGizmos_Scale_FrameOffset:
+  category: 10
   default: '0.500000'
+  help: Y Offset of scale frame from target
 housingExpertGizmos_Scale_Snap:
+  category: 10
   default: '0.100000'
+  help: Amount scale should snap (0.1 being 10%, 1 being 100%, etc)
 housingExpertGizmos_SnapOnHold:
+  category: 10
   default: '1'
+  help: 'true: Holding shift turns expert control snapping on, false: Holding shift
+    turns snapping off'
 housingLayout_Camera_DefaultDistance:
+  category: 10
   default: '50.000000'
+  help: Default height of the layout edit mode camera above the floor
 housingLayout_Camera_DragFriction:
+  category: 10
   default: '8.000000'
+  help: How quickly the camera loses drag momentum
 housingLayout_Camera_DragMomentum:
+  category: 10
   default: '0.300000'
+  help: How much momentum does the camera have after the user stops dragging
 housingLayout_Camera_MaxDistance:
+  category: 10
   default: '120.000000'
+  help: Maximum height of the layout edit mode camera above the floor
 housingLayout_Camera_MaxDistanceIncr:
+  category: 10
   default: '5.000000'
+  help: How much zoom in/out of the layout edit mode camera affects distance from
+    the floor
 housingLayout_Camera_MinDistance:
+  category: 10
   default: '30.000000'
+  help: Minimum height of the layout edit mode camera above the floor
 housingLayout_Camera_Smoothness:
+  category: 10
   default: '15.000000'
+  help: Smoothness factor of layout camera movement
 housingLayout_Camera_Speed:
+  category: 10
   default: '15.000000'
+  help: Units/second that the layout edit mode camera moves
 housingOtherDecorLightRadiusIndicatorType:
+  category: 4
   default: '1'
+  help: Choose how light radius indicator is shown for non-selected decor
 housingSelectedDecorLightRadiusIndicatorType:
+  category: 4
   default: '1'
+  help: Choose how light radius indicator is shown for selected decor
 housingStoragePanelCollapsed:
+  category: 4
   default: '0'
+  help: Whether the housing storage panel is collapsed
 housingStoragePanelHeight:
+  category: 4
   default: '615.000000'
+  help: The saved height of the housing storage panel
 housingStoragePanelWidth:
+  category: 4
   default: '530.000000'
+  help: The saved width of the housing storage panel
 housingTutorialsEnabled:
+  category: 4
   default: '1'
+  help: Housing tutorials enabled or disabled
 hwDetect:
+  category: 5
   default: '1'
+  help: ''
 imageSharingPublishCooldown:
+  category: 4
   default: '5000'
+  help: Amount of time between allowed photo publish attempts (in milliseconds).
 ImpactModelCollisionMelee:
+  category: 4
   default: '1'
+  help: Enable model collision checks for melee impact effects
 ImpactModelCollisionMissile:
+  category: 4
   default: '1'
+  help: Enable model collision checks for missile impact effects
 ImpactModelCollisionRanged:
+  category: 4
   default: '1'
+  help: Enable model collision checks for ranged attack impact effects
 incompleteQuestPriorityThresholdDelta:
+  category: 0
   default: '135'
 initialRealmListTimeout:
+  category: 5
   default: '60'
+  help: How long to wait for the initial realm list before failing login (in seconds)
 interactKeyWarningTutorial:
+  category: 4
   default: '0'
+  help: Has the player seen the interact key warning tutorial since they have logged
+    in
 interactOnLeftClick:
+  category: 4
   default: '1'
+  help: Test CVar for interacting with NPC's on left click
 interactQuestItems:
+  category: 4
   default: '1'
+  help: Enable Quest Item use as an interaction
 InvalidateDeactivatedHandles:
+  category: 0
   default: '1'
+  help: Turn on to treat WowCS Handles as invalid if referring to a deactivated entity
 KioskCanSessionExpire:
+  category: 5
   default: '1'
+  help: ''
 KioskCharacterTemplateSet:
+  category: 5
   default: '0'
+  help: ''
 KioskLobbyKickSeconds:
+  category: 5
   default: '30'
+  help: ''
 lastAddonVersion:
+  category: 4
   default: '0'
+  help: Addon interface version number from previous build
 lastCharacterIndex:
+  category: 4
   default: '0'
+  help: Last character selected
 lastGarrisonMissionTutorial:
+  category: 4
   default: '0'
+  help: Stores the last garrison mission tutorial the player has accepted
 lastLaunchedExternalEventURL:
+  category: 4
   default: ''
+  help: ''
+lastLockedDelvesCompanionAbilities:
+  category: 5
+  help: ''
 lastLockedTieredEntranceCompanionAbilities:
+  category: 4
   default: ''
+  help: Serialized mapping using a PDE ID. Stores the nodeIDs of the locked delve
+    companion abilities, to highlight them when unlocked.
 lastRenownForCovenant1:
+  category: 4
   default: '0'
+  help: Stores the Kyrian renown when Renown UI is closed
 lastRenownForCovenant2:
+  category: 4
   default: '0'
+  help: Stores the Venthyr renown when Renown UI is closed
 lastRenownForCovenant3:
+  category: 4
   default: '0'
+  help: Stores the NightFae renown when Renown UI is closed
 lastRenownForCovenant4:
+  category: 4
   default: '0'
+  help: Stores the Necrolord renown when Renown UI is closed
 lastRenownForDelvesSeason:
+  category: 4
   default: '0'
+  help: Stores the Delves Season faction renown when Renown UI is closed
 lastSelectedClubId:
+  category: 4
   default: '0'
+  help: The last club that was selected by the user. We default to this club when
+    the player opens the communities frame if the player isn't in a guild.
 lastSelectedTieredEntranceTier:
+  category: 4
   default: ''
+  help: Serialized mapping using a PDE ID. Stores the last selected difficulty tier.
+    If 0, the player will be forced to select a tier.
 lastTalkedToGM:
+  category: 4
   default: ''
+  help: Stores the last GM someone was talking to in case they reload the UI while
+    the GM chat window is open.
 lastTransmogCustomSetIDNoSpec:
+  category: 4
   default: ''
+  help: SetID of the last applied transmog custom set
 lastTransmogCustomSetIDSpec1:
+  category: 4
   default: ''
+  help: SetID of the last applied transmog custom set for the 1st spec
 lastTransmogCustomSetIDSpec2:
+  category: 4
   default: ''
+  help: SetID of the last applied transmog custom set for the 2nd spec
 lastTransmogCustomSetIDSpec3:
+  category: 4
   default: ''
+  help: SetID of the last applied transmog custom set for the 3rd spec
 lastTransmogCustomSetIDSpec4:
+  category: 4
   default: ''
+  help: SetID of the last applied transmog custom set for the 4th spec
 lastTransmogOutfitIDNoSpec:
+  category: 4
   default: ''
+  help: SetID of the last applied transmog outfit
+lastTransmogOutfitIDSpec1:
+  category: 5
+  help: ''
+lastTransmogOutfitIDSpec2:
+  category: 5
+  help: ''
+lastTransmogOutfitIDSpec3:
+  category: 5
+  help: ''
+lastVoidStorageTutorial:
+  category: 5
+  help: ''
 latestSplashScreen:
+  category: 4
   default: '0'
+  help: The ID of the latest splash screen from the UISPLASHSCREEN table.
 latestTransmogSetSource:
+  category: 4
   default: '0'
+  help: itemModifiedAppearanceID of the latest collected source belonging to a set
 launchAgent:
+  category: 4
   default: '1'
+  help: Set this to have the client start up Agent
 lfdCollapsedHeaders:
+  category: 4
   default: ''
+  help: Stores which LFD headers are collapsed.
 lfdSelectedDungeons:
+  category: 4
   default: ''
+  help: Stores which LFD dungeons are selected.
 lfgListAdvancedFilterMinRating:
+  category: 4
   default: '0'
+  help: Minimum mythic plus rating of the leader of the group to find
 lfgListAdvancedFilterRemovedActivities:
+  category: 4
   default: ''
+  help: List of activity IDs to filter against
 lfgListAdvancedFilters:
+  category: 4
   default: '0'
+  help: Advanced LFG filters for dungeons that are booleans
 lfgListAdvancedFiltersVersion:
+  category: 4
   default: '0'
+  help: Version for lfgListAdvancedFilters
 lfgListSearchLanguages:
+  category: 4
   default: '0'
+  help: A simple bitfield for what languages we want to search in.
 lfgSelectedRoles:
+  category: 4
   default: '0'
+  help: Stores what roles the player is willing to take on.
+lfGuildSettings:
+  category: 5
+  help: ''
 loadDeprecationFallbacks:
+  category: 4
   default: '1'
+  help: When enabled, Deprecation_* addons are loaded to provide fallbacks for deprecated
+    script APIs.
 locale:
+  category: 5
   default: ''
+  help: Set the game locale
 locateViewerMaxJobs:
+  category: 1
   default: '32'
+  help: Maximum job threads for LocateViewer
 lockActionBars:
+  category: 4
   default: '1'
+  help: Whether the action bars should be locked, preventing changes
 lodObjectCullDist:
+  category: 1
   default: '30'
+  help: Lod object culling dist minimum
 lodObjectCullSize:
+  category: 5
   default: '15'
+  help: ''
 lodObjectFadeScale:
+  category: 5
   default: '100'
+  help: ''
 lodObjectMinSize:
+  category: 5
   default: '20'
+  help: ''
 lodObjectSizeScale:
+  category: 1
   default: '1'
+  help: Scales all objects size for culling
 lootUnderMouse:
+  category: 4
   default: '1'
+  help: Whether the loot window should open under the mouse
 lossOfControl:
+  category: 4
   default: '1'
+  help: Enables loss of control spell banner
 lossOfControlDisarm:
+  category: 4
   default: '2'
+  help: Setting for Loss of Control - Disarm
 lossOfControlFull:
+  category: 4
   default: '2'
+  help: Setting for Loss of Control - Full Loss
 lossOfControlInterrupt:
+  category: 4
   default: '2'
+  help: Setting for Loss of Control - Interrupt
 lossOfControlRoot:
+  category: 4
   default: '2'
+  help: Setting for Loss of Control - Root
 lossOfControlSilence:
+  category: 4
   default: '2'
+  help: Setting for Loss of Control - Silence
 LowLatencyMinInterval:
+  category: 1
   default: '0'
+  help: Min frame time (in microseconds) for Low Latency systems. Pass -1 to use monitor's
+    refresh rate.
 LowLatencyMode:
+  category: 1
   default: '0'
+  help: 0=None, 1=BuiltIn, 2=Reflex, 3=Reflex+Boost, 4=XeLL
 M2ForceAdditiveParticleSort:
+  category: 1
   default: '0'
+  help: force all particles to sort as though they were additive
 M2UseInstancing:
+  category: 1
   default: '1'
+  help: use hardware instancing
 M2UseThreads:
+  category: 1
   default: '1'
+  help: multithread model animations
 MacDisableOsShortcuts:
+  category: 4
   default: '0'
+  help: Enable/Disable OS keyboard shortcuts
 MacUseCommandLeftClickAsRightClick:
+  category: 4
   default: '1'
+  help: If this is enabled, left-clicking while holding down the Command key will
+    generate a right click instead.  This is mainly for use with laptops or mice with
+    only one button.
 MacWindowToggleHotkey:
+  category: 5
   default: '1'
+  help: Controls if CMD+M toggles window mode
 majorFactionRenownMap:
+  category: 4
   default: ''
+  help: Serialized mapping of faction ID to last known renown rank/level. Updated
+    when the Renown UI is closed, used to control animations in the Major Faction
+    UI.
 mapFade:
+  category: 4
   default: '1'
+  help: Whether to fade out the world map when moving
 MaxCharacterComponentLoadStartsPerFrame:
+  category: 1
   default: '4'
+  help: Maximum number of character component textures to composit per frame - range
+    1-8
 maxFPS:
+  category: 1
   default: '120'
+  help: Set FPS limit. Min 8
 maxFPSBk:
+  category: 1
   default: '30'
+  help: Set background FPS limit. Min 8
 maxFPSLoading:
+  category: 1
   default: '10'
+  help: Set loading screen max FPS
 maxLevelSpecsUsed:
+  category: 4
   default: '0'
+  help: The specs the player has switched to at max level
+maxLightCount:
+  category: 1
+  help: Maximum lights to render
 maxLightDist:
+  category: 1
   default: '2048'
+  help: Maximum distance to render lights
 MaxObservedPetBattles:
+  category: 5
   default: '4'
+  help: Maximum number of observed pet battles
 miniCommunitiesFrame:
+  category: 4
   default: '0'
+  help: Whether or not the communities frame has been toggled to smaller size
 miniDressUpFrame:
+  category: 4
   default: '0'
+  help: Whether or not the dress up has been toggled to smaller size
 minimapInsideZoom:
+  category: 4
   default: '0'
+  help: The current indoor minimap zoom level
 minimapPortalMax:
+  category: 4
   default: '99'
+  help: Max Number of Portals to traverse for minimap
 minimapShapeshiftTracking:
+  category: 4
   default: ''
+  help: Stores shapeshift-specific tracking spells that were active last session.
+minimapTrackedInfov2:
+  category: 5
+  help: ''
 minimapTrackedInfov4:
+  category: 4
   default: '3103471'
+  help: Stores the minimap tracking that was active last session.
 minimapTrackingClosestOnly:
+  category: 4
   default: '1'
+  help: If enabled, show only the closest tracked icon for certain minimap icon types.
 minimapTrackingShowAll:
+  category: 4
   default: '0'
+  help: If enabled, show dropdown for configuring all possible minimap tracking options.
 minimapZoom:
+  category: 4
   default: '0'
+  help: The current outdoor minimap zoom level
 miniWorldMap:
+  category: 4
   default: '1'
+  help: Whether or not the world map has been toggled to smaller size
 missingTransmogSourceInItemTooltips:
+  category: 4
   default: '0'
+  help: Whether to show if you have collected the appearance of an item but not from
+    that item itself
 motionSicknessFocalCircle:
+  category: 4
   default: '0'
+  help: Enables a focal circle showing up when mounted
 motionSicknessLandscapeDarkening:
+  category: 4
   default: '0'
+  help: Enables landscape darkening at higher speeds
 mountJournalGeneralFilters:
+  category: 4
   default: '0'
+  help: Bitfield for which collected filters are applied in the mount journal
 mountJournalShowPlayer:
+  category: 4
   default: '0'
+  help: Show the player on the mount preview.
 mountJournalSourcesFilter:
+  category: 4
   default: '0'
+  help: Bitfield for which source filters are applied in the mount journal
 mountJournalTypeFilter:
+  category: 4
   default: '0'
+  help: Bitfield for which type filters are applied in the mount journal
 mouseAcceleration:
+  category: 4
   default: '-1'
+  help: '-1: use desktop mouse acceleration, 0: disable mouse acceleration, 1: enable
+    mouse acceleration'
 MouseHiddenInRelativeMode:
+  category: 4
   default: '1'
+  help: Disabling may work around issues in relative mode in some rare cases
 mouseInvertPitch:
+  category: 4
   default: '0'
 mouseInvertYaw:
+  category: 4
   default: '0'
 mouseSpeed:
+  category: 4
   default: '1.1'
+  help: ''
 MoveHistoryEventLog:
+  category: 5
   default: '0'
 movePadInPressAndHoldMode:
+  category: 4
   default: '0'
+  help: When true the MovePad buttons are activated on mouse down and deactivated
+    on mouse up
 movePadLocked:
+  category: 4
   default: '1'
+  help: When false the MovePad can be moved by the player
 movieSubtitle:
+  category: 4
   default: '1'
+  help: Show movie subtitles
 movieSubtitleBackground:
+  category: 4
   default: '2'
+  help: 'Adds a background to cinematic subtitles -> 1: off, 2: dark, 3: light'
 movieSubtitleBackgroundAlpha:
+  category: 4
   default: '70'
+  help: Sets the cinematic subtitles background alpha from 0-100. Default is 70%
 MSAAAlphaTest:
+  category: 1
   default: '1'
+  help: Enable MSAA for alpha-tested geometry
 MSAAQuality:
+  category: 1
   default: '0'
+  help: Multisampling AA quality
 nameplateAuraScale:
+  category: 4
   default: '1.000000'
+  help: Controls the size multiplier for buffs and debuffs on nameplates.
 nameplateCastBarDisplay:
+  category: 4
   default: "\x02["
+  help: Determines what information is displayed on nameplate castbars.
 nameplateCheckDistanceForTarget:
+  category: 4
   default: '0'
+  help: If false, show our target's nameplate even if they're very far away.
 nameplateDebuffPadding:
+  category: 4
   default: '0'
+  help: The padding between the debuff list and the health bar on nameplates.
 nameplateEnemyNpcAuraDisplay:
+  category: 4
   default: "\x02G"
+  help: Determines how buffs, debuffs, and crowd control are displayed on enemy Npc
+    nameplates.
 nameplateEnemyPlayerAuraDisplay:
+  category: 4
   default: "\x02G"
+  help: Determines how buffs, debuffs, and crowd control are displayed on enemy player
+    nameplates.
 nameplateForceShowUnitName:
+  category: 4
   default: '0'
+  help: If true, nameplates will always show the unit name regardless of other unit
+    name settings.
 nameplateFriendlyPlayerAuraDisplay:
+  category: 4
   default: "\x02C"
+  help: Determines how buffs, debuffs, and crowd control are displayed on friendly
+    player nameplates.
 nameplateGameObjectMaxDistance:
+  category: 4
   default: '30.000000'
+  help: The max distance to show player nameplates for game objects
+NamePlateHorizontalScale:
+  category: 5
+  help: ''
 nameplateInfoDisplay:
+  category: 4
   default: "\x02D"
+  help: Determines what information is displayed on nameplates.
 nameplateMaxAlpha:
+  category: 4
   default: '1.000000'
+  help: The max alpha of nameplates (when setting alpha based on distance).
 nameplateMaxAlphaDistance:
+  category: 4
   default: '40.000000'
+  help: The distance from the camera that nameplates will reach their maximum alpha.
 nameplateMaxDistance:
+  category: 4
   default: '60.000000'
+  help: The max distance to show nameplates.
 nameplateMaxScale:
+  category: 4
   default: '1.000000'
+  help: The max scale of nameplates.
 nameplateMaxScaleDistance:
+  category: 4
   default: '10.000000'
+  help: The distance from the camera that nameplates will reach their maximum scale.
 nameplateMinAlpha:
+  category: 4
   default: '0.600000'
+  help: The minimum alpha of nameplates (when setting alpha based on distance).
 nameplateMinAlphaDistance:
+  category: 4
   default: '10.000000'
+  help: The distance from the max distance that nameplates will reach their minimum
+    alpha.
 nameplateMinScale:
+  category: 4
   default: '0.800000'
+  help: The minimum scale of nameplates.
 nameplateMinScaleDistance:
+  category: 4
   default: '10.000000'
+  help: The distance from the max distance that nameplates will reach their minimum
+    scale.
 nameplateNotSelectedAlpha:
+  category: 4
   default: '-1.000000'
+  help: When you have a target, the alpha of other nameplates (not used if value is
+    negative).
 nameplateOccludedAlphaMult:
+  category: 4
   default: '0.400000'
+  help: Alpha multiplier of nameplates for occluded targets.
 nameplateOtherAtBase:
+  category: 4
   default: '0'
+  help: Position other nameplates at the base, rather than overhead
 nameplateOverlapH:
+  category: 4
   default: '0.800000'
+  help: Percentage amount for horizontal overlap of nameplates
 nameplateOverlapV:
+  category: 4
   default: '1.100000'
+  help: Percentage amount for vertical overlap of nameplates
 nameplatePlayerMaxDistance:
+  category: 4
   default: '60.000000'
+  help: The max distance to show player nameplates.
 nameplatePlayRemovalAnimation:
+  category: 4
   default: '1'
+  help: If true, play a scale/alpha animation when a nameplate is removed. If false,
+    remove the nameplate instantly.
+nameplateResourceOnTarget:
+  category: 5
+  help: ''
 nameplateSelectedAlpha:
+  category: 4
   default: '1.000000'
+  help: The alpha of the selected nameplate.
 nameplateSelectedScale:
+  category: 4
   default: '1.200000'
+  help: The scale of the selected nameplate.
 nameplateShowAll:
+  category: 4
   default: '0'
+  help: If true, nameplates are shown all the time. If false, nameplates are only
+    shown in combat.
 nameplateShowAllPersonalAuras:
+  category: 4
   default: '0'
+  help: If true, show all personal auras on nameplates, regardless of whether they
+    are normally flagged to be shown.
 nameplateShowCastBars:
+  category: 4
   default: '1'
+  help: Show cast bars for unit nameplates.
 nameplateShowClassColor:
+  category: 4
   default: '1'
+  help: Used to display the class color in enemy nameplate health bars
 nameplateShowDebuffsOnFriendly:
+  category: 4
   default: '1'
+  help: Whether debuffs are shown on friendly nameplates.
 nameplateShowEnemies:
+  category: 4
   default: '1'
+  help: Whether enemy nameplates are shown.
 nameplateShowEnemyGuardians:
+  category: 4
   default: '0'
+  help: Whether enemy guardian nameplates are shown.
 nameplateShowEnemyMinions:
+  category: 4
   default: '0'
+  help: Whether enemy minion nameplates are shown.
 nameplateShowEnemyMinus:
+  category: 4
   default: '1'
+  help: Whether enemy nameplates for entities with a minus sign (indicating they are
+    weaker than the player) are shown.
 nameplateShowEnemyPets:
+  category: 4
   default: '0'
+  help: Whether enemy pet nameplates are shown.
 nameplateShowEnemyTotems:
+  category: 4
   default: '0'
+  help: Whether enemy totem nameplates are shown.
 nameplateShowFriendlyClassColor:
+  category: 4
   default: '1'
+  help: Used to display the class color in friendly nameplate health bars
 nameplateShowFriendlyNpcs:
+  category: 4
   default: '0'
+  help: Whether nameplates are shown for friendly npcs.
 nameplateShowFriendlyPlayerGuardians:
+  category: 4
   default: '0'
+  help: Whether friendly player guardian nameplates are shown.
 nameplateShowFriendlyPlayerMinions:
+  category: 4
   default: '0'
+  help: Whether friendly player minion nameplates are shown.
 nameplateShowFriendlyPlayerPets:
+  category: 4
   default: '0'
+  help: Whether friendly player pet nameplates are shown.
 nameplateShowFriendlyPlayers:
+  category: 4
   default: '0'
+  help: Whether nameplates are shown for friendly players.
 nameplateShowFriendlyPlayerTotems:
+  category: 4
   default: '0'
+  help: Whether friendly player totem nameplates are shown.
 nameplateShowFriendlyRealmName:
+  category: 4
   default: '1'
+  help: Used to show or hide the realm name in friendly player unit nameplate names.
 nameplateShowOffscreen:
+  category: 4
   default: '0'
+  help: When enabled, the nameplate is always shown if owner is in combat with player
+    or player's group member.
 nameplateShowOnlyNameForFriendlyPlayerUnits:
+  category: 4
   default: '0'
+  help: Used to hide every part of the nameplate but the name for friendly player
+    units.
 nameplateShowSelf:
+  category: 4
   default: '0'
+  help: Whether the personal resource display is shown.
 nameplateSimplifiedScale:
+  category: 4
   default: '0.300000'
+  help: Scale used for simplified nameplates.
 nameplateSimplifiedTypes:
+  category: 4
   default: "\x02"
+  help: Determines what types of nameplates are displayed in a more simple and streamlined
+    way.
 nameplateSize:
+  category: 4
   default: '1'
+  help: Provides discrete values that are translated into specific horizontal and
+    vertical scales defined in lua for displaying nameplates.
 nameplateStackingTypes:
+  category: 4
   default: "\x02"
+  help: Determines which types of nameplates stack to prevent overlapping each other.
 nameplateStyle:
+  category: 4
   default: '0'
+  help: Determines how nameplate contents are displayed.
 nameplateTargetBehindMaxDistance:
+  category: 4
   default: '0.100000'
+  help: The max distance to show the target nameplate when the target is behind the
+    camera.
 nameplateTargetRadialPosition:
+  category: 4
   default: '0'
+  help: 'When target is off screen, position its nameplate radially around sides and
+    bottom. 1: Target Only. 2: All In Combat'
 nameplateThreatDisplay:
+  category: 4
   default: "\x02"
+  help: Determines how threat is displayed on nameplates.
 nameplateUseClassColorForFriendlyPlayerUnitNames:
+  category: 4
   default: '0'
+  help: Used to display the class color in friendly player unit nameplate names.
+NamePlateVerticalScale:
+  category: 5
+  help: ''
 nearclip:
+  category: 1
   default: '0.2'
+  help: Near clip plane distance
 newDelvesSeason:
+  category: 4
   default: '1'
+  help: Signals a new delves season for the user, so when they open the companion
+    config UI it shows them a helptip with season info
 newMythicPlusSeason:
+  category: 4
   default: '1'
+  help: Signals a new mythic+ season for the user, so when they open the UI it shows
+    them the info about the season
 newPvpSeason:
+  category: 4
   default: '1'
+  help: Signals a new pvp season for the user, so when they open the UI it shows them
+    the info about the season
 noBuffDebuffFilterOnTarget:
+  category: 4
   default: '0'
+  help: Do not filter buffs or debuffs at all on targets
 NonEmitterCombatRange:
+  category: 4
   default: '6400.000000'
+  help: Range to stop shoulder/weapon emissions outside combat
 NotchedDisplayMode:
+  category: 5
   default: '1'
+  help: Do nothing = 0. Shift UI down = 1. Shift everything down = 2.
 notifiedOfNewMail:
+  category: 4
   default: '0'
+  help: Stores whether the player has been previously notified of new mail. Only set
+    to false once everything in their Inbox has been marked as read.
 numCurrencyCategories:
+  category: 4
   default: '0'
+  help: Stores the number of currency categories that existed the last time we logged
+    in
 numReputationHeaders:
+  category: 4
   default: '0'
+  help: Stores the number of reputation headers that existed the last time we logged
+    in
 ObjectSelectionCircle:
+  category: 4
   default: '1'
 occludedSilhouettePlayer:
+  category: 4
   default: '0'
+  help: Show a silhouette of your character when obstructed
 occlusionMaxJobs:
+  category: 1
   default: '5'
+  help: Maximum job threads for occlusion render
 optOutIngameSurveys:
+  category: 4
   default: '0'
+  help: Whether we are opted out of receiving surveys.
 orderHallMissionTutorial:
+  category: 4
   default: '0'
+  help: Stores information about which order hall mission tutorials the player has
+    seen
 otherRolesAzeriteEssencesHidden:
+  category: 4
   default: '0'
+  help: Whether to collapse the Azerite Essences for player's other roles
 outdoorMinAltitudeDistance:
+  category: 4
   default: '10'
+  help: Minimum altitude distance for outdoor objects when you are also outdoors before
+    the altitude difference marker displays
 Outline:
+  category: 4
   default: '2'
+  help: Outline Mode
 OutlineEngineMode:
+  category: 1
   default: '0'
+  help: Mode for the OutlineBuffer for the engine
 outlineMouseOverFadeDuration:
+  category: 0
   default: '0.9'
 outlineSelectionFadeDuration:
+  category: 0
   default: '0.32'
 outlineSoftInteractFadeDuration:
+  category: 0
   default: '0.3'
 overrideArchive:
+  category: 4
   default: '0'
+  help: Whether or not the client loads alternate data
 overrideScreenFlash:
+  category: 4
   default: '0'
+  help: Overrides fade color options so that it always fades to black
 particleDensity:
+  category: 5
   default: '100'
+  help: ''
 particleMTDensity:
+  category: 5
   default: '100'
+  help: ''
 particulatesEnabled:
+  category: 5
   default: '1'
+  help: ''
 partyBackgroundOpacity:
+  category: 4
   default: '0.500000'
+  help: The opacity of the party background
 partyInvitesCollapsed_Glue:
+  category: 4
   default: '0'
+  help: The info for pending invites has been shown
 Pathing:
+  category: 5
   default: '0'
 pathSmoothing:
+  category: 4
   default: '1'
+  help: NPC will round corners on ground paths
 pendingInviteInfoShown:
+  category: 4
   default: '0'
+  help: The info for pending invites has been shown
 perksActivitiesCurrentMonth:
+  category: 4
   default: '0'
+  help: Current month for perks activities
 perksActivitiesLastPoints:
+  category: 4
   default: '0'
+  help: Last seen number of influence points in the perks progress bar
 perksActivitiesPendingCompletion:
+  category: 5
   default: ''
+  help: ''
 persistMoveLogOnTransfer:
+  category: 0
   default: '0'
+  help: Set to 1 to automatically re-enable logging on the current movelog target
+    after a transfer
 petJournalFilters:
+  category: 4
   default: '0'
+  help: Bitfield for which collected filters are applied in the pet journal
 petJournalFilterVersion:
+  category: 4
   default: '0'
+  help: Current filter version. Will reset all filters to their defaults if out of
+    date.
 petJournalSort:
+  category: 4
   default: '0'
+  help: Sorting value for the pet journal
 petJournalSourceFilters:
+  category: 4
   default: '0'
+  help: Bitfield for which source filters are applied in the pet journal
 petJournalTab:
+  category: 4
   default: '1'
+  help: Stores the last tab the pet journal was opened to
 petJournalTypeFilters:
+  category: 4
   default: '0'
+  help: Bitfield for which type filters are applied in the pet journal
 petStableShowExoticOnly:
+  category: 4
   default: '0'
+  help: Filter value for hunter pet stable. Will only show exotic pets in stable if
+    true
 petStableSort:
+  category: 4
   default: '1'
+  help: Sorting value for the hunter pet stable
 PhaseHistory:
+  category: 5
   default: '0'
 physicsLevel:
+  category: 1
   default: '1'
+  help: Level of physics world interaction
 pingCategoryTutorialShown:
+  category: 4
   default: '0'
+  help: Has shown the ping category tutorial dialog
 pingMode:
+  category: 4
   default: '0'
+  help: Determines which mode is used to use the ping system.
 pingTarget:
+  category: 4
   default: '0'
+  help: Determines how pinging in the world should behave for the ping system.
 playerColorOverrides:
+  category: 4
   default: ''
+  help: Any color override values that are different from the default values for an
+    account
 PlayerSpawnTracking:
+  category: 5
   default: '0'
 playIntroMovie:
+  category: 4
   default: '0'
+  help: Starting expansion movie to play on startup
 plunderstormRealm:
+  category: 5
   default: '0'
+  help: ''
 POIShiftComplete:
+  category: 0
   default: '0.3'
 portal:
+  category: 6
   default: ''
+  help: Name of Battle.net portal to use
 PreemptiveCastEnable:
+  category: 5
   default: '0'
+  help: Enable preemptive triggering of cast visuals based on spell release timing
 preloadLoadingDistObject:
+  category: 5
   default: '512'
+  help: Object preload distance when loading
 preloadLoadingDistTerrain:
+  category: 5
   default: '1024'
+  help: Terrain preload distance when loading
 preloadPlayerModels:
+  category: 4
   default: '1'
+  help: Preload all local racial models into memory
 preloadStreamingDistObject:
+  category: 5
   default: '64'
+  help: Object preload distance when streaming
 preloadStreamingDistTerrain:
+  category: 5
   default: '256'
+  help: Terrain preload distance when streaming
 PreventOsIdleSleep:
+  category: 10
   default: '0'
+  help: Enable this to prevent the computer from idle sleeping while the game is running
 primaryProfessionsFilter:
+  category: 4
   default: '1'
+  help: If enabled, primary profession world quests icons will be shown on world maps
 ProcDebugEventLog:
+  category: 5
   default: '0'
 profanityFilter:
+  category: 4
   default: '1'
+  help: Whether to enable mature language filtering
 professionAccessorySlotsExampleShown:
+  category: 4
   default: '0'
+  help: If the profession gear slots example has been shown
 professionsAllocateBestQualityReagents:
+  category: 4
   default: '1'
+  help: Indicates if best quality reagents should be automatically allocated in the
+    crafting UI.
 professionsAllocateBestQualityReagentsCustomer:
+  category: 4
   default: '1'
+  help: Indicates if best quality reagents should be automatically allocated in the
+    customer crafting order UI.
 professionsFlyoutHideUnowned:
+  category: 4
   default: '0'
+  help: Boolean indicating if unowned items are hidden in the profession slot flyouts
 professionsOrderDurationDropdown:
+  category: 4
   default: '2'
+  help: The previously selected duration index in the professions customer order form
+    dropdown
 professionsOrderRecipientDropdown:
+  category: 4
   default: '1'
+  help: The previously selected order recipient index in the professions customer
+    order form dropdown
 professionToolSlotsExampleShown:
+  category: 4
   default: '0'
+  help: If the profession gear slots example has been shown
 projectedTextures:
+  category: 1
   default: '0'
+  help: Projected Textures
 PushToTalkSound:
+  category: 5
   default: '0'
+  help: ''
 pvpFramesDisplayClassColor:
+  category: 4
   default: '0'
+  help: Colors pvp frames with the class color
 pvpFramesDisplayOnlyHealerPowerBars:
+  category: 4
   default: '0'
+  help: Whether to display power bars only for healers on Pvp Frames
 pvpFramesDisplayPowerBars:
+  category: 4
   default: '0'
+  help: Whether to display mana, rage, etc. on Pvp Frames
 pvpFramesHealthText:
+  category: 4
   default: none
+  help: How to display health text on the pvp frames
 pvpOptionDisplayPets:
+  category: 4
   default: '0'
+  help: Whether to display pets on the pvp frames
 pvpSelectedRoles:
+  category: 4
   default: '0'
+  help: Stores what roles the player will fulfill in a BG.
 QuestEventLog:
+  category: 5
   default: '0'
 questLogOpen:
+  category: 4
   default: '1'
+  help: 'Whether the quest log appears the side of the windowed map. '
 questPOI:
+  category: 4
   default: '1'
+  help: If enabled, the quest POI system will be used.
 questPOILocalStory:
+  category: 4
   default: '1'
+  help: Worldmap filter setting for showing any local story quest offers on the map,
+    this is an independent setting for the world map only.
 questPOIWQ:
+  category: 4
   default: '1'
+  help: Worldmap filter setting for showing any WQs on the map, this is in conjunction
+    with the questPOI cvar.
 questTextContrast:
+  category: 4
   default: '0'
+  help: Whether to increase text contrast in Quest UIs
 RAIDclusteredShading:
+  category: 1
   default: '1'
+  help: Allow forward transparent lighting
 RAIDcomponentTextureLevel:
+  category: 5
   default: '0'
+  help: ''
 RAIDDepthBasedOpacity:
+  category: 1
   default: '1'
+  help: Raid Enable/Disable Soft Edge Effect
 RAIDdoodadLodScale:
+  category: 5
   default: '100'
+  help: ''
 RAIDentityLodDist:
+  category: 5
   default: '10'
+  help: ''
 RAIDentityShadowFadeScale:
+  category: 5
   default: '10'
+  help: ''
 RAIDfarclip:
+  category: 5
   default: '1000'
+  help: ''
 raidFramesCenterBigDefensive:
+  category: 4
   default: '1'
+  help: Show big defensive raid buffs in the center of the unit frame
 raidFramesDispelIndicatorOverlay:
+  category: 4
   default: '1'
+  help: When showing dispel indicators, also show a color gradient overlay
 raidFramesDispelIndicatorOverlayAnimation:
+  category: 4
   default: '0'
+  help: When showing dispel indicators, use a pulsing alpha anim
 raidFramesDispelIndicatorType:
+  category: 4
   default: '2'
+  help: Choose which dispel icon indicators to show in raid frames
 raidFramesDisplayAggroHighlight:
+  category: 4
   default: '1'
+  help: Whether to display aggro highlights on Raid Frames
 raidFramesDisplayBuffs:
+  category: 4
   default: '1'
+  help: Whether to display buffs on Raid Frames
 raidFramesDisplayClassColor:
+  category: 4
   default: '0'
+  help: Colors raid frames with the class color
 raidFramesDisplayDebuffs:
+  category: 4
   default: '1'
+  help: Whether to display debuffs on Raid Frames
 raidFramesDisplayIncomingHeals:
+  category: 4
   default: '1'
+  help: Whether to display incoming heals on Raid Frames
 raidFramesDisplayLargerRoleSpecificDebuffs:
+  category: 4
   default: '1'
+  help: Show role-specific debuffs as larger on Raid Frames
 raidFramesDisplayOnlyDispellableDebuffs:
+  category: 4
   default: '0'
+  help: Whether to display only dispellable debuffs on Raid Frames
 raidFramesDisplayOnlyHealerPowerBars:
+  category: 4
   default: '0'
+  help: Whether to display power bars only for healers on Raid Frames
 raidFramesDisplayPowerBars:
+  category: 4
   default: '0'
+  help: Whether to display mana, rage, etc. on Raid Frames
 raidFramesHealthBarColor:
+  category: 4
   default: FF2B9305
+  help: Colors raid frame health bars with a custom color if the user doesn't want
+    class colors, ARGB format
 raidFramesHealthBarColorBG:
+  category: 4
   default: FF141414
+  help: Colors raid frame backgrounds with a custom color, ARGB format
 raidFramesHealthText:
+  category: 4
   default: none
+  help: How to display health text on the raid frames
 raidFramesHeight:
+  category: 4
   default: '36'
+  help: The height of the individual raid frames
 raidFramesPosition:
+  category: 4
   default: ''
+  help: Where the raid frames should be placed
 raidFramesWidth:
+  category: 4
   default: '72'
+  help: The width of the individual raid frames
 raidGraphicsComputeEffects:
+  category: 5
   default: '1'
+  help: ''
 raidGraphicsDepthEffects:
+  category: 5
   default: '1'
+  help: ''
 raidGraphicsEnvironmentDetail:
+  category: 5
   default: '3'
+  help: ''
 raidGraphicsGroundClutter:
+  category: 5
   default: '3'
+  help: ''
 raidGraphicsLiquidDetail:
+  category: 5
   default: '1'
+  help: ''
 raidGraphicsOutlineMode:
+  category: 5
   default: '0'
+  help: ''
 raidGraphicsParticleDensity:
+  category: 5
   default: '2'
+  help: ''
 raidGraphicsProjectedTextures:
+  category: 5
   default: '1'
+  help: ''
 RAIDgraphicsQuality:
+  category: 5
   default: '3'
+  help: ''
 raidGraphicsShadowQuality:
+  category: 5
   default: '1'
+  help: ''
 raidGraphicsSpellDensity:
+  category: 5
   default: '3'
+  help: ''
 raidGraphicsSSAO:
+  category: 5
   default: '1'
+  help: ''
 raidGraphicsTextureResolution:
+  category: 5
   default: '1'
+  help: ''
 raidGraphicsViewDistance:
+  category: 5
   default: '3'
+  help: ''
 RAIDgroundEffectDensity:
+  category: 5
   default: '16'
+  help: ''
 RAIDgroundEffectDist:
+  category: 5
   default: '70'
+  help: ''
 RAIDgroundEffectFade:
+  category: 1
   default: '70'
+  help: Raid Ground effect fade
 RAIDhorizonClip:
+  category: 5
   default: '1600'
+  help: ''
 RAIDhorizonStart:
+  category: 5
   default: '800'
+  help: ''
 RAIDlodObjectCullDist:
+  category: 1
   default: '30'
+  help: Lod object culling dist minimum
 RAIDlodObjectCullSize:
+  category: 5
   default: '15'
+  help: ''
 RAIDlodObjectFadeScale:
+  category: 5
   default: '100'
+  help: ''
 RAIDlodObjectMinSize:
+  category: 5
   default: '20'
+  help: ''
 raidOptionDisplayMainTankAndAssist:
+  category: 4
   default: '1'
+  help: Whether to display main tank and main assist units in the raid frames
 raidOptionDisplayPets:
+  category: 4
   default: '0'
+  help: Whether to display pets on the raid frames
 raidOptionIsShown:
+  category: 4
   default: '1'
+  help: Whether the Raid Frames are shown
 raidOptionKeepGroupsTogether:
+  category: 4
   default: '0'
+  help: The way to group raid frames
 raidOptionLocked:
+  category: 4
   default: lock
+  help: Whether the raid frames are locked
 raidOptionShowBorders:
+  category: 4
   default: '1'
+  help: Displays borders around the raid frames.
 raidOptionSortMode:
+  category: 4
   default: role
+  help: The way to sort raid frames
 RAIDOutlineEngineMode:
+  category: 1
   default: '0'
+  help: Mode for the OutlineBuffer
 RAIDparticleDensity:
+  category: 5
   default: '100'
+  help: ''
 RAIDparticleMTDensity:
+  category: 5
   default: '100'
+  help: ''
 RAIDParticulatesEnabled:
+  category: 1
   default: '1'
+  help: Enabling particulates (0-1)
 RAIDprojectedTextures:
+  category: 5
   default: '0'
+  help: ''
 RAIDreflectionMode:
+  category: 5
   default: '3'
+  help: ''
 RAIDrefraction:
+  category: 1
   default: '0'
+  help: Refraction
 RAIDrippleDetail:
+  category: 5
   default: '2'
+  help: ''
 RAIDsettingsEnabled:
+  category: 1
   default: '0'
+  help: Raid graphic settings are available
 RAIDshadowBlendCascades:
+  category: 1
   default: '0'
+  help: Blend between shadow cascades (0/1)
 RAIDshadowMode:
+  category: 5
   default: '0'
+  help: ''
 RAIDshadowNumCascades:
+  category: 1
   default: '1'
+  help: Number of shadow cascades (1-4)
 RAIDshadowRt:
+  category: 1
   default: '0'
+  help: Raid Raytraced shadows (0-2)
 RAIDshadowSoft:
+  category: 1
   default: '0'
+  help: Soft shadows (0/1)
 RAIDshadowTextureSize:
+  category: 1
   default: '1024'
+  help: Shadow texture size (1024-2048)
 RAIDspellClutter:
+  category: 1
   default: '2'
+  help: Spell Density
 RAIDSSAO:
+  category: 5
   default: '0'
+  help: ''
 RAIDsunShafts:
+  category: 1
   default: '0'
+  help: SunShafts
 RAIDterrainLodDist:
+  category: 5
   default: '400'
+  help: ''
 RAIDTerrainLodDiv:
+  category: 5
   default: '768'
+  help: ''
 RAIDterrainMipLevel:
+  category: 5
   default: '0'
+  help: ''
 RAIDVolumeFog:
+  category: 1
   default: '0'
+  help: Volume Fog
 RAIDVolumeFogLevel:
+  category: 5
   default: '2'
+  help: ''
 RAIDWaterDetail:
+  category: 5
   default: '0'
+  help: ''
 RAIDweatherDensity:
+  category: 5
   default: '2'
+  help: ''
 RAIDwmoLodDist:
+  category: 5
   default: '650'
+  help: ''
 RAIDworldBaseMip:
+  category: 5
   default: '0'
+  help: ''
 reflectionDownscale:
+  category: 1
   default: '0'
+  help: Reflection downscale
 reflectionMode:
+  category: 5
   default: '3'
+  help: ''
 refraction:
+  category: 1
   default: '0'
+  help: Refraction
 reloadUIOnAspectChange:
+  category: 5
   default: '0'
+  help: Reload the UI on aspect change
 remoteTextToSpeech:
+  category: 4
   default: '0'
+  help: Enables typing into a voice chat window to speak to other players using the
+    text to speech system
 remoteTextToSpeechVoice:
+  category: 4
   default: '1'
+  help: Voice option used with Speak for Me where you can send text to speech to other
+    players in voice chat
 RenderFormat:
+  category: 1
   default: '0'
+  help: 0 = BGRA8Unorm, 1 = A2BGR10Unorm, 2 = RGBA16F, 3 = RGBA32F
 RenderScale:
+  category: 5
   default: '0.675000'
+  help: ''
 RenderScaleDowngradeBackgroundMinSize:
+  category: 1
   default: '720'
+  help: Min size (in pixels) we can reduce render scale to when under high VRAM pressure
+    when the game does not has focus
 RenderScaleDowngradeForegroundMinSize:
+  category: 1
   default: '1080'
+  help: Min size (in pixels) we can reduce render scale to when under high VRAM pressure
+    when the game has focus
 ReplaceMyPlayerPortrait:
+  category: 4
   default: '0'
+  help: Replaces local player's unit frame portrait with their class icon
 ReplaceOtherPlayerPortraits:
+  category: 4
   default: '0'
+  help: Replaces other player unit frame portraits with their class icon
 reputationsCollapsed:
+  category: 4
   default: ''
+  help: List of reputation categories that have been collapsed in the Reputation tab
 ResampleAlwaysSharpen:
+  category: 1
   default: '0'
+  help: Run sharpness pass, even if not using AMD FSR Upscale [0,1]
 ResampleQuality:
+  category: 1
   default: '3'
+  help: Resample quality
 ResampleSharpness:
+  category: 1
   default: '0.2'
+  help: FSR sharpness strength [0.0-2.0]. 0 is full strength. -1 to disable.
 ResizeConstraints:
+  category: 5
   default: '1'
+  help: 0=None,1=AspectRatioLocked,2=DisableResizing
 restrictCalendarInvites:
+  category: 4
   default: '1'
+  help: Whether to restrict calendar invites to friends and guilds only.
 rippleDetail:
+  category: 5
   default: '2'
+  help: ''
 rotateMinimap:
+  category: 4
   default: '0'
+  help: Whether to rotate the entire minimap instead of the player arrow
 runeFadeTime:
+  category: 5
   default: '0.2'
+  help: Adjust the time the rune fades from on CD to ready
 runeSpentFadeTime:
+  category: 5
   default: '0.1'
+  help: Adjust the time the base rune takes to fade out after the rune flash fades
+    out
 runeSpentFlashTime:
+  category: 5
   default: '0.15'
+  help: Adjust the time the rune flash takes to fade out
 sceneOcclusionEnable:
+  category: 1
   default: '1'
+  help: Scene software occlusion
 screenEdgeFlash:
+  category: 4
   default: '1'
+  help: Whether to show a red flash while you are in combat with the world map up
 screenshotFormat:
+  category: 1
   default: jpeg
+  help: Set the format of screenshots
 screenshotQuality:
+  category: 1
   default: '3'
+  help: Set the quality of screenshots (1 - 10)
 screenshotSizeOverride:
+  category: 1
   default: '0x0'
+  help: Set the size of screenshots to a specific resolution (e.g. 7680x4320). 0x0
+    means use the window size
 scriptErrors:
+  category: 4
   default: '0'
+  help: Whether or not the UI shows Lua errors
 scriptProfile:
+  category: 0
   default: '0'
+  help: Whether or not script profiling is enabled
 scriptWarnings:
+  category: 0
   default: '0'
+  help: Whether or not the UI shows Lua warnings
 scrollToLogQuest:
+  category: 4
   default: '0'
+  help: Whether to scroll to a quest in the quest log when mousing over its map pin
 secondaryProfessionsFilter:
+  category: 4
   default: '1'
+  help: If enabled, secondary profession world quests icons will be shown on world
+    maps
 secureAbilityToggle:
+  category: 4
   default: '1'
+  help: Whether you should be protected against accidentally double-clicking an aura
 seenAlliedRaceUnlocks:
+  category: 4
   default: '0'
+  help: Bit array for which allied race unlocks have been seen
 seenAsiaCharacterUpgradePopup:
+  category: 4
   default: '0'
+  help: Seen the free character upgrade popup (Asia)
 seenCharacterUpgradePopup:
+  category: 4
   default: '6'
+  help: Seen the free character upgrade popup
 seenConfigurationWarnings:
+  category: 4
   default: '0'
+  help: A bitfield to track which configuration warnings have been seen
 seenExpansionTrialPopup:
+  category: 4
   default: '6'
+  help: Seen the expansion trial popup
 seenLevelSquishPopup:
+  category: 4
   default: '0'
+  help: Seen the level squish popup
 seenPurchasableClassCapstone:
+  category: 4
   default: '0'
+  help: Whether or not the player has ever opened the class talent UI and seen a purchasable
+    capstone node
 seenRegionalChatDisabled:
+  category: 4
   default: '0'
+  help: Seen the alert indicating chat has been disabled by default. (UK and CA AADC)
 seenTimerunningFirstLoginPopup:
+  category: 4
   default: '0'
+  help: Seen the timerunning first login popup (value is timerunning season id)
 serverAlert:
+  category: 6
   default: https://breaking-news.support.blizzard.com/service/wow-client/ptr/us/en-US
+  help: Get the glue-string tag for the URL
 ServerMessageEventLog:
+  category: 5
   default: '0'
 serviceTypeFilter:
+  category: 4
   default: '6'
+  help: Which trainer services to show
 shadowBlendCascades:
+  category: 1
   default: '0'
+  help: Blend between shadow cascades (0/1)
 shadowMode:
+  category: 1
   default: '0'
+  help: Quality of shadows (0-3)
 shadowNumCascades:
+  category: 1
   default: '1'
+  help: Number of shadow cascades (1-4)
 shadowRt:
+  category: 1
   default: '0'
+  help: Raytraced shadows (0-3)
 shadowSoft:
+  category: 1
   default: '0'
+  help: Soft shadows (0/1)
 shadowTextureSize:
+  category: 1
   default: '1024'
+  help: Shadow texture size (1024-2048)
 ShakeStrengthCamera:
+  category: 4
   default: '1.000000'
+  help: Motion sickness control for how much effects can shake the camera
 ShakeStrengthUI:
+  category: 4
   default: '1.000000'
+  help: Motion sickness control for how much effects can shake in 2D UI
 shipyardMissionTutorialAreaBuff:
+  category: 4
   default: '0'
+  help: Stores whether the player has accepted the first area buff mission tutorial
 shipyardMissionTutorialBlockade:
+  category: 4
   default: '0'
+  help: Stores whether the player has accepted the first blockade mission tutorial
 shipyardMissionTutorialFirst:
+  category: 4
   default: '0'
+  help: Stores whether the player has accepted the first mission tutorial
 showAllItemsInTransmog:
+  category: 4
   default: '0'
+  help: Shows all items in the transmogger regardless of armor restrictions
 showArenaEnemyCastbar:
+  category: 4
   default: '1'
+  help: Show the spell enemies are casting on the Arena Enemy frames
 showArenaEnemyFrames:
+  category: 4
   default: '1'
+  help: Show arena enemy frames while in an Arena
 showArenaEnemyPets:
+  category: 4
   default: '1'
+  help: Show the enemy team's pets on the ArenaEnemy frames
 showBattlefieldMinimap:
+  category: 4
   default: '0'
+  help: Whether or not the battlefield minimap is shown
 showBuilderFeedback:
+  category: 4
   default: '1'
+  help: Show animation when building power for builder/spender bar
 showCastableBuffs:
+  category: 4
   default: '0'
+  help: Show only Buffs the player can cast.  Only applies to raids.
 showCreateCharacterRealmConfirmDialog:
+  category: 4
   default: '1'
+  help: Show the character create realm confirmation dialog
 showCustomSetDetails:
+  category: 4
   default: '1'
+  help: Whether or not to show custom set details when the dressing room is opened
+    in maximized mode, default on
 showDelveEntrancesOnMap:
+  category: 4
   default: '1'
+  help: If enabled, delve entrances will display on the world map.
 showDispelDebuffs:
+  category: 4
   default: '1'
+  help: Show only Debuffs that the player can dispel.  Only applies to raids.
 showDungeonEntrancesOnMap:
+  category: 4
   default: '1'
+  help: If enabled, dungeon entrances will display on the world map.
 showErrors:
+  category: 0
   default: '1'
 showfootprintparticles:
+  category: 1
   default: '1'
+  help: toggles rendering of footprint particles
 showHonorAsExperience:
+  category: 4
   default: '0'
+  help: Show the honor bar as a regular experience bar in place of rep
 showInGameNavigation:
+  category: 4
   default: '1'
+  help: '0: Disable IGN, 1: Enable IGN (Default).'
 showLoadingScreenTips:
+  category: 4
   default: '1'
+  help: Show loading screen tooltips
 showNPETutorials:
+  category: 4
   default: '1'
+  help: display NPE tutorials
 showOutfitDetails:
+  category: 4
   default: '1'
+  help: Whether or not to show outfit details when the dressing room is opened in
+    maximized mode, default on
+showPartyBackground:
+  category: 5
+  help: ''
 showPartyPets:
+  category: 4
   default: '0'
+  help: Whether to show pets in the party UI
 showPhotosensitivityWarning:
+  category: 4
   default: '-1'
+  help: Showing photosensitivity warning on startup
 showPingsInChat:
+  category: 4
   default: '1'
+  help: Enables ping details being shown in chat.
 showPingsOnRaidFrames:
+  category: 4
   default: '1'
+  help: Enables ping details being shown on raid frames.
 showQuestObjectivesInLog:
+  category: 4
   default: '1'
+  help: Stores whether to show quest objectives in the quest list in the log
 ShowQuestUnitCircles:
+  category: 4
   default: '1'
+  help: Determines if units related to a quest display an indicator on the ground.
 showScreenNarrationDialog:
+  category: 4
   default: '1'
+  help: Show screen narration dialog on startup
 showSpectatorTeamCircles:
+  category: 4
   default: '1'
+  help: Determines if the team color circles are visible while spectating or commentating
+    a wargame
 showSpenderFeedback:
+  category: 4
   default: '1'
+  help: Show animation when spending power for builder/spender bar
 showTamers:
+  category: 4
   default: '1'
+  help: If enabled, pet battle icons will be shown on world maps
 showTamersWQ:
+  category: 4
   default: '1'
+  help: If enabled, WQ pet battle icons will be shown on world maps
 showTargetCastbar:
+  category: 4
   default: '1'
+  help: Show the spell your current target is casting
 showTargetOfTarget:
+  category: 4
   default: '0'
+  help: Whether the target of target frame should be shown
 showTempMaxHealthLoss:
+  category: 4
   default: '1'
+  help: Weather or not to show temporary max health changes on unit health bars
 showTimestamps:
+  category: 4
   default: none
+  help: The format of timestamps in chat or "none"
 showToastBroadcast:
+  category: 4
   default: '0'
+  help: Whether to show Battle.net message for broadcasts
 showToastClubInvitation:
+  category: 4
   default: '1'
+  help: Whether to show Battle.net message for club invitations
 showToastConversation:
+  category: 4
   default: '1'
+  help: Whether to show Battle.net message for conversations
 showToastFriendRequest:
+  category: 4
   default: '1'
+  help: Whether to show Battle.net message for friend requests
 showToastOffline:
+  category: 4
   default: '1'
+  help: Whether to show Battle.net message for friend going offline
 showToastOnline:
+  category: 4
   default: '1'
+  help: Whether to show Battle.net message for friend coming online
 showToastWindow:
+  category: 4
   default: '1'
+  help: Whether to show Battle.net system messages in a toast window
 showTokenFrame:
+  category: 4
   default: '0'
+  help: The token UI has been shown
 showTutorials:
+  category: 4
   default: '1'
+  help: display tutorials
 showVKeyCastbar:
+  category: 4
   default: '1'
+  help: If the V key display is up for your current target, show the enemy cast bar
+    with the target's health bar in the game field
 showVKeyCastbarOnlyOnTarget:
+  category: 4
   default: '0'
 showVKeyCastbarSpellName:
+  category: 4
   default: '1'
 simd:
+  category: 5
   default: '-1'
+  help: Enable SIMD features (e.g. SSE)
 SkyCloudLOD:
+  category: 1
   default: '0'
+  help: Texture resolution for clouds
 SlugOpticalWeight:
+  category: 0
   default: '0'
+  help: When rendering, coverage values are remapped to increase the optical weight
+    of the glyphs. This can improve the appearance of small text, but usually looks
+    good only for dark text on a light background.
 smoothUnitPhasing:
+  category: 4
   default: '1'
+  help: The client will try to smoothly switch between the same on model different
+    phases.
 smoothUnitPhasingActorPurgatoryTimeMs:
+  category: 4
   default: '1500'
+  help: Time to keep client-actor displays in purgatory before letting go of them,
+    if they were despawned
 smoothUnitPhasingAliveTimeoutMs:
+  category: 4
   default: '3500'
+  help: Time to wait for an alive unit to get it's despawn message
 smoothUnitPhasingDestroyedPurgatoryTimeMs:
+  category: 4
   default: '750'
+  help: Time to keep unit displays in purgatory before letting go of them, if they
+    were destroyed
 smoothUnitPhasingDistThreshold:
+  category: 4
   default: '0.25'
+  help: Distance threshold to active smooth unit phasing.
 smoothUnitPhasingEnableAlive:
+  category: 4
   default: '1'
+  help: Use units that have not despawn yet if they match, in hopes the despawn message
+    will come later.
 smoothUnitPhasingUnseenPurgatoryTimeMs:
+  category: 4
   default: '1000'
+  help: Time to keep unit displays in purgatory before letting go of them, if they
+    were just unseen.
 smoothUnitPhasingVehicleExtraTimeoutMs:
+  category: 4
   default: '1000'
+  help: Extra time to wait before releasing a vehicle, after it has smooth phased.
+    This allows it's passengers to smooth phase as well.
 SoftTargetEnemy:
+  category: 4
   default: '1'
+  help: Sets when enemy soft targeting should be enabled. 0=off, 1=gamepad, 2=KBM,
+    3=always
 SoftTargetEnemyArc:
+  category: 4
   default: '2'
+  help: 0 = No yaw arc allowance, must be directly in front. 1 = Must be in front
+    yaw arc. 2 = Can be anywhere in tab targeting area.
 SoftTargetEnemyRange:
+  category: 4
   default: '45.000000'
+  help: Max range to soft target enemies (limited to tab targeting range)
 SoftTargetForce:
+  category: 4
   default: '1'
+  help: Auto-set target to match soft target. 1 = for enemies, 2 = for friends
 SoftTargetFriend:
+  category: 4
   default: '0'
+  help: Sets when friend soft targeting should be enabled. 0=off, 1=gamepad, 2=KBM,
+    3=always
 SoftTargetFriendArc:
+  category: 4
   default: '2'
+  help: 0 = No yaw arc allowance, must be directly in front. 1 = Must be in front
+    yaw arc. 2 = Can be anywhere in targeting area.
 SoftTargetFriendRange:
+  category: 4
   default: '45.000000'
+  help: Max range to soft target friends (limited to tab targeting range)
 SoftTargetIconEnemy:
+  category: 4
   default: '0'
+  help: Show icon for soft enemy target
 SoftTargetIconFriend:
+  category: 4
   default: '0'
+  help: Show icon for soft friend target
 SoftTargetIconGameObject:
+  category: 4
   default: '0'
+  help: Show icon for sot interact game objects (interactable objects you cannot normally
+    target)
 SoftTargetIconInteract:
+  category: 4
   default: '1'
+  help: Show icon for soft interact target
 SoftTargetInteract:
+  category: 4
   default: '1'
+  help: Sets when soft interact should be enabled. 0=off, 1=gamepad, 2=KBM, 3=always
 SoftTargetInteractArc:
+  category: 4
   default: '0'
+  help: 0 = No yaw arc allowance, must be directly in front. 1 = Must be in front
+    yaw arc. 2 = Can be anywhere in targeting area.
 softTargetInteractionTutorialTotalInteractions:
+  category: 4
   default: '0'
+  help: Total interactions that the player has used in soft targeting
 SoftTargetInteractRange:
+  category: 4
   default: '10.000000'
+  help: Max range to soft target interacts (limited to tab targeting and individual
+    interact ranges)
 SoftTargetInteractRangeIsHard:
+  category: 4
   default: '0'
+  help: Sets if it should be a hard range cutoff, even for something you can interact
+    with right now.
 SoftTargetLowPriorityIcons:
+  category: 4
   default: '0'
+  help: Show interact icons even when there is other visual indicators, such as quest
+    or loot effects
 SoftTargetMatchLocked:
+  category: 4
   default: '1'
+  help: Match appropriate soft target to locked target. 1 = hard locked target only,
+    2 = for targets you attack
 SoftTargetNameplateEnemy:
+  category: 4
   default: '1'
+  help: Always show nameplates for soft enemy target
 SoftTargetNameplateFriend:
+  category: 4
   default: '0'
+  help: Always show nameplates for soft friend target
 SoftTargetNameplateInteract:
+  category: 4
   default: '0'
+  help: Always show nameplates for soft interact target
 SoftTargetNameplateSize:
+  category: 4
   default: '19'
+  help: Size of soft target icon on nameplate (0 to disable)
 softTargettingInteractKeySound:
+  category: 4
   default: '0'
+  help: Setting for soft targeting that enables sound cues
 SoftTargetTooltipDurationMs:
+  category: 4
   default: '2000'
 SoftTargetTooltipEnemy:
+  category: 4
   default: '0'
 SoftTargetTooltipFriend:
+  category: 4
   default: '0'
 SoftTargetTooltipInteract:
+  category: 4
   default: '0'
 SoftTargetTooltipLocked:
+  category: 4
   default: '0'
 SoftTargetWithLocked:
+  category: 4
   default: '1'
+  help: Allows soft target selection while player has a locked target. 2 = always
+    do soft targeting
 SoftTargetWorldtextFarDist:
+  category: 4
   default: '40.000000'
 SoftTargetWorldtextNearDist:
+  category: 4
   default: '4.000000'
 SoftTargetWorldtextNearScale:
+  category: 4
   default: '1.000000'
 SoftTargetWorldtextSize:
+  category: 4
   default: '32.000000'
 sortCharListByLastActive:
+  category: 4
   default: '0'
+  help: Whether to sort the character list by last active time
 sortDiskReads:
+  category: 4
   default: '0'
+  help: Sort async disk reads to minimize seeks (requires restart)
 soulbindsActivatedTutorial:
+  category: 4
   default: ''
+  help: Bitfield for tutorializing activating soulbinds
 soulbindsLandingPageTutorial:
+  category: 4
   default: ''
+  help: Boolean indicating if the landing page tutorial has been completed.
 soulbindsViewedTutorial:
+  category: 4
   default: ''
+  help: Bitfield for tutorializing viewing soulbinds trees
+Sound_AllyPlayerHighpassDSPCutoff:
+  category: 7
+  help: The cutoff value to use for the Highpass filter on the Ally Player bus (default
+    80 Hz)
 Sound_AlternateListener:
+  category: 7
   default: '1'
+  help: When enabled, calculates listener forward by simply using the camera's yaw
+    value, instead of a vector from camera position to listener position
+Sound_AmbienceHighpassDSPCutoff:
+  category: 7
+  help: The cutoff value to use for the Highpass filter on the Ambience bus (default
+    100 Hz)
 Sound_AmbienceVolume:
+  category: 5
   default: '0.6'
+  help: ''
 Sound_DialogVolume:
+  category: 7
   default: '1.0'
+  help: Dialog Volume (0.0 to 1.0)
 Sound_DSPBufferSize:
+  category: 7
   default: '0'
+  help: sound buffer size, default 0
 Sound_EnableAllSound:
+  category: 7
   default: '1'
+  help: ''
 Sound_EnableAmbience:
+  category: 7
   default: '1'
+  help: Enable Ambience
 Sound_EnableArmorFoleySoundForOthers:
+  category: 7
   default: '1'
+  help: ''
 Sound_EnableArmorFoleySoundForSelf:
+  category: 7
   default: '1'
+  help: ''
 Sound_EnableDialog:
+  category: 7
   default: '1'
+  help: all dialog
 Sound_EnableDSPEffects:
+  category: 7
   default: '1'
+  help: ''
 Sound_EnableEmoteSounds:
+  category: 7
   default: '1'
+  help: ''
 Sound_EnableEncounterWarningsSounds:
+  category: 7
   default: '1'
+  help: Enable Encounter Warnings Sounds
 Sound_EnableErrorSpeech:
+  category: 7
   default: '1'
+  help: error speech
 Sound_EnableGameplaySFX:
+  category: 7
   default: '1'
+  help: enables gameplay-specific sfx
 Sound_EnableMixMode2:
+  category: 7
   default: '0'
+  help: test
 Sound_EnableMusic:
+  category: 7
   default: '1'
+  help: Enables music
 Sound_EnablePetBattleMusic:
+  category: 7
   default: '1'
+  help: Enables music in pet battles
 Sound_EnablePetSounds:
+  category: 7
   default: '1'
+  help: Enables pet sounds
 Sound_EnablePingSounds:
+  category: 7
   default: '1'
+  help: Enable Ping Sounds
 Sound_EnablePositionalLowPassFilter:
+  category: 7
   default: '1'
+  help: Environmental effect to make sounds duller behind you or far away
 Sound_EnableReverb:
+  category: 7
   default: '1'
+  help: ''
 Sound_EnableSFX:
+  category: 7
   default: '1'
+  help: ''
 Sound_EnableSoundWhenGameIsInBG:
+  category: 7
   default: '1'
+  help: Enable Sound When Game Is In Background
 Sound_EncounterWarningsVolume:
+  category: 7
   default: '1.000000'
+  help: Encounter Warnings Volume (0.0 to 1.0)
+Sound_EnemyPlayerHighpassDSPCutoff:
+  category: 7
+  help: The cutoff value to use for the Highpass filter on the Enemy Player bus (default
+    80 Hz)
 Sound_GameplaySFX:
+  category: 7
   default: '1.000000'
+  help: sound volume (0.0 to 1.0)
 Sound_ListenerAtCharacter:
+  category: 7
   default: '1'
+  help: lock listener at character
 Sound_MasterVolume:
+  category: 7
   default: '1.0'
+  help: master volume (0.0 to 1.0)
 Sound_MaxCacheableSizeInBytes:
+  category: 7
   default: '174762'
+  help: Max sound size that will be cached, larger files will be streamed instead
 Sound_MaxCacheSizeInBytes:
+  category: 7
   default: '134217728'
+  help: Max cache size in bytes
 Sound_MusicVolume:
+  category: 5
   default: '0.4'
+  help: ''
+Sound_NPCHighpassDSPCutoff:
+  category: 7
+  help: The cutoff value to use for the Highpass filter on the NPC bus (default 80
+    Hz)
 Sound_NumChannels:
+  category: 7
   default: '64'
+  help: number of sound channels
 Sound_OutputDriverIndex:
+  category: 7
   default: '0'
+  help: ''
 Sound_OutputDriverName:
+  category: 5
   default: Primary Sound Driver
+  help: ''
 Sound_OutputSampleRate:
+  category: 7
   default: '44100'
+  help: output sample rate
 Sound_PingVolume:
+  category: 7
   default: '1.0'
+  help: Ping Volume (0.0 to 1.0)
 Sound_SFXVolume:
+  category: 7
   default: '1.0'
+  help: sound volume (0.0 to 1.0)
 Sound_VoiceChatInputDriverIndex:
+  category: 7
   default: '0'
+  help: ''
 Sound_VoiceChatInputDriverName:
+  category: 7
   default: Primary Sound Capture Driver
+  help: ''
 Sound_VoiceChatOutputDriverIndex:
+  category: 7
   default: '0'
+  help: ''
 Sound_VoiceChatOutputDriverName:
+  category: 7
   default: Primary Sound Driver
+  help: ''
 Sound_ZoneMusicNoDelay:
+  category: 7
   default: '0'
+  help: ''
 SoundPerf_VariationCap:
+  category: 7
   default: '32'
+  help: Limit sound kit variations to cut down on memory usage and disk thrashing
+    on 32-bit machines
 SpawnRegion:
+  category: 5
   default: '0'
 specular:
+  category: 1
   default: '1'
+  help: Specular lighting multiplier (0-1)
 speechToText:
+  category: 4
   default: '0'
+  help: Allows enabling transcription on a voice channel in order to see written text
+    based on the words spoken by other players
 spellActivationOverlayOpacity:
+  category: 4
   default: '0.650000'
+  help: The opacity of the Spell Activation Overlays (a.k.a. Spell Alerts)
 spellBookHidePassives:
+  category: 4
   default: '0'
+  help: Stores whether to hide Passive spells in the SpellBook pane
 spellBookMinimize:
+  category: 4
   default: '0'
+  help: Stores whether to always show the the SpellBook pane in half-screen minimized
+    mode
 spellClutter:
+  category: 5
   default: '4'
+  help: ''
 SpellCooldownDebugger:
+  category: 5
   default: '0'
 spellDiminishPVPEnemiesEnabled:
+  category: 4
   default: '1'
+  help: Determines if we should show crowd control diminishing returns on enemy unit
+    frames in arenas
 spellDiminishPVPOnlyTriggerableByMe:
+  category: 4
   default: '0'
+  help: Determines if we should show crowd control diminishing returns for all categories
+    or only the ones you could cause with your spells
 SpellEventLog:
+  category: 5
   default: '0'
 SpellOverrides:
+  category: 5
   default: '0'
 SpellQueueWindow:
+  category: 4
   default: '400'
+  help: Sets how early you can pre-activate/queue a spell/ability. (In Milliseconds)
 SpellScriptEventLog:
+  category: 5
   default: '0'
 SpellTargeting:
+  category: 5
   default: '0'
 spellVisualDensityFilterSetting:
+  category: 4
   default: '4'
+  help: SVK Density, set by the UI Spell Density setting. 0 - none (dev-only), 1 -
+    minimum, 2 - reduced, 3 - performance, 4 - full
 SpellVisuals:
+  category: 5
   default: '0'
+splashScreenNormal:
+  category: 5
+  help: ''
 SplineOpt:
+  category: 0
   default: '1'
+  help: toggles use of spline coll optimization
 SSAO:
+  category: 1
   default: '0'
+  help: Screen-Space Ambient Occlusion
 ssaoMagicNormals:
+  category: 1
   default: '1'
+  help: SSAO Use combined GBuffer and face normals; attempts to get the best compromise
+    for architecture, foliage, and characters
 ssaoMagicThresholdHigh:
+  category: 1
   default: '50'
+  help: SSAO High threshold for transitioning from gbuffer to face normal (degrees)
 ssaoMagicThresholdLow:
+  category: 1
   default: '25'
+  help: SSAO Low threshold for transitioning from gbuffer to face normal (degrees)
 SSAOType:
+  category: 1
   default: '0'
+  help: Screen-Space Ambient Occlusion Type
 statusText:
+  category: 4
   default: '0'
+  help: Whether the status bars show numeric health/mana values
 statusTextDisplay:
+  category: 4
   default: NONE
+  help: Whether numeric health/mana values are shown as raw values or percentages,
+    or both
 stopAutoAttackOnTargetChange:
+  category: 4
   default: '0'
+  help: Whether to stop attacking when changing targets
 streamingCameraLookAheadTime:
+  category: 1
   default: '2000'
+  help: Look ahead time for streaming.
 streamingCameraMaxRadius:
+  category: 1
   default: '250'
+  help: Max radius of the streaming camera.
 streamingCameraRadius:
+  category: 1
   default: '100'
+  help: Base radius of the streaming camera.
 streamStatusMessage:
+  category: 4
   default: '1'
+  help: Whether to display status messages while streaming content
 sunShafts:
+  category: 1
   default: '0'
+  help: SunShafts
 superTrackerDist:
+  category: 4
   default: '0.750000'
+  help: ''
 SuppressCpuMicrocodeChecks:
+  category: 5
   default: '0'
+  help: Disables CPU Microcode checks
 synchronizeBindings:
+  category: 5
   default: '1'
 synchronizeChatFrames:
+  category: 5
   default: '1'
 synchronizeConfig:
+  category: 5
   default: '1'
 taintLog:
+  category: 0
   default: '0'
+  help: 'Controls debug logging of Lua taint and restricted action events to the ''taint.log''
+    file:
+
+    0: Disable all logging
+
+    1: Log blocked action errors and taint events leading up to them
+
+    2: Log tainted reads and writes of global variables
+
+    3: Log tainted reads and writes of upvalues
+
+    4: Log tainted reads and writes of table fields'
 taintLogObjectSecrets:
+  category: 0
   default: '0'
+  help: If enabled, include additional taint log entries when script objects gain
+    secret aspects or values.
+talentFrameShown:
+  category: 5
+  help: ''
 talentPointsSpent:
+  category: 4
   default: '0'
+  help: The player has spent a talent point
 TargetAutoEnemy:
+  category: 4
   default: '1'
+  help: Auto-Target from your single target helpful spells
 TargetAutoFriend:
+  category: 4
   default: '1'
+  help: Auto-Target from your single target helpful spells
 TargetAutoLock:
+  category: 4
   default: '0'
+  help: Lock targets auto-set by the game
 TargetEnemyAttacker:
+  category: 4
   default: '1'
+  help: Auto-Target Enemy when they attack you
 targetFPS:
+  category: 1
   default: '60'
+  help: Set target FPS. Dynamic actions will be taken if you fall below the FPS target
 TargetNearestUseNew:
+  category: 4
   default: '1'
+  help: Use new 7.2 'nearest target' functionality (Set to 0 for 6.x style tab targeting)
 TargetPriorityCombatLock:
+  category: 4
   default: '1'
+  help: 1=Lock to in-combat targets when starting from an in-combat target. 2=Further
+    restrict to in-combat with player.
 TargetPriorityCombatLockContextualRelaxation:
+  category: 4
   default: '1'
+  help: 1=Enables relaxation of combat lock based on context (eg. no in-combat target
+    infront)
 TargetPriorityCombatLockHighlight:
+  category: 4
   default: '0'
+  help: 1=Lock to in-combat targets when starting from an in-combat target. 2=Further
+    restrict to in-combat with player. (while doing hold-to-target)
 TargetPriorityPvp:
+  category: 4
   default: '1'
+  help: When in pvp, give higher priority to players and important pvp targets (1
+    = players & npc bosses, 2 = all pvp targets, 3 = players only)
 telemetryWowlabsPackage:
+  category: 5
   default: Blizzard.Telemetry.Wow_Labs_PTR
+  help: The secondary package we want to send telemetry to e.g. Wow_Wowlabs
 telemetryWowPackage:
+  category: 5
   default: Blizzard.Telemetry.Wow_Mainline_PTR
+  help: The primary package we want to send telemetry to e.g. Wow_Mainline or Wow_Classic
 teleportMaxNoLoadDist:
+  category: 1
   default: '200'
+  help: Max teleport distanace without preload
 terrainLodDist:
+  category: 5
   default: '400'
+  help: ''
 TerrainLodDiv:
+  category: 5
   default: '768'
+  help: ''
 terrainMipLevel:
+  category: 5
   default: '0'
+  help: ''
 test_cameraDynamicPitch:
+  category: 4
   default: '0.000000'
+  help: Adjust camera pitch according to zoom distance for a more cinematic view
 test_cameraDynamicPitchBaseFovPad:
+  category: 4
   default: '0.400000'
+  help: Fraction of screen height to keep feet below
 test_cameraDynamicPitchBaseFovPadDownScale:
+  category: 4
   default: '0.250000'
+  help: Strength of dynamic pitch when looking down
 test_cameraDynamicPitchBaseFovPadFlying:
+  category: 4
   default: '0.750000'
+  help: Fraction of screen height to keep character below when able to fly
 test_cameraDynamicPitchSmartPivotCutoffDist:
+  category: 4
   default: '10.000000'
+  help: Dynamic pitch disables Smart Pivot within this camera distance
 test_cameraHeadMovementDeadZone:
+  category: 4
   default: '0.015000'
 test_cameraHeadMovementFirstPersonDampRate:
+  category: 4
   default: '20.000000'
 test_cameraHeadMovementMovingDampRate:
+  category: 4
   default: '10.000000'
 test_cameraHeadMovementMovingStrength:
+  category: 4
   default: '0.500000'
 test_cameraHeadMovementRangeScale:
+  category: 4
   default: '5.000000'
 test_cameraHeadMovementStandingDampRate:
+  category: 4
   default: '10.000000'
 test_cameraHeadMovementStandingStrength:
+  category: 4
   default: '0.300000'
 test_cameraHeadMovementStrength:
+  category: 4
   default: '0.000000'
 test_cameraOverShoulder:
+  category: 4
   default: '0.000000'
 test_cameraTargetFocusEnemyEnable:
+  category: 4
   default: '0'
 test_cameraTargetFocusEnemyStrengthPitch:
+  category: 4
   default: '0.400000'
 test_cameraTargetFocusEnemyStrengthYaw:
+  category: 4
   default: '0.500000'
 test_cameraTargetFocusInteractEnable:
+  category: 4
   default: '0'
 test_cameraTargetFocusInteractStrengthPitch:
+  category: 4
   default: '0.750000'
 test_cameraTargetFocusInteractStrengthYaw:
+  category: 4
   default: '1.000000'
 textLocale:
+  category: 4
   default: ''
+  help: Set the game locale for text
 textToSpeech:
+  category: 4
   default: '0'
+  help: Reads chat text out loud using the voice text to speech system based on the
+    selected options
 textureErrorColors:
+  category: 1
   default: '1'
+  help: If enabled, replaceable textures that aren't specified will be purple
 textureFilteringMode:
+  category: 1
   default: '5'
+  help: Texture filtering mode
 ThreadPoolLimitHP:
+  category: 10
   default: '6'
+  help: Limit num threads for High prio jobs
 ThreadPoolLimitLP:
+  category: 10
   default: '6'
+  help: Limit num threads for Low prio jobs
 ThreadPoolLimitMP:
+  category: 10
   default: '6'
+  help: Limit num threads for Mid prio jobs
 ThreadPoolPerThreadAllocator:
+  category: 10
   default: '1'
+  help: 0=Disabled, 1=Allow, 2=Force (around 12% faster but uses ~300MB more memory)
 threatPlaySounds:
+  category: 4
   default: '1'
+  help: Whether or not to sounds when certain threat transitions occur
 threatShowNumeric:
+  category: 4
   default: '0'
+  help: Whether or not to show numeric threat on the target and focus frames
 threatWarning:
+  category: 4
   default: '3'
+  help: Whether or not to show threat warning UI (0 = off, 1 = in dungeons, 2 = in
+    party/raid, 3 = always)
 threatWorldText:
+  category: 4
   default: '1'
+  help: Whether or not to show threat floaters in combat
 timeMgrAlarmEnabled:
+  category: 4
   default: '0'
+  help: Toggles whether or not the time manager's alarm will go off
 timeMgrAlarmMessage:
+  category: 4
   default: ''
+  help: The time manager's alarm message
 timeMgrAlarmTime:
+  category: 4
   default: '0'
+  help: The time manager's alarm time in minutes
 timeMgrUseLocalTime:
+  category: 4
   default: '0'
+  help: Toggles the use of either the realm time or your system time
 timeMgrUseMilitaryTime:
+  category: 4
   default: '0'
+  help: Toggles the display of either 12 or 24 hour time
 titleBarShortName:
+  category: 5
   default: '0'
+  help: ''
 titleBarShowAccountName:
+  category: 5
   default: '0'
+  help: ''
 titleBarShowBuildInfo:
+  category: 5
   default: '0'
+  help: ''
 titleBarShowCharacterName:
+  category: 5
   default: '0'
+  help: ''
 titleBarShowConfigName:
+  category: 5
   default: '0'
+  help: ''
 titleBarShowGxInfo:
+  category: 5
   default: '0'
+  help: ''
 titleBarShowPID:
+  category: 5
   default: '0'
+  help: ''
 titleBarShowRealmName:
+  category: 5
   default: '0'
+  help: ''
 toastDuration:
+  category: 4
   default: '4'
+  help: How long to display Battle.net toast windows, in seconds
 tooltipShowAuraSpellIDs:
+  category: 4
   default: '0'
+  help: Show spell IDs in tooltips for unit auras.
 toyBoxCollectedFilters:
+  category: 4
   default: '0'
+  help: Bitfield for which collected filters are applied in the toybox
 toyBoxExpansionFilters:
+  category: 4
   default: '0'
+  help: Bitfield for which expansion filters are applied in the toybox
 toyBoxSourceFilters:
+  category: 4
   default: '0'
+  help: Bitfield for which source filters are applied in the toybox
 trackedAchievements:
+  category: 4
   default: ''
+  help: Internal cvar for saving tracked achievements in order
 trackedInitiativeTasks:
+  category: 4
   default: ''
+  help: Internal cvar for saving tracked initiative tasks in order
 trackedPerksActivities:
+  category: 5
   default: ''
+  help: ''
 trackedProfessionRecipes:
+  category: 4
   default: ''
+  help: Internal cvar for saving tracked recipes in order
 trackedProfessionRecraftRecipes:
+  category: 4
   default: ''
+  help: Internal cvar for saving tracked recraft recipes in order
 trackedQuests:
+  category: 4
   default: ''
+  help: Internal cvar for saving automatically tracked quests in order
 trackedWorldQuests:
+  category: 4
   default: ''
+  help: Internal cvar for saving automatically tracked world quests
 transmogCurrentSpecOnly:
+  category: 4
   default: '0'
+  help: Stores whether transmogs apply to current spec instead of all specs
 transmogDebug:
+  category: 4
   default: '0'
+  help: Enables Transmog Debug Logging
 transmogHideIgnoredSlots:
+  category: 4
   default: '0'
+  help: Whether ignored slots display as hidden or unassigned in the transmog frame
 transmogPreviewedWeaponToggle:
+  category: 4
   default: '0'
+  help: Whether the transmog ModelScene should show the MH/OH combo or the RangedWeapon
 transmogrifySetsFilters:
+  category: 4
   default: '0'
+  help: Bitfield for which transmog sets filters are applied in the transmog sets
+    tab
 transmogrifyShowCollected:
+  category: 4
   default: '1'
+  help: Whether to show collected transmogs in the at the transmogrifier
 transmogrifyShowUncollected:
+  category: 4
   default: '0'
+  help: Whether to show uncollected transmogs in the at the transmogrifier
 transmogrifySourceFilters:
+  category: 4
   default: '0'
+  help: Bitfield for which source filters are applied in the  wardrobe at the transmogrifier
 transmogShowID:
+  category: 4
   default: '0'
+  help: Shows the itemModifiedAppearanceID or setID in transmog tooltips
 TurnSpeed:
+  category: 5
   default: '180.000000'
+  help: Set the keyboard turn rate in degrees per second; capped by the server
 UberTooltips:
+  category: 4
   default: '1'
+  help: Show verbose tooltips
 uiScale:
+  category: 5
   default: '1.000000'
+  help: ''
 uiScaleMultiplier:
+  category: 4
   default: '-1.000000'
+  help: A multiplier for the default UI scale. -1=determine based on system/monitor
+    DPI, 0.5-2.0=multiplier to use when calculating UI scale. Only applied when useUIScale
+    is 0.
 unitClutter:
+  category: 4
   default: '1'
+  help: Enables/Disables unit clutter
 unitClutterInstancesOnly:
+  category: 4
   default: '1'
+  help: Whether or not to use unit clutter in instances only (0 or 1)
 unitClutterPlayerThreshold:
+  category: 4
   default: '9'
+  help: The number of players that have to be nearby to trigger unit clutter
 UnitEnterCombatLog:
+  category: 5
   default: '0'
 unitFacingPlayerDeadZoneDeg:
+  category: 4
   default: '60'
+  help: Degrees outside a unit's default facing a player has to be for the unit to
+    face them on interact
 UnitNameEnemyGuardianName:
+  category: 4
   default: '1'
 UnitNameEnemyMinionName:
+  category: 4
   default: '1'
 UnitNameEnemyPetName:
+  category: 4
   default: '1'
 UnitNameEnemyPlayerName:
+  category: 4
   default: '1'
 UnitNameEnemyTotemName:
+  category: 4
   default: '1'
 UnitNameFocused:
+  category: 4
   default: '1'
 UnitNameForceHideMinus:
+  category: 4
   default: '0'
 UnitNameFriendlyGuardianName:
+  category: 4
   default: '1'
 UnitNameFriendlyMinionName:
+  category: 4
   default: '1'
 UnitNameFriendlyPetName:
+  category: 4
   default: '1'
 UnitNameFriendlyPlayerName:
+  category: 4
   default: '1'
 UnitNameFriendlySpecialNPCName:
+  category: 5
   default: '1'
+  help: ''
 UnitNameFriendlyTotemName:
+  category: 4
   default: '1'
 UnitNameGuildTitle:
+  category: 4
   default: '1'
 UnitNameHostleNPC:
+  category: 5
   default: '1'
+  help: ''
 UnitNameInteractiveNPC:
+  category: 5
   default: '1'
+  help: ''
 UnitNameNonCombatCreatureName:
+  category: 4
   default: '0'
 UnitNameNPC:
+  category: 4
   default: '0'
 UnitNameOwn:
+  category: 4
   default: '0'
 UnitNamePlayerGuild:
+  category: 4
   default: '1'
 UnitNamePlayerPVPTitle:
+  category: 4
   default: '1'
 unitsLookAtPlayers:
+  category: 4
   default: '1'
+  help: Enables units turning their head to look at players
 UnitVisibility:
+  category: 5
   default: '0'
 unlockedMajorFactions:
+  category: 4
   default: ''
+  help: Internal cvar for tracking unlocked Major Factions. Used to play a toast when
+    a new faction has been unlocked.
 useBLEEP:
+  category: 6
   default: '0'
+  help: Client override to always prefer BLEEP, when available
 useCommentatorSelectionCircles:
+  category: 4
   default: '1'
+  help: Determines whether to use the commentator selection circles or the default
+    selection circles while spectating or commentating a wargame
 useHighResTextures:
+  category: 4
   default: '1'
+  help: Prefer upscaled versions of texture assets when available
 useIPv6:
+  category: 6
   default: '0'
+  help: Enable the usage of IPv6 sockets
 UseKeyHeldSpellErrorPollTime:
+  category: 4
   default: '500'
+  help: (Internal only) Time between a failed cast and when it should attempt to cast
+    again in ms. (Clamped to 100 and 10000)
 useMaxFPS:
+  category: 1
   default: '0'
+  help: Enables or disables FPS limit
 useMaxFPSBk:
+  category: 1
   default: '1'
+  help: Enables or disables background FPS limit
 userFontScale:
+  category: 4
   default: '1.000000'
+  help: 'in-game: Defines the scale of the font used in places around the UI where
+    readability requires larger defaults which are still customizable by the user.'
 userFontScaleGlue:
+  category: 4
   default: '1.390000'
+  help: 'glues: Defines the scale of the font used in places around the UI where readability
+    requires larger defaults which are still customizable by the user.'
 useShadowMapping:
+  category: 1
   default: '1'
+  help: Use shadow mapping
 UseSlug:
+  category: 0
   default: '1'
+  help: Render with slug text
 useTargetFPS:
+  category: 1
   default: '1'
+  help: Enables or disables the target FPS
 useUiScale:
+  category: 5
   default: '0'
+  help: ''
 validateFrameXML:
+  category: 4
   default: '1'
+  help: Display warning when FrameXML detects unparsed elements
 VerboseSpellScriptEventLog:
+  category: 5
   default: '0'
 videoOptionsVersion:
+  category: 5
   default: '0'
+  help: ''
 videoOptionsVersionDefault:
+  category: 1
   default: '0'
+  help: ''
 violenceLevel:
+  category: 4
   default: '2'
+  help: Sets the violence level of the game
 VoiceChatMasterVolumeScale:
+  category: 5
   default: '1'
+  help: ''
 VoiceCommunicationMode:
+  category: 7
   default: '0'
+  help: 'Which communication mode to use for voice chat: push-to-talk, open mic, etc...'
 VoiceEnableWhenGameIsInBG:
+  category: 7
   default: '1'
+  help: Enable Voice Chat when game is in background
 VoiceInputDevice:
+  category: 7
   default: ''
+  help: Which deviceID you would like to use to pick up the sound of your wonderful
+    voice, usually a microphone of some kind, empty string is system default
 VoiceInputVolume:
+  category: 7
   default: '50'
+  help: The gain applied to your microphone, helps change your speaking volume from
+    other users' perspectives, larger values are louder.
 VoiceOutputDevice:
+  category: 7
   default: ''
+  help: Which deviceID you would like to use to transmit the sound of other users'
+    wonderful voices, usually a speakers of some kind, empty string is system default
 VoiceOutputVolume:
+  category: 7
   default: '50'
+  help: The volume of incoming voice chat, how loud other users' voices sound
 VoicePushToTalkKeybind:
+  category: 7
   default: LMETA
+  help: Push to talk key
 VoiceSelfDeafened:
+  category: 7
   default: '0'
+  help: Voice Chat Self Deafened
 VoiceSelfMuted:
+  category: 7
   default: '0'
+  help: Voice Chat Self Muted
 VoiceVADSensitivity:
+  category: 7
   default: '43'
+  help: How sensitive voice activity detection is.  Value ranges from 0 to 100, smaller
+    values will transmit at a lower noise threshold.
 volumeFog:
+  category: 1
   default: '0'
+  help: Volume Fog
 volumeFogDisableLightScattering:
+  category: 1
   default: '0'
+  help: '0: vf point light scattering enabled. 1: disabled'
 volumeFogDisableNoise:
+  category: 1
   default: '0'
+  help: '0: vf noise enabled. 1: noise disabled'
 volumeFogDisableShadows:
+  category: 1
   default: '0'
+  help: '0: vf shadows enabled. 1: shadows disabled'
 volumeFogInterior:
+  category: 1
   default: '1'
+  help: Volume Fog Interiors
 volumeFogLevel:
+  category: 5
   default: '2'
+  help: ''
 volumeFogUse16BitTexture:
+  category: 1
   default: '1'
+  help: '0: 8 bit. 1: 16 bit. REQUIRES gxRestart'
+vrsParticles:
+  category: 1
+  help: Render scale like effect for particles. Only used if lots of particles are
+    on screen
 vrsValar:
+  category: 1
   default: '0'
+  help: Generate a shading rate mask based on velocity and luminance. Requires VRS
+    Tier 2.
 vrsValarGPUMode:
+  category: 1
   default: '0'
+  help: 0 - Auto-detect, 1 - Standard (discrete GPU default), 2 - Low Power (integrated
+    GPU default) modes for VALAR
+vrsWorldGeo:
+  category: 1
+  help: Render scale like effect for terrain, buildings and liquids
 vsync:
+  category: 5
   default: '1'
+  help: ''
 WalkableSurfacesValidationLog:
+  category: 5
   default: '0'
 wardrobeSetsFilters:
+  category: 4
   default: '0'
+  help: Bitfield for which transmog sets filters are applied in the wardrobe in the
+    collection journal
 wardrobeShowAllFactions:
+  category: 4
   default: '0'
+  help: Stores whether to show both Alliance and Horde transmogs in the Wardrobe
 wardrobeShowAllRaces:
+  category: 4
   default: '0'
+  help: Stores whether to show race restricted transmogs in the Wardrobe
 wardrobeShowCollected:
+  category: 4
   default: '1'
+  help: Whether to show collected transmogs in the wardrobe
 wardrobeShowUncollected:
+  category: 4
   default: '1'
+  help: Whether to show uncollected transmogs in the wardrobe
 wardrobeSourceFilters:
+  category: 4
   default: '0'
+  help: Bitfield for which source filters are applied in the wardrobe in the collection
+    journal
+watchFrameBaseAlpha:
+  category: 5
+  help: ''
 waterDetail:
+  category: 1
   default: '0'
+  help: Water surface detail
 weatherDensity:
+  category: 5
   default: '2'
+  help: ''
 webChallengeURLTimeout:
+  category: 5
   default: '60'
+  help: How long to wait for the web challenge URL (in seconds). 0 means wait forever.
 whisperMode:
+  category: 4
   default: popout
+  help: 'The action new whispers take by default: "popout", "inline", "popout_and_inline"'
 wholeChatWindowClickable:
+  category: 4
   default: '1'
+  help: Whether the user may click anywhere on a chat window to change EditBox focus
+    (only works in IM style)
 wmoDoodadDist:
+  category: 1
   default: '2000'
+  help: Wmo doodad load distance
 wmoLodDist:
+  category: 5
   default: '300'
+  help: ''
 wmoLodDistScale:
+  category: 1
   default: '1.0'
+  help: Wmo level of detail distance scale
 wmoPortalFadeScale:
+  category: 1
   default: '1000'
+  help: Wmo portal fade scale
 wmoPortalInteriorFade:
+  category: 1
   default: '1'
+  help: Wmo portal interior fade
 WorldActionsLog:
+  category: 5
   default: '0'
 worldBaseMip:
+  category: 5
   default: '0'
+  help: ''
 worldIntersectMaxJobs:
+  category: 1
   default: '32'
+  help: Maximum job threads for culling
 worldLoadSort:
+  category: 1
   default: '1'
+  help: Sort objects by distance when loading
 worldMapShowCursorCoords:
+  category: 4
   default: '1'
+  help: Show cursor coordinates on the world map
 worldMapShowPlayerCoords:
+  category: 4
   default: '1'
+  help: Show player coordinates on the world map
 worldPreloadHighResTextures:
+  category: 1
   default: '1'
+  help: Require high res textures to be loaded in streaming non critical radius when
+    preloading
 worldPreloadNonCritical:
+  category: 1
   default: '2'
+  help: Require objects to be loaded in streaming non critical radius when preloading
 worldPreloadNonCriticalTimeout:
+  category: 1
   default: '45'
+  help: World preload time (in seconds) when non-critical items are automatically
+    ignored
 worldPreloadSort:
+  category: 1
   default: '1'
+  help: Sort objects by distance when preloading
 worldQuestFilterAnima:
+  category: 4
   default: '1'
+  help: If enabled, world quests with anima rewards will be shown on the map
 worldQuestFilterArtifactPower:
+  category: 4
   default: '1'
+  help: If enabled, world quests with artifact power rewards will be shown on the
+    map
 worldQuestFilterEquipment:
+  category: 4
   default: '1'
+  help: If enabled, world quests with equipment rewards will be shown on the map
 worldQuestFilterGold:
+  category: 4
   default: '1'
+  help: If enabled, world quests with gold rewards will be shown on the map
 worldQuestFilterProfessionMaterials:
+  category: 4
   default: '1'
+  help: If enabled, world quests with profession material rewards will be shown on
+    the map
 worldQuestFilterReputation:
+  category: 4
   default: '1'
+  help: If enabled, world quests with reputation rewards will be shown on the map
 worldQuestFilterResources:
+  category: 4
   default: '1'
+  help: If enabled, world quests with order resource rewards or war resource rewards
+    will be shown on the map
 WorldTextCritScreenY_v2:
+  category: 4
   default: '0.0275'
 WorldTextGravity_v2:
+  category: 4
   default: '0.500000'
+  help: ''
 WorldTextMinAlpha_v2:
+  category: 4
   default: '0.500000'
+  help: ''
 WorldTextMinSize:
+  category: 4
   default: '0.000000'
+  help: Smallest size used for world text like player names
 WorldTextNonRandomZ_v2:
+  category: 4
   default: '2.5'
 WorldTextRampDuration_v2:
+  category: 4
   default: '1.000000'
+  help: ''
 WorldTextRampPow_v2:
+  category: 4
   default: '1.900000'
+  help: ''
 WorldTextRampPowCrit_v2:
+  category: 4
   default: '8.000000'
+  help: ''
 WorldTextRandomXY_v2:
+  category: 4
   default: '0.0'
 WorldTextRandomZMax_v2:
+  category: 4
   default: '1.5'
 WorldTextRandomZMin_v2:
+  category: 4
   default: '0.8'
 WorldTextScale_v2:
+  category: 4
   default: '1.000000'
+  help: ''
 WorldTextScreenY_v2:
+  category: 4
   default: '0.015'
 WorldTextStartPosRandomness_v2:
+  category: 4
   default: '1.0'
 worldViewCullMaxJobs:
+  category: 1
   default: '32'
+  help: Maximum job threads for culling
 xpBarText:
+  category: 4
   default: '0'
+  help: Whether the XP bar shows the numeric experience value

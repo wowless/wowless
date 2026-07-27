@@ -4,5 +4,10 @@ type:
     key: string
     value:
       record:
+        category:
+          required: true
+          type: number
         default:
+          type: string
+        help:
           type: string
