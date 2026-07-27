@@ -13,7 +13,9 @@
     }
   },
   "features": {
-    "ghcr.io/devcontainers/features/github-cli:1": {}
+    "ghcr.io/anthropics/devcontainer-features/claude-code:1.0": {},
+    "ghcr.io/devcontainers/features/github-cli:1": {},
+    "ghcr.io/devcontainers/features/node:1": {}
   },
   "initializeCommand": "(test -f .env && echo \".env exists\") || cp -n .env.dist .env",
   "name": "wowless/wowless",
