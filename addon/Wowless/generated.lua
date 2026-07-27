@@ -474,9 +474,8 @@ G.testsuite.generated = function()
       Texture = function()
         return CreateFrame('Frame'):CreateTexture()
       end,
-      TextureCoordTranslation = function()
-        local frame = CreateFrame('Frame', nil, nil, 'WowlessTextureCoordTranslationFactory')
-        return frame.AnimationGroup.TextureCoordTranslation
+      TextureCoord = function()
+        return CreateFrame('Frame'):CreateAnimationGroup():CreateAnimation('TextureCoord')
       end,
       Translation = function()
         return CreateFrame('Frame'):CreateAnimationGroup():CreateAnimation('Translation')

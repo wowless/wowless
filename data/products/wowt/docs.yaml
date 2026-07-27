@@ -465,7 +465,7 @@ script_objects:
   SimpleAnimScaleLineAPI:
     uiobject: LineScale
   SimpleAnimTextureCoordTranslationAPI:
-    uiobject: TextureCoordTranslation
+    uiobject: TextureCoord
   SimpleAnimTranslationAPI:
     uiobject: Translation
   SimpleAnimTranslationLineAPI:

@@ -1458,10 +1458,7 @@ G.testsuite.uiobjects = function()
       }
     end,
     TextureCoordTranslation = function()
-      if _G.__wowless then
-        return
-      end
-      -- Cannot be created via Lua CreateAnimation.
+      -- The XML name doesn't work from Lua.
       local ag = retn(1, CreateFrame('Frame'):CreateAnimationGroup())
       local tct = retn(1, ag:CreateAnimation('TextureCoordTranslation'))
       return {

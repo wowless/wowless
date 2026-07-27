@@ -659,14 +659,6 @@
     </Frames>
   </Frame>
 
-  <Frame name='WowlessTextureCoordTranslationFactory' virtual='true'>
-    <Animations>
-      <AnimationGroup parentKey='AnimationGroup'>
-        <TextureCoordTranslation parentKey='TextureCoordTranslation' />
-      </AnimationGroup>
-    </Animations>
-  </Frame>
-
   <Script>
     WowlessLog = {}
   </Script>
