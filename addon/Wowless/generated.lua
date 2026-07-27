@@ -179,7 +179,13 @@ G.testsuite.generated = function()
       end
       return tt
     end
-    local expectedCVars = lowify(_G.WowlessData.CVars)
+    local expectedCVars = lowify((function()
+      local t = {}
+      for k, v in pairs(_G.WowlessData.CVars) do
+        t[k] = v.value
+      end
+      return t
+    end)())
     local actualCVars = lowify((function()
       -- Do this early to avoid issues with deferred cvar creation.
       local t = {}

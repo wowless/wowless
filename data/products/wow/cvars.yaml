@@ -1,1628 +1,3256 @@
-accountNeedsTurnStrafeDialog: '1'
-acknowledgedArrowCallouts: '0'
-ActionButtonUseKeyDown: '1'
-ActionButtonUseKeyHeldSpell: '0'
-ActionCombatCameraEnable: '0'
-actionedAdventureJournalEntries: ''
-addFriendInfoShown: '0'
-addonChallengeModeRestrictionsForced: '0'
-addonChatRestrictionsForced: '0'
-addonCombatRestrictionsForced: '0'
-addonEncounterRestrictionsForced: '0'
-addonLoadDebugging: '0'
-addonMapRestrictionsForced: '0'
-addonPerformanceMsgError: '0.000000'
-addonPerformanceMsgOverall: '0.000000'
-addonPerformanceMsgWarning: '0.000000'
-addonPvPMatchRestrictionsForced: '0'
-advancedCombatLogging: '0'
-AdvFlyingDynamicFOVEnabled: '1'
-advFlyKeyboardMaxPitchFactor: '5.000000'
-advFlyKeyboardMaxTurnFactor: '8.000000'
-advFlyKeyboardMinPitchFactor: '2.500000'
-advFlyKeyboardMinTurnFactor: '5.000000'
-advFlyPitchControl: '3'
-advFlyPitchControlCameraChase: '20.000000'
-advFlyPitchControlGroundDebounce: '0'
-agentUID: ''
-AIBrain: '0'
-AIController: '0'
-AIControllerEventLog: '0'
-AIEventLog: '0'
-allowCompareWithToggle: '1'
-allowDevPublicKey: '0'
-AllowMacHideAppBinding: '1'
-AllowMacHideOthersBinding: '1'
-AllowMacQuitBinding: '1'
-AllowSoftwareRenderer: '0'
-AllowSpectateMode: '1'
-alwaysCompareItems: '1'
-alwaysShowRuneIcons: '0'
-animFrameSkipLOD: '0'
-arachnophobiaMode: '0'
-AreaTriggerEventLog: '0'
-AreaTriggers: '0'
-assaoAdaptiveQualityLimit: '.45'
-assaoBlurPassCount: '2'
-assaoDetailShadowStrength: '0'
-assaoFadeOutFrom: '50.0'
-assaoFadeOutTo: '300.0'
-assaoHorizonAngleThresh: '0.4'
-assaoNormals: '1'
-assaoRadius: '1.85'
-assaoShadowClamp: '.98'
-assaoShadowMult: '1.1'
-assaoShadowPower: '1.34'
-assaoSharpness: '.98'
-assaoTemporalSSAngleOffset: '0.0'
-assaoTemporalSSRadiusOffset: '1.0'
-assistAttack: '0'
-assistedCombatHighlight: '0'
-assistedCombatHighlightRPE: '0'
-assistedCombatIconUpdateRate: '0.100000'
-assistedCombatReduceHighlights: '1'
-AsyncAssistActions: '0'
-asyncHandlerTimeout: '100'
-asyncThreadSleep: '0'
-auctionDisplayOnCharacter: '0'
-auctionHouseDurationDropdown: '2'
-auctionSortByBuyoutPrice: '0'
-auctionSortByUnitPrice: '0'
-audioLocale: ''
-AuraDebugger: '0'
-AuraEventLog: '0'
-autoAcceptQuickJoinRequests: '0'
-autoClearAFK: '1'
-autoCompleteResortNamesOnRecency: '1'
-autoCompleteUseContext: '1'
-autoCompleteWhenEditingFromCenter: '1'
-autoDismount: '1'
-autoDismountFlying: '0'
-autoFilledMultiCastSlots: '0'
-autoInteract: '0'
-autojoinBGVoice: '0'
-autojoinPartyVoice: '0'
-autoLootDefault: '0'
-autoLootRate: '150'
-AutoPushSpellToActionBar: '1'
-autoQuestPopUps: ''
-autoQuestProgress: '1'
-autoQuestWatch: '1'
-autoSelfCast: '1'
-autoStand: '1'
-autoUnshift: '1'
-bankAutoDepositReagents: '1'
-bankConfirmTabCleanUp: '1'
-BeckonTriggerEventlog: '0'
-BehaviorTree: '0'
-blockChannelInvites: '0'
-blockTrades: '0'
-bodyQuota: '100'
-breakUpLargeNumbers: '1'
-Brightness: '50.000000'
-buffDurations: '1'
-CAADebuffSelfAlert: '0'
-CAAEnabled: '0'
-CAAInterruptCast: '0'
-CAAInterruptCastSuccess: '0'
-CAAPartyHealthFrequency: '0'
-CAAPartyHealthPercent: '0'
-CAAPartyHealthVoice: '0'
-CAAPartyHealthVolume: '100'
-CAAPlayerCastFormat: '4'
-CAAPlayerCastMinTime: '1.500000'
-CAAPlayerCastMode: '0'
-CAAPlayerCastThrottle: '0.000000'
-CAAPlayerCastVoice: '0'
-CAAPlayerCastVolume: '100'
-CAAPlayerHealthFormat: '1'
-CAAPlayerHealthPercent: '0'
-CAAPlayerHealthThrottle: '0.000000'
-CAAPlayerHealthVoice: '0'
-CAAPlayerHealthVolume: '100'
-CAAResource1Formats: ''
-CAAResource1Percents: ''
-CAAResource1Throttle: '0.000000'
-CAAResource1Voice: ''
-CAAResource1Volume: ''
-CAAResource2Formats: ''
-CAAResource2Percents: ''
-CAAResource2Throttle: '0.000000'
-CAAResource2Voice: ''
-CAAResource2Volume: ''
-CAASayCombatEnd: '1'
-CAASayCombatStart: '1'
-CAASayIfTargeted: ''
-CAASayTargetName: '1'
-CAASayYourDebuffs: '1'
-CAASayYourDebuffsFormat: '0'
-CAASayYourDebuffsMinDuration: '1.500000'
-CAASayYourDebuffsVoice: '0'
-CAASayYourDebuffsVolume: '100'
-CAASpeed: '0'
-CAATargetCastFormat: '0'
-CAATargetCastMinTime: '1.500000'
-CAATargetCastMode: '0'
-CAATargetCastThrottle: '0.000000'
-CAATargetCastVoice: '0'
-CAATargetCastVolume: '100'
-CAATargetDeathBehavior: '0'
-CAATargetHealthFormat: '3'
-CAATargetHealthPercent: '2'
-CAATargetHealthThrottle: '0.000000'
-CAATargetHealthVoice: '0'
-CAATargetHealthVolume: '100'
-CAAVoice: '0'
-CAAVolume: '100'
-cacaoBilateralSimilarityDistanceSigma: '0.01'
-calendarShowBattlegrounds: '1'
-calendarShowDarkmoon: '1'
-calendarShowHolidays: '1'
-calendarShowLockouts: '1'
-calendarShowResets: '0'
-calendarShowWeeklyHolidays: '1'
-cameraBobbing: '0'
-cameraBobbingSmoothSpeed: '0.800000'
-cameraCustomViewSmoothing: '0'
-cameraDistanceMaxZoomFactor: '1.900000'
-cameraDistanceRateMult: '1.000000'
-cameraDive: '1'
-CameraFollowGamepadAdjustDelay: '1.000000'
-CameraFollowGamepadAdjustEaseIn: '1.000000'
-CameraFollowOnStick: '0'
-CameraFollowPitchDeadZone: '5.000000'
-CameraFollowPitchSpeed: '1.000000'
-CameraFollowPitchStrength: '0.700000'
-CameraFollowSnapCharacterAngle: '45.000000'
-CameraFollowTargetCombat: '1'
-CameraFollowYawSpeed: '1.000000'
-cameraFov: '90.000000'
-cameraFoVSmoothSpeed: '0.500000'
-cameraGroundSmoothSpeed: '7.500000'
-cameraHeightIgnoreStandState: '0'
-cameraIndirectOffset: '6.000000'
-cameraIndirectVisibility: '1'
-CameraKeepCharacterCentered: '1'
-cameraPitchMoveSpeed: '90.000000'
-cameraPitchSmoothMax: '23.000000'
-cameraPitchSmoothMin: '0.000000'
-cameraPitchSmoothSpeed: '45.000000'
-cameraPivot: '1'
-cameraPivotDXMax: '0.050000'
-cameraPivotDYMin: '0.000000'
-CameraReduceUnexpectedMovement: '0'
-cameraSavedDistance: '5.550000'
-cameraSavedPetBattleDistance: '10.000000'
-cameraSavedPitch: '10.000000'
-cameraSavedVehicleDistance: '-1.000000'
-cameraSmooth: '1'
-cameraSmoothAlwaysFearDelay: '0.000000'
-cameraSmoothAlwaysFearFactor: '1.000000'
-cameraSmoothAlwaysIdleDelay: '0.000000'
-cameraSmoothAlwaysIdleFactor: '1.000000'
-cameraSmoothAlwaysMoveDelay: '0.000000'
-cameraSmoothAlwaysMoveFactor: '1.000000'
-cameraSmoothAlwaysStopDelay: '0.000000'
-cameraSmoothAlwaysStopFactor: '1.000000'
-cameraSmoothAlwaysStrafeDelay: '0.000000'
-cameraSmoothAlwaysStrafeFactor: '1.000000'
-cameraSmoothAlwaysTrackDelay: '0.000000'
-cameraSmoothAlwaysTrackFactor: '1.000000'
-cameraSmoothAlwaysTurnDelay: '0.000000'
-cameraSmoothAlwaysTurnFactor: '1.000000'
-cameraSmoothNeverFearDelay: '0.000000'
-cameraSmoothNeverFearFactor: '0.000000'
-cameraSmoothNeverIdleDelay: '0.000000'
-cameraSmoothNeverIdleFactor: '0.000000'
-cameraSmoothNeverMoveDelay: '0.000000'
-cameraSmoothNeverMoveFactor: '0.000000'
-cameraSmoothNeverStopDelay: '0.000000'
-cameraSmoothNeverStopFactor: '0.000000'
-cameraSmoothNeverStrafeDelay: '0.000000'
-cameraSmoothNeverStrafeFactor: '0.000000'
-cameraSmoothNeverTrackDelay: '0.000000'
-cameraSmoothNeverTrackFactor: '0.000000'
-cameraSmoothNeverTurnDelay: '0.000000'
-cameraSmoothNeverTurnFactor: '0.000000'
-cameraSmoothPitch: '1'
-cameraSmoothSmarterFearDelay: '0.400000'
-cameraSmoothSmarterFearFactor: '10.000000'
-cameraSmoothSmarterIdleDelay: '0.000000'
-cameraSmoothSmarterIdleFactor: '0.000000'
-cameraSmoothSmarterMoveDelay: '0.000000'
-cameraSmoothSmarterMoveFactor: '1.000000'
-cameraSmoothSmarterStopDelay: '0.000000'
-cameraSmoothSmarterStopFactor: '0.000000'
-cameraSmoothSmarterStrafeDelay: '0.000000'
-cameraSmoothSmarterStrafeFactor: '1.000000'
-cameraSmoothSmarterTrackDelay: '0.400000'
-cameraSmoothSmarterTrackFactor: '10.000000'
-cameraSmoothSmarterTurnDelay: '0.000000'
-cameraSmoothSmarterTurnFactor: '1.000000'
-cameraSmoothSmartFearDelay: '0.400000'
-cameraSmoothSmartFearFactor: '10.000000'
-cameraSmoothSmartIdleDelay: '0.000000'
-cameraSmoothSmartIdleFactor: '0.000000'
-cameraSmoothSmartMoveDelay: '0.000000'
-cameraSmoothSmartMoveFactor: '1.000000'
-cameraSmoothSmartStopDelay: '0.000000'
-cameraSmoothSmartStopFactor: '0.000000'
-cameraSmoothSmartStrafeDelay: '0.000000'
-cameraSmoothSmartStrafeFactor: '1.000000'
-cameraSmoothSmartTrackDelay: '0.400000'
-cameraSmoothSmartTrackFactor: '10.000000'
-cameraSmoothSmartTurnDelay: '0.000000'
-cameraSmoothSmartTurnFactor: '1.000000'
-cameraSmoothSplineFearDelay: '0.000000'
-cameraSmoothSplineFearFactor: '4.000000'
-cameraSmoothSplineIdleDelay: '0.000000'
-cameraSmoothSplineIdleFactor: '4.000000'
-cameraSmoothSplineMoveDelay: '0.000000'
-cameraSmoothSplineMoveFactor: '1.000000'
-cameraSmoothSplineStopDelay: '0.000000'
-cameraSmoothSplineStopFactor: '4.000000'
-cameraSmoothSplineStrafeDelay: '0.000000'
-cameraSmoothSplineStrafeFactor: '1.000000'
-cameraSmoothSplineTrackDelay: '0.000000'
-cameraSmoothSplineTrackFactor: '4.000000'
-cameraSmoothSplineTurnDelay: '0.000000'
-cameraSmoothSplineTurnFactor: '1.000000'
-cameraSmoothStyle: '4'
-cameraSmoothTimeMax: '2.000000'
-cameraSmoothTimeMin: '0.100000'
-cameraSmoothTrackingStyle: '4'
-cameraSmoothViewDataAlwaysDistanceDelay: '0.000000'
-cameraSmoothViewDataAlwaysDistanceFactor: '0.000000'
-cameraSmoothViewDataAlwaysPitchDelay: '0.000000'
-cameraSmoothViewDataAlwaysPitchFactor: '1.000000'
-cameraSmoothViewDataAlwaysYawDelay: '0.000000'
-cameraSmoothViewDataAlwaysYawFactor: '1.000000'
-cameraSmoothViewDataNeverDistanceDelay: '0.000000'
-cameraSmoothViewDataNeverDistanceFactor: '0.000000'
-cameraSmoothViewDataNeverPitchDelay: '0.000000'
-cameraSmoothViewDataNeverPitchFactor: '0.000000'
-cameraSmoothViewDataNeverYawDelay: '0.000000'
-cameraSmoothViewDataNeverYawFactor: '0.000000'
-cameraSmoothViewDataSmartDistanceDelay: '0.000000'
-cameraSmoothViewDataSmartDistanceFactor: '0.000000'
-cameraSmoothViewDataSmarterDistanceDelay: '0.000000'
-cameraSmoothViewDataSmarterDistanceFactor: '0.000000'
-cameraSmoothViewDataSmarterPitchDelay: '0.000000'
-cameraSmoothViewDataSmarterPitchFactor: '1.000000'
-cameraSmoothViewDataSmarterYawDelay: '0.000000'
-cameraSmoothViewDataSmarterYawFactor: '1.000000'
-cameraSmoothViewDataSmartPitchDelay: '0.000000'
-cameraSmoothViewDataSmartPitchFactor: '0.000000'
-cameraSmoothViewDataSmartYawDelay: '0.000000'
-cameraSmoothViewDataSmartYawFactor: '1.000000'
-cameraSmoothViewDataSplineDistanceDelay: '0.000000'
-cameraSmoothViewDataSplineDistanceFactor: '0.000000'
-cameraSmoothViewDataSplinePitchDelay: '0.000000'
-cameraSmoothViewDataSplinePitchFactor: '1.000000'
-cameraSmoothViewDataSplineYawDelay: '0.000000'
-cameraSmoothViewDataSplineYawFactor: '1.000000'
-cameraSmoothYaw: '1'
-cameraSubmergePitch: '18.000000'
-cameraSurfacePitch: '0.000000'
-cameraTargetSmoothSpeed: '90.000000'
-cameraTerrainTilt: '0'
-cameraTerrainTiltAlwaysFallAbsorb: '1.000000'
-cameraTerrainTiltAlwaysFallDelay: '0.000000'
-cameraTerrainTiltAlwaysFallFactor: '0.750000'
-cameraTerrainTiltAlwaysFearAbsorb: '1.000000'
-cameraTerrainTiltAlwaysFearDelay: '0.000000'
-cameraTerrainTiltAlwaysFearFactor: '1.000000'
-cameraTerrainTiltAlwaysIdleAbsorb: '1.000000'
-cameraTerrainTiltAlwaysIdleDelay: '0.000000'
-cameraTerrainTiltAlwaysIdleFactor: '1.000000'
-cameraTerrainTiltAlwaysJumpAbsorb: '0.000000'
-cameraTerrainTiltAlwaysJumpDelay: '0.000000'
-cameraTerrainTiltAlwaysJumpFactor: '-1.000000'
-cameraTerrainTiltAlwaysMoveAbsorb: '1.000000'
-cameraTerrainTiltAlwaysMoveDelay: '0.000000'
-cameraTerrainTiltAlwaysMoveFactor: '1.000000'
-cameraTerrainTiltAlwaysStrafeAbsorb: '1.000000'
-cameraTerrainTiltAlwaysStrafeDelay: '0.000000'
-cameraTerrainTiltAlwaysStrafeFactor: '1.000000'
-cameraTerrainTiltAlwaysSwimAbsorb: '0.000000'
-cameraTerrainTiltAlwaysSwimDelay: '0.000000'
-cameraTerrainTiltAlwaysSwimFactor: '1.000000'
-cameraTerrainTiltAlwaysTaxiAbsorb: '0.000000'
-cameraTerrainTiltAlwaysTaxiDelay: '0.000000'
-cameraTerrainTiltAlwaysTaxiFactor: '1.000000'
-cameraTerrainTiltAlwaysTrackAbsorb: '1.000000'
-cameraTerrainTiltAlwaysTrackDelay: '0.000000'
-cameraTerrainTiltAlwaysTrackFactor: '1.000000'
-cameraTerrainTiltAlwaysTurnAbsorb: '1.000000'
-cameraTerrainTiltAlwaysTurnDelay: '0.000000'
-cameraTerrainTiltAlwaysTurnFactor: '1.000000'
-cameraTerrainTiltNeverFallAbsorb: '0.000000'
-cameraTerrainTiltNeverFallDelay: '0.000000'
-cameraTerrainTiltNeverFallFactor: '-1.000000'
-cameraTerrainTiltNeverFearAbsorb: '0.000000'
-cameraTerrainTiltNeverFearDelay: '0.000000'
-cameraTerrainTiltNeverFearFactor: '-1.000000'
-cameraTerrainTiltNeverIdleAbsorb: '0.000000'
-cameraTerrainTiltNeverIdleDelay: '0.000000'
-cameraTerrainTiltNeverIdleFactor: '-1.000000'
-cameraTerrainTiltNeverJumpAbsorb: '0.000000'
-cameraTerrainTiltNeverJumpDelay: '0.000000'
-cameraTerrainTiltNeverJumpFactor: '-1.000000'
-cameraTerrainTiltNeverMoveAbsorb: '0.000000'
-cameraTerrainTiltNeverMoveDelay: '0.000000'
-cameraTerrainTiltNeverMoveFactor: '-1.000000'
-cameraTerrainTiltNeverStrafeAbsorb: '0.000000'
-cameraTerrainTiltNeverStrafeDelay: '0.000000'
-cameraTerrainTiltNeverStrafeFactor: '-1.000000'
-cameraTerrainTiltNeverSwimAbsorb: '0.000000'
-cameraTerrainTiltNeverSwimDelay: '0.000000'
-cameraTerrainTiltNeverSwimFactor: '-1.000000'
-cameraTerrainTiltNeverTaxiAbsorb: '0.000000'
-cameraTerrainTiltNeverTaxiDelay: '0.000000'
-cameraTerrainTiltNeverTaxiFactor: '-1.000000'
-cameraTerrainTiltNeverTrackAbsorb: '0.000000'
-cameraTerrainTiltNeverTrackDelay: '0.000000'
-cameraTerrainTiltNeverTrackFactor: '-1.000000'
-cameraTerrainTiltNeverTurnAbsorb: '0.000000'
-cameraTerrainTiltNeverTurnDelay: '0.000000'
-cameraTerrainTiltNeverTurnFactor: '-1.000000'
-cameraTerrainTiltSmarterFallAbsorb: '1.000000'
-cameraTerrainTiltSmarterFallDelay: '0.000000'
-cameraTerrainTiltSmarterFallFactor: '0.750000'
-cameraTerrainTiltSmarterFearAbsorb: '1.000000'
-cameraTerrainTiltSmarterFearDelay: '0.000000'
-cameraTerrainTiltSmarterFearFactor: '1.000000'
-cameraTerrainTiltSmarterIdleAbsorb: '0.000000'
-cameraTerrainTiltSmarterIdleDelay: '0.000000'
-cameraTerrainTiltSmarterIdleFactor: '-1.000000'
-cameraTerrainTiltSmarterJumpAbsorb: '0.000000'
-cameraTerrainTiltSmarterJumpDelay: '0.000000'
-cameraTerrainTiltSmarterJumpFactor: '-1.000000'
-cameraTerrainTiltSmarterMoveAbsorb: '1.000000'
-cameraTerrainTiltSmarterMoveDelay: '0.000000'
-cameraTerrainTiltSmarterMoveFactor: '1.000000'
-cameraTerrainTiltSmarterStrafeAbsorb: '1.000000'
-cameraTerrainTiltSmarterStrafeDelay: '0.000000'
-cameraTerrainTiltSmarterStrafeFactor: '1.000000'
-cameraTerrainTiltSmarterSwimAbsorb: '0.000000'
-cameraTerrainTiltSmarterSwimDelay: '0.000000'
-cameraTerrainTiltSmarterSwimFactor: '1.000000'
-cameraTerrainTiltSmarterTaxiAbsorb: '0.000000'
-cameraTerrainTiltSmarterTaxiDelay: '0.000000'
-cameraTerrainTiltSmarterTaxiFactor: '1.000000'
-cameraTerrainTiltSmarterTrackAbsorb: '1.000000'
-cameraTerrainTiltSmarterTrackDelay: '0.000000'
-cameraTerrainTiltSmarterTrackFactor: '1.000000'
-cameraTerrainTiltSmarterTurnAbsorb: '1.000000'
-cameraTerrainTiltSmarterTurnDelay: '0.000000'
-cameraTerrainTiltSmarterTurnFactor: '1.000000'
-cameraTerrainTiltSmartFallAbsorb: '1.000000'
-cameraTerrainTiltSmartFallDelay: '0.000000'
-cameraTerrainTiltSmartFallFactor: '0.750000'
-cameraTerrainTiltSmartFearAbsorb: '1.000000'
-cameraTerrainTiltSmartFearDelay: '0.000000'
-cameraTerrainTiltSmartFearFactor: '1.000000'
-cameraTerrainTiltSmartIdleAbsorb: '0.000000'
-cameraTerrainTiltSmartIdleDelay: '0.000000'
-cameraTerrainTiltSmartIdleFactor: '-1.000000'
-cameraTerrainTiltSmartJumpAbsorb: '0.000000'
-cameraTerrainTiltSmartJumpDelay: '0.000000'
-cameraTerrainTiltSmartJumpFactor: '-1.000000'
-cameraTerrainTiltSmartMoveAbsorb: '1.000000'
-cameraTerrainTiltSmartMoveDelay: '0.000000'
-cameraTerrainTiltSmartMoveFactor: '1.000000'
-cameraTerrainTiltSmartStrafeAbsorb: '1.000000'
-cameraTerrainTiltSmartStrafeDelay: '0.000000'
-cameraTerrainTiltSmartStrafeFactor: '1.000000'
-cameraTerrainTiltSmartSwimAbsorb: '0.000000'
-cameraTerrainTiltSmartSwimDelay: '0.000000'
-cameraTerrainTiltSmartSwimFactor: '1.000000'
-cameraTerrainTiltSmartTaxiAbsorb: '0.000000'
-cameraTerrainTiltSmartTaxiDelay: '0.000000'
-cameraTerrainTiltSmartTaxiFactor: '1.000000'
-cameraTerrainTiltSmartTrackAbsorb: '1.000000'
-cameraTerrainTiltSmartTrackDelay: '0.000000'
-cameraTerrainTiltSmartTrackFactor: '1.000000'
-cameraTerrainTiltSmartTurnAbsorb: '1.000000'
-cameraTerrainTiltSmartTurnDelay: '0.000000'
-cameraTerrainTiltSmartTurnFactor: '1.000000'
-cameraTerrainTiltSplineFallAbsorb: '1.000000'
-cameraTerrainTiltSplineFallDelay: '0.000000'
-cameraTerrainTiltSplineFallFactor: '0.750000'
-cameraTerrainTiltSplineFearAbsorb: '1.000000'
-cameraTerrainTiltSplineFearDelay: '0.000000'
-cameraTerrainTiltSplineFearFactor: '1.000000'
-cameraTerrainTiltSplineIdleAbsorb: '0.000000'
-cameraTerrainTiltSplineIdleDelay: '0.000000'
-cameraTerrainTiltSplineIdleFactor: '-1.000000'
-cameraTerrainTiltSplineJumpAbsorb: '0.000000'
-cameraTerrainTiltSplineJumpDelay: '0.000000'
-cameraTerrainTiltSplineJumpFactor: '-1.000000'
-cameraTerrainTiltSplineMoveAbsorb: '1.000000'
-cameraTerrainTiltSplineMoveDelay: '0.000000'
-cameraTerrainTiltSplineMoveFactor: '1.000000'
-cameraTerrainTiltSplineStrafeAbsorb: '1.000000'
-cameraTerrainTiltSplineStrafeDelay: '0.000000'
-cameraTerrainTiltSplineStrafeFactor: '1.000000'
-cameraTerrainTiltSplineSwimAbsorb: '0.000000'
-cameraTerrainTiltSplineSwimDelay: '0.000000'
-cameraTerrainTiltSplineSwimFactor: '1.000000'
-cameraTerrainTiltSplineTaxiAbsorb: '0.000000'
-cameraTerrainTiltSplineTaxiDelay: '0.000000'
-cameraTerrainTiltSplineTaxiFactor: '1.000000'
-cameraTerrainTiltSplineTrackAbsorb: '1.000000'
-cameraTerrainTiltSplineTrackDelay: '0.000000'
-cameraTerrainTiltSplineTrackFactor: '1.000000'
-cameraTerrainTiltSplineTurnAbsorb: '1.000000'
-cameraTerrainTiltSplineTurnDelay: '0.000000'
-cameraTerrainTiltSplineTurnFactor: '1.000000'
-cameraTerrainTiltTimeMax: '10.000000'
-cameraTerrainTiltTimeMin: '3.000000'
-cameraView: '2'
-cameraViewBlendStyle: '1'
-cameraWaterCollision: '0'
-cameraYawMoveSpeed: '180.000000'
-cameraYawSmoothMax: '0.000000'
-cameraYawSmoothMin: '0.000000'
-cameraYawSmoothSpeed: '180.000000'
-cameraZoomSpeed: '20.000000'
-cameraZSmooth: '1'
-casContainerSizeLimit: '0'
-characterNeedsTurnStrafeDialog: '1'
-characterSocialRestrictionSettingsApplied: '0'
-ChatAmbienceVolume: '0.3'
-chatBubbles: '1'
-chatBubblesParty: '1'
-chatBubblesRaid: '0'
-chatClassColorOverride: '0'
-chatMouseScroll: '1'
-ChatMusicVolume: '0.3'
-ChatSoundVolume: '0.4'
-chatStyle: im
-checkAddonVersion: '1'
-ClientCastDebug: '0'
-ClientCastLimitDebug: '100'
-ClientMessageEventLog: '0'
-ClientSettings_AFTERMATH_BY_API_MASK: ''
-ClientSettings_AFTERMATH_BY_GPU_CATEGORY: ''
-ClientSettings_ASYNC_COMPUTE_BY_API_MASK: ''
-ClientSettings_ASYNC_COMPUTE_BY_GPU_CATEGORY: ''
-ClientSettings_ClusteredShading: ''
-ClientSettings_CMAA2: ''
-ClientSettings_CMD_LIST_MT_BY_API_MASK: ''
-ClientSettings_CMD_LIST_MT_BY_GPU_CATEGORY: ''
-ClientSettings_COPY_QUEUE_BY_API_MASK: ''
-ClientSettings_COPY_QUEUE_BY_GPU_CATEGORY: ''
-ClientSettings_CTexAsyncCreate: ''
-ClientSettings_FSR: ''
-ClientSettings_HIGH_MEM_FEATURES_BY_API_MASK: ''
-ClientSettings_HIGH_MEM_FEATURES_BY_GPU_CATEGORY: ''
-ClientSettings_LowLatency: ''
-ClientSettings_LowVramActions: ''
-ClientSettings_MemoryAllocationTraces: ''
-ClientSettings_MSAA: ''
-ClientSettings_NeedsGxRestart: ''
-ClientSettings_OPT_FEATURES_BY_API_MASK: ''
-ClientSettings_OPT_FEATURES_BY_GPU_CATEGORY: ''
-ClientSettings_RAY_TRACING_BY_API_MASK: ''
-ClientSettings_RAY_TRACING_BY_GPU_CATEGORY: ''
-ClientSettings_RTShadows: ''
-ClientSettings_SHADER_MT_BY_API_MASK: ''
-ClientSettings_SHADER_MT_BY_GPU_CATEGORY: ''
-ClientSettings_SM6_BY_API_MASK: ''
-ClientSettings_SM6_BY_GPU_CATEGORY: ''
-ClientSettings_SpellClutter: ''
-ClientSettings_VolumeFog: ''
-ClientSettings_WORK_OPTIMS_BY_API_MASK: ''
-ClientSettings_WORK_OPTIMS_BY_GPU_CATEGORY: ''
-ClipCursor: '0'
-cloakFixEnabled: '1'
-closedExtraAbiltyTutorials: ''
-closedInfoFrames: ''
-closedInfoFramesAccountWide: ''
-closedRemixArtifactTutorialFrames: '0'
-clubFinderCacheExpiry: '1000'
-clubFinderCachePendingExpiry: '5000'
-clubFinderPlayerLanguageSettings: '0'
-clubFinderPlayerSettings: '1'
-clusteredShading: '1'
-CMAA2ExtraSharpness: '0'
-CMAA2HalfFloat: '1'
-CMAA2Quality: '3'
-collapsedCurrencyCategoryDefaults: '0'
-collapsedReputationHeaderDefaults: ''
-collapseExpandBuffs: '1'
-Collision: '0'
-colorblindMode: '0'
-colorblindSimulator: '0'
-colorblindWeaknessFactor: '0.5'
-colorChatNamesByClass: '0'
-combatLogRetentionTime: '300'
-combatLogUniqueFilename: '1'
-combatWarningsEnabled: '1'
-combinedBags: '0'
-comboPointLocation: '2'
-commentatorLossOfControlIconUnitFrame: '1'
-commentatorLossOfControlTextNameplate: '0'
-commentatorLossOfControlTextUnitFrame: '0'
-communitiesShowOffline: '1'
-componentCompress: '1'
-componentEmissive: '1'
-componentSpecular: '1'
-componentTexCacheSize: '32'
-componentTexLoadLimit: '16'
-componentTextureLevel: '0'
-componentThread: '1'
-ConsoleKey: '`'
-consoleShowDebugMessages: '0'
-consoleShowSpamMessages: '0'
-contentTrackingFilter: '1'
-ContentTuning: '0'
-Contrast: '50.000000'
-cooldownViewerEnabled: '0'
-cooldownViewerShowUnlearned: '1'
-countdownForCooldowns: '0'
-covenantMissionTutorial: '0'
-craftingOrdersOnlyPreferredArmorCollectable: '0'
-currencyCategoriesCollapsed: '0'
-currentGameMode: '-1'
-CursorCenteredYPos: '0.6'
-CursorFreelookCentering: '0'
-CursorFreelookStartDelta: '0.001'
-cursorSizePreferred: '-1'
-CursorStickyCentering: '0'
-CustomDesignEventLog: '0'
-CustomWindowEventLog: '0'
-daltonize: '1'
-DamageCalculator: '0'
-damageMeterEnabled: '0'
-damageMeterResetOnNewInstance: '0'
-dangerousShipyardMissionWarningAlreadyShown: '0'
-DebugTorsoTwist: '0'
-DeprecatedWarningThrottle: '0'
-DepthBasedOpacity: '1'
-deselectOnClick: '0'
-developerLog: '0'
-developerLogFilterDebug: '0'
-developerLogFilterError: '1'
-developerLogFilterFatal: '1'
-developerLogFilterNormal: '1'
-developerLogFilterSpam: '0'
-developerLogFilterWarning: '1'
-developerLogWriteToFile: '1'
-digSites: '1'
-DisableAdvancedFlyingFullScreenEffects: '0'
-DisableAdvancedFlyingVelocityVFX: '0'
-disableAELooting: '0'
-disableAutoRealmSelect: '0'
-disableServerNagle: '1'
-disableSuggestedLevelActivityFilter: '0'
-disableUILoadErrorDialog: '0'
-disableUserAddonsByDefault: '0'
-displaySpellActivationOverlays: '1'
-displayWorldPVPObjectives: '1'
-dnMTUpdate: '1'
-doNotFlashLowHealthWarning: '0'
-doNotShowTWFraudWarning: '0'
-dontShowEquipmentSetsOnItems: '0'
-doodadLodScale: '100'
-dragonRidingRacesFilter: '0'
-dragonRidingRacesFilterWQ: '1'
-DriveDynamicFOVEnabled: '1'
-DriverVersionCheck: '1'
-DriveSwapReverseTurnDirection: '0'
-dynamicLod: '1'
-DynamicRenderScale: '0'
-DynamicRenderScaleMin: '0.333333'
-EJDungeonDifficulty: '0'
-EJLootClass: '-1'
-EJLootSpec: '0'
-EJRaidDifficulty: '0'
-EJSelectedTier: '0'
-EmitterCombatRange: '900.000000'
-emphasizeMySpellEffects: '1'
-EmpowerMinHoldStagePercent: '1.000000'
-empowerTapControls: '0'
-EmpowerTapControlsReleaseThreshold: '300'
-enableAssetTracking: '1'
-enableBGDL: '1'
-EnableBlinkApplicationIcon: '1'
-enableConnectToPhotoSharing: '0'
-enableFloatingCombatText: '0'
-enableMouseoverCast: '0'
-enableMouseSpeed: '0'
-enableMovePad: '0'
-enableMultiActionBars: '0'
-enablePetBattleFloatingCombatText_v2: '1'
-enablePings: '1'
-enablePVPNotifyAFK: '1'
-enableQuestCacheLogging: '1'
-enableRuneSpentAnim: '1'
-enableSourceLocationLookup: '1'
-enableWowMouse: '0'
-encounterTimelineEnabled: '1'
-encounterTimelineHideForOtherRoles: '0'
-encounterTimelineHideLongCountdowns: '0'
-encounterTimelineHideQueuedCountdowns: '0'
-encounterTimelineHighlightDuration: '5000'
-encounterTimelineIconographyEnabled: '1'
-encounterTimelineIconographyHiddenMask: "\x01"
-encounterTimelineShowSequenceCount: '0'
-encounterWarningsDefaultMessageDuration: '3500'
-encounterWarningsEnabled: '1'
-encounterWarningsHideIfNotTargetingPlayer: '0'
-encounterWarningsLevel: '0'
-endeavorInitiativesLastPointsMap: ''
-engineSurvey: '0'
-engineSurveyPatch: '0'
-entityLodDist: '10'
-entityLodOffset: '10'
-entityShadowFadeScale: '50'
-equipmentManager: '1'
-ErrorFilter: all
-ErrorLevelMax: '3'
-ErrorLevelMin: '2'
-Errors: '0'
-eventReminders: ''
-eventSchedulerLastUpdate: '0'
-excludedCensorSources: '1'
-ExclusiveWindowMode: '0'
-expandBagBar: '1'
-expandUpgradePanel: '1'
-expandWarbandCharacterList: '1'
-externalDefensivesEnabled: '0'
-farclip: '1000'
-ffxAntiAliasingMode: '4'
-ffxDeath: '1'
-ffxGlow: '1'
-ffxLingeringVenari: '1'
-ffxNether: '1'
-ffxVenari: '1'
-findYourselfAnywhere: '0'
-findYourselfAnywhereOnlyInCombat: '0'
-findYourselfInBG: '1'
-findYourselfInBGOnlyInCombat: '0'
-findYourselfInRaid: '1'
-findYourselfInRaidOnlyInCombat: '1'
-findYourselfMode: '0'
-findYourselfModeCircle: '0'
-findYourselfModeIcon: '0'
-findYourselfModeOutline: '0'
-flaggedTutorials: ''
-flashErrorMessageRepeats: '1'
-flightAngleLookAhead: '0'
-floatingCombatTextAuraFade_v2: '0'
-floatingCombatTextAuras_v2: '0'
-floatingCombatTextCombatDamage_v2: '1'
-floatingCombatTextCombatDamageAllAutos_v2: '1'
-floatingCombatTextCombatDamageDirectionalOffset_v2: '1.000000'
-floatingCombatTextCombatDamageDirectionalScale_v2: '1.000000'
-floatingCombatTextCombatHealing_v2: '1'
-floatingCombatTextCombatHealingAbsorbSelf_v2: '1'
-floatingCombatTextCombatHealingAbsorbTarget_v2: '1'
-floatingCombatTextCombatLogPeriodicSpells_v2: '1'
-floatingCombatTextCombatState_v2: '0'
-floatingCombatTextComboPoints_v2: '0'
-floatingCombatTextDamageReduction_v2: '0'
-floatingCombatTextDodgeParryMiss_v2: '0'
-floatingCombatTextEnergyGains_v2: '0'
-floatingCombatTextFloatMode_v2: '1'
-floatingCombatTextFriendlyHealers_v2: '0'
-floatingCombatTextHonorGains_v2: '0'
-floatingCombatTextLowManaHealth_v2: '1'
-floatingCombatTextPeriodicEnergyGains_v2: '0'
-floatingCombatTextPetMeleeDamage_v2: '1'
-floatingCombatTextPetSpellDamage_v2: '1'
-floatingCombatTextReactives_v2: '1'
-floatingCombatTextRepChanges_v2: '0'
-FootstepSounds: '1'
-forceClusteredShading: '0'
-forceEnglishNames: '0'
-ForceGenerateSlug: '0'
-forceLODCheck: '0'
-ForceResolutionDefaultToMaxSize: '0'
-FrameBufferCacheForceNoHeaps: '0'
-frameScriptFunctionInheritanceWarningMode: '0'
-friendInvitesCollapsed: '0'
-fstack_enabled: '0'
-fstack_preferParentKeys: '0'
-fstack_showanchors: '1'
-fstack_showhidden: '0'
-fstack_showhighlight: '1'
-fstack_showRaisedFrameLevels: '0'
-fstack_showregions: '1'
-GameDataVisualizer: '0'
-GamePadAnalogMovement: '1'
-GamePadCameraLookMaxPitch: '0'
-GamePadCameraLookMaxYaw: '0'
-GamePadCameraPitchSpeed: '1'
-GamePadCameraYawSpeed: '1'
-GamePadCursorAutoDisableJump: '1'
-GamePadCursorAutoDisableSticks: '2'
-GamePadCursorAutoEnable: '1'
-GamePadCursorCenteredEmulation: '1'
-GamePadCursorCentering: '0'
-GamePadCursorForTargeting: '1'
-GamePadCursorLeftClick: PADRTRIGGER
-GamePadCursorOnLogin: '1'
-GamePadCursorPushCamera: '1'
-GamePadCursorRightClick: PADRSHOULDER
-GamePadCursorSpeedAccel: '2'
-GamePadCursorSpeedMax: '1'
-GamePadCursorSpeedStart: '0.1'
-GamePadEmulateAlt: none
-GamePadEmulateCtrl: PADLSHOULDER
-GamePadEmulateShift: PADLTRIGGER
-GamePadEmulateTapWindowMs: '350'
-GamePadEnable: '0'
-GamePadFaceMovementMaxAngle: '0'
-GamePadFaceMovementMaxAngleCombat: '180'
-GamePadFactionColor: '1'
-GamePadOverlapMouseMs: '2000'
-GamePadRunThreshold: '0.5'
-GamePadSingleActiveID: '0'
-GamePadStickAxisButtons: '0'
-GamePadTankTurnSpeed: '0'
-GamePadTouchCursorEnable: '1'
-GamePadTurnWithCamera: '1'
-GamePadVibrationStrength: '1'
-GameplayContext: '0'
-gameTip: '0'
-Gamma: '1.000000'
-garrisonCompleteTalent: '0'
-garrisonCompleteTalentType: '0'
-graphicsComputeEffects: '1'
-graphicsDepthEffects: '1'
-graphicsEnvironmentDetail: '3'
-graphicsGroundClutter: '3'
-graphicsLiquidDetail: '1'
-graphicsOutlineMode: '0'
-graphicsParticleDensity: '2'
-graphicsProjectedTextures: '1'
-graphicsQuality: '3'
-graphicsShadowQuality: '1'
-graphicsSpellDensity: '3'
-graphicsSSAO: '1'
-graphicsTextureResolution: '1'
-graphicsViewDistance: '3'
-groundEffectDensity: '16'
-groundEffectDist: '70'
-groundEffectFade: '70'
-guildMemberNotify: '1'
-guildNewsFilter: '0'
-guildRewardsCategory: '0'
-guildRewardsUsable: '0'
-guildShowOffline: '1'
-GxAdapter: ''
-GxAFRDevicesCount: '0'
-GxAllowCachelessShaderMode: '0'
-GxApi: auto
-GxCompatAllowSM6: '1'
-GxCompatAsyncComputeQueue: '1'
-GxCompatAsyncShaderCompilation: '1'
-GxCompatCommandListMultiThreading: '1'
-GxCompatCopyQueue: '1'
-GxCompatOptionalGpuFeatures: '1'
-GxCompatWorkSubmitOptimizations: '1'
-GxDebugBreakLevel: '1'
-GxDebugLevel: '0'
-GxFullscreenResolution: auto
-GxMaxFrameLatency: '3'
-gxMaximize: '1'
-GxMonitor: '0'
-gxMTAlphaM2: '1'
-gxMTAlphaPass: '1'
-gxMTBeginDraw: '1'
-gxMTDecals: '0'
-gxMTDisable: '0'
-gxMTLightShafts: '1'
-gxMTMisc: '1'
-gxMTOpaqueM2: '1'
-gxMTOpaqueM2NoReflect: '1'
-gxMTOpaqueWMO: '1'
-gxMTOutlines: '1'
-gxMTPrepass: '1'
-gxMTRefraction: '1'
-gxMTShadow: '1'
-gxMTTerrain: '1'
-gxMTTriggerOnBeginDrawComplete: '1'
-gxMTVolFog: '1'
-GxNewResolution: '0x0'
-GxPrismEnabled: '1'
-GxSlowShaderWarnThreshold: '30000'
-gxWindowedResolution: auto
-hardcoreDeathAlertType: '0'
-hardcoreDeathChatType: '0'
-hardTrackedQuests: ''
-hardTrackedWorldQuests: ''
-HardwareCursor: '1'
-HealHandler: '0'
-heirloomCollectedFilters: '0'
-heirloomSourceFilters: '0'
-hideFastLoginLoadingScreen: '0'
-hideRewardedEvents: '0'
-highestUnlockedTieredEntranceTier: ''
-horizonClip: '1600'
-horizonStart: '800'
-HotfixEventLog: '0'
-hotReloadModels: '1'
-houseExterior_Hide_Decor: '1'
-housingDecorFreePlaceEnabled: '0'
-housingDecorGridSnapEnabled: '0'
-housingDecorGridVisible: '1'
-housingDecorLightRadiusIndicatorsEnabled: '1'
-housingExpertGizmos_Scale_FrameOffset: '0.500000'
-housingExpertGizmos_Scale_Snap: '0.100000'
-housingExpertGizmos_SnapOnHold: '1'
-housingLayout_Camera_DefaultDistance: '50.000000'
-housingLayout_Camera_DragFriction: '8.000000'
-housingLayout_Camera_DragMomentum: '0.300000'
-housingLayout_Camera_MaxDistance: '80.000000'
-housingLayout_Camera_MaxDistanceIncr: '5.000000'
-housingLayout_Camera_MinDistance: '30.000000'
-housingLayout_Camera_Smoothness: '15.000000'
-housingLayout_Camera_Speed: '15.000000'
-housingOtherDecorLightRadiusIndicatorType: '1'
-housingSelectedDecorLightRadiusIndicatorType: '1'
-housingStoragePanelCollapsed: '0'
-housingStoragePanelHeight: '615.000000'
-housingStoragePanelWidth: '530.000000'
-housingTutorialsEnabled: '1'
-hwDetect: '1'
-imageSharingPublishCooldown: '5000'
-ImpactModelCollisionMelee: '1'
-ImpactModelCollisionMissile: '1'
-ImpactModelCollisionRanged: '1'
-incompleteQuestPriorityThresholdDelta: '135'
-initialRealmListTimeout: '60'
-interactKeyWarningTutorial: '0'
-interactOnLeftClick: '1'
-interactQuestItems: '1'
-InvalidateDeactivatedHandles: '1'
-KioskCanSessionExpire: '1'
-KioskCharacterTemplateSet: '0'
-KioskLobbyKickSeconds: '30'
-lastAddonVersion: '0'
-lastCharacterIndex: '0'
-lastGarrisonMissionTutorial: '0'
-lastLaunchedExternalEventURL: ''
-lastLockedTieredEntranceCompanionAbilities: ''
-lastRenownForCovenant1: '0'
-lastRenownForCovenant2: '0'
-lastRenownForCovenant3: '0'
-lastRenownForCovenant4: '0'
-lastRenownForDelvesSeason: '0'
-lastSelectedClubId: '0'
-lastSelectedTieredEntranceTier: ''
-lastTalkedToGM: ''
-lastTransmogCustomSetIDNoSpec: ''
-lastTransmogCustomSetIDSpec1: ''
-lastTransmogCustomSetIDSpec2: ''
-lastTransmogCustomSetIDSpec3: ''
-lastTransmogCustomSetIDSpec4: ''
-lastTransmogOutfitIDNoSpec: ''
-latestSplashScreen: '0'
-latestTransmogSetSource: '0'
-launchAgent: '1'
-lfdCollapsedHeaders: ''
-lfdSelectedDungeons: ''
-lfgListAdvancedFilterMinRating: '0'
-lfgListAdvancedFilterRemovedActivities: ''
-lfgListAdvancedFilters: '0'
-lfgListAdvancedFiltersVersion: '0'
-lfgListSearchLanguages: '0'
-lfgSelectedRoles: '0'
-loadDeprecationFallbacks: '1'
-locale: ''
-locateViewerMaxJobs: '32'
-lockActionBars: '1'
-lodObjectCullDist: '30'
-lodObjectCullSize: '15'
-lodObjectFadeScale: '100'
-lodObjectMinSize: '20'
-lodObjectSizeScale: '1'
-lootUnderMouse: '1'
-lossOfControl: '1'
-lossOfControlDisarm: '2'
-lossOfControlFull: '2'
-lossOfControlInterrupt: '2'
-lossOfControlRoot: '2'
-lossOfControlSilence: '2'
-LowLatencyMinInterval: '0'
-LowLatencyMode: '0'
-M2ForceAdditiveParticleSort: '0'
-M2UseInstancing: '1'
-M2UseThreads: '1'
-MacDisableOsShortcuts: '0'
-MacUseCommandLeftClickAsRightClick: '1'
-MacWindowToggleHotkey: '1'
-majorFactionRenownMap: ''
-mapFade: '1'
-MaxCharacterComponentLoadStartsPerFrame: '4'
-maxFPS: '120'
-maxFPSBk: '30'
-maxFPSLoading: '10'
-maxLevelSpecsUsed: '0'
-maxLightDist: '2048'
-MaxObservedPetBattles: '4'
-miniCommunitiesFrame: '0'
-miniDressUpFrame: '0'
-minimapInsideZoom: '0'
-minimapPortalMax: '99'
-minimapShapeshiftTracking: ''
-minimapTrackedInfov4: '3103471'
-minimapTrackingClosestOnly: '1'
-minimapTrackingShowAll: '0'
-minimapZoom: '0'
-miniWorldMap: '1'
-missingTransmogSourceInItemTooltips: '0'
-motionSicknessFocalCircle: '0'
-motionSicknessLandscapeDarkening: '0'
-mountJournalGeneralFilters: '0'
-mountJournalShowPlayer: '0'
-mountJournalSourcesFilter: '0'
-mountJournalTypeFilter: '0'
-mouseAcceleration: '-1'
-MouseHiddenInRelativeMode: '1'
-mouseInvertPitch: '0'
-mouseInvertYaw: '0'
-mouseSpeed: '1.1'
-MoveHistoryEventLog: '0'
-movePadInPressAndHoldMode: '0'
-movePadLocked: '1'
-movieSubtitle: '1'
-movieSubtitleBackground: '1'
-movieSubtitleBackgroundAlpha: '70'
-MSAAAlphaTest: '1'
-MSAAQuality: '0'
-nameplateAuraScale: '1.000000'
-nameplateCastBarDisplay: "\x02["
-nameplateDebuffPadding: '0'
-nameplateEnemyNpcAuraDisplay: "\x02G"
-nameplateEnemyPlayerAuraDisplay: "\x02C"
-nameplateFriendlyPlayerAuraDisplay: "\x02C"
-nameplateGameObjectMaxDistance: '30.000000'
-nameplateInfoDisplay: "\x02D"
-nameplateMaxAlpha: '1.000000'
-nameplateMaxAlphaDistance: '40.000000'
-nameplateMaxDistance: '60.000000'
-nameplateMaxScale: '1.000000'
-nameplateMaxScaleDistance: '10.000000'
-nameplateMinAlpha: '0.600000'
-nameplateMinAlphaDistance: '10.000000'
-nameplateMinScale: '0.800000'
-nameplateMinScaleDistance: '10.000000'
-nameplateOccludedAlphaMult: '0.400000'
-nameplateOtherAtBase: '0'
-nameplateOverlapH: '0.800000'
-nameplateOverlapV: '1.100000'
-nameplatePlayerMaxDistance: '60.000000'
-nameplateSelectedAlpha: '1.000000'
-nameplateSelectedScale: '1.200000'
-nameplateShowAll: '0'
-nameplateShowCastBars: '1'
-nameplateShowClassColor: '1'
-nameplateShowDebuffsOnFriendly: '1'
-nameplateShowEnemies: '1'
-nameplateShowEnemyGuardians: '0'
-nameplateShowEnemyMinions: '0'
-nameplateShowEnemyMinus: '1'
-nameplateShowEnemyPets: '0'
-nameplateShowEnemyTotems: '0'
-nameplateShowFriendlyClassColor: '1'
-nameplateShowFriendlyNpcs: '0'
-nameplateShowFriendlyPlayerGuardians: '0'
-nameplateShowFriendlyPlayerMinions: '0'
-nameplateShowFriendlyPlayerPets: '0'
-nameplateShowFriendlyPlayers: '0'
-nameplateShowFriendlyPlayerTotems: '0'
-nameplateShowOffscreen: '0'
-nameplateShowOnlyNameForFriendlyPlayerUnits: '0'
-nameplateShowSelf: '0'
-nameplateSimplifiedScale: '0.300000'
-nameplateSimplifiedTypes: "\x02"
-nameplateSize: '1'
-nameplateStackingTypes: "\x02"
-nameplateStyle: '0'
-nameplateTargetBehindMaxDistance: '0.100000'
-nameplateTargetRadialPosition: '0'
-nameplateThreatDisplay: "\x02"
-nameplateUseClassColorForFriendlyPlayerUnitNames: '0'
-nearclip: '0.2'
-newDelvesSeason: '1'
-newMythicPlusSeason: '1'
-newPvpSeason: '1'
-noBuffDebuffFilterOnTarget: '0'
-NonEmitterCombatRange: '6400.000000'
-NotchedDisplayMode: '1'
-notifiedOfNewMail: '0'
-numCurrencyCategories: '0'
-numReputationHeaders: '0'
-ObjectSelectionCircle: '1'
-occludedSilhouettePlayer: '0'
-occlusionMaxJobs: '5'
-optOutIngameSurveys: '0'
-orderHallMissionTutorial: '0'
-otherRolesAzeriteEssencesHidden: '0'
-outdoorMinAltitudeDistance: '10'
-Outline: '2'
-OutlineEngineMode: '0'
-outlineMouseOverFadeDuration: '0.9'
-outlineSelectionFadeDuration: '0.32'
-outlineSoftInteractFadeDuration: '0.3'
-overrideArchive: '0'
-overrideScreenFlash: '0'
-particleDensity: '100'
-particleMTDensity: '100'
-particulatesEnabled: '1'
-partyBackgroundOpacity: '0.500000'
-partyInvitesCollapsed_Glue: '0'
-Pathing: '0'
-pathSmoothing: '1'
-pendingInviteInfoShown: '0'
-perksActivitiesCurrentMonth: '0'
-perksActivitiesLastPoints: '0'
-perksActivitiesPendingCompletion: ''
-persistMoveLogOnTransfer: '0'
-petJournalFilters: '0'
-petJournalFilterVersion: '0'
-petJournalSort: '0'
-petJournalSourceFilters: '0'
-petJournalTab: '1'
-petJournalTypeFilters: '0'
-petStableShowExoticOnly: '0'
-petStableSort: '1'
-PhaseHistory: '0'
-physicsLevel: '1'
-pingCategoryTutorialShown: '0'
-pingMode: '0'
-playerColorOverrides: ''
-PlayerSpawnTracking: '0'
-playIntroMovie: '0'
-plunderstormRealm: '0'
-POIShiftComplete: '0.3'
-portal: ''
-PreemptiveCastEnable: '0'
-preloadLoadingDistObject: '512'
-preloadLoadingDistTerrain: '1024'
-preloadPlayerModels: '1'
-preloadStreamingDistObject: '64'
-preloadStreamingDistTerrain: '256'
-PreventOsIdleSleep: '0'
-primaryProfessionsFilter: '1'
-ProcDebugEventLog: '0'
-profanityFilter: '1'
-professionAccessorySlotsExampleShown: '0'
-professionsAllocateBestQualityReagents: '1'
-professionsAllocateBestQualityReagentsCustomer: '1'
-professionsFlyoutHideUnowned: '0'
-professionsOrderDurationDropdown: '2'
-professionsOrderRecipientDropdown: '1'
-professionToolSlotsExampleShown: '0'
-projectedTextures: '0'
-PushToTalkSound: '0'
-pvpFramesDisplayClassColor: '0'
-pvpFramesDisplayOnlyHealerPowerBars: '0'
-pvpFramesDisplayPowerBars: '0'
-pvpFramesHealthText: none
-pvpOptionDisplayPets: '0'
-pvpSelectedRoles: '0'
-QuestEventLog: '0'
-questLogOpen: '1'
-questPOI: '1'
-questPOILocalStory: '1'
-questPOIWQ: '1'
-questTextContrast: '0'
-RAIDclusteredShading: '1'
-RAIDcomponentTextureLevel: '0'
-RAIDDepthBasedOpacity: '1'
-RAIDdoodadLodScale: '100'
-RAIDentityLodDist: '10'
-RAIDentityShadowFadeScale: '10'
-RAIDfarclip: '1000'
-raidFramesCenterBigDefensive: '1'
-raidFramesDispelIndicatorOverlay: '1'
-raidFramesDispelIndicatorType: '2'
-raidFramesDisplayAggroHighlight: '1'
-raidFramesDisplayBuffs: '1'
-raidFramesDisplayClassColor: '0'
-raidFramesDisplayDebuffs: '1'
-raidFramesDisplayIncomingHeals: '1'
-raidFramesDisplayLargerRoleSpecificDebuffs: '1'
-raidFramesDisplayOnlyDispellableDebuffs: '0'
-raidFramesDisplayOnlyHealerPowerBars: '0'
-raidFramesDisplayPowerBars: '0'
-raidFramesHealthBarColor: FF2B9305
-raidFramesHealthBarColorBG: FF141414
-raidFramesHealthText: none
-raidFramesHeight: '36'
-raidFramesPosition: ''
-raidFramesWidth: '72'
-raidGraphicsComputeEffects: '1'
-raidGraphicsDepthEffects: '1'
-raidGraphicsEnvironmentDetail: '3'
-raidGraphicsGroundClutter: '3'
-raidGraphicsLiquidDetail: '1'
-raidGraphicsOutlineMode: '0'
-raidGraphicsParticleDensity: '2'
-raidGraphicsProjectedTextures: '1'
-RAIDgraphicsQuality: '3'
-raidGraphicsShadowQuality: '1'
-raidGraphicsSpellDensity: '3'
-raidGraphicsSSAO: '1'
-raidGraphicsTextureResolution: '1'
-raidGraphicsViewDistance: '3'
-RAIDgroundEffectDensity: '16'
-RAIDgroundEffectDist: '70'
-RAIDgroundEffectFade: '70'
-RAIDhorizonClip: '1600'
-RAIDhorizonStart: '800'
-RAIDlodObjectCullDist: '30'
-RAIDlodObjectCullSize: '15'
-RAIDlodObjectFadeScale: '100'
-RAIDlodObjectMinSize: '20'
-raidOptionDisplayMainTankAndAssist: '1'
-raidOptionDisplayPets: '0'
-raidOptionIsShown: '1'
-raidOptionKeepGroupsTogether: '0'
-raidOptionLocked: lock
-raidOptionShowBorders: '1'
-raidOptionSortMode: role
-RAIDOutlineEngineMode: '0'
-RAIDparticleDensity: '100'
-RAIDparticleMTDensity: '100'
-RAIDParticulatesEnabled: '1'
-RAIDprojectedTextures: '0'
-RAIDreflectionMode: '3'
-RAIDrefraction: '0'
-RAIDrippleDetail: '2'
-RAIDsettingsEnabled: '0'
-RAIDshadowBlendCascades: '0'
-RAIDshadowMode: '0'
-RAIDshadowNumCascades: '1'
-RAIDshadowRt: '0'
-RAIDshadowSoft: '0'
-RAIDshadowTextureSize: '1024'
-RAIDspellClutter: '2'
-RAIDSSAO: '0'
-RAIDsunShafts: '0'
-RAIDterrainLodDist: '400'
-RAIDTerrainLodDiv: '768'
-RAIDterrainMipLevel: '0'
-RAIDVolumeFog: '0'
-RAIDVolumeFogLevel: '2'
-RAIDWaterDetail: '0'
-RAIDweatherDensity: '2'
-RAIDwmoLodDist: '650'
-RAIDworldBaseMip: '0'
-reflectionDownscale: '0'
-reflectionMode: '3'
-refraction: '0'
-reloadUIOnAspectChange: '0'
-remoteTextToSpeech: '0'
-remoteTextToSpeechVoice: '1'
-RenderFormat: '0'
-RenderScale: '0.675000'
-RenderScaleDowngradeBackgroundMinSize: '720'
-RenderScaleDowngradeForegroundMinSize: '1080'
-ReplaceMyPlayerPortrait: '0'
-ReplaceOtherPlayerPortraits: '0'
-reputationsCollapsed: ''
-ResampleAlwaysSharpen: '0'
-ResampleQuality: '3'
-ResampleSharpness: '0.2'
-ResizeConstraints: '1'
-restrictCalendarInvites: '1'
-rippleDetail: '2'
-rotateMinimap: '0'
-runeFadeTime: '0.2'
-runeSpentFadeTime: '0.1'
-runeSpentFlashTime: '0.15'
-sceneOcclusionEnable: '1'
-screenEdgeFlash: '1'
-screenshotFormat: jpeg
-screenshotQuality: '3'
-screenshotSizeOverride: '0x0'
-scriptErrors: '0'
-scriptProfile: '0'
-scriptWarnings: '0'
-scrollToLogQuest: '0'
-secondaryProfessionsFilter: '1'
-secureAbilityToggle: '1'
-seenAlliedRaceUnlocks: '0'
-seenAsiaCharacterUpgradePopup: '0'
-seenCharacterUpgradePopup: '6'
-seenConfigurationWarnings: '0'
-seenExpansionTrialPopup: '6'
-seenLevelSquishPopup: '0'
-seenPurchasableClassCapstone: '0'
-seenRegionalChatDisabled: '0'
-seenTimerunningFirstLoginPopup: '0'
-serverAlert: https://breaking-news.support.blizzard.com/service/wow-client/live/us/en-US
-ServerMessageEventLog: '0'
-serviceTypeFilter: '6'
-shadowBlendCascades: '0'
-shadowMode: '0'
-shadowNumCascades: '1'
-shadowRt: '0'
-shadowSoft: '0'
-shadowTextureSize: '1024'
-ShakeStrengthCamera: '1.000000'
-ShakeStrengthUI: '1.000000'
-shipyardMissionTutorialAreaBuff: '0'
-shipyardMissionTutorialBlockade: '0'
-shipyardMissionTutorialFirst: '0'
-showAllItemsInTransmog: '0'
-showArenaEnemyCastbar: '1'
-showArenaEnemyFrames: '1'
-showArenaEnemyPets: '1'
-showBattlefieldMinimap: '0'
-showBuilderFeedback: '1'
-showCastableBuffs: '0'
-showCreateCharacterRealmConfirmDialog: '1'
-showCustomSetDetails: '1'
-showDelveEntrancesOnMap: '1'
-showDispelDebuffs: '1'
-showDungeonEntrancesOnMap: '1'
-showErrors: '1'
-showfootprintparticles: '1'
-showHonorAsExperience: '0'
-showInGameNavigation: '1'
-showLoadingScreenTips: '1'
-showNPETutorials: '1'
-showOutfitDetails: '1'
-showPartyPets: '0'
-showPhotosensitivityWarning: '-1'
-showPingsInChat: '1'
-showQuestObjectivesInLog: '1'
-ShowQuestUnitCircles: '1'
-showSpectatorTeamCircles: '1'
-showSpenderFeedback: '1'
-showTamers: '1'
-showTamersWQ: '1'
-showTargetCastbar: '1'
-showTargetOfTarget: '0'
-showTempMaxHealthLoss: '1'
-showTimestamps: none
-showToastBroadcast: '0'
-showToastClubInvitation: '1'
-showToastConversation: '1'
-showToastFriendRequest: '1'
-showToastOffline: '1'
-showToastOnline: '1'
-showToastWindow: '1'
-showTokenFrame: '0'
-showTutorials: '1'
-showVKeyCastbar: '1'
-showVKeyCastbarOnlyOnTarget: '0'
-showVKeyCastbarSpellName: '1'
-simd: '-1'
-SkyCloudLOD: '0'
-SlugOpticalWeight: '0'
-SlugSupersampling: '1'
-smoothUnitPhasing: '1'
-smoothUnitPhasingActorPurgatoryTimeMs: '1500'
-smoothUnitPhasingAliveTimeoutMs: '3500'
-smoothUnitPhasingDestroyedPurgatoryTimeMs: '750'
-smoothUnitPhasingDistThreshold: '0.25'
-smoothUnitPhasingEnableAlive: '1'
-smoothUnitPhasingUnseenPurgatoryTimeMs: '1000'
-smoothUnitPhasingVehicleExtraTimeoutMs: '1000'
-SoftTargetEnemy: '1'
-SoftTargetEnemyArc: '2'
-SoftTargetEnemyRange: '45.000000'
-SoftTargetForce: '1'
-SoftTargetFriend: '0'
-SoftTargetFriendArc: '2'
-SoftTargetFriendRange: '45.000000'
-SoftTargetIconEnemy: '0'
-SoftTargetIconFriend: '0'
-SoftTargetIconGameObject: '0'
-SoftTargetIconInteract: '1'
-SoftTargetInteract: '1'
-SoftTargetInteractArc: '0'
-softTargetInteractionTutorialTotalInteractions: '0'
-SoftTargetInteractRange: '10.000000'
-SoftTargetInteractRangeIsHard: '0'
-SoftTargetLowPriorityIcons: '0'
-SoftTargetMatchLocked: '1'
-SoftTargetNameplateEnemy: '1'
-SoftTargetNameplateFriend: '0'
-SoftTargetNameplateInteract: '0'
-SoftTargetNameplateSize: '19'
-softTargettingInteractKeySound: '0'
-SoftTargetTooltipDurationMs: '2000'
-SoftTargetTooltipEnemy: '0'
-SoftTargetTooltipFriend: '0'
-SoftTargetTooltipInteract: '0'
-SoftTargetTooltipLocked: '0'
-SoftTargetWithLocked: '1'
-SoftTargetWorldtextFarDist: '40.000000'
-SoftTargetWorldtextNearDist: '4.000000'
-SoftTargetWorldtextNearScale: '1.000000'
-SoftTargetWorldtextSize: '32.000000'
-sortCharListByLastActive: '0'
-sortDiskReads: '0'
-soulbindsActivatedTutorial: ''
-soulbindsLandingPageTutorial: ''
-soulbindsViewedTutorial: ''
-Sound_AlternateListener: '1'
-Sound_AmbienceVolume: '0.6'
-Sound_DialogVolume: '1.0'
-Sound_DSPBufferSize: '0'
-Sound_EnableAllSound: '1'
-Sound_EnableAmbience: '1'
-Sound_EnableArmorFoleySoundForOthers: '1'
-Sound_EnableArmorFoleySoundForSelf: '1'
-Sound_EnableDialog: '1'
-Sound_EnableDSPEffects: '1'
-Sound_EnableEmoteSounds: '1'
-Sound_EnableEncounterWarningsSounds: '1'
-Sound_EnableErrorSpeech: '1'
-Sound_EnableGameplaySFX: '1'
-Sound_EnableMixMode2: '0'
-Sound_EnableMusic: '1'
-Sound_EnablePetBattleMusic: '1'
-Sound_EnablePetSounds: '1'
-Sound_EnablePingSounds: '1'
-Sound_EnablePositionalLowPassFilter: '1'
-Sound_EnableReverb: '1'
-Sound_EnableSFX: '1'
-Sound_EnableSoundWhenGameIsInBG: '1'
-Sound_EncounterWarningsVolume: '1.000000'
-Sound_GameplaySFX: '1.000000'
-Sound_ListenerAtCharacter: '1'
-Sound_MasterVolume: '1.0'
-Sound_MaxCacheableSizeInBytes: '174762'
-Sound_MaxCacheSizeInBytes: '134217728'
-Sound_MusicVolume: '0.4'
-Sound_NumChannels: '64'
-Sound_OutputDriverIndex: '0'
-Sound_OutputDriverName: Primary Sound Driver
-Sound_OutputSampleRate: '44100'
-Sound_PingVolume: '1.0'
-Sound_SFXVolume: '1.0'
-Sound_VoiceChatInputDriverIndex: '0'
-Sound_VoiceChatInputDriverName: Primary Sound Capture Driver
-Sound_VoiceChatOutputDriverIndex: '0'
-Sound_VoiceChatOutputDriverName: Primary Sound Driver
-Sound_ZoneMusicNoDelay: '0'
-SoundPerf_VariationCap: '32'
-SpawnRegion: '0'
-specular: '1'
-speechToText: '0'
-spellActivationOverlayOpacity: '0.650000'
-spellBookHidePassives: '0'
-spellBookMinimize: '0'
-spellClutter: '4'
-SpellCooldownDebugger: '0'
-spellDiminishPVPEnemiesEnabled: '1'
-spellDiminishPVPOnlyTriggerableByMe: '0'
-SpellEventLog: '0'
-SpellOverrides: '0'
-SpellQueueWindow: '400'
-SpellScriptEventLog: '0'
-SpellTargeting: '0'
-spellVisualDensityFilterSetting: '4'
-SpellVisuals: '0'
-SplineOpt: '1'
-SSAO: '0'
-ssaoMagicNormals: '1'
-ssaoMagicThresholdHigh: '50'
-ssaoMagicThresholdLow: '25'
-SSAOType: '0'
-statusText: '0'
-statusTextDisplay: NONE
-stopAutoAttackOnTargetChange: '0'
-streamingCameraLookAheadTime: '2000'
-streamingCameraMaxRadius: '250'
-streamingCameraRadius: '100'
-streamStatusMessage: '1'
-sunShafts: '0'
-superTrackerDist: '0.750000'
-SuppressCpuMicrocodeChecks: '0'
-synchronizeBindings: '1'
-synchronizeChatFrames: '1'
-synchronizeConfig: '1'
-taintLog: '0'
-talentPointsSpent: '0'
-TargetAutoEnemy: '1'
-TargetAutoFriend: '1'
-TargetAutoLock: '0'
-TargetEnemyAttacker: '1'
-targetFPS: '60'
-TargetNearestUseNew: '1'
-TargetPriorityCombatLock: '1'
-TargetPriorityCombatLockContextualRelaxation: '1'
-TargetPriorityCombatLockHighlight: '0'
-TargetPriorityPvp: '1'
-telemetryWowlabsPackage: Blizzard.Telemetry.Wow_Labs
-telemetryWowPackage: Blizzard.Telemetry.Wow_Mainline
-teleportMaxNoLoadDist: '200'
-terrainLodDist: '400'
-TerrainLodDiv: '768'
-terrainMipLevel: '0'
-test_cameraDynamicPitch: '0.000000'
-test_cameraDynamicPitchBaseFovPad: '0.400000'
-test_cameraDynamicPitchBaseFovPadDownScale: '0.250000'
-test_cameraDynamicPitchBaseFovPadFlying: '0.750000'
-test_cameraDynamicPitchSmartPivotCutoffDist: '10.000000'
-test_cameraHeadMovementDeadZone: '0.015000'
-test_cameraHeadMovementFirstPersonDampRate: '20.000000'
-test_cameraHeadMovementMovingDampRate: '10.000000'
-test_cameraHeadMovementMovingStrength: '0.500000'
-test_cameraHeadMovementRangeScale: '5.000000'
-test_cameraHeadMovementStandingDampRate: '10.000000'
-test_cameraHeadMovementStandingStrength: '0.300000'
-test_cameraHeadMovementStrength: '0.000000'
-test_cameraOverShoulder: '0.000000'
-test_cameraTargetFocusEnemyEnable: '0'
-test_cameraTargetFocusEnemyStrengthPitch: '0.400000'
-test_cameraTargetFocusEnemyStrengthYaw: '0.500000'
-test_cameraTargetFocusInteractEnable: '0'
-test_cameraTargetFocusInteractStrengthPitch: '0.750000'
-test_cameraTargetFocusInteractStrengthYaw: '1.000000'
-textLocale: ''
-textToSpeech: '0'
-textureErrorColors: '1'
-textureFilteringMode: '5'
-ThreadPoolLimitHP: '6'
-ThreadPoolLimitLP: '6'
-ThreadPoolLimitMP: '6'
-ThreadPoolPerThreadAllocator: '1'
-threatPlaySounds: '1'
-threatShowNumeric: '0'
-threatWarning: '3'
-threatWorldText: '1'
-timeMgrAlarmEnabled: '0'
-timeMgrAlarmMessage: ''
-timeMgrAlarmTime: '0'
-timeMgrUseLocalTime: '0'
-timeMgrUseMilitaryTime: '0'
-titleBarShortName: '0'
-titleBarShowAccountName: '0'
-titleBarShowBuildInfo: '0'
-titleBarShowCharacterName: '0'
-titleBarShowConfigName: '0'
-titleBarShowGxInfo: '0'
-titleBarShowPID: '0'
-titleBarShowRealmName: '0'
-toastDuration: '4'
-toyBoxCollectedFilters: '0'
-toyBoxExpansionFilters: '0'
-toyBoxSourceFilters: '0'
-trackedAchievements: ''
-trackedInitiativeTasks: ''
-trackedPerksActivities: ''
-trackedProfessionRecipes: ''
-trackedProfessionRecraftRecipes: ''
-trackedQuests: ''
-trackedWorldQuests: ''
-transmogCurrentSpecOnly: '0'
-transmogDebug: '0'
-transmogHideIgnoredSlots: '0'
-transmogPreviewedWeaponToggle: '0'
-transmogrifySetsFilters: '0'
-transmogrifyShowCollected: '1'
-transmogrifyShowUncollected: '0'
-transmogrifySourceFilters: '0'
-transmogShowID: '0'
-TurnSpeed: '180.000000'
-UberTooltips: '1'
-uiScale: '1.000000'
-uiScaleMultiplier: '-1.000000'
-unitClutter: '1'
-unitClutterInstancesOnly: '1'
-unitClutterPlayerThreshold: '9'
-UnitEnterCombatLog: '0'
-unitFacingPlayerDeadZoneDeg: '60'
-UnitNameEnemyGuardianName: '1'
-UnitNameEnemyMinionName: '1'
-UnitNameEnemyPetName: '1'
-UnitNameEnemyPlayerName: '1'
-UnitNameEnemyTotemName: '1'
-UnitNameFocused: '1'
-UnitNameForceHideMinus: '0'
-UnitNameFriendlyGuardianName: '1'
-UnitNameFriendlyMinionName: '1'
-UnitNameFriendlyPetName: '1'
-UnitNameFriendlyPlayerName: '1'
-UnitNameFriendlySpecialNPCName: '1'
-UnitNameFriendlyTotemName: '1'
-UnitNameGuildTitle: '1'
-UnitNameHostleNPC: '1'
-UnitNameInteractiveNPC: '1'
-UnitNameNonCombatCreatureName: '0'
-UnitNameNPC: '0'
-UnitNameOwn: '0'
-UnitNamePlayerGuild: '1'
-UnitNamePlayerPVPTitle: '1'
-unitsLookAtPlayers: '1'
-UnitVisibility: '0'
-unlockedMajorFactions: ''
-useBLEEP: '0'
-useCommentatorSelectionCircles: '1'
-useHighResTextures: '1'
-useIPv6: '0'
-UseKeyHeldSpellErrorPollTime: '500'
-useMaxFPS: '0'
-useMaxFPSBk: '1'
-userFontScale: '1'
-useShadowMapping: '1'
-UseSlug: '1'
-useTargetFPS: '1'
-useUiScale: '0'
-validateFrameXML: '1'
-VerboseSpellScriptEventLog: '0'
-videoOptionsVersion: '0'
-videoOptionsVersionDefault: '0'
-violenceLevel: '2'
-VoiceChatMasterVolumeScale: '1'
-VoiceCommunicationMode: '0'
-VoiceEnableWhenGameIsInBG: '1'
-VoiceInputDevice: ''
-VoiceInputVolume: '50'
-VoiceOutputDevice: ''
-VoiceOutputVolume: '50'
-VoicePushToTalkKeybind: LMETA
-VoiceSelfDeafened: '0'
-VoiceSelfMuted: '0'
-VoiceVADSensitivity: '43'
-volumeFog: '0'
-volumeFogDisableLightScattering: '0'
-volumeFogDisableNoise: '0'
-volumeFogDisableShadows: '0'
-volumeFogInterior: '1'
-volumeFogLevel: '2'
-volumeFogUse16BitTexture: '1'
-vrsValar: '0'
-vrsValarGPUMode: '0'
-vsync: '1'
-WalkableSurfacesValidationLog: '0'
-wardrobeSetsFilters: '0'
-wardrobeShowAllFactions: '0'
-wardrobeShowAllRaces: '0'
-wardrobeShowCollected: '1'
-wardrobeShowUncollected: '1'
-wardrobeSourceFilters: '0'
-waterDetail: '0'
-weatherDensity: '2'
-webChallengeURLTimeout: '60'
-whisperMode: popout
-wholeChatWindowClickable: '1'
-wmoDoodadDist: '2000'
-wmoLodDist: '300'
-wmoLodDistScale: '1.0'
-wmoPortalFadeScale: '1000'
-wmoPortalInteriorFade: '1'
-WorldActionsLog: '0'
-worldBaseMip: '0'
-worldIntersectMaxJobs: '32'
-worldLoadSort: '1'
-worldPreloadHighResTextures: '1'
-worldPreloadNonCritical: '2'
-worldPreloadNonCriticalTimeout: '45'
-worldPreloadSort: '1'
-worldQuestFilterAnima: '1'
-worldQuestFilterArtifactPower: '1'
-worldQuestFilterEquipment: '1'
-worldQuestFilterGold: '1'
-worldQuestFilterProfessionMaterials: '1'
-worldQuestFilterReputation: '1'
-worldQuestFilterResources: '1'
-WorldTextCritScreenY_v2: '0.0275'
-WorldTextGravity_v2: '0.500000'
-WorldTextMinAlpha_v2: '0.500000'
-WorldTextMinSize: '0.000000'
-WorldTextNonRandomZ_v2: '2.5'
-WorldTextRampDuration_v2: '1.000000'
-WorldTextRampPow_v2: '1.900000'
-WorldTextRampPowCrit_v2: '8.000000'
-WorldTextRandomXY_v2: '0.0'
-WorldTextRandomZMax_v2: '1.5'
-WorldTextRandomZMin_v2: '0.8'
-WorldTextScale_v2: '1.000000'
-WorldTextScreenY_v2: '0.015'
-WorldTextStartPosRandomness_v2: '1.0'
-worldViewCullMaxJobs: '32'
-xpBarText: '0'
+accountNeedsTurnStrafeDialog:
+  value: '1'
+acknowledgedArrowCallouts:
+  value: '0'
+ActionButtonUseKeyDown:
+  value: '1'
+ActionButtonUseKeyHeldSpell:
+  value: '0'
+ActionCombatCameraEnable:
+  value: '0'
+actionedAdventureJournalEntries:
+  value: ''
+addFriendInfoShown:
+  value: '0'
+addonChallengeModeRestrictionsForced:
+  value: '0'
+addonChatRestrictionsForced:
+  value: '0'
+addonCombatRestrictionsForced:
+  value: '0'
+addonEncounterRestrictionsForced:
+  value: '0'
+addonLoadDebugging:
+  value: '0'
+addonMapRestrictionsForced:
+  value: '0'
+addonPerformanceMsgError:
+  value: '0.000000'
+addonPerformanceMsgOverall:
+  value: '0.000000'
+addonPerformanceMsgWarning:
+  value: '0.000000'
+addonPvPMatchRestrictionsForced:
+  value: '0'
+advancedCombatLogging:
+  value: '0'
+AdvFlyingDynamicFOVEnabled:
+  value: '1'
+advFlyKeyboardMaxPitchFactor:
+  value: '5.000000'
+advFlyKeyboardMaxTurnFactor:
+  value: '8.000000'
+advFlyKeyboardMinPitchFactor:
+  value: '2.500000'
+advFlyKeyboardMinTurnFactor:
+  value: '5.000000'
+advFlyPitchControl:
+  value: '3'
+advFlyPitchControlCameraChase:
+  value: '20.000000'
+advFlyPitchControlGroundDebounce:
+  value: '0'
+agentUID:
+  value: ''
+AIBrain:
+  value: '0'
+AIController:
+  value: '0'
+AIControllerEventLog:
+  value: '0'
+AIEventLog:
+  value: '0'
+allowCompareWithToggle:
+  value: '1'
+allowDevPublicKey:
+  value: '0'
+AllowMacHideAppBinding:
+  value: '1'
+AllowMacHideOthersBinding:
+  value: '1'
+AllowMacQuitBinding:
+  value: '1'
+AllowSoftwareRenderer:
+  value: '0'
+AllowSpectateMode:
+  value: '1'
+alwaysCompareItems:
+  value: '1'
+alwaysShowRuneIcons:
+  value: '0'
+animFrameSkipLOD:
+  value: '0'
+arachnophobiaMode:
+  value: '0'
+AreaTriggerEventLog:
+  value: '0'
+AreaTriggers:
+  value: '0'
+assaoAdaptiveQualityLimit:
+  value: '.45'
+assaoBlurPassCount:
+  value: '2'
+assaoDetailShadowStrength:
+  value: '0'
+assaoFadeOutFrom:
+  value: '50.0'
+assaoFadeOutTo:
+  value: '300.0'
+assaoHorizonAngleThresh:
+  value: '0.4'
+assaoNormals:
+  value: '1'
+assaoRadius:
+  value: '1.85'
+assaoShadowClamp:
+  value: '.98'
+assaoShadowMult:
+  value: '1.1'
+assaoShadowPower:
+  value: '1.34'
+assaoSharpness:
+  value: '.98'
+assaoTemporalSSAngleOffset:
+  value: '0.0'
+assaoTemporalSSRadiusOffset:
+  value: '1.0'
+assistAttack:
+  value: '0'
+assistedCombatHighlight:
+  value: '0'
+assistedCombatHighlightRPE:
+  value: '0'
+assistedCombatIconUpdateRate:
+  value: '0.100000'
+assistedCombatReduceHighlights:
+  value: '1'
+AsyncAssistActions:
+  value: '0'
+asyncHandlerTimeout:
+  value: '100'
+asyncThreadSleep:
+  value: '0'
+auctionDisplayOnCharacter:
+  value: '0'
+auctionHouseDurationDropdown:
+  value: '2'
+auctionSortByBuyoutPrice:
+  value: '0'
+auctionSortByUnitPrice:
+  value: '0'
+audioLocale:
+  value: ''
+AuraDebugger:
+  value: '0'
+AuraEventLog:
+  value: '0'
+autoAcceptQuickJoinRequests:
+  value: '0'
+autoClearAFK:
+  value: '1'
+autoCompleteResortNamesOnRecency:
+  value: '1'
+autoCompleteUseContext:
+  value: '1'
+autoCompleteWhenEditingFromCenter:
+  value: '1'
+autoDismount:
+  value: '1'
+autoDismountFlying:
+  value: '0'
+autoFilledMultiCastSlots:
+  value: '0'
+autoInteract:
+  value: '0'
+autojoinBGVoice:
+  value: '0'
+autojoinPartyVoice:
+  value: '0'
+autoLootDefault:
+  value: '0'
+autoLootRate:
+  value: '150'
+AutoPushSpellToActionBar:
+  value: '1'
+autoQuestPopUps:
+  value: ''
+autoQuestProgress:
+  value: '1'
+autoQuestWatch:
+  value: '1'
+autoSelfCast:
+  value: '1'
+autoStand:
+  value: '1'
+autoUnshift:
+  value: '1'
+bankAutoDepositReagents:
+  value: '1'
+bankConfirmTabCleanUp:
+  value: '1'
+BeckonTriggerEventlog:
+  value: '0'
+BehaviorTree:
+  value: '0'
+blockChannelInvites:
+  value: '0'
+blockTrades:
+  value: '0'
+bodyQuota:
+  value: '100'
+breakUpLargeNumbers:
+  value: '1'
+Brightness:
+  value: '50.000000'
+buffDurations:
+  value: '1'
+CAADebuffSelfAlert:
+  value: '0'
+CAAEnabled:
+  value: '0'
+CAAInterruptCast:
+  value: '0'
+CAAInterruptCastSuccess:
+  value: '0'
+CAAPartyHealthFrequency:
+  value: '0'
+CAAPartyHealthPercent:
+  value: '0'
+CAAPartyHealthVoice:
+  value: '0'
+CAAPartyHealthVolume:
+  value: '100'
+CAAPlayerCastFormat:
+  value: '4'
+CAAPlayerCastMinTime:
+  value: '1.500000'
+CAAPlayerCastMode:
+  value: '0'
+CAAPlayerCastThrottle:
+  value: '0.000000'
+CAAPlayerCastVoice:
+  value: '0'
+CAAPlayerCastVolume:
+  value: '100'
+CAAPlayerHealthFormat:
+  value: '1'
+CAAPlayerHealthPercent:
+  value: '0'
+CAAPlayerHealthThrottle:
+  value: '0.000000'
+CAAPlayerHealthVoice:
+  value: '0'
+CAAPlayerHealthVolume:
+  value: '100'
+CAAResource1Formats:
+  value: ''
+CAAResource1Percents:
+  value: ''
+CAAResource1Throttle:
+  value: '0.000000'
+CAAResource1Voice:
+  value: ''
+CAAResource1Volume:
+  value: ''
+CAAResource2Formats:
+  value: ''
+CAAResource2Percents:
+  value: ''
+CAAResource2Throttle:
+  value: '0.000000'
+CAAResource2Voice:
+  value: ''
+CAAResource2Volume:
+  value: ''
+CAASayCombatEnd:
+  value: '1'
+CAASayCombatStart:
+  value: '1'
+CAASayIfTargeted:
+  value: ''
+CAASayTargetName:
+  value: '1'
+CAASayYourDebuffs:
+  value: '1'
+CAASayYourDebuffsFormat:
+  value: '0'
+CAASayYourDebuffsMinDuration:
+  value: '1.500000'
+CAASayYourDebuffsVoice:
+  value: '0'
+CAASayYourDebuffsVolume:
+  value: '100'
+CAASpeed:
+  value: '0'
+CAATargetCastFormat:
+  value: '0'
+CAATargetCastMinTime:
+  value: '1.500000'
+CAATargetCastMode:
+  value: '0'
+CAATargetCastThrottle:
+  value: '0.000000'
+CAATargetCastVoice:
+  value: '0'
+CAATargetCastVolume:
+  value: '100'
+CAATargetDeathBehavior:
+  value: '0'
+CAATargetHealthFormat:
+  value: '3'
+CAATargetHealthPercent:
+  value: '2'
+CAATargetHealthThrottle:
+  value: '0.000000'
+CAATargetHealthVoice:
+  value: '0'
+CAATargetHealthVolume:
+  value: '100'
+CAAVoice:
+  value: '0'
+CAAVolume:
+  value: '100'
+cacaoBilateralSimilarityDistanceSigma:
+  value: '0.01'
+calendarShowBattlegrounds:
+  value: '1'
+calendarShowDarkmoon:
+  value: '1'
+calendarShowHolidays:
+  value: '1'
+calendarShowLockouts:
+  value: '1'
+calendarShowResets:
+  value: '0'
+calendarShowWeeklyHolidays:
+  value: '1'
+cameraBobbing:
+  value: '0'
+cameraBobbingSmoothSpeed:
+  value: '0.800000'
+cameraCustomViewSmoothing:
+  value: '0'
+cameraDistanceMaxZoomFactor:
+  value: '1.900000'
+cameraDistanceRateMult:
+  value: '1.000000'
+cameraDive:
+  value: '1'
+CameraFollowGamepadAdjustDelay:
+  value: '1.000000'
+CameraFollowGamepadAdjustEaseIn:
+  value: '1.000000'
+CameraFollowOnStick:
+  value: '0'
+CameraFollowPitchDeadZone:
+  value: '5.000000'
+CameraFollowPitchSpeed:
+  value: '1.000000'
+CameraFollowPitchStrength:
+  value: '0.700000'
+CameraFollowSnapCharacterAngle:
+  value: '45.000000'
+CameraFollowTargetCombat:
+  value: '1'
+CameraFollowYawSpeed:
+  value: '1.000000'
+cameraFov:
+  value: '90.000000'
+cameraFoVSmoothSpeed:
+  value: '0.500000'
+cameraGroundSmoothSpeed:
+  value: '7.500000'
+cameraHeightIgnoreStandState:
+  value: '0'
+cameraIndirectOffset:
+  value: '6.000000'
+cameraIndirectVisibility:
+  value: '1'
+CameraKeepCharacterCentered:
+  value: '1'
+cameraPitchMoveSpeed:
+  value: '90.000000'
+cameraPitchSmoothMax:
+  value: '23.000000'
+cameraPitchSmoothMin:
+  value: '0.000000'
+cameraPitchSmoothSpeed:
+  value: '45.000000'
+cameraPivot:
+  value: '1'
+cameraPivotDXMax:
+  value: '0.050000'
+cameraPivotDYMin:
+  value: '0.000000'
+CameraReduceUnexpectedMovement:
+  value: '0'
+cameraSavedDistance:
+  value: '5.550000'
+cameraSavedPetBattleDistance:
+  value: '10.000000'
+cameraSavedPitch:
+  value: '10.000000'
+cameraSavedVehicleDistance:
+  value: '-1.000000'
+cameraSmooth:
+  value: '1'
+cameraSmoothAlwaysFearDelay:
+  value: '0.000000'
+cameraSmoothAlwaysFearFactor:
+  value: '1.000000'
+cameraSmoothAlwaysIdleDelay:
+  value: '0.000000'
+cameraSmoothAlwaysIdleFactor:
+  value: '1.000000'
+cameraSmoothAlwaysMoveDelay:
+  value: '0.000000'
+cameraSmoothAlwaysMoveFactor:
+  value: '1.000000'
+cameraSmoothAlwaysStopDelay:
+  value: '0.000000'
+cameraSmoothAlwaysStopFactor:
+  value: '1.000000'
+cameraSmoothAlwaysStrafeDelay:
+  value: '0.000000'
+cameraSmoothAlwaysStrafeFactor:
+  value: '1.000000'
+cameraSmoothAlwaysTrackDelay:
+  value: '0.000000'
+cameraSmoothAlwaysTrackFactor:
+  value: '1.000000'
+cameraSmoothAlwaysTurnDelay:
+  value: '0.000000'
+cameraSmoothAlwaysTurnFactor:
+  value: '1.000000'
+cameraSmoothNeverFearDelay:
+  value: '0.000000'
+cameraSmoothNeverFearFactor:
+  value: '0.000000'
+cameraSmoothNeverIdleDelay:
+  value: '0.000000'
+cameraSmoothNeverIdleFactor:
+  value: '0.000000'
+cameraSmoothNeverMoveDelay:
+  value: '0.000000'
+cameraSmoothNeverMoveFactor:
+  value: '0.000000'
+cameraSmoothNeverStopDelay:
+  value: '0.000000'
+cameraSmoothNeverStopFactor:
+  value: '0.000000'
+cameraSmoothNeverStrafeDelay:
+  value: '0.000000'
+cameraSmoothNeverStrafeFactor:
+  value: '0.000000'
+cameraSmoothNeverTrackDelay:
+  value: '0.000000'
+cameraSmoothNeverTrackFactor:
+  value: '0.000000'
+cameraSmoothNeverTurnDelay:
+  value: '0.000000'
+cameraSmoothNeverTurnFactor:
+  value: '0.000000'
+cameraSmoothPitch:
+  value: '1'
+cameraSmoothSmarterFearDelay:
+  value: '0.400000'
+cameraSmoothSmarterFearFactor:
+  value: '10.000000'
+cameraSmoothSmarterIdleDelay:
+  value: '0.000000'
+cameraSmoothSmarterIdleFactor:
+  value: '0.000000'
+cameraSmoothSmarterMoveDelay:
+  value: '0.000000'
+cameraSmoothSmarterMoveFactor:
+  value: '1.000000'
+cameraSmoothSmarterStopDelay:
+  value: '0.000000'
+cameraSmoothSmarterStopFactor:
+  value: '0.000000'
+cameraSmoothSmarterStrafeDelay:
+  value: '0.000000'
+cameraSmoothSmarterStrafeFactor:
+  value: '1.000000'
+cameraSmoothSmarterTrackDelay:
+  value: '0.400000'
+cameraSmoothSmarterTrackFactor:
+  value: '10.000000'
+cameraSmoothSmarterTurnDelay:
+  value: '0.000000'
+cameraSmoothSmarterTurnFactor:
+  value: '1.000000'
+cameraSmoothSmartFearDelay:
+  value: '0.400000'
+cameraSmoothSmartFearFactor:
+  value: '10.000000'
+cameraSmoothSmartIdleDelay:
+  value: '0.000000'
+cameraSmoothSmartIdleFactor:
+  value: '0.000000'
+cameraSmoothSmartMoveDelay:
+  value: '0.000000'
+cameraSmoothSmartMoveFactor:
+  value: '1.000000'
+cameraSmoothSmartStopDelay:
+  value: '0.000000'
+cameraSmoothSmartStopFactor:
+  value: '0.000000'
+cameraSmoothSmartStrafeDelay:
+  value: '0.000000'
+cameraSmoothSmartStrafeFactor:
+  value: '1.000000'
+cameraSmoothSmartTrackDelay:
+  value: '0.400000'
+cameraSmoothSmartTrackFactor:
+  value: '10.000000'
+cameraSmoothSmartTurnDelay:
+  value: '0.000000'
+cameraSmoothSmartTurnFactor:
+  value: '1.000000'
+cameraSmoothSplineFearDelay:
+  value: '0.000000'
+cameraSmoothSplineFearFactor:
+  value: '4.000000'
+cameraSmoothSplineIdleDelay:
+  value: '0.000000'
+cameraSmoothSplineIdleFactor:
+  value: '4.000000'
+cameraSmoothSplineMoveDelay:
+  value: '0.000000'
+cameraSmoothSplineMoveFactor:
+  value: '1.000000'
+cameraSmoothSplineStopDelay:
+  value: '0.000000'
+cameraSmoothSplineStopFactor:
+  value: '4.000000'
+cameraSmoothSplineStrafeDelay:
+  value: '0.000000'
+cameraSmoothSplineStrafeFactor:
+  value: '1.000000'
+cameraSmoothSplineTrackDelay:
+  value: '0.000000'
+cameraSmoothSplineTrackFactor:
+  value: '4.000000'
+cameraSmoothSplineTurnDelay:
+  value: '0.000000'
+cameraSmoothSplineTurnFactor:
+  value: '1.000000'
+cameraSmoothStyle:
+  value: '4'
+cameraSmoothTimeMax:
+  value: '2.000000'
+cameraSmoothTimeMin:
+  value: '0.100000'
+cameraSmoothTrackingStyle:
+  value: '4'
+cameraSmoothViewDataAlwaysDistanceDelay:
+  value: '0.000000'
+cameraSmoothViewDataAlwaysDistanceFactor:
+  value: '0.000000'
+cameraSmoothViewDataAlwaysPitchDelay:
+  value: '0.000000'
+cameraSmoothViewDataAlwaysPitchFactor:
+  value: '1.000000'
+cameraSmoothViewDataAlwaysYawDelay:
+  value: '0.000000'
+cameraSmoothViewDataAlwaysYawFactor:
+  value: '1.000000'
+cameraSmoothViewDataNeverDistanceDelay:
+  value: '0.000000'
+cameraSmoothViewDataNeverDistanceFactor:
+  value: '0.000000'
+cameraSmoothViewDataNeverPitchDelay:
+  value: '0.000000'
+cameraSmoothViewDataNeverPitchFactor:
+  value: '0.000000'
+cameraSmoothViewDataNeverYawDelay:
+  value: '0.000000'
+cameraSmoothViewDataNeverYawFactor:
+  value: '0.000000'
+cameraSmoothViewDataSmartDistanceDelay:
+  value: '0.000000'
+cameraSmoothViewDataSmartDistanceFactor:
+  value: '0.000000'
+cameraSmoothViewDataSmarterDistanceDelay:
+  value: '0.000000'
+cameraSmoothViewDataSmarterDistanceFactor:
+  value: '0.000000'
+cameraSmoothViewDataSmarterPitchDelay:
+  value: '0.000000'
+cameraSmoothViewDataSmarterPitchFactor:
+  value: '1.000000'
+cameraSmoothViewDataSmarterYawDelay:
+  value: '0.000000'
+cameraSmoothViewDataSmarterYawFactor:
+  value: '1.000000'
+cameraSmoothViewDataSmartPitchDelay:
+  value: '0.000000'
+cameraSmoothViewDataSmartPitchFactor:
+  value: '0.000000'
+cameraSmoothViewDataSmartYawDelay:
+  value: '0.000000'
+cameraSmoothViewDataSmartYawFactor:
+  value: '1.000000'
+cameraSmoothViewDataSplineDistanceDelay:
+  value: '0.000000'
+cameraSmoothViewDataSplineDistanceFactor:
+  value: '0.000000'
+cameraSmoothViewDataSplinePitchDelay:
+  value: '0.000000'
+cameraSmoothViewDataSplinePitchFactor:
+  value: '1.000000'
+cameraSmoothViewDataSplineYawDelay:
+  value: '0.000000'
+cameraSmoothViewDataSplineYawFactor:
+  value: '1.000000'
+cameraSmoothYaw:
+  value: '1'
+cameraSubmergePitch:
+  value: '18.000000'
+cameraSurfacePitch:
+  value: '0.000000'
+cameraTargetSmoothSpeed:
+  value: '90.000000'
+cameraTerrainTilt:
+  value: '0'
+cameraTerrainTiltAlwaysFallAbsorb:
+  value: '1.000000'
+cameraTerrainTiltAlwaysFallDelay:
+  value: '0.000000'
+cameraTerrainTiltAlwaysFallFactor:
+  value: '0.750000'
+cameraTerrainTiltAlwaysFearAbsorb:
+  value: '1.000000'
+cameraTerrainTiltAlwaysFearDelay:
+  value: '0.000000'
+cameraTerrainTiltAlwaysFearFactor:
+  value: '1.000000'
+cameraTerrainTiltAlwaysIdleAbsorb:
+  value: '1.000000'
+cameraTerrainTiltAlwaysIdleDelay:
+  value: '0.000000'
+cameraTerrainTiltAlwaysIdleFactor:
+  value: '1.000000'
+cameraTerrainTiltAlwaysJumpAbsorb:
+  value: '0.000000'
+cameraTerrainTiltAlwaysJumpDelay:
+  value: '0.000000'
+cameraTerrainTiltAlwaysJumpFactor:
+  value: '-1.000000'
+cameraTerrainTiltAlwaysMoveAbsorb:
+  value: '1.000000'
+cameraTerrainTiltAlwaysMoveDelay:
+  value: '0.000000'
+cameraTerrainTiltAlwaysMoveFactor:
+  value: '1.000000'
+cameraTerrainTiltAlwaysStrafeAbsorb:
+  value: '1.000000'
+cameraTerrainTiltAlwaysStrafeDelay:
+  value: '0.000000'
+cameraTerrainTiltAlwaysStrafeFactor:
+  value: '1.000000'
+cameraTerrainTiltAlwaysSwimAbsorb:
+  value: '0.000000'
+cameraTerrainTiltAlwaysSwimDelay:
+  value: '0.000000'
+cameraTerrainTiltAlwaysSwimFactor:
+  value: '1.000000'
+cameraTerrainTiltAlwaysTaxiAbsorb:
+  value: '0.000000'
+cameraTerrainTiltAlwaysTaxiDelay:
+  value: '0.000000'
+cameraTerrainTiltAlwaysTaxiFactor:
+  value: '1.000000'
+cameraTerrainTiltAlwaysTrackAbsorb:
+  value: '1.000000'
+cameraTerrainTiltAlwaysTrackDelay:
+  value: '0.000000'
+cameraTerrainTiltAlwaysTrackFactor:
+  value: '1.000000'
+cameraTerrainTiltAlwaysTurnAbsorb:
+  value: '1.000000'
+cameraTerrainTiltAlwaysTurnDelay:
+  value: '0.000000'
+cameraTerrainTiltAlwaysTurnFactor:
+  value: '1.000000'
+cameraTerrainTiltNeverFallAbsorb:
+  value: '0.000000'
+cameraTerrainTiltNeverFallDelay:
+  value: '0.000000'
+cameraTerrainTiltNeverFallFactor:
+  value: '-1.000000'
+cameraTerrainTiltNeverFearAbsorb:
+  value: '0.000000'
+cameraTerrainTiltNeverFearDelay:
+  value: '0.000000'
+cameraTerrainTiltNeverFearFactor:
+  value: '-1.000000'
+cameraTerrainTiltNeverIdleAbsorb:
+  value: '0.000000'
+cameraTerrainTiltNeverIdleDelay:
+  value: '0.000000'
+cameraTerrainTiltNeverIdleFactor:
+  value: '-1.000000'
+cameraTerrainTiltNeverJumpAbsorb:
+  value: '0.000000'
+cameraTerrainTiltNeverJumpDelay:
+  value: '0.000000'
+cameraTerrainTiltNeverJumpFactor:
+  value: '-1.000000'
+cameraTerrainTiltNeverMoveAbsorb:
+  value: '0.000000'
+cameraTerrainTiltNeverMoveDelay:
+  value: '0.000000'
+cameraTerrainTiltNeverMoveFactor:
+  value: '-1.000000'
+cameraTerrainTiltNeverStrafeAbsorb:
+  value: '0.000000'
+cameraTerrainTiltNeverStrafeDelay:
+  value: '0.000000'
+cameraTerrainTiltNeverStrafeFactor:
+  value: '-1.000000'
+cameraTerrainTiltNeverSwimAbsorb:
+  value: '0.000000'
+cameraTerrainTiltNeverSwimDelay:
+  value: '0.000000'
+cameraTerrainTiltNeverSwimFactor:
+  value: '-1.000000'
+cameraTerrainTiltNeverTaxiAbsorb:
+  value: '0.000000'
+cameraTerrainTiltNeverTaxiDelay:
+  value: '0.000000'
+cameraTerrainTiltNeverTaxiFactor:
+  value: '-1.000000'
+cameraTerrainTiltNeverTrackAbsorb:
+  value: '0.000000'
+cameraTerrainTiltNeverTrackDelay:
+  value: '0.000000'
+cameraTerrainTiltNeverTrackFactor:
+  value: '-1.000000'
+cameraTerrainTiltNeverTurnAbsorb:
+  value: '0.000000'
+cameraTerrainTiltNeverTurnDelay:
+  value: '0.000000'
+cameraTerrainTiltNeverTurnFactor:
+  value: '-1.000000'
+cameraTerrainTiltSmarterFallAbsorb:
+  value: '1.000000'
+cameraTerrainTiltSmarterFallDelay:
+  value: '0.000000'
+cameraTerrainTiltSmarterFallFactor:
+  value: '0.750000'
+cameraTerrainTiltSmarterFearAbsorb:
+  value: '1.000000'
+cameraTerrainTiltSmarterFearDelay:
+  value: '0.000000'
+cameraTerrainTiltSmarterFearFactor:
+  value: '1.000000'
+cameraTerrainTiltSmarterIdleAbsorb:
+  value: '0.000000'
+cameraTerrainTiltSmarterIdleDelay:
+  value: '0.000000'
+cameraTerrainTiltSmarterIdleFactor:
+  value: '-1.000000'
+cameraTerrainTiltSmarterJumpAbsorb:
+  value: '0.000000'
+cameraTerrainTiltSmarterJumpDelay:
+  value: '0.000000'
+cameraTerrainTiltSmarterJumpFactor:
+  value: '-1.000000'
+cameraTerrainTiltSmarterMoveAbsorb:
+  value: '1.000000'
+cameraTerrainTiltSmarterMoveDelay:
+  value: '0.000000'
+cameraTerrainTiltSmarterMoveFactor:
+  value: '1.000000'
+cameraTerrainTiltSmarterStrafeAbsorb:
+  value: '1.000000'
+cameraTerrainTiltSmarterStrafeDelay:
+  value: '0.000000'
+cameraTerrainTiltSmarterStrafeFactor:
+  value: '1.000000'
+cameraTerrainTiltSmarterSwimAbsorb:
+  value: '0.000000'
+cameraTerrainTiltSmarterSwimDelay:
+  value: '0.000000'
+cameraTerrainTiltSmarterSwimFactor:
+  value: '1.000000'
+cameraTerrainTiltSmarterTaxiAbsorb:
+  value: '0.000000'
+cameraTerrainTiltSmarterTaxiDelay:
+  value: '0.000000'
+cameraTerrainTiltSmarterTaxiFactor:
+  value: '1.000000'
+cameraTerrainTiltSmarterTrackAbsorb:
+  value: '1.000000'
+cameraTerrainTiltSmarterTrackDelay:
+  value: '0.000000'
+cameraTerrainTiltSmarterTrackFactor:
+  value: '1.000000'
+cameraTerrainTiltSmarterTurnAbsorb:
+  value: '1.000000'
+cameraTerrainTiltSmarterTurnDelay:
+  value: '0.000000'
+cameraTerrainTiltSmarterTurnFactor:
+  value: '1.000000'
+cameraTerrainTiltSmartFallAbsorb:
+  value: '1.000000'
+cameraTerrainTiltSmartFallDelay:
+  value: '0.000000'
+cameraTerrainTiltSmartFallFactor:
+  value: '0.750000'
+cameraTerrainTiltSmartFearAbsorb:
+  value: '1.000000'
+cameraTerrainTiltSmartFearDelay:
+  value: '0.000000'
+cameraTerrainTiltSmartFearFactor:
+  value: '1.000000'
+cameraTerrainTiltSmartIdleAbsorb:
+  value: '0.000000'
+cameraTerrainTiltSmartIdleDelay:
+  value: '0.000000'
+cameraTerrainTiltSmartIdleFactor:
+  value: '-1.000000'
+cameraTerrainTiltSmartJumpAbsorb:
+  value: '0.000000'
+cameraTerrainTiltSmartJumpDelay:
+  value: '0.000000'
+cameraTerrainTiltSmartJumpFactor:
+  value: '-1.000000'
+cameraTerrainTiltSmartMoveAbsorb:
+  value: '1.000000'
+cameraTerrainTiltSmartMoveDelay:
+  value: '0.000000'
+cameraTerrainTiltSmartMoveFactor:
+  value: '1.000000'
+cameraTerrainTiltSmartStrafeAbsorb:
+  value: '1.000000'
+cameraTerrainTiltSmartStrafeDelay:
+  value: '0.000000'
+cameraTerrainTiltSmartStrafeFactor:
+  value: '1.000000'
+cameraTerrainTiltSmartSwimAbsorb:
+  value: '0.000000'
+cameraTerrainTiltSmartSwimDelay:
+  value: '0.000000'
+cameraTerrainTiltSmartSwimFactor:
+  value: '1.000000'
+cameraTerrainTiltSmartTaxiAbsorb:
+  value: '0.000000'
+cameraTerrainTiltSmartTaxiDelay:
+  value: '0.000000'
+cameraTerrainTiltSmartTaxiFactor:
+  value: '1.000000'
+cameraTerrainTiltSmartTrackAbsorb:
+  value: '1.000000'
+cameraTerrainTiltSmartTrackDelay:
+  value: '0.000000'
+cameraTerrainTiltSmartTrackFactor:
+  value: '1.000000'
+cameraTerrainTiltSmartTurnAbsorb:
+  value: '1.000000'
+cameraTerrainTiltSmartTurnDelay:
+  value: '0.000000'
+cameraTerrainTiltSmartTurnFactor:
+  value: '1.000000'
+cameraTerrainTiltSplineFallAbsorb:
+  value: '1.000000'
+cameraTerrainTiltSplineFallDelay:
+  value: '0.000000'
+cameraTerrainTiltSplineFallFactor:
+  value: '0.750000'
+cameraTerrainTiltSplineFearAbsorb:
+  value: '1.000000'
+cameraTerrainTiltSplineFearDelay:
+  value: '0.000000'
+cameraTerrainTiltSplineFearFactor:
+  value: '1.000000'
+cameraTerrainTiltSplineIdleAbsorb:
+  value: '0.000000'
+cameraTerrainTiltSplineIdleDelay:
+  value: '0.000000'
+cameraTerrainTiltSplineIdleFactor:
+  value: '-1.000000'
+cameraTerrainTiltSplineJumpAbsorb:
+  value: '0.000000'
+cameraTerrainTiltSplineJumpDelay:
+  value: '0.000000'
+cameraTerrainTiltSplineJumpFactor:
+  value: '-1.000000'
+cameraTerrainTiltSplineMoveAbsorb:
+  value: '1.000000'
+cameraTerrainTiltSplineMoveDelay:
+  value: '0.000000'
+cameraTerrainTiltSplineMoveFactor:
+  value: '1.000000'
+cameraTerrainTiltSplineStrafeAbsorb:
+  value: '1.000000'
+cameraTerrainTiltSplineStrafeDelay:
+  value: '0.000000'
+cameraTerrainTiltSplineStrafeFactor:
+  value: '1.000000'
+cameraTerrainTiltSplineSwimAbsorb:
+  value: '0.000000'
+cameraTerrainTiltSplineSwimDelay:
+  value: '0.000000'
+cameraTerrainTiltSplineSwimFactor:
+  value: '1.000000'
+cameraTerrainTiltSplineTaxiAbsorb:
+  value: '0.000000'
+cameraTerrainTiltSplineTaxiDelay:
+  value: '0.000000'
+cameraTerrainTiltSplineTaxiFactor:
+  value: '1.000000'
+cameraTerrainTiltSplineTrackAbsorb:
+  value: '1.000000'
+cameraTerrainTiltSplineTrackDelay:
+  value: '0.000000'
+cameraTerrainTiltSplineTrackFactor:
+  value: '1.000000'
+cameraTerrainTiltSplineTurnAbsorb:
+  value: '1.000000'
+cameraTerrainTiltSplineTurnDelay:
+  value: '0.000000'
+cameraTerrainTiltSplineTurnFactor:
+  value: '1.000000'
+cameraTerrainTiltTimeMax:
+  value: '10.000000'
+cameraTerrainTiltTimeMin:
+  value: '3.000000'
+cameraView:
+  value: '2'
+cameraViewBlendStyle:
+  value: '1'
+cameraWaterCollision:
+  value: '0'
+cameraYawMoveSpeed:
+  value: '180.000000'
+cameraYawSmoothMax:
+  value: '0.000000'
+cameraYawSmoothMin:
+  value: '0.000000'
+cameraYawSmoothSpeed:
+  value: '180.000000'
+cameraZoomSpeed:
+  value: '20.000000'
+cameraZSmooth:
+  value: '1'
+casContainerSizeLimit:
+  value: '0'
+characterNeedsTurnStrafeDialog:
+  value: '1'
+characterSocialRestrictionSettingsApplied:
+  value: '0'
+ChatAmbienceVolume:
+  value: '0.3'
+chatBubbles:
+  value: '1'
+chatBubblesParty:
+  value: '1'
+chatBubblesRaid:
+  value: '0'
+chatClassColorOverride:
+  value: '0'
+chatMouseScroll:
+  value: '1'
+ChatMusicVolume:
+  value: '0.3'
+ChatSoundVolume:
+  value: '0.4'
+chatStyle:
+  value: im
+checkAddonVersion:
+  value: '1'
+ClientCastDebug:
+  value: '0'
+ClientCastLimitDebug:
+  value: '100'
+ClientMessageEventLog:
+  value: '0'
+ClientSettings_AFTERMATH_BY_API_MASK:
+  value: ''
+ClientSettings_AFTERMATH_BY_GPU_CATEGORY:
+  value: ''
+ClientSettings_ASYNC_COMPUTE_BY_API_MASK:
+  value: ''
+ClientSettings_ASYNC_COMPUTE_BY_GPU_CATEGORY:
+  value: ''
+ClientSettings_ClusteredShading:
+  value: ''
+ClientSettings_CMAA2:
+  value: ''
+ClientSettings_CMD_LIST_MT_BY_API_MASK:
+  value: ''
+ClientSettings_CMD_LIST_MT_BY_GPU_CATEGORY:
+  value: ''
+ClientSettings_COPY_QUEUE_BY_API_MASK:
+  value: ''
+ClientSettings_COPY_QUEUE_BY_GPU_CATEGORY:
+  value: ''
+ClientSettings_CTexAsyncCreate:
+  value: ''
+ClientSettings_FSR:
+  value: ''
+ClientSettings_HIGH_MEM_FEATURES_BY_API_MASK:
+  value: ''
+ClientSettings_HIGH_MEM_FEATURES_BY_GPU_CATEGORY:
+  value: ''
+ClientSettings_LowLatency:
+  value: ''
+ClientSettings_LowVramActions:
+  value: ''
+ClientSettings_MemoryAllocationTraces:
+  value: ''
+ClientSettings_MSAA:
+  value: ''
+ClientSettings_NeedsGxRestart:
+  value: ''
+ClientSettings_OPT_FEATURES_BY_API_MASK:
+  value: ''
+ClientSettings_OPT_FEATURES_BY_GPU_CATEGORY:
+  value: ''
+ClientSettings_RAY_TRACING_BY_API_MASK:
+  value: ''
+ClientSettings_RAY_TRACING_BY_GPU_CATEGORY:
+  value: ''
+ClientSettings_RTShadows:
+  value: ''
+ClientSettings_SHADER_MT_BY_API_MASK:
+  value: ''
+ClientSettings_SHADER_MT_BY_GPU_CATEGORY:
+  value: ''
+ClientSettings_SM6_BY_API_MASK:
+  value: ''
+ClientSettings_SM6_BY_GPU_CATEGORY:
+  value: ''
+ClientSettings_SpellClutter:
+  value: ''
+ClientSettings_VolumeFog:
+  value: ''
+ClientSettings_WORK_OPTIMS_BY_API_MASK:
+  value: ''
+ClientSettings_WORK_OPTIMS_BY_GPU_CATEGORY:
+  value: ''
+ClipCursor:
+  value: '0'
+cloakFixEnabled:
+  value: '1'
+closedExtraAbiltyTutorials:
+  value: ''
+closedInfoFrames:
+  value: ''
+closedInfoFramesAccountWide:
+  value: ''
+closedRemixArtifactTutorialFrames:
+  value: '0'
+clubFinderCacheExpiry:
+  value: '1000'
+clubFinderCachePendingExpiry:
+  value: '5000'
+clubFinderPlayerLanguageSettings:
+  value: '0'
+clubFinderPlayerSettings:
+  value: '1'
+clusteredShading:
+  value: '1'
+CMAA2ExtraSharpness:
+  value: '0'
+CMAA2HalfFloat:
+  value: '1'
+CMAA2Quality:
+  value: '3'
+collapsedCurrencyCategoryDefaults:
+  value: '0'
+collapsedReputationHeaderDefaults:
+  value: ''
+collapseExpandBuffs:
+  value: '1'
+Collision:
+  value: '0'
+colorblindMode:
+  value: '0'
+colorblindSimulator:
+  value: '0'
+colorblindWeaknessFactor:
+  value: '0.5'
+colorChatNamesByClass:
+  value: '0'
+combatLogRetentionTime:
+  value: '300'
+combatLogUniqueFilename:
+  value: '1'
+combatWarningsEnabled:
+  value: '1'
+combinedBags:
+  value: '0'
+comboPointLocation:
+  value: '2'
+commentatorLossOfControlIconUnitFrame:
+  value: '1'
+commentatorLossOfControlTextNameplate:
+  value: '0'
+commentatorLossOfControlTextUnitFrame:
+  value: '0'
+communitiesShowOffline:
+  value: '1'
+componentCompress:
+  value: '1'
+componentEmissive:
+  value: '1'
+componentSpecular:
+  value: '1'
+componentTexCacheSize:
+  value: '32'
+componentTexLoadLimit:
+  value: '16'
+componentTextureLevel:
+  value: '0'
+componentThread:
+  value: '1'
+ConsoleKey:
+  value: '`'
+consoleShowDebugMessages:
+  value: '0'
+consoleShowSpamMessages:
+  value: '0'
+contentTrackingFilter:
+  value: '1'
+ContentTuning:
+  value: '0'
+Contrast:
+  value: '50.000000'
+cooldownViewerEnabled:
+  value: '0'
+cooldownViewerShowUnlearned:
+  value: '1'
+countdownForCooldowns:
+  value: '0'
+covenantMissionTutorial:
+  value: '0'
+craftingOrdersOnlyPreferredArmorCollectable:
+  value: '0'
+currencyCategoriesCollapsed:
+  value: '0'
+currentGameMode:
+  value: '-1'
+CursorCenteredYPos:
+  value: '0.6'
+CursorFreelookCentering:
+  value: '0'
+CursorFreelookStartDelta:
+  value: '0.001'
+cursorSizePreferred:
+  value: '-1'
+CursorStickyCentering:
+  value: '0'
+CustomDesignEventLog:
+  value: '0'
+CustomWindowEventLog:
+  value: '0'
+daltonize:
+  value: '1'
+DamageCalculator:
+  value: '0'
+damageMeterEnabled:
+  value: '0'
+damageMeterResetOnNewInstance:
+  value: '0'
+dangerousShipyardMissionWarningAlreadyShown:
+  value: '0'
+DebugTorsoTwist:
+  value: '0'
+DeprecatedWarningThrottle:
+  value: '0'
+DepthBasedOpacity:
+  value: '1'
+deselectOnClick:
+  value: '0'
+developerLog:
+  value: '0'
+developerLogFilterDebug:
+  value: '0'
+developerLogFilterError:
+  value: '1'
+developerLogFilterFatal:
+  value: '1'
+developerLogFilterNormal:
+  value: '1'
+developerLogFilterSpam:
+  value: '0'
+developerLogFilterWarning:
+  value: '1'
+developerLogWriteToFile:
+  value: '1'
+digSites:
+  value: '1'
+DisableAdvancedFlyingFullScreenEffects:
+  value: '0'
+DisableAdvancedFlyingVelocityVFX:
+  value: '0'
+disableAELooting:
+  value: '0'
+disableAutoRealmSelect:
+  value: '0'
+disableServerNagle:
+  value: '1'
+disableSuggestedLevelActivityFilter:
+  value: '0'
+disableUILoadErrorDialog:
+  value: '0'
+disableUserAddonsByDefault:
+  value: '0'
+displaySpellActivationOverlays:
+  value: '1'
+displayWorldPVPObjectives:
+  value: '1'
+dnMTUpdate:
+  value: '1'
+doNotFlashLowHealthWarning:
+  value: '0'
+doNotShowTWFraudWarning:
+  value: '0'
+dontShowEquipmentSetsOnItems:
+  value: '0'
+doodadLodScale:
+  value: '100'
+dragonRidingRacesFilter:
+  value: '0'
+dragonRidingRacesFilterWQ:
+  value: '1'
+DriveDynamicFOVEnabled:
+  value: '1'
+DriverVersionCheck:
+  value: '1'
+DriveSwapReverseTurnDirection:
+  value: '0'
+dynamicLod:
+  value: '1'
+DynamicRenderScale:
+  value: '0'
+DynamicRenderScaleMin:
+  value: '0.333333'
+EJDungeonDifficulty:
+  value: '0'
+EJLootClass:
+  value: '-1'
+EJLootSpec:
+  value: '0'
+EJRaidDifficulty:
+  value: '0'
+EJSelectedTier:
+  value: '0'
+EmitterCombatRange:
+  value: '900.000000'
+emphasizeMySpellEffects:
+  value: '1'
+EmpowerMinHoldStagePercent:
+  value: '1.000000'
+empowerTapControls:
+  value: '0'
+EmpowerTapControlsReleaseThreshold:
+  value: '300'
+enableAssetTracking:
+  value: '1'
+enableBGDL:
+  value: '1'
+EnableBlinkApplicationIcon:
+  value: '1'
+enableConnectToPhotoSharing:
+  value: '0'
+enableFloatingCombatText:
+  value: '0'
+enableMouseoverCast:
+  value: '0'
+enableMouseSpeed:
+  value: '0'
+enableMovePad:
+  value: '0'
+enableMultiActionBars:
+  value: '0'
+enablePetBattleFloatingCombatText_v2:
+  value: '1'
+enablePings:
+  value: '1'
+enablePVPNotifyAFK:
+  value: '1'
+enableQuestCacheLogging:
+  value: '1'
+enableRuneSpentAnim:
+  value: '1'
+enableSourceLocationLookup:
+  value: '1'
+enableWowMouse:
+  value: '0'
+encounterTimelineEnabled:
+  value: '1'
+encounterTimelineHideForOtherRoles:
+  value: '0'
+encounterTimelineHideLongCountdowns:
+  value: '0'
+encounterTimelineHideQueuedCountdowns:
+  value: '0'
+encounterTimelineHighlightDuration:
+  value: '5000'
+encounterTimelineIconographyEnabled:
+  value: '1'
+encounterTimelineIconographyHiddenMask:
+  value: "\x01"
+encounterTimelineShowSequenceCount:
+  value: '0'
+encounterWarningsDefaultMessageDuration:
+  value: '3500'
+encounterWarningsEnabled:
+  value: '1'
+encounterWarningsHideIfNotTargetingPlayer:
+  value: '0'
+encounterWarningsLevel:
+  value: '0'
+endeavorInitiativesLastPointsMap:
+  value: ''
+engineSurvey:
+  value: '0'
+engineSurveyPatch:
+  value: '0'
+entityLodDist:
+  value: '10'
+entityLodOffset:
+  value: '10'
+entityShadowFadeScale:
+  value: '50'
+equipmentManager:
+  value: '1'
+ErrorFilter:
+  value: all
+ErrorLevelMax:
+  value: '3'
+ErrorLevelMin:
+  value: '2'
+Errors:
+  value: '0'
+eventReminders:
+  value: ''
+eventSchedulerLastUpdate:
+  value: '0'
+excludedCensorSources:
+  value: '1'
+ExclusiveWindowMode:
+  value: '0'
+expandBagBar:
+  value: '1'
+expandUpgradePanel:
+  value: '1'
+expandWarbandCharacterList:
+  value: '1'
+externalDefensivesEnabled:
+  value: '0'
+farclip:
+  value: '1000'
+ffxAntiAliasingMode:
+  value: '4'
+ffxDeath:
+  value: '1'
+ffxGlow:
+  value: '1'
+ffxLingeringVenari:
+  value: '1'
+ffxNether:
+  value: '1'
+ffxVenari:
+  value: '1'
+findYourselfAnywhere:
+  value: '0'
+findYourselfAnywhereOnlyInCombat:
+  value: '0'
+findYourselfInBG:
+  value: '1'
+findYourselfInBGOnlyInCombat:
+  value: '0'
+findYourselfInRaid:
+  value: '1'
+findYourselfInRaidOnlyInCombat:
+  value: '1'
+findYourselfMode:
+  value: '0'
+findYourselfModeCircle:
+  value: '0'
+findYourselfModeIcon:
+  value: '0'
+findYourselfModeOutline:
+  value: '0'
+flaggedTutorials:
+  value: ''
+flashErrorMessageRepeats:
+  value: '1'
+flightAngleLookAhead:
+  value: '0'
+floatingCombatTextAuraFade_v2:
+  value: '0'
+floatingCombatTextAuras_v2:
+  value: '0'
+floatingCombatTextCombatDamage_v2:
+  value: '1'
+floatingCombatTextCombatDamageAllAutos_v2:
+  value: '1'
+floatingCombatTextCombatDamageDirectionalOffset_v2:
+  value: '1.000000'
+floatingCombatTextCombatDamageDirectionalScale_v2:
+  value: '1.000000'
+floatingCombatTextCombatHealing_v2:
+  value: '1'
+floatingCombatTextCombatHealingAbsorbSelf_v2:
+  value: '1'
+floatingCombatTextCombatHealingAbsorbTarget_v2:
+  value: '1'
+floatingCombatTextCombatLogPeriodicSpells_v2:
+  value: '1'
+floatingCombatTextCombatState_v2:
+  value: '0'
+floatingCombatTextComboPoints_v2:
+  value: '0'
+floatingCombatTextDamageReduction_v2:
+  value: '0'
+floatingCombatTextDodgeParryMiss_v2:
+  value: '0'
+floatingCombatTextEnergyGains_v2:
+  value: '0'
+floatingCombatTextFloatMode_v2:
+  value: '1'
+floatingCombatTextFriendlyHealers_v2:
+  value: '0'
+floatingCombatTextHonorGains_v2:
+  value: '0'
+floatingCombatTextLowManaHealth_v2:
+  value: '1'
+floatingCombatTextPeriodicEnergyGains_v2:
+  value: '0'
+floatingCombatTextPetMeleeDamage_v2:
+  value: '1'
+floatingCombatTextPetSpellDamage_v2:
+  value: '1'
+floatingCombatTextReactives_v2:
+  value: '1'
+floatingCombatTextRepChanges_v2:
+  value: '0'
+FootstepSounds:
+  value: '1'
+forceClusteredShading:
+  value: '0'
+forceEnglishNames:
+  value: '0'
+ForceGenerateSlug:
+  value: '0'
+forceLODCheck:
+  value: '0'
+ForceResolutionDefaultToMaxSize:
+  value: '0'
+FrameBufferCacheForceNoHeaps:
+  value: '0'
+frameScriptFunctionInheritanceWarningMode:
+  value: '0'
+friendInvitesCollapsed:
+  value: '0'
+fstack_enabled:
+  value: '0'
+fstack_preferParentKeys:
+  value: '0'
+fstack_showanchors:
+  value: '1'
+fstack_showhidden:
+  value: '0'
+fstack_showhighlight:
+  value: '1'
+fstack_showRaisedFrameLevels:
+  value: '0'
+fstack_showregions:
+  value: '1'
+GameDataVisualizer:
+  value: '0'
+GamePadAnalogMovement:
+  value: '1'
+GamePadCameraLookMaxPitch:
+  value: '0'
+GamePadCameraLookMaxYaw:
+  value: '0'
+GamePadCameraPitchSpeed:
+  value: '1'
+GamePadCameraYawSpeed:
+  value: '1'
+GamePadCursorAutoDisableJump:
+  value: '1'
+GamePadCursorAutoDisableSticks:
+  value: '2'
+GamePadCursorAutoEnable:
+  value: '1'
+GamePadCursorCenteredEmulation:
+  value: '1'
+GamePadCursorCentering:
+  value: '0'
+GamePadCursorForTargeting:
+  value: '1'
+GamePadCursorLeftClick:
+  value: PADRTRIGGER
+GamePadCursorOnLogin:
+  value: '1'
+GamePadCursorPushCamera:
+  value: '1'
+GamePadCursorRightClick:
+  value: PADRSHOULDER
+GamePadCursorSpeedAccel:
+  value: '2'
+GamePadCursorSpeedMax:
+  value: '1'
+GamePadCursorSpeedStart:
+  value: '0.1'
+GamePadEmulateAlt:
+  value: none
+GamePadEmulateCtrl:
+  value: PADLSHOULDER
+GamePadEmulateShift:
+  value: PADLTRIGGER
+GamePadEmulateTapWindowMs:
+  value: '350'
+GamePadEnable:
+  value: '0'
+GamePadFaceMovementMaxAngle:
+  value: '0'
+GamePadFaceMovementMaxAngleCombat:
+  value: '180'
+GamePadFactionColor:
+  value: '1'
+GamePadOverlapMouseMs:
+  value: '2000'
+GamePadRunThreshold:
+  value: '0.5'
+GamePadSingleActiveID:
+  value: '0'
+GamePadStickAxisButtons:
+  value: '0'
+GamePadTankTurnSpeed:
+  value: '0'
+GamePadTouchCursorEnable:
+  value: '1'
+GamePadTurnWithCamera:
+  value: '1'
+GamePadVibrationStrength:
+  value: '1'
+GameplayContext:
+  value: '0'
+gameTip:
+  value: '0'
+Gamma:
+  value: '1.000000'
+garrisonCompleteTalent:
+  value: '0'
+garrisonCompleteTalentType:
+  value: '0'
+graphicsComputeEffects:
+  value: '1'
+graphicsDepthEffects:
+  value: '1'
+graphicsEnvironmentDetail:
+  value: '3'
+graphicsGroundClutter:
+  value: '3'
+graphicsLiquidDetail:
+  value: '1'
+graphicsOutlineMode:
+  value: '0'
+graphicsParticleDensity:
+  value: '2'
+graphicsProjectedTextures:
+  value: '1'
+graphicsQuality:
+  value: '3'
+graphicsShadowQuality:
+  value: '1'
+graphicsSpellDensity:
+  value: '3'
+graphicsSSAO:
+  value: '1'
+graphicsTextureResolution:
+  value: '1'
+graphicsViewDistance:
+  value: '3'
+groundEffectDensity:
+  value: '16'
+groundEffectDist:
+  value: '70'
+groundEffectFade:
+  value: '70'
+guildMemberNotify:
+  value: '1'
+guildNewsFilter:
+  value: '0'
+guildRewardsCategory:
+  value: '0'
+guildRewardsUsable:
+  value: '0'
+guildShowOffline:
+  value: '1'
+GxAdapter:
+  value: ''
+GxAFRDevicesCount:
+  value: '0'
+GxAllowCachelessShaderMode:
+  value: '0'
+GxApi:
+  value: auto
+GxCompatAllowSM6:
+  value: '1'
+GxCompatAsyncComputeQueue:
+  value: '1'
+GxCompatAsyncShaderCompilation:
+  value: '1'
+GxCompatCommandListMultiThreading:
+  value: '1'
+GxCompatCopyQueue:
+  value: '1'
+GxCompatOptionalGpuFeatures:
+  value: '1'
+GxCompatWorkSubmitOptimizations:
+  value: '1'
+GxDebugBreakLevel:
+  value: '1'
+GxDebugLevel:
+  value: '0'
+GxFullscreenResolution:
+  value: auto
+GxMaxFrameLatency:
+  value: '3'
+gxMaximize:
+  value: '1'
+GxMonitor:
+  value: '0'
+gxMTAlphaM2:
+  value: '1'
+gxMTAlphaPass:
+  value: '1'
+gxMTBeginDraw:
+  value: '1'
+gxMTDecals:
+  value: '0'
+gxMTDisable:
+  value: '0'
+gxMTLightShafts:
+  value: '1'
+gxMTMisc:
+  value: '1'
+gxMTOpaqueM2:
+  value: '1'
+gxMTOpaqueM2NoReflect:
+  value: '1'
+gxMTOpaqueWMO:
+  value: '1'
+gxMTOutlines:
+  value: '1'
+gxMTPrepass:
+  value: '1'
+gxMTRefraction:
+  value: '1'
+gxMTShadow:
+  value: '1'
+gxMTTerrain:
+  value: '1'
+gxMTTriggerOnBeginDrawComplete:
+  value: '1'
+gxMTVolFog:
+  value: '1'
+GxNewResolution:
+  value: '0x0'
+GxPrismEnabled:
+  value: '1'
+GxSlowShaderWarnThreshold:
+  value: '30000'
+gxWindowedResolution:
+  value: auto
+hardcoreDeathAlertType:
+  value: '0'
+hardcoreDeathChatType:
+  value: '0'
+hardTrackedQuests:
+  value: ''
+hardTrackedWorldQuests:
+  value: ''
+HardwareCursor:
+  value: '1'
+HealHandler:
+  value: '0'
+heirloomCollectedFilters:
+  value: '0'
+heirloomSourceFilters:
+  value: '0'
+hideFastLoginLoadingScreen:
+  value: '0'
+hideRewardedEvents:
+  value: '0'
+highestUnlockedTieredEntranceTier:
+  value: ''
+horizonClip:
+  value: '1600'
+horizonStart:
+  value: '800'
+HotfixEventLog:
+  value: '0'
+hotReloadModels:
+  value: '1'
+houseExterior_Hide_Decor:
+  value: '1'
+housingDecorFreePlaceEnabled:
+  value: '0'
+housingDecorGridSnapEnabled:
+  value: '0'
+housingDecorGridVisible:
+  value: '1'
+housingDecorLightRadiusIndicatorsEnabled:
+  value: '1'
+housingExpertGizmos_Scale_FrameOffset:
+  value: '0.500000'
+housingExpertGizmos_Scale_Snap:
+  value: '0.100000'
+housingExpertGizmos_SnapOnHold:
+  value: '1'
+housingLayout_Camera_DefaultDistance:
+  value: '50.000000'
+housingLayout_Camera_DragFriction:
+  value: '8.000000'
+housingLayout_Camera_DragMomentum:
+  value: '0.300000'
+housingLayout_Camera_MaxDistance:
+  value: '80.000000'
+housingLayout_Camera_MaxDistanceIncr:
+  value: '5.000000'
+housingLayout_Camera_MinDistance:
+  value: '30.000000'
+housingLayout_Camera_Smoothness:
+  value: '15.000000'
+housingLayout_Camera_Speed:
+  value: '15.000000'
+housingOtherDecorLightRadiusIndicatorType:
+  value: '1'
+housingSelectedDecorLightRadiusIndicatorType:
+  value: '1'
+housingStoragePanelCollapsed:
+  value: '0'
+housingStoragePanelHeight:
+  value: '615.000000'
+housingStoragePanelWidth:
+  value: '530.000000'
+housingTutorialsEnabled:
+  value: '1'
+hwDetect:
+  value: '1'
+imageSharingPublishCooldown:
+  value: '5000'
+ImpactModelCollisionMelee:
+  value: '1'
+ImpactModelCollisionMissile:
+  value: '1'
+ImpactModelCollisionRanged:
+  value: '1'
+incompleteQuestPriorityThresholdDelta:
+  value: '135'
+initialRealmListTimeout:
+  value: '60'
+interactKeyWarningTutorial:
+  value: '0'
+interactOnLeftClick:
+  value: '1'
+interactQuestItems:
+  value: '1'
+InvalidateDeactivatedHandles:
+  value: '1'
+KioskCanSessionExpire:
+  value: '1'
+KioskCharacterTemplateSet:
+  value: '0'
+KioskLobbyKickSeconds:
+  value: '30'
+lastAddonVersion:
+  value: '0'
+lastCharacterIndex:
+  value: '0'
+lastGarrisonMissionTutorial:
+  value: '0'
+lastLaunchedExternalEventURL:
+  value: ''
+lastLockedTieredEntranceCompanionAbilities:
+  value: ''
+lastRenownForCovenant1:
+  value: '0'
+lastRenownForCovenant2:
+  value: '0'
+lastRenownForCovenant3:
+  value: '0'
+lastRenownForCovenant4:
+  value: '0'
+lastRenownForDelvesSeason:
+  value: '0'
+lastSelectedClubId:
+  value: '0'
+lastSelectedTieredEntranceTier:
+  value: ''
+lastTalkedToGM:
+  value: ''
+lastTransmogCustomSetIDNoSpec:
+  value: ''
+lastTransmogCustomSetIDSpec1:
+  value: ''
+lastTransmogCustomSetIDSpec2:
+  value: ''
+lastTransmogCustomSetIDSpec3:
+  value: ''
+lastTransmogCustomSetIDSpec4:
+  value: ''
+lastTransmogOutfitIDNoSpec:
+  value: ''
+latestSplashScreen:
+  value: '0'
+latestTransmogSetSource:
+  value: '0'
+launchAgent:
+  value: '1'
+lfdCollapsedHeaders:
+  value: ''
+lfdSelectedDungeons:
+  value: ''
+lfgListAdvancedFilterMinRating:
+  value: '0'
+lfgListAdvancedFilterRemovedActivities:
+  value: ''
+lfgListAdvancedFilters:
+  value: '0'
+lfgListAdvancedFiltersVersion:
+  value: '0'
+lfgListSearchLanguages:
+  value: '0'
+lfgSelectedRoles:
+  value: '0'
+loadDeprecationFallbacks:
+  value: '1'
+locale:
+  value: ''
+locateViewerMaxJobs:
+  value: '32'
+lockActionBars:
+  value: '1'
+lodObjectCullDist:
+  value: '30'
+lodObjectCullSize:
+  value: '15'
+lodObjectFadeScale:
+  value: '100'
+lodObjectMinSize:
+  value: '20'
+lodObjectSizeScale:
+  value: '1'
+lootUnderMouse:
+  value: '1'
+lossOfControl:
+  value: '1'
+lossOfControlDisarm:
+  value: '2'
+lossOfControlFull:
+  value: '2'
+lossOfControlInterrupt:
+  value: '2'
+lossOfControlRoot:
+  value: '2'
+lossOfControlSilence:
+  value: '2'
+LowLatencyMinInterval:
+  value: '0'
+LowLatencyMode:
+  value: '0'
+M2ForceAdditiveParticleSort:
+  value: '0'
+M2UseInstancing:
+  value: '1'
+M2UseThreads:
+  value: '1'
+MacDisableOsShortcuts:
+  value: '0'
+MacUseCommandLeftClickAsRightClick:
+  value: '1'
+MacWindowToggleHotkey:
+  value: '1'
+majorFactionRenownMap:
+  value: ''
+mapFade:
+  value: '1'
+MaxCharacterComponentLoadStartsPerFrame:
+  value: '4'
+maxFPS:
+  value: '120'
+maxFPSBk:
+  value: '30'
+maxFPSLoading:
+  value: '10'
+maxLevelSpecsUsed:
+  value: '0'
+maxLightDist:
+  value: '2048'
+MaxObservedPetBattles:
+  value: '4'
+miniCommunitiesFrame:
+  value: '0'
+miniDressUpFrame:
+  value: '0'
+minimapInsideZoom:
+  value: '0'
+minimapPortalMax:
+  value: '99'
+minimapShapeshiftTracking:
+  value: ''
+minimapTrackedInfov4:
+  value: '3103471'
+minimapTrackingClosestOnly:
+  value: '1'
+minimapTrackingShowAll:
+  value: '0'
+minimapZoom:
+  value: '0'
+miniWorldMap:
+  value: '1'
+missingTransmogSourceInItemTooltips:
+  value: '0'
+motionSicknessFocalCircle:
+  value: '0'
+motionSicknessLandscapeDarkening:
+  value: '0'
+mountJournalGeneralFilters:
+  value: '0'
+mountJournalShowPlayer:
+  value: '0'
+mountJournalSourcesFilter:
+  value: '0'
+mountJournalTypeFilter:
+  value: '0'
+mouseAcceleration:
+  value: '-1'
+MouseHiddenInRelativeMode:
+  value: '1'
+mouseInvertPitch:
+  value: '0'
+mouseInvertYaw:
+  value: '0'
+mouseSpeed:
+  value: '1.1'
+MoveHistoryEventLog:
+  value: '0'
+movePadInPressAndHoldMode:
+  value: '0'
+movePadLocked:
+  value: '1'
+movieSubtitle:
+  value: '1'
+movieSubtitleBackground:
+  value: '1'
+movieSubtitleBackgroundAlpha:
+  value: '70'
+MSAAAlphaTest:
+  value: '1'
+MSAAQuality:
+  value: '0'
+nameplateAuraScale:
+  value: '1.000000'
+nameplateCastBarDisplay:
+  value: "\x02["
+nameplateDebuffPadding:
+  value: '0'
+nameplateEnemyNpcAuraDisplay:
+  value: "\x02G"
+nameplateEnemyPlayerAuraDisplay:
+  value: "\x02C"
+nameplateFriendlyPlayerAuraDisplay:
+  value: "\x02C"
+nameplateGameObjectMaxDistance:
+  value: '30.000000'
+nameplateInfoDisplay:
+  value: "\x02D"
+nameplateMaxAlpha:
+  value: '1.000000'
+nameplateMaxAlphaDistance:
+  value: '40.000000'
+nameplateMaxDistance:
+  value: '60.000000'
+nameplateMaxScale:
+  value: '1.000000'
+nameplateMaxScaleDistance:
+  value: '10.000000'
+nameplateMinAlpha:
+  value: '0.600000'
+nameplateMinAlphaDistance:
+  value: '10.000000'
+nameplateMinScale:
+  value: '0.800000'
+nameplateMinScaleDistance:
+  value: '10.000000'
+nameplateOccludedAlphaMult:
+  value: '0.400000'
+nameplateOtherAtBase:
+  value: '0'
+nameplateOverlapH:
+  value: '0.800000'
+nameplateOverlapV:
+  value: '1.100000'
+nameplatePlayerMaxDistance:
+  value: '60.000000'
+nameplateSelectedAlpha:
+  value: '1.000000'
+nameplateSelectedScale:
+  value: '1.200000'
+nameplateShowAll:
+  value: '0'
+nameplateShowCastBars:
+  value: '1'
+nameplateShowClassColor:
+  value: '1'
+nameplateShowDebuffsOnFriendly:
+  value: '1'
+nameplateShowEnemies:
+  value: '1'
+nameplateShowEnemyGuardians:
+  value: '0'
+nameplateShowEnemyMinions:
+  value: '0'
+nameplateShowEnemyMinus:
+  value: '1'
+nameplateShowEnemyPets:
+  value: '0'
+nameplateShowEnemyTotems:
+  value: '0'
+nameplateShowFriendlyClassColor:
+  value: '1'
+nameplateShowFriendlyNpcs:
+  value: '0'
+nameplateShowFriendlyPlayerGuardians:
+  value: '0'
+nameplateShowFriendlyPlayerMinions:
+  value: '0'
+nameplateShowFriendlyPlayerPets:
+  value: '0'
+nameplateShowFriendlyPlayers:
+  value: '0'
+nameplateShowFriendlyPlayerTotems:
+  value: '0'
+nameplateShowOffscreen:
+  value: '0'
+nameplateShowOnlyNameForFriendlyPlayerUnits:
+  value: '0'
+nameplateShowSelf:
+  value: '0'
+nameplateSimplifiedScale:
+  value: '0.300000'
+nameplateSimplifiedTypes:
+  value: "\x02"
+nameplateSize:
+  value: '1'
+nameplateStackingTypes:
+  value: "\x02"
+nameplateStyle:
+  value: '0'
+nameplateTargetBehindMaxDistance:
+  value: '0.100000'
+nameplateTargetRadialPosition:
+  value: '0'
+nameplateThreatDisplay:
+  value: "\x02"
+nameplateUseClassColorForFriendlyPlayerUnitNames:
+  value: '0'
+nearclip:
+  value: '0.2'
+newDelvesSeason:
+  value: '1'
+newMythicPlusSeason:
+  value: '1'
+newPvpSeason:
+  value: '1'
+noBuffDebuffFilterOnTarget:
+  value: '0'
+NonEmitterCombatRange:
+  value: '6400.000000'
+NotchedDisplayMode:
+  value: '1'
+notifiedOfNewMail:
+  value: '0'
+numCurrencyCategories:
+  value: '0'
+numReputationHeaders:
+  value: '0'
+ObjectSelectionCircle:
+  value: '1'
+occludedSilhouettePlayer:
+  value: '0'
+occlusionMaxJobs:
+  value: '5'
+optOutIngameSurveys:
+  value: '0'
+orderHallMissionTutorial:
+  value: '0'
+otherRolesAzeriteEssencesHidden:
+  value: '0'
+outdoorMinAltitudeDistance:
+  value: '10'
+Outline:
+  value: '2'
+OutlineEngineMode:
+  value: '0'
+outlineMouseOverFadeDuration:
+  value: '0.9'
+outlineSelectionFadeDuration:
+  value: '0.32'
+outlineSoftInteractFadeDuration:
+  value: '0.3'
+overrideArchive:
+  value: '0'
+overrideScreenFlash:
+  value: '0'
+particleDensity:
+  value: '100'
+particleMTDensity:
+  value: '100'
+particulatesEnabled:
+  value: '1'
+partyBackgroundOpacity:
+  value: '0.500000'
+partyInvitesCollapsed_Glue:
+  value: '0'
+Pathing:
+  value: '0'
+pathSmoothing:
+  value: '1'
+pendingInviteInfoShown:
+  value: '0'
+perksActivitiesCurrentMonth:
+  value: '0'
+perksActivitiesLastPoints:
+  value: '0'
+perksActivitiesPendingCompletion:
+  value: ''
+persistMoveLogOnTransfer:
+  value: '0'
+petJournalFilters:
+  value: '0'
+petJournalFilterVersion:
+  value: '0'
+petJournalSort:
+  value: '0'
+petJournalSourceFilters:
+  value: '0'
+petJournalTab:
+  value: '1'
+petJournalTypeFilters:
+  value: '0'
+petStableShowExoticOnly:
+  value: '0'
+petStableSort:
+  value: '1'
+PhaseHistory:
+  value: '0'
+physicsLevel:
+  value: '1'
+pingCategoryTutorialShown:
+  value: '0'
+pingMode:
+  value: '0'
+playerColorOverrides:
+  value: ''
+PlayerSpawnTracking:
+  value: '0'
+playIntroMovie:
+  value: '0'
+plunderstormRealm:
+  value: '0'
+POIShiftComplete:
+  value: '0.3'
+portal:
+  value: ''
+PreemptiveCastEnable:
+  value: '0'
+preloadLoadingDistObject:
+  value: '512'
+preloadLoadingDistTerrain:
+  value: '1024'
+preloadPlayerModels:
+  value: '1'
+preloadStreamingDistObject:
+  value: '64'
+preloadStreamingDistTerrain:
+  value: '256'
+PreventOsIdleSleep:
+  value: '0'
+primaryProfessionsFilter:
+  value: '1'
+ProcDebugEventLog:
+  value: '0'
+profanityFilter:
+  value: '1'
+professionAccessorySlotsExampleShown:
+  value: '0'
+professionsAllocateBestQualityReagents:
+  value: '1'
+professionsAllocateBestQualityReagentsCustomer:
+  value: '1'
+professionsFlyoutHideUnowned:
+  value: '0'
+professionsOrderDurationDropdown:
+  value: '2'
+professionsOrderRecipientDropdown:
+  value: '1'
+professionToolSlotsExampleShown:
+  value: '0'
+projectedTextures:
+  value: '0'
+PushToTalkSound:
+  value: '0'
+pvpFramesDisplayClassColor:
+  value: '0'
+pvpFramesDisplayOnlyHealerPowerBars:
+  value: '0'
+pvpFramesDisplayPowerBars:
+  value: '0'
+pvpFramesHealthText:
+  value: none
+pvpOptionDisplayPets:
+  value: '0'
+pvpSelectedRoles:
+  value: '0'
+QuestEventLog:
+  value: '0'
+questLogOpen:
+  value: '1'
+questPOI:
+  value: '1'
+questPOILocalStory:
+  value: '1'
+questPOIWQ:
+  value: '1'
+questTextContrast:
+  value: '0'
+RAIDclusteredShading:
+  value: '1'
+RAIDcomponentTextureLevel:
+  value: '0'
+RAIDDepthBasedOpacity:
+  value: '1'
+RAIDdoodadLodScale:
+  value: '100'
+RAIDentityLodDist:
+  value: '10'
+RAIDentityShadowFadeScale:
+  value: '10'
+RAIDfarclip:
+  value: '1000'
+raidFramesCenterBigDefensive:
+  value: '1'
+raidFramesDispelIndicatorOverlay:
+  value: '1'
+raidFramesDispelIndicatorType:
+  value: '2'
+raidFramesDisplayAggroHighlight:
+  value: '1'
+raidFramesDisplayBuffs:
+  value: '1'
+raidFramesDisplayClassColor:
+  value: '0'
+raidFramesDisplayDebuffs:
+  value: '1'
+raidFramesDisplayIncomingHeals:
+  value: '1'
+raidFramesDisplayLargerRoleSpecificDebuffs:
+  value: '1'
+raidFramesDisplayOnlyDispellableDebuffs:
+  value: '0'
+raidFramesDisplayOnlyHealerPowerBars:
+  value: '0'
+raidFramesDisplayPowerBars:
+  value: '0'
+raidFramesHealthBarColor:
+  value: FF2B9305
+raidFramesHealthBarColorBG:
+  value: FF141414
+raidFramesHealthText:
+  value: none
+raidFramesHeight:
+  value: '36'
+raidFramesPosition:
+  value: ''
+raidFramesWidth:
+  value: '72'
+raidGraphicsComputeEffects:
+  value: '1'
+raidGraphicsDepthEffects:
+  value: '1'
+raidGraphicsEnvironmentDetail:
+  value: '3'
+raidGraphicsGroundClutter:
+  value: '3'
+raidGraphicsLiquidDetail:
+  value: '1'
+raidGraphicsOutlineMode:
+  value: '0'
+raidGraphicsParticleDensity:
+  value: '2'
+raidGraphicsProjectedTextures:
+  value: '1'
+RAIDgraphicsQuality:
+  value: '3'
+raidGraphicsShadowQuality:
+  value: '1'
+raidGraphicsSpellDensity:
+  value: '3'
+raidGraphicsSSAO:
+  value: '1'
+raidGraphicsTextureResolution:
+  value: '1'
+raidGraphicsViewDistance:
+  value: '3'
+RAIDgroundEffectDensity:
+  value: '16'
+RAIDgroundEffectDist:
+  value: '70'
+RAIDgroundEffectFade:
+  value: '70'
+RAIDhorizonClip:
+  value: '1600'
+RAIDhorizonStart:
+  value: '800'
+RAIDlodObjectCullDist:
+  value: '30'
+RAIDlodObjectCullSize:
+  value: '15'
+RAIDlodObjectFadeScale:
+  value: '100'
+RAIDlodObjectMinSize:
+  value: '20'
+raidOptionDisplayMainTankAndAssist:
+  value: '1'
+raidOptionDisplayPets:
+  value: '0'
+raidOptionIsShown:
+  value: '1'
+raidOptionKeepGroupsTogether:
+  value: '0'
+raidOptionLocked:
+  value: lock
+raidOptionShowBorders:
+  value: '1'
+raidOptionSortMode:
+  value: role
+RAIDOutlineEngineMode:
+  value: '0'
+RAIDparticleDensity:
+  value: '100'
+RAIDparticleMTDensity:
+  value: '100'
+RAIDParticulatesEnabled:
+  value: '1'
+RAIDprojectedTextures:
+  value: '0'
+RAIDreflectionMode:
+  value: '3'
+RAIDrefraction:
+  value: '0'
+RAIDrippleDetail:
+  value: '2'
+RAIDsettingsEnabled:
+  value: '0'
+RAIDshadowBlendCascades:
+  value: '0'
+RAIDshadowMode:
+  value: '0'
+RAIDshadowNumCascades:
+  value: '1'
+RAIDshadowRt:
+  value: '0'
+RAIDshadowSoft:
+  value: '0'
+RAIDshadowTextureSize:
+  value: '1024'
+RAIDspellClutter:
+  value: '2'
+RAIDSSAO:
+  value: '0'
+RAIDsunShafts:
+  value: '0'
+RAIDterrainLodDist:
+  value: '400'
+RAIDTerrainLodDiv:
+  value: '768'
+RAIDterrainMipLevel:
+  value: '0'
+RAIDVolumeFog:
+  value: '0'
+RAIDVolumeFogLevel:
+  value: '2'
+RAIDWaterDetail:
+  value: '0'
+RAIDweatherDensity:
+  value: '2'
+RAIDwmoLodDist:
+  value: '650'
+RAIDworldBaseMip:
+  value: '0'
+reflectionDownscale:
+  value: '0'
+reflectionMode:
+  value: '3'
+refraction:
+  value: '0'
+reloadUIOnAspectChange:
+  value: '0'
+remoteTextToSpeech:
+  value: '0'
+remoteTextToSpeechVoice:
+  value: '1'
+RenderFormat:
+  value: '0'
+RenderScale:
+  value: '0.675000'
+RenderScaleDowngradeBackgroundMinSize:
+  value: '720'
+RenderScaleDowngradeForegroundMinSize:
+  value: '1080'
+ReplaceMyPlayerPortrait:
+  value: '0'
+ReplaceOtherPlayerPortraits:
+  value: '0'
+reputationsCollapsed:
+  value: ''
+ResampleAlwaysSharpen:
+  value: '0'
+ResampleQuality:
+  value: '3'
+ResampleSharpness:
+  value: '0.2'
+ResizeConstraints:
+  value: '1'
+restrictCalendarInvites:
+  value: '1'
+rippleDetail:
+  value: '2'
+rotateMinimap:
+  value: '0'
+runeFadeTime:
+  value: '0.2'
+runeSpentFadeTime:
+  value: '0.1'
+runeSpentFlashTime:
+  value: '0.15'
+sceneOcclusionEnable:
+  value: '1'
+screenEdgeFlash:
+  value: '1'
+screenshotFormat:
+  value: jpeg
+screenshotQuality:
+  value: '3'
+screenshotSizeOverride:
+  value: '0x0'
+scriptErrors:
+  value: '0'
+scriptProfile:
+  value: '0'
+scriptWarnings:
+  value: '0'
+scrollToLogQuest:
+  value: '0'
+secondaryProfessionsFilter:
+  value: '1'
+secureAbilityToggle:
+  value: '1'
+seenAlliedRaceUnlocks:
+  value: '0'
+seenAsiaCharacterUpgradePopup:
+  value: '0'
+seenCharacterUpgradePopup:
+  value: '6'
+seenConfigurationWarnings:
+  value: '0'
+seenExpansionTrialPopup:
+  value: '6'
+seenLevelSquishPopup:
+  value: '0'
+seenPurchasableClassCapstone:
+  value: '0'
+seenRegionalChatDisabled:
+  value: '0'
+seenTimerunningFirstLoginPopup:
+  value: '0'
+serverAlert:
+  value: https://breaking-news.support.blizzard.com/service/wow-client/live/us/en-US
+ServerMessageEventLog:
+  value: '0'
+serviceTypeFilter:
+  value: '6'
+shadowBlendCascades:
+  value: '0'
+shadowMode:
+  value: '0'
+shadowNumCascades:
+  value: '1'
+shadowRt:
+  value: '0'
+shadowSoft:
+  value: '0'
+shadowTextureSize:
+  value: '1024'
+ShakeStrengthCamera:
+  value: '1.000000'
+ShakeStrengthUI:
+  value: '1.000000'
+shipyardMissionTutorialAreaBuff:
+  value: '0'
+shipyardMissionTutorialBlockade:
+  value: '0'
+shipyardMissionTutorialFirst:
+  value: '0'
+showAllItemsInTransmog:
+  value: '0'
+showArenaEnemyCastbar:
+  value: '1'
+showArenaEnemyFrames:
+  value: '1'
+showArenaEnemyPets:
+  value: '1'
+showBattlefieldMinimap:
+  value: '0'
+showBuilderFeedback:
+  value: '1'
+showCastableBuffs:
+  value: '0'
+showCreateCharacterRealmConfirmDialog:
+  value: '1'
+showCustomSetDetails:
+  value: '1'
+showDelveEntrancesOnMap:
+  value: '1'
+showDispelDebuffs:
+  value: '1'
+showDungeonEntrancesOnMap:
+  value: '1'
+showErrors:
+  value: '1'
+showfootprintparticles:
+  value: '1'
+showHonorAsExperience:
+  value: '0'
+showInGameNavigation:
+  value: '1'
+showLoadingScreenTips:
+  value: '1'
+showNPETutorials:
+  value: '1'
+showOutfitDetails:
+  value: '1'
+showPartyPets:
+  value: '0'
+showPhotosensitivityWarning:
+  value: '-1'
+showPingsInChat:
+  value: '1'
+showQuestObjectivesInLog:
+  value: '1'
+ShowQuestUnitCircles:
+  value: '1'
+showSpectatorTeamCircles:
+  value: '1'
+showSpenderFeedback:
+  value: '1'
+showTamers:
+  value: '1'
+showTamersWQ:
+  value: '1'
+showTargetCastbar:
+  value: '1'
+showTargetOfTarget:
+  value: '0'
+showTempMaxHealthLoss:
+  value: '1'
+showTimestamps:
+  value: none
+showToastBroadcast:
+  value: '0'
+showToastClubInvitation:
+  value: '1'
+showToastConversation:
+  value: '1'
+showToastFriendRequest:
+  value: '1'
+showToastOffline:
+  value: '1'
+showToastOnline:
+  value: '1'
+showToastWindow:
+  value: '1'
+showTokenFrame:
+  value: '0'
+showTutorials:
+  value: '1'
+showVKeyCastbar:
+  value: '1'
+showVKeyCastbarOnlyOnTarget:
+  value: '0'
+showVKeyCastbarSpellName:
+  value: '1'
+simd:
+  value: '-1'
+SkyCloudLOD:
+  value: '0'
+SlugOpticalWeight:
+  value: '0'
+SlugSupersampling:
+  value: '1'
+smoothUnitPhasing:
+  value: '1'
+smoothUnitPhasingActorPurgatoryTimeMs:
+  value: '1500'
+smoothUnitPhasingAliveTimeoutMs:
+  value: '3500'
+smoothUnitPhasingDestroyedPurgatoryTimeMs:
+  value: '750'
+smoothUnitPhasingDistThreshold:
+  value: '0.25'
+smoothUnitPhasingEnableAlive:
+  value: '1'
+smoothUnitPhasingUnseenPurgatoryTimeMs:
+  value: '1000'
+smoothUnitPhasingVehicleExtraTimeoutMs:
+  value: '1000'
+SoftTargetEnemy:
+  value: '1'
+SoftTargetEnemyArc:
+  value: '2'
+SoftTargetEnemyRange:
+  value: '45.000000'
+SoftTargetForce:
+  value: '1'
+SoftTargetFriend:
+  value: '0'
+SoftTargetFriendArc:
+  value: '2'
+SoftTargetFriendRange:
+  value: '45.000000'
+SoftTargetIconEnemy:
+  value: '0'
+SoftTargetIconFriend:
+  value: '0'
+SoftTargetIconGameObject:
+  value: '0'
+SoftTargetIconInteract:
+  value: '1'
+SoftTargetInteract:
+  value: '1'
+SoftTargetInteractArc:
+  value: '0'
+softTargetInteractionTutorialTotalInteractions:
+  value: '0'
+SoftTargetInteractRange:
+  value: '10.000000'
+SoftTargetInteractRangeIsHard:
+  value: '0'
+SoftTargetLowPriorityIcons:
+  value: '0'
+SoftTargetMatchLocked:
+  value: '1'
+SoftTargetNameplateEnemy:
+  value: '1'
+SoftTargetNameplateFriend:
+  value: '0'
+SoftTargetNameplateInteract:
+  value: '0'
+SoftTargetNameplateSize:
+  value: '19'
+softTargettingInteractKeySound:
+  value: '0'
+SoftTargetTooltipDurationMs:
+  value: '2000'
+SoftTargetTooltipEnemy:
+  value: '0'
+SoftTargetTooltipFriend:
+  value: '0'
+SoftTargetTooltipInteract:
+  value: '0'
+SoftTargetTooltipLocked:
+  value: '0'
+SoftTargetWithLocked:
+  value: '1'
+SoftTargetWorldtextFarDist:
+  value: '40.000000'
+SoftTargetWorldtextNearDist:
+  value: '4.000000'
+SoftTargetWorldtextNearScale:
+  value: '1.000000'
+SoftTargetWorldtextSize:
+  value: '32.000000'
+sortCharListByLastActive:
+  value: '0'
+sortDiskReads:
+  value: '0'
+soulbindsActivatedTutorial:
+  value: ''
+soulbindsLandingPageTutorial:
+  value: ''
+soulbindsViewedTutorial:
+  value: ''
+Sound_AlternateListener:
+  value: '1'
+Sound_AmbienceVolume:
+  value: '0.6'
+Sound_DialogVolume:
+  value: '1.0'
+Sound_DSPBufferSize:
+  value: '0'
+Sound_EnableAllSound:
+  value: '1'
+Sound_EnableAmbience:
+  value: '1'
+Sound_EnableArmorFoleySoundForOthers:
+  value: '1'
+Sound_EnableArmorFoleySoundForSelf:
+  value: '1'
+Sound_EnableDialog:
+  value: '1'
+Sound_EnableDSPEffects:
+  value: '1'
+Sound_EnableEmoteSounds:
+  value: '1'
+Sound_EnableEncounterWarningsSounds:
+  value: '1'
+Sound_EnableErrorSpeech:
+  value: '1'
+Sound_EnableGameplaySFX:
+  value: '1'
+Sound_EnableMixMode2:
+  value: '0'
+Sound_EnableMusic:
+  value: '1'
+Sound_EnablePetBattleMusic:
+  value: '1'
+Sound_EnablePetSounds:
+  value: '1'
+Sound_EnablePingSounds:
+  value: '1'
+Sound_EnablePositionalLowPassFilter:
+  value: '1'
+Sound_EnableReverb:
+  value: '1'
+Sound_EnableSFX:
+  value: '1'
+Sound_EnableSoundWhenGameIsInBG:
+  value: '1'
+Sound_EncounterWarningsVolume:
+  value: '1.000000'
+Sound_GameplaySFX:
+  value: '1.000000'
+Sound_ListenerAtCharacter:
+  value: '1'
+Sound_MasterVolume:
+  value: '1.0'
+Sound_MaxCacheableSizeInBytes:
+  value: '174762'
+Sound_MaxCacheSizeInBytes:
+  value: '134217728'
+Sound_MusicVolume:
+  value: '0.4'
+Sound_NumChannels:
+  value: '64'
+Sound_OutputDriverIndex:
+  value: '0'
+Sound_OutputDriverName:
+  value: Primary Sound Driver
+Sound_OutputSampleRate:
+  value: '44100'
+Sound_PingVolume:
+  value: '1.0'
+Sound_SFXVolume:
+  value: '1.0'
+Sound_VoiceChatInputDriverIndex:
+  value: '0'
+Sound_VoiceChatInputDriverName:
+  value: Primary Sound Capture Driver
+Sound_VoiceChatOutputDriverIndex:
+  value: '0'
+Sound_VoiceChatOutputDriverName:
+  value: Primary Sound Driver
+Sound_ZoneMusicNoDelay:
+  value: '0'
+SoundPerf_VariationCap:
+  value: '32'
+SpawnRegion:
+  value: '0'
+specular:
+  value: '1'
+speechToText:
+  value: '0'
+spellActivationOverlayOpacity:
+  value: '0.650000'
+spellBookHidePassives:
+  value: '0'
+spellBookMinimize:
+  value: '0'
+spellClutter:
+  value: '4'
+SpellCooldownDebugger:
+  value: '0'
+spellDiminishPVPEnemiesEnabled:
+  value: '1'
+spellDiminishPVPOnlyTriggerableByMe:
+  value: '0'
+SpellEventLog:
+  value: '0'
+SpellOverrides:
+  value: '0'
+SpellQueueWindow:
+  value: '400'
+SpellScriptEventLog:
+  value: '0'
+SpellTargeting:
+  value: '0'
+spellVisualDensityFilterSetting:
+  value: '4'
+SpellVisuals:
+  value: '0'
+SplineOpt:
+  value: '1'
+SSAO:
+  value: '0'
+ssaoMagicNormals:
+  value: '1'
+ssaoMagicThresholdHigh:
+  value: '50'
+ssaoMagicThresholdLow:
+  value: '25'
+SSAOType:
+  value: '0'
+statusText:
+  value: '0'
+statusTextDisplay:
+  value: NONE
+stopAutoAttackOnTargetChange:
+  value: '0'
+streamingCameraLookAheadTime:
+  value: '2000'
+streamingCameraMaxRadius:
+  value: '250'
+streamingCameraRadius:
+  value: '100'
+streamStatusMessage:
+  value: '1'
+sunShafts:
+  value: '0'
+superTrackerDist:
+  value: '0.750000'
+SuppressCpuMicrocodeChecks:
+  value: '0'
+synchronizeBindings:
+  value: '1'
+synchronizeChatFrames:
+  value: '1'
+synchronizeConfig:
+  value: '1'
+taintLog:
+  value: '0'
+talentPointsSpent:
+  value: '0'
+TargetAutoEnemy:
+  value: '1'
+TargetAutoFriend:
+  value: '1'
+TargetAutoLock:
+  value: '0'
+TargetEnemyAttacker:
+  value: '1'
+targetFPS:
+  value: '60'
+TargetNearestUseNew:
+  value: '1'
+TargetPriorityCombatLock:
+  value: '1'
+TargetPriorityCombatLockContextualRelaxation:
+  value: '1'
+TargetPriorityCombatLockHighlight:
+  value: '0'
+TargetPriorityPvp:
+  value: '1'
+telemetryWowlabsPackage:
+  value: Blizzard.Telemetry.Wow_Labs
+telemetryWowPackage:
+  value: Blizzard.Telemetry.Wow_Mainline
+teleportMaxNoLoadDist:
+  value: '200'
+terrainLodDist:
+  value: '400'
+TerrainLodDiv:
+  value: '768'
+terrainMipLevel:
+  value: '0'
+test_cameraDynamicPitch:
+  value: '0.000000'
+test_cameraDynamicPitchBaseFovPad:
+  value: '0.400000'
+test_cameraDynamicPitchBaseFovPadDownScale:
+  value: '0.250000'
+test_cameraDynamicPitchBaseFovPadFlying:
+  value: '0.750000'
+test_cameraDynamicPitchSmartPivotCutoffDist:
+  value: '10.000000'
+test_cameraHeadMovementDeadZone:
+  value: '0.015000'
+test_cameraHeadMovementFirstPersonDampRate:
+  value: '20.000000'
+test_cameraHeadMovementMovingDampRate:
+  value: '10.000000'
+test_cameraHeadMovementMovingStrength:
+  value: '0.500000'
+test_cameraHeadMovementRangeScale:
+  value: '5.000000'
+test_cameraHeadMovementStandingDampRate:
+  value: '10.000000'
+test_cameraHeadMovementStandingStrength:
+  value: '0.300000'
+test_cameraHeadMovementStrength:
+  value: '0.000000'
+test_cameraOverShoulder:
+  value: '0.000000'
+test_cameraTargetFocusEnemyEnable:
+  value: '0'
+test_cameraTargetFocusEnemyStrengthPitch:
+  value: '0.400000'
+test_cameraTargetFocusEnemyStrengthYaw:
+  value: '0.500000'
+test_cameraTargetFocusInteractEnable:
+  value: '0'
+test_cameraTargetFocusInteractStrengthPitch:
+  value: '0.750000'
+test_cameraTargetFocusInteractStrengthYaw:
+  value: '1.000000'
+textLocale:
+  value: ''
+textToSpeech:
+  value: '0'
+textureErrorColors:
+  value: '1'
+textureFilteringMode:
+  value: '5'
+ThreadPoolLimitHP:
+  value: '6'
+ThreadPoolLimitLP:
+  value: '6'
+ThreadPoolLimitMP:
+  value: '6'
+ThreadPoolPerThreadAllocator:
+  value: '1'
+threatPlaySounds:
+  value: '1'
+threatShowNumeric:
+  value: '0'
+threatWarning:
+  value: '3'
+threatWorldText:
+  value: '1'
+timeMgrAlarmEnabled:
+  value: '0'
+timeMgrAlarmMessage:
+  value: ''
+timeMgrAlarmTime:
+  value: '0'
+timeMgrUseLocalTime:
+  value: '0'
+timeMgrUseMilitaryTime:
+  value: '0'
+titleBarShortName:
+  value: '0'
+titleBarShowAccountName:
+  value: '0'
+titleBarShowBuildInfo:
+  value: '0'
+titleBarShowCharacterName:
+  value: '0'
+titleBarShowConfigName:
+  value: '0'
+titleBarShowGxInfo:
+  value: '0'
+titleBarShowPID:
+  value: '0'
+titleBarShowRealmName:
+  value: '0'
+toastDuration:
+  value: '4'
+toyBoxCollectedFilters:
+  value: '0'
+toyBoxExpansionFilters:
+  value: '0'
+toyBoxSourceFilters:
+  value: '0'
+trackedAchievements:
+  value: ''
+trackedInitiativeTasks:
+  value: ''
+trackedPerksActivities:
+  value: ''
+trackedProfessionRecipes:
+  value: ''
+trackedProfessionRecraftRecipes:
+  value: ''
+trackedQuests:
+  value: ''
+trackedWorldQuests:
+  value: ''
+transmogCurrentSpecOnly:
+  value: '0'
+transmogDebug:
+  value: '0'
+transmogHideIgnoredSlots:
+  value: '0'
+transmogPreviewedWeaponToggle:
+  value: '0'
+transmogrifySetsFilters:
+  value: '0'
+transmogrifyShowCollected:
+  value: '1'
+transmogrifyShowUncollected:
+  value: '0'
+transmogrifySourceFilters:
+  value: '0'
+transmogShowID:
+  value: '0'
+TurnSpeed:
+  value: '180.000000'
+UberTooltips:
+  value: '1'
+uiScale:
+  value: '1.000000'
+uiScaleMultiplier:
+  value: '-1.000000'
+unitClutter:
+  value: '1'
+unitClutterInstancesOnly:
+  value: '1'
+unitClutterPlayerThreshold:
+  value: '9'
+UnitEnterCombatLog:
+  value: '0'
+unitFacingPlayerDeadZoneDeg:
+  value: '60'
+UnitNameEnemyGuardianName:
+  value: '1'
+UnitNameEnemyMinionName:
+  value: '1'
+UnitNameEnemyPetName:
+  value: '1'
+UnitNameEnemyPlayerName:
+  value: '1'
+UnitNameEnemyTotemName:
+  value: '1'
+UnitNameFocused:
+  value: '1'
+UnitNameForceHideMinus:
+  value: '0'
+UnitNameFriendlyGuardianName:
+  value: '1'
+UnitNameFriendlyMinionName:
+  value: '1'
+UnitNameFriendlyPetName:
+  value: '1'
+UnitNameFriendlyPlayerName:
+  value: '1'
+UnitNameFriendlySpecialNPCName:
+  value: '1'
+UnitNameFriendlyTotemName:
+  value: '1'
+UnitNameGuildTitle:
+  value: '1'
+UnitNameHostleNPC:
+  value: '1'
+UnitNameInteractiveNPC:
+  value: '1'
+UnitNameNonCombatCreatureName:
+  value: '0'
+UnitNameNPC:
+  value: '0'
+UnitNameOwn:
+  value: '0'
+UnitNamePlayerGuild:
+  value: '1'
+UnitNamePlayerPVPTitle:
+  value: '1'
+unitsLookAtPlayers:
+  value: '1'
+UnitVisibility:
+  value: '0'
+unlockedMajorFactions:
+  value: ''
+useBLEEP:
+  value: '0'
+useCommentatorSelectionCircles:
+  value: '1'
+useHighResTextures:
+  value: '1'
+useIPv6:
+  value: '0'
+UseKeyHeldSpellErrorPollTime:
+  value: '500'
+useMaxFPS:
+  value: '0'
+useMaxFPSBk:
+  value: '1'
+userFontScale:
+  value: '1'
+useShadowMapping:
+  value: '1'
+UseSlug:
+  value: '1'
+useTargetFPS:
+  value: '1'
+useUiScale:
+  value: '0'
+validateFrameXML:
+  value: '1'
+VerboseSpellScriptEventLog:
+  value: '0'
+videoOptionsVersion:
+  value: '0'
+videoOptionsVersionDefault:
+  value: '0'
+violenceLevel:
+  value: '2'
+VoiceChatMasterVolumeScale:
+  value: '1'
+VoiceCommunicationMode:
+  value: '0'
+VoiceEnableWhenGameIsInBG:
+  value: '1'
+VoiceInputDevice:
+  value: ''
+VoiceInputVolume:
+  value: '50'
+VoiceOutputDevice:
+  value: ''
+VoiceOutputVolume:
+  value: '50'
+VoicePushToTalkKeybind:
+  value: LMETA
+VoiceSelfDeafened:
+  value: '0'
+VoiceSelfMuted:
+  value: '0'
+VoiceVADSensitivity:
+  value: '43'
+volumeFog:
+  value: '0'
+volumeFogDisableLightScattering:
+  value: '0'
+volumeFogDisableNoise:
+  value: '0'
+volumeFogDisableShadows:
+  value: '0'
+volumeFogInterior:
+  value: '1'
+volumeFogLevel:
+  value: '2'
+volumeFogUse16BitTexture:
+  value: '1'
+vrsValar:
+  value: '0'
+vrsValarGPUMode:
+  value: '0'
+vsync:
+  value: '1'
+WalkableSurfacesValidationLog:
+  value: '0'
+wardrobeSetsFilters:
+  value: '0'
+wardrobeShowAllFactions:
+  value: '0'
+wardrobeShowAllRaces:
+  value: '0'
+wardrobeShowCollected:
+  value: '1'
+wardrobeShowUncollected:
+  value: '1'
+wardrobeSourceFilters:
+  value: '0'
+waterDetail:
+  value: '0'
+weatherDensity:
+  value: '2'
+webChallengeURLTimeout:
+  value: '60'
+whisperMode:
+  value: popout
+wholeChatWindowClickable:
+  value: '1'
+wmoDoodadDist:
+  value: '2000'
+wmoLodDist:
+  value: '300'
+wmoLodDistScale:
+  value: '1.0'
+wmoPortalFadeScale:
+  value: '1000'
+wmoPortalInteriorFade:
+  value: '1'
+WorldActionsLog:
+  value: '0'
+worldBaseMip:
+  value: '0'
+worldIntersectMaxJobs:
+  value: '32'
+worldLoadSort:
+  value: '1'
+worldPreloadHighResTextures:
+  value: '1'
+worldPreloadNonCritical:
+  value: '2'
+worldPreloadNonCriticalTimeout:
+  value: '45'
+worldPreloadSort:
+  value: '1'
+worldQuestFilterAnima:
+  value: '1'
+worldQuestFilterArtifactPower:
+  value: '1'
+worldQuestFilterEquipment:
+  value: '1'
+worldQuestFilterGold:
+  value: '1'
+worldQuestFilterProfessionMaterials:
+  value: '1'
+worldQuestFilterReputation:
+  value: '1'
+worldQuestFilterResources:
+  value: '1'
+WorldTextCritScreenY_v2:
+  value: '0.0275'
+WorldTextGravity_v2:
+  value: '0.500000'
+WorldTextMinAlpha_v2:
+  value: '0.500000'
+WorldTextMinSize:
+  value: '0.000000'
+WorldTextNonRandomZ_v2:
+  value: '2.5'
+WorldTextRampDuration_v2:
+  value: '1.000000'
+WorldTextRampPow_v2:
+  value: '1.900000'
+WorldTextRampPowCrit_v2:
+  value: '8.000000'
+WorldTextRandomXY_v2:
+  value: '0.0'
+WorldTextRandomZMax_v2:
+  value: '1.5'
+WorldTextRandomZMin_v2:
+  value: '0.8'
+WorldTextScale_v2:
+  value: '1.000000'
+WorldTextScreenY_v2:
+  value: '0.015'
+WorldTextStartPosRandomness_v2:
+  value: '1.0'
+worldViewCullMaxJobs:
+  value: '32'
+xpBarText:
+  value: '0'

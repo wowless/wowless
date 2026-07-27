@@ -2,4 +2,8 @@ name: cvars
 type:
   mapof:
     key: string
-    value: string
+    value:
+      record:
+        value:
+          required: true
+          type: string
