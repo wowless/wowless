@@ -130,7 +130,7 @@ if data.generated.cvars then
       if value == nil then
         cvars[k] = nil
       else
-        cvars[k] = { value = value }
+        cvars[k] = { default = value }
       end
     end
   end

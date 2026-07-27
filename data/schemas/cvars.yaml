@@ -4,6 +4,6 @@ type:
     key: string
     value:
       record:
-        value:
+        default:
           required: true
           type: string

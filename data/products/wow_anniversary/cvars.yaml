@@ -1,3066 +1,3066 @@
 accountNeedsTurnStrafeDialog:
-  value: '1'
+  default: '1'
 acknowledgedArrowCallouts:
-  value: '0'
+  default: '0'
 ActionButtonUseKeyDown:
-  value: '1'
+  default: '1'
 ActionCombatCameraEnable:
-  value: '0'
+  default: '0'
 actionedAdventureJournalEntries:
-  value: ''
+  default: ''
 activeCUFProfile:
-  value: ''
+  default: ''
 addFriendInfoShown:
-  value: '0'
+  default: '0'
 addonChallengeModeRestrictionsForced:
-  value: '0'
+  default: '0'
 addonChatRestrictionsForced:
-  value: '0'
+  default: '0'
 addonCombatRestrictionsForced:
-  value: '0'
+  default: '0'
 addonEncounterRestrictionsForced:
-  value: '0'
+  default: '0'
 addonLoadDebugging:
-  value: '0'
+  default: '0'
 addonMapRestrictionsForced:
-  value: '0'
+  default: '0'
 addonPerformanceMsgError:
-  value: '0.000000'
+  default: '0.000000'
 addonPerformanceMsgOverall:
-  value: '0.000000'
+  default: '0.000000'
 addonPerformanceMsgWarning:
-  value: '0.000000'
+  default: '0.000000'
 addonPvPMatchRestrictionsForced:
-  value: '0'
+  default: '0'
 advancedCombatLogging:
-  value: '0'
+  default: '0'
 advFlyKeyboardMaxPitchFactor:
-  value: '5.000000'
+  default: '5.000000'
 advFlyKeyboardMaxTurnFactor:
-  value: '8.000000'
+  default: '8.000000'
 advFlyKeyboardMinPitchFactor:
-  value: '2.500000'
+  default: '2.500000'
 advFlyKeyboardMinTurnFactor:
-  value: '5.000000'
+  default: '5.000000'
 advFlyPitchControl:
-  value: '3'
+  default: '3'
 advFlyPitchControlCameraChase:
-  value: '20.000000'
+  default: '20.000000'
 advFlyPitchControlGroundDebounce:
-  value: '0'
+  default: '0'
 agentUID:
-  value: ''
+  default: ''
 AIBrain:
-  value: '0'
+  default: '0'
 AIController:
-  value: '0'
+  default: '0'
 AIControllerEventLog:
-  value: '0'
+  default: '0'
 AIEventLog:
-  value: '0'
+  default: '0'
 allowCompareWithToggle:
-  value: '1'
+  default: '1'
 allowDevPublicKey:
-  value: '0'
+  default: '0'
 AllowMacHideAppBinding:
-  value: '1'
+  default: '1'
 AllowMacHideOthersBinding:
-  value: '1'
+  default: '1'
 AllowMacQuitBinding:
-  value: '1'
+  default: '1'
 AllowSoftwareRenderer:
-  value: '0'
+  default: '0'
 alwaysCompareItems:
-  value: '0'
+  default: '0'
 alwaysShowBlizzardGroupsTab:
-  value: '0'
+  default: '0'
 alwaysShowRuneIcons:
-  value: '0'
+  default: '0'
 animFrameSkipLOD:
-  value: '0'
+  default: '0'
 arachnophobiaMode:
-  value: '0'
+  default: '0'
 AreaTriggerEventLog:
-  value: '0'
+  default: '0'
 AreaTriggers:
-  value: '0'
+  default: '0'
 assaoAdaptiveQualityLimit:
-  value: '.45'
+  default: '.45'
 assaoBlurPassCount:
-  value: '2'
+  default: '2'
 assaoDetailShadowStrength:
-  value: '0'
+  default: '0'
 assaoFadeOutFrom:
-  value: '50.0'
+  default: '50.0'
 assaoFadeOutTo:
-  value: '300.0'
+  default: '300.0'
 assaoHorizonAngleThresh:
-  value: '0.4'
+  default: '0.4'
 assaoNormals:
-  value: '1'
+  default: '1'
 assaoRadius:
-  value: '1.85'
+  default: '1.85'
 assaoShadowClamp:
-  value: '.98'
+  default: '.98'
 assaoShadowMult:
-  value: '1.1'
+  default: '1.1'
 assaoShadowPower:
-  value: '1.34'
+  default: '1.34'
 assaoSharpness:
-  value: '.98'
+  default: '.98'
 assaoTemporalSSAngleOffset:
-  value: '0.0'
+  default: '0.0'
 assaoTemporalSSRadiusOffset:
-  value: '1.0'
+  default: '1.0'
 assistAttack:
-  value: '0'
+  default: '0'
 AsyncAssistActions:
-  value: '0'
+  default: '0'
 asyncHandlerTimeout:
-  value: '100'
+  default: '100'
 asyncThreadSleep:
-  value: '0'
+  default: '0'
 auctionDisplayOnCharacter:
-  value: '0'
+  default: '0'
 auctionSortByBuyoutPrice:
-  value: '0'
+  default: '0'
 auctionSortByUnitPrice:
-  value: '0'
+  default: '0'
 audioLocale:
-  value: ''
+  default: ''
 AuraDebugger:
-  value: '0'
+  default: '0'
 AuraEventLog:
-  value: '0'
+  default: '0'
 autoClearAFK:
-  value: '1'
+  default: '1'
 autoCompleteResortNamesOnRecency:
-  value: '1'
+  default: '1'
 autoCompleteUseContext:
-  value: '1'
+  default: '1'
 autoCompleteWhenEditingFromCenter:
-  value: '1'
+  default: '1'
 autoDismount:
-  value: '1'
+  default: '1'
 autoDismountFlying:
-  value: '0'
+  default: '0'
 autoFilledMultiCastSlots:
-  value: '0'
+  default: '0'
 autoInteract:
-  value: '0'
+  default: '0'
 autojoinBGVoice:
-  value: '0'
+  default: '0'
 autojoinPartyVoice:
-  value: '0'
+  default: '0'
 autoLootDefault:
-  value: '0'
+  default: '0'
 autoLootRate:
-  value: '150'
+  default: '150'
 autoOpenLootHistory:
-  value: '0'
+  default: '0'
 AutoPushSpellToActionBar:
-  value: '0'
+  default: '0'
 autoQuestPopUps:
-  value: ''
+  default: ''
 autoQuestWatch:
-  value: '1'
+  default: '1'
 autoRangedCombat:
-  value: '1'
+  default: '1'
 autoSelfCast:
-  value: '1'
+  default: '1'
 autoStand:
-  value: '1'
+  default: '1'
 autoUnshift:
-  value: '1'
+  default: '1'
 BeckonTriggerEventlog:
-  value: '0'
+  default: '0'
 BehaviorTree:
-  value: '0'
+  default: '0'
 blockChannelInvites:
-  value: '0'
+  default: '0'
 blockTrades:
-  value: '0'
+  default: '0'
 bodyQuota:
-  value: '100'
+  default: '100'
 breakUpLargeNumbers:
-  value: '0'
+  default: '0'
 Brightness:
-  value: '50.000000'
+  default: '50.000000'
 buffDurations:
-  value: '1'
+  default: '1'
 CAADebuffSelfAlert:
-  value: '0'
+  default: '0'
 CAAEnabled:
-  value: '0'
+  default: '0'
 CAAInterruptCast:
-  value: '0'
+  default: '0'
 CAAInterruptCastSuccess:
-  value: '0'
+  default: '0'
 CAAPartyHealthFrequency:
-  value: '0'
+  default: '0'
 CAAPartyHealthPercent:
-  value: '0'
+  default: '0'
 CAAPartyHealthVoice:
-  value: '0'
+  default: '0'
 CAAPartyHealthVolume:
-  value: '100'
+  default: '100'
 CAAPlayerCastFormat:
-  value: '4'
+  default: '4'
 CAAPlayerCastMinTime:
-  value: '1.500000'
+  default: '1.500000'
 CAAPlayerCastMode:
-  value: '0'
+  default: '0'
 CAAPlayerCastThrottle:
-  value: '0.000000'
+  default: '0.000000'
 CAAPlayerCastVoice:
-  value: '0'
+  default: '0'
 CAAPlayerCastVolume:
-  value: '100'
+  default: '100'
 CAAPlayerHealthFormat:
-  value: '1'
+  default: '1'
 CAAPlayerHealthPercent:
-  value: '0'
+  default: '0'
 CAAPlayerHealthThrottle:
-  value: '0.000000'
+  default: '0.000000'
 CAAPlayerHealthVoice:
-  value: '0'
+  default: '0'
 CAAPlayerHealthVolume:
-  value: '100'
+  default: '100'
 CAAResource1Formats:
-  value: ''
+  default: ''
 CAAResource1Percents:
-  value: ''
+  default: ''
 CAAResource1Throttle:
-  value: '0.000000'
+  default: '0.000000'
 CAAResource1Voice:
-  value: ''
+  default: ''
 CAAResource1Volume:
-  value: ''
+  default: ''
 CAAResource2Formats:
-  value: ''
+  default: ''
 CAAResource2Percents:
-  value: ''
+  default: ''
 CAAResource2Throttle:
-  value: '0.000000'
+  default: '0.000000'
 CAAResource2Voice:
-  value: ''
+  default: ''
 CAAResource2Volume:
-  value: ''
+  default: ''
 CAASayCombatEnd:
-  value: '1'
+  default: '1'
 CAASayCombatStart:
-  value: '1'
+  default: '1'
 CAASayIfTargeted:
-  value: ''
+  default: ''
 CAASayTargetName:
-  value: '1'
+  default: '1'
 CAASayYourDebuffs:
-  value: '1'
+  default: '1'
 CAASayYourDebuffsFormat:
-  value: '0'
+  default: '0'
 CAASayYourDebuffsMinDuration:
-  value: '1.500000'
+  default: '1.500000'
 CAASayYourDebuffsVoice:
-  value: '0'
+  default: '0'
 CAASayYourDebuffsVolume:
-  value: '100'
+  default: '100'
 CAASpeed:
-  value: '0'
+  default: '0'
 CAATargetCastFormat:
-  value: '0'
+  default: '0'
 CAATargetCastMinTime:
-  value: '1.500000'
+  default: '1.500000'
 CAATargetCastMode:
-  value: '0'
+  default: '0'
 CAATargetCastThrottle:
-  value: '0.000000'
+  default: '0.000000'
 CAATargetCastVoice:
-  value: '0'
+  default: '0'
 CAATargetCastVolume:
-  value: '100'
+  default: '100'
 CAATargetDeathBehavior:
-  value: '0'
+  default: '0'
 CAATargetHealthFormat:
-  value: '3'
+  default: '3'
 CAATargetHealthPercent:
-  value: '2'
+  default: '2'
 CAATargetHealthThrottle:
-  value: '0.000000'
+  default: '0.000000'
 CAATargetHealthVoice:
-  value: '0'
+  default: '0'
 CAATargetHealthVolume:
-  value: '100'
+  default: '100'
 CAAVoice:
-  value: '0'
+  default: '0'
 CAAVolume:
-  value: '100'
+  default: '100'
 cacaoBilateralSimilarityDistanceSigma:
-  value: '0.01'
+  default: '0.01'
 calendarShowBattlegrounds:
-  value: '1'
+  default: '1'
 calendarShowDarkmoon:
-  value: '1'
+  default: '1'
 calendarShowHolidays:
-  value: '1'
+  default: '1'
 calendarShowLockouts:
-  value: '1'
+  default: '1'
 calendarShowResets:
-  value: '0'
+  default: '0'
 calendarShowWeeklyHolidays:
-  value: '1'
+  default: '1'
 cameraBobbing:
-  value: '0'
+  default: '0'
 cameraBobbingSmoothSpeed:
-  value: '0.800000'
+  default: '0.800000'
 cameraCustomViewSmoothing:
-  value: '0'
+  default: '0'
 cameraDistanceMaxZoomFactor:
-  value: '1.000000'
+  default: '1.000000'
 cameraDistanceRateMult:
-  value: '1.000000'
+  default: '1.000000'
 cameraDive:
-  value: '1'
+  default: '1'
 CameraFollowGamepadAdjustDelay:
-  value: '1.000000'
+  default: '1.000000'
 CameraFollowGamepadAdjustEaseIn:
-  value: '1.000000'
+  default: '1.000000'
 CameraFollowOnStick:
-  value: '0'
+  default: '0'
 CameraFollowPitchDeadZone:
-  value: '5.000000'
+  default: '5.000000'
 CameraFollowPitchSpeed:
-  value: '1.000000'
+  default: '1.000000'
 CameraFollowPitchStrength:
-  value: '0.700000'
+  default: '0.700000'
 CameraFollowSnapCharacterAngle:
-  value: '45.000000'
+  default: '45.000000'
 CameraFollowTargetCombat:
-  value: '1'
+  default: '1'
 CameraFollowYawSpeed:
-  value: '1.000000'
+  default: '1.000000'
 cameraFov:
-  value: '90.000000'
+  default: '90.000000'
 cameraFoVSmoothSpeed:
-  value: '0.500000'
+  default: '0.500000'
 cameraGroundSmoothSpeed:
-  value: '7.500000'
+  default: '7.500000'
 cameraHeightIgnoreStandState:
-  value: '0'
+  default: '0'
 cameraIndirectOffset:
-  value: '6.000000'
+  default: '6.000000'
 cameraIndirectVisibility:
-  value: '1'
+  default: '1'
 CameraKeepCharacterCentered:
-  value: '1'
+  default: '1'
 cameraPitchMoveSpeed:
-  value: '90.000000'
+  default: '90.000000'
 cameraPitchSmoothMax:
-  value: '23.000000'
+  default: '23.000000'
 cameraPitchSmoothMin:
-  value: '0.000000'
+  default: '0.000000'
 cameraPitchSmoothSpeed:
-  value: '45.000000'
+  default: '45.000000'
 cameraPivot:
-  value: '1'
+  default: '1'
 cameraPivotDXMax:
-  value: '0.050000'
+  default: '0.050000'
 cameraPivotDYMin:
-  value: '0.000000'
+  default: '0.000000'
 CameraReduceUnexpectedMovement:
-  value: '0'
+  default: '0'
 cameraSavedDistance:
-  value: '5.550000'
+  default: '5.550000'
 cameraSavedPetBattleDistance:
-  value: '10.000000'
+  default: '10.000000'
 cameraSavedPitch:
-  value: '10.000000'
+  default: '10.000000'
 cameraSavedVehicleDistance:
-  value: '-1.000000'
+  default: '-1.000000'
 cameraSmooth:
-  value: '1'
+  default: '1'
 cameraSmoothAlwaysFearDelay:
-  value: '0.000000'
+  default: '0.000000'
 cameraSmoothAlwaysFearFactor:
-  value: '1.000000'
+  default: '1.000000'
 cameraSmoothAlwaysIdleDelay:
-  value: '0.000000'
+  default: '0.000000'
 cameraSmoothAlwaysIdleFactor:
-  value: '1.000000'
+  default: '1.000000'
 cameraSmoothAlwaysMoveDelay:
-  value: '0.000000'
+  default: '0.000000'
 cameraSmoothAlwaysMoveFactor:
-  value: '1.000000'
+  default: '1.000000'
 cameraSmoothAlwaysStopDelay:
-  value: '0.000000'
+  default: '0.000000'
 cameraSmoothAlwaysStopFactor:
-  value: '1.000000'
+  default: '1.000000'
 cameraSmoothAlwaysStrafeDelay:
-  value: '0.000000'
+  default: '0.000000'
 cameraSmoothAlwaysStrafeFactor:
-  value: '1.000000'
+  default: '1.000000'
 cameraSmoothAlwaysTrackDelay:
-  value: '0.000000'
+  default: '0.000000'
 cameraSmoothAlwaysTrackFactor:
-  value: '1.000000'
+  default: '1.000000'
 cameraSmoothAlwaysTurnDelay:
-  value: '0.000000'
+  default: '0.000000'
 cameraSmoothAlwaysTurnFactor:
-  value: '1.000000'
+  default: '1.000000'
 cameraSmoothNeverFearDelay:
-  value: '0.000000'
+  default: '0.000000'
 cameraSmoothNeverFearFactor:
-  value: '0.000000'
+  default: '0.000000'
 cameraSmoothNeverIdleDelay:
-  value: '0.000000'
+  default: '0.000000'
 cameraSmoothNeverIdleFactor:
-  value: '0.000000'
+  default: '0.000000'
 cameraSmoothNeverMoveDelay:
-  value: '0.000000'
+  default: '0.000000'
 cameraSmoothNeverMoveFactor:
-  value: '0.000000'
+  default: '0.000000'
 cameraSmoothNeverStopDelay:
-  value: '0.000000'
+  default: '0.000000'
 cameraSmoothNeverStopFactor:
-  value: '0.000000'
+  default: '0.000000'
 cameraSmoothNeverStrafeDelay:
-  value: '0.000000'
+  default: '0.000000'
 cameraSmoothNeverStrafeFactor:
-  value: '0.000000'
+  default: '0.000000'
 cameraSmoothNeverTrackDelay:
-  value: '0.000000'
+  default: '0.000000'
 cameraSmoothNeverTrackFactor:
-  value: '0.000000'
+  default: '0.000000'
 cameraSmoothNeverTurnDelay:
-  value: '0.000000'
+  default: '0.000000'
 cameraSmoothNeverTurnFactor:
-  value: '0.000000'
+  default: '0.000000'
 cameraSmoothPitch:
-  value: '1'
+  default: '1'
 cameraSmoothSmarterFearDelay:
-  value: '0.400000'
+  default: '0.400000'
 cameraSmoothSmarterFearFactor:
-  value: '10.000000'
+  default: '10.000000'
 cameraSmoothSmarterIdleDelay:
-  value: '0.000000'
+  default: '0.000000'
 cameraSmoothSmarterIdleFactor:
-  value: '0.000000'
+  default: '0.000000'
 cameraSmoothSmarterMoveDelay:
-  value: '0.000000'
+  default: '0.000000'
 cameraSmoothSmarterMoveFactor:
-  value: '1.000000'
+  default: '1.000000'
 cameraSmoothSmarterStopDelay:
-  value: '0.000000'
+  default: '0.000000'
 cameraSmoothSmarterStopFactor:
-  value: '0.000000'
+  default: '0.000000'
 cameraSmoothSmarterStrafeDelay:
-  value: '0.000000'
+  default: '0.000000'
 cameraSmoothSmarterStrafeFactor:
-  value: '1.000000'
+  default: '1.000000'
 cameraSmoothSmarterTrackDelay:
-  value: '0.400000'
+  default: '0.400000'
 cameraSmoothSmarterTrackFactor:
-  value: '10.000000'
+  default: '10.000000'
 cameraSmoothSmarterTurnDelay:
-  value: '0.000000'
+  default: '0.000000'
 cameraSmoothSmarterTurnFactor:
-  value: '1.000000'
+  default: '1.000000'
 cameraSmoothSmartFearDelay:
-  value: '0.400000'
+  default: '0.400000'
 cameraSmoothSmartFearFactor:
-  value: '10.000000'
+  default: '10.000000'
 cameraSmoothSmartIdleDelay:
-  value: '0.000000'
+  default: '0.000000'
 cameraSmoothSmartIdleFactor:
-  value: '0.000000'
+  default: '0.000000'
 cameraSmoothSmartMoveDelay:
-  value: '0.000000'
+  default: '0.000000'
 cameraSmoothSmartMoveFactor:
-  value: '1.000000'
+  default: '1.000000'
 cameraSmoothSmartStopDelay:
-  value: '0.000000'
+  default: '0.000000'
 cameraSmoothSmartStopFactor:
-  value: '0.000000'
+  default: '0.000000'
 cameraSmoothSmartStrafeDelay:
-  value: '0.000000'
+  default: '0.000000'
 cameraSmoothSmartStrafeFactor:
-  value: '1.000000'
+  default: '1.000000'
 cameraSmoothSmartTrackDelay:
-  value: '0.400000'
+  default: '0.400000'
 cameraSmoothSmartTrackFactor:
-  value: '10.000000'
+  default: '10.000000'
 cameraSmoothSmartTurnDelay:
-  value: '0.000000'
+  default: '0.000000'
 cameraSmoothSmartTurnFactor:
-  value: '1.000000'
+  default: '1.000000'
 cameraSmoothSplineFearDelay:
-  value: '0.000000'
+  default: '0.000000'
 cameraSmoothSplineFearFactor:
-  value: '4.000000'
+  default: '4.000000'
 cameraSmoothSplineIdleDelay:
-  value: '0.000000'
+  default: '0.000000'
 cameraSmoothSplineIdleFactor:
-  value: '4.000000'
+  default: '4.000000'
 cameraSmoothSplineMoveDelay:
-  value: '0.000000'
+  default: '0.000000'
 cameraSmoothSplineMoveFactor:
-  value: '1.000000'
+  default: '1.000000'
 cameraSmoothSplineStopDelay:
-  value: '0.000000'
+  default: '0.000000'
 cameraSmoothSplineStopFactor:
-  value: '4.000000'
+  default: '4.000000'
 cameraSmoothSplineStrafeDelay:
-  value: '0.000000'
+  default: '0.000000'
 cameraSmoothSplineStrafeFactor:
-  value: '1.000000'
+  default: '1.000000'
 cameraSmoothSplineTrackDelay:
-  value: '0.000000'
+  default: '0.000000'
 cameraSmoothSplineTrackFactor:
-  value: '4.000000'
+  default: '4.000000'
 cameraSmoothSplineTurnDelay:
-  value: '0.000000'
+  default: '0.000000'
 cameraSmoothSplineTurnFactor:
-  value: '1.000000'
+  default: '1.000000'
 cameraSmoothStyle:
-  value: '1'
+  default: '1'
 cameraSmoothTimeMax:
-  value: '2.000000'
+  default: '2.000000'
 cameraSmoothTimeMin:
-  value: '0.100000'
+  default: '0.100000'
 cameraSmoothTrackingStyle:
-  value: '1'
+  default: '1'
 cameraSmoothViewDataAlwaysDistanceDelay:
-  value: '0.000000'
+  default: '0.000000'
 cameraSmoothViewDataAlwaysDistanceFactor:
-  value: '0.000000'
+  default: '0.000000'
 cameraSmoothViewDataAlwaysPitchDelay:
-  value: '0.000000'
+  default: '0.000000'
 cameraSmoothViewDataAlwaysPitchFactor:
-  value: '1.000000'
+  default: '1.000000'
 cameraSmoothViewDataAlwaysYawDelay:
-  value: '0.000000'
+  default: '0.000000'
 cameraSmoothViewDataAlwaysYawFactor:
-  value: '1.000000'
+  default: '1.000000'
 cameraSmoothViewDataNeverDistanceDelay:
-  value: '0.000000'
+  default: '0.000000'
 cameraSmoothViewDataNeverDistanceFactor:
-  value: '0.000000'
+  default: '0.000000'
 cameraSmoothViewDataNeverPitchDelay:
-  value: '0.000000'
+  default: '0.000000'
 cameraSmoothViewDataNeverPitchFactor:
-  value: '0.000000'
+  default: '0.000000'
 cameraSmoothViewDataNeverYawDelay:
-  value: '0.000000'
+  default: '0.000000'
 cameraSmoothViewDataNeverYawFactor:
-  value: '0.000000'
+  default: '0.000000'
 cameraSmoothViewDataSmartDistanceDelay:
-  value: '0.000000'
+  default: '0.000000'
 cameraSmoothViewDataSmartDistanceFactor:
-  value: '0.000000'
+  default: '0.000000'
 cameraSmoothViewDataSmarterDistanceDelay:
-  value: '0.000000'
+  default: '0.000000'
 cameraSmoothViewDataSmarterDistanceFactor:
-  value: '0.000000'
+  default: '0.000000'
 cameraSmoothViewDataSmarterPitchDelay:
-  value: '0.000000'
+  default: '0.000000'
 cameraSmoothViewDataSmarterPitchFactor:
-  value: '1.000000'
+  default: '1.000000'
 cameraSmoothViewDataSmarterYawDelay:
-  value: '0.000000'
+  default: '0.000000'
 cameraSmoothViewDataSmarterYawFactor:
-  value: '1.000000'
+  default: '1.000000'
 cameraSmoothViewDataSmartPitchDelay:
-  value: '0.000000'
+  default: '0.000000'
 cameraSmoothViewDataSmartPitchFactor:
-  value: '0.000000'
+  default: '0.000000'
 cameraSmoothViewDataSmartYawDelay:
-  value: '0.000000'
+  default: '0.000000'
 cameraSmoothViewDataSmartYawFactor:
-  value: '1.000000'
+  default: '1.000000'
 cameraSmoothViewDataSplineDistanceDelay:
-  value: '0.000000'
+  default: '0.000000'
 cameraSmoothViewDataSplineDistanceFactor:
-  value: '0.000000'
+  default: '0.000000'
 cameraSmoothViewDataSplinePitchDelay:
-  value: '0.000000'
+  default: '0.000000'
 cameraSmoothViewDataSplinePitchFactor:
-  value: '1.000000'
+  default: '1.000000'
 cameraSmoothViewDataSplineYawDelay:
-  value: '0.000000'
+  default: '0.000000'
 cameraSmoothViewDataSplineYawFactor:
-  value: '1.000000'
+  default: '1.000000'
 cameraSmoothYaw:
-  value: '1'
+  default: '1'
 cameraSubmergePitch:
-  value: '18.000000'
+  default: '18.000000'
 cameraSurfacePitch:
-  value: '0.000000'
+  default: '0.000000'
 cameraTargetSmoothSpeed:
-  value: '90.000000'
+  default: '90.000000'
 cameraTerrainTilt:
-  value: '0'
+  default: '0'
 cameraTerrainTiltAlwaysFallAbsorb:
-  value: '1.000000'
+  default: '1.000000'
 cameraTerrainTiltAlwaysFallDelay:
-  value: '0.000000'
+  default: '0.000000'
 cameraTerrainTiltAlwaysFallFactor:
-  value: '0.750000'
+  default: '0.750000'
 cameraTerrainTiltAlwaysFearAbsorb:
-  value: '1.000000'
+  default: '1.000000'
 cameraTerrainTiltAlwaysFearDelay:
-  value: '0.000000'
+  default: '0.000000'
 cameraTerrainTiltAlwaysFearFactor:
-  value: '1.000000'
+  default: '1.000000'
 cameraTerrainTiltAlwaysIdleAbsorb:
-  value: '1.000000'
+  default: '1.000000'
 cameraTerrainTiltAlwaysIdleDelay:
-  value: '0.000000'
+  default: '0.000000'
 cameraTerrainTiltAlwaysIdleFactor:
-  value: '1.000000'
+  default: '1.000000'
 cameraTerrainTiltAlwaysJumpAbsorb:
-  value: '0.000000'
+  default: '0.000000'
 cameraTerrainTiltAlwaysJumpDelay:
-  value: '0.000000'
+  default: '0.000000'
 cameraTerrainTiltAlwaysJumpFactor:
-  value: '-1.000000'
+  default: '-1.000000'
 cameraTerrainTiltAlwaysMoveAbsorb:
-  value: '1.000000'
+  default: '1.000000'
 cameraTerrainTiltAlwaysMoveDelay:
-  value: '0.000000'
+  default: '0.000000'
 cameraTerrainTiltAlwaysMoveFactor:
-  value: '1.000000'
+  default: '1.000000'
 cameraTerrainTiltAlwaysStrafeAbsorb:
-  value: '1.000000'
+  default: '1.000000'
 cameraTerrainTiltAlwaysStrafeDelay:
-  value: '0.000000'
+  default: '0.000000'
 cameraTerrainTiltAlwaysStrafeFactor:
-  value: '1.000000'
+  default: '1.000000'
 cameraTerrainTiltAlwaysSwimAbsorb:
-  value: '0.000000'
+  default: '0.000000'
 cameraTerrainTiltAlwaysSwimDelay:
-  value: '0.000000'
+  default: '0.000000'
 cameraTerrainTiltAlwaysSwimFactor:
-  value: '1.000000'
+  default: '1.000000'
 cameraTerrainTiltAlwaysTaxiAbsorb:
-  value: '0.000000'
+  default: '0.000000'
 cameraTerrainTiltAlwaysTaxiDelay:
-  value: '0.000000'
+  default: '0.000000'
 cameraTerrainTiltAlwaysTaxiFactor:
-  value: '1.000000'
+  default: '1.000000'
 cameraTerrainTiltAlwaysTrackAbsorb:
-  value: '1.000000'
+  default: '1.000000'
 cameraTerrainTiltAlwaysTrackDelay:
-  value: '0.000000'
+  default: '0.000000'
 cameraTerrainTiltAlwaysTrackFactor:
-  value: '1.000000'
+  default: '1.000000'
 cameraTerrainTiltAlwaysTurnAbsorb:
-  value: '1.000000'
+  default: '1.000000'
 cameraTerrainTiltAlwaysTurnDelay:
-  value: '0.000000'
+  default: '0.000000'
 cameraTerrainTiltAlwaysTurnFactor:
-  value: '1.000000'
+  default: '1.000000'
 cameraTerrainTiltNeverFallAbsorb:
-  value: '0.000000'
+  default: '0.000000'
 cameraTerrainTiltNeverFallDelay:
-  value: '0.000000'
+  default: '0.000000'
 cameraTerrainTiltNeverFallFactor:
-  value: '-1.000000'
+  default: '-1.000000'
 cameraTerrainTiltNeverFearAbsorb:
-  value: '0.000000'
+  default: '0.000000'
 cameraTerrainTiltNeverFearDelay:
-  value: '0.000000'
+  default: '0.000000'
 cameraTerrainTiltNeverFearFactor:
-  value: '-1.000000'
+  default: '-1.000000'
 cameraTerrainTiltNeverIdleAbsorb:
-  value: '0.000000'
+  default: '0.000000'
 cameraTerrainTiltNeverIdleDelay:
-  value: '0.000000'
+  default: '0.000000'
 cameraTerrainTiltNeverIdleFactor:
-  value: '-1.000000'
+  default: '-1.000000'
 cameraTerrainTiltNeverJumpAbsorb:
-  value: '0.000000'
+  default: '0.000000'
 cameraTerrainTiltNeverJumpDelay:
-  value: '0.000000'
+  default: '0.000000'
 cameraTerrainTiltNeverJumpFactor:
-  value: '-1.000000'
+  default: '-1.000000'
 cameraTerrainTiltNeverMoveAbsorb:
-  value: '0.000000'
+  default: '0.000000'
 cameraTerrainTiltNeverMoveDelay:
-  value: '0.000000'
+  default: '0.000000'
 cameraTerrainTiltNeverMoveFactor:
-  value: '-1.000000'
+  default: '-1.000000'
 cameraTerrainTiltNeverStrafeAbsorb:
-  value: '0.000000'
+  default: '0.000000'
 cameraTerrainTiltNeverStrafeDelay:
-  value: '0.000000'
+  default: '0.000000'
 cameraTerrainTiltNeverStrafeFactor:
-  value: '-1.000000'
+  default: '-1.000000'
 cameraTerrainTiltNeverSwimAbsorb:
-  value: '0.000000'
+  default: '0.000000'
 cameraTerrainTiltNeverSwimDelay:
-  value: '0.000000'
+  default: '0.000000'
 cameraTerrainTiltNeverSwimFactor:
-  value: '-1.000000'
+  default: '-1.000000'
 cameraTerrainTiltNeverTaxiAbsorb:
-  value: '0.000000'
+  default: '0.000000'
 cameraTerrainTiltNeverTaxiDelay:
-  value: '0.000000'
+  default: '0.000000'
 cameraTerrainTiltNeverTaxiFactor:
-  value: '-1.000000'
+  default: '-1.000000'
 cameraTerrainTiltNeverTrackAbsorb:
-  value: '0.000000'
+  default: '0.000000'
 cameraTerrainTiltNeverTrackDelay:
-  value: '0.000000'
+  default: '0.000000'
 cameraTerrainTiltNeverTrackFactor:
-  value: '-1.000000'
+  default: '-1.000000'
 cameraTerrainTiltNeverTurnAbsorb:
-  value: '0.000000'
+  default: '0.000000'
 cameraTerrainTiltNeverTurnDelay:
-  value: '0.000000'
+  default: '0.000000'
 cameraTerrainTiltNeverTurnFactor:
-  value: '-1.000000'
+  default: '-1.000000'
 cameraTerrainTiltSmarterFallAbsorb:
-  value: '1.000000'
+  default: '1.000000'
 cameraTerrainTiltSmarterFallDelay:
-  value: '0.000000'
+  default: '0.000000'
 cameraTerrainTiltSmarterFallFactor:
-  value: '0.750000'
+  default: '0.750000'
 cameraTerrainTiltSmarterFearAbsorb:
-  value: '1.000000'
+  default: '1.000000'
 cameraTerrainTiltSmarterFearDelay:
-  value: '0.000000'
+  default: '0.000000'
 cameraTerrainTiltSmarterFearFactor:
-  value: '1.000000'
+  default: '1.000000'
 cameraTerrainTiltSmarterIdleAbsorb:
-  value: '0.000000'
+  default: '0.000000'
 cameraTerrainTiltSmarterIdleDelay:
-  value: '0.000000'
+  default: '0.000000'
 cameraTerrainTiltSmarterIdleFactor:
-  value: '-1.000000'
+  default: '-1.000000'
 cameraTerrainTiltSmarterJumpAbsorb:
-  value: '0.000000'
+  default: '0.000000'
 cameraTerrainTiltSmarterJumpDelay:
-  value: '0.000000'
+  default: '0.000000'
 cameraTerrainTiltSmarterJumpFactor:
-  value: '-1.000000'
+  default: '-1.000000'
 cameraTerrainTiltSmarterMoveAbsorb:
-  value: '1.000000'
+  default: '1.000000'
 cameraTerrainTiltSmarterMoveDelay:
-  value: '0.000000'
+  default: '0.000000'
 cameraTerrainTiltSmarterMoveFactor:
-  value: '1.000000'
+  default: '1.000000'
 cameraTerrainTiltSmarterStrafeAbsorb:
-  value: '1.000000'
+  default: '1.000000'
 cameraTerrainTiltSmarterStrafeDelay:
-  value: '0.000000'
+  default: '0.000000'
 cameraTerrainTiltSmarterStrafeFactor:
-  value: '1.000000'
+  default: '1.000000'
 cameraTerrainTiltSmarterSwimAbsorb:
-  value: '0.000000'
+  default: '0.000000'
 cameraTerrainTiltSmarterSwimDelay:
-  value: '0.000000'
+  default: '0.000000'
 cameraTerrainTiltSmarterSwimFactor:
-  value: '1.000000'
+  default: '1.000000'
 cameraTerrainTiltSmarterTaxiAbsorb:
-  value: '0.000000'
+  default: '0.000000'
 cameraTerrainTiltSmarterTaxiDelay:
-  value: '0.000000'
+  default: '0.000000'
 cameraTerrainTiltSmarterTaxiFactor:
-  value: '1.000000'
+  default: '1.000000'
 cameraTerrainTiltSmarterTrackAbsorb:
-  value: '1.000000'
+  default: '1.000000'
 cameraTerrainTiltSmarterTrackDelay:
-  value: '0.000000'
+  default: '0.000000'
 cameraTerrainTiltSmarterTrackFactor:
-  value: '1.000000'
+  default: '1.000000'
 cameraTerrainTiltSmarterTurnAbsorb:
-  value: '1.000000'
+  default: '1.000000'
 cameraTerrainTiltSmarterTurnDelay:
-  value: '0.000000'
+  default: '0.000000'
 cameraTerrainTiltSmarterTurnFactor:
-  value: '1.000000'
+  default: '1.000000'
 cameraTerrainTiltSmartFallAbsorb:
-  value: '1.000000'
+  default: '1.000000'
 cameraTerrainTiltSmartFallDelay:
-  value: '0.000000'
+  default: '0.000000'
 cameraTerrainTiltSmartFallFactor:
-  value: '0.750000'
+  default: '0.750000'
 cameraTerrainTiltSmartFearAbsorb:
-  value: '1.000000'
+  default: '1.000000'
 cameraTerrainTiltSmartFearDelay:
-  value: '0.000000'
+  default: '0.000000'
 cameraTerrainTiltSmartFearFactor:
-  value: '1.000000'
+  default: '1.000000'
 cameraTerrainTiltSmartIdleAbsorb:
-  value: '0.000000'
+  default: '0.000000'
 cameraTerrainTiltSmartIdleDelay:
-  value: '0.000000'
+  default: '0.000000'
 cameraTerrainTiltSmartIdleFactor:
-  value: '-1.000000'
+  default: '-1.000000'
 cameraTerrainTiltSmartJumpAbsorb:
-  value: '0.000000'
+  default: '0.000000'
 cameraTerrainTiltSmartJumpDelay:
-  value: '0.000000'
+  default: '0.000000'
 cameraTerrainTiltSmartJumpFactor:
-  value: '-1.000000'
+  default: '-1.000000'
 cameraTerrainTiltSmartMoveAbsorb:
-  value: '1.000000'
+  default: '1.000000'
 cameraTerrainTiltSmartMoveDelay:
-  value: '0.000000'
+  default: '0.000000'
 cameraTerrainTiltSmartMoveFactor:
-  value: '1.000000'
+  default: '1.000000'
 cameraTerrainTiltSmartStrafeAbsorb:
-  value: '1.000000'
+  default: '1.000000'
 cameraTerrainTiltSmartStrafeDelay:
-  value: '0.000000'
+  default: '0.000000'
 cameraTerrainTiltSmartStrafeFactor:
-  value: '1.000000'
+  default: '1.000000'
 cameraTerrainTiltSmartSwimAbsorb:
-  value: '0.000000'
+  default: '0.000000'
 cameraTerrainTiltSmartSwimDelay:
-  value: '0.000000'
+  default: '0.000000'
 cameraTerrainTiltSmartSwimFactor:
-  value: '1.000000'
+  default: '1.000000'
 cameraTerrainTiltSmartTaxiAbsorb:
-  value: '0.000000'
+  default: '0.000000'
 cameraTerrainTiltSmartTaxiDelay:
-  value: '0.000000'
+  default: '0.000000'
 cameraTerrainTiltSmartTaxiFactor:
-  value: '1.000000'
+  default: '1.000000'
 cameraTerrainTiltSmartTrackAbsorb:
-  value: '1.000000'
+  default: '1.000000'
 cameraTerrainTiltSmartTrackDelay:
-  value: '0.000000'
+  default: '0.000000'
 cameraTerrainTiltSmartTrackFactor:
-  value: '1.000000'
+  default: '1.000000'
 cameraTerrainTiltSmartTurnAbsorb:
-  value: '1.000000'
+  default: '1.000000'
 cameraTerrainTiltSmartTurnDelay:
-  value: '0.000000'
+  default: '0.000000'
 cameraTerrainTiltSmartTurnFactor:
-  value: '1.000000'
+  default: '1.000000'
 cameraTerrainTiltSplineFallAbsorb:
-  value: '1.000000'
+  default: '1.000000'
 cameraTerrainTiltSplineFallDelay:
-  value: '0.000000'
+  default: '0.000000'
 cameraTerrainTiltSplineFallFactor:
-  value: '0.750000'
+  default: '0.750000'
 cameraTerrainTiltSplineFearAbsorb:
-  value: '1.000000'
+  default: '1.000000'
 cameraTerrainTiltSplineFearDelay:
-  value: '0.000000'
+  default: '0.000000'
 cameraTerrainTiltSplineFearFactor:
-  value: '1.000000'
+  default: '1.000000'
 cameraTerrainTiltSplineIdleAbsorb:
-  value: '0.000000'
+  default: '0.000000'
 cameraTerrainTiltSplineIdleDelay:
-  value: '0.000000'
+  default: '0.000000'
 cameraTerrainTiltSplineIdleFactor:
-  value: '-1.000000'
+  default: '-1.000000'
 cameraTerrainTiltSplineJumpAbsorb:
-  value: '0.000000'
+  default: '0.000000'
 cameraTerrainTiltSplineJumpDelay:
-  value: '0.000000'
+  default: '0.000000'
 cameraTerrainTiltSplineJumpFactor:
-  value: '-1.000000'
+  default: '-1.000000'
 cameraTerrainTiltSplineMoveAbsorb:
-  value: '1.000000'
+  default: '1.000000'
 cameraTerrainTiltSplineMoveDelay:
-  value: '0.000000'
+  default: '0.000000'
 cameraTerrainTiltSplineMoveFactor:
-  value: '1.000000'
+  default: '1.000000'
 cameraTerrainTiltSplineStrafeAbsorb:
-  value: '1.000000'
+  default: '1.000000'
 cameraTerrainTiltSplineStrafeDelay:
-  value: '0.000000'
+  default: '0.000000'
 cameraTerrainTiltSplineStrafeFactor:
-  value: '1.000000'
+  default: '1.000000'
 cameraTerrainTiltSplineSwimAbsorb:
-  value: '0.000000'
+  default: '0.000000'
 cameraTerrainTiltSplineSwimDelay:
-  value: '0.000000'
+  default: '0.000000'
 cameraTerrainTiltSplineSwimFactor:
-  value: '1.000000'
+  default: '1.000000'
 cameraTerrainTiltSplineTaxiAbsorb:
-  value: '0.000000'
+  default: '0.000000'
 cameraTerrainTiltSplineTaxiDelay:
-  value: '0.000000'
+  default: '0.000000'
 cameraTerrainTiltSplineTaxiFactor:
-  value: '1.000000'
+  default: '1.000000'
 cameraTerrainTiltSplineTrackAbsorb:
-  value: '1.000000'
+  default: '1.000000'
 cameraTerrainTiltSplineTrackDelay:
-  value: '0.000000'
+  default: '0.000000'
 cameraTerrainTiltSplineTrackFactor:
-  value: '1.000000'
+  default: '1.000000'
 cameraTerrainTiltSplineTurnAbsorb:
-  value: '1.000000'
+  default: '1.000000'
 cameraTerrainTiltSplineTurnDelay:
-  value: '0.000000'
+  default: '0.000000'
 cameraTerrainTiltSplineTurnFactor:
-  value: '1.000000'
+  default: '1.000000'
 cameraTerrainTiltTimeMax:
-  value: '10.000000'
+  default: '10.000000'
 cameraTerrainTiltTimeMin:
-  value: '3.000000'
+  default: '3.000000'
 cameraView:
-  value: '2'
+  default: '2'
 cameraViewBlendStyle:
-  value: '1'
+  default: '1'
 cameraWaterCollision:
-  value: '0'
+  default: '0'
 cameraYawMoveSpeed:
-  value: '180.000000'
+  default: '180.000000'
 cameraYawSmoothMax:
-  value: '0.000000'
+  default: '0.000000'
 cameraYawSmoothMin:
-  value: '0.000000'
+  default: '0.000000'
 cameraYawSmoothSpeed:
-  value: '180.000000'
+  default: '180.000000'
 cameraZoomSpeed:
-  value: '20.000000'
+  default: '20.000000'
 cameraZSmooth:
-  value: '1'
+  default: '1'
 casContainerSizeLimit:
-  value: '0'
+  default: '0'
 characterFrameCollapsed:
-  value: '1'
+  default: '1'
 characterNeedsTurnStrafeDialog:
-  value: '1'
+  default: '1'
 characterSocialRestrictionSettingsApplied:
-  value: '0'
+  default: '0'
 ChatAmbienceVolume:
-  value: '0.3'
+  default: '0.3'
 chatBubbles:
-  value: '1'
+  default: '1'
 chatBubblesParty:
-  value: '1'
+  default: '1'
 chatBubblesRaid:
-  value: '0'
+  default: '0'
 chatClassColorOverride:
-  value: '2'
+  default: '2'
 chatMouseScroll:
-  value: '1'
+  default: '1'
 ChatMusicVolume:
-  value: '0.3'
+  default: '0.3'
 ChatSoundVolume:
-  value: '0.4'
+  default: '0.4'
 chatStyle:
-  value: classic
+  default: classic
 checkAddonVersion:
-  value: '1'
+  default: '1'
 ClientCastDebug:
-  value: '0'
+  default: '0'
 ClientMessageEventLog:
-  value: '0'
+  default: '0'
 ClientSettings_AFTERMATH_BY_API_MASK:
-  value: ''
+  default: ''
 ClientSettings_AFTERMATH_BY_GPU_CATEGORY:
-  value: ''
+  default: ''
 ClientSettings_ASYNC_COMPUTE_BY_API_MASK:
-  value: ''
+  default: ''
 ClientSettings_ASYNC_COMPUTE_BY_GPU_CATEGORY:
-  value: ''
+  default: ''
 ClientSettings_ClusteredShading:
-  value: ''
+  default: ''
 ClientSettings_CMAA2:
-  value: ''
+  default: ''
 ClientSettings_CMD_LIST_MT_BY_API_MASK:
-  value: ''
+  default: ''
 ClientSettings_CMD_LIST_MT_BY_GPU_CATEGORY:
-  value: ''
+  default: ''
 ClientSettings_COPY_QUEUE_BY_API_MASK:
-  value: ''
+  default: ''
 ClientSettings_COPY_QUEUE_BY_GPU_CATEGORY:
-  value: ''
+  default: ''
 ClientSettings_CTexAsyncCreate:
-  value: ''
+  default: ''
 ClientSettings_FSR:
-  value: ''
+  default: ''
 ClientSettings_HIGH_MEM_FEATURES_BY_API_MASK:
-  value: ''
+  default: ''
 ClientSettings_HIGH_MEM_FEATURES_BY_GPU_CATEGORY:
-  value: ''
+  default: ''
 ClientSettings_LowLatency:
-  value: ''
+  default: ''
 ClientSettings_LowVramActions:
-  value: ''
+  default: ''
 ClientSettings_MemoryAllocationTraces:
-  value: ''
+  default: ''
 ClientSettings_MSAA:
-  value: ''
+  default: ''
 ClientSettings_NeedsGxRestart:
-  value: ''
+  default: ''
 ClientSettings_OPT_FEATURES_BY_API_MASK:
-  value: ''
+  default: ''
 ClientSettings_OPT_FEATURES_BY_GPU_CATEGORY:
-  value: ''
+  default: ''
 ClientSettings_RAY_TRACING_BY_API_MASK:
-  value: ''
+  default: ''
 ClientSettings_RAY_TRACING_BY_GPU_CATEGORY:
-  value: ''
+  default: ''
 ClientSettings_RTShadows:
-  value: ''
+  default: ''
 ClientSettings_SHADER_MT_BY_API_MASK:
-  value: ''
+  default: ''
 ClientSettings_SHADER_MT_BY_GPU_CATEGORY:
-  value: ''
+  default: ''
 ClientSettings_SM6_BY_API_MASK:
-  value: ''
+  default: ''
 ClientSettings_SM6_BY_GPU_CATEGORY:
-  value: ''
+  default: ''
 ClientSettings_VolumeFog:
-  value: ''
+  default: ''
 ClientSettings_WORK_OPTIMS_BY_API_MASK:
-  value: ''
+  default: ''
 ClientSettings_WORK_OPTIMS_BY_GPU_CATEGORY:
-  value: ''
+  default: ''
 ClipCursor:
-  value: '0'
+  default: '0'
 cloakFixEnabled:
-  value: '1'
+  default: '1'
 closedInfoFrames:
-  value: ''
+  default: ''
 closedInfoFramesAccountWide:
-  value: ''
+  default: ''
 closedRemixArtifactTutorialFrames:
-  value: '0'
+  default: '0'
 clubFinderCacheExpiry:
-  value: '1000'
+  default: '1000'
 clubFinderCachePendingExpiry:
-  value: '5000'
+  default: '5000'
 clubFinderPlayerLanguageSettings:
-  value: '0'
+  default: '0'
 clubFinderPlayerSettings:
-  value: '1'
+  default: '1'
 clusteredShading:
-  value: '1'
+  default: '1'
 CMAA2ExtraSharpness:
-  value: '0'
+  default: '0'
 CMAA2HalfFloat:
-  value: '1'
+  default: '1'
 CMAA2Quality:
-  value: '3'
+  default: '3'
 collapseExpandBuffs:
-  value: '0'
+  default: '0'
 Collision:
-  value: '0'
+  default: '0'
 colorblindMode:
-  value: '0'
+  default: '0'
 colorblindSimulator:
-  value: '0'
+  default: '0'
 colorblindWeaknessFactor:
-  value: '0.5'
+  default: '0.5'
 combatLogRetentionTime:
-  value: '300'
+  default: '300'
 combatLogUniqueFilename:
-  value: '1'
+  default: '1'
 combatWarningsEnabled:
-  value: '1'
+  default: '1'
 combinedBags:
-  value: '0'
+  default: '0'
 comboPointLocation:
-  value: '2'
+  default: '2'
 communitiesShowOffline:
-  value: '1'
+  default: '1'
 componentCompress:
-  value: '1'
+  default: '1'
 componentEmissive:
-  value: '1'
+  default: '1'
 componentSpecular:
-  value: '1'
+  default: '1'
 componentTexCacheSize:
-  value: '32'
+  default: '32'
 componentTexLoadLimit:
-  value: '16'
+  default: '16'
 componentTextureLevel:
-  value: '0'
+  default: '0'
 componentThread:
-  value: '1'
+  default: '1'
 ConsoleKey:
-  value: '`'
+  default: '`'
 consoleShowDebugMessages:
-  value: '0'
+  default: '0'
 consoleShowSpamMessages:
-  value: '0'
+  default: '0'
 consolidateBuffs:
-  value: '0'
+  default: '0'
 contentTrackingFilter:
-  value: '1'
+  default: '1'
 ContentTuning:
-  value: '0'
+  default: '0'
 Contrast:
-  value: '50.000000'
+  default: '50.000000'
 cooldownViewerEnabled:
-  value: '0'
+  default: '0'
 cooldownViewerShowUnlearned:
-  value: '1'
+  default: '1'
 countdownForCooldowns:
-  value: '0'
+  default: '0'
 currencyCategoriesCollapsed:
-  value: '0'
+  default: '0'
 currentGameMode:
-  value: '-1'
+  default: '-1'
 CursorCenteredYPos:
-  value: '0.6'
+  default: '0.6'
 CursorFreelookCentering:
-  value: '0'
+  default: '0'
 CursorFreelookStartDelta:
-  value: '0.001'
+  default: '0.001'
 cursorSizePreferred:
-  value: '-1'
+  default: '-1'
 CursorStickyCentering:
-  value: '0'
+  default: '0'
 CustomDesignEventLog:
-  value: '0'
+  default: '0'
 CustomWindowEventLog:
-  value: '0'
+  default: '0'
 daltonize:
-  value: '1'
+  default: '1'
 DamageCalculator:
-  value: '0'
+  default: '0'
 damageMeterEnabled:
-  value: '0'
+  default: '0'
 damageMeterResetOnNewInstance:
-  value: '0'
+  default: '0'
 DebugTorsoTwist:
-  value: '0'
+  default: '0'
 DeprecatedWarningThrottle:
-  value: '0'
+  default: '0'
 deselectOnClick:
-  value: '0'
+  default: '0'
 developerLog:
-  value: '0'
+  default: '0'
 developerLogFilterDebug:
-  value: '0'
+  default: '0'
 developerLogFilterError:
-  value: '1'
+  default: '1'
 developerLogFilterFatal:
-  value: '1'
+  default: '1'
 developerLogFilterNormal:
-  value: '1'
+  default: '1'
 developerLogFilterSpam:
-  value: '0'
+  default: '0'
 developerLogFilterWarning:
-  value: '1'
+  default: '1'
 developerLogWriteToFile:
-  value: '1'
+  default: '1'
 digSites:
-  value: '1'
+  default: '1'
 disableAutoRealmSelect:
-  value: '0'
+  default: '0'
 disableServerNagle:
-  value: '1'
+  default: '1'
 disableSuggestedLevelActivityFilter:
-  value: '0'
+  default: '0'
 disableUILoadErrorDialog:
-  value: '0'
+  default: '0'
 disableUserAddonsByDefault:
-  value: '0'
+  default: '0'
 displayFreeBagSlots:
-  value: '0'
+  default: '0'
 dnMTUpdate:
-  value: '1'
+  default: '1'
 doNotFlashLowHealthWarning:
-  value: '1'
+  default: '1'
 doNotShowTWFraudWarning:
-  value: '0'
+  default: '0'
 dontShowEquipmentSetsOnItems:
-  value: '0'
+  default: '0'
 doodadLodScale:
-  value: '100'
+  default: '100'
 dragonRidingRacesFilter:
-  value: '0'
+  default: '0'
 dragonRidingRacesFilterWQ:
-  value: '1'
+  default: '1'
 DriverVersionCheck:
-  value: '1'
+  default: '1'
 DriveSwapReverseTurnDirection:
-  value: '0'
+  default: '0'
 dynamicLod:
-  value: '1'
+  default: '1'
 DynamicRenderScale:
-  value: '0'
+  default: '0'
 DynamicRenderScaleMin:
-  value: '0.333333'
+  default: '0.333333'
 EJDungeonDifficulty:
-  value: '0'
+  default: '0'
 EJLootClass:
-  value: '-1'
+  default: '-1'
 EJLootSpec:
-  value: '0'
+  default: '0'
 EJRaidDifficulty:
-  value: '0'
+  default: '0'
 EmitterCombatRange:
-  value: '900.000000'
+  default: '900.000000'
 emphasizeMySpellEffects:
-  value: '1'
+  default: '1'
 enableAssetTracking:
-  value: '1'
+  default: '1'
 enableBGDL:
-  value: '1'
+  default: '1'
 EnableBlinkApplicationIcon:
-  value: '1'
+  default: '1'
 enableConnectToPhotoSharing:
-  value: '0'
+  default: '0'
 enableFloatingCombatText:
-  value: '0'
+  default: '0'
 enableMouseoverCast:
-  value: '0'
+  default: '0'
 enableMouseSpeed:
-  value: '0'
+  default: '0'
 enableMovePad:
-  value: '0'
+  default: '0'
 enableMultiActionBars:
-  value: '0'
+  default: '0'
 enablePetBattleFloatingCombatText_v2:
-  value: '1'
+  default: '1'
 enablePVPNotifyAFK:
-  value: '1'
+  default: '1'
 enableRuneSpentAnim:
-  value: '1'
+  default: '1'
 enableSourceLocationLookup:
-  value: '1'
+  default: '1'
 enableWowMouse:
-  value: '0'
+  default: '0'
 encounterTimelineShowSequenceCount:
-  value: '0'
+  default: '0'
 encounterWarningsDefaultMessageDuration:
-  value: '3500'
+  default: '3500'
 encounterWarningsEnabled:
-  value: '1'
+  default: '1'
 encounterWarningsHideIfNotTargetingPlayer:
-  value: '0'
+  default: '0'
 encounterWarningsLevel:
-  value: '0'
+  default: '0'
 engineSurvey:
-  value: '0'
+  default: '0'
 engineSurveyPatch:
-  value: '0'
+  default: '0'
 entityLodDist:
-  value: '10'
+  default: '10'
 entityLodOffset:
-  value: '10'
+  default: '10'
 entityShadowFadeScale:
-  value: '25'
+  default: '25'
 equipmentManager:
-  value: '1'
+  default: '1'
 ErrorFilter:
-  value: all
+  default: all
 ErrorLevelMax:
-  value: '3'
+  default: '3'
 ErrorLevelMin:
-  value: '2'
+  default: '2'
 Errors:
-  value: '0'
+  default: '0'
 excludedCensorSources:
-  value: '1'
+  default: '1'
 ExclusiveWindowMode:
-  value: '0'
+  default: '0'
 expandBagBar:
-  value: '1'
+  default: '1'
 externalDefensivesEnabled:
-  value: '0'
+  default: '0'
 farclip:
-  value: '2112'
+  default: '2112'
 ffxAntiAliasingMode:
-  value: '4'
+  default: '4'
 ffxDeath:
-  value: '1'
+  default: '1'
 ffxGlow:
-  value: '1'
+  default: '1'
 ffxLingeringVenari:
-  value: '1'
+  default: '1'
 ffxNether:
-  value: '1'
+  default: '1'
 ffxVenari:
-  value: '1'
+  default: '1'
 findYourselfAnywhere:
-  value: '0'
+  default: '0'
 findYourselfAnywhereOnlyInCombat:
-  value: '0'
+  default: '0'
 findYourselfInBG:
-  value: '1'
+  default: '1'
 findYourselfInBGOnlyInCombat:
-  value: '0'
+  default: '0'
 findYourselfInRaid:
-  value: '1'
+  default: '1'
 findYourselfInRaidOnlyInCombat:
-  value: '1'
+  default: '1'
 findYourselfMode:
-  value: '-1'
+  default: '-1'
 findYourselfModeCircle:
-  value: '0'
+  default: '0'
 findYourselfModeIcon:
-  value: '0'
+  default: '0'
 findYourselfModeOutline:
-  value: '0'
+  default: '0'
 flaggedTutorials:
-  value: ''
+  default: ''
 flashErrorMessageRepeats:
-  value: '1'
+  default: '1'
 flightAngleLookAhead:
-  value: '0'
+  default: '0'
 floatingCombatTextAuraFade_v2:
-  value: '0'
+  default: '0'
 floatingCombatTextAuras_v2:
-  value: '0'
+  default: '0'
 floatingCombatTextCombatDamage_v2:
-  value: '1'
+  default: '1'
 floatingCombatTextCombatDamageAllAutos_v2:
-  value: '1'
+  default: '1'
 floatingCombatTextCombatDamageDirectionalOffset_v2:
-  value: '1.000000'
+  default: '1.000000'
 floatingCombatTextCombatDamageDirectionalScale_v2:
-  value: '0.000000'
+  default: '0.000000'
 floatingCombatTextCombatHealing_v2:
-  value: '1'
+  default: '1'
 floatingCombatTextCombatHealingAbsorbSelf_v2:
-  value: '1'
+  default: '1'
 floatingCombatTextCombatHealingAbsorbTarget_v2:
-  value: '1'
+  default: '1'
 floatingCombatTextCombatLogPeriodicSpells_v2:
-  value: '1'
+  default: '1'
 floatingCombatTextCombatState_v2:
-  value: '0'
+  default: '0'
 floatingCombatTextComboPoints_v2:
-  value: '0'
+  default: '0'
 floatingCombatTextDamageReduction_v2:
-  value: '0'
+  default: '0'
 floatingCombatTextDodgeParryMiss_v2:
-  value: '0'
+  default: '0'
 floatingCombatTextEnergyGains_v2:
-  value: '0'
+  default: '0'
 floatingCombatTextFloatMode_v2:
-  value: '1'
+  default: '1'
 floatingCombatTextFriendlyHealers_v2:
-  value: '0'
+  default: '0'
 floatingCombatTextHonorGains_v2:
-  value: '0'
+  default: '0'
 floatingCombatTextLowManaHealth_v2:
-  value: '1'
+  default: '1'
 floatingCombatTextPeriodicEnergyGains_v2:
-  value: '0'
+  default: '0'
 floatingCombatTextPetMeleeDamage_v2:
-  value: '1'
+  default: '1'
 floatingCombatTextPetSpellDamage_v2:
-  value: '1'
+  default: '1'
 floatingCombatTextReactives_v2:
-  value: '1'
+  default: '1'
 floatingCombatTextRepChanges_v2:
-  value: '0'
+  default: '0'
 FootstepSounds:
-  value: '1'
+  default: '1'
 forceClusteredShading:
-  value: '0'
+  default: '0'
 forceEnglishNames:
-  value: '0'
+  default: '0'
 ForceGenerateSlug:
-  value: '0'
+  default: '0'
 forceLODCheck:
-  value: '0'
+  default: '0'
 ForceResolutionDefaultToMaxSize:
-  value: '0'
+  default: '0'
 FrameBufferCacheForceNoHeaps:
-  value: '0'
+  default: '0'
 frameScriptFunctionInheritanceWarningMode:
-  value: '0'
+  default: '0'
 friendInvitesCollapsed:
-  value: '0'
+  default: '0'
 fstack_enabled:
-  value: '0'
+  default: '0'
 fstack_preferParentKeys:
-  value: '0'
+  default: '0'
 fstack_showanchors:
-  value: '1'
+  default: '1'
 fstack_showhidden:
-  value: '0'
+  default: '0'
 fstack_showhighlight:
-  value: '1'
+  default: '1'
 fstack_showRaisedFrameLevels:
-  value: '0'
+  default: '0'
 fstack_showregions:
-  value: '1'
+  default: '1'
 GameDataVisualizer:
-  value: '0'
+  default: '0'
 GamePadAnalogMovement:
-  value: '0'
+  default: '0'
 GamePadCameraLookMaxPitch:
-  value: '0'
+  default: '0'
 GamePadCameraLookMaxYaw:
-  value: '0'
+  default: '0'
 GamePadCameraPitchSpeed:
-  value: '1'
+  default: '1'
 GamePadCameraYawSpeed:
-  value: '1'
+  default: '1'
 GamePadCursorAutoDisableJump:
-  value: '1'
+  default: '1'
 GamePadCursorAutoDisableSticks:
-  value: '2'
+  default: '2'
 GamePadCursorAutoEnable:
-  value: '1'
+  default: '1'
 GamePadCursorCenteredEmulation:
-  value: '1'
+  default: '1'
 GamePadCursorCentering:
-  value: '0'
+  default: '0'
 GamePadCursorForTargeting:
-  value: '1'
+  default: '1'
 GamePadCursorLeftClick:
-  value: PADRTRIGGER
+  default: PADRTRIGGER
 GamePadCursorOnLogin:
-  value: '1'
+  default: '1'
 GamePadCursorPushCamera:
-  value: '1'
+  default: '1'
 GamePadCursorRightClick:
-  value: PADRSHOULDER
+  default: PADRSHOULDER
 GamePadCursorSpeedAccel:
-  value: '2'
+  default: '2'
 GamePadCursorSpeedMax:
-  value: '1'
+  default: '1'
 GamePadCursorSpeedStart:
-  value: '0.1'
+  default: '0.1'
 GamePadEmulateAlt:
-  value: none
+  default: none
 GamePadEmulateCtrl:
-  value: PADLSHOULDER
+  default: PADLSHOULDER
 GamePadEmulateShift:
-  value: PADLTRIGGER
+  default: PADLTRIGGER
 GamePadEmulateTapWindowMs:
-  value: '350'
+  default: '350'
 GamePadEnable:
-  value: '0'
+  default: '0'
 GamePadFaceMovementMaxAngle:
-  value: '0'
+  default: '0'
 GamePadFaceMovementMaxAngleCombat:
-  value: '180'
+  default: '180'
 GamePadFactionColor:
-  value: '1'
+  default: '1'
 GamePadOverlapMouseMs:
-  value: '2000'
+  default: '2000'
 GamePadRunThreshold:
-  value: '0.5'
+  default: '0.5'
 GamePadSingleActiveID:
-  value: '0'
+  default: '0'
 GamePadStickAxisButtons:
-  value: '0'
+  default: '0'
 GamePadTankTurnSpeed:
-  value: '0'
+  default: '0'
 GamePadTouchCursorEnable:
-  value: '1'
+  default: '1'
 GamePadTurnWithCamera:
-  value: '1'
+  default: '1'
 GamePadVibrationStrength:
-  value: '1'
+  default: '1'
 GameplayContext:
-  value: '0'
+  default: '0'
 gameTip:
-  value: '0'
+  default: '0'
 Gamma:
-  value: '1.000000'
+  default: '1.000000'
 graphicsEnvironmentDetail:
-  value: '3'
+  default: '3'
 graphicsGroundClutter:
-  value: '3'
+  default: '3'
 graphicsLiquidDetail:
-  value: '1'
+  default: '1'
 graphicsParticleDensity:
-  value: '2'
+  default: '2'
 graphicsProjectedTextures:
-  value: '1'
+  default: '1'
 graphicsQuality:
-  value: '3'
+  default: '3'
 graphicsShadowQuality:
-  value: '1'
+  default: '1'
 graphicsSSAO:
-  value: '1'
+  default: '1'
 graphicsSunshafts:
-  value: '0'
+  default: '0'
 graphicsTextureResolution:
-  value: '1'
+  default: '1'
 groundEffectAnimation:
-  value: '0'
+  default: '0'
 groundEffectDensity:
-  value: '16'
+  default: '16'
 groundEffectDist:
-  value: '70'
+  default: '70'
 groundEffectFade:
-  value: '70'
+  default: '70'
 guildMemberNotify:
-  value: '1'
+  default: '1'
 guildNewsFilter:
-  value: '0'
+  default: '0'
 guildRewardsCategory:
-  value: '0'
+  default: '0'
 guildRewardsUsable:
-  value: '0'
+  default: '0'
 guildShowOffline:
-  value: '1'
+  default: '1'
 GxAdapter:
-  value: ''
+  default: ''
 GxAFRDevicesCount:
-  value: '0'
+  default: '0'
 GxAllowCachelessShaderMode:
-  value: '0'
+  default: '0'
 GxApi:
-  value: auto
+  default: auto
 GxCompatAllowSM6:
-  value: '1'
+  default: '1'
 GxCompatAsyncComputeQueue:
-  value: '1'
+  default: '1'
 GxCompatAsyncShaderCompilation:
-  value: '1'
+  default: '1'
 GxCompatCommandListMultiThreading:
-  value: '1'
+  default: '1'
 GxCompatCopyQueue:
-  value: '1'
+  default: '1'
 GxCompatOptionalGpuFeatures:
-  value: '1'
+  default: '1'
 GxCompatWorkSubmitOptimizations:
-  value: '1'
+  default: '1'
 GxDebugBreakLevel:
-  value: '1'
+  default: '1'
 GxDebugLevel:
-  value: '0'
+  default: '0'
 GxFullscreenResolution:
-  value: auto
+  default: auto
 GxMaxFrameLatency:
-  value: '3'
+  default: '3'
 GxMaximize:
-  value: '1'
+  default: '1'
 GxMonitor:
-  value: '0'
+  default: '0'
 gxMTAlphaM2:
-  value: '1'
+  default: '1'
 gxMTAlphaPass:
-  value: '1'
+  default: '1'
 gxMTBeginDraw:
-  value: '1'
+  default: '1'
 gxMTDecals:
-  value: '0'
+  default: '0'
 gxMTDisable:
-  value: '0'
+  default: '0'
 gxMTLightShafts:
-  value: '1'
+  default: '1'
 gxMTMisc:
-  value: '1'
+  default: '1'
 gxMTOpaqueM2:
-  value: '1'
+  default: '1'
 gxMTOpaqueM2NoReflect:
-  value: '1'
+  default: '1'
 gxMTOpaqueWMO:
-  value: '1'
+  default: '1'
 gxMTOutlines:
-  value: '1'
+  default: '1'
 gxMTPrepass:
-  value: '1'
+  default: '1'
 gxMTRefraction:
-  value: '1'
+  default: '1'
 gxMTShadow:
-  value: '1'
+  default: '1'
 gxMTTerrain:
-  value: '1'
+  default: '1'
 gxMTTriggerOnBeginDrawComplete:
-  value: '1'
+  default: '1'
 gxMTVolFog:
-  value: '1'
+  default: '1'
 GxNewResolution:
-  value: '0x0'
+  default: '0x0'
 GxPrismEnabled:
-  value: '1'
+  default: '1'
 GxSlowShaderWarnThreshold:
-  value: '30000'
+  default: '30000'
 GxWindowedResolution:
-  value: auto
+  default: auto
 hardcoreDeathAlertType:
-  value: '0'
+  default: '0'
 hardcoreDeathChatType:
-  value: '0'
+  default: '0'
 hardTrackedQuests:
-  value: ''
+  default: ''
 HardwareCursor:
-  value: '1'
+  default: '1'
 hasDeclinedHighResTextures:
-  value: '0'
+  default: '0'
 HealHandler:
-  value: '0'
+  default: '0'
 heirloomCollectedFilters:
-  value: '0'
+  default: '0'
 heirloomSourceFilters:
-  value: '0'
+  default: '0'
 hideFastLoginLoadingScreen:
-  value: '0'
+  default: '0'
 horizonClip:
-  value: '1600'
+  default: '1600'
 horizonStart:
-  value: '777'
+  default: '777'
 HotfixEventLog:
-  value: '0'
+  default: '0'
 hotReloadModels:
-  value: '1'
+  default: '1'
 houseExterior_Hide_Decor:
-  value: '1'
+  default: '1'
 housingDecorFreePlaceEnabled:
-  value: '0'
+  default: '0'
 housingDecorGridSnapEnabled:
-  value: '0'
+  default: '0'
 housingDecorGridVisible:
-  value: '1'
+  default: '1'
 housingDecorLightRadiusIndicatorsEnabled:
-  value: '1'
+  default: '1'
 housingExpertGizmos_Scale_FrameOffset:
-  value: '0.500000'
+  default: '0.500000'
 housingExpertGizmos_Scale_Snap:
-  value: '0.100000'
+  default: '0.100000'
 housingExpertGizmos_SnapOnHold:
-  value: '1'
+  default: '1'
 housingLayout_Camera_DefaultDistance:
-  value: '50.000000'
+  default: '50.000000'
 housingLayout_Camera_DragFriction:
-  value: '8.000000'
+  default: '8.000000'
 housingLayout_Camera_DragMomentum:
-  value: '0.300000'
+  default: '0.300000'
 housingLayout_Camera_MaxDistance:
-  value: '80.000000'
+  default: '80.000000'
 housingLayout_Camera_MaxDistanceIncr:
-  value: '5.000000'
+  default: '5.000000'
 housingLayout_Camera_MinDistance:
-  value: '30.000000'
+  default: '30.000000'
 housingLayout_Camera_Smoothness:
-  value: '15.000000'
+  default: '15.000000'
 housingLayout_Camera_Speed:
-  value: '15.000000'
+  default: '15.000000'
 housingOtherDecorLightRadiusIndicatorType:
-  value: '1'
+  default: '1'
 housingSelectedDecorLightRadiusIndicatorType:
-  value: '1'
+  default: '1'
 housingStoragePanelCollapsed:
-  value: '0'
+  default: '0'
 housingStoragePanelHeight:
-  value: '615.000000'
+  default: '615.000000'
 housingStoragePanelWidth:
-  value: '530.000000'
+  default: '530.000000'
 housingTutorialsEnabled:
-  value: '1'
+  default: '1'
 hwDetect:
-  value: '1'
+  default: '1'
 imageSharingPublishCooldown:
-  value: '5000'
+  default: '5000'
 ImpactModelCollisionMelee:
-  value: '1'
+  default: '1'
 ImpactModelCollisionMissile:
-  value: '1'
+  default: '1'
 ImpactModelCollisionRanged:
-  value: '1'
+  default: '1'
 incompleteQuestPriorityThresholdDelta:
-  value: '135'
+  default: '135'
 initialRealmListTimeout:
-  value: '60'
+  default: '60'
 instantQuestText:
-  value: '0'
+  default: '0'
 interactOnLeftClick:
-  value: '0'
+  default: '0'
 interactQuestItems:
-  value: '0'
+  default: '0'
 InvalidateDeactivatedHandles:
-  value: '1'
+  default: '1'
 KioskCanSessionExpire:
-  value: '1'
+  default: '1'
 KioskCharacterTemplateSet:
-  value: '0'
+  default: '0'
 KioskLobbyKickSeconds:
-  value: '30'
+  default: '30'
 lastAddonVersion:
-  value: '0'
+  default: '0'
 lastCharacterGuid:
-  value: (null)
+  default: (null)
 lastCharacterIndex:
-  value: '0'
+  default: '0'
 lastGarrisonMissionTutorial:
-  value: '0'
+  default: '0'
 lastLaunchedExternalEventURL:
-  value: ''
+  default: ''
 lastSelectedClubId:
-  value: '0'
+  default: '0'
 lastTalkedToGM:
-  value: ''
+  default: ''
 lastTransmogCustomSetIDNoSpec:
-  value: ''
+  default: ''
 lastTransmogCustomSetIDSpec1:
-  value: ''
+  default: ''
 lastTransmogCustomSetIDSpec2:
-  value: ''
+  default: ''
 lastTransmogCustomSetIDSpec3:
-  value: ''
+  default: ''
 lastTransmogCustomSetIDSpec4:
-  value: ''
+  default: ''
 lastTransmogOutfitIDNoSpec:
-  value: ''
+  default: ''
 lastVoidStorageTutorial:
-  value: '0'
+  default: '0'
 latestTransmogSetSource:
-  value: '0'
+  default: '0'
 launchAgent:
-  value: '1'
+  default: '1'
 lfdCollapsedHeaders:
-  value: ''
+  default: ''
 lfdSelectedDungeons:
-  value: ''
+  default: ''
 lfgListAdvancedFilterMinRating:
-  value: '0'
+  default: '0'
 lfgListAdvancedFilterRemovedActivities:
-  value: ''
+  default: ''
 lfgListAdvancedFilters:
-  value: '0'
+  default: '0'
 lfgListAdvancedFiltersVersion:
-  value: '0'
+  default: '0'
 lfgListSearchLanguages:
-  value: '0'
+  default: '0'
 lfgNewPlayerFriendly:
-  value: '0'
+  default: '0'
 lfgSelectedRoles:
-  value: '0'
+  default: '0'
 loadDeprecationFallbacks:
-  value: '1'
+  default: '1'
 locale:
-  value: ''
+  default: ''
 locateViewerMaxJobs:
-  value: '32'
+  default: '32'
 lockActionBars:
-  value: '1'
+  default: '1'
 lodObjectCullDist:
-  value: '30'
+  default: '30'
 lodObjectCullSize:
-  value: '15'
+  default: '15'
 lodObjectFadeScale:
-  value: '100'
+  default: '100'
 lodObjectMinSize:
-  value: '20'
+  default: '20'
 lodObjectSizeScale:
-  value: '1'
+  default: '1'
 lootUnderMouse:
-  value: '0'
+  default: '0'
 lossOfControl:
-  value: '1'
+  default: '1'
 lossOfControlDisarm:
-  value: '2'
+  default: '2'
 lossOfControlFull:
-  value: '2'
+  default: '2'
 lossOfControlInterrupt:
-  value: '2'
+  default: '2'
 lossOfControlRoot:
-  value: '2'
+  default: '2'
 lossOfControlSilence:
-  value: '2'
+  default: '2'
 LowLatencyMinInterval:
-  value: '0'
+  default: '0'
 LowLatencyMode:
-  value: '0'
+  default: '0'
 M2ForceAdditiveParticleSort:
-  value: '0'
+  default: '0'
 M2UseInstancing:
-  value: '1'
+  default: '1'
 M2UseThreads:
-  value: '1'
+  default: '1'
 MacDisableOsShortcuts:
-  value: '0'
+  default: '0'
 MacUseCommandLeftClickAsRightClick:
-  value: '1'
+  default: '1'
 MacWindowToggleHotkey:
-  value: '1'
+  default: '1'
 mapFade:
-  value: '1'
+  default: '1'
 MaxCharacterComponentLoadStartsPerFrame:
-  value: '4'
+  default: '4'
 maxFPS:
-  value: '120'
+  default: '120'
 maxFPSBk:
-  value: '30'
+  default: '30'
 maxFPSLoading:
-  value: '10'
+  default: '10'
 maxLightDist:
-  value: '2048'
+  default: '2048'
 MaxObservedPetBattles:
-  value: '4'
+  default: '4'
 miniCommunitiesFrame:
-  value: '0'
+  default: '0'
 minimapInsideZoom:
-  value: '0'
+  default: '0'
 minimapPortalMax:
-  value: '99'
+  default: '99'
 minimapShapeshiftTracking:
-  value: ''
+  default: ''
 minimapTrackedInfov2:
-  value: '491528'
+  default: '491528'
 minimapZoom:
-  value: '0'
+  default: '0'
 minimumAutomaticUiScale:
-  value: '0.900000'
+  default: '0.900000'
 miniWorldMap:
-  value: '1'
+  default: '1'
 missingTransmogSourceInItemTooltips:
-  value: '0'
+  default: '0'
 motionSicknessFocalCircle:
-  value: '0'
+  default: '0'
 motionSicknessLandscapeDarkening:
-  value: '0'
+  default: '0'
 mountJournalGeneralFilters:
-  value: '0'
+  default: '0'
 mountJournalShowPlayer:
-  value: '0'
+  default: '0'
 mountJournalSourcesFilter:
-  value: '0'
+  default: '0'
 mountJournalTypeFilter:
-  value: '0'
+  default: '0'
 mouseAcceleration:
-  value: '-1'
+  default: '-1'
 MouseHiddenInRelativeMode:
-  value: '1'
+  default: '1'
 mouseInvertPitch:
-  value: '0'
+  default: '0'
 mouseInvertYaw:
-  value: '0'
+  default: '0'
 mouseSpeed:
-  value: '1.1'
+  default: '1.1'
 MoveHistoryEventLog:
-  value: '0'
+  default: '0'
 movePadInPressAndHoldMode:
-  value: '0'
+  default: '0'
 movePadLocked:
-  value: '1'
+  default: '1'
 movieSubtitle:
-  value: '1'
+  default: '1'
 movieSubtitleBackground:
-  value: '1'
+  default: '1'
 movieSubtitleBackgroundAlpha:
-  value: '70'
+  default: '70'
 MSAAAlphaTest:
-  value: '1'
+  default: '1'
 MSAAQuality:
-  value: '0'
+  default: '0'
 nameplateAuraScale:
-  value: '1.000000'
+  default: '1.000000'
 nameplateCastBarDisplay:
-  value: "\x02B"
+  default: "\x02B"
 nameplateCheckDistanceForTarget:
-  value: '1'
+  default: '1'
 nameplateDebuffPadding:
-  value: '0'
+  default: '0'
 nameplateEnemyNpcAuraDisplay:
-  value: "\x02"
+  default: "\x02"
 nameplateEnemyPlayerAuraDisplay:
-  value: "\x02"
+  default: "\x02"
 nameplateForceShowUnitName:
-  value: '1'
+  default: '1'
 nameplateFriendlyPlayerAuraDisplay:
-  value: "\x02"
+  default: "\x02"
 nameplateGameObjectMaxDistance:
-  value: '30.000000'
+  default: '30.000000'
 nameplateInfoDisplay:
-  value: "\x02"
+  default: "\x02"
 nameplateMaxAlpha:
-  value: '1.000000'
+  default: '1.000000'
 nameplateMaxAlphaDistance:
-  value: '40.000000'
+  default: '40.000000'
 nameplateMaxDistance:
-  value: '41.000000'
+  default: '41.000000'
 nameplateMaxScale:
-  value: '1.000000'
+  default: '1.000000'
 nameplateMaxScaleDistance:
-  value: '10.000000'
+  default: '10.000000'
 nameplateMinAlpha:
-  value: '1.000000'
+  default: '1.000000'
 nameplateMinAlphaDistance:
-  value: '10.000000'
+  default: '10.000000'
 nameplateMinScale:
-  value: '1.000000'
+  default: '1.000000'
 nameplateMinScaleDistance:
-  value: '10.000000'
+  default: '10.000000'
 nameplateNotSelectedAlpha:
-  value: '0.500000'
+  default: '0.500000'
 nameplateOccludedAlphaMult:
-  value: '1.000000'
+  default: '1.000000'
 nameplateOtherAtBase:
-  value: '0'
+  default: '0'
 nameplateOverlapH:
-  value: '0.800000'
+  default: '0.800000'
 nameplateOverlapV:
-  value: '1.100000'
+  default: '1.100000'
 nameplatePlayerMaxDistance:
-  value: '60.000000'
+  default: '60.000000'
 nameplatePlayRemovalAnimation:
-  value: '0'
+  default: '0'
 nameplateSelectedAlpha:
-  value: '1.000000'
+  default: '1.000000'
 nameplateSelectedScale:
-  value: '1.000000'
+  default: '1.000000'
 nameplateShowAll:
-  value: '1'
+  default: '1'
 nameplateShowAllPersonalAuras:
-  value: '1'
+  default: '1'
 nameplateShowCastBars:
-  value: '1'
+  default: '1'
 nameplateShowClassColor:
-  value: '0'
+  default: '0'
 nameplateShowDebuffsOnFriendly:
-  value: '1'
+  default: '1'
 nameplateShowEnemies:
-  value: '0'
+  default: '0'
 nameplateShowEnemyGuardians:
-  value: '0'
+  default: '0'
 nameplateShowEnemyMinions:
-  value: '0'
+  default: '0'
 nameplateShowEnemyMinus:
-  value: '0'
+  default: '0'
 nameplateShowEnemyPets:
-  value: '0'
+  default: '0'
 nameplateShowEnemyTotems:
-  value: '0'
+  default: '0'
 nameplateShowFriendlyClassColor:
-  value: '0'
+  default: '0'
 nameplateShowFriendlyNpcs:
-  value: '0'
+  default: '0'
 nameplateShowFriendlyPlayerGuardians:
-  value: '0'
+  default: '0'
 nameplateShowFriendlyPlayerMinions:
-  value: '0'
+  default: '0'
 nameplateShowFriendlyPlayerPets:
-  value: '0'
+  default: '0'
 nameplateShowFriendlyPlayers:
-  value: '0'
+  default: '0'
 nameplateShowFriendlyPlayerTotems:
-  value: '0'
+  default: '0'
 nameplateShowOffscreen:
-  value: '0'
+  default: '0'
 nameplateShowOnlyNameForFriendlyPlayerUnits:
-  value: '0'
+  default: '0'
 nameplateShowSelf:
-  value: '0'
+  default: '0'
 nameplateSimplifiedScale:
-  value: '0.300000'
+  default: '0.300000'
 nameplateSimplifiedTypes:
-  value: "\x02"
+  default: "\x02"
 nameplateSize:
-  value: '2'
+  default: '2'
 nameplateStackingTypes:
-  value: "\x02"
+  default: "\x02"
 nameplateStyle:
-  value: '6'
+  default: '6'
 nameplateTargetBehindMaxDistance:
-  value: '0.100000'
+  default: '0.100000'
 nameplateTargetRadialPosition:
-  value: '0'
+  default: '0'
 nameplateThreatDisplay:
-  value: "\x02"
+  default: "\x02"
 nameplateUseClassColorForFriendlyPlayerUnitNames:
-  value: '0'
+  default: '0'
 nearclip:
-  value: '0.2'
+  default: '0.2'
 newMythicPlusSeason:
-  value: '1'
+  default: '1'
 noBuffDebuffFilterOnTarget:
-  value: '1'
+  default: '1'
 NonEmitterCombatRange:
-  value: '6400.000000'
+  default: '6400.000000'
 NotchedDisplayMode:
-  value: '1'
+  default: '1'
 notifiedOfNewMail:
-  value: '0'
+  default: '0'
 ObjectSelectionCircle:
-  value: '1'
+  default: '1'
 occlusionMaxJobs:
-  value: '5'
+  default: '5'
 optOutIngameSurveys:
-  value: '0'
+  default: '0'
 orderHallMissionTutorial:
-  value: '0'
+  default: '0'
 otherRolesAzeriteEssencesHidden:
-  value: '0'
+  default: '0'
 outdoorMinAltitudeDistance:
-  value: '20.000000'
+  default: '20.000000'
 Outline:
-  value: '2'
+  default: '2'
 outlineMouseOverFadeDuration:
-  value: '0.9'
+  default: '0.9'
 outlineSelectionFadeDuration:
-  value: '0.32'
+  default: '0.32'
 outlineSoftInteractFadeDuration:
-  value: '0.3'
+  default: '0.3'
 overrideArchive:
-  value: '0'
+  default: '0'
 overrideScreenFlash:
-  value: '0'
+  default: '0'
 particleDensity:
-  value: '33'
+  default: '33'
 particleMTDensity:
-  value: '33'
+  default: '33'
 partyBackgroundOpacity:
-  value: '0.500000'
+  default: '0.500000'
 partyInvitesCollapsed_Glue:
-  value: '0'
+  default: '0'
 Pathing:
-  value: '0'
+  default: '0'
 pathSmoothing:
-  value: '1'
+  default: '1'
 pendingInviteInfoShown:
-  value: '0'
+  default: '0'
 persistMoveLogOnTransfer:
-  value: '0'
+  default: '0'
 petJournalFilters:
-  value: '0'
+  default: '0'
 petJournalFilterVersion:
-  value: '0'
+  default: '0'
 petJournalSort:
-  value: '0'
+  default: '0'
 petJournalSourceFilters:
-  value: '0'
+  default: '0'
 petJournalTab:
-  value: '1'
+  default: '1'
 petJournalTypeFilters:
-  value: '0'
+  default: '0'
 petStatCategoriesCollapsed:
-  value: '0'
+  default: '0'
 petStatCategoryOrder:
-  value: ''
+  default: ''
 PhaseHistory:
-  value: '0'
+  default: '0'
 PlayerSpawnTracking:
-  value: '0'
+  default: '0'
 playerStatLeftDropdown:
-  value: ''
+  default: ''
 playerStatRightDropdown:
-  value: ''
+  default: ''
 playIntroMovie:
-  value: '0'
+  default: '0'
 plunderstormRealm:
-  value: '0'
+  default: '0'
 POIShiftComplete:
-  value: '0.3'
+  default: '0.3'
 portal:
-  value: ''
+  default: ''
 PreemptiveCastEnable:
-  value: '0'
+  default: '0'
 preloadLoadingDistObject:
-  value: '512'
+  default: '512'
 preloadLoadingDistTerrain:
-  value: '1024'
+  default: '1024'
 preloadPlayerModels:
-  value: '1'
+  default: '1'
 preloadStreamingDistObject:
-  value: '64'
+  default: '64'
 preloadStreamingDistTerrain:
-  value: '256'
+  default: '256'
 PreventOsIdleSleep:
-  value: '0'
+  default: '0'
 previewTalentsOption:
-  value: '0'
+  default: '0'
 primaryProfessionsFilter:
-  value: '1'
+  default: '1'
 ProcDebugEventLog:
-  value: '0'
+  default: '0'
 profanityFilter:
-  value: '1'
+  default: '1'
 projectedTextures:
-  value: '0'
+  default: '0'
 PushToTalkSound:
-  value: '0'
+  default: '0'
 pvpLocklistMaps0:
-  value: '0'
+  default: '0'
 pvpLocklistMaps1:
-  value: '0'
+  default: '0'
 pvpSelectedRoles:
-  value: '0'
+  default: '0'
 QuestEventLog:
-  value: '0'
+  default: '0'
 questLogOpen:
-  value: '1'
+  default: '1'
 questPOILocalStory:
-  value: '1'
+  default: '1'
 questPOIWQ:
-  value: '1'
+  default: '1'
 questTextContrast:
-  value: '0'
+  default: '0'
 RAIDclusteredShading:
-  value: '1'
+  default: '1'
 RAIDcomponentTextureLevel:
-  value: '0'
+  default: '0'
 RAIDdoodadLodScale:
-  value: '100'
+  default: '100'
 RAIDentityLodDist:
-  value: '10'
+  default: '10'
 RAIDentityShadowFadeScale:
-  value: '25'
+  default: '25'
 RAIDfarclip:
-  value: '2112'
+  default: '2112'
 raidFramesCenterBigDefensive:
-  value: '0'
+  default: '0'
 raidFramesDispelIndicatorOverlay:
-  value: '0'
+  default: '0'
 raidFramesDispelIndicatorType:
-  value: '0'
+  default: '0'
 raidFramesDisplayAggroHighlight:
-  value: '1'
+  default: '1'
 raidFramesDisplayClassColor:
-  value: '0'
+  default: '0'
 raidFramesDisplayDebuffs:
-  value: '1'
+  default: '1'
 raidFramesDisplayIncomingHeals:
-  value: '1'
+  default: '1'
 raidFramesDisplayLargerRoleSpecificDebuffs:
-  value: '0'
+  default: '0'
 raidFramesDisplayOnlyDispellableDebuffs:
-  value: '0'
+  default: '0'
 raidFramesDisplayOnlyHealerPowerBars:
-  value: '0'
+  default: '0'
 raidFramesDisplayPowerBars:
-  value: '0'
+  default: '0'
 raidFramesHealthBarColor:
-  value: FF2B9305
+  default: FF2B9305
 raidFramesHealthBarColorBG:
-  value: FF141414
+  default: FF141414
 raidFramesHealthText:
-  value: none
+  default: none
 raidGraphicsEnvironmentDetail:
-  value: '3'
+  default: '3'
 raidGraphicsGroundClutter:
-  value: '3'
+  default: '3'
 raidGraphicsLiquidDetail:
-  value: '1'
+  default: '1'
 raidGraphicsParticleDensity:
-  value: '2'
+  default: '2'
 raidGraphicsProjectedTextures:
-  value: '1'
+  default: '1'
 RAIDgraphicsQuality:
-  value: '3'
+  default: '3'
 raidGraphicsShadowQuality:
-  value: '1'
+  default: '1'
 raidGraphicsSSAO:
-  value: '1'
+  default: '1'
 raidGraphicsSunshafts:
-  value: '0'
+  default: '0'
 raidGraphicsTextureResolution:
-  value: '1'
+  default: '1'
 RAIDgroundEffectAnimation:
-  value: '0'
+  default: '0'
 RAIDgroundEffectDensity:
-  value: '16'
+  default: '16'
 RAIDgroundEffectDist:
-  value: '70'
+  default: '70'
 RAIDgroundEffectFade:
-  value: '70'
+  default: '70'
 RAIDhorizonClip:
-  value: '1600'
+  default: '1600'
 RAIDhorizonStart:
-  value: '777'
+  default: '777'
 RAIDlodObjectCullDist:
-  value: '30'
+  default: '30'
 RAIDlodObjectCullSize:
-  value: '15'
+  default: '15'
 RAIDlodObjectFadeScale:
-  value: '100'
+  default: '100'
 RAIDlodObjectMinSize:
-  value: '20'
+  default: '20'
 raidOptionDisplayMainTankAndAssist:
-  value: '1'
+  default: '1'
 raidOptionDisplayPets:
-  value: '0'
+  default: '0'
 raidOptionIsShown:
-  value: '1'
+  default: '1'
 RAIDparticleDensity:
-  value: '33'
+  default: '33'
 RAIDparticleMTDensity:
-  value: '33'
+  default: '33'
 RAIDprojectedTextures:
-  value: '0'
+  default: '0'
 RAIDreflectionMode:
-  value: '3'
+  default: '3'
 RAIDrippleDetail:
-  value: '2'
+  default: '2'
 RAIDsettingsEnabled:
-  value: '0'
+  default: '0'
 RAIDshadowBlendCascades:
-  value: '0'
+  default: '0'
 RAIDshadowMode:
-  value: '0'
+  default: '0'
 RAIDshadowNumCascades:
-  value: '1'
+  default: '1'
 RAIDshadowRt:
-  value: '0'
+  default: '0'
 RAIDshadowSoft:
-  value: '0'
+  default: '0'
 RAIDshadowTextureSize:
-  value: '1024'
+  default: '1024'
 RAIDSSAO:
-  value: '0'
+  default: '0'
 RAIDsunShafts:
-  value: '0'
+  default: '0'
 RAIDterrainLodDist:
-  value: '500'
+  default: '500'
 RAIDTerrainLodDiv:
-  value: '768'
+  default: '768'
 RAIDterrainMipLevel:
-  value: '0'
+  default: '0'
 RAIDWaterDetail:
-  value: '0'
+  default: '0'
 RAIDweatherDensity:
-  value: '3'
+  default: '3'
 RAIDwmoLodDist:
-  value: '400'
+  default: '400'
 RAIDworldBaseMip:
-  value: '1'
+  default: '1'
 reflectionDownscale:
-  value: '0'
+  default: '0'
 reflectionMode:
-  value: '3'
+  default: '3'
 reloadUIOnAspectChange:
-  value: '0'
+  default: '0'
 remoteTextToSpeech:
-  value: '0'
+  default: '0'
 remoteTextToSpeechVoice:
-  value: '1'
+  default: '1'
 removeChatDelay:
-  value: '0'
+  default: '0'
 RenderFormat:
-  value: '0'
+  default: '0'
 RenderScale:
-  value: '0.675000'
+  default: '0.675000'
 RenderScaleDowngradeBackgroundMinSize:
-  value: '720'
+  default: '720'
 RenderScaleDowngradeForegroundMinSize:
-  value: '1080'
+  default: '1080'
 ReplaceMyPlayerPortrait:
-  value: '0'
+  default: '0'
 ReplaceOtherPlayerPortraits:
-  value: '0'
+  default: '0'
 reputationsCollapsed:
-  value: ''
+  default: ''
 ResampleAlwaysSharpen:
-  value: '0'
+  default: '0'
 ResampleQuality:
-  value: '3'
+  default: '3'
 ResampleSharpness:
-  value: '0.2'
+  default: '0.2'
 ResizeConstraints:
-  value: '1'
+  default: '1'
 restrictCalendarInvites:
-  value: '1'
+  default: '1'
 rippleDetail:
-  value: '2'
+  default: '2'
 rotateMinimap:
-  value: '0'
+  default: '0'
 runeFadeTime:
-  value: '0.2'
+  default: '0.2'
 runeSpentFadeTime:
-  value: '0.1'
+  default: '0.1'
 runeSpentFlashTime:
-  value: '0.15'
+  default: '0.15'
 sceneOcclusionEnable:
-  value: '1'
+  default: '1'
 screenEdgeFlash:
-  value: '0'
+  default: '0'
 screenshotFormat:
-  value: jpeg
+  default: jpeg
 screenshotQuality:
-  value: '3'
+  default: '3'
 screenshotSizeOverride:
-  value: '0x0'
+  default: '0x0'
 scriptErrors:
-  value: '0'
+  default: '0'
 scriptProfile:
-  value: '0'
+  default: '0'
 scriptWarnings:
-  value: '0'
+  default: '0'
 secondaryProfessionsFilter:
-  value: '1'
+  default: '1'
 secureAbilityToggle:
-  value: '1'
+  default: '1'
 seenAsiaCharacterUpgradePopup:
-  value: '0'
+  default: '0'
 seenCharacterUpgradePopup:
-  value: '6'
+  default: '6'
 seenConfigurationWarnings:
-  value: '0'
+  default: '0'
 seenExpansionTrialPopup:
-  value: '6'
+  default: '6'
 seenRegionalChatDisabled:
-  value: '0'
+  default: '0'
 seenSoMNotification:
-  value: '0'
+  default: '0'
 serverAlert:
-  value: https://breaking-news.support.blizzard.com/service/wow-tbc-client/live/us/en-US
+  default: https://breaking-news.support.blizzard.com/service/wow-tbc-client/live/us/en-US
 ServerMessageEventLog:
-  value: '0'
+  default: '0'
 serviceTypeFilter:
-  value: '6'
+  default: '6'
 shadowBlendCascades:
-  value: '0'
+  default: '0'
 shadowMode:
-  value: '0'
+  default: '0'
 shadowNumCascades:
-  value: '1'
+  default: '1'
 shadowRt:
-  value: '0'
+  default: '0'
 shadowSoft:
-  value: '0'
+  default: '0'
 shadowTextureSize:
-  value: '1024'
+  default: '1024'
 ShakeStrengthCamera:
-  value: '1.000000'
+  default: '1.000000'
 ShakeStrengthUI:
-  value: '1.000000'
+  default: '1.000000'
 shipyardMissionTutorialAreaBuff:
-  value: '0'
+  default: '0'
 shipyardMissionTutorialBlockade:
-  value: '0'
+  default: '0'
 shipyardMissionTutorialFirst:
-  value: '0'
+  default: '0'
 showAllItemsInTransmog:
-  value: '0'
+  default: '0'
 ShowAllSpellRanks:
-  value: '0'
+  default: '0'
 showArenaEnemyCastbar:
-  value: '1'
+  default: '1'
 showArenaEnemyFrames:
-  value: '1'
+  default: '1'
 showArenaEnemyPets:
-  value: '1'
+  default: '1'
 showBattlefieldMinimap:
-  value: '0'
+  default: '0'
 showBosses:
-  value: '1'
+  default: '1'
 showBuilderFeedback:
-  value: '1'
+  default: '1'
 showCastableBuffs:
-  value: '0'
+  default: '0'
 showCustomSetDetails:
-  value: '1'
+  default: '1'
 showDelveEntrancesOnMap:
-  value: '1'
+  default: '1'
 showDispelDebuffs:
-  value: '0'
+  default: '0'
 showDungeonEntrancesOnMap:
-  value: '1'
+  default: '1'
 showDynamicBuffSize:
-  value: '1'
+  default: '1'
 showErrors:
-  value: '1'
+  default: '1'
 showfootprintparticles:
-  value: '1'
+  default: '1'
 showKeyring:
-  value: '0'
+  default: '0'
 showLoadingScreenTips:
-  value: '1'
+  default: '1'
 showLootSpam:
-  value: '1'
+  default: '1'
 showMaxLevelAnnouncements:
-  value: '1'
+  default: '1'
 showMinimapClock:
-  value: '1'
+  default: '1'
 showNewbieTips:
-  value: '1'
+  default: '1'
 showPartyBackground:
-  value: '0'
+  default: '0'
 showPartyPets:
-  value: '0'
+  default: '0'
 showPhotosensitivityWarning:
-  value: '-1'
+  default: '-1'
 ShowQuestObjectHighlightEffect:
-  value: '1'
+  default: '1'
 ShowQuestUnitCircles:
-  value: '1'
+  default: '1'
 showSpectatorTeamCircles:
-  value: '1'
+  default: '1'
 showSpenderFeedback:
-  value: '1'
+  default: '1'
 showTamers:
-  value: '1'
+  default: '1'
 showTamersWQ:
-  value: '1'
+  default: '1'
 showTargetCastbar:
-  value: '1'
+  default: '1'
 showTargetOfTarget:
-  value: '0'
+  default: '0'
 showTempMaxHealthLoss:
-  value: '1'
+  default: '1'
 showTimestamps:
-  value: none
+  default: none
 showToastBroadcast:
-  value: '0'
+  default: '0'
 showToastClubInvitation:
-  value: '1'
+  default: '1'
 showToastConversation:
-  value: '1'
+  default: '1'
 showToastFriendRequest:
-  value: '1'
+  default: '1'
 showToastOffline:
-  value: '1'
+  default: '1'
 showToastOnline:
-  value: '1'
+  default: '1'
 showToastWindow:
-  value: '0'
+  default: '0'
 showTokenFrame:
-  value: '0'
+  default: '0'
 showTutorials:
-  value: '1'
+  default: '1'
 showVKeyCastbar:
-  value: '1'
+  default: '1'
 showVKeyCastbarOnlyOnTarget:
-  value: '0'
+  default: '0'
 showVKeyCastbarSpellName:
-  value: '1'
+  default: '1'
 simd:
-  value: '-1'
+  default: '-1'
 SkyCloudLOD:
-  value: '0'
+  default: '0'
 SlugOpticalWeight:
-  value: '0'
+  default: '0'
 SlugSupersampling:
-  value: '1'
+  default: '1'
 smoothUnitPhasing:
-  value: '1'
+  default: '1'
 smoothUnitPhasingActorPurgatoryTimeMs:
-  value: '1500'
+  default: '1500'
 smoothUnitPhasingAliveTimeoutMs:
-  value: '3500'
+  default: '3500'
 smoothUnitPhasingDestroyedPurgatoryTimeMs:
-  value: '750'
+  default: '750'
 smoothUnitPhasingDistThreshold:
-  value: '0.25'
+  default: '0.25'
 smoothUnitPhasingEnableAlive:
-  value: '1'
+  default: '1'
 smoothUnitPhasingUnseenPurgatoryTimeMs:
-  value: '1000'
+  default: '1000'
 smoothUnitPhasingVehicleExtraTimeoutMs:
-  value: '1000'
+  default: '1000'
 SoftTargetEnemy:
-  value: '0'
+  default: '0'
 SoftTargetEnemyArc:
-  value: '2'
+  default: '2'
 SoftTargetEnemyRange:
-  value: '45.000000'
+  default: '45.000000'
 SoftTargetForce:
-  value: '1'
+  default: '1'
 SoftTargetFriend:
-  value: '0'
+  default: '0'
 SoftTargetFriendArc:
-  value: '2'
+  default: '2'
 SoftTargetFriendRange:
-  value: '45.000000'
+  default: '45.000000'
 SoftTargetIconEnemy:
-  value: '0'
+  default: '0'
 SoftTargetIconFriend:
-  value: '0'
+  default: '0'
 SoftTargetIconGameObject:
-  value: '0'
+  default: '0'
 SoftTargetIconInteract:
-  value: '1'
+  default: '1'
 SoftTargetInteract:
-  value: '0'
+  default: '0'
 SoftTargetInteractArc:
-  value: '0'
+  default: '0'
 SoftTargetInteractRange:
-  value: '10.000000'
+  default: '10.000000'
 SoftTargetInteractRangeIsHard:
-  value: '0'
+  default: '0'
 SoftTargetLowPriorityIcons:
-  value: '0'
+  default: '0'
 SoftTargetMatchLocked:
-  value: '1'
+  default: '1'
 SoftTargetNameplateEnemy:
-  value: '1'
+  default: '1'
 SoftTargetNameplateFriend:
-  value: '0'
+  default: '0'
 SoftTargetNameplateInteract:
-  value: '0'
+  default: '0'
 SoftTargetNameplateSize:
-  value: '19'
+  default: '19'
 softTargettingInteractKeySound:
-  value: '0'
+  default: '0'
 SoftTargetTooltipDurationMs:
-  value: '2000'
+  default: '2000'
 SoftTargetTooltipEnemy:
-  value: '0'
+  default: '0'
 SoftTargetTooltipFriend:
-  value: '0'
+  default: '0'
 SoftTargetTooltipInteract:
-  value: '0'
+  default: '0'
 SoftTargetTooltipLocked:
-  value: '0'
+  default: '0'
 SoftTargetWithLocked:
-  value: '1'
+  default: '1'
 SoftTargetWorldtextFarDist:
-  value: '40.000000'
+  default: '40.000000'
 SoftTargetWorldtextNearDist:
-  value: '4.000000'
+  default: '4.000000'
 SoftTargetWorldtextNearScale:
-  value: '1.000000'
+  default: '1.000000'
 SoftTargetWorldtextSize:
-  value: '32.000000'
+  default: '32.000000'
 sortDiskReads:
-  value: '0'
+  default: '0'
 Sound_AlternateListener:
-  value: '1'
+  default: '1'
 Sound_AmbienceVolume:
-  value: '0.6'
+  default: '0.6'
 Sound_DialogVolume:
-  value: '1.0'
+  default: '1.0'
 Sound_DSPBufferSize:
-  value: '0'
+  default: '0'
 Sound_EnableAllSound:
-  value: '1'
+  default: '1'
 Sound_EnableAmbience:
-  value: '1'
+  default: '1'
 Sound_EnableArmorFoleySoundForOthers:
-  value: '1'
+  default: '1'
 Sound_EnableArmorFoleySoundForSelf:
-  value: '1'
+  default: '1'
 Sound_EnableDialog:
-  value: '1'
+  default: '1'
 Sound_EnableEmoteSounds:
-  value: '1'
+  default: '1'
 Sound_EnableEncounterWarningsSounds:
-  value: '1'
+  default: '1'
 Sound_EnableErrorSpeech:
-  value: '1'
+  default: '1'
 Sound_EnableGameplaySFX:
-  value: '1'
+  default: '1'
 Sound_EnableMixMode2:
-  value: '0'
+  default: '0'
 Sound_EnableMusic:
-  value: '1'
+  default: '1'
 Sound_EnablePetBattleMusic:
-  value: '1'
+  default: '1'
 Sound_EnablePetSounds:
-  value: '1'
+  default: '1'
 Sound_EnablePingSounds:
-  value: '1'
+  default: '1'
 Sound_EnablePositionalLowPassFilter:
-  value: '0'
+  default: '0'
 Sound_EnableReverb:
-  value: '0'
+  default: '0'
 Sound_EnableSFX:
-  value: '1'
+  default: '1'
 Sound_EnableSoundWhenGameIsInBG:
-  value: '1'
+  default: '1'
 Sound_EncounterWarningsVolume:
-  value: '1.000000'
+  default: '1.000000'
 Sound_GameplaySFX:
-  value: '1.000000'
+  default: '1.000000'
 Sound_ListenerAtCharacter:
-  value: '1'
+  default: '1'
 Sound_MasterVolume:
-  value: '1.0'
+  default: '1.0'
 Sound_MaxCacheableSizeInBytes:
-  value: '174762'
+  default: '174762'
 Sound_MaxCacheSizeInBytes:
-  value: '134217728'
+  default: '134217728'
 Sound_MusicVolume:
-  value: '0.4'
+  default: '0.4'
 Sound_NumChannels:
-  value: '64'
+  default: '64'
 Sound_OutputDriverIndex:
-  value: '0'
+  default: '0'
 Sound_OutputDriverName:
-  value: Primary Sound Driver
+  default: Primary Sound Driver
 Sound_OutputSampleRate:
-  value: '44100'
+  default: '44100'
 Sound_PingVolume:
-  value: '1.0'
+  default: '1.0'
 Sound_SFXVolume:
-  value: '1.0'
+  default: '1.0'
 Sound_VoiceChatInputDriverIndex:
-  value: '0'
+  default: '0'
 Sound_VoiceChatInputDriverName:
-  value: Primary Sound Capture Driver
+  default: Primary Sound Capture Driver
 Sound_VoiceChatOutputDriverIndex:
-  value: '0'
+  default: '0'
 Sound_VoiceChatOutputDriverName:
-  value: Primary Sound Driver
+  default: Primary Sound Driver
 Sound_ZoneMusicNoDelay:
-  value: '0'
+  default: '0'
 SoundPerf_VariationCap:
-  value: '32'
+  default: '32'
 spamFilter:
-  value: '1'
+  default: '1'
 SpawnRegion:
-  value: '0'
+  default: '0'
 specular:
-  value: '1'
+  default: '1'
 speechToText:
-  value: '0'
+  default: '0'
 spellClutter:
-  value: '1'
+  default: '1'
 spellClutterDefaultTargetScalar:
-  value: '3.000000'
+  default: '3.000000'
 spellClutterHostileScalar:
-  value: '0.500000'
+  default: '0.500000'
 spellClutterMinSpellCount:
-  value: '1'
+  default: '1'
 spellClutterMinWeaponTrailCount:
-  value: '3'
+  default: '3'
 spellClutterPartySizeScalar:
-  value: '20.000000'
+  default: '20.000000'
 spellClutterPlayerScalarMultiplier:
-  value: '1.666667'
+  default: '1.666667'
 spellClutterRangeConstant:
-  value: '30.000000'
+  default: '30.000000'
 spellClutterRangeConstantRaid:
-  value: '30.000000'
+  default: '30.000000'
 SpellCooldownDebugger:
-  value: '0'
+  default: '0'
 spellDiminishPVPEnemiesEnabled:
-  value: '0'
+  default: '0'
 spellDiminishPVPOnlyTriggerableByMe:
-  value: '0'
+  default: '0'
 SpellEventLog:
-  value: '0'
+  default: '0'
 SpellOverrides:
-  value: '0'
+  default: '0'
 SpellQueueWindow:
-  value: '400'
+  default: '400'
 SpellScriptEventLog:
-  value: '0'
+  default: '0'
 SpellTargeting:
-  value: '0'
+  default: '0'
 spellVisualDensityFilterSetting:
-  value: '3'
+  default: '3'
 SpellVisuals:
-  value: '0'
+  default: '0'
 SplineOpt:
-  value: '1'
+  default: '1'
 SSAO:
-  value: '0'
+  default: '0'
 ssaoMagicNormals:
-  value: '1'
+  default: '1'
 ssaoMagicThresholdHigh:
-  value: '50'
+  default: '50'
 ssaoMagicThresholdLow:
-  value: '25'
+  default: '25'
 SSAOType:
-  value: '0'
+  default: '0'
 statCategoriesCollapsed:
-  value: '0'
+  default: '0'
 statCategoriesCollapsed_2:
-  value: ''
+  default: ''
 statCategoryOrder:
-  value: ''
+  default: ''
 statCategoryOrder_2:
-  value: ''
+  default: ''
 statusText:
-  value: '0'
+  default: '0'
 statusTextDisplay:
-  value: NONE
+  default: NONE
 stopAutoAttackOnTargetChange:
-  value: '0'
+  default: '0'
 streamingCameraLookAheadTime:
-  value: '2000'
+  default: '2000'
 streamingCameraMaxRadius:
-  value: '250'
+  default: '250'
 streamingCameraRadius:
-  value: '100'
+  default: '100'
 streamStatusMessage:
-  value: '1'
+  default: '1'
 sunShafts:
-  value: '0'
+  default: '0'
 superTrackerDist:
-  value: '0.750000'
+  default: '0.750000'
 SuppressCpuMicrocodeChecks:
-  value: '0'
+  default: '0'
 synchronizeBindings:
-  value: '1'
+  default: '1'
 synchronizeChatFrames:
-  value: '1'
+  default: '1'
 synchronizeConfig:
-  value: '1'
+  default: '1'
 taintLog:
-  value: '0'
+  default: '0'
 talentFrameShown:
-  value: '0'
+  default: '0'
 talentPointsSpent:
-  value: '0'
+  default: '0'
 TargetAutoEnemy:
-  value: '0'
+  default: '0'
 TargetAutoFriend:
-  value: '0'
+  default: '0'
 TargetAutoLock:
-  value: '1'
+  default: '1'
 TargetEnemyAttacker:
-  value: '1'
+  default: '1'
 targetFPS:
-  value: '60'
+  default: '60'
 TargetNearestUseNew:
-  value: '1'
+  default: '1'
 TargetPriorityCombatLock:
-  value: '1'
+  default: '1'
 TargetPriorityCombatLockContextualRelaxation:
-  value: '1'
+  default: '1'
 TargetPriorityCombatLockHighlight:
-  value: '0'
+  default: '0'
 TargetPriorityPvp:
-  value: '1'
+  default: '1'
 telemetryWowlabsPackage:
-  value: Blizzard.Telemetry.Wow_Classic
+  default: Blizzard.Telemetry.Wow_Classic
 telemetryWowPackage:
-  value: Blizzard.Telemetry.Wow_Classic
+  default: Blizzard.Telemetry.Wow_Classic
 teleportMaxNoLoadDist:
-  value: '200'
+  default: '200'
 terrainLodDist:
-  value: '500'
+  default: '500'
 TerrainLodDiv:
-  value: '768'
+  default: '768'
 terrainMipLevel:
-  value: '0'
+  default: '0'
 test_cameraDynamicPitch:
-  value: '0.000000'
+  default: '0.000000'
 test_cameraDynamicPitchBaseFovPad:
-  value: '0.400000'
+  default: '0.400000'
 test_cameraDynamicPitchBaseFovPadDownScale:
-  value: '0.250000'
+  default: '0.250000'
 test_cameraDynamicPitchBaseFovPadFlying:
-  value: '0.750000'
+  default: '0.750000'
 test_cameraDynamicPitchSmartPivotCutoffDist:
-  value: '10.000000'
+  default: '10.000000'
 test_cameraHeadMovementDeadZone:
-  value: '0.015000'
+  default: '0.015000'
 test_cameraHeadMovementFirstPersonDampRate:
-  value: '20.000000'
+  default: '20.000000'
 test_cameraHeadMovementMovingDampRate:
-  value: '10.000000'
+  default: '10.000000'
 test_cameraHeadMovementMovingStrength:
-  value: '0.500000'
+  default: '0.500000'
 test_cameraHeadMovementRangeScale:
-  value: '5.000000'
+  default: '5.000000'
 test_cameraHeadMovementStandingDampRate:
-  value: '10.000000'
+  default: '10.000000'
 test_cameraHeadMovementStandingStrength:
-  value: '0.300000'
+  default: '0.300000'
 test_cameraHeadMovementStrength:
-  value: '0.000000'
+  default: '0.000000'
 test_cameraOverShoulder:
-  value: '0.000000'
+  default: '0.000000'
 test_cameraTargetFocusEnemyEnable:
-  value: '0'
+  default: '0'
 test_cameraTargetFocusEnemyStrengthPitch:
-  value: '0.400000'
+  default: '0.400000'
 test_cameraTargetFocusEnemyStrengthYaw:
-  value: '0.500000'
+  default: '0.500000'
 test_cameraTargetFocusInteractEnable:
-  value: '0'
+  default: '0'
 test_cameraTargetFocusInteractStrengthPitch:
-  value: '0.750000'
+  default: '0.750000'
 test_cameraTargetFocusInteractStrengthYaw:
-  value: '1.000000'
+  default: '1.000000'
 textLocale:
-  value: ''
+  default: ''
 textToSpeech:
-  value: '0'
+  default: '0'
 textureErrorColors:
-  value: '1'
+  default: '1'
 textureFilteringMode:
-  value: '5'
+  default: '5'
 ThreadPoolLimitHP:
-  value: '6'
+  default: '6'
 ThreadPoolLimitLP:
-  value: '6'
+  default: '6'
 ThreadPoolLimitMP:
-  value: '6'
+  default: '6'
 ThreadPoolPerThreadAllocator:
-  value: '1'
+  default: '1'
 threatPlaySounds:
-  value: '1'
+  default: '1'
 threatShowNumeric:
-  value: '0'
+  default: '0'
 threatWarning:
-  value: '3'
+  default: '3'
 threatWorldText:
-  value: '1'
+  default: '1'
 timeMgrAlarmEnabled:
-  value: '0'
+  default: '0'
 timeMgrAlarmMessage:
-  value: ''
+  default: ''
 timeMgrAlarmTime:
-  value: '0'
+  default: '0'
 timeMgrUseLocalTime:
-  value: '0'
+  default: '0'
 timeMgrUseMilitaryTime:
-  value: '0'
+  default: '0'
 titleBarShortName:
-  value: '0'
+  default: '0'
 titleBarShowAccountName:
-  value: '0'
+  default: '0'
 titleBarShowBuildInfo:
-  value: '0'
+  default: '0'
 titleBarShowCharacterName:
-  value: '0'
+  default: '0'
 titleBarShowConfigName:
-  value: '0'
+  default: '0'
 titleBarShowGxInfo:
-  value: '0'
+  default: '0'
 titleBarShowPID:
-  value: '0'
+  default: '0'
 titleBarShowRealmName:
-  value: '0'
+  default: '0'
 toastDuration:
-  value: '4'
+  default: '4'
 toyBoxCollectedFilters:
-  value: '0'
+  default: '0'
 toyBoxExpansionFilters:
-  value: '0'
+  default: '0'
 toyBoxSourceFilters:
-  value: '0'
+  default: '0'
 trackedAchievements:
-  value: ''
+  default: ''
 trackedQuests:
-  value: ''
+  default: ''
 trackerFilter:
-  value: '7'
+  default: '7'
 trackerSorting:
-  value: '0'
+  default: '0'
 trackQuestSorting:
-  value: top
+  default: top
 transmogCurrentSpecOnly:
-  value: '0'
+  default: '0'
 transmogDebug:
-  value: '0'
+  default: '0'
 transmogHideIgnoredSlots:
-  value: '0'
+  default: '0'
 transmogPreviewedWeaponToggle:
-  value: '0'
+  default: '0'
 transmogrifySetsFilters:
-  value: '0'
+  default: '0'
 transmogrifyShowCollected:
-  value: '1'
+  default: '1'
 transmogrifyShowUncollected:
-  value: '0'
+  default: '0'
 transmogrifySourceFilters:
-  value: '0'
+  default: '0'
 transmogShowID:
-  value: '0'
+  default: '0'
 TurnSpeed:
-  value: '180.000000'
+  default: '180.000000'
 UberTooltips:
-  value: '1'
+  default: '1'
 uiScale:
-  value: '1.000000'
+  default: '1.000000'
 uiScaleMultiplier:
-  value: '-1.000000'
+  default: '-1.000000'
 unitClutter:
-  value: '1'
+  default: '1'
 unitClutterInstancesOnly:
-  value: '1'
+  default: '1'
 unitClutterPlayerThreshold:
-  value: '9'
+  default: '9'
 UnitEnterCombatLog:
-  value: '0'
+  default: '0'
 unitFramesDisplayIncomingHeals:
-  value: '0'
+  default: '0'
 UnitNameEnemyGuardianName:
-  value: '1'
+  default: '1'
 UnitNameEnemyMinionName:
-  value: '1'
+  default: '1'
 UnitNameEnemyPetName:
-  value: '1'
+  default: '1'
 UnitNameEnemyPlayerName:
-  value: '1'
+  default: '1'
 UnitNameEnemyTotemName:
-  value: '1'
+  default: '1'
 UnitNameForceHideMinus:
-  value: '0'
+  default: '0'
 UnitNameFriendlyGuardianName:
-  value: '1'
+  default: '1'
 UnitNameFriendlyMinionName:
-  value: '1'
+  default: '1'
 UnitNameFriendlyPetName:
-  value: '1'
+  default: '1'
 UnitNameFriendlyPlayerName:
-  value: '1'
+  default: '1'
 UnitNameFriendlySpecialNPCName:
-  value: '0'
+  default: '0'
 UnitNameFriendlyTotemName:
-  value: '1'
+  default: '1'
 UnitNameGuildTitle:
-  value: '1'
+  default: '1'
 UnitNameHostleNPC:
-  value: '0'
+  default: '0'
 UnitNameInteractiveNPC:
-  value: '0'
+  default: '0'
 UnitNameNonCombatCreatureName:
-  value: '0'
+  default: '0'
 UnitNameNPC:
-  value: '0'
+  default: '0'
 UnitNameOwn:
-  value: '0'
+  default: '0'
 UnitNamePlayerGuild:
-  value: '1'
+  default: '1'
 UnitNamePlayerPVPTitle:
-  value: '1'
+  default: '1'
 UnitVisibility:
-  value: '0'
+  default: '0'
 useBLEEP:
-  value: '0'
+  default: '0'
 useClassicGuildUI:
-  value: '1'
+  default: '1'
 useCommentatorSelectionCircles:
-  value: '1'
+  default: '1'
 useHighResolutionUITextures:
-  value: '0'
+  default: '0'
 useHighResTextures:
-  value: '1'
+  default: '1'
 useIPv6:
-  value: '0'
+  default: '0'
 useMaxFPS:
-  value: '0'
+  default: '0'
 useMaxFPSBk:
-  value: '1'
+  default: '1'
 userFontScale:
-  value: '1'
+  default: '1'
 useShadowMapping:
-  value: '1'
+  default: '1'
 UseSlug:
-  value: '1'
+  default: '1'
 useTargetFPS:
-  value: '1'
+  default: '1'
 useUiScale:
-  value: '0'
+  default: '0'
 validateFrameXML:
-  value: '1'
+  default: '1'
 VerboseSpellScriptEventLog:
-  value: '0'
+  default: '0'
 videoOptionsVersion:
-  value: '0'
+  default: '0'
 videoOptionsVersionDefault:
-  value: '0'
+  default: '0'
 violenceLevel:
-  value: '2'
+  default: '2'
 VoiceChatMasterVolumeScale:
-  value: '1'
+  default: '1'
 VoiceCommunicationMode:
-  value: '0'
+  default: '0'
 VoiceEnableWhenGameIsInBG:
-  value: '1'
+  default: '1'
 VoiceInputDevice:
-  value: ''
+  default: ''
 VoiceInputVolume:
-  value: '50'
+  default: '50'
 VoiceOutputDevice:
-  value: ''
+  default: ''
 VoiceOutputVolume:
-  value: '50'
+  default: '50'
 VoicePushToTalkKeybind:
-  value: LMETA
+  default: LMETA
 VoiceSelfDeafened:
-  value: '0'
+  default: '0'
 VoiceSelfMuted:
-  value: '0'
+  default: '0'
 VoiceVADSensitivity:
-  value: '43'
+  default: '43'
 volumeFogDisableLightScattering:
-  value: '0'
+  default: '0'
 volumeFogDisableNoise:
-  value: '0'
+  default: '0'
 volumeFogDisableShadows:
-  value: '0'
+  default: '0'
 volumeFogUse16BitTexture:
-  value: '1'
+  default: '1'
 vrsValar:
-  value: '0'
+  default: '0'
 vrsValarGPUMode:
-  value: '0'
+  default: '0'
 vsync:
-  value: '1'
+  default: '1'
 WalkableSurfacesValidationLog:
-  value: '0'
+  default: '0'
 wardrobeSetsFilters:
-  value: '0'
+  default: '0'
 wardrobeShowAllFactions:
-  value: '0'
+  default: '0'
 wardrobeShowAllRaces:
-  value: '0'
+  default: '0'
 wardrobeShowCollected:
-  value: '1'
+  default: '1'
 wardrobeShowUncollected:
-  value: '1'
+  default: '1'
 wardrobeSourceFilters:
-  value: '0'
+  default: '0'
 waterDetail:
-  value: '0'
+  default: '0'
 weatherDensity:
-  value: '3'
+  default: '3'
 webChallengeURLTimeout:
-  value: '60'
+  default: '60'
 whisperMode:
-  value: inline
+  default: inline
 wholeChatWindowClickable:
-  value: '1'
+  default: '1'
 wmoDoodadDist:
-  value: '2000'
+  default: '2000'
 wmoLodDist:
-  value: '400'
+  default: '400'
 wmoLodDistScale:
-  value: '1.0'
+  default: '1.0'
 wmoPortalFadeScale:
-  value: '1000'
+  default: '1000'
 wmoPortalInteriorFade:
-  value: '1'
+  default: '1'
 WorldActionsLog:
-  value: '0'
+  default: '0'
 worldBaseMip:
-  value: '1'
+  default: '1'
 worldIntersectMaxJobs:
-  value: '32'
+  default: '32'
 worldLoadSort:
-  value: '1'
+  default: '1'
 worldMapOpacity:
-  value: '0'
+  default: '0'
 worldPreloadHighResTextures:
-  value: '1'
+  default: '1'
 worldPreloadNonCritical:
-  value: '2'
+  default: '2'
 worldPreloadNonCriticalTimeout:
-  value: '45'
+  default: '45'
 worldPreloadSort:
-  value: '1'
+  default: '1'
 worldQuestFilterAnima:
-  value: '1'
+  default: '1'
 worldQuestFilterArtifactPower:
-  value: '1'
+  default: '1'
 worldQuestFilterEquipment:
-  value: '1'
+  default: '1'
 worldQuestFilterGold:
-  value: '1'
+  default: '1'
 worldQuestFilterProfessionMaterials:
-  value: '1'
+  default: '1'
 worldQuestFilterReputation:
-  value: '1'
+  default: '1'
 worldQuestFilterResources:
-  value: '1'
+  default: '1'
 WorldTextCritScreenY_v2:
-  value: '0.0'
+  default: '0.0'
 WorldTextGravity_v2:
-  value: '0.500000'
+  default: '0.500000'
 WorldTextMinAlpha_v2:
-  value: '0.500000'
+  default: '0.500000'
 WorldTextMinSize:
-  value: '0.000000'
+  default: '0.000000'
 WorldTextNonRandomZ_v2:
-  value: '2.0'
+  default: '2.0'
 WorldTextRampDuration_v2:
-  value: '1.000000'
+  default: '1.000000'
 WorldTextRampPow_v2:
-  value: '1.900000'
+  default: '1.900000'
 WorldTextRampPowCrit_v2:
-  value: '8.000000'
+  default: '8.000000'
 WorldTextRandomXY_v2:
-  value: '0.0'
+  default: '0.0'
 WorldTextRandomZMax_v2:
-  value: '1.5'
+  default: '1.5'
 WorldTextRandomZMin_v2:
-  value: '0.8'
+  default: '0.8'
 WorldTextScale_v2:
-  value: '1.000000'
+  default: '1.000000'
 WorldTextScreenY_v2:
-  value: '0.0'
+  default: '0.0'
 WorldTextStartPosRandomness_v2:
-  value: '0.0'
+  default: '0.0'
 worldViewCullMaxJobs:
-  value: '32'
+  default: '32'
 xpBarText:
-  value: '0'
+  default: '0'

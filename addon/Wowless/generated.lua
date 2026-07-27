@@ -182,7 +182,7 @@ G.testsuite.generated = function()
     local expectedCVars = lowify((function()
       local t = {}
       for k, v in pairs(_G.WowlessData.CVars) do
-        t[k] = v.value
+        t[k] = v.default
       end
       return t
     end)())
