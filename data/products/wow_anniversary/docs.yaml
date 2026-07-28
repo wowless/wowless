@@ -23,6 +23,14 @@ lies:
             type: number
           - name: raidFlags
             type: number
+    C_CVar.GetCVarInfo:
+      _add:
+        mayreturnnothing: true
+      outputs:
+      - _add:
+          nilable: true
+      - _add:
+          nilable: true
     C_Item.GetItemClassInfo:
       outputs:
       - _add:

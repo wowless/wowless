@@ -81,6 +81,9 @@ C_CVar.GetCVarBool:
 C_CVar.GetCVarDefault:
   moduledelegate:
     name: cvars
+C_CVar.GetCVarInfo:
+  moduledelegate:
+    name: cvars
 C_CVar.RegisterCVar:
   moduledelegate:
     name: cvars

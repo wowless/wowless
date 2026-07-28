@@ -41,6 +41,10 @@ local getPatternValue = (function()
       value = mustnumber,
     },
     {
+      pattern = ': want false, got true$',
+      value = constant(true),
+    },
+    {
       pattern = ': want %-?%d+, got (-?%d+)$',
       value = mustnumber,
     },
@@ -67,6 +71,10 @@ local getPatternValue = (function()
     {
       pattern = ': extra cvar "[^"]*"$',
       value = constant(nil),
+    },
+    {
+      pattern = ': missing cvar$',
+      value = constant({}),
     },
     {
       pattern = ': missing cvar with default (".*")$',
@@ -132,23 +140,12 @@ if data.generated.cvars then
   local cvarsfile = 'data/products/' .. product .. '/cvars.yaml'
   local cvars = yaml.parseFile(cvarsfile)
   for k, v in pairs(data.generated.cvars) do
-    if v:match(': missing cvar with default nil$') then
-      cvars[k] = {}
-    elseif v:match(': cvar category mismatch') then
-      local _, value = assert(getPatternValue(v))
-      cvars[k].category = value
-    elseif v:match(': cvar help mismatch') then
-      local _, value = assert(getPatternValue(v))
-      cvars[k].help = value
-    else
-      local match, value = getPatternValue(v)
-      if match then
-        if value == nil then
-          cvars[k] = nil
-        else
-          cvars[k] = { default = value }
-        end
+    if type(v) == 'table' then
+      for vk, vv in pairs(v) do
+        cvars[k][vk] = select(2, assert(getPatternValue(vv)))
       end
+    else
+      cvars[k] = select(2, assert(getPatternValue(v)))
     end
   end
   write(cvarsfile, yaml.pprint(cvars))

@@ -6496,13 +6496,17 @@ C_CVar.GetCVarDefault:
     nilable: true
     type: string
 C_CVar.GetCVarInfo:
+  impl: C_CVar.GetCVarInfo
   inputs:
   - name: name
     type: string
+  mayreturnnothing: true
   outputs:
   - name: value
+    nilable: true
     type: string
   - name: defaultValue
+    nilable: true
     type: string
   - name: isStoredServerAccount
     type: boolean

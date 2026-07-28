@@ -177,38 +177,57 @@ G.testsuite.generated = function()
       end
       return tt
     end
-    local expectedCVars = lowify(_G.WowlessData.CVars)
+    local toskipin = _G.WowlessData.Config.addon.ignore_cvar_value or {}
+    local expectedCVars = lowify((function()
+      local t = {}
+      for k, v in pairs(_G.WowlessData.CVars) do
+        t[k] = {
+          account = not not v.account,
+          category = v.category,
+          character = not not v.character,
+          default = not toskipin[k] and v.default or nil,
+          help = v.help,
+          locked = not not v.locked,
+          readonly = not not v.readonly,
+          secure = not not v.secure,
+        }
+      end
+      return t
+    end)())
     local actualCVars = lowify((function()
       -- Do this early to avoid issues with deferred cvar creation.
       local t = {}
       for _, command in ipairs(_G.ConsoleGetAllCommands()) do
         local name = command.command
-        local ninfo = select('#', _G.C_CVar.GetCVarInfo(name))
-        if command.commandType == 0 and name:sub(1, 6) ~= 'CACHE-' and ninfo > 0 then
+        local cn, ct = (function(...)
+          return select('#', ...), { ... }
+        end)(_G.C_CVar.GetCVarInfo(name))
+        if command.commandType == 0 and name:sub(1, 6) ~= 'CACHE-' and cn > 0 then
           assertEquals('', command.scriptContents, name)
           assertEquals('', command.scriptParameters, name)
           assertEquals(nil, t[name], name)
+          assertEquals(7, cn)
+          assertEquals(ct[2], _G.C_CVar.GetCVarDefault(name))
           t[name] = {
+            account = ct[3],
             category = command.category,
-            default = _G.C_CVar.GetCVarDefault(name),
+            character = ct[4],
+            default = not toskipin[name] and ct[2] or nil,
             help = command.help,
+            locked = ct[5],
+            readonly = ct[7],
+            secure = ct[6],
           }
         end
       end
       return t
     end)())
-    local toskipin = _G.WowlessData.Config.addon.ignore_cvar_value or {}
     local tests = {}
     for k, v in pairs(expectedCVars) do
       tests[v.name] = function()
         local actual = actualCVars[k]
         assert(actual, ('extra cvar %q'):format(k))
-        assertEquals(v.name, actual.name, 'cvar name mismatch')
-        assertEquals(v.category, actual.category, 'cvar category mismatch')
-        assertEquals(v.help, actual.help, 'cvar help mismatch')
-        if not toskipin[actual.name] then
-          assertEquals(v.default, actual.default, 'cvar default mismatch')
-        end
+        return G.assertRecursivelyEqual(v, actual)
       end
     end
     local toskipout = {
@@ -218,8 +237,7 @@ G.testsuite.generated = function()
     for k, v in pairs(actualCVars) do
       if not tests[v.name] and not toskipout[k] then
         tests[v.name] = function()
-          local s = v.default == nil and 'nil' or ('%q'):format(v.default)
-          error('missing cvar with default ' .. s)
+          error('missing cvar')
         end
       end
     end

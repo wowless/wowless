@@ -789,7 +789,7 @@ return function(
   }
 
   local function isLoadable(addon)
-    local a = datalua.cvars.agentuid.value
+    local a = datalua.cvars.agentuid.default
     if addon.attrs.OnlyBetaAndPTR == '1' and a ~= 'wow_ptr' and a ~= 'wow_beta' then
       return false
     end
