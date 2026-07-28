@@ -31,6 +31,7 @@ CreateWindow:
   CreateWindow:
 cvars:
   C_CVar.GetCVar:
+  C_CVar.GetCVarBool:
   C_CVar.SetCVar:
 debuglocals:
   debuglocals:

@@ -9,7 +9,8 @@ return function(datalua)
       return values[name:lower()]
     end,
     ['C_CVar.GetCVarBool'] = function(name)
-      return values[name:lower()] == '1'
+      local v = values[name:lower()]
+      return v and v == '1'
     end,
     ['C_CVar.GetCVarDefault'] = function(name)
       local t = infos[name:lower()]
