@@ -29,6 +29,9 @@ CreateFrame:
   CreateFrame:
 CreateWindow:
   CreateWindow:
+cvars:
+  C_CVar.GetCVar:
+  C_CVar.SetCVar:
 debuglocals:
   debuglocals:
 EnumerateFrames:

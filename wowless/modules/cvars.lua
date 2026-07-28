@@ -33,9 +33,11 @@ return function(datalua)
       values[name:lower()] = value
     end,
     ['C_CVar.SetCVar'] = function(name, value)
-      -- TODO assert cvar exists
-      values[name:lower()] = value
-      return true
+      local n = name:lower()
+      if infos[n] then
+        values[n] = value
+        return true
+      end
     end,
   }
 end

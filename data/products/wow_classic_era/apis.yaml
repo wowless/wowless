@@ -6541,6 +6541,7 @@ C_CVar.SetCVar:
   - name: scriptCVar
     nilable: true
     type: string
+  mayreturnnothing: true
   outputs:
   - name: success
     type: boolean

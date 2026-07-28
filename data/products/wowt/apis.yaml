@@ -9998,6 +9998,7 @@ C_CVar.SetCVar:
   - name: value
     nilable: true
     type: string
+  mayreturnnothing: true
   outputs:
   - name: success
     type: boolean
