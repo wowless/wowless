@@ -1,7 +1,7 @@
-build: '68775'
-date: Jul 16 2026
+build: '68941'
+date: Jul 24 2026
 gametype: TBC
-hash: 48733c01faf635d8220af49ac03c206c
+hash: a28e58bce063f7ce3051a07a3588bcf1
 test: false
 tocversion: 20506
 version: 2.5.6
