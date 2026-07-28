@@ -17,6 +17,9 @@ type:
           type: string
         locked:
           type: flag
+        name:
+          required: true
+          type: string
         readonly:
           type: flag
         secure:

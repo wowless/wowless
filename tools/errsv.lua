@@ -33,10 +33,6 @@ local getPatternValue = (function()
   end
   local patterns = {
     {
-      pattern = ': cvar name mismatch: want ',
-      value = constant(nil),
-    },
-    {
       pattern = ': want nil, got (-?%d+)$',
       value = mustnumber,
     },
@@ -69,16 +65,12 @@ local getPatternValue = (function()
       value = mustnumber,
     },
     {
-      pattern = ': extra cvar "[^"]*"$',
+      pattern = ': extra cvar$',
       value = constant(nil),
     },
     {
       pattern = ': missing cvar$',
       value = constant({}),
-    },
-    {
-      pattern = ': missing cvar with default (".*")$',
-      value = tostring,
     },
     {
       pattern = ': missing key ".+" with value (-?[0-9.]+)$',

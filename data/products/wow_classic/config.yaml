@@ -24,24 +24,24 @@ addon:
     HousingCatalogEntrySubtype:
     QuestPOIQuestTypes:
   ignore_cvar_value:
-    graphicsEnvironmentDetail:
-    graphicsGroundClutter:
-    graphicsLiquidDetail:
-    graphicsParticleDensity:
-    graphicsQuality:
-    graphicsShadowQuality:
-    graphicsSSAO:
-    graphicsTextureResolution:
-    mouseSpeed:
-    raidGraphicsEnvironmentDetail:
-    raidGraphicsGroundClutter:
-    raidGraphicsLiquidDetail:
-    raidGraphicsParticleDensity:
-    RAIDgraphicsQuality:
-    raidGraphicsShadowQuality:
-    raidGraphicsSSAO:
-    raidGraphicsTextureResolution:
-    RenderScale:
+    graphicsenvironmentdetail:
+    graphicsgroundclutter:
+    graphicsliquiddetail:
+    graphicsparticledensity:
+    graphicsquality:
+    graphicsshadowquality:
+    graphicsssao:
+    graphicstextureresolution:
+    mousespeed:
+    raidgraphicsenvironmentdetail:
+    raidgraphicsgroundclutter:
+    raidgraphicsliquiddetail:
+    raidgraphicsparticledensity:
+    raidgraphicsquality:
+    raidgraphicsshadowquality:
+    raidgraphicsssao:
+    raidgraphicstextureresolution:
+    renderscale:
   overwritten_apis:
     C_HousingBasicMode.StartPlacingNewDecor:
     C_HousingCatalog.CreateCatalogSearcher:

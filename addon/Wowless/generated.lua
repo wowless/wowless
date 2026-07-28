@@ -167,66 +167,51 @@ G.testsuite.generated = function()
   end
 
   local function cvars()
-    local function lowify(t)
-      local tt = {}
-      for k, v in pairs(t) do
-        local lk = k:lower()
-        assertEquals(nil, tt[lk])
-        tt[lk] = v
-        tt[lk].name = k
-      end
-      return tt
-    end
     local toskipin = _G.WowlessData.Config.addon.ignore_cvar_value or {}
-    local expectedCVars = lowify((function()
-      local t = {}
-      for k, v in pairs(_G.WowlessData.CVars) do
-        t[k] = {
-          account = not not v.account,
-          category = v.category,
-          character = not not v.character,
-          default = not toskipin[k] and v.default or nil,
-          help = v.help,
-          locked = not not v.locked,
-          readonly = not not v.readonly,
-          secure = not not v.secure,
+    local expectedCVars = {}
+    for k, v in pairs(_G.WowlessData.CVars) do
+      expectedCVars[k] = {
+        account = not not v.account,
+        category = v.category,
+        character = not not v.character,
+        default = not toskipin[k] and v.default or nil,
+        help = v.help,
+        locked = not not v.locked,
+        name = v.name,
+        readonly = not not v.readonly,
+        secure = not not v.secure,
+      }
+    end
+    -- Do this early to avoid issues with deferred cvar creation.
+    local actualCVars = {}
+    for _, command in ipairs(_G.ConsoleGetAllCommands()) do
+      local name = command.command:lower()
+      local cn, ct = (function(...)
+        return select('#', ...), { ... }
+      end)(_G.C_CVar.GetCVarInfo(name))
+      if command.commandType == 0 and name:sub(1, 6) ~= 'cache-' and cn > 0 then
+        assertEquals('', command.scriptContents, name)
+        assertEquals('', command.scriptParameters, name)
+        assertEquals(nil, actualCVars[name], name)
+        assertEquals(7, cn)
+        assertEquals(ct[2], _G.C_CVar.GetCVarDefault(name))
+        actualCVars[name] = {
+          account = ct[3],
+          category = command.category,
+          character = ct[4],
+          default = not toskipin[name] and ct[2] or nil,
+          help = command.help,
+          locked = ct[5],
+          name = command.command,
+          readonly = ct[7],
+          secure = ct[6],
         }
       end
-      return t
-    end)())
-    local actualCVars = lowify((function()
-      -- Do this early to avoid issues with deferred cvar creation.
-      local t = {}
-      for _, command in ipairs(_G.ConsoleGetAllCommands()) do
-        local name = command.command
-        local cn, ct = (function(...)
-          return select('#', ...), { ... }
-        end)(_G.C_CVar.GetCVarInfo(name))
-        if command.commandType == 0 and name:sub(1, 6) ~= 'CACHE-' and cn > 0 then
-          assertEquals('', command.scriptContents, name)
-          assertEquals('', command.scriptParameters, name)
-          assertEquals(nil, t[name], name)
-          assertEquals(7, cn)
-          assertEquals(ct[2], _G.C_CVar.GetCVarDefault(name))
-          t[name] = {
-            account = ct[3],
-            category = command.category,
-            character = ct[4],
-            default = not toskipin[name] and ct[2] or nil,
-            help = command.help,
-            locked = ct[5],
-            readonly = ct[7],
-            secure = ct[6],
-          }
-        end
-      end
-      return t
-    end)())
+    end
     local tests = {}
     for k, v in pairs(expectedCVars) do
-      tests[v.name] = function()
-        local actual = actualCVars[k]
-        assert(actual, ('extra cvar %q'):format(k))
+      tests[k] = function()
+        local actual = assert(actualCVars[k], 'extra cvar')
         return G.assertRecursivelyEqual(v, actual)
       end
     end
@@ -234,9 +219,9 @@ G.testsuite.generated = function()
       praisethesun = true, -- set in FrameXML
       ttsusecharactersettings = true,
     }
-    for k, v in pairs(actualCVars) do
-      if not tests[v.name] and not toskipout[k] then
-        tests[v.name] = function()
+    for k in pairs(actualCVars) do
+      if not tests[k] and not toskipout[k] then
+        tests[k] = function()
           error('missing cvar')
         end
       end

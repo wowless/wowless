@@ -136,14 +136,6 @@ local function ensureimpl(k)
   return impls[k]
 end
 
-local cvars = {}
-for k, v in pairs(parseYaml('data/products/' .. product .. '/cvars.yaml')) do
-  local lk = k:lower()
-  assert(not cvars[lk], lk)
-  v.name = k
-  cvars[lk] = v
-end
-
 local eventcfg = parseYaml('data/products/' .. product .. '/events.yaml')
 local events = {}
 for k, v in pairs(eventcfg) do
@@ -526,7 +518,7 @@ end
 local data = {
   build = parseYaml('data/products/' .. product .. '/build.yaml'),
   config = parseYaml('data/products/' .. product .. '/config.yaml'),
-  cvars = cvars,
+  cvars = parseYaml('data/products/' .. product .. '/cvars.yaml'),
   events = events,
   globals = globals,
   luaobjects = luaobjects,

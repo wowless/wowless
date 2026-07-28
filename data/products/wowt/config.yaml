@@ -38,34 +38,34 @@ addon:
     SetItemRef:
     UpdateUIParentPosition:
   ignore_cvar_value:
-    graphicsComputeEffects:
-    graphicsDepthEffects:
-    graphicsEnvironmentDetail:
-    graphicsGroundClutter:
-    graphicsLiquidDetail:
-    graphicsOutlineMode:
-    graphicsParticleDensity:
-    graphicsQuality:
-    graphicsShadowQuality:
-    graphicsSpellDensity:
-    graphicsSSAO:
-    graphicsTextureResolution:
-    graphicsViewDistance:
-    mouseSpeed:
-    raidGraphicsComputeEffects:
-    raidGraphicsDepthEffects:
-    raidGraphicsEnvironmentDetail:
-    raidGraphicsGroundClutter:
-    raidGraphicsLiquidDetail:
-    raidGraphicsOutlineMode:
-    raidGraphicsParticleDensity:
-    RAIDgraphicsQuality:
-    raidGraphicsShadowQuality:
-    raidGraphicsSpellDensity:
-    raidGraphicsSSAO:
-    raidGraphicsTextureResolution:
-    raidGraphicsViewDistance:
-    RenderScale:
+    graphicscomputeeffects:
+    graphicsdeptheffects:
+    graphicsenvironmentdetail:
+    graphicsgroundclutter:
+    graphicsliquiddetail:
+    graphicsoutlinemode:
+    graphicsparticledensity:
+    graphicsquality:
+    graphicsshadowquality:
+    graphicsspelldensity:
+    graphicsssao:
+    graphicstextureresolution:
+    graphicsviewdistance:
+    mousespeed:
+    raidgraphicscomputeeffects:
+    raidgraphicsdeptheffects:
+    raidgraphicsenvironmentdetail:
+    raidgraphicsgroundclutter:
+    raidgraphicsliquiddetail:
+    raidgraphicsoutlinemode:
+    raidgraphicsparticledensity:
+    raidgraphicsquality:
+    raidgraphicsshadowquality:
+    raidgraphicsspelldensity:
+    raidgraphicsssao:
+    raidgraphicstextureresolution:
+    raidgraphicsviewdistance:
+    renderscale:
   overwritten_apis:
     C_HousingBasicMode.StartPlacingNewDecor:
     C_HousingCatalog.CanDestroyEntry:
