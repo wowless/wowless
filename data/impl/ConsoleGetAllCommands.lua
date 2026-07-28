@@ -1,13 +1,13 @@
 local datalua = ...
 local commandType = datalua.globals.Enum.ConsoleCommandType.Cvar
+local category = datalua.globals.Enum.ConsoleCategory.Default
 return function()
   local t = {}
-  for _, v in require('pl.tablex').sort(datalua.cvars) do
+  for k in require('pl.tablex').sort(datalua.cvars) do
     table.insert(t, {
-      category = v.category,
-      command = v.name,
+      category = category,
+      command = k,
       commandType = commandType,
-      help = v.help,
       scriptContents = '',
       scriptParameters = '',
     })

@@ -172,12 +172,9 @@ G.testsuite.generated = function()
     for k, v in pairs(_G.WowlessData.CVars) do
       expectedCVars[k] = {
         account = not not v.account,
-        category = v.category,
         character = not not v.character,
         default = not toskipin[k] and v.default or nil,
-        help = v.help,
         locked = not not v.locked,
-        name = v.name,
         readonly = not not v.readonly,
         secure = not not v.secure,
       }
@@ -197,12 +194,9 @@ G.testsuite.generated = function()
         assertEquals(ct[2], _G.C_CVar.GetCVarDefault(name))
         actualCVars[name] = {
           account = ct[3],
-          category = command.category,
           character = ct[4],
           default = not toskipin[name] and ct[2] or nil,
-          help = command.help,
           locked = ct[5],
-          name = command.command,
           readonly = ct[7],
           secure = ct[6],
         }

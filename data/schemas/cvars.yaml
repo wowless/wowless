@@ -6,20 +6,12 @@ type:
       record:
         account:
           type: flag
-        category:
-          required: true
-          type: number
         character:
           type: flag
         default:
           type: string
-        help:
-          type: string
         locked:
           type: flag
-        name:
-          required: true
-          type: string
         readonly:
           type: flag
         secure:
