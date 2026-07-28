@@ -2380,15 +2380,9 @@ flightAngleLookAhead:
   category: 4
   default: '0'
   help: Enables more dynamic attitude adjustments while flying
-floatingCombatTextAuraFade:
-  category: 5
-  help: ''
 floatingCombatTextAuraFade_v2:
   category: 4
   default: '0'
-floatingCombatTextAuras:
-  category: 5
-  help: ''
 floatingCombatTextAuras_v2:
   category: 4
   default: '0'
@@ -2424,33 +2418,18 @@ floatingCombatTextCombatLogPeriodicSpells_v2:
   category: 4
   default: '1'
   help: Display damage caused by periodic effects
-floatingCombatTextCombatState:
-  category: 5
-  help: ''
 floatingCombatTextCombatState_v2:
   category: 4
   default: '0'
-floatingCombatTextComboPoints:
-  category: 5
-  help: ''
 floatingCombatTextComboPoints_v2:
   category: 4
   default: '0'
-floatingCombatTextDamageReduction:
-  category: 5
-  help: ''
 floatingCombatTextDamageReduction_v2:
   category: 4
   default: '0'
-floatingCombatTextDodgeParryMiss:
-  category: 5
-  help: ''
 floatingCombatTextDodgeParryMiss_v2:
   category: 4
   default: '0'
-floatingCombatTextEnergyGains:
-  category: 5
-  help: ''
 floatingCombatTextEnergyGains_v2:
   category: 4
   default: '0'
@@ -2461,9 +2440,6 @@ floatingCombatTextFloatMode_v2:
 floatingCombatTextFriendlyHealers_v2:
   category: 4
   default: '0'
-floatingCombatTextHonorGains:
-  category: 5
-  help: ''
 floatingCombatTextHonorGains_v2:
   category: 4
   default: '0'
@@ -2484,9 +2460,6 @@ floatingCombatTextPetSpellDamage_v2:
 floatingCombatTextReactives_v2:
   category: 4
   default: '1'
-floatingCombatTextRepChanges:
-  category: 5
-  help: ''
 floatingCombatTextRepChanges_v2:
   category: 4
   default: '0'

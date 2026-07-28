@@ -24,9 +24,6 @@ actionedAdventureJournalEntries:
   default: ''
   help: Which adventure journal entries flagged with ADVENTURE_JOURNAL_HIDE_AFTER_ACTION
     the user acted upon
-activeCUFProfile:
-  category: 5
-  help: ''
 addFriendInfoShown:
   category: 4
   default: '0'
@@ -2080,12 +2077,6 @@ dangerousShipyardMissionWarningAlreadyShown:
   default: '0'
   help: Boolean indicating whether the shipyard's dangerous mission warning has been
     shown
-debugLog0:
-  category: 5
-  help: ''
-debugLog1:
-  category: 5
-  help: ''
 DebugTorsoTwist:
   category: 0
   default: '0'
@@ -3010,9 +3001,6 @@ GxDebugLevel:
   category: 5
   default: '0'
   help: ''
-GxDebugOmitAssertAllCheck:
-  category: 5
-  help: ''
 GxFullscreenResolution:
   category: 5
   default: auto
@@ -3337,9 +3325,6 @@ lastGarrisonMissionTutorial:
 lastLaunchedExternalEventURL:
   category: 4
   default: ''
-  help: ''
-lastLockedDelvesCompanionAbilities:
-  category: 5
   help: ''
 lastLockedTieredEntranceCompanionAbilities:
   category: 4
@@ -3719,9 +3704,6 @@ nameplateCastBarDisplay:
   category: 4
   default: "\x02["
   help: Determines what information is displayed on nameplate castbars.
-NamePlateClassificationScale:
-  category: 5
-  help: ''
 nameplateDebuffPadding:
   category: 4
   default: '0'
@@ -3745,9 +3727,6 @@ nameplateGameObjectMaxDistance:
   category: 4
   default: '30.000000'
   help: The max distance to show player nameplates for game objects
-NamePlateHorizontalScale:
-  category: 5
-  help: ''
 nameplateInfoDisplay:
   category: 4
   default: "\x02D"
@@ -3864,19 +3843,10 @@ nameplateShowFriendlyClassColor:
   category: 4
   default: '1'
   help: Used to display the class color in friendly nameplate health bars
-nameplateShowFriendlyGuardians:
-  category: 5
-  help: ''
-nameplateShowFriendlyMinions:
-  category: 5
-  help: ''
 nameplateShowFriendlyNpcs:
   category: 4
   default: '0'
   help: Whether nameplates are shown for friendly npcs.
-nameplateShowFriendlyPets:
-  category: 5
-  help: ''
 nameplateShowFriendlyPlayerGuardians:
   category: 4
   default: '0'
@@ -3897,9 +3867,6 @@ nameplateShowFriendlyPlayerTotems:
   category: 4
   default: '0'
   help: Whether friendly player totem nameplates are shown.
-nameplateShowFriendlyTotems:
-  category: 5
-  help: ''
 nameplateShowOffscreen:
   category: 4
   default: '0'
@@ -3954,9 +3921,6 @@ nameplateUseClassColorForFriendlyPlayerUnitNames:
   category: 4
   default: '0'
   help: Used to display the class color in friendly player unit nameplate names.
-NamePlateVerticalScale:
-  category: 5
-  help: ''
 nearclip:
   category: 1
   default: '0.2'

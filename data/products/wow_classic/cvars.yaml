@@ -153,9 +153,6 @@ alwaysCompareItems:
   category: 4
   default: '1'
   help: Always show item comparison tooltips
-alwaysShowActionBars:
-  category: 5
-  help: ''
 alwaysShowBlizzardGroupsTab:
   category: 4
   default: '0'
@@ -1651,9 +1648,6 @@ checkAddonVersion:
   category: 4
   default: '1'
   help: Check interface addon version number
-clampTargetNameplateToScreen:
-  category: 5
-  help: ''
 ClientCastDebug:
   category: 5
   default: '0'
@@ -2310,9 +2304,6 @@ expandBagBar:
   default: '1'
   help: Expand the main menu bar that shows the bags so you can see all equipped bags
     instead of just the backpack and reagent bag
-expandUpgradePanel:
-  category: 5
-  help: ''
 externalDefensivesEnabled:
   category: 4
   default: '0'
@@ -2397,15 +2388,9 @@ flightAngleLookAhead:
   category: 4
   default: '0'
   help: Enables more dynamic attitude adjustments while flying
-floatingCombatTextAuraFade:
-  category: 5
-  help: ''
 floatingCombatTextAuraFade_v2:
   category: 4
   default: '0'
-floatingCombatTextAuras:
-  category: 5
-  help: ''
 floatingCombatTextAuras_v2:
   category: 4
   default: '0'
@@ -2441,33 +2426,18 @@ floatingCombatTextCombatLogPeriodicSpells_v2:
   category: 4
   default: '1'
   help: Display damage caused by periodic effects
-floatingCombatTextCombatState:
-  category: 5
-  help: ''
 floatingCombatTextCombatState_v2:
   category: 4
   default: '0'
-floatingCombatTextComboPoints:
-  category: 5
-  help: ''
 floatingCombatTextComboPoints_v2:
   category: 4
   default: '0'
-floatingCombatTextDamageReduction:
-  category: 5
-  help: ''
 floatingCombatTextDamageReduction_v2:
   category: 4
   default: '0'
-floatingCombatTextDodgeParryMiss:
-  category: 5
-  help: ''
 floatingCombatTextDodgeParryMiss_v2:
   category: 4
   default: '0'
-floatingCombatTextEnergyGains:
-  category: 5
-  help: ''
 floatingCombatTextEnergyGains_v2:
   category: 4
   default: '0'
@@ -2478,9 +2448,6 @@ floatingCombatTextFloatMode_v2:
 floatingCombatTextFriendlyHealers_v2:
   category: 4
   default: '0'
-floatingCombatTextHonorGains:
-  category: 5
-  help: ''
 floatingCombatTextHonorGains_v2:
   category: 4
   default: '0'
@@ -2756,9 +2723,6 @@ graphicsShadowQuality:
   category: 5
   default: '1'
   help: ''
-graphicsSpellDensity:
-  category: 5
-  help: ''
 graphicsSSAO:
   category: 5
   default: '1'
@@ -2979,9 +2943,6 @@ hardTrackedQuests:
   category: 4
   default: ''
   help: Internal cvar for saving hard (user manually selected) tracked quests in order
-hardTrackedWorldQuests:
-  category: 5
-  help: ''
 HardwareCursor:
   category: 1
   default: '1'
@@ -3557,19 +3518,10 @@ nameplateGameObjectMaxDistance:
   category: 4
   default: '30.000000'
   help: The max distance to show player nameplates for game objects
-NamePlateHorizontalScale:
-  category: 5
-  help: ''
 nameplateInfoDisplay:
   category: 4
   default: "\x02"
   help: Determines what information is displayed on nameplates.
-nameplateLargerScale:
-  category: 5
-  help: ''
-nameplateLargeTopInset:
-  category: 5
-  help: ''
 nameplateMaxAlpha:
   category: 4
   default: '1.000000'
@@ -3608,9 +3560,6 @@ nameplateMinScaleDistance:
   default: '10.000000'
   help: The distance from the max distance that nameplates will reach their minimum
     scale.
-nameplateMotionSpeed:
-  category: 5
-  help: ''
 nameplateNotSelectedAlpha:
   category: 4
   default: '0.500000'
@@ -3624,9 +3573,6 @@ nameplateOtherAtBase:
   category: 4
   default: '0'
   help: Position other nameplates at the base, rather than overhead
-nameplateOtherTopInset:
-  category: 5
-  help: ''
 nameplateOverlapH:
   category: 4
   default: '0.800000'
@@ -3635,9 +3581,6 @@ nameplateOverlapV:
   category: 4
   default: '1.100000'
   help: Percentage amount for vertical overlap of nameplates
-NameplatePersonalHideDelaySeconds:
-  category: 5
-  help: ''
 nameplatePlayerMaxDistance:
   category: 4
   default: '60.000000'
@@ -3647,9 +3590,6 @@ nameplatePlayRemovalAnimation:
   default: '0'
   help: If true, play a scale/alpha animation when a nameplate is removed. If false,
     remove the nameplate instantly.
-nameplateRemovalAnimation:
-  category: 5
-  help: ''
 nameplateSelectedAlpha:
   category: 4
   default: '1.000000'
@@ -3709,12 +3649,6 @@ nameplateShowFriendlyClassColor:
   category: 4
   default: '0'
   help: Used to display the class color in friendly nameplate health bars
-nameplateShowFriendlyGuardians:
-  category: 5
-  help: ''
-nameplateShowFriendlyMinions:
-  category: 5
-  help: ''
 nameplateShowFriendlyNpcs:
   category: 4
   default: '0'
@@ -3739,9 +3673,6 @@ nameplateShowFriendlyPlayerTotems:
   category: 4
   default: '0'
   help: Whether friendly player totem nameplates are shown.
-nameplateShowFriendlyTotems:
-  category: 5
-  help: ''
 nameplateShowOffscreen:
   category: 4
   default: '0'
@@ -3796,9 +3727,6 @@ nameplateUseClassColorForFriendlyPlayerUnitNames:
   category: 4
   default: '0'
   help: Used to display the class color in friendly player unit nameplate names.
-NamePlateVerticalScale:
-  category: 5
-  help: ''
 nearclip:
   category: 1
   default: '0.2'
@@ -4166,9 +4094,6 @@ RAIDgraphicsQuality:
 raidGraphicsShadowQuality:
   category: 5
   default: '1'
-  help: ''
-raidGraphicsSpellDensity:
-  category: 5
   help: ''
 raidGraphicsSSAO:
   category: 5
@@ -4572,9 +4497,6 @@ showCastableBuffs:
   category: 4
   default: '0'
   help: Show only Buffs the player can cast.  Only applies to raids.
-ShowClassColorInNameplate:
-  category: 5
-  help: ''
 showCustomSetDetails:
   category: 4
   default: '1'
@@ -5575,9 +5497,6 @@ trackedQuests:
   category: 4
   default: ''
   help: Internal cvar for saving automatically tracked quests in order
-trackedWorldQuests:
-  category: 5
-  help: ''
 trackerFilter:
   category: 4
   default: '7'

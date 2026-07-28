@@ -40,9 +40,6 @@ actionedAdventureJournalEntries:
   default: ''
   help: Which adventure journal entries flagged with ADVENTURE_JOURNAL_HIDE_AFTER_ACTION
     the user acted upon
-activeCUFProfile:
-  category: 5
-  help: ''
 addFriendInfoShown:
   category: 4
   default: '0'
@@ -133,9 +130,6 @@ advFlyPitchControlGroundDebounce:
   default: '0'
   help: If enabled, will debounce forwards/backwards inputs used to control pitch
     when transitioning between dragonriding and grounded.
-advJournalLastOpened:
-  category: 5
-  help: ''
 agentUID:
   category: 4
   default: wow_ptr
@@ -2087,12 +2081,6 @@ dangerousShipyardMissionWarningAlreadyShown:
   default: '0'
   help: Boolean indicating whether the shipyard's dangerous mission warning has been
     shown
-debugLog0:
-  category: 5
-  help: ''
-debugLog1:
-  category: 5
-  help: ''
 DebugTorsoTwist:
   category: 0
   default: '0'
@@ -2566,9 +2554,6 @@ flightAngleLookAhead:
 floatingCombatTextAuraFade_v2:
   category: 4
   default: '0'
-floatingCombatTextAuras:
-  category: 5
-  help: ''
 floatingCombatTextAuras_v2:
   category: 4
   default: '0'
@@ -2604,33 +2589,18 @@ floatingCombatTextCombatLogPeriodicSpells_v2:
   category: 4
   default: '1'
   help: Display damage caused by periodic effects
-floatingCombatTextCombatState:
-  category: 5
-  help: ''
 floatingCombatTextCombatState_v2:
   category: 4
   default: '0'
-floatingCombatTextComboPoints:
-  category: 5
-  help: ''
 floatingCombatTextComboPoints_v2:
   category: 4
   default: '0'
-floatingCombatTextDamageReduction:
-  category: 5
-  help: ''
 floatingCombatTextDamageReduction_v2:
   category: 4
   default: '0'
-floatingCombatTextDodgeParryMiss:
-  category: 5
-  help: ''
 floatingCombatTextDodgeParryMiss_v2:
   category: 4
   default: '0'
-floatingCombatTextEnergyGains:
-  category: 5
-  help: ''
 floatingCombatTextEnergyGains_v2:
   category: 4
   default: '0'
@@ -2641,9 +2611,6 @@ floatingCombatTextFloatMode_v2:
 floatingCombatTextFriendlyHealers_v2:
   category: 4
   default: '0'
-floatingCombatTextHonorGains:
-  category: 5
-  help: ''
 floatingCombatTextHonorGains_v2:
   category: 4
   default: '0'
@@ -2664,9 +2631,6 @@ floatingCombatTextPetSpellDamage_v2:
 floatingCombatTextReactives_v2:
   category: 4
   default: '1'
-floatingCombatTextRepChanges:
-  category: 5
-  help: ''
 floatingCombatTextRepChanges_v2:
   category: 4
   default: '0'
@@ -2737,9 +2701,6 @@ fstack_showregions:
   category: 0
   default: '1'
   help: '0: Hide Regions, 1: Show Regions (Default).'
-fullSizeFocusFrame:
-  category: 5
-  help: ''
 GameDataVisualizer:
   category: 5
   default: '0'
@@ -2989,9 +2950,6 @@ guildRewardsUsable:
   category: 4
   default: '0'
   help: Show usable guild rewards only
-guildRosterView:
-  category: 5
-  help: ''
 guildShowOffline:
   category: 4
   default: '1'
@@ -3054,9 +3012,6 @@ GxDebugBreakLevel:
 GxDebugLevel:
   category: 5
   default: '0'
-  help: ''
-GxDebugOmitAssertAllCheck:
-  category: 5
   help: ''
 GxFullscreenResolution:
   category: 5
@@ -3383,9 +3338,6 @@ lastLaunchedExternalEventURL:
   category: 4
   default: ''
   help: ''
-lastLockedDelvesCompanionAbilities:
-  category: 5
-  help: ''
 lastLockedTieredEntranceCompanionAbilities:
   category: 4
   default: ''
@@ -3450,18 +3402,6 @@ lastTransmogOutfitIDNoSpec:
   category: 4
   default: ''
   help: SetID of the last applied transmog outfit
-lastTransmogOutfitIDSpec1:
-  category: 5
-  help: ''
-lastTransmogOutfitIDSpec2:
-  category: 5
-  help: ''
-lastTransmogOutfitIDSpec3:
-  category: 5
-  help: ''
-lastVoidStorageTutorial:
-  category: 5
-  help: ''
 latestSplashScreen:
   category: 4
   default: '0'
@@ -3506,9 +3446,6 @@ lfgSelectedRoles:
   category: 4
   default: '0'
   help: Stores what roles the player is willing to take on.
-lfGuildSettings:
-  category: 5
-  help: ''
 loadDeprecationFallbacks:
   category: 4
   default: '1'
@@ -3671,9 +3608,6 @@ minimapShapeshiftTracking:
   category: 4
   default: ''
   help: Stores shapeshift-specific tracking spells that were active last session.
-minimapTrackedInfov2:
-  category: 5
-  help: ''
 minimapTrackedInfov4:
   category: 4
   default: '3103471'
@@ -3814,9 +3748,6 @@ nameplateGameObjectMaxDistance:
   category: 4
   default: '30.000000'
   help: The max distance to show player nameplates for game objects
-NamePlateHorizontalScale:
-  category: 5
-  help: ''
 nameplateInfoDisplay:
   category: 4
   default: "\x02D"
@@ -3889,9 +3820,6 @@ nameplatePlayRemovalAnimation:
   default: '1'
   help: If true, play a scale/alpha animation when a nameplate is removed. If false,
     remove the nameplate instantly.
-nameplateResourceOnTarget:
-  category: 5
-  help: ''
 nameplateSelectedAlpha:
   category: 4
   default: '1.000000'
@@ -4033,9 +3961,6 @@ nameplateUseClassColorForFriendlyPlayerUnitNames:
   category: 4
   default: '0'
   help: Used to display the class color in friendly player unit nameplate names.
-NamePlateVerticalScale:
-  category: 5
-  help: ''
 nearclip:
   category: 1
   default: '0.2'
@@ -5033,9 +4958,6 @@ showOutfitDetails:
   default: '1'
   help: Whether or not to show outfit details when the dressing room is opened in
     maximized mode, default on
-showPartyBackground:
-  category: 5
-  help: ''
 showPartyPets:
   category: 4
   default: '0'
@@ -5602,9 +5524,6 @@ spellVisualDensityFilterSetting:
 SpellVisuals:
   category: 5
   default: '0'
-splashScreenNormal:
-  category: 5
-  help: ''
 SplineOpt:
   category: 0
   default: '1'
@@ -5700,9 +5619,6 @@ taintLogObjectSecrets:
   default: '0'
   help: If enabled, include additional taint log entries when script objects gain
     secret aspects or values.
-talentFrameShown:
-  category: 5
-  help: ''
 talentPointsSpent:
   category: 4
   default: '0'
@@ -6344,9 +6260,6 @@ wardrobeSourceFilters:
   default: '0'
   help: Bitfield for which source filters are applied in the wardrobe in the collection
     journal
-watchFrameBaseAlpha:
-  category: 5
-  help: ''
 waterDetail:
   category: 1
   default: '0'

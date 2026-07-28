@@ -183,7 +183,8 @@ G.testsuite.generated = function()
       local t = {}
       for _, command in ipairs(_G.ConsoleGetAllCommands()) do
         local name = command.command
-        if command.commandType == 0 and name:sub(1, 6) ~= 'CACHE-' then
+        local ninfo = select('#', _G.C_CVar.GetCVarInfo(name))
+        if command.commandType == 0 and name:sub(1, 6) ~= 'CACHE-' and ninfo > 0 then
           assertEquals('', command.scriptContents, name)
           assertEquals('', command.scriptParameters, name)
           assertEquals(nil, t[name], name)
