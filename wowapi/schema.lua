@@ -1,11 +1,10 @@
 local wdata = require('wowapi.data')
 
 -- Domain names used by the 'ref' schematype match data/datafiles.yaml keys,
--- so global-vs-product is looked up there. A few domains aren't declared in
--- datafiles.yaml because they aren't simple per-file loads (see
+-- so global-vs-product is looked up there. A couple domains aren't declared
+-- in datafiles.yaml because they aren't simple per-file loads (see
 -- wowapi/data.lua):
 --  - 'schemas' is assembled from the data/schemas directory
---  - 'enums' is extracted from each product's globals.yaml
 --  - 'domains' is the set of valid domain names itself, letting
 --    schematype.yaml check that a schema's ref.schema field names a real
 --    domain without separately enumerating them
@@ -16,7 +15,6 @@ end
 
 local extradomains = {
   schemas = { kind = 'global', domain = wdata.schemas },
-  enums = { kind = 'product', domain = wdata.enums },
   domains = { kind = 'global', domain = domainnames },
 }
 for name in pairs(extradomains) do

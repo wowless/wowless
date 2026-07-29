@@ -3,7 +3,7 @@ describe('config', function()
     describe(p, function()
       local config = require('build.data.products.' .. p .. '.config')
       local apis = require('build.data.products.' .. p .. '.apis')
-      local enums = require('build.data.products.' .. p .. '.globals').Enum
+      local enums = require('build.data.products.' .. p .. '.enums')
       local ns = {}
       for k in pairs(apis) do
         local dot = k:find('%.')

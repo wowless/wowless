@@ -109,7 +109,7 @@ do
 end
 
 local config = parseYaml('data/products/' .. product .. '/docs.yaml')
-local enum = parseYaml('data/products/' .. product .. '/globals.yaml').Enum
+local enum = parseYaml('data/products/' .. product .. '/enums.yaml')
 
 local extra_events = deref(config, 'lies', 'extra_events') or {}
 local extra_script_objects = deref(config, 'lies', 'extra_script_objects') or {}
@@ -365,7 +365,7 @@ local function rewriteEvents(out)
   assertTaken('lies', lies)
 end
 
-local function rewriteGlobals(out)
+local function rewriteEnums(out)
   local lies = deref(config, 'lies', 'enums') or {}
   local extras = deref(config, 'lies', 'extra_enums') or {}
   for _, tab in pairs(tabs) do
@@ -375,7 +375,7 @@ local function rewriteGlobals(out)
         assert(v.Type == tab.Name, v.Name)
         t[v.Name] = v.EnumValue
       end
-      out.Enum[tab.Name] = takelieor(t, lies, tab.Name)
+      out[tab.Name] = takelieor(t, lies, tab.Name)
     end
   end
   assertTaken('lies.enums', lies)
@@ -541,8 +541,8 @@ end
 
 local rewriteFuncs = {
   apis = rewriteApis,
+  enums = rewriteEnums,
   events = rewriteEvents,
-  globals = rewriteGlobals,
   luaobjects = rewriteLuaObjects,
   structures = rewriteStructures,
   uiobjects = rewriteUIObjects,

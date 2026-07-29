@@ -28,6 +28,7 @@ local productschemas = {
   config = 'config',
   cvars = 'cvars',
   docs = 'docs',
+  enums = 'enums',
   events = 'events',
   globals = 'globals',
   luaobjects = 'luaobjects',

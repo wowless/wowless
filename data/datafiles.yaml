@@ -3,6 +3,7 @@ build: product
 config: product
 cvars: product
 docs: product
+enums: product
 events: product
 families: global
 gametypes: global

@@ -64,8 +64,8 @@ local function fixMissingScriptObject(product, source, name)
   return true
 end
 
-local function globalsfile(product)
-  return 'data/products/' .. product .. '/globals.yaml'
+local function enumsfile(product)
+  return 'data/products/' .. product .. '/enums.yaml'
 end
 
 local function fixMissingTypedef(product, source, name)
@@ -82,11 +82,11 @@ local function fixMissingTypedef(product, source, name)
     print(('copied typedefs.%s from %s to %s'):format(name, source, product))
     return true
   end
-  local enum = yaml.parse(file.read(globalsfile(source))).Enum[name]
+  local enum = yaml.parse(file.read(enumsfile(source)))[name]
   if enum then
-    local targetfile = globalsfile(product)
+    local targetfile = enumsfile(product)
     local target = yaml.parse(file.read(targetfile))
-    target.Enum[name] = enum
+    target[name] = enum
     file.write(targetfile, yaml.pprint(target))
     print(('copied Enum.%s from %s to %s'):format(name, source, product))
     return true

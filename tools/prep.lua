@@ -26,17 +26,19 @@ local product = args.product
 local globals = parseYaml('data/products/' .. product .. '/globals.yaml')
 local structures = parseYaml('data/products/' .. product .. '/structures.yaml')
 local stringenums = parseYaml('data/products/' .. product .. '/stringenums.yaml')
+local enums = parseYaml('data/products/' .. product .. '/enums.yaml')
 
 do
   local metafix = parseYaml('data/products/' .. product .. '/config.yaml').runtime.enummetafix
   local names = {}
-  for name in pairs(globals.Enum) do
+  for name in pairs(enums) do
     table.insert(names, name)
   end
   for _, name in ipairs(names) do
-    globals.Enum[name .. 'Meta'] = computeEnumMeta(globals.Enum[name], metafix)
+    enums[name .. 'Meta'] = computeEnumMeta(enums[name], metafix)
   end
 end
+globals.Enum = enums
 
 local function valstr(value)
   local ty = type(value)
