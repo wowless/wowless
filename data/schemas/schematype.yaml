@@ -3,6 +3,7 @@ type:
   taggedunion:
     any: tag
     boolean: tag
+    enumvalue: tag
     flag: tag
     hierarchy:
       record:

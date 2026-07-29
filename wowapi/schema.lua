@@ -33,6 +33,15 @@ end
 local simple = {
   any = function() end,
   boolean = mksimple('boolean'),
+  enumvalue = (function()
+    local pattern = '^0x' .. ('[0-9]'):rep(16) .. '$'
+    return function(v)
+      local ty = type(v)
+      if not (ty == 'number' or ty == 'string' and v:match(pattern)) then
+        return ('want enum value, got %s'):format(ty)
+      end
+    end
+  end)(),
   flag = function(v)
     if v ~= true then
       local vty = type(v)
