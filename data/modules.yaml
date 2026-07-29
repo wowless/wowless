@@ -32,6 +32,8 @@ cgencode:
     luaobjects:
     uiobjects:
     units:
+chunks:
+  deps:
 clog:
   deps:
     datalua:
@@ -91,6 +93,7 @@ loader:
     addons:
     api:
     bindings:
+    chunks:
     datalua:
     env:
     events:
