@@ -307,7 +307,8 @@ local function attrMembers(p, case)
     end
     return members
   elseif ty.enum then
-    return perproduct(p, 'enums')[ty.enum] or {}
+    local e = perproduct(p, 'enums')[ty.enum]
+    return e and e.values or {}
   end
   error('unsupported template-case attribute type for ' .. case.id)
 end
@@ -394,14 +395,11 @@ local ptablemap = {
   end,
   globals = function(p)
     local t = perproduct(p, 'globals')
-    local enums = perproduct(p, 'enums')
+    local enums = {}
     local metafix = perproduct(p, 'config').runtime.enummetafix
-    local names = {}
-    for name in pairs(enums) do
-      table.insert(names, name)
-    end
-    for _, name in ipairs(names) do
-      enums[name .. 'Meta'] = computeEnumMeta(enums[name], metafix)
+    for name, enum in pairs(perproduct(p, 'enums')) do
+      enums[name] = enum.values
+      enums[name .. 'Meta'] = computeEnumMeta(enum.values, metafix)
     end
     t.Enum = enums
     return 'Globals', t

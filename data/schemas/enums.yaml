@@ -3,6 +3,10 @@ type:
   mapof:
     key: string
     value:
-      mapof:
-        key: string
-        value: enumvalue
+      record:
+        values:
+          required: true
+          type:
+            mapof:
+              key: string
+              value: enumvalue

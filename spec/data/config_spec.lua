@@ -26,7 +26,7 @@ describe('config', function()
         describe('enum_values_set_in_framexml', function()
           for k, v in pairs(addoncfg.enum_values_set_in_framexml or {}) do
             describe(k, function()
-              local e = enums[k]
+              local e = enums[k].values
               for vk in pairs(v) do
                 describe(vk, function()
                   it('must not exist', function()
