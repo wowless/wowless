@@ -490,208 +490,218 @@ return function(
     end,
   }
 
+  local function processAttr(ctx, attr, obj, v)
+    if attr.impl == 'internal' then
+      xmlattrlang[attr.name](ctx, obj, v)
+    elseif attr.impl == 'loadfile' then
+      ctx.loadFile(path.join(ctx.dir, v), nil, path.join(ctx.addonRoot, v))
+    elseif attr.impl.scope then
+      return { [attr.impl.scope] = v }
+    elseif attr.impl.method then
+      local fn = assert(obj[attr.impl.method], attr.impl.method)
+      if type(v) == 'table' then -- stringlist
+        fn(obj, unpack(v))
+      else
+        fn(obj, v)
+      end
+    elseif attr.impl.field then
+      obj[attr.impl.field] = v
+    else
+      error('invalid attribute impl for ' .. attr.name)
+    end
+  end
+
+  local function processAttrs(ctx, e, obj, phase)
+    local objty = obj.type
+    local attrs = xmlimpls[objty].attrs
+    for k, v in pairs(e.attr) do
+      local attr = attrs[k]
+      if attr and phase == attr.phase then
+        processAttr(ctx, attr, obj, v)
+      end
+    end
+  end
+
+  local loadElement
+
+  local function implUiobjectType(e)
+    local entry = xmlimpls[e.type] and xmlimpls[e.type].tag
+    return type(entry) == 'table' and entry.uiobject and string.lower(entry.uiobject) or nil
+  end
+
+  local function loadElements(ctx, t, parent)
+    for _, v in ipairs(t) do
+      loadElement(ctx, v, parent)
+    end
+  end
+
+  local function processKids(ctx, e, obj, phase)
+    ctx = ctx.ignoreVirtual and ctx or mixin({}, ctx, { ignoreVirtual = true })
+    for _, kid in ipairs(e.kids) do
+      if xmlimpls[string.lower(kid.type)].phase == phase then
+        loadElement(ctx, kid, obj)
+      end
+    end
+  end
+
+  local phases = {
+    EarlyAttrs = function(ctx, e, obj)
+      processAttrs(ctx, e, obj, 'early')
+    end,
+    Attrs = function(ctx, e, obj)
+      processAttrs(ctx, e, obj, 'middle')
+      processKids(ctx, e, obj, 'middle')
+    end,
+    -- Runs after every template in the inherits= chain has finished Attrs, so
+    -- method= resolves against fully-composed fields.
+    ScriptBindings = function(ctx, e, obj)
+      local env = ctx.useAddonEnv and ctx.addonEnv or ctx.useSecureEnv and secureenv or genv
+      for _, kid in ipairs(e.kids) do
+        if string.lower(kid.type) == 'scripts' then
+          for _, script in ipairs(kid.kids) do
+            bindScript(script, obj, env, ctx.intrinsic)
+          end
+        end
+      end
+    end,
+    Kids = function(ctx, e, obj)
+      processKids(ctx, e, obj, 'late')
+      processAttrs(ctx, e, obj, 'late')
+      -- Implicit setpoint hack for fontstrings.
+      if obj:IsObjectType('fontstring') and obj:GetNumPoints() == 0 then
+        -- Conveniently the JustifyHorizontal names match FramePoint.
+        points.SetPointInternal(obj, obj.justifyh, obj.parent, obj.justifyh, 0, 0)
+      end
+      -- Implicit setallpoints hack for textures.
+      if obj:IsObjectType('texture') and obj:GetNumPoints() == 0 then
+        points.SetAllPointsInternal(obj, obj.parent)
+      end
+    end,
+  }
+
+  -- A template is data (ctx + elem); these are the shared, stateless
+  -- functions that interpret it against a concrete object at creation time,
+  -- walking the inherits= chain first. Same four function values are used
+  -- by every template, so building a template never allocates a closure.
+  local function makePhaseRunner(phaseName)
+    local phase = phases[phaseName]
+    local runner
+    runner = function(template, obj)
+      for _, inh in ipairs(template.inherits or {}) do
+        runner(templates.GetTemplateOrThrow(inh), obj)
+      end
+      phase(template.ctx, template.elem, obj)
+    end
+    return runner
+  end
+
+  local initEarlyAttrs = makePhaseRunner('EarlyAttrs')
+  local initAttrs = makePhaseRunner('Attrs')
+  local initScriptBindings = makePhaseRunner('ScriptBindings')
+  local initKids = makePhaseRunner('Kids')
+
+  function loadElement(ctx, e, parent)
+    local ltype = string.lower(e.type)
+    local intrinsicEntry = intrinsics.Get(ltype)
+    local implBasetype = implUiobjectType(e)
+    -- e.type dispatches to either a declared uiobject-creating tag (impl.uiobject
+    -- in xml.yaml) or a previously-registered intrinsic (same name namespace).
+    if implBasetype or intrinsicEntry then
+      ctx = not e.attr.intrinsic and ctx or mixin({}, ctx, { intrinsic = true })
+      local template = {
+        ctx = ctx,
+        elem = e,
+        inherits = e.attr.inherits,
+        initEarlyAttrs = initEarlyAttrs,
+        initAttrs = initAttrs,
+        initScriptBindings = initScriptBindings,
+        initKids = initKids,
+        name = e.attr.name,
+        type = e.type,
+      }
+      local virtual = e.attr.virtual
+      if e.attr.intrinsic then
+        assert(virtual ~= false, 'intrinsics cannot be explicitly non-virtual: ' .. e.type)
+        assert(e.attr.name, 'cannot create anonymous intrinsic')
+        local name = string.lower(e.attr.name)
+        local basetype = intrinsicEntry and intrinsicEntry.basetype or implBasetype
+        uiobjecttypes.GetOrThrow(basetype) -- validate basetype exists
+        intrinsics.Add(name, basetype, template)
+      else
+        if (ltype == 'font' and e.attr.name) or (virtual and not ctx.ignoreVirtual) then
+          assert(e.attr.name, 'cannot create anonymous template')
+          templates.SetTemplate(e.attr.name, template)
+        end
+        if ltype == 'font' or (not virtual or ctx.ignoreVirtual) then
+          local name = e.attr.name
+          if virtual and ctx.ignoreVirtual then
+            log(1, 'ignoring virtual on %s', tostring(name))
+          end
+          local basetype = intrinsicEntry and intrinsicEntry.basetype or implBasetype
+          local env = ctx.useAddonEnv and ctx.addonEnv or ctx.useSecureEnv and secureenv or genv
+          local tmpls = intrinsicEntry and { intrinsicEntry.template, template } or { template }
+          local objParent = uiobjecttypes.InheritsFrom(basetype, 'parentedobjectbase') and parent or nil
+          local obj = api.CreateUIObject(basetype, name, objParent, env, tmpls, nil, ctx.layer, ctx.sublevel)
+          if ltype == 'worldframe' then
+            -- WORLD is a real frameStrata value, but only WorldFrame has it,
+            -- confirmed against a real client; it isn't reachable through
+            -- SetFrameStrata.
+            obj.frameStrata = 'WORLD'
+          end
+          return obj
+        end
+      end
+    else
+      local impl = xmlimpls[e.type] and xmlimpls[e.type].tag or nil
+      local fn = xmllang[e.type]
+      if type(impl) == 'table' and impl.script then
+        local env = ctx.useAddonEnv and ctx.addonEnv or ctx.useSecureEnv and secureenv or genv
+        precacheScriptText(e, parent, env, ctx.filename)
+      elseif type(impl) == 'table' and impl.call then
+        local elt = impl.call.argument == 'lastkid' and e.kids[#e.kids] or mixin({}, e, { type = impl.call.argument })
+        local obj = loadElement(ctx, elt, parent)
+        -- TODO find if this if needs to be broader to everything here including kids
+        if parent:IsObjectType(impl.call.parenttype) then
+          parent[impl.call.parentmethod](parent, obj)
+        end
+      elseif impl == 'transparent' or impl == 'loadstring' then
+        local ctxmix = mixin({}, ctx)
+        for k, v in pairs(e.attr) do
+          local attr = xmlimpls[e.type].attrs[k]
+          if attr then
+            mixin(ctxmix, processAttr(ctx, attr, nil, v))
+          end
+        end
+        loadElements(ctxmix, e.kids, parent)
+        if impl == 'loadstring' and e.text then
+          loadLuaString(ctx.filename, e.text, e.line, ctx.useSecureEnv)
+        end
+      elseif e.type == 'binding' then -- TODO do this another way
+        -- TODO interpret all binding attributes
+        if not e.attr.debug then -- TODO support debug bindings
+          local bfn = 'return function(keystate) ' .. e.text .. ' end'
+          bindings[e.attr.name] = loadstr(bfn, ctx.filename, e.line)()
+        end
+      elseif e.type == 'fontfamily' then -- TODO do this another way
+        local font = e.kids[1].kids[1]
+        loadElement(ctx, {
+          attr = mixin({}, font.attr, { virtual = true, name = e.attr.name }),
+          kids = font.kids,
+          type = font.type,
+        })
+      elseif fn then
+        fn(ctx, e, parent)
+      else
+        error('unimplemented xml tag ' .. e.type)
+      end
+    end
+  end
+
   local function forAddon(addonName, addonEnv, addonRoot, useSecureEnv)
     local loadFile
 
     local function loadXml(filename, xmlstr)
       local dir = path.dirname(filename)
-
-      local function processAttr(ctx, attr, obj, v)
-        if attr.impl == 'internal' then
-          xmlattrlang[attr.name](ctx, obj, v)
-        elseif attr.impl == 'loadfile' then
-          ctx.loadFile(path.join(ctx.dir, v), nil, path.join(ctx.addonRoot, v))
-        elseif attr.impl.scope then
-          return { [attr.impl.scope] = v }
-        elseif attr.impl.method then
-          local fn = assert(obj[attr.impl.method], attr.impl.method)
-          if type(v) == 'table' then -- stringlist
-            fn(obj, unpack(v))
-          else
-            fn(obj, v)
-          end
-        elseif attr.impl.field then
-          obj[attr.impl.field] = v
-        else
-          error('invalid attribute impl for ' .. attr.name)
-        end
-      end
-
-      local function processAttrs(ctx, e, obj, phase)
-        local objty = obj.type
-        local attrs = xmlimpls[objty].attrs
-        for k, v in pairs(e.attr) do
-          local attr = attrs[k]
-          if attr and phase == attr.phase then
-            processAttr(ctx, attr, obj, v)
-          end
-        end
-      end
-
-      local loadElement
-
-      local function implUiobjectType(e)
-        local entry = xmlimpls[e.type] and xmlimpls[e.type].tag
-        return type(entry) == 'table' and entry.uiobject and string.lower(entry.uiobject) or nil
-      end
-
-      local function loadElements(ctx, t, parent)
-        for _, v in ipairs(t) do
-          loadElement(ctx, v, parent)
-        end
-      end
-
-      local function processKids(ctx, e, obj, phase)
-        ctx = ctx.ignoreVirtual and ctx or mixin({}, ctx, { ignoreVirtual = true })
-        for _, kid in ipairs(e.kids) do
-          if xmlimpls[string.lower(kid.type)].phase == phase then
-            loadElement(ctx, kid, obj)
-          end
-        end
-      end
-
-      local phases = {
-        EarlyAttrs = function(ctx, e, obj)
-          processAttrs(ctx, e, obj, 'early')
-        end,
-        Attrs = function(ctx, e, obj)
-          processAttrs(ctx, e, obj, 'middle')
-          processKids(ctx, e, obj, 'middle')
-        end,
-        -- Runs after every template in the inherits= chain has finished Attrs, so
-        -- method= resolves against fully-composed fields.
-        ScriptBindings = function(ctx, e, obj)
-          local env = ctx.useAddonEnv and ctx.addonEnv or ctx.useSecureEnv and secureenv or genv
-          for _, kid in ipairs(e.kids) do
-            if string.lower(kid.type) == 'scripts' then
-              for _, script in ipairs(kid.kids) do
-                bindScript(script, obj, env, ctx.intrinsic)
-              end
-            end
-          end
-        end,
-        Kids = function(ctx, e, obj)
-          processKids(ctx, e, obj, 'late')
-          processAttrs(ctx, e, obj, 'late')
-          -- Implicit setpoint hack for fontstrings.
-          if obj:IsObjectType('fontstring') and obj:GetNumPoints() == 0 then
-            -- Conveniently the JustifyHorizontal names match FramePoint.
-            points.SetPointInternal(obj, obj.justifyh, obj.parent, obj.justifyh, 0, 0)
-          end
-          -- Implicit setallpoints hack for textures.
-          if obj:IsObjectType('texture') and obj:GetNumPoints() == 0 then
-            points.SetAllPointsInternal(obj, obj.parent)
-          end
-        end,
-      }
-
-      local function mkInitPhase(ctx, phaseName, e)
-        local phase = phases[phaseName]
-        return function(obj)
-          for _, inh in ipairs(e.attr.inherits or {}) do
-            local t = templates.GetTemplateOrThrow(inh)
-            t['init' .. phaseName](obj)
-          end
-          phase(ctx, e, obj)
-        end
-      end
-
-      function loadElement(ctx, e, parent)
-        local ltype = string.lower(e.type)
-        local intrinsicEntry = intrinsics.Get(ltype)
-        local implBasetype = implUiobjectType(e)
-        -- e.type dispatches to either a declared uiobject-creating tag (impl.uiobject
-        -- in xml.yaml) or a previously-registered intrinsic (same name namespace).
-        if implBasetype or intrinsicEntry then
-          ctx = not e.attr.intrinsic and ctx or mixin({}, ctx, { intrinsic = true })
-          local template = {
-            inherits = e.attr.inherits,
-            initEarlyAttrs = mkInitPhase(ctx, 'EarlyAttrs', e),
-            initAttrs = mkInitPhase(ctx, 'Attrs', e),
-            initScriptBindings = mkInitPhase(ctx, 'ScriptBindings', e),
-            initKids = mkInitPhase(ctx, 'Kids', e),
-            name = e.attr.name,
-            type = e.type,
-          }
-          local virtual = e.attr.virtual
-          if e.attr.intrinsic then
-            assert(virtual ~= false, 'intrinsics cannot be explicitly non-virtual: ' .. e.type)
-            assert(e.attr.name, 'cannot create anonymous intrinsic')
-            local name = string.lower(e.attr.name)
-            local basetype = intrinsicEntry and intrinsicEntry.basetype or implBasetype
-            uiobjecttypes.GetOrThrow(basetype) -- validate basetype exists
-            intrinsics.Add(name, basetype, template)
-          else
-            if (ltype == 'font' and e.attr.name) or (virtual and not ctx.ignoreVirtual) then
-              assert(e.attr.name, 'cannot create anonymous template')
-              templates.SetTemplate(e.attr.name, template)
-            end
-            if ltype == 'font' or (not virtual or ctx.ignoreVirtual) then
-              local name = e.attr.name
-              if virtual and ctx.ignoreVirtual then
-                log(1, 'ignoring virtual on %s', tostring(name))
-              end
-              local basetype = intrinsicEntry and intrinsicEntry.basetype or implBasetype
-              local env = ctx.useAddonEnv and ctx.addonEnv or ctx.useSecureEnv and secureenv or genv
-              local tmpls = intrinsicEntry and { intrinsicEntry.template, template } or { template }
-              local objParent = uiobjecttypes.InheritsFrom(basetype, 'parentedobjectbase') and parent or nil
-              local obj = api.CreateUIObject(basetype, name, objParent, env, tmpls, nil, ctx.layer, ctx.sublevel)
-              if ltype == 'worldframe' then
-                -- WORLD is a real frameStrata value, but only WorldFrame has it,
-                -- confirmed against a real client; it isn't reachable through
-                -- SetFrameStrata.
-                obj.frameStrata = 'WORLD'
-              end
-              return obj
-            end
-          end
-        else
-          local impl = xmlimpls[e.type] and xmlimpls[e.type].tag or nil
-          local fn = xmllang[e.type]
-          if type(impl) == 'table' and impl.script then
-            local env = ctx.useAddonEnv and ctx.addonEnv or ctx.useSecureEnv and secureenv or genv
-            precacheScriptText(e, parent, env, ctx.filename)
-          elseif type(impl) == 'table' and impl.call then
-            local elt = impl.call.argument == 'lastkid' and e.kids[#e.kids]
-              or mixin({}, e, { type = impl.call.argument })
-            local obj = loadElement(ctx, elt, parent)
-            -- TODO find if this if needs to be broader to everything here including kids
-            if parent:IsObjectType(impl.call.parenttype) then
-              parent[impl.call.parentmethod](parent, obj)
-            end
-          elseif impl == 'transparent' or impl == 'loadstring' then
-            local ctxmix = mixin({}, ctx)
-            for k, v in pairs(e.attr) do
-              local attr = xmlimpls[e.type].attrs[k]
-              if attr then
-                mixin(ctxmix, processAttr(ctx, attr, nil, v))
-              end
-            end
-            loadElements(ctxmix, e.kids, parent)
-            if impl == 'loadstring' and e.text then
-              loadLuaString(ctx.filename, e.text, e.line, ctx.useSecureEnv)
-            end
-          elseif e.type == 'binding' then -- TODO do this another way
-            -- TODO interpret all binding attributes
-            if not e.attr.debug then -- TODO support debug bindings
-              local bfn = 'return function(keystate) ' .. e.text .. ' end'
-              bindings[e.attr.name] = loadstr(bfn, ctx.filename, e.line)()
-            end
-          elseif e.type == 'fontfamily' then -- TODO do this another way
-            local font = e.kids[1].kids[1]
-            loadElement(ctx, {
-              attr = mixin({}, font.attr, { virtual = true, name = e.attr.name }),
-              kids = font.kids,
-              type = font.type,
-            })
-          elseif fn then
-            fn(ctx, e, parent)
-          else
-            error('unimplemented xml tag ' .. e.type)
-          end
-        end
-      end
-
       security.CallSafely(function()
         local root, warnings = parseXml(xmlstr)
         if loglevel >= 3 then

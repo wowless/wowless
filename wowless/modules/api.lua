@@ -167,7 +167,7 @@ return function(
       end
     end
     for _, template in ipairs(tmpls) do
-      template.initEarlyAttrs(ud)
+      template.initEarlyAttrs(template, ud)
     end
     if (layer or sublevel) and ud.SetDrawLayer then
       ud:SetDrawLayer(layer or ud.layer, sublevel or ud.sublevel)
@@ -189,13 +189,13 @@ return function(
       end
     end
     for _, template in ipairs(tmpls) do
-      template.initAttrs(ud)
+      template.initAttrs(template, ud)
     end
     for _, template in ipairs(tmpls) do
-      template.initScriptBindings(ud)
+      template.initScriptBindings(template, ud)
     end
     for _, template in ipairs(tmpls) do
-      template.initKids(ud)
+      template.initKids(template, ud)
     end
     if id then
       ud:SetID(id)
