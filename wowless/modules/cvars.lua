@@ -1,4 +1,5 @@
-return function(datalua)
+return function(datalua, events)
+  local SendEvent = events.SendEvent
   local infos = datalua.cvars
   local values = {}
   for k, v in pairs(infos) do
@@ -36,7 +37,11 @@ return function(datalua)
     ['C_CVar.SetCVar'] = function(name, value)
       local n = name:lower()
       if infos[n] then
+        local prev = values[n]
         values[n] = value
+        if prev ~= value then
+          SendEvent('CVAR_UPDATE', name, value)
+        end
         return true
       end
     end,
