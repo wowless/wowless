@@ -1,3 +1,19 @@
+# This overlay exists solely to work around a build failure on systems whose
+# glibc declares getresuid/getresgid under _GNU_SOURCE (e.g. current Arch):
+# SDL's CMake HAVE_GETRESUID/HAVE_GETRESGID checks don't define _GNU_SOURCE, so
+# they miss the declaration that SDL_internal.h's own _GNU_SOURCE define exposes
+# in the real translation unit, and SDL's static fallback then conflicts with
+# it. Forcing these cache variables here skips SDL's checks entirely
+# (check_symbol_exists is a no-op when the variable is already defined), so
+# SDL's static fallback is never emitted.
+#
+# Everything else below is an unmodified copy of vcpkg's upstream
+# ports/sdl3/portfile.cmake; unrelated files (fix-freebsd.patch, usage) are
+# referenced from there directly instead of being duplicated here.
+
+set(sdl3_upstream_port_dir
+    "${CMAKE_CURRENT_LIST_DIR}/../../../vcpkg/ports/sdl3")
+
 vcpkg_from_github(
   OUT_SOURCE_PATH
   SOURCE_PATH
@@ -10,8 +26,7 @@ vcpkg_from_github(
   HEAD_REF
   main
   PATCHES
-  fix-freebsd.patch
-  fix-getresuid-gnu-source.patch)
+  "${sdl3_upstream_port_dir}/fix-freebsd.patch")
 
 string(COMPARE EQUAL "${VCPKG_LIBRARY_LINKAGE}" "static" SDL_STATIC)
 string(COMPARE EQUAL "${VCPKG_LIBRARY_LINKAGE}" "dynamic" SDL_SHARED)
@@ -95,6 +110,10 @@ vcpkg_cmake_configure(
   -DSDL_INSTALL_CMAKEDIR_ROOT=share/${PORT}
   # Specifying the revision skips the need to use git to determine a version
   -DSDL_REVISION=vcpkg
+  # See the file-level comment: forces SDL's broken getresuid/getresgid feature
+  # checks to skip, instead of running and getting the wrong answer.
+  -DHAVE_GETRESUID=1
+  -DHAVE_GETRESGID=1
   MAYBE_UNUSED_VARIABLES
   SDL_FORCE_STATIC_VCRT)
 
@@ -107,7 +126,7 @@ file(REMOVE_RECURSE "${CURRENT_PACKAGES_DIR}/debug/include"
 vcpkg_copy_pdbs()
 vcpkg_fixup_pkgconfig()
 
-file(INSTALL "${CMAKE_CURRENT_LIST_DIR}/usage"
+file(INSTALL "${sdl3_upstream_port_dir}/usage"
      DESTINATION "${CURRENT_PACKAGES_DIR}/share/${PORT}")
 vcpkg_install_copyright(
   FILE_LIST
