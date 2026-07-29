@@ -4,6 +4,16 @@ set(CMAKE_TOOLCHAIN_FILE
     ${CMAKE_CURRENT_SOURCE_DIR}/vcpkg/scripts/buildsystems/vcpkg.cmake
     CACHE STRING "Vcpkg toolchain file")
 
+# sdl3's upstream vcpkg port fails to build on systems whose glibc declares
+# getresuid/getresgid under _GNU_SOURCE (e.g. current Arch): SDL's CMake
+# HAVE_GETRESUID/HAVE_GETRESGID checks don't define _GNU_SOURCE, so they miss
+# the declaration that SDL_internal.h's own _GNU_SOURCE define exposes in the
+# real translation unit, and its static fallback then conflicts with it. This
+# overlay patches the check to match.
+set(VCPKG_OVERLAY_PORTS
+    ${CMAKE_CURRENT_SOURCE_DIR}/cmake/vcpkg-overlay-ports
+    CACHE STRING "Vcpkg overlay ports")
+
 project(wowless LANGUAGES C CXX)
 
 set(CMAKE_CXX_STANDARD 17)
