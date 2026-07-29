@@ -500,7 +500,7 @@ return function(
         if attr.impl == 'internal' then
           xmlattrlang[attr.name](ctx, obj, v)
         elseif attr.impl == 'loadfile' then
-          loadFile(path.join(dir, v), nil, path.join(addonRoot, v))
+          ctx.loadFile(path.join(ctx.dir, v), nil, path.join(ctx.addonRoot, v))
         elseif attr.impl.scope then
           return { [attr.impl.scope] = v }
         elseif attr.impl.method then
@@ -561,7 +561,7 @@ return function(
         -- Runs after every template in the inherits= chain has finished Attrs, so
         -- method= resolves against fully-composed fields.
         ScriptBindings = function(ctx, e, obj)
-          local env = ctx.useAddonEnv and addonEnv or ctx.useSecureEnv and secureenv or genv
+          local env = ctx.useAddonEnv and ctx.addonEnv or ctx.useSecureEnv and secureenv or genv
           for _, kid in ipairs(e.kids) do
             if string.lower(kid.type) == 'scripts' then
               for _, script in ipairs(kid.kids) do
@@ -632,7 +632,7 @@ return function(
                 log(1, 'ignoring virtual on %s', tostring(name))
               end
               local basetype = intrinsicEntry and intrinsicEntry.basetype or implBasetype
-              local env = ctx.useAddonEnv and addonEnv or ctx.useSecureEnv and secureenv or genv
+              local env = ctx.useAddonEnv and ctx.addonEnv or ctx.useSecureEnv and secureenv or genv
               local tmpls = intrinsicEntry and { intrinsicEntry.template, template } or { template }
               local objParent = uiobjecttypes.InheritsFrom(basetype, 'parentedobjectbase') and parent or nil
               local obj = api.CreateUIObject(basetype, name, objParent, env, tmpls, nil, ctx.layer, ctx.sublevel)
@@ -649,8 +649,8 @@ return function(
           local impl = xmlimpls[e.type] and xmlimpls[e.type].tag or nil
           local fn = xmllang[e.type]
           if type(impl) == 'table' and impl.script then
-            local env = ctx.useAddonEnv and addonEnv or ctx.useSecureEnv and secureenv or genv
-            precacheScriptText(e, parent, env, filename)
+            local env = ctx.useAddonEnv and ctx.addonEnv or ctx.useSecureEnv and secureenv or genv
+            precacheScriptText(e, parent, env, ctx.filename)
           elseif type(impl) == 'table' and impl.call then
             local elt = impl.call.argument == 'lastkid' and e.kids[#e.kids]
               or mixin({}, e, { type = impl.call.argument })
@@ -669,13 +669,13 @@ return function(
             end
             loadElements(ctxmix, e.kids, parent)
             if impl == 'loadstring' and e.text then
-              loadLuaString(filename, e.text, e.line, ctx.useSecureEnv)
+              loadLuaString(ctx.filename, e.text, e.line, ctx.useSecureEnv)
             end
           elseif e.type == 'binding' then -- TODO do this another way
             -- TODO interpret all binding attributes
             if not e.attr.debug then -- TODO support debug bindings
               local bfn = 'return function(keystate) ' .. e.text .. ' end'
-              bindings[e.attr.name] = loadstr(bfn, filename, e.line)()
+              bindings[e.attr.name] = loadstr(bfn, ctx.filename, e.line)()
             end
           elseif e.type == 'fontfamily' then -- TODO do this another way
             local font = e.kids[1].kids[1]
@@ -701,8 +701,13 @@ return function(
         end
         local ctx = {
           addonEnv = addonEnv,
+          addonName = addonName,
+          addonRoot = addonRoot,
+          dir = dir,
+          filename = filename,
           ignoreVirtual = false,
           intrinsic = false,
+          loadFile = loadFile,
           useAddonEnv = false,
           useSecureEnv = useSecureEnv,
         }
