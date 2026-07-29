@@ -22,7 +22,7 @@ describe('docs', function()
     describe(p, function()
       local docs = require('build.data.products.' .. p .. '.docs')
       local apis = require('build.data.products.' .. p .. '.apis')
-      local enums = require('build.data.products.' .. p .. '.globals').Enum
+      local enums = require('build.data.products.' .. p .. '.enums')
       local uiobjects = require('build.data.products.' .. p .. '.uiobjects')
       describe('lies', function()
         local lies = docs.lies or {}

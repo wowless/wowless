@@ -733,6 +733,7 @@ foreach(product ${products})
     config
     cvars
     docs
+    enums
     events
     globals
     luaobjects
@@ -758,6 +759,7 @@ list(
   datafiles
   docs
   doctable
+  enums
   events
   families
   function

@@ -40,13 +40,6 @@ local datafiles = extLoaders.yaml('data/datafiles.yaml')
 
 local fns = {
   datafiles = global('datafiles'),
-  enums = function()
-    local t = {}
-    for _, d in ipairs(require('pl.dir').getdirectories('data/products')) do
-      t[require('path').basename(d)] = extLoaders.yaml(d .. '/globals.yaml').Enum
-    end
-    return t
-  end,
   schemas = loaddir('schemas', 'yaml'),
 }
 for name, dtype in pairs(datafiles) do
