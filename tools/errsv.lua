@@ -168,15 +168,24 @@ if data.generated.globals then
     if genum then
       local ef = 'data/products/' .. product .. '/enums.yaml'
       local enums = yaml.parseFile(ef)
+      local flatEnums = {}
+      for k, v in pairs(enums) do
+        flatEnums[k] = v.values
+      end
       for k in pairs(genum) do
         local base = k:match('^(.+)Meta$')
         if base and (enums[base] or genum[base]) then
           genum[k] = nil
         end
       end
-      applyPatterns(enums, genum)
+      applyPatterns(flatEnums, genum)
+      for k, v in pairs(flatEnums) do
+        if not enums[k] then
+          enums[k] = { values = v }
+        end
+      end
       for k in pairs(genum) do
-        local ev = enums[k]
+        local ev = flatEnums[k]
         if type(ev) == 'table' and next(ev) == nil then
           ev.Placeholder = 1
         end

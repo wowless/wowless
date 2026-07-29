@@ -230,7 +230,7 @@ local function default(x)
   if x.Type == 'luaIndex' and x.Default then
     return x.Default + 1
   end
-  return enum[x.Type] and enum[x.Type][x.Default] or x.Default
+  return enum[x.Type] and enum[x.Type].values[x.Default] or x.Default
 end
 
 local function insig(fn, ns, api)
@@ -375,7 +375,7 @@ local function rewriteEnums(out)
         assert(v.Type == tab.Name, v.Name)
         t[v.Name] = v.EnumValue
       end
-      out[tab.Name] = takelieor(t, lies, tab.Name)
+      out[tab.Name] = { values = takelieor(t, lies, tab.Name) }
     end
   end
   assertTaken('lies.enums', lies)

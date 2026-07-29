@@ -39,7 +39,7 @@ describe('docs', function()
           for k, v in pairs(lies.enums or {}) do
             describe(k, function()
               it('applies to the declared enum in reverse', function()
-                tedit(enums[k], revedit(v))
+                tedit(enums[k].values, revedit(v))
               end)
             end)
           end
