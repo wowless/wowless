@@ -101,7 +101,7 @@ local function checkLuaObject(ty, o)
     end,
     tostring = function()
       local s = tostring(o)
-      assert(s:match('^' .. ty .. ': 0x[0-9a-f]+$'), s)
+      assert(s:match('^' .. ty .. ': [0-9a-fA-Fx]+$'), s)
     end,
     type = function()
       assertEquals('userdata', type(o))
