@@ -48,6 +48,10 @@ return function(
     end
   end)()
 
+  -- Assigned below, once the phase functions they run exist; forward-declared
+  -- here since CreateUIObject needs to call them and is defined first.
+  local initEarlyAttrs, initAttrs, initScriptBindings, initKids
+
   local function CreateUIObject(typename, objnamearg, parent, addonEnv, tmplsarg, id, layer, sublevel)
     local objname
     if type(objnamearg) == 'string' then
@@ -82,7 +86,7 @@ return function(
       end
     end
     for _, template in ipairs(tmpls) do
-      template.initEarlyAttrs(ud)
+      initEarlyAttrs(template, ud)
     end
     if (layer or sublevel) and ud.SetDrawLayer then
       ud:SetDrawLayer(layer or ud.layer, sublevel or ud.sublevel)
@@ -104,13 +108,13 @@ return function(
       end
     end
     for _, template in ipairs(tmpls) do
-      template.initAttrs(ud)
+      initAttrs(template, ud)
     end
     for _, template in ipairs(tmpls) do
-      template.initScriptBindings(ud)
+      initScriptBindings(template, ud)
     end
     for _, template in ipairs(tmpls) do
-      template.initKids(ud)
+      initKids(template, ud)
     end
     if id then
       ud:SetID(id)
@@ -676,16 +680,26 @@ return function(
     end,
   }
 
-  local function mkInitPhase(ctx, phaseName, e)
+  -- A template is data (ctx + elem); these are the shared, stateless
+  -- functions that interpret it against a concrete object at creation time,
+  -- walking the inherits= chain first. Same four function values are used
+  -- by every template, so building a template never allocates a closure.
+  local function makePhaseRunner(phaseName)
     local phase = phases[phaseName]
-    return function(obj)
-      for _, inh in ipairs(e.attr.inherits or {}) do
-        local t = templates.GetTemplateOrThrow(inh)
-        t['init' .. phaseName](obj)
+    local runner
+    runner = function(template, obj)
+      for _, inh in ipairs(template.inherits or {}) do
+        runner(templates.GetTemplateOrThrow(inh), obj)
       end
-      phase(ctx, e, obj)
+      phase(template.ctx, template.elem, obj)
     end
+    return runner
   end
+
+  initEarlyAttrs = makePhaseRunner('EarlyAttrs')
+  initAttrs = makePhaseRunner('Attrs')
+  initScriptBindings = makePhaseRunner('ScriptBindings')
+  initKids = makePhaseRunner('Kids')
 
   function loadElement(ctx, e, parent)
     local ltype = string.lower(e.type)
@@ -696,11 +710,9 @@ return function(
     if implBasetype or intrinsicEntry then
       ctx = not e.attr.intrinsic and ctx or mixin({}, ctx, { intrinsic = true })
       local template = {
+        ctx = ctx,
+        elem = e,
         inherits = e.attr.inherits,
-        initEarlyAttrs = mkInitPhase(ctx, 'EarlyAttrs', e),
-        initAttrs = mkInitPhase(ctx, 'Attrs', e),
-        initScriptBindings = mkInitPhase(ctx, 'ScriptBindings', e),
-        initKids = mkInitPhase(ctx, 'Kids', e),
         name = e.attr.name,
         type = e.type,
       }
