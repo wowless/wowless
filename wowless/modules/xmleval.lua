@@ -645,47 +645,11 @@ return function(
     end
   end
 
-  local phases = {
-    EarlyAttrs = function(ctx, e, obj)
-      processAttrs(ctx, e, obj, 'early')
-    end,
-    Attrs = function(ctx, e, obj)
-      processAttrs(ctx, e, obj, 'middle')
-      processKids(ctx, e, obj, 'middle')
-    end,
-    -- Runs after every template in the inherits= chain has finished Attrs, so
-    -- method= resolves against fully-composed fields.
-    ScriptBindings = function(ctx, e, obj)
-      local env = ctx.useAddonEnv and ctx.addonEnv or ctx.useSecureEnv and secureenv or genv
-      for _, kid in ipairs(e.kids) do
-        if string.lower(kid.type) == 'scripts' then
-          for _, script in ipairs(kid.kids) do
-            bindScript(script, obj, env, ctx.intrinsic)
-          end
-        end
-      end
-    end,
-    Kids = function(ctx, e, obj)
-      processKids(ctx, e, obj, 'late')
-      processAttrs(ctx, e, obj, 'late')
-      -- Implicit setpoint hack for fontstrings.
-      if obj:IsObjectType('fontstring') and obj:GetNumPoints() == 0 then
-        -- Conveniently the JustifyHorizontal names match FramePoint.
-        points.SetPointInternal(obj, obj.justifyh, obj.parent, obj.justifyh, 0, 0)
-      end
-      -- Implicit setallpoints hack for textures.
-      if obj:IsObjectType('texture') and obj:GetNumPoints() == 0 then
-        points.SetAllPointsInternal(obj, obj.parent)
-      end
-    end,
-  }
-
   -- A template is data (ctx + elem); these are the shared, stateless
   -- functions that interpret it against a concrete object at creation time,
   -- walking the inherits= chain first. Same four function values are used
   -- by every template, so building a template never allocates a closure.
-  local function makePhaseRunner(phaseName)
-    local phase = phases[phaseName]
+  local function makePhaseRunner(phase)
     local runner
     runner = function(template, obj)
       for _, inh in ipairs(template.inherits or {}) do
@@ -696,10 +660,41 @@ return function(
     return runner
   end
 
-  initEarlyAttrs = makePhaseRunner('EarlyAttrs')
-  initAttrs = makePhaseRunner('Attrs')
-  initScriptBindings = makePhaseRunner('ScriptBindings')
-  initKids = makePhaseRunner('Kids')
+  initEarlyAttrs = makePhaseRunner(function(ctx, e, obj)
+    processAttrs(ctx, e, obj, 'early')
+  end)
+
+  initAttrs = makePhaseRunner(function(ctx, e, obj)
+    processAttrs(ctx, e, obj, 'middle')
+    processKids(ctx, e, obj, 'middle')
+  end)
+
+  -- Runs after every template in the inherits= chain has finished Attrs, so
+  -- method= resolves against fully-composed fields.
+  initScriptBindings = makePhaseRunner(function(ctx, e, obj)
+    local env = ctx.useAddonEnv and ctx.addonEnv or ctx.useSecureEnv and secureenv or genv
+    for _, kid in ipairs(e.kids) do
+      if string.lower(kid.type) == 'scripts' then
+        for _, script in ipairs(kid.kids) do
+          bindScript(script, obj, env, ctx.intrinsic)
+        end
+      end
+    end
+  end)
+
+  initKids = makePhaseRunner(function(ctx, e, obj)
+    processKids(ctx, e, obj, 'late')
+    processAttrs(ctx, e, obj, 'late')
+    -- Implicit setpoint hack for fontstrings.
+    if obj:IsObjectType('fontstring') and obj:GetNumPoints() == 0 then
+      -- Conveniently the JustifyHorizontal names match FramePoint.
+      points.SetPointInternal(obj, obj.justifyh, obj.parent, obj.justifyh, 0, 0)
+    end
+    -- Implicit setallpoints hack for textures.
+    if obj:IsObjectType('texture') and obj:GetNumPoints() == 0 then
+      points.SetAllPointsInternal(obj, obj.parent)
+    end
+  end)
 
   function loadElement(ctx, e, parent)
     local ltype = string.lower(e.type)
