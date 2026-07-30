@@ -1,4 +1,4 @@
-local api = ...
+local templates = ...
 return function(self, name)
-  return api.CreateUIObject('controlpoint', name, self)
+  return templates.CreateUIObject('controlpoint', name, self)
 end

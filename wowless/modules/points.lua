@@ -1,6 +1,6 @@
-return function(api, datalua, dirty, env, log, platform, uiobjects)
+return function(datalua, dirty, env, log, platform, uiobjects)
   local genv = env.genv
-  local ParentSub = api.ParentSub
+  local ParentSub = uiobjects.ParentSub
   local SetDirty = dirty.SetDirty
   local IsWindowsClient = platform.IsWindowsClient
   local UserData = uiobjects.UserData

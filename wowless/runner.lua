@@ -70,8 +70,8 @@ local function run(cfg)
     loglevel = cfg.loglevel or 0,
     maxErrors = cfg.maxErrors or math.huge,
   })
-  local api = modules.api
   local loader = modules.loader
+  local templates = modules.templates
   local system = modules.system
   local genv = modules.env.genv
   local datalua = modules.datalua
@@ -137,7 +137,7 @@ local function run(cfg)
       local render = require('wowless.render')
       local screenWidth, screenHeight = system.GetScreenWidth(), system.GetScreenHeight()
       local function doit(name)
-        local data = render.frames2rects(api.frames, cfg.product, screenWidth, screenHeight)
+        local data = render.frames2rects(templates.frames, cfg.product, screenWidth, screenHeight)
         local fn = path.join(path.dirname(cfg.output), name .. '.yaml')
         require('pl.file').write(fn, require('wowapi.yaml').pprint(data))
       end
@@ -173,7 +173,7 @@ local function run(cfg)
         end
       end,
       clicks = function()
-        for frame in api.frames:entries() do
+        for frame in templates.frames:entries() do
           if frame:IsObjectType('button') and frame:IsVisible() then
             log(2, 'clicking %s', frame:GetDebugName())
             CallSafely(frame.Click, frame)
@@ -197,7 +197,7 @@ local function run(cfg)
         end
       end,
       enterleave = function()
-        for frame in api.frames:entries() do
+        for frame in templates.frames:entries() do
           if frame:IsVisible() then
             log(2, 'enter/leave %s', frame:GetDebugName())
             modules.scripts.RunScript(frame, 'OnEnter', true)

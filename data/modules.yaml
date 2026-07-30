@@ -3,19 +3,11 @@ addons:
     datalua:
 api:
   deps:
-    cstubs:
     datalua:
-    env:
     events:
     intrinsics:
-    log:
-    loglevel:
-    parentkey:
-    scripts:
     templates:
-    uiobjects:
     uiobjecttypes:
-    visibility:
 atlas:
   deps:
     env:
@@ -26,10 +18,10 @@ calendar:
 cgencode:
   deps:
     addons:
-    api:
     events:
     log:
     luaobjects:
+    templates:
     uiobjects:
     units:
 clog:
@@ -82,29 +74,20 @@ funtainer:
     security:
 gencode:
   deps:
-    api:
+    templates:
+    uiobjects:
 intrinsics:
   deps:
     log:
 loader:
   deps:
     addons:
-    api:
-    bindings:
     datalua:
     env:
     events:
-    intrinsics:
     loadercfg:
     log:
-    loglevel:
-    points:
-    scripts:
-    security:
     templates:
-    uiobjects:
-    uiobjecttypes:
-    xml:
 loadercfg:
   root:
     default: '{}'
@@ -123,10 +106,10 @@ macrotext:
     security:
 mainloop:
   deps:
-    api:
     eventqueue:
     region:
     scripts:
+    templates:
     time:
     visibility:
 maxErrors:
@@ -139,7 +122,6 @@ platform:
   deps:
 points:
   deps:
-    api:
     datalua:
     dirty:
     env:
@@ -176,7 +158,21 @@ talents:
   deps:
 templates:
   deps:
+    bindings:
+    cstubs:
+    datalua:
+    env:
+    events:
+    intrinsics:
     log:
+    loglevel:
+    points:
+    scripts:
+    security:
+    uiobjects:
+    uiobjecttypes:
+    visibility:
+    xml:
 time:
   deps:
     funtainer:
@@ -189,6 +185,9 @@ uiobjectloader:
     gencode:
 uiobjects:
   deps:
+    parentkey:
+    uiobjecttypes:
+    visibility:
 uiobjecttypes:
   deps:
 units:

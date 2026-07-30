@@ -5,7 +5,7 @@ Animation/GetTarget:
 AnimationGroup/CreateAnimation:
   luafile:
     modules:
-      api:
+      templates:
       uiobjecttypes:
 AnimationGroup/GetAnimations:
   luafile:
@@ -32,7 +32,7 @@ Button/SetEnabled:
 Button/SetFontString:
   luafile:
     modules:
-      api:
+      uiobjects:
 Button/SetFormattedText:
   luafile:
 Button/SetHighlightAtlas:
@@ -133,7 +133,6 @@ MessageFrame/AddMessage:
 ModelScene/CreateActor:
   luafile:
     modules:
-      api:
       templates:
 MouseMixin/EnableMouse:
   luafile:
@@ -141,10 +140,10 @@ MouseMixin/IsMouseEnabled:
   luafile:
 ParentedObject/GetDebugName:
   moduledelegate:
-    name: api
+    name: uiobjects
 ParentedObject/SetParent:
   moduledelegate:
-    name: api
+    name: uiobjects
 ParentedObjectBase/ClearParentKey:
   moduledelegate:
     name: parentkey
@@ -157,7 +156,7 @@ ParentedObjectBase/SetParentKey:
 Path/CreateControlPoint:
   luafile:
     modules:
-      api:
+      templates:
 Path/GetControlPoints:
   luafile:
 Region/ClearAllPoints:
@@ -169,7 +168,7 @@ Region/ClearPoint:
 Region/CreateAnimationGroup:
   luafile:
     modules:
-      api:
+      templates:
 Region/GetAnimationGroups:
   luafile:
 Region/GetBottom:
@@ -267,8 +266,8 @@ ScriptObject/SetScript:
 ScrollFrame/SetScrollChild:
   luafile:
     modules:
-      api:
       points:
+      uiobjects:
 Slider/Disable:
   luafile:
 Slider/Enable:

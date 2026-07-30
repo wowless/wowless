@@ -257,7 +257,7 @@ coroutine.yield:
 CreateFont:
   impl:
     modules:
-      api:
+      templates:
 CreateForbiddenFrame:
   moduledelegate:
     name: api
@@ -289,7 +289,7 @@ difftime:
 EnumerateFrames:
   impl:
     modules:
-      api:
+      templates:
 error:
   stdlib: error
 fastrandom:
