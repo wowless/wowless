@@ -158,21 +158,7 @@ talents:
   deps:
 templates:
   deps:
-    bindings:
-    cstubs:
-    datalua:
-    env:
-    events:
-    intrinsics:
-    log:
-    loglevel:
-    points:
-    scripts:
-    security:
-    uiobjects:
-    uiobjecttypes:
-    visibility:
-    xml:
+    xmleval:
 time:
   deps:
     funtainer:
@@ -198,3 +184,20 @@ visibility:
 xml:
   deps:
     datalua:
+xmleval:
+  deps:
+    bindings:
+    cstubs:
+    datalua:
+    env:
+    events:
+    intrinsics:
+    log:
+    loglevel:
+    points:
+    scripts:
+    security:
+    uiobjects:
+    uiobjecttypes:
+    visibility:
+    xml:
