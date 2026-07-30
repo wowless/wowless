@@ -1061,6 +1061,7 @@
     </Scripts>
   </Frame>
 
+  <Include file='apitemplates.xml' />
   <Include file='generatedxml.xml' />
 
   <Script>
