@@ -490,11 +490,21 @@ return function(
     end,
   }
 
+  local loadFile
+
   local function processAttr(ctx, attr, obj, v)
     if attr.impl == 'internal' then
       xmlattrlang[attr.name](ctx, obj, v)
     elseif attr.impl == 'loadfile' then
-      ctx.loadFile(path.join(ctx.dir, v), nil, path.join(ctx.addonRoot, v))
+      loadFile(
+        ctx.addonName,
+        ctx.addonEnv,
+        ctx.addonRoot,
+        ctx.useSecureEnv,
+        path.join(ctx.dir, v),
+        nil,
+        path.join(ctx.addonRoot, v)
+      )
     elseif attr.impl.scope then
       return { [attr.impl.scope] = v }
     elseif attr.impl.method then
@@ -685,59 +695,62 @@ return function(
     end
   end
 
+  local function loadXml(addonName, addonEnv, addonRoot, useSecureEnv, filename, xmlstr)
+    local dir = path.dirname(filename)
+    security.CallSafely(function()
+      local root, warnings = parseXml(xmlstr)
+      if loglevel >= 3 then
+        for _, warning in ipairs(warnings) do
+          log(3, filename .. ': ' .. warning)
+        end
+      end
+      local ctx = {
+        addonEnv = addonEnv,
+        addonName = addonName,
+        addonRoot = addonRoot,
+        dir = dir,
+        filename = filename,
+        ignoreVirtual = false,
+        intrinsic = false,
+        useAddonEnv = false,
+        useSecureEnv = useSecureEnv,
+      }
+      loadElement(ctx, root)
+    end)
+  end
+
+  function loadFile(addonName, addonEnv, addonRoot, useSecureEnv, filename, closureTaint, secondaryFileName)
+    filename = path.normalize(filename)
+    security.CallSafely(function()
+      log(2, 'loading file %s', filename)
+      local isXml
+      if filename:sub(-4) == '.lua' then
+        isXml = false
+      elseif filename:sub(-4) == '.xml' then
+        isXml = true
+      else
+        error('unknown file type ' .. filename)
+      end
+      local success, content = pcall(readFile, filename)
+      if not success and secondaryFileName then
+        success, content = pcall(readFile, secondaryFileName)
+      end
+      if success then
+        if isXml then
+          loadXml(addonName, addonEnv, addonRoot, useSecureEnv, filename, content)
+        else
+          loadLuaString(filename, content, nil, useSecureEnv, closureTaint, addonName, addonEnv)
+        end
+      else
+        log(1, 'skipping missing file %s', filename)
+      end
+    end)
+  end
+
   local function forAddon(addonName, addonEnv, addonRoot, useSecureEnv)
-    local loadFile
-
-    local function loadXml(filename, xmlstr)
-      local dir = path.dirname(filename)
-      security.CallSafely(function()
-        local root, warnings = parseXml(xmlstr)
-        if loglevel >= 3 then
-          for _, warning in ipairs(warnings) do
-            log(3, filename .. ': ' .. warning)
-          end
-        end
-        local ctx = {
-          addonEnv = addonEnv,
-          addonName = addonName,
-          addonRoot = addonRoot,
-          dir = dir,
-          filename = filename,
-          ignoreVirtual = false,
-          intrinsic = false,
-          loadFile = loadFile,
-          useAddonEnv = false,
-          useSecureEnv = useSecureEnv,
-        }
-        loadElement(ctx, root)
-      end)
+    return function(filename, closureTaint, secondaryFileName)
+      return loadFile(addonName, addonEnv, addonRoot, useSecureEnv, filename, closureTaint, secondaryFileName)
     end
-
-    function loadFile(filename, closureTaint, secondaryFileName)
-      filename = path.normalize(filename)
-      security.CallSafely(function()
-        log(2, 'loading file %s', filename)
-        local loadFn
-        if filename:sub(-4) == '.lua' then
-          loadFn = loadLuaString
-        elseif filename:sub(-4) == '.xml' then
-          loadFn = loadXml
-        else
-          error('unknown file type ' .. filename)
-        end
-        local success, content = pcall(readFile, filename)
-        if not success and secondaryFileName then
-          success, content = pcall(readFile, secondaryFileName)
-        end
-        if success then
-          loadFn(filename, content, nil, useSecureEnv, closureTaint, addonName, addonEnv)
-        else
-          log(1, 'skipping missing file %s', filename)
-        end
-      end)
-    end
-
-    return loadFile
   end
 
   local build = datalua.build
@@ -972,7 +985,7 @@ return function(
     end
     local kindstr = forceSecure and ' (secure dependency)' or useSecureEnv and ' (secure)' or ''
     log(1, 'loading addon files for %s%s', addonName, kindstr)
-    local loadFile = forAddon(addonName, addon.env, addon.dir, useSecureEnv)
+    local loadAddonFile = forAddon(addonName, addon.env, addon.dir, useSecureEnv)
     for _, file in ipairs(addon.files) do
       if forceSecure and file.name:lower():sub(-4) == '.xml' then
         log(1, 'skipping insecure xml %s during forceSecure', file.name)
@@ -987,14 +1000,14 @@ return function(
         log(1, 'loading insecure %s in secureenv', file.name)
         forAddon(addonName, addon.env, addon.dir, true)(file.name)
       else
-        loadFile(file.name)
+        loadAddonFile(file.name)
       end
     end
     if addon.bindings then
-      loadFile(addon.bindings)
+      loadAddonFile(addon.bindings)
       SendEvent('UPDATE_BINDINGS')
     end
-    loadFile(('out/%s/SavedVariables/%s.lua'):format(product, addonName), addon.signed and 'SavedVariables' or nil)
+    loadAddonFile(('out/%s/SavedVariables/%s.lua'):format(product, addonName), addon.signed and 'SavedVariables' or nil)
     if forceSecure then
       addon.secdeploaded = true
     else
@@ -1037,11 +1050,11 @@ return function(
       doBootstrap(dep)
     end
     local env = addon.attrs.SuppressLocalTableRef ~= '1' and {} or nil
-    local loadFile = forAddon(addon.name, env, addon.dir)
+    local loadAddonFile = forAddon(addon.name, env, addon.dir)
     for _, file in ipairs(addon.files) do
       if file.Bootstrap then
         dolog('loading bootstrap file %s', file.name)
-        loadFile(file.name)
+        loadAddonFile(file.name)
       end
     end
     addon.bootstrapped = true
