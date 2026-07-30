@@ -1,4 +1,4 @@
-local templates = ...
+local api = ...
 return function(self)
-  return templates.CreateUIObject('animationgroup', nil, self)
+  return api.CreateUIObject('animationgroup', nil, self)
 end

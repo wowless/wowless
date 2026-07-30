@@ -1,12 +1,12 @@
 local bubblewrap = require('wowless.bubblewrap')
 
-return function(addons, events, log, luaobjects, templates, uiobjects, units)
+return function(addons, api, events, log, luaobjects, uiobjects, units)
   local function CreateLuaObject(typename)
     return luaobjects.CreateProxy(luaobjects.Create(typename))
   end
 
   local function CreateUiObject(typename)
-    return templates.CreateUIObject(string.lower(typename)).luarep
+    return api.CreateUIObject(string.lower(typename)).luarep
   end
 
   local function GetUiAddon(value)

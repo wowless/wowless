@@ -1,12 +1,12 @@
-local points, uiobjects = ...
+local api, points = ...
 return function(self, scrollChild)
   local old = self.scrollChild
   if old then
-    uiobjects.SetParent(old, nil)
+    api.SetParent(old, nil)
   end
   self.scrollChild = scrollChild
   if scrollChild then
-    uiobjects.SetParent(scrollChild, self)
+    api.SetParent(scrollChild, self)
     points.ClearAllPoints(scrollChild)
     points.SetPointInternal(scrollChild, 'TOPLEFT', self, 'TOPLEFT', 0, 0)
   end

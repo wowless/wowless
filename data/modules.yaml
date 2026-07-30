@@ -7,6 +7,7 @@ api:
     events:
     intrinsics:
     templates:
+    uiobjects:
     uiobjecttypes:
 atlas:
   deps:
@@ -18,10 +19,10 @@ calendar:
 cgencode:
   deps:
     addons:
+    api:
     events:
     log:
     luaobjects:
-    templates:
     uiobjects:
     units:
 clog:
@@ -74,8 +75,7 @@ funtainer:
     security:
 gencode:
   deps:
-    templates:
-    uiobjects:
+    api:
 intrinsics:
   deps:
     log:
@@ -106,10 +106,10 @@ macrotext:
     security:
 mainloop:
   deps:
+    api:
     eventqueue:
     region:
     scripts:
-    templates:
     time:
     visibility:
 maxErrors:

@@ -1,5 +1,5 @@
-local uiobjects = ...
+local api = ...
 return function(self, value)
-  uiobjects.SetParent(value, self)
+  api.SetParent(value, self)
   self.fontstring = value
 end

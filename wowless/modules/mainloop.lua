@@ -1,7 +1,7 @@
-return function(eventqueue, region, scripts, templates, time, visibility)
+return function(api, eventqueue, region, scripts, time, visibility)
   local Advance = time.Advance
   local DrainEvents = eventqueue.DrainEvents
-  local frames = templates.frames
+  local frames = api.frames
   local GetRect = region.GetRect
   local IsVisible = visibility.IsVisible
   local RunScript = scripts.RunScript
