@@ -916,6 +916,7 @@ lua2c(
   wowless.modules.units=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/units.lua
   wowless.modules.visibility=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/visibility.lua
   wowless.modules.xml=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/xml.lua
+  wowless.modules.xmleval=${CMAKE_CURRENT_SOURCE_DIR}/wowless/modules/xmleval.lua
   wowless.profiler=${CMAKE_CURRENT_SOURCE_DIR}/wowless/profiler.lua
   wowless.runner=${CMAKE_CURRENT_SOURCE_DIR}/wowless/runner.lua
   wowless.luaobject=c

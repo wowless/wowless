@@ -3,19 +3,13 @@ addons:
     datalua:
 api:
   deps:
-    cstubs:
     datalua:
-    env:
     events:
     intrinsics:
-    log:
-    loglevel:
-    parentkey:
-    scripts:
     templates:
     uiobjects:
     uiobjecttypes:
-    visibility:
+    xmleval:
 atlas:
   deps:
     env:
@@ -89,22 +83,12 @@ intrinsics:
 loader:
   deps:
     addons:
-    api:
-    bindings:
     datalua:
     env:
     events:
-    intrinsics:
     loadercfg:
     log:
-    loglevel:
-    points:
-    scripts:
-    security:
-    templates:
-    uiobjects:
-    uiobjecttypes:
-    xml:
+    xmleval:
 loadercfg:
   root:
     default: '{}'
@@ -139,7 +123,6 @@ platform:
   deps:
 points:
   deps:
-    api:
     datalua:
     dirty:
     env:
@@ -189,6 +172,9 @@ uiobjectloader:
     gencode:
 uiobjects:
   deps:
+    parentkey:
+    uiobjecttypes:
+    visibility:
 uiobjecttypes:
   deps:
 units:
@@ -199,3 +185,21 @@ visibility:
 xml:
   deps:
     datalua:
+xmleval:
+  deps:
+    bindings:
+    cstubs:
+    datalua:
+    env:
+    events:
+    intrinsics:
+    log:
+    loglevel:
+    points:
+    scripts:
+    security:
+    templates:
+    uiobjects:
+    uiobjecttypes:
+    visibility:
+    xml:
