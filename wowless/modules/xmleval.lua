@@ -77,9 +77,6 @@ return function(
       frames:insert(ud)
     end
     local tmpls = {}
-    if objtype.template then
-      table.insert(tmpls, objtype.template)
-    end
     if tmplsarg then
       for _, tmpl in ipairs(tmplsarg) do
         table.insert(tmpls, tmpl)
