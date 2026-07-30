@@ -116,6 +116,16 @@ return function(
     for _, template in ipairs(tmpls) do
       initKids(template, ud)
     end
+    -- These only apply to template-driven creation (XML authoring convenience
+    -- for anchor-less fontstrings/textures); #tmpls == 0 means a plain
+    -- CreateTexture()/CreateFontString() call, which gets no implicit anchor.
+    if #tmpls > 0 and ud:IsObjectType('fontstring') and ud:GetNumPoints() == 0 then
+      -- Conveniently the JustifyHorizontal names match FramePoint.
+      points.SetPointInternal(ud, ud.justifyh, ud.parent, ud.justifyh, 0, 0)
+    end
+    if #tmpls > 0 and ud:IsObjectType('texture') and ud:GetNumPoints() == 0 then
+      points.SetAllPointsInternal(ud, ud.parent)
+    end
     if id then
       ud:SetID(id)
     end
@@ -685,15 +695,6 @@ return function(
   initKids = makePhaseRunner(function(ctx, e, obj)
     processKids(ctx, e, obj, 'late')
     processAttrs(ctx, e, obj, 'late')
-    -- Implicit setpoint hack for fontstrings.
-    if obj:IsObjectType('fontstring') and obj:GetNumPoints() == 0 then
-      -- Conveniently the JustifyHorizontal names match FramePoint.
-      points.SetPointInternal(obj, obj.justifyh, obj.parent, obj.justifyh, 0, 0)
-    end
-    -- Implicit setallpoints hack for textures.
-    if obj:IsObjectType('texture') and obj:GetNumPoints() == 0 then
-      points.SetAllPointsInternal(obj, obj.parent)
-    end
   end)
 
   function loadElement(ctx, e, parent)
