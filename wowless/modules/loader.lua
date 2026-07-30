@@ -1,4 +1,4 @@
-return function(addons, datalua, envmodule, events, loadercfg, log, templates)
+return function(addons, datalua, envmodule, events, loadercfg, log, xmleval)
   local genv = envmodule.genv
   local SendEvent = events.SendEvent
 
@@ -13,7 +13,7 @@ return function(addons, datalua, envmodule, events, loadercfg, log, templates)
 
   local function forAddon(addonName, addonEnv, addonRoot, useSecureEnv)
     return function(filename, closureTaint, secondaryFileName)
-      return templates.LoadFile(addonName, addonEnv, addonRoot, useSecureEnv, filename, closureTaint, secondaryFileName)
+      return xmleval.LoadFile(addonName, addonEnv, addonRoot, useSecureEnv, filename, closureTaint, secondaryFileName)
     end
   end
 

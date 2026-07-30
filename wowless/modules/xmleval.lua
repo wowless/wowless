@@ -16,6 +16,7 @@ return function(
   points,
   scripts,
   security,
+  templates,
   uiobjects,
   uiobjecttypes,
   visibility,
@@ -46,39 +47,6 @@ return function(
       return n
     end
   end)()
-
-  local templates = {}
-
-  local function GetTemplateInfo(name)
-    local t = templates[name:lower()]
-    if t then
-      return {
-        height = 1,
-        inherits = t.inherits and table.concat(t.inherits, ','),
-        keyValues = {},
-        sourceLocation = 'source',
-        type = t.type,
-        width = 1,
-      }
-    end
-  end
-
-  local function GetTemplateOrThrow(name)
-    local t = templates[name:lower()]
-    if not t then
-      error('unknown template ' .. name)
-    end
-    return t
-  end
-
-  local function SetTemplate(name, template)
-    local lname = name:lower()
-    if templates[lname] then
-      log(1, 'overwriting template %s', name)
-    end
-    log(3, 'creating template %s', name)
-    templates[lname] = template
-  end
 
   local function CreateUIObject(typename, objnamearg, parent, addonEnv, tmplsarg, id, layer, sublevel)
     local objname
@@ -712,7 +680,7 @@ return function(
     local phase = phases[phaseName]
     return function(obj)
       for _, inh in ipairs(e.attr.inherits or {}) do
-        local t = GetTemplateOrThrow(inh)
+        local t = templates.GetTemplateOrThrow(inh)
         t['init' .. phaseName](obj)
       end
       phase(ctx, e, obj)
@@ -747,7 +715,7 @@ return function(
       else
         if (ltype == 'font' and e.attr.name) or (virtual and not ctx.ignoreVirtual) then
           assert(e.attr.name, 'cannot create anonymous template')
-          SetTemplate(e.attr.name, template)
+          templates.SetTemplate(e.attr.name, template)
         end
         if ltype == 'font' or (not virtual or ctx.ignoreVirtual) then
           local name = e.attr.name
@@ -869,9 +837,6 @@ return function(
   return {
     CreateUIObject = CreateUIObject,
     frames = frames,
-    GetTemplateInfo = GetTemplateInfo,
-    GetTemplateOrThrow = GetTemplateOrThrow,
     LoadFile = LoadFile,
-    SetTemplate = SetTemplate,
   }
 end
