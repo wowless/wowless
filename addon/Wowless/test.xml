@@ -1030,6 +1030,37 @@
     </Scripts>
   </Frame>
 
+  <Frame name='WowlessTemplateDiamond1' virtual='true'>
+    <KeyValues>
+      <KeyValue key='key' value='1' />
+    </KeyValues>
+  </Frame>
+  <Frame name='WowlessTemplateDiamond2' inherits='WowlessTemplateDiamond1' virtual='true'>
+    <KeyValues>
+      <KeyValue key='key' value='2' />
+    </KeyValues>
+  </Frame>
+  <Frame inherits='WowlessTemplateDiamond1,WowlessTemplateDiamond2'>
+    <Scripts>
+      <OnLoad>assertEquals('2', self.key)</OnLoad>
+    </Scripts>
+  </Frame>
+  <Frame inherits='WowlessTemplateDiamond2,WowlessTemplateDiamond1'>
+    <Scripts>
+      <OnLoad>assertEquals('1', self.key)</OnLoad>
+    </Scripts>
+  </Frame>
+  <Frame inherits='WowlessTemplateDiamond1,WowlessTemplateDiamond2,WowlessTemplateDiamond1'>
+    <Scripts>
+      <OnLoad>assertEquals('1', self.key)</OnLoad>
+    </Scripts>
+  </Frame>
+  <Frame inherits='WowlessTemplateDiamond2,WowlessTemplateDiamond1,WowlessTemplateDiamond2'>
+    <Scripts>
+      <OnLoad>assertEquals('2', self.key)</OnLoad>
+    </Scripts>
+  </Frame>
+
   <Include file='generatedxml.xml' />
 
   <Script>
