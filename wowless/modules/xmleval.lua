@@ -53,14 +53,7 @@ return function(
   local initEarlyAttrs, initAttrs, initScriptBindings, initKids
 
   local function CreateUIObject(typename, objnamearg, parent, addonEnv, tmplsarg, id, layer, sublevel)
-    local objname
-    if type(objnamearg) == 'string' then
-      objname = ParentSub(objnamearg, parent)
-    elseif type(objnamearg) == 'number' then
-      objname = tostring(objnamearg)
-    end
     local objtype = uiobjecttypes.GetOrThrow(typename)
-    log(3, 'creating %s%s', objtype.name, objname and (' named ' .. objname) or '')
     local regid = nextid()
     local objp = new(regid, objtype.ctype)
     local obj = setmetatable({ [0] = objp }, objtype.sandboxMT)
@@ -68,7 +61,6 @@ return function(
     ud[1] = objp
     ud.luarep = obj
     ud.forbiddenrep = setmetatable({ [0] = objp }, objtype.sandboxMT)
-    ud.name = objname
     ud.type = typename
     userdata[regid] = ud
     setmetatable(ud, objtype.hostMT)
@@ -88,12 +80,16 @@ return function(
     if (layer or sublevel) and ud.SetDrawLayer then
       ud:SetDrawLayer(layer or ud.layer, sublevel or ud.sublevel)
     end
+    -- Resolved against the object's final parent, since an early `parent=`
+    -- attr (processed above) can reassign it before $parent substitution runs.
+    local objname
+    if type(objnamearg) == 'string' then
+      objname = ParentSub(objnamearg, ud.parent)
+    elseif type(objnamearg) == 'number' then
+      objname = tostring(objnamearg)
+    end
+    log(3, 'creating %s%s', objtype.name, objname and (' named ' .. objname) or '')
     if objname then
-      if type(objnamearg) == 'string' then
-        objname = ParentSub(objnamearg, ud.parent)
-      elseif type(objnamearg) == 'number' then
-        objname = tostring(objnamearg)
-      end
       ud.name = objname
       if genv[objname] then
         log(3, 'overwriting global ' .. objname)
