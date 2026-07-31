@@ -1,0 +1,73 @@
+<Ui>
+  <!--
+    Templates used to check whether the various Create*() APIs that take a
+    template/templateName argument accept more than one template name
+    (comma-separated, the way XML inherits= does) or reject/ignore it. See
+    templates.lua.
+  -->
+  <Script>
+    WowlessApiTemplateActorMixin1 = { apiTemplateFrom1 = true }
+    WowlessApiTemplateActorMixin2 = { apiTemplateFrom2 = true }
+  </Script>
+
+  <Frame name='WowlessApiTemplateFrame1' virtual='true'>
+    <KeyValues>
+      <KeyValue key='apiTemplateFrom1' value='true' type='boolean' />
+    </KeyValues>
+  </Frame>
+  <Frame name='WowlessApiTemplateFrame2' virtual='true'>
+    <KeyValues>
+      <KeyValue key='apiTemplateFrom2' value='true' type='boolean' />
+    </KeyValues>
+  </Frame>
+
+  <Actor name='WowlessApiTemplateActor1' virtual='true' mixin='WowlessApiTemplateActorMixin1' />
+  <Actor name='WowlessApiTemplateActor2' virtual='true' mixin='WowlessApiTemplateActorMixin2' />
+
+  <Texture name='WowlessApiTemplateTexture1' virtual='true'>
+    <KeyValues>
+      <KeyValue key='apiTemplateFrom1' value='true' type='boolean' />
+    </KeyValues>
+  </Texture>
+  <Texture name='WowlessApiTemplateTexture2' virtual='true'>
+    <KeyValues>
+      <KeyValue key='apiTemplateFrom2' value='true' type='boolean' />
+    </KeyValues>
+  </Texture>
+  <FontString name='WowlessApiTemplateFontString1' virtual='true'>
+    <KeyValues>
+      <KeyValue key='apiTemplateFrom1' value='true' type='boolean' />
+    </KeyValues>
+  </FontString>
+  <FontString name='WowlessApiTemplateFontString2' virtual='true'>
+    <KeyValues>
+      <KeyValue key='apiTemplateFrom2' value='true' type='boolean' />
+    </KeyValues>
+  </FontString>
+  <Line name='WowlessApiTemplateLine1' virtual='true'>
+    <KeyValues>
+      <KeyValue key='apiTemplateFrom1' value='true' type='boolean' />
+    </KeyValues>
+  </Line>
+  <Line name='WowlessApiTemplateLine2' virtual='true'>
+    <KeyValues>
+      <KeyValue key='apiTemplateFrom2' value='true' type='boolean' />
+    </KeyValues>
+  </Line>
+  <MaskTexture name='WowlessApiTemplateMaskTexture1' virtual='true'>
+    <KeyValues>
+      <KeyValue key='apiTemplateFrom1' value='true' type='boolean' />
+    </KeyValues>
+  </MaskTexture>
+  <MaskTexture name='WowlessApiTemplateMaskTexture2' virtual='true'>
+    <KeyValues>
+      <KeyValue key='apiTemplateFrom2' value='true' type='boolean' />
+    </KeyValues>
+  </MaskTexture>
+
+  <AnimationGroup name='WowlessApiTemplateAnimationGroup1' virtual='true' looping='REPEAT' />
+  <AnimationGroup name='WowlessApiTemplateAnimationGroup2' virtual='true' looping='BOUNCE' />
+
+  <Animation name='WowlessApiTemplateAnimation1' virtual='true' smoothing='IN' />
+  <Animation name='WowlessApiTemplateAnimation2' virtual='true' smoothing='OUT' />
+</Ui>

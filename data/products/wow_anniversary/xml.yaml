@@ -76,6 +76,8 @@ Animation:
       type: number
     enddelay:
       type: number
+    name:
+      type: string
     order:
       type: number
     parentkey:
@@ -89,6 +91,8 @@ Animation:
       type: number
     target:
       type: string
+    virtual:
+      type: boolean
   contents:
     tags:
       KeyValues:
@@ -1513,6 +1517,7 @@ Ui:
   contents:
     tags:
       Actor:
+      Animation:
       AnimationGroup:
       Font:
       FontFamily:

@@ -1053,6 +1053,7 @@ file(MAKE_DIRECTORY ${d} ${CMAKE_CURRENT_BINARY_DIR}/staging/addon/Wowless)
 set(testaddon_outs)
 foreach(
   f
+  apitemplates.xml
   arraydiff.lua
   asynctests.lua
   evenmoreintrinsic.xml
@@ -1062,6 +1063,7 @@ foreach(
   init.lua
   luaobjects.lua
   statemachine.lua
+  templates.lua
   test.lua
   uiobjects.lua
   util.lua
