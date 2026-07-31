@@ -37,6 +37,11 @@ G.testsuite.templates = function()
     -- match any template and errors.
     CreateTexture = function()
       return {
+        ['single template'] = function()
+          local f = CreateFrame('Frame')
+          local t = retn(1, f:CreateTexture(nil, nil, 'WowlessApiTemplateTexture1'))
+          check1(true, t.apiTemplateFrom1)
+        end,
         ['comma-separated templates'] = function()
           local f = CreateFrame('Frame')
           local names = 'WowlessApiTemplateTexture1,WowlessApiTemplateTexture2'
@@ -51,6 +56,11 @@ G.testsuite.templates = function()
 
     CreateFontString = function()
       return {
+        ['single template'] = function()
+          local f = CreateFrame('Frame')
+          local fs = retn(1, f:CreateFontString(nil, nil, 'WowlessApiTemplateFontString1'))
+          check1(true, fs.apiTemplateFrom1)
+        end,
         ['comma-separated templates'] = function()
           local f = CreateFrame('Frame')
           local names = 'WowlessApiTemplateFontString1,WowlessApiTemplateFontString2'
@@ -65,6 +75,11 @@ G.testsuite.templates = function()
 
     CreateLine = function()
       return {
+        ['single template'] = function()
+          local f = CreateFrame('Frame')
+          local l = retn(1, f:CreateLine(nil, nil, 'WowlessApiTemplateLine1'))
+          check1(true, l.apiTemplateFrom1)
+        end,
         ['comma-separated templates'] = function()
           local f = CreateFrame('Frame')
           local names = 'WowlessApiTemplateLine1,WowlessApiTemplateLine2'
@@ -79,6 +94,11 @@ G.testsuite.templates = function()
 
     CreateMaskTexture = function()
       return {
+        ['single template'] = function()
+          local f = CreateFrame('Frame')
+          local m = retn(1, f:CreateMaskTexture(nil, nil, 'WowlessApiTemplateMaskTexture1'))
+          check1(true, m.apiTemplateFrom1)
+        end,
         ['comma-separated templates'] = function()
           local f = CreateFrame('Frame')
           local names = 'WowlessApiTemplateMaskTexture1,WowlessApiTemplateMaskTexture2'

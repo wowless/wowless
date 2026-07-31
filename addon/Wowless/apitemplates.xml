@@ -54,16 +54,20 @@
       <KeyValue key='apiTemplateFrom2' value='true' type='boolean' />
     </KeyValues>
   </Line>
-  <MaskTexture name='WowlessApiTemplateMaskTexture1' virtual='true'>
+  <!-- A MaskTexture-tagged virtual template isn't found by CreateMaskTexture
+       on a real client; a Texture-tagged one is (confirmed against a real
+       client), so these use Texture here even though the target is a
+       MaskTexture. -->
+  <Texture name='WowlessApiTemplateMaskTexture1' virtual='true'>
     <KeyValues>
       <KeyValue key='apiTemplateFrom1' value='true' type='boolean' />
     </KeyValues>
-  </MaskTexture>
-  <MaskTexture name='WowlessApiTemplateMaskTexture2' virtual='true'>
+  </Texture>
+  <Texture name='WowlessApiTemplateMaskTexture2' virtual='true'>
     <KeyValues>
       <KeyValue key='apiTemplateFrom2' value='true' type='boolean' />
     </KeyValues>
-  </MaskTexture>
+  </Texture>
 
   <AnimationGroup name='WowlessApiTemplateAnimationGroup1' virtual='true' looping='REPEAT' />
   <AnimationGroup name='WowlessApiTemplateAnimationGroup2' virtual='true' looping='BOUNCE' />
