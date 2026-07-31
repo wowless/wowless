@@ -1,4 +1,4 @@
 local api = ...
-return function(self)
-  return api.CreateUIObject('animationgroup', nil, self)
+return function(self, name, templateName)
+  return api.CreateChildUIObject('animationgroup', self, name, templateName)
 end
