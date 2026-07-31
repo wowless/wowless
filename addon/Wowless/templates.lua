@@ -30,11 +30,10 @@ G.testsuite.templates = function()
     end,
 
     -- Frame:CreateTexture/CreateFontString/CreateLine/CreateMaskTexture all
-    -- go through api.CreateChildUIObject, which splits templateName the
-    -- same way CreateFrame does. Confirmed against a real client that this
-    -- is wrong for all four: the client treats the whole templateName
-    -- string as one literal name, so a comma-separated list just fails to
-    -- match any template and errors.
+    -- go through api.CreateChildUIObject, which looks templateName up as a
+    -- single literal name (no splitting), matching CreateActor's rule.
+    -- Confirmed against a real client: a comma-separated list is just an
+    -- unknown template name and errors.
     CreateTexture = function()
       return {
         ['single template'] = function()
@@ -42,14 +41,10 @@ G.testsuite.templates = function()
           local t = retn(1, f:CreateTexture(nil, nil, 'WowlessApiTemplateTexture1'))
           check1(true, t.apiTemplateFrom1)
         end,
-        ['comma-separated templates'] = function()
+        ['comma-separated templates error'] = function()
           local f = CreateFrame('Frame')
           local names = 'WowlessApiTemplateTexture1,WowlessApiTemplateTexture2'
-          if _G.__wowless then
-            checkBoth(retn(1, f:CreateTexture(nil, nil, names)))
-          else
-            check1(false, (pcall(f.CreateTexture, f, nil, nil, names)))
-          end
+          check1(false, (pcall(f.CreateTexture, f, nil, nil, names)))
         end,
       }
     end,
@@ -61,14 +56,10 @@ G.testsuite.templates = function()
           local fs = retn(1, f:CreateFontString(nil, nil, 'WowlessApiTemplateFontString1'))
           check1(true, fs.apiTemplateFrom1)
         end,
-        ['comma-separated templates'] = function()
+        ['comma-separated templates error'] = function()
           local f = CreateFrame('Frame')
           local names = 'WowlessApiTemplateFontString1,WowlessApiTemplateFontString2'
-          if _G.__wowless then
-            checkBoth(retn(1, f:CreateFontString(nil, nil, names)))
-          else
-            check1(false, (pcall(f.CreateFontString, f, nil, nil, names)))
-          end
+          check1(false, (pcall(f.CreateFontString, f, nil, nil, names)))
         end,
       }
     end,
@@ -80,14 +71,10 @@ G.testsuite.templates = function()
           local l = retn(1, f:CreateLine(nil, nil, 'WowlessApiTemplateLine1'))
           check1(true, l.apiTemplateFrom1)
         end,
-        ['comma-separated templates'] = function()
+        ['comma-separated templates error'] = function()
           local f = CreateFrame('Frame')
           local names = 'WowlessApiTemplateLine1,WowlessApiTemplateLine2'
-          if _G.__wowless then
-            checkBoth(retn(1, f:CreateLine(nil, nil, names)))
-          else
-            check1(false, (pcall(f.CreateLine, f, nil, nil, names)))
-          end
+          check1(false, (pcall(f.CreateLine, f, nil, nil, names)))
         end,
       }
     end,
@@ -99,14 +86,10 @@ G.testsuite.templates = function()
           local m = retn(1, f:CreateMaskTexture(nil, nil, 'WowlessApiTemplateMaskTexture1'))
           check1(true, m.apiTemplateFrom1)
         end,
-        ['comma-separated templates'] = function()
+        ['comma-separated templates error'] = function()
           local f = CreateFrame('Frame')
           local names = 'WowlessApiTemplateMaskTexture1,WowlessApiTemplateMaskTexture2'
-          if _G.__wowless then
-            checkBoth(retn(1, f:CreateMaskTexture(nil, nil, names)))
-          else
-            check1(false, (pcall(f.CreateMaskTexture, f, nil, nil, names)))
-          end
+          check1(false, (pcall(f.CreateMaskTexture, f, nil, nil, names)))
         end,
       }
     end,
