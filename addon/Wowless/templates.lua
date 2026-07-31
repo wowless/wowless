@@ -94,56 +94,36 @@ G.testsuite.templates = function()
       }
     end,
 
-    -- Region/CreateAnimationGroup.lua ignores every argument beyond self
-    -- (it doesn't even accept a name), so templateName is never looked up
-    -- or applied -- not even a single valid name.
+    -- Region/CreateAnimationGroup.lua looks templateName up as a single
+    -- literal name (no splitting), matching CreateActor's rule.
     CreateAnimationGroup = function()
       return {
         ['single template'] = function()
           local f = CreateFrame('Frame')
           local g = retn(1, f:CreateAnimationGroup(nil, 'WowlessApiTemplateAnimationGroup1'))
-          if _G.__wowless then
-            check1('NONE', (g:GetLooping()))
-          else
-            check1('REPEAT', (g:GetLooping()))
-          end
+          check1('REPEAT', (g:GetLooping()))
         end,
-        ['comma-separated templates'] = function()
+        ['comma-separated templates error'] = function()
           local f = CreateFrame('Frame')
           local names = 'WowlessApiTemplateAnimationGroup1,WowlessApiTemplateAnimationGroup2'
-          if _G.__wowless then
-            local g = retn(1, f:CreateAnimationGroup(nil, names))
-            check1('NONE', (g:GetLooping()))
-          else
-            check1(false, (pcall(f.CreateAnimationGroup, f, nil, names)))
-          end
+          check1(false, (pcall(f.CreateAnimationGroup, f, nil, names)))
         end,
       }
     end,
 
-    -- AnimationGroup/CreateAnimation.lua only reads its first argument
-    -- (animationType); name and templateName are accepted but discarded,
-    -- so not even a single valid template name is applied.
+    -- AnimationGroup/CreateAnimation.lua looks templateName up as a single
+    -- literal name (no splitting), matching CreateActor's rule.
     CreateAnimation = function()
       return {
         ['single template'] = function()
           local ag = CreateFrame('Frame'):CreateAnimationGroup()
           local a = retn(1, ag:CreateAnimation('Animation', nil, 'WowlessApiTemplateAnimation1'))
-          if _G.__wowless then
-            check1('NONE', (a:GetSmoothing()))
-          else
-            check1('IN', (a:GetSmoothing()))
-          end
+          check1('IN', (a:GetSmoothing()))
         end,
-        ['comma-separated templates'] = function()
+        ['comma-separated templates error'] = function()
           local ag = CreateFrame('Frame'):CreateAnimationGroup()
           local names = 'WowlessApiTemplateAnimation1,WowlessApiTemplateAnimation2'
-          if _G.__wowless then
-            local a = retn(1, ag:CreateAnimation('Animation', nil, names))
-            check1('NONE', (a:GetSmoothing()))
-          else
-            check1(false, (pcall(ag.CreateAnimation, ag, 'Animation', nil, names)))
-          end
+          check1(false, (pcall(ag.CreateAnimation, ag, 'Animation', nil, names)))
         end,
       }
     end,
