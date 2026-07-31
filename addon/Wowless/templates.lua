@@ -100,9 +100,9 @@ G.testsuite.templates = function()
           local f = CreateFrame('Frame')
           local g = retn(1, f:CreateAnimationGroup(nil, 'WowlessApiTemplateAnimationGroup1'))
           if _G.__wowless then
-            check1(nil, g.apiTemplateFrom1)
+            check1('NONE', (g:GetLooping()))
           else
-            check1(true, g.apiTemplateFrom1)
+            check1('REPEAT', (g:GetLooping()))
           end
         end,
         ['comma-separated templates'] = function()
@@ -110,8 +110,7 @@ G.testsuite.templates = function()
           local names = 'WowlessApiTemplateAnimationGroup1,WowlessApiTemplateAnimationGroup2'
           if _G.__wowless then
             local g = retn(1, f:CreateAnimationGroup(nil, names))
-            check1(nil, g.apiTemplateFrom1)
-            check1(nil, g.apiTemplateFrom2)
+            check1('NONE', (g:GetLooping()))
           else
             check1(false, (pcall(f.CreateAnimationGroup, f, nil, names)))
           end
@@ -128,9 +127,9 @@ G.testsuite.templates = function()
           local ag = CreateFrame('Frame'):CreateAnimationGroup()
           local a = retn(1, ag:CreateAnimation('Animation', nil, 'WowlessApiTemplateAnimation1'))
           if _G.__wowless then
-            check1(nil, a.apiTemplateFrom1)
+            check1('NONE', (a:GetSmoothing()))
           else
-            check1(true, a.apiTemplateFrom1)
+            check1('IN', (a:GetSmoothing()))
           end
         end,
         ['comma-separated templates'] = function()
@@ -138,8 +137,7 @@ G.testsuite.templates = function()
           local names = 'WowlessApiTemplateAnimation1,WowlessApiTemplateAnimation2'
           if _G.__wowless then
             local a = retn(1, ag:CreateAnimation('Animation', nil, names))
-            check1(nil, a.apiTemplateFrom1)
-            check1(nil, a.apiTemplateFrom2)
+            check1('NONE', (a:GetSmoothing()))
           else
             check1(false, (pcall(ag.CreateAnimation, ag, 'Animation', nil, names)))
           end
