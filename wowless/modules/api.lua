@@ -25,10 +25,7 @@ return function(datalua, events, intrinsics, templates, uiobjects, uiobjecttypes
   end
 
   local function CreateChildUIObject(typename, self, name, inherits, layer, sublevel)
-    local tmpls = {}
-    for templateName in string.gmatch(inherits or '', '[^, ]+') do
-      table.insert(tmpls, templates.GetTemplateOrThrow(templateName))
-    end
+    local tmpls = inherits and { templates.GetTemplateOrThrow(inherits) }
     return xmleval.CreateUIObject(typename, name, self, nil, tmpls, nil, layer, sublevel)
   end
 
