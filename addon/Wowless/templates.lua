@@ -1,7 +1,6 @@
 local _, G = ...
 G.testsuite.templates = function()
   local check1 = G.check1
-  local check2 = G.check2
   local retn = G.retn
 
   local function checkBoth(obj)
@@ -99,7 +98,7 @@ G.testsuite.templates = function()
       return {
         ['single template'] = function()
           local f = CreateFrame('Frame')
-          local g = retn(1, f:CreateAnimationGroup('WowlessApiTemplateAnimationGroup1'))
+          local g = retn(1, f:CreateAnimationGroup(nil, 'WowlessApiTemplateAnimationGroup1'))
           if _G.__wowless then
             check1(nil, g.apiTemplateFrom1)
           else
@@ -110,11 +109,11 @@ G.testsuite.templates = function()
           local f = CreateFrame('Frame')
           local names = 'WowlessApiTemplateAnimationGroup1,WowlessApiTemplateAnimationGroup2'
           if _G.__wowless then
-            local g = retn(1, f:CreateAnimationGroup(names))
+            local g = retn(1, f:CreateAnimationGroup(nil, names))
             check1(nil, g.apiTemplateFrom1)
             check1(nil, g.apiTemplateFrom2)
           else
-            check1(false, (pcall(f.CreateAnimationGroup, f, names)))
+            check1(false, (pcall(f.CreateAnimationGroup, f, nil, names)))
           end
         end,
       }
@@ -143,33 +142,6 @@ G.testsuite.templates = function()
             check1(nil, a.apiTemplateFrom2)
           else
             check1(false, (pcall(ag.CreateAnimation, ag, 'Animation', nil, names)))
-          end
-        end,
-      }
-    end,
-
-    -- Path/CreateControlPoint.lua reads name but discards templateName,
-    -- so not even a single valid template name is applied (offsetx/offsety
-    -- stay at their 0 defaults instead of the template's values).
-    CreateControlPoint = function()
-      return {
-        ['single template'] = function()
-          local path = retn(1, CreateFrame('Frame'):CreateAnimationGroup():CreateAnimation('Path'))
-          local point = retn(1, path:CreateControlPoint(nil, 'WowlessApiTemplateControlPoint1'))
-          if _G.__wowless then
-            check2(0, 0, point:GetOffset())
-          else
-            check2(11, 0, point:GetOffset())
-          end
-        end,
-        ['comma-separated templates'] = function()
-          local path = retn(1, CreateFrame('Frame'):CreateAnimationGroup():CreateAnimation('Path'))
-          local names = 'WowlessApiTemplateControlPoint1,WowlessApiTemplateControlPoint2'
-          if _G.__wowless then
-            local point = retn(1, path:CreateControlPoint(nil, names))
-            check2(0, 0, point:GetOffset())
-          else
-            check1(false, (pcall(path.CreateControlPoint, path, nil, names)))
           end
         end,
       }

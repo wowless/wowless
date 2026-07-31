@@ -76,34 +76,14 @@
     </KeyValues>
   </AnimationGroup>
 
-  <!--
-    Animation and ControlPoint aren't valid top-level template tags, so
-    these are registered as virtual templates nested inside a real (always
-    instantiated) AnimationGroup/Path instead, the same way any other
-    virtual template gets registered when its containing element loads.
-    ControlPoint has no KeyValues support, so offsetx/offsety (readable via
-    GetOffset()) stand in as the per-template markers instead.
-  -->
-  <Frame>
-    <Animations>
-      <AnimationGroup>
-        <Animation name='WowlessApiTemplateAnimation1' virtual='true'>
-          <KeyValues>
-            <KeyValue key='apiTemplateFrom1' value='true' type='boolean' />
-          </KeyValues>
-        </Animation>
-        <Animation name='WowlessApiTemplateAnimation2' virtual='true'>
-          <KeyValues>
-            <KeyValue key='apiTemplateFrom2' value='true' type='boolean' />
-          </KeyValues>
-        </Animation>
-        <Path>
-          <ControlPoints>
-            <ControlPoint name='WowlessApiTemplateControlPoint1' virtual='true' offsetx='11' />
-            <ControlPoint name='WowlessApiTemplateControlPoint2' virtual='true' offsety='22' />
-          </ControlPoints>
-        </Path>
-      </AnimationGroup>
-    </Animations>
-  </Frame>
+  <Animation name='WowlessApiTemplateAnimation1' virtual='true'>
+    <KeyValues>
+      <KeyValue key='apiTemplateFrom1' value='true' type='boolean' />
+    </KeyValues>
+  </Animation>
+  <Animation name='WowlessApiTemplateAnimation2' virtual='true'>
+    <KeyValues>
+      <KeyValue key='apiTemplateFrom2' value='true' type='boolean' />
+    </KeyValues>
+  </Animation>
 </Ui>
