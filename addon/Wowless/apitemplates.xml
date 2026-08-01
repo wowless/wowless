@@ -74,4 +74,7 @@
 
   <Animation name='WowlessApiTemplateAnimation1' virtual='true' smoothing='IN' />
   <Animation name='WowlessApiTemplateAnimation2' virtual='true' smoothing='OUT' />
+
+  <Frame name='WowlessApiTemplateControlPoint1' virtual='true' />
+  <Frame name='WowlessApiTemplateControlPoint2' virtual='true' />
 </Ui>

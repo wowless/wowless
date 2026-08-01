@@ -128,6 +128,23 @@ G.testsuite.templates = function()
       }
     end,
 
+    -- AnimationGroup/CreateAnimation.lua looks templateName up as a single
+    -- literal name (no splitting), matching CreateActor's rule.
+    CreateControlPoint = function()
+      return {
+        ['single template'] = function()
+          local p = CreateFrame('Frame'):CreateAnimationGroup():CreateAnimation('Path')
+          local c = retn(1, p:CreateControlPoint(nil, 'WowlessApiTemplateControlPoint1'))
+          check1('ControlPoint', c:GetObjectType())
+        end,
+        ['comma-separated templates error'] = function()
+          local p = CreateFrame('Frame'):CreateAnimationGroup():CreateAnimation('Path')
+          local names = 'WowlessApiTemplateControlPoint1,WowlessApiTemplateControlPoint2'
+          check1(false, (pcall(p.CreateControlPoint, p, nil, names)))
+        end,
+      }
+    end,
+
     -- ModelScene/CreateActor.lua looks up its template argument as a
     -- single literal name (no splitting), so a comma-separated list is
     -- just an unknown template name and errors. Confirmed against a real
