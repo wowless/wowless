@@ -1,4 +1,4 @@
-return function(datalua, events, intrinsics, templates, uiobjects, uiobjecttypes, xmleval)
+return function(datalua, events, intrinsics, templates, uiobjecttypes, xmleval)
   local GetIntrinsic = intrinsics.Get
   local HasType = uiobjecttypes.Has
   local InheritsFrom = uiobjecttypes.InheritsFrom
@@ -33,10 +33,5 @@ return function(datalua, events, intrinsics, templates, uiobjects, uiobjecttypes
     CreateChildUIObject = CreateChildUIObject,
     CreateForbiddenFrame = CreateFrame, -- TODO implement properly
     CreateFrame = CreateFrame,
-    CreateUIObject = xmleval.CreateUIObject,
-    frames = xmleval.frames,
-    GetDebugName = uiobjects.GetDebugName,
-    ParentSub = uiobjects.ParentSub,
-    SetParent = uiobjects.SetParent,
   }
 end

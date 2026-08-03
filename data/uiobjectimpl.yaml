@@ -32,7 +32,7 @@ Button/SetEnabled:
 Button/SetFontString:
   luafile:
     modules:
-      api:
+      uiobjects:
 Button/SetFormattedText:
   luafile:
 Button/SetHighlightAtlas:
@@ -133,18 +133,18 @@ MessageFrame/AddMessage:
 ModelScene/CreateActor:
   luafile:
     modules:
-      api:
       templates:
+      xmleval:
 MouseMixin/EnableMouse:
   luafile:
 MouseMixin/IsMouseEnabled:
   luafile:
 ParentedObject/GetDebugName:
   moduledelegate:
-    name: api
+    name: uiobjects
 ParentedObject/SetParent:
   moduledelegate:
-    name: api
+    name: uiobjects
 ParentedObjectBase/ClearParentKey:
   moduledelegate:
     name: parentkey
@@ -267,8 +267,8 @@ ScriptObject/SetScript:
 ScrollFrame/SetScrollChild:
   luafile:
     modules:
-      api:
       points:
+      uiobjects:
 Slider/Disable:
   luafile:
 Slider/Enable:

@@ -1,6 +1,6 @@
 local hlist = require('wowless.hlist')
 
-return function(api)
+return function(uiobjects, xmleval)
   local function ToTexture(parent, tex, obj)
     if type(tex) == 'string' or type(tex) == 'number' then
       local t = obj or parent:CreateTexture()
@@ -12,9 +12,9 @@ return function(api)
   end
 
   return {
-    CreateUIObject = api.CreateUIObject,
+    CreateUIObject = xmleval.CreateUIObject,
     hlist = hlist,
-    SetParent = api.SetParent,
+    SetParent = uiobjects.SetParent,
     ToTexture = ToTexture,
   }
 end
