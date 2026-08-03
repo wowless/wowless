@@ -7,7 +7,6 @@ api:
     events:
     intrinsics:
     templates:
-    uiobjects:
     uiobjecttypes:
     xmleval:
 atlas:
@@ -20,12 +19,12 @@ calendar:
 cgencode:
   deps:
     addons:
-    api:
     events:
     log:
     luaobjects:
     uiobjects:
     units:
+    xmleval:
 clog:
   deps:
     datalua:
@@ -76,7 +75,8 @@ funtainer:
     security:
 gencode:
   deps:
-    api:
+    uiobjects:
+    xmleval:
 intrinsics:
   deps:
     log:
@@ -107,12 +107,12 @@ macrotext:
     security:
 mainloop:
   deps:
-    api:
     eventqueue:
     region:
     scripts:
     time:
     visibility:
+    xmleval:
 maxErrors:
   root:
     default: '0'

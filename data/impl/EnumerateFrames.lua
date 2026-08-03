@@ -1,5 +1,5 @@
-local api = ...
-local nextentry, arg = api.frames:entries()
+local xmleval = ...
+local nextentry, arg = xmleval.frames:entries()
 return function(frame)
   return nextentry(arg, frame)
 end
