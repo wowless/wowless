@@ -9,6 +9,7 @@ return function(
   cstubs,
   datalua,
   envmodule,
+  eventqueue,
   events,
   intrinsics,
   log,
@@ -24,6 +25,7 @@ return function(
 )
   local genv = envmodule.genv
   local secureenv = envmodule.secureenv
+  local QueueEvent = eventqueue.QueueEvent
   local SendEvent = events.SendEvent
   local parseXml = xml
   local bindings = bindingsmodule.bindings
@@ -326,19 +328,35 @@ return function(
     return obj
   end
 
+  -- issue #854: matches the "Interface/AddOns/<addon>/<relpath>" virtual
+  -- paths a real client reports in LUA_WARNING messages for XML-sourced
+  -- issues, regardless of where wowless actually reads the file from disk.
+  local function warningPath(ctx)
+    return 'Interface/AddOns/' .. ctx.addonName .. '/' .. ctx.filename:sub(#ctx.addonRoot + 2)
+  end
+
+  local function anchorWarning(ctx, anchor, parent, reason, value)
+    QueueEvent(
+      'LUA_WARNING',
+      ('%s:%d %s: %s: %s'):format(warningPath(ctx), anchor.line, parent.name or 'Unknown', reason, value)
+    )
+  end
+
   local xmllang = {
-    anchor = function(_, anchor, parent)
+    anchor = function(ctx, anchor, parent)
       local point = anchor.attr.point or 'TOPLEFT'
       local relativeTo
       if anchor.attr.relativeto then
         relativeTo = genv[ParentSub(anchor.attr.relativeto, parent.parent)]
         relativeTo = relativeTo and uiobjects.UserData(relativeTo)
-        if not relativeTo or relativeTo == parent then
-          return
+        if not relativeTo then
+          return anchorWarning(ctx, anchor, parent, 'Couldn\'t find relative frame', anchor.attr.relativeto)
+        elseif relativeTo == parent then
+          return anchorWarning(ctx, anchor, parent, 'anchored to itself', anchor.attr.relativeto)
         end
       elseif anchor.attr.relativekey then
         if not anchor.attr.relativekey:match(parentMatch) then
-          return
+          return anchorWarning(ctx, anchor, parent, 'anchored to itself', anchor.attr.relativekey)
         end
         relativeTo = navigate(parent, anchor.attr.relativekey)
         if not relativeTo or relativeTo == parent then

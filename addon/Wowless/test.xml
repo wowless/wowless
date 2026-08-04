@@ -931,12 +931,24 @@
       </OnLoad>
     </Scripts>
   </Frame>
+  <Script>
+    table.insert(
+      Wowless.ExpectedNextFrame,
+      'Interface/AddOns/Wowless/test.xml:' .. (__LINE__ - 11) .. " Unknown: Couldn't find relative frame: thisisdefinitelynotsomethingin_G"
+    )
+  </Script>
 
   <Frame name='WowlessSelfAnchor'>
     <Anchors>
       <Anchor relativeTo='WowlessSelfAnchor' />
     </Anchors>
   </Frame>
+  <Script>
+    table.insert(
+      Wowless.ExpectedNextFrame,
+      'Interface/AddOns/Wowless/test.xml:' .. (__LINE__ - 6) .. ' WowlessSelfAnchor: anchored to itself: WowlessSelfAnchor'
+    )
+  </Script>
   <Script>
     Wowless.check1(0, WowlessSelfAnchor:GetNumPoints())
   </Script>
@@ -953,6 +965,28 @@
             Wowless.check5('TOPLEFT', self:GetParent(), 'TOPLEFT', 0, 0, self:GetPoint(1))
           </OnLoad>
         </Scripts>
+      </Frame>
+      <Frame parentKey='baz'>
+        <Frames>
+          <Frame parentKey='frob' />
+          <Frame parentKey='quux'>
+            <Anchors>
+              <Anchor point='TOPLEFT' relativeKey='$pArEnT.$PaReNt.foo' />
+              <Anchor point='TOP' relativeKey='$pArEnT$PaReNt.foo' />
+              <Anchor point='TOPRIGHT' relativeKey='$parent.frob.$parent.$parent.foo' />
+              <Anchor point='LEFT' relativeKey='$parent.quux.$parent.$parent.foo' />
+            </Anchors>
+            <Scripts>
+              <OnLoad>
+                Wowless.check1(4, self:GetNumPoints())
+                Wowless.check5('TOPLEFT', self:GetParent():GetParent().foo, 'TOPLEFT', 0, 0, self:GetPoint(1))
+                Wowless.check5('TOP', self:GetParent(), 'TOP', 0, 0, self:GetPoint(2))
+                Wowless.check5('TOPRIGHT', self:GetParent():GetParent().foo, 'TOPRIGHT', 0, 0, self:GetPoint(3))
+                Wowless.check5('LEFT', self:GetParent(), 'LEFT', 0, 0, self:GetPoint(4))
+              </OnLoad>
+            </Scripts>
+          </Frame>
+        </Frames>
       </Frame>
       <Frame parentKey='bar'>
         <Anchors>
@@ -980,30 +1014,14 @@
           </OnLoad>
         </Scripts>
       </Frame>
-      <Frame parentKey='baz'>
-        <Frames>
-          <Frame parentKey='frob' />
-          <Frame parentKey='quux'>
-            <Anchors>
-              <Anchor point='TOPLEFT' relativeKey='$pArEnT.$PaReNt.foo' />
-              <Anchor point='TOP' relativeKey='$pArEnT$PaReNt.foo' />
-              <Anchor point='TOPRIGHT' relativeKey='$parent.frob.$parent.$parent.foo' />
-              <Anchor point='LEFT' relativeKey='$parent.quux.$parent.$parent.foo' />
-            </Anchors>
-            <Scripts>
-              <OnLoad>
-                Wowless.check1(4, self:GetNumPoints())
-                Wowless.check5('TOPLEFT', self:GetParent():GetParent().foo, 'TOPLEFT', 0, 0, self:GetPoint(1))
-                Wowless.check5('TOP', self:GetParent(), 'TOP', 0, 0, self:GetPoint(2))
-                Wowless.check5('TOPRIGHT', self:GetParent():GetParent().foo, 'TOPRIGHT', 0, 0, self:GetPoint(3))
-                Wowless.check5('LEFT', self:GetParent(), 'LEFT', 0, 0, self:GetPoint(4))
-              </OnLoad>
-            </Scripts>
-          </Frame>
-        </Frames>
-      </Frame>
     </Frames>
   </Frame>
+  <Script>
+    table.insert(
+      Wowless.ExpectedNextFrame,
+      'Interface/AddOns/Wowless/test.xml:' .. (__LINE__ - 26) .. ' Unknown: anchored to itself: anyoldgarbage$parent.foo'
+    )
+  </Script>
 
   <Frame>
     <Layers>
