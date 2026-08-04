@@ -133,8 +133,7 @@ MessageFrame/AddMessage:
 ModelScene/CreateActor:
   luafile:
     modules:
-      templates:
-      xmleval:
+      api:
 MouseMixin/EnableMouse:
   luafile:
 MouseMixin/IsMouseEnabled:
