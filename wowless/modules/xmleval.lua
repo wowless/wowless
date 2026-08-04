@@ -801,12 +801,6 @@ return function(
   local function loadXml(addonName, addonEnv, addonRoot, useSecureEnv, filename, xmlstr)
     local dir = path.dirname(filename)
     security.CallSafely(function()
-      local root, warnings = parseXml(xmlstr, filename, addonName, addonRoot)
-      if loglevel >= 3 then
-        for _, warning in ipairs(warnings) do
-          log(3, filename .. ': ' .. warning)
-        end
-      end
       local ctx = {
         addonEnv = addonEnv,
         addonName = addonName,
@@ -818,6 +812,12 @@ return function(
         useAddonEnv = false,
         useSecureEnv = useSecureEnv,
       }
+      local root, warnings = parseXml(xmlstr, warningPath(ctx))
+      if loglevel >= 3 then
+        for _, warning in ipairs(warnings) do
+          log(3, filename .. ': ' .. warning)
+        end
+      end
       loadElement(ctx, root)
     end)
   end
