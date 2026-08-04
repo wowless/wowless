@@ -41,8 +41,8 @@ local function xml2dom(xmlstr)
   return stack[1]._children[1]
 end
 
-return function(datalua, events)
-  local SendEvent = events.SendEvent
+return function(datalua, eventqueue)
+  local QueueEvent = eventqueue.QueueEvent
   local lang = datalua.xmlflat
   local stringenums = datalua.stringenums
   local enums = datalua.globals.Enum
@@ -87,9 +87,9 @@ return function(datalua, events)
     -- children and attributes rather than dropping the whole subtree
     -- silently, flagging each one individually too.
     local function warnUnrecognized(e)
-      SendEvent('LUA_WARNING', ('%s:%d Unrecognized XML: %s'):format(warningPath, e._line, e._name))
+      QueueEvent('LUA_WARNING', ('%s:%d Unrecognized XML: %s'):format(warningPath, e._line, e._name))
       for _, k in ipairs(e._attr) do
-        SendEvent('LUA_WARNING', ('%s:%d Unrecognized XML attribute: %s'):format(warningPath, e._line, k))
+        QueueEvent('LUA_WARNING', ('%s:%d Unrecognized XML attribute: %s'):format(warningPath, e._line, k))
       end
       for _, kid in ipairs(e._children or {}) do
         if kid._type == 'ELEMENT' then

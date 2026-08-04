@@ -185,14 +185,14 @@
     </Scripts>
   </WowlessIntrinsicType>
   <Script>
-    table.insert(Wowless.ExpectedLuaWarnings, 'Interface/AddOns/Wowless/test.xml:' .. (__LINE__ - 11) .. ' Unrecognized XML: WowlessIntrinsicType')
-    table.insert(Wowless.ExpectedLuaWarnings, 'Interface/AddOns/Wowless/test.xml:' .. (__LINE__ - 11) .. ' Unrecognized XML: Scripts')
-    table.insert(Wowless.ExpectedLuaWarnings, 'Interface/AddOns/Wowless/test.xml:' .. (__LINE__ - 11) .. ' Unrecognized XML: OnLoad')
-    table.insert(Wowless.ExpectedLuaWarnings, 'Interface/AddOns/Wowless/test.xml:' .. (__LINE__ - 9) .. ' Unrecognized XML: WowlessIntrinsicType')
-    table.insert(Wowless.ExpectedLuaWarnings, 'Interface/AddOns/Wowless/test.xml:' .. (__LINE__ - 10) .. ' Unrecognized XML attribute: name')
-    table.insert(Wowless.ExpectedLuaWarnings, 'Interface/AddOns/Wowless/test.xml:' .. (__LINE__ - 11) .. ' Unrecognized XML attribute: intrinsic')
-    table.insert(Wowless.ExpectedLuaWarnings, 'Interface/AddOns/Wowless/test.xml:' .. (__LINE__ - 11) .. ' Unrecognized XML: Scripts')
-    table.insert(Wowless.ExpectedLuaWarnings, 'Interface/AddOns/Wowless/test.xml:' .. (__LINE__ - 11) .. ' Unrecognized XML: OnLoad')
+    table.insert(Wowless.ExpectedNextFrame, 'Interface/AddOns/Wowless/test.xml:' .. (__LINE__ - 11) .. ' Unrecognized XML: WowlessIntrinsicType')
+    table.insert(Wowless.ExpectedNextFrame, 'Interface/AddOns/Wowless/test.xml:' .. (__LINE__ - 11) .. ' Unrecognized XML: Scripts')
+    table.insert(Wowless.ExpectedNextFrame, 'Interface/AddOns/Wowless/test.xml:' .. (__LINE__ - 11) .. ' Unrecognized XML: OnLoad')
+    table.insert(Wowless.ExpectedNextFrame, 'Interface/AddOns/Wowless/test.xml:' .. (__LINE__ - 9) .. ' Unrecognized XML: WowlessIntrinsicType')
+    table.insert(Wowless.ExpectedNextFrame, 'Interface/AddOns/Wowless/test.xml:' .. (__LINE__ - 10) .. ' Unrecognized XML attribute: name')
+    table.insert(Wowless.ExpectedNextFrame, 'Interface/AddOns/Wowless/test.xml:' .. (__LINE__ - 11) .. ' Unrecognized XML attribute: intrinsic')
+    table.insert(Wowless.ExpectedNextFrame, 'Interface/AddOns/Wowless/test.xml:' .. (__LINE__ - 11) .. ' Unrecognized XML: Scripts')
+    table.insert(Wowless.ExpectedNextFrame, 'Interface/AddOns/Wowless/test.xml:' .. (__LINE__ - 11) .. ' Unrecognized XML: OnLoad')
   </Script>
   <Include file='evenmoreintrinsic.xml' />
   <Script>--[[ TODO requires more sophistication in api re intrinsics

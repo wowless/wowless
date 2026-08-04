@@ -11,7 +11,7 @@ describe('xml', function()
   for _, p in ipairs(require('build.data.products')) do
     describe(p, function()
       local datalua = require('build.products.' .. p .. '.data')
-      local parse = xmlmodule(datalua, { SendEvent = function() end })
+      local parse = xmlmodule(datalua, { QueueEvent = function() end })
       -- ButtonText/NormalFont share a type (FontString/Font) with generic
       -- layered regions but belong to Button's own substitution group, not
       -- the generic one -- see issue #778.
