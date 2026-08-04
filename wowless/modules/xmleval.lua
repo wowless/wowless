@@ -348,16 +348,13 @@ return function(
         relativeTo = genv[ParentSub(anchor.attr.relativeto, parent.parent)]
         relativeTo = relativeTo and uiobjects.UserData(relativeTo)
         if not relativeTo then
-          anchorWarning(ctx, anchor, parent, 'Couldn\'t find relative frame', anchor.attr.relativeto)
-          return
+          return anchorWarning(ctx, anchor, parent, 'Couldn\'t find relative frame', anchor.attr.relativeto)
         elseif relativeTo == parent then
-          anchorWarning(ctx, anchor, parent, 'anchored to itself', anchor.attr.relativeto)
-          return
+          return anchorWarning(ctx, anchor, parent, 'anchored to itself', anchor.attr.relativeto)
         end
       elseif anchor.attr.relativekey then
         if not anchor.attr.relativekey:match(parentMatch) then
-          anchorWarning(ctx, anchor, parent, 'anchored to itself', anchor.attr.relativekey)
-          return
+          return anchorWarning(ctx, anchor, parent, 'anchored to itself', anchor.attr.relativekey)
         end
         relativeTo = navigate(parent, anchor.attr.relativekey)
         if not relativeTo or relativeTo == parent then
