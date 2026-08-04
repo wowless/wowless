@@ -990,9 +990,11 @@
             Wowless.check5('BOTTOM', self:GetParent(), 'BOTTOM', 0, 0, self:GetPoint(7))
             Wowless.check5('BOTTOMRIGHT', self:GetParent().foo, 'BOTTOMRIGHT', 0, 0, self:GetPoint(8))
             -- the malformed relativeKey above is the only warning-worthy anchor
-            -- in this shared list; unlike the anchor tests above, offsetting
-            -- __LINE__ to it isn't practical from outside this Anchors block,
-            -- so just confirm exactly one warning fired here (issue #854).
+            -- in this shared list; Script is only valid as a child of Ui, so
+            -- the nearest place for one is well past the unrelated
+            -- parentKey='baz' block below, too far for a fixed __LINE__
+            -- offset to stay reliable; just confirm exactly one warning
+            -- fired here (issue #854).
             table.insert(Wowless.ExpectedLuaWarnings, Wowless.ActualLuaWarnings[#Wowless.ActualLuaWarnings])
           </OnLoad>
         </Scripts>
