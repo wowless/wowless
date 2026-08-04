@@ -966,6 +966,28 @@
           </OnLoad>
         </Scripts>
       </Frame>
+      <Frame parentKey='baz'>
+        <Frames>
+          <Frame parentKey='frob' />
+          <Frame parentKey='quux'>
+            <Anchors>
+              <Anchor point='TOPLEFT' relativeKey='$pArEnT.$PaReNt.foo' />
+              <Anchor point='TOP' relativeKey='$pArEnT$PaReNt.foo' />
+              <Anchor point='TOPRIGHT' relativeKey='$parent.frob.$parent.$parent.foo' />
+              <Anchor point='LEFT' relativeKey='$parent.quux.$parent.$parent.foo' />
+            </Anchors>
+            <Scripts>
+              <OnLoad>
+                Wowless.check1(4, self:GetNumPoints())
+                Wowless.check5('TOPLEFT', self:GetParent():GetParent().foo, 'TOPLEFT', 0, 0, self:GetPoint(1))
+                Wowless.check5('TOP', self:GetParent(), 'TOP', 0, 0, self:GetPoint(2))
+                Wowless.check5('TOPRIGHT', self:GetParent():GetParent().foo, 'TOPRIGHT', 0, 0, self:GetPoint(3))
+                Wowless.check5('LEFT', self:GetParent(), 'LEFT', 0, 0, self:GetPoint(4))
+              </OnLoad>
+            </Scripts>
+          </Frame>
+        </Frames>
+      </Frame>
       <Frame parentKey='bar'>
         <Anchors>
           <Anchor point='TOPLEFT' relativeKey='$parent.foo' />
@@ -989,40 +1011,17 @@
             Wowless.check5('BOTTOMLEFT', self:GetParent(), 'BOTTOMLEFT', 0, 0, self:GetPoint(6))
             Wowless.check5('BOTTOM', self:GetParent(), 'BOTTOM', 0, 0, self:GetPoint(7))
             Wowless.check5('BOTTOMRIGHT', self:GetParent().foo, 'BOTTOMRIGHT', 0, 0, self:GetPoint(8))
-            -- the malformed relativeKey above is the only warning-worthy anchor
-            -- in this shared list; Script is only valid as a child of Ui, so
-            -- the nearest place for one is well past the unrelated
-            -- parentKey='baz' block below, too far for a fixed __LINE__
-            -- offset to stay reliable; just confirm exactly one warning
-            -- fired here (issue #854).
-            table.insert(Wowless.ExpectedLuaWarnings, Wowless.ActualLuaWarnings[#Wowless.ActualLuaWarnings])
           </OnLoad>
         </Scripts>
       </Frame>
-      <Frame parentKey='baz'>
-        <Frames>
-          <Frame parentKey='frob' />
-          <Frame parentKey='quux'>
-            <Anchors>
-              <Anchor point='TOPLEFT' relativeKey='$pArEnT.$PaReNt.foo' />
-              <Anchor point='TOP' relativeKey='$pArEnT$PaReNt.foo' />
-              <Anchor point='TOPRIGHT' relativeKey='$parent.frob.$parent.$parent.foo' />
-              <Anchor point='LEFT' relativeKey='$parent.quux.$parent.$parent.foo' />
-            </Anchors>
-            <Scripts>
-              <OnLoad>
-                Wowless.check1(4, self:GetNumPoints())
-                Wowless.check5('TOPLEFT', self:GetParent():GetParent().foo, 'TOPLEFT', 0, 0, self:GetPoint(1))
-                Wowless.check5('TOP', self:GetParent(), 'TOP', 0, 0, self:GetPoint(2))
-                Wowless.check5('TOPRIGHT', self:GetParent():GetParent().foo, 'TOPRIGHT', 0, 0, self:GetPoint(3))
-                Wowless.check5('LEFT', self:GetParent(), 'LEFT', 0, 0, self:GetPoint(4))
-              </OnLoad>
-            </Scripts>
-          </Frame>
-        </Frames>
-      </Frame>
     </Frames>
   </Frame>
+  <Script>
+    table.insert(
+      Wowless.ExpectedLuaWarnings,
+      'Interface/AddOns/Wowless/test.xml:' .. (__LINE__ - 26) .. ' Unknown: anchored to itself: anyoldgarbage$parent.foo'
+    )
+  </Script>
 
   <Frame>
     <Layers>
