@@ -185,6 +185,7 @@ visibility:
 xml:
   deps:
     datalua:
+    eventqueue:
 xmleval:
   deps:
     bindings:

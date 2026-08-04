@@ -41,7 +41,8 @@ local function xml2dom(xmlstr)
   return stack[1]._children[1]
 end
 
-return function(datalua)
+return function(datalua, eventqueue)
+  local QueueEvent = eventqueue.QueueEvent
   local lang = datalua.xmlflat
   local stringenums = datalua.stringenums
   local enums = datalua.globals.Enum
@@ -80,8 +81,22 @@ return function(datalua)
     end,
   }
 
-  local function parseRoot(root, intrinsics, snapshot)
+  local function parseRoot(root, intrinsics, snapshot, warningPath)
     local warnings = {}
+    -- A real client keeps descending into an unrecognized element's
+    -- children and attributes rather than dropping the whole subtree
+    -- silently, flagging each one individually too.
+    local function warnUnrecognized(e)
+      QueueEvent('LUA_WARNING', ('%s:%d Unrecognized XML: %s'):format(warningPath, e._line, e._name))
+      for _, k in ipairs(e._attr) do
+        QueueEvent('LUA_WARNING', ('%s:%d Unrecognized XML attribute: %s'):format(warningPath, e._line, k))
+      end
+      for _, kid in ipairs(e._children or {}) do
+        if kid._type == 'ELEMENT' then
+          warnUnrecognized(kid)
+        end
+      end
+    end
     local function run(e, tn, tk)
       if e._type ~= 'ELEMENT' then
         error('invalid xml type ' .. e._type .. ' on child of ' .. tn)
@@ -89,7 +104,7 @@ return function(datalua)
       local tname = string.lower(e._name)
       local ty = lang[tname] or snapshot[tname]
       if not ty then
-        table.insert(warnings, 'unknown type ' .. tname)
+        warnUnrecognized(e)
         return nil
       end
       if ty.virtual then
@@ -176,11 +191,11 @@ return function(datalua)
   end
 
   local intrinsics = {}
-  return function(xmlstr)
+  return function(xmlstr, warningPath)
     local snapshot = {}
     for k, v in pairs(intrinsics) do
       snapshot[k] = v
     end
-    return parseRoot(xml2dom(xmlstr), intrinsics, snapshot)
+    return parseRoot(xml2dom(xmlstr), intrinsics, snapshot, warningPath)
   end
 end
