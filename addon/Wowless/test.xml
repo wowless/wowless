@@ -931,16 +931,24 @@
       </OnLoad>
     </Scripts>
   </Frame>
-  <!-- __LINE__ below is offset to the relativeTo Anchor 9 lines up; issue #854 -->
-  <Script>table.insert(Wowless.ExpectedLuaWarnings, 'Interface/AddOns/Wowless/test.xml:' .. (__LINE__ - 9) .. " Unknown: Couldn't find relative frame: thisisdefinitelynotsomethingin_G")</Script>
+  <Script>
+    table.insert(
+      Wowless.ExpectedLuaWarnings,
+      'Interface/AddOns/Wowless/test.xml:' .. (__LINE__ - 11) .. " Unknown: Couldn't find relative frame: thisisdefinitelynotsomethingin_G"
+    )
+  </Script>
 
   <Frame name='WowlessSelfAnchor'>
     <Anchors>
       <Anchor relativeTo='WowlessSelfAnchor' />
     </Anchors>
   </Frame>
-  <!-- __LINE__ below is offset to the relativeTo Anchor 4 lines up; issue #854 -->
-  <Script>table.insert(Wowless.ExpectedLuaWarnings, 'Interface/AddOns/Wowless/test.xml:' .. (__LINE__ - 4) .. ' WowlessSelfAnchor: anchored to itself: WowlessSelfAnchor')</Script>
+  <Script>
+    table.insert(
+      Wowless.ExpectedLuaWarnings,
+      'Interface/AddOns/Wowless/test.xml:' .. (__LINE__ - 6) .. ' WowlessSelfAnchor: anchored to itself: WowlessSelfAnchor'
+    )
+  </Script>
   <Script>
     Wowless.check1(0, WowlessSelfAnchor:GetNumPoints())
   </Script>
