@@ -41,7 +41,8 @@ local function xml2dom(xmlstr)
   return stack[1]._children[1]
 end
 
-return function(datalua)
+return function(datalua, events)
+  local SendEvent = events.SendEvent
   local lang = datalua.xmlflat
   local stringenums = datalua.stringenums
   local enums = datalua.globals.Enum
@@ -80,15 +81,21 @@ return function(datalua)
     end,
   }
 
-  local function parseRoot(root, intrinsics, snapshot)
+  local function parseRoot(root, intrinsics, snapshot, filename, addonName, addonRoot)
     local warnings = {}
+    -- issue #521: matches the "Interface/AddOns/<addon>/<relpath>" virtual
+    -- paths a real client reports in LUA_WARNING messages, regardless of
+    -- where wowless actually reads the file from disk.
+    local function warningPath()
+      return 'Interface/AddOns/' .. addonName .. '/' .. filename:sub(#addonRoot + 2)
+    end
     -- A real client keeps descending into an unrecognized element's
     -- children and attributes rather than dropping the whole subtree
     -- silently, flagging each one individually too.
     local function warnUnrecognized(e)
-      table.insert(warnings, { kind = 'tag', line = e._line, name = e._name })
+      SendEvent('LUA_WARNING', ('%s:%d Unrecognized XML: %s'):format(warningPath(), e._line, e._name))
       for _, k in ipairs(e._attr) do
-        table.insert(warnings, { kind = 'attr', line = e._line, name = k })
+        SendEvent('LUA_WARNING', ('%s:%d Unrecognized XML attribute: %s'):format(warningPath(), e._line, k))
       end
       for _, kid in ipairs(e._children or {}) do
         if kid._type == 'ELEMENT' then
@@ -190,11 +197,11 @@ return function(datalua)
   end
 
   local intrinsics = {}
-  return function(xmlstr)
+  return function(xmlstr, filename, addonName, addonRoot)
     local snapshot = {}
     for k, v in pairs(intrinsics) do
       snapshot[k] = v
     end
-    return parseRoot(xml2dom(xmlstr), intrinsics, snapshot)
+    return parseRoot(xml2dom(xmlstr), intrinsics, snapshot, filename, addonName, addonRoot)
   end
 end
