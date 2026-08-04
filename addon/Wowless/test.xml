@@ -922,14 +922,25 @@
   </Frame>
 
   <Frame>
+    <Anchors>
+      <Anchor relativeTo='thisisdefinitelynotsomethingin_G' />
+    </Anchors>
     <Scripts>
       <OnLoad>
         Wowless.check1(0, self:GetNumPoints())
       </OnLoad>
     </Scripts>
-    <Anchors><Anchor relativeTo='thisisdefinitelynotsomethingin_G' /></Anchors></Frame><Script>table.insert(Wowless.ExpectedLuaWarnings, 'Interface/AddOns/Wowless/test.xml:' .. __LINE__ .. " Unknown: Couldn't find relative frame: thisisdefinitelynotsomethingin_G")</Script>
+  </Frame>
+  <!-- __LINE__ below is offset to the relativeTo Anchor 9 lines up; issue #854 -->
+  <Script>table.insert(Wowless.ExpectedLuaWarnings, 'Interface/AddOns/Wowless/test.xml:' .. (__LINE__ - 9) .. " Unknown: Couldn't find relative frame: thisisdefinitelynotsomethingin_G")</Script>
 
-  <Frame name='WowlessSelfAnchor'><Anchors><Anchor relativeTo='WowlessSelfAnchor' /></Anchors></Frame><Script>table.insert(Wowless.ExpectedLuaWarnings, 'Interface/AddOns/Wowless/test.xml:' .. __LINE__ .. ' WowlessSelfAnchor: anchored to itself: WowlessSelfAnchor')</Script>
+  <Frame name='WowlessSelfAnchor'>
+    <Anchors>
+      <Anchor relativeTo='WowlessSelfAnchor' />
+    </Anchors>
+  </Frame>
+  <!-- __LINE__ below is offset to the relativeTo Anchor 4 lines up; issue #854 -->
+  <Script>table.insert(Wowless.ExpectedLuaWarnings, 'Interface/AddOns/Wowless/test.xml:' .. (__LINE__ - 4) .. ' WowlessSelfAnchor: anchored to itself: WowlessSelfAnchor')</Script>
   <Script>
     Wowless.check1(0, WowlessSelfAnchor:GetNumPoints())
   </Script>
@@ -952,7 +963,7 @@
           <Anchor point='TOPLEFT' relativeKey='$parent.foo' />
           <Anchor point='TOP' relativeKey='$pArEnT.foo' />
           <Anchor point='TOPRIGHT' relativeKey='$pArEnTanyoldgarbage.foo' />
-          <Anchor point='LEFT' relativeKey='anyoldgarbage$parent.foo' /> <!-- ignored; LUA_WARNING checked in OnLoad below -->
+          <Anchor point='LEFT' relativeKey='anyoldgarbage$parent.foo' /> <!-- ignored -->
           <Anchor point='CENTER' relativeKey='$parent' />
           <Anchor point='RIGHT' relativeKey='$parent..foo' />
           <Anchor point='BOTTOMLEFT' relativeKey='$parentfoo' />
@@ -971,9 +982,9 @@
             Wowless.check5('BOTTOM', self:GetParent(), 'BOTTOM', 0, 0, self:GetPoint(7))
             Wowless.check5('BOTTOMRIGHT', self:GetParent().foo, 'BOTTOMRIGHT', 0, 0, self:GetPoint(8))
             -- the malformed relativeKey above is the only warning-worthy anchor
-            -- in this shared list; unlike the anchor tests above it can't be
-            -- paired with a same-line __LINE__ Script without collapsing the
-            -- whole list, so just confirm exactly one warning fired here.
+            -- in this shared list; unlike the anchor tests above, offsetting
+            -- __LINE__ to it isn't practical from outside this Anchors block,
+            -- so just confirm exactly one warning fired here (issue #854).
             table.insert(Wowless.ExpectedLuaWarnings, Wowless.ActualLuaWarnings[#Wowless.ActualLuaWarnings])
           </OnLoad>
         </Scripts>
