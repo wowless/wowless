@@ -933,7 +933,7 @@
   </Frame>
   <Script>
     table.insert(
-      Wowless.ExpectedLuaWarnings,
+      Wowless.ExpectedNextFrame,
       'Interface/AddOns/Wowless/test.xml:' .. (__LINE__ - 11) .. " Unknown: Couldn't find relative frame: thisisdefinitelynotsomethingin_G"
     )
   </Script>
@@ -945,7 +945,7 @@
   </Frame>
   <Script>
     table.insert(
-      Wowless.ExpectedLuaWarnings,
+      Wowless.ExpectedNextFrame,
       'Interface/AddOns/Wowless/test.xml:' .. (__LINE__ - 6) .. ' WowlessSelfAnchor: anchored to itself: WowlessSelfAnchor'
     )
   </Script>
@@ -1018,7 +1018,7 @@
   </Frame>
   <Script>
     table.insert(
-      Wowless.ExpectedLuaWarnings,
+      Wowless.ExpectedNextFrame,
       'Interface/AddOns/Wowless/test.xml:' .. (__LINE__ - 26) .. ' Unknown: anchored to itself: anyoldgarbage$parent.foo'
     )
   </Script>

@@ -191,6 +191,7 @@ xmleval:
     cstubs:
     datalua:
     env:
+    eventqueue:
     events:
     intrinsics:
     log:

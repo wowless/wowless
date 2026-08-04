@@ -9,6 +9,7 @@ return function(
   cstubs,
   datalua,
   envmodule,
+  eventqueue,
   events,
   intrinsics,
   log,
@@ -24,6 +25,7 @@ return function(
 )
   local genv = envmodule.genv
   local secureenv = envmodule.secureenv
+  local QueueEvent = eventqueue.QueueEvent
   local SendEvent = events.SendEvent
   local parseXml = xml
   local bindings = bindingsmodule.bindings
@@ -334,7 +336,7 @@ return function(
   end
 
   local function anchorWarning(ctx, anchor, parent, reason, value)
-    SendEvent(
+    QueueEvent(
       'LUA_WARNING',
       ('%s:%d %s: %s: %s'):format(warningPath(ctx), anchor.line, parent.name or 'Unknown', reason, value)
     )
