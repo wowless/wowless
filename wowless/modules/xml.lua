@@ -82,6 +82,20 @@ return function(datalua)
 
   local function parseRoot(root, intrinsics, snapshot)
     local warnings = {}
+    -- A real client keeps descending into an unrecognized element's
+    -- children and attributes rather than dropping the whole subtree
+    -- silently, flagging each one individually too.
+    local function warnUnrecognized(e)
+      table.insert(warnings, { kind = 'tag', line = e._line, name = e._name })
+      for _, k in ipairs(e._attr) do
+        table.insert(warnings, { kind = 'attr', line = e._line, name = k })
+      end
+      for _, kid in ipairs(e._children or {}) do
+        if kid._type == 'ELEMENT' then
+          warnUnrecognized(kid)
+        end
+      end
+    end
     local function run(e, tn, tk)
       if e._type ~= 'ELEMENT' then
         error('invalid xml type ' .. e._type .. ' on child of ' .. tn)
@@ -89,7 +103,7 @@ return function(datalua)
       local tname = string.lower(e._name)
       local ty = lang[tname] or snapshot[tname]
       if not ty then
-        table.insert(warnings, 'unknown type ' .. tname)
+        warnUnrecognized(e)
         return nil
       end
       if ty.virtual then
