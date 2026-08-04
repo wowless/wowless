@@ -798,15 +798,17 @@ return function(
     end
   end
 
+  -- issue #521: matches the "Interface/AddOns/<addon>/<relpath>" virtual
+  -- paths a real client reports in LUA_WARNING messages for XML-sourced
+  -- issues, regardless of where wowless actually reads the file from disk.
+  local function warningPath(ctx)
+    return 'Interface/AddOns/' .. ctx.addonName .. '/' .. ctx.filename:sub(#ctx.addonRoot + 2)
+  end
+
   local function loadXml(addonName, addonEnv, addonRoot, useSecureEnv, filename, xmlstr)
     local dir = path.dirname(filename)
     security.CallSafely(function()
       local root, warnings = parseXml(xmlstr)
-      if loglevel >= 3 then
-        for _, warning in ipairs(warnings) do
-          log(3, filename .. ': ' .. warning)
-        end
-      end
       local ctx = {
         addonEnv = addonEnv,
         addonName = addonName,
@@ -818,6 +820,15 @@ return function(
         useAddonEnv = false,
         useSecureEnv = useSecureEnv,
       }
+      for _, warning in ipairs(warnings) do
+        if type(warning) == 'table' then
+          local msg = warning.kind == 'tag' and 'Unrecognized XML: ' .. warning.name
+            or 'Unrecognized XML attribute: ' .. warning.name
+          SendEvent('LUA_WARNING', ('%s:%d %s'):format(warningPath(ctx), warning.line, msg))
+        elseif loglevel >= 3 then
+          log(3, filename .. ': ' .. warning)
+        end
+      end
       loadElement(ctx, root)
     end)
   end
