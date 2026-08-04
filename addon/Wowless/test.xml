@@ -922,21 +922,14 @@
   </Frame>
 
   <Frame>
-    <Anchors>
-      <Anchor relativeTo='thisisdefinitelynotsomethingin_G' />
-    </Anchors>
     <Scripts>
       <OnLoad>
         Wowless.check1(0, self:GetNumPoints())
       </OnLoad>
     </Scripts>
-  </Frame>
+    <Anchors><Anchor relativeTo='thisisdefinitelynotsomethingin_G' /></Anchors></Frame><Script>table.insert(Wowless.ExpectedLuaWarnings, 'Interface/AddOns/Wowless/test.xml:' .. __LINE__ .. " Unknown: Couldn't find relative frame: thisisdefinitelynotsomethingin_G")</Script>
 
-  <Frame name='WowlessSelfAnchor'>
-    <Anchors>
-      <Anchor relativeTo='WowlessSelfAnchor' />
-    </Anchors>
-  </Frame>
+  <Frame name='WowlessSelfAnchor'><Anchors><Anchor relativeTo='WowlessSelfAnchor' /></Anchors></Frame><Script>table.insert(Wowless.ExpectedLuaWarnings, 'Interface/AddOns/Wowless/test.xml:' .. __LINE__ .. ' WowlessSelfAnchor: anchored to itself: WowlessSelfAnchor')</Script>
   <Script>
     Wowless.check1(0, WowlessSelfAnchor:GetNumPoints())
   </Script>
@@ -959,7 +952,7 @@
           <Anchor point='TOPLEFT' relativeKey='$parent.foo' />
           <Anchor point='TOP' relativeKey='$pArEnT.foo' />
           <Anchor point='TOPRIGHT' relativeKey='$pArEnTanyoldgarbage.foo' />
-          <Anchor point='LEFT' relativeKey='anyoldgarbage$parent.foo' /> <!-- ignored -->
+          <Anchor point='LEFT' relativeKey='anyoldgarbage$parent.foo' /> <!-- ignored; LUA_WARNING checked in OnLoad below -->
           <Anchor point='CENTER' relativeKey='$parent' />
           <Anchor point='RIGHT' relativeKey='$parent..foo' />
           <Anchor point='BOTTOMLEFT' relativeKey='$parentfoo' />
@@ -977,6 +970,11 @@
             Wowless.check5('BOTTOMLEFT', self:GetParent(), 'BOTTOMLEFT', 0, 0, self:GetPoint(6))
             Wowless.check5('BOTTOM', self:GetParent(), 'BOTTOM', 0, 0, self:GetPoint(7))
             Wowless.check5('BOTTOMRIGHT', self:GetParent().foo, 'BOTTOMRIGHT', 0, 0, self:GetPoint(8))
+            -- the malformed relativeKey above is the only warning-worthy anchor
+            -- in this shared list; unlike the anchor tests above it can't be
+            -- paired with a same-line __LINE__ Script without collapsing the
+            -- whole list, so just confirm exactly one warning fired here.
+            table.insert(Wowless.ExpectedLuaWarnings, Wowless.ActualLuaWarnings[#Wowless.ActualLuaWarnings])
           </OnLoad>
         </Scripts>
       </Frame>

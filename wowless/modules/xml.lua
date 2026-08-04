@@ -24,10 +24,11 @@ local function xml2dom(xmlstr)
     EndElement = function()
       table.remove(stack)
     end,
-    StartElement = function(_, name, attrs)
+    StartElement = function(p, name, attrs)
       local t = {
         _attr = attrs,
         _children = {},
+        _line = (p:pos()),
         _name = name,
         _type = 'ELEMENT',
       }
@@ -162,6 +163,7 @@ return function(datalua)
         return {
           attr = resultAttrs,
           kids = resultKids,
+          line = e._line,
           type = tname,
         }
       end

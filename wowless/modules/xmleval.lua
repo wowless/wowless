@@ -326,18 +326,37 @@ return function(
     return obj
   end
 
+  -- issue #854: matches the "Interface/AddOns/<addon>/<relpath>" virtual
+  -- paths a real client reports in LUA_WARNING messages for XML-sourced
+  -- issues, regardless of where wowless actually reads the file from disk.
+  local function warningPath(ctx)
+    return 'Interface/AddOns/' .. ctx.addonName .. '/' .. ctx.filename:sub(#ctx.addonRoot + 2)
+  end
+
+  local function anchorWarning(ctx, anchor, parent, reason, value)
+    SendEvent(
+      'LUA_WARNING',
+      ('%s:%d %s: %s: %s'):format(warningPath(ctx), anchor.line, parent.name or 'Unknown', reason, value)
+    )
+  end
+
   local xmllang = {
-    anchor = function(_, anchor, parent)
+    anchor = function(ctx, anchor, parent)
       local point = anchor.attr.point or 'TOPLEFT'
       local relativeTo
       if anchor.attr.relativeto then
         relativeTo = genv[ParentSub(anchor.attr.relativeto, parent.parent)]
         relativeTo = relativeTo and uiobjects.UserData(relativeTo)
-        if not relativeTo or relativeTo == parent then
+        if not relativeTo then
+          anchorWarning(ctx, anchor, parent, 'Couldn\'t find relative frame', anchor.attr.relativeto)
+          return
+        elseif relativeTo == parent then
+          anchorWarning(ctx, anchor, parent, 'anchored to itself', anchor.attr.relativeto)
           return
         end
       elseif anchor.attr.relativekey then
         if not anchor.attr.relativekey:match(parentMatch) then
+          anchorWarning(ctx, anchor, parent, 'anchored to itself', anchor.attr.relativekey)
           return
         end
         relativeTo = navigate(parent, anchor.attr.relativekey)
