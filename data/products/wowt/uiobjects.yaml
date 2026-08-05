@@ -8838,6 +8838,9 @@ TextureBase:
     ClearRadialProgressBar:
       inputs:
       outputs:
+    ClearSVG:
+      inputs:
+      outputs:
     ClearTextureSlice:
       inputs:
       outputs:
@@ -9175,6 +9178,13 @@ TextureBase:
         nilable: true
         type: number
       outputs:
+    SetSVG:
+      inputs:
+      - name: svgAsset
+        type: FileAsset
+      outputs:
+      - name: success
+        type: boolean
     SetTexCoord:
       impl:
         uiobjectimpl: Texture/SetTexCoord

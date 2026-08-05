@@ -2295,6 +2295,10 @@ CursorStyle:
   values:
     Crosshair: 1
     Mouse: 0
+CustomAuraButtonDispelTypeStealableFilter:
+  values:
+    NotStealable: 1
+    Stealable: 0
 CustomAuraButtonDispelTypeTextureStyle:
   values:
     Border: 0
@@ -6728,6 +6732,10 @@ SecondsFormatterIntervalWhitespace:
     Preserve: 0
     Strip: 1
     StripIgnoreLocale: 2
+SecondsFormatterRounding:
+  values:
+    RoundUp: 0
+    Truncate: 1
 SecrecyLevel:
   values:
     AlwaysSecret: 1

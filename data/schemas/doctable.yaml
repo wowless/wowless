@@ -362,6 +362,8 @@ type:
               type: flag
             SecretWhenUnitNameIdentityRestricted:
               type: flag
+            SecretWhenUnitPossessionRestricted:
+              type: flag
             SecretWhenUnitPowerMaxRestricted:
               type: flag
             SecretWhenUnitPowerRestricted:

@@ -847,6 +847,9 @@ C_AuraContainerUtil.CustomAuraButtonDispelTypeTextureOptions:
       type:
         arrayof:
           structure: colorRGB
+    showAlways:
+      default: false
+      type: boolean
     showWhenHarmful:
       default: true
       type: boolean
@@ -856,6 +859,10 @@ C_AuraContainerUtil.CustomAuraButtonDispelTypeTextureOptions:
     showWithoutDispelType:
       default: false
       type: boolean
+    stealableFilter:
+      nilable: true
+      type:
+        enum: CustomAuraButtonDispelTypeStealableFilter
     style:
       default: 1
       type:

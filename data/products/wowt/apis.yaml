@@ -13974,6 +13974,13 @@ C_HousingBasicMode.StartPlacingPreviewDecor:
     nilable: true
     type: number
   outputs:
+C_HousingBlueprint.CanExportRoom:
+  inputs:
+  - name: roomGUID
+    type: string
+  outputs:
+  - name: canExport
+    type: boolean
 C_HousingBlueprint.CanExportTypeFromCurrentLocation:
   inputs:
   - name: type
@@ -15086,6 +15093,13 @@ C_HousingLayout.RemoveRoom:
   - name: roomGUID
     type: string
   outputs:
+C_HousingLayout.RoomHasStairs:
+  inputs:
+  - name: roomGUID
+    type: string
+  outputs:
+  - name: hasStairs
+    type: boolean
 C_HousingLayout.RotateFocusedRoom:
   inputs:
   - name: isLeft

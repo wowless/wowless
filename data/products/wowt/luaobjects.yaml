@@ -850,6 +850,12 @@ SecondsFormatter:
         nilable: true
         type:
           luaobject: LuaCurveObject
+    GetRounding:
+      inputs:
+      outputs:
+      - name: rounding
+        type:
+          enum: SecondsFormatterRounding
     GetStripIntervalWhitespace:
       inputs:
       outputs:
@@ -924,6 +930,12 @@ SecondsFormatter:
       - name: curve
         type:
           luaobject: LuaCurveObject
+      outputs:
+    SetRounding:
+      inputs:
+      - name: rounding
+        type:
+          enum: SecondsFormatterRounding
       outputs:
     SetStripIntervalWhitespace:
       inputs:
