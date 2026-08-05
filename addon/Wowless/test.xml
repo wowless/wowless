@@ -1,4 +1,22 @@
 <Ui>
+  <!--
+    A real client warns on this one gentest.lua-generated nonsense negative
+    case (AnimationGroup.looping) in WowlessData's templates.xml. Hardcoded
+    because gentest.lua doesn't thread expected-warning data through
+    templates.lua yet; see issue #864 for the general fix. The line number
+    differs only for wow_classic_era. WowlessData's XML is structurally
+    parsed (and this warning queued) before any of this addon's own, so
+    this must be registered first.
+  -->
+  <Script>
+    table.insert(
+      Wowless.ExpectedNextFrame,
+      'Interface/AddOns/WowlessData/templates.xml:'
+        .. (_G.WowlessData.product == 'wow_classic_era' and 162 or 177)
+        .. ' AnimationGroup AnimationGroup: Invalid looping value: nonsense'
+    )
+  </Script>
+
   <Script>
     WowlessXmlErrors = {}
     WowlessOldErrorHandler = geterrorhandler()

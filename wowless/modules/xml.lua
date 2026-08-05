@@ -81,6 +81,11 @@ return function(datalua, eventqueue)
     end,
   }
 
+  -- Confirmed against a real client; see issue #864 for the general fix.
+  local warnsOnInvalidValue = {
+    animationgroup = { looping = true },
+  }
+
   local function parseRoot(root, intrinsics, snapshot, warningPath)
     local warnings = {}
     -- A real client keeps descending into an unrecognized element's
@@ -128,6 +133,12 @@ return function(datalua, eventqueue)
           local v = e._attr[k]
           local vv = dispatch(attributeTypes, attr, v)
           if vv == nil then
+            if (warnsOnInvalidValue[tname] or {})[an] then
+              QueueEvent(
+                'LUA_WARNING',
+                ('%s:%d %s %s: Invalid %s value: %s'):format(warningPath, e._line, e._name, e._name, k, v)
+              )
+            end
             table.insert(warnings, 'attribute ' .. k .. ' has invalid value ' .. v)
           else
             resultAttrs[an] = vv
