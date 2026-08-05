@@ -1,4 +1,19 @@
 <Ui>
+  <!--
+    gentest.lua marks each generated Templates candidate whose XML
+    attribute is declared warnsoninvalid with the LUA_WARNING a real
+    client emits for it (see data/schemas/xml.yaml). WowlessData's XML is
+    structurally parsed (and any such warning queued) before any of this
+    addon's own, so this must be registered first.
+  -->
+  <Script>
+    for _, cfg in pairs(_G.WowlessData.Templates) do
+      if cfg.warning then
+        table.insert(Wowless.ExpectedNextFrame, cfg.warning)
+      end
+    end
+  </Script>
+
   <Script>
     WowlessXmlErrors = {}
     WowlessOldErrorHandler = geterrorhandler()

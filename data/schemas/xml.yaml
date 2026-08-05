@@ -37,6 +37,8 @@ type:
                         ref:
                           schema: stringenums
                       stringlist: tag
+                warnsoninvalid:
+                  type: flag
       contents:
         type:
           taggedunion:

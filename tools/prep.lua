@@ -386,8 +386,12 @@ local xmlflat = (function()
   local newtree = {}
   for k, v in pairs(tree) do
     local attrs = {}
+    local warnsinvalid = {}
     for ak, av in pairs(v.attributes or {}) do
       attrs[ak] = av.type
+      if av.warnsoninvalid then
+        warnsinvalid[ak] = true
+      end
     end
     local kids = {}
     local text = false
@@ -414,6 +418,9 @@ local xmlflat = (function()
       climbing = climbing and not t.sealed
       for ak, av in pairs(t.attributes or {}) do
         attrs[ak] = av.type
+        if av.warnsoninvalid then
+          warnsinvalid[ak] = true
+        end
       end
       if t.contents == 'text' then
         text = true
@@ -432,6 +439,7 @@ local xmlflat = (function()
       children = kids,
       supertypes = supertypes,
       text = text,
+      warnsinvalid = warnsinvalid,
     }
   end
   return newtree

@@ -128,6 +128,12 @@ return function(datalua, eventqueue)
           local v = e._attr[k]
           local vv = dispatch(attributeTypes, attr, v)
           if vv == nil then
+            if ty.warnsinvalid[an] then
+              QueueEvent(
+                'LUA_WARNING',
+                ('%s:%d %s %s: Invalid %s value: %s'):format(warningPath, e._line, e._name, e._name, k, v)
+              )
+            end
             table.insert(warnings, 'attribute ' .. k .. ' has invalid value ' .. v)
           else
             resultAttrs[an] = vv
