@@ -281,9 +281,27 @@ Color:
       type: number
     r:
       type: number
+ColorAlphaTexture:
+  extends: Texture
+  impl:
+    call:
+      argument: self
+      parentmethod: SetColorAlphaTexture
+      parenttype: ColorSelect
+  sealed: true
+ColorAlphaThumbTexture:
+  extends: Texture
+  impl:
+    call:
+      argument: self
+      parentmethod: SetColorAlphaThumbTexture
+      parenttype: ColorSelect
+  sealed: true
 ColorSelect:
   contents:
     tags:
+      ColorAlphaTexture:
+      ColorAlphaThumbTexture:
       ColorValueTexture:
       ColorValueThumbTexture:
       ColorWheelTexture:
