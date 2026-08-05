@@ -83,6 +83,23 @@ return function(datalua, eventqueue)
 
   local function parseRoot(root, intrinsics, snapshot, warningPath)
     local warnings = {}
+    -- A real client doesn't report an invalid attribute value warning at
+    -- the offending element's own line: by the time it's actually
+    -- delivered, parsing has moved on, and it points at the start line of
+    -- whichever region (Frame, Texture, FontString, ... -- anything
+    -- LayoutFrame-derived) was most recently encountered (document order,
+    -- including descending into children) -- observed against a real
+    -- client; see issue #864.
+    local lastRegionLine
+    local pendingInvalidValueWarnings = {}
+    local function nameOf(e)
+      for _, k in ipairs(e._attr) do
+        if string.lower(k) == 'name' then
+          return e._attr[k]
+        end
+      end
+      return e._name
+    end
     -- A real client keeps descending into an unrecognized element's
     -- children and attributes rather than dropping the whole subtree
     -- silently, flagging each one individually too.
@@ -110,6 +127,9 @@ return function(datalua, eventqueue)
       if ty.virtual then
         error(tname .. ' is virtual and cannot be instantiated')
       end
+      if ty.supertypes.layoutframe then
+        lastRegionLine = e._line
+      end
       local extends = false
       for k in pairs(tk) do
         extends = extends or ty.supertypes[k]
@@ -129,9 +149,9 @@ return function(datalua, eventqueue)
           local vv = dispatch(attributeTypes, attr, v)
           if vv == nil then
             if ty.warnsinvalid[an] then
-              QueueEvent(
-                'LUA_WARNING',
-                ('%s:%d %s %s: Invalid %s value: %s'):format(warningPath, e._line, e._name, e._name, k, v)
+              table.insert(
+                pendingInvalidValueWarnings,
+                ('%s %s: Invalid %s value: %s'):format(e._name, nameOf(e), k, v)
               )
             end
             table.insert(warnings, 'attribute ' .. k .. ' has invalid value ' .. v)
@@ -193,6 +213,9 @@ return function(datalua, eventqueue)
       bindings = true,
       ui = true,
     })
+    for _, msg in ipairs(pendingInvalidValueWarnings) do
+      QueueEvent('LUA_WARNING', ('%s:%d %s'):format(warningPath, lastRegionLine, msg))
+    end
     return result, warnings
   end
 
