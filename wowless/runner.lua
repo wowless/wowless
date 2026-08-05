@@ -103,6 +103,12 @@ local function run(cfg)
   if runnercfg.implicitgodframes then
     local uiparent = modules.api.CreateFrame('Frame', 'UIParent')
     modules.points.SetAllPointsInternal(uiparent)
+    local worldframe = modules.api.CreateFrame('Frame', 'WorldFrame')
+    -- WORLD is a real frameStrata value, but only WorldFrame has it,
+    -- confirmed against a real client; matches the XML-tag path in
+    -- xmleval.lua's loadElement.
+    worldframe.frameStrata = 'WORLD'
+    modules.points.SetAllPointsInternal(worldframe)
   end
   return withglobaltable(genv, function()
     loader.loadAddons()
