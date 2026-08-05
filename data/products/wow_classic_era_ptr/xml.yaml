@@ -136,6 +136,10 @@ Animations:
     tags:
       AnimationGroup:
   impl: transparent
+ArchaeologyDigSiteFrame:
+  extends: Frame
+  impl:
+    uiobject: Frame
 Attribute:
   attributes:
     name:
