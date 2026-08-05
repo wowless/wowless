@@ -401,6 +401,9 @@ return function(
       local name, _, flags = parent:GetFont()
       parent:SetFont(name, e.kids[#e.kids].attr.val, flags)
     end,
+    -- TODO wire up AddForbiddenAspects once something depends on it; for
+    -- now this just keeps the tag from being flagged as unrecognized.
+    forbiddenaspects = function() end,
     gradient = function(_, e, parent)
       local minColor, maxColor
       for _, kid in ipairs(e.kids) do

@@ -250,14 +250,13 @@ local function templateElement(uiobjectApis, chain, attrKey, key, value)
 end
 
 -- Every (tag, attribute) pair typed stringenum:/enum:, for tags reachable
--- from Frame (see frameChains) -- these are eligible for per-product
--- XML-attribute-value template tests. An eligible attribute's impl is
--- required to be field-based (data/schemas/xml.yaml's attribute impl
--- taggedunion also allows method/internal/loadfile/scope, but every
--- stringenum-/enum-typed attribute reachable from Frame today uses
--- `impl.field` directly) -- resolve the field's default and real getter
--- method via computeUiobjectApis's already-computed, inherits-flattened
--- field/getter data, rather than re-deriving either from string transforms.
+-- from Frame (see frameChains), whose impl is field-based
+-- (data/schemas/xml.yaml's attribute impl taggedunion also allows
+-- method/internal/loadfile/scope, or no impl at all) -- these are
+-- eligible for per-product XML-attribute-value template tests. Resolve
+-- the field's default and real getter method via computeUiobjectApis's
+-- already-computed, inherits-flattened field/getter data, rather than
+-- re-deriving either from string transforms.
 --
 -- frameChains doesn't guarantee every tag has one unambiguous chain (see
 -- its comment, and issue #781) -- only assert that here, lazily, for a
@@ -271,8 +270,8 @@ local function discoverCases(p)
     if chains[tag] then
       for attrKey, attrDef in pairs(tdef.attributes or {}) do
         local ty = attrDef.type
-        if ty.stringenum or ty.enum then
-          local fieldName = assert(attrDef.impl.field, 'unsupported attribute impl for ' .. tag .. '.' .. attrKey)
+        local fieldName = (ty.stringenum or ty.enum) and attrDef.impl and attrDef.impl.field
+        if fieldName then
           local fv = uiobjectApis[tag].fields[fieldName]
           local chain = chains[tag]
           for _, t in ipairs(chain) do

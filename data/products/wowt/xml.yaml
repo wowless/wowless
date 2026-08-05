@@ -542,6 +542,16 @@ FontStringHeader2:
 FontStringHeader3:
   extends: FontString
   sealed: true
+ForbiddenAspect:
+  attributes:
+    aspect:
+      required: true
+      type:
+        enum: ForbiddenAspect
+ForbiddenAspects:
+  contents:
+    tags:
+      ForbiddenAspect:
 Frame:
   attributes:
     clampedtoscreen:
@@ -619,6 +629,7 @@ Frame:
     tags:
       Animations:
       Attributes:
+      ForbiddenAspects:
       Frames:
       HitRectInsets:
       Layers:
