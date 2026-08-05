@@ -139,7 +139,7 @@ Animations:
 ArchaeologyDigSiteFrame:
   extends: Frame
   impl:
-    uiobject: ArchaeologyDigSiteFrame
+    uiobject: Frame
 Attribute:
   attributes:
     name:

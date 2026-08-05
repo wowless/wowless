@@ -304,6 +304,7 @@ lies:
     OWNED_AUCTION_BIDDER_INFO_RECEIVED:
     REPLICATE_ITEM_LIST_UPDATE:
   extra_script_objects:
+    FrameAPIArchaeologyDigSiteFrame:
     FrameAPIBlob:
     FrameAPINamePlate:
     FrameAPIQuestPOI:
@@ -554,8 +555,6 @@ script_objects:
     luaobject: AbbreviatedNumberFormatter
   DurationTextBindingObjectAPI:
     luaobject: DurationTextBinding
-  FrameAPIArchaeologyDigSiteFrame:
-    uiobject: ArchaeologyDigSiteFrame
   FrameAPICharacterModelBase:
     uiobject: PlayerModel
   FrameAPICinematicModel:
