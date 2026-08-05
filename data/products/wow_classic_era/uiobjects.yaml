@@ -1048,11 +1048,6 @@ AnimationGroup:
     OnPlay:
     OnStop:
     OnUpdate:
-ArchaeologyDigSiteFrame:
-  fields:
-  inherits:
-    Frame:
-  methods:
 Browser:
   fieldinitoverrides:
     mouseClickEnabled: true
