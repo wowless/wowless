@@ -26,10 +26,7 @@ local function tpath(t, ...)
   return t
 end
 
--- onElement(tag, line), if given, is called for every element as its
--- opening (or self-closing) tag is written, with the 1-indexed line it
--- lands on.
-local function renderXml(x, onElement)
+local function renderXml(x)
   local function doRenderXml(y, n, t)
     local attrs = {}
     for k in pairs(y) do
@@ -41,9 +38,6 @@ local function renderXml(x, onElement)
     local tt = { (' '):rep(n), '<', y.tag }
     for _, k in ipairs(attrs) do
       table.insert(tt, (' %s=\'%s\''):format(k, tostring(y[k])))
-    end
-    if onElement then
-      onElement(y.tag, #t + 1)
     end
     if #y == 0 then
       table.insert(tt, ' />')
@@ -359,39 +353,9 @@ local function computeCandidates(p, case)
   return candidates
 end
 
--- Mirrors prep.lua's xmlflat supertypes climb (respecting sealed) just
--- enough to answer "is-a region" (Frame, Texture, FontString, ... --
--- anything LayoutFrame-derived) for an arbitrary tag.
-local function isRegion(xmltree, tag)
-  if tag == 'LayoutFrame' then
-    return true
-  end
-  local t = xmltree[tag]
-  if not t then
-    return false
-  end
-  local climbing = not t.sealed
-  while t.extends do
-    if climbing and t.extends == 'LayoutFrame' then
-      return true
-    end
-    t = xmltree[t.extends]
-    climbing = climbing and not t.sealed
-  end
-  return false
-end
-
 -- Builds the WowlessGeneratedXmlTests root shared by the 'templatexml' file
 -- (rendered to text as templates.xml) and the templates ptablemap entry.
--- Also returns lastRegionLine: a real client doesn't report an invalid
--- attribute value warning at the offending element's own line, but at the
--- start line of whichever region was most recently encountered by the
--- time the (queued) warning is actually delivered -- observed against a
--- real client; see issue #864 and the matching xml.lua comment. Since
--- every warnsinvalid warning from one file is delivered together, they
--- all share that same final line.
 local function buildTemplatesXml(p, uiobjectApis)
-  local xmltree = perproduct(p, 'xml')
   local root = { name = 'WowlessGeneratedXmlTests', tag = 'Frame' }
   for _, case in ipairs(discoverCases(p)) do
     for _, c in ipairs(computeCandidates(p, case)) do
@@ -399,13 +363,7 @@ local function buildTemplatesXml(p, uiobjectApis)
       table.insert(root, templateElement(uiobjectApis, case.chain, case.xmlAttrKey, key, c.value))
     end
   end
-  local lastRegionLine
-  local text = renderXml({ root, tag = 'Ui' }, function(tag, line)
-    if isRegion(xmltree, tag) then
-      lastRegionLine = line
-    end
-  end)
-  return text, lastRegionLine
+  return renderXml({ root, tag = 'Ui' })
 end
 
 local ptablemap = {
@@ -603,7 +561,6 @@ local ptablemap = {
   end,
   templates = function(p)
     local uiobjectApis = computeUiobjectApis(p)
-    local _, lastRegionLine = buildTemplatesXml(p, uiobjectApis)
     local t = {}
     for _, case in ipairs(discoverCases(p)) do
       for _, c in ipairs(computeCandidates(p, case)) do
@@ -614,13 +571,7 @@ local ptablemap = {
           objectPath = objectPath(uiobjectApis, case.chain, key),
         }
         if c.warnsinvalid then
-          cfg.warning = ('Interface/AddOns/WowlessData/templates.xml:%d %s %s: Invalid %s value: %s'):format(
-            assert(lastRegionLine),
-            case.xmlTag,
-            case.xmlTag,
-            case.xmlAttrKey,
-            c.value
-          )
+          cfg.warning = ('%s %s: Invalid %s value: %s'):format(case.xmlTag, case.xmlTag, case.xmlAttrKey, c.value)
         end
         t[key] = cfg
       end

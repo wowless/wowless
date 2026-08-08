@@ -81,17 +81,14 @@ return function(datalua, eventqueue)
     end,
   }
 
-  local function parseRoot(root, intrinsics, snapshot, warningPath)
+  local function parseRoot(root, intrinsics, snapshot)
     local warnings = {}
-    -- A real client doesn't report an invalid attribute value warning at
-    -- the offending element's own line: by the time it's actually
-    -- delivered, parsing has moved on, and it points at the start line of
-    -- whichever region (Frame, Texture, FontString, ... -- anything
-    -- LayoutFrame-derived) was most recently encountered (document order,
-    -- including descending into children) -- observed against a real
-    -- client; see issue #864.
-    local lastRegionLine
-    local pendingInvalidValueWarnings = {}
+    -- A real client only prefixes these LUA_WARNINGs with a file:line
+    -- (and, for invalid attribute values, does so via a surprising,
+    -- non-local "last region encountered" cursor rather than the
+    -- offending element's own line -- see issue #864) when the
+    -- enableSourceLocationLookup cvar is on. The addon forces it off
+    -- (init.lua) so both sides can just compare bare messages.
     local function nameOf(e)
       for _, k in ipairs(e._attr) do
         if string.lower(k) == 'name' then
@@ -104,9 +101,9 @@ return function(datalua, eventqueue)
     -- children and attributes rather than dropping the whole subtree
     -- silently, flagging each one individually too.
     local function warnUnrecognized(e)
-      QueueEvent('LUA_WARNING', ('%s:%d Unrecognized XML: %s'):format(warningPath, e._line, e._name))
+      QueueEvent('LUA_WARNING', ('Unrecognized XML: %s'):format(e._name))
       for _, k in ipairs(e._attr) do
-        QueueEvent('LUA_WARNING', ('%s:%d Unrecognized XML attribute: %s'):format(warningPath, e._line, k))
+        QueueEvent('LUA_WARNING', ('Unrecognized XML attribute: %s'):format(k))
       end
       for _, kid in ipairs(e._children or {}) do
         if kid._type == 'ELEMENT' then
@@ -127,9 +124,6 @@ return function(datalua, eventqueue)
       if ty.virtual then
         error(tname .. ' is virtual and cannot be instantiated')
       end
-      if ty.supertypes.layoutframe then
-        lastRegionLine = e._line
-      end
       local extends = false
       for k in pairs(tk) do
         extends = extends or ty.supertypes[k]
@@ -149,10 +143,7 @@ return function(datalua, eventqueue)
           local vv = dispatch(attributeTypes, attr, v)
           if vv == nil then
             if ty.warnsinvalid[an] then
-              table.insert(
-                pendingInvalidValueWarnings,
-                ('%s %s: Invalid %s value: %s'):format(e._name, nameOf(e), k, v)
-              )
+              QueueEvent('LUA_WARNING', ('%s %s: Invalid %s value: %s'):format(e._name, nameOf(e), k, v))
             end
             table.insert(warnings, 'attribute ' .. k .. ' has invalid value ' .. v)
           else
@@ -213,18 +204,15 @@ return function(datalua, eventqueue)
       bindings = true,
       ui = true,
     })
-    for _, msg in ipairs(pendingInvalidValueWarnings) do
-      QueueEvent('LUA_WARNING', ('%s:%d %s'):format(warningPath, lastRegionLine, msg))
-    end
     return result, warnings
   end
 
   local intrinsics = {}
-  return function(xmlstr, warningPath)
+  return function(xmlstr)
     local snapshot = {}
     for k, v in pairs(intrinsics) do
       snapshot[k] = v
     end
-    return parseRoot(xml2dom(xmlstr), intrinsics, snapshot, warningPath)
+    return parseRoot(xml2dom(xmlstr), intrinsics, snapshot)
   end
 end
