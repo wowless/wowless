@@ -804,14 +804,12 @@ do
       local asyncName, asyncFn = next(G.asynctests, asyncCurKey)
       if asyncName == nil then
         frame:SetScript('OnUpdate', nil)
-        if _G.__wowless then -- issue #521
-          _G.WowlessTestFailures.LUA_WARNING = (function()
-            local diff = G.arraydiff(G.ExpectedLuaWarnings, G.ActualLuaWarnings)
-            if #diff > 0 then
-              return diff
-            end
-          end)()
-        end
+        _G.WowlessTestFailures.LUA_WARNING = (function()
+          local diff = G.arraydiff(G.ExpectedLuaWarnings, G.ActualLuaWarnings)
+          if #diff > 0 then
+            return diff
+          end
+        end)()
         _G.WowlessTestsDone = true
         local print = DevTools_Dump and print or function() end
         print(('Wowless testing completed in %.1fs (%d frames).'):format(totalTime, numFrames))
