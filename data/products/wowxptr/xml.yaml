@@ -108,6 +108,7 @@ AnimationGroup:
         field: looping
       type:
         stringenum: LoopType
+      warnsoninvalid: true
     mixin:
       impl: internal
       phase: early

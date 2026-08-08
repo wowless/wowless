@@ -81,15 +81,29 @@ return function(datalua, eventqueue)
     end,
   }
 
-  local function parseRoot(root, intrinsics, snapshot, warningPath)
+  local function parseRoot(root, intrinsics, snapshot)
     local warnings = {}
+    -- A real client only prefixes these LUA_WARNINGs with a file:line
+    -- (and, for invalid attribute values, does so via a surprising,
+    -- non-local "last region encountered" cursor rather than the
+    -- offending element's own line -- see issue #864) when the
+    -- enableSourceLocationLookup cvar is on. The addon forces it off
+    -- (init.lua) so both sides can just compare bare messages.
+    local function nameOf(e)
+      for _, k in ipairs(e._attr) do
+        if string.lower(k) == 'name' then
+          return e._attr[k]
+        end
+      end
+      return e._name
+    end
     -- A real client keeps descending into an unrecognized element's
     -- children and attributes rather than dropping the whole subtree
     -- silently, flagging each one individually too.
     local function warnUnrecognized(e)
-      QueueEvent('LUA_WARNING', ('%s:%d Unrecognized XML: %s'):format(warningPath, e._line, e._name))
+      QueueEvent('LUA_WARNING', ('Unrecognized XML: %s'):format(e._name))
       for _, k in ipairs(e._attr) do
-        QueueEvent('LUA_WARNING', ('%s:%d Unrecognized XML attribute: %s'):format(warningPath, e._line, k))
+        QueueEvent('LUA_WARNING', ('Unrecognized XML attribute: %s'):format(k))
       end
       for _, kid in ipairs(e._children or {}) do
         if kid._type == 'ELEMENT' then
@@ -128,6 +142,9 @@ return function(datalua, eventqueue)
           local v = e._attr[k]
           local vv = dispatch(attributeTypes, attr, v)
           if vv == nil then
+            if ty.warnsinvalid[an] then
+              QueueEvent('LUA_WARNING', ('%s %s: Invalid %s value: %s'):format(e._name, nameOf(e), k, v))
+            end
             table.insert(warnings, 'attribute ' .. k .. ' has invalid value ' .. v)
           else
             resultAttrs[an] = vv
@@ -191,11 +208,11 @@ return function(datalua, eventqueue)
   end
 
   local intrinsics = {}
-  return function(xmlstr, warningPath)
+  return function(xmlstr)
     local snapshot = {}
     for k, v in pairs(intrinsics) do
       snapshot[k] = v
     end
-    return parseRoot(xml2dom(xmlstr), intrinsics, snapshot, warningPath)
+    return parseRoot(xml2dom(xmlstr), intrinsics, snapshot)
   end
 end

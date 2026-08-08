@@ -1065,6 +1065,7 @@ foreach(
   statemachine.lua
   templates.lua
   test.lua
+  test.xml
   uiobjects.lua
   util.lua
   Wowless.toc)
@@ -1077,17 +1078,6 @@ foreach(
       -DDST_DIR=${d} -P ${CMAKE_CURRENT_SOURCE_DIR}/cmake/copy_executable.cmake
     DEPENDS addon/Wowless/${f})
 endforeach()
-set(out ${d}/test.xml)
-set(staging ${CMAKE_CURRENT_BINARY_DIR}/staging/addon/Wowless/test.xml)
-list(APPEND testaddon_outs ${out})
-add_custom_command(
-  OUTPUT ${out}
-  COMMAND
-    ${CMAKE_COMMAND} -DSRC=${CMAKE_CURRENT_SOURCE_DIR}/addon/Wowless/test.xml
-    -DDST=${staging} -P ${CMAKE_CURRENT_SOURCE_DIR}/cmake/preprocess_line.cmake
-  COMMAND ${CMAKE_COMMAND} -DSRC=${staging} -DDST_DIR=${d} -P
-          ${CMAKE_CURRENT_SOURCE_DIR}/cmake/copy_executable.cmake
-  DEPENDS addon/Wowless/test.xml cmake/preprocess_line.cmake)
 set(out ${d}/generatedxml.xml)
 set(staged ${CMAKE_CURRENT_BINARY_DIR}/staging/addon/Wowless/generatedxml.xml)
 list(APPEND testaddon_outs ${out})

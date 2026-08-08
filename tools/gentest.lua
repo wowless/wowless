@@ -282,6 +282,7 @@ local function discoverCases(p)
             getter = fv.getters[1].method,
             id = tag:lower() .. '_' .. attrKey,
             init = fv.init,
+            warnsinvalid = attrDef.warnsoninvalid,
             xmlAttrKey = attrKey,
             xmlTag = tag,
           })
@@ -336,14 +337,33 @@ local function computeCandidates(p, case)
         local upper = name:upper()
         if not native[upper] and not seenForeign[upper] then
           seenForeign[upper] = true
-          table.insert(candidates, { expected = case.init, suffix = name:lower(), value = name })
+          table.insert(
+            candidates,
+            { expected = case.init, suffix = name:lower(), value = name, warnsinvalid = case.warnsinvalid }
+          )
         end
       end
     end
   end
   assert(not native.NONSENSE, 'nonsense is apparently not nonsense for ' .. case.id)
-  table.insert(candidates, { expected = case.init, suffix = 'nonsense', value = 'nonsense' })
+  table.insert(
+    candidates,
+    { expected = case.init, suffix = 'nonsense', value = 'nonsense', warnsinvalid = case.warnsinvalid }
+  )
   return candidates
+end
+
+-- Builds the WowlessGeneratedXmlTests root shared by the 'templatexml' file
+-- (rendered to text as templates.xml) and the templates ptablemap entry.
+local function buildTemplatesXml(p, uiobjectApis)
+  local root = { name = 'WowlessGeneratedXmlTests', tag = 'Frame' }
+  for _, case in ipairs(discoverCases(p)) do
+    for _, c in ipairs(computeCandidates(p, case)) do
+      local key = case.id .. '_' .. c.suffix
+      table.insert(root, templateElement(uiobjectApis, case.chain, case.xmlAttrKey, key, c.value))
+    end
+  end
+  return renderXml({ root, tag = 'Ui' })
 end
 
 local ptablemap = {
@@ -545,11 +565,15 @@ local ptablemap = {
     for _, case in ipairs(discoverCases(p)) do
       for _, c in ipairs(computeCandidates(p, case)) do
         local key = case.id .. '_' .. c.suffix
-        t[key] = {
+        local cfg = {
           expected = c.expected,
           getter = case.getter,
           objectPath = objectPath(uiobjectApis, case.chain, key),
         }
+        if c.warnsinvalid then
+          cfg.warning = ('%s %s: Invalid %s value: %s'):format(case.xmlTag, case.xmlTag, case.xmlAttrKey, c.value)
+        end
+        t[key] = cfg
       end
     end
     return 'Templates', t
@@ -573,15 +597,7 @@ local function doit(k, p)
   elseif k == 'product' then
     return ('_G.WowlessData = { product = %q }'):format(p)
   elseif k == 'templatexml' then
-    local uiobjectApis = computeUiobjectApis(p)
-    local root = { name = 'WowlessGeneratedXmlTests', tag = 'Frame' }
-    for _, case in ipairs(discoverCases(p)) do
-      for _, c in ipairs(computeCandidates(p, case)) do
-        local key = case.id .. '_' .. c.suffix
-        table.insert(root, templateElement(uiobjectApis, case.chain, case.xmlAttrKey, key, c.value))
-      end
-    end
-    return renderXml({ root, tag = 'Ui' })
+    return buildTemplatesXml(p, computeUiobjectApis(p))
   elseif k == 'toc' then
     local tt = {}
     for kk in pairs(ptablemap) do
