@@ -3767,6 +3767,9 @@ C_BlackMarket.ItemPlaceBid:
 C_BlackMarket.RequestItems:
   inputs:
   outputs:
+C_Browser.CloseFullscreenBrowser:
+  inputs:
+  outputs:
 C_Calendar.AddEvent:
   inputs:
   outputs:
@@ -10490,6 +10493,11 @@ C_DelvesUI.HasActiveLair:
   outputs:
   - name: result
     type: boolean
+C_DelvesUI.HasActiveLFGLair:
+  inputs:
+  outputs:
+  - name: result
+    type: boolean
 C_DelvesUI.IsDelveEntranceTierEnabled:
   inputs:
   - name: tier
@@ -10504,6 +10512,11 @@ C_DelvesUI.IsEligibleForActiveDelveRewards:
   inputs:
   - name: unit
     type: unit
+  outputs:
+  - name: result
+    type: boolean
+C_DelvesUI.IsInLair:
+  inputs:
   outputs:
   - name: result
     type: boolean

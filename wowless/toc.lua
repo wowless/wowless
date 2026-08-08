@@ -47,6 +47,9 @@ local filters = {
       end
     end
   end,
+  AllowLoadTextLocale = function()
+    -- TODO implement
+  end,
   Bootstrap = function()
     return true, true
   end,
