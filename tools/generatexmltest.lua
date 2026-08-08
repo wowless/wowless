@@ -16,7 +16,17 @@ local args = (function()
 end)()
 
 local sorted = require('pl.tablex').sort
-local scripttypes = readyaml('data/scripttypes.yaml')
+-- scripttypes.yaml is per-product (some products dropped script hooks
+-- deprecated on other versions -- issue #864); this file isn't, so it
+-- unions the full universe across products for maximum coverage, and
+-- generatedxml.xml's own comparison logic checks each product's own
+-- ScriptTypes data at runtime to expect the right warning either way.
+local scripttypes = {}
+for _, p in ipairs(readyaml('data/products.yaml')) do
+  for name in pairs(readyaml(('data/products/%s/scripttypes.yaml'):format(p))) do
+    scripttypes[name] = true
+  end
+end
 local stringenums = readyaml('data/products/wow/stringenums.yaml')
 
 local function hack(s)
@@ -53,21 +63,33 @@ local content = {
   },
   {
     tag = 'Script',
-    text = [[
-      CreateFrame('ModelScene'):CreateActor(nil, 'WowlessActorTemplate')
-      local expected = {}
-      for k, v in _G.Wowless.sorted(_G.WowlessData.UIObjectApis.Actor.scripts) do
-        if v then
-          table.insert(expected, k)
-        elseif _G.WowlessData.ScriptTypes[k] then
-          local fmt = 'Frame ModelSceneActor: Unknown script element %s'
-          table.insert(_G.Wowless.ExpectedLuaWarnings, fmt:format(k))
-        else
-          table.insert(_G.Wowless.ExpectedNextFrame, 'Unrecognized XML: ' .. k)
-        end
+    text = (function()
+      local names = {}
+      for name in sorted(scripttypes) do
+        table.insert(names, luaLiteral(name))
       end
-      assertEquals(table.concat(expected, ','), table.concat(WowlessLog, ','))
-    ]],
+      -- Iterates the full cross-product name universe (not
+      -- UIObjectApis.Actor.scripts, which only has this product's own
+      -- valid names -- issue #864) so a name invalid here still gets
+      -- classified, not silently skipped.
+      return ([[
+        CreateFrame('ModelScene'):CreateActor(nil, 'WowlessActorTemplate')
+        local allNames = {%s}
+        local expected = {}
+        for _, k in ipairs(allNames) do
+          local v = _G.WowlessData.UIObjectApis.Actor.scripts[k]
+          if v then
+            table.insert(expected, k)
+          elseif _G.WowlessData.ScriptTypes[k] then
+            local fmt = 'Frame ModelSceneActor: Unknown script element %%s'
+            table.insert(_G.Wowless.ExpectedLuaWarnings, fmt:format(k))
+          else
+            table.insert(_G.Wowless.ExpectedNextFrame, 'Unrecognized XML: ' .. k)
+          end
+        end
+        assertEquals(table.concat(expected, ','), table.concat(WowlessLog, ','))
+      ]]):format(table.concat(names, ','))
+    end)(),
   },
   {
     tag = 'Frame',

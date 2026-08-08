@@ -1,9 +1,9 @@
 describe('xml', function()
-  local scripttypes = require('build.data.scripttypes')
   for _, p in ipairs(require('build.data.products')) do
     describe(p, function()
       local xml = require('build.data.products.' .. p .. '.xml')
       local uiobjects = require('build.data.products.' .. p .. '.uiobjects')
+      local scripttypes = require('build.data.products.' .. p .. '.scripttypes')
       local methods = {}
       local fields = {}
       local function flatten(k)

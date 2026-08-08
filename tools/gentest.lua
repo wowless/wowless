@@ -74,7 +74,7 @@ end
 -- the uiobjectapis ptablemap entry and discoverCases below.
 local function computeUiobjectApis(p)
   local uiobjects = perproduct(p, 'uiobjects')
-  local allscripts = readyaml('data/scripttypes.yaml')
+  local allscripts = perproduct(p, 'scripttypes')
   for _, cfg in pairs(uiobjects) do
     cfg.fieldinitoverrides = cfg.fieldinitoverrides or {}
   end
@@ -559,19 +559,8 @@ local ptablemap = {
     end
     return 'NamespaceApis', t
   end,
-  -- The universe of script names in data/scripttypes.yaml isn't all valid
-  -- XML tags on every product (e.g. the old OnTooltip* script hooks were
-  -- deprecated on modern retail) -- only the ones this product's own
-  -- xml.yaml actually declares (extends: ScriptType) are.
   scripttypes = function(p)
-    local xml = perproduct(p, 'xml')
-    local t = {}
-    for name in pairs(readyaml('data/scripttypes.yaml')) do
-      if xml[name] and xml[name].extends == 'ScriptType' then
-        t[name] = true
-      end
-    end
-    return 'ScriptTypes', t
+    return 'ScriptTypes', perproduct(p, 'scripttypes')
   end,
   templates = function(p)
     local uiobjectApis = computeUiobjectApis(p)
