@@ -78,6 +78,8 @@ type:
     runtime:
       type:
         record:
+          bareScriptWarning:
+            type: flag
           discord:
             type: flag
           enummetafix:
