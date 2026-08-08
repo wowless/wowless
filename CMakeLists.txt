@@ -683,6 +683,7 @@ foreach(product ${products})
   gentest(luaobjects.lua luaobjects)
   gentest(namespaceapis.lua namespaceapis)
   gentest(product.lua product)
+  gentest(scripttypes.lua scripttypes)
   gentest(templates.lua templates)
   gentest(templates.xml templatexml)
   gentest(uiobjectapis.lua uiobjectapis)
@@ -720,7 +721,6 @@ add_custom_target(
   WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
 
 yaml2lua(impl)
-yaml2lua(scripttypes)
 yaml2lua(sql)
 yaml2lua(test)
 yaml2lua(uiobjectimpl)
@@ -737,6 +737,7 @@ foreach(product ${products})
     events
     globals
     luaobjects
+    scripttypes
     stringenums
     structures
     uiobjects
@@ -795,7 +796,6 @@ lua2c(
   build.data.impl=runtime/impl.lua
   build.data.modules=runtime/modules.lua
   build.data.products=runtime/products.lua
-  build.data.scripttypes=runtime/scripttypes.lua
   build.data.sql=runtime/sql.lua
   build.data.test=runtime/test.lua
   build.data.uiobjectimpl=runtime/uiobjectimpl.lua

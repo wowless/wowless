@@ -12,7 +12,7 @@ impl: global
 luaobjects: product
 modules: global
 products: global
-scripttypes: global
+scripttypes: product
 sql: global
 stringenums: product
 structures: product

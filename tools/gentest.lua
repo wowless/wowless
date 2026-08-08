@@ -74,7 +74,7 @@ end
 -- the uiobjectapis ptablemap entry and discoverCases below.
 local function computeUiobjectApis(p)
   local uiobjects = perproduct(p, 'uiobjects')
-  local allscripts = readyaml('data/scripttypes.yaml')
+  local allscripts = perproduct(p, 'scripttypes')
   for _, cfg in pairs(uiobjects) do
     cfg.fieldinitoverrides = cfg.fieldinitoverrides or {}
   end
@@ -558,6 +558,9 @@ local ptablemap = {
       t[k] = mt
     end
     return 'NamespaceApis', t
+  end,
+  scripttypes = function(p)
+    return 'ScriptTypes', perproduct(p, 'scripttypes')
   end,
   templates = function(p)
     local uiobjectApis = computeUiobjectApis(p)
