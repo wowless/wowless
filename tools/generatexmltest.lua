@@ -59,9 +59,11 @@ local content = {
       for k, v in _G.Wowless.sorted(_G.WowlessData.UIObjectApis.Actor.scripts) do
         if v then
           table.insert(expected, k)
-        else
+        elseif _G.WowlessData.ScriptTypes[k] then
           local fmt = 'Frame ModelSceneActor: Unknown script element %s'
           table.insert(_G.Wowless.ExpectedLuaWarnings, fmt:format(k))
+        else
+          table.insert(_G.Wowless.ExpectedNextFrame, 'Unrecognized XML: ' .. k)
         end
       end
       assertEquals(table.concat(expected, ','), table.concat(WowlessLog, ','))

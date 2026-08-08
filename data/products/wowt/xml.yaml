@@ -1177,10 +1177,6 @@ OnTextSet:
   extends: ScriptType
   impl:
     script:
-OnTooltipAddMoney:
-  extends: ScriptType
-  impl:
-    script:
 OnTooltipCleared:
   extends: ScriptType
   impl:
@@ -1190,18 +1186,6 @@ OnTooltipSetDefaultAnchor:
   impl:
     script:
 OnTooltipSetFrameStack:
-  extends: ScriptType
-  impl:
-    script:
-OnTooltipSetItem:
-  extends: ScriptType
-  impl:
-    script:
-OnTooltipSetSpell:
-  extends: ScriptType
-  impl:
-    script:
-OnTooltipSetUnit:
   extends: ScriptType
   impl:
     script:
