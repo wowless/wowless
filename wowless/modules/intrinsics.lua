@@ -1,12 +1,13 @@
 return function(log)
   local intrinsicTypes = {}
 
-  local function Add(name, basetype, template, nested)
+  local function Add(displayName, basetype, template, nested)
+    local name = string.lower(displayName)
     if intrinsicTypes[name] then
       log(1, 'overwriting intrinsic %s', name)
     end
     log(3, 'creating intrinsic %s', name)
-    intrinsicTypes[name] = { basetype = basetype, nested = nested, template = template }
+    intrinsicTypes[name] = { basetype = basetype, displayName = displayName, nested = nested, template = template }
   end
 
   local function Get(name)
