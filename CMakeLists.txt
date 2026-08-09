@@ -1057,6 +1057,7 @@ foreach(
   arraydiff.lua
   asynctests.lua
   evenmoreintrinsic.xml
+  evenmoreintrinsic2.xml
   framework.lua
   funtainer.lua
   generated.lua

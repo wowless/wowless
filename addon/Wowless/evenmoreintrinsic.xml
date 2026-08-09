@@ -4,4 +4,5 @@
       <OnLoad>end, error('this should not be executed')--</OnLoad>
     </Scripts>
   </WowlessIntrinsicType>
+  <Include file='evenmoreintrinsic2.xml' />
 </Ui>

@@ -1,0 +1,6 @@
+<Ui>
+  <Script>
+    table.insert(_G.Wowless.ExpectedLuaWarnings, 'Unknown frame type: WowlessEvenMoreIntrinsicType')
+  </Script>
+  <WowlessEvenMoreIntrinsicType />
+</Ui>
