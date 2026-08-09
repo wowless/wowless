@@ -8,8 +8,11 @@ return function(datalua, events, intrinsics, templates, uiobjecttypes, xmleval)
     local ltype = string.lower(type)
     local intrinsicEntry = GetIntrinsic(ltype)
     local basetype = intrinsicEntry and intrinsicEntry.basetype or ltype
-    if not HasType(basetype) or not InheritsFrom(basetype, 'frame') then
-      if datalua.config.runtime.warners[ltype] then
+    -- issue #116: an intrinsic of an intrinsic parses fine but a real client
+    -- refuses to instantiate it, the same way it does an unknown frame type.
+    local nested = intrinsicEntry and intrinsicEntry.nested
+    if nested or not HasType(basetype) or not InheritsFrom(basetype, 'frame') then
+      if nested or datalua.config.runtime.warners[ltype] then
         SendEvent('LUA_WARNING', 'Unknown frame type: ' .. type)
       end
       error('CreateFrame: Unknown frame type \'' .. type .. '\'', 0)
