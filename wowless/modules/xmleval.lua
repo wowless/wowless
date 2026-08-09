@@ -736,7 +736,7 @@ return function(
           -- intrinsic fine, but refuses to instantiate it, the same way it
           -- warns on an unknown frame type.
           if intrinsicEntry and intrinsicEntry.nested then
-            SendEvent('LUA_WARNING', 'Unknown frame type: ' .. intrinsicEntry.displayName)
+            QueueEvent('LUA_WARNING', 'Unknown frame type: ' .. intrinsicEntry.displayName)
             return nil
           end
           local name = e.attr.name
