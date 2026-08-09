@@ -215,6 +215,21 @@
     table.insert(_G.Wowless.ExpectedLuaWarnings, 'WowlessEvenMoreIntrinsicType')]]--
   </Script>
 
+  <!-- VectorGraphics has a uiobjects.yaml entry (wowt only) but no XML tag
+       definition on any product; this documents today's actual behavior
+       (unrecognized XML) as a real-client probe for whether it belongs in
+       Layer's tag list like Texture/FontString/Line. -->
+  <Frame>
+    <Layers>
+      <Layer>
+        <VectorGraphics />
+      </Layer>
+    </Layers>
+  </Frame>
+  <Script>
+    table.insert(Wowless.ExpectedNextFrame, 'Unrecognized XML: VectorGraphics')
+  </Script>
+
   <!-- https://github.com/wowless/wowless/issues/714: a method= script bound in a
        base virtual template should see a KeyValue override applied by a more-derived
        template later in the same inherits= chain, not the value captured when the
