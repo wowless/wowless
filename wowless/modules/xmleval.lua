@@ -723,16 +723,22 @@ return function(
       if e.attr.intrinsic then
         assert(virtual ~= false, 'intrinsics cannot be explicitly non-virtual: ' .. e.type)
         assert(e.attr.name, 'cannot create anonymous intrinsic')
-        local name = string.lower(e.attr.name)
         local basetype = intrinsicEntry and intrinsicEntry.basetype or implBasetype
         uiobjecttypes.GetOrThrow(basetype) -- validate basetype exists
-        intrinsics.Add(name, basetype, template)
+        intrinsics.Add(e.attr.name, basetype, template, intrinsicEntry ~= nil)
       else
         if (ltype == 'font' and e.attr.name) or (virtual and not ctx.ignoreVirtual) then
           assert(e.attr.name, 'cannot create anonymous template')
           templates.SetTemplate(e.attr.name, template)
         end
         if ltype == 'font' or (not virtual or ctx.ignoreVirtual) then
+          -- issue #116: a real client parses a tag for an intrinsic of an
+          -- intrinsic fine, but refuses to instantiate it, the same way it
+          -- warns on an unknown frame type.
+          if intrinsicEntry and intrinsicEntry.nested then
+            QueueEvent('LUA_WARNING', 'Unknown frame type: ' .. intrinsicEntry.displayName)
+            return nil
+          end
           local name = e.attr.name
           if virtual and ctx.ignoreVirtual then
             log(1, 'ignoring virtual on %s', tostring(name))
