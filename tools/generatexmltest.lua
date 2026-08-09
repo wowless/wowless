@@ -81,7 +81,8 @@ local content = {
           if v then
             table.insert(expected, k)
           elseif _G.WowlessData.ScriptTypes[k] then
-            local fmt = 'Frame ModelSceneActor: Unknown script element %%s'
+            local prefix = _G.WowlessData.Config.runtime.bareScriptWarning and '' or 'Frame '
+            local fmt = prefix .. 'ModelSceneActor: Unknown script element %%s'
             table.insert(_G.Wowless.ExpectedLuaWarnings, fmt:format(k))
           else
             table.insert(_G.Wowless.ExpectedNextFrame, 'Unrecognized XML: ' .. k)

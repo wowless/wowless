@@ -108,6 +108,7 @@ runner:
     PTRFEEDBACK:
     USERANDOM:
 runtime:
+  bareScriptWarning: true
   discord: true
   enummetafix: true
   send_isfromitem: true

@@ -248,7 +248,8 @@ return function(
 
   local function bindScript(script, obj, env, intrinsic)
     if not scripts.HasScript(obj, script.type) then
-      local fmt = 'Frame %s: Unknown script element %s'
+      local prefix = datalua.config.runtime.bareScriptWarning and '' or 'Frame '
+      local fmt = prefix .. '%s: Unknown script element %s'
       SendEvent('LUA_WARNING', fmt:format(uiobjecttypes.GetObjectType(obj), script.name))
       return
     end
