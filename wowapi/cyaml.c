@@ -277,7 +277,11 @@ static void printscalar(lua_State *L, yaml_emitter_t *emitter,
     case LUA_TSTRING: {
       size_t z;
       const unsigned char *s = (const unsigned char *)lua_tolstring(L, -1, &z);
-      int q = (!z || lua_isnumber(L, -1)) ? YAML_SINGLE_QUOTED_SCALAR_STYLE : 0;
+      int q = (!z || lua_isnumber(L, -1)) ||
+                      (z == 4 && !memcmp(s, "true", 4)) ||
+                      (z == 5 && !memcmp(s, "false", 5))
+                  ? YAML_SINGLE_QUOTED_SCALAR_STYLE
+                  : 0;
       x(L, yaml_scalar_event_initialize(event, 0, 0, s, z, 1, 1, q));
       x(L, yaml_emitter_emit(emitter, event));
       break;

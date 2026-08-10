@@ -2,8 +2,10 @@ describe('yaml', function()
   local yaml = require('wowapi.yaml')
   local ystr = [[
 bool: true
+boolstr: 'true'
 empty_string: ''
 number: 42
+numstr: '42'
 record:
   baz: quux
   frob: nicate
@@ -14,8 +16,10 @@ string: foo
 ]]
   local ytab = {
     bool = true,
+    boolstr = 'true',
     empty_string = '',
     number = 42,
+    numstr = '42',
     record = { baz = 'quux', frob = 'nicate' },
     sequence = { 99, 'bar' },
     string = 'foo',
