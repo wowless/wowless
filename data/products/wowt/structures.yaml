@@ -11658,8 +11658,6 @@ DiscordChatInfo:
         enum: DiscordDisplayNameType
     userID:
       type: string
-    username:
-      type: string
 DurationTextBindingColorOptions:
   fields:
     curve:

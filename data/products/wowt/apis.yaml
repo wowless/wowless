@@ -10563,6 +10563,13 @@ C_Discord.GetDiscordUserID:
   outputs:
   - name: userID
     type: string
+C_Discord.GetDiscordUserName:
+  inputs:
+  - name: userID
+    type: string
+  outputs:
+  - name: userName
+    type: string
 C_Discord.GetDisplayNameType:
   inputs:
   outputs:

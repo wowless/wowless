@@ -654,6 +654,8 @@ typedefs:
     type: string
   kstringClubMessage:
     type: string
+  KStringDiscordUserName:
+    type: string
   kstringLfgListApplicant:
     type: string
   kstringLfgListChat:
