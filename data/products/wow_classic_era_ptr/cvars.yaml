@@ -88,7 +88,7 @@ allowsoftwarerenderer:
   default: '0'
 alwayscompareitems:
   account: true
-  default: '1'
+  default: '0'
 alwaysshowblizzardgroupstab:
   account: true
   default: '0'
@@ -140,6 +140,15 @@ asyncassistactions:
 asynchandlertimeout:
   default: '100'
 asyncthreadsleep:
+  default: '0'
+auctiondisplayoncharacter:
+  account: true
+  default: '0'
+auctionsortbybuyoutprice:
+  character: true
+  default: '0'
+auctionsortbyunitprice:
+  character: true
   default: '0'
 audiolocale:
   default: ''
@@ -1678,6 +1687,21 @@ enablesourcelocationlookup:
   default: '1'
 enablewowmouse:
   default: '0'
+encountertimelineenabled:
+  account: true
+encountertimelinehideforotherroles:
+  account: true
+  secure: true
+encountertimelinehidelongcountdowns:
+  account: true
+encountertimelinehidequeuedcountdowns:
+  account: true
+encountertimelinehighlightduration:
+  account: true
+encountertimelineiconographyenabled:
+  account: true
+encountertimelineiconographyhiddenmask:
+  account: true
 encountertimelineshowsequencecount:
   account: true
   default: '0'
@@ -2147,6 +2171,7 @@ hwdetect:
   default: '1'
 imagesharingpublishcooldown:
   default: '5000'
+  readonly: true
 impactmodelcollisionmelee:
   default: '1'
 impactmodelcollisionmissile:
@@ -2170,12 +2195,15 @@ invalidatedeactivatedhandles:
   default: '1'
 kioskcansessionexpire:
   default: '1'
+  readonly: true
   secure: true
 kioskcharactertemplateset:
   default: '0'
+  readonly: true
   secure: true
 kiosklobbykickseconds:
   default: '30'
+  readonly: true
   secure: true
 lastaddonversion:
   default: '0'
@@ -2326,6 +2354,7 @@ maxfpsbk:
   default: '30'
 maxfpsloading:
   default: '10'
+maxlightcount:
 maxlightdist:
   default: '2048'
 maxobservedpetbattles:
@@ -2520,6 +2549,7 @@ nameplateshowallpersonalauras:
 nameplateshowcastbars:
   character: true
   default: '1'
+  readonly: true
   secure: true
 nameplateshowclasscolor:
   account: true
@@ -2728,6 +2758,7 @@ poishiftcomplete:
   default: '0.3'
 portal:
   default: ''
+  readonly: true
 preemptivecastenable:
   default: '0'
 preloadloadingdistobject:
@@ -2795,13 +2826,13 @@ raidfarclip:
   default: '2112'
 raidframescenterbigdefensive:
   character: true
-  default: '1'
+  default: '0'
 raidframesdispelindicatoroverlay:
   character: true
-  default: '1'
+  default: '0'
 raidframesdispelindicatortype:
   character: true
-  default: '2'
+  default: '0'
 raidframesdisplayaggrohighlight:
   character: true
   default: '1'
@@ -2816,7 +2847,7 @@ raidframesdisplayincomingheals:
   default: '1'
 raidframesdisplaylargerrolespecificdebuffs:
   character: true
-  default: '1'
+  default: '0'
 raidframesdisplayonlydispellabledebuffs:
   character: true
   default: '0'
@@ -3023,6 +3054,7 @@ seensomnotification:
   default: '0'
 serveralert:
   default: https://breaking-news.support.blizzard.com/service/wow-tbc-client/ptr/us/en-US
+  readonly: true
 servermessageeventlog:
   default: '0'
 servicetypefilter:
@@ -3316,8 +3348,10 @@ softtargetworldtextsize:
   default: '32.000000'
 sortdiskreads:
   default: '0'
+sound_allyplayerhighpassdspcutoff:
 sound_alternatelistener:
   default: '1'
+sound_ambiencehighpassdspcutoff:
 sound_ambiencevolume:
   default: '0.6'
 sound_dialogvolume:
@@ -3362,6 +3396,7 @@ sound_enablesoundwhengameisinbg:
   default: '1'
 sound_encounterwarningsvolume:
   default: '1.000000'
+sound_enemyplayerhighpassdspcutoff:
 sound_gameplaysfx:
   default: '1.000000'
 sound_listeneratcharacter:
@@ -3374,6 +3409,7 @@ sound_maxcachesizeinbytes:
   default: '134217728'
 sound_musicvolume:
   default: '0.4'
+sound_npchighpassdspcutoff:
 sound_numchannels:
   default: '64'
 sound_outputdriverindex:
@@ -3872,10 +3908,12 @@ volumefogdisableshadows:
   default: '0'
 volumefoguse16bittexture:
   default: '1'
+vrsparticles:
 vrsvalar:
   default: '0'
 vrsvalargpumode:
   default: '0'
+vrsworldgeo:
 vsync:
   default: '1'
 walkablesurfacesvalidationlog:
