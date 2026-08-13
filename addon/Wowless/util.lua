@@ -39,7 +39,7 @@ local function assertRecursivelyEqual(expected, actual)
     end
     for k, v in pairs(actual) do
       t[k] = t[k] or function()
-        error(('missing key %q with value %s'):format(k, tostring(v)))
+        error(('missing key %q with value %s'):format(k, quote(v)))
       end
     end
     return t

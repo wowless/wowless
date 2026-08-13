@@ -75,6 +75,8 @@ advflypitchcontrolcamerachase:
 advflypitchcontrolgrounddebounce:
   account: true
   default: '0'
+agentloglevel:
+  default: '1'
 agentuid:
   default: wow_ptr
 aibrain:
@@ -1620,6 +1622,10 @@ damagemeterresetonnewinstance:
 dangerousshipyardmissionwarningalreadyshown:
   character: true
   default: '0'
+debugallocsingleblade:
+  default: ''
+debugalloctrackstacktrace:
+  default: auto
 debugtorsotwist:
   default: '0'
 deprecatedwarningthrottle:
@@ -1769,6 +1775,8 @@ enablepvpnotifyafk:
   default: '1'
 enablequestcachelogging:
   default: '1'
+enablerefhistory:
+  default: '1'
 enablerunespentanim:
   default: '1'
 enablesourcelocationlookup:
@@ -1829,6 +1837,8 @@ entityshadowfadescale:
 equipmentmanager:
   character: true
   default: '1'
+errorfilelog:
+  default: '0'
 errorfilter:
   default: all
 errorlevelmax:
@@ -3296,7 +3306,7 @@ screenshotsizeoverride:
   default: '0x0'
 scripterrors:
   account: true
-  default: '0'
+  default: '1'
 scriptprofile:
   default: '0'
 scriptwarnings:
@@ -4124,6 +4134,8 @@ usebleep:
   default: '0'
 usecommentatorselectioncircles:
   default: '1'
+usedebugallocators:
+  default: '0'
 usehighrestextures:
   default: '1'
 useipv6:

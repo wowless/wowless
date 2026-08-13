@@ -14104,6 +14104,14 @@ C_HousingBlueprint.StartImportRoomBlueprint:
   - name: shareCode
     type: string
   outputs:
+C_HousingBlueprint.UpdateBlueprintStringFromInput:
+  inputs:
+  - name: inputShareCode
+    type: string
+  mayreturnnothing: true
+  outputs:
+  - name: updatedShareCode
+    type: string
 C_HousingCatalog.CanDestroyEntry:
   inputs:
   - name: entryID

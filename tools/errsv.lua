@@ -19,16 +19,7 @@ local getPatternValue = (function()
   local function mustnumber(x)
     return assert(tonumber(x))
   end
-  local function boolOrString(x)
-    if x == 'true' then
-      return true
-    elseif x == 'false' then
-      return false
-    else
-      return x
-    end
-  end
-  local function unquote(x)
+  local function parseliteral(x)
     return assert(loadstring('return ' .. x))()
   end
   local patterns = {
@@ -54,11 +45,11 @@ local getPatternValue = (function()
     },
     {
       pattern = ': want ".*", got (".*")$',
-      value = unquote,
+      value = parseliteral,
     },
     {
       pattern = ': want nil, got (".*")$',
-      value = unquote,
+      value = parseliteral,
     },
     {
       pattern = ': missing, has value (-?%d+)$',
@@ -73,20 +64,12 @@ local getPatternValue = (function()
       value = constant({}),
     },
     {
-      pattern = ': missing key ".+" with value (-?[0-9.]+)$',
-      value = mustnumber,
-    },
-    {
-      pattern = ': missing key ".+" with value (0x0000[01248]+)$',
-      value = tostring,
-    },
-    {
       pattern = ': missing key ".+" with value table: [0-9a-fA-Fx]+$',
       value = constant({}),
     },
     {
-      pattern = ': missing key ".+" with value (%a[%w_]*)$',
-      value = boolOrString,
+      pattern = ': missing key ".+" with value (.+)$',
+      value = parseliteral,
     },
   }
 
