@@ -3758,6 +3758,11 @@ FontString:
       outputs:
       - name: isWithinText
         type: boolean
+    SetDesaturateEmbeddedTextures:
+      inputs:
+      - name: desaturate
+        type: boolean
+      outputs:
     SetFixedColor:
       inputs:
       - name: fixedColor
@@ -3931,6 +3936,11 @@ Frame:
     AbortDrag:
       inputs:
       outputs:
+    AddRoleset:
+      inputs:
+      - name: roleset
+        type: string
+      outputs:
     CanChangeAttribute:
       inputs:
       outputs:
@@ -4032,6 +4042,25 @@ Frame:
         nilable: true
         type:
           uiobject: Texture
+    CreateVectorGraphics:
+      inputs:
+      - name: name
+        nilable: true
+        type: string
+      - name: drawLayer
+        nilable: true
+        type:
+          stringenum: DrawLayer
+      - name: templateName
+        nilable: true
+        type: string
+      - name: subLevel
+        nilable: true
+        type: number
+      outputs:
+      - name: vectorGraphics
+        type:
+          uiobject: VectorGraphics
     DesaturateHierarchy:
       inputs:
       - name: desaturation
@@ -4238,6 +4267,12 @@ Frame:
       outputs:
       - name: numRegions
         type: number
+    GetOnUpdateMode:
+      inputs:
+      outputs:
+      - name: onUpdateMode
+        type:
+          enum: OnUpdateMode
     GetPropagateKeyboardInput:
       impl:
         getter:
@@ -4277,6 +4312,12 @@ Frame:
         type: number
       - name: maxHeight
         type: number
+    GetRolesetNames:
+      inputs:
+      outputs:
+      - name: rolesets
+        type:
+          arrayof: string
     GetWindow:
       inputs:
       outputs:
@@ -4386,6 +4427,11 @@ Frame:
       outputs:
       - name: resizable
         type: boolean
+    IsRolesetFiltered:
+      inputs:
+      outputs:
+      - name: isRolesetFiltered
+        type: boolean
     IsToplevel:
       impl:
         getter:
@@ -4474,6 +4520,14 @@ Frame:
       outputs:
       - name: registered
         type: boolean
+    RemoveRoleset:
+      inputs:
+      - name: roleset
+        type: string
+      outputs:
+    ResizeToBoundsRect:
+      inputs:
+      outputs:
     RotateTextures:
       inputs:
       - name: radians
@@ -4659,6 +4713,12 @@ Frame:
       - name: movable
         type: boolean
       outputs:
+    SetOnUpdateMode:
+      inputs:
+      - name: onUpdateMode
+        type:
+          enum: OnUpdateMode
+      outputs:
     SetPropagateKeyboardInput:
       impl:
         setter:
@@ -4689,6 +4749,12 @@ Frame:
       - name: maxHeight
         nilable: true
         type: number
+      outputs:
+    SetRolesets:
+      inputs:
+      - name: rolesetsString
+        nilable: true
+        type: string
       outputs:
     SetToplevel:
       impl:
@@ -4789,6 +4855,14 @@ GameTooltip:
     AddAtlas:
     AddDoubleLine:
     AddFontStrings:
+      inputs:
+      - name: leftFontString
+        type:
+          uiobject: FontString
+      - name: rightFontString
+        type:
+          uiobject: FontString
+      outputs:
     AddLine:
     AddTexture:
     AppendText:
@@ -5354,6 +5428,11 @@ Minimap:
       inputs:
       - name: asset
         type: TextureAsset
+      outputs:
+    SetIconScale:
+      inputs:
+      - name: scale
+        type: number
       outputs:
     SetMaskTexture:
       inputs:
@@ -6933,6 +7012,31 @@ QuestPOIFrame:
       - name: numObjectives
         nilable: true
         type: number
+RadialProgress:
+  fields:
+  inherits:
+    Animation:
+  methods:
+    GetFromPercent:
+      inputs:
+      outputs:
+      - name: percent
+        type: number
+    GetToPercent:
+      inputs:
+      outputs:
+      - name: percent
+        type: number
+    SetFromPercent:
+      inputs:
+      - name: percent
+        type: number
+      outputs:
+    SetToPercent:
+      inputs:
+      - name: percent
+        type: number
+      outputs:
 Region:
   fields:
     anchoredBy:
@@ -7740,9 +7844,10 @@ ScriptObject:
       inputs:
       - name: scriptTypeName
         type: string
-      - name: bindingType
-        nilable: true
-        type: number
+      - default: 1
+        name: bindingType
+        type:
+          enum: ScriptBindingType
       outputs:
       - name: script
         nilable: true
@@ -7764,9 +7869,10 @@ ScriptObject:
         type: string
       - name: script
         type: function
-      - name: bindingType
-        nilable: true
-        type: number
+      - default: 1
+        name: bindingType
+        type:
+          enum: ScriptBindingType
       outputs:
       - name: success
         type: boolean
@@ -8349,6 +8455,12 @@ StatusBar:
       - name: orientation
         type:
           stringenum: Orientation
+    GetRenderMode:
+      inputs:
+      outputs:
+      - name: renderMode
+        type:
+          enum: StatusBarRenderMode
     GetReverseFill:
       impl:
         getter:
@@ -8462,6 +8574,12 @@ StatusBar:
       - name: orientation
         type:
           stringenum: Orientation
+      outputs:
+    SetRenderMode:
+      inputs:
+      - name: renderMode
+        type:
+          enum: StatusBarRenderMode
       outputs:
     SetReverseFill:
       impl:
@@ -8717,6 +8835,12 @@ TextureBase:
     LayeredRegion:
     ScriptObject:
   methods:
+    ClearRadialProgressBar:
+      inputs:
+      outputs:
+    ClearSVG:
+      inputs:
+      outputs:
     ClearTextureSlice:
       inputs:
       outputs:
@@ -8757,6 +8881,31 @@ TextureBase:
       outputs:
       - name: tiling
         type: boolean
+    GetRadialProgressBarEndOffset:
+      inputs:
+      outputs:
+      - name: offset
+        type: number
+    GetRadialProgressBarFeather:
+      inputs:
+      outputs:
+      - name: feather
+        type: number
+    GetRadialProgressBarPercent:
+      inputs:
+      outputs:
+      - name: percent
+        type: number
+    GetRadialProgressBarReverse:
+      inputs:
+      outputs:
+      - name: reverse
+        type: boolean
+    GetRadialProgressBarStartOffset:
+      inputs:
+      outputs:
+      - name: offset
+        type: number
     GetRotation:
       inputs:
       outputs:
@@ -8974,6 +9123,31 @@ TextureBase:
       - name: file
         type: string
       outputs:
+    SetRadialProgressBarEndOffset:
+      inputs:
+      - name: offset
+        type: number
+      outputs:
+    SetRadialProgressBarFeather:
+      inputs:
+      - name: feather
+        type: number
+      outputs:
+    SetRadialProgressBarPercent:
+      inputs:
+      - name: percent
+        type: number
+      outputs:
+    SetRadialProgressBarReverse:
+      inputs:
+      - name: reverse
+        type: boolean
+      outputs:
+    SetRadialProgressBarStartOffset:
+      inputs:
+      - name: offset
+        type: number
+      outputs:
     SetRotation:
       inputs:
       - name: radians
@@ -9004,6 +9178,13 @@ TextureBase:
         nilable: true
         type: number
       outputs:
+    SetSVG:
+      inputs:
+      - name: svgAsset
+        type: FileAsset
+      outputs:
+      - name: success
+        type: boolean
     SetTexCoord:
       impl:
         uiobjectimpl: Texture/SetTexCoord
@@ -9141,6 +9322,50 @@ UIObject:
       type: string
   inherits:
   methods:
+    AddAccessRestrictions:
+      inputs:
+      - name: restrictions
+        type:
+          enum: ScriptObjectAccessRestriction
+      outputs:
+    AddForbiddenAspects:
+      inputs:
+      - name: aspects
+        type:
+          enum: ForbiddenAspect
+      outputs:
+    AddSecretAspect:
+      inputs:
+      - name: aspect
+        type:
+          enum: SecretAspect
+      outputs:
+    CanBeAccessedInContext:
+      inputs:
+      outputs:
+      - name: canAccess
+        type: boolean
+    GetAccessRestrictions:
+      inputs:
+      outputs:
+      - name: restrictions
+        type:
+          enum: ScriptObjectAccessRestriction
+    GetForbiddenAspects:
+      inputs:
+      outputs:
+      - name: aspects
+        type:
+          enum: ForbiddenAspect
+    GetInheritableForbiddenAspects:
+      inputs:
+      - name: path
+        type:
+          enum: ScriptObjectPropagationPath
+      outputs:
+      - name: aspects
+        type:
+          enum: ForbiddenAspect
     GetName:
       impl:
         getter:
@@ -9150,6 +9375,12 @@ UIObject:
       - name: name
         nilable: true
         type: string
+    GetObjectTable:
+      inputs:
+      outputs:
+      - name: objectTable
+        type:
+          uiobject: UIObject
     GetObjectType:
       impl:
         uiobjectimpl: UIObject/GetObjectType
@@ -9157,6 +9388,29 @@ UIObject:
       outputs:
       - name: objectType
         type: string
+    HasAccessConstraints:
+      inputs:
+      outputs:
+      - name: hasAccessConstraints
+        type: boolean
+    HasAnyAccessRestrictions:
+      inputs:
+      - name: restrictions
+        nilable: true
+        type:
+          enum: ScriptObjectAccessRestriction
+      outputs:
+      - name: hasAnyAccessRestriction
+        type: boolean
+    HasAnyForbiddenAspects:
+      inputs:
+      - name: aspects
+        nilable: true
+        type:
+          enum: ForbiddenAspect
+      outputs:
+      - name: hasAnyForbiddenAspect
+        type: boolean
     HasAnySecretAspect:
       inputs:
       outputs:
@@ -9332,6 +9586,32 @@ UnitPositionFrame:
     StopPlayerPing:
       inputs:
       outputs:
+VectorGraphics:
+  fields:
+  inherits:
+    LayeredRegion:
+    ScriptObject:
+  methods:
+    ClearSVG:
+      inputs:
+      outputs:
+    GetSVGFileID:
+      inputs:
+      outputs:
+      - name: svgFile
+        type: number
+    HasSVG:
+      inputs:
+      outputs:
+      - name: hasSVG
+        type: boolean
+    SetSVG:
+      inputs:
+      - name: svgAsset
+        type: FileAsset
+      outputs:
+      - name: success
+        type: boolean
 VertexColor:
   fields:
   inherits:

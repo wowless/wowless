@@ -543,6 +543,16 @@ FontStringHeader2:
 FontStringHeader3:
   extends: FontString
   sealed: true
+ForbiddenAspect:
+  attributes:
+    aspect:
+      required: true
+      type:
+        enum: ForbiddenAspect
+ForbiddenAspects:
+  contents:
+    tags:
+      ForbiddenAspect:
 Frame:
   attributes:
     clampedtoscreen:
@@ -620,6 +630,7 @@ Frame:
     tags:
       Animations:
       Attributes:
+      ForbiddenAspects:
       Frames:
       HitRectInsets:
       Layers:
@@ -770,6 +781,7 @@ LayoutFrame:
       Anchors:
       Color:
       KeyValues:
+      Mixins:
       Scripts:
       Size:
   virtual: true
@@ -857,6 +869,24 @@ Minimap:
     uiobject: Minimap
 MinResize:
   extends: Dimension
+Mixin:
+  attributes:
+    inboundpartition:
+      type: string
+    key:
+      required: true
+      type: string
+    securedelegates:
+      type: boolean
+    source:
+      type: string
+    targetpartition:
+      type: string
+Mixins:
+  contents:
+    tags:
+      Mixin:
+  impl: transparent
 Model:
   extends: Frame
   impl:
@@ -1307,6 +1337,10 @@ ScopedModifier:
     scriptsusegivenenv:
       impl:
         scope: useAddonEnv
+      type: boolean
+    useforbiddenobjecttable:
+      impl:
+        scope: useForbiddenObjectTable
       type: boolean
   contents:
     tags:

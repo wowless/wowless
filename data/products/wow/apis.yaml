@@ -160,17 +160,6 @@ BNGetBlockedInfo:
 BNGetDisplayName:
 BNGetFOFInfo:
 BNGetFriendIndex:
-BNGetFriendInviteInfo:
-  inputs:
-  - name: inviteIndex
-    type: number
-  outputs:
-  - name: inviteID
-    type: number
-  - name: accountName
-    type: string
-  - name: isBattleTag
-    type: boolean
 BNGetInfo:
   inputs:
   outputs:
@@ -213,7 +202,6 @@ BNRequestFOFInfo:
 BNRequestInviteFriend:
 BNSendFriendInvite:
 BNSendFriendInviteByID:
-BNSendVerifiedBattleTagInvite:
 BNSetBlocked:
 BNSetFriendFavoriteFlag:
 BNSetFriendNote:
@@ -439,6 +427,9 @@ C_ActionBar.ForceUpdateAction:
   inputs:
   - name: slotID
     type: number
+  - default: false
+    name: suppressEvents
+    type: boolean
   outputs:
 C_ActionBar.GetActionAutocast:
   inputs:
@@ -2692,6 +2683,92 @@ C_AuctionHouse.SupportsCopperValues:
   outputs:
   - name: supportsCopperValues
     type: boolean
+C_AuraContainerUtil.ProcessAuraTooltipBackdropOptions:
+  inputs:
+  - name: options
+    type:
+      structure: C_AuraContainerUtil.AuraContainerTooltipBackdropOptions
+  outputs:
+  - name: result
+    type:
+      structure: C_AuraContainerUtil.AuraContainerTooltipBackdropOptions
+C_AuraContainerUtil.ProcessAuraTooltipNineSliceOptions:
+  inputs:
+  - name: options
+    type:
+      structure: C_AuraContainerUtil.AuraContainerTooltipNineSliceOptions
+  outputs:
+  - name: result
+    type:
+      structure: C_AuraContainerUtil.AuraContainerTooltipNineSliceOptions
+C_AuraContainerUtil.ProcessAuraTooltipTextureSliceOptions:
+  inputs:
+  - name: options
+    type:
+      structure: C_AuraContainerUtil.AuraContainerTooltipTextureSliceOptions
+  outputs:
+  - name: result
+    type:
+      structure: C_AuraContainerUtil.AuraContainerTooltipTextureSliceOptions
+C_AuraContainerUtil.ProcessCustomAuraButtonApplicationBarOptions:
+  inputs:
+  - name: options
+    type:
+      structure: C_AuraContainerUtil.CustomAuraButtonApplicationBarOptions
+  outputs:
+  - name: result
+    type:
+      structure: C_AuraContainerUtil.CustomAuraButtonApplicationBarOptions
+C_AuraContainerUtil.ProcessCustomAuraButtonApplicationCountOptions:
+  inputs:
+  - name: options
+    nilable: true
+    type:
+      structure: C_AuraContainerUtil.CustomAuraButtonApplicationCountOptions
+  outputs:
+  - name: result
+    type:
+      structure: C_AuraContainerUtil.CustomAuraButtonApplicationCountOptions
+C_AuraContainerUtil.ProcessCustomAuraButtonDispelTypeTextOptions:
+  inputs:
+  - name: options
+    nilable: true
+    type:
+      structure: C_AuraContainerUtil.CustomAuraButtonDispelTypeTextOptions
+  outputs:
+  - name: result
+    type:
+      structure: C_AuraContainerUtil.CustomAuraButtonDispelTypeTextOptions
+C_AuraContainerUtil.ProcessCustomAuraButtonDispelTypeTextureOptions:
+  inputs:
+  - name: options
+    nilable: true
+    type:
+      structure: C_AuraContainerUtil.CustomAuraButtonDispelTypeTextureOptions
+  outputs:
+  - name: result
+    type:
+      structure: C_AuraContainerUtil.CustomAuraButtonDispelTypeTextureOptions
+C_AuraContainerUtil.ProcessCustomAuraButtonDurationBarOptions:
+  inputs:
+  - name: options
+    nilable: true
+    type:
+      structure: C_AuraContainerUtil.CustomAuraButtonDurationBarOptions
+  outputs:
+  - name: result
+    type:
+      structure: C_AuraContainerUtil.CustomAuraButtonDurationBarOptions
+C_AuraContainerUtil.ProcessCustomAuraButtonDurationTextOptions:
+  inputs:
+  - name: options
+    nilable: true
+    type:
+      structure: C_AuraContainerUtil.CustomAuraButtonDurationTextOptions
+  outputs:
+  - name: result
+    type:
+      structure: C_AuraContainerUtil.CustomAuraButtonDurationTextOptions
 C_AuthChallenge.Cancel:
 C_AuthChallenge.DidChallengeSucceed:
 C_AuthChallenge.OnTabPressed:
@@ -3452,11 +3529,36 @@ C_BarberShop.ZoomCamera:
   - name: zoomAmount
     type: number
   outputs:
+C_BattleNet.AreFriendTagsEnabled:
+  inputs:
+  outputs:
+  - name: areFriendTagsEnabled
+    type: boolean
+C_BattleNet.AreTitleFriendCustomNamesEnabled:
+  inputs:
+  outputs:
+  - name: areTitleFriendCustomNamesEnabled
+    type: boolean
+C_BattleNet.AreTitleFriendsEnabled:
+  inputs:
+  outputs:
+  - name: areTitleFriendsEnabled
+    type: boolean
 C_BattleNet.BNCheckBattleTagInviteToRecentAlly:
   inputs:
   - name: recentAllyGUID
     type: string
   outputs:
+C_BattleNet.BNCheckTitleFriendInviteToUnit:
+  inputs:
+  - name: unit
+    type: unit
+  outputs:
+C_BattleNet.CanToggleHighResTexturesWithoutClientReload:
+  inputs:
+  outputs:
+  - name: canToggle
+    type: boolean
 C_BattleNet.GetAccountInfoByGUID:
   inputs:
   - name: guid
@@ -3478,6 +3580,14 @@ C_BattleNet.GetAccountInfoByID:
     nilable: true
     type:
       structure: C_BattleNet.BNetAccountInfo
+C_BattleNet.GetCustomTitleFriendName:
+  inputs:
+  - name: id
+    type: number
+  mayreturnnothing: true
+  outputs:
+  - name: customName
+    type: string
 C_BattleNet.GetFriendAccountInfo:
   inputs:
   - name: friendIndex
@@ -3501,6 +3611,15 @@ C_BattleNet.GetFriendGameAccountInfo:
     nilable: true
     type:
       structure: C_BattleNet.BNetGameAccountInfo
+C_BattleNet.GetFriendInviteInfo:
+  inputs:
+  - name: inviteIndex
+    type: number
+  outputs:
+  - name: inviteInfo
+    nilable: true
+    type:
+      structure: C_BattleNet.BNetFriendInviteInfo
 C_BattleNet.GetFriendNumGameAccounts:
   inputs:
   - name: friendIndex
@@ -3534,6 +3653,25 @@ C_BattleNet.InviteFriend:
   - name: gameAccountID
     type: number
   outputs:
+C_BattleNet.IsBattleNetFriendsListEnabled:
+  inputs:
+  outputs:
+  - name: isBattleNetFriendsListEnabled
+    type: boolean
+C_BattleNet.IsBattleNetFriendsListSupported:
+  inputs:
+  outputs:
+  - name: isBattleNetFriendsListSupported
+    type: boolean
+C_BattleNet.SearchFriends:
+  inputs:
+  - name: searchInfo
+    type:
+      structure: C_BattleNet.AuroraFriendsSearchInfo
+  outputs:
+  - name: friendsData
+    type:
+      arrayof: number
 C_BattleNet.SendGameData:
   inputs:
   - name: gameAccountID
@@ -3546,6 +3684,14 @@ C_BattleNet.SendGameData:
   - name: result
     type:
       enum: SendAddonMessageResult
+C_BattleNet.SendTitleFriendInviteByName:
+  inputs:
+  - name: name
+    type: string
+  outputs:
+C_BattleNet.SendVerifiedBattleNetFriendInvite:
+  inputs:
+  outputs:
 C_BattleNet.SendWhisper:
   inputs:
   - name: bnetAccountID
@@ -3561,6 +3707,12 @@ C_BattleNet.SetAFK:
     name: isAFK
     type: boolean
   outputs:
+C_BattleNet.SetAppearOffline:
+  inputs:
+  - default: true
+    name: isAppearOffline
+    type: boolean
+  outputs:
 C_BattleNet.SetCustomMessage:
   inputs:
   - name: text
@@ -3568,11 +3720,27 @@ C_BattleNet.SetCustomMessage:
   outputs:
   - name: success
     type: boolean
+C_BattleNet.SetCustomTitleFriendName:
+  inputs:
+  - name: id
+    type: number
+  - name: customName
+    type: string
+  outputs:
 C_BattleNet.SetDND:
   inputs:
   - default: true
     name: isDND
     type: boolean
+  outputs:
+C_BattleNet.SetFriendTags:
+  inputs:
+  - name: id
+    type: number
+  - name: friendTags
+    type:
+      arrayof:
+        enum: BattleNetFriendTag
   outputs:
 C_BehavioralMessaging.SendNotificationReceipt:
   inputs:
@@ -3597,6 +3765,9 @@ C_BlackMarket.IsViewOnly:
     type: boolean
 C_BlackMarket.ItemPlaceBid:
 C_BlackMarket.RequestItems:
+  inputs:
+  outputs:
+C_Browser.CloseFullscreenBrowser:
   inputs:
   outputs:
 C_Calendar.AddEvent:
@@ -5455,6 +5626,15 @@ C_ClickBindings.SetProfileByInfo:
 C_ClickBindings.SetTutorialShown:
   inputs:
   outputs:
+C_ClientScene.IsSceneTypeActive:
+  inputs:
+  - name: desiredSceneType
+    nilable: true
+    type:
+      enum: ClientSceneType
+  outputs:
+  - name: isPlaying
+    type: boolean
 C_Club.AcceptInvitation:
   inputs:
   - name: clubId
@@ -6092,6 +6272,13 @@ C_Club.SendMessage:
   - name: streamId
     type: string
   - name: message
+    type: string
+  outputs:
+C_Club.SendTitleFriendRequest:
+  inputs:
+  - name: guildClubId
+    type: string
+  - name: memberId
     type: string
   outputs:
 C_Club.SetAutoAdvanceStreamViewMarker:
@@ -6848,7 +7035,10 @@ C_CombatAudioAlert.SpeakText:
   - default: true
     name: allowOverlap
     type: boolean
+  mayreturnnothing: true
   outputs:
+  - name: utteranceID
+    type: number
 C_CombatLog.ApplyFilterSettings:
   inputs:
   - name: filterSettings
@@ -8881,6 +9071,13 @@ C_CooldownViewer.GetCooldownViewerCooldownInfo:
   - name: cooldownInfo
     type:
       structure: C_CooldownViewer.CooldownViewerCooldown
+C_CooldownViewer.GetGroupBuffItems:
+  inputs:
+  outputs:
+  - name: groupBuffItems
+    type:
+      arrayof:
+        structure: C_CooldownViewer.GroupBuffItem
 C_CooldownViewer.GetLayoutData:
   inputs:
   outputs:
@@ -9719,6 +9916,11 @@ C_CurveUtil.EvaluateGameCurve:
   outputs:
   - name: y
     type: number
+C_CVar.AreCVarsLoaded:
+  inputs:
+  outputs:
+  - name: loaded
+    type: boolean
 C_CVar.GetCVar:
   impl: C_CVar.GetCVar
   inputs:
@@ -10178,6 +10380,22 @@ C_DelvesUI.GetFactionForCompanion:
   outputs:
   - name: factionID
     type: number
+C_DelvesUI.GetFlavorNodeForCompanion:
+  inputs:
+  - name: companionID
+    nilable: true
+    type: number
+  outputs:
+  - name: nodeID
+    type: number
+C_DelvesUI.GetFlavorNodeNameForCompanion:
+  inputs:
+  - name: companionID
+    nilable: true
+    type: number
+  outputs:
+  - name: name
+    type: string
 C_DelvesUI.GetLockedTextForCompanion:
   inputs:
   - name: companionID
@@ -10270,6 +10488,16 @@ C_DelvesUI.HasActiveDelve:
   outputs:
   - name: result
     type: boolean
+C_DelvesUI.HasActiveLair:
+  inputs:
+  outputs:
+  - name: result
+    type: boolean
+C_DelvesUI.HasActiveLFGLair:
+  inputs:
+  outputs:
+  - name: result
+    type: boolean
 C_DelvesUI.IsDelveEntranceTierEnabled:
   inputs:
   - name: tier
@@ -10284,6 +10512,11 @@ C_DelvesUI.IsEligibleForActiveDelveRewards:
   inputs:
   - name: unit
     type: unit
+  outputs:
+  - name: result
+    type: boolean
+C_DelvesUI.IsInLair:
+  inputs:
   outputs:
   - name: result
     type: boolean
@@ -10312,6 +10545,121 @@ C_DelvesUI.SelectDelveEntranceTier:
   inputs:
   - name: tier
     type: number
+  outputs:
+C_Discord.Authorize:
+  inputs:
+  outputs:
+C_Discord.GetDiscordChannelName:
+  inputs:
+  - name: serverIndex
+    type: number
+  - name: channelIndex
+    type: number
+  outputs:
+  - name: name
+    type: string
+C_Discord.GetDiscordUserID:
+  inputs:
+  outputs:
+  - name: userID
+    type: string
+C_Discord.GetDiscordUserName:
+  inputs:
+  - name: userID
+    type: string
+  outputs:
+  - name: userName
+    type: string
+C_Discord.GetDisplayNameType:
+  inputs:
+  outputs:
+  - name: type
+    type:
+      enum: DiscordDisplayNameType
+C_Discord.GetGuildLinkStatus:
+  inputs:
+  outputs:
+  - name: isFullyLinked
+    type: boolean
+  - name: linkedChannelName
+    type: string
+  - name: linkedServerName
+    type: string
+C_Discord.GetNumDiscordChannels:
+  inputs:
+  - name: serverIndex
+    type: number
+  outputs:
+  - name: count
+    type: number
+  - name: valid
+    type: boolean
+C_Discord.GetNumDiscordServers:
+  inputs:
+  outputs:
+  - name: count
+    type: number
+C_Discord.GetServerLinkableChannels:
+  inputs:
+  - name: index
+    type: number
+  outputs:
+C_Discord.GetServerName:
+  inputs:
+  - name: index
+    type: number
+  outputs:
+  - name: name
+    type: string
+C_Discord.GuildLink:
+  inputs:
+  - name: serverIndex
+    type: number
+  - name: channelIndex
+    type: number
+  outputs:
+C_Discord.GuildUnlink:
+  inputs:
+  outputs:
+C_Discord.IsEnabled:
+  inputs:
+  outputs:
+  - name: enabled
+    type: boolean
+C_Discord.IsGuildChannelLinked:
+  inputs:
+  outputs:
+  - name: isLinked
+    type: boolean
+C_Discord.IsGuildSettingSet:
+  inputs:
+  - name: setting
+    type:
+      enum: DiscordGuildSettings
+  outputs:
+  - name: isSet
+    type: boolean
+C_Discord.IsUserOAuthed:
+  inputs:
+  outputs:
+  - name: hasOAuth
+    type: boolean
+C_Discord.RefreshAuth:
+  inputs:
+  outputs:
+C_Discord.SetGuildSetting:
+  inputs:
+  - name: setting
+    type:
+      enum: DiscordGuildSettings
+  - name: set
+    type: boolean
+  outputs:
+C_Discord.UpdateDiscordServers:
+  inputs:
+  outputs:
+C_Discord.UpdateGuildLobby:
+  inputs:
   outputs:
 C_DurationUtil.CreateDuration:
   inputs:
@@ -10355,23 +10703,6 @@ C_DyeColor.GetDyeColorCategoryInfo:
     nilable: true
     type:
       structure: DyeColorCategoryDisplayInfo
-C_DyeColor.GetDyeColorForItem:
-  inputs:
-  - name: itemLinkOrID
-    type: string
-  outputs:
-  - name: dyeColorID
-    nilable: true
-    type: number
-C_DyeColor.GetDyeColorForItemLocation:
-  inputs:
-  - name: itemLocation
-    type:
-      structure: ItemLocation
-  outputs:
-  - name: dyeColorID
-    nilable: true
-    type: number
 C_DyeColor.GetDyeColorInfo:
   inputs:
   - name: dyeColorID
@@ -10381,6 +10712,23 @@ C_DyeColor.GetDyeColorInfo:
     nilable: true
     type:
       structure: DyeColorDisplayInfo
+C_DyeColor.GetDyeColorsForItem:
+  inputs:
+  - name: itemLinkOrID
+    type: string
+  outputs:
+  - name: dyeColorIDs
+    type:
+      arrayof: number
+C_DyeColor.GetDyeColorsForItemLocation:
+  inputs:
+  - name: itemLocation
+    type:
+      structure: ItemLocation
+  outputs:
+  - name: dyeColorIDs
+    type:
+      arrayof: number
 C_DyeColor.GetDyeColorsInCategory:
   inputs:
   - name: dyeColorCategory
@@ -10662,6 +11010,13 @@ C_EncounterEvents.SetEventSound:
     type:
       structure: EncounterEventSoundInfo
   outputs:
+C_EncounterJournal.GetBaseDifficultyID:
+  inputs:
+  - name: difficultyID
+    type: number
+  outputs:
+  - name: baseDifficultyID
+    type: number
 C_EncounterJournal.GetDungeonEntrancesForMap:
   inputs:
   - name: uiMapID
@@ -10749,6 +11104,13 @@ C_EncounterJournal.GetSlotFilter:
 C_EncounterJournal.InitalizeSelectedTier:
   inputs:
   outputs:
+C_EncounterJournal.InstanceHasDifficultyID:
+  inputs:
+  - name: difficultyID
+    type: number
+  outputs:
+  - name: hasDifficultyID
+    type: boolean
 C_EncounterJournal.InstanceHasLoot:
   inputs:
   - name: instanceID
@@ -11553,6 +11915,11 @@ C_FriendList.IsIgnoredByGuid:
     type: string
   outputs:
   - name: isIgnored
+    type: boolean
+C_FriendList.IsLegacyFriendSystemEnabled:
+  inputs:
+  outputs:
+  - name: isLegacyFriendSystemEnabled
     type: boolean
 C_FriendList.IsOnIgnoredList:
   inputs:
@@ -12757,6 +13124,11 @@ C_GuildInfo.Invite:
   - name: name
     type: string
   outputs:
+C_GuildInfo.IsDiscordStreamSeparate:
+  inputs:
+  outputs:
+  - name: separateStream
+    type: boolean
 C_GuildInfo.IsEncounterGuildNewsEnabled:
   inputs:
   outputs:
@@ -13023,6 +13395,12 @@ C_HouseEditor.GetHouseEditorModeAvailability:
   - name: result
     type:
       enum: HousingResult
+C_HouseEditor.GetHouseEditorPlayerType:
+  inputs:
+  outputs:
+  - name: playerType
+    type:
+      enum: HouseEditorPlayerType
 C_HouseEditor.IsHouseEditorActive:
   inputs:
   outputs:
@@ -13321,6 +13699,11 @@ C_Housing.HasHousingExpansionAccess:
 C_Housing.HouseFinderDeclineNeighborhoodInvitation:
   inputs:
   outputs:
+C_Housing.HouseFinderIgnoreNeighborhood:
+  inputs:
+  - name: neighborhoodGuid
+    type: string
+  outputs:
 C_Housing.HouseFinderRequestNeighborhoods:
   inputs:
   outputs:
@@ -13361,10 +13744,20 @@ C_Housing.IsInsideHouseOrPlot:
   outputs:
   - name: isInside
     type: boolean
-C_Housing.IsInsideOwnHouse:
+C_Housing.IsInsideOwnedHouse:
   inputs:
   outputs:
-  - name: isInsideOwnHouse
+  - name: isInsideOwnedHouse
+    type: boolean
+C_Housing.IsInsideOwnedHouseOrPlot:
+  inputs:
+  outputs:
+  - name: isInsideOwnedHouseOrPlot
+    type: boolean
+C_Housing.IsInsideOwnedPlot:
+  inputs:
+  outputs:
+  - name: isInside
     type: boolean
 C_Housing.IsInsidePlot:
   inputs:
@@ -13421,6 +13814,12 @@ C_Housing.RequestHouseFinderNeighborhoodData:
   outputs:
 C_Housing.RequestPlayerCharacterList:
   inputs:
+  outputs:
+C_Housing.ResetHouse:
+  inputs:
+  - name: resetScope
+    type:
+      enum: HousingHouseScope
   outputs:
 C_Housing.ReturnAfterVisitingHouse:
   inputs:
@@ -13595,6 +13994,131 @@ C_HousingBasicMode.StartPlacingPreviewDecor:
     nilable: true
     type: number
   outputs:
+C_HousingBlueprint.CanExportRoom:
+  inputs:
+  - name: roomGUID
+    type: string
+  outputs:
+  - name: canExport
+    type: boolean
+C_HousingBlueprint.CanExportTypeFromCurrentLocation:
+  inputs:
+  - name: type
+    type:
+      enum: HousingBlueprintType
+  outputs:
+  - name: locationValid
+    type: boolean
+C_HousingBlueprint.CanImportTypeFromCurrentLocation:
+  inputs:
+  - name: type
+    type:
+      enum: HousingBlueprintType
+  outputs:
+  - name: locationValid
+    type: boolean
+C_HousingBlueprint.DeleteBlueprint:
+  inputs:
+  - name: blueprintID
+    type: number
+  outputs:
+C_HousingBlueprint.ExportBlueprint:
+  inputs:
+  - name: type
+    type:
+      enum: HousingBlueprintType
+  - name: name
+    type: string
+  outputs:
+C_HousingBlueprint.ExportRoomBlueprint:
+  inputs:
+  - name: name
+    type: string
+  - name: roomGUID
+    type: string
+  outputs:
+C_HousingBlueprint.GetBlueprintHyperlink:
+  inputs:
+  - name: blueprintShareCode
+    type: string
+  mayreturnnothing: true
+  outputs:
+  - name: hyperLink
+    type: string
+C_HousingBlueprint.GetBlueprintTypeForCode:
+  inputs:
+  - name: shareCode
+    type: string
+  outputs:
+  - name: type
+    type:
+      enum: HousingBlueprintType
+C_HousingBlueprint.GetExportAvailability:
+  inputs:
+  outputs:
+  - name: availability
+    type:
+      enum: HousingResult
+C_HousingBlueprint.GetFeatureAvailability:
+  inputs:
+  outputs:
+  - name: blueprintsAvailability
+    type:
+      enum: HousingResult
+C_HousingBlueprint.GetImportAvailability:
+  inputs:
+  outputs:
+  - name: availability
+    type:
+      enum: HousingResult
+C_HousingBlueprint.ImportBlueprint:
+  inputs:
+  - name: shareCode
+    type: string
+  outputs:
+C_HousingBlueprint.IsShareCodeValid:
+  inputs:
+  - name: shareCode
+    type: string
+  outputs:
+  - name: isValid
+    type: boolean
+C_HousingBlueprint.RenameBlueprint:
+  inputs:
+  - name: blueprintID
+    type: number
+  - name: newName
+    type: string
+  outputs:
+C_HousingBlueprint.RequestBlueprintCollection:
+  inputs:
+  outputs:
+C_HousingBlueprint.RequestBlueprintContents:
+  inputs:
+  - name: shareCode
+    type: string
+  outputs:
+C_HousingBlueprint.RequestBlueprintContentsForContext:
+  inputs:
+  - name: shareCode
+    type: string
+  - name: optionalHouseGUID
+    nilable: true
+    type: string
+  outputs:
+C_HousingBlueprint.StartImportRoomBlueprint:
+  inputs:
+  - name: shareCode
+    type: string
+  outputs:
+C_HousingBlueprint.UpdateBlueprintStringFromInput:
+  inputs:
+  - name: inputShareCode
+    type: string
+  mayreturnnothing: true
+  outputs:
+  - name: updatedShareCode
+    type: string
 C_HousingCatalog.CanDestroyEntry:
   inputs:
   - name: entryID
@@ -13876,6 +14400,15 @@ C_HousingCustomizeMode.ApplyDyeToSelectedDecor:
     nilable: true
     type: number
   outputs:
+C_HousingCustomizeMode.ApplyPetToSelectedDecor:
+  inputs:
+  - name: petID
+    nilable: true
+    type: string
+  - name: petBehavior
+    type:
+      enum: HousingPetBehaviorType
+  outputs:
 C_HousingCustomizeMode.ApplyThemeToRoom:
   inputs:
   - name: themeSetID
@@ -13966,6 +14499,15 @@ C_HousingCustomizeMode.GetSelectedDecorInfo:
     nilable: true
     type:
       structure: HousingDecorInstanceInfo
+C_HousingCustomizeMode.GetSelectedDecorPetInfo:
+  inputs:
+  outputs:
+  - name: petID
+    nilable: true
+    type: string
+  - name: petBehavior
+    type:
+      enum: HousingPetBehaviorType
 C_HousingCustomizeMode.GetSelectedRoomComponentInfo:
   inputs:
   outputs:
@@ -14057,6 +14599,13 @@ C_HousingCustomizeMode.SetRoomComponentDoorType:
     type:
       enum: HousingRoomComponentDoorType
   outputs:
+C_HousingDecor.AnyDecorPlacedInRoom:
+  inputs:
+  - name: roomGUID
+    type: string
+  outputs:
+  - name: isPlaced
+    type: boolean
 C_HousingDecor.CancelActiveEditing:
   inputs:
   outputs:
@@ -14069,6 +14618,17 @@ C_HousingDecor.EnterPreviewState:
 C_HousingDecor.ExitPreviewState:
   inputs:
   outputs:
+C_HousingDecor.GetAllMaxPlacementBudgets:
+  inputs:
+  outputs:
+  - name: interiorMaxBudgets
+    nilable: true
+    type:
+      arrayof: number
+  - name: exteriorMaxBudgets
+    nilable: true
+    type:
+      arrayof: number
 C_HousingDecor.GetAllPlacedDecor:
   inputs:
   outputs:
@@ -14076,6 +14636,32 @@ C_HousingDecor.GetAllPlacedDecor:
     type:
       arrayof:
         structure: C_HousingDecor.HousingDecorInstanceListEntry
+C_HousingDecor.GetAllSpentPlacementBudgets:
+  inputs:
+  outputs:
+  - name: interiorSpentBudgets
+    nilable: true
+    type:
+      arrayof: number
+  - name: exteriorSpentBudgets
+    nilable: true
+    type:
+      arrayof: number
+C_HousingDecor.GetDecorAssignedPetName:
+  inputs:
+  - name: decorGUID
+    type: string
+  outputs:
+  - name: name
+    nilable: true
+    type: string
+C_HousingDecor.GetDecorCanAttachPet:
+  inputs:
+  - name: decorID
+    type: number
+  outputs:
+  - name: canAttachPet
+    type: boolean
 C_HousingDecor.GetDecorDebugInfoForGUID:
 C_HousingDecor.GetDecorHyperlink:
   inputs:
@@ -14118,10 +14704,17 @@ C_HousingDecor.GetHoveredDecorInfo:
     nilable: true
     type:
       structure: HousingDecorInstanceInfo
+C_HousingDecor.GetMaxPetPlacementBudget:
+  inputs:
+  outputs:
+  - name: maxBudget
+    nilable: true
+    type: number
 C_HousingDecor.GetMaxPlacementBudget:
   inputs:
   outputs:
   - name: maxBudget
+    nilable: true
     type: number
 C_HousingDecor.GetNumDecorPlaced:
   inputs:
@@ -14141,10 +14734,17 @@ C_HousingDecor.GetSelectedDecorInfo:
     nilable: true
     type:
       structure: HousingDecorInstanceInfo
+C_HousingDecor.GetSpentPetPlacementBudget:
+  inputs:
+  outputs:
+  - name: totalCost
+    nilable: true
+    type: number
 C_HousingDecor.GetSpentPlacementBudget:
   inputs:
   outputs:
   - name: totalCost
+    nilable: true
     type: number
 C_HousingDecor.HasMaxPlacementBudget:
   inputs:
@@ -14361,21 +14961,46 @@ C_HousingLayout.DeselectFloorplan:
 C_HousingLayout.DeselectRoomOrDoor:
   inputs:
   outputs:
+C_HousingLayout.GetBaseRoomFloor:
+  inputs:
+  outputs:
+  - name: floor
+    type: number
+C_HousingLayout.GetHighestOccupiedFloorIndex:
+  inputs:
+  outputs:
+  - name: highestFloorIndex
+    type: number
+C_HousingLayout.GetLowestOccupiedFloorIndex:
+  inputs:
+  outputs:
+  - name: lowestFloorIndex
+    type: number
 C_HousingLayout.GetNumActiveRooms:
   inputs:
   outputs:
   - name: numRooms
     type: number
-C_HousingLayout.GetNumFloors:
-  inputs:
-  outputs:
-  - name: numFloors
-    type: number
 C_HousingLayout.GetRoomPlacementBudget:
   inputs:
   outputs:
   - name: placementBudget
+    nilable: true
     type: number
+C_HousingLayout.GetRoomPlayerIsIn:
+  inputs:
+  mayreturnnothing: true
+  outputs:
+  - name: roomGUID
+    type: string
+C_HousingLayout.GetSelectedBlueprintFloorplan:
+  inputs:
+  mayreturnnothing: true
+  outputs:
+  - name: roomID
+    type: number
+  - name: shareCode
+    type: string
 C_HousingLayout.GetSelectedDoor:
   inputs:
   mayreturnnothing: true
@@ -14405,6 +15030,7 @@ C_HousingLayout.GetSpentPlacementBudget:
   inputs:
   outputs:
   - name: spentPlacementBudget
+    nilable: true
     type: number
 C_HousingLayout.GetViewedFloor:
   inputs:
@@ -14420,6 +15046,11 @@ C_HousingLayout.HasRoomPlacementBudget:
   inputs:
   outputs:
   - name: hasBudget
+    type: boolean
+C_HousingLayout.HasSelectedBlueprintFloorplan:
+  inputs:
+  outputs:
+  - name: hasSelectedBlueprintFloorplan
     type: boolean
 C_HousingLayout.HasSelectedDoor:
   inputs:
@@ -14490,6 +15121,13 @@ C_HousingLayout.RemoveRoom:
   - name: roomGUID
     type: string
   outputs:
+C_HousingLayout.RoomHasStairs:
+  inputs:
+  - name: roomGUID
+    type: string
+  outputs:
+  - name: hasStairs
+    type: boolean
 C_HousingLayout.RotateFocusedRoom:
   inputs:
   - name: isLeft
@@ -14871,6 +15509,14 @@ C_Item.DoesItemMatchBonusTreeReplacement:
       structure: ItemLocation
   outputs:
   - name: matchesBonusTree
+    type: boolean
+C_Item.DoesItemMatchSpellItemCondition:
+  inputs:
+  - name: itemLoc
+    type:
+      structure: ItemLocation
+  outputs:
+  - name: matches
     type: boolean
 C_Item.DoesItemMatchTargetEnchantingSpell:
   inputs:
@@ -16552,6 +17198,9 @@ C_LFGList.ClearSearchResults:
 C_LFGList.ClearSearchTextFields:
   inputs:
   outputs:
+C_LFGList.ConfirmCensoredActiveEntry:
+  inputs:
+  outputs:
 C_LFGList.CopyActiveEntryInfoToCreationFields:
   inputs:
   outputs:
@@ -16580,6 +17229,15 @@ C_LFGList.CreateScenarioListing:
     type: boolean
 C_LFGList.DeclineApplicant:
 C_LFGList.DeclineInvite:
+C_LFGList.DoesCensoredTextMatch:
+  inputs:
+  - name: name
+    type: string
+  - name: comment
+    type: string
+  outputs:
+  - name: isMatch
+    type: boolean
 C_LFGList.DoesEntryTitleMatchPrebuiltTitle:
   inputs:
   - name: activityID
@@ -16878,6 +17536,11 @@ C_LFGList.HasSearchResultInfo:
   - name: hasSearchResultInfo
     type: boolean
 C_LFGList.InviteApplicant:
+C_LFGList.IsCensoredActiveEntryUnresolved:
+  inputs:
+  outputs:
+  - name: isUnresolved
+    type: boolean
 C_LFGList.IsCurrentlyApplying:
 C_LFGList.IsPlayerAuthenticatedForLFG:
   inputs:
@@ -16914,6 +17577,14 @@ C_LFGList.ReportGroupAsAdvertisement:
   outputs:
 C_LFGList.RequestAvailableActivities:
   inputs:
+  outputs:
+C_LFGList.RevealCensoredActiveEntry:
+  inputs:
+  outputs:
+C_LFGList.RevealCensoredSearchResult:
+  inputs:
+  - name: searchResultID
+    type: number
   outputs:
 C_LFGList.SaveAdvancedFilter:
   inputs:
@@ -17802,6 +18473,8 @@ C_Map.SetUserWaypoint:
   - name: point
     type: table
   outputs:
+  - name: wasSet
+    type: boolean
 C_MapExplorationInfo.GetExploredAreaIDsAtPosition:
   inputs:
   - name: uiMapID
@@ -18750,6 +19423,18 @@ C_Navigation.GetNearestPartyMemberToken:
   outputs:
   - name: unitToken
     type: string
+C_Navigation.GetNextWaypointForMap:
+  inputs:
+  - name: uiMapID
+    type: number
+  mayreturnnothing: true
+  outputs:
+  - name: x
+    type: number
+  - name: y
+    type: number
+  - name: waypointDescription
+    type: string
 C_Navigation.GetTargetState:
   inputs:
   outputs:
@@ -18804,6 +19489,15 @@ C_NeighborhoodInitiative.GetInitiativeTaskInfo:
     nilable: true
     type:
       structure: C_NeighborhoodInitiative.InitiativeTaskInfo
+C_NeighborhoodInitiative.GetInitiativeTaskRewardScaling:
+  inputs:
+  - name: taskID
+    type: number
+  - name: numItems
+    type: number
+  outputs:
+  - name: scaledAmount
+    type: number
 C_NeighborhoodInitiative.GetNeighborhoodInitiativeInfo:
   inputs:
   outputs:
@@ -18894,6 +19588,11 @@ C_PaperDollInfo.CanAutoEquipCursorItem:
   outputs:
   - name: canAutoEquip
     type: boolean
+C_PaperDollInfo.CancelTemporaryEnchantment:
+  inputs:
+  - name: slot
+    type: number
+  outputs:
 C_PaperDollInfo.CanCursorCanGoInSlot:
   inputs:
   - name: slotIndex
@@ -18967,6 +19666,32 @@ C_PaperDollInfo.GetInspectRatedSoloShuffleData:
   - name: ratedSoloShuffleData
     type:
       structure: C_PaperDollInfo.InspectPVPData
+C_PaperDollInfo.GetInventorySlotInfo:
+  inputs:
+  - name: slotName
+    type: string
+  mayreturnnothing: true
+  outputs:
+  - name: invSlot
+    type: number
+  - name: slotTexture
+    type: number
+  - name: checkRelic
+    type: boolean
+C_PaperDollInfo.GetInventorySlotInfoForInvSlot:
+  inputs:
+  - name: invSlotValue
+    type: number
+  mayreturnnothing: true
+  outputs:
+  - name: invSlot
+    type: number
+  - name: slotTexture
+    type: number
+  - name: checkRelic
+    type: boolean
+  - name: slotName
+    type: string
 C_PaperDollInfo.GetMinItemLevel:
   inputs:
   outputs:
@@ -18983,6 +19708,15 @@ C_PaperDollInfo.GetStaggerPercentage:
   - name: staggerAgainstTarget
     nilable: true
     type: number
+C_PaperDollInfo.GetTemporaryEnchantmentInfo:
+  inputs:
+  - name: slot
+    type: number
+  mayreturnnothing: true
+  outputs:
+  - name: enchantInfo
+    type:
+      structure: C_PaperDollInfo.TemporaryItemEnchantInfo
 C_PaperDollInfo.IsInventorySlotEnabled:
   inputs:
   - name: slotName
@@ -19970,6 +20704,15 @@ C_PetJournal.GetPetInfoTableByPetID:
   - name: info
     type:
       structure: C_PetJournal.PetJournalPetInfo
+C_PetJournal.GetPetInfoTableBySpeciesID:
+  inputs:
+  - name: speciesID
+    type: number
+  mayreturnnothing: true
+  outputs:
+  - name: petInfo
+    type:
+      structure: C_PetJournal.PetJournalPetInfo
 C_PetJournal.GetPetLoadOutInfo:
   inputs:
   - name: slot
@@ -20171,15 +20914,6 @@ C_PhotoSharing.UploadPhotoToService:
     name: optionalDescription
     type: string
   outputs:
-C_Ping.GetContextualPingTypeForUnit:
-  inputs:
-  - name: targetUnit
-    nilable: true
-    type: string
-  outputs:
-  - name: type
-    type:
-      enum: PingSubjectType
 C_Ping.GetCooldownInfo:
   inputs:
   outputs:
@@ -20192,7 +20926,7 @@ C_Ping.GetDefaultPingOptions:
   - name: pingTypes
     type:
       arrayof:
-        structure: PingTypeInfo
+        structure: C_Ping.PingTypeInfo
 C_Ping.GetTextureKitForType:
   inputs:
   - name: type
@@ -20208,19 +20942,19 @@ C_Ping.IsPingSystemEnabled:
     type: boolean
 C_Ping.SendMacroPing:
   inputs:
-  - name: type
-    nilable: true
+  - name: macroInfo
     type:
-      enum: PingSubjectType
-  - name: targetToken
-    nilable: true
-    type: string
+      structure: PingMacroInfo
   outputs:
 C_Ping.TogglePingListener:
   inputs:
   - name: down
     type: boolean
   outputs:
+C_PingSecure.ClearHitTestPingInfo:
+  inputs:
+  outputs:
+  secureonly: true
 C_PingSecure.ClearPendingPingInfo:
   inputs:
   outputs:
@@ -20264,6 +20998,17 @@ C_PingSecure.GetTargetWorldPingAndSend:
     type:
       structure: ContextualWorldPingResult
   secureonly: true
+C_PingSecure.SendHitTestPing:
+  inputs:
+  - name: type
+    nilable: true
+    type:
+      enum: PingSubjectType
+  outputs:
+  - name: result
+    type:
+      structure: C_PingSecure.SendPingResult
+  secureonly: true
 C_PingSecure.SendPing:
   inputs:
   - name: type
@@ -20276,6 +21021,70 @@ C_PingSecure.SendPing:
   - name: result
     type:
       enum: PingResult
+  secureonly: true
+C_PingSecure.SendPlayerItemPing:
+  inputs:
+  - name: itemID
+    type: number
+  outputs:
+  - name: result
+    type:
+      structure: C_PingSecure.SendPingResult
+  secureonly: true
+C_PingSecure.SendPlayerSpellCategoryPing:
+  inputs:
+  - name: spellCategoryID
+    type: number
+  outputs:
+  - name: result
+    type:
+      structure: C_PingSecure.SendPingResult
+  secureonly: true
+C_PingSecure.SendPlayerSpellPing:
+  inputs:
+  - name: spellID
+    type: number
+  outputs:
+  - name: result
+    type:
+      structure: C_PingSecure.SendPingResult
+  secureonly: true
+C_PingSecure.SendUnitPing:
+  inputs:
+  - name: target
+    type: string
+  - name: type
+    nilable: true
+    type:
+      enum: PingSubjectType
+  - name: isPlayerResource
+    nilable: true
+    type: boolean
+  outputs:
+  - name: result
+    type:
+      structure: C_PingSecure.SendPingResult
+  secureonly: true
+C_PingSecure.SetHitTestPingTarget:
+  inputs:
+  - name: mousePosX
+    type: number
+  - name: mousePosY
+    type: number
+  - name: forcePointPing
+    nilable: true
+    type: boolean
+  outputs:
+  - name: state
+    type:
+      enum: PingSetTargetState
+  secureonly: true
+C_PingSecure.SetHitTestTargetAndSendPing:
+  inputs:
+  outputs:
+  - name: result
+    type:
+      structure: C_PingSecure.SendPingResult
   secureonly: true
 C_PingSecure.SetPendingPingOffScreenCallback:
   inputs:
@@ -20953,6 +21762,11 @@ C_PvP.CanPlayerUseTrainingGroundsUI:
     type: boolean
   - name: failureReason
     type: string
+C_PvP.CanSurrenderArena:
+  inputs:
+  outputs:
+  - name: CanSurrenderArena
+    type: boolean
 C_PvP.CanToggleWarMode:
   inputs:
   - name: toggle
@@ -21696,7 +22510,10 @@ C_PvP.JoinBrawl:
     name: isSpecialBrawl
     type: boolean
   outputs:
-C_PvP.JoinRandomTrainingGround:
+C_PvP.JoinRandomTrainingGroundArena:
+  inputs:
+  outputs:
+C_PvP.JoinRandomTrainingGroundBattleground:
   inputs:
   outputs:
 C_PvP.JoinRatedBGBlitz:
@@ -21749,11 +22566,20 @@ C_PvP.TogglePVP:
 C_PvP.ToggleWarMode:
   inputs:
   outputs:
+C_QuestHub.IsAreaPOICurrentlyRelatedToHub:
+  inputs:
+  - name: areaPoiID
+    type: number
+  - name: hubAreaPoiID
+    type: number
+  outputs:
+  - name: isRelated
+    type: boolean
 C_QuestHub.IsQuestCurrentlyRelatedToHub:
   inputs:
   - name: questID
     type: number
-  - name: areaPoiID
+  - name: hubAreaPoiID
     type: number
   outputs:
   - name: isRelated
@@ -22809,6 +23635,16 @@ C_RecentAllies.IsSystemSupported:
   outputs:
   - name: isRecentAllySystemSupported
     type: boolean
+C_RecentAllies.SearchRecentAllies:
+  inputs:
+  - name: searchInfo
+    type:
+      structure: C_RecentAllies.RecentAlliesSearchInfo
+  outputs:
+  - name: recentAlliesData
+    type:
+      arrayof:
+        structure: C_RecentAllies.RecentAllyData
 C_RecentAllies.SetRecentAllyNote:
   inputs:
   - name: characterGUID
@@ -22830,9 +23666,13 @@ C_RecruitAFriend.CanSummonFriend:
   inputs:
   - name: guid
     type: string
+  mayreturnnothing: true
   outputs:
-  - name: result
+  - name: canSummon
     type: boolean
+  - name: reason
+    type:
+      enum: RecruitAFriendFailure
 C_RecruitAFriend.ClaimActivityReward:
   inputs:
   - name: activityID
@@ -22894,11 +23734,6 @@ C_RecruitAFriend.GetSummonFriendCooldown:
     type: number
   - name: enableCooldownTimer
     type: boolean
-C_RecruitAFriend.IsEnabled:
-  inputs:
-  outputs:
-  - name: enabled
-    type: boolean
 C_RecruitAFriend.IsRecruitAFriendLinked:
   inputs:
   - name: guid
@@ -22910,6 +23745,16 @@ C_RecruitAFriend.IsRecruitingEnabled:
   inputs:
   outputs:
   - name: enabled
+    type: boolean
+C_RecruitAFriend.IsSystemEnabled:
+  inputs:
+  outputs:
+  - name: isSystemEnabled
+    type: boolean
+C_RecruitAFriend.IsSystemSupported:
+  inputs:
+  outputs:
+  - name: isSystemSupported
     type: boolean
 C_RecruitAFriend.RemoveRAFRecruit:
   inputs:
@@ -23296,6 +24141,27 @@ C_RestrictedActions.IsAddOnRestrictionActive:
   outputs:
   - name: active
     type: boolean
+C_Roleset.ApplyRolesetFilters:
+  inputs:
+  - name: blockedRolesets
+    type:
+      arrayof: string
+  - name: allowedRolesets
+    type:
+      arrayof: string
+  outputs:
+C_Roleset.GetActiveAllowedRolesets:
+  inputs:
+  outputs:
+  - name: allowedRolesets
+    type:
+      arrayof: string
+C_Roleset.GetActiveBlockedRolesets:
+  inputs:
+  outputs:
+  - name: blockedRolesets
+    type:
+      arrayof: string
 C_Scenario.GetBonusStepRewardQuestID:
 C_Scenario.GetBonusSteps:
 C_Scenario.GetInfo:
@@ -23830,6 +24696,16 @@ C_SocialQueue.GetGroupQueues:
     type:
       arrayof:
         structure: C_SocialQueue.SocialQueueGroupQueueInfo
+C_SocialQueue.IsSystemEnabled:
+  inputs:
+  outputs:
+  - name: isSystemEnabled
+    type: boolean
+C_SocialQueue.IsSystemSupported:
+  inputs:
+  outputs:
+  - name: isSystemSupported
+    type: boolean
 C_SocialQueue.RequestToJoin:
   inputs:
   - name: groupGUID
@@ -23871,6 +24747,11 @@ C_SocialRestrictions.IsChatDisabled:
   outputs:
   - name: disabled
     type: boolean
+C_SocialRestrictions.IsFriendsDisabled:
+  inputs:
+  outputs:
+  - name: disabled
+    type: boolean
 C_SocialRestrictions.IsMuted:
   inputs:
   outputs:
@@ -23891,6 +24772,11 @@ C_SocialRestrictions.SetChatDisabled:
   - name: disabled
     type: boolean
   outputs:
+C_SocialUI.IsSystemEnabled:
+  inputs:
+  outputs:
+  - name: isSocialUISystemEnabled
+    type: boolean
 C_Soulbinds.ActivateSoulbind:
   inputs:
   - name: soulbindID
@@ -24217,6 +25103,20 @@ C_Sound.PlaySound:
   - name: overridePriority
     nilable: true
     type: number
+  - name: volumeOverride
+    nilable: true
+    type: number
+  mayreturnnothing: true
+  outputs:
+  - name: success
+    type: boolean
+  - name: soundHandle
+    type: string
+C_Sound.PlaySoundWithOptions:
+  inputs:
+  - name: params
+    type:
+      structure: C_Sound.PlaySoundParams
   mayreturnnothing: true
   outputs:
   - name: success
@@ -24284,6 +25184,13 @@ C_SpecializationInfo.GetInspectSelectedPvpTalent:
   outputs:
   - name: selectedTalentID
     nilable: true
+    type: number
+C_SpecializationInfo.GetInspectSpecialization:
+  inputs:
+  - name: unit
+    type: unit
+  outputs:
+  - name: specializationID
     type: number
 C_SpecializationInfo.GetNumSpecializationsForClassID:
   impl: GetNumSpecializationsForClassID
@@ -24542,6 +25449,18 @@ C_Spell.GetItemModifiedAppearancesApplied:
   - name: itemModifiedAppearanceIDs
     type:
       arrayof: number
+C_Spell.GetLastCategoryCooldownSource:
+  inputs:
+  - name: spellCategory
+    type: number
+  mayreturnnothing: true
+  outputs:
+  - name: spellID
+    nilable: true
+    type: number
+  - name: itemID
+    nilable: true
+    type: number
 C_Spell.GetMawPowerLinkBySpellID:
   inputs:
   - name: spellID
@@ -24643,6 +25562,17 @@ C_Spell.GetSpellDescription:
   inputs:
   - name: spellIdentifier
     type: string
+  mayreturnnothing: true
+  outputs:
+  - name: description
+    type: string
+C_Spell.GetSpellDescriptionForItemLocation:
+  inputs:
+  - name: spellIdentifier
+    type: string
+  - name: itemLocation
+    type:
+      structure: ItemLocation
   mayreturnnothing: true
   outputs:
   - name: description
@@ -24768,6 +25698,9 @@ C_Spell.GetSpellTexture:
   - name: iconID
     type: number
   - name: originalIconID
+    type: number
+  - name: conditionalIconID
+    nilable: true
     type: number
 C_Spell.GetSpellTradeSkillLink:
   inputs:
@@ -24961,6 +25894,11 @@ C_Spell.SpellHasRange:
     type: string
   outputs:
   - name: hasRange
+    type: boolean
+C_Spell.TargetSpellChecksItemCondition:
+  inputs:
+  outputs:
+  - name: result
     type: boolean
 C_Spell.TargetSpellIsEnchanting:
   inputs:
@@ -25887,18 +26825,6 @@ C_SuperTrack.GetHighestPrioritySuperTrackingType:
     nilable: true
     type:
       enum: SuperTrackingType
-C_SuperTrack.GetNextWaypointForMap:
-  inputs:
-  - name: uiMapID
-    type: number
-  mayreturnnothing: true
-  outputs:
-  - name: x
-    type: number
-  - name: y
-    type: number
-  - name: waypointDescription
-    type: string
 C_SuperTrack.GetSuperTrackedContent:
   inputs:
   mayreturnnothing: true
@@ -29475,6 +30401,14 @@ C_TransmogOutfitInfo.AddNewOutfit:
   - name: icon
     type: number
   outputs:
+C_TransmogOutfitInfo.CanPlayerTransmogSlot:
+  inputs:
+  - name: slot
+    type:
+      enum: TransmogOutfitSlot
+  outputs:
+  - name: valid
+    type: boolean
 C_TransmogOutfitInfo.ChangeDisplayedOutfit:
   inputs:
   - name: outfitID
@@ -29857,6 +30791,11 @@ C_TransmogOutfitInfo.IsSlotWeaponSlot:
       enum: TransmogOutfitSlot
   outputs:
   - name: isWeaponSlot
+    type: boolean
+C_TransmogOutfitInfo.IsTransmogEnabled:
+  inputs:
+  outputs:
+  - name: enabled
     type: boolean
 C_TransmogOutfitInfo.IsUsableDiscountAvailable:
   inputs:
@@ -30856,6 +31795,18 @@ C_UIWidgetManager.UnregisterUnitForWidgetUpdates:
     name: isGuid
     type: boolean
   outputs:
+C_UnitAuras.AddAuraSound:
+  inputs:
+  - name: trigger
+    type:
+      enum: UnitAuraSoundTrigger
+  - name: sound
+    type:
+      structure: UnitAuraSoundInfo
+  outputs:
+  - name: auraSoundID
+    nilable: true
+    type: number
 C_UnitAuras.AddBlockedAura:
   inputs:
   - name: unit
@@ -30872,15 +31823,6 @@ C_UnitAuras.AddPrivateAuraAnchor:
   - name: anchorID
     nilable: true
     type: number
-C_UnitAuras.AddPrivateAuraAppliedSound:
-  inputs:
-  - name: sound
-    type:
-      structure: UnitPrivateAuraAppliedSoundInfo
-  outputs:
-  - name: privateAuraSoundID
-    nilable: true
-    type: number
 C_UnitAuras.AuraIsBigDefensive:
   inputs:
   - name: spellID
@@ -30895,6 +31837,13 @@ C_UnitAuras.AuraIsPrivate:
   outputs:
   - name: isPrivate
     type: boolean
+C_UnitAuras.CancelAuraByInstanceID:
+  inputs:
+  - name: unit
+    type: unit
+  - name: auraInstanceID
+    type: number
+  outputs:
 C_UnitAuras.ClearBlockedAuras:
   inputs:
   - name: unit
@@ -31067,6 +32016,19 @@ C_UnitAuras.GetDebuffDataByIndex:
     nilable: true
     type:
       structure: AuraData
+C_UnitAuras.GetGroupBuffVisualAlerts:
+  inputs:
+  outputs:
+  - name: visualAlerts
+    type:
+      arrayof:
+        structure: GroupBuffVisualAlertInfo
+C_UnitAuras.GetHiddenGroupBuffs:
+  inputs:
+  outputs:
+  - name: spellIDs
+    type:
+      arrayof: number
 C_UnitAuras.GetPlayerAuraBySpellID:
   inputs:
   - name: spellID
@@ -31154,18 +32116,31 @@ C_UnitAuras.IsAuraFilteredOutByInstanceID:
   outputs:
   - name: isFiltered
     type: boolean
+C_UnitAuras.RemoveAuraSound:
+  inputs:
+  - name: auraSoundID
+    type: number
+  outputs:
 C_UnitAuras.RemovePrivateAuraAnchor:
   inputs:
   - name: anchorID
     type: number
   outputs:
-C_UnitAuras.RemovePrivateAuraAppliedSound:
-  inputs:
-  - name: privateAuraSoundID
-    type: number
-  outputs:
 C_UnitAuras.ResetAuraDataProvider:
   inputs:
+  outputs:
+C_UnitAuras.SetGroupBuffVisualAlerts:
+  inputs:
+  - name: visualAlerts
+    type:
+      arrayof:
+        structure: GroupBuffVisualAlertInfo
+  outputs:
+C_UnitAuras.SetHiddenGroupBuffs:
+  inputs:
+  - name: spellIDs
+    type:
+      arrayof: number
   outputs:
 C_UnitAuras.SetPrivateWarningTextAnchor:
   inputs:
@@ -31179,11 +32154,6 @@ C_UnitAuras.SetPrivateWarningTextAnchor:
   outputs:
 C_UnitAuras.SwitchAuraDataProvider:
   inputs:
-  outputs:
-C_UnitAuras.TriggerPrivateAuraShowDispelType:
-  inputs:
-  - name: show
-    type: boolean
   outputs:
 C_UnitAuras.WantsAlteredForm:
   inputs:
@@ -31210,6 +32180,7 @@ C_UnitAurasPrivate.GetPrivateAuraAnchors:
   inputs:
   outputs:
   - name: existingAnchors
+    stub:
     type:
       arrayof:
         structure: PrivateAuraAnchor
@@ -32359,7 +33330,6 @@ CancelAreaSpiritHeal:
   inputs:
   outputs:
 CancelDuel:
-CancelItemTempEnchantment:
 CancelLogout:
   inputs:
   outputs:
@@ -32502,7 +33472,6 @@ CanSignPetition:
   - name: value
     type: boolean
 CanSolveArtifact:
-CanSurrenderArena:
 CanSwitchVehicleSeat:
   inputs:
   outputs:
@@ -32907,6 +33876,10 @@ CreateSecureDelegate:
   inputs:
   - name: luaFunction
     type: function
+  - name: options
+    nilable: true
+    type:
+      structure: SecureDelegateOptions
   outputs:
   - name: secureDelegateFunction
     type: function
@@ -34096,6 +35069,16 @@ GetFontStringMetatable:
   outputs:
   - name: metatable
     type: table
+GetForbiddenObjectTable:
+  inputs:
+  - name: object
+    type:
+      uiobject: UIObject
+  outputs:
+  - name: forbiddenTable
+    type:
+      uiobject: UIObject
+  secureonly: true
 GetFrameCPUUsage:
   inputs:
   - name: frame
@@ -34458,7 +35441,6 @@ GetInspectHonorData:
     type: number
   - name: lifetimeRank
     type: number
-GetInspectSpecialization:
 GetInspectTalent:
 GetInstanceBootTimeRemaining:
   inputs:
@@ -34543,16 +35525,6 @@ GetInventoryItemLink:
 GetInventoryItemQuality:
 GetInventoryItemsForSlot:
 GetInventoryItemTexture:
-GetInventorySlotInfo:
-  impl: GetInventorySlotInfo
-  inputs:
-  - name: slotName
-    type: string
-  outputs:
-  - name: slotId
-    type: number
-  - name: texture
-    type: number
 GetInviteConfirmationInfo:
 GetItemLevelColor:
 GetJailersTowerLevel:
@@ -36377,6 +37349,12 @@ GetSpecializationRoleByID:
 GetSpecializationRoleEnum:
 GetSpecializationRoleEnumByID:
 GetSpecializationSpells:
+GetSpecializationSystem:
+  inputs:
+  outputs:
+  - name: system
+    type:
+      enum: SpecializationSystem
 GetSpecsForSpell:
 GetSpeed:
   inputs:
@@ -36950,7 +37928,6 @@ GetVersatilityBonus:
 GetVideoCaps:
 GetWarGameQueueStatus:
 GetWarGameTypeInfo:
-GetWeaponEnchantInfo:
 GetWebTicket:
 GetWorldElapsedTime:
 GetWorldElapsedTimers:
@@ -38463,6 +39440,18 @@ SecureCmdOptionParse:
   - name: target
     nilable: true
     type: string
+securecopy:
+  inputs:
+  - name: value
+    nilable: true
+    type: unknown
+  - name: options
+    nilable: true
+    type:
+      structure: SecureCopyOptions
+  outputs:
+  - name: copy
+    type: unknown
 secureexecuterange:
   impl: secureexecuterange
 select:
@@ -38754,7 +39743,7 @@ SetSendMailShowing:
     type: boolean
   outputs:
 SetSpellbookPetAction:
-SetTableSecurityOption:
+settablesecurity:
   inputs:
   - name: table
     type: table
@@ -40585,7 +41574,7 @@ UnitQuestTrivialLevelRangeScaling:
 UnitRace:
   impl: UnitRace
   inputs:
-  - name: name
+  - name: unit
     type: unit
   mayreturnnothing: true
   outputs:

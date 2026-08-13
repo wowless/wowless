@@ -1,3 +1,11 @@
+accessibilityscreennarrationenabled:
+  default: '1'
+accessibilityscreennarrationspeechrate:
+  default: '0'
+accessibilityscreennarrationspeechvolume:
+  default: '100'
+accessibilityscreennarrationvoice:
+  default: '1'
 accountneedsturnstrafedialog:
   account: true
   default: '1'
@@ -157,18 +165,9 @@ asynchandlertimeout:
   default: '100'
 asyncthreadsleep:
   default: '0'
-auctiondisplayoncharacter:
-  account: true
-  default: '0'
 auctionhousedurationdropdown:
   account: true
   default: '2'
-auctionsortbybuyoutprice:
-  character: true
-  default: '0'
-auctionsortbyunitprice:
-  character: true
-  default: '0'
 audiolocale:
   default: ''
 auradebugger:
@@ -209,7 +208,7 @@ autojoinpartyvoice:
   account: true
   default: '0'
 autolootdefault:
-  character: true
+  account: true
   default: '0'
 autolootrate:
   character: true
@@ -1668,6 +1667,10 @@ disableuiloaderrordialog:
   default: '0'
 disableuseraddonsbydefault:
   default: '0'
+discordclientenabled:
+  default: '1'
+discorddisplayname:
+  default: '0'
 displayspellactivationoverlays:
   character: true
   default: '1'
@@ -2271,7 +2274,7 @@ housinglayout_camera_dragfriction:
 housinglayout_camera_dragmomentum:
   default: '0.300000'
 housinglayout_camera_maxdistance:
-  default: '80.000000'
+  default: '120.000000'
 housinglayout_camera_maxdistanceincr:
   default: '5.000000'
 housinglayout_camera_mindistance:
@@ -2586,10 +2589,8 @@ movepadlocked:
 moviesubtitle:
   default: '1'
 moviesubtitlebackground:
-  account: true
-  default: '1'
+  default: '2'
 moviesubtitlebackgroundalpha:
-  account: true
   default: '70'
 msaaalphatest:
   default: '1'
@@ -2602,6 +2603,9 @@ nameplateaurascale:
 nameplatecastbardisplay:
   account: true
   default: "\x02["
+nameplatecheckdistancefortarget:
+  default: '0'
+  secure: true
 nameplatedebuffpadding:
   account: true
   default: '0'
@@ -2611,7 +2615,10 @@ nameplateenemynpcauradisplay:
   default: "\x02G"
 nameplateenemyplayerauradisplay:
   account: true
-  default: "\x02C"
+  default: "\x02G"
+nameplateforceshowunitname:
+  default: '0'
+  secure: true
 nameplatefriendlyplayerauradisplay:
   account: true
   default: "\x02C"
@@ -2658,6 +2665,9 @@ nameplateminscaledistance:
   character: true
   default: '10.000000'
   secure: true
+nameplatenotselectedalpha:
+  default: '-1.000000'
+  secure: true
 nameplateoccludedalphamult:
   character: true
   default: '0.400000'
@@ -2676,6 +2686,9 @@ nameplateplayermaxdistance:
   character: true
   default: '60.000000'
   secure: true
+nameplateplayremovalanimation:
+  default: '1'
+  secure: true
 nameplateselectedalpha:
   character: true
   default: '1.000000'
@@ -2687,6 +2700,9 @@ nameplateselectedscale:
 nameplateshowall:
   account: true
   default: '0'
+nameplateshowallpersonalauras:
+  default: '0'
+  secure: true
 nameplateshowcastbars:
   character: true
   default: '1'
@@ -2745,13 +2761,16 @@ nameplateshowfriendlyplayertotems:
   account: true
   default: '0'
   secure: true
+nameplateshowfriendlyrealmname:
+  account: true
+  default: '1'
 nameplateshowoffscreen:
   account: true
   default: '0'
   secure: true
 nameplateshowonlynameforfriendlyplayerunits:
+  account: true
   default: '0'
-  secure: true
 nameplateshowself:
   character: true
   default: '0'
@@ -2786,8 +2805,8 @@ nameplatethreatdisplay:
   account: true
   default: "\x02"
 nameplateuseclasscolorforfriendlyplayerunitnames:
+  account: true
   default: '0'
-  secure: true
 nearclip:
   default: '0.2'
 newdelvesseason:
@@ -2920,6 +2939,8 @@ pingcategorytutorialshown:
   default: '0'
 pingmode:
   default: '0'
+pingtarget:
+  default: '0'
 playercoloroverrides:
   account: true
   default: ''
@@ -3037,6 +3058,9 @@ raidframescenterbigdefensive:
 raidframesdispelindicatoroverlay:
   character: true
   default: '1'
+raidframesdispelindicatoroverlayanimation:
+  character: true
+  default: '0'
 raidframesdispelindicatortype:
   character: true
   default: '2'
@@ -3407,11 +3431,15 @@ showphotosensitivitywarning:
   default: '-1'
 showpingsinchat:
   default: '1'
+showpingsonraidframes:
+  default: '1'
 showquestobjectivesinlog:
   character: true
   default: '1'
 showquestunitcircles:
   account: true
+  default: '1'
+showscreennarrationdialog:
   default: '1'
 showspectatorteamcircles:
   default: '1'
@@ -3478,8 +3506,6 @@ skycloudlod:
   default: '0'
 slugopticalweight:
   default: '0'
-slugsupersampling:
-  default: '1'
 smoothunitphasing:
   default: '1'
 smoothunitphasingactorpurgatorytimems:
@@ -3784,6 +3810,8 @@ synchronizeconfig:
   default: '1'
 taintlog:
   default: '0'
+taintlogobjectsecrets:
+  default: '0'
 talentpointsspent:
   account: true
   default: '0'
@@ -3926,6 +3954,8 @@ titlebarshowrealmname:
 toastduration:
   account: true
   default: '4'
+tooltipshowauraspellids:
+  default: '0'
 toyboxcollectedfilters:
   account: true
   default: '0'
@@ -4107,7 +4137,9 @@ usemaxfps:
 usemaxfpsbk:
   default: '1'
 userfontscale:
-  default: '1'
+  default: '1.000000'
+userfontscaleglue:
+  default: '1.390000'
 useshadowmapping:
   default: '1'
 useslug:
@@ -4233,6 +4265,12 @@ worldbasemip:
 worldintersectmaxjobs:
   default: '32'
 worldloadsort:
+  default: '1'
+worldmapshowcursorcoords:
+  account: true
+  default: '1'
+worldmapshowplayercoords:
+  account: true
   default: '1'
 worldpreloadhighrestextures:
   default: '1'

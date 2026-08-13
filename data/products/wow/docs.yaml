@@ -141,16 +141,6 @@ lies:
           nilable: true
       - _add:
           nilable: true
-    UnitRace:
-      inputs:
-      - type:
-          _change:
-            from: string
-            to: unit
-  events:
-    MINIMAP_PING:
-      _remove:
-        restricted: true
   extra_apis:
     C_BarberShopInternal.SetQAMode:
     C_CinematicList.GetUICinematicList:
@@ -175,6 +165,7 @@ lies:
     CharCreateAnimTurnType:
     CharSectionCondition:
     ConfigurationWarning:
+    RestrictionType:
     UnitTokenType:
     WarbandEventState:
     WarbandGroupFlags:
@@ -351,13 +342,6 @@ lies:
         outputs:
         - _add:
             nilable: true
-      HookScript:
-        outputs:
-          _change:
-            from:
-            to:
-            - name: success
-              type: boolean
     TextureBase:
       GetAtlas:
         outputs:
@@ -489,6 +473,8 @@ script_objects:
     uiobject: AnimationGroup
   SimpleAnimPathAPI:
     uiobject: Path
+  SimpleAnimRadialProgressAPI:
+    uiobject: RadialProgress
   SimpleAnimRotationAPI:
     uiobject: Rotation
   SimpleAnimScaleAPI:
@@ -555,6 +541,8 @@ script_objects:
     uiobject: Texture
   SimpleTextureBaseAPI:
     uiobject: TextureBase
+  SimpleVectorGraphicsAPI:
+    uiobject: VectorGraphics
   UnitHealPredictionCalculatorAPI:
     luaobject: UnitHealPredictionCalculator
 typedefs:
@@ -609,6 +597,8 @@ typedefs:
       uiobject: UIObject
   cstring:
     type: string
+  DiscordID:
+    type: string
   DurationMillisecondsPrimitive:
     type: number
   DurationSeconds:
@@ -660,7 +650,11 @@ typedefs:
     type: number
   ItemInfo:
     type: string
+  kstringAuroraName:
+    type: string
   kstringClubMessage:
+    type: string
+  KStringDiscordUserName:
     type: string
   kstringLfgListApplicant:
     type: string
@@ -688,9 +682,11 @@ typedefs:
   LuaDurationObject:
     type:
       luaobject: LuaDurationObject
-  luaFunction:
+  LuaFunctionReference:
     type: function
   luaIndex:
+    type: number
+  LuaInventorySlot:
     type: number
   LuaValueReference:
     type: unknown
@@ -730,6 +726,8 @@ typedefs:
     outnil: true
     type:
       uiobject: Region
+  ScriptTypeName:
+    type: string
   SecondsFormatter:
     type:
       luaobject: SecondsFormatter
@@ -775,6 +773,9 @@ typedefs:
     outnil: true
     type:
       uiobject: Texture
+  SimpleVectorGraphics:
+    type:
+      uiobject: VectorGraphics
   SimpleWindow:
     type: nil
   SingleColorValue:
