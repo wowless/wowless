@@ -749,9 +749,7 @@ return function(
           -- client refuses to instantiate it, the same way it does an
           -- unknown frame type passed to CreateFrame.
           if unknownType then
-            if datalua.config.runtime.warners[ltype] then
-              QueueEvent('LUA_WARNING', 'Unknown frame type: ' .. e.name)
-            end
+            QueueEvent('LUA_WARNING', 'Unknown frame type: ' .. e.name)
             return nil
           end
           local name = e.attr.name
