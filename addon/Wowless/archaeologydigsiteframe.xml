@@ -1,0 +1,28 @@
+<Ui>
+  <!--
+    issue #863: ArchaeologyDigSiteFrame parses on wow_classic_era,
+    wow_classic_era_ptr, and wow_anniversary (Blizzard ships the same
+    DigSiteDataProvider.xml to every product), but genuinely has no
+    working uiobject on those three products; only a virtual="true"
+    template declaration is ever real client usage. Instantiating it
+    for real, as done here, must warn "Unknown frame type" the same
+    way CreateFrame does for any other bogus type name, then skip
+    creating the frame. wow_classic/wow_classic_ptr have a genuine
+    uiobject backing it instead, and the remaining products never
+    define the tag at all; WowlessData.Xml (the addon's copy of
+    data/products/<product>/xml.yaml, from gentest.lua) reports which
+    case applies on the current product, so this file loads
+    unconditionally everywhere and derives its expectation from that.
+  -->
+  <Script>
+    local tag = _G.WowlessData.Xml.ArchaeologyDigSiteFrame
+    if not tag then
+      table.insert(_G.Wowless.ExpectedNextFrame, 'Unrecognized XML: ArchaeologyDigSiteFrame')
+    elseif tag.impl == 'unknowntype' then
+      table.insert(_G.Wowless.ExpectedNextFrame, 'Unknown frame type: ArchaeologyDigSiteFrame')
+    else
+      assert(type(tag.impl) == 'table' and tag.impl.uiobject, tag.impl)
+    end
+  </Script>
+  <ArchaeologyDigSiteFrame />
+</Ui>

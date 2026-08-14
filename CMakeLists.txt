@@ -687,6 +687,7 @@ foreach(product ${products})
   gentest(templates.lua templates)
   gentest(templates.xml templatexml)
   gentest(uiobjectapis.lua uiobjectapis)
+  gentest(xml.lua xml)
   add_custom_command(
     OUTPUT ${product}_addon.txt
     COMMAND ${CMAKE_COMMAND} -E touch ${product}_addon.txt
@@ -1054,6 +1055,7 @@ set(testaddon_outs)
 foreach(
   f
   apitemplates.xml
+  archaeologydigsiteframe.xml
   arraydiff.lua
   asynctests.lua
   evenmoreintrinsic.xml

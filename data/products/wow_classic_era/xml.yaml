@@ -139,8 +139,7 @@ Animations:
   impl: transparent
 ArchaeologyDigSiteFrame:
   extends: Frame
-  impl:
-    uiobject: Frame
+  impl: unknowntype
 Attribute:
   attributes:
     name:

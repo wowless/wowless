@@ -79,6 +79,7 @@ type:
             uiobject:
               ref:
                 schema: uiobjects
+            unknowntype: tag
       phase:
         type:
           taggedunion:

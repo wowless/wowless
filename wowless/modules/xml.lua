@@ -196,6 +196,7 @@ return function(datalua, eventqueue)
           attr = resultAttrs,
           kids = resultKids,
           line = e._line,
+          name = e._name,
           type = tname,
         }
       end
