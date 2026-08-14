@@ -750,7 +750,7 @@ return function(
           -- unknown frame type passed to CreateFrame.
           if unknownType then
             if datalua.config.runtime.warners[ltype] then
-              QueueEvent('LUA_WARNING', 'Unknown frame type: ' .. e.rawtype)
+              QueueEvent('LUA_WARNING', 'Unknown frame type: ' .. e.name)
             end
             return nil
           end
