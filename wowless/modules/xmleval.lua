@@ -638,6 +638,10 @@ return function(
     return type(entry) == 'table' and entry.uiobject and string.lower(entry.uiobject) or nil
   end
 
+  local function implUnknownType(e)
+    return xmlimpls[e.type] and xmlimpls[e.type].tag == 'unknowntype'
+  end
+
   local function loadElements(ctx, t, parent)
     for _, v in ipairs(t) do
       loadElement(ctx, v, parent)
@@ -708,9 +712,10 @@ return function(
     local ltype = string.lower(e.type)
     local intrinsicEntry = intrinsics.Get(ltype)
     local implBasetype = implUiobjectType(e)
+    local unknownType = implUnknownType(e)
     -- e.type dispatches to either a declared uiobject-creating tag (impl.uiobject
     -- in xml.yaml) or a previously-registered intrinsic (same name namespace).
-    if implBasetype or intrinsicEntry then
+    if implBasetype or intrinsicEntry or unknownType then
       ctx = not e.attr.intrinsic and ctx or mixin({}, ctx, { intrinsic = true })
       local template = {
         ctx = ctx,
@@ -737,6 +742,16 @@ return function(
           -- warns on an unknown frame type.
           if intrinsicEntry and intrinsicEntry.nested then
             QueueEvent('LUA_WARNING', 'Unknown frame type: ' .. intrinsicEntry.displayName)
+            return nil
+          end
+          -- issue #863: this tag parses (structurally valid per xml.yaml)
+          -- but has no genuine backing uiobject on this product; a real
+          -- client refuses to instantiate it, the same way it does an
+          -- unknown frame type passed to CreateFrame.
+          if unknownType then
+            if datalua.config.runtime.warners[ltype] then
+              QueueEvent('LUA_WARNING', 'Unknown frame type: ' .. e.rawtype)
+            end
             return nil
           end
           local name = e.attr.name

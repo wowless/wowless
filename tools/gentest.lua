@@ -584,6 +584,9 @@ local ptablemap = {
   uiobjectapis = function(p)
     return 'UIObjectApis', computeUiobjectApis(p)
   end,
+  xml = function(p)
+    return 'Xml', perproduct(p, 'xml')
+  end,
 }
 
 local args = (function()
