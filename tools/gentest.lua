@@ -69,6 +69,33 @@ local function frameChains(p)
   return xmlcontainment.chains(perproduct(p, 'xml'), 'Frame', 'Layer')
 end
 
+-- Tag names, in a stable sorted order, whose XML impl is 'unknowntype' on
+-- this product -- i.e. the tag parses but a real client refuses to
+-- instantiate it non-virtually (see xmleval.lua's loadElement, issue
+-- #863). test.xml derives the same list (same filter, same sort) from
+-- WowlessData.Xml to register its expected warnings, so it doesn't need
+-- a dedicated ptablemap entry here beyond this file's own use below.
+local function unknownTypeTags(p)
+  local xml = perproduct(p, 'xml')
+  local result = {}
+  for name in sorted(xml) do
+    if xml[name].impl == 'unknowntype' then
+      table.insert(result, name)
+    end
+  end
+  return result
+end
+
+-- <Ui> wrapping one non-virtual, self-closing instantiation per tag in
+-- unknownTypeTags(p) -- empty (just `<Ui />`) on products with none.
+local function buildUnknownTypeXml(p)
+  local root = { tag = 'Ui' }
+  for _, name in ipairs(unknownTypeTags(p)) do
+    table.insert(root, { tag = name })
+  end
+  return renderXml(root)
+end
+
 -- Per-type field/method data (fields, their init defaults, and which
 -- methods getter/set them), flattened across the inherits chain. Shared by
 -- the uiobjectapis ptablemap entry and discoverCases below.
@@ -604,12 +631,15 @@ local function doit(k, p)
     return ('_G.WowlessData = { product = %q }'):format(p)
   elseif k == 'templatexml' then
     return buildTemplatesXml(p, computeUiobjectApis(p))
+  elseif k == 'unknowntypexml' then
+    return buildUnknownTypeXml(p)
   elseif k == 'toc' then
     local tt = {}
     for kk in pairs(ptablemap) do
       table.insert(tt, kk .. '.lua')
     end
     table.insert(tt, 'templates.xml')
+    table.insert(tt, 'unknowntype.xml')
     table.sort(tt)
     table.insert(tt, 1, 'product.lua')
     table.insert(tt, 1, '## Interface: ' .. perproduct(p, 'build').tocversion)
