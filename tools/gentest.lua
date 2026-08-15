@@ -74,7 +74,7 @@ end
 -- instantiate it non-virtually (see xmleval.lua's loadElement, issue
 -- #863). test.xml derives the same list (same filter, same sort) from
 -- WowlessData.Xml to register its expected warnings, so it doesn't need
--- a dedicated ptablemap entry here beyond this file's own use below.
+-- a dedicated ptablemap entry here beyond buildTemplatesXml's use below.
 local function unknownTypeTags(p)
   local xml = perproduct(p, 'xml')
   local result = {}
@@ -84,16 +84,6 @@ local function unknownTypeTags(p)
     end
   end
   return result
-end
-
--- <Ui> wrapping one non-virtual, self-closing instantiation per tag in
--- unknownTypeTags(p) -- empty (just `<Ui />`) on products with none.
-local function buildUnknownTypeXml(p)
-  local root = { tag = 'Ui' }
-  for _, name in ipairs(unknownTypeTags(p)) do
-    table.insert(root, { tag = name })
-  end
-  return renderXml(root)
 end
 
 -- Per-type field/method data (fields, their init defaults, and which
@@ -382,6 +372,11 @@ end
 
 -- Builds the WowlessGeneratedXmlTests root shared by the 'templatexml' file
 -- (rendered to text as templates.xml) and the templates ptablemap entry.
+-- Also appends one non-virtual, self-closing instantiation per
+-- unknownTypeTags(p) tag as a sibling top-level element, since those
+-- don't need any of the wrapper/nesting machinery above -- just
+-- somewhere in WowlessData's own XML for xmleval to process before
+-- test.xml runs (see issue #863).
 local function buildTemplatesXml(p, uiobjectApis)
   local root = { name = 'WowlessGeneratedXmlTests', tag = 'Frame' }
   for _, case in ipairs(discoverCases(p)) do
@@ -390,7 +385,11 @@ local function buildTemplatesXml(p, uiobjectApis)
       table.insert(root, templateElement(uiobjectApis, case.chain, case.xmlAttrKey, key, c.value))
     end
   end
-  return renderXml({ root, tag = 'Ui' })
+  local ui = { root, tag = 'Ui' }
+  for _, name in ipairs(unknownTypeTags(p)) do
+    table.insert(ui, { tag = name })
+  end
+  return renderXml(ui)
 end
 
 local ptablemap = {
@@ -631,15 +630,12 @@ local function doit(k, p)
     return ('_G.WowlessData = { product = %q }'):format(p)
   elseif k == 'templatexml' then
     return buildTemplatesXml(p, computeUiobjectApis(p))
-  elseif k == 'unknowntypexml' then
-    return buildUnknownTypeXml(p)
   elseif k == 'toc' then
     local tt = {}
     for kk in pairs(ptablemap) do
       table.insert(tt, kk .. '.lua')
     end
     table.insert(tt, 'templates.xml')
-    table.insert(tt, 'unknowntype.xml')
     table.sort(tt)
     table.insert(tt, 1, 'product.lua')
     table.insert(tt, 1, '## Interface: ' .. perproduct(p, 'build').tocversion)

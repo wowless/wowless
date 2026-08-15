@@ -687,7 +687,6 @@ foreach(product ${products})
   gentest(templates.lua templates)
   gentest(templates.xml templatexml)
   gentest(uiobjectapis.lua uiobjectapis)
-  gentest(unknowntype.xml unknowntypexml)
   gentest(xml.lua xml)
   add_custom_command(
     OUTPUT ${product}_addon.txt
