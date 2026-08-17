@@ -1055,7 +1055,6 @@ set(testaddon_outs)
 foreach(
   f
   apitemplates.xml
-  archaeologydigsiteframe.xml
   arraydiff.lua
   asynctests.lua
   evenmoreintrinsic.xml

@@ -355,6 +355,12 @@ end
 
 -- Builds the WowlessGeneratedXmlTests root shared by the 'templatexml' file
 -- (rendered to text as templates.xml) and the templates ptablemap entry.
+-- Also appends one non-virtual, self-closing instantiation per XML tag
+-- whose impl is 'unknowntype' on this product (see xmleval.lua's
+-- loadElement, issue #863) as a sibling top-level element, since those
+-- don't need any of the wrapper/nesting machinery above -- just
+-- somewhere in WowlessData's own XML for xmleval to process before
+-- test.xml runs.
 local function buildTemplatesXml(p, uiobjectApis)
   local root = { name = 'WowlessGeneratedXmlTests', tag = 'Frame' }
   for _, case in ipairs(discoverCases(p)) do
@@ -363,7 +369,13 @@ local function buildTemplatesXml(p, uiobjectApis)
       table.insert(root, templateElement(uiobjectApis, case.chain, case.xmlAttrKey, key, c.value))
     end
   end
-  return renderXml({ root, tag = 'Ui' })
+  local ui = { root, tag = 'Ui' }
+  for name, def in sorted(perproduct(p, 'xml')) do
+    if def.impl == 'unknowntype' then
+      table.insert(ui, { tag = name })
+    end
+  end
+  return renderXml(ui)
 end
 
 local ptablemap = {

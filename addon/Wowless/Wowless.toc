@@ -13,7 +13,6 @@ arraydiff.lua
 funtainer.lua
 luaobjects.lua
 test.xml
-archaeologydigsiteframe.xml
 generated.lua
 uiobjects.lua
 templates.lua
