@@ -23,15 +23,10 @@
     WowlessData.Xml (the same source those instantiations came from).
   -->
   <Script>
-    local tags = {}
-    for name, def in pairs(_G.WowlessData.Xml) do
+    for tag, def in Wowless.sorted(_G.WowlessData.Xml) do
       if def.impl == 'unknowntype' then
-        table.insert(tags, name)
+        table.insert(Wowless.ExpectedNextFrame, 'Unknown frame type: ' .. tag)
       end
-    end
-    table.sort(tags)
-    for _, tag in ipairs(tags) do
-      table.insert(Wowless.ExpectedNextFrame, 'Unknown frame type: ' .. tag)
     end
   </Script>
 

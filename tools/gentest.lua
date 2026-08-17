@@ -69,23 +69,6 @@ local function frameChains(p)
   return xmlcontainment.chains(perproduct(p, 'xml'), 'Frame', 'Layer')
 end
 
--- Tag names, in a stable sorted order, whose XML impl is 'unknowntype' on
--- this product -- i.e. the tag parses but a real client refuses to
--- instantiate it non-virtually (see xmleval.lua's loadElement, issue
--- #863). test.xml derives the same list (same filter, same sort) from
--- WowlessData.Xml to register its expected warnings, so it doesn't need
--- a dedicated ptablemap entry here beyond buildTemplatesXml's use below.
-local function unknownTypeTags(p)
-  local xml = perproduct(p, 'xml')
-  local result = {}
-  for name in sorted(xml) do
-    if xml[name].impl == 'unknowntype' then
-      table.insert(result, name)
-    end
-  end
-  return result
-end
-
 -- Per-type field/method data (fields, their init defaults, and which
 -- methods getter/set them), flattened across the inherits chain. Shared by
 -- the uiobjectapis ptablemap entry and discoverCases below.
@@ -372,11 +355,12 @@ end
 
 -- Builds the WowlessGeneratedXmlTests root shared by the 'templatexml' file
 -- (rendered to text as templates.xml) and the templates ptablemap entry.
--- Also appends one non-virtual, self-closing instantiation per
--- unknownTypeTags(p) tag as a sibling top-level element, since those
+-- Also appends one non-virtual, self-closing instantiation per XML tag
+-- whose impl is 'unknowntype' on this product (see xmleval.lua's
+-- loadElement, issue #863) as a sibling top-level element, since those
 -- don't need any of the wrapper/nesting machinery above -- just
 -- somewhere in WowlessData's own XML for xmleval to process before
--- test.xml runs (see issue #863).
+-- test.xml runs.
 local function buildTemplatesXml(p, uiobjectApis)
   local root = { name = 'WowlessGeneratedXmlTests', tag = 'Frame' }
   for _, case in ipairs(discoverCases(p)) do
@@ -386,8 +370,11 @@ local function buildTemplatesXml(p, uiobjectApis)
     end
   end
   local ui = { root, tag = 'Ui' }
-  for _, name in ipairs(unknownTypeTags(p)) do
-    table.insert(ui, { tag = name })
+  local xml = perproduct(p, 'xml')
+  for name in sorted(xml) do
+    if xml[name].impl == 'unknowntype' then
+      table.insert(ui, { tag = name })
+    end
   end
   return renderXml(ui)
 end
