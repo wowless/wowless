@@ -370,9 +370,8 @@ local function buildTemplatesXml(p, uiobjectApis)
     end
   end
   local ui = { root, tag = 'Ui' }
-  local xml = perproduct(p, 'xml')
-  for name in sorted(xml) do
-    if xml[name].impl == 'unknowntype' then
+  for name, def in sorted(perproduct(p, 'xml')) do
+    if def.impl == 'unknowntype' then
       table.insert(ui, { tag = name })
     end
   end
