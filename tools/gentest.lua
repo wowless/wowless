@@ -293,6 +293,41 @@ local function discoverCases(p)
   return cases
 end
 
+-- Every XML tag whose impl instantiates a uiobject that is-a Frame
+-- (data/schemas/xml.yaml's impl.uiobject, as opposed to transparent/call/
+-- script/loadstring/unknowntype), excluding singleton types (e.g.
+-- Minimap: the game creates the one true instance itself, and a second
+-- one errors) -- addon/Wowless/generated.lua's frametags() applies this
+-- exact same filter over WowlessData.Xml/UIObjectApis directly, so
+-- there's no dedicated ptablemap entry for it, just this shared list of
+-- tags to instantiate in templates.xml.
+--
+-- Every such tag nests directly under a single <Frames> wrapper: Frame's
+-- own contents only ever offer a Frames child, and Frames accepts any
+-- non-sealed Frame-extending tag generically, including Frame itself
+-- (see frameChains) -- so unlike discoverCases's attribute candidates,
+-- there's no need to walk a containment chain or assign scaffolding
+-- parentKeys, just a fixed one-level nest keyed by the tag's own
+-- (lowercased) name. frameChains is still consulted, and asserted
+-- against that fixed shape, purely to catch a tag becoming unreachable
+-- (e.g. a future `sealed` flag) rather than silently mis-nesting it.
+local function discoverFrameTags(p, uiobjectApis)
+  local chains = frameChains(p)
+  local tags = {}
+  for tag, tdef in pairs(perproduct(p, 'xml')) do
+    local objtype = type(tdef.impl) == 'table' and tdef.impl.uiobject
+    if objtype and not uiobjectApis[objtype].singleton and uiobjectApis[objtype].isa.Frame then
+      local chain = chains[tag]
+      assert(
+        chain and #chain == 3 and chain[2] == 'Frames',
+        ('%s: expected a Frame -> Frames -> %s containment chain'):format(tag, tag)
+      )
+      table.insert(tags, tag)
+    end
+  end
+  return tags
+end
+
 local function attrMembers(p, case)
   local tdef = perproduct(p, 'xml')[case.xmlTag]
   local attrDef = tdef and tdef.attributes[case.xmlAttrKey]
@@ -353,12 +388,14 @@ local function computeCandidates(p, case)
   return candidates
 end
 
--- Builds the WowlessGeneratedXmlTests root shared by the 'templatexml' file
--- (rendered to text as templates.xml) and the templates ptablemap entry.
--- Also appends one non-virtual, self-closing instantiation per XML tag
--- whose impl is 'unknowntype' on this product (see xmleval.lua's
--- loadElement, issue #863) as a sibling top-level element, since those
--- don't need any of the wrapper/nesting machinery above -- just
+-- Builds the WowlessGeneratedXmlTests root shared by the 'templatexml'
+-- file (rendered to text as templates.xml) and the templates ptablemap
+-- entry. Also appends one <Frames>-wrapped, non-virtual, self-closing
+-- instantiation per discoverFrameTags(p) tag (parentKey'd by its own
+-- lowercased name -- see that function), and one bare non-virtual,
+-- self-closing instantiation per XML tag whose impl is 'unknowntype' on
+-- this product (see xmleval.lua's loadElement, issue #863) as a sibling
+-- top-level element, since those don't need any wrapper -- just
 -- somewhere in WowlessData's own XML for xmleval to process before
 -- test.xml runs.
 local function buildTemplatesXml(p, uiobjectApis)
@@ -368,6 +405,9 @@ local function buildTemplatesXml(p, uiobjectApis)
       local key = case.id .. '_' .. c.suffix
       table.insert(root, templateElement(uiobjectApis, case.chain, case.xmlAttrKey, key, c.value))
     end
+  end
+  for _, tag in ipairs(discoverFrameTags(p, uiobjectApis)) do
+    table.insert(root, { tag = 'Frames', { tag = tag, parentKey = tag:lower() } })
   end
   local ui = { root, tag = 'Ui' }
   for name, def in sorted(perproduct(p, 'xml')) do
