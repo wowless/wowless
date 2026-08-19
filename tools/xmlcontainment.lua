@@ -22,40 +22,42 @@
 -- tag is recorded in the second return value, `ambiguous`, the set of tags
 -- with no unique shortest path -- callers can then decide whether/when
 -- that matters for their own purposes.
+local function supertypesOf(xml, tag)
+  local st = { [tag:lower()] = true }
+  local t = xml[tag]
+  local climbing = not t.sealed
+  while t.extends do
+    if climbing then
+      st[t.extends:lower()] = true
+    end
+    t = xml[t.extends]
+    climbing = climbing and not t.sealed
+  end
+  return st
+end
+
+local function childrenOf(xml, tag)
+  local kids = {}
+  local t = xml[tag]
+  while true do
+    if t.contents and t.contents ~= 'text' then
+      for kid in pairs(t.contents.tags) do
+        kids[kid:lower()] = true
+      end
+    end
+    if not t.extends then
+      break
+    end
+    t = xml[t.extends]
+  end
+  return kids
+end
+
 local function chains(xml, root, preferParent)
-  local function supertypesOf(tag)
-    local st = { [tag:lower()] = true }
-    local t = xml[tag]
-    local climbing = not t.sealed
-    while t.extends do
-      if climbing then
-        st[t.extends:lower()] = true
-      end
-      t = xml[t.extends]
-      climbing = climbing and not t.sealed
-    end
-    return st
-  end
-  local function childrenOf(tag)
-    local kids = {}
-    local t = xml[tag]
-    while true do
-      if t.contents and t.contents ~= 'text' then
-        for kid in pairs(t.contents.tags) do
-          kids[kid:lower()] = true
-        end
-      end
-      if not t.extends then
-        break
-      end
-      t = xml[t.extends]
-    end
-    return kids
-  end
   local supertypes, children = {}, {}
   for tag in pairs(xml) do
-    supertypes[tag] = supertypesOf(tag)
-    children[tag] = childrenOf(tag)
+    supertypes[tag] = supertypesOf(xml, tag)
+    children[tag] = childrenOf(xml, tag)
   end
   local result = { [root] = { root } }
   local visited = {}
@@ -115,6 +117,40 @@ local function chains(xml, root, preferParent)
   return result, ambiguous
 end
 
+-- The set of non-virtual tags that are never a legal child of any other tag
+-- in the schema -- i.e. the tags that can legitimately stand as an XML
+-- document's root element. A virtual tag is excluded even when nothing
+-- names it as a child, since it can never be instantiated as a literal tag
+-- either way (it exists only for concrete subtypes to extend).
+local function roots(xml)
+  local children = {}
+  for tag in pairs(xml) do
+    children[tag] = childrenOf(xml, tag)
+  end
+  local result = {}
+  for tag in pairs(xml) do
+    if not xml[tag].virtual then
+      local isChild = false
+      for st in pairs(supertypesOf(xml, tag)) do
+        for _, kids in pairs(children) do
+          if kids[st] then
+            isChild = true
+            break
+          end
+        end
+        if isChild then
+          break
+        end
+      end
+      if not isChild then
+        result[tag] = true
+      end
+    end
+  end
+  return result
+end
+
 return {
   chains = chains,
+  roots = roots,
 }

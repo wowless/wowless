@@ -44,6 +44,12 @@ end
 return function(datalua, eventqueue)
   local QueueEvent = eventqueue.QueueEvent
   local lang = datalua.xmlflat
+  local rootTags = {}
+  for k, v in pairs(lang) do
+    if v.root then
+      rootTags[k] = true
+    end
+  end
   local stringenums = datalua.stringenums
   local enums = datalua.globals.Enum
   local attributeTypes = {
@@ -198,10 +204,7 @@ return function(datalua, eventqueue)
         }
       end
     end
-    local result = run(root, 'toplevel', {
-      bindings = true,
-      ui = true,
-    })
+    local result = run(root, 'toplevel', rootTags)
     return result, warnings
   end
 

@@ -438,6 +438,7 @@ local xmlflat = (function()
       newtree[k:lower()] = {
         attributes = attrs,
         children = kids,
+        root = v.root,
         supertypes = supertypes,
         text = text,
         warnsinvalid = warnsinvalid,
