@@ -207,7 +207,7 @@ return function(datalua, eventqueue)
         }
       end
     end
-    local result = run(root, 'toplevel', rootTags, lang.ui and lang.ui.containmentwarnings)
+    local result = run(root, 'toplevel', rootTags, true)
     return result, warnings
   end
 

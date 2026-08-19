@@ -185,42 +185,49 @@ describe('xmlcontainment', function()
   end)
 
   describe('legalChildren', function()
-    it('accepts a directly declared child', function()
-      local xml = {
-        Frame = { contents = { tags = { Leaf = true } } },
-        Leaf = {},
-        Other = {},
-      }
-      local legal = xmlcontainment.legalChildren(xml, 'Frame')
-      assert.is_true(legal.Leaf)
-      assert.is_nil(legal.Other)
-    end)
+    local cases = {
+      ['accepts a directly declared child'] = {
+        xml = {
+          Frame = { contents = { tags = { Leaf = true } } },
+          Leaf = {},
+          Other = {},
+        },
+        parent = 'Frame',
+        legal = { Leaf = true },
+      },
+      ['accepts a tag reachable only via its extends chain'] = {
+        xml = {
+          Base = {},
+          Frame = { contents = { tags = { Base = true } } },
+          Sub = { extends = 'Base' },
+        },
+        parent = 'Frame',
+        legal = { Base = true, Sub = true },
+      },
+      ['sealed stops extends-chain climbing'] = {
+        xml = {
+          Base = {},
+          Frame = { contents = { tags = { Base = true } } },
+          Sub = { extends = 'Base', sealed = true },
+        },
+        parent = 'Frame',
+        legal = { Base = true },
+      },
+      ['does not require any path from a root to parent itself'] = {
+        xml = {
+          Frame = { contents = { tags = { Leaf = true } } },
+          Leaf = {},
+          Unreachable = { contents = { tags = { Leaf = true } } },
+        },
+        parent = 'Unreachable',
+        legal = { Leaf = true },
+      },
+    }
 
-    it('accepts a tag reachable only via its extends chain', function()
-      local xml = {
-        Base = {},
-        Frame = { contents = { tags = { Base = true } } },
-        Sub = { extends = 'Base' },
-      }
-      assert.is_true(xmlcontainment.legalChildren(xml, 'Frame').Sub)
-    end)
-
-    it('sealed stops extends-chain climbing', function()
-      local xml = {
-        Base = {},
-        Frame = { contents = { tags = { Base = true } } },
-        Sub = { extends = 'Base', sealed = true },
-      }
-      assert.is_nil(xmlcontainment.legalChildren(xml, 'Frame').Sub)
-    end)
-
-    it('doesn\'t require any path from a root to `parent` itself', function()
-      local xml = {
-        Frame = { contents = { tags = { Leaf = true } } },
-        Leaf = {},
-        Unreachable = { contents = { tags = { Leaf = true } } },
-      }
-      assert.is_true(xmlcontainment.legalChildren(xml, 'Unreachable').Leaf)
-    end)
+    for name, case in pairs(cases) do
+      it(name, function()
+        assert.same(case.legal, xmlcontainment.legalChildren(case.xml, case.parent))
+      end)
+    end
   end)
 end)
