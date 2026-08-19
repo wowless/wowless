@@ -1,8 +1,8 @@
-return function(datalua, eventqueue, intrinsics, templates, uiobjecttypes, xmleval)
+return function(datalua, events, intrinsics, templates, uiobjecttypes, xmleval)
   local GetIntrinsic = intrinsics.Get
   local HasType = uiobjecttypes.Has
   local InheritsFrom = uiobjecttypes.InheritsFrom
-  local QueueEvent = eventqueue.QueueEvent
+  local SendEvent = events.SendEvent
 
   local function CreateFrame(type, name, parent, templateNames, id)
     local ltype = string.lower(type)
@@ -13,7 +13,7 @@ return function(datalua, eventqueue, intrinsics, templates, uiobjecttypes, xmlev
     local nested = intrinsicEntry and intrinsicEntry.nested
     if nested or not HasType(basetype) or not InheritsFrom(basetype, 'frame') then
       if nested or datalua.config.runtime.warners[ltype] then
-        QueueEvent('LUA_WARNING', 'Unknown frame type: ' .. type)
+        SendEvent('LUA_WARNING', 'Unknown frame type: ' .. type)
       end
       error('CreateFrame: Unknown frame type \'' .. type .. '\'', 0)
     end

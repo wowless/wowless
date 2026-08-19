@@ -10,6 +10,7 @@ return function(
   datalua,
   envmodule,
   eventqueue,
+  events,
   intrinsics,
   log,
   loglevel,
@@ -25,6 +26,7 @@ return function(
   local genv = envmodule.genv
   local secureenv = envmodule.secureenv
   local QueueEvent = eventqueue.QueueEvent
+  local SendEvent = events.SendEvent
   local parseXml = xml
   local bindings = bindingsmodule.bindings
   local securemixins = {}
@@ -248,7 +250,7 @@ return function(
     if not scripts.HasScript(obj, script.type) then
       local prefix = datalua.config.runtime.bareScriptWarning and '' or 'Frame '
       local fmt = prefix .. '%s: Unknown script element %s'
-      QueueEvent('LUA_WARNING', fmt:format(uiobjecttypes.GetObjectType(obj), script.name))
+      SendEvent('LUA_WARNING', fmt:format(uiobjecttypes.GetObjectType(obj), script.name))
       return
     end
     local fn

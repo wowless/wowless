@@ -4,7 +4,7 @@ addons:
 api:
   deps:
     datalua:
-    eventqueue:
+    events:
     intrinsics:
     templates:
     uiobjecttypes:
@@ -193,6 +193,7 @@ xmleval:
     datalua:
     env:
     eventqueue:
+    events:
     intrinsics:
     log:
     loglevel:

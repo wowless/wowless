@@ -9,7 +9,7 @@
   <Script>
     for _, cfg in pairs(_G.WowlessData.Templates) do
       if cfg.warning then
-        table.insert(Wowless.ExpectedLuaWarnings, cfg.warning)
+        table.insert(Wowless.ExpectedNextFrame, cfg.warning)
       end
     end
   </Script>
@@ -25,7 +25,7 @@
   <Script>
     for tag, def in Wowless.sorted(_G.WowlessData.Xml) do
       if def.impl == 'unknowntype' then
-        table.insert(Wowless.ExpectedLuaWarnings, 'Unknown frame type: ' .. tag)
+        table.insert(Wowless.ExpectedNextFrame, 'Unknown frame type: ' .. tag)
       end
     end
   </Script>
@@ -216,14 +216,14 @@
     </Scripts>
   </WowlessIntrinsicType>
   <Script>
-    table.insert(Wowless.ExpectedLuaWarnings, 'Unrecognized XML: WowlessIntrinsicType')
-    table.insert(Wowless.ExpectedLuaWarnings, 'Unrecognized XML: Scripts')
-    table.insert(Wowless.ExpectedLuaWarnings, 'Unrecognized XML: OnLoad')
-    table.insert(Wowless.ExpectedLuaWarnings, 'Unrecognized XML: WowlessIntrinsicType')
-    table.insert(Wowless.ExpectedLuaWarnings, 'Unrecognized XML attribute: name')
-    table.insert(Wowless.ExpectedLuaWarnings, 'Unrecognized XML attribute: intrinsic')
-    table.insert(Wowless.ExpectedLuaWarnings, 'Unrecognized XML: Scripts')
-    table.insert(Wowless.ExpectedLuaWarnings, 'Unrecognized XML: OnLoad')
+    table.insert(Wowless.ExpectedNextFrame, 'Unrecognized XML: WowlessIntrinsicType')
+    table.insert(Wowless.ExpectedNextFrame, 'Unrecognized XML: Scripts')
+    table.insert(Wowless.ExpectedNextFrame, 'Unrecognized XML: OnLoad')
+    table.insert(Wowless.ExpectedNextFrame, 'Unrecognized XML: WowlessIntrinsicType')
+    table.insert(Wowless.ExpectedNextFrame, 'Unrecognized XML attribute: name')
+    table.insert(Wowless.ExpectedNextFrame, 'Unrecognized XML attribute: intrinsic')
+    table.insert(Wowless.ExpectedNextFrame, 'Unrecognized XML: Scripts')
+    table.insert(Wowless.ExpectedNextFrame, 'Unrecognized XML: OnLoad')
   </Script>
   <Include file='evenmoreintrinsic.xml' />
   <Script>
@@ -974,7 +974,7 @@
   </Frame>
   <Script>
     table.insert(
-      Wowless.ExpectedLuaWarnings,
+      Wowless.ExpectedNextFrame,
       "Unknown: Couldn't find relative frame: thisisdefinitelynotsomethingin_G"
     )
   </Script>
@@ -985,7 +985,7 @@
     </Anchors>
   </Frame>
   <Script>
-    table.insert(Wowless.ExpectedLuaWarnings, 'WowlessSelfAnchor: anchored to itself: WowlessSelfAnchor')
+    table.insert(Wowless.ExpectedNextFrame, 'WowlessSelfAnchor: anchored to itself: WowlessSelfAnchor')
   </Script>
   <Script>
     Wowless.check1(0, WowlessSelfAnchor:GetNumPoints())
@@ -1055,7 +1055,7 @@
     </Frames>
   </Frame>
   <Script>
-    table.insert(Wowless.ExpectedLuaWarnings, 'Unknown: anchored to itself: anyoldgarbage$parent.foo')
+    table.insert(Wowless.ExpectedNextFrame, 'Unknown: anchored to itself: anyoldgarbage$parent.foo')
   </Script>
 
   <Frame>

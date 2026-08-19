@@ -72,19 +72,10 @@ local content = {
       -- UIObjectApis.Actor.scripts, which only has this product's own
       -- valid names -- issue #864) so a name invalid here still gets
       -- classified, not silently skipped.
-      --
-      -- Names unrecognized on this product warn while WowlessActorTemplate's
-      -- own <Scripts> tag above is structurally parsed, before this <Script>
-      -- ever runs; names recognized but unsupported by Actor only warn once
-      -- CreateActor below actually binds them. Both classes of warning are
-      -- queued (next-frame LUA_WARNINGs), so the two groups land in
-      -- ActualLuaWarnings in that same chronological order, not interleaved
-      -- by name -- collect the CreateActor-triggered ones separately and
-      -- register them after the call, instead of inline per-name.
       return ([[
+        CreateFrame('ModelScene'):CreateActor(nil, 'WowlessActorTemplate')
         local allNames = {%s}
         local expected = {}
-        local scriptWarnings = {}
         for _, k in ipairs(allNames) do
           local v = _G.WowlessData.UIObjectApis.Actor.scripts[k]
           if v then
@@ -92,14 +83,10 @@ local content = {
           elseif _G.WowlessData.ScriptTypes[k] then
             local prefix = _G.WowlessData.Config.runtime.bareScriptWarning and '' or 'Frame '
             local fmt = prefix .. 'ModelSceneActor: Unknown script element %%s'
-            table.insert(scriptWarnings, fmt:format(k))
+            table.insert(_G.Wowless.ExpectedLuaWarnings, fmt:format(k))
           else
-            table.insert(_G.Wowless.ExpectedLuaWarnings, 'Unrecognized XML: ' .. k)
+            table.insert(_G.Wowless.ExpectedNextFrame, 'Unrecognized XML: ' .. k)
           end
-        end
-        CreateFrame('ModelScene'):CreateActor(nil, 'WowlessActorTemplate')
-        for _, w in ipairs(scriptWarnings) do
-          table.insert(_G.Wowless.ExpectedLuaWarnings, w)
         end
         assertEquals(table.concat(expected, ','), table.concat(WowlessLog, ','))
       ]]):format(table.concat(names, ','))
