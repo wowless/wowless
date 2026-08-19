@@ -5,52 +5,34 @@ describe('util', function()
   describe('assertRecursivelyEqual', function()
     local f = assert(env.assertRecursivelyEqual)
 
-    it('returns nil on equal numbers', function()
-      assert.Nil(f(3, 3))
-    end)
-
-    it('returns nil on equal strings', function()
-      assert.Nil(f('foo', 'foo'))
-    end)
-
-    it('returns nil on equal booleans', function()
-      assert.Nil(f(true, true))
-      assert.Nil(f(false, false))
-    end)
-
-    it('returns nil on nils', function()
-      assert.Nil(f(nil, nil))
-    end)
-
-    it('throws on unequal numbers', function()
-      assert.errors(function()
-        f(3, 4)
+    local equalCases = {
+      numbers = { value = 3 },
+      strings = { value = 'foo' },
+      ['true booleans'] = { value = true },
+      ['false booleans'] = { value = false },
+      nils = { value = nil },
+    }
+    for name, case in pairs(equalCases) do
+      it('returns nil on equal ' .. name, function()
+        assert.Nil(f(case.value, case.value))
       end)
-    end)
+    end
 
-    it('throws on unequal strings', function()
-      assert.errors(function()
-        f('foo', 'bar')
+    local unequalCases = {
+      numbers = { a = 3, b = 4 },
+      strings = { a = 'foo', b = 'bar' },
+      booleans = { a = true, b = false },
+      ['types (number/boolean)'] = { a = 34, b = false },
+      ['types (string/nil)'] = { a = 'foo', b = nil },
+      ['types (string/table)'] = { a = 'bar', b = {} },
+    }
+    for name, case in pairs(unequalCases) do
+      it('throws on unequal ' .. name, function()
+        assert.errors(function()
+          f(case.a, case.b)
+        end)
       end)
-    end)
-
-    it('throws on unequal booleans', function()
-      assert.errors(function()
-        f(true, false)
-      end)
-    end)
-
-    it('throws on unequal types', function()
-      assert.errors(function()
-        f(34, false)
-      end)
-      assert.errors(function()
-        f('foo', nil)
-      end)
-      assert.errors(function()
-        f('bar', {})
-      end)
-    end)
+    end
 
     it('returns empty table on empty tables', function()
       assert.same({}, f({}, {}))
