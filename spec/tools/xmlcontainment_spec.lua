@@ -183,4 +183,51 @@ describe('xmlcontainment', function()
       end)
     end
   end)
+
+  describe('legalChildren', function()
+    local cases = {
+      ['accepts a directly declared child'] = {
+        xml = {
+          Frame = { contents = { tags = { Leaf = true } } },
+          Leaf = {},
+          Other = {},
+        },
+        parent = 'Frame',
+        legal = { Leaf = true },
+      },
+      ['accepts a tag reachable only via its extends chain'] = {
+        xml = {
+          Base = {},
+          Frame = { contents = { tags = { Base = true } } },
+          Sub = { extends = 'Base' },
+        },
+        parent = 'Frame',
+        legal = { Base = true, Sub = true },
+      },
+      ['sealed stops extends-chain climbing'] = {
+        xml = {
+          Base = {},
+          Frame = { contents = { tags = { Base = true } } },
+          Sub = { extends = 'Base', sealed = true },
+        },
+        parent = 'Frame',
+        legal = { Base = true },
+      },
+      ['does not require any path from a root to parent itself'] = {
+        xml = {
+          Frame = { contents = { tags = { Leaf = true } } },
+          Leaf = {},
+          Unreachable = { contents = { tags = { Leaf = true } } },
+        },
+        parent = 'Unreachable',
+        legal = { Leaf = true },
+      },
+    }
+
+    for name, case in pairs(cases) do
+      it(name, function()
+        assert.same(case.legal, xmlcontainment.legalChildren(case.xml, case.parent))
+      end)
+    end
+  end)
 end)

@@ -1,8 +1,33 @@
--- Derives XML tag containment from an xml.yaml-shaped schema (contents.tags/
--- extends, including the `sealed` flag), mirroring the containment check
--- wowless/modules/xml.lua's runtime parser uses (see also tools/prep.lua's
--- xmlflat). Pure structural computation over that graph -- no notion of
--- rendering, tests, or any particular caller's vocabulary.
+-- Derives XML tag containment queries (chains/legalChildren/roots) from an
+-- xml.yaml-shaped schema, on top of wowless/xmlutil.lua's shared
+-- supertypesOf/childrenOf -- the same relation tools/prep.lua's xmlflat
+-- flattens for wowless/modules/xml.lua's runtime parser to consume. Pure
+-- structural computation over that graph -- no notion of rendering, tests,
+-- or any particular caller's vocabulary.
+local xmlutil = require('wowless.xmlutil')
+local supertypesOf = xmlutil.supertypesOf
+local childrenOf = xmlutil.childrenOf
+
+-- Every tag in `xml` that's a legal direct child of `parent`, per the
+-- same relation `chains` walks: `child` qualifies if any of its own
+-- supertypes (see supertypesOf) is one of `parent`'s accepted content
+-- supertypes (see childrenOf). Pure structural query, no notion of
+-- reachability from any particular root -- a tag can be a legal child of
+-- `parent` here even if there's no path to `parent` itself from
+-- anywhere.
+local function legalChildren(xml, parent)
+  local allowed = childrenOf(xml, parent)
+  local result = {}
+  for tag in pairs(xml) do
+    for st in pairs(supertypesOf(xml, tag)) do
+      if allowed[st] then
+        result[tag] = true
+        break
+      end
+    end
+  end
+  return result
+end
 
 -- The shortest chain of tags from `root` down to every tag reachable, as a
 -- descendant, from it -- e.g. chains(xml, 'Frame').Slider = { 'Frame',
@@ -22,37 +47,6 @@
 -- tag is recorded in the second return value, `ambiguous`, the set of tags
 -- with no unique shortest path -- callers can then decide whether/when
 -- that matters for their own purposes.
-local function supertypesOf(xml, tag)
-  local st = { [tag:lower()] = true }
-  local t = xml[tag]
-  local climbing = not t.sealed
-  while t.extends do
-    if climbing then
-      st[t.extends:lower()] = true
-    end
-    t = xml[t.extends]
-    climbing = climbing and not t.sealed
-  end
-  return st
-end
-
-local function childrenOf(xml, tag)
-  local kids = {}
-  local t = xml[tag]
-  while true do
-    if t.contents and t.contents ~= 'text' then
-      for kid in pairs(t.contents.tags) do
-        kids[kid:lower()] = true
-      end
-    end
-    if not t.extends then
-      break
-    end
-    t = xml[t.extends]
-  end
-  return kids
-end
-
 local function chains(xml, root, preferParent)
   local supertypes, children = {}, {}
   for tag in pairs(xml) do
@@ -152,5 +146,6 @@ end
 
 return {
   chains = chains,
+  legalChildren = legalChildren,
   roots = roots,
 }

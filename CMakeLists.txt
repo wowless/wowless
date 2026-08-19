@@ -406,6 +406,9 @@ lua2c(wowlessutil luapath=p wowless.mixin=c
       wowless.util=${CMAKE_CURRENT_SOURCE_DIR}/wowless/util.lua)
 target_sources(wowlessutil PRIVATE wowless/mixin.c)
 
+lua2c(wowlessxmlutil
+      wowless.xmlutil=${CMAKE_CURRENT_SOURCE_DIR}/wowless/xmlutil.lua)
+
 set(cjson_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/vendor/cjson)
 lua2c(luacjson cjson=c)
 target_sources(
@@ -517,6 +520,7 @@ add_lua_executable(
   toolsenum
   toolsutil
   wowlessutil
+  wowlessxmlutil
   wowlessyaml)
 
 foreach(product ${products})
@@ -649,6 +653,7 @@ add_lua_executable(
   toolsenum
   toolsutil
   toolsxmlcontainment
+  wowlessxmlutil
   wowlessyaml)
 
 foreach(product ${products})
@@ -1043,6 +1048,7 @@ add_lua_executable(
   wowlesssqlite
   wowlesstoc
   wowlessutil
+  wowlessxmlutil
   wowlessyaml)
 
 add_lua_executable(

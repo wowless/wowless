@@ -39,6 +39,8 @@ type:
                       stringlist: tag
                 warnsoninvalid:
                   type: flag
+      containmentwarnings:
+        type: flag
       contents:
         type:
           taggedunion:

@@ -1532,6 +1532,7 @@ Translation:
   impl:
     uiobject: Translation
 Ui:
+  containmentwarnings: true
   contents:
     tags:
       Actor:
