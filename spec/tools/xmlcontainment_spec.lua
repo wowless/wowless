@@ -5,7 +5,6 @@ describe('xmlcontainment', function()
     ['finds a direct child'] = {
       xml = { Frame = { contents = { tags = { Leaf = true } } }, Leaf = {} },
       chains = { Frame = { 'Frame' }, Leaf = { 'Frame', 'Leaf' } },
-      roots = { Frame = true },
     },
     ['walks through wrapper tags to find the shortest chain'] = {
       xml = {
@@ -18,7 +17,6 @@ describe('xmlcontainment', function()
         Wrap = { 'Frame', 'Wrap' },
         Leaf = { 'Frame', 'Wrap', 'Leaf' },
       },
-      roots = { Frame = true },
     },
     ['matches a tag reachable only via its extends chain'] = {
       xml = {
@@ -31,12 +29,10 @@ describe('xmlcontainment', function()
         Base = { 'Frame', 'Base' },
         Sub = { 'Frame', 'Sub' },
       },
-      roots = { Frame = true },
     },
     ['does not mark a tag reachable if nothing accepts it'] = {
       xml = { Frame = { contents = { tags = {} } }, Orphan = {} },
       chains = { Frame = { 'Frame' } },
-      roots = { Frame = true, Orphan = true },
     },
     ['sealed stops extends-chain climbing for containment purposes'] = {
       xml = {
@@ -45,7 +41,6 @@ describe('xmlcontainment', function()
         Sub = { extends = 'Base', sealed = true },
       },
       chains = { Frame = { 'Frame' }, Base = { 'Frame', 'Base' } },
-      roots = { Frame = true, Sub = true },
     },
     ['sealed does not affect a tag reachable via its own declared contents'] = {
       xml = {
@@ -54,16 +49,6 @@ describe('xmlcontainment', function()
         Sub = { extends = 'Base', sealed = true },
       },
       chains = { Frame = { 'Frame' }, Sub = { 'Frame', 'Sub' } },
-      roots = { Frame = true, Base = true },
-    },
-    ['excludes a virtual tag even though nothing names it as a child'] = {
-      xml = {
-        Abstract = { virtual = true },
-        Frame = { contents = { tags = { Leaf = true } } },
-        Leaf = {},
-      },
-      chains = { Frame = { 'Frame' }, Leaf = { 'Frame', 'Leaf' } },
-      roots = { Frame = true },
     },
     ['does not mark a tag ambiguous when a second route is strictly deeper'] = {
       xml = {
@@ -80,7 +65,6 @@ describe('xmlcontainment', function()
         B = { 'Frame', 'C', 'B' },
         Leaf = { 'Frame', 'A', 'Leaf' },
       },
-      roots = { Frame = true },
     },
     ['preferParent resolves a tie without marking it ambiguous'] = {
       xml = {
@@ -96,7 +80,6 @@ describe('xmlcontainment', function()
         B = { 'Frame', 'B' },
         Leaf = { 'Frame', 'B', 'Leaf' },
       },
-      roots = { Frame = true },
     },
     ['preferParent does not affect tags with only one candidate'] = {
       xml = {
@@ -110,17 +93,13 @@ describe('xmlcontainment', function()
         A = { 'Frame', 'A' },
         Leaf = { 'Frame', 'A', 'Leaf' },
       },
-      roots = { Frame = true },
     },
-    -- Neither tag is a root here: each is only ever legal nested inside the
-    -- other, so this schema fragment alone has no valid document root.
     ['rediscovers the root tag as an ordinary two-hop descendant of itself'] = {
       xml = {
         Frame = { contents = { tags = { Wrap = true } } },
         Wrap = { contents = { tags = { Frame = true } } },
       },
       chains = { Frame = { 'Frame', 'Wrap', 'Frame' }, Wrap = { 'Frame', 'Wrap' } },
-      roots = {},
     },
   }
 
@@ -129,7 +108,6 @@ describe('xmlcontainment', function()
       local chains, ambiguous = xmlcontainment.chains(case.xml, 'Frame', case.preferParent)
       assert.same(case.chains, chains)
       assert.same({}, ambiguous)
-      assert.same(case.roots, xmlcontainment.roots(case.xml))
     end)
   end
 
@@ -150,5 +128,57 @@ describe('xmlcontainment', function()
     assert.same({ Leaf = true }, ambiguous)
     local actual = table.concat(chains.Leaf, '/')
     assert.same(true, actual == 'Frame/A/Leaf' or actual == 'Frame/B/Leaf')
+  end)
+
+  describe('roots', function()
+    -- roots() has none of chains()'s BFS/shortest-path/tie-breaking
+    -- machinery -- it's a plain per-tag "is this ever a legal child of
+    -- anything" predicate, so it needs far fewer cases to cover: direct
+    -- containment, extends-based substitution, sealed truncating that
+    -- substitution, virtual overriding reachability, and the everything-
+    -- nests-in-everything-else edge case where no tag is a root at all.
+    local rootsCases = {
+      ['finds a tag nothing else ever admits as a child'] = {
+        xml = { Frame = { contents = { tags = { Leaf = true } } }, Leaf = {} },
+        roots = { Frame = true },
+      },
+      ['excludes a tag reachable only via its extends chain'] = {
+        xml = {
+          Base = {},
+          Frame = { contents = { tags = { Base = true } } },
+          Sub = { extends = 'Base' },
+        },
+        roots = { Frame = true },
+      },
+      ['sealed keeps a tag a root despite its base being accepted elsewhere'] = {
+        xml = {
+          Base = {},
+          Frame = { contents = { tags = { Base = true } } },
+          Sub = { extends = 'Base', sealed = true },
+        },
+        roots = { Frame = true, Sub = true },
+      },
+      ['excludes a virtual tag even though nothing names it as a child'] = {
+        xml = {
+          Abstract = { virtual = true },
+          Frame = { contents = { tags = { Leaf = true } } },
+          Leaf = {},
+        },
+        roots = { Frame = true },
+      },
+      ['has no roots when every tag is only ever legal nested in another'] = {
+        xml = {
+          Frame = { contents = { tags = { Wrap = true } } },
+          Wrap = { contents = { tags = { Frame = true } } },
+        },
+        roots = {},
+      },
+    }
+
+    for name, case in pairs(rootsCases) do
+      it(name, function()
+        assert.same(case.roots, xmlcontainment.roots(case.xml))
+      end)
+    end
   end)
 end)
