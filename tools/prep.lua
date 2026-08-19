@@ -384,63 +384,74 @@ end)()
 local xmlflat = (function()
   local tree = xmlraw
   local newtree = {}
+  -- A virtual tag (e.g. LayoutFrame) is an abstract type real tags extend,
+  -- never a concrete element a real client accepts written out on its own
+  -- -- so it gets no entry here at all. xml.lua's run() looks tag names up
+  -- in this table alone (lang[tname], with no fallback to xmlraw), so
+  -- omitting it here is enough on its own to make a literal <LayoutFrame/>
+  -- fall into the same "Unrecognized XML" handling as any other tag name
+  -- it's never heard of -- no separate check needed. Climbing below reads
+  -- `tree` (xmlraw), not `newtree`, so a real tag extending a virtual one
+  -- still resolves its own flattened supertypes/children/attributes fine.
   for k, v in pairs(tree) do
-    local attrs = {}
-    local warnsinvalid = {}
-    for ak, av in pairs(v.attributes or {}) do
-      attrs[ak] = av.type
-      if av.warnsoninvalid then
-        warnsinvalid[ak] = true
-      end
-    end
-    local kids = {}
-    local text = false
-    if v.contents == 'text' then
-      text = true
-    elseif v.contents then
-      for kid in pairs(v.contents.tags) do
-        local key = kid:lower()
-        assert(not kids[key], kid .. ' is already a child of ' .. k)
-        kids[key] = true
-      end
-    end
-    -- supertypes stops climbing at a sealed tag: extends is type inheritance,
-    -- not substitution-group membership, and some tags share a type with a
-    -- generic tag while only being legal in a narrower spot -- issue #778
-    local supertypes = { [k:lower()] = true }
-    local climbing = not v.sealed
-    local t = v
-    while t.extends do
-      if climbing then
-        supertypes[t.extends:lower()] = true
-      end
-      t = tree[t.extends]
-      climbing = climbing and not t.sealed
-      for ak, av in pairs(t.attributes or {}) do
+    if not v.virtual then
+      local attrs = {}
+      local warnsinvalid = {}
+      for ak, av in pairs(v.attributes or {}) do
         attrs[ak] = av.type
         if av.warnsoninvalid then
           warnsinvalid[ak] = true
         end
       end
-      if t.contents == 'text' then
+      local kids = {}
+      local text = false
+      if v.contents == 'text' then
         text = true
-      elseif t.contents then
-        for kid in pairs(t.contents.tags) do
+      elseif v.contents then
+        for kid in pairs(v.contents.tags) do
           local key = kid:lower()
           assert(not kids[key], kid .. ' is already a child of ' .. k)
           kids[key] = true
         end
       end
+      -- supertypes stops climbing at a sealed tag: extends is type inheritance,
+      -- not substitution-group membership, and some tags share a type with a
+      -- generic tag while only being legal in a narrower spot -- issue #778
+      local supertypes = { [k:lower()] = true }
+      local climbing = not v.sealed
+      local t = v
+      while t.extends do
+        if climbing then
+          supertypes[t.extends:lower()] = true
+        end
+        t = tree[t.extends]
+        climbing = climbing and not t.sealed
+        for ak, av in pairs(t.attributes or {}) do
+          attrs[ak] = av.type
+          if av.warnsoninvalid then
+            warnsinvalid[ak] = true
+          end
+        end
+        if t.contents == 'text' then
+          text = true
+        elseif t.contents then
+          for kid in pairs(t.contents.tags) do
+            local key = kid:lower()
+            assert(not kids[key], kid .. ' is already a child of ' .. k)
+            kids[key] = true
+          end
+        end
+      end
+      assert(not v.sealed or v.extends, k .. ' is sealed but has no extends')
+      assert(not text or #kids == 0, 'both text and kids on ' .. k)
+      newtree[k:lower()] = {
+        attributes = attrs,
+        children = kids,
+        supertypes = supertypes,
+        text = text,
+        warnsinvalid = warnsinvalid,
+      }
     end
-    assert(not v.sealed or v.extends, k .. ' is sealed but has no extends')
-    assert(not text or #kids == 0, 'both text and kids on ' .. k)
-    newtree[k:lower()] = {
-      attributes = attrs,
-      children = kids,
-      supertypes = supertypes,
-      text = text,
-      warnsinvalid = warnsinvalid,
-    }
   end
   return newtree
 end)()
