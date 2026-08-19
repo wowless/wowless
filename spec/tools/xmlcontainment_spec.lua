@@ -183,4 +183,44 @@ describe('xmlcontainment', function()
       end)
     end
   end)
+
+  describe('legalChildren', function()
+    it('accepts a directly declared child', function()
+      local xml = {
+        Frame = { contents = { tags = { Leaf = true } } },
+        Leaf = {},
+        Other = {},
+      }
+      local legal = xmlcontainment.legalChildren(xml, 'Frame')
+      assert.is_true(legal.Leaf)
+      assert.is_nil(legal.Other)
+    end)
+
+    it('accepts a tag reachable only via its extends chain', function()
+      local xml = {
+        Base = {},
+        Frame = { contents = { tags = { Base = true } } },
+        Sub = { extends = 'Base' },
+      }
+      assert.is_true(xmlcontainment.legalChildren(xml, 'Frame').Sub)
+    end)
+
+    it('sealed stops extends-chain climbing', function()
+      local xml = {
+        Base = {},
+        Frame = { contents = { tags = { Base = true } } },
+        Sub = { extends = 'Base', sealed = true },
+      }
+      assert.is_nil(xmlcontainment.legalChildren(xml, 'Frame').Sub)
+    end)
+
+    it('doesn\'t require any path from a root to `parent` itself', function()
+      local xml = {
+        Frame = { contents = { tags = { Leaf = true } } },
+        Leaf = {},
+        Unreachable = { contents = { tags = { Leaf = true } } },
+      }
+      assert.is_true(xmlcontainment.legalChildren(xml, 'Unreachable').Leaf)
+    end)
+  end)
 end)
