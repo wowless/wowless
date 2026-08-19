@@ -15,22 +15,34 @@ describe('xml', function()
       -- ButtonText/NormalFont share a type (FontString/Font) with generic
       -- layered regions but belong to Button's own substitution group, not
       -- the generic one -- see issue #778.
-      it('rejects a Button-only child nested in an unrelated container', function()
-        local _, warnings = parse('<Ui><SimpleHTML><ButtonText/></SimpleHTML></Ui>')
-        assert(hasWarning(warnings, 'buttontext cannot be a child of simplehtml'))
-      end)
-      it('rejects a Button-only child at the document root', function()
-        local _, warnings = parse('<Ui><NormalFont/></Ui>')
-        assert(hasWarning(warnings, 'normalfont cannot be a child of ui'))
-      end)
-      it('still accepts those tags under their real parent', function()
-        local _, warnings = parse('<Ui><Button><ButtonText/><NormalFont/></Button></Ui>')
-        assert.False(hasWarning(warnings, 'cannot be a child of'))
-      end)
-      it('still accepts a plain FontString wherever generic layered regions go', function()
-        local _, warnings = parse('<Ui><SimpleHTML><FontString/></SimpleHTML></Ui>')
-        assert.False(hasWarning(warnings, 'cannot be a child of'))
-      end)
+      local cases = {
+        ['rejects a Button-only child nested in an unrelated container'] = {
+          xml = '<Ui><SimpleHTML><ButtonText/></SimpleHTML></Ui>',
+          pattern = 'buttontext cannot be a child of simplehtml',
+          expectWarning = true,
+        },
+        ['rejects a Button-only child at the document root'] = {
+          xml = '<Ui><NormalFont/></Ui>',
+          pattern = 'normalfont cannot be a child of ui',
+          expectWarning = true,
+        },
+        ['still accepts those tags under their real parent'] = {
+          xml = '<Ui><Button><ButtonText/><NormalFont/></Button></Ui>',
+          pattern = 'cannot be a child of',
+          expectWarning = false,
+        },
+        ['still accepts a plain FontString wherever generic layered regions go'] = {
+          xml = '<Ui><SimpleHTML><FontString/></SimpleHTML></Ui>',
+          pattern = 'cannot be a child of',
+          expectWarning = false,
+        },
+      }
+      for name, case in pairs(cases) do
+        it(name, function()
+          local _, warnings = parse(case.xml)
+          assert.same(case.expectWarning, hasWarning(warnings, case.pattern))
+        end)
+      end
     end)
   end
 end)
