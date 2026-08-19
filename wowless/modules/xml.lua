@@ -117,7 +117,7 @@ return function(datalua, eventqueue)
         end
       end
     end
-    local function run(e, tn, tk)
+    local function run(e, tn, tk, warncontainment)
       if e._type ~= 'ELEMENT' then
         error('invalid xml type ' .. e._type .. ' on child of ' .. tn)
       end
@@ -133,6 +133,9 @@ return function(datalua, eventqueue)
       end
       if not extends then
         table.insert(warnings, tname .. ' cannot be a child of ' .. tn)
+        if warncontainment then
+          warnUnrecognized(e)
+        end
         return nil
       end
       local resultAttrs = {}
@@ -181,7 +184,7 @@ return function(datalua, eventqueue)
           if kid._type == 'TEXT' then
             table.insert(warnings, 'ignoring text kid of ' .. tname)
           else
-            local newkid = run(kid, tname, ty.children)
+            local newkid = run(kid, tname, ty.children, ty.containmentwarnings)
             if newkid then
               table.insert(resultKids, newkid)
             end
@@ -204,7 +207,7 @@ return function(datalua, eventqueue)
         }
       end
     end
-    local result = run(root, 'toplevel', rootTags)
+    local result = run(root, 'toplevel', rootTags, lang.ui and lang.ui.containmentwarnings)
     return result, warnings
   end
 
