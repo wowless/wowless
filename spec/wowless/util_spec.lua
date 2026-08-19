@@ -20,21 +20,25 @@ describe('util', function()
   describe('readfile', function()
     local readfile = util.readfile
     local path = require('path')
-    it('reads filenames with no path parts', function()
-      assert.Not.Nil(readfile('README.md'))
-    end)
+    local readme = readfile('README.md')
+
+    local readmeCases = {
+      ['filenames with no path parts'] = 'README.md',
+      ['relative paths with dot slash'] = './././././README.md',
+      ['absolute paths'] = path.join(path.currentdir(), 'README.md'),
+      ['filenames case insensitively'] = 'readme.md',
+    }
+    for name, p in pairs(readmeCases) do
+      it('reads ' .. name, function()
+        assert.same(readme, readfile(p))
+      end)
+    end
+
     it('reads relative paths', function()
-      assert.Not.Nil(readfile('spec/wowless/util_spec.lua'))
+      local absolute = readfile(path.join(path.currentdir(), 'spec/wowless/util_spec.lua'))
+      assert.same(absolute, readfile('spec/wowless/util_spec.lua'))
     end)
-    it('reads relative paths with dot slash', function()
-      assert.Not.Nil(readfile('./././././README.md'))
-    end)
-    it('reads absolute paths', function()
-      assert.Not.Nil(readfile(path.join(path.currentdir(), 'README.md')))
-    end)
-    it('reads filenames case insensitively', function()
-      assert.Not.Nil(readfile('readme.md'))
-    end)
+
     it('does not just stop at a good filename', function()
       assert.has.errors(function()
         readfile('README.md/foo')
