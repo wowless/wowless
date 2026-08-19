@@ -129,4 +129,41 @@ describe('xmlcontainment', function()
     local actual = table.concat(chains.Leaf, '/')
     assert.same(true, actual == 'Frame/A/Leaf' or actual == 'Frame/B/Leaf')
   end)
+
+  describe('roots', function()
+    it('finds a tag nothing else ever admits as a child', function()
+      local xml = {
+        Frame = { contents = { tags = { Leaf = true } } },
+        Leaf = {},
+      }
+      assert.same({ Frame = true }, xmlcontainment.roots(xml))
+    end)
+
+    it('excludes a tag reachable only via its extends chain', function()
+      local xml = {
+        Base = {},
+        Frame = { contents = { tags = { Base = true } } },
+        Sub = { extends = 'Base' },
+      }
+      assert.same({ Frame = true }, xmlcontainment.roots(xml))
+    end)
+
+    it('excludes a virtual tag even though nothing names it as a child', function()
+      local xml = {
+        Abstract = { virtual = true },
+        Frame = { contents = { tags = { Leaf = true } } },
+        Leaf = {},
+      }
+      assert.same({ Frame = true }, xmlcontainment.roots(xml))
+    end)
+
+    it('sealed stops extends-chain climbing, so the child stays a root', function()
+      local xml = {
+        Base = {},
+        Frame = { contents = { tags = { Base = true } } },
+        Sub = { extends = 'Base', sealed = true },
+      }
+      assert.same({ Frame = true, Sub = true }, xmlcontainment.roots(xml))
+    end)
+  end)
 end)

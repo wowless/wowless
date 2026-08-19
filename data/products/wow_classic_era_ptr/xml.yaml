@@ -188,6 +188,7 @@ Bindings:
       Binding:
       ModifiedClick:
   impl: transparent
+  root: true
 BlingTexture:
   extends: Texture
   sealed: true
@@ -1548,6 +1549,7 @@ Ui:
       ScopedModifier:
       Script:
   impl: transparent
+  root: true
 UnitPositionFrame:
   extends: Frame
   impl:
@@ -1556,6 +1558,7 @@ Value:
   contents:
     tags:
       AbsValue:
+  virtual: true
 ViewInsets:
   attributes:
     bottom:

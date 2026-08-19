@@ -1,9 +1,11 @@
 describe('xml', function()
+  local structuralRoots = require('tools.xmlcontainment').roots
   for _, p in ipairs(require('build.data.products')) do
     describe(p, function()
       local xml = require('build.data.products.' .. p .. '.xml')
       local uiobjects = require('build.data.products.' .. p .. '.uiobjects')
       local scripttypes = require('build.data.products.' .. p .. '.scripttypes')
+      local roots = structuralRoots(xml)
       local methods = {}
       local fields = {}
       local function flatten(k)
@@ -44,6 +46,13 @@ describe('xml', function()
       end
       for name, elem in pairs(xml) do
         describe(name, function()
+          -- `root` on an xml.yaml tag is only meaningful if it exactly
+          -- tracks whether the tag is actually never a legal child of any
+          -- other tag -- see wowless/modules/xml.lua's use of the `root`
+          -- flag to build its document-root whitelist.
+          it('root flag matches structural root-ness', function()
+            assert.equals(not not elem.root, not not roots[name])
+          end)
           if elem.extends == 'ScriptType' then
             it('is in scripttypes', function()
               assert.Not.Nil(scripttypes[name])

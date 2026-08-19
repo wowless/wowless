@@ -84,6 +84,8 @@ type:
         type:
           taggedunion:
             late: tag
+      root:
+        type: flag
       sealed:
         type: flag
       virtual:
