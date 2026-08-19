@@ -384,15 +384,6 @@ end)()
 local xmlflat = (function()
   local tree = xmlraw
   local newtree = {}
-  -- A virtual tag (e.g. LayoutFrame) is an abstract type real tags extend,
-  -- never a concrete element a real client accepts written out on its own
-  -- -- so it gets no entry here at all. xml.lua's run() looks tag names up
-  -- in this table alone (lang[tname], with no fallback to xmlraw), so
-  -- omitting it here is enough on its own to make a literal <LayoutFrame/>
-  -- fall into the same "Unrecognized XML" handling as any other tag name
-  -- it's never heard of -- no separate check needed. Climbing below reads
-  -- `tree` (xmlraw), not `newtree`, so a real tag extending a virtual one
-  -- still resolves its own flattened supertypes/children/attributes fine.
   for k, v in pairs(tree) do
     if not v.virtual then
       local attrs = {}
