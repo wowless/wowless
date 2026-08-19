@@ -353,14 +353,54 @@ local function computeCandidates(p, case)
   return candidates
 end
 
--- Builds the WowlessGeneratedXmlTests root shared by the 'templatexml' file
--- (rendered to text as templates.xml) and the templates ptablemap entry.
--- Also appends one non-virtual, self-closing instantiation per XML tag
--- whose impl is 'unknowntype' on this product (see xmleval.lua's
--- loadElement, issue #863) as a sibling top-level element, since those
--- don't need any of the wrapper/nesting machinery above -- just
--- somewhere in WowlessData's own XML for xmleval to process before
--- test.xml runs.
+-- Every tag known to this product's xml.yaml that's *not* a legal direct
+-- child of `parentTag`, per the schema's own containment relation (see
+-- xmlcontainment.legalChildren). A real client warns "Unrecognized
+-- XML: %s" for a rejected tag exactly the same way it does for a tag
+-- it's never heard of at all (see wowless/modules/xml.lua's
+-- containmentwarnings-flagged run(), issue #877), so that's the only
+-- outcome to check here.
+--
+-- Deliberately one-sided: a rejected tag is turned away before any
+-- attribute or content processing even starts (see run()'s early
+-- return on a failed containment check), so nothing here ever risks
+-- reaching object-creation code. Legal children are left comprehensively
+-- covered by spec/wowless/modules/xml_spec.lua's own sweep instead,
+-- which calls wowless/modules/xml.lua directly (never creating a live
+-- object either way, legal or not) rather than through this addon's
+-- full xmleval/uiobjectloader pipeline -- accepted candidates here would
+-- actually get instantiated for real, and some (e.g. a singleton like
+-- Minimap, or FontFamily's own hand-dispatched required substructure)
+-- aren't safe to self-close blindly. Since none of that applies to
+-- rejected candidates, this stays a simple one-sided list for now.
+--
+-- Reusable as-is for any `parentTag`, not just 'Ui': the only thing
+-- specific to testing Ui's own children right now is the single call
+-- site below, which places candidates as bare top-level siblings since
+-- Ui itself needs no wrapping. Testing a deeper tag's children would
+-- additionally need nesting the candidates inside an established,
+-- already-verified-legal chain down to that tag -- left for later.
+local function illegalChildren(p, parentTag)
+  local xml = perproduct(p, 'xml')
+  local legal = xmlcontainment.legalChildren(xml, parentTag)
+  local tags = {}
+  for tag in sorted(xml) do
+    if not legal[tag] then
+      table.insert(tags, tag)
+    end
+  end
+  return tags
+end
+
+-- Builds the WowlessGeneratedXmlTests root shared by the 'templatexml'
+-- file (rendered to text as templates.xml) and the templates ptablemap
+-- entry. Also appends, as sibling top-level elements (no wrapper/nesting
+-- machinery needed, since these all attach directly under the
+-- document's own <Ui> root):
+--   - one non-virtual, self-closing instantiation per XML tag whose impl
+--     is 'unknowntype' on this product (see xmleval.lua's loadElement,
+--     issue #863);
+--   - one self-closing instantiation per illegalChildren(p, 'Ui') tag.
 local function buildTemplatesXml(p, uiobjectApis)
   local root = { name = 'WowlessGeneratedXmlTests', tag = 'Frame' }
   for _, case in ipairs(discoverCases(p)) do
@@ -375,6 +415,9 @@ local function buildTemplatesXml(p, uiobjectApis)
       table.insert(ui, { tag = name })
     end
   end
+  for _, tag in ipairs(illegalChildren(p, 'Ui')) do
+    table.insert(ui, { tag = tag })
+  end
   return renderXml(ui)
 end
 
@@ -384,6 +427,13 @@ local ptablemap = {
   end,
   config = function(p)
     return 'Config', perproduct(p, 'config')
+  end,
+  containment = function(p)
+    local warnings = {}
+    for _, tag in ipairs(illegalChildren(p, 'Ui')) do
+      table.insert(warnings, 'Unrecognized XML: ' .. tag)
+    end
+    return 'ContainmentWarnings', warnings
   end,
   cvars = function(p)
     return 'CVars', perproduct(p, 'cvars')
