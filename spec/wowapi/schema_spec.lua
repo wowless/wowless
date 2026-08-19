@@ -12,107 +12,103 @@ describe('schema', function()
           assert.same(emsg, msg)
         end
     end)()
+    local function runCase(schema, case)
+      if case.error == nil then
+        accept(schema, case.value)
+      else
+        reject(schema, case.value, case.error)
+      end
+    end
     describe('boolean', function()
-      it('rejects nil', function()
-        reject('boolean', nil, 'want boolean, got nil')
-      end)
-      it('rejects numbers', function()
-        reject('boolean', 42, 'want boolean, got number')
-      end)
-      it('accepts booleans', function()
-        accept('boolean', true)
-      end)
-      it('rejects strings', function()
-        reject('boolean', 'foo', 'want boolean, got string')
-      end)
-      it('rejects tables', function()
-        reject('boolean', {}, 'want boolean, got table')
-      end)
+      local cases = {
+        ['rejects nil'] = { value = nil, error = 'want boolean, got nil' },
+        ['rejects numbers'] = { value = 42, error = 'want boolean, got number' },
+        ['accepts booleans'] = { value = true },
+        ['rejects strings'] = { value = 'foo', error = 'want boolean, got string' },
+        ['rejects tables'] = { value = {}, error = 'want boolean, got table' },
+      }
+      for name, case in pairs(cases) do
+        it(name, function()
+          runCase('boolean', case)
+        end)
+      end
     end)
     describe('number', function()
-      it('rejects nil', function()
-        reject('number', nil, 'want number, got nil')
-      end)
-      it('accepts numbers', function()
-        accept('number', 42)
-      end)
-      it('rejects booleans', function()
-        reject('number', true, 'want number, got boolean')
-      end)
-      it('rejects strings', function()
-        reject('number', 'foo', 'want number, got string')
-      end)
-      it('rejects tables', function()
-        reject('number', {}, 'want number, got table')
-      end)
+      local cases = {
+        ['rejects nil'] = { value = nil, error = 'want number, got nil' },
+        ['accepts numbers'] = { value = 42 },
+        ['rejects booleans'] = { value = true, error = 'want number, got boolean' },
+        ['rejects strings'] = { value = 'foo', error = 'want number, got string' },
+        ['rejects tables'] = { value = {}, error = 'want number, got table' },
+      }
+      for name, case in pairs(cases) do
+        it(name, function()
+          runCase('number', case)
+        end)
+      end
     end)
     describe('string', function()
-      it('rejects nil', function()
-        reject('string', nil, 'want string, got nil')
-      end)
-      it('rejects numbers', function()
-        reject('string', 42, 'want string, got number')
-      end)
-      it('rejects booleans', function()
-        reject('string', true, 'want string, got boolean')
-      end)
-      it('accepts strings', function()
-        accept('string', 'foo')
-      end)
-      it('rejects tables', function()
-        reject('string', {}, 'want string, got table')
-      end)
+      local cases = {
+        ['rejects nil'] = { value = nil, error = 'want string, got nil' },
+        ['rejects numbers'] = { value = 42, error = 'want string, got number' },
+        ['rejects booleans'] = { value = true, error = 'want string, got boolean' },
+        ['accepts strings'] = { value = 'foo' },
+        ['rejects tables'] = { value = {}, error = 'want string, got table' },
+      }
+      for name, case in pairs(cases) do
+        it(name, function()
+          runCase('string', case)
+        end)
+      end
     end)
     describe('table', function()
-      it('rejects nil', function()
-        reject('table', nil, 'want table, got nil')
-      end)
-      it('rejects numbers', function()
-        reject('table', 42, 'want table, got number')
-      end)
-      it('rejects booleans', function()
-        reject('table', true, 'want table, got boolean')
-      end)
-      it('rejects strings', function()
-        reject('table', 'foo', 'want table, got string')
-      end)
-      it('accepts tables', function()
-        accept('table', {})
-      end)
+      local cases = {
+        ['rejects nil'] = { value = nil, error = 'want table, got nil' },
+        ['rejects numbers'] = { value = 42, error = 'want table, got number' },
+        ['rejects booleans'] = { value = true, error = 'want table, got boolean' },
+        ['rejects strings'] = { value = 'foo', error = 'want table, got string' },
+        ['accepts tables'] = { value = {} },
+      }
+      for name, case in pairs(cases) do
+        it(name, function()
+          runCase('table', case)
+        end)
+      end
     end)
     describe('flag', function()
-      it('accepts true', function()
-        accept('flag', true)
-      end)
-      it('rejects false', function()
-        reject('flag', false, 'want flag (boolean true), got boolean (false)')
-      end)
-      it('rejects nil', function()
-        reject('flag', nil, 'want flag (boolean true), got nil')
-      end)
-      it('rejects numbers', function()
-        reject('flag', 42, 'want flag (boolean true), got number')
-      end)
-      it('rejects strings', function()
-        reject('flag', 'true', 'want flag (boolean true), got string')
-      end)
-      it('rejects tables', function()
-        reject('flag', {}, 'want flag (boolean true), got table')
-      end)
-      it('works in optional record fields', function()
+      local cases = {
+        ['accepts true'] = { value = true },
+        ['rejects false'] = { value = false, error = 'want flag (boolean true), got boolean (false)' },
+        ['rejects nil'] = { value = nil, error = 'want flag (boolean true), got nil' },
+        ['rejects numbers'] = { value = 42, error = 'want flag (boolean true), got number' },
+        ['rejects strings'] = { value = 'true', error = 'want flag (boolean true), got string' },
+        ['rejects tables'] = { value = {}, error = 'want flag (boolean true), got table' },
+      }
+      for name, case in pairs(cases) do
+        it(name, function()
+          runCase('flag', case)
+        end)
+      end
+      describe('in optional record fields', function()
         local ty = {
           record = {
             optionalFlag = { type = 'flag' },
             other = { type = 'string' },
           },
         }
-        accept(ty, { other = 'test' })
-        accept(ty, { optionalFlag = true, other = 'test' })
-        reject(
-          ty,
-          { optionalFlag = false, other = 'test' },
-          { optionalFlag = 'want flag (boolean true), got boolean (false)' }
-        )
+        local recordCases = {
+          ['works when omitted'] = { value = { other = 'test' } },
+          ['works when true'] = { value = { optionalFlag = true, other = 'test' } },
+          ['rejects when false'] = {
+            value = { optionalFlag = false, other = 'test' },
+            error = { optionalFlag = 'want flag (boolean true), got boolean (false)' },
+          },
+        }
+        for name, case in pairs(recordCases) do
+          it(name, function()
+            runCase(ty, case)
+          end)
+        end
       end)
     end)
     describe('record', function()
@@ -129,54 +125,50 @@ describe('schema', function()
           },
         },
       }
-      it('rejects nil', function()
-        reject(ty, nil, 'expected table')
-      end)
-      it('rejects numbers', function()
-        reject(ty, 42, 'expected table')
-      end)
-      it('rejects booleans', function()
-        reject(ty, true, 'expected table')
-      end)
-      it('rejects strings', function()
-        reject(ty, 'foo', 'expected table')
-      end)
-      it('accepts empty tables', function()
-        accept(ty, {})
-      end)
-      it('accepts all fields', function()
-        accept(ty, {
-          foo = 'foo',
-          bar = 'bar',
-          baz = { quux = 'baz.quux' },
-        })
-      end)
-      it('rejects extra fields', function()
-        reject(ty, {
-          foo = 'foo',
-          bar = 'bar',
-          baz = { quux = 'baz.quux' },
-          extra = 'bad',
-        }, { extra = 'unknown field' })
-      end)
-      it('rejects extra nested fields', function()
-        reject(ty, {
-          foo = 'foo',
-          bar = 'bar',
-          baz = { quux = 'baz.quux', extra = 'bad' },
-        }, { baz = { extra = 'unknown field' } })
-      end)
-      it('handles required fields', function()
+      local cases = {
+        ['rejects nil'] = { value = nil, error = 'expected table' },
+        ['rejects numbers'] = { value = 42, error = 'expected table' },
+        ['rejects booleans'] = { value = true, error = 'expected table' },
+        ['rejects strings'] = { value = 'foo', error = 'expected table' },
+        ['accepts empty tables'] = { value = {} },
+        ['accepts all fields'] = {
+          value = { foo = 'foo', bar = 'bar', baz = { quux = 'baz.quux' } },
+        },
+        ['rejects extra fields'] = {
+          value = { foo = 'foo', bar = 'bar', baz = { quux = 'baz.quux' }, extra = 'bad' },
+          error = { extra = 'unknown field' },
+        },
+        ['rejects extra nested fields'] = {
+          value = { foo = 'foo', bar = 'bar', baz = { quux = 'baz.quux', extra = 'bad' } },
+          error = { baz = { extra = 'unknown field' } },
+        },
+      }
+      for name, case in pairs(cases) do
+        it(name, function()
+          runCase(ty, case)
+        end)
+      end
+      describe('required fields', function()
         local rty = {
           record = {
             foo = { type = 'string' },
             bar = { required = true, type = 'string' },
           },
         }
-        reject(rty, {}, { bar = 'missing required field' })
-        reject(rty, { foo = 'foo' }, { bar = 'missing required field' })
-        accept(rty, { bar = 'bar' })
-        accept(rty, { foo = 'foo', bar = 'bar' })
+        local requiredCases = {
+          ['rejects when absent'] = { value = {}, error = { bar = 'missing required field' } },
+          ['rejects when other fields present'] = {
+            value = { foo = 'foo' },
+            error = { bar = 'missing required field' },
+          },
+          ['accepts when present alone'] = { value = { bar = 'bar' } },
+          ['accepts with other fields too'] = { value = { foo = 'foo', bar = 'bar' } },
+        }
+        for name, case in pairs(requiredCases) do
+          it(name, function()
+            runCase(rty, case)
+          end)
+        end
       end)
     end)
     describe('mapof', function()
@@ -197,26 +189,19 @@ describe('schema', function()
           },
         },
       }
-      it('rejects nil', function()
-        reject(mstr, nil, 'expected table')
-        reject(mnest, nil, 'expected table')
-      end)
-      it('rejects numbers', function()
-        reject(mstr, 42, 'expected table')
-        reject(mnest, 42, 'expected table')
-      end)
-      it('rejects booleans', function()
-        reject(mstr, true, 'expected table')
-        reject(mnest, true, 'expected table')
-      end)
-      it('rejects strings', function()
-        reject(mstr, 'foo', 'expected table')
-        reject(mnest, 'foo', 'expected table')
-      end)
-      it('accepts empty tables', function()
-        accept(mstr, {})
-        accept(mnest, {})
-      end)
+      local cases = {
+        ['rejects nil'] = { value = nil, error = 'expected table' },
+        ['rejects numbers'] = { value = 42, error = 'expected table' },
+        ['rejects booleans'] = { value = true, error = 'expected table' },
+        ['rejects strings'] = { value = 'foo', error = 'expected table' },
+        ['accepts empty tables'] = { value = {} },
+      }
+      for name, case in pairs(cases) do
+        it(name, function()
+          runCase(mstr, case)
+          runCase(mnest, case)
+        end)
+      end
       it('rejects non-string keys', function()
         reject(mstr, { [42] = 'cow' }, { [42] = { key = 'want string, got number' } })
         reject(mnest, { moo = { [42] = 'cow' } }, { moo = { value = { [42] = { key = 'want string, got number' } } } })
@@ -234,26 +219,19 @@ describe('schema', function()
     describe('sequenceof', function()
       local sstr = { sequenceof = 'string' }
       local snest = { sequenceof = { sequenceof = 'string' } }
-      it('rejects nil', function()
-        reject(sstr, nil, 'expected table')
-        reject(snest, nil, 'expected table')
-      end)
-      it('rejects numbers', function()
-        reject(sstr, 42, 'expected table')
-        reject(snest, 42, 'expected table')
-      end)
-      it('rejects booleans', function()
-        reject(sstr, true, 'expected table')
-        reject(snest, true, 'expected table')
-      end)
-      it('rejects strings', function()
-        reject(sstr, 'foo', 'expected table')
-        reject(snest, 'foo', 'expected table')
-      end)
-      it('accepts empty tables', function()
-        accept(sstr, {})
-        accept(snest, {})
-      end)
+      local cases = {
+        ['rejects nil'] = { value = nil, error = 'expected table' },
+        ['rejects numbers'] = { value = 42, error = 'expected table' },
+        ['rejects booleans'] = { value = true, error = 'expected table' },
+        ['rejects strings'] = { value = 'foo', error = 'expected table' },
+        ['accepts empty tables'] = { value = {} },
+      }
+      for name, case in pairs(cases) do
+        it(name, function()
+          runCase(sstr, case)
+          runCase(snest, case)
+        end)
+      end
       it('rejects string keys', function()
         reject(sstr, { moo = 'cow' }, { moo = 'expected number' })
         reject(snest, { { moo = 'cow' } }, { { moo = 'expected number' } })
@@ -273,40 +251,39 @@ describe('schema', function()
     end)
     describe('literal', function()
       local ty = { literal = 'foo' }
-      it('rejects nil', function()
-        reject(ty, nil, 'string literal mismatch')
-      end)
-      it('rejects numbers', function()
-        reject(ty, 42, 'string literal mismatch')
-      end)
-      it('rejects booleans', function()
-        reject(ty, true, 'string literal mismatch')
-      end)
-      it('accepts matched string', function()
-        accept(ty, 'foo')
-        reject(ty, 'bar', 'string literal mismatch')
-      end)
-      it('rejects tables', function()
-        reject(ty, {}, 'string literal mismatch')
-      end)
+      local cases = {
+        ['rejects nil'] = { value = nil, error = 'string literal mismatch' },
+        ['rejects numbers'] = { value = 42, error = 'string literal mismatch' },
+        ['rejects booleans'] = { value = true, error = 'string literal mismatch' },
+        ['accepts matched string'] = { value = 'foo' },
+        ['rejects mismatched string'] = { value = 'bar', error = 'string literal mismatch' },
+        ['rejects tables'] = { value = {}, error = 'string literal mismatch' },
+      }
+      for name, case in pairs(cases) do
+        it(name, function()
+          runCase(ty, case)
+        end)
+      end
     end)
     describe('setof', function()
-      it('accepts empty set', function()
-        accept({ setof = 'string' }, {})
-      end)
-      it('accepts non empty set', function()
-        accept({ setof = 'string' }, { a = {}, b = {} })
-      end)
-      it('rejects wrong keys', function()
-        reject({ setof = 'string' }, { [42] = {} }, { [42] = { key = 'want string, got number' } })
-      end)
-      it('rejects wrong values', function()
-        reject(
-          { setof = 'string' },
-          { a = 42, b = { 99 } },
-          { a = { value = 'bad value' }, b = { value = 'bad value' } }
-        )
-      end)
+      local ty = { setof = 'string' }
+      local cases = {
+        ['accepts empty set'] = { value = {} },
+        ['accepts non empty set'] = { value = { a = {}, b = {} } },
+        ['rejects wrong keys'] = {
+          value = { [42] = {} },
+          error = { [42] = { key = 'want string, got number' } },
+        },
+        ['rejects wrong values'] = {
+          value = { a = 42, b = { 99 } },
+          error = { a = { value = 'bad value' }, b = { value = 'bad value' } },
+        },
+      }
+      for name, case in pairs(cases) do
+        it(name, function()
+          runCase(ty, case)
+        end)
+      end
     end)
     describe('taggedunion', function()
       local ty = {
@@ -318,24 +295,22 @@ describe('schema', function()
         },
       }
       local err = 'expected one of {bar, foo}'
-      it('accepts one', function()
-        accept(ty, { bar = 42 })
-      end)
-      it('accepts the other', function()
-        accept(ty, { foo = { 'baz', 'quux' } })
-      end)
-      it('rejects non-table', function()
-        reject(ty, 42, err)
-      end)
-      it('rejects empty', function()
-        reject(ty, {}, 'missing element, ' .. err)
-      end)
-      it('rejects multiple', function()
-        reject(ty, { bar = 42, foo = { 'baz', 'quux' } }, 'multiple elements, ' .. err)
-      end)
-      it('rejects bad keys', function()
-        reject(ty, { baz = 99 }, 'bad key, ' .. err)
-      end)
+      local cases = {
+        ['accepts one'] = { value = { bar = 42 } },
+        ['accepts the other'] = { value = { foo = { 'baz', 'quux' } } },
+        ['rejects non-table'] = { value = 42, error = err },
+        ['rejects empty'] = { value = {}, error = 'missing element, ' .. err },
+        ['rejects multiple'] = {
+          value = { bar = 42, foo = { 'baz', 'quux' } },
+          error = 'multiple elements, ' .. err,
+        },
+        ['rejects bad keys'] = { value = { baz = 99 }, error = 'bad key, ' .. err },
+      }
+      for name, case in pairs(cases) do
+        it(name, function()
+          runCase(ty, case)
+        end)
+      end
     end)
   end)
 end)
