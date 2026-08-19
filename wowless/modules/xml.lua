@@ -121,9 +121,6 @@ return function(datalua, eventqueue)
         warnUnrecognized(e)
         return nil
       end
-      if ty.virtual then
-        error(tname .. ' is virtual and cannot be instantiated')
-      end
       local extends = false
       for k in pairs(tk) do
         extends = extends or ty.supertypes[k]
