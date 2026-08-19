@@ -20,6 +20,7 @@ end
 local computeEnumMeta = require('tools.enum').computeMeta
 local prettywrite = require('tools.prettywrite')
 local Mixin = require('wowless.util').mixin
+local xmlutil = require('wowless.xmlutil')
 local sorted = require('pl.tablex').sort
 
 local product = args.product
@@ -394,45 +395,25 @@ local xmlflat = (function()
           warnsinvalid[ak] = true
         end
       end
-      local kids = {}
-      local text = false
-      if v.contents == 'text' then
-        text = true
-      elseif v.contents then
-        for kid in pairs(v.contents.tags) do
-          local key = kid:lower()
-          assert(not kids[key], kid .. ' is already a child of ' .. k)
-          kids[key] = true
-        end
-      end
-      -- supertypes stops climbing at a sealed tag: extends is type inheritance,
-      -- not substitution-group membership, and some tags share a type with a
-      -- generic tag while only being legal in a narrower spot -- issue #778
-      local supertypes = { [k:lower()] = true }
-      local climbing = not v.sealed
       local t = v
       while t.extends do
-        if climbing then
-          supertypes[t.extends:lower()] = true
-        end
         t = tree[t.extends]
-        climbing = climbing and not t.sealed
         for ak, av in pairs(t.attributes or {}) do
           attrs[ak] = av.type
           if av.warnsoninvalid then
             warnsinvalid[ak] = true
           end
         end
-        if t.contents == 'text' then
-          text = true
-        elseif t.contents then
-          for kid in pairs(t.contents.tags) do
-            local key = kid:lower()
-            assert(not kids[key], kid .. ' is already a child of ' .. k)
-            kids[key] = true
-          end
-        end
       end
+      -- children/supertypes climb the same extends chain (stopping
+      -- supertypes-climbing at a sealed tag: extends is type inheritance,
+      -- not substitution-group membership, and some tags share a type with
+      -- a generic tag while only being legal in a narrower spot -- issue
+      -- #778) via wowless/xmlutil.lua, the same shared implementation
+      -- tools/xmlcontainment.lua's other build-time queries use directly,
+      -- rather than a second, independently-maintained copy of it here.
+      local kids, text = xmlutil.childrenOf(tree, k)
+      local supertypes = xmlutil.supertypesOf(tree, k)
       assert(not v.sealed or v.extends, k .. ' is sealed but has no extends')
       assert(not text or #kids == 0, 'both text and kids on ' .. k)
       newtree[k:lower()] = {

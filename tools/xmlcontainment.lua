@@ -1,46 +1,12 @@
--- Derives XML tag containment from an xml.yaml-shaped schema (contents.tags/
--- extends, including the `sealed` flag), mirroring the containment check
--- wowless/modules/xml.lua's runtime parser uses (see also tools/prep.lua's
--- xmlflat). Pure structural computation over that graph -- no notion of
--- rendering, tests, or any particular caller's vocabulary.
-
--- A tag's own name plus every ancestor reached by climbing `extends`,
--- lowercased -- climbing stops (without adding that ancestor) once a
--- `sealed` tag is passed, since a sealed tag's own extends-ancestors no
--- longer count as this tag's supertypes for containment purposes.
-local function supertypesOf(xml, tag)
-  local st = { [tag:lower()] = true }
-  local t = xml[tag]
-  local climbing = not t.sealed
-  while t.extends do
-    if climbing then
-      st[t.extends:lower()] = true
-    end
-    t = xml[t.extends]
-    climbing = climbing and not t.sealed
-  end
-  return st
-end
-
--- The set of (lowercased) supertype names `tag` accepts as direct
--- content, flattened across its own `extends` chain (a tag's declared
--- contents are inherited by whatever extends it, same as attributes).
-local function childrenOf(xml, tag)
-  local kids = {}
-  local t = xml[tag]
-  while true do
-    if t.contents and t.contents ~= 'text' then
-      for kid in pairs(t.contents.tags) do
-        kids[kid:lower()] = true
-      end
-    end
-    if not t.extends then
-      break
-    end
-    t = xml[t.extends]
-  end
-  return kids
-end
+-- Derives XML tag containment queries (chains/legalChildren/roots) from an
+-- xml.yaml-shaped schema, on top of wowless/xmlutil.lua's shared
+-- supertypesOf/childrenOf -- the same relation tools/prep.lua's xmlflat
+-- flattens for wowless/modules/xml.lua's runtime parser to consume. Pure
+-- structural computation over that graph -- no notion of rendering, tests,
+-- or any particular caller's vocabulary.
+local xmlutil = require('wowless.xmlutil')
+local supertypesOf = xmlutil.supertypesOf
+local childrenOf = xmlutil.childrenOf
 
 -- Every tag in `xml` that's a legal direct child of `parent`, per the
 -- same relation `chains` walks: `child` qualifies if any of its own
