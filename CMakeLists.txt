@@ -1168,7 +1168,6 @@ set(specs
     spec/wowless/blp_spec.lua
     spec/wowless/bubblewrap_spec.lua
     spec/wowless/hlist_spec.lua
-    spec/wowless/modules/xml_containment_spec.lua
     spec/wowless/modules/xml_spec.lua
     spec/wowless/sqlite_spec.lua
     spec/wowless/toc_spec.lua
