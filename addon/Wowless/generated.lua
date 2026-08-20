@@ -631,10 +631,39 @@ G.testsuite.generated = function()
     return tests
   end
 
+  -- gentest.lua's discoverFrameTags applies this exact same filter (impl a
+  -- non-singleton uiobject that is-a Frame) to decide which XML tags get a
+  -- <Frames>-wrapped, parentKey'd-by-lowercased-tag-name instantiation in
+  -- templates.xml; mirroring it here means the addon can locate and check
+  -- each one without a dedicated generated data file.
+  local function frametags()
+    local tests = {}
+    for tag, def in pairs(_G.WowlessData.Xml) do
+      local uiobject = type(def.impl) == 'table' and def.impl.uiobject
+      local api = uiobject and _G.WowlessData.UIObjectApis[uiobject]
+      if api and not api.singleton and api.isa.Frame then
+        local key = tag:lower()
+        tests[key] = function()
+          local obj = _G.WowlessGeneratedXmlTests[key]
+          return {
+            isframe = function()
+              assertEquals(true, obj:IsObjectType('Frame'))
+            end,
+            objtype = function()
+              assertEquals(api.objtype, obj:GetObjectType())
+            end,
+          }
+        end
+      end
+    end
+    return tests
+  end
+
   return {
     apiNamespaces = apiNamespaces,
     cvars = cvars,
     events = events,
+    frametags = frametags,
     globalApis = globalApis,
     globals = globals,
     impltests = impltests,
