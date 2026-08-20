@@ -1,6 +1,8 @@
-return function(eventqueue, region, scripts, time, visibility, xmleval)
+return function(eventqueue, region, scripts, time, visibility, warningqueue, xmleval, xmlwarningqueue)
   local Advance = time.Advance
   local DrainEvents = eventqueue.DrainEvents
+  local DrainWarnings = warningqueue.DrainWarnings
+  local DumpXmlWarnings = xmlwarningqueue.Dump
   local frames = xmleval.frames
   local GetRect = region.GetRect
   local IsVisible = visibility.IsVisible
@@ -8,6 +10,8 @@ return function(eventqueue, region, scripts, time, visibility, xmleval)
 
   local function NextFrame(elapsed)
     DrainEvents()
+    DumpXmlWarnings()
+    DrainWarnings()
     Advance(elapsed)
     for frame in frames:entries() do
       if IsVisible(frame) then

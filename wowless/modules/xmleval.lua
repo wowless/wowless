@@ -9,8 +9,6 @@ return function(
   cstubs,
   datalua,
   envmodule,
-  eventqueue,
-  events,
   intrinsics,
   log,
   loglevel,
@@ -21,12 +19,14 @@ return function(
   uiobjects,
   uiobjecttypes,
   visibility,
-  xml
+  warningqueue,
+  xml,
+  xmlwarningqueue
 )
   local genv = envmodule.genv
   local secureenv = envmodule.secureenv
-  local QueueEvent = eventqueue.QueueEvent
-  local SendEvent = events.SendEvent
+  local QueueWarning = warningqueue.QueueWarning
+  local QueueXmlWarning = xmlwarningqueue.QueueXmlWarning
   local parseXml = xml
   local bindings = bindingsmodule.bindings
   local securemixins = {}
@@ -250,7 +250,7 @@ return function(
     if not scripts.HasScript(obj, script.type) then
       local prefix = datalua.config.runtime.bareScriptWarning and '' or 'Frame '
       local fmt = prefix .. '%s: Unknown script element %s'
-      SendEvent('LUA_WARNING', fmt:format(uiobjecttypes.GetObjectType(obj), script.name))
+      QueueWarning(fmt:format(uiobjecttypes.GetObjectType(obj), script.name))
       return
     end
     local fn
@@ -333,7 +333,7 @@ return function(
   -- enableSourceLocationLookup cvar is on. The addon forces it off
   -- (init.lua) so both sides can just compare bare messages.
   local function anchorWarning(parent, reason, value)
-    QueueEvent('LUA_WARNING', ('%s: %s: %s'):format(parent.name or 'Unknown', reason, value))
+    QueueXmlWarning(('%s: %s: %s'):format(parent.name or 'Unknown', reason, value))
   end
 
   local xmllang = {
@@ -741,7 +741,7 @@ return function(
           -- intrinsic fine, but refuses to instantiate it, the same way it
           -- warns on an unknown frame type.
           if intrinsicEntry and intrinsicEntry.nested then
-            QueueEvent('LUA_WARNING', 'Unknown frame type: ' .. intrinsicEntry.displayName)
+            QueueXmlWarning('Unknown frame type: ' .. intrinsicEntry.displayName)
             return nil
           end
           -- issue #863: this tag parses (structurally valid per xml.yaml)
@@ -749,7 +749,7 @@ return function(
           -- client refuses to instantiate it, the same way it does an
           -- unknown frame type passed to CreateFrame.
           if unknownType then
-            QueueEvent('LUA_WARNING', 'Unknown frame type: ' .. e.name)
+            QueueXmlWarning('Unknown frame type: ' .. e.name)
             return nil
           end
           local name = e.attr.name
