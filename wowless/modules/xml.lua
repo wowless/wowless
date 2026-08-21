@@ -41,8 +41,8 @@ local function xml2dom(xmlstr)
   return stack[1]._children[1]
 end
 
-return function(datalua, eventqueue)
-  local QueueEvent = eventqueue.QueueEvent
+return function(datalua, xmlwarningqueue)
+  local QueueXmlWarning = xmlwarningqueue.QueueXmlWarning
   local lang = datalua.xmlflat
   local rootTags = {}
   for k, v in pairs(lang) do
@@ -107,9 +107,9 @@ return function(datalua, eventqueue)
     -- children and attributes rather than dropping the whole subtree
     -- silently, flagging each one individually too.
     local function warnUnrecognized(e)
-      QueueEvent('LUA_WARNING', ('Unrecognized XML: %s'):format(e._name))
+      QueueXmlWarning(('Unrecognized XML: %s'):format(e._name))
       for _, k in ipairs(e._attr) do
-        QueueEvent('LUA_WARNING', ('Unrecognized XML attribute: %s'):format(k))
+        QueueXmlWarning(('Unrecognized XML attribute: %s'):format(k))
       end
       for _, kid in ipairs(e._children or {}) do
         if kid._type == 'ELEMENT' then
@@ -149,7 +149,7 @@ return function(datalua, eventqueue)
           local vv = dispatch(attributeTypes, attr, v)
           if vv == nil then
             if ty.warnsinvalid[an] then
-              QueueEvent('LUA_WARNING', ('%s %s: Invalid %s value: %s'):format(e._name, nameOf(e), k, v))
+              QueueXmlWarning(('%s %s: Invalid %s value: %s'):format(e._name, nameOf(e), k, v))
             end
             table.insert(warnings, 'attribute ' .. k .. ' has invalid value ' .. v)
           else

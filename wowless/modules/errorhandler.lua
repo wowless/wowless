@@ -1,5 +1,5 @@
-return function(eventqueue, uiobjects, uiobjecttypes)
-  local QueueEvent = eventqueue.QueueEvent
+return function(uiobjects, uiobjecttypes, warningqueue)
+  local QueueWarning = warningqueue.QueueWarning
   local UserData = uiobjects.UserData
   local GetObjectType = uiobjecttypes.GetObjectType
   local currentFn
@@ -42,7 +42,7 @@ return function(eventqueue, uiobjects, uiobjecttypes)
       msg = SubstituteObjectName(msg)
     end
     if not pcall(currentFn, msg) then
-      QueueEvent('LUA_WARNING', msg)
+      QueueWarning(msg)
     end
   end)
 

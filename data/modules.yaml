@@ -4,10 +4,10 @@ addons:
 api:
   deps:
     datalua:
-    events:
     intrinsics:
     templates:
     uiobjecttypes:
+    warningqueue:
     xmleval:
 atlas:
   deps:
@@ -49,9 +49,9 @@ env:
   deps:
 errorhandler:
   deps:
-    eventqueue:
     uiobjects:
     uiobjecttypes:
+    warningqueue:
 errors:
   deps:
     log:
@@ -112,7 +112,9 @@ mainloop:
     scripts:
     time:
     visibility:
+    warningqueue:
     xmleval:
+    xmlwarningqueue:
 maxErrors:
   root:
     default: '0'
@@ -182,18 +184,19 @@ units:
 visibility:
   deps:
     scripts:
+warningqueue:
+  deps:
+    events:
 xml:
   deps:
     datalua:
-    eventqueue:
+    xmlwarningqueue:
 xmleval:
   deps:
     bindings:
     cstubs:
     datalua:
     env:
-    eventqueue:
-    events:
     intrinsics:
     log:
     loglevel:
@@ -204,4 +207,9 @@ xmleval:
     uiobjects:
     uiobjecttypes:
     visibility:
+    warningqueue:
     xml:
+    xmlwarningqueue:
+xmlwarningqueue:
+  deps:
+    warningqueue:
