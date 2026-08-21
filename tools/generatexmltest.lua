@@ -85,7 +85,7 @@ local content = {
             local fmt = prefix .. 'ModelSceneActor: Unknown script element %%s'
             table.insert(_G.Wowless.ExpectedLuaWarnings, fmt:format(k))
           else
-            table.insert(_G.Wowless.ExpectedNextFrame, 'Unrecognized XML: ' .. k)
+            table.insert(_G.Wowless.ExpectedXmlWarnings, 'Unrecognized XML: ' .. k)
           end
         end
         assertEquals(table.concat(expected, ','), table.concat(WowlessLog, ','))
