@@ -18,9 +18,9 @@
     issue #863: gentest.lua's templates.xml also forces a non-virtual
     instantiation of every XML tag whose impl is 'unknowntype' on this
     product (as top-level siblings after the Templates candidates
-    above, so their warnings queue after the ones just registered);
-    register their expected warnings, in the same order, derived from
-    WowlessData.Xml (the same source those instantiations came from).
+    above); register their expected warnings, in the same order,
+    derived from WowlessData.Xml (the same source those instantiations
+    came from).
   -->
   <Script>
     for tag, def in Wowless.sorted(_G.WowlessData.Xml) do
