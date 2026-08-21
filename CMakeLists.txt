@@ -656,26 +656,36 @@ add_lua_executable(
   wowlessxmlutil
   wowlessyaml)
 
+# A generated WowlessBatchN LoadOnDemand addon is capacity for one gentest.lua
+# warning batch (see warningBatchSize/warningBatchItems there); this is the one
+# place that declares how many of them exist. gentest.lua fails the build if a
+# real item list ever needs more batches than this provides, so raising it here
+# is always safe.
+set(warningbatchcount 4)
+
 foreach(product ${products})
   set(d ${CMAKE_CURRENT_BINARY_DIR}/products/${product}/WowlessData)
   set(staging ${CMAKE_CURRENT_BINARY_DIR}/products/${product}/gentest-staging)
   file(MAKE_DIRECTORY ${d} ${staging})
   set(outs)
-  macro(gentest file name)
+  macro(gentestto destdir file name)
     set(staged ${staging}/${file})
-    set(out ${d}/${file})
+    set(out ${destdir}/${file})
     list(APPEND outs ${out})
     add_custom_command(
       OUTPUT ${staged}
-      COMMAND gentest ${product} ${name} ${staged}
+      COMMAND gentest ${product} ${name} ${staged} ${ARGN}
       WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
       DEPFILE ${staged}.d
       DEPENDS gentest)
     add_custom_command(
       OUTPUT ${out}
-      COMMAND ${CMAKE_COMMAND} -DSRC=${staged} -DDST_DIR=${d} -P
+      COMMAND ${CMAKE_COMMAND} -DSRC=${staged} -DDST_DIR=${destdir} -P
               ${CMAKE_CURRENT_SOURCE_DIR}/cmake/copy_executable.cmake
       DEPENDS ${staged})
+  endmacro()
+  macro(gentest file name)
+    gentestto(${d} ${file} ${name})
   endmacro()
   gentest(WowlessData.toc toc)
   gentest(build.lua build)
@@ -693,7 +703,16 @@ foreach(product ${products})
   gentest(templates.lua templates)
   gentest(templates.xml templatexml)
   gentest(uiobjectapis.lua uiobjectapis)
+  gentest(warningbatchsize.lua warningbatchsize)
   gentest(xml.lua xml)
+  foreach(i RANGE 1 ${warningbatchcount})
+    set(bd ${CMAKE_CURRENT_BINARY_DIR}/products/${product}/WowlessBatch${i})
+    file(MAKE_DIRECTORY ${bd})
+    gentestto(${bd} WowlessBatch${i}.toc warningbatchtoc --batch=${i}
+              --batchcount=${warningbatchcount})
+    gentestto(${bd} WowlessBatch${i}.xml warningbatchxml --batch=${i}
+              --batchcount=${warningbatchcount})
+  endforeach()
   add_custom_command(
     OUTPUT ${product}_addon.txt
     COMMAND ${CMAKE_COMMAND} -E touch ${product}_addon.txt

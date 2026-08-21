@@ -15,28 +15,6 @@
   </Script>
 
   <!--
-    issue #877: gentest.lua's templates.xml also instantiates one tag
-    per WowlessData.ContainmentWarnings-worth of candidate, as top-level
-    siblings. WowlessData.ContainmentWarnings is already the exact
-    ordered list of "Unrecognized XML: %s" warnings those rejected
-    candidates are expected to produce (see tools/gentest.lua's
-    containmentCandidates), so registering it is a bare loop with no
-    filtering. This has to come before the unknowntype block below, not
-    after, even though its own XML comes after unknowntype's tags in
-    the document: "Unrecognized XML" (like the Templates warnings
-    above) comes from wowless/modules/xml.lua's structural parse of the
-    whole document, which completes before xmleval.lua evaluates any of
-    it and creates objects, which is where unknowntype's "Unknown
-    frame type" warning fires. Parse-phase warnings all queue before
-    evaluation-phase ones, regardless of document order between them.
-  -->
-  <Script>
-    for _, warning in ipairs(_G.WowlessData.ContainmentWarnings) do
-      table.insert(Wowless.ExpectedXmlWarnings, warning)
-    end
-  </Script>
-
-  <!--
     issue #863: gentest.lua's templates.xml also forces a non-virtual
     instantiation of every XML tag whose impl is 'unknowntype' on this
     product (as top-level siblings after the Templates candidates

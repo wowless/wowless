@@ -376,10 +376,11 @@ end
 --
 -- Reusable as-is for any `parentTag`, not just 'Ui': the only thing
 -- specific to testing Ui's own children right now is the single call
--- site below, which places candidates as bare top-level siblings since
--- Ui itself needs no wrapping. Testing a deeper tag's children would
--- additionally need nesting the candidates inside an established,
--- already-verified-legal chain down to that tag -- left for later.
+-- site below (see warningBatchItems), which places candidates as bare
+-- top-level siblings since Ui itself needs no wrapping. Testing a
+-- deeper tag's children would additionally need nesting the candidates
+-- inside an established, already-verified-legal chain down to that tag
+-- -- left for later.
 local function illegalChildren(p, parentTag)
   local xml = perproduct(p, 'xml')
   local legal = xmlcontainment.legalChildren(xml, parentTag)
@@ -392,15 +393,56 @@ local function illegalChildren(p, parentTag)
   return tags
 end
 
+-- wowless/modules/warningqueue.lua's DrainWarnings caps real LUA_WARNING
+-- delivery at 100 per frame, matching client-verified real behavior: a
+-- real client silently drops anything past the 100th queued in one
+-- frame's drain. A document that queues more than that in one shot (like
+-- illegalChildren(p, 'Ui')'s ~148 candidates) can't be exercised
+-- through the addon test suite's regular startup load, so those items
+-- get split into WowlessBatchN LoadOnDemand addons instead -- one
+-- generated per-product directory per batch, each with its own toc and
+-- a <Ui> document holding just that batch's slice, loaded one at a time
+-- by asynctests.lua's driver, paced a real frame apart so each batch's
+-- warnings get their own drain.
+--
+-- warningBatchItems/batchSlice are deliberately generic (a flat item
+-- list in, a same-shaped slice out) rather than containment-specific --
+-- illegalChildren(p, 'Ui') is the only source today, but an unrelated
+-- future test that queues more than 100 LUA_WARNINGs from one document
+-- can reuse this same batching machinery by supplying its own item
+-- list, without renaming anything here.
+local warningBatchSize = 90
+
+local function warningBatchItems(p)
+  local items = {}
+  for _, tag in ipairs(illegalChildren(p, 'Ui')) do
+    table.insert(items, { tag = tag })
+  end
+  return items
+end
+
+local function batchSlice(items, batchIndex, batchSize)
+  local slice = {}
+  for i = (batchIndex - 1) * batchSize + 1, math.min(batchIndex * batchSize, #items) do
+    table.insert(slice, items[i])
+  end
+  return slice
+end
+
 -- Builds the WowlessGeneratedXmlTests root shared by the 'templatexml'
 -- file (rendered to text as templates.xml) and the templates ptablemap
 -- entry. Also appends, as sibling top-level elements (no wrapper/nesting
 -- machinery needed, since these all attach directly under the
--- document's own <Ui> root):
---   - one non-virtual, self-closing instantiation per XML tag whose impl
---     is 'unknowntype' on this product (see xmleval.lua's loadElement,
---     issue #863);
---   - one self-closing instantiation per illegalChildren(p, 'Ui') tag.
+-- document's own <Ui> root), one non-virtual, self-closing instantiation
+-- per XML tag whose impl is 'unknowntype' on this product (see
+-- xmleval.lua's loadElement, issue #863).
+--
+-- illegalChildren(p, 'Ui') candidates are deliberately NOT instantiated
+-- here: unlike the small, fixed unknowntype set, that list is large
+-- enough to exceed wowless/modules/warningqueue.lua's 100-per-frame
+-- LUA_WARNING delivery cap if queued from one synchronously-loaded
+-- document -- see warningBatchItems/batchSlice above and the
+-- WowlessBatchN generation below instead.
 local function buildTemplatesXml(p, uiobjectApis)
   local root = { name = 'WowlessGeneratedXmlTests', tag = 'Frame' }
   for _, case in ipairs(discoverCases(p)) do
@@ -414,9 +456,6 @@ local function buildTemplatesXml(p, uiobjectApis)
     if def.impl == 'unknowntype' then
       table.insert(ui, { tag = name })
     end
-  end
-  for _, tag in ipairs(illegalChildren(p, 'Ui')) do
-    table.insert(ui, { tag = tag })
   end
   return renderXml(ui)
 end
@@ -646,6 +685,9 @@ local ptablemap = {
   uiobjectapis = function(p)
     return 'UIObjectApis', computeUiobjectApis(p)
   end,
+  warningbatchsize = function()
+    return 'WarningBatchSize', warningBatchSize
+  end,
   xml = function(p)
     return 'Xml', perproduct(p, 'xml')
   end,
@@ -656,6 +698,8 @@ local args = (function()
   parser:argument('product')
   parser:argument('file')
   parser:argument('output')
+  parser:option('--batch'):convert(tonumber)
+  parser:option('--batchcount'):convert(tonumber)
   return parser:parse()
 end)()
 local function doit(k, p)
@@ -666,6 +710,27 @@ local function doit(k, p)
     return ('_G.WowlessData = { product = %q }'):format(p)
   elseif k == 'templatexml' then
     return buildTemplatesXml(p, computeUiobjectApis(p))
+  elseif k == 'warningbatchtoc' then
+    return table.concat({
+      '## Interface: ' .. perproduct(p, 'build').tocversion,
+      '## LoadOnDemand: 1',
+      ('WowlessBatch%d.xml'):format(args.batch),
+      '',
+    }, '\n')
+  elseif k == 'warningbatchxml' then
+    local items = warningBatchItems(p)
+    assert(
+      #items <= args.batchcount * warningBatchSize,
+      (
+        'warning batch capacity %d x %d cannot hold %d real items on %s -- bump warningbatchcount in '
+        .. 'CMakeLists.txt'
+      ):format(args.batchcount, warningBatchSize, #items, p)
+    )
+    local ui = { tag = 'Ui' }
+    for _, item in ipairs(batchSlice(items, args.batch, warningBatchSize)) do
+      table.insert(ui, item)
+    end
+    return renderXml(ui)
   elseif k == 'toc' then
     local tt = {}
     for kk in pairs(ptablemap) do

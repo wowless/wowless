@@ -230,6 +230,36 @@ G.asynctests = {
       end)
     end)
   end,
+  -- wowless/modules/warningqueue.lua caps real LUA_WARNING delivery at
+  -- 100 per frame (client-verified). WowlessData.ContainmentWarnings is
+  -- the full ordered list of warnings tools/gentest.lua's generated
+  -- WowlessBatchN LoadOnDemand addons are built to produce (see
+  -- warningBatchItems/batchSlice there) -- load them one at a time, a
+  -- real frame apart (each LoadAddOn call is chained from inside the
+  -- previous batch's C_Timer.After(0, ...) callback, not fired
+  -- alongside it, so each batch's queued warnings get their own drain
+  -- before the next batch loads), so every batch stays under the cap
+  -- regardless of how large the full list is.
+  ['queued warnings, batched'] = function(done)
+    local items = _G.WowlessData.ContainmentWarnings
+    local batchSize = _G.WowlessData.WarningBatchSize
+    local numBatches = math.ceil(#items / batchSize)
+    local function loadBatch(i)
+      if i > numBatches then
+        done(function() end)
+        return
+      end
+      for j = (i - 1) * batchSize + 1, math.min(i * batchSize, #items) do
+        table.insert(G.ExpectedLuaWarnings, items[j])
+      end
+      local loaded = _G.C_AddOns.LoadAddOn('WowlessBatch' .. i)
+      assertEquals(true, loaded)
+      _G.C_Timer.After(0, function()
+        loadBatch(i + 1)
+      end)
+    end
+    loadBatch(1)
+  end,
   ['heartbeat clears dirty bits on invisible frame anchored to by visible frame'] = function(done)
     local p = CreateFrame('Frame')
     p:SetSize(100, 100)
