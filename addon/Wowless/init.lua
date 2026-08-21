@@ -22,17 +22,21 @@ end)
 G.LuaWarningsFrame = frame
 G.testsuite = {}
 
--- Mirrors QueueEvent/DrainEvents: some LUA_WARNINGs (XML-time issues
--- like anchor resolution or unrecognized elements) are queued and only
--- delivered at the start of the next frame, not fired inline. Tests for
--- those register into ExpectedNextFrame instead of ExpectedLuaWarnings
--- directly; a single After(0) call moves the whole batch across at
--- once, since ordering among multiple After(0) callbacks isn't
--- guaranteed.
-G.ExpectedNextFrame = {}
+-- Mirrors wowless's own warningqueue/xmlwarningqueue split: every
+-- LUA_WARNING is queued for next-frame delivery, none fire inline, so
+-- that alone isn't a reason to track two buckets. The real distinction
+-- is XML-time warnings (like anchor resolution or unrecognized
+-- elements), which stage separately and only get dumped into the main
+-- warning queue once a frame has passed, versus warnings from an
+-- actual Lua call (CreateFrame, bindScript), which queue directly.
+-- Tests for the former register into ExpectedXmlWarnings instead of
+-- ExpectedLuaWarnings directly; a single After(0) call moves the whole
+-- batch across at once, since ordering among multiple After(0)
+-- callbacks isn't guaranteed.
+G.ExpectedXmlWarnings = {}
 _G.C_Timer.After(0, function()
-  for _, v in ipairs(G.ExpectedNextFrame) do
+  for _, v in ipairs(G.ExpectedXmlWarnings) do
     table.insert(G.ExpectedLuaWarnings, v)
   end
-  table.wipe(G.ExpectedNextFrame)
+  table.wipe(G.ExpectedXmlWarnings)
 end)

@@ -1,6 +1,6 @@
 <Ui>
   <Script>
-    table.insert(_G.Wowless.ExpectedNextFrame, 'Unknown frame type: WowlessEvenMoreIntrinsicType')
+    table.insert(_G.Wowless.ExpectedXmlWarnings, 'Unknown frame type: WowlessEvenMoreIntrinsicType')
   </Script>
   <WowlessEvenMoreIntrinsicType />
 </Ui>
