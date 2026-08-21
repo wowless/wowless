@@ -32,7 +32,7 @@
   -->
   <Script>
     for _, warning in ipairs(_G.WowlessData.ContainmentWarnings) do
-      table.insert(Wowless.ExpectedNextFrame, warning)
+      table.insert(Wowless.ExpectedXmlWarnings, warning)
     end
   </Script>
 
