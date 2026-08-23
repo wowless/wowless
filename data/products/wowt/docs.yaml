@@ -622,8 +622,6 @@ typedefs:
     type: FileAsset
   fileID:
     type: number
-  FontAlphabet:
-    type: string
   FontAsset:
     type: string
   FrameEventCallbackType:

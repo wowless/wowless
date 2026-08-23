@@ -11176,7 +11176,8 @@ CraftingVariableQuantities:
 CreateFontFamilyMemberInfo:
   fields:
     alphabet:
-      type: string
+      type:
+        stringenum: FontAlphabet
     file:
       type: string
     flags:

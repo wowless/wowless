@@ -846,7 +846,8 @@ Member:
   attributes:
     alphabet:
       required: true
-      type: string
+      type:
+        stringenum: FontAlphabet
   contents:
     tags:
       Font:
