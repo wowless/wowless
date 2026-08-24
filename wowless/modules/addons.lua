@@ -15,8 +15,13 @@ return function(datalua)
     if not addon then
       return 0
     end
-    local v = addon.interface or 0
-    return v <= tocversion and v or 0
+    local best = 0
+    for _, v in ipairs(addon.interface or {}) do
+      if v <= tocversion and v > best then
+        best = v
+      end
+    end
+    return best
   end
 
   local function GetNumAddOns()

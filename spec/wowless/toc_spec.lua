@@ -82,9 +82,13 @@ describe('wowless.toc', function()
             '## Key: Value',
           }
           local toc = parse(gametype, table.concat(lines, '\n'))
-          assert.same(120001, toc.interface)
+          assert.same({ 120001 }, toc.interface)
           assert.same({ Key = 'Value' }, toc.attrs)
           assert.Nil(toc.attrs.Interface)
+        end)
+        it('handles multiple Interface values', function()
+          local toc = parse(gametype, '## Interface: 120001, 40400, 11507')
+          assert.same({ 120001, 40400, 11507 }, toc.interface)
         end)
         it('does family substitution', function()
           local lines = {

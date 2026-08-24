@@ -86,7 +86,11 @@ local function parse(gametype, content)
       local key, value = line:match('([^:]+): (.*)', 4)
       if key then
         if key == 'Interface' then
-          toc.interface = tonumber(value)
+          local arr = {}
+          for v in value:gmatch('[^, ]+') do
+            table.insert(arr, tonumber(v))
+          end
+          toc.interface = arr
         elseif key == 'SavedVariables' or key == 'SavedVariablesPerCharacter' then
           local arr = {}
           for var in value:gmatch('[^, ]+') do

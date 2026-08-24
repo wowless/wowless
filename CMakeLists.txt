@@ -746,6 +746,9 @@ add_custom_target(
   COMMAND bump
   WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
 
+add_lua_executable(gentoc ${CMAKE_CURRENT_SOURCE_DIR}/tools/gentoc.lua argparse
+                   penlight runtimeproducts wowlessyaml)
+
 yaml2lua(impl)
 yaml2lua(sql)
 yaml2lua(test)
@@ -1097,8 +1100,7 @@ foreach(
   test.lua
   test.xml
   uiobjects.lua
-  util.lua
-  Wowless.toc)
+  util.lua)
   set(out ${d}/${f})
   list(APPEND testaddon_outs ${out})
   add_custom_command(
@@ -1108,6 +1110,17 @@ foreach(
       -DDST_DIR=${d} -P ${CMAKE_CURRENT_SOURCE_DIR}/cmake/copy_executable.cmake
     DEPENDS addon/Wowless/${f})
 endforeach()
+set(out ${d}/Wowless.toc)
+list(APPEND testaddon_outs ${out})
+set(tocdeps)
+foreach(product ${products})
+  list(APPEND tocdeps data/products/${product}/build.yaml)
+endforeach()
+add_custom_command(
+  OUTPUT ${out}
+  COMMAND gentoc ${out}
+  WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+  DEPENDS gentoc data/products.yaml ${tocdeps})
 set(out ${d}/generatedxml.xml)
 set(staged ${CMAKE_CURRENT_BINARY_DIR}/staging/addon/Wowless/generatedxml.xml)
 list(APPEND testaddon_outs ${out})
