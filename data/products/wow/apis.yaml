@@ -40336,6 +40336,12 @@ UnitCanAssist:
     type: unit
   - name: target
     type: unit
+  - default: false
+    name: canAssistImmunePC
+    type: boolean
+  - default: false
+    name: canAssistUninteractable
+    type: boolean
   outputs:
   - name: result
     type: boolean
@@ -41179,6 +41185,13 @@ UnitIsPlayer:
   - name: partyIndex
     nilable: true
     type: number
+  outputs:
+  - name: result
+    type: boolean
+UnitIsPlayerControlledOrGroupMember:
+  inputs:
+  - name: unit
+    type: unit
   outputs:
   - name: result
     type: boolean
