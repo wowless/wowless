@@ -168,8 +168,11 @@ G.testsuite.generated = function()
 
   local function cvars()
     local toskipin = _G.WowlessData.Config.addon.ignore_cvar_value or {}
+    local platform = _G.IsMacClient() and 'mac' or _G.IsWindowsClient() and 'windows' or 'linux'
     local expectedCVars = {}
+    local cvarPlatforms = {}
     for k, v in pairs(_G.WowlessData.CVars) do
+      cvarPlatforms[k] = v.platform
       expectedCVars[k] = {
         account = not not v.account,
         character = not not v.character,
@@ -204,9 +207,16 @@ G.testsuite.generated = function()
     end
     local tests = {}
     for k, v in pairs(expectedCVars) do
-      tests[k] = function()
-        local actual = assert(actualCVars[k], 'extra cvar')
-        return G.assertRecursivelyEqual(v, actual)
+      local wantPlatform = cvarPlatforms[k]
+      if wantPlatform and wantPlatform ~= platform then
+        -- Cross-platform runs (e.g. wowless itself, or a real client on the
+        -- other platform) can't confirm this cvar's presence or value.
+        tests[k] = function() end
+      else
+        tests[k] = function()
+          local actual = assert(actualCVars[k], 'extra cvar')
+          return G.assertRecursivelyEqual(v, actual)
+        end
       end
     end
     local toskipout = {
