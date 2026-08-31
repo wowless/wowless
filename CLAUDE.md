@@ -37,6 +37,14 @@ bin/run.sh wow --addondir path/to/YourAddon
 build/wowless run -p wow [options]
 ```
 
+Prefer `bin/run.sh <product>` over invoking `build/wowless` directly: it
+builds both `wowless_<product>` (the product-specific binary) and the
+`<product>` target, which pulls the `<product>_data.sqlite3` fetch chain.
+Running the generic `build/wowless` binary skips those data dependencies
+and can fail with "no such table" if fetch hasn't run. In a worktree,
+`cmake --build --preset default --target wowless_<product> <product>` then
+`build/wowless_<product> run -p <product>` is the equivalent.
+
 Products: see `data/products.yaml`
 
 ### Running Tests
@@ -54,6 +62,45 @@ Tests are in `spec/` directory and use luassert. Test specs are defined in
 CMakeLists.txt around line 985. The test addon in `addon/Wowless/` contains
 in-game tests that run inside the simulated WoW environment during `runtests`.
 
+### Build and Test Gotchas
+
+- **Submodules do not auto-update on pull/rebase.** After any `git pull` or
+  `git rebase` that brings in new commits, run `git submodule update` (e.g.
+  `git submodule update vendor/dbdefs`) before building. Submodule pointers
+  move via commits like "bump wowt to X.Y.Z"; a stale `vendor/dbdefs`
+  checkout surfaces as a confusing, seemingly-unrelated data error (e.g.
+  `cannot find <version> in dbd FactionGroup`) that looks like a bug in
+  your change.
+- **`build/extracts/<product>/` is not a dependency of the `test` target.**
+  The raw game-client files `tools/fetch.lua` pulls (e.g.
+  `Blizzard_SharedXML/UI.xsd`, `Blizzard_APIDocumentation*`) are only
+  fetched/consumed by the `docs-<product>` / `docs-all` targets. A green
+  `--target test` run does not exercise `tools/docs.lua`; run
+  `docs-<product>` (or `docs-all`) and check `git status` on the files it
+  writes to actually verify a `tools/docs.lua` change. Extracts are
+  network-fetched and slow; `cp -r` reuse from another checkout on the same
+  machine is safe (read-only extraction, unaffected by source changes).
+- **Never run system `lua`/`luajit` against this repo's code or data.** The
+  project vendors its own Lua 5.1 fork (`vendor/elune/`) with WoW taint
+  extensions and its own module path baked into the CMake-built tooling. A
+  system interpreter is a different runtime without the project's modules,
+  so nothing "confirmed" through it is trustworthy. For ad hoc data
+  inspection use Python (`pyyaml` is available) or `grep`/`awk`; for
+  anything that must execute in the real environment use the project's
+  build/test targets or the `tools/*.lua` entry points as CMake invokes
+  them.
+- **Do not chain multiple `git commit` calls in one shell invocation.** The
+  `build and test` pre-commit hook reruns the full build+test on *every*
+  commit (several commits can exceed a command timeout) and stashes other
+  unstaged files to `~/.cache/pre-commit/patch<ts>-<pid>` for the duration.
+  If the shell is killed mid-hook, a later commit's stash-restore may never
+  run and that file silently reverts to HEAD. Commit one logical change per
+  shell call; after any interrupted commit, check `git status` and diff
+  your edited files before continuing.
+- **"Full eval" means build the `outs` target and confirm the output files
+  are empty.** Non-empty output is a regression to investigate. Only run it
+  when explicitly asked, not as a routine post-change check.
+
 ### Linting and Formatting
 
 Pre-commit hooks handle linting. Key tools:
@@ -66,6 +113,10 @@ Pre-commit hooks handle linting. Key tools:
 ```sh
 pre-commit run -a  # Run all checks
 ```
+
+Do not modify `.luacheckrc` to silence a warning. If luacheck flags an
+undefined global in new code, reference it as `_G.SomeGlobal` (which its
+static analysis does not flag) rather than adding to `read_globals`.
 
 ### C Code Style
 
@@ -208,6 +259,33 @@ The test addon runs inside the simulated WoW environment. Files load in
 - Pre-compute data tables outside test functions when iterating `WowlessData`
 - Keep test modules focused on type-specific behavior
 
+### Spec Tests (`spec/`)
+
+luassert/busted unit tests, separate from the in-game addon tests.
+
+- **`spec/wowless/modules/X_spec.lua` corresponds 1:1 with
+  `wowless/modules/X.lua`.** One spec file per runtime module, named to
+  match. Never add a second spec file for the same module (e.g.
+  `X_containment_spec.lua`) no matter how different the new cases feel —
+  add a `describe` block inside the existing spec instead.
+- **`spec/data/schema_coverage_spec.lua` enforces YAGNI at the schema
+  level.** It asserts every field path in `data/schemas/*.yaml` is
+  exercised by at least one real data file across all products. Add a new
+  schema field only in the same commit that populates it in real data,
+  even when the pattern "obviously" generalizes.
+- **Table-driven style for repeated near-identical `it()` blocks:** one
+  table of named cases, then a single
+  `for name, case in pairs(cases) do it(name, ...) end` loop. Use named
+  fields (`case.value`), not positional indices. Assert the whole return
+  value with one `assert.same` rather than per-key checks. A table
+  constructor silently drops a key whose value is literal `nil`, so wrap
+  nil cases as `{ value = nil }`. Reference: `spec/addon/util_spec.lua`,
+  `spec/tools/xmlcontainment_spec.lua`.
+- **Never assert only not-nil.** Assert the actual expected value. The one
+  exception is output that is nondeterministic by the implementation's own
+  documented contract (e.g. `pairs()` iteration order) — pull that case
+  out of the loop and assert membership in the valid set.
+
 ### C Stubs for API Typechecking
 
 Eligible global API stubs are generated as native C functions rather than Lua
@@ -285,6 +363,73 @@ UIObjects and luaobjects use a deferred loading pattern:
 - This allows type initialization to access the full module graph via the
   `modules` parameter
 
+### XML / FrameXML Notes
+
+- **`UI.xsd` is the ground truth for `xml.yaml` design questions.** Blizzard
+  ships it per-product at
+  `build/extracts/<product>/Interface/AddOns/Blizzard_SharedXML/UI.xsd`
+  (~1600 lines). `data/products/*/xml.yaml` is a hand-maintained
+  approximation; when it disagrees with FrameXML or `uiobjects.yaml`, the
+  XSD is the tiebreaker (`uiobjects.yaml` is treated as correct — fixes go
+  in `xml.yaml`). The extract lives under the main checkout's `build/`, not
+  necessarily a fresh worktree.
+- **Virtual templates are valid only at top level, directly under `<Ui>`.**
+  A tag can be a top-level virtual template only if it (or something in its
+  substitution-group chain) reaches `substitutionGroup="UiField"` *and* its
+  own XSD complexType declares `name`/`virtual` attributes. Both must hold.
+- **Child widgets need a wrapper tag.** `<Frame>`'s valid direct children
+  are limited (`Animations`/`Attributes`/`Frames`/`HitRectInsets`/`Layers`/
+  `ResizeBounds`). A child frame-type widget goes inside `<Frames>`;
+  `FontString`/`Texture` regions go inside `<Layers><Layer>`. A bare child
+  widget is not valid.
+- **Invalid parent/child relationships fail silently.** `wowless/modules/
+  xml.lua` drops the element and appends to a `warnings` list only logged
+  at `loglevel >= 3`. It never throws, never fails a test, never shows in
+  CI. A green build does not prove generated XML test content actually
+  loaded and ran — verify by temporarily breaking an expected value and
+  confirming the build then fails.
+- **`xml.lua` parses the whole document structurally before `xmleval.lua`
+  evaluates any of it.** So every parse-phase `LUA_WARNING` (structural
+  rejections, invalid attribute values) fires before *any* evaluation-phase
+  one, regardless of the two tags' relative position in the XML text.
+
+### LUA_WARNING Delivery Model
+
+- All `LUA_WARNING`s are queued and delivered next-frame, after other
+  same-frame queued events (via a dedicated queue drained after the general
+  `eventqueue`). Nothing fires inline.
+- XML-parse-time warnings stage in `xmlwarningqueue` and dump into the main
+  warning queue once per frame, before it drains. Warnings from an actual
+  Lua call (`CreateFrame`, `bindScript`) enqueue directly, bypassing XML
+  staging.
+- **Hard cap of 100 `LUA_WARNING`s per frame** (client-verified); excess is
+  silently dropped, shared across all sources. A test that can produce more
+  than 100 warnings in one frame must paginate across real frame boundaries
+  (e.g. `LoadOnDemand` addons paced with `C_Timer.After(0, ...)`).
+- Sites: `wowless/modules/warningqueue.lua`, `xmlwarningqueue.lua`,
+  `api.lua`, `xmleval.lua`, `errorhandler.lua`, `mainloop.lua` (which runs
+  `DrainEvents()` → `xmlwarningqueue.Dump()` → `warningqueue.DrainWarnings()`
+  → `Advance`). Get real-client confirmation before changing ordering here —
+  this subsystem has needed real-client corrections twice.
+
+### Generated Code
+
+- Generated Lua is a DI-instantiated chunk created by a thin shim module in
+  the `data/modules.yaml` graph (the cstubs pattern), receiving exactly what
+  it needs. Pass bare state tables (`{ bindings = {} }`, callers manipulate
+  it directly), not accessor pairs. Drop unused parameters from generated
+  signatures. Helpers a generated chunk needs can live in the shim module
+  itself rather than getting their own module.
+- Do not add new generated `WowlessData/<name>.lua` files (gentest.lua
+  `ptablemap` entries) just to hand the addon precomputed data if the addon
+  can compute it from existing tables (`WowlessData.Xml`,
+  `WowlessData.UIObjectApis`). If a new generated file really is needed, ask
+  first.
+- `tools/generatexmltest.lua` (and similar Lua-table-to-XML generators):
+  build each dynamic node with an inline IIFE that constructs and returns
+  the complete tag table including its own `tag` field. No named helper
+  functions, no `unpack()` splicing.
+
 ### Module Delegate Pattern for C_ APIs
 
 When modules export WoW C_ style functions (like
@@ -322,6 +467,40 @@ When modules export WoW C_ style functions (like
 - Add a `-- issue #nnn` comment to the line of Lua code most relevant to the
   issue
 
+### Git / PR Workflow
+
+- **Sync the primary checkout to `origin/main` at the start of every
+  session** (fetch + fast-forward/reset). Local changes should never
+  persist there between sessions; work happens in ephemeral worktrees,
+  which already branch from `origin/main`.
+- **`git fetch origin main` before *every* `git worktree add ... origin/main`
+  or `git rebase origin/main`,** including mid-session. Merging a PR via
+  `gh pr merge` does *not* update the local `refs/remotes/origin/main`; a
+  stale local ref silently branches/rebases from the wrong commit with no
+  error.
+- **Rebase a feature branch onto latest `origin/main` before every push** —
+  the first push that opens the PR and every force-push after. Rebuild and
+  rerun tests after rebasing. After rebasing onto history that includes an
+  upstream rename, grep your branch's own new lines for the old name — a
+  clean rebase does not catch a rename that never shares a line with your
+  new code.
+- Pushing a branch auto-opens a PR against `main`. Just call `gh pr create`;
+  on "already exists" fall back to `gh pr edit` / `gh pr ready <n> --undo`.
+- **Merging:** squash only, always
+  `gh pr merge <n> --squash -b "<summary>"` — the `-b` summary is
+  mandatory, written before assembling the command, medium/high-level
+  (not a transcript of the review), and ending with the `Co-Authored-By:`
+  trailer. Then immediately, as the next command,
+  `git push origin --delete <branch>`, then remove the worktree. Leaving
+  the branch lets GitHub auto-open a duplicate PR.
+- **"Merge on green" means poll CI to success first** (`gh pr view <n>
+  --json statusCheckRollup` or `gh run watch`). This repo has no branch
+  protection, so `gh pr merge --auto` merges immediately without waiting.
+- Merge authorization is per-PR, per-request. A "merge on green" for one PR
+  does not authorize merging a later or related one.
+- `git worktree remove` refuses on any worktree containing submodules —
+  needs `--force` (a second `--force` only for locked worktrees).
+
 ## Testing After Code Changes
 
 Always run tests after modifying code:
@@ -339,3 +518,17 @@ fix the issues before considering the task complete.
   `luaobjects: description` (no period at end)
 - Always add a `Co-Authored-By: <model name> <noreply@anthropic.com>` trailer
   using the actual model name (e.g., `Claude Sonnet 4.6`)
+- Only confirmed facts in commit messages, PR descriptions, and code
+  comments — no speculative explanations of behavior. Say "left for a
+  follow-up investigation", not "probably means X". A comment reads as
+  settled documentation and does not carry the uncertainty that produced
+  it.
+
+## Small-Scope Style
+
+- A constant is worth naming only when reused non-trivially or the name
+  adds real clarity; a single literal used once stays inline.
+- For a "this should structurally never happen" branch, prefer
+  `assert(invariant)` (loud, fails the build) over `if invariant then ...
+  end` (silent skip). This codebase has been bitten by
+  silently-skipped/dropped edge cases before.
