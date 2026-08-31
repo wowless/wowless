@@ -77,9 +77,11 @@ in-game tests that run inside the simulated WoW environment during `runtests`.
   fetched/consumed by the `docs-<product>` / `docs-all` targets. A green
   `--target test` run does not exercise `tools/docs.lua`; run
   `docs-<product>` (or `docs-all`) and check `git status` on the files it
-  writes to actually verify a `tools/docs.lua` change. Extracts are
-  network-fetched and slow; `cp -r` reuse from another checkout on the same
-  machine is safe (read-only extraction, unaffected by source changes).
+  writes to actually verify a `tools/docs.lua` change. Populating extracts
+  needs network access, but the expensive part — the CASC download — is
+  cached at user level by tactless and shared across every checkout, so a
+  fresh worktree re-extracts cheaply rather than re-downloading. Don't
+  `cp -r` extracts between checkouts.
 - **Never run system `lua`/`luajit` against this repo's code or data.** The
   project vendors its own Lua 5.1 fork (`vendor/elune/`) with WoW taint
   extensions and its own module path baked into the CMake-built tooling. A
@@ -365,14 +367,17 @@ UIObjects and luaobjects use a deferred loading pattern:
 
 ### XML / FrameXML Notes
 
-- **`UI.xsd` is the ground truth for `xml.yaml` design questions.** Blizzard
-  ships it per-product at
+- **`UI.xsd` is a reference for `xml.yaml`, not the source of truth.** It
+  stands to `xml.yaml` roughly as the `Blizzard_APIDocumentation` addons
+  stand to the files `docs.lua` generates: upstream documentation that
+  `xml.yaml` should ideally track — including a `docs.yaml`-style layer for
+  where the schema, like the API docs, is simply wrong about the client.
+  The client's own behavior is always the real authority. `xml.yaml` is
+  hand-maintained today, so when it disagrees with observed FrameXML, weigh
+  the XSD and real client behavior rather than assuming either file is
+  right. Blizzard ships it per-product at
   `build/extracts/<product>/Interface/AddOns/Blizzard_SharedXML/UI.xsd`
-  (~1600 lines). `data/products/*/xml.yaml` is a hand-maintained
-  approximation; when it disagrees with FrameXML or `uiobjects.yaml`, the
-  XSD is the tiebreaker (`uiobjects.yaml` is treated as correct — fixes go
-  in `xml.yaml`). The extract lives under the main checkout's `build/`, not
-  necessarily a fresh worktree.
+  (~1600 lines), under the main checkout's `build/`.
 - **Virtual templates are valid only at top level, directly under `<Ui>`.**
   A tag can be a top-level virtual template only if it (or something in its
   substitution-group chain) reaches `substitutionGroup="UiField"` *and* its
@@ -382,12 +387,13 @@ UIObjects and luaobjects use a deferred loading pattern:
   `ResizeBounds`). A child frame-type widget goes inside `<Frames>`;
   `FontString`/`Texture` regions go inside `<Layers><Layer>`. A bare child
   widget is not valid.
-- **Invalid parent/child relationships fail silently.** `wowless/modules/
-  xml.lua` drops the element and appends to a `warnings` list only logged
-  at `loglevel >= 3`. It never throws, never fails a test, never shows in
-  CI. A green build does not prove generated XML test content actually
-  loaded and ran — verify by temporarily breaking an expected value and
-  confirming the build then fails.
+- **A rejected child element is dropped, not errored.** `wowless/modules/
+  xml.lua` records it in a `warnings` list returned to `xmleval.lua` and
+  logged only at `loglevel >= 3`. Schema tags flagged `containmentwarnings`
+  (currently just `Ui`) additionally emit a real `LUA_WARNING` for a
+  rejected direct child; `spec/wowless/modules/xml_spec.lua`'s "every tag
+  as a child of Ui" sweep covers the accept/reject relation against
+  `xmlcontainment.legalChildren`.
 - **`xml.lua` parses the whole document structurally before `xmleval.lua`
   evaluates any of it.** So every parse-phase `LUA_WARNING` (structural
   rejections, invalid attribute values) fires before *any* evaluation-phase
