@@ -31,12 +31,12 @@ repos:
   - id: markdownlint
     language_version: default
 - repo: https://github.com/pre-commit/mirrors-clang-format
-  rev: v22.1.8
+  rev: v23.1.0
   hooks:
   - id: clang-format
     types: [c]
 - repo: https://github.com/shellcheck-py/shellcheck-py
-  rev: v0.11.0.1
+  rev: v0.11.0.1-1
   hooks:
   - id: shellcheck
     args:
