@@ -236,9 +236,10 @@ Constants:
     MAX_PVP_LOCK_LIST_MAP: 2
     MaxPlayersPerInstance: 80
   QuestWatchConsts_Classic:
-    MAX_QUEST_WATCHES: 25
     MAX_WORLD_QUEST_HARD_WATCHES: 5
     MAX_WORLD_QUEST_WATCHES: 1
+  QuestWatchConsts_ClassicPreWrath:
+    MAX_QUEST_WATCHES: 5
   RecentAlliesConsts:
     PIN_EXPIRATION_WARNING_DAYS: 5
   SpellBookSpellIDs:
