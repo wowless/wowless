@@ -17149,6 +17149,11 @@ C_LFGInfo.IsInLFGFollowerDungeon:
   outputs:
   - name: result
     type: boolean
+C_LFGInfo.IsInMatchmadeRaidWithoutRoleRequirements:
+  inputs:
+  outputs:
+  - name: result
+    type: boolean
 C_LFGInfo.IsLFDEnabled:
   inputs:
   outputs:
