@@ -2360,6 +2360,8 @@ maxfpsbk:
   default: '30'
 maxfpsloading:
   default: '10'
+maximumconnectionattempts:
+  default: '2'
 maxlightcount:
 maxlightdist:
   default: '2048'
