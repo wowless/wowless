@@ -1590,6 +1590,8 @@ C_CatalogShop.CatalogShopProductInfo:
       nilable: true
       type:
         structure: C_CatalogShop.DecorQuantity
+    deferredGameTimeDays:
+      type: number
     description:
       type: string
     discountPercentage:
