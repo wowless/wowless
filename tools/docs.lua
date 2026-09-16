@@ -39,7 +39,9 @@ local function take(t, k, ...)
   end
 end
 
-local function takelieor(v, lies, ...)
+local lies
+
+local function takelieor(v, ...)
   local lie = take(lies, ...)
   if not lie then
     return v
@@ -55,6 +57,10 @@ local function assertTaken(s, t)
   if next(t) then
     error(('not all %s were consumed:\n%s'):format(s, pprintYaml(t)), 0)
   end
+end
+
+local function assertLiesTaken(s)
+  assertTaken(s, lies[s] or {})
 end
 
 local docs = {}
@@ -109,6 +115,7 @@ do
 end
 
 local config = parseYaml('data/products/' .. product .. '/docs.yaml')
+lies = config.lies or {}
 local enum = parseYaml('data/products/' .. product .. '/enums.yaml')
 
 local extra_events = deref(config, 'lies', 'extra_events') or {}
@@ -135,7 +142,10 @@ for _, t in pairs(docs) do
       events[name] = not take(extra_events, event.LiteralName) and event or nil
     end
   elseif t.Type == 'ScriptObject' and not take(extra_script_objects, t.Name) then
-    assert(config.script_objects[t.Name], 'missing script object mapping for ' .. t.Name)
+    assert(
+      config.script_objects[t.Name],
+      ('missing script object mapping for %s (ObjectType %s)'):format(t.Name, t.ObjectType or 'nil')
+    )
     assert(not scrobjs[t.Name])
     assert(not next(t.Events))
     scrobjs[t.Name] = t
@@ -314,7 +324,6 @@ local function outsig(fn, ns, api)
 end
 
 local function rewriteApis(apis)
-  local lies = deref(config, 'lies', 'apis') or {}
   local extras = deref(config, 'lies', 'extra_apis') or {}
   for name, fn in pairs(funcs) do
     local ns = split(name)
@@ -333,15 +342,14 @@ local function rewriteApis(apis)
       stuboutstrides = api and api.stuboutstrides,
     }
     if not take(extras, name) then
-      apis[name] = takelieor(newapi, lies, name)
+      apis[name] = takelieor(newapi, 'apis', name)
     end
   end
-  assertTaken('lies', lies)
+  assertLiesTaken('apis')
   assertTaken('extras', extras)
 end
 
 local function rewriteEvents(out)
-  local lies = deref(config, 'lies', 'events') or {}
   for name, ev in pairs(events) do
     local ns = split(name)
     local payload = {}
@@ -360,13 +368,12 @@ local function rewriteEvents(out)
       restricted = ev.HasRestrictions or ev.RequireNPERestricted,
       stride = stride(ev.Payload),
     }
-    out[ev.LiteralName] = takelieor(newev, lies, ev.LiteralName)
+    out[ev.LiteralName] = takelieor(newev, 'events', ev.LiteralName)
   end
-  assertTaken('lies', lies)
+  assertLiesTaken('events')
 end
 
 local function rewriteEnums(out)
-  local lies = deref(config, 'lies', 'enums') or {}
   local extras = deref(config, 'lies', 'extra_enums') or {}
   for _, tab in pairs(tabs) do
     if tab.Type == 'Enumeration' and not take(extras, tab.Name) then
@@ -375,10 +382,10 @@ local function rewriteEnums(out)
         assert(v.Type == tab.Name, v.Name)
         t[v.Name] = v.EnumValue
       end
-      out[tab.Name] = { values = takelieor(t, lies, tab.Name) }
+      out[tab.Name] = { values = takelieor(t, 'enums', tab.Name) }
     end
   end
-  assertTaken('lies.enums', lies)
+  assertLiesTaken('enums')
   assertTaken('lies.extra_enums', extras)
 end
 
@@ -442,11 +449,10 @@ local function rewriteStructures(structures, outApis, outEvents, outLuaObjects, 
   for k in pairs(structures) do
     structures[k] = nil
   end
-  local lies = deref(config, 'lies', 'structures') or {}
   for k, v in pairs(out) do
-    structures[k] = takelieor(v, lies, k)
+    structures[k] = takelieor(v, 'structures', k)
   end
-  assertTaken('lies.structures', lies)
+  assertLiesTaken('structures')
 end
 
 local function rewriteUIObjects(uiobjects)
@@ -473,7 +479,6 @@ local function rewriteUIObjects(uiobjects)
       mapped[so.uiobject] = t
     end
   end
-  local lies = deref(config, 'lies', 'uiobjects') or {}
   local reassigns = config.uiobject_method_reassignments or {}
   local inhm = {}
   local function inhprocess(k)
@@ -512,11 +517,11 @@ local function rewriteUIObjects(uiobjects)
         stuboutstrides = mm and mm.stuboutstrides,
       }
       if not inhm[kk][mk] then
-        u.methods[mk] = takelieor(mmv, lies, kk, mk)
+        u.methods[mk] = takelieor(mmv, 'uiobjects', kk, mk)
       end
     end
   end
-  assertTaken('lies', lies)
+  assertLiesTaken('uiobjects')
   assertTaken('reassigns', reassigns)
 end
 
