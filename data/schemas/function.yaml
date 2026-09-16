@@ -1,6 +1,8 @@
 name: function
 type:
   record:
+    genusage:
+      type: flag
     impl:
       type:
         ref:

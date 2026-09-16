@@ -40723,6 +40723,7 @@ table.contains:
   - name: containsValue
     type: boolean
 table.count:
+  genusage: true
   impl: table.count.single
   inputs:
   - name: table
@@ -40752,6 +40753,7 @@ table.freeze:
   - name: frozen
     type: table
 table.getcountinfo:
+  genusage: true
   impl: table.getcountinfo
   inputs:
   - name: table

@@ -1076,6 +1076,14 @@ local function stub_inputcheck(inp, idx)
   return dispatch(cinputtypes, inp.type)('stubcheck', nilable, idx) .. ';'
 end
 
+local function names(list)
+  local t = {}
+  for _, item in ipairs(list or {}) do
+    table.insert(t, item.name)
+  end
+  return table.concat(t, ', ')
+end
+
 local function emit_implstub_body(name, v, fn, extra_first_input)
   local check_inputs = v.inputs ~= nil or extra_first_input ~= nil
   local check_outputs = v.outputs ~= nil
@@ -1106,7 +1114,17 @@ local function emit_implstub_body(name, v, fn, extra_first_input)
         cstring('Usage: ' .. v.usage)
       )
     end
-    local inputcheck = v.usage and usagecheck or check
+    local function genusagecheck(inp, idx)
+      local nilable = inp.nilable or inp.default ~= nil
+      return ('if (!%s) luaL_argerror(L, %s, usage);'):format(dispatch(cinputtypes, inp.type)('is', nilable, idx), idx)
+    end
+    if v.genusage then
+      emit(
+        '  const char *usage = %s;',
+        cstring(('Usage: local %s = %s(%s)'):format(names(v.outputs), name, names(v.inputs)))
+      )
+    end
+    local inputcheck = v.genusage and genusagecheck or v.usage and usagecheck or check
     for i = 1, nsins do
       emit('  %s', inputcheck(inputs[i], i))
     end
@@ -1118,7 +1136,7 @@ local function emit_implstub_body(name, v, fn, extra_first_input)
       end
       emit('  }')
     end
-    if v.usage then
+    if v.usage and not v.genusage then
       for i = 1, nsins do
         emit('  %s', check(inputs[i], i))
       end
