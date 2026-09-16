@@ -658,10 +658,14 @@ table.concat:
   stdlib: table.concat
 table.count:
   impl:
+table.count.single:
+  impl:
 table.foreach:
   stdlib: table.foreach
 table.foreachi:
   stdlib: table.foreachi
+table.getcountinfo:
+  impl:
 table.getn:
   stdlib: table.getn
 table.insert:

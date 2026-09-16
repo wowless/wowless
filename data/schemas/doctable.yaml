@@ -228,6 +228,8 @@ type:
               type: flag
             RequiresSupportedScript:
               type: flag
+            RequiresTimedSignalMapAccess:
+              type: flag
             RequiresUnitAuraAccess:
               type: flag
             RequiresUnitIdentityAccess:
@@ -330,6 +332,8 @@ type:
               type: flag
             SecretWhenLossOfControlInfoRestricted:
               type: flag
+            SecretWhenLuaTableHasSecretKeys:
+              type: flag
             SecretWhenNumericFormatterSecret:
               type: flag
             SecretWhenSpellAuraRestricted:
@@ -426,6 +430,11 @@ type:
               type:
                 sequenceof:
                   record:
+                    ConditionalSecret:
+                      type: flag
+                    Documentation:
+                      type:
+                        sequenceof: string
                     Name:
                       required: true
                       type: string

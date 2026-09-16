@@ -171,11 +171,17 @@ local factories = {
   LuaFunctionContainer = function()
     return _G.C_FunctionContainers.CreateCallback(function() end)
   end,
+  LuaLocaleContext = function()
+    return _G.C_Intl.CreateLocaleContext('enUS')
+  end,
   NumericRuleFormatter = function()
     return _G.C_StringUtil.CreateNumericRuleFormatter()
   end,
   SecondsFormatter = function()
     return _G.C_StringUtil.CreateSecondsFormatter()
+  end,
+  TimedSignalMap = function()
+    return _G.C_Timer.NewTimedSignalMap(function() end)
   end,
   UnitHealPredictionCalculator = function()
     return _G.CreateUnitHealPredictionCalculator()

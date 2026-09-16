@@ -61,6 +61,10 @@ AccountExportResult:
     TimedOut: 4
     Unavailable: 10
     UnknownError: 1
+AccountGetListRequestType:
+  values:
+    Battlepets: 1
+    None: 0
 AccountSequenceCacheType:
   values:
     HouseDecor: 2
@@ -518,7 +522,6 @@ BagFlag:
     IgnoreExisting: 8192
     IgnorePetBankcheck: 131072
     IgnoreReagentBags: 8388608
-    IgnoreSoulbound: 4194304
     LookInAccountBankOnly: 16777216
     LookInCharacterBankOnly: 32768
     LookInInventory: 32
@@ -594,6 +597,23 @@ Base64Variant:
   values:
     Standard: 0
     StandardUrlSafe: 1
+BattleNetFriendLevel:
+  values:
+    BattleTag: 1
+    RealID: 2
+    Title: 3
+BattleNetFriendTag:
+  values:
+    DamagerRole: 7
+    Delves: 4
+    Dungeons: 3
+    HealerRole: 8
+    Professions: 0
+    PvP: 1
+    Questing: 5
+    Raiding: 2
+    Roleplaying: 6
+    TankRole: 9
 BattlepayBannerType:
   values:
     Discount: 1
@@ -810,6 +830,65 @@ BonusStatIndex:
     PvPPower: 57
     Rage: 9
     RangedAttackPower: 39
+    Reserved_100: 100
+    Reserved_101: 101
+    Reserved_102: 102
+    Reserved_103: 103
+    Reserved_104: 104
+    Reserved_105: 105
+    Reserved_106: 106
+    Reserved_107: 107
+    Reserved_108: 108
+    Reserved_109: 109
+    Reserved_110: 110
+    Reserved_111: 111
+    Reserved_112: 112
+    Reserved_113: 113
+    Reserved_114: 114
+    Reserved_115: 115
+    Reserved_116: 116
+    Reserved_117: 117
+    Reserved_118: 118
+    Reserved_119: 119
+    Reserved_120: 120
+    Reserved_121: 121
+    Reserved_122: 122
+    Reserved_123: 123
+    Reserved_124: 124
+    Reserved_125: 125
+    Reserved_126: 126
+    Reserved_127: 127
+    Reserved_128: 128
+    Reserved_129: 129
+    Reserved_130: 130
+    Reserved_131: 131
+    Reserved_132: 132
+    Reserved_133: 133
+    Reserved_134: 134
+    Reserved_135: 135
+    Reserved_136: 136
+    Reserved_137: 137
+    Reserved_138: 138
+    Reserved_139: 139
+    Reserved_140: 140
+    Reserved_141: 141
+    Reserved_83: 83
+    Reserved_84: 84
+    Reserved_85: 85
+    Reserved_86: 86
+    Reserved_87: 87
+    Reserved_88: 88
+    Reserved_89: 89
+    Reserved_90: 90
+    Reserved_91: 91
+    Reserved_92: 92
+    Reserved_93: 93
+    Reserved_94: 94
+    Reserved_95: 95
+    Reserved_96: 96
+    Reserved_97: 97
+    Reserved_98: 98
+    Reserved_99: 99
     ResilienceRating: 35
     ShadowResistance: 54
     SpellDamageDone: 42
@@ -831,6 +910,12 @@ BrawlType:
     None: 0
     SoloRbg: 5
     SoloShuffle: 4
+BreakType:
+  values:
+    Character: 0
+    Line: 3
+    Sentence: 2
+    Word: 1
 BulkPurchaseResult:
   values:
     ResultFailed: 3
@@ -1383,16 +1468,24 @@ ClubStreamNotificationFilter:
     None: 0
 ClubStreamType:
   values:
+    Discord: 3
     General: 0
     Guild: 1
     Officer: 2
-    Other: 3
+    Other: 4
 ClubType:
   values:
     BattleNet: 0
     Character: 1
     Guild: 2
     Other: 3
+CollationStrength:
+  values:
+    Identical: 4
+    Primary: 0
+    Quaternary: 3
+    Secondary: 1
+    Tertiary: 2
 ColorOverride:
   values:
     ItemQualityAccount: 7
@@ -1415,6 +1508,7 @@ CombatAudioAlertCategory:
     PlayerCast: 3
     PlayerDebuffs: 8
     PlayerHealth: 1
+    PlayerHealthPulse: 9
     PlayerResource1: 5
     PlayerResource2: 6
     TargetCast: 4
@@ -1471,6 +1565,18 @@ CombatAudioAlertPlayerResourceFormatValues:
     ResourceFull: 0
     ResourceNoPercent: 1
     ResourceNoPercentDiv10: 2
+CombatAudioAlertPulsePercentValues:
+  values:
+    Off: 0
+    Under10Percent: 9
+    Under20Percent: 8
+    Under30Percent: 7
+    Under40Percent: 6
+    Under50Percent: 5
+    Under60Percent: 4
+    Under70Percent: 3
+    Under80Percent: 2
+    Under90Percent: 1
 CombatAudioAlertSayIfTargetedType:
   values:
     Aggro: 1
@@ -1592,6 +1698,7 @@ CommunicationMode:
 CompanionConfigSlotTypes:
   values:
     Combat: 2
+    Flavor: 3
     Role: 0
     Utility: 1
 CompanionRoleType:
@@ -1734,7 +1841,12 @@ CooldownViewerBarContent:
     NameOnly: 2
 CooldownViewerCategory:
   values:
+    EquipSlotEssential: 7
+    EquipSlotTracked: 8
     Essential: 0
+    GroupBuff: 4
+    SpecAgnosticEssential: 5
+    SpecAgnosticTracked: 6
     TrackedBar: 3
     TrackedBuff: 2
     Utility: 1
@@ -1746,6 +1858,102 @@ CooldownViewerOrientation:
   values:
     Horizontal: 0
     Vertical: 1
+CooldownViewerSound:
+  values:
+    AnimalsCat: 1
+    AnimalsChicken: 2
+    AnimalsCow: 3
+    AnimalsGnoll: 4
+    AnimalsGoat: 5
+    AnimalsLion: 6
+    AnimalsPanther: 7
+    AnimalsRattlesnake: 8
+    AnimalsSheep: 9
+    AnimalsWolf: 10
+    DevicesAirHorn: 12
+    DevicesBikeHorn: 13
+    DevicesBoatHorn: 11
+    DevicesCashRegister: 14
+    DevicesJackpotBell: 15
+    DevicesJackpotCoins: 16
+    DevicesJackpotFail: 17
+    DevicesRotaryPhoneDial: 18
+    DevicesRotaryPhoneRing: 19
+    DevicesStovePipe: 20
+    DevicesTrashcanLid: 21
+    ImpactsAnvilStrike: 22
+    ImpactsBubbleSmash: 23
+    ImpactsLowThud: 24
+    ImpactsMetalClanks: 25
+    ImpactsMetalRattle: 26
+    ImpactsMetalScrape: 27
+    ImpactsMetalWarble: 28
+    ImpactsPopClick: 29
+    ImpactsStrangeClang: 30
+    ImpactsSwordScrape: 31
+    InstrumentsBellRing: 32
+    InstrumentsBellTrill: 33
+    InstrumentsBrass: 34
+    InstrumentsChimeAscending: 35
+    InstrumentsGuitarChug: 36
+    InstrumentsGuitarPinch: 37
+    InstrumentsPitchPipeDistressed: 38
+    InstrumentsPitchPipeNote: 39
+    InstrumentsSynthBig: 40
+    InstrumentsSynthBuzz: 41
+    InstrumentsSynthHigh: 42
+    InstrumentsWarhorn: 43
+    ShortBellStrike: 68
+    ShortBellTree: 69
+    ShortBigPot: 70
+    ShortBlades: 71
+    ShortCoffeeMug: 72
+    ShortCowBell: 73
+    ShortFingerSnap: 74
+    ShortGuitar: 75
+    ShortKalimba: 76
+    ShortMetalBladeDrop: 77
+    ShortMetalBladeOnRod: 78
+    ShortMetalImpact: 79
+    ShortMiniWoodXylophone: 80
+    ShortPaperCup: 81
+    ShortSheetMetal: 82
+    ShortStovePipe: 83
+    ShortStovePipeBlade: 84
+    ShortSwordShing: 85
+    ShortSynthBleep: 86
+    ShortSynthBlurp: 87
+    ShortSynthError: 88
+    ShortSynthHigh: 89
+    ShortTriangle: 90
+    ShortWaterDrop: 91
+    ShortWineBottle: 92
+    ShortWoodXylophone: 93
+    TextToSpeech: 0
+    War2AbstractWhoosh: 44
+    War2Choir: 45
+    War2Construction: 46
+    War2MagicChimes: 47
+    War2PigSqueal: 48
+    War2Saws: 49
+    War2Seal: 50
+    War2Slow: 51
+    War2Smith: 52
+    War2SynthStinger: 53
+    War2TrumpetRally: 54
+    War2ZippyMagic: 55
+    War3Bell: 56
+    War3CrunchyBell: 57
+    War3DrumSplash: 58
+    War3Error: 59
+    War3Fanfare: 60
+    War3GateOpen: 61
+    War3Gold: 62
+    War3MagicShimmer: 63
+    War3Ringout: 64
+    War3Rooster: 65
+    War3ShimmerBell: 66
+    War3WolfHowl: 67
 CooldownViewerVisibleSetting:
   values:
     Always: 0
@@ -1970,6 +2178,7 @@ CurioRarity:
   values:
     Common: 1
     Epic: 4
+    EpicTier2: 5
     Rare: 3
     Uncommon: 2
 CurioType:
@@ -2061,6 +2270,13 @@ CurrencyGainFlags:
     DroppedFromDeath: 2
     FromAccountServer: 4
     None: 0
+CurrencyNameStyle:
+  values:
+    FormalSymbol: 3
+    Long: 2
+    NarrowSymbol: 1
+    Symbol: 0
+    VariantSymbol: 4
 CurrencySource:
   values:
     AccountCopy: 42
@@ -2241,6 +2457,21 @@ CursorStyle:
   values:
     Crosshair: 1
     Mouse: 0
+CustomAuraButtonDispelTypeStealableFilter:
+  values:
+    NotStealable: 1
+    Stealable: 0
+CustomAuraButtonDispelTypeTextureStyle:
+  values:
+    Border: 0
+    BorderWithIcon: 1
+    CustomAsset: 4
+    Icon: 2
+    PreserveAsset: 3
+CustomAuraButtonUpdateMode:
+  values:
+    Assignment: 0
+    Update: 1
 CustomBindingType:
   values:
     VoicePushToTalk: 0
@@ -2367,6 +2598,13 @@ DamageMeterVisibility:
     Hidden: 2
     InCombat: 1
     InGroup: 3
+DateTimeStyle:
+  values:
+    Full: 4
+    Long: 3
+    Medium: 2
+    None: 0
+    Short: 1
 DeveloperLogAssertDomain:
   values:
     Art: 1
@@ -2397,6 +2635,18 @@ DisableAccountProfilesFlags:
     None: 0
     PetsCollections: 8
     SharedCollections: 2
+DiscordAccountType:
+  values:
+    Normal: 0
+    Provisional: 1
+DiscordDisplayNameType:
+  values:
+    Default: 0
+    GlobalName: 2
+    LastOnline: 1
+DiscordGuildSettings:
+  values:
+    SeparateStream: 1
 DurationTextBindingProperty:
   values:
     ElapsedDuration: 2
@@ -2432,18 +2682,20 @@ EditModeAccountSetting:
     ShowGrid: 0
     ShowHudTooltip: 19
     ShowLootFrame: 18
+    ShowLossOfControl: 35
     ShowPartyFrames: 12
     ShowPersonalResourceDisplay: 29
     ShowPetActionBar: 5
     ShowPetFrame: 24
     ShowPossessActionBar: 6
     ShowRaidFrames: 13
+    ShowRaidWarning: 33
     ShowStanceBar: 4
     ShowStatusTrackingBar2: 20
     ShowTalkingHeadFrame: 14
     ShowTargetAndFocus: 3
     ShowTimerBars: 25
-    ShowTotemActionBar: 33
+    ShowTotemActionBar: 34
     ShowVehicleLeaveButton: 15
     ShowVehicleSeatIndicator: 26
 EditModeActionBarSetting:
@@ -2575,6 +2827,9 @@ EditModeLayoutType:
     Character: 2
     Override: 3
     Preset: 0
+EditModeLossOfControlSetting:
+  values:
+    Size: 0
 EditModeMicroMenuSetting:
   values:
     EyeSize: 3
@@ -2584,6 +2839,7 @@ EditModeMicroMenuSetting:
 EditModeMinimapSetting:
   values:
     HeaderUnderneath: 0
+    IconScale: 3
     RotateMinimap: 1
     Size: 2
 EditModeObjectiveTrackerSetting:
@@ -2612,6 +2868,9 @@ EditModePresetLayouts:
   values:
     Classic: 1
     Modern: 0
+EditModeRaidWarningSetting:
+  values:
+    None: 0
 EditModeSettingDisplayType:
   values:
     Checkbox: 1
@@ -2643,14 +2902,16 @@ EditModeSystem:
     ExtraAbilities: 5
     HudTooltip: 11
     LootFrame: 10
+    LossOfControl: 26
     MicroMenu: 13
     Minimap: 2
     ObjectiveTracker: 12
     PersonalResourceDisplay: 21
+    RaidWarning: 24
     StatusTrackingBar: 15
     TalkingHeadFrame: 7
     TimerBars: 17
-    TotemActionBar: 24
+    TotemActionBar: 25
     UnitFrame: 3
     VehicleLeaveButton: 9
     VehicleSeatIndicator: 18
@@ -2661,15 +2922,16 @@ EditModeUnitFrameSetting:
   values:
     AuraOrganizationType: 18
     BigDefensiveIconSize: 21
+    BuffIconSize: 22
     BuffsOnTop: 2
     CastBarOnSide: 7
     CastBarUnderneath: 1
+    DebuffIconSize: 19
     DisplayBorder: 12
     FrameHeight: 11
     FrameSize: 16
     FrameWidth: 10
     HidePortrait: 0
-    IconSize: 19
     Opacity: 20
     RaidGroupDisplayType: 13
     RowSize: 15
@@ -2933,46 +3195,64 @@ FontStringScaleAnimationMode:
   values:
     FontSize: 0
     Vertex: 1
+ForbiddenAspect:
+  values:
+    AddAnimations: 4096
+    AlwaysPropagateInput: 32
+    ChangeAnimationTarget: 256
+    ChangeParent: 1024
+    EventRegistrations: 16
+    QueryAnimationProgress: 2048
+    QueryFocus: 128
+    RemoveSecretAspects: 512
+    ScriptBindings: 2
+    ScriptedInput: 64
+    SetToDefaults: 1
+    UntrustedLayoutScriptExecution: 8
+    UntrustedScriptExecution: 4
 FragmentID:
   values:
-    Actor: 15
-    CgObject: 2
-    ClientObservablesData: 6
-    DeferredMessages: 9
-    EntityPosition: 1
-    FHousingDecor: 20
-    FHousingDecorActor: 28
-    FHousingDecorProxy: 26
-    FHousingFixture: 34
-    FHousingHouseDecorSet: 24
-    FHousingHouseFixtureSet: 35
-    FHousingHouseRoomSet: 25
-    FHousingPlayerHouse: 23
-    FHousingPlotAreaTrigger: 29
-    FHousingRoom: 21
-    FHousingRoomComponentMesh: 22
-    FHousingStorageMirrorData: 33
-    FJamHousingCornerstone: 27
-    FLootObjectList: 12
-    FMeshObjectData: 19
-    FMirroredPositionData: 31
-    FNeighborhoodMirrorData: 30
-    FNeighborhoodStateData: 38
-    FPathingDoor: 41
-    FPathingDynamicLinks: 40
-    FPersistableJamServers: 10
-    FPhaseShiftData: 16
-    FPlayerHouseInfo: 32
-    FPlayerInitiativeInfo: 37
-    FPlayerJamServers: 11
-    FPlayerOwnershipLink: 13
-    FTransportLink: 5
-    FUnitAIGroupLink: 39
-    FUnitAreaTriggerLink: 14
-    FVendor: 17
-    HeartbeatData: 4
-    JamDispatcher: 3
-    MirroredObjectC: 18
+    Actor: 16
+    AuthMirrorState: 1
+    CgObject: 3
+    ClientObservablesData: 7
+    DeferredMessages: 10
+    EntityPosition: 2
+    FHousingDecor: 21
+    FHousingDecorActor: 29
+    FHousingDecorProxy: 27
+    FHousingFixture: 35
+    FHousingHouseDecorSet: 25
+    FHousingHouseFixtureSet: 36
+    FHousingHouseRoomSet: 26
+    FHousingPlayerHouse: 24
+    FHousingPlotAreaTrigger: 30
+    FHousingRoom: 22
+    FHousingRoomComponentMesh: 23
+    FHousingStorageMirrorData: 34
+    FJamHousingCornerstone: 28
+    FLootObjectList: 13
+    FMapObject: 44
+    FMeshObjectData: 20
+    FMirroredPositionData: 32
+    FNeighborhoodMirrorData: 31
+    FNeighborhoodStateData: 39
+    FPathingDoor: 42
+    FPathingDynamicLinks: 41
+    FPersistableJamServers: 11
+    FPhaseShiftData: 17
+    FPlayerHouseInfo: 33
+    FPlayerInitiativeInfo: 38
+    FPlayerJamServers: 12
+    FPlayerOwnershipLink: 14
+    FTransportLink: 6
+    FUnitAIGroupLink: 40
+    FUnitAreaTriggerLink: 15
+    FVendor: 18
+    FWorldStateListenerData: 43
+    HeartbeatData: 5
+    JamDispatcher: 4
+    MirroredObjectC: 19
     MirrorState: 0
     ReservedArchetypeSeparator: 255
     TagActiveClientS: 216
@@ -3007,9 +3287,9 @@ FragmentID:
     TestFragment_3: 252
     TestFragment_4: 253
     TestFragment_5: 254
-    Timer: 36
-    TimerQueues: 7
-    TransferSuspensionData: 8
+    Timer: 37
+    TimerQueues: 8
+    TransferSuspensionData: 9
 FrameTutorialAccount:
   values:
     AccountWideReputation: 9
@@ -3038,6 +3318,7 @@ FrameTutorialAccount:
     HousingMarketTab: 34
     HousingModesUnlocked: 38
     HousingNewPip: 31
+    HousingPetBeds: 50
     HousingTeleportButton: 35
     HudRevampBagChanges: 1
     LFGList: 6
@@ -3518,6 +3799,9 @@ GraphicsValidationResult:
     Unsupported: 2
     WindowsUnsupported: 28
     WineUnsupported: 33
+GroupBuffItemFlags:
+  values:
+    HideByDefault: 1
 GuildErrorType:
   values:
     AlreadyInGuild: 2
@@ -3601,6 +3885,11 @@ HouseEditorMode:
     ExteriorCustomization: 6
     Layout: 3
     None: 0
+HouseEditorPlayerType:
+  values:
+    None: 0
+    Owner: 1
+    Visitor: 2
 HouseExteriorWMODataFlags:
   values:
     AllowedInAllianceNeighborhoods: 4
@@ -3618,6 +3907,7 @@ HouseFinderSuggestionReason:
     Owner: 1
     PartySync: 16
     Random: 32
+    Relinquished: 128
 HouseLevelRewardType:
   values:
     Object: 1
@@ -3658,6 +3948,41 @@ HousingBasicModeTargetType:
     Decor: 1
     House: 2
     None: 0
+HousingBlueprintContentType:
+  values:
+    Decor: 3
+    Dye: 4
+    Fixture: 5
+    HouseType: 1
+    None: 0
+    Other: 6
+    Room: 2
+HousingBlueprintFlag:
+  values:
+    AutomaticBackup: 1
+    None: 0
+HousingBlueprintType:
+  values:
+    Exterior: 4
+    House: 1
+    Interior: 3
+    None: 0
+    Room: 2
+HousingBlueprintUnmetRequirementFlags:
+  values:
+    HouseSizeLocked: 128
+    HouseTypeLocked: 64
+    InsufficientBudget: 1
+    MismatchedExteriorFaction: 32
+    MissingDecor: 8
+    MissingDye: 16
+    MissingFixture: 4
+    MissingRoom: 2
+HousingBudgetType:
+  values:
+    DecorPlacement: 1
+    PetDecor: 2
+    RoomPlacement: 0
 HousingCatalogEntryModelScenePresets:
   values:
     DecorCeiling: 1338
@@ -3795,6 +4120,11 @@ HousingFixtureType:
     RoofWindow: 14
     Tower: 15
     Window: 12
+HousingHouseScope:
+  values:
+    Exterior: 2
+    Interior: 1
+    None: 0
 HousingIncrementType:
   values:
     Back: 8
@@ -3841,6 +4171,10 @@ HousingLayoutStairDirection:
   values:
     Down: 1
     Up: 0
+HousingPetBehaviorType:
+  values:
+    Stationary: 0
+    Wander: 1
 HousingPlotOwnerType:
   values:
     Friend: 2
@@ -3854,98 +4188,119 @@ HousingPrecisionSubmode:
     Translate: 0
 HousingResult:
   values:
-    ActionLockedByCombat: 1
-    BoundsFailureChildren: 2
-    BoundsFailurePlot: 3
-    BoundsFailureRoom: 4
-    BoundToStartingArea: 5
-    CannotAfford: 6
-    CharterComplete: 7
-    CollisionInvalid: 8
-    DbError: 9
-    DecorCannotBeRedeemed: 10
-    DecorItemNotDestroyable: 11
-    DecorNotFound: 12
-    DecorNotFoundInStorage: 13
-    DuplicateCharterSignature: 14
-    FilterRejected: 15
-    FixtureCantDeleteDoor: 16
-    FixtureHookEmpty: 17
-    FixtureHookOccupied: 18
-    FixtureHouseTypeMismatch: 19
-    FixtureNotFound: 20
-    FixtureSizeMismatch: 21
-    FixtureTypeMismatch: 22
-    GenericFailure: 23
-    GuildMoreAccountsNeeded: 24
-    GuildMoreActivePlayersNeeded: 25
-    GuildNotLoaded: 26
-    HookNotChildOfFixture: 35
-    HouseEditLockFailed: 27
-    HouseExteriorAlreadyThatSize: 28
-    HouseExteriorAlreadyThatType: 29
-    HouseExteriorRootNotFound: 30
-    HouseExteriorSizeNotAvailable: 34
-    HouseExteriorTypeNeighborhoodMismatch: 31
-    HouseExteriorTypeNotFound: 32
-    HouseExteriorTypeSizeMismatch: 33
-    HouseNotFound: 36
-    IncorrectFaction: 37
-    InvalidDecorItem: 38
-    InvalidDistance: 39
-    InvalidGuild: 40
-    InvalidHouse: 41
-    InvalidInstance: 42
-    InvalidInteraction: 43
-    InvalidLightOverlap: 44
-    InvalidMap: 45
-    InvalidNeighborhoodName: 46
-    InvalidRoomLayout: 47
-    LockedByOtherPlayer: 48
-    LockOperationFailed: 49
-    MaxDecorReached: 50
-    MaxPreviewDecorReached: 51
-    MissingCoreFixture: 52
-    MissingDye: 53
-    MissingExpansionAccess: 54
-    MissingFactionMap: 55
-    MissingPrivateNeighborhoodInvite: 56
-    MoreHouseSlotsNeeded: 57
-    MoreSignaturesNeeded: 58
-    NeighborhoodNotFound: 59
-    NoNeighborhoodOwnershipRequests: 60
-    NotInDecorEditMode: 61
-    NotInFixtureEditMode: 62
-    NotInLayoutEditMode: 63
-    NotInsideHouse: 64
-    NotOnOwnedPlot: 65
-    OperationAborted: 66
-    OwnerNotInGuild: 67
-    PermissionDenied: 68
-    PlacementTargetInvalid: 69
-    PlayerNotFound: 70
-    PlayerNotInInstance: 71
-    PlotNotFound: 72
-    PlotNotVacant: 73
-    PlotReservationCooldown: 74
-    PlotReserved: 75
-    RoomNotFound: 76
-    RoomUpdateFailed: 77
-    RpcFailure: 78
-    ServiceNotAvailable: 79
-    StaticDataNotFound: 80
+    AccountBanned: 1
+    ActionLockedByCombat: 2
+    BlueprintCodeInvalid: 3
+    BlueprintDyeFailed: 4
+    BlueprintGenericExportError: 5
+    BlueprintGenericImportError: 6
+    BlueprintLocationInvalid: 7
+    BlueprintNameInvalid: 8
+    BlueprintNotFound: 9
+    BlueprintRequirementsUnmet: 10
+    BlueprintRoomPlacementRequired: 11
+    BlueprintStorageLimit: 14
+    BlueprintTypeInvalid: 12
+    BlueprintTypeLocationInvalid: 13
+    BlueprintVersionInvalid: 15
+    BoundsFailureChildren: 16
+    BoundsFailurePlot: 17
+    BoundsFailureRoom: 18
+    BoundToStartingArea: 19
+    CannotAfford: 20
+    CharterComplete: 21
+    CollisionInvalid: 22
+    DbError: 23
+    DecorCannotBeRedeemed: 24
+    DecorItemNotDestroyable: 25
+    DecorNotFound: 26
+    DecorNotFoundInStorage: 27
+    DuplicateCharterSignature: 28
+    FilterRejected: 29
+    FixtureCantDeleteDoor: 30
+    FixtureHookEmpty: 31
+    FixtureHookOccupied: 32
+    FixtureHouseTypeMismatch: 33
+    FixtureNotFound: 34
+    FixtureSizeMismatch: 35
+    FixtureTypeMismatch: 36
+    GenericFailure: 37
+    GuildMoreAccountsNeeded: 38
+    GuildMoreActivePlayersNeeded: 39
+    GuildNotLoaded: 40
+    HookNotChildOfFixture: 49
+    HouseEditLockFailed: 41
+    HouseExteriorAlreadyThatSize: 42
+    HouseExteriorAlreadyThatType: 43
+    HouseExteriorRootNotFound: 44
+    HouseExteriorSizeNotAvailable: 48
+    HouseExteriorTypeNeighborhoodMismatch: 45
+    HouseExteriorTypeNotFound: 46
+    HouseExteriorTypeSizeMismatch: 47
+    HouseNotFound: 50
+    IncorrectFaction: 51
+    InsufficientRoomBudget: 64
+    InvalidDecorItem: 52
+    InvalidDistance: 53
+    InvalidExteriorDocument: 54
+    InvalidGuild: 55
+    InvalidHouse: 56
+    InvalidInstance: 57
+    InvalidInteraction: 58
+    InvalidInteriorDocument: 59
+    InvalidLightOverlap: 60
+    InvalidMap: 61
+    InvalidNeighborhoodName: 62
+    InvalidRoomLayout: 63
+    LockedByOtherPlayer: 65
+    LockOperationFailed: 66
+    MaxPetDecorReached: 68
+    MaxPlacedDecorReached: 67
+    MaxPreviewDecorReached: 69
+    MaxStorageDecorReached: 70
+    MessageTooLong: 71
+    MissingCoreFixture: 72
+    MissingDye: 73
+    MissingExpansionAccess: 74
+    MissingFactionMap: 75
+    MissingPrivateNeighborhoodInvite: 76
+    MoreHouseSlotsNeeded: 77
+    MoreSignaturesNeeded: 78
+    NeighborhoodNotFound: 79
+    NoNeighborhoodOwnershipRequests: 80
+    NotInDecorEditMode: 81
+    NotInFixtureEditMode: 82
+    NotInLayoutEditMode: 83
+    NotInsideHouse: 84
+    NotOnOwnedPlot: 85
+    OperationAborted: 86
+    OwnerNotInGuild: 87
+    PermissionDenied: 88
+    PlacementTargetInvalid: 89
+    PlayerNotFound: 90
+    PlayerNotInInstance: 91
+    PlotNotFound: 92
+    PlotNotVacant: 93
+    PlotReservationCooldown: 94
+    PlotReserved: 95
+    RoomNotFound: 96
+    RoomPlacementOutOfBounds: 97
+    RoomUpdateFailed: 98
+    RpcFailure: 99
+    ServiceNotAvailable: 100
+    StaticDataNotFound: 101
     Success: 0
-    TimeoutLimit: 81
-    TimerunningNotAllowed: 82
-    TokenRequired: 83
-    TooManyRequests: 84
-    TransactionFailure: 85
-    UncollectedExteriorFixture: 86
-    UncollectedHouseType: 87
-    UncollectedRoom: 88
-    UncollectedRoomMaterial: 89
-    UncollectedRoomTheme: 90
-    UnlockOperationFailed: 91
+    TimeoutLimit: 102
+    TimerunningNotAllowed: 103
+    TokenRequired: 104
+    TooManyRequests: 105
+    TransactionFailure: 106
+    UncollectedExteriorFixture: 107
+    UncollectedHouseType: 108
+    UncollectedRoom: 109
+    UncollectedRoomMaterial: 110
+    UncollectedRoomTheme: 111
+    UnlockOperationFailed: 112
 HousingRoomComponentCeilingType:
   values:
     Flat: 0
@@ -4215,6 +4570,9 @@ ItemConsumableSubclass:
     Scroll: 4
     UtilityCurio: 10
     VantusRune: 9
+ItemConversionFlags:
+  values:
+    UseInputItemStats: 1
 ItemCreationContext:
   values:
     BlackMarket: 15
@@ -4907,6 +5265,16 @@ LoadConfigResult:
     LoadInProgress: 2
     NoChangesNecessary: 1
     Ready: 3
+LocaleTransform:
+  values:
+    AddLikelySubtags: 1
+    Canonicalize: 0
+    Language: 3
+    ParentLocale: 7
+    Region: 5
+    RemoveLikelySubtags: 2
+    Script: 4
+    Variant: 6
 LogicLogicop:
   values:
     And: 1
@@ -4930,6 +5298,9 @@ LogicRelop:
     Lteq: 4
     None: 0
     Notequal: 2
+LoginTicketLicenses:
+  values:
+    GmLicense: 11486
 LogPriority:
   values:
     Debug: 30
@@ -5157,6 +5528,7 @@ NamePlateStyle:
   values:
     Block: 2
     CastFocus: 4
+    Classic: 6
     HealthFocus: 3
     Legacy: 5
     Modern: 0
@@ -5278,6 +5650,12 @@ NodeOpFailureReason:
     WrongSelection: 11
     WrongSpec: 10
     WrongTreeID: 21
+NormalizationForm:
+  values:
+    Nfc: 0
+    Nfd: 1
+    Nfkc: 2
+    Nfkd: 3
 NoRPEReason:
   values:
     BNetToken: 8
@@ -5294,11 +5672,24 @@ NpcCraftingOrderSetFlags:
   values:
     AllowDuplicate: 2
     AllowMultiple: 1
+NumberStyle:
+  values:
+    Currency: 3
+    Decimal: 0
+    Integer: 1
+    Percent: 2
 NumericRuleFormatRounding:
   values:
     Down: 2
     Nearest: 0
     Up: 1
+OnUpdateMode:
+  values:
+    Disabled: 0
+    RunAlways: 4
+    RunOnce: 3
+    RunWhenVisible: 1
+    RunWhenVisibleOnce: 2
 PartyPlaylistEntry:
   values:
     DuoGameMode: 1
@@ -5512,18 +5903,38 @@ PingResult:
     FailedDisabledBySettings: 4
     FailedGeneric: 1
     FailedOutOfPingArea: 5
+    FailedSilent: 8
     FailedSpamming: 2
     FailedSquelched: 6
     FailedUnspecified: 7
     Success: 0
+PingSetTargetState:
+  values:
+    Failed: 1
+    FailedSilent: 2
+    Ok: 0
 PingSubjectType:
   values:
+    ActionNotReady: 9
+    ActionOnCooldown: 7
+    ActionReady: 6
+    ActionUnavailable: 8
     AlertNotThreat: 5
     AlertThreat: 4
     Assist: 2
     Attack: 0
     OnMyWay: 3
     Warning: 1
+PingTargetOption:
+  values:
+    All: 0
+    Environment: 1
+    Units: 2
+PingTargetType:
+  values:
+    Action: 2
+    Point: 1
+    Unit: 0
 PingTextureType:
   values:
     Center: 0
@@ -5532,12 +5943,41 @@ PingTextureType:
 PingTypeFlags:
   values:
     DefaultPing: 1
+PlayerChoiceFlags:
+  values:
+    DoNotRefresh: 8
+    HideAnswerArt: 128
+    HideWarboardHeader: 2
+    InfiniteRange: 1
+    KeepOpenAfterChoice: 4
+    RequiresSelection: 32
+    ShowChoicesAsColumns: 256
+    ShowChoicesAsGrid: 64
+    ShowChoicesAsList: 16
+PlayerChoiceLayout:
+  values:
+    Columns: 3
+    Default: 0
+    Grid: 1
+    List: 2
 PlayerChoiceRarity:
   values:
     Common: 0
     Epic: 3
     Rare: 2
     Uncommon: 1
+PlayerChoiceResponseFlags:
+  values:
+    CheckmarkOnlyButton: 64
+    ConsolidateWidgets: 32
+    HideButton: 128
+    InvertCondition: 8
+    None: 0
+    ShowAnswerDisabled: 1
+    ShowAnswerDisabledWhenConditionFails: 16
+    ShowAnswerSelected: 256
+    ShowArtDesaturated: 2
+    ShowOptionDisabled: 4
 PlayerClubRequestStatus:
   values:
     Approved: 4
@@ -5562,6 +6002,12 @@ PlayerCurrencyFlagsDbFlags:
     Reuse1: 2
     Reuse2: 16
     UnusedInUI: 8
+PlayerDataElementAccountFlags:
+  values:
+    Log: 1
+PlayerDataElementCharacterFlags:
+  values:
+    Log: 1
 PlayerDataElementType:
   values:
     Float: 1
@@ -5664,6 +6110,10 @@ PlunderstormQueueState:
     Proposed: 2
     Queued: 1
     Suspended: 3
+PluralType:
+  values:
+    Cardinal: 0
+    Ordinal: 1
 PowerType:
   values:
     Alternate: 10
@@ -6139,6 +6589,11 @@ RaidDispelDisplayType:
     Disabled: 0
     DispellableByMe: 1
     DisplayAll: 2
+RaidDispelOverlayType:
+  values:
+    Disabled: 0
+    UseBlack: 2
+    UseDebuffColor: 1
 RaidGroupDisplayType:
   values:
     CombineGroupsHorizontal: 3
@@ -6154,6 +6609,14 @@ RcoCloseReason:
     GmCancel: 4
     Invalid: 6
     Reject: 3
+RecentAlliesFriendTag:
+  values:
+    Delves: 4
+    Dungeons: 3
+    Professions: 0
+    PvP: 1
+    Questing: 5
+    Raiding: 2
 RecentAllyPinResult:
   values:
     ServerError: 1
@@ -6163,6 +6626,19 @@ RecipeRequirementType:
     Area: 2
     SpellFocus: 0
     Totem: 1
+RecruitAFriendFailure:
+  values:
+    InsufExpanLvl: 7
+    MapIncomingTransferNotAllowed: 9
+    NoTarget: 3
+    NotInClassic: 10
+    NotInParty: 4
+    NotLinked: 1
+    NotNow: 2
+    Offline: 8
+    Success: 0
+    SummonCooldown: 6
+    SummonLevelMax: 5
 RecruitAFriendRewardsVersion:
   values:
     InvalidVersion: 0
@@ -6213,6 +6689,7 @@ ReportMajorCategory:
   values:
     Cheating: 2
     GameplaySabotage: 1
+    InappropriateBlueprint: 5
     InappropriateCommunication: 0
     InappropriateDecor: 4
     InappropriateName: 3
@@ -6232,6 +6709,7 @@ ReportMinorCategory:
     GuildName: 4096
     Hacking: 64
     HarmfulToMinors: 32768
+    HousingBlueprint: 1048576
     IntentionallyFeeding: 16
     Name: 16384
     NeighborhoodName: 524288
@@ -6260,6 +6738,7 @@ ReportType:
     GroupFinderApplicant: 5
     GroupFinderPosting: 4
     GroupMember: 7
+    HousingBlueprint: 21
     HousingDecor: 18
     InWorld: 1
     Mail: 12
@@ -6286,6 +6765,13 @@ ResidentType:
     Manager: 1
     Owner: 2
     Resident: 0
+RestrictionType:
+  values:
+    AccountExpansion: 2
+    Achievement: 3
+    Entitlement: 4
+    Invalid: 0
+    ServerExpansion: 1
 RestrictPingsTo:
   values:
     Assist: 2
@@ -6296,12 +6782,20 @@ RetroactiveDecorRewardFlags:
   values:
     AllCriteriaRequired: 1
     None: 0
+RolodexContactMigrationResult:
+  values:
+    ContactAdded: 0
+    ContactUpdated: 1
 RolodexContextLevelType:
   values:
     DelveTier: 3
     Difficulty: 1
     KeystoneLevel: 2
     None: 0
+RolodexDbFlags:
+  values:
+    None: 0
+    PromotedFromContact: 1
 RolodexType:
   values:
     CompleteArena: 16
@@ -6314,6 +6808,7 @@ RolodexType:
     GuildOrderFilledByYou: 10
     KillLfrBoss: 14
     KillRaidBoss: 13
+    LegacyFriend: 23
     None: 0
     PartyMember: 1
     PersonalOrderFilledByOther: 7
@@ -6363,6 +6858,11 @@ ScreenshotSource:
     Automatic: 0
     Cheat: 2
     PlayerReport: 1
+ScriptBindingType:
+  values:
+    Extrinsic: 1
+    Postcall: 2
+    Precall: 0
 ScriptedAnimationBehavior:
   values:
     None: 0
@@ -6383,6 +6883,21 @@ ScriptedAnimationTrajectory:
     CurveRight: 4
     HalfwayBetween: 6
     Straight: 2
+ScriptObjectAccessRestriction:
+  values:
+    DenyTaintedAccessWhenAurasAreSecret: 1
+ScriptObjectMetatable:
+  values:
+    Forbidden: 1
+    Public: 0
+ScriptObjectPartition:
+  values:
+    Forbidden: 1
+    Public: 0
+ScriptObjectPropagationPath:
+  values:
+    Hierarchy: 0
+    Layout: 1
 ScrubStringFlags:
   values:
     AllowBarCodes: 2
@@ -6413,6 +6928,10 @@ SecondsFormatterIntervalWhitespace:
     Preserve: 0
     Strip: 1
     StripIgnoreLocale: 2
+SecondsFormatterRounding:
+  values:
+    RoundUp: 0
+    Truncate: 1
 SecrecyLevel:
   values:
     AlwaysSecret: 1
@@ -6438,6 +6957,7 @@ SecretAspect:
     ObjectSecurity: 1
     ObjectType: 1
     Padding: 262144
+    RadialProgress: 8388608
     Rotation: 65536
     Scale: 64
     ScrollOffset: 4194304
@@ -6545,6 +7065,26 @@ SlotRegionMask:
     PlayerBags: 4
     PlayerEquip: 2
     PlayerInv: 8
+SocialSystemType:
+  values:
+    Friends: 0
+    QuickJoin: 1
+    RaidList: 2
+    RecentAllies: 4
+    RecruitAFriend: 3
+SocialUIBlockType:
+  values:
+    BattleNetInviteBlock: 2
+    Ignore: 1
+    None: 0
+SocialUIPresenceType:
+  values:
+    AppearOffline: 5
+    Away: 3
+    Busy: 4
+    Offline: 2
+    Online: 1
+    Unknown: 0
 SocialWhoOrigin:
   values:
     Chat: 2
@@ -6715,6 +7255,10 @@ StatusBarOverrideBarTextShownType:
     Never: 0
     OnlyNotOnMouseover: 3
     OnlyOnMouseover: 2
+StatusBarRenderMode:
+  values:
+    Linear: 0
+    Radial: 1
 StatusBarTimerDirection:
   values:
     ElapsedTime: 0
@@ -6786,6 +7330,7 @@ SubcontainerType:
     Mail: 4
     Quarantine: 24
     Reagentbank: 22
+    Reserved: 40
 SubscriptionInterstitialResponseType:
   values:
     Clicked: 0
@@ -6827,8 +7372,14 @@ SurveyDeliveryFlags:
   values:
     EncounterSucccessOnly: 1
     None: 0
+    PvPLossOnly: 16
+    PvPRatedOnly: 2
+    PvPUnratedOnly: 4
+    PvPWinOnly: 8
 SurveyDeliveryMoment:
   values:
+    AchievementCompleted: 6
+    BattlegroundEnd: 7
     ChestLooted: 3
     EncounterEnd: 5
     Login: 0
@@ -6844,10 +7395,16 @@ TieredEntranceRewardType:
   values:
     Currency: 1
     Item: 0
+TieredEntranceTierFlag:
+  values:
+    IsLFG: 1
 TieredEntranceType:
   values:
     Delve: 1
     Invalid: 0
+    Lairs: 4
+    Placeholder_5: 5
+    Placeholder_6: 6
     Sites: 2
     WorldTier: 3
 TimeEventFlag:
@@ -6881,6 +7438,7 @@ TooltipDataItemBinding:
     Soulbound: 3
 TooltipDataLineType:
   values:
+    AuraCaster: 51
     AzeriteEssencePower: 5
     AzeriteEssenceSlot: 4
     AzeriteItemPowerDescription: 9
@@ -6898,6 +7456,9 @@ TooltipDataLineType:
     ItemName: 22
     ItemQuality: 35
     ItemSpellTriggerLearn: 38
+    ItemSpellTriggerOnEquip: 45
+    ItemSpellTriggerOnProc: 46
+    ItemSpellTriggerOnUse: 44
     ItemUpgradeLevel: 32
     LearnableSpell: 6
     LearnTransmogIllusion: 40
@@ -6921,9 +7482,13 @@ TooltipDataLineType:
     ToySource: 29
     ToyText: 25
     TradeTimeRemaining: 36
+    UnitCriteriaProgress: 50
+    UnitDead: 49
+    UnitLevel: 47
     UnitName: 2
     UnitOwner: 16
     UnitThreat: 7
+    UnitType: 48
     UsageRequirement: 43
 TooltipDataType:
   values:
@@ -7228,6 +7793,7 @@ TransmogCollectionType:
 TransmogIllusionFlags:
   values:
     AllowedRangedShieldsHoldables: 4
+    HiddenIllusion: 8
     HideUntilCollected: 1
     PlayerConditionGrantsOnLogin: 2
 TransmogModification:
@@ -7537,7 +8103,6 @@ TurnStrafeStyle:
 UIActionType:
   values:
     DefaultAction: 0
-    Reserved1: 2
     UpdateMapSystem: 1
 UICovenantDisplayInfoFlags:
   values:
@@ -7820,6 +8385,11 @@ UnitAuraSortRule:
     Name: 5
     NameOnly: 6
     Unsorted: 0
+UnitAuraSoundTrigger:
+  values:
+    Added: 0
+    ApplicationsIncreased: 1
+    Removed: 2
 UnitDamageAbsorbClampMode:
   values:
     MaximumHealth: 2
@@ -8071,6 +8641,18 @@ VignetteType:
     PvPBounty: 1
     Torghast: 2
     Treasure: 3
+VisualAlertType:
+  values:
+    Flash: 6
+    FlashBlue: 10
+    FlashCyan: 7
+    FlashGreen: 9
+    FlashRed: 8
+    MarchingAnts: 1
+    MarchingAntsBlue: 5
+    MarchingAntsCyan: 2
+    MarchingAntsGreen: 4
+    MarchingAntsRed: 3
 Vocalerrorsounds:
   values:
     Abilitycooling: 50
@@ -8199,6 +8781,13 @@ WeaponSlot:
   values:
     MainHand: 0
     OffHand: 1
+WeatherType:
+  values:
+    Clear: 0
+    Miscellaneous: 4
+    Rain: 1
+    Sandstorm: 3
+    Snow: 2
 WeeklyRewardChestActivityType:
   values:
     LFGDungeons: 1

@@ -115,18 +115,6 @@ lies:
           _change:
             from: unknown
             to: any
-    table.count:
-      inputs:
-      - type:
-          _change:
-            from: unknown
-            to: any
-    table.create:
-      outputs:
-      - type:
-          _change:
-            from: unknown
-            to: table
     UnitFactionGroup:
       _add:
         mayreturnnothing: true
@@ -141,12 +129,6 @@ lies:
           nilable: true
       - _add:
           nilable: true
-    UnitRace:
-      inputs:
-      - type:
-          _change:
-            from: string
-            to: unit
   events:
     MINIMAP_PING:
       _remove:
@@ -351,13 +333,6 @@ lies:
         outputs:
         - _add:
             nilable: true
-      HookScript:
-        outputs:
-          _change:
-            from:
-            to:
-            - name: success
-              type: boolean
     TextureBase:
       GetAtlas:
         outputs:
@@ -469,6 +444,8 @@ script_objects:
     luaobject: LuaDurationManualClock
   LuaDurationObjectAPI:
     luaobject: LuaDurationObject
+  LuaLocaleContextAPI:
+    luaobject: LuaLocaleContext
   MinimapFrameAPI:
     uiobject: Minimap
   NumericFormatterAPI:
@@ -489,6 +466,8 @@ script_objects:
     uiobject: AnimationGroup
   SimpleAnimPathAPI:
     uiobject: Path
+  SimpleAnimRadialProgressAPI:
+    uiobject: RadialProgress
   SimpleAnimRotationAPI:
     uiobject: Rotation
   SimpleAnimScaleAPI:
@@ -555,6 +534,10 @@ script_objects:
     uiobject: Texture
   SimpleTextureBaseAPI:
     uiobject: TextureBase
+  SimpleVectorGraphicsAPI:
+    uiobject: VectorGraphics
+  TimedSignalMapAPI:
+    luaobject: TimedSignalMap
   UnitHealPredictionCalculatorAPI:
     luaobject: UnitHealPredictionCalculator
 typedefs:
@@ -566,6 +549,8 @@ typedefs:
       luaobject: AbbreviatedNumberFormatter
   AnimationDataEnum:
     type: number
+  any:
+    type: any
   ArtifactTiers:
     type: number
   AuraFilters:
@@ -609,14 +594,8 @@ typedefs:
       uiobject: UIObject
   cstring:
     type: string
-  DurationMillisecondsPrimitive:
-    type: number
-  DurationSeconds:
-    type: number
-  DurationSecondsDouble:
-    type: number
-  DurationSecondsPrimitive:
-    type: number
+  DiscordID:
+    type: string
   DurationTextBinding:
     type:
       luaobject: DurationTextBinding
@@ -658,7 +637,11 @@ typedefs:
     type: number
   ItemInfo:
     type: string
+  kstringAuroraName:
+    type: string
   kstringClubMessage:
+    type: string
+  KStringDiscordUserName:
     type: string
   kstringLfgListApplicant:
     type: string
@@ -686,14 +669,18 @@ typedefs:
   LuaDurationObject:
     type:
       luaobject: LuaDurationObject
-  luaFunction:
+  LuaFunctionReference:
     type: function
   luaIndex:
+    type: number
+  LuaInventorySlot:
     type: number
   LuaValueReference:
     type: unknown
   LuaValueVariant:
     type: table
+  Milliseconds:
+    type: number
   ModelAsset:
     type: string
   ModelSceneFrame:
@@ -728,6 +715,10 @@ typedefs:
     outnil: true
     type:
       uiobject: Region
+  ScriptTypeName:
+    type: string
+  Seconds:
+    type: number
   SecondsFormatter:
     type:
       luaobject: SecondsFormatter
@@ -773,6 +764,9 @@ typedefs:
     outnil: true
     type:
       uiobject: Texture
+  SimpleVectorGraphics:
+    type:
+      uiobject: VectorGraphics
   SimpleWindow:
     type: nil
   SingleColorValue:
@@ -787,6 +781,8 @@ typedefs:
     type: string
   stringView:
     type: string
+  table:
+    type: table
   TBFFlags:
     type: string
   TextureAsset:
@@ -802,6 +798,9 @@ typedefs:
       luaobject: LuaFunctionContainer
   time_t:
     type: number
+  TimedSignalMap:
+    type:
+      luaobject: TimedSignalMap
   TimerCallback:
     type:
       luaobject: LuaFunctionContainer
@@ -819,6 +818,8 @@ typedefs:
   UISoundSubType:
     type: string
   uiUnit:
+    type: number
+  UnitCastBarID:
     type: number
   UnitHealPredictionCalculator:
     type:

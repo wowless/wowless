@@ -26,6 +26,22 @@ local function tpath(t, ...)
   return t
 end
 
+local function names(list)
+  local t = {}
+  for _, item in ipairs(list or {}) do
+    table.insert(t, item.name)
+  end
+  return table.concat(t, ', ')
+end
+
+local function genusage(fullname, api)
+  if not api.genusage then
+    return nil
+  end
+  assert(#api.inputs == 1 and api.inputs[1].type == 'table', fullname)
+  return ('local %s = %s(%s)'):format(names(api.outputs), fullname, names(api.inputs))
+end
+
 local function renderXml(x)
   local function doRenderXml(y, n, t)
     local attrs = {}
@@ -504,6 +520,7 @@ local ptablemap = {
     for name, api in pairs(perproduct(p, 'apis')) do
       if not name:find('%.') and not api.secureonly then
         local vv = {
+          genusage = genusage(name, api),
           overwritten = tpath(config, 'addon', 'overwritten_apis', name) and true,
           protected = api.protected,
           unsupported = api.unsupported,
@@ -650,9 +667,11 @@ local ptablemap = {
     local t = {}
     for k, v in pairs(apiNamespaces) do
       local mt = {}
-      for mk in pairs(v.methods) do
+      for mk, api in pairs(v.methods) do
+        local fullname = k .. '.' .. mk
         local tt = {
-          overwritten = tpath(config, 'addon', 'overwritten_apis', k .. '.' .. mk) and true,
+          genusage = genusage(fullname, api),
+          overwritten = tpath(config, 'addon', 'overwritten_apis', fullname) and true,
         }
         mt[mk] = next(tt) and tt or true
       end

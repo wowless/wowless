@@ -11,13 +11,22 @@ AddPrivateAuraAnchorArgs:
       type:
         structure: PrivateAuraIconInfo
     isContainer:
+      default: false
       type: boolean
     parent:
       type:
         uiobject: Frame
-    showCountdownFrame:
+    showCooldownEdge:
+      default: false
+      type: boolean
+    showCooldownFrame:
+      default: false
       type: boolean
     showCountdownNumbers:
+      default: false
+      type: boolean
+    showDispelIcon:
+      default: false
       type: boolean
     unitToken:
       type: string
@@ -670,6 +679,247 @@ C_AuctionHouse.OwnedAuctionInfo:
     timeLeftSeconds:
       nilable: true
       type: number
+C_AuraContainerUtil.AuraContainerTooltipAnchorOffsets:
+  fields:
+    bottom:
+      default: 0
+      type: number
+    left:
+      default: 0
+      type: number
+    right:
+      default: 0
+      type: number
+    top:
+      default: 0
+      type: number
+C_AuraContainerUtil.AuraContainerTooltipBackdropInfo:
+  fields:
+    bgFile:
+      nilable: true
+      type: string
+    edgeFile:
+      nilable: true
+      type: string
+    edgeSize:
+      nilable: true
+      type: number
+    insets:
+      nilable: true
+      type:
+        structure: C_AuraContainerUtil.AuraContainerTooltipBackdropInsets
+    tile:
+      nilable: true
+      type: boolean
+    tileEdge:
+      nilable: true
+      type: boolean
+    tileSize:
+      nilable: true
+      type: number
+C_AuraContainerUtil.AuraContainerTooltipBackdropInsets:
+  fields:
+    bottom:
+      default: 0
+      type: number
+    left:
+      default: 0
+      type: number
+    right:
+      default: 0
+      type: number
+    top:
+      default: 0
+      type: number
+C_AuraContainerUtil.AuraContainerTooltipBackdropOptions:
+  fields:
+    anchorOffsets:
+      nilable: true
+      type:
+        structure: C_AuraContainerUtil.AuraContainerTooltipAnchorOffsets
+    backdropInfo:
+      type:
+        structure: C_AuraContainerUtil.AuraContainerTooltipBackdropInfo
+    borderColor:
+      nilable: true
+      type:
+        structure: colorRGBA
+    centerColor:
+      nilable: true
+      type:
+        structure: colorRGBA
+C_AuraContainerUtil.AuraContainerTooltipNineSliceOptions:
+  fields:
+    anchorOffsets:
+      nilable: true
+      type:
+        structure: C_AuraContainerUtil.AuraContainerTooltipAnchorOffsets
+    borderColor:
+      nilable: true
+      type:
+        structure: colorRGBA
+    centerColor:
+      nilable: true
+      type:
+        structure: colorRGBA
+    layoutName:
+      type: string
+C_AuraContainerUtil.AuraContainerTooltipTextureSliceOptions:
+  fields:
+    anchorOffsets:
+      nilable: true
+      type:
+        structure: C_AuraContainerUtil.AuraContainerTooltipAnchorOffsets
+    asset:
+      type: string
+    color:
+      nilable: true
+      type:
+        structure: colorRGBA
+    drawLayer:
+      nilable: true
+      type:
+        stringenum: DrawLayer
+    drawLayerSublevel:
+      default: 0
+      type: number
+    sliceMargins:
+      nilable: true
+      type:
+        structure: UITextureSliceMargins
+    sliceMode:
+      nilable: true
+      type:
+        enum: UITextureSliceMode
+C_AuraContainerUtil.CustomAuraButtonApplicationBarOptions:
+  fields:
+    interpolation:
+      nilable: true
+      type:
+        enum: StatusBarInterpolation
+    maxApplications:
+      type: number
+    minApplications:
+      default: 0
+      type: number
+C_AuraContainerUtil.CustomAuraButtonApplicationCountOptions:
+  fields:
+    formatter:
+      nilable: true
+      type:
+        luaobject: NumericFormatter
+C_AuraContainerUtil.CustomAuraButtonCasterNameOptions:
+  fields:
+    showRealmName:
+      default: false
+      type: boolean
+    useClassColors:
+      default: false
+      type: boolean
+C_AuraContainerUtil.CustomAuraButtonDispelTypeTextOptions:
+  fields:
+    customDispelTextMap:
+      nilable: true
+      type:
+        arrayof: string
+    showWhenHarmful:
+      default: true
+      type: boolean
+    showWhenHelpful:
+      default: false
+      type: boolean
+    showWithoutDispelType:
+      default: false
+      type: boolean
+C_AuraContainerUtil.CustomAuraButtonDispelTypeTextureAsset:
+  fields:
+    asset:
+      type: string
+    texCoords:
+      nilable: true
+      type:
+        structure: C_AuraContainerUtil.CustomAuraButtonDispelTypeTextureTexCoords
+    useAtlasSize:
+      default: false
+      type: boolean
+C_AuraContainerUtil.CustomAuraButtonDispelTypeTextureOptions:
+  fields:
+    customDispelAssetMap:
+      nilable: true
+      type:
+        arrayof:
+          structure: C_AuraContainerUtil.CustomAuraButtonDispelTypeTextureAsset
+    customDispelColorCurve:
+      nilable: true
+      type:
+        luaobject: LuaColorCurveObject
+    customDispelColorMap:
+      nilable: true
+      type:
+        arrayof:
+          structure: colorRGB
+    showAlways:
+      default: false
+      type: boolean
+    showWhenHarmful:
+      default: true
+      type: boolean
+    showWhenHelpful:
+      default: false
+      type: boolean
+    showWithoutDispelType:
+      default: false
+      type: boolean
+    stealableFilter:
+      nilable: true
+      type:
+        enum: CustomAuraButtonDispelTypeStealableFilter
+    style:
+      default: 1
+      type:
+        enum: CustomAuraButtonDispelTypeTextureStyle
+C_AuraContainerUtil.CustomAuraButtonDispelTypeTextureTexCoords:
+  fields:
+    bottom:
+      default: 1
+      type: number
+    left:
+      default: 0
+      type: number
+    right:
+      default: 1
+      type: number
+    top:
+      default: 0
+      type: number
+C_AuraContainerUtil.CustomAuraButtonDurationBarOptions:
+  fields:
+    direction:
+      nilable: true
+      type:
+        enum: StatusBarTimerDirection
+    interpolation:
+      nilable: true
+      type:
+        enum: StatusBarInterpolation
+C_AuraContainerUtil.CustomAuraButtonDurationTextOptions:
+  fields:
+    binding:
+      nilable: true
+      type:
+        luaobject: DurationTextBinding
+    textColor:
+      nilable: true
+      type:
+        structure: DurationTextBindingColorOptions
+    textFormat:
+      nilable: true
+      type:
+        structure: DurationTextBindingFormatOptions
+    textFormatter:
+      nilable: true
+      type:
+        luaobject: NumericFormatter
 C_AutoComplete.AutoCompleteResult:
   fields:
     bnetID:
@@ -772,6 +1022,26 @@ C_Bank.PurchasableBankTabData:
       type: string
     tabCost:
       type: number
+C_BattleNet.AuroraFriendsSearchInfo:
+  fields:
+    isAFK:
+      type: boolean
+    isAvailableForQueue:
+      type: boolean
+    isDND:
+      type: boolean
+    isInQueue:
+      type: boolean
+    isOffline:
+      type: boolean
+    isOnline:
+      type: boolean
+    searchText:
+      type: string
+    tags:
+      type:
+        arrayof:
+          enum: BattleNetFriendTag
 C_BattleNet.BNetAccountInfo:
   fields:
     accountName:
@@ -786,6 +1056,14 @@ C_BattleNet.BNetAccountInfo:
       type: string
     customMessageTime:
       type: number
+    friendLevel:
+      nilable: true
+      type:
+        enum: BattleNetFriendLevel
+    friendTags:
+      type:
+        arrayof:
+          enum: BattleNetFriendTag
     gameAccountInfo:
       type:
         structure: C_BattleNet.BNetGameAccountInfo
@@ -806,6 +1084,18 @@ C_BattleNet.BNetAccountInfo:
     rafLinkType:
       type:
         enum: RafLinkType
+C_BattleNet.BNetFriendInviteInfo:
+  fields:
+    accountName:
+      type: string
+    creationTimestamp:
+      type: number
+    friendLevel:
+      nilable: true
+      type:
+        enum: BattleNetFriendLevel
+    inviteID:
+      type: number
 C_BattleNet.BNetGameAccountInfo:
   fields:
     areaName:
@@ -817,6 +1107,9 @@ C_BattleNet.BNetGameAccountInfo:
       nilable: true
       type: number
     characterName:
+      nilable: true
+      type: string
+    classFilename:
       nilable: true
       type: string
     classID:
@@ -833,6 +1126,8 @@ C_BattleNet.BNetGameAccountInfo:
     gameAccountID:
       type: number
     hasFocus:
+      type: boolean
+    isAppearOffline:
       type: boolean
     isGameAFK:
       type: boolean
@@ -1306,6 +1601,8 @@ C_CatalogShop.CatalogShopProductInfo:
       nilable: true
       type:
         structure: C_CatalogShop.DecorQuantity
+    deferredGameTimeDays:
+      type: number
     description:
       type: string
     discountPercentage:
@@ -1642,6 +1939,10 @@ C_Club.ClubMemberInfo:
       nilable: true
       type:
         enum: ClubType
+    discordInfo:
+      nilable: true
+      type:
+        structure: DiscordChatInfo
     faction:
       nilable: true
       type:
@@ -2255,6 +2556,9 @@ C_ContributionCollector.ContributionMapInfo:
         structure: vector2
 C_CooldownViewer.CooldownViewerCooldown:
   fields:
+    buffSlot:
+      nilable: true
+      type: number
     category:
       type:
         enum: CooldownViewerCategory
@@ -2262,10 +2566,15 @@ C_CooldownViewer.CooldownViewerCooldown:
       type: boolean
     cooldownID:
       type: number
+    equipSlot:
+      nilable: true
+      type: number
     flags:
       type:
         enum: CooldownSetSpellFlags
     hasAura:
+      type: boolean
+    isInvisible:
       type: boolean
     isKnown:
       type: boolean
@@ -2280,6 +2589,23 @@ C_CooldownViewer.CooldownViewerCooldown:
       type: number
     selfAura:
       type: boolean
+    spellCategoryID:
+      nilable: true
+      type: number
+    spellID:
+      nilable: true
+      type: number
+C_CooldownViewer.GroupBuffItem:
+  fields:
+    flags:
+      type:
+        enum: GroupBuffItemFlags
+    iconID:
+      type: number
+    isKnown:
+      type: boolean
+    name:
+      type: string
     spellID:
       type: number
 C_CovenantPreview.CovenantAbilityInfo:
@@ -2781,11 +3107,17 @@ C_DelvesUI.TieredEntranceRewardInfo:
         enum: TieredEntranceRewardType
 C_DelvesUI.TieredEntranceTierInfo:
   fields:
+    difficultyID:
+      type: number
     lockedReason:
       nilable: true
       type: string
     modifierUIWidgetSetID:
       type: number
+    overrideTooltipSpellID:
+      type: number
+    queueAsLFG:
+      type: boolean
     rewards:
       type:
         arrayof:
@@ -3168,9 +3500,6 @@ C_EventToastManager.EventToastInfo:
       type: number
     flags:
       type: number
-    hideDefaultAtlas:
-      nilable: true
-      type: boolean
     hideSoundKitID:
       nilable: true
       type: number
@@ -4646,6 +4975,8 @@ C_LFGList.LfgEntryData:
         arrayof: number
     autoAccept:
       type: boolean
+    censored:
+      type: boolean
     comment:
       type: string
     duration:
@@ -4726,6 +5057,8 @@ C_LFGList.LfgSearchResultData:
     age:
       type: number
     autoAccept:
+      type: boolean
+    censored:
       type: boolean
     comment:
       type: string
@@ -5516,6 +5849,16 @@ C_PaperDollInfo.InspectRatedBGData:
       type: number
     won:
       type: number
+C_PaperDollInfo.TemporaryItemEnchantInfo:
+  fields:
+    chargesRemaining:
+      type: number
+    enchantID:
+      type: number
+    hasExpirationTime:
+      type: boolean
+    remainingTimeMs:
+      type: number
 C_PartyPose.PartyPoseInfo:
   fields:
     defeatModelSceneID:
@@ -5781,9 +6124,14 @@ C_PetJournal.PetAbilityLevelInfo:
       type: number
 C_PetJournal.PetJournalPetInfo:
   fields:
+    canAttachToDecor:
+      type: boolean
     canBattle:
       type: boolean
     creatureID:
+      type: number
+    creatureModelScale:
+      nilable: true
       type: number
     customName:
       nilable: true
@@ -5791,14 +6139,18 @@ C_PetJournal.PetJournalPetInfo:
     description:
       type: string
     displayID:
+      nilable: true
       type: number
     icon:
       type: number
     isFavorite:
+      nilable: true
       type: boolean
     isWild:
+      nilable: true
       type: boolean
     maxXP:
+      nilable: true
       type: number
     name:
       nilable: true
@@ -5806,6 +6158,7 @@ C_PetJournal.PetJournalPetInfo:
     obtainable:
       type: boolean
     petLevel:
+      nilable: true
       type: number
     petType:
       type: number
@@ -5818,7 +6171,26 @@ C_PetJournal.PetJournalPetInfo:
     unique:
       type: boolean
     xp:
+      nilable: true
       type: number
+C_Ping.PingTypeInfo:
+  fields:
+    orderIndex:
+      type: number
+    type:
+      type:
+        enum: PingSubjectType
+    uiTextureKitID:
+      type: string
+C_PingSecure.SendPingResult:
+  fields:
+    result:
+      type:
+        enum: PingResult
+    type:
+      nilable: true
+      type:
+        enum: PingSubjectType
 C_PlayerChoice.PlayerChoiceInfo:
   fields:
     choiceID:
@@ -5826,6 +6198,8 @@ C_PlayerChoice.PlayerChoiceInfo:
     closeUISoundKitID:
       nilable: true
       type: number
+    hideAnswerArt:
+      type: boolean
     hideWarboardHeader:
       type: boolean
     keepOpenAfterChoice:
@@ -5838,13 +6212,12 @@ C_PlayerChoice.PlayerChoiceInfo:
           structure: C_PlayerChoice.PlayerChoiceOptionInfo
     pendingChoiceText:
       type: string
+    playerChoiceLayout:
+      type:
+        enum: PlayerChoiceLayout
     questionText:
       type: string
     requiresSelection:
-      type: boolean
-    showChoicesAsGrid:
-      type: boolean
-    showChoicesAsList:
       type: boolean
     soundKitID:
       nilable: true
@@ -6570,6 +6943,22 @@ C_QuestSession.QuestSessionPlayerDetails:
       type: string
     name:
       type: string
+C_RecentAllies.RecentAlliesSearchInfo:
+  fields:
+    interests:
+      type:
+        arrayof:
+          enum: RecentAlliesFriendTag
+    isAFK:
+      type: boolean
+    isDND:
+      type: boolean
+    isOffline:
+      type: boolean
+    isOnline:
+      type: boolean
+    searchText:
+      type: string
 C_RecentAllies.RecentAllyCharacterData:
   fields:
     classID:
@@ -6643,6 +7032,8 @@ C_RecentAllies.RecentAllyStateData:
     friendRequestSentThisSession:
       type: boolean
     isAFK:
+      type: boolean
+    isConvertedLegacyFriend:
       type: boolean
     isDND:
       type: boolean
@@ -6949,7 +7340,11 @@ C_ScenarioInfo.ScenarioCriteriaInfo:
       type: number
 C_ScenarioInfo.ScenarioDisplayInfo:
   fields:
+    startSoundKitID:
+      nilable: true
+      type: number
     themeColor:
+      nilable: true
       type:
         structure: colorRGB
 C_ScenarioInfo.ScenarioIconInfo:
@@ -7279,6 +7674,25 @@ C_Soulbinds.SoulbindTree:
       type:
         arrayof:
           structure: C_Soulbinds.SoulbindNode
+C_Sound.PlaySoundParams:
+  fields:
+    forceNoDuplicates:
+      default: false
+      type: boolean
+    overridePriority:
+      nilable: true
+      type: number
+    runFinishCallback:
+      default: false
+      type: boolean
+    soundKitID:
+      type: number
+    uiSoundSubType:
+      default: g_defaultSI3UISoundSubTypeForLua
+      type: string
+    volumeOverride:
+      nilable: true
+      type: number
 C_SpecializationInfo.PvpTalentInfo:
   fields:
     available:
@@ -10263,6 +10677,14 @@ C_WarbandScene.WarbandSceneSearchInfo:
     ownedOnly:
       default: false
       type: boolean
+C_Weather.WeatherInfo:
+  fields:
+    intensity:
+      type: number
+    type:
+      default: 0
+      type:
+        enum: WeatherType
 C_WeeklyRewards.ConquestWeeklyProgress:
   fields:
     displayType:
@@ -10414,6 +10836,22 @@ CharacterAlternateFormData:
       type: string
     raceID:
       type: number
+CharacterProperties:
+  fields:
+    blockCode:
+      type: string
+    codePoint:
+      type: number
+    generalCategory:
+      type: string
+    isAlphabetic:
+      type: boolean
+    isDigit:
+      type: boolean
+    isWhitespace:
+      type: boolean
+    scriptCode:
+      type: string
 CharCustomizationCategory:
   fields:
     cameraDistanceOffset:
@@ -11034,6 +11472,8 @@ CraftingQualityInfo:
       type: string
     iconMixed:
       type: string
+    iconQuestObjective:
+      type: string
     iconSmall:
       type: string
     quality:
@@ -11184,6 +11624,30 @@ CreateFontFamilyMemberInfo:
       type: string
     height:
       type: number
+CreateFrameOptions:
+  fields:
+    forbidden:
+      default: false
+      type: boolean
+    frameType:
+      type: string
+    hidden:
+      default: false
+      type: boolean
+    id:
+      nilable: true
+      type: number
+    inherits:
+      nilable: true
+      type:
+        arrayof: string
+    name:
+      nilable: true
+      type: string
+    parent:
+      nilable: true
+      type:
+        uiobject: Frame
 CriteriaRequiredValue:
   fields:
     criteriaID:
@@ -11202,6 +11666,12 @@ CurrencyCost:
       type: number
     currencyID:
       type: number
+CurrencyParseResult:
+  fields:
+    amount:
+      type: number
+    currencyCode:
+      type: string
 DBColorExport:
   fields:
     baseTag:
@@ -11225,6 +11695,46 @@ DelveAssistActionData:
     receivedSpellID:
       nilable: true
       type: number
+DiscordChatInfo:
+  fields:
+    forwardedMessage:
+      type: string
+    fromDiscord:
+      type: boolean
+    globalName:
+      type: string
+    hasAttachment:
+      type: boolean
+    hasEmbed:
+      type: boolean
+    hasEmoji:
+      type: boolean
+    hasError:
+      type: boolean
+    hasForwardedMessage:
+      type: boolean
+    hasPoll:
+      type: boolean
+    hasSticker:
+      type: boolean
+    lastOnlineGUID:
+      type: string
+    lastOnlineName:
+      type: string
+    type:
+      default: 0
+      type:
+        enum: DiscordDisplayNameType
+    userID:
+      type: string
+DurationTextBindingColorOptions:
+  fields:
+    curve:
+      type:
+        luaobject: LuaColorCurveObject
+    property:
+      type:
+        enum: DurationTextBindingProperty
 DurationTextBindingFormatComponent:
   fields:
     formatter:
@@ -11233,6 +11743,14 @@ DurationTextBindingFormatComponent:
     property:
       type:
         enum: DurationTextBindingProperty
+DurationTextBindingFormatOptions:
+  fields:
+    components:
+      type:
+        arrayof:
+          structure: DurationTextBindingFormatComponent
+    formatString:
+      type: string
 DyeColorCategoryDisplayInfo:
   fields:
     ID:
@@ -11527,6 +12045,13 @@ GatheringOperationInfo:
       type: number
     spellID:
       type: number
+GroupBuffVisualAlertInfo:
+  fields:
+    spellID:
+      type: number
+    visualValue:
+      type:
+        enum: VisualAlertType
 GuildTabardInfo:
   fields:
     backgroundColor:
@@ -11670,6 +12195,108 @@ HouseOwnerCharacterInfo:
         enum: HouseOwnerError
     playerGUID:
       type: string
+HousingBlueprintBudgetEntry:
+  fields:
+    budgetType:
+      type:
+        enum: HousingBudgetType
+    cost:
+      type: number
+    current:
+      nilable: true
+      type: number
+    max:
+      nilable: true
+      type: number
+HousingBlueprintBudgetInfo:
+  fields:
+    exteriorBudgets:
+      type:
+        arrayof:
+          structure: HousingBlueprintBudgetEntry
+    interiorBudgets:
+      type:
+        arrayof:
+          structure: HousingBlueprintBudgetEntry
+HousingBlueprintCollection:
+  fields:
+    groups:
+      type:
+        arrayof:
+          structure: HousingBlueprintGroup
+HousingBlueprintContentEntry:
+  fields:
+    contentType:
+      type:
+        enum: HousingBlueprintContentType
+    invalid:
+      default: false
+      type: boolean
+    name:
+      type: string
+    numMissing:
+      default: 0
+      type: number
+    recordID:
+      type: number
+    tooltip:
+      nilable: true
+      type: string
+    total:
+      default: 0
+      type: number
+HousingBlueprintContentGroup:
+  fields:
+    contentType:
+      type:
+        enum: HousingBlueprintContentType
+    entries:
+      type:
+        arrayof:
+          structure: HousingBlueprintContentEntry
+HousingBlueprintContentInfo:
+  fields:
+    blockingRequirementFlags:
+      type:
+        enum: HousingBlueprintUnmetRequirementFlags
+    budgetInfo:
+      type:
+        structure: HousingBlueprintBudgetInfo
+    contentGroups:
+      type:
+        arrayof:
+          structure: HousingBlueprintContentGroup
+    shareCode:
+      type: string
+    targetHouseGUID:
+      nilable: true
+      type: string
+    unmetRequirementFlags:
+      type:
+        enum: HousingBlueprintUnmetRequirementFlags
+HousingBlueprintGroup:
+  fields:
+    entries:
+      type:
+        arrayof:
+          structure: HousingBlueprintInfo
+    name:
+      type: string
+HousingBlueprintInfo:
+  fields:
+    blueprintID:
+      type: number
+    blueprintType:
+      type:
+        enum: HousingBlueprintType
+    creationTime:
+      type: number
+    isAutoSave:
+      type: boolean
+    name:
+      type: string
+    shareCode:
+      type: string
 HousingCatalogEntryID:
   fields:
     entryType:
@@ -11738,6 +12365,8 @@ HousingDecorDyeSlot:
       type: number
 HousingDecorInstanceInfo:
   fields:
+    canAttachPet:
+      type: boolean
     canBeCustomized:
       type: boolean
     canBeRemoved:
@@ -12073,15 +12702,21 @@ PingCooldownInfo:
       type: number
     startTimeMs:
       type: number
-PingTypeInfo:
+PingMacroInfo:
   fields:
-    orderIndex:
+    itemID:
+      nilable: true
       type: number
+    spellID:
+      nilable: true
+      type: number
+    targetToken:
+      nilable: true
+      type: string
     type:
+      nilable: true
       type:
         enum: PingSubjectType
-    uiTextureKitID:
-      type: string
 PlayerInfoCharacterData:
   fields:
     alternateFormRaceData:
@@ -12319,6 +12954,32 @@ RuneforgePower:
     state:
       type:
         enum: RuneforgePowerState
+ScriptBucketThrottleLimits:
+  fields:
+    luaScriptBucketThrottleMaxMsBurstNormal:
+      type: number
+    luaScriptBucketThrottleMaxMsBurstRestricted:
+      type: number
+    luaScriptBucketThrottleMaxMsPerSecondNormal:
+      type: number
+    luaScriptBucketThrottleMaxMsPerSecondRestricted:
+      type: number
+SecureCopyOptions:
+  fields:
+    maxTraversalDepth:
+      default: 100
+      type: number
+    permitScriptObjects:
+      default: false
+      type: boolean
+    wrapUntrustedFunctions:
+      default: true
+      type: boolean
+SecureDelegateOptions:
+  fields:
+    wrapUntrustedFunctions:
+      default: true
+      type: boolean
 SpecializationCurrencyInfo:
   fields:
     currencyName:
@@ -12615,6 +13276,34 @@ UITextureSliceData:
     sliceMode:
       type:
         enum: UITextureSliceMode
+UITextureSliceMargins:
+  fields:
+    bottom:
+      type: number
+    left:
+      type: number
+    right:
+      type: number
+    top:
+      type: number
+UnitAuraSoundInfo:
+  fields:
+    outputChannel:
+      nilable: true
+      type: string
+    soundFileID:
+      nilable: true
+      type: number
+    soundFileName:
+      nilable: true
+      type: string
+    spellID:
+      type: number
+    throttleSeconds:
+      nilable: true
+      type: number
+    unitToken:
+      type: string
 UnitAuraUpdateInfo:
   fields:
     addedAuras:

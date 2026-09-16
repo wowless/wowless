@@ -99,6 +99,7 @@ runner:
     PTRFEEDBACK:
     USERANDOM:
 runtime:
+  discord: true
   send_isfromitem: true
   warners:
     fontstring:

@@ -136,6 +136,10 @@ SwapToGlobalEnvironment:
   SwapToGlobalEnvironment:
 table.count:
   table.count:
+table.count.single:
+  table.count.single:
+table.getcountinfo:
+  table.getcountinfo:
 table.wipe:
   table.wipe:
 UnitName:

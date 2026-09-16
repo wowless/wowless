@@ -82,6 +82,20 @@ G.testsuite.generated = function()
         G.assertEquals(addonName, args[1])
         G.assertEquals('UNKNOWN()', args[2])
       end,
+      genusage = cfg and cfg.genusage and function()
+        local msg = ('bad argument #1 to \'?\' (Usage: %s)'):format(cfg.genusage)
+        return {
+          missing = function()
+            return G.match(2, false, msg, pcall(func))
+          end,
+          nilarg = function()
+            return G.match(2, false, msg, pcall(func, nil))
+          end,
+          number = function()
+            return G.match(2, false, msg, pcall(func, 42))
+          end,
+        }
+      end,
       getfenv = function()
         assertEquals(_G, getfenv(func))
       end,
