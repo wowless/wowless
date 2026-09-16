@@ -369,6 +369,8 @@ static inline void wowless_stubcheckunknown(lua_State *L, int idx) {
 
 static inline void wowless_stubchecknilableunknown(lua_State *L, int idx) {}
 
+static inline void wowless_stubchecknilableany(lua_State *L, int idx) {}
+
 static inline bool wowless_isnil(lua_State *L, int idx) {
   return lua_isnoneornil(L, idx);
 }

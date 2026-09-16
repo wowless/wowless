@@ -432,6 +432,9 @@ end)()
 
 local coutdefaults
 coutdefaults = {
+  any = function()
+    return 1
+  end,
   arrayof = function(inner)
     return { dispatch(coutdefaults, inner) }
   end,
@@ -746,6 +749,7 @@ coutpushers = {
       emit('  lua_rawseti(L, -2, %d);', i)
     end
   end,
+  any = emit_expr,
   boolean = emit_expr,
   enum = function(_, val)
     emit_expr(val)

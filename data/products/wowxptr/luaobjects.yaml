@@ -51,6 +51,12 @@ AbbreviatedNumberFormatter:
       outputs:
 DurationTextBinding:
   methods:
+    Assign:
+      inputs:
+      - name: other
+        type:
+          luaobject: DurationTextBinding
+      outputs:
     CanFormatText:
       inputs:
       outputs:
@@ -61,6 +67,15 @@ DurationTextBinding:
       outputs:
       - name: canUpdateText
         type: boolean
+    ClearTextColorCurve:
+      inputs:
+      outputs:
+    Copy:
+      inputs:
+      outputs:
+      - name: copy
+        type:
+          luaobject: DurationTextBinding
     Disable:
       inputs:
       outputs:
@@ -92,6 +107,23 @@ DurationTextBinding:
       outputs:
       - name: text
         type: string
+    GetFormattedTextColor:
+      inputs:
+      mayreturnnothing: true
+      outputs:
+      - name: color
+        type:
+          structure: colorRGBA
+    GetTextColorCurve:
+      inputs:
+      mayreturnnothing: true
+      outputs:
+      - name: curve
+        type:
+          luaobject: LuaColorCurveObject
+      - name: property
+        type:
+          enum: DurationTextBindingProperty
     GetTimeModifier:
       inputs:
       outputs:
@@ -148,9 +180,18 @@ DurationTextBinding:
         type:
           luaobject: NumericFormatter
       outputs:
+    SetTextColorCurve:
+      inputs:
+      - name: curve
+        type:
+          luaobject: LuaColorCurveObject
+      - name: property
+        type:
+          enum: DurationTextBindingProperty
+      outputs:
     SetTextFormat:
       inputs:
-      - name: format
+      - name: formatString
         type: string
       - name: components
         type:
@@ -641,6 +682,232 @@ LuaFunctionContainer:
     Cancel:
     Invoke:
     IsCancelled:
+LuaLocaleContext:
+  methods:
+    CompareStrings:
+      inputs:
+      - name: left
+        type: string
+      - name: right
+        type: string
+      - name: strength
+        type:
+          enum: CollationStrength
+      mayreturnnothing: true
+      outputs:
+      - name: result
+        type: number
+    FindBreaks:
+      inputs:
+      - name: text
+        type: string
+      - name: breakType
+        type:
+          enum: BreakType
+      mayreturnnothing: true
+      outputs:
+      - name: byteOffsets
+        type:
+          arrayof: number
+    FindStringMatches:
+      inputs:
+      - name: text
+        type: string
+      - name: pattern
+        type: string
+      - name: strength
+        type:
+          enum: CollationStrength
+      mayreturnnothing: true
+      outputs:
+      - name: byteOffsets
+        type:
+          arrayof: number
+    FoldCase:
+      inputs:
+      - name: text
+        type: string
+      mayreturnnothing: true
+      outputs:
+      - name: result
+        type: string
+    FormatCurrency:
+      inputs:
+      - name: number
+        type: number
+      - name: currencyCode
+        type: string
+      mayreturnnothing: true
+      outputs:
+      - name: result
+        type: string
+    FormatDate:
+      inputs:
+      - name: unixTimeSeconds
+        type: number
+      - name: style
+        type:
+          enum: DateTimeStyle
+      - name: timeZone
+        type: string
+      mayreturnnothing: true
+      outputs:
+      - name: result
+        type: string
+    FormatDateTime:
+      inputs:
+      - name: unixTimeSeconds
+        type: number
+      - name: dateStyle
+        type:
+          enum: DateTimeStyle
+      - name: timeStyle
+        type:
+          enum: DateTimeStyle
+      - name: timeZone
+        type: string
+      mayreturnnothing: true
+      outputs:
+      - name: result
+        type: string
+    FormatNumber:
+      inputs:
+      - name: number
+        type: number
+      - name: style
+        type:
+          enum: NumberStyle
+      mayreturnnothing: true
+      outputs:
+      - name: result
+        type: string
+    FormatTime:
+      inputs:
+      - name: unixTimeSeconds
+        type: number
+      - name: style
+        type:
+          enum: DateTimeStyle
+      - name: timeZone
+        type: string
+      mayreturnnothing: true
+      outputs:
+      - name: result
+        type: string
+    GetCurrencyName:
+      inputs:
+      - name: currencyCode
+        type: string
+      - name: style
+        type:
+          enum: CurrencyNameStyle
+      mayreturnnothing: true
+      outputs:
+      - name: result
+        type: string
+    GetDisplayName:
+      inputs:
+      - name: displayLocale
+        type: string
+      mayreturnnothing: true
+      outputs:
+      - name: result
+        type: string
+    GetLocale:
+      inputs:
+      outputs:
+      - name: result
+        type: string
+    GetSortKey:
+      inputs:
+      - name: text
+        type: string
+      - name: strength
+        type:
+          enum: CollationStrength
+      mayreturnnothing: true
+      outputs:
+      - name: result
+        type: string
+    Length:
+      inputs:
+      - name: text
+        type: string
+      mayreturnnothing: true
+      outputs:
+      - name: result
+        type: number
+    ParseCurrency:
+      inputs:
+      - name: text
+        type: string
+      mayreturnnothing: true
+      outputs:
+      - name: result
+        type:
+          structure: CurrencyParseResult
+    ParseNumber:
+      inputs:
+      - name: text
+        type: string
+      - name: style
+        type:
+          enum: NumberStyle
+      mayreturnnothing: true
+      outputs:
+      - name: result
+        type: number
+    SelectPlural:
+      inputs:
+      - name: number
+        type: number
+      - name: pluralType
+        type:
+          enum: PluralType
+      mayreturnnothing: true
+      outputs:
+      - name: result
+        type: string
+    SetLocale:
+      inputs:
+      - name: locale
+        type: string
+      outputs:
+      - name: success
+        type: boolean
+    ToLower:
+      inputs:
+      - name: text
+        type: string
+      mayreturnnothing: true
+      outputs:
+      - name: result
+        type: string
+    ToTitle:
+      inputs:
+      - name: text
+        type: string
+      mayreturnnothing: true
+      outputs:
+      - name: result
+        type: string
+    ToUpper:
+      inputs:
+      - name: text
+        type: string
+      mayreturnnothing: true
+      outputs:
+      - name: result
+        type: string
+    TransformLocale:
+      inputs:
+      - name: transform
+        type:
+          enum: LocaleTransform
+      mayreturnnothing: true
+      outputs:
+      - name: result
+        type: string
 NumericFormatter:
   methods:
     FormatNumber:
@@ -809,6 +1076,12 @@ SecondsFormatter:
         nilable: true
         type:
           luaobject: LuaCurveObject
+    GetRounding:
+      inputs:
+      outputs:
+      - name: rounding
+        type:
+          enum: SecondsFormatterRounding
     GetStripIntervalWhitespace:
       inputs:
       outputs:
@@ -884,11 +1157,68 @@ SecondsFormatter:
         type:
           luaobject: LuaCurveObject
       outputs:
+    SetRounding:
+      inputs:
+      - name: rounding
+        type:
+          enum: SecondsFormatterRounding
+      outputs:
     SetStripIntervalWhitespace:
       inputs:
       - name: strip
         type:
           enum: SecondsFormatterIntervalWhitespace
+      outputs:
+TimedSignalMap:
+  methods:
+    CancelAllSignals:
+      inputs:
+      outputs:
+    CancelSignal:
+      inputs:
+      - name: key
+        type: number
+      outputs:
+    GetNextSignal:
+      inputs:
+      outputs:
+      - name: key
+        type: number
+      - name: time
+        type: number
+    GetSignalCount:
+      inputs:
+      outputs:
+      - name: count
+        type: number
+    GetSignalTime:
+      inputs:
+      - name: key
+        type: number
+      outputs:
+      - name: time
+        nilable: true
+        type: number
+    HasSignal:
+      inputs:
+      - name: key
+        type: number
+      outputs:
+      - name: hasSignal
+        type: boolean
+    SignalAfter:
+      inputs:
+      - name: key
+        type: number
+      - name: secondsFromNow
+        type: number
+      outputs:
+    SignalAt:
+      inputs:
+      - name: key
+        type: number
+      - name: time
+        type: number
       outputs:
 UnitHealPredictionCalculator:
   methods:

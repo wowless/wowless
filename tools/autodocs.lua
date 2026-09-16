@@ -28,15 +28,14 @@ local function runbuild(product)
   return code == 0, output
 end
 
-local function fixMissingScriptObject(product, source, name)
-  if not source then
-    print(('missing script object mapping for %s, but no --source product was given'):format(name))
-    return false
-  end
-  local sourcedata = yaml.parse(file.read(docsfile(source)))
-  local mapping = sourcedata.script_objects[name]
-  if not mapping then
-    if sourcedata.lies.extra_script_objects[name] then
+local function fixMissingScriptObject(product, source, name, objecttype)
+  local domain, typename
+  if source then
+    local sourcedata = yaml.parse(file.read(docsfile(source)))
+    local mapping = sourcedata.script_objects[name]
+    if mapping then
+      domain, typename = next(mapping)
+    elseif sourcedata.lies.extra_script_objects[name] then
       local targetfile = docsfile(product)
       local target = yaml.parse(file.read(targetfile))
       target.lies.extra_script_objects[name] = {}
@@ -44,23 +43,35 @@ local function fixMissingScriptObject(product, source, name)
       print(('copied lies.extra_script_objects.%s from %s to %s'):format(name, source, product))
       return true
     end
-    print(('%s has no script_objects mapping for %s either'):format(source, name))
+  end
+  if not domain and objecttype == 'Userdata' then
+    local stripped = name:match('^(.*)API$')
+    if stripped then
+      domain, typename = 'luaobject', stripped
+      print(('guessed luaobject %s for %s from ObjectType Userdata; verify this is correct'):format(typename, name))
+    end
+  end
+  if not domain then
+    if source then
+      print(('%s has no script_objects mapping for %s either'):format(source, name))
+    else
+      print(('missing script object mapping for %s, but no --source product was given'):format(name))
+    end
     return false
   end
-  local domain, typename = next(mapping)
   local domainf = domainfile(product, domain)
   local domaindata = yaml.parse(file.read(domainf))
   if not domaindata[typename] then
-    domaindata[typename] = domain == 'uiobject' and { inherits = { UIObject = true }, fields = {}, methods = {} }
+    domaindata[typename] = domain == 'uiobject' and { inherits = { UIObject = {} }, fields = {}, methods = {} }
       or { methods = {} }
     file.write(domainf, yaml.pprint(domaindata))
     print(('added empty %s %s to %s'):format(domain, typename, product))
   end
   local targetfile = docsfile(product)
   local target = yaml.parse(file.read(targetfile))
-  target.script_objects[name] = mapping
+  target.script_objects[name] = { [domain] = typename }
   file.write(targetfile, yaml.pprint(target))
-  print(('copied script_objects.%s from %s to %s'):format(name, source, product))
+  print(('added script_objects.%s -> %s %s to %s'):format(name, domain, typename, product))
   return true
 end
 
@@ -68,46 +79,101 @@ local function enumsfile(product)
   return 'data/products/' .. product .. '/enums.yaml'
 end
 
+local baseLuaTypes = { boolean = true, number = true, string = true, table = true }
+
 local function fixMissingTypedef(product, source, name)
-  if not source then
+  local targetfile = docsfile(product)
+  local target = yaml.parse(file.read(targetfile))
+  if baseLuaTypes[name] then
+    target.typedefs[name] = { type = name }
+    file.write(targetfile, yaml.pprint(target))
+    print(('added typedefs.%s -> %s to %s'):format(name, name, product))
+    return true
+  end
+  for _, mapping in pairs(target.script_objects) do
+    local domain, typename = next(mapping)
+    if typename == name then
+      target.typedefs[name] = { type = { [domain] = name } }
+      file.write(targetfile, yaml.pprint(target))
+      print(
+        ('added typedefs.%s -> %s %s (matches own script_objects mapping) to %s'):format(name, domain, name, product)
+      )
+      return true
+    end
+  end
+  if source then
+    local typedef = yaml.parse(file.read(docsfile(source))).typedefs[name]
+    if typedef then
+      target.typedefs[name] = typedef
+      file.write(targetfile, yaml.pprint(target))
+      print(('copied typedefs.%s from %s to %s'):format(name, source, product))
+      return true
+    end
+    local enum = yaml.parse(file.read(enumsfile(source)))[name]
+    if enum then
+      local enumsf = enumsfile(product)
+      local enumtarget = yaml.parse(file.read(enumsf))
+      enumtarget[name] = enum
+      file.write(enumsf, yaml.pprint(enumtarget))
+      print(('copied Enum.%s from %s to %s'):format(name, source, product))
+      return true
+    end
+  end
+  if name:match('ID$') then
+    target.typedefs[name] = { type = 'number' }
+    file.write(targetfile, yaml.pprint(target))
+    print(('guessed typedefs.%s -> number from name ending in ID; verify this is correct'):format(name))
+    return true
+  end
+  if source then
+    print(('%s has no typedefs or Enum entry for %s either'):format(source, name))
+  else
     print(('wtf %s, but no --source product was given'):format(name))
-    return false
   end
-  local typedef = yaml.parse(file.read(docsfile(source))).typedefs[name]
-  if typedef then
-    local targetfile = docsfile(product)
-    local target = yaml.parse(file.read(targetfile))
-    target.typedefs[name] = typedef
-    file.write(targetfile, yaml.pprint(target))
-    print(('copied typedefs.%s from %s to %s'):format(name, source, product))
-    return true
-  end
-  local enum = yaml.parse(file.read(enumsfile(source)))[name]
-  if enum then
-    local targetfile = enumsfile(product)
-    local target = yaml.parse(file.read(targetfile))
-    target[name] = enum
-    file.write(targetfile, yaml.pprint(target))
-    print(('copied Enum.%s from %s to %s'):format(name, source, product))
-    return true
-  end
-  print(('%s has no typedefs or Enum entry for %s either'):format(source, name))
   return false
 end
 
--- A lies.apis patch that no longer applies means the doc it was patching
--- around has itself changed upstream; drop the stale patch.
-local function fixStaleApiLie(product, _, name)
-  local targetfile = docsfile(product)
-  local target = yaml.parse(file.read(targetfile))
-  local lie = target.lies and target.lies.apis and target.lies.apis[name]
-  if not lie then
-    print(('no lies.apis entry for %s to remove'):format(name))
+-- A lies.<section> patch that no longer applies means the doc it was
+-- patching around has itself changed upstream; drop the stale patch.
+-- docs.lua's takelieor always passes the section ('apis', 'events', 'enums',
+-- 'structures', 'uiobjects') as the first path element, so it's always the
+-- text before the first dot here; only lies.uiobjects nests a second level
+-- (uiobject type, then method) below that.
+local nestedLiesSections = { uiobjects = true }
+
+local function fixStaleApiLie(product, _, path)
+  local section, rest = path:match('^([^.]+)%.(.+)$')
+  if not section then
+    print(('could not parse a lies section out of %s'):format(path))
     return false
   end
-  target.lies.apis[name] = nil
+  local targetfile = docsfile(product)
+  local target = yaml.parse(file.read(targetfile))
+  local lies = target.lies and target.lies[section]
+  if not lies then
+    print(('no lies.%s to remove %s from'):format(section, rest))
+    return false
+  end
+  if nestedLiesSections[section] then
+    local outer, inner = rest:match('^([^.]+)%.(.+)$')
+    local outerLies = outer and lies[outer]
+    if not (outerLies and outerLies[inner] ~= nil) then
+      print(('no lies.%s.%s entry to remove'):format(section, rest))
+      return false
+    end
+    outerLies[inner] = nil
+    if not next(outerLies) then
+      lies[outer] = nil
+    end
+  else
+    if lies[rest] == nil then
+      print(('no lies.%s.%s entry to remove'):format(section, rest))
+      return false
+    end
+    lies[rest] = nil
+  end
   file.write(targetfile, yaml.pprint(target))
-  print(('removed stale lies.apis.%s from %s'):format(name, product))
+  print(('removed stale lies.%s.%s from %s'):format(section, rest, product))
   return true
 end
 
@@ -210,13 +276,29 @@ local function fixDoctableSchema(_, _, block)
   return false
 end
 
+local function fixUnusedTypedefs(product, _, block)
+  local ok, names = pcall(yaml.parse, block)
+  if not ok or type(names) ~= 'table' or not next(names) then
+    print('could not parse unused typedefs list')
+    return false
+  end
+  local targetfile = docsfile(product)
+  local target = yaml.parse(file.read(targetfile))
+  for name in pairs(names) do
+    target.typedefs[name] = nil
+    print(('removed unused typedefs.%s from %s'):format(name, product))
+  end
+  file.write(targetfile, yaml.pprint(target))
+  return true
+end
+
 local patterns = {
   {
     pattern = 'tools/docs%.lua:88: (.-)\n\n',
     fix = fixDoctableSchema,
   },
   {
-    pattern = 'missing script object mapping for (%S+)',
+    pattern = 'missing script object mapping for (%S+) %(ObjectType (%S+)%)',
     fix = fixMissingScriptObject,
   },
   {
@@ -226,6 +308,10 @@ local patterns = {
   {
     pattern = 'tedit failure on ([^:]+):',
     fix = fixStaleApiLie,
+  },
+  {
+    pattern = 'tools/docs%.lua:585: unused typedefs:\n(.-)\n\n',
+    fix = fixUnusedTypedefs,
   },
 }
 
@@ -238,10 +324,10 @@ for _ = 1, maxIters do
   end
   local matched = false
   for _, p in ipairs(patterns) do
-    local capture = output:match(p.pattern)
-    if capture then
+    local captures = { output:match(p.pattern) }
+    if captures[1] then
       matched = true
-      if not p.fix(args.product, args.source, capture) then
+      if not p.fix(args.product, args.source, unpack(captures)) then
         io.stderr:write('fix failed; a human needs to be involved\n')
         os.exit(1)
       end
