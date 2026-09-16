@@ -40723,7 +40723,7 @@ table.contains:
   - name: containsValue
     type: boolean
 table.count:
-  impl: table.count
+  impl: table.count.single
   inputs:
   - name: table
     type: table
@@ -40752,6 +40752,7 @@ table.freeze:
   - name: frozen
     type: table
 table.getcountinfo:
+  impl: table.getcountinfo
   inputs:
   - name: table
     type: table
