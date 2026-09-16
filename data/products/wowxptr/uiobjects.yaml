@@ -7016,7 +7016,7 @@ QuestPOIFrame:
 RadialProgress:
   fields:
   inherits:
-    UIObject:
+    Animation:
   methods:
     GetFromPercent:
       inputs:
