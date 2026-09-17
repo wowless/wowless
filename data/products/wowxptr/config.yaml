@@ -108,6 +108,7 @@ runner:
     USERANDOM:
 runtime:
   bareScriptWarning: true
+  createframetaint: true
   discord: true
   enummetafix: true
   send_isfromitem: true

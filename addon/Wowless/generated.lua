@@ -429,8 +429,15 @@ G.testsuite.generated = function()
 
   local function uiobjects()
     local warners = _G.WowlessData.Config.runtime.warners
+    local createframetaint = _G.WowlessData.Config.runtime.createframetaint
     local function assertCreateFrameFails(ty)
-      G.check2(false, 'CreateFrame: Unknown frame type \'' .. ty .. '\'', pcall(CreateFrame, ty))
+      local err = table.concat({
+        'CreateFrame',
+        createframetaint and '()' or '',
+        ': Unknown frame type \'' .. ty .. '\'',
+        createframetaint and '\nLua Taint: ' .. addonName or '',
+      })
+      G.check2(false, err, pcall(CreateFrame, ty))
       if warners[ty:lower()] then
         table.insert(G.ExpectedLuaWarnings, 'Unknown frame type: ' .. ty)
       end

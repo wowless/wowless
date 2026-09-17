@@ -15,6 +15,10 @@ return function(datalua, intrinsics, templates, uiobjecttypes, warningqueue, xml
       if nested or datalua.config.runtime.warners[ltype] then
         QueueWarning('Unknown frame type: ' .. type)
       end
+      if datalua.config.runtime.createframetaint then
+        local taint = _G.THETAINT and '\nLua Taint: ' .. _G.THETAINT or ''
+        error('CreateFrame(): Unknown frame type \'' .. type .. '\'' .. taint, 0)
+      end
       error('CreateFrame: Unknown frame type \'' .. type .. '\'', 0)
     end
     local tmpls = {}

@@ -80,6 +80,8 @@ type:
         record:
           bareScriptWarning:
             type: flag
+          createframetaint:
+            type: flag
           discord:
             type: flag
           enummetafix:
