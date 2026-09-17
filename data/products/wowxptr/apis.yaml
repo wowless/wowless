@@ -160,17 +160,6 @@ BNGetBlockedInfo:
 BNGetDisplayName:
 BNGetFOFInfo:
 BNGetFriendIndex:
-BNGetFriendInviteInfo:
-  inputs:
-  - name: inviteIndex
-    type: number
-  outputs:
-  - name: inviteID
-    type: number
-  - name: accountName
-    type: string
-  - name: isBattleTag
-    type: boolean
 BNGetInfo:
   inputs:
   outputs:
@@ -213,7 +202,6 @@ BNRequestFOFInfo:
 BNRequestInviteFriend:
 BNSendFriendInvite:
 BNSendFriendInviteByID:
-BNSendVerifiedBattleTagInvite:
 BNSetBlocked:
 BNSetFriendFavoriteFlag:
 BNSetFriendNote:
@@ -21257,15 +21245,6 @@ C_PhotoSharing.UploadPhotoToService:
     name: optionalDescription
     type: string
   outputs:
-C_Ping.GetContextualPingTypeForUnit:
-  inputs:
-  - name: targetUnit
-    nilable: true
-    type: string
-  outputs:
-  - name: type
-    type:
-      enum: PingSubjectType
 C_Ping.GetCooldownInfo:
   inputs:
   outputs:
@@ -22553,27 +22532,6 @@ C_PvP.GetRandomTrainingGroundBGRewards:
     nilable: true
     type:
       structure: C_PvP.RoleShortageReward
-C_PvP.GetRandomTrainingGroundRewards:
-  inputs:
-  outputs:
-  - name: honor
-    type: number
-  - name: experience
-    type: number
-  - name: itemRewards
-    nilable: true
-    type:
-      arrayof:
-        structure: C_PvP.BattlefieldItemReward
-  - name: currencyRewards
-    nilable: true
-    type:
-      arrayof:
-        structure: C_PvP.BattlefieldCurrencyReward
-  - name: roleShortageBonus
-    nilable: true
-    type:
-      structure: C_PvP.RoleShortageReward
 C_PvP.GetRatedBGRewards:
   inputs:
   outputs:
@@ -22771,11 +22729,6 @@ C_PvP.HasRandomTrainingGroundBGWinToday:
   outputs:
   - name: hasRandomTrainingGroundBGWinToday
     type: boolean
-C_PvP.HasRandomTrainingGroundWinToday:
-  inputs:
-  outputs:
-  - name: hasRandomTrainingGroundWinToday
-    type: boolean
 C_PvP.IsActiveBattlefield:
   inputs:
   outputs:
@@ -22928,13 +22881,7 @@ C_PvP.JoinBrawl:
     name: isSpecialBrawl
     type: boolean
   outputs:
-C_PvP.JoinRandomTrainingGround:
-  inputs:
-  outputs:
 C_PvP.JoinRandomTrainingGroundArena:
-  inputs:
-  outputs:
-C_PvP.JoinRandomTrainingGroundBattleground:
   inputs:
   outputs:
 C_PvP.JoinRandomTrainingGroundBG:
@@ -24157,11 +24104,6 @@ C_RecruitAFriend.GetSummonFriendCooldown:
   - name: durationSeconds
     type: number
   - name: enableCooldownTimer
-    type: boolean
-C_RecruitAFriend.IsEnabled:
-  inputs:
-  outputs:
-  - name: enabled
     type: boolean
 C_RecruitAFriend.IsRecruitAFriendLinked:
   inputs:
@@ -27382,16 +27324,6 @@ C_SystemVisibilityManager.IsSystemVisible:
   outputs:
   - name: visible
     type: boolean
-C_TableUtil.FindIndexedMismatch:
-  inputs:
-  - name: t1
-    type: unknown
-  - name: t2
-    type: unknown
-  outputs:
-  - name: index
-    nilable: true
-    type: number
 C_TalkingHead.GetConversationsDeferred:
 C_TalkingHead.GetCurrentLineAnimationInfo:
 C_TalkingHead.GetCurrentLineInfo:
@@ -32628,11 +32560,6 @@ C_UnitAuras.SetPrivateWarningTextAnchor:
 C_UnitAuras.SwitchAuraDataProvider:
   inputs:
   outputs:
-C_UnitAuras.TriggerPrivateAuraShowDispelType:
-  inputs:
-  - name: show
-    type: boolean
-  outputs:
 C_UnitAuras.WantsAlteredForm:
   inputs:
   - name: unit
@@ -33813,7 +33740,6 @@ CancelAreaSpiritHeal:
   inputs:
   outputs:
 CancelDuel:
-CancelItemTempEnchantment:
 CancelLogout:
   inputs:
   outputs:
@@ -33956,7 +33882,6 @@ CanSignPetition:
   - name: value
     type: boolean
 CanSolveArtifact:
-CanSurrenderArena:
 CanSwitchVehicleSeat:
   inputs:
   outputs:
@@ -35936,7 +35861,6 @@ GetInspectHonorData:
     type: number
   - name: lifetimeRank
     type: number
-GetInspectSpecialization:
 GetInspectTalent:
 GetInstanceBootTimeRemaining:
   inputs:
@@ -36021,16 +35945,6 @@ GetInventoryItemLink:
 GetInventoryItemQuality:
 GetInventoryItemsForSlot:
 GetInventoryItemTexture:
-GetInventorySlotInfo:
-  impl: GetInventorySlotInfo
-  inputs:
-  - name: slotName
-    type: string
-  outputs:
-  - name: slotId
-    type: number
-  - name: texture
-    type: number
 GetInviteConfirmationInfo:
 GetItemLevelColor:
 GetJailersTowerLevel:
@@ -38000,6 +37914,7 @@ GetText:
   outputs:
   - name: text
     type: string
+GetTextureMetatable:
 GetThreatStatusColor:
   inputs:
   - name: gameErrorIndex
@@ -38443,7 +38358,6 @@ GetVersatilityBonus:
 GetVideoCaps:
 GetWarGameQueueStatus:
 GetWarGameTypeInfo:
-GetWeaponEnchantInfo:
 GetWebTicket:
 GetWorldElapsedTime:
 GetWorldElapsedTimers:
@@ -40364,14 +40278,6 @@ SetSendMailShowing:
   outputs:
 SetSpellbookPetAction:
 settablesecurity:
-  inputs:
-  - name: table
-    type: table
-  - name: option
-    type:
-      enum: TableSecurityOption
-  outputs:
-SetTableSecurityOption:
   inputs:
   - name: table
     type: table

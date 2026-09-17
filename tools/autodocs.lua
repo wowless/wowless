@@ -294,7 +294,11 @@ end
 
 local patterns = {
   {
-    pattern = 'tools/docs%.lua:88: (.-)\n\n',
+    pattern = 'tools/docs%.lua:%d+: unused typedefs:\n(.-)\n\n',
+    fix = fixUnusedTypedefs,
+  },
+  {
+    pattern = 'tools/docs%.lua:%d+: (.-)\n\n',
     fix = fixDoctableSchema,
   },
   {
@@ -308,10 +312,6 @@ local patterns = {
   {
     pattern = 'tedit failure on ([^:]+):',
     fix = fixStaleApiLie,
-  },
-  {
-    pattern = 'tools/docs%.lua:585: unused typedefs:\n(.-)\n\n',
-    fix = fixUnusedTypedefs,
   },
 }
 

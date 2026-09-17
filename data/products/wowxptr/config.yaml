@@ -24,8 +24,8 @@ addon:
       secretunwrap:
   enum_values_set_in_framexml:
     CooldownViewerCategory:
-      HiddenAura:
-      HiddenSpell:
+      HiddenActive:
+      HiddenPassive:
   enums_set_in_framexml:
     CDMLayoutMode:
     CooldownLayoutAction:

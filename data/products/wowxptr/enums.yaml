@@ -1954,6 +1954,15 @@ CooldownViewerSound:
     War3Rooster: 65
     War3ShimmerBell: 66
     War3WolfHowl: 67
+CooldownViewerSoundCategory:
+  values:
+    Animals: 1
+    Devices: 2
+    Impacts: 3
+    Instruments: 4
+    Short: 5
+    War2: 6
+    War3: 7
 CooldownViewerVisibleSetting:
   values:
     Always: 0
@@ -3926,6 +3935,11 @@ HouseOwnerError:
     None: 0
 HouseSettingFlags:
   values:
+    BlueprintExportAnyone: 1024
+    BlueprintExportFriends: 8192
+    BlueprintExportGuild: 4096
+    BlueprintExportNeighbors: 2048
+    BlueprintExportParty: 16384
     HouseAccessAnyone: 1
     HouseAccessFriends: 8
     HouseAccessGuild: 4
@@ -4041,6 +4055,7 @@ HousingDecorActionFlags:
 HousingDecorModelType:
   values:
     M2: 1
+    M3: 3
     None: 0
     WMO: 2
 HousingDecorPlacementRestriction:
@@ -4354,6 +4369,11 @@ HousingRoomFlags:
     HasStairs: 2
     None: 0
     UnlockedByDefault: 4
+HousingShowcaseType:
+  values:
+    None: 0
+    PrivateVisitCode: 2
+    PublicSubmission: 1
 HousingTeleportReason:
   values:
     Booted: 3
@@ -4576,6 +4596,11 @@ ItemConversionFlags:
 ItemCreationContext:
   values:
     BlackMarket: 15
+    BonusRoll_1: 187
+    BonusRoll_2: 188
+    BonusRoll_3: 189
+    BonusRoll_4: 190
+    BonusRoll_5: 191
     ChallengeMode_1: 16
     ChallengeMode_2: 33
     ChallengeMode_3: 34

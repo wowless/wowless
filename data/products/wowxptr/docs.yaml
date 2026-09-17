@@ -675,6 +675,9 @@ typedefs:
     type: number
   LuaInventorySlot:
     type: number
+  LuaLocaleContext:
+    type:
+      luaobject: LuaLocaleContext
   LuaValueReference:
     type: unknown
   LuaValueVariant:

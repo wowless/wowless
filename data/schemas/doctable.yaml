@@ -388,6 +388,8 @@ type:
               type: flag
             SecureHooksAllowed:
               type: boolean
+            TransliteratorAllowed:
+              type: flag
             Type:
               required: true
               type:

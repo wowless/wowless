@@ -103,7 +103,7 @@ do
             }))
           end
           if not success then
-            print(('error loading %s: %s'):format(f, err))
+            error(('error loading %s: %s'):format(f, err), 0)
           end
         end
       end
@@ -329,6 +329,7 @@ local function rewriteApis(apis)
     local ns = split(name)
     local api = apis[name]
     local newapi = {
+      genusage = api and api.genusage,
       impl = api and api.impl,
       inputs = insig(fn, ns, api),
       instride = stride(fn.Arguments),

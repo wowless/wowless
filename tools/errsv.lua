@@ -28,6 +28,10 @@ local getPatternValue = (function()
       value = mustnumber,
     },
     {
+      pattern = ': want true, got false$',
+      value = constant(nil), -- TODO fix the addon
+    },
+    {
       pattern = ': want false, got true$',
       value = constant(true),
     },
