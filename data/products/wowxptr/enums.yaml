@@ -1954,15 +1954,6 @@ CooldownViewerSound:
     War3Rooster: 65
     War3ShimmerBell: 66
     War3WolfHowl: 67
-CooldownViewerSoundCategory:
-  values:
-    Animals: 1
-    Devices: 2
-    Impacts: 3
-    Instruments: 4
-    Short: 5
-    War2: 6
-    War3: 7
 CooldownViewerVisibleSetting:
   values:
     Always: 0
@@ -2286,76 +2277,6 @@ CurrencyNameStyle:
     NarrowSymbol: 1
     Symbol: 0
     VariantSymbol: 4
-CurrencySource:
-  values:
-    AccountCopy: 42
-    AccountHwmUpdate: 61
-    AccountServerConversion: 63
-    AccountTransfer: 65
-    AddConduitToCollection: 46
-    Arena: 17
-    AuctionDeposit: 51
-    AzeriteRespec: 34
-    Barbershop: 47
-    BonusRoll: 33
-    CatalystBalancing: 57
-    CatalystCraft: 58
-    Cheat: 4
-    ConvertItemsToCurrencyAndReputation: 62
-    ConvertItemsToCurrencyValue: 48
-    ConvertOldItem: 0
-    ConvertOldPvPCurrency: 1
-    CraftingOrder: 56
-    CurrencyWalletClaim: 29
-    DailyQuestReward: 38
-    DailyQuestWarModeReward: 39
-    DailyReset: 45
-    ExceededMaxQty: 18
-    FactionConversion: 37
-    GarrisonBuilding: 23
-    GarrisonBuildingRefund: 26
-    GarrisonFollowerActivation: 25
-    GarrisonMissionReward: 27
-    GarrisonResourceOverTime: 28
-    GarrisonTalent: 30
-    GarrisonTalentTreeReset: 44
-    GarrisonWorldQuestBonus: 31
-    GuildBankWithdrawal: 21
-    InitiativeReward: 67
-    ItemDeletion: 14
-    ItemRefund: 2
-    LFGReward: 11
-    Loot: 9
-    PhBuffer_53: 53
-    PhBuffer_54: 54
-    PlayerTrait: 52
-    PlayerTraitRefund: 60
-    ProfessionInitialAward: 59
-    Pushloot: 22
-    PvPCompletionBonus: 19
-    PvPDrop: 24
-    PvPHonorReward: 32
-    PvPKillCredit: 6
-    PvPMetaCredit: 7
-    PvPScriptedAward: 8
-    PvPTeamContribution: 49
-    QuestReward: 3
-    RandomBattleground: 16
-    RatedBattleground: 15
-    RenownRepGain: 55
-    RenownRepGainInitialVisibility: 66
-    Script: 20
-    Spell: 13
-    SpellSkipLinkedCurrency: 64
-    Trade: 12
-    Transmogrify: 50
-    UpdatingVersion: 10
-    Vendor: 5
-    WeeklyQuestReward: 40
-    WeeklyQuestWarModeReward: 41
-    WeeklyRewardChest: 43
-    WorldQuestReward: 35
-    WorldQuestRewardIgnoreCapsDeprecated: 36
 CurrencyTokenCategoryFlags:
   values:
     FlagPlayerItemAssignment: 2
@@ -6790,13 +6711,6 @@ ResidentType:
     Manager: 1
     Owner: 2
     Resident: 0
-RestrictionType:
-  values:
-    AccountExpansion: 2
-    Achievement: 3
-    Entitlement: 4
-    Invalid: 0
-    ServerExpansion: 1
 RestrictPingsTo:
   values:
     Assist: 2

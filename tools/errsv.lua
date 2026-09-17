@@ -159,13 +159,24 @@ if data.generated.globals then
       for k, v in pairs(enums) do
         flatEnums[k] = v.values
       end
+      local frameXmlBases = {}
       for k in pairs(genum) do
         local base = k:match('^(.+)Meta$')
-        if base and (enums[base] or genum[base]) then
-          genum[k] = nil
+        if base then
+          if genum[base] then
+            genum[k] = nil
+          elseif enums[base] and type(genum[k]) == 'string' and genum[k]:match(', got "nil"$') then
+            genum[k] = nil
+            frameXmlBases[base] = true
+          end
         end
       end
       applyPatterns(flatEnums, genum)
+      for k in pairs(genum) do
+        if flatEnums[k] == nil then
+          enums[k] = nil
+        end
+      end
       for k, v in pairs(flatEnums) do
         if not enums[k] then
           enums[k] = { values = v }
@@ -177,7 +188,18 @@ if data.generated.globals then
           ev.Placeholder = 1
         end
       end
+      for base in pairs(frameXmlBases) do
+        enums[base] = nil
+      end
       write(ef, yaml.pprint(enums))
+      if next(frameXmlBases) then
+        local cf = 'data/products/' .. product .. '/config.yaml'
+        local config = yaml.parseFile(cf)
+        for base in pairs(frameXmlBases) do
+          config.addon.enums_set_in_framexml[base] = {}
+        end
+        write(cf, yaml.pprint(config))
+      end
     end
     applyPatterns(g, gv)
     write(gf, yaml.pprint(g))

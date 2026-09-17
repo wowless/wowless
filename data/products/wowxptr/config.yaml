@@ -31,6 +31,7 @@ addon:
     CooldownLayoutAction:
     CooldownLayoutStatus:
     CooldownLayoutType:
+    CooldownViewerSoundCategory:
     EditModeChatFrameDisplayOnlySetting:
     HousingCatalogEntrySubtype:
   hooked_globals:
