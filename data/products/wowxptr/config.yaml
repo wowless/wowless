@@ -78,6 +78,10 @@ addon:
     C_HousingCatalog.GetCatalogSubcategoryInfo:
     C_HousingCatalog.SearchCatalogCategories:
     C_HousingCatalog.SearchCatalogSubcategories:
+    C_HousingDecor.GetMaxPlacementBudget:
+    C_HousingDecor.GetSpentPlacementBudget:
+    C_HousingLayout.GetRoomPlacementBudget:
+    C_HousingLayout.GetSpentPlacementBudget:
     C_Traits.GetConditionInfo:
     C_Traits.GetEntryInfo:
     C_Traits.GetTreeInfo:

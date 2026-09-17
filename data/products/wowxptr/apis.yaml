@@ -10724,23 +10724,6 @@ C_DyeColor.GetDyeColorCategoryInfo:
     nilable: true
     type:
       structure: DyeColorCategoryDisplayInfo
-C_DyeColor.GetDyeColorForItem:
-  inputs:
-  - name: itemLinkOrID
-    type: string
-  outputs:
-  - name: dyeColorID
-    nilable: true
-    type: number
-C_DyeColor.GetDyeColorForItemLocation:
-  inputs:
-  - name: itemLocation
-    type:
-      structure: ItemLocation
-  outputs:
-  - name: dyeColorID
-    nilable: true
-    type: number
 C_DyeColor.GetDyeColorInfo:
   inputs:
   - name: dyeColorID
@@ -15018,11 +15001,6 @@ C_HousingLayout.GetNumActiveRooms:
   inputs:
   outputs:
   - name: numRooms
-    type: number
-C_HousingLayout.GetNumFloors:
-  inputs:
-  outputs:
-  - name: numFloors
     type: number
 C_HousingLayout.GetRoomPlacementBudget:
   inputs:
@@ -32185,15 +32163,6 @@ C_UnitAuras.AddPrivateAuraAnchor:
       structure: AddPrivateAuraAnchorArgs
   outputs:
   - name: anchorID
-    nilable: true
-    type: number
-C_UnitAuras.AddPrivateAuraAppliedSound:
-  inputs:
-  - name: sound
-    type:
-      structure: UnitPrivateAuraAppliedSoundInfo
-  outputs:
-  - name: privateAuraSoundID
     nilable: true
     type: number
 C_UnitAuras.AuraIsBigDefensive:
