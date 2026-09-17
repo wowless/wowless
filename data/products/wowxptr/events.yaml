@@ -590,10 +590,6 @@ BATTLEPET_FORCE_NAME_DECLENSION:
     type: string
   - name: battlePetGUID
     type: string
-BATTLETAG_INVITE_SHOW:
-  payload:
-  - name: name
-    type: string
 BEHAVIORAL_NOTIFICATION:
   payload:
   - name: notificationType
@@ -5740,12 +5736,6 @@ HOUSING_LAYOUT_FLOORPLAN_SELECTION_CHANGED:
   - name: blueprintShareCode
     nilable: true
     type: string
-HOUSING_LAYOUT_NUM_FLOORS_CHANGED:
-  payload:
-  - name: prevNumFloors
-    type: number
-  - name: numFloors
-    type: number
 HOUSING_LAYOUT_OCCUPIED_FLOOR_RANGE_CHANGED:
   payload:
   - name: lowestFloor
@@ -6511,6 +6501,7 @@ MINIMAP_PING:
     type: number
   - name: x
     type: number
+  restricted: true
 MINIMAP_UPDATE_TRACKING:
   payload:
 MINIMAP_UPDATE_ZOOM:
