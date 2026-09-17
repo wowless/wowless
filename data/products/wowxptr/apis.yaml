@@ -13797,11 +13797,6 @@ C_Housing.IsInsideOwnedPlot:
   outputs:
   - name: isInside
     type: boolean
-C_Housing.IsInsideOwnHouse:
-  inputs:
-  outputs:
-  - name: isInsideOwnHouse
-    type: boolean
 C_Housing.IsInsidePlot:
   inputs:
   outputs:
@@ -27196,18 +27191,6 @@ C_SuperTrack.GetHighestPrioritySuperTrackingType:
     nilable: true
     type:
       enum: SuperTrackingType
-C_SuperTrack.GetNextWaypointForMap:
-  inputs:
-  - name: uiMapID
-    type: number
-  mayreturnnothing: true
-  outputs:
-  - name: x
-    type: number
-  - name: y
-    type: number
-  - name: waypointDescription
-    type: string
 C_SuperTrack.GetSuperTrackedContent:
   inputs:
   mayreturnnothing: true
@@ -32524,11 +32507,6 @@ C_UnitAuras.RemoveAuraSound:
 C_UnitAuras.RemovePrivateAuraAnchor:
   inputs:
   - name: anchorID
-    type: number
-  outputs:
-C_UnitAuras.RemovePrivateAuraAppliedSound:
-  inputs:
-  - name: privateAuraSoundID
     type: number
   outputs:
 C_UnitAuras.ResetAuraDataProvider:
