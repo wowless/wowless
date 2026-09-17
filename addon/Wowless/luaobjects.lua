@@ -174,14 +174,14 @@ local factories = {
   LuaLocaleContext = function()
     return _G.C_Intl.CreateLocaleContext('enUS')
   end,
+  LuaTimedSignalMapObject = function()
+    return _G.C_Timer.NewTimedSignalMap(function() end)
+  end,
   NumericRuleFormatter = function()
     return _G.C_StringUtil.CreateNumericRuleFormatter()
   end,
   SecondsFormatter = function()
     return _G.C_StringUtil.CreateSecondsFormatter()
-  end,
-  TimedSignalMap = function()
-    return _G.C_Timer.NewTimedSignalMap(function() end)
   end,
   UnitHealPredictionCalculator = function()
     return _G.CreateUnitHealPredictionCalculator()

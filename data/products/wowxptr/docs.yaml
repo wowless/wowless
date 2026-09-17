@@ -538,7 +538,7 @@ script_objects:
   SimpleVectorGraphicsAPI:
     uiobject: VectorGraphics
   TimedSignalMapAPI:
-    luaobject: TimedSignalMap
+    luaobject: LuaTimedSignalMapObject
   UnitHealPredictionCalculatorAPI:
     luaobject: UnitHealPredictionCalculator
 typedefs:
@@ -804,7 +804,7 @@ typedefs:
     type: number
   TimedSignalMap:
     type:
-      luaobject: TimedSignalMap
+      luaobject: LuaTimedSignalMapObject
   TimerCallback:
     type:
       luaobject: LuaFunctionContainer

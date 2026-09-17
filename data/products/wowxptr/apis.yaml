@@ -27566,7 +27566,7 @@ C_Timer.NewTimedSignalMap:
   outputs:
   - name: signalMap
     type:
-      luaobject: TimedSignalMap
+      luaobject: LuaTimedSignalMapObject
 C_Timer.NewTimer:
   impl: C_Timer.NewTimer
   inputs:

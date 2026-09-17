@@ -908,6 +908,57 @@ LuaLocaleContext:
       outputs:
       - name: result
         type: string
+LuaTimedSignalMapObject:
+  methods:
+    CancelAllSignals:
+      inputs:
+      outputs:
+    CancelSignal:
+      inputs:
+      - name: key
+        type: number
+      outputs:
+    GetNextSignal:
+      inputs:
+      outputs:
+      - name: key
+        type: number
+      - name: time
+        type: number
+    GetSignalCount:
+      inputs:
+      outputs:
+      - name: count
+        type: number
+    GetSignalTime:
+      inputs:
+      - name: key
+        type: number
+      outputs:
+      - name: time
+        nilable: true
+        type: number
+    HasSignal:
+      inputs:
+      - name: key
+        type: number
+      outputs:
+      - name: hasSignal
+        type: boolean
+    SignalAfter:
+      inputs:
+      - name: key
+        type: number
+      - name: secondsFromNow
+        type: number
+      outputs:
+    SignalAt:
+      inputs:
+      - name: key
+        type: number
+      - name: time
+        type: number
+      outputs:
 NumericFormatter:
   methods:
     FormatNumber:
@@ -1168,57 +1219,6 @@ SecondsFormatter:
       - name: strip
         type:
           enum: SecondsFormatterIntervalWhitespace
-      outputs:
-TimedSignalMap:
-  methods:
-    CancelAllSignals:
-      inputs:
-      outputs:
-    CancelSignal:
-      inputs:
-      - name: key
-        type: number
-      outputs:
-    GetNextSignal:
-      inputs:
-      outputs:
-      - name: key
-        type: number
-      - name: time
-        type: number
-    GetSignalCount:
-      inputs:
-      outputs:
-      - name: count
-        type: number
-    GetSignalTime:
-      inputs:
-      - name: key
-        type: number
-      outputs:
-      - name: time
-        nilable: true
-        type: number
-    HasSignal:
-      inputs:
-      - name: key
-        type: number
-      outputs:
-      - name: hasSignal
-        type: boolean
-    SignalAfter:
-      inputs:
-      - name: key
-        type: number
-      - name: secondsFromNow
-        type: number
-      outputs:
-    SignalAt:
-      inputs:
-      - name: key
-        type: number
-      - name: time
-        type: number
       outputs:
 UnitHealPredictionCalculator:
   methods:
