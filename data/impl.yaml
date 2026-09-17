@@ -431,6 +431,10 @@ GetTalentPrereqs:
       units:
     sqls:
     - GetTalentPrereqs
+GetTextureMetatable:
+  impl:
+    modules:
+      uiobjecttypes:
 GetTime:
   moduledelegate:
     name: time

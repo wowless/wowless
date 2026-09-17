@@ -32532,6 +32532,7 @@ C_UnitAurasPrivate.GetPrivateAuraAnchors:
   inputs:
   outputs:
   - name: existingAnchors
+    stub:
     type:
       arrayof:
         structure: PrivateAuraAnchor
@@ -37862,6 +37863,11 @@ GetText:
   - name: text
     type: string
 GetTextureMetatable:
+  impl: GetTextureMetatable
+  inputs:
+  outputs:
+  - name: metatable
+    type: table
 GetThreatStatusColor:
   inputs:
   - name: gameErrorIndex
