@@ -9600,7 +9600,8 @@ UnitPositionFrame:
 VectorGraphics:
   fields:
   inherits:
-    UIObject:
+    LayeredRegion:
+    ScriptObject:
   methods:
     ClearSVG:
       inputs:
