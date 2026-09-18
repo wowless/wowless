@@ -674,6 +674,8 @@ table.getn:
   stdlib: table.getn
 table.insert:
   stdlib: table.insert
+table.keys:
+  stdlib: table.keys
 table.maxn:
   stdlib: table.maxn
 table.remove:

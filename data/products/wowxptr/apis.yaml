@@ -40654,6 +40654,7 @@ table.isfrozen:
   - name: frozen
     type: boolean
 table.keys:
+  impl: table.keys
   inputs:
   - name: table
     type: table

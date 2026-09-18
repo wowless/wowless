@@ -280,6 +280,19 @@ static int table_wipe(lua_State *L) {
   return 1;
 }
 
+static int table_keys(lua_State *L) {
+  int n = 0;
+  luaL_checktype(L, 1, LUA_TTABLE);
+  lua_newtable(L);
+  lua_pushnil(L);
+  while (lua_next(L, 1)) {
+    lua_pop(L, 1);
+    lua_pushvalue(L, -1);
+    lua_rawseti(L, -3, ++n);
+  }
+  return 1;
+}
+
 static int table_removemulti(lua_State *L) {
   luaL_checktype(L, 1, LUA_TTABLE);
 
@@ -324,6 +337,7 @@ static const luaL_Reg tablib_shared[] = {
     {"foreach",     table_foreach    },
     {"foreachi",    table_foreachi   },
     {"getn",        table_getn       },
+    {"keys",        table_keys       },
     {"maxn",        table_maxn       },
     {"insert",      table_insert     },
     {"remove",      table_remove     },

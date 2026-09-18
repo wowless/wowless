@@ -145,6 +145,8 @@ table.count.single:
   table.count.single:
 table.getcountinfo:
   table.getcountinfo:
+table.keys:
+  table.keys:
 table.wipe:
   table.wipe:
 UnitName:
