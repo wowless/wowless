@@ -59,7 +59,7 @@ enum OpMode { iABC, iABx, iAsBx }; /* basic instruction format */
 #define MAXARG_C ((1 << SIZE_C) - 1)
 
 /* creates a mask with `n' 1 bits at position `p' */
-#define MASK1(n, p) ((~((~(Instruction) 0) << n)) << p)
+#define MASK1(n, p) ((~((~(Instruction)0) << n)) << p)
 
 /* creates a mask with `n' 0 bits at position `p' */
 #define MASK0(n, p) (~MASK1(n, p))
@@ -69,31 +69,40 @@ enum OpMode { iABC, iABx, iAsBx }; /* basic instruction format */
 */
 
 #define GET_OPCODE(i) (cast(OpCode, ((i) >> POS_OP) & MASK1(SIZE_OP, 0)))
-#define SET_OPCODE(i, o)                                                                                               \
-    ((i) = (((i) &MASK0(SIZE_OP, POS_OP)) | ((cast(Instruction, o) << POS_OP) & MASK1(SIZE_OP, POS_OP))))
+#define SET_OPCODE(i, o)                   \
+  ((i) = (((i) & MASK0(SIZE_OP, POS_OP)) | \
+          ((cast(Instruction, o) << POS_OP) & MASK1(SIZE_OP, POS_OP))))
 
 #define GETARG_A(i) (cast(int, ((i) >> POS_A) & MASK1(SIZE_A, 0)))
-#define SETARG_A(i, u) ((i) = (((i) &MASK0(SIZE_A, POS_A)) | ((cast(Instruction, u) << POS_A) & MASK1(SIZE_A, POS_A))))
+#define SETARG_A(i, u)                   \
+  ((i) = (((i) & MASK0(SIZE_A, POS_A)) | \
+          ((cast(Instruction, u) << POS_A) & MASK1(SIZE_A, POS_A))))
 
 #define GETARG_B(i) (cast(int, ((i) >> POS_B) & MASK1(SIZE_B, 0)))
-#define SETARG_B(i, b) ((i) = (((i) &MASK0(SIZE_B, POS_B)) | ((cast(Instruction, b) << POS_B) & MASK1(SIZE_B, POS_B))))
+#define SETARG_B(i, b)                   \
+  ((i) = (((i) & MASK0(SIZE_B, POS_B)) | \
+          ((cast(Instruction, b) << POS_B) & MASK1(SIZE_B, POS_B))))
 
 #define GETARG_C(i) (cast(int, ((i) >> POS_C) & MASK1(SIZE_C, 0)))
-#define SETARG_C(i, b) ((i) = (((i) &MASK0(SIZE_C, POS_C)) | ((cast(Instruction, b) << POS_C) & MASK1(SIZE_C, POS_C))))
+#define SETARG_C(i, b)                   \
+  ((i) = (((i) & MASK0(SIZE_C, POS_C)) | \
+          ((cast(Instruction, b) << POS_C) & MASK1(SIZE_C, POS_C))))
 
 #define GETARG_Bx(i) (cast(int, ((i) >> POS_Bx) & MASK1(SIZE_Bx, 0)))
-#define SETARG_Bx(i, b)                                                                                                \
-    ((i) = (((i) &MASK0(SIZE_Bx, POS_Bx)) | ((cast(Instruction, b) << POS_Bx) & MASK1(SIZE_Bx, POS_Bx))))
+#define SETARG_Bx(i, b)                    \
+  ((i) = (((i) & MASK0(SIZE_Bx, POS_Bx)) | \
+          ((cast(Instruction, b) << POS_Bx) & MASK1(SIZE_Bx, POS_Bx))))
 
 #define GETARG_sBx(i) (GETARG_Bx(i) - MAXARG_sBx)
 #define SETARG_sBx(i, b) SETARG_Bx((i), cast(unsigned int, (b) + MAXARG_sBx))
 
-#define CREATE_ABC(o, a, b, c)                                                                                         \
-    ((cast(Instruction, o) << POS_OP) | (cast(Instruction, a) << POS_A) | (cast(Instruction, b) << POS_B) |            \
-     (cast(Instruction, c) << POS_C))
+#define CREATE_ABC(o, a, b, c)                                          \
+  ((cast(Instruction, o) << POS_OP) | (cast(Instruction, a) << POS_A) | \
+   (cast(Instruction, b) << POS_B) | (cast(Instruction, c) << POS_C))
 
-#define CREATE_ABx(o, a, bc)                                                                                           \
-    ((cast(Instruction, o) << POS_OP) | (cast(Instruction, a) << POS_A) | (cast(Instruction, bc) << POS_Bx))
+#define CREATE_ABx(o, a, bc)                                            \
+  ((cast(Instruction, o) << POS_OP) | (cast(Instruction, a) << POS_A) | \
+   (cast(Instruction, bc) << POS_Bx))
 
 /*
 ** Macros to operate RK indices
@@ -103,10 +112,10 @@ enum OpMode { iABC, iABx, iAsBx }; /* basic instruction format */
 #define BITRK (1 << (SIZE_B - 1))
 
 /* test whether value is a constant */
-#define ISK(x) ((x) &BITRK)
+#define ISK(x) ((x) & BITRK)
 
 /* gets the index of the constant */
-#define INDEXK(r) ((int) (r) & ~BITRK)
+#define INDEXK(r) ((int)(r) & ~BITRK)
 
 #define MAXINDEXRK (BITRK - 1)
 
@@ -129,7 +138,7 @@ enum OpMode { iABC, iABx, iAsBx }; /* basic instruction format */
 */
 
 typedef enum {
-    /* clang-format off */
+  /* clang-format off */
     /*----------------------------------------------------------------------
     name                args                description
     ------------------------------------------------------------------------*/
@@ -171,7 +180,7 @@ typedef enum {
     OP_CLOSE,       /*  A                   close all variables in the stack up to (>=) R(A)    */
     OP_CLOSURE,     /*  A Bx                R(A) := closure(KPROTO[Bx], R(A), ... ,R(A+n))      */
     OP_VARARG       /*  A B                 R(A), R(A+1), ..., R(A+B-1) = vararg                */
-    /* clang-format on */
+  /* clang-format on */
 } OpCode;
 
 #define NUM_OPCODES (cast(int, OP_VARARG) + 1)
@@ -206,10 +215,10 @@ typedef enum {
 */
 
 enum OpArgMask {
-    OpArgN, /* argument is not used */
-    OpArgU, /* argument is used */
-    OpArgR, /* argument is a register or a jump offset */
-    OpArgK /* argument is a constant or register/constant */
+  OpArgN, /* argument is not used */
+  OpArgU, /* argument is used */
+  OpArgR, /* argument is a register or a jump offset */
+  OpArgK  /* argument is a constant or register/constant */
 };
 
 LUAI_DATA const lu_byte luaP_opmodes[NUM_OPCODES];

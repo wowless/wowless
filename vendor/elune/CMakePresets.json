@@ -1,31 +1,45 @@
 {
-  "version": 3,
+  "buildPresets": [
+    {
+      "configuration": "Release",
+      "configurePreset": "windows",
+      "name": "windows"
+    },
+    {
+      "configuration": "Release",
+      "configurePreset": "macos",
+      "name": "macos"
+    },
+    {
+      "configuration": "Release",
+      "configurePreset": "linux",
+      "name": "linux"
+    }
+  ],
   "cmakeMinimumRequired": {
     "major": 3,
     "minor": 24
   },
   "configurePresets": [
     {
-      "name": "base",
-      "hidden": true,
-      "generator": "Ninja Multi-Config",
       "binaryDir": "${sourceDir}/build/${presetName}",
-      "installDir": "${sourceDir}/build/${presetName}/install",
       "cacheVariables": {
         "BUILD_SHARED_LIBS": true,
+        "CMAKE_ARCHIVE_OUTPUT_DIRECTORY": "${sourceDir}/build/${presetName}/lib",
         "CMAKE_CONFIGURATION_TYPES": "Debug;Release",
         "CMAKE_DEFAULT_BUILD_TYPE": "Debug",
         "CMAKE_EXPORT_COMPILE_COMMANDS": true,
-        "CMAKE_ARCHIVE_OUTPUT_DIRECTORY": "${sourceDir}/build/${presetName}/lib",
+        "CMAKE_INSTALL_INCLUDEDIR": "include/lua5.1",
         "CMAKE_LIBRARY_OUTPUT_DIRECTORY": "${sourceDir}/build/${presetName}/lib",
         "CMAKE_PDB_OUTPUT_DIRECTORY": "${sourceDir}/build/${presetName}/bin",
-        "CMAKE_RUNTIME_OUTPUT_DIRECTORY": "${sourceDir}/build/${presetName}/bin",
-        "CMAKE_INSTALL_INCLUDEDIR": "include/lua5.1"
-      }
+        "CMAKE_RUNTIME_OUTPUT_DIRECTORY": "${sourceDir}/build/${presetName}/bin"
+      },
+      "generator": "Ninja Multi-Config",
+      "hidden": true,
+      "installDir": "${sourceDir}/build/${presetName}/install",
+      "name": "base"
     },
     {
-      "name": "windows",
-      "inherits": "base",
       "cacheVariables": {
         "CMAKE_C_COMPILER": "cl.exe",
         "CMAKE_C_FLAGS": "/D_CRT_SECURE_NO_WARNINGS /W4 /wd4324 /wd4334 /utf-8",
@@ -37,42 +51,28 @@
         "CMAKE_SHARED_LINKER_FLAGS": "/DEBUG:FULL /MANIFEST:NO /PDBALTPATH:%_PDB%",
         "CMAKE_SHARED_LINKER_FLAGS_DEBUG": "/INCREMENTAL /OPT:NOREF /OPT:NOICF /EDITANDCONTINUE",
         "CMAKE_SHARED_LINKER_FLAGS_RELEASE": "/INCREMENTAL:NO /LTCG /OPT:REF /OPT:ICF"
-      }
+      },
+      "inherits": "base",
+      "name": "windows"
     },
     {
-      "name": "linux",
-      "inherits": "base",
       "cacheVariables": {
         "CMAKE_C_COMPILER": "gcc",
         "CMAKE_C_FLAGS": "-Wall -Wextra",
         "CMAKE_C_FLAGS_RELEASE": "-DNDEBUG -flto -O3"
-      }
+      },
+      "inherits": "base",
+      "name": "linux"
     },
     {
-      "name": "macos",
-      "inherits": "base",
       "cacheVariables": {
         "CMAKE_C_COMPILER": "clang",
         "CMAKE_C_FLAGS": "-Wall -Wextra",
         "CMAKE_C_FLAGS_RELEASE": "-DNDEBUG -flto -O3"
-      }
+      },
+      "inherits": "base",
+      "name": "macos"
     }
   ],
-  "buildPresets": [
-    {
-      "name": "windows",
-      "configurePreset": "windows",
-      "configuration": "Release"
-    },
-    {
-      "name": "macos",
-      "configurePreset": "macos",
-      "configuration": "Release"
-    },
-    {
-      "name": "linux",
-      "configurePreset": "linux",
-      "configuration": "Release"
-    }
-  ]
+  "version": 3
 }

@@ -3,10 +3,10 @@ cmake_minimum_required(VERSION 3.24)
 project(
   elune
   VERSION 3.2
-  DESCRIPTION "Customized Lua 5.1 distribution aimed at replicating the World of Warcraft addon environment"
+  DESCRIPTION
+    "Customized Lua 5.1 distribution aimed at replicating the World of Warcraft addon environment"
   HOMEPAGE_URL "https://github.com/Meorawr/elune"
-  LANGUAGES C
-)
+  LANGUAGES C)
 
 list(PREPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake")
 
@@ -28,21 +28,37 @@ find_package(readline)
 
 option(BUILD_SHARED_LIBS "Build components as shared libraries?" ON)
 option(BUILD_TESTING "Build test executables?" ${PROJECT_IS_TOP_LEVEL})
-option(BUILD_INSTALL "Enable the generation of installation targets?" ${PROJECT_IS_TOP_LEVEL})
-option(BUILD_PACKAGE "Enable the generation of packaging targets?" ${PROJECT_IS_TOP_LEVEL})
-option(BUILD_SUMMARY "Print a summary of configuration details?" ${PROJECT_IS_TOP_LEVEL})
+option(BUILD_INSTALL "Enable the generation of installation targets?"
+       ${PROJECT_IS_TOP_LEVEL})
+option(BUILD_PACKAGE "Enable the generation of packaging targets?"
+       ${PROJECT_IS_TOP_LEVEL})
+option(BUILD_SUMMARY "Print a summary of configuration details?"
+       ${PROJECT_IS_TOP_LEVEL})
 
 option(BUILD_CXX "Build with a C++ compiler?" OFF)
 option(BUILD_LUA "Build the Lua interpreter target?" ON)
 option(BUILD_LUAC "Build the Lua compiler target?" ON)
 
-set(LUA_ASSERT_CONFIGS "Debug" CACHE STRING "List of build configurations where Lua assertions are enabled")
-set(LUA_APICHECK_CONFIGS "Debug" CACHE STRING "List of build configurations where Lua API checks are enabled")
+set(LUA_ASSERT_CONFIGS
+    "Debug"
+    CACHE STRING
+          "List of build configurations where Lua assertions are enabled")
+set(LUA_APICHECK_CONFIGS
+    "Debug"
+    CACHE STRING
+          "List of build configurations where Lua API checks are enabled")
 
 option(LUA_USE_FAST_MATH "Enable fast floating point optimizations?" ON)
-cmake_dependent_option(LUA_USE_CXX_LINKAGE "Build the Lua interface with C++ linkage?" ON "BUILD_CXX" OFF)
-cmake_dependent_option(LUA_USE_CXX_EXCEPTIONS "Allow the use of C++ exceptions for error handling?" ON "BUILD_CXX" OFF)
-cmake_dependent_option(LUA_USE_READLINE "Allow linking to 'libreadline' for the interpreter and debug library?" ON "TARGET readline::readline" OFF)
+cmake_dependent_option(
+  LUA_USE_CXX_LINKAGE "Build the Lua interface with C++ linkage?" ON
+  "BUILD_CXX" OFF)
+cmake_dependent_option(
+  LUA_USE_CXX_EXCEPTIONS "Allow the use of C++ exceptions for error handling?"
+  ON "BUILD_CXX" OFF)
+cmake_dependent_option(
+  LUA_USE_READLINE
+  "Allow linking to 'libreadline' for the interpreter and debug library?" ON
+  "TARGET readline::readline" OFF)
 option(LUA_DISABLE_LOADLIB "Disable the runtime dynamic module loader?" OFF)
 
 if(CMAKE_SYSTEM_NAME STREQUAL "Windows")
@@ -57,11 +73,27 @@ else()
   set(LUA_DIRSEP "/")
 endif()
 
-set(LUA_ROOT "${LUA_ROOT_INIT}" CACHE STRING "Base path prefix from which Lua will search for Lua and C libraries")
-set(LUA_CDIR "${LUA_CDIR_INIT}" CACHE STRING "Subdirectory within LUA_ROOT from which Lua will search for C libraries")
-set(LUA_LDIR "${LUA_LDIR_INIT}" CACHE STRING "Subdirectory within LUA_ROOT from which Lua will search for Lua libraries")
-set(LUA_CPATH_CUSTOM "" CACHE STRING "Custom default search path for C libraries")
-set(LUA_PATH_CUSTOM "" CACHE STRING "Custom default search path for Lua libraries")
+set(LUA_ROOT
+    "${LUA_ROOT_INIT}"
+    CACHE STRING
+          "Base path prefix from which Lua will search for Lua and C libraries")
+set(LUA_CDIR
+    "${LUA_CDIR_INIT}"
+    CACHE
+      STRING
+      "Subdirectory within LUA_ROOT from which Lua will search for C libraries")
+set(LUA_LDIR
+    "${LUA_LDIR_INIT}"
+    CACHE
+      STRING
+      "Subdirectory within LUA_ROOT from which Lua will search for Lua libraries"
+)
+set(LUA_CPATH_CUSTOM
+    ""
+    CACHE STRING "Custom default search path for C libraries")
+set(LUA_PATH_CUSTOM
+    ""
+    CACHE STRING "Custom default search path for Lua libraries")
 
 if(CMAKE_SYSTEM_NAME STREQUAL "Windows")
   set(LIBLUA_OUTPUT_NAME_INIT "lua51")
@@ -73,9 +105,15 @@ else()
   set(LUAC_OUTPUT_NAME_INIT "luac5.1")
 endif()
 
-set(LIBLUA_OUTPUT_NAME "${LIBLUA_OUTPUT_NAME_INIT}" CACHE STRING "Base output name of the Lua library target")
-set(LUA_OUTPUT_NAME "${LUA_OUTPUT_NAME_INIT}" CACHE STRING "Base output name of the Lua interpreter target")
-set(LUAC_OUTPUT_NAME "${LUAC_OUTPUT_NAME_INIT}" CACHE STRING "Base output name of the Lua compiler target")
+set(LIBLUA_OUTPUT_NAME
+    "${LIBLUA_OUTPUT_NAME_INIT}"
+    CACHE STRING "Base output name of the Lua library target")
+set(LUA_OUTPUT_NAME
+    "${LUA_OUTPUT_NAME_INIT}"
+    CACHE STRING "Base output name of the Lua interpreter target")
+set(LUAC_OUTPUT_NAME
+    "${LUAC_OUTPUT_NAME_INIT}"
+    CACHE STRING "Base output name of the Lua compiler target")
 
 #
 # Config Header Generation
@@ -120,7 +158,10 @@ if(LUA_USE_FAST_MATH)
   elseif(LUA_HAS_FP_FAST)
     add_compile_options("/fp:fast")
   else()
-    message(WARNING "Unable to detect appropriate compiler flag for fast math support (LUA_USE_FAST_MATH).")
+    message(
+      WARNING
+        "Unable to detect appropriate compiler flag for fast math support (LUA_USE_FAST_MATH)."
+    )
   endif()
 endif()
 
@@ -132,9 +173,11 @@ else()
   set(LUA_PATH_DEFAULT)
   list(APPEND LUA_PATH_DEFAULT ".${LUA_DIRSEP}?.lua")
   list(APPEND LUA_PATH_DEFAULT "${LUA_ROOT}${LUA_LDIR}${LUA_DIRSEP}?.lua")
-  list(APPEND LUA_PATH_DEFAULT "${LUA_ROOT}${LUA_LDIR}${LUA_DIRSEP}?${LUA_DIRSEP}init.lua")
+  list(APPEND LUA_PATH_DEFAULT
+       "${LUA_ROOT}${LUA_LDIR}${LUA_DIRSEP}?${LUA_DIRSEP}init.lua")
   list(APPEND LUA_PATH_DEFAULT "${LUA_ROOT}${LUA_CDIR}${LUA_DIRSEP}?.lua")
-  list(APPEND LUA_PATH_DEFAULT "${LUA_ROOT}${LUA_CDIR}${LUA_DIRSEP}?${LUA_DIRSEP}init.lua")
+  list(APPEND LUA_PATH_DEFAULT
+       "${LUA_ROOT}${LUA_CDIR}${LUA_DIRSEP}?${LUA_DIRSEP}init.lua")
 endif()
 
 if(LUA_CPATH_CUSTOM)
@@ -142,29 +185,32 @@ if(LUA_CPATH_CUSTOM)
 else()
   set(LUA_CPATH_DEFAULT)
   list(APPEND LUA_CPATH_DEFAULT ".${LUA_DIRSEP}?${CMAKE_SHARED_LIBRARY_SUFFIX}")
-  list(APPEND LUA_CPATH_DEFAULT "${LUA_ROOT}${LUA_CDIR}${LUA_DIRSEP}?${CMAKE_SHARED_LIBRARY_SUFFIX}")
-  list(APPEND LUA_CPATH_DEFAULT "${LUA_ROOT}${LUA_CDIR}${LUA_DIRSEP}loadall${CMAKE_SHARED_LIBRARY_SUFFIX}")
+  list(APPEND LUA_CPATH_DEFAULT
+       "${LUA_ROOT}${LUA_CDIR}${LUA_DIRSEP}?${CMAKE_SHARED_LIBRARY_SUFFIX}")
+  list(
+    APPEND LUA_CPATH_DEFAULT
+    "${LUA_ROOT}${LUA_CDIR}${LUA_DIRSEP}loadall${CMAKE_SHARED_LIBRARY_SUFFIX}")
 endif()
 
 # The Lua search paths are interpolated into a header file as strings; ensure
 # any backslashes (such as directory separators) are appropriately escaped.
 #
-# For added insanity - the "list(TRANSFORM var REPLACE ...)" call is regex
-# based - so we need to escape the slashes here as well!
+# For added insanity - the "list(TRANSFORM var REPLACE ...)" call is regex based
+# - so we need to escape the slashes here as well!
 
 string(REPLACE "\\" "\\\\" LUA_DIRSEP_ESCAPED ${LUA_DIRSEP})
-list(TRANSFORM LUA_PATH_DEFAULT REPLACE "\\\\" "\\\\\\\\" OUTPUT_VARIABLE LUA_PATH_ESCAPED)
-list(TRANSFORM LUA_CPATH_DEFAULT REPLACE "\\\\" "\\\\\\\\" OUTPUT_VARIABLE LUA_CPATH_ESCAPED)
+list(TRANSFORM LUA_PATH_DEFAULT REPLACE "\\\\" "\\\\\\\\" OUTPUT_VARIABLE
+                                                          LUA_PATH_ESCAPED)
+list(TRANSFORM LUA_CPATH_DEFAULT REPLACE "\\\\" "\\\\\\\\" OUTPUT_VARIABLE
+                                                           LUA_CPATH_ESCAPED)
 
 # Generate the configuration header; this is used implicitly by multiple targets
 # so needs to be done early and can't really be skipped.
 
 configure_file(
   "${PROJECT_SOURCE_DIR}/liblua/include/luaconf.h.in"
-  "${PROJECT_BINARY_DIR}/liblua/include/luaconf.h"
-  USE_SOURCE_PERMISSIONS
-  ESCAPE_QUOTES
-)
+  "${PROJECT_BINARY_DIR}/liblua/include/luaconf.h" USE_SOURCE_PERMISSIONS
+  ESCAPE_QUOTES)
 
 #
 # Project Targets
@@ -188,28 +234,25 @@ if(BUILD_INSTALL)
   write_basic_package_version_file(
     "${CMAKE_CURRENT_BINARY_DIR}/elune-config-version.cmake"
     VERSION ${PROJECT_VERSION}
-    COMPATIBILITY ExactVersion
-  )
+    COMPATIBILITY ExactVersion)
 
   configure_package_config_file(
     "${CMAKE_CURRENT_SOURCE_DIR}/cmake/elune-config.cmake.in"
     "${CMAKE_CURRENT_BINARY_DIR}/elune-config.cmake"
     INSTALL_DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/elune"
-    NO_CHECK_REQUIRED_COMPONENTS_MACRO
-  )
+    NO_CHECK_REQUIRED_COMPONENTS_MACRO)
 
   install(
-    FILES
-      "${CMAKE_CURRENT_BINARY_DIR}/elune-config-version.cmake"
-      "${CMAKE_CURRENT_BINARY_DIR}/elune-config.cmake"
+    FILES "${CMAKE_CURRENT_BINARY_DIR}/elune-config-version.cmake"
+          "${CMAKE_CURRENT_BINARY_DIR}/elune-config.cmake"
     DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/elune"
-    COMPONENT Development
-  )
+    COMPONENT Development)
 endif()
 
 if(BUILD_INSTALL AND BUILD_PACKAGE)
   set(CPACK_PACKAGE_VENDOR "Meorawr")
-  string(TOLOWER "${CMAKE_SYSTEM_NAME}-${CMAKE_SYSTEM_PROCESSOR}" CPACK_SYSTEM_NAME)
+  string(TOLOWER "${CMAKE_SYSTEM_NAME}-${CMAKE_SYSTEM_PROCESSOR}"
+                 CPACK_SYSTEM_NAME)
   set(CPACK_GENERATOR "TXZ;ZIP")
   set(CPACK_STRIP_FILES ON)
 
@@ -226,7 +269,10 @@ if(BUILD_SUMMARY)
   message(STATUS "Lua library path:   ${LUA_PATH_DEFAULT}")
   message(STATUS "Lua C library path: ${LUA_CPATH_DEFAULT}")
 
-  get_property(_variable_names DIRECTORY PROPERTY CACHE_VARIABLES)
+  get_property(
+    _variable_names
+    DIRECTORY
+    PROPERTY CACHE_VARIABLES)
   list(SORT _variable_names)
 
   set(_enabled_features)
