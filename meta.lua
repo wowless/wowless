@@ -36,11 +36,6 @@ function issecure() end
 ---@return string?
 function loadstring_untainted(chunk, name) end
 
----@param a number
----@param b number
----@return number
-function mod(a, b) end
-
 ---@param delim string
 ---@param str string
 ---@return string ...

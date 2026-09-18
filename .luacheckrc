@@ -16,7 +16,6 @@ read_globals = {
   'issecure',
   'issecurevariable',
   'loadstring_untainted',
-  'mod',
   'scrub',
   'securecall',
   'securecallfunction',

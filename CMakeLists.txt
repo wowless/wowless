@@ -50,7 +50,6 @@ add_library(
   ${elune_SOURCE_DIR}/liblua/lbaselib.c
   ${elune_SOURCE_DIR}/liblua/lbitlib.c
   ${elune_SOURCE_DIR}/liblua/lcode.c
-  ${elune_SOURCE_DIR}/liblua/lcompatlib.c
   ${elune_SOURCE_DIR}/liblua/lcorolib.c
   ${elune_SOURCE_DIR}/liblua/ldblib.c
   ${elune_SOURCE_DIR}/liblua/ldebug.c

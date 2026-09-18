@@ -20,7 +20,6 @@ static const luaL_Reg lualibs[] = {
     {LUA_OSLIBNAME,             luaopen_os      },
     {LUA_STRLIBNAME,            luaopen_string  },
     {LUA_TABLIBNAME,            luaopen_table   },
-    {LUA_COMPATLIBNAME,         luaopen_compat  },
     /* clang-format off */
     { NULL, NULL },
     /* clang-format on */
