@@ -40572,6 +40572,7 @@ SwitchAchievementSearchTab:
 table.concat:
   impl: table.concat
 table.contains:
+  genusage: true
   impl: table.contains
   inputs:
   - name: table
@@ -40655,6 +40656,7 @@ table.isfrozen:
   - name: frozen
     type: boolean
 table.keys:
+  genusage: true
   impl: table.keys
   inputs:
   - name: table
