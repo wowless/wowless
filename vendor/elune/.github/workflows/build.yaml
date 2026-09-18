@@ -1,0 +1,74 @@
+---
+name: Build
+on:
+  - push
+
+jobs:
+  build:
+    name: ${{ matrix.config.name }}
+    runs-on: ${{ matrix.config.os }}
+    strategy:
+      fail-fast: false
+
+      matrix:
+        config:
+          - name: Windows
+            os: windows-latest
+            preset: windows
+            arch: x64
+            executable-suffix: .exe
+
+          - name: Linux
+            os: ubuntu-latest
+            preset: linux
+
+          - name: macOS
+            os: macos-latest
+            preset: macos
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: seanmiddleditch/gha-setup-ninja@v3
+
+      - uses: ilammy/msvc-dev-cmd@v1
+        if: startsWith(matrix.config.os, 'windows')
+        with:
+          arch: ${{ matrix.config.arch }}
+
+      - uses: ammaraskar/msvc-problem-matcher@master
+        if: startsWith(matrix.config.os, 'windows')
+
+      - uses: ammaraskar/gcc-problem-matcher@master
+        if: startsWith(matrix.config.os, 'ubuntu') || startsWith(matrix.config.os, 'macos')
+
+      - name: Configure
+        run: cmake --preset ${{ matrix.config.preset }}
+
+      - name: Build
+        run: cmake --build --preset ${{ matrix.config.preset }}
+
+      - name: Install
+        run: cmake --build --preset ${{ matrix.config.preset }} --target install
+
+      - name: Test
+        run: ./luatest${{ matrix.config.executable-suffix }}
+        working-directory: build/${{ matrix.config.preset }}/bin/Release
+
+      - name: Package
+        run: cmake --build --preset ${{ matrix.config.preset }} --target package
+
+      - name: Upload
+        uses: actions/upload-artifact@v3
+        with:
+          path: build/${{ matrix.config.preset }}/install/**/*
+          name: ${{ matrix.config.name }}
+
+      - name: Release
+        uses: ncipollo/release-action@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          artifacts: build/${{ matrix.config.preset }}/*.tar.xz,build/${{ matrix.config.preset }}/*.zip
+          draft: true
+          token: ${{ secrets.GITHUB_TOKEN }}
+          allowUpdates: true

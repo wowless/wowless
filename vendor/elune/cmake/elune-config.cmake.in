@@ -1,0 +1,11 @@
+@PACKAGE_INIT@
+
+set(_elune_supported_components liblua lua luac)
+
+foreach(_comp ${elune_FIND_COMPONENTS})
+  if (NOT _comp IN_LIST _elune_supported_components)
+    set(elune_FOUND False)
+    set(elune_NOT_FOUND_MESSAGE "Unsupported component: ${_comp}")
+  endif()
+  include("${CMAKE_CURRENT_LIST_DIR}/elune-${_comp}-targets.cmake")
+endforeach()

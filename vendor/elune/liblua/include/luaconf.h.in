@@ -1,0 +1,278 @@
+/**
+ * Lua - An Extensible Extension Language
+ *
+ * Licensed under the terms of the MIT License; see full copyright information
+ * in the "LICENSE" file or at <http://www.lua.org/license.html>
+ */
+
+#ifndef lconfig_h
+#define lconfig_h
+
+#include <limits.h>
+#include <stddef.h>
+#include <stdint.h>
+
+/* Build configuration */
+
+#define LUA_VERSION_MAJOR "5"
+#define LUA_VERSION_MINOR "1"
+#define LUA_VERSION_RELEASE "5"
+
+#define LUA_VERSION "Lua " LUA_VERSION_MAJOR "." LUA_VERSION_MINOR
+#define LUA_RELEASE LUA_VERSION "." LUA_VERSION_RELEASE
+#define LUA_COPYRIGHT "Copyright (C) 1994-2012 Lua.org, PUC-Rio."
+#define LUA_AUTHORS "R. Ierusalimschy, L. H. de Figueiredo, W. Celes"
+
+#define ELUNE_AUTHORS "Daniel 'Meorawr' Yates"
+#define ELUNE_COPYRIGHT "Copyright (C) 2021-2022 " ELUNE_AUTHORS "."
+#define ELUNE_RELEASE ELUNE_VERSION
+#define ELUNE_VERSION "Elune @PROJECT_VERSION@"
+/* clang-format off */
+#define ELUNE_VERSION_NUM @PROJECT_VERSION@
+/* clang-format on */
+
+#cmakedefine LUA_USE_WINDOWS
+#cmakedefine LUA_USE_LINUX
+#cmakedefine LUA_USE_MACOS
+#cmakedefine LUA_USE_POSIX
+#cmakedefine LUA_USE_CXX_EXCEPTIONS
+#cmakedefine LUA_USE_CXX_LINKAGE
+#cmakedefine LUA_USE_LONGLONG
+#cmakedefine LUA_USE_SHARED
+#cmakedefine LUA_USE_READLINE
+#cmakedefine LUA_DISABLE_LOADLIB
+
+/* Type configuration */
+
+/* Type used for numbers in Lua. */
+#define LUA_NUMBER double
+/* Signal to C libraries that LUA_NUMBER is double. */
+#define LUA_NUMBER_DOUBLE
+/* Type used for integers in the Lua C API. */
+#define LUA_INTEGER ptrdiff_t
+/* Result of a `usual argument conversion' over lua_Number. */
+#define LUAI_UACNUMBER double
+/* Bit-width of integers on the compiled-for platform. */
+/* clang-format off */
+#cmakedefine LUAI_BITSINT @LUAI_BITSINT@
+/* clang-format on */
+
+/* VM and auxilliary library limitations */
+
+/* Maximum size of source descriptions for debug info. */
+#define LUA_IDSIZE 60
+/* Maximum number of captures accepted by pattern matching functions. */
+#define LUA_MAXCAPTURES 32
+/* Minimum Lua stack available to a C function. */
+#define LUA_MINSTACK 100
+/* Maximum number of nested Lua calls. */
+#define LUAI_MAXCALLS 20000
+/* Maximum number of nested C calls. */
+#define LUAI_MAXCCALLS 200
+/* Maximum size of the Lua stack in a C function. */
+#define LUAI_MAXCSTACK 8000
+/* Maximum number of upvalues referenced in a Lua chunk. */
+#define LUAI_MAXUPVALUES 60
+/* Maximum number of local variables in a Lua chunk. */
+#define LUAI_MAXVARS 200
+/* Size of buffers used by the auxilliary library buffer system. */
+#define LUAL_BUFFERSIZE BUFSIZ
+/* Extra free space allocated with the Lua state. */
+#define LUAI_EXTRASPACE 0
+
+/* Garbage collector tuning */
+
+/* Speed at which garbage collection works relative to allocations as a percentage. */
+#define LUAI_GCMUL 200
+/* Pause between cycles as a percentage of memory growth. */
+#define LUAI_GCPAUSE 110
+
+/* Taint source configuration */
+
+/* Taint source applied from the 'forceinsecure' library function. */
+#define LUA_FORCEINSECURE_TAINT "*** TaintForced ***"
+/* Taint source applied from the 'loadstring' library function. */
+#define LUA_LOADSTRING_TAINT "*** ForceTaint_Strong ***"
+
+/* Lua interpreter prompt configuration */
+
+/* Name of the Lua interpreter executable. */
+#define LUA_PROGNAME "@LUA_OUTPUT_NAME@"
+/* Prompt used for the interpreter. */
+#define LUA_PROMPT "> "
+/* Prompt used for the interpreter on continuation lines. */
+#define LUA_PROMPT2 ">> "
+/* Maximum size of input for interpreter input lines and 'debug.debug()'. */
+#define LUA_MAXINPUT 512
+
+/* Backwards compatibility options */
+
+/* Controls compatibility with the old long-string nesting facility. */
+#define LUA_COMPAT_LSTR 1
+
+/* Library loading configuration */
+
+/* Environment variable to use for Lua library paths. */
+#define LUA_PATH "LUA_PATH"
+/* Environment variable to use for C library paths. */
+#define LUA_CPATH "LUA_CPATH"
+/* Environment variable to use for initialization code. */
+#define LUA_INIT "LUA_INIT"
+/* Character that separates templates in a path. */
+#define LUA_PATHSEP ";"
+/* Character used for substitution points in a path template. */
+#define LUA_PATH_MARK "?"
+/* Character used on Windows as a substitution marker for the executable directory. */
+#define LUA_EXECDIR "!"
+/* Character before which all other characters are ignored when building 'lua_open*' function names. */
+#define LUA_IGMARK "-"
+/* Directory separator for this platform. */
+#define LUA_DIRSEP "@LUA_DIRSEP_ESCAPED@"
+/* Default search path for Lua libraries. */
+#define LUA_PATH_DEFAULT "@LUA_PATH_ESCAPED@"
+/* Default search path for C libraries. */
+#define LUA_CPATH_DEFAULT "@LUA_CPATH_ESCAPED@"
+
+/* Numeric scanning and formatting */
+
+#define LUA_NUMBER_SCAN "%lf"
+#define LUA_NUMBER_FMT "%.14g"
+#define LUAI_MAXNUMBER2STR 32
+
+/* Number and string conversions */
+
+#define lua_number2int(i, d) ((i) = (int) (d))
+#define lua_number2integer(i, d) ((i) = (lua_Integer) (d))
+#define lua_number2str(s, n) sprintf((s), LUA_NUMBER_FMT, (n))
+#define lua_str2number(s, p) strtod((s), (p))
+
+/* Assertions and API checks */
+
+#define lua_unused(x) ((void) sizeof((x)))
+#define lua_nop() ((void) 0)
+
+#if defined(LUA_USE_ASSERT)
+#include <assert.h>
+#define lua_assert(expr) assert((expr))
+#else
+#define lua_assert(expr) lua_unused((expr))
+#endif
+
+#if defined(LUA_USE_APICHECK)
+#include <assert.h>
+#define luai_apicheck(L, expr)                                                                                         \
+    {                                                                                                                  \
+        lua_unused((L));                                                                                               \
+        assert(expr);                                                                                                  \
+    }
+#else
+#define luai_apicheck(L, expr)                                                                                         \
+    {                                                                                                                  \
+        lua_unused((L));                                                                                               \
+        lua_unused((expr));                                                                                            \
+    }
+#endif
+
+/* Export declarations */
+
+#if defined(__cplusplus)
+#if defined(LUA_USE_CXX_LINKAGE)
+#define LUA_DECL_EXTERN extern "C++"
+#else
+#define LUA_DECL_EXTERN extern "C"
+#endif
+#else
+#define LUA_DECL_EXTERN extern
+#endif
+
+#if defined(LUA_USE_SHARED) && defined(_WIN32)
+#define LUA_DECL_EXPORT LUA_DECL_EXTERN __declspec(dllexport)
+#define LUA_DECL_IMPORT LUA_DECL_EXTERN __declspec(dllimport)
+#define LUA_DECL_HIDDEN LUA_DECL_EXTERN
+#elif defined(LUA_USE_SHARED) && defined(__GNUC__)
+#define LUA_DECL_EXPORT LUA_DECL_EXTERN __attribute__((visibility("default")))
+#define LUA_DECL_IMPORT LUA_DECL_EXTERN __attribute__((visibility("default")))
+#define LUA_DECL_HIDDEN LUA_DECL_EXTERN __attribute__((visibility("hidden")))
+#else
+#define LUA_DECL_EXPORT LUA_DECL_EXTERN
+#define LUA_DECL_IMPORT LUA_DECL_EXTERN
+#define LUA_DECL_HIDDEN LUA_DECL_EXTERN
+#endif
+
+#if !defined(LUA_API)
+#if defined(LUA_BUILD_EXPORT)
+#define LUA_API LUA_DECL_EXPORT
+#else
+#define LUA_API LUA_DECL_IMPORT
+#endif
+#endif
+
+#if !defined(LUALIB_API)
+#define LUALIB_API LUA_API
+#endif
+
+#define LUAI_FUNC LUA_DECL_HIDDEN
+#define LUAI_DATA LUA_DECL_HIDDEN
+
+/* Attribute declarations */
+
+#if defined(__has_cpp_attribute) && defined(__cplusplus)
+#define LUA_HAS_ATTRIBUTE(x) __has_cpp_attribute(x)
+#else
+#define LUA_HAS_ATTRIBUTE(x) 0
+#endif
+
+#if LUA_HAS_ATTRIBUTE(noreturn)
+#define LUA_NORETURN [[noreturn]]
+#else
+#define LUA_NORETURN _Noreturn
+#endif
+
+#if LUA_HAS_ATTRIBUTE(fallthrough)
+#define LUA_FALLTHROUGH [[fallthrough]]
+#elif defined(__GNUC__)
+#define LUA_FALLTHROUGH __attribute__((fallthrough))
+#else
+#define LUA_FALLTHROUGH lua_nop()
+#endif
+
+/* Source-compatibility definitions; these are not used internally. */
+
+#define LUAI_UINT32 uint_least32_t
+#define LUAI_INT32 int_least32_t
+#define LUAI_MAXINT32 INT_LEAST32_MAX
+#define LUAI_UMEM size_t
+#define LUAI_MEM ptrdiff_t
+
+#define LUA_INTFRMLEN "l"
+#define LUA_INTFRM_T long
+
+#define LUA_QL(x) "'" x "'"
+#define LUA_QS LUA_QL("%s")
+
+#if defined(LUA_USE_LONGLONG)
+#define LUA_USELONGLONG
+#endif
+
+#if defined(LUA_USE_MACOS)
+#define LUA_USE_MACOSX
+#endif
+
+#if defined(LUA_USE_POSIX)
+#define LUA_DL_DLOPEN
+#define LUA_USE_MKSTEMP
+#define LUA_USE_ISATTY
+#define LUA_USE_POPEN
+#define LUA_USE_ULONGJMP
+#endif
+
+#if defined(LUA_USE_WINDOWS)
+#define LUA_WIN
+#define LUA_DL_DLL
+#endif
+
+#if defined(LUA_USE_WINDOWS) && defined(LUA_USE_SHARED)
+#define LUA_BUILD_AS_DLL
+#endif
+
+#endif

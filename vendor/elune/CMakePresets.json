@@ -1,0 +1,78 @@
+{
+  "version": 3,
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 24
+  },
+  "configurePresets": [
+    {
+      "name": "base",
+      "hidden": true,
+      "generator": "Ninja Multi-Config",
+      "binaryDir": "${sourceDir}/build/${presetName}",
+      "installDir": "${sourceDir}/build/${presetName}/install",
+      "cacheVariables": {
+        "BUILD_SHARED_LIBS": true,
+        "CMAKE_CONFIGURATION_TYPES": "Debug;Release",
+        "CMAKE_DEFAULT_BUILD_TYPE": "Debug",
+        "CMAKE_EXPORT_COMPILE_COMMANDS": true,
+        "CMAKE_ARCHIVE_OUTPUT_DIRECTORY": "${sourceDir}/build/${presetName}/lib",
+        "CMAKE_LIBRARY_OUTPUT_DIRECTORY": "${sourceDir}/build/${presetName}/lib",
+        "CMAKE_PDB_OUTPUT_DIRECTORY": "${sourceDir}/build/${presetName}/bin",
+        "CMAKE_RUNTIME_OUTPUT_DIRECTORY": "${sourceDir}/build/${presetName}/bin",
+        "CMAKE_INSTALL_INCLUDEDIR": "include/lua5.1"
+      }
+    },
+    {
+      "name": "windows",
+      "inherits": "base",
+      "cacheVariables": {
+        "CMAKE_C_COMPILER": "cl.exe",
+        "CMAKE_C_FLAGS": "/D_CRT_SECURE_NO_WARNINGS /W4 /wd4324 /wd4334 /utf-8",
+        "CMAKE_C_FLAGS_DEBUG": "/Od /Ob1 /ZI",
+        "CMAKE_C_FLAGS_RELEASE": "/GL /Gw /O2 /Ob3 /Zi",
+        "CMAKE_EXE_LINKER_FLAGS": "/DEBUG:FULL /MANIFEST:NO /PDBALTPATH:%_PDB%",
+        "CMAKE_EXE_LINKER_FLAGS_DEBUG": "/INCREMENTAL /OPT:NOREF /OPT:NOICF /EDITANDCONTINUE",
+        "CMAKE_EXE_LINKER_FLAGS_RELEASE": "/INCREMENTAL:NO /LTCG /OPT:REF /OPT:ICF",
+        "CMAKE_SHARED_LINKER_FLAGS": "/DEBUG:FULL /MANIFEST:NO /PDBALTPATH:%_PDB%",
+        "CMAKE_SHARED_LINKER_FLAGS_DEBUG": "/INCREMENTAL /OPT:NOREF /OPT:NOICF /EDITANDCONTINUE",
+        "CMAKE_SHARED_LINKER_FLAGS_RELEASE": "/INCREMENTAL:NO /LTCG /OPT:REF /OPT:ICF"
+      }
+    },
+    {
+      "name": "linux",
+      "inherits": "base",
+      "cacheVariables": {
+        "CMAKE_C_COMPILER": "gcc",
+        "CMAKE_C_FLAGS": "-Wall -Wextra",
+        "CMAKE_C_FLAGS_RELEASE": "-DNDEBUG -flto -O3"
+      }
+    },
+    {
+      "name": "macos",
+      "inherits": "base",
+      "cacheVariables": {
+        "CMAKE_C_COMPILER": "clang",
+        "CMAKE_C_FLAGS": "-Wall -Wextra",
+        "CMAKE_C_FLAGS_RELEASE": "-DNDEBUG -flto -O3"
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "windows",
+      "configurePreset": "windows",
+      "configuration": "Release"
+    },
+    {
+      "name": "macos",
+      "configurePreset": "macos",
+      "configuration": "Release"
+    },
+    {
+      "name": "linux",
+      "configurePreset": "linux",
+      "configuration": "Release"
+    }
+  ]
+}

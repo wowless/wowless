@@ -1,0 +1,11 @@
+0f825feb3b6dbb86976de37588f922e481c846b8 # Add stylua config and reformat script tests
+b705ed04f46ce7ad03bb629ac57736f8d4cb8baa # Minor script formatting fixups
+7f3d84f548184befaa6af31f42b74c7fcaee895f # Small comment cleanups for formatting
+8237561f3c7a108fc2d9f149c4adb3cc64f94921 # Indentation cleanup
+bff981b3b03f6803b05b14d466ca8ed270d2caf5 # Re-indent to four spaces for Lua and C files
+cc32a795c88086ef8599941defc1e7c0d3477d08 # Enable indentation of case labels
+516f1634625abe167e01f16096c3590dfea22a5b # Disable Linux-style brace wrapping for functions
+90b15763bce99481185768b19f4e2f40826ab607 # Apply clang-tidy isolate-declarations fixups
+0f26d9bdffef9d9b82093f60bc245126cf36abd0 # Apply clang-tidy braces-around-statements fixups
+b423959661155327242d4aae4391e97d32979a93 # Add clang-format config, mass-format files
+93f6af6080f7b6b1c47b00eae07cf3b7dc5c8f16 # Remove unnecessary indentation

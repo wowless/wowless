@@ -1,0 +1,48 @@
+{
+  "version": 3,
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 24
+  },
+  "configurePresets": [
+    {
+      "name": "windows-amd64",
+      "inherits": "windows",
+      "toolset": {
+        "strategy": "external",
+        "value": "host=x64"
+      },
+      "architecture": {
+        "strategy": "external",
+        "value": "x64"
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "windows-debug",
+      "configurePreset": "windows",
+      "configuration": "Debug"
+    },
+    {
+      "name": "windows-amd64",
+      "configurePreset": "windows-amd64",
+      "configuration": "Release"
+    },
+    {
+      "name": "windows-amd64-debug",
+      "configurePreset": "windows-amd64",
+      "configuration": "Debug"
+    },
+    {
+      "name": "macos-debug",
+      "configurePreset": "macos",
+      "configuration": "Debug"
+    },
+    {
+      "name": "linux-debug",
+      "configurePreset": "linux",
+      "configuration": "Debug"
+    }
+  ]
+}
