@@ -21,6 +21,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 This license covers wowless's own code. Vendored third-party dependencies
-under `vendor/` (including the `elune` Lua runtime under `vendor/elune/`,
-from <https://github.com/meorawr/elune>) retain their own copyright and
-license terms; see the `LICENSE` file within each such directory.
+under `vendor/`, and the `elune` Lua runtime vendored separately under
+`elune/` (from <https://github.com/meorawr/elune>), retain their own
+copyright and license terms; see the `LICENSE` file within each such
+directory.

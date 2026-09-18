@@ -40,7 +40,7 @@ if(NOT BUILD_SHARED_LIBS)
   set(CMAKE_VISIBILITY_INLINES_HIDDEN ON)
 endif()
 
-set(elune_SOURCE_DIR vendor/elune)
+set(elune_SOURCE_DIR elune)
 set(elune_BINARY_DIR ${CMAKE_BINARY_DIR}/_deps/elune-build)
 add_library(
   elune
@@ -1161,9 +1161,9 @@ add_custom_command(
   OUTPUT ${out}
   COMMAND
     ${CMAKE_COMMAND}
-    -DSRC=${CMAKE_CURRENT_SOURCE_DIR}/vendor/elune/tests/luatest_scriptcases.lua
+    -DSRC=${CMAKE_CURRENT_SOURCE_DIR}/elune/tests/luatest_scriptcases.lua
     -DDST_DIR=${d} -P ${CMAKE_CURRENT_SOURCE_DIR}/cmake/copy_executable.cmake
-  DEPENDS vendor/elune/tests/luatest_scriptcases.lua)
+  DEPENDS elune/tests/luatest_scriptcases.lua)
 add_custom_command(
   OUTPUT eluneaddon.txt
   COMMAND ${CMAKE_COMMAND} -E touch eluneaddon.txt
