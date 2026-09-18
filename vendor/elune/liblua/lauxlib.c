@@ -20,8 +20,10 @@
 #include "lua.h"
 
 #if defined(LUA_USE_WINDOWS)
-#include <bcrypt.h>
+// clang-format off
 #include <windows.h>
+#include <bcrypt.h>
+// clang-format on
 #endif
 
 #if defined(LUA_USE_LINUX)
