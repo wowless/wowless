@@ -83,7 +83,7 @@ in-game tests that run inside the simulated WoW environment during `runtests`.
   fresh worktree re-extracts cheaply rather than re-downloading. Don't
   `cp -r` extracts between checkouts.
 - **Never run system `lua`/`luajit` against this repo's code or data.** The
-  project vendors its own Lua 5.1 fork (`vendor/elune/`) with WoW taint
+  project vendors its own Lua 5.1 fork (`elune/`) with WoW taint
   extensions and its own module path baked into the CMake-built tooling. A
   system interpreter is a different runtime without the project's modules,
   so nothing "confirmed" through it is trustworthy. For ad hoc data
@@ -182,8 +182,8 @@ API behavior.
 
 ### C Extensions
 
-- `vendor/elune/`: Custom Lua 5.1 fork with WoW-specific extensions (taint
-  tracking, security). Vendored (not a git submodule) from
+- `elune/`: Custom Lua 5.1 fork with WoW-specific extensions (taint
+  tracking, security). Vendored in-tree (not a git submodule) from
   <https://github.com/meorawr/elune> so it can be modified directly;
   upstream changes must be merged in by hand rather than via
   `git submodule update`. Only the sources this project actually builds
