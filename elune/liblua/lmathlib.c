@@ -265,42 +265,17 @@ static const luaL_Reg mathlib_lua[] = {
     /* clang-format on */
 };
 
-static const luaL_Reg mathlib_elune[] = {
-    {"random", math_securerandom},
-    /* clang-format off */
-    { NULL, NULL },
-    /* clang-format on */
-};
-
-static void mathlib_openshared(lua_State *L) {
+LUALIB_API int luaopen_math(lua_State *L) {
+  /* open math library */
+  luaL_register(L, LUA_MATHLIBNAME, mathlib_lua);
   luaL_setfuncs(L, mathlib_shared, 0);
   lua_pushnumber(L, PI);
   lua_setfield(L, -2, "pi");
   lua_pushnumber(L, HUGE_VAL);
   lua_setfield(L, -2, "huge");
-}
-
-LUALIB_API int luaopen_math(lua_State *L) {
-  /* open math library */
-  luaL_register(L, LUA_MATHLIBNAME, mathlib_lua);
-  mathlib_openshared(L);
 
   /* open global functions */
   lua_pushvalue(L, LUA_GLOBALSINDEX);
-  luaL_setfuncs(L, mathlib_global, 0);
-  lua_pop(L, 1);
-
-  return 1;
-}
-
-LUALIB_API int luaopen_elune_math(lua_State *L) {
-  /* open math library */
-  luaL_getsubtable(L, LUA_ENVIRONINDEX, LUA_MATHLIBNAME);
-  luaL_setfuncs(L, mathlib_elune, 0);
-  mathlib_openshared(L);
-
-  /* open global functions */
-  lua_pushvalue(L, LUA_ENVIRONINDEX);
   luaL_setfuncs(L, mathlib_global, 0);
   lua_pop(L, 1);
 

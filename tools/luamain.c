@@ -17,8 +17,7 @@ int main(int argc, char **argv) {
   if (L == NULL) {
     return EXIT_FAILURE;
   }
-  luaL_openlibsx(L, LUALIB_STANDARD);
-  luaL_openlibsx(L, LUALIB_ELUNE);
+  luaL_openlibs(L);
   lua_newtable(L); /* stack of preloads to process */
   for (size_t i = 1; i <= luamain.npreloads; ++i) {
     const struct preload *preload = luamain.preloads[luamain.npreloads - i];

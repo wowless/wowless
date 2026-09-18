@@ -261,9 +261,3 @@ LUALIB_API int luaopen_os(lua_State *L) {
   luaL_register(L, LUA_OSLIBNAME, syslib_lua);
   return 1;
 }
-
-LUALIB_API int luaopen_elune_os(lua_State *L) {
-  lua_pushvalue(L, LUA_ENVIRONINDEX);
-  luaL_setfuncs(L, syslib_global, 0);
-  return 0;
-}

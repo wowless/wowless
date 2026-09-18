@@ -10,11 +10,6 @@
 
 #include "lua.h"
 
-enum lua_LibrarySet {
-  LUALIB_STANDARD, /* Lua 5.1 standard libraries */
-  LUALIB_ELUNE,    /* WoW-compatible reference libraries */
-};
-
 #define LUA_FILEHANDLE "FILE*"
 
 #define LUA_BASELIBNAME "_G"
@@ -44,26 +39,5 @@ LUALIB_API int luaopen_string(lua_State *L);
 LUALIB_API int luaopen_table(lua_State *L);
 
 LUALIB_API void luaL_openlibs(lua_State *L);
-LUALIB_API void luaL_openlibsx(lua_State *L, int set);
-
-/*
-** {======================================================================
-** Extension Libraries
-** =======================================================================
-*/
-
-#define LUA_ELUNELIBNAME "elune"
-
-LUALIB_API int luaopen_elune_base(lua_State *L);
-LUALIB_API int luaopen_elune_bit(lua_State *L);
-LUALIB_API int luaopen_elune_debug(lua_State *L);
-LUALIB_API int luaopen_elune_coroutine(lua_State *L);
-LUALIB_API int luaopen_elune_os(lua_State *L);
-LUALIB_API int luaopen_elune_math(lua_State *L);
-LUALIB_API int luaopen_elune_string(lua_State *L);
-LUALIB_API int luaopen_elune_table(lua_State *L);
-LUALIB_API int luaopen_elune(lua_State *L);
-
-/* }====================================================================== */
 
 #endif

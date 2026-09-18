@@ -340,9 +340,3 @@ LUALIB_API int luaopen_table(lua_State *L) {
   luaL_register(L, LUA_TABLIBNAME, tablib_shared);
   return 1;
 }
-
-LUALIB_API int luaopen_elune_table(lua_State *L) {
-  luaL_getsubtable(L, LUA_ENVIRONINDEX, LUA_TABLIBNAME);
-  luaL_setfuncs(L, tablib_shared, 0);
-  return 1;
-}

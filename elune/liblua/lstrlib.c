@@ -1094,23 +1094,3 @@ LUALIB_API int luaopen_string(lua_State *L) {
   createmetatable(L);
   return 1;
 }
-
-LUALIB_API int luaopen_elune_string(lua_State *L) {
-  /* open string library */
-  luaL_getsubtable(L, LUA_ENVIRONINDEX, LUA_STRLIBNAME);
-  luaL_setfuncs(L, strlib_shared, 0);
-
-  /* open global functions */
-  lua_pushvalue(L, LUA_ENVIRONINDEX);
-  luaL_setfuncs(L, strlib_global, 0);
-
-  lua_pushvalue(L, LUA_GLOBALSINDEX);
-  if (lua_rawequal(L, -2, -1)) { /* loading into global environment? */
-    lua_pop(L, 2);               /* pop global and environment tables */
-    createmetatable(L);          /* install string metatable */
-  } else {
-    lua_pop(L, 2);
-  }
-
-  return 1;
-}

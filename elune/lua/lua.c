@@ -398,10 +398,7 @@ static int libargs(lua_State *L, char **argv, int n) {
       lua_assert(extra != NULL);
 
       if (strcmp(extra, "lua") == 0) {
-        luaL_openlibsx(L, LUALIB_STANDARD);
-        loaded = 1;
-      } else if ((strcmp(extra, "elune") == 0) || strcmp(extra, "wow") == 0) {
-        luaL_openlibsx(L, LUALIB_ELUNE);
+        luaL_openlibs(L);
         loaded = 1;
       } else if (strcmp(extra, "none") == 0) {
         loaded = 1;
@@ -414,9 +411,7 @@ static int libargs(lua_State *L, char **argv, int n) {
   }
 
   if (!loaded) {
-    /* Load both libraries with standard taking priority by default. */
-    luaL_openlibsx(L, LUALIB_ELUNE);
-    luaL_openlibsx(L, LUALIB_STANDARD);
+    luaL_openlibs(L);
   }
 
   return 1;

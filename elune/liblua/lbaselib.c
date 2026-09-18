@@ -779,16 +779,9 @@ static const luaL_Reg baselib_shared[] = {
 };
 
 static const luaL_Reg baselib_lua[] = {
-    {"dofile",     luaB_dofile             },
-    {"load",       luaB_load               },
-    {"loadfile",   luaB_loadfile           },
-    {"loadstring", luaB_loadstringuntainted},
-    /* clang-format off */
-    { NULL, NULL },
-    /* clang-format on */
-};
-
-static const luaL_Reg baselib_elune[] = {
+    {"dofile",     luaB_dofile    },
+    {"load",       luaB_load      },
+    {"loadfile",   luaB_loadfile  },
     {"loadstring", luaB_loadstring},
     /* clang-format off */
     { NULL, NULL },
@@ -835,17 +828,4 @@ LUALIB_API int luaopen_base(lua_State *L) {
   luaopen_coroutine(L);
 
   return 2;
-}
-
-LUALIB_API int luaopen_elune_base(lua_State *L) {
-  /* set field '_G' */
-  lua_pushvalue(L, LUA_ENVIRONINDEX);
-  lua_pushvalue(L, -1);
-  lua_setfield(L, -2, LUA_BASELIBNAME);
-
-  /* register '_G' base library */
-  luaL_setfuncs(L, baselib_elune, 0);
-  baselib_openshared(L);
-
-  return 1;
 }

@@ -209,21 +209,8 @@ static const luaL_Reg corolib_lua[] = {
     /* clang-format on */
 };
 
-static const luaL_Reg corolib_elune[] = {
-    /* clang-format off */
-    { NULL, NULL },
-    /* clang-format on */
-};
-
 LUALIB_API int luaopen_coroutine(lua_State *L) {
   luaL_register(L, LUA_COLIBNAME, corolib_lua);
-  luaL_setfuncs(L, corolib_shared, 0);
-  return 1;
-}
-
-LUALIB_API int luaopen_elune_coroutine(lua_State *L) {
-  luaL_getsubtable(L, LUA_ENVIRONINDEX, LUA_COLIBNAME);
-  luaL_setfuncs(L, corolib_elune, 0);
   luaL_setfuncs(L, corolib_shared, 0);
   return 1;
 }

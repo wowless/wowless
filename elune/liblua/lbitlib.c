@@ -106,9 +106,3 @@ LUALIB_API int luaopen_bit(lua_State *L) {
   luaL_register(L, LUA_BITLIBNAME, bitlib_shared);
   return 1;
 }
-
-LUALIB_API int luaopen_elune_bit(lua_State *L) {
-  luaL_getsubtable(L, LUA_ENVIRONINDEX, LUA_BITLIBNAME);
-  luaL_setfuncs(L, bitlib_shared, 0);
-  return 1;
-}
