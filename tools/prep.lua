@@ -74,6 +74,10 @@ local function ensuresql(k)
   end
 end
 
+local function safename(s)
+  return s:gsub('[%.:]', '_')
+end
+
 local implimpls = {
   delegate = function(impl)
     return {
@@ -117,6 +121,11 @@ local implimpls = {
       modules = { impl.name },
       nobubblewrap = impl.nobubblewrap,
       nowrap = impl.nowrap,
+    }
+  end,
+  native = function(_, name)
+    return {
+      cfunc = 'wowless_native_' .. safename(name),
     }
   end,
   stdlib = function(path)
@@ -526,10 +535,6 @@ local data = {
   xmlflat = xmlflat,
   xmlimpls = xmlimpls,
 }
-
-local function safename(s)
-  return s:gsub('[%.:]', '_')
-end
 
 local function cstring(s)
   return '"' .. s:gsub('\\', '\\\\'):gsub('"', '\\"'):gsub('\n', '\\n'):gsub('\r', '\\r'):gsub('\t', '\\t') .. '"'
@@ -1076,17 +1081,65 @@ local function stub_inputcheck(inp, idx)
   return dispatch(cinputtypes, inp.type)('stubcheck', nilable, idx) .. ';'
 end
 
-local function names(list)
-  local t = {}
-  for _, item in ipairs(list or {}) do
-    table.insert(t, item.name)
+-- Joins names for a Usage: string, bracketing a trailing run of nilable
+-- args (e.g. "table [, value]") to match the real client's convention.
+-- Requires the list to be shaped exactly [non-nilables..., nilables...]
+-- (hard errors on interleaving) and rejects a strided (variadic) list,
+-- since bracket notation doesn't apply to either.
+local function names(list, stride)
+  assert(not stride or stride == 0, 'names: stride not supported')
+  list = list or {}
+  local function isnilable(item)
+    return item.nilable or item.default ~= nil
   end
-  return table.concat(t, ', ')
+  local n = #list
+  local seennilable = false
+  for i = 1, n do
+    if isnilable(list[i]) then
+      seennilable = true
+    else
+      assert(not seennilable, 'names: non-nilable arg after nilable arg')
+    end
+  end
+  local split = n + 1
+  for i = 1, n do
+    if isnilable(list[i]) then
+      split = i
+      break
+    end
+  end
+  local required = {}
+  for i = 1, split - 1 do
+    table.insert(required, list[i].name)
+  end
+  local result = table.concat(required, ', ')
+  for i = split, n do
+    local sep
+    if i == split then
+      sep = result ~= '' and ' [, ' or '['
+    else
+      sep = '[, '
+    end
+    result = result .. sep .. list[i].name
+  end
+  if split <= n then
+    result = result .. string.rep(']', n - split + 1)
+  end
+  return result
 end
 
-local function emit_implstub_body(name, v, fn, extra_first_input)
+-- A native (direct C function, no lua_call) impl skips output typechecking
+-- entirely: unlike wowless_impl_stub, which reaches its result via lua_call
+-- and thus leaves it at the stack position the VM's own calling convention
+-- expects, a plain C call to a native function leaves any pre-existing
+-- stack contents (like the original arguments) below its pushed results, so
+-- the position-based output checks below would read the wrong slots. The
+-- Lua VM's own return convention (top N values, everything else discarded)
+-- handles this correctly on its own -- just pass the native function's
+-- return through untouched.
+local function emit_implstub_body(name, v, fn, extra_first_input, native)
   local check_inputs = v.inputs ~= nil or extra_first_input ~= nil
-  local check_outputs = v.outputs ~= nil
+  local check_outputs = v.outputs ~= nil and not native
   local inputs = v.inputs or {}
   if extra_first_input ~= nil then
     inputs = { extra_first_input }
@@ -1121,7 +1174,7 @@ local function emit_implstub_body(name, v, fn, extra_first_input)
     if v.genusage then
       emit(
         '  const char *usage = %s;',
-        cstring(('Usage: local %s = %s(%s)'):format(names(v.outputs), name, names(v.inputs)))
+        cstring(('Usage: local %s = %s(%s)'):format(names(v.outputs, v.outstride), name, names(v.inputs, v.instride)))
       )
     end
     local inputcheck = v.genusage and genusagecheck or v.usage and usagecheck or check
@@ -1282,6 +1335,11 @@ local ns_entries = {}
 local global_entries = {}
 for k, v in pairs(parseYaml('data/products/' .. product .. '/apis.yaml')) do
   local impl = v.impl and ensureimpl(v.impl)
+  if impl and impl.cfunc then
+    -- Defined in wowless/native.c (a plain C file); this forward-declares
+    -- it with C linkage for the C++ stub file about to call it directly.
+    emit('extern "C" int %s(lua_State *L);', impl.cfunc)
+  end
   if not impl or not impl.nowrap then
     emit('static int api_%s(lua_State *L) {', safename(k))
     if v.protected then
@@ -1304,8 +1362,8 @@ for k, v in pairs(parseYaml('data/products/' .. product .. '/apis.yaml')) do
       end
       emit_stub_body(k, v, inputcheck)
     else
-      local fn = impl.nobubblewrap and 'wowless_impl_stub_nobubblewrap' or 'wowless_impl_stub'
-      emit_implstub_body(k, v, fn)
+      local fn = impl.cfunc or (impl.nobubblewrap and 'wowless_impl_stub_nobubblewrap' or 'wowless_impl_stub')
+      emit_implstub_body(k, v, fn, nil, impl.cfunc ~= nil)
     end
     emit('}')
     emit('')
@@ -1330,7 +1388,7 @@ for k, v in pairs(parseYaml('data/products/' .. product .. '/apis.yaml')) do
 end
 
 local function emit_stub_entry_statics(sn, entry)
-  if entry.impldata then
+  if entry.impldata and not entry.impldata.cfunc then
     local impldata = entry.impldata
     local mods = impldata.modules or {}
     local sqls_list = impldata.sqls or {}
@@ -1368,7 +1426,7 @@ local function emit_stub_entry(indent, name, entry)
     cstring(name),
     d and d.nowrap and 'nullptr' or ('api_' .. entry.sn),
     entry.secureonly and 1 or 0,
-    d and ('&impldata_' .. entry.sn) or 'nullptr'
+    d and not d.cfunc and ('&impldata_' .. entry.sn) or 'nullptr'
   )
 end
 

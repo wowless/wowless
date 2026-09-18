@@ -30,7 +30,7 @@ describe('impl', function()
       for vk, vv in pairs(v) do
         describe(vk, function()
           it('does not have both nowrap and nobubblewrap set', function()
-            assert.falsy(vv.nowrap and vv.nobubblewrap)
+            assert.falsy(type(vv) == 'table' and vv.nowrap and vv.nobubblewrap)
           end)
         end)
       end

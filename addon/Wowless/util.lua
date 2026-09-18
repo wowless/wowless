@@ -48,6 +48,22 @@ local function assertRecursivelyEqual(expected, actual)
   end
 end
 
+-- Lua arrays can't be handed to assertRecursivelyEqual directly: it turns
+-- table values into sub-tests keyed by whatever keys the table has, and the
+-- addon test framework requires every sub-test key to be a non-empty
+-- string, which array indices aren't. This returns the same shape of
+-- sub-test table assertRecursivelyEqual does, keyed by tostring(index)
+-- instead of the raw integer.
+local function assertScalarArrayEquals(expected, actual)
+  local t = {}
+  for i = 1, math.max(#expected, #actual) do
+    t[tostring(i)] = function()
+      assertEquals(expected[i], actual[i])
+    end
+  end
+  return t
+end
+
 local function match(k, ...)
   local n = select('#', ...)
   assert(n >= k, 'match usage error: insufficient args')
@@ -195,6 +211,7 @@ G.addonEnv = G
 G.assertEquals = assertEquals
 G.assertEqualSets = assertEqualSets
 G.assertRecursivelyEqual = assertRecursivelyEqual
+G.assertScalarArrayEquals = assertScalarArrayEquals
 G.check0 = check0
 G.check1 = check1
 G.check2 = check2

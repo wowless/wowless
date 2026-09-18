@@ -684,6 +684,8 @@ table.remove:
   stdlib: table.remove
 table.removemulti:
   stdlib: table.removemulti
+table.removevalue:
+  native: true
 table.setn:
   stdlib: table.setn
 table.sort:

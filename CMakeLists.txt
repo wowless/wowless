@@ -961,6 +961,7 @@ target_sources(
           wowless/luaobject.c
           wowless/modules/encodingutil.c
           wowless/modules/security.c
+          wowless/native.c
           wowless/secure.c
           wowless/stubs.cpp
           wowless/uiobject.c)

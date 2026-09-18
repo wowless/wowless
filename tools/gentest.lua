@@ -26,20 +26,61 @@ local function tpath(t, ...)
   return t
 end
 
-local function names(list)
-  local t = {}
-  for _, item in ipairs(list or {}) do
-    table.insert(t, item.name)
+-- Joins names for a Usage: string, bracketing a trailing run of nilable
+-- args (e.g. "table [, value]") to match the real client's convention.
+-- Requires the list to be shaped exactly [non-nilables..., nilables...]
+-- (hard errors on interleaving) and rejects a strided (variadic) list,
+-- since bracket notation doesn't apply to either. Kept in sync with
+-- tools/prep.lua's own names(), which builds the same string embedded in
+-- the generated C stub.
+local function names(list, stride)
+  assert(not stride or stride == 0, 'names: stride not supported')
+  list = list or {}
+  local function isnilable(item)
+    return item.nilable or item.default ~= nil
   end
-  return table.concat(t, ', ')
+  local n = #list
+  local seennilable = false
+  for i = 1, n do
+    if isnilable(list[i]) then
+      seennilable = true
+    else
+      assert(not seennilable, 'names: non-nilable arg after nilable arg')
+    end
+  end
+  local split = n + 1
+  for i = 1, n do
+    if isnilable(list[i]) then
+      split = i
+      break
+    end
+  end
+  local required = {}
+  for i = 1, split - 1 do
+    table.insert(required, list[i].name)
+  end
+  local result = table.concat(required, ', ')
+  for i = split, n do
+    local sep
+    if i == split then
+      sep = result ~= '' and ' [, ' or '['
+    else
+      sep = '[, '
+    end
+    result = result .. sep .. list[i].name
+  end
+  if split <= n then
+    result = result .. string.rep(']', n - split + 1)
+  end
+  return result
 end
 
 local function genusage(fullname, api)
   if not api.genusage then
     return nil
   end
-  assert(#api.inputs == 1 and api.inputs[1].type == 'table', fullname)
-  return ('local %s = %s(%s)'):format(names(api.outputs), fullname, names(api.inputs))
+  assert(api.inputs[1] and api.inputs[1].type == 'table', fullname)
+  return ('local %s = %s(%s)'):format(names(api.outputs, api.outstride), fullname, names(api.inputs, api.instride))
 end
 
 local function renderXml(x)

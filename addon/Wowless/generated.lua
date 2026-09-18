@@ -386,6 +386,7 @@ G.testsuite.generated = function()
       addonName = addonName,
       assertEquals = G.assertEquals,
       assertRecursivelyEqual = G.assertRecursivelyEqual,
+      assertScalarArrayEquals = G.assertScalarArrayEquals,
       check0 = G.check0,
       check1 = G.check1,
       check2 = G.check2,

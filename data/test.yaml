@@ -149,6 +149,8 @@ table.getcountinfo:
   table.getcountinfo:
 table.keys:
   table.keys:
+table.removevalue:
+  table.removevalue:
 table.wipe:
   table.wipe:
 UnitName:

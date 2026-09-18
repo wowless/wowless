@@ -42,4 +42,5 @@ type:
               type: flag
             nowrap:
               type: flag
+        native: flag
         stdlib: string

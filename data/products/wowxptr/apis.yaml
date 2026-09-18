@@ -40680,6 +40680,8 @@ table.removeunordered:
     nilable: true
     type: any
 table.removevalue:
+  genusage: true
+  impl: table.removevalue
   inputs:
   - name: table
     type: table
