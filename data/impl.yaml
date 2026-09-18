@@ -661,7 +661,7 @@ SwapToGlobalEnvironment:
 table.concat:
   stdlib: table.concat
 table.contains:
-  stdlib: table.contains
+  native: true
 table.count:
   impl:
 table.count.single:
@@ -677,7 +677,7 @@ table.getn:
 table.insert:
   stdlib: table.insert
 table.keys:
-  stdlib: table.keys
+  native: true
 table.maxn:
   stdlib: table.maxn
 table.remove:
