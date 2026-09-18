@@ -13,6 +13,7 @@ local allgttokens = {
   cata = true,
   plunderstorm = true,
   wowhack = true,
+  wowlabs = true,
 }
 for _, v in pairs(gttokens) do
   for k in pairs(v) do

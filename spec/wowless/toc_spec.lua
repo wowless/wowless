@@ -121,6 +121,7 @@ describe('wowless.toc', function()
           }
           local files = parse(gametype, table.concat(lines, '\n')).files
           local expected = {
+            Camelot = { { name = 'ccc' } },
             Mists = { { name = 'ccc' }, { name = 'ddd' }, { name = 'fff' }, { name = 'ggg' } },
             Standard = { { name = 'aaa' } },
             TBC = { { name = 'ccc' }, { name = 'eee' }, { name = 'fff' }, { name = 'ggg' } },
