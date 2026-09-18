@@ -35,6 +35,9 @@ cvars:
   C_CVar.SetCVar:
 debuglocals:
   debuglocals:
+debugprofilestop:
+  debugprofilestart:
+  debugprofilestop:
 EnumerateFrames:
   CreateFrame:
   EnumerateFrames:
@@ -121,6 +124,8 @@ loadstring:
   getfenv:
   loadstring:
   setfenv:
+scrub:
+  scrub:
 securecallfunction:
   error:
   geterrorhandler:

@@ -2,6 +2,13 @@ describe('apis', function()
   for _, p in ipairs(require('build.data.products')) do
     describe(p, function()
       local apis = require('build.data.products.' .. p .. '.apis')
+      local impls = require('build.data.impl')
+      local testedimpls = {}
+      for _, implset in pairs(require('build.data.test')) do
+        for implname in pairs(implset) do
+          testedimpls[implname] = true
+        end
+      end
       for name, api in pairs(apis) do
         describe(name, function()
           it('is not stubbed if provided by elune', function()
@@ -11,6 +18,13 @@ describe('apis', function()
           end)
           it('has outputs if it has inputs', function()
             assert.Truthy(not api.inputs or api.outputs)
+          end)
+          it('has a data/test if it is a stdlib impl with inputs or outputs', function()
+            local impl = api.impl and impls[api.impl]
+            local hasspec = next(api.inputs or {}) or next(api.outputs or {})
+            if impl and impl.stdlib and hasspec then
+              assert.Truthy(testedimpls[api.impl])
+            end
           end)
           it('has no other fields if unsupported', function()
             if api.unsupported then
@@ -147,7 +161,6 @@ describe('apis', function()
         end)
       end
       it('has no duplicate stdlibs', function()
-        local impls = require('build.data.impl')
         local s = {}
         for k, v in pairs(apis) do
           local z = impls[v.impl] and impls[v.impl].stdlib
