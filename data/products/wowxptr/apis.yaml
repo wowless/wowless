@@ -40572,6 +40572,7 @@ SwitchAchievementSearchTab:
 table.concat:
   impl: table.concat
 table.contains:
+  impl: table.contains
   inputs:
   - name: table
     type: table

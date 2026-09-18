@@ -293,6 +293,21 @@ static int table_keys(lua_State *L) {
   return 1;
 }
 
+static int table_contains(lua_State *L) {
+  luaL_checktype(L, 1, LUA_TTABLE);
+  luaL_checkany(L, 2);
+  lua_pushnil(L);
+  while (lua_next(L, 1)) {
+    if (lua_rawequal(L, -1, 2)) {
+      lua_pushboolean(L, 1);
+      return 1;
+    }
+    lua_pop(L, 1);
+  }
+  lua_pushboolean(L, 0);
+  return 1;
+}
+
 static int table_removemulti(lua_State *L) {
   luaL_checktype(L, 1, LUA_TTABLE);
 
@@ -334,6 +349,7 @@ static int table_removemulti(lua_State *L) {
 
 static const luaL_Reg tablib_shared[] = {
     {"concat",      table_concat     },
+    {"contains",    table_contains   },
     {"foreach",     table_foreach    },
     {"foreachi",    table_foreachi   },
     {"getn",        table_getn       },

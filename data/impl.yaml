@@ -660,6 +660,8 @@ SwapToGlobalEnvironment:
     name: env
 table.concat:
   stdlib: table.concat
+table.contains:
+  stdlib: table.contains
 table.count:
   impl:
 table.count.single:

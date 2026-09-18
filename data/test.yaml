@@ -139,6 +139,8 @@ string.trim:
   string.trim:
 SwapToGlobalEnvironment:
   SwapToGlobalEnvironment:
+table.contains:
+  table.contains:
 table.count:
   table.count:
 table.count.single:
