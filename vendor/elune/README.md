@@ -26,37 +26,14 @@ be - submitted to Blizzard for resolution.
 
 ## Building
 
-CMake is used for building the project. The presets defined in
-`CMakePresets.json` at the root of the repository represent the supported build
-configurations that are tested by the CI; these are Linux (GCC), macOS (Clang)
-and Windows (MSVC).
-
-For a build with all components enabled in a release configuration the
-following CMake commands will configure and build the project in a
-`build/<preset>` directory. The resulting binaries for Lua can be found in
-`bin/Release/` and `lib/Release/` subdirectories of that folder.
-
-```sh
-cmake --preset <linux|macos|windows>
-cmake --build --preset <linux|macos|windows> [--config <Debug|Release>]
-```
-
-Installation of the compiled artifacts to a specified target directory can be
-performed with the following command.
-
-```sh
-cmake --build --preset <linux|macos|windows> [--config <Debug|Release>] \
-  [--prefix <path to install to>] [--strip]
-```
-
-To generate a fully packaged release the following can be executed to create a
-set of `.tar.xz` and `.zip` files in the build directory for the selected
-preset.
-
-```sh
-cmake --build --preset <linux|macos|windows> [--config <Debug|Release>] \
-  --target package
-```
+This copy is vendored into [wowless](https://github.com/wowless/wowless),
+trimmed to only the sources wowless actually builds (`liblua/`, the public
+headers, and `lua/lua.c`), and compiled directly by wowless's own top-level
+`CMakeLists.txt` rather than elune's own CMake build. Elune's own build
+system (CMake presets, packaging, CI) and standalone test harness were
+dropped from this copy; see the [upstream
+repository](https://github.com/meorawr/elune) for those and for the
+project's own release history.
 
 ## License
 
