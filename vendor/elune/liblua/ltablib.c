@@ -6,7 +6,10 @@
 #define ltablib_c
 #define LUA_LIB
 
+#include "lapi.h"
 #include "lauxlib.h"
+#include "lobject.h"
+#include "ltable.h"
 #include "lua.h"
 #include "lualib.h"
 
@@ -280,6 +283,29 @@ static int table_wipe(lua_State *L) {
   return 1;
 }
 
+static int table_keys(lua_State *L) {
+  luaL_checktype(L, 1, LUA_TTABLE);
+  Table *t = (Table *)lua_topointer(L, 1);
+  int n = 0;
+  lua_newtable(L);
+  /* array part: keys are the implicit indices, matching luaH_next */
+  for (int i = 0; i < t->sizearray; i++) {
+    if (!ttisnil(&t->array[i])) {
+      lua_pushinteger(L, i + 1);
+      lua_rawseti(L, -2, ++n);
+    }
+  }
+  /* hash part: push the stored key TValue itself, matching luaH_next */
+  for (int i = 0; i < sizenode(t); i++) {
+    Node *node = gnode(t, i);
+    if (!ttisnil(gval(node))) {
+      luaA_pushobject(L, key2tval(node));
+      lua_rawseti(L, -2, ++n);
+    }
+  }
+  return 1;
+}
+
 static int table_removemulti(lua_State *L) {
   luaL_checktype(L, 1, LUA_TTABLE);
 
@@ -324,6 +350,7 @@ static const luaL_Reg tablib_shared[] = {
     {"foreach",     table_foreach    },
     {"foreachi",    table_foreachi   },
     {"getn",        table_getn       },
+    {"keys",        table_keys       },
     {"maxn",        table_maxn       },
     {"insert",      table_insert     },
     {"remove",      table_remove     },

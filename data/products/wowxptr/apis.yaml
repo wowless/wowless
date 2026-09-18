@@ -40654,12 +40654,7 @@ table.isfrozen:
   - name: frozen
     type: boolean
 table.keys:
-  inputs:
-  - name: table
-    type: table
-  outputs:
-  - name: keys
-    type: any
+  impl: table.keys
 table.maxn:
   impl: table.maxn
 table.remove:
