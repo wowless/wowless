@@ -183,7 +183,12 @@ API behavior.
 ### C Extensions
 
 - `vendor/elune/`: Custom Lua 5.1 fork with WoW-specific extensions (taint
-  tracking, security)
+  tracking, security). Vendored (not a git submodule) from
+  <https://github.com/meorawr/elune> so it can be modified directly;
+  upstream changes must be merged in by hand rather than via
+  `git submodule update`. Only the sources this project actually builds
+  are kept — elune's own CMake build system, CI workflow, changelog, and
+  unused test-harness files were dropped rather than carried along dead.
 - `wowless/*.c`: Native Lua extensions (sqlite, mixin, bubblewrap, ext)
 
 ### External Data (`vendor/`)

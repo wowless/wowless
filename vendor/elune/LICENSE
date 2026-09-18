@@ -1,6 +1,7 @@
 MIT License
 
-Copyright (c) 2021 Ferronn
+Copyright (C) 1994-2012 Lua.org, PUC-Rio.
+Copyright (C) 2021-2022 Daniel "Meorawr" Yates.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -19,8 +20,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
-This license covers wowless's own code. Vendored third-party dependencies
-under `vendor/` (including the `elune` Lua runtime under `vendor/elune/`,
-from <https://github.com/meorawr/elune>) retain their own copyright and
-license terms; see the `LICENSE` file within each such directory.

@@ -42,3 +42,11 @@ To run an addon through it, download it into the container, then run:
 ```sh
 bin/run.sh wow --addondir path/to/your/AddonName
 ```
+
+## Third-party software
+
+Wowless's Lua runtime is [elune](https://github.com/meorawr/elune), a
+WoW-taint-aware Lua 5.1 fork by Daniel "Meorawr" Yates, vendored (trimmed to
+the sources this project actually builds) under `vendor/elune/` (see that
+directory's own `LICENSE` and `README.md`). Other third-party dependencies
+are listed in `.gitmodules`.
