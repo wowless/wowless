@@ -533,6 +533,7 @@ return function(
   local xmlattrlang = {
     hidden = function(_, obj, value)
       obj.shown = not value
+      obj.visible = obj.shown and IsVisible(obj.parent)
     end,
     mixin = function(ctx, obj, value)
       local env = ctx.useAddonEnv and ctx.addonEnv or ctx.useSecureEnv and secureenv or genv
