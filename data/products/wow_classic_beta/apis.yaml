@@ -1,4 +1,3 @@
-AbandonSkill:
 AbbreviateLargeNumbers:
   inputs:
   - name: number
@@ -391,7 +390,7 @@ C_ActionBar.EnableActionRangeCheck:
   outputs:
 C_ActionBar.FindAssistedCombatActionButtons:
   inputs:
-  - default: All
+  - default: 3
     name: setToSearch
     type:
       enum: ActionBarSet
@@ -404,7 +403,7 @@ C_ActionBar.FindFlyoutActionButtons:
   inputs:
   - name: flyoutID
     type: number
-  - default: All
+  - default: 3
     name: setToSearch
     type:
       enum: ActionBarSet
@@ -417,7 +416,7 @@ C_ActionBar.FindPetActionButtons:
   inputs:
   - name: petActionID
     type: number
-  - default: All
+  - default: 3
     name: setToSearch
     type:
       enum: ActionBarSet
@@ -430,7 +429,7 @@ C_ActionBar.FindSpellActionButtons:
   inputs:
   - name: spellID
     type: string
-  - default: All
+  - default: 3
     name: setToSearch
     type:
       enum: ActionBarSet
@@ -598,7 +597,7 @@ C_ActionBar.GetPetActionPetBarIndices:
   inputs:
   - name: petActionID
     type: number
-  - default: All
+  - default: 3
     name: setToSearch
     type:
       enum: ActionBarSet
@@ -650,7 +649,7 @@ C_ActionBar.HasAction:
     type: boolean
 C_ActionBar.HasAssistedCombatActionButtons:
   inputs:
-  - default: All
+  - default: 3
     name: setToSearch
     type:
       enum: ActionBarSet
@@ -671,7 +670,7 @@ C_ActionBar.HasFlyoutActionButtons:
   inputs:
   - name: flyoutID
     type: number
-  - default: All
+  - default: 3
     name: setToSearch
     type:
       enum: ActionBarSet
@@ -687,7 +686,7 @@ C_ActionBar.HasPetActionButtons:
   inputs:
   - name: petActionID
     type: number
-  - default: All
+  - default: 3
     name: setToSearch
     type:
       enum: ActionBarSet
@@ -698,7 +697,7 @@ C_ActionBar.HasPetActionPetBarIndices:
   inputs:
   - name: petActionID
     type: number
-  - default: All
+  - default: 3
     name: setToSearch
     type:
       enum: ActionBarSet
@@ -716,7 +715,7 @@ C_ActionBar.HasSpellActionButtons:
   inputs:
   - name: spellID
     type: string
-  - default: All
+  - default: 3
     name: setToSearch
     type:
       enum: ActionBarSet
@@ -850,7 +849,7 @@ C_ActionBar.IsOnBarOrSpecialBar:
   inputs:
   - name: spellID
     type: string
-  - default: All
+  - default: 3
     name: setToSearch
     type:
       enum: ActionBarSet
@@ -5026,6 +5025,7 @@ C_ChallengeMode.StartChallengeMode:
     type: boolean
 C_CharacterServices.ArePaidCharacterTransfersBetweenBnetAccountsEnabled:
 C_CharacterServices.AssignFCMDistribution:
+C_CharacterServices.AssignHCTDistribution:
 C_CharacterServices.AssignNameChangeDistribution:
 C_CharacterServices.AssignPCTDistribution:
 C_CharacterServices.AssignRaceOrFactionChangeDistribution:
@@ -5046,9 +5046,12 @@ C_CharacterServices.GetCharacterServiceDisplayData:
     type: table
 C_CharacterServices.GetCharacterServiceDisplayDataByVASType:
 C_CharacterServices.GetCharacterServiceDisplayInfo:
+C_CharacterServices.GetHardcoreTransferSuperDistrictDestinations:
+C_CharacterServices.GetPaidCharacterTransferSuperDistrictDestinations:
 C_CharacterServices.GetVASDistributions:
 C_CharacterServices.HasRequiredBoostForClassTrial:
 C_CharacterServices.HasRequiredBoostForUnrevoke:
+C_CharacterServices.IsRealmlessRealmSelectionEnabled:
 C_CharacterServices.SetAutomaticBoost:
 C_CharacterServices.SetAutomaticBoostCharacter:
 C_CharacterServicesPublic.ShouldSeeControlPopup:
@@ -20253,13 +20256,6 @@ C_PaperDollInfo.CancelTemporaryEnchantment:
   - name: slot
     type: number
   outputs:
-C_PaperDollInfo.CanCursorCanGoInSlot:
-  inputs:
-  - name: slotIndex
-    type: number
-  outputs:
-  - name: canOccupySlot
-    type: boolean
 C_PaperDollInfo.CursorCanGoInSlot:
   inputs:
   - name: slotIndex
@@ -37740,7 +37736,6 @@ GetPetExperience:
     type: number
   - name: nextXP
     type: number
-GetPetFoodTypes:
 GetPetHitChanceModifier:
   inputs:
   outputs:
@@ -40023,8 +40018,10 @@ JumpOrAscendStart:
   outputs:
   protected: true
 Kiosk.EnableGodMode:
-Kiosk.GetCharacterTemplateSetIndex:
+Kiosk.GetCharacterTemplateSetID:
 Kiosk.GetKioskLoginInfo:
+Kiosk.GetSecondsRemaining:
+Kiosk.GetSessionDuration:
 Kiosk.IsCompetitiveModeEnabled:
 Kiosk.IsEnabled:
   inputs:
@@ -40033,7 +40030,10 @@ Kiosk.IsEnabled:
 Kiosk.IsExpired:
 Kiosk.IsHousingResetPending:
 Kiosk.IsInLobby:
+Kiosk.IsSessionActive:
+Kiosk.IsSessionTimed:
 Kiosk.RequestHousingReset:
+Kiosk.ShouldDeleteAllCharacters:
 Kiosk.ShutdownSession:
 Kiosk.StartSession:
 LaunchURL:
@@ -40658,6 +40658,8 @@ RequestTimePlayed:
   inputs:
   outputs:
 RequeueSkirmish:
+require:
+  impl: require
 ResetChatColors:
 ResetChatWindows:
 ResetCPUUsage:
@@ -40888,7 +40890,6 @@ SetAutoDeclineNeighborhoodInvites:
     name: allow
     type: boolean
   outputs:
-SetBarSlotFromIntro:
 SetBattlefieldScoreFaction:
 SetBinding:
 SetBindingClick:

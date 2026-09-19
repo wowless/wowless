@@ -103,6 +103,7 @@ AccountStateLoadedFlags:
     CurrencyTransferLogLoaded: '0x0000020000000000'
     DataElementsLoaded: '0x0000001000000000'
     DynamicCriteriaLoaded: '0x0000000001000000'
+    DynamicDistrictsLoaded: '0x0000800000000000'
     EventRecordsLoaded: '0x0000200000000000'
     HousingDataLoaded: '0x0000080000000000'
     ItemCollectionsLoaded: '0x0000000000001000'
@@ -2176,6 +2177,7 @@ CreateAllAccountData:
     CurrencycapsDone: '0x0000000000000010'
     CurrencyTransferLogDone: '0x0000020000000000'
     DataElementsDone: '0x0000001000000000'
+    DynamicDistrictsDone: '0x0000800000000000'
     EventRecordsDone: '0x0000200000000000'
     ItemCollectionItemsDone: '0x0000000000001000'
     LgVendorPurchaseDone: '0x0000040000000000'
@@ -3396,12 +3398,15 @@ GameRule:
     ActionbarIconIntroDisabled: 60
     ActionButtonTypeOverlayStrategy: 165
     ActionCombatTargetLockEnabled: 87
+    AeLootDisabled: 89
     AfterDeathSpectatingUI: 49
     AllPlayersAreFastMovers: 53
     AlwaysAllowAlliedRaces: 59
     AutoAttacksDisabled: 103
+    AutoLearnPetSpells: 182
     BagSpaceOverride: 172
     BagsUIDisabled: 64
+    BinarySpellPushbackResist: 90
     BlockWhileSheathedAllowed: 88
     CharacterCreateUseFixedBackgroundModel: 55
     CharacterlessLogin: 14
@@ -3413,6 +3418,8 @@ GameRule:
     CollectionsPanelDisabled: 36
     CommunitiesPanelDisabled: 41
     CompactRaidFrameManagerDisabled: 81
+    CraftFromBankRestricted: 211
+    CreatureDamageMultiplierAllowedSources: 174
     CustomActionbarOverlayHeightOffset: 33
     DeleteItemConfirmationDisabled: 62
     DisableCampsites: 114
@@ -3422,18 +3429,23 @@ GameRule:
     DisableRaidGroups: 163
     DisableRealmSelection: 113
     DisableVas: 119
+    DisallowAbandoningLastPet: 180
     DoesNotCountTowardAccountCharacterMax: 142
+    DynamicDistrictAffinityAssignmentAlgorithm: 216
     EditModeDisabled: 82
     EjDungeonsDisabled: 149
     EjItemSetsDisabled: 151
     EjJourneysDisabled: 156
     EjRaidsDisabled: 150
     EjSuggestedContentDisabled: 148
+    EnableAmmoSystem: 177
+    EnableDifficultyMessages: 237
     EncounterJournalDisabled: 42
     EtaRealmLaunchTime: 5
     ExperienceBarDisabled: 159
     FastAreaTriggerTick: 52
     FinderPanelDisabled: 43
+    FishingClassicDifficulty: 209
     ForceAlteredFormsOn: 56
     ForcedChatLanguage: 34
     ForcedMultiActionBarSetting: 133
@@ -3474,6 +3486,7 @@ GameRule:
     MerchantFilterDisabled: 101
     MicrobarScale: 26
     MinimapDisabled: 146
+    MinimumXPDecayCoefficient: 200
     MinUndeleteLevelRequired: 140
     NameplateCastBarDisabled: 107
     NoDebuffLimit: 1
@@ -3488,20 +3501,27 @@ GameRule:
     PlayerNameplateDifficultyIcon: 57
     PlunderstormAreaSelection: 94
     PremadeGroupFinderStyle: 93
+    ProfessionsPanelDisabled: 38
     PvPInitialRatingOverride: 190
+    PvPRuleset: 213
     QuestLogMicrobuttonDisabled: 47
     QuestLogPanelDisabled: 71
     QuestLogSuperTrackingDisabled: 72
+    QuestLootRoundRobin: 197
     RaceAlteredFormsDisabled: 78
+    ReagentBagsFitItemsOfTheirBagFamily: 206
     RecommendLeastPopulatedRealm: 169
     ReleaseSpiritGhostDisabled: 61
     RepairArmorDisabled: 147
     ReplaceAbsentGmSeconds: 11
     ReplaceGmRankLastOnlineSeconds: 12
     RestrictedAchievementCategoryID: 155
+    RPEDisabled: 195
+    RPRuleset: 214
     Runecarving: 17
     SelfFoundAllowed: 22
-    SpellbookPanelDisabled: 38
+    SingleTargetComboPoints: 112
+    StandardQuestXPDecayLevelOffset: 199
     StoreDisabled: 44
     SummoningStones: 108
     TalentRespecCostMax: 19
@@ -3511,7 +3531,9 @@ GameRule:
     TargetCastBarDisabled: 106
     TargetFrameBuffsDisabled: 85
     TargetFrameDisabled: 130
+    ThrownWeaponsUseDurability: 181
     TimerunningAllowed: 137
+    TrackAchievementsDisabled: 228
     TransmogEnabled: 109
     TrivialGroupXPPercent: 7
     TutorialFrameDisabled: 73
@@ -5261,6 +5283,10 @@ JournalLinkTypes:
     Instance: 0
     Section: 2
     Tier: 3
+KioskExperience:
+  values:
+    One: 0
+    Two: 1
 LanguageFlag:
   values:
     HiddenFromPlayer: 2
@@ -6311,9 +6337,6 @@ PowerTypeSlot:
     Slot_7: 7
     Slot_8: 8
     Slot_9: 9
-PreferredPlaySettingsStatus:
-  values:
-    Placeholder: 0
 PremadeGroupFinderStyle:
   values:
     Disabled: 0
@@ -6770,14 +6793,6 @@ RcoCloseReason:
     GmCancel: 4
     Invalid: 6
     Reject: 3
-RecentAlliesFriendTag:
-  values:
-    Delves: 4
-    Dungeons: 3
-    Professions: 0
-    PvP: 1
-    Questing: 5
-    Raiding: 2
 RecentAlliesInteractionCategoryFilter:
   values:
     Delves: 4

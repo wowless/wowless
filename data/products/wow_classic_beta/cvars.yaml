@@ -78,7 +78,7 @@ advflypitchcontrolgrounddebounce:
 agentloglevel:
   default: '1'
 agentuid:
-  default: wow_ptr
+  default: wow_beta
 aibrain:
   default: '0'
 aicontroller:
@@ -248,12 +248,20 @@ beckontriggereventlog:
   default: '0'
 behaviortree:
   default: '0'
+blizzcon2026coldswapfeatureenabled:
+  default: '1'
+blizzcon2026experience:
+  default: '0'
 blockchannelinvites:
   character: true
   default: '0'
 blocktrades:
   character: true
   default: '0'
+bloomenable:
+  default: '0'
+bloomusermult:
+  default: '1'
 bodyquota:
   default: '100'
 breakuplargenumbers:
@@ -459,7 +467,7 @@ cameracustomviewsmoothing:
   default: '0'
 cameradistancemaxzoomfactor:
   account: true
-  default: '1.900000'
+  default: '1.000000'
 cameradistanceratemult:
   account: true
   default: '1.000000'
@@ -478,6 +486,9 @@ camerafollowonstick:
 camerafollowpitchdeadzone:
   account: true
   default: '5.000000'
+camerafollowpitchoffset:
+  account: true
+  default: '15.000000'
 camerafollowpitchspeed:
   account: true
   default: '1.000000'
@@ -1365,7 +1376,12 @@ camerazoomspeed:
 camerazsmooth:
   account: true
   default: '1'
+canusequestitemwithleftclick:
+  default: '0'
 cascontainersizelimit:
+  default: '0'
+characterframecollapsed:
+  character: true
   default: '0'
 characterneedsturnstrafedialog:
   character: true
@@ -1400,6 +1416,8 @@ chatstyle:
   default: im
 checkaddonversion:
   default: '1'
+classicstyleworldtext:
+  default: '0'
 clientcastdebug:
   default: '0'
 clientcastlimitdebug:
@@ -1433,6 +1451,10 @@ clientsettings_fsr:
 clientsettings_high_mem_features_by_api_mask:
   default: ''
 clientsettings_high_mem_features_by_gpu_category:
+  default: ''
+clientsettings_low_latency_cbs_by_api_mask:
+  default: ''
+clientsettings_low_latency_cbs_by_gpu_category:
   default: ''
 clientsettings_lowlatency:
   default: ''
@@ -1540,7 +1562,7 @@ combinedbags:
   account: true
   default: '0'
 combopointlocation:
-  default: '2'
+  default: '1'
 commentatorlossofcontroliconunitframe:
   account: true
   default: '1'
@@ -1637,6 +1659,12 @@ debugalloctrackstacktrace:
   default: auto
 debugtorsotwist:
   default: '0'
+deemphasizeoffspecprimarystats:
+  account: true
+  default: '0'
+defaultreputationsorttype:
+  account: true
+  default: '2'
 deprecatedwarningthrottle:
   default: '0'
 depthbasedopacity:
@@ -1673,6 +1701,8 @@ disableaelooting:
   default: '0'
 disableautorealmselect:
   default: '0'
+disablehorizonstart:
+  default: '0'
 disableservernagle:
   default: '1'
 disablesuggestedlevelactivityfilter:
@@ -1688,6 +1718,8 @@ discorddisplayname:
   default: '0'
 displayspellactivationoverlays:
   character: true
+  default: '1'
+displaytemporaryenchanticon:
   default: '1'
 displayworldpvpobjectives:
   account: true
@@ -1758,11 +1790,20 @@ enablebgdl:
   default: '1'
 enableblinkapplicationicon:
   default: '1'
+enablecollectiontoasts:
+  account: true
+  default: '1'
 enableconnecttophotosharing:
   default: '0'
 enablefloatingcombattext:
   account: true
   default: '0'
+enablelearnedrecipetoasts:
+  account: true
+  default: '1'
+enableloottoasts:
+  account: true
+  default: '1'
 enablemouseovercast:
   character: true
   default: '0'
@@ -1794,26 +1835,19 @@ enablewowmouse:
   default: '0'
 encountertimelineenabled:
   account: true
-  default: '1'
 encountertimelinehideforotherroles:
   account: true
-  default: '0'
   secure: true
 encountertimelinehidelongcountdowns:
   account: true
-  default: '0'
 encountertimelinehidequeuedcountdowns:
   account: true
-  default: '0'
 encountertimelinehighlightduration:
   account: true
-  default: '5000'
 encountertimelineiconographyenabled:
   account: true
-  default: '1'
 encountertimelineiconographyhiddenmask:
   account: true
-  default: "\x01"
 encountertimelineshowsequencecount:
   account: true
   default: '0'
@@ -1943,7 +1977,7 @@ floatingcombattextcombatdamageallautos_v2:
 floatingcombattextcombatdamagedirectionaloffset_v2:
   default: '1.000000'
 floatingcombattextcombatdamagedirectionalscale_v2:
-  default: '1.000000'
+  default: '0.000000'
 floatingcombattextcombathealing_v2:
   default: '1'
 floatingcombattextcombathealingabsorbself_v2:
@@ -2017,14 +2051,59 @@ gamedatavisualizer:
   default: '0'
 gamepadanalogmovement:
   default: '1'
+gamepadbackend:
+  default: '0'
+gamepadbackpedalthreshold:
+  default: '0.600000'
+gamepadcamerafollowonstick:
+  account: true
+  default: '0'
+gamepadcamerafollowpitchoffset:
+  account: true
+  default: '15.000000'
 gamepadcameralookmaxpitch:
   default: '0'
 gamepadcameralookmaxyaw:
   default: '0'
 gamepadcamerapitchspeed:
-  default: '1'
+  default: '1.000000'
+gamepadcamerasaveddistance:
+  character: true
+  default: '5.550000'
+gamepadcamerasavedpetbattledistance:
+  character: true
+  default: '10.000000'
+gamepadcamerasavedpitch:
+  character: true
+  default: '10.000000'
+gamepadcamerasavedvehicledistance:
+  character: true
+  default: '-1.000000'
 gamepadcamerayawspeed:
+  default: '1.300000'
+gamepadcompasscustomfilterboss:
+  character: true
+  default: '0'
+gamepadcompasscustomfiltercritter:
+  character: true
+  default: '0'
+gamepadcompasscustomfilterenemy:
+  character: true
+  default: '0'
+gamepadcompasscustomfilterfriendly:
+  character: true
+  default: '0'
+gamepadcompasscustomfilterparty:
+  character: true
+  default: '0'
+gamepadconstrainedgroundtargetdistanceyds:
+  default: '20.000000'
+gamepadconstrainedgroundtargetenabled:
   default: '1'
+  locked: true
+gamepadconstrainedgroundtargetmaxrange:
+  default: '100.000000'
+  locked: true
 gamepadcursorautodisablejump:
   default: '1'
 gamepadcursorautodisablesticks:
@@ -2051,6 +2130,8 @@ gamepadcursorspeedmax:
   default: '1'
 gamepadcursorspeedstart:
   default: '0.1'
+gamepaddisabletooltips:
+  default: '0'
 gamepademulatealt:
   default: none
 gamepademulatectrl:
@@ -2060,27 +2141,123 @@ gamepademulateshift:
 gamepademulatetapwindowms:
   default: '350'
 gamepadenable:
-  default: '0'
+  default: '1'
+gamepadfacemovementfreeflying:
+  default: '1'
 gamepadfacemovementmaxangle:
   default: '0'
 gamepadfacemovementmaxanglecombat:
-  default: '180'
+  default: '105'
+gamepadfacemovementmount:
+  default: '1'
+gamepadfacemovementswimming:
+  default: '1'
 gamepadfactioncolor:
   default: '1'
+gamepadfocusstatecolor:
+  character: true
+  default: '1'
+gamepadfocusstateopacity:
+  character: true
+  default: '0.500000'
+gamepadhudmodifierusestoggle:
+  character: true
+  default: '0'
+gamepadinvertpitch:
+  default: '0'
+gamepadinvertyaw:
+  default: '0'
+gamepadmapedgepandistance:
+  default: '15.000000'
+gamepadmapscrollspeed:
+  default: '400.000000'
+gamepadmapscrollspeedfullscreen:
+  default: '600.000000'
+gamepadmapzoomspeed:
+  default: '2.000000'
 gamepadoverlapmousems:
   default: '2000'
+gamepadpossessbaroverride:
+  character: true
+  default: '4'
+gamepadpreferscreentargeting:
+  character: true
+  default: '0'
+gamepadraidtargetinghovermode:
+  character: true
+  default: '0'
+gamepadraidtargetingstyle:
+  character: true
+  default: '1'
 gamepadrunthreshold:
   default: '0.5'
+gamepadshowactionbarbuttonprompts:
+  character: true
+  default: '0'
+gamepadshowactionbarhighlight:
+  character: true
+  default: '1'
+gamepadshowactionbarscaling:
+  character: true
+  default: '1'
+gamepadshowautoauratooltip:
+  account: true
+  default: '1'
+gamepadshowemptyactionbars:
+  character: true
+  default: '1'
+gamepadshowpersistentinputlegend:
+  character: true
+  default: '1'
 gamepadsingleactiveid:
   default: '0'
+gamepadstancebaroverride:
+  character: true
+  default: '3'
 gamepadstickaxisbuttons:
   default: '0'
+gamepadswapfriendlytargetactions:
+  default: '0'
+gamepadswaphostiletargetactions:
+  default: '0'
+gamepadswaptargetmodifiers:
+  default: '0'
+gamepadtabfriendlytargetaction:
+  default: '1'
+gamepadtabhostiletargetaction:
+  default: '1'
 gamepadtankturnspeed:
   default: '0'
+gamepadtargetinganalogdeadzone:
+  default: '0.600000'
+gamepadtargetinganalogpullbackthreshold:
+  default: '0.100000'
+gamepadtargetingmodifiervisualdelay:
+  character: true
+  default: '0.350000'
+gamepadtouchcursoraccel:
+  default: '1.000000'
 gamepadtouchcursorenable:
   default: '1'
-gamepadturnwithcamera:
+gamepadtouchcursormovethreshold:
+  default: '0.042000'
+gamepadtouchcursorspeed:
+  default: '1.000000'
+gamepadtouchtapbuttons:
+  default: '0'
+gamepadtouchtapmaxms:
+  default: '200'
+gamepadtouchtaponlyclick:
   default: '1'
+gamepadtouchtaprightclick:
+  default: '0'
+gamepadturnwithcamera:
+  default: '3'
+gamepadusecompactactionbar:
+  character: true
+  default: '0'
+gamepadusepartytargeting:
+  default: '0'
 gamepadvibrationstrength:
   default: '1'
 gameplaycontext:
@@ -2097,6 +2274,12 @@ garrisoncompletetalenttype:
   character: true
   default: '0'
   secure: true
+gimode:
+  default: '513'
+giquality:
+  default: '2'
+graphicsbloomusermult:
+  default: '0'
 graphicscomputeeffects:
   default: '1'
 graphicsdeptheffects:
@@ -2105,12 +2288,16 @@ graphicsenvironmentdetail:
   default: '3'
 graphicsgroundclutter:
   default: '3'
+graphicslightmode:
+  default: '0'
 graphicsliquiddetail:
   default: '1'
 graphicsoutlinemode:
   default: '0'
 graphicsparticledensity:
   default: '2'
+graphicspbrliquiddetail:
+  default: '0'
 graphicsprojectedtextures:
   default: '1'
 graphicsquality:
@@ -2165,6 +2352,8 @@ gxcompatcommandlistmultithreading:
   default: '1'
 gxcompatcopyqueue:
   default: '1'
+gxcompatlowlatencycallbacks:
+  default: '0'
 gxcompatoptionalgpufeatures:
   default: '1'
 gxcompatworksubmitoptimizations:
@@ -2239,6 +2428,16 @@ hardtrackedworldquests:
   locked: true
 hardwarecursor:
   default: '1'
+hasselectedexperiencepreset:
+  default: '0'
+hdrbrightness:
+  default: '203'
+hdrfactor:
+  default: '2.000000'
+hdroutput:
+  default: '0'
+hdrpeakbrightness:
+  default: '400'
 healhandler:
   default: '0'
 heirloomcollectedfilters:
@@ -2333,6 +2532,8 @@ incompletequestprioritythresholddelta:
   default: '135'
 initialrealmlisttimeout:
   default: '60'
+inputdeviceinterfacestyle:
+  default: '0'
 interactkeywarningtutorial:
   account: true
   default: '0'
@@ -2342,19 +2543,27 @@ interactonleftclick:
 interactquestitems:
   account: true
   default: '1'
+interiorfogoverride:
+  default: '0'
 invalidatedeactivatedhandles:
   default: '1'
+kioskcanautodeletecharacters:
+  default: '1'
+  secure: true
 kioskcansessionexpire:
   default: '1'
-  readonly: true
   secure: true
-kioskcharactertemplateset:
+kioskcharactertemplateset1:
   default: '0'
-  readonly: true
+  secure: true
+kioskcharactertemplateset2:
+  default: '0'
   secure: true
 kiosklobbykickseconds:
-  default: '30'
-  readonly: true
+  default: '30.000000'
+  secure: true
+kioskwarmupseconds:
+  default: '15.000000'
   secure: true
 lastaddonversion:
   default: '0'
@@ -2454,6 +2663,8 @@ lfgselectedroles:
   character: true
   default: '0'
   locked: true
+linear:
+  default: '1'
 loaddeprecationfallbacks:
   default: '1'
   secure: true
@@ -2496,7 +2707,7 @@ lossofcontrolsilence:
   character: true
   default: '2'
 lowlatencymininterval:
-  default: '0'
+  default: '-1'
 lowlatencymode:
   default: '0'
 m2forceadditiveparticlesort:
@@ -2535,6 +2746,8 @@ maxlightdist:
   default: '2048'
 maxobservedpetbattles:
   default: '4'
+minfontheight:
+  default: '0.000000'
 minicommunitiesframe:
   character: true
   default: '0'
@@ -2555,7 +2768,7 @@ minimapshowplayercoords:
   default: '1'
 minimaptrackedinfov4:
   character: true
-  default: '3103471'
+  default: '2162728'
 minimaptrackingclosestonly:
   default: '1'
 minimaptrackingshowall:
@@ -2624,9 +2837,6 @@ nameplateaurascale:
   account: true
   default: '1.000000'
   secure: true
-nameplatebottominset:
-  default: '0.100000'
-  secure: true
 nameplatecastbardisplay:
   account: true
   default: "\x02["
@@ -2644,7 +2854,7 @@ nameplateenemyplayerauradisplay:
   account: true
   default: "\x02G"
 nameplateforceshowunitname:
-  default: '0'
+  default: '1'
   secure: true
 nameplatefriendlyplayerauradisplay:
   account: true
@@ -2655,7 +2865,7 @@ nameplategameobjectmaxdistance:
   secure: true
 nameplateinfodisplay:
   account: true
-  default: "\x02D"
+  default: "\x02"
 nameplatemaxalpha:
   character: true
   default: '1.000000'
@@ -2666,7 +2876,7 @@ nameplatemaxalphadistance:
   secure: true
 nameplatemaxdistance:
   character: true
-  default: '60.000000'
+  default: '45.000000'
   secure: true
 nameplatemaxscale:
   character: true
@@ -2692,9 +2902,6 @@ nameplateminscaledistance:
   character: true
   default: '10.000000'
   secure: true
-nameplatemotionspeed:
-  default: '0.025000'
-  secure: true
 nameplatenotselectedalpha:
   default: '-1.000000'
   secure: true
@@ -2714,7 +2921,7 @@ nameplateoverlapv:
   secure: true
 nameplateplayermaxdistance:
   character: true
-  default: '60.000000'
+  default: '40.000000'
   secure: true
 nameplateplayremovalanimation:
   default: '1'
@@ -2729,7 +2936,7 @@ nameplateselectedscale:
   secure: true
 nameplateshowall:
   account: true
-  default: '0'
+  default: '1'
 nameplateshowallpersonalauras:
   default: '0'
   secure: true
@@ -2739,15 +2946,15 @@ nameplateshowcastbars:
   readonly: true
   secure: true
 nameplateshowclasscolor:
-  default: '1'
-  secure: true
+  account: true
+  default: '0'
 nameplateshowdebuffsonfriendly:
   character: true
   default: '1'
   secure: true
 nameplateshowenemies:
   account: true
-  default: '1'
+  default: '0'
 nameplateshowenemyguardians:
   account: true
   default: '0'
@@ -2757,7 +2964,7 @@ nameplateshowenemyminions:
   default: '0'
 nameplateshowenemyminus:
   account: true
-  default: '1'
+  default: '0'
   secure: true
 nameplateshowenemypets:
   account: true
@@ -2768,8 +2975,8 @@ nameplateshowenemytotems:
   default: '0'
   secure: true
 nameplateshowfriendlyclasscolor:
-  default: '1'
-  secure: true
+  account: true
+  default: '0'
 nameplateshowfriendlynpcs:
   account: true
   default: '0'
@@ -2821,7 +3028,7 @@ nameplatestackingtypes:
   default: "\x02"
 nameplatestyle:
   account: true
-  default: '0'
+  default: '1'
   secure: true
 nameplatetargetbehindmaxdistance:
   character: true
@@ -2834,9 +3041,6 @@ nameplatetargetradialposition:
 nameplatethreatdisplay:
   account: true
   default: "\x02"
-nameplatetopinset:
-  default: '0.080000'
-  secure: true
 nameplateuseclasscolorforfriendlyplayerunitnames:
   account: true
   default: '0'
@@ -2856,7 +3060,7 @@ newpvpseason:
   secure: true
 nobuffdebufffilterontarget:
   character: true
-  default: '0'
+  default: '1'
 nonemittercombatrange:
   account: true
   default: '6400.000000'
@@ -2878,6 +3082,9 @@ occludedsilhouetteplayer:
   default: '0'
 occlusionmaxjobs:
   default: '5'
+onlyshowcollecteditemsinjournal:
+  account: true
+  default: '1'
 optoutingamesurveys:
   account: true
   default: '0'
@@ -2891,8 +3098,11 @@ outdoorminaltitudedistance:
   default: '10'
 outline:
   account: true
-  default: '2'
+  default: '0'
 outlineenginemode:
+  default: '0'
+outlinemodeshowlooteffectwhendisabled:
+  account: true
   default: '0'
 outlinemouseoverfadeduration:
   default: '0.9'
@@ -2920,6 +3130,8 @@ pathing:
   default: '0'
 pathsmoothing:
   default: '1'
+pbrliquiddetail:
+  default: '0'
 pendinginviteinfoshown:
   account: true
   default: '0'
@@ -3071,6 +3283,8 @@ questpoiwq:
   default: '1'
 questtextcontrast:
   default: '0'
+raidbloomusermult:
+  default: '1'
 raidclusteredshading:
   default: '1'
 raidcomponenttexturelevel:
@@ -3145,6 +3359,12 @@ raidframesposition:
 raidframeswidth:
   character: true
   default: '72'
+raidgimode:
+  default: '513'
+raidgiquality:
+  default: '2'
+raidgraphicsbloomusermult:
+  default: '0'
 raidgraphicscomputeeffects:
   default: '1'
 raidgraphicsdeptheffects:
@@ -3153,12 +3373,16 @@ raidgraphicsenvironmentdetail:
   default: '3'
 raidgraphicsgroundclutter:
   default: '3'
+raidgraphicslightmode:
+  default: '0'
 raidgraphicsliquiddetail:
   default: '1'
 raidgraphicsoutlinemode:
   default: '0'
 raidgraphicsparticledensity:
   default: '2'
+raidgraphicspbrliquiddetail:
+  default: '0'
 raidgraphicsprojectedtextures:
   default: '1'
 raidgraphicsquality:
@@ -3220,6 +3444,8 @@ raidparticlemtdensity:
   default: '100'
 raidparticulatesenabled:
   default: '1'
+raidpbrliquiddetail:
+  default: '0'
 raidprojectedtextures:
   default: '0'
 raidreflectionmode:
@@ -3255,9 +3481,9 @@ raidterrainloddiv:
 raidterrainmiplevel:
   default: '0'
 raidvolumefog:
-  default: '0'
+  default: '1'
 raidvolumefoglevel:
-  default: '2'
+  default: '3'
 raidwaterdetail:
   default: '0'
 raidweatherdensity:
@@ -3281,7 +3507,7 @@ remotetexttospeechvoice:
   account: true
   default: '1'
 renderformat:
-  default: '0'
+  default: '2'
 renderscale:
   default: '0.675000'
 renderscaledowngradebackgroundminsize:
@@ -3371,7 +3597,7 @@ seenregionalchatdisabled:
 seentimerunningfirstloginpopup:
   default: '0'
 serveralert:
-  default: https://breaking-news.support.blizzard.com/service/wow-client/ptr/us/en-US
+  default: https://breaking-news.support.blizzard.com/service/wow-classic-client/ptr/us/en-US
   readonly: true
 servermessageeventlog:
   default: '0'
@@ -3406,6 +3632,9 @@ shipyardmissiontutorialfirst:
   character: true
   default: '0'
 showallitemsintransmog:
+  default: '0'
+showallspellranks:
+  account: true
   default: '0'
 showarenaenemycastbar:
   character: true
@@ -3450,12 +3679,21 @@ showhonorasexperience:
   default: '0'
 showingamenavigation:
   account: true
-  default: '1'
+  default: '0'
+showkeyring:
+  account: true
+  default: '0'
 showloadingscreentips:
+  default: '1'
+showlootspam:
+  account: true
+  default: '1'
+showmaxlevelannouncements:
+  account: true
   default: '1'
 shownpetutorials:
   account: true
-  default: '1'
+  default: '0'
 showoutfitdetails:
   character: true
   default: '1'
@@ -3469,6 +3707,12 @@ showpingsinchat:
   default: '1'
 showpingsonraidframes:
   default: '1'
+showquestdifficultycolor:
+  character: true
+  default: '1'
+showquestlevel:
+  character: true
+  default: '0'
 showquestobjectivesinlog:
   character: true
   default: '1'
@@ -3481,6 +3725,9 @@ showspectatorteamcircles:
   default: '1'
 showspenderfeedback:
   default: '1'
+showswingtimer:
+  account: true
+  default: '0'
 showtamers:
   character: true
   default: '1'
@@ -3494,6 +3741,8 @@ showtargetoftarget:
   account: true
   default: '0'
   secure: true
+showtaxinodelearnedicon:
+  default: '0'
 showtempmaxhealthloss:
   account: true
   default: '1'
@@ -3526,7 +3775,7 @@ showtokenframe:
   default: '0'
 showtutorials:
   account: true
-  default: '1'
+  default: '0'
 showvkeycastbar:
   account: true
   default: '1'
@@ -3542,6 +3791,22 @@ skycloudlod:
   default: '0'
 slugopticalweight:
   default: '0'
+smartnavigationcursoranchor:
+  default: '5'
+smartnavigationcursorappearance:
+  default: '2'
+smartnavigationcursorbuttonanchor:
+  default: '1'
+smartnavigationcursorfliphorizontal:
+  default: '0'
+smartnavigationcursorflipvertical:
+  default: '0'
+smartnavigationcursorrotationangle:
+  default: '0.000000'
+smartnavigationcursorscale:
+  default: '2.000000'
+smartnavigationscrollspeed:
+  default: '5000.000000'
 smoothunitphasing:
   default: '1'
 smoothunitphasingactorpurgatorytimems:
@@ -3601,6 +3866,9 @@ softtargetinteractarc:
   account: true
   default: '0'
 softtargetinteractiontutorialtotalinteractions:
+  account: true
+  default: '0'
+softtargetinteractonlyinrange:
   account: true
   default: '0'
 softtargetinteractrange:
@@ -3770,12 +4038,15 @@ speechtotext:
 spellactivationoverlayopacity:
   account: true
   default: '0.650000'
+spellbookhideflyouts:
+  account: true
+  default: '1'
 spellbookhidepassives:
   account: true
   default: '0'
 spellbookminimize:
   account: true
-  default: '0'
+  default: '1'
 spellclutter:
   default: '4'
 spellcooldowndebugger:
@@ -3865,6 +4136,9 @@ targetenemyattacker:
   default: '1'
 targetfps:
   default: '60'
+targethighlightalwaysshown:
+  account: true
+  default: '1'
 targetnearestusenew:
   default: '1'
 targetprioritycombatlock:
@@ -3876,9 +4150,9 @@ targetprioritycombatlockhighlight:
 targetprioritypvp:
   default: '1'
 telemetrywowlabspackage:
-  default: Blizzard.Telemetry.Wow_Labs_PTR
+  default: Blizzard.Telemetry.Wow_Camelot_PTR
 telemetrywowpackage:
-  default: Blizzard.Telemetry.Wow_Mainline_PTR
+  default: Blizzard.Telemetry.Wow_Camelot_PTR
 teleportmaxnoloaddist:
   default: '200'
 terrainloddist:
@@ -3990,6 +4264,8 @@ titlebarshowrealmname:
 toastduration:
   account: true
   default: '4'
+tooltippointsshowminandmax:
+  default: '1'
 tooltipshowauracasternames:
   account: true
   default: '0'
@@ -4154,6 +4430,9 @@ unitnameplayerpvptitle:
   default: '1'
 unitslookatplayers:
   default: '1'
+unitsurnameown:
+  account: true
+  default: '1'
 unitvisibility:
   default: '0'
 unlockedmajorfactions:
@@ -4164,7 +4443,13 @@ usebleep:
   default: '0'
 usecommentatorselectioncircles:
   default: '1'
+usecsm:
+  default: '1'
 usedebugallocators:
+  default: '0'
+usehdrbrightness:
+  default: '0'
+usehdrpeakbrightness:
   default: '0'
 usehighrestextures:
   default: '1'
@@ -4182,8 +4467,6 @@ userfontscale:
   default: '1.000000'
 userfontscaleglue:
   default: '1.390000'
-useshadowmapping:
-  default: '1'
 useslug:
   default: '1'
 usetargetfps:
@@ -4191,6 +4474,8 @@ usetargetfps:
 useuiscale:
   default: '0'
   secure: true
+usevsm:
+  default: '1'
 validateframexml:
   default: '1'
 verbosespellscripteventlog:
@@ -4233,6 +4518,8 @@ voicevadsensitivity:
   default: '43'
   locked: true
 volumefog:
+  default: '1'
+volumefogdebugportals:
   default: '0'
 volumefogdisablelightscattering:
   default: '0'
@@ -4242,10 +4529,18 @@ volumefogdisableshadows:
   default: '0'
 volumefoginterior:
   default: '1'
+volumefoginteriorexp:
+  default: '4.000000'
+volumefoginteriorscalar:
+  default: '0.100000'
 volumefoglevel:
-  default: '2'
+  default: '3'
+volumefogtemporalquality:
+  default: '-1'
 volumefoguse16bittexture:
   default: '1'
+volumefoguseinteriorstart:
+  default: '0'
 vrsparticles:
 vrsvalar:
   default: '0'
@@ -4272,7 +4567,7 @@ wardrobeshowcollected:
   locked: true
 wardrobeshowuncollected:
   account: true
-  default: '1'
+  default: '0'
   locked: true
 wardrobesourcefilters:
   account: true
@@ -4344,7 +4639,7 @@ worldquestfilterresources:
   character: true
   default: '1'
 worldtextcritscreeny_v2:
-  default: '0.0275'
+  default: '0.0'
 worldtextgravity_v2:
   default: '0.500000'
 worldtextminalpha_v2:
@@ -4353,7 +4648,7 @@ worldtextminsize:
   account: true
   default: '0.000000'
 worldtextnonrandomz_v2:
-  default: '2.5'
+  default: '2.0'
 worldtextrampduration_v2:
   default: '1.000000'
 worldtextramppow_v2:
@@ -4369,7 +4664,7 @@ worldtextrandomzmin_v2:
 worldtextscale_v2:
   default: '1.000000'
 worldtextscreeny_v2:
-  default: '0.015'
+  default: '0.0'
 worldtextstartposrandomness_v2:
   default: '1.0'
 worldviewcullmaxjobs:

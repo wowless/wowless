@@ -569,6 +569,8 @@ RequestTimePlayed:
   impl:
     modules:
       eventqueue:
+require:
+  impl:
 RunMacroText:
   moduledelegate:
     name: macrotext

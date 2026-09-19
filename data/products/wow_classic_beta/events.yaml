@@ -5359,8 +5359,7 @@ GUILD_PARTY_STATE_UPDATED:
 GUILD_PREFERRED_PLAY_SETTINGS_UPDATED:
   payload:
   - name: status
-    type:
-      enum: PreferredPlaySettingsStatus
+    type: string
   - name: preferredLocaleID
     type: number
   - name: preferredDatacenterLocalityID

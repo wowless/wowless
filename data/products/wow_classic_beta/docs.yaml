@@ -711,6 +711,8 @@ typedefs:
   NumericRuleFormatter:
     type:
       luaobject: NumericRuleFormatter
+  PreferredPlaySettingsStatus:
+    type: string
   QuestObjectiveType:
     type: number
   RecruitAcceptanceID:
