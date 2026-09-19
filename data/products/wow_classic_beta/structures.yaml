@@ -8704,15 +8704,6 @@ C_TransmogOutfitInfo.TransmogOutfitSlotInfo:
     type:
       type:
         enum: TransmogType
-C_TransmogOutfitInfo.TransmogOutfitWeaponOptionInfo:
-  fields:
-    enabled:
-      type: boolean
-    name:
-      type: string
-    weaponOption:
-      type:
-        enum: TransmogOutfitSlotOption
 C_TransmogOutfitInfo.TransmogSituationCategory:
   fields:
     description:

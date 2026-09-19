@@ -31795,22 +31795,6 @@ C_TransmogOutfitInfo.GetViewedOutfitSlotInfo:
   - name: slotInfo
     type:
       structure: C_TransmogOutfitInfo.ViewedTransmogOutfitSlotInfo
-C_TransmogOutfitInfo.GetWeaponOptionsForSlot:
-  inputs:
-  - name: slot
-    type:
-      enum: TransmogOutfitSlot
-  mayreturnnothing: true
-  outputs:
-  - name: weaponOptions
-    type:
-      arrayof:
-        structure: C_TransmogOutfitInfo.TransmogOutfitWeaponOptionInfo
-  - name: artifactOptions
-    nilable: true
-    type:
-      arrayof:
-        structure: C_TransmogOutfitInfo.TransmogOutfitWeaponOptionInfo
 C_TransmogOutfitInfo.HasPendingOutfitSituations:
   inputs:
   outputs:
@@ -31952,15 +31936,6 @@ C_TransmogOutfitInfo.SetViewedOptionForSlot:
     type:
       enum: TransmogOutfitSlot
   - name: option
-    type:
-      enum: TransmogOutfitSlotOption
-  outputs:
-C_TransmogOutfitInfo.SetViewedWeaponOptionForSlot:
-  inputs:
-  - name: slot
-    type:
-      enum: TransmogOutfitSlot
-  - name: weaponOption
     type:
       enum: TransmogOutfitSlotOption
   outputs:
