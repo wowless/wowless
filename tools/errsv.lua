@@ -115,6 +115,19 @@ local function applyPatterns(tx, ty)
   end
 end
 
+if data.generated.impltests then
+  for implname in pairs(data.generated.impltests) do
+    if implname:match('^GetBuildInfo_') then
+      local v = data.generated.impltests[implname].GetBuildInfo['3']
+      local value = assert(loadstring('return ' .. assert(v:match('^want ".*", got (".*")$'))))()
+      local bf = 'data/products/' .. product .. '/build.yaml'
+      local build = yaml.parseFile(bf)
+      build.date = value
+      write(bf, yaml.pprint(build))
+    end
+  end
+end
+
 if data.generated.cvars then
   local cvarsfile = 'data/products/' .. product .. '/cvars.yaml'
   local cvars = yaml.parseFile(cvarsfile)
