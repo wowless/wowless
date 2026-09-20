@@ -7,11 +7,12 @@ type:
     date:
       required: true
       type: string
+    family:
+      required: true
+      type: string
     gametype:
       required: true
-      type:
-        ref:
-          schema: gametypes
+      type: string
     hash:
       required: true
       type: string

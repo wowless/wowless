@@ -19,13 +19,13 @@ return function(addons, datalua, envmodule, events, loadercfg, log, xmleval)
 
   local build = datalua.build
   local gametype = build.gametype
-  local family = require('runtime.gametypes')[gametype].family
+  local family = build.family
   local tocutil = require('wowless.toc')
-  local tocsuffixes = tocutil.suffixes[gametype]
+  local tocsuffixes = tocutil.suffixes(gametype, family)
 
   local function parseToc(tocFile, content)
     local dir = path.dirname(tocFile)
-    local toc = tocutil.parse(gametype, content)
+    local toc = tocutil.parse(gametype, family, content)
     for i, f in ipairs(toc.files) do
       toc.files[i].name = path.join(dir, f.name)
     end

@@ -374,8 +374,6 @@ function(yaml2lua basename)
 endfunction()
 
 yaml2lua(datafiles)
-yaml2lua(families)
-yaml2lua(gametypes)
 yaml2lua(modules)
 yaml2lua(products)
 
@@ -617,7 +615,6 @@ add_lua_executable(
   luaexpat
   luapath
   penlight
-  runtimegametypes
   runtimelistfile
   toolsdb2
   toolstactless
@@ -723,7 +720,6 @@ add_custom_command(
   COMMAND ${CMAKE_COMMAND} -E touch addons.txt
   DEPENDS ${addons})
 
-lua2c(runtimegametypes runtime.gametypes=runtime/gametypes.lua)
 lua2c(runtimeproducts runtime.products=runtime/products.lua)
 
 add_lua_executable(
@@ -790,9 +786,7 @@ list(
   doctable
   enums
   events
-  families
   function
-  gametypes
   globals
   impl
   luaobjects
@@ -819,8 +813,6 @@ endforeach()
 lua2c(
   wowapischema
   build.data.datafiles=runtime/datafiles.lua
-  build.data.families=runtime/families.lua
-  build.data.gametypes=runtime/gametypes.lua
   build.data.impl=runtime/impl.lua
   build.data.modules=runtime/modules.lua
   build.data.products=runtime/products.lua
@@ -975,7 +967,6 @@ add_lua_executable(
   luaexpat
   minheap
   penlight
-  runtimegametypes
   runtimeproducts
   tsort
   wowlesslib
@@ -1001,7 +992,6 @@ foreach(product ${products})
     luaexpat
     minheap
     penlight
-    runtimegametypes
     runtimeproducts
     tsort
     wowlesslib
@@ -1060,7 +1050,6 @@ add_lua_executable(
   luassert
   minheap
   penlight
-  runtimegametypes
   runtimeproducts
   toolsenum
   toolstedit
@@ -1178,8 +1167,6 @@ set(specs
     spec/data/config_spec.lua
     spec/data/docs_spec.lua
     spec/data/events_spec.lua
-    spec/data/families_spec.lua
-    spec/data/gametypes_spec.lua
     spec/data/impl_spec.lua
     spec/data/luaobjects_spec.lua
     spec/data/schema_coverage_spec.lua
