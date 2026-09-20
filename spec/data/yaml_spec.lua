@@ -8,7 +8,6 @@ do
 end
 
 local globalschemas = {
-  ['data/families'] = 'families',
   ['data/gametypes'] = 'gametypes',
   ['data/impl'] = 'impl',
   ['data/modules'] = 'modules',

@@ -7,6 +7,12 @@ type:
     date:
       required: true
       type: string
+    family:
+      required: true
+      type:
+        taggedunion:
+          Classic: tag
+          Mainline: tag
     gametype:
       required: true
       type:

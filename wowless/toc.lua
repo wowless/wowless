@@ -1,33 +1,24 @@
 local gametypes = require('runtime.gametypes')
 
-local gttokens = {}
-for k, v in pairs(gametypes) do
-  gttokens[k] = {
-    [k:lower()] = true,
-    [v.family:lower()] = true,
-  }
-end
-
 local allgttokens = {
+  classic = true,
+  mainline = true,
   wrath = true,
   cata = true,
   plunderstorm = true,
   wowhack = true,
   wowlabs = true,
 }
-for _, v in pairs(gttokens) do
-  for k in pairs(v) do
-    allgttokens[k] = true
-  end
+for k in pairs(gametypes) do
+  allgttokens[k:lower()] = true
 end
 
-local suffixes = {}
-for k, v in pairs(gametypes) do
-  suffixes[k] = {
-    '_' .. k,
-    '-' .. k,
-    '_' .. v.family,
-    '-' .. v.family,
+local function suffixes(gametype, family)
+  return {
+    '_' .. gametype,
+    '-' .. gametype,
+    '_' .. family,
+    '-' .. family,
     '',
   }
 end
@@ -69,10 +60,13 @@ local filters = {
   end,
 }
 
-local function parse(gametype, content)
-  local gts = assert(gttokens[gametype])
+local function parse(gametype, family, content)
+  local gts = {
+    [gametype:lower()] = true,
+    [family:lower()] = true,
+  }
   content = content:gsub('%[Game%]', gametype)
-  content = content:gsub('%[Family%]', gametypes[gametype].family)
+  content = content:gsub('%[Family%]', family)
   local toc = { attrs = {}, deps = {}, files = {}, optionaldeps = {} }
   for line in content:gmatch('[^\r\n]+') do
     local allok = true

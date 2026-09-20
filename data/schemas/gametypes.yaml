@@ -7,8 +7,3 @@ type:
         expansion_level:
           required: true
           type: number
-        family:
-          required: true
-          type:
-            ref:
-              schema: families

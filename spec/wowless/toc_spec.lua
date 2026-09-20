@@ -1,13 +1,18 @@
 describe('wowless.toc', function()
   local wowlesstoc = require('wowless.toc')
   local gametypes = require('runtime.gametypes')
+  local gametypefamilies = {}
+  for _, p in ipairs(require('build.data.products')) do
+    local build = require('build.products.' .. p .. '.data').build
+    gametypefamilies[build.gametype] = build.family
+  end
   describe('parse', function()
     local parse = wowlesstoc.parse
-    for gametype, gt in pairs(gametypes) do
-      local family = gt.family
+    for gametype in pairs(gametypes) do
+      local family = assert(gametypefamilies[gametype], gametype)
       describe(gametype, function()
         it('handles empty content', function()
-          local toc = parse(gametype, '')
+          local toc = parse(gametype, family, '')
           assert.same({}, toc.attrs)
           assert.same({}, toc.deps)
           assert.same({}, toc.files)
@@ -22,7 +27,7 @@ describe('wowless.toc', function()
             ' bbb ',
             'ccc',
           }
-          local toc = parse(gametype, table.concat(lines, '\n'))
+          local toc = parse(gametype, family, table.concat(lines, '\n'))
           assert.same({ Key = 'Value' }, toc.attrs)
           assert.same({ { name = 'aaa' }, { name = 'bbb' }, { name = 'ccc' } }, toc.files)
         end)
@@ -31,7 +36,7 @@ describe('wowless.toc', function()
             '## SavedVariables: Foo, Bar Baz',
             '## Key: Value',
           }
-          local toc = parse(gametype, table.concat(lines, '\n'))
+          local toc = parse(gametype, family, table.concat(lines, '\n'))
           assert.same({ 'Foo', 'Bar', 'Baz' }, toc.savedvariables)
           assert.same({ Key = 'Value' }, toc.attrs)
           assert.Nil(toc.attrs.SavedVariables)
@@ -39,14 +44,14 @@ describe('wowless.toc', function()
         local depkeys = { 'Dep', 'Deps', 'Dependencies', 'RequiredDep', 'RequiredDeps', 'RequiredDependencies' }
         for _, key in ipairs(depkeys) do
           it('handles ' .. key .. ' field', function()
-            local toc = parse(gametype, '## ' .. key .. ': Foo, Bar Baz')
+            local toc = parse(gametype, family, '## ' .. key .. ': Foo, Bar Baz')
             assert.same({ 'Foo', 'Bar', 'Baz' }, toc.deps)
             assert.Nil(toc.attrs[key])
           end)
         end
         for _, key in ipairs({ 'OptionalDep', 'OptionalDeps', 'OptionalDependencies' }) do
           it('handles ' .. key .. ' field', function()
-            local toc = parse(gametype, '## ' .. key .. ': Foo, Bar Baz')
+            local toc = parse(gametype, family, '## ' .. key .. ': Foo, Bar Baz')
             assert.same({ 'Foo', 'Bar', 'Baz' }, toc.optionaldeps)
             assert.Nil(toc.attrs[key])
           end)
@@ -56,7 +61,7 @@ describe('wowless.toc', function()
             '## RequiredDep: Foo',
             '## RequiredDeps: Bar',
           }
-          local toc = parse(gametype, table.concat(lines, '\n'))
+          local toc = parse(gametype, family, table.concat(lines, '\n'))
           assert.same({ 'Foo', 'Bar' }, toc.deps)
         end)
         it('handles filters on dep fields', function()
@@ -65,7 +70,7 @@ describe('wowless.toc', function()
             '## Dep: Bar [AllowLoad glue]',
             '## Dep: Baz [AllowLoad game]',
           }
-          local toc = parse(gametype, table.concat(lines, '\n'))
+          local toc = parse(gametype, family, table.concat(lines, '\n'))
           assert.same({ 'Foo', 'Baz' }, toc.deps)
         end)
         it('merges multiple optionaldep fields', function()
@@ -73,7 +78,7 @@ describe('wowless.toc', function()
             '## OptionalDep: Foo',
             '## OptionalDeps: Bar',
           }
-          local toc = parse(gametype, table.concat(lines, '\n'))
+          local toc = parse(gametype, family, table.concat(lines, '\n'))
           assert.same({ 'Foo', 'Bar' }, toc.optionaldeps)
         end)
         it('handles Interface field', function()
@@ -81,13 +86,13 @@ describe('wowless.toc', function()
             '## Interface: 120001',
             '## Key: Value',
           }
-          local toc = parse(gametype, table.concat(lines, '\n'))
+          local toc = parse(gametype, family, table.concat(lines, '\n'))
           assert.same({ 120001 }, toc.interface)
           assert.same({ Key = 'Value' }, toc.attrs)
           assert.Nil(toc.attrs.Interface)
         end)
         it('handles multiple Interface values', function()
-          local toc = parse(gametype, '## Interface: 120001, 40400, 11507')
+          local toc = parse(gametype, family, '## Interface: 120001, 40400, 11507')
           assert.same({ 120001, 40400, 11507 }, toc.interface)
         end)
         it('does family substitution', function()
@@ -97,7 +102,7 @@ describe('wowless.toc', function()
             '',
             'a[Family]b',
           }
-          local toc = parse(gametype, table.concat(lines, '\n'))
+          local toc = parse(gametype, family, table.concat(lines, '\n'))
           assert.same({ ['A' .. family .. 'Key'] = 'B' .. family .. 'Value' .. family }, toc.attrs)
           assert.same({ { name = 'a' .. family .. 'b' } }, toc.files)
         end)
@@ -106,7 +111,7 @@ describe('wowless.toc', function()
             'algame [AllowLoad Game]',
             'alglue [AllowLoad Glue]',
           }
-          local files = parse(gametype, table.concat(lines, '\n')).files
+          local files = parse(gametype, family, table.concat(lines, '\n')).files
           assert.same({ { name = 'algame' } }, files)
         end)
         it('does AllowLoadGameType filtering', function()
@@ -119,7 +124,7 @@ describe('wowless.toc', function()
             'fff [AllowLoadGameType mists, tbc]',
             'ggg [AllowLoadGameType mists,tbc]',
           }
-          local files = parse(gametype, table.concat(lines, '\n')).files
+          local files = parse(gametype, family, table.concat(lines, '\n')).files
           local expected = {
             Camelot = { { name = 'ccc' } },
             Mists = { { name = 'ccc' }, { name = 'ddd' }, { name = 'fff' }, { name = 'ggg' } },
@@ -133,20 +138,15 @@ describe('wowless.toc', function()
     end
     it('handles multiple filters', function()
       local line = 'aaa [AllowLoadGameType standard] [AllowLoadEnvironment Global] [Bootstrap]'
-      local files = parse('Standard', line).files
+      local files = parse('Standard', 'Mainline', line).files
       assert.same({ { AllowLoadEnvironment = 'global', Bootstrap = true, name = 'aaa' } }, files)
     end)
   end)
   describe('suffixes', function()
-    local allsuffixes = wowlesstoc.suffixes
-    it('are keyed by gametype', function()
-      for k in pairs(allsuffixes) do
-        assert.Not.Nil(gametypes[k])
-      end
-    end)
     for gametype in pairs(gametypes) do
+      local family = assert(gametypefamilies[gametype], gametype)
       describe(gametype, function()
-        local suffixes = allsuffixes[gametype]
+        local suffixes = wowlesstoc.suffixes(gametype, family)
         it('are unique', function()
           local t = {}
           for _, v in ipairs(suffixes) do

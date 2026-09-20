@@ -5,7 +5,6 @@ cvars: product
 docs: product
 enums: product
 events: product
-families: global
 gametypes: global
 globals: product
 impl: global
