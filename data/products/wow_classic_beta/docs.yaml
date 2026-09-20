@@ -129,10 +129,6 @@ lies:
           nilable: true
       - _add:
           nilable: true
-  events:
-    MINIMAP_PING:
-      _remove:
-        restricted: true
   extra_apis:
     C_BarberShopInternal.SetQAMode:
     C_CinematicList.GetUICinematicList:
