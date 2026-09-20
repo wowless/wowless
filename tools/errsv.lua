@@ -128,6 +128,33 @@ if data.generated.impltests then
   end
 end
 
+if data.generated.events then
+  local isEventValid = data.generated.impltests
+    and data.generated.impltests['C_EventUtils.IsEventValid']
+    and data.generated.impltests['C_EventUtils.IsEventValid']['C_EventUtils.IsEventValid']
+  local toRemove = {}
+  for k, v in pairs(data.generated.events) do
+    if
+      v.RegisterEvent
+      and not v.RegisterEventCallback
+      and not v.RegisterEventCallbackGlobal
+      and v.RegisterEvent['2']:find('Attempt to register unknown event \\"' .. k .. '\\"', 1, true)
+      and isEventValid
+      and isEventValid[k]
+    then
+      toRemove[k] = true
+    end
+  end
+  if next(toRemove) then
+    local fn = 'data/products/' .. product .. '/events.yaml'
+    local events = yaml.parseFile(fn)
+    for k in pairs(toRemove) do
+      events[k] = nil
+    end
+    write(fn, yaml.pprint(events))
+  end
+end
+
 if data.generated.cvars then
   local cvarsfile = 'data/products/' .. product .. '/cvars.yaml'
   local cvars = yaml.parseFile(cvarsfile)

@@ -7196,8 +7196,6 @@ PET_JOURNAL_TRAP_LEVEL_SET:
     type: number
 PET_SPECIALIZATION_CHANGED:
   payload:
-PET_SPELL_POWER_UPDATE:
-  payload:
 PET_STABLE_CLOSED:
   payload:
 PET_STABLE_FAVORITES_UPDATED:
@@ -9791,14 +9789,6 @@ VIEWED_TRANSMOG_OUTFIT_SLOT_SAVE_SUCCESS:
     type:
       enum: TransmogType
   - name: option
-    type:
-      enum: TransmogOutfitSlotOption
-VIEWED_TRANSMOG_OUTFIT_SLOT_WEAPON_OPTION_CHANGED:
-  payload:
-  - name: slot
-    type:
-      enum: TransmogOutfitSlot
-  - name: weaponOption
     type:
       enum: TransmogOutfitSlotOption
 VIGNETTE_MINIMAP_UPDATED:
