@@ -111,6 +111,7 @@ runtime:
   bareScriptWarning: true
   discord: true
   enummetafix: true
+  expansion_level: 10
   send_isfromitem: true
   warners:
     fontstring:

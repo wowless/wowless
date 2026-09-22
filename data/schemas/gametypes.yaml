@@ -4,9 +4,6 @@ type:
     key: string
     value:
       record:
-        expansion_level:
-          required: true
-          type: number
         family:
           required: true
           type:

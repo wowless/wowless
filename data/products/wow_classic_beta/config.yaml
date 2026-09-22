@@ -112,6 +112,7 @@ runtime:
   createframetaint: true
   discord: true
   enummetafix: true
+  expansion_level: 5
   send_isfromitem: true
   warners:
     fontstring:

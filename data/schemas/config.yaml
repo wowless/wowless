@@ -86,6 +86,9 @@ type:
             type: flag
           enummetafix:
             type: flag
+          expansion_level:
+            required: true
+            type: number
           send_isfromitem:
             type: flag
           warners:

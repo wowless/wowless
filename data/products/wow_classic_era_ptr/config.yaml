@@ -79,6 +79,7 @@ runner:
     RAIDFINDER:
     USERANDOM:
 runtime:
+  expansion_level: 1
   warners:
     archaeologydigsiteframe:
     fontstring:
