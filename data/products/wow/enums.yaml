@@ -3033,9 +3033,11 @@ ForbiddenAspect:
     ChangeParent: 1024
     EventRegistrations: 16
     QueryFocus: 128
+    QueryRotation: 4096
     RemoveSecretAspects: 512
     ScriptBindings: 2
     ScriptedInput: 64
+    SetTexture: 2048
     SetToDefaults: 1
     UntrustedLayoutScriptExecution: 8
     UntrustedScriptExecution: 4
