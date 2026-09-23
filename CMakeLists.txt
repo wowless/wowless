@@ -741,8 +741,14 @@ add_custom_target(
   COMMAND bump
   WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
 
-add_lua_executable(gentoc ${CMAKE_CURRENT_SOURCE_DIR}/tools/gentoc.lua argparse
-                   penlight runtimeproducts wowlessyaml)
+add_lua_executable(
+  gentoc
+  ${CMAKE_CURRENT_SOURCE_DIR}/tools/gentoc.lua
+  argparse
+  luapath
+  penlight
+  runtimeproducts
+  wowlessyaml)
 
 yaml2lua(impl)
 yaml2lua(sql)

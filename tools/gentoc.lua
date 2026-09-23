@@ -1,30 +1,34 @@
 local yaml = require('wowapi.yaml')
 local products = require('runtime.products')
+local path = require('path')
+local pfile = require('pl.file')
+local sorted = require('pl.tablex').sort
 local args = (function()
   local parser = require('argparse')()
   parser:argument('output', 'generated toc file')
   return parser:parse()
 end)()
 
-local seen = {}
 local interfaces = {}
+local gametypes = {}
+local families = {}
 for _, product in ipairs(products) do
-  local fn = 'data/products/' .. product .. '/build.yaml'
-  local build = yaml.parse(require('pl.file').read(fn))
-  local v = assert(build.tocversion, fn)
-  if not seen[v] then
-    seen[v] = true
-    table.insert(interfaces, v)
-  end
+  local build = yaml.parse(pfile.read('data/products/' .. product .. '/build.yaml'))
+  interfaces[build.tocversion] = true
+  gametypes[build.gametype] = true
+  families[build.family] = true
 end
-table.sort(interfaces)
-for i, v in ipairs(interfaces) do
-  interfaces[i] = tostring(v)
+
+local dir = path.dirname(args.output)
+
+local interfacestrs = {}
+for v in sorted(interfaces) do
+  table.insert(interfacestrs, tostring(v))
 end
 
 local lines = {
   '## Dependencies: WowlessData',
-  '## Interface: ' .. table.concat(interfaces, ', '),
+  '## Interface: ' .. table.concat(interfacestrs, ', '),
   '## SavedVariables: WowlessLastTestFailures',
   '## Notes: WoW client unit tests',
   '## Title: Wowless',
@@ -41,6 +45,15 @@ local lines = {
   'templates.lua',
   'asynctests.lua',
   'test.lua',
-  '',
 }
-require('pl.file').write(args.output, table.concat(lines, '\n'))
+local function addmarkers(field, set)
+  for token in sorted(set) do
+    local fname = field .. '_' .. token .. '.lua'
+    table.insert(lines, ('%s [AllowLoadGameType %s]'):format(fname, token:lower()))
+    pfile.write(path.join(dir, fname), ('local _, G = ...\nG.%s[%q] = true\n'):format(field, token))
+  end
+end
+addmarkers('GameTypes', gametypes)
+addmarkers('Families', families)
+table.insert(lines, '')
+pfile.write(args.output, table.concat(lines, '\n'))

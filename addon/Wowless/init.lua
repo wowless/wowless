@@ -21,6 +21,8 @@ frame:SetScript('OnEvent', function(_, _, warnText)
 end)
 G.LuaWarningsFrame = frame
 G.testsuite = {}
+G.GameTypes = {}
+G.Families = {}
 
 -- Mirrors wowless's own warningqueue/xmlwarningqueue split: every
 -- LUA_WARNING is queued for next-frame delivery, none fire inline, so
