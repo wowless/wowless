@@ -2274,8 +2274,6 @@ garrisoncompletetalenttype:
   character: true
   default: '0'
   secure: true
-gimode:
-  default: '513'
 giquality:
   default: '2'
 graphicsbloomusermult:
@@ -3359,8 +3357,6 @@ raidframesposition:
 raidframeswidth:
   character: true
   default: '72'
-raidgimode:
-  default: '513'
 raidgiquality:
   default: '2'
 raidgraphicsbloomusermult:
@@ -4443,8 +4439,6 @@ usebleep:
   default: '0'
 usecommentatorselectioncircles:
   default: '1'
-usecsm:
-  default: '1'
 usedebugallocators:
   default: '0'
 usehdrbrightness:
@@ -4474,8 +4468,6 @@ usetargetfps:
 useuiscale:
   default: '0'
   secure: true
-usevsm:
-  default: '1'
 validateframexml:
   default: '1'
 verbosespellscripteventlog:

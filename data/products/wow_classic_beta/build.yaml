@@ -1,8 +1,8 @@
-build: '69913'
-date: Sep 17 2026
+build: '69977'
+date: Sep 22 2026
 family: Classic
 gametype: Camelot
-hash: 6c0df97e8e481a9a41600e373367c200
+hash: 3bd89ce2721f7c75e7525dc83741076f
 test: true
 tocversion: 16001
 version: 1.60.1
