@@ -32,6 +32,8 @@ local lines = {
   '## SavedVariables: WowlessLastTestFailures',
   '## Notes: WoW client unit tests',
   '## Title: Wowless',
+  '## X-Family: [Family]',
+  '## X-GameType: [Game]',
   'util.lua',
   'init.lua',
   'framework.lua',

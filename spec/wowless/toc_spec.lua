@@ -99,6 +99,17 @@ describe('wowless.toc', function()
       assert.same({ ['A' .. family .. 'Key'] = 'B' .. family .. 'Value' .. family }, toc.attrs)
       assert.same({ { name = 'a' .. family .. 'b' } }, toc.files)
     end)
+    it('does game substitution', function()
+      local lines = {
+        '# [Game] comment blah blah',
+        '## A[Game]Key: B[Game]Value[Game]',
+        '',
+        'a[Game]b',
+      }
+      local toc = parse(gametype, family, table.concat(lines, '\n'))
+      assert.same({ ['A' .. gametype .. 'Key'] = 'B' .. gametype .. 'Value' .. gametype }, toc.attrs)
+      assert.same({ { name = 'a' .. gametype .. 'b' } }, toc.files)
+    end)
     it('does AllowLoad filtering', function()
       local lines = {
         'algame [AllowLoad Game]',
