@@ -1,4 +1,5 @@
 C_CovenantSanctumUI.GetRenownLevels:
+  C_Covenants.GetCovenantIDs:
   C_CovenantSanctumUI.GetRenownLevels:
 C_DateAndTime.AdjustTimeByDays:
   C_DateAndTime.AdjustTimeByDays:

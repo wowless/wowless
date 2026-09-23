@@ -62,6 +62,10 @@ C_Covenants.GetCovenantData:
     sqls:
     - C_Covenants.GetCovenantData
     - C_Covenants.GetCovenantData.soulbinds
+C_Covenants.GetCovenantIDs:
+  impl:
+    sqls:
+    - C_Covenants.GetCovenantIDs
 C_CovenantSanctumUI.GetRenownLevels:
   impl:
     sqls:

@@ -9140,6 +9140,7 @@ C_Covenants.GetCovenantData:
     type:
       structure: C_Covenants.CovenantData
 C_Covenants.GetCovenantIDs:
+  impl: C_Covenants.GetCovenantIDs
   inputs:
   outputs:
   - name: covenantID

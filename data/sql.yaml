@@ -11,6 +11,8 @@ C_Covenants.GetCovenantData:
   type: lookup
 C_Covenants.GetCovenantData.soulbinds:
   type: cursor
+C_Covenants.GetCovenantIDs:
+  type: cursor
 C_CovenantSanctumUI.GetRenownLevels:
   type: cursor
 C_CovenantSanctumUI.GetRenownRewardsForLevel:

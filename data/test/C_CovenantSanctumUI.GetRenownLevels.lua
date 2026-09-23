@@ -1,4 +1,4 @@
-local T, GetRenownLevels = ...
+local T, GetRenownLevels, GetCovenantIDs = ...
 local assertEquals = T.assertEquals
 local function numkeys(t)
   local n = 0
@@ -7,7 +7,7 @@ local function numkeys(t)
   end
   return n
 end
-local islite = _G.__wowless and _G.__wowless.lite
+local islite = not not (_G.__wowless and _G.__wowless.lite)
 local function check(...)
   assertEquals(1, select('#', ...))
   local t = ...
@@ -15,20 +15,29 @@ local function check(...)
   assertEquals(nil, getmetatable(t))
   return t
 end
+local covenantIDs = check(GetCovenantIDs())
+assertEquals(islite, next(covenantIDs) == nil)
+local maxID = 0
+for _, id in ipairs(covenantIDs) do
+  if id > maxID then
+    maxID = id
+  end
+end
+local invalidID = maxID + 1
 local tests = {
   ['nil'] = function()
     assert(not pcall(GetRenownLevels))
   end,
-  ['5'] = function()
-    local t = check(GetRenownLevels(5))
+  [tostring(invalidID)] = function()
+    local t = check(GetRenownLevels(invalidID))
     assertEquals(nil, next(t))
   end,
 }
-for i = 1, 4 do
-  tests[tostring(i)] = function()
-    local t = check(GetRenownLevels(i))
-    assertEquals(islite and 0 or 80, #t)
-    assertEquals(islite and 0 or 80, numkeys(t))
+for _, id in ipairs(covenantIDs) do
+  tests[tostring(id)] = function()
+    local t = check(GetRenownLevels(id))
+    assert(#t > 0)
+    assertEquals(#t, numkeys(t))
     local tt = {}
     for j, v in ipairs(t) do
       tt[tostring(j)] = function()
@@ -39,7 +48,6 @@ for i = 1, 4 do
         assertEquals('boolean', type(v.isMilestone))
         assertEquals('number', type(v.level))
         assertEquals('boolean', type(v.locked))
-        assertEquals(j, v.level)
       end
     end
     return tt

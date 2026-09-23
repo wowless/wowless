@@ -1,3 +1,5 @@
+local sorted = require('pl.tablex').sort
+
 describe('test', function()
   local luas = {}
   for _, f in ipairs(require('wowless.util').getfiles('data/test')) do
@@ -20,10 +22,9 @@ describe('test', function()
         local impl = filename:match('([^/]+)%.lua$')
         local implfns = require('build.data.test')[impl]
         local vars = {}
-        for k in pairs(implfns) do
+        for k in sorted(implfns) do
           table.insert(vars, k:match('[^.]+$'))
         end
-        table.sort(vars)
         local preamble = 'local T, ' .. table.concat(vars, ', ') .. ' = ...\n'
         assert.same(preamble, content:sub(1, preamble:len()))
       end)
