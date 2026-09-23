@@ -1,5 +1,5 @@
 local T, AdjustTimeByMinutes = ...
-local day = T.data.build.gametype ~= 'Standard' and 0 or nil
+local day = T.data.build.family ~= 'Mainline' and 0 or nil
 local input = {
   day = day,
   hour = 13,

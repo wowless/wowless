@@ -1,7 +1,7 @@
 local datalua = ...
-local gametype = datalua.build.gametype
+local family = datalua.build.family
 local elevel = datalua.config.runtime.expansion_level
 return function(level)
   assert(level >= 0 and level <= 4294967295)
-  return gametype == 'Standard' or level <= elevel
+  return family == 'Mainline' or level <= elevel
 end
