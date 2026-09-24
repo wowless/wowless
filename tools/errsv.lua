@@ -155,6 +155,23 @@ if data.generated.events then
   end
 end
 
+if data.generated.gameTypeFilter then
+  local fn = 'data/products/' .. product .. '/excludedgametypes.yaml'
+  local excluded = yaml.parseFile(fn)
+  for token, v in pairs(data.generated.gameTypeFilter) do
+    local value = select(2, assert(getPatternValue(v)))
+    if value == true then
+      -- real client doesn't recognize this token as known-different
+      excluded[token] = nil
+    else
+      assert(value == nil, v)
+      -- real client does recognize this token as known-different
+      excluded[token] = {}
+    end
+  end
+  write(fn, yaml.pprint(excluded))
+end
+
 if data.generated.cvars then
   local cvarsfile = 'data/products/' .. product .. '/cvars.yaml'
   local cvars = yaml.parseFile(cvarsfile)

@@ -8,6 +8,19 @@ local function suffixes(gametype, family)
   }
 end
 
+local function countMatches(s, state)
+  local positives, negatives = 0, 0
+  for gt in s:lower():gmatch('[^, ]+') do
+    local st = state[gt]
+    if st == true then
+      positives = positives + 1
+    elseif st == false then
+      negatives = negatives + 1
+    end
+  end
+  return positives, negatives
+end
+
 local filters = {
   AllowLoad = function(s)
     return s:lower() == 'game'
@@ -16,12 +29,9 @@ local filters = {
     assert(s:lower() == 'global', s)
     return true, s:lower()
   end,
-  AllowLoadGameType = function(s, gts)
-    for gt in s:lower():gmatch('[^, ]+') do
-      if gts[gt] then
-        return true
-      end
-    end
+  AllowLoadGameType = function(s, state)
+    local positives, negatives = countMatches(s, state)
+    return positives > 0 or negatives == 0
   end,
   AllowLoadTextLocale = function()
     -- TODO implement
@@ -29,13 +39,9 @@ local filters = {
   Bootstrap = function()
     return true, true
   end,
-  ExcludeLoadGameType = function(s, gts)
-    for gt in s:lower():gmatch('[^, ]+') do
-      if gts[gt] then
-        return
-      end
-    end
-    return true
+  ExcludeLoadGameType = function(s, state)
+    local positives = countMatches(s, state)
+    return positives == 0
   end,
   LoadIntoEnvironment = function(s)
     assert(s == 'global' or s == 'secure', s)
@@ -43,11 +49,13 @@ local filters = {
   end,
 }
 
-local function parse(gametype, family, content)
-  local gts = {
-    [gametype:lower()] = true,
-    [family:lower()] = true,
-  }
+local function parse(gametype, family, content, excluded)
+  local state = {}
+  for k in pairs(excluded) do
+    state[k] = false
+  end
+  state[gametype:lower()] = true
+  state[family:lower()] = true
   content = content:gsub('%[Game%]', gametype)
   content = content:gsub('%[Family%]', family)
   local toc = { attrs = {}, deps = {}, files = {}, optionaldeps = {} }
@@ -55,7 +63,7 @@ local function parse(gametype, family, content)
     local allok = true
     local tags = {}
     line = line:match('^%s*(.-)%s*$'):gsub('%[([^:%]%s]*):?%s*([^%]]-)%]', function(filter, fdata)
-      local ok, tag = assert(filters[filter], filter)(fdata, gts)
+      local ok, tag = assert(filters[filter], filter)(fdata, state)
       allok = allok and ok
       tags[filter] = tag
       return ''

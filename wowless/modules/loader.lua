@@ -25,7 +25,7 @@ return function(addons, datalua, envmodule, events, loadercfg, log, xmleval)
 
   local function parseToc(tocFile, content)
     local dir = path.dirname(tocFile)
-    local toc = tocutil.parse(gametype, family, content)
+    local toc = tocutil.parse(gametype, family, content, datalua.excludedgametypes)
     for i, f in ipairs(toc.files) do
       toc.files[i].name = path.join(dir, f.name)
     end

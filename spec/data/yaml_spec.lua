@@ -28,6 +28,7 @@ local productschemas = {
   docs = 'docs',
   enums = 'enums',
   events = 'events',
+  excludedgametypes = 'excludedgametypes',
   globals = 'globals',
   luaobjects = 'luaobjects',
   stringenums = 'stringenums',

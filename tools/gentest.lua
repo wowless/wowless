@@ -517,6 +517,75 @@ local function buildTemplatesXml(p, uiobjectApis)
   return renderXml(ui)
 end
 
+local function gameTypeUniverse()
+  local universe = {}
+  for _, product in ipairs(readyaml('data/products.yaml')) do
+    local build = perproduct(product, 'build')
+    universe[build.family:lower()] = true
+    universe[build.gametype:lower()] = true
+    for name in pairs(perproduct(product, 'excludedgametypes')) do
+      universe[name] = true
+    end
+  end
+  return universe
+end
+
+local function expectedGameTypes(p)
+  local myExcluded = perproduct(p, 'excludedgametypes')
+  local expected = {}
+  for name in pairs(gameTypeUniverse()) do
+    if not myExcluded[name] then
+      expected[name] = true
+    end
+  end
+  assert(not expected.nonsensegametype)
+  expected.nonsensegametype = true
+  return expected
+end
+
+-- Token lists for the combo tests, which exercise a single multi-token
+-- AllowLoadGameType/ExcludeLoadGameType directive rather than one token
+-- per marker -- confirming the real client's OR-across-tokens semantics,
+-- not just single-token filtering.
+local combos = { 'AllKnown', 'AllExclusions', 'AllExclusionsPlusNonsense' }
+local directives = { 'Allow', 'Exclude' }
+
+local function comboTokenLists(p)
+  local build = perproduct(p, 'build')
+  local excluded = perproduct(p, 'excludedgametypes')
+
+  local allExclusions = {}
+  for k in pairs(excluded) do
+    table.insert(allExclusions, k)
+  end
+  table.sort(allExclusions)
+
+  local allKnown = { build.family:lower(), build.gametype:lower() }
+  for _, t in ipairs(allExclusions) do
+    table.insert(allKnown, t)
+  end
+  table.sort(allKnown)
+
+  local allExclusionsPlusNonsense = {}
+  for _, t in ipairs(allExclusions) do
+    table.insert(allExclusionsPlusNonsense, t)
+  end
+  table.insert(allExclusionsPlusNonsense, 'nonsensegametype')
+
+  return {
+    AllKnown = allKnown,
+    AllExclusions = allExclusions,
+    AllExclusionsPlusNonsense = allExclusionsPlusNonsense,
+  }
+end
+
+local comboFileNames = {}
+for _, combo in ipairs(combos) do
+  for _, directive in ipairs(directives) do
+    comboFileNames[directive:lower() .. combo] = { combo = combo, directive = directive }
+  end
+end
+
 local ptablemap = {
   build = function(p)
     return 'Build', perproduct(p, 'build')
@@ -554,6 +623,9 @@ local ptablemap = {
       end
     end
     return 'Events', t
+  end,
+  expectedgametypes = function(p)
+    return 'ExpectedGameTypes', expectedGameTypes(p)
   end,
   globalapis = function(p)
     local config = perproduct(p, 'config')
@@ -791,6 +863,9 @@ local function doit(k, p)
       table.insert(ui, item)
     end
     return renderXml(ui)
+  elseif comboFileNames[k] then
+    local decl = '_G.WowlessData.GameTypeCombos = _G.WowlessData.GameTypeCombos or {}\n'
+    return decl .. ('_G.WowlessData.GameTypeCombos[%q] = true\n'):format(k)
   elseif k == 'toc' then
     local tt = {}
     for kk in pairs(ptablemap) do
@@ -798,6 +873,13 @@ local function doit(k, p)
     end
     table.insert(tt, 'templates.xml')
     table.sort(tt)
+    local lists = comboTokenLists(p)
+    for _, combo in ipairs(combos) do
+      for _, directive in ipairs(directives) do
+        local fname = ('GameTypesCombo%s%s.lua'):format(directive, combo)
+        table.insert(tt, ('%s [%sLoadGameType %s]'):format(fname, directive, table.concat(lists[combo], ', ')))
+      end
+    end
     table.insert(tt, 1, 'product.lua')
     table.insert(tt, 1, '## Interface: ' .. perproduct(p, 'build').tocversion)
     table.insert(tt, '')

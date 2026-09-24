@@ -5,6 +5,7 @@ cvars: product
 docs: product
 enums: product
 events: product
+excludedgametypes: product
 globals: product
 impl: global
 luaobjects: product

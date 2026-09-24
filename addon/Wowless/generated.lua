@@ -639,16 +639,17 @@ G.testsuite.generated = function()
     return tests
   end
 
-  local function gameTypesAndFamilies()
-    local build = _G.WowlessData.Build
-    return {
-      family = function()
-        return G.assertRecursivelyEqual({ [build.family] = true }, G.Families)
-      end,
-      gametype = function()
-        return G.assertRecursivelyEqual({ [build.gametype] = true }, G.GameTypes)
-      end,
+  local function gameTypeFilter()
+    return G.assertRecursivelyEqual(_G.WowlessData.ExpectedGameTypes, G.GameTypes)
+  end
+
+  local function gameTypeFilterCombos()
+    local expected = {
+      allowAllKnown = true,
+      excludeAllExclusions = true,
+      excludeAllExclusionsPlusNonsense = true,
     }
+    return G.assertRecursivelyEqual(expected, _G.WowlessData.GameTypeCombos or {})
   end
 
   local function templates()
@@ -669,7 +670,8 @@ G.testsuite.generated = function()
     apiNamespaces = apiNamespaces,
     cvars = cvars,
     events = events,
-    gameTypesAndFamilies = gameTypesAndFamilies,
+    gameTypeFilter = gameTypeFilter,
+    gameTypeFilterCombos = gameTypeFilterCombos,
     globalApis = globalApis,
     globals = globals,
     impltests = impltests,

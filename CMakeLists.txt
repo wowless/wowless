@@ -632,7 +632,8 @@ foreach(product ${products})
     OUTPUT ${out}
     COMMAND fetch ${product}
     COMMAND ${CMAKE_COMMAND} -E touch ${out}
-    DEPENDS fetch ${dblist_dep} runtime/products/${product}/build.lua)
+    DEPENDS fetch ${dblist_dep} runtime/products/${product}/build.lua
+            runtime/products/${product}/excludedgametypes.lua)
 endforeach()
 
 lua2c(wowlessblp vstruct=p
@@ -689,6 +690,15 @@ foreach(product ${products})
   gentest(containment.lua containment)
   gentest(cvars.lua cvars)
   gentest(events.lua events)
+  gentest(expectedgametypes.lua expectedgametypes)
+  gentest(GameTypesComboAllowAllExclusions.lua allowAllExclusions)
+  gentest(GameTypesComboAllowAllExclusionsPlusNonsense.lua
+          allowAllExclusionsPlusNonsense)
+  gentest(GameTypesComboAllowAllKnown.lua allowAllKnown)
+  gentest(GameTypesComboExcludeAllExclusions.lua excludeAllExclusions)
+  gentest(GameTypesComboExcludeAllExclusionsPlusNonsense.lua
+          excludeAllExclusionsPlusNonsense)
+  gentest(GameTypesComboExcludeAllKnown.lua excludeAllKnown)
   gentest(globalapis.lua globalapis)
   gentest(globals.lua globals)
   gentest(impltests.lua impltests)
@@ -765,6 +775,7 @@ foreach(product ${products})
     docs
     enums
     events
+    excludedgametypes
     globals
     luaobjects
     scripttypes
@@ -792,6 +803,7 @@ list(
   doctable
   enums
   events
+  excludedgametypes
   function
   globals
   impl
@@ -1109,7 +1121,8 @@ set(out ${d}/Wowless.toc)
 list(APPEND testaddon_outs ${out})
 set(tocdeps)
 foreach(product ${products})
-  list(APPEND tocdeps data/products/${product}/build.yaml)
+  list(APPEND tocdeps data/products/${product}/build.yaml
+       data/products/${product}/excludedgametypes.yaml)
 endforeach()
 add_custom_command(
   OUTPUT ${out}

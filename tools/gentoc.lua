@@ -11,13 +11,19 @@ end)()
 
 local interfaces = {}
 local gametypes = {}
-local families = {}
 for _, product in ipairs(products) do
   local build = yaml.parse(pfile.read('data/products/' .. product .. '/build.yaml'))
   interfaces[build.tocversion] = true
-  gametypes[build.gametype] = true
-  families[build.family] = true
+  gametypes[build.family:lower()] = true
+  gametypes[build.gametype:lower()] = true
+  for k in pairs(yaml.parse(pfile.read('data/products/' .. product .. '/excludedgametypes.yaml'))) do
+    gametypes[k] = true
+  end
 end
+
+-- a value no real product declares or excludes, so its marker file must
+-- never load
+gametypes.nonsensegametype = true
 
 local dir = path.dirname(args.output)
 
@@ -48,14 +54,10 @@ local lines = {
   'asynctests.lua',
   'test.lua',
 }
-local function addmarkers(field, set)
-  for token in sorted(set) do
-    local fname = field .. '_' .. token .. '.lua'
-    table.insert(lines, ('%s [AllowLoadGameType %s]'):format(fname, token:lower()))
-    pfile.write(path.join(dir, fname), ('local _, G = ...\nG.%s[%q] = true\n'):format(field, token))
-  end
+for token in sorted(gametypes) do
+  local fname = 'GameTypes_' .. token .. '.lua'
+  table.insert(lines, ('%s [AllowLoadGameType %s]'):format(fname, token:lower()))
+  pfile.write(path.join(dir, fname), ('local _, G = ...\nG.GameTypes[%q] = true\n'):format(token))
 end
-addmarkers('GameTypes', gametypes)
-addmarkers('Families', families)
 table.insert(lines, '')
 pfile.write(args.output, table.concat(lines, '\n'))
