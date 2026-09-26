@@ -2345,10 +2345,13 @@ m2usethreads:
   default: '1'
 macdisableosshortcuts:
   default: '0'
+  platform: mac
 macusecommandleftclickasrightclick:
   default: '1'
+  platform: mac
 macwindowtogglehotkey:
   default: '1'
+  platform: mac
 mapfade:
   character: true
   default: '1'
