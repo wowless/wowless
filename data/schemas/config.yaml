@@ -55,6 +55,11 @@ type:
               record:
                 rawset:
                   type: flag
+          units:
+            type:
+              record:
+                lastnames:
+                  type: flag
     runner:
       type:
         record:

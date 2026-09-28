@@ -4,13 +4,18 @@ return {
     T.assertEquals(false, pcall(UnitName))
   end,
   player = function()
-    local name, realm = T.retn(2, UnitName('player'))
+    local name, second = T.retn(2, UnitName('player'))
+    local cfg = T.data.config.modules and T.data.config.modules.units or {}
     return {
       name = function()
         assert(#name > 0)
       end,
-      realm = function()
-        T.assertEquals(nil, realm)
+      second = function()
+        if cfg.lastnames then
+          assert(#second > 0)
+        else
+          T.assertEquals(nil, second)
+        end
       end,
     }
   end,

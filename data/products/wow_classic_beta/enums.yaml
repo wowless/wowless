@@ -1849,6 +1849,7 @@ CooldownSetSpellFlags:
   values:
     HideAura: 1
     HideByDefault: 2
+    SelectHighestLevelLinkedSpell: 4
 CooldownViewerAddAlertStatus:
   values:
     DuplicateAlert: 3
@@ -3201,19 +3202,25 @@ FontStringScaleAnimationMode:
     Vertex: 1
 ForbiddenAspect:
   values:
-    AddAnimations: 4096
+    AddAnimations: 16384
     AlwaysPropagateInput: 32
     ChangeAnimationTarget: 256
     ChangeParent: 1024
     EventRegistrations: 16
-    QueryAnimationProgress: 2048
+    QueryAnimationProgress: 8192
     QueryFocus: 128
+    QueryRotation: 4096
     RemoveSecretAspects: 512
     ScriptBindings: 2
     ScriptedInput: 64
+    SetTexture: 2048
     SetToDefaults: 1
     UntrustedLayoutScriptExecution: 8
     UntrustedScriptExecution: 4
+ForeverExperiencePreset:
+  values:
+    Classic: 0
+    Modern: 1
 FragmentID:
   values:
     Actor: 16
@@ -3334,6 +3341,7 @@ FrameTutorialAccount:
     NpcCraftingOrderTabNew: 18
     PerksProgramActivitiesIntro: 2
     PerksProgramActivitiesOpen: 32
+    Reserved1: 51
     RPETalentStarterBuild: 36
     RunesOfPower: 49
     TimerunnersAdvantage: 8
@@ -3431,6 +3439,7 @@ GameRule:
     DisableVas: 119
     DisallowAbandoningLastPet: 180
     DoesNotCountTowardAccountCharacterMax: 142
+    DontAllowPartialTicks: 241
     DynamicDistrictAffinityAssignmentAlgorithm: 216
     EditModeDisabled: 82
     EjDungeonsDisabled: 149
@@ -3475,6 +3484,7 @@ GameRule:
     LootMethodStyle: 157
     MacrosDisabled: 80
     MailGameRule: 132
+    ManaRegenBonusStatMeansMp5: 244
     MapPlunderstormCircle: 48
     MaxAccountCharReservationsPerContentset: 4
     MaxCharactersPerContentSet: 139
@@ -3501,6 +3511,7 @@ GameRule:
     PlayerNameplateDifficultyIcon: 57
     PlunderstormAreaSelection: 94
     PremadeGroupFinderStyle: 93
+    PreventXPAndLootForExcessiveOutsideHelp: 243
     ProfessionsPanelDisabled: 38
     PvPInitialRatingOverride: 190
     PvPRuleset: 213
@@ -3772,6 +3783,7 @@ GossipNpcOption:
     ProfessionsOpen: 49
     QueueScenario: 25
     RenameNeighborhood: 59
+    RewardsShop: 70
     RuneforgeLegendaryCrafting: 42
     RuneforgeLegendaryUpgrade: 44
     ShipmentCrafter: 28
@@ -6245,6 +6257,7 @@ PlayerInteractionType:
     Registrar: 11
     RenameNeighborhood: 71
     Renown: 55
+    RewardsShop: 81
     ScrappingMachine: 40
     ShipmentCrafter: 33
     Soulbind: 50
@@ -8962,6 +8975,7 @@ VoiceChatStatusCode:
     LoginProhibited: 3
     OperationPending: 1
     PlayerSilenced: 21
+    PlayerVoiceChatAgeVerificationRestricted: 25
     PlayerVoiceChatParentalDisabled: 22
     ProxyConnectionTimeOut: 15
     ProxyConnectionUnableToConnect: 16

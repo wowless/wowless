@@ -1380,6 +1380,9 @@ canusequestitemwithleftclick:
   default: '0'
 cascontainersizelimit:
   default: '0'
+categorizetrainerui:
+  account: true
+  default: '0'
 characterframecollapsed:
   character: true
   default: '0'
@@ -2168,18 +2171,18 @@ gamepadinvertpitch:
 gamepadinvertyaw:
   default: '0'
 gamepadmapedgepandistance:
-  default: '15.000000'
+  default: '50.000000'
 gamepadmapscrollspeed:
   default: '400.000000'
 gamepadmapscrollspeedfullscreen:
-  default: '600.000000'
+  default: '1000.000000'
 gamepadmapzoomspeed:
   default: '2.000000'
 gamepadoverlapmousems:
   default: '2000'
 gamepadpossessbaroverride:
   character: true
-  default: '4'
+  default: '1'
 gamepadpreferscreentargeting:
   character: true
   default: '0'
@@ -2541,8 +2544,6 @@ interactonleftclick:
 interactquestitems:
   account: true
   default: '1'
-interiorfogoverride:
-  default: '0'
 invalidatedeactivatedhandles:
   default: '1'
 kioskcanautodeletecharacters:
@@ -2835,6 +2836,9 @@ nameplateaurascale:
   account: true
   default: '1.000000'
   secure: true
+nameplatebottominset:
+  default: '0.100000'
+  secure: true
 nameplatecastbardisplay:
   account: true
   default: "\x02["
@@ -2899,6 +2903,9 @@ nameplateminscale:
 nameplateminscaledistance:
   character: true
   default: '10.000000'
+  secure: true
+nameplatemotionspeed:
+  default: '0.025000'
   secure: true
 nameplatenotselectedalpha:
   default: '-1.000000'
@@ -3039,6 +3046,9 @@ nameplatetargetradialposition:
 nameplatethreatdisplay:
   account: true
   default: "\x02"
+nameplatetopinset:
+  default: '0.080000'
+  secure: true
 nameplateuseclasscolorforfriendlyplayerunitnames:
   account: true
   default: '0'
@@ -3569,6 +3579,10 @@ secondaryprofessionsfilter:
 secureabilitytoggle:
   account: true
   default: '1'
+seenageverificationrestrictionstate:
+  account: true
+  default: '0'
+  locked: true
 seenalliedraceunlocks:
   default: '0'
 seenasiacharacterupgradepopup:
@@ -4511,28 +4525,10 @@ voicevadsensitivity:
   locked: true
 volumefog:
   default: '1'
-volumefogdebugportals:
-  default: '0'
-volumefogdisablelightscattering:
-  default: '0'
-volumefogdisablenoise:
-  default: '0'
-volumefogdisableshadows:
-  default: '0'
 volumefoginterior:
   default: '1'
-volumefoginteriorexp:
-  default: '4.000000'
-volumefoginteriorscalar:
-  default: '0.100000'
 volumefoglevel:
   default: '3'
-volumefogtemporalquality:
-  default: '-1'
-volumefoguse16bittexture:
-  default: '1'
-volumefoguseinteriorstart:
-  default: '0'
 vrsparticles:
 vrsvalar:
   default: '0'
@@ -4573,7 +4569,7 @@ webchallengeurltimeout:
   default: '60'
 whispermode:
   account: true
-  default: popout
+  default: inline
 wholechatwindowclickable:
   account: true
   default: '1'

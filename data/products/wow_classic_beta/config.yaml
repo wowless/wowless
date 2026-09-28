@@ -88,6 +88,8 @@ addon:
 modules:
   parentkey:
     rawset: true
+  units:
+    lastnames: true
 runner:
   implicitgodframes: true
   skip_bindings:

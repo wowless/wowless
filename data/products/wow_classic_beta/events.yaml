@@ -181,6 +181,8 @@ AJ_REFRESH_DISPLAY:
     type: boolean
 AJ_REWARD_DATA_RECEIVED:
   payload:
+ALERT_AGE_VERIFICATION_RESTRICTED:
+  payload:
 ALERT_REGIONAL_CHAT_DISABLED:
   payload:
 ALLIED_RACE_CLOSE:
@@ -5248,6 +5250,20 @@ GLOBAL_MOUSE_UP:
   payload:
   - name: button
     type: string
+GLOBAL_REGION_MOUSE_DOWN:
+  payload:
+  - name: region
+    type:
+      uiobject: Region
+  - name: button
+    type: string
+GLOBAL_REGION_MOUSE_UP:
+  payload:
+  - name: region
+    type:
+      uiobject: Region
+  - name: button
+    type: string
 GLUE_SCREENSHOT_FAILED:
   payload:
 GLUE_SCREENSHOT_STARTED:
@@ -6315,6 +6331,8 @@ LFG_LIST_SHOW_SEARCH:
     nilable: true
     type:
       arrayof: number
+  - name: showAllLevelRanges
+    type: boolean
 LFG_LIST_UPDATE_SEARCH_RESULTS:
   payload:
 LFG_LOCK_INFO_RECEIVED:

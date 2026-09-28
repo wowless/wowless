@@ -1,9 +1,11 @@
-return function()
+return function(datalua)
+  local cfg = datalua.config.modules and datalua.config.modules.units or {}
   local player = {
     class = 1, -- Warrior
     faction = 'Horde',
     guid = 'Player-1096-06DF65C1',
     isplayer = true,
+    lastname = cfg.lastnames and 'Unitlastname' or nil,
     level = 30,
     name = 'Unitname',
     race = 2, -- Orc

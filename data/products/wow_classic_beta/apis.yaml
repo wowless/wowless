@@ -201,7 +201,6 @@ BNRequestFOFInfo:
 BNRequestInviteFriend:
 BNSendFriendInvite:
 BNSendFriendInviteByID:
-BNSetBlocked:
 BNSetFriendFavoriteFlag:
 BNSetFriendNote:
 BNSetSelectedBlock:
@@ -1257,8 +1256,20 @@ C_AdventureMap.GetMapID:
 C_AdventureMap.GetMapInsetDetailTileInfo:
 C_AdventureMap.GetMapInsetInfo:
 C_AdventureMap.GetNumMapInsets:
+  inputs:
+  outputs:
+  - name: numMapInsets
+    type: number
 C_AdventureMap.GetNumQuestOffers:
+  inputs:
+  outputs:
+  - name: numQuestOffers
+    type: number
 C_AdventureMap.GetNumZoneChoices:
+  inputs:
+  outputs:
+  - name: numZoneChoices
+    type: number
 C_AdventureMap.GetQuestInfo:
 C_AdventureMap.GetQuestOfferInfo:
 C_AdventureMap.GetQuestPortraitInfo:
@@ -3818,6 +3829,13 @@ C_BattleNet.SetAppearOffline:
   inputs:
   - default: true
     name: isAppearOffline
+    type: boolean
+  outputs:
+C_BattleNet.SetBlocked:
+  inputs:
+  - name: bnetAccountID
+    type: number
+  - name: block
     type: boolean
   outputs:
 C_BattleNet.SetCustomMessage:
@@ -11923,6 +11941,57 @@ C_ExternalEventURL.IsNew:
 C_ExternalEventURL.LaunchURL:
   inputs:
   outputs:
+C_Flyout.FlyoutHasSpell:
+  inputs:
+  - name: flyoutID
+    type: number
+  - name: spellID
+    type: number
+  mayreturnnothing: true
+  outputs:
+  - name: hasSpell
+    type: boolean
+C_Flyout.GetFlyoutID:
+  inputs:
+  - name: index
+    type: number
+  mayreturnnothing: true
+  outputs:
+  - name: flyoutID
+    type: number
+C_Flyout.GetFlyoutInfo:
+  inputs:
+  - name: flyoutID
+    type: number
+  mayreturnnothing: true
+  outputs:
+  - name: info
+    type:
+      structure: C_Flyout.FlyoutInfo
+C_Flyout.GetFlyoutSlotInfo:
+  inputs:
+  - name: flyoutID
+    type: number
+  - name: slotIndex
+    type: number
+  mayreturnnothing: true
+  outputs:
+  - name: slotInfo
+    type:
+      structure: C_Flyout.FlyoutSlotInfo
+C_Flyout.GetFlyoutTexture:
+  inputs:
+  - name: flyoutID
+    type: number
+  mayreturnnothing: true
+  outputs:
+  - name: textureID
+    type: number
+C_Flyout.GetNumFlyouts:
+  inputs:
+  outputs:
+  - name: numFlyouts
+    type: number
 C_FogOfWar.GetFogOfWarForMap:
   inputs:
   - name: uiMapID
@@ -12056,6 +12125,13 @@ C_FriendList.GetWhoInfo:
   - name: info
     type:
       structure: C_FriendList.WhoInfo
+C_FriendList.GetWhoRaceFilters:
+  inputs:
+  outputs:
+  - name: filters
+    type:
+      arrayof:
+        structure: C_FriendList.WhoFilter
 C_FriendList.IsFriend:
   inputs:
   - name: guid
@@ -12108,6 +12184,10 @@ C_FriendList.SendWho:
   - name: origin
     nilable: true
     type: number
+  - name: filters
+    nilable: true
+    type:
+      structure: C_FriendList.SendWhoFilters
   outputs:
 C_FriendList.SetFriendNotes:
   inputs:
@@ -12147,6 +12227,9 @@ C_FriendList.SortWho:
   inputs:
   - name: sorting
     type: string
+  - name: ascending
+    nilable: true
+    type: boolean
   outputs:
 C_FunctionContainers.CreateCallback:
   impl: C_FunctionContainers.CreateCallback
@@ -12421,6 +12504,13 @@ C_GameRules.GetDisplayedGameModeRecordIDAtIndex:
   outputs:
   - name: gameModeRecordID
     type: number
+C_GameRules.GetForeverExperiencePreset:
+  inputs:
+  outputs:
+  - name: preset
+    nilable: true
+    type:
+      enum: ForeverExperiencePreset
 C_GameRules.GetGameModeDisplayInfoByRecordID:
   inputs:
   - name: gameModeRecordID
@@ -12534,11 +12624,11 @@ C_GameRules.IsWoWHack:
   outputs:
   - name: active
     type: boolean
-C_GameRules.SelectClassicExperiencePreset:
+C_GameRules.SetForeverExperiencePreset:
   inputs:
-  outputs:
-C_GameRules.SelectModernExperiencePreset:
-  inputs:
+  - name: preset
+    type:
+      enum: ForeverExperiencePreset
   outputs:
 C_GameRules.SetSDHDToggleValue:
   inputs:
@@ -20065,6 +20155,13 @@ C_NamePlateManager.SetNamePlateSimplified:
   - name: isSimplified
     type: boolean
   outputs:
+C_NameUtil.ReplaceSurnameSeparatorWithLinkSeparator:
+  inputs:
+  - name: fullName
+    type: string
+  outputs:
+  - name: result
+    type: string
 C_Navigation.GetDistance:
   inputs:
   outputs:
@@ -25577,6 +25674,9 @@ C_SocialQueue.SignalToastDisplayed:
   - name: priority
     type: number
   outputs:
+C_SocialRestrictions.AcknowledgeAgeVerificationRestriction:
+  inputs:
+  outputs:
 C_SocialRestrictions.AcknowledgeRegionalChatDisabled:
   inputs:
   outputs:
@@ -25589,6 +25689,16 @@ C_SocialRestrictions.CanSendChat:
   inputs:
   outputs:
   - name: canSendChat
+    type: boolean
+C_SocialRestrictions.IsAgeVerificationRestricted:
+  inputs:
+  outputs:
+  - name: restricted
+    type: boolean
+C_SocialRestrictions.IsAgeVerificationRestrictedMinor:
+  inputs:
+  outputs:
+  - name: isMinor
     type: boolean
 C_SocialRestrictions.IsChatDisabled:
   inputs:
@@ -30216,12 +30326,22 @@ C_TradeSkillUI.SetSourceTypeFilter:
     type: number
   outputs:
 C_TradeSkillUI.StopRecipeRepeat:
+C_Trainer.GetCategorizeTrainerUI:
+  inputs:
+  outputs:
+  - name: value
+    type: boolean
 C_Trainer.GetTrainerType:
   inputs:
   outputs:
   - name: trainerType
     type:
       enum: TrainerType
+C_Trainer.SetCategorizeTrainerUI:
+  inputs:
+  - name: value
+    type: boolean
+  outputs:
 C_Traits.CanEditConfig:
   inputs:
   - name: configID
@@ -33097,6 +33217,19 @@ C_UnitAuras.GetPlayerAuraBySpellID:
     nilable: true
     type:
       structure: AuraData
+C_UnitAuras.GetRefreshCarryOverDuration:
+  inputs:
+  - name: auraInstanceUnit
+    type: unit
+  - name: auraInstanceID
+    type: number
+  - name: spellID
+    nilable: true
+    type: string
+  outputs:
+  - name: newDuration
+    nilable: true
+    type: number
 C_UnitAuras.GetRefreshExtendedDuration:
   inputs:
   - name: auraInstanceUnit
@@ -35442,10 +35575,10 @@ GetAreaText:
 GetArenaOpponentSpec:
   inputs:
   - name: index
-    nilable: true
     type: number
+  mayreturnnothing: true
   outputs:
-  - name: specID
+  - name: specializationID
     stub: 71
     type: number
   - name: gender
@@ -43299,6 +43432,7 @@ UnitSpellTargetName:
   inputs:
   - name: unit
     type: unit
+  mayreturnnothing: true
   outputs:
   - name: targetName
     type: string

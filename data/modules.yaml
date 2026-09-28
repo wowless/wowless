@@ -181,6 +181,7 @@ uiobjecttypes:
   deps:
 units:
   deps:
+    datalua:
 visibility:
   deps:
     scripts:

@@ -3149,6 +3149,10 @@ C_EditMode.EditModeAnchorInfo:
       type: string
 C_EditMode.EditModeLayoutInfo:
   fields:
+    interfaceStyle:
+      nilable: true
+      type:
+        enum: InputDeviceInterfaceType
     layoutName:
       type: string
     layoutType:
@@ -3550,6 +3554,30 @@ C_EventToastManager.EventToastInfo:
     uiWidgetSetID:
       nilable: true
       type: number
+C_Flyout.FlyoutInfo:
+  fields:
+    description:
+      type: string
+    isKnown:
+      type: boolean
+    name:
+      type: string
+    numSlots:
+      type: number
+C_Flyout.FlyoutSlotInfo:
+  fields:
+    isKnown:
+      type: boolean
+    name:
+      nilable: true
+      type: string
+    overrideSpellID:
+      type: number
+    specID:
+      nilable: true
+      type: number
+    spellID:
+      type: number
 C_FogOfWar.FogOfWarInfo:
   fields:
     backgroundAtlas:
@@ -3586,6 +3614,23 @@ C_FriendList.FriendInfo:
     rafLinkType:
       type:
         enum: RafLinkType
+C_FriendList.SendWhoFilters:
+  fields:
+    classIDs:
+      type:
+        arrayof: number
+    raceIDs:
+      type:
+        arrayof: number
+    uiMapIDs:
+      type:
+        arrayof: number
+C_FriendList.WhoFilter:
+  fields:
+    ID:
+      type: number
+    name:
+      type: string
 C_FriendList.WhoInfo:
   fields:
     area:
