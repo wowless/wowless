@@ -131,7 +131,12 @@ end
 -- the uiobjectapis ptablemap entry and discoverCases below.
 local function computeUiobjectApis(p)
   local uiobjects = perproduct(p, 'uiobjects')
-  local allscripts = perproduct(p, 'scripttypes')
+  local allscripts = {}
+  for _, product in ipairs(readyaml('data/products.yaml')) do
+    for scripttype in pairs(perproduct(product, 'scripttypes')) do
+      allscripts[scripttype] = true
+    end
+  end
   for _, cfg in pairs(uiobjects) do
     cfg.fieldinitoverrides = cfg.fieldinitoverrides or {}
   end
