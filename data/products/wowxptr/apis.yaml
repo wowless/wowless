@@ -1209,8 +1209,20 @@ C_AdventureMap.GetMapID:
 C_AdventureMap.GetMapInsetDetailTileInfo:
 C_AdventureMap.GetMapInsetInfo:
 C_AdventureMap.GetNumMapInsets:
+  inputs:
+  outputs:
+  - name: numMapInsets
+    type: number
 C_AdventureMap.GetNumQuestOffers:
+  inputs:
+  outputs:
+  - name: numQuestOffers
+    type: number
 C_AdventureMap.GetNumZoneChoices:
+  inputs:
+  outputs:
+  - name: numZoneChoices
+    type: number
 C_AdventureMap.GetQuestInfo:
 C_AdventureMap.GetQuestOfferInfo:
 C_AdventureMap.GetQuestPortraitInfo:
@@ -32391,6 +32403,19 @@ C_UnitAuras.GetPlayerAuraBySpellID:
     nilable: true
     type:
       structure: AuraData
+C_UnitAuras.GetRefreshCarryOverDuration:
+  inputs:
+  - name: auraInstanceUnit
+    type: unit
+  - name: auraInstanceID
+    type: number
+  - name: spellID
+    nilable: true
+    type: string
+  outputs:
+  - name: newDuration
+    nilable: true
+    type: number
 C_UnitAuras.GetRefreshExtendedDuration:
   inputs:
   - name: auraInstanceUnit
@@ -34692,10 +34717,10 @@ GetAreaText:
 GetArenaOpponentSpec:
   inputs:
   - name: index
-    nilable: true
     type: number
+  mayreturnnothing: true
   outputs:
-  - name: specID
+  - name: specializationID
     stub: 71
     type: number
   - name: gender

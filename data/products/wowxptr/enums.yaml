@@ -1816,6 +1816,7 @@ CooldownSetSpellFlags:
   values:
     HideAura: 1
     HideByDefault: 2
+    SelectHighestLevelLinkedSpell: 4
 CooldownViewerAddAlertStatus:
   values:
     DuplicateAlert: 3
@@ -3127,16 +3128,18 @@ FontStringScaleAnimationMode:
     Vertex: 1
 ForbiddenAspect:
   values:
-    AddAnimations: 4096
+    AddAnimations: 16384
     AlwaysPropagateInput: 32
     ChangeAnimationTarget: 256
     ChangeParent: 1024
     EventRegistrations: 16
-    QueryAnimationProgress: 2048
+    QueryAnimationProgress: 8192
     QueryFocus: 128
+    QueryRotation: 4096
     RemoveSecretAspects: 512
     ScriptBindings: 2
     ScriptedInput: 64
+    SetTexture: 2048
     SetToDefaults: 1
     UntrustedLayoutScriptExecution: 8
     UntrustedScriptExecution: 4
@@ -3260,6 +3263,7 @@ FrameTutorialAccount:
     NpcCraftingOrderTabNew: 18
     PerksProgramActivitiesIntro: 2
     PerksProgramActivitiesOpen: 32
+    Reserved1: 51
     RPETalentStarterBuild: 36
     RunesOfPower: 49
     TimerunnersAdvantage: 8
