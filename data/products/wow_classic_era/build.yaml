@@ -1,8 +1,8 @@
-build: '69722'
-date: Sep  4 2026
+build: '70003'
+date: Sep 23 2026
 family: Classic
 gametype: Vanilla
-hash: 3645f0fe9dc5215ea90eaf7cdb7379ce
+hash: 2417084b8b041ee120d02d4adf31b0bc
 test: false
 tocversion: 11509
 version: 1.15.9
