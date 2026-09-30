@@ -3054,6 +3054,7 @@ EventToastEventType:
     PvPTierUpdate: 20
     QuestBossEmote: 10
     QuestTurnedIn: 12
+    RenownFactionLeveledUp: 27
     Scenario: 14
     SpellLearned: 21
     SpellScript: 18
@@ -3648,6 +3649,7 @@ GossipNpcOption:
     ProfessionsOpen: 49
     QueueScenario: 25
     RenameNeighborhood: 59
+    RewardsShop: 67
     RuneforgeLegendaryCrafting: 42
     RuneforgeLegendaryUpgrade: 44
     ShipmentCrafter: 28
@@ -6026,6 +6028,7 @@ PlayerInteractionType:
     Registrar: 11
     RenameNeighborhood: 71
     Renown: 55
+    RewardsShop: 80
     ScrappingMachine: 40
     ShipmentCrafter: 33
     Soulbind: 50
@@ -8687,6 +8690,7 @@ VoiceChatStatusCode:
     LoginProhibited: 3
     OperationPending: 1
     PlayerSilenced: 21
+    PlayerVoiceChatAgeVerificationRestricted: 25
     PlayerVoiceChatParentalDisabled: 22
     ProxyConnectionTimeOut: 15
     ProxyConnectionUnableToConnect: 16

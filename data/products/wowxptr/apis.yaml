@@ -25086,6 +25086,9 @@ C_SocialQueue.SignalToastDisplayed:
   - name: priority
     type: number
   outputs:
+C_SocialRestrictions.AcknowledgeAgeVerificationRestriction:
+  inputs:
+  outputs:
 C_SocialRestrictions.AcknowledgeRegionalChatDisabled:
   inputs:
   outputs:
@@ -25098,6 +25101,16 @@ C_SocialRestrictions.CanSendChat:
   inputs:
   outputs:
   - name: canSendChat
+    type: boolean
+C_SocialRestrictions.IsAgeVerificationRestricted:
+  inputs:
+  outputs:
+  - name: restricted
+    type: boolean
+C_SocialRestrictions.IsAgeVerificationRestrictedMinor:
+  inputs:
+  outputs:
+  - name: isMinor
     type: boolean
 C_SocialRestrictions.IsChatDisabled:
   inputs:

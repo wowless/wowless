@@ -3347,6 +3347,10 @@ secondaryprofessionsfilter:
 secureabilitytoggle:
   account: true
   default: '1'
+seenageverificationrestrictionstate:
+  account: true
+  default: '0'
+  locked: true
 seenalliedraceunlocks:
   default: '0'
 seenasiacharacterupgradepopup:
