@@ -67,10 +67,14 @@ return function(cstubs, datalua, log, loglevel, scripts, security)
   end
 
   local function UnregisterEvent(frame, event)
-    event = event:upper()
-    local reg = regs[event]
-    local cbreg = cbregs[event]
-    assert(reg or cbreg, 'cannot unregister ' .. event)
+    local uevent = event:upper()
+    local reg = regs[uevent]
+    local cbreg = cbregs[uevent]
+    if not reg and not cbreg then
+      local fmt = '%s:UnregisterEvent(): %s:UnregisterEvent(): Attempt to unregister unknown event %q'
+      local ty = frame:GetObjectType()
+      error(fmt:format(ty, ty, event), 0)
+    end
     local unregistered = false
     if reg and reg:has(frame) then
       reg:remove(frame)

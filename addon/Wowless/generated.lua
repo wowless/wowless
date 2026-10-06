@@ -282,6 +282,19 @@ G.testsuite.generated = function()
               return G.match(2, false, err, pcall(_G.RegisterEventCallback, k, nop))
             end
           end,
+          UnregisterEvent = function()
+            if v.registerable or v.callback then
+              return G.match(2, true, not v.restricted, pcall(frame.UnregisterEvent, frame, k))
+            else
+              local err = table.concat({
+                'Frame:UnregisterEvent(): ',
+                'Frame:UnregisterEvent(): ',
+                'Attempt to unregister unknown event ',
+                '"' .. k .. '"',
+              })
+              return G.match(2, false, err, pcall(frame.UnregisterEvent, frame, k))
+            end
+          end,
         }
       end
     end
