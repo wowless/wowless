@@ -135,6 +135,11 @@ lies:
           nilable: true
       - _add:
           nilable: true
+    UnregisterEventCallback:
+      outputs:
+        _add:
+        - name: unregistered
+          type: boolean
   events:
     COMBAT_LOG_APPLY_FILTER_SETTINGS:
       _remove:

@@ -746,5 +746,9 @@ UnitSex:
   impl:
 unpack:
   stdlib: unpack
+UnregisterEventCallback:
+  moduledelegate:
+    function: UnregisterEventCallbackGlobal
+    name: events
 xpcall:
   stdlib: xpcall

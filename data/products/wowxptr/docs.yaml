@@ -129,6 +129,11 @@ lies:
           nilable: true
       - _add:
           nilable: true
+    UnregisterEventCallback:
+      outputs:
+        _add:
+        - name: unregistered
+          type: boolean
   extra_apis:
     C_BarberShopInternal.SetQAMode:
     C_CinematicList.GetUICinematicList:

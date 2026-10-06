@@ -41930,6 +41930,7 @@ UnmuteSoundFile:
 unpack:
   impl: unpack
 UnregisterEventCallback:
+  impl: UnregisterEventCallback
   inputs:
   - name: eventName
     type: string
@@ -41937,6 +41938,8 @@ UnregisterEventCallback:
     type:
       luaobject: LuaFunctionContainer
   outputs:
+  - name: unregistered
+    type: boolean
 UnregisterUnitEventCallback:
   inputs:
   - name: eventName

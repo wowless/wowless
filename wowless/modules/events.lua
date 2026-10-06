@@ -60,6 +60,12 @@ return function(cstubs, datalua, log, loglevel, scripts, security)
     return true
   end
 
+  local function UnregisterEventCallbackGlobal(event, cb)
+    local cbreg = assert(cbregs[event:upper()], 'cannot unregister ' .. event)
+    cbreg.global:remove(cb)
+    return true
+  end
+
   local function UnregisterEvent(frame, event)
     event = event:upper()
     local reg = assert(regs[event], 'cannot unregister ' .. event)
@@ -170,5 +176,6 @@ return function(cstubs, datalua, log, loglevel, scripts, security)
     SendEvent = SendEvent,
     UnregisterAllEvents = UnregisterAllEvents,
     UnregisterEvent = UnregisterEvent,
+    UnregisterEventCallbackGlobal = UnregisterEventCallbackGlobal,
   }
 end

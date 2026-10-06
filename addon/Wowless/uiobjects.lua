@@ -447,14 +447,15 @@ G.testsuite.uiobjects = function()
           local ft = _G.C_FunctionContainers.CreateCallback(function() end)
           return match(1, true, f:RegisterEventCallback('ENCOUNTER_STATE_CHANGED', ft))
         end,
-        ['RegisterEventCallback repeated registration'] = function()
+        ['event callback registration'] = function()
           local switch = _G.C_ClassTalents and _G.C_ClassTalents.SwitchToLoadoutByIndex
           if not switch then
             return
           end
           local event = 'CLASS_TALENTS_SWITCH_TO_LOADOUT_BY_INDEX'
           -- Each step registers a callback (ft* = funtainer, fn* = raw function)
-          -- for an owner (f* = frame, global = _G.RegisterEventCallback). Expected
+          -- for an owner (f* = frame, global = _G.RegisterEventCallback), or with
+          -- unregister set, removes it via _G.UnregisterEventCallback. Expected
           -- values are the callbacks fired for each owner, in order. Global
           -- callbacks fire first, then each frame's callbacks as a group. The
           -- order of the frame groups varies between runs of the client.
@@ -494,6 +495,19 @@ G.testsuite.uiobjects = function()
               expected = { global = 'ft1,ft2,ft3' },
               steps = { { 'global', 'ft1' }, { 'global', 'ft2' }, { 'global', 'ft3' }, { 'global', 'ft1' } },
             },
+            ['funtainer unregistered globally'] = {
+              expected = { global = 'ft3,ft2' },
+              steps = {
+                { 'global', 'ft1' },
+                { 'global', 'ft2' },
+                { 'global', 'ft3' },
+                { 'global', 'ft1', unregister = true },
+              },
+            },
+            ['funtainer unregistered globally when not registered'] = {
+              expected = { global = 'ft1' },
+              steps = { { 'global', 'ft1' }, { 'global', 'ft2', unregister = true } },
+            },
             ['funtainers interleaved across frames and global'] = {
               expected = { f1 = 'ft1,ft4', f2 = 'ft3,ft6', global = 'ft2,ft5' },
               steps = {
@@ -529,7 +543,9 @@ G.testsuite.uiobjects = function()
                   end
                   callbacks[cname] = cname:sub(1, 2) == 'ft' and _G.C_FunctionContainers.CreateCallback(fn) or fn
                 end
-                if oname == 'global' then
+                if step.unregister then
+                  check1(true, _G.UnregisterEventCallback(event, callbacks[cname]))
+                elseif oname == 'global' then
                   check1(true, _G.RegisterEventCallback(event, callbacks[cname]))
                 else
                   if not frames[oname] then
