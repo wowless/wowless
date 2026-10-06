@@ -61,7 +61,16 @@ return function(cstubs, datalua, log, loglevel, scripts, security)
   end
 
   local function UnregisterEventCallbackGlobal(event, cb)
-    local cbreg = assert(cbregs[event:upper()], 'cannot unregister ' .. event)
+    local uevent = event:upper()
+    local cbreg = cbregs[uevent]
+    if not cbreg then
+      local fmt = 'UnregisterEventCallback Attempt to register unknown event %q'
+      local taint = _G.THETAINT and '\nLua Taint: ' .. _G.THETAINT or ''
+      error(fmt:format(event) .. taint, 0)
+    end
+    if secures[uevent] and _G.THETAINT then
+      return false
+    end
     cbreg.global:remove(cb)
     return true
   end
