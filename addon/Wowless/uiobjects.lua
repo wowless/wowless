@@ -517,8 +517,6 @@ G.testsuite.uiobjects = function()
           local tests = {}
           for name, case in pairs(cases) do
             tests[name] = function()
-              -- Callbacks cannot be unregistered, so they go quiet when the case ends.
-              local live = true
               local calls = {}
               local frames = {}
               local owners = {}
@@ -527,9 +525,7 @@ G.testsuite.uiobjects = function()
                 local oname, cname = unpack(step)
                 if not callbacks[cname] then
                   local function fn(owner, index, ...)
-                    if live then
-                      table.insert(calls, { cname = cname, extra = select('#', ...), index = index, owner = owner })
-                    end
+                    table.insert(calls, { cname = cname, extra = select('#', ...), index = index, owner = owner })
                   end
                   callbacks[cname] = cname:sub(1, 2) == 'ft' and _G.C_FunctionContainers.CreateCallback(fn) or fn
                 end
@@ -544,7 +540,6 @@ G.testsuite.uiobjects = function()
                 end
               end
               check0(switch(12345))
-              live = false
               local actual = {}
               local order = {}
               for _, call in ipairs(calls) do
