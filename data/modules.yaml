@@ -63,10 +63,10 @@ events:
   deps:
     cstubs:
     datalua:
+    funtainer:
     log:
     loglevel:
     scripts:
-    security:
 fontinstance:
   deps:
 funtainer:

@@ -1,5 +1,6 @@
 local hlist = require('wowless.hlist')
-return function(cstubs, datalua, log, loglevel, scripts, security)
+return function(cstubs, datalua, funtainer, log, loglevel, scripts)
+  local Invoke = funtainer.methods.Invoke
   local allregs = hlist()
   local regs = {}
   local cbregs = {}
@@ -153,17 +154,12 @@ return function(cstubs, datalua, log, loglevel, scripts, security)
     end
     local cbreg = cbregs[event]
     if cbreg then
-      -- TODO unify with funtainer Invoke
       for cb in cbreg.global:entries() do
-        if not cb.cancelled then
-          security.CallSandbox(cb.callback, nil, ...)
-        end
+        Invoke(cb, nil, ...)
       end
       for frame, framecbs in pairs(cbreg.frames) do
         for cb in framecbs:entries() do
-          if not cb.cancelled then
-            security.CallSandbox(cb.callback, frame.luarep, ...)
-          end
+          Invoke(cb, frame.luarep, ...)
         end
       end
     end
