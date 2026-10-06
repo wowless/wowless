@@ -406,6 +406,9 @@ target_sources(wowlessutil PRIVATE wowless/mixin.c)
 lua2c(wowlessxmlutil
       wowless.xmlutil=${CMAKE_CURRENT_SOURCE_DIR}/wowless/xmlutil.lua)
 
+lua2c(wowlesshierarchy
+      wowless.hierarchy=${CMAKE_CURRENT_SOURCE_DIR}/wowless/hierarchy.lua)
+
 set(cjson_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/vendor/cjson)
 lua2c(luacjson cjson=c)
 target_sources(
@@ -1075,6 +1078,7 @@ add_lua_executable(
   tsort
   wowapischema
   wowlessblp
+  wowlesshierarchy
   wowlesslib
   wowlessrender
   wowlesssqlite
@@ -1208,6 +1212,7 @@ set(specs
     spec/wowless/addon_spec.lua
     spec/wowless/blp_spec.lua
     spec/wowless/bubblewrap_spec.lua
+    spec/wowless/hierarchy_spec.lua
     spec/wowless/hlist_spec.lua
     spec/wowless/modules/warningqueue_spec.lua
     spec/wowless/modules/xml_spec.lua
