@@ -455,7 +455,9 @@ G.testsuite.uiobjects = function()
           local event = 'CLASS_TALENTS_SWITCH_TO_LOADOUT_BY_INDEX'
           -- Each step registers a callback (ft* = funtainer, fn* = raw function)
           -- for an owner (f* = frame, global = _G.RegisterEventCallback), or with
-          -- unregister set, removes it via _G.UnregisterEventCallback. Expected
+          -- unregister set, removes it via _G.UnregisterEventCallback. A step with
+          -- unregisterall or unregisterevent set calls UnregisterAllEvents or
+          -- UnregisterEvent on its frame. Expected
           -- values are the callbacks fired for each owner, in order. Global
           -- callbacks fire first, then each frame's callbacks as a group. The
           -- order of the frame groups varies between runs of the client.
@@ -516,6 +518,14 @@ G.testsuite.uiobjects = function()
               expected = { f1 = 'ft1' },
               steps = { { 'f1', 'ft1' }, { 'global', 'ft1' }, { 'global', 'ft1', unregister = true } },
             },
+            ['funtainer on a frame removed by UnregisterAllEvents'] = {
+              expected = {},
+              steps = { { 'f1', 'ft1' }, { 'f1', unregisterall = true } },
+            },
+            ['funtainer on a frame removed by UnregisterEvent'] = {
+              expected = {},
+              steps = { { 'f1', 'ft1' }, { 'f1', unregisterevent = true } },
+            },
             ['funtainers interleaved across frames and global'] = {
               expected = { f1 = 'ft1,ft4', f2 = 'ft3,ft6', global = 'ft2,ft5' },
               steps = {
@@ -545,13 +555,17 @@ G.testsuite.uiobjects = function()
               local callbacks = {}
               for _, step in ipairs(case.steps) do
                 local oname, cname = unpack(step)
-                if not callbacks[cname] then
+                if cname and not callbacks[cname] then
                   local function fn(owner, index, ...)
                     table.insert(calls, { cname = cname, extra = select('#', ...), index = index, owner = owner })
                   end
                   callbacks[cname] = cname:sub(1, 2) == 'ft' and _G.C_FunctionContainers.CreateCallback(fn) or fn
                 end
-                if step.unregister then
+                if step.unregisterall then
+                  check0(frames[oname]:UnregisterAllEvents())
+                elseif step.unregisterevent then
+                  check1(true, frames[oname]:UnregisterEvent(event))
+                elseif step.unregister then
                   check1(true, _G.UnregisterEventCallback(event, callbacks[cname]))
                 elseif oname == 'global' then
                   check1(true, _G.RegisterEventCallback(event, callbacks[cname]))

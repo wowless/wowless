@@ -68,17 +68,27 @@ return function(cstubs, datalua, log, loglevel, scripts, security)
 
   local function UnregisterEvent(frame, event)
     event = event:upper()
-    local reg = assert(regs[event], 'cannot unregister ' .. event)
-    if reg:has(frame) then
+    local reg = regs[event]
+    local cbreg = cbregs[event]
+    assert(reg or cbreg, 'cannot unregister ' .. event)
+    local unregistered = false
+    if reg and reg:has(frame) then
       reg:remove(frame)
-      return true
+      unregistered = true
     end
-    return false
+    if cbreg and cbreg.frames[frame] then
+      cbreg.frames[frame] = nil
+      unregistered = true
+    end
+    return unregistered
   end
 
   local function UnregisterAllEvents(frame)
     for _, reg in pairs(regs) do
       reg:remove(frame)
+    end
+    for _, cbreg in pairs(cbregs) do
+      cbreg.frames[frame] = nil
     end
     allregs:remove(frame)
   end
