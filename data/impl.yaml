@@ -51,6 +51,10 @@ C_ClassTalents.InitializeViewLoadout:
   impl:
     modules:
       talents:
+C_ClassTalents.SwitchToLoadoutByIndex:
+  impl:
+    modules:
+      events:
 C_ClassTalents.ViewLoadout:
   impl:
     modules:

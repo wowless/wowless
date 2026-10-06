@@ -447,6 +447,128 @@ G.testsuite.uiobjects = function()
           local ft = _G.C_FunctionContainers.CreateCallback(function() end)
           return match(1, true, f:RegisterEventCallback('ENCOUNTER_STATE_CHANGED', ft))
         end,
+        ['RegisterEventCallback repeated registration'] = function()
+          local switch = _G.C_ClassTalents and _G.C_ClassTalents.SwitchToLoadoutByIndex
+          if not switch then
+            return
+          end
+          local event = 'CLASS_TALENTS_SWITCH_TO_LOADOUT_BY_INDEX'
+          -- Each step registers a callback (ft* = funtainer, fn* = raw function)
+          -- for an owner (f* = frame, global = _G.RegisterEventCallback). Expected
+          -- values are the callbacks fired for each owner, in order. Global
+          -- callbacks fire first, then each frame's callbacks as a group. The
+          -- order of the frame groups varies between runs of the client.
+          local cases = {
+            ['funtainer twice on one frame'] = {
+              expected = { f1 = 'ft1' },
+              steps = { { 'f1', 'ft1' }, { 'f1', 'ft1' } },
+            },
+            ['funtainer twice globally'] = {
+              expected = { global = 'ft1' },
+              steps = { { 'global', 'ft1' }, { 'global', 'ft1' } },
+            },
+            ['funtainer on two frames'] = {
+              expected = { f1 = 'ft1', f2 = 'ft1' },
+              steps = { { 'f1', 'ft1' }, { 'f2', 'ft1' } },
+            },
+            ['funtainer on a frame then globally'] = {
+              expected = { f1 = 'ft1', global = 'ft1' },
+              steps = { { 'f1', 'ft1' }, { 'global', 'ft1' } },
+            },
+            ['funtainer on five frames then globally'] = {
+              expected = { f1 = 'ft1', f2 = 'ft1', f3 = 'ft1', f4 = 'ft1', f5 = 'ft1', global = 'ft1' },
+              steps = {
+                { 'f1', 'ft1' },
+                { 'f2', 'ft1' },
+                { 'f3', 'ft1' },
+                { 'f4', 'ft1' },
+                { 'f5', 'ft1' },
+                { 'global', 'ft1' },
+              },
+            },
+            ['funtainer re-registered after others on one frame'] = {
+              expected = { f1 = 'ft1,ft2,ft3' },
+              steps = { { 'f1', 'ft1' }, { 'f1', 'ft2' }, { 'f1', 'ft3' }, { 'f1', 'ft1' } },
+            },
+            ['funtainer re-registered after others globally'] = {
+              expected = { global = 'ft1,ft2,ft3' },
+              steps = { { 'global', 'ft1' }, { 'global', 'ft2' }, { 'global', 'ft3' }, { 'global', 'ft1' } },
+            },
+            ['funtainers interleaved across frames and global'] = {
+              expected = { f1 = 'ft1,ft4', f2 = 'ft3,ft6', global = 'ft2,ft5' },
+              steps = {
+                { 'f1', 'ft1' },
+                { 'global', 'ft2' },
+                { 'f2', 'ft3' },
+                { 'f1', 'ft4' },
+                { 'global', 'ft5' },
+                { 'f2', 'ft6' },
+              },
+            },
+            ['function twice on one frame'] = {
+              expected = { f1 = 'fn1,fn1' },
+              steps = { { 'f1', 'fn1' }, { 'f1', 'fn1' } },
+            },
+            ['function twice globally'] = {
+              expected = { global = 'fn1,fn1' },
+              steps = { { 'global', 'fn1' }, { 'global', 'fn1' } },
+            },
+          }
+          local tests = {}
+          for name, case in pairs(cases) do
+            tests[name] = function()
+              -- Callbacks cannot be unregistered, so they go quiet when the case ends.
+              local live = true
+              local calls = {}
+              local frames = {}
+              local owners = {}
+              local callbacks = {}
+              for _, step in ipairs(case.steps) do
+                local oname, cname = unpack(step)
+                if not callbacks[cname] then
+                  local function fn(owner, index, ...)
+                    if live then
+                      table.insert(calls, { cname = cname, extra = select('#', ...), index = index, owner = owner })
+                    end
+                  end
+                  callbacks[cname] = cname:sub(1, 2) == 'ft' and _G.C_FunctionContainers.CreateCallback(fn) or fn
+                end
+                if oname == 'global' then
+                  check1(true, _G.RegisterEventCallback(event, callbacks[cname]))
+                else
+                  if not frames[oname] then
+                    frames[oname] = retn(1, CreateFrame('Frame'))
+                    owners[frames[oname]] = oname
+                  end
+                  check1(true, frames[oname]:RegisterEventCallback(event, callbacks[cname]))
+                end
+              end
+              check0(switch(12345))
+              live = false
+              local actual = {}
+              local order = {}
+              for _, call in ipairs(calls) do
+                assertEquals(12345, call.index)
+                assertEquals(0, call.extra)
+                local oname = call.owner == nil and 'global' or owners[call.owner] or tostring(call.owner)
+                if order[#order] ~= oname then
+                  assertEquals(nil, actual[oname])
+                  actual[oname] = {}
+                  table.insert(order, oname)
+                end
+                table.insert(actual[oname], call.cname)
+              end
+              if actual.global then
+                assertEquals('global', order[1])
+              end
+              for oname, cnames in pairs(actual) do
+                actual[oname] = table.concat(cnames, ',')
+              end
+              return G.assertRecursivelyEqual(case.expected, actual)
+            end
+          end
+          return tests
+        end,
         ['support $parent in frame names'] = function()
           local parent = retn(1, CreateFrame('Frame', 'WowlessParentNameTestMoo'))
           local t = {

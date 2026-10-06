@@ -5522,6 +5522,7 @@ C_ClassTalents.SetUsesSharedActionBars:
     type: boolean
   outputs:
 C_ClassTalents.SwitchToLoadoutByIndex:
+  impl: C_ClassTalents.SwitchToLoadoutByIndex
   inputs:
   - name: loadoutIndex
     type: number

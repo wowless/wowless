@@ -9,7 +9,7 @@ return function(cstubs, datalua, log, loglevel, scripts, security)
       regs[k] = hlist()
     end
     if v.callback then
-      cbregs[k] = hlist()
+      cbregs[k] = { frames = {}, global = hlist() }
     end
     secures[k] = v.restricted
   end
@@ -37,11 +37,11 @@ return function(cstubs, datalua, log, loglevel, scripts, security)
       local ty = frame:GetObjectType()
       error(fmt:format(ty, event), 0)
     end
-    if secures[uevent] and _G.THETAINT then -- TODO check repeat registration
+    if secures[uevent] and _G.THETAINT then
       return false
     end
-    cb.firstarg = frame
-    cbreg:insert(cb)
+    cbreg.frames[frame] = cbreg.frames[frame] or hlist()
+    cbreg.frames[frame]:insert(cb)
     return true
   end
 
@@ -53,10 +53,10 @@ return function(cstubs, datalua, log, loglevel, scripts, security)
       local taint = _G.THETAINT and '\nLua Taint: ' .. _G.THETAINT or ''
       error(fmt:format(event) .. taint, 0)
     end
-    if secures[uevent] and _G.THETAINT then -- TODO check repeat registration
+    if secures[uevent] and _G.THETAINT then
       return false
     end
-    cbreg:insert(cb)
+    cbreg.global:insert(cb)
     return true
   end
 
@@ -124,10 +124,17 @@ return function(cstubs, datalua, log, loglevel, scripts, security)
     end
     local cbreg = cbregs[event]
     if cbreg then
-      for cb in cbreg:entries() do
-        -- TODO unify with funtainer Invoke
+      -- TODO unify with funtainer Invoke
+      for cb in cbreg.global:entries() do
         if not cb.cancelled then
-          security.CallSandbox(cb.callback, cb.firstarg, ...)
+          security.CallSandbox(cb.callback, nil, ...)
+        end
+      end
+      for frame, framecbs in pairs(cbreg.frames) do
+        for cb in framecbs:entries() do
+          if not cb.cancelled then
+            security.CallSandbox(cb.callback, frame.luarep, ...)
+          end
         end
       end
     end
