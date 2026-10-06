@@ -508,6 +508,14 @@ G.testsuite.uiobjects = function()
               expected = { global = 'ft1' },
               steps = { { 'global', 'ft1' }, { 'global', 'ft2', unregister = true } },
             },
+            ['funtainer on a frame unregistered globally'] = {
+              expected = { f1 = 'ft1' },
+              steps = { { 'f1', 'ft1' }, { 'global', 'ft1', unregister = true } },
+            },
+            ['funtainer on a frame and globally unregistered globally'] = {
+              expected = { f1 = 'ft1' },
+              steps = { { 'f1', 'ft1' }, { 'global', 'ft1' }, { 'global', 'ft1', unregister = true } },
+            },
             ['funtainers interleaved across frames and global'] = {
               expected = { f1 = 'ft1,ft4', f2 = 'ft3,ft6', global = 'ft2,ft5' },
               steps = {
