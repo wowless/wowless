@@ -906,7 +906,6 @@ lua2c(
   runtime.modules=runtime/modules.lua
   runtime.platform=runtime/platform.lua
   wowless.bubblewrap=c
-  wowless.debug=c
   wowless.env=${CMAKE_CURRENT_SOURCE_DIR}/wowless/env.lua
   wowless.ext=c
   wowless.hlist=${CMAKE_CURRENT_SOURCE_DIR}/wowless/hlist.lua
@@ -967,7 +966,6 @@ lua2c(
 target_sources(
   wowlesslib
   PRIVATE wowless/bubblewrap.c
-          wowless/debug.c
           wowless/ext.c
           wowless/luaobject.c
           wowless/modules/encodingutil.c

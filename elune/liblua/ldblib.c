@@ -491,10 +491,19 @@ static int db_debugprofilestop(lua_State *L) {
   return 1;
 }
 
+/* wowless: full path for file sources, rather than truncated short_src. */
+static const char *stack_source(const lua_Debug *ar) {
+  if (ar->source[0] == '@') {
+    return ar->source + 1;
+  } else {
+    return ar->short_src;
+  }
+}
+
 static int db_stack(lua_State *L) {
   lua_State *L1 = L;
   int level = 1;
-  int ntop = 12;
+  int ntop = 120; /* wowless: upstream default is 12 */
   int nbase = 10;
   int firstpart = 1;
   int startlevel;
@@ -554,7 +563,7 @@ static int db_stack(lua_State *L) {
     }
 
     lua_getinfo(L1, "Snl", &ar);
-    lua_pushfstring(L, "%s:", ar.short_src);
+    lua_pushfstring(L, "%s:", stack_source(&ar));
 
     if (ar.currentline > 0) {
       lua_pushfstring(L, "%d:", ar.currentline);
@@ -573,7 +582,7 @@ static int db_stack(lua_State *L) {
         } else if (*ar.what == 'C' || *ar.what == 't') {
           lua_pushliteral(L, " ?");
         } else {
-          lua_pushfstring(L, " in function <%s:%d>", ar.short_src,
+          lua_pushfstring(L, " in function <%s:%d>", stack_source(&ar),
                           ar.linedefined);
         }
       }

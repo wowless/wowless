@@ -89,7 +89,7 @@ return function(parentkey, uiobjecttypes, visibility)
     local p = parent
     while p do
       if obj == p then
-        io.stderr:write('SetParent loop, crashing\n' .. require('wowless.debug').debugstack())
+        io.stderr:write('SetParent loop, crashing\n' .. _G.debugstack())
         os.exit(1)
       end
       p = p.parent

@@ -1,4 +1,4 @@
-local debugstack = require('wowless.debug').debugstack
+local debugstack = _G.debugstack
 return function(log, maxErrors)
   local errors = 0
 

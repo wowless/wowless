@@ -289,9 +289,7 @@ debugprofilestart:
 debugprofilestop:
   stdlib: debugprofilestop
 debugstack:
-  luadelegate:
-    module: wowless.debug
-    nowrap: true
+  stdlib: debugstack
 difftime:
   stdlib: difftime
 EnumerateFrames:
