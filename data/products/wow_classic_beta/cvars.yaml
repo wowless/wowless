@@ -437,8 +437,6 @@ caavoice:
 caavolume:
   account: true
   default: '100'
-cacaobilateralsimilaritydistancesigma:
-  default: '0.01'
 calendarshowbattlegrounds:
   character: true
   default: '1'
@@ -1477,6 +1475,10 @@ clientsettings_ray_tracing_by_api_mask:
   default: ''
 clientsettings_ray_tracing_by_gpu_category:
   default: ''
+clientsettings_rgb10a2_api:
+  default: ''
+clientsettings_rgb10a2_cat:
+  default: ''
 clientsettings_rtshadows:
   default: ''
 clientsettings_shader_mt_by_api_mask:
@@ -1718,6 +1720,9 @@ disableuseraddonsbydefault:
 discordclientenabled:
   default: '1'
 discorddisplayname:
+  default: '0'
+displayfreebagslots:
+  account: true
   default: '0'
 displayspellactivationoverlays:
   character: true
@@ -2241,7 +2246,7 @@ gamepadtargetingmodifiervisualdelay:
 gamepadtouchcursoraccel:
   default: '1.000000'
 gamepadtouchcursorenable:
-  default: '1'
+  default: '2'
 gamepadtouchcursormovethreshold:
   default: '0.042000'
 gamepadtouchcursorspeed:
@@ -2260,7 +2265,7 @@ gamepadusecompactactionbar:
   character: true
   default: '0'
 gamepadusepartytargeting:
-  default: '0'
+  default: '1'
 gamepadvibrationstrength:
   default: '1'
 gameplaycontext:
@@ -2278,7 +2283,7 @@ garrisoncompletetalenttype:
   default: '0'
   secure: true
 giquality:
-  default: '2'
+  default: '1'
 graphicsbloomusermult:
   default: '0'
 graphicscomputeeffects:
@@ -2535,6 +2540,9 @@ initialrealmlisttimeout:
   default: '60'
 inputdeviceinterfacestyle:
   default: '0'
+instantquesttext:
+  account: true
+  default: '1'
 interactkeywarningtutorial:
   account: true
   default: '0'
@@ -3368,7 +3376,7 @@ raidframeswidth:
   character: true
   default: '72'
 raidgiquality:
-  default: '2'
+  default: '1'
 raidgraphicsbloomusermult:
   default: '0'
 raidgraphicscomputeeffects:
@@ -3458,6 +3466,8 @@ raidreflectionmode:
   default: '3'
 raidrefraction:
   default: '0'
+raidrenderformat:
+  default: '2'
 raidrippledetail:
   default: '2'
 raidsettingsenabled:
@@ -3607,7 +3617,7 @@ seenregionalchatdisabled:
 seentimerunningfirstloginpopup:
   default: '0'
 serveralert:
-  default: https://breaking-news.support.blizzard.com/service/wow-classic-client/ptr/us/en-US
+  default: https://breaking-news.support.blizzard.com/service/wow-forever-client/ptr/us/en-US
   readonly: true
 servermessageeventlog:
   default: '0'
@@ -4092,8 +4102,6 @@ ssaomagicthresholdhigh:
   default: '50'
 ssaomagicthresholdlow:
   default: '25'
-ssaotype:
-  default: '0'
 statustext:
   account: true
   default: '0'

@@ -22073,9 +22073,9 @@ C_PlayerInfo.GetName:
   - name: playerLocation
     type:
       structure: PlayerLocation
+  mayreturnnothing: true
   outputs:
   - name: name
-    nilable: true
     type: string
 C_PlayerInfo.GetNativeDisplayID:
   inputs:
@@ -26445,6 +26445,15 @@ C_Spell.GetDeadlyDebuffInfo:
   - name: deadlyDebuffInfo
     type:
       structure: C_Spell.DeadlyDebuffInfo
+C_Spell.GetItemCooldown:
+  inputs:
+  - name: itemID
+    type: number
+  mayreturnnothing: true
+  outputs:
+  - name: spellCooldownInfo
+    type:
+      structure: SpellCooldownInfo
 C_Spell.GetItemModifiedAppearancesApplied:
   inputs:
   - name: spellID
@@ -43538,6 +43547,13 @@ UnitTrialXP:
   outputs:
   - name: result
     type: number
+UnitUsesAmmo:
+  inputs:
+  - name: unit
+    type: unit
+  outputs:
+  - name: result
+    type: boolean
 UnitUsingVehicle:
   inputs:
   - name: unit

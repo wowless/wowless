@@ -7424,6 +7424,10 @@ PLAYER_MONEY:
   payload:
 PLAYER_MOUNT_DISPLAY_CHANGED:
   payload:
+PLAYER_PVP_FLAG_CHANGED:
+  payload:
+  - name: isPvpFlagged
+    type: boolean
 PLAYER_PVP_KILLS_CHANGED:
   payload:
   - name: unitTarget

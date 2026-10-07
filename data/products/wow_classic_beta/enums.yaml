@@ -3128,6 +3128,7 @@ EventToastEventType:
     PvPTierUpdate: 20
     QuestBossEmote: 10
     QuestTurnedIn: 12
+    RenownFactionLeveledUp: 27
     Scenario: 14
     SpellLearned: 21
     SpellScript: 18
@@ -3416,6 +3417,7 @@ GameRule:
     BagsUIDisabled: 64
     BinarySpellPushbackResist: 90
     BlockWhileSheathedAllowed: 88
+    CannotSkinCreaturesTooHighLevelForYourSkinningSkill: 247
     CharacterCreateUseFixedBackgroundModel: 55
     CharacterlessLogin: 14
     CharacterPanelDisabled: 37
@@ -3449,6 +3451,7 @@ GameRule:
     EjSuggestedContentDisabled: 148
     EnableAmmoSystem: 177
     EnableDifficultyMessages: 237
+    EnableMaxBuffLevelDifference: 242
     EncounterJournalDisabled: 42
     EtaRealmLaunchTime: 5
     ExperienceBarDisabled: 159
