@@ -26,6 +26,7 @@ OnExternalLink:
 OnFinished:
 OnGamePadButtonDown:
 OnGamePadButtonUp:
+OnGamePadStick:
 OnHide:
 OnHorizontalScroll:
 OnHyperlinkClick:
@@ -45,6 +46,7 @@ OnMouseDown:
 OnMouseUp:
 OnMouseWheel:
 OnMovieFinished:
+OnPanFinished:
 OnPause:
 OnPlay:
 OnReceiveDrag:
@@ -59,7 +61,7 @@ OnTextChanged:
 OnTextSet:
 OnTooltipCleared:
 OnTooltipSetDefaultAnchor:
-OnTooltipSetFrameStack:
+OnTooltipSetFramestack:
 OnUiMapChanged:
 OnUpdate:
 OnValueChanged:

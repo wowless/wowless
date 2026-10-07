@@ -1736,6 +1736,8 @@ CinematicModel:
     UnequipItems:
       inputs:
       outputs:
+  scripts:
+    OnPanFinished:
 ColorSelect:
   fieldinitoverrides:
     mouseClickEnabled: true
@@ -4673,6 +4675,7 @@ Frame:
     OnEvent:
     OnGamePadButtonDown:
     OnGamePadButtonUp:
+    OnGamePadStick:
     OnHyperlinkClick:
     OnHyperlinkEnter:
     OnHyperlinkLeave:
@@ -4884,9 +4887,12 @@ GameTooltip:
   scripts:
     OnTooltipAddMoney:
     OnTooltipCleared:
+    OnTooltipSetAchievement:
     OnTooltipSetDefaultAnchor:
-    OnTooltipSetFrameStack:
+    OnTooltipSetEquipmentSet:
+    OnTooltipSetFramestack:
     OnTooltipSetItem:
+    OnTooltipSetQuest:
     OnTooltipSetSpell:
     OnTooltipSetUnit:
 LayeredRegion:

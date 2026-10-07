@@ -1028,6 +1028,10 @@ OnGamePadButtonUp:
   extends: ScriptType
   impl:
     script:
+OnGamePadStick:
+  extends: ScriptType
+  impl:
+    script:
 OnHide:
   extends: ScriptType
   impl:
@@ -1105,6 +1109,10 @@ OnMovieFinished:
   extends: ScriptType
   impl:
     script:
+OnPanFinished:
+  extends: ScriptType
+  impl:
+    script:
 OnPause:
   extends: ScriptType
   impl:
@@ -1161,15 +1169,27 @@ OnTooltipCleared:
   extends: ScriptType
   impl:
     script:
+OnTooltipSetAchievement:
+  extends: ScriptType
+  impl:
+    script:
 OnTooltipSetDefaultAnchor:
   extends: ScriptType
   impl:
     script:
-OnTooltipSetFrameStack:
+OnTooltipSetEquipmentSet:
+  extends: ScriptType
+  impl:
+    script:
+OnTooltipSetFramestack:
   extends: ScriptType
   impl:
     script:
 OnTooltipSetItem:
+  extends: ScriptType
+  impl:
+    script:
+OnTooltipSetQuest:
   extends: ScriptType
   impl:
     script:

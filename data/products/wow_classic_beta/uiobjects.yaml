@@ -1804,6 +1804,8 @@ CinematicModel:
     UnequipItems:
       inputs:
       outputs:
+  scripts:
+    OnPanFinished:
 ColorSelect:
   fieldinitoverrides:
     mouseClickEnabled: true
@@ -4838,6 +4840,7 @@ Frame:
     OnEvent:
     OnGamePadButtonDown:
     OnGamePadButtonUp:
+    OnGamePadStick:
     OnHyperlinkClick:
     OnHyperlinkEnter:
     OnHyperlinkLeave:
@@ -5013,7 +5016,7 @@ GameTooltip:
   scripts:
     OnTooltipCleared:
     OnTooltipSetDefaultAnchor:
-    OnTooltipSetFrameStack:
+    OnTooltipSetFramestack:
 LayeredRegion:
   childField: regions
   fields:

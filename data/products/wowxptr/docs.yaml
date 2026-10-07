@@ -178,6 +178,18 @@ lies:
     PingPinFrameAPI:
     SimpleMapSceneAPI:
     SimpleModelFFXAPI:
+  extra_scripttypes:
+    OnMessageScrollChanged:
+    OnMovieHideSubtitle:
+    OnMovieShowSubtitle:
+    OnTooltipAddMoney:
+    OnTooltipSetAchievement:
+    OnTooltipSetEquipmentSet:
+    OnTooltipSetItem:
+    OnTooltipSetQuest:
+    OnTooltipSetSpell:
+    OnTooltipSetUnit:
+    OnUpdateModel:
   structures:
     ConsoleCommandInfo:
       fields:

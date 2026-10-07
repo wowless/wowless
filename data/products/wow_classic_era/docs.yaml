@@ -319,6 +319,11 @@ lies:
     HousingLayoutPinFrameAPI:
     PingPinFrameAPI:
     SimpleModelFFXAPI:
+  extra_scripttypes:
+    OnMessageScrollChanged:
+    OnMovieHideSubtitle:
+    OnMovieShowSubtitle:
+    OnUpdateModel:
   structures:
     ConsoleCommandInfo:
       fields:

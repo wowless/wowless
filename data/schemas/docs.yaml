@@ -45,6 +45,12 @@ type:
           extra_script_objects:
             type:
               setof: string
+          extra_scripttypes:
+            type:
+              setof:
+                ref:
+                  negative: true
+                  schema: scripttypes
           structures:
             type:
               mapof:

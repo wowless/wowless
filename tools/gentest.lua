@@ -136,6 +136,9 @@ local function computeUiobjectApis(p)
     for scripttype in pairs(perproduct(product, 'scripttypes')) do
       allscripts[scripttype] = true
     end
+    for scripttype in pairs(tpath(perproduct(product, 'docs'), 'lies', 'extra_scripttypes') or {}) do
+      allscripts[scripttype] = true
+    end
   end
   for _, cfg in pairs(uiobjects) do
     cfg.fieldinitoverrides = cfg.fieldinitoverrides or {}

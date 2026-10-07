@@ -21,9 +21,16 @@ local sorted = require('pl.tablex').sort
 -- unions the full universe across products for maximum coverage, and
 -- generatedxml.xml's own comparison logic checks each product's own
 -- ScriptTypes data at runtime to expect the right warning either way.
+-- Names listed in any product's docs.yaml lies.extra_scripttypes (declared
+-- by UI.xsd but not in scripttypes.yaml) are included too, so real-client
+-- runs check them.
 local scripttypes = {}
 for _, p in ipairs(readyaml('data/products.yaml')) do
   for name in pairs(readyaml(('data/products/%s/scripttypes.yaml'):format(p))) do
+    scripttypes[name] = true
+  end
+  local lies = readyaml(('data/products/%s/docs.yaml'):format(p)).lies or {}
+  for name in pairs(lies.extra_scripttypes or {}) do
     scripttypes[name] = true
   end
 end

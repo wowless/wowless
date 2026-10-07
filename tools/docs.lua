@@ -545,11 +545,42 @@ local function rewriteLuaObjects(luaobjects)
   end
 end
 
+local function rewriteScriptTypes(scripttypes)
+  local xsd = {}
+  local inscripts = false
+  local parser = require('lxp').new({
+    EndElement = function(_, name)
+      if name == 'xs:complexType' then
+        inscripts = false
+      end
+    end,
+    StartElement = function(_, name, attrs)
+      if name == 'xs:complexType' and attrs.name == 'ScriptsType' then
+        inscripts = true
+      elseif inscripts and name == 'xs:element' then
+        xsd[attrs.name] = true
+      end
+    end,
+  })
+  local xsdfile = 'build/extracts/' .. product .. '/Interface/AddOns/Blizzard_SharedXML/UI.xsd'
+  assert(parser:parse(assert(require('pl.file').read(xsdfile))))
+  assert(parser:close())
+  assert(next(xsd), 'no ScriptsType elements in ' .. xsdfile)
+  local extras = deref(config, 'lies', 'extra_scripttypes') or {}
+  for name in pairs(xsd) do
+    if not take(extras, name) then
+      scripttypes[name] = scripttypes[name] or {}
+    end
+  end
+  assertTaken('lies.extra_scripttypes', extras)
+end
+
 local rewriteFuncs = {
   apis = rewriteApis,
   enums = rewriteEnums,
   events = rewriteEvents,
   luaobjects = rewriteLuaObjects,
+  scripttypes = rewriteScriptTypes,
   structures = rewriteStructures,
   uiobjects = rewriteUIObjects,
 }
