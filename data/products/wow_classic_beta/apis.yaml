@@ -243,6 +243,16 @@ C_AccountInfo.IsGUIDRelatedToLocalAccount:
   outputs:
   - name: isLocalUser
     type: boolean
+C_AccountServices.GetPreferredDatacenterLocalities:
+C_AccountServices.GetPreferredLocales:
+C_AccountServices.GetPreferredPlaySettings:
+C_AccountServices.GetPreferredPlaySettingsFeatures:
+C_AccountServices.IsAccountLockedPostSave:
+C_AccountServices.IsAccountSaveEnabled:
+C_AccountServices.IsAccountSaveInProgress:
+C_AccountServices.RequestPreferredPlaySettings:
+C_AccountServices.SaveAccountData:
+C_AccountServices.SetPreferredPlaySettings:
 C_AccountStore.BeginPurchase:
   inputs:
   - name: itemID

@@ -245,6 +245,10 @@ C_AccountInfo.IsGUIDRelatedToLocalAccount:
   outputs:
   - name: isLocalUser
     type: boolean
+C_AccountServices.IsAccountLockedPostSave:
+C_AccountServices.IsAccountSaveEnabled:
+C_AccountServices.IsAccountSaveInProgress:
+C_AccountServices.SaveAccountData:
 C_AccountStore.BeginPurchase:
   inputs:
   - name: itemID
