@@ -6,6 +6,7 @@ local sorted = require('pl.tablex').sort
 local args = (function()
   local parser = require('argparse')()
   parser:argument('output', 'generated toc file')
+  parser:argument('files', 'files of a simple addon; omit for the Wowless addon'):args('*')
   return parser:parse()
 end)()
 
@@ -30,6 +31,16 @@ local dir = path.dirname(args.output)
 local interfacestrs = {}
 for v in sorted(interfaces) do
   table.insert(interfacestrs, tostring(v))
+end
+
+if #args.files > 0 then
+  local lines = { '## Interface: ' .. table.concat(interfacestrs, ', ') }
+  for _, f in ipairs(args.files) do
+    table.insert(lines, f)
+  end
+  table.insert(lines, '')
+  pfile.write(args.output, table.concat(lines, '\n'))
+  return
 end
 
 local lines = {

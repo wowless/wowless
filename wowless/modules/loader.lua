@@ -352,8 +352,17 @@ return function(addons, datalua, envmodule, events, loadercfg, log, xmleval)
       end
     end
     log(1, 'loading non-framexml addons')
+    local unsigned = {}
     for _, addon in ipairs(loadables) do
-      if not addon.loaded and not addon.signed then
+      if not addon.signed then
+        table.insert(unsigned, addon)
+      end
+    end
+    table.sort(unsigned, function(a, b)
+      return a.name:lower() < b.name:lower()
+    end)
+    for _, addon in ipairs(unsigned) do
+      if not addon.loaded then
         (addon.loadondemand and doBootstrap or doLoadAddon)(addon)
       end
     end

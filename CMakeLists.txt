@@ -1142,6 +1142,25 @@ add_custom_command(
   COMMAND ${CMAKE_COMMAND} -DSRC=${staged} -DDST_DIR=${d} -P
           ${CMAKE_CURRENT_SOURCE_DIR}/cmake/copy_executable.cmake
   DEPENDS ${staged})
+foreach(a WowlessLoadOrderA WowlessLoadOrderC WowlessLoadOrderb)
+  set(d ${CMAKE_CURRENT_BINARY_DIR}/addon/${a})
+  file(MAKE_DIRECTORY ${d})
+  set(out ${d}/${a}.lua)
+  list(APPEND testaddon_outs ${out})
+  add_custom_command(
+    OUTPUT ${out}
+    COMMAND
+      ${CMAKE_COMMAND} -DSRC=${CMAKE_CURRENT_SOURCE_DIR}/addon/${a}/${a}.lua
+      -DDST_DIR=${d} -P ${CMAKE_CURRENT_SOURCE_DIR}/cmake/copy_executable.cmake
+    DEPENDS addon/${a}/${a}.lua)
+  set(out ${d}/${a}.toc)
+  list(APPEND testaddon_outs ${out})
+  add_custom_command(
+    OUTPUT ${out}
+    COMMAND gentoc ${out} ${a}.lua
+    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+    DEPENDS gentoc data/products.yaml ${tocdeps})
+endforeach()
 add_custom_command(
   OUTPUT testaddon.txt
   COMMAND ${CMAKE_COMMAND} -E touch testaddon.txt

@@ -761,6 +761,11 @@ G.testsuite.xml = function()
   assertEquals('', table.concat(_G.WowlessXmlErrors, '\n'))
 end
 
+G.testsuite.loadorder = function()
+  local expected = { 'WowlessLoadOrderA', 'WowlessLoadOrderb', 'WowlessLoadOrderC' }
+  return G.assertScalarArrayEquals(expected, _G.WowlessLoadOrder)
+end
+
 _G.WowlessTestFailures = {}
 _G.WowlessTestsDone = false
 do
