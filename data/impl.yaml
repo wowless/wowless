@@ -446,6 +446,8 @@ GetTime:
     name: time
 hooksecurefunc:
   stdlib: hooksecurefunc
+import:
+  impl:
 ipairs:
   stdlib: ipairs
 IsAddOnLoaded:
@@ -575,8 +577,6 @@ RequestTimePlayed:
   impl:
     modules:
       eventqueue:
-require:
-  impl:
 RunMacroText:
   moduledelegate:
     name: macrotext

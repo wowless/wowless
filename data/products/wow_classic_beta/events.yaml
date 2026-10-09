@@ -9826,6 +9826,11 @@ VOICE_CHAT_ACTIVE_INPUT_DEVICE_UPDATED:
   payload:
 VOICE_CHAT_ACTIVE_OUTPUT_DEVICE_UPDATED:
   payload:
+VOICE_CHAT_ACTIVE_VOICE_PROVIDER_CHANGED:
+  payload:
+  - name: voiceProviderID
+    type:
+      enum: VoiceProviderID
 VOICE_CHAT_AUDIO_CAPTURE_ENERGY:
   payload:
   - name: isSpeaking
@@ -9995,6 +10000,8 @@ VOICE_CHAT_DEAFENED_CHANGED:
   payload:
   - name: isDeafened
     type: boolean
+VOICE_CHAT_DISCORD_SETTINGS_UPDATED:
+  payload:
 VOICE_CHAT_ERROR:
   payload:
   - name: platformCode
@@ -10076,6 +10083,13 @@ VOICE_CHAT_TTS_SPEAK_TEXT_UPDATE:
 VOICE_CHAT_TTS_VOICES_UPDATE:
   payload:
 VOICE_CHAT_VAD_SETTINGS_UPDATED:
+  payload:
+VOICE_CHAT_VOICE_PROVIDER_CHANGED:
+  payload:
+  - name: voiceProviderID
+    type:
+      enum: VoiceProviderID
+VOICE_CHAT_VOICE_PROVIDERS_AVAILABLE_CHANGED:
   payload:
 VOTE_KICK_REASON_NEEDED:
   payload:

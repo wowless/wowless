@@ -608,8 +608,8 @@ typedefs:
       uiobject: UIObject
   cstring:
     type: string
-  DiscordID:
-    type: string
+  DiscordMemberOpaqueID:
+    type: number
   DurationTextBinding:
     type:
       luaobject: DurationTextBinding
@@ -855,6 +855,8 @@ typedefs:
     type: unit
   UnitTokenVariant:
     type: unit
+  VoiceChatID:
+    type: number
   WeeklyRewardItemDBID:
     type: string
   WOWGUID:

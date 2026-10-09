@@ -257,6 +257,7 @@ Constants:
     MAX_CHARACTER_MACROS: 30
   MajorFactionsConsts:
     PLUNDERSTORM_MAJOR_FACTION_ID: 2593
+    PVP_RANK_POINTS_FACTION_ID: 2800
     WORLD_STATE_RAPID_RENOWN_CAP_10_0: 20851
     WORLD_STATE_RENOWN_CAP_10_0: 19735
   MoneyFormattingConstants:
@@ -291,6 +292,11 @@ Constants:
   PvpInfoConsts:
     MAX_PVP_LOCK_LIST_MAP: 2
     MaxPlayersPerInstance: 80
+  QuestConsts:
+    QUEST_INFO_DUNGEON_ID: 81
+    QUEST_INFO_ELITE_ID: 1
+    QUEST_INFO_PVP_ID: 41
+    QUEST_INFO_RAID_ID: 62
   QuestLogConsts:
     MAXIMUM_NUM_QUESTS_LOG_CAN_ACCEPT: 40
   QuestWatchConsts:

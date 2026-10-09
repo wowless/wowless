@@ -2199,20 +2199,8 @@ gamepadraidtargetingstyle:
   default: '1'
 gamepadrunthreshold:
   default: '0.5'
-gamepadshowactionbarbuttonprompts:
-  character: true
-  default: '0'
-gamepadshowactionbarhighlight:
-  character: true
-  default: '1'
-gamepadshowactionbarscaling:
-  character: true
-  default: '1'
 gamepadshowautoauratooltip:
   account: true
-  default: '1'
-gamepadshowemptyactionbars:
-  character: true
   default: '1'
 gamepadshowpersistentinputlegend:
   character: true
@@ -2261,9 +2249,6 @@ gamepadtouchtaprightclick:
   default: '0'
 gamepadturnwithcamera:
   default: '3'
-gamepadusecompactactionbar:
-  character: true
-  default: '0'
 gamepadusepartytargeting:
   default: '1'
 gamepadvibrationstrength:
@@ -4521,12 +4506,18 @@ voiceoutputdevice:
 voiceoutputvolume:
   default: '50'
   locked: true
+voiceprovider:
+  default: '0'
+voiceproxyeventlog:
+  default: '0'
 voicepushtotalkkeybind:
   default: LMETA
   locked: true
 voiceselfdeafened:
   default: '0'
 voiceselfmuted:
+  default: '0'
+voiceusediscordsettings:
   default: '0'
 voicevadsensitivity:
   default: '43'

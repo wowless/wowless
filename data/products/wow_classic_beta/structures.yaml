@@ -5075,6 +5075,9 @@ C_LFGList.LfgEntryData:
       type: number
     voiceChat:
       type: string
+    voiceMode:
+      type:
+        enum: LFGEntryVoiceMode
 C_LFGList.LfgListingCreateData:
   fields:
     activityIDs:
@@ -5112,6 +5115,10 @@ C_LFGList.LfgListingCreateData:
     requiredPvpRating:
       default: 0
       type: number
+    voiceMode:
+      default: None
+      type:
+        enum: LFGEntryVoiceMode
 C_LFGList.LfgSearchResultData:
   fields:
     activityIDs:
@@ -5194,6 +5201,9 @@ C_LFGList.LfgSearchResultData:
       type: number
     voiceChat:
       type: string
+    voiceMode:
+      type:
+        enum: LFGEntryVoiceMode
 C_LFGList.LfgSearchResultPlayerInfo:
   fields:
     areaName:
@@ -11888,7 +11898,7 @@ DiscordChatInfo:
       type:
         enum: DiscordDisplayNameType
     userID:
-      type: string
+      type: number
 DurationTextBindingColorOptions:
   fields:
     curve:

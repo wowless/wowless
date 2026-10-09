@@ -10748,11 +10748,11 @@ C_Discord.GetDiscordUserID:
   inputs:
   outputs:
   - name: userID
-    type: string
+    type: number
 C_Discord.GetDiscordUserName:
   inputs:
   - name: userID
-    type: string
+    type: number
   outputs:
   - name: userName
     type: string
@@ -10829,6 +10829,11 @@ C_Discord.IsUserOAuthed:
   inputs:
   outputs:
   - name: hasOAuth
+    type: boolean
+C_Discord.IsVoiceEnabled:
+  inputs:
+  outputs:
+  - name: enabled
     type: boolean
 C_Discord.RefreshAuth:
   inputs:
@@ -33611,6 +33616,12 @@ C_VoiceChat.GetActiveChannelType:
     nilable: true
     type:
       enum: ChatChannelType
+C_VoiceChat.GetActiveVoiceProviderID:
+  inputs:
+  outputs:
+  - name: activeVoiceProviderID
+    type:
+      enum: VoiceProviderID
 C_VoiceChat.GetAvailableInputDevices:
   inputs:
   outputs:
@@ -33932,6 +33943,10 @@ C_VoiceChat.LeaveChannel:
   outputs:
 C_VoiceChat.Login:
   inputs:
+  - name: channelType
+    nilable: true
+    type:
+      enum: ChatChannelType
   outputs:
   - name: status
     type:
@@ -33961,6 +33976,19 @@ C_VoiceChat.RequestJoinChannelByChannelType:
     nilable: true
     type: boolean
   outputs:
+C_VoiceChat.RestoreActiveVoiceProvider:
+  inputs:
+  outputs:
+  - name: changed
+    type: boolean
+C_VoiceChat.SetActiveVoiceProvider:
+  inputs:
+  - name: voiceProviderID
+    type:
+      enum: VoiceProviderID
+  outputs:
+  - name: success
+    type: boolean
 C_VoiceChat.SetCommunicationMode:
   inputs:
   - name: communicationMode
@@ -36424,6 +36452,26 @@ GetGameTime:
   - name: hour
     type: number
   - name: minute
+    type: number
+GetGlancingBlowChance:
+  inputs:
+  - name: playerWeaponSkill
+    nilable: true
+    type: number
+  - name: targetDefenseSkill
+    type: number
+  outputs:
+  - name: result
+    type: number
+GetGlancingBlowPenalty:
+  inputs:
+  - name: playerWeaponSkill
+    nilable: true
+    type: number
+  - name: targetDefenseSkill
+    type: number
+  outputs:
+  - name: result
     type: number
 GetGlobalEnvironment:
   impl: GetGlobalEnvironment
@@ -39469,6 +39517,8 @@ HearthAndResurrectFromArea:
 HideRepairCursor:
 hooksecurefunc:
   impl: hooksecurefunc
+import:
+  impl: import
 InboxItemCanDelete:
   inputs:
   - name: index
@@ -40788,8 +40838,6 @@ RequestTimePlayed:
   inputs:
   outputs:
 RequeueSkirmish:
-require:
-  impl: require
 ResetChatColors:
 ResetChatWindows:
 ResetCPUUsage:

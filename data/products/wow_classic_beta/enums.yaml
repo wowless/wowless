@@ -1234,6 +1234,9 @@ ChatChannelType:
   values:
     Communities: 4
     Custom: 1
+    DiscordGuild: 6
+    DiscordParty: 5
+    DiscordSolo: 7
     None: 0
     PrivateParty: 2
     PublicParty: 3
@@ -2609,14 +2612,32 @@ DiscordAccountType:
   values:
     Normal: 0
     Provisional: 1
+DiscordChannelID:
+  values:
+    InvalidDiscordID: '0x0000000000000000'
 DiscordDisplayNameType:
   values:
     Default: 0
     GlobalName: 2
     LastOnline: 1
+DiscordGuildID:
+  values:
+    InvalidDiscordID: '0x0000000000000000'
 DiscordGuildSettings:
   values:
     SeparateStream: 1
+DiscordID:
+  values:
+    InvalidDiscordID: '0x0000000000000000'
+DiscordLobbyID:
+  values:
+    InvalidDiscordID: '0x0000000000000000'
+DiscordMemberID:
+  values:
+    InvalidDiscordID: '0x0000000000000000'
+DiscordMessageID:
+  values:
+    InvalidDiscordID: '0x0000000000000000'
 DurationTextBindingProperty:
   values:
     ElapsedDuration: 2
@@ -2793,6 +2814,13 @@ EditModeEncounterEventsSystemIndices:
     MediumWarnings: 3
     NormalWarnings: 4
     Timeline: 1
+EditModeGamepadMainActionBarSetting:
+  values:
+    Compact: 0
+    ShouldExpand: 4
+    ShowButtonPrompts: 2
+    ShowEmptyBars: 1
+    ShowHighlight: 3
 EditModeGroupFinderSetting:
   values:
     Size: 0
@@ -2902,6 +2930,7 @@ EditModeSystem:
     EncounterBar: 4
     EncounterEvents: 22
     ExtraAbilities: 5
+    GamepadMainActionBar: 30
     GroupFinder: 27
     HudTooltip: 11
     LootFrame: 10
@@ -3409,6 +3438,7 @@ GameRule:
     ActionCombatTargetLockEnabled: 87
     AeLootDisabled: 89
     AfterDeathSpectatingUI: 49
+    AllowEmptyLoot: 251
     AllPlayersAreFastMovers: 53
     AlwaysAllowAlliedRaces: 59
     AutoAttacksDisabled: 103
@@ -3514,6 +3544,7 @@ GameRule:
     PlayerNameplateDifficultyIcon: 57
     PlunderstormAreaSelection: 94
     PremadeGroupFinderStyle: 93
+    PreventUnlootableItemsFromDropping: 253
     PreventXPAndLootForExcessiveOutsideHelp: 243
     ProfessionsPanelDisabled: 38
     PvPInitialRatingOverride: 190
@@ -3561,6 +3592,7 @@ GameRule:
     VanillaAccountMailInstant: 91
     VanillaNpcKnockback: 16
     VanillaRageGenerationModifier: 21
+    WeaponSwapIgnoresCombatSwapCd: 252
     WorldMapDisabled: 145
     WorldMapFrameStrata: 100
     WorldMapHelpPlateDisabled: 70
@@ -5324,6 +5356,12 @@ LFGEntryPlaystyle:
     Hardcore: 3
     None: 0
     Standard: 1
+LFGEntryVoiceMode:
+  values:
+    Custom: 3
+    Discord: 2
+    Legacy: 1
+    None: 0
 LFGListDisplayType:
   values:
     ClassEnumerate: 2
@@ -7149,6 +7187,7 @@ SecretAspect:
     Cursor: 1024
     Desaturation: 4096
     FrameLevel: 256
+    FrameStrata: 16777216
     Hierarchy: 1
     ID: 2
     MinimumWidth: 131072
@@ -7605,7 +7644,9 @@ TieredEntranceRewardType:
     Item: 0
 TieredEntranceTierFlag:
   values:
+    DisableTraitSystem: 2
     IsLFG: 1
+    None: 0
 TieredEntranceType:
   values:
     Delve: 1
@@ -8989,6 +9030,10 @@ VoiceChatStatusCode:
     TooManyRequests: 2
     UnableToLaunchProxy: 14
     UnsupportedChatChannelType: 19
+VoiceProviderID:
+  values:
+    Discord: 1
+    Legacy: 0
 VoiceTtsStatusCode:
   values:
     DestinationQueueFull: 8
