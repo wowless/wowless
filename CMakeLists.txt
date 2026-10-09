@@ -660,6 +660,14 @@ add_lua_executable(
 # is always safe.
 set(warningbatchcount 4)
 
+# gentoc reads every product's build.yaml (interface versions) and config.yaml
+# (toc record).
+set(builddeps)
+foreach(product ${products})
+  list(APPEND builddeps data/products/${product}/build.yaml
+       data/products/${product}/config.yaml)
+endforeach()
+
 foreach(product ${products})
   set(d ${CMAKE_CURRENT_BINARY_DIR}/products/${product}/WowlessData)
   set(staging ${CMAKE_CURRENT_BINARY_DIR}/products/${product}/gentest-staging)
@@ -719,6 +727,14 @@ foreach(product ${products})
     gentestto(${bd} WowlessBatch${i}.xml warningbatchxml --batch=${i}
               --batchcount=${warningbatchcount})
   endforeach()
+  set(out ${CMAKE_CURRENT_BINARY_DIR}/products/${product}/tocprecedence.txt)
+  list(APPEND outs ${out})
+  add_custom_command(
+    OUTPUT ${out}
+    COMMAND gentoc ${out} --product ${product} --tocprecedence
+            ${CMAKE_CURRENT_BINARY_DIR}/products/${product}
+    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+    DEPENDS gentoc data/products.yaml ${builddeps})
   add_custom_command(
     OUTPUT ${product}_addon.txt
     COMMAND ${CMAKE_COMMAND} -E touch ${product}_addon.txt
@@ -1159,13 +1175,6 @@ foreach(a WowlessLoadOrderA WowlessLoadOrderC WowlessLoadOrderb)
     WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
     DEPENDS gentoc data/products.yaml ${tocdeps})
 endforeach()
-set(out ${CMAKE_CURRENT_BINARY_DIR}/tocprecedence.txt)
-list(APPEND testaddon_outs ${out})
-add_custom_command(
-  OUTPUT ${out}
-  COMMAND gentoc ${out} --tocprecedence ${CMAKE_CURRENT_BINARY_DIR}/addon
-  WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-  DEPENDS gentoc data/products.yaml ${tocdeps})
 add_custom_command(
   OUTPUT testaddon.txt
   COMMAND ${CMAKE_COMMAND} -E touch testaddon.txt

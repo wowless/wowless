@@ -1,11 +1,13 @@
 local function suffixes(toccfg)
-  return {
-    '-' .. toccfg.gametype,
-    '_' .. toccfg.gametype,
-    '-' .. toccfg.family,
-    '_' .. toccfg.family,
-    '',
-  }
+  local t = { '-' .. toccfg.gametype, '_' .. toccfg.gametype }
+  if toccfg.gametypealias then
+    table.insert(t, '-' .. toccfg.gametypealias)
+    table.insert(t, '_' .. toccfg.gametypealias)
+  end
+  table.insert(t, '-' .. toccfg.family)
+  table.insert(t, '_' .. toccfg.family)
+  table.insert(t, '')
+  return t
 end
 
 local function countMatches(s, state)

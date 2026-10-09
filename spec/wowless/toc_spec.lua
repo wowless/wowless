@@ -191,5 +191,20 @@ describe('wowless.toc', function()
     it('have the empty string as the last member', function()
       assert.same('', suffixes[#suffixes])
     end)
+    local cases = {
+      ['without alias'] = {
+        toccfg = { family = 'Fam', gametype = 'Game' },
+        expected = { '-Game', '_Game', '-Fam', '_Fam', '' },
+      },
+      ['with alias'] = {
+        toccfg = { family = 'Fam', gametype = 'Game', gametypealias = 'alias' },
+        expected = { '-Game', '_Game', '-alias', '_alias', '-Fam', '_Fam', '' },
+      },
+    }
+    for name, case in pairs(cases) do
+      it('are ordered ' .. name, function()
+        assert.same(case.expected, wowlesstoc.suffixes(case.toccfg))
+      end)
+    end
   end)
 end)

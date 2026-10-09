@@ -767,17 +767,34 @@ G.testsuite.loadorder = function()
 end
 
 G.testsuite.tocprecedence = function()
-  -- Highest precedence first. Each WowlessToc<A><B> addon (names sorted)
-  -- holds only category A and B tocs; see tools/gentoc.lua.
-  local precedence = { 'GameDash', 'GameUnderscore', 'FamilyDash', 'FamilyUnderscore', 'Bare' }
-  local tests = {}
-  for i, winner in ipairs(precedence) do
-    for j = i + 1, #precedence do
-      local loser = precedence[j]
-      local addon = 'WowlessToc' .. (winner < loser and winner .. loser or loser .. winner)
-      tests[addon] = function()
-        assertEquals(winner, _G.C_AddOns.GetAddOnMetadata(addon, 'X-TocCategory'))
+  -- Highest precedence first; must stay in sync with tools/gentoc.lua.
+  -- Each per-product WowlessToc<A><B> addon holds only that product's tocs
+  -- for adjacent categories A and B; transitivity covers the rest.
+  local precedence = {
+    'GameDash',
+    'GameUnderscore',
+    'AliasDash',
+    'AliasUnderscore',
+    'FamilyDash',
+    'FamilyUnderscore',
+    'Bare',
+  }
+  -- A product without a gametype alias has no alias tocs to choose from.
+  if not _G.WowlessData.Config.toc.gametypealias then
+    local filtered = {}
+    for _, category in ipairs(precedence) do
+      if category:sub(1, 5) ~= 'Alias' then
+        table.insert(filtered, category)
       end
+    end
+    precedence = filtered
+  end
+  local tests = {}
+  for i = 1, #precedence - 1 do
+    local winner = precedence[i]
+    local addon = 'WowlessToc' .. winner .. precedence[i + 1]
+    tests[addon] = function()
+      assertEquals(winner, _G.C_AddOns.GetAddOnMetadata(addon, 'X-TocCategory'))
     end
   end
   return tests
