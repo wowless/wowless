@@ -1,3 +1,0 @@
-name: excludedgametypes
-type:
-  setof: string

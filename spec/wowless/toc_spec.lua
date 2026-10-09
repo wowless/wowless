@@ -134,8 +134,8 @@ describe('wowless.toc', function()
         'ccc [AllowLoadGameType othergametype]',
         'ddd [AllowLoadGameType nomatch]',
       }
-      local excluded = { otherfamily = true, othergametype = true }
-      local files = parse(gametype, family, table.concat(lines, '\n'), excluded).files
+      local gametypes = { otherfamily = false, othergametype = false }
+      local files = parse(gametype, family, table.concat(lines, '\n'), gametypes).files
       assert.same({ { name = 'aaa' }, { name = 'ddd' } }, files)
     end)
     it('flips ExcludeLoadGameType relative to AllowLoadGameType, except when nothing is recognized', function()
@@ -145,8 +145,8 @@ describe('wowless.toc', function()
         'ccc [ExcludeLoadGameType othergametype]',
         'ddd [ExcludeLoadGameType nomatch]',
       }
-      local excluded = { otherfamily = true, othergametype = true }
-      local files = parse(gametype, family, table.concat(lines, '\n'), excluded).files
+      local gametypes = { otherfamily = false, othergametype = false }
+      local files = parse(gametype, family, table.concat(lines, '\n'), gametypes).files
       -- aaa (own) and bbb/ccc (known but different) flip relative to
       -- AllowLoadGameType's result for the same lines; ddd (nothing
       -- recognized) is a no-op for either directive, so it loads for both
@@ -157,9 +157,18 @@ describe('wowless.toc', function()
         'aaa [AllowLoadGameType otherfamily, nomatch]',
         'bbb [ExcludeLoadGameType otherfamily, nomatch]',
       }
-      local excluded = { otherfamily = true }
-      local files = parse(gametype, family, table.concat(lines, '\n'), excluded).files
+      local gametypes = { otherfamily = false }
+      local files = parse(gametype, family, table.concat(lines, '\n'), gametypes).files
       assert.same({ { name = 'bbb' } }, files)
+    end)
+    it('treats an extra positive gametype like the declared ones', function()
+      local lines = {
+        'aaa [AllowLoadGameType othergametype, extragametype]',
+        'bbb [ExcludeLoadGameType othergametype, extragametype]',
+      }
+      local gametypes = { extragametype = true, othergametype = false }
+      local files = parse(gametype, family, table.concat(lines, '\n'), gametypes).files
+      assert.same({ { name = 'aaa' } }, files)
     end)
     it('handles multiple filters', function()
       local line = 'aaa [AllowLoadGameType ' .. gametype .. '] [AllowLoadEnvironment Global] [Bootstrap]'

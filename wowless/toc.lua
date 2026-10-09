@@ -49,10 +49,10 @@ local filters = {
   end,
 }
 
-local function parse(gametype, family, content, excluded)
+local function parse(gametype, family, content, gametypes)
   local state = {}
-  for k in pairs(excluded) do
-    state[k] = false
+  for k, v in pairs(gametypes) do
+    state[k] = v
   end
   state[gametype:lower()] = true
   state[family:lower()] = true

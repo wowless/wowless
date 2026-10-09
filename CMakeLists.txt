@@ -633,7 +633,7 @@ foreach(product ${products})
     COMMAND fetch ${product}
     COMMAND ${CMAKE_COMMAND} -E touch ${out}
     DEPENDS fetch ${dblist_dep} runtime/products/${product}/build.lua
-            runtime/products/${product}/excludedgametypes.lua)
+            runtime/products/${product}/gametypes.lua)
 endforeach()
 
 lua2c(wowlessblp vstruct=p
@@ -775,7 +775,7 @@ foreach(product ${products})
     docs
     enums
     events
-    excludedgametypes
+    gametypes
     globals
     luaobjects
     scripttypes
@@ -803,8 +803,8 @@ list(
   doctable
   enums
   events
-  excludedgametypes
   function
+  gametypes
   globals
   impl
   luaobjects
@@ -1121,7 +1121,7 @@ list(APPEND testaddon_outs ${out})
 set(tocdeps)
 foreach(product ${products})
   list(APPEND tocdeps data/products/${product}/build.yaml
-       data/products/${product}/excludedgametypes.yaml)
+       data/products/${product}/gametypes.yaml)
 endforeach()
 add_custom_command(
   OUTPUT ${out}

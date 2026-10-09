@@ -17,7 +17,7 @@ for _, product in ipairs(products) do
   interfaces[build.tocversion] = true
   gametypes[build.family:lower()] = true
   gametypes[build.gametype:lower()] = true
-  for k in pairs(yaml.parse(pfile.read('data/products/' .. product .. '/excludedgametypes.yaml'))) do
+  for k in pairs(yaml.parse(pfile.read('data/products/' .. product .. '/gametypes.yaml'))) do
     gametypes[k] = true
   end
 end

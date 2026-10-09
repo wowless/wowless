@@ -531,7 +531,7 @@ local function gameTypeUniverse()
     local build = perproduct(product, 'build')
     universe[build.family:lower()] = true
     universe[build.gametype:lower()] = true
-    for name in pairs(perproduct(product, 'excludedgametypes')) do
+    for name in pairs(perproduct(product, 'gametypes')) do
       universe[name] = true
     end
   end
@@ -539,10 +539,10 @@ local function gameTypeUniverse()
 end
 
 local function expectedGameTypes(p)
-  local myExcluded = perproduct(p, 'excludedgametypes')
+  local myGameTypes = perproduct(p, 'gametypes')
   local expected = {}
   for name in pairs(gameTypeUniverse()) do
-    if not myExcluded[name] then
+    if myGameTypes[name] ~= false then
       expected[name] = true
     end
   end
@@ -560,17 +560,23 @@ local directives = { 'Allow', 'Exclude' }
 
 local function comboTokenLists(p)
   local build = perproduct(p, 'build')
-  local excluded = perproduct(p, 'excludedgametypes')
+  local gametypes = perproduct(p, 'gametypes')
 
   local allExclusions = {}
-  for k in pairs(excluded) do
-    table.insert(allExclusions, k)
+  for k, v in pairs(gametypes) do
+    if not v then
+      table.insert(allExclusions, k)
+    end
   end
   table.sort(allExclusions)
 
-  local allKnown = { build.family:lower(), build.gametype:lower() }
-  for _, t in ipairs(allExclusions) do
-    table.insert(allKnown, t)
+  local knownSet = { [build.family:lower()] = true, [build.gametype:lower()] = true }
+  for k in pairs(gametypes) do
+    knownSet[k] = true
+  end
+  local allKnown = {}
+  for k in pairs(knownSet) do
+    table.insert(allKnown, k)
   end
   table.sort(allKnown)
 

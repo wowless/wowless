@@ -1,0 +1,5 @@
+name: gametypes
+type:
+  mapof:
+    key: string
+    value: boolean

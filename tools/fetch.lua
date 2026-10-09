@@ -9,7 +9,7 @@ local product = args.product
 local log = args.verbose and print or function() end
 
 local build = dofile('runtime/products/' .. product .. '/build.lua')
-local excludedgametypes = dofile('runtime/products/' .. product .. '/excludedgametypes.lua')
+local gametypes = dofile('runtime/products/' .. product .. '/gametypes.lua')
 local fdids = require('runtime.listfile')
 
 local path = require('path')
@@ -93,7 +93,7 @@ local function processTocDir(dir)
   end
   if tocContent then
     save(tocName, tocContent)
-    local files = tocutil.parse(build.gametype, build.family, tocContent, excludedgametypes).files
+    local files = tocutil.parse(build.gametype, build.family, tocContent, gametypes).files
     for _, file in ipairs(files) do
       processFile(joinRelative(tocName, file.name), dir)
     end
