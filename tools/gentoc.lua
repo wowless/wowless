@@ -5,16 +5,21 @@ local pfile = require('pl.file')
 local sorted = require('pl.tablex').sort
 local args = (function()
   local parser = require('argparse')()
-  parser:argument('output', 'generated toc file')
+  parser:argument('output', 'generated toc file, or stamp file with --tocprecedence')
   parser:argument('files', 'files of a simple addon; omit for the Wowless addon'):args('*')
+  parser:option('--tocprecedence', 'directory to write toc precedence test addons into')
   return parser:parse()
 end)()
 
 local interfaces = {}
 local gametypes = {}
+local familynames = {}
+local gametypenames = {}
 for _, product in ipairs(products) do
   local build = yaml.parse(pfile.read('data/products/' .. product .. '/build.yaml'))
   interfaces[build.tocversion] = true
+  familynames[build.family] = true
+  gametypenames[build.gametype] = true
   gametypes[build.family:lower()] = true
   gametypes[build.gametype:lower()] = true
   for k in pairs(yaml.parse(pfile.read('data/products/' .. product .. '/gametypes.yaml'))) do
@@ -33,6 +38,52 @@ local dir = path.dirname(args.output)
 local interfacestrs = {}
 for v in sorted(interfaces) do
   table.insert(interfacestrs, tostring(v))
+end
+
+if args.tocprecedence then
+  -- One addon per pair of toc filename categories, each holding only that
+  -- pair's tocs for every product's family and gametype names. Each toc
+  -- names its category in X-TocCategory, so GetAddOnMetadata reports which
+  -- toc the client chose.
+  for name in pairs(familynames) do
+    assert(not gametypenames[name], name .. ' is both a family and a gametype')
+  end
+  local categories = {
+    Bare = { [''] = true },
+    FamilyDash = {},
+    FamilyUnderscore = {},
+    GameDash = {},
+    GameUnderscore = {},
+  }
+  for name in pairs(familynames) do
+    categories.FamilyDash['-' .. name] = true
+    categories.FamilyUnderscore['_' .. name] = true
+  end
+  for name in pairs(gametypenames) do
+    categories.GameDash['-' .. name] = true
+    categories.GameUnderscore['_' .. name] = true
+  end
+  for a in sorted(categories) do
+    for b in sorted(categories) do
+      if a < b then
+        local addon = 'WowlessToc' .. a .. b
+        local addondir = path.join(args.tocprecedence, addon)
+        path.mkdir(addondir)
+        for _, category in ipairs({ a, b }) do
+          for suffix in pairs(categories[category]) do
+            local lines = {
+              '## Interface: ' .. table.concat(interfacestrs, ', '),
+              '## X-TocCategory: ' .. category,
+              '',
+            }
+            pfile.write(path.join(addondir, addon .. suffix .. '.toc'), table.concat(lines, '\n'))
+          end
+        end
+      end
+    end
+  end
+  pfile.write(args.output, '')
+  return
 end
 
 if #args.files > 0 then

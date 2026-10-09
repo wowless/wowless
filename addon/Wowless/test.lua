@@ -766,6 +766,23 @@ G.testsuite.loadorder = function()
   return G.assertScalarArrayEquals(expected, _G.WowlessLoadOrder)
 end
 
+G.testsuite.tocprecedence = function()
+  -- Highest precedence first. Each WowlessToc<A><B> addon (names sorted)
+  -- holds only category A and B tocs; see tools/gentoc.lua.
+  local precedence = { 'GameDash', 'GameUnderscore', 'FamilyDash', 'FamilyUnderscore', 'Bare' }
+  local tests = {}
+  for i, winner in ipairs(precedence) do
+    for j = i + 1, #precedence do
+      local loser = precedence[j]
+      local addon = 'WowlessToc' .. (winner < loser and winner .. loser or loser .. winner)
+      tests[addon] = function()
+        assertEquals(winner, _G.C_AddOns.GetAddOnMetadata(addon, 'X-TocCategory'))
+      end
+    end
+  end
+  return tests
+end
+
 _G.WowlessTestFailures = {}
 _G.WowlessTestsDone = false
 do

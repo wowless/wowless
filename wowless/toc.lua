@@ -1,9 +1,9 @@
 local function suffixes(gametype, family)
   return {
-    '_' .. gametype,
     '-' .. gametype,
-    '_' .. family,
+    '_' .. gametype,
     '-' .. family,
+    '_' .. family,
     '',
   }
 end

@@ -1161,6 +1161,13 @@ foreach(a WowlessLoadOrderA WowlessLoadOrderC WowlessLoadOrderb)
     WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
     DEPENDS gentoc data/products.yaml ${tocdeps})
 endforeach()
+set(out ${CMAKE_CURRENT_BINARY_DIR}/tocprecedence.txt)
+list(APPEND testaddon_outs ${out})
+add_custom_command(
+  OUTPUT ${out}
+  COMMAND gentoc ${out} --tocprecedence ${CMAKE_CURRENT_BINARY_DIR}/addon
+  WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+  DEPENDS gentoc data/products.yaml ${tocdeps})
 add_custom_command(
   OUTPUT testaddon.txt
   COMMAND ${CMAKE_COMMAND} -E touch testaddon.txt
