@@ -538,16 +538,23 @@ local function gameTypeUniverse()
   return universe
 end
 
+-- Gametype names that every product's client is asserted to treat as
+-- unknown. Must stay in sync with tools/gentoc.lua.
+local unknownGameTypes = { 'bcc', 'nonsensegametype', 'wowlabs' }
+
 local function expectedGameTypes(p)
   local myGameTypes = perproduct(p, 'gametypes')
+  local universe = gameTypeUniverse()
   local expected = {}
-  for name in pairs(gameTypeUniverse()) do
+  for name in pairs(universe) do
     if myGameTypes[name] ~= false then
       expected[name] = true
     end
   end
-  assert(not expected.nonsensegametype)
-  expected.nonsensegametype = true
+  for _, name in ipairs(unknownGameTypes) do
+    assert(not universe[name], ('%s is supposed to be unknown but some product declares it'):format(name))
+    expected[name] = true
+  end
   return expected
 end
 
@@ -584,7 +591,9 @@ local function comboTokenLists(p)
   for _, t in ipairs(allExclusions) do
     table.insert(allExclusionsPlusNonsense, t)
   end
-  table.insert(allExclusionsPlusNonsense, 'nonsensegametype')
+  for _, t in ipairs(unknownGameTypes) do
+    table.insert(allExclusionsPlusNonsense, t)
+  end
 
   return {
     AllKnown = allKnown,

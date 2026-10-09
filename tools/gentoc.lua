@@ -22,9 +22,11 @@ for _, product in ipairs(products) do
   end
 end
 
--- a value no real product declares or excludes, so its marker file must
--- never load
-gametypes.nonsensegametype = true
+-- gametype names every product is asserted to treat as unknown; must stay
+-- in sync with tools/gentest.lua
+for _, k in ipairs({ 'bcc', 'nonsensegametype', 'wowlabs' }) do
+  gametypes[k] = true
+end
 
 local dir = path.dirname(args.output)
 
