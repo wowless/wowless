@@ -17,12 +17,16 @@ local familynames = {}
 local gametypenames = {}
 for _, product in ipairs(products) do
   local build = yaml.parse(pfile.read('data/products/' .. product .. '/build.yaml'))
+  local toccfg = yaml.parse(pfile.read('data/products/' .. product .. '/config.yaml')).toc
   interfaces[build.tocversion] = true
-  familynames[build.family] = true
-  gametypenames[build.gametype] = true
-  gametypes[build.family:lower()] = true
-  gametypes[build.gametype:lower()] = true
-  for k in pairs(yaml.parse(pfile.read('data/products/' .. product .. '/gametypes.yaml'))) do
+  familynames[toccfg.family] = true
+  gametypenames[toccfg.gametype] = true
+  gametypes[toccfg.family:lower()] = true
+  gametypes[toccfg.gametype:lower()] = true
+  if toccfg.gametypealias then
+    gametypes[toccfg.gametypealias] = true
+  end
+  for k in pairs(toccfg.excludedgametypes) do
     gametypes[k] = true
   end
 end

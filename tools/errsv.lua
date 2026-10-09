@@ -156,22 +156,26 @@ if data.generated.events then
 end
 
 if data.generated.gameTypeFilter then
-  local fn = 'data/products/' .. product .. '/gametypes.yaml'
-  local gametypes = yaml.parseFile(fn)
+  local fn = 'data/products/' .. product .. '/config.yaml'
+  local config = yaml.parseFile(fn)
+  local toccfg = config.toc
   for token, v in pairs(data.generated.gameTypeFilter) do
     local value = select(2, assert(getPatternValue(v)))
     if value == true then
       -- real client doesn't recognize this token as known-different; a
       -- single-token marker can't tell positive from unknown, so fall back
       -- to unknown
-      gametypes[token] = nil
+      toccfg.excludedgametypes[token] = nil
     else
       assert(value == nil, v)
       -- real client does recognize this token as known-different
-      gametypes[token] = false
+      toccfg.excludedgametypes[token] = {}
+      if toccfg.gametypealias == token then
+        toccfg.gametypealias = nil
+      end
     end
   end
-  write(fn, yaml.pprint(gametypes))
+  write(fn, yaml.pprint(config))
 end
 
 if data.generated.cvars then

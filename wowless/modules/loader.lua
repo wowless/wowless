@@ -17,15 +17,13 @@ return function(addons, datalua, envmodule, events, loadercfg, log, xmleval)
     end
   end
 
-  local build = datalua.build
-  local gametype = build.gametype
-  local family = build.family
+  local toccfg = datalua.config.toc
   local tocutil = require('wowless.toc')
-  local tocsuffixes = tocutil.suffixes(gametype, family)
+  local tocsuffixes = tocutil.suffixes(toccfg)
 
   local function parseToc(tocFile, content)
     local dir = path.dirname(tocFile)
-    local toc = tocutil.parse(gametype, family, content, datalua.gametypes)
+    local toc = tocutil.parse(toccfg, content)
     for i, f in ipairs(toc.files) do
       toc.files[i].name = path.join(dir, f.name)
     end
@@ -63,10 +61,7 @@ return function(addons, datalua, envmodule, events, loadercfg, log, xmleval)
 
   local addonData = addons.addons
 
-  local gttokens = {
-    [family:lower()] = true,
-    [gametype:lower()] = true,
-  }
+  local gtstate = tocutil.gametypestate(toccfg)
 
   local function isLoadable(addon)
     local a = datalua.cvars.agentuid.default
@@ -80,7 +75,7 @@ return function(addons, datalua, envmodule, events, loadercfg, log, xmleval)
       return true
     end
     for gt in string.gmatch(addon.attrs.AllowLoadGameType, '[^, ]+') do
-      if gttokens[gt] then
+      if gtstate[gt] then
         return true
       end
     end

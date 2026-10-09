@@ -9,7 +9,7 @@ local product = args.product
 local log = args.verbose and print or function() end
 
 local build = dofile('runtime/products/' .. product .. '/build.lua')
-local gametypes = dofile('runtime/products/' .. product .. '/gametypes.lua')
+local toccfg = dofile('runtime/products/' .. product .. '/config.lua').toc
 local fdids = require('runtime.listfile')
 
 local path = require('path')
@@ -79,7 +79,7 @@ local processFile = (function()
 end)()
 
 local tocutil = require('wowless.toc')
-local tocsuffixes = tocutil.suffixes(build.gametype, build.family)
+local tocsuffixes = tocutil.suffixes(toccfg)
 
 local function processTocDir(dir)
   local addonName = path.basename(dir)
@@ -93,7 +93,7 @@ local function processTocDir(dir)
   end
   if tocContent then
     save(tocName, tocContent)
-    local files = tocutil.parse(build.gametype, build.family, tocContent, gametypes).files
+    local files = tocutil.parse(toccfg, tocContent).files
     for _, file in ipairs(files) do
       processFile(joinRelative(tocName, file.name), dir)
     end

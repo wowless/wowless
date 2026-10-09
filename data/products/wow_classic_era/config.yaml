@@ -84,3 +84,15 @@ runtime:
     scenariopoiframe:
     texture:
     worldframe:
+toc:
+  excludedgametypes:
+    cata:
+    mainline:
+    mists:
+    plunderstorm:
+    standard:
+    tbc:
+    wowhack:
+    wrath:
+  family: Classic
+  gametype: Vanilla

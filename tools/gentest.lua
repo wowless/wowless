@@ -525,13 +525,23 @@ local function buildTemplatesXml(p, uiobjectApis)
   return renderXml(ui)
 end
 
+-- Positive gametype tokens for a product's config toc record.
+local function positiveGameTypes(toccfg)
+  local positives = { [toccfg.family:lower()] = true, [toccfg.gametype:lower()] = true }
+  if toccfg.gametypealias then
+    positives[toccfg.gametypealias] = true
+  end
+  return positives
+end
+
 local function gameTypeUniverse()
   local universe = {}
   for _, product in ipairs(readyaml('data/products.yaml')) do
-    local build = perproduct(product, 'build')
-    universe[build.family:lower()] = true
-    universe[build.gametype:lower()] = true
-    for name in pairs(perproduct(product, 'gametypes')) do
+    local toccfg = perproduct(product, 'config').toc
+    for name in pairs(positiveGameTypes(toccfg)) do
+      universe[name] = true
+    end
+    for name in pairs(toccfg.excludedgametypes) do
       universe[name] = true
     end
   end
@@ -543,11 +553,11 @@ end
 local unknownGameTypes = { 'bcc', 'nonsensegametype', 'wowlabs' }
 
 local function expectedGameTypes(p)
-  local myGameTypes = perproduct(p, 'gametypes')
+  local excluded = perproduct(p, 'config').toc.excludedgametypes
   local universe = gameTypeUniverse()
   local expected = {}
   for name in pairs(universe) do
-    if myGameTypes[name] ~= false then
+    if not excluded[name] then
       expected[name] = true
     end
   end
@@ -566,19 +576,16 @@ local combos = { 'AllKnown', 'AllExclusions', 'AllExclusionsPlusNonsense' }
 local directives = { 'Allow', 'Exclude' }
 
 local function comboTokenLists(p)
-  local build = perproduct(p, 'build')
-  local gametypes = perproduct(p, 'gametypes')
+  local toccfg = perproduct(p, 'config').toc
 
   local allExclusions = {}
-  for k, v in pairs(gametypes) do
-    if not v then
-      table.insert(allExclusions, k)
-    end
+  for k in pairs(toccfg.excludedgametypes) do
+    table.insert(allExclusions, k)
   end
   table.sort(allExclusions)
 
-  local knownSet = { [build.family:lower()] = true, [build.gametype:lower()] = true }
-  for k in pairs(gametypes) do
+  local knownSet = positiveGameTypes(toccfg)
+  for k in pairs(toccfg.excludedgametypes) do
     knownSet[k] = true
   end
   local allKnown = {}

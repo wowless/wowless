@@ -1,9 +1,9 @@
-local function suffixes(gametype, family)
+local function suffixes(toccfg)
   return {
-    '-' .. gametype,
-    '_' .. gametype,
-    '-' .. family,
-    '_' .. family,
+    '-' .. toccfg.gametype,
+    '_' .. toccfg.gametype,
+    '-' .. toccfg.family,
+    '_' .. toccfg.family,
     '',
   }
 end
@@ -49,15 +49,23 @@ local filters = {
   end,
 }
 
-local function parse(gametype, family, content, gametypes)
+local function gametypestate(toccfg)
   local state = {}
-  for k, v in pairs(gametypes) do
-    state[k] = v
+  for k in pairs(toccfg.excludedgametypes) do
+    state[k] = false
   end
-  state[gametype:lower()] = true
-  state[family:lower()] = true
-  content = content:gsub('%[Game%]', gametype)
-  content = content:gsub('%[Family%]', family)
+  state[toccfg.gametype:lower()] = true
+  state[toccfg.family:lower()] = true
+  if toccfg.gametypealias then
+    state[toccfg.gametypealias] = true
+  end
+  return state
+end
+
+local function parse(toccfg, content)
+  local state = gametypestate(toccfg)
+  content = content:gsub('%[Game%]', toccfg.gametype)
+  content = content:gsub('%[Family%]', toccfg.family)
   local toc = { attrs = {}, deps = {}, files = {}, optionaldeps = {} }
   for line in content:gmatch('[^\r\n]+') do
     local allok = true
@@ -104,6 +112,7 @@ local function parse(gametype, family, content, gametypes)
 end
 
 return {
+  gametypestate = gametypestate,
   parse = parse,
   suffixes = suffixes,
 }

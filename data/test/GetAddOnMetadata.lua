@@ -2,8 +2,8 @@ local T, GetAddOnMetadata = ...
 local kv = {
   Notes = 'WoW client unit tests',
   Title = 'Wowless',
-  ['X-Family'] = T.data.build.family,
-  ['X-GameType'] = T.data.build.gametype,
+  ['X-Family'] = T.data.config.toc.family,
+  ['X-GameType'] = T.data.config.toc.gametype,
 }
 local knil = {
   'Dependencies',

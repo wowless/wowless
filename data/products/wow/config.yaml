@@ -117,3 +117,15 @@ runtime:
     texture:
     vectorgraphics:
     worldframe:
+toc:
+  excludedgametypes:
+    cata:
+    classic:
+    mists:
+    plunderstorm:
+    tbc:
+    vanilla:
+    wowhack:
+    wrath:
+  family: Mainline
+  gametype: Standard

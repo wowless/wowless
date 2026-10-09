@@ -524,7 +524,6 @@ local data = {
   config = parseYaml('data/products/' .. product .. '/config.yaml'),
   cvars = parseYaml('data/products/' .. product .. '/cvars.yaml'),
   events = events,
-  gametypes = parseYaml('data/products/' .. product .. '/gametypes.yaml'),
   globals = globals,
   luaobjects = luaobjects,
   product = product,

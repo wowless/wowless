@@ -99,3 +99,19 @@ type:
           warners:
             type:
               setof: string
+    toc:
+      required: true
+      type:
+        record:
+          excludedgametypes:
+            required: true
+            type:
+              setof: string
+          family:
+            required: true
+            type: string
+          gametype:
+            required: true
+            type: string
+          gametypealias:
+            type: string
