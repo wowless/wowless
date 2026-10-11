@@ -12,6 +12,10 @@ type:
           type: string
         locked:
           type: flag
+        platform:
+          type:
+            taggedunion:
+              mac: tag
         readonly:
           type: flag
         secure:
