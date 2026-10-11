@@ -23,7 +23,10 @@ return function(parentkey, uiobjecttypes, visibility)
   }
 
   local function DoSetParent(obj, parent)
-    if obj.parent == parent then
+    -- The `visible` check makes this fire only once at creation for the
+    -- common case of a nil-parent object, so `visible` still gets its
+    -- initial value even though `parent` didn't change from its default.
+    if obj.parent == parent and obj.visible ~= nil then
       return
     end
     local field = GetChildField(obj.type)
@@ -40,6 +43,7 @@ return function(parentkey, uiobjecttypes, visibility)
     if parent then
       parent[field]:insert(obj)
     end
+    obj.visible = obj.shown and IsVisible(parent)
     if parent and parent.frameLevel and obj.frameLevel and not obj.hasFixedFrameLevel then
       obj:SetFrameLevel(parent.frameLevel + 1)
     end
@@ -94,15 +98,11 @@ return function(parentkey, uiobjecttypes, visibility)
       end
       p = p.parent
     end
-    if obj.shown then
-      local opv = IsVisible(obj.parent)
-      local npv = IsVisible(parent)
-      DoSetParent(obj, parent)
-      if opv ~= npv then
-        UpdateVisible(obj, npv)
-      end
-    else
-      DoSetParent(obj, parent)
+    local wasVisible = IsVisible(obj)
+    DoSetParent(obj, parent)
+    local isVisible = IsVisible(obj)
+    if wasVisible ~= isVisible then
+      UpdateVisible(obj, isVisible)
     end
   end
 
