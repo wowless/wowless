@@ -134,6 +134,37 @@ lies:
         _add:
         - name: unregistered
           type: boolean
+  enums:
+    DiscordChannelID:
+      InvalidDiscordID:
+        _change:
+          from: 0
+          to: '0x0000000000000000'
+    DiscordGuildID:
+      InvalidDiscordID:
+        _change:
+          from: 0
+          to: '0x0000000000000000'
+    DiscordID:
+      InvalidDiscordID:
+        _change:
+          from: 0
+          to: '0x0000000000000000'
+    DiscordLobbyID:
+      InvalidDiscordID:
+        _change:
+          from: 0
+          to: '0x0000000000000000'
+    DiscordMemberID:
+      InvalidDiscordID:
+        _change:
+          from: 0
+          to: '0x0000000000000000'
+    DiscordMessageID:
+      InvalidDiscordID:
+        _change:
+          from: 0
+          to: '0x0000000000000000'
   extra_apis:
     C_BarberShopInternal.SetQAMode:
     C_CinematicList.GetUICinematicList:

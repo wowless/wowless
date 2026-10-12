@@ -5116,7 +5116,7 @@ C_LFGList.LfgListingCreateData:
       default: 0
       type: number
     voiceMode:
-      default: None
+      default: 0
       type:
         enum: LFGEntryVoiceMode
 C_LFGList.LfgSearchResultData:

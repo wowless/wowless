@@ -17,6 +17,13 @@ type:
                   ref:
                     schema: apis
                 value: any
+          enums:
+            type:
+              mapof:
+                key:
+                  ref:
+                    schema: enums
+                value: any
           events:
             type:
               mapof:
