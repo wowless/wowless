@@ -126,6 +126,19 @@ if data.generated.impltests then
       write(bf, yaml.pprint(build))
     end
   end
+  local itb = data.generated.impltests.IsTestBuild
+  if itb then
+    local v = itb.IsTestBuild['1']
+    local bf = 'data/products/' .. product .. '/build.yaml'
+    local build = yaml.parseFile(bf)
+    if v == 'want true, got false' then
+      build.test = false
+    else
+      assert(v == 'want false, got true', v)
+      build.test = true
+    end
+    write(bf, yaml.pprint(build))
+  end
 end
 
 if data.generated.events then
