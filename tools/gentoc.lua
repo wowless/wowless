@@ -48,7 +48,7 @@ if args.tocprecedence then
   -- GetAddOnMetadata reports which toc the client chose.
   local product = assert(args.product, '--tocprecedence requires --product')
   local toccfg = yaml.parse(pfile.read('data/products/' .. product .. '/config.yaml')).toc
-  local alias = toccfg.gametypealias
+  local alias = toccfg.tocsuffixalias
   local tocsuffixes = {
     AliasDash = alias and '-' .. alias,
     AliasUnderscore = alias and '_' .. alias,

@@ -779,8 +779,8 @@ G.testsuite.tocprecedence = function()
     'FamilyUnderscore',
     'Bare',
   }
-  -- A product without a gametype alias has no alias tocs to choose from.
-  if not _G.WowlessData.Config.toc.gametypealias then
+  -- A product without a toc suffix alias has no alias tocs to choose from.
+  if not _G.WowlessData.Config.toc.tocsuffixalias then
     local filtered = {}
     for _, category in ipairs(precedence) do
       if category:sub(1, 5) ~= 'Alias' then

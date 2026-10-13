@@ -115,3 +115,5 @@ type:
             type: string
           gametypealias:
             type: string
+          tocsuffixalias:
+            type: string

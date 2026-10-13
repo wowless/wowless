@@ -1,8 +1,8 @@
 local function suffixes(toccfg)
   local t = { '-' .. toccfg.gametype, '_' .. toccfg.gametype }
-  if toccfg.gametypealias then
-    table.insert(t, '-' .. toccfg.gametypealias)
-    table.insert(t, '_' .. toccfg.gametypealias)
+  if toccfg.tocsuffixalias then
+    table.insert(t, '-' .. toccfg.tocsuffixalias)
+    table.insert(t, '_' .. toccfg.tocsuffixalias)
   end
   table.insert(t, '-' .. toccfg.family)
   table.insert(t, '_' .. toccfg.family)

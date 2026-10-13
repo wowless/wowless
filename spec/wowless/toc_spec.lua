@@ -196,8 +196,12 @@ describe('wowless.toc', function()
         toccfg = { family = 'Fam', gametype = 'Game' },
         expected = { '-Game', '_Game', '-Fam', '_Fam', '' },
       },
-      ['with alias'] = {
-        toccfg = { family = 'Fam', gametype = 'Game', gametypealias = 'alias' },
+      ['with only a gametype alias'] = {
+        toccfg = { family = 'Fam', gametype = 'Game', gametypealias = 'gtalias' },
+        expected = { '-Game', '_Game', '-Fam', '_Fam', '' },
+      },
+      ['with a toc suffix alias'] = {
+        toccfg = { family = 'Fam', gametype = 'Game', gametypealias = 'gtalias', tocsuffixalias = 'alias' },
         expected = { '-Game', '_Game', '-alias', '_alias', '-Fam', '_Fam', '' },
       },
     }
