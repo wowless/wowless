@@ -26,11 +26,14 @@ for _, product in ipairs(products) do
   for k in pairs(toccfg.excludedgametypes) do
     gametypes[k] = true
   end
+  if toccfg.tocsuffixalias then
+    gametypes[toccfg.tocsuffixalias] = true
+  end
 end
 
 -- gametype names every product is asserted to treat as unknown; must stay
 -- in sync with tools/gentest.lua
-for _, k in ipairs({ 'bcc', 'nonsensegametype', 'wowlabs' }) do
+for _, k in ipairs({ 'nonsensegametype', 'wowlabs' }) do
   gametypes[k] = true
 end
 

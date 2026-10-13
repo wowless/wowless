@@ -544,13 +544,16 @@ local function gameTypeUniverse()
     for name in pairs(toccfg.excludedgametypes) do
       universe[name] = true
     end
+    if toccfg.tocsuffixalias then
+      universe[toccfg.tocsuffixalias] = true
+    end
   end
   return universe
 end
 
 -- Gametype names that every product's client is asserted to treat as
 -- unknown. Must stay in sync with tools/gentoc.lua.
-local unknownGameTypes = { 'bcc', 'nonsensegametype', 'wowlabs' }
+local unknownGameTypes = { 'nonsensegametype', 'wowlabs' }
 
 local function expectedGameTypes(p)
   local excluded = perproduct(p, 'config').toc.excludedgametypes
@@ -594,11 +597,24 @@ local function comboTokenLists(p)
   end
   table.sort(allKnown)
 
+  -- Nonsense is every token this product treats as unknown: the universe
+  -- tokens it neither matches nor excludes, plus the always-unknown ones.
+  local nonsense = {}
+  for k in pairs(gameTypeUniverse()) do
+    if not knownSet[k] then
+      table.insert(nonsense, k)
+    end
+  end
+  for _, t in ipairs(unknownGameTypes) do
+    table.insert(nonsense, t)
+  end
+  table.sort(nonsense)
+
   local allExclusionsPlusNonsense = {}
   for _, t in ipairs(allExclusions) do
     table.insert(allExclusionsPlusNonsense, t)
   end
-  for _, t in ipairs(unknownGameTypes) do
+  for _, t in ipairs(nonsense) do
     table.insert(allExclusionsPlusNonsense, t)
   end
 
