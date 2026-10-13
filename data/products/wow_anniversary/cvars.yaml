@@ -1977,7 +1977,7 @@ graphicsshadowquality:
 graphicsssao:
   default: '1'
 graphicssunshafts:
-  default: '0'
+  default: '1'
 graphicstextureresolution:
   default: '1'
 groundeffectanimation:
@@ -2883,7 +2883,7 @@ raidgraphicsshadowquality:
 raidgraphicsssao:
   default: '1'
 raidgraphicssunshafts:
-  default: '0'
+  default: '1'
 raidgraphicstextureresolution:
   default: '1'
 raidgroundeffectanimation:
