@@ -800,6 +800,13 @@ G.testsuite.tocprecedence = function()
   return tests
 end
 
+G.testsuite.tocnonpositive = function()
+  -- WowlessTocNonPositive holds a bare toc plus tocs suffixed with every
+  -- gametype token that is not a toc suffix for this product; see
+  -- tools/gentoc.lua.
+  assertEquals('Bare', _G.C_AddOns.GetAddOnMetadata('WowlessTocNonPositive', 'X-TocCategory'))
+end
+
 _G.WowlessTestFailures = {}
 _G.WowlessTestsDone = false
 do

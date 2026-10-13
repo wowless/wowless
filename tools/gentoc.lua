@@ -8,7 +8,8 @@ local args = (function()
   parser:argument('output', 'generated toc file, or stamp file with --tocprecedence')
   parser:argument('files', 'files of a simple addon; omit for the Wowless addon'):args('*')
   parser:option('--tocprecedence', 'directory to write toc precedence test addons into')
-  parser:option('--product', 'product for --tocprecedence'):choices(products)
+  parser:option('--tocnonpositive', 'directory to write the non-positive gametype toc test addon into')
+  parser:option('--product', 'product for --tocprecedence and --tocnonpositive'):choices(products)
   return parser:parse()
 end)()
 
@@ -42,6 +43,40 @@ local dir = path.dirname(args.output)
 local interfacestrs = {}
 for v in sorted(interfaces) do
   table.insert(interfacestrs, tostring(v))
+end
+
+if args.tocnonpositive then
+  -- A bare toc plus a - suffixed toc for every gametype token that is not a
+  -- toc suffix for this product. Each toc names its suffix (or Bare) in
+  -- X-TocCategory, so GetAddOnMetadata reports which toc the client chose.
+  local product = assert(args.product, '--tocnonpositive requires --product')
+  local toccfg = yaml.parse(pfile.read('data/products/' .. product .. '/config.yaml')).toc
+  local positives = {
+    [toccfg.family:lower()] = true,
+    [toccfg.gametype:lower()] = true,
+  }
+  if toccfg.tocsuffixalias then
+    positives[toccfg.tocsuffixalias] = true
+  end
+  local addon = 'WowlessTocNonPositive'
+  local addondir = path.join(args.tocnonpositive, addon)
+  path.mkdir(addondir)
+  local suffixes = { [''] = 'Bare' }
+  for token in pairs(gametypes) do
+    if not positives[token] then
+      suffixes['-' .. token] = '-' .. token
+    end
+  end
+  for suffix, category in pairs(suffixes) do
+    local lines = {
+      '## Interface: ' .. table.concat(interfacestrs, ', '),
+      '## X-TocCategory: ' .. category,
+      '',
+    }
+    pfile.write(path.join(addondir, addon .. suffix .. '.toc'), table.concat(lines, '\n'))
+  end
+  pfile.write(args.output, '')
+  return
 end
 
 if args.tocprecedence then

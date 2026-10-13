@@ -735,6 +735,14 @@ foreach(product ${products})
             ${CMAKE_CURRENT_BINARY_DIR}/products/${product}
     WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
     DEPENDS gentoc data/products.yaml ${builddeps})
+  set(out ${CMAKE_CURRENT_BINARY_DIR}/products/${product}/tocnonpositive.txt)
+  list(APPEND outs ${out})
+  add_custom_command(
+    OUTPUT ${out}
+    COMMAND gentoc ${out} --product ${product} --tocnonpositive
+            ${CMAKE_CURRENT_BINARY_DIR}/products/${product}
+    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+    DEPENDS gentoc data/products.yaml ${builddeps})
   add_custom_command(
     OUTPUT ${product}_addon.txt
     COMMAND ${CMAKE_COMMAND} -E touch ${product}_addon.txt
