@@ -7294,6 +7294,11 @@ Region:
       outputs:
       - name: right
         type: number
+    GetRoundLayoutToNearestPixel:
+      inputs:
+      outputs:
+      - name: enabled
+        type: boolean
     GetScaledRect:
       impl:
         uiobjectimpl: Region/GetScaledRect
@@ -7554,6 +7559,11 @@ Region:
     SetPropagateMouseMotion:
       inputs:
       - name: propagate
+        type: boolean
+      outputs:
+    SetRoundLayoutToNearestPixel:
+      inputs:
+      - name: enabled
         type: boolean
       outputs:
     SetSize:

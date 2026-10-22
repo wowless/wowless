@@ -682,6 +682,283 @@ LuaFunctionContainer:
     Cancel:
     Invoke:
     IsCancelled:
+LuaLocaleContext:
+  methods:
+    CompareStrings:
+      inputs:
+      - name: left
+        type: string
+      - name: right
+        type: string
+      - name: strength
+        type:
+          enum: CollationStrength
+      mayreturnnothing: true
+      outputs:
+      - name: result
+        type: number
+    FindBreaks:
+      inputs:
+      - name: text
+        type: string
+      - name: breakType
+        type:
+          enum: BreakType
+      mayreturnnothing: true
+      outputs:
+      - name: byteOffsets
+        type:
+          arrayof: number
+    FindStringMatches:
+      inputs:
+      - name: text
+        type: string
+      - name: pattern
+        type: string
+      - name: strength
+        type:
+          enum: CollationStrength
+      mayreturnnothing: true
+      outputs:
+      - name: byteOffsets
+        type:
+          arrayof: number
+    FoldCase:
+      inputs:
+      - name: text
+        type: string
+      mayreturnnothing: true
+      outputs:
+      - name: result
+        type: string
+    FormatCurrency:
+      inputs:
+      - name: number
+        type: number
+      - name: currencyCode
+        type: string
+      mayreturnnothing: true
+      outputs:
+      - name: result
+        type: string
+    FormatDate:
+      inputs:
+      - name: unixTimeSeconds
+        type: number
+      - name: style
+        type:
+          enum: DateTimeStyle
+      - name: timeZone
+        type: string
+      mayreturnnothing: true
+      outputs:
+      - name: result
+        type: string
+    FormatDateTime:
+      inputs:
+      - name: unixTimeSeconds
+        type: number
+      - name: dateStyle
+        type:
+          enum: DateTimeStyle
+      - name: timeStyle
+        type:
+          enum: DateTimeStyle
+      - name: timeZone
+        type: string
+      mayreturnnothing: true
+      outputs:
+      - name: result
+        type: string
+    FormatNumber:
+      inputs:
+      - name: number
+        type: number
+      - name: style
+        type:
+          enum: NumberStyle
+      mayreturnnothing: true
+      outputs:
+      - name: result
+        type: string
+    FormatTime:
+      inputs:
+      - name: unixTimeSeconds
+        type: number
+      - name: style
+        type:
+          enum: DateTimeStyle
+      - name: timeZone
+        type: string
+      mayreturnnothing: true
+      outputs:
+      - name: result
+        type: string
+    GetCurrencyName:
+      inputs:
+      - name: currencyCode
+        type: string
+      - name: style
+        type:
+          enum: CurrencyNameStyle
+      mayreturnnothing: true
+      outputs:
+      - name: result
+        type: string
+    GetDisplayName:
+      inputs:
+      - name: displayLocale
+        type: string
+      mayreturnnothing: true
+      outputs:
+      - name: result
+        type: string
+    GetLocale:
+      inputs:
+      outputs:
+      - name: result
+        type: string
+    GetSortKey:
+      inputs:
+      - name: text
+        type: string
+      - name: strength
+        type:
+          enum: CollationStrength
+      mayreturnnothing: true
+      outputs:
+      - name: result
+        type: string
+    Length:
+      inputs:
+      - name: text
+        type: string
+      mayreturnnothing: true
+      outputs:
+      - name: result
+        type: number
+    ParseCurrency:
+      inputs:
+      - name: text
+        type: string
+      mayreturnnothing: true
+      outputs:
+      - name: result
+        type:
+          structure: CurrencyParseResult
+    ParseNumber:
+      inputs:
+      - name: text
+        type: string
+      - name: style
+        type:
+          enum: NumberStyle
+      mayreturnnothing: true
+      outputs:
+      - name: result
+        type: number
+    SelectPlural:
+      inputs:
+      - name: number
+        type: number
+      - name: pluralType
+        type:
+          enum: PluralType
+      mayreturnnothing: true
+      outputs:
+      - name: result
+        type: string
+    SetLocale:
+      inputs:
+      - name: locale
+        type: string
+      outputs:
+      - name: success
+        type: boolean
+    ToLower:
+      inputs:
+      - name: text
+        type: string
+      mayreturnnothing: true
+      outputs:
+      - name: result
+        type: string
+    ToTitle:
+      inputs:
+      - name: text
+        type: string
+      mayreturnnothing: true
+      outputs:
+      - name: result
+        type: string
+    ToUpper:
+      inputs:
+      - name: text
+        type: string
+      mayreturnnothing: true
+      outputs:
+      - name: result
+        type: string
+    TransformLocale:
+      inputs:
+      - name: transform
+        type:
+          enum: LocaleTransform
+      mayreturnnothing: true
+      outputs:
+      - name: result
+        type: string
+LuaTimedSignalMapObject:
+  methods:
+    CancelAllSignals:
+      inputs:
+      outputs:
+    CancelSignal:
+      inputs:
+      - name: key
+        type: number
+      outputs:
+    GetNextSignal:
+      inputs:
+      outputs:
+      - name: key
+        type: number
+      - name: time
+        type: number
+    GetSignalCount:
+      inputs:
+      outputs:
+      - name: count
+        type: number
+    GetSignalTime:
+      inputs:
+      - name: key
+        type: number
+      outputs:
+      - name: time
+        nilable: true
+        type: number
+    HasSignal:
+      inputs:
+      - name: key
+        type: number
+      outputs:
+      - name: hasSignal
+        type: boolean
+    SignalAfter:
+      inputs:
+      - name: key
+        type: number
+      - name: secondsFromNow
+        type: number
+      outputs:
+    SignalAt:
+      inputs:
+      - name: key
+        type: number
+      - name: time
+        type: number
+      outputs:
 NumericFormatter:
   methods:
     FormatNumber:

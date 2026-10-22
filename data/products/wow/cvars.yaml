@@ -319,6 +319,12 @@ caaplayerhealthvoice:
 caaplayerhealthvolume:
   account: true
   default: '100'
+caapulseplayerhealthpercent:
+  account: true
+  default: '0'
+caapulseplayerhealthvolume:
+  account: true
+  default: '100'
 caaresource1formats:
   character: true
   default: ''
@@ -1578,6 +1584,9 @@ cooldownviewerenabled:
 cooldownviewershowunlearned:
   account: true
   default: '1'
+coordsbytenths:
+  account: true
+  default: '1'
 countdownforcooldowns:
   account: true
   default: '0'
@@ -2506,6 +2515,8 @@ maxfpsbk:
   default: '30'
 maxfpsloading:
   default: '10'
+maximumconnectionattempts:
+  default: '2'
 maxlevelspecsused:
   character: true
   default: '0'
@@ -2529,6 +2540,9 @@ minimapshapeshifttracking:
   character: true
   default: ''
   locked: true
+minimapshowplayercoords:
+  account: true
+  default: '1'
 minimaptrackedinfov4:
   character: true
   default: '3103471'
@@ -2600,6 +2614,9 @@ nameplateaurascale:
   account: true
   default: '1.000000'
   secure: true
+nameplatebottominset:
+  default: '0.100000'
+  secure: true
 nameplatecastbardisplay:
   account: true
   default: "\x02["
@@ -2664,6 +2681,9 @@ nameplateminscale:
 nameplateminscaledistance:
   character: true
   default: '10.000000'
+  secure: true
+nameplatemotionspeed:
+  default: '0.025000'
   secure: true
 nameplatenotselectedalpha:
   default: '-1.000000'
@@ -2804,6 +2824,9 @@ nameplatetargetradialposition:
 nameplatethreatdisplay:
   account: true
   default: "\x02"
+nameplatetopinset:
+  default: '0.080000'
+  secure: true
 nameplateuseclasscolorforfriendlyplayerunitnames:
   account: true
   default: '0'
@@ -3055,6 +3078,9 @@ raidfarclip:
 raidframescenterbigdefensive:
   character: true
   default: '1'
+raidframesdispelindicatoranimatedborder:
+  character: true
+  default: '0'
 raidframesdispelindicatoroverlay:
   character: true
   default: '1'
@@ -3311,6 +3337,10 @@ secondaryprofessionsfilter:
 secureabilitytoggle:
   account: true
   default: '1'
+seenageverificationrestrictionstate:
+  account: true
+  default: '0'
+  locked: true
 seenalliedraceunlocks:
   default: '0'
 seenasiacharacterupgradepopup:
@@ -3954,7 +3984,11 @@ titlebarshowrealmname:
 toastduration:
   account: true
   default: '4'
+tooltipshowauracasternames:
+  account: true
+  default: '0'
 tooltipshowauraspellids:
+  account: true
   default: '0'
 toyboxcollectedfilters:
   account: true

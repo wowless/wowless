@@ -799,12 +799,23 @@ C_AuraContainerUtil.CustomAuraButtonApplicationBarOptions:
         enum: StatusBarInterpolation
     maxApplications:
       type: number
+    minApplications:
+      default: 0
+      type: number
 C_AuraContainerUtil.CustomAuraButtonApplicationCountOptions:
   fields:
     formatter:
       nilable: true
       type:
         luaobject: NumericFormatter
+C_AuraContainerUtil.CustomAuraButtonCasterNameOptions:
+  fields:
+    showRealmName:
+      default: false
+      type: boolean
+    useClassColors:
+      default: false
+      type: boolean
 C_AuraContainerUtil.CustomAuraButtonDispelTypeTextOptions:
   fields:
     customDispelTextMap:
@@ -3489,9 +3500,6 @@ C_EventToastManager.EventToastInfo:
       type: number
     flags:
       type: number
-    hideDefaultAtlas:
-      nilable: true
-      type: boolean
     hideSoundKitID:
       nilable: true
       type: number
@@ -7332,7 +7340,11 @@ C_ScenarioInfo.ScenarioCriteriaInfo:
       type: number
 C_ScenarioInfo.ScenarioDisplayInfo:
   fields:
+    startSoundKitID:
+      nilable: true
+      type: number
     themeColor:
+      nilable: true
       type:
         structure: colorRGB
 C_ScenarioInfo.ScenarioIconInfo:
@@ -10665,6 +10677,14 @@ C_WarbandScene.WarbandSceneSearchInfo:
     ownedOnly:
       default: false
       type: boolean
+C_Weather.WeatherInfo:
+  fields:
+    intensity:
+      type: number
+    type:
+      default: 0
+      type:
+        enum: WeatherType
 C_WeeklyRewards.ConquestWeeklyProgress:
   fields:
     displayType:
@@ -10816,6 +10836,22 @@ CharacterAlternateFormData:
       type: string
     raceID:
       type: number
+CharacterProperties:
+  fields:
+    blockCode:
+      type: string
+    codePoint:
+      type: number
+    generalCategory:
+      type: string
+    isAlphabetic:
+      type: boolean
+    isDigit:
+      type: boolean
+    isWhitespace:
+      type: boolean
+    scriptCode:
+      type: string
 CharCustomizationCategory:
   fields:
     cameraDistanceOffset:
@@ -11588,6 +11624,30 @@ CreateFontFamilyMemberInfo:
       type: string
     height:
       type: number
+CreateFrameOptions:
+  fields:
+    forbidden:
+      default: false
+      type: boolean
+    frameType:
+      type: string
+    hidden:
+      default: false
+      type: boolean
+    id:
+      nilable: true
+      type: number
+    inherits:
+      nilable: true
+      type:
+        arrayof: string
+    name:
+      nilable: true
+      type: string
+    parent:
+      nilable: true
+      type:
+        uiobject: Frame
 CriteriaRequiredValue:
   fields:
     criteriaID:
@@ -11606,6 +11666,12 @@ CurrencyCost:
       type: number
     currencyID:
       type: number
+CurrencyParseResult:
+  fields:
+    amount:
+      type: number
+    currencyCode:
+      type: string
 DBColorExport:
   fields:
     baseTag:
@@ -12888,6 +12954,16 @@ RuneforgePower:
     state:
       type:
         enum: RuneforgePowerState
+ScriptBucketThrottleLimits:
+  fields:
+    luaScriptBucketThrottleMaxMsBurstNormal:
+      type: number
+    luaScriptBucketThrottleMaxMsBurstRestricted:
+      type: number
+    luaScriptBucketThrottleMaxMsPerSecondNormal:
+      type: number
+    luaScriptBucketThrottleMaxMsPerSecondRestricted:
+      type: number
 SecureCopyOptions:
   fields:
     maxTraversalDepth:
@@ -13222,6 +13298,9 @@ UnitAuraSoundInfo:
       nilable: true
       type: string
     spellID:
+      type: number
+    throttleSeconds:
+      nilable: true
       type: number
     unitToken:
       type: string

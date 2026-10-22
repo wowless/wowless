@@ -522,7 +522,6 @@ BagFlag:
     IgnoreExisting: 8192
     IgnorePetBankcheck: 131072
     IgnoreReagentBags: 8388608
-    IgnoreSoulbound: 4194304
     LookInAccountBankOnly: 16777216
     LookInCharacterBankOnly: 32768
     LookInInventory: 32
@@ -831,6 +830,65 @@ BonusStatIndex:
     PvPPower: 57
     Rage: 9
     RangedAttackPower: 39
+    Reserved_100: 100
+    Reserved_101: 101
+    Reserved_102: 102
+    Reserved_103: 103
+    Reserved_104: 104
+    Reserved_105: 105
+    Reserved_106: 106
+    Reserved_107: 107
+    Reserved_108: 108
+    Reserved_109: 109
+    Reserved_110: 110
+    Reserved_111: 111
+    Reserved_112: 112
+    Reserved_113: 113
+    Reserved_114: 114
+    Reserved_115: 115
+    Reserved_116: 116
+    Reserved_117: 117
+    Reserved_118: 118
+    Reserved_119: 119
+    Reserved_120: 120
+    Reserved_121: 121
+    Reserved_122: 122
+    Reserved_123: 123
+    Reserved_124: 124
+    Reserved_125: 125
+    Reserved_126: 126
+    Reserved_127: 127
+    Reserved_128: 128
+    Reserved_129: 129
+    Reserved_130: 130
+    Reserved_131: 131
+    Reserved_132: 132
+    Reserved_133: 133
+    Reserved_134: 134
+    Reserved_135: 135
+    Reserved_136: 136
+    Reserved_137: 137
+    Reserved_138: 138
+    Reserved_139: 139
+    Reserved_140: 140
+    Reserved_141: 141
+    Reserved_83: 83
+    Reserved_84: 84
+    Reserved_85: 85
+    Reserved_86: 86
+    Reserved_87: 87
+    Reserved_88: 88
+    Reserved_89: 89
+    Reserved_90: 90
+    Reserved_91: 91
+    Reserved_92: 92
+    Reserved_93: 93
+    Reserved_94: 94
+    Reserved_95: 95
+    Reserved_96: 96
+    Reserved_97: 97
+    Reserved_98: 98
+    Reserved_99: 99
     ResilienceRating: 35
     ShadowResistance: 54
     SpellDamageDone: 42
@@ -852,6 +910,12 @@ BrawlType:
     None: 0
     SoloRbg: 5
     SoloShuffle: 4
+BreakType:
+  values:
+    Character: 0
+    Line: 3
+    Sentence: 2
+    Word: 1
 BulkPurchaseResult:
   values:
     ResultFailed: 3
@@ -1415,6 +1479,13 @@ ClubType:
     Character: 1
     Guild: 2
     Other: 3
+CollationStrength:
+  values:
+    Identical: 4
+    Primary: 0
+    Quaternary: 3
+    Secondary: 1
+    Tertiary: 2
 ColorOverride:
   values:
     ItemQualityAccount: 7
@@ -1437,6 +1508,7 @@ CombatAudioAlertCategory:
     PlayerCast: 3
     PlayerDebuffs: 8
     PlayerHealth: 1
+    PlayerHealthPulse: 9
     PlayerResource1: 5
     PlayerResource2: 6
     TargetCast: 4
@@ -1493,6 +1565,18 @@ CombatAudioAlertPlayerResourceFormatValues:
     ResourceFull: 0
     ResourceNoPercent: 1
     ResourceNoPercentDiv10: 2
+CombatAudioAlertPulsePercentValues:
+  values:
+    Off: 0
+    Under10Percent: 9
+    Under20Percent: 8
+    Under30Percent: 7
+    Under40Percent: 6
+    Under50Percent: 5
+    Under60Percent: 4
+    Under70Percent: 3
+    Under80Percent: 2
+    Under90Percent: 1
 CombatAudioAlertSayIfTargetedType:
   values:
     Aggro: 1
@@ -1732,6 +1816,7 @@ CooldownSetSpellFlags:
   values:
     HideAura: 1
     HideByDefault: 2
+    SelectHighestLevelLinkedSpell: 4
 CooldownViewerAddAlertStatus:
   values:
     DuplicateAlert: 3
@@ -2094,6 +2179,7 @@ CurioRarity:
   values:
     Common: 1
     Epic: 4
+    EpicTier2: 5
     Rare: 3
     Uncommon: 2
 CurioType:
@@ -2185,6 +2271,13 @@ CurrencyGainFlags:
     DroppedFromDeath: 2
     FromAccountServer: 4
     None: 0
+CurrencyNameStyle:
+  values:
+    FormalSymbol: 3
+    Long: 2
+    NarrowSymbol: 1
+    Symbol: 0
+    VariantSymbol: 4
 CurrencyTokenCategoryFlags:
   values:
     FlagPlayerItemAssignment: 2
@@ -2436,6 +2529,13 @@ DamageMeterVisibility:
     Hidden: 2
     InCombat: 1
     InGroup: 3
+DateTimeStyle:
+  values:
+    Full: 4
+    Long: 3
+    Medium: 2
+    None: 0
+    Short: 1
 DeveloperLogAssertDomain:
   values:
     Art: 1
@@ -2954,6 +3054,7 @@ EventToastEventType:
     PvPTierUpdate: 20
     QuestBossEmote: 10
     QuestTurnedIn: 12
+    RenownFactionLeveledUp: 27
     Scenario: 14
     SpellLearned: 21
     SpellScript: 18
@@ -3028,10 +3129,12 @@ FontStringScaleAnimationMode:
     Vertex: 1
 ForbiddenAspect:
   values:
+    AddAnimations: 16384
     AlwaysPropagateInput: 32
     ChangeAnimationTarget: 256
     ChangeParent: 1024
     EventRegistrations: 16
+    QueryAnimationProgress: 8192
     QueryFocus: 128
     QueryRotation: 4096
     RemoveSecretAspects: 512
@@ -3043,46 +3146,47 @@ ForbiddenAspect:
     UntrustedScriptExecution: 4
 FragmentID:
   values:
-    Actor: 15
-    CgObject: 2
-    ClientObservablesData: 6
-    DeferredMessages: 9
-    EntityPosition: 1
-    FHousingDecor: 20
-    FHousingDecorActor: 28
-    FHousingDecorProxy: 26
-    FHousingFixture: 34
-    FHousingHouseDecorSet: 24
-    FHousingHouseFixtureSet: 35
-    FHousingHouseRoomSet: 25
-    FHousingPlayerHouse: 23
-    FHousingPlotAreaTrigger: 29
-    FHousingRoom: 21
-    FHousingRoomComponentMesh: 22
-    FHousingStorageMirrorData: 33
-    FJamHousingCornerstone: 27
-    FLootObjectList: 12
-    FMapObject: 43
-    FMeshObjectData: 19
-    FMirroredPositionData: 31
-    FNeighborhoodMirrorData: 30
-    FNeighborhoodStateData: 38
-    FPathingDoor: 41
-    FPathingDynamicLinks: 40
-    FPersistableJamServers: 10
-    FPhaseShiftData: 16
-    FPlayerHouseInfo: 32
-    FPlayerInitiativeInfo: 37
-    FPlayerJamServers: 11
-    FPlayerOwnershipLink: 13
-    FTransportLink: 5
-    FUnitAIGroupLink: 39
-    FUnitAreaTriggerLink: 14
-    FVendor: 17
-    FWorldStateListenerData: 42
-    HeartbeatData: 4
-    JamDispatcher: 3
-    MirroredObjectC: 18
+    Actor: 16
+    AuthMirrorState: 1
+    CgObject: 3
+    ClientObservablesData: 7
+    DeferredMessages: 10
+    EntityPosition: 2
+    FHousingDecor: 21
+    FHousingDecorActor: 29
+    FHousingDecorProxy: 27
+    FHousingFixture: 35
+    FHousingHouseDecorSet: 25
+    FHousingHouseFixtureSet: 36
+    FHousingHouseRoomSet: 26
+    FHousingPlayerHouse: 24
+    FHousingPlotAreaTrigger: 30
+    FHousingRoom: 22
+    FHousingRoomComponentMesh: 23
+    FHousingStorageMirrorData: 34
+    FJamHousingCornerstone: 28
+    FLootObjectList: 13
+    FMapObject: 44
+    FMeshObjectData: 20
+    FMirroredPositionData: 32
+    FNeighborhoodMirrorData: 31
+    FNeighborhoodStateData: 39
+    FPathingDoor: 42
+    FPathingDynamicLinks: 41
+    FPersistableJamServers: 11
+    FPhaseShiftData: 17
+    FPlayerHouseInfo: 33
+    FPlayerInitiativeInfo: 38
+    FPlayerJamServers: 12
+    FPlayerOwnershipLink: 14
+    FTransportLink: 6
+    FUnitAIGroupLink: 40
+    FUnitAreaTriggerLink: 15
+    FVendor: 18
+    FWorldStateListenerData: 43
+    HeartbeatData: 5
+    JamDispatcher: 4
+    MirroredObjectC: 19
     MirrorState: 0
     ReservedArchetypeSeparator: 255
     TagActiveClientS: 216
@@ -3117,9 +3221,9 @@ FragmentID:
     TestFragment_3: 252
     TestFragment_4: 253
     TestFragment_5: 254
-    Timer: 36
-    TimerQueues: 7
-    TransferSuspensionData: 8
+    Timer: 37
+    TimerQueues: 8
+    TransferSuspensionData: 9
 FrameTutorialAccount:
   values:
     AccountWideReputation: 9
@@ -3160,6 +3264,7 @@ FrameTutorialAccount:
     NpcCraftingOrderTabNew: 18
     PerksProgramActivitiesIntro: 2
     PerksProgramActivitiesOpen: 32
+    Reserved1: 51
     RPETalentStarterBuild: 36
     RunesOfPower: 49
     TimerunnersAdvantage: 8
@@ -3544,6 +3649,7 @@ GossipNpcOption:
     ProfessionsOpen: 49
     QueueScenario: 25
     RenameNeighborhood: 59
+    RewardsShop: 67
     RuneforgeLegendaryCrafting: 42
     RuneforgeLegendaryUpgrade: 44
     ShipmentCrafter: 28
@@ -4094,48 +4200,49 @@ HousingResult:
     MaxPlacedDecorReached: 67
     MaxPreviewDecorReached: 69
     MaxStorageDecorReached: 70
-    MissingCoreFixture: 71
-    MissingDye: 72
-    MissingExpansionAccess: 73
-    MissingFactionMap: 74
-    MissingPrivateNeighborhoodInvite: 75
-    MoreHouseSlotsNeeded: 76
-    MoreSignaturesNeeded: 77
-    NeighborhoodNotFound: 78
-    NoNeighborhoodOwnershipRequests: 79
-    NotInDecorEditMode: 80
-    NotInFixtureEditMode: 81
-    NotInLayoutEditMode: 82
-    NotInsideHouse: 83
-    NotOnOwnedPlot: 84
-    OperationAborted: 85
-    OwnerNotInGuild: 86
-    PermissionDenied: 87
-    PlacementTargetInvalid: 88
-    PlayerNotFound: 89
-    PlayerNotInInstance: 90
-    PlotNotFound: 91
-    PlotNotVacant: 92
-    PlotReservationCooldown: 93
-    PlotReserved: 94
-    RoomNotFound: 95
-    RoomPlacementOutOfBounds: 96
-    RoomUpdateFailed: 97
-    RpcFailure: 98
-    ServiceNotAvailable: 99
-    StaticDataNotFound: 100
+    MessageTooLong: 71
+    MissingCoreFixture: 72
+    MissingDye: 73
+    MissingExpansionAccess: 74
+    MissingFactionMap: 75
+    MissingPrivateNeighborhoodInvite: 76
+    MoreHouseSlotsNeeded: 77
+    MoreSignaturesNeeded: 78
+    NeighborhoodNotFound: 79
+    NoNeighborhoodOwnershipRequests: 80
+    NotInDecorEditMode: 81
+    NotInFixtureEditMode: 82
+    NotInLayoutEditMode: 83
+    NotInsideHouse: 84
+    NotOnOwnedPlot: 85
+    OperationAborted: 86
+    OwnerNotInGuild: 87
+    PermissionDenied: 88
+    PlacementTargetInvalid: 89
+    PlayerNotFound: 90
+    PlayerNotInInstance: 91
+    PlotNotFound: 92
+    PlotNotVacant: 93
+    PlotReservationCooldown: 94
+    PlotReserved: 95
+    RoomNotFound: 96
+    RoomPlacementOutOfBounds: 97
+    RoomUpdateFailed: 98
+    RpcFailure: 99
+    ServiceNotAvailable: 100
+    StaticDataNotFound: 101
     Success: 0
-    TimeoutLimit: 101
-    TimerunningNotAllowed: 102
-    TokenRequired: 103
-    TooManyRequests: 104
-    TransactionFailure: 105
-    UncollectedExteriorFixture: 106
-    UncollectedHouseType: 107
-    UncollectedRoom: 108
-    UncollectedRoomMaterial: 109
-    UncollectedRoomTheme: 110
-    UnlockOperationFailed: 111
+    TimeoutLimit: 102
+    TimerunningNotAllowed: 103
+    TokenRequired: 104
+    TooManyRequests: 105
+    TransactionFailure: 106
+    UncollectedExteriorFixture: 107
+    UncollectedHouseType: 108
+    UncollectedRoom: 109
+    UncollectedRoomMaterial: 110
+    UncollectedRoomTheme: 111
+    UnlockOperationFailed: 112
 HousingRoomComponentCeilingType:
   values:
     Flat: 0
@@ -5110,6 +5217,16 @@ LoadConfigResult:
     LoadInProgress: 2
     NoChangesNecessary: 1
     Ready: 3
+LocaleTransform:
+  values:
+    AddLikelySubtags: 1
+    Canonicalize: 0
+    Language: 3
+    ParentLocale: 7
+    Region: 5
+    RemoveLikelySubtags: 2
+    Script: 4
+    Variant: 6
 LogicLogicop:
   values:
     And: 1
@@ -5485,6 +5602,12 @@ NodeOpFailureReason:
     WrongSelection: 11
     WrongSpec: 10
     WrongTreeID: 21
+NormalizationForm:
+  values:
+    Nfc: 0
+    Nfd: 1
+    Nfkc: 2
+    Nfkd: 3
 NoRPEReason:
   values:
     BNetToken: 8
@@ -5501,6 +5624,12 @@ NpcCraftingOrderSetFlags:
   values:
     AllowDuplicate: 2
     AllowMultiple: 1
+NumberStyle:
+  values:
+    Currency: 3
+    Decimal: 0
+    Integer: 1
+    Percent: 2
 NumericRuleFormatRounding:
   values:
     Down: 2
@@ -5825,6 +5954,12 @@ PlayerCurrencyFlagsDbFlags:
     Reuse1: 2
     Reuse2: 16
     UnusedInUI: 8
+PlayerDataElementAccountFlags:
+  values:
+    Log: 1
+PlayerDataElementCharacterFlags:
+  values:
+    Log: 1
 PlayerDataElementType:
   values:
     Float: 1
@@ -5893,6 +6028,7 @@ PlayerInteractionType:
     Registrar: 11
     RenameNeighborhood: 71
     Renown: 55
+    RewardsShop: 80
     ScrappingMachine: 40
     ShipmentCrafter: 33
     Soulbind: 50
@@ -5927,6 +6063,10 @@ PlunderstormQueueState:
     Proposed: 2
     Queued: 1
     Suspended: 3
+PluralType:
+  values:
+    Cardinal: 0
+    Ordinal: 1
 PowerType:
   values:
     Alternate: 10
@@ -7178,8 +7318,14 @@ SurveyDeliveryFlags:
   values:
     EncounterSucccessOnly: 1
     None: 0
+    PvPLossOnly: 16
+    PvPRatedOnly: 2
+    PvPUnratedOnly: 4
+    PvPWinOnly: 8
 SurveyDeliveryMoment:
   values:
+    AchievementCompleted: 6
+    BattlegroundEnd: 7
     ChestLooted: 3
     EncounterEnd: 5
     Login: 0
@@ -7203,6 +7349,8 @@ TieredEntranceType:
     Delve: 1
     Invalid: 0
     Lairs: 4
+    Placeholder_5: 5
+    Placeholder_6: 6
     Sites: 2
     WorldTier: 3
 TimeEventFlag:
@@ -7236,6 +7384,7 @@ TooltipDataItemBinding:
     Soulbound: 3
 TooltipDataLineType:
   values:
+    AuraCaster: 51
     AzeriteEssencePower: 5
     AzeriteEssenceSlot: 4
     AzeriteItemPowerDescription: 9
@@ -7279,6 +7428,7 @@ TooltipDataLineType:
     ToySource: 29
     ToyText: 25
     TradeTimeRemaining: 36
+    UnitCriteriaProgress: 50
     UnitDead: 49
     UnitLevel: 47
     UnitName: 2
@@ -7589,6 +7739,7 @@ TransmogCollectionType:
 TransmogIllusionFlags:
   values:
     AllowedRangedShieldsHoldables: 4
+    HiddenIllusion: 8
     HideUntilCollected: 1
     PlayerConditionGrantsOnLogin: 2
 TransmogModification:
@@ -8539,6 +8690,7 @@ VoiceChatStatusCode:
     LoginProhibited: 3
     OperationPending: 1
     PlayerSilenced: 21
+    PlayerVoiceChatAgeVerificationRestricted: 25
     PlayerVoiceChatParentalDisabled: 22
     ProxyConnectionTimeOut: 15
     ProxyConnectionUnableToConnect: 16
@@ -8576,6 +8728,13 @@ WeaponSlot:
   values:
     MainHand: 0
     OffHand: 1
+WeatherType:
+  values:
+    Clear: 0
+    Miscellaneous: 4
+    Rain: 1
+    Sandstorm: 3
+    Snow: 2
 WeeklyRewardChestActivityType:
   values:
     LFGDungeons: 1
