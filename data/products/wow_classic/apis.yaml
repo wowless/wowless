@@ -2627,6 +2627,11 @@ C_BattleNet.AreHighResTexturesInstalled:
   outputs:
   - name: installed
     type: boolean
+C_BattleNet.AreRealIDFriendsEnabled:
+  inputs:
+  outputs:
+  - name: areRealIDFriendsEnabled
+    type: boolean
 C_BattleNet.BNCheckBattleTagInviteToRecentAlly:
   inputs:
   - name: recentAllyGUID
