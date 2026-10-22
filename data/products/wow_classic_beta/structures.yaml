@@ -2600,6 +2600,8 @@ C_CooldownViewer.CooldownViewerCooldown:
       type: number
 C_CooldownViewer.GroupBuffItem:
   fields:
+    displaySpellID:
+      type: number
     flags:
       type:
         enum: GroupBuffItemFlags
@@ -6711,6 +6713,8 @@ C_PvP.PVPScoreInfo:
       type: number
     faction:
       type: number
+    gender:
+      type: number
     guid:
       type: string
     healingDone:
@@ -7588,6 +7592,18 @@ C_ScriptedAnimations.ScriptedAnimationEffect:
     yawRadians:
       type: number
 C_SecureTransfer.MailInfo:
+  fields:
+    sendMoney:
+      type: number
+    target:
+      type: string
+C_SecureTransfer.MailReceiveInfo:
+  fields:
+    money:
+      type: number
+    sender:
+      type: string
+C_SecureTransfer.MailSendInfo:
   fields:
     sendMoney:
       type: number
@@ -11820,6 +11836,23 @@ CreateFrameOptions:
       nilable: true
       type:
         uiobject: Frame
+CreditsDisplayInfo:
+  fields:
+    background:
+      type: string
+    creditsFileID:
+      type: number
+    isDefault:
+      type: boolean
+    keyArt:
+      type: string
+    logo:
+      type: number
+    name:
+      type: string
+    soundKit:
+      nilable: true
+      type: number
 CriteriaRequiredValue:
   fields:
     criteriaID:

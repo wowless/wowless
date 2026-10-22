@@ -2264,6 +2264,15 @@ C_AuctionHouse.GetItemKeyRequiredLevel:
   outputs:
   - name: requiredLevel
     type: number
+C_AuctionHouse.GetItemKeySampleLink:
+  inputs:
+  - name: itemKey
+    type:
+      structure: C_AuctionHouse.ItemKey
+  outputs:
+  - name: sampleItemLink
+    nilable: true
+    type: string
 C_AuctionHouse.GetItemSearchResultInfo:
   inputs:
   - name: itemKey
@@ -3655,6 +3664,11 @@ C_BattleNet.AreHighResTexturesInstalled:
   outputs:
   - name: installed
     type: boolean
+C_BattleNet.AreRealIDFriendsEnabled:
+  inputs:
+  outputs:
+  - name: areRealIDFriendsEnabled
+    type: boolean
 C_BattleNet.AreTitleFriendCustomNamesEnabled:
   inputs:
   outputs:
@@ -3741,6 +3755,14 @@ C_BattleNet.GetFriendInviteInfo:
     nilable: true
     type:
       structure: C_BattleNet.BNetFriendInviteInfo
+C_BattleNet.GetFriendLevelFromInviteText:
+  inputs:
+  - name: inviteText
+    type: string
+  outputs:
+  - name: friendLevel
+    type:
+      enum: BattleNetFriendLevel
 C_BattleNet.GetFriendNumGameAccounts:
   inputs:
   - name: friendIndex
@@ -11945,6 +11967,11 @@ C_ExpansionTrial.OnTrialLevelUpDialogClicked:
 C_ExpansionTrial.OnTrialLevelUpDialogShown:
   inputs:
   outputs:
+C_ExternalEventURL.CanShow:
+  inputs:
+  outputs:
+  - name: canShow
+    type: boolean
 C_ExternalEventURL.HasURL:
   inputs:
   outputs:
@@ -12432,11 +12459,6 @@ C_GamepadTargeting.Disable:
 C_GamepadTargeting.Enable:
   inputs:
   outputs:
-C_GamepadTargeting.HasReticleHoverTarget:
-  inputs:
-  outputs:
-  - name: hasReticleHoverTarget
-    type: boolean
 C_GamepadTargeting.SetFilter:
   inputs:
   - name: filter
@@ -12651,6 +12673,9 @@ C_GameRules.SetSDHDToggleValue:
   inputs:
   - name: setToSD
     type: boolean
+  - name: usageLocation
+    type:
+      enum: SdToggleUsageLocationUI
   outputs:
 C_Garrison.AddFollowerToMission:
   inputs:
@@ -25500,6 +25525,18 @@ C_SecureTransfer.GetMailInfo:
   - name: mailInfo
     type:
       structure: C_SecureTransfer.MailInfo
+C_SecureTransfer.GetMailReceiveInfo:
+  inputs:
+  outputs:
+  - name: mailInfo
+    type:
+      structure: C_SecureTransfer.MailReceiveInfo
+C_SecureTransfer.GetMailSendInfo:
+  inputs:
+  outputs:
+  - name: mailInfo
+    type:
+      structure: C_SecureTransfer.MailSendInfo
 C_SecureTransfer.GetTradePartner:
   inputs:
   outputs:
@@ -25514,6 +25551,14 @@ C_SecureTransfer.ShouldShowTradeOfferWarning:
   outputs:
   - name: shouldShow
     type: boolean
+C_SecureTransfer.ShouldShowTradeRMTWarning:
+  inputs:
+  outputs:
+  - name: shouldShow
+    type: boolean
+C_SecureTransfer.TakeMailMoney:
+  inputs:
+  outputs:
 C_SettingsUtil.NotifySettingsLoaded:
   inputs:
   outputs:
@@ -32555,6 +32600,11 @@ C_Tutorial.GetCombatEventInfo:
 C_Tutorial.ReturnToTutorialArea:
   inputs:
   outputs:
+C_Tutorial.SendTutorialStartButtonTelem:
+  inputs:
+  - name: skipTutorial
+    type: boolean
+  outputs:
 C_UI.DoesAnyDisplayHaveNotch:
   inputs:
   outputs:
@@ -36073,6 +36123,13 @@ GetCorruptionResistance:
   outputs:
   - name: result
     type: number
+GetCreditsDisplayInfo:
+  inputs:
+  outputs:
+  - name: info
+    type:
+      arrayof:
+        structure: CreditsDisplayInfo
 GetCritChance:
   inputs:
   outputs:
@@ -36148,6 +36205,13 @@ GetCurrentTitle:
   inputs:
   outputs:
   - name: result
+    type: number
+GetCursorCenterPosition:
+  inputs:
+  outputs:
+  - name: posX
+    type: number
+  - name: posY
     type: number
 GetCursorDelta:
   inputs:
@@ -37842,6 +37906,11 @@ GetNumUnspentTalents:
     type: number
 GetNumWarGameTypes:
 GetObjectiveText:
+GetOffhandHitModifier:
+  inputs:
+  outputs:
+  - name: result
+    type: number
 GetOptOutOfLoot:
 GetOSLocale:
   inputs:
@@ -37908,6 +37977,18 @@ GetPetActionCooldown:
 GetPetActionInfo:
 GetPetActionSlotUsable:
 GetPetActionsUsable:
+GetPetCritChance:
+  inputs:
+  outputs:
+  - name: meleeCrit
+    type: number
+  - name: spellCrit
+    type: number
+GetPetDodgeChance:
+  inputs:
+  outputs:
+  - name: result
+    type: number
 GetPetExperience:
   outputs:
   - name: currXP
@@ -39627,6 +39708,11 @@ IsCpuBound:
     nilable: true
     type: boolean
 IsCurrentQuestFailed:
+IsCursorVisible:
+  inputs:
+  outputs:
+  - name: visible
+    type: boolean
 IsDebugBuild:
   impl: IsDebugBuild
   inputs:

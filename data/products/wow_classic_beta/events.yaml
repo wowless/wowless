@@ -4854,7 +4854,11 @@ EXPAND_BAG_BAR_CHANGED:
     type: boolean
 EXPERIMENTAL_CVAR_CONFIRMATION_NEEDED:
   payload:
-EXTERNAL_EVENT_LAUNCH_URL_FAILED:
+EXTERNAL_EVENT_LAUNCH_URL_RESULT:
+  payload:
+  - name: result
+    type: boolean
+EXTERNAL_EVENT_URL_CHANGED:
   payload:
 EXTRA_BROWSE_INFO_RECEIVED:
   payload:
@@ -6554,6 +6558,8 @@ MAIL_LOCK_SEND_ITEMS:
     type: number
   - name: itemLink
     type: string
+MAIL_OPEN_ALL_CANCELED:
+  payload:
 MAIL_SEND_INFO_UPDATE:
   payload:
 MAIL_SEND_SUCCESS:
@@ -7400,6 +7406,8 @@ PLAYER_LEVEL_UP:
     type: number
   - name: intellectDelta
     type: number
+  - name: spiritDelta
+    type: number
 PLAYER_LOGIN:
   payload:
 PLAYER_LOGOUT:
@@ -8058,6 +8066,8 @@ SECURE_TRANSFER_CONFIRM_HOUSING_PURCHASE:
   payload:
 SECURE_TRANSFER_CONFIRM_SEND_MAIL:
   payload:
+SECURE_TRANSFER_CONFIRM_TAKE_MAIL_MONEY:
+  payload:
 SECURE_TRANSFER_CONFIRM_TRADE_ACCEPT:
   payload:
 SECURE_TRANSFER_HOUSING_CURRENCY_PURCHASE_CONFIRMATION:
@@ -8092,6 +8102,8 @@ SETTINGS_PANEL_OPEN:
     nilable: true
     type: string
 SHARD_TRANSFER:
+  payload:
+SHARD_TRANSFER_CANCELLED:
   payload:
 SHARD_TRANSFER_IMMINENT:
   payload:

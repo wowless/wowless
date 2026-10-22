@@ -3168,6 +3168,15 @@ EventToastEventType:
 EventToastFlags:
   values:
     DisableRightClickDismiss: 1
+EvictionType:
+  values:
+    JoinParty: 2
+    LeaveParty: 3
+    Outsider: 0
+    OutsiderParty: 1
+    ServerExpiryAggressive: 5
+    ServerExpiryNormal: 4
+    ServerExpiryParty: 6
 ExcludedCensorSources:
   values:
     All: 255
@@ -3554,12 +3563,14 @@ GameRule:
     QuestLogSuperTrackingDisabled: 72
     QuestLootRoundRobin: 197
     RaceAlteredFormsDisabled: 78
+    RangedAttackDelay: 249
     ReagentBagsFitItemsOfTheirBagFamily: 206
     RecommendLeastPopulatedRealm: 169
     ReleaseSpiritGhostDisabled: 61
     RepairArmorDisabled: 147
     ReplaceAbsentGmSeconds: 11
     ReplaceGmRankLastOnlineSeconds: 12
+    RequirePvPFlagForPvPKillCredit: 255
     RestrictedAchievementCategoryID: 155
     RPEDisabled: 195
     RPRuleset: 214
@@ -7143,6 +7154,18 @@ ScrubStringFlags:
     None: 0
     StripControlCodes: 4
     TruncateNewLines: 1
+SdToggleUsageLocation:
+  values:
+    BarberShop: 2
+    BeforeLogin: 0
+    CharacterCreation: 1
+    OptionsMenu: 3
+SdToggleUsageLocationUI:
+  values:
+    BarberShop: 2
+    BeforeLogin: 0
+    CharacterCreation: 1
+    OptionsMenu: 3
 SeasonID:
   values:
     Fresh: 11

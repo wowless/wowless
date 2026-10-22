@@ -75,8 +75,6 @@ advflypitchcontrolcamerachase:
 advflypitchcontrolgrounddebounce:
   account: true
   default: '0'
-agentloglevel:
-  default: '1'
 agentuid:
   default: wow_beta
 aibrain:
@@ -227,6 +225,9 @@ autoquestprogress:
 autoquestwatch:
   account: true
   default: '1'
+autorangedcombat:
+  character: true
+  default: '1'
 autoselfcast:
   character: true
   default: '1'
@@ -261,7 +262,7 @@ blocktrades:
 bloomenable:
   default: '0'
 bloomusermult:
-  default: '1'
+  default: '1.000000'
 bodyquota:
   default: '100'
 breakuplargenumbers:
@@ -1658,10 +1659,6 @@ damagemeterresetonnewinstance:
 dangerousshipyardmissionwarningalreadyshown:
   character: true
   default: '0'
-debugallocsingleblade:
-  default: ''
-debugalloctrackstacktrace:
-  default: auto
 debugtorsotwist:
   default: '0'
 deemphasizeoffspecprimarystats:
@@ -1833,8 +1830,6 @@ enablepvpnotifyafk:
   default: '1'
 enablequestcachelogging:
   default: '1'
-enablerefhistory:
-  default: '1'
 enablerunespentanim:
   default: '1'
 enablesourcelocationlookup:
@@ -1888,8 +1883,6 @@ entityshadowfadescale:
 equipmentmanager:
   character: true
   default: '1'
-errorfilelog:
-  default: '0'
 errorfilter:
   default: all
 errorlevelmax:
@@ -2022,6 +2015,10 @@ floatingcombattextreactives_v2:
   default: '1'
 floatingcombattextrepchanges_v2:
   default: '0'
+floatingcombattextspellmechanics_v2:
+  default: '0'
+floatingcombattextspellmechanicsother_v2:
+  default: '0'
 footstepsounds:
   default: '1'
 forceclusteredshading:
@@ -2150,6 +2147,8 @@ gamepademulatetapwindowms:
   default: '350'
 gamepadenable:
   default: '1'
+gamepadenablereticleswingtimer:
+  default: '1'
 gamepadfacemovementfreeflying:
   default: '1'
 gamepadfacemovementmaxangle:
@@ -2269,8 +2268,6 @@ garrisoncompletetalenttype:
   secure: true
 giquality:
   default: '1'
-graphicsbloomusermult:
-  default: '0'
 graphicscomputeeffects:
   default: '1'
 graphicsdeptheffects:
@@ -2559,15 +2556,15 @@ kioskwarmupseconds:
   secure: true
 lastaddonversion:
   default: '0'
+lastattemptedexternaleventurlhash:
+  account: true
+  default: '0'
+  locked: true
 lastcharacterindex:
   default: '0'
 lastgarrisonmissiontutorial:
   character: true
   default: '0'
-lastlaunchedexternaleventurl:
-  account: true
-  default: ''
-  locked: true
 lastlockedtieredentrancecompanionabilities:
   account: true
   default: ''
@@ -3136,6 +3133,12 @@ pbrliquiddetail:
 pendinginviteinfoshown:
   account: true
   default: '0'
+performeddeathtutorial:
+  account: true
+  default: '0'
+performedvendortutorial:
+  account: true
+  default: '0'
 perksactivitiescurrentmonth:
   account: true
   default: '0'
@@ -3284,8 +3287,6 @@ questpoiwq:
   default: '1'
 questtextcontrast:
   default: '0'
-raidbloomusermult:
-  default: '1'
 raidclusteredshading:
   default: '1'
 raidcomponenttexturelevel:
@@ -3362,8 +3363,6 @@ raidframeswidth:
   default: '72'
 raidgiquality:
   default: '1'
-raidgraphicsbloomusermult:
-  default: '0'
 raidgraphicscomputeeffects:
   default: '1'
 raidgraphicsdeptheffects:
@@ -3559,7 +3558,7 @@ screenshotsizeoverride:
   default: '0x0'
 scripterrors:
   account: true
-  default: '1'
+  default: '0'
 scriptprofile:
   default: '0'
 scriptwarnings:
@@ -3698,7 +3697,7 @@ showmaxlevelannouncements:
   default: '1'
 shownpetutorials:
   account: true
-  default: '0'
+  default: '1'
 showoutfitdetails:
   character: true
   default: '1'
@@ -3780,7 +3779,7 @@ showtokenframe:
   default: '0'
 showtutorials:
   account: true
-  default: '0'
+  default: '1'
 showvkeycastbar:
   account: true
   default: '1'
@@ -3792,6 +3791,9 @@ showvkeycastbarspellname:
   default: '1'
 simd:
   default: '-1'
+skiptutorialachievement:
+  account: true
+  default: '0'
 skycloudlod:
   default: '0'
 slugopticalweight:
@@ -4133,7 +4135,7 @@ targetautofriend:
   default: '1'
 targetautolock:
   character: true
-  default: '0'
+  default: '1'
 targetenemyattacker:
   character: true
   default: '1'
@@ -4446,8 +4448,6 @@ usebleep:
   default: '0'
 usecommentatorselectioncircles:
   default: '1'
-usedebugallocators:
-  default: '0'
 usehdrbrightness:
   default: '0'
 usehdrpeakbrightness:
