@@ -447,20 +447,28 @@ return function(
       end
     end,
     mixin = function(ctx, e, parent)
-      assert(ctx.useForbiddenObjectTable)
-      assert(e.attr.source == 'secure', e.attr.source)
-      local f = parent.forbiddenrep
-      local m = assert(secureenv[e.attr.key], e.attr.key)
-      if not e.attr.securedelegates then
-        mixin(f, m)
-      else
-        assert(e.attr.targetpartition == 'public', e.attr.targetpartition)
-        assert(e.attr.inboundpartition == 'forbidden', e.attr.inboundpartition)
-        for k, v in pairs(m) do
-          parent.luarep[k] = debug.newsecurefunction(function(_, ...)
-            return v(f, ...)
-          end)
+      if not e.attr.source then
+        assert(not ctx.useForbiddenObjectTable)
+        local env = ctx.useAddonEnv and ctx.addonEnv or ctx.useSecureEnv and secureenv or genv
+        local m = assert(env[e.attr.key], e.attr.key)
+        mixin(parent.luarep, m)
+      elseif e.attr.source == 'secure' then
+        assert(ctx.useForbiddenObjectTable)
+        local f = parent.forbiddenrep
+        local m = assert(secureenv[e.attr.key], e.attr.key)
+        if not e.attr.securedelegates then
+          mixin(f, m)
+        else
+          assert(e.attr.targetpartition == 'public', e.attr.targetpartition)
+          assert(e.attr.inboundpartition == 'forbidden', e.attr.inboundpartition)
+          for k, v in pairs(m) do
+            parent.luarep[k] = debug.newsecurefunction(function(_, ...)
+              return v(f, ...)
+            end)
+          end
         end
+      else
+        error('unexpected mixin source ' .. e.attr.source)
       end
     end,
     modifiedclick = function()
